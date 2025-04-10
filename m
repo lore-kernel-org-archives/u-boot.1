@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7003CC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:46:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4194C369A2
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:48:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF4E283A02;
-	Thu, 10 Apr 2025 09:46:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48FEB83A03;
+	Thu, 10 Apr 2025 09:48:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QSN7VNFc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ThoOPgRs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 367AC83A02; Thu, 10 Apr 2025 09:46:23 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 3D32D83A15; Thu, 10 Apr 2025 09:48:22 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1057083995
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:46:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04CDB83A03
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:48:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-39d83782ef6so999282f8f.0
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:46:21 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-391342fc0b5so278781f8f.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:48:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744271180; x=1744875980; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744271299; x=1744876099; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=xRdV/3ejCaaWremGTBvSe/VbE4XGbDqCAqUMi28ovCI=;
- b=QSN7VNFcXx3MAQiGWz0O/cSCP1vv+KLHDSK8H9Dq9M3v3gFLiMGmtVk+9jNcsiflW4
- iT66658KrKttQDG87dmQVYjCCacppkynhYflnJof72Os0iZpjv31GFCD+0ezaDsKbCEk
- QwziUw6IIX4NKDZT13WmIUqdgaqUNXOjb3TOsFP06LRuwYkNlkMUa66kUmy9X9l3qI3c
- ZAmpfU/SUnHEJ/IcNDR+RJg60DYzfaCal3qfJv8IVji8HsO54WKqBxJWTMgcmSa6/kBo
- 4ImpY/RlRFkEBO9Fe39IDCem9zJBiYSm+N8Wwz2MftJxAN5jVj2HbaIn9CYcj5Vfp8hA
- zpdw==
+ :reply-to; bh=J36iu0BO6MSkZlVasGb+W8mSaxOA6ngug0PvQs5SRio=;
+ b=ThoOPgRsWwkoYA5jsUfGnjyO9npyn81XHWOUfXClvG3qL961374IN7Fvn+7ndjM1k4
+ atgdwkRxY/wEn/ND8mlK38SoPjgPnOokKiKAZV9eXP/mRCUGYy0xMQFb3wIkl7h+pyrX
+ FiXZTMVGl5T8jOkvWcS3bFMthOCN/+91etueTKHjJT0uDxQKCT4A3Mhf2SisL7DPyVzf
+ yzJz6uqAfCWdumfRU9J/XNremSyU9Gv19XQP8DrTi3NiIxMPNO8huvlGawrS9tZjlaz3
+ WQzJTgRrNyHFZ8l+Gp/uXJ969Hd+xS5HFhhbkyM9U0RRCet0JcE9wAvrboMzzLTlhdDF
+ hqUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744271180; x=1744875980;
+ d=1e100.net; s=20230601; t=1744271299; x=1744876099;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=xRdV/3ejCaaWremGTBvSe/VbE4XGbDqCAqUMi28ovCI=;
- b=VaztciSYvNydCaQDf+O8e+5RZ+86zOUgwqq4fYWiuGwNTd1MQ5lOvPZwe4l5mO8e+t
- RrI8KZ3G3bQJoJXdQOg7YwS7ZuNkRImxpG6mSP8sxAYWysYkpdV0VwULzwQQiivCc7FB
- 3Tr8dgoj6YCWUlcvSMTZ4f7uTf0jufYnf+b0vI72uA3BHWI8Klbj7jJ0pj1H+KGEuNfn
- RJCLUavcqoEVGcwxlQZeUt4BLKpiWK+lR9X6jyieX5vM9Yr3y8t0DaB4MN6vXbacYrF7
- nwinl9Zq2XRAMO+IsoWylB27+d0B2OC5ckoz9tNksXB1AIDF6DGYbn5UD4iqsrsJovk4
- wHhw==
-X-Gm-Message-State: AOJu0YxAmnKjSw7PmYzbqYzWGq8fsQ9ZBBpocXiHwxnNeLtxNtNJEIoL
- Tg+Oo6F6eNvJzkFc3wUjlT8MlYpD8uRDYWTsWxdMgi3c3ei99mBylXlszQNekus=
-X-Gm-Gg: ASbGncvkaAm1y9G9Ua6w1S7B2xKPKnqbdNKB4ZalfED8Y4QjSLYmiO7l929GnL9Auij
- M5x3yM/5TzBsplOn3tPJcm867wHdYlVVHhTbxKXHfaTI46JkSFxoedZgBtFKwvw8bffoM+e3ITB
- Cz/owgEygeoZUP14F7kh1OdkSB92qIs6sb7h9XbikRoB7cXuLSdUTTaTc59w5t5jMjWrNNjmgz2
- 1U5VlaAkkJ/E39wL5BYYWOo7hs0dtoi+tpvXHef/xInUlnAiCA7GVDbSd2oSU6BH4fV8ZZ1KCuR
- AB4dbSvqmXCxdPUbw0ujSujnVfU74207c/HbVDlrwJA3glHcXeHrQ9+EYusUpRcG3ghdf9YuZyz
- iC9DFXHlj0G/qyVUM1g==
-X-Google-Smtp-Source: AGHT+IGbjwK1Rzdhjsz4ciSmeLZPhi1fyx33/gjqqpjWaopbH12cexIdre6A965n1q6Z2pOeigoRHQ==
-X-Received: by 2002:a5d:5986:0:b0:390:ec6e:43ea with SMTP id
- ffacd0b85a97d-39d8f46ad64mr1346085f8f.15.1744271180495; 
- Thu, 10 Apr 2025 00:46:20 -0700 (PDT)
+ bh=J36iu0BO6MSkZlVasGb+W8mSaxOA6ngug0PvQs5SRio=;
+ b=HG9kPrVJCusbSEF+S+RnSEImyW83wexu/y8fwslNhjx0f4SjgWaK6KfSQAlGvU7Xin
+ Sz2nDwaFUQJjVINl+LWWgdXZi2TVuF+2CPYJx9LFq1k+iEwUGDRfxOLFbmOryz2hjdjs
+ vFYKN/tOrGssuYXYf9Sa5TSZrtFp1SrMs/S4zgxrZyILNDvwoTl+UMNit4+JT4Hg7+Ng
+ Y5nG+mGn+YlcJFtGe/4bjUSNYc1Rs3Acp9wZwh7qq3kdnafk6//qlaLcEw65lG7cbTCj
+ Xyn3lDm11S1oV5ZhUb3nIH7t5zyl6YUwccxO5Qi8FOSnIZIH03uDW8tTfegpqxx4pb/W
+ d0jw==
+X-Gm-Message-State: AOJu0YxXe3mo1I6DNwO5lifeZKkk4aqg4R8AFUoCIQ9P49Ke8quVqZaj
+ ylP55+denqa28e02jjSfcVh5e71KTPGWbjeAp4OLSJXV7eicnaXx5YtmMaNimJI=
+X-Gm-Gg: ASbGncsSXkTLQ91gjjhepewPAi5Deuwumrhag9LFgUtOHx3fQ5omfeBKMFI8Vav1wWA
+ ovd3jyf4v57k78yFUq7HZVgI/F0YiDg5OevlQT3uc8ul7TWH5FtLscha5v8DTXYCcbSTweGRXgW
+ 3aplDgFOWExjoyvphZiLm+SzfTv5VS9rl5QGRiE38Scmm9xZkEZWs+9xrnHKSNoPFFAZ5cKXfin
+ gMcaOCcIwXlrT7szoCkL1BFfe5ORopCQ+bhfYfy6FAjy63x3TfVAfYszNzGTNYIzpJg+7bOl8BI
+ LBHIxELo9T3shgF8h2DqYwhEO0Le1IUhB8WVsYHK+BaIsLLzwnLy1m5gb3aLJHXKDn6j9TtDOZn
+ omlV0+H8Id31ran1D7Q==
+X-Google-Smtp-Source: AGHT+IEXs/mIHdFo7hrO5lPjwoGoCbslxCv7de/12svRoKo3A8864fNyXQ473LffuIEvOGwl2lQhjQ==
+X-Received: by 2002:a05:6000:1a8c:b0:390:e9b5:d69c with SMTP id
+ ffacd0b85a97d-39d8f4713cemr1301715f8f.25.1744271299444; 
+ Thu, 10 Apr 2025 00:48:19 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe?
  ([2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d89389f72sm3860959f8f.42.2025.04.10.00.46.19
+ ffacd0b85a97d-39d893f0b35sm3906739f8f.70.2025.04.10.00.48.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Apr 2025 00:46:19 -0700 (PDT)
-Message-ID: <10395b6f-533f-411e-9f13-09421dd3ee0a@linaro.org>
-Date: Thu, 10 Apr 2025 09:46:18 +0200
+ Thu, 10 Apr 2025 00:48:19 -0700 (PDT)
+Message-ID: <8683856d-5bd2-4e6f-b4f3-9a5928b707c5@linaro.org>
+Date: Thu, 10 Apr 2025 09:48:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 6/6] pinctrl: qcom: qcm2290: fix off by 1 in pin_count
-To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
- <20250409-livetree-fixup-v1-6-76dfea80b07f@linaro.org>
+Subject: Re: [PATCH] pinctrl: qcom: handle reserved ranges
+To: Alexey Minnekhanov <alexeymin@postmarketos.org>, u-boot-qcom@groups.io,
+ Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de
+References: <20250401-topic-sm8x50-pinctrl-reserved-ranges-v1-1-0fe88b491707@linaro.org>
+ <84ec2a78-6f9b-469f-b8a1-de44132e31bd@postmarketos.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -111,9 +110,9 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250409-livetree-fixup-v1-6-76dfea80b07f@linaro.org>
+In-Reply-To: <84ec2a78-6f9b-469f-b8a1-de44132e31bd@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,31 +130,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09/04/2025 19:17, Caleb Connolly wrote:
-> There are 134 pins not 133, oops! This fixes the sdcard on the RB1 as
-> the pins now all get configured correctly.
+On 10/04/2025 01:40, Alexey Minnekhanov wrote:
+> On 4/1/25 10:46, Neil Armstrong via groups.io wrote:
+>> From: Caleb Connolly <caleb.connolly@linaro.org>
+>>
+>> Some Qualcomm boards feature reserved ranges of pins which are protected
+>> by firmware. Attempting to read or write any registers associated with
+>> these pins results the board resetting.
+>>
+>> Add support for parsing these ranges from devicetree and ensure that the
+>> pinctrl and GPIO drivers don't try to interact with these pins.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>>   arch/arm/mach-snapdragon/include/mach/gpio.h | 15 +++++++
+>>   drivers/gpio/msm_gpio.c                      |  9 ++++
+>>   drivers/pinctrl/qcom/pinctrl-qcom.c          | 64 ++++++++++++++++++++++++++++
+>>   3 files changed, 88 insertions(+)
 > 
-> Fixes: 0ecb8cfcb930 ("pinctrl: qcom: add qcm2290 pinctrl driver")
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/pinctrl/qcom/pinctrl-qcm2290.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> ...
 > 
-> diff --git a/drivers/pinctrl/qcom/pinctrl-qcm2290.c b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
-> index 0c2222ce663e6d584d229e7521f88fedf8aa19da..84f76b63b93ad78182524661dba561672feb4c85 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-qcm2290.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
-> @@ -44,9 +44,9 @@ static int qcm2290_get_function_mux(__maybe_unused unsigned int pin, unsigned in
->   }
->   
->   struct msm_pinctrl_data qcm2290_data = {
->   	.pin_data = {
-> -		.pin_count = 133,
-> +		.pin_count = 134,
->   		.special_pins_start = 127,
->   	},
->   	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
->   	.get_function_name = qcm2290_get_function_name,
+>> +#define MSM_PINCTRL_MAX_RESERVED_RANGES 32
+>> +
+>>   struct msm_pinctrl_priv {
+>>       phys_addr_t base;
+>>       struct msm_pinctrl_data *data;
+>> +    u32 reserved_ranges[MSM_PINCTRL_MAX_RESERVED_RANGES * 2];
+>> +    int reserved_ranges_count;
+>>   };
+> Why storing of reserved pins isn't implemented using bitmap?
 > 
+>      DECLARE_BITMAP(reserved_pins, 256);
+> 
+> would only consume 32 bytes, instead of 256+4 like here.
+> 
+> Do I miss something?
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+You're right, I'll convert it to bitmap.
+
+Neil
+
+> 
+> ---
+> Regards,
+> Alexey Minnekhanov
+
