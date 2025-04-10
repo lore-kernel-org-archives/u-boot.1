@@ -4,64 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F86CC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 18:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D108C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 20:14:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CE2583DDF;
-	Thu, 10 Apr 2025 20:24:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 89F9383B24;
+	Thu, 10 Apr 2025 22:14:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1744309465;
-	bh=eKXnzRQaOFPrGPyxJBmvpcD8JNxJ+OJiFx7ZswhWKOQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yQ2tfWz2yeOwS+8QHeA/1EahE4UExg1lxZ8LJvdI/K0S/zs43Qf9JJiHkX9i6/HVc
-	 v2RUn6dfoPG0QfpN7zgI26hSc3BGTCWUMuYNETifYw5AOpvwq8zyNb2qIcmX1Ile44
-	 cY7jBNhTgV/JS+w6x0B4jai4vgIadNR9jMqUd0SDdXLzy0ZYx6HEZHE5Ibrg6STMXv
-	 tZyYwk2+xJLEIm1FKZ3m91ltQ0evve6SSLC5mKf4belAuEgO07QG9hAS7HUpIg+6MP
-	 KRvUNWFKvnxIs1HCsSJqJuJALZber0QzjspOY/olXcVimAuQ9qXNx2sodxUeTZiHPe
-	 nIw8mOIt4PTew==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D60F83DEA; Thu, 10 Apr 2025 20:24:24 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E40E83D92
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 20:24:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="YvxVM9sj"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4613D103B92D7; 
- Thu, 10 Apr 2025 20:24:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1744309460; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=eKXnzRQaOFPrGPyxJBmvpcD8JNxJ+OJiFx7ZswhWKOQ=;
- b=YvxVM9sjyuKN2BoI8oV/MGBWG0wOA1JoH8uMwoXQLAoD0p54UJyUzURWmT8cQMibMVEAJ+
- h7y+ou560jyo7HL9K8PDmdxGjVO04qt30ZouFW1JE8ltOj/1APSRKvFwsH/KTDh7hatcUx
- fr4CdRhgINgJVHbbtMlTjrfEI8kx51izg699YsVG+HpPVU1TM8TB6mnjsvxkIi9U2pcN6a
- 3CNtfynXSgA7Ex5QLteMN8kQtCOfcpFr5pMD5pHfn8cbmZtHzBzQZRczBNCD9td++hEbVE
- LYclJFSrcuZgXayh6z86hr3F9d4JFL19mm7Ne6GVzqVWvO71BOy6Ku4+NH1r2A==
-Message-ID: <746f7719-3e93-47b9-953d-781009e94524@denx.de>
-Date: Thu, 10 Apr 2025 19:57:51 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NsGKUm3b";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9423283B1E; Thu, 10 Apr 2025 22:14:19 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EABC83A8E
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 22:14:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-72bc3987a05so669788a34.1
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:14:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744316056; x=1744920856; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YXUFnovTalVLLXS5I0nk9YxVZoK2FdcJirbEv84nFz8=;
+ b=NsGKUm3bjX1O9aE3WuQWwTQTb/OTH5aysFMWBJL46/DyxFttVGRzepty+xYctIGdAW
+ UceBNjAVI9SdTz0DC7VvN5+vDNh5X0gU+wzXH1hvyIhWOUWy70PUSEz1R0bjeNlAcfsW
+ gAJMXQMQmdg/HyXyHwQm45vrwnwwASC1EPo/s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744316056; x=1744920856;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YXUFnovTalVLLXS5I0nk9YxVZoK2FdcJirbEv84nFz8=;
+ b=Q4LCSkK0SKaDGEZtr7TUJCOtdh/QEeIuD5VBpnHC4lXgX3lw+yOlAl5Go2+w3E1IBY
+ qQ7/1YjXlPCz+95mxod7OzrmvQs13RzWdGqmSQQQJwqElhvBqJThxBF7tmtC+8niTXjI
+ CdagGRCurrHLaMSa6V6IxKc6drmnpLkGF6yQzfZhompdS4pqjGtwcsQrZZFHfgfhBtdj
+ pIa4Ciegje5sjGdzB+tT/8DDAnW91em3JKWi3VJ10WQ2mQNkZlXMShatAAk+kTqdSLt6
+ Na5mDuJvzxKdOn7LWQNX8Mh6TVrl9NmI1+N+CYc+H3L8007aoaJqLnwZEhMAcdANupyV
+ ihkw==
+X-Gm-Message-State: AOJu0YyismmiF641ovaAor+KV5R9RgHlicLlogIGHkmxsQqQV+DJSU1u
+ MK+DdUNSapa1nryLTK6hL2OU4mAnrdURnbwakrXGbQa4J+58oLBISFofPCbrQ69Hy1cJ3e8SQeh
+ vhtY=
+X-Gm-Gg: ASbGncsN/Y60VymJGiKxtxo72OgLomH+0v2pRo0g3I6gjniu6zWwJqFQF2guOq74XfF
+ 6vKDm4kVTgNe5SlWa9DJnZLU0EYYRk4/11KVdOe4DhOToRk6mpw0SmV9bDDfoUM4l+FxQFjCEdI
+ Lu5283Sav/0MlPU/q3/xw+hPpapxMJh36xpplQDj6C+bdN+6k2tGHdf5ilUttCCDT3czQgkCXPd
+ RtKVr/nVUXUAxwNjvBV16zP6YKi3382ONkVFa040DVqXFulOhHS8f0E6+eltcfULJ6AUzdKEzgz
+ aXDwC/j1Lf4dZY3mV5s/JqjJMseo4YJiIqEscHH2PpBvI12fRJYFaAM79A6BEP4bCD2OlgbFQQ4
+ PYso8g3eQCfA=
+X-Google-Smtp-Source: AGHT+IGOrx6D2TQXSEHpvgxH29c+PG0x39zz+JI/G2l0bOxIFXFxO1HM8/CHJ5vO9PR9XYApdldl5A==
+X-Received: by 2002:a05:6830:3a95:b0:72a:48d1:7fca with SMTP id
+ 46e09a7af769-72e7c0fc2a6mr2190762a34.4.1744316056190; 
+ Thu, 10 Apr 2025 13:14:16 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e73d8fcaasm685741a34.38.2025.04.10.13.14.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Apr 2025 13:14:15 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Brian Norris <computersforpeace@gmail.com>, 
+ Douglas Anderson <dianders@chromium.org>, Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20250227192735.406389-1-sjg@chromium.org>
+References: <20250227192735.406389-1-sjg@chromium.org>
+Subject: Re: [PATCH] patman: Show the base commit and branch
+Message-Id: <174431605513.2981499.5744559721693306570.b4-ty@konsulko.com>
+Date: Thu, 10 Apr 2025 14:14:15 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: usb: r8152: add device id of Linksys USB3GIGV1
-To: Gabor Juhos <j4g8y7@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250331-usb3gigv1-v1-1-04374174fab9@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250331-usb3gigv1-v1-1-04374174fab9@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,68 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/31/25 5:06 PM, Gabor Juhos wrote:
-> The Linksys USB3GIGV1 device is a USB 3.0 Wired Gigabit Adapter
-> supporting 10/100/1000 Mbits/sec transfer rates. It is based on
-> RTL8153 and it works correctly with the r8152 driver:
+On Thu, 27 Feb 2025 12:27:30 -0700, Simon Glass wrote:
+
+> It is helpful to know which commit patches are based on, even if that
+> commit might not be available to readers. Add a tag for this in the
+> cover letter.
 > 
->    uDPU>> usb start
->    starting USB...
->    Bus usb@58000: Register 2000104 NbrPorts 2
->    Starting the controller
->    USB XHCI 1.00
->    scanning bus usb@58000 for devices... 2 USB Device(s) found
->           scanning usb for storage devices... 0 Storage Device(s) found
->    uDPU>> usb info 1
->    config for device 1
->    2: Vendor specific,  USB Revision 2.10
->     - Linksys Linksys USB3GIGV1 000001000000
->     - Class: (from Interface) Vendor specific
->     - PacketSize: 64  Configurations: 2
->     - Vendor: 0x13b1  Product 0x0041 Version 48.0
->       Configuration: 1
->       - Interfaces: 1 Bus Powered Remote Wakeup 180mA
->         Interface: 0
->         - Alternate Setting 0, Endpoints: 3
->         - Class Vendor specific
->         - Endpoint 1 In Bulk MaxPacket 512
->         - Endpoint 2 Out Bulk MaxPacket 512
->         - Endpoint 3 In Interrupt MaxPacket 2 Interval 8ms
+> Also add the local-branch name since that may be useful to the writer.
 > 
->    uDPU>> dm tree usb@58000
->     Class     Seq    Probed  Driver                Name
->    -----------------------------------------------------------
->     usb           0  [ + ]   xhci_mvebu            usb@58000
->     usb_hub       0  [ + ]   usb_hub               `-- usb_hub
->     ethernet      2  [ + ]   r8152_eth                 `-- r8152_eth
->     bootdev       3  [   ]   eth_bootdev                   `-- r8152_eth.bootdev
->    uDPU>> setenv ethact r8152_eth
->    uDPU>> setenv serverip 192.168.1.253
->    uDPU>> setenv ipaddr 192.168.1.1
->    uDPU>> ping 192.168.1.253
->    Using r8152_eth device
->    host 192.168.1.253 is alive
->    uDPU>> tftpboot 0x10000000 random.bin
->    Using r8152_eth device
->    TFTP from server 192.168.1.253; our IP address is 192.168.1.1
->    Filename 'random.bin'.
->    Load address: 0x10000000
->    Loading: #################################################################
->    	 #################################################################
->    	 #################################################################
->    	 #################################################################
->    	 #################################################################
->    	 #################################################################
->    	 #################################################################
->    	 #################################################################
->    	 ####################################################
->    	 6.3 MiB/s
->    done
->    Bytes transferred = 8388608 (800000 hex)
->    uDPU>>
 > 
-> Add the USB id of the device to the driver to allow using it
-> from U-Boot.
-> 
-> Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
+> [...]
+
+Applied to u-boot/master, thanks!
+
+[1/1] patman: Show the base commit and branch
+      commit: 774e966f293c552f29a57d9ad7b620e6f334aad9
+-- 
+Tom
+
+
