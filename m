@@ -4,88 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEB5BC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:54:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29085C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C39083B72;
-	Thu, 10 Apr 2025 11:54:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 807B3839AD;
+	Thu, 10 Apr 2025 11:58:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lCkILM2m";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pJY3icQr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 119E383B81; Thu, 10 Apr 2025 11:54:45 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD01383B71
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:54:42 +0200 (CEST)
+ id 6423A83A6B; Thu, 10 Apr 2025 11:58:22 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E6F2830E4
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-39c13fa05ebso317062f8f.0
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 02:54:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744278882; x=1744883682; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9jKU6azxgPq4wGc8QJJwmANVEEDE3a++ejvoJ5DAIjE=;
- b=lCkILM2mrNVFK1QIv+WojN2x2m8twAQ/l1+ev8fxB9vHzdisA5v5qMkXs9do7bMVd8
- j1RnS+weWn3QdJfLGFxYZiPU//A7vKkS+YVzEwwbrHY/FB+csJTDR/qgQ+d/BYwBPTrr
- is7/rlZvWpfs2uF9LKU1OtwIvCkuWBwzk6Z5c5marjEz9TYlpTXqwuXXXsbnL4X5EgAO
- uJzyLrNhv54hZJD+7BNF4hH5HDwoVwXM4xr8M+lAsKioy3cuaNN/tML7zLcn8KyGWN2u
- MtqGHmKCvlbw3v+XajwIrqCpAlu4PQfyJh7lGY4DmjneRFBKNkV/3ZoH1dU05wlybGW4
- EMGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744278882; x=1744883682;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9jKU6azxgPq4wGc8QJJwmANVEEDE3a++ejvoJ5DAIjE=;
- b=SBl8iyr1ZM0UzhFkq0p6Ix45EY5jo3v4ms1nU6rI1AO4UQ/tUFhr+dYUJgizunUK3C
- JdzQFWDwQSHPyehTLbGxyN5wqIya1TjNv5u8A0OTtJCcJ8BmoHhAtc0qXE/T7S7U3llo
- gJDcOrJ+oSMU3THdvvT8zT/1syBhex5NtlB583sjCDH8PtPUx2/lmN0A2+2/tMXjbk/n
- qnKDEbUQIe5HT0Aq/iMwhVqdxRn+Fp+c9lG5+lGVrscj95JQfDysCz8GoPozZoFCpP0H
- PXQFqRxNAesMR1x+PougQ12UmbtfVNTH21GU18P2wY+slf7B+QHmqKKkC+GNzpQ0ha9B
- pDrg==
-X-Gm-Message-State: AOJu0Yz0PTqBWW3ZWL0Ynyvh9yKr600TN9iy+hhQ75zLTj35oG9U3Uy5
- 0uYRG9XlVVYj+C1F8wH00OGY7UMtWzukOa3aBYZ7t0Q1iGH48vmQtsw/lPYNZMM=
-X-Gm-Gg: ASbGncvdWityFaFQ3JgmzRRDKkm5Ov06gn+ik3L287KVX+VypD00CEE00wVyytpjsQy
- FfwDaDcLb7L3+VXZSeY2RZ4xIRIZF5uu9CIzfJPQick1CybGP/76r10lmR9FaEtYf41/eitVAOt
- YssY+hu3buVylZqsNJfYpUKAQVRD/QgBtv3KeeGrr9s00Rt+i0froK/AV2FgGfNsL7sls2z0ZJq
- RYt4T060eR+Cmo+AlQHwxfUihj0Wivy3yzV7z8PdU0qmohpSQsRBB2z1ua3wSgbZhxdwKfdAx3/
- aeb5vYN4+LM9bwpD51omr3YJHqHXhZG2xWSZKURKAOAatWLnxYNDl5NrqbT4KwXoGVz4Wy+0SvH
- 5NwA6ow==
-X-Google-Smtp-Source: AGHT+IFHgF4Y4FbOPf4ZART2fZLhvZzfIwPTH6zgzBE6drs5UGE7I9pVETVuH0MSB9Urrr8eDoVdgQ==
-X-Received: by 2002:a05:6000:40d9:b0:39c:e0e:b27a with SMTP id
- ffacd0b85a97d-39d8f46db29mr1824964f8f.23.1744278882032; 
- Thu, 10 Apr 2025 02:54:42 -0700 (PDT)
-Received: from toyger.tail248178.ts.net (i5E863B08.versanet.de. [94.134.59.8])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f235a5e9dsm46931315e9.36.2025.04.10.02.54.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 02:54:41 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-In-Reply-To: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
-References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
-Subject: Re: [PATCH 0/6] Qualcomm: cleanup OF_LIVE fixup and fix RB1/2
-Message-Id: <174427888064.2136308.7249049876232428758.b4-ty@linaro.org>
-Date: Thu, 10 Apr 2025 11:54:40 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53A9wGAd1745204
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 10 Apr 2025 04:58:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744279097;
+ bh=/U8aAH1bpwMRupshzfPO3iBQRqwV04gm1WnH3T/3VXk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=pJY3icQrjV961RRKMEOq3kPChaJVlSk8woz7WV+HtCUo8yrgEpy4s7U+p+hjJl2xw
+ sH/h5mlB1mHGZDlyPKZIcMjnp7WO8XJad9rdEaDBDTeZSviTOt2kimqqctCgmpd/E4
+ lhptHQ5ajPZimQOc+yU5vnLHJoC1Hczyq0hVXr4Q=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53A9wGaL038694
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 10 Apr 2025 04:58:16 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 10
+ Apr 2025 04:58:16 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 10 Apr 2025 04:58:16 -0500
+Received: from localhost (prasanth-server.dhcp.ti.com [172.24.227.142])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53A9wFPc088391;
+ Thu, 10 Apr 2025 04:58:16 -0500
+Date: Thu, 10 Apr 2025 15:28:15 +0530
+From: Prasanth Mantena <p-mantena@ti.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <vigneshr@ti.com>, Jagan
+ Teki <jagan@amarulasolutions.com>, <j-humphreys@ti.com>,
+ <n-francis@ti.com>, <vaishnav.a@ti.com>
+Subject: Re: [PATCH] mtd: spi-nor-core: Fixup SNOR_F_IO_MODE_EN_VOLATILE for
+ MT35X
+Message-ID: <20250410095815.a7ozc6mjakp4q4ai@prasanth-server>
+References: <20241125104947.1324824-1-p-mantena@ti.com>
+ <ea5abd4c-1f18-44f2-b44c-1b4014ceb5cb@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <ea5abd4c-1f18-44f2-b44c-1b4014ceb5cb@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,37 +82,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On Wed, 09 Apr 2025 19:17:23 +0200, Caleb Connolly wrote:
-> Introduce a new event to signal that the live tree has been built,
-> allowing boards to perform fixups on the tree before devices are bound.
-> Crucially this allows for devices to be enabled or disabled, but also
-> allows for properties that are parsed during the bind stage to be
-> modified (such as dr_mode for dwc3).
+On 21:57, Kumar, Udit wrote:
+> Thanks for fix
 > 
-> With this in place, mach-snapdragon is switched over to use the event
-> and some hacky U-Boot specific DT overrides (which had to be undone
-> prior to booting an image) are removed in favour of fixing up the
-> livetree (which is not passed on to further boot stages).
+> On 11/25/2024 4:19 PM, Prasanth Babu Mantena wrote:
+> > From: Vaishnav Achath <vaishnav.a@ti.com>
+> > 
+> > MT35XU512ABA has only BFPT and 4-Byte Address Instruction Table
+> > in  SFDP. commit bebdc237507c ("mtd: spi-nor: Parse SFDP SCCR Map")
+> > added checks in spi_nor_octal_dtr_enable() to bail out if the 22nd DWORD
+> > in SCCR does not indicate DTR Octal Mode Enable, since MT35XU512ABA device
+> > supports octal DTR mode, add this property in SFDP fixup.
+> > 
+> > Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+> > Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+> > ---
+> > 
+> > Test results : https://gist.github.com/PrasanthBabuMantena/678cbd7a230a4e2d19e22d20dfeb1235
+> > 
+> >   drivers/mtd/spi/spi-nor-core.c | 6 ++++++
+> >   1 file changed, 6 insertions(+)
+> > 
+> > diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+> > index ec841fb13bd..6364d91fac0 100644
+> > --- a/drivers/mtd/spi/spi-nor-core.c
+> > +++ b/drivers/mtd/spi/spi-nor-core.c
+> > @@ -4109,6 +4109,12 @@ static void mt35xu512aba_post_sfdp_fixup(struct spi_nor *nor,
+> >   	params->rdsr_dummy = 8;
+> >   	params->rdsr_addr_nbytes = 0;
+> > +	/*
+> > +	 * SCCR Map 22nd DWORD does not indicate DTR Octal Mode Enable
+> > +	 * for MT35XU512ABA but is actually supported by device.
+> > +	 */
+> > +	nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
+> > +
 > 
-> [...]
+> 
+> Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+> 
+> + jagan@amarulasolutions.com, not sure, if this needs to go through SPI
+> branch
 
-Applied, thanks!
+Jagan, Tom Any more updates needed for this patch regarding the branch ?
 
-[1/6] event: signal when livetree has been built
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/1c057be814e1
-[2/6] mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT fixups
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/f27e9c349b03
-[3/6] mach-snapdragon: of_fixup: skip disabled USB nodes
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/6d81cb1c01bc
-[4/6] clk/qcom: qcm2290: show clock name in set_rate()
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/bd7b4fa55310
-[5/6] mach-snapdragon: of_fixup: set dr_mode for RB1/2 boards
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/dfb173f8080b
-[6/6] pinctrl: qcom: qcm2290: fix off by 1 in pin_count
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/9511f4381bdf
+Regards,
+Prasanth
 
-Best regards,
--- 
-Caleb Connolly <caleb.connolly@linaro.org>
-
+> 
+> 
+> >   	/*
+> >   	 * The BFPT quad enable field is set to a reserved value so the quad
+> >   	 * enable function is ignored by spi_nor_parse_bfpt(). Make sure we
