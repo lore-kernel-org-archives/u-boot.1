@@ -4,58 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BF9C369A6
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 21:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEE5BC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 22:16:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB11E83E3A;
-	Thu, 10 Apr 2025 23:45:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 8DF8383E2B;
+	Fri, 11 Apr 2025 00:16:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zvbDBiAt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ulGz+9iY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3405B83E3A; Thu, 10 Apr 2025 23:45:42 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 87D9683E1E; Fri, 11 Apr 2025 00:16:08 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE7EB83ACE
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 23:45:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EDB083E0E
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 00:16:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=c990=W5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1744321538; bh=+TIi/Vw3k4xUCPjF7q9r5KivUeIFyUenme8YnpvGaTw=;
- b=zvbDBiAtdsfdB92WbsMop0TWxdOknppkud1QBZRysyACUY9/YOj3zoRTo9BL/0Gsb5yFKbHiy
- ppoypyQ2w964JIPveko6FxPKVZEl/9oi2hLaVZc8oKKU9/Tr+smk1slsrmPxE6YgLfJesP1S1JM
- veLGxzkHl08Xe31/aDyaU1Sf3GEw/A6hcLsBmVcT0t0rPFj0PI2EWd6jQhGf89uD9k0d1JYqpec
- Im3G05c51cz89uGnW0UYEVbvnsvVBPsESQYHnf1cyz+K3LkithraHlC2sag1aPWoi7YcOO07JRV
- R2h0TZGAy4aMirbnY4VDZo4NRV5XzWtTYvw21vjAAQZg==
-X-Forward-Email-ID: 67f83bff0ebe9f861dbcc3c5
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v5 7/7] rockchip: binman: Support use of crc32 hash for FIT
- images
-Date: Thu, 10 Apr 2025 21:44:56 +0000
-Message-ID: <20250410214506.3575404-8-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250410214506.3575404-1-jonas@kwiboo.se>
-References: <20250410214506.3575404-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2d0364e9231so350055fac.1
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 15:16:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744323365; x=1744928165; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dQAagmKHdYwvtgAOPhJeSfg9BflxIazW0omBbJFkSlo=;
+ b=ulGz+9iYiNXgOUifAKBmminn+4+4hCcByFpy3hn8GqP+JmrCN7SjyUvJo42NVrjOb1
+ GnKJc0US7vlWyAGQKsJDkWAapyfodPrCoCdbcJANiZKsms9Vb77omJcyGNc9OHEBw60z
+ +34tAR+lbrnZT3l8jNJktjjXED4AhFufW1Kls=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744323365; x=1744928165;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dQAagmKHdYwvtgAOPhJeSfg9BflxIazW0omBbJFkSlo=;
+ b=TnJTlFObILhk8/JQXRVqNO0f6n6IUrk3epfK+kJJId7B480fetI7wZkNZvotuhVPsy
+ D5YvtW/C50/BSi857GKn+MgTjn73g1scQEq18NCWZA6SxWw//ZfduuyPugcgl62MvjTL
+ qWkxGCojSccl+rLE0Dzdo4abv7puaY5VqPgiIerMeuCq6zysLim59AgKivz8msH5dGp4
+ NhgXGPccqcxbhcZxXQSCP2tAKXz+M8ep0+YlAjzObgSIja64MyfjcZMnR9dAeUbDFvkC
+ vrC2Pkw7OWxT+nWAb3xEWSZUj7YAGTyunLDgfAspYyA1ghZYOsivBa9NL7V6/GiDO/13
+ Jymg==
+X-Gm-Message-State: AOJu0YzPoGiE5nRiTkEKw4IU1/e7W1qu3vSRIHbe2ruXUBrTfuwKB2YN
+ x/a911dB3YlU+Zi5cduikarsqWvFM5fRxGeO7Bzj2r4HnnTIZyDxmYrU1TDSMX0=
+X-Gm-Gg: ASbGncuW+adsW7xqVFRWy0uCC++AZdtZtA0etm0X22OFMVQcCysF07TUym9kGcLaJlq
+ ENUE+0Mbtsgnv9UuVW+mGxQHyy+t9cHTiOEAXHHTICA5Lc0fTCo2mVziRqIkKlQNzVrvPgPFe7Z
+ Ut9ktPez6HiLrLfowZK1hmhXWC715+HnN3efpwIpk3XjjSM7PYZ625e10KO1ySuiodznsxuBmfE
+ z/xR4j86pEJs1Cig9U28mNwkBYxQaGJ0ZzqTg8FnQFzSPYPHLDnW+iynrYHHOJgvBqMRQwz0QlY
+ em3Xi4AKvSemAPvXCJU0TDb0Q+eWQcfcRwj1TpCDSW9SV07HtaIYKOvGtYAh+wVFovx92J95ULs
+ 3YHnnEx2/M8E=
+X-Google-Smtp-Source: AGHT+IEfUSKlfh6Wy6eVfUtFQyRtl6i8lkTfrgH1F+ciBh9gMN8svINm7L2mpV8TfiQlekS2EP12hQ==
+X-Received: by 2002:a05:6871:50c9:b0:2c2:56f3:1c84 with SMTP id
+ 586e51a60fabf-2d0d5f35d6emr207155fac.25.1744323364735; 
+ Thu, 10 Apr 2025 15:16:04 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2d096961127sm838499fac.20.2025.04.10.15.16.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Apr 2025 15:16:03 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: vigneshr@ti.com, bb@ti.com, Santhosh Kumar K <s-k6@ti.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250326121220.1831975-1-s-k6@ti.com>
+References: <20250326121220.1831975-1-s-k6@ti.com>
+Subject: Re: [PATCH 0/3] Add UBIFS Support
+Message-Id: <174432336326.3115550.12054056718983389369.b4-ty@konsulko.com>
+Date: Thu, 10 Apr 2025 16:16:03 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,120 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use of SHA256 checksum validation on ARMv7 SoCs can be very time
-consuming compared to when used on a ARMv8 SoC with Crypto Extensions.
+On Wed, 26 Mar 2025 17:42:17 +0530, Santhosh Kumar K wrote:
 
-Add support for use of the much faster CRC32 hash algo when SHA256 is
-not supported in SPL. Also use a HAS_FIT_HASH to simplify the ifdefs
-when no known hash algo has been compiled.
+> This series adds support for UBIFS in AM64x, AM62x, AM62Px.
+> 
+> Test logs: https://gist.github.com/santhosh21/be687f10086fe3b02d76cf5126a99861
+> 
+> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+> 
+> Santhosh Kumar K (3):
+>   configs: am64x: Add UBIFS support
+>   configs: am62x: Add UBIFS support
+>   configs: am62px: Add UBIFS support
+> 
+> [...]
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
----
-Changes in v5:
-- Update commit message and add comment that CRC32 hash algo should
-  only be used for basic checksum validation.
-- Collect r-b tag
+Applied to u-boot/master, thanks!
 
-Changes in v4:
-- New patch
-
-This patch can be skipped in case there is any objection against adding
-crc32 as a checksum fallback algo, something that will be usefull in a
-future rk3228 related series.
----
- arch/arm/dts/rockchip-u-boot.dtsi | 34 ++++++++++++++++++++++---------
- 1 file changed, 24 insertions(+), 10 deletions(-)
-
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index f60cc31fb1a6..18accef8bd44 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -19,10 +19,24 @@
- #define FIT_UBOOT_COMP		"none"
- #endif
- 
-+/*
-+ * SHA256 should be enabled in SPL when signature validation is involved,
-+ * CRC32 should only be used for basic checksum validation of FIT images.
-+ */
-+#if defined(CONFIG_SPL_SHA256)
-+#define FIT_HASH_ALGO		"sha256"
-+#elif defined(CONFIG_SPL_CRC32)
-+#define FIT_HASH_ALGO		"crc32"
-+#endif
-+
- #if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
- #define HAS_FIT
- #endif
- 
-+#if defined(CONFIG_SPL_FIT_SIGNATURE) && defined(FIT_HASH_ALGO)
-+#define HAS_FIT_HASH
-+#endif
-+
- / {
- 	binman: binman {
- 		multiple-images;
-@@ -55,9 +69,9 @@
- 				u-boot-nodtb {
- 					compress = FIT_UBOOT_COMP;
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_FIT_HASH
- 				hash {
--					algo = "sha256";
-+					algo = FIT_HASH_ALGO;
- 				};
- #endif
- 			};
-@@ -76,9 +90,9 @@
- 
- 				atf-bl31 {
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_FIT_HASH
- 				hash {
--					algo = "sha256";
-+					algo = FIT_HASH_ALGO;
- 				};
- #endif
- 			};
-@@ -96,9 +110,9 @@
- 				tee-os {
- 					optional;
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_FIT_HASH
- 				hash {
--					algo = "sha256";
-+					algo = FIT_HASH_ALGO;
- 				};
- #endif
- 			};
-@@ -114,9 +128,9 @@
- 
- 				tee-os {
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_FIT_HASH
- 				hash {
--					algo = "sha256";
-+					algo = FIT_HASH_ALGO;
- 				};
- #endif
- 			};
-@@ -126,9 +140,9 @@
- 				description = "fdt-NAME";
- 				compression = "none";
- 				type = "flat_dt";
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_FIT_HASH
- 				hash {
--					algo = "sha256";
-+					algo = FIT_HASH_ALGO;
- 				};
- #endif
- 			};
+[1/3] configs: am64x: Add UBIFS support
+      commit: 11ced9fd7361746509caa5ee7d1fcb8871d43772
+[2/3] configs: am62x: Add UBIFS support
+      commit: 23e2b6ff8d3cfbdf7f297f52803a6445a5390d94
+[3/3] configs: am62px: Add UBIFS support
+      commit: a62fc05f44145fcabf30dfc1f218e16637c72a07
 -- 
-2.49.0
+Tom
+
 
