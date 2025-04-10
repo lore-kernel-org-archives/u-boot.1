@@ -4,52 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00ED8C369A6
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:48:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D92C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:49:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 819A083A95;
-	Thu, 10 Apr 2025 10:48:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA4FC83AA6;
+	Thu, 10 Apr 2025 10:49:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="U2zQ9z46";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kjSoRpdP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 411DA83A98; Thu, 10 Apr 2025 10:48:27 +0200 (CEST)
+ id 7A58D83AA9; Thu, 10 Apr 2025 10:49:23 +0200 (CEST)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5B3983A6B
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:48:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28A1983A98
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:49:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BE1C15C433A;
- Thu, 10 Apr 2025 08:46:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E12DCC4CEE3;
- Thu, 10 Apr 2025 08:48:22 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id EF1A75C4BBA;
+ Thu, 10 Apr 2025 08:47:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AD8EC4CEDD;
+ Thu, 10 Apr 2025 08:49:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744274903;
- bh=RUrIhTIe1mlYS5AD+cR+yDtp1aQ7vmJQjnTf64qf40k=;
+ s=k20201202; t=1744274959;
+ bh=2zGnYB9ZsuE6hhcJQdOy8qhTNNsw0bwtB5jnwzsQFdA=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=U2zQ9z46ZM6+4p++BLxIzifiasiOQvSuAWKDHuCVRHCL7Ote+H0quAMYPj+wfuKiN
- tCZizowBcUoYdgqjGyK1r+mOjoWBB7V+oRkRDvOAwsCfuEXYgyKNCq8aVAtWv/BXbg
- E6Z/RZCauU+P/ZIU6OyXEE732/Jsy3cTsvcp7EFU+M/rYqZ+WRieZZje0eTjErmldy
- aCo2FOZr4H165uKyRXhCYc5Djjvk6a8w5OwJBIJD+BpSgQdfQcWtY+wA+YbLRagveR
- RqoGr/u5Qqca5czyl8LTrd7oYWijJN6Mg12ACO5V/xouAZYlUeQbnsjzotaF/Kck/u
- m+t4Wkhn0YMWw==
+ b=kjSoRpdPP6VtiHn2SZI4DfPMQjpJnkeI5+6fCLOQ0+945qKIYphnHIgt490G02dhU
+ eb0yT6zeq/8kb8HwtK5cck356ltQHmoX87404ZmWAj4TkTMfeKgAYOtUY5nhQn3v6f
+ aFnydXddQh2jNKDaMyW7wEnvLTdDKsWvMlNgTbS0A5zcfjidxIGNgNSpb4nQL93i0y
+ 3DqVdW5KJ/pYWjDkC/390yICmLs9T1jSxyPS4PWGGHseFU32Zpc6tLquc+aRAOcMTG
+ 6u9XrzMkUB0xPqxPpo3cXRhhmT9knV1ty7bffI7WdaDhwF00TxaO+hyZUmTDVimSQt
+ 0gxHvepWCs+4A==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de
-In-Reply-To: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
-References: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
-Subject: Re: [PATCH 0/4] usb: gadget: f_mass_storage: Fix crashes on low
- memory devices
-Message-Id: <174427489953.286125.3867443054091743825.b4-ty@kernel.org>
-Date: Thu, 10 Apr 2025 10:48:19 +0200
+To: Eugen Hristev <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
+ Zixun LI <admin@hifiphile.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250331162611.1557759-2-admin@hifiphile.com>
+References: <20250331162611.1557759-1-admin@hifiphile.com>
+ <20250331162611.1557759-2-admin@hifiphile.com>
+Subject: Re: (subset) [PATCH v2 1/3] usb: gadget: atmel: Add SAM9X60
+ support
+Message-Id: <174427495638.286402.9855514984625058076.b4-ty@kernel.org>
+Date: Thu, 10 Apr 2025 10:49:16 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -72,41 +74,20 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Fri, 28 Mar 2025 09:15:40 +0100, Mattijs Korpershoek wrote:
-> Zixun has reported an odd problem in [1].
+On Mon, 31 Mar 2025 18:26:07 +0200, Zixun LI wrote:
+> Compared to SAM9X5 the only difference is the DPRAM memory from the
+> USB High Speed Device Port (UDPHS) hardware block was increased,
+> so we can reuse the same endpoint data.
 > 
-> He encountered a data abort on the 2nd "ums 0 mmc 0" command with
-> sam9x60-curiosity board:
+> Also add compatible "microchip,sam9x60-udc".
 > 
-> U-Boot> ums 0 mmc 0
-> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1d29000
-> CTRL+C - Operation aborted
-> U-Boot> ums 0 mmc 0
-> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1d29000
-> data abort
-> pc : [<27f93428>]          lr : [<27ef7e80>]
-> reloc pc : [<23f16428>]    lr : [<23e7ae80>]
-> sp : 27ef4cf0  ip : a5200000     fp : 23f6915c
-> r10: deadbeef  r9 : 27ef7e80     r8 : 27f7d2a0
-> r7 : a5200000  r6 : 00000000     r5 : 00000000  r4 : 27f01668
-> r3 : 00000000  r2 : 00000000     r1 : 27fe1d88  r0 : 27f01668
-> Flags: nzCV  IRQs off  FIQs off  Mode SVC_32 (T)
-> Code: 45ac d017 68c5 4667 (60fd) 60af
 > 
 > [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-[0/4] usb: gadget: f_mass_storage: Fix crashes on low memory devices
-      (no commit info)
-[1/4] usb: gadget: f_mass_storage: Remove kref structure use
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a4317be9dbe9428f6209cb5595bfc57eb990b023
-[2/4] usb: gadget: f_mass_storage: Drop invalid kfree() in fsg_common_release()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/47fd46db943a55a7e0232e27224d216b774d7575
-[3/4] usb: gadget: f_mass_storage: Fix NULL dereference in fsg_add()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/6c9eaec55ae634bac02e0cf70eb78c879d008a5c
-[4/4] usb: gadget: f_mass_storage: Fix memory leak of fsg buffers
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c76a7090f6480affbe3946fcd0dcc6df9bfe05b3
+[1/3] usb: gadget: atmel: Add SAM9X60 support
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dc22cf37af6d604513f8c6f02d4cb551d5a59435
 
 --
 Mattijs
