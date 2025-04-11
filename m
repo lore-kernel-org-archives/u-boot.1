@@ -4,136 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE4BC36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 05:55:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736F2C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 06:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B5A83E9F;
-	Fri, 11 Apr 2025 07:55:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 93FA183EAB;
+	Fri, 11 Apr 2025 08:20:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UO1EYtEi";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hKf6VSkj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B726E83EA6; Fri, 11 Apr 2025 07:55:54 +0200 (CEST)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::611])
+ id B6F5A83EAC; Fri, 11 Apr 2025 08:20:11 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14E8D83E96
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:55:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76FC683E92
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:20:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ST46bhPK5UhpEq2wK19vBsmbXM2g4yKysuPOoPGBNXcUVgN6ZkTEmqpf6rV1cSbKgjBgQgE47d+nYxFqOZoPLnxGp3hUbSrrHCELqIHRy+LNjPa+mUDwGw7wVuBHx3m2ItYSMVaF3pIO124NxA5rDO+P+Gc0P3/lDq6p4lMMUemyHJ54+fLTyzyjNj4EWxLVELciZ0Xc+wBeXPnoOBw2xdfp1pVHgOW76bx4RgfdivzDWjVKhWVqhbkOvmWpIjlsg1DF0r06T5yaimQC+ghnWh2KnIPYhpbjav4y9kRwE69ywpxj0GYVTgR84Se/gAyddG2A3MPU87E5tqSU+weE7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IsQZZh6DASF7pUt+N8712CKL17YoTl7KKw095YgtqsU=;
- b=js7AaMZs41CkxPC6aE+Qk25WNHnSaq6lLFTIqScy1j+ng6e/hvPwU7+DGStlumHimfOSLwkW+pNhEl1z7qyuWX5FNp5bdrvTGIxbZseCJGT8W3g9Jom1iG9UPG5WYT7CvFmYdJC6HdnHozbZ7PjxdPqu52pWDlet4pd1XIMCfn695LnZEIPjIiLAYYZZge9rMi0ZKs81Mgbh+rVfZCXJluDoNNyNjmyB1rukKT5CTshpeozM/BDtgs69iHCEJRA1iVKtPqK71qgryuEj6jUQhWtBmW9C5GBEmnJOtiTN4BbCndZiy3kOwcSMb5cVSLvZe2FmDt2OGuGJygkWeKnWYw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=temperror (sender ip
- is 165.204.84.17) smtp.rcpttodomain=lists.denx.de
- smtp.mailfrom=amd.com; 
- dmarc=temperror action=none header.from=amd.com; dkim=none (message not
- signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IsQZZh6DASF7pUt+N8712CKL17YoTl7KKw095YgtqsU=;
- b=UO1EYtEiH0L+SJG3Q32VMlTFtVnzeBbGAOu63To3nF5IvmqtZRBVbVoUO2LhI1KqTHlxQtBXZJYFfM+7/adEbde1+UGsva4SbXZlxAPHpliqLN0eBG7LZ9lhzJ/+TeCp2jommcefnNPExWaXPoSUU2djuk/IetEqaAeU0tXpETM=
-Received: from SJ2PR07CA0007.namprd07.prod.outlook.com (2603:10b6:a03:505::12)
- by SA0PR12MB4383.namprd12.prod.outlook.com (2603:10b6:806:94::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.22; Fri, 11 Apr
- 2025 05:55:46 +0000
-Received: from CY4PEPF0000E9D0.namprd03.prod.outlook.com
- (2603:10b6:a03:505:cafe::46) by SJ2PR07CA0007.outlook.office365.com
- (2603:10b6:a03:505::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8606.36 via Frontend Transport; Fri,
- 11 Apr 2025 05:55:46 +0000
-X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
- 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=temperror action=none header.from=amd.com;
-Received-SPF: TempError (protection.outlook.com: error in processing during
- lookup of amd.com: DNS Timeout)
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000E9D0.mail.protection.outlook.com (10.167.241.135) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Fri, 11 Apr 2025 05:55:45 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
- 2025 00:55:44 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
- 2025 00:55:42 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 11 Apr 2025 00:55:42 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Padmarao Begari <padmarao.begari@amd.com>, Marek Vasut <marex@denx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v2] usb: onboard-hub: Fix return type for regulator APIs
-Date: Fri, 11 Apr 2025 07:55:38 +0200
-Message-ID: <a2d520f14efc30fc28ec59881205e156dabbfcd9.1744350937.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1744352408; x=1744957208; i=xypron.glpk@gmx.de;
+ bh=/3S70V9nxAyE7Uliv1678c3UtYfmThkLOmdQ4IXHsic=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=hKf6VSkjcvVNvf+KL4Ze/VFCrwFgJiAkxYXKmCvYM+EFbf3jrOJ2LabPZ+D5HoxK
+ gsUVKldfwK9pLEVLbB57S3/f3PPbWABsh5AhMPbhC0HnG/4o0OHHEd3iz+Zgv1jXf
+ sDvRI0dWhrISul1JgL1WFVMuYkvnc9OG6EiW5V3DRUR7jOlT1vEmAck+e8CAAEtGS
+ 9B4hckKMZQHJRAK0jJPSJjzd7GGaD2cGOoc01rcUXW2NrSLcZ55Tp2TmCDtNwxdsC
+ YrzhBwlyeXKxoDSkaoXQWqiFzsZW405bQoezQckJKbg8rxZ/hS8+yX2nVIfmNc9Zc
+ SxzzoPOz2c/2R+rFmw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.109.163]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MzhnN-1t87L713aL-00vUU3; Fri, 11
+ Apr 2025 08:20:08 +0200
+Message-ID: <16f41a27-4b98-4c2c-81c0-6dc5d64b19f2@gmx.de>
+Date: Fri, 11 Apr 2025 08:20:04 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D0:EE_|SA0PR12MB4383:EE_
-X-MS-Office365-Filtering-Correlation-Id: 75aeb80b-ef3e-4dcc-2911-08dd78bd805a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Ofj2SHkBTxJPspR6y/4aixpEGoSQfx4MmKOJVJkbzp1hUqfzpdQ3cwxwCquN?=
- =?us-ascii?Q?IZZDIEDlIMfc3lLd9Jo2G3ENIwrRvON9npWaTxJ+2IDOtDS1alfEQqg9+7+q?=
- =?us-ascii?Q?uPzI7bnBtSDSQlXACanqwm1QKp3TOkvrazwi5ErlGwPuGAbS1bK064Qz/FN6?=
- =?us-ascii?Q?M47Q/jIoNMShTLLmSLOGnQWnxzeQCTyBtQVqshQgEBlZ146HT9KpAQELiGIu?=
- =?us-ascii?Q?orUEWBPuyScCDmPXBxtCUoe8IUUW5Z9q66Bnn0W0r53relOutFwDmOyo8aiu?=
- =?us-ascii?Q?Rr/lAYBAafB6uGviS4VcX49eZ9oZHltqXDBMlG0wpykJj9Z6/h1Pr/Mi9mOj?=
- =?us-ascii?Q?tcJmUwT/gKMrS26qMywPaP98hzrkGODtKhyrEqw72cu4G65MgbU2kQFmpU+2?=
- =?us-ascii?Q?zlVeAWM8DqhNDa7EjigzJo1Jhgu18NF6Kf962W1Gf2r8otSAOIAl1qMy0WoI?=
- =?us-ascii?Q?ZeEKRnUQM+9a2vcn1QeMMPAdp2UmorFvKwIzFUqYeBSnNkpfj0wq1rl37QEh?=
- =?us-ascii?Q?LxXn7ILSY82RhXfpiYFpYPMGzGs4rLGjk/6ol5uiernVvTXQqMZy55Yoa1r1?=
- =?us-ascii?Q?m7SutzZErriSfj86ZdMnG0lJkPDBwNh53u365+fiYupcBdkuIWrS4jS4P4HP?=
- =?us-ascii?Q?XBX7RK7VJzOcKdXKP1mKkUK6qwNgC5+KSOyEb5cI2gsvq2BbKZTH9kFK8jqx?=
- =?us-ascii?Q?vhUVpSVtUxXR6Qit2pZ4MfDGU5mB/ZofTBi4uVz7R2ebCskfytJoYk/xu6Vg?=
- =?us-ascii?Q?5X4hUxTYD54ZBpTPHnRmQZ2F1k8k/lsdr1kDWY5yix2a12r3S1PWB+eavRjN?=
- =?us-ascii?Q?olnHjZe/QORbLdAVQe9uMLDXzL53wiwaUVQC+b7iuO3jXn9I6EizcLmpAxKs?=
- =?us-ascii?Q?U1YmIJ18c0owBihaXhNKv/DrFA+F4Eqo//YElHyeKPJyEZKHPsa+072bfYm3?=
- =?us-ascii?Q?x2wFPN041VKoK7CfAw7ktiqndnao+42NBQoDym28kHJJqRPD2GfE3w7xaYTa?=
- =?us-ascii?Q?s76WlT1fxv7oq+usXbNkH2t2qIhfhRzjTE8P8IoIh7hlC61//Fj7o5dXHWEW?=
- =?us-ascii?Q?9yu/Bf2s6oSlsEBgm+amFcbX1QspGf0QuKQF8vfz09as67uuObH7YDkhVgEd?=
- =?us-ascii?Q?1DIZrLYjq/C8tcLKtlYiTW85WZX8pHgQEl5f7SDDOhEeECS3e9oZLJWwTPLU?=
- =?us-ascii?Q?zjttgJGj0+LXDqwLi4XpnjwdB/AmCykP+FNJSUUa9g5sphvXsUGyatbSRvIC?=
- =?us-ascii?Q?XRxy1PH2gYHRgoApquXGH2sdQFVPX+o/YaJ/ChG2hdTYd9pA20NaDiEfNy78?=
- =?us-ascii?Q?TkLjGvCDg8naV7Dynu1Y5YR0DXYQEPlnq0j4bjg3gLLxdCEp8PJbWAq4nD74?=
- =?us-ascii?Q?c75z523/w97U419TWTG03djHyVNstlxa61CbNYBwvrH3yBJjfnea8J+jfG6I?=
- =?us-ascii?Q?rY1SlFQ2n6Iib9JTcmy21WMaMKLFR/9UpCGeGxKbAx4OEcFzKpNdzGxIfbDS?=
- =?us-ascii?Q?s33bglH31dsXjqgIkZASrzRndmKxD3cyLjCF?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 05:55:45.2460 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75aeb80b-ef3e-4dcc-2911-08dd78bd805a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D0.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4383
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] efi: Make FDT extra space configurable
+To: Pawel Kochanowski <pkochanowski@sii.pl>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Gabriel Nesteruk <gnesteruk@sii.pl>,
+ u-boot@lists.denx.de
+References: <20250318092327.55203-1-pkochanowski@sii.pl>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250318092327.55203-1-pkochanowski@sii.pl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:bAlvbDA+XUCSlWndEvf9bT7ZsYgy4qtwAlnbWg00G0ahtCg3GL1
+ 50QN99dFY+Csyeb9jsI2LKuLWt4tLNUsIohUg9sHx4cka5dwCjBFB9+7gyL5oO6wg+LeB6Y
+ MNt6NRwppWHBfSqTO9+y2FRLQBeBQ4PenbkqutwHnFhAVvzTzRRQyXeiSpkdWWeziDaas1M
+ SEOyASfEOlSHeVjKkY6bQ==
+UI-OutboundReport: notjunk:1;M01:P0:hXc/dJ9AH3U=;XiE4+Mf66bqDjx1ZJBkWydd9B3V
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,60 +122,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Padmarao Begari <padmarao.begari@amd.com>
+On 3/18/25 10:22, Pawel Kochanowski wrote:
+> U-Boot currently reserves only 0x3000 bytes when copying the FDT
+> in copy_fdt(), which may not be sufficient if additional nodes
+> (such as FMAN firmware) are added later.
+>
+> This patch uses the exisitng SYS_FDT_PAD to reserve space for FDT fixup
+> instead of hardcoded value.
+>
+> This change prevents potential corruption when resizing FDT after
+> EFI boot, especially when firmware like FMAN requires additional
+> space.
+>
+> Signed-off-by: Gabriel Nesteruk <gnesteruk@sii.pl>
+> Signed-off-by: Pawel Kochanowski <pkochanowski@sii.pl>
 
-Apart from ENOENT observing return value as ENOSYS when
-!DM_REGULATOR that's why cover both configurations.
-Changed code is not working as operation should be "&&"
-not "||" (ret != -ENOENT && ret != -ENOSYS).
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Also fix the remove function where the regulator_set_enable_if_allowed()
-function is returning an error.
-
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
-
-Changes in v2:
-- Update logic around ret in remove - reported by Marek
-
- common/usb_onboard_hub.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
-
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 7fe62b043e6a..d17c85dd6225 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -146,7 +146,7 @@ static int usb_onboard_hub_probe(struct udevice *dev)
- 	int ret;
- 
- 	ret = device_get_supply_regulator(dev, "vdd-supply", &hub->vdd);
--	if (ret && ret != -ENOENT) {
-+	if (ret && ret != -ENOENT && ret != -ENOSYS) {
- 		dev_err(dev, "can't get vdd-supply: %d\n", ret);
- 		return ret;
- 	}
-@@ -204,14 +204,16 @@ static int usb_onboard_hub_bind(struct udevice *dev)
- static int usb_onboard_hub_remove(struct udevice *dev)
- {
- 	struct onboard_hub *hub = dev_get_priv(dev);
--	int ret;
-+	int ret = 0;
- 
- 	if (hub->reset_gpio)
- 		dm_gpio_free(hub->reset_gpio->dev, hub->reset_gpio);
- 
--	ret = regulator_set_enable_if_allowed(hub->vdd, false);
--	if (ret)
--		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
-+	if (hub->vdd) {
-+		ret = regulator_set_enable_if_allowed(hub->vdd, false);
-+		if (ret)
-+			dev_err(dev, "can't disable vdd-supply: %d\n", ret);
-+	}
- 
- 	return ret;
- }
--- 
-2.43.0
+> ---
+> Changes since version 1:
+> - Removed custom CONFIG_FDT_EXTRA_SPACE in favor of already present SYS_=
+FDT_PAD
+> - Use the define also in efi_dt_fixup.c
+>
+>   lib/efi_loader/efi_dt_fixup.c | 2 +-
+>   lib/efi_loader/efi_helper.c   | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup=
+.c
+> index 26928cfc454..544e1aa9808 100644
+> --- a/lib/efi_loader/efi_dt_fixup.c
+> +++ b/lib/efi_loader/efi_dt_fixup.c
+> @@ -168,7 +168,7 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, voi=
+d *dtb,
+>   		/* Check size */
+>   		required_size =3D fdt_off_dt_strings(dtb) +
+>   				fdt_size_dt_strings(dtb) +
+> -				0x3000;
+> +				CONFIG_SYS_FDT_PAD;
+>   		total_size =3D fdt_totalsize(dtb);
+>   		if (required_size < total_size)
+>   			required_size =3D total_size;
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index 04b2efc4a3b..40e5d31575a 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -477,7 +477,7 @@ static efi_status_t copy_fdt(void **fdtp)
+>   	 * needs to be expanded later.
+>   	 */
+>   	fdt =3D *fdtp;
+> -	fdt_pages =3D efi_size_in_pages(fdt_totalsize(fdt) + 0x3000);
+> +	fdt_pages =3D efi_size_in_pages(fdt_totalsize(fdt) + CONFIG_SYS_FDT_PA=
+D);
+>   	fdt_size =3D fdt_pages << EFI_PAGE_SHIFT;
+>
+>   	ret =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
 
