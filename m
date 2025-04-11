@@ -4,74 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20B68C369AF
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E620FC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C897836E7;
-	Fri, 11 Apr 2025 17:22:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 66D6284189;
+	Fri, 11 Apr 2025 17:30:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n/trAKlr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zFoaTodv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 180CD83E7A; Fri, 11 Apr 2025 17:22:56 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 55D9F84189; Fri, 11 Apr 2025 17:30:58 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADEDF82B3F
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:22:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B782182B66
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:30:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ac7bd86f637so630191866b.1
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:22:53 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3995ff6b066so1127045f8f.3
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:30:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744384973; x=1744989773; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9wW4FPSop6rhe++Un6KwUrCNU20MXEXbpiQDx84mkwU=;
- b=n/trAKlrbsSvLE1Vojht22yPkuov+naA1O7ES1PTNQ8uWq0hIzJsP0425hdd1l1h7k
- et0YqdsgZX2jyTWl7uhrE6avrSmyPBj/EkDt+znISx6iJkCOh5qX3lZr/8ghrrqAi2b8
- KCckKdldJ+QpQROujN0KCj44NvF4d5SmrliTw=
+ d=linaro.org; s=google; t=1744385455; x=1744990255; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hWehS5BtWDwZMIJ9+SND/YtDq3CGWkGLxZZMpOcVAi0=;
+ b=zFoaTodvAD+OFZPRsCVnB1GccC61MORsJfjW34f7L+2aNSvcrOuWO4pQT+5dwU8pmq
+ L9YhbPkydSju3rqCHWIG/ARxAXi9dBiCcRlXF996HWo3eLBMKuhxmpfH+L6MCCjCKLzJ
+ CPLVHjsKtW/6i5l/n0j5TNub2bO/s6F+EvcVYfHgPL80g3So99WAUih3xY+Qy+KfSfX8
+ qaO6Q7/qnWnUstchGkviLpY4wqDuKVJI20FSvMMq+3sJNHYDV4h9NfaIiMiPalYOonE9
+ ew0HFKhv3jB14bA7yqmZ1Q68NPUJMKAH3uhHdq5nHFA5azIv3b1aYq/mlPMZ89jyT2yn
+ XcEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744384973; x=1744989773;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1744385455; x=1744990255;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9wW4FPSop6rhe++Un6KwUrCNU20MXEXbpiQDx84mkwU=;
- b=bBOyDOf9XMymu8PhpziC/QGqaJJCnAJOZovwSDa8v6U0RySsWUUduS/VC5hPNaI5Xo
- Q22tYiVyZDmIiAOh3snDh4fBUDFJuBR8LZGVopm9OvKg868bOlBFg9hDgfBLvm4F8XqT
- kP6Q8EKmYMncRiv7WusP2v51SBWdqcpVvcDLh6RSBil5FLHKSBh0DX+tlWkbQS+o6ZA3
- Bssos3J2R8pgITtb+6TUOP3COYXMYXna57cWGmF8nFexUKGK+UBGA5Q1IE0q7mnxbEOy
- xFfRvpbjIY5YYfAlflVs18+Vt6btNwnp4EuVcUQxPiG3+LwHbMqiBIQtqm1H/LHidzc3
- x9sQ==
-X-Gm-Message-State: AOJu0Ywp26CKgdscburybf7814Duem8LaAnd7n3Om6CN9lVxdtZBQ+lj
- djHKnK3djtCVMqFVYGPga7yFcaw/IyVDgdGeOGEpHwZEdgaXsXrk3cE9jKhp1q6MSv5qGNIOAXs
- 9qr8Fd2k1sGZwj1nzssAKX6sh//djs5b7p8f5
-X-Gm-Gg: ASbGncv0zGReUhIolJR7vzEzGZFrITJSBDanJEhcXVFtg+bxywZqgjYYu3ICvpk9GP/
- RDH1bVt4YOAx5BGTh910/2K1Ks0DPP3IAdua9pe2cGOLnzOkF3X3Laz32m3AMmZydFs36iajAF5
- fbzk/lfeK0GwQIo7WM/+8X/d+KyGXdMeUM9OYavgqwMmDpoWxj22olxeI=
-X-Google-Smtp-Source: AGHT+IFOoNPFplsuGkBFqsKlJ7neHIpogBYB7vgIdqBZ/7a7Wezy/InqmSkF7201uAGoxIGsJm5fxvzeD32YL3xa3Ts=
-X-Received: by 2002:a17:907:8694:b0:aca:95eb:12e with SMTP id
- a640c23a62f3a-acad17d0177mr319859866b.24.1744384972806; Fri, 11 Apr 2025
- 08:22:52 -0700 (PDT)
+ bh=hWehS5BtWDwZMIJ9+SND/YtDq3CGWkGLxZZMpOcVAi0=;
+ b=rAQXm/gM+NuLzREmBeFPRctj6NYDct+jkgmYmwr7c9UAnWmC3FHRMTRzmVgIX+153D
+ NZJ6HnfDCoWSmWGI6jhDPHGzRjTYUVqmHd781PmeMd3ly3eSCiHWmh7tCXMTMaaxHL3G
+ k2ldcQyFiBAu153LDucHUD4Hl4i/ztW6QoFYHD7O2uRMjdZp3yweTsb/aTc9TOmW7zdm
+ ecTsPCh0t3E6IbhEUwB55+D5eOF2dAFYGr/XjJFmDUjbNYt0pkdcJIj4nX0tOSHR2X7n
+ d7DTSESdNnO68i+NapjrgBf3/4WfamVkC8xwNgOwJZSJYU0GOmzGoCN8Dhe8asRE1pjE
+ PhtA==
+X-Gm-Message-State: AOJu0Yz7uOmk7Dl6NdInxeHhMDnaTxZRR98njsB/JYX0mSXRgYFhTrVh
+ dAussmf2fDZUYtktuZPodA5h0z2QdTiNFp2jN6jbVvUR4rQNz6AW4aw4wCCs3bJwPhGkRaEo+Wo
+ vO9w=
+X-Gm-Gg: ASbGncvfl0A75rArm8+lVumKqBm7lscIkZC64kzuZEe8FDTEur1eU8bTY2y4xzePGUJ
+ 1422NJMmzkWFgoaY4O+sD0fatgibOThqLmEYFRSy/Nhn3rptEXLSbhBYArlQW/SQXm2rPUkpFGa
+ ayTLMW+7oZlgNpsVXfj/OvPhAm6yYwh72ciIC4CYweVMHFZUvVIroeJpr8qvieVJraFdNLcZT18
+ M0SupFpxsUeh7cs5ZNxan18aRY+FJaE0jVa7cQqBywPXUCQqZY3vFY0X+ogQ3lkJ7EaSa+aRvAo
+ AZkdEIvQE0tuYgff9TxQg0Al22U0lq/KCxc1WZOlmNExY1q1jw==
+X-Google-Smtp-Source: AGHT+IH8cqsOOyUlo7cLrz/mQuAAIPi+Ox62pXY2h+TazRU/o7naxDXq8xrCYc7vYsJwC52GHx8v2Q==
+X-Received: by 2002:a5d:584f:0:b0:39c:1257:c7a1 with SMTP id
+ ffacd0b85a97d-39eaaecaeb2mr2365767f8f.57.1744385454946; 
+ Fri, 11 Apr 2025 08:30:54 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:94cf:dbda:d223:8de8])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f205ecf30sm90337355e9.1.2025.04.11.08.30.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Apr 2025 08:30:54 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janne Grunau <j@jannau.net>, Jonas Karlman <jonas@kwiboo.se>,
+ Love Kumar <love.kumar@amd.com>, Marek Vasut <marex@denx.de>,
+ Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Richard Weinberger <richard@nod.at>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Yao Zi <ziyao@disroot.org>
+Subject: [RFC PATCH v1 0/7] Bootstage reports for CI
+Date: Fri, 11 Apr 2025 17:29:26 +0200
+Message-ID: <20250411153040.1772000-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250405204409.420738-1-sjg@chromium.org>
- <CAC_iWjJ07Z4PqZa9mXSnzp5TjsgXr3RL6FxSL2EV0oX7p8uN_g@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ07Z4PqZa9mXSnzp5TjsgXr3RL6FxSL2EV0oX7p8uN_g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 11 Apr 2025 09:22:39 -0600
-X-Gm-Features: ATxdqUFJjmyIxS8sI7xswcsMGJxbvnUweBZmFnCZpg5ZDLZEQbw6n5nlHvWGa9E
-Message-ID: <CAFLszTg8BON21uopaDvNT+jkoq_O405arCnTp9ncSN1-cHjnEw@mail.gmail.com>
-Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via EFI
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Niklas Sombert <niklas.sombert@uni-duesseldorf.de>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,95 +106,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+The BOOTSTAGE Kconfig symbol allows to record boot time information
+which can be consumed in several ways:
 
-On Fri, 11 Apr 2025 at 04:04, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon
->
-> On Sat, 5 Apr 2025 at 23:46, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > The EFI-loader code has not been fully converted to use bloblist, so
-> > relies on the SMBIOS-table address being set in global_data.
->
-> Can you explain a bit more what this means?
+1) Printed to the console just before the OS is booted (when
+   BOOTSTAGE_REPORT=y)
+2) Printed to the console by the "bootstage report" command (when
+   CMD_BOOTSTAGE=y)
+3) Passed to the OS in the Device Tree (when BOOTSTAGE_FDT=y)
+4) Written to some memory location in binary format before the OS is
+   booted (when BOOTSTAGE_STASH=y)
 
-It means that the EFI-loader code is still using gd->arch.smbios_start
-to find the SMBIOS table. At some point we should move it to use
-bloblist_get_blob().
+None of these options are convenient for use in CI. Suppose we want to
+monitor a set of boards for boot time regressions -- in other words,
+make sure the boot time does not degrade unexpectedly as the code
+evolves. For that, we'd like to be able to record the bootstage data in
+some kind of database or persistent storage and possibly draw graphs
+showing trends over time.
 
-> The SMBIOS tables for EFI
-> are supposed to be on EFI allocated memory
+This RFC is a step in that direction. It introduces two new output
+formats for the bootstage data. The two are independant, they are simply
+two options I considered:
 
-Not allocated by EFI, just added to the EFI memory map. See
-efi_smbios_register(). We still want to support SMBIOS tables if not
-booting with EFI.
+1) JSON
+2) InfluxDB v2 line protocol [1]
 
->
-> >
-> > Set this up in write_tables() so that the SMBIOS tables are actually
-> > available.
-> >
-> > Enable the command for x86 QEMU so that the SMBIOS tests actually run.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Fixes: 83ce35d6ebb ("emulation: Use bloblist to hold tables")
-> > Reported-by: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-> > ---
-> >
-> >  arch/x86/lib/tables.c            | 2 ++
-> >  board/emulation/qemu-x86/Kconfig | 1 +
-> >  lib/efi_loader/efi_smbios.c      | 1 +
-> >  3 files changed, 4 insertions(+)
-> >
-> > diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
-> > index ec52992209f..d7f183f95dc 100644
-> > --- a/arch/x86/lib/tables.c
-> > +++ b/arch/x86/lib/tables.c
-> > @@ -126,6 +126,8 @@ int write_tables(void)
-> >                         use_high = true;
-> >                         if (!gd->arch.table_start_high)
-> >                                 gd->arch.table_start_high = rom_addr;
-> > +                       if (table->tag == BLOBLISTT_SMBIOS_TABLES)
-> > +                               gd_set_smbios_start(rom_addr);
-> >                 }
-> >                 rom_table_end = table->write(rom_addr);
-> >                 if (!rom_table_end) {
-> > diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/Kconfig
-> > index b2a4e0891a4..c1564fba7cd 100644
-> > --- a/board/emulation/qemu-x86/Kconfig
-> > +++ b/board/emulation/qemu-x86/Kconfig
-> > @@ -23,5 +23,6 @@ config BOARD_SPECIFIC_OPTIONS # dummy
-> >         imply VIRTIO_PCI
-> >         imply VIRTIO_NET
-> >         imply VIRTIO_BLK
-> > +       imply CMD_SMBIOS
-> >
-> >  endif
-> > diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-> > index 8d2ef6deb51..5275e966dfe 100644
-> > --- a/lib/efi_loader/efi_smbios.c
-> > +++ b/lib/efi_loader/efi_smbios.c
-> > @@ -35,6 +35,7 @@ efi_status_t efi_smbios_register(void)
-> >         void *buf;
-> >
-> >         addr = gd_smbios_start();
-> > +       printf("register %lx\n", addr);
->
-> I don't think this print is useful at all, why isn't the log_err()
-> right below enough?
+Both depend on BOOTSTAGE_REPORT and are enabled by BOOTSTAGE_REPORT_JSON
+and BOOTSTAGE_REPORT_INFLUXDB respectively. Each format comes with its
+own test in test/py/tests. The InfluxDB test is special in that it is
+able to upload the data to a cloud database, provided the environment
+variables BOOTSTAGE_INFLUXDB_URI and BOOTSTAGE_INFLUXDB_TOKEN are set
+properly.
 
-This was left in inadvertently and should be removed.
+I have been able to run a boot test on rpi4 in the sjg-lab with
+BOOTSTGE_REPORT_INFLUXDB enabled. The CI log [2] shows that the data
+were indeed uploaded to my InfluxDB Cloud test account.
 
->
-> >         if (!addr) {
-> >                 log_err("No SMBIOS tables to install\n");
-> >                 return EFI_NOT_FOUND;
-> > --
-> > 2.43.0
-> >
->
+This is published as an RFC since it is just an investigation. If
+someone finds this useful I may folloow-up with a non-RFC series.
 
-Regards,
-Simon
+Comments are welcome.
+
+[1] https://docs.influxdata.com/influxdb/v2/reference/syntax/line-protocol/
+[2] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1097039#L116
+
+
+Jerome Forissier (7):
+  efi_loader: make efi_exit_boot_services() call bootstage_report()
+  bootstage: add support for reporting in JSON format
+  test/py/tests/test_bootstage.py: add test for JSON report
+  bootstage: add support for reporting in InfluxDB v2 line format
+  test/py/tests/test_bootstage.py: add test for InfluxDB report
+  sandbox64_defconfig: enable bootstage report in JSON and InfluxDB
+    formats
+  test/py/tests/test_bootstage.py: upload bootstage data to InfluxDB
+    cloud
+
+ boot/Kconfig                    |  17 ++
+ common/bootstage.c              | 289 +++++++++++++++++++++++++++++++-
+ configs/sandbox64_defconfig     |   2 +
+ lib/efi_loader/efi_boottime.c   |   7 +
+ test/py/requirements.txt        |   1 +
+ test/py/tests/test_bootstage.py |  57 +++++++
+ 6 files changed, 372 insertions(+), 1 deletion(-)
+
+-- 
+2.43.0
+
