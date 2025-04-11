@@ -4,106 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358E8C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 06:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5981C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 06:31:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89E0A83EAC;
-	Fri, 11 Apr 2025 08:31:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4A8A283EE7;
+	Fri, 11 Apr 2025 08:31:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="op7vtq+L";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UHKVGni1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39A3D83EAC; Fri, 11 Apr 2025 08:31:32 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id DA44983EDF; Fri, 11 Apr 2025 08:31:37 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::626])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CE1183EC0
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:31:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EC3A83E96
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:31:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1744353088; x=1744957888; i=xypron.glpk@gmx.de;
- bh=5sT/1CX9nq2w/GsxoqI/XNRiYvNfRJIn1MlvfbOYWpM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=op7vtq+L+TUhfhExYMIaJGZZK2D31J6/BYu/otyMqgh1bGbxcS7r4ebTjWgv+wzz
- LZp5fGMXXyJZkhxRx2/Dan8LSDMigZxALi5+v/dRc/SrW4P8vcCQZw6oFVvBFsyf+
- UL1Nl5IkhEsGBnMYzPxmE+Y4OzP+6IDI/Q2b0/WioZAtrMGsDxUpUFMBxk/D2lAUW
- uHT10JE4zjVZlEinoNsBl4FxLqX1ENBpR1YoMPJipzItMKXDGVJjS3DgRX+16X5o5
- F4QD7NsXxaHN406qGWYCZgc+FtxzFDRFFR7EGDzjUO0K6Y5tYBzZqjBHTP4KbAfAN
- AVaJ+ymOWTf8Pyu0Ng==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.109.163]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MC34h-1ttTI50yPl-001i05; Fri, 11
- Apr 2025 08:31:28 +0200
-Message-ID: <09f26320-68a0-4ab8-bc22-a6fa20492b06@gmx.de>
-Date: Fri, 11 Apr 2025 08:31:27 +0200
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oXwAITy6YBTb7w1ERpRj8npT1m+9TBsz7j6b2BOJt2PyOtc2gIbQWdJNX28L7w8CNz/HnHvjNAkyJ3eqZCWn2Nj8X2kn/Et4bw/ZIGI6kVLaME8S7UdiS5Z7YSO8Y32IgrQ1UIsiz5yU5cKgra6ZWOf4g8St8+45tAoBlaVASLgHzRW69CNzhf35UarPACijS3ZlP9TR0MvBg+L+vOy48Un+YIjpHAKsDTh6OkP6xcJqmX2eghs2vBUPgiZbvwoVOTncAm2zh4AkwbmxWK5e+zSScH7aHevNZZQBavqFJj0JpfJMAQMvEI7He0nwDAIv0ybUKAloN5QSUnR83Tp1bg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aXddEIJeTxDkuSuZqe15Rd+XDsUMgc1F3OeY7cy8SHM=;
+ b=dAkqG4W6CT5Hs8InK+Gmgb8ThEMtwWT+0xoVdCkEJR3TjsASRe9WD3mGPpNl1Y1W2ssEqza/towQD7cmFnKCxIVP3KbTJosEk0nLfntHhwct1fWvHANVWDtpw2Trfn+xtstFPmApcr8hNbqigsp7B7gfFfTDBYTnaxMqkkN24pAQ2SwJOGwQudkE/LFjW4uTCzeGOH0acmsvImk00ck/8Vr53VkpDeE7JsudFWHH50M6iUx6eu0ALUw1madm96bnp2ii8wYPwBzz/FWb8PCgZR0riUvh9iIVtWpt+wH9q3neakEuvurR/4yguR30o8Hp8oTsNmOy5r+/YESpWuC2+A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aXddEIJeTxDkuSuZqe15Rd+XDsUMgc1F3OeY7cy8SHM=;
+ b=UHKVGni1XT3DA6DH+8///PTfsBb4tHXp7nxJIXj9YOLDXw5OvJDyIU5RKC1W1C6v6U2Nr7snUpDJMXv7MvPFTHN2KgFgfaFkRKDZBv6VNIzf0Vdh66PfBjxs+iTzy9M0sM1E+iz+HO2jbm8bImiOmN06Aj0Czt7a+J+R4wOWcEU=
+Received: from DS7PR06CA0015.namprd06.prod.outlook.com (2603:10b6:8:2a::26) by
+ CH2PR12MB4181.namprd12.prod.outlook.com (2603:10b6:610:a8::16) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8534.44; Fri, 11 Apr 2025 06:31:31 +0000
+Received: from DS1PEPF0001709A.namprd05.prod.outlook.com
+ (2603:10b6:8:2a:cafe::eb) by DS7PR06CA0015.outlook.office365.com
+ (2603:10b6:8:2a::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.26 via Frontend Transport; Fri,
+ 11 Apr 2025 06:31:31 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS1PEPF0001709A.mail.protection.outlook.com (10.167.18.104) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8655.12 via Frontend Transport; Fri, 11 Apr 2025 06:31:31 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
+ 2025 01:31:29 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 11 Apr 2025 01:31:29 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] cmd: Remove CMD_NET protection
+Date: Fri, 11 Apr 2025 08:31:19 +0200
+Message-ID: <a28c1113f97c4b480ba6b75ed695147eb17a20ec.1744353078.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi: Fix efiboot for payloads loaded from memory
-To: =?UTF-8?Q?Christian_Kohlschu=CC=88tter?= <christian@kohlschutter.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250323190304.45371-2-christian@kohlschutter.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250323190304.45371-2-christian@kohlschutter.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:o0P4ZcWAU7RQBpHtaZHtHcRxaJAT91RT867e//F3vz/OslV+yub
- uLhsTPJzRvF2mlj/hdeQYRDEKZspMfhMAP1zu/VLA7xOVCOfk+6N+lSAFVPwMNZMAz0B8Jr
- tnK6ZUrhaAFMvHiExT7sTwTZZKBlGaFnfzqWrFExNO8skUwHzlxw4BBEjZdLiJZUeGiIoDf
- 4yLJQlCStxqDmTe8hXCqg==
-UI-OutboundReport: notjunk:1;M01:P0:KlWZK7fpS9I=;Brl9QGtEnR+kG2SmNuGLWZRoc2k
- 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
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709A:EE_|CH2PR12MB4181:EE_
+X-MS-Office365-Filtering-Correlation-Id: e3b75fea-00fc-4f93-e3da-08dd78c27f80
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Xo2xHQoSF1dq0Z8FNXyRvFfIZdB4UlRsw6zXxi8M2RmOvl4k3IO7i+5yo244?=
+ =?us-ascii?Q?B9ZZeMyl1kjc3sgNVjGm9js8XRags9+zXQCSfHdJmXHWeK+r8mmZZrMD3Cfw?=
+ =?us-ascii?Q?W3An9TugBujShz0NJ0w4vFdy1auXNncS9ETtivhGyWKwJHY/C20L8iXdOpDw?=
+ =?us-ascii?Q?kFRY7fTOoB+jicfM7KzUpZFOE8uB3Oqh+2xx1Utxks9VOvHCLavjfjYtoLRY?=
+ =?us-ascii?Q?+y9YvyeEonDuTV44CiI7ro8/O6wnOur4UhDYWi42C6rr9Z7ZctrRGSeWrPLn?=
+ =?us-ascii?Q?DKlrbkMuO1Un7jcmi0eG2NjTJsJwKWoLzpkkUp88UxUoZzMrZdwiwUIzzPpk?=
+ =?us-ascii?Q?j/99ML8vF7qrWp9akH/zkBqbl+fGnOI3jZar5Y+5uH4dyUk1BNFRkk64FYUk?=
+ =?us-ascii?Q?bT8RV07scels62UcDRTl2w4GwQ9VrXL/UiPVnmv+Qz/szD9DdE3Fg7NptX8P?=
+ =?us-ascii?Q?RwklMrrAoa8fCX3BBqTJFpq1UXtMbOgSz5mr0MIIcrFAmLtWGz2YJneshC9f?=
+ =?us-ascii?Q?LPwzYTG32TlvjzE4SPkMkdIwBtDF7q5YBtX8fTxEmk+yKfSWx24AwOENcPCY?=
+ =?us-ascii?Q?2nF4WrNxuVP3ovKOlHDoUSbFOLU+NLV/RSPKppMS6xjj9GjVbbQQqSe6dmne?=
+ =?us-ascii?Q?7SzSIGQOUTbMokpjJPXtwOMP/nPIEHBXiSpyQBjoLxngaHl6OPizxRGeEV87?=
+ =?us-ascii?Q?zc4ARUNIOy79sPd5a5sSGtfwbvriWCJxxJzaifRM84Ppjov2fIJKG+BFJ2E4?=
+ =?us-ascii?Q?MVpqhDMb46H3MMyQtTK9XpPGGtmmiziJi+bOc/4RU3jno97dbI51Ei5VnTNr?=
+ =?us-ascii?Q?rnhE1wAM/eYSryw+pi39Io3Tk2AVIOI6YgfUs2mHYq7xkuvUYCMcheC/x9mx?=
+ =?us-ascii?Q?H9nqyjWI2hjq4cnbVaxwW5tHMmT+yqUjOvIeJOL1dnarI+UDjpvAiHYaKCLS?=
+ =?us-ascii?Q?Lcs/xZyCzDFBbMUKVgF26G0pCRqNAYFrwX8GDXyZpQVaxb2L9YrRq3K3B23j?=
+ =?us-ascii?Q?+9x6OjOb054CS+T9/61miwLeHJ+uVSnRBWGcuW5t+5gXFffSBckCIwVdGZKL?=
+ =?us-ascii?Q?ziBh3m0aNin7awaSnwVFCKqEXG7gd466D0SvzCKP6SkMdL09r1oTGnG9EYtq?=
+ =?us-ascii?Q?d5oY7cwb1OaWA0Uf7nUxeBeu3MqEUTpO6df7NXZRBJn1fM0WVcuD+YGW80L7?=
+ =?us-ascii?Q?8etAMOkU0wZWpwRAMVEwBiW+msmzAhdHM5ALVEDmiuR2tuR3of1vUGEpcVsM?=
+ =?us-ascii?Q?WGt1lE/VYpv3TEtz8I2dHSLrlM5QutspTUGFivljCkwu8XkbGoLgTJnbu61r?=
+ =?us-ascii?Q?k8dPlEQ9HrMRkfViE8ZavwljtOocCQdw/ckVMhSUsmfUdovQ9h/qcNwVeA2W?=
+ =?us-ascii?Q?PTIyZzTrWw9ER8VkhFGOB8fxGDbBmD9E+zpBAncK+QiEwZQK1dDrynwRCq8v?=
+ =?us-ascii?Q?/VznwYCE3qlafZMNoQseXQv3s9ixRuK8RiogT2OTC40xzzV4Cg3BPcwB9CiG?=
+ =?us-ascii?Q?QqVcCz/llTu4On4yJ021zNsxkkWN97+VH5Dh?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 06:31:31.3839 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3b75fea-00fc-4f93-e3da-08dd78c27f80
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709A.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4181
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,54 +147,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/23/25 20:03, Christian Kohlschu=CC=88tter wrote:
-> Calling bootefi on an address that was loaded from memory (e.g., cramfs
-> or SPI flash via "sf read", etc.), currently results in the EFI binary
-> not being able to access the EFI image device path.
->
-> For example, iPXE would fail with an error "EFI could not get loaded
-> image's device path: Error 0x7f39e082 (https://ipxe.org/7f39e082)".
->
-> This is due to an incomplete special-case in efi_binary_run, where a new
-> device path was created but not used in all required places.
->
-> Fix the in-memory special case, set the "bootefi_device_path" to the
-> generated "file_path".
->
-> iPXE will now boot, and report the device path as
-> "/MemoryMapped(0x0,0xSTART,0xLEN)"
->
-> Signed-off-by: Christian Kohlschu=CC=88tter <christian@kohlschutter.com>
+CMD_PXE is already under CMD_NET in Kconfig that's why make no sense to
+have another ifdef inside source code.
 
-Hello Christian,
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-Thank you for the patch.
+ cmd/pxe.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-For future submission, please, use scripts/get_maintainer.pl to identify
-mail recipients.
-
-Best regards
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-
-> ---
->   lib/efi_loader/efi_bootbin.c | 3 +++
->   1 file changed, 3 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index 10ec5e9ada3..f78cf972228 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -268,6 +268,9 @@ efi_status_t efi_binary_run(void *image, size_t size=
-, void *fdt)
->   							       file_path, NULL);
->   		if (ret !=3D EFI_SUCCESS)
->   			goto out;
-> +
-> +		bootefi_device_path =3D file_path;
-> +		bootefi_image_path =3D NULL;
->   	} else {
->   		log_debug("Loaded from disk\n");
->   	}
+diff --git a/cmd/pxe.c b/cmd/pxe.c
+index 37b8dea6ad6f..0f26b3b42197 100644
+--- a/cmd/pxe.c
++++ b/cmd/pxe.c
+@@ -13,7 +13,6 @@
+ 
+ #include "pxe_utils.h"
+ 
+-#ifdef CONFIG_CMD_NET
+ const char *pxe_default_paths[] = {
+ #ifdef CONFIG_SYS_SOC
+ #ifdef CONFIG_SYS_BOARD
+@@ -331,5 +330,3 @@ U_BOOT_CMD(pxe, 4, 1, do_pxe,
+ 	   "get [" USE_IP6_CMD_PARAM "] - try to retrieve a pxe file using tftp\n"
+ 	   "pxe boot [pxefile_addr_r] [-ipv6] - boot from the pxe file at pxefile_addr_r\n"
+ );
+-
+-#endif /* CONFIG_CMD_NET */
+-- 
+2.43.0
 
