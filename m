@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C25C1C369AE
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:04:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B74C369AE
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:04:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E951B8416E;
-	Fri, 11 Apr 2025 17:03:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 379C284178;
+	Fri, 11 Apr 2025 17:03:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cfW281KU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QKvO4eQn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C712884148; Fri, 11 Apr 2025 17:03:49 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id E213084148; Fri, 11 Apr 2025 17:03:49 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6AFA8415D
+ by phobos.denx.de (Postfix) with ESMTPS id E3F4A84167
  for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-39d83782ef6so2023923f8f.0
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43cf05f0c3eso15540365e9.0
  for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:03:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1744383827; x=1744988627; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5kpOlHnovRDvFVWgYIlqSGWad/OVxsVIYQ8LnXuhMJI=;
- b=cfW281KUZXbhxXGKWOKnHOxKV1hqQ9UIeE6MCFq5rx0/k+E6NWsDKNzxRRvbJBKxJY
- +fY0QoHxBFHoT53moBASa1TEONKO6nhqO3IR12RjewvEdcoIARCrxQ+25YPs1EGO4ndQ
- l46ZR7OSijVVUyfoHCFEu/zybsElx3qqUBUKZEQHTPvF19tF3EQkkb38TuFpY31HXIGB
- XUFPGifEo0rmiPn/wdJ67Ob99fNalOwZQ3VlkJV/N3jk2pMa2Zz6vensqrKr7ZUy8kmX
- ZqfXL9+fmeLZFhNW0kn1Bx+GytSGEwQ6t+vX64a9cHTVC31po+D/5a4ajBlAiSvM9Dfq
- sWRA==
+ :reply-to; bh=Msntet+z1hVp+lXklTxDdx8dRWqp1mS+6xaRDI1fhvM=;
+ b=QKvO4eQnMwCNCDSDbimRwkdrWVyDqkIYr1n2p+Dhjmzw4Spa6u0VZMDAyeSGBFwpBJ
+ nEam2fOm3yQ8mdLmEnSgnut3hRZJFTYCBEbRdU4mGhrFl/P8Wsn8lYJNeck6hi1PlN/I
+ V7f15PfcyzvChYBNDO425Pif7oLa4TYGTvPkvlTVm9VpxGl/KHQHrH/TXvwGMBHQrDh3
+ LpxKjvcYQGZpOw4rAwDMdkfr7mN8jkP/hMoWgayf3Mve8wsT7dlTrE9bALG5iAVn+sEQ
+ nwQXc4TAwfJpQJ54w6UJYDPNHOTfY6S6Tbwr+TkJn4HWri9vEHm3oLiS0arOVKYR+xmC
+ J9QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1744383827; x=1744988627;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5kpOlHnovRDvFVWgYIlqSGWad/OVxsVIYQ8LnXuhMJI=;
- b=PAEmRxbmWsqZH6gy3QOQbnPWDNXgTNZ31V2+cxU/cWB5DSUKjqc6AI9+FWjuBhefTy
- 6T2Y5w53O8DgKuo2oLQ7RNTWIjrRPjC89DbYVWurun6zYfsUoY21fhu+PkfvpzGHnbXt
- xnMmAlwSfaJOblXlYlfGJt3gnvMCBbIiEqdcYv1g84PA6A1Sq1mb1WSZZs3KWWLpavyw
- KSO7G7IlPUhTk7TfwJHw8LHOf3doq6ZUHwQ5ijU+P6svcqS8QndWTlLqMUWZ5R0zqO9Y
- 4fGTlK3tj09MaxaQBtjoE/e8jCAiNPHUPQ6a5sl0xSg5u/5KZlv2ggpPg3DzgFuiptZz
- i9HA==
-X-Gm-Message-State: AOJu0YzGeXz6XmAC5wKnsDzsbsoMUnC6UCyrpht+F4vDS33IPp/IgLjM
- /vBuuBOO8fy4GmlXaTfCgNY3uHWu208bJcdLHA93b/1jomRx5GNvePoRkJ6dyY55YDuCTn0FrHq
- FuH8=
-X-Gm-Gg: ASbGncvdCb2srVt4PDx99hQkKwq9C8YrhYT4m3KJ8RySSYAWgAyqo4QZk/j0KakhGR1
- l07czcMAmgyU6PBkNyvc6a1l0gOiZobbUmh7bUhvLnyDMnsSEfRMD6ZXW3HgjiQTD/3VOqLPVOi
- gbuD+HavtKSTchDGOnXpXEl8lDl7ZIYZqOfoHbXqXBZ/e55yrl/M7d1jY9jP+MLXAuUnZKBSZBy
- 9j6OtUX+qchW3ziVvT0KBGBK81vrFwh/wYoD1pr90XPUR6VMNpL2XyUeIZRIpAbJWr9N/jh9fMJ
- FHKqjQByjdzgokSfwelrfNYQqv81wbOXs+gZE1PuBExmgk4Qz+ip0qkATqE0mW4WESt4pQcA3bD
- bZ666Zyq8tGNRfywOgw==
-X-Google-Smtp-Source: AGHT+IFgzkUwKyW2UEQfjEK68emfJDL3qlpraHcL7NdJpnyoovjNIBkI28UrZuXPYaCM3rSZGw9sOQ==
-X-Received: by 2002:a05:6000:1e42:b0:39c:30d8:32a4 with SMTP id
- ffacd0b85a97d-39d8f4dd007mr5280839f8f.26.1744383826346; 
- Fri, 11 Apr 2025 08:03:46 -0700 (PDT)
+ bh=Msntet+z1hVp+lXklTxDdx8dRWqp1mS+6xaRDI1fhvM=;
+ b=G/+rIS3fOQ20H7g8UNez3i08VBZNCb2PocAlaRIaQzxzppYj3L7HwPVz0UJb7G9Wh6
+ A0WqIwOQpZdtBReKQwZD/xjGJj3SjzritvhLZwYjyDKJNNDaAW0aLqmVyTwrKtGXOzZn
+ 2uFkjxkBR1WwFT+HAOGp9nV1vxe68JhJ/R7tIQNYnBSikT4E6/NWbTQ3OAVJEm2qSDO/
+ 36Zu+WurhPKWgR2hUqvu5ca16zvj/PgJ/PkSGTICVy+UmuArB9+AIr1uH10UD2bg1lWR
+ QUggDo38TxwRNR9hGU4dwVi0jKL2PUYFmXAj0c0oOWrZSEPPxu5K5EQihRYvjmDDXyY2
+ gwJQ==
+X-Gm-Message-State: AOJu0YzECv7fO1S0VWbCDb3d6wd7uhI9PPod2RxrH5ATemjlR7K8XCYb
+ 83AXMkpcovnM2g7tLaV5rud8/tJtAMUYBuQ9kH5ImJjJuC8nEx6BSjO9hXnAC4o=
+X-Gm-Gg: ASbGnctFWNSmfMG6/LKGapsfG1bDs8fqAmJIn5rmA/A0q1lkA+XKAFat/hxHmGG+/wP
+ XMKtv9RAuK7c/6wnhSxbYk2Bf5nJV2UoPCghaGhV2iaOuXYIpKiM53fhG/JZugoLLOIpGatG3/g
+ WM/xAs3k9aoBuijGq/OamDswgR87KhimmWgmYPUc0qlKSIN7apsx2bfxMWDG/0AAJ9aH+YNyu5z
+ qLreJrdCqtjAiZDZ/95/AiWMF7oc0VdTzIF/S1rpPE8ClCR1NCUK7EaWLk0TtBVhCoPCckmRHev
+ odriOJ4U0bxpOD5GWsHxKF6T67BLbPi6L5CzZxVEEnXPcdNF
+X-Google-Smtp-Source: AGHT+IFd5tbIg49otABDG43BrVN/C9znmNXizVbwBmU09ChOrdmU9lqAhWxtXRzDPXpfZZ/NSnacnw==
+X-Received: by 2002:a05:600c:c8d:b0:43e:afca:808f with SMTP id
+ 5b1f17b1804b1-43f3a9b02eemr36398745e9.31.1744383824911; 
+ Fri, 11 Apr 2025 08:03:44 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (35-60-142-46.pool.kielnet.net.
  [46.142.60.35]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf445270sm2201005f8f.81.2025.04.11.08.03.45
+ ffacd0b85a97d-39eaf445270sm2201005f8f.81.2025.04.11.08.03.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 08:03:45 -0700 (PDT)
+ Fri, 11 Apr 2025 08:03:43 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 11 Apr 2025 17:03:37 +0200
-Subject: [PATCH v2 4/4] qcom_defconfig: enable capsule update support
+Date: Fri, 11 Apr 2025 17:03:36 +0200
+Subject: [PATCH v2 3/4] dfu: scsi: don't call scsi_scan()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250411-b4-qcom-capsule-update-improvements-v2-4-27f6b2fcc4a9@linaro.org>
+Message-Id: <20250411-b4-qcom-capsule-update-improvements-v2-3-27f6b2fcc4a9@linaro.org>
 References: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
 In-Reply-To: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
@@ -87,21 +85,21 @@ To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1604;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1170;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=8ZsO0tnpKp/bzY43lbuvzaH22MWYYKMdoIEhD0J9800=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn+S9K8FWiKHvMZwTNoq6ODtDYsn2ud8Yg7qDFz
- V+qrd7uhcCJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/kvSgAKCRAFgzErGV9k
- tjcCD/9upTV19lr31/JlTAbJPJdvvx3SmLLj6MMw+8kbUe5CCEsKCGD62bDlh8D/ygC4ShM9D41
- oTifKef2ptc5J8PHZ4lWVZKVk2dpKb0kjfjqHGkhRHlHBLj/PPhWtZqJ7FphdvifhKzKogz6T8I
- KHmBp+z9A5pL7epp91TFzamq3wdsBbetRfdjtdOxWS+T9Feh78Hbq7+//DjqZfgA4UZteottwQE
- wWrREhkyU8gvEtzMlXnNJnGwyDDURgvGbGFVB0Tj++OIvDO+QpzJC2Zn0s/U6h+kDGTGxpKISmK
- vkmi6CtnpoAtmowvfEZWoVBsDG02C+7pzh0xPIfnxg4VPAe970iMfRv0rvV9oGnO/fjJ0d/WYqC
- 8oDU9WhwLLTJ6NSlWDtQrKNYS7o1j4S6UBbQ12ooqkEnhib9yvma5/n/Tdei25QAo1pzxo1xPoU
- 5LhhvL0+Y3FzpEP7YjhrjK/4hV9kjf/5Sm6QClL1MqN7sDo75oRGn+i/drn+0N8XgB+3G3D/fJb
- AcaC9qE1UfgLUu6MLLB10oZQh9Mmm6hrfu8G5g/Uy7RQ7DpME2CgHFf5dpoSn6JvGaixW5fNH52
- qSJ30ZeVh2EXsSbAPWUoBcIE1bIriHBHeq2ShYQvckn3t7+TChneEgBLMHlJ1DLxzKFnTYnhTxt
- bDEVMhZTYYkJ6rw==
+ bh=/qd9iWmTFynlTK1BUZWU9tJpdkIDPqn32jR6qxXJKxc=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn+S9JgBeJf56BoeMuhYtmgKNgf8LUUOHLQOQP1
+ fk6txv7e7eJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/kvSQAKCRAFgzErGV9k
+ tiDBEACBiSTtcX2+7bgGZ7un7fR15IHoxd8/UquPB4a5acIxNFU2bIEkWTxUUxnMMpE/AvGPsx8
+ rOveInd1fPu0Kp+9vEYcpGpGgDUSudkgr97KiB+TbXsQ+9bZMdg6GrEuTh0BtbMth3QdcjduHSv
+ 7Q3nvJr0lIlnu3JaYeU6CWVnNVac/+KhXsM19mkmbycrcLWFsPx5T6LZPCnWw3JvVi0PXu7yNJA
+ kajZte4SzmXR0OPKyQy8miRml7txWRh3omSLm7YR40ARPxTr4LMc56+KzNhiOjIJR/Qj5SXuTft
+ ync1MccHAwbKk1cV0TVSRq4BB51V2v1pSyheuzR6UmAdBkKJ3fpoB4siE9HofDveYFf3IHm73bq
+ 2VjwkdO9kbq4LIM0aUEijTFM0sBgIhUU1msUqiBp2OaNexwsz68yHa4EUGaEQ9FgWGRAE3XQ1GZ
+ zDpuMOlpu+mNGxa4OEsgAHhX0YOogMCfigGbauOAzmUwxvBNIbkyW61z7udMxSy3CKTIMwrHrBp
+ UgPa47Jmmgqd8Pc1UV3LCzZJI36P04JCXNcthS42m9gH+QCBnq38XCXIGBMPV/gun/nrvy43YUK
+ y7rZ+iXaLFsONQr16KEapdb8qo5u2gNKtxUiN4PkxUfBB+X6oFIfGP+bzV4m9QOob8T8/FrD3+l
+ V/UFb9OnqulQ4Yg==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -120,48 +118,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We can now correctly identify which partition U-Boot is flashed to
-between uefi, xbl, and boot (including A/B support) so enable capsule
-update support for all boards.
+Calling scsi_scan() results in all the block devices (and EFI block
+devices) being destroyed and re-created. This breaks the EFI filesystem
+drivers during capsule update.
+
+Remove the call, since boards really should be calling scsi_scan()
+themselves during board_init().
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- configs/qcm6490_defconfig | 6 ------
- configs/qcom_defconfig    | 3 +++
- 2 files changed, 3 insertions(+), 6 deletions(-)
+ drivers/dfu/dfu_scsi.c | 5 -----
+ 1 file changed, 5 deletions(-)
 
-diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-index ba26924da161b1c4b5378955185f314b05cb1006..5ddc5ab3ef8cfe8f9cc09eb573c1a8130b394b43 100644
---- a/configs/qcm6490_defconfig
-+++ b/configs/qcm6490_defconfig
-@@ -18,10 +18,4 @@ CONFIG_DEBUG_UART_CLOCK=14745600
- CONFIG_TEXT_BASE=0x9fc00000
- CONFIG_REMAKE_ELF=y
+diff --git a/drivers/dfu/dfu_scsi.c b/drivers/dfu/dfu_scsi.c
+index 9f95194784c1de00458843276872b1d23d023444..a234548ae46dc2a6ae1ca5770accb58f43782239 100644
+--- a/drivers/dfu/dfu_scsi.c
++++ b/drivers/dfu/dfu_scsi.c
+@@ -341,13 +341,8 @@ int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr, char **argv, int
+ 		if (*s)
+ 			return -EINVAL;
+ 	}
  
- CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
+-	if (scsi_scan(false)) {
+-		pr_err("Couldn't init scsi device.\n");
+-		return -ENODEV;
+-	}
 -
--# Enable capsule updates
--CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
--CONFIG_EFI_CAPSULE_ON_DISK=y
--CONFIG_EFI_IGNORE_OSINDICATIONS=y
--CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..36e2f45d22aeec6d8c4d904d22bfc466ca1f5b0d 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -5,8 +5,11 @@ CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
- CONFIG_ARCH_SNAPDRAGON=y
- CONFIG_NR_DRAM_BANKS=24
- CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
- CONFIG_SYS_LOAD_ADDR=0xA0000000
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_BUTTON_CMD=y
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_BOOTSTD_FULL=y
+ 	ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
+ 	if (ret < 0) {
+ 		pr_err("Couldn't find scsi device no. %d.\n", dfu->data.scsi.lun);
+ 		return -ENODEV;
 
 -- 
 2.49.0
