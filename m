@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F95C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 04:21:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13136C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 05:30:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0A0083E70;
-	Fri, 11 Apr 2025 06:21:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6858482B7F;
+	Fri, 11 Apr 2025 07:30:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1744345279;
-	bh=jfsSDUutk71+l19/vvdtsDHyupiKxQ1Et1aAwu6Vts8=;
-	h=Date:Subject:To:References:Cc:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=SaN7ri1HWkPhRvgg8fliOglcY/S1RGTjvMvqE8E3bZgR5XUvr2YKE+kv1karN1Vb8
-	 2uwxzQ3kXXOJYUU1V0wZYJQxqTDIJw9Vm00DqVLFe+rWiINM/iGOg/WttRFto79vig
-	 jYF/pU6Hb6ja9GUk5Or2hqDuNwm1gJJqxpGl8KA5sjCW3eWoD8OFLwTAKosm6Y+RCj
-	 hM4lKPC0QGq0cHy5b67LYuL/RhFKphTX899b4lpiqgwW+g1ztiyTjbACSMJrxtnCQo
-	 TuklZ9i6QEz7bhF6UOFGE0fRRFkSpVPYImPI83pJmPCm/tHfFX3eC586eVybm41C5e
-	 r0KiWdIwH+KIg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A833A83E73; Fri, 11 Apr 2025 06:21:18 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2BDF836E7
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 06:21:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Lv8Py/Bo"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E436A103B92D7; 
- Fri, 11 Apr 2025 06:21:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1744345275;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=jfsSDUutk71+l19/vvdtsDHyupiKxQ1Et1aAwu6Vts8=;
- b=Lv8Py/BoNWe4nhA+U4IPAPEbaE+n43vySXybg/sT4jA+J/L9Sg3hit+w8DqTU2Bhjw8DH/
- eNjjmDNtkkqgCtOzQUKxouaW41xMhem7T0jewIB35ezEs2muyg4H2DVpBHPIvtb9AWndsD
- tfp6zMClZaipuBVEgsdnI8TFVPEgIfs0vB00sbXZKcwKJscfDKl+AkCBu8DS+0tpX9J5xU
- 2P0deyBxLhgwthOFjJmG1vTqUaNdOqUk0XMpBJMSyL74A2iqYveZ5Wc1ckfb2PWxx4ZkAd
- TEGWWWpMvgLrG5pf5eLeW1hmeRvUcKhmdSKV3C6igZMKUZudN5w/MCnGskoHcg==
-Message-ID: <72eb977f-280b-5016-e8ac-76df95508216@denx.de>
-Date: Fri, 11 Apr 2025 06:21:51 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GdyPvSCG";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AFEAC82B95; Fri, 11 Apr 2025 07:30:09 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D88B582B72
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:30:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53B5U4Ek1348953
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 11 Apr 2025 00:30:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744349404;
+ bh=b2zIAf6uE8HfoyOJk1fsCnapj7yCTomAr39zC1vMwCM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=GdyPvSCGZer/eSqQXV+myxq7eeMZUPS8GBqSzR/oN8Ct4smhlhuJcZw8rg0/VISNk
+ GPY4P6Z5Ux7RGB4ysjR8A5RgF8ch7+B0Or8R8DEi97514fZBwJ/1pHYzTp73pEVncU
+ lOnDb1/6eZq677WM9IF73yjS92MIa7KiTUh/cuBI=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53B5U3C0004597
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 11 Apr 2025 00:30:04 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 11
+ Apr 2025 00:30:03 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 11 Apr 2025 00:30:03 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53B5TxYG032649;
+ Fri, 11 Apr 2025 00:30:00 -0500
+Message-ID: <2ae04e74-4672-41fa-8fa3-f3c0894f7df1@ti.com>
+Date: Fri, 11 Apr 2025 10:59:59 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] mtd: ubi: Put MTD device after it is not used
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] mach-k3: common_fdt: Move carveout struct
+To: Daniel Schultz <d.schultz@phytec.de>, <trini@konsulko.com>, <afd@ti.com>, 
+ <n-francis@ti.com>, <bb@ti.com>, <u-boot@lists.denx.de>
+CC: <w.egorov@phytec.de>, <upstream@lists.phytec.de>
+References: <20250410075525.390331-1-d.schultz@phytec.de>
 Content-Language: en-US
-To: Alexander Vickberg <wickbergster@gmail.com>
-References: <20250410113740.1602891-1-wickbergster@gmail.com>
-Cc: u-boot@lists.denx.de
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250410113740.1602891-1-wickbergster@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20250410075525.390331-1-d.schultz@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,37 +76,68 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alexander,
 
-On 10.04.25 13:37, Alexander Vickberg wrote:
-> The MTD device reference is dropped via put_mtd_device, however its
-> field ->index is read and passed to ubi_msg. To fix this, the patch
-> moves the reference dropping after calling ubi_msg.
-> 
-> Signed-off-by: Pan Bian <bianpan2016@163.com>
-> Reviewed-by: Boris Brezillon <boris.brezillon@bootlin.com>
-> Signed-off-by: Richard Weinberger <richard@nod.at>
-> 
-> Upstream Linux commit: b95f83ab762dd6211351b9140f99f43644076ca8
-> 
-> Signed-off-by: Alexander Vickberg <wickbergster@gmail.com>
+On 4/10/2025 1:25 PM, Daniel Schultz wrote:
+> Labels are not allowed before declarations. Move the carveout struct
+> at the beginning and only update 'end' at this point.
+>
+> This will fix following error:
+>
+> arch/arm/mach-k3/common_fdt.c: In function 'fdt_fixup_reserved':
+> arch/arm/mach-k3/common_fdt.c:156:2: error: a label can only be part of a statement and a declaration is not a statement
+>    156 |  struct fdt_memory carveout = {
+>        |  ^~~~~~
+> make[1]: *** [scripts/Makefile.build:256: arch/arm/mach-k3/common_fdt.o] Error 1
+> make: *** [Makefile:1919: arch/arm/mach-k3] Error 2
+>
+> Fixes: 096aa229a9e ("mach-k3: common_fdt: create a reserved memory node")
+>
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 > ---
->   drivers/mtd/ubi/build.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> Changes in v2:
+>    * Moved carveout struct at the beginning instead of adding an dummy statement.
+>
+>   arch/arm/mach-k3/common_fdt.c | 9 +++++----
+>   1 file changed, 5 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
+> index 361b0c0b31b..9437b923d49 100644
+> --- a/arch/arm/mach-k3/common_fdt.c
+> +++ b/arch/arm/mach-k3/common_fdt.c
+> @@ -119,6 +119,10 @@ int fdt_fixup_reserved(void *blob, const char *name,
+>   {
+>   	int nodeoffset, subnode;
+>   	int ret;
+> +	struct fdt_memory carveout = {
+> +		.start = new_address,
+> +		.end = new_address + new_size - 1,
 
-Thanks!
+I think there is no need of assigning end here. As final value is 
+updated at last.
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+With this change
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+
+
+> +	};
+>   
+>   	/* Find reserved-memory */
+>   	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
+> @@ -153,10 +157,7 @@ int fdt_fixup_reserved(void *blob, const char *name,
+>   	}
+>   
+>   add_carveout:
+> -	struct fdt_memory carveout = {
+> -		.start = new_address,
+> -		.end = new_address + new_size - 1,
+> -	};
+> +	carveout.end = new_address + new_size - 1;
+>   	ret = fdtdec_add_reserved_memory(blob, name, &carveout, NULL, 0, NULL,
+>   					 FDTDEC_RESERVED_MEMORY_NO_MAP);
+>   	if (ret < 0)
