@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38359C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:17:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E95C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7427840B3;
-	Fri, 11 Apr 2025 16:17:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AE40840AB;
+	Fri, 11 Apr 2025 16:18:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C7MV4R2N";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Se4RDqaR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D30CE840B5; Fri, 11 Apr 2025 16:17:37 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 17ABF84085; Fri, 11 Apr 2025 16:18:24 +0200 (CEST)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EF4784085
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:17:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1652484085
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:18:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-54998f865b8so2010127e87.3
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:17:34 -0700 (PDT)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-30ddad694c1so19555181fa.2
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:18:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744381054; x=1744985854; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744381101; x=1744985901; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3l9me1pke6Hgqs1dZ/u2/WVXOEIOzASPXq21OVKr++A=;
- b=C7MV4R2Nmv4/FoEBjVb4Baow2L+n+ry7TFCMYxMS4+LBo8rGveO7tmRn1t/okSc6ex
- 5/vnK4jWVszGF5O3eSbAD6lsaIs0UGsRJkKRYEhG7KW85tyDahTGBeva3533+Amnsebd
- liMUIdj24dsfxeksgmlvHALskLlq1yRc5sHGJ36o+oCUtGt4YWOzeuSWlQKwfr1PndVA
- cKGaQCYXAHtqMAA7TMwoYa++1rIHATk5yPorTJnR+4bajb88fgD9FzH8PIMLmMb0f5E/
- vjh9V59okGsuZBheg4WK3UBJM1w2xLpyuowK29gJ6CAInHEIA2DJvmyCVphonJU6aoA5
- +F0Q==
+ bh=PAkyxSFtRDh1k2uu0b7fV79WKOEARxwKDqyxOycgqIs=;
+ b=Se4RDqaR3BsED7X7GHRS6d03gxL317k/vfyai4kzeEzW4Mj1j2jTw/62cXV/OmqWy3
+ 1oKpadQA5wMy/u9qgy0DIwzYu5Kv4A93YlWfA4MUUuBrgFgAMuFZz538M8ed2hn75n2e
+ +Hy0tEJVBcX8c6TIWAh8a0QbMzSQmkgNizDrvwsnZ8+TAuVD75xCbz5s1RJhH4ezUvaD
+ WIbmb5AAJq8Y2JlN7gw/eK6a1YO09XB3k3wXSX3rA0Iguvtl39hsCh0U7LgKOIJpWhPj
+ NJ0Rph5SpdWUjpYZ/Leu9r+XRbfPoHhJ1dwciUvarode69TQLRrcem7g1kNlLPE1gCYZ
+ L+rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744381054; x=1744985854;
+ d=1e100.net; s=20230601; t=1744381101; x=1744985901;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3l9me1pke6Hgqs1dZ/u2/WVXOEIOzASPXq21OVKr++A=;
- b=R+1YjV5IMsPvtf/P1XAAHESIwpQqRqfgK2D7vlOuqcAbT0Y0zeLrZI7snkf79xXejZ
- 14puqDCUJioNX6v3YAK4+Q+CEG97Y0t0uGi8tEGktYdaZZQ6ZAlkwLCEt+AkwrpXdrD2
- c30gBQKCPWGe74m2L5PnBX/o3noKbA4vacTJhzLZTRVo5/uMG5YpoCL4JlyRAkuBJoXw
- ONCyxtr+sQ3lzGa7kfImAiWVYZKDO+T6XeJXBWdDweNTjkXsD1TIQzUrhNdcGYJL1YyH
- hOb+aNBBhUS9qzy/BL8PS7LAFMddWpIjS0nkhZJ+pTSEEVofeTDTY8KU3QGpuKK2hfXE
- cd3A==
+ bh=PAkyxSFtRDh1k2uu0b7fV79WKOEARxwKDqyxOycgqIs=;
+ b=p5eSJeuH4z1k7HeaWPFJGU98eHHYxNv4iWzQae8OQb5bIe4BE5XMwWqhm2W98l9aHM
+ LVRGI6a2E1p/zzg8bdPDfKsMR+MlMu5Wv1U2GqsG8ugBeAtKoD2UYSConPqUsCeIPi78
+ k42hOJUweJ3lU4hjhjoMF+F3Irm+e+YQ7UAJbtbvd05JbC7ZLiI/RU79EIHGonk+rzxS
+ nMNyHWAxRLEqaBTMrjG4Ok9XYCUtNAllYSsm7TDTZYIMqKdQEmXcvpkx82DxKUUxeOg3
+ ebhtTdI9Kw/uEcnancBx7/amgsUjJStkWYubg1Bej6jkHPgr98eNtSYh5rbJ2ZO6Ip6Q
+ +IfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdJWyTVmOdfPlFm+paw/IaLyA0leUtKq94BwoiaDnRYoRKQ5CtkRO3DNegrZhZhGWM3qmp/04=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLsGwgDDXJzrwG3F3em7EsqNJ15IaMH80l3AX0TZJ0sej21Fsx
- z26FSs3X6rYwxyiXA/pr1x14znOmSaHeZpX+ypCZVZwR2MobZqVAaoj2udNRGc0DgYdOCmzvErm
- GaXJaVsLdRoMzG4v0QK2IgXdfjkY=
-X-Gm-Gg: ASbGncsBkUAoRy1W/6eGro1vZ3IL4k80eL57bFNoYhTU4RqxI6UoJMurrRWGIMEwHR8
- AFSh2Yb6rnttQDF7e+LHJgKe7+lY0SZn2aYnl1+yexhspS+trk9n/xgfmUysLXIIW0pl75aRuUK
- ZvUylolJ3ccfYireXW4gzRQcY+gka11cRhZxqwCZEOsZi74NqSlclM1Q==
-X-Google-Smtp-Source: AGHT+IEZpigteYBavjIIwTrX/dwZ8JlgM/rSdPeyxVbA94hrodymLosmNWUdeq3Ce91lVtpKCgJOTQzX8IyuMbPV36c=
-X-Received: by 2002:a05:6512:3e28:b0:549:7c13:e895 with SMTP id
- 2adb3069b0e04-54d452e275cmr1041983e87.47.1744381053548; Fri, 11 Apr 2025
- 07:17:33 -0700 (PDT)
+ AJvYcCXk6MTZOxd6Az01JolnUSCHSuB8lHlDS0HZ3Dc8RwZ7lmv/QbISzRRrKOH/5YVc8zyxyr1bOco=@lists.denx.de
+X-Gm-Message-State: AOJu0YxamOwC/drvFAzahpr1nr+Sv2v2+BLFwMtjOArrsSwrRDvy+82I
+ 6qd5JLTE4KQiCJf+aYZk2Tzh28mryBJYo/lPiDRJ8MJUJ/hQbEAFbVz/nAIENbqF83e0xu5CIHt
+ zILSbcGjlLMrY78KfArfBoZee6Cc=
+X-Gm-Gg: ASbGncsbOLICn3JI8O+mnIubUuWeoKDJ+eQ54YrZQDHN7JZr3k1mrHpDhEtteenaKu2
+ IdKF4wQV1mQed9YqSksLiBMISP0ltMgs1QOMFZkAh+TOycf79gYLFdcJ/o+gGn9fGRBYhBKMqpR
+ nGNCPB2/JCiCWVlbKOJKYg/rGygcdVXqckYveLYLGfd+KxEeL4DaUZLg==
+X-Google-Smtp-Source: AGHT+IHw2x9+rjUxbH7NHxGHyUAuQU6RZGain6btJZod4d1/CGTBBil1YyusDBRT6SiDEO4SRniPPNmhBAXu8DMrIW4=
+X-Received: by 2002:a05:651c:1464:b0:30d:b8a5:9b88 with SMTP id
+ 38308e7fff4ca-310499fb48dmr10117271fa.20.1744381101128; Fri, 11 Apr 2025
+ 07:18:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250401075635.3802640-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20250401075635.3802640-1-alice.guo@oss.nxp.com>
+References: <20250410084122.1010297-1-primoz.fiser@norik.com>
+In-Reply-To: <20250410084122.1010297-1-primoz.fiser@norik.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 11 Apr 2025 11:17:21 -0300
-X-Gm-Features: ATxdqUH-kxpGHxDL89usZyqMMjAIqTR_i1XjMct-yalqrh7cElXfb2-uZv5yIq8
-Message-ID: <CAOMZO5A3v+nrZ8PdS1NRaY1YcaZTD6AwSNujz2UKwPs6xL4oEQ@mail.gmail.com>
-Subject: Re: [PATCH] firmware: scmi: smt: Interrupt communication enable
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: marex@denx.de, trini@konsulko.com, sbabic@denx.de, sjg@chromium.org, 
- seanga2@gmail.com, lukma@denx.de, alpernebiyasak@gmail.com, 
- u-boot@lists.denx.de, peng.fan@nxp.com, viorel.suman@nxp.com, ye.li@nxp.com
+Date: Fri, 11 Apr 2025 11:18:09 -0300
+X-Gm-Features: ATxdqUFNgxMYDx_cakHb4YnufxrSc_URLuoy8r-LBM0tjlKp1MyAyjQuXf0n_-A
+Message-ID: <CAOMZO5BmgxiSS_Xk=XX0LD9876ZnwD50uwzVbie-FwLx6vQfbQ@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Update phyCORE-i.MX93 environment
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Tom Rini <trini@konsulko.com>, upstream@lists.phytec.de, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,20 +95,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 1, 2025 at 4:57=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
-om> wrote:
+On Thu, Apr 10, 2025 at 5:52=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
+m> wrote:
 >
-> From: Viorel Suman <viorel.suman@nxp.com>
+> Update PHYTEC phyCORE-i.MX93 environment in mainline U-Boot with changes
+> from the downstream fork to get back in sync.
 >
-> i.MX95 System Manager uses interrupt driven communication which requires
-> the caller to set Bit[0] of channel flags to 1. When transmission
-> completes and the previous general purpose interrupt has been processed
-> by the other core, i.MX95 System Manager will set General Purpose
-> Interrupt Control Register (GCR). U-Boot polls General-purpose Status
-> (GSR) to check if the operation is finished.
+> Leonard Anderweit (1):
+>   board: phycore-imx93: env: Move bootcmd from defconfig to env
 >
-> Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Ye Li <ye.li@nxp.com>
+> Martin Schwan (1):
+>   board: phycore-imx93: env: Add common RAUC boot logic
+>
+> Primoz Fiser (4):
+>   board: phycore-imx93: env: Move fdt and bootenv addresses
+>   board: phycore-imx93: env: Add optargs to environment
+>   board: phycore-imx93: env: Add prepare_mcore to environment
+>   board: phycore-imx93: env: Add option to disable bootenv.txt import
 
-Applied, thanks.
+Applied the series, thanks.
