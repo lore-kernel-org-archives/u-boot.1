@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E36A7C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 13:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D3FC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 13:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00AFF84056;
-	Fri, 11 Apr 2025 15:36:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A2AEE84064;
+	Fri, 11 Apr 2025 15:36:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yCOBF4BL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RwVQbFsY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65AEA84057; Fri, 11 Apr 2025 15:36:12 +0200 (CEST)
+ id B46C684057; Fri, 11 Apr 2025 15:36:13 +0200 (CEST)
 Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
  [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED47284051
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 15:36:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5677684054
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 15:36:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
 Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43edecbfb94so21219385e9.1
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 06:36:09 -0700 (PDT)
+ 5b1f17b1804b1-4394a0c65fcso21156425e9.1
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 06:36:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744378569; x=1744983369; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744378571; x=1744983371; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6rckyFnMCiPCWThR43E5Hotzn2mn90OZurqWqlzTflk=;
- b=yCOBF4BLxx+32rbJhOmTODXrnHwvcsggYknbCpUkLtgpajebNceIGgXVDCJAmRYSFW
- lWe1eVyrpHt/06TyHpXUwMM3SaKiRwbD8dx6lX4LCpCuZxHmLCQ34ILr1J7rrGbil/NX
- zG7uiG9eCqqHoQzmfSWEltLh9wgu75ZK7P6qE7zr0jEItPNX43/hQftfvRihGh4qReGm
- 81EBmurzKVzyHEC82zoLWY9YWxRHTmD2IJLIsTvVwd0GpyEBBVZvVVD4fHCjafeo9Jed
- tkeieoipxrMejh9dHpQX8q7BkzEisPIFXfyyraqzjlCJaZlGrEiGCuL6dzalrZNUVxqX
- uVVg==
+ bh=JAm8o8Ymb1ybPEQHE+JwuLZzo1sOOx1WxSdZszeOxXg=;
+ b=RwVQbFsY9Wx0sIJlHnV5KM/OWyq+kLMD14X9bNmZDeg+5YJls1yqdBQGOLs6Ks258x
+ S48itl8aeDArsK6qHyXBNFkuL8D26OSuQvi6xiNFrAZWQfZx1i49fWsN+bBceFqEB0m2
+ 89FRVynn6MuYejh6ib+aiQzpLh8xkg0nncL6gsFJiL7m4nvUB3pRag57UMlMt+IwEcTu
+ fqDiDYgZWxPILj50SwS31heRA2bjGrNfZJo8MGD/qkuYezcsuwLJyAknp6dTosr6EMdN
+ AzQQwEwLBxBbKmoAEUrtGwlQ/feUdmT5Q3iAE4kt5EP4VlOE4DdYJi092IRJ+EB10keC
+ UJeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744378569; x=1744983369;
+ d=1e100.net; s=20230601; t=1744378571; x=1744983371;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6rckyFnMCiPCWThR43E5Hotzn2mn90OZurqWqlzTflk=;
- b=ae3jbVOHwAI17uXrXWufFN4ftuDM+S4cmTUvT6ieEG2XAUG9G3VoQrI8pUFlz2XhRB
- qJUCBpaYzY0i6wGy/JEDkvSThJS7NayrPi4K737ntqD7bWYoKmuPbHf/fks1oUOut3xu
- Jq+fo6y3na2YuUNi8bocaLAegX0wxOB+JU3UI0fs3mVjn+wR7AyD/xVoBrdgmkp80dgx
- lMtLS/BGVlTAoyodv9KyPq3XvjU8kosHZFGAu2OdtykL6ydwudbKWaN/YQhhNsyqhpdd
- ln7zccuxjT3pgmoNYpIY0JvnotyBLmgY26EGEZe+oz3CE7Gvw5DV6q9btVuLmymGgLi/
- F9Pw==
+ bh=JAm8o8Ymb1ybPEQHE+JwuLZzo1sOOx1WxSdZszeOxXg=;
+ b=cEDpFxGV8dGD//g+X3fotYFffSyuiR9jOU1JGEpYfzOZki4x68Ls/mGKYQOSugXHTe
+ S4y9PIO+OD+tCaaDuo2tF7lcFHAyTHWkK0XiifF262G8LNcKeStL8mRvR+AdIXC6VzjM
+ fMNh6WQxOe6hSpKIKOJzmR0G6hegPULzUtExOl8tNiaO40594ZajWnyJW/6H37btfzAW
+ QOoCLzsAWeqDrj1ykNJ/WN0/NF1lbSVRyBri2XG+IjzganG+FEIIknsZUlBZgl8Qprl0
+ QWuYXuzeN6jM7pVKzGLRn0QoJlObfimNKhkRbTwLOq9sEqAxZ9a5YIZG5D+3O5iNrSQm
+ tYkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKYQVG/1LnlhpDcfkXLvfNF7pfY1SnWZ3gaJY1ontZV++PW7qErwNdOj8MP2NpeC7TEWHr2xg=@lists.denx.de
-X-Gm-Message-State: AOJu0YypSucB3ZmGBP1DV0xKjIpeZgEudz9KLnlFbsfpyCdK/l5u/r03
- SfW62R2m19NGbya1c7uHd0y8/d5ZAs8KAbXYBPNT9dDlQwhX37tCYM3jk+wszBM=
-X-Gm-Gg: ASbGncsjiJ5gyBr29Kve2jzBmf3O9w3IVNkBAvRI8JrT876UkK+CpDEsY7DvvIc0xs5
- DDGXjyCU5Rsd2egOQE9K4DH1lcrwWcdPiJm+pzLJdTxJZMkJe1MuM4xRM0LwqXpzHK/1+BBkPAU
- CYGU+tnAJIOmoeKkmJjmzUJUBp++cOleYXSMIkCIEQm/265E9R29q1kS3QqmYAZW6qYVqUc41AX
- xo7/l+manYEnBkXDri4hgtBTUqpXgoB0oqXDkavg+EfqVQ5QJDQVGiT+HNvRfjRm2/pLT0mtijx
- hkOPLUzO5u7T4lpUABaStpWDQyHf8u432BwrUzclz6F6CSZ3Gw3GOn18bY5FfTlmIJlFQTcqK2I
- VWrEf+ALX9vvlqmwaHg==
-X-Google-Smtp-Source: AGHT+IHRt+8pMDWsY5ev5p7w7pEZw2KVdL5kzmAI+PZHZCOwvrPBi76ZKhCYLFIpAypaW308C/UqBw==
-X-Received: by 2002:a05:600c:3baa:b0:43c:e70d:450c with SMTP id
- 5b1f17b1804b1-43f3a9afc12mr22116225e9.22.1744378569268; 
- Fri, 11 Apr 2025 06:36:09 -0700 (PDT)
+ AJvYcCUMxYqo/o2fRHdnK6r241o/lvsSE1oeWoxCIcvAjZBShGtLhrJfQvIrzmtmec5QO5f/yWTg9kE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxG9laF0vmmvtnVa2uNXNNCDpJ0SFNT1uIqmUcveUzJ2xmRuw4W
+ GmUhavHpaYJQZnNf9/xecKJ9z+2eQcaeDQ53jCQ1P5y1Mra2x1KpGdbpA4dknes=
+X-Gm-Gg: ASbGncsP+oLlhfG5GBoaieREXKF/Arn5XMKm4dqWLs8FZz3X2nmGW1gbMCHpvwX3OO8
+ Lf96yi2PzyLtcBbBlylXhK+Qqsh0ImXMC/wb0cTjN+fBb4CiqVLZl6V0POvcg6V2POX7Gib759B
+ 1rVnwmVY3T9AQe2tIG7GzPshQvx+a9MEaazXb919Y4ETtBKlGxVdc9sW1h8rK0btwYfCHHm7aBk
+ xrSGEK7WwlquVSLF+aOC873CJxsOGU8E23R1x01nNU+Of1351/abjQq612svhcqYcT5NV+lqfjE
+ EyvPXiEwQRZurf43VZ2NRQQEBM/Qo3ZoSTJNP3uJI4AelljFH/Lz/55/XRwmweOuRCOSZjodgHm
+ 67ZolVw8sqvOEauH7KA==
+X-Google-Smtp-Source: AGHT+IG592bE1fb10vK1BuGdP7JXzKiqn93d4dZDdU20QJTpxPi+ZA/b4MkRFzov6/R2BmEvgMnV3A==
+X-Received: by 2002:a05:600c:5104:b0:43c:fcbc:968c with SMTP id
+ 5b1f17b1804b1-43f3a92639dmr20920545e9.7.1744378570788; 
+ Fri, 11 Apr 2025 06:36:10 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (35-60-142-46.pool.kielnet.net.
  [46.142.60.35]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233c8219sm83195365e9.21.2025.04.11.06.36.07
+ 5b1f17b1804b1-43f233c8219sm83195365e9.21.2025.04.11.06.36.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 06:36:07 -0700 (PDT)
+ Fri, 11 Apr 2025 06:36:10 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20250401-topic-sm8x50-msm-gpio-special-fixes-v1-0-a1148a02bb16@linaro.org>
-References: <20250401-topic-sm8x50-msm-gpio-special-fixes-v1-0-a1148a02bb16@linaro.org>
-Subject: Re: [PATCH 0/2] gpio: msm: fix special pins handling
-Message-Id: <174437856706.2613234.13660793500363172218.b4-ty@linaro.org>
-Date: Fri, 11 Apr 2025 15:36:07 +0200
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Danila Tikhonov <danila@jiaxyga.com>, 
+ Jens Reidel <adrian@mainlining.org>
+In-Reply-To: <20250331-qcom-phones-v4-0-f52e57d3b8c6@linaro.org>
+References: <20250331-qcom-phones-v4-0-f52e57d3b8c6@linaro.org>
+Subject: Re: [PATCH v4 0/6] Better smartphone support (Qualcomm)
+Message-Id: <174437856938.2613234.1996686696172949555.b4-ty@linaro.org>
+Date: Fri, 11 Apr 2025 15:36:09 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,18 +108,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Tue, 01 Apr 2025 09:45:18 +0200, Neil Armstrong wrote:
-> Fix special pins handling of get_value and get_function
-> to show correct state in gpio cmd.
+On Mon, 31 Mar 2025 14:23:17 +0200, Caleb Connolly wrote:
+> Improve support for running U-Boot on [Qualcomm] smartphones, with:
 > 
+> * A boot menu which can be entered by holding volume down during boot
+> * Hang on panic (so errors can be read on the display)
+> * Serial gadget which can be enabled by holding volume down or via
+>   boot menu
 > 
+> [...]
 
 Applied, thanks!
 
-[1/2] gpio: msm: fix get_function return for special pins
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/0708bdd34d4f
-[2/2] gpio: msm: return correct value return for special output pins
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/8803cd6dd782
+[1/6] board/qualcomm: introduce phone config
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/fd775fb7aff8
+[2/6] cli_hush: support running bootcmd on boot retry
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/657e19f8f2dd
+[3/6] bootretry: check for bootretry variable changes
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/aa5ef3c0a752
+[4/6] doc: board/qualcomm: describe phone support and bringup
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/4509f8183970
+[5/6] button: qcom-pmic: prettify and standardise button labels
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/8f5685d5d32f
+[6/6] button: make button_get_by_label() case insensitive
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/9c607005c519
 
 Best regards,
 -- 
