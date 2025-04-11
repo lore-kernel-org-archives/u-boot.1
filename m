@@ -4,72 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 049E1C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 05:34:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A27C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 05:36:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EBED83E88;
-	Fri, 11 Apr 2025 07:34:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C060F83E9A;
+	Fri, 11 Apr 2025 07:36:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ezW4JYgo";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="DXGedZBM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2368D83E8A; Fri, 11 Apr 2025 07:34:10 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD6E783E72
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:34:07 +0200 (CEST)
+ id 2001D83E9F; Fri, 11 Apr 2025 07:36:51 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B94D83E72
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:36:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53B5Y6un1488697
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 11 Apr 2025 00:34:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744349646;
- bh=5C5d53D2H86HU6p2Y2a9wv6yjpKYQFpSsFk6G4XmZpw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ezW4JYgoupD5Y8XWVyMHx4dyY0fAL3+8aMXfJrnGkd88yYYcoKkHV8lumSA9yQqKc
- ygsPzRWFcMwsgU8p+FxBH3CN6vC3bku1oxb0hkeblsGEMde2oq1mRY+d6EPsyj78Li
- 5UY2tCoJTiGJ0LijpFzaQxY7E5iN9HLWGgFtjj7I=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53B5Y6Gv122077
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 11 Apr 2025 00:34:06 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 11
- Apr 2025 00:34:05 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 11 Apr 2025 00:34:05 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53B5Y1DC039410;
- Fri, 11 Apr 2025 00:34:02 -0500
-Message-ID: <c7aeedc9-3786-4d1f-b68d-22252d9c3197@ti.com>
-Date: Fri, 11 Apr 2025 11:04:01 +0530
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (dynamic-046-114-109-163.46.114.pool.telefonica.de
+ [46.114.109.163])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 2CE6F3F079; 
+ Fri, 11 Apr 2025 05:36:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1744349808;
+ bh=l72hnwHiKCAnEfI6AH9318hzDBTwA+qdplTK7cJLMlQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=DXGedZBMnwSme+qTqHWTGpSj2q/7QxwJIr9CEUQhKbZVhOuImmkpfw7bl5Gnki1qZ
+ iSBEfkZgNfH+VNYjZ6wTROi5d8z+PUCPytS9CeDDu8Xx4TTsIaPMu/WBq7xE6k79uT
+ N45HxJKP6BY0cB7sZvrcsPbAev4uCR4sBG0IVxxHKbxTZR+OTO+vQB7K0CVfaC+vKO
+ BH0pkX4n8dUxFDB1rbIT2VLwavLNK84IHDZ5sYJsYRwLQSqGfLXiWrSGdQ7Jl0yPZy
+ 1Ej+OozezOhS6BvYYjDvY1N68PNzkFMVGDWutmo7iHgQRYJ131mHQvwxEjQDMc0pMf
+ Z8H8LZXrFCNmw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH] efi_selftest: use do_bootefi_exec()
+Date: Fri, 11 Apr 2025 07:36:45 +0200
+Message-ID: <20250411053645.17454-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2] firmware: ti_sci: Scan all device instances when
- releasing exclusive devices
-To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>, Neha Malcom
- Francis <n-francis@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-CC: Andrew Davis <afd@ti.com>, Alexander Sverdlin
- <alexander.sverdlin@siemens.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Jonas Wood <jw@ti.com>,
- <praneeth@ti.com>, <u-boot@lists.denx.de>, Dhruva Gole
- <d-gole@ti.com>, <u-kumar1@ti.com>
-References: <20250407121554.1010490-1-nm@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20250407121554.1010490-1-nm@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,38 +69,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth,
+The EFI selftest should match executing a real EFI binary
+as closely as possible.
 
-Sorry for basic question
+Use do_bootefi_exec() to enter the EFI selftest.
 
-On 4/7/2025 5:45 PM, Nishanth Menon wrote:
-> [..] This creates a problem when Device Manager(DM) firmware starts up later
-> on in the boot process and identifies that this instance of i2c is
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/bootefi.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-Do we need to do clean up, where DM is loaded as different binary .
+diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+index c1454ffb948..13479248999 100644
+--- a/cmd/bootefi.c
++++ b/cmd/bootefi.c
+@@ -38,6 +38,9 @@ static efi_status_t bootefi_run_prepare(const char *load_options_path,
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+ 
++	(*image_objp)->auth_status = EFI_IMAGE_AUTH_PASSED;
++	(*image_objp)->entry = efi_selftest;
++
+ 	/* Transfer environment variable as load options */
+ 	return efi_env_set_load_options((efi_handle_t)*image_objp,
+ 					load_options_path,
+@@ -106,8 +109,8 @@ static int do_efi_selftest(void)
+ 		return CMD_RET_FAILURE;
+ 
+ 	/* Execute the test */
+-	ret = EFI_CALL(efi_selftest(&image_obj->header, &systab));
+-	free(loaded_image_info->load_options);
++	ret = do_bootefi_exec(&image_obj->header,
++			      loaded_image_info->load_options);
+ 	efi_free_pool(test_device_path);
+ 	efi_free_pool(test_image_path);
+ 	if (ret != EFI_SUCCESS)
+-- 
+2.48.1
 
-As I understand this cleanup is needed, where DM is running along with 
-SPL/R5
-
-or I am missing something
-
-
-> already marked active, so it assumes this can no longer be controlled
-> by software and is marked internally as reserved and HLOS can no
-> longer control these instances. This defeated the purpose of
-> ti_sci_cmd_release_exclusive_devices.
->
-> NOTE: This scheme works just fine if the FIT has just a single dtb as
-> the info->dev_list is upto date.
->
-> To fix this, let us make ti_sci_cmd_release_exclusive_devices scan the
-> all registrations of tisci instances and cleanup all exclusive devices
-> that have ever been registered.
->
-> As part of this, change the prototype of release_exclusive_devices to
-> drop the handle since that has no further meaning now.
->
-> Though this issue was identified on AM64-sk, this can be present in
-> other builds which use multi-fit-dtb for R5 SPL startup.
->
-> [..]
