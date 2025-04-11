@@ -4,104 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B74C369AE
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:04:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF56C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:06:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 379C284178;
-	Fri, 11 Apr 2025 17:03:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9EF6F84143;
+	Fri, 11 Apr 2025 17:05:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QKvO4eQn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CmuY8+CA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E213084148; Fri, 11 Apr 2025 17:03:49 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 853AF84148; Fri, 11 Apr 2025 17:05:57 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3F4A84167
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:03:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D81F840D5
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:05:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43cf05f0c3eso15540365e9.0
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:03:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-601b6146b9cso1190398eaf.0
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:05:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744383827; x=1744988627; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Msntet+z1hVp+lXklTxDdx8dRWqp1mS+6xaRDI1fhvM=;
- b=QKvO4eQnMwCNCDSDbimRwkdrWVyDqkIYr1n2p+Dhjmzw4Spa6u0VZMDAyeSGBFwpBJ
- nEam2fOm3yQ8mdLmEnSgnut3hRZJFTYCBEbRdU4mGhrFl/P8Wsn8lYJNeck6hi1PlN/I
- V7f15PfcyzvChYBNDO425Pif7oLa4TYGTvPkvlTVm9VpxGl/KHQHrH/TXvwGMBHQrDh3
- LpxKjvcYQGZpOw4rAwDMdkfr7mN8jkP/hMoWgayf3Mve8wsT7dlTrE9bALG5iAVn+sEQ
- nwQXc4TAwfJpQJ54w6UJYDPNHOTfY6S6Tbwr+TkJn4HWri9vEHm3oLiS0arOVKYR+xmC
- J9QA==
+ d=konsulko.com; s=google; t=1744383953; x=1744988753; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5KsT5rHlGdGm+xJYnxiLoreCROxism0Ow7JgtMybzb4=;
+ b=CmuY8+CALSmUkvh+svtjiJKZPzg44Szz1IpTYgWJ4EW6OUmAL+uGVjTr5KOvZl4YOY
+ bXL/EcQtdbzmAP/wkJeETyco5Z6jyRB3obivEDGRycc4oopmaxNE4sB3oaQXNaRG2/Jr
+ 3S1WWKjkgEpzrRTCjmluHyTmrkc4F6NS1mQg4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744383827; x=1744988627;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Msntet+z1hVp+lXklTxDdx8dRWqp1mS+6xaRDI1fhvM=;
- b=G/+rIS3fOQ20H7g8UNez3i08VBZNCb2PocAlaRIaQzxzppYj3L7HwPVz0UJb7G9Wh6
- A0WqIwOQpZdtBReKQwZD/xjGJj3SjzritvhLZwYjyDKJNNDaAW0aLqmVyTwrKtGXOzZn
- 2uFkjxkBR1WwFT+HAOGp9nV1vxe68JhJ/R7tIQNYnBSikT4E6/NWbTQ3OAVJEm2qSDO/
- 36Zu+WurhPKWgR2hUqvu5ca16zvj/PgJ/PkSGTICVy+UmuArB9+AIr1uH10UD2bg1lWR
- QUggDo38TxwRNR9hGU4dwVi0jKL2PUYFmXAj0c0oOWrZSEPPxu5K5EQihRYvjmDDXyY2
- gwJQ==
-X-Gm-Message-State: AOJu0YzECv7fO1S0VWbCDb3d6wd7uhI9PPod2RxrH5ATemjlR7K8XCYb
- 83AXMkpcovnM2g7tLaV5rud8/tJtAMUYBuQ9kH5ImJjJuC8nEx6BSjO9hXnAC4o=
-X-Gm-Gg: ASbGnctFWNSmfMG6/LKGapsfG1bDs8fqAmJIn5rmA/A0q1lkA+XKAFat/hxHmGG+/wP
- XMKtv9RAuK7c/6wnhSxbYk2Bf5nJV2UoPCghaGhV2iaOuXYIpKiM53fhG/JZugoLLOIpGatG3/g
- WM/xAs3k9aoBuijGq/OamDswgR87KhimmWgmYPUc0qlKSIN7apsx2bfxMWDG/0AAJ9aH+YNyu5z
- qLreJrdCqtjAiZDZ/95/AiWMF7oc0VdTzIF/S1rpPE8ClCR1NCUK7EaWLk0TtBVhCoPCckmRHev
- odriOJ4U0bxpOD5GWsHxKF6T67BLbPi6L5CzZxVEEnXPcdNF
-X-Google-Smtp-Source: AGHT+IFd5tbIg49otABDG43BrVN/C9znmNXizVbwBmU09ChOrdmU9lqAhWxtXRzDPXpfZZ/NSnacnw==
-X-Received: by 2002:a05:600c:c8d:b0:43e:afca:808f with SMTP id
- 5b1f17b1804b1-43f3a9b02eemr36398745e9.31.1744383824911; 
- Fri, 11 Apr 2025 08:03:44 -0700 (PDT)
-Received: from toyger.tail248178.ts.net (35-60-142-46.pool.kielnet.net.
- [46.142.60.35]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf445270sm2201005f8f.81.2025.04.11.08.03.43
+ d=1e100.net; s=20230601; t=1744383953; x=1744988753;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5KsT5rHlGdGm+xJYnxiLoreCROxism0Ow7JgtMybzb4=;
+ b=Lg9GC5HVsVxGU5yMRSSO+rEffHt79dGtaJK9qgiOmJ6zLUGBjgb1hDeM1CPUE38lmq
+ 3g3E+yARf8dV/pbzpX6KbkAw6DN7H5Zbfnq8U46SacwOP+RtKNFjrzJLs2pXFsWfV7mQ
+ 64XBfQ4tr/8LuhjxHCxhMGGfRZJ/4i8mGNLkZhdXpDXb03bEed9i3MO0uXiDGXNdi494
+ 9g6BMOtSboO1jXlEI2gOtSD9fOxZ88XSCZ4cJRx2e9P4cuIJy7vztwcHyHhExnxRNtRE
+ zJ5vk8C1roXW5166433KcnJb/ZKsaO0clVYurNqciYFVGwR4cEkSCT8EMiYKCIzq5Ju7
+ p/PQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUr64VmZDc6v5BVnUmcKSB2qV6gd93yVpYUr2CqzVflvudM39ZTqNyFTfoX3EumwI6jjq4Ly+8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyVuQBveTk+uMgEwdg/n7b2VyohFGhrK8A/ZmP4/mkIBbjbJUpo
+ wzCUHhqSSvYgDyx+/Z3ddeVofEa7xjEt5ZiWPI3NTbW7pY6coPXvXi938yh3icRjQhQCRzr88TQ
+ zLfw=
+X-Gm-Gg: ASbGncv1WhZYhM9K/6FTaBbUaysmsF9sanZNDk7FnMcBsLNXu79f7gY3WeNR7+MiP9n
+ z+KHHqEgozQLpZak24zVCnAxcUiGH/prwcJUM+HzTdGVPY1Nl9O0GMUtN23QHegLIpb5Wu0G+n5
+ 27yoVHuVLQs8KwtcS/tZujz+9S7Zo+rOZ3K1Nrh2S5ChJkl7hn2pFdXHGPy/wUaeRsKOQJIXmNn
+ bkqEiMbEbMq7RI10sqRkh9AXvfulEfgqtasM7x87UpnO1+HJaoKLCBDTyH4vdljisAFSfEbYl0c
+ qBHWydAi9qIeeELn8zIx9ImI42FAzPRO//JWLMSlkfKIBNvNO+SN62D+hBIuI8hgcjwPVPw5JrZ
+ 4rw==
+X-Google-Smtp-Source: AGHT+IFxig9dP676XSrZJBcrBcyRGdyaZOgCkT+X45SK1qmVEIxN/ZrFEkbhpk9Ozow0fSAS1lhnog==
+X-Received: by 2002:a05:6871:6086:b0:2c2:b18c:9be9 with SMTP id
+ 586e51a60fabf-2d0d5c3c5c7mr1733193fac.3.1744383953312; 
+ Fri, 11 Apr 2025 08:05:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e73e67050sm965447a34.56.2025.04.11.08.05.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 08:03:43 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 11 Apr 2025 17:03:36 +0200
-Subject: [PATCH v2 3/4] dfu: scsi: don't call scsi_scan()
+ Fri, 11 Apr 2025 08:05:52 -0700 (PDT)
+Date: Fri, 11 Apr 2025 09:05:50 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Joel Stanley <joel@jms.id.au>
+Cc: =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
+ Eugen Hristev <eugen.hristev@linaro.org>,
+ open list <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>
+Subject: Re: Gitlab runner timeout on evb-ast2600 ?
+Message-ID: <20250411150550.GR5495@bill-the-cat>
+References: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
+ <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
+ <20250410231444.GK5495@bill-the-cat>
+ <89f2eac8-4e76-42a6-b56e-fc62abdaffe9@kaod.org>
+ <CACPK8Xff4GD=CzJ+_fbCWniut7TVNHh744At8w3JSYrcsv=oOQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250411-b4-qcom-capsule-update-improvements-v2-3-27f6b2fcc4a9@linaro.org>
-References: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
-In-Reply-To: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1170;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=/qd9iWmTFynlTK1BUZWU9tJpdkIDPqn32jR6qxXJKxc=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn+S9JgBeJf56BoeMuhYtmgKNgf8LUUOHLQOQP1
- fk6txv7e7eJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/kvSQAKCRAFgzErGV9k
- tiDBEACBiSTtcX2+7bgGZ7un7fR15IHoxd8/UquPB4a5acIxNFU2bIEkWTxUUxnMMpE/AvGPsx8
- rOveInd1fPu0Kp+9vEYcpGpGgDUSudkgr97KiB+TbXsQ+9bZMdg6GrEuTh0BtbMth3QdcjduHSv
- 7Q3nvJr0lIlnu3JaYeU6CWVnNVac/+KhXsM19mkmbycrcLWFsPx5T6LZPCnWw3JvVi0PXu7yNJA
- kajZte4SzmXR0OPKyQy8miRml7txWRh3omSLm7YR40ARPxTr4LMc56+KzNhiOjIJR/Qj5SXuTft
- ync1MccHAwbKk1cV0TVSRq4BB51V2v1pSyheuzR6UmAdBkKJ3fpoB4siE9HofDveYFf3IHm73bq
- 2VjwkdO9kbq4LIM0aUEijTFM0sBgIhUU1msUqiBp2OaNexwsz68yHa4EUGaEQ9FgWGRAE3XQ1GZ
- zDpuMOlpu+mNGxa4OEsgAHhX0YOogMCfigGbauOAzmUwxvBNIbkyW61z7udMxSy3CKTIMwrHrBp
- UgPa47Jmmgqd8Pc1UV3LCzZJI36P04JCXNcthS42m9gH+QCBnq38XCXIGBMPV/gun/nrvy43YUK
- y7rZ+iXaLFsONQr16KEapdb8qo5u2gNKtxUiN4PkxUfBB+X6oFIfGP+bzV4m9QOob8T8/FrD3+l
- V/UFb9OnqulQ4Yg==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="isKZvqH788sxrYhx"
+Content-Disposition: inline
+In-Reply-To: <CACPK8Xff4GD=CzJ+_fbCWniut7TVNHh744At8w3JSYrcsv=oOQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,39 +105,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Calling scsi_scan() results in all the block devices (and EFI block
-devices) being destroyed and re-created. This breaks the EFI filesystem
-drivers during capsule update.
 
-Remove the call, since boards really should be calling scsi_scan()
-themselves during board_init().
+--isKZvqH788sxrYhx
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- drivers/dfu/dfu_scsi.c | 5 -----
- 1 file changed, 5 deletions(-)
+On Fri, Apr 11, 2025 at 05:26:49PM +0930, Joel Stanley wrote:
+> On Fri, 11 Apr 2025 at 16:54, C=E9dric Le Goater <clg@kaod.org> wrote:
+> >
+> > Hi,
+> >
+> > On 4/11/25 01:14, Tom Rini wrote:
+> > > On Fri, Apr 11, 2025 at 08:07:15AM +0930, Joel Stanley wrote:
+> > >> On Mon, 7 Apr 2025 at 23:25, Eugen Hristev <eugen.hristev@linaro.org=
+> wrote:
+> > >>>
+> > >>> Hi everyone,
+> > >>>
+> > >>> I keep getting an error on running the CI loop on -next on my tree :
+> > >>>
+> > >>> https://source.denx.de/u-boot/custodians/u-boot-at91/-/jobs/1090517
+> > >>
+> > >> Thanks for the report.
+> > >>
+> > >>>
+> > >>> ! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - no o=
+ther
+> > >>> tests will run !
+> > >>>
+> > >>> Any clue ? It's been like this for few days. It doesn't look like a
+> > >>> faulty patch.
+> > >>
+> > >> I can't see that link you sent me, it 403s.
+> > >>
+> > >> Do you have any other traces or information to share?
+> > >
+> > > It's been intermittent recently. I was able to put qemu + gdb together
+> > > and see it's one of the early initcalls that fails and hang()s but
+> > > didn't see why. You should be able to use commit 1f0281294d8b ("Merge
+> > > patch series "Annotate switch/case fallthrough cases"") as a starting
+> > > point of failure.
+> > >
+> >
+> > Do you have logs ?
+> >
+> > Things look ok from the QEMU side (latest 10.0.0-rc and 9.1) :
+>=20
+> I brefily tried to run the steps from CI locally, but couldn't work
+> out how to get the flash image built. Instead I used the instructions
+> from 154cffa16a7b6647e180ed6cef55342b39580aff.
 
-diff --git a/drivers/dfu/dfu_scsi.c b/drivers/dfu/dfu_scsi.c
-index 9f95194784c1de00458843276872b1d23d023444..a234548ae46dc2a6ae1ca5770accb58f43782239 100644
---- a/drivers/dfu/dfu_scsi.c
-+++ b/drivers/dfu/dfu_scsi.c
-@@ -341,13 +341,8 @@ int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr, char **argv, int
- 		if (*s)
- 			return -EINVAL;
- 	}
- 
--	if (scsi_scan(false)) {
--		pr_err("Couldn't init scsi device.\n");
--		return -ENODEV;
--	}
--
- 	ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
- 	if (ret < 0) {
- 		pr_err("Couldn't find scsi device no. %d.\n", dfu->data.scsi.lun);
- 		return -ENODEV;
+It's a bit of abstractions, sorry. It's this:
+https://source.denx.de/u-boot/u-boot-test-hooks/-/blob/master/bin/flash.qem=
+u_gen_padded_image?ref_type=3Dheads
+with variables filled from:
+https://source.denx.de/u-boot/u-boot-test-hooks/-/blob/master/bin/travis-ci=
+/conf.evb-ast2600_qemu?ref_type=3Dheads
 
--- 
-2.49.0
+> Testing master with Debian's qemu 9.2.2:
+>=20
+> makearm evb-ast2600_defconfig
+> make u-boot-with-spl.bin
+> truncate -s 64M u-boot-with-spl.bin
+> qemu-system-arm -nographic -M ast2600-evb \
+>         -drive file=3Du-boot-with-spl.bin,if=3Dmtd,format=3Draw
+>=20
+>=20
+> U-Boot SPL 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 17:05:20 +0930)
+> Trying to boot from RAM
+> ## Checking hash(es) for config conf-1 ... OK
+> ## Checking hash(es) for Image firmware-1 ... crc32+ OK
+> ## Checking hash(es) for Image fdt-1 ... crc32+ OK
+>=20
+>=20
+> U-Boot 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 17:05:20 +0930)
 
+Just please note I don't know if this rev of U-Boot was a failing one,
+or not. That's part of the challenge here is seemingly arbitrary changes
+lead to this platform passing/failing.
+
+--=20
+Tom
+
+--isKZvqH788sxrYhx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf5L84ACgkQFHw5/5Y0
+tyzgdQv+Lcn9LwebUqBDALeA3jxpkGosRF9JS7dXsnCay4XXy8WzTh3opuhCG1Ja
+AzSixAwm3KVIhnCtUGwYcwSd8p4Kf1W156Mm8AntFsauZMkut+D4RN5rGUhBNnfE
+ih9aVoxA0jPs57JGDyKEwGevJSJLreUa6oj5dBezqeYadFLcgDsUUUk9ouNsKGz2
+2hWcFrXIlcfO7RQCviM0NuQv44kXHWrb3o4ZOZ9MlekPKOQlDSdjZzDiYBKApacL
+24v077x139yUZfJ/M+Ysh1cxOjjWp/KEY74fpS0UI49a8rLb/P8zFdqT7wpHpHpn
+14mKEeFijRx3A+/wQLmn5BIDxhklndKSA+SwInYJm2LiEbEncLgvWjSSgxztz7zI
+iUDKBnkIDJjd8E0bGXTJjlWCVIW+CEBB51J/hxcSAkj45X6bq/JVwpv/jZ+cDeBp
+mgYrdSAwjZ0N+tLgcJoCfkOKmRTh0EWUO4ZBAbnevgj372TJEkrZgcmA3qIh4cu7
+HWIc4l4Y
+=YEhr
+-----END PGP SIGNATURE-----
+
+--isKZvqH788sxrYhx--
