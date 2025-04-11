@@ -4,133 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5981C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 06:31:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8C5C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 07:08:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A8A283EE7;
-	Fri, 11 Apr 2025 08:31:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id BD8CD83EC0;
+	Fri, 11 Apr 2025 09:08:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UHKVGni1";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NHe6jxGq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA44983EDF; Fri, 11 Apr 2025 08:31:37 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20626.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::626])
+ id D7A4F83EC9; Fri, 11 Apr 2025 09:08:22 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EC3A83E96
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:31:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFC4283EBA
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:08:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oXwAITy6YBTb7w1ERpRj8npT1m+9TBsz7j6b2BOJt2PyOtc2gIbQWdJNX28L7w8CNz/HnHvjNAkyJ3eqZCWn2Nj8X2kn/Et4bw/ZIGI6kVLaME8S7UdiS5Z7YSO8Y32IgrQ1UIsiz5yU5cKgra6ZWOf4g8St8+45tAoBlaVASLgHzRW69CNzhf35UarPACijS3ZlP9TR0MvBg+L+vOy48Un+YIjpHAKsDTh6OkP6xcJqmX2eghs2vBUPgiZbvwoVOTncAm2zh4AkwbmxWK5e+zSScH7aHevNZZQBavqFJj0JpfJMAQMvEI7He0nwDAIv0ybUKAloN5QSUnR83Tp1bg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aXddEIJeTxDkuSuZqe15Rd+XDsUMgc1F3OeY7cy8SHM=;
- b=dAkqG4W6CT5Hs8InK+Gmgb8ThEMtwWT+0xoVdCkEJR3TjsASRe9WD3mGPpNl1Y1W2ssEqza/towQD7cmFnKCxIVP3KbTJosEk0nLfntHhwct1fWvHANVWDtpw2Trfn+xtstFPmApcr8hNbqigsp7B7gfFfTDBYTnaxMqkkN24pAQ2SwJOGwQudkE/LFjW4uTCzeGOH0acmsvImk00ck/8Vr53VkpDeE7JsudFWHH50M6iUx6eu0ALUw1madm96bnp2ii8wYPwBzz/FWb8PCgZR0riUvh9iIVtWpt+wH9q3neakEuvurR/4yguR30o8Hp8oTsNmOy5r+/YESpWuC2+A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aXddEIJeTxDkuSuZqe15Rd+XDsUMgc1F3OeY7cy8SHM=;
- b=UHKVGni1XT3DA6DH+8///PTfsBb4tHXp7nxJIXj9YOLDXw5OvJDyIU5RKC1W1C6v6U2Nr7snUpDJMXv7MvPFTHN2KgFgfaFkRKDZBv6VNIzf0Vdh66PfBjxs+iTzy9M0sM1E+iz+HO2jbm8bImiOmN06Aj0Czt7a+J+R4wOWcEU=
-Received: from DS7PR06CA0015.namprd06.prod.outlook.com (2603:10b6:8:2a::26) by
- CH2PR12MB4181.namprd12.prod.outlook.com (2603:10b6:610:a8::16) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8534.44; Fri, 11 Apr 2025 06:31:31 +0000
-Received: from DS1PEPF0001709A.namprd05.prod.outlook.com
- (2603:10b6:8:2a:cafe::eb) by DS7PR06CA0015.outlook.office365.com
- (2603:10b6:8:2a::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.26 via Frontend Transport; Fri,
- 11 Apr 2025 06:31:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0001709A.mail.protection.outlook.com (10.167.18.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Fri, 11 Apr 2025 06:31:31 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
- 2025 01:31:29 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 11 Apr 2025 01:31:29 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] cmd: Remove CMD_NET protection
-Date: Fri, 11 Apr 2025 08:31:19 +0200
-Message-ID: <a28c1113f97c4b480ba6b75ed695147eb17a20ec.1744353078.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1744355293; x=1744960093; i=xypron.glpk@gmx.de;
+ bh=jEg1Sh1Dhzcf7JU8hmBaynFI7ufzJpH1UIqCMLY1qRM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=NHe6jxGqAGX9pOK/Q/ToG7+as/WjmPkjduVN0t0L4KTz7AZ5N+dy6wUTDIFl6tSj
+ GHopbko3tBDWjXnXmUZJZE/DdK1Etu9CUzEpXNuMY31h37FmtFHSeyaST/Gh/gczq
+ f8BZdjCu6tovt3dDdzBszoj0wDR2l9j5kRXLKMUxLnJu8CUmpi9aCRVvJ0IJ32zJ+
+ H23qJnYmk3vlMXfF4F4oY8ZFvZSTW6vUN94F4ERKmm8l6i5/dUY1atEd6Ytd2xVeZ
+ VQ3bhLxf/GxrRchiKV3WR/Cm6Kdqay6Ra2opQUpyqeqlLsTLSvrj/bqoSJMV8wLL6
+ RTACmH8xmLl1yZnO0A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.109.163]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mel7v-1tVAaW2Hx7-00m0fL; Fri, 11
+ Apr 2025 09:08:13 +0200
+Message-ID: <8ae5f2ce-06dd-45d6-9eca-dbae5c32d951@gmx.de>
+Date: Fri, 11 Apr 2025 09:08:11 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001709A:EE_|CH2PR12MB4181:EE_
-X-MS-Office365-Filtering-Correlation-Id: e3b75fea-00fc-4f93-e3da-08dd78c27f80
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Xo2xHQoSF1dq0Z8FNXyRvFfIZdB4UlRsw6zXxi8M2RmOvl4k3IO7i+5yo244?=
- =?us-ascii?Q?B9ZZeMyl1kjc3sgNVjGm9js8XRags9+zXQCSfHdJmXHWeK+r8mmZZrMD3Cfw?=
- =?us-ascii?Q?W3An9TugBujShz0NJ0w4vFdy1auXNncS9ETtivhGyWKwJHY/C20L8iXdOpDw?=
- =?us-ascii?Q?kFRY7fTOoB+jicfM7KzUpZFOE8uB3Oqh+2xx1Utxks9VOvHCLavjfjYtoLRY?=
- =?us-ascii?Q?+y9YvyeEonDuTV44CiI7ro8/O6wnOur4UhDYWi42C6rr9Z7ZctrRGSeWrPLn?=
- =?us-ascii?Q?DKlrbkMuO1Un7jcmi0eG2NjTJsJwKWoLzpkkUp88UxUoZzMrZdwiwUIzzPpk?=
- =?us-ascii?Q?j/99ML8vF7qrWp9akH/zkBqbl+fGnOI3jZar5Y+5uH4dyUk1BNFRkk64FYUk?=
- =?us-ascii?Q?bT8RV07scels62UcDRTl2w4GwQ9VrXL/UiPVnmv+Qz/szD9DdE3Fg7NptX8P?=
- =?us-ascii?Q?RwklMrrAoa8fCX3BBqTJFpq1UXtMbOgSz5mr0MIIcrFAmLtWGz2YJneshC9f?=
- =?us-ascii?Q?LPwzYTG32TlvjzE4SPkMkdIwBtDF7q5YBtX8fTxEmk+yKfSWx24AwOENcPCY?=
- =?us-ascii?Q?2nF4WrNxuVP3ovKOlHDoUSbFOLU+NLV/RSPKppMS6xjj9GjVbbQQqSe6dmne?=
- =?us-ascii?Q?7SzSIGQOUTbMokpjJPXtwOMP/nPIEHBXiSpyQBjoLxngaHl6OPizxRGeEV87?=
- =?us-ascii?Q?zc4ARUNIOy79sPd5a5sSGtfwbvriWCJxxJzaifRM84Ppjov2fIJKG+BFJ2E4?=
- =?us-ascii?Q?MVpqhDMb46H3MMyQtTK9XpPGGtmmiziJi+bOc/4RU3jno97dbI51Ei5VnTNr?=
- =?us-ascii?Q?rnhE1wAM/eYSryw+pi39Io3Tk2AVIOI6YgfUs2mHYq7xkuvUYCMcheC/x9mx?=
- =?us-ascii?Q?H9nqyjWI2hjq4cnbVaxwW5tHMmT+yqUjOvIeJOL1dnarI+UDjpvAiHYaKCLS?=
- =?us-ascii?Q?Lcs/xZyCzDFBbMUKVgF26G0pCRqNAYFrwX8GDXyZpQVaxb2L9YrRq3K3B23j?=
- =?us-ascii?Q?+9x6OjOb054CS+T9/61miwLeHJ+uVSnRBWGcuW5t+5gXFffSBckCIwVdGZKL?=
- =?us-ascii?Q?ziBh3m0aNin7awaSnwVFCKqEXG7gd466D0SvzCKP6SkMdL09r1oTGnG9EYtq?=
- =?us-ascii?Q?d5oY7cwb1OaWA0Uf7nUxeBeu3MqEUTpO6df7NXZRBJn1fM0WVcuD+YGW80L7?=
- =?us-ascii?Q?8etAMOkU0wZWpwRAMVEwBiW+msmzAhdHM5ALVEDmiuR2tuR3of1vUGEpcVsM?=
- =?us-ascii?Q?WGt1lE/VYpv3TEtz8I2dHSLrlM5QutspTUGFivljCkwu8XkbGoLgTJnbu61r?=
- =?us-ascii?Q?k8dPlEQ9HrMRkfViE8ZavwljtOocCQdw/ckVMhSUsmfUdovQ9h/qcNwVeA2W?=
- =?us-ascii?Q?PTIyZzTrWw9ER8VkhFGOB8fxGDbBmD9E+zpBAncK+QiEwZQK1dDrynwRCq8v?=
- =?us-ascii?Q?/VznwYCE3qlafZMNoQseXQv3s9ixRuK8RiogT2OTC40xzzV4Cg3BPcwB9CiG?=
- =?us-ascii?Q?QqVcCz/llTu4On4yJ021zNsxkkWN97+VH5Dh?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 06:31:31.3839 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3b75fea-00fc-4f93-e3da-08dd78c27f80
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709A.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4181
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: Print extra information from the bootmgr
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
+References: <20250328125819.1080935-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250328125819.1080935-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:co4LThKfDCXnfCSFHY0VI0mKUy/VC+ewGPD16N8pCvfM4/Xtm+t
+ /O45U4IGnWxSk1Jst2lgQ4rPOTJ/m54Rxh5Jk/bPm8OMfYAE97hyqjvlRyODY2FE87+0bkQ
+ 2+z5gwvYPmJZs5XstC/LI5f1o1NJqn55gG16yUcSF8+XzRruHA9rVnrdJNrrVJsq1Rii07y
+ OsJxbiuAzbbLy1oDOgetw==
+UI-OutboundReport: notjunk:1;M01:P0:q6io+9SRp4E=;EOdyeqKka+P6t45flTrHy6LxlkW
+ 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
+ 0qSOEp/A41FqMMSsExZM+s=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,33 +122,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CMD_PXE is already under CMD_NET in Kconfig that's why make no sense to
-have another ifdef inside source code.
+On 3/28/25 13:58, Ilias Apalodimas wrote:
+> Instead of just printing the label, add information for the Device
+> path as well so it's easier to see if we are booting from disk, network
+> etc
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   lib/efi_loader/efi_bootmgr.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index f9534ef85edb..6b9d809ff618 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -690,7 +690,7 @@ static efi_status_t try_load_entry(u16 n, efi_handle=
+_t *handle,
+>   			goto error;
+>   	}
+>
+> -	log_info("Booting: %ls\n", lo.label);
+> +	log_info("Booting: Label: %ls Device path: %pD\n", lo.label, lo.file_p=
+ath);
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+I think we can remove "Label:" and but "Device path:" on a new line.
 
- cmd/pxe.c | 3 ---
- 1 file changed, 3 deletions(-)
+The output is truncated according to CONFIG_SYS_PBSIZE=3D276:
 
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 37b8dea6ad6f..0f26b3b42197 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -13,7 +13,6 @@
- 
- #include "pxe_utils.h"
- 
--#ifdef CONFIG_CMD_NET
- const char *pxe_default_paths[] = {
- #ifdef CONFIG_SYS_SOC
- #ifdef CONFIG_SYS_BOARD
-@@ -331,5 +330,3 @@ U_BOOT_CMD(pxe, 4, 1, do_pxe,
- 	   "get [" USE_IP6_CMD_PARAM "] - try to retrieve a pxe file using tftp\n"
- 	   "pxe boot [pxefile_addr_r] [-ipv6] - boot from the pxe file at pxefile_addr_r\n"
- );
--
--#endif /* CONFIG_CMD_NET */
--- 
-2.43.0
+Booting: Label: nvme 0 Device path:
+/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73=
+b9-a384-4acc-aeab-82e828f3628b,6d00000000000000)/VenHw(e61d73b9-a384-4acc-=
+aeab-82e828f3628b,5500000002000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3=
+628b,550000000300
+
+In this case the filename is not shown at all.
+
+efi_dp_shorten() might help to provide a printable output.
+
+But I don't believe that a non-developer would have a benefit from an
+output like:
+
+HD(2,GPT,54e58a03-c1db-4c6b-afda-24340c39cda5,0x109000,0x32000)\EFI\ubuntu=
+\bootriscv64.efi)
+
+I would not know the GUIDs for my partitions by heart.
+
+Isn't log_debug() more adequate here?
+
+Best regards
+
+Heinrich
+
+>
+>   	/* Ignore the optional data in auto-generated boot options */
+>   	if (size >=3D sizeof(efi_guid_t) &&
 
