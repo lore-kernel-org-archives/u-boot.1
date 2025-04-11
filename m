@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F0FC36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 08:14:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A86AC369A2
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 08:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58E2383F8F;
-	Fri, 11 Apr 2025 10:14:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA28683F8C;
+	Fri, 11 Apr 2025 10:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="SIB2mCb4";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="XHtGTvKU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E356183F8F; Fri, 11 Apr 2025 10:14:09 +0200 (CEST)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::60d])
+ id 9545083F8D; Fri, 11 Apr 2025 10:14:28 +0200 (CEST)
+Received: from AS8PR03CU001.outbound.protection.outlook.com
+ (mail-westeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE8BB83F85
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 10:14:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 721E083F85
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 10:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y1XEFjwijMQVpZ/dudqt99ri9rsel7K7VKP1btofIQUctHZgF/tXoGjGuQHFQ5N6nLgz7a8SWGXDPO6L18rGnZYSCZM5TwoNLr3yND7TPVoaK22LN8E/C0nYEQiWTbXOg4Q/p7ATiCxLHveulTSBIXFvtF4pNKE7KZ7ub6kVvGyYvZu3O/Yc7TwwblvW/3YjbWXl3I/0OS0zhPGnjoto8qmxDVE0x3sdMeL1C2ZwpdU3oHTTsb00rXyzOtwVRHzcjc3EtcVTCNPPGMvGZXP/4egVjyD7x9Iv9GXDi9jHOIz+NH0cUMe3ruqiix3uedhTu5Mo5Oldj7xdAv5BzkiQSg==
+ b=n02HUwNpoeXDcYRazcFS5z0GIg2ps33LWryA/uP0b6rK9XjFU5pbGUFoDo15jRmRF3DqArs5Wq18wRUxrp7r/CSRsNRDAauhH6vFSKreO1gTIQ2ox7oSggBVaj3gDBmfYZO8ExI2VaNMvf/k4fUrW8nvGfBtjMU9bMc+W741vp0kpKZAEC0/NfdCZu+OcAL/VnYPrt4ZrUWnib60bDHN30f77mwK3k3htpZMKBxBuHQG1SiCJwXFw2eCrysaVaiHLMjyXwwjj5H2Vepa6djjKILm5TYsDqqu2exjhvcqRJJo7r9fvpF3gjAg3zEmpl/r3ty4fY+dFmW9SfDHUmYCwg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8gxLiiUFkTa5mGQFnWa6pXyRBR21ynB+BeYOqjDwN94=;
- b=mPwyVoj4U9wDOYr921pgIO8bEK341BEPxisouO4doYotIeIRyPu1z+b/+Jd34u55zvtXmmD5qtdYOWsVuMtUP76QSpQIZKQb9T66cY82A9klqYqzVrQ/YquHZiOFrFakEd6Mt4zleY+6vfwdQxZoVfMzHGwsGqZwnBaIL4JX/BKqNB1dTavgtoxu/G3oSkXq4tkvy+rX7+X3mGu88aDujSYbBtzS4U+hPyf6tgUDvZ3b08WcehYOFP8FMrO2pd20X04yoopayvs3UBrriZZidY/SvCNBoLjJJvw8Lb1/Nx0wcnFqEiKv1VSfrTWfGi+hyt+tPypFTpvMQGoaBM5+mw==
+ bh=NAcpriVO/LEWgmPeDObTycTqJ6XRZdXCFoipL62uk7c=;
+ b=bx3kbnyJig1CdEv4kW9l/i/9fx58Vg+w3naNEDD85qZoq/7Pa+3JamJpOI3lEWQeLnmcTK9QZyOXrWGqZaHugjvU2DNk3aCwAAAidExjZaHobj1efthQ6vnJgzFA41ccG6n125Kw7MiR+/C1I298DO+hTgXZ8sO8VOp7vAJjh1AAfONl5glG42NUcECizWdH6ryFnqUaW8K28ByaLtlj0sTBjnFce26EqdO+ddtPTvLMpizMr23Ulw1djdpgW10y+xgr5y2DXzuqPSSJXm0dzrLtdADjff7ZlexJsmXv86jvGsHCHxCH0ib7u1irFsmPP5xnwJLXYr3jPX+iUcUShg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8gxLiiUFkTa5mGQFnWa6pXyRBR21ynB+BeYOqjDwN94=;
- b=SIB2mCb4fHCfU+hbgUm2rewl/jJ76U1H6apgjqU4lvYeWKYQ6qidROE0+v3q/C0Tlu/ElRo1Ds+V/IGmdzoYxof6uM7kgHpbiBzZAwMBqm5FkKyEDwAA8JrKJhVCnZAuynd3Bs+EioMkJaxV/1rUXQzMWCgL7OVMf2RAP4eghTlc66g9jcAHmqyQKs96WJ8xvG/phW7vHhxES4nuE1A3cV0krZ+XhISrHH3g1cM69IP/JBWQv8gInScNp7d7DOnr5RTQjQNQCB7BPycr35oL/+cJJ0kH/jfmP7AHGepi1TJqubjz2mQgkIRLOy0jIzhPxpCXkHlPwAg0MGMHBh7fHQ==
+ bh=NAcpriVO/LEWgmPeDObTycTqJ6XRZdXCFoipL62uk7c=;
+ b=XHtGTvKUZeXVP8tWywEMT9fP4saRSDpfrLeb6CWPqwgtDC42TcbbfjhHG1b8rv/0UKfESVPc8FUiIilamjwk7ybWZDtxjA3N6st9woVvW9AalVZ8dMOlz6TSJFKwARCdbW4zLv+EItIRbYnscLVo2O4ra8wLF0s5rXjw3EIIj6aVaEAcey+6H/nxA0/hmuY1QqdLntbjn+QbDREhUaB5VD16sXoTgEeplqgVV8QX1CbR9iQR6pzkZ21n6tf5BvEhR+8+CmbZoqU9UYIB0+e/M6Xu6jpLGnSv8ouEQhxchsVVnWQoWazG/WBOMg7zCh9Wpd8W9VCQ5FG9W4P7Y2JSOg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by AS8PR04MB8932.eurprd04.prod.outlook.com (2603:10a6:20b:42f::18)
+ by PA4PR04MB7967.eurprd04.prod.outlook.com (2603:10a6:102:b8::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.36; Fri, 11 Apr
- 2025 08:14:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.23; Fri, 11 Apr
+ 2025 08:14:24 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8632.024; Fri, 11 Apr 2025
- 08:14:06 +0000
+ 08:14:24 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
 To: marex@denx.de, trini@konsulko.com, festevam@gmail.com, lukma@denx.de,
  seanga2@gmail.com, sjg@chromium.org, sbabic@denx.de,
@@ -60,94 +60,113 @@ To: marex@denx.de, trini@konsulko.com, festevam@gmail.com, lukma@denx.de,
 Cc: u-boot@lists.denx.de, viorel.suman@nxp.com, ye.li@nxp.com,
  ranjani.vaidyanathan@nxp.com, peng.fan@nxp.com, frank.li@nxp.com,
  ji.luo@nxp.com, jindong.yue@nxp.com, Anton.Gres@ifm.com
-Subject: [PATCH v9 17/20] imx: container: add V2X container support for i.MX95
-Date: Fri, 11 Apr 2025 16:07:00 +0800
-Message-ID: <20250411080707.602371-18-alice.guo@oss.nxp.com>
+Subject: [PATCH v9 18/20] doc: imx: add document for i.MX95 Image Container
+ Format
+Date: Fri, 11 Apr 2025 16:07:01 +0800
+Message-ID: <20250411080707.602371-19-alice.guo@oss.nxp.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250411080707.602371-1-alice.guo@oss.nxp.com>
 References: <20250411080707.602371-1-alice.guo@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-ClientProxiedBy: SI2PR06CA0009.apcprd06.prod.outlook.com
  (2603:1096:4:186::17) To PAXPR04MB9644.eurprd04.prod.outlook.com
  (2603:10a6:102:242::11)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS8PR04MB8932:EE_
-X-MS-Office365-Filtering-Correlation-Id: f477b1be-2863-421b-a465-08dd78d0d3c5
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|PA4PR04MB7967:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5fcc3022-f79c-4529-2f61-08dd78d0de9d
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|52116014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BRj1WbhbxxCgTysP686zkmbL93X4CmN9wAV+YCFPexWUjF3UlqQepllOFbJj?=
- =?us-ascii?Q?6+Fr8FdMYQS+TMMM495a1H8CC80v+9UnhHAUmeREyO+nPXxbCZc6YIbVvIfb?=
- =?us-ascii?Q?dneV46MPhgUic7CNM8sN+ZfnJAFfTWt+LQK+ZOf1rEjbA5DYlI0e6HlYXbgD?=
- =?us-ascii?Q?1mj3lV5QG4OMnDa7zjWDa200euN6Gav47u3CP6LPMBwH4uqGZegcnEIAv9bL?=
- =?us-ascii?Q?JaW0nQkMiH7oOjhZkxUjwOTdwMPHjI5XVPETRD/4PcG7ahIqrLWf1TzF1RI2?=
- =?us-ascii?Q?c/X3sSQZmSS4RkxSSCFjSAAAOxx6YknWnBV/lkm+jkLES9Hf6XVCMjAce8io?=
- =?us-ascii?Q?IXdLcFInngJXTrxOHwJZbzIDV7+9mvNU/08sdsICF+2qu/tMYrXKEVDmskNy?=
- =?us-ascii?Q?LI6zn+KeyhzxZ/SKPqlUE1pwL4Xir538rGVvi+G+TRUPG/Hnj11gjBhLp3Ic?=
- =?us-ascii?Q?bPjPAUoVf8iAPhqOJzJwhY9SGiyhfv4LmJN7wgYR/DWKayaJke7psE9HoKrB?=
- =?us-ascii?Q?PQXuKC1eY4c5vMU78VLvPv/57GsZvh660EjENh4B2OiZWAYh5hS/EdHCG+s8?=
- =?us-ascii?Q?QycGLGhjvRB9zR8q7PPcT6vpb2NBpG2xdyOc+72LErH5H27sZBkzu/gGAC3d?=
- =?us-ascii?Q?1d6zai3MV01FeMhC8Q5oQ8MI+R6m4HluTOpBsDz5y2M+Y7rcYztETLDCRTTG?=
- =?us-ascii?Q?G61JNU3Z3GxNF+q1ze7amAiiVkerAQnnlEDPFqTmZXMbEoDTH3QGAYeL7cwG?=
- =?us-ascii?Q?zBN5yzqh9AgLTJzuw45Q+nHlWjf6kTbKoNiACz4TEStcMSfQ6CtBJP15loOc?=
- =?us-ascii?Q?J19Iw2x0Rx/jwBdowsejPHFUhSLDfzsz5GNNeWVkQrdqp0HXnaED+sAJa/Fe?=
- =?us-ascii?Q?6cEoFdb4mGlgPbXR3gECwzjHu7YyB86BPWReG4GsmV2iD4E5LuRO4I7CVi9D?=
- =?us-ascii?Q?JqkVMjvaeIw1HZt7XcnaZGb5/OfAjveXKd8zZ1sgAQu8y4AaECfMG5hmzl1Z?=
- =?us-ascii?Q?WFtOIL5//cl0t8io+Xad8PMol2kIVKCoQ5YOGcu74hfTtt4vh9doDRRAnwmo?=
- =?us-ascii?Q?APMUpHMlzlDEndE++N8NlhLNiYqqcv7t7QioDoOMAPjGLn0lsqU6Wap9nGrb?=
- =?us-ascii?Q?jtzLqZPNz8qjOTeBXnm+WxE+F1+1CzP1ezx0MFBxVmbrSLHE1tRODa8RDoSZ?=
- =?us-ascii?Q?D1rPtGyBQS9vB9dO7b+bUw2hli01otSELB3IEDs0fQTDCheagNxRv/zSz1aL?=
- =?us-ascii?Q?l78A1TS+EpGjWO+7H3gqkGu/crIk+D6/lzdRcigOHS8ehCGIQGv9qRfwW/U2?=
- =?us-ascii?Q?fNDQtMIa7u39+O/MozjuuzVFVFXFaj+rCGtFXtX/BOwme05aHWF8Ik3utPCz?=
- =?us-ascii?Q?R+8N3QMirNq3zsADKxZ4eVmoX+7LthT5ZcSkq0mstJQwPmAiSF3iKH9Bn7n3?=
- =?us-ascii?Q?Ug7WNWMFGMGD++l743oqWRJ+tvHLUWRJwXmDkrsDEss8PO0DSqhRAA=3D=3D?=
+ ARA:13230040|376014|52116014|7416014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?b0dnWjJyQ2h5U3hFd21tWldPbGVGUnVKaWdHZnBwVGtBVCtiMElSbnZ1UFEr?=
+ =?utf-8?B?K0VXckc0a2g0ZjVLbFljZ0NlemFJRHMreUJyV2hRSjlOUUJ2UUErck5xaEZH?=
+ =?utf-8?B?UGpQelhkR0docjFTbnY5M3A2NDl2YWtLVjhRNkF3YkdhQU5KdWZzdFlQNUtw?=
+ =?utf-8?B?SHlMai95YjNEUnM5RUs3ZGg2SzV4QzZHT3BpaHhJK0ovM1F1cVZDd3hzRDRu?=
+ =?utf-8?B?RmtDZVorUGg4M21JYmFweERDbmZ1RSttMjZKalFsbndSNmhXejIwbnZZU05w?=
+ =?utf-8?B?N2lURkdQTllQb2hKRjhmaWVZbE9NVDN2Z1NkZHRFbUFZUnpwZWhJbGlzamZV?=
+ =?utf-8?B?Yk40OWNWMWxxMzZlbHljcE93QVVqemRWdDJVa05NY2ZhY1E1eldmRTdSUTUv?=
+ =?utf-8?B?QlZPRXBwcFhtVEtuVHRUOXptc2p3RFpNVnlQT1QxaEt2ZUtqOG1uTWpjMEhP?=
+ =?utf-8?B?WXBZclJ2TDFpYnZqbUowVjRDaHNMTUpXc0huM3BZc3hhT1ZHVjZua2pObkY5?=
+ =?utf-8?B?aWZHT1paWHdwbitTbTA5R2ZZTVdpMWpiVWNDcGd1T1pRalBTM0ZaUG5hNUF3?=
+ =?utf-8?B?VGcycGthd2pWUDRMbCtOUk9VU3VtTUVyc1dPWUVkcVRHZmg5U0V5VlFXK1ZH?=
+ =?utf-8?B?S0hiTTA1QmJhcU94YVg3c1NUbW1xL3hVdVljTnM4SXBQOEFJWjYybnJmc05I?=
+ =?utf-8?B?cU5Hek1UU1hRYXRubkZmeVZWTkdnSlU4QkpIMCtrNEVscW9HM3M3Z1M2YnJS?=
+ =?utf-8?B?K29taC9YdWRuemFYa2FFUnZJbVUyRkhvTjNnME5MS0JURUxuejh5bG0xbHdk?=
+ =?utf-8?B?aFkwTm14eUFyOGRYeDQrUWp0V0JpdnNZSFBkNlNpQmNSRGFPbjQrczlSNllJ?=
+ =?utf-8?B?cnZqQnJBVU1iLzNuYmlrSjRyK2tlbVZRblBHaUxkZVQ0L05yekZQWmtCRm1K?=
+ =?utf-8?B?Mjl6ZE5NcnhKMEt4aEpYMXJUdE5NZlpmMGlvTW9FWkZnbnZpbzRUeE5BZUJQ?=
+ =?utf-8?B?NWRaSTY3dVR3UjM3eTlDRlgxVHV1QXVDVlhjUUFobE1YdXU5T2IvaldsQXV2?=
+ =?utf-8?B?YUxPRE9iWGl6d25kbTRPekdrb2VPOUdkTG5vbmNVUDF6cnl3dVJiOGdUK1NE?=
+ =?utf-8?B?WUd0N2tsS1B3SHVOMnVsdUFsaEtLSjZNejM0V0FlSHJSNFVFQUdlb3ByRHBj?=
+ =?utf-8?B?bFo5eDBFcytFVWVCaUtNSFBTQ1JBZlJrZXlpeXp6d2VwZ0xxYjVSajlvQ2w1?=
+ =?utf-8?B?aTJaNVB1UnZUNzhIQTFEN203UW9hT29MMERUYkFIK1d0RTVQbWFMMXhpOHZt?=
+ =?utf-8?B?UEJZNlo1VlNvSkNwNHM2SUZBV1dsMm1qK2RSWm9kakVLMFN4Ni9mKzAxU1kx?=
+ =?utf-8?B?VVoySFN3NC9wSzc2VFNIcnRNVnJrOWtPRkZURnJSVTVRN3Z6T01haGQ2eTFi?=
+ =?utf-8?B?aVh5UEkyV3M0MUh3eHIvNE1mWGMwNllDa3NFbnU1U2xibEtudlhNUk10NENn?=
+ =?utf-8?B?aHBZeE5RZzJrWUNyNW5nV1NidUlLUWVDSUxMTUpUMmxFWXZ1SVBZMlh1TnlN?=
+ =?utf-8?B?Slp5Z0RMNXZwemU2dUlSN085RnNVNGwwV29XWmV5L29IQnliSW0yKy9KQVlh?=
+ =?utf-8?B?dHY2am1qZGVTakhyU1BqaFZYYmlteDg4dmlIcFJKK0xIbk9YVDNtQmNVbHp6?=
+ =?utf-8?B?N3NPMWRiMTRuZzBiN2txTjExUGVDczUyU0tra1ZpR1VjRkY0UHd4S3o4QWpk?=
+ =?utf-8?B?TmtISUNWT0t6WXpQeVM0MDB3QWxrS3V4dEMvWnhlSytEWThFcEdQM3NNWkJ0?=
+ =?utf-8?B?UlVPSVdSUWhXSWFSbXpUS0ljL3piL055Qk5DTlVYMUdJbkhGUU03WEc4REN6?=
+ =?utf-8?B?NmFDaEpIVnR5SHRaSzBhdnJXdys5MjhZUHJmVGpqMi9TS3ZJN25sbnltZkli?=
+ =?utf-8?B?dFliSzNZQ2xvL2JGNGtKdnV5Q2M3RkI3Y3Q4RW5hYWhtR053dmZOTGpOd0xK?=
+ =?utf-8?B?L0tPRjdFMEx3PT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(52116014)(1800799024)(366016)(38350700014);
+ SFS:(13230040)(376014)(52116014)(7416014)(1800799024)(366016)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FI2kB0ou5ezRpCwqTGZ/C1/aw2xhfvRX4aJpqfmLI7L4Oh8vJ5CPsZIC3DD+?=
- =?us-ascii?Q?3RxRVUW+l0ZGVXzRtvpVLVxDMomr6GVZOVGfGpjD7rnpA4jC0mW0NESazb99?=
- =?us-ascii?Q?Kp8AVMnzIdb5uUSbiHAVBJnaxLEwoW1NesGoNswGC1sHy7O1E0RdXdhZXQaa?=
- =?us-ascii?Q?vvMj3q0Llbl2qY/dd3QpGLbNLDQxvpimGIaMpmQmPI8RSWbwKBjN6JAzB4s4?=
- =?us-ascii?Q?6oxJ07xjg7kv2m5SGxfwJt50cA5rF7I15wql7AtxBZaEfb246mpKA9NdF4BI?=
- =?us-ascii?Q?wJ66aBRDpHS/w6mxs7qayRIjIjX45oPoOYmAoaB9ai7aHU/50MNe8xKHNecn?=
- =?us-ascii?Q?4Qo+HAvDA1zlX15M6j0nU0tNw2KCi05bh4ru8dVy163fbhDZBU0iq3cN13mc?=
- =?us-ascii?Q?+sCo4wc5fqz3GfzWTGOshtUblUcWsGhGFKoZ1VktUl6FUrdEhp0sxhBfX1kC?=
- =?us-ascii?Q?ZuDlX5LsWWAJNuBhJ5yuHC9Y5CCfrwurIRqhH5FgMNsiaqPhkFK05s97Va5V?=
- =?us-ascii?Q?lOEsD+av/CFkLh56zfsaYupsY7cFdflNNAi2qzmwtwDnlxX6R8EIaM/thDJV?=
- =?us-ascii?Q?CxBXkykBIPRxWutsaOsw/7sYOeOrfxMzrQlgxHtueNz+qoKlb+io09R1GBR+?=
- =?us-ascii?Q?6Mwe/HZ0M1QNuSghhxsvf8pXAAwU/gdQmcSaECjQWYExv+qNXIUmCRifSVO5?=
- =?us-ascii?Q?y5IdfUo+kUuXCFWNpUzSWKbxgLP9gmaHH/O471aqsafP/Dc7jPubALgYGZGy?=
- =?us-ascii?Q?BuUXi0lwoxtI1T/pdVuUmyge6rheJq+BoT7O5x8P2mAuQ51kdOQtr1CWQTAt?=
- =?us-ascii?Q?l6R13DT6GuQvEFQNr2TZL0OQLy31cbERkU+5uD6KoqY5ByQ4++tdNOhk7Rld?=
- =?us-ascii?Q?VNZmj9a2h8w0liuwVvBe7viQTXDf3fFYwP4NuA9M2yL5qrC/zKokHSh/DEwV?=
- =?us-ascii?Q?PzDDK6jqhn9cu91VqtfxOwHVCMyG/g7AthBjSbh1dD6EairY/Y0GsWtYiBQc?=
- =?us-ascii?Q?GvtpzZCIsd/Y2l+lg0YA8ROAvhX+QKI5yZN54punbVJ0L2scktIdM0+rK7Xn?=
- =?us-ascii?Q?cB0Cfx6lNmRTiYbmJtTGZQWpYoEwNZbpsc7iZtchriGemDtuPFtCwsc/xFsN?=
- =?us-ascii?Q?w0t6U46rUDtbSSe113Bo3HaZOEVt6m6QYnU5PBNYCJ/u1gv7vhaeL8b6Lk+q?=
- =?us-ascii?Q?0WT/WHdmp3y/hG+LmimvEDOH6kDZFJlMMU4/dOHJoz5iUJ4mLUz9m3N8T49f?=
- =?us-ascii?Q?8+RuIL5iq7EfnDbVOMWTQLLEFPxTGaKlBnGvA0QHSgQ/pAGZlaDENdOOdNRH?=
- =?us-ascii?Q?5hdrYFejMo+u7n1WbtWXvVfMfZo9p5gq9/K2ZYjhR/65b1yqJN5h9D6cBCw1?=
- =?us-ascii?Q?RcsqZJ/hY/qxBSf07lniOBcATS2x5Ms2f1dLKlg8IV5C/VMSHEpPwlN6SA9m?=
- =?us-ascii?Q?aatVrfv9vwTbRb5SxEnUoDEeqEwhGEnVsvIQU8MsBSZ6kd+4En+R/wnfcGju?=
- =?us-ascii?Q?MU8XpK796QM6KH2lGWrNlUnjkxwuyXR3phs7ApyjheflpCdNrzzpvg16esbs?=
- =?us-ascii?Q?PWalY817TChJHxxwn2qtv46zXjRakorDiu8MqNbw?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cldtZ2FHK0lzZHE4RGFjUnlZUzlKeTVZYWNBT3JVaXRpcUwwUVVyU3M0Z21y?=
+ =?utf-8?B?bG02TXR3TTB3ZFRnTlhQV0FCUktSWHdhaUxDTFVKSWl1elJOWGtIdUZVMGdw?=
+ =?utf-8?B?NEw3T0Z0Y0JKcXhFRVVCUkNHcjVjNXM5QUNxRmV5dEpXVWhwbko2RXBhS2d4?=
+ =?utf-8?B?Zzh6bGFwNGJpRVdXdGxBS200UHo0OVpKS00wMjRnZkFETDVmc09kalNLWXQ2?=
+ =?utf-8?B?RndnZ0tTTGVQdlFCRHJNTHJjSDFGbXZUTllnM1BQWWlIZkJkUmVtL3dxOWQ4?=
+ =?utf-8?B?TTFCVFpWYTlrb202cm9PbXJwMG9vN3duVU5rZ284Q3dibFlFRG5aNE9IZk1L?=
+ =?utf-8?B?UksrU0J5VExMNURPalFCZkpVeUhDMDJPeWlPQmY4Qzl0SUI0bUtVQk45Z1Zq?=
+ =?utf-8?B?RkNMYm9rZ2RsT3ZNZFFOWHp1OUlwYUZXNUduZDZ2MHJ6M2J2aHdNY2pzeE9W?=
+ =?utf-8?B?VG5SY1ZCOC9FRkFLRkt2QzJrNVNTQXo0dS9rWnM0Y3ozVmdPR081TGJrQUNC?=
+ =?utf-8?B?b3c4c054c1ViYVpvWmoxUy9pNDdDWEprRVZPTWxMQTRKeG9VbERPMjU1YVRr?=
+ =?utf-8?B?Q0U2RUpjSzdEdVhNT21RMVRjSHQ5K0I1VnhiSVdnMEN0TTJ4MFJMQ0dMWitI?=
+ =?utf-8?B?YzlNSGZiODRRR2ZJNmVvMEdjMy9CQnF3QzZTdUw4WGR5V3k0Y0sybXNvQ2U5?=
+ =?utf-8?B?VnJJYWVzQmpPeTBvS0VhSXZGN0xDZzhqdU53OFpHemtLR21yaU02Z1ZIKzV1?=
+ =?utf-8?B?YWRWL01vSmFMam1jckFxVHBtZGVjeU5mK0NXSW5BUDN2WkY5VFpGZzlDM3pC?=
+ =?utf-8?B?ZWhDSk5hWWo0cVlFL3JNQ0JEZ3RvSHRoK1ZMRG16a29kY1Znc2tKd2wwRGpj?=
+ =?utf-8?B?Uyt2alovTUZZOG0veUNzYWdhZkJocHI2eHBOWFViTDJDRWVXcTYzdDF5Z1dF?=
+ =?utf-8?B?bmtVRmFKN2NQek9BUHp3TStDd2xBbGFkSmI4aUdrRms2YmpCa0RoelVFUmhj?=
+ =?utf-8?B?UXNJNGxJbk5jTzIxL0hMcThNOTdqV21FbUlWOW0ycUNsNDJNSTc0VEVBbjQ5?=
+ =?utf-8?B?VjFoN1d4M0FETmJmb0VFTk9PZ281eHhoTFBwVDVLUmd6SE1xZ29HTWdEaXo0?=
+ =?utf-8?B?eGlZcXF0ZEtGSXFSdkZicVdRYmFxSXpodHpkblJBcERQb2syZmxyS3F2c2tD?=
+ =?utf-8?B?VWhGUUx3R1ZPZHdXZW1UNFBRYzR0K2pHWm5WTUZTVmRydGhkMndlWFd5WW1p?=
+ =?utf-8?B?OUdsSXhCcEZKUU43eWFDak5id0tEakNhSEhib1g1KzFBdm9idG1URzd0RzY5?=
+ =?utf-8?B?bjRSbXZFNmtUalk4QjBhV0h6SXBOUlR1MXIvL1g3ZkxtV0FFQVZ0K284WVNp?=
+ =?utf-8?B?NTJYaFBXK25Oc3dRRXdjWDM3YWdTdkJoVG1uZ3ZEV0ZCa0NSQmlKTmxwZDZs?=
+ =?utf-8?B?WnU5UmlGei9uVkxHVTQydXhjZGNyNjZ3bHpuZWxyY1ZKdXpwS1NvbkYzTHQ3?=
+ =?utf-8?B?Sytxd3ZZTFJMSkl0WkVheS83eTl6NG5aWXhkcjZHZXZqK0JuL04yZFl1RFdn?=
+ =?utf-8?B?NkZla2FtZzBFTkhJUzFRT2puL0Y3enpqczlQeDg2ZVlVNTZudk9FVjV1NUhj?=
+ =?utf-8?B?dHRyMVBYZjdkZzBITUk3ckoya21EQ0o1K09zRXkwZlFRRGhnU2dQYlV3Uy9k?=
+ =?utf-8?B?WFJybEx4WVB3WVhqK21uSDBNQ2c2U2RralN6UzBhNHZubCszalFaVVRyZ3Q5?=
+ =?utf-8?B?aWJ1RzJNdS8zQmlPckVDcUpsRUpaalZnK0Y5b0QxMXRTSXQ1UGJmakl6ZjN4?=
+ =?utf-8?B?NHBBWFZ1SmIzRURCN1VYOTBkd0VHb2ZpOGdvWDVMM1pzQjBrQktlNTRQcE13?=
+ =?utf-8?B?SGZteEZQZ1QwN2xmWGdoYkxFNElPMlRxS0t5a2k0RG1heXNIOE9zbEx4V0JS?=
+ =?utf-8?B?UVVZWTFvZVlDTmNBUUxUbUIwSEJVcWZSRC9xMWRJZ1FXaUIxd3NsamxkNm90?=
+ =?utf-8?B?ZzZRTnhBeTRnMVl4STg3Nmk1RW5kS2syZTJXOHFuNUcra3VCR0dudDdFMksz?=
+ =?utf-8?B?a2VVeHhKKzRyOVVveHN4Z1VmeEpaWGYzcGt6eWVTYzBwcXg2N1pqZTdPQ0s0?=
+ =?utf-8?Q?QrnSJl44Ypf5oW2TeFx+ivsNW?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f477b1be-2863-421b-a465-08dd78d0d3c5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5fcc3022-f79c-4529-2f61-08dd78d0de9d
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 08:14:06.1680 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 08:14:24.2698 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: haycT9FeL5mr6PyUWjcTKBf9vi0hBqf35aWO8MRvHOKTC8uEbwKhc0cpKZKZLDgIK9pLqiJL4/be4C55ThKwIQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8932
+X-MS-Exchange-CrossTenant-UserPrincipalName: HIIH4MC25px5+G8njw1tt+UuSizHljfYzfH64LEeZJcna0Cmj4ibm73Ggsd+Rha9l3VkGayRrPSf2s9HVmJ00A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7967
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,228 +183,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+From: Alice Guo <alice.guo@nxp.com>
 
-This patch adds V2X container support for i.MX95. Since V2X container
-may not be included in ahab-container.img of i.MX95, check if V2X
-container exists in order to get the correct image end.
+This patch add a document for i.MX95 Image Container Format.
 
-Signed-off-by: Ye Li <ye.li@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/mach-imx/image-container.c | 119 ++++++++++++++++++++++------
- 1 file changed, 95 insertions(+), 24 deletions(-)
+ doc/imx/imx95_container.txt | 136 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 136 insertions(+)
+ create mode 100644 doc/imx/imx95_container.txt
 
-diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
-index 2afe9d38a06..f84e23f4b2a 100644
---- a/arch/arm/mach-imx/image-container.c
-+++ b/arch/arm/mach-imx/image-container.c
-@@ -41,6 +41,52 @@
- #define FUSE_IMG_SET_OFF_WORD 720
- #endif
- 
-+#define MAX_V2X_CTNR_IMG_NUM   (4)
-+#define MIN_V2X_CTNR_IMG_NUM   (2)
+diff --git a/doc/imx/imx95_container.txt b/doc/imx/imx95_container.txt
+new file mode 100644
+index 00000000000..05f223d962a
+--- /dev/null
++++ b/doc/imx/imx95_container.txt
+@@ -0,0 +1,136 @@
++i.MX95 Image Container Format
++-----------------------------
 +
-+#define IMG_FLAGS_IMG_TYPE_SHIFT  (0u)
-+#define IMG_FLAGS_IMG_TYPE_MASK   (0xfU)
-+#define IMG_FLAGS_IMG_TYPE(x)     (((x) & IMG_FLAGS_IMG_TYPE_MASK) >> \
-+								   IMG_FLAGS_IMG_TYPE_SHIFT)
++The image container set consists of some image containers, and image container
++contains boot images. Each image container has its own container header which is
++defined in Figure 1. All container headers are placed together in a continuous
++8KB space at the beginning of the image container set - image container set header.
 +
-+#define IMG_FLAGS_CORE_ID_SHIFT   (4u)
-+#define IMG_FLAGS_CORE_ID_MASK    (0xf0U)
-+#define IMG_FLAGS_CORE_ID(x)      (((x) & IMG_FLAGS_CORE_ID_MASK) >> \
-+								   IMG_FLAGS_CORE_ID_SHIFT)
++ROM code addresses image containers in image container set one by one based on
++their headers’ order in image container set header.
 +
-+#define IMG_TYPE_V2X_PRI_FW     (0x0Bu)   /* Primary V2X FW */
-+#define IMG_TYPE_V2X_SND_FW     (0x0Cu)   /* Secondary V2X FW */
++If ELE container exists, its container header must be the 1st one in the image
++container set header.
 +
-+#define CORE_V2X_PRI 9
-+#define CORE_V2X_SND 10
++If V2X container exists, its container header must be the 2nd one in the image
++container set header. V2X must be combined with ELE container.
 +
-+static bool is_v2x_fw_container(ulong addr)
-+{
-+	struct container_hdr *phdr;
-+	struct boot_img_t *img_entry;
++The information of boot images are recorded in image container header. System
++ROM code needs to retrieve the information from the image container header, like
++the offset on boot source, the target address in RAM, the length of boot image.
++The order of ROM code handling these boot images is based on the order of each
++boot image information present in image container header.
 +
-+	phdr = (struct container_hdr *)addr;
-+	if (phdr->tag != 0x87 || phdr->version != 0x0) {
-+		debug("Wrong container header\n");
-+		return false;
-+	}
++Figure 1:
++------------------- +--------------+--------------+--------------+--------------+
++          ^         |Tag           |Length        |Length        |Version       |
++          |         +--------------+--------------+--------------+--------------+
++          |         |                           Flags                           |
++          |         +--------------+--------------+--------------+--------------+
++          |         |# of Images   |Fuse version  |SW version                   |
++Image     |         +--------------+--------------+--------------+--------------+
++Container |         |Reserved                     |Signature Block Offset       |
++Header    | ------- +--------------+--------------+--------------+--------------+
++          |       ^ |Image0: Offset, Size, LoadAddr, EntryPoint, Flags, Hash, IV|
++          |       | +--------------+--------------+--------------+--------------+
++          | Image | |Image1: Offset, Size, LoadAddr, EntryPoint, Flags, Hash, IV|
++          | Array | +--------------+--------------+--------------+--------------+
++          |       | |                            ...                            |
++          |       | +--------------+--------------+--------------+--------------+
++          v       v |ImageN: Offset, Size, LoadAddr, EntryPoint, Flags, Hash, IV|
++------------------- +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++        ----------- +--------------+--------------+--------------+--------------+ <-- SignOffset
++                  ^ |Tag           |Length        |Length        |Version       |
++                  | +--------------+--------------+--------------+--------------+
++                  | |SRK table offset             |Certificate Offset           |
++                  | +--------------+--------------+--------------+--------------+
++                  | |Blob Offset                  |Signature Offset             |
++                  | +--------------+--------------+--------------+--------------+
++        Signature | |                         SRK Table                         |
++        Block     | +--------------+--------------+--------------+--------------+
++                  | |                         Signature                         |
++                  | +--------------+--------------+--------------+--------------+
++                  | |                   Certificate (optional)                  |
++                  | +--------------+--------------+--------------+--------------+
++                  v |                      Blob (optional)                      |
++        ----------- +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+ <-- Image0Offset
++                    |                           Image0                          |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+ <-- ImageNOffset
++                    |                           ImageN                          |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
 +
-+	if (phdr->num_images >= MIN_V2X_CTNR_IMG_NUM && phdr->num_images <= MAX_V2X_CTNR_IMG_NUM) {
-+		img_entry = (struct boot_img_t *)(addr + sizeof(struct container_hdr));
++i.MX95 Low Power Boot Image Sets Layout
++---------------------------------------
 +
-+		if (IMG_FLAGS_IMG_TYPE(img_entry->hab_flags) == IMG_TYPE_V2X_PRI_FW &&
-+		    IMG_FLAGS_CORE_ID(img_entry->hab_flags) == CORE_V2X_PRI) {
-+			img_entry++;
++    Image container sets are handled by M33 ROM.
 +
-+			if (IMG_FLAGS_IMG_TYPE(img_entry->hab_flags) == IMG_TYPE_V2X_SND_FW &&
-+			    IMG_FLAGS_CORE_ID(img_entry->hab_flags) == CORE_V2X_SND)
-+				return true;
-+		}
-+	}
++    --------------- +--------------+--------------+--------------+--------------+
++                  ^ |                    1st Container Header                   |
++                  | +--------------+--------------+--------------+--------------+
++    ELE +         | |                 Padding for 1KB alignment                 |
++    OEM           | +--------------+--------------+--------------+--------------+
++    Container     | |                    2nd Container Header                   |
++    Set           | +--------------+--------------+--------------+--------------+
++    Header        | |                 Padding for 1KB alignment                 |
++                  | +--------------+--------------+--------------+--------------+
++                  | |                    3rd Container Header                   |
++                  | +--------------+--------------+--------------+--------------+
++                  v |                 Padding for 1KB alignment                 |
++    --------------- +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
++                    |                 mx95a0-ahab-container.img                 |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++------------------- +--------------+--------------+--------------+--------------+
++                  ^ |                      oei-m33-ddr.bin                      |
++                  | +--------------+--------------+--------------+--------------+
++                  | |                      ddrfw-header.bin                     |
++                  | +--------------+--------------+--------------+--------------+
++                  | |                  lpddr5_imem_v202311.bin                  |
++                  | +--------------+--------------+--------------+--------------+
++m33-oei-ddrfw.bin | |                  lpddr5_dmem_v202311.bin                  |
++                  | +--------------+--------------+--------------+--------------+
++                  | |                     ddrfw-qb-header.bin                   |
++                  | +--------------+--------------+--------------+--------------+
++                  | |                 lpddr5_imem_qb_v202311.bin                |
++                  | +--------------+--------------+--------------+--------------+
++                  v |                 lpddr5_dmem_qb_v202311.bin                |
++------------------- +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
++                    |                      oei-m33-tcm.bin                      |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
++                    |                       m33_image.bin                       |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
++                    |                      u-boot-spl.bin                       |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
 +
-+	return false;
-+}
-+
- int get_container_size(ulong addr, u16 *header_length)
- {
- 	struct container_hdr *phdr;
-@@ -83,7 +129,7 @@ int get_container_size(ulong addr, u16 *header_length)
- 	return max_offset;
- }
- 
--static int get_dev_container_size(void *dev, int dev_type, unsigned long offset, u16 *header_length)
-+static int get_dev_container_size(void *dev, int dev_type, unsigned long offset, u16 *header_length, bool *v2x_cntr)
- {
- 	u8 *buf = malloc(CONTAINER_HDR_ALIGNMENT);
- 	int ret = 0;
-@@ -150,6 +196,9 @@ static int get_dev_container_size(void *dev, int dev_type, unsigned long offset,
- 
- 	ret = get_container_size((ulong)buf, header_length);
- 
-+	if (v2x_cntr)
-+		*v2x_cntr = is_v2x_fw_container((ulong)buf);
-+
- 	free(buf);
- 
- 	return ret;
-@@ -231,45 +280,67 @@ static unsigned long get_boot_device_offset(void *dev, int dev_type)
- 	return offset;
- }
- 
--static int get_imageset_end(void *dev, int dev_type)
-+static ulong get_imageset_end(void *dev, int dev_type)
- {
--	unsigned long offset1 = 0, offset2 = 0;
--	int value_container[2];
-+	unsigned long offset[3] = {};
-+	int value_container[3] = {};
- 	u16 hdr_length;
-+	bool v2x_fw = false;
- 
--	offset1 = get_boot_device_offset(dev, dev_type);
--	offset2 = CONTAINER_HDR_ALIGNMENT + offset1;
-+	offset[0] = get_boot_device_offset(dev, dev_type);
- 
--	value_container[0] = get_dev_container_size(dev, dev_type, offset1, &hdr_length);
-+	value_container[0] = get_dev_container_size(dev, dev_type, offset[0], &hdr_length, NULL);
- 	if (value_container[0] < 0) {
- 		printf("Parse seco container failed %d\n", value_container[0]);
--		return value_container[0];
-+		return 0;
- 	}
- 
- 	debug("seco container size 0x%x\n", value_container[0]);
- 
--	value_container[1] = get_dev_container_size(dev, dev_type, offset2, &hdr_length);
--	if (value_container[1] < 0) {
--		debug("Parse scu container failed %d, only seco container\n",
--		      value_container[1]);
--		/* return seco container total size */
--		return value_container[0] + offset1;
-+	if (is_imx95()) {
-+		offset[1] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[0];
-+
-+		value_container[1] = get_dev_container_size(dev, dev_type, offset[1], &hdr_length, &v2x_fw);
-+		if (value_container[1] < 0) {
-+			printf("Parse v2x container failed %d\n", value_container[1]);
-+			return value_container[0] + offset[0]; /* return seco container total size */
-+		}
-+
-+		if (v2x_fw) {
-+			debug("v2x container size 0x%x\n", value_container[1]);
-+			offset[2] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[1];
-+		} else {
-+			printf("no v2x container included\n");
-+			offset[2] = offset[1];
-+		}
-+	} else {
-+		/* Skip offset[1] */
-+		offset[2] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[0];
-+	}
-+
-+	value_container[2] = get_dev_container_size(dev, dev_type, offset[2], &hdr_length, NULL);
-+	if (value_container[2] < 0) {
-+		debug("Parse scu container image failed %d, only seco container\n", value_container[2]);
-+		if (is_imx95())
-+			return value_container[1] + offset[1]; /* return seco + v2x container total size */
-+		else
-+			return value_container[0] + offset[0]; /* return seco container total size */
- 	}
- 
--	debug("scu container size 0x%x\n", value_container[1]);
-+	debug("scu container size 0x%x\n", value_container[2]);
- 
--	return value_container[1] + offset2;
-+	return value_container[2] + offset[2];
- }
- 
- #ifdef CONFIG_SPL_SPI_LOAD
- unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
- {
--	int end;
-+	ulong end;
- 
- 	end = get_imageset_end(flash, QSPI_DEV);
- 	end = ROUND(end, SZ_1K);
- 
--	printf("Load image from QSPI 0x%x\n", end);
-+	printf("Load image from QSPI 0x%lx\n", end);
- 
- 	return end;
- }
-@@ -279,12 +350,12 @@ unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
- unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 						unsigned long raw_sect)
- {
--	int end;
-+	ulong end;
- 
- 	end = get_imageset_end(mmc, MMC_DEV);
- 	end = ROUND(end, SZ_1K);
- 
--	printf("Load image from MMC/SD 0x%x\n", end);
-+	printf("Load image from MMC/SD 0x%lx\n", end);
- 
- 	return end / mmc->read_bl_len;
- }
-@@ -312,12 +383,12 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc)
- #ifdef CONFIG_SPL_NAND_SUPPORT
- uint32_t spl_nand_get_uboot_raw_page(void)
- {
--	int end;
-+	ulong end;
- 
- 	end = get_imageset_end((void *)NULL, NAND_DEV);
- 	end = ROUND(end, SZ_16K);
- 
--	printf("Load image from NAND 0x%x\n", end);
-+	printf("Load image from NAND 0x%lx\n", end);
- 
- 	return end;
- }
-@@ -326,7 +397,7 @@ uint32_t spl_nand_get_uboot_raw_page(void)
- #ifdef CONFIG_SPL_NOR_SUPPORT
- unsigned long spl_nor_get_uboot_base(void)
- {
--	int end;
-+	ulong end;
- 
- 	/* Calculate the image set end,
- 	 * if it is less than CFG_SYS_UBOOT_BASE(0x8281000),
-@@ -339,7 +410,7 @@ unsigned long spl_nor_get_uboot_base(void)
- 	else
- 		end = ROUND(end, SZ_1K);
- 
--	printf("Load image from NOR 0x%x\n", end);
-+	printf("Load image from NOR 0x%lx\n", end);
- 
- 	return end;
- }
++    --------------- +--------------+--------------+--------------+--------------+
++    u-boot-atf    ^ |                    1st Container Header                   |
++    Container     | +--------------+--------------+--------------+--------------+
++    Header        v |                 Padding for 1KB alignment                 |
++    --------------- +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
++                    |                          bl31.bin                         |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
++                    |                         u-boot.bin                        |
++                    +--------------+--------------+--------------+--------------+
++                    |                            ...                            |
++                    +--------------+--------------+--------------+--------------+
 -- 
 2.43.0
 
