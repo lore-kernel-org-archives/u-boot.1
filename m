@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E78C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 10:00:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5459C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 10:01:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3A3483F85;
-	Fri, 11 Apr 2025 12:00:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F12F83FA4;
+	Fri, 11 Apr 2025 12:01:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cS85mj8v";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HbXr+PDo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD36283FA4; Fri, 11 Apr 2025 12:00:48 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id 42D8583FA8; Fri, 11 Apr 2025 12:01:37 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8568782B1F
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:00:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11EA882B1F
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:01:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e609cff9927so1281877276.3
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 03:00:46 -0700 (PDT)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e7040987879so1577054276.2
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 03:01:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744365645; x=1744970445; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744365694; x=1744970494; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y7wrQCRVI5bxZqjqbzq0vRyvgtarLSnjzkjQtJf5ZsU=;
- b=cS85mj8v0C3TBLkBOokQR8hwaewIcchZ3X4jQACLksrmQlNnhpsjai2ZZOeCe3HJae
- pFbRCPzHnM9cNfkLYLEiQKeeq4KzKaOjQ6izQNbmh/uQjKMC86tAX7XOxpMLuh0psDv3
- 5+cHtwiA5Y/YxdXqm/2rfLA9PCOvznRP5zjnZoZ7v4dyqxgHhwSLH6BexoWiPVagPs6W
- wXlYJx1VeyXBUUSqnyHvQKEUEmljsGYCeavLSRLnEdhmCrgcQp35PVyhjpecD6DOSww9
- 4oFGpdS5KEz78g+eSoygSPyVaZ4VydScE8SNzh8yXRykytOlHA+K2+/FYUIXT7mi3GaN
- oH8g==
+ bh=PXvK+7SMU6YHPslCtri7q6lF0rIVLu/tMi9h5gnLhkE=;
+ b=HbXr+PDoLt9SvALkM7jeuEdLeB5wf5ZO9oCwd3kSddANIWuR82oZHzYcPHxRGg5fcJ
+ nn+xsMYRiqqMFMscPG4lM25VvYD4HaohDi3pJ3f+PzKnOn0wawEoTF8rrA2N76/yIrpv
+ TsoDZDEuVuvXNclQ0S+mfP9qxs+7fNsUMfNIItLbmCFOL9Rv3XADXj9nMpzd/SEp6jMM
+ WVs7jN3V/I5JGvN6NhMvBhXi6rLAbO1AI1F1Lb8OVbde0mjavpIATLzBgz39d1vIPQqH
+ oA79p4gXcH+PvXWehYNXhV543+PRxguUzt2Do52X3r02LJbqxmd+cjJnYfLXIZ9qhz0c
+ Iglw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744365645; x=1744970445;
+ d=1e100.net; s=20230601; t=1744365694; x=1744970494;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y7wrQCRVI5bxZqjqbzq0vRyvgtarLSnjzkjQtJf5ZsU=;
- b=Otkrv42jSGtMyjXtSQARNq4uAnbopDWXoZYl53TUnXvkGV5q1oZfifv2fh705MuIvr
- mxoD6zvWZQrl305wZZqsKXVfGgSiCOMRpzi0MBYKXa5oE/sjE6xxbaZxGY7yz0KUGhD4
- tlvYcHp05aB5QnnKPR820NhKbnRp8chxpkSeTWLI2diPLKvQBSCI5lj4byMjoRzYrHGq
- IUtL63+mEyFTwF5wh0k7np0cZuX7ElefbVlxGUBbbP7QyVYAJOqhejko1te24EJw5rzY
- 29kr35U3NaKkXJPLzuvubdUU+26XDxg/hbWcagLjocVrpL5GwmpP2gAvw+jVtM+Zgq7H
- Fx9A==
-X-Gm-Message-State: AOJu0Yy/qBPcbz2MUppwanrqnMB711TOVV18O2yiw4IPG4pwQntHdmP0
- 6mmwdS9wSi1C8mrN0WPnokqaEUZVQIUinsOvck4zQV6QUW0f7ccwaEVNzIMxUXjff7xPlmwMGdX
- oKDQCykoK7j3jAOTiQFU4ZxVDNyVuoEXYZI34i3u7w3ET2YsEFbg=
-X-Gm-Gg: ASbGnctL7TculTkBWQC6LVIL960eQissBXIi5Ys1CQltoTP9plr5E6/Crd2nBLikypg
- YdWSUblNIwAHb6F9VCOQTZXOzw0NQS6uTNpwXQj9VmbMebxfkIElxufCDco4Wd2+o0zK0p1aSEO
- eb9Ome8RciE/0aTuZb9ekhhlA=
-X-Google-Smtp-Source: AGHT+IEHevqMuWZ0moHH/+6M2YqMAV1RShmqqNok+ykC1sbOiQ5rwXVFyg2eoPi3VAqBcGykvKakQf0NC65A1vwQngM=
-X-Received: by 2002:a05:6902:2011:b0:e6d:e063:d552 with SMTP id
- 3f1490d57ef6-e704decf48amr3360245276.19.1744365645339; Fri, 11 Apr 2025
- 03:00:45 -0700 (PDT)
+ bh=PXvK+7SMU6YHPslCtri7q6lF0rIVLu/tMi9h5gnLhkE=;
+ b=eVsTQc1K0Tqy2dLMyJZULpQD3JeqsTQwLGZxCdZp5LeR9sjI3wddcBZv3iwP+jFMbg
+ yoa+2BGZ2b2KiyS9J4i0OeQgbvWjkrctpYbKEHA9RbqUZpIqIqG+DHqyOznQvRTXCjPY
+ uJXE11o3u6K6JzhvM/q4X1lJi+Np/Q2VM3ZyniT9xEOWx5ZytNrDtYvfbtlrcL091+eK
+ J4tT+4qpNWhRXB+ieaXNc0ZNrFAoNHEweOe7KHoFu+qROw5yDPUtwFrOdeYjrwbYfVn1
+ rYIz4gkpQkgaxS42lWrZNKVaturMq4Eh+/DF9tdGg08rdtbCJ6MUSXH5IGt4xnuvF0hF
+ Idtg==
+X-Gm-Message-State: AOJu0YwtKwYZQ6YSsoRsiAcLFCTPkE2jN6hrWys3vtfFH/bBj2iWILeZ
+ cjFBe6WwHlpNYMqn7ahpldi5jdb/1CcqA+HJYLDA9St7mprWYFNlAk6XIQRz4KiRpGGXXCcAkz7
+ lRrsrmcJG5IhZ13OpUbppsI9zi9aBXtEy33Pal71VhOkisIOgAAg=
+X-Gm-Gg: ASbGncsRMWwiJrgtWVZkRFL7oVoA0oy7+sMWHSTwyaA5lXoC/mqBLsTKteeXyt+hgtF
+ QZLkin0om/2xI7BefIyBTBJOGRnv30eJcaQl1IGtIJA+XvxxOzgIQoBKHrg1f84smB6fbx054cw
+ I7r6LcbqjdJ/6NQzW6VbZR3rs=
+X-Google-Smtp-Source: AGHT+IFEBlhlifJRbt1tFVRToCX0Ld0qpuNw57VwdnZSYlfMipfszvbfu3rRjFZW1LOHhp+UcB0aWH6XDDisOa9/32o=
+X-Received: by 2002:a05:6902:98f:b0:e65:91f3:fbdd with SMTP id
+ 3f1490d57ef6-e704decaacfmr3666712276.22.1744365693981; Fri, 11 Apr 2025
+ 03:01:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250411053256.17332-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250411053256.17332-1-heinrich.schuchardt@canonical.com>
+References: <20250318092327.55203-1-pkochanowski@sii.pl>
+In-Reply-To: <20250318092327.55203-1-pkochanowski@sii.pl>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 11 Apr 2025 13:00:09 +0300
-X-Gm-Features: ATxdqUHT_dNw8SfcChXk86FbHaoUnYpaugyLsvJaMyymf2-h9fqcM0Blg-M4eHQ
-Message-ID: <CAC_iWjL+L4ad1hfz1a5J2ozUPEwmwkZSZRuU3_mb-Qz4LG3KKg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_selftest: check executing in EL2
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+Date: Fri, 11 Apr 2025 13:00:57 +0300
+X-Gm-Features: ATxdqUHXQQaOMO84k2hUxTarwH8Mx5dK5iy0dTwUkbJgBDZJGVrxso1DYQwAsfY
+Message-ID: <CAC_iWjJ+5pFYN-Cp0DcB=AWHF9HnBhKFFCagaq8LDM-=CizF1w@mail.gmail.com>
+Subject: Re: [PATCH v2] efi: Make FDT extra space configurable
+To: Pawel Kochanowski <pkochanowski@sii.pl>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Gabriel Nesteruk <gnesteruk@sii.pl>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,62 +90,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-[...]
-
-> +
-> +/**
-> + * current_exception_level()
-> + *
-> + * Return:     current exception level, 0 - 3
-> + */
-> +static unsigned int current_exception_level(void)
-> +{
-> +       unsigned long el;
-> +
-> +       asm volatile (
-> +               "MRS %0, CurrentEL"
-> +               : "=r" (el) : : );
-> +
-> +       return (el >> 2) & 0x3;
-> +}
-> +
-
-We have an identical function in arch/arm/include/asm/system.h, can we
-use that? It's static inline so you may be able to just include the
-header file directly. Also, that function adds a 'cc,' which tells the
-compiler that the instruction might change the condition code flags. I
-don't remember if this is needed, but it doesn't hurt to have it.
-
-
-> +/**
-> + * execute() - execute test
-> + *
-> + * Check that the exception level is not EL3.
-> + */
-> +static int execute(void)
-> +{
-> +       unsigned int el = current_exception_level();
-> +
-> +       efi_st_printf("Exception level EL%u\n", el);
-> +       if (el != 1 && el != 2) {
-> +               efi_st_error("EL1 or EL2 expected");
-> +               return EFI_ST_FAILURE;
-> +       }
-> +
-> +       return EFI_ST_SUCCESS;
-> +}
-> +
-> +EFI_UNIT_TEST(el) = {
-> +       .name = "exception level",
-> +       .phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-> +       .execute = execute,
-> +};
+On Tue, 18 Mar 2025 at 11:23, Pawel Kochanowski <pkochanowski@sii.pl> wrote:
+>
+> U-Boot currently reserves only 0x3000 bytes when copying the FDT
+> in copy_fdt(), which may not be sufficient if additional nodes
+> (such as FMAN firmware) are added later.
+>
+> This patch uses the exisitng SYS_FDT_PAD to reserve space for FDT fixup
+> instead of hardcoded value.
+>
+> This change prevents potential corruption when resizing FDT after
+> EFI boot, especially when firmware like FMAN requires additional
+> space.
+>
+> Signed-off-by: Gabriel Nesteruk <gnesteruk@sii.pl>
+> Signed-off-by: Pawel Kochanowski <pkochanowski@sii.pl>
+> ---
+> Changes since version 1:
+> - Removed custom CONFIG_FDT_EXTRA_SPACE in favor of already present SYS_FDT_PAD
+> - Use the define also in efi_dt_fixup.c
+>
+>  lib/efi_loader/efi_dt_fixup.c | 2 +-
+>  lib/efi_loader/efi_helper.c   | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
+> index 26928cfc454..544e1aa9808 100644
+> --- a/lib/efi_loader/efi_dt_fixup.c
+> +++ b/lib/efi_loader/efi_dt_fixup.c
+> @@ -168,7 +168,7 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
+>                 /* Check size */
+>                 required_size = fdt_off_dt_strings(dtb) +
+>                                 fdt_size_dt_strings(dtb) +
+> -                               0x3000;
+> +                               CONFIG_SYS_FDT_PAD;
+>                 total_size = fdt_totalsize(dtb);
+>                 if (required_size < total_size)
+>                         required_size = total_size;
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index 04b2efc4a3b..40e5d31575a 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -477,7 +477,7 @@ static efi_status_t copy_fdt(void **fdtp)
+>          * needs to be expanded later.
+>          */
+>         fdt = *fdtp;
+> -       fdt_pages = efi_size_in_pages(fdt_totalsize(fdt) + 0x3000);
+> +       fdt_pages = efi_size_in_pages(fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
+>         fdt_size = fdt_pages << EFI_PAGE_SHIFT;
+>
+>         ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
 > --
-> 2.48.1
+> 2.43.0
 >
 
-Other than that LGTM
-
-/Ilias
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
