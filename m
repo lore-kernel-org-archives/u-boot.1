@@ -4,81 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95A8BC369A2
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 20:29:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E021DC369A2
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 21:53:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6F8E8422F;
-	Fri, 11 Apr 2025 22:29:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 27EA782B5C;
+	Fri, 11 Apr 2025 23:53:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k5F/89o7";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="AbzUXthL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F5A484230; Fri, 11 Apr 2025 22:29:18 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9560D82B92; Fri, 11 Apr 2025 23:53:52 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 750F48422D
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 22:29:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2B1982B54
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 23:53:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-603fd257386so580987eaf.1
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 13:29:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744403354; x=1745008154; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=slOUkeFiBJ+XaoaAeeK8id66GvphH6tVVIsiY9ix9g8=;
- b=k5F/89o7ynsCYrvg/osW2h9SD8g0cnuW9xcSWDPgw1PEWbzmDyQkL/Mw08zXwfJ2lL
- DLrqgb1J3XoRLVCLFnz78EcHyf4aCBifciOQXjfZb8HieMsUrq61GuTOv0rxnby7CPcY
- lcsOiwFLbMknbQOw2cM5fWFu2IlgVylkr4DqQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744403354; x=1745008154;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=slOUkeFiBJ+XaoaAeeK8id66GvphH6tVVIsiY9ix9g8=;
- b=E/sDgYLOcOHol1+nULOK5d1PzILDCZuxJ5sLSSqcjX56HkwNGwkjGKTKiZNytS0qFl
- Wg5wBPrKFLQxW3lDxVkvFD8grIjNvbhVsN2UvWvb2NcVTILSLs4DPPVJMUvtPVmlSzwZ
- ZqemnwvUGIhK4Vak5b7Dfw46qBfWRDUomd0julheGlSIEIAKUMjqSZ+nSpaKJNESwAkA
- kMESpRvtE10Znf+2LmNzJ1iuIe31ITC4Tw6xNm3DYcKxnei/e2x92Tp8AEAoK4KAsIxe
- fyvrSztJW6Sk+x1HatbcOrhY+mNenbxPg636BI28x/8TRQq+AOTisVeW8IaeDzTf5gKw
- oEEA==
-X-Gm-Message-State: AOJu0YzqxumsY8mCVwKpJusIqaYk/VE4/OuStnpQ9vsPNeak7g4SvzLR
- +iaS2QLIoZlEf+a6Xodlp2XcptoIoi8GNwO7zSe4Xq83rx3Y9EdzYOivBz/jbzE=
-X-Gm-Gg: ASbGncvV+ETJCqj4JhiqLB2xoRWXIaTqzqlEgmfO4MvEfxHDoFKLUHKjbYlULVGtCUu
- cfA9x46CXny8WK6Yn/36yuDMNyJ2+XLtpuDadcYvKp+ICHvVTgPzVz/VLz6lSWSb/DDxKEc+HyD
- R31nsyMKHl0DsFFO4WzgvNbqOAaMepw9w/WfU7XKb68EGpGe88BzRG83MJrwkjuZ+TYuJqtrmDa
- dI0Vp5zFFZGfwfZNlFYcWtPf6JzqQXPCIBO4BTkrJ7KdEJEF+JzJlylaXj3SuIJeTlibjqXRINZ
- FKPoZzxCHEgRuJlngVQpoXceyN+NivYASCWZLlYjs6w9vmTCIivueNCM/0SYhTEupB6/biiT2W6
- ADA==
-X-Google-Smtp-Source: AGHT+IEj2DyGDDCNXBgDsncfTgg0IpMzEwl/Be4aircJRny07DUf/1AR1qdLMuRzb2xf/wEEQXlAaw==
-X-Received: by 2002:a05:6871:64c9:b0:2c6:72d3:fc93 with SMTP id
- 586e51a60fabf-2d0d5cd3278mr2349433fac.12.1744403354030; 
- Fri, 11 Apr 2025 13:29:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d0969b721fsm1292222fac.25.2025.04.11.13.29.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 13:29:13 -0700 (PDT)
-Date: Fri, 11 Apr 2025 14:29:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v5 00/16] Uthreads
-Message-ID: <20250411202910.GA141451@bill-the-cat>
-References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8fee=W6=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
+ References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1744408425;
+ bh=QtkvqtXfV8rX9+6XqY1EgRBzREFmQY4Eew32PsGRj8U=;
+ b=AbzUXthLiQoI5mUutKJB2MiU83unrNfESx081W4d6VR1ieEzMs7+qJRNYViRGf56QYBmq2Eyu
+ qfkLBucL2Xy5A2AyF5so1Y22okzDqge1jjRwae+etb7Y3uKJmJutDZ4k7C81u59VXTbIL7Awlt4
+ zibJlAb2/1Pfy6lDrErbciJZwAnQQuv3BWbICVXkOG3AHMauzBWC+6dMUe3N6fktuAN0cAl6VCi
+ mYWA4pw7iq4wMNrV5jLSIrPbAKomHFDAm20Jd0ly4yQtgC8lIZnkBpQ5z8w7MlptLMvse/onxs0
+ X9SHJ+7PS5XTPniQQwr29/enphAfIVSwg1I6huVxTgiA==
+X-Forward-Email-ID: 67f98f66a8be77febed3f2f5
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <52438f52-792b-4cc9-b7db-813561debd80@kwiboo.se>
+Date: Fri, 11 Apr 2025 23:53:39 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="94WYbRju/vUEBzuz"
-Content-Disposition: inline
-In-Reply-To: <20250331123120.2025062-1-jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: rockchip: add Xunlong Orange Pi 5 Max
+To: K900 <me@0upti.me>
+References: <20250405-add-opi5-max-v1-1-e02686fc03b6@0upti.me>
+Content-Language: en-US
+Cc: u-boot@lists.denx.de
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250405-add-opi5-max-v1-1-e02686fc03b6@0upti.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,84 +72,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---94WYbRju/vUEBzuz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025-04-05 22:46, K900 wrote:
+> The 5 Max is another board in the Orange Pi 5 family.
+> 
+> It's overall similar to the 5 Plus, but in a smaller form factor,
+> which leads to some I/O being reshuffled, but nothing relevant
+> to u-boot.
+> 
+> So, just reuse the config for the 5 Plus and adjust the DT names.
+> 
+> Signed-off-by: K900 <me@0upti.me>
 
-On Mon, Mar 31, 2025 at 02:30:54PM +0200, Jerome Forissier wrote:
+For Linux kernel you need to be using a known identity (no anonymous
+contributions), not sure about U-Boot.
 
-> This series introduces threads and uses them for two things:
-> - Improve the performance of the USB bus scanning code (scan multiple
-> busses simultaneously),
-> - Implement background jobs in the shell via two new commands: 'spawn'
-> and 'wait'.
->=20
-> The threading framework is called 'uthread' and is inspired from the
-> barebox threads [2]. setjmp() and longjmp() are used to save and
-> restore contexts, as well as a non-standard extension called initjmp().
-> This new function is added in several patches, one for each
-> architecture that supports HAVE_SETJMP. A new symbol is defined:
-> HAVE_INITJMP. Two tests, one for initjmp() and one for the uthread
-> scheduling, are added to the lib suite.
->=20
-> The schedule() and udelay() function are updated to become thread
-> re-scheduling points, and mutex objects are introduced. With that the
-> USB stack initialization is modified to benefit from concurrency when
-> UTHREAD is enabled, where uthreads are used in usb_init() to initialize
-> and scan multiple busses at the same time. The code was tested on arm64
-> and arm QEMU with 4 simulated XHCI buses and some devices. On this
-> platform the USB scan takes 2.2 s instead of 5.6 s. Tested on i.MX93 EVK
-> with two USB hubs, one ethernet adapter and one webcam on each, "usb
-> start" takes 2.4 s instead of 4.6 s.
->=20
-> Finally, the spawn and wait commands are introduced, allowing the use of
-> threads from the shell. Tested on the i.MX93 EVK with a spinning HDD
-> connected to USB1 and the network connected to ENET1. The USB plus DHCP
-> init sequence "spawn usb start; spawn dhcp; wait" takes 4.5 seconds
-> instead of 8 seconds for "usb start; dhcp".
->=20
-> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D446674
-> [2] https://github.com/barebox/barebox/blob/master/common/bthread.c
+> ---
+> The 5 Max is another board in the Orange Pi 5 family.
+> 
+> It's overall similar to the 5 Plus, but in a smaller form factor,
+> which leads to some I/O being reshuffled, but nothing relevant
+> to u-boot.
+> 
+> So, just reuse the config for the 5 Plus and adjust the DT names.
+> ---
+>  arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi | 20 ++++++
+>  configs/orangepi-5-max-rk3588_defconfig        | 89 ++++++++++++++++++++++++++
+>  2 files changed, 109 insertions(+)
+> 
+> diff --git a/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1ab31a4ec5ab31810039e480189d373a3bb50061
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
+> @@ -0,0 +1,20 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk3588-u-boot.dtsi"
+> +
+> +&fspim1_pins {
 
-So, we're nearly there. But there's some CI problems. First, CI isn't
-testing this because nothing enables UTHREADS. I don't know if we should
-enable it by default on qemu_arm64 for example or not. But for testing,
-I added this to .gitlab-ci.yml (and something similar would work for
-Azure):
-qemu_arm64_uthread test.py:
-  variables:
-    TEST_PY_BD: "qemu_arm64"
-    TEST_PY_TEST_SPEC: "not sleep"
-    OVERRIDE: "-a CONFIG_UTHREAD=3Dy -a CONFIG_CMD_SPAWN=3Dy -a CONFIG_UNIT=
-_TEST=3Dy"
-  <<: *buildman_and_testpy_dfn
+This board use fspim2_pins, please change.
 
-This however leads first to unrelated tests failing:
-https://source.denx.de/u-boot/u-boot/-/jobs/1099921
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&sdhci {
+> +	cap-mmc-highspeed;
+> +	mmc-hs200-1_8v;
+> +};
+> +
+> +&sfc {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> diff --git a/configs/orangepi-5-max-rk3588_defconfig b/configs/orangepi-5-max-rk3588_defconfig
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..a655dfe2d64168b2d6a3b400abd4c03d9d4bc402
+> --- /dev/null
+> +++ b/configs/orangepi-5-max-rk3588_defconfig
+> @@ -0,0 +1,89 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-max"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_EVB_RK3588=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_SF_DEFAULT_BUS=5
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-max.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_DWC_AHCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_XMC=y
+> +CONFIG_PHYLIB=y
+> +CONFIG_RTL8169=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
+> 
+> ---
+> base-commit: e458e103d4f5fb7aaf13e744c65916ab3ba4a18d
+> change-id: 20250405-add-opi5-max-569b1e7a53b1
+> 
+> Best regards,
 
-And I didn't see if the new tests ran either.
+This is missing an entry in board/rockchip/evb_rk3588/MAINTAINERS
+and please also add the board to doc/board/rockchip/rockchip.rst.
 
---=20
-Tom
-
---94WYbRju/vUEBzuz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf5e4sACgkQFHw5/5Y0
-tywjHAwAoQ/DjgFBRt/mncSaR7ueJhejvf/GGGc71mVOKtXblZClwsrGiXWN28B9
-2wCm1UNY/GbJN//+oJHx5lyjh8nq5o7TOi5PS+dMJ4zUyge3ZwqP7OpPga1Rfnre
-ZXBEzoMQauuCyjM2ZTW5O8S/V+viojNqZrT6JqZwhdH/WoRWjnyRaVn3Rnqz0V5M
-QLmVmaotqt070+Re63AWrYt0q68MVLaa7mpRYFyOsTvQUkQseidwvBTHdv8PBfml
-No4Tr2dlK66k7VQAegHiOR5kxe0lVzaDIZOU4XZkGM5m45e5Anh016tVCJJ/CE9q
-MORufH+jEPloOWZ9edZa+ivhK6pntVdBDn2U5F/fcIOIuNYT3i9ALvaQSifhRCSZ
-thuDxxVeRBNTmrjDk2HIImKS51pG/5myfrjiIrJk6dDmcN/wjmBugxfUOvQUVjy/
-X9CcKc5izvKFu4ooUcQ+YHOL5wRxPp8IjPu0hDWkY3SjaWNViPW74drKZC/518ai
-TRFjF6wy
-=ygSf
------END PGP SIGNATURE-----
-
---94WYbRju/vUEBzuz--
+Regards,
+Jonas
