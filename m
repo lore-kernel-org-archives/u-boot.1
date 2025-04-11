@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E4BC36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 10:02:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1DA9C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 10:04:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 837A482B41;
-	Fri, 11 Apr 2025 12:02:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1392D83FB0;
+	Fri, 11 Apr 2025 12:04:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mjQFNSp7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a8UALfHo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2066582B41; Fri, 11 Apr 2025 12:02:28 +0200 (CEST)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id C482383FB2; Fri, 11 Apr 2025 12:04:50 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2E3882B1F
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:02:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88FA383FAF
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:04:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e6e2971f79fso1504439276.0
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 03:02:25 -0700 (PDT)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-e6dd991a0e6so1416065276.1
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 03:04:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744365744; x=1744970544; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744365887; x=1744970687; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nOoBMCX/E0d2K7mGzmyzgUikChEFvWaVRLNlYjWy9PY=;
- b=mjQFNSp76iWBKg9W6mb0WAT74oK2zAzrpk2iVaFFCEww1pxs3fL8D4/z+9LysplKtT
- 7c4teDvMvPbbgKVNMH/UugFkQb0TVYqy+nLkwShJfUTU/G7jzCVBgo564AhVZHuTO2Za
- iU9MXHczS96Ytt5gyteMI1vh20Untfme5ChTUA0dJX2z0kHqFsUkw6XNh4IA0PSGAZRD
- oGCG/QEbA4jIaAovz23P0lLHiYzf3VHMjDfqJskh9TqRQFcyiBEySA0QmccQ3Hu+ARhk
- cTZJYc7PyVNgccuSeUpdsW4TCrg6nXARMBo4PvvlgURYLDsS95/+Zp3E8sgIRc0JY2zs
- RjkA==
+ bh=zrv4glQhwtt3PIAr7Snq8Hosj2XIWQ17rrEDlVwZ4uQ=;
+ b=a8UALfHoCIOVcDnJfgNYl5FlCokuzsSsiVRZloesVLzV/3W3xz011HY2aYu9B0LnW9
+ j/VeiPxAtxU6ZN88d2cZRTVvrf6f0NYv/5koEhfXeLXcV/maH8iUjU7qFlq4xMTOGqy2
+ gMoxn5C6WKv0DD3BGz9q+2SO2tuzxGp1mY8W5YEaQ9NhbHJgBedc3dEP0wamDSIQO9L2
+ LMCqMuQu0UvphtFVZ9aAdi8iVwHDiw6RtoBG6KoqtIR13wmLdbJZlTsgV/bODQbjbLNz
+ RCDJGxqS/RgrO5BKPb9PiBDTou+lGkMa0dGBQ0Ss7iTTuBTOPCkMVf8j6ya3tY5+XBNq
+ WYig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744365744; x=1744970544;
+ d=1e100.net; s=20230601; t=1744365887; x=1744970687;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nOoBMCX/E0d2K7mGzmyzgUikChEFvWaVRLNlYjWy9PY=;
- b=beXTxeOCJX4W95MumdoEl0/d3dxbWHYzzbMVNyYrqT+ngDeQ9DAutBBhSUiw+sPyxo
- DlnNUGK0NME/X+PTLtk6jR0V55bXVSC12tzE7rV57FVI2Umgdv6zfm9AgQfjCcgxcEpe
- udGyegkLSmsKYKWsbh4ikMIIiVMaBfbrVqXRSzz1+k8HvP/onHD2Ux6+aUmrWF2DEzrh
- tro9h6VUoPIEGGw9ywR1ya/8c5bWOLXDBsajHMcBeqDAtGnm34b2nDF5WjQTuYXw0s2P
- mKHDrVcjvRv7+us0ZMWmQarUl7heU0oLbGDvLgpRroALkhxJBySq3NF5YPFt4mtDWhj/
- /scA==
-X-Gm-Message-State: AOJu0YxmDk3Ee0B1yo3vYR/fabfC0oEtNqo5AE5MZzIHOn9n1VtsjCUG
- sd6xtF4L0TJaQJT4VYTldtKvhv0Wnb36Ux+aboM1u3PyA8b+1/VWW+jkMp/pfZJeLG3VPkcv3DW
- AjPRp029gOrktB6AjP13dha9Zr8UPgE9iARzL7DeaDNhQ295gojg=
-X-Gm-Gg: ASbGnctvPx3I3UPKX8TAjegPGKz7TvPpMGhXbaFWY65oT1W4xJSHxfVhIJ3ZXcsEQsJ
- moogAk1wwfAdBdRPuORnS70TIOe5xK1eI4gU4jRwDe8ICDKw3Fxo2X7lpQGUeLXU/krtvgMNq+v
- kyFVfPPOPMmHDE6xqchAXNwG8=
-X-Google-Smtp-Source: AGHT+IEVQqNkbAKLS0XfoR9gwdL8+36fkdGpTcj1ocKEUszHAP1hhqbpW0NC2kzDTZViYVgTS1FePCj1/xKpzjxcR8U=
-X-Received: by 2002:a05:6902:e04:b0:e6d:f47a:f873 with SMTP id
- 3f1490d57ef6-e704deee8fbmr3364900276.9.1744365744356; Fri, 11 Apr 2025
- 03:02:24 -0700 (PDT)
+ bh=zrv4glQhwtt3PIAr7Snq8Hosj2XIWQ17rrEDlVwZ4uQ=;
+ b=qaQzitvougl7wgAU/ZFIqvRjvvbfP3EkTaQsLMHjxaLmrskKIvZEKavjfwc6pVSLG4
+ LzfG6m6dRExQk74VjDy5pHazL7BZ/QACA+Tw8wjME7JOwQyUS8521uS4wcTvqj6eZOh5
+ ymzpRaqopK9kgv00TZiOUglkratU+Is+obZOZN2Li3oC00pQATCTMdRfhNXb81x91wQf
+ EAUIzeFb6MRveJ57dSXg91cdlgGpSV403W6tNBBWfAgAysc11zf5DW7Uyv2Wdd88B/Zf
+ EQeDUpuJPPOUhZWk5Rczi+lHAP0K66YE1Sv6p/SvxpP5bdt5TAos1mLSzs1Y6ERlNqqV
+ Kd/g==
+X-Gm-Message-State: AOJu0YzuHlgnDRXJ0BVnMfSzZpsJd/raycuqEdcdW22/DQM2C+O1AOOa
+ GHTSiShabMkshzIn3c8RZIjQ6VXkWbvtxnTQTEuISAwsnw5gmMLmx9NxiOuwz+6LEgbnN34gyMc
+ F3OpkqRoIxwhUqJdek5pHUjxRYVDUKQPEqkXPtw==
+X-Gm-Gg: ASbGnctysG+qC9Z/V5MXNVvNk9HT1RcURvOJ53CydXQCpFceBHmQYiJ3uDOzKN6hD1u
+ vbvXJLuu8GBDXyaZQAb+SOxlYnjQdJd8L64ymc2QG80+9C9ownJKi1XcCUXti1QcK24iAl8IxSr
+ SF52LuTh/Zmu+iSzf4wx4TzoY=
+X-Google-Smtp-Source: AGHT+IGzqH7j9kU0gVYk6rd6bWzHfQGV9jnazN/T0JLko1idlDy6hY9byYO0tH0/5A0w0pOmzPp/J6T1Zxk27migwCc=
+X-Received: by 2002:a05:6902:1b07:b0:e6d:f7ea:c722 with SMTP id
+ 3f1490d57ef6-e704de9c3eamr3540860276.17.1744365887174; Fri, 11 Apr 2025
+ 03:04:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250411053645.17454-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250411053645.17454-1-heinrich.schuchardt@canonical.com>
+References: <20250405204409.420738-1-sjg@chromium.org>
+In-Reply-To: <20250405204409.420738-1-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 11 Apr 2025 13:01:48 +0300
-X-Gm-Features: ATxdqUHrIImKZa1cdlmXwQmdWQ6JiWEG2StD_foN8c5vqLSzjtUPe-IDA9wSZR8
-Message-ID: <CAC_iWjLqP_qP4VGjZafF33sJYR=NbJtFtO-HQi01Aj-wwjvonQ@mail.gmail.com>
-Subject: Re: [PATCH] efi_selftest: use do_bootefi_exec()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+Date: Fri, 11 Apr 2025 13:04:11 +0300
+X-Gm-Features: ATxdqUH2wJiMgz54iXc77NHY7dZFrlHWuQ8i7VQz0NjhktbD2Jdc1OrLECk5Pog
+Message-ID: <CAC_iWjJ07Z4PqZa9mXSnzp5TjsgXr3RL6FxSL2EV0oX7p8uN_g@mail.gmail.com>
+Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via EFI
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Niklas Sombert <niklas.sombert@uni-duesseldorf.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,46 +91,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 11 Apr 2025 at 08:36, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+Hi Simon
+
+On Sat, 5 Apr 2025 at 23:46, Simon Glass <sjg@chromium.org> wrote:
 >
-> The EFI selftest should match executing a real EFI binary
-> as closely as possible.
+> The EFI-loader code has not been fully converted to use bloblist, so
+> relies on the SMBIOS-table address being set in global_data.
+
+Can you explain a bit more what this means? The SMBIOS tables for EFI
+are supposed to be on EFI allocated memory
+
 >
-> Use do_bootefi_exec() to enter the EFI selftest.
+> Set this up in write_tables() so that the SMBIOS tables are actually
+> available.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Enable the command for x86 QEMU so that the SMBIOS tests actually run.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: 83ce35d6ebb ("emulation: Use bloblist to hold tables")
+> Reported-by: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
 > ---
->  cmd/bootefi.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
 >
-> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> index c1454ffb948..13479248999 100644
-> --- a/cmd/bootefi.c
-> +++ b/cmd/bootefi.c
-> @@ -38,6 +38,9 @@ static efi_status_t bootefi_run_prepare(const char *load_options_path,
->         if (ret != EFI_SUCCESS)
->                 return ret;
+>  arch/x86/lib/tables.c            | 2 ++
+>  board/emulation/qemu-x86/Kconfig | 1 +
+>  lib/efi_loader/efi_smbios.c      | 1 +
+>  3 files changed, 4 insertions(+)
 >
-> +       (*image_objp)->auth_status = EFI_IMAGE_AUTH_PASSED;
-> +       (*image_objp)->entry = efi_selftest;
-> +
->         /* Transfer environment variable as load options */
->         return efi_env_set_load_options((efi_handle_t)*image_objp,
->                                         load_options_path,
-> @@ -106,8 +109,8 @@ static int do_efi_selftest(void)
->                 return CMD_RET_FAILURE;
+> diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
+> index ec52992209f..d7f183f95dc 100644
+> --- a/arch/x86/lib/tables.c
+> +++ b/arch/x86/lib/tables.c
+> @@ -126,6 +126,8 @@ int write_tables(void)
+>                         use_high = true;
+>                         if (!gd->arch.table_start_high)
+>                                 gd->arch.table_start_high = rom_addr;
+> +                       if (table->tag == BLOBLISTT_SMBIOS_TABLES)
+> +                               gd_set_smbios_start(rom_addr);
+>                 }
+>                 rom_table_end = table->write(rom_addr);
+>                 if (!rom_table_end) {
+> diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/Kconfig
+> index b2a4e0891a4..c1564fba7cd 100644
+> --- a/board/emulation/qemu-x86/Kconfig
+> +++ b/board/emulation/qemu-x86/Kconfig
+> @@ -23,5 +23,6 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+>         imply VIRTIO_PCI
+>         imply VIRTIO_NET
+>         imply VIRTIO_BLK
+> +       imply CMD_SMBIOS
 >
->         /* Execute the test */
-> -       ret = EFI_CALL(efi_selftest(&image_obj->header, &systab));
-> -       free(loaded_image_info->load_options);
-> +       ret = do_bootefi_exec(&image_obj->header,
-> +                             loaded_image_info->load_options);
->         efi_free_pool(test_device_path);
->         efi_free_pool(test_image_path);
->         if (ret != EFI_SUCCESS)
+>  endif
+> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+> index 8d2ef6deb51..5275e966dfe 100644
+> --- a/lib/efi_loader/efi_smbios.c
+> +++ b/lib/efi_loader/efi_smbios.c
+> @@ -35,6 +35,7 @@ efi_status_t efi_smbios_register(void)
+>         void *buf;
+>
+>         addr = gd_smbios_start();
+> +       printf("register %lx\n", addr);
+
+I don't think this print is useful at all, why isn't the log_err()
+right below enough?
+
+>         if (!addr) {
+>                 log_err("No SMBIOS tables to install\n");
+>                 return EFI_NOT_FOUND;
 > --
-> 2.48.1
+> 2.43.0
 >
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Thanks
+/Ilias
