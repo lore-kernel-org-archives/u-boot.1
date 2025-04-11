@@ -4,79 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D21C369A2
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 07:32:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63FAEC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 07:36:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ABD683EE4;
-	Fri, 11 Apr 2025 09:32:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id E3E7183EF2;
+	Fri, 11 Apr 2025 09:36:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="t5lzhkIY";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="d9dax1D8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25BE983EE8; Fri, 11 Apr 2025 09:32:00 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 162A483EF5; Fri, 11 Apr 2025 09:36:20 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EEAB83E78
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:31:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2E2E83E78
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:36:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6196a1474a=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53B2q2Qm005469;
- Fri, 11 Apr 2025 09:31:51 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- mCsSGa/6MJi+v0mlCRhbIOCa37ktCQp5rdrRt2/Y8dQ=; b=t5lzhkIYw+U1/tBj
- vEDbKEdGAGzR0BLlGgq8AL0umYyW5hfrfzAKeHSpsYEcCyeb6ABnbHHsWnq7Ed61
- LcZ7g/38/Z/tCtHigf207t6SQiRW85gD97dwQHAw3RrLLOCjVk1NxxYi1qSVuLXB
- W9SaaZNpTsC6NWr/pr8VtMXAbn/Q1QQmnLG9tNtKbs3WGdBMdEnGXk2k+CEvItSh
- gFewZUxofspaV430Sw0bf5+bJVOQOmW4rTuvRV8AQkw4vHvWW94fCpDu7tRze4IA
- pNoBhcW4N5qMWOIhnleKyayHLGmIxBX46LZUUIr113r9rSNPfbp3P6ZOgoYeRJ9f
- h3HohA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45uffn22jq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 11 Apr 2025 09:31:50 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 18C3B4005A;
- Fri, 11 Apr 2025 09:30:35 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A48D4938E67;
- Fri, 11 Apr 2025 09:29:55 +0200 (CEST)
-Received: from [10.252.25.37] (10.252.25.37) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
- 2025 09:29:54 +0200
-Message-ID: <ec9432f6-a4c9-4122-9075-b6782f61380a@foss.st.com>
-Date: Fri, 11 Apr 2025 09:29:54 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1744356977; x=1744961777; i=xypron.glpk@gmx.de;
+ bh=AI+d7J4FFOWX7xE13X06E+O49cCs4xRfk3A2rZzY8wc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=d9dax1D87MmX98MIcL5UPGZPCEx6KoUdxaIyXsHxAnhcWRhNsUn3AlBVZFOEm+uY
+ xp5CyJb7LDFQ7x6MP6L48xMmGgyXaH3YhGzooC0deob/dyIZ/HcdkS7n2g88rwUPv
+ hEbgMrN03Z7zloqiDBkC7hBm1tWw4Ko2EPobACzqktRfpPeYKbRE3C/y0V79zt1DE
+ GJlH7A+ZQuCxf++cPACJcmrX44LLy+jY2Ij+sSSsqQn8eVg9PIKZXxjupm7T4dtJD
+ 3M8Are1nHXYcemARecDdnFCSmcQGBldwmD/mqzDlvxKq8SZ7IBWzjnPSxTuQFKYIZ
+ XRbdRkA++3U0RJf3hg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.109.163]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mlw7V-1tLrow0hvf-00bbD4; Fri, 11
+ Apr 2025 09:36:17 +0200
+Message-ID: <faee771b-9bf2-4689-86dc-fcfa79ec5880@gmx.de>
+Date: Fri, 11 Apr 2025 09:36:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/6] video: support FRIDA FRD400B25025-A-CTK
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>, 
- Anton Bambura <jenneron@protonmail.com>, =?UTF-8?Q?Jonas_Schw=C3=B6bel?=
- <jonasschwoebel@yahoo.de>, Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250401070125.3705126-1-dario.binacchi@amarulasolutions.com>
- <20250401070125.3705126-6-dario.binacchi@amarulasolutions.com>
+Subject: Re: [PATCH] Dockerfile: Update to gcc-14.2.0 and clang-18
+To: Tom Rini <trini@konsulko.com>
+References: <20250128230205.2062703-1-trini@konsulko.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250401070125.3705126-6-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.25.37]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-11_02,2025-04-10_01,2024-11-22_01
+Cc: u-boot@lists.denx.de
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250128230205.2062703-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Ozh4x5WTSNjPddyZjQ3tqwvh/NnnYoe0XPyUT6CrMmoTOv24sOJ
+ oQleEMpNKBz25ChIqEhWRjlZ0mapC6PIA2qRl+DHgAXO1trdgAfOj/w8TROsg8LQyWc8fyC
+ T5ebem3P9GpsA9iZOkCm8b7Pa8r0G8JaDp5GdDkMkZkKRVpbS+ZAVG4xsUYrDFLhujab8lh
+ gIylogyZYDGK2TX1br/iw==
+UI-OutboundReport: notjunk:1;M01:P0:ESuoTLKGDHc=;SHG2cg6zXSDDOQFXrjIJVFdhUZD
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,1317 +120,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 4/1/25 09:00, Dario Binacchi wrote:
-> [backport from Linux commits 9b26d5c044d6a29ebfb1845408e0f2a7c5f89818
->  and 219a1f49094f50bf9c382830d06149e677f76bed]
-> 
-> The patch adds the FRIDA FRD400B25025-A-CTK panel, which belongs to the
-> Novatek NT35510-based panel family.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+On 1/29/25 00:02, Tom Rini wrote:
+> Outside of changing versions here the other visible change is that we
+> tell grub that riscv64 does not have "large model" support. Without this
+> change the resulting mkimage is non-functional. This is known upstream
+> already.
+>
+> Link: https://savannah.gnu.org/bugs/?65909
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> 
-> (no changes since v1)
-> 
->  drivers/video/Kconfig           |    7 +
->  drivers/video/Makefile          |    1 +
->  drivers/video/novatek-nt35510.c | 1253 +++++++++++++++++++++++++++++++
->  3 files changed, 1261 insertions(+)
->  create mode 100644 drivers/video/novatek-nt35510.c
-> 
-> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-> index 3c3cebaacd02..76dc2d65a6d3 100644
-> --- a/drivers/video/Kconfig
-> +++ b/drivers/video/Kconfig
-> @@ -550,6 +550,13 @@ config VIDEO_LCD_HIMAX_HX8394
->  	Say Y here if you want to enable support for Himax HX8394
->  	dsi 4dl panel.
->  
-> +config VIDEO_LCD_NOVATEK_NT35510
-> +	bool "Novatek NT35510 DSI LCD panel support"
-> +	select VIDEO_MIPI_DSI
-> +	help
-> +	Say Y here if you want to enable support for Novatek nt35510
-> +	dsi panel.
-> +
->  config VIDEO_LCD_ORISETECH_OTM8009A
->  	bool "OTM8009A DSI LCD panel support"
->  	select VIDEO_MIPI_DSI
-> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-> index 5a00438ce064..ff9c9e1c2512 100644
-> --- a/drivers/video/Makefile
-> +++ b/drivers/video/Makefile
-> @@ -59,6 +59,7 @@ obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
->  obj-$(CONFIG_VIDEO_LCD_HIMAX_HX8394) += himax-hx8394.o
->  obj-$(CONFIG_VIDEO_LCD_HITACHI_TX18D42VM) += hitachi_tx18d42vm_lcd.o
->  obj-$(CONFIG_VIDEO_LCD_LG_LD070WX3) += lg-ld070wx3.o
-> +obj-$(CONFIG_VIDEO_LCD_NOVATEK_NT35510) += novatek-nt35510.o
->  obj-$(CONFIG_VIDEO_LCD_ORISETECH_OTM8009A) += orisetech_otm8009a.o
->  obj-$(CONFIG_VIDEO_LCD_RAYDIUM_RM68200) += raydium-rm68200.o
->  obj-$(CONFIG_VIDEO_LCD_RENESAS_R61307) += renesas-r61307.o
-> diff --git a/drivers/video/novatek-nt35510.c b/drivers/video/novatek-nt35510.c
-> new file mode 100644
-> index 000000000000..f3432939c0cb
-> --- /dev/null
-> +++ b/drivers/video/novatek-nt35510.c
-> @@ -0,0 +1,1253 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2025 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> + *
-> + * Inspired from the Linux kernel driver panel-novatek-nt35510.c
-> + */
-> +
-> +#include <backlight.h>
-> +#include <dm.h>
-> +#include <mipi_dsi.h>
-> +#include <panel.h>
-> +#include <asm/gpio.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/delay.h>
-> +#include <power/regulator.h>
-> +
-> +#define NT35510_CMD_CORRECT_GAMMA BIT(0)
-> +#define NT35510_CMD_CONTROL_DISPLAY BIT(1)
-> +#define NT35510_CMD_SETVCMOFF BIT(2)
-> +
-> +#define MCS_CMD_MAUCCTR		0xF0 /* Manufacturer command enable */
-> +#define MCS_CMD_READ_ID1	0xDA
-> +#define MCS_CMD_READ_ID2	0xDB
-> +#define MCS_CMD_READ_ID3	0xDC
-> +#define MCS_CMD_MTP_READ_SETTING 0xF8 /* Uncertain about name */
-> +#define MCS_CMD_MTP_READ_PARAM 0xFF /* Uncertain about name */
-> +
-> +/*
-> + * These manufacturer commands are available after we enable manufacturer
-> + * command set (MCS) for page 0.
-> + */
-> +#define NT35510_P0_DOPCTR 0xB1
-> +#define NT35510_P0_SDHDTCTR 0xB6
-> +#define NT35510_P0_GSEQCTR 0xB7
-> +#define NT35510_P0_SDEQCTR 0xB8
-> +#define NT35510_P0_SDVPCTR 0xBA
-> +#define NT35510_P0_DPFRCTR1 0xBD
-> +#define NT35510_P0_DPFRCTR2 0xBE
-> +#define NT35510_P0_DPFRCTR3 0xBF
-> +#define NT35510_P0_DPMCTR12 0xCC
-> +
-> +#define NT35510_P0_DOPCTR_LEN 2
-> +#define NT35510_P0_GSEQCTR_LEN 2
-> +#define NT35510_P0_SDEQCTR_LEN 4
-> +#define NT35510_P0_SDVPCTR_LEN 1
-> +#define NT35510_P0_DPFRCTR1_LEN 5
-> +#define NT35510_P0_DPFRCTR2_LEN 5
-> +#define NT35510_P0_DPFRCTR3_LEN 5
-> +#define NT35510_P0_DPMCTR12_LEN 3
-> +
-> +#define NT35510_DOPCTR_0_RAMKP BIT(7) /* Contents kept in sleep */
-> +#define NT35510_DOPCTR_0_DSITE BIT(6) /* Enable TE signal */
-> +#define NT35510_DOPCTR_0_DSIG BIT(5) /* Enable generic read/write */
-> +#define NT35510_DOPCTR_0_DSIM BIT(4) /* Enable video mode on DSI */
-> +#define NT35510_DOPCTR_0_EOTP BIT(3) /* Support EoTP */
-> +#define NT35510_DOPCTR_0_N565 BIT(2) /* RGB or BGR pixel format */
-> +#define NT35510_DOPCTR_1_TW_PWR_SEL BIT(4) /* TE power selector */
-> +#define NT35510_DOPCTR_1_CRGB BIT(3) /* RGB or BGR byte order */
-> +#define NT35510_DOPCTR_1_CTB BIT(2) /* Vertical scanning direction */
-> +#define NT35510_DOPCTR_1_CRL BIT(1) /* Source driver data shift */
-> +#define NT35510_P0_SDVPCTR_PRG BIT(2) /* 0 = normal operation, 1 = VGLO */
-> +#define NT35510_P0_SDVPCTR_AVDD 0 /* source driver output = AVDD */
-> +#define NT35510_P0_SDVPCTR_OFFCOL 1 /* source driver output = off color */
-> +#define NT35510_P0_SDVPCTR_AVSS 2 /* source driver output = AVSS */
-> +#define NT35510_P0_SDVPCTR_HI_Z 3 /* source driver output = High impedance */
-> +
-> +/*
-> + * These manufacturer commands are available after we enable manufacturer
-> + * command set (MCS) for page 1.
-> + */
-> +#define NT35510_P1_SETAVDD 0xB0
-> +#define NT35510_P1_SETAVEE 0xB1
-> +#define NT35510_P1_SETVCL 0xB2
-> +#define NT35510_P1_SETVGH 0xB3
-> +#define NT35510_P1_SETVRGH 0xB4
-> +#define NT35510_P1_SETVGL 0xB5
-> +#define NT35510_P1_BT1CTR 0xB6
-> +#define NT35510_P1_BT2CTR 0xB7
-> +#define NT35510_P1_BT3CTR 0xB8
-> +#define NT35510_P1_BT4CTR 0xB9 /* VGH boosting times/freq */
-> +#define NT35510_P1_BT5CTR 0xBA
-> +#define NT35510_P1_PFMCTR 0xBB
-> +#define NT35510_P1_SETVGP 0xBC
-> +#define NT35510_P1_SETVGN 0xBD
-> +#define NT35510_P1_SETVCMOFF 0xBE
-> +#define NT35510_P1_VGHCTR 0xBF /* VGH output ctrl */
-> +#define NT35510_P1_SET_GAMMA_RED_POS 0xD1
-> +#define NT35510_P1_SET_GAMMA_GREEN_POS 0xD2
-> +#define NT35510_P1_SET_GAMMA_BLUE_POS 0xD3
-> +#define NT35510_P1_SET_GAMMA_RED_NEG 0xD4
-> +#define NT35510_P1_SET_GAMMA_GREEN_NEG 0xD5
-> +#define NT35510_P1_SET_GAMMA_BLUE_NEG 0xD6
-> +
-> +/* AVDD and AVEE setting 3 bytes */
-> +#define NT35510_P1_AVDD_LEN 3
-> +#define NT35510_P1_AVEE_LEN 3
-> +#define NT35510_P1_VCL_LEN 3
-> +#define NT35510_P1_VGH_LEN 3
-> +#define NT35510_P1_VGL_LEN 3
-> +#define NT35510_P1_VGP_LEN 3
-> +#define NT35510_P1_VGN_LEN 3
-> +#define NT35510_P1_VCMOFF_LEN 2
-> +/* BT1CTR thru BT5CTR setting 3 bytes */
-> +#define NT35510_P1_BT1CTR_LEN 3
-> +#define NT35510_P1_BT2CTR_LEN 3
-> +#define NT35510_P1_BT3CTR_LEN 3
-> +#define NT35510_P1_BT4CTR_LEN 3
-> +#define NT35510_P1_BT5CTR_LEN 3
-> +/* 52 gamma parameters times two per color: positive and negative */
-> +#define NT35510_P1_GAMMA_LEN 52
-> +
-> +#define NT35510_WRCTRLD_BCTRL BIT(5)
-> +#define NT35510_WRCTRLD_A BIT(4)
-> +#define NT35510_WRCTRLD_DD BIT(3)
-> +#define NT35510_WRCTRLD_BL BIT(2)
-> +#define NT35510_WRCTRLD_DB BIT(1)
-> +#define NT35510_WRCTRLD_G BIT(0)
-> +
-> +#define NT35510_WRCABC_OFF 0
-> +#define NT35510_WRCABC_UI_MODE 1
-> +#define NT35510_WRCABC_STILL_MODE 2
-> +#define NT35510_WRCABC_MOVING_MODE 3
-> +
-> +/**
-> + * struct nt35510_config - the display-specific NT35510 configuration
-> + *
-> + * Some of the settings provide an array of bytes, A, B C which mean:
-> + * A = normal / idle off mode
-> + * B = idle on mode
-> + * C = partial / idle off mode
-> + *
-> + * Gamma correction arrays are 10bit numbers, two consecutive bytes
-> + * makes out one point on the gamma correction curve. The points are
-> + * not linearly placed along the X axis, we get points 0, 1, 3, 5
-> + * 7, 11, 15, 23, 31, 47, 63, 95, 127, 128, 160, 192, 208, 224, 232,
-> + * 240, 244, 248, 250, 252, 254, 255. The voltages tuples form
-> + * V0, V1, V3 ... V255, with 0x0000 being the lowest voltage and
-> + * 0x03FF being the highest voltage.
-> + *
-> + * Each value must be strictly higher than the previous value forming
-> + * a rising curve like this:
-> + *
-> + * ^
-> + * |                                        V255
-> + * |                                 V254
-> + * |                         ....
-> + * |                    V5
-> + * |           V3
-> + * |     V1
-> + * | V0
-> + * +------------------------------------------->
-> + *
-> + * The details about all settings can be found in the NT35510 Application
-> + * Note.
-> + */
-> +struct nt35510_config {
-> +	/**
-> +	 * @width_mm: physical panel width [mm]
-> +	 */
-> +	u32 width_mm;
-> +	/**
-> +	 * @height_mm: physical panel height [mm]
-> +	 */
-> +	u32 height_mm;
-> +	/**
-> +	 * @timings: display timings
-> +	 */
-> +	struct display_timing timings;
-> +	/**
-> +	 * @mode_flags: DSI operation mode related flags
-> +	 */
-> +	unsigned long mode_flags;
-> +	/**
-> +	 * @cmds: enable DSI commands
-> +	 */
-> +	u32 cmds;
-> +	/**
-> +	 * @avdd: setting for AVDD ranging from 0x00 = 6.5V to 0x14 = 4.5V
-> +	 * in 0.1V steps the default is 0x05 which means 6.0V
-> +	 */
-> +	u8 avdd[NT35510_P1_AVDD_LEN];
-> +	/**
-> +	 * @bt1ctr: setting for boost power control for the AVDD step-up
-> +	 * circuit (1)
-> +	 * bits 0..2 in the lower nibble controls PCK, the booster clock
-> +	 * frequency for the step-up circuit:
-> +	 * 0 = Hsync/32
-> +	 * 1 = Hsync/16
-> +	 * 2 = Hsync/8
-> +	 * 3 = Hsync/4
-> +	 * 4 = Hsync/2
-> +	 * 5 = Hsync
-> +	 * 6 = Hsync x 2
-> +	 * 7 = Hsync x 4
-> +	 * bits 4..6 in the upper nibble controls BTP, the boosting
-> +	 * amplification for the step-up circuit:
-> +	 * 0 = Disable
-> +	 * 1 = 1.5 x VDDB
-> +	 * 2 = 1.66 x VDDB
-> +	 * 3 = 2 x VDDB
-> +	 * 4 = 2.5 x VDDB
-> +	 * 5 = 3 x VDDB
-> +	 * The defaults are 4 and 4 yielding 0x44
-> +	 */
-> +	u8 bt1ctr[NT35510_P1_BT1CTR_LEN];
-> +	/**
-> +	 * @avee: setting for AVEE ranging from 0x00 = -6.5V to 0x14 = -4.5V
-> +	 * in 0.1V steps the default is 0x05 which means -6.0V
-> +	 */
-> +	u8 avee[NT35510_P1_AVEE_LEN];
-> +	/**
-> +	 * @bt2ctr: setting for boost power control for the AVEE step-up
-> +	 * circuit (2)
-> +	 * bits 0..2 in the lower nibble controls NCK, the booster clock
-> +	 * frequency, the values are the same as for PCK in @bt1ctr.
-> +	 * bits 4..5 in the upper nibble controls BTN, the boosting
-> +	 * amplification for the step-up circuit.
-> +	 * 0 = Disable
-> +	 * 1 = -1.5 x VDDB
-> +	 * 2 = -2 x VDDB
-> +	 * 3 = -2.5 x VDDB
-> +	 * 4 = -3 x VDDB
-> +	 * The defaults are 4 and 3 yielding 0x34
-> +	 */
-> +	u8 bt2ctr[NT35510_P1_BT2CTR_LEN];
-> +	/**
-> +	 * @vcl: setting for VCL ranging from 0x00 = -2.5V to 0x11 = -4.0V
-> +	 * in 1V steps, the default is 0x00 which means -2.5V
-> +	 */
-> +	u8 vcl[NT35510_P1_VCL_LEN];
-> +	/**
-> +	 * @bt3ctr: setting for boost power control for the VCL step-up
-> +	 * circuit (3)
-> +	 * bits 0..2 in the lower nibble controls CLCK, the booster clock
-> +	 * frequency, the values are the same as for PCK in @bt1ctr.
-> +	 * bits 4..5 in the upper nibble controls BTCL, the boosting
-> +	 * amplification for the step-up circuit.
-> +	 * 0 = Disable
-> +	 * 1 = -0.5 x VDDB
-> +	 * 2 = -1 x VDDB
-> +	 * 3 = -2 x VDDB
-> +	 * The defaults are 4 and 2 yielding 0x24
-> +	 */
-> +	u8 bt3ctr[NT35510_P1_BT3CTR_LEN];
-> +	/**
-> +	 * @vgh: setting for VGH ranging from 0x00 = 7.0V to 0x0B = 18.0V
-> +	 * in 1V steps, the default is 0x08 which means 15V
-> +	 */
-> +	u8 vgh[NT35510_P1_VGH_LEN];
-> +	/**
-> +	 * @bt4ctr: setting for boost power control for the VGH step-up
-> +	 * circuit (4)
-> +	 * bits 0..2 in the lower nibble controls HCK, the booster clock
-> +	 * frequency, the values are the same as for PCK in @bt1ctr.
-> +	 * bits 4..5 in the upper nibble controls BTH, the boosting
-> +	 * amplification for the step-up circuit.
-> +	 * 0 = AVDD + VDDB
-> +	 * 1 = AVDD - AVEE
-> +	 * 2 = AVDD - AVEE + VDDB
-> +	 * 3 = AVDD x 2 - AVEE
-> +	 * The defaults are 4 and 3 yielding 0x34
-> +	 */
-> +	u8 bt4ctr[NT35510_P1_BT4CTR_LEN];
-> +	/**
-> +	 * @vgl: setting for VGL ranging from 0x00 = -2V to 0x0f = -15V in
-> +	 * 1V steps, the default is 0x08 which means -10V
-> +	 */
-> +	u8 vgl[NT35510_P1_VGL_LEN];
-> +	/**
-> +	 * @bt5ctr: setting for boost power control for the VGL step-up
-> +	 * circuit (5)
-> +	 * bits 0..2 in the lower nibble controls LCK, the booster clock
-> +	 * frequency, the values are the same as for PCK in @bt1ctr.
-> +	 * bits 4..5 in the upper nibble controls BTL, the boosting
-> +	 * amplification for the step-up circuit.
-> +	 * 0 = AVEE + VCL
-> +	 * 1 = AVEE - AVDD
-> +	 * 2 = AVEE + VCL - AVDD
-> +	 * 3 = AVEE x 2 - AVDD
-> +	 * The defaults are 3 and 2 yielding 0x32
-> +	 */
-> +	u8 bt5ctr[NT35510_P1_BT5CTR_LEN];
-> +	/**
-> +	 * @vgp: setting for VGP, the positive gamma divider voltages
-> +	 * VGMP the high voltage and VGSP the low voltage.
-> +	 * The first byte contains bit 8 of VGMP and VGSP in bits 4 and 0
-> +	 * The second byte contains bit 0..7 of VGMP
-> +	 * The third byte contains bit 0..7 of VGSP
-> +	 * VGMP 0x00 = 3.0V .. 0x108 = 6.3V in steps of 12.5mV
-> +	 * VGSP 0x00 = 0V .. 0x111 = 3.7V in steps of 12.5mV
-> +	 */
-> +	u8 vgp[NT35510_P1_VGP_LEN];
-> +	/**
-> +	 * @vgn: setting for VGN, the negative gamma divider voltages,
-> +	 * same layout of bytes as @vgp.
-> +	 */
-> +	u8 vgn[NT35510_P1_VGN_LEN];
-> +	/**
-> +	 * @vcmoff: setting the DC VCOM offset voltage
-> +	 * The first byte contains bit 8 of VCM in bit 0 and VCMOFFSEL in bit 4.
-> +	 * The second byte contains bits 0..7 of VCM.
-> +	 * VCMOFFSEL the common voltage offset mode.
-> +	 * VCMOFFSEL 0x00 = VCOM .. 0x01 Gamma.
-> +	 * The default is 0x00.
-> +	 * VCM the VCOM output voltage (VCMOFFSEL = 0) or the internal register
-> +	 * offset for gamma voltage (VCMOFFSEL = 1).
-> +	 * VCM 0x00 = 0V/0 .. 0x118 = 3.5V/280 in steps of 12.5mV/1step
-> +	 * The default is 0x00 = 0V/0.
-> +	 */
-> +	u8 vcmoff[NT35510_P1_VCMOFF_LEN];
-> +	/**
-> +	 * @dopctr: setting optional control for display
-> +	 * ERR bits 0..1 in the first byte is the ERR pin output signal setting.
-> +	 * 0 = Disable, ERR pin output low
-> +	 * 1 = ERR pin output CRC error only
-> +	 * 2 = ERR pin output ECC error only
-> +	 * 3 = ERR pin output CRC and ECC error
-> +	 * The default is 0.
-> +	 * N565 bit 2 in the first byte is the 16-bit/pixel format selection.
-> +	 * 0 = R[4:0] + G[5:3] & G[2:0] + B[4:0]
-> +	 * 1 = G[2:0] + R[4:0] & B[4:0] + G[5:3]
-> +	 * The default is 0.
-> +	 * DIS_EoTP_HS bit 3 in the first byte is "DSI protocol violation" error
-> +	 * reporting.
-> +	 * 0 = reporting when error
-> +	 * 1 = not reporting when error
-> +	 * DSIM bit 4 in the first byte is the video mode data type enable
-> +	 * 0 = Video mode data type disable
-> +	 * 1 = Video mode data type enable
-> +	 * The default is 0.
-> +	 * DSIG bit 5 int the first byte is the generic r/w data type enable
-> +	 * 0 = Generic r/w disable
-> +	 * 1 = Generic r/w enable
-> +	 * The default is 0.
-> +	 * DSITE bit 6 in the first byte is TE line enable
-> +	 * 0 = TE line is disabled
-> +	 * 1 = TE line is enabled
-> +	 * The default is 0.
-> +	 * RAMKP bit 7 in the first byte is the frame memory keep/loss in
-> +	 * sleep-in mode
-> +	 * 0 = contents loss in sleep-in
-> +	 * 1 = contents keep in sleep-in
-> +	 * The default is 0.
-> +	 * CRL bit 1 in the second byte is the source driver data shift
-> +	 * direction selection. This bit is XOR operation with bit RSMX
-> +	 * of 3600h command.
-> +	 * 0 (RMSX = 0) = S1 -> S1440
-> +	 * 0 (RMSX = 1) = S1440 -> S1
-> +	 * 1 (RMSX = 0) = S1440 -> S1
-> +	 * 1 (RMSX = 1) = S1 -> S1440
-> +	 * The default is 0.
-> +	 * CTB bit 2 in the second byte is the vertical scanning direction
-> +	 * selection for gate control signals. This bit is XOR operation
-> +	 * with bit ML of 3600h command.
-> +	 * 0 (ML = 0) = Forward (top -> bottom)
-> +	 * 0 (ML = 1) = Reverse (bottom -> top)
-> +	 * 1 (ML = 0) = Reverse (bottom -> top)
-> +	 * 1 (ML = 1) = Forward (top -> bottom)
-> +	 * The default is 0.
-> +	 * CRGB bit 3 in the second byte is RGB-BGR order selection. This
-> +	 * bit is XOR operation with bit RGB of 3600h command.
-> +	 * 0 (RGB = 0) = RGB/Normal
-> +	 * 0 (RGB = 1) = BGR/RB swap
-> +	 * 1 (RGB = 0) = BGR/RB swap
-> +	 * 1 (RGB = 1) = RGB/Normal
-> +	 * The default is 0.
-> +	 * TE_PWR_SEL bit 4 in the second byte is the TE output voltage
-> +	 * level selection (only valid when DSTB_SEL = 0 or DSTB_SEL = 1,
-> +	 * VSEL = High and VDDI = 1.665~3.3V).
-> +	 * 0 = TE output voltage level is VDDI
-> +	 * 1 = TE output voltage level is VDDA
-> +	 * The default is 0.
-> +	 */
-> +	u8 dopctr[NT35510_P0_DOPCTR_LEN];
-> +	/**
-> +	 * @madctl: Memory data access control
-> +	 * RSMY bit 0 is flip vertical. Flips the display image top to down.
-> +	 * RSMX bit 1 is flip horizontal. Flips the display image left to right.
-> +	 * MH bit 2 is the horizontal refresh order.
-> +	 * RGB bit 3 is the RGB-BGR order.
-> +	 * 0 = RGB color sequence
-> +	 * 1 = BGR color sequence
-> +	 * ML bit 4 is the vertical refresh order.
-> +	 * MV bit 5 is the row/column exchange.
-> +	 * MX bit 6 is the column address order.
-> +	 * MY bit 7 is the row address order.
-> +	 */
-> +	u8 madctl;
-> +	/**
-> +	 * @sdhdtctr: source output data hold time
-> +	 * 0x00..0x3F = 0..31.5us in steps of 0.5us
-> +	 * The default is 0x05 = 2.5us.
-> +	 */
-> +	u8 sdhdtctr;
-> +	/**
-> +	 * @gseqctr: EQ control for gate signals
-> +	 * GFEQ_XX[3:0]: time setting of EQ step for falling edge in steps
-> +	 * of 0.5us.
-> +	 * The default is 0x07 = 3.5us
-> +	 * GREQ_XX[7:4]: time setting of EQ step for rising edge in steps
-> +	 * of 0.5us.
-> +	 * The default is 0x07 = 3.5us
-> +	 */
-> +	u8 gseqctr[NT35510_P0_GSEQCTR_LEN];
-> +	/**
-> +	 * @sdeqctr: Source driver control settings, first byte is
-> +	 * 0 for mode 1 and 1 for mode 2. Mode 1 uses two steps and
-> +	 * mode 2 uses three steps meaning EQS3 is not used in mode
-> +	 * 1. Mode 2 is default. The last three parameters are EQS1, EQS2
-> +	 * and EQS3, setting the rise time for each equalizer step:
-> +	 * 0x00 = 0.0 us to 0x0f = 7.5 us in steps of 0.5us. The default
-> +	 * is 0x07 = 3.5 us.
-> +	 */
-> +	u8 sdeqctr[NT35510_P0_SDEQCTR_LEN];
-> +	/**
-> +	 * @sdvpctr: power/voltage behaviour during vertical porch time
-> +	 */
-> +	u8 sdvpctr;
-> +	/**
-> +	 * @t1: the number of pixel clocks on one scanline, range
-> +	 * 0x100 (258 ticks) .. 0x3FF (1024 ticks) so the value + 1
-> +	 * clock ticks.
-> +	 */
-> +	u16 t1;
-> +	/**
-> +	 * @vbp: vertical back porch toward the PANEL note: not toward
-> +	 * the DSI host; these are separate interfaces, in from DSI host
-> +	 * and out to the panel.
-> +	 */
-> +	u8 vbp;
-> +	/**
-> +	 * @vfp: vertical front porch toward the PANEL.
-> +	 */
-> +	u8 vfp;
-> +	/**
-> +	 * @psel: pixel clock divisor: 0 = 1, 1 = 2, 2 = 4, 3 = 8.
-> +	 */
-> +	u8 psel;
-> +	/**
-> +	 * @dpmctr12: Display timing control 12
-> +	 * Byte 1 bit 4 selects LVGL voltage level: 0 = VGLX, 1 = VGL_REG
-> +	 * Byte 1 bit 1 selects gate signal mode: 0 = non-overlap, 1 = overlap
-> +	 * Byte 1 bit 0 selects output signal control R/L swap, 0 = normal
-> +	 * 1 = swap all O->E, L->R
-> +	 * Byte 2 is CLW delay clock for CK O/E and CKB O/E signals:
-> +	 * 0x00 = 0us .. 0xFF = 12.75us in 0.05us steps
-> +	 * Byte 3 is FTI_H0 delay time for STP O/E signals:
-> +	 * 0x00 = 0us .. 0xFF = 12.75us in 0.05us steps
-> +	 */
-> +	u8 dpmctr12[NT35510_P0_DPMCTR12_LEN];
-> +	/**
-> +	 * @gamma_corr_pos_r: Red gamma correction parameters, positive
-> +	 */
-> +	u8 gamma_corr_pos_r[NT35510_P1_GAMMA_LEN];
-> +	/**
-> +	 * @gamma_corr_pos_g: Green gamma correction parameters, positive
-> +	 */
-> +	u8 gamma_corr_pos_g[NT35510_P1_GAMMA_LEN];
-> +	/**
-> +	 * @gamma_corr_pos_b: Blue gamma correction parameters, positive
-> +	 */
-> +	u8 gamma_corr_pos_b[NT35510_P1_GAMMA_LEN];
-> +	/**
-> +	 * @gamma_corr_neg_r: Red gamma correction parameters, negative
-> +	 */
-> +	u8 gamma_corr_neg_r[NT35510_P1_GAMMA_LEN];
-> +	/**
-> +	 * @gamma_corr_neg_g: Green gamma correction parameters, negative
-> +	 */
-> +	u8 gamma_corr_neg_g[NT35510_P1_GAMMA_LEN];
-> +	/**
-> +	 * @gamma_corr_neg_b: Blue gamma correction parameters, negative
-> +	 */
-> +	u8 gamma_corr_neg_b[NT35510_P1_GAMMA_LEN];
-> +	/**
-> +	 * @wrdisbv: write display brightness
-> +	 * 0x00 value means the lowest brightness and 0xff value means
-> +	 * the highest brightness.
-> +	 * The default is 0x00.
-> +	 */
-> +	u8 wrdisbv;
-> +	/**
-> +	 * @wrctrld: write control display
-> +	 * G bit 0 selects gamma curve: 0 = Manual, 1 = Automatic
-> +	 * DB bit 1 selects display brightness: 0 = Manual, 1 = Automatic
-> +	 * BL bit 2 controls backlight control: 0 = Off, 1 = On
-> +	 * DD bit 3 controls display dimming: 0 = Off, 1 = On
-> +	 * A bit 4 controls LABC block: 0 = Off, 1 = On
-> +	 * BCTRL bit 5 controls brightness block: 0 = Off, 1 = On
-> +	 */
-> +	u8 wrctrld;
-> +	/**
-> +	 * @wrcabc: write content adaptive brightness control
-> +	 * There is possible to use 4 different modes for content adaptive
-> +	 * image functionality:
-> +	 * 0: Off
-> +	 * 1: User Interface Image (UI-Mode)
-> +	 * 2: Still Picture Image (Still-Mode)
-> +	 * 3: Moving Picture Image (Moving-Mode)
-> +	 * The default is 0
-> +	 */
-> +	u8 wrcabc;
-> +	/**
-> +	 * @wrcabcmb: write CABC minimum brightness
-> +	 * Set the minimum brightness value of the display for CABC
-> +	 * function.
-> +	 * 0x00 value means the lowest brightness for CABC and 0xff
-> +	 * value means the highest brightness for CABC.
-> +	 * The default is 0x00.
-> +	 */
-> +	u8 wrcabcmb;
-> +};
-> +
-> +/**
-> + * struct nt35510 - state container for the NT35510 panel
-> + */
-> +struct nt35510_panel_priv {
-> +	const struct nt35510_config *conf;
-> +	struct udevice *vdd_reg;
-> +	struct udevice *vddi_reg;
-> +	struct gpio_desc *reset;
-> +};
-> +
-> +/* Manufacturer command has strictly this byte sequence */
-> +static const u8 nt35510_mauc_mtp_read_param[] = { 0xAA, 0x55, 0x25, 0x01 };
-> +static const u8 nt35510_mauc_mtp_read_setting[] = { 0x01, 0x02, 0x00, 0x20,
-> +						    0x33, 0x13, 0x00, 0x40,
-> +						    0x00, 0x00, 0x23, 0x02 };
-> +static const u8 nt35510_mauc_select_page_0[] = { 0x55, 0xAA, 0x52, 0x08, 0x00 };
-> +static const u8 nt35510_mauc_select_page_1[] = { 0x55, 0xAA, 0x52, 0x08, 0x01 };
-> +static const u8 nt35510_vgh_on[] = { 0x01 };
-> +
-> +#define NT35510_ROTATE_0_SETTING	0x02
-> +#define NT35510_ROTATE_180_SETTING	0x00
-> +
-> +static inline struct mipi_dsi_device *to_mipi_dsi_device(struct udevice *dev)
-> +{
-> +	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-> +
-> +	return plat->device;
-> +}
-> +
-> +static inline const struct nt35510_config *to_panel_config(struct udevice *dev)
-> +{
-> +	struct nt35510_panel_priv *priv = dev_get_priv(dev);
-> +
-> +	return priv->conf;
-> +}
-> +
-> +static int nt35510_send_long(struct udevice *dev, u8 cmd, u8 cmdlen,
-> +			     const u8 *seq)
-> +{
-> +	struct mipi_dsi_device *dsi = to_mipi_dsi_device(dev);
-> +	const u8 *seqp = seq;
-> +	int cmdwritten = 0;
-> +	int chunk = cmdlen;
-> +	int ret;
-> +
-> +	if (chunk > 15)
-> +		chunk = 15;
-> +	ret = mipi_dsi_dcs_write(dsi, cmd, seqp, chunk);
-> +	if (ret < 0) {
-> +		dev_err(dev, "error sending DCS command seq cmd %02x\n", cmd);
-> +		return ret;
-> +	}
-> +	cmdwritten += chunk;
-> +	seqp += chunk;
-> +
-> +	while (cmdwritten < cmdlen) {
-> +		chunk = cmdlen - cmdwritten;
-> +		if (chunk > 15)
-> +			chunk = 15;
-> +		ret = mipi_dsi_generic_write(dsi, seqp, chunk);
-> +		if (ret < 0) {
-> +			dev_err(dev, "error sending generic write seq %02x\n", cmd);
-> +			return ret;
-> +		}
-> +		cmdwritten += chunk;
-> +		seqp += chunk;
-> +	}
-> +	dev_dbg(dev, "sent command %02x %02x bytes\n", cmd, cmdlen);
-> +	return 0;
-> +}
-> +
-> +static int nt35510_setup_power(struct udevice *dev)
-> +{
-> +	const struct nt35510_config *conf = to_panel_config(dev);
-> +	int ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_SETAVDD,
-> +				NT35510_P1_AVDD_LEN,
-> +				conf->avdd);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_BT1CTR,
-> +				NT35510_P1_BT1CTR_LEN,
-> +				conf->bt1ctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_SETAVEE,
-> +				NT35510_P1_AVEE_LEN,
-> +				conf->avee);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_BT2CTR,
-> +				NT35510_P1_BT2CTR_LEN,
-> +				conf->bt2ctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_SETVCL,
-> +				NT35510_P1_VCL_LEN,
-> +				conf->vcl);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_BT3CTR,
-> +				NT35510_P1_BT3CTR_LEN,
-> +				conf->bt3ctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_SETVGH,
-> +				NT35510_P1_VGH_LEN,
-> +				conf->vgh);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_BT4CTR,
-> +				NT35510_P1_BT4CTR_LEN,
-> +				conf->bt4ctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_VGHCTR,
-> +				ARRAY_SIZE(nt35510_vgh_on),
-> +				nt35510_vgh_on);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_SETVGL,
-> +				NT35510_P1_VGL_LEN,
-> +				conf->vgl);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_BT5CTR,
-> +				NT35510_P1_BT5CTR_LEN,
-> +				conf->bt5ctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_SETVGP,
-> +				NT35510_P1_VGP_LEN,
-> +				conf->vgp);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P1_SETVGN,
-> +				NT35510_P1_VGN_LEN,
-> +				conf->vgn);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (conf->cmds & NT35510_CMD_SETVCMOFF) {
-> +		ret = nt35510_send_long(dev, NT35510_P1_SETVCMOFF,
-> +					NT35510_P1_VCMOFF_LEN,
-> +					conf->vcmoff);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	/* Typically 10 ms */
-> +	mdelay(10);
-> +
-> +	return 0;
-> +}
-> +
-> +static int nt35510_setup_display(struct udevice *dev)
-> +{
-> +	struct mipi_dsi_device *dsi = to_mipi_dsi_device(dev);
-> +	const struct nt35510_config *conf = to_panel_config(dev);
-> +	u8 dpfrctr[NT35510_P0_DPFRCTR1_LEN];
-> +	int ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P0_DOPCTR,
-> +				NT35510_P0_DOPCTR_LEN,
-> +				conf->dopctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = mipi_dsi_dcs_write(dsi, MIPI_DCS_SET_ADDRESS_MODE, &conf->madctl,
-> +				 sizeof(conf->madctl));
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = mipi_dsi_dcs_write(dsi, NT35510_P0_SDHDTCTR, &conf->sdhdtctr,
-> +				 sizeof(conf->sdhdtctr));
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P0_GSEQCTR,
-> +				NT35510_P0_GSEQCTR_LEN,
-> +				conf->gseqctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, NT35510_P0_SDEQCTR,
-> +				NT35510_P0_SDEQCTR_LEN,
-> +				conf->sdeqctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = mipi_dsi_dcs_write(dsi, NT35510_P0_SDVPCTR,
-> +				 &conf->sdvpctr, 1);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	/*
-> +	 * Display timing control for active and idle off mode:
-> +	 * the first byte contains
-> +	 * the two high bits of T1A and second byte the low 8 bits, and
-> +	 * the valid range is 0x100 (257) to 0x3ff (1023) representing
-> +	 * 258..1024 (+1) pixel clock ticks for one scanline. At 20MHz pixel
-> +	 * clock this covers the range of 12.90us .. 51.20us in steps of
-> +	 * 0.05us, the default is 0x184 (388) representing 389 ticks.
-> +	 * The third byte is VBPDA, vertical back porch display active
-> +	 * and the fourth VFPDA, vertical front porch display active,
-> +	 * both given in number of scanlines in the range 0x02..0xff
-> +	 * for 2..255 scanlines. The fifth byte is 2 bits selecting
-> +	 * PSEL for active and idle off mode, how much the 20MHz clock
-> +	 * is divided by 0..3.  This needs to be adjusted to get the right
-> +	 * frame rate.
-> +	 */
-> +	dpfrctr[0] = (conf->t1 >> 8) & 0xFF;
-> +	dpfrctr[1] = conf->t1 & 0xFF;
-> +	/* Vertical back porch */
-> +	dpfrctr[2] = conf->vbp;
-> +	/* Vertical front porch */
-> +	dpfrctr[3] = conf->vfp;
-> +	dpfrctr[4] = conf->psel;
-> +	ret = nt35510_send_long(dev, NT35510_P0_DPFRCTR1,
-> +				NT35510_P0_DPFRCTR1_LEN,
-> +				dpfrctr);
-> +	if (ret)
-> +		return ret;
-> +	/* For idle and partial idle off mode we decrease front porch by one */
-> +	dpfrctr[3]--;
-> +	ret = nt35510_send_long(dev, NT35510_P0_DPFRCTR2,
-> +				NT35510_P0_DPFRCTR2_LEN,
-> +				dpfrctr);
-> +	if (ret)
-> +		return ret;
-> +	ret = nt35510_send_long(dev, NT35510_P0_DPFRCTR3,
-> +				NT35510_P0_DPFRCTR3_LEN,
-> +				dpfrctr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Enable TE on vblank */
-> +	ret = mipi_dsi_dcs_set_tear_on(dsi, MIPI_DSI_DCS_TEAR_MODE_VBLANK);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Turn on the pads? */
-> +	ret = nt35510_send_long(dev, NT35510_P0_DPMCTR12,
-> +				NT35510_P0_DPMCTR12_LEN,
-> +				conf->dpmctr12);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return 0;
-> +}
-> +
-> +static int nt35510_read_id(struct udevice *dev)
-> +{
-> +	struct mipi_dsi_device *dsi = to_mipi_dsi_device(dev);
-> +	u8 id1, id2, id3;
-> +	int ret;
-> +
-> +	ret = mipi_dsi_dcs_read(dsi, MCS_CMD_READ_ID1, &id1, 1);
-> +	if (ret < 0) {
-> +		dev_err(dev, "could not read MTP ID1\n");
-> +		return ret;
-> +	}
-> +
-> +	ret = mipi_dsi_dcs_read(dsi, MCS_CMD_READ_ID2, &id2, 1);
-> +	if (ret < 0) {
-> +		dev_err(dev, "could not read MTP ID2\n");
-> +		return ret;
-> +	}
-> +
-> +	ret = mipi_dsi_dcs_read(dsi, MCS_CMD_READ_ID3, &id3, 1);
-> +	if (ret < 0) {
-> +		dev_err(dev, "could not read MTP ID3\n");
-> +		return ret;
-> +	}
-> +
-> +	/*
-> +	 * Multi-Time Programmable (?) memory contains manufacturer
-> +	 * ID (e.g. Hydis 0x55), driver ID (e.g. NT35510 0xc0) and
-> +	 * version.
-> +	 */
-> +	dev_info(dev, "MTP ID manufacturer: %02x version: %02x driver: %02x\n",
-> +		 id1, id2, id3);
-> +
-> +	return 0;
-> +}
-> +
-> +static int nt35510_init_sequence(struct udevice *dev)
-> +{
-> +	const struct nt35510_config *conf = to_panel_config(dev);
-> +	int ret;
-> +
-> +	ret = nt35510_send_long(dev, MCS_CMD_MTP_READ_PARAM,
-> +				ARRAY_SIZE(nt35510_mauc_mtp_read_param),
-> +				nt35510_mauc_mtp_read_param);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_send_long(dev, MCS_CMD_MTP_READ_SETTING,
-> +				ARRAY_SIZE(nt35510_mauc_mtp_read_setting),
-> +				nt35510_mauc_mtp_read_setting);
-> +	if (ret)
-> +		return ret;
-> +
-> +	nt35510_read_id(dev);
-> +
-> +	/* Set up stuff in  manufacturer control, page 1 */
-> +	ret = nt35510_send_long(dev, MCS_CMD_MAUCCTR,
-> +				ARRAY_SIZE(nt35510_mauc_select_page_1),
-> +				nt35510_mauc_select_page_1);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_setup_power(dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (conf->cmds & NT35510_CMD_CORRECT_GAMMA) {
-> +		ret = nt35510_send_long(dev, NT35510_P1_SET_GAMMA_RED_POS,
-> +					NT35510_P1_GAMMA_LEN,
-> +					conf->gamma_corr_pos_r);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = nt35510_send_long(dev, NT35510_P1_SET_GAMMA_GREEN_POS,
-> +					NT35510_P1_GAMMA_LEN,
-> +					conf->gamma_corr_pos_g);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = nt35510_send_long(dev, NT35510_P1_SET_GAMMA_BLUE_POS,
-> +					NT35510_P1_GAMMA_LEN,
-> +					conf->gamma_corr_pos_b);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = nt35510_send_long(dev, NT35510_P1_SET_GAMMA_RED_NEG,
-> +					NT35510_P1_GAMMA_LEN,
-> +					conf->gamma_corr_neg_r);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = nt35510_send_long(dev, NT35510_P1_SET_GAMMA_GREEN_NEG,
-> +					NT35510_P1_GAMMA_LEN,
-> +					conf->gamma_corr_neg_g);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = nt35510_send_long(dev, NT35510_P1_SET_GAMMA_BLUE_NEG,
-> +					NT35510_P1_GAMMA_LEN,
-> +					conf->gamma_corr_neg_b);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	/* Set up stuff in  manufacturer control, page 0 */
-> +	ret = nt35510_send_long(dev, MCS_CMD_MAUCCTR,
-> +				ARRAY_SIZE(nt35510_mauc_select_page_0),
-> +				nt35510_mauc_select_page_0);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = nt35510_setup_display(dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return 0;
-> +}
-> +
-> +static int nt35510_panel_enable_backlight(struct udevice *dev)
-> +{
-> +	struct mipi_dsi_device *dsi = to_mipi_dsi_device(dev);
-> +	const struct nt35510_config *conf = to_panel_config(dev);
-> +	int ret;
-> +
-> +	ret = mipi_dsi_attach(dsi);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = nt35510_init_sequence(dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Exit sleep mode */
-> +	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
-> +	if (ret) {
-> +		dev_err(dev, "failed to exit sleep mode (%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	/* Up to 120 ms */
-> +	mdelay(120);
-> +
-> +	if (conf->cmds & NT35510_CMD_CONTROL_DISPLAY) {
-> +		ret = mipi_dsi_dcs_write(dsi, MIPI_DCS_WRITE_CONTROL_DISPLAY,
-> +					 &conf->wrctrld,
-> +					 sizeof(conf->wrctrld));
-> +		if (ret < 0)
-> +			return ret;
-> +
-> +		ret = mipi_dsi_dcs_write(dsi, MIPI_DCS_WRITE_POWER_SAVE,
-> +					 &conf->wrcabc,
-> +					 sizeof(conf->wrcabc));
-> +		if (ret < 0)
-> +			return ret;
-> +
-> +		ret = mipi_dsi_dcs_write(dsi, MIPI_DCS_SET_CABC_MIN_BRIGHTNESS,
-> +					 &conf->wrcabcmb,
-> +					 sizeof(conf->wrcabcmb));
-> +		if (ret < 0)
-> +			return ret;
-> +	}
-> +
-> +	ret = mipi_dsi_dcs_set_display_on(dsi);
-> +	if (ret) {
-> +		dev_err(dev, "failed to turn display on (%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	/* Some 10 ms */
-> +	mdelay(10);
-> +
-> +	ret = mipi_dsi_dcs_set_display_brightness(dsi, 0x7f);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	/* Need to wait a few time before sending the first image */
-> +	mdelay(10);
-> +
-> +	return 0;
-> +}
-> +
-> +static int nt35510_panel_get_display_timing(struct udevice *dev,
-> +					    struct display_timing *timings)
-> +{
-> +	struct nt35510_panel_priv *priv = dev_get_priv(dev);
-> +
-> +	memcpy(timings, &priv->conf->timings, sizeof(*timings));
-> +	return 0;
-> +}
-> +
-> +static int nt35510_panel_of_to_plat(struct udevice *dev)
-> +{
-> +	struct nt35510_panel_priv *priv = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
-> +		ret =  device_get_supply_regulator(dev, "vdd-supply",
-> +						   &priv->vdd_reg);
-> +		if (ret) {
-> +			dev_err(dev, "Warning: cannot get vdd supply\n");
-> +			return ret;
-> +		}
-> +
-> +		ret =  device_get_supply_regulator(dev, "vddi-supply",
-> +						   &priv->vddi_reg);
-> +		if (ret) {
-> +			dev_err(dev, "Warning: cannot get vddi supply\n");
-> +			return ret;
-> +		}
-> +	}
-> +
-> +	priv->reset =
-> +		devm_gpiod_get_optional(dev, "reset",
-> +					GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> +	if (IS_ERR(priv->reset)) {
-> +		dev_err(dev, "error getting RESET GPIO\n");
-> +		return PTR_ERR(priv->reset);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int nt35510_panel_probe(struct udevice *dev)
-> +{
-> +	struct nt35510_panel_priv *priv = dev_get_priv(dev);
-> +	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-> +	int ret;
-> +
-> +	priv->conf = (struct nt35510_config *)dev_get_driver_data(dev);
-> +	if (!priv->conf) {
-> +		dev_err(dev, "missing device configuration\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
-> +		dev_dbg(dev, "enable regulator '%s'\n", priv->vdd_reg->name);
-> +		ret = regulator_set_enable(priv->vdd_reg, true);
-> +		if (ret)
-> +			return ret;
-> +
-> +		dev_dbg(dev, "enable regulator '%s'\n", priv->vddi_reg->name);
-> +		ret = regulator_set_enable(priv->vddi_reg, true);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	/* Toggle RESET in accordance with datasheet page 370 */
-> +	if (priv->reset) {
-> +		dm_gpio_set_value(priv->reset, 1);
-> +		/* Active min 10 us according to datasheet, let's say 20 */
-> +		mdelay(1);
-> +		dm_gpio_set_value(priv->reset, 0);
-> +		/*
-> +		 * 5 ms during sleep mode, 120 ms during sleep out mode
-> +		 * according to datasheet, let's use 15 ms.
-> +		 */
-> +		mdelay(150);
-> +	}
-> +
-> +	plat->lanes = 2;
-> +	plat->format = MIPI_DSI_FMT_RGB888;
-> +	plat->mode_flags = priv->conf->mode_flags;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct panel_ops nt35510_panel_ops = {
-> +	.enable_backlight = nt35510_panel_enable_backlight,
-> +	.get_display_timing = nt35510_panel_get_display_timing,
-> +};
-> +
-> +/*
-> + * These gamma correction values are 10bit tuples, so only bits 0 and 1 is
-> + * ever used in the first byte. They form a positive and negative gamma
-> + * correction curve for each color, values must be strictly higher for each
-> + * step on the curve. As can be seen these default curves goes from 0x0001
-> + * to 0x03FE.
-> + */
-> +#define NT35510_GAMMA_POS_DEFAULT 0x00, 0x01, 0x00, 0x43, 0x00, \
-> +		0x6B, 0x00, 0x87, 0x00, 0xA3, 0x00, 0xCE, 0x00, 0xF1, 0x01, \
-> +		0x27, 0x01, 0x53, 0x01, 0x98, 0x01, 0xCE, 0x02, 0x22, 0x02, \
-> +		0x83, 0x02, 0x78, 0x02, 0x9E, 0x02, 0xDD, 0x03, 0x00, 0x03, \
-> +		0x2E, 0x03, 0x54, 0x03, 0x7F, 0x03, 0x95, 0x03, 0xB3, 0x03, \
-> +		0xC2, 0x03, 0xE1, 0x03, 0xF1, 0x03, 0xFE
-> +
-> +#define NT35510_GAMMA_NEG_DEFAULT 0x00, 0x01, 0x00, 0x43, 0x00, \
-> +		0x6B, 0x00, 0x87, 0x00, 0xA3, 0x00, 0xCE, 0x00, 0xF1, 0x01, \
-> +		0x27, 0x01, 0x53, 0x01, 0x98, 0x01, 0xCE, 0x02, 0x22, 0x02, \
-> +		0x43, 0x02, 0x50, 0x02, 0x9E, 0x02, 0xDD, 0x03, 0x00, 0x03, \
-> +		0x2E, 0x03, 0x54, 0x03, 0x7F, 0x03, 0x95, 0x03, 0xB3, 0x03, \
-> +		0xC2, 0x03, 0xE1, 0x03, 0xF1, 0x03, 0xFE
-> +
-> +/*
-> + * The Hydis HVA40WV1 panel
-> + */
-> +static const struct nt35510_config nt35510_hydis_hva40wv1 = {
-> +	.width_mm = 52,
-> +	.height_mm = 86,
-> +	/**
-> +	 * As the Hydis panel is used in command mode, the porches etc
-> +	 * are settings programmed internally into the NT35510 controller
-> +	 * and generated toward the physical display. As the panel is not
-> +	 * used in video mode, these are not really exposed to the DSI
-> +	 * host.
-> +	 *
-> +	 * Display frame rate control:
-> +	 * Frame rate = (20 MHz / 1) / (389 * (7 + 50 + 800)) ~= 60 Hz
-> +	 */
-> +	.timings = {
-> +		/* The internal pixel clock of the NT35510 is 20 MHz */
-> +		.pixelclock.typ = 20000,
-> +		.hactive.typ = 480,
-> +		.hfront_porch.typ = 2,
-> +		.hsync_len.typ = 0,
-> +		.hback_porch.typ = 5,
-> +		.vactive.typ = 800,
-> +		.vfront_porch.typ = 2,
-> +		.vsync_len.typ = 0,
-> +		.vback_porch.typ = 5,
-> +	},
-> +	.mode_flags = MIPI_DSI_CLOCK_NON_CONTINUOUS,
-> +	.cmds = NT35510_CMD_CORRECT_GAMMA,
-> +	/* 0x09: AVDD = 5.6V */
-> +	.avdd = { 0x09, 0x09, 0x09 },
-> +	/* 0x34: PCK = Hsync/2, BTP = 2 x VDDB */
-> +	.bt1ctr = { 0x34, 0x34, 0x34 },
-> +	/* 0x09: AVEE = -5.6V */
-> +	.avee = { 0x09, 0x09, 0x09 },
-> +	/* 0x24: NCK = Hsync/2, BTN =  -2 x VDDB */
-> +	.bt2ctr = { 0x24, 0x24, 0x24 },
-> +	/* VBCLA: -2.5V, VBCLB: -2.5V, VBCLC: -2.5V */
-> +	.vcl = { 0x00, 0x00, 0x00 },
-> +	/* 0x24: CLCK = Hsync/2, BTN =  -1 x VDDB */
-> +	.bt3ctr = { 0x24, 0x24, 0x24 },
-> +	/* 0x05 = 12V */
-> +	.vgh = { 0x05, 0x05, 0x05 },
-> +	/* 0x24: NCKA = Hsync/2, VGH = 2 x AVDD - AVEE */
-> +	.bt4ctr = { 0x24, 0x24, 0x24 },
-> +	/* 0x0B = -13V */
-> +	.vgl = { 0x0B, 0x0B, 0x0B },
-> +	/* 0x24: LCKA = Hsync, VGL = AVDD + VCL - AVDD */
-> +	.bt5ctr = { 0x24, 0x24, 0x24 },
-> +	/* VGMP: 0x0A3 = 5.0375V, VGSP = 0V */
-> +	.vgp = { 0x00, 0xA3, 0x00 },
-> +	/* VGMP: 0x0A3 = 5.0375V, VGSP = 0V */
-> +	.vgn = { 0x00, 0xA3, 0x00 },
-> +	/* VCMOFFSEL = VCOM voltage offset mode, VCM = 0V */
-> +	.vcmoff = { 0x00, 0x00 },
-> +	/* Enable TE, EoTP and RGB pixel format */
-> +	.dopctr = { NT35510_DOPCTR_0_DSITE | NT35510_DOPCTR_0_EOTP |
-> +		    NT35510_DOPCTR_0_N565, NT35510_DOPCTR_1_CTB },
-> +	.madctl = NT35510_ROTATE_0_SETTING,
-> +	/* 0x0A: SDT = 5 us */
-> +	.sdhdtctr = 0x0A,
-> +	/* EQ control for gate signals, 0x00 = 0 us */
-> +	.gseqctr = { 0x00, 0x00 },
-> +	/* SDEQCTR: source driver EQ mode 2, 2.5 us rise time on each step */
-> +	.sdeqctr = { 0x01, 0x05, 0x05, 0x05 },
-> +	/* SDVPCTR: Normal operation off color during v porch */
-> +	.sdvpctr = 0x01,
-> +	/* T1: number of pixel clocks on one scanline: 0x184 = 389 clocks */
-> +	.t1 = 0x0184,
-> +	/* VBP: vertical back porch toward the panel */
-> +	.vbp = 7,
-> +	/* VFP: vertical front porch toward the panel */
-> +	.vfp = 50,
-> +	/* PSEL: divide pixel clock 20MHz with 1 (no clock downscaling) */
-> +	.psel = 0,
-> +	/* DPTMCTR12: 0x03: LVGL = VGLX, overlap mode, swap R->L O->E */
-> +	.dpmctr12 = { 0x03, 0x00, 0x00, },
-> +	/* Default gamma correction values */
-> +	.gamma_corr_pos_r = { NT35510_GAMMA_POS_DEFAULT },
-> +	.gamma_corr_pos_g = { NT35510_GAMMA_POS_DEFAULT },
-> +	.gamma_corr_pos_b = { NT35510_GAMMA_POS_DEFAULT },
-> +	.gamma_corr_neg_r = { NT35510_GAMMA_NEG_DEFAULT },
-> +	.gamma_corr_neg_g = { NT35510_GAMMA_NEG_DEFAULT },
-> +	.gamma_corr_neg_b = { NT35510_GAMMA_NEG_DEFAULT },
-> +};
-> +
-> +static const struct nt35510_config nt35510_frida_frd400b25025 = {
-> +	.width_mm = 52,
-> +	.height_mm = 86,
-> +	.timings = {
-> +		.pixelclock.typ		= 23000000,
-> +		.hactive.typ		= 480,
-> +		.hfront_porch.typ	= 34,
-> +		.hback_porch.typ	= 34,
-> +		.hsync_len.typ		= 2,
-> +		.vactive.typ		= 800,
-> +		.vfront_porch.typ	= 15,
-> +		.vback_porch.typ	= 15,
-> +		.vsync_len.typ		= 12,
-> +	},
-> +	.mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST |
-> +			MIPI_DSI_MODE_LPM,
-> +	.cmds = NT35510_CMD_CONTROL_DISPLAY | NT35510_CMD_SETVCMOFF,
-> +	/* 0x03: AVDD = 6.2V */
-> +	.avdd = { 0x03, 0x03, 0x03 },
-> +	/* 0x46: PCK = 2 x Hsync, BTP = 2.5 x VDDB */
-> +	.bt1ctr = { 0x46, 0x46, 0x46 },
-> +	/* 0x03: AVEE = -6.2V */
-> +	.avee = { 0x03, 0x03, 0x03 },
-> +	/* 0x36: PCK = 2 x Hsync, BTP =  2 x VDDB */
-> +	.bt2ctr = { 0x36, 0x36, 0x36 },
-> +	/* VBCLA: -2.5V, VBCLB: -2.5V, VBCLC: -3.5V */
-> +	.vcl = { 0x00, 0x00, 0x02 },
-> +	/* 0x26: CLCK = 2 x Hsync, BTN =  -1 x VDDB */
-> +	.bt3ctr = { 0x26, 0x26, 0x26 },
-> +	/* 0x09 = 16V */
-> +	.vgh = { 0x09, 0x09, 0x09 },
-> +	/* 0x36: HCK = 2 x Hsync, VGH = 2 x AVDD - AVEE */
-> +	.bt4ctr = { 0x36, 0x36, 0x36 },
-> +	/* 0x08 = -10V */
-> +	.vgl = { 0x08, 0x08, 0x08 },
-> +	/* 0x26: LCK = 2 x Hsync, VGL = AVDD + VCL - AVDD */
-> +	.bt5ctr = { 0x26, 0x26, 0x26 },
-> +	/* VGMP: 0x080 = 4.6V, VGSP = 0V */
-> +	.vgp = { 0x00, 0x80, 0x00 },
-> +	/* VGMP: 0x080 = 4.6V, VGSP = 0V */
-> +	.vgn = { 0x00, 0x80, 0x00 },
-> +	/* VCMOFFSEL = VCOM voltage offset mode, VCM = -1V */
-> +	.vcmoff = { 0x00, 0x50 },
-> +	.dopctr = { NT35510_DOPCTR_0_RAMKP | NT35510_DOPCTR_0_DSITE |
-> +		NT35510_DOPCTR_0_DSIG | NT35510_DOPCTR_0_DSIM |
-> +		NT35510_DOPCTR_0_EOTP | NT35510_DOPCTR_0_N565, 0 },
-> +	.madctl = NT35510_ROTATE_180_SETTING,
-> +	/* 0x03: SDT = 1.5 us */
-> +	.sdhdtctr = 0x03,
-> +	/* EQ control for gate signals, 0x00 = 0 us */
-> +	.gseqctr = { 0x00, 0x00 },
-> +	/* SDEQCTR: source driver EQ mode 2, 1 us rise time on each step */
-> +	.sdeqctr = { 0x01, 0x02, 0x02, 0x02 },
-> +	/* SDVPCTR: Normal operation off color during v porch */
-> +	.sdvpctr = 0x01,
-> +	/* T1: number of pixel clocks on one scanline: 0x184 = 389 clocks */
-> +	.t1 = 0x0184,
-> +	/* VBP: vertical back porch toward the panel */
-> +	.vbp = 0x1C,
-> +	/* VFP: vertical front porch toward the panel */
-> +	.vfp = 0x1C,
-> +	/* PSEL: divide pixel clock 23MHz with 1 (no clock downscaling) */
-> +	.psel = 0,
-> +	/* DPTMCTR12: 0x03: LVGL = VGLX, overlap mode, swap R->L O->E */
-> +	.dpmctr12 = { 0x03, 0x00, 0x00, },
-> +	/* write display brightness */
-> +	.wrdisbv = 0x7f,
-> +	/* write control display */
-> +	.wrctrld = NT35510_WRCTRLD_BCTRL | NT35510_WRCTRLD_DD |
-> +			NT35510_WRCTRLD_BL,
-> +	/* write content adaptive brightness control */
-> +	.wrcabc = NT35510_WRCABC_STILL_MODE,
-> +	/* write CABC minimum brightness */
-> +	.wrcabcmb = 0xff,
-> +};
-> +
-> +static const struct udevice_id nt35510_panel_ids[] = {
-> +	{
-> +		.compatible = "frida,frd400b25025",
-> +		.data = (ulong)&nt35510_frida_frd400b25025,
-> +	},
-> +	{
-> +		.compatible = "hydis,hva40wv1",
-> +		.data = (ulong)&nt35510_hydis_hva40wv1,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(nt35510_panel) = {
-> +	.name = "nt35510_panel",
-> +	.id = UCLASS_PANEL,
-> +	.of_match = nt35510_panel_ids,
-> +	.ops = &nt35510_panel_ops,
-> +	.of_to_plat = nt35510_panel_of_to_plat,
-> +	.probe = nt35510_panel_probe,
-> +	.plat_auto = sizeof(struct mipi_dsi_panel_plat),
-> +	.priv_auto = sizeof(struct nt35510_panel_priv),
-> +};
+>   .azure-pipelines.yml    | 8 ++++----
+>   .gitlab-ci.yml          | 6 +++---
+>   tools/docker/Dockerfile | 8 ++++----
+>   3 files changed, 11 insertions(+), 11 deletions(-)
+>
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index ba351b9802d1..4d3a5800beb3 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -2,7 +2,7 @@ variables:
+>     windows_vm: windows-2022
+>     ubuntu_vm: ubuntu-24.04
+>     macos_vm: macOS-14
+> -  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec=
+2024
+> +  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240911.1-28Jan=
+2025
+>     # Add '-u 0' options for Azure pipelines, otherwise we get "permissi=
+on
+>     # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontain=
+er",
+>     # since our $(ci_runner_image) user is not root.
+> @@ -324,16 +324,16 @@ stages:
+>             TEST_PY_TEST_SPEC: "version"
+>           sandbox_clang:
+>             TEST_PY_BD: "sandbox"
+> -          OVERRIDE: "-O clang-17"
+> +          OVERRIDE: "-O clang-18"
+>           sandbox_clang_asan:
+>             TEST_PY_BD: "sandbox"
+> -          OVERRIDE: "-O clang-17 -a ASAN"
+> +          OVERRIDE: "-O clang-18 -a ASAN"
+>             TEST_PY_TEST_SPEC: "version"
+>           sandbox64:
+>             TEST_PY_BD: "sandbox64"
+>           sandbox64_clang:
+>             TEST_PY_BD: "sandbox64"
+> -          OVERRIDE: "-O clang-17"
+> +          OVERRIDE: "-O clang-18"
+>           sandbox_spl:
+>             TEST_PY_BD: "sandbox_spl"
+>             TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_=
+spl"
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 74dc05d58a70..c3c38e24fd1d 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -20,7 +20,7 @@ workflow:
+>
+>   # Grab our configured image.  The source for this is found
+>   # in the u-boot tree at tools/docker/Dockerfile
+> -image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-=
+08Dec2024
+> +image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-=
+28Jan2025
+>
+>   # We run some tests in different order, to catch some failures quicker=
+.
+>   stages:
+> @@ -241,7 +241,7 @@ sandbox with clang test.py:
+>       - ${DEFAULT_AMD64_TAG}
+>     variables:
+>       TEST_PY_BD: "sandbox"
+> -    OVERRIDE: "-O clang-17"
+> +    OVERRIDE: "-O clang-18"
+>     <<: *buildman_and_testpy_dfn
+>
+>   sandbox64 test.py:
+> @@ -256,7 +256,7 @@ sandbox64 with clang test.py:
+>       - ${DEFAULT_AMD64_TAG}
+>     variables:
+>       TEST_PY_BD: "sandbox64"
+> -    OVERRIDE: "-O clang-17"
+> +    OVERRIDE: "-O clang-18"
+>     <<: *buildman_and_testpy_dfn
+>
+>   sandbox_spl test.py:
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index d2848ab85f35..b72ed357fa36 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -23,7 +23,7 @@ ENV ARCHS=3D"aarch64 arc i386 m68k mips microblaze nio=
+s2 powerpc riscv64 riscv32 s
+>   ENV MIRROR=3Dhttps://mirrors.edge.kernel.org/pub/tools/crosstool/files=
+/bin
+>
+>   # Toolchain version
+> -ENV TCVER=3D13.2.0
+> +ENV TCVER=3D14.2.0
+>
+>   RUN echo "Building on $BUILDPLATFORM, for target $TARGETPLATFORM"
+>
+> @@ -32,7 +32,7 @@ RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt,sha=
+ring=3Dlocked \
+>       --mount=3Dtype=3Dcache,target=3D/var/lib/apt,sharing=3Dlocked \
+>       apt-get update && apt-get install -y gnupg2 wget xz-utils
+>   RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add=
+ -
+> -RUN echo deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main | =
+tee /etc/apt/sources.list.d/llvm.list
+> +RUN echo deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main | =
+tee /etc/apt/sources.list.d/llvm.list
+>
+>   # Create a list of URLs to process, then pass them into a 'while read'=
+ loop
+>   RUN if [ "$TARGETPLATFORM" =3D "linux/amd64" ]; then HOSTARCH=3Dx86_64=
+; else HOSTARCH=3Darm64; fi; ( \
+> @@ -65,7 +65,7 @@ RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt,sha=
+ring=3Dlocked \
+>   	bison \
+>   	build-essential \
+>   	cgpt \
+> -	clang-17 \
+> +	clang-18 \
+>   	coreutils \
+>   	cpio \
+>   	curl \
+> @@ -182,7 +182,7 @@ RUN git clone git://git.savannah.gnu.org/grub.git /t=
+mp/grub && \
+>   	search search_fs_file search_fs_uuid search_label serial sleep test \
+>   	true && \
+>   	make clean && \
+> -	./configure --target=3Driscv64 --with-platform=3Defi \
+> +	grub_cv_cc_mcmodel=3Dno ./configure --target=3Driscv64 --with-platform=
+=3Defi \
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Hello Tom,
 
-Thanks
-Patrice
+The upstream GRUB code already has a test in autoconfigure.ac to check
+if the large model is supported:
+
+if test "$target_cpu" =3D x86_64 || test "$target_cpu" =3D sparc64 || test
+"$target_cpu" =3D riscv64 ; then
+   # Use large model to support 4G memory
+   AC_CACHE_CHECK([whether option -mcmodel=3Dlarge works],
+grub_cv_cc_mcmodel, [
+     CFLAGS=3D"$TARGET_CFLAGS -mcmodel=3Dlarge"
+     AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])],
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0      [grub_cv_cc_mcmodel=3Dyes],
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0      [grub_cv_cc_mcmodel=3Dno])
+   ])
+   if test "x$grub_cv_cc_mcmodel" =3D xyes; then
+     TARGET_CFLAGS=3D"$TARGET_CFLAGS -mcmodel=3Dlarge"
+   elif test "$target_cpu" =3D sparc64 || test "$target_cpu" =3D riscv64; =
+then
+     TARGET_CFLAGS=3D"$TARGET_CFLAGS -mcmodel=3Dmedany"
+   fi
+fi
+
+Why did you have to put grub_cv_cc_mcmodel=3Dno on the command line?
+
+I would prefer to leave it to GRUB to figure out which model is supported.
+
+Best regards
+
+Heinrich
+
+>   	CC=3Dgcc \
+>   	TARGET_CC=3D/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-=
+gcc \
+>   	TARGET_OBJCOPY=3D/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-l=
+inux-objcopy \
+
