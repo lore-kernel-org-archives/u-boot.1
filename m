@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CA5C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA808C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 946808410A;
-	Fri, 11 Apr 2025 16:49:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F752840E6;
+	Fri, 11 Apr 2025 16:49:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kigu8mqh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D3TsJ+D7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F9EC84118; Fri, 11 Apr 2025 16:49:35 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 1A850840F8; Fri, 11 Apr 2025 16:49:39 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E990784111
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:49:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3496840D8
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:49:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-6040465b9e2so1055892eaf.0
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:49:31 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3fbaa18b810so604887b6e.2
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:49:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744382970; x=1744987770; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744382974; x=1744987774; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KO1eFm63tUlfFCJgYBmEGIuTvW79X6sP0/TJu+YTX70=;
- b=Kigu8mqhNRrRJ4WkyZuGmvbZ1G9qj4AwWGl0mItR8+Hb4/jHAeyxsdsBpaU4wKxepN
- jppG3UUnJYJZVdF24ddj6nYMQ9DVdpdPeGwqQWJcvNhzWSeM1Q0+Lj2ecUbpO+uHqxz4
- tEyTLS4mw1n3U4q59MkbixfwtGj1kMavqC3Uw=
+ bh=sYH/Nf8+r0PPt9IeTdWBAAjIeizISv3Ae+srHmJQfSQ=;
+ b=D3TsJ+D7ewJGdbtty2QeZpZNLcoWvGWTS7EMe2Qjy40VzDA5G0AHydcUeJ1rDeiIZB
+ KQxVqP6DiglfIJsVzomTPhzXXY2GpJy++SjkArgFWazNDfP5hqXwgJZC3H2sJ7bhVpnT
+ kgVenHt9s0R3jwvGJaoiTHAjE4KsXVlApTkXc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744382970; x=1744987770;
+ d=1e100.net; s=20230601; t=1744382974; x=1744987774;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KO1eFm63tUlfFCJgYBmEGIuTvW79X6sP0/TJu+YTX70=;
- b=HhzC2k59Pc6Lm9K0f4S/RJvc+oX/Py/I77EK+1meAbDk0tuWlYZAeP7is8cQVQHWuu
- DOFzyzKSDFcKf00goiTze6QrmQz3XbXQZDpCbTKtbhsdJbb4NY8p8iVPUjVu2338GsoW
- r74In5Ar4ApPnFlo0liuReqf7nc+q+gE1yOZ6d2kEu5B2hZ17KfxHif8eVOM0+mRh0Xw
- HVrPN99H9fhyzEqFJr4vEJZjx9hIqwz+/XbACZ0+bvC9JEzXI4ZOukmapDz5lhzV6NOx
- jgaeYdEY3ZrnA26KexnTOAcGPVPuknGhQ+tb6pfIkgrnzUGEC3qrTsc9iuCGSewqY4mx
- b2Gg==
-X-Gm-Message-State: AOJu0YwCdQuaz8LajrH8ikFE6jFqQd2UQcBv7GFyB7mcLb/svPSwZFbM
- IhfXK1YDapNTtFateZevou1CSH4U/5h9rrJG1uVk6nrutlhdehbpsZMXV/VuKgQ=
-X-Gm-Gg: ASbGncuklNE0ZtSkhprVT9EYr/q+qKh1fK6jU2iw9iA9KK6kUhxreT2tX1isv36srSa
- KI2yYJg4TXW+SJUJ652+3FWNBc1eNBuPWiL9MH6+ghUy3BfrqZhS79fozD5KT+g9b3oQEQoU3xo
- WVJXR0fcfhJ13tPXRuuy21DaObxz89T+bSgrG6tuF3tBtjScrYkjYAG0dPsVWqgZlofdlOM4RsB
- WmbUkvei2JQ1PEB2xXtU/qEM3QQ8Cj7zqGej8PSVdq++iulpHtWmz/juqV5EIwJzNaFNpxvZnYz
- c8UekQGhyOyN1vgSYf93p7izdtlqhy0jyPlEvTrLWcS+BmyvSuYIMmXvEYqanNOQxdWAii6ErrF
- fww==
-X-Google-Smtp-Source: AGHT+IGPyxf5qRzJLQerY1nNyajplltZAA8E2nipiKA5eBGGTjR7SnUhHfyPcnCuayDu92QQLXObMg==
-X-Received: by 2002:a05:6820:601:b0:603:f9b2:e2e9 with SMTP id
- 006d021491bc7-6046f5c150bmr1553206eaf.7.1744382970671; 
- Fri, 11 Apr 2025 07:49:30 -0700 (PDT)
+ bh=sYH/Nf8+r0PPt9IeTdWBAAjIeizISv3Ae+srHmJQfSQ=;
+ b=KvXDgHi4cELW3LKttuEowAFK2EtVaa4Kxpj1Jo52eCyXGh2QaMjessyKymW1GR6Poa
+ Psmh//4zHLqf7cEvrKAtx6SdURTOV1SfV08f+LGvkPO8R+pwUiJNLyVFyIgETV8i0nmn
+ PubT53tsNa0SjRbBCWQKBMj+iJBTGpaoYmFVb5xot0aC1yvXjELwSzG3O5Ap208RoRBQ
+ nbaVGCbkSsG6+6WOEcOHkuCKq+qfMvoFdnFUtbUap/7/YXdi0JI63srnBsl3/clzu6Yr
+ CxvJR2BWF7+ANAF1nRCU/FZbtJlSxRMNTgnELapcQHFQHkICxhsG4DnjZAUBcYcXIvBb
+ rmbw==
+X-Gm-Message-State: AOJu0YyQGuUt76oBG55QCqNdYQHX6iDQwynmrhuYRqk1REJrHf2bySxI
+ FvZ/NgpvdHO1ZQOu7TDItOX6YicYrPMVwQJeJtwONANtL4woUggfbQv1pOv3boHJcDiTTSBxRj+
+ eMic=
+X-Gm-Gg: ASbGncv0UyeZ5PPe737es+W1oGNF229xF3bbCcVfn1uQAO5rpvnMsmRdT/z4RUwOY21
+ Z6ngcZAwV3K3JZYNunDDH71L8RU/aGVGHfB7jP0Tlq0Eb9PW+IxNVmgWN8Sp0VtqccqkCSOvrMh
+ VzTjn3L+K/8iX26gnlANlzEH+NUYanuvMnu7Q2Z666VnDSVa9C3dz6a7m95uhDaEwYubsfA82UG
+ rMSNvzw0Qn4E+4E3pa1vp+O/HvpEdgbajCpxZbE5SAi1X9uEHgfSAPauTHd217AwzFx5Q3NpYJ/
+ 3guulQQaZkW1pwU2wCULW8DVsDs57FVjcMa3OF4yCN+CnrvHGYDGf5kXr2DYDxT+09lLQdVj3sv
+ 7wg==
+X-Google-Smtp-Source: AGHT+IH0irLLW5XrbV7ze6GcA0zR6zPbu5VH0q+tQqNOxvSwEe4JqKkBLqWd7ZF6vq/gzPQlpt+vRQ==
+X-Received: by 2002:a05:6808:2188:b0:3fa:d6c:cdbe with SMTP id
+ 5614622812f47-4008510b686mr1764954b6e.32.1744382974684; 
+ Fri, 11 Apr 2025 07:49:34 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6045f50ef06sm932221eaf.8.2025.04.11.07.49.29
+ 5614622812f47-4007639dfd1sm955480b6e.31.2025.04.11.07.49.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 07:49:30 -0700 (PDT)
-Date: Fri, 11 Apr 2025 08:49:28 -0600
+ Fri, 11 Apr 2025 07:49:34 -0700 (PDT)
+Date: Fri, 11 Apr 2025 08:49:32 -0600
 From: Tom Rini <trini@konsulko.com>
 To: =?utf-8?B?xaMg1r7vv73vv70=?= <Zone.Niuzh@hotmail.com>
 Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] bootm: Add support for passing arguments to elf app
-Message-ID: <20250411144928.GM5495@bill-the-cat>
-References: <20250321082242.59565-1-zone.niuzh@hotmail.com>
- <ME0P300MB130971571336A7F169047BED9FA42@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] bootm: Support load images when os is elf
+Message-ID: <20250411144932.GN5495@bill-the-cat>
+References: <ME0P300MB130922F2666257BD3431535C9FAC2@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hyoQqi0SILXUXxsy"
+ protocol="application/pgp-signature"; boundary="1oxMCf/Hq3m3VDm+"
 Content-Disposition: inline
-In-Reply-To: <ME0P300MB130971571336A7F169047BED9FA42@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
+In-Reply-To: <ME0P300MB130922F2666257BD3431535C9FAC2@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,16 +97,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hyoQqi0SILXUXxsy
+--1oxMCf/Hq3m3VDm+
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 24, 2025 at 03:05:56AM +0000, =C5=A3 =D6=BE=EF=BF=BD=EF=BF=BD w=
+On Tue, Apr 01, 2025 at 07:44:34AM +0000, =C5=A3 =D6=BE=EF=BF=BD=EF=BF=BD w=
 rote:
 
-> This extends the bootm command to allow passing arguments to standalone
-> ELF applications.
+> This extends the bootm command to allow find images when os type is elf.
 >=20
 > Signed-off-by: Niu Zhihong <zone.niuzh@hotmail.com>
 
@@ -115,22 +114,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---hyoQqi0SILXUXxsy
+--1oxMCf/Hq3m3VDm+
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf5K/gACgkQFHw5/5Y0
-tyxglAv/YYW1wwO9LKgcd6Rp7VXmrKA9rKDZEMwwxzxnx2o+M6KNtlehEdB5MVQn
-GRhBeoz4acjbHrnG6Bun5iQDyaZumPxFtEm5FGQA01uZytHSVYNiGKwIWh3N7gsd
-4RYep0AR5RrppXzKJEumj5B/9YWAv9hdIskXwizmdrf7sW2EIUcBUarS+XBAor+/
-8epEtZuqrnDOPK0R1ZIgTH37v3QJDOXlsgDSZXFQbTmyTCFbfwaEzzGC7cvUgTI/
-Gy3A9jIkDWQgpwKjnZ09abbKP1/Ix/08oVcwwzhvhoy+A5sKN4+A6izCFmqOW4GG
-odzmOxHRX9FtdCIz1gOZveRBHbxBTWY1MrOnc3VMseL+SzPF1hSG+Iwx4uS9fym8
-Ygoonlba8tPXgpUvKvbLjaTtbFVEF1DTNNzhYTlpfyVv6cSh3CPuHXjmsh7Rlz5P
-82O7hzp7O2ELsKG5mVuOQh9+tga/qBgC3NV5d++x6xwvTEK1aW9gpJBxI+woSiHU
-OnNRh2mY
-=AXvG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf5K/wACgkQFHw5/5Y0
+tywk+AwApgh0tLvHlF6Zr4v3LPv5ENY6rCR1+IjSMb6i7Kr8FmkAw+BoZHcaP3Jd
+vumZpwPrAJTKppjBGus7u1q1WPsIJtWTDMasp2gNPmi1gSoSmHbOzIsncm2yGBg1
+QHfM73/Kd1zdnhoIk+HXzrvAZyVXnSrEIVhBlZk3EQ1L03drLcystB8GhPJytoNP
+mYkPFFlPUpSYl17yeaea6oYIDMc7iX2m3nzjrbbTnyuvuaKLMF84JvDveqjRQVuC
+aMrN/ftO5wjzsw3nL4TJHv1gw3q4ikrLdON5WF9vzi/lstdN6+PgbqkUVUwgyyc7
+myGlZPGEWpAFU1VUkz5QpZiX1UXo10rLd+G4jWpijB+QU+juG6juEvO24DGrwq/U
+nouwVz6uISG4s2hySjXAszdnZkz1GdCdf9Iq+WUHv5VTVAaZZe61Uev84eO5CiEF
+PVkSxEbGvi6Oxv4R6Qd6Epr1Thl/NjmvJSe1zeUFe8O0LEgi6jESZtn+/r//rcCl
+HfsKx4hb
+=6si1
 -----END PGP SIGNATURE-----
 
---hyoQqi0SILXUXxsy--
+--1oxMCf/Hq3m3VDm+--
