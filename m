@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC97C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:12:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75903C369AE
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:12:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E81BD84088;
-	Fri, 11 Apr 2025 16:12:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3D0984097;
+	Fri, 11 Apr 2025 16:12:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jcbWrfTY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nHhY2o77";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C39F78408D; Fri, 11 Apr 2025 16:12:02 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 7F7CD84099; Fri, 11 Apr 2025 16:12:20 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B514584085
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:12:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 563AA84085
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:12:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43cf257158fso15464145e9.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:12:00 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3912fdddf8fso2206585f8f.1
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:12:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744380720; x=1744985520; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744380738; x=1744985538; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=gNrdQjVAH8F7gui5uldcF/iWpOGZMqWU7x2yPGf7yG8=;
- b=jcbWrfTYIUYihl0fWNMjT8/1mOFmuHMecRq6jmvMNzbWXahNMK4i5tfbSjEj+sXPoz
- ap7Fl+QZl8EET0uo+Je7f2o9ocG6xwljXVecbVASDD1fLEMJoE5vR4QFTGXtaOmGj8W5
- tcknRuphPN3EwvTgPtm6MMtlm6DMzQrjTE6ONZDRuKz7FJ1rdDI6yI4FHXEJrzobNN7T
- RtzkOugXmXabI8EegFfwgTfbuSgrGPKE3SdGmQxYne5XnMZkOS/Ama2H+08C3vTfOyir
- 13EbR9NP++9MUQcB50cZlj96Y/9Rl3gsFBpj70MlG2dXWPkAPBJlNdk5bV+k8T0PtqAC
- vbmw==
+ :reply-to; bh=/qY6t+9iNKr8LcmT5dx0BqI8GDgv7tJY5NEMlvqiLtI=;
+ b=nHhY2o774bm7Wi1XC6UmJqZRW1ks4LDQYV0lYloWjfjzuukNHNEr7gwxDEcVsJlWlC
+ +D4CluFyc2YT+b2RVfKqR5VwqTwid2Nth2y+acrPYPC0hhRKg74K6+xHe9Xv97i1r2nM
+ NFmIGpl2QGxgnfe1w1AvOCwjGKvuJwc9jLo3i3IPQWA5jqp1d4ylOb7SZLHqAE9XxzGE
+ a0f0ZXDWfVQ9JSgEumvuB8LE3jJlT4m7u1M4FI+0e+pqdCaHg1IZTVpDIw6M1kwRJCAp
+ MADyNDPQk5K55NpnGvIZImBq8P3FVRBz4h9xQu7ejgXwo+0KtuW20GHgNJezTJLTnsJJ
+ ug0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744380720; x=1744985520;
+ d=1e100.net; s=20230601; t=1744380738; x=1744985538;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=gNrdQjVAH8F7gui5uldcF/iWpOGZMqWU7x2yPGf7yG8=;
- b=G3rl/QOTlIi1re3RqUXF+tTE9Lq0FHFx6Cu0vzPONkVJ7Nnt4Cdm32rxy2q1lMvpET
- 38p5OJjipCCS+u7Ius0JFr0iFCGSKgSU5mgsmYQb48C6vPeBMVAZzS9bqPbBlrexC2rE
- n6Bvfyk1x5b1Yrw0l+wiZZP5/GeZL0/cAeErepx0ecqrgLrRJLcqByumXL4XFwYzaQUF
- J6Jl1d6sLArRMeJTgvRr1elDbk6Q6aRBVS51FyDktJotbGgr+RvwU2I81eXSEYJBcpl9
- adx4uMEpXGNLZSwW3DqAtF7hRefhqkTdjJEBcK7aK4CcQmNMydKqnu4I9iDSiuFHci2s
- 6Yzg==
-X-Gm-Message-State: AOJu0Yx2qU7CERI8P8uexWX8hMU7Ty6Trawf/ItxLYOC2SY6UxiyAQDD
- XMbu13cmFtglcpQAFR0hzoZ9TtVLrRi4QKfDWVPD79n27Fcp2FvEF1qgVQ9MmWU=
-X-Gm-Gg: ASbGncuxeoGrozeIKoM/LWllZvPlwn+0+TCrPKzQzfpbVVnTfxzIccVsKAWypXvKxk3
- RvG9dMyVYeOYQ8/k4v8UCCwz3O8X/E2IEEPYzH+tVbeOjCRiYRU5vRpZJLGwg9Ec5W4Po9uU022
- lR5Z964Nx3/MbCuZYuo5uoR0C7At5QxE3tTQjzlefGU3fiXntSwcZIlfF0epQyBfcNlnRz3nwoe
- i4V32NAR9yq7E5pPQRp/fYw2JrFFfNDtBiQA88YhrVoDgApMNorAlWA0QXMRcd1EYj8u9WLOiUt
- zrhMLgVJc/nPSha5zAyi9q7N5AT9aHugRebQAnhRz2C0Ga8L0ZuA5qjreq/r4ScGbdtixmJKjZt
- AQMykosLiKfxVtxomSg==
-X-Google-Smtp-Source: AGHT+IFp/z4ppEou4dP6HuDlsWtcBmXdpBvBCjgUaN9sqDYswmswE/cPOIW2uEDEFt3WE8azwHInxg==
-X-Received: by 2002:a7b:c8d0:0:b0:43b:ce36:7574 with SMTP id
- 5b1f17b1804b1-43f3b530d98mr19977215e9.11.1744380720019; 
- Fri, 11 Apr 2025 07:12:00 -0700 (PDT)
+ bh=/qY6t+9iNKr8LcmT5dx0BqI8GDgv7tJY5NEMlvqiLtI=;
+ b=DJxFtLXubd7zFxzxThzMOmUT1puvy6WDC3wlIdrjcxYOg0nTjkhTxdeWqF8euEy4lA
+ +LLfKifirfTOvu3EpaXMdpY0DRP2fwtHdHMZZk9R0GWZgngNVDGgLcJhSo/H6gZk3uUb
+ 7gmWx1me6fya7rAjIux7f/7m4dvEjoNQ3SQFCN3Y93tKeVorDinYM/feLpQZ6MyAr8X4
+ K94yDm0LqDF0dXDi0Io8MQ1XKwpLrba1Ur8QJLIZmzEG7teCklgcB6M2x/WQf6mx/WZ3
+ /Rxq+Vi812lcUg8RoU/ru86HnPOp1cjpm9AIqmes0qkcccBuWw9DLWLor7hNDjUyLEGf
+ PDZw==
+X-Gm-Message-State: AOJu0Yy23jNGYk/ZB55wMmPmfxOvVGMdvl2EAMokIuPoFyBznIPpxct5
+ yFc6HC/6FHdPMNzeHtXtXrpK4oee8OQs0m+lkl11bvrPI6YGo9Ok8Rxq81qs5jkaQW92gmvKtWp
+ S
+X-Gm-Gg: ASbGncvzddIowY6PlYTdTqAi0ffcT1z36ZTTAU38uXzPlgs9JOIJcpbQJL5ScMJjQOD
+ MrbLof9z/zTaFdnBA3guu3ZAvilFXGZWJzEkR+qEreFkibQ/EzzQZiO8PEmJfaQsLk+Gfhql6YX
+ JceeBtblqEvLPMuYGWQdegk+Z8BJtW4kJ1ZFonvs0bKiXpdnJJGbeL0u8z29PMyKCXZwb0jnZmj
+ 7i7ORr70JBbB4LBYCO55q7P+6wziFr8EyAQ1manR/w9cuA56rfZJKK1JG6EjTOFESPj7w5dVHkS
+ 0RXxXW2tg6X/igDE+iVtKYBPWrl4/gGoSIYpxgFQ0Q4lFBqjQK9qEiFL9kFYuAvWIFL9eWjs7w7
+ fbmEziu5suqMTUB41Ig==
+X-Google-Smtp-Source: AGHT+IGXSnMjkLgBUnAHo/aY2L6BDpG5ImweEU+dgcYSOfjGBTokB9ISLU3YwQ+//rjdosxBcZkkrA==
+X-Received: by 2002:a5d:648d:0:b0:391:65c:1b05 with SMTP id
+ ffacd0b85a97d-39e6e48d03dmr2585044f8f.11.1744380737756; 
+ Fri, 11 Apr 2025 07:12:17 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:f77b:949e:1d61:69a8?
  ([2a01:e0a:3d9:2080:f77b:949e:1d61:69a8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f207cb88asm86927955e9.37.2025.04.11.07.11.59
+ ffacd0b85a97d-39eae977513sm2089698f8f.42.2025.04.11.07.12.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Apr 2025 07:11:59 -0700 (PDT)
-Message-ID: <31f7c87d-cc4e-4035-940c-7e9641b498d0@linaro.org>
-Date: Fri, 11 Apr 2025 16:11:59 +0200
+ Fri, 11 Apr 2025 07:12:17 -0700 (PDT)
+Message-ID: <08b303b9-8d44-4bb6-a616-012c5be78ba5@linaro.org>
+Date: Fri, 11 Apr 2025 16:12:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 4/8] mach-snapdragon: of_fixup: remove confusing log
- message
+Subject: Re: [PATCH v2 5/8] mach-snapdragon: of_fixup: update comment
 To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250411-livetree-fixup-v2-0-1236823377bb@linaro.org>
- <20250411-livetree-fixup-v2-4-1236823377bb@linaro.org>
+ <20250411-livetree-fixup-v2-5-1236823377bb@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250411-livetree-fixup-v2-4-1236823377bb@linaro.org>
+In-Reply-To: <20250411-livetree-fixup-v2-5-1236823377bb@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,37 +133,29 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/04/2025 14:47, Caleb Connolly wrote:
-> The debug log here had the logic completely backwards, even though the
-> code is actually correct. Remove it since it's extraneous anyway.
+> we don't rewrite the volume buttons any more.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/mach-snapdragon/of_fixup.c | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
+>   arch/arm/mach-snapdragon/of_fixup.c | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
 > 
 > diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index dcd09ee7cac3e02287647c9e6df5575651e18e85..a5515c02d3de05944dfb7c1b2a5542631b517497 100644
+> index a5515c02d3de05944dfb7c1b2a5542631b517497..10053e48d88017d2179c96f2f3724c4d5dc4f3e2 100644
 > --- a/arch/arm/mach-snapdragon/of_fixup.c
 > +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -72,13 +72,14 @@ static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np
->   		log_err("Failed to read second phy name: %d\n", ret);
->   		return ret;
->   	}
->   
-> -	if (!strncmp("usb3-phy", second_phy_name, strlen("usb3-phy"))) {
-> -		log_debug("Second phy isn't superspeed (is '%s') assuming first phy is SS\n",
-> -			  second_phy_name);
-> +	/*
-> +	 * Determine which phy is the superspeed phy by checking the name of the second phy
-> +	 * since it is typically the superspeed one.
-> +	 */
-> +	if (!strncmp("usb3-phy", second_phy_name, strlen("usb3-phy")))
->   		hsphy_idx = 0;
-> -	}
->   
->   	/* Overwrite the "phys" property to only contain the high-speed phy */
->   	ret = of_write_prop(dwc3, "phys", sizeof(*phandles), phandles + hsphy_idx);
->   	if (ret) {
+> @@ -3,10 +3,9 @@
+>    * OF_LIVE devicetree fixup.
+>    *
+>    * This file implements runtime fixups for Qualcomm DT to improve
+>    * compatibility with U-Boot. This includes adjusting the USB nodes
+> - * to only use USB high-speed, as well as remapping volume buttons
+> - * to behave as up/down for navigating U-Boot.
+> + * to only use USB high-speed.
+>    *
+>    * We use OF_LIVE for this rather than early FDT fixup for a couple
+>    * of reasons: it has a much nicer API, is most likely more efficient,
+>    * and our changes are only applied to U-Boot. This allows us to use a
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
