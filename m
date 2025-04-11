@@ -4,81 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E95C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD54C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:21:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AE40840AB;
-	Fri, 11 Apr 2025 16:18:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5060F840BE;
+	Fri, 11 Apr 2025 16:21:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Se4RDqaR";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="Eod/QdIp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17ABF84085; Fri, 11 Apr 2025 16:18:24 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2F352840C1; Fri, 11 Apr 2025 16:21:29 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1652484085
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:18:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2039684085
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:21:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-30ddad694c1so19555181fa.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:18:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744381101; x=1744985901; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PAkyxSFtRDh1k2uu0b7fV79WKOEARxwKDqyxOycgqIs=;
- b=Se4RDqaR3BsED7X7GHRS6d03gxL317k/vfyai4kzeEzW4Mj1j2jTw/62cXV/OmqWy3
- 1oKpadQA5wMy/u9qgy0DIwzYu5Kv4A93YlWfA4MUUuBrgFgAMuFZz538M8ed2hn75n2e
- +Hy0tEJVBcX8c6TIWAh8a0QbMzSQmkgNizDrvwsnZ8+TAuVD75xCbz5s1RJhH4ezUvaD
- WIbmb5AAJq8Y2JlN7gw/eK6a1YO09XB3k3wXSX3rA0Iguvtl39hsCh0U7LgKOIJpWhPj
- NJ0Rph5SpdWUjpYZ/Leu9r+XRbfPoHhJ1dwciUvarode69TQLRrcem7g1kNlLPE1gCYZ
- L+rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744381101; x=1744985901;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PAkyxSFtRDh1k2uu0b7fV79WKOEARxwKDqyxOycgqIs=;
- b=p5eSJeuH4z1k7HeaWPFJGU98eHHYxNv4iWzQae8OQb5bIe4BE5XMwWqhm2W98l9aHM
- LVRGI6a2E1p/zzg8bdPDfKsMR+MlMu5Wv1U2GqsG8ugBeAtKoD2UYSConPqUsCeIPi78
- k42hOJUweJ3lU4hjhjoMF+F3Irm+e+YQ7UAJbtbvd05JbC7ZLiI/RU79EIHGonk+rzxS
- nMNyHWAxRLEqaBTMrjG4Ok9XYCUtNAllYSsm7TDTZYIMqKdQEmXcvpkx82DxKUUxeOg3
- ebhtTdI9Kw/uEcnancBx7/amgsUjJStkWYubg1Bej6jkHPgr98eNtSYh5rbJ2ZO6Ip6Q
- +IfQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXk6MTZOxd6Az01JolnUSCHSuB8lHlDS0HZ3Dc8RwZ7lmv/QbISzRRrKOH/5YVc8zyxyr1bOco=@lists.denx.de
-X-Gm-Message-State: AOJu0YxamOwC/drvFAzahpr1nr+Sv2v2+BLFwMtjOArrsSwrRDvy+82I
- 6qd5JLTE4KQiCJf+aYZk2Tzh28mryBJYo/lPiDRJ8MJUJ/hQbEAFbVz/nAIENbqF83e0xu5CIHt
- zILSbcGjlLMrY78KfArfBoZee6Cc=
-X-Gm-Gg: ASbGncsbOLICn3JI8O+mnIubUuWeoKDJ+eQ54YrZQDHN7JZr3k1mrHpDhEtteenaKu2
- IdKF4wQV1mQed9YqSksLiBMISP0ltMgs1QOMFZkAh+TOycf79gYLFdcJ/o+gGn9fGRBYhBKMqpR
- nGNCPB2/JCiCWVlbKOJKYg/rGygcdVXqckYveLYLGfd+KxEeL4DaUZLg==
-X-Google-Smtp-Source: AGHT+IHw2x9+rjUxbH7NHxGHyUAuQU6RZGain6btJZod4d1/CGTBBil1YyusDBRT6SiDEO4SRniPPNmhBAXu8DMrIW4=
-X-Received: by 2002:a05:651c:1464:b0:30d:b8a5:9b88 with SMTP id
- 38308e7fff4ca-310499fb48dmr10117271fa.20.1744381101128; Fri, 11 Apr 2025
- 07:18:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id E7CF31FC42;
+ Fri, 11 Apr 2025 16:21:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1744381285;
+ bh=ML/Ivn/9ho2tiXQcxsjfLMNMVuNFPS43SIiKcj04mqw=; h=From:To:Subject;
+ b=Eod/QdIpPkbniDJU9PL0khqTXXY4Mn8dnjEKh35HGr6Yu7ihAYoWjYWSDTEXA83Gt
+ KeL8uiztBAoOQ41yb6qtFm8DxNpsBqiWmfexPONuX8EChTo91tsyGgeaT9WV0QvW9f
+ lxfy3eBb8isz3yif7c7ai/O7RlbGaAY4HWv66s4jPhL8qt8/m6bX1ym6v3dI2whVwJ
+ CTpnoVjbIk/fG5WdmB4hVcfV9hhv1PKrmsc4EaCCWP8whv1zMrc9bFEr09OOsqmAkA
+ Cq1Xtv8kAwgyMBbRYGz3RFim0S0j5gbwrHvkk6Anl3ACp9vbqLHxPkBGbV5WI4SKTL
+ icJFbfD68RNNw==
+Date: Fri, 11 Apr 2025 16:21:23 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Marek Vasut <marex@denx.de>
+Cc: Francesco Dolcini <francesco@dolcini.it>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Felipe Balbi <felipe.balbi@linux.intel.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
+Message-ID: <20250411142123.GC12707@francesco-nb>
+References: <20250319220805.219001-1-marex@denx.de>
+ <87a59gdofd.fsf@baylibre.com> <20250324080315.GA6932@francesco-nb>
+ <87pli6esx0.fsf@baylibre.com>
+ <Z-FQeVtIImeHsfXs@gaggiata.pivistrello.it>
+ <42f53c19-de12-45c3-9091-2e6c23d1fcd4@denx.de>
+ <Z-FpUV-fwGvch4-W@gaggiata.pivistrello.it>
+ <48e57653-d86a-4650-859e-1e77a6c29f4a@denx.de>
+ <Z_TnLsKHod_fvDsK@gaggiata.pivistrello.it>
+ <bf955296-b4fe-443a-8bf9-ead7afe57661@denx.de>
 MIME-Version: 1.0
-References: <20250410084122.1010297-1-primoz.fiser@norik.com>
-In-Reply-To: <20250410084122.1010297-1-primoz.fiser@norik.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 11 Apr 2025 11:18:09 -0300
-X-Gm-Features: ATxdqUFNgxMYDx_cakHb4YnufxrSc_URLuoy8r-LBM0tjlKp1MyAyjQuXf0n_-A
-Message-ID: <CAOMZO5BmgxiSS_Xk=XX0LD9876ZnwD50uwzVbie-FwLx6vQfbQ@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Update phyCORE-i.MX93 environment
-To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Mathieu Othacehe <m.othacehe@gmail.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, 
- Tom Rini <trini@konsulko.com>, upstream@lists.phytec.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <bf955296-b4fe-443a-8bf9-ead7afe57661@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,22 +78,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 10, 2025 at 5:52=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
-m> wrote:
->
-> Update PHYTEC phyCORE-i.MX93 environment in mainline U-Boot with changes
-> from the downstream fork to get back in sync.
->
-> Leonard Anderweit (1):
->   board: phycore-imx93: env: Move bootcmd from defconfig to env
->
-> Martin Schwan (1):
->   board: phycore-imx93: env: Add common RAUC boot logic
->
-> Primoz Fiser (4):
->   board: phycore-imx93: env: Move fdt and bootenv addresses
->   board: phycore-imx93: env: Add optargs to environment
->   board: phycore-imx93: env: Add prepare_mcore to environment
->   board: phycore-imx93: env: Add option to disable bootenv.txt import
+On Tue, Apr 08, 2025 at 04:51:22PM +0200, Marek Vasut wrote:
+> On 4/8/25 11:06 AM, Francesco Dolcini wrote:
+> > On Mon, Mar 24, 2025 at 03:36:52PM +0100, Marek Vasut wrote:
+> > > On 3/24/25 3:16 PM, Francesco Dolcini wrote:
+> > > > On Mon, Mar 24, 2025 at 02:53:23PM +0100, Marek Vasut wrote:
+> > > > > On 3/24/25 1:30 PM, Francesco Dolcini wrote:
+> > > > > > On Mon, Mar 24, 2025 at 09:26:03AM +0100, Mattijs Korpershoek wrote:
+> > > > > > > Hi Francesco,
+> > > > > > > 
+> > > > > > > On lun., mars 24, 2025 at 09:03, Francesco Dolcini <francesco@dolcini.it> wrote:
+> > > > > > > 
+> > > > > > > > Hello Mattijs, Marek
+> > > > > > > > 
+> > > > > > > > On Thu, Mar 20, 2025 at 10:47:02AM +0100, Mattijs Korpershoek wrote:
+> > > > > > > > > On mer., mars 19, 2025 at 23:07, Marek Vasut <marex@denx.de> wrote:
+> > > > > > > > > 
+> > > > > > > > > > The UUU tool excepts the interrupt-in endpoint to be ep1in, otherwise
+> > > > > > > > > > it crashes. This is a result of the previous hard-coded EP setup in
+> > > > > > > > > > drivers/usb/gadget/epautoconf.c which did special-case EP allocation
+> > > > > > > > > > for SPL builds, and which was since converted to this callback, but
+> > > > > > > > > > without the special-case EP allocation in SPL part.
+> > > > > > > > > > 
+> > > > > > > > > > This reinstates the SPL part in an isolated manner, only for NXP iMX
+> > > > > > > > > > SoCs, only for SPL builds, and only for the ep1in interrupt-in endpoint.
+> > > > > > > > 
+> > > > > > > > UUU can (and in our case is) used also on non-NXP i.MX platforms.
+> > > > > > > > What should we do?
+> > > > > > > 
+> > > > > > > Do reproduce the problem (UUU tool crashes) on those platforms with
+> > > > > > > recent U-Boot versions (v2024.10+) ?
+> > > > > > 
+> > > > > > Not tested, my comment is purely based on the code and the commit message.
+> > > > > > Older U-Boot versions (up to v2024.04, included) are working fine, with UUU used
+> > > > > > with TI K3 SoCs (AM69, AM62, AM62P).
+> > > > > Are you talking about the NXP UUU ?
+> > > > 
+> > > > yes, it works just fine on not-NXP SoC.
+> > > Then please test if it still works, and if not, this patch needs to be
+> > > expanded to cover TI ... or apply unconditionally in SPL (sigh).
+> > 
+> > I just found the time to check some logs from our CI in which we execute such a
+> > workflow.  We do use UUU only from U-Boot proper, so we are not going to be
+> > affected by this SPL specific change.
+> > 
+> > However I found this error in the logs, on both a TI AM62 and an i.MX8MP
+> > 
+> > ```
+> > Starting download of 40524455 bytes
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > ..........................................................................
+> > ..........................................................................
+> > ..........................................................................
+> > ..........................................................................
+> > .............
+> > downloading of 40524455 bytes finished
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > Starting download of 1675 bytes
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > downloading of 1675 bytes finished
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > Starting download of 82 bytes
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > downloading of 82 bytes finished
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > ```
+> > 
+> > the download is successful however, despite those error messages. Any idea? Is
+> > this related to this topic?
+> I have a feeling it is the UUU which should be fixed to not depend on the
+> ep1-in , really.
+> 
+> You could however quickly try and apply the change in this patch not only to
+> SPL, but to U-Boot on your board as well, and see if those warnings
+> disappear.
 
-Applied the series, thanks.
+So, I did a quick test and the issue is still there.
+
+And looking better at the error now, this is about ep1in-bulk, that is
+not affected by this change at all.
+
+
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index 477ecd020985..55b248505de5 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -1632,23 +1632,7 @@ usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
+        if (usb_endpoint_is_bulk_out(desc))
+                return dwc3_find_ep(gadget, "ep2out");
+        if (usb_endpoint_is_int_in(desc)) {
+-               /*
+-                * Special workaround for NXP UUU tool in SPL.
+-                *
+-                * The tool excepts the interrupt-in endpoint to be ep1in,
+-                * otherwise it crashes. This is a result of the previous
+-                * hard-coded EP setup in drivers/usb/gadget/epautoconf.c
+-                * which did special-case EP allocation for SPL builds,
+-                * and which was since converted to this callback, but
+-                * without the special-case EP allocation in SPL part.
+-                *
+-                * This reinstates the SPL part in an isolated manner,
+-                * only for NXP iMX SoCs, only for SPL builds, and only
+-                * for the ep1in interrupt-in endpoint.
+-                */
+-               if (IS_ENABLED(CONFIG_MACH_IMX) && IS_ENABLED(CONFIG_XPL_BUILD))
+-                       return dwc3_find_ep(gadget, "ep1in");
+-               return dwc3_find_ep(gadget, "ep3in");
++               return dwc3_find_ep(gadget, "ep1in");
+        }
+
+        return NULL;
+
+
+
