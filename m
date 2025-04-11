@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB0DDC36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 16:15:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5F2C369A2
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 16:15:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21F57830E4;
-	Fri, 11 Apr 2025 18:15:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 772558403D;
+	Fri, 11 Apr 2025 18:15:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m8C0uOIe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gybb7mUn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 723D883F15; Fri, 11 Apr 2025 18:15:23 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3EBB9838AB; Fri, 11 Apr 2025 18:15:25 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A25882C10
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 18:15:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 342C6838AB
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 18:15:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5e8be1c6ff8so3914728a12.1
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:15:21 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5ed43460d6bso3479905a12.0
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:15:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744388121; x=1744992921; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=B82T6hTq1hpiLL619M0lvAUvNB79dDXvEfvWCAV78iU=;
- b=m8C0uOIeDfpkfUxBJTuA5SGlqXFc9keP6wOw34/DHDdVIQmJk2OHEzkx2HsWMxBdNe
- NeVwVspw8YSmXDRfJHcz4V9qaMZFcMkLuxmKxy7lEsdOUMSEg/CSBQHpAFcVc34aKbR5
- F904P2QhgET8kvId1KsmdfPXzAXl2V+9ZSzCdvLqd9i+/S/3qNVsbx+ew+uox7LWiq95
- pcU5Ku/zXQVtEvxELT3t+bFqvd79G2JnRlUn014rgl8PT+AHwyhns+4yTji7M04BkXFq
- B84JS/WsAM2E9KPj3vFPFxT6EUoI8U/NAPkdrvfsakakubP0BI3F79pW1I00VnPYlpbl
- fyFA==
+ d=gmail.com; s=20230601; t=1744388123; x=1744992923; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5IGNN6aGbKHcH6Capa+ymRdfB7bDOe1OnvdR4NcBsvY=;
+ b=gybb7mUnWoBwW0mCai6mlKricC7F/0edEmzuKW0BHoudIlsKZR0wkiPVN/fmr4WkPQ
+ 2PacDPDcpuQWRW/sWVWlju91mtJN3qUtuSy5cNBKoqIR6JUKGJitzQ7vXbbOBNeux9MS
+ wFuf/D2Y3kpGbzJlL2qC6enb+5wjbBe9bmn5zxeBd5R1MGbBj0Z7c+wK55+yan4siJkN
+ 866kQL29+0vEQI8fYxmX1uLEZmjponHAsxbe/tiRIqAbF/nLrRBwwJfpn62jiswntGMx
+ g8z1nH4F/DRPl4tbCV3yod3pKGs13Tpfl8ydpOG7KMUR1hHkijjVkcdaBTlDmhXYvpyU
+ iw/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744388121; x=1744992921;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B82T6hTq1hpiLL619M0lvAUvNB79dDXvEfvWCAV78iU=;
- b=n2o6sh1vlOTyUxRi8a67FbNqemk+A78sJ5wo0jx6YibsxLVUDC9BSmltR0O49urVUF
- 93JJ429VG/P66suk+Z4753Ko5gpmAqNWYoKbjPTAAZ2/jIpeq37Ze+lhYVjA9RKhs/I9
- 0Zz2z/F+nSLNLyFxXDuWL3JQCLSHeiGMZN94iPk9MQl50V1ADV/dHkSH+TF3mXxia//U
- LpniWhFaXr9Bb8pCR8htRRzsh5o5jU9Pp6rk5HCC03MOa6JHyGFUigHyR822Ac4Ljt8k
- FkMskDqfeCIpH6l+dPbCwOmdsLsKSCRxI/KZRVbU3bMPc5f3w+lTIN/v6MaX4YByt8Do
- jtcg==
+ d=1e100.net; s=20230601; t=1744388123; x=1744992923;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5IGNN6aGbKHcH6Capa+ymRdfB7bDOe1OnvdR4NcBsvY=;
+ b=knUZomKS2gSZDqvPdq05r/BD0bSvN3qza6pG+Xb+PcNJceh/xZRgungRtwxw+Azs0N
+ Prvp/C2+Ej0IrHO4UVBmCjj6A8jBH/4H4rAEq32G9ukyBYVO0Ats5QtoAw14xsO1pYtk
+ 6bkvW6evsAiQuJYPxiuLHBhlofFWWLWiug3ixjJVTV7w8KxobTOa2F+vxnDHbR2DHVdO
+ FejTJeqnb2y9IYa0kKFxhdIv7LT5tMEMaMucgk8JVmrHY6VZkXMn3su4Gv7zFoqO4htO
+ PPiSPhZR8uuqj+SSHFqYC1U0h/pkMv/wkr8pv6OHrv7QlBO3h8aqA+jlgY2WarZ00Ywu
+ K0aw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrEznLmU2OaqrElT+rUlHAh1T8Se6SV4AXD8Y12apr/4e8rDjYCzx4/HhYRq/cCtODxDVTJXo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPbdriVSYnMAVOTYl5q71Gj26sAtm78z263whgTSe7Rgktpw+S
- 8Fp11C58TYii142iUSaVOmhtFnBoM+qSRbwBMc4GiKmEeUPmXytV
-X-Gm-Gg: ASbGncvdMN2OX/iqijrCv8erji2SNRACMOanq3S2lt/vKeEWYIk+uFT/VMOi8WpweEg
- nuOOM47keNpxAujAR9KSE0R3nFah19IJJDTeZYuITIHJ3A8tYXB5PuIQUIOk+KrBNFar7frqDxK
- +IhLGOC2Tz9aP3uXAJfb2diCnfN24U+NcMavm4HGNDeM61cN9nhIKdZswxQ6PSjDSWVDwS/xxoy
- CK1eSynFt9NPY5VZe7Nto6AXGgW6Zyj4jYjfuXLe5tXHpohnxtDt15SYML7vV8YyIxg8SxeNufW
- ihTb1v2wfQdfyHQ+IPPA9Y4JeUxFE+vYd2gYYyPxBkKQslU1QfgvKEcIWg==
-X-Google-Smtp-Source: AGHT+IHZJViaxeqVafycWAgWlTemVq3b4nQ8w/rJUTay+2pLVM9l8CR+QSyv/Be/fCnA5kzma/FppQ==
-X-Received: by 2002:a05:6402:42c2:b0:5ed:17d9:91db with SMTP id
- 4fb4d7f45d1cf-5f36fbaaeeemr2725083a12.12.1744388120556; 
- Fri, 11 Apr 2025 09:15:20 -0700 (PDT)
+ AJvYcCWZraN07slFXzW/rPtxwmcVAHw+XVm876r7HJWhdAsmmU8UExVrRabmhi94AVatMbM38+dw//I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxS9QfyCks+gsBuacorRLM0lZfdq9b5RIh/YlR4nqKDD2p7vQ4+
+ NdmZP14LCCS2MWhXqY8dX90Nj3hxVunRXwc/JUXv5St/8XQvaNhgEtB1vjalGxY=
+X-Gm-Gg: ASbGncsebtkg17Y0BW7hkQJ+y5fdPaMZurHlVaawTUZtSiNc0YMzW9cSSgGQlnaPNxr
+ 1NxKryTM9/2tREE1BvFJXa0n+2ZUj9GU6wMFVnssSiSPbOYSau38my89mfwD+5wYmdZhDo4rINX
+ wy7evemx/W7JjWXk5FbhViIQ9oMmMQc9w84pYYPIZg0tPV0cC7aGKKwtZNPTriBSu/GjYLzPDo0
+ gAC4dCla+BgjFlOl9yTMmLBvNShugwCWcCVBMZB4OXvtPNk5ZtmdUYa+r+u57rTeuL3uEwkocrW
+ F89CO3WJLUcgYgsY+0/jp/V07JIFFxn5sjwV8VpX4taBw6ke/Xpu0buEYQ==
+X-Google-Smtp-Source: AGHT+IHGPQcIH6fxyoGt0YfhSdF0afBr8xnUcPqiyOupXM5CcByh7Q/fMnwhqpNRnJzCSJMXSnSfLA==
+X-Received: by 2002:a05:6402:270f:b0:5e7:110a:c55 with SMTP id
+ 4fb4d7f45d1cf-5f36f77aad1mr2867188a12.18.1744388122272; 
+ Fri, 11 Apr 2025 09:15:22 -0700 (PDT)
 Received: from localhost.localdomain ([80.90.89.143])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f36f526da3sm1136246a12.67.2025.04.11.09.15.17
+ 4fb4d7f45d1cf-5f36f526da3sm1136246a12.67.2025.04.11.09.15.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 09:15:20 -0700 (PDT)
+ Fri, 11 Apr 2025 09:15:21 -0700 (PDT)
 From: Jernej Skrabec <jernej.skrabec@gmail.com>
 To: jagan@amarulasolutions.com,
 	andre.przywara@arm.com
 Cc: trini@konsulko.com, macromorgan@hotmail.com, uwu@icenowy.me,
  u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
  Jernej Skrabec <jernej.skrabec@gmail.com>
-Subject: [PATCH 0/5] sunxi: h6/h616: consolidate DRAM code
-Date: Fri, 11 Apr 2025 18:14:34 +0200
-Message-ID: <20250411161439.4743-1-jernej.skrabec@gmail.com>
+Subject: [PATCH 1/5] sunxi: h616: Panic if DRAM size is not detected
+Date: Fri, 11 Apr 2025 18:14:35 +0200
+Message-ID: <20250411161439.4743-2-jernej.skrabec@gmail.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250411161439.4743-1-jernej.skrabec@gmail.com>
+References: <20250411161439.4743-1-jernej.skrabec@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,52 +101,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While working on A523 support, it became obvious that newer sunxi DRAM
-drivers are similar in many ways, so it makes sense to share some code
-between them. Let's start with DRAM size and ranks detection. There were
-many fixes for it in H616 driver, so make sense to unify code interface
-and split out h616 part into separate file and reuse it for h6 too. This
-will probably solve some DRAM size detection issues on h6 reported
-through the years.
+If colum or row size is not detected, panic instead of continuing. It
+won't work anyway and it's better to inform user directly what's wrong
+instead of failing later down the road for random reason.
 
-Patch 1 adds more error reporting in case rows or column size is not
-correctly detected.
+Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+---
+ arch/arm/mach-sunxi/dram_sun50i_h616.c | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
 
-Patches 2-4 bring h6 code close enough to h616 so code sharing is
-possible.
-
-Patch 5 splits out h616 code and reuse it on h6.
-
-Note I'm currently not able test the code, so if anyone else could do it
-I would appreciate very much.
-
-There are further possibilities regarding code sharing in the future,
-like:
-- memory controller is pretty similar for H6, H616 and A523
-- unify config and parameters structures
-
-Best regards,
-Jernej
-
-Jernej Skrabec (5):
-  sunxi: h616: Panic if DRAM size is not detected
-  sunxi: H6: Remove useless DRAM timings parameter
-  sunxi: H6: DRAM: Constify function parameters
-  sunxi: h6: dram: split dram_para struct
-  sunxi: h6/h616: Reuse common DRAM infrastructure
-
- .../include/asm/arch-sunxi/dram_dw_helpers.h  |  22 +++
- .../include/asm/arch-sunxi/dram_sun50i_h6.h   |   9 +-
- arch/arm/mach-sunxi/Makefile                  |   4 +-
- arch/arm/mach-sunxi/dram_dw_helpers.c         | 160 ++++++++++++++++
- arch/arm/mach-sunxi/dram_sun50i_h6.c          | 180 +++++-------------
- arch/arm/mach-sunxi/dram_sun50i_h616.c        | 145 +-------------
- .../mach-sunxi/dram_timings/h6_ddr3_1333.c    |   2 +-
- arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c  |   2 +-
- 8 files changed, 247 insertions(+), 277 deletions(-)
- create mode 100644 arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
- create mode 100644 arch/arm/mach-sunxi/dram_dw_helpers.c
-
+diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+index cd9d321a0185..d1768a7e7d3a 100644
+--- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
++++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+@@ -1396,7 +1396,7 @@ static bool mctl_check_pattern(ulong offset)
+ static void mctl_auto_detect_dram_size(const struct dram_para *para,
+ 				       struct dram_config *config)
+ {
+-	unsigned int shift, cols, rows;
++	unsigned int shift, cols, rows, found;
+ 	u32 buffer[16];
+ 
+ 	/* max. config for columns, but not rows */
+@@ -1416,10 +1416,15 @@ static void mctl_auto_detect_dram_size(const struct dram_para *para,
+ 	shift = config->bus_full_width + 1;
+ 
+ 	/* detect column address bits */
++	found = 0;
+ 	for (cols = 8; cols < 11; cols++) {
+-		if (mctl_check_pattern(1ULL << (cols + shift)))
++		if (mctl_check_pattern(1ULL << (cols + shift))) {
++			found = 1;
+ 			break;
++		}
+ 	}
++	if (!found)
++		panic("DRAM init failed: Can't detect number of columns!");
+ 	debug("detected %u columns\n", cols);
+ 
+ 	/* restore data */
+@@ -1437,10 +1442,15 @@ static void mctl_auto_detect_dram_size(const struct dram_para *para,
+ 
+ 	/* detect row address bits */
+ 	shift = config->bus_full_width + 4 + config->cols;
++	found = 0;
+ 	for (rows = 13; rows < 17; rows++) {
+-		if (mctl_check_pattern(1ULL << (rows + shift)))
++		if (mctl_check_pattern(1ULL << (rows + shift))) {
++			found = 1;
+ 			break;
++		}
+ 	}
++	if (!found)
++		panic("DRAM init failed: Can't detect number of rows!");
+ 	debug("detected %u rows\n", rows);
+ 
+ 	/* restore data again */
 -- 
 2.49.0
 
