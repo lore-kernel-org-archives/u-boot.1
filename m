@@ -4,49 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8F9C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 16:32:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D222EC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 16:42:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CDB684137;
-	Fri, 11 Apr 2025 18:32:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 1A07784085;
+	Fri, 11 Apr 2025 18:42:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Uv2w99Yv";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E472B8413B; Fri, 11 Apr 2025 18:32:24 +0200 (CEST)
-Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
- [185.125.25.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0AA3182AF1; Fri, 11 Apr 2025 18:42:57 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1522884130
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 18:32:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 651D982A80
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 18:42:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZZ2K12JLgzG4m;
- Fri, 11 Apr 2025 18:32:21 +0200 (CEST)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4ZZ2K04XFDzg7N; Fri, 11 Apr 2025 18:32:20 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 11 Apr 2025 18:32:09 +0200
-Subject: [PATCH RFC] fit: allow to specify RSAPSS padding salt length magic
- value
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3f8df49e75fso694677b6e.1
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:42:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744389772; x=1744994572; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Guk33+6fIHHa6C24FxuYsYrvb95cX8gSzFioNuN3NWc=;
+ b=Uv2w99YvIe6pZ+G2ZqvAF6sHR1xwUPyVVxOhNYJhWwg7Y4PBhbRFHFXmGQtaqqPrDQ
+ /CafGvyL9GBmFGkLJtZxYrCxprC3bDMqb64bpCHOqTzrDkxVbfA1Uzb3dUp54y7t0iTA
+ 46swy2rws/X4P2yZq0ugwbVXV3C2R2P2+hd8c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744389772; x=1744994572;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Guk33+6fIHHa6C24FxuYsYrvb95cX8gSzFioNuN3NWc=;
+ b=jcIBp0WEPYgnbfskcpCH1uc7znrXfyllZWa7jjOaie1eU8wIRcqbZoOGxopTm4pDZx
+ Gpsu0nMQumzKDkaWbeTMkJHisLA3uSMuTpavciawZuoJLMqP+zpxoTYvP2kvZN8pX5zb
+ hhlM8/XEvqzCOAK3AzTbOu6pFQQzwITGUVP2x7mtfVlO+JqKG0sOh08+TGOJ/cVAi67s
+ l41UCytKUVv3u4V3RqrwLXEQmKw8FeW+IWOTR5zuu4sJRewRIh6Dq8ffTt/kJ+rBpyO1
+ YX66RJNCI8njAD1oRKaClYgF41opP85pKR4yMwqDjFBTQfZ4k/aLiEcWExZ0yFKVWItU
+ BhnQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV9okIy1D6W5fkPLDWUYPNnp4QZ3LxTtx2cgLxs/ZvjAWHt133DcK6bxP3lkH80O5ayG5syR+k=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMVh1NGz3EkWSP0tBFBQVqdu27AIMM3feYBXELWjwvOih7sdXO
+ vAnxt0r++uP1GXYhvt+0bunvKoytSD3KN/APY/SS/W8htU94FkY/lLXzaAepx3r6eHqBtZt2oir
+ LmdA=
+X-Gm-Gg: ASbGncsTC4Dlqy85cBRKLh4It0oLNab0MPYosBfFhwDaJ3t76wpwg6F852y46i/IEQ+
+ rQ9pxKjwBTUgDfWXFrcl3R97w7xQqq3Mf3i09rSfgbQKdAYJBMD9LnydyOermuGwqNHHAOqMOSU
+ U06k9udS6/xrCbbg6PsVfNh3grBjg1Z5Ln+amcTEw1UhEnJGG77pjUQnDPphPS3x0IGWz+fSNA9
+ 0jedY8GTM446kXXDfU1FUgwgSnwUWC/ujfBN8sMXLBTjaqs37CadeLKWb1rDTGKaSP5oC40oQ6u
+ Rgs1Y46N8Fv3ZU4jfWQJ0nWykZ7NjnC9GC1I7m0BBk7e3iRUNvzsg4VwxnGFj7ZWjwPkNtbBL+I
+ HYQ==
+X-Google-Smtp-Source: AGHT+IGlIC4jC6HQER2JpiA3TF2UQmcaSrE61kztHGkOELKyzC090E966QHWp1O3P7gSY0pHaztsXQ==
+X-Received: by 2002:a05:6808:1a12:b0:3f9:bc8f:8145 with SMTP id
+ 5614622812f47-40084e39511mr1822251b6e.0.1744389771994; 
+ Fri, 11 Apr 2025 09:42:51 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4007629efc7sm983839b6e.14.2025.04.11.09.42.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Apr 2025 09:42:51 -0700 (PDT)
+Date: Fri, 11 Apr 2025 10:42:48 -0600
+From: Tom Rini <trini@konsulko.com>
+To: =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>
+Cc: Joel Stanley <joel@jms.id.au>, Eugen Hristev <eugen.hristev@linaro.org>,
+ open list <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>
+Subject: Re: Gitlab runner timeout on evb-ast2600 ?
+Message-ID: <20250411164248.GS5495@bill-the-cat>
+References: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
+ <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
+ <20250410231444.GK5495@bill-the-cat>
+ <89f2eac8-4e76-42a6-b56e-fc62abdaffe9@kaod.org>
+ <20250411150120.GQ5495@bill-the-cat>
+ <ef7019b2-1a81-46b2-8612-ead1139b742e@kaod.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250411-rsapss-saltlen-v1-1-f2913c4b3415@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAAhE+WcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDE0ND3aLixILiYt3ixJySnNQ83SSLFPNEM3MzUzPTRCWgpoKi1LTMCrC
- B0UpBbs5KsbW1AKwSC1hlAAAA
-X-Change-ID: 20250411-rsapss-saltlen-b8d7a676565a
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Loic Poulain <loic.poulain@linaro.org>, 
- SESA644425 <giojahermann@gmail.com>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="K21HCNwhbUVt4Xx/"
+Content-Disposition: inline
+In-Reply-To: <ef7019b2-1a81-46b2-8612-ead1139b742e@kaod.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,253 +105,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Before commit 1b99c15d73c1 ("lib: rsa: Set conventional salt length
-RSA-PSS parameter"), the salt length for PSS padding was openSSL's
-default. Prior to openSSL 3.1, this was the maximum allowed value ("max"
-when passed from CLI or RSA_PSS_SALTLEN_MAX (-3) if from library).[1]
-Starting from 3.1, the default is now "maximized up to the digest
-length" ("auto-digestmax" from CLI or RSA_PSS_SALTLEN_AUTO_DIGEST_MAX
-(-4) from library).[2]
+--K21HCNwhbUVt4Xx/
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-After commit 1b99c15d73c1 ("lib: rsa: Set conventional salt length
-RSA-PSS parameter"), the salt length has been forced to the digest
-length, but manually instead of using "digest" from CLI or
-RSA_PSS_SALTLEN_DIGEST from lib.
+On Fri, Apr 11, 2025 at 05:26:55PM +0200, C=E9dric Le Goater wrote:
+> On 4/11/25 17:01, Tom Rini wrote:
+> > On Fri, Apr 11, 2025 at 09:23:59AM +0200, C=E9dric Le Goater wrote:
+> > > Hi,
+> > >=20
+> > > On 4/11/25 01:14, Tom Rini wrote:
+> > > > On Fri, Apr 11, 2025 at 08:07:15AM +0930, Joel Stanley wrote:
+> > > > > On Mon, 7 Apr 2025 at 23:25, Eugen Hristev <eugen.hristev@linaro.=
+org> wrote:
+> > > > > >=20
+> > > > > > Hi everyone,
+> > > > > >=20
+> > > > > > I keep getting an error on running the CI loop on -next on my t=
+ree :
+> > > > > >=20
+> > > > > > https://source.denx.de/u-boot/custodians/u-boot-at91/-/jobs/109=
+0517
+> > > > >=20
+> > > > > Thanks for the report.
+> > > > >=20
+> > > > > >=20
+> > > > > > ! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - =
+no other
+> > > > > > tests will run !
+> > > > > >=20
+> > > > > > Any clue ? It's been like this for few days. It doesn't look li=
+ke a
+> > > > > > faulty patch.
+> > > > >=20
+> > > > > I can't see that link you sent me, it 403s.
+> > > > >=20
+> > > > > Do you have any other traces or information to share?
+> > > >=20
+> > > > It's been intermittent recently. I was able to put qemu + gdb toget=
+her
+> > > > and see it's one of the early initcalls that fails and hang()s but
+> > > > didn't see why. You should be able to use commit 1f0281294d8b ("Mer=
+ge
+> > > > patch series "Annotate switch/case fallthrough cases"") as a starti=
+ng
+> > > > point of failure.
+> > > >=20
+> > >=20
+> > > Do you have logs ?
+> > >=20
+> > > Things look ok from the QEMU side (latest 10.0.0-rc and 9.1) :
+> > >      uboot_build=3D/path/to/u-boot/
+> > >      flashsize=3D65536
+> > >      flash=3D./flash-ast2600-evb-uboot
+> > >      dd of=3D$flash bs=3D1K if=3D/dev/zero count=3D$flashsize
+> > >      dd of=3D$flash conv=3Dnotrunc bs=3D1K if=3D$uboot_build/spl/u-bo=
+ot-spl.bin
+> > >      dd of=3D$flash conv=3Dnotrunc bs=3D1K if=3D$uboot_build/u-boot.i=
+mg seek=3D64
+> > >      $ qemu-system-arm -M ast2600-evb -net nic,netdev=3Dnet0 -netdev =
+user,id=3Dnet0 -nographic -snapshot -serial mon:stdio   -drive file=3Dflash=
+-ast2600-evb-uboot,format=3Draw,if=3Dmtd
+> > >      qemu-system-arm: warning: nic ftgmac100.1 has no peer
+> > >      qemu-system-arm: warning: nic ftgmac100.2 has no peer
+> > >      qemu-system-arm: warning: nic ftgmac100.3 has no peer
+> > >      U-Boot SPL 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +=
+0200)
+> > >      Trying to boot from RAM
+> > >      ## Checking hash(es) for config conf-1 ... OK
+> > >      ## Checking hash(es) for Image firmware-1 ... crc32+ OK
+> > >      ## Checking hash(es) for Image fdt-1 ... crc32+ OK
+> > >      U-Boot 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +0200)
+> >=20
+> > Please note that it's inconsistent about what commit fails. I would
+> > expect 1f0281294d8b in U-Boot to fail but I don't know about
+> > cb7555e93075.
+> >=20
+> > Also can you please check QEMU v8.2.0? That's what we're on, and I can
+> > try and test 9.1.3 or 10.0.0-rc and see if it's a QEMU problem instead.
+> > Thanks!
+>=20
+> Same result :
+>=20
+> qemu-system-arm -M ast2600-evb -net nic,netdev=3Dnet0 -netdev user,id=3Dn=
+et0 -nographic -snapshot -serial mon:stdio   -drive file=3Dflash-ast2600-ev=
+b-uboot,format=3Draw,if=3Dmtd
+> qemu-system-arm: warning: nic ftgmac100.1 has no peer
+> qemu-system-arm: warning: nic ftgmac100.2 has no peer
+> qemu-system-arm: warning: nic ftgmac100.3 has no peer
+>=20
+> U-Boot SPL 2025.04-00881-g1f0281294d8b (Apr 11 2025 - 17:23:25 +0200)
+> Trying to boot from RAM
+> ## Checking hash(es) for config conf-1 ... OK
+> ## Checking hash(es) for Image firmware-1 ... crc32+ OK
+> ## Checking hash(es) for Image fdt-1 ... crc32+ OK
+>=20
+>=20
+> U-Boot 2025.04-00881-g1f0281294d8b (Apr 11 2025 - 17:23:25 +0200)
+>=20
+> Model: Aspeed BMC
+> DRAM:  already initialized, 1008 MiB (capacity:1024 MiB, VGA:64 MiB), ECC=
+ off
+> Core:  266 devices, 24 uclasses, devicetree: separate
+> WDT:   Started watchdog@1e785000 with servicing every 1000ms (60s timeout)
+> MMC:   sdhci@1e750100: 0
+> Loading Environment from SPIFlash... SF: Detected mx25u51245g with page s=
+ize 256 Bytes, erase size 64 KiB, total 64 MiB
+> *** Warning - bad CRC, using default environment
+>=20
+> In:    serial@1e784000
+> Out:   serial@1e784000
+> Err:   serial@1e784000
+> Net:   eth0: ftgmac@1e660000, eth1: ftgmac@1e680000, eth2: ftgmac@1e67000=
+0, eth3: ftgmac@1e690000
+> Hit any key to stop autoboot:  0
+> libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+> Error loading kernel FIT image
+> =3D> QEMU 8.2.10 monitor - type 'help' for more information
+> (qemu) q
+>=20
+>=20
+> What about the compiler ?
 
-Before commit 81eff51047e2 ("lib: rsa: Update function
-padding_pss_verify (any-salt)"), verifying a signature with PSS padding
-could only be done when the padding was using the max value for the salt
-length. While that is now history and the code should now detect the
-appropriate length when verifying, this lack of support in older
-versions bring some issue. Indeed, U-Boot is typically split in two
-binaries (at least on Rockchip platforms), one for U-Boot FIT (with
-U-Boot proper, TF-A, TEE, etc..) which can be signed and one for the
-stage(s) before U-Boot proper, who's in charge of verifying the FIT
-signature. It would be possible to update only U-Boot FIT and not the
-other prior stages binary in which case the device would be bricked if
-it has a pre-81eff51047e2 prior stages with a U-Boot FIT signed from
-post-1b99c15d73c1 or from pre-1b99c15d73c1 with openSSL >= 3.1.
+It's:
+https://www.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-g=
+cc-13.2.0-nolibc-aarch64-linux.tar.xz
 
-This introduces a "padding-saltlen" string property to the signature
-node of a FIT node which expects the CLI name of the openSSL option for
-setting the RSAPSS padding salt length, it can be:
-- "max"
-- "digest"
-- "auto" ("max" alias, but U-Boot internals pass "auto" to openSSL)
-- "auto-digestmax" (only available on openSSL >= 3.1)
+--=20
+Tom
 
-If it is missing, "digest" is assumed, to match current behavior.
+--K21HCNwhbUVt4Xx/
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Note that while openSSL allows to pass the length as number, the string
-magic values are represented as negative numbers. FDT only allowing
-u32/u64 for numbers, we cannot represent those negative numbers in the
-same property as the magic string values. Hence the choice to go with a
-string property.
+-----BEGIN PGP SIGNATURE-----
 
-[1] https://docs.openssl.org/3.0/man3/EVP_PKEY_CTX_ctrl/#rsa-parameters
-[2] https://docs.openssl.org/3.4/man3/EVP_PKEY_CTX_ctrl/#rsa-parameters
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf5RoQACgkQFHw5/5Y0
+tyz+fgv8D0K6Zt/HvV1HcUC5JikWa2LCOqAM+iwq5PhMBWRXrBJuSIhlWQ1ndggF
+GPkB/dp339PcJZlAJ4Nb4DG6DfST/6+O7VWbT8rS0GBCXqdqy8lYS8K1rzvivWxb
++uDYcDJ6bstxuzcceMmjZQvZxBzKvH6uRA4Y7e0EHyTPh/qHLiK06BdEDXhvmN/y
+/eWxEOQAoPqCI0S7K4sVNBmfWx2tufPVxcRMwZx6Iqmp88yynjCsawmrsJKlL6v/
+m30HmIRI6S2clrWounThdwStrTtHoZ942sSNUDlO54KYZgANFS0JrwSzGC0OEG/k
+2tbCwuDZJOi5O9EmoN1pmrJdMOp+Oe0gtAYTyrrgbVpbnf3eL1dIGVKLMwrjtp88
+ro/hHRFkqFkVWq+E0mJ0GZfd+FLR938kr9dB/1+hVjL6J3wCCTOuNItWIBC4Xql7
+naGMkVQTFA/f5Ma7S0IgIPLNDHQhZjQ5wRNEj/0aE9Eid4xn+S+i9mwHjVo2AGmD
+/ZgMnzX3
+=xAUS
+-----END PGP SIGNATURE-----
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
-How to test:
-- generate keys and certs at the root of U-Boot's source directory:
-  - openssl genpkey -algorithm RSA -out dev.key \
-	  -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537
-  - openssl req -batch -new -x509 -key dev.key -out dev.crt
-- apply the following diff for generating signed U-Boot FIT + adding the
-  pubkey to U-Boot SPL + making signature verification required:
-
- diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
- index c8c928c7e50..e5fd8c73602 100644
- --- a/arch/arm/dts/rockchip-u-boot.dtsi
- +++ b/arch/arm/dts/rockchip-u-boot.dtsi
- @@ -29,7 +29,14 @@
-  			u-boot-tpl {
-  			};
-  #endif
- -			u-boot-spl {
- +			section {
- +				u-boot-spl-nodtb {
- +				};
- +				u-boot-spl-pubkey-dtb {
- +					algo = "sha256,rsa2048";
- +					required = "conf";
- +					key-name-hint = "dev";
- +				};
-  			};
-  		};
-  
- @@ -45,6 +52,7 @@
-  			filename = "u-boot.itb";
-  			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-  			fit,align = <512>;
- +			fit,sign;
-  			offset = <CONFIG_SPL_PAD_TO>;
-  			images {
-  				u-boot {
- @@ -162,6 +170,13 @@
-  					fit,firmware = "op-tee", "u-boot";
-  #endif
-  					fit,loadables;
- +
- +					signature {
- +						algo = "sha256,rsa2048";
- +						key-name-hint = "dev";
- +						padding = "pss";
- +						sign-images = "fdt", "loadables", "firmware";
- +					};
-  				};
-  			};
-  		};
-
-You need RSA and RSAPSS support in SPL for this to work (it'll compile
-just fine but always fail to verify).
-
-It'll successfully boot.
-
-Now revert commit 81eff51047e2 ("lib: rsa: Update function
-padding_pss_verify (any-salt)") and regenerate the images.
-
-U-Boot SPL will fail to verify U-Boot FIT signature and refuse to boot.
-
-Now, add `padding-saltlen = "max";` to the signature node and regenerate
-the images, U-Boot SPL will now be able to verify U-Boot FIT signature.
-
-Note that I have no security background and I essentially just made sure
-it compiles and boots (or refuses to boot).
-
-This is marked as RFC because we would need to add the property to
-https://fitspec.osfw.foundation/#configuration-signature-nodes
-and
-https://fitspec.osfw.foundation/#image-signature-nodes
-I assume. Don't want to suggest something to the FIT spec if it's anyway
-going to be denied in U-Boot :)
-
-Note that I actually need a patch like this (for now I just hardcoded
-the salt length to use MAX instead of digest length) for one of our
-products. I don't mind keeping it downstream but I felt like this was a
-semi-reasonable approach to making this configurable.
-
-What do you think?
----
- include/image.h    |  1 +
- lib/rsa/rsa-sign.c | 34 +++++++++++++++++++++++++++-------
- tools/image-host.c |  3 +++
- 3 files changed, 31 insertions(+), 7 deletions(-)
-
-diff --git a/include/image.h b/include/image.h
-index c1db8383459c9d7ce1ecc318ccccb4627a7066e5..785852a92f838b7b89bede1c6e6c9a346a9efd1d 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1511,6 +1511,7 @@ struct image_sign_info {
- 	int required_keynode;		/* Node offset of key to use: -1=any */
- 	const char *require_keys;	/* Value for 'required' property */
- 	const char *engine_id;		/* Engine to use for signing */
-+	const char *saltlen_name;	/* OpenSSL RSA PSS salt length magic value */
- 	/*
- 	 * Note: the following two fields are always valid even w/o
- 	 * RSA_VERIFY_WITH_PKEY in order to make sure this structure is
-diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
-index fa9e143b4ca8cbc50297acdfbb4ccb39cb160f84..10b25094a2fada08eb37c38a5d618b6e07972139 100644
---- a/lib/rsa/rsa-sign.c
-+++ b/lib/rsa/rsa-sign.c
-@@ -384,7 +384,7 @@ static void rsa_engine_remove(ENGINE *e)
- static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
- 			     struct checksum_algo *checksum_algo,
- 		const struct image_region region[], int region_count,
--		uint8_t **sigp, uint *sig_size)
-+		uint8_t **sigp, uint *sig_size, const char *saltlen_name)
- {
- 	EVP_PKEY_CTX *ckey;
- 	EVP_MD_CTX *context;
-@@ -423,17 +423,37 @@ static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
- 
- 	if (CONFIG_IS_ENABLED(FIT_RSASSA_PSS) && padding_algo &&
- 	    !strcmp(padding_algo->name, "pss")) {
-+		int saltlen;
-+
- 		if (EVP_PKEY_CTX_set_rsa_padding(ckey,
- 						 RSA_PKCS1_PSS_PADDING) <= 0) {
- 			ret = rsa_err("Signer padding setup failed");
- 			goto err_sign;
- 		}
- 
--		/* Per RFC 3447 (and convention) the Typical salt length is the
--		 * length of the output of the digest algorithm.
--		 */
--		if (EVP_PKEY_CTX_set_rsa_pss_saltlen(ckey,
--						     checksum_algo->checksum_len) <= 0) {
-+		if (saltlen_name && !strcmp(saltlen_name, "max")) {
-+			saltlen = RSA_PSS_SALTLEN_MAX;
-+		} else if (saltlen_name && !strcmp(saltlen_name, "auto")) {
-+			saltlen = RSA_PSS_SALTLEN_AUTO;
-+#if OPENSSL_VERSION_NUMBER >= 0x31000000L
-+		} else if (saltlen_name && !strcmp(saltlen_name, "auto-digestmax")) {
-+			saltlen = RSA_PSS_SALTLEN_AUTO_DIGEST_MAX;
-+#endif
-+		} else if (saltlen_name && !strcmp(saltlen_name, "digest")) {
-+			saltlen = RSA_PSS_SALTLEN_DIGEST;
-+		} else if (saltlen_name) {
-+			fprintf(stderr, "Invalid salt length '%s'\n", saltlen_name);
-+			rsa_err("Invalid salt length");
-+			goto err_sign;
-+		} else {
-+			/* Per RFC 3447 (and convention) the Typical salt length is the
-+			 * length of the output of the digest algorithm.
-+			 */
-+			debug("padding saltlen missing, assuming \"digest\"\n");
-+			saltlen = RSA_PSS_SALTLEN_DIGEST;
-+		}
-+
-+		if (EVP_PKEY_CTX_set_rsa_pss_saltlen(ckey, saltlen) <= 0) {
- 			ret = rsa_err("Signer salt length setup failed");
- 			goto err_sign;
- 		}
-@@ -491,7 +511,7 @@ int rsa_sign(struct image_sign_info *info,
- 	if (ret)
- 		goto err_priv;
- 	ret = rsa_sign_with_key(pkey, info->padding, info->checksum, region,
--				region_count, sigp, sig_len);
-+				region_count, sigp, sig_len, info->saltlen_name);
- 	if (ret)
- 		goto err_sign;
- 
-diff --git a/tools/image-host.c b/tools/image-host.c
-index a9b8690276386aa21983612c6a306b7897a0af26..63055f2044ac5c320c52dc87e59b275d4bc79e4a 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -175,6 +175,7 @@ static int fit_image_setup_sig(struct image_sign_info *info,
- {
- 	const char *node_name;
- 	const char *padding_name;
-+	const char *saltlen_name;
- 
- 	node_name = fit_get_name(fit, noffset, NULL);
- 	if (!algo_name) {
-@@ -187,6 +188,7 @@ static int fit_image_setup_sig(struct image_sign_info *info,
- 	}
- 
- 	padding_name = fdt_getprop(fit, noffset, "padding", NULL);
-+	saltlen_name = fdt_getprop(fit, noffset, "padding-saltlen", NULL);
- 
- 	memset(info, '\0', sizeof(*info));
- 	info->keydir = keydir;
-@@ -198,6 +200,7 @@ static int fit_image_setup_sig(struct image_sign_info *info,
- 	info->checksum = image_get_checksum_algo(algo_name);
- 	info->crypto = image_get_crypto_algo(algo_name);
- 	info->padding = image_get_padding_algo(padding_name);
-+	info->saltlen_name = saltlen_name;
- 	info->require_keys = require_keys;
- 	info->engine_id = engine_id;
- 	if (!info->checksum || !info->crypto) {
-
----
-base-commit: cb7555e93075114fe4af0adb806877ac4d4ef80d
-change-id: 20250411-rsapss-saltlen-b8d7a676565a
-
-Best regards,
--- 
-Quentin Schulz <quentin.schulz@cherry.de>
-
+--K21HCNwhbUVt4Xx/--
