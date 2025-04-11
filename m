@@ -4,108 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8C5C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 07:08:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91887C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 07:17:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD8CD83EC0;
-	Fri, 11 Apr 2025 09:08:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id EBAA883EC8;
+	Fri, 11 Apr 2025 09:17:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NHe6jxGq";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dhN/M0lT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7A4F83EC9; Fri, 11 Apr 2025 09:08:22 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7C0E783EC9; Fri, 11 Apr 2025 09:17:04 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFC4283EBA
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:08:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4872683EBA
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:17:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1744355293; x=1744960093; i=xypron.glpk@gmx.de;
- bh=jEg1Sh1Dhzcf7JU8hmBaynFI7ufzJpH1UIqCMLY1qRM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=NHe6jxGqAGX9pOK/Q/ToG7+as/WjmPkjduVN0t0L4KTz7AZ5N+dy6wUTDIFl6tSj
- GHopbko3tBDWjXnXmUZJZE/DdK1Etu9CUzEpXNuMY31h37FmtFHSeyaST/Gh/gczq
- f8BZdjCu6tovt3dDdzBszoj0wDR2l9j5kRXLKMUxLnJu8CUmpi9aCRVvJ0IJ32zJ+
- H23qJnYmk3vlMXfF4F4oY8ZFvZSTW6vUN94F4ERKmm8l6i5/dUY1atEd6Ytd2xVeZ
- VQ3bhLxf/GxrRchiKV3WR/Cm6Kdqay6Ra2opQUpyqeqlLsTLSvrj/bqoSJMV8wLL6
- RTACmH8xmLl1yZnO0A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.109.163]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mel7v-1tVAaW2Hx7-00m0fL; Fri, 11
- Apr 2025 09:08:13 +0200
-Message-ID: <8ae5f2ce-06dd-45d6-9eca-dbae5c32d951@gmx.de>
-Date: Fri, 11 Apr 2025 09:08:11 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6196a1474a=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53B2q0sA001089;
+ Fri, 11 Apr 2025 09:16:45 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ KknNbymWzEsmv4e92+yWV87CPbu35owLmYzmHGydV3Y=; b=dhN/M0lTzhbDSC3+
+ ups55OHGcdVbNPgEOnfGtm5R8JOJ+cj/GaQ4PolIV5yMynU/UbiFmDHgq1yfrSWy
+ yiJuZO6mA75cvB/fTpOKjU3ixUihGnvY4tp2qfok6CB9LOwoSK1xyTKicKuBIHgA
+ 66S3THq6LkKwEg8z9y0i/AzIxwM8XWFccmOwYvXPFz4BEfz6l+kpD2u592A+/2Vy
+ uFQXsGykvwaekAasrzpEjGw3aLIeg45TK/M3rVRfsHFVQOhTXlH9/Xnyrz+W+Ynz
+ mDvCZ2DDic3tcW/Qfc3DZzjebXYJlFqXmENk1vmYvlqZlSAR6FsYnEh9LRXh5l6o
+ 9Yp2Lw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45tw8puy9r-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 11 Apr 2025 09:16:45 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DD75140049;
+ Fri, 11 Apr 2025 09:15:45 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 07206889837;
+ Fri, 11 Apr 2025 09:15:22 +0200 (CEST)
+Received: from [10.252.25.37] (10.252.25.37) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
+ 2025 09:15:21 +0200
+Message-ID: <696564cc-4159-4f1c-8f4f-54332b9022bd@foss.st.com>
+Date: Fri, 11 Apr 2025 09:15:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Print extra information from the bootmgr
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
-References: <20250328125819.1080935-1-ilias.apalodimas@linaro.org>
+Subject: Re: [RESEND PATCH 1/2] config_distro_bootcmd: make possible to
+ substitute 'part list' in distro_bootcmd
+To: Pascal Zimmermann <pzimmermann@dh-electronics.com>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marex@denx.de>, <u-boot@dh-electronics.com>
+References: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
+ <20250327143843.19358-2-pzimmermann@dh-electronics.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250328125819.1080935-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:co4LThKfDCXnfCSFHY0VI0mKUy/VC+ewGPD16N8pCvfM4/Xtm+t
- /O45U4IGnWxSk1Jst2lgQ4rPOTJ/m54Rxh5Jk/bPm8OMfYAE97hyqjvlRyODY2FE87+0bkQ
- 2+z5gwvYPmJZs5XstC/LI5f1o1NJqn55gG16yUcSF8+XzRruHA9rVnrdJNrrVJsq1Rii07y
- OsJxbiuAzbbLy1oDOgetw==
-UI-OutboundReport: notjunk:1;M01:P0:q6io+9SRp4E=;EOdyeqKka+P6t45flTrHy6LxlkW
- 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
- 0qSOEp/A41FqMMSsExZM+s=
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250327143843.19358-2-pzimmermann@dh-electronics.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.25.37]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-11_02,2025-04-10_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,58 +91,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/28/25 13:58, Ilias Apalodimas wrote:
-> Instead of just printing the label, add information for the Device
-> path as well so it's easier to see if we are booting from disk, network
-> etc
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+
+On 3/27/25 15:38, Pascal Zimmermann wrote:
+> Make it possible to substitute the 'part list' command inside
+> 'scan_dev_for_boot_part' with a custom board specific implementation.
+> 
+> For this the new define 'SCAN_DEV_FOR_BOOT_PARTS' is introduced.
+> 
+> Signed-off-by: Pascal Zimmermann <pzimmermann@dh-electronics.com>
 > ---
->   lib/efi_loader/efi_bootmgr.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index f9534ef85edb..6b9d809ff618 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -690,7 +690,7 @@ static efi_status_t try_load_entry(u16 n, efi_handle=
-_t *handle,
->   			goto error;
->   	}
->
-> -	log_info("Booting: %ls\n", lo.label);
-> +	log_info("Booting: Label: %ls Device path: %pD\n", lo.label, lo.file_p=
-ath);
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: u-boot@lists.denx.de
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: u-boot@dh-electronics.com
+> ---
+>  include/config_distro_bootcmd.h | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
+> index 0a4e4b8ff85..df0dc8cfdee 100644
+> --- a/include/config_distro_bootcmd.h
+> +++ b/include/config_distro_bootcmd.h
+> @@ -194,6 +194,11 @@
+>  #define SCAN_DEV_FOR_EFI
+>  #endif
+>  
+> +#ifndef SCAN_DEV_FOR_BOOT_PARTS
+> +#define SCAN_DEV_FOR_BOOT_PARTS \
+> +	"part list ${devtype} ${devnum} -bootable devplist; "
+> +#endif
+> +
+>  #ifdef CONFIG_SATA
+>  #define BOOTENV_SHARED_SATA	BOOTENV_SHARED_BLKDEV(sata)
+>  #define BOOTENV_DEV_SATA	BOOTENV_DEV_BLKDEV
+> @@ -538,7 +543,7 @@
+>  		"\0"                                                      \
+>  	\
+>  	"scan_dev_for_boot_part="                                         \
+> -		"part list ${devtype} ${devnum} -bootable devplist; "     \
+> +		SCAN_DEV_FOR_BOOT_PARTS                                   \
+>  		"env exists devplist || setenv devplist 1; "              \
+>  		"for distro_bootpart in ${devplist}; do "                 \
+>  			"if fstype ${devtype} "                           \
 
-I think we can remove "Label:" and but "Device path:" on a new line.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-The output is truncated according to CONFIG_SYS_PBSIZE=3D276:
-
-Booting: Label: nvme 0 Device path:
-/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73=
-b9-a384-4acc-aeab-82e828f3628b,6d00000000000000)/VenHw(e61d73b9-a384-4acc-=
-aeab-82e828f3628b,5500000002000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3=
-628b,550000000300
-
-In this case the filename is not shown at all.
-
-efi_dp_shorten() might help to provide a printable output.
-
-But I don't believe that a non-developer would have a benefit from an
-output like:
-
-HD(2,GPT,54e58a03-c1db-4c6b-afda-24340c39cda5,0x109000,0x32000)\EFI\ubuntu=
-\bootriscv64.efi)
-
-I would not know the GUIDs for my partitions by heart.
-
-Isn't log_debug() more adequate here?
-
-Best regards
-
-Heinrich
-
->
->   	/* Ignore the optional data in auto-generated boot options */
->   	if (size >=3D sizeof(efi_guid_t) &&
-
+Thanks
+Patrice
