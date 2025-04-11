@@ -4,109 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F824C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93EECC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:03:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB8668411C;
-	Fri, 11 Apr 2025 17:03:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1452084144;
+	Fri, 11 Apr 2025 17:03:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="roTDrz6p";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lhvMdh4l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B492C8413A; Fri, 11 Apr 2025 17:03:21 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD43984148; Fri, 11 Apr 2025 17:03:43 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CC6F84107
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:03:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74C1284107
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:03:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1744383796; x=1744988596; i=xypron.glpk@gmx.de;
- bh=RJTsrw81clCaOz/Squ4n5syzdGWUAJncZHvaIAzM4GA=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=roTDrz6p2NrrO+MSPH0TKDwTxjqTAdZr1FwahMnOpEBkjhED6J8jOw6P+i34pGqj
- yutF8hrhmgUkc8EbzXmUBQh6Sse0w2Ks1v2+3o6AHwshGtrjeDZgeQkU43fsvPcM/
- 1xbJekJsDvlRwFYbiA4KpbmgpNpGZpa7v4dg0QVBMykle3tGblOsbSyeUsZzUyPol
- CWyARr/MmHtfq+xjqkkk4QZDHlLYQDXVOYPS2OccKxFePBRy0X1Gb60kIgozeBTHq
- mGIMho6lkEG0dJmjomVnso+xTkzTFeSW5VDa+uDCEf/X+SYM41V4AMNfJl3Xv2MxP
- xCdNB97QyPtstfnMzQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MVNB1-1teG8J0vAN-00SUs2; Fri, 11
- Apr 2025 17:03:16 +0200
-Message-ID: <74336103-ff09-4384-8528-8895c73b1742@gmx.de>
-Date: Fri, 11 Apr 2025 17:03:11 +0200
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-39c266c2dd5so1729916f8f.3
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:03:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744383820; x=1744988620; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bo4WFpYmlvS4V+xunHdmQ9QU9WR2rtXFyZkvEqHMmZ8=;
+ b=lhvMdh4lk2FHxQ8/O/lnsG5plwPjIL58VfTrAGRIUJc+7hO8SXeGY2pAj8ahRGewU0
+ b8IEto1hcrOdaKgpm1R7pBQ1eF3vpbwTz9Jyg0ltLJjNUaevjQo8nhpHLgnrZp7+4YJj
+ nlawSfrj4Th2WY3u7mqTxnPw5NbxJom7+W/wKhszn03e23TFNQaIMrl0Ew1BPnzzjElh
+ NyjvVMdRsyj4nBsysBAusGBff31JacXf8etuKo0+vb3ZAJ2QN47O2wjBsIWAZoRRKC6H
+ wmUSOJ/zde4veULLPBqxqq/mW1FR0ELxKsZfGmSzBa2oW3uTSIKmLmc36Z/NKOjR0z3q
+ ToRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744383820; x=1744988620;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bo4WFpYmlvS4V+xunHdmQ9QU9WR2rtXFyZkvEqHMmZ8=;
+ b=cLseX4Ixtx7h6ggpNo2Hxk52Tgkg/4VldgS8Q+9DZhxpq9uCOHnKNSB2Ot5TN90JvW
+ fJwt6rk3LgTKq8eGsr3toDsyevUj6dnVp+6qKi2NYvSF4Mnt/OhbkcRq5BRxhy2CkeS6
+ RZx/JOrCwQmgPfu1JrPNUOr7Ht7CbLj4DO3HdHemTbsrlS18GxHxsdMlbrlJlNe/bBfc
+ ZDIwssPJhrx07LA3TogoqCeqQXbPmfghkE5IVZciRSBrguPa47bIHJb6xpj8Mo6buwCj
+ 01NLQc2r6kfDQt/cxpG+KGDAUtvQs/utFnUlpRqKehxLV7oAQPw3pML6oO/zy4DMukhu
+ WNWQ==
+X-Gm-Message-State: AOJu0Yx1p8yQYEIvpRX492AP/IYcYxWRu4YQNtYsogPtv3c2QHS+P16A
+ 7ocaUnmNHjRnlkX6TPTN5fJyH6z2BysqWvJ2MrP25kHzjjsLsTfjlVv3hzUZfPlTCGW/quTCsiR
+ UH24=
+X-Gm-Gg: ASbGncueTVd34F8IDnjMMXmoTWuK4xsRralLtwDSWhXaQl/ESpe65gnXruLP9D5YZJd
+ diTOKuPFomUXOM8RB/A4wnWQPdg6R5pTK/75T3HQMl/xqoCXxAVBI1arg06Js5tCq4XYQIG7G72
+ vYKQIXLRw4Z1zfPbqaldnnTF7+ZeDqGQ0nuXHZU2oOinvtaaVxbkYzacTYJKg0rHrSf0PfB/l++
+ xlSGn47Bxw5jGaaQD/djTio2ZOYLcJCLvlVQs5nfbhMtXtaogyTI2KliZmioy3HL6sQLbnIfxjl
+ 9ZOVRWoc+U5ooMAoBzjt2X9HFqd5JFpvusQ7hLZFprU78hC0eCtPRmwCJaWzKdvCKD9Es4Uhb0H
+ ETInyr1HrL5hlt59WKw==
+X-Google-Smtp-Source: AGHT+IEn9wZ3tdxTMjDU23vAgKFB3kyVNddfp2lz5mzoNyousfWtmCTS34vUEIutSHdjw/B1QzBgFA==
+X-Received: by 2002:a05:6000:4285:b0:39c:1efb:ee8a with SMTP id
+ ffacd0b85a97d-39eaaebdecfmr2616617f8f.38.1744383819557; 
+ Fri, 11 Apr 2025 08:03:39 -0700 (PDT)
+Received: from toyger.tail248178.ts.net (35-60-142-46.pool.kielnet.net.
+ [46.142.60.35]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39eaf445270sm2201005f8f.81.2025.04.11.08.03.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Apr 2025 08:03:38 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v2 0/4] Qualcomm: expand capsule update support
+Date: Fri, 11 Apr 2025 17:03:33 +0200
+Message-Id: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via EFI
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Niklas Sombert <niklas.sombert@uni-duesseldorf.de>,
- Bin Meng <bmeng.cn@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250405204409.420738-1-sjg@chromium.org>
- <CAC_iWjJ07Z4PqZa9mXSnzp5TjsgXr3RL6FxSL2EV0oX7p8uN_g@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjJ07Z4PqZa9mXSnzp5TjsgXr3RL6FxSL2EV0oX7p8uN_g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:TKqUHQLWIK7kjhqBix7pvdx/8DgL7w7GkqXl7DIvBna3AZElPmo
- W5D9sBOu7867bQmJxh5mAgRI2d1TsXhhdcuBr0/bNrBv6RsGzukpVn1berVn//0foFJnQ+h
- zxy07k97hfWK983eKoOBtSnwjd6cS/MSXd9PDbbq7MEtAfFEGcFBie1hO+Dgmot3USVAXFD
- pGyvZeDp13vnfVdbdzi5w==
-UI-OutboundReport: notjunk:1;M01:P0:qBiiTCzPnEc=;w1i6HHCTuDS9vlHpJDeiuI8eAGF
- +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
- g==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEUv+WcC/5WNQQ6DIBBFr9Kw7jSCFdOueo/GBcKgJAp0UNLGe
+ PdSb9Dl+/l5b2MJyWFi99PGCLNLLvgC4nxielR+QHCmMBOVaKpaSOiv8NJhBq1iWieENRq1lNc
+ cKWSc0S8JuLS27bUw3AhWTJHQuvdReXaFR5eWQJ8jmvlv/c+fOVSgLAqs5U3KtnlMzisKl0AD6
+ /Z9/wISKMhH1wAAAA==
+X-Change-ID: 20250326-b4-qcom-capsule-update-improvements-16ff7bc2d1d2
+To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2510;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=jzym53EOTdW5ol47c2dfDkyQ+qA3CMyzvsIBAoDyXoM=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn+S9Jh4jj5b9DFE+TSx6Agq7gg52p1/+dx4p0G
+ xgezc0w1pGJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/kvSQAKCRAFgzErGV9k
+ toteD/47R5bzgiV/hli+TgYIZNWN3jU3OGikTbUc1lbAO0W2FbzQDD92putOabKhtU2HzEGu9w/
+ WfoSoMUfeNsNmM23l6TfUR+X8NMyeSm74/n7B0gyr0DTEeibJyVFaMQ7wS55/ebbCPbFwwc7eX9
+ IL/g9TEtMDjfthyi0GeCnV4il+GQKFjDaLPec9Hz/68R/mvteLz457y61vyxn1KuaHx0UXS9FVS
+ ow3zEE4ppRS8ZKfDRDCnYPhSt6dYq8jtWUCRrTRKR/vvwVCBwN2LJLIw6JP3dv0dfimNlyk+tG1
+ K6GZm4SPBDdruePDjtZ31upH+91m7qoixWfcN7nISGEtc5pylgjUAk9PtWq5DBRzPTSQ3M/hbiK
+ aWlbcH78nwrPA8M97dVyhNR6y5y2IFBhwnCLUCmm2h0joLBqs77kKANspdGBWuh3e9PyUbteY2U
+ t1GtfunoQHqGh0tZyZWl5CLFHNwyngabbKzhFlJpbMZcUCzIL82c5+lAyk9U2GSFJ0to0VQFg1W
+ rfwhXZP4edt4E6T+TtZnFJLhCrAuRAg1PCAmVmRONbvXrsUbj0J04PlEfxOTKSFmABhNIUBt9Be
+ LgSSksZfVXSmoCAxmR1F/BgsVCgkB07R34vgfLlktVK5/wuLrDT1Q3YxkhndmM2TrjzJ2ATDw3N
+ a8s4tov/FjsNpyw==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,89 +123,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11.04.25 12:04, Ilias Apalodimas wrote:
-> Hi Simon
->
-> On Sat, 5 Apr 2025 at 23:46, Simon Glass <sjg@chromium.org> wrote:
->>
->> The EFI-loader code has not been fully converted to use bloblist, so
->> relies on the SMBIOS-table address being set in global_data.
->
-> Can you explain a bit more what this means? The SMBIOS tables for EFI
-> are supposed to be on EFI allocated memory
->
->>
->> Set this up in write_tables() so that the SMBIOS tables are actually
->> available.
->>
->> Enable the command for x86 QEMU so that the SMBIOS tests actually run.
->>
->> Signed-off-by: Simon Glass <sjg@chromium.org>
->> Fixes: 83ce35d6ebb ("emulation: Use bloblist to hold tables")
->> Reported-by: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
->> ---
->>
->>   arch/x86/lib/tables.c            | 2 ++
->>   board/emulation/qemu-x86/Kconfig | 1 +
->>   lib/efi_loader/efi_smbios.c      | 1 +
->>   3 files changed, 4 insertions(+)
->>
->> diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
->> index ec52992209f..d7f183f95dc 100644
->> --- a/arch/x86/lib/tables.c
->> +++ b/arch/x86/lib/tables.c
->> @@ -126,6 +126,8 @@ int write_tables(void)
->>                          use_high =3D true;
->>                          if (!gd->arch.table_start_high)
->>                                  gd->arch.table_start_high =3D rom_addr=
-;
->> +                       if (table->tag =3D=3D BLOBLISTT_SMBIOS_TABLES)
->> +                               gd_set_smbios_start(rom_addr);
->>                  }
->>                  rom_table_end =3D table->write(rom_addr);
->>                  if (!rom_table_end) {
->> diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x8=
-6/Kconfig
->> index b2a4e0891a4..c1564fba7cd 100644
->> --- a/board/emulation/qemu-x86/Kconfig
->> +++ b/board/emulation/qemu-x86/Kconfig
->> @@ -23,5 +23,6 @@ config BOARD_SPECIFIC_OPTIONS # dummy
->>          imply VIRTIO_PCI
->>          imply VIRTIO_NET
->>          imply VIRTIO_BLK
->> +       imply CMD_SMBIOS
->>
->>   endif
->> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
->> index 8d2ef6deb51..5275e966dfe 100644
->> --- a/lib/efi_loader/efi_smbios.c
->> +++ b/lib/efi_loader/efi_smbios.c
->> @@ -35,6 +35,7 @@ efi_status_t efi_smbios_register(void)
->>          void *buf;
->>
->>          addr =3D gd_smbios_start();
->> +       printf("register %lx\n", addr);
+The initial capsule update support only worked on the RB3 Gen 2 and made
+a lot of assumptions specific to that board.
 
-User will not know what "register" relates to.
+Implement the logic necessary to update U-Boot no matter where it was
+flashed to, independent of any particular board.
 
-log_debug() with a meaningful message in the else branch of the if
-statement below would be acceptable.
+First, we keep track of how U-Boot was loaded, specifically if we had a
+valid external FDT (even if we didn't use it) this indicates that we
+were booted via the Android bootloader, in this case the target for
+capsule updates is the boot partition. Otherwise, we target the uefi
+partition (if it exists) or the xbl partition. We handle A/B support for
+all 3 (currently we always flash to the currently active partition with
+a minor exception for the uefi partition).
 
-Best regards
+We introduce two new fw_name strings to differentiate the GUIDs based on
+the target partition, this means one board can support multiple boot
+methods with capsule update support for all of them (typically this
+would be chainloading OR flashing U-Boot to XBL).
 
-Heinrich
+Lastly, the call to scsi_scan() in dfu_scsi.c is removed. Since
+scsi_scan() unbinds all scsi devices it breaks device handles maintained
+in the EFI layer for the duration of the capsule update process and
+causes the EFI filesystem access to delete the capsule file after the
+update to fail.
 
->
-> I don't think this print is useful at all, why isn't the log_err()
-> right below enough?
->
->>          if (!addr) {
->>                  log_err("No SMBIOS tables to install\n");
->>                  return EFI_NOT_FOUND;
->> --
->> 2.43.0
->>
->
-> Thanks
-> /Ilias
+Boards should instead be responsible for calling scsi_scan() before
+initiating DFU.
+
+---
+Changes in v2:
+- Restrict the partition hunt to either UFS storage or the first MMC
+  device so that we never accidentally write to some external storage
+  (like an sdcard) during a capsule update.
+- Fix typo
+- Link to v1: https://lore.kernel.org/r/20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org
+
+---
+Caleb Connolly (4):
+      mach-snapdragon: track boot source
+      mach-snapdragon: CapsuleUpdate: support all boot methods
+      dfu: scsi: don't call scsi_scan()
+      qcom_defconfig: enable capsule update support
+
+ arch/arm/mach-snapdragon/board.c          |  26 +++
+ arch/arm/mach-snapdragon/capsule_update.c | 274 ++++++++++++++++++++++++------
+ arch/arm/mach-snapdragon/qcom-priv.h      |  14 ++
+ configs/qcm6490_defconfig                 |   6 -
+ configs/qcom_defconfig                    |   3 +
+ drivers/dfu/dfu_scsi.c                    |   5 -
+ 6 files changed, 266 insertions(+), 62 deletions(-)
+---
+base-commit: 885d68280c29b8011731b6a7cdac32b8d9a4e6fd
+change-id: 20250326-b4-qcom-capsule-update-improvements-16ff7bc2d1d2
+
+Caleb Connolly <caleb.connolly@linaro.org>
 
