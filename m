@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ECDEC36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:52:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D94FC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:55:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8901684114;
-	Fri, 11 Apr 2025 16:52:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C7597840F8;
+	Fri, 11 Apr 2025 16:55:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NJGNK8rv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JJFFCtMg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F9148410B; Fri, 11 Apr 2025 16:52:48 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 4F3F784127; Fri, 11 Apr 2025 16:55:36 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09FF884127
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:52:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C63248410C
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:55:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2c7b2c14455so1237970fac.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:52:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-39c0dfba946so1227771f8f.3
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:55:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744383164; x=1744987964; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=q7hx+DMk0kQYihsWvakMW0Encqc8VLdtJW8xN+rpFPc=;
- b=NJGNK8rvDxBaEpDX7kBsLrhA2EgX6IQjBduDN1R24c32UPveXz7eO26G1xcmjHL7nU
- hrovIzLjiX8We4w0nHLj7lN9dvBQjTn0gsQeJP4D9EwSNCDMJw21fIrZfrycVau+kExH
- UkEGluHJonAZ6ZaQFS7lG9U/zUH4B0waYh4tU=
+ d=linaro.org; s=google; t=1744383333; x=1744988133; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=NsNgx6w9Y8XSGBfjyutbVSS9ReV242t00p5t2z2vj5Y=;
+ b=JJFFCtMgG88qtdTNdSp/VEsKuZY6fMOKnovAW77Owwj0aDMMx1C9fb6uNDBllU0O3x
+ GlSvfZgbgi2mpel/T53ZputZ9egWzb3EtDGulX9iee3vEVLLXQDzxxvH2OmRGNgpr0mW
+ ncWeoLOLfqfncjsg9IOQKIzQPwSy8PHbmYcTmMJRlY1njHvDj73AvGMohsn3l2RK8ZBq
+ 2Xaw5g+QYc2i8tOOh0aK50zK2qabG/T4pdeAK1ZUypqQnrr0s4fNfE2zb+Ebv02f+pZG
+ 5YxtpPXnoKrrXV5JMJvKzXGaZ5F6joqGjP1eo/Rl61DOvj8s0H5fF1jNPY4opopUWEqn
+ ZQ8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744383164; x=1744987964;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q7hx+DMk0kQYihsWvakMW0Encqc8VLdtJW8xN+rpFPc=;
- b=vKlDDzLeb75Syf0mgis6rXN9t9TSKrbrzWyLLAX5X1FwJFpHRjrcgBCb9KYaS1TWJm
- 9hNarvZsyN8uS5w8vCGZ0TiZRTTdWvHEBYnL1iEA1LxV9HTICq4pCtWMTtjQog/LbkkT
- FMc64Vbx31QIJv4k/m2wj54cmOBgJvCQPFH6IPiVyTSWikg1+sBaUFFPJ+pnqTORGWOC
- IExnpUHTDL/KpkvW7noba0EmymKyG4E33Bu7aOwvYNRLKE7fnEcxCmyPOvM+5Ljoii1h
- c7p3lXluhPxOcu8/UPLsRZ27Oc77ZXb9LAvw1lAmUkB6X/96HYjwI3I6WhnlIXqYgZRO
- ZDFQ==
-X-Gm-Message-State: AOJu0YwvSPvi0Rv0d3w+Djwr1K/qN+Kmvi+3MDaZg9/trbyMpZukPsAW
- 4PUro0/SSwt+ZrK2VhfL6qBL3CYOlmmS76Zqn5RZUWAVH0sq1k/1d7htvTmlxyU=
-X-Gm-Gg: ASbGncvLVTaX2Y5WevzFW3Hc1FTv3UX8dqwewZ8GeTqZ+q0s8v5vAkYObQ+6YXTxxu8
- mxdW+UBZVUHtbXw4+IL1mlAnHcg2N9S8XoPu2H2xjLmJ9ukF8keoXoqJ+O0m+nbQanzVYLy68DQ
- z7T57+/a7oDW0zGxvQcAeMZCDWijwfjRHkUurbeZR00cmrXewWC3hHQ2j/0NUnKCeLhwFdww2Ow
- cVUD5syAnamSz/UlE5HX5aqYmcUtz5u08pC5MWxL/TRcX57zByNzobUwa3BC3LQECSTiAnKlK2O
- xhFz0lP3GiS54ANXjTqNVyPXKeRTJhttwYuzr1exbBONBeiIhS71FhZCZqwSKMVSlUZSc0SfCrv
- BTw==
-X-Google-Smtp-Source: AGHT+IF/IC2PA4Po5qMnpZroV68xnfxUW6JxR2JJ5v6EIwqXjJRURNfB+GFzyO0osW/leXsCI0n3tQ==
-X-Received: by 2002:a05:6871:a90d:b0:2c2:5579:7c10 with SMTP id
- 586e51a60fabf-2d0d5cc6d33mr1785862fac.9.1744383163669; 
- Fri, 11 Apr 2025 07:52:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73e4d4a4sm962499a34.42.2025.04.11.07.52.41
+ d=1e100.net; s=20230601; t=1744383333; x=1744988133;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NsNgx6w9Y8XSGBfjyutbVSS9ReV242t00p5t2z2vj5Y=;
+ b=Kwn5WhTddXg5dp/5km3+oQO3os0CG3Fpvs/qEDhX7+un+5CGwL4HBeWuOYJaTNoV9s
+ +k2fwrYAt0kQA8vWJxu0ZDdT9buqcrb3BPqJYS02zqN1Hfg9cIVFQX8IWhcu70vgjHS0
+ S5AylhV+kQnTC8YtI/lTl9llnX/fMzAMYhFL9bXmmuEi2usENx14a3ZnsEb734PCSzne
+ FdmWkE85pfu8N+/t7pn/Ria01R8EZl1LIosJ0K+1lqfCn4ZD8mmnXzOtXI5XMQ8IewVM
+ jC6SzEbDXY40yi3Q+jaO2+1l+OahKA6jn75EGNO01lJEJFtKhbvFyUiKgJYuOBuasSHs
+ 61Pg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCtGyODHULA3kSeytr8XYUHF/Q964Y604RdKNG816HP0kipHwJGSW1c825VVrLAF24zgh3e04=@lists.denx.de
+X-Gm-Message-State: AOJu0YwaG+NwfzsQR7cN6NfVCbZ+zCCoVCj2TzhIjvF1zCS9eqYkAEFL
+ Xl+FFeQRFPEcZgUV3osdPvxvRKGaHnmB1hbJgSZI73ffcxqKE4kL4jPMMPHsldEWlzfAqxhz3D9
+ N
+X-Gm-Gg: ASbGncuKGle8xDh9GmSFLg7FQlXs0BA5jSykq5cYi7UnAsFt9B2wp/kYY20SoUF3jff
+ 9rCFiEe0El6WjVqSIbHgqV57u+jhBEFcnvBG6ip+fuUQn33hCVt3e7PyBqH7rT3of5d7c7PU4kE
+ vrXncNc80xIAf+AlxRaGb2cABX6t5eDNs7LToZwzF3gob/AwnlGqV4R9Y8waA9yEaU54mKg+khv
+ aRliBky1h1m5hJcX+ODitlzYIGFN3hKxIKXID32o3+bQQoOux2XT1fUSu4x3wRLJ1h8nIJCdsI+
+ Y0pgWGM1upbZ1FGcR5Dy45o6wftwWYK8rgDEQKEjf/iXmX2S8rSDEO8cLblzSg==
+X-Google-Smtp-Source: AGHT+IFZpwyl7wugZBzdjRWD1NP0HnwgDVZsj+Bd9rLCl8fa2aXVarZEmUlZ7tF8iAVZBNAUlXMSkg==
+X-Received: by 2002:a05:6000:4205:b0:391:40bd:6222 with SMTP id
+ ffacd0b85a97d-39ea5200a8emr2024168f8f.22.1744383333257; 
+ Fri, 11 Apr 2025 07:55:33 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39eadda64ecsm2279119f8f.0.2025.04.11.07.55.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 07:52:43 -0700 (PDT)
-Date: Fri, 11 Apr 2025 08:52:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek <marex@denx.de>,
- Simon <simon.k.r.goldschmidt@gmail.com>, Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- "Meng, Tingting" <tingting.meng@altera.com>,
- "Chee, Tien Fong" <tien.fong.chee@altera.com>,
- "Hea, Kok Kiang" <kok.kiang.hea@altera.com>,
- "Ng, Boon Khai" <boon.khai.ng@altera.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@altera.com>,
- "Lim, Jit Loon" <jit.loon.lim@altera.com>,
- "Tang, Sieu Mun" <sieu.mun.tang@altera.com>
-Subject: Re: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
-Message-ID: <20250411145240.GO5495@bill-the-cat>
-References: <20250324083704.26259-1-dinesh.maniyam@altera.com>
- <SA1PR03MB6370C3D360FC1E92B4766F3CF7B52@SA1PR03MB6370.namprd03.prod.outlook.com>
- <20250408142657.GX5495@bill-the-cat>
- <SA1PR03MB637095CF17776E7274561E5FF7B62@SA1PR03MB6370.namprd03.prod.outlook.com>
+ Fri, 11 Apr 2025 07:55:32 -0700 (PDT)
+From: neil.armstrong@linaro.org
+Date: Fri, 11 Apr 2025 16:55:30 +0200
+Subject: [PATCH 1/2] pinctrl: meson: convert to livetree
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="n1wKcPrkEGTRKCGI"
-Content-Disposition: inline
-In-Reply-To: <SA1PR03MB637095CF17776E7274561E5FF7B62@SA1PR03MB6370.namprd03.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250411-u-boot-meson-livetree-v1-1-ebe31909cba5@linaro.org>
+References: <20250411-u-boot-meson-livetree-v1-0-ebe31909cba5@linaro.org>
+In-Reply-To: <20250411-u-boot-meson-livetree-v1-0-ebe31909cba5@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Beniamino Galvani <b.galvani@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4864;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=P6dTiCTGOxNhdQB0+tiXTIyW5a6Up5qyg/k1RIKMCHw=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn+S1jOhkbFRFihRzEtKDQsQqgt4qzbeB+io/YrnkQ
+ gcNOdAmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ/ktYwAKCRB33NvayMhJ0RPOEA
+ COJnOv5OF54jIzetmIdVGkN/0chpQaSFfsCCPK/kmNW42sbGlmLMetspbjep5xOWSCzI65F7pyX9j7
+ EBNIRKXwYbi2kbb+6Q2zDR12oHPzduc7nARUvssB5z832uuYLxujs/Q3TZBNUOs7jml0YhoQVJv831
+ C6iCMqW6BaoTHkAgi0JuO9y1FKOJ2txWh6HETd3nouH3rhZxp1N949b1TYCXWe3/kkEnL4fybeZ+Gr
+ h2T8d+c5TuAyPTVjAT57vbrnOMYT3os+84+QyuG3KF6fH6vhVLsUGI3+xbE+w227UloDGv2koq4CA7
+ g1EmuClHRTMWQrBzqRlqlqZXkgfvot+k5y3l7nHvbUq45d64esqhKVkvlCrWvqYgsUcxVn6UgXuPIz
+ q1ocIrWV3IUJI2muJFiz2IFS9AVrta7MRpDK2lBP5NM8KTR3buiN5T16I6zabjtwbVvnHmtMMToPjP
+ 8Z390MnPoBKYZINSN8t/Y9KoVxz0hBkVq6Fhjxxnt8xf8lrE4lNv/5oxLNII6hPT0DEA8W2wwn2CDv
+ 7lL33GmAO4pEQXPK3J7Z0FI3mFAdQWIpYqhnxW3ISbARWX+BF3efZcrLSBmB9VctY1YlOPBpEuHUOp
+ eN/wQGG9fekZIvBudPEOrea00NAlW240LTUTnodMIOzr8gDeEj8MY9qptuDA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,230 +117,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Beniamino Galvani <b.galvani@gmail.com>
 
---n1wKcPrkEGTRKCGI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Update the Meson pinctrl/gpio driver to support a live device tree.
 
-On Fri, Apr 11, 2025 at 07:00:16AM +0000, Maniyam, Dinesh wrote:
->=20
->=20
-> > -----Original Message-----
-> > From: Tom Rini <trini@konsulko.com>
-> > Sent: Tuesday, 8 April 2025 10:27 pm
-> > To: Maniyam, Dinesh <dinesh.maniyam@altera.com>
-> > Cc: u-boot@lists.denx.de; Marek <marex@denx.de>; Simon
-> > <simon.k.r.goldschmidt@gmail.com>; Simon Glass <sjg@chromium.org>; Dario
-> > Binacchi <dario.binacchi@amarulasolutions.com>; Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org>; Heinrich Schuchardt <xypron.glpk@gmx.de>;
-> > Jerome Forissier <jerome.forissier@linaro.org>; Mattijs Korpershoek
-> > <mkorpershoek@baylibre.com>; Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>;
-> > Michal Simek <michal.simek@amd.com>; Dmitry Rokosov
-> > <ddrokosov@salutedevices.com>; Jonas Karlman <jonas@kwiboo.se>; Sebasti=
-an
-> > Reichel <sebastian.reichel@collabora.com>; Meng, Tingting
-> > <tingting.meng@altera.com>; Chee, Tien Fong <tien.fong.chee@altera.com>;
-> > Hea, Kok Kiang <kok.kiang.hea@altera.com>; Ng, Boon Khai
-> > <boon.khai.ng@altera.com>; Yuslaimi, Alif Zakuan
-> > <alif.zakuan.yuslaimi@altera.com>; Zamri, Muhammad Hazim Izzat
-> > <muhammad.hazim.izzat.zamri@altera.com>; Lim, Jit Loon
-> > <jit.loon.lim@altera.com>; Tang, Sieu Mun <sieu.mun.tang@altera.com>
-> > Subject: Re: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
-> >=20
-> > On Tue, Apr 08, 2025 at 08:14:46AM +0000, Maniyam, Dinesh wrote:
-> >=20
-> > > Hi Tom Rini,
-> > >
-> > > > -----Original Message-----
-> > > > From: Maniyam, Dinesh
-> > > > Sent: Monday, 24 March 2025 4:40 pm
-> > > > To: u-boot@lists.denx.de
-> > > > Cc: Marek <marex@denx.de>; Simon <simon.k.r.goldschmidt@gmail.com>;
-> > > > Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>; Dario
-> > > > Binacchi <dario.binacchi@amarulasolutions.com>; Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org>; Heinrich Schuchardt
-> > > > <xypron.glpk@gmx.de>; Jerome Forissier
-> > > > <jerome.forissier@linaro.org>; Mattijs Korpershoek
-> > > > <mkorpershoek@baylibre.com>; Ibai Erkiaga
-> > > > <ibai.erkiaga-elorza@amd.com>; Michal Simek <michal.simek@amd.com>;
-> > > > Dmitry Rokosov <ddrokosov@salutedevices.com>; Jonas Karlman
-> > > > <jonas@kwiboo.se>; Sebastian Reichel
-> > > > <sebastian.reichel@collabora.com>; Meng, Tingting
-> > > > <tingting.meng@altera.com>; Chee, Tien Fong
-> > > > <tien.fong.chee@altera.com>; Hea, Kok Kiang
-> > > > <kok.kiang.hea@altera.com>; Maniyam, Dinesh
-> > > > <dinesh.maniyam@altera.com>; Ng, Boon Khai
-> > > > <boon.khai.ng@altera.com>; Yuslaimi, Alif Zakuan
-> > > > <alif.zakuan.yuslaimi@altera.com>; Zamri, Muhammad Hazim Izzat
-> > > > <muhammad.hazim.izzat.zamri@altera.com>; Lim, Jit Loon
-> > > > <jit.loon.lim@altera.com>; Tang, Sieu Mun <sieu.mun.tang@altera.com>
-> > > > Subject: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
-> > > >
-> > > > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
-> > > >
-> > > > This patchset add Synopsys MIPI I3C Driver support for Intel Agilex=
-5 devices.
-> > > >
-> > > > The i3c driver is leveraged from the master/dw-i3c-master.c,
-> > > > i3c/device.c and i3c/master.c Linux version 6.6.37 LTS And few
-> > > > header files included to be part of the migration; i3c/internals.h,
-> > > > include/linux/i3c/ccc.h, include/linux/i3c/device.h and
-> > include/linux/i3c/master.h.
-> > > > Additional i3c uclass driver and command files added to support i3c
-> > > > read and write in U-Boot.
-> > > >
-> > > > Patch status:
-> > > >
-> > > > Detail changelog can find in commit message.
-> > > >
-> > > > v3->v2:
-> > > > --------
-> > > > - Squash commit 10 to commit 9
-> > > > - Resolve index for new files to pass the checkpatch
-> > > >
-> > > > Commit: sandbox_defconfig: Enable configs for sandbox i3c
-> > > > Commit: agilex5_defconfig: Enable i3c configs for agilex5
-> > > > - use savedefconfig
-> > > >
-> > > > drivers: Enabled Kconfig and Makefile for i3c support
-> > > > - Add maintainer for i3c
-> > > >
-> > > > drivers: i3c: Enabled Kconfig and Makefile for DWI3C
-> > > > - Add empty lines for if/endif
-> > > >
-> > > > drivers: i3c: Add i3c sandbox simple test.
-> > > > - Removed DECLARE_GLOBAL_DATA_PTR
-> > > >
-> > > > v1->v2:
-> > > > --------
-> > > > Reorder commits.
-> > > >
-> > > > Added commits:
-> > > > - drivers: i3c: Add i3c sandbox simple test.
-> > > > - test: cmd: Add simple test for i3c
-> > > > - configs: sandbox_defconfig: Enable configs for sandbox i3c
-> > > > - configs: agilex5_defconfig: Enable i3c configs for agilex5
-> > > >
-> > > > History:
-> > > > --------
-> > > > [v1]:
-> > > > https://patchwork.ozlabs.org/project/uboot/cover/20250218025705.5005
-> > > > 1-1-
-> > > > dinesh.maniyam@intel.com/
-> > > > [v2]:
-> > > > https://patchwork.ozlabs.org/project/uboot/cover/20250314040902.4362
-> > > > 1-1-
-> > > > dinesh.maniyam@altera.com/
-> > > >
-> > > > Dinesh Maniyam (12):
-> > > >   drivers: i3c: Add new i3c uclass id
-> > > >   drivers: i3c: Add driver for MIPI DWI3C
-> > > >   drivers: i3c: Add i3c uclass driver.
-> > > >   drivers: Enabled Kconfig and Makefile for i3c support
-> > > >   drivers: i3c: Enabled Kconfig and Makefile for DWI3C
-> > > >   drivers: i3c: Add i3c sandbox simple test.
-> > > >   drivers: i3c: master: Enable probe i3c without slave device
-> > > >   i3c: master: dw-i3c-master: Fix OD_TIMING for spike filter
-> > > >   cmd: Add i3c command support.
-> > > >   test: cmd: Add simple test for i3c
-> > > >   configs: sandbox_defconfig: Enable configs for sandbox i3c
-> > > >   configs: agilex5_defconfig: Enable i3c configs for agilex5
-> > > >
-> > > >  MAINTAINERS                        |    7 +
-> > > >  arch/sandbox/dts/test.dts          |    8 +
-> > > >  cmd/Kconfig                        |    6 +
-> > > >  cmd/Makefile                       |    1 +
-> > > >  cmd/i3c.c                          |  193 +++
-> > > >  configs/sandbox_defconfig          |    4 +
-> > > >  configs/socfpga_agilex5_defconfig  |    3 +
-> > > >  doc/usage/cmd/i3c.rst              |   98 ++
-> > > >  drivers/Kconfig                    |    2 +
-> > > >  drivers/Makefile                   |    1 +
-> > > >  drivers/i3c/Kconfig                |   27 +
-> > > >  drivers/i3c/Makefile               |    5 +
-> > > >  drivers/i3c/device.c               |  262 ++++
-> > > >  drivers/i3c/i3c-uclass.c           |   38 +
-> > > >  drivers/i3c/internals.h            |   26 +
-> > > >  drivers/i3c/master.c               | 2072 ++++++++++++++++++++++++=
-++++
-> > > >  drivers/i3c/master/Kconfig         |   11 +
-> > > >  drivers/i3c/master/Makefile        |    3 +
-> > > >  drivers/i3c/master/dw-i3c-master.c | 1058 ++++++++++++++
-> > > >  drivers/i3c/sandbox_i3c.c          |   56 +
-> > > >  include/dm/device.h                |    2 +
-> > > >  include/dm/uclass-id.h             |    1 +
-> > > >  include/dw-i3c.h                   |  252 ++++
-> > > >  include/i3c.h                      |   67 +
-> > > >  include/linux/i3c/ccc.h            |  385 ++++++
-> > > >  include/linux/i3c/device.h         |  286 ++++
-> > > >  include/linux/i3c/master.h         |  698 ++++++++++
-> > > >  test/cmd/Makefile                  |    1 +
-> > > >  test/cmd/i3c.c                     |   52 +
-> > > >  test/dm/Makefile                   |    1 +
-> > > >  test/dm/i3c.c                      |   34 +
-> > > >  31 files changed, 5660 insertions(+)  create mode 100644 cmd/i3c.c
-> > > > create mode 100644 doc/usage/cmd/i3c.rst  create mode 100644
-> > > > drivers/i3c/Kconfig  create mode 100644 drivers/i3c/Makefile  create
-> > > > mode
-> > > > 100644 drivers/i3c/device.c  create mode 100644
-> > > > drivers/i3c/i3c-uclass.c  create mode 100644 drivers/i3c/internals.h
-> > > > create mode 100644 drivers/i3c/master.c create mode 100644
-> > > > drivers/i3c/master/Kconfig  create mode 100644
-> > > > drivers/i3c/master/Makefile  create mode 100644
-> > > > drivers/i3c/master/dw-i3c- master.c  create mode 100644
-> > > > drivers/i3c/sandbox_i3c.c  create mode 100644 include/dw-i3c.h
-> > > > create mode 100644 include/i3c.h  create mode 100644
-> > > > include/linux/i3c/ccc.h  create mode 100644
-> > > > include/linux/i3c/device.h  create mode 100644
-> > > > include/linux/i3c/master.h  create mode 100644 test/cmd/i3c.c create
-> > > > mode 100644 test/dm/i3c.c
-> > > >
-> > > > --
-> > > > 2.26.2
-> > >
-> > > Please help to review the v3 of the patches.
-> > > Thanks for your time.
-> >=20
-> > Please run this through CI, see
-> > https://docs.u-boot.org/en/latest/develop/ci_testing.html, as there are=
- both
-> > easy and less-easy doc failures, and then compile warnings:
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1092473
-> >=20
-> > --
-> > Tom
->=20
-> https://github.com/u-boot/u-boot
-> Cloned the repo, tried to create and push a PR with the solution.
-> Thought, CI test will be triggered automatically once push the PR.
-> Since I'm not a maintainer I don't have the write access to push the PR.
->=20
-> Can I have access to push a PR just to trigger the CI test so that I can =
-see the result?
-> Or any other way to do it?
+Signed-off-by: Beniamino Galvani <b.galvani@gmail.com>
+Link: https://lore.kernel.org/r/20170709223006.3998-5-b.galvani@gmail.com
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ drivers/pinctrl/meson/pinctrl-meson.c | 73 +++++++++++++++++++----------------
+ 1 file changed, 39 insertions(+), 34 deletions(-)
 
-Creating a PR triggers a CI run.
+diff --git a/drivers/pinctrl/meson/pinctrl-meson.c b/drivers/pinctrl/meson/pinctrl-meson.c
+index babf1bccc9697596522dc93d8906ff0454cfebf5..21409063ee89cd2f8aa3d511f3fed6b64f800e51 100644
+--- a/drivers/pinctrl/meson/pinctrl-meson.c
++++ b/drivers/pinctrl/meson/pinctrl-meson.c
+@@ -10,6 +10,8 @@
+ #include <dm/device-internal.h>
+ #include <dm/device_compat.h>
+ #include <dm/lists.h>
++#include <dm/of_addr.h>
++#include <linux/ioport.h>
+ #include <dm/pinctrl.h>
+ #include <fdt_support.h>
+ #include <linux/bitops.h>
+@@ -319,88 +321,91 @@ int meson_gpio_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static fdt_addr_t parse_address(int offset, const char *name, int na, int ns)
++static phys_addr_t parse_address(struct udevice *dev, ofnode node,
++				 const char *name)
+ {
+-	int index, len = 0;
+-	const fdt32_t *reg;
++	struct resource r;
++	fdt_size_t sz;
++	int na, ns, index;
+ 
+-	index = fdt_stringlist_search(gd->fdt_blob, offset, "reg-names", name);
++	index = ofnode_stringlist_search(node, "reg-names", name);
+ 	if (index < 0)
+ 		return FDT_ADDR_T_NONE;
+ 
+-	reg = fdt_getprop(gd->fdt_blob, offset, "reg", &len);
+-	if (!reg || (len <= (index * sizeof(fdt32_t) * (na + ns))))
++	if (of_live_active()) {
++		if (of_address_to_resource(ofnode_to_np(node), index, &r))
++			return FDT_ADDR_T_NONE;
++		else
++			return r.start;
++	}
++
++	na = dev_read_addr_cells(dev->parent);
++	if (na < 1) {
++		debug("bad #address-cells\n");
+ 		return FDT_ADDR_T_NONE;
++	}
+ 
+-	reg += index * (na + ns);
++	ns = dev_read_size_cells(dev->parent);
++	if (ns < 1) {
++		debug("bad #size-cells\n");
++		return FDT_ADDR_T_NONE;
++	}
+ 
+-	return fdt_translate_address((void *)gd->fdt_blob, offset, reg);
++	return fdtdec_get_addr_size_fixed(gd->fdt_blob, ofnode_to_offset(node),
++					  "reg", index, na, ns, &sz, true);
+ }
+ 
+ int meson_pinctrl_probe(struct udevice *dev)
+ {
+ 	struct meson_pinctrl *priv = dev_get_priv(dev);
++	ofnode node, gpio = ofnode_null();
+ 	struct uclass_driver *drv;
+ 	struct udevice *gpio_dev;
+-	fdt_addr_t addr;
+-	int node, gpio = -1, len;
+-	int na, ns;
++	phys_addr_t addr;
+ 	char *name;
++	int len;
+ 
+-	/* FIXME: Should use livetree */
+-	na = fdt_address_cells(gd->fdt_blob, dev_of_offset(dev->parent));
+-	if (na < 1) {
+-		debug("bad #address-cells\n");
+-		return -EINVAL;
+-	}
+-
+-	ns = fdt_size_cells(gd->fdt_blob, dev_of_offset(dev->parent));
+-	if (ns < 1) {
+-		debug("bad #size-cells\n");
+-		return -EINVAL;
+-	}
+-
+-	fdt_for_each_subnode(node, gd->fdt_blob, dev_of_offset(dev)) {
+-		if (fdt_getprop(gd->fdt_blob, node, "gpio-controller", &len)) {
++	dev_for_each_subnode(node, dev) {
++		if (ofnode_read_prop(node, "gpio-controller", &len)) {
+ 			gpio = node;
+ 			break;
+ 		}
+ 	}
+ 
+-	if (!gpio) {
++	if (!ofnode_valid(gpio)) {
+ 		debug("gpio node not found\n");
+ 		return -EINVAL;
+ 	}
+ 
+-	addr = parse_address(gpio, "mux", na, ns);
++	addr = parse_address(dev, gpio, "mux");
+ 	if (addr == FDT_ADDR_T_NONE) {
+ 		debug("mux address not found\n");
+ 		return -EINVAL;
+ 	}
+ 	priv->reg_mux = (void __iomem *)addr;
+ 
+-	addr = parse_address(gpio, "gpio", na, ns);
++	addr = parse_address(dev, gpio, "gpio");
+ 	if (addr == FDT_ADDR_T_NONE) {
+ 		debug("gpio address not found\n");
+ 		return -EINVAL;
+ 	}
+ 	priv->reg_gpio = (void __iomem *)addr;
+ 
+-	addr = parse_address(gpio, "pull", na, ns);
++	addr = parse_address(dev, gpio, "pull");
+ 	/* Use gpio region if pull one is not present */
+ 	if (addr == FDT_ADDR_T_NONE)
+ 		priv->reg_pull = priv->reg_gpio;
+ 	else
+ 		priv->reg_pull = (void __iomem *)addr;
+ 
+-	addr = parse_address(gpio, "pull-enable", na, ns);
++	addr = parse_address(dev, gpio, "pull-enable");
+ 	/* Use pull region if pull-enable one is not present */
+ 	if (addr == FDT_ADDR_T_NONE)
+ 		priv->reg_pullen = priv->reg_pull;
+ 	else
+ 		priv->reg_pullen = (void __iomem *)addr;
+ 
+-	addr = parse_address(gpio, "ds", na, ns);
++	addr = parse_address(dev, gpio, "ds");
+ 	/* Drive strength region is optional */
+ 	if (addr == FDT_ADDR_T_NONE)
+ 		priv->reg_ds = NULL;
+@@ -420,8 +425,8 @@ int meson_pinctrl_probe(struct udevice *dev)
+ 	sprintf(name, "meson-gpio");
+ 
+ 	/* Create child device UCLASS_GPIO and bind it */
+-	device_bind(dev, priv->data->gpio_driver, name, NULL,
+-		    offset_to_ofnode(gpio), &gpio_dev);
++	device_bind_with_driver_data(dev, priv->data->gpio_driver, name, 0,
++				     gpio, &gpio_dev);
+ 
+ 	return 0;
+ }
 
---=20
-Tom
+-- 
+2.34.1
 
---n1wKcPrkEGTRKCGI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf5LLgACgkQFHw5/5Y0
-tyyxGgv+PhdXc2VH+Qpu9X5eGqbttqExdhbjCMs4FhlUIfpaAsZ7P0RTxC/UzcBF
-mkLtygIkPywD189kR1xerzaISyn+zvXfEe/Y14vFWDIifzqj1eLmFHWDqu4cImmM
-Pu+1w+rYMm0iHgFK+WU8Yxe8aB0MqlyKpQ2AmU75u+iO3OWTucX8zPhh3STWJsPU
-XpSquKVsgj9uPxnqefG3NsWtwQuT4snz10Bzn5hyHxOG1S12P9ll84i/o49psOWF
-NWVlGq1yiz5D0Qp5zMEgcLCeITCYz75X/jkrLapXDsfKUu52rVQ/gN9+uXBi4GMC
-9au8Z43gXRw+DGuUQS0hOXGZnYQ17d96NKOGKKE09k/jBtVxcHCRe8QZ2Yt0v8W6
-TWIhMHe6/YvMsm/cRPhZxhF1mF0qFwo0vRIpLxmhO7ZqETtWPgro60McFOf77xGl
-ouYhEaBYGPNMPApawI3LKAtT7wtKx2HUD6nVtbM/wuQrYtl5n/v5oRli7njr7N95
-NVazlT6q
-=dzhD
------END PGP SIGNATURE-----
-
---n1wKcPrkEGTRKCGI--
