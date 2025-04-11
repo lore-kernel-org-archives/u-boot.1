@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73020C369A2
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 08:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F0FC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 08:14:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E52A83F7F;
-	Fri, 11 Apr 2025 10:13:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 58E2383F8F;
+	Fri, 11 Apr 2025 10:14:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="wHplM0W7";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="SIB2mCb4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 771C582B16; Fri, 11 Apr 2025 10:13:47 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
+ id E356183F8F; Fri, 11 Apr 2025 10:14:09 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on2060d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::60d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3423983F7F
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 10:13:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE8BB83F85
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 10:14:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DRm62gK6A37oc+y2i11xUI0tyNJkaG8w9Gogr0wqX4G3nfiePZHkabpV1EtSc9rhyKFcxLGusCpUiGIPVWF6HKUkwfBWRnIZBUpuRBG1UUrYmapUu2DWD7r796l7BYLfpvY/o6//NkkMxCZSz3HoTs9LoQkNJxubhbzRDz/k2ldUyKdm9XdP2/zCTF9daueOj1ryoM6QTNO3SA4OensPANiOGD6o7tZojUMdhkXWkz7EQ4WCfs/A3Rcsodgkc8J6iyd6BRL7WccUcKkEiLEpZpLU3O0T4uc5RGVzbL3XezL500NTG28BUvcJanaQJoYedcwC+jf9cjOJ9abD1PSVHw==
+ b=y1XEFjwijMQVpZ/dudqt99ri9rsel7K7VKP1btofIQUctHZgF/tXoGjGuQHFQ5N6nLgz7a8SWGXDPO6L18rGnZYSCZM5TwoNLr3yND7TPVoaK22LN8E/C0nYEQiWTbXOg4Q/p7ATiCxLHveulTSBIXFvtF4pNKE7KZ7ub6kVvGyYvZu3O/Yc7TwwblvW/3YjbWXl3I/0OS0zhPGnjoto8qmxDVE0x3sdMeL1C2ZwpdU3oHTTsb00rXyzOtwVRHzcjc3EtcVTCNPPGMvGZXP/4egVjyD7x9Iv9GXDi9jHOIz+NH0cUMe3ruqiix3uedhTu5Mo5Oldj7xdAv5BzkiQSg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CuDq3N53lj/y9bGDdKUZJyl71Rr2igrSNciaFr5dB04=;
- b=xV7LbTPHYY8DOdcWn16mT5dBm57HgLcikqUM545AgoMHEsUhf/4XqhS6+T6L+wPmp0x8iaLqKNU7+IO2LuqZFxsut1b746TkyPcBfBQx1PUM8HZb+i0cqoaFBqPL8jT92muF2LkS3ZCp/X2Ceq2IQCloaamHy4L+fhaITI5au8x2z8a2uEXXO//sXhfxuhqJtUS91z6JjGws2awYP8NmgoLSKCRZ/0VYwmWguedU+kgQF5NF3r0jNJ3WDX4NPxeJV+Ghpqun7JoxbugJcCxnufrBFNqClUSTvrG2xXkGE/vFoWLd3sQA3Or/HfpnR/1/q0bOiGtV6bRGvdcTEWp4vg==
+ bh=8gxLiiUFkTa5mGQFnWa6pXyRBR21ynB+BeYOqjDwN94=;
+ b=mPwyVoj4U9wDOYr921pgIO8bEK341BEPxisouO4doYotIeIRyPu1z+b/+Jd34u55zvtXmmD5qtdYOWsVuMtUP76QSpQIZKQb9T66cY82A9klqYqzVrQ/YquHZiOFrFakEd6Mt4zleY+6vfwdQxZoVfMzHGwsGqZwnBaIL4JX/BKqNB1dTavgtoxu/G3oSkXq4tkvy+rX7+X3mGu88aDujSYbBtzS4U+hPyf6tgUDvZ3b08WcehYOFP8FMrO2pd20X04yoopayvs3UBrriZZidY/SvCNBoLjJJvw8Lb1/Nx0wcnFqEiKv1VSfrTWfGi+hyt+tPypFTpvMQGoaBM5+mw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CuDq3N53lj/y9bGDdKUZJyl71Rr2igrSNciaFr5dB04=;
- b=wHplM0W7oDcAkbQ3jRIb8Hh2Hp79amaM7iBnQrj3E0obRN6B80KHmiC35QrEumKAe+nHPdfFc3IrSCIS2zzXtQp7BK3CAF79zXHZNHx2/Wyofl28PFXGRPQroGCKzd059RFby3hgql0KcAZuln4n8JDla7gdNKUYqBgEnTzOOCp28DMm6TElhxACVsKV572Tt0Z9N6XWrN5I8EBA2qw60rEDzn/hN1nm8uFjJ49bX3rfIgNIukvW8THBasmmaBzaSfgvxPDuQ7h1ng2yV2BO9+MAWbxs8BLtAkf1RkMDHMJz7WvqyJ8FCZb+dVQrd2jrOQxp94d73TNldnLyAUXUWg==
+ bh=8gxLiiUFkTa5mGQFnWa6pXyRBR21ynB+BeYOqjDwN94=;
+ b=SIB2mCb4fHCfU+hbgUm2rewl/jJ76U1H6apgjqU4lvYeWKYQ6qidROE0+v3q/C0Tlu/ElRo1Ds+V/IGmdzoYxof6uM7kgHpbiBzZAwMBqm5FkKyEDwAA8JrKJhVCnZAuynd3Bs+EioMkJaxV/1rUXQzMWCgL7OVMf2RAP4eghTlc66g9jcAHmqyQKs96WJ8xvG/phW7vHhxES4nuE1A3cV0krZ+XhISrHH3g1cM69IP/JBWQv8gInScNp7d7DOnr5RTQjQNQCB7BPycr35oL/+cJJ0kH/jfmP7AHGepi1TJqubjz2mQgkIRLOy0jIzhPxpCXkHlPwAg0MGMHBh7fHQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by PA4PR04MB7967.eurprd04.prod.outlook.com (2603:10a6:102:b8::21)
+ by AS8PR04MB8932.eurprd04.prod.outlook.com (2603:10a6:20b:42f::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.23; Fri, 11 Apr
- 2025 08:13:43 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.36; Fri, 11 Apr
+ 2025 08:14:06 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8632.024; Fri, 11 Apr 2025
- 08:13:43 +0000
+ 08:14:06 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
 To: marex@denx.de, trini@konsulko.com, festevam@gmail.com, lukma@denx.de,
  seanga2@gmail.com, sjg@chromium.org, sbabic@denx.de,
@@ -60,9 +60,9 @@ To: marex@denx.de, trini@konsulko.com, festevam@gmail.com, lukma@denx.de,
 Cc: u-boot@lists.denx.de, viorel.suman@nxp.com, ye.li@nxp.com,
  ranjani.vaidyanathan@nxp.com, peng.fan@nxp.com, frank.li@nxp.com,
  ji.luo@nxp.com, jindong.yue@nxp.com, Anton.Gres@ifm.com
-Subject: [PATCH v9 16/20] tools: imx8image: add i.MX95 support
-Date: Fri, 11 Apr 2025 16:06:59 +0800
-Message-ID: <20250411080707.602371-17-alice.guo@oss.nxp.com>
+Subject: [PATCH v9 17/20] imx: container: add V2X container support for i.MX95
+Date: Fri, 11 Apr 2025 16:07:00 +0800
+Message-ID: <20250411080707.602371-18-alice.guo@oss.nxp.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250411080707.602371-1-alice.guo@oss.nxp.com>
 References: <20250411080707.602371-1-alice.guo@oss.nxp.com>
@@ -74,80 +74,80 @@ X-ClientProxiedBy: SI2PR06CA0009.apcprd06.prod.outlook.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|PA4PR04MB7967:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8fd89cbf-7143-4e70-8b69-08dd78d0c5dd
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS8PR04MB8932:EE_
+X-MS-Office365-Filtering-Correlation-Id: f477b1be-2863-421b-a465-08dd78d0d3c5
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|7416014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9x12Vw2ViFJ7K9FFQJ9WlV7X2gD8hUELgfBqHj1H5yA+PxLO37dUkNr+2XPY?=
- =?us-ascii?Q?/WWplUbjiUQeg6euXPsffo+rNbDhiNbnFjFr+qTA9AoSR5/zkTStuHMUhsaj?=
- =?us-ascii?Q?aAWHtdK8ubKcqjYbmT0EOZ4SRlxpX4nhKTE1cQ+oZcVouP8D1ZcR9zba7bn2?=
- =?us-ascii?Q?3JGuRNgC3dZIrfkYKLdFttS87iU/G4dH4xQiuDNP/CVE+LsVmq74AfzsMrsl?=
- =?us-ascii?Q?TaynjxmYtyVuCltsWC4l8Uksl7mB6a6acFw0ivY5tijh4CGoZBLWLQibbUK2?=
- =?us-ascii?Q?rNqubUBJbMFx5gsg8Ii2Xdy0hVypdMml5mZbySzQwIVRVKeROusfXdGIis6L?=
- =?us-ascii?Q?4ThTHKW4nzMvvcvHuiu1xLwO9Y/2R22dCzQ75iFWcG0WM4CQ2FqY3DKHxeZx?=
- =?us-ascii?Q?HoCcWQFx84CsAgLuinT9mhiir60OD1aUAYo06pAXdGnecTFILqWQvKHTg0r1?=
- =?us-ascii?Q?sYNLfIhQgsTj2l6Ilz8yL3EAbBkoy2z1OqnCcECsaq4x1pFWqFPyivsOwWxW?=
- =?us-ascii?Q?hBNCj+pF71XQ3w6vzXWH515t9UzcmJTcODn3IV+AKGix0WuenjPQmHI2LgVz?=
- =?us-ascii?Q?m80nJpJs1BDFyGdZKEJiwtSj/VlrijBoKB92nha2ErH3hs9Hd3RhWU3hnB6F?=
- =?us-ascii?Q?SINTg6Yct/jylN1lT3OyaYmls1VsU6r2a8oBJiNsXUWXte18SSRLOj2Pa/qG?=
- =?us-ascii?Q?fOqb6jrSMnRttNBp+eF+LvP1889UYTuX9bk6hulmDj7YuAahPR3ocNoHfx6D?=
- =?us-ascii?Q?FSYEtDB2xZUOkfr9s9YhefLMg2AwNDQvlFr+HIsdtNiKKyOteXjnzyQJUmkr?=
- =?us-ascii?Q?PNILejjsqeZ3FVQPhIFLh6EvXHqEPSibv8nkfCL/OFJXKsAoeA46YwvFm/f6?=
- =?us-ascii?Q?LZHiAWarmbP6V41gPsXbxPRpjgsvXMQbvRnx2//yeP4yuBSKL3FIcgr//3Hu?=
- =?us-ascii?Q?OtvpCYdFd4HZO4Jvi/yFP81SViV5Vu1jZjmmRqBq3EamVifpjnzX+0SZq0bo?=
- =?us-ascii?Q?tQVlHPPbyzz7F5J9qZJAfRLWa2KV54wuO3gol5UsEVoyzfrPEPl6WB23I2e7?=
- =?us-ascii?Q?JAH0WxYYzuW6Hd0WE8JlpfNWa8bbKu7xK1VWP4sWuYv8uOkeyBcj2YUFfEc1?=
- =?us-ascii?Q?tN7jrWksItPYT/ipt8zBZ9myaZNeD/5OKYbn9ergRohiymRgt0W5iLvFBsu+?=
- =?us-ascii?Q?3LvIdEgU971lGuZL0ggl5Gu+qtObAMCi+5ikTMpSgeGZS7VYefl6PgC8zoCe?=
- =?us-ascii?Q?pSLAbOx4tag420/SxjCTQnFT/J5S108LRxUy6tikgrqhNlhQKAnzbN0if50F?=
- =?us-ascii?Q?pJvCFDmmSpiKWFyhK2cC25nHutHe7uLIJkOqUkoyhGB0aj8l0h1Z2P6HHFah?=
- =?us-ascii?Q?d3gx0W1NHlxyK8h0RgGhIUfqGtYPUQ5VP79BjnUDm8AdCsc+HG9qoV4rMAy9?=
- =?us-ascii?Q?cj26v0AF96W3kXP51hZmUk0L/il/h1Oib372ALyVfUQ7Z7pHrrW/3A=3D=3D?=
+ ARA:13230040|376014|7416014|52116014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BRj1WbhbxxCgTysP686zkmbL93X4CmN9wAV+YCFPexWUjF3UlqQepllOFbJj?=
+ =?us-ascii?Q?6+Fr8FdMYQS+TMMM495a1H8CC80v+9UnhHAUmeREyO+nPXxbCZc6YIbVvIfb?=
+ =?us-ascii?Q?dneV46MPhgUic7CNM8sN+ZfnJAFfTWt+LQK+ZOf1rEjbA5DYlI0e6HlYXbgD?=
+ =?us-ascii?Q?1mj3lV5QG4OMnDa7zjWDa200euN6Gav47u3CP6LPMBwH4uqGZegcnEIAv9bL?=
+ =?us-ascii?Q?JaW0nQkMiH7oOjhZkxUjwOTdwMPHjI5XVPETRD/4PcG7ahIqrLWf1TzF1RI2?=
+ =?us-ascii?Q?c/X3sSQZmSS4RkxSSCFjSAAAOxx6YknWnBV/lkm+jkLES9Hf6XVCMjAce8io?=
+ =?us-ascii?Q?IXdLcFInngJXTrxOHwJZbzIDV7+9mvNU/08sdsICF+2qu/tMYrXKEVDmskNy?=
+ =?us-ascii?Q?LI6zn+KeyhzxZ/SKPqlUE1pwL4Xir538rGVvi+G+TRUPG/Hnj11gjBhLp3Ic?=
+ =?us-ascii?Q?bPjPAUoVf8iAPhqOJzJwhY9SGiyhfv4LmJN7wgYR/DWKayaJke7psE9HoKrB?=
+ =?us-ascii?Q?PQXuKC1eY4c5vMU78VLvPv/57GsZvh660EjENh4B2OiZWAYh5hS/EdHCG+s8?=
+ =?us-ascii?Q?QycGLGhjvRB9zR8q7PPcT6vpb2NBpG2xdyOc+72LErH5H27sZBkzu/gGAC3d?=
+ =?us-ascii?Q?1d6zai3MV01FeMhC8Q5oQ8MI+R6m4HluTOpBsDz5y2M+Y7rcYztETLDCRTTG?=
+ =?us-ascii?Q?G61JNU3Z3GxNF+q1ze7amAiiVkerAQnnlEDPFqTmZXMbEoDTH3QGAYeL7cwG?=
+ =?us-ascii?Q?zBN5yzqh9AgLTJzuw45Q+nHlWjf6kTbKoNiACz4TEStcMSfQ6CtBJP15loOc?=
+ =?us-ascii?Q?J19Iw2x0Rx/jwBdowsejPHFUhSLDfzsz5GNNeWVkQrdqp0HXnaED+sAJa/Fe?=
+ =?us-ascii?Q?6cEoFdb4mGlgPbXR3gECwzjHu7YyB86BPWReG4GsmV2iD4E5LuRO4I7CVi9D?=
+ =?us-ascii?Q?JqkVMjvaeIw1HZt7XcnaZGb5/OfAjveXKd8zZ1sgAQu8y4AaECfMG5hmzl1Z?=
+ =?us-ascii?Q?WFtOIL5//cl0t8io+Xad8PMol2kIVKCoQ5YOGcu74hfTtt4vh9doDRRAnwmo?=
+ =?us-ascii?Q?APMUpHMlzlDEndE++N8NlhLNiYqqcv7t7QioDoOMAPjGLn0lsqU6Wap9nGrb?=
+ =?us-ascii?Q?jtzLqZPNz8qjOTeBXnm+WxE+F1+1CzP1ezx0MFBxVmbrSLHE1tRODa8RDoSZ?=
+ =?us-ascii?Q?D1rPtGyBQS9vB9dO7b+bUw2hli01otSELB3IEDs0fQTDCheagNxRv/zSz1aL?=
+ =?us-ascii?Q?l78A1TS+EpGjWO+7H3gqkGu/crIk+D6/lzdRcigOHS8ehCGIQGv9qRfwW/U2?=
+ =?us-ascii?Q?fNDQtMIa7u39+O/MozjuuzVFVFXFaj+rCGtFXtX/BOwme05aHWF8Ik3utPCz?=
+ =?us-ascii?Q?R+8N3QMirNq3zsADKxZ4eVmoX+7LthT5ZcSkq0mstJQwPmAiSF3iKH9Bn7n3?=
+ =?us-ascii?Q?Ug7WNWMFGMGD++l743oqWRJ+tvHLUWRJwXmDkrsDEss8PO0DSqhRAA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(7416014)(1800799024)(366016)(38350700014);
+ SFS:(13230040)(376014)(7416014)(52116014)(1800799024)(366016)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?fCpuilQ9pSvRFrYCFee69LIC8i2hWW+ZEMMzFkT9aGYLV5TBoPS8Wp6YVPpJ?=
- =?us-ascii?Q?oDr5jMibAeSM3R072T0acY+vJyHksqzYJLX1zqqBfG3fopeqA4W5PfnCb9Ce?=
- =?us-ascii?Q?Zu3YSDp6gKk9rTKM3aY8yu3o1+11+xJr0eUZczmUS9KeH55QscMso91me9Gj?=
- =?us-ascii?Q?sOs4f6tMjhSLHXJhexAqsCfucM6yyEa4248sZ5t2biA3h86zH5JgcgY451Ez?=
- =?us-ascii?Q?T+GafrOBc/BmBoPpRkS1pELtd4CCDM/VAu7av5UuOYueH05NO6wCDXibSyDC?=
- =?us-ascii?Q?qinbsP4FEssudxnY6u/Y3/yIEpCdutRotfN7S8uQUaS0ofXiNazykbic154f?=
- =?us-ascii?Q?xAVnNBrOs58JipBQD7AKWL3MAt6FM9Rm3dNXKj7enHtkJ2jh0u4oChLSk1Cc?=
- =?us-ascii?Q?vIbO12d25x+H2pG5slY0m8lUfF7kF+FhCJFSpR2wLUTISgE7fTA81cBxv8dv?=
- =?us-ascii?Q?G77pV9Ydm2Pj808/H57rNhUiLrn7tkcUvU+I4PUntCbNh3D2wwD0n2PoJBO9?=
- =?us-ascii?Q?f5karuV3TNF2Eva3IsG5gKG+toWKLM72nZdkcZFnuOU5mOJlEn+sosb2qLuQ?=
- =?us-ascii?Q?eDiHfPkU5QOiBNkRPOHl9wscrMSR1U1Tiatsj6J+DcA5Iga3ilixcEx5rUoN?=
- =?us-ascii?Q?hLtY5mH2BRTl+AY6GV9tfyxv46aukC6ta7NOR0XXu8v2o9J1OUaNmnsth/sb?=
- =?us-ascii?Q?VU6AhyA4T+4W9IPfehV5/xfLr1OyTsc9feF1nKUC9KBMhcsyNpF2356C9Xls?=
- =?us-ascii?Q?avO7mdLqBtyJFXxYriILLFVVuoxmb9CIiZxprM2qWIM5OIrvKLSiMDwMQ7d2?=
- =?us-ascii?Q?Jabwf4BoI7iqozbutLoHdgURwzswGf37tUwNCzr1Mo7+XR2QfUv7H+YMdyVM?=
- =?us-ascii?Q?IbjmUOMLYEI0eto/TTmL8nQF8mhXCakArKInIQr2LtzT5Xhf4oMJJAEQCmjn?=
- =?us-ascii?Q?4XLHSMZcUQpOfG8sGG/6gcEhhLJ5onJ81RdrVHtShEDnXOxrFgq74ALyiadb?=
- =?us-ascii?Q?TGJnyDR0wAy4U/y/lK334I4u3d4jO4fX9JWb3RpauYP+It9pJfg/OR/ldoQe?=
- =?us-ascii?Q?3Q46cG95qDUvJu8l5NzMNek36orJRpZ3n38vj0WXQVfqy1NN0gnJx5nfKzBv?=
- =?us-ascii?Q?6uRnqyib2XQMWCvIzdMFUNr/P+MKDlm82pqAA5TakfSZspavJ/18nl2WnWnV?=
- =?us-ascii?Q?cFdDgusokp/arDnRi6kkJUYw32SptD5CKhVj5W6m+NM/lMiRpYpLVMmLcYGK?=
- =?us-ascii?Q?9LYUFgypkK8/xl51iTJ1HGsHNuVtCzNhGJdUCGsOW9s0m2JwXcriFKSwPsNJ?=
- =?us-ascii?Q?uOk5BeQIjBaSBBcUgGv0Ezpg7Lo0fYRG3gJ7IqrGbnuHdQFArpy7QTEGwAik?=
- =?us-ascii?Q?VoXkHwWcpL8nd5ax3yiie88AYClPAiwdxXEbcPtmHhJxNAVBiaSIGKXBYjn4?=
- =?us-ascii?Q?pMHK7DjMbpAPVpm7C1hFujV1FMwnpNN6xtQUo2bDiCZ9JnxbNU1Eq7OTyGV7?=
- =?us-ascii?Q?KgJWBs0hu/p/OILG75RTJOt65PiacI7SVp0fHlK7ri9dy86h+PfXYMzM9scJ?=
- =?us-ascii?Q?SvSsBa8yoDvvciYO4DbJ3CVHRUI3fTwUDqr1s271?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FI2kB0ou5ezRpCwqTGZ/C1/aw2xhfvRX4aJpqfmLI7L4Oh8vJ5CPsZIC3DD+?=
+ =?us-ascii?Q?3RxRVUW+l0ZGVXzRtvpVLVxDMomr6GVZOVGfGpjD7rnpA4jC0mW0NESazb99?=
+ =?us-ascii?Q?Kp8AVMnzIdb5uUSbiHAVBJnaxLEwoW1NesGoNswGC1sHy7O1E0RdXdhZXQaa?=
+ =?us-ascii?Q?vvMj3q0Llbl2qY/dd3QpGLbNLDQxvpimGIaMpmQmPI8RSWbwKBjN6JAzB4s4?=
+ =?us-ascii?Q?6oxJ07xjg7kv2m5SGxfwJt50cA5rF7I15wql7AtxBZaEfb246mpKA9NdF4BI?=
+ =?us-ascii?Q?wJ66aBRDpHS/w6mxs7qayRIjIjX45oPoOYmAoaB9ai7aHU/50MNe8xKHNecn?=
+ =?us-ascii?Q?4Qo+HAvDA1zlX15M6j0nU0tNw2KCi05bh4ru8dVy163fbhDZBU0iq3cN13mc?=
+ =?us-ascii?Q?+sCo4wc5fqz3GfzWTGOshtUblUcWsGhGFKoZ1VktUl6FUrdEhp0sxhBfX1kC?=
+ =?us-ascii?Q?ZuDlX5LsWWAJNuBhJ5yuHC9Y5CCfrwurIRqhH5FgMNsiaqPhkFK05s97Va5V?=
+ =?us-ascii?Q?lOEsD+av/CFkLh56zfsaYupsY7cFdflNNAi2qzmwtwDnlxX6R8EIaM/thDJV?=
+ =?us-ascii?Q?CxBXkykBIPRxWutsaOsw/7sYOeOrfxMzrQlgxHtueNz+qoKlb+io09R1GBR+?=
+ =?us-ascii?Q?6Mwe/HZ0M1QNuSghhxsvf8pXAAwU/gdQmcSaECjQWYExv+qNXIUmCRifSVO5?=
+ =?us-ascii?Q?y5IdfUo+kUuXCFWNpUzSWKbxgLP9gmaHH/O471aqsafP/Dc7jPubALgYGZGy?=
+ =?us-ascii?Q?BuUXi0lwoxtI1T/pdVuUmyge6rheJq+BoT7O5x8P2mAuQ51kdOQtr1CWQTAt?=
+ =?us-ascii?Q?l6R13DT6GuQvEFQNr2TZL0OQLy31cbERkU+5uD6KoqY5ByQ4++tdNOhk7Rld?=
+ =?us-ascii?Q?VNZmj9a2h8w0liuwVvBe7viQTXDf3fFYwP4NuA9M2yL5qrC/zKokHSh/DEwV?=
+ =?us-ascii?Q?PzDDK6jqhn9cu91VqtfxOwHVCMyG/g7AthBjSbh1dD6EairY/Y0GsWtYiBQc?=
+ =?us-ascii?Q?GvtpzZCIsd/Y2l+lg0YA8ROAvhX+QKI5yZN54punbVJ0L2scktIdM0+rK7Xn?=
+ =?us-ascii?Q?cB0Cfx6lNmRTiYbmJtTGZQWpYoEwNZbpsc7iZtchriGemDtuPFtCwsc/xFsN?=
+ =?us-ascii?Q?w0t6U46rUDtbSSe113Bo3HaZOEVt6m6QYnU5PBNYCJ/u1gv7vhaeL8b6Lk+q?=
+ =?us-ascii?Q?0WT/WHdmp3y/hG+LmimvEDOH6kDZFJlMMU4/dOHJoz5iUJ4mLUz9m3N8T49f?=
+ =?us-ascii?Q?8+RuIL5iq7EfnDbVOMWTQLLEFPxTGaKlBnGvA0QHSgQ/pAGZlaDENdOOdNRH?=
+ =?us-ascii?Q?5hdrYFejMo+u7n1WbtWXvVfMfZo9p5gq9/K2ZYjhR/65b1yqJN5h9D6cBCw1?=
+ =?us-ascii?Q?RcsqZJ/hY/qxBSf07lniOBcATS2x5Ms2f1dLKlg8IV5C/VMSHEpPwlN6SA9m?=
+ =?us-ascii?Q?aatVrfv9vwTbRb5SxEnUoDEeqEwhGEnVsvIQU8MsBSZ6kd+4En+R/wnfcGju?=
+ =?us-ascii?Q?MU8XpK796QM6KH2lGWrNlUnjkxwuyXR3phs7ApyjheflpCdNrzzpvg16esbs?=
+ =?us-ascii?Q?PWalY817TChJHxxwn2qtv46zXjRakorDiu8MqNbw?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8fd89cbf-7143-4e70-8b69-08dd78d0c5dd
+X-MS-Exchange-CrossTenant-Network-Message-Id: f477b1be-2863-421b-a465-08dd78d0d3c5
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 08:13:43.1849 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 08:14:06.1680 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TYIYKVGbyA/LKGGZH0eKPoF6Net/WlYj9xVN2O3zvILFXUW22apVT5q6QehOhnuvRaZfiST+a/K/3//iKl7j+Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7967
+X-MS-Exchange-CrossTenant-UserPrincipalName: haycT9FeL5mr6PyUWjcTKBf9vi0hBqf35aWO8MRvHOKTC8uEbwKhc0cpKZKZLDgIK9pLqiJL4/be4C55ThKwIQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8932
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,445 +164,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+From: Ye Li <ye.li@nxp.com>
 
-i.MX95 uses binman to invoke mkimage to create image container. 2 image
-containers are needed currently. The first one is composed of
-ahab-container.img, LPDDR firmware images, OEI images, System Manager
-image and u-boot-spl.bin. The second one is consisted of ARM Trusted
-firmware and u-boot.bin.
+This patch adds V2X container support for i.MX95. Since V2X container
+may not be included in ahab-container.img of i.MX95, check if V2X
+container exists in order to get the correct image end.
 
-Because DDR OEI image and LPDDR firmware images have to be packaged
-together and named as m33-oei-ddrfw.bin by binman, so imx9_image.sh does
-not check if m33-oei-ddrfw.bin exists.
-
-When using "make imx95_19x19_evk_defconfig; make", imx9_image.sh will
-delete the line for u-boot.bin in container.cfg. In fact, binman is
-always called after the u-boot.bin is built, so imx9_image.sh does not
-check if u-boot.bin exists.
-
+Signed-off-by: Ye Li <ye.li@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
 ---
- include/imx8image.h |  19 +++++-
- tools/imx8image.c   | 147 +++++++++++++++++++++++++++++++++++++++-----
- tools/imx9_image.sh |   8 +++
- 3 files changed, 155 insertions(+), 19 deletions(-)
+ arch/arm/mach-imx/image-container.c | 119 ++++++++++++++++++++++------
+ 1 file changed, 95 insertions(+), 24 deletions(-)
 
-diff --git a/include/imx8image.h b/include/imx8image.h
-index 6b95e93fb50..e0d25c5b6c9 100644
---- a/include/imx8image.h
-+++ b/include/imx8image.h
-@@ -157,7 +157,9 @@ enum imx8image_cmd {
- 	CMD_SOC_TYPE,
- 	CMD_CONTAINER,
- 	CMD_IMAGE,
--	CMD_DATA
-+	CMD_DATA,
-+	CMD_DUMMY_V2X,
-+	CMD_HOLD,
- };
+diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
+index 2afe9d38a06..f84e23f4b2a 100644
+--- a/arch/arm/mach-imx/image-container.c
++++ b/arch/arm/mach-imx/image-container.c
+@@ -41,6 +41,52 @@
+ #define FUSE_IMG_SET_OFF_WORD 720
+ #endif
  
- enum imx8image_core_type {
-@@ -169,7 +171,9 @@ enum imx8image_core_type {
- 	CFG_A35,
- 	CFG_A55,
- 	CFG_A53,
--	CFG_A72
-+	CFG_A72,
-+	CFG_M33,
-+	CFG_OEI,
- };
- 
- enum imx8image_fld_types {
-@@ -208,7 +212,10 @@ typedef enum option_type {
- 	FILEOFF,
- 	MSG_BLOCK,
- 	SENTINEL,
--	UPOWER
-+	UPOWER,
-+	OEI,
-+	DUMMY_V2X,
-+	HOLD,
- } option_type_t;
- 
- typedef struct {
-@@ -227,12 +234,16 @@ typedef struct {
- #define CORE_CA35       4
- #define CORE_CA72       5
- #define CORE_SECO       6
-+#define CORE_M33        7
- 
- #define CORE_ULP_CM33		0x1
- #define CORE_ULP_CA35		0x2
- #define CORE_ULP_UPOWER 	0x4
- #define CORE_ULP_SENTINEL 	0x6
- 
-+#define CORE_IMX95_M33P		0
-+#define CORE_IMX95_A55C0	2
++#define MAX_V2X_CTNR_IMG_NUM   (4)
++#define MIN_V2X_CTNR_IMG_NUM   (2)
 +
- #define SC_R_OTP	357U
- #define SC_R_DEBUG	354U
- #define SC_R_ROM_0	236U
-@@ -246,10 +257,12 @@ typedef struct {
- #define IMG_TYPE_EXEC    0x03   /* Executable image type */
- #define IMG_TYPE_DATA    0x04   /* Data image type */
- #define IMG_TYPE_DCD_DDR 0x05   /* DCD/DDR image type */
-+#define IMG_TYPE_OEI     0x05   /* Optional Executable image type */
- #define IMG_TYPE_SECO    0x06   /* SECO image type */
- #define IMG_TYPE_SENTINEL 0x06	/* SENTINEL image type */
- #define IMG_TYPE_PROV    0x07   /* Provisioning image type */
- #define IMG_TYPE_DEK     0x08   /* DEK validation type */
-+#define IMG_TYPE_V2X_DUMMY 0x0E /* V2X Dummy image */
- 
- #define IMG_TYPE_SHIFT   0
- #define IMG_TYPE_MASK    0x1f
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index 0135b190951..a333ded46e2 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -7,6 +7,7 @@
- 
- #include "imx8image.h"
- #include <image.h>
-+#include <linux/sizes.h>
- 
- static int p_idx;
- static int sector_size;
-@@ -54,7 +55,9 @@ static table_entry_t imx8image_cmds[] = {
- 	{CMD_CONTAINER,         "CONTAINER",            "new container",      },
- 	{CMD_IMAGE,             "IMAGE",                "new image",          },
- 	{CMD_DATA,              "DATA",                 "new data",           },
--	{-1,                    "",                     "",	              },
-+	{CMD_DUMMY_V2X,         "DUMMY_V2X",            "v2x",                },
-+	{CMD_HOLD,              "HOLD",                 "hold",               },
-+	{-1,                    "",                     "",	              }
- };
- 
- static table_entry_t imx8image_core_entries[] = {
-@@ -66,7 +69,9 @@ static table_entry_t imx8image_core_entries[] = {
- 	{CFG_A55,	"A55",			"A55 core",	},
- 	{CFG_A53,	"A53",			"A53 core",	},
- 	{CFG_A72,	"A72",			"A72 core",	},
--	{-1,		"",			"",		},
-+	{CFG_OEI,	"OEI",			"OEI", },
-+	{CFG_M33,	"M33",			"M33 core", },
-+	{-1,		"",			"",		}
- };
- 
- static table_entry_t imx8image_sector_size[] = {
-@@ -144,6 +149,14 @@ static void parse_cfg_cmd(image_t *param_stack, int32_t cmd, char *token,
- 			exit(EXIT_FAILURE);
- 		}
- 		break;
-+	case CMD_DUMMY_V2X:
-+		param_stack[p_idx].option = DUMMY_V2X;
-+		param_stack[p_idx++].entry = (uint32_t)strtoll(token, NULL, 0);
-+		break;
-+	case CMD_HOLD:
-+		param_stack[p_idx].option = HOLD;
-+		param_stack[p_idx].entry = (uint32_t)strtoll(token, NULL, 0);
-+		param_stack[p_idx++].filename = NULL;
- 	default:
- 		break;
- 	}
-@@ -221,6 +234,16 @@ static void parse_cfg_fld(image_t *param_stack, int32_t *cmd, char *token,
- 				(*cmd == CMD_DATA) ? DATA : AP;
- 			param_stack[p_idx].filename = token;
- 			break;
-+		case CFG_OEI:
-+			param_stack[p_idx].option = OEI;
-+			param_stack[p_idx].filename = token;
-+			param_stack[p_idx].ext = CORE_CM4_0;
-+			break;
-+		case CFG_M33:
-+			param_stack[p_idx].option = M40;
-+			param_stack[p_idx].ext = 0;
-+			param_stack[p_idx].filename = token;
-+			break;
- 		}
- 		break;
- 	case CFG_LOAD_ADDR:
-@@ -238,9 +261,15 @@ static void parse_cfg_fld(image_t *param_stack, int32_t *cmd, char *token,
- 		case CFG_A53:
- 		case CFG_A55:
- 		case CFG_A72:
-+		case CFG_M33:
- 			param_stack[p_idx++].entry =
- 				(uint32_t)strtoll(token, NULL, 0);
- 			break;
-+		case CFG_OEI:
-+			param_stack[p_idx].dst = (uint32_t)strtoll(token, NULL, 0);
-+			param_stack[p_idx].entry = param_stack[p_idx].dst + 1;
-+			p_idx++;
-+			break;
- 		}
- 	default:
- 		break;
-@@ -549,6 +578,7 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 				  char *tmp_filename, bool dcd_skip)
- {
- 	uint64_t entry = image_stack->entry;
-+	uint64_t dst = image_stack->dst;
- 	uint64_t core = image_stack->ext;
- 	uint32_t meta;
- 	char *tmp_name = "";
-@@ -558,7 +588,9 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 	img->offset = offset;  /* Is re-adjusted later */
- 	img->size = size;
- 
--	set_image_hash(img, tmp_filename, IMAGE_HASH_ALGO_DEFAULT);
-+	if (type != DUMMY_V2X) {
-+		set_image_hash(img, tmp_filename, IMAGE_HASH_ALGO_DEFAULT);
++#define IMG_FLAGS_IMG_TYPE_SHIFT  (0u)
++#define IMG_FLAGS_IMG_TYPE_MASK   (0xfU)
++#define IMG_FLAGS_IMG_TYPE(x)     (((x) & IMG_FLAGS_IMG_TYPE_MASK) >> \
++								   IMG_FLAGS_IMG_TYPE_SHIFT)
++
++#define IMG_FLAGS_CORE_ID_SHIFT   (4u)
++#define IMG_FLAGS_CORE_ID_MASK    (0xf0U)
++#define IMG_FLAGS_CORE_ID(x)      (((x) & IMG_FLAGS_CORE_ID_MASK) >> \
++								   IMG_FLAGS_CORE_ID_SHIFT)
++
++#define IMG_TYPE_V2X_PRI_FW     (0x0Bu)   /* Primary V2X FW */
++#define IMG_TYPE_V2X_SND_FW     (0x0Cu)   /* Secondary V2X FW */
++
++#define CORE_V2X_PRI 9
++#define CORE_V2X_SND 10
++
++static bool is_v2x_fw_container(ulong addr)
++{
++	struct container_hdr *phdr;
++	struct boot_img_t *img_entry;
++
++	phdr = (struct container_hdr *)addr;
++	if (phdr->tag != 0x87 || phdr->version != 0x0) {
++		debug("Wrong container header\n");
++		return false;
 +	}
++
++	if (phdr->num_images >= MIN_V2X_CTNR_IMG_NUM && phdr->num_images <= MAX_V2X_CTNR_IMG_NUM) {
++		img_entry = (struct boot_img_t *)(addr + sizeof(struct container_hdr));
++
++		if (IMG_FLAGS_IMG_TYPE(img_entry->hab_flags) == IMG_TYPE_V2X_PRI_FW &&
++		    IMG_FLAGS_CORE_ID(img_entry->hab_flags) == CORE_V2X_PRI) {
++			img_entry++;
++
++			if (IMG_FLAGS_IMG_TYPE(img_entry->hab_flags) == IMG_TYPE_V2X_SND_FW &&
++			    IMG_FLAGS_CORE_ID(img_entry->hab_flags) == CORE_V2X_SND)
++				return true;
++		}
++	}
++
++	return false;
++}
++
+ int get_container_size(ulong addr, u16 *header_length)
+ {
+ 	struct container_hdr *phdr;
+@@ -83,7 +129,7 @@ int get_container_size(ulong addr, u16 *header_length)
+ 	return max_offset;
+ }
  
- 	switch (type) {
- 	case SECO:
-@@ -580,6 +612,27 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 		img->dst = 0xe4000000; /* S400 IRAM base */
- 		img->entry = 0xe4000000;
- 		break;
-+	case OEI:
-+		if (soc != IMX9) {
-+			fprintf(stderr, "Error: invalid core id: %" PRIi64 "\n", core);
-+			exit(EXIT_FAILURE);
+-static int get_dev_container_size(void *dev, int dev_type, unsigned long offset, u16 *header_length)
++static int get_dev_container_size(void *dev, int dev_type, unsigned long offset, u16 *header_length, bool *v2x_cntr)
+ {
+ 	u8 *buf = malloc(CONTAINER_HDR_ALIGNMENT);
+ 	int ret = 0;
+@@ -150,6 +196,9 @@ static int get_dev_container_size(void *dev, int dev_type, unsigned long offset,
+ 
+ 	ret = get_container_size((ulong)buf, header_length);
+ 
++	if (v2x_cntr)
++		*v2x_cntr = is_v2x_fw_container((ulong)buf);
++
+ 	free(buf);
+ 
+ 	return ret;
+@@ -231,45 +280,67 @@ static unsigned long get_boot_device_offset(void *dev, int dev_type)
+ 	return offset;
+ }
+ 
+-static int get_imageset_end(void *dev, int dev_type)
++static ulong get_imageset_end(void *dev, int dev_type)
+ {
+-	unsigned long offset1 = 0, offset2 = 0;
+-	int value_container[2];
++	unsigned long offset[3] = {};
++	int value_container[3] = {};
+ 	u16 hdr_length;
++	bool v2x_fw = false;
+ 
+-	offset1 = get_boot_device_offset(dev, dev_type);
+-	offset2 = CONTAINER_HDR_ALIGNMENT + offset1;
++	offset[0] = get_boot_device_offset(dev, dev_type);
+ 
+-	value_container[0] = get_dev_container_size(dev, dev_type, offset1, &hdr_length);
++	value_container[0] = get_dev_container_size(dev, dev_type, offset[0], &hdr_length, NULL);
+ 	if (value_container[0] < 0) {
+ 		printf("Parse seco container failed %d\n", value_container[0]);
+-		return value_container[0];
++		return 0;
+ 	}
+ 
+ 	debug("seco container size 0x%x\n", value_container[0]);
+ 
+-	value_container[1] = get_dev_container_size(dev, dev_type, offset2, &hdr_length);
+-	if (value_container[1] < 0) {
+-		debug("Parse scu container failed %d, only seco container\n",
+-		      value_container[1]);
+-		/* return seco container total size */
+-		return value_container[0] + offset1;
++	if (is_imx95()) {
++		offset[1] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[0];
++
++		value_container[1] = get_dev_container_size(dev, dev_type, offset[1], &hdr_length, &v2x_fw);
++		if (value_container[1] < 0) {
++			printf("Parse v2x container failed %d\n", value_container[1]);
++			return value_container[0] + offset[0]; /* return seco container total size */
 +		}
 +
-+		img->hab_flags |= IMG_TYPE_OEI;
-+		if (core == CORE_CM4_0) {
-+			img->hab_flags |= CORE_ULP_CM33 << BOOT_IMG_FLAGS_CORE_SHIFT;
-+			meta = CORE_IMX95_M33P;
-+
++		if (v2x_fw) {
++			debug("v2x container size 0x%x\n", value_container[1]);
++			offset[2] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[1];
 +		} else {
-+			img->hab_flags |= CORE_ULP_CA35 << BOOT_IMG_FLAGS_CORE_SHIFT;
-+			meta = CORE_IMX95_A55C0;
++			printf("no v2x container included\n");
++			offset[2] = offset[1];
 +		}
-+		tmp_name = "OEI";
-+		img->dst = (dst ? dst : entry);
-+		img->entry = entry;
-+		img->meta = meta;
-+		custom_partition = 0;
-+		break;
- 	case AP:
- 		if (soc == QX && core == CORE_CA35) {
- 			meta = IMAGE_A35_DEFAULT_META(custom_partition);
-@@ -587,8 +640,10 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 			meta = IMAGE_A53_DEFAULT_META(custom_partition);
- 		} else if (soc == QM && core == CORE_CA72) {
- 			meta = IMAGE_A72_DEFAULT_META(custom_partition);
--		} else if (((soc == ULP) || (soc == IMX9)) && core == CORE_CA35) {
-+		} else if ((soc == ULP) && core == CORE_CA35) {
- 			meta = 0;
-+		} else if ((soc == IMX9) && core == CORE_CA35) {
-+			meta = CORE_IMX95_A55C0;
- 		} else {
- 			fprintf(stderr,
- 				"Error: invalid AP core id: %" PRIu64 "\n",
-@@ -687,6 +742,15 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 			img->entry = 0x28300200;
- 		}
- 		break;
-+	case DUMMY_V2X:
-+		img->hab_flags |= IMG_TYPE_V2X_DUMMY;
-+		img->hab_flags |= CORE_SC << BOOT_IMG_FLAGS_CORE_SHIFT;
-+		tmp_name = "V2X Dummy";
-+		set_image_hash(img, "/dev/null", IMAGE_HASH_ALGO_DEFAULT);
-+		img->dst = entry;
-+		img->entry = entry;
-+		img->size = 0; /* dummy image has no size */
-+		break;
- 	default:
- 		fprintf(stderr, "unrecognized image type (%d)\n", type);
- 		exit(EXIT_FAILURE);
-@@ -709,15 +773,26 @@ void set_container(flash_header_v3_t *container,  uint16_t sw_version,
- 	fprintf(stdout, "container flags: 0x%x\n", container->flags);
- }
- 
--static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
-+static int get_container_image_start_pos(image_t *image_stack, uint32_t align, uint32_t *v2x)
- {
- 	image_t *img_sp = image_stack;
- 	/*8K total container header*/
- 	int file_off = CONTAINER_IMAGE_ARRAY_START_OFFSET;
- 	FILE *fd = NULL;
--	flash_header_v3_t header;
-+	flash_header_v3_t *header;
-+	flash_header_v3_t *header2;
-+	void *p;
- 	int ret;
- 
-+	p = calloc(1, SZ_4K);
-+	if (!p) {
-+		fprintf(stderr, "Fail to alloc 4K memory\n");
-+		exit(EXIT_FAILURE);
++	} else {
++		/* Skip offset[1] */
++		offset[2] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[0];
 +	}
 +
-+	header = p;
-+	header2 = p + FIRST_CONTAINER_HEADER_LENGTH;
-+
- 	while (img_sp->option != NO_IMG) {
- 		if (img_sp->option == APPEND) {
- 			fd = fopen(img_sp->filename, "r");
-@@ -726,7 +801,7 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
- 				exit(EXIT_FAILURE);
- 			}
- 
--			ret = fread(&header, sizeof(header), 1, fd);
-+			ret = fread(header, SZ_4K, 1, fd);
- 			if (ret != 1) {
- 				printf("Failure Read header %d\n", ret);
- 				exit(EXIT_FAILURE);
-@@ -734,19 +809,27 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
- 
- 			fclose(fd);
- 
--			if (header.tag != IVT_HEADER_TAG_B0) {
--				fprintf(stderr, "header tag mismatched file %s\n", img_sp->filename);
-+			if (header->tag != IVT_HEADER_TAG_B0) {
-+				fprintf(stderr, "header tag mismatched \n");
- 				exit(EXIT_FAILURE);
- 			} else {
--				file_off +=
--					header.img[header.num_images - 1].size;
--				file_off = ALIGN(file_off, align);
-+				if (header2->tag != IVT_HEADER_TAG_B0) {
-+					file_off += header->img[header->num_images - 1].size;
-+					file_off = ALIGN(file_off, align);
-+				} else {
-+					file_off = header2->img[header2->num_images - 1].offset + FIRST_CONTAINER_HEADER_LENGTH;
-+					file_off += header2->img[header2->num_images - 1].size;
-+					file_off = ALIGN(file_off, align);
-+					fprintf(stderr, "Has 2nd container %x\n", file_off);
-+					*v2x = true;
-+				}
- 			}
- 		}
- 
- 		img_sp++;
++	value_container[2] = get_dev_container_size(dev, dev_type, offset[2], &hdr_length, NULL);
++	if (value_container[2] < 0) {
++		debug("Parse scu container image failed %d, only seco container\n", value_container[2]);
++		if (is_imx95())
++			return value_container[1] + offset[1]; /* return seco + v2x container total size */
++		else
++			return value_container[0] + offset[0]; /* return seco container total size */
  	}
  
-+	free(p);
- 	return file_off;
+-	debug("scu container size 0x%x\n", value_container[1]);
++	debug("scu container size 0x%x\n", value_container[2]);
+ 
+-	return value_container[1] + offset2;
++	return value_container[2] + offset[2];
  }
  
-@@ -838,6 +921,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	char *tmp_filename = NULL;
- 	uint32_t size = 0;
- 	uint32_t file_padding = 0;
-+	uint32_t v2x = false;
- 	int ret;
+ #ifdef CONFIG_SPL_SPI_LOAD
+ unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
+ {
+-	int end;
++	ulong end;
  
- 	int container = -1;
-@@ -861,7 +945,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	set_imx_hdr_v3(&imx_header, 0);
- 	set_imx_hdr_v3(&imx_header, 1);
+ 	end = get_imageset_end(flash, QSPI_DEV);
+ 	end = ROUND(end, SZ_1K);
  
--	file_off = get_container_image_start_pos(image_stack, sector_size);
-+	file_off = get_container_image_start_pos(image_stack, sector_size, &v2x);
- 	fprintf(stdout, "container image offset (aligned):%x\n", file_off);
+-	printf("Load image from QSPI 0x%x\n", end);
++	printf("Load image from QSPI 0x%lx\n", end);
  
- 	/* step through image stack and generate the header */
-@@ -870,6 +954,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	/* stop once we reach null terminator */
- 	while (img_sp->option != NO_IMG) {
- 		switch (img_sp->option) {
-+		case OEI:
- 		case AP:
- 		case M40:
- 		case M41:
-@@ -892,6 +977,30 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 			file_off += ALIGN(sbuf.st_size, sector_size);
- 			break;
- 
-+		case DUMMY_V2X:
-+			if (container < 0) {
-+				fprintf(stderr, "No container found\n");
-+				exit(EXIT_FAILURE);
-+			}
-+			tmp_filename = "dummy";
-+			set_image_array_entry(&imx_header.fhdr[container],
-+						soc,
-+						img_sp,
-+						file_off,
-+						0,
-+						tmp_filename,
-+						dcd_skip);
-+			img_sp->src = file_off;
-+			break;
-+
-+		case HOLD:
-+			if (container < 0) {
-+				fprintf(stderr, "No container found\n");
-+				exit(EXIT_FAILURE);
-+			}
-+			file_off += ALIGN(img_sp->entry, sector_size);
-+			break;
-+
- 		case SECO:
- 		case SENTINEL:
- 			if (container < 0) {
-@@ -963,11 +1072,15 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	do {
- 		if (img_sp->option == APPEND) {
- 			copy_file(ofd, img_sp->filename, 0, 0);
--			file_padding += FIRST_CONTAINER_HEADER_LENGTH;
-+			if (v2x)
-+				file_padding += FIRST_CONTAINER_HEADER_LENGTH * 2;
-+			else
-+				file_padding += FIRST_CONTAINER_HEADER_LENGTH;
- 		}
- 		img_sp++;
- 	} while (img_sp->option != NO_IMG);
- 
-+	fprintf(stderr, "%s: %x %d\n", __func__, file_padding, v2x);
- 	/* Add padding or skip appended container */
- 	ret = lseek(ofd, file_padding, SEEK_SET);
- 	if (ret < 0) {
-@@ -980,6 +1093,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 		/* Note: Image offset are not contained in the image */
- 		tmp = flatten_container_header(&imx_header, container + 1,
- 					       &size, file_padding);
-+		fprintf(stderr, "error writing image hdr %x\n", size);
- 		/* Write image header */
- 		if (write(ofd, tmp, size) != size) {
- 			fprintf(stderr, "error writing image hdr\n");
-@@ -1000,7 +1114,8 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 		    img_sp->option == AP || img_sp->option == DATA ||
- 		    img_sp->option == SCD || img_sp->option == SCFW ||
- 		    img_sp->option == SECO || img_sp->option == MSG_BLOCK ||
--		    img_sp->option == UPOWER || img_sp->option == SENTINEL) {
-+		    img_sp->option == UPOWER || img_sp->option == SENTINEL ||
-+		    img_sp->option == OEI) {
- 			copy_file_aligned(ofd, img_sp->filename, img_sp->src,
- 					  sector_size);
- 		}
-@@ -1031,7 +1146,7 @@ int imx8image_copy_image(int outfd, struct image_tool_params *mparams)
- 	fprintf(stdout, "CONTAINER SW VERSION:\t0x%04x\n", sw_version);
- 
- 	build_container(soc, sector_size, emmc_fastboot,
--			img_sp, dcd_skip, fuse_version, sw_version, outfd);
-+			img_sp, false, fuse_version, sw_version, outfd);
- 
- 	return 0;
+ 	return end;
  }
-diff --git a/tools/imx9_image.sh b/tools/imx9_image.sh
-index ca78a57a19a..6523d1a0ad1 100755
---- a/tools/imx9_image.sh
-+++ b/tools/imx9_image.sh
-@@ -18,6 +18,14 @@ for f in $blobs; do
- 		continue
- 	fi
+@@ -279,12 +350,12 @@ unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
+ unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+ 						unsigned long raw_sect)
+ {
+-	int end;
++	ulong end;
  
-+	if [ $f = "m33-oei-ddrfw.bin" ]; then
-+		continue
-+	fi
-+
-+	if [ $f = "u-boot.bin" ]; then
-+		continue
-+	fi
-+
- 	if [ ! -f $tmp ]; then
- 		echo "WARNING '$tmp' not found, resulting binary may be not-functional" >&2
+ 	end = get_imageset_end(mmc, MMC_DEV);
+ 	end = ROUND(end, SZ_1K);
  
+-	printf("Load image from MMC/SD 0x%x\n", end);
++	printf("Load image from MMC/SD 0x%lx\n", end);
+ 
+ 	return end / mmc->read_bl_len;
+ }
+@@ -312,12 +383,12 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc)
+ #ifdef CONFIG_SPL_NAND_SUPPORT
+ uint32_t spl_nand_get_uboot_raw_page(void)
+ {
+-	int end;
++	ulong end;
+ 
+ 	end = get_imageset_end((void *)NULL, NAND_DEV);
+ 	end = ROUND(end, SZ_16K);
+ 
+-	printf("Load image from NAND 0x%x\n", end);
++	printf("Load image from NAND 0x%lx\n", end);
+ 
+ 	return end;
+ }
+@@ -326,7 +397,7 @@ uint32_t spl_nand_get_uboot_raw_page(void)
+ #ifdef CONFIG_SPL_NOR_SUPPORT
+ unsigned long spl_nor_get_uboot_base(void)
+ {
+-	int end;
++	ulong end;
+ 
+ 	/* Calculate the image set end,
+ 	 * if it is less than CFG_SYS_UBOOT_BASE(0x8281000),
+@@ -339,7 +410,7 @@ unsigned long spl_nor_get_uboot_base(void)
+ 	else
+ 		end = ROUND(end, SZ_1K);
+ 
+-	printf("Load image from NOR 0x%x\n", end);
++	printf("Load image from NOR 0x%lx\n", end);
+ 
+ 	return end;
+ }
 -- 
 2.43.0
 
