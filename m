@@ -4,81 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB14C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 07:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C75DAC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 08:08:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4211E83F17;
-	Fri, 11 Apr 2025 09:57:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jms.id.au
+	by phobos.denx.de (Postfix) with ESMTP id 2685683F1F;
+	Fri, 11 Apr 2025 10:08:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=jms.id.au header.i=@jms.id.au header.b="hVAspakw";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kLMqIt8R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5569583F1F; Fri, 11 Apr 2025 09:57:05 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ADC2383F24; Fri, 11 Apr 2025 10:08:49 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2060a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::60a])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 347CA83EB3
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:57:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C14783EDC
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 10:08:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jms.id.au
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=joel.stan@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aaecf50578eso306244766b.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 00:57:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1744358221; x=1744963021; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4YI8uUnZHzx6CICQDMeE3m0BI1kYtVgjzfLyzwrvlSE=;
- b=hVAspakwZJZUVga4VsK9O2nl9fnZq4g55/JRBvEt1TkhVZAeAkZsyep15+1RkRilqk
- Ggucjwknkw6aQQVHQ0J48m9GjYzK1KueVFql87KzyFhxy7Ho+z0CSGX606N6d6KVL8Lm
- E71vjOKk7ubHy3BsUADWXbqueVIN0b6Hs3WjE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744358221; x=1744963021;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4YI8uUnZHzx6CICQDMeE3m0BI1kYtVgjzfLyzwrvlSE=;
- b=aeZFvXjzyoIYTV1l2gT60pExAZUr4NT6LCHQq+W+5RzeYWifzwMOx5Mm9o88m4+HJ3
- HAlvDGlceDbTlGN6zYoatIkCIlL3vcMsouWQlUEHptpjldS7fukcc2c3hp8itfU7auv6
- 8BrYba7dViL4NOK4N9VaF2ExaB+BmVasRthcsdog7hhUht8MtqnUI6oF4H9dVCewh5Za
- Y3lT3hw6WREibR6x1jhO5fVqDBA1+osGJDH3iMV3k6aCVaWrLeNwOufHjMe9tVRhqPYz
- Lo5uhpA9hVN9/ItA1pcF6FO1GVAqPTRdQJhgrZZNpHzLRq01YsTWarpJLLWcUwLdqY2K
- zyvA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlvWjIxrSF167K/Ay6lFdW3u/x6pWxltSwNxg450lAAXmAVMBL/Eogv6oB5Cei64WLORtqN68=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKPa0AiDYTasjJj+mLsGUPDoYW+6WdZmgav54/QVlv6LS7Uy4/
- ePL50Mggdncggf2Z9lWr+0zP4lhabnbpTlubvjp5B0myumWc5UBDNY+7uG1O56NwqTeB8F0Rb0Y
- Gv0oDOOcQezfMP95rmJ3xuWQDwzM=
-X-Gm-Gg: ASbGncvUCmtGzVn5dd8/Vft6bn9Wo4bFOrqM2xkhvOtnBON5y+2fkfoau6s0sFukYrb
- bf2BQO9Oe58KuazVRmuGtMPIE81f+89WY15RH5s/gefwHqeQ+Id904p+/izol8spCdorD8256TN
- gbsc5BpROWFbHlXIt4v+n0U1Y=
-X-Google-Smtp-Source: AGHT+IE/mK6kAKC3bSNG2wFmyxLPBSdNUKY5I/25lnBQbv3RnqwimhmFx94JCEB7DxnIEND6zGg3tulqMNxdYwok7j0=
-X-Received: by 2002:a17:907:1b03:b0:ac4:493:403 with SMTP id
- a640c23a62f3a-acad36a5b29mr130417966b.37.1744358221263; Fri, 11 Apr 2025
- 00:57:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mSGNRxxakpCCHLMeukYbQmqMbssmaNi/U8MzoKkIu+FZPTSXbG/K326CjlevxoTH6b8QBV/aVpyVobVt8tG7QT06rMvT2xpBHSNvPIFnRlfARvE4NX/BeFCzN0Pkp9Sl2GAfkJD/0y5Un+ZqszJgSzesquANdoejT2B0E6mE7i+7uwqnL5gyZgUfvtNGylF0OzOInMPAlZG/6PW5m2EXjJfXv3piK8khLk7aPXMVCAPOH2ptSD0XlbBm8uIdkhQI6pfrHsS0Kz9cTsMGSWBS7DbRJ8AD/bSsUsK1NbrgJThMdRDKqIG2+LwuBExDyt55VIZQ5luCpfVqdWLAe41Ogg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gdD31EW2KRX55Zg3VTuWi3r6LGqplHhLMjqtciiwPoI=;
+ b=yr0WwBZjM62t7TIp6ZMZ5lNVZb5IjynCocBF9YsSAioco2zW4foLTa08Y2+n6gGlWJroDU46EXJYO1+piWlMfLOodF+F7DVAUS/GOEckNmzM/7DalzKqszUcJFhx053/2tRlim0b9RTotIsGkI9biTYmIgBlbZdrSqmyGgNKhvVI/gSgoKRqeWkU4Rnz1KWhibOWX5GDzJEuyWlfYMLW3nnapF6IPDOmZvqgkwr2tRblNhLxCgflAd82YDCLfD124sw329F5yOwzB2o0kfpKzYsLeFadkx9sIh2TO0StqLV1R4vWbJabESj+nW+ZdVKF+Z9jPPYJdxdNCUT87NbXlw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gdD31EW2KRX55Zg3VTuWi3r6LGqplHhLMjqtciiwPoI=;
+ b=kLMqIt8RCBFN/bCvepS3kTIMea2pJ9KH2haYgaAxwb1khTYLw6YMWqLQppqkENevOk2AyFsz2gh31oe8rAhom5/NRq0fLLNVplUNdJz55oMLNSCWOVhHeqQ99PEm0BIN9T3mCxr+RiKDjtdzbyw/htKkaFvDXyiUmmm32cltBMguzctlsSCD+8nhaD4t2tyVL/RuguT9o0JvAMy0WoucIZezHJdMUS3Ky+Vc5CTnvA8b0a/ZFT5iGHCQ8G5t4jwxT4oUv/XNabhiP0a2zGbYDOa6FHBVK2fV+AfzWxxR6lcKmLF7q4NHd4wDzPeQETR/4opqV/LCvpq+H81/qT8XTA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by AS8PR04MB7606.eurprd04.prod.outlook.com (2603:10a6:20b:23e::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.27; Fri, 11 Apr
+ 2025 08:08:45 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8632.024; Fri, 11 Apr 2025
+ 08:08:45 +0000
+From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+To: marex@denx.de, trini@konsulko.com, festevam@gmail.com, lukma@denx.de,
+ seanga2@gmail.com, sjg@chromium.org, sbabic@denx.de,
+ alpernebiyasak@gmail.com, alice.guo@nxp.com
+Cc: u-boot@lists.denx.de, viorel.suman@nxp.com, ye.li@nxp.com,
+ ranjani.vaidyanathan@nxp.com, peng.fan@nxp.com, frank.li@nxp.com,
+ ji.luo@nxp.com, jindong.yue@nxp.com, Anton.Gres@ifm.com
+Subject: [PATCH v9 00/20] imx: add i.MX95 support
+Date: Fri, 11 Apr 2025 16:06:43 +0800
+Message-ID: <20250411080707.602371-1-alice.guo@oss.nxp.com>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR06CA0009.apcprd06.prod.outlook.com
+ (2603:1096:4:186::17) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
-References: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
- <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
- <20250410231444.GK5495@bill-the-cat>
- <89f2eac8-4e76-42a6-b56e-fc62abdaffe9@kaod.org>
-In-Reply-To: <89f2eac8-4e76-42a6-b56e-fc62abdaffe9@kaod.org>
-From: Joel Stanley <joel@jms.id.au>
-Date: Fri, 11 Apr 2025 17:26:49 +0930
-X-Gm-Features: ATxdqUHLddT6I78y8St_maEkdnrircy3YW5uhL5YB0oACkekt0mAFZT4dtrei5Q
-Message-ID: <CACPK8Xff4GD=CzJ+_fbCWniut7TVNHh744At8w3JSYrcsv=oOQ@mail.gmail.com>
-Subject: Re: Gitlab runner timeout on evb-ast2600 ?
-To: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-Cc: Tom Rini <trini@konsulko.com>, Eugen Hristev <eugen.hristev@linaro.org>, 
- open list <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, 
- Andrew Jeffery <andrew@codeconstruct.com.au>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS8PR04MB7606:EE_
+X-MS-Office365-Filtering-Correlation-Id: cf2f3fe7-8080-4f05-7d79-08dd78d01442
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|7416014|376014|366016|1800799024|38350700014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?o/DDZq9CKkoXF6gUzQ6JJbE13CQMd9iqcoNueTVsK81ZVcvuJ2i+SNZhp35U?=
+ =?us-ascii?Q?Hup2AskqM75wJfM1oE9p1V37uxDUf1797bFsre/qBf3JvyNcf3l3mvJ+bUQ8?=
+ =?us-ascii?Q?/LBaQ9+WPHDUzX/l0eRhhxQDlfHhjX7lx1NuBjQz/04RtZmn5HNwnnbqxv5W?=
+ =?us-ascii?Q?HzF7lqBWZnyDGLUfhxqnYofOXpk1TGOtA2RhHcrtYinM2txSiarKoYSGBTWz?=
+ =?us-ascii?Q?9UpsXpRTI2X/nLdrAnE8Qh0n/4njrzVv8NlbwXiZGO28O/b1GnKHGNBv7BQJ?=
+ =?us-ascii?Q?gdZE1xDLWLbF3dlGYC6UD1sYp1blY3q0SHxRMIi/ulxzTtzpYmAtceSYinXW?=
+ =?us-ascii?Q?iTfTb2c5NLoCA8TrBj7Dg7OzTx2gASIuZZFjUey9bCJfdyGOFeqmFUWI3K8X?=
+ =?us-ascii?Q?4EceTO/Dp94a8c0o6J/Er0hFM4AQqPgTnjJ4mTjw1JFL6QwxlNgpPq9AlqIa?=
+ =?us-ascii?Q?z37YPLg+ZtCpyorIjPJ5tV2N+5dY88T15/AARnF2y4tNy4+G5CEUOvo7Q5iD?=
+ =?us-ascii?Q?IdyJoVNmZoRp7h8Bmiih+0E4s1Of3YnIGQc8N75pT75x1w071ceujDGNHXql?=
+ =?us-ascii?Q?nWjX0o0hZTjKyqKEYp2Hg4hi1TC2oiOchFuP5VrqmM8UFhK5EcDzjoq2mBUg?=
+ =?us-ascii?Q?4wUl9ThsJJHQkWvJOzSrp+yloaovyIwPQiqf+EZDz+Ac4MYWaZoqKylPFwwW?=
+ =?us-ascii?Q?dzzaDbTcs+jWj4xnokN+rKDnAX48xRNV9eXHxkzDBfFYx1coOOxFUhmhVdft?=
+ =?us-ascii?Q?4sipldaibFtNaohVtRAm860ZgNxCciioXMIGGLiMmlrdkqBJbRZzXfjycVeN?=
+ =?us-ascii?Q?HY5OLpUarJwXv2nNxoODSlwp0STWJfj2SL64tr9odCGRqw18YEnDfldqxQM8?=
+ =?us-ascii?Q?BC0lNu6aHVo1RWXg8DwUMlT9xnn718KrWwvl07q9MsVBznpOzLyzpA4wZH2Y?=
+ =?us-ascii?Q?ElmuxcD71gvQM/Z/qKdrRdIi2KJzHajybqMkEnjMlwAbqcyBFv4YVsHq1SmX?=
+ =?us-ascii?Q?CzEb7q3ALf4VSUTPRDznFiGPDDcl/6RXih2npy7LsUcpj9yaLx3JaRrIB2iy?=
+ =?us-ascii?Q?VsPvxrFZNU1WxubCZr3L5WfBjThM0ITVFsr1HzF0U0wjZNl6OMpHHfGZk/kf?=
+ =?us-ascii?Q?qPjdILun4H8Sd6NJMsuLFU2LhrJSjRsANQYhjgiO1JM8l8lXe+sFwA90V9wW?=
+ =?us-ascii?Q?bfpkIW5YhcRJQSE7JsYME096gwyhjFRwD8JPJm7Xo6xL2Jf0xssGAV9MrXYu?=
+ =?us-ascii?Q?J0oILHIea+CsbPVhqv5HB9oYyIeI2zDJsMGhRKePV47/XPmvD37ZykueTckW?=
+ =?us-ascii?Q?aF1465i9J3AkAgyCwmfdHv6ckMsqx2vB5ziC7Xk+0yl8TngIOVatrjYsVC7N?=
+ =?us-ascii?Q?0lOvEadUXDZwAmioVHMcuMdLS0BgZApMGZ7x0DnVhq9ybf4fdH8fDqXq9Q8o?=
+ =?us-ascii?Q?d0kUsBNDq6AXAIj5EiOKvVyOem4aPD229KrilNcNXZa/xYR8UJwy7DFE7jYG?=
+ =?us-ascii?Q?QKhJq+wWAtvcew0=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(7416014)(376014)(366016)(1800799024)(38350700014)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5et+9KmJmIe1cyNanQ8a2/tju2JKkVDQoDkmDCl1SKb7l9usX23hBKQoI7EV?=
+ =?us-ascii?Q?Dgo0VzBPgdPcohNrbGQgmQw/nu2HQkUn4gSn3B+9BaYdYN4sx038HW2fEaV2?=
+ =?us-ascii?Q?4NSAdb35mU+FXW2O2n+LnRLdolEiZUUadSuEZBcWR3mTAgbuVFqRDBWyIKRc?=
+ =?us-ascii?Q?olhGbBaWZSe2wAMYYPbjqthATkRQWB9XnqkDaBpfMaWiQBdrvjm/PSRWFMbS?=
+ =?us-ascii?Q?G3psZmB4Q0TTZXrhTfoarEKKm84bxC2Dyj9Mmx1NeJcgRD2P/jFkQFqwrLtu?=
+ =?us-ascii?Q?Qp9th6WY3M7vMRAg9B3ilUNGGHwdHP2z62SVrZmszNZYS8KDG/9hiOptbeUG?=
+ =?us-ascii?Q?BNvB6OZOhfm45/b4UOM2trROfRSey/LFUrvmSEUod/UdbrL4RK2tjfP+j9QJ?=
+ =?us-ascii?Q?QuWStNVMAyFItqgcUOIqe+VRht2BVlw4uwN3STb4ZEEW8JLZDaA/48jDkwn/?=
+ =?us-ascii?Q?wAYoDUKU1JN0zYuiM5KYGoDsXLOZlSGEdlAjOykeg2rkQrUFKgbXTCnPsK73?=
+ =?us-ascii?Q?k5t9cjQMoFfeUEHKYfRQ3GOxpo0BIqTmw5cCaueNMES6ouU+yth+aLrTkU/0?=
+ =?us-ascii?Q?0USbky/S+GFsPF75NPBIQf9FubCyOIXFVYM4wDU3lu4a8WoMb5haWkGgaEf2?=
+ =?us-ascii?Q?l5fTMKkkh9FheKJspFKB8OPjgzgte6RUYp52OwdbHd+EL8IoWkE1DpZjoLYH?=
+ =?us-ascii?Q?cmZL002VqvGDEyJBIJHOuHfH40heFtRpW1/TvDdZk0AO2m0MtBUfuHEls6IM?=
+ =?us-ascii?Q?mRxVCj1gBLW9jRWtZkSCJtnoCcCbY6XiOimfXnyQaV5lMoAIA2fC5TyIMFO/?=
+ =?us-ascii?Q?aG+eyUKMrRVEqZrIvEK1A0IlKUfVyHCIjAwl8LTsKY4IjJHT56EQm/HtpYgD?=
+ =?us-ascii?Q?ObOdEerJg7kpktRU3pVMkGgE9EGChE2o0rR815R0v2Vnue1N+CFX1A3sp1ZD?=
+ =?us-ascii?Q?t1uW4r1+fjJqhH3A7rt2SLdOeTB6bKiSKqU5PrG+9oHUaDnjpdg6omKllFQJ?=
+ =?us-ascii?Q?exxmIO6RTFw1wpmbMQQzHmg1deorm2R+Rf/OZccA8LUU0SMK044lbJEv4APH?=
+ =?us-ascii?Q?/ybWsZaZs0caSnymiryXIa6E5YRhjj6YNl33ZLHnHWNAhP2kQsfMVaZFYpdv?=
+ =?us-ascii?Q?b3eZUyF08rkE31UvAP9iM2ZJrDYB7E+THBG8rau52R4OeT8xOae1fDsbFqve?=
+ =?us-ascii?Q?sZUM5hnRVc1Y5KTF0ajbXc8CHe/OKLjtg9Qb3evxWD7QMzWy2EbapIg+scp+?=
+ =?us-ascii?Q?7UeokE6hCrjAqQBZ/9NTaLLdJyv3XhIGG7r8zBLej1de1siufXsM/zH6HGAE?=
+ =?us-ascii?Q?JuE6PLN+nSY8+cOgHG5baioEZLf83IIa9Ool0e69C9yopCIOYXv5RalRm6wM?=
+ =?us-ascii?Q?u7/08q8eQSAKQV3w1BOZlEwBamQZlJd6NjZsW5L3UF1mnUG8bglaotS3g6Gl?=
+ =?us-ascii?Q?f8W3c9tHHtIQ9hJs/sfi2ogQ0Jzrk1IjBbMtrSGbIRqdCJ1W/9kddqUIgfCw?=
+ =?us-ascii?Q?/eS0KbUBeRpO5EC8DWZchnJap57piiBTNrKAk7HhaynL4USasCh53D7EbktL?=
+ =?us-ascii?Q?6YLyi87Qsx/EwfNr6ck86J1gbqF6WmH9n6OD41CH?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf2f3fe7-8080-4f05-7d79-08dd78d01442
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2025 08:08:44.9650 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TkFbZ0hYqulgy02SKVNBjIb6auIws60R/I91LFod/ZxE5LRc7+pVJqPSwOYtQAN8PQ4osvv1Q6jx9WQ6kZd7Zw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7606
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,142 +163,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 11 Apr 2025 at 16:54, C=C3=A9dric Le Goater <clg@kaod.org> wrote:
->
-> Hi,
->
-> On 4/11/25 01:14, Tom Rini wrote:
-> > On Fri, Apr 11, 2025 at 08:07:15AM +0930, Joel Stanley wrote:
-> >> On Mon, 7 Apr 2025 at 23:25, Eugen Hristev <eugen.hristev@linaro.org> =
-wrote:
-> >>>
-> >>> Hi everyone,
-> >>>
-> >>> I keep getting an error on running the CI loop on -next on my tree :
-> >>>
-> >>> https://source.denx.de/u-boot/custodians/u-boot-at91/-/jobs/1090517
-> >>
-> >> Thanks for the report.
-> >>
-> >>>
-> >>> ! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - no oth=
-er
-> >>> tests will run !
-> >>>
-> >>> Any clue ? It's been like this for few days. It doesn't look like a
-> >>> faulty patch.
-> >>
-> >> I can't see that link you sent me, it 403s.
-> >>
-> >> Do you have any other traces or information to share?
-> >
-> > It's been intermittent recently. I was able to put qemu + gdb together
-> > and see it's one of the early initcalls that fails and hang()s but
-> > didn't see why. You should be able to use commit 1f0281294d8b ("Merge
-> > patch series "Annotate switch/case fallthrough cases"") as a starting
-> > point of failure.
-> >
->
-> Do you have logs ?
->
-> Things look ok from the QEMU side (latest 10.0.0-rc and 9.1) :
+From: Alice Guo <alice.guo@nxp.com>
 
-I brefily tried to run the steps from CI locally, but couldn't work
-out how to get the flash image built. Instead I used the instructions
-from 154cffa16a7b6647e180ed6cef55342b39580aff.
+Changes for v9:
+ - remove the "firmware: scmi: smt: Interrupt communication enable" patch from
+ this patch-set and sent it separately
+ https://patchwork.ozlabs.org/project/uboot/patch/20250401075635.3802640-1-alice.guo@oss.nxp.com/
+ - use scmi_proto_driver_get() function to get SCMI protocol driver, which
+ dependents on two patches which have not been applied
+ https://patchwork.ozlabs.org/project/uboot/patch/20250322014444.174796-1-marex@denx.de/
+ https://patchwork.ozlabs.org/project/uboot/patch/20250409075352.535194-1-alice.guo@oss.nxp.com/
+ - query SCMI clock management protocol version in .probe() once and cache the
+ value in private data
+ - explain u32 protocols[] in struct scmi_base_discover_list_protocols_out in
+ commit log
+ - make debug prints in read_auth_image() a bit more informative
+ - keep the list of "config IMX8_ROMAPI" sorted
+ - correct spelling errors in imx95_container.txt
 
-Testing master with Debian's qemu 9.2.2:
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
 
-makearm evb-ast2600_defconfig
-make u-boot-with-spl.bin
-truncate -s 64M u-boot-with-spl.bin
-qemu-system-arm -nographic -M ast2600-evb \
-        -drive file=3Du-boot-with-spl.bin,if=3Dmtd,format=3Draw
+Alice Guo (11):
+  firmware: scmi: use scmi_proto_driver_get() function to get SCMI
+    protocol driver
+  pinctrl: nxp: add a pin controller driver based on SCMI pin control
+    protocol
+  firmware: scmi_agent: add SCMI pin control protocol support
+  clk: scmi: check the clock state/parent/rate control permissions
+  sandbox: add SCMI clock control permissions to sandbox
+  cpu: imx95: add i.MX95 support
+  imx: Kconfig: IMX8_ROMAPI is not configured for i.MX95
+  binman: add a new entry type for packing DDR PHY firmware images
+  tools: imx8image: add i.MX95 support
+  doc: imx: add document for i.MX95 Image Container Format
+  Makefile: add some files to CLEAN_FILES
 
+Peng Fan (4):
+  scmi_protocols: add SCMI misc protocol protocol_id and message_id for
+    getting the ROM passover data
+  scmi_protocols: add SCMI Performance domain management protocol
+    message IDs
+  clk: scmi: add the command CLOCK_PARENT_SET
+  imx9: scmi: add i.MX95 SoC and clock related code
 
-U-Boot SPL 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 17:05:20 +0930)
-Trying to boot from RAM
-## Checking hash(es) for config conf-1 ... OK
-## Checking hash(es) for Image firmware-1 ... crc32+ OK
-## Checking hash(es) for Image fdt-1 ... crc32+ OK
+Ye Li (5):
+  scmi_protocols: update struct scmi_base_discover_list_protocols_out
+  spl: imx: use trampoline buffer to load images to secure region
+  imx9: add i.MX95 Kconfig and Makefile
+  imx: container: add V2X container support for i.MX95
+  imx95_evk: add i.MX95 19x19 EVK board basic support
 
+ Makefile                                      |   3 +-
+ arch/arm/dts/imx95-19x19-evk-u-boot.dtsi      |  62 ++
+ arch/arm/dts/imx95-u-boot.dtsi                | 188 +++++
+ arch/arm/include/asm/arch-imx/cpu.h           |   2 +
+ arch/arm/include/asm/arch-imx9/clock.h        |  10 +
+ arch/arm/include/asm/arch-imx9/imx-regs.h     |   6 +
+ arch/arm/include/asm/arch-imx9/sys_proto.h    |   1 +
+ arch/arm/include/asm/mach-imx/sys_proto.h     |  39 +
+ arch/arm/mach-imx/Kconfig                     |   2 +-
+ arch/arm/mach-imx/image-container.c           | 119 ++-
+ arch/arm/mach-imx/imx9/Kconfig                |  15 +
+ arch/arm/mach-imx/imx9/Makefile               |   9 +-
+ arch/arm/mach-imx/imx9/scmi/Makefile          |   6 +
+ arch/arm/mach-imx/imx9/scmi/clock.c           |  70 ++
+ arch/arm/mach-imx/imx9/scmi/clock_scmi.c      | 133 ++++
+ arch/arm/mach-imx/imx9/scmi/container.cfg     |  10 +
+ arch/arm/mach-imx/imx9/scmi/imximage.cfg      |  15 +
+ arch/arm/mach-imx/imx9/scmi/soc.c             | 749 ++++++++++++++++++
+ arch/sandbox/include/asm/scmi_test.h          |   4 +-
+ board/freescale/imx95_evk/Kconfig             |  12 +
+ board/freescale/imx95_evk/MAINTAINERS         |   6 +
+ board/freescale/imx95_evk/Makefile            |  11 +
+ board/freescale/imx95_evk/imx95_19x19_evk.env |  91 +++
+ board/freescale/imx95_evk/imx95_evk.c         |  36 +
+ board/freescale/imx95_evk/spl.c               |  69 ++
+ common/spl/Kconfig                            |   6 +
+ common/spl/spl_imx_container.c                |  41 +-
+ configs/imx95_19x19_evk_defconfig             | 152 ++++
+ doc/board/nxp/imx95_evk.rst                   | 114 +++
+ doc/board/nxp/index.rst                       |   1 +
+ doc/imx/imx95_container.txt                   | 136 ++++
+ drivers/clk/clk_scmi.c                        | 204 ++++-
+ drivers/cpu/imx8_cpu.c                        |   2 +
+ drivers/firmware/scmi/base.c                  |  24 +-
+ drivers/firmware/scmi/sandbox-scmi_agent.c    |  56 +-
+ drivers/firmware/scmi/scmi_agent-uclass.c     |  34 +-
+ drivers/pinctrl/nxp/Kconfig                   |  13 +
+ drivers/pinctrl/nxp/Makefile                  |   1 +
+ drivers/pinctrl/nxp/pinctrl-imx-scmi.c        | 162 ++++
+ drivers/power/domain/scmi-power-domain.c      |   8 +
+ drivers/power/regulator/scmi_regulator.c      |   8 +
+ drivers/reset/reset-scmi.c                    |   8 +
+ include/configs/imx95_evk.h                   |  24 +
+ include/imx8image.h                           |  19 +-
+ include/scmi_agent-uclass.h                   |   2 +
+ include/scmi_protocols.h                      | 104 ++-
+ tools/binman/entries.rst                      |  10 +
+ tools/binman/etype/nxp_header_ddrfw.py        |  29 +
+ tools/binman/ftest.py                         |  11 +
+ tools/binman/test/346_nxp_ddrfw_imx95.dts     |  24 +
+ tools/imx8image.c                             | 147 +++-
+ tools/imx9_image.sh                           |   8 +
+ 52 files changed, 2916 insertions(+), 100 deletions(-)
+ create mode 100644 arch/arm/dts/imx95-19x19-evk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx95-u-boot.dtsi
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/Makefile
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/clock.c
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/clock_scmi.c
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/container.cfg
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/imximage.cfg
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/soc.c
+ create mode 100644 board/freescale/imx95_evk/Kconfig
+ create mode 100644 board/freescale/imx95_evk/MAINTAINERS
+ create mode 100644 board/freescale/imx95_evk/Makefile
+ create mode 100644 board/freescale/imx95_evk/imx95_19x19_evk.env
+ create mode 100644 board/freescale/imx95_evk/imx95_evk.c
+ create mode 100644 board/freescale/imx95_evk/spl.c
+ create mode 100644 configs/imx95_19x19_evk_defconfig
+ create mode 100644 doc/board/nxp/imx95_evk.rst
+ create mode 100644 doc/imx/imx95_container.txt
+ create mode 100644 drivers/pinctrl/nxp/pinctrl-imx-scmi.c
+ create mode 100644 include/configs/imx95_evk.h
+ create mode 100644 tools/binman/etype/nxp_header_ddrfw.py
+ create mode 100644 tools/binman/test/346_nxp_ddrfw_imx95.dts
 
-U-Boot 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 17:05:20 +0930)
+-- 
+2.43.0
 
-Model: Aspeed BMC
-DRAM:  already initialized, 1008 MiB (capacity:1024 MiB, VGA:64 MiB), ECC o=
-ff
-Core:  266 devices, 24 uclasses, devicetree: separate
-WDT:   Started watchdog@1e785000 with servicing every 1000ms (60s timeout)
-MMC:   sdhci@1e750100: 0
-Loading Environment from SPIFlash... SF: Detected mx25u51245g with
-page size 256 Bytes, erase size 64 KiB, total 64 MiB
-*** Warning - bad CRC, using default environment
-
-In:    serial@1e784000
-Out:   serial@1e784000
-Err:   serial@1e784000
-Net:   eth0: ftgmac@1e660000, eth1: ftgmac@1e680000, eth2:
-ftgmac@1e670000, eth3: ftgmac@1e690000
-Hit any key to stop autoboot:  0
-libfdt fdt_check_header(): FDT_ERR_BADMAGIC
-Error loading kernel FIT image
-=3D>
-
-I tried to run qemu using the recipie from CI but I couldn't see where
-the step to create the flash image happens.
-
->
->      uboot_build=3D/path/to/u-boot/
->      flashsize=3D65536
->      flash=3D./flash-ast2600-evb-uboot
->      dd of=3D$flash bs=3D1K if=3D/dev/zero count=3D$flashsize
->      dd of=3D$flash conv=3Dnotrunc bs=3D1K if=3D$uboot_build/spl/u-boot-s=
-pl.bin
->      dd of=3D$flash conv=3Dnotrunc bs=3D1K if=3D$uboot_build/u-boot.img s=
-eek=3D64
->
->      $ qemu-system-arm -M ast2600-evb -net nic,netdev=3Dnet0 -netdev user=
-,id=3Dnet0 -nographic -snapshot -serial mon:stdio   -drive file=3Dflash-ast=
-2600-evb-uboot,format=3Draw,if=3Dmtd
->      qemu-system-arm: warning: nic ftgmac100.1 has no peer
->      qemu-system-arm: warning: nic ftgmac100.2 has no peer
->      qemu-system-arm: warning: nic ftgmac100.3 has no peer
->
->      U-Boot SPL 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +0200=
-)
->      Trying to boot from RAM
->      ## Checking hash(es) for config conf-1 ... OK
->      ## Checking hash(es) for Image firmware-1 ... crc32+ OK
->      ## Checking hash(es) for Image fdt-1 ... crc32+ OK
->
->
->      U-Boot 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +0200)
->
->      Model: Aspeed BMC
->      DRAM:  already initialized, 1008 MiB (capacity:1024 MiB, VGA:64 MiB)=
-, ECC off
->      Core:  266 devices, 24 uclasses, devicetree: separate
->      WDT:   Started watchdog@1e785000 with servicing every 1000ms (60s ti=
-meout)
->      MMC:   sdhci@1e750100: 0
->      Loading Environment from SPIFlash... SF: Detected mx25u51245g with p=
-age size 256 Bytes, erase size 64 KiB, total 64 MiB
->      *** Warning - bad CRC, using default environment
->
->      In:    serial@1e784000
->      Out:   serial@1e784000
->      Err:   serial@1e784000
->      Net:   eth0: ftgmac@1e660000, eth1: ftgmac@1e680000, eth2: ftgmac@1e=
-670000, eth3: ftgmac@1e690000
->      Hit any key to stop autoboot:  0
->      libfdt fdt_check_header(): FDT_ERR_BADMAGIC
->      Error loading kernel FIT image
->      =3D>
->
->
-> Thanks,
->
-> C.
->
->
