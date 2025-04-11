@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5459C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 10:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E4BC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 10:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F12F83FA4;
-	Fri, 11 Apr 2025 12:01:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 837A482B41;
+	Fri, 11 Apr 2025 12:02:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HbXr+PDo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mjQFNSp7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42D8583FA8; Fri, 11 Apr 2025 12:01:37 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 2066582B41; Fri, 11 Apr 2025 12:02:28 +0200 (CEST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11EA882B1F
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:01:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2E3882B1F
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:02:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e7040987879so1577054276.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 03:01:35 -0700 (PDT)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e6e2971f79fso1504439276.0
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 03:02:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744365694; x=1744970494; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744365744; x=1744970544; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PXvK+7SMU6YHPslCtri7q6lF0rIVLu/tMi9h5gnLhkE=;
- b=HbXr+PDoLt9SvALkM7jeuEdLeB5wf5ZO9oCwd3kSddANIWuR82oZHzYcPHxRGg5fcJ
- nn+xsMYRiqqMFMscPG4lM25VvYD4HaohDi3pJ3f+PzKnOn0wawEoTF8rrA2N76/yIrpv
- TsoDZDEuVuvXNclQ0S+mfP9qxs+7fNsUMfNIItLbmCFOL9Rv3XADXj9nMpzd/SEp6jMM
- WVs7jN3V/I5JGvN6NhMvBhXi6rLAbO1AI1F1Lb8OVbde0mjavpIATLzBgz39d1vIPQqH
- oA79p4gXcH+PvXWehYNXhV543+PRxguUzt2Do52X3r02LJbqxmd+cjJnYfLXIZ9qhz0c
- Iglw==
+ bh=nOoBMCX/E0d2K7mGzmyzgUikChEFvWaVRLNlYjWy9PY=;
+ b=mjQFNSp76iWBKg9W6mb0WAT74oK2zAzrpk2iVaFFCEww1pxs3fL8D4/z+9LysplKtT
+ 7c4teDvMvPbbgKVNMH/UugFkQb0TVYqy+nLkwShJfUTU/G7jzCVBgo564AhVZHuTO2Za
+ iU9MXHczS96Ytt5gyteMI1vh20Untfme5ChTUA0dJX2z0kHqFsUkw6XNh4IA0PSGAZRD
+ oGCG/QEbA4jIaAovz23P0lLHiYzf3VHMjDfqJskh9TqRQFcyiBEySA0QmccQ3Hu+ARhk
+ cTZJYc7PyVNgccuSeUpdsW4TCrg6nXARMBo4PvvlgURYLDsS95/+Zp3E8sgIRc0JY2zs
+ RjkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744365694; x=1744970494;
+ d=1e100.net; s=20230601; t=1744365744; x=1744970544;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PXvK+7SMU6YHPslCtri7q6lF0rIVLu/tMi9h5gnLhkE=;
- b=eVsTQc1K0Tqy2dLMyJZULpQD3JeqsTQwLGZxCdZp5LeR9sjI3wddcBZv3iwP+jFMbg
- yoa+2BGZ2b2KiyS9J4i0OeQgbvWjkrctpYbKEHA9RbqUZpIqIqG+DHqyOznQvRTXCjPY
- uJXE11o3u6K6JzhvM/q4X1lJi+Np/Q2VM3ZyniT9xEOWx5ZytNrDtYvfbtlrcL091+eK
- J4tT+4qpNWhRXB+ieaXNc0ZNrFAoNHEweOe7KHoFu+qROw5yDPUtwFrOdeYjrwbYfVn1
- rYIz4gkpQkgaxS42lWrZNKVaturMq4Eh+/DF9tdGg08rdtbCJ6MUSXH5IGt4xnuvF0hF
- Idtg==
-X-Gm-Message-State: AOJu0YwtKwYZQ6YSsoRsiAcLFCTPkE2jN6hrWys3vtfFH/bBj2iWILeZ
- cjFBe6WwHlpNYMqn7ahpldi5jdb/1CcqA+HJYLDA9St7mprWYFNlAk6XIQRz4KiRpGGXXCcAkz7
- lRrsrmcJG5IhZ13OpUbppsI9zi9aBXtEy33Pal71VhOkisIOgAAg=
-X-Gm-Gg: ASbGncsRMWwiJrgtWVZkRFL7oVoA0oy7+sMWHSTwyaA5lXoC/mqBLsTKteeXyt+hgtF
- QZLkin0om/2xI7BefIyBTBJOGRnv30eJcaQl1IGtIJA+XvxxOzgIQoBKHrg1f84smB6fbx054cw
- I7r6LcbqjdJ/6NQzW6VbZR3rs=
-X-Google-Smtp-Source: AGHT+IFEBlhlifJRbt1tFVRToCX0Ld0qpuNw57VwdnZSYlfMipfszvbfu3rRjFZW1LOHhp+UcB0aWH6XDDisOa9/32o=
-X-Received: by 2002:a05:6902:98f:b0:e65:91f3:fbdd with SMTP id
- 3f1490d57ef6-e704decaacfmr3666712276.22.1744365693981; Fri, 11 Apr 2025
- 03:01:33 -0700 (PDT)
+ bh=nOoBMCX/E0d2K7mGzmyzgUikChEFvWaVRLNlYjWy9PY=;
+ b=beXTxeOCJX4W95MumdoEl0/d3dxbWHYzzbMVNyYrqT+ngDeQ9DAutBBhSUiw+sPyxo
+ DlnNUGK0NME/X+PTLtk6jR0V55bXVSC12tzE7rV57FVI2Umgdv6zfm9AgQfjCcgxcEpe
+ udGyegkLSmsKYKWsbh4ikMIIiVMaBfbrVqXRSzz1+k8HvP/onHD2Ux6+aUmrWF2DEzrh
+ tro9h6VUoPIEGGw9ywR1ya/8c5bWOLXDBsajHMcBeqDAtGnm34b2nDF5WjQTuYXw0s2P
+ mKHDrVcjvRv7+us0ZMWmQarUl7heU0oLbGDvLgpRroALkhxJBySq3NF5YPFt4mtDWhj/
+ /scA==
+X-Gm-Message-State: AOJu0YxmDk3Ee0B1yo3vYR/fabfC0oEtNqo5AE5MZzIHOn9n1VtsjCUG
+ sd6xtF4L0TJaQJT4VYTldtKvhv0Wnb36Ux+aboM1u3PyA8b+1/VWW+jkMp/pfZJeLG3VPkcv3DW
+ AjPRp029gOrktB6AjP13dha9Zr8UPgE9iARzL7DeaDNhQ295gojg=
+X-Gm-Gg: ASbGnctvPx3I3UPKX8TAjegPGKz7TvPpMGhXbaFWY65oT1W4xJSHxfVhIJ3ZXcsEQsJ
+ moogAk1wwfAdBdRPuORnS70TIOe5xK1eI4gU4jRwDe8ICDKw3Fxo2X7lpQGUeLXU/krtvgMNq+v
+ kyFVfPPOPMmHDE6xqchAXNwG8=
+X-Google-Smtp-Source: AGHT+IEVQqNkbAKLS0XfoR9gwdL8+36fkdGpTcj1ocKEUszHAP1hhqbpW0NC2kzDTZViYVgTS1FePCj1/xKpzjxcR8U=
+X-Received: by 2002:a05:6902:e04:b0:e6d:f47a:f873 with SMTP id
+ 3f1490d57ef6-e704deee8fbmr3364900276.9.1744365744356; Fri, 11 Apr 2025
+ 03:02:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250318092327.55203-1-pkochanowski@sii.pl>
-In-Reply-To: <20250318092327.55203-1-pkochanowski@sii.pl>
+References: <20250411053645.17454-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250411053645.17454-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 11 Apr 2025 13:00:57 +0300
-X-Gm-Features: ATxdqUHXQQaOMO84k2hUxTarwH8Mx5dK5iy0dTwUkbJgBDZJGVrxso1DYQwAsfY
-Message-ID: <CAC_iWjJ+5pFYN-Cp0DcB=AWHF9HnBhKFFCagaq8LDM-=CizF1w@mail.gmail.com>
-Subject: Re: [PATCH v2] efi: Make FDT extra space configurable
-To: Pawel Kochanowski <pkochanowski@sii.pl>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Gabriel Nesteruk <gnesteruk@sii.pl>
+Date: Fri, 11 Apr 2025 13:01:48 +0300
+X-Gm-Features: ATxdqUHrIImKZa1cdlmXwQmdWQ6JiWEG2StD_foN8c5vqLSzjtUPe-IDA9wSZR8
+Message-ID: <CAC_iWjLqP_qP4VGjZafF33sJYR=NbJtFtO-HQi01Aj-wwjvonQ@mail.gmail.com>
+Subject: Re: [PATCH] efi_selftest: use do_bootefi_exec()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,58 +89,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 18 Mar 2025 at 11:23, Pawel Kochanowski <pkochanowski@sii.pl> wrote:
+On Fri, 11 Apr 2025 at 08:36, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> U-Boot currently reserves only 0x3000 bytes when copying the FDT
-> in copy_fdt(), which may not be sufficient if additional nodes
-> (such as FMAN firmware) are added later.
+> The EFI selftest should match executing a real EFI binary
+> as closely as possible.
 >
-> This patch uses the exisitng SYS_FDT_PAD to reserve space for FDT fixup
-> instead of hardcoded value.
+> Use do_bootefi_exec() to enter the EFI selftest.
 >
-> This change prevents potential corruption when resizing FDT after
-> EFI boot, especially when firmware like FMAN requires additional
-> space.
->
-> Signed-off-by: Gabriel Nesteruk <gnesteruk@sii.pl>
-> Signed-off-by: Pawel Kochanowski <pkochanowski@sii.pl>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> Changes since version 1:
-> - Removed custom CONFIG_FDT_EXTRA_SPACE in favor of already present SYS_FDT_PAD
-> - Use the define also in efi_dt_fixup.c
+>  cmd/bootefi.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 >
->  lib/efi_loader/efi_dt_fixup.c | 2 +-
->  lib/efi_loader/efi_helper.c   | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> index c1454ffb948..13479248999 100644
+> --- a/cmd/bootefi.c
+> +++ b/cmd/bootefi.c
+> @@ -38,6 +38,9 @@ static efi_status_t bootefi_run_prepare(const char *load_options_path,
+>         if (ret != EFI_SUCCESS)
+>                 return ret;
 >
-> diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-> index 26928cfc454..544e1aa9808 100644
-> --- a/lib/efi_loader/efi_dt_fixup.c
-> +++ b/lib/efi_loader/efi_dt_fixup.c
-> @@ -168,7 +168,7 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
->                 /* Check size */
->                 required_size = fdt_off_dt_strings(dtb) +
->                                 fdt_size_dt_strings(dtb) +
-> -                               0x3000;
-> +                               CONFIG_SYS_FDT_PAD;
->                 total_size = fdt_totalsize(dtb);
->                 if (required_size < total_size)
->                         required_size = total_size;
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index 04b2efc4a3b..40e5d31575a 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -477,7 +477,7 @@ static efi_status_t copy_fdt(void **fdtp)
->          * needs to be expanded later.
->          */
->         fdt = *fdtp;
-> -       fdt_pages = efi_size_in_pages(fdt_totalsize(fdt) + 0x3000);
-> +       fdt_pages = efi_size_in_pages(fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
->         fdt_size = fdt_pages << EFI_PAGE_SHIFT;
+> +       (*image_objp)->auth_status = EFI_IMAGE_AUTH_PASSED;
+> +       (*image_objp)->entry = efi_selftest;
+> +
+>         /* Transfer environment variable as load options */
+>         return efi_env_set_load_options((efi_handle_t)*image_objp,
+>                                         load_options_path,
+> @@ -106,8 +109,8 @@ static int do_efi_selftest(void)
+>                 return CMD_RET_FAILURE;
 >
->         ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+>         /* Execute the test */
+> -       ret = EFI_CALL(efi_selftest(&image_obj->header, &systab));
+> -       free(loaded_image_info->load_options);
+> +       ret = do_bootefi_exec(&image_obj->header,
+> +                             loaded_image_info->load_options);
+>         efi_free_pool(test_device_path);
+>         efi_free_pool(test_image_path);
+>         if (ret != EFI_SUCCESS)
 > --
-> 2.43.0
+> 2.48.1
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
