@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B98D4C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:10:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5270C369AF
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DF358406A;
-	Fri, 11 Apr 2025 16:10:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 782F18407E;
+	Fri, 11 Apr 2025 16:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bMW3kN9+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sdbLnc5k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACD7C84073; Fri, 11 Apr 2025 16:10:49 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 328D484081; Fri, 11 Apr 2025 16:11:15 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6963084003
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:10:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03ADC84003
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:11:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3912d2c89ecso1673081f8f.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:10:47 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-39c1ef4ae3aso1276879f8f.1
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:11:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744380647; x=1744985447; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744380672; x=1744985472; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=bl5S1byYeV59B44sZTxwzAU8/2U8Xl2uBvqFL77Vi+w=;
- b=bMW3kN9+6AoWlkHbyfSPmXRTrQgyAcQO1rWfSxGRtIbokjvMkcqCclUL39DtnUF92I
- 8i86HYGmy7uPhm11wlff2EH/gwgvsQjmDAvBUXWTobbqmcr+TiykOXY8ozMpAIsP1a0W
- fobpw/8fDFZgDsbBFJSsdlEn59T4dc2sY7CBdnLLziiXhQNrtc2YjZXIpNOg2wlU8OtM
- XH2q7HQhF4DT6F3/ADmxmZgkvaQfJ6izAWPE3dNE7hOSQvFjx0P8Jv6I4DHspBirRK4b
- sJB5tiFuYPF5mHIXzDV31upr4sz7sLMj5UGe6E9yQFPMAD+ti+i/IyJIV4D3ouslSoIa
- kPTA==
+ :reply-to; bh=RD7UU1noJodALdOr2P6N6mPNgJnpCtb7/wq8Syk6bjs=;
+ b=sdbLnc5knW94wJMp1e+3Dd+tZbti7sc1KCheYoFJPqw7JiInfqBDbHfLbW8lV86/4d
+ wiQGRwJjIX6H5DXzAKroRwYi3ZgYGAYngAi+ruTv4bQCSE6nU/Kkkleliswk8dGXMoWJ
+ rOWlMCOLCaTDnO3RBzK58thK7bNgL1Mx+TfH1QU5KgJcclPctnNirTcHLPUKltFrcpFX
+ u+I/m6rRCKJqiso2f/bTBeUUxzmW/KZTXSHsdxFJcpvUfj/pNOS326rnwx8zzdJh3d0q
+ AuZqrz6Hji/WNdfQEtofGspfm0J2uOKpn7xP6tgqRfu9qnM4x1mg8ou3h0r8Um5aY990
+ yK5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744380647; x=1744985447;
+ d=1e100.net; s=20230601; t=1744380672; x=1744985472;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=bl5S1byYeV59B44sZTxwzAU8/2U8Xl2uBvqFL77Vi+w=;
- b=Ry8TSAnx4ssDc/EtRuW1+x+/ZkGItQ1mndzQY3pIP25hr+vrILjH+FsfjZmzs1v7kJ
- kEu1tIGPkBC+TU3WQOCRQi6T0WMnTxwTwwAmyW+kV7/FlkxX2ttOPbm/xCINRy95n400
- ojy0Ze3dXUx8nK1wzbCaKNU/K+4kPVtr4PY1PzWPyNRTezin0SzdHo8c3fcPkypv41GO
- gxEdJchBN1H0Ic2DHzDsHA9uWDvV7FVXEJtMrJYUbsx0ZhJEQBrLmkCLj46qknO3HlA+
- wOh7Onc/nvmBTNL82MFMofvRO6PDbMNZdCDDh9plEL5JjMQlzI+gKKzn+K/Se7rY3xQf
- w9+A==
-X-Gm-Message-State: AOJu0Yz8sxi/TNIdwKsudm9vY6XyTUvBK6adoHnh1Q9nLCspWcud+QFU
- 4GQMfreEaX395hd7d4UelfdCd31BxHdk8d89jS9NvhE8O8qdPhGprNUI8mNISq0=
-X-Gm-Gg: ASbGnctDqrZqpXE31M9oNXxu+DBreuMBXZ8FU+iSz2t9ZW314ATLqVfBAQwyZIcYYpU
- ThRDFxVgwnCKgw24MKj0ScwWK6kcEltads7c6rY8T1+dveGONJQXMZD5zqElL1cyy5ibuXSJUX9
- LzlrBsJ4j30mAfRB9MCddGB8w/YdbKh91QbvJXeCygr622beW/cp2jYXYitQFEg9omTOgZdK9HD
- u7dwZR/Ju2f+NJYqALbZw0slnHdsFhGPPe2ekO9oOWW/dxxcVBzf2/JGFA00qzo9Au6OS5VvVCK
- BtDbVDZ9uXkcZ4i/5L7NfwpEKk5rDCItCIk/tPgYhjla0Vy/WF0gwmdwUv4X6QOy01VTIswYH2M
- pMhWjXs0NxNyeIjLncA==
-X-Google-Smtp-Source: AGHT+IEo7b/zVpmSgzEPkSvdbQmU2LamrxPMr69nf5y/q4s5ae95SQOEqgjjI4psW0ra/uZ9H2aXOQ==
-X-Received: by 2002:a5d:64e8:0:b0:390:f745:bbfb with SMTP id
- ffacd0b85a97d-39ea52171f7mr2611363f8f.26.1744380646683; 
- Fri, 11 Apr 2025 07:10:46 -0700 (PDT)
+ bh=RD7UU1noJodALdOr2P6N6mPNgJnpCtb7/wq8Syk6bjs=;
+ b=BDsuLGBiQeywVfxhRVMSrddFtGObsNhlUtdLXVzIBDe4bz7/goJctytLMvpbB7qxFx
+ sNp2nNHsU5b0oycQfLRz5kjV+fX3M/YAKoGOM5leojz8ViF11EQlEDhYBdcXJg/46zeJ
+ kIjCI++KGnzvrbeyl7KhM6MAsFdJF6swBZj5szdy2iHTU8fNPf5VJEQ9ccV2ORRUrofY
+ hACMRpYwYKX0DimV2URmfTBBa+5peTnx3cqMUUOA9jfTSB8EIdnqhVGoQ7jyFtmvgkti
+ GW+BM1M8grnvDD4Htxy88Pg6NVuQV6SAnN9DIhASAKH2mtP7BZULQW4M20ASs3sRHM1w
+ ATcg==
+X-Gm-Message-State: AOJu0YzFgLRCGkzxoBLV/6U9ZYgNtZS4ensCkXilvO6ig6EF0TwDZx6K
+ hXjrVaMrGlKkJbymomkt/N1EVXbkbGUTai2kyFhR3XnQVCA0R8//+knOQalY4Qw=
+X-Gm-Gg: ASbGncvwQC85+qDUR4bq2VMxTfdVWyqodJ4zi/7spetsV3FY9F9fCg6D2592Zfbdv6G
+ R69cgdeY6V04LEKL2JSDhDGM+ZjZel9OV/RKCq87BgtHNYu/skV3wjiObv8EGqKdwasjwwM9NK4
+ r8PkP1S7RaVKIqn9V/ZFkYPYYrIayx0yeLAxDQ0eoeMyxI2xxR9yTp7JPkrcZoy2sPnI9Zpey8B
+ 3a74CRRRXQbDwxQuOxQaoX2hFx68CixKWKrKbccUC12nFdYAer+W6cJQLqbi3IfXbclKiPUzF/q
+ B8nfQ5p2w1A4QNPhTh3TfrynnWK7ODkg4HfdXRdJuoDD3WSf9IARMzAEs9Cr/dNfRHYjQYLqD/Q
+ A5LKhNhKyb9pJa8tTYQ==
+X-Google-Smtp-Source: AGHT+IFT7bpkvBMx0JxcLxM8qLEA1gENKsN3lXio2gnLFG2FZSH7hZpB2Ql0PyFY/8/jwdbMrl85OA==
+X-Received: by 2002:a5d:598e:0:b0:38d:df15:2770 with SMTP id
+ ffacd0b85a97d-39d8f21d531mr5982782f8f.0.1744380672269; 
+ Fri, 11 Apr 2025 07:11:12 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:f77b:949e:1d61:69a8?
  ([2a01:e0a:3d9:2080:f77b:949e:1d61:69a8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf445713sm2072690f8f.85.2025.04.11.07.10.46
+ ffacd0b85a97d-39eae9640fdsm2100467f8f.7.2025.04.11.07.11.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Apr 2025 07:10:46 -0700 (PDT)
-Message-ID: <349ff29e-076a-46b6-a556-75cf72d5d5ac@linaro.org>
-Date: Fri, 11 Apr 2025 16:10:45 +0200
+ Fri, 11 Apr 2025 07:11:11 -0700 (PDT)
+Message-ID: <d7684e37-098a-403f-b6be-70a49ef993d6@linaro.org>
+Date: Fri, 11 Apr 2025 16:11:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 2/8] mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT
- fixups
+Subject: Re: [PATCH v2 1/8] event: signal when livetree has been built
 To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250411-livetree-fixup-v2-0-1236823377bb@linaro.org>
- <20250411-livetree-fixup-v2-2-1236823377bb@linaro.org>
+ <20250411-livetree-fixup-v2-1-1236823377bb@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250411-livetree-fixup-v2-2-1236823377bb@linaro.org>
+In-Reply-To: <20250411-livetree-fixup-v2-1-1236823377bb@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,155 +131,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
 On 11/04/2025 14:47, Caleb Connolly wrote:
-> This will now apply fixups prior to devices being bound, which makes it
-> possible to enable/disable devices and adjust more properties that might
-> be read before devices probe.
-
-Subject should be EVT_OF_LIVE_BUILT
-
-Neil
-
+> OF_LIVE offers a variety of benefits, one of them being that the live
+> tree can be modified without caring about the underlying FDT. This is
+> particularly valuable for working around U-Boot limitations like lacking
+> USB superspeed support on Qualcomm platforms, no runtime OTG, or
+> peripherals like the sdcard being broken (and displaying potentially
+> worrying error messages).
+> 
+> Add an event to signal when the live tree has been built so that we can
+> apply fixups to it directly before devices are bound.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/mach-snapdragon/board.c     |  1 -
->   arch/arm/mach-snapdragon/of_fixup.c  | 25 ++++++++++++++++---------
->   arch/arm/mach-snapdragon/qcom-priv.h | 14 --------------
->   3 files changed, 16 insertions(+), 24 deletions(-)
+>   common/event.c  |  3 +++
+>   include/event.h | 18 ++++++++++++++++++
+>   lib/of_live.c   | 11 +++++++++++
+>   3 files changed, 32 insertions(+)
 > 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index deae4d323789eab75d5fe735159b4cd820c02c45..3ab75f0fce02ecffd476ebe2aa606b1a9024bbec 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -305,9 +305,8 @@ void __weak qcom_board_init(void)
+> diff --git a/common/event.c b/common/event.c
+> index dda569d447851f559a83f98fb7b1f3543156eab5..8d7513eb10b61919e1e784481dfdcc076be14986 100644
+> --- a/common/event.c
+> +++ b/common/event.c
+> @@ -47,8 +47,11 @@ const char *const type_name[] = {
+>   	"ft_fixup",
 >   
->   int board_init(void)
->   {
->   	show_psci_version();
-> -	qcom_of_fixup_nodes();
->   	qcom_board_init();
->   	return 0;
->   }
+>   	/* main loop events */
+>   	"main_loop",
+> +
+> +	/* livetree has been built */
+> +	"of_live_init",
+
+"of_live_built" ?
+
+>   };
 >   
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 1ea0c18c2f2789a8aa054cd95bb9e4308d6b3384..70399307bcbda1e067230f00af6ba859a98c7ac0 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -21,8 +21,9 @@
+>   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
+>   #endif
+> diff --git a/include/event.h b/include/event.h
+> index 75141a192a48b0931667632f41be8ff4d6139f7c..1d267f1d10547642d381fa287ab4981a2bf03543 100644
+> --- a/include/event.h
+> +++ b/include/event.h
+> @@ -152,8 +152,17 @@ enum event_t {
+>   	 * A non-zero return value causes the boot to fail.
+>   	 */
+>   	EVT_MAIN_LOOP,
 >   
->   #include <dt-bindings/input/linux-event-codes.h>
->   #include <dm/of_access.h>
->   #include <dm/of.h>
+> +	/**
+> +	 * @EVT_OF_LIVE_BUILT:
+> +	 * This event is triggered immediately after the live device tree has been
+> +	 * built. This allows for machine specific fixups to be done to the live tree
+> +	 * (like disabling known-unsupported devices) before it is used. This
+> +	 * event is only available if OF_LIVE is enabled and is only used after relocation.
+> +	 */
+> +	EVT_OF_LIVE_BUILT,
+> +
+>   	/**
+>   	 * @EVT_COUNT:
+>   	 * This constants holds the maximum event number + 1 and is used when
+>   	 * looping over all event classes.
+> @@ -202,8 +211,17 @@ union event_data {
+>   	struct event_ft_fixup {
+>   		oftree tree;
+>   		struct bootm_headers *images;
+>   	} ft_fixup;
+> +
+> +	/**
+> +	 * struct event_of_live_built - livetree has been built
+> +	 *
+> +	 * @root: The root node of the live device tree
+> +	 */
+> +	struct event_of_live_built {
+> +		struct device_node *root;
+> +	} of_live_built;
+>   };
+>   
+>   /**
+>    * struct event - an event that can be sent and received
+> diff --git a/lib/of_live.c b/lib/of_live.c
+> index 90b9459ede313e492e28c8556c730f3bd8aaa9df..c1620616513c2e32448b4a6d156a9162d97c76b7 100644
+> --- a/lib/of_live.c
+> +++ b/lib/of_live.c
+> @@ -10,8 +10,9 @@
+>   
+>   #define LOG_CATEGORY	LOGC_DT
+>   
+>   #include <abuf.h>
 > +#include <event.h>
->   #include <fdt_support.h>
->   #include <linux/errno.h>
->   #include <stdlib.h>
->   #include <time.h>
-> @@ -31,9 +32,9 @@
->    * USB controllers. Rather than requiring source level DT changes, we fix up
->    * DT here. This improves compatibility with upstream DT and simplifies the
->    * porting process for new devices.
->    */
-> -static int fixup_qcom_dwc3(struct device_node *glue_np)
-> +static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np)
->   {
->   	struct device_node *dwc3;
->   	int ret, len, hsphy_idx = 1;
->   	const __be32 *phandles;
-> @@ -100,11 +101,11 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
+>   #include <log.h>
+>   #include <linux/libfdt.h>
+>   #include <of_live.h>
+>   #include <malloc.h>
+> @@ -320,8 +321,9 @@ int unflatten_device_tree(const void *blob, struct device_node **mynodes)
 >   
->   	return 0;
->   }
->   
-> -static void fixup_usb_nodes(void)
-> +static void fixup_usb_nodes(struct device_node *root)
+>   int of_live_build(const void *fdt_blob, struct device_node **rootp)
 >   {
-> -	struct device_node *glue_np = NULL;
-> +	struct device_node *glue_np = root;
 >   	int ret;
+> +	union event_data evt;
 >   
->   	while ((glue_np = of_find_compatible_node(glue_np, NULL, "qcom,dwc3"))) {
->   		ret = fixup_qcom_dwc3(glue_np);
-> @@ -113,16 +114,16 @@ static void fixup_usb_nodes(void)
+>   	debug("%s: start\n", __func__);
+>   	ret = unflatten_device_tree(fdt_blob, rootp);
+>   	if (ret) {
+> @@ -334,8 +336,17 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
+>   		return ret;
 >   	}
+>   	debug("%s: stop\n", __func__);
+>   
+> +	if (CONFIG_IS_ENABLED(EVENT)) {
+> +		evt.of_live_built.root = *rootp;
+> +		ret = event_notify(EVT_OF_LIVE_BUILT, &evt, sizeof(evt));
+> +		if (ret) {
+> +			log_debug("Failed to notify livetree build event: err=%d\n", ret);
+> +			return ret;
+> +		}
+> +	}
+> +
+>   	return ret;
 >   }
 >   
->   /* Remove all references to the rpmhpd device */
-> -static void fixup_power_domains(void)
-> +static void fixup_power_domains(struct device_node *root)
->   {
->   	struct device_node *pd = NULL, *np = NULL;
->   	struct property *prop;
->   	const __be32 *val;
->   
->   	/* All Qualcomm platforms name the rpm(h)pd "power-controller" */
-> -	for_each_of_allnodes(pd) {
-> +	for_each_of_allnodes_from(root, pd) {
->   		if (pd->name && !strcmp("power-controller", pd->name))
->   			break;
->   	}
->   
-> @@ -132,9 +133,9 @@ static void fixup_power_domains(void)
->   		return;
->   	}
->   
->   	/* Remove all references to the power domain controller */
-> -	for_each_of_allnodes(np) {
-> +	for_each_of_allnodes_from(root, np) {
->   		if (!(prop = of_find_property(np, "power-domains", NULL)))
->   			continue;
->   
->   		val = prop->value;
-> @@ -149,14 +150,20 @@ static void fixup_power_domains(void)
->   		func(__VA_ARGS__); \
->   		debug(#func " took %lluus\n", timer_get_us() - start); \
->   	} while (0)
->   
-> -void qcom_of_fixup_nodes(void)
-> +static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
->   {
-> -	time_call(fixup_usb_nodes);
-> -	time_call(fixup_power_domains);
-> +	struct device_node *root = event->data.of_live_built.root;
-> +
-> +	time_call(fixup_usb_nodes, root);
-> +	time_call(fixup_power_domains, root);
-> +
-> +	return 0;
->   }
->   
-> +EVENT_SPY_FULL(EVT_OF_LIVE_BUILT, qcom_of_fixup_nodes);
-> +
->   int ft_board_setup(void *blob, struct bd_info __maybe_unused *bd)
->   {
->   	struct fdt_header *fdt = blob;
->   	int node;
-> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-> index 74d39197b89f4e769299b06214c26ee829ecdce0..4f398e2ba374f27811afd2ccf6e72037d0f9ee7f 100644
-> --- a/arch/arm/mach-snapdragon/qcom-priv.h
-> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
-> @@ -8,19 +8,5 @@ void qcom_configure_capsule_updates(void);
->   #else
->   void qcom_configure_capsule_updates(void) {}
->   #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->   
-> -#if CONFIG_IS_ENABLED(OF_LIVE)
-> -/**
-> - * qcom_of_fixup_nodes() - Fixup Qualcomm DT nodes
-> - *
-> - * Adjusts nodes in the live tree to improve compatibility with U-Boot.
-> - */
-> -void qcom_of_fixup_nodes(void);
-> -#else
-> -static inline void qcom_of_fixup_nodes(void)
-> -{
-> -	log_debug("Unable to dynamically fixup USB nodes, please enable CONFIG_OF_LIVE\n");
-> -}
-> -#endif /* OF_LIVE */
-> -
->   #endif /* __QCOM_PRIV_H__ */
+>   void of_live_free(struct device_node *root)
 > 
 
