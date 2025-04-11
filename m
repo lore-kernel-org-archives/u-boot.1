@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38573C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 13:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35881C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 13:36:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDC5A84070;
-	Fri, 11 Apr 2025 15:36:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40DF78407F;
+	Fri, 11 Apr 2025 15:36:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cHp3T0Uc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p+cZueq2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17CA84051; Fri, 11 Apr 2025 15:36:15 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id B270884051; Fri, 11 Apr 2025 15:36:18 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0FCB84051
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 15:36:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3816B8405E
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 15:36:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cfebc343dso14819255e9.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 06:36:12 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43cef035a3bso14043185e9.1
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 06:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744378572; x=1744983372; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744378575; x=1744983375; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NFa4AdoQdtx/Pv+1WZl2BVf3YrDjUEF9rxgFOnB+tbQ=;
- b=cHp3T0UcwUV4bXYfL8sKjAY0GrP2yB4+S231xiG9OD1r/DU+QHs+yvAvo6AurOYZ+o
- cqkH6y0ZH4iMPYQRd0LZi3g5g8c3H1FTyPPXIfHjAkEhIWZarnnGJVZtO02M9BpOWSEs
- Z/14xensfEnbNNcfyetJ9sYqJQUL2vfu19xyUCRJ0zd39Vw1U2DJhJljadyJl/5yba4y
- 5O/WMaA1jDMX1gOkihjdukzN7FNPjFAYIsJWFww7dlQTr3DZLWXchAZoPOQrfi8Z0VTD
- wivU8jZ+sgmLjgV6FU9o1gl/nFyjygZB1pdgUhWhuZ9gogYYTAdTYk189ymlxkl0fmEk
- 59Zw==
+ bh=sORCJjnnYKETdy3TWAB0wtosJHyD5tK1lMWWnal5kl4=;
+ b=p+cZueq25IvR35xzAHxKt2Hn3dcv1hhIS/mUQyNHff8QxY1ja0JhckdejQaR2rfDMZ
+ FERA/AJ96nRXmy0PI6I1VDWmFx3bhmeIyPMAiJwv7qPKL3VlzhkNAl0zqtzXgCirCQP/
+ k3gMCTJxay/P0cGDIIfLBwJQxJ5aVHTHAw+bODWO10I2VkQF9aj1GRbX1bWRtKPBJaSF
+ mZydNTPIJFogBnS/vRbt0isRSy/1lliedxdc5SMm7UoaAhmIND4MQXFCqu6Gu9b7+hwP
+ OonJBmyAHRQmUaDkZ1d5jz4VTEPTDtE3BRPpdLfIu6CkLTJKQePGwUbGho7QAEDp6CXH
+ qSQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744378572; x=1744983372;
+ d=1e100.net; s=20230601; t=1744378575; x=1744983375;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NFa4AdoQdtx/Pv+1WZl2BVf3YrDjUEF9rxgFOnB+tbQ=;
- b=l3RXSIk7Qrj9XNbSxRpnNBJ5EHwlWlHA14N0HsbXtTVn/D/88Gt/nUKT0/nSPLvGvE
- mXAh/562p2C0OsfBHm5jD32AbcXfClywlm2o9a5Wg4VzUiRk/zGyK91etTA5rwBs71fS
- drwFvWeP7XIH2CdyaojwqqOgoPsHG46GmyOmdO8bypEDCkLELEDEZi5OjaXolVM32ghT
- bfHOPaNKD1LXOnNzIbRPh8nFinQ4Fjw5IrXgEvB/I3Nd9mY27g9dQqYtpiLq5gPjV5it
- JvbO6GxOBdJ26IckFnpCyolcEprHdoITaVozjZrDt/SJPpLWx71wHoFDRoDKzFUYG8xk
- 94VA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXvWcqQXrrKyA8AR+3px/ryRcXJEAGfgPbDmFeThLC2F0Awun/E5I+LGtXw8vig37XpqGkHpOc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxIBpbMBn14Ww7fdQfTfO1+UBvp0zEz+5UbEyGQjbajT0V0hknG
- P4MysrEl5HaY35CQ8LtEVtmlOKBsbmSBs9KC0cz+qjxAFuHW/wdMeVZJwNayf+c=
-X-Gm-Gg: ASbGnctCcSkVDkfwDiBaKf5kFyBwpI5UQC1WRmKwkjDLFzOKT1UgZXLGuDCenj73pEC
- ctb7iMz+inRR2wE/QbDGqKhvYIY4fOYp1c1p3JNapCAefjOwimk/JuqOVIRUz4fDw8AH5zRN7uY
- dCgQXBN8DN4iNQrBNsrZlUStWrSMd4qMDe5MviCIoj0hvf0Ba4STzhzLcKe9yyLu0avON7oBuU3
- 8tPE7wGsT+46IEk41PwcdePHP6LmRz5vonjYM/3Ym9EFt30j71LGBpLLiTX+epYNkSPXE9V7FDc
- S/Ofqx4AaU4tp2Qb+pKCdZ84v5RO3L4qp/nT57ElStxu8Ftgaux66mqRlK65BQUIPtOBXlzvDda
- fKY37AVniot1kTB1AuA==
-X-Google-Smtp-Source: AGHT+IEvGIT6yXEWx3lBnkK76aJOjdasvgCJ1YV54OyamndwWFOF4mXW7DDxz8V7QmRySUoAQpbcjg==
-X-Received: by 2002:a05:600c:1e1c:b0:43c:f8fc:f687 with SMTP id
- 5b1f17b1804b1-43f3a9adc61mr29538975e9.27.1744378572150; 
- Fri, 11 Apr 2025 06:36:12 -0700 (PDT)
+ bh=sORCJjnnYKETdy3TWAB0wtosJHyD5tK1lMWWnal5kl4=;
+ b=R2ihXiBI33rcECgoDhI9BI+6TawLj+41k+qeQ3VK2omDgS7+f12kM82S+l2OgacBfg
+ VlW4j+BIEJ3uu1oxU7ieZiL4WrhRPiDQd178LuUNyhVR3t6PdIOKkdsWvhvYAWoD1305
+ m/zLZCf0FqdT9hNO649PZQiezox2WZYjwF8u0pUzdrmoUdSYo00WaU6r2zwtQSmC2OnZ
+ ap8juHaTEruWPmXZDn5IRnlbvpYR9Rk5kH3B7oP7JYvsYzaqG4fW6h1qMlTne57IyUjL
+ J6ciccfoaJHdw4QZfoltduwEOdqm0Pyb80EhgXMlPG6UB9oA3oIxFakqVTP+FP7AnBGZ
+ RBSw==
+X-Gm-Message-State: AOJu0Yyw1TJ8cWXSRFZ4AIOlzFafppb4+EfvA7Ozli3bgEj7yrNoVR73
+ TRM4I7ogMVTbXZYMw5/PE4H9WjIFPh1uY21JJlY4/5fq7SCV2ds6ppsM8GJ/PNU=
+X-Gm-Gg: ASbGncvAjUGdKc/H4zBAP5ufGCcdgUhI6bzo3jQ8IKrRyEU2zzY2WzpKi3u/zNeL4qN
+ 2pyXSnz+HAH07x34YRrBwsFa+Y54P3GSdbaiMglYm8bb+exjpxVEgfwwzDsBtUsqFAMK4ee6kiO
+ 0VkY+4VblnQ0fOd056ojsqCDABRI3GHkza5IDtnO2noh82ZX+n6+ruFBz4D00ULc3dGnaF1E5Zc
+ azV+7Pydgu+mF/Q+p9rkHLBggS/sONCT3fJ4LrpFYhRiKXEC0ZWOC5uEge2PnRCso1OsssONMFc
+ zQ3lj/okJhlt3GkjOiD/+i3uCyu+yCwhJ6XHGa3jtHktOpoOuDcEi48uPrOS/PW1f6tk/kSQ70K
+ YLck02+LjVxGdRqIh4Q==
+X-Google-Smtp-Source: AGHT+IG1NS80r9OiPt812HAhKxtJp4Sr5mTJyBMXJfCm7JPGObA2caEBLfd2A6+SURk8XH5WNLwRrg==
+X-Received: by 2002:a05:600c:1e14:b0:43d:ea:51d2 with SMTP id
+ 5b1f17b1804b1-43f3a93f681mr25822675e9.14.1744378574637; 
+ Fri, 11 Apr 2025 06:36:14 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (35-60-142-46.pool.kielnet.net.
  [46.142.60.35]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233c8219sm83195365e9.21.2025.04.11.06.36.10
+ 5b1f17b1804b1-43f233c8219sm83195365e9.21.2025.04.11.06.36.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 06:36:11 -0700 (PDT)
+ Fri, 11 Apr 2025 06:36:12 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Sam Day <me@samcday.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20250331104327.321339-1-caleb.connolly@linaro.org>
-References: <20250331104327.321339-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] mach-snapdragon: of_fixup: fix condition check in
- ft_board_setup()
-Message-Id: <174437857089.2613234.8476852529726797881.b4-ty@linaro.org>
-Date: Fri, 11 Apr 2025 15:36:10 +0200
+To: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, alexeymin@postmarketos.org
+In-Reply-To: <20250410080027.208674-1-sumit.garg@kernel.org>
+References: <20250410080027.208674-1-sumit.garg@kernel.org>
+Subject: Re: [PATCH v2 0/2] RB1 fixes
+Message-Id: <174437857232.2613234.17852939354900503676.b4-ty@linaro.org>
+Date: Fri, 11 Apr 2025 15:36:12 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,21 +100,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Mon, 31 Mar 2025 12:43:18 +0200, Caleb Connolly wrote:
-> The fdt_node_check_compatible() function returns 0 on success which is
-> pretty confusing, and we were using it wrong!
+On Thu, 10 Apr 2025 13:30:25 +0530, Sumit Garg wrote:
+> The eMMC on RB1 boards supports HS200 mode but currently the msm_shdci
+> driver in U-Boot is missing DLL configuration required for HS200 mode to
+> work. Hence disable HS200 for now until proper support is in place.
 > 
-> Invert the condition check and refactor things to be more readable.
-> 
-> Additionally, add the check for the RB1 which needs the same fixup as
-> the RB2.
+> Apart from that, add a fix for USB PHY power on sequence which got
+> broken by recent addition for SM660 platform support.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] mach-snapdragon: of_fixup: fix condition check in ft_board_setup()
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/602ceb0c9279
+[1/2] qcom_defconfig: Disable MMC HS200 mode support
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/49cf3b29134c
+[2/2] phy: phy-qcom-qusb2: Fix USB PHY power on sequence
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/45acd9d2d4ec
 
 Best regards,
 -- 
