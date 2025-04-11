@@ -4,64 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD54C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:21:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60062C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:23:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5060F840BE;
-	Fri, 11 Apr 2025 16:21:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id CCFF0840AE;
+	Fri, 11 Apr 2025 16:23:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="Eod/QdIp";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jb4ASMjd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F352840C1; Fri, 11 Apr 2025 16:21:29 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2039684085
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:21:26 +0200 (CEST)
+ id 71DEA840AE; Fri, 11 Apr 2025 16:23:13 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DA2AA840B1
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:23:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id E7CF31FC42;
- Fri, 11 Apr 2025 16:21:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1744381285;
- bh=ML/Ivn/9ho2tiXQcxsjfLMNMVuNFPS43SIiKcj04mqw=; h=From:To:Subject;
- b=Eod/QdIpPkbniDJU9PL0khqTXXY4Mn8dnjEKh35HGr6Yu7ihAYoWjYWSDTEXA83Gt
- KeL8uiztBAoOQ41yb6qtFm8DxNpsBqiWmfexPONuX8EChTo91tsyGgeaT9WV0QvW9f
- lxfy3eBb8isz3yif7c7ai/O7RlbGaAY4HWv66s4jPhL8qt8/m6bX1ym6v3dI2whVwJ
- CTpnoVjbIk/fG5WdmB4hVcfV9hhv1PKrmsc4EaCCWP8whv1zMrc9bFEr09OOsqmAkA
- Cq1Xtv8kAwgyMBbRYGz3RFim0S0j5gbwrHvkk6Anl3ACp9vbqLHxPkBGbV5WI4SKTL
- icJFbfD68RNNw==
-Date: Fri, 11 Apr 2025 16:21:23 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Marek Vasut <marex@denx.de>
-Cc: Francesco Dolcini <francesco@dolcini.it>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Felipe Balbi <felipe.balbi@linux.intel.com>,
- Lukasz Majewski <lukma@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
-Message-ID: <20250411142123.GC12707@francesco-nb>
-References: <20250319220805.219001-1-marex@denx.de>
- <87a59gdofd.fsf@baylibre.com> <20250324080315.GA6932@francesco-nb>
- <87pli6esx0.fsf@baylibre.com>
- <Z-FQeVtIImeHsfXs@gaggiata.pivistrello.it>
- <42f53c19-de12-45c3-9091-2e6c23d1fcd4@denx.de>
- <Z-FpUV-fwGvch4-W@gaggiata.pivistrello.it>
- <48e57653-d86a-4650-859e-1e77a6c29f4a@denx.de>
- <Z_TnLsKHod_fvDsK@gaggiata.pivistrello.it>
- <bf955296-b4fe-443a-8bf9-ead7afe57661@denx.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53BEN7nL2152988
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 11 Apr 2025 09:23:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744381388;
+ bh=c2p93tP2ZflxQIXeEYvJ5BAid4kWcmZKGxtWvQ0luGo=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=jb4ASMjdTjxgQFkLHHU5G97D3/OUJgyDiVlnSrdMg9S4G1q6v89wevS1F1oRi8ETW
+ T2Rzm6Cih1mnTbBwFkQ6RI3qR1NICPF2vyoISrUyVuB42Pg5YxMCvAgMz6fE5WCsdS
+ /z3ioIR6V/9nRq4WmBSCUH+G7olYlV+toolKTjoU=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53BEN7bt010495
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 11 Apr 2025 09:23:07 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 11
+ Apr 2025 09:23:07 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 11 Apr 2025 09:23:07 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53BEN7LD030134;
+ Fri, 11 Apr 2025 09:23:07 -0500
+Date: Fri, 11 Apr 2025 09:23:07 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Parth Pancholi <parth105105@gmail.com>
+CC: Tom Rini <trini@konsulko.com>, Parth Pancholi
+ <parth.pancholi@toradex.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1] arm: mach-k3: am62px: Fix MCU_CLKOUT0 parent clock mux
+Message-ID: <20250411142307.byeft4cljksi73bv@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250408161211.3165588-1-parth105105@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <bf955296-b4fe-443a-8bf9-ead7afe57661@denx.de>
+In-Reply-To: <20250408161211.3165588-1-parth105105@gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,119 +80,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 08, 2025 at 04:51:22PM +0200, Marek Vasut wrote:
-> On 4/8/25 11:06 AM, Francesco Dolcini wrote:
-> > On Mon, Mar 24, 2025 at 03:36:52PM +0100, Marek Vasut wrote:
-> > > On 3/24/25 3:16 PM, Francesco Dolcini wrote:
-> > > > On Mon, Mar 24, 2025 at 02:53:23PM +0100, Marek Vasut wrote:
-> > > > > On 3/24/25 1:30 PM, Francesco Dolcini wrote:
-> > > > > > On Mon, Mar 24, 2025 at 09:26:03AM +0100, Mattijs Korpershoek wrote:
-> > > > > > > Hi Francesco,
-> > > > > > > 
-> > > > > > > On lun., mars 24, 2025 at 09:03, Francesco Dolcini <francesco@dolcini.it> wrote:
-> > > > > > > 
-> > > > > > > > Hello Mattijs, Marek
-> > > > > > > > 
-> > > > > > > > On Thu, Mar 20, 2025 at 10:47:02AM +0100, Mattijs Korpershoek wrote:
-> > > > > > > > > On mer., mars 19, 2025 at 23:07, Marek Vasut <marex@denx.de> wrote:
-> > > > > > > > > 
-> > > > > > > > > > The UUU tool excepts the interrupt-in endpoint to be ep1in, otherwise
-> > > > > > > > > > it crashes. This is a result of the previous hard-coded EP setup in
-> > > > > > > > > > drivers/usb/gadget/epautoconf.c which did special-case EP allocation
-> > > > > > > > > > for SPL builds, and which was since converted to this callback, but
-> > > > > > > > > > without the special-case EP allocation in SPL part.
-> > > > > > > > > > 
-> > > > > > > > > > This reinstates the SPL part in an isolated manner, only for NXP iMX
-> > > > > > > > > > SoCs, only for SPL builds, and only for the ep1in interrupt-in endpoint.
-> > > > > > > > 
-> > > > > > > > UUU can (and in our case is) used also on non-NXP i.MX platforms.
-> > > > > > > > What should we do?
-> > > > > > > 
-> > > > > > > Do reproduce the problem (UUU tool crashes) on those platforms with
-> > > > > > > recent U-Boot versions (v2024.10+) ?
-> > > > > > 
-> > > > > > Not tested, my comment is purely based on the code and the commit message.
-> > > > > > Older U-Boot versions (up to v2024.04, included) are working fine, with UUU used
-> > > > > > with TI K3 SoCs (AM69, AM62, AM62P).
-> > > > > Are you talking about the NXP UUU ?
-> > > > 
-> > > > yes, it works just fine on not-NXP SoC.
-> > > Then please test if it still works, and if not, this patch needs to be
-> > > expanded to cover TI ... or apply unconditionally in SPL (sigh).
-> > 
-> > I just found the time to check some logs from our CI in which we execute such a
-> > workflow.  We do use UUU only from U-Boot proper, so we are not going to be
-> > affected by this SPL specific change.
-> > 
-> > However I found this error in the logs, on both a TI AM62 and an i.MX8MP
-> > 
-> > ```
-> > Starting download of 40524455 bytes
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > ..........................................................................
-> > ..........................................................................
-> > ..........................................................................
-> > ..........................................................................
-> > .............
-> > downloading of 40524455 bytes finished
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > Starting download of 1675 bytes
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > downloading of 1675 bytes finished
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > Starting download of 82 bytes
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > downloading of 82 bytes finished
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > ```
-> > 
-> > the download is successful however, despite those error messages. Any idea? Is
-> > this related to this topic?
-> I have a feeling it is the UUU which should be fixed to not depend on the
-> ep1-in , really.
+On April  8, 2025 thus sayeth Parth Pancholi:
+> From: Parth Pancholi <parth.pancholi@toradex.com>
 > 
-> You could however quickly try and apply the change in this patch not only to
-> SPL, but to U-Boot on your board as well, and see if those warnings
-> disappear.
+> CU_CLKOUT0 can be driven by two input clocks: a 25 MHz and a 50 MHz source.
+> Currently, the 25 MHz option is not selectable due to an incorrect mux
+> configuration where the 50 MHz clock is duplicated in the parent list.
+> 
+> This patch fixes the mux setup, allowing proper selection of the 25 MHz
+> clock source for MCU_CLKOUT0.
+> 
+> Similar configuration is already correctly implemented in AM62 clock
+> data for 'hsdiv4_16fft_main_2_hsdivout1_clk10', where MCU_CLKOUT0
+> parent switching behaves as expected.
+> 
+> Link: http://downloads.ti.com/tisci/esd/latest/5_soc_doc/am62px/clocks.html#clocks-for-board0-device
+> Signed-off-by: Parth Pancholi <parth.pancholi@toradex.com>
+> ---
 
-So, I did a quick test and the issue is still there.
+Good catch!
 
-And looking better at the error now, this is about ep1in-bulk, that is
-not affected by this change at all.
+Reviewed-by: Bryan Brattlof <bb@ti.com>
 
-
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 477ecd020985..55b248505de5 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -1632,23 +1632,7 @@ usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
-        if (usb_endpoint_is_bulk_out(desc))
-                return dwc3_find_ep(gadget, "ep2out");
-        if (usb_endpoint_is_int_in(desc)) {
--               /*
--                * Special workaround for NXP UUU tool in SPL.
--                *
--                * The tool excepts the interrupt-in endpoint to be ep1in,
--                * otherwise it crashes. This is a result of the previous
--                * hard-coded EP setup in drivers/usb/gadget/epautoconf.c
--                * which did special-case EP allocation for SPL builds,
--                * and which was since converted to this callback, but
--                * without the special-case EP allocation in SPL part.
--                *
--                * This reinstates the SPL part in an isolated manner,
--                * only for NXP iMX SoCs, only for SPL builds, and only
--                * for the ep1in interrupt-in endpoint.
--                */
--               if (IS_ENABLED(CONFIG_MACH_IMX) && IS_ENABLED(CONFIG_XPL_BUILD))
--                       return dwc3_find_ep(gadget, "ep1in");
--               return dwc3_find_ep(gadget, "ep3in");
-+               return dwc3_find_ep(gadget, "ep1in");
-        }
-
-        return NULL;
-
-
-
+~Bryan
