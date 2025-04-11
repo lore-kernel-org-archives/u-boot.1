@@ -4,107 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93EECC36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:03:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C2DAC36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 15:03:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1452084144;
-	Fri, 11 Apr 2025 17:03:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C7438413A;
+	Fri, 11 Apr 2025 17:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lhvMdh4l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SpTlOOQk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD43984148; Fri, 11 Apr 2025 17:03:43 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id EFB6A84148; Fri, 11 Apr 2025 17:03:44 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74C1284107
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:03:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D52FC84143
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 17:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-39c266c2dd5so1729916f8f.3
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:03:41 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cfebc343dso15992095e9.2
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 08:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744383820; x=1744988620; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bo4WFpYmlvS4V+xunHdmQ9QU9WR2rtXFyZkvEqHMmZ8=;
- b=lhvMdh4lk2FHxQ8/O/lnsG5plwPjIL58VfTrAGRIUJc+7hO8SXeGY2pAj8ahRGewU0
- b8IEto1hcrOdaKgpm1R7pBQ1eF3vpbwTz9Jyg0ltLJjNUaevjQo8nhpHLgnrZp7+4YJj
- nlawSfrj4Th2WY3u7mqTxnPw5NbxJom7+W/wKhszn03e23TFNQaIMrl0Ew1BPnzzjElh
- NyjvVMdRsyj4nBsysBAusGBff31JacXf8etuKo0+vb3ZAJ2QN47O2wjBsIWAZoRRKC6H
- wmUSOJ/zde4veULLPBqxqq/mW1FR0ELxKsZfGmSzBa2oW3uTSIKmLmc36Z/NKOjR0z3q
- ToRQ==
+ d=linaro.org; s=google; t=1744383822; x=1744988622; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FSa5QNB53S+69Dbruhd9xlOrJA2Nu+cbfcsov0S7PQI=;
+ b=SpTlOOQkoHeb2oDzFUnwmWy5djIBr9ylNamBFfEvSCqe5Xp+ZgLQha5wCiKAFBwtof
+ cwuGHiOQ6m5IeeqJ5zzAgdk56175JNaucttmzaZVpvmjz4aMu7BAEg7DnW3ztMS80NAs
+ JK4PwoKjqYfOqPoKjHvlpYomUsLLBOmqnU7R8jn5r+4wgFB1MfAsZa4GQD4R+HlOVLto
+ BtJg9Ej+kdQTxtiwgoK4MWvzSGyAjjVWGcbQlIwfAOB0JdDBlQYbTI1YjFlEqGIEfXIh
+ iyUEuksDgeam3gpDRdoKzeRiYST4ILmTx4Yjx2VMk/0tVUXqYA+s3Hs/Ob1cVdeSHEAS
+ w62A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744383820; x=1744988620;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bo4WFpYmlvS4V+xunHdmQ9QU9WR2rtXFyZkvEqHMmZ8=;
- b=cLseX4Ixtx7h6ggpNo2Hxk52Tgkg/4VldgS8Q+9DZhxpq9uCOHnKNSB2Ot5TN90JvW
- fJwt6rk3LgTKq8eGsr3toDsyevUj6dnVp+6qKi2NYvSF4Mnt/OhbkcRq5BRxhy2CkeS6
- RZx/JOrCwQmgPfu1JrPNUOr7Ht7CbLj4DO3HdHemTbsrlS18GxHxsdMlbrlJlNe/bBfc
- ZDIwssPJhrx07LA3TogoqCeqQXbPmfghkE5IVZciRSBrguPa47bIHJb6xpj8Mo6buwCj
- 01NLQc2r6kfDQt/cxpG+KGDAUtvQs/utFnUlpRqKehxLV7oAQPw3pML6oO/zy4DMukhu
- WNWQ==
-X-Gm-Message-State: AOJu0Yx1p8yQYEIvpRX492AP/IYcYxWRu4YQNtYsogPtv3c2QHS+P16A
- 7ocaUnmNHjRnlkX6TPTN5fJyH6z2BysqWvJ2MrP25kHzjjsLsTfjlVv3hzUZfPlTCGW/quTCsiR
- UH24=
-X-Gm-Gg: ASbGncueTVd34F8IDnjMMXmoTWuK4xsRralLtwDSWhXaQl/ESpe65gnXruLP9D5YZJd
- diTOKuPFomUXOM8RB/A4wnWQPdg6R5pTK/75T3HQMl/xqoCXxAVBI1arg06Js5tCq4XYQIG7G72
- vYKQIXLRw4Z1zfPbqaldnnTF7+ZeDqGQ0nuXHZU2oOinvtaaVxbkYzacTYJKg0rHrSf0PfB/l++
- xlSGn47Bxw5jGaaQD/djTio2ZOYLcJCLvlVQs5nfbhMtXtaogyTI2KliZmioy3HL6sQLbnIfxjl
- 9ZOVRWoc+U5ooMAoBzjt2X9HFqd5JFpvusQ7hLZFprU78hC0eCtPRmwCJaWzKdvCKD9Es4Uhb0H
- ETInyr1HrL5hlt59WKw==
-X-Google-Smtp-Source: AGHT+IEn9wZ3tdxTMjDU23vAgKFB3kyVNddfp2lz5mzoNyousfWtmCTS34vUEIutSHdjw/B1QzBgFA==
-X-Received: by 2002:a05:6000:4285:b0:39c:1efb:ee8a with SMTP id
- ffacd0b85a97d-39eaaebdecfmr2616617f8f.38.1744383819557; 
- Fri, 11 Apr 2025 08:03:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744383822; x=1744988622;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FSa5QNB53S+69Dbruhd9xlOrJA2Nu+cbfcsov0S7PQI=;
+ b=SBdnvTfA9+Onf3VKq9e11iFW7WB3CLLenzjnJXOVTeVSKIU9WqdJ3EBkFSThehVIMa
+ gWpBUGLuRgh0XJjni6UEFzBPI4ERe71gYytHlZrNzyp1AIqnDH/UJT6eFWbgEFsjyxZ0
+ O0+AJKIPecn6qJXplfo4zS9PHXt2BxlEiReYTwTHZEfSUc1z05e4FeJHxFDK9f0+/6EW
+ G9Xht+2jsuXrRfZXlPOC/BbbE9IB5ZnPVoGnN7kGDoZff8ZUB39rdVEsHL7nrZj4bKOD
+ jiTbsLSGAu87EOdYOvt3hf+PuxxD2tyBIQUEYtSJNikwijkidG5l4uRimqNT1Y4mUjD9
+ YF8g==
+X-Gm-Message-State: AOJu0Yz0QlNJ8AhWVad8wWePl9wy5aQCJPdmK+cWfI6AKu6W8wPvf7p/
+ fBdvlj3i4tMRa7wiOHrMWRvRIQHTq9i4qpatfcbsXXUO+WuZCvuwRuJFabiRVVlD7eojZ2bQkKi
+ XvhM=
+X-Gm-Gg: ASbGncuk7xyMAuQuqLD7esUNjtWLXHOSAzjkkvHZdPMBO0X7PQduwaG9qFkvmisnjat
+ NRD169IJWmTXlItrk+3/wJiv1qaHeakqVrVN2955Fbx5bI8K8Mj1zBmRo9bKrChPaoDQIzWGYg/
+ lJCcaub+nmQY9MJAaYvQWoJBJRkwd1znrdyjHv4rgTYNP+peH8gTS4ER/nbhrwUOMwNXfwMHwHO
+ Iq3v3u2dRvmWsjmBcpvM+r6cq8WpY2e2L6PpLR1G5fpAtCfjg5o7aBlniwMGNHoGhJaftJzzihT
+ bG7CZTWz9zL95YqKjk7d8wtessaKpUXOCsU+szNAFCUoY4DYKAMmMQ54gRxmNgH9CPJiFtvOAch
+ XbvJ5OqJ0QXW0aDnuow==
+X-Google-Smtp-Source: AGHT+IHfTE6T/YuLZfo+zQIf7/GVzgC5T1CBniyDSmXDmBSWSLLZ84ZqJrV94p698UN7YbuACOqRwQ==
+X-Received: by 2002:a05:6000:18ac:b0:39c:142d:c0a with SMTP id
+ ffacd0b85a97d-39ea52037f9mr2504199f8f.19.1744383821492; 
+ Fri, 11 Apr 2025 08:03:41 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (35-60-142-46.pool.kielnet.net.
  [46.142.60.35]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf445270sm2201005f8f.81.2025.04.11.08.03.38
+ ffacd0b85a97d-39eaf445270sm2201005f8f.81.2025.04.11.08.03.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 08:03:38 -0700 (PDT)
+ Fri, 11 Apr 2025 08:03:40 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v2 0/4] Qualcomm: expand capsule update support
-Date: Fri, 11 Apr 2025 17:03:33 +0200
-Message-Id: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
+Date: Fri, 11 Apr 2025 17:03:34 +0200
+Subject: [PATCH v2 1/4] mach-snapdragon: track boot source
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEUv+WcC/5WNQQ6DIBBFr9Kw7jSCFdOueo/GBcKgJAp0UNLGe
- PdSb9Dl+/l5b2MJyWFi99PGCLNLLvgC4nxielR+QHCmMBOVaKpaSOiv8NJhBq1iWieENRq1lNc
- cKWSc0S8JuLS27bUw3AhWTJHQuvdReXaFR5eWQJ8jmvlv/c+fOVSgLAqs5U3KtnlMzisKl0AD6
- /Z9/wISKMhH1wAAAA==
-X-Change-ID: 20250326-b4-qcom-capsule-update-improvements-16ff7bc2d1d2
+Message-Id: <20250411-b4-qcom-capsule-update-improvements-v2-1-27f6b2fcc4a9@linaro.org>
+References: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
+In-Reply-To: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@kernel.org>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2510;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3177;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=jzym53EOTdW5ol47c2dfDkyQ+qA3CMyzvsIBAoDyXoM=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn+S9Jh4jj5b9DFE+TSx6Agq7gg52p1/+dx4p0G
- xgezc0w1pGJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/kvSQAKCRAFgzErGV9k
- toteD/47R5bzgiV/hli+TgYIZNWN3jU3OGikTbUc1lbAO0W2FbzQDD92putOabKhtU2HzEGu9w/
- WfoSoMUfeNsNmM23l6TfUR+X8NMyeSm74/n7B0gyr0DTEeibJyVFaMQ7wS55/ebbCPbFwwc7eX9
- IL/g9TEtMDjfthyi0GeCnV4il+GQKFjDaLPec9Hz/68R/mvteLz457y61vyxn1KuaHx0UXS9FVS
- ow3zEE4ppRS8ZKfDRDCnYPhSt6dYq8jtWUCRrTRKR/vvwVCBwN2LJLIw6JP3dv0dfimNlyk+tG1
- K6GZm4SPBDdruePDjtZ31upH+91m7qoixWfcN7nISGEtc5pylgjUAk9PtWq5DBRzPTSQ3M/hbiK
- aWlbcH78nwrPA8M97dVyhNR6y5y2IFBhwnCLUCmm2h0joLBqs77kKANspdGBWuh3e9PyUbteY2U
- t1GtfunoQHqGh0tZyZWl5CLFHNwyngabbKzhFlJpbMZcUCzIL82c5+lAyk9U2GSFJ0to0VQFg1W
- rfwhXZP4edt4E6T+TtZnFJLhCrAuRAg1PCAmVmRONbvXrsUbj0J04PlEfxOTKSFmABhNIUBt9Be
- LgSSksZfVXSmoCAxmR1F/BgsVCgkB07R34vgfLlktVK5/wuLrDT1Q3YxkhndmM2TrjzJ2ATDw3N
- a8s4tov/FjsNpyw==
+ bh=KPSwS7EDhp0UhWBnLFtWO/msI1anYMpSnbXCoVWHpdw=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn+S9JpBCo1/xkUWJKOoguY4CBNr53G+2YnXrPp
+ cCHl48NSkuJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/kvSQAKCRAFgzErGV9k
+ tr7aD/9x5NVbYZp0+2WumkBasGWG5wRL3PI5nluolNZzsr40lEEEDhy2HQXjMTF5ufQLzOgS1MC
+ fP/fyFgBCQ10LJ/mOF1mnYVDA6lU/D6Z/6V8s7/VDMxm8zeK9CGj9x/8KRb453MIK/qLtO5SV9K
+ IxN9MmaQe6gYFQ+D+C9fT542apa5ChAEEc4cD3Ty2mxetml/81ilVJyfjmpJQHoeXLJgXLPUZb6
+ wi2l/FohyeDO4IK3bJwsGSQJQaRgWwgxZJLqIEc4NYv4DbC/qf8EK67WRGPzEDENgJwcwbyx3Pq
+ hNPU+xajOdkVTHSN7Yb4SSLp69K5hyRGQNiICtwXh8z8V5BXQDLkNeye2FCOR79A95uyZTp7vdx
+ U8RApljx9Zj/SKtJU5eNSQJyT2Cec6QeKrDCNiSmowmiH0awthRKfYg65W/vofCS6pxTuu3RuQY
+ bVuswFRPfST7vmDLlgIRWqQRRi1qhHWGaXYFlDRjaGDxwvPM/x3If9GTbb3DxNcXtmYdy3DHrEK
+ Re7Lm9R2FwglY+H++/ciYW8ih7YZNoC5fcsbCnmql2SXHzh1M5zzsnQOa4tJs0utvS/Zrr9Qmli
+ 91fvHN5/5HgWXpocJH042TEz/JkLlNQ7lkPYI+lBFRgGM8YvZYNHFuC27/tV6Q2/OFNBJCjwIn7
+ 6zxZ1SnT8E+WMIA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -123,59 +119,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The initial capsule update support only worked on the RB3 Gen 2 and made
-a lot of assumptions specific to that board.
+Keep track of whether we were loaded via ABL or if U-Boot is running as
+a first-stage bootloader.
 
-Implement the logic necessary to update U-Boot no matter where it was
-flashed to, independent of any particular board.
+For now we set this based on if we have a valid external FDT or not,
+since it isn't possible to chainload U-Boot from ABL without there being
+an external FDT.
 
-First, we keep track of how U-Boot was loaded, specifically if we had a
-valid external FDT (even if we didn't use it) this indicates that we
-were booted via the Android bootloader, in this case the target for
-capsule updates is the boot partition. Otherwise, we target the uefi
-partition (if it exists) or the xbl partition. We handle A/B support for
-all 3 (currently we always flash to the currently active partition with
-a minor exception for the uefi partition).
+This will be used to inform the capsule update logic which partition
+U-Boot is flashed to.
 
-We introduce two new fw_name strings to differentiate the GUIDs based on
-the target partition, this means one board can support multiple boot
-methods with capsule update support for all of them (typically this
-would be chainloading OR flashing U-Boot to XBL).
-
-Lastly, the call to scsi_scan() in dfu_scsi.c is removed. Since
-scsi_scan() unbinds all scsi devices it breaks device handles maintained
-in the EFI layer for the duration of the capsule update process and
-causes the EFI filesystem access to delete the capsule file after the
-update to fail.
-
-Boards should instead be responsible for calling scsi_scan() before
-initiating DFU.
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Changes in v2:
-- Restrict the partition hunt to either UFS storage or the first MMC
-  device so that we never accidentally write to some external storage
-  (like an sdcard) during a capsule update.
-- Fix typo
-- Link to v1: https://lore.kernel.org/r/20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org
+ arch/arm/mach-snapdragon/board.c     | 26 ++++++++++++++++++++++++++
+ arch/arm/mach-snapdragon/qcom-priv.h | 14 ++++++++++++++
+ 2 files changed, 40 insertions(+)
 
----
-Caleb Connolly (4):
-      mach-snapdragon: track boot source
-      mach-snapdragon: CapsuleUpdate: support all boot methods
-      dfu: scsi: don't call scsi_scan()
-      qcom_defconfig: enable capsule update support
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index deae4d323789eab75d5fe735159b4cd820c02c45..34e37ab083f20b70660f2ab90a2995a4dfb33f8e 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -36,8 +36,10 @@
+ #include "qcom-priv.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++enum qcom_boot_source qcom_boot_source __section(".data") = 0;
++
+ static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
+ 
+ struct mm_region *mem_map = rbx_mem_map;
+ 
+@@ -237,8 +239,14 @@ int board_fdt_blob_setup(void **fdtp)
+ 
+ 	if (ret < 0)
+ 		panic("No valid memory ranges found!\n");
+ 
++	/* If we have an external FDT, it can only have come from the Android bootloader. */
++	if (external_valid)
++		qcom_boot_source = QCOM_BOOT_SOURCE_ANDROID;
++	else
++		qcom_boot_source = QCOM_BOOT_SOURCE_XBL;
++
+ 	debug("ram_base = %#011lx, ram_size = %#011llx\n",
+ 	      gd->ram_base, gd->ram_size);
+ 
+ 	if (internal_valid) {
+@@ -472,8 +480,25 @@ static void configure_env(void)
+ 
+ 	qcom_set_serialno();
+ }
+ 
++void qcom_show_boot_source(void)
++{
++	const char *name = "UNKNOWN";
++
++	switch (qcom_boot_source) {
++	case QCOM_BOOT_SOURCE_ANDROID:
++		name = "ABL";
++		break;
++	case QCOM_BOOT_SOURCE_XBL:
++		name = "XBL";
++		break;
++	}
++
++	log_info("U-Boot loaded from %s\n", name);
++	env_set("boot_source", name);
++}
++
+ void __weak qcom_late_init(void)
+ {
+ }
+ 
+@@ -515,8 +540,9 @@ int board_late_init(void)
+ 
+ 	configure_env();
+ 	qcom_late_init();
+ 
++	qcom_show_boot_source();
+ 	/* Configure the dfu_string for capsule updates */
+ 	qcom_configure_capsule_updates();
+ 
+ 	return 0;
+diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
+index 74d39197b89f4e769299b06214c26ee829ecdce0..e5eb4cfbc2b752de799b1407ede69683c81474c1 100644
+--- a/arch/arm/mach-snapdragon/qcom-priv.h
++++ b/arch/arm/mach-snapdragon/qcom-priv.h
+@@ -2,8 +2,22 @@
+ 
+ #ifndef __QCOM_PRIV_H__
+ #define __QCOM_PRIV_H__
+ 
++/**
++ * enum qcom_boot_source - Track where we got loaded from.
++ * Used for capsule update logic.
++ *
++ * @QCOM_BOOT_SOURCE_ANDROID: chainloaded (typically from ABL)
++ * @QCOM_BOOT_SOURCE_XBL: flashed to the XBL or UEFI partition
++ */
++enum qcom_boot_source {
++	QCOM_BOOT_SOURCE_ANDROID = 1,
++	QCOM_BOOT_SOURCE_XBL,
++};
++
++extern enum qcom_boot_source qcom_boot_source;
++
+ #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+ void qcom_configure_capsule_updates(void);
+ #else
+ void qcom_configure_capsule_updates(void) {}
 
- arch/arm/mach-snapdragon/board.c          |  26 +++
- arch/arm/mach-snapdragon/capsule_update.c | 274 ++++++++++++++++++++++++------
- arch/arm/mach-snapdragon/qcom-priv.h      |  14 ++
- configs/qcm6490_defconfig                 |   6 -
- configs/qcom_defconfig                    |   3 +
- drivers/dfu/dfu_scsi.c                    |   5 -
- 6 files changed, 266 insertions(+), 62 deletions(-)
----
-base-commit: 885d68280c29b8011731b6a7cdac32b8d9a4e6fd
-change-id: 20250326-b4-qcom-capsule-update-improvements-16ff7bc2d1d2
-
-Caleb Connolly <caleb.connolly@linaro.org>
+-- 
+2.49.0
 
