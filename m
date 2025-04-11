@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39B3EC36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 09:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A136C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 09:43:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D50683F4E;
-	Fri, 11 Apr 2025 11:29:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 5564983F8E;
+	Fri, 11 Apr 2025 11:43:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="DtGsjTOi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GmMyHIFz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B776983F5D; Fri, 11 Apr 2025 11:29:43 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 898EE83F9B; Fri, 11 Apr 2025 11:43:15 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7B2F82B3F
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 11:29:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57E8D83F85
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 11:43:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6196a1474a=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53B9Snk7023534;
- Fri, 11 Apr 2025 11:29:29 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=mjuS0K188lu31W5lg/oB8j
- GIinih1XD0PQpx6M4anWQ=; b=DtGsjTOiZvAaz2t6hWZyXlNLzIQv9L9sZCw8Il
- X0PY+MwzDs2/zEY6ZVlFa33wnIxbp/tjKOgIZOOEM1bUT/kNnjvlwdlXVBCttL6i
- e4yItMcYiL0+gZfYsh4QnXRspwiLtuAYfGcXYdN6VMekYFQcAtqRdOjLYy4yNZaj
- 2G2VScVuwnQJslJ8wTWE3dDwJ9IBs6GrNYbLE8HJC2mCvY7TuIyQ5qVVYWEn3A8O
- GQEZBlrAIQ0jlDI1UHKIWV/kXEmuYtS9iMBOgI2V37ih00ga9WtLGpvu4+aYvvJn
- PheD9gn3w8iy2GPl0vsxQKeW1TDQ3NQsQ2wD+EzXeHSJCgmg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45xgpduppk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 11 Apr 2025 11:29:29 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D772940045;
- Fri, 11 Apr 2025 11:28:09 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0661C9B40B5;
- Fri, 11 Apr 2025 11:27:24 +0200 (CEST)
-Received: from localhost (10.252.25.37) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
- 2025 11:27:23 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Christophe Roullier
- <christophe.roullier@foss.st.com>, Erik Schumacher
- <erik.schumacher@iris-sensing.com>,
- Greg Malysa <malysagreg@gmail.com>, Heesub Shin <heesub@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
- Philip Oberfichtner <pro@denx.de>, Ramon Fried <rfried.dev@gmail.com>,
- Tom Rini <trini@konsulko.com>, Vasileios Bimpikas
- <vasileios.bimpikas@analog.com>
-Subject: [PATCH] net: dwc_eth_qos: add support of stm32mp2 platform
-Date: Fri, 11 Apr 2025 11:27:20 +0200
-Message-ID: <20250411092721.331518-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-30c091b54aaso15080971fa.3
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 02:43:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744364592; x=1744969392; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GBLSNE5ChOXBFKb9IO560JhDcP0DDDzgBYOptmfsXR4=;
+ b=GmMyHIFze4h+2qzW1lSoRtmZ0STObp7rdqpi4r7yWQ1obEQL2+EqAl34M0TCmJnAgu
+ Ejnd6RtWOocWKAXSzgnpmoFEzbRXIibqcgyfxmtu/P5a08OrbE75ktzd8tMXpfqGfo1k
+ nN2XRSOsCPO1Cmb4435eQJnnm1LytYcYiKjVr+EvI2s835E85xSBFIQ8Kp0mWqk+tY9X
+ D+9iSGV+xL0N7tLL7puB2QpNgDlUtoBTur+aJqa5c4XJsth06R0I86N3Aw6suHrawmmt
+ NxlkN4XWBMinJgB0TzTXPS1DWlL7gIqSjhVoTgsWF4hQqmPrEPgb3ZtR1P1mbOXUzX4V
+ MQOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744364592; x=1744969392;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GBLSNE5ChOXBFKb9IO560JhDcP0DDDzgBYOptmfsXR4=;
+ b=d+yhmIrUR42Ve//4naW3mn6F/cVLcGSPSlkjZLD46tG4Le9YRctvqoZXYJkTwgKPTU
+ fLZX4rQgiqGKFd/dOV4Y9Qx7fs6vsWRIdF7FeKcbrw8bTlCezMFGQAvZZRsCa8KnfIwW
+ O+/a8JlTXSV0rq5iQ348SgTDcMD/PoYi10YWwOPjvvbS+hjJCyuQy9DEoQdejIWUtrud
+ ocrWbxHJL5+FmENOO7vNmcaQFZ01D4chkFmlY1MBrZ+r3GCCP4z0Pn9vl4WtpmxrMeUE
+ eaEXO3n+MHCtcghKN9Th6KS/drYGp2fvtWhCqtZkirktZu+SXjchPh+dq9WfagaF88FG
+ qw7g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWGizt5Z6lv17SmipZelOu2M8Bi5yI1aio6+lyBVsYNHPyL+VuTPpRxOwnekyXv1fHcSxPIsZQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTgnvSJvWJsRHAKJwOZ6jSeGxZMWfe0thMy7Q7mEBmYfV7GIg/
+ Z3ue4LDkWyqhT7y6jljzbFA47RnFjFmurwwMFT4ilfiV9ocnJPC7WS+cgeLOUN2zqwvriMJhMaD
+ plmzMPm4IV6pKprEWRoHPf9F7GN2ZHUeRZgzgpw==
+X-Gm-Gg: ASbGnctvwgcduVdIAtuIoRag5hF1uRjANAwoZS/qYONd9Jr4m6wjmR4e/lEVtMFxPEm
+ n+Mgssa2v/uT1AbSFnJ40EibTSCn+bQBXVN/lnk1/g46KwYUFYrzq09tvKVE6J7qm7Oh+uEuoZf
+ uhu/9am7AYj4gRPXDBkj7BBiQ=
+X-Google-Smtp-Source: AGHT+IHxsATq1nDvx0tESU8FI7Z9tOwK8mI93d2lo0Ql4OOD1G4oz0JfWrGnIn9eIFvI5EMYXS6uxaNsYhI5QN/XvkI=
+X-Received: by 2002:a05:651c:19ac:b0:30b:d4a9:947c with SMTP id
+ 38308e7fff4ca-31049a25de3mr5594291fa.24.1744364592524; Fri, 11 Apr 2025
+ 02:43:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.252.25.37]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-11_03,2025-04-10_01,2024-11-22_01
+References: <20250328125819.1080935-1-ilias.apalodimas@linaro.org>
+ <8ae5f2ce-06dd-45d6-9eca-dbae5c32d951@gmx.de>
+In-Reply-To: <8ae5f2ce-06dd-45d6-9eca-dbae5c32d951@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 11 Apr 2025 12:42:29 +0300
+X-Gm-Features: ATxdqUFuD4TqfOi3l-3Vq4E9gnJeth1VVy42sC6pPm8t9BxgLYhkq7ElTcJjaIE
+Message-ID: <CAC_iWjLQ5EX=qxv-r=9oC+8ZquCpsvAv6+9b5SonVnEUkpiaog@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: Print extra information from the bootmgr
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,66 +94,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Christophe Roullier <christophe.roullier@foss.st.com>
+On Fri, 11 Apr 2025 at 10:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 3/28/25 13:58, Ilias Apalodimas wrote:
+> > Instead of just printing the label, add information for the Device
+> > path as well so it's easier to see if we are booting from disk, network
+> > etc
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   lib/efi_loader/efi_bootmgr.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index f9534ef85edb..6b9d809ff618 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -690,7 +690,7 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
+> >                       goto error;
+> >       }
+> >
+> > -     log_info("Booting: %ls\n", lo.label);
+> > +     log_info("Booting: Label: %ls Device path: %pD\n", lo.label, lo.file_path);
+>
+> I think we can remove "Label:" and but "Device path:" on a new line.
+>
+> The output is truncated according to CONFIG_SYS_PBSIZE=276:
+>
+> Booting: Label: nvme 0 Device path:
+> /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,6d00000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,5500000002000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,550000000300
+>
+> In this case the filename is not shown at all.
+>
+> efi_dp_shorten() might help to provide a printable output.
+>
+> But I don't believe that a non-developer would have a benefit from an
+> output like:
+>
+> HD(2,GPT,54e58a03-c1db-4c6b-afda-24340c39cda5,0x109000,0x32000)\EFI\ubuntu\bootriscv64.efi)
+>
+> I would not know the GUIDs for my partitions by heart.
+>
+> Isn't log_debug() more adequate here?
 
-Add compatible "st,stm32mp25-dwmac" to manage STM32MP2 boards
+I dont have a strong opinion tbh. I was mostly driver by looking into
+EDK2 which prints something along the lines of
+URI: http://<URL>/image.img
 
-Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+I can either switch to log_debug or print a human readable form I guess.
 
- drivers/net/dwc_eth_qos.c       |  4 ++++
- drivers/net/dwc_eth_qos.h       |  1 +
- drivers/net/dwc_eth_qos_stm32.c | 11 +++++++++++
- 3 files changed, 16 insertions(+)
-
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index b4ec3614696..6605de6e036 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -1599,6 +1599,10 @@ static const struct udevice_id eqos_ids[] = {
- 		.compatible = "st,stm32mp1-dwmac",
- 		.data = (ulong)&eqos_stm32mp15_config
- 	},
-+	{
-+		.compatible = "st,stm32mp25-dwmac",
-+		.data = (ulong)&eqos_stm32mp25_config
-+	},
- #endif
- #if IS_ENABLED(CONFIG_DWC_ETH_QOS_IMX)
- 	{
-diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
-index 403e8203974..c239a5c7aca 100644
---- a/drivers/net/dwc_eth_qos.h
-+++ b/drivers/net/dwc_eth_qos.h
-@@ -301,5 +301,6 @@ extern struct eqos_config eqos_rockchip_config;
- extern struct eqos_config eqos_qcom_config;
- extern struct eqos_config eqos_stm32mp13_config;
- extern struct eqos_config eqos_stm32mp15_config;
-+extern struct eqos_config eqos_stm32mp25_config;
- extern struct eqos_config eqos_jh7110_config;
- extern struct eqos_config eqos_adi_config;
-diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-index f3a973f3774..7a28f2a3e83 100644
---- a/drivers/net/dwc_eth_qos_stm32.c
-+++ b/drivers/net/dwc_eth_qos_stm32.c
-@@ -350,3 +350,14 @@ struct eqos_config __maybe_unused eqos_stm32mp15_config = {
- 	.interface = dev_read_phy_mode,
- 	.ops = &eqos_stm32_ops
- };
-+
-+struct eqos_config __maybe_unused eqos_stm32mp25_config = {
-+	.reg_access_always_ok = false,
-+	.mdio_wait = 10000,
-+	.swr_wait = 50,
-+	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
-+	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
-+	.axi_bus_width = EQOS_AXI_WIDTH_64,
-+	.interface = dev_read_phy_mode,
-+	.ops = &eqos_stm32_ops
-+};
--- 
-2.25.1
-
-base-commit: cb7555e93075114fe4af0adb806877ac4d4ef80d
-branch: upstream_net_add_stm32mp25_support
+Thanks
+/Ilias
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >       /* Ignore the optional data in auto-generated boot options */
+> >       if (size >= sizeof(efi_guid_t) &&
+>
