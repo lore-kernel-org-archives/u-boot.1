@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5270C369AF
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC97C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 14:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 782F18407E;
-	Fri, 11 Apr 2025 16:11:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E81BD84088;
+	Fri, 11 Apr 2025 16:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sdbLnc5k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jcbWrfTY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 328D484081; Fri, 11 Apr 2025 16:11:15 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id C39F78408D; Fri, 11 Apr 2025 16:12:02 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03ADC84003
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:11:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B514584085
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 16:12:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-39c1ef4ae3aso1276879f8f.1
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:11:12 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43cf257158fso15464145e9.2
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:12:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744380672; x=1744985472; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744380720; x=1744985520; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=RD7UU1noJodALdOr2P6N6mPNgJnpCtb7/wq8Syk6bjs=;
- b=sdbLnc5knW94wJMp1e+3Dd+tZbti7sc1KCheYoFJPqw7JiInfqBDbHfLbW8lV86/4d
- wiQGRwJjIX6H5DXzAKroRwYi3ZgYGAYngAi+ruTv4bQCSE6nU/Kkkleliswk8dGXMoWJ
- rOWlMCOLCaTDnO3RBzK58thK7bNgL1Mx+TfH1QU5KgJcclPctnNirTcHLPUKltFrcpFX
- u+I/m6rRCKJqiso2f/bTBeUUxzmW/KZTXSHsdxFJcpvUfj/pNOS326rnwx8zzdJh3d0q
- AuZqrz6Hji/WNdfQEtofGspfm0J2uOKpn7xP6tgqRfu9qnM4x1mg8ou3h0r8Um5aY990
- yK5g==
+ :reply-to; bh=gNrdQjVAH8F7gui5uldcF/iWpOGZMqWU7x2yPGf7yG8=;
+ b=jcbWrfTYIUYihl0fWNMjT8/1mOFmuHMecRq6jmvMNzbWXahNMK4i5tfbSjEj+sXPoz
+ ap7Fl+QZl8EET0uo+Je7f2o9ocG6xwljXVecbVASDD1fLEMJoE5vR4QFTGXtaOmGj8W5
+ tcknRuphPN3EwvTgPtm6MMtlm6DMzQrjTE6ONZDRuKz7FJ1rdDI6yI4FHXEJrzobNN7T
+ RtzkOugXmXabI8EegFfwgTfbuSgrGPKE3SdGmQxYne5XnMZkOS/Ama2H+08C3vTfOyir
+ 13EbR9NP++9MUQcB50cZlj96Y/9Rl3gsFBpj70MlG2dXWPkAPBJlNdk5bV+k8T0PtqAC
+ vbmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744380672; x=1744985472;
+ d=1e100.net; s=20230601; t=1744380720; x=1744985520;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=RD7UU1noJodALdOr2P6N6mPNgJnpCtb7/wq8Syk6bjs=;
- b=BDsuLGBiQeywVfxhRVMSrddFtGObsNhlUtdLXVzIBDe4bz7/goJctytLMvpbB7qxFx
- sNp2nNHsU5b0oycQfLRz5kjV+fX3M/YAKoGOM5leojz8ViF11EQlEDhYBdcXJg/46zeJ
- kIjCI++KGnzvrbeyl7KhM6MAsFdJF6swBZj5szdy2iHTU8fNPf5VJEQ9ccV2ORRUrofY
- hACMRpYwYKX0DimV2URmfTBBa+5peTnx3cqMUUOA9jfTSB8EIdnqhVGoQ7jyFtmvgkti
- GW+BM1M8grnvDD4Htxy88Pg6NVuQV6SAnN9DIhASAKH2mtP7BZULQW4M20ASs3sRHM1w
- ATcg==
-X-Gm-Message-State: AOJu0YzFgLRCGkzxoBLV/6U9ZYgNtZS4ensCkXilvO6ig6EF0TwDZx6K
- hXjrVaMrGlKkJbymomkt/N1EVXbkbGUTai2kyFhR3XnQVCA0R8//+knOQalY4Qw=
-X-Gm-Gg: ASbGncvwQC85+qDUR4bq2VMxTfdVWyqodJ4zi/7spetsV3FY9F9fCg6D2592Zfbdv6G
- R69cgdeY6V04LEKL2JSDhDGM+ZjZel9OV/RKCq87BgtHNYu/skV3wjiObv8EGqKdwasjwwM9NK4
- r8PkP1S7RaVKIqn9V/ZFkYPYYrIayx0yeLAxDQ0eoeMyxI2xxR9yTp7JPkrcZoy2sPnI9Zpey8B
- 3a74CRRRXQbDwxQuOxQaoX2hFx68CixKWKrKbccUC12nFdYAer+W6cJQLqbi3IfXbclKiPUzF/q
- B8nfQ5p2w1A4QNPhTh3TfrynnWK7ODkg4HfdXRdJuoDD3WSf9IARMzAEs9Cr/dNfRHYjQYLqD/Q
- A5LKhNhKyb9pJa8tTYQ==
-X-Google-Smtp-Source: AGHT+IFT7bpkvBMx0JxcLxM8qLEA1gENKsN3lXio2gnLFG2FZSH7hZpB2Ql0PyFY/8/jwdbMrl85OA==
-X-Received: by 2002:a5d:598e:0:b0:38d:df15:2770 with SMTP id
- ffacd0b85a97d-39d8f21d531mr5982782f8f.0.1744380672269; 
- Fri, 11 Apr 2025 07:11:12 -0700 (PDT)
+ bh=gNrdQjVAH8F7gui5uldcF/iWpOGZMqWU7x2yPGf7yG8=;
+ b=G3rl/QOTlIi1re3RqUXF+tTE9Lq0FHFx6Cu0vzPONkVJ7Nnt4Cdm32rxy2q1lMvpET
+ 38p5OJjipCCS+u7Ius0JFr0iFCGSKgSU5mgsmYQb48C6vPeBMVAZzS9bqPbBlrexC2rE
+ n6Bvfyk1x5b1Yrw0l+wiZZP5/GeZL0/cAeErepx0ecqrgLrRJLcqByumXL4XFwYzaQUF
+ J6Jl1d6sLArRMeJTgvRr1elDbk6Q6aRBVS51FyDktJotbGgr+RvwU2I81eXSEYJBcpl9
+ adx4uMEpXGNLZSwW3DqAtF7hRefhqkTdjJEBcK7aK4CcQmNMydKqnu4I9iDSiuFHci2s
+ 6Yzg==
+X-Gm-Message-State: AOJu0Yx2qU7CERI8P8uexWX8hMU7Ty6Trawf/ItxLYOC2SY6UxiyAQDD
+ XMbu13cmFtglcpQAFR0hzoZ9TtVLrRi4QKfDWVPD79n27Fcp2FvEF1qgVQ9MmWU=
+X-Gm-Gg: ASbGncuxeoGrozeIKoM/LWllZvPlwn+0+TCrPKzQzfpbVVnTfxzIccVsKAWypXvKxk3
+ RvG9dMyVYeOYQ8/k4v8UCCwz3O8X/E2IEEPYzH+tVbeOjCRiYRU5vRpZJLGwg9Ec5W4Po9uU022
+ lR5Z964Nx3/MbCuZYuo5uoR0C7At5QxE3tTQjzlefGU3fiXntSwcZIlfF0epQyBfcNlnRz3nwoe
+ i4V32NAR9yq7E5pPQRp/fYw2JrFFfNDtBiQA88YhrVoDgApMNorAlWA0QXMRcd1EYj8u9WLOiUt
+ zrhMLgVJc/nPSha5zAyi9q7N5AT9aHugRebQAnhRz2C0Ga8L0ZuA5qjreq/r4ScGbdtixmJKjZt
+ AQMykosLiKfxVtxomSg==
+X-Google-Smtp-Source: AGHT+IFp/z4ppEou4dP6HuDlsWtcBmXdpBvBCjgUaN9sqDYswmswE/cPOIW2uEDEFt3WE8azwHInxg==
+X-Received: by 2002:a7b:c8d0:0:b0:43b:ce36:7574 with SMTP id
+ 5b1f17b1804b1-43f3b530d98mr19977215e9.11.1744380720019; 
+ Fri, 11 Apr 2025 07:12:00 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:f77b:949e:1d61:69a8?
  ([2a01:e0a:3d9:2080:f77b:949e:1d61:69a8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eae9640fdsm2100467f8f.7.2025.04.11.07.11.11
+ 5b1f17b1804b1-43f207cb88asm86927955e9.37.2025.04.11.07.11.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Apr 2025 07:11:11 -0700 (PDT)
-Message-ID: <d7684e37-098a-403f-b6be-70a49ef993d6@linaro.org>
-Date: Fri, 11 Apr 2025 16:11:11 +0200
+ Fri, 11 Apr 2025 07:11:59 -0700 (PDT)
+Message-ID: <31f7c87d-cc4e-4035-940c-7e9641b498d0@linaro.org>
+Date: Fri, 11 Apr 2025 16:11:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 1/8] event: signal when livetree has been built
+Subject: Re: [PATCH v2 4/8] mach-snapdragon: of_fixup: remove confusing log
+ message
 To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250411-livetree-fixup-v2-0-1236823377bb@linaro.org>
- <20250411-livetree-fixup-v2-1-1236823377bb@linaro.org>
+ <20250411-livetree-fixup-v2-4-1236823377bb@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -111,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250411-livetree-fixup-v2-1-1236823377bb@linaro.org>
+In-Reply-To: <20250411-livetree-fixup-v2-4-1236823377bb@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,123 +133,37 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/04/2025 14:47, Caleb Connolly wrote:
-> OF_LIVE offers a variety of benefits, one of them being that the live
-> tree can be modified without caring about the underlying FDT. This is
-> particularly valuable for working around U-Boot limitations like lacking
-> USB superspeed support on Qualcomm platforms, no runtime OTG, or
-> peripherals like the sdcard being broken (and displaying potentially
-> worrying error messages).
-> 
-> Add an event to signal when the live tree has been built so that we can
-> apply fixups to it directly before devices are bound.
+> The debug log here had the logic completely backwards, even though the
+> code is actually correct. Remove it since it's extraneous anyway.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   common/event.c  |  3 +++
->   include/event.h | 18 ++++++++++++++++++
->   lib/of_live.c   | 11 +++++++++++
->   3 files changed, 32 insertions(+)
+>   arch/arm/mach-snapdragon/of_fixup.c | 9 +++++----
+>   1 file changed, 5 insertions(+), 4 deletions(-)
 > 
-> diff --git a/common/event.c b/common/event.c
-> index dda569d447851f559a83f98fb7b1f3543156eab5..8d7513eb10b61919e1e784481dfdcc076be14986 100644
-> --- a/common/event.c
-> +++ b/common/event.c
-> @@ -47,8 +47,11 @@ const char *const type_name[] = {
->   	"ft_fixup",
->   
->   	/* main loop events */
->   	"main_loop",
-> +
-> +	/* livetree has been built */
-> +	"of_live_init",
-
-"of_live_built" ?
-
->   };
->   
->   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
->   #endif
-> diff --git a/include/event.h b/include/event.h
-> index 75141a192a48b0931667632f41be8ff4d6139f7c..1d267f1d10547642d381fa287ab4981a2bf03543 100644
-> --- a/include/event.h
-> +++ b/include/event.h
-> @@ -152,8 +152,17 @@ enum event_t {
->   	 * A non-zero return value causes the boot to fail.
->   	 */
->   	EVT_MAIN_LOOP,
->   
-> +	/**
-> +	 * @EVT_OF_LIVE_BUILT:
-> +	 * This event is triggered immediately after the live device tree has been
-> +	 * built. This allows for machine specific fixups to be done to the live tree
-> +	 * (like disabling known-unsupported devices) before it is used. This
-> +	 * event is only available if OF_LIVE is enabled and is only used after relocation.
-> +	 */
-> +	EVT_OF_LIVE_BUILT,
-> +
->   	/**
->   	 * @EVT_COUNT:
->   	 * This constants holds the maximum event number + 1 and is used when
->   	 * looping over all event classes.
-> @@ -202,8 +211,17 @@ union event_data {
->   	struct event_ft_fixup {
->   		oftree tree;
->   		struct bootm_headers *images;
->   	} ft_fixup;
-> +
-> +	/**
-> +	 * struct event_of_live_built - livetree has been built
-> +	 *
-> +	 * @root: The root node of the live device tree
-> +	 */
-> +	struct event_of_live_built {
-> +		struct device_node *root;
-> +	} of_live_built;
->   };
->   
->   /**
->    * struct event - an event that can be sent and received
-> diff --git a/lib/of_live.c b/lib/of_live.c
-> index 90b9459ede313e492e28c8556c730f3bd8aaa9df..c1620616513c2e32448b4a6d156a9162d97c76b7 100644
-> --- a/lib/of_live.c
-> +++ b/lib/of_live.c
-> @@ -10,8 +10,9 @@
->   
->   #define LOG_CATEGORY	LOGC_DT
->   
->   #include <abuf.h>
-> +#include <event.h>
->   #include <log.h>
->   #include <linux/libfdt.h>
->   #include <of_live.h>
->   #include <malloc.h>
-> @@ -320,8 +321,9 @@ int unflatten_device_tree(const void *blob, struct device_node **mynodes)
->   
->   int of_live_build(const void *fdt_blob, struct device_node **rootp)
->   {
->   	int ret;
-> +	union event_data evt;
->   
->   	debug("%s: start\n", __func__);
->   	ret = unflatten_device_tree(fdt_blob, rootp);
->   	if (ret) {
-> @@ -334,8 +336,17 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
+> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+> index dcd09ee7cac3e02287647c9e6df5575651e18e85..a5515c02d3de05944dfb7c1b2a5542631b517497 100644
+> --- a/arch/arm/mach-snapdragon/of_fixup.c
+> +++ b/arch/arm/mach-snapdragon/of_fixup.c
+> @@ -72,13 +72,14 @@ static int fixup_qcom_dwc3(struct device_node *root, struct device_node *glue_np
+>   		log_err("Failed to read second phy name: %d\n", ret);
 >   		return ret;
 >   	}
->   	debug("%s: stop\n", __func__);
 >   
-> +	if (CONFIG_IS_ENABLED(EVENT)) {
-> +		evt.of_live_built.root = *rootp;
-> +		ret = event_notify(EVT_OF_LIVE_BUILT, &evt, sizeof(evt));
-> +		if (ret) {
-> +			log_debug("Failed to notify livetree build event: err=%d\n", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
->   	return ret;
->   }
+> -	if (!strncmp("usb3-phy", second_phy_name, strlen("usb3-phy"))) {
+> -		log_debug("Second phy isn't superspeed (is '%s') assuming first phy is SS\n",
+> -			  second_phy_name);
+> +	/*
+> +	 * Determine which phy is the superspeed phy by checking the name of the second phy
+> +	 * since it is typically the superspeed one.
+> +	 */
+> +	if (!strncmp("usb3-phy", second_phy_name, strlen("usb3-phy")))
+>   		hsphy_idx = 0;
+> -	}
 >   
->   void of_live_free(struct device_node *root)
+>   	/* Overwrite the "phys" property to only contain the high-speed phy */
+>   	ret = of_write_prop(dwc3, "phys", sizeof(*phandles), phandles + hsphy_idx);
+>   	if (ret) {
 > 
 
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
