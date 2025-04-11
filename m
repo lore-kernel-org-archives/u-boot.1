@@ -4,87 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1DF9C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 16:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8F9C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 16:32:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FF5884198;
-	Fri, 11 Apr 2025 18:15:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CDB684137;
+	Fri, 11 Apr 2025 18:32:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z8tFCgJG";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0A4084198; Fri, 11 Apr 2025 18:15:39 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E472B8413B; Fri, 11 Apr 2025 18:32:24 +0200 (CEST)
+Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
+ [185.125.25.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C2DB82C10
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 18:15:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1522884130
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 18:32:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5ed43460d6bso3480335a12.0
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 09:15:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744388137; x=1744992937; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=w01KBsbTIugC5zV/0g7RHk3vVtVqf8PWUKKuQxBBtqg=;
- b=Z8tFCgJGGz4g/f/a0C8S5oza25yrN0mWEt4daapjfva9u69GVjqmT6CmnzScqlnn3p
- uAZFuSLOZgI+k0xsIOvIlKNzrLIDOP6HzEJwiNh1nV79W4n153Rt9lEUG91Fw9IYO9hF
- aXQEqv8pxPQcH3yIgvl5LzC7u0pvdqqWOXfyqLkxDUJb5rsm4W0jMB6lTTvpq4ZS5Vi+
- RkAKFVxcyg12I2w8kWb9KiL+560gkoQpcCBktvo4IxeP5aEU2fGilueIYltT9m9Lgjg8
- 86OQXvYJRzSDG/YrqSIFXilKANSPfas02M1JDrBqULzAdpfoCFLsDE8LK2KoaonRXXKp
- nI1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744388137; x=1744992937;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=w01KBsbTIugC5zV/0g7RHk3vVtVqf8PWUKKuQxBBtqg=;
- b=vmIiDHleJibF6U0/QwMznFcd7vVl1qlPH4VVl8bUVfSB8NXJ4tfujraJ1kCdXKGvsp
- 78HwmqTo1bLfg3hIf2g09tQdnJ0e1QjW1ICgMKA+eIZDi2mxoQ1SFkr807lqGFaUgDMO
- pDUsI5UT8Rpog/Pqryu4TlDL/FPXxJWen4J2SNkxu4mb/Yl9Y9vENQPpn5OZZwP2Ar7D
- Gz9Yv4xlmRiAMRc1XgTEvoCIZspFWFkx7xFxL76z1ykBau2QeUFQ7b7uS4j6DN0VvV8C
- 1p2ooFsWeHXVvHBdppWD1vUJYfIJTboXdd3vsJON6y5IPivz+Jwpg7pp8ee/kl23iCzK
- uaQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkG62kFcXw2PlL7ffppHiiQzFB8rZBFWbBqzKg46mrFOlRnMlL4go2stRM+ogmBkfIOzCqJH0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSv4AoHJXw1GGEA6Z3vQZu+S2IMB7W+K4vx0UP7LPORXnAbOtV
- a+xe9sW+ZR/dxVypc+K9m7cbVrHMjAb3Ewq4SLId3kHhZkS0nQng
-X-Gm-Gg: ASbGncvyX0UGCsjudoaiSYuuoAqNkwuX9o+O4+bVPLCu/EnrUvka3TlSKltfoQ87qIm
- 7+WOfJ+w9CUiDx9v3CRJRUilgPl0LvgyV/CIcdABLKHsDSQK+Py5rp9B70hHKgTVMSQ068gGP4e
- 6g2QBnPpPFPpDCOZe7+CL2ZdnWsSHnFrEqgWRxQ33X8v39AQhROT7lTaFpQUDIvOryo/h4Va1tx
- SiJQOoN9VMFhzDrYzoevXAPauVFByMSii7nxKde6LFmNY6zYKDoNJaTgfYlgaXhTJ3L1sAQd4i/
- VCQUPC4HHk4XmbCvtEMTjUQI0jeflAQGekXP9YFVQyXQ4qi1Ca+eJqDK4g==
-X-Google-Smtp-Source: AGHT+IH+0U1OCIXeucwjkY7F6UJCKLrFhssqPNORxtqi9bU4G5Xhj41S1VNiRfUAGVu+wJMNguisPQ==
-X-Received: by 2002:a05:6402:280b:b0:5e1:dac1:fa22 with SMTP id
- 4fb4d7f45d1cf-5f36fee2fe1mr2227288a12.21.1744388136655; 
- Fri, 11 Apr 2025 09:15:36 -0700 (PDT)
-Received: from localhost.localdomain ([80.90.89.143])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f36f526da3sm1136246a12.67.2025.04.11.09.15.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 09:15:36 -0700 (PDT)
-From: Jernej Skrabec <jernej.skrabec@gmail.com>
-To: jagan@amarulasolutions.com,
-	andre.przywara@arm.com
-Cc: trini@konsulko.com, macromorgan@hotmail.com, uwu@icenowy.me,
- u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Jernej Skrabec <jernej.skrabec@gmail.com>
-Subject: [PATCH 5/5] sunxi: h6/h616: Reuse common DRAM infrastructure
-Date: Fri, 11 Apr 2025 18:14:39 +0200
-Message-ID: <20250411161439.4743-6-jernej.skrabec@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250411161439.4743-1-jernej.skrabec@gmail.com>
-References: <20250411161439.4743-1-jernej.skrabec@gmail.com>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZZ2K12JLgzG4m;
+ Fri, 11 Apr 2025 18:32:21 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4ZZ2K04XFDzg7N; Fri, 11 Apr 2025 18:32:20 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Fri, 11 Apr 2025 18:32:09 +0200
+Subject: [PATCH RFC] fit: allow to specify RSAPSS padding salt length magic
+ value
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250411-rsapss-saltlen-v1-1-f2913c4b3415@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAhE+WcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDE0ND3aLixILiYt3ixJySnNQ83SSLFPNEM3MzUzPTRCWgpoKi1LTMCrC
+ B0UpBbs5KsbW1AKwSC1hlAAAA
+X-Change-ID: 20250411-rsapss-saltlen-b8d7a676565a
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Loic Poulain <loic.poulain@linaro.org>, 
+ SESA644425 <giojahermann@gmail.com>, u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,526 +63,253 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-H616 rank and size detection code is superior to the H6. Nevertheless,
-they are structurally the same. Split functions from H616 into new file
-and reuse them in H6 DRAM driver too. This should also fix some bugs for
-H6 too, like incorrect DRAM size detection.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Before commit 1b99c15d73c1 ("lib: rsa: Set conventional salt length
+RSA-PSS parameter"), the salt length for PSS padding was openSSL's
+default. Prior to openSSL 3.1, this was the maximum allowed value ("max"
+when passed from CLI or RSA_PSS_SALTLEN_MAX (-3) if from library).[1]
+Starting from 3.1, the default is now "maximized up to the digest
+length" ("auto-digestmax" from CLI or RSA_PSS_SALTLEN_AUTO_DIGEST_MAX
+(-4) from library).[2]
+
+After commit 1b99c15d73c1 ("lib: rsa: Set conventional salt length
+RSA-PSS parameter"), the salt length has been forced to the digest
+length, but manually instead of using "digest" from CLI or
+RSA_PSS_SALTLEN_DIGEST from lib.
+
+Before commit 81eff51047e2 ("lib: rsa: Update function
+padding_pss_verify (any-salt)"), verifying a signature with PSS padding
+could only be done when the padding was using the max value for the salt
+length. While that is now history and the code should now detect the
+appropriate length when verifying, this lack of support in older
+versions bring some issue. Indeed, U-Boot is typically split in two
+binaries (at least on Rockchip platforms), one for U-Boot FIT (with
+U-Boot proper, TF-A, TEE, etc..) which can be signed and one for the
+stage(s) before U-Boot proper, who's in charge of verifying the FIT
+signature. It would be possible to update only U-Boot FIT and not the
+other prior stages binary in which case the device would be bricked if
+it has a pre-81eff51047e2 prior stages with a U-Boot FIT signed from
+post-1b99c15d73c1 or from pre-1b99c15d73c1 with openSSL >= 3.1.
+
+This introduces a "padding-saltlen" string property to the signature
+node of a FIT node which expects the CLI name of the openSSL option for
+setting the RSAPSS padding salt length, it can be:
+- "max"
+- "digest"
+- "auto" ("max" alias, but U-Boot internals pass "auto" to openSSL)
+- "auto-digestmax" (only available on openSSL >= 3.1)
+
+If it is missing, "digest" is assumed, to match current behavior.
+
+Note that while openSSL allows to pass the length as number, the string
+magic values are represented as negative numbers. FDT only allowing
+u32/u64 for numbers, we cannot represent those negative numbers in the
+same property as the magic string values. Hence the choice to go with a
+string property.
+
+[1] https://docs.openssl.org/3.0/man3/EVP_PKEY_CTX_ctrl/#rsa-parameters
+[2] https://docs.openssl.org/3.4/man3/EVP_PKEY_CTX_ctrl/#rsa-parameters
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- .../include/asm/arch-sunxi/dram_dw_helpers.h  |  22 +++
- arch/arm/mach-sunxi/Makefile                  |   4 +-
- arch/arm/mach-sunxi/dram_dw_helpers.c         | 160 ++++++++++++++++++
- arch/arm/mach-sunxi/dram_sun50i_h6.c          |  91 +---------
- arch/arm/mach-sunxi/dram_sun50i_h616.c        | 155 +----------------
- 5 files changed, 190 insertions(+), 242 deletions(-)
- create mode 100644 arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
- create mode 100644 arch/arm/mach-sunxi/dram_dw_helpers.c
+How to test:
+- generate keys and certs at the root of U-Boot's source directory:
+  - openssl genpkey -algorithm RSA -out dev.key \
+	  -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537
+  - openssl req -batch -new -x509 -key dev.key -out dev.crt
+- apply the following diff for generating signed U-Boot FIT + adding the
+  pubkey to U-Boot SPL + making signature verification required:
 
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h b/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
-new file mode 100644
-index 000000000000..bc9e0d868c55
---- /dev/null
-+++ b/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
-@@ -0,0 +1,22 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Helpers that are commonly used with DW memory controller.
-+ *
-+ * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
-+ *
-+ */
+ diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+ index c8c928c7e50..e5fd8c73602 100644
+ --- a/arch/arm/dts/rockchip-u-boot.dtsi
+ +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+ @@ -29,7 +29,14 @@
+  			u-boot-tpl {
+  			};
+  #endif
+ -			u-boot-spl {
+ +			section {
+ +				u-boot-spl-nodtb {
+ +				};
+ +				u-boot-spl-pubkey-dtb {
+ +					algo = "sha256,rsa2048";
+ +					required = "conf";
+ +					key-name-hint = "dev";
+ +				};
+  			};
+  		};
+  
+ @@ -45,6 +52,7 @@
+  			filename = "u-boot.itb";
+  			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+  			fit,align = <512>;
+ +			fit,sign;
+  			offset = <CONFIG_SPL_PAD_TO>;
+  			images {
+  				u-boot {
+ @@ -162,6 +170,13 @@
+  					fit,firmware = "op-tee", "u-boot";
+  #endif
+  					fit,loadables;
+ +
+ +					signature {
+ +						algo = "sha256,rsa2048";
+ +						key-name-hint = "dev";
+ +						padding = "pss";
+ +						sign-images = "fdt", "loadables", "firmware";
+ +					};
+  				};
+  			};
+  		};
+
+You need RSA and RSAPSS support in SPL for this to work (it'll compile
+just fine but always fail to verify).
+
+It'll successfully boot.
+
+Now revert commit 81eff51047e2 ("lib: rsa: Update function
+padding_pss_verify (any-salt)") and regenerate the images.
+
+U-Boot SPL will fail to verify U-Boot FIT signature and refuse to boot.
+
+Now, add `padding-saltlen = "max";` to the signature node and regenerate
+the images, U-Boot SPL will now be able to verify U-Boot FIT signature.
+
+Note that I have no security background and I essentially just made sure
+it compiles and boots (or refuses to boot).
+
+This is marked as RFC because we would need to add the property to
+https://fitspec.osfw.foundation/#configuration-signature-nodes
+and
+https://fitspec.osfw.foundation/#image-signature-nodes
+I assume. Don't want to suggest something to the FIT spec if it's anyway
+going to be denied in U-Boot :)
+
+Note that I actually need a patch like this (for now I just hardcoded
+the salt length to use MAX instead of digest length) for one of our
+products. I don't mind keeping it downstream but I felt like this was a
+semi-reasonable approach to making this configurable.
+
+What do you think?
+---
+ include/image.h    |  1 +
+ lib/rsa/rsa-sign.c | 34 +++++++++++++++++++++++++++-------
+ tools/image-host.c |  3 +++
+ 3 files changed, 31 insertions(+), 7 deletions(-)
+
+diff --git a/include/image.h b/include/image.h
+index c1db8383459c9d7ce1ecc318ccccb4627a7066e5..785852a92f838b7b89bede1c6e6c9a346a9efd1d 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1511,6 +1511,7 @@ struct image_sign_info {
+ 	int required_keynode;		/* Node offset of key to use: -1=any */
+ 	const char *require_keys;	/* Value for 'required' property */
+ 	const char *engine_id;		/* Engine to use for signing */
++	const char *saltlen_name;	/* OpenSSL RSA PSS salt length magic value */
+ 	/*
+ 	 * Note: the following two fields are always valid even w/o
+ 	 * RSA_VERIFY_WITH_PKEY in order to make sure this structure is
+diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
+index fa9e143b4ca8cbc50297acdfbb4ccb39cb160f84..10b25094a2fada08eb37c38a5d618b6e07972139 100644
+--- a/lib/rsa/rsa-sign.c
++++ b/lib/rsa/rsa-sign.c
+@@ -384,7 +384,7 @@ static void rsa_engine_remove(ENGINE *e)
+ static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
+ 			     struct checksum_algo *checksum_algo,
+ 		const struct image_region region[], int region_count,
+-		uint8_t **sigp, uint *sig_size)
++		uint8_t **sigp, uint *sig_size, const char *saltlen_name)
+ {
+ 	EVP_PKEY_CTX *ckey;
+ 	EVP_MD_CTX *context;
+@@ -423,17 +423,37 @@ static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
+ 
+ 	if (CONFIG_IS_ENABLED(FIT_RSASSA_PSS) && padding_algo &&
+ 	    !strcmp(padding_algo->name, "pss")) {
++		int saltlen;
 +
-+#ifndef _DRAM_DW_HELPERS_H
-+#define _DRAM_DW_HELPERS_H
-+
-+#include <asm/arch/dram.h>
-+
-+bool mctl_core_init(const struct dram_para *para,
-+		    const struct dram_config *config);
-+void mctl_auto_detect_rank_width(const struct dram_para *para,
-+				 struct dram_config *config);
-+void mctl_auto_detect_dram_size(const struct dram_para *para,
-+				struct dram_config *config);
-+unsigned long mctl_calc_size(const struct dram_config *config);
-+
+ 		if (EVP_PKEY_CTX_set_rsa_padding(ckey,
+ 						 RSA_PKCS1_PSS_PADDING) <= 0) {
+ 			ret = rsa_err("Signer padding setup failed");
+ 			goto err_sign;
+ 		}
+ 
+-		/* Per RFC 3447 (and convention) the Typical salt length is the
+-		 * length of the output of the digest algorithm.
+-		 */
+-		if (EVP_PKEY_CTX_set_rsa_pss_saltlen(ckey,
+-						     checksum_algo->checksum_len) <= 0) {
++		if (saltlen_name && !strcmp(saltlen_name, "max")) {
++			saltlen = RSA_PSS_SALTLEN_MAX;
++		} else if (saltlen_name && !strcmp(saltlen_name, "auto")) {
++			saltlen = RSA_PSS_SALTLEN_AUTO;
++#if OPENSSL_VERSION_NUMBER >= 0x31000000L
++		} else if (saltlen_name && !strcmp(saltlen_name, "auto-digestmax")) {
++			saltlen = RSA_PSS_SALTLEN_AUTO_DIGEST_MAX;
 +#endif
-diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
-index eb6a49119a13..a33cd5b0f07a 100644
---- a/arch/arm/mach-sunxi/Makefile
-+++ b/arch/arm/mach-sunxi/Makefile
-@@ -41,8 +41,8 @@ obj-$(CONFIG_DRAM_SUN9I)	+= dram_sun9i.o
- obj-$(CONFIG_SPL_SPI_SUNXI)	+= spl_spi_sunxi.o
- obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_sunxi_dw.o
- obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_timings/
--obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o
-+obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o dram_dw_helpers.o
- obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_timings/
--obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o
-+obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o dram_dw_helpers.o
- obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_timings/
- endif
-diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunxi/dram_dw_helpers.c
-new file mode 100644
-index 000000000000..885d1f2c0b12
---- /dev/null
-+++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
-@@ -0,0 +1,160 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Helpers that are commonly used with DW memory controller.
-+ *
-+ * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
-+ *
-+ */
-+
-+#include <init.h>
-+#include <asm/arch/dram_dw_helpers.h>
-+
-+void mctl_auto_detect_rank_width(const struct dram_para *para,
-+				 struct dram_config *config)
-+{
-+	/* this is minimum size that it's supported */
-+	config->cols = 8;
-+	config->rows = 13;
-+
-+	/*
-+	 * Strategy here is to test most demanding combination first and least
-+	 * demanding last, otherwise HW might not be fully utilized. For
-+	 * example, half bus width and rank = 1 combination would also work
-+	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
-+	 * visible.
-+	 */
-+
-+	debug("testing 32-bit width, rank = 2\n");
-+	config->bus_full_width = 1;
-+	config->ranks = 2;
-+	if (mctl_core_init(para, config))
-+		return;
-+
-+	debug("testing 32-bit width, rank = 1\n");
-+	config->bus_full_width = 1;
-+	config->ranks = 1;
-+	if (mctl_core_init(para, config))
-+		return;
-+
-+	debug("testing 16-bit width, rank = 2\n");
-+	config->bus_full_width = 0;
-+	config->ranks = 2;
-+	if (mctl_core_init(para, config))
-+		return;
-+
-+	debug("testing 16-bit width, rank = 1\n");
-+	config->bus_full_width = 0;
-+	config->ranks = 1;
-+	if (mctl_core_init(para, config))
-+		return;
-+
-+	panic("This DRAM setup is currently not supported.\n");
-+}
-+
-+static void mctl_write_pattern(void)
-+{
-+	unsigned int i;
-+	u32 *ptr, val;
-+
-+	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-+	for (i = 0; i < 16; ptr++, i++) {
-+		if (i & 1)
-+			val = ~(ulong)ptr;
-+		else
-+			val = (ulong)ptr;
-+		writel(val, ptr);
-+	}
-+}
-+
-+static bool mctl_check_pattern(ulong offset)
-+{
-+	unsigned int i;
-+	u32 *ptr, val;
-+
-+	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-+	for (i = 0; i < 16; ptr++, i++) {
-+		if (i & 1)
-+			val = ~(ulong)ptr;
-+		else
-+			val = (ulong)ptr;
-+		if (val != *(ptr + offset / 4))
-+			return false;
-+	}
-+
-+	return true;
-+}
-+
-+void mctl_auto_detect_dram_size(const struct dram_para *para,
-+				struct dram_config *config)
-+{
-+	unsigned int shift, cols, rows, found;
-+	u32 buffer[16];
-+
-+	/* max. config for columns, but not rows */
-+	config->cols = 11;
-+	config->rows = 13;
-+	mctl_core_init(para, config);
-+
-+	/*
-+	 * Store content so it can be restored later. This is important
-+	 * if controller was already initialized and holds any data
-+	 * which is important for restoring system.
-+	 */
-+	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-+
-+	mctl_write_pattern();
-+
-+	shift = config->bus_full_width + 1;
-+
-+	/* detect column address bits */
-+	found = 0;
-+	for (cols = 8; cols < 11; cols++) {
-+		if (mctl_check_pattern(1ULL << (cols + shift))) {
-+			found = 1;
-+			break;
++		} else if (saltlen_name && !strcmp(saltlen_name, "digest")) {
++			saltlen = RSA_PSS_SALTLEN_DIGEST;
++		} else if (saltlen_name) {
++			fprintf(stderr, "Invalid salt length '%s'\n", saltlen_name);
++			rsa_err("Invalid salt length");
++			goto err_sign;
++		} else {
++			/* Per RFC 3447 (and convention) the Typical salt length is the
++			 * length of the output of the digest algorithm.
++			 */
++			debug("padding saltlen missing, assuming \"digest\"\n");
++			saltlen = RSA_PSS_SALTLEN_DIGEST;
 +		}
-+	}
-+	if (!found)
-+		panic("DRAM init failed: Can't detect number of columns!");
-+	debug("detected %u columns\n", cols);
 +
-+	/* restore data */
-+	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-+
-+	/* reconfigure to make sure that all active rows are accessible */
-+	config->cols = 8;
-+	config->rows = 17;
-+	mctl_core_init(para, config);
-+
-+	/* store data again as it might be moved */
-+	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-+
-+	mctl_write_pattern();
-+
-+	/* detect row address bits */
-+	shift = config->bus_full_width + 4 + config->cols;
-+	found = 0;
-+	for (rows = 13; rows < 17; rows++) {
-+		if (mctl_check_pattern(1ULL << (rows + shift))) {
-+			found = 1;
-+			break;
-+		}
-+	}
-+	if (!found)
-+		panic("DRAM init failed: Can't detect number of rows!");
-+	debug("detected %u rows\n", rows);
-+
-+	/* restore data again */
-+	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-+
-+	config->cols = cols;
-+	config->rows = rows;
-+}
-+
-+unsigned long mctl_calc_size(const struct dram_config *config)
-+{
-+	u8 width = config->bus_full_width ? 4 : 2;
-+
-+	/* 8 banks */
-+	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-+}
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-index 6a9e53f965eb..fbb865131e08 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-@@ -10,6 +10,7 @@
- #include <asm/io.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/dram.h>
-+#include <asm/arch/dram_dw_helpers.h>
- #include <asm/arch/cpu.h>
- #include <asm/arch/prcm.h>
- #include <linux/bitops.h>
-@@ -40,8 +41,8 @@ static void mctl_com_init(const struct dram_para *para,
- static bool mctl_channel_init(const struct dram_para *para,
- 			      const struct dram_config *config);
++		if (EVP_PKEY_CTX_set_rsa_pss_saltlen(ckey, saltlen) <= 0) {
+ 			ret = rsa_err("Signer salt length setup failed");
+ 			goto err_sign;
+ 		}
+@@ -491,7 +511,7 @@ int rsa_sign(struct image_sign_info *info,
+ 	if (ret)
+ 		goto err_priv;
+ 	ret = rsa_sign_with_key(pkey, info->padding, info->checksum, region,
+-				region_count, sigp, sig_len);
++				region_count, sigp, sig_len, info->saltlen_name);
+ 	if (ret)
+ 		goto err_sign;
  
--static bool mctl_core_init(const struct dram_para *para,
--			   const struct dram_config *config)
-+bool mctl_core_init(const struct dram_para *para,
-+		    const struct dram_config *config)
+diff --git a/tools/image-host.c b/tools/image-host.c
+index a9b8690276386aa21983612c6a306b7897a0af26..63055f2044ac5c320c52dc87e59b275d4bc79e4a 100644
+--- a/tools/image-host.c
++++ b/tools/image-host.c
+@@ -175,6 +175,7 @@ static int fit_image_setup_sig(struct image_sign_info *info,
  {
- 	mctl_sys_init(para->clk);
- 	mctl_com_init(para, config);
-@@ -560,92 +561,6 @@ static bool mctl_channel_init(const struct dram_para *para,
- 	return true;
- }
+ 	const char *node_name;
+ 	const char *padding_name;
++	const char *saltlen_name;
  
--static void mctl_auto_detect_rank_width(const struct dram_para *para,
--					struct dram_config *config)
--{
--	/* this is minimum size that it's supported */
--	config->cols = 8;
--	config->rows = 13;
--
--	/*
--	 * Previous versions of this driver tried to auto detect the rank
--	 * and width by looking at controller registers. However this proved
--	 * to be not reliable, so this approach here is the more robust
--	 * solution. Check the git history for details.
--	 *
--	 * Strategy here is to test most demanding combination first and least
--	 * demanding last, otherwise HW might not be fully utilized. For
--	 * example, half bus width and rank = 1 combination would also work
--	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
--	 * visible.
--	 */
--
--	debug("testing 32-bit width, rank = 2\n");
--	config->bus_full_width = 1;
--	config->ranks = 2;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 32-bit width, rank = 1\n");
--	config->bus_full_width = 1;
--	config->ranks = 1;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 16-bit width, rank = 2\n");
--	config->bus_full_width = 0;
--	config->ranks = 2;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 16-bit width, rank = 1\n");
--	config->bus_full_width = 0;
--	config->ranks = 1;
--	if (mctl_core_init(para, config))
--		return;
--
--	panic("This DRAM setup is currently not supported.\n");
--}
--
--static void mctl_auto_detect_dram_size(const struct dram_para *para,
--				       struct dram_config *config)
--{
--	/* TODO: non-(LP)DDR3 */
--
--	/* detect row address bits */
--	config->cols = 8;
--	config->rows = 18;
--	mctl_core_init(para, config);
--
--	for (config->rows = 13; config->rows < 18; config->rows++) {
--		/* 8 banks, 8 bit per byte and 16/32 bit width */
--		if (mctl_mem_matches((1 << (config->rows + config->cols +
--					    4 + config->bus_full_width))))
--			break;
--	}
--
--	/* detect column address bits */
--	config->cols = 11;
--	mctl_core_init(para, config);
--
--	for (config->cols = 8; config->cols < 11; config->cols++) {
--		/* 8 bits per byte and 16/32 bit width */
--		if (mctl_mem_matches(1 << (config->cols + 1 +
--					   config->bus_full_width)))
--			break;
--	}
--}
--
--unsigned long mctl_calc_size(const struct dram_config *config)
--{
--	u8 width = config->bus_full_width ? 4 : 2;
--
--	/* TODO: non-(LP)DDR3 */
--
--	/* 8 banks */
--	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
--}
--
- #define SUN50I_H6_LPDDR3_DX_WRITE_DELAYS			\
- 	{{  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
- 	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index d1768a7e7d3a..80d9de557876 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -17,6 +17,7 @@
- #include <asm/io.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/dram.h>
-+#include <asm/arch/dram_dw_helpers.h>
- #include <asm/arch/cpu.h>
- #include <asm/arch/prcm.h>
- #include <linux/bitops.h>
-@@ -1310,164 +1311,14 @@ static bool mctl_ctrl_init(const struct dram_para *para,
- 	return true;
- }
+ 	node_name = fit_get_name(fit, noffset, NULL);
+ 	if (!algo_name) {
+@@ -187,6 +188,7 @@ static int fit_image_setup_sig(struct image_sign_info *info,
+ 	}
  
--static bool mctl_core_init(const struct dram_para *para,
--			   const struct dram_config *config)
-+bool mctl_core_init(const struct dram_para *para,
-+		    const struct dram_config *config)
- {
- 	mctl_sys_init(para->clk);
+ 	padding_name = fdt_getprop(fit, noffset, "padding", NULL);
++	saltlen_name = fdt_getprop(fit, noffset, "padding-saltlen", NULL);
  
- 	return mctl_ctrl_init(para, config);
- }
- 
--static void mctl_auto_detect_rank_width(const struct dram_para *para,
--					struct dram_config *config)
--{
--	/* this is minimum size that it's supported */
--	config->cols = 8;
--	config->rows = 13;
--
--	/*
--	 * Strategy here is to test most demanding combination first and least
--	 * demanding last, otherwise HW might not be fully utilized. For
--	 * example, half bus width and rank = 1 combination would also work
--	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
--	 * visible.
--	 */
--
--	debug("testing 32-bit width, rank = 2\n");
--	config->bus_full_width = 1;
--	config->ranks = 2;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 32-bit width, rank = 1\n");
--	config->bus_full_width = 1;
--	config->ranks = 1;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 16-bit width, rank = 2\n");
--	config->bus_full_width = 0;
--	config->ranks = 2;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 16-bit width, rank = 1\n");
--	config->bus_full_width = 0;
--	config->ranks = 1;
--	if (mctl_core_init(para, config))
--		return;
--
--	panic("This DRAM setup is currently not supported.\n");
--}
--
--static void mctl_write_pattern(void)
--{
--	unsigned int i;
--	u32 *ptr, val;
--
--	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
--	for (i = 0; i < 16; ptr++, i++) {
--		if (i & 1)
--			val = ~(ulong)ptr;
--		else
--			val = (ulong)ptr;
--		writel(val, ptr);
--	}
--}
--
--static bool mctl_check_pattern(ulong offset)
--{
--	unsigned int i;
--	u32 *ptr, val;
--
--	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
--	for (i = 0; i < 16; ptr++, i++) {
--		if (i & 1)
--			val = ~(ulong)ptr;
--		else
--			val = (ulong)ptr;
--		if (val != *(ptr + offset / 4))
--			return false;
--	}
--
--	return true;
--}
--
--static void mctl_auto_detect_dram_size(const struct dram_para *para,
--				       struct dram_config *config)
--{
--	unsigned int shift, cols, rows, found;
--	u32 buffer[16];
--
--	/* max. config for columns, but not rows */
--	config->cols = 11;
--	config->rows = 13;
--	mctl_core_init(para, config);
--
--	/*
--	 * Store content so it can be restored later. This is important
--	 * if controller was already initialized and holds any data
--	 * which is important for restoring system.
--	 */
--	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
--
--	mctl_write_pattern();
--
--	shift = config->bus_full_width + 1;
--
--	/* detect column address bits */
--	found = 0;
--	for (cols = 8; cols < 11; cols++) {
--		if (mctl_check_pattern(1ULL << (cols + shift))) {
--			found = 1;
--			break;
--		}
--	}
--	if (!found)
--		panic("DRAM init failed: Can't detect number of columns!");
--	debug("detected %u columns\n", cols);
--
--	/* restore data */
--	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
--
--	/* reconfigure to make sure that all active rows are accessible */
--	config->cols = 8;
--	config->rows = 17;
--	mctl_core_init(para, config);
--
--	/* store data again as it might be moved */
--	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
--
--	mctl_write_pattern();
--
--	/* detect row address bits */
--	shift = config->bus_full_width + 4 + config->cols;
--	found = 0;
--	for (rows = 13; rows < 17; rows++) {
--		if (mctl_check_pattern(1ULL << (rows + shift))) {
--			found = 1;
--			break;
--		}
--	}
--	if (!found)
--		panic("DRAM init failed: Can't detect number of rows!");
--	debug("detected %u rows\n", rows);
--
--	/* restore data again */
--	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
--
--	config->cols = cols;
--	config->rows = rows;
--}
--
--static unsigned long mctl_calc_size(const struct dram_config *config)
--{
--	u8 width = config->bus_full_width ? 4 : 2;
--
--	/* 8 banks */
--	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
--}
--
- static const struct dram_para para = {
- 	.clk = CONFIG_DRAM_CLK,
- #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
+ 	memset(info, '\0', sizeof(*info));
+ 	info->keydir = keydir;
+@@ -198,6 +200,7 @@ static int fit_image_setup_sig(struct image_sign_info *info,
+ 	info->checksum = image_get_checksum_algo(algo_name);
+ 	info->crypto = image_get_crypto_algo(algo_name);
+ 	info->padding = image_get_padding_algo(padding_name);
++	info->saltlen_name = saltlen_name;
+ 	info->require_keys = require_keys;
+ 	info->engine_id = engine_id;
+ 	if (!info->checksum || !info->crypto) {
+
+---
+base-commit: cb7555e93075114fe4af0adb806877ac4d4ef80d
+change-id: 20250411-rsapss-saltlen-b8d7a676565a
+
+Best regards,
 -- 
-2.49.0
+Quentin Schulz <quentin.schulz@cherry.de>
 
