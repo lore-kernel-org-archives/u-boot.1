@@ -4,67 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13136C36010
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 05:30:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9D9C36010
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 05:33:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6858482B7F;
-	Fri, 11 Apr 2025 07:30:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DEBAA82AEF;
+	Fri, 11 Apr 2025 07:33:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GdyPvSCG";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ITzOGg5s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFEAC82B95; Fri, 11 Apr 2025 07:30:09 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D88B582B72
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:30:06 +0200 (CEST)
+ id D337D82AF1; Fri, 11 Apr 2025 07:33:04 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BAF2582ACF
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 07:33:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53B5U4Ek1348953
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 11 Apr 2025 00:30:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744349404;
- bh=b2zIAf6uE8HfoyOJk1fsCnapj7yCTomAr39zC1vMwCM=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=GdyPvSCGZer/eSqQXV+myxq7eeMZUPS8GBqSzR/oN8Ct4smhlhuJcZw8rg0/VISNk
- GPY4P6Z5Ux7RGB4ysjR8A5RgF8ch7+B0Or8R8DEi97514fZBwJ/1pHYzTp73pEVncU
- lOnDb1/6eZq677WM9IF73yjS92MIa7KiTUh/cuBI=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53B5U3C0004597
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 11 Apr 2025 00:30:04 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 11
- Apr 2025 00:30:03 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 11 Apr 2025 00:30:03 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53B5TxYG032649;
- Fri, 11 Apr 2025 00:30:00 -0500
-Message-ID: <2ae04e74-4672-41fa-8fa3-f3c0894f7df1@ti.com>
-Date: Fri, 11 Apr 2025 10:59:59 +0530
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (dynamic-046-114-109-163.46.114.pool.telefonica.de
+ [46.114.109.163])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id A328E3F189; 
+ Fri, 11 Apr 2025 05:33:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1744349581;
+ bh=BDR1Ax4oGBn73awgeE4nwoM9w0cEtUrtUGAy0l90wAw=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ITzOGg5sW0fPLx5ns8ZC/qxidue/lnlu0niopTxNM4craJ1PR40OWOPuV+B+dHA33
+ RkllQxAwGb9GbSnoP8+vvUn6uQvJrioZFKwE6lNtSqSu1ke/qKOYU54UXu0xq4qIX2
+ KZSV5oRNCEpU/WVm1CG3rg1/IObLCeXDZR2v4cwtea67R2TyQVeDtHsPzRoc38O0+k
+ +fwCfahjRnZFzIiVS/fj3tUqOMf2G1IV25aPmTzCgyvDB4oIOIMqNQh32Lb8dVwgbT
+ 5OjjuSua1DlLbRYvU6evc5FB1m1P0bUd0bz7WdH9NA15tq5tVvA3jG0bJyFjfdaUMe
+ XjpMZM9XDOqlw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_selftest: check executing in EL2
+Date: Fri, 11 Apr 2025 07:32:56 +0200
+Message-ID: <20250411053256.17332-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mach-k3: common_fdt: Move carveout struct
-To: Daniel Schultz <d.schultz@phytec.de>, <trini@konsulko.com>, <afd@ti.com>, 
- <n-francis@ti.com>, <bb@ti.com>, <u-boot@lists.denx.de>
-CC: <w.egorov@phytec.de>, <upstream@lists.phytec.de>
-References: <20250410075525.390331-1-d.schultz@phytec.de>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20250410075525.390331-1-d.schultz@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,63 +69,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+UEFI binaries should be executed in EL2 or EL1 even if U-Boot is started
+in EL3. Provide a unit test.
 
-On 4/10/2025 1:25 PM, Daniel Schultz wrote:
-> Labels are not allowed before declarations. Move the carveout struct
-> at the beginning and only update 'end' at this point.
->
-> This will fix following error:
->
-> arch/arm/mach-k3/common_fdt.c: In function 'fdt_fixup_reserved':
-> arch/arm/mach-k3/common_fdt.c:156:2: error: a label can only be part of a statement and a declaration is not a statement
->    156 |  struct fdt_memory carveout = {
->        |  ^~~~~~
-> make[1]: *** [scripts/Makefile.build:256: arch/arm/mach-k3/common_fdt.o] Error 1
-> make: *** [Makefile:1919: arch/arm/mach-k3] Error 2
->
-> Fixes: 096aa229a9e ("mach-k3: common_fdt: create a reserved memory node")
->
-> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
-> ---
-> Changes in v2:
->    * Moved carveout struct at the beginning instead of adding an dummy statement.
->
->   arch/arm/mach-k3/common_fdt.c | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
-> index 361b0c0b31b..9437b923d49 100644
-> --- a/arch/arm/mach-k3/common_fdt.c
-> +++ b/arch/arm/mach-k3/common_fdt.c
-> @@ -119,6 +119,10 @@ int fdt_fixup_reserved(void *blob, const char *name,
->   {
->   	int nodeoffset, subnode;
->   	int ret;
-> +	struct fdt_memory carveout = {
-> +		.start = new_address,
-> +		.end = new_address + new_size - 1,
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_selftest/Makefile          |  1 +
+ lib/efi_selftest/efi_selftest_el.c | 46 ++++++++++++++++++++++++++++++
+ 2 files changed, 47 insertions(+)
+ create mode 100644 lib/efi_selftest/efi_selftest_el.c
 
-I think there is no need of assigning end here. As final value is 
-updated at last.
+diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+index 17fbfad116f..d78bf7d6191 100644
+--- a/lib/efi_selftest/Makefile
++++ b/lib/efi_selftest/Makefile
+@@ -51,6 +51,7 @@ efi_selftest_variables_runtime.o \
+ efi_selftest_watchdog.o
+ 
+ obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
++obj-$(CONFIG_ARM64) += efi_selftest_el.o
+ obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
+ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
+ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_ipconfig.o
+diff --git a/lib/efi_selftest/efi_selftest_el.c b/lib/efi_selftest/efi_selftest_el.c
+new file mode 100644
+index 00000000000..03218efa49c
+--- /dev/null
++++ b/lib/efi_selftest/efi_selftest_el.c
+@@ -0,0 +1,46 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ *  Check current exception level on ARMv8.
++ */
++#include <efi_loader.h>
++#include <efi_selftest.h>
++
++/**
++ * current_exception_level()
++ *
++ * Return:	current exception level, 0 - 3
++ */
++static unsigned int current_exception_level(void)
++{
++	unsigned long el;
++
++	asm volatile (
++		"MRS %0, CurrentEL"
++		: "=r" (el) : : );
++
++	return (el >> 2) & 0x3;
++}
++
++/**
++ * execute() - execute test
++ *
++ * Check that the exception level is not EL3.
++ */
++static int execute(void)
++{
++	unsigned int el = current_exception_level();
++
++	efi_st_printf("Exception level EL%u\n", el);
++	if (el != 1 && el != 2) {
++		efi_st_error("EL1 or EL2 expected");
++		return EFI_ST_FAILURE;
++	}
++
++	return EFI_ST_SUCCESS;
++}
++
++EFI_UNIT_TEST(el) = {
++	.name = "exception level",
++	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
++	.execute = execute,
++};
+-- 
+2.48.1
 
-With this change
-
-Reviewed-by: Udit Kumar <u-kumar1@ti.com>
-
-
-> +	};
->   
->   	/* Find reserved-memory */
->   	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
-> @@ -153,10 +157,7 @@ int fdt_fixup_reserved(void *blob, const char *name,
->   	}
->   
->   add_carveout:
-> -	struct fdt_memory carveout = {
-> -		.start = new_address,
-> -		.end = new_address + new_size - 1,
-> -	};
-> +	carveout.end = new_address + new_size - 1;
->   	ret = fdtdec_add_reserved_memory(blob, name, &carveout, NULL, 0, NULL,
->   					 FDTDEC_RESERVED_MEMORY_NO_MAP);
->   	if (ret < 0)
