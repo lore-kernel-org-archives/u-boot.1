@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC86C369A2
-	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 19:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EA1C369A2
+	for <u-boot@archiver.kernel.org>; Fri, 11 Apr 2025 19:17:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69C4A84236;
-	Fri, 11 Apr 2025 21:16:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B161D8423A;
+	Fri, 11 Apr 2025 21:16:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nX9vMQTo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e1UKvvmX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F5FC8422F; Fri, 11 Apr 2025 21:16:50 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 5DC6884239; Fri, 11 Apr 2025 21:16:52 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92EDA8422F
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 21:16:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEAD484233
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 21:16:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3f6dccdcadaso1437616b6e.2
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:16:47 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3ff0df81fdbso899704b6e.3
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 12:16:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744399006; x=1745003806; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744399007; x=1745003807; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CQdBuKovRB8JgnlXkp3FBhuzQ1H6omaa6003+i4/qWw=;
- b=nX9vMQToD8vqYxZGY9pUH/pbTAB1IczyGnWA+qktypalO9vytdErWZ9HVcIFzSq71U
- xQ+HQ3fNs6aL6e2IzoMbHC71JIQNRB3SDlolwsFzhhULp8KBO/1EKxaN0Xr94OH/DjyC
- YmyXhi+2wAWZM1BMb8W6/BSUS45zCJYEQ6PLI=
+ bh=NiWImqx90kWaAIW3GH92W+a3cirTq+jDtEJjv8XbrKU=;
+ b=e1UKvvmXLmzl1ivVRDOQdU6WOgdxoJyB6R4p03cPnWUB+azxmiowZ6MFmdF8BYIan2
+ 3psRdWVLpfaSg0wvpwz87KLdABvGjSNN6HH83sWSjcCxII6o9aFLawMEDxAl+PEh14e1
+ zUW1VPzJEq4FlVtbH+BDgt8beEJxEZwYgA/+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744399006; x=1745003806;
+ d=1e100.net; s=20230601; t=1744399007; x=1745003807;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CQdBuKovRB8JgnlXkp3FBhuzQ1H6omaa6003+i4/qWw=;
- b=Zqe/r6id1A4rZlpgdtsEVln50uO39HE/90i07lJYXJYVaHgZjLqO02/Zhw09OfQ+qQ
- F+QO8GckksLg6VmSRpYa6vm3MIMSeB8O2ArXMYg7Y0ffuSRlR6Qzic7ygfFLeQTkHIoH
- uz4BmuIfVF6MKqtJVozSS0/jY4buIsVwLUWRSpSnzBXovU3f+NTQTO7vRH5fCcuammQA
- nAyV7swOwdAYPQ6/PODVgh9eLvawLnhvXYw8BEMCpMk73S/22jM2SxWPE6fZbzCRNJOo
- CGLUWKsatsPXg5C0+ZVGjpr1ArIAuQsZ/uUyVAMTYBMR7psMaXjM88SoFO+QhoiKSyqF
- kEdQ==
-X-Gm-Message-State: AOJu0YzFq07zr6UTd2h25Z3wzL4k4LhuWYxCSFNHCTRwXVS0qKC3Zv76
- HbHNjtWEBTOHyxjI9pkcGtruHubxDZ7HB2WA1nGwF9lGiiG6xNS7NptIZHErhdY=
-X-Gm-Gg: ASbGnctqGT284/zovY3V+Y+e1SMevpi1QU56cIoiy5afqNuF19OlOYUV7i5Ltw2I3hq
- TT8FHJiEhx9lqKsim9tx8sVD91gYKx5wd20ckPDIgmZzAnFNXZEejdD5VexKvuS3qcrda4tNQ1f
- FQfFuO6HOFZHmbHd7MihqbQxwd+PbPnjEtRw0Sj10EjMzJrvZtJ2CT+ov+n+hHV7KJbW1DImHPA
- Z93ci/5cJDMD7BUhyAME/wxaS3P8NPYIQfSB0X/wHgQwbYlrEH2nNJ3K5QlU8KEsH+nPHJMW2WK
- fHuSVEPDQOkAK4UyEklY9uO2I91KdhxgLbeCZ1vUxBfrRNXjAz95FB/fA+KIBsWgRbtZhcGycLB
- B
-X-Google-Smtp-Source: AGHT+IGMtU6qDC+wHLpj0Bpy1twKROEbZ2MuVS8fpiR3eV3TvlGxYeIcmRcrqBA+Q/ky5c0upjZkqQ==
-X-Received: by 2002:a05:6808:10c3:b0:3f6:77d3:2546 with SMTP id
- 5614622812f47-40085042da2mr2302771b6e.14.1744399006340; 
- Fri, 11 Apr 2025 12:16:46 -0700 (PDT)
+ bh=NiWImqx90kWaAIW3GH92W+a3cirTq+jDtEJjv8XbrKU=;
+ b=hOo3ZcyvVPk87nmJMLyIT320N7v7Ys1XDMHuxXB897Ov0JsoLat63NZsBLjYvKKNth
+ qmIVC0BOj+czXUoKYG8PdWCrCXI2tFOrZ+aqSBaXZEo0oCMVESGkLZpnQ+nZFc8P+NBD
+ B7j6IIUiOGtvBnHQNm6OSBjw+txFCwgoDOqheiNHC5gyQ2WqSnC5Su8MRi97zhpij1QN
+ B2b69tPsJLfkZBknHx61S6QIVI+IzJKiy74fdXPWCIgSKnmwFbxg+/uPw2Y4oi4x7aUx
+ ziKivJwVayDrE44fCNzGtc3dVBu4mZfNK9EOJFx8rGz1zvgv3LXuUTqXBRnyGL1eVB08
+ fmRA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVGSH7irYd7lMiYavBbRsq/crjZoK1XqjM4DUa6TOJk/gwkLjQTB+sOoWeUuHKEuXfqP0Qad2A=@lists.denx.de
+X-Gm-Message-State: AOJu0YysL0XwveHTW0FMoNe17ZHPQ7cScXRwVftVnGRbmNx2dHviGKb8
+ 8HJVBQLJI2FOklUMy+hSnsOChzFL8E4RAxALOc2geHmfGknBIm5grzJeLLZXMvk=
+X-Gm-Gg: ASbGncvlhjlWRdhXMSNkJkHJr2LUTAS3PJoUYjLCvlII8cwjD/NEiZZ28TMkoL1ClAn
+ Dcki6lvuYpi4mLwnpn/BPZROYUrWwwIsL3a91lnIaZzIuyG/4nwmSkiiAZ4NMeI6ieKtqBADOV5
+ St1klgZVcfvCZe6EVuT3G85xPJ++j0jzGX59P58d6vZOG/13pOdwJs65uubHt07Qgh7dxZ8bjoo
+ 2nWOTj2qq9ujUSBsjRYzId+jXFK2GiQ2tZlYBG7IlUhfessO27k4iZuZ79BjkR9TvyHVDBr6dXh
+ eXIbVO7+D8/Ix5WFiUG4aJncdAa7Q1ZEGqKK/drYedy7jP43yHcJ3Ra3ySeWmGyZphuC8kWYVhC
+ v
+X-Google-Smtp-Source: AGHT+IFGrlePKHvlsfCCCP0ZoRdmdeb1BbKtaJGh3LfsCR4gdBoE0ibeYFVE0NaVJ6G7FOjlDJFfUQ==
+X-Received: by 2002:a05:6808:1201:b0:3fa:8bfd:7747 with SMTP id
+ 5614622812f47-40085039d5cmr2467560b6e.13.1744399007648; 
+ Fri, 11 Apr 2025 12:16:47 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-400762cc752sm1043970b6e.20.2025.04.11.12.16.45
+ 5614622812f47-400762cc752sm1043970b6e.20.2025.04.11.12.16.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Apr 2025 12:16:45 -0700 (PDT)
+ Fri, 11 Apr 2025 12:16:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Leonard Anderweit <l.anderweit@phytec.de>
-Cc: sjg@chromium.org, festevam@gmail.com, marex@denx.de, 
- upstream@lists.phytec.de
-In-Reply-To: <20250401084642.216933-1-l.anderweit@phytec.de>
-References: <20250401084642.216933-1-l.anderweit@phytec.de>
-Subject: Re: (subset) [PATCH 1/2] Dockerfile: install byacc
-Message-Id: <174439900529.3262324.12771408961407370638.b4-ty@konsulko.com>
-Date: Fri, 11 Apr 2025 13:16:45 -0600
+To: w.egorov@phytec.de, u-boot@lists.denx.de, 
+ Daniel Schultz <d.schultz@phytec.de>
+Cc: B.Hahn@phytec.de, upstream@lists.phytec.de, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+In-Reply-To: <20250328055824.3849523-1-d.schultz@phytec.de>
+References: <20250328055824.3849523-1-d.schultz@phytec.de>
+Subject: Re: [PATCH 1/3] configs: phycore_am64x_a53_defconfig: Enable
+ remoteproc cmd
+Message-Id: <174439900647.3262324.7994448350592897481.b4-ty@konsulko.com>
+Date: Fri, 11 Apr 2025 13:16:46 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,16 +100,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 01 Apr 2025 10:46:41 +0200, Leonard Anderweit wrote:
+On Thu, 27 Mar 2025 22:58:22 -0700, Daniel Schultz wrote:
 
-> Install byacc required to build cst from source.
+> This enables the 'rproc' command, allowing users to
+> start, stop, and manage co-processors as well as load firmware
+> images.
 > 
+> Useful for systems with auxiliary cores, such as M4 or R5 cores
+> in the AM64x soc.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[2/2] CI: Build missing binman tools before binman tests
-      commit: 1e5e45983d80776426d4b4e467531b29f52cbc4b
+[1/3] configs: phycore_am64x_a53_defconfig: Enable remoteproc cmd
+      commit: 0819316de97ed57cb094f2ac50a5b4ab138f6e7a
+[2/3] configs: phycore_am62x_a53_defconfig: Enable remoteproc cmd
+      commit: a8ec1f11322286263d24e7cf931728557ccbe4ea
+[3/3] configs: phycore_am62x_a53_defconfig: Enable gpio
+      commit: 6d4d4ee519f4dfc799c1851f13e8be0634ec7911
 -- 
 Tom
 
