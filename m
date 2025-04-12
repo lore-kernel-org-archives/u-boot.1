@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D119C369AB
-	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 17:42:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A52C369AB
+	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 18:32:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC4A582E7D;
-	Sat, 12 Apr 2025 19:42:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 174A08215E;
+	Sat, 12 Apr 2025 20:32:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rbS0mVVX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oz4Q2Vq6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDDA582E81; Sat, 12 Apr 2025 19:42:12 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 1560782E71; Sat, 12 Apr 2025 20:32:28 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B725282E28
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 19:42:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3D9B82D0C
+ for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 20:32:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rui.silva@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43cfe574976so21461245e9.1
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 10:42:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3feaedb6670so1998270b6e.1
+ for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 11:32:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744479730; x=1745084530; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ClpbE4vbfE6icHgZKRO1lDV7vT9jnEYfSOgx1i9lL8s=;
- b=rbS0mVVX5mAG6bSBmgzuPN64/X4tOdHFYPlqtiTA7Av+GNan16zNWuFe415oAvJwJK
- uqY4B595yrb7uJob5+J2qJOsM7MxCbtz8qPMtJ//WsE9lQ6B1SVKm2OCIIYKmQhMlJ3p
- aEEtrGc6nmPBvqJMWqhbZuJIiPmSCxeG1tzKzGMIZ2blrVnp4iajVdJugUvrMkJby3k/
- HkykHU5qO9ZCJI1sUiiZzHY8WWoJT3jblXflG8nHgBQ5w0vhJuiZlNOd5MMI4oyxBz8A
- WQF8hHfA0haHmjpDnRL/EpY3Q8QnyRClBEEzuPIRzJkqMlFx0n+9DZ5r0mQIAXN5E7U0
- 158Q==
+ d=konsulko.com; s=google; t=1744482744; x=1745087544; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YnJbOlxq3YH1fbvbdel9kExX67XGO+j0vbZnOaLF1S8=;
+ b=oz4Q2Vq63e0eGv6eHfvyS06BlHCZG3njFntYEZOU3r/m845mPlxMB4b5ptgj/vY/5w
+ 9HiqvfR6PXKm4atXu0aL6vA6PVLH177Cz3V3w5E2F87D6UUyxzitF9KD+tuAx3Vy1Vmn
+ MwbPvbiaaOVZfnEXwzp2CTwVy8v6T/u/4AscI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744479730; x=1745084530;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ClpbE4vbfE6icHgZKRO1lDV7vT9jnEYfSOgx1i9lL8s=;
- b=PgBI4RSo6PZgRvjf7s52fIfzhvstPaZd8P6J7Oq6Xjz7dShWUEY09ET9E147i65yuK
- 98ewvERQlRxAUd/Hhs5o6FGZgG4nVHIQMUeKRr3oirPlvqJQ+dQRzCRhqQOunrdITUCH
- bA5DrnkzTooX9g/8R27JzXMWBiIVI8tczebLhGRzHYn+RIsFi7eIv6y8hqY11d5KL9SZ
- HWvUXz/o6aTL3BZY9IYzpEP6nZPmLLX0oS9XaKnZ2VHji6NxGWKfGei+fQBtGFQj0DNS
- qZIuRXdaDSeQchiN82inda+aHBqywveGNjG3DkSS9uJKZC+xD5gAbkflREFV10yfS/8C
- lapQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhDDkLrT4JEjjEU1jPDw5v9YJ1lVEk64d0u7+WjuECVrpqI/ujI5QDQiIRIqu2YGllwskWuQY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5E454AJrX/0F0yp3S6oFWyhi91Z9gQD98azzbM1xg9kYn/xXH
- Z5pV8n/k5a5Mf+LfwnhVdVmnkk3a/wd+HxyGbPypdJOWJVkn+FEu8Q5C+KEIU5U=
-X-Gm-Gg: ASbGncsXXmY0dYGyW/Udc5K4t+ktlcTkWdcBLJeVf70s6BnEiZ5FcS4Y2vW0iE7jU+M
- +FiTwJjv5YW7kASn7wNopMxS+gNuACnsOXxr/oS3jnIg8tfvqOaoQc904uE39WNoMtQM7ss6K4a
- qQYExPku7HEXsiH5N5ERf+rAe8NRG2So+Z4oPx0pyral7T0uMDwdYPnZ+TcUglPM826Kbq0brQj
- z/177egyTfVoCLPahnYBLB2sEULqDMyUe+KXFsIGms08MLrh+WaUmTS5BeBDMuw+nr+AEH0nd62
- V8dP8w7DcvGGgnNXLXRXPdjkI/fNosFPLNj8Lf7s8/x12iMP7YZ7dmbm15GtokHvrzrH8VSo/nQ
- =
-X-Google-Smtp-Source: AGHT+IHDJNS8QB9ivW+lcAts9gRMXqInAB7Gk+cpD8EGT5qVZewxaAxyy/FSmMlYtmJDcaahK+2zMw==
-X-Received: by 2002:a05:600c:3c98:b0:43c:ec4c:25b4 with SMTP id
- 5b1f17b1804b1-43f3a93cc56mr77384875e9.10.1744479730065; 
- Sat, 12 Apr 2025 10:42:10 -0700 (PDT)
-Received: from arch-thunder.lan (a109-49-32-45.cpe.netcabo.pt. [109.49.32.45])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf43d046sm5792143f8f.63.2025.04.12.10.42.09
+ d=1e100.net; s=20230601; t=1744482744; x=1745087544;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YnJbOlxq3YH1fbvbdel9kExX67XGO+j0vbZnOaLF1S8=;
+ b=ZXEirhron8VUPVAlD3qp+pLDbvzXHDNYH/mj2S7aT1SBgchm2rtS8RZkVk2Ey0sGC6
+ 9ZxK/XN8qN6ZQX+hJ6cwQ7azngK/X/VUgkVt3SJ1f9mNCbC/2/sGJ7LcjzEyDXRZjb40
+ Om8ts/QoxVbM1TVhfcMeKeojJrinx/PwVE8BGn0y7rT1qLfHZb6Rrd6s3Xmqv2PhtBtw
+ k4lDp7v6TbsNK7hIo0Wc7lO9dRa/QrSeJRZeQUz20r8qYvZkz5Kto/59OIM65mgaAe0U
+ IIkECsQD7JByq9b/GDqSUfcwqm6V9HBULS15QgvRNfqw825EgeoGCYFttEAIdA9Nog1O
+ zt+Q==
+X-Gm-Message-State: AOJu0YyxwZnGW2bkgIKVBdMmF0unwyzuS5nXOunnTq7v1YhxdD8m7swL
+ /Ssfx2NssEA/iem0Y/4esd7O/yWBDfPjenws3SzAmaIL8a/penqIZ75nTJ6YO6o=
+X-Gm-Gg: ASbGncswza5Dyg7u6BAj5QEHz+AsoN/rCPb8/5mlRlCMevcWPygPSoVDAlMYUZ7SqTz
+ Ejz+yqXweNi9uyYKX90mojfij1rhwbn/AqDPAfPlCwtqUbyqH4G6RgtbyIW7g2JSynDxcuQSNXx
+ VUPz3PKb0VxMUXA/6R8Xm8+LZhtf2FmK5c89wPFtV8iXPaBjNzfGAFwGeKBC34RKEag8G/8xNRc
+ Y/ML63y5snuhnqPlTGezqosMkRSPgpwl4mQuEJC2mtvLIDJ5iPA+Y39XGJ+qNhXBjosSEdb3YOw
+ iB5oktYm//DLZVCujGYo9GAbJcguifGz+K8lb0UcoAy8nUcvKu8QguTFPGbXTSZW4XHWLBLVkPv
+ j
+X-Google-Smtp-Source: AGHT+IFVEH2woF78rdKb79Z78dS4LeQxseMnP1GIYWDgDbtnufw8mCN7Xdv5wNGEA2kP60PG6XoyTw==
+X-Received: by 2002:a05:6808:180c:b0:3f6:7fd0:808c with SMTP id
+ 5614622812f47-4008505cefemr4250125b6e.16.1744482744487; 
+ Sat, 12 Apr 2025 11:32:24 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4007639c9e0sm1333376b6e.32.2025.04.12.11.32.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Apr 2025 10:42:09 -0700 (PDT)
-From: Rui Miguel Silva <rui.silva@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Rui Miguel Silva <rui.silva@linaro.org>
-Subject: [PATCH] power: qcom_vbus_regulator: add and fix support for pmic
- variants
-Date: Sat, 12 Apr 2025 18:41:31 +0100
-Message-ID: <20250412174157.104419-1-rui.silva@linaro.org>
-X-Mailer: git-send-email 2.49.0
+ Sat, 12 Apr 2025 11:32:23 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Alexander Kochetkov <al.kochet@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Brandon Maier <brandon.maier@collins.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+In-Reply-To: <20250410124333.843527-1-sjg@chromium.org>
+References: <20250410124333.843527-1-sjg@chromium.org>
+Subject: Re: [PATCH v2 0/8] binman: Check code-coverage requirements
+Message-Id: <174448274259.256398.1892331563087478873.b4-ty@konsulko.com>
+Date: Sat, 12 Apr 2025 12:32:22 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,98 +104,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix and add support for different pmic variants pm8x50b to handle
-the vbus regulator.
+On Thu, 10 Apr 2025 06:42:57 -0600, Simon Glass wrote:
 
-Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
----
- .../power/regulator/qcom_usb_vbus_regulator.c | 37 +++++++++++++++----
- 1 file changed, 30 insertions(+), 7 deletions(-)
+> This series adds a cover-coverage check to CI for Binman. The iMX8 tests
+> are still not completed, so a work-around is included for those.
+> 
+> A few fixes are included for some other problems.
+> 
+> Changes in v2:
+> - Add new patch to add coverage to the requirements.txt file
+> - Rebase to -master
+> 
+> [...]
 
-diff --git a/drivers/power/regulator/qcom_usb_vbus_regulator.c b/drivers/power/regulator/qcom_usb_vbus_regulator.c
-index 2d58ef5e111e..07f118d47977 100644
---- a/drivers/power/regulator/qcom_usb_vbus_regulator.c
-+++ b/drivers/power/regulator/qcom_usb_vbus_regulator.c
-@@ -15,14 +15,33 @@
- #include <power/pmic.h>
- #include <power/regulator.h>
- 
--#define CMD_OTG				0x50
-+enum pm8x50b_vbus {
-+	PM8150B,
-+	PM8550B,
-+};
-+
- #define OTG_EN				BIT(0)
--// The 0 bit in this register's bit field is undocumented
--#define OTG_CFG				0x56
-+
- #define OTG_EN_SRC_CFG			BIT(1)
- 
-+struct qcom_otg_regs {
-+	u32 otg_cmd;
-+	u32 otg_cfg;
-+};
- struct qcom_usb_vbus_priv {
- 	phys_addr_t base;
-+	struct qcom_otg_regs *regs;
-+};
-+
-+static const struct qcom_otg_regs qcom_otg[] = {
-+	[PM8150B] = {
-+		.otg_cmd = 0x40,
-+		.otg_cfg = 0x53,
-+	},
-+	[PM8550B] = {
-+		.otg_cmd = 0x50,
-+		.otg_cfg = 0x56,
-+	},
- };
- 
- static int qcom_usb_vbus_regulator_of_to_plat(struct udevice *dev)
-@@ -38,8 +57,9 @@ static int qcom_usb_vbus_regulator_of_to_plat(struct udevice *dev)
- 
- static int qcom_usb_vbus_regulator_get_enable(struct udevice *dev)
- {
-+	const struct qcom_otg_regs *regs = &qcom_otg[dev_get_driver_data(dev)];
- 	struct qcom_usb_vbus_priv *priv = dev_get_priv(dev);
--	int otg_en_reg = priv->base + CMD_OTG;
-+	int otg_en_reg = priv->base + regs->otg_cmd;
- 	int ret;
- 
- 	ret = pmic_reg_read(dev->parent, otg_en_reg);
-@@ -53,8 +73,9 @@ static int qcom_usb_vbus_regulator_get_enable(struct udevice *dev)
- 
- static int qcom_usb_vbus_regulator_set_enable(struct udevice *dev, bool enable)
- {
-+	const struct qcom_otg_regs *regs = &qcom_otg[dev_get_driver_data(dev)];
- 	struct qcom_usb_vbus_priv *priv = dev_get_priv(dev);
--	int otg_en_reg = priv->base + CMD_OTG;
-+	int otg_en_reg = priv->base + regs->otg_cmd;
- 	int ret;
- 
- 	if (enable) {
-@@ -76,8 +97,9 @@ static int qcom_usb_vbus_regulator_set_enable(struct udevice *dev, bool enable)
- 
- static int qcom_usb_vbus_regulator_probe(struct udevice *dev)
- {
-+	const struct qcom_otg_regs *regs = &qcom_otg[dev_get_driver_data(dev)];
- 	struct qcom_usb_vbus_priv *priv = dev_get_priv(dev);
--	int otg_cfg_reg = priv->base + OTG_CFG;
-+	int otg_cfg_reg = priv->base + regs->otg_cfg;
- 	int ret;
- 
- 	/* Disable HW logic for VBUS enable */
-@@ -96,7 +118,8 @@ static const struct dm_regulator_ops qcom_usb_vbus_regulator_ops = {
- };
- 
- static const struct udevice_id qcom_usb_vbus_regulator_ids[] = {
--	{ .compatible = "qcom,pm8150b-vbus-reg"},
-+	{ .compatible = "qcom,pm8150b-vbus-reg", .data = PM8150B },
-+	{ .compatible = "qcom,pm8550b-vbus-reg", .data = PM8550B },
- 	{ },
- };
- 
+Applied to u-boot/master, thanks!
+
+[1/8] binman: Add coverage to requirements
+      commit: ac964c099b5a90076add8aef6bcd6eb3d96eb458
+[2/8] binman: Exclude dist-packages and site-packages
+      commit: a876295e1bec85f8318807424bb9de8794a4d7f7
+[3/8] binman: Drop GetRootSkipAtStart()
+      commit: 0148be7cd49e8f801662e5af74203e2cdf93a5bb
+[4/8] binman: fit: Drop unused code
+      commit: d664c29ec37964db5e191debb2cafeed3a170255
+[5/8] binman: Drop algo check in CheckSetHashValue()
+      commit: 702b7a3e2eb49b144936e061c0107518544c4b1a
+[6/8] binman: Workaround lz4 cli padding in test cases
+      commit: 06a0d9eee835b5b6242e773cbab34ec9aba19443
+[7/8] binman: Work around missing test coverage
+      commit: 2911f2c1ee83760737dc162b1852b0e3b414e6ac
+[8/8] CI: Run code-coverage test for Binman
+      commit: 6f875290eb107106059f4edfcf8afe31bed9a378
 -- 
-2.49.0
+Tom
+
 
