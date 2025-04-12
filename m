@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 218D6C369AE
-	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 14:32:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FDC6C369B2
+	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 14:32:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF2E482E27;
-	Sat, 12 Apr 2025 16:31:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3121B82E26;
+	Sat, 12 Apr 2025 16:31:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="DXhX7L+D";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="TclfT8/p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43DE782D7C; Sat, 12 Apr 2025 16:31:44 +0200 (CEST)
-Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
+ id 996D982E52; Sat, 12 Apr 2025 16:31:47 +0200 (CEST)
+Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AFD282E26
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 16:31:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89B2082AE2
+ for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 16:31:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de;
@@ -29,26 +29,25 @@ Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.riseup.net (Postfix) with ESMTPS id 4ZZbbJ1lZKzDqND;
- Sat, 12 Apr 2025 14:31:40 +0000 (UTC)
+ by mx0.riseup.net (Postfix) with ESMTPS id 4ZZbbM6Brwz9w9M;
+ Sat, 12 Apr 2025 14:31:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1744468300; bh=bQMp36eGxEPAohAXnqXlo5gi+J6T6xA/gsNtm7jAlxE=;
+ t=1744468304; bh=nOZ0TDdGzVKba0pk9+xGpYVheWNq3taP8oml9pcpCfI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=DXhX7L+DsgpRehcUKoJI6eAVJu41NLJV2gvudbMbQE/oBlGl6lsLNPP1Y+566CBME
- /pEW94q08H9r5ndY991EH8Rq6vik91fpnup7NKS53vcRPR4hrzAx1//MoAOr6L1vUW
- NmJRCGLb3wDERKoJs7+3D0rnd9AL+dq/aR/3UGI4=
-X-Riseup-User-ID: 0A4C2E0BDC62B5C7A76DE8FE611E3FCEDBD0BDDD21F93D8423DFE7344F3AD065
+ b=TclfT8/p+hWBQW7ruTnSitgf6Je/NpcPrhBFT8rSMNd4potacCubPaEsUyTT/KoSt
+ GIx7hzSHBaEMU9PFWSI18Jp/7AfE+kZnoFVAiS5YpLboh8pSvBs6+9vAfzXssb1ImR
+ pDiVYWxDnuGK+HxcW+jHIKEoucoOlqWXUoXzuJIs=
+X-Riseup-User-ID: F039685B23E48E30DE99F9F95438164853009B68ED52D08A33C092644D79CB85
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4ZZbbD5P1vzJtRl;
- Sat, 12 Apr 2025 14:31:36 +0000 (UTC)
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4ZZbbJ2yrBzJtdD;
+ Sat, 12 Apr 2025 14:31:40 +0000 (UTC)
 From: Dang Huynh <danct12@riseup.net>
-Date: Sat, 12 Apr 2025 21:27:10 +0700
-Subject: [PATCH v3 08/12] dts: rockchip: rk356x: Prerelocate VOP in U-Boot
- proper
+Date: Sat, 12 Apr 2025 21:27:11 +0700
+Subject: [PATCH v3 09/12] configs: quartz64: Enable vidconsole
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250412-vop2-pt2-v3-8-7c796db335e9@riseup.net>
+Message-Id: <20250412-vop2-pt2-v3-9-7c796db335e9@riseup.net>
 References: <20250412-vop2-pt2-v3-0-7c796db335e9@riseup.net>
 In-Reply-To: <20250412-vop2-pt2-v3-0-7c796db335e9@riseup.net>
 To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>, 
@@ -76,29 +75,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We need to prerelocate VOP2 memory so the driver can work. This
-will only support U-Boot proper.
+Now that we have VOP2 support, we should enable vidconsole.
 
 Signed-off-by: Dang Huynh <danct12@riseup.net>
 ---
- arch/arm/dts/rk356x-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+ include/configs/quartz64_rk3566.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
-index 24a976cf7e21da351cbbb969ba2b4687c344ca6c..1191e2fd567dd18655c88ea1b7a28d160d43c220 100644
---- a/arch/arm/dts/rk356x-u-boot.dtsi
-+++ b/arch/arm/dts/rk356x-u-boot.dtsi
-@@ -166,6 +166,10 @@
- 	clock-frequency = <24000000>;
- };
+diff --git a/include/configs/quartz64_rk3566.h b/include/configs/quartz64_rk3566.h
+index dfe0fee94cdb043cbca558e90fb203245534509a..bf391458219b4f2371626d0ccf98af2a3bc279ce 100644
+--- a/include/configs/quartz64_rk3566.h
++++ b/include/configs/quartz64_rk3566.h
+@@ -3,7 +3,10 @@
+ #ifndef __QUARTZ64_RK3566_H
+ #define __QUARTZ64_RK3566_H
  
-+&vop {
-+	bootph-some-ram;
-+};
-+
- &uart2m0_xfer {
- 	bootph-all;
- };
+-#define ROCKCHIP_DEVICE_SETTINGS
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdin=serial,usbkbd\0" \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
+ 
+ #include <configs/rk3568_common.h>
+ 
 
 -- 
 2.49.0
