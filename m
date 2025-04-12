@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C48C369A1
-	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 07:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2AD5C369A1
+	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 07:40:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 627B382CAC;
-	Sat, 12 Apr 2025 09:29:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50CCC840D5;
+	Sat, 12 Apr 2025 09:40:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UwJGS6AG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZSchy75w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DF8882CB0; Sat, 12 Apr 2025 09:29:50 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 3A12984130; Sat, 12 Apr 2025 09:40:47 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2B8882C8A
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 09:29:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E25AE82B9D
+ for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 09:40:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e6e2a303569so2082190276.0
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 00:29:47 -0700 (PDT)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e6e2971f79fso2308860276.0
+ for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 00:40:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744442986; x=1745047786; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744443643; x=1745048443; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5qci+U+sQQILves3Ns4/s6ZRJtCp0NfmRK1UTsCw5YU=;
- b=UwJGS6AG9tgRnnAN+KqlEqvbP9fZ6J+iaytteUDK8Po1sp3PRbturxRG1haPsIsEuT
- ZH1oecolTnyulfXVoywDkETB820IVNDa0vqurwQJZasASc3keT6pk7SpUT7m8ElYJe4n
- ojJkjZIIPe1W0PNjBJypU0YOV3LcFu34xfhCfKMhYScv+Nudu9dRNhNcOCeJTDDjp7W+
- LjfK9EO2qYSt2DyIFTHz1MOaBO1Wwmj9UDNrINlw9dNXeV8HiNovBMsd2ohRgNNW3GKr
- Zf48hdhZG5irHoY7UL6m4VoVNvdtOVF3N9qQPDhrT1iJOHgHQWB7QZYLkrqsp2m68itQ
- StRg==
+ bh=nhRNzUnIN+vtWuUH63sAYJ68BBBCL6f8UWSnA2jl0u8=;
+ b=ZSchy75wmyAVaqM0CJ++PWeu+uLMBoN/2o/8j0d1o+4xkVxeB1Esq8CugwpVbJBaho
+ GRQY+JFf81YdXWswJeW+l5tlovVVxDl2PGyAtJ3VJpzzHccI9NUmy6clLz6N2CxN951e
+ GhnWlHdBT5cCNcN10eUFxyYAVZjQeqYBNqn2ZeFYG88V6EFoYJSp9FKYgSlUEApn+C3f
+ rAnkE8r2aS1kX9VpKYjCklLBfMqhfVh5Ug9/9Yp546ftPoxyjEQASxf46NVkgf5ZD92O
+ sWFI1ISGnMkuzi5a95dfhOjz4cXAmbRsCFLWXLg/DJYNewsVeOVUTJ99J0J2ICR6hRIY
+ ujQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744442986; x=1745047786;
+ d=1e100.net; s=20230601; t=1744443643; x=1745048443;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5qci+U+sQQILves3Ns4/s6ZRJtCp0NfmRK1UTsCw5YU=;
- b=GVGVSr3Tn6AZvVGnCFtG019CA/mh/Q8CFTJsUc4zfPO+eYx3N0Fn1kNKfNAfZeFUl6
- CtVIPVnysP6N9HS+RsXicJNoqLYxCtyoWFGa1F6eJ+PACkWl5B8EDTsTxi9+Az2fPAYI
- gyPa9+/RjukJPr0DQQ1xoOewLc1xFhUuKLYABGgkTpvhgrjZp8uxANGyH4xq1H+i6Q6P
- 2+0MdZkRsd55DQTGJykvVKqG11vWaxqOIAHzAK35u/nGFkHnl5wE1LPrZp7DIq8hZKjR
- 73NY03xFCFQazu59X/81w5mULVRio3AG8BW49kcjt+1l1cart4rZqcGLyftp3/1+7R1D
- Rw0A==
-X-Gm-Message-State: AOJu0Yw8hyQ5Q5fAn5g9Mce56PbGO/FrpQRGHTRi2/Sw93zD/rtMlTs6
- XrdSUHlNR1tSZ/m3SArURfZmpFKbOqMV7NWsSyLa5arOXlvP7IT8wAdnzgmmTecVUL9VuUKocWw
- Nx8kA7E6oTkHUF+qCOcZDS2u/C5XbxusFcyNvnhAmbKiQSwmN
-X-Gm-Gg: ASbGncsCOl3p5/8C0A01bL4x8lsn322qZfUuHMyCDhLEqs4E0AscfKYiIx6sjjA6Eln
- E8Px6jBicE1u4dm+RaRQ8Ls2QHzbwuiNcppdr2ZoO7LNcDu1lne9Fe8ooMO8KSIroNxVGG1c7FO
- XwI/g3BbVB7a8RRK6Jo0dSLUaC3jWi2Z2r
-X-Google-Smtp-Source: AGHT+IEXmfopp76f0gvfdUiw6htkcne/VtgnaBY79kMh6Jv+EiGtJQVUdg1fQpgoVM+WSdZi77htkRNnTiu0T7Oq81U=
-X-Received: by 2002:a05:6902:2586:b0:e6e:4d8:81ce with SMTP id
- 3f1490d57ef6-e704dee5df1mr8909036276.29.1744442986345; Sat, 12 Apr 2025
- 00:29:46 -0700 (PDT)
+ bh=nhRNzUnIN+vtWuUH63sAYJ68BBBCL6f8UWSnA2jl0u8=;
+ b=X5r8bE8Yd18PlKkoyIv4obDRX6bWvgIX/nhH9P597tQ0RyL8R8EFJp1ZKZ3GJvCvw4
+ gqKKtE3772Xda3k3cxqf0Cgyw4KQxgdFffHDgW3m4sDLgEV2teX3J9o7PLiBuYtswm5d
+ cOzR5zNoCb/uw4hhbAE9AtXhmNp8zT6oZmIoocSeV+svemUrNweijvjfv1feKKkfttb9
+ T6y4q/2xUXUAes0WvMs+UEpQcul0K+VMgF+hXRWCA2PV5lcJeUQyIRBA/7wWIRg+HnnR
+ UIHsH/8zF1oW9yGVteztpA/8hUUQmbtw23Gw3+bkScJVtOheEzD8iFbrERlAVbFyhB39
+ WZLQ==
+X-Gm-Message-State: AOJu0YxZpnmlSE/62rx3ZlrGJdl5LrVpsDY0TBarK8ofdYKtBStz619z
+ 5VMPD6xl2oeKtI9YFDBrgxOax+DZpXOZrioPYKoKt05F/egmvbjbDXpWBVxiHGBquUoEfM/L7G7
+ hipY2j4/SeU9r8anjtrC6d92/cF4iNSx0LJeqAA==
+X-Gm-Gg: ASbGncu51jDmNAmQuC/Gs6s43Y4KmzT5OqowpILnwFSkKGDiwpO3EmjD6StDz7ADv/h
+ BWEwKYCAz87UpWgCM57sk8QpNbd2ETcOvOHJuNdwJ1B5IlRQSUdNESr/TG7nO4WESTd0t35oATU
+ UH/0mSj0nOg/r4RptrBiVX5rgX24tNyeet
+X-Google-Smtp-Source: AGHT+IGeOhYiFTWebaiDoJbNId64undYx0PssMfnYM4lu0fIqxVU7Y08MQ7W9SOzkncGpSAXD0KbaBJgJ+LRTipDlcs=
+X-Received: by 2002:a05:6902:1b81:b0:e63:ddc4:f5a9 with SMTP id
+ 3f1490d57ef6-e704df26551mr8282352276.20.1744443643507; Sat, 12 Apr 2025
+ 00:40:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250311164758.421900-1-adriano.cordova@canonical.com>
- <20250311164758.421900-3-adriano.cordova@canonical.com>
-In-Reply-To: <20250311164758.421900-3-adriano.cordova@canonical.com>
+ <20250311164758.421900-14-adriano.cordova@canonical.com>
+In-Reply-To: <20250311164758.421900-14-adriano.cordova@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 12 Apr 2025 10:29:10 +0300
-X-Gm-Features: ATxdqUHjFVL1h8lifdoF6hYPKkA_15sr9y0Ji7YTPXtLcTbXxX_Yg7ibE7b-0pk
-Message-ID: <CAC_iWj+VyhocQyQ-cx7UwU3r9g_m35R8DpRaN0OPb=djn4B1=A@mail.gmail.com>
-Subject: Re: [PATCH 02/16] efi_loader: efi_net: check efi_search_protocol
- return value
+Date: Sat, 12 Apr 2025 10:40:07 +0300
+X-Gm-Features: ATxdqUFQhmPSt04BMkXVeu6-Zubu4bJvZp5_2XWvV1vLX1vUQ9eKutSpRl2yqeY
+Message-ID: <CAC_iWjL5XAUkr2qo=ofP6igf-jBKdmwnBKF1KS_yPdPLTy=U=Q@mail.gmail.com>
+Subject: Re: [PATCH 13/16] efi_selftest: Add selftest for counting EFI
+ netdevices
 To: Adriano Cordova <adrianox@gmail.com>
 Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
  jerome.forissier@linaro.org, xypron.glpk@gmx.de, =trini@konsulko.com, 
@@ -93,74 +93,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adriano
-
-Apologies for the very late review, I was travelling a lot...
-
-On Tue, 11 Mar 2025 at 18:47, Adriano Cordova <adrianox@gmail.com> wrote:
+On Tue, 11 Mar 2025 at 18:48, Adriano Cordova <adrianox@gmail.com> wrote:
 >
-
-You need a proper commit message on why we need this
-
 > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+
+Please add a proper commit message
+
 > ---
->  lib/efi_loader/efi_net.c | 13 ++++++++++---
->  1 file changed, 10 insertions(+), 3 deletions(-)
+>  lib/efi_selftest/Makefile                  |  2 +-
+>  lib/efi_selftest/efi_selftest_net_device.c | 65 ++++++++++++++++++++++
+>  2 files changed, 66 insertions(+), 1 deletion(-)
+>  create mode 100644 lib/efi_selftest/efi_selftest_net_device.c
 >
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index 0334eedaf5c..8c0a3f5243c 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -1020,7 +1020,9 @@ efi_status_t efi_netobj_set_dp(struct efi_net_obj *netobj, struct efi_device_pat
->                 return EFI_OUT_OF_RESOURCES;
+> diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+> index 17fbfad116f..f7e8f02cb20 100644
+> --- a/lib/efi_selftest/Makefile
+> +++ b/lib/efi_selftest/Makefile
+> @@ -51,7 +51,7 @@ efi_selftest_variables_runtime.o \
+>  efi_selftest_watchdog.o
 >
->         phandler = NULL;
-> -       efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-> +       ret = efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-> +       if (ret != EFI_SUCCESS && ret != EFI_NOT_FOUND)
-> +               return ret;
+>  obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
+> -obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
+> +obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o efi_selftest_net_device.o
+>  obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
+>  obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_ipconfig.o
 >
->         // If the device path protocol is not yet installed, install it
->         if (!phandler)
-> @@ -1051,12 +1053,15 @@ add:
->  static struct efi_device_path *efi_netobj_get_dp(struct efi_net_obj *netobj)
->  {
->         struct efi_handler *phandler;
-> +       efi_status_t r;
->
->         if (!efi_netobj_is_active(netobj))
->                 return NULL;
->
->         phandler = NULL;
-> -       efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-> +       r = efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-> +       if (r != EFI_SUCCESS && r != EFI_NOT_FOUND)
+> diff --git a/lib/efi_selftest/efi_selftest_net_device.c b/lib/efi_selftest/efi_selftest_net_device.c
+> new file mode 100644
+> index 00000000000..51963eb328c
+> --- /dev/null
+> +++ b/lib/efi_selftest/efi_selftest_net_device.c
+> @@ -0,0 +1,65 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * efi_selftest_net_device
+> + *
+> + */
+> +
+> +#include <efi_selftest.h>
+> +#include <net.h>
+> +
+> +static struct efi_boot_services *boottime;
+> +
+> +/*
+> + * Setup unit test.
+> + *
+> + * @handle:    handle of the loaded image
+> + * @systable:  system table
+> + * Return:     EFI_ST_SUCCESS for success
+> + */
+> +static int setup(const efi_handle_t handle,
+> +                const struct efi_system_table *systable)
+> +{
+> +       efi_uintn_t num_handles;
+> +       efi_handle_t *handles;
+> +
+> +       boottime = systable->boottime;
+> +
+> +       num_handles = 0;
+> +       boottime->locate_handle_buffer(BY_PROTOCOL, &efi_net_guid,
+> +                                      NULL, &num_handles, &handles);
+> +       efi_st_printf("Detected %u active EFI net devices\n", (unsigned int)num_handles);
 
-Why do you check for EFI_NOT_FOUND here? If the protocol isn't
-installed it will just fail adn retunr NULL a few lines below
+Shouldn't this be moved to 'execute'?
 
-
-> +               return NULL;
->
->         if (phandler && phandler->protocol_interface)
->                 return efi_dp_dup(phandler->protocol_interface);
-> @@ -1444,7 +1449,9 @@ int efi_net_unregister(void *ctx, struct event *event)
->                         return -1;
->
->                 phandler = NULL;
-> -               efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-> +               ret = efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-> +               if (ret != EFI_SUCCESS && ret != EFI_NOT_FOUND)
-
-same here
-
-> +                       return -1;
->                 if (phandler && phandler->protocol_interface)
->                         interface = phandler->protocol_interface;
->
+> +
+> +       return EFI_ST_SUCCESS;
+> +}
+> +
+> +/*
+> + * Execute unit test.
+> + *
+> + *
+> + * Return:     EFI_ST_SUCCESS for success
+> + */
+> +static int execute(void)
+> +{
+> +       return EFI_ST_SUCCESS;
+> +}
+> +
+> +/*
+> + * Tear down unit test.
+> + *
+> + * Return:     EFI_ST_SUCCESS for success
+> + */
+> +static int teardown(void)
+> +{
+> +       int exit_status = EFI_ST_SUCCESS;
+> +
+> +       return exit_status;
+> +}
+> +
+> +EFI_UNIT_TEST(netdevices) = {
+> +       .name = "netdevices",
+> +       .phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
+> +       .setup = setup,
+> +       .execute = execute,
+> +       .teardown = teardown,
+> +       .on_request = true,
+> +};
 > --
 > 2.48.1
 >
 
-Cheers
+Thanks
 /Ilias
