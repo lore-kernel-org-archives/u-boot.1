@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D65AC369AB
-	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 19:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72679C369AE
+	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 19:40:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AE6982F10;
-	Sat, 12 Apr 2025 21:40:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8903F82E28;
+	Sat, 12 Apr 2025 21:40:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="ACSY26d+";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="cuwJf1T9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B378A82F10; Sat, 12 Apr 2025 21:40:12 +0200 (CEST)
-Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
+ id 6696982D66; Sat, 12 Apr 2025 21:40:21 +0200 (CEST)
+Received: from mail-10624.protonmail.ch (mail-10624.protonmail.ch
+ [79.135.106.24])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74BC082F4B
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 21:40:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CE1D82F4B
+ for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 21:40:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail; t=1744486808; x=1744746008;
- bh=3+zRXHBKtVM7Nfq9UqXXdjj94sos5scnLZdRa8HR7Eo=;
+ s=protonmail; t=1744486816; x=1744746016;
+ bh=XJUh9N46jeIrxVG0TEfuD4gZhqseFkao6NCUwTLV3GA=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=ACSY26d+vxFrxzEE/B3fKFPn6pymaExt/pwQ25tLyrPbwmITelq/z9gGdaojmzKP0
- jGUhGbxuQNtwD3QbQbursifRDxD1kVMYFE4yNP8/QJNvnLuCEQ5S7X0c/JnOemrTKe
- iZ4Gxg9MJjxXPeR9KR4JmfTD3rJDzL6YKDZyCQQI+lc/wjhLTcFsUqlbJ35aDzFn5a
- 8lzkkhZK6AU2DsNSXZVZ+V2oGBVGIVjaWIBCd6U0MVEryncV0lZepDic6atq7L9++G
- KK1OYFy6ka3CJt4XY/xL2Nx0yNqVWhMj558krsia6J1UYmmjeqAtqMJloQ9uPDKhxf
- EntPNV8jABQgw==
-Date: Sat, 12 Apr 2025 19:40:03 +0000
+ b=cuwJf1T9750auDvEjdpi+cf7I+i7xsCoTerFdvkx+PeHBEM6hV+rocepUUje8n9ca
+ EbmUrCO4wBwoM2zGaQ9Bdey4txnV5lDhr3hG+cmLPcyz87WfGCtnkFVNqV+Q5opXLq
+ fBaeCE9+a6gelcP8SjphmUmqqZphejschnxzCXJKgIDFnc97YuuLJAjcHoqHZXSEJo
+ T8Cu7lm97DwEQZTPRjJyJCu2XGirfNlfERRbP7rcgtz0ZJ1Xrjra7DnzAMs6sFqIn8
+ tGeoFyVhPTS0Fsxphr7FdTgdvS2jSe6Z2MChDL4WT0gYUwcwZpR1NrifjWp+/hYyRH
+ nfrYL8Nqkurrw==
+Date: Sat, 12 Apr 2025 19:40:11 +0000
 To: Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
@@ -44,13 +45,12 @@ To: Lukasz Majewski <lukma@denx.de>,
  Stephan Gerhold <stephan.gerhold@linaro.org>
 From: Sam Day <me@samcday.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Sam Day <me@samcday.com>
-Subject: [PATCH 2/3] usb: host: ehci-msm: Register ChipIdea UDC from glue
- wrapper
-Message-ID: <20250412-msm8916-usb-v1-2-2925239caf4b@samcday.com>
+Subject: [PATCH 3/3] qcom_defconfig: Enable MSM8916 USB PHY + ChipIdea UDC
+Message-ID: <20250412-msm8916-usb-v1-3-2925239caf4b@samcday.com>
 In-Reply-To: <20250412-msm8916-usb-v1-0-2925239caf4b@samcday.com>
 References: <20250412-msm8916-usb-v1-0-2925239caf4b@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 82db75f648dac5d559284e8e99e5a36130c189d6
+X-Pm-Message-ID: 3b24719d432452bd903de0e8b12199b02159b1d0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -70,33 +70,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_DM_USB_GADGET is enabled, the CI UDC driver needs to be
-explicitly bound. So we do this from the newly introduced glue driver.
+Now that the ChipIdea UDC driver supports USB Gadget driver model, we
+can enable it alongside the dwc3 generic driver.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/usb/host/ehci-msm.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ configs/qcom_defconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-index 8aeb6a915563453ad2a02721d4828fd1b300a4e4..ae40e96e6349b1a352608e6350c=
-e950a3cff95af 100644
---- a/drivers/usb/host/ehci-msm.c
-+++ b/drivers/usb/host/ehci-msm.c
-@@ -161,6 +161,13 @@ static int qcom_ci_hdrc_bind(struct udevice *dev)
- =09if (ret)
- =09=09return ret;
-=20
-+=09if (IS_ENABLED(CONFIG_DM_USB_GADGET) && IS_ENABLED(CONFIG_CI_UDC)) {
-+=09=09ret =3D device_bind_driver_to_node(dev, "ci-udc", "ci-udc",
-+=09=09=09=09dev_ofnode(dev), NULL);
-+=09=09if (ret)
-+=09=09=09return ret;
-+=09}
-+
- =09if (!ofnode_valid(ulpi_node))
- =09=09return 0;
-=20
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..e8582d4e6bd2fae4ff2f7e34dc3=
+2651ea2de76bc 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -45,6 +45,7 @@ CONFIG_OF_UPSTREAM_BUILD_VENDOR=3Dy
+ CONFIG_USE_DEFAULT_ENV_FILE=3Dy
+ CONFIG_DEFAULT_ENV_FILE=3D"board/qualcomm/default.env"
+ CONFIG_BUTTON_QCOM_PMIC=3Dy
++CONFIG_CI_UDC=3Dy
+ CONFIG_CLK=3Dy
+ CONFIG_CLK_STUB=3Dy
+ CONFIG_CLK_QCOM_APQ8016=3Dy
+@@ -121,6 +122,7 @@ CONFIG_RNG_MSM=3Dy
+ CONFIG_SCSI=3Dy
+ CONFIG_MSM_SERIAL=3Dy
+ CONFIG_MSM_GENI_SERIAL=3Dy
++CONFIG_MSM8916_USB_PHY=3Dy
+ CONFIG_SOC_QCOM=3Dy
+ CONFIG_QCOM_COMMAND_DB=3Dy
+ CONFIG_QCOM_RPMH=3Dy
+@@ -133,6 +135,10 @@ CONFIG_USB_XHCI_HCD=3Dy
+ CONFIG_USB_XHCI_DWC3=3Dy
+ CONFIG_USB_DWC3=3Dy
+ CONFIG_USB_DWC3_GENERIC=3Dy
++CONFIG_USB_EHCI_HCD=3Dy
++CONFIG_USB_EHCI_MSM=3Dy
++CONFIG_USB_ULPI=3Dy
++CONFIG_USB_ULPI_VIEWPORT=3Dy
+ CONFIG_USB_GADGET=3Dy
+ CONFIG_USB_GADGET_DOWNLOAD=3Dy
+ CONFIG_USB_FUNCTION_MASS_STORAGE=3Dy
 
 --=20
 2.49.0
