@@ -4,93 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A8DC369A1
-	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 12:45:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409B3C369B2
+	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 14:31:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D456A82CBC;
-	Sat, 12 Apr 2025 14:45:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6E8B582D34;
+	Sat, 12 Apr 2025 16:31:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GJimqPBd";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="NFjPDXNE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EFF782BE3; Sat, 12 Apr 2025 14:45:17 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 86B9082D33; Sat, 12 Apr 2025 16:31:06 +0200 (CEST)
+Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ECEE82D34
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 14:45:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A485F82D33
+ for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 16:31:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-abbb12bea54so563497066b.0
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 05:45:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744461915; x=1745066715; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vtoU6MUBGK0ObQuTj6heqJ5LT/NUCO63UhxXOcWuI8k=;
- b=GJimqPBdsIGJq1nhnhmER3XWcUpRIE2uOZHQfkYwNdKLnk1Bq5OZIa8fwKgNZXhIH9
- m7m4ohf5fxsDO01Ld0iAKNLJobt4aj0iLYQTtNoVs/LfK1QdfyOMgUnoNXkP7LOOiFAf
- 2X8IOKVAWiGJMEEOO3Axrgc14A19uPt0RbeU0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744461915; x=1745066715;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vtoU6MUBGK0ObQuTj6heqJ5LT/NUCO63UhxXOcWuI8k=;
- b=Yo0qQuif4BshocY25epCJx/gy9anUevzntrX23WsFMB0CHLQayh6pK9bT1d5jS5OQk
- 4YNTffrPOJ0yTSjdbfz7aQruIAY9PCB552v5o7RJbxd7+JeUIGcheuCpIvu1FhSf9rEd
- zd0CPIG/1PAilyl5BOh83VAt0UWcQ9xHbltxGHtGlKjYjzlcSvZ11f6fptkdwZEXyOeD
- 9ieE6ht9wabuIJ9FYt1k7RHC5xusGXI9IE8fo+wspUHLgoI+pm37vFqUgGfYp5E1kqyk
- GVo/ch7QKuzTaW4fR+rdwYmpbBDLndJHY3Eyhdh4esSH4YyF7iivcydA2VDJhRSHuLPq
- 4dfg==
-X-Gm-Message-State: AOJu0Yx/6NWYr9ZwHLH2Yk6g9ToS9Lxe1FRt9sns3H35S8mGtuQJ83CV
- YM2l6klYAhZxxThOFH8MuSO5aCgsfzzK+62l6uJSCN0Qtf2VNhQZoq2m/PPbtXpMQa7s2UysAab
- YE0wU5ozUUWnMe5Ci9ycPnB8SysBhILxxBkjc
-X-Gm-Gg: ASbGncs4b+MKAQj43UOomMwMNzdofZyOSvhpNOe464W6kL2SxZisPN6yZ0dGjb0YJyb
- 2xHtPqr/mYDKCnM3rwFz8WOgNIr/Plf8tVMlbAACKQ138KTuHbHPQC41zMdiRVZ8C/wR0U00IVL
- Ei8fvvbgbnrOgN7l3uMEo9sG0=
-X-Google-Smtp-Source: AGHT+IGj8nHwY56Zo5ZOe99WDapATpxxbFODohXmA7dyrlUDD8kyl2iVYTlOv6s29IZ/ep549tr7ReGeZMlYHJIrFUg=
-X-Received: by 2002:a17:907:2d06:b0:ac6:b639:5a1a with SMTP id
- a640c23a62f3a-acad34d95afmr587092166b.28.1744461914509; Sat, 12 Apr 2025
- 05:45:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=riseup.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=danct12@riseup.net
+Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx1.riseup.net (Postfix) with ESMTPS id 4ZZbZW1SqzzDqPC;
+ Sat, 12 Apr 2025 14:30:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+ t=1744468259; bh=r/zKkTDZwwYxlrQZ1KSxFSmgWtQMtnz6n6+O4Oe3ISg=;
+ h=From:Subject:Date:To:Cc:From;
+ b=NFjPDXNERzked4tDDVqQNF9kxC1VaiZa7c6QFgummoa/N+zzzetmNtpKs6Nowp0Yv
+ a57zoDScqnb7UlnUTzmlLYZ3YsEM28T3/mqMNQlocd9gyNz8uy8Kuk2BUxdnXrKGup
+ pJPk/a8b96iRYao4QkUNrlPRQvr43MIog3fxhhEE=
+X-Riseup-User-ID: 99B826289726E9256657AC10531E5E4D7F9FE40B76FEEE03676FF38BB49348E3
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4ZZbZQ4rPfzJtRl;
+ Sat, 12 Apr 2025 14:30:54 +0000 (UTC)
+From: Dang Huynh <danct12@riseup.net>
+Subject: [PATCH v3 00/12] Rockchip VOP2 support
+Date: Sat, 12 Apr 2025 21:27:02 +0700
+Message-Id: <20250412-vop2-pt2-v3-0-7c796db335e9@riseup.net>
 MIME-Version: 1.0
-References: <20250319143820.2385092-1-sjg@chromium.org>
- <20250319143820.2385092-10-sjg@chromium.org>
- <20250319145218.GG2640854@bill-the-cat>
- <CAFLszTiRm3YEQqU1w75uFp5gFZ1HiPv41vNX7VFy8XS80udVRw@mail.gmail.com>
- <20250319153510.GJ2640854@bill-the-cat>
- <CAFLszTg8a7CCiyyVVQdHDHNJ3MEP-Zxbbao_riy+iTzDt2u-KA@mail.gmail.com>
- <20250330144542.GQ93000@bill-the-cat>
- <CAFLszTiRXB+DpXOgyHiNCF9HoitzYW0EO9fyS2cKKCP8cQaR4A@mail.gmail.com>
- <20250401164856.GH5495@bill-the-cat>
- <CAFLszTiL2=RVf9u96E=0=JKraaeKwFiTf+W1De3bQvFCCnwdGw@mail.gmail.com>
- <20250411191301.GZ5495@bill-the-cat>
-In-Reply-To: <20250411191301.GZ5495@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 12 Apr 2025 06:45:02 -0600
-X-Gm-Features: ATxdqUEMYHH-IDkZHHXMeGRddb4aZCWltyHF3XMjBSdu9X8kCXPD6Oy_2tcHYmo
-Message-ID: <CAFLszThC+P+3RRAakH2vdfWAsitOJ9us74EOeqq_UhxBfvw4CA@mail.gmail.com>
-Subject: Re: [PATCH 09/17] test/py: Add a test image for Ubuntu
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Julius Lehmann <lehmanju@devpi.de>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADZ4+mcC/1WMwQ7CIBAFf6XhLAaWQsWT/2E8SLu1e2kJINE0/
+ XdpE1M9zsubmVnEQBjZuZpZwEyRprGAOlSsHe7jAzl1hRkI0ELKmufJA/cJeKN176S10jnDyt0
+ H7Om1pa63wgPFNIX3Vs5yXb8Rs0ey5IK3tjO1cVpZJS6BIj79ccTE1kqG3QRQPyYUs5FKC6xPY
+ Jt/c1mWD84idSbbAAAA
+X-Change-ID: 20250114-vop2-pt2-755fb1991bb6
+To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Ondrej Jirman <megi@xff.cz>, 
+ Dragan Simic <dsimic@manjaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, u-boot@lists.denx.de, 
+ Piotr Zalewski <pZ010001011111@proton.me>, Dang Huynh <danct12@riseup.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,120 +78,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This series adds VOP2 support to U-Boot and enable it for PineTab2.
 
-On Fri, 11 Apr 2025 at 13:13, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Apr 02, 2025 at 06:55:02AM +1300, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 2 Apr 2025 at 05:49, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Apr 02, 2025 at 04:49:18AM +1300, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 31 Mar 2025 at 03:45, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Mar 20, 2025 at 03:41:33AM +0000, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, 19 Mar 2025 at 16:35, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Mar 19, 2025 at 03:04:28PM +0000, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Wed, 19 Mar 2025 at 15:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Wed, Mar 19, 2025 at 03:38:03PM +0100, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > Add an extlinux image that contains a few Ubuntu entries.
-> > > > > > > > > >
-> > > > > > > > > > Increase the number of sandbox-USB-hub ports to permit this.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > >
-> > > > > > > > > I don't understand what this test adds. In neither the current Fedora
-> > > > > > > > > test nor in this new test are we actually booting something, we're just
-> > > > > > > > > taking a sample extlinux.conf and making sure it doesn't fail. Is it
-> > > > > > > > > that we're testing in a useful fashion now having two labels?
-> > > > > > > >
-> > > > > > > > I didn't think so either, which is why I never did this before. But it
-> > > > > > > > turns out that there were some bugs, too.
-> > > > > > >
-> > > > > > > I don't understand you, sorry. You don't think so either to what?
-> > > > > >
-> > > > > > I didn't think we needed two extlinux examples on different boot
-> > > > > > devices, but we do.
-> > > > >
-> > > > > I'm not sure it's particularly clear what you're doing here then, or
-> > > > > why, but I'll find some time to read it all more deeply.
-> > > >
-> > > > OK. This test case is how I found the bugs/problems in bootstd that
-> > > > are fixed in this series.
-> > >
-> > > It should be (a) better explained and likely (b) instead of dropping in
-> > > a seemingly verbatim installed file a specially crafted bit of content.
-> > > We aren't testing "Ubuntu". We are testing multiple labels.
-> > >
-> > > > > > > > > We should probably be clear about what we're doing in the tests and
-> > > > > > > > > instead of adding seemingly arbitrary distributions add an extlinux test
-> > > > > > > > > and testcases.
-> > > > > > > >
-> > > > > > > > This is not actually a test case. It is simply creating a new image.
-> > > > > > > > The test cases are in the other patches, so please take a look there.
-> > > > > > >
-> > > > > > > Nothing in this series quickly reads as adding tests and fixing problems
-> > > > > > > with extlinux parsing, it's all bootmeth stuff?
-> > > > > >
-> > > > > > It isn't about the actual parsing of the .conf file, although I would
-> > > > > > like to add tests there as we have none apart from what I have added
-> > > > > > in my PXE series. It's more about having multiple devices with
-> > > > > > bootable OSes on them. This series tidies up and fixes this. We need
-> > > > > > to have an image available on more than one device to spot these
-> > > > > > problems.
-> > > > >
-> > > > > And the existing tests for pxelinux that we have in mainline already,
-> > > > > don't forget those.
-> > > >
-> > > > Yes. But those tests actually don't use bootstd, do they?
-> > >
-> > > No, they're testing pxelinux, the thing you said we don't have any tests
-> > > for.
-> > >
-> > > > > > Currently we have two accessible to sandbox, one extlinux and one
-> > > > > > EFI*. I decided to add a third, using extlinux.
-> > > > > >
-> > > > > > Again, this is not a test case, but provides an image for the test
-> > > > > > cases in this series.
-> > > > >
-> > > > > Adding mocked up things for use in sandbox is adding test cases.
-> > > >
-> > > > One is a test image for use by tests; the other is a test. Perhaps you
-> > > > are just saying that there is no point in having one without the
-> > > > other? Otherwise, I'm not sure what to do with this feedback.
-> > >
-> > > Maybe I clarified better above now. You're not testing Ubuntu (or Fedora
-> > > or Armbian or ...) you're seeing if various pxelinux files parse
-> > > correctly. Making the tests be clearer about what's being tested is
-> > > what's missing at least in part.
-> >
-> > You want me to remove the word 'Ubuntu' from the test files? This is
-> > what I get when I install u-boot-tools so I am trying to use that,
-> > rather than invent my own thing. This is the same approach I've taken
-> > with Fedora and Armbian and I think it makes the most sense.
->
-> I seem to be unable to explain that if you're constructing tests, I'd
-> like to see it clear that you're constructing test files. You're not
-> testing "Ubuntu" or "Fedora" or "Armbian" here. I'm not nak'ing this
-> patch as at the end of the day, it's adding some test, even if it's also
-> I believe being done in confusing ways.
+HDMI should work flawlessly but there's still some timings issue with
+DW MIPI DSI, perhaps that's something to look into later.
 
-I actually do understand what you are saying. Indeed I am not testing
-the OS booting, just that we can parse the files that they use to
-describe the OS. I think it is better to use real files rather than
-invent things that are not used in the wild.
+PATCH 4 and 7 requires get_display_timing patch[1]. This patch should
+should now be in master.
 
-Perhaps the commit subject is bad. 'Add an extlinux file as used by Ubuntu' ?
+[1]: https://lore.kernel.org/u-boot/20250220170629.228485-1-clamor95@gmail.com
 
-Regards,
-Simon
+Tested-by: Piotr Zalewski <pZ010001011111@proton.me>
+Signed-off-by: Dang Huynh <danct12@riseup.net>
+---
+Changes in v3:
+- Renaming prefix from "rkvop" to "rkvop2" and similar
+- Win planes are platform-configurable
+- Link to v2: https://lore.kernel.org/r/20250223-vop2-pt2-v2-0-71350e482970@riseup.net
+
+Changes in v2:
+- Get display timings from video bridge (requires [1])
+- Disable esmart and post before booting to OS
+- Enable avdd-0v9 and avdd-1v8 when probing HDMI.
+- Link to v1: https://lore.kernel.org/r/20250116-vop2-pt2-v1-0-c9d646b53930@riseup.net
+
+---
+Dang Huynh (10):
+      video: rockchip: dw-mipi-dsi: Depend on CONFIG_VIDEO_BRIDGE
+      video: rockchip: dw-mipi-dsi: Add get_display_timing support
+      video: Add BOE TH101MB31IG002-28A MIPI-DSI panel
+      video: rockchip: Add VOP2 support
+      video: rockchip: vop2: Add video bridge support
+      dts: rockchip: rk356x: Prerelocate VOP in U-Boot proper
+      configs: quartz64: Enable vidconsole
+      video: rockchip: Add HDMI support for RK3568
+      configs: pinetab2-rk3566: Enable video and USB keyboard
+      clk: rockchip: rk3568: Use assigned VPLL clock when possible
+
+Ondrej Jirman (2):
+      video: rockchip: dw_mipi_dsi: Improve pixel clock calculations
+      video: rockchip: dw_mipi_dsi: Proceed when external PHY is not defined
+
+ arch/arm/dts/rk356x-u-boot.dtsi                 |   4 +
+ arch/arm/include/asm/arch-rockchip/vop_rk3568.h | 280 ++++++++++++
+ configs/pinetab2-rk3566_defconfig               |  11 +
+ drivers/clk/rockchip/clk_rk3568.c               |   6 +-
+ drivers/video/Kconfig                           |  10 +
+ drivers/video/Makefile                          |   1 +
+ drivers/video/boe-th101mb31ig002-28a.c          | 236 ++++++++++
+ drivers/video/rockchip/Kconfig                  |   2 +-
+ drivers/video/rockchip/Makefile                 |   4 +-
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c   |  45 +-
+ drivers/video/rockchip/rk3568_hdmi.c            |  71 +++
+ drivers/video/rockchip/rk3568_vop.c             | 268 ++++++++++++
+ drivers/video/rockchip/rk_vop2.c                | 560 ++++++++++++++++++++++++
+ drivers/video/rockchip/rk_vop2.h                |  76 ++++
+ include/configs/quartz64_rk3566.h               |   5 +-
+ 15 files changed, 1556 insertions(+), 23 deletions(-)
+---
+base-commit: 407d68638fe32418d61681407effba2a303bb9ee
+change-id: 20250114-vop2-pt2-755fb1991bb6
+
+Best regards,
+-- 
+Dang Huynh <danct12@riseup.net>
+
