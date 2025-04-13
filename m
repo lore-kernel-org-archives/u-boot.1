@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099A7C3601E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 20:01:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B4AC3601E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 20:01:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C749382B12;
-	Sun, 13 Apr 2025 22:00:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23555828D0;
+	Sun, 13 Apr 2025 22:00:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="N+uoyvGn";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ML0m3/z1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19A8782ADA; Sun, 13 Apr 2025 22:00:22 +0200 (CEST)
+ id 7879882B00; Sun, 13 Apr 2025 22:00:26 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC97B82AF4
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 22:00:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C72B82B1C
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 22:00:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1744574417; bh=Q2fp3ZjyYoyybsrSTsc2ASsi67zi5P6trKn9fiPULW4=;
- b=N+uoyvGnAwhLmiFm63MBrGYL2j93CfK941QSe861HThXkmfTT3lC02VTuFs8E88nKV0s9RqQw
- AOwNKi1i0ZeW0o/0O9xl5w7WPwT9pKRbzSQ/8QW6flIYwEShufPfsrI+3HeSk/55H+ZH9GbWJ2K
- l/uJ8hW2iE/NrJGjD2ZAN+KcXrihMtEqBE48qOvNxlYg0pHaTwQN6mXsYSl6QxBNDZ9drSEepwI
- ffn0+aU8TlJ1WDHYPFrQAD6UeJ3rlV9P4grlE0mRbka7CuM1Fzhr4bDK+vnv/2ywtHWTFx2L/wb
- /x5UHaic+JxoNT1c//ux//qFmxVnkFqZkkL3lC6KjYrA==
-X-Forward-Email-ID: 67fc17cf6900761fb1516304
+ t=1744574422; bh=e8LA1aqoFoKH9xiPQ5dChPZerScPC/nJAirpe5Bpszo=;
+ b=ML0m3/z1e9t9fF7D7+m4lQY6uM/KaisnyftlQ3pdridKcJIMputdaVqRS3yaQupdV5Q40TEWo
+ 33WQXZu735sLTdExAWv0XaepF7wCxGzAZrktsOUN+WaK0DdbyMaXGNJqYH6LigbUD9dfDlh0k4z
+ rOzt90V3ZIyaXo9bl8HW9ViO47b6eH2hDuVWnYCEv4Yrzpr+4jQD8k1yMKoxcF2otCl+sje+YbX
+ Te1CKe8g31xzS5eemyP75IoC5nNA2uUYMGRBPj72dsBNoTPE9Bk3Q6vUpGjWBcNIOm2fUQJUquk
+ IlgC+fu4jKkR6rQVwyLgRh+f1Cy0DVWOftfVkSgJHgUA==
+X-Forward-Email-ID: 67fc17d26900761fb1516319
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.0.2
@@ -47,10 +47,10 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v6 6/7] rockchip: binman: Include a compatible string in each
- configuration
-Date: Sun, 13 Apr 2025 19:59:38 +0000
-Message-ID: <20250413195949.432730-7-jonas@kwiboo.se>
+Subject: [PATCH v6 7/7] rockchip: binman: Support use of crc32 hash for FIT
+ images
+Date: Sun, 13 Apr 2025 19:59:39 +0000
+Message-ID: <20250413195949.432730-8-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250413195949.432730-1-jonas@kwiboo.se>
 References: <20250413195949.432730-1-jonas@kwiboo.se>
@@ -72,42 +72,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <sjg@chromium.org>
+Use of SHA256 checksum validation on ARMv7 SoCs can be very time
+consuming compared to when used on a ARMv8 SoC with Crypto Extensions.
 
-Provide a compatible string in the config nodes that U-Boot can use to
-help decide which configuration to use with SPL_LOAD_FIT_FULL=y and
-FIT_BEST_MATCH=y.
+Add support for use of the much faster CRC32 hash algo when SHA256 is
+not supported in SPL. Also use FIT_HASH_ALGO to simplify the ifdefs when
+no known hash algo has been compiled.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 Changes in v6:
-- No change
+- Drop use of HAS_FIT_HASH
+- Collect r-b tag
 
 Changes in v5:
-- Update commit message
-- Collect r-b tags
+- Update commit message and add comment that CRC32 hash algo should
+  only be used for basic checksum validation.
+- Collect r-b tag
 
 Changes in v4:
-- Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
+- New patch
 ---
- arch/arm/dts/rockchip-u-boot.dtsi | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/rockchip-u-boot.dtsi | 32 +++++++++++++++++++++----------
+ 1 file changed, 22 insertions(+), 10 deletions(-)
 
 diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index e97e9d23834c..f60cc31fb1a6 100644
+index f60cc31fb1a6..cc2feed6464f 100644
 --- a/arch/arm/dts/rockchip-u-boot.dtsi
 +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -145,6 +145,7 @@
- 				fit,firmware = "op-tee", "u-boot";
+@@ -19,6 +19,18 @@
+ #define FIT_UBOOT_COMP		"none"
  #endif
- 				fit,loadables;
-+				fit,compatible;
+ 
++/*
++ * SHA256 should be enabled in SPL when signature validation is involved,
++ * CRC32 should only be used for basic checksum validation of FIT images.
++ */
++#if defined(CONFIG_SPL_FIT_SIGNATURE)
++#if defined(CONFIG_SPL_SHA256)
++#define FIT_HASH_ALGO		"sha256"
++#elif defined(CONFIG_SPL_CRC32)
++#define FIT_HASH_ALGO		"crc32"
++#endif
++#endif
++
+ #if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
+ #define HAS_FIT
+ #endif
+@@ -55,9 +67,9 @@
+ 				u-boot-nodtb {
+ 					compress = FIT_UBOOT_COMP;
+ 				};
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
++#ifdef FIT_HASH_ALGO
+ 				hash {
+-					algo = "sha256";
++					algo = FIT_HASH_ALGO;
+ 				};
+ #endif
  			};
- 		};
- 	};
+@@ -76,9 +88,9 @@
+ 
+ 				atf-bl31 {
+ 				};
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
++#ifdef FIT_HASH_ALGO
+ 				hash {
+-					algo = "sha256";
++					algo = FIT_HASH_ALGO;
+ 				};
+ #endif
+ 			};
+@@ -96,9 +108,9 @@
+ 				tee-os {
+ 					optional;
+ 				};
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
++#ifdef FIT_HASH_ALGO
+ 				hash {
+-					algo = "sha256";
++					algo = FIT_HASH_ALGO;
+ 				};
+ #endif
+ 			};
+@@ -114,9 +126,9 @@
+ 
+ 				tee-os {
+ 				};
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
++#ifdef FIT_HASH_ALGO
+ 				hash {
+-					algo = "sha256";
++					algo = FIT_HASH_ALGO;
+ 				};
+ #endif
+ 			};
+@@ -126,9 +138,9 @@
+ 				description = "fdt-NAME";
+ 				compression = "none";
+ 				type = "flat_dt";
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
++#ifdef FIT_HASH_ALGO
+ 				hash {
+-					algo = "sha256";
++					algo = FIT_HASH_ALGO;
+ 				};
+ #endif
+ 			};
 -- 
 2.49.0
 
