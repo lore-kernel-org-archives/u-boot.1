@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CB0C369AE
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 08:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8351C369AE
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 08:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDA9582A65;
-	Sun, 13 Apr 2025 10:58:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BEFC82A87;
+	Sun, 13 Apr 2025 10:58:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1744534702;
-	bh=JWYvabKTy7xPTkfDIp/lE3JtHmtIYTujumewUcymK0M=;
+	s=phobos-20191101; t=1744534706;
+	bh=xAB8JrKvoTZoZGPacw6+1rdGCxhqWoC3xYxax5THDGI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cc8JNrvzf2n6lwfykGzlYZtY2VQP4w52udL+g15gjhZAa6XWFLJX12bLgfybY7hUm
-	 KYP1L0r28oeXld258lkdL8zm9lBHPRZXDmrRT86QUkqVGa8/X5w/7tlrOeFgBnfv89
-	 E2pgGlpltijDpnyHpLSn+LkQZOeowyHSuHixf388ZuTx0vEUy1v/Ofsmss4ceAJ6KY
-	 Xsa5wokiWoUBCGhThAFvFgFVgdOOdWHAOeE1g2+K17VpjcrSrnnykTlDuq2vIW1spP
-	 qXS4r8IUWwwHlDanylv+aplvQ6K6qCkQGenXiv8mWtqIQYeeqD4y7oyO5K2j+QA+3h
-	 s/GEX9a2lk+BQ==
+	b=Ifwcn0wSQ8s+uGIzJAZMavuASt+mHTPYQSMXZ4UtRtrinMYmZXEj8uD/PiMTt6BGA
+	 ARLjUAThxqv67q5q0Lm4FQhXJ0FNQHjCWHI7Df11fvfPdNCb6PgkuQRjNxZz+Zt5es
+	 OE5v461F4LAR8msgCblKOQ6ksuO9lzawcGKBZgMOa8UCYPxjk6+0xDMPxEJqmZt7Dx
+	 agLzAc/YFdwOVbHKcWrKc9vXZ9zTLMO5EO1hlDvWZr+Ujf+WJw7ndaxOTl7pmS0oy4
+	 8vlRs/ZQYsbmuuGEBDhBhZnShxsSSpEp26wPq4UumKdj8e2+HEpOaM7VU1iN9NddGu
+	 hYiK+3Qwl/zCQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3976C82917; Sun, 13 Apr 2025 10:58:21 +0200 (CEST)
+ id 48C7D82998; Sun, 13 Apr 2025 10:58:22 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FBCA82944
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 10:58:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FD25829F9
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 10:58:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="TQR67o7i"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="FZVraUbz"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 62CE81007B829; 
+ with ESMTPSA id 0C3BB10271405; 
  Sun, 13 Apr 2025 10:58:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1744534698; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1744534699; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=JWYvabKTy7xPTkfDIp/lE3JtHmtIYTujumewUcymK0M=;
- b=TQR67o7i1X/1wceHtCPjHR5Pq/XExXZ6tijonPXStFiLxQ1i4u8LahgVvqh3xdn5Cj809Z
- xH6D+zM1iHggLxogcBDQAMAj8lVvy2EyCR5FdOCtpIlf8AILTz2G2skWQdkmsXP1Vs1qOf
- oB6MjeRpBqc22AGAhcXuDk8spxJB9o5s5se+WeKpr63Uk5za4u2QDyxiCEJdZtnKbYDXIA
- SRePEzcP9EdE1UgVvWThphhCdef2HK/JHPB2Ec6hABWngoXJQWoz1Vf5U0+RYFIFZELErJ
- 4Pxuq94yZflV+GjIFPM4AlvsOQcGA7oYdImf3atiBDpdXnyG7I2nuij25kn1pw==
+ bh=xAB8JrKvoTZoZGPacw6+1rdGCxhqWoC3xYxax5THDGI=;
+ b=FZVraUbzguOg9g0n3vgVh4O05KJYBIHyTfIe6ogY6pZXdL7Qn+aJbKfBlnUZW7GV3j6sI6
+ koLJUc38pWoYH3sl8djqRESPTj5bv2S1FuzpCZ7ioceV3fAxEBOhRESmoWM6W+/3scw+oz
+ a6WO/eSbS1BstLnqGKoFl4PvvHZGgvZP8oLcj4jzpfWK0PrBhtPkPkwbK6MFBBcxtFAVLf
+ 0yAmqQocAZu8nzWWQngowqawyDyy7Tsn+KxJLFAFuywLq5IBpFTqKzzEJCRmMxmRjFluoq
+ MvhQvEPL4h9TpPysMqBvswj6Ai9SWtgkkRZWYB88F3rHWZpMnqPKZvm+G8Xwiw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 6/7] fs: exfat: Implement trivial 'rename' support
-Date: Sun, 13 Apr 2025 10:55:04 +0200
-Message-ID: <20250413085740.5953-6-marex@denx.de>
+Subject: [PATCH 7/7] test_fs: Test 'mv' command on exfat and fs_generic
+Date: Sun, 13 Apr 2025 10:55:05 +0200
+Message-ID: <20250413085740.5953-7-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250413085740.5953-1-marex@denx.de>
 References: <20250413085740.5953-1-marex@denx.de>
@@ -79,13 +79,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement exfat_fs_rename() to rename or move files. This is used
-by the 'mv' generic FS interface command. The rename implementation
-for other filesystems was added recently and was not part of exfat
-porting layer due to merge issue, which made 'mv' command crash,
-fix this by adding the missing implementation.
+Enable tests for the generic FS interface 'mv' command against
+both exfat and fs_generic.
 
-Fixes: b86a651b646c ("fs: exfat: Add U-Boot porting layer")
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -95,50 +91,22 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- fs/exfat/io.c   | 5 +++++
- fs/fs.c         | 1 +
- include/exfat.h | 1 +
- 3 files changed, 7 insertions(+)
+ test/py/tests/test_fs/conftest.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/exfat/io.c b/fs/exfat/io.c
-index 43c05713ed0..c56f5675987 100644
---- a/fs/exfat/io.c
-+++ b/fs/exfat/io.c
-@@ -1013,6 +1013,11 @@ exit:
- 	return err;
- }
+diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/conftest.py
+index c73fb4abbcb..0205048e73a 100644
+--- a/test/py/tests/test_fs/conftest.py
++++ b/test/py/tests/test_fs/conftest.py
+@@ -17,7 +17,7 @@ supported_fs_fat = ['fat12', 'fat16']
+ supported_fs_mkdir = ['fat12', 'fat16', 'fat32', 'exfat', 'fs_generic']
+ supported_fs_unlink = ['fat12', 'fat16', 'fat32', 'exfat', 'fs_generic']
+ supported_fs_symlink = ['ext4']
+-supported_fs_rename = ['fat12', 'fat16', 'fat32']
++supported_fs_rename = ['fat12', 'fat16', 'fat32', 'exfat', 'fs_generic']
  
-+int exfat_fs_rename(const char *old_path, const char *new_path)
-+{
-+	return exfat_rename(&ctxt.ef, old_path, new_path);
-+}
-+
- void exfat_fs_close(void)
- {
- 	exfat_unmount(&ctxt.ef);
-diff --git a/fs/fs.c b/fs/fs.c
-index 0b62217fd59..1f36872fb9a 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -401,6 +401,7 @@ static struct fstype_info fstypes[] = {
- 		.ln = fs_ln_unsupported,
- 		.unlink = exfat_fs_unlink,
- 		.mkdir = exfat_fs_mkdir,
-+		.rename = exfat_fs_rename,
- 	},
- #endif
- 	{
-diff --git a/include/exfat.h b/include/exfat.h
-index 7e43beeb348..75fce5b6566 100644
---- a/include/exfat.h
-+++ b/include/exfat.h
-@@ -20,5 +20,6 @@ int exfat_fs_unlink(const char *filename);
- int exfat_fs_mkdir(const char *dirname);
- int exfat_fs_write(const char *filename, void *buf, loff_t offset,
- 		   loff_t len, loff_t *actwrite);
-+int exfat_fs_rename(const char *old_path, const char *new_path);
- 
- #endif /* _EXFAT_H */
+ #
+ # Filesystem test specific setup
 -- 
 2.47.2
 
