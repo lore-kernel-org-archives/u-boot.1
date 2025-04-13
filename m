@@ -4,89 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE34C369B1
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 14:09:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D263C3601E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 14:33:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A14F82AC1;
-	Sun, 13 Apr 2025 16:09:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 087C78209F;
+	Sun, 13 Apr 2025 16:33:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RpD3DgzY";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="o1z0m5f9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C54882AC4; Sun, 13 Apr 2025 16:09:33 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BF790820E3; Sun, 13 Apr 2025 16:33:48 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E949582849
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 16:09:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 474118004F
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 16:33:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-2c759bf1b2eso1904242fac.1
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 07:09:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744553370; x=1745158170; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hK+uxfsA0dpJg8UQGe/fh/WYXpKHyAJTmJPKnIonHVU=;
- b=RpD3DgzYXqp5pthwG+hyEWGRUrqkOOBGTFeQJAuFjjS/Lp+00frQuYb2BkCvT+HANL
- xTLMQj1ecX9f+8/fiRBNITK0qyLvaJIIKOKAjizqwZJUgR0yPuYlqjHV4k5auXnyJeLW
- URxBsr9w/NLobmcUX2gv6Kp7l3G2Dk8/OtlbI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744553370; x=1745158170;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hK+uxfsA0dpJg8UQGe/fh/WYXpKHyAJTmJPKnIonHVU=;
- b=nsWaydSe1/PBFpldULVU3dvGPHsFe9GoUwncxbMeWq0L0bsZcY7l7uKAwRrJjBfV+W
- v802n0SmHtIyhfKRxLNSCYOQ/S7Skwfa0/l//Nrdd/G70ZJGecdT4WsXlOBtm0QiIDGH
- sQkq3bJJDCZBuu4/GaGWzQKIt7Z1rGxPaHhQIDfTGBBvVbd8QXR87LToU2XM41Co4k2Y
- jMBqTVZxJ48ssb+vQ97h1JEUbitWgC85XIcurq7qRe94RwaVNzg97s2Zzo3o0bx43+BP
- QfDXMYvq/cJzvhpMyErJLA/zjcbgZYptxQh3nhZxI3tM198HLxhbEVeFCM2cCOUVcYJK
- o4XA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWqeI86N8WdM98dGiD40U6JjwENibGwOQ1vGg3hQ+AQK8yEqpwkpx7rC6T75R2DzkovCnMFqa0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyroJ4jEUAs8zh/Dw8XDymacbo6GqeQB98BPTVvStBffqbS6cFu
- Kmj1wKTcjiZwqCaCrsUVtcgXyrhxAh24QWPbmWGXFrZRSmqv0GTswVK4z70h2Fu6f/I5yVFSRiY
- M
-X-Gm-Gg: ASbGncv5UE2houlFZ5OZApgu/A1+zz4mah4UZrGEybuArEXEo5NWYym62y0AKW93q7g
- YMh04BiI7jFr7kYcDyOn4jTATYqKlOjQWZ0tcPTcW8IZwWwxtvXdVtO/Vsp78otRcdbbN4DXDNS
- Pj8RO2dXO1QZI4iXBnYrTuya43B+DkRqGANWv4gFiM2GXWJJdKZLpy2eFnH18/xnsDI9tlWHyXD
- d0q9yjfOj12DyvBv7FxI6JLYU0QTj9EhYztEwCMD9AXc65EdQSrdT3FOzqNn2gGiILtfpZ0CXO8
- ZszK5MHUFaPbI1xqzttDMG/x5vCyfnpDLmr52A4oCdiiNlhvs8tPXXWdOuG89O1bFBcvIUehTQu
- 9
-X-Google-Smtp-Source: AGHT+IEYYyony1hfXLkvv7LjyyAUvx+i8/hCEVGhCCYAa0vJTf1W24s+S03re1od7e5snIxP5XamjQ==
-X-Received: by 2002:a05:6870:cd85:b0:2bd:455e:c22e with SMTP id
- 586e51a60fabf-2d0d5d0afdfmr5453127fac.19.1744553369632; 
- Sun, 13 Apr 2025 07:09:29 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d096406702sm1989557fac.0.2025.04.13.07.09.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Apr 2025 07:09:28 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>, 
- Marek Vasut <marex@denx.de>, Tim Harvey <tharvey@gateworks.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Robert Marko <robert.marko@sartura.hr>, Simon Glass <sjg@chromium.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Adriano Cordova <adrianox@gmail.com>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250413113427.3126132-1-ilias.apalodimas@linaro.org>
-References: <20250413113427.3126132-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] efi_loader: Moved the generated ESL file to objtree
-Message-Id: <174455336756.362516.12829354668573194035.b4-ty@konsulko.com>
-Date: Sun, 13 Apr 2025 08:09:27 -0600
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=b5c5=XA=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1744554825;
+ bh=/rzmdFZHj11mnrecIfzEoyz2y4bxsjFsXpKqNWXXK5o=;
+ b=o1z0m5f9cWX+lc2o44CEyBXvsDBzh/8Hu6IsMBbdcd1AtXEKjk2IZPDKYoHd4bE5Y2ljXqEtZ
+ CP5oQ3bmUoiSY+Ylr/jivgr8AyUp9w3psbTKBIEG5kOUar7GJHkH63dyTwXr2puliEnZ2XB+s9N
+ 60f3S92bj17p7f4/18DRgdzRywQ/+xAv7xHmga+Wx2MZyOCCJv7tmeE1yt+h2qiQ6OgY8yj2x4g
+ tSEwzTaR55KB6f4BxISALx2SORM45HjjuUXpxYSOJt0LXDDdCKl6O3KPQZKfA+R8oR8Y4+hMufD
+ GkeYlSPMwL8tLRJtTVotKwc+qnmq9Q6GmuEyshcIWX6A==
+X-Forward-Email-ID: 67fbcb3b7cfcd77aa7dc31e3
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <a496ff87-1030-44c0-8707-04af70208883@kwiboo.se>
+Date: Sun, 13 Apr 2025 16:33:25 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 08/12] dts: rockchip: rk356x: Prerelocate VOP in U-Boot
+ proper
+To: Dang Huynh <danct12@riseup.net>
+Cc: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Ondrej Jirman <megi@xff.cz>, Dragan Simic <dsimic@manjaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Piotr Zalewski <pZ010001011111@proton.me>
+References: <20250412-vop2-pt2-v3-0-7c796db335e9@riseup.net>
+ <20250412-vop2-pt2-v3-8-7c796db335e9@riseup.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250412-vop2-pt2-v3-8-7c796db335e9@riseup.net>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,20 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 13 Apr 2025 14:34:26 +0300, Ilias Apalodimas wrote:
+Hi,
 
-> Tom reports that generating the ESL file we need for authenticated
-> capsule updates fails to work on azure which expects a RO git tree.
+On 2025-04-12 16:27, Dang Huynh wrote:
+> We need to prerelocate VOP2 memory so the driver can work. This
+> will only support U-Boot proper.
 > 
-> Move it to $(objtree)
+> Signed-off-by: Dang Huynh <danct12@riseup.net>
+> ---
+>  arch/arm/dts/rk356x-u-boot.dtsi | 4 ++++
+>  1 file changed, 4 insertions(+)
 > 
+> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+> index 24a976cf7e21da351cbbb969ba2b4687c344ca6c..1191e2fd567dd18655c88ea1b7a28d160d43c220 100644
+> --- a/arch/arm/dts/rk356x-u-boot.dtsi
+> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
+> @@ -166,6 +166,10 @@
+>  	clock-frequency = <24000000>;
+>  };
+>  
+> +&vop {
+> +	bootph-some-ram;
+> +};
+
+This node should be sorted after &uart2m0_xfer to be in alphabetical
+order, and not put between &uart2 and &uart2m0_xfer.
+
+On a related note, I do not understand why U-Boot must allocated its
+framebuffer in pre-reloc phase, but that may be something to change/fix
+in a different series.
+
+Regards,
+Jonas
+
+> +
+>  &uart2m0_xfer {
+>  	bootph-all;
+>  };
 > 
-
-Applied to u-boot/master, thanks!
-
-[1/1] efi_loader: Moved the generated ESL file to objtree
-      commit: 739ad58dbee874a3ad3bddd116e995212a254e07
--- 
-Tom
-
 
