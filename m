@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E89F1C3601E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 08:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0881DC3601E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 08:58:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DCA282A27;
+	by phobos.denx.de (Postfix) with ESMTP id 9EB5482A46;
 	Sun, 13 Apr 2025 10:58:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1744534702;
-	bh=uwJGlGH24UrGTOm0jbUfOMGhLGcDrKXW3s09Yxf/kAs=;
+	bh=Qe8Xy4LGiBOtMqojVWqfW89Ki/IE56xdJT2HCOlSZx8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=t0gL6nbSATwlxHB+zomBAYKOYGmyCKPIwUlcfWJroZCE//vszD+qccxAKKQpNHU0X
-	 MrC8Rz5iciRueFhw8xINQz6usSg3GZoOGsHESKfBUyjiFxYyiZMwKIbC8/0Na8+Hmn
-	 ZDChgsjKgvWhvKZuembptRmZWjynroLA96c8EkY//vT9qYPmCOM+IQdeVb5vw6gB4L
-	 NKNhuFVMAIR7ZAuifNI/3lq07uLjXEFLtMqlGTwahrpcZkFqaZvaj3sd6JcdwZh2pP
-	 1jdjhBKXVWmDy9ks3ml8tkV9MuAPPguFe4PL3EDJ4EtK2Y+7IqRzLC8/w6oEMLodFM
-	 Qe7ilGTsZ1Itw==
+	b=Y36Na+aQj6RO+GZjfEWv/FYh5igSJu8RxXAdh48AUNmkdE4z+jmrkhWd4CbCuZAO/
+	 oPSvH90vtlnrqMYJ1OApEEzMWqVFvjBQ6aXfrfwDeR6i8vGIXpFiYntv4XcLwCR/88
+	 3jYNhlHM21OPe2r3oROOHJS0Nk6Ko3WaGOckfn2naFMj7vMiMK00Bz05ozb2a2fxBP
+	 2hUv80ErqC2Iy3U/zMB3bJgo1Hu6gzT75dv7qtjHw/tol25BwrR1yXaTablfhXg/JU
+	 qIE6izuZhKfq4bxghr64/Q2BNtIbTrp9IVKA5heZNYKePbd/byOZCzhm5WQkCUZvQD
+	 MtaWumgFgbscw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 670AA8295C; Sun, 13 Apr 2025 10:58:20 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id A150B8294C; Sun, 13 Apr 2025 10:58:20 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F1E78294C
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 10:58:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FF1582917
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 10:58:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Si0KjVQj"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="JOVWgXVH"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2C5D81007B829; 
- Sun, 13 Apr 2025 10:58:16 +0200 (CEST)
+ with ESMTPSA id 9CB8110271405; 
+ Sun, 13 Apr 2025 10:58:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1744534696; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1744534698; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=uwJGlGH24UrGTOm0jbUfOMGhLGcDrKXW3s09Yxf/kAs=;
- b=Si0KjVQjKejwilg+MwHIK0JajEsw+xAr37FYnIW3OKVGvEtu9hlFZ0CdNfdYR2y00xOkum
- PK5RwQ3tmwzFYzT4t1AujijmakQweIn1NbGvudiRm9/8QMcoVl5D78X7tHgOMfrLMHZIBT
- 89rCZKtDfHHPvk+7rfekJMH+NZdC0MhKfg3mi67QoIImSdQ/0yhl4q7KBR3w2TetE2zMtr
- BSMCcRYzYQj6GkoqV10qp1rEmyhryp7yghb1Jtk8Q4om8x+jjxk3Mbnz4vfwZFnj4FzNc3
- UcFJS6f49S9HBvvEB2m1IK15mYFqL0VZ5oFKewem06W9//w9dACBr6wgUkBWLg==
+ bh=Qe8Xy4LGiBOtMqojVWqfW89Ki/IE56xdJT2HCOlSZx8=;
+ b=JOVWgXVH7zRK4+ucdHXqKkZVKXeyhFq+8HGp4R1UOkqNwZaChPFvWAchzhzXnaHFbUmpbk
+ iht/sroDRze5odf6ggAph+MMSv6hZ2u7Gppjc9Ez87BlkRpYkE7xfjHZInyyaHPVfv2cs2
+ /U1R/h4B9jYTCkNgCwLNT+B3AlNT9cH03FC7MA4MUKr/wNKHXVeQKDRbiqmQPrnWbw0fM4
+ QY4WeQ+K5QuYsnOR71keg0NoiF+EpUsi6ado+49HZ1Tv26A7a9IqnYqemvQdBlHTtVzaVO
+ GZQvrbQiIFDPImeiw3mH4vLr6Nz+cekmFZ5T0k+2xp4idC604ejQATkUZgE12g==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/7] fs: exfat: Rework exfat_fs_readdir() to behave like
- exfat_fs_ls()
-Date: Sun, 13 Apr 2025 10:55:01 +0200
-Message-ID: <20250413085740.5953-3-marex@denx.de>
+Subject: [PATCH 5/7] test_fs: Add test -e test
+Date: Sun, 13 Apr 2025 10:55:03 +0200
+Message-ID: <20250413085740.5953-5-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250413085740.5953-1-marex@denx.de>
 References: <20250413085740.5953-1-marex@denx.de>
@@ -80,20 +80,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The exfat_fs_readdir() depends on state created in exfat_fs_opendir(),
-but that state may be disrupted by fs_close() called by the FS layer
-in fs_opendir(), because exfat porting layer unmounts the filesystem
-in ->close() callback.
+Add test for the 'test -e' command to check for existence of files.
+This exercises struct fstype_info .exists callback.
 
-To avoid this disruption, avoid creating state in exfat_fs_opendir(),
-cache only the directory name to list there, and rework exfat_fs_readdir()
-to work in a similar way to exfat_fs_ls(). That is, make exfat_fs_readdir()
-open the directory, look up specific entry, extract its properties to be
-reported to FS layer, and close the directory. This is slow, but avoids
-the disruption. The slowness does not affect regular 'ls' command, which
-uses exfat_fs_ls() fast path.
-
-Fixes: b86a651b646c ("fs: exfat: Add U-Boot porting layer")
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -103,188 +92,33 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- fs/exfat/io.c | 111 ++++++++++++++++++++++++++++++--------------------
- 1 file changed, 67 insertions(+), 44 deletions(-)
+ test/py/tests/test_fs/test_basic.py | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/fs/exfat/io.c b/fs/exfat/io.c
-index 12498a4a6ec..004ba5d3e45 100644
---- a/fs/exfat/io.c
-+++ b/fs/exfat/io.c
-@@ -597,15 +597,13 @@ ssize_t exfat_generic_pwrite(struct exfat* ef, struct exfat_node* node,
- }
+diff --git a/test/py/tests/test_fs/test_basic.py b/test/py/tests/test_fs/test_basic.py
+index 64a3b50f52a..88b163ce305 100644
+--- a/test/py/tests/test_fs/test_basic.py
++++ b/test/py/tests/test_fs/test_basic.py
+@@ -35,6 +35,19 @@ class TestFsBasic(object):
+                 '%sls host 0:0 invalid_d' % fs_cmd_prefix)
+             assert('' == output)
  
- #ifdef __UBOOT__
-+#define PATH_MAX FS_DIRENT_NAME_LEN
++        with ubman.log.section('Test Case 1c - test -e'):
++            # Test Case 1 - test -e
++            output = ubman.run_command_list([
++                'host bind 0 %s' % fs_img,
++                'test -e host 0:0 1MB.file && echo PASS'])
++            assert('PASS' in ''.join(output))
 +
- struct exfat_dir_stream {
-+	char dirname[PATH_MAX];
- 	struct fs_dir_stream fs_dirs;
- 	struct fs_dirent dirent;
--
--	struct exfat_node* node;
--	struct exfat_iterator it;
--	/* State tracker flags for emulated . and .. dirents */
--	bool dot;
--	bool dotdot;
-+	int offset;
- };
- 
- int exfat_fs_probe(struct blk_desc *fs_dev_desc,
-@@ -626,8 +624,6 @@ error:
- 	return ret;
- }
- 
--#define PATH_MAX FS_DIRENT_NAME_LEN
--
- /* Adapted from uclibc 1.0.35 */
- static char *exfat_realpath(const char *path, char got_path[])
- {
-@@ -721,31 +717,31 @@ int exfat_lookup_realpath(struct exfat* ef, struct exfat_node** node,
- int exfat_fs_opendir(const char *filename, struct fs_dir_stream **dirsp)
- {
- 	struct exfat_dir_stream *dirs;
-+	struct exfat_node *dnode;
- 	int err;
- 
--	dirs = calloc(1, sizeof(*dirs));
--	if (!dirs)
--		return -ENOMEM;
--
--	err = exfat_lookup_realpath(&ctxt.ef, &dirs->node, filename);
-+	err = exfat_lookup_realpath(&ctxt.ef, &dnode, filename);
- 	if (err)
--		goto err_out;
-+		return err;
- 
--	if (!(dirs->node->attrib & EXFAT_ATTRIB_DIR)) {
-+	if (!(dnode->attrib & EXFAT_ATTRIB_DIR))
- 		err = -ENOTDIR;
--		goto err_out;
--	}
- 
--	err = exfat_opendir(&ctxt.ef, dirs->node, &dirs->it);
-+	exfat_put_node(&ctxt.ef, dnode);
++        with ubman.log.section('Test Case 1d - test -e (invalid file)'):
++            # In addition, test with a nonexistent file to see if we crash.
++            output = ubman.run_command(
++                'test -e host 0:0 2MB.file || echo PASS')
++            assert('PASS' in ''.join(output))
 +
- 	if (err)
--		goto err_out;
-+		return err;
-+
-+	dirs = calloc(1, sizeof(*dirs));
-+	if (!dirs)
-+		return -ENOMEM;
-+
-+	strcpy(dirs->dirname, filename);
-+	dirs->offset = -1;
- 
- 	*dirsp = &dirs->fs_dirs;
- 
- 	return 0;
--err_out:
--	free(dirs);
--	return err;
- }
- 
- int exfat_fs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **dentp)
-@@ -753,50 +749,77 @@ int exfat_fs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **dentp)
- 	struct exfat_dir_stream *dirs =
- 		container_of(fs_dirs, struct exfat_dir_stream, fs_dirs);
- 	struct fs_dirent *dent = &dirs->dirent;
--	struct exfat_node* node;
-+	struct exfat_node *dnode, *node;
-+	struct exfat_iterator it;
-+	int offset = 0;
-+	int err;
-+
-+	err = exfat_lookup_realpath(&ctxt.ef, &dnode, dirs->dirname);
-+	if (err)
-+		return err;
-+
-+	if (!(dnode->attrib & EXFAT_ATTRIB_DIR)) {
-+		err = -ENOTDIR;
-+		goto err_out;
-+	}
- 
- 	/* Emulate current directory ./ */
--	if (!dirs->dot) {
--		dirs->dot = true;
-+	if (dirs->offset == -1) {
-+		dirs->offset++;
- 		snprintf(dent->name, FS_DIRENT_NAME_LEN, ".");
- 		dent->type = FS_DT_DIR;
- 		*dentp = dent;
--		return 0;
-+		goto err_out;
- 	}
- 
- 	/* Emulate parent directory ../ */
--	if (!dirs->dotdot) {
--		dirs->dotdot = true;
-+	if (dirs->offset == 0) {
-+		dirs->offset++;
- 		snprintf(dent->name, FS_DIRENT_NAME_LEN, "..");
- 		dent->type = FS_DT_DIR;
- 		*dentp = dent;
--		return 0;
-+		goto err_out;
- 	}
- 
-+	err = exfat_opendir(&ctxt.ef, dnode, &it);
-+	if (err)
-+		goto err_out;
-+
-+	*dentp = NULL;
-+
- 	/* Read actual directory content */
--	node = exfat_readdir(&dirs->it);
--	if (!node) {	/* No more content, reset . and .. emulation */
--		dirs->dot = false;
--		dirs->dotdot = false;
--		return 1;
--	}
-+	while ((node = exfat_readdir(&it))) {
-+		if (dirs->offset != ++offset) {
-+			exfat_put_node(&ctxt.ef, node);
-+			continue;
-+		}
- 
--	exfat_get_name(node, dent->name);
--	if (node->attrib & EXFAT_ATTRIB_DIR) {
--		dent->type = FS_DT_DIR;
--	} else {
--		dent->type = FS_DT_REG;
--		dent->size = node->size;
-+		exfat_get_name(node, dent->name);
-+		if (node->attrib & EXFAT_ATTRIB_DIR) {
-+			dent->type = FS_DT_DIR;
-+		} else {
-+			dent->type = FS_DT_REG;
-+			dent->size = node->size;
-+		}
-+		exfat_put_node(&ctxt.ef, node);
-+		*dentp = dent;
-+		dirs->offset++;
-+		break;
- 	}
- 
--	*dentp = dent;
-+	exfat_closedir(&ctxt.ef, &it);
- 
--	return 0;
-+err_out:
-+	exfat_put_node(&ctxt.ef, dnode);
-+	return err;
- }
- 
- void exfat_fs_closedir(struct fs_dir_stream *fs_dirs)
- {
--	free(fs_dirs);
-+	struct exfat_dir_stream *dirs =
-+		container_of(fs_dirs, struct exfat_dir_stream, fs_dirs);
-+
-+	free(dirs);
- }
- 
- int exfat_fs_ls(const char *dirname)
+     def test_fs2(self, ubman, fs_obj_basic):
+         """
+         Test Case 2 - size command for a small file
 -- 
 2.47.2
 
