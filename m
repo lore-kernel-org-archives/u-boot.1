@@ -4,70 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AAD0C369AB
-	for <u-boot@archiver.kernel.org>; Sat, 12 Apr 2025 20:54:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B025DC369AE
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 08:58:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BD01829E2;
-	Sat, 12 Apr 2025 22:54:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BEDF829E7;
+	Sun, 13 Apr 2025 10:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1744491242;
-	bh=QsPdZAAxDkf29Zec7IJ8q/PXOXWwNnoGDFfHXYS3FSc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kMjp7ZdAQxPJXB50PftjZnX/sCAmOXF+xT8ZWnMzUM8oc+5tnz5r5nNcvvWjzmaAQ
-	 WjQel6NWQEV/mIKFs84qBn4wqRfwZK7xvGqU6kTtUUlZfeGevlk6mDcCP/yP1LJM0L
-	 3GnbbEy99BE2z/Sry2fzRPPmXzltEEpDYe7LZekmunzk0Ovc+sx1jmMz9AI65WSnp2
-	 MB0APNPVvKDFq1tBg/X45vMuwG98I3e01JKSXqsMbqse3u2qhh3C23Zp5m8L3d35/f
-	 C9oIC2h20KWklR60mdS0wyqmZaxr1r10NVJkji+iTlDg+xIZZOTBQTtGdI/O/+K0e4
-	 TJMw1hBVg6AtA==
+	s=phobos-20191101; t=1744534699;
+	bh=rWYCR6BLVNc1Gi8KgH7A6jqDAhtNPMECDEG38KPBEKQ=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=HsFAceraS/cN8CxLtT9VnK3gjeAFpPojEeS9yG4wrIUrySs5/dINBAihEXIh9ns89
+	 PEF7cbfWCYNekKtIXUW9ZMkvce2jP7MIbUaJnnzdaeFMeVw5K23Y3+orXNr+ZRUlBl
+	 QRlbg7ugZk5l9h37LAvIEyJOyn1VwrwwT6MCisH1kO0+ePur4FCQmpBqBHLFE8PXBZ
+	 yVU/qmGZoXpQ/6OY3/frSYP3Id36HMiBOGstXjkzKvcS4uz0QNuWBfvEQ/oA7EYtOI
+	 0h1cpyBwSwxpRgKO7C+R1Kvsc7yoFcLI+49WjgNY0+nQ5O74VQtpCT5vBbvI/KugVk
+	 sQU6c/NHfp8pg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C01C282A33; Sat, 12 Apr 2025 22:54:00 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 546BF829A1; Sun, 13 Apr 2025 10:58:18 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D81B6826AD
- for <u-boot@lists.denx.de>; Sat, 12 Apr 2025 22:53:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4717082917
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 10:58:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="S163y2C1"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="INrhgbII"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 004FF10275AD0; 
- Sat, 12 Apr 2025 22:53:54 +0200 (CEST)
+ with ESMTPSA id 512A110271405; 
+ Sun, 13 Apr 2025 10:58:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1744491237; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=QsPdZAAxDkf29Zec7IJ8q/PXOXWwNnoGDFfHXYS3FSc=;
- b=S163y2C1XEv/yNlVjAUuzDCstvxXe8ad5LWVSGoPzm1okj0wx3KeA+TxgsMCJUzEDgWtFM
- 3mxaZ4sKkGR+Qd56GNc+hU2d/nTyfcjqZvcqyj2bjcEXkYLLKvHaKaTF5MdxP1TwLkvqPM
- RPVFTHGQzsFGWRqbulamf6QlbI35/PIPmX5pJYTziPD6wLw4+B1b4Mz8ALxN4oYZw2/fT5
- Du1u18BRpcw0S/EaSQllERUgsh+OFnJG7PdvziWliYOSYouOVLr4IR+cSRV2AsF7w8q6jl
- 2OEEG0d8SStV3lwjFAGvDVW3U7qZsqdIoX0nr+jqwCgPFXcgtQ/gpinD/ZUPUQ==
-Message-ID: <4ffec9c5-1faa-4156-825d-c72478eb032d@denx.de>
-Date: Sat, 12 Apr 2025 22:53:53 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: dwc_eth_qos: add support of stm32mp2 platform
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Christophe Roullier <christophe.roullier@foss.st.com>,
- Erik Schumacher <erik.schumacher@iris-sensing.com>,
- Greg Malysa <malysagreg@gmail.com>, Heesub Shin <heesub@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Philip Oberfichtner <pro@denx.de>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-References: <20250411092721.331518-1-patrice.chotard@foss.st.com>
-Content-Language: en-US
+ t=1744534694; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=rWYCR6BLVNc1Gi8KgH7A6jqDAhtNPMECDEG38KPBEKQ=;
+ b=INrhgbIIRJM9uf0yFSre4nb1mYmyXgxY9lVrFmOcP9Hdhto7PHiBJZkLL6Th8dyUqSdBEp
+ lqGOOgneMryweSlRSWkfNue7kSWHTrtEgLJDt0dEgdiRP8qQL7vGJaDL632uDpKtwC6PDF
+ rDV9UNu3OI9cMRBH+Ntr8yG740XCkZvsONUcS1KJJVpHVdyg6F5MaE4urd4dFCI6eI7SsD
+ 35BdAU0nrn6vZGOwnWMIAhqA05FdiZvc0JlgdN+jnpSv+9Mtd6ayPaPkjA1iIYtHr7tUOC
+ Co76AsyAnHY5wmDfjKVtJO2hmP2Md8cZJhm+yBUa6TGjldl9wf52Nzf/3jzsgg==
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250411092721.331518-1-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/7] fs: exfat: Flush node before put in read() callback
+Date: Sun, 13 Apr 2025 10:54:59 +0200
+Message-ID: <20250413085740.5953-1-marex@denx.de>
+X-Mailer: git-send-email 2.47.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,11 +76,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/11/25 11:27 AM, Patrice Chotard wrote:
-> From: Christophe Roullier <christophe.roullier@foss.st.com>
-> 
-> Add compatible "st,stm32mp25-dwmac" to manage STM32MP2 boards
-> 
-> Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
+Make sure the node is never dirty before being released, flush
+the node first using exfat_flush_node() and only then release
+the node using exfat_put_node(). This now matches the behavior
+of exfat_fs_write() too.
+
+Fixes: b86a651b646c ("fs: exfat: Add U-Boot porting layer")
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ fs/exfat/io.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/fs/exfat/io.c b/fs/exfat/io.c
+index 81e82829c72..12498a4a6ec 100644
+--- a/fs/exfat/io.c
++++ b/fs/exfat/io.c
+@@ -898,9 +898,7 @@ int exfat_fs_read(const char *filename, void *buf, loff_t offset, loff_t len,
+ 
+ 	*actread = sz;
+ 
+-	exfat_put_node(&ctxt.ef, node);
+-
+-	return exfat_flush_node(&ctxt.ef, node);
++	err = exfat_flush_node(&ctxt.ef, node);
+ exit:
+ 	exfat_put_node(&ctxt.ef, node);
+ 	return err;
+-- 
+2.47.2
+
