@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8BBEC369AE
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 09:39:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C158C3601E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 09:52:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E30A828AB;
-	Sun, 13 Apr 2025 11:39:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97F5A828AB;
+	Sun, 13 Apr 2025 11:52:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ElQk6CUy";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CT4UAn0a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC43F829B8; Sun, 13 Apr 2025 11:39:55 +0200 (CEST)
+ id 234F782A7F; Sun, 13 Apr 2025 11:52:16 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26FAE820EA
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 11:39:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E29F582131
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 11:52:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,14 +28,14 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744537191;
- bh=eCnX26WmJlfvsqid0ubhSInDz0/fUn0oVoSqhTyQ0XY=;
- b=ElQk6CUyik9AauwynLUALmFSVpa/6FmMaVZLQ/pM3mXEFZzdUtJahuN2oLoaVEH8iyqWECZbK
- xPiYwjYJsZgkZgZ3Anlq9AezrWdZm6zBa4xDazqrmBc5bOO/PJWPU/mVVmSxZwaujDRb0RUJNKB
- ybDpnkCNh8at4zU8DkeynxqqbXnYluQqWtjDx/yQZh+q9Pe2tkq7dmSnMlTKeuzRfasaMrjmn8E
- MOpYbiRmxjxSVlhgfV0B4DL0fz3BvDJewbXpny9J6x8Drxbp/bK4fXqdK55Lof1mMeXDYYwsUCl
- a4HeMzJbN6GU+37iF0+sNebzpJrIbJXHw5fw3qpQHA0A==
-X-Forward-Email-ID: 67fb86643367ea6d19bb6028
+ s=fe-e1b5cab7be; t=1744537931;
+ bh=EWOXWd8Jl4xpr7QcwuZ3k1FTgHZycpsoJX1chVpKlJY=;
+ b=CT4UAn0ajx2TSPrnzU4LFcyS/dhLlHBFunVQaCAEov/cmNDDR00WEIvG58vuMGjO1Tf7VvuBB
+ q0XOC/aYyVr8TZdegw/5/5D0Ol32eij9C1rtc5vxh+CIhgr3UdKla2mEFjQgjxEeS5K0u5J+S/e
+ 6PWAm5JT2DlUAxzmn/aoDZYU9U/W4YArH1GS5MeytLhs3R7E27URDF0tVvw2VGBesFnV3jnN/vR
+ ssc/EJqUybDvZPgzyPs7qnV9wnejnbZTNZx+XNzh9I4LMWuDY7ongjZEGC1BTHk9UAANV/VQj27
+ 4LxssTu0awWkSEQgEyOiScEj/EvhEg1Ir6vGNSYlpKxQ==
+X-Forward-Email-ID: 67fb89453367ea6d19bb6202
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.0.2
@@ -43,11 +43,11 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <12b364ef-7139-4fd9-89c7-502b42df0347@kwiboo.se>
-Date: Sun, 13 Apr 2025 11:39:42 +0200
+Message-ID: <c103bd5c-f67d-4708-a24b-ec84fe462efb@kwiboo.se>
+Date: Sun, 13 Apr 2025 11:51:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] rockchip: Add DFU to SPL for RK3588
+Subject: Re: [PATCH 4/7] rockchip: Add DFU to SPL for RK3568
 To: FUKAUMI Naoki <naoki@radxa.com>
 Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
  kever.yang@rock-chips.com, trini@konsulko.com, quentin.schulz@cherry.de,
@@ -58,10 +58,10 @@ Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
  marex@denx.de, mkorpershoek@baylibre.com, xypron.glpk@gmx.de,
  jerome.forissier@linaro.org
 References: <20250211053340.92919-1-naoki@radxa.com>
- <20250211053340.92919-4-naoki@radxa.com>
+ <20250211053340.92919-5-naoki@radxa.com>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250211053340.92919-4-naoki@radxa.com>
+In-Reply-To: <20250211053340.92919-5-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -83,7 +83,7 @@ X-Virus-Status: Clean
 Hi,
 
 On 2025-02-11 06:33, FUKAUMI Naoki wrote:
-> Boot the RK3588 from the USB OTG port using rkflashtool[1] or
+> Boot the RK3568 from the USB OTG port using rkflashtool[1] or
 > rkusbboot[2] and dfu-util.
 > 
 > 1a. Download the TPL and SPL using rkflashtool
@@ -106,65 +106,63 @@ On 2025-02-11 06:33, FUKAUMI Naoki wrote:
 > 
 > Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 > ---
->  arch/arm/dts/rk3588s-u-boot.dtsi       | 5 +++++
->  arch/arm/mach-rockchip/rk3588/rk3588.c | 1 +
->  configs/generic-rk3588_defconfig       | 9 +++++++++
->  include/configs/rk3588_common.h        | 7 +++++++
+>  arch/arm/dts/rk356x-u-boot.dtsi        | 5 +++++
+>  arch/arm/mach-rockchip/rk3568/rk3568.c | 1 +
+>  configs/generic-rk3568_defconfig       | 9 +++++++++
+>  include/configs/rk3568_common.h        | 7 +++++++
 >  4 files changed, 22 insertions(+)
 > 
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index 8880d162b11..1e961768341 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -161,6 +161,11 @@
+> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+> index 24a976cf7e2..8d2485586bd 100644
+> --- a/arch/arm/dts/rk356x-u-boot.dtsi
+> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
+> @@ -170,6 +170,11 @@
 >  	bootph-all;
 >  };
 >  
 > +&usb_host0_xhci {
 > +	bootph-pre-ram;
-
-Please wrap bootph-pre-ram in IS_ENABLED(CONFIG_SPL_DFU) or similar, we
-do not need or want to include the usb node in SPL unless SPL_DFU have
-been enabled for the build.
-
-
 > +	bootph-some-ram;
 
-I do not think USB is needed in U-Boot proper pre-reloc phase, please
-drop bootph-some-ram.
+Same as in the RK3588 review, and same goes for remaining SoCs.
+
+Please drop the bootph-some-ram and wrap the bootph-pre-ram in
+IF_ENABLED(CONFIG_SPL_DFU).
 
 > +};
 > +
 >  &xin24m {
 >  	bootph-all;
 >  };
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index c1dce3ee370..662b092d811 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -53,6 +53,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->  	[BROM_BOOTSOURCE_FSPI_M1] = "/spi@fe2b0000/flash@0",
->  	[BROM_BOOTSOURCE_FSPI_M2] = "/spi@fe2b0000/flash@0",
->  	[BROM_BOOTSOURCE_SD] = "/mmc@fe2c0000",
-> +	[BROM_BOOTSOURCE_USB] = "/usb@fc000000",
+> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> index c2b96902d2d..b087c08b3d0 100644
+> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
+> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> @@ -88,6 +88,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@fe310000",
+>  	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe300000/flash@0",
+>  	[BROM_BOOTSOURCE_SD] = "/mmc@fe2b0000",
+> +	[BROM_BOOTSOURCE_USB] = "/usb@fcc00000",
 >  };
 >  
->  static struct mm_region rk3588_mem_map[] = {
-> diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-> index 51e31dce3a9..0dd64783bc0 100644
-> --- a/configs/generic-rk3588_defconfig
-> +++ b/configs/generic-rk3588_defconfig
-> @@ -21,7 +21,9 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
+>  struct mm_region *mem_map = rk3568_mem_map;
+> diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
+> index f79f0e84400..32c6fdc2846 100644
+> --- a/configs/generic-rk3568_defconfig
+> +++ b/configs/generic-rk3568_defconfig
+> @@ -25,9 +25,11 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-generic.dtb"
 >  CONFIG_SPL_MAX_SIZE=0x40000
 >  CONFIG_SPL_PAD_TO=0x7f8000
 >  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 > +CONFIG_SPL_ENV_SUPPORT=y
+>  CONFIG_SPL_SPI_LOAD=y
+>  CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
 >  CONFIG_SPL_ATF=y
 > +CONFIG_CMD_DFU=y
 >  CONFIG_CMD_GPIO=y
 >  CONFIG_CMD_GPT=y
 >  CONFIG_CMD_MISC=y
-> @@ -41,6 +43,9 @@ CONFIG_SPL_REGMAP=y
+> @@ -47,6 +49,9 @@ CONFIG_SPL_REGMAP=y
 >  CONFIG_SPL_SYSCON=y
 >  # CONFIG_ADC is not set
 >  CONFIG_SPL_CLK=y
@@ -174,7 +172,7 @@ drop bootph-some-ram.
 >  # CONFIG_USB_FUNCTION_FASTBOOT is not set
 >  CONFIG_ROCKCHIP_GPIO=y
 >  CONFIG_MISC=y
-> @@ -60,9 +65,13 @@ CONFIG_SYS_NS16550_MEM32=y
+> @@ -74,9 +79,13 @@ CONFIG_ROCKCHIP_SFC=y
 >  CONFIG_SYSRESET=y
 >  CONFIG_SYSRESET_PSCI=y
 >  CONFIG_USB=y
@@ -182,17 +180,25 @@ drop bootph-some-ram.
 >  CONFIG_USB_DWC3=y
 >  CONFIG_USB_DWC3_GENERIC=y
 > +CONFIG_SPL_USB_DWC3_GENERIC=y
+
+Back when Eugen Hristev sent a "rockchip: rk3588: add support for DFU in
+SPL" series [1] there was a few dwc3 patches required for stable
+operation. Are these no longer required or was only for rk3588 dwc3
+affected?
+
+[1] https://patchwork.ozlabs.org/cover/1815387/
+
 >  CONFIG_USB_GADGET=y
 > +CONFIG_SPL_USB_GADGET=y
 >  CONFIG_USB_GADGET_DOWNLOAD=y
 >  CONFIG_USB_FUNCTION_ROCKUSB=y
 > +CONFIG_SPL_DFU=y
 >  CONFIG_ERRNO_STR=y
-> diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
-> index e6654c275ac..0fad6b37589 100644
-> --- a/include/configs/rk3588_common.h
-> +++ b/include/configs/rk3588_common.h
-> @@ -26,11 +26,18 @@
+> diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
+> index 09b7b71c6af..7b6aeca2a15 100644
+> --- a/include/configs/rk3568_common.h
+> +++ b/include/configs/rk3568_common.h
+> @@ -27,11 +27,18 @@
 >  	"ramdisk_addr_r=0x12180000\0"	\
 >  	"kernel_comp_size=0x8000000\0"
 >  
@@ -202,9 +208,10 @@ drop bootph-some-ram.
 > +	__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS) " "	\
 > +	__stringify(CONFIG_SYS_DFU_MAX_FILE_SIZE) "\0"
 
-Is this not needed using DFU in U-Boot proper? And if we use this in
-U-Boot proper the load addresses may need to change to match other load
-addresses used for booting?
+Same as in the RK3588 review, and same goes for remaining SoCs.
+
+Do we not need to set similar for U-Boot proper if we want to use DFU
+from U-Boot cli?
 
 Regards,
 Jonas
@@ -218,5 +225,5 @@ Jonas
 >  	"boot_targets=" BOOT_TARGETS "\0"
 > +#endif
 >  
->  #endif /* __CONFIG_RK3588_COMMON_H */
+>  #endif /* __CONFIG_RK3568_COMMON_H */
 
