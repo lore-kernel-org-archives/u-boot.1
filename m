@@ -4,58 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF7EC3601E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 20:20:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F23C3601E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 21:13:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F2A282115;
-	Sun, 13 Apr 2025 22:20:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id BD978828F8;
+	Sun, 13 Apr 2025 23:13:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="VjgEx4qS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RU8OX85b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E05F18214B; Sun, 13 Apr 2025 22:20:14 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F2FE582952; Sun, 13 Apr 2025 23:13:53 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F04BA82114
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 22:20:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5539982845
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 23:13:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=b5c5=XA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
- References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744575610;
- bh=/jxRg8WCLcQTelaxWbXQ7tjhNSdz81zMJj63n/0GhFw=;
- b=VjgEx4qS0sl8QZTfgi5LLXX7/hRS3uH5yCvBLJgF+z2aAo5atbEYwa0g998HRhERC54DamcUn
- AcDBANxLsdHX5amsCM76Y1D1cY9pNYcBh5UFMyLywrEa/Exz6nPb8jf/wiQVQbrku+plLDJPF1i
- 8ZxEbAolFuNkzXcKPbG1Xhhct8flERHrNYtsyo0LeSGXe2ajf+dafeh8tjZ/xdVC3iKUUbCGAeN
- U/Ru8TJxPhGiarUP64V0fjFjxxiFvhxvNCvt7+rNeTYR/LxY768S4kBXu2zQP3xFJ7XkKqpjiLV
- JWV6CwdLJfwjPqMpnPHe9+6AgWg7qoa/PVf1EO2/IQfQ==
-X-Forward-Email-ID: 67fc1c766900761fb1516851
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <d86f579f-11a1-4164-bef1-db2dd74dbbe7@kwiboo.se>
-Date: Sun, 13 Apr 2025 22:20:03 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ac6e8cf9132so686592866b.2
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 14:13:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1744578831; x=1745183631; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GEMGaIpztNqbRKA2SYlZhIfSWkETo0wxKdha1zn4jp4=;
+ b=RU8OX85bzWxCVu3hLaEi5fj0ORsP0Qkn5Xz6qOtuzbVPa6RezBhKa2whPBBhqqa/KF
+ JaEDbz3MzQtmCfpoQNeN7JnDEDHEGHrr0ijStIMh9H+QldhA6Z5VyychBijlz0KOBbFQ
+ +qrYvPvKut8I/VPVSwplv7PiaP/NXuBVMvRbs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744578831; x=1745183631;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GEMGaIpztNqbRKA2SYlZhIfSWkETo0wxKdha1zn4jp4=;
+ b=xAr3X8HIoANH+qn3JvqK37Uj0Qh2+7IG01QmGVBIcdA4WFqWsJXhmyelrBz8bCRBWG
+ woEoVFQV9hNi+LjaUIvj9ofOgiGaphoIzIQXQ0giMsLFjNMnOXB32ygkA5v5oJlahmb2
+ F+BwHy5HV/3qtiTpH5aFoeUosCvWo21O15wcyzFjWMmOa+fZXPEmMMhRAevht4XnFseJ
+ AVMlWLsCa6fEptMMljQX4Z8bA+FfkFQgN9hEle87HoeGkCcLsdHZontrQnADNYgsnuAw
+ l+NmFAG2yI3SzFAhuVXHQy1M839ekgzv6rFIZcbTIvgpN/fifj0ZG/HzTmhqSJVSjZc2
+ glYQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcIjByqPbZt0Qzhb84lEgY+05fDBGJp9CpITgh93OzIgdXpMYhw3WNgG2FduQ0DwBo/urJZgk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyK2kFJgGV943NxsTQhlIX0K70pstAelqNtBJHYVFXYcuSIuXWr
+ hjiK/EgUqx1csEGi2U/E2ApbEVuHuEAChDwsYrpZm//IxVUBgMgRyEw+AuJrmy3oS1DjqcuuJdr
+ aYdrOTEpOgew0+ttUTHCEnbQDsWneaOXEBwZt
+X-Gm-Gg: ASbGncvCMG1VIaUZ5+xT5Rs305CaF+BcoBPL0PEynIpYIjquNtjtQCNNN1bybdbviPX
+ vQW/JRpPEwyw0QU5hNpcOVtl+v5UPyMdwZX0mFhe2OFxollJWtUoYYq4K+CmJiYho9kA4sm3bo3
+ buWQryHcQ/TBo4Di0mcZV/G+g=
+X-Google-Smtp-Source: AGHT+IF54zaGrMMu2Fgg7NM2H+FjWqvmUN1U3bcUubTaUQ7axpbnR4WSgfkMvXWgIXm4o1YQW/UYOzRyEou6jz4wEt0=
+X-Received: by 2002:a17:906:71d6:b0:aca:e6b3:6fa5 with SMTP id
+ a640c23a62f3a-acae6b377ccmr451720366b.14.1744578830479; Sun, 13 Apr 2025
+ 14:13:50 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] board: rockchip: add Xunlong Orange Pi 5 Max
-To: Ilya Katsnelson <me@0upti.me>
-References: <20250412-add-opi5-max-v2-1-585197588511@0upti.me>
-Content-Language: en-US
-Cc: u-boot@lists.denx.de
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250412-add-opi5-max-v2-1-585197588511@0upti.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250328154401.3563921-1-sjg@chromium.org>
+ <20250328161845.GB93000@bill-the-cat>
+ <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
+ <20250329000211.GH93000@bill-the-cat>
+ <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
+ <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
+ <CAFLszTjo8HEzKbZAbO=neF57e69vGbWYsDVV_dD=kO6j_VH39w@mail.gmail.com>
+ <CAEfUkUJNUhoyRY6S9-eYV5i9RT_GgYLRs+HRWocch8jYfVj2Lw@mail.gmail.com>
+ <CAFLszTj-pQSK_aKNoLUcLFBk+wAjgC_5=-5YRPGt_7DDFRL3Dw@mail.gmail.com>
+ <CAEfUkULcgK9jY902Ccf_mNNCHf5m1BU=ecLK7cuviv7TdABukQ@mail.gmail.com>
+In-Reply-To: <CAEfUkULcgK9jY902Ccf_mNNCHf5m1BU=ecLK7cuviv7TdABukQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 13 Apr 2025 15:13:38 -0600
+X-Gm-Features: ATxdqUHGemsF-z6pffYoixpTDr2b-muBZRRQIDPH0b7lbc8U63Uu4gdi5Jem_tE
+Message-ID: <CAFLszTi7CmWL7pxAp08gy5euD8vKs1qN5DOzi-J=9c2dZ7hFMw@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,204 +112,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilya,
+Hi Raymond,
 
-On 2025-04-12 07:59, Ilya Katsnelson wrote:
-> The 5 Max is another board in the Orange Pi 5 family.
-> 
-> It's overall similar to the 5 Plus, but in a smaller form factor,
-> which leads to some I/O being reshuffled, but nothing relevant
-> to u-boot.
-> 
-> So, just reuse the config for the 5 Plus and adjust the DT names.
-> 
-> Signed-off-by: Ilya Katsnelson <me@0upti.me>
-> ---
-> The 5 Max is another board in the Orange Pi 5 family.
-> 
-> It's overall similar to the 5 Plus, but in a smaller form factor,
-> which leads to some I/O being reshuffled, but nothing relevant
-> to u-boot.
-> 
-> So, just reuse the config for the 5 Plus and adjust the DT names.
-> 
-> Signed-off-by: K900 <me@0upti.me>
-> ---
-> Changes in v2:
-> - fixed pinctrl definition for the flash
-> - added docs and MAINTAINERS entries
-> - fixed signoff line to use my real name
-> - Link to v1: https://lore.kernel.org/r/20250405-add-opi5-max-v1-1-e02686fc03b6@0upti.me
-> ---
->  arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi | 20 ++++++
->  board/rockchip/evb_rk3588/MAINTAINERS          |  7 ++
->  configs/orangepi-5-max-rk3588_defconfig        | 89 ++++++++++++++++++++++++++
->  doc/board/rockchip/rockchip.rst                |  1 +
->  4 files changed, 117 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..afd33dd3248a92a721c2f5a6789f395a5b577ae5
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-> @@ -0,0 +1,20 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588-u-boot.dtsi"
-> +
-> +&fspim2_pins {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> +
-> +&sfc {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
-> +};
-> diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-> index a858ab163f362f4fc0dd578830fe84b20d9ca429..3011c0a852e7e022dec4e07f7c16843862cd5527 100644
-> --- a/board/rockchip/evb_rk3588/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3588/MAINTAINERS
-> @@ -42,3 +42,10 @@ S:	Maintained
->  F:	configs/orangepi-5-plus-rk3588_defconfig
->  F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
->  F:	arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
-> +
-> +ORANGEPI-5-MAX-RK3588
-> +M:	Ilya Katsnelson <me@0upti.me>
-> +S:	Maintained
-> +F:	configs/orangepi-5-max-rk3588_defconfig
-> +F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
+On Mon, 7 Apr 2025 at 08:08, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Sun, 6 Apr 2025 at 18:06, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Raymond,
+> >
+> > On Sat, 5 Apr 2025 at 07:09, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Fri, 4 Apr 2025 at 13:40, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Raymond,
+> > > >
+> > > > On Sat, 5 Apr 2025 at 03:49, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > >
+> > > > > Hi Tom and Simon,
+> > > > >
+> > > > > On Fri, 28 Mar 2025 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > >
+> > > > > > Hi Tom and Simon,
+> > > > > >
+> > > > > > On Fri, 28 Mar 2025 at 20:02, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Mar 28, 2025 at 11:38:14PM +0000, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
+> > > > > > > > >
+> > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
+> > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
+> > > > > > > > > > so that it is simpler to understand and manage.
+> > > > > > > > > >
+> > > > > > > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
+> > > > > > > > > >
+> > > > > > > > > > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
+> > > > > > > > > > CI at some point. In the meantime, the standard passage series[1] could
+> > > > > > > > > > be resurrected to give some coverage.
+> > > > > > > > > >
+> > > > > > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
+> > > > > > > > >
+> > > > > > > > > Based on how it's documented to be run in
+> > > > > > > > > doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
+> > > > > > > > > that platforms using the handoff spec still work?
+> > > > > > > >
+> > > > > > > > I believe so, yes. I don't have that board to test it though. Raymond
+> > > > > > > > may be able to test this series on QEMU?
+> > > > > > >
+> > > > > > > I was pointing you at the docs so that you would have access to testing
+> > > > > > > it. That's part of the docs, running the emulator.
+> > > > > > >
+> > > > > >
+> > > > > > I can help to test the firmware handoff on qemu.
+> > > > > > I have all the necessary changes and unit tests for the OP-TEE repo
+> > > > > > qemu v8 build to test this.
+> > > > > > I will try to find some time early next week to review and test this
+> > > > > > series before turning back to you.
+> > > > > >
+> > > > >
+> > > > > Just a follow-up on the testing with TF-A and OP-TEE.
+> > > > > Unfortunately, the patch series breaks the transfer list handoff to
+> > > > > U-Boot completely and just end up with below error when U-Boot boots:
+> > > > > ```
+> > > > > No valid device tree binary found at 0000000000000000
+> > > > > initcall failed at call 0000000060097bcc (err=-2)
+> > > > > ### ERROR ### Please RESET the board ###
+> > > > > ```
+> > > > >
+> > > > > U-Boot test version:
+> > > > > 'next' branch + this series + my patch [1] to point fdt_addr to gd->fdt_blob.
+> > > > >
+> > > > > [1]: https://lore.kernel.org/u-boot/20250331224011.2734284-2-raymond.mao@linaro.org/
+> > > >
+> > > > I suppose the FDT address in the register is not being read correctly.
+> > > >
+> > > > Do you have a test case for this, e.g. in QEMU? Even if it is just
+> > > > binary blobs for now, not suitable for CI, I'd like to get it in my
+> > > > lab.
+> > > >
+> > > > I did create a test back when I did standard passage, but that series
+> > > > seems to have not been applied. I'll see if I can resurrect it.
+> > > >
+> > >
+> > > I am using the OP-TEE repo [1] qemu_v8 build to test. You will also
+> > > need my patch [2] for enabling transfer_ist in all components.
+> > >
+> > > [1] https://github.com/OP-TEE
+> > > [2] https://github.com/OP-TEE/build/pull/821
+> > >
+> >
+> > Tom's email seems easier to follow. I got as far as building:
+> >
+> > build/fvp/release/fip.bin
+> >
+> > But I'm not sure how to run that in QEMU. The docs mention some sort
+> > of FVP thing and running FVP_Base_RevC-2xAEMvA -C which I don't seem
+> > to have.
+> >
+>
+> If you want to test with QEMU v8, just simply:
+> $ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml
+> $ repo sync
+> $ cd build
+> Apply my patch https://github.com/OP-TEE/build/pull/821
+> In kconfigs/u-boot_tl.conf, remove 'CONFIG_BLOBLIST_SIZE=0' and add
+> 'OF_BLOBLIST=y'
+> $ make toolchains
+> $ make run
 
-This line can be dropped, as there is no such file and would have
-matched a different board.
+Thanks for the steps. It seemed to complete OK. I also found this:
 
-With that fixes, this is:
+https://optee.readthedocs.io/en/latest/building/devices/qemu.html#qemu-v8
 
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+But I'm not sure how to actually run it, or even what was actually
+built. Do you have the QEMU cmdline I should use to make it start,
+please?
 
 Regards,
-Jonas
-
-> +F:	arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-> diff --git a/configs/orangepi-5-max-rk3588_defconfig b/configs/orangepi-5-max-rk3588_defconfig
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..a655dfe2d64168b2d6a3b400abd4c03d9d4bc402
-> --- /dev/null
-> +++ b/configs/orangepi-5-max-rk3588_defconfig
-> @@ -0,0 +1,89 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-max"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_EVB_RK3588=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_SF_DEFAULT_BUS=5
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-max.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_DWC_AHCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_XMC=y
-> +CONFIG_PHYLIB=y
-> +CONFIG_RTL8169=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 1407080f1f4fd226b80e34689a34c88f3c37150a..00d9587e9880937125f7ace229740f10f2c959c4 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -149,6 +149,7 @@ List of mainline supported Rockchip boards:
->       - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
->       - Turing Machines RK1 (turing-rk1-rk3588)
->       - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
-> +     - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
->       - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
->       - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
->       - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
-> 
-> ---
-> base-commit: e458e103d4f5fb7aaf13e744c65916ab3ba4a18d
-> change-id: 20250405-add-opi5-max-569b1e7a53b1
-> 
-> Best regards,
-
+SImon
