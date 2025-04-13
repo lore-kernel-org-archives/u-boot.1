@@ -4,43 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FCD5C3601E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 13:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24495C3601E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 13:38:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD222829E4;
-	Sun, 13 Apr 2025 15:38:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C58F82A9E;
+	Sun, 13 Apr 2025 15:38:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="ZeIWaudk";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="e7A0qzrF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 732B982A65; Sun, 13 Apr 2025 13:01:31 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id E8AFF82A65; Sun, 13 Apr 2025 13:01:44 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CE6D8210E
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 13:01:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F9C38210E
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 13:01:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sbabic@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5362DFFA36; Sun, 13 Apr 2025 13:01:28 +0200 (CEST)
+ with ESMTPSA id 5DB54FFA36; Sun, 13 Apr 2025 13:01:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1744542088; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=d+QIycbQFe5Z2a6WGQreAftw3AFlNrncWY+jBoHj4S0=;
- b=ZeIWaudk5Vo8+aL38kyqFD2pLi0SNBNiVgdb+6Y6uw4sIYQGlHUtLiQ+8y15JuR9RgyOqZ
- 26YZ7ZKGUcn8enhAUa9Mku5VFAxedv9iGHBiPerkysTKq9x2zhvomnj5BUUj2o1r6rP+cd
- swujpZpGwQ81cZ+pTojYIyH+5t33HAxFZjyrn9vsUgvPaC/jIrQ8xDbAHI1SVfhwT7B7rZ
- TQRWVnOs4Rn5X42CNn4iiD4CgsZ0BxQHn7jUsIhbwnvUvBtpUFymLIExtReCsWKypESAvz
- p8Ro9lvtfj6Gi7FuRb5ZFLmRgCBeo42IzdqpqlixKQvrXYaAGl4IluCbZEx85g==
+ s=dkim; t=1744542101; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=udQ2VVn7JL3WUdWgZtZtk5XjIxj0s8GcIHl6J+yoMnA=;
+ b=e7A0qzrFVmTsHqNg5ih+DaVcC5xLfp/t09fU/O68YTtWR/3DLCAYCV2AJZCqPV1TbasmGZ
+ wlc19sZBqjjdecBbs5Hx1+rE7gpMqgkVK1BJihWLdQ0hf7XpLru/t6JYl2bPfPc/qMu0FD
+ AatX+R45ZT+m0thqBci1E9qfMvskb9pyvlhPgjzaBih+ZPCvdCgA8LiCyK+vgYJ9GibewF
+ 0Zo9nzAgg1rLZIvGDNnQVLJhE2dGg7gv0IbXcAVVbFD61Bi0tVh5pCr+wibrK4KNN7cEP1
+ AJMG7CwhtDXat9IntxS/OiDx4lWEwDi4XWtZWjFmQIE883jAC5n+r1NwmFr5NA==
 From: Stefano Babic <sbabic@nabladev.com>
 To: u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>
-Subject: [PATCH] MAINTAINERS: Update email of Stefano Babic
-Date: Sun, 13 Apr 2025 13:01:18 +0200
-Message-ID: <20250413110118.1027383-1-sbabic@nabladev.com>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+	Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] imx: mx51evk: drop Stefano Babic from MAINTAINERS
+Date: Sun, 13 Apr 2025 13:01:38 +0200
+Message-ID: <20250413110138.1027438-1-sbabic@nabladev.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -62,55 +64,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace my old e-mail with the current one to get still involved in the
-project.
+I haven't anymore the MX51EVK board.
 
 Signed-off-by: Stefano Babic <sbabic@nabladev.com>
+CC: Fabio Estevam <festevam@gmail.com>
 ---
- .mailmap       | 2 +-
- MAINTAINERS    | 2 +-
- doc/git-mailrc | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ board/freescale/mx51evk/MAINTAINERS | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/.mailmap b/.mailmap
-index 85086602cd5..493bc84a94a 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -123,7 +123,7 @@ Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com> <sivadur@xilinx.
- Srinivas Goud <srinivas.goud@amd.com> <srinivas.goud@xilinx.com>
- Srinivas Neeli <srinivas.neeli@amd.com> <srinivas.neeli@xilinx.com>
- Stefan Roese <sr@denx.de> <stroese>
--Stefano Babic <sbabic@denx.de>
-+Stefano Babic <sbabic@nabladev.com>
- Stefano Stabellini <stefano.stabellini@amd.com> <stefano.stabellini@xilinx.com>
- Sumit Garg <sumit.garg@kernel.org> <sumit.garg@linaro.org>
- Tom Rini <trini@konsulko.com> <trini@ti.com>
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 042d3f6160a..a9c0d727748 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -294,7 +294,7 @@ F:	test/cmd/armffa.c
- F:	test/dm/ffa.c
- 
- ARM FREESCALE IMX
--M:	Stefano Babic <sbabic@denx.de>
-+M:	Stefano Babic <sbabic@nabladev.com>
+diff --git a/board/freescale/mx51evk/MAINTAINERS b/board/freescale/mx51evk/MAINTAINERS
+index 1ca55f7d14e..025a5f8b582 100644
+--- a/board/freescale/mx51evk/MAINTAINERS
++++ b/board/freescale/mx51evk/MAINTAINERS
+@@ -1,6 +1,5 @@
+ MX51EVK BOARD
  M:	Fabio Estevam <festevam@gmail.com>
- R:	NXP i.MX U-Boot Team <uboot-imx@nxp.com>
+-M:	Stefano Babic <sbabic@denx.de>
  S:	Maintained
-diff --git a/doc/git-mailrc b/doc/git-mailrc
-index 1177e42df2f..6214daeaecf 100644
---- a/doc/git-mailrc
-+++ b/doc/git-mailrc
-@@ -42,7 +42,7 @@ alias mbrugger       Matthias Brugger <mbrugger@suse.com>
- alias monstr         Michal Simek <monstr@monstr.eu>
- alias prom           Minkyu Kang <mk7.kang@samsung.com>
- alias ptomsich       Philipp Tomsich <philipp.tomsich@theobroma-systems.com>
--alias sbabic         Stefano Babic <sbabic@denx.de>
-+alias sbabic         Stefano Babic <sbabic@nabladev.com>
- alias simongoldschmidt Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
- alias sjg            Simon Glass <sjg@chromium.org>
- alias smcnutt        Scott McNutt <smcnutt@psyent.com>
+ F:	board/freescale/mx51evk/
+ F:	include/configs/mx51evk.h
 -- 
 2.43.0
 
