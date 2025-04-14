@@ -4,71 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 748B8C369B8
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 13:51:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1755C369A2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 13:55:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD0548212B;
-	Mon, 14 Apr 2025 15:51:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7326F82102;
+	Mon, 14 Apr 2025 15:55:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="s/srBhbv";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="T9vs2fq/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABD4A82132; Mon, 14 Apr 2025 15:51:44 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 712748212F
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 15:51:42 +0200 (CEST)
+ id 2469B82114; Mon, 14 Apr 2025 15:55:17 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 04B698006D
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 15:55:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EDpbSU2070878
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 14 Apr 2025 08:51:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744638697;
- bh=k7mtDtKYFT2O35xKT9RrOSaMaKZIqvElq9DLkyAvR9k=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=s/srBhbvu9FDDiBqn0lTn8ia/HKg2JXjBnShxZWWxWkG8tz03ePq7/UO4Vw9EU7n7
- LBzv7PbJwqVKd/ddiMVGI/TcGYzJBmJo3j9c2S2QmcOE/YQTgewdjH7FTJyNiVMeWm
- iNm+AfdSJz3ZMkdG2g5VYOw0wcgY5w1Aso1Z3bmk=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EDpbk2035735
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 14 Apr 2025 08:51:37 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
- Apr 2025 08:51:37 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 14 Apr 2025 08:51:36 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EDparY086021;
- Mon, 14 Apr 2025 08:51:36 -0500
-Message-ID: <e0f5dff0-3dab-444d-95cb-b06de90d84d5@ti.com>
-Date: Mon, 14 Apr 2025 08:51:36 -0500
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8D83C3F1E4
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 13:55:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1744638913;
+ bh=pGHIY/oPRieAZ2I5eNeNGj1yZEwoMoOu2wcREUob9uc=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=T9vs2fq/6mdlm2k2PkHvsycYwmA8/H5kI/1Mh4hlvXLAz/FMAJ3iCS6U86SAz4WwN
+ SMPV76jTtI01UP4CpnvvpI9DNGrvgGyI1UAlntvmIUUVTIRKm+a9/ZN0qYyqossa/b
+ EnPUVLbnkbkHf+4h7JVgGtGraJlRU7bmfzGhDRBpjQi8i1Y8Nc3Dt+8ARCmuqaR5iN
+ v1qwUxWZO8wdhq0uH5OfRvjOhYcpZSLjZFYnTNzrFkaJyx38RHwMA8fmrFIzqTXThW
+ Ws4uXrDYy8u3BqMgFipLoTeLsVI7EBnDj2tzpWc49FYffp9QEiJkb7I4l+spk6FsX3
+ wf68YpQVqFp+w==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-43d51bd9b45so26840875e9.1
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 06:55:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744638912; x=1745243712;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pGHIY/oPRieAZ2I5eNeNGj1yZEwoMoOu2wcREUob9uc=;
+ b=CPj9Wu8B4h3Ahfumi0+xNiyMrgD5Zd65VMPgCWoR6zDLcU+++aqPmbdUS1AM1/SVZJ
+ w4Q30nk89WEpyYiMNVQhSG7pUD8A5mhsgkqSMuTNHSfw+BzRrRVYiKruXV63+Xgl1U/W
+ cBNY59+1dJPOesYMT84IuHu1uaEh9uNTmik/gsql/wVjZogAqMM0mmc8EuRMZuDb5LKg
+ 4G9CEmWvrmLHrfk9jHlED82BJ6lIR8XAk31YTFkYr5vIKBQr5ALNYRIw5QJ0mQxDkI+d
+ nFftP25U2vNPx8JTSkPodNM6lMUxJn1BUEsDXNgYrQ4j2XwxmZGgb8yiw9k4VL8yc1MS
+ 4mIQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/ogE8rsnRBDca4sxBbY9I6odze4ty7UqVtW11sT5kiNFyveyALYxTGHmRZrFW2h6BG0p2jb8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1sEIGA4qBwMGIlHl/gXi7mGfDVjLkj4BlZxJH5S/WhduN8Pxa
+ 19ByvljrSU9D1wZK4j2M/CKYd+QkcJPbrwvz84c7HOMmt8SwQXiJ1/wbV+Fl5J56qH4H7dq2Yhv
+ rmAjNUXd1DE/ieq1D7xUWbzJviRMsHLuN73EXfj/9phaOWI/vk9mQEtAiuhZVQRGiJeg=
+X-Gm-Gg: ASbGncvIPZox3l7kNKLrpewGXHbBmkh3OKL6aUklqomMvcxZRlL7Hrw6TWQk0kbwT1A
+ w/NT0HDIhKsKE2G4VFf3PqV3OUDrUE7nCnn54hz//B6jPEPyOcOB/AbcbWseh5CLAZjZgzwUBKX
+ QkByCH5gFeEijiJC4dRBqDxLW1/ULiJOQipZIhcH3kKUu8LDDO+QFAh791iYZedPokh7+OS4CuQ
+ pwi8MCoHJWDBXmMAUfPLHv15LzJ/e2OPMC+G+NIqdvKsq+IZ4Ee6uTjT/c5oRM+U4cWeRTgGn6l
+ TlS6XocH2TzZ0196s6ZB2WbC60Pq6bKbUncDdhr2IMR5IRbLbUu1XgoorS1aEg3q0IIilAslCj3
+ MWPmrtvdicbShhg==
+X-Received: by 2002:a05:600c:698c:b0:43d:49eb:963f with SMTP id
+ 5b1f17b1804b1-43f3a9a70aemr108053295e9.24.1744638911995; 
+ Mon, 14 Apr 2025 06:55:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE5xLkl1tQKWZ69LGhWkYndLn0BkUUPCgWSAykm0h6MD368zvwe/Rezv3P4La2eL8ZdEFb1ew==
+X-Received: by 2002:a05:600c:698c:b0:43d:49eb:963f with SMTP id
+ 5b1f17b1804b1-43f3a9a70aemr108052925e9.24.1744638911579; 
+ Mon, 14 Apr 2025 06:55:11 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39eae963f62sm10913352f8f.5.2025.04.14.06.55.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Apr 2025 06:55:11 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH] net: make initr_net() invocation command line agnostic
+Date: Mon, 14 Apr 2025 15:55:06 +0200
+Message-ID: <20250414135506.87892-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 8/9] configs: am67a_beagley_ai_a53: Enable additional
- features
-To: Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Neha
- Malcom Francis <n-francis@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Jonathan
- Humphreys <j-humphreys@ti.com>, <u-boot@lists.denx.de>
-References: <20250411225717.3117370-1-nm@ti.com>
- <20250411225717.3117370-9-nm@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250411225717.3117370-9-nm@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,78 +115,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/11/25 5:57 PM, Nishanth Menon wrote:
-> Enable basic efi capsule features, switch over to stdboot, enable
-> GPIO, LED and PMIC used on this platform. And enable UHS mode support
-> for SD cards in U-Boot.
-> 
-> Capsule support is still pending.
-> 
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> ---
->   configs/am67a_beagley_ai_a53_defconfig | 12 +++++++++++-
->   1 file changed, 11 insertions(+), 1 deletion(-)
-> 
-> diff --git a/configs/am67a_beagley_ai_a53_defconfig b/configs/am67a_beagley_ai_a53_defconfig
-> index cbf19a03b136..657920025ad3 100644
-> --- a/configs/am67a_beagley_ai_a53_defconfig
-> +++ b/configs/am67a_beagley_ai_a53_defconfig
-> @@ -32,7 +32,7 @@ CONFIG_AUTOBOOT_KEYED=y
->   CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
->   CONFIG_AUTOBOOT_DELAY_STR="d"
->   CONFIG_AUTOBOOT_STOP_STR=" "
-> -CONFIG_BOOTCOMMAND="run findfdt; run envboot; run distro_bootcmd"
-> +CONFIG_BOOTCOMMAND="run set_led_state_start_load; run envboot; bootflow scan -lb;run set_led_state_fail_load"
+initr_net() initalizes the network devices by calling eth_initalize().
+There is no good reason to disable this if no command line interface is
+present.
 
-nit: should be space after all the last ";" char
+Let initr_net() depend on CONFIG_NET || CONFIG_NET_LWIP.
 
-Acked-by: Andrew Davis <afd@ti.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ common/board_r.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
->   CONFIG_BOARD_LATE_INIT=y
->   CONFIG_SPL_MAX_SIZE=0x58000
->   CONFIG_SPL_PAD_TO=0x0
-> @@ -49,7 +49,9 @@ CONFIG_SPL_RAM_DEVICE=y
->   CONFIG_SPL_THERMAL=y
->   CONFIG_SPL_YMODEM_SUPPORT=y
->   CONFIG_CMD_CLK=y
-> +CONFIG_CMD_GPIO_READ=y
->   CONFIG_CMD_USB_MASS_STORAGE=y
-> +CONFIG_CMD_EFIDEBUG=y
->   CONFIG_OF_CONTROL=y
->   CONFIG_SPL_OF_CONTROL=y
->   CONFIG_OF_UPSTREAM=y
-> @@ -81,6 +83,10 @@ CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
->   CONFIG_DA8XX_GPIO=y
->   CONFIG_DM_I2C=y
->   CONFIG_SYS_I2C_OMAP24XX=y
-> +CONFIG_LED=y
-> +CONFIG_SPL_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_SPL_LED_GPIO=y
->   CONFIG_DM_MAILBOX=y
->   CONFIG_K3_SEC_PROXY=y
->   CONFIG_I2C_EEPROM=y
-> @@ -88,6 +94,7 @@ CONFIG_SPL_I2C_EEPROM=y
->   CONFIG_FS_LOADER=y
->   CONFIG_MMC_IO_VOLTAGE=y
->   CONFIG_SPL_MMC_IO_VOLTAGE=y
-> +CONFIG_MMC_UHS_SUPPORT=y
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_ADMA=y
->   CONFIG_SPL_MMC_SDHCI_ADMA=y
-> @@ -99,12 +106,15 @@ CONFIG_SPL_PINCTRL=y
->   CONFIG_PINCTRL_SINGLE=y
->   CONFIG_POWER_DOMAIN=y
->   CONFIG_TI_SCI_POWER_DOMAIN=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_TPS65219=y
->   CONFIG_DM_REGULATOR=y
->   CONFIG_SPL_DM_REGULATOR=y
->   CONFIG_DM_REGULATOR_FIXED=y
->   CONFIG_SPL_DM_REGULATOR_FIXED=y
->   CONFIG_DM_REGULATOR_GPIO=y
->   CONFIG_SPL_DM_REGULATOR_GPIO=y
-> +CONFIG_DM_REGULATOR_TPS65219=y
->   CONFIG_K3_SYSTEM_CONTROLLER=y
->   CONFIG_RESET_TI_SCI=y
->   CONFIG_DM_SERIAL=y
+diff --git a/common/board_r.c b/common/board_r.c
+index 62228a723e1..0b1dbd4196d 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -482,7 +482,7 @@ static int initr_boot_led_on(void)
+ 	return 0;
+ }
+ 
+-#if defined(CONFIG_CMD_NET)
++#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+ static int initr_net(void)
+ {
+ 	puts("Net:   ");
+@@ -747,7 +747,7 @@ static init_fnc_t init_sequence_r[] = {
+ #ifdef CONFIG_PCI_ENDPOINT
+ 	pci_ep_init,
+ #endif
+-#if defined(CONFIG_CMD_NET)
++#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+ 	INIT_FUNC_WATCHDOG_RESET
+ 	initr_net,
+ #endif
+-- 
+2.48.1
+
