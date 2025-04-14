@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9E92C369B5
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:21:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6A01C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81D3482836;
-	Mon, 14 Apr 2025 22:21:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79D4282898;
+	Mon, 14 Apr 2025 22:21:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="zpwQkElp";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="f6FLDHb/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EA2482153; Mon, 14 Apr 2025 22:21:11 +0200 (CEST)
+ id 3BEDC82153; Mon, 14 Apr 2025 22:21:22 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01A5582898
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:21:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08A35828B3
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:21:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -30,18 +30,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID;
- bh=phF8sVYlef+TynOvpC7ubMTdh8eyiMppTMU5S0P/0kI=; b=zpwQkElp1EPz1vbigd6zvaEDw8
- +RCuQZbn3DerzLTmhzCD25c0X6au6eQ+7DJovL0h0cou9o54rOM6yVUK4lHQND8hHGzsEVZqxV1Bs
- iwPwFlboLuvHCbyti0kIMnPlH+Zb8+DfpstMTabJ7Hr3VrBhVvIQnpJ3JhXMYpjp+MkiChVogpDKu
- DMWd2inFKT9dn+D1HpOZxHrWRuoSWsUvRUtYUEEe4dIiuMsm8NYyq5VnQqBYMgp0nRrVK7FvnIUjS
- p/sdG2WB/P3x8vGK7SP4EeSnX8ext/SJKBPYyJGDJs9Rr3m0U3/aV6liOxg8Iu3oOqza3Y9fqhfel
- 11S/7KQA==;
+ bh=m6EUgDmo7axoxBJJx6WlPBsjCE2y8J3rY9g/gJzKxcs=; b=f6FLDHb/2wFb4YTQ7XNZwLdbpY
+ MJWQPG7gxBJLwVnnUJodQZgYRzumX9YpOrHnMfTtHSa8JdGgJ+2SpI7LoZWbmii9BXcaBChmX0wnw
+ r1hIPaebhLYgPXidKqjh8urflTsc7/4byZEffL6fLPC0dRwU0xeRujhmgBFxqtiO6y1BbVCajixBU
+ 5nqktryXYEXLfQ4CVsIZI4twSIc6eqYcZvqXKZ61UrstyaBgcIp1W3nNZ2Zj7PAlKdOqRgSy4Kdtw
+ Y3WbyHlEgBYDHaIgX0QlejkxgDBet7YGUh9j000CLMx8LJKWMa6mLu+EJ83pBwJi07E03dgewgOqr
+ LURTP7bw==;
 Received: from i53875b95.versanet.de ([83.135.91.149]
  helo=localhost.localdomain)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1u4Pzy-0001rf-Pd; Mon, 14 Apr 2025 22:01:42 +0200
+ id 1u4Q01-0001rf-6M; Mon, 14 Apr 2025 22:01:45 +0200
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
@@ -50,9 +50,9 @@ Cc: heiko@sntech.de, lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
  jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
  jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
  u-boot@lists.denx.de, sebastian.reichel@collabora.com
-Subject: [PATCH v2 12/16] net: dwc_eth_qos_rockchip: Add support for RK3576
-Date: Mon, 14 Apr 2025 22:01:07 +0200
-Message-ID: <20250414200111.1357867-13-heiko@sntech.de>
+Subject: [PATCH v2 16/16] rockchip: rk3576: Add support for ROC-RK3576-PC board
+Date: Mon, 14 Apr 2025 22:01:11 +0200
+Message-ID: <20250414200111.1357867-17-heiko@sntech.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250414200111.1357867-1-heiko@sntech.de>
 References: <20250414200111.1357867-1-heiko@sntech.de>
@@ -74,209 +74,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add rk_gmac_ops and other special handling that is needed for GMAC to
-work on RK3576.
+The ROC-RK3576-PC is a SBC made by Firefly, designed around the RK3576
+SoC. This adds the needed board infrastructure and config for it.
 
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 ---
- drivers/net/dwc_eth_qos.c          |   4 +
- drivers/net/dwc_eth_qos_rockchip.c | 154 ++++++++++++++++++++++++++++-
- 2 files changed, 157 insertions(+), 1 deletion(-)
+ arch/arm/dts/rk3576-roc-pc-u-boot.dtsi  | 11 ++++++
+ arch/arm/mach-rockchip/rk3576/Kconfig   |  8 +++++
+ board/firefly/roc-pc-rk3576/Kconfig     | 12 +++++++
+ board/firefly/roc-pc-rk3576/MAINTAINERS |  7 ++++
+ configs/roc-pc-rk3576_defconfig         | 45 +++++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst         |  3 ++
+ include/configs/roc-pc-rk3576.h         | 15 +++++++++
+ 7 files changed, 101 insertions(+)
+ create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+ create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
+ create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
+ create mode 100644 configs/roc-pc-rk3576_defconfig
+ create mode 100644 include/configs/roc-pc-rk3576.h
 
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index d4561784a6e..b1bc422f791 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -1619,6 +1619,10 @@ static const struct udevice_id eqos_ids[] = {
- 		.compatible = "rockchip,rk3568-gmac",
- 		.data = (ulong)&eqos_rockchip_config
- 	},
-+	{
-+		.compatible = "rockchip,rk3576-gmac",
-+		.data = (ulong)&eqos_rockchip_config
-+	},
- 	{
- 		.compatible = "rockchip,rk3588-gmac",
- 		.data = (ulong)&eqos_rockchip_config
-diff --git a/drivers/net/dwc_eth_qos_rockchip.c b/drivers/net/dwc_eth_qos_rockchip.c
-index 3a9c46a01ec..d646d3ebac8 100644
---- a/drivers/net/dwc_eth_qos_rockchip.c
-+++ b/drivers/net/dwc_eth_qos_rockchip.c
-@@ -260,6 +260,145 @@ static int rk3568_set_gmac_speed(struct udevice *dev)
- 	return 0;
- }
+diff --git a/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+new file mode 100644
+index 00000000000..97240345ed4
+--- /dev/null
++++ b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Joshua Riek <jjriek@verizon.net>
++ *
++ */
++
++#include "rk3576-u-boot.dtsi"
++
++&sdhci {
++	cap-mmc-highspeed;
++};
+diff --git a/arch/arm/mach-rockchip/rk3576/Kconfig b/arch/arm/mach-rockchip/rk3576/Kconfig
+index a94dc6706f0..83d41f7a100 100644
+--- a/arch/arm/mach-rockchip/rk3576/Kconfig
++++ b/arch/arm/mach-rockchip/rk3576/Kconfig
+@@ -1,5 +1,11 @@
+ if ROCKCHIP_RK3576
  
-+/* VCCIO0_1_3_IOC */
-+#define RK3576_VCCIO0_1_3_IOC_CON2		0x6408
-+#define RK3576_VCCIO0_1_3_IOC_CON3		0x640c
-+#define RK3576_VCCIO0_1_3_IOC_CON4		0x6410
-+#define RK3576_VCCIO0_1_3_IOC_CON5		0x6414
++config TARGET_ROC_PC_RK3576
++	bool "Firefly ROC-RK3576-PC"
++	help
++	  ROC-RK3576-PC is a single board computer from Firefly
++	  using the Rockchip RK3576.
 +
-+#define RK3576_GMAC_RXCLK_DLY_ENABLE		GRF_BIT(15)
-+#define RK3576_GMAC_RXCLK_DLY_DISABLE		GRF_CLR_BIT(15)
-+#define RK3576_GMAC_TXCLK_DLY_ENABLE		GRF_BIT(7)
-+#define RK3576_GMAC_TXCLK_DLY_DISABLE		GRF_CLR_BIT(7)
-+
-+#define RK3576_GMAC_CLK_RX_DL_CFG(val)		HIWORD_UPDATE(val, 0x7F, 8)
-+#define RK3576_GMAC_CLK_TX_DL_CFG(val)		HIWORD_UPDATE(val, 0x7F, 0)
-+
-+/* SDGMAC_GRF */
-+#define RK3576_GRF_GMAC_CON0			0x0020
-+#define RK3576_GRF_GMAC_CON1			0x0024
-+
-+#define RK3576_GMAC_RMII_MODE			GRF_BIT(3)
-+#define RK3576_GMAC_RGMII_MODE			GRF_CLR_BIT(3)
-+
-+#define RK3576_GMAC_CLK_SELECT_IO		GRF_BIT(7)
-+#define RK3576_GMAC_CLK_SELECT_CRU		GRF_CLR_BIT(7)
-+
-+#define RK3576_GMAC_CLK_RMII_DIV2		GRF_BIT(5)
-+#define RK3576_GMAC_CLK_RMII_DIV20		GRF_CLR_BIT(5)
-+
-+#define RK3576_GMAC_CLK_RGMII_DIV1		\
-+			(GRF_CLR_BIT(6) | GRF_CLR_BIT(5))
-+#define RK3576_GMAC_CLK_RGMII_DIV5		\
-+			(GRF_BIT(6) | GRF_BIT(5))
-+#define RK3576_GMAC_CLK_RGMII_DIV50		\
-+			(GRF_BIT(6) | GRF_CLR_BIT(5))
-+
-+#define RK3576_GMAC_CLK_RMII_GATE		GRF_BIT(4)
-+#define RK3576_GMAC_CLK_RMII_NOGATE		GRF_CLR_BIT(4)
-+
-+static int rk3576_set_to_rgmii(struct udevice *dev,
-+			       int tx_delay, int rx_delay)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct rockchip_platform_data *data = pdata->priv_pdata;
-+	u32 offset_con;
-+
-+	offset_con = data->id == 1 ? RK3576_GRF_GMAC_CON1 :
-+				     RK3576_GRF_GMAC_CON0;
-+
-+	regmap_write(data->grf, offset_con, RK3576_GMAC_RGMII_MODE);
-+
-+	offset_con = data->id == 1 ? RK3576_VCCIO0_1_3_IOC_CON4 :
-+				     RK3576_VCCIO0_1_3_IOC_CON2;
-+
-+	/* m0 && m1 delay enabled */
-+	regmap_write(data->php_grf, offset_con,
-+		     DELAY_ENABLE(RK3576, tx_delay, rx_delay));
-+	regmap_write(data->php_grf, offset_con + 0x4,
-+		     DELAY_ENABLE(RK3576, tx_delay, rx_delay));
-+
-+	/* m0 && m1 delay value */
-+	regmap_write(data->php_grf, offset_con,
-+		     RK3576_GMAC_CLK_TX_DL_CFG(tx_delay) |
-+		     RK3576_GMAC_CLK_RX_DL_CFG(rx_delay));
-+	regmap_write(data->php_grf, offset_con + 0x4,
-+		     RK3576_GMAC_CLK_TX_DL_CFG(tx_delay) |
-+		     RK3576_GMAC_CLK_RX_DL_CFG(rx_delay));
-+
-+	return 0;
-+}
-+
-+static int rk3576_set_to_rmii(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct rockchip_platform_data *data = pdata->priv_pdata;
-+	u32 offset_con;
-+
-+	offset_con = data->id == 1 ? RK3576_GRF_GMAC_CON1 :
-+				     RK3576_GRF_GMAC_CON0;
-+
-+	regmap_write(data->grf, offset_con, RK3576_GMAC_RMII_MODE);
-+
-+	return 0;
-+}
-+
-+static int rk3576_set_gmac_speed(struct udevice *dev)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct rockchip_platform_data *data = pdata->priv_pdata;
-+	u32 val = 0, offset_con;
-+
-+	switch (eqos->phy->speed) {
-+	case SPEED_10:
-+		if (pdata->phy_interface == PHY_INTERFACE_MODE_RMII)
-+			val = RK3576_GMAC_CLK_RMII_DIV20;
-+		else
-+			val = RK3576_GMAC_CLK_RGMII_DIV50;
-+		break;
-+	case SPEED_100:
-+		if (pdata->phy_interface == PHY_INTERFACE_MODE_RMII)
-+			val = RK3576_GMAC_CLK_RMII_DIV2;
-+		else
-+			val = RK3576_GMAC_CLK_RGMII_DIV5;
-+		break;
-+	case SPEED_1000:
-+		if (pdata->phy_interface != PHY_INTERFACE_MODE_RMII)
-+			val = RK3576_GMAC_CLK_RGMII_DIV1;
-+		else
-+			return -EINVAL;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	offset_con = data->id == 1 ? RK3576_GRF_GMAC_CON1 :
-+				     RK3576_GRF_GMAC_CON0;
-+
-+	regmap_write(data->grf, offset_con, val);
-+
-+	return 0;
-+}
-+
-+static void rk3576_set_clock_selection(struct udevice *dev, bool enable)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct rockchip_platform_data *data = pdata->priv_pdata;
-+
-+	u32 val = data->clock_input ? RK3576_GMAC_CLK_SELECT_IO :
-+				      RK3576_GMAC_CLK_SELECT_CRU;
-+	u32 offset_con;
-+
-+	val |= enable ? RK3576_GMAC_CLK_RMII_NOGATE :
-+			RK3576_GMAC_CLK_RMII_GATE;
-+
-+	offset_con = data->id == 1 ? RK3576_GRF_GMAC_CON1 :
-+				     RK3576_GRF_GMAC_CON0;
-+
-+	regmap_write(data->grf, offset_con, val);
-+}
-+
- #define RK3588_DELAY_ENABLE(id, tx, rx) \
- 	(((tx) ? RK3588_GMAC_TXCLK_DLY_ENABLE(id) : RK3588_GMAC_TXCLK_DLY_DISABLE(id)) | \
- 	 ((rx) ? RK3588_GMAC_RXCLK_DLY_ENABLE(id) : RK3588_GMAC_RXCLK_DLY_DISABLE(id)))
-@@ -418,6 +557,18 @@ static const struct rk_gmac_ops rk_gmac_ops[] = {
- 			0x0, /* sentinel */
- 		},
- 	},
-+	{
-+		.compatible = "rockchip,rk3576-gmac",
-+		.set_to_rgmii = rk3576_set_to_rgmii,
-+		.set_to_rmii = rk3576_set_to_rmii,
-+		.set_gmac_speed = rk3576_set_gmac_speed,
-+		.set_clock_selection = rk3576_set_clock_selection,
-+		.regs = {
-+			0x2a220000, /* gmac0 */
-+			0x2a230000, /* gmac1 */
-+			0x0, /* sentinel */
-+		},
-+	},
- 	{
- 		.compatible = "rockchip,rk3588-gmac",
- 		.set_to_rgmii = rk3588_set_to_rgmii,
-@@ -495,7 +646,8 @@ static int eqos_probe_resources_rk(struct udevice *dev)
- 		goto err_free;
- 	}
+ config ROCKCHIP_BOOT_MODE_REG
+ 	default 0x26024040
  
--	if (device_is_compatible(dev, "rockchip,rk3588-gmac")) {
-+	if (device_is_compatible(dev, "rockchip,rk3588-gmac") ||
-+	    device_is_compatible(dev, "rockchip,rk3576-gmac")) {
- 		data->php_grf =
- 			syscon_regmap_lookup_by_phandle(dev, "rockchip,php-grf");
- 		if (IS_ERR(data->php_grf)) {
+@@ -12,4 +18,6 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "rk3576_common"
+ 
++source board/firefly/roc-pc-rk3576/Kconfig
++
+ endif
+diff --git a/board/firefly/roc-pc-rk3576/Kconfig b/board/firefly/roc-pc-rk3576/Kconfig
+new file mode 100644
+index 00000000000..2fc0f913c37
+--- /dev/null
++++ b/board/firefly/roc-pc-rk3576/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_ROC_PC_RK3576
++
++config SYS_BOARD
++	default "roc-pc-rk3576"
++
++config SYS_VENDOR
++	default "firefly"
++
++config SYS_CONFIG_NAME
++	default "roc-pc-rk3576"
++
++endif
+diff --git a/board/firefly/roc-pc-rk3576/MAINTAINERS b/board/firefly/roc-pc-rk3576/MAINTAINERS
+new file mode 100644
+index 00000000000..aa8897c16fc
+--- /dev/null
++++ b/board/firefly/roc-pc-rk3576/MAINTAINERS
+@@ -0,0 +1,7 @@
++ROC-RK3576-PC
++M:	Heiko Stuebner <heiko@sntech.de>
++S:	Maintained
++F:	board/firefly/roc-pc-rk3576
++F:	include/configs/roc-pc-rk3576.h
++F:	configs/roc-pc-rk3576_defconfig
++F:	arch/arm/dts/rk3576-roc-pc*
+diff --git a/configs/roc-pc-rk3576_defconfig b/configs/roc-pc-rk3576_defconfig
+new file mode 100644
+index 00000000000..af2c1026636
+--- /dev/null
++++ b/configs/roc-pc-rk3576_defconfig
+@@ -0,0 +1,45 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-roc-pc"
++CONFIG_ROCKCHIP_RK3576=y
++CONFIG_TARGET_ROC_PC_RK3576=y
++CONFIG_SYS_LOAD_ADDR=0x40c00800
++CONFIG_DEBUG_UART_BASE=0x2AD40000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_DEBUG_UART=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-roc-pc.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_BUTTON=y
++CONFIG_BUTTON_ADC=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_MOTORCOMM=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 1058a1ce990..8d7c2591e25 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -130,6 +130,9 @@ List of mainline supported Rockchip boards:
+      - Radxa ROCK 3A (rock-3a-rk3568)
+      - Radxa ROCK 3B (rock-3b-rk3568)
+ 
++* rk3576
++     - Firefly ROC-RK3576-PC (roc-pc-rk3576)
++
+ * rk3588
+      - ArmSoM Sige7 (sige7-rk3588)
+      - Rockchip EVB (evb-rk3588)
+diff --git a/include/configs/roc-pc-rk3576.h b/include/configs/roc-pc-rk3576.h
+new file mode 100644
+index 00000000000..77c95f0c560
+--- /dev/null
++++ b/include/configs/roc-pc-rk3576.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
++ */
++
++#ifndef __ROC_PC_RK3576_H
++#define __ROC_PC_RK3576_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#include <configs/rk3576_common.h>
++
++#endif
 -- 
 2.47.2
 
