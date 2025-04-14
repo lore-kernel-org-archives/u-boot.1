@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30476C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:20:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FA6C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:21:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C05608219C;
-	Mon, 14 Apr 2025 22:20:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32187826AD;
+	Mon, 14 Apr 2025 22:21:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="djcG74Rl";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="M0bXZcXS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0C058267E; Mon, 14 Apr 2025 22:20:49 +0200 (CEST)
+ id 9825A82153; Mon, 14 Apr 2025 22:21:00 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2F3A82153
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:20:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64742828D0
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -30,18 +30,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID;
- bh=dJ3dbn6a0yHQg4LeCjJk917LqJhb//qiB3RQ8rxNI6g=; b=djcG74Rl06RVP79GdvbmD3JdML
- 024Swniyr3bSFjNYEZ6qzjWWvXu+IBlKhnDjRDHoplOzR3JoaM9FpbR8jIuAyfxxxwHVkAEYr+fl/
- BjdvSAGQHAukY2txmw67ndK9Kp65N8x5OOLNFg8jWNT1vkfwAALYz4lahIhMxqwF+6XlUCcQ0wLJp
- Qv/stkCcX2txhBC3eWpmnVX79Ye4T0eRXpbJ5GfocPSqTkCe0lyb/kUJziNZ/itpJ9InzDru0RMle
- NSpdfnHmCRtr5FIPfBraPISDxwqWnDkEwV9FIcIgEt8zRuwZpMl2x+SRsWAxJsDnbOTTh4ZH08WAd
- z3PXWhRQ==;
+ bh=DKWXXVoFHvqH4xgtDP2VN2grifTlcoa0ff9dYQCQ9Hg=; b=M0bXZcXSlvnL6FLYrWUtjY0TAX
+ TN1rgvAKOQD0OhtITUSaXeNlsLNb6YV3mnFRwIMuaLXDLcAix4rsL17nJ/KUGhktD76Fj18opBy7d
+ 5mT6JZiRwQAr2RVhPzYhxgq0XHNmLHknC1eU1nXjaXhgwrejx8CgQ/uZDiVL3m6omfuO0mj06i9wB
+ uoE2uTcCFZZCgx4VwzxpYu8xlK3EpVXIKgxl3X/GvCkG34hEHcpeHY1dVeKmDO+cxc61PbSD0mSFr
+ t2AIfdh7L+F6tawFpoiqACMzHM2DbMFNCX0JAZqTU+NEwbqay/pkLM3UQ6hXQcuQIuGqnkbQ4l040
+ eAHo2u5Q==;
 Received: from i53875b95.versanet.de ([83.135.91.149]
  helo=localhost.localdomain)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1u4Pzz-0001rf-DT; Mon, 14 Apr 2025 22:01:43 +0200
+ id 1u4Pzy-0001rf-6W; Mon, 14 Apr 2025 22:01:42 +0200
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
@@ -49,11 +49,10 @@ To: sjg@chromium.org,
 Cc: heiko@sntech.de, lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
  jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
  jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
- u-boot@lists.denx.de, sebastian.reichel@collabora.com,
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Subject: [PATCH v2 13/16] arm64: dts: rockchip: add rk3576 otp node
-Date: Mon, 14 Apr 2025 22:01:08 +0200
-Message-ID: <20250414200111.1357867-14-heiko@sntech.de>
+ u-boot@lists.denx.de, sebastian.reichel@collabora.com
+Subject: [PATCH v2 11/16] mmc: rockchip_dw_mmc: Add support for rk3576
+Date: Mon, 14 Apr 2025 22:01:06 +0200
+Message-ID: <20250414200111.1357867-12-heiko@sntech.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250414200111.1357867-1-heiko@sntech.de>
 References: <20250414200111.1357867-1-heiko@sntech.de>
@@ -75,70 +74,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the otp node to the rk3576 soc devicetree including the
-individual fields we know about.
+The rk3576 uses a different base-compatible, as starting with this
+generation, the clock phase tuning is done via registers inside
+the mmc controller and not from inside the CRU.
 
-Tested-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+In U-Boot we do not tune at all, so no other code changes are
+necessary.
+
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Link: https://lore.kernel.org/r/20250210224510.1194963-7-heiko@sntech.de
-
-[ upstream commit: 8715d2eeb062f6859c252bb6c87b363230b66e9f ]
-
-(cherry picked from commit d67cf6de8aacb4abcdfb516eeb8a511a4a657bc1)
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 ---
- dts/upstream/src/arm64/rockchip/rk3576.dtsi | 39 +++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+ drivers/mmc/rockchip_dw_mmc.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3576.dtsi b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
-index 4dde954043e..29b47799849 100644
---- a/dts/upstream/src/arm64/rockchip/rk3576.dtsi
-+++ b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
-@@ -1260,6 +1260,45 @@
- 			status = "disabled";
- 		};
+diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+index 422b8f7e4c8..7a72abaa38a 100644
+--- a/drivers/mmc/rockchip_dw_mmc.c
++++ b/drivers/mmc/rockchip_dw_mmc.c
+@@ -171,6 +171,7 @@ static int rockchip_dwmmc_bind(struct udevice *dev)
+ static const struct udevice_id rockchip_dwmmc_ids[] = {
+ 	{ .compatible = "rockchip,rk2928-dw-mshc" },
+ 	{ .compatible = "rockchip,rk3288-dw-mshc" },
++	{ .compatible = "rockchip,rk3576-dw-mshc" },
+ 	{ }
+ };
  
-+		otp: otp@2a580000 {
-+			compatible = "rockchip,rk3576-otp";
-+			reg = <0x0 0x2a580000 0x0 0x400>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			clocks = <&cru CLK_OTPC_NS>, <&cru PCLK_OTPC_NS>,
-+				 <&cru CLK_OTP_PHY_G>;
-+			clock-names = "otp", "apb_pclk", "phy";
-+			resets = <&cru SRST_OTPC_NS>, <&cru SRST_P_OTPC_NS>;
-+			reset-names = "otp", "apb";
-+
-+			/* Data cells */
-+			cpu_code: cpu-code@2 {
-+				reg = <0x02 0x2>;
-+			};
-+			otp_cpu_version: cpu-version@5 {
-+				reg = <0x05 0x1>;
-+				bits = <3 3>;
-+			};
-+			otp_id: id@a {
-+				reg = <0x0a 0x10>;
-+			};
-+			cpub_leakage: cpub-leakage@1e {
-+				reg = <0x1e 0x1>;
-+			};
-+			cpul_leakage: cpul-leakage@1f {
-+				reg = <0x1f 0x1>;
-+			};
-+			npu_leakage: npu-leakage@20 {
-+				reg = <0x20 0x1>;
-+			};
-+			gpu_leakage: gpu-leakage@21 {
-+				reg = <0x21 0x1>;
-+			};
-+			log_leakage: log-leakage@22 {
-+				reg = <0x22 0x1>;
-+			};
-+		};
-+
- 		gic: interrupt-controller@2a701000 {
- 			compatible = "arm,gic-400";
- 			reg = <0x0 0x2a701000 0 0x10000>,
 -- 
 2.47.2
 
