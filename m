@@ -4,66 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03AF7C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 21:16:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A6CAC369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 21:16:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BCE582836;
-	Mon, 14 Apr 2025 23:16:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 090CB8294C;
+	Mon, 14 Apr 2025 23:16:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=0upti.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="OS5f7KtS";
+	dkim=pass (1024-bit key; secure) header.d=0upti.me header.i=@0upti.me header.b="CaBdys5v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6088D820F8; Mon, 14 Apr 2025 15:35:34 +0200 (CEST)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [217.70.183.195])
+ id 867008212A; Mon, 14 Apr 2025 17:25:29 +0200 (CEST)
+Received: from forward103b.mail.yandex.net (forward103b.mail.yandex.net
+ [IPv6:2a02:6b8:c02:900:1:45:d181:d103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D856381F30
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 15:35:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=joaomarcos.costa@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 0E06D1FCF1;
- Mon, 14 Apr 2025 13:35:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1744637731;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xO6JUZG5QhSPZtBmBk+kWnYbdmvqMtCiYGwfWL8BGCw=;
- b=OS5f7KtSmxT45KKJ5ZkXsX5fG91g69nbcXkaUr3+aCRYFWH1AJV7Zr0Msjg6OMzignVzUg
- XuIRJosorpqpuZjIMNj/XUdlZpwaqq3/QyDPy8CCxbplHa+v78OrA2TkGQAocCbgxhioTt
- e2zmHtn6DwZ7RD9EPtEVK+JHr+bzQgMqZEFV1SzcN/o4GVL0bkCNV02QMi+6Tttr8YGLNI
- e+G7QA4D+XuvSBjOIrNXscFZiqL/u+dxx7H0GsNeDHGCtdcNnjg8XvoEBWYEFft1rJrdsj
- 4JUHFMOHXkXeDJ8qELjj9ZakNZGZXwaz/ZNbYfH919EGPYgcqogyoC09/XwGtQ==
-Message-ID: <e86091c7-3dd2-4cf8-af97-673609dbc79a@bootlin.com>
-Date: Mon, 14 Apr 2025 15:35:30 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id D9EF180FDA
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 17:25:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=0upti.me
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@0upti.me
+Received: from mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net
+ [IPv6:2a02:6b8:c0c:bca8:0:640:45be:0])
+ by forward103b.mail.yandex.net (Yandex) with ESMTPS id CFD9360908;
+ Mon, 14 Apr 2025 18:25:25 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net
+ (smtp/Yandex) with ESMTPSA id FPIqcQ0LaOs0-m2ey9OVT; 
+ Mon, 14 Apr 2025 18:25:25 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0upti.me; s=mail;
+ t=1744644325; bh=ciy9pYWoekWShNRLeOZbyDJzTCgKIWWrz+okWMVWqi0=;
+ h=Cc:Message-Id:To:From:Date:Subject;
+ b=CaBdys5vYpCgZ4HlJHFbb8bObHQE8UVukyqlvxO+C22lcVcusWCvjC7MgqXW6hQsh
+ hn7zXqc792T+dMtieLUZ8dBaRaGXrl52bj/EpcYIpyP4z/4kuYy93GQ9x/WTOO0M8k
+ 2suLFq2a+yIYEL/ZIdraDtXwTInJcUe4xJ8C16GU=
+Authentication-Results: mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net;
+ dkim=pass header.i=@0upti.me
+From: Ilya Katsnelson <me@0upti.me>
+Date: Mon, 14 Apr 2025 18:25:15 +0300
+Subject: [PATCH v3] board: rockchip: add Xunlong Orange Pi 5 Max
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] fs/squashfs: avoid illegal free() in sqfs_opendir()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Joao Marcos Costa <jmcosta944@gmail.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Richard Weinberger <richard@nod.at>,
- Andrea della Porta <andrea.porta@suse.com>, u-boot@lists.denx.de
-References: <20250414131924.86672-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US, fr
-From: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-Organization: Bootlin
-In-Reply-To: <20250414131924.86672-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvvddtieekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfevfhfhohgjtgfgsehtkeertddtvdejnecuhfhrohhmpeflohgrohcuofgrrhgtohhsucevohhsthgruceojhhorghomhgrrhgtohhsrdgtohhsthgrsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeeuhfehfeeujeeifeektdfhudelgfdvlefhgeduuedvleejjeefveffvdeuveelteenucfkphepvdgrtddumegtsgdugeemheehieemjegrtddtmegusgefsgemugduvdgumeduugeljeemtgdvfhehnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddumegtsgdugeemheehieemjegrtddtmegusgefsgemugduvdgumeduugeljeemtgdvfhehpdhhvghloheplgfkrfggieemvdgrtddumegtsgdugeemheehieemjegrtddtmegusgefsgemugduvdgumeduugeljeemtgdvfhehngdpmhgrihhlfhhrohhmpehjohgrohhmrghrtghoshdrtghoshhtrgessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepjedprhgtphhtthhopehhvghinhhrihgthhdrshgthhhutghhrghrughtsegtrghnohhnihgtrghlrdgtohhmpdhrtghpthhtohepjhhmtghos
- hhtrgelgeegsehgmhgrihhlrdgtohhmpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomhdprhgtphhtthhopehrihgthhgrrhgusehnohgurdgrthdprhgtphhtthhopegrnhgurhgvrgdrphhorhhtrgesshhushgvrdgtohhmpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
-X-GND-Sasl: joaomarcos.costa@bootlin.com
-X-Mailman-Approved-At: Mon, 14 Apr 2025 23:16:34 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250414-add-opi5-max-v3-1-50dc6808a115@0upti.me>
+X-B4-Tracking: v=1; b=H4sIANoo/WcC/3WMywqDMBBFf0WybkomduJj1f8oXUQd6yx8kNhgE
+ f+90ZUUurqcC+eswpNj8qJMVuEosOdxiJBeElF3dniR5Cay0EqjuimUtmnkODHK3i4STVEBZRb
+ TCkRUJkctL0fu8YzcsZ9H9znqAfb3TyiABElKm9y0tUorc1fvaeZrT2LvBH1yQf+4OrqYIxQZ5
+ nHg5G7b9gXMz2Pf4wAAAA==
+X-Change-ID: 20250405-add-opi5-max-569b1e7a53b1
+To: u-boot@lists.denx.de
+Cc: Jonas Karlman <jonas@kwiboo.se>, Ilya Katsnelson <me@0upti.me>, 
+ K900 <me@0upti.me>
+X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Mon, 14 Apr 2025 23:16:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,52 +75,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+The 5 Max is another board in the Orange Pi 5 family.
 
-On 4/14/25 15:19, Heinrich Schuchardt wrote:
-> * Use calloc() to allocate token_list. This avoids an illegal free if
->    sqfs_tokenize() fails.
-> * Do not iterate over token_list if it has not been allocated.
-> 
-> Addresses-Coverity-ID: 510453:  Null pointer dereferences  (FORWARD_NULL)
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
-> 	Fix typo in subject line
-> ---
->   fs/squashfs/sqfs.c | 10 ++++++----
->   1 file changed, 6 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-> index 7c364686f14..2dcdd60f683 100644
-> --- a/fs/squashfs/sqfs.c
-> +++ b/fs/squashfs/sqfs.c
-> @@ -949,7 +949,7 @@ static int sqfs_opendir_nest(const char *filename, struct fs_dir_stream **dirsp)
->   		goto out;
->   	}
->   
-> -	token_list = malloc(token_count * sizeof(char *));
-> +	token_list = calloc(token_count, sizeof(char *));
->   	if (!token_list) {
->   		ret = -EINVAL;
->   		goto out;
-> @@ -987,9 +987,11 @@ static int sqfs_opendir_nest(const char *filename, struct fs_dir_stream **dirsp)
->   	*dirsp = (struct fs_dir_stream *)dirs;
->   
->   out:
-> -	for (j = 0; j < token_count; j++)
-> -		free(token_list[j]);
-> -	free(token_list);
-> +	if (token_list) {
-> +		for (j = 0; j < token_count; j++)
-> +			free(token_list[j]);
-> +		free(token_list);
-> +	}
->   	free(pos_list);
->   	free(path);
->   	if (ret) {
+It's overall similar to the 5 Plus, but in a smaller form factor,
+which leads to some I/O being reshuffled, but nothing relevant
+to u-boot.
 
-Reviewed-by: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
--- 
+So, just reuse the config for the 5 Plus and adjust the DT names.
+
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Ilya Katsnelson <me@0upti.me>
+---
+The 5 Max is another board in the Orange Pi 5 family.
+
+It's overall similar to the 5 Plus, but in a smaller form factor,
+which leads to some I/O being reshuffled, but nothing relevant
+to u-boot.
+
+So, just reuse the config for the 5 Plus and adjust the DT names.
+
+Signed-off-by: K900 <me@0upti.me>
+---
+Changes in v3:
+- fixed silly copy/paste error
+- Link to v2: https://lore.kernel.org/r/20250412-add-opi5-max-v2-1-585197588511@0upti.me
+
+Changes in v2:
+- fixed pinctrl definition for the flash
+- added docs and MAINTAINERS entries
+- fixed signoff line to use my real name
+- Link to v1: https://lore.kernel.org/r/20250405-add-opi5-max-v1-1-e02686fc03b6@0upti.me
+---
+ arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi | 20 ++++++
+ board/rockchip/evb_rk3588/MAINTAINERS          |  6 ++
+ configs/orangepi-5-max-rk3588_defconfig        | 89 ++++++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst                |  1 +
+ 4 files changed, 116 insertions(+)
+
+diff --git a/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..afd33dd3248a92a721c2f5a6789f395a5b577ae5
+--- /dev/null
++++ b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3588-u-boot.dtsi"
++
++&fspim2_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
++
++&sfc {
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
+diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+index a858ab163f362f4fc0dd578830fe84b20d9ca429..f875dbed1ec21a7ba74637c5f0aef858de7f3d49 100644
+--- a/board/rockchip/evb_rk3588/MAINTAINERS
++++ b/board/rockchip/evb_rk3588/MAINTAINERS
+@@ -42,3 +42,9 @@ S:	Maintained
+ F:	configs/orangepi-5-plus-rk3588_defconfig
+ F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
+ F:	arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
++
++ORANGEPI-5-MAX-RK3588
++M:	Ilya Katsnelson <me@0upti.me>
++S:	Maintained
++F:	configs/orangepi-5-max-rk3588_defconfig
++F:	arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
+diff --git a/configs/orangepi-5-max-rk3588_defconfig b/configs/orangepi-5-max-rk3588_defconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..a655dfe2d64168b2d6a3b400abd4c03d9d4bc402
+--- /dev/null
++++ b/configs/orangepi-5-max-rk3588_defconfig
+@@ -0,0 +1,89 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-max"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_EVB_RK3588=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-max.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_XMC=y
++CONFIG_PHYLIB=y
++CONFIG_RTL8169=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 1407080f1f4fd226b80e34689a34c88f3c37150a..00d9587e9880937125f7ace229740f10f2c959c4 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -149,6 +149,7 @@ List of mainline supported Rockchip boards:
+      - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
+      - Turing Machines RK1 (turing-rk1-rk3588)
+      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
++     - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
+      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
+      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
+      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
+
+---
+base-commit: e458e103d4f5fb7aaf13e744c65916ab3ba4a18d
+change-id: 20250405-add-opi5-max-569b1e7a53b1
+
 Best regards,
-João Marcos Costa
+-- 
+Ilya Katsnelson <me@0upti.me>
+
