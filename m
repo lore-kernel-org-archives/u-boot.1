@@ -4,66 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAF1CC369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30476C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:20:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71A4B8267E;
-	Mon, 14 Apr 2025 22:20:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C05608219C;
+	Mon, 14 Apr 2025 22:20:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZTgIAjBx";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="djcG74Rl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EC268272A; Mon, 14 Apr 2025 22:20:10 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF77B82153
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:20:05 +0200 (CEST)
+ id F0C058267E; Mon, 14 Apr 2025 22:20:49 +0200 (CEST)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A2F3A82153
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:20:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EKK3RR2790092
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 14 Apr 2025 15:20:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744662004;
- bh=f+o2qmFXmokFYU8vLK0oZZPpC3shhd72nMCd4Qzpz8Y=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=ZTgIAjBxG+sBAz7UEsUkrYFMj89Av9OHoHzyB1g+y/9wM9hM980QmOpGXnRl3ay8/
- PReadSAlRrntqR1m3CEWGE5QTtgBgZciVsDRMHMorTA66/l8l0m+AseZHHIH5AZpR1
- dG1BzBpacwHDdxWnnSAnKot+sRZRW24blBaM74+I=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EKK45Q111171
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 14 Apr 2025 15:20:04 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
- Apr 2025 15:20:03 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 14 Apr 2025 15:20:04 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EKK3k5025027;
- Mon, 14 Apr 2025 15:20:03 -0500
-From: Bryan Brattlof <bb@ti.com>
-Date: Mon, 14 Apr 2025 15:20:03 -0500
-Subject: [PATCH 2/2] arm: mach-k3: am625: remove any firewalls ROM has
- configured for HSRAM
+ dmarc=pass (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
+ s=gloria202408;
+ h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=dJ3dbn6a0yHQg4LeCjJk917LqJhb//qiB3RQ8rxNI6g=; b=djcG74Rl06RVP79GdvbmD3JdML
+ 024Swniyr3bSFjNYEZ6qzjWWvXu+IBlKhnDjRDHoplOzR3JoaM9FpbR8jIuAyfxxxwHVkAEYr+fl/
+ BjdvSAGQHAukY2txmw67ndK9Kp65N8x5OOLNFg8jWNT1vkfwAALYz4lahIhMxqwF+6XlUCcQ0wLJp
+ Qv/stkCcX2txhBC3eWpmnVX79Ye4T0eRXpbJ5GfocPSqTkCe0lyb/kUJziNZ/itpJ9InzDru0RMle
+ NSpdfnHmCRtr5FIPfBraPISDxwqWnDkEwV9FIcIgEt8zRuwZpMl2x+SRsWAxJsDnbOTTh4ZH08WAd
+ z3PXWhRQ==;
+Received: from i53875b95.versanet.de ([83.135.91.149]
+ helo=localhost.localdomain)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1u4Pzz-0001rf-DT; Mon, 14 Apr 2025 22:01:43 +0200
+From: Heiko Stuebner <heiko@sntech.de>
+To: sjg@chromium.org,
+	philipp.tomsich@vrull.eu,
+	kever.yang@rock-chips.com
+Cc: heiko@sntech.de, lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
+ jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
+ u-boot@lists.denx.de, sebastian.reichel@collabora.com,
+ Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+Subject: [PATCH v2 13/16] arm64: dts: rockchip: add rk3576 otp node
+Date: Mon, 14 Apr 2025 22:01:08 +0200
+Message-ID: <20250414200111.1357867-14-heiko@sntech.de>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20250414200111.1357867-1-heiko@sntech.de>
+References: <20250414200111.1357867-1-heiko@sntech.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250414-firewalls-v1-2-89090085c08b@ti.com>
-References: <20250414-firewalls-v1-0-89090085c08b@ti.com>
-In-Reply-To: <20250414-firewalls-v1-0-89090085c08b@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-X-Mailer: b4 0.13.0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,58 +75,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ROM will configure a firewall to only allow HSRAM to be touched by the
-R5 core. Any outside entity like DMA or the A53s will not have access to
-this region. This can be problematic when U-Boot, running on the A53,
-loads firmware that runs out of this region.
+This adds the otp node to the rk3576 soc devicetree including the
+individual fields we know about.
 
-To simplify things remove the firewall here and let the remote core
-firmware place a new firewall themselves if they wish for the memory
-region.
+Tested-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+Link: https://lore.kernel.org/r/20250210224510.1194963-7-heiko@sntech.de
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
+[ upstream commit: 8715d2eeb062f6859c252bb6c87b363230b66e9f ]
+
+(cherry picked from commit d67cf6de8aacb4abcdfb516eeb8a511a4a657bc1)
 ---
- arch/arm/mach-k3/am62x/am625_init.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ dts/upstream/src/arm64/rockchip/rk3576.dtsi | 39 +++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-index 595fc391ac5aa..a422919fab131 100644
---- a/arch/arm/mach-k3/am62x/am625_init.c
-+++ b/arch/arm/mach-k3/am62x/am625_init.c
-@@ -29,6 +29,12 @@
- /* TISCI DEV ID for A53 Clock */
- #define AM62X_DEV_A53SS0_CORE_0_DEV_ID 135
+diff --git a/dts/upstream/src/arm64/rockchip/rk3576.dtsi b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
+index 4dde954043e..29b47799849 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3576.dtsi
++++ b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
+@@ -1260,6 +1260,45 @@
+ 			status = "disabled";
+ 		};
  
-+struct fwl_data rom_fwls[] = {
-+	{ "SOC_DEVGRP_MAIN", 641, 1 },
-+	{ "SOC_DEVGRP_MAIN", 642, 1 },
-+	{ "SOC_DEVGRP_MAIN", 642, 2 },
-+};
++		otp: otp@2a580000 {
++			compatible = "rockchip,rk3576-otp";
++			reg = <0x0 0x2a580000 0x0 0x400>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++			clocks = <&cru CLK_OTPC_NS>, <&cru PCLK_OTPC_NS>,
++				 <&cru CLK_OTP_PHY_G>;
++			clock-names = "otp", "apb_pclk", "phy";
++			resets = <&cru SRST_OTPC_NS>, <&cru SRST_P_OTPC_NS>;
++			reset-names = "otp", "apb";
 +
- /*
-  * This uninitialized global variable would normal end up in the .bss section,
-  * but the .bss is cleared between writing and reading this variable, so move
-@@ -177,6 +183,7 @@ void board_init_f(ulong dummy)
- {
- 	struct udevice *dev;
- 	int ret;
-+	int i;
- 
- 	if (IS_ENABLED(CONFIG_CPU_V7R)) {
- 		setup_k3_mpu_regions();
-@@ -261,6 +268,11 @@ void board_init_f(ulong dummy)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	/* Disable firewalls ROM has configured. */
-+	if (IS_ENABLED(CONFIG_CPU_V7R))
-+		for (i = 0; i < ARRAY_SIZE(rom_fwls); i++)
-+			remove_fwl_region(&rom_fwls[i]);
++			/* Data cells */
++			cpu_code: cpu-code@2 {
++				reg = <0x02 0x2>;
++			};
++			otp_cpu_version: cpu-version@5 {
++				reg = <0x05 0x1>;
++				bits = <3 3>;
++			};
++			otp_id: id@a {
++				reg = <0x0a 0x10>;
++			};
++			cpub_leakage: cpub-leakage@1e {
++				reg = <0x1e 0x1>;
++			};
++			cpul_leakage: cpul-leakage@1f {
++				reg = <0x1f 0x1>;
++			};
++			npu_leakage: npu-leakage@20 {
++				reg = <0x20 0x1>;
++			};
++			gpu_leakage: gpu-leakage@21 {
++				reg = <0x21 0x1>;
++			};
++			log_leakage: log-leakage@22 {
++				reg = <0x22 0x1>;
++			};
++		};
 +
- 	if (IS_ENABLED(CONFIG_ESM_K3)) {
- 		/* Probe/configure ESM0 */
- 		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@420000", &dev);
-
+ 		gic: interrupt-controller@2a701000 {
+ 			compatible = "arm,gic-400";
+ 			reg = <0x0 0x2a701000 0 0x10000>,
 -- 
-2.48.1
+2.47.2
 
