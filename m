@@ -4,55 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB1BC369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 09:21:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDFCDC369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 10:51:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA1468205B;
-	Mon, 14 Apr 2025 11:21:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 03FA982006;
+	Mon, 14 Apr 2025 12:51:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Je/E4Fn5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 945018209C; Mon, 14 Apr 2025 11:21:40 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 0D63B820B7; Mon, 14 Apr 2025 12:51:03 +0200 (CEST)
+Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
+ [84.16.66.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DF8482054
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 11:21:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id ED8928129F
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 12:51:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 54FED60007;
- Mon, 14 Apr 2025 09:21:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A68FC4CEE2;
- Mon, 14 Apr 2025 09:21:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744622496;
- bh=htt3BH3Ha13pe7j2ijIqrgLXQM+dAKAVrPB0fRqvMHo=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=Je/E4Fn5nUjdMj/abfSUsQWAptrXjMyfQPAdSR70PKxBH61HcZpsLCHOvuPGLUR2w
- RWICCWljtc7waePT5Foo4S6BFzzE5E1sgnhJc1MDT01XKISDfmjGaGcuXnPIN1w9g7
- auhdrDUSUk83gdw36TV/ofIlRzzEkAdBuE9mkSzi9x9o25iu3T3SMmHSSiXlQxKAoG
- MN+GD+YXfRzOm+9K2qf72e8K7XgNr14QzHHGMcDUUW/0GF9jUIKaqqOAwwBZ/2wHfW
- 3RVOq0mYVTjo6yatM6wKYUe5HlpC8MPVuwNMO78F8yrB1xQQnOmPGytoWHgotNyaxV
- r8gHe7XjgBk9w==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Dmitrii Merkurev <dimorinny@google.com>
-Subject: Re: [PATCH RFT v2 0/3] fastboot: add support for generic block
- flashing
-In-Reply-To: <34a1d183-406d-41e0-8c62-99940b4892ed@linaro.org>
-References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
- <34a1d183-406d-41e0-8c62-99940b4892ed@linaro.org>
-Date: Mon, 14 Apr 2025 11:21:34 +0200
-Message-ID: <8734ebdroh.fsf@baylibre.com>
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246b])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Zbkbm4SXBzmWr;
+ Mon, 14 Apr 2025 12:51:00 +0200 (CEST)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Zbkbl71mnzlF9; Mon, 14 Apr 2025 12:50:59 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH 0/2] binman: properly error out if path provided to
+ key-name-hint in signature nodes
+Date: Mon, 14 Apr 2025 12:50:43 +0200
+Message-Id: <20250414-binman-pubkey-dir-v1-0-0784d54ac621@cherry.de>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIPo/GcC/x3MQQ5AMBBA0avIrE2iUpSriEXLYCKGtCFE3F1j+
+ Rb/PxDIMwVokgc8nRx4kwiVJtDPViZCHqIhz/Ii00qhY1mt4H64hW4c2KM2zpjSqaqoa4jd7mn
+ k63+23ft+6nvpjWMAAAA=
+X-Change-ID: 20250411-binman-pubkey-dir-48b886b17599
+To: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Alexander Kochetkov <al.kochet@gmail.com>, 
+ Lukas Funke <lukas.funke@weidmueller.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,65 +64,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Neil,
+I misunderstood the documentation and put the signing key in a keys/
+directory while setting key-name-hint property in the signature node and
+u-boot-spl-pubkey-dtb to a path.
 
-On lun., avril 14, 2025 at 11:13, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+mkimage doesn't fail if it cannot find the public key when signing a
+FIT but returns something on stderr to notify the user it couldn't find
+the key. The issue is that bintool currently discards stderr if the
+command successfully returns, so the FIT is not signed AND the user
+isn't made aware of it unless the image is manually inspected.
 
-> Hi Mattijs,
->
-> On 09/04/2025 09:58, neil.armstrong@linaro.org wrote:
->> This serie permits using any block device as target
->> for fastboot by moving the generic block logic into
->> a common set of helpers and also use them as generic
->> backend.
->> 
->> The erase logic has been extended to support software
->> erase since only 2 block drivers exposes the erase
->> operation.
->> 
->> Tests are welcome to make sure this series doesn't
->> introduce any regressions on the emmc backend.
->
-> Could you get an eye on this v2 ?
+mkimage does fail when trying to insert a public key in a DTB if it
+isn't found but we can have a better error message.
 
-Yes, it's on my radar. I plan to test the emmc backend on Khadas VIM3. I
-have not gotten to it yet, but will do this week.
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Quentin Schulz (2):
+      tools: binman: etype: fit: raise ValueError if key-name-hint is a path
+      binman: etype: u_boot_spl_pubkey_dtb: provide more explicit error for key-name-hint with path
 
-Thank you for your patience.
-Mattijs
+ tools/binman/etype/fit.py                   | 3 +++
+ tools/binman/etype/u_boot_spl_pubkey_dtb.py | 2 ++
+ 2 files changed, 5 insertions(+)
+---
+base-commit: cb7555e93075114fe4af0adb806877ac4d4ef80d
+change-id: 20250411-binman-pubkey-dir-48b886b17599
 
->
-> Thanks,
-> Neil
->
->> 
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->> ---
->> Changes in v2:
->> - Dropped applied virtio erase patch
->> - Reorganize patches, introducing helpers first, using them in mmc afterwards
->> - Added soft-erase logic
->> - Added move helpers to handle the partitions erase & flash from emmc
->> - Fixed const var on last patch
->> - Link to v1: https://lore.kernel.org/all/20240306185921.1854109-1-dimorinny@google.com/
->> 
->> ---
->> Dmitrii Merkurev (3):
->>        fastboot: blk: introduce fastboot block flashing support
->>        fastboot: blk: switch emmc to use the block helpers
->>        fastboot: integrate block flashing back-end
->> 
->>   drivers/fastboot/Kconfig      |  20 ++-
->>   drivers/fastboot/Makefile     |   4 +-
->>   drivers/fastboot/fb_block.c   | 313 ++++++++++++++++++++++++++++++++++++++++++
->>   drivers/fastboot/fb_command.c |   8 ++
->>   drivers/fastboot/fb_common.c  |  16 ++-
->>   drivers/fastboot/fb_getvar.c  |   8 +-
->>   drivers/fastboot/fb_mmc.c     | 210 ++--------------------------
->>   include/fb_block.h            | 104 ++++++++++++++
->>   8 files changed, 477 insertions(+), 206 deletions(-)
->> ---
->> base-commit: f892a7f397a66d8d09f418d1e0e06dfb48bac27d
->> change-id: 20250408-topic-fastboot-blk-c5e14cd59224
->> 
->> Best regards,
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
