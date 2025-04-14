@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3215FC369B5
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 21:00:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEF48C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 21:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51C84826B2;
-	Mon, 14 Apr 2025 23:00:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 1E123826AD;
+	Mon, 14 Apr 2025 23:16:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="RUdqrl2u";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mtlrr6XK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 212BD8272A; Mon, 14 Apr 2025 23:00:54 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 308F1820E8; Mon, 14 Apr 2025 14:54:44 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68672826AD
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 23:00:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB642800B3
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 14:54:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 4ACCC1F940;
- Mon, 14 Apr 2025 23:00:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1744664450;
- bh=dZfj5/VFXKyTcSVKHxRD+U1zd+QWTGOSzODdjxD9tZg=; h=From:To:Subject;
- b=RUdqrl2uV1yVnhHHZT8SbtNEcj0dA2IQXkx8IGFbUS3lDeIuisv6t3tYWg/rYz12E
- JfrY9FE8fLvGvD50/29+VFebGgRKNOWEyKs97GJQanxCdqp43Fe+xCQF6zlunPBuwp
- HjWcg5KNipAhLaPm01t+2f95kLutlFFdmCEC8Ko53JWN6YYXhH2W6VGSRLVmCwOO3k
- 7ZRZ2thrK0xs+Fl5YXHCbVQwoHnEByB0uuJhMPE2fUuCL/OK0r0EXwQ5bglaXpc2BF
- g+iBL+tBMmW6sVWihvzer57en5cz4DmzDgW0ibTBP7pvNpxGY7PXOzNBazLahvNXcI
- HoNCnD7PGNVnw==
-Date: Mon, 14 Apr 2025 23:00:41 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Tom Rini <trini@konsulko.com>
-Cc: Nishanth Menon <nm@ti.com>, "Francis, Neha" <n-francis@ti.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>,
- Fabio Estevm <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Mario Six <mario.six@gdsys.cc>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
-Message-ID: <20250414210041.GA8754@francesco-nb>
-References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
- <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
- <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
- <20250414180727.5d5zyenfagdc5qw2@unable>
- <20250414200635.GC5495@bill-the-cat>
+ spf=pass smtp.mailfrom=jmcosta944@gmail.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-e6cea43bb31so3140158276.0
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 05:54:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744635281; x=1745240081; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AP3zN8N9i7m5oxpEkIVa7Uj2K9dQT4SyAz1ObLMberE=;
+ b=Mtlrr6XKU+aKXUAVv7kp5OAxHh+OwPokvg/tycjWQPgKIwnYZuuM1IygiJqZhMzUbz
+ jDl2vdH/1BBx/oMBquqY7x6OUcUkL/l3qoDWbUytsxvU3XdkN+yg486gvp+JmLv+vY1+
+ Y7RA/8691EGm9uIAk8FYfnltuERLCj0/ID3U7c/RtaakevvgbDvCDHIgFG7WrIy4n5UV
+ U5lAxfnM5urt2LqzR9mEvIzlHA9+4EDwS6KEbtLoJoSdbtz/TAjQokC5d5SzmyLcHI3P
+ sN+0EnsLyOp0OIJFwDFTpr3x9PjskaN9wg/oxYm/YyJ/+GEj5yKRS5JRuQP2cwiXus0E
+ sxiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744635281; x=1745240081;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AP3zN8N9i7m5oxpEkIVa7Uj2K9dQT4SyAz1ObLMberE=;
+ b=qVpkQFYwZLneGtZeKFKpfuMSzE8lat1pU+qACDqF7oY1qAVPZyP+9rd2PP1h1Il1u7
+ VUNU2BlmlceiUkUnDHYQ9kZC/L3XqaTaKOLXRsHq1eNxEe1uk2EP3a4nDNHEULbvNHu0
+ oVbE1bQAfDxgREzQElebQAGWNZNPdOIWtikGWh7jYF10NsA6D1riaoGP9w6WqFpTme1Z
+ Aq+1v+/3I+ZZM+ZSQSfjffhe2uBFGqpPoNeP9Yg2rf22klYa8x3kYRxzGd/hz21gel9N
+ f1fLvwuteCRaIBR3k/JhyDC/5y+oPUUJd18ZS74QmljioGx2+smafmCFRU1pU7gqr9ce
+ e2Ig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWB0Ea6W8xkPz0ILamCKLBi1GcMwsdzyIHmAxDJ/7AL3mIFPlqAhHfxgsUb1Xxx6ge/ZqfcpB8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxcCSTkIrnQNK6xMeqoqC7b5vDEOp1UI2Vj4kYsXmrj/+9kEXMR
+ oGuyIvybNjY5M+ij6t4MTfrTqgRN6HlJ1tPJJdOXTqeynpgnDifa6jGBxtuJt12mfn3hUgnC6r8
+ rgHQfAtpnhKDQCk7QG3Kkov2NeKwgn1Nz
+X-Gm-Gg: ASbGncsXb2neLW99rtNroCw178JZj5mWD6fNJ8Z5OaGKXq8SEdfEzSVq0J/IqUPriuE
+ if3pAKXJ8P3qpq3ynB5lIMQv01BT1I8Q8jN2YyVl9w3T1ZhD5zX7T2w3STp7HeHXiggM+mK+vsE
+ CoWPFMhaDPK0x1a4HQLk+0vxvFQP2K2mFwlUJ9nnQxmUhXheM+z/h9wk5n0/CWHkdGDA==
+X-Google-Smtp-Source: AGHT+IEdp3dhTsNy17kwecnqxhcWPunmSpDu1N4yoB4qoOMvfgta/rtg2a+1cQ5ZQhAB/PW+R6h+7a+ORgysSqeTsmE=
+X-Received: by 2002:a05:6902:2589:b0:e6b:8256:5d6d with SMTP id
+ 3f1490d57ef6-e704de63eb0mr20781300276.10.1744635280558; Mon, 14 Apr 2025
+ 05:54:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250414200635.GC5495@bill-the-cat>
+References: <20250411071900.36136-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250411071900.36136-1-heinrich.schuchardt@canonical.com>
+From: =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <jmcosta944@gmail.com>
+Date: Mon, 14 Apr 2025 14:54:29 +0200
+X-Gm-Features: ATxdqUEesqdIAs6vhheQkXJ541dnd7P50ypzWv7jcbZlHqmwz5Senv4lHu3j8-w
+Message-ID: <CABfBAmCxrZL2UgmbwFe=ZDg4DAK732eyPodU8tJ3P2TA8f32tg@mail.gmail.com>
+Subject: Re: [PATCH] fs/sqaushfs: avoid illegal free() in sqfs_opendir()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
+X-Mailman-Approved-At: Mon, 14 Apr 2025 23:16:34 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,57 +96,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 14, 2025 at 02:06:35PM -0600, Tom Rini wrote:
-> On Mon, Apr 14, 2025 at 01:07:27PM -0500, Nishanth Menon wrote:
-> > On 23:06-20250414, Francis, Neha wrote:
-> > > On 4/3/2025 1:09 PM, Miquel Raynal wrote:
-> > > > It is very surprising that such an uclass, specifically designed to
-> > > > handle resources that may be shared by different devices, is not keeping
-> > > > the count of the number of times a power domain has been
-> > > > enabled/disabled to avoid shutting it down unexpectedly or disabling it
-> > > > several times.
-> > > > 
-> > > > Doing this causes troubles on eg. i.MX8MP because disabling power
-> > > > domains can be done in recursive loops were the same power domain
-> > > > disabled up to 4 times in a row. PGCs seem to have tight FSM internal
-> > > > timings to respect and it is easy to produce a race condition that puts
-> > > > the power domains in an unstable state, leading to ADB400 errors and
-> > > > later crashes in Linux.
-> > > > 
-> > > > CI tests using power domains are slightly updated to make sure the count
-> > > > of on/off calls is even and the results match what we *now* expect.
-> > > > 
-> > > > As we do not want to break existing users while stile getting
-> > > > interesting error codes, the implementation is split between:
-> > > > - a low-level helper reporting error codes if the requested transition
-> > > >   could not be operated,
-> > > > - a higher-level helper ignoring the "non error" codes, like EALREADY and
-> > > >   EBUSY.
-> > > > 
-> > > > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> > > > ---
-> > > 
-> > > This commit looks to be breaking K3 platforms boot, please see "Latest Boot
-> > > Summary" [0]. Reverting the commit fixes boot.
-> > > 
-> > > [0] https://lcpd.itg.ti.com/upstream/k3-boot-build/main/build-trends.html
-> > 
-> > Uggh. This link is a TI internal link. Nutshell, it is broken
-> > between:
-> > v2025.04-921-gcb7555e93075 : https://source.denx.de/u-boot/u-boot.git
-> > and
-> > v2025.04-1041-g407d68638fe3 : https://source.denx.de/u-boot/u-boot.git
-> > 
-> > Neha bisected it down to 197376fbf300e92afa0a1583815d9c9eb52d613a commit
-> > which is this patch.
-> 
-> And assuming it's the same failure I got reported this morning by one of
-> my coworkers, we just get:
-> U-Boot SPL 2025.04-01050-ga40fc5afaec0 (Apr 14 2025 - 07:31:32 +0000)
-> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
+Hello, Heinrich
 
-I have not tried reverting that commit yet, but I do have the same
-failure.
+Em sex., 11 de abr. de 2025 =C3=A0s 09:19, Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> escreveu:
 
-Francesco
+> * Use calloc() to allocate token_list. This avoids an illegal free if
+>   sqfs_tokenize() fails.
+> * Do not iterate over token_list if it has not been allocated.
+>
+> Addresses-Coverity-ID: 510453:  Null pointer dereferences  (FORWARD_NULL)
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  fs/squashfs/sqfs.c | 10 ++++++----
+>  1 file changed, 6 insertions(+), 4 deletions(-)
+>
+> diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+> index 7c364686f14..2dcdd60f683 100644
+> --- a/fs/squashfs/sqfs.c
+> +++ b/fs/squashfs/sqfs.c
+> @@ -949,7 +949,7 @@ static int sqfs_opendir_nest(const char *filename,
+> struct fs_dir_stream **dirsp)
+>                 goto out;
+>         }
+>
+> -       token_list =3D malloc(token_count * sizeof(char *));
+> +       token_list =3D calloc(token_count, sizeof(char *));
+>         if (!token_list) {
+>                 ret =3D -EINVAL;
+>                 goto out;
+> @@ -987,9 +987,11 @@ static int sqfs_opendir_nest(const char *filename,
+> struct fs_dir_stream **dirsp)
+>         *dirsp =3D (struct fs_dir_stream *)dirs;
+>
+>  out:
+> -       for (j =3D 0; j < token_count; j++)
+> -               free(token_list[j]);
+> -       free(token_list);
+> +       if (token_list) {
+> +               for (j =3D 0; j < token_count; j++)
+> +                       free(token_list[j]);
+> +               free(token_list);
+> +       }
+>         free(pos_list);
+>         free(path);
+>         if (ret) {
+> --
+> 2.48.1
+>
+>
+Thanks for your patch. Just a nit, though: there's a typo in the patch
+title ('sqaushfs').
 
+Reviewed-by: Joao Marcos Costa <jmcosta944@gmail.com>
+--=20
+Best regards,
+Jo=C3=A3o Marcos Costa
