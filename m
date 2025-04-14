@@ -4,63 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC73C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 23:04:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B2CC369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 23:45:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6F52809A5;
-	Tue, 15 Apr 2025 01:04:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B7F2F820B7;
+	Tue, 15 Apr 2025 01:45:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jms.id.au
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nHO4hFbo";
+	dkim=pass (1024-bit key; secure) header.d=jms.id.au header.i=@jms.id.au header.b="EBMLy/oP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BEE2828D0; Tue, 15 Apr 2025 01:04:02 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 75C838214F; Tue, 15 Apr 2025 01:45:11 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2882806FC
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 01:03:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEF838209C
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 01:45:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=02b5=XB=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744671838;
- bh=7NKMEpQND5yJokq/My8++XOYvwVi2SDpdmSSCkZSYQI=;
- b=nHO4hFbob8hHgR2fpibgTcd4oY4K8yFQ/7UqP1DGctEOyH6t7c9qip9Fy6/eK3MSI3pWEWNLq
- bV3RCekpD8rRR38FA6v1YADj3mHVCBoeVGI9U0oEgTo9U8CMkoShuEdf0181Kuyq4288D81XAiR
- +V54z1QWE3AszQ2JNu5n38u17kPDZK5a8A6u+ZmZI9LxYFR+gyUa32Y+oNYHeioAOqz3Qou56Bu
- bkCFC8pjUB6YF03m7G6ZjIYw/vDAGVNezROdLxIKHvcixh/Dsd9LVpacKlpIhjTNJ5Xj3WdegRk
- oOMZSay/VyQ1YN/ZRejDs4frepXIk5Ga0NG+neR9nkoA==
-X-Forward-Email-ID: 67fd945040cbaa005ededfd6
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <0900d4d2-4249-463c-aa5b-0d7ac8706c29@kwiboo.se>
-Date: Tue, 15 Apr 2025 01:03:39 +0200
+ dmarc=none (p=none dis=none) header.from=jms.id.au
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=joel.stan@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ac7bd86f637so1172165166b.1
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 16:45:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=jms.id.au; s=google; t=1744674307; x=1745279107; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gCW7kwyzwgVa/R2oS/ngREu57yHyxsdC/caaDeH6o8g=;
+ b=EBMLy/oPoszZ7RKtNo9E+8o3kiHQxZ4Rh1pCffnOrmPYo/+t8IL8UInDPKYvql3fo8
+ 23QPrMEMUVE3PGpbGDCFrCRTL2jU8KMaaqVEbGzqrFfFrfZsNzpj+Xc2F1Wi9r4QN6Lx
+ RR31LKUqpAa4P/9w9+WK7Z7i2awU/ugOduPlQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744674307; x=1745279107;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gCW7kwyzwgVa/R2oS/ngREu57yHyxsdC/caaDeH6o8g=;
+ b=MtgyzEz724n09GoND2lB/BeXZ+6nKlafXe0Em5VDk6Y9Hee30Y0Da8+IXKp5/ReGYI
+ D3sHyDtMc21r2aVksf96kSgtHD0xCdiE2qu7lGrNI9rhfVoDUaok5fPNDMOVRl0AF4P1
+ kjNBqTxYRB3YbCvBpUfPvnOAo7n3tP8hewbgsJSR6ngWciddsW1bixM9uYP6lN9ZKmNS
+ 8SNZqYhct1YKE754ujwT34LO7Pobbv/6K5hKrIljLw/bzaHqSD3RG+p2ZRQhc6ttgyfV
+ BVt25WiMRexYtJC/uXxpuQMRXGkqHes63/CB9cCs3maEWrhwyJehtqqCS945kVHs7oQO
+ k+yg==
+X-Gm-Message-State: AOJu0YyzGNjDtzxHVaRD5iw8J26lJGvnmnGw3M/qiGW/gfw2t9gkQlOU
+ 2HIWcCQ2NhpAHxSqcRYMZEbD/RUOf0yifcCozwx7E8HHNz4OGe7j3plEYvHD0jAcegPtRCrM9AB
+ 2JRQq+UrmDejNxM0NTuEBX1hdBl8=
+X-Gm-Gg: ASbGncsFaqDcwZVcQSMiCiVU35BUOUV+L4nMCDO0r5D9LOgnJsyh0ze47aIOAEJTSo6
+ 9PXOpimUD/gK9PQ8TMs/m/uZJa69/MSWP7SRPLO8vfxZc+dp4hwM5Qm/MRDk3jiy+L9cyrosDFu
+ 08T8R2y1J9+Whxlkf7w/I4Qg==
+X-Google-Smtp-Source: AGHT+IGzWfJN0DCatKu1jHICRla6mrVZ4cnoJ/QQItlBmqKTdmf87LcYQRaoOJwPyo2monmlWX+FqwfWPvhVm5Wfaqc=
+X-Received: by 2002:a17:907:3d0a:b0:ac1:dde7:b57f with SMTP id
+ a640c23a62f3a-acb1688aaf6mr100994266b.23.1744674306711; Mon, 14 Apr 2025
+ 16:45:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/16] arm: rockchip: Add RK3576 arch core support
-To: Heiko Stuebner <heiko@sntech.de>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
- detlev.casanova@collabora.com, u-boot@lists.denx.de,
- sebastian.reichel@collabora.com, Xuhui Lin <xuhui.lin@rock-chips.com>
-References: <20250414200111.1357867-1-heiko@sntech.de>
- <20250414200111.1357867-5-heiko@sntech.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250414200111.1357867-5-heiko@sntech.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250414220439.529572-1-trini@konsulko.com>
+In-Reply-To: <20250414220439.529572-1-trini@konsulko.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Tue, 15 Apr 2025 09:14:54 +0930
+X-Gm-Features: ATxdqUGOYE5xQBgm6evJtHh49dCvsEYCexMekZlXTrHD3NwVQhZgDdTXCA3ckBA
+Message-ID: <CACPK8XcXJS0X4kRWxncCjnbR1ADBprGXFsvgB63Bb7b81rHfnw@mail.gmail.com>
+Subject: Re: [PATCH] Revert "CI: Disable evb-ast2600"
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,114 +89,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+On Tue, 15 Apr 2025 at 07:34, Tom Rini <trini@konsulko.com> wrote:
+>
+> Upstream developers have been unable to replicate this failure exactly.
+> Furthermore, with commit 8c98b57d72d5 ('Merge patch series "Static
+> initcalls"') we have now replaced the part of the U-Boot code which the
+> platform was hanging in when I was debugging. Moving forward, if we have
+> a failure again the next steps are to upgrade QEMU (which should be done
+> regardless).
+>
+> This reverts commit 8a2cf6307a2ccc09c39dde486b6d9375b78c82c2.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-On 2025-04-14 22:00, Heiko Stuebner wrote:
-> From: Xuhui Lin <xuhui.lin@rock-chips.com>
-> 
-> The Rockchip RK3576 is a ARM-based SoC with quad-core Cortex-A72
-> and quad-core Cortex-A53 including 6TOPS NPU, Mali-G52 MC3, HDMI Out,
-> DP, eDP, MIPI DSI, MIPI CSI2, LPDDR4/4X/5, eMMC5.1, SD3.0/MMC4.5, UFS,
-> USB OTG 3.0, Type-C, USB 2.0, PCIe 2.1, SATA 3, Ethernet, SDIO3.0, I2C,
-> UART, SPI, GPIO and PWM.
-> 
-> Add arch core support for it.
-> 
-> Signed-off-by: Xuhui Lin <xuhui.lin@rock-chips.com>
-> [adapted for mainline u-boot]
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+Thanks Tom! Sorry we couldn't help with the failure.
+
+Acked-by: Joel Stanley <joel@jms.id.au>
+
 > ---
->  arch/arm/dts/rk3576-u-boot.dtsi               | 131 +++++++++++++++
->  arch/arm/include/asm/arch-rk3576/boot0.h      |  11 ++
->  arch/arm/include/asm/arch-rk3576/gpio.h       |  11 ++
->  arch/arm/mach-rockchip/Kconfig                |  51 ++++++
->  arch/arm/mach-rockchip/Makefile               |   1 +
->  arch/arm/mach-rockchip/rk3576/Kconfig         |  15 ++
->  arch/arm/mach-rockchip/rk3576/Makefile        |   9 +
->  arch/arm/mach-rockchip/rk3576/clk_rk3576.c    |  18 ++
->  arch/arm/mach-rockchip/rk3576/rk3576.c        | 155 ++++++++++++++++++
->  arch/arm/mach-rockchip/rk3576/syscon_rk3576.c |  22 +++
->  arch/arm/mach-rockchip/sdram.c                |   1 +
->  doc/board/rockchip/rockchip.rst               |   9 +
->  include/configs/rk3576_common.h               |  45 +++++
->  13 files changed, 479 insertions(+)
->  create mode 100644 arch/arm/dts/rk3576-u-boot.dtsi
->  create mode 100644 arch/arm/include/asm/arch-rk3576/boot0.h
->  create mode 100644 arch/arm/include/asm/arch-rk3576/gpio.h
->  create mode 100644 arch/arm/mach-rockchip/rk3576/Kconfig
->  create mode 100644 arch/arm/mach-rockchip/rk3576/Makefile
->  create mode 100644 arch/arm/mach-rockchip/rk3576/clk_rk3576.c
->  create mode 100644 arch/arm/mach-rockchip/rk3576/rk3576.c
->  create mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
->  create mode 100644 include/configs/rk3576_common.h
-> 
-
-[snip]
-
-> diff --git a/include/configs/rk3576_common.h b/include/configs/rk3576_common.h
-> new file mode 100644
-> index 00000000000..90ea62cb9ca
-> --- /dev/null
-> +++ b/include/configs/rk3576_common.h
-> @@ -0,0 +1,45 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * (C) Copyright 2024 Rockchip Electronics Co., Ltd
-> + */
+> Cc: Ryan Chen <ryan_chen@aspeedtech.com>
+> Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+> Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+> Cc: Joel Stanley <joel@jms.id.au>
+> ---
+>  .azure-pipelines.yml | 4 ++++
+>  .gitlab-ci.yml       | 7 +++++++
+>  2 files changed, 11 insertions(+)
+>
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index cb787d32f142..24b6661c9c94 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -424,6 +424,10 @@ stages:
+>            TEST_PY_BD: "evb-ast2500"
+>            TEST_PY_ID: "--id qemu"
+>            TEST_PY_TEST_SPEC: "not sleep"
+> +        evb_ast2600:
+> +          TEST_PY_BD: "evb-ast2600"
+> +          TEST_PY_ID: "--id qemu"
+> +          TEST_PY_TEST_SPEC: "not sleep"
+>          vexpress_ca9x4:
+>            TEST_PY_BD: "vexpress_ca9x4"
+>            TEST_PY_ID: "--id qemu"
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 5f3418e482fe..aa15e009b39e 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -331,6 +331,13 @@ evb-ast2500 test.py:
+>      TEST_PY_ID: "--id qemu"
+>    <<: *buildman_and_testpy_dfn
+>
+> +evb-ast2600 test.py:
+> +  variables:
+> +    TEST_PY_BD: "evb-ast2600"
+> +    TEST_PY_TEST_SPEC: "not sleep"
+> +    TEST_PY_ID: "--id qemu"
+> +  <<: *buildman_and_testpy_dfn
 > +
-> +#ifndef __CONFIG_RK3576_COMMON_H
-> +#define __CONFIG_RK3576_COMMON_H
-> +
-> +#define CFG_CPUID_OFFSET	0xa
-> +
-> +#include "rockchip-common.h"
-> +
-> +#define CFG_IRAM_BASE			0x3ff80000
-> +
-> +#define CFG_SYS_SDRAM_BASE		0x40000000
-> +/* Used by board_get_usable_ram_top(), space below the 4G address boundary */
-> +#define SDRAM_MAX_SIZE			(SZ_4G - CFG_SYS_SDRAM_BASE)
-> +
-> +#ifndef CONFIG_XPL_BUILD
-
-I know that I probably suggested adding this XPL_BUILD condition in v1,
-however after seeing similar wrapper being dropped in FUKAUMI Naoki's
-"rockchip: Add boot from USB OTG port" series [1] I am no longer sure it
-should be here and I ended up dropping it for RK3528.
-
-Regardless, this is:
-
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-
-[1] https://patchwork.ozlabs.org/cover/2045428/
-
-Regards,
-Jonas
-
-> +
-> +#ifndef ROCKCHIP_DEVICE_SETTINGS
-> +#define ROCKCHIP_DEVICE_SETTINGS
-> +#endif
-> +
-> +#define ENV_MEM_LAYOUT_SETTINGS		\
-> +	"scriptaddr=0x40c00000\0" \
-> +	"script_offset_f=0xffe000\0"	\
-> +	"script_size_f=0x2000\0"	\
-> +	"pxefile_addr_r=0x40e00000\0" \
-> +	"kernel_addr_r=0x42000000\0" \
-> +	"kernel_comp_addr_r=0x4a000000\0"	\
-> +	"fdt_addr_r=0x52000000\0"	\
-> +	"fdtoverlay_addr_r=0x52100000\0"	\
-> +	"ramdisk_addr_r=0x52180000\0"	\
-> +	"kernel_comp_size=0x8000000\0"
-> +
-> +#define CFG_EXTRA_ENV_SETTINGS		\
-> +	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
-> +	ENV_MEM_LAYOUT_SETTINGS		\
-> +	ROCKCHIP_DEVICE_SETTINGS	\
-> +	"boot_targets=" BOOT_TARGETS "\0"
-> +
-> +#endif /* CONFIG_XPL_BUILD */
-> +
-> +#endif /* __CONFIG_RK3576_COMMON_H */
-
+>  sandbox_flattree test.py:
+>    tags:
+>      - ${DEFAULT_AMD64_TAG}
+> --
+> 2.43.0
+>
