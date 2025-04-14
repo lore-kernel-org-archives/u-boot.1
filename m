@@ -4,64 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F86BC369B5
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D44C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:44:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A34D82905;
+	by phobos.denx.de (Postfix) with ESMTP id 9DF9482982;
 	Tue, 15 Apr 2025 00:44:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="biI2G1S7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HLMLt1JJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57FE982836; Tue, 15 Apr 2025 00:44:08 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 707DF826AD; Tue, 15 Apr 2025 00:44:08 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CED4C826AD
+ by phobos.denx.de (Postfix) with ESMTPS id DB645827A6
  for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 00:43:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhwRK2821282
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhvUU2183004
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 14 Apr 2025 17:43:58 -0500
+ Mon, 14 Apr 2025 17:43:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744670638;
- bh=F0BTvZDcYB6qRvtcE6KD+cvgqkXF8v+MdIsh+IK/z00=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=biI2G1S7LQ27R5O0xgZF4H+HJvutKhAqPGiHEyR11hyIv5NtSo+pG2n8a+3XNtEEt
- osahvLw3lql57x0a7vQM1zo+JDdgJypGYaFL5BT4MBEnz5nOrLPbyMtejhm9Si9+VE
- 9ITIrsMKCytmpXXd67GQFFnJbetUuimQbA/afJV4=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhv10007567
+ s=ti-com-17Q1; t=1744670637;
+ bh=5hDea4waEPCrFOeLehdJJarVMkbQLBoQkA3xB6vKTFI=;
+ h=From:To:CC:Subject:Date;
+ b=HLMLt1JJXS/u8aavmv30CuqOMFCerxuklRlTRDvtF2TToDOkODH4rjJP03AvWUb9n
+ uuczuOAe+9X4xB0n74byEDR/FSHLVjLSsQpSmHRfxzzd/oE3mNU8ZLqCtEWVuqYsbk
+ K5r9ZNFoS20X6ir8TwN5eYG1OqYMm5crcMp5QP58=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhvVo002952
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 14 Apr 2025 17:43:57 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
  Apr 2025 17:43:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 14 Apr 2025 17:43:57 -0500
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EMhvv3064149;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EMhvux064149;
  Mon, 14 Apr 2025 17:43:57 -0500
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
  <jh80.chung@samsung.com>
 CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, open
  list <u-boot@lists.denx.de>
-Subject: [PATCH v2 4/5] configs: am62px_evm_r5/a53_defconfig: Disable eMMC
- HS400
-Date: Mon, 14 Apr 2025 17:43:56 -0500
-Message-ID: <20250414224357.1555064-5-jm@ti.com>
+Subject: [PATCH v2 0/5] More MMC fixes
+Date: Mon, 14 Apr 2025 17:43:52 -0500
+Message-ID: <20250414224357.1555064-1-jm@ti.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250414224357.1555064-1-jm@ti.com>
-References: <20250414224357.1555064-1-jm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -82,46 +79,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch addresses silicon errata i2458 [0] "MMCHS: eMMC HS400
-tDCD timing marginal to JEDEC spec". Where, in some corner cases,
-MMC0 interface may marginally exceed the tdCD JEDEC spec requirement
-of 300 ps. As per workaround, switch to HS200 mode instead of HS400.
+This patch series fixes MMC_HS_52 mode in am654_sdhci
+driver, as well as HIGH_SPEED_ENA and UHS_MODE_SELECT
+for HS modes.
+
+Also Disable eMMC HS400 mode for am62px device according
+to silicon errata i2458 [0] and add TI_COMMON_CMD_OPTIONS
+to K3 Sitara board a53 defconfigs. 
 
 [0] https://www.ti.com/lit/er/sprz574a/sprz574a.pdf
-Signed-off-by: Judith Mendez <jm@ti.com>
-Reviewed-by: Bryan Brattlof <bb@ti.com>
----
- configs/am62px_evm_a53_defconfig | 4 ++--
- configs/am62px_evm_r5_defconfig  | 1 -
- 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
-index dae87c3b788..d9e68956676 100644
---- a/configs/am62px_evm_a53_defconfig
-+++ b/configs/am62px_evm_a53_defconfig
-@@ -109,8 +109,8 @@ CONFIG_MMC_IO_VOLTAGE=y
- CONFIG_SPL_MMC_IO_VOLTAGE=y
- CONFIG_MMC_UHS_SUPPORT=y
- CONFIG_SPL_MMC_UHS_SUPPORT=y
--CONFIG_MMC_HS400_SUPPORT=y
--CONFIG_SPL_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_SPL_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_SPL_MMC_SDHCI_ADMA=y
-diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
-index 39b6a83ab42..cba1f057be3 100644
---- a/configs/am62px_evm_r5_defconfig
-+++ b/configs/am62px_evm_r5_defconfig
-@@ -87,7 +87,6 @@ CONFIG_SYS_I2C_OMAP24XX=y
- CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_ESM_K3=y
--CONFIG_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_SPL_MMC_SDHCI_ADMA=y
+Changes since v1:
+- rebase against master and fix merge conflicts for patch 5/5
+- pick up bryans reviewed-by tag
+
+Judith Mendez (5):
+  mmc: am654_sdhci: Add MMC_HS_52 to timing data
+  mmc: am654_sdhci: Fix HIGH_SPEED_ENA
+  mmc: am654_sdhci: Add am654_sdhci_set_control_reg
+  configs: am62px_evm_r5/a53_defconfig: Disable eMMC HS400
+  configs: am62*_evm_a53_defconfig: Add TI_COMMON_CMD_OPTIONS
+
+ board/ti/common/Kconfig          |  2 ++
+ configs/am62ax_evm_a53_defconfig |  3 +--
+ configs/am62px_evm_a53_defconfig | 13 +++----------
+ configs/am62px_evm_r5_defconfig  |  1 -
+ configs/am62x_evm_a53_defconfig  |  3 +--
+ configs/am64x_evm_a53_defconfig  | 11 +----------
+ configs/am65x_evm_a53_defconfig  |  9 +--------
+ drivers/mmc/am654_sdhci.c        | 25 +++++++++++++++++++------
+ drivers/mmc/sdhci.c              |  2 +-
+ include/sdhci.h                  |  1 +
+ 10 files changed, 30 insertions(+), 40 deletions(-)
+
+
+base-commit: 8c98b57d72d5e5b94ed064fe1041e51216165334
 -- 
 2.49.0
 
