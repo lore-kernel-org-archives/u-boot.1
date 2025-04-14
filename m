@@ -4,99 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F486C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04F55C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 20:07:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8A678214B;
-	Mon, 14 Apr 2025 22:06:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 889C282102;
+	Mon, 14 Apr 2025 22:07:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VYN4Gror";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pqBnbw1P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BF938214B; Mon, 14 Apr 2025 22:06:43 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 142F18214B; Mon, 14 Apr 2025 22:07:56 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC1A782102
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:06:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D828A81F6B
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 22:07:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72c03d237a7so1614934a34.3
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 13:06:39 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2cc89c59cc0so3392864fac.0
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 13:07:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744661198; x=1745265998; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ipa8exr6HccicC2p4vSzUhjdai2YxaQr3g9/Rcx8QtM=;
- b=VYN4GrorFq3hNg67kmuZef4oW6UT2hRIdGaNaQCnk8MlIUWNRMugqYbwhhpOACRFDo
- 5tu42gDlDPJth8EDK4I82U9LMKTG9zWX6nzE9BSZlorhLd4IBmEvsxUpvZP8vgYmG0uT
- EMJeiJtRXGDPyb/E8Lu1TDcgF4GhjM0YaaDzs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744661198; x=1745265998;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1744661272; x=1745266072; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ipa8exr6HccicC2p4vSzUhjdai2YxaQr3g9/Rcx8QtM=;
- b=PW52+LGgbam6iHZFhA8Nm3A6kVoov/uhY48DzWvyw3/0smsOsAOrZEyhQAKR1z8Ro2
- 26t0fEmhEqBt67hW6mquCS+of/SjDoSqyG9V+dayQhdnDwwW5UiTuHKdnVYhExqN5Ujh
- OJ8Kx9h/QdVxuB8y7g4CPT9f9Z2HlARoGFX8XGGaMNi63USibOazICfEcqsJh/UhcqsH
- UCG75UZeqK+uOP3DhfLrA0/748B3Ad7gSbM6DijMmRjmRdFr2AfUpvZ8k4bJGcaer0W9
- CxFiUKbVgt+3bUhttp4G2GCeC4dcgcOy5kw5z2DPrmxS3qlcvoJgEenZJSjUEqEw/Pbj
- UPzg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXu7wJOvTI2C/OeMpvBaWLYAe2BuP1WKHxRjpgFqoag+Pz/m3/BH0Dg0GdlPhJpeqd0kfDHFNc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPiZSihF955APCDtkuM4LuImp78r0g4BTEVj9hh8aHGdhoRAIo
- OtNehI1BPNJpvPOOp19Svlow2LW0Eg7bLAQv2VSChN99/Pu09w2vQaK3+VsWUWc7OZdeO4w8N7g
- 4
-X-Gm-Gg: ASbGncs8N2EFA0qjxy+hp/F6BmHr5TbOtjIBUYNdTBQTr5QwPdvYNt4174Fz+WRDPGy
- uZtvjUYzhC4tQdbbUEZxrjne0/nZIfpKtjrJAZ8W2QzqAqFqCU5ScnDr8TMoP0Kd3SD5REXd6Iy
- I5q1EayxHY7+rz+Ojeh81FXANMCqpZrFwjSnCwGGeZFcNeetIxhcX9cuxksKUO7I7aQiiM8cxqu
- 5JNziqmqAlLL+1kq/cDo+sBWzrT9fTpSYGF8E8GaRAU0k73Ryf+ZyoeI+DZpzO6QoFUDR1M/OBR
- KHeyt8keJ+mOpzvgUQaCzoU6DSs09WnQ8VGdOAcMFcWaz4wfKTPyblvQOd1tyetUrzeE3FUsX8e
- QL6ghxzNcFUqL
-X-Google-Smtp-Source: AGHT+IHRr8JkkSuBifVjKcltDVOT1joc64xau5I1go6hMvpt+7GgtydWoGt1RCsIVtJxkXT02bzv/Q==
-X-Received: by 2002:a05:6830:6203:b0:72b:872f:efc8 with SMTP id
- 46e09a7af769-72e863c2869mr9715341a34.24.1744661198581; 
- Mon, 14 Apr 2025 13:06:38 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ bh=X5+WqlDr4J36a2VSEwSSanxOn+YGg0jAMtjPZzGe95o=;
+ b=pqBnbw1Pd/l4whR1AM31RWk9xRsrfIrXNb0UAiD/J6Wf3Z/G2egarGAjtduaVpBDq3
+ XauRfTObuMuzj9PIthVjLrkAwmlAaZk8Ek1XPJp9X/17XdDw65NQxkbvPDqjNiO+lyda
+ TLOHgR4HVAcrhVvpOOydmuHyUiM0om7J2i0sc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744661272; x=1745266072;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=X5+WqlDr4J36a2VSEwSSanxOn+YGg0jAMtjPZzGe95o=;
+ b=xDVYGxk5nWLJXdlmwkihnISgNxaJt5driKyPllRlMqjENkTGCb5r0K5FM/4/jJeaRm
+ uvGPAUaXtbRw/Cz3z2OrmMwS9nt8zg94FNbnDrMZ6sfwSzOKtSa1YsUbuBSv2D099n/Y
+ HWkGGJmFiMNr6/vTm6g0uIMR17KT9yveewgFQVJNCKK7UkmKPkxegCXmu/Du+ThLjyti
+ Gkc5KNHfESbFjVIOfkZcRF/9WOwiGL9DG2RKhgh/fxb4O9gREsWfSMzkj20PLaEOk7XT
+ VmjpZmaPMWqXGSUKlKPBlI35GAz5u5XAtkz2m3Mc6aY8d5rMURJYhR1iyo39rjJ7+INX
+ F2RQ==
+X-Gm-Message-State: AOJu0YwQW+2lDChVT0Pl4BoBwPVE/H+uxcHsmdCJgQ1b9w2fH+M12tpv
+ YGljkrReFrUEY8r8vHhs3Gpnb7DdPhC5qZYVTC4xZeZLBbngU/cKKSP4OBjy6UIQfzkGhk0qS4G
+ y
+X-Gm-Gg: ASbGncuEioTH+TyS7dOaC/wt5rDvpjSQcs2Z0VSHMoHCvWIzAnCOsqdPUnyzJWHevV/
+ IgzgbxUZ3KiobpQfztwgQPwfgbHvZfwI8dyG2Yg0n/qV+SQkhpsa9TTnhz6LAeQYdGP1j0dEN6H
+ v0XukaJDTLgno0fg/6FaA2qTt27bAz7LZkmTVNBp+zJRoIuCFtyzO1p7h978ZHsD9A310TgwzZE
+ aQ/sfHUg/s22N5uZNEJAZFpNQRikYVN8bngqxdAiMh9PqIDGriam6JUJ1naamG/KOiK7PO58CmL
+ iWxmm6zvTxcqgkElXa9h8P2kaTlImiOv8kW90T7awYaSThoHhnx6vI40MZgi3MPSslZEPsOpESB
+ R
+X-Google-Smtp-Source: AGHT+IEOmj3W9pxzaw5UzDej+mWGBZ5AfEMY2yxQD3A6dZp2hs3MdpN6P7xymVPfpwefrFfBlwAZAQ==
+X-Received: by 2002:a05:6871:a601:b0:2c2:4d73:ec43 with SMTP id
+ 586e51a60fabf-2d1da70fc82mr528734fac.15.1744661272460; 
+ Mon, 14 Apr 2025 13:07:52 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73e67050sm2123744a34.56.2025.04.14.13.06.36
+ 586e51a60fabf-2d0968ea1c6sm2531169fac.5.2025.04.14.13.07.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Apr 2025 13:06:37 -0700 (PDT)
-Date: Mon, 14 Apr 2025 14:06:35 -0600
+ Mon, 14 Apr 2025 13:07:51 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: "Francis, Neha" <n-francis@ti.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>,
- Fabio Estevm <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Mario Six <mario.six@gdsys.cc>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
-Message-ID: <20250414200635.GC5495@bill-the-cat>
-References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
- <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
- <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
- <20250414180727.5d5zyenfagdc5qw2@unable>
+To: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20250404135038.2134570-1-jerome.forissier@linaro.org>
+References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
+Subject: Re: [PATCH v6 0/3] Static initcalls
+Message-Id: <174466127133.517851.4201251191294861772.b4-ty@konsulko.com>
+Date: Mon, 14 Apr 2025 14:07:51 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TWHaClizhytUCBdm"
-Content-Disposition: inline
-In-Reply-To: <20250414180727.5d5zyenfagdc5qw2@unable>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,88 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 04 Apr 2025 15:50:34 +0200, Jerome Forissier wrote:
 
---TWHaClizhytUCBdm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This series replaces the dynamic initcalls (with function pointers) with
+> static calls, and gets rid of initcall_run_list(), init_sequence_f,
+> init_sequence_f_r and init_sequence_r. This makes the code simpler and the
+> binary slighlty smaller: -2281 bytes/-0.21 % with LTO enabled and -510
+> bytes/-0.05 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
+> 
+> Execution time doesn't seem to change noticeably. There is no impact on
+> the SPL.
+> 
+> [...]
 
-On Mon, Apr 14, 2025 at 01:07:27PM -0500, Nishanth Menon wrote:
-> On 23:06-20250414, Francis, Neha wrote:
-> > On 4/3/2025 1:09 PM, Miquel Raynal wrote:
-> > > It is very surprising that such an uclass, specifically designed to
-> > > handle resources that may be shared by different devices, is not keep=
-ing
-> > > the count of the number of times a power domain has been
-> > > enabled/disabled to avoid shutting it down unexpectedly or disabling =
-it
-> > > several times.
-> > >=20
-> > > Doing this causes troubles on eg. i.MX8MP because disabling power
-> > > domains can be done in recursive loops were the same power domain
-> > > disabled up to 4 times in a row. PGCs seem to have tight FSM internal
-> > > timings to respect and it is easy to produce a race condition that pu=
-ts
-> > > the power domains in an unstable state, leading to ADB400 errors and
-> > > later crashes in Linux.
-> > >=20
-> > > CI tests using power domains are slightly updated to make sure the co=
-unt
-> > > of on/off calls is even and the results match what we *now* expect.
-> > >=20
-> > > As we do not want to break existing users while stile getting
-> > > interesting error codes, the implementation is split between:
-> > > - a low-level helper reporting error codes if the requested transition
-> > >   could not be operated,
-> > > - a higher-level helper ignoring the "non error" codes, like EALREADY=
- and
-> > >   EBUSY.
-> > >=20
-> > > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> > > ---
-> >=20
-> > This commit looks to be breaking K3 platforms boot, please see "Latest =
-Boot
-> > Summary" [0]. Reverting the commit fixes boot.
-> >=20
-> > [0] https://lcpd.itg.ti.com/upstream/k3-boot-build/main/build-trends.ht=
-ml
->=20
-> Uggh. This link is a TI internal link. Nutshell, it is broken
-> between:
-> v2025.04-921-gcb7555e93075 : https://source.denx.de/u-boot/u-boot.git
-> and
-> v2025.04-1041-g407d68638fe3 : https://source.denx.de/u-boot/u-boot.git
->=20
-> Neha bisected it down to 197376fbf300e92afa0a1583815d9c9eb52d613a commit
-> which is this patch.
+Applied to u-boot/master, thanks!
 
-And assuming it's the same failure I got reported this morning by one of
-my coworkers, we just get:
-U-Boot SPL 2025.04-01050-ga40fc5afaec0 (Apr 14 2025 - 07:31:32 +0000)
-SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
-
-For example on console.
-
---=20
+[1/3] arm: asm/system.h: mrc and mcr need .arm if __thumb2__ is not set
+      commit: 6fe50e39508043f386fc1bd40bbc02b8a75c1940
+[2/3] common: board: make initcalls static
+      commit: 6c171f7a184cc2815b736c48aa6ac02367bbb67f
+[3/3] initcall: remove initcall_run_list()
+      commit: bbee3d41b33f5b8c88ae3707dc8af105acafdd55
+-- 
 Tom
 
---TWHaClizhytUCBdm
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf9ar4ACgkQFHw5/5Y0
-tyxaVgv/T/VelmV3Iplq7zQtndE7Qt2KpqqvQdMyX+akJbWj1LS9B7Bqc6T/B9pW
-vzA4Mz309EcsuYOeaC2Glm6dD8nb61NlIP4YFwz4kgXr/SrH5xmKbtpfSjg+mwv3
-QvvB1pB0xeemy6dMcOH3VZIX/aRHM+JZD46QdCmGT9rlSApSiaR2pLr51oglobGa
-sofVyvw8uoJuNPxtaFRxLg8i2UUcKS02yqA4A+gwShfg9kGxZFfvzbZJverCsnsY
-9X2Um/hop5Oc3c92SawDefXVO7M09CNZmCi0IVbOdcP631q29OwK9aB7/khZIkgX
-l9bZ0zDzTSq2F/XYrUxmUwplG97edgwyEjomkTL1J/PmlFRAXaeA7dDGpXVMypre
-OPUP6EDNcz8FLlwBjdPc4KrChAh0B8MN83CLaVpiCl7N62gdPhelhJ81oGafwC3t
-UcVh5JpOebbKBV95iGTCHWesc6QBL9lafpMu52iDbBg2IxHH11Qd+htyI+M+potS
-ATPCiMbA
-=qSIg
------END PGP SIGNATURE-----
-
---TWHaClizhytUCBdm--
