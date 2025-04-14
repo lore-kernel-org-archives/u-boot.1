@@ -4,67 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA08DC369A2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 06:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B828C3601E
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 06:48:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C93980EFB;
-	Mon, 14 Apr 2025 08:29:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DA5D81B4B;
+	Mon, 14 Apr 2025 08:48:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="JF9o9NqG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MapQ3ix5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85DED81F4D; Mon, 14 Apr 2025 08:29:11 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20605.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::605])
+ id C3F9781CAF; Mon, 14 Apr 2025 08:48:52 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::612])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91B5982054
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 08:29:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C090810EB
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 08:48:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jxDyrq9xhgvQg32Vb2yp8q7UDw/GK9n4EMMhb3v2QVomt3RwlxrDPN/bSghtwZ4cEmBA+YWqLNLtuFAZRZGD1bj9G+XwwFz+JXdp9i7K9r+9S/U4I2z2vsFQ+PPalZWSWXKU3IdVi7wfZrn+T9xuvHuXYAyYxuETRloPhY39eCk4FRNRag1EuO0IlmFRBv3zLYa/1pwVk77vJidKyQ298TQtQUJaheWcO8soy9MhaCNp90kguw4HBTcDwvn7w7IUmfhJ58odkeD4rPyVellxTF8cvCrKsysLuNZf1sP+ZLQL1Jvk9lH2Vgq+jxSQaknx3RZI+3nGtK2F/aXgVFlQlg==
+ b=frLB6YtCgoyoTLaVvujthu50Z1d865NnT5uIcy5AfE+tE9wZpkieC6MF2oL+ghndGW7XFem8JE6kCnuzV9Gh7IuaD0d8JhxhWrV05+riFbQbmAO33rZcAvZ0aJKT9kxBWzpwdL6NGFTpnfh+AVV9aa8KTZyFP4ZonLTs7eh40RZklTQuhkeCib7XLOL4e9ORdVth44Ru9ogMdFuVh6ggZfzBX4Bp7k2x9F1DF3oZ7Gd5vZ0ypKCBJ87d7H5TMRfDZB6nWJgkmsoORASrXXNgp2lQMUXobwoGiFx+4G1BjGfL/xxTEyVg/WyuJRglED3Ie5h1jZq6k2GBZc/4tyO+wA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ythfC8YRfEhXvnN/BGb6ZR3WzJK5+rmJx7HxhY2PKQQ=;
- b=d3c7SxFXTyp3AKZ1BybcHpApOmGFa8lu1TGhNNbYjlFWcRhnpnD7Pz7pUBMy4yP5bK35xOHOyUkjOYvIQKPDFsJiUpaouqpKIoIhke3Fxq2ef57fPRpXJdgfyNqMPyzlrXlVfpKhBSsA1xE4R8Obq2Tug5baW9VIUFA8fPWAQKotI3Ulsul83toM9rlbx9AnkLwexJLanqKv95wQhgW3Uy/lb6baZKu8CHx9VL1s0fu2chsNsahSvVFBleddIFdvyHkymS+MKCKiAZyP4zDR6qeGs98Bgts4wYb0G9/e/eLwAwFR0jOP1FQDr5CiBC3Uhf9LPMjXJ6YA9TNTs5R2oQ==
+ bh=qzJG7kxKFMpSFdFdkGk7ZpAYOVhX8z5MwLMuKVsGwYQ=;
+ b=LMScXP2wOvSj/KdDzeGW/YD4yffQreIprBpyPrqejDav8BcjwsDERNBbwFjNaX0/baH89M5WOCMlUEEoTiOKpVIZeth+yQNlkPbTZiOFjnpDmXO5WmsP0UD9zr9r6D5K5PObR89UV4zc2xEzrQLUlhTRF125R74ItZfOakxkxk0tDvvuMXiZDE33Hc8FW7TkMlKx1iNn4/D6eslveFO1qmKlZ+SgNcWRKcr0cCLvZ3S4bEuHfhhLKOGLnuBP7H6PqDdM/8ZCkuEJuEUof+pTEn74BVI2AopDAgDE3QewvnJbTI/HuYr70sHOnc/HXqYCw2FtxuD9rwwyKHbpBUvxmQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ythfC8YRfEhXvnN/BGb6ZR3WzJK5+rmJx7HxhY2PKQQ=;
- b=JF9o9NqGxspuVbUHadhng61cmsEmPrboB0FYtSXv+kzzRbT06SlreKeAWr9ysOjMmFuPA6yEJtqt20Q6sVmIys2Qiw4XqCRCIAMAWlC9p8JOsMCn7bmmhYX0J97IrCpDkU3kDWe0qaXL6/AnCBgczet/HuqGHRX3cRnWSHzqnBY=
+ bh=qzJG7kxKFMpSFdFdkGk7ZpAYOVhX8z5MwLMuKVsGwYQ=;
+ b=MapQ3ix5FeI6909E8YLSRA+en50n6HM1J69IkLZtXyT+Qf0FOwC55tcnz9nGYEzEsuzAg1WGar6Rj2+chm40XbL3rqNDQMhDToGViQQQGgfXFE5Xc05u7IJLAe06qUrzVggGcsPow1vc3IED9hxs+DkVyb8OwLIPIlC094ZEyQo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by BN5PR12MB9461.namprd12.prod.outlook.com (2603:10b6:408:2a8::7)
+ by BY5PR12MB4259.namprd12.prod.outlook.com (2603:10b6:a03:202::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.33; Mon, 14 Apr
- 2025 06:29:05 +0000
+ 2025 06:48:46 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%3]) with mapi id 15.20.8632.030; Mon, 14 Apr 2025
- 06:29:05 +0000
-Message-ID: <6572f897-595a-4cfd-b697-8f277b7762df@amd.com>
-Date: Mon, 14 Apr 2025 08:29:03 +0200
+ 06:48:46 +0000
+Message-ID: <91fba3f7-6e61-4b8e-a1c5-7e0eb2af2ebb@amd.com>
+Date: Mon, 14 Apr 2025 08:48:40 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] arm64: zynqmp: fix dfu alt buffer clearing
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+Subject: Re: [PATCH v4 4/4] board/BuR/zynq: initial commit
+To: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
  u-boot@lists.denx.de
-Cc: Jassi Brar <jaswinder.singh@linaro.org>, Marek Vasut <marex@denx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>
-References: <20250407170529.893307-1-vincent.stehle@arm.com>
- <20250407170529.893307-6-vincent.stehle@arm.com>
+Cc: Adam Ford <aford173@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+References: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
+ <20250404072819.69642-5-bernhard.messerklinger@br-automation.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -111,102 +114,104 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20250407170529.893307-6-vincent.stehle@arm.com>
+In-Reply-To: <20250404072819.69642-5-bernhard.messerklinger@br-automation.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SJ0PR13CA0131.namprd13.prod.outlook.com
- (2603:10b6:a03:2c6::16) To SJ2PR12MB8109.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PH7P221CA0046.NAMP221.PROD.OUTLOOK.COM
+ (2603:10b6:510:33c::33) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|BN5PR12MB9461:EE_
-X-MS-Office365-Filtering-Correlation-Id: ae37393b-af0b-4dbf-e0fe-08dd7b1da790
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|BY5PR12MB4259:EE_
+X-MS-Office365-Filtering-Correlation-Id: b96392b4-0021-475c-069a-08dd7b206788
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M2FpUkU1RGw4NW1iRmNDK1hsT2NjT2lwYnFkeEQ2eDBBQ1A0QU1TVG43V1Fu?=
- =?utf-8?B?ZzdYWW1mbkcxVDZZcEhMU0xRZHd5SG1tK0gvYU91emRSVFNkdmpvYU5BUEc4?=
- =?utf-8?B?SmVsSisrUTRZQmhkZ3I1Nk5LMGU2Tk9hWHJxRk04aFlsTWVHWWVkM0FXdit1?=
- =?utf-8?B?WHkrbXpPbXVuVHlKcUoxRCs0OFYvRW5wdndSOFE1RlBXTk1wdWdzQWh3SXlH?=
- =?utf-8?B?L2U5ZUo4bFZXMDBKUjJ0dG94MlRDUnN5cDRHUDRoeHAweElpbHRTbmc0OGlO?=
- =?utf-8?B?TDk2Sy83N3ppR1RtVm9tZlVaSjh5cGtOVHJzOWdwS1VzOFd1OHFmTmQxbStN?=
- =?utf-8?B?TU9zVDZjMFUvbWVNU0JHVncxTmpJMkNTZnV1Z2hGaFo5TDBkaW16YmxSNmJF?=
- =?utf-8?B?MHhDZXQ2VnNQY0hrN01OMHNYMWhXVlVxTVFlTkpIOTNhbU1laWZORm55endu?=
- =?utf-8?B?cXY2NVlPeEdCZllqSzI1RFUzMytrbEZWMjlGN3JtQ016cU84WDh1allYTUJX?=
- =?utf-8?B?T0RZVWZTaHNnMHZqUWZ6RmY1di9KMEpnMEphdHIwYlZiZ29idjhEenh0U2h6?=
- =?utf-8?B?MjhVQVBnRXRocUtGekxsSkU3NGh2NzJpcWovTkY4MC91eWNWTkVidDM0NEFq?=
- =?utf-8?B?bFZXNmY3bmhpYUxiZEU0NitXeGR0L1JlN3ZDUitWbmVjaTBpTmZ3MTFBRy95?=
- =?utf-8?B?MnU2MFcyejZ5RGxIUTNLclNCVVpDcU1DK3ZOVXp0bUQ3MHh5MENLc0gzS0Nw?=
- =?utf-8?B?VjUrYmZjbTdKanFtdzFBbkM2bDdUNmhWbm9ndjM5Yi8vT0pOdHBIUkFlSWNo?=
- =?utf-8?B?NmhlK1RuOTJoV25CdVB6SkJ1bWF6Qi9ZaitIbndQeE1weWExYjgwM3d5clZz?=
- =?utf-8?B?cnIyZVlOTWhBQ2V4NWxnQ29lTFhoOGQxODRqMGkrWFVBQ1BPbjBFaW1tV2RH?=
- =?utf-8?B?SWRsWjFwWStOR1JRakFFb0FjbFNLTDVCV2xiOU5tQkJiMlUxQXRmL3JON1Rr?=
- =?utf-8?B?d3E3MkpIcXBhaTJ5TDRyQk1NMDFOUVcvOEZiZ1lRU0hTR2dIMnhwbzZnbVZp?=
- =?utf-8?B?dW50WTJYRFp4eGgvVzhrY2tyUUZjWVNnUEF1VHlPTFRDaUhWVWNCeTFCcUY3?=
- =?utf-8?B?Ri9oLzV2VlRZTVJHTHpxWFJKOUd6UE9JZWFDVURRbTNvS25IUkxvSDhTOHlB?=
- =?utf-8?B?QVhidnVYbVJ5SUFZTVJ0RUJCME1iRHVjVUZPZkNIcFVSc1VtdUNhVjJ5dkZ6?=
- =?utf-8?B?L0FZVDI2cEgxK2pwYlo2ZUdFRitsUzRHb3dMcWJsZ0owLzlOekNzd3NpUzBH?=
- =?utf-8?B?dDAxV1RDK0gvcjFiUGZXc0JaS05xTisyYk9GTW5yOEZHV3VoSjZXaEFHWDFo?=
- =?utf-8?B?UEIvWmYwUENkL2NXV2V4RytXRjlEVmVNVHQ0SHZQSVBqNlF1blZwZ3gySzhH?=
- =?utf-8?B?OTliTDRTbml6SVZIbldjNFNab1paMFpmZ3BpbEk0blpMMTFkbzdOT2pGVlN0?=
- =?utf-8?B?bC9aV0diaXdOWVZUMkdzbjFsbWNkclZ3dkhTU29zYStrZkZWYmgzR1VZcFNB?=
- =?utf-8?B?eWpaa0VvVXAxRnNQenhsVXc1WWdUMGE5Y3gzMUVZMldKUTlOampHOWpGWERz?=
- =?utf-8?B?T2crSHBtOTJmZlBYeCtLS1VVQXRNd0FxQmRHNEV2TVJlY1dxdERTc0JaU2ZC?=
- =?utf-8?B?ZVNzejc5cHl1NGJMRXZrQjVveE9UQ2k5cGZuVE5EbHArTVdFRHlPd0kyL2hl?=
- =?utf-8?B?bDRlaU10VDc4bHBXcXlsMmtmUVpwaTVwVVE2MjVVa0lZRFRDS3hCWFFQK2pX?=
- =?utf-8?B?RUhFTWFjbmE5QWtBdXVUamIwb0p6MEdpcmVTUUhjRTVsckVZYjdneERTU2U5?=
- =?utf-8?B?VTgrc3F0L2FiUGs2V3pmVFU0c2lSYXQwTVFvanVDa2FtTVBUMjUraDVPYndL?=
- =?utf-8?Q?oUGUY3nP1Hw=3D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|7416014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SXp1UlhyREc0L0Z1c1RDTWZibmE1aWhiczVVMTlSNEYydE9Xdko2T2RDMkVS?=
+ =?utf-8?B?UzF5U09aMnRqaTRVZERBUDk3RFROcFQ3a1o1M1c4RkhpU2VqbXNmcVpKeUo3?=
+ =?utf-8?B?V2tuLzVQVjRYS3JuOFNPZm5wZlRYMGFsS3VUejA5U2dhYnBGdGZCQUpmMVNG?=
+ =?utf-8?B?dmh2aDJVSzBpTzBVMDZIMkVMdnFDM1pyK1F1NVBRY2w3RDlvcjVaY2hVaFl5?=
+ =?utf-8?B?RDVMbUtja1NUVldEQklPa0R3UkR2VUdabis0NU1VU05PaUtlNXhjNDhxUjJn?=
+ =?utf-8?B?M1h0VG8wbktDcHFOZkZ2Y2pjYlUwMVdBaVBrMURwWjRaRDJ6WFZrUFNsT0oz?=
+ =?utf-8?B?Q3pYUTcrd2doNlNRTFhBMVRyK0hHdGdDRG5KQ29oQVVHQmlwWFliaFdMUHRD?=
+ =?utf-8?B?bURpbm1QMnB6VTVQYzhvL21YcTYxbUpoOGI5NVlLODlyQ1ZId1JuYXlkWnJR?=
+ =?utf-8?B?T09tYkh3Sk9lZXRKNGpxSmNCRnlXUVBkYkxHNWpZRXh6TysxMGh0MnBDY0F4?=
+ =?utf-8?B?cS9qQy9Bc01JQ2puS3J3T1ovMzBYZng4ME5RWktsaGVKZXdjZkdRMzdxdm1i?=
+ =?utf-8?B?cDJScDZ1d0toZkxhdzBRMFFFb0czelk0WWlMamZ1RDd4Qmlwams5b2pvbXpF?=
+ =?utf-8?B?a1V3bU9rVlpRTEQ5NjZtSExyeHBkVHJIRW01TTRaUkxSQlJtWmFMWHc1OEdz?=
+ =?utf-8?B?MUp1cXJFVkU5QjJyZW9rcGVGWEcrV0VoQmFyOENIYVV2c0dlcW5mdEhJMjF3?=
+ =?utf-8?B?S2hXMEJmdDZRVkFLQVpqYm91b0s3QzE0aEZsOTVrTFlBVEdUSmVoWmRyNW8r?=
+ =?utf-8?B?ZitqTUdUNDNwdU9wNTdKZmZqbjNRd0tSZ09wRzRFRnd0cUhoSEVqNTM5emcx?=
+ =?utf-8?B?UWdneEQ3T081Um5nRDc1bzJqNk9mb0xQdGN6dE84ck9MRC9EN0QrUG9haVlo?=
+ =?utf-8?B?akw1SlJiRjMyaDgwcUVVM3JpYkc3TE1FZ215V0VCZTQzdVFHVDNwVTVORUp1?=
+ =?utf-8?B?Zkg5dnF4aThXYmRHdVNmVzVES21QOHZxU0VuV2FIWWhLR2N5UnBWWjkvZlE3?=
+ =?utf-8?B?VTFaWEw2Yy8zNEtTdkY0cGloWHRKZzRybTl1UHJLSzdsd0ZUR3k1TFNac3JF?=
+ =?utf-8?B?QWxaaklTczlUNEYxYWNBd0ljaFBZOXkvbFZVUUlMZ1oxL2YvMmVBQWhNUEN4?=
+ =?utf-8?B?SWJiR09ZcjdQZEhpbzN2amtsWDBleVFMeUMrSGdaZ0NPT1J3N2RlUjlaTlFO?=
+ =?utf-8?B?RHREUUdlbkFwR3k5VE5XY0FrN3VURDJ0YlhsTXJnMVRkOG1pSGtFS1dpVkJS?=
+ =?utf-8?B?REdwQlBIYXBBWnFzc3ZVVGZpTmIyUU9IRExrYUhZenRoZ0xSdGQzL2dLZGdm?=
+ =?utf-8?B?Mjl5Q0VBTUVIVngzbUxRTEhmK3Z1RWNkc3ZmSzVPdUdrWVIwSDFKcW1ZYzB2?=
+ =?utf-8?B?OWJuNmpaMHp0anRDTStDUEhSL3JFNWErSGNFc2tOOXlhZEpzcnV0VVFIZDdH?=
+ =?utf-8?B?RmQzZW1yZ1pLQ3Q0N0IwK01JazVYWnpPRGc0cDY4aXhuT2VMUkx0dWd0MGRl?=
+ =?utf-8?B?VTl2azJQYnl2U3pTVWxUa0ZaM3hSVVgvVzY3Yzd6YlZxRnA2NlBnMit5dS9R?=
+ =?utf-8?B?QjQ0M3lZaGhGU3l6MkRZRTdWbUtSNHFoZnFaQ1V5SEtrNWhpcGRvejZiRktw?=
+ =?utf-8?B?dnpvNFovZ3YraGtRTkJzdVQ2UmZHbjRGdXVKTFdoaFZ1WjBENENYWldzVHNs?=
+ =?utf-8?B?WkJJcjFnbGFLZ09SUHk4RjVySTAzaTJ6dXhRWGNCQUVaSmI1MW83Ukgrek8x?=
+ =?utf-8?B?UE5WYWJpSnFEVkZGcU02VGpxMXZzc3lwZmZPU0I3RzExWGRXSWFEVlBkVlRP?=
+ =?utf-8?B?MDF1WU5LL3J3VTJudDc4V2NldFVGaG01L0Y5cTdUSGdNREtaMTQ3b2hOa0J5?=
+ =?utf-8?Q?zCzFJheP0EU=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VmxHR2xqRkVvbm5yNlFEeXd2aUkwV001T0VTbEVib2R3cStIUFliZTVxR0Zn?=
- =?utf-8?B?czF4THZJSjNDVHU2NFVzTlVqV3ZxdDNXbXFtZ3FJNStnbTNBTHpwTHcrak9i?=
- =?utf-8?B?L04rWjBkNG9zZCsvZVdUajhCemp3WE1tT3NiOUQ4Vk96TTNsUUJkb1Bqa3Vy?=
- =?utf-8?B?UkxTeWdRcE9JN0RCWWg2OFhObE1uZU5lWS95bENkenpha1hDVzdUNE4vemJ2?=
- =?utf-8?B?TkhNOURuNlFLbGw5elNic1RvdExpd04rOXFaYmdmaWlZV0JPcVBvY1p6MzlZ?=
- =?utf-8?B?NndscmVnK3hJUUhVLzdTSXdkUDBva2JTRWpQWjVvbkFaaWk4dnE4OTNEejEv?=
- =?utf-8?B?Ky9pVUpWSUpNYTYydWsyUkkyQldyNW1FUkJrZGFzNTNiTnVMcGlsT1owQUgw?=
- =?utf-8?B?TjByM0lRZlRhTklkL0Vib0FWYTA0a1dVWU1HT1pJSTYwZHpidjJnRW1rT1ZL?=
- =?utf-8?B?SEQ2VHg0QzU3SHZxMEg0LzNQY1kwMEE0Tmg0YUdPVDIxVlZGT0VxZEVpWStj?=
- =?utf-8?B?WW9RYzZhRi9obFBkTDZlNVF1NzBDTS9jaWlVVGl2eVFjdUhkcGdVend1OEhD?=
- =?utf-8?B?YmVuUEs4UjR5eFJrUFRBNUxQcEM0VVQ4ejZqTy80TG5EU0ZjT0RaWEdnU1E2?=
- =?utf-8?B?ek95S2ZqaU1JWk1xZkk1NktMMGpLR1ViczRnbkhQTElES0ZhdUc3Tk5YN3dw?=
- =?utf-8?B?U0p4UU9NUEwrenpwSDZuNVdLWCtHbU1LMUVWMnE1NG1QbWJXWThRMUI2blk0?=
- =?utf-8?B?ZkxzSHM1UjdnbnJBSmQ1OCtnSkY4ejJVL1B5eWpVeHFSYXg0dktBRHg3aTlq?=
- =?utf-8?B?a2JsYzVlODJCOGxqZ1lNUStXWkYvdEtVUVQ5QkkxT3RJUGRralRldzZZNzFO?=
- =?utf-8?B?WHFtSTBjMVB5LzRoVjlteC9OSER1K0trQzZzcldsMEthUi9pSEUyeCtjN29Z?=
- =?utf-8?B?RFZsSDQ4TkkvWTBPTjhqQmo3dDhsc1E4Vlh4WWJGTzVDWmVEbk9wMml4MHRZ?=
- =?utf-8?B?Q1VhaWhrTEpFOEJmQ0ZDRzBHTzVVRk9ubUJXcHkvKy9rWmthTHAyTnJxdjNr?=
- =?utf-8?B?T255MVAwWEpRaVNMWTY4UU1sVUp6SmZnQ3NSUCtaRTdrUldZdGYrejIxUWRI?=
- =?utf-8?B?VHRSR1lUNXo3NTU1QzdsWS9Cd3ZrcWZmVTlKaVVaVWlkSWNRQitaK21MM2RH?=
- =?utf-8?B?RkRyNFRrVHRBV0dONzRnbkJhbWtyL2lCUVVRQW5RMEpINUtzL1VTNGh0Um40?=
- =?utf-8?B?NGFsSlZaTHU2eXlYSk1HdXc2VjkvWm5KaGlNL05wZ05MTGZTVExkSHBUNWVD?=
- =?utf-8?B?Y29pTTN2cWh2aVRFTGtPcFcxM2RwTEFWdVY1SUE0dUVWR1ZMTVhEQ0dtVDdF?=
- =?utf-8?B?SFkrWjBYSW1XanZNN0phQWhnL1o1eERmZDZFRFVmVUNNWUZnT1Z0ZVRQOG1l?=
- =?utf-8?B?N1BYOWFRMWlOdDdSd1k4S3VNOVNrYkVFZkMxeUZXMHNUeGhHZlpvSFhEelU1?=
- =?utf-8?B?bzVWdjArUlo1K0p4VGRRZFM2NmR1a1dvQUgzWnliK0RPcWxnc0FRMXl4aHpt?=
- =?utf-8?B?d0hsLy96aUlXSmRYVVB1N1p2V1dyZFlON3ZuRjJ4OEwxT3M3R3hzZnJzZCtT?=
- =?utf-8?B?WUE2UVA5YldBWktGL0ZBWVIwZFNLbjczenVxRHZNQmF4TUNzUHVtSGQwNmQz?=
- =?utf-8?B?OElKek9Wdm93RU1zb3RZb1E4M0dvRmx2UGJQOTlqYTNHSkEyNWZQSjFZb1Jw?=
- =?utf-8?B?bFNvWEhGSkt2dnpSNlRHSHNidEdTekl6ZE5OUnhrdDJVVlJTSnBEdGs2b0c0?=
- =?utf-8?B?YXBualh6MUpmR1I1RGlLYnRMb0NueGwzZithaTRXRGYxRWRRY2NRZEFTR1dt?=
- =?utf-8?B?TC9yb3F3VDN1K2dlb3FyR3h0NElKY1BMNUVjR3lMaEE5dXMyOWRteDN5MG02?=
- =?utf-8?B?SStQbndKVWFtbTdhUE0yWUtKZ2gwc0xDbjVHMEJFcG5QYmZoamxqbFd0YlpF?=
- =?utf-8?B?WVU0YkdpQVUrRzc5aEpyY2NsM2lFTkR5NEhKM3NvWHBIMUc2UndhOFdsbHk2?=
- =?utf-8?B?c3U3WkxJVlJoaXBJclhHZlI3aHlmMGkyOEo3SzJLWHdqaGkwKzVRWEVOZGFH?=
- =?utf-8?Q?0PuUnlRq/PLufWC0k/aZbJo51?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aG1LV09SYlRoNi9YSDZCUEJ0cmZra0pjTHBhYlF1Y0NpWmthWklrM1Mwd2N4?=
+ =?utf-8?B?NWcyRU01ZnFhZWpVZEpLNWpDd0JMdDIxcUlpYUl4Z0VWYjV6Q0Z5OHpxdUZs?=
+ =?utf-8?B?eGpvdHhLZW9sbjFaK1BsUExVOVJ1eE14VHhaRU1Rb3hXUk9LZlMyQWQ3YzJu?=
+ =?utf-8?B?NmdIOWtLcHpIdGtJM1RmejFoVkFkU2c5UkkrWlVpL3B3eC9uWmxVRWpRbDV1?=
+ =?utf-8?B?bExCYTNtYjlyODhsWmRXaHhNU0FlRkJYQ2EreVFOUmc4WVRZZW1IdFR6N1dt?=
+ =?utf-8?B?Q2ErS2RhRGpkR1lmTXJaUkdTbTRhN1VlMkw1YzJ1c3dHcHo1ZDQxdGpjN3di?=
+ =?utf-8?B?NjlpamNkT3l2M3F6YXVoSDJSeFc5RjZOSzBXYlhzb3UzbTNZWVo5aGJ1bjdy?=
+ =?utf-8?B?amh2UjR2NVY4dWJ3TGVicXd3TkdZbThzb2tlRm1mTVpPWWIxdzYzZHVCem5n?=
+ =?utf-8?B?SW91ZE9NUnZlUml5akpnV1ErUDBsalljcittRXBDNGg2L3JkbU9FWkpYN3VM?=
+ =?utf-8?B?cTZLY0QxaUI3K2xpSkZsZXJ5cUs3SkhreU1KWnNpeGlGdUpnVmhtZkNpZDdn?=
+ =?utf-8?B?SjdYcjZkenpCYkZZMU1UVk1xdnhxbUJzaW5ZdFVsZkVoZ3NwaHl4S0pMMHRz?=
+ =?utf-8?B?WWZDMHNyZVg1NmI1d0dwMmtBQmFHYS9KTThJTm9NdWF6cXZaUkU2QW5LYTdz?=
+ =?utf-8?B?TDRwRWQvU0wvNDhyZWZaWnRWK1ZJY2Y3L3NvbW9zb1kyV0Y4ZS83Z2JuNXEr?=
+ =?utf-8?B?Nnl0NTZ0bmZDR3dvZmdtUklzenN1eXZ4ZktqbVp4aU1QbmZwYVFPQTRWZ2Jl?=
+ =?utf-8?B?Lzlxb2swVWJCd1ZVWS9sVHp6ZHFXVFBCKzE3TE1IelJtc1JiZHVRNEdXVnBW?=
+ =?utf-8?B?WkQ3S2ZWeVAyQzkrRjVMZHdFcjUzYWFWRm9qRzRtcEZpZC9KWVI4a1d4TEZ2?=
+ =?utf-8?B?VEpacGVhMytFVnNNbUdmNFVHelRwc1ZPSWlZQkdzZHlEUFM5czF0Qk9aNWNs?=
+ =?utf-8?B?VzR5S0drWE8yVXBodEdzcVo1dUpGamtTV096dWhuTDZpRWRzaWN3dWNPakZz?=
+ =?utf-8?B?ZnFOMlowR051VVVHbG1tM0g5YmdsZ1Q4dkRScXp0RG50SmtEaDJpZ0E2cTNj?=
+ =?utf-8?B?ZTVsdkRGRklQd1hlVEVXVWZaUnZHdmMrZVEvcHJyVEFzMzZLNnhVQVlkRjly?=
+ =?utf-8?B?WFZPWWJ4WWlyVHd1a2NWS2dMUDl5VGRqOFJNZWI4UmwxV1Z6ZnMvZ0VHakFY?=
+ =?utf-8?B?Z3VTZEZlaFM5Y3hjNXFKaHYxMUc1cXExL3ZvaEZwWFE0d1Nxa3hXNUkwUlJz?=
+ =?utf-8?B?NGczSE5sSFQyc3RIaFZRcFFucGJTS3hoUlUxRDVZWFUyZUtxNjlPUVZ2VmVR?=
+ =?utf-8?B?VFNBM1YzVEpCa3JrZXdaK01iejVvem1TZ1hSem5OY25mMHdxaVdxSEJLRERO?=
+ =?utf-8?B?UHlBekJQcmVHMjJUZ1BKbmkyOFJwdzYwUU9OZS9DUlBtQm5RMmNDdDVOYkRx?=
+ =?utf-8?B?N3ZQZG1oUjd2amVtaDhrUlhFVUp4QU1QSUFtNGZpK2hoM3JsTUJLeVZZVUlW?=
+ =?utf-8?B?cVR6aHNEQmFnMGQxYldwQmhXakE2aXBpaFQ2WnBvTWh1ZkFVMUUyK0ovVlZt?=
+ =?utf-8?B?Sk1DaVVGNnBPa2tjTzgyK2s3TjQzVVc4NWgxT1JLWDVTNU90Sml4WVp3Tndu?=
+ =?utf-8?B?STYzVWkzZ09meEJUWXJHOGoxQmFtdENUOENkKzFKZzdWZXE0Y0tFQjY4UTRP?=
+ =?utf-8?B?L1RvOXlSMTNkbUFES01ISzhPTkVjWGhxRzZvVmVYMEtuTU1EVHJRZll5QmJ6?=
+ =?utf-8?B?bWVOcjlqUVpEcm1MeFBVMFd5SUdPQzJ2L1RuaWs4THRheldvU3pYTFNmRm9l?=
+ =?utf-8?B?V0JyeTNMcml6SkxoVXdiTmk3eGIyUXcvczQvcEhjS1QzcEFEcVFlVnZOZEtH?=
+ =?utf-8?B?RmVYeUJtT1MzWC8wenhjcmtkbnc2VW03K29EYTl0bDZMbjdQU1BZOEwwZHBF?=
+ =?utf-8?B?WEZvbjRSbE1lVEUwT0tHQ0NsZFZzV2tZYk5XWklmL0lJamxLbW9oUnZDMnpl?=
+ =?utf-8?B?QUVodmFkVy9kVXJlOXNPMjhFVjNMRlBQYTQ1Z2xjV3ZTZWRzbzZ6UmFKWXhP?=
+ =?utf-8?Q?LiyfgoVd7yoPS/Vc2DWLIym/Z?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae37393b-af0b-4dbf-e0fe-08dd7b1da790
+X-MS-Exchange-CrossTenant-Network-Message-Id: b96392b4-0021-475c-069a-08dd7b206788
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 06:29:05.3049 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 06:48:46.4317 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OOF72QhJyWgQ+v7idyWi0PzpV+e/mPzLQMLEqPZZV+37ch1f3OrfNM+8blhgoMx5
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9461
+X-MS-Exchange-CrossTenant-UserPrincipalName: BWtqmIlPJjBFh3ee48LjGUDh8yLlbp0gcqj8qlNtL2cJpcD8yKeZAYq9eVGVfP86
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4259
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -225,37 +230,430 @@ X-Virus-Status: Clean
 
 
 
-On 4/7/25 19:05, Vincent Stehlé wrote:
-> The set_dfu_alt_info() function calls the ALLOC_CACHE_ALIGN_BUFFER()
-> macro to declare a `buf' variable pointer into an array allocated on the
-> stack. It then calls the memset() function to clear the useable portion
-> of the array using the idiomatic expression `sizeof(buf)'.
+On 4/4/25 09:28, Bernhard Messerklinger wrote:
+> This commit adds support for the brcp1, brsmarc2, brcp150 and brcp170
+> boards. This boards are based on the Xilinx Zynq SoC.
 > 
-> While this would indeed work fine for an array, in the present case we
-> end up clearing only the size of a pointer.
-> Fix this by specifying the explicit size `DFU_ALT_BUF_LEN' instead.
-> 
-> Fixes: b86f43de0be0 ("xilinx: zynqmp: Add support for runtime dfu_alt_info setup")
-> Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>
 > ---
->   board/xilinx/zynqmp/zynqmp.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index 820fb252a3f..687dcd3ac9d 100644
-> --- a/board/xilinx/zynqmp/zynqmp.c
-> +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -669,7 +669,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
->   	if (env_get("dfu_alt_info"))
->   		return;
+> Changes in v4:
+> - Fix device tree Makefile to only build B&R Zynq device trees
+> if the target is from B&R.
+> 
+> Changes in v3:
+> - Split spi_flash and qspi controller node in device tree for the usage
+> of bootph-all
+> - Merge binman descriptions into one zynq-binman-brcp1
+> - Add links instead of manually including u-boot.dtsi files
+> - Remove empty MAC addresses nodes from the device tree
+> - Seperate B&R Zynq device trees in the devicetree Makefile
+> 
+> Changes in v2:
+> - Remove all unnecessary device-tree entries
+> - Reviewed led names (no pattern restriction found)
+> - Fix maintainers file
+> - Cleanup of code
+> - Move preboot variable to env file
+> 
+>   arch/arm/dts/Makefile                         |   7 +
+>   arch/arm/dts/zynq-binman-brcp1.dtsi           | 102 +++++++
+>   arch/arm/dts/zynq-brcp1.dtsi                  | 131 +++++++++
+>   arch/arm/dts/zynq-brcp150-u-boot.dtsi         |  34 +++
+>   arch/arm/dts/zynq-brcp150.dts                 | 173 +++++++++++
+>   arch/arm/dts/zynq-brcp170-u-boot.dtsi         |  26 ++
+>   arch/arm/dts/zynq-brcp170.dts                 | 139 +++++++++
+>   arch/arm/dts/zynq-brcp1_1r-u-boot.dtsi        |  30 ++
+>   arch/arm/dts/zynq-brcp1_1r.dts                |  28 ++
+>   arch/arm/dts/zynq-brcp1_1r_switch-u-boot.dtsi |   1 +
+>   arch/arm/dts/zynq-brcp1_1r_switch.dts         |  30 ++
+>   arch/arm/dts/zynq-brcp1_2r-u-boot.dtsi        |   1 +
+>   arch/arm/dts/zynq-brcp1_2r.dts                |  21 ++
+>   arch/arm/dts/zynq-brsmarc2-u-boot.dtsi        |  30 ++
+>   arch/arm/dts/zynq-brsmarc2.dts                | 157 ++++++++++
+>   arch/arm/mach-zynq/Kconfig                    |   1 +
+>   board/BuR/zynq/Kconfig                        |  14 +
+>   board/BuR/zynq/MAINTAINERS                    |  11 +
+>   board/BuR/zynq/Makefile                       |  15 +
+>   board/BuR/zynq/brcp150/board.c                |   4 +
+>   board/BuR/zynq/brcp150/ps7_init_gpl.c         | 278 ++++++++++++++++++
+>   board/BuR/zynq/brcp170/board.c                |   4 +
+>   board/BuR/zynq/brcp170/ps7_init_gpl.c         | 274 +++++++++++++++++
+>   board/BuR/zynq/brcp1_1r/board.c               |   4 +
+>   board/BuR/zynq/brcp1_1r/ps7_init_gpl.c        | 274 +++++++++++++++++
+>   board/BuR/zynq/brcp1_1r_switch/board.c        |   4 +
+>   board/BuR/zynq/brcp1_1r_switch/ps7_init_gpl.c | 270 +++++++++++++++++
+>   board/BuR/zynq/brcp1_2r/board.c               |   4 +
+>   board/BuR/zynq/brcp1_2r/ps7_init_gpl.c        | 277 +++++++++++++++++
+>   board/BuR/zynq/brsmarc2/board.c               |  30 ++
+>   board/BuR/zynq/brsmarc2/ps7_init_gpl.c        | 276 +++++++++++++++++
+>   board/BuR/zynq/common/board.c                 | 231 +++++++++++++++
+>   board/BuR/zynq/env/brcp1.env                  | 109 +++++++
+>   board/BuR/zynq/env/brcp150.env                | 119 ++++++++
+>   configs/brcp150_defconfig                     | 121 ++++++++
+>   configs/brcp170_defconfig                     | 120 ++++++++
+>   configs/brcp1_1r_defconfig                    | 120 ++++++++
+>   configs/brcp1_1r_switch_defconfig             | 121 ++++++++
+>   configs/brcp1_2r_defconfig                    | 120 ++++++++
+>   configs/brsmarc2_defconfig                    | 120 ++++++++
+>   include/configs/brzynq.h                      |  21 ++
+>   41 files changed, 3852 insertions(+)
+>   create mode 100644 arch/arm/dts/zynq-binman-brcp1.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp1.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp150-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp150.dts
+>   create mode 100644 arch/arm/dts/zynq-brcp170-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp170.dts
+>   create mode 100644 arch/arm/dts/zynq-brcp1_1r-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp1_1r.dts
+>   create mode 120000 arch/arm/dts/zynq-brcp1_1r_switch-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp1_1r_switch.dts
+>   create mode 120000 arch/arm/dts/zynq-brcp1_2r-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp1_2r.dts
+>   create mode 100644 arch/arm/dts/zynq-brsmarc2-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brsmarc2.dts
+>   create mode 100644 board/BuR/zynq/Kconfig
+>   create mode 100644 board/BuR/zynq/MAINTAINERS
+>   create mode 100644 board/BuR/zynq/Makefile
+>   create mode 100644 board/BuR/zynq/brcp150/board.c
+>   create mode 100644 board/BuR/zynq/brcp150/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp170/board.c
+>   create mode 100644 board/BuR/zynq/brcp170/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r/board.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r_switch/board.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r_switch/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp1_2r/board.c
+>   create mode 100644 board/BuR/zynq/brcp1_2r/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brsmarc2/board.c
+>   create mode 100644 board/BuR/zynq/brsmarc2/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/common/board.c
+>   create mode 100644 board/BuR/zynq/env/brcp1.env
+>   create mode 100644 board/BuR/zynq/env/brcp150.env
+>   create mode 100644 configs/brcp150_defconfig
+>   create mode 100644 configs/brcp170_defconfig
+>   create mode 100644 configs/brcp1_1r_defconfig
+>   create mode 100644 configs/brcp1_1r_switch_defconfig
+>   create mode 100644 configs/brcp1_2r_defconfig
+>   create mode 100644 configs/brsmarc2_defconfig
+>   create mode 100644 include/configs/brzynq.h
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 267b0179a5f..10c1e34713a 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -297,6 +297,13 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
+>   	zynqmp-zc1751-xm017-dc3.dtb		\
+>   	zynqmp-zc1751-xm018-dc4.dtb		\
+>   	zynqmp-zc1751-xm019-dc5.dtb
+> +dtb-$(CONFIG_TARGET_ZYNQ_BR) += \
+> +	zynq-brcp1_2r.dtb			\
+> +	zynq-brcp1_1r.dtb			\
+> +	zynq-brcp1_1r_switch.dtb		\
+> +	zynq-brsmarc2.dtb			\
+> +	zynq-brcp150.dtb			\
+> +	zynq-brcp170.dtb
 >   
-> -	memset(buf, 0, sizeof(buf));
-> +	memset(buf, 0, DFU_ALT_BUF_LEN);
->   
->   	multiboot = multi_boot();
->   	if (multiboot < 0)
+>   zynqmp-p-a2197-00-revA-x-prc-01-revA-dtbs := zynqmp-p-a2197-00-revA.dtb zynqmp-p-a2197-00-revA-x-prc-01-revA.dtbo
+>   zynqmp-p-a2197-00-revA-x-prc-02-revA-dtbs := zynqmp-p-a2197-00-revA.dtb zynqmp-p-a2197-00-revA-x-prc-02-revA.dtbo
+> diff --git a/arch/arm/dts/zynq-binman-brcp1.dtsi b/arch/arm/dts/zynq-binman-brcp1.dtsi
+> new file mode 100644
+> index 00000000000..3cc8ee8b810
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-binman-brcp1.dtsi
+> @@ -0,0 +1,102 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2025 B&R Industrial Automation GmbH
+> + */
+> +
+> + #include <config.h>
+> +
+> +/ {
+> +	binman {
+> +		bootph-all;
+> +		filename = "flash.bin";
+> +		pad-byte = <0xff>;
+> +		align-size = <16>;
+> +		align = <16>;
+> +
+> +		blob@0 {
+> +			filename = "spl/boot.bin";
+> +			offset = <0x0>;
+> +		};
+> +
+> +		fit {
+> +			description = "U-Boot BR Zynq boards";
+> +			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+> +
+> +			images {
+> +				uboot {
+> +					description = "U-Boot BR Zynq";
+> +					type = "firmware";
+> +					os = "u-boot";
+> +					arch = "arm";
+> +					compression = "none";
+> +					load = <CONFIG_TEXT_BASE>;
+> +					u-boot-nodtb {
+> +					};
+> +				};
+> +
+> +				fdt-0 {
+> +					description = "DTB BR Zynq";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					u-boot-dtb {
+> +					};
+> +				};
+> +			};
+> +
+> +			configurations {
+> +				default = "conf-0";
+> +
+> +				conf-0 {
+> +					description = "BR Zynq";
+> +					firmware = "uboot";
+> +					fdt = "fdt-0";
+> +				};
+> +			};
+> +		};
+> +
+> +		blob-ext@0 {
+> +			filename = "blobs/cfg.img";
+> +			offset = <0xC0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@5 {
+> +			filename = "blobs/cfg_opt.img";
+> +			offset = <0xD0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@1 {
+> +			bootph-all;
+> +			filename = "blobs/bitstream.bit";
+> +			offset = <0x100000>;
+> +			size = <0x200000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@4 {
+> +			bootph-all;
+> +			filename = "blobs/bitstream_update.bit";
+> +			offset = <0x400000>;
+> +			size = <0x200000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@2 {
+> +			filename = "blobs/bootar.itb";
+> +			offset = <0x900000>;
+> +			size = <0x600000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@3 {
+> +			filename = "blobs/dtb.bin";
+> +			offset = <0xF00000>;
+> +			size = <0x100000>;
+> +			optional;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp1.dtsi b/arch/arm/dts/zynq-brcp1.dtsi
+> new file mode 100644
+> index 00000000000..ebaf42d9419
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp1.dtsi
+> @@ -0,0 +1,131 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/include/ "zynq-7000.dtsi"
+> +#include <dt-bindings/gpio/gpio.h>
+> +
+> +/ {
+> +	model = "BRCP1 CPU";
+> +	compatible = "br,cp1",
+> +		     "xlnx,zynq-7000";
+> +
+> +	aliases {
+> +		i2c0 = &i2c0;
+> +		serial0 = &uart0;
+> +		spi0 = &qspi;
+> +		mmc0 = &sdhci0;
+> +	};
+> +
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0x0 0x40000000>;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	usb_phy0: phy0 {
+> +		compatible = "usb-nop-xceiv";
+> +		#phy-cells = <0>;
+> +	};
+> +
+> +	brd_rst: board_reset {
+> +		compatible = "br,board-reset";
+> +		pin = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +		se_green {
+> +			label = "S_E_GREEN";
+> +			gpios = <&ledgpio 0 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		se_red {
+> +			label = "S_E_RED";
+> +			gpios = <&ledgpio 1 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		rdy_f_yellow {
+> +			label = "RDY_F_YELLOW";
+> +			gpios = <&ledgpio 2 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		re_green {
+> +			label = "R_E_GREEN";
+> +			gpios = <&ledgpio 3 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		re_red {
+> +			label = "R_E_RED";
+> +			gpios = <&ledgpio 4 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		plk_se_green {
+> +			label = "PLK_S_E_GREEN";
+> +			gpios = <&ledgpio 5 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		eth_se_green {
+> +			label = "ETH_S_E_GREEN";
+> +			gpios = <&ledgpio 6 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +	};
+> +};
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +
+> +	ledgpio: max7320@5d {	/* board LED */
+> +		status = "okay";
+> +		compatible = "maxim,max7320";
+> +		reg = <0x5d>;
+> +		#gpio-cells = <2>;
+> +		gpio-controller;
+> +		ngpios = <8>;
+> +	};
+> +
+> +	pmic0: da9062@58 {
+> +		compatible = "dlg,da9062";
+> +		reg = <0x58>;
+> +	};
+> +};
+> +
+> +&sdhci0 {
+> +	status = "okay";
+> +	max-frequency = <25000000>;
+> +};
+> +
+> +&uart0 {
+> +	status = "okay";
+> +};
+> +
+> +&qspi {
+> +	status = "okay";
+> +	spi-max-frequency = <100000000>;
+> +
+> +	spi_flash: spiflash@0 {
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		compatible = "jedec,spi-nor", "spi-flash", "s25fl256s1";
+> +		spi-max-frequency = <100000000>;
+> +		spi-cpol;
+> +		spi-cpha;
+> +		reg = <0>;
+> +	};
+> +};
+> +
+> +&usb0 {
+> +	status = "okay";
+> +	dr_mode = "host";
+> +	usb-phy = <&usb_phy0>;
+> +};
+> +
+> +&gpio0 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp150-u-boot.dtsi b/arch/arm/dts/zynq-brcp150-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..1bfd5f27a7e
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp150-u-boot.dtsi
+> @@ -0,0 +1,34 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +#include "zynq-binman-brcp1.dtsi"
+> +
+> +&i2c0 {
+> +	bootph-all;
+> +};
+> +
+> +&uart0 {
+> +	bootph-all;
+> +};
+> +
+> +&qspi {
+> +	bootph-all;
+> +};
+> +
+> +&spi_flash {
+> +	bootph-all;
+> +};
+> +
+> +&gpio0 {
+> +	bootph-all;
+> +};
+> +
+> +&brd_rst {
+> +	bootph-all;
+> +};
+> +
+> +&rs232_en {
+> +	bootph-all;
+> +};
 
-Applied.
-M
+nit:
+All these nodes with bootph-all don't need to be here.
+The reason was that flags (especially previous one) were not the part of 
+dt-schema. But now it is that's why there is no reason to separate them in 
+special file. You can simply add them to zynq-brcp150.dtsi
+
+Visible also with some other files below.
+
+Anyway I don't have issue with this patch that's why feel free to add
+
+Acked-by: Michal Simek <michal.simek@amd.com>
+
+Thanks,
+Michal
+
