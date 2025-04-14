@@ -4,117 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46311C369A2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 07:25:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0382C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 08:52:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A187E81F45;
-	Mon, 14 Apr 2025 09:25:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D6BB581F44;
+	Mon, 14 Apr 2025 10:52:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="US4qUQ1r";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="tb2QKALZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AC8581F7E; Mon, 14 Apr 2025 09:25:03 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E546F81F45; Mon, 14 Apr 2025 10:52:42 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E196281F44
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 09:25:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 928558003E
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 10:52:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43edecbfb46so26755885e9.0
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 00:25:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744615500; x=1745220300; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=BVZu4E6P28Jp388f4cuTUdgiNRIYtl+tRD2gEThfj2w=;
- b=US4qUQ1rPa4LuSi0ONlIwaAJf2A1yRFGhV+oexWYOCeXSNWjSd9ut6F9dcJP2SF8/l
- QatAyADzXDZrTWf1Cw00pUEDk0zD6Gs12kq6y8T+oQyWjXvqvwQ+G5jAuOhIIWLYoITq
- FzKVbqVpD46w8vUSw+xN64Nyc6iZXG8ad/vxCmhip3t302EeSoHEwMnyFsWM67Y+Xagy
- qAxQpBCfLsNyfs+8wRmKvsvEkkhqd+SK0B1MCu6KX1Fx1YsblGMgaq0tzcV3FYiMYd+H
- 5xTtB6vyIx4MmqUN1sCKk4SSqn3Dn8TBo9cmROPgSNPOm6yqFxwy34AbAjeeBmdi3cBc
- yFqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744615500; x=1745220300;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=BVZu4E6P28Jp388f4cuTUdgiNRIYtl+tRD2gEThfj2w=;
- b=mHvEp+DuyWMIS+1DetmXY9lITq1+GpX4y2Y45g67Da7PxWlrAuZ7mRUs9xMmZKOURB
- yBsu+RddG4sCSpFESNaadIrgTE4qquY0yq6WhBfzR4AY/bVFJh2LIcGTZYX5LFlev/JV
- vNHDOm3dG7/l1J29+zwWrXsDcp2Sq6wKVdZ0BZXvKq/7xyOESh9gsZgJ/N6MXi2BauTG
- OaSSM+6rapwVrahg2N5P95VLoCMy2vjl7giuWqy3kps0rwJIYRwOqw6TZCsPKCboAUXK
- wffC63FoTGu0x6/ES6+W6CH87/uc4PA7dto6zzaCvY2z4WV3a3zcVHo6LQ+2BZ1cP757
- BNhA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7cubuPrqutAj0FNTaGo0plKidI6AnPTNWRNlFSRmd4Jd/29ROleF0YbRUsD4ccSQndm/h868=@lists.denx.de
-X-Gm-Message-State: AOJu0YyV/K4yOk/2Mb3v9J4m9MWaI+Y2MdsfXIP5hTs+FdOZZMacO1un
- 2QUNT7kr65bjNrP2PUpJrEbnYFgAPtXj+8isX/N+AJj+p7LTEf1cTFOKlWr0SPk=
-X-Gm-Gg: ASbGnctIhD/eRScZcm1dJDWkdS160xRwBNv0059atXNnCIvnWGrVk21v3toPA1sJ9QK
- gFfKJGMwO4vCubD6QNUZfUdnegaeUZiGtH6ZjdFAvCJ1Tekv06NOy/eYXFiQnBAFJblIT6xMqU+
- 55D4hqPxTJbueMf4TKgx++h62+L84PjSqkCk9rarfgbDGTePeAphQL6j42ni52in2K52lTdaY7/
- sAE1iqut3ywRNdO7eAPNnlA7obqaA3yjHpBXdf7z++gG2e3kgRdSczS8sAeF+Ayw18pv+T98jff
- Z/ZtlCGj5qMQx3mgh+1t9i69LhWRg+7u6JX1+P/nN8ZwJ3Yn7efx1c2lh24pJ2W7MlNOMKjyngO
- 1pyathdEQ4IojAD0xFQ==
-X-Google-Smtp-Source: AGHT+IGaM57OBxfa+KgukZWGljA9JeiHoQrgcQmMH1cez3umtb1zIL8Ww+4E9Hy1fCK0n2AEsy/7aA==
-X-Received: by 2002:a05:600c:a15:b0:43c:e8ca:5140 with SMTP id
- 5b1f17b1804b1-43f3a9aa646mr90296065e9.23.1744615500243; 
- Mon, 14 Apr 2025 00:25:00 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:bf8a:3473:5c13:9743?
- ([2a01:e0a:3d9:2080:bf8a:3473:5c13:9743])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f2338d7d8sm173216205e9.4.2025.04.14.00.24.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Apr 2025 00:24:59 -0700 (PDT)
-Message-ID: <af42fc39-2283-4eb6-8844-085b72356e11@linaro.org>
-Date: Mon, 14 Apr 2025 09:24:59 +0200
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from gaggiata.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id B15A11F98D;
+ Mon, 14 Apr 2025 10:52:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1744620758;
+ bh=HyEjaDxSrLZA4ziorEktuYdV2CAqPkVKWAZkLVT0SZo=;
+ h=Received:From:To:Subject;
+ b=tb2QKALZ53M99/YUxFiKePNBwJznuOMZIZR9plPBWlYYe66l8aZx8qBW/0D7nJhfk
+ QNQ5JeeiebmVThTo779Rei48AkJ4ZYaO15AoV8TE/qW5PJ07+5qRQANzVj19L1cfkA
+ eA+EsZB5GgEytX9CpibtDtepTx8ntts846Y67vwUMrkg6CXJhCP4Ulp8819xFbsaQr
+ GKJX+IupoodNKq9GwOOi7LrvhCCYIcjGDehAylIyU7m78KlOT7updQRSqOua0pP4gK
+ OkI8AmQ64vNDRk7oPdsWMOd58NoGD0xJOLnOdDbHYfBsOlZASkFhGuee1ywdcBlP1B
+ wmjXzQMqwEnkA==
+Received: by gaggiata.pivistrello.it (Postfix, from userid 1000)
+ id 5D5F27F820; Mon, 14 Apr 2025 10:52:38 +0200 (CEST)
+Date: Mon, 14 Apr 2025 10:52:38 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Marek Vasut <marex@denx.de>
+Cc: Francesco Dolcini <francesco@dolcini.it>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
+Message-ID: <Z_zM1vhKKe07ax98@gaggiata.pivistrello.it>
+References: <20250324080315.GA6932@francesco-nb> <87pli6esx0.fsf@baylibre.com>
+ <Z-FQeVtIImeHsfXs@gaggiata.pivistrello.it>
+ <42f53c19-de12-45c3-9091-2e6c23d1fcd4@denx.de>
+ <Z-FpUV-fwGvch4-W@gaggiata.pivistrello.it>
+ <48e57653-d86a-4650-859e-1e77a6c29f4a@denx.de>
+ <Z_TnLsKHod_fvDsK@gaggiata.pivistrello.it>
+ <bf955296-b4fe-443a-8bf9-ead7afe57661@denx.de>
+ <20250411142123.GC12707@francesco-nb>
+ <7ad7bf3f-dd0b-4cd6-8a8a-5f35922da114@denx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] watchdog: qcom: introduce qcom-wdt driver
-To: Paul Sajna <hello@paulsajna.com>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Stefan Roese <sr@denx.de>
-Cc: u-boot-qcom@groups.io, Sam Day <me@samcday.com>
-References: <20250413-b4-qcom-wdt-v1-1-db42cb93dff8@paulsajna.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250413-b4-qcom-wdt-v1-1-db42cb93dff8@paulsajna.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7ad7bf3f-dd0b-4cd6-8a8a-5f35922da114@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,204 +76,129 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Sun, Apr 13, 2025 at 11:14:07AM +0200, Marek Vasut wrote:
+> On 4/11/25 4:21 PM, Francesco Dolcini wrote:
+> > On Tue, Apr 08, 2025 at 04:51:22PM +0200, Marek Vasut wrote:
+> > > On 4/8/25 11:06 AM, Francesco Dolcini wrote:
+> > > > On Mon, Mar 24, 2025 at 03:36:52PM +0100, Marek Vasut wrote:
+> > > > > On 3/24/25 3:16 PM, Francesco Dolcini wrote:
+> > > > > > On Mon, Mar 24, 2025 at 02:53:23PM +0100, Marek Vasut wrote:
+> > > > > > > On 3/24/25 1:30 PM, Francesco Dolcini wrote:
+> > > > > > > > On Mon, Mar 24, 2025 at 09:26:03AM +0100, Mattijs Korpershoek wrote:
+> > > > > > > > > Hi Francesco,
+> > > > > > > > > 
+> > > > > > > > > On lun., mars 24, 2025 at 09:03, Francesco Dolcini <francesco@dolcini.it> wrote:
+> > > > > > > > > 
+> > > > > > > > > > Hello Mattijs, Marek
+> > > > > > > > > > 
+> > > > > > > > > > On Thu, Mar 20, 2025 at 10:47:02AM +0100, Mattijs Korpershoek wrote:
+> > > > > > > > > > > On mer., mars 19, 2025 at 23:07, Marek Vasut <marex@denx.de> wrote:
+> > > > > > > > > > > 
+> > > > > > > > > > > > The UUU tool excepts the interrupt-in endpoint to be ep1in, otherwise
+> > > > > > > > > > > > it crashes. This is a result of the previous hard-coded EP setup in
+> > > > > > > > > > > > drivers/usb/gadget/epautoconf.c which did special-case EP allocation
+> > > > > > > > > > > > for SPL builds, and which was since converted to this callback, but
+> > > > > > > > > > > > without the special-case EP allocation in SPL part.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > This reinstates the SPL part in an isolated manner, only for NXP iMX
+> > > > > > > > > > > > SoCs, only for SPL builds, and only for the ep1in interrupt-in endpoint.
+> > > > > > > > > > 
+> > > > > > > > > > UUU can (and in our case is) used also on non-NXP i.MX platforms.
+> > > > > > > > > > What should we do?
+> > > > > > > > > 
+> > > > > > > > > Do reproduce the problem (UUU tool crashes) on those platforms with
+> > > > > > > > > recent U-Boot versions (v2024.10+) ?
+> > > > > > > > 
+> > > > > > > > Not tested, my comment is purely based on the code and the commit message.
+> > > > > > > > Older U-Boot versions (up to v2024.04, included) are working fine, with UUU used
+> > > > > > > > with TI K3 SoCs (AM69, AM62, AM62P).
+> > > > > > > Are you talking about the NXP UUU ?
+> > > > > > 
+> > > > > > yes, it works just fine on not-NXP SoC.
+> > > > > Then please test if it still works, and if not, this patch needs to be
+> > > > > expanded to cover TI ... or apply unconditionally in SPL (sigh).
+> > > > 
+> > > > I just found the time to check some logs from our CI in which we execute such a
+> > > > workflow.  We do use UUU only from U-Boot proper, so we are not going to be
+> > > > affected by this SPL specific change.
+> > > > 
+> > > > However I found this error in the logs, on both a TI AM62 and an i.MX8MP
+> > > > 
+> > > > ```
+> > > > Starting download of 40524455 bytes
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > ..........................................................................
+> > > > ..........................................................................
+> > > > ..........................................................................
+> > > > ..........................................................................
+> > > > .............
+> > > > downloading of 40524455 bytes finished
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > Starting download of 1675 bytes
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > downloading of 1675 bytes finished
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > Starting download of 82 bytes
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > downloading of 82 bytes finished
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> > > > ```
+> > > > 
+> > > > the download is successful however, despite those error messages. Any idea? Is
+> > > > this related to this topic?
+> > > I have a feeling it is the UUU which should be fixed to not depend on the
+> > > ep1-in , really.
+> > > 
+> > > You could however quickly try and apply the change in this patch not only to
+> > > SPL, but to U-Boot on your board as well, and see if those warnings
+> > > disappear.
+> > 
+> > So, I did a quick test and the issue is still there.
+> > 
+> > And looking better at the error now, this is about ep1in-bulk, that is
+> > not affected by this change at all.
+> > 
+> > 
+> > diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+> > index 477ecd020985..55b248505de5 100644
+> > --- a/drivers/usb/dwc3/gadget.c
+> > +++ b/drivers/usb/dwc3/gadget.c
+> > @@ -1632,23 +1632,7 @@ usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
+> >          if (usb_endpoint_is_bulk_out(desc))
+> >                  return dwc3_find_ep(gadget, "ep2out");
+> >          if (usb_endpoint_is_int_in(desc)) {
+> > -               /*
+> > -                * Special workaround for NXP UUU tool in SPL.
+> > -                *
+> > -                * The tool excepts the interrupt-in endpoint to be ep1in,
+> > -                * otherwise it crashes. This is a result of the previous
+> > -                * hard-coded EP setup in drivers/usb/gadget/epautoconf.c
+> > -                * which did special-case EP allocation for SPL builds,
+> > -                * and which was since converted to this callback, but
+> > -                * without the special-case EP allocation in SPL part.
+> > -                *
+> > -                * This reinstates the SPL part in an isolated manner,
+> > -                * only for NXP iMX SoCs, only for SPL builds, and only
+> > -                * for the ep1in interrupt-in endpoint.
+> > -                */
+> > -               if (IS_ENABLED(CONFIG_MACH_IMX) && IS_ENABLED(CONFIG_XPL_BUILD))
+> > -                       return dwc3_find_ep(gadget, "ep1in");
+> > -               return dwc3_find_ep(gadget, "ep3in");
+> > +               return dwc3_find_ep(gadget, "ep1in");
+> >          }
+> This should really be fixed in the UUU tool, not worked around in U-Boot.
+> Can you try and see if the UUU tool can be fixed and not hard-code ep1 ?
 
-On 13/04/2025 12:12, Paul Sajna wrote:
-> From: Caleb Connolly <caleb.connolly@linaro.org>
-> 
-> Some Qualcomm device vendors decide to turn the watchdog on in the
-> bootloader, resulting in the device being reset if it isn't petted every
-> ~30 seconds. Introduce a driver to disable the watchdog and prevent this
-> annoying behaviour.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> Signed-off-by: Paul Sajna <hello@paulsajna.com>
-> Tested-by: Paul Sajna <hello@paulsajna.com>
-> ---
-> This patch introduces a simple watchdog driver for Qualcomm devices.
-> 
-> Some devices, including one I have been spending a lot of time with,
-> the LG G7 ThinQ (codename judyln, arch sdm845) will reset within 30
-> seconds if the watchdog is not serviced.
-> 
-> I have tested this patch from Caleb Connolly that is over a year old and has
-> not yet been upstreamed, and it is very useful to me. I can hardly use
-> u-boot on this device without it. I have received Caleb's permission to
-> work on upstreaming this patch.
-> 
-> This is my first contribution to U-Boot, and I am unfamiliar with
-> mailing list workflows, so please be patient :)
-> ---
->   configs/qcom_defconfig      |   2 +
->   drivers/watchdog/Kconfig    |   7 ++++
->   drivers/watchdog/Makefile   |   1 +
->   drivers/watchdog/qcom-wdt.c | 100 ++++++++++++++++++++++++++++++++++++++++++++
->   4 files changed, 110 insertions(+)
-> 
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..0232f6d51c552bd06c8ba72b71edb5cb72fe0706 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -144,3 +144,5 @@ CONFIG_VIDEO_FONT_16X32=y
->   CONFIG_SYS_WHITE_ON_BLACK=y
->   CONFIG_NO_FB_CLEAR=y
->   CONFIG_VIDEO_SIMPLE=y
-> +CONFIG_WDT_QCOM=y
-> +CONFIG_WDT=y
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 1bb67f5035231df9f6ce01adb08d074855393143..808f4e578e28e7812f93b393a7f7d95d9501cdd4 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -335,6 +335,13 @@ config WDT_K3_RTI_FW_FILE
->   
->   endif
->   
-> +config WDT_QCOM
-> +	bool "Qualcomm watchdog timer support"
-> +	depends on WDT && ARCH_SNAPDRAGON
-> +	help
-> +	  Select this to enable Qualcomm watchdog timer, which can be found on
-> +	  some Qualcomm chips.
-> +
->   config WDT_SANDBOX
->   	bool "Enable Watchdog Timer support for Sandbox"
->   	depends on SANDBOX && WDT
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index e6bd4c587af6133c405dde6dbada8050debc781c..5eaabd4aba58c815de4165f901aecfba0e0da255 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -54,3 +54,4 @@ obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
->   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
->   obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
->   obj-$(CONFIG_WDT_ADI) += adi_wdt.o
-> +obj-$(CONFIG_WDT_QCOM) += qcom-wdt.o
-> diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..a7ce31ef811c717fd16700aa7d984a000763a93e
-> --- /dev/null
-> +++ b/drivers/watchdog/qcom-wdt.c
-> @@ -0,0 +1,100 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2014, The Linux Foundation. All rights reserved.
-> + * Copyright (c) Linaro Ltd. 2024
-> + *
-> + * Authors:
-> + *   Caleb Connolly <caleb.connolly@linaro.org>
-> + *
-> + * Derived from linux/drivers/watchdog/qcom-wdt.c
-> + */
-> +
-> +#include <dm.h>
-> +#include <wdt.h>
-> +
-> +#include <asm/io.h>
-> +
-> +enum wdt_reg {
-> +	WDT_RST,
-> +	WDT_EN,
-> +	WDT_STS,
-> +	WDT_BARK_TIME,
-> +	WDT_BITE_TIME,
-> +};
-> +
-> +struct qcom_wdt_match_data {
-> +	const u32 *offset;
-> +};
-> +
-> +struct qcom_wdt {
-> +	void __iomem *base;
-> +	const u32 *layout;
-> +};
-> +
-> +static const u32 reg_offset_data_kpss[] = {
-> +	[WDT_RST] = 0x4,
-> +	[WDT_EN] = 0x8,
-> +	[WDT_STS] = 0xC,
-> +	[WDT_BARK_TIME] = 0x10,
-> +	[WDT_BITE_TIME] = 0x14,
-> +};
-> +
-> +static const struct qcom_wdt_match_data match_data_kpss = {
-> +	.offset = reg_offset_data_kpss,
-> +};
-> +
-> +static void __iomem *wdt_addr(struct qcom_wdt *wdt, enum wdt_reg reg)
-> +{
-> +	return wdt->base + wdt->layout[reg];
-> +}
-> +
-> +int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-> +{
-> +	/* unimplemented */
-> +	return 0;
-> +}
-> +
-> +int qcom_wdt_stop(struct udevice *dev)
-> +{
-> +	struct qcom_wdt *wdt = dev_get_priv(dev);
-> +
-> +	writel(0, wdt_addr(wdt, WDT_EN));
-> +	if (readl(wdt_addr(wdt, WDT_EN))) {
-> +		printf("Failed to disable Qualcomm watchdog!\n");
-> +		return -EIO;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int qcom_wdt_probe(struct udevice *dev)
-> +{
-> +	struct qcom_wdt *wdt = dev_get_priv(dev);
-> +	struct qcom_wdt_match_data *data = (void *)dev_get_driver_data(dev);
-> +	int ret;
-> +
-> +	wdt->base = dev_read_addr_ptr(dev);
-> +	wdt->layout = data->offset;
-> +
-> +	ret = qcom_wdt_stop(dev);
+I do not have time to look into that at the moment, I created an issue
+https://github.com/nxp-imx/mfgtools/issues/472, hopefully NXP will have a look.
 
-Fine but perhaps just add a simple code into qcom_wdt_start() and add
-a reset callback to allow people to actually use the wdog from u-boot
-with CONFIG_WATCHDOG_AUTOSTART and/or u-boot,autostart.
-
-No need to implement set_timeout, we can use the bootloader value.
-
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct wdt_ops qcom_wdt_ops = {
-> +	.stop = qcom_wdt_stop,
-
-You forgot qcom_wdt_start()
-
-> +};
-> +
-> +static const struct udevice_id qcom_wdt_ids[] = {
-> +	{ .compatible = "qcom,kpss-wdt", .data = (ulong)&match_data_kpss },
-> +	{}
-> +};
-> +
-> +U_BOOT_DRIVER(qcom_wdt) = {
-> +	.name = "qcom_wdt",
-> +	.id = UCLASS_WDT,
-> +	.of_match = qcom_wdt_ids,
-> +	.ops = &qcom_wdt_ops,
-> +	.probe = qcom_wdt_probe,
-> +	.priv_auto = sizeof(struct qcom_wdt),
-> +};
-> 
-> ---
-> base-commit: f3563fc30356c8079527b90e532407050dff7c7b
-> change-id: 20250413-b4-qcom-wdt-e7b913fc375e
-> 
-> Best regards,
-
+Francesco
 
