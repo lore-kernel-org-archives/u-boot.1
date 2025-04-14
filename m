@@ -4,64 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9137C369B5
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:57:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18AF6C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B96582905;
-	Tue, 15 Apr 2025 00:57:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 98CA782905;
+	Tue, 15 Apr 2025 00:59:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="mbPbL54P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ScMzfACp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D023982928; Tue, 15 Apr 2025 00:57:13 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3404082905; Tue, 15 Apr 2025 00:59:19 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58D5A827A6
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 00:57:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E594827A6
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 00:59:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=02b5=XB=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744671429;
- bh=ppS0S/oPhJs9r+5TdrAvuCS2m8qC/1zFJ1IhNpmVEGA=;
- b=mbPbL54PbMwJM3qArstxdqAVI1LV4XawoEY62GSsxXR98RJRifdhoUz6TRO9jIaFbp54bW5Ze
- XPeL2RyLTY4A5qt25KWaNChPfLiHlvrp8T3Q/WVodu2G5TfMlLNnT5dz/2pX+MrryF5kTd2TMYJ
- 93IVDCfPTXlLpPb5yh5vbMkQjOqGapEguhGvvgvlKHRcszZNvlfhKsz0i/p1Pm2Z1A8CjzI9Gxh
- cV+WJS5ZT0r79WQQltOzKumTLjcvRoVHFibufXn41GQQWMrXyPZYBy8iPTp907tbs+Jq68zBaba
- yUKm0ThAx3RGhoT97rC8YTr9wx0/dtbJ2enrWnzT/R1Q==
-X-Forward-Email-ID: 67fd92bd40cbaa005ededdd7
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <dd052bb0-f984-4997-b203-c1e9702601e8@kwiboo.se>
-Date: Tue, 15 Apr 2025 00:56:56 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2cc44c72959so3033199fac.0
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 15:59:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744671555; x=1745276355; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=cykt1tmm5YBw5p0+bbHFxy0zurM8XzS7m7oGYDW9mUk=;
+ b=ScMzfACp/I4MxEdQDvdZe9cZSWWZNwCWmv6bNsYvQ+4PLv/XyI3v00OAhT1QR4F/5T
+ 7X78stTF3O9rqa4uNmMbA+WQj6xLOyIvTYcXmzI5yAf00Tm9Kz6kt4T4ySFmYL3X13ny
+ B302NYDHOBWaB3dAE2S2KpI2n2nJsU3dLE594=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744671555; x=1745276355;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cykt1tmm5YBw5p0+bbHFxy0zurM8XzS7m7oGYDW9mUk=;
+ b=JCI9GpTRoOrTBFpqQ3XOxINjzFy6D982gQfwMhk1fdtDKk3V/TaQf4EJXcx+E06yOm
+ WNErHCwASKlx7R5hu6QJ9+6NRO1C+f1BHtvFRJ+Q3Ba1y92xXdZDNWtqztuo0+nmYfsR
+ L+Lmr5qLv9gnSYIq2xNEM4+Qb8NVIa984/r7TKcejevHswO8KcIPIa5vGhVC2y4aMLCJ
+ If72OrPbH8xnyBz7FIbMVIyYuryECx4ABbwj1OKbZxeyKLjKllH9+KXleaNYPq/gj3Wf
+ TJvNEG6YD0+2mULD/9ayqS2sFtK26tJfaxRJGJMmtlp9XXZDvt3OCrO1Xy/99sbap6rM
+ P+ow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX6Xnx0qiTeysAOArLR1RhksOxKV4g/WvkJSbYKTR+zlw+x6Wx3Alv/2Y9J1IYhVUf3INi4SQk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz9M9E5w0eWU+7LkyGBShpt/7ydkNNy9NPPmA0nNhgS2ECgL45E
+ B4Bk9or6iQxKCB8Q3d9bHHAdERgNfcFhBwuIFMezuYZa9xAA8WWVIMoe1snR6iE=
+X-Gm-Gg: ASbGncvsmae5WZTAXGQb7N0S29WccU1dmv9VNWmRQkKaFrySIE4DaXNlZtuVaUxGBVl
+ RDBbLbvA8vSZ0Szsl7lyb28Ja5Q8nR/H5QGWYxyxHx9yFSYUKX4DR005aZdc3EfRaWSrtHiIovL
+ S4KX00v9DCMqzwOcIUT+TvPQaND06wBvaubExkyKKahNW7cIxQFvmjEqJZa8XE4NJG2TWRc7USD
+ VlH62RBC0zQ94jtboJVabDQZ/WGJBH2yLNtfJmTVn8P2wbP1bWmYRNi6D2M56SQtu8qfRnZy9XN
+ rngY0RPM3S3x8kENIehC+kNL6UPvk8JHr82Y0/0ntQipdQdjevgPX535x/Lu7JBh9eRcpkRlFFW
+ PUbg//UP/oLHZ
+X-Google-Smtp-Source: AGHT+IHftVT4H1Ui+8xY/60/kecYEtNSoyXD4/FBn9Q+KMw4nLq/Mooj2By6sosJ0SkfLUM9Wvn5ew==
+X-Received: by 2002:a05:6871:68a:b0:2b8:fab0:33c with SMTP id
+ 586e51a60fabf-2d0d5d9e2c9mr7504256fac.23.1744671554915; 
+ Mon, 14 Apr 2025 15:59:14 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2d096cd546esm2618664fac.39.2025.04.14.15.59.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Apr 2025 15:59:13 -0700 (PDT)
+Date: Mon, 14 Apr 2025 16:59:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Daniel Schultz <d.schultz@phytec.de>
+Cc: n-francis@ti.com, u-kumar1@ti.com, bb@ti.com, afd@ti.com,
+ u-boot@lists.denx.de, upstream@lists.phytec.de, w.egorov@phytec.de
+Subject: Re: [PATCH] mach-k3: common_fdt: Fix Label Issue
+Message-ID: <20250414225911.GA546803@bill-the-cat>
+References: <20250407060711.3160366-1-d.schultz@phytec.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 16/16] rockchip: rk3576: Add support for ROC-RK3576-PC
- board
-To: Heiko Stuebner <heiko@sntech.de>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
- detlev.casanova@collabora.com, u-boot@lists.denx.de,
- sebastian.reichel@collabora.com
-References: <20250414200111.1357867-1-heiko@sntech.de>
- <20250414200111.1357867-17-heiko@sntech.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250414200111.1357867-17-heiko@sntech.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="suYUxlMp5QhWbKf4"
+Content-Disposition: inline
+In-Reply-To: <20250407060711.3160366-1-d.schultz@phytec.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,98 +98,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
 
-On 2025-04-14 22:01, Heiko Stuebner wrote:
-> The ROC-RK3576-PC is a SBC made by Firefly, designed around the RK3576
-> SoC. This adds the needed board infrastructure and config for it.
-> 
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+--suYUxlMp5QhWbKf4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Apr 06, 2025 at 11:07:11PM -0700, Daniel Schultz wrote:
+> Labels are not allowed before declarations. Add a semicolon after the
+> label to introduce an empty statement. This will fix following error:
+>=20
+> arch/arm/mach-k3/common_fdt.c: In function 'fdt_fixup_reserved':
+> arch/arm/mach-k3/common_fdt.c:156:2: error: a label can only be part of a=
+ statement and a declaration is not a statement
+>   156 |  struct fdt_memory carveout =3D {
+>       |  ^~~~~~
+> make[1]: *** [scripts/Makefile.build:256: arch/arm/mach-k3/common_fdt.o] =
+Error 1
+> make: *** [Makefile:1919: arch/arm/mach-k3] Error 2
+>=20
+> Fixes: 096aa229a9e ("mach-k3: common_fdt: create a reserved memory node")
+>=20
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 > ---
->  arch/arm/dts/rk3576-roc-pc-u-boot.dtsi  | 11 ++++++
->  arch/arm/mach-rockchip/rk3576/Kconfig   |  8 +++++
->  board/firefly/roc-pc-rk3576/Kconfig     | 12 +++++++
->  board/firefly/roc-pc-rk3576/MAINTAINERS |  7 ++++
->  configs/roc-pc-rk3576_defconfig         | 45 +++++++++++++++++++++++++
->  doc/board/rockchip/rockchip.rst         |  3 ++
->  include/configs/roc-pc-rk3576.h         | 15 +++++++++
->  7 files changed, 101 insertions(+)
->  create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
->  create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
->  create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
->  create mode 100644 configs/roc-pc-rk3576_defconfig
->  create mode 100644 include/configs/roc-pc-rk3576.h
-> 
-> diff --git a/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..97240345ed4
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2023 Joshua Riek <jjriek@verizon.net>
-> + *
-> + */
-> +
-> +#include "rk3576-u-boot.dtsi"
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3576/Kconfig b/arch/arm/mach-rockchip/rk3576/Kconfig
-> index a94dc6706f0..83d41f7a100 100644
-> --- a/arch/arm/mach-rockchip/rk3576/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3576/Kconfig
-> @@ -1,5 +1,11 @@
->  if ROCKCHIP_RK3576
->  
-> +config TARGET_ROC_PC_RK3576
-> +	bool "Firefly ROC-RK3576-PC"
-> +	help
-> +	  ROC-RK3576-PC is a single board computer from Firefly
-> +	  using the Rockchip RK3576.
-> +
->  config ROCKCHIP_BOOT_MODE_REG
->  	default 0x26024040
->  
-> @@ -12,4 +18,6 @@ config SYS_SOC
->  config SYS_CONFIG_NAME
->  	default "rk3576_common"
->  
-> +source board/firefly/roc-pc-rk3576/Kconfig
+>=20
+> I'm open to other suggestions! This is just the easiest way to fix this
+> compile error. BTW, master is fine since 096aa229a9e is only on next.
 
-This line should be added before the "config SYS_CONFIG_NAME" above,
-else the default SYS_CONFIG_NAME defined in the board Kconfig does not
-take effect and rk3576_common.h will be included instead of
-roc-pc-rk3576.h.
+Is this the only warning you get with Ubuntu 20.04's gcc? But I would
+also rather see Udit's suggestion on how to fix it rather than adding a
+';' here as that looks like a stray character rather than an intentional
+but not always obvious fix. Thanks.
 
-With that fixed this is:
+--=20
+Tom
 
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+--suYUxlMp5QhWbKf4
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
-Jonas
+-----BEGIN PGP SIGNATURE-----
 
-> +
->  endif
-> diff --git a/board/firefly/roc-pc-rk3576/Kconfig b/board/firefly/roc-pc-rk3576/Kconfig
-> new file mode 100644
-> index 00000000000..2fc0f913c37
-> --- /dev/null
-> +++ b/board/firefly/roc-pc-rk3576/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_ROC_PC_RK3576
-> +
-> +config SYS_BOARD
-> +	default "roc-pc-rk3576"
-> +
-> +config SYS_VENDOR
-> +	default "firefly"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "roc-pc-rk3576"
-> +
-> +endif
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf9kz8ACgkQFHw5/5Y0
+tyzNRwv+PoGmP6EbNXlVOwnOjMqFwzKhw5FpL7QFwsviFcBcIXRqKJzUmKHgO8zd
+nUsW9K4g5O+gtOGHBC62otSmPsLFaBHpNy+mbSI0U9iToQS9LNJluvpQXQJ0vajV
+LEqtmmo0c0M3rUZPGk+G+fw1qiiW9hdbC1xZaqB0SeyzBxGjP1XSeMJKeMDqC59/
+ovK5VXrNKzGOQ5R3lSfgdiLdZU2TPJB0/Ymuul3lrA38aOG3btfeM+XloEEBozFB
+7rTpyZe1J7KiI37AmMNQ8ayxvu5st0aZnh965rb0moWhrZNdyOJBFhWTPRwTmLzW
+wqIIJnqUPOZMzX3Aiol2iQtjQOiVzmrGO6bwisrXmFWN6eM7dM7knNSnW6eJ2enM
+YSqzXeAkNDyj/GKAmgdjd9ZqLkBrPXPlIP5izQLazJHaw4Lpmdk4AbxnZYrSL6DE
+rMQwgj7qXDm0jCa28Hir3wfLPbCp0AxbMwB26dqDs4ozTY7xSXGkeOf1kWpF/4oJ
+jBZxOSfw
+=SKWO
+-----END PGP SIGNATURE-----
 
-[snip]
+--suYUxlMp5QhWbKf4--
