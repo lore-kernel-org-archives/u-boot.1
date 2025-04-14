@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0382C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 08:52:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65944C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 09:10:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6BB581F44;
-	Mon, 14 Apr 2025 10:52:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id A87FF81F6B;
+	Mon, 14 Apr 2025 11:10:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="tb2QKALZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zyNesDjT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E546F81F45; Mon, 14 Apr 2025 10:52:42 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BC93381F7B; Mon, 14 Apr 2025 11:10:46 +0200 (CEST)
+Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
+ [IPv6:2607:f8b0:4864:20::930])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 928558003E
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 10:52:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D1D28197F
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 11:10:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from gaggiata.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
- [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id B15A11F98D;
- Mon, 14 Apr 2025 10:52:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1744620758;
- bh=HyEjaDxSrLZA4ziorEktuYdV2CAqPkVKWAZkLVT0SZo=;
- h=Received:From:To:Subject;
- b=tb2QKALZ53M99/YUxFiKePNBwJznuOMZIZR9plPBWlYYe66l8aZx8qBW/0D7nJhfk
- QNQ5JeeiebmVThTo779Rei48AkJ4ZYaO15AoV8TE/qW5PJ07+5qRQANzVj19L1cfkA
- eA+EsZB5GgEytX9CpibtDtepTx8ntts846Y67vwUMrkg6CXJhCP4Ulp8819xFbsaQr
- GKJX+IupoodNKq9GwOOi7LrvhCCYIcjGDehAylIyU7m78KlOT7updQRSqOua0pP4gK
- OkI8AmQ64vNDRk7oPdsWMOd58NoGD0xJOLnOdDbHYfBsOlZASkFhGuee1ywdcBlP1B
- wmjXzQMqwEnkA==
-Received: by gaggiata.pivistrello.it (Postfix, from userid 1000)
- id 5D5F27F820; Mon, 14 Apr 2025 10:52:38 +0200 (CEST)
-Date: Mon, 14 Apr 2025 10:52:38 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Marek Vasut <marex@denx.de>
-Cc: Francesco Dolcini <francesco@dolcini.it>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Lukasz Majewski <lukma@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
-Message-ID: <Z_zM1vhKKe07ax98@gaggiata.pivistrello.it>
-References: <20250324080315.GA6932@francesco-nb> <87pli6esx0.fsf@baylibre.com>
- <Z-FQeVtIImeHsfXs@gaggiata.pivistrello.it>
- <42f53c19-de12-45c3-9091-2e6c23d1fcd4@denx.de>
- <Z-FpUV-fwGvch4-W@gaggiata.pivistrello.it>
- <48e57653-d86a-4650-859e-1e77a6c29f4a@denx.de>
- <Z_TnLsKHod_fvDsK@gaggiata.pivistrello.it>
- <bf955296-b4fe-443a-8bf9-ead7afe57661@denx.de>
- <20250411142123.GC12707@francesco-nb>
- <7ad7bf3f-dd0b-4cd6-8a8a-5f35922da114@denx.de>
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-86d75f4e9a1so1592286241.3
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 02:10:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744621843; x=1745226643; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NBf40b6J2FlVZC6YKvCYldgTJMmz70NhV0D3eZZHhJU=;
+ b=zyNesDjTLTiIEw101nggDW5baH5IntH1pvdS/kFEo9zCdaYFt7uew2xRV6lrye0ENC
+ OuB8zMbqBN+EmXyLs95eOprRBNIIvxZIK7rDSbUQeT492snr3R01ocWy/FTdy87R+ewv
+ 3R7ydRyhvFcU26F2oAP4AA3d9YHjOAi2tHGlobPzqCOQXn8TGwZWAJlf520b+9AjEv29
+ 2QyhaXfbd4m1sMpUeXIF8PrVnc2kAvDJjnVwp5LfUEF3Cd2jbCwO3kucsMv5Y6qZCjnt
+ NyBKg1p7N5E+KvqHrmhmKl3C6Meazo5sBZ+z58ouKEsa7N2Tgnr325gqXegUMsiXgBaL
+ P1Qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744621843; x=1745226643;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NBf40b6J2FlVZC6YKvCYldgTJMmz70NhV0D3eZZHhJU=;
+ b=wcwH+vAsxiASK143E73eHoavC69GL2iDKeZemIS+JwPHB4wI5Cgta5t0khe3T/2ajk
+ HOERpZjNjuOR5A+XkqeRLwzTG1K836rI6XTYp82ATyEYBsMNcvqoWJCPGYW+T8YZkBB9
+ IARolf2PspvjmJkb4m0ilJX3s4JPNN2JyYCrkadppAWhON6Sjl0ECZu7IYai8H1fJynH
+ TDIdMSmnQp+r1oNlgOL4rV7dgR4LO6r8mIOikkMeFRk6+WeWG4Ua/64aLLsYhnLH7k0A
+ +REk6iUiFKZ0evet0DEiKa2AwkcopikhugWFeMrzkx4M0opepoQUrrBsPGRsLfEl1xj5
+ wUeA==
+X-Gm-Message-State: AOJu0Yxgf7EqwgVKatUhiuEixK5ddXTr0YNnbK0H3MgFPAUGh9QyLWwp
+ +9oyEbzZBrQ/ladtqFRLy+sZiVCuFQw+GJ6bT4WluHkV9Aim1ADsVHWCRUIpT1pWH4WagUYvQWH
+ mlkgvgn+jwT2XcZnqibioHRkSdzH/oNCkKt4rFQ==
+X-Gm-Gg: ASbGncsSU/PpQJ3oLVv942Gs8y3QjTmlheCd1ZNOx92CQoICCWM+eJ793jPYtPiUApr
+ dshNxrPZuKVWTeT+EPeTVfMHfCHBG1GEj7zWEIPtE5+Z0ZUSZeyW3MW2JNyqR1AIRMUNNdHnQQW
+ d3mLrnNxX3ZM98HL56LlYIAjk=
+X-Google-Smtp-Source: AGHT+IHaMItvrTELCTxSdrC+JCoZwIdquPunVRRylW0YQjW+chQZL9bA1/Qt2YQ72Umfs1Yx+YVcr+VKn2e/Unz50gU=
+X-Received: by 2002:a05:6102:1512:b0:4bb:cf34:374d with SMTP id
+ ada2fe7eead31-4c9e4fff4f3mr7460715137.20.1744621842935; Mon, 14 Apr 2025
+ 02:10:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7ad7bf3f-dd0b-4cd6-8a8a-5f35922da114@denx.de>
+References: <20250410151600.3370247-1-jerome.forissier@linaro.org>
+ <20250410151600.3370247-2-jerome.forissier@linaro.org>
+In-Reply-To: <20250410151600.3370247-2-jerome.forissier@linaro.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 14 Apr 2025 14:40:31 +0530
+X-Gm-Features: ATxdqUEiMWeVpS4WLhnrpYY1NdyH-DaKMybMgSA95EjK9YvoziH81Zu0xtwqXoI
+Message-ID: <CADg8p96TQB5r76Ws6k_J6TF4wKNHUj6nW63LZ+DAbctTUbhLsg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] net-lwip: wget_do_request(): do not print anything
+ to the console
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,124 +96,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Apr 13, 2025 at 11:14:07AM +0200, Marek Vasut wrote:
-> On 4/11/25 4:21 PM, Francesco Dolcini wrote:
-> > On Tue, Apr 08, 2025 at 04:51:22PM +0200, Marek Vasut wrote:
-> > > On 4/8/25 11:06 AM, Francesco Dolcini wrote:
-> > > > On Mon, Mar 24, 2025 at 03:36:52PM +0100, Marek Vasut wrote:
-> > > > > On 3/24/25 3:16 PM, Francesco Dolcini wrote:
-> > > > > > On Mon, Mar 24, 2025 at 02:53:23PM +0100, Marek Vasut wrote:
-> > > > > > > On 3/24/25 1:30 PM, Francesco Dolcini wrote:
-> > > > > > > > On Mon, Mar 24, 2025 at 09:26:03AM +0100, Mattijs Korpershoek wrote:
-> > > > > > > > > Hi Francesco,
-> > > > > > > > > 
-> > > > > > > > > On lun., mars 24, 2025 at 09:03, Francesco Dolcini <francesco@dolcini.it> wrote:
-> > > > > > > > > 
-> > > > > > > > > > Hello Mattijs, Marek
-> > > > > > > > > > 
-> > > > > > > > > > On Thu, Mar 20, 2025 at 10:47:02AM +0100, Mattijs Korpershoek wrote:
-> > > > > > > > > > > On mer., mars 19, 2025 at 23:07, Marek Vasut <marex@denx.de> wrote:
-> > > > > > > > > > > 
-> > > > > > > > > > > > The UUU tool excepts the interrupt-in endpoint to be ep1in, otherwise
-> > > > > > > > > > > > it crashes. This is a result of the previous hard-coded EP setup in
-> > > > > > > > > > > > drivers/usb/gadget/epautoconf.c which did special-case EP allocation
-> > > > > > > > > > > > for SPL builds, and which was since converted to this callback, but
-> > > > > > > > > > > > without the special-case EP allocation in SPL part.
-> > > > > > > > > > > > 
-> > > > > > > > > > > > This reinstates the SPL part in an isolated manner, only for NXP iMX
-> > > > > > > > > > > > SoCs, only for SPL builds, and only for the ep1in interrupt-in endpoint.
-> > > > > > > > > > 
-> > > > > > > > > > UUU can (and in our case is) used also on non-NXP i.MX platforms.
-> > > > > > > > > > What should we do?
-> > > > > > > > > 
-> > > > > > > > > Do reproduce the problem (UUU tool crashes) on those platforms with
-> > > > > > > > > recent U-Boot versions (v2024.10+) ?
-> > > > > > > > 
-> > > > > > > > Not tested, my comment is purely based on the code and the commit message.
-> > > > > > > > Older U-Boot versions (up to v2024.04, included) are working fine, with UUU used
-> > > > > > > > with TI K3 SoCs (AM69, AM62, AM62P).
-> > > > > > > Are you talking about the NXP UUU ?
-> > > > > > 
-> > > > > > yes, it works just fine on not-NXP SoC.
-> > > > > Then please test if it still works, and if not, this patch needs to be
-> > > > > expanded to cover TI ... or apply unconditionally in SPL (sigh).
-> > > > 
-> > > > I just found the time to check some logs from our CI in which we execute such a
-> > > > workflow.  We do use UUU only from U-Boot proper, so we are not going to be
-> > > > affected by this SPL specific change.
-> > > > 
-> > > > However I found this error in the logs, on both a TI AM62 and an i.MX8MP
-> > > > 
-> > > > ```
-> > > > Starting download of 40524455 bytes
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > ..........................................................................
-> > > > ..........................................................................
-> > > > ..........................................................................
-> > > > ..........................................................................
-> > > > .............
-> > > > downloading of 40524455 bytes finished
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > Starting download of 1675 bytes
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > downloading of 1675 bytes finished
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > Starting download of 82 bytes
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > downloading of 82 bytes finished
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
-> > > > ```
-> > > > 
-> > > > the download is successful however, despite those error messages. Any idea? Is
-> > > > this related to this topic?
-> > > I have a feeling it is the UUU which should be fixed to not depend on the
-> > > ep1-in , really.
-> > > 
-> > > You could however quickly try and apply the change in this patch not only to
-> > > SPL, but to U-Boot on your board as well, and see if those warnings
-> > > disappear.
-> > 
-> > So, I did a quick test and the issue is still there.
-> > 
-> > And looking better at the error now, this is about ep1in-bulk, that is
-> > not affected by this change at all.
-> > 
-> > 
-> > diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-> > index 477ecd020985..55b248505de5 100644
-> > --- a/drivers/usb/dwc3/gadget.c
-> > +++ b/drivers/usb/dwc3/gadget.c
-> > @@ -1632,23 +1632,7 @@ usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
-> >          if (usb_endpoint_is_bulk_out(desc))
-> >                  return dwc3_find_ep(gadget, "ep2out");
-> >          if (usb_endpoint_is_int_in(desc)) {
-> > -               /*
-> > -                * Special workaround for NXP UUU tool in SPL.
-> > -                *
-> > -                * The tool excepts the interrupt-in endpoint to be ep1in,
-> > -                * otherwise it crashes. This is a result of the previous
-> > -                * hard-coded EP setup in drivers/usb/gadget/epautoconf.c
-> > -                * which did special-case EP allocation for SPL builds,
-> > -                * and which was since converted to this callback, but
-> > -                * without the special-case EP allocation in SPL part.
-> > -                *
-> > -                * This reinstates the SPL part in an isolated manner,
-> > -                * only for NXP iMX SoCs, only for SPL builds, and only
-> > -                * for the ep1in interrupt-in endpoint.
-> > -                */
-> > -               if (IS_ENABLED(CONFIG_MACH_IMX) && IS_ENABLED(CONFIG_XPL_BUILD))
-> > -                       return dwc3_find_ep(gadget, "ep1in");
-> > -               return dwc3_find_ep(gadget, "ep3in");
-> > +               return dwc3_find_ep(gadget, "ep1in");
-> >          }
-> This should really be fixed in the UUU tool, not worked around in U-Boot.
-> Can you try and see if the UUU tool can be fixed and not hard-code ep1 ?
+On Thu, 10 Apr 2025 at 20:46, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Functions called from EFI applications should not call printf().
+> Refactor wget_do_request() to implement this requirement.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>
+> Changes in v3:
+> - New patch: net-lwip: wget_do_request(): do not print anything to the
+>   console
+>
+>  net/lwip/wget.c | 37 +++++++++++++++++++++++--------------
+>  1 file changed, 23 insertions(+), 14 deletions(-)
+>
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index ec098148835..d3628cf72de 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -36,6 +36,7 @@ struct wget_ctx {
+>         ulong prevsize;
+>         ulong start_time;
+>         enum done_state done;
+> +       bool silent;
+>  };
+>
+>  static void wget_lwip_fill_info(struct pbuf *hdr, u16_t hdr_len, u32_t hdr_cont_len)
+> @@ -217,7 +218,8 @@ static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
+>                 memcpy((void *)ctx->daddr, buf->payload, buf->len);
+>                 ctx->daddr += buf->len;
+>                 ctx->size += buf->len;
+> -               if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
+> +               if (!ctx->silent &&
+> +                   ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
+>                         printf("#");
+>                         ctx->prevsize = ctx->size;
+>                 }
+> @@ -255,11 +257,15 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
+>         elapsed = get_timer(ctx->start_time);
+>         if (!elapsed)
+>                 elapsed = 1;
+> -       if (rx_content_len > PROGRESS_PRINT_STEP_BYTES)
+> -               printf("\n");
+> -       printf("%u bytes transferred in %lu ms (", rx_content_len, elapsed);
+> -       print_size(rx_content_len / elapsed * 1000, "/s)\n");
+> -       printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
+> +       if (!ctx->silent) {
+> +               if (rx_content_len > PROGRESS_PRINT_STEP_BYTES)
+> +                       printf("\n");
+> +               printf("%u bytes transferred in %lu ms (", rx_content_len,
+> +                      elapsed);
+> +               print_size(rx_content_len / elapsed * 1000, "/s)\n");
+> +               printf("Bytes transferred = %lu (%lx hex)\n", ctx->size,
+> +                      ctx->size);
+> +       }
+>         if (wget_info->set_bootdev)
+>                 efi_set_bootdev("Http", ctx->server_name, ctx->path, map_sysmem(ctx->saved_daddr, 0),
+>                                 rx_content_len);
+> @@ -372,13 +378,14 @@ static int set_cacert(char * const saddr, char * const ssz)
+>  #endif
+>  #endif  /* CONFIG_WGET_CACERT || CONFIG_WGET_BUILTIN_CACERT */
+>
+> -static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+> +static int wget_loop(ulong dst_addr, char *uri, bool silent)
 
-I do not have time to look into that at the moment, I created an issue
-https://github.com/nxp-imx/mfgtools/issues/472, hopefully NXP will have a look.
+Can we expand the scope to include the non-lwip functions as well? The
+wget_request() API can then be modified to include the bool, and the
+prints can be made silent only when calling from the EFI API -- we can
+still get the error message when calling from within U-Boot. This
+version does not print what the issue is, but just errors out, which
+can be a bit confusing. I do see that the non-lwip wget.c module does
+not work with a context. Maybe the bool can instead be in the
+wget_http_info struct so that it can be used for both lwip and
+non-lwip cases.
 
-Francesco
+-sughosh
 
+>  {
+>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
+>         altcp_allocator_t tls_allocator;
+>  #endif
+>         httpc_connection_t conn;
+>         httpc_state_t *state;
+> +       struct udevice *udev;
+>         struct netif *netif;
+>         struct wget_ctx ctx;
+>         char *path;
+> @@ -390,6 +397,13 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>         ctx.size = 0;
+>         ctx.prevsize = 0;
+>         ctx.start_time = 0;
+> +       ctx.silent = silent;
+> +
+> +       if (!wget_info)
+> +               wget_info = &default_wget_info;
+> +
+> +       net_lwip_set_current();
+> +       udev = eth_get_dev();
+>
+>         if (parse_url(uri, ctx.server_name, &ctx.port, &path, &is_https))
+>                 return CMD_RET_USAGE;
+> @@ -471,12 +485,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>
+>  int wget_do_request(ulong dst_addr, char *uri)
+>  {
+> -       net_lwip_set_current();
+> -
+> -       if (!wget_info)
+> -               wget_info = &default_wget_info;
+> -
+> -       return wget_loop(eth_get_dev(), dst_addr, uri);
+> +       return wget_loop(dst_addr, uri, true);
+>  }
+>
+>  int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+> @@ -521,7 +530,7 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+>                 return CMD_RET_FAILURE;
+>
+>         wget_info = &default_wget_info;
+> -       if (wget_do_request(dst_addr, nurl))
+> +       if (wget_loop(dst_addr, nurl, false))
+>                 return CMD_RET_FAILURE;
+>
+>         return CMD_RET_SUCCESS;
+> --
+> 2.43.0
+>
