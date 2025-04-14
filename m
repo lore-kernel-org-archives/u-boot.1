@@ -4,98 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F23C3601E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Apr 2025 21:13:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D20C3601E
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 05:49:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD978828F8;
-	Sun, 13 Apr 2025 23:13:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DF3DA81F54;
+	Mon, 14 Apr 2025 07:49:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RU8OX85b";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="LUsUnomh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2FE582952; Sun, 13 Apr 2025 23:13:53 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0E78681F66; Mon, 14 Apr 2025 07:49:46 +0200 (CEST)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20728.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::728])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5539982845
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 23:13:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B23DC81E1F
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 07:49:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ac6e8cf9132so686592866b.2
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 14:13:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744578831; x=1745183631; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GEMGaIpztNqbRKA2SYlZhIfSWkETo0wxKdha1zn4jp4=;
- b=RU8OX85bzWxCVu3hLaEi5fj0ORsP0Qkn5Xz6qOtuzbVPa6RezBhKa2whPBBhqqa/KF
- JaEDbz3MzQtmCfpoQNeN7JnDEDHEGHrr0ijStIMh9H+QldhA6Z5VyychBijlz0KOBbFQ
- +qrYvPvKut8I/VPVSwplv7PiaP/NXuBVMvRbs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744578831; x=1745183631;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GEMGaIpztNqbRKA2SYlZhIfSWkETo0wxKdha1zn4jp4=;
- b=xAr3X8HIoANH+qn3JvqK37Uj0Qh2+7IG01QmGVBIcdA4WFqWsJXhmyelrBz8bCRBWG
- woEoVFQV9hNi+LjaUIvj9ofOgiGaphoIzIQXQ0giMsLFjNMnOXB32ygkA5v5oJlahmb2
- F+BwHy5HV/3qtiTpH5aFoeUosCvWo21O15wcyzFjWMmOa+fZXPEmMMhRAevht4XnFseJ
- AVMlWLsCa6fEptMMljQX4Z8bA+FfkFQgN9hEle87HoeGkCcLsdHZontrQnADNYgsnuAw
- l+NmFAG2yI3SzFAhuVXHQy1M839ekgzv6rFIZcbTIvgpN/fifj0ZG/HzTmhqSJVSjZc2
- glYQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUcIjByqPbZt0Qzhb84lEgY+05fDBGJp9CpITgh93OzIgdXpMYhw3WNgG2FduQ0DwBo/urJZgk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyK2kFJgGV943NxsTQhlIX0K70pstAelqNtBJHYVFXYcuSIuXWr
- hjiK/EgUqx1csEGi2U/E2ApbEVuHuEAChDwsYrpZm//IxVUBgMgRyEw+AuJrmy3oS1DjqcuuJdr
- aYdrOTEpOgew0+ttUTHCEnbQDsWneaOXEBwZt
-X-Gm-Gg: ASbGncvCMG1VIaUZ5+xT5Rs305CaF+BcoBPL0PEynIpYIjquNtjtQCNNN1bybdbviPX
- vQW/JRpPEwyw0QU5hNpcOVtl+v5UPyMdwZX0mFhe2OFxollJWtUoYYq4K+CmJiYho9kA4sm3bo3
- buWQryHcQ/TBo4Di0mcZV/G+g=
-X-Google-Smtp-Source: AGHT+IF54zaGrMMu2Fgg7NM2H+FjWqvmUN1U3bcUubTaUQ7axpbnR4WSgfkMvXWgIXm4o1YQW/UYOzRyEou6jz4wEt0=
-X-Received: by 2002:a17:906:71d6:b0:aca:e6b3:6fa5 with SMTP id
- a640c23a62f3a-acae6b377ccmr451720366b.14.1744578830479; Sun, 13 Apr 2025
- 14:13:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nso/LxyFIj0GvZ6ASvk5txDjohc/w1ireeP+tW1hX26WMuozGnQXvRt4fsRHPRuDR/E2k6CW8Wh2FJA9ZlcAfvZ5JcUJYma7GPuNCyL+UqjwbQ7KGLTb2HXYhq2k457bD0//bJbkpXvk6zjOyKzkdHSlUsPz/disSQ+Nd0AmeFFQ6hqi21ourYXxt42mnDo2gLNfHGgXOmSKH3pgzX+s3EbnYvN65QLIgJeiIoKpHw1ZA6cs2dFqTSD+yntiWXJ7Qq4ksew0w7qz0AOQHvZ+lulD+crz7c2qcuTZdS6meKT7Zozv/XNkO1/IPmfCVlYPc7m+W0JYpbCji2ZO21Q3Hg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cQbiNLtrifJKuRgyqkzk64YF4Kank1CL4lxiBnftF2I=;
+ b=yJ4GlEvmGrrKvnO6bdZkC02YepWT+OwpDcOVsD46sTWVB2n5AYF8pxYGJ1E/gMEqRgZVvgStnTv1wfD00FvhUKXi9+7+bvbG/85yJbqOlbJ3dyfVldsvFaFp5GMmAsANV+s/cV+YH3reZfi8PAvpWyTe3/2mEH2cthCf9ObnPvS9V8MpqQBTi2PjlSiBVvc2FsiWgbI5U24p1KAjAbLPOxez8dDLbB9D/TK6b32g6RRVdui4E+03l34Bc1EQ34C+mvYC5ufrU3msVRgE3Ro8az25PBm2eIn78MLHfcYsvaO8wGutPJhDJQ5urS56zLiJu8aI2qNgMvQFRvNs1uHVPw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cQbiNLtrifJKuRgyqkzk64YF4Kank1CL4lxiBnftF2I=;
+ b=LUsUnomhRn/e08R74V9aw0b/B1IkI1JG3xiqyQwTq1xs5mDXEGeVddDdpHFHYiwZh9UZ0cwEAZbZiOggxn1W5Xh1Rwj9TmAqMsiY1OdUL4lij/EnyzZlhBZUDhrNh7rAdJvPJChx65irlUoUmUyJJ2w5WEwD7UqLQVh7Q+cLFlEpWzYqD9cK90Ao+gIdSfrXko827R9AH+T+8yXqD7Dgk7qiSYT6jOc4cqNbZiHjNEExA0vglKV8foMdwo6M0DwJmFV75W7d4P+DmMq+z1qQM/O2vjHjK4dO2nKR+BOErTsGeP8UZauK9zCB3sAwgD7oeQi9pucDs4pNNdVKMlikyg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by AS1P195MB1448.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4a6::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.32; Mon, 14 Apr
+ 2025 05:49:41 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a%4]) with mapi id 15.20.8632.030; Mon, 14 Apr 2025
+ 05:49:41 +0000
+Message-ID: <fce464de-2d1d-4346-9033-619372fa1d2e@phytec.de>
+Date: Mon, 14 Apr 2025 08:49:38 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+To: Tom Rini <trini@konsulko.com>, Martin Schwan <M.Schwan@phytec.de>
+Cc: "sjg@chromium.org" <sjg@chromium.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
+ <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
+ <20250129160323.GV1233568@bill-the-cat>
+ <da13999132b06d7891ffc85edfc3147e64cbaa93.camel@phytec.de>
+ <20250130145104.GZ1233568@bill-the-cat>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20250130145104.GZ1233568@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: VI1PR06CA0098.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::27) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
-References: <20250328154401.3563921-1-sjg@chromium.org>
- <20250328161845.GB93000@bill-the-cat>
- <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
- <20250329000211.GH93000@bill-the-cat>
- <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
- <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
- <CAFLszTjo8HEzKbZAbO=neF57e69vGbWYsDVV_dD=kO6j_VH39w@mail.gmail.com>
- <CAEfUkUJNUhoyRY6S9-eYV5i9RT_GgYLRs+HRWocch8jYfVj2Lw@mail.gmail.com>
- <CAFLszTj-pQSK_aKNoLUcLFBk+wAjgC_5=-5YRPGt_7DDFRL3Dw@mail.gmail.com>
- <CAEfUkULcgK9jY902Ccf_mNNCHf5m1BU=ecLK7cuviv7TdABukQ@mail.gmail.com>
-In-Reply-To: <CAEfUkULcgK9jY902Ccf_mNNCHf5m1BU=ecLK7cuviv7TdABukQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 13 Apr 2025 15:13:38 -0600
-X-Gm-Features: ATxdqUHGemsF-z6pffYoixpTDr2b-muBZRRQIDPH0b7lbc8U63Uu4gdi5Jem_tE
-Message-ID: <CAFLszTi7CmWL7pxAp08gy5euD8vKs1qN5DOzi-J=9c2dZ7hFMw@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AS1P195MB1448:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4e9c0149-447d-4463-80f1-08dd7b182648
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bDFQUlA2ODFGRHhMZnFXdmd2TThnU0YrOU1WRjRrY1Viak9IQnBmTFVuUXl3?=
+ =?utf-8?B?M2pXcEkvMDlkT1d5MVdzSUJlQmR2WjE2RjQ5MGxWZVhjYkdEUEJrUjNHb3FE?=
+ =?utf-8?B?QjVTUEIxMXFGV0JzVGIydjUrcnFZdno2ZmlxdndYak1Fb08yUGxNRDJiYXVU?=
+ =?utf-8?B?SHhUZHFmcTVpMFF3SjRJOENKUERucWNMdUFyU2ExZUhGbGt0QkdOSHVFYldG?=
+ =?utf-8?B?L3YyWnZIY0hLcXZwdkVtV0FYMDZQZnVQN1lDZFY5enlVR1RhbXlJRXFFcTV1?=
+ =?utf-8?B?aERSSHY2ekIrNDM0Yk5oKytzTU1idWhZbk4wd1lzeFYreXp5L3c3VFAyRG56?=
+ =?utf-8?B?c0JrZkZMWnVDaVk2NklMQmhML2xsK3NHempINVAvUGFpMlhQM0ptRUNycito?=
+ =?utf-8?B?OVdJRFY1VWZSWEp5M0p6TFJQbzZpVGpqQmowNWJiRTZTR214Vk5CWmU2eVpw?=
+ =?utf-8?B?eE05VThrUWxXUnppZy9FWXdqS3FHUENCZUYyT0hZalJxTWRXRkUvcmlvd052?=
+ =?utf-8?B?dVNhR0RFMFE1TWRLWWhtZUhWNkMwTk9JRmZGUlB6bEtBSFYwcHFCMjNNVU9Q?=
+ =?utf-8?B?VkVvMy8vMTFrWUt6TFBPcDNka01GWHJST2IySm1IdDJxWjlMVWtEd2R0Z0E3?=
+ =?utf-8?B?RGpEOHczNXR5b0F5aC9VVmJ0cnBuZit0bXgzdmV3Q1pwMFc3S2oyY2NUYTh6?=
+ =?utf-8?B?Y1R5Nnd3QzdVRjlOTm5aM25Vek1SdStNUE1SZDJCQkRYdXF1Zjg4bmEyMnFI?=
+ =?utf-8?B?MkpNamgyZEFRSUpLWEtPN0t0K2VQNmlOQUkxL2lrTTV6UTY4ZUZzWElwd2ti?=
+ =?utf-8?B?R1FSWlFKWXdvdzJoa3BZaTByQm9JSk04Q2Jza1JHYlhKZy9wODhHUGpwckps?=
+ =?utf-8?B?K2VpK0xZV3VPUHRHc3ZubmFjbWZCcWIwcUpReUs4SCtwL1hSUVEyUHBNOXpB?=
+ =?utf-8?B?dW9jUDdZeE9RRHBSd2V1ZGlVcmV2UFg0ZEFoakFUbFR1c1BiUEdtSlVFSnIy?=
+ =?utf-8?B?bXViOUJLeC9ucllQSTVUZFUzSkVsUk9FV0ltRitSRFFWQUwyRmtNT2l5TVVI?=
+ =?utf-8?B?MlJEekFGM3NFZUNFd2s1YmoyMmcvenNoMFEzU1hFS1IvQ3cxUGpKK2hSWU9y?=
+ =?utf-8?B?eWxVZmVkeGRWUloyUkF3RkEzY2xLOVZHMmI0blEzSmJCQWRyRlU3dVBrUUZX?=
+ =?utf-8?B?bmNUZE5Dd0lEOW9ydGQzTEdNWWRpWHpSbCtIZ3g4TjcxQ1ErV3BTK0h2aFFo?=
+ =?utf-8?B?YmYzMkc3N0NVSGVKcUtRb1gwN3h0N3JJMTRHTEg4M0NJcTdxMElLYzBlRG1T?=
+ =?utf-8?B?VHFvNE9HZEhHd0JKZ0Y2M0hwQ3l0aUlESk92MG9SeDZXR0hFUjdiSWtUUUUw?=
+ =?utf-8?B?eUVlcjNRK1RjanVpdGl6cStoUG1vWkcySUVieHlWalpoMmN5NzBFbWtDYWdt?=
+ =?utf-8?B?cFJEY1A1c0lESkdxUDhiR0dOYUVuREptT2lQL1dXOXhnRjBwWEllVkVINU9E?=
+ =?utf-8?B?SjM0b3JwWWdKRENGUHNrRVV5d1VSK04xUFBEdFBBcVQwOW9lRU1VeU5XSzhP?=
+ =?utf-8?B?MkhvV1Z5Z0hZY2ZDNDg5MlZtT05XeFVUdkNUcjdkTlk5WG9LY0dvWGVGblVr?=
+ =?utf-8?B?Tm1KZXBqaU9SWTY0VjNXRGxJUnVQeGtUNVI2akxPZk1lWjY4dDJYR3NYdGFt?=
+ =?utf-8?B?ZGk5QnJBZ3NWVjBhTlZrMHM3ajgydHhORjFVc0ZkMGNQN252VTAvZGFOTmNW?=
+ =?utf-8?B?VS9VUmJXY1ROL0QvU284bmc5NWlVWUxGRWhQK2pnWlI0ejYwa2JESjBuSzI2?=
+ =?utf-8?B?QTBQYzR4OUI1NVRYZFFQazVJUjJ1RUErRUpTdjBENXE3YUpLaXJlYjNTT1gz?=
+ =?utf-8?B?WjNEZllpeFBsSDkzR2UvRnBxYjJXUDZLUnJhcjZRM1l5eFJwMkx6akhWY2xR?=
+ =?utf-8?Q?P95w3thO6yQ=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3MySEdmM2lwSGdmZzB6UUpRN1BtTFJOcU9OMGh2SVdNWDJSS1RTT0oyR0Zq?=
+ =?utf-8?B?UDBVR3dwUTFHYktqRnZLaUhIWmtBYzZoeWxvRDhObWJHWDU2bXhneDZmaDRE?=
+ =?utf-8?B?Z3JOUUJBTDhHd1g5dXhmd1lkWVlVMU5TMjBSTjVQVi93dkcvL2pXdmtVa2I1?=
+ =?utf-8?B?Q2Z6YU0rcGhiRFJoWFpzaHVLNndsSlgwRVBTckRKZ3dkZ1VhMk1QSnRVSm5E?=
+ =?utf-8?B?TmhwNXYxUmttL0NFZ3h4Nnh4WlBmb2xham5MdXdoY3VDenpTWDlUR1RRQzFO?=
+ =?utf-8?B?V2xRdjRxalROMEcwQ1dEcXVZUkYzREhXb09qVlp1NjlLZW9rZGFMU3VJUm9T?=
+ =?utf-8?B?eEY4amNNQjBJR1VVUmpvUkVCZjBnMlZQMHhIR3l0QisyblNoSnFjajZRcXNF?=
+ =?utf-8?B?WFpFNjdsZm9JYUg3THVvbjIvclhkYzl0UmpiNk9kMjBXaUl1MFh1M1VaNFF2?=
+ =?utf-8?B?ZkFNdHBrZFFvQTlCNUVuRVFxNS9pWllmeGgwdmx3UlhoK0RpUkd6VnF2U2Jx?=
+ =?utf-8?B?WWpDaTlPeEtmRmhTLzRwVUhzbXRwamFzek5VWWdTMUpJQmVhZVNXdU96NmNO?=
+ =?utf-8?B?bGRQeWg1bkFCZ3pLc0pycHovcDhsUlV3dDY0d2RoaHdQeTRIRVovL21kcXZ0?=
+ =?utf-8?B?TmtoTU9tMnpOWDJKbXRJelRqTy9kUmxaL1BZMlpveVlPTmhBSnJDVjFTMk1R?=
+ =?utf-8?B?SDdISlNOYVhvQTY0Sk1TMzJCOGRsT2lYa0ZWYVRMODdIalorekttdHNJbGdZ?=
+ =?utf-8?B?OFlUNVFLZVVROUI3QU9Fa1FtS1MwTFJSL05taUdHbXVrYm02S2dPanZnaGNG?=
+ =?utf-8?B?TnNwV2xEL25BWlpyaGI1RHg0a3h5ejNJOVhHclJEeDVZOGUyZUhXSE9IdWto?=
+ =?utf-8?B?WDVIaHQ0bXhLUmIyYVlBZUZ2S0V1ZW5mdDVEdkpSRkhneFZFK01WNDllejBx?=
+ =?utf-8?B?amN5T1FPTHJBbUJXcWVVckIvSk00a1RQRDlZQWtwbi9FZGhkeC9aNmFqZ01X?=
+ =?utf-8?B?dk1rbFBUZHRGNVp6TUFSTVNtQVpsL283OW5ua0kxTWZ1K1I2dDg1bHhrc1VY?=
+ =?utf-8?B?RTdoV2s1RXppU2szTEs4RmIrK1Boa0ZPc1pSNEtmemQyRUc3SjFHZnFqQStX?=
+ =?utf-8?B?SVl0SFJyNVZ6WEhZbDBBaERQOW9lZnZFOVFOM2hEMVlGb3ZhQUo0NWVYMUMx?=
+ =?utf-8?B?eEZpRDdZMUp5VjFlZU8wNkZlOGJBWEU4amxQYWhwT2k3WUJpc2d0U2pYdmk1?=
+ =?utf-8?B?WlpFZVQyVkdteUlFb3U3UmdjYVVIcHZWQnBWUDhkVkpweFI1RXowR1crUVQy?=
+ =?utf-8?B?eFBwbGk3MWxuRDdhN1dXNUNXazNCSUZaQ042K0tzU095Y3pXYStuR0ZFOXp2?=
+ =?utf-8?B?U3lQbkNnbHBJaWVoSHR5MTZYaU0vQUVXL2MvdXEzOGhSem9BMllpUzZaSmhX?=
+ =?utf-8?B?NHY4cm4zL01KZVhodm51K01Sdkx0Vy81cUo4M3p6eC82VWdlNTNJY2QyQTFD?=
+ =?utf-8?B?ckdBdVVJdWdVRUlhV29KYmhVUXBFNXU5Q04rNC81d2loRkM4Yno3T2ZXTjJk?=
+ =?utf-8?B?QkkyTkdpNWlrT2tkRjRzRDdPSjlvdjdoZFVCb3o1Vlp3aEpud2h5WHZleXkr?=
+ =?utf-8?B?UVRyR3FRcnM1N1VzZUNlY3VYZWJVLytYSUdXQmVoano0WHlJMTkzUTJVNlpS?=
+ =?utf-8?B?UUhVZG5aSVhMOElpQlhoRzZ5ODRnd0pYMmkyQW5WK1FKUEdGWG90cTlhK2o4?=
+ =?utf-8?B?cUZ4bjRwdDRHWUpJaTVhT1BxY1VpMnE2d0FQaGEvM1BVK2l1VnhQUHBXMXdY?=
+ =?utf-8?B?V3BhTGt4UTlXSzllbDB5S2tHUG92NFpjVUxTTHNhOVdtdmJQaFdEYlo4aUZm?=
+ =?utf-8?B?aUUrakl1Um02M1hCd3hrRjJzNmxvTXdsTjYwVlM3cW1LSElMVnV5Y0UxamlJ?=
+ =?utf-8?B?Qkx2QTk0NVNtNlpjVzZPQ1YrZkhjc2V2T2NTMWd0Tmg4VUlVOHBlZnVMZG5T?=
+ =?utf-8?B?Yy9zR1h6VmZZMUtXWnRsY2IyNFJwMlJEK21JeHJhZnJMSmxjVXZNUjZieDlO?=
+ =?utf-8?B?aTV3WXFVS3d0ei90dHVvOTVLb1hjUUpySi94NjhhK3MvdWhOUnk3TE4rZ1NX?=
+ =?utf-8?Q?Km5EbJXjB3IElYTq2qOp2lR5g?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4e9c0149-447d-4463-80f1-08dd7b182648
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 05:49:41.1233 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Rjqmdf3FOtPZUEZMxXo66ZAvEmQUYkVLxpLN0knT56h+UL6LDjjg9AJ7+Z8ETk1AWpltgoLhFTs03cOJmQAGtg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1P195MB1448
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,130 +179,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Am 30.01.25 um 16:51 schrieb Tom Rini:
+> On Thu, Jan 30, 2025 at 09:48:19AM +0000, Martin Schwan wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA256
+>>
+>> On Wed, 2025-01-29 at 10:03 -0600, Tom Rini wrote:
+>>> On Wed, Jan 29, 2025 at 03:25:25PM +0100, Martin Schwan wrote:
+>>>> Add a bootmeth driver which supports booting A/B system with RAUC
+>>>> as
+>>>> their update client.
+>>>>
+>>>> Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+>>>> ---
+>>>>   boot/Kconfig         |  11 ++
+>>>>   boot/Makefile        |   1 +
+>>>>   boot/bootmeth_rauc.c | 408
+>>>> +++++++++++++++++++++++++++++++++++++++++++++++++++
+>>>>   3 files changed, 420 insertions(+)
+>>>
+>>> I'm curious, what would be required to have this work for any block
+>>> device, rather than just "mmc" ? Just a lack of time / testing / this
+>>> is
+>>> v1 and that's a future idea? Or is there something more fundamental
+>>> required within bootstd/bootmeths ? Thanks!
+>>>
+>>
+>> Besides MMC, RAUC supports updating SSDs and raw NAND flash [1].
+>>
+>> I guess there should be very little to no adjustments necessary to
+>> support SSDs (probably only adjust checks).
+>>
+>> For raw NAND flash and using UBI volumes, this would require some
+>> additional code calling the correct read operations, but is definitely
+>> possible. I did not implement it yet because of lack of time and
+>> verification, as you correctly guessed.
+>>
+>> Network devices are not supported for obvious reasons.
+> 
+> Thanks for elaborating.
+> 
 
-On Mon, 7 Apr 2025 at 08:08, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Sun, 6 Apr 2025 at 18:06, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Raymond,
-> >
-> > On Sat, 5 Apr 2025 at 07:09, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Fri, 4 Apr 2025 at 13:40, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Raymond,
-> > > >
-> > > > On Sat, 5 Apr 2025 at 03:49, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > >
-> > > > > Hi Tom and Simon,
-> > > > >
-> > > > > On Fri, 28 Mar 2025 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > >
-> > > > > > Hi Tom and Simon,
-> > > > > >
-> > > > > > On Fri, 28 Mar 2025 at 20:02, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Mar 28, 2025 at 11:38:14PM +0000, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
-> > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
-> > > > > > > > > > so that it is simpler to understand and manage.
-> > > > > > > > > >
-> > > > > > > > > > - Unwind some of the nesting in bloblist_init()
-> > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
-> > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
-> > > > > > > > > >
-> > > > > > > > > > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
-> > > > > > > > > > CI at some point. In the meantime, the standard passage series[1] could
-> > > > > > > > > > be resurrected to give some coverage.
-> > > > > > > > > >
-> > > > > > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
-> > > > > > > > >
-> > > > > > > > > Based on how it's documented to be run in
-> > > > > > > > > doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
-> > > > > > > > > that platforms using the handoff spec still work?
-> > > > > > > >
-> > > > > > > > I believe so, yes. I don't have that board to test it though. Raymond
-> > > > > > > > may be able to test this series on QEMU?
-> > > > > > >
-> > > > > > > I was pointing you at the docs so that you would have access to testing
-> > > > > > > it. That's part of the docs, running the emulator.
-> > > > > > >
-> > > > > >
-> > > > > > I can help to test the firmware handoff on qemu.
-> > > > > > I have all the necessary changes and unit tests for the OP-TEE repo
-> > > > > > qemu v8 build to test this.
-> > > > > > I will try to find some time early next week to review and test this
-> > > > > > series before turning back to you.
-> > > > > >
-> > > > >
-> > > > > Just a follow-up on the testing with TF-A and OP-TEE.
-> > > > > Unfortunately, the patch series breaks the transfer list handoff to
-> > > > > U-Boot completely and just end up with below error when U-Boot boots:
-> > > > > ```
-> > > > > No valid device tree binary found at 0000000000000000
-> > > > > initcall failed at call 0000000060097bcc (err=-2)
-> > > > > ### ERROR ### Please RESET the board ###
-> > > > > ```
-> > > > >
-> > > > > U-Boot test version:
-> > > > > 'next' branch + this series + my patch [1] to point fdt_addr to gd->fdt_blob.
-> > > > >
-> > > > > [1]: https://lore.kernel.org/u-boot/20250331224011.2734284-2-raymond.mao@linaro.org/
-> > > >
-> > > > I suppose the FDT address in the register is not being read correctly.
-> > > >
-> > > > Do you have a test case for this, e.g. in QEMU? Even if it is just
-> > > > binary blobs for now, not suitable for CI, I'd like to get it in my
-> > > > lab.
-> > > >
-> > > > I did create a test back when I did standard passage, but that series
-> > > > seems to have not been applied. I'll see if I can resurrect it.
-> > > >
-> > >
-> > > I am using the OP-TEE repo [1] qemu_v8 build to test. You will also
-> > > need my patch [2] for enabling transfer_ist in all components.
-> > >
-> > > [1] https://github.com/OP-TEE
-> > > [2] https://github.com/OP-TEE/build/pull/821
-> > >
-> >
-> > Tom's email seems easier to follow. I got as far as building:
-> >
-> > build/fvp/release/fip.bin
-> >
-> > But I'm not sure how to run that in QEMU. The docs mention some sort
-> > of FVP thing and running FVP_Base_RevC-2xAEMvA -C which I don't seem
-> > to have.
-> >
->
-> If you want to test with QEMU v8, just simply:
-> $ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml
-> $ repo sync
-> $ cd build
-> Apply my patch https://github.com/OP-TEE/build/pull/821
-> In kconfigs/u-boot_tl.conf, remove 'CONFIG_BLOBLIST_SIZE=0' and add
-> 'OF_BLOBLIST=y'
-> $ make toolchains
-> $ make run
+Any other comments on the RAUC bootmeth idea?
 
-Thanks for the steps. It seemed to complete OK. I also found this:
-
-https://optee.readthedocs.io/en/latest/building/devices/qemu.html#qemu-v8
-
-But I'm not sure how to actually run it, or even what was actually
-built. Do you have the QEMU cmdline I should use to make it start,
-please?
-
-Regards,
-SImon
