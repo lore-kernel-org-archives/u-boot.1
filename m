@@ -4,79 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FEBC369A2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 18:48:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB983C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 19:34:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C770803DF;
-	Mon, 14 Apr 2025 20:48:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D1C428209C;
+	Mon, 14 Apr 2025 21:34:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QLso91y/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UZOUE+DJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E86C80584; Mon, 14 Apr 2025 20:48:31 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 32ADB8211F; Mon, 14 Apr 2025 21:34:27 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 248B2803CC
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 20:48:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6B0B81F0D
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 21:34:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ac3eb3fdd2eso889251466b.0
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 11:48:28 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5f3f04b5dbcso3520250a12.1
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 12:34:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744656507; x=1745261307; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744659264; x=1745264064; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dZEfpf4uDzKnPhVK/U06SlK7uewSCRsIkynMuyq8+1I=;
- b=QLso91y/CEeqcqec12Dv6nIyyH55EUZ7QOAF9XdpSAF0oWMFmpKJoeaS7HLR+1MvgI
- 9z03nhhQwzMzO1SnVFzgdaI5bplXVndzOvnpAbU2kjhO/+psGMsKooxDYGdbMlH4IPHf
- eQ+GPrajy65+rgEivh2s06RXo3CProlmNXCfE=
+ bh=BwsX2k1DLp3uD78G2PwpRZGiVZ4+Hk4uUmSWr3XBQhs=;
+ b=UZOUE+DJL2GxIbUnYVNEH/C/0xWGjUKMHSWutTSS3Zzp7znMEW2RoK6CRoIYQBOMdH
+ yR3lugP0EeqLWRFFpD+2bn7nohdxRQ2QSS8DZ5svmEJi9Wcblb3TuH8Y/vhKf0VHHw0V
+ GOPRPt/pboALGbPpHG9jfKFZTS4k/Yx3UxNrU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744656507; x=1745261307;
+ d=1e100.net; s=20230601; t=1744659264; x=1745264064;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dZEfpf4uDzKnPhVK/U06SlK7uewSCRsIkynMuyq8+1I=;
- b=lluNId5DjoHcPN7CcBf51UBK+wGHhqe7K3NZvl4kLVTEdQpbntKvTAM4+VJ0vqe/5M
- T6rk8CsNdSkVjcpEXR9ZHcEi+TmewA9oT3hXaRHlV3TJvf5lGC6hMYtMy4x5zmFqLyFp
- o2pyOR/A/XnDzqY/857b9Zl8XKK6Xug5sT98kLuGd/ZY172X3+Cm2xiUS9BeZdjzLfsa
- AzC2FByoioLD3tygL3hqMwtGsL7+7+qEjRN9LLyVn+uAptVe1X0kytK2TMvq0VJhwXRu
- CBSMzU4j2cN+YItOi7/rf5r6zkCqOVX+Eg8tOhKrxMkZxSOjWjv5BZrBmckMuJSCq56W
- 4WXg==
-X-Gm-Message-State: AOJu0Yxe9Sj7Ok0boV2P7XTzmxMqJqjoY5WUsR0q2EYGsAKdM1tYg3lI
- S6U3cZ+J80MInaOF8FFBGWU5b14kqn8MrtxLZ9KU1ISyaRgqE4X3as9mC2jyRzYgyiIPB5aknFj
- boJMXxgIrfcbzt5SM5Saq8rpNPIeGGT/TYD3I
-X-Gm-Gg: ASbGnctJhYBpcM8Ad9c8bPPwmj2I6+yY0s9wi4aWlMcjso8cyhE14YACEBpsbzL3guS
- 4jLkwVpDY7sFcOlYls+zNjC+24oTkEa3VqCAcqnqHpCRhnz59nOuTFJsMsI3fSydV8KnZqbM/s9
- 5KRoHyWlXzS9ecAl5VjkT+xNUzR6f1zdqDJQ==
-X-Google-Smtp-Source: AGHT+IGAvbFw6aoRBbJYl984Wk0MlWkDBwjOHMeOxsNGozmZ0L948HyKFwoSnrqwVWAJHFyCnQEYvtBk6Q7h+MsHC5w=
-X-Received: by 2002:a17:906:3e87:b0:aca:d48f:4d48 with SMTP id
- a640c23a62f3a-acad48f4effmr868721766b.60.1744656507110; Mon, 14 Apr 2025
- 11:48:27 -0700 (PDT)
+ bh=BwsX2k1DLp3uD78G2PwpRZGiVZ4+Hk4uUmSWr3XBQhs=;
+ b=ESzke/wg4vdTuwkDJm2639MYI1wXtwc/DV44pPdWmEjp1SEQSjCz1i8aa8Wzetnvxt
+ l9pZEipl1R2M0v5frugSU1KH7vawiFXCeLbRy5ElYuoHCgSPIV2o9/5fQZd8CIO7Udfk
+ Dc5KBKt41A0ErTS0Wxw+K+cBBW9NLsSaSeG+dV8jPO1Z183QvLQfkQvzIi4G02nVM0mu
+ BI/fL73huJYPQga3L8zzEd8bWwx4IreCbpwYQ8aFwqrg6PbkmbIYdwA0GVnR70N4+Aub
+ eDvXGWTtetqUETR8n6X26aIOzKhWJ1T3gw1VoYHH0XsdAQulRitKcKufiuKa8lCRq8F7
+ AKqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVGDeKRLmfKV13r5LHyJMtlK6MumCUs8GlSGBanwOdn8N7JMR9LfmQATS/HMjQwwWmAv7CCQ+c=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhQjd4u4NPvtGNDvkAnCmVYaxRRd1STuNugoe9dKEKCCCPCUc4
+ NAt+3oZnRUUSuwK+OxswOAfoWgzvLgNOE6nw4QOEo7agKBAITrU9sQxMSaO6ZcDj6GOKSmUQQ8M
+ BTM3WfNW/7GggMxeR07y7VPjMV8dNYu1tk1e/
+X-Gm-Gg: ASbGncuyDSnoRx2hvdFYGOj2kghHiSeAVMWnEAFp2a+wWCyIP0qfJrmi9/UtHd9O2SD
+ MSmgYJZuCALpxeE6j8jm2FphfZqkJGegg61arO/ymAGDXpsIgs/BfSH+qJrknq0vqMTRKRGoY6K
+ 4sEx47IsQ/mO9ML8wi+mTAWKk=
+X-Google-Smtp-Source: AGHT+IGqZ5SNq+8j5Rs/iwy3606xuEgHo9dSbAIABgkqOpfc8s0z6iIxUgGu5k8oVVPTXohWWdAiQDa81rQ6ke06B/k=
+X-Received: by 2002:a17:907:3da1:b0:ac1:e332:b1f5 with SMTP id
+ a640c23a62f3a-acad36a567amr1206867766b.37.1744659264101; Mon, 14 Apr 2025
+ 12:34:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250327080642.2269856-1-m-shah@ti.com>
- <20250327080642.2269856-2-m-shah@ti.com>
- <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
- <3d2c894b-11f1-462c-b9f5-8d3f45dc0b61@ti.com>
- <CAFLszThs5W+=tFpUsCE0Qi5mvuymtsHF57jeLpV9KUQfGXBXnA@mail.gmail.com>
- <3287617e-3b6a-4387-90d4-7bbfc810f9c7@ti.com>
- <ec117e91-7b13-4ca9-8509-3075d7071427@ti.com>
-In-Reply-To: <ec117e91-7b13-4ca9-8509-3075d7071427@ti.com>
+References: <CAEfUkULg0bzG564_vo43Bta5C4_EirZNt39ncgua0VFjd1C-tw@mail.gmail.com>
+ <CAFLszTjGn1JGdpNAZVL6CC+pQLsOrG6gjmo8kRzjbnR_=6CMvw@mail.gmail.com>
+ <20250403215239.GO5495@bill-the-cat>
+ <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
+ <20250403225058.GQ5495@bill-the-cat>
+ <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
+ <20250404175710.GU5495@bill-the-cat>
+ <CAFLszTgBMP-WsAw=z807e9RUY1YNB=Ky+s1MhW=x6dYt7_V+-g@mail.gmail.com>
+ <20250406223854.GE5495@bill-the-cat>
+ <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
+ <20250407143056.GL5495@bill-the-cat>
+In-Reply-To: <20250407143056.GL5495@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Apr 2025 12:48:15 -0600
-X-Gm-Features: ATxdqUFYvbh0CEi1R18XCSlrnzfamh_QB9Y_7X_NOuehP8lwb1mUZFR_cITnDMU
-Message-ID: <CAFLszTjD+Aofu8jLMyX4FPxatmt_SaRC8amf7rziNmNKECFrGQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
- properties to supernodes
-To: Moteen Shah <m-shah@ti.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, alpernebiyasak@gmail.com, 
- quentin.schulz@cherry.de, m-chawdhry@ti.com, n-francis@ti.com, 
- vigneshr@ti.com, u-kumar1@ti.com, a-chavda@ti.com
+Date: Mon, 14 Apr 2025 13:34:10 -0600
+X-Gm-Features: ATxdqUEK3wDkOaOHWKJ4imYultec2LzieXxqApvIoy_rJf5Sm1xruBPhIhYe2DU
+Message-ID: <CAFLszTjJekLH7Z3NMewpK1hYvMgXfrJ_0TknKhuZ0QRk3ZO3sg@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
+To: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,264 +114,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Moteen,
+Hi Tom,
 
-On Thu, 10 Apr 2025 at 05:39, Moteen Shah <m-shah@ti.com> wrote:
+On Mon, 7 Apr 2025 at 08:31, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hey Simon,
+> On Mon, Apr 07, 2025 at 12:35:15PM +1200, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 7 Apr 2025 at 10:38, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Apr 07, 2025 at 10:06:07AM +1200, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Sat, 5 Apr 2025 at 06:57, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Sat, Apr 05, 2025 at 06:39:39AM +1300, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
+> > > > > > > > > > Hi Raymond,
+> > > > > > > > > >
+> > > > > > > > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > Hi Simon,
+> > > > > > > > > > >
+> > > > > > > > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Hi Simon,
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Hi Simon,
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
+> > > > > > > > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
+> > > > > > > > > > > > > > > > so that it is simpler to understand and manage.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > > > > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > > > > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
+> > > > > > > > > > > > > > > mandatorily use bloblist to hand over everything between boot stages
+> > > > > > > > > > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates that
+> > > > > > > > > > > > > > there must be a bloblist, not that it must contain a devicetree. So I
+> > > > > > > > > > > > > > wasn't sure about removing it.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDATORY is
+> > > > > > > > > > > > > selected, we can override any fdt from board or env with the one from
+> > > > > > > > > > > > > the bloblist.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Yes, but we should be explicit about what is going on here. With
+> > > > > > > > > > > > OF_BLOBLIST we indicate that the devicetree is coming from the
+> > > > > > > > > > > > bloblist. It becomes one of the sources for devicetree, like
+> > > > > > > > > > > > OF_SEPARATE and OF_EMBED
+> > > > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
+> > > > > > > > > > > mandatorily used and override other fdt sources like from the board or
+> > > > > > > > > > > env variables.
+> > > > > > > > > >
+> > > > > > > > > > So long as you are OK with OF_BLOBLIST as well, I have no objection to
+> > > > > > > > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
+> > > > > > > > > > very much. But I can see why it is called that as my standard passage
+> > > > > > > > > > series was actually never applied. So I suppose I'll need to have
+> > > > > > > > > > another try at that.
+> > > > > > > > > >
+> > > > > > > > > > So to be clear, I want a separate option for devicetree, called
+> > > > > > > > > > OF_BLOBLIST, which I can enable/disable as needed, without affecting
+> > > > > > > > > > your option.
+> > > > > > > > >
+> > > > > > > > > Sigh. Can I ask what the use case for this will be? And we are going to
+> > > > > > > > > get rid of BLOBLIST_FIXED at some point, yes?
+> > > > > > > >
+> > > > > > > > I thought we agreed that this was acceptable. We argued the toss for
+> > > > > > > > months on this point and I would rather not revisit it.
+> > > > > > > >
+> > > > > > > > Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
+> > > > > > > > pretty sure it can be done. The only tricky bit is coming up with a
+> > > > > > > > bloblist protocol for x86.
+> > > > > > >
+> > > > > > > Yes, I'm stuck between being "flexible and saying yes" and how long we
+> > > > > > > have to live with what I also think are bad designs.
+> > > > > > >
+> > > > > > > So maybe the pre-requisite here is that with "bloblist" and "standard
+> > > > > > > passage" being divorced, what is the requirement for bloblist again?
+> > > > > > > Because in practice, all of the problems we've had come down to looking
+> > > > > > > in fixed address locations before they're valid. You want to handle this
+> > > > > > > by saying "Ah, we won't look before it's valid with other CONFIG flags"
+> > > > > > > and I say we should handle this by not using a fixed address to start
+> > > > > > > with.
+> > > > > > >
+> > > > > > > If we have to add OF_BLOBLIST now and delete it in a few months, sigh,
+> > > > > > > OK. But it shouldn't need to exist long term.
+> > > > > >
+> > > > > > For me, OF_BLOBLIST is needed for x86 devices which don't pass the
+> > > > > > devicetree in the bloblist.
+> > > > >
+> > > > > I don't understand why that would become the case when it's not true
+> > > > > today.
+> > > >
+> > > > If you look at the top obbfdtdec_setup() in your tree you can see the
+> > > > special-case code related to TPL, that I'm wanting to get rid of.
+> > >
+> > > OK, but all of that too is for the case of a fixed bloblist being in
+> > > uninitialized memory. Which is why I don't like BLOBLIST_FIXED and want
+> > > to see passing of the bloblist from xPL -> PPL be implemented and so xPL
+> > > can allocate a bloblist (or grow a passed one if needed).
+> >
+> > We are going around in circles though. Having it is registers doesn't
+> > help with the problem that there isn't an FDT in the bloblist.
 >
-> Is the problem discussed in the thread an actual bug or am I missing
-> something in the implementation?
+> Sure it does. If we're passed a bloblist in a register we can then see
+> if it has a DT (and use it) or not (and move to the next DT location).
 >
-> Regards,
-> Moteen
+> > Also, I thought you decided that I could maintain bloblist. Have you
+> > changed your mind?
 >
-> On 03/04/25 11:51, Moteen Shah wrote:
-> > Hey Simon,
-> >
-> > On 03/04/25 00:52, Simon Glass wrote:
-> >> Hi Moteen,
-> >>
-> >> On Wed, 2 Apr 2025 at 22:01, Moteen Shah <m-shah@ti.com> wrote:
-> >>> Hey Simon,
-> >>>
-> >>> On 29/03/25 05:17, Simon Glass wrote:
-> >>>> Hi Moteen,
-> >>>>
-> >>>> On Thu, 27 Mar 2025 at 08:06, Moteen Shah <m-shah@ti.com> wrote:
-> >>>>> Add a function to scan through all the nodes in the device-tree
-> >>>>> recusively for bootph-* property. If found, propagate it to all
-> >>>>> of its parent nodes up the hierarchy.
-> >>>>>
-> >>>>> Signed-off-by: Moteen Shah <m-shah@ti.com>
-> >>>>> ---
-> >>>>>    tools/binman/control.py | 35 ++++++++++++++++++++++++++++++++++-
-> >>>>>    1 file changed, 34 insertions(+), 1 deletion(-)
-> >>>>>
-> >>>>> diff --git a/tools/binman/control.py b/tools/binman/control.py
-> >>>>> index e73c598298c..e739949d366 100644
-> >>>>> --- a/tools/binman/control.py
-> >>>>> +++ b/tools/binman/control.py
-> >>>>> @@ -526,6 +526,35 @@ def _RemoveTemplates(parent):
-> >>>>>            if node.name.startswith('template'):
-> >>>>>                node.Delete()
-> >>>>>
-> >>>>> +def prop_bootph_to_parent(node, prop, dtb):
-> >>>> I think the 'prop_' is a bit confusing, since you are dealing with
-> >>>> properties! How about 'add_' as the prefix?
-> >>> 'add_' should be more descriptive, will add that in v3.
-> >>>
-> >>>>> +    """Propagates bootph-* property to all the parent
-> >>>>> +    nodes up the hierarchy
-> >>>> First line should be a summary
-> >>>>
-> >>>> then blank line
-> >>>>
-> >>>> then describe the args...you can see this if you look at a few
-> >>>> other functions.
-> >>>
-> >>> Noted, will rectify in v3.
-> >>>
-> >>>>> +    """
-> >>>>> +    parent = node.parent
-> >>>>> +    if parent == None or parent.props.get(prop):
-> >>>> if not parent or ...
-> >>>
-> >>> Noted.
-> >>>
-> >>>
-> >>>>> +       return
-> >>>>> +
-> >>>>> +    while parent:
-> >>>>> +        parent.AddEmptyProp(prop, 0)
-> >>>>> +        parent = parent.parent
-> >>>>> +
-> >>>>> +def scan_and_prop_bootph(node, dtb):
-> >>>>> +    """Scan the device tree and set the bootph-* property if its
-> >>>>> present
-> >>>>> +    in subnode
-> >>>>> +
-> >>>>> +    This is used to set the bootph-* property in the parent node
-> >>>>> if a
-> >>>>> +    "bootph-*" property is found in any of the subnodes of the
-> >>>>> parent
-> >>>>> +    node.
-> >>>> comment style again
-> >>>>
-> >>>>> +    """
-> >>>>> +    bootph_prop = ['bootph-all', 'bootph-some-ram',
-> >>>>> 'bootph-pre-ram', 'bootph-pre-sram']
-> >>>>   From my understanding the only ones that matter are bootph-all and
-> >>>> bootph-some-ram, since the SPL ones are handled by fdtgrep.
-> >>>
-> >>> Noted.
-> >>>
-> >>>
-> >>>>> +
-> >>>>> +    for props in bootph_prop:
-> >>>> for prop
-> >>>>
-> >>>> (since it is just one)
-> >>>>
-> >>>>> +        if node.props.get(props):
-> >>>>> +            prop_bootph_to_parent(node, props, dtb)
-> >>>>> +
-> >>>>> +    for subnode in node.subnodes:
-> >>>>> +       scan_and_prop_bootph(subnode, dtb)
-> >>>>> +
-> >>>>>    def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt,
-> >>>>> use_expanded, indir):
-> >>>>>        """Prepare the images to be processed and select the device
-> >>>>> tree
-> >>>>>
-> >>>>> @@ -563,7 +592,11 @@ def PrepareImagesAndDtbs(dtb_fname,
-> >>>>> select_images, update_fdt, use_expanded, ind
-> >>>>>            indir = []
-> >>>>>        dtb_fname = fdt_util.EnsureCompiled(dtb_fname, indir=indir)
-> >>>>>        fname = tools.get_output_filename('u-boot.dtb.out')
-> >>>>> -    tools.write_file(fname, tools.read_file(dtb_fname))
-> >>>>> +    dtb = fdt.FdtScan(dtb_fname)
-> >>>>> +    scan_and_prop_bootph(dtb.GetRoot(), dtb)
-> >>>>> +    dtb.Sync(True)
-> >>>>> +    tools.write_file(dtb_fname, dtb.GetContents())
-> >>>>> +    tools.write_file(fname, dtb.GetContents())
-> >>>> You shouldn't write back to the file created by the build. Do you
-> >>>> need this?
-> >>>
-> >>> Had the same thought, but the build fails in non clean builds[0]. Did a
-> >>> workaround[1] but then some essential template nodes ends up getting
-> >>> deleted from u-boot.dtb. Finally, had to write back to the file
-> >>> to resolve the issue.
-> >> Can you push a tree somewhere. This could be a bug that I could fix.
-> >
-> > You can use the tree here to recreate the non clean build issue
-> > mentioned:
-> > https://github.com/Jamm02/U-Boot-patchwork/tree/bootph-patch-test
-> >
-> >>
-> >>>>>        dtb = fdt.FdtScan(fname)
-> >>>>>
-> >>>>>        node = _FindBinmanNode(dtb)
-> >>>>> --
-> >>>>> 2.34.1
-> >>>>>
-> >>>> The code looks fine to me apart from the nits.
-> >>>>
-> >>>> This addition needs a test - see ftest.py for some examples there. But
-> >>>> basically just create a dts that has some props in it, then check that
-> >>>> they got added.
-> >>>
-> >>> Included a test as well in the patchset[3]. Do let me know if there are
-> >>> some changes required in it.
-> >> Somehow I'm not seeing that in patchwork. It looks good but please try
-> >> to keep lines <=80 cols.
-> >
-> >
-> > Sure, will fix up in v3. Should I push a v3 or wait for you to fix the
-> > issue discussed above?
+> You just mis-understood me. Yes, you can maintain bloblist. But also,
+> Yes, I need to understand what you're doing. The root of the OF_BLOBLIST
+> problems is that no one understood you.
 
-I've finally got back to this, but I can't repeat it.
+No, that's not actually true. The problem is that no one would listen
+and everyone was sure I was wrong.
 
-For me:
-
- crosfw j7200_evm_r5 -F
-cmd: make -j32 'CROSS_COMPILE=/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-'
---no-print-directory 'HOSTSTRIP=true' 'QEMU_ARCH='
-'KCONFIG_NOSILENTUPDATE=1' 'O=/tmp/b/j7200_evm_r5' -s 'BUILD_ROM=1'
-all
-Image 'tiboot3-j7200-hs-evm.bin' has faked external blobs and is
-non-functional: ti-fs-firmware-j7200-hs-enc.bin
-ti-fs-firmware-j7200-hs-cert.bin
-
-Image 'tiboot3-j7200-hs-evm.bin' is missing optional external blobs
-but is still functional: ti-fs-enc.bin sysfw-inner-cert
-
-/binman/tiboot3-j7200-hs-evm.bin/ti-fs-enc.bin
-(ti-sysfw/ti-fs-firmware-j7200-hs-enc.bin):
-   Missing blob
-
-/binman/tiboot3-j7200-hs-evm.bin/sysfw-inner-cert
-(ti-sysfw/ti-fs-firmware-j7200-hs-cert.bin):
-   Missing blob
-
-Image 'tiboot3-j7200_sr2-hs-evm.bin' has faked external blobs and is
-non-functional: ti-fs-firmware-j7200_sr2-hs-enc.bin
-ti-fs-firmware-j7200_sr2-hs-cert.bin
-
-Image 'tiboot3-j7200_sr2-hs-evm.bin' is missing optional external
-blobs but is still functional: ti-fs-enc.bin sysfw-inner-cert
-
-/binman/tiboot3-j7200_sr2-hs-evm.bin/ti-fs-enc.bin
-(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-enc.bin):
-   Missing blob
-
-/binman/tiboot3-j7200_sr2-hs-evm.bin/sysfw-inner-cert
-(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-cert.bin):
-   Missing blob
-
-Image 'tiboot3-j7200-hs-fs-evm.bin' has faked external blobs and is
-non-functional: ti-fs-firmware-j7200-hs-fs-enc.bin
-ti-fs-firmware-j7200-hs-fs-cert.bin
-
-Image 'tiboot3-j7200-hs-fs-evm.bin' is missing optional external blobs
-but is still functional: ti-fs-enc.bin sysfw-inner-cert
-
-/binman/tiboot3-j7200-hs-fs-evm.bin/ti-fs-enc.bin
-(ti-sysfw/ti-fs-firmware-j7200-hs-fs-enc.bin):
-   Missing blob
-
-/binman/tiboot3-j7200-hs-fs-evm.bin/sysfw-inner-cert
-(ti-sysfw/ti-fs-firmware-j7200-hs-fs-cert.bin):
-   Missing blob
-
-Image 'tiboot3-j7200_sr2-hs-fs-evm.bin' has faked external blobs and
-is non-functional: ti-fs-firmware-j7200_sr2-hs-fs-enc.bin
-ti-fs-firmware-j7200_sr2-hs-fs-cert.bin
-
-Image 'tiboot3-j7200_sr2-hs-fs-evm.bin' is missing optional external
-blobs but is still functional: ti-fs-enc.bin sysfw-inner-cert
-
-/binman/tiboot3-j7200_sr2-hs-fs-evm.bin/ti-fs-enc.bin
-(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-fs-enc.bin):
-   Missing blob
-
-/binman/tiboot3-j7200_sr2-hs-fs-evm.bin/sysfw-inner-cert
-(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-fs-cert.bin):
-   Missing blob
-
-Image 'tiboot3-j7200-gp-evm.bin' has faked external blobs and is
-non-functional: ti-fs-firmware-j7200-gp.bin
-
-Image 'tiboot3-j7200-gp-evm.bin' is missing optional external blobs
-but is still functional: ti-fs-gp.bin
-
-/binman/tiboot3-j7200-gp-evm.bin/ti-fs-gp.bin
-(ti-sysfw/ti-fs-firmware-j7200-gp.bin):
-   Missing blob
-
-Some images are invalid
-make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:1135:
-.binman_stamp] Error 103
-make: *** [Makefile:177: sub-make] Error 2
-
-I wonder if I need some blobs?
-
-> >
-> >>
-> >>
-> >>>> I think testSimpleFitEncryptedData() could be a good example?
-> >>>>
-> >>>> Regards,
-> >>>> Simon
-> >>> References:
-> >>> [0]https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-non-clean-build
-> >>>
-> >>> [1]https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-patch-tools-dtdoc-fdt-py
-> >>>
-> >>> [3]https://lore.kernel.org/u-boot/20250327080642.2269856-3-m-shah@ti.com/
-> >>>
-> >>>
-> >>> Thanks for the review.
+I sent the series on the basis that you were open to my maintaining
+bloblist in your tree. I didn't know there were extra conditions. So
+please let me know which way you want to go on this.
 
 Regards,
-SImon
+Simon
