@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46899C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 18:07:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FEBC369A2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 18:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 535118082A;
-	Mon, 14 Apr 2025 20:07:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C770803DF;
+	Mon, 14 Apr 2025 20:48:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="expVWV/4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QLso91y/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB8398091A; Mon, 14 Apr 2025 20:07:46 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A071807B1
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 20:07:44 +0200 (CEST)
+ id 1E86C80584; Mon, 14 Apr 2025 20:48:31 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 248B2803CC
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 20:48:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EI7S9r2225093
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 14 Apr 2025 13:07:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744654048;
- bh=f3vpgcHanjLtKeeo1duvFLpMIGwUzE4/CGVDhvYhrdY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=expVWV/41CVlNH/Rk0UHQM9+SZuQINhOw6P/clIZRdP9p/6c7mdnLP4iEV44duXEM
- v3MxZZhP/l0FheU0eRA2DlEOCNt3qpqww440KUIiH/m5cFG7+YR6zLIwN3Z06M0qCX
- OWKQ+pWSFhLohSTeZW+IwcUFUgZhaq7mam/u0gqY=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EI7SXT032158
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 14 Apr 2025 13:07:28 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
- Apr 2025 13:07:27 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 14 Apr 2025 13:07:27 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EI7Rpk018782;
- Mon, 14 Apr 2025 13:07:27 -0500
-Date: Mon, 14 Apr 2025 13:07:27 -0500
-From: Nishanth Menon <nm@ti.com>
-To: "Francis, Neha" <n-francis@ti.com>
-CC: Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Fabio Estevm <festevam@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Mario Six <mario.six@gdsys.cc>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- <u-boot@lists.denx.de>, Ian Ray <ian.ray@gehealthcare.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
-Message-ID: <20250414180727.5d5zyenfagdc5qw2@unable>
-References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
- <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
- <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac3eb3fdd2eso889251466b.0
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 11:48:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1744656507; x=1745261307; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dZEfpf4uDzKnPhVK/U06SlK7uewSCRsIkynMuyq8+1I=;
+ b=QLso91y/CEeqcqec12Dv6nIyyH55EUZ7QOAF9XdpSAF0oWMFmpKJoeaS7HLR+1MvgI
+ 9z03nhhQwzMzO1SnVFzgdaI5bplXVndzOvnpAbU2kjhO/+psGMsKooxDYGdbMlH4IPHf
+ eQ+GPrajy65+rgEivh2s06RXo3CProlmNXCfE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744656507; x=1745261307;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dZEfpf4uDzKnPhVK/U06SlK7uewSCRsIkynMuyq8+1I=;
+ b=lluNId5DjoHcPN7CcBf51UBK+wGHhqe7K3NZvl4kLVTEdQpbntKvTAM4+VJ0vqe/5M
+ T6rk8CsNdSkVjcpEXR9ZHcEi+TmewA9oT3hXaRHlV3TJvf5lGC6hMYtMy4x5zmFqLyFp
+ o2pyOR/A/XnDzqY/857b9Zl8XKK6Xug5sT98kLuGd/ZY172X3+Cm2xiUS9BeZdjzLfsa
+ AzC2FByoioLD3tygL3hqMwtGsL7+7+qEjRN9LLyVn+uAptVe1X0kytK2TMvq0VJhwXRu
+ CBSMzU4j2cN+YItOi7/rf5r6zkCqOVX+Eg8tOhKrxMkZxSOjWjv5BZrBmckMuJSCq56W
+ 4WXg==
+X-Gm-Message-State: AOJu0Yxe9Sj7Ok0boV2P7XTzmxMqJqjoY5WUsR0q2EYGsAKdM1tYg3lI
+ S6U3cZ+J80MInaOF8FFBGWU5b14kqn8MrtxLZ9KU1ISyaRgqE4X3as9mC2jyRzYgyiIPB5aknFj
+ boJMXxgIrfcbzt5SM5Saq8rpNPIeGGT/TYD3I
+X-Gm-Gg: ASbGnctJhYBpcM8Ad9c8bPPwmj2I6+yY0s9wi4aWlMcjso8cyhE14YACEBpsbzL3guS
+ 4jLkwVpDY7sFcOlYls+zNjC+24oTkEa3VqCAcqnqHpCRhnz59nOuTFJsMsI3fSydV8KnZqbM/s9
+ 5KRoHyWlXzS9ecAl5VjkT+xNUzR6f1zdqDJQ==
+X-Google-Smtp-Source: AGHT+IGAvbFw6aoRBbJYl984Wk0MlWkDBwjOHMeOxsNGozmZ0L948HyKFwoSnrqwVWAJHFyCnQEYvtBk6Q7h+MsHC5w=
+X-Received: by 2002:a17:906:3e87:b0:aca:d48f:4d48 with SMTP id
+ a640c23a62f3a-acad48f4effmr868721766b.60.1744656507110; Mon, 14 Apr 2025
+ 11:48:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250327080642.2269856-1-m-shah@ti.com>
+ <20250327080642.2269856-2-m-shah@ti.com>
+ <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
+ <3d2c894b-11f1-462c-b9f5-8d3f45dc0b61@ti.com>
+ <CAFLszThs5W+=tFpUsCE0Qi5mvuymtsHF57jeLpV9KUQfGXBXnA@mail.gmail.com>
+ <3287617e-3b6a-4387-90d4-7bbfc810f9c7@ti.com>
+ <ec117e91-7b13-4ca9-8509-3075d7071427@ti.com>
+In-Reply-To: <ec117e91-7b13-4ca9-8509-3075d7071427@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 14 Apr 2025 12:48:15 -0600
+X-Gm-Features: ATxdqUFYvbh0CEi1R18XCSlrnzfamh_QB9Y_7X_NOuehP8lwb1mUZFR_cITnDMU
+Message-ID: <CAFLszTjD+Aofu8jLMyX4FPxatmt_SaRC8amf7rziNmNKECFrGQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
+ properties to supernodes
+To: Moteen Shah <m-shah@ti.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, alpernebiyasak@gmail.com, 
+ quentin.schulz@cherry.de, m-chawdhry@ti.com, n-francis@ti.com, 
+ vigneshr@ti.com, u-kumar1@ti.com, a-chavda@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,49 +94,264 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23:06-20250414, Francis, Neha wrote:
-> On 4/3/2025 1:09 PM, Miquel Raynal wrote:
-> > It is very surprising that such an uclass, specifically designed to
-> > handle resources that may be shared by different devices, is not keeping
-> > the count of the number of times a power domain has been
-> > enabled/disabled to avoid shutting it down unexpectedly or disabling it
-> > several times.
-> > 
-> > Doing this causes troubles on eg. i.MX8MP because disabling power
-> > domains can be done in recursive loops were the same power domain
-> > disabled up to 4 times in a row. PGCs seem to have tight FSM internal
-> > timings to respect and it is easy to produce a race condition that puts
-> > the power domains in an unstable state, leading to ADB400 errors and
-> > later crashes in Linux.
-> > 
-> > CI tests using power domains are slightly updated to make sure the count
-> > of on/off calls is even and the results match what we *now* expect.
-> > 
-> > As we do not want to break existing users while stile getting
-> > interesting error codes, the implementation is split between:
-> > - a low-level helper reporting error codes if the requested transition
-> >   could not be operated,
-> > - a higher-level helper ignoring the "non error" codes, like EALREADY and
-> >   EBUSY.
-> > 
-> > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> > ---
-> 
-> This commit looks to be breaking K3 platforms boot, please see "Latest Boot
-> Summary" [0]. Reverting the commit fixes boot.
-> 
-> [0] https://lcpd.itg.ti.com/upstream/k3-boot-build/main/build-trends.html
+Hi Moteen,
 
-Uggh. This link is a TI internal link. Nutshell, it is broken
-between:
-v2025.04-921-gcb7555e93075 : https://source.denx.de/u-boot/u-boot.git
-and
-v2025.04-1041-g407d68638fe3 : https://source.denx.de/u-boot/u-boot.git
+On Thu, 10 Apr 2025 at 05:39, Moteen Shah <m-shah@ti.com> wrote:
+>
+> Hey Simon,
+>
+> Is the problem discussed in the thread an actual bug or am I missing
+> something in the implementation?
+>
+> Regards,
+> Moteen
+>
+> On 03/04/25 11:51, Moteen Shah wrote:
+> > Hey Simon,
+> >
+> > On 03/04/25 00:52, Simon Glass wrote:
+> >> Hi Moteen,
+> >>
+> >> On Wed, 2 Apr 2025 at 22:01, Moteen Shah <m-shah@ti.com> wrote:
+> >>> Hey Simon,
+> >>>
+> >>> On 29/03/25 05:17, Simon Glass wrote:
+> >>>> Hi Moteen,
+> >>>>
+> >>>> On Thu, 27 Mar 2025 at 08:06, Moteen Shah <m-shah@ti.com> wrote:
+> >>>>> Add a function to scan through all the nodes in the device-tree
+> >>>>> recusively for bootph-* property. If found, propagate it to all
+> >>>>> of its parent nodes up the hierarchy.
+> >>>>>
+> >>>>> Signed-off-by: Moteen Shah <m-shah@ti.com>
+> >>>>> ---
+> >>>>>    tools/binman/control.py | 35 ++++++++++++++++++++++++++++++++++-
+> >>>>>    1 file changed, 34 insertions(+), 1 deletion(-)
+> >>>>>
+> >>>>> diff --git a/tools/binman/control.py b/tools/binman/control.py
+> >>>>> index e73c598298c..e739949d366 100644
+> >>>>> --- a/tools/binman/control.py
+> >>>>> +++ b/tools/binman/control.py
+> >>>>> @@ -526,6 +526,35 @@ def _RemoveTemplates(parent):
+> >>>>>            if node.name.startswith('template'):
+> >>>>>                node.Delete()
+> >>>>>
+> >>>>> +def prop_bootph_to_parent(node, prop, dtb):
+> >>>> I think the 'prop_' is a bit confusing, since you are dealing with
+> >>>> properties! How about 'add_' as the prefix?
+> >>> 'add_' should be more descriptive, will add that in v3.
+> >>>
+> >>>>> +    """Propagates bootph-* property to all the parent
+> >>>>> +    nodes up the hierarchy
+> >>>> First line should be a summary
+> >>>>
+> >>>> then blank line
+> >>>>
+> >>>> then describe the args...you can see this if you look at a few
+> >>>> other functions.
+> >>>
+> >>> Noted, will rectify in v3.
+> >>>
+> >>>>> +    """
+> >>>>> +    parent = node.parent
+> >>>>> +    if parent == None or parent.props.get(prop):
+> >>>> if not parent or ...
+> >>>
+> >>> Noted.
+> >>>
+> >>>
+> >>>>> +       return
+> >>>>> +
+> >>>>> +    while parent:
+> >>>>> +        parent.AddEmptyProp(prop, 0)
+> >>>>> +        parent = parent.parent
+> >>>>> +
+> >>>>> +def scan_and_prop_bootph(node, dtb):
+> >>>>> +    """Scan the device tree and set the bootph-* property if its
+> >>>>> present
+> >>>>> +    in subnode
+> >>>>> +
+> >>>>> +    This is used to set the bootph-* property in the parent node
+> >>>>> if a
+> >>>>> +    "bootph-*" property is found in any of the subnodes of the
+> >>>>> parent
+> >>>>> +    node.
+> >>>> comment style again
+> >>>>
+> >>>>> +    """
+> >>>>> +    bootph_prop = ['bootph-all', 'bootph-some-ram',
+> >>>>> 'bootph-pre-ram', 'bootph-pre-sram']
+> >>>>   From my understanding the only ones that matter are bootph-all and
+> >>>> bootph-some-ram, since the SPL ones are handled by fdtgrep.
+> >>>
+> >>> Noted.
+> >>>
+> >>>
+> >>>>> +
+> >>>>> +    for props in bootph_prop:
+> >>>> for prop
+> >>>>
+> >>>> (since it is just one)
+> >>>>
+> >>>>> +        if node.props.get(props):
+> >>>>> +            prop_bootph_to_parent(node, props, dtb)
+> >>>>> +
+> >>>>> +    for subnode in node.subnodes:
+> >>>>> +       scan_and_prop_bootph(subnode, dtb)
+> >>>>> +
+> >>>>>    def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt,
+> >>>>> use_expanded, indir):
+> >>>>>        """Prepare the images to be processed and select the device
+> >>>>> tree
+> >>>>>
+> >>>>> @@ -563,7 +592,11 @@ def PrepareImagesAndDtbs(dtb_fname,
+> >>>>> select_images, update_fdt, use_expanded, ind
+> >>>>>            indir = []
+> >>>>>        dtb_fname = fdt_util.EnsureCompiled(dtb_fname, indir=indir)
+> >>>>>        fname = tools.get_output_filename('u-boot.dtb.out')
+> >>>>> -    tools.write_file(fname, tools.read_file(dtb_fname))
+> >>>>> +    dtb = fdt.FdtScan(dtb_fname)
+> >>>>> +    scan_and_prop_bootph(dtb.GetRoot(), dtb)
+> >>>>> +    dtb.Sync(True)
+> >>>>> +    tools.write_file(dtb_fname, dtb.GetContents())
+> >>>>> +    tools.write_file(fname, dtb.GetContents())
+> >>>> You shouldn't write back to the file created by the build. Do you
+> >>>> need this?
+> >>>
+> >>> Had the same thought, but the build fails in non clean builds[0]. Did a
+> >>> workaround[1] but then some essential template nodes ends up getting
+> >>> deleted from u-boot.dtb. Finally, had to write back to the file
+> >>> to resolve the issue.
+> >> Can you push a tree somewhere. This could be a bug that I could fix.
+> >
+> > You can use the tree here to recreate the non clean build issue
+> > mentioned:
+> > https://github.com/Jamm02/U-Boot-patchwork/tree/bootph-patch-test
+> >
+> >>
+> >>>>>        dtb = fdt.FdtScan(fname)
+> >>>>>
+> >>>>>        node = _FindBinmanNode(dtb)
+> >>>>> --
+> >>>>> 2.34.1
+> >>>>>
+> >>>> The code looks fine to me apart from the nits.
+> >>>>
+> >>>> This addition needs a test - see ftest.py for some examples there. But
+> >>>> basically just create a dts that has some props in it, then check that
+> >>>> they got added.
+> >>>
+> >>> Included a test as well in the patchset[3]. Do let me know if there are
+> >>> some changes required in it.
+> >> Somehow I'm not seeing that in patchwork. It looks good but please try
+> >> to keep lines <=80 cols.
+> >
+> >
+> > Sure, will fix up in v3. Should I push a v3 or wait for you to fix the
+> > issue discussed above?
 
-Neha bisected it down to 197376fbf300e92afa0a1583815d9c9eb52d613a commit
-which is this patch.
+I've finally got back to this, but I can't repeat it.
 
--- 
+For me:
+
+ crosfw j7200_evm_r5 -F
+cmd: make -j32 'CROSS_COMPILE=/home/sglass/.buildman-toolchains/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-'
+--no-print-directory 'HOSTSTRIP=true' 'QEMU_ARCH='
+'KCONFIG_NOSILENTUPDATE=1' 'O=/tmp/b/j7200_evm_r5' -s 'BUILD_ROM=1'
+all
+Image 'tiboot3-j7200-hs-evm.bin' has faked external blobs and is
+non-functional: ti-fs-firmware-j7200-hs-enc.bin
+ti-fs-firmware-j7200-hs-cert.bin
+
+Image 'tiboot3-j7200-hs-evm.bin' is missing optional external blobs
+but is still functional: ti-fs-enc.bin sysfw-inner-cert
+
+/binman/tiboot3-j7200-hs-evm.bin/ti-fs-enc.bin
+(ti-sysfw/ti-fs-firmware-j7200-hs-enc.bin):
+   Missing blob
+
+/binman/tiboot3-j7200-hs-evm.bin/sysfw-inner-cert
+(ti-sysfw/ti-fs-firmware-j7200-hs-cert.bin):
+   Missing blob
+
+Image 'tiboot3-j7200_sr2-hs-evm.bin' has faked external blobs and is
+non-functional: ti-fs-firmware-j7200_sr2-hs-enc.bin
+ti-fs-firmware-j7200_sr2-hs-cert.bin
+
+Image 'tiboot3-j7200_sr2-hs-evm.bin' is missing optional external
+blobs but is still functional: ti-fs-enc.bin sysfw-inner-cert
+
+/binman/tiboot3-j7200_sr2-hs-evm.bin/ti-fs-enc.bin
+(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-enc.bin):
+   Missing blob
+
+/binman/tiboot3-j7200_sr2-hs-evm.bin/sysfw-inner-cert
+(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-cert.bin):
+   Missing blob
+
+Image 'tiboot3-j7200-hs-fs-evm.bin' has faked external blobs and is
+non-functional: ti-fs-firmware-j7200-hs-fs-enc.bin
+ti-fs-firmware-j7200-hs-fs-cert.bin
+
+Image 'tiboot3-j7200-hs-fs-evm.bin' is missing optional external blobs
+but is still functional: ti-fs-enc.bin sysfw-inner-cert
+
+/binman/tiboot3-j7200-hs-fs-evm.bin/ti-fs-enc.bin
+(ti-sysfw/ti-fs-firmware-j7200-hs-fs-enc.bin):
+   Missing blob
+
+/binman/tiboot3-j7200-hs-fs-evm.bin/sysfw-inner-cert
+(ti-sysfw/ti-fs-firmware-j7200-hs-fs-cert.bin):
+   Missing blob
+
+Image 'tiboot3-j7200_sr2-hs-fs-evm.bin' has faked external blobs and
+is non-functional: ti-fs-firmware-j7200_sr2-hs-fs-enc.bin
+ti-fs-firmware-j7200_sr2-hs-fs-cert.bin
+
+Image 'tiboot3-j7200_sr2-hs-fs-evm.bin' is missing optional external
+blobs but is still functional: ti-fs-enc.bin sysfw-inner-cert
+
+/binman/tiboot3-j7200_sr2-hs-fs-evm.bin/ti-fs-enc.bin
+(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-fs-enc.bin):
+   Missing blob
+
+/binman/tiboot3-j7200_sr2-hs-fs-evm.bin/sysfw-inner-cert
+(ti-sysfw/ti-fs-firmware-j7200_sr2-hs-fs-cert.bin):
+   Missing blob
+
+Image 'tiboot3-j7200-gp-evm.bin' has faked external blobs and is
+non-functional: ti-fs-firmware-j7200-gp.bin
+
+Image 'tiboot3-j7200-gp-evm.bin' is missing optional external blobs
+but is still functional: ti-fs-gp.bin
+
+/binman/tiboot3-j7200-gp-evm.bin/ti-fs-gp.bin
+(ti-sysfw/ti-fs-firmware-j7200-gp.bin):
+   Missing blob
+
+Some images are invalid
+make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:1135:
+.binman_stamp] Error 103
+make: *** [Makefile:177: sub-make] Error 2
+
+I wonder if I need some blobs?
+
+> >
+> >>
+> >>
+> >>>> I think testSimpleFitEncryptedData() could be a good example?
+> >>>>
+> >>>> Regards,
+> >>>> Simon
+> >>> References:
+> >>> [0]https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-non-clean-build
+> >>>
+> >>> [1]https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-patch-tools-dtdoc-fdt-py
+> >>>
+> >>> [3]https://lore.kernel.org/u-boot/20250327080642.2269856-3-m-shah@ti.com/
+> >>>
+> >>>
+> >>> Thanks for the review.
+
 Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+SImon
