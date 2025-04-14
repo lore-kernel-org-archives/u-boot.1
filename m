@@ -4,214 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B828C3601E
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 06:48:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46311C369A2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 07:25:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DA5D81B4B;
-	Mon, 14 Apr 2025 08:48:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A187E81F45;
+	Mon, 14 Apr 2025 09:25:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MapQ3ix5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="US4qUQ1r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3F9781CAF; Mon, 14 Apr 2025 08:48:52 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::612])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9AC8581F7E; Mon, 14 Apr 2025 09:25:03 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C090810EB
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 08:48:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E196281F44
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 09:25:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=frLB6YtCgoyoTLaVvujthu50Z1d865NnT5uIcy5AfE+tE9wZpkieC6MF2oL+ghndGW7XFem8JE6kCnuzV9Gh7IuaD0d8JhxhWrV05+riFbQbmAO33rZcAvZ0aJKT9kxBWzpwdL6NGFTpnfh+AVV9aa8KTZyFP4ZonLTs7eh40RZklTQuhkeCib7XLOL4e9ORdVth44Ru9ogMdFuVh6ggZfzBX4Bp7k2x9F1DF3oZ7Gd5vZ0ypKCBJ87d7H5TMRfDZB6nWJgkmsoORASrXXNgp2lQMUXobwoGiFx+4G1BjGfL/xxTEyVg/WyuJRglED3Ie5h1jZq6k2GBZc/4tyO+wA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qzJG7kxKFMpSFdFdkGk7ZpAYOVhX8z5MwLMuKVsGwYQ=;
- b=LMScXP2wOvSj/KdDzeGW/YD4yffQreIprBpyPrqejDav8BcjwsDERNBbwFjNaX0/baH89M5WOCMlUEEoTiOKpVIZeth+yQNlkPbTZiOFjnpDmXO5WmsP0UD9zr9r6D5K5PObR89UV4zc2xEzrQLUlhTRF125R74ItZfOakxkxk0tDvvuMXiZDE33Hc8FW7TkMlKx1iNn4/D6eslveFO1qmKlZ+SgNcWRKcr0cCLvZ3S4bEuHfhhLKOGLnuBP7H6PqDdM/8ZCkuEJuEUof+pTEn74BVI2AopDAgDE3QewvnJbTI/HuYr70sHOnc/HXqYCw2FtxuD9rwwyKHbpBUvxmQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qzJG7kxKFMpSFdFdkGk7ZpAYOVhX8z5MwLMuKVsGwYQ=;
- b=MapQ3ix5FeI6909E8YLSRA+en50n6HM1J69IkLZtXyT+Qf0FOwC55tcnz9nGYEzEsuzAg1WGar6Rj2+chm40XbL3rqNDQMhDToGViQQQGgfXFE5Xc05u7IJLAe06qUrzVggGcsPow1vc3IED9hxs+DkVyb8OwLIPIlC094ZEyQo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by BY5PR12MB4259.namprd12.prod.outlook.com (2603:10b6:a03:202::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.33; Mon, 14 Apr
- 2025 06:48:46 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%3]) with mapi id 15.20.8632.030; Mon, 14 Apr 2025
- 06:48:46 +0000
-Message-ID: <91fba3f7-6e61-4b8e-a1c5-7e0eb2af2ebb@amd.com>
-Date: Mon, 14 Apr 2025 08:48:40 +0200
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43edecbfb46so26755885e9.0
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 00:25:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744615500; x=1745220300; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=BVZu4E6P28Jp388f4cuTUdgiNRIYtl+tRD2gEThfj2w=;
+ b=US4qUQ1rPa4LuSi0ONlIwaAJf2A1yRFGhV+oexWYOCeXSNWjSd9ut6F9dcJP2SF8/l
+ QatAyADzXDZrTWf1Cw00pUEDk0zD6Gs12kq6y8T+oQyWjXvqvwQ+G5jAuOhIIWLYoITq
+ FzKVbqVpD46w8vUSw+xN64Nyc6iZXG8ad/vxCmhip3t302EeSoHEwMnyFsWM67Y+Xagy
+ qAxQpBCfLsNyfs+8wRmKvsvEkkhqd+SK0B1MCu6KX1Fx1YsblGMgaq0tzcV3FYiMYd+H
+ 5xTtB6vyIx4MmqUN1sCKk4SSqn3Dn8TBo9cmROPgSNPOm6yqFxwy34AbAjeeBmdi3cBc
+ yFqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744615500; x=1745220300;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=BVZu4E6P28Jp388f4cuTUdgiNRIYtl+tRD2gEThfj2w=;
+ b=mHvEp+DuyWMIS+1DetmXY9lITq1+GpX4y2Y45g67Da7PxWlrAuZ7mRUs9xMmZKOURB
+ yBsu+RddG4sCSpFESNaadIrgTE4qquY0yq6WhBfzR4AY/bVFJh2LIcGTZYX5LFlev/JV
+ vNHDOm3dG7/l1J29+zwWrXsDcp2Sq6wKVdZ0BZXvKq/7xyOESh9gsZgJ/N6MXi2BauTG
+ OaSSM+6rapwVrahg2N5P95VLoCMy2vjl7giuWqy3kps0rwJIYRwOqw6TZCsPKCboAUXK
+ wffC63FoTGu0x6/ES6+W6CH87/uc4PA7dto6zzaCvY2z4WV3a3zcVHo6LQ+2BZ1cP757
+ BNhA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU7cubuPrqutAj0FNTaGo0plKidI6AnPTNWRNlFSRmd4Jd/29ROleF0YbRUsD4ccSQndm/h868=@lists.denx.de
+X-Gm-Message-State: AOJu0YyV/K4yOk/2Mb3v9J4m9MWaI+Y2MdsfXIP5hTs+FdOZZMacO1un
+ 2QUNT7kr65bjNrP2PUpJrEbnYFgAPtXj+8isX/N+AJj+p7LTEf1cTFOKlWr0SPk=
+X-Gm-Gg: ASbGnctIhD/eRScZcm1dJDWkdS160xRwBNv0059atXNnCIvnWGrVk21v3toPA1sJ9QK
+ gFfKJGMwO4vCubD6QNUZfUdnegaeUZiGtH6ZjdFAvCJ1Tekv06NOy/eYXFiQnBAFJblIT6xMqU+
+ 55D4hqPxTJbueMf4TKgx++h62+L84PjSqkCk9rarfgbDGTePeAphQL6j42ni52in2K52lTdaY7/
+ sAE1iqut3ywRNdO7eAPNnlA7obqaA3yjHpBXdf7z++gG2e3kgRdSczS8sAeF+Ayw18pv+T98jff
+ Z/ZtlCGj5qMQx3mgh+1t9i69LhWRg+7u6JX1+P/nN8ZwJ3Yn7efx1c2lh24pJ2W7MlNOMKjyngO
+ 1pyathdEQ4IojAD0xFQ==
+X-Google-Smtp-Source: AGHT+IGaM57OBxfa+KgukZWGljA9JeiHoQrgcQmMH1cez3umtb1zIL8Ww+4E9Hy1fCK0n2AEsy/7aA==
+X-Received: by 2002:a05:600c:a15:b0:43c:e8ca:5140 with SMTP id
+ 5b1f17b1804b1-43f3a9aa646mr90296065e9.23.1744615500243; 
+ Mon, 14 Apr 2025 00:25:00 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:bf8a:3473:5c13:9743?
+ ([2a01:e0a:3d9:2080:bf8a:3473:5c13:9743])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f2338d7d8sm173216205e9.4.2025.04.14.00.24.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Apr 2025 00:24:59 -0700 (PDT)
+Message-ID: <af42fc39-2283-4eb6-8844-085b72356e11@linaro.org>
+Date: Mon, 14 Apr 2025 09:24:59 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/4] board/BuR/zynq: initial commit
-To: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
- u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-References: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
- <20250404072819.69642-5-bernhard.messerklinger@br-automation.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <20250404072819.69642-5-bernhard.messerklinger@br-automation.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] watchdog: qcom: introduce qcom-wdt driver
+To: Paul Sajna <hello@paulsajna.com>, u-boot@lists.denx.de,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Stefan Roese <sr@denx.de>
+Cc: u-boot-qcom@groups.io, Sam Day <me@samcday.com>
+References: <20250413-b4-qcom-wdt-v1-1-db42cb93dff8@paulsajna.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250413-b4-qcom-wdt-v1-1-db42cb93dff8@paulsajna.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PH7P221CA0046.NAMP221.PROD.OUTLOOK.COM
- (2603:10b6:510:33c::33) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|BY5PR12MB4259:EE_
-X-MS-Office365-Filtering-Correlation-Id: b96392b4-0021-475c-069a-08dd7b206788
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|7416014|366016|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SXp1UlhyREc0L0Z1c1RDTWZibmE1aWhiczVVMTlSNEYydE9Xdko2T2RDMkVS?=
- =?utf-8?B?UzF5U09aMnRqaTRVZERBUDk3RFROcFQ3a1o1M1c4RkhpU2VqbXNmcVpKeUo3?=
- =?utf-8?B?V2tuLzVQVjRYS3JuOFNPZm5wZlRYMGFsS3VUejA5U2dhYnBGdGZCQUpmMVNG?=
- =?utf-8?B?dmh2aDJVSzBpTzBVMDZIMkVMdnFDM1pyK1F1NVBRY2w3RDlvcjVaY2hVaFl5?=
- =?utf-8?B?RDVMbUtja1NUVldEQklPa0R3UkR2VUdabis0NU1VU05PaUtlNXhjNDhxUjJn?=
- =?utf-8?B?M1h0VG8wbktDcHFOZkZ2Y2pjYlUwMVdBaVBrMURwWjRaRDJ6WFZrUFNsT0oz?=
- =?utf-8?B?Q3pYUTcrd2doNlNRTFhBMVRyK0hHdGdDRG5KQ29oQVVHQmlwWFliaFdMUHRD?=
- =?utf-8?B?bURpbm1QMnB6VTVQYzhvL21YcTYxbUpoOGI5NVlLODlyQ1ZId1JuYXlkWnJR?=
- =?utf-8?B?T09tYkh3Sk9lZXRKNGpxSmNCRnlXUVBkYkxHNWpZRXh6TysxMGh0MnBDY0F4?=
- =?utf-8?B?cS9qQy9Bc01JQ2puS3J3T1ovMzBYZng4ME5RWktsaGVKZXdjZkdRMzdxdm1i?=
- =?utf-8?B?cDJScDZ1d0toZkxhdzBRMFFFb0czelk0WWlMamZ1RDd4Qmlwams5b2pvbXpF?=
- =?utf-8?B?a1V3bU9rVlpRTEQ5NjZtSExyeHBkVHJIRW01TTRaUkxSQlJtWmFMWHc1OEdz?=
- =?utf-8?B?MUp1cXJFVkU5QjJyZW9rcGVGWEcrV0VoQmFyOENIYVV2c0dlcW5mdEhJMjF3?=
- =?utf-8?B?S2hXMEJmdDZRVkFLQVpqYm91b0s3QzE0aEZsOTVrTFlBVEdUSmVoWmRyNW8r?=
- =?utf-8?B?ZitqTUdUNDNwdU9wNTdKZmZqbjNRd0tSZ09wRzRFRnd0cUhoSEVqNTM5emcx?=
- =?utf-8?B?UWdneEQ3T081Um5nRDc1bzJqNk9mb0xQdGN6dE84ck9MRC9EN0QrUG9haVlo?=
- =?utf-8?B?akw1SlJiRjMyaDgwcUVVM3JpYkc3TE1FZ215V0VCZTQzdVFHVDNwVTVORUp1?=
- =?utf-8?B?Zkg5dnF4aThXYmRHdVNmVzVES21QOHZxU0VuV2FIWWhLR2N5UnBWWjkvZlE3?=
- =?utf-8?B?VTFaWEw2Yy8zNEtTdkY0cGloWHRKZzRybTl1UHJLSzdsd0ZUR3k1TFNac3JF?=
- =?utf-8?B?QWxaaklTczlUNEYxYWNBd0ljaFBZOXkvbFZVUUlMZ1oxL2YvMmVBQWhNUEN4?=
- =?utf-8?B?SWJiR09ZcjdQZEhpbzN2amtsWDBleVFMeUMrSGdaZ0NPT1J3N2RlUjlaTlFO?=
- =?utf-8?B?RHREUUdlbkFwR3k5VE5XY0FrN3VURDJ0YlhsTXJnMVRkOG1pSGtFS1dpVkJS?=
- =?utf-8?B?REdwQlBIYXBBWnFzc3ZVVGZpTmIyUU9IRExrYUhZenRoZ0xSdGQzL2dLZGdm?=
- =?utf-8?B?Mjl5Q0VBTUVIVngzbUxRTEhmK3Z1RWNkc3ZmSzVPdUdrWVIwSDFKcW1ZYzB2?=
- =?utf-8?B?OWJuNmpaMHp0anRDTStDUEhSL3JFNWErSGNFc2tOOXlhZEpzcnV0VVFIZDdH?=
- =?utf-8?B?RmQzZW1yZ1pLQ3Q0N0IwK01JazVYWnpPRGc0cDY4aXhuT2VMUkx0dWd0MGRl?=
- =?utf-8?B?VTl2azJQYnl2U3pTVWxUa0ZaM3hSVVgvVzY3Yzd6YlZxRnA2NlBnMit5dS9R?=
- =?utf-8?B?QjQ0M3lZaGhGU3l6MkRZRTdWbUtSNHFoZnFaQ1V5SEtrNWhpcGRvejZiRktw?=
- =?utf-8?B?dnpvNFovZ3YraGtRTkJzdVQ2UmZHbjRGdXVKTFdoaFZ1WjBENENYWldzVHNs?=
- =?utf-8?B?WkJJcjFnbGFLZ09SUHk4RjVySTAzaTJ6dXhRWGNCQUVaSmI1MW83Ukgrek8x?=
- =?utf-8?B?UE5WYWJpSnFEVkZGcU02VGpxMXZzc3lwZmZPU0I3RzExWGRXSWFEVlBkVlRP?=
- =?utf-8?B?MDF1WU5LL3J3VTJudDc4V2NldFVGaG01L0Y5cTdUSGdNREtaMTQ3b2hOa0J5?=
- =?utf-8?Q?zCzFJheP0EU=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(366016)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aG1LV09SYlRoNi9YSDZCUEJ0cmZra0pjTHBhYlF1Y0NpWmthWklrM1Mwd2N4?=
- =?utf-8?B?NWcyRU01ZnFhZWpVZEpLNWpDd0JMdDIxcUlpYUl4Z0VWYjV6Q0Z5OHpxdUZs?=
- =?utf-8?B?eGpvdHhLZW9sbjFaK1BsUExVOVJ1eE14VHhaRU1Rb3hXUk9LZlMyQWQ3YzJu?=
- =?utf-8?B?NmdIOWtLcHpIdGtJM1RmejFoVkFkU2c5UkkrWlVpL3B3eC9uWmxVRWpRbDV1?=
- =?utf-8?B?bExCYTNtYjlyODhsWmRXaHhNU0FlRkJYQ2EreVFOUmc4WVRZZW1IdFR6N1dt?=
- =?utf-8?B?Q2ErS2RhRGpkR1lmTXJaUkdTbTRhN1VlMkw1YzJ1c3dHcHo1ZDQxdGpjN3di?=
- =?utf-8?B?NjlpamNkT3l2M3F6YXVoSDJSeFc5RjZOSzBXYlhzb3UzbTNZWVo5aGJ1bjdy?=
- =?utf-8?B?amh2UjR2NVY4dWJ3TGVicXd3TkdZbThzb2tlRm1mTVpPWWIxdzYzZHVCem5n?=
- =?utf-8?B?SW91ZE9NUnZlUml5akpnV1ErUDBsalljcittRXBDNGg2L3JkbU9FWkpYN3VM?=
- =?utf-8?B?cTZLY0QxaUI3K2xpSkZsZXJ5cUs3SkhreU1KWnNpeGlGdUpnVmhtZkNpZDdn?=
- =?utf-8?B?SjdYcjZkenpCYkZZMU1UVk1xdnhxbUJzaW5ZdFVsZkVoZ3NwaHl4S0pMMHRz?=
- =?utf-8?B?WWZDMHNyZVg1NmI1d0dwMmtBQmFHYS9KTThJTm9NdWF6cXZaUkU2QW5LYTdz?=
- =?utf-8?B?TDRwRWQvU0wvNDhyZWZaWnRWK1ZJY2Y3L3NvbW9zb1kyV0Y4ZS83Z2JuNXEr?=
- =?utf-8?B?Nnl0NTZ0bmZDR3dvZmdtUklzenN1eXZ4ZktqbVp4aU1QbmZwYVFPQTRWZ2Jl?=
- =?utf-8?B?Lzlxb2swVWJCd1ZVWS9sVHp6ZHFXVFBCKzE3TE1IelJtc1JiZHVRNEdXVnBW?=
- =?utf-8?B?WkQ3S2ZWeVAyQzkrRjVMZHdFcjUzYWFWRm9qRzRtcEZpZC9KWVI4a1d4TEZ2?=
- =?utf-8?B?VEpacGVhMytFVnNNbUdmNFVHelRwc1ZPSWlZQkdzZHlEUFM5czF0Qk9aNWNs?=
- =?utf-8?B?VzR5S0drWE8yVXBodEdzcVo1dUpGamtTV096dWhuTDZpRWRzaWN3dWNPakZz?=
- =?utf-8?B?ZnFOMlowR051VVVHbG1tM0g5YmdsZ1Q4dkRScXp0RG50SmtEaDJpZ0E2cTNj?=
- =?utf-8?B?ZTVsdkRGRklQd1hlVEVXVWZaUnZHdmMrZVEvcHJyVEFzMzZLNnhVQVlkRjly?=
- =?utf-8?B?WFZPWWJ4WWlyVHd1a2NWS2dMUDl5VGRqOFJNZWI4UmwxV1Z6ZnMvZ0VHakFY?=
- =?utf-8?B?Z3VTZEZlaFM5Y3hjNXFKaHYxMUc1cXExL3ZvaEZwWFE0d1Nxa3hXNUkwUlJz?=
- =?utf-8?B?NGczSE5sSFQyc3RIaFZRcFFucGJTS3hoUlUxRDVZWFUyZUtxNjlPUVZ2VmVR?=
- =?utf-8?B?VFNBM1YzVEpCa3JrZXdaK01iejVvem1TZ1hSem5OY25mMHdxaVdxSEJLRERO?=
- =?utf-8?B?UHlBekJQcmVHMjJUZ1BKbmkyOFJwdzYwUU9OZS9DUlBtQm5RMmNDdDVOYkRx?=
- =?utf-8?B?N3ZQZG1oUjd2amVtaDhrUlhFVUp4QU1QSUFtNGZpK2hoM3JsTUJLeVZZVUlW?=
- =?utf-8?B?cVR6aHNEQmFnMGQxYldwQmhXakE2aXBpaFQ2WnBvTWh1ZkFVMUUyK0ovVlZt?=
- =?utf-8?B?Sk1DaVVGNnBPa2tjTzgyK2s3TjQzVVc4NWgxT1JLWDVTNU90Sml4WVp3Tndu?=
- =?utf-8?B?STYzVWkzZ09meEJUWXJHOGoxQmFtdENUOENkKzFKZzdWZXE0Y0tFQjY4UTRP?=
- =?utf-8?B?L1RvOXlSMTNkbUFES01ISzhPTkVjWGhxRzZvVmVYMEtuTU1EVHJRZll5QmJ6?=
- =?utf-8?B?bWVOcjlqUVpEcm1MeFBVMFd5SUdPQzJ2L1RuaWs4THRheldvU3pYTFNmRm9l?=
- =?utf-8?B?V0JyeTNMcml6SkxoVXdiTmk3eGIyUXcvczQvcEhjS1QzcEFEcVFlVnZOZEtH?=
- =?utf-8?B?RmVYeUJtT1MzWC8wenhjcmtkbnc2VW03K29EYTl0bDZMbjdQU1BZOEwwZHBF?=
- =?utf-8?B?WEZvbjRSbE1lVEUwT0tHQ0NsZFZzV2tZYk5XWklmL0lJamxLbW9oUnZDMnpl?=
- =?utf-8?B?QUVodmFkVy9kVXJlOXNPMjhFVjNMRlBQYTQ1Z2xjV3ZTZWRzbzZ6UmFKWXhP?=
- =?utf-8?Q?LiyfgoVd7yoPS/Vc2DWLIym/Z?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b96392b4-0021-475c-069a-08dd7b206788
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2025 06:48:46.4317 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BWtqmIlPJjBFh3ee48LjGUDh8yLlbp0gcqj8qlNtL2cJpcD8yKeZAYq9eVGVfP86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4259
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -223,437 +126,204 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-
-On 4/4/25 09:28, Bernhard Messerklinger wrote:
-> This commit adds support for the brcp1, brsmarc2, brcp150 and brcp170
-> boards. This boards are based on the Xilinx Zynq SoC.
+On 13/04/2025 12:12, Paul Sajna wrote:
+> From: Caleb Connolly <caleb.connolly@linaro.org>
 > 
-> Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>
+> Some Qualcomm device vendors decide to turn the watchdog on in the
+> bootloader, resulting in the device being reset if it isn't petted every
+> ~30 seconds. Introduce a driver to disable the watchdog and prevent this
+> annoying behaviour.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Paul Sajna <hello@paulsajna.com>
+> Tested-by: Paul Sajna <hello@paulsajna.com>
 > ---
+> This patch introduces a simple watchdog driver for Qualcomm devices.
 > 
-> Changes in v4:
-> - Fix device tree Makefile to only build B&R Zynq device trees
-> if the target is from B&R.
+> Some devices, including one I have been spending a lot of time with,
+> the LG G7 ThinQ (codename judyln, arch sdm845) will reset within 30
+> seconds if the watchdog is not serviced.
 > 
-> Changes in v3:
-> - Split spi_flash and qspi controller node in device tree for the usage
-> of bootph-all
-> - Merge binman descriptions into one zynq-binman-brcp1
-> - Add links instead of manually including u-boot.dtsi files
-> - Remove empty MAC addresses nodes from the device tree
-> - Seperate B&R Zynq device trees in the devicetree Makefile
+> I have tested this patch from Caleb Connolly that is over a year old and has
+> not yet been upstreamed, and it is very useful to me. I can hardly use
+> u-boot on this device without it. I have received Caleb's permission to
+> work on upstreaming this patch.
 > 
-> Changes in v2:
-> - Remove all unnecessary device-tree entries
-> - Reviewed led names (no pattern restriction found)
-> - Fix maintainers file
-> - Cleanup of code
-> - Move preboot variable to env file
+> This is my first contribution to U-Boot, and I am unfamiliar with
+> mailing list workflows, so please be patient :)
+> ---
+>   configs/qcom_defconfig      |   2 +
+>   drivers/watchdog/Kconfig    |   7 ++++
+>   drivers/watchdog/Makefile   |   1 +
+>   drivers/watchdog/qcom-wdt.c | 100 ++++++++++++++++++++++++++++++++++++++++++++
+>   4 files changed, 110 insertions(+)
 > 
->   arch/arm/dts/Makefile                         |   7 +
->   arch/arm/dts/zynq-binman-brcp1.dtsi           | 102 +++++++
->   arch/arm/dts/zynq-brcp1.dtsi                  | 131 +++++++++
->   arch/arm/dts/zynq-brcp150-u-boot.dtsi         |  34 +++
->   arch/arm/dts/zynq-brcp150.dts                 | 173 +++++++++++
->   arch/arm/dts/zynq-brcp170-u-boot.dtsi         |  26 ++
->   arch/arm/dts/zynq-brcp170.dts                 | 139 +++++++++
->   arch/arm/dts/zynq-brcp1_1r-u-boot.dtsi        |  30 ++
->   arch/arm/dts/zynq-brcp1_1r.dts                |  28 ++
->   arch/arm/dts/zynq-brcp1_1r_switch-u-boot.dtsi |   1 +
->   arch/arm/dts/zynq-brcp1_1r_switch.dts         |  30 ++
->   arch/arm/dts/zynq-brcp1_2r-u-boot.dtsi        |   1 +
->   arch/arm/dts/zynq-brcp1_2r.dts                |  21 ++
->   arch/arm/dts/zynq-brsmarc2-u-boot.dtsi        |  30 ++
->   arch/arm/dts/zynq-brsmarc2.dts                | 157 ++++++++++
->   arch/arm/mach-zynq/Kconfig                    |   1 +
->   board/BuR/zynq/Kconfig                        |  14 +
->   board/BuR/zynq/MAINTAINERS                    |  11 +
->   board/BuR/zynq/Makefile                       |  15 +
->   board/BuR/zynq/brcp150/board.c                |   4 +
->   board/BuR/zynq/brcp150/ps7_init_gpl.c         | 278 ++++++++++++++++++
->   board/BuR/zynq/brcp170/board.c                |   4 +
->   board/BuR/zynq/brcp170/ps7_init_gpl.c         | 274 +++++++++++++++++
->   board/BuR/zynq/brcp1_1r/board.c               |   4 +
->   board/BuR/zynq/brcp1_1r/ps7_init_gpl.c        | 274 +++++++++++++++++
->   board/BuR/zynq/brcp1_1r_switch/board.c        |   4 +
->   board/BuR/zynq/brcp1_1r_switch/ps7_init_gpl.c | 270 +++++++++++++++++
->   board/BuR/zynq/brcp1_2r/board.c               |   4 +
->   board/BuR/zynq/brcp1_2r/ps7_init_gpl.c        | 277 +++++++++++++++++
->   board/BuR/zynq/brsmarc2/board.c               |  30 ++
->   board/BuR/zynq/brsmarc2/ps7_init_gpl.c        | 276 +++++++++++++++++
->   board/BuR/zynq/common/board.c                 | 231 +++++++++++++++
->   board/BuR/zynq/env/brcp1.env                  | 109 +++++++
->   board/BuR/zynq/env/brcp150.env                | 119 ++++++++
->   configs/brcp150_defconfig                     | 121 ++++++++
->   configs/brcp170_defconfig                     | 120 ++++++++
->   configs/brcp1_1r_defconfig                    | 120 ++++++++
->   configs/brcp1_1r_switch_defconfig             | 121 ++++++++
->   configs/brcp1_2r_defconfig                    | 120 ++++++++
->   configs/brsmarc2_defconfig                    | 120 ++++++++
->   include/configs/brzynq.h                      |  21 ++
->   41 files changed, 3852 insertions(+)
->   create mode 100644 arch/arm/dts/zynq-binman-brcp1.dtsi
->   create mode 100644 arch/arm/dts/zynq-brcp1.dtsi
->   create mode 100644 arch/arm/dts/zynq-brcp150-u-boot.dtsi
->   create mode 100644 arch/arm/dts/zynq-brcp150.dts
->   create mode 100644 arch/arm/dts/zynq-brcp170-u-boot.dtsi
->   create mode 100644 arch/arm/dts/zynq-brcp170.dts
->   create mode 100644 arch/arm/dts/zynq-brcp1_1r-u-boot.dtsi
->   create mode 100644 arch/arm/dts/zynq-brcp1_1r.dts
->   create mode 120000 arch/arm/dts/zynq-brcp1_1r_switch-u-boot.dtsi
->   create mode 100644 arch/arm/dts/zynq-brcp1_1r_switch.dts
->   create mode 120000 arch/arm/dts/zynq-brcp1_2r-u-boot.dtsi
->   create mode 100644 arch/arm/dts/zynq-brcp1_2r.dts
->   create mode 100644 arch/arm/dts/zynq-brsmarc2-u-boot.dtsi
->   create mode 100644 arch/arm/dts/zynq-brsmarc2.dts
->   create mode 100644 board/BuR/zynq/Kconfig
->   create mode 100644 board/BuR/zynq/MAINTAINERS
->   create mode 100644 board/BuR/zynq/Makefile
->   create mode 100644 board/BuR/zynq/brcp150/board.c
->   create mode 100644 board/BuR/zynq/brcp150/ps7_init_gpl.c
->   create mode 100644 board/BuR/zynq/brcp170/board.c
->   create mode 100644 board/BuR/zynq/brcp170/ps7_init_gpl.c
->   create mode 100644 board/BuR/zynq/brcp1_1r/board.c
->   create mode 100644 board/BuR/zynq/brcp1_1r/ps7_init_gpl.c
->   create mode 100644 board/BuR/zynq/brcp1_1r_switch/board.c
->   create mode 100644 board/BuR/zynq/brcp1_1r_switch/ps7_init_gpl.c
->   create mode 100644 board/BuR/zynq/brcp1_2r/board.c
->   create mode 100644 board/BuR/zynq/brcp1_2r/ps7_init_gpl.c
->   create mode 100644 board/BuR/zynq/brsmarc2/board.c
->   create mode 100644 board/BuR/zynq/brsmarc2/ps7_init_gpl.c
->   create mode 100644 board/BuR/zynq/common/board.c
->   create mode 100644 board/BuR/zynq/env/brcp1.env
->   create mode 100644 board/BuR/zynq/env/brcp150.env
->   create mode 100644 configs/brcp150_defconfig
->   create mode 100644 configs/brcp170_defconfig
->   create mode 100644 configs/brcp1_1r_defconfig
->   create mode 100644 configs/brcp1_1r_switch_defconfig
->   create mode 100644 configs/brcp1_2r_defconfig
->   create mode 100644 configs/brsmarc2_defconfig
->   create mode 100644 include/configs/brzynq.h
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 267b0179a5f..10c1e34713a 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -297,6 +297,13 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
->   	zynqmp-zc1751-xm017-dc3.dtb		\
->   	zynqmp-zc1751-xm018-dc4.dtb		\
->   	zynqmp-zc1751-xm019-dc5.dtb
-> +dtb-$(CONFIG_TARGET_ZYNQ_BR) += \
-> +	zynq-brcp1_2r.dtb			\
-> +	zynq-brcp1_1r.dtb			\
-> +	zynq-brcp1_1r_switch.dtb		\
-> +	zynq-brsmarc2.dtb			\
-> +	zynq-brcp150.dtb			\
-> +	zynq-brcp170.dtb
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..0232f6d51c552bd06c8ba72b71edb5cb72fe0706 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -144,3 +144,5 @@ CONFIG_VIDEO_FONT_16X32=y
+>   CONFIG_SYS_WHITE_ON_BLACK=y
+>   CONFIG_NO_FB_CLEAR=y
+>   CONFIG_VIDEO_SIMPLE=y
+> +CONFIG_WDT_QCOM=y
+> +CONFIG_WDT=y
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 1bb67f5035231df9f6ce01adb08d074855393143..808f4e578e28e7812f93b393a7f7d95d9501cdd4 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -335,6 +335,13 @@ config WDT_K3_RTI_FW_FILE
 >   
->   zynqmp-p-a2197-00-revA-x-prc-01-revA-dtbs := zynqmp-p-a2197-00-revA.dtb zynqmp-p-a2197-00-revA-x-prc-01-revA.dtbo
->   zynqmp-p-a2197-00-revA-x-prc-02-revA-dtbs := zynqmp-p-a2197-00-revA.dtb zynqmp-p-a2197-00-revA-x-prc-02-revA.dtbo
-> diff --git a/arch/arm/dts/zynq-binman-brcp1.dtsi b/arch/arm/dts/zynq-binman-brcp1.dtsi
+>   endif
+>   
+> +config WDT_QCOM
+> +	bool "Qualcomm watchdog timer support"
+> +	depends on WDT && ARCH_SNAPDRAGON
+> +	help
+> +	  Select this to enable Qualcomm watchdog timer, which can be found on
+> +	  some Qualcomm chips.
+> +
+>   config WDT_SANDBOX
+>   	bool "Enable Watchdog Timer support for Sandbox"
+>   	depends on SANDBOX && WDT
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index e6bd4c587af6133c405dde6dbada8050debc781c..5eaabd4aba58c815de4165f901aecfba0e0da255 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -54,3 +54,4 @@ obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
+>   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
+>   obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
+>   obj-$(CONFIG_WDT_ADI) += adi_wdt.o
+> +obj-$(CONFIG_WDT_QCOM) += qcom-wdt.o
+> diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
 > new file mode 100644
-> index 00000000000..3cc8ee8b810
+> index 0000000000000000000000000000000000000000..a7ce31ef811c717fd16700aa7d984a000763a93e
 > --- /dev/null
-> +++ b/arch/arm/dts/zynq-binman-brcp1.dtsi
-> @@ -0,0 +1,102 @@
+> +++ b/drivers/watchdog/qcom-wdt.c
+> @@ -0,0 +1,100 @@
 > +// SPDX-License-Identifier: GPL-2.0+
 > +/*
-> + * Copyright 2025 B&R Industrial Automation GmbH
+> + * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+> + * Copyright (c) Linaro Ltd. 2024
+> + *
+> + * Authors:
+> + *   Caleb Connolly <caleb.connolly@linaro.org>
+> + *
+> + * Derived from linux/drivers/watchdog/qcom-wdt.c
 > + */
 > +
-> + #include <config.h>
+> +#include <dm.h>
+> +#include <wdt.h>
 > +
-> +/ {
-> +	binman {
-> +		bootph-all;
-> +		filename = "flash.bin";
-> +		pad-byte = <0xff>;
-> +		align-size = <16>;
-> +		align = <16>;
+> +#include <asm/io.h>
 > +
-> +		blob@0 {
-> +			filename = "spl/boot.bin";
-> +			offset = <0x0>;
-> +		};
-> +
-> +		fit {
-> +			description = "U-Boot BR Zynq boards";
-> +			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
-> +
-> +			images {
-> +				uboot {
-> +					description = "U-Boot BR Zynq";
-> +					type = "firmware";
-> +					os = "u-boot";
-> +					arch = "arm";
-> +					compression = "none";
-> +					load = <CONFIG_TEXT_BASE>;
-> +					u-boot-nodtb {
-> +					};
-> +				};
-> +
-> +				fdt-0 {
-> +					description = "DTB BR Zynq";
-> +					type = "flat_dt";
-> +					arch = "arm";
-> +					compression = "none";
-> +					u-boot-dtb {
-> +					};
-> +				};
-> +			};
-> +
-> +			configurations {
-> +				default = "conf-0";
-> +
-> +				conf-0 {
-> +					description = "BR Zynq";
-> +					firmware = "uboot";
-> +					fdt = "fdt-0";
-> +				};
-> +			};
-> +		};
-> +
-> +		blob-ext@0 {
-> +			filename = "blobs/cfg.img";
-> +			offset = <0xC0000>;
-> +			size = <0x10000>;
-> +			optional;
-> +		};
-> +
-> +		blob-ext@5 {
-> +			filename = "blobs/cfg_opt.img";
-> +			offset = <0xD0000>;
-> +			size = <0x10000>;
-> +			optional;
-> +		};
-> +
-> +		blob-ext@1 {
-> +			bootph-all;
-> +			filename = "blobs/bitstream.bit";
-> +			offset = <0x100000>;
-> +			size = <0x200000>;
-> +			optional;
-> +		};
-> +
-> +		blob-ext@4 {
-> +			bootph-all;
-> +			filename = "blobs/bitstream_update.bit";
-> +			offset = <0x400000>;
-> +			size = <0x200000>;
-> +			optional;
-> +		};
-> +
-> +		blob-ext@2 {
-> +			filename = "blobs/bootar.itb";
-> +			offset = <0x900000>;
-> +			size = <0x600000>;
-> +			optional;
-> +		};
-> +
-> +		blob-ext@3 {
-> +			filename = "blobs/dtb.bin";
-> +			offset = <0xF00000>;
-> +			size = <0x100000>;
-> +			optional;
-> +		};
-> +	};
-> +};
-> diff --git a/arch/arm/dts/zynq-brcp1.dtsi b/arch/arm/dts/zynq-brcp1.dtsi
-> new file mode 100644
-> index 00000000000..ebaf42d9419
-> --- /dev/null
-> +++ b/arch/arm/dts/zynq-brcp1.dtsi
-> @@ -0,0 +1,131 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2024 B&R Industrial Automation GmbH
-> + */
-> +
-> +/include/ "zynq-7000.dtsi"
-> +#include <dt-bindings/gpio/gpio.h>
-> +
-> +/ {
-> +	model = "BRCP1 CPU";
-> +	compatible = "br,cp1",
-> +		     "xlnx,zynq-7000";
-> +
-> +	aliases {
-> +		i2c0 = &i2c0;
-> +		serial0 = &uart0;
-> +		spi0 = &qspi;
-> +		mmc0 = &sdhci0;
-> +	};
-> +
-> +	memory {
-> +		device_type = "memory";
-> +		reg = <0x0 0x40000000>;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path = "serial0:115200n8";
-> +	};
-> +
-> +	usb_phy0: phy0 {
-> +		compatible = "usb-nop-xceiv";
-> +		#phy-cells = <0>;
-> +	};
-> +
-> +	brd_rst: board_reset {
-> +		compatible = "br,board-reset";
-> +		pin = <&gpio0 9 GPIO_ACTIVE_HIGH>;
-> +	};
-> +
-> +	leds {
-> +		compatible = "gpio-leds";
-> +		se_green {
-> +			label = "S_E_GREEN";
-> +			gpios = <&ledgpio 0 GPIO_ACTIVE_LOW>;
-> +			default-state = "off";
-> +		};
-> +		se_red {
-> +			label = "S_E_RED";
-> +			gpios = <&ledgpio 1 GPIO_ACTIVE_LOW>;
-> +			default-state = "off";
-> +		};
-> +		rdy_f_yellow {
-> +			label = "RDY_F_YELLOW";
-> +			gpios = <&ledgpio 2 GPIO_ACTIVE_LOW>;
-> +			default-state = "off";
-> +		};
-> +		re_green {
-> +			label = "R_E_GREEN";
-> +			gpios = <&ledgpio 3 GPIO_ACTIVE_LOW>;
-> +			default-state = "off";
-> +		};
-> +		re_red {
-> +			label = "R_E_RED";
-> +			gpios = <&ledgpio 4 GPIO_ACTIVE_HIGH>;
-> +			default-state = "off";
-> +		};
-> +		plk_se_green {
-> +			label = "PLK_S_E_GREEN";
-> +			gpios = <&ledgpio 5 GPIO_ACTIVE_LOW>;
-> +			default-state = "off";
-> +		};
-> +		eth_se_green {
-> +			label = "ETH_S_E_GREEN";
-> +			gpios = <&ledgpio 6 GPIO_ACTIVE_LOW>;
-> +			default-state = "off";
-> +		};
-> +	};
+> +enum wdt_reg {
+> +	WDT_RST,
+> +	WDT_EN,
+> +	WDT_STS,
+> +	WDT_BARK_TIME,
+> +	WDT_BITE_TIME,
 > +};
 > +
-> +&i2c0 {
-> +	status = "okay";
-> +	clock-frequency = <100000>;
-> +
-> +	ledgpio: max7320@5d {	/* board LED */
-> +		status = "okay";
-> +		compatible = "maxim,max7320";
-> +		reg = <0x5d>;
-> +		#gpio-cells = <2>;
-> +		gpio-controller;
-> +		ngpios = <8>;
-> +	};
-> +
-> +	pmic0: da9062@58 {
-> +		compatible = "dlg,da9062";
-> +		reg = <0x58>;
-> +	};
+> +struct qcom_wdt_match_data {
+> +	const u32 *offset;
 > +};
 > +
-> +&sdhci0 {
-> +	status = "okay";
-> +	max-frequency = <25000000>;
+> +struct qcom_wdt {
+> +	void __iomem *base;
+> +	const u32 *layout;
 > +};
 > +
-> +&uart0 {
-> +	status = "okay";
+> +static const u32 reg_offset_data_kpss[] = {
+> +	[WDT_RST] = 0x4,
+> +	[WDT_EN] = 0x8,
+> +	[WDT_STS] = 0xC,
+> +	[WDT_BARK_TIME] = 0x10,
+> +	[WDT_BITE_TIME] = 0x14,
 > +};
 > +
-> +&qspi {
-> +	status = "okay";
-> +	spi-max-frequency = <100000000>;
-> +
-> +	spi_flash: spiflash@0 {
-> +		#address-cells = <1>;
-> +		#size-cells = <1>;
-> +		compatible = "jedec,spi-nor", "spi-flash", "s25fl256s1";
-> +		spi-max-frequency = <100000000>;
-> +		spi-cpol;
-> +		spi-cpha;
-> +		reg = <0>;
-> +	};
+> +static const struct qcom_wdt_match_data match_data_kpss = {
+> +	.offset = reg_offset_data_kpss,
 > +};
 > +
-> +&usb0 {
-> +	status = "okay";
-> +	dr_mode = "host";
-> +	usb-phy = <&usb_phy0>;
-> +};
+> +static void __iomem *wdt_addr(struct qcom_wdt *wdt, enum wdt_reg reg)
+> +{
+> +	return wdt->base + wdt->layout[reg];
+> +}
 > +
-> +&gpio0 {
-> +	status = "okay";
-> +};
-> diff --git a/arch/arm/dts/zynq-brcp150-u-boot.dtsi b/arch/arm/dts/zynq-brcp150-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..1bfd5f27a7e
-> --- /dev/null
-> +++ b/arch/arm/dts/zynq-brcp150-u-boot.dtsi
-> @@ -0,0 +1,34 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2024 B&R Industrial Automation GmbH
-> + */
+> +int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+> +{
+> +	/* unimplemented */
+> +	return 0;
+> +}
 > +
-> +#include "zynq-binman-brcp1.dtsi"
+> +int qcom_wdt_stop(struct udevice *dev)
+> +{
+> +	struct qcom_wdt *wdt = dev_get_priv(dev);
 > +
-> +&i2c0 {
-> +	bootph-all;
-> +};
+> +	writel(0, wdt_addr(wdt, WDT_EN));
+> +	if (readl(wdt_addr(wdt, WDT_EN))) {
+> +		printf("Failed to disable Qualcomm watchdog!\n");
+> +		return -EIO;
+> +	}
 > +
-> +&uart0 {
-> +	bootph-all;
-> +};
+> +	return 0;
+> +}
 > +
-> +&qspi {
-> +	bootph-all;
-> +};
+> +static int qcom_wdt_probe(struct udevice *dev)
+> +{
+> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+> +	struct qcom_wdt_match_data *data = (void *)dev_get_driver_data(dev);
+> +	int ret;
 > +
-> +&spi_flash {
-> +	bootph-all;
-> +};
+> +	wdt->base = dev_read_addr_ptr(dev);
+> +	wdt->layout = data->offset;
 > +
-> +&gpio0 {
-> +	bootph-all;
-> +};
-> +
-> +&brd_rst {
-> +	bootph-all;
-> +};
-> +
-> +&rs232_en {
-> +	bootph-all;
-> +};
+> +	ret = qcom_wdt_stop(dev);
 
-nit:
-All these nodes with bootph-all don't need to be here.
-The reason was that flags (especially previous one) were not the part of 
-dt-schema. But now it is that's why there is no reason to separate them in 
-special file. You can simply add them to zynq-brcp150.dtsi
+Fine but perhaps just add a simple code into qcom_wdt_start() and add
+a reset callback to allow people to actually use the wdog from u-boot
+with CONFIG_WATCHDOG_AUTOSTART and/or u-boot,autostart.
 
-Visible also with some other files below.
+No need to implement set_timeout, we can use the bootloader value.
 
-Anyway I don't have issue with this patch that's why feel free to add
+> +
+> +	return ret;
+> +}
+> +
+> +static const struct wdt_ops qcom_wdt_ops = {
+> +	.stop = qcom_wdt_stop,
 
-Acked-by: Michal Simek <michal.simek@amd.com>
+You forgot qcom_wdt_start()
 
-Thanks,
-Michal
+> +};
+> +
+> +static const struct udevice_id qcom_wdt_ids[] = {
+> +	{ .compatible = "qcom,kpss-wdt", .data = (ulong)&match_data_kpss },
+> +	{}
+> +};
+> +
+> +U_BOOT_DRIVER(qcom_wdt) = {
+> +	.name = "qcom_wdt",
+> +	.id = UCLASS_WDT,
+> +	.of_match = qcom_wdt_ids,
+> +	.ops = &qcom_wdt_ops,
+> +	.probe = qcom_wdt_probe,
+> +	.priv_auto = sizeof(struct qcom_wdt),
+> +};
+> 
+> ---
+> base-commit: f3563fc30356c8079527b90e532407050dff7c7b
+> change-id: 20250413-b4-qcom-wdt-e7b913fc375e
+> 
+> Best regards,
+
 
