@@ -4,67 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28603C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:44:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606F0C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:45:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF715829B2;
-	Tue, 15 Apr 2025 00:44:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A74CA8215D;
+	Tue, 15 Apr 2025 00:45:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OqstMOxR";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jV/EqlFi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 781F1827A6; Tue, 15 Apr 2025 00:44:08 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCD7F82102
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 00:43:59 +0200 (CEST)
+ id 5B812826AD; Tue, 15 Apr 2025 00:45:13 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D97982102
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 00:45:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhvrJ2281878
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 14 Apr 2025 17:43:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744670637;
- bh=5JEpfNTFgNbzNEhf5XtA/6Ak3fi4hoRQaRUGmMbd75U=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=OqstMOxRT4YOv/GNY/vuW+6jSjq3WZlZyvyFprzgF1/H02t2EC+LzMmqTxj0bLLoB
- fbYI/3iMbYL/GP3i42gO84aSNVLcVJl8l/tmIKqJhi5VaVCKxCCAj1EN34rYYDVXeu
- WS7Q73vKvUF3qxPN3AJdGmR+d0yeZhJznklsQ5Jg=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhvEo007561
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 14 Apr 2025 17:43:57 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
- Apr 2025 17:43:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 14 Apr 2025 17:43:57 -0500
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EMhvv0064149;
- Mon, 14 Apr 2025 17:43:57 -0500
-From: Judith Mendez <jm@ti.com>
-To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
- <jh80.chung@samsung.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, open
- list <u-boot@lists.denx.de>
-Subject: [PATCH v2 1/5] mmc: am654_sdhci: Add MMC_HS_52 to timing data
-Date: Mon, 14 Apr 2025 17:43:53 -0500
-Message-ID: <20250414224357.1555064-2-jm@ti.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250414224357.1555064-1-jm@ti.com>
-References: <20250414224357.1555064-1-jm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=02b5=XB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1744670709;
+ bh=elx0/NqiIXVahyX4E6YxyuHQRfEH0bSpFkaVEdUN6jQ=;
+ b=jV/EqlFidgPrQHNhymbUiWJM1qlFi1dEb7Xp6Mu4R2dj0kwPAqECfKZjvHnHrt8JXJ+QSLuBY
+ rDA4hK4s8YR/0Vi0D+3bmBvK71LZXmuDMgKNIa/5HdGfJ1rv8jSLr8O13MvJUYXmpOlyQAkX+Lh
+ ViSHSL4zplaAh1QD/wU81TFrvY67ANjLjCaDJvHN6WPB1E3gZfIsD2gRLpVYY5YuhO1R4eiKYJx
+ BPVkRzgeBi/yFRoP6HKT4ZsX4cfD3CGCs7TXM8pU6a84y+2uQLyENweg1KsuuEMb8DoI11UEJo6
+ fd6Ak4ebWUOGL9TeuQ/WTn+/nqgoF1wRccWLh3sgRxKw==
+X-Forward-Email-ID: 67fd8fe740cbaa005ededaf0
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <8493ad37-bdb1-458b-b936-078239cfb4e2@kwiboo.se>
+Date: Tue, 15 Apr 2025 00:44:49 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/16] arm: rockchip: add RK3576-specific syscon ids
+To: Heiko Stuebner <heiko@sntech.de>
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
+ detlev.casanova@collabora.com, u-boot@lists.denx.de,
+ sebastian.reichel@collabora.com
+References: <20250414200111.1357867-1-heiko@sntech.de>
+ <20250414200111.1357867-4-heiko@sntech.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250414200111.1357867-4-heiko@sntech.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,45 +77,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds MMC_HS_52 to the timing data structure.
+Hi Heiko,
 
-Previously, this bus mode tap settings were not populated and
-were instead populated for MMC_HS which is a different bus mode
-up to 26MHz. Since we intended these settings according to the
-device data sheet[0] for MMC_HS_52 up to 52MHz, populate MMC_HS
-tap settings for MMC_HS_52.
+On 2025-04-14 22:00, Heiko Stuebner wrote:
+> From: Detlev Casanova <detlev.casanova@collabora.com>
+> 
+> The rk3576 defines some more different syscons, namely the IOC-syscon
+> holding io-controller registers and sdgmac holding settings for the
+> gmac controller.
+> 
+> Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+>  arch/arm/include/asm/arch-rockchip/clock.h | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
+> index a9921fbb6e4..533f8bd89eb 100644
+> --- a/arch/arm/include/asm/arch-rockchip/clock.h
+> +++ b/arch/arm/include/asm/arch-rockchip/clock.h
+> @@ -39,6 +39,8 @@ enum {
+>  	ROCKCHIP_SYSCON_PIPE_PHY2_GRF,
+>  	ROCKCHIP_SYSCON_VOP_GRF,
+>  	ROCKCHIP_SYSCON_VO_GRF,
+> +	ROCKCHIP_SYSCON_IOC,
+> +	ROCKCHIP_SYSCON_SDGMAC,
 
-While we are here, fix typo in ti,itap-del-sel-mms-hs.
+These are not really needed, the gmac and pinctrl drivers get these
+syscon/regmap using the phandle from rockchip,grf/php-grf props.
 
-[0] https://www.ti.com/lit/ds/symlink/am625.pdf Table 7-79
-Signed-off-by: Judith Mendez <jm@ti.com>
-Reviewed-by: Bryan Brattlof <bb@ti.com>
----
- drivers/mmc/am654_sdhci.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+I also have a very slow going work-in-progress series that eventually
+hopefully will drop most if not all of these syscon ids, see [1].
 
-diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index b4c60a48d2e..e4fa8a88565 100644
---- a/drivers/mmc/am654_sdhci.c
-+++ b/drivers/mmc/am654_sdhci.c
-@@ -125,12 +125,15 @@ static const struct timing_data td[] = {
- 	[MMC_LEGACY]	= {"ti,otap-del-sel-legacy",
- 			   "ti,itap-del-sel-legacy",
- 			   0},
--	[MMC_HS]	= {"ti,otap-del-sel-mmc-hs",
--			   "ti,itap-del-sel-mms-hs",
-+	[MMC_HS]	= {"ti,otap-del-sel-mmc-hs26",
-+			   "ti,itap-del-sel-mmc-hs26",
- 			   MMC_CAP(MMC_HS)},
- 	[SD_HS]		= {"ti,otap-del-sel-sd-hs",
- 			   "ti,itap-del-sel-sd-hs",
- 			   MMC_CAP(SD_HS)},
-+	[MMC_HS_52]	= {"ti,otap-del-sel-mmc-hs",
-+			   "ti,itap-del-sel-mmc-hs",
-+			   MMC_CAP(MMC_HS_52)},
- 	[UHS_SDR12]	= {"ti,otap-del-sel-sdr12",
- 			   "ti,itap-del-sel-sdr12",
- 			   MMC_CAP(UHS_SDR12)},
--- 
-2.49.0
+So please drop this patch.
+
+[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/optimize
+
+Regards,
+Jonas
+
+>  };
+>  
+>  /* Standard Rockchip clock numbers */
 
