@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3F35C369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:44:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB2B4C369B2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 22:44:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9AC082937;
-	Tue, 15 Apr 2025 00:44:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19FFF826AD;
+	Tue, 15 Apr 2025 00:44:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pppbpWuz";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KQgXzguO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C87582898; Tue, 15 Apr 2025 00:44:06 +0200 (CEST)
+ id 239FD8297E; Tue, 15 Apr 2025 00:44:08 +0200 (CEST)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E311382898
+ by phobos.denx.de (Postfix) with ESMTPS id E07F382836
  for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 00:43:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhvp62881579
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhvE62881577
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 14 Apr 2025 17:43:58 -0500
+ Mon, 14 Apr 2025 17:43:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744670638;
- bh=Pbq8D34pOEE43TdRaZ7LIkbeSqZc9vfvT9pmbcz7xDs=;
+ s=ti-com-17Q1; t=1744670637;
+ bh=eZPaM71m4irbVc2zOxqZv4Hf2y40sN63/c0d8pmSBq8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pppbpWuzlMdqYCFNCg7+mk0mgd81q7a02e0T+j/UaoY6aaGZoPwfq4aufcBBnpQDt
- MAabW4hqpYRZ4jA7ZjoOF0jmQEWmyH31uH+/r3G/fwHZT7NsWbvX3qycHxKIgr8asi
- c95tF2b3G5dEgVRP6m4Yyd6PqsFrfDR1lZmqN4dc=
+ b=KQgXzguOFSgkh7wmCVUjlvDwSGRQT7ombk2c3gGxOEfBIxVJ1ObdSY6ODiwd9KtvK
+ se7hiqfRV6YRBaD1pAKwBlDamxu4Y+dgr5XiVOJ0t6f1qpHW8wFZvAFVHOsSMDSkOt
+ DA8R7VQjvPytXOOBRVhTEH/JPsfidezxlLBvfcGE=
 Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhv4X002955
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53EMhvs5118171
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 14 Apr 2025 17:43:57 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE110.ent.ti.com
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE110.ent.ti.com
  (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
  Apr 2025 17:43:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 14 Apr 2025 17:43:58 -0500
+ Frontend Transport; Mon, 14 Apr 2025 17:43:57 -0500
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EMhvv2064149;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53EMhvv1064149;
  Mon, 14 Apr 2025 17:43:57 -0500
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
  <jh80.chung@samsung.com>
 CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, open
  list <u-boot@lists.denx.de>
-Subject: [PATCH v2 3/5] mmc: am654_sdhci: Add am654_sdhci_set_control_reg
-Date: Mon, 14 Apr 2025 17:43:55 -0500
-Message-ID: <20250414224357.1555064-4-jm@ti.com>
+Subject: [PATCH v2 2/5] mmc: am654_sdhci: Fix HIGH_SPEED_ENA
+Date: Mon, 14 Apr 2025 17:43:54 -0500
+Message-ID: <20250414224357.1555064-3-jm@ti.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250414224357.1555064-1-jm@ti.com>
 References: <20250414224357.1555064-1-jm@ti.com>
@@ -81,94 +81,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds am654_sdhci_set_control_reg to am654_sdhci.
-
-This is required to fix UHS_MODE_SELECT for TI K3 boards.
-
-If any of HIGH_SPEED_ENA, V1P8_SIGNAL_ENA, UHS_MODE_SELECT
-are set, then data will be launched on the pos-edge of the
-clock.
-
-Since K3 SoCs did not meet timing requirements for High Speed
-SDR mode at rising clock edge, none of these three should be
-set, therefore limit UHS_MODE_SELECT to only be set for modes
-above MMC_HS_52.
-
-This fixes MMC write issue on am64x evm at mode High Speed
-SDR.
+High Speed enable bit switches data launch from the falling
+clock edge (half cycle timing) to the rising clock edge (full
+cycle timing). For all SD UHS modes, data launch must happen
+at the rising clock edge, so set HIGH_SPEED_ENA for SDR12 and
+SDR25 modes. For all HS modes, data launch must happen at the
+falling clock edge, so do not set HIGH_SPEED_ENA for MMC_HS_52.
 
 Signed-off-by: Judith Mendez <jm@ti.com>
 Reviewed-by: Bryan Brattlof <bb@ti.com>
 ---
- drivers/mmc/am654_sdhci.c | 15 +++++++++++++--
- drivers/mmc/sdhci.c       |  2 +-
- include/sdhci.h           |  1 +
- 3 files changed, 15 insertions(+), 3 deletions(-)
+ drivers/mmc/am654_sdhci.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index 28d82afd012..0df3568f073 100644
+index e4fa8a88565..28d82afd012 100644
 --- a/drivers/mmc/am654_sdhci.c
 +++ b/drivers/mmc/am654_sdhci.c
-@@ -523,13 +523,24 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- 	return 0;
- }
- #endif
-+
-+void am654_sdhci_set_control_reg(struct sdhci_host *host)
-+{
-+	struct mmc *mmc = host->mmc;
-+
-+	sdhci_set_voltage(host);
-+
-+	if (mmc->selected_mode > MMC_HS_52)
-+		sdhci_set_uhs_timing(host);
-+}
-+
- const struct sdhci_ops am654_sdhci_ops = {
- #if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
- 	.platform_execute_tuning = am654_sdhci_execute_tuning,
- #endif
- 	.deferred_probe		= am654_sdhci_deferred_probe,
- 	.set_ios_post		= &am654_sdhci_set_ios_post,
--	.set_control_reg	= sdhci_set_control_reg,
-+	.set_control_reg	= am654_sdhci_set_control_reg,
- 	.write_b		= am654_sdhci_write_b,
- };
- 
-@@ -589,7 +600,7 @@ const struct sdhci_ops j721e_4bit_sdhci_ops = {
- #endif
- 	.deferred_probe		= am654_sdhci_deferred_probe,
- 	.set_ios_post		= &j721e_4bit_sdhci_set_ios_post,
--	.set_control_reg	= sdhci_set_control_reg,
-+	.set_control_reg	= am654_sdhci_set_control_reg,
- 	.write_b		= am654_sdhci_write_b,
- };
- 
-diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
-index dc7f0724a7b..648dfa4b5ef 100644
---- a/drivers/mmc/sdhci.c
-+++ b/drivers/mmc/sdhci.c
-@@ -549,7 +549,7 @@ void sdhci_set_uhs_timing(struct sdhci_host *host)
- 	sdhci_writew(host, reg, SDHCI_HOST_CONTROL2);
- }
- 
--static void sdhci_set_voltage(struct sdhci_host *host)
-+void sdhci_set_voltage(struct sdhci_host *host)
- {
- 	if (IS_ENABLED(CONFIG_MMC_IO_VOLTAGE)) {
- 		struct mmc *mmc = (struct mmc *)host->mmc;
-diff --git a/include/sdhci.h b/include/sdhci.h
-index 31a49ca6a2f..2372697b743 100644
---- a/include/sdhci.h
-+++ b/include/sdhci.h
-@@ -518,6 +518,7 @@ void sdhci_set_uhs_timing(struct sdhci_host *host);
- /* Export the operations to drivers */
- int sdhci_probe(struct udevice *dev);
- int sdhci_set_clock(struct mmc *mmc, unsigned int clock);
-+void sdhci_set_voltage(struct sdhci_host *host);
- 
- /**
-  * sdhci_set_control_reg - Set control registers
+@@ -412,8 +412,7 @@ static void am654_sdhci_write_b(struct sdhci_host *host, u8 val, int reg)
+ 		 */
+ 		case SD_HS:
+ 		case MMC_HS:
+-		case UHS_SDR12:
+-		case UHS_SDR25:
++		case MMC_HS_52:
+ 			val &= ~SDHCI_CTRL_HISPD;
+ 		default:
+ 			break;
 -- 
 2.49.0
 
