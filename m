@@ -4,60 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A6CAC369B2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 21:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3655C369B5
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 21:17:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 090CB8294C;
+	by phobos.denx.de (Postfix) with ESMTP id 5CF7982982;
 	Mon, 14 Apr 2025 23:16:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=0upti.me
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=0upti.me header.i=@0upti.me header.b="CaBdys5v";
+	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="SxCLUtS1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 867008212A; Mon, 14 Apr 2025 17:25:29 +0200 (CEST)
-Received: from forward103b.mail.yandex.net (forward103b.mail.yandex.net
- [IPv6:2a02:6b8:c02:900:1:45:d181:d103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 57BC38211F; Mon, 14 Apr 2025 21:30:21 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9EF180FDA
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 17:25:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=0upti.me
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@0upti.me
-Received: from mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net
- [IPv6:2a02:6b8:c0c:bca8:0:640:45be:0])
- by forward103b.mail.yandex.net (Yandex) with ESMTPS id CFD9360908;
- Mon, 14 Apr 2025 18:25:25 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net
- (smtp/Yandex) with ESMTPSA id FPIqcQ0LaOs0-m2ey9OVT; 
- Mon, 14 Apr 2025 18:25:25 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0upti.me; s=mail;
- t=1744644325; bh=ciy9pYWoekWShNRLeOZbyDJzTCgKIWWrz+okWMVWqi0=;
- h=Cc:Message-Id:To:From:Date:Subject;
- b=CaBdys5vYpCgZ4HlJHFbb8bObHQE8UVukyqlvxO+C22lcVcusWCvjC7MgqXW6hQsh
- hn7zXqc792T+dMtieLUZ8dBaRaGXrl52bj/EpcYIpyP4z/4kuYy93GQ9x/WTOO0M8k
- 2suLFq2a+yIYEL/ZIdraDtXwTInJcUe4xJ8C16GU=
-Authentication-Results: mail-nwsmtp-smtp-production-main-73.iva.yp-c.yandex.net;
- dkim=pass header.i=@0upti.me
-From: Ilya Katsnelson <me@0upti.me>
-Date: Mon, 14 Apr 2025 18:25:15 +0300
-Subject: [PATCH v3] board: rockchip: add Xunlong Orange Pi 5 Max
+ by phobos.denx.de (Postfix) with ESMTPS id 1154D80FF7
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 21:30:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=sifive.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=samuel.holland@sifive.com
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-224019ad9edso61387685ad.1
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 12:30:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1744659017; x=1745263817; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9v0PAvzZ4krbgV2hSvifPiEp6oAmkhQ1iABMoUnQ5hQ=;
+ b=SxCLUtS1p/pe+jxqESoG7uUkvJ3wN7AP6XQDT4tVNmm16PcuW9a+LVnWODAo18UXNS
+ jgwbY2ojeVYQZWyRuk0/f5vbMSuW5ZGgVemIeuO+wuqhbNxpTAz/YqLtZHnuvqMEhVnh
+ 3N+P1OvFvfr5muyO/EucjRKZ+wGr2x5cm+A7yWMfn1vNCRExjf7yxFZkZ31sUWZYGa9w
+ UCAS85sOGueJTvVz9wPEtnvdEU7R6W0pcb9+DTYz51X8t7LWxeVZ0RwOwLGfOfFfAmEh
+ BNLwC8hjTiAq8SUG8ho733RyIMF/FsqluKtkIBiLK5sXoxNsjEYj2OHllFhCws3cofUi
+ 3/Uw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744659017; x=1745263817;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9v0PAvzZ4krbgV2hSvifPiEp6oAmkhQ1iABMoUnQ5hQ=;
+ b=mFqxa8arP9o0rlk2J478lI4jbTtP3XMcJmbYUE0ucnMaMDUFnfaJ7bOigNSdfLlyd8
+ hzu9cW62ie1IcbF4WPtplWQyObYqVkrx9TA4E5emwbbspAeWsk/WktgWGzbHp4wlFPnN
+ f2esdsGtOJKYQqe4xo5AbVBC6qgKYPkOGG4n8s8cEyOo0fXL+ivlX06NDQnThZtvmLBU
+ dFcUMyDW0J6HEWDrH0c/42gg499Lpg8sp4QWQjK7yxX+ulOgd3SH5XH03ED8dTtsC8H6
+ pajjUc4jY45R5tL/Lgbh2sCtkkt9WGv+QfUYR2wyUGP/7oXV/1RhuTmw0MddCfarEnuN
+ 919Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2/wnYd3aW5UfkPFGSc+dr6jnggNxg0gqRIol54ewHCii6kWQe59/64/HMTFkJBjBlRs8q7mE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzrXkZWd0K3b2kFdxthuOMB0FEQbGuntLT88H1nV8KOqzFmtGfx
+ fXYwkiimmfelQ4rIaq71v8a3PWwH+Nmx+swOkrMWP2FC8cEnCWzs6z9dgpfmqhE=
+X-Gm-Gg: ASbGncsnMnuctVka+XPetyugEYBSBQJj8E6M4H69huwFcSAztKpm9nXD/0nNFNZfAXk
+ dx1NYjwKEagLZ3Q/pkM3UOwQ/Z7majl2HONmhObaAQDh9Cnju5uAOwxxCzulLZrcbC8bF8ncfxR
+ NxnZ4hZQyTut1ND26sAdgJuSJTFaLExNbpjmYsSzdHQ7hJCFuEBkMN1MPsyWVAuQrr0OleXNkYK
+ HCwn9EHMxkMLDS83Hc/2EPRGGPtnM9YZ1dztwm5IG+YLTQpwWpyGxoQXxMJ3iUnvbInCnGJQ107
+ 6gCM081+GMISmq8oQcGlb/Hn4jWiXpvatw3FOTzTQkIS5oOf85JtaKq8ppqvcqA=
+X-Google-Smtp-Source: AGHT+IHYPYsJMh2RsRfAVkjXOt90lphgAnNhr9D3532vHBttNwM8S4rv5c5Ktb9PPlYHOjt7Wh5d4Q==
+X-Received: by 2002:a17:902:f712:b0:21f:35fd:1b6c with SMTP id
+ d9443c01a7336-22bea4fc93emr203191195ad.45.1744659017390; 
+ Mon, 14 Apr 2025 12:30:17 -0700 (PDT)
+Received: from sw06.internal.sifive.com ([4.53.31.132])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73bd1fe6b4esm7011610b3a.0.2025.04.14.12.30.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Apr 2025 12:30:17 -0700 (PDT)
+From: Samuel Holland <samuel.holland@sifive.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Cc: Samuel Holland <samuel.holland@sifive.com>,
+ Christophe Roullier <christophe.roullier@st.com>,
+ Erik Schumacher <erik.schumacher@iris-sensing.com>,
+ Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Philip Oberfichtner <pro@denx.de>, Simon Glass <sjg@chromium.org>,
+ Stephen Warren <swarren@nvidia.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH] net: dwc_eth_qos: Fix hang when freeing packet after stop
+Date: Mon, 14 Apr 2025 12:30:11 -0700
+Message-ID: <20250414193015.2094578-1-samuel.holland@sifive.com>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250414-add-opi5-max-v3-1-50dc6808a115@0upti.me>
-X-B4-Tracking: v=1; b=H4sIANoo/WcC/3WMywqDMBBFf0WybkomduJj1f8oXUQd6yx8kNhgE
- f+90ZUUurqcC+eswpNj8qJMVuEosOdxiJBeElF3dniR5Cay0EqjuimUtmnkODHK3i4STVEBZRb
- TCkRUJkctL0fu8YzcsZ9H9znqAfb3TyiABElKm9y0tUorc1fvaeZrT2LvBH1yQf+4OrqYIxQZ5
- nHg5G7b9gXMz2Pf4wAAAA==
-X-Change-ID: 20250405-add-opi5-max-569b1e7a53b1
-To: u-boot@lists.denx.de
-Cc: Jonas Karlman <jonas@kwiboo.se>, Ilya Katsnelson <me@0upti.me>, 
- K900 <me@0upti.me>
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 14 Apr 2025 23:16:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,196 +103,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 5 Max is another board in the Orange Pi 5 family.
+If eqos_free_pkt() is called after eqos_stop(), eqos_stop_resets() will
+have been called already. This may prevent accessing the MMIO space to
+update the RX descriptor tail pointer, so we must skip the descriptor
+maintenance logic. This is okay because the descriptors and tail pointer
+will all be rewritten anyway during the next call to eqos_start().
 
-It's overall similar to the 5 Plus, but in a smaller form factor,
-which leads to some I/O being reshuffled, but nothing relevant
-to u-boot.
+This hang was observed after a failed TFTP transaction:
 
-So, just reuse the config for the 5 Plus and adjust the DT names.
+  eqos_recv(dev=000000047fb57330, flags=1):
+  eqos_recv: *packetp=000000c3ffb5c080, length=151
 
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-Signed-off-by: Ilya Katsnelson <me@0upti.me>
+  TFTP error: 'file <FILE> not found for <IP>' (1)
+  Not retrying...
+  eqos_stop(dev=000000047fb57330):
+  eqos_stop: OK
+  eqos_free_pkt(packet=000000c3ffb5c080, length=151)
+  <HANG>
+
+Fixes: ba4dfef1469f ("net: add driver for Synopsys Ethernet QoS device")
+Signed-off-by: Samuel Holland <samuel.holland@sifive.com>
 ---
-The 5 Max is another board in the Orange Pi 5 family.
 
-It's overall similar to the 5 Plus, but in a smaller form factor,
-which leads to some I/O being reshuffled, but nothing relevant
-to u-boot.
+ drivers/net/dwc_eth_qos.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-So, just reuse the config for the 5 Plus and adjust the DT names.
-
-Signed-off-by: K900 <me@0upti.me>
----
-Changes in v3:
-- fixed silly copy/paste error
-- Link to v2: https://lore.kernel.org/r/20250412-add-opi5-max-v2-1-585197588511@0upti.me
-
-Changes in v2:
-- fixed pinctrl definition for the flash
-- added docs and MAINTAINERS entries
-- fixed signoff line to use my real name
-- Link to v1: https://lore.kernel.org/r/20250405-add-opi5-max-v1-1-e02686fc03b6@0upti.me
----
- arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi | 20 ++++++
- board/rockchip/evb_rk3588/MAINTAINERS          |  6 ++
- configs/orangepi-5-max-rk3588_defconfig        | 89 ++++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst                |  1 +
- 4 files changed, 116 insertions(+)
-
-diff --git a/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..afd33dd3248a92a721c2f5a6789f395a5b577ae5
---- /dev/null
-+++ b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588-u-boot.dtsi"
-+
-+&fspim2_pins {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-+
-+&sfc {
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+	};
-+};
-diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-index a858ab163f362f4fc0dd578830fe84b20d9ca429..f875dbed1ec21a7ba74637c5f0aef858de7f3d49 100644
---- a/board/rockchip/evb_rk3588/MAINTAINERS
-+++ b/board/rockchip/evb_rk3588/MAINTAINERS
-@@ -42,3 +42,9 @@ S:	Maintained
- F:	configs/orangepi-5-plus-rk3588_defconfig
- F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
- F:	arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
-+
-+ORANGEPI-5-MAX-RK3588
-+M:	Ilya Katsnelson <me@0upti.me>
-+S:	Maintained
-+F:	configs/orangepi-5-max-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-diff --git a/configs/orangepi-5-max-rk3588_defconfig b/configs/orangepi-5-max-rk3588_defconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..a655dfe2d64168b2d6a3b400abd4c03d9d4bc402
---- /dev/null
-+++ b/configs/orangepi-5-max-rk3588_defconfig
-@@ -0,0 +1,89 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_SPEED=24000000
-+CONFIG_SF_DEFAULT_MODE=0x2000
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-max"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_EVB_RK3588=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_SF_DEFAULT_BUS=5
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-max.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DWC_AHCI=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_XMC=y
-+CONFIG_PHYLIB=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SFC=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 1407080f1f4fd226b80e34689a34c88f3c37150a..00d9587e9880937125f7ace229740f10f2c959c4 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -149,6 +149,7 @@ List of mainline supported Rockchip boards:
-      - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
-      - Turing Machines RK1 (turing-rk1-rk3588)
-      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
-+     - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
-      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
-      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
-      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
-
----
-base-commit: e458e103d4f5fb7aaf13e744c65916ab3ba4a18d
-change-id: 20250405-add-opi5-max-569b1e7a53b1
-
-Best regards,
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index b4ec3614696..b9a2846b2d7 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1173,7 +1173,7 @@ static int eqos_free_pkt(struct udevice *dev, uchar *packet, int length)
+ 
+ 	eqos->config->ops->eqos_inval_buffer(packet, length);
+ 
+-	if ((eqos->rx_desc_idx & idx_mask) == idx_mask) {
++	if (eqos->started && (eqos->rx_desc_idx & idx_mask) == idx_mask) {
+ 		for (idx = eqos->rx_desc_idx - idx_mask;
+ 		     idx <= eqos->rx_desc_idx;
+ 		     idx++) {
 -- 
-Ilya Katsnelson <me@0upti.me>
+2.47.2
 
+base-commit: 739ad58dbee874a3ad3bddd116e995212a254e07
+branch: up/dwmac-hang-fix
