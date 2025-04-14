@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D20C369A2
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 15:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 363BFC369A2
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 16:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B248F81F54;
-	Mon, 14 Apr 2025 17:47:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 664A382075;
+	Mon, 14 Apr 2025 18:03:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qfvKGTII";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="siuSlrhq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80F1D82006; Mon, 14 Apr 2025 17:47:16 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 0A5468212A; Mon, 14 Apr 2025 18:03:54 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44ACA81F45
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 17:47:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC85A8043C
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 18:03:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1744645633; x=1745250433; i=xypron.glpk@gmx.de;
- bh=7iHSKHKenSmtRQD/p4lT3CFoliWRrgQ/1SsnsBYRm3c=;
+ s=s31663417; t=1744646623; x=1745251423; i=xypron.glpk@gmx.de;
+ bh=jXPCZp6M7AVcvuWZl+4t0Ho5X8nTZay7UkE37cu2qM4=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=qfvKGTIIoiA1ZEZoA54I5SnPEvaUxKZ25MWBbUpRE2GbxnvsSvUf0aJ1vqGV3qQU
- 10Rjo5bba5xzFYUi22gRT7qLiJPChF2RAZUd4JMda11m8WJYCP5iasVBee3L68tQT
- gdQtQpnsjPRjL4Pg/XY4XpJ8FuLF8E3/CxcnnW3j3Q+aSEOgW8x8rm4vPStj+V7r1
- 4fwAD4XxT7FZE7cwHKik0YKfs83Dqcbi6+LYlMWHwgM01QV6k/8TJ2DdYoW/PFJ+Y
- 52v5al6udZ5h8Z5l1qe9gKvVnPE9Oz6pTZaNjLvVjv8Zmc5RJ5Au1wYxU5BrkO5MG
- YXOpvcSRjrtnYORm4g==
+ b=siuSlrhq4558cJp5ox+2P43qlrbJ1ijixVpECoHUHnhgYZb4Uyc3hhyo5GKFveNB
+ efRADqPORNWfm8HJu8yUHIsWD5ZkPTACEFUp1pyB5DC1HFn4NDRcBjAnnt/WpTdod
+ T4l0RL+0rQDLa419fnuvVTYIHS3zrcjSCKpByYz3mlbsrGJqV8w/UgkXN7Mk+a+Y7
+ 8dZkFt2cDMMrzmfDuZj6q9cyvvkJfvjVu7VAgnpw23m/qsdgei7qjZSjwPbiBcvbP
+ LDC+BPPvY0r/V9FSLLlVWfCQ9RETEK2+nzq8mnwCvAW/91KxfJx4RiFFEQ8wpwVpn
+ D7/W62FpVnmX2b3Oaw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MpUUm-1tElXZ2wvM-00mxxE; Mon, 14
- Apr 2025 17:47:13 +0200
-Message-ID: <80461a04-156e-4744-a677-ed36e4ccbb15@gmx.de>
-Date: Mon, 14 Apr 2025 17:47:08 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N0X8u-1t8Fqd1MEW-00y3NK; Mon, 14
+ Apr 2025 18:03:43 +0200
+Message-ID: <c08fde08-7526-4565-98f6-004f0d02b6c7@gmx.de>
+Date: Mon, 14 Apr 2025 18:03:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/16] efi_driver: efi_net: UCLASS_ETH driver for EFI net
- devices
+Subject: Re: [PATCH 12/16] efi_loader: efi_net: add snp_owner field to
+ efi_net_obj struct
 To: Adriano Cordova <adrianox@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Adriano Cordova <adriano.cordova@canonical.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
+ =trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 References: <20250311164758.421900-1-adriano.cordova@canonical.com>
- <20250311164758.421900-9-adriano.cordova@canonical.com>
+ <20250311164758.421900-13-adriano.cordova@canonical.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250311164758.421900-9-adriano.cordova@canonical.com>
+In-Reply-To: <20250311164758.421900-13-adriano.cordova@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:3dJ6TQ0vXQxU6n5/LDzEXJf79BUX2jtWjMzOskwvTQ7QAdTJbTk
- QGCR5X8GcPvakr6Uwrh6gJWFr+LT8QqQyxNzC4NKOfGgXzG64iE/E7TRW0P9EsafEnvVtF0
- B0koTsydZ4dzdv0wzNq0//dCXfPGASf2Zn/GIxVtAczHYxPXwCGevFDNjqObw2HhW9hVPUi
- DrsFVQ802XUDRFuH5e9EQ==
-UI-OutboundReport: notjunk:1;M01:P0:fHGCteuLUPs=;a2AShN2L9o1U7Cj6KOaHzSiO3Ch
- L4WP0c9nj8z4wg9eBgxm+kuBSIsfORdnMQTfszaEGN+6AJVGsTbhN4+0hT4PbqWiJuWsZKhwV
- ZY8aHA9OSi1+wTpeFjW7b7op/G1886TFOXsxY7GkvIRsX0SFQ0RSeIa1Gtji8Objc9xppG3/A
- dPX7jSr1zwCNsspwS/d9yuzYJ/IjZCFxafmQOvpaM3aieZrfkTSuHiXndq8EAG7JnNGBJl7O2
- shBc1Lk/k7WhAN2QvVxoHxHb95c2dcycgBTILOmAj1yyuIJ3oRjP/ULqKICb5phC0SibFBsDr
- SAuRuLliFoG7Tuebs1JOIBTw2a9F/MOf64YGoIkjtH2ilcCmsQfyfvvCUA3C6s9FUfCISPP2F
- 4iW/yD88We98qBA6jMVZkYRFvb+idaYfI0jvN6urjnSRdCSDfPn9LF/W4GMHzEHOEO0ttpZkX
- ZgL5fF6OomHIP1cyhyWA1zNNA3/btHzVwPGSKLZ/dECWUTdlWBvGNwIM/N7FGNoUagicKro03
- lDIXn+CIi2snOlAheYb6EnCyVfZLz9dZqyegssaD7z36wACWua2KnwNFWPXDsbaVsJTdNpAtk
- Jh2iL6YclTOuJNpj4M/UbbICP5iAwDe/elOB52KmwhIe8+ZqYLvyMlzyA8wwXFxy4bud9F93F
- daUIwusUmNbRogAhUMUEPBXrmZjHZBNXv52Pi7/a8FYi5MX59uHhcI98MKYM2KOYxWcfQ9Bs6
- 2Nl24vTnhQG+KMwtGUisNGLbTNUNATO3mSVNKmvf0RMboDMPqnBJEfGxNJ0aQfjIXh32J/2p/
- oDsyFLmekGQ4C/9csYjNOYPieMbijJ/JSigDEc/pLjIrQVI2pngBTkEGvmnGxlvNeQWZ4MdG9
- yo/92/ZjcjSohRKvvKW3RixY5tTNB048SBKjWnA9VjQTyt+zg4yvVBhsDSFLeOMXQvNmSsXK5
- 7pb/mLl7ewLABrz+EAGFZ03l7kT6SNbXoUASdOT5m31ZTmL3wa+Mlkyu2ydSpDIYyVnduoQmw
- wCMNIqHopGhTiJWclC5lFtUmEWKmww8g5YuRAJJX50/9Dkp/edjIQnZ5cAn3P1h+4TIUSFm56
- fYScs1iS1EXBUa5oV2cxy2wJsYZCLOQFMFddgH5PCMmIi/ciqJBvaRpWanQFcD7DCjQP/nRnh
- e4aaqMwLeCkbJsO1axqkM69xnVDuujlTN/Rd1LFNLRwtnPLPyk18AEHyPKofD7qhsYzNdnce8
- ZO1G0Hz2m8C8O+CK7iGBrkNJJjnW9uLC37V8+5f6NQVXtWTGMTsIWQelm902jyoVwuWZIUPTO
- Yp/HCTvARSJ8ZBbRL2Ji3Ws2kUSf/zqKAzehlBAHs/U8v3L0j2Gn1y6haV5wmVDbcZH9NXSlS
- 6Pscs48XebJY6JCTKBOrSXdxKopRGZ8omi9P459ih39D3ms1gshR+xEhUi0Fhm7L0mWoV8FaV
- 4sF1Rkujn4xx93Ni6kH97do5HXYs=
+X-Provags-ID: V03:K1:LykPw4LMAz++DrV5rHwRNYnIRR8/a2LfSic/jcocz++EX5a6MtR
+ pH5q2pbfOfKSMEpf391IDniyupaOUfTII5YrPDT4Bextqm5CN+7mfQEjuzsMuMoiZhDwAaw
+ ZNlrQIjrqyoszfhQYj3+3MW74WRGknXr3OBqjy0Mb/VI0VQ1IE0wkKjka8WxPYL/JwdApQf
+ uCeksvLrJ3yXEH7bj7Pdw==
+UI-OutboundReport: notjunk:1;M01:P0:tvRpheEAYt8=;H9UrGEKPMfSyqhWHjouebDuK2sx
+ xgG09cHDF29r3gVUDTnfkVfvGE2XVwxGBwYrTdy6d2JJvX5BhBlZdywBaXf8Kov43KGdSreQd
+ KxS0MVmmGQfnM65H3TfLj2sf8jSmT7e+xq7GS0obX86pwTOzUp7dCW0mhVlA0qqjeQcSTm+os
+ Eu3NMLsJRJGkmysB9ungh8MQfxyvqYIdlS3uFzaDK1DtMjSHH5zs23mD+LGTbUjbT3Srr0iPN
+ 8lCvxwp6n6vnIS3rvBvcTkgyTAl/vCDY4uUcQPUgjPkjXLFxO0b4B5sX6NNUdp19sRAFGsova
+ NmbkWEUMjf71uosjKoarzM2+/HbG0iAVDBGEgErkSnr33R0iVpJ0VVqZAyUnwKtU+mJtzPjFN
+ 5Y4photCRSzU5JgIGSlpiDmQPaB+JMDxFhi0xOucSFrsobjaLczLZsTv8u5Z9WMUJMMnFaOgG
+ b5IhnBVCjmWMn26NDgN6y93YUgLFRqiU9pLPYw0+qrMeGS2/H0IYlrUB+teBQvYF5C6IwFx3X
+ joSXaBTL2dOh6NHSdaup1Q5w9AWlgYAPuOwSIQYtTVDLFJ/MOp6+GMrcJenxIAWcEzkN2aZl4
+ 4d6YEG6fHimBilxTLu4akDUbIADnafMJxFAQGeG1KtD6tnrS0FseRIeu+DMIvVdGRwzCcYm86
+ D7IuoUztoDvV/Z4MB3SgX9GpmSBLhJ0AMUptfi/TG0lrG1UycFXieDHEPuTChkLtOc4pviQCJ
+ /e00Yx2JNQqXACpknOrkdPKq85gE5MYFfQL1bmYIRysG+ca2hoejbx6gS5c1ykzIL8UOdmYuD
+ urU6n0H+SOXzCmXO0CsG/tOKSIU3xYImiZ8hK7hS/1dJfb9a5OwC4Q/faHRCvquSr6UohV8hS
+ hZqOm5OOBIpRu1jsd4v38vBYYgTt+pkcauiSekG2ji5Kelv8usim6N23cbTxJN3h73mtvI61e
+ oDPtyrBdK+kwL6CNWTXIDCmWTvVJ98UFMg2pUloqdxT9fWxCNknWiqIsXRi1EPodN+FBIzK8F
+ AXC/kjB92NLpDb13Egs+JMSfynAOa0xpdDrjHl09eOrooGsWs5qOMw5O32F/uDMMV7E0wXqsv
+ wway0tTkcaO0eTVjOLg5uQmgUAqlQQweq9rnhVYllvtZAPRUJt++yeSS/3p32ORKnqKxp3vVc
+ a4xcrYCbj+g5tnHEC0Y/WRob5mQTBYlBNS5nfPY+YkLWMrKAH7d1lK3to1nJf0rlRg7UFJyEA
+ BJHNVa8gdTDcPc3SEM40JbNK8ch5+uLqLAEKQ9ifydBdPXoQ41ewn2AmYbTFsZu6MJkSlwj6T
+ BzIEN/9nmp4a5aP1bSm/1kwIcd9hvmmMXFrzJUb3qz9sr0C5rKaDmugFWNsR2gF+BIHeGjwpS
+ 0trSEIjbuywh6yOLSFlAwCI4a2w+k/FW6q8ZjbVVt5lw7YfBeYKdKV1WBoSU+8MsRcPLefgY/
+ 3ow8Z27JPgIk/5git3N1/ALWi430=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,279 +104,233 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11.03.25 17:47, Adriano Cordova wrote:
-> Ethernet driver that uses an underlying efi_simple_network_protocol
-> to send packages.
->=20
+> Two efi_net_obj's could share the same efi_simple_network_protocol inter=
+face.
+> For example, say a working U-Boot net device is registered in the EFI
+> subsystem, this will create an instance of an efi simple network protoco=
+l.
+> Then another handle, say handle A, could be created using this same efi =
+simple
+> network protocol interface, and connect controller could be called. A U-=
+Boot
+> udevice would be created for handle A and it would be registered in the =
+EFI
+> subsystem as an efi_net_obj with the same simple network protocol interf=
+ace as
+> the efi_net_obj we started with.
+
+Why do you think it would be problematic if some new udevice is created
+which via efi_net_driver could call into the driver of the physical udevic=
+e?
+
+What we should avoid is having multiple handles pointing to the same
+udevice.
+
+>
 > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 > ---
->   include/efi_loader.h            |  12 +++
->   lib/efi_driver/efi_net_device.c | 159 ++++++++++++++++++++++++++++++++
->   2 files changed, 171 insertions(+)
->=20
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 38ea0c5c672..35f500fd97d 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -656,6 +656,18 @@ int efi_disk_create_partitions(efi_handle_t parent,=
- struct blk_desc *desc,
->   			       const char *pdevname);
->   /* Called by bootefi to make GOP (graphical) interface available */
->   efi_status_t efi_gop_register(void);
-> +
-> +/**
-> + * struct efi_netdev_plat - attributes of a network device
-> + *
-> + * @handle:	handle of the controller on which this driver is installed
-> + * @snp:		simple network protocol proxied by this driver
-> + */
-> +struct efi_netdev_plat {
-> +	efi_handle_t handle;
-> +	struct efi_simple_network *snp;
-> +	void *buffer;
-> +};
->   /* Called to register an EFI network device */
->   int efi_net_register(void *ctx, struct event *event);
->   /* Called to unregister an EFI network device */
-> diff --git a/lib/efi_driver/efi_net_device.c b/lib/efi_driver/efi_net_de=
-vice.c
-> index 90d695da2b1..3838cc47158 100644
-> --- a/lib/efi_driver/efi_net_device.c
-> +++ b/lib/efi_driver/efi_net_device.c
-> @@ -7,11 +7,146 @@
->   #include <dm.h>
->   #include <efi_driver.h>
->   #include <malloc.h>
-> +#include <net.h>
->   #include <dm/device-internal.h>
->   #include <dm/root.h>
->   #include <dm/tag.h>
->   #include <dm/uclass-internal.h>
->  =20
-> +#define DEFAULT_EFI_NET_BUFFER_SIZE 1024
-> +
-> +int efi_net_start(struct udevice *dev)
+>   lib/efi_loader/efi_net.c | 51 +++++++++++++++++++++++++---------------
+>   1 file changed, 32 insertions(+), 19 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> index 5a00e7a570c..3ad51d343da 100644
+> --- a/lib/efi_loader/efi_net.c
+> +++ b/lib/efi_loader/efi_net.c
+> @@ -110,6 +110,7 @@ struct efi_net_obj {
+>   	struct efi_event *wait_for_packet;
+>   	struct efi_event *network_timer_event;
+>   	int efi_seq_num;
+> +	bool snp_owner;
 
-This function should be static.
-The function description is missing.
-
-For debugging it is preferable that function names are unique. That way=20
-we can more easily set break points.
-
-> +{
-> +	struct efi_netdev_plat *plat;
-> +	efi_status_t ret;
-> +
-> +	plat =3D dev_get_plat(dev);
-> +	if (!plat || !plat->snp)
-> +		return -1;
-
-We would never arrive here if probing failed.
-
-> +
-> +	ret =3D plat->snp->start(plat->snp);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		return -1;
-> +	ret =3D plat->snp->initialize(plat->snp, 0, 0);
-
-Shouldn't efi_net_start() in lib/efi_loader/efi_net.c take care of this?
-
-> +	if (ret !=3D EFI_SUCCESS)
-> +		return -1;
-> +
-> +	return 0;
-> +}
-> +
-> +int efi_net_send(struct udevice *dev, void *packet, int length)
-> +{
-
-This function should be static.
-The function description is missing.
-
-> +	struct efi_netdev_plat *plat;
-> +	efi_status_t ret;
-> +
-> +	plat =3D dev_get_plat(dev);
-> +	if (!plat || !plat->snp)
-> +		return -1;
-
-We would never arrive here if probing failed.
-
-> +
-> +	ret =3D plat->snp->transmit(plat->snp, 0, length, packet, NULL, NULL, =
-NULL);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		return -1;
-> +
-> +	return 0;
-> +}
-> +
-> +int efi_net_recv(struct udevice *dev, int flags, uchar **packetp)
-> +{
-> +	struct efi_netdev_plat *plat;
-> +	efi_status_t ret;
-> +	size_t buffer_size;
-> +
-> +	plat =3D dev_get_plat(dev);
-> +	if (!plat || !plat->snp)
-> +		return -1;
-> +
-> +	if (plat->buffer)
-> +		free(plat->buffer);
-> +
-> +	buffer_size =3D DEFAULT_EFI_NET_BUFFER_SIZE;
-> +	plat->buffer =3D calloc(1, buffer_size);
-
-You are allocating new memory on every call to efi_net_recv() but not=20
-freeing it.
-
-calloc() may return NULL.
-
-> +	ret =3D plat->snp->receive(plat->snp, NULL, &buffer_size, plat->buffer=
-,
-> +				 NULL, NULL, NULL);
-
-efi_net_recv is time critical. We should avoid allocating it during=20
-transfers. Please, try to allocate it when probing the device and free=20
-it when removing it.
-
-> +
-> +	if (ret =3D=3D EFI_BUFFER_TOO_SMALL) {
-> +		free(plat->buffer);
-> +		plat->buffer =3D calloc(1, buffer_size);
-
-calloc() may return NULL.
-
-> +		ret =3D plat->snp->receive(plat->snp, NULL, &buffer_size, plat->buffe=
-r,
-> +					 NULL, NULL, NULL);
-> +	}
-> +
-> +	if (ret !=3D EFI_SUCCESS || ret !=3D EFI_NOT_READY)
-> +		return -1;
-> +
-> +	*packetp =3D plat->buffer;
-> +	return buffer_size;
-> +}
-> +
-> +void efi_net_stop(struct udevice *dev)
-> +{
-> +	struct efi_netdev_plat *plat;
-> +
-> +	plat =3D dev_get_plat(dev);
-> +	if (!plat || !plat->snp)
-> +		return;
-
-We would never arrive here if probing failed.
-
-> +
-> +	plat->snp->stop(plat->snp);
-> +}
-> +
-> +/**
-> + * efi_netdev_create() - create a net udevice for a handle
-> + *
-> + * @handle:	handle
-> + * @interface:	simple network protocol
-> + * Return:	status code
-> + */
-> +static efi_status_t
-> +efi_netdev_create(efi_handle_t handle, void *interface)
-> +{
-> +	struct udevice *dev =3D NULL, *parent =3D dm_root();
-> +	efi_status_t ret;
-> +	char *name;
-> +	struct efi_netdev_plat *plat;
-> +	static int devnum;
-> +
-> +	name =3D calloc(1, 18); /* strlen("efinet#2147483648") + 1 */
-> +	if (!name)
-> +		return EFI_OUT_OF_RESOURCES;
-> +	sprintf(name, "efinet#%d", devnum);
-> +	devnum++;
-> +
-> +	/* Create driver model udevice for the EFI block io device */
-
-"block io"?
-
-> +	if (eth_create_device(parent, "efi_netdev", name, &dev)) {
-> +		ret =3D EFI_OUT_OF_RESOURCES;
-> +		free(name);
-> +		goto err;
-> +	}
-> +
-> +	plat =3D dev_get_plat(dev);
-> +	plat->handle =3D handle;
-> +	plat->snp =3D interface;
-> +
-> +	if (efi_link_dev(handle, dev)) {
-> +		ret =3D EFI_OUT_OF_RESOURCES;
-> +		goto err;
-> +	}
-> +
-> +	if (device_probe(dev)) {
-> +		ret =3D EFI_DEVICE_ERROR;
-> +		goto err;
-> +	}
-
-CCing Simon due to his interest in the driver model.
+Building the documentation fails because a description for the new
+element snp_owner is missing.
 
 Best regards
 
 Heinrich
 
-> +	EFI_PRINT("%s: net udevice '%s' created\n", __func__, dev->name);
-> +
-> +	return EFI_SUCCESS;
-> +
-> +err:
-> +	efi_unlink_dev(handle);
-> +	if (dev)
-> +		device_unbind(dev);
-> +
-> +	return ret;
-> +}
-> +
->   /**
->    * efi_net_bind_drv() - TODO
+>   };
+>
+>   static int curr_efi_net_obj;
+> @@ -134,15 +135,17 @@ static bool efi_netobj_is_active(struct efi_net_ob=
+j *netobj)
 >    *
-> @@ -26,6 +161,14 @@ static efi_status_t efi_net_bind_drv(
+>    *
+>    * @snp:	pointer to the simple network protocol
+> + * @bool:	snp owner
+>    * Return:	pointer to efi_net_obj, NULL on error
+>    */
+> -static struct efi_net_obj *efi_netobj_from_snp(struct efi_simple_networ=
+k *snp)
+> +static struct efi_net_obj *efi_netobj_from_snp(struct efi_simple_networ=
+k *snp,
+> +					       bool snp_owner)
 >   {
->   	EFI_PRINT("%s: handle %p, interface %p\n", __func__, handle, interfac=
-e);
->  =20
-> +	efi_status_t ret;
+>   	int i;
+>
+>   	for (i =3D 0; i < MAX_EFI_NET_OBJS; i++) {
+> -		if (net_objs[i] && net_objs[i]->net =3D=3D snp) {
+> -			// Do not register duplicate devices
+> +		if (net_objs[i] && net_objs[i]->net =3D=3D snp &&
+> +		    (!snp_owner || net_objs[i]->snp_owner)) {
+>   			return net_objs[i];
+>   		}
+>   	}
+> @@ -171,7 +174,7 @@ static efi_status_t EFIAPI efi_net_start(struct efi_=
+simple_network *this)
+>   		goto out;
+>   	}
+>
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>
+>   	if (this->mode->state !=3D EFI_NETWORK_STOPPED) {
+>   		ret =3D EFI_ALREADY_STARTED;
+> @@ -207,7 +210,7 @@ static efi_status_t EFIAPI efi_net_stop(struct efi_s=
+imple_network *this)
+>   		goto out;
+>   	}
+>
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>
+>   	if (this->mode->state =3D=3D EFI_NETWORK_STOPPED) {
+>   		ret =3D EFI_NOT_STARTED;
+> @@ -250,7 +253,7 @@ static efi_status_t EFIAPI efi_net_initialize(struct=
+ efi_simple_network *this,
+>   		r =3D EFI_INVALID_PARAMETER;
+>   		goto out;
+>   	}
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>
+>   	switch (this->mode->state) {
+>   	case EFI_NETWORK_INITIALIZED:
+> @@ -347,7 +350,7 @@ static efi_status_t EFIAPI efi_net_shutdown(struct e=
+fi_simple_network *this)
+>   		ret =3D EFI_INVALID_PARAMETER;
+>   		goto out;
+>   	}
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>
+>   	switch (this->mode->state) {
+>   	case EFI_NETWORK_INITIALIZED:
+> @@ -553,7 +556,7 @@ static efi_status_t EFIAPI efi_net_get_status(struct=
+ efi_simple_network *this,
+>   		goto out;
+>   	}
+>
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>
+>   	switch (this->mode->state) {
+>   	case EFI_NETWORK_STOPPED:
+> @@ -614,7 +617,7 @@ static efi_status_t EFIAPI efi_net_transmit
+>   		goto out;
+>   	}
+>
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>
+>   	/* We do not support jumbo packets */
+>   	if (buffer_size > PKTSIZE_ALIGN) {
+> @@ -712,7 +715,7 @@ static efi_status_t EFIAPI efi_net_receive
+>   		goto out;
+>   	}
+>
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>
+>   	switch (this->mode->state) {
+>   	case EFI_NETWORK_STOPPED:
+> @@ -870,7 +873,7 @@ static void EFIAPI efi_network_timer_notify(struct e=
+fi_event *event,
+>   	if (!this || this->mode->state !=3D EFI_NETWORK_INITIALIZED)
+>   		goto out;
+>
+> -	nt =3D efi_netobj_from_snp(this);
+> +	nt =3D efi_netobj_from_snp(this, true);
+>   	curr_efi_net_obj =3D nt->efi_seq_num;
+>
+>   	// The following only happens if the net obj was removed but the even=
+t
+> @@ -1205,7 +1208,7 @@ static int efi_netobj_init(struct efi_net_obj *net=
+obj)
+>
+>   	dev =3D netobj->dev;
+>
+> -	if (efi_netobj_is_active(netobj))
+> +	if (efi_netobj_is_active(netobj) || !netobj->snp_owner)
+>   		goto set_timers;
+>
+>   	if (!netobj->net_mode)
+> @@ -1417,6 +1420,7 @@ struct efi_net_obj *efi_netobj_alloc(efi_handle_t =
+handle,
+>   			free(netobj->net->mode);
+>   		free(netobj->net);
+>   	}
+> +	netobj->net =3D NULL;
+>
+>   	if (handle) {
+>   		netobj->handle =3D handle;
+> @@ -1429,6 +1433,8 @@ struct efi_net_obj *efi_netobj_alloc(efi_handle_t =
+handle,
+>   		}
+>   	}
+>
+> +	netobj->snp_owner =3D efi_netobj_from_snp(net, true) ? false : true;
 > +
-> +	if (!handle->dev) {
-> +		ret =3D efi_netdev_create(handle, interface);
+>   	if (net) {
+>   		netobj->net =3D net;
+>   		netobj->net_mode =3D net->mode;
+> @@ -1556,14 +1562,9 @@ int efi_net_unregister(void *ctx, struct event *e=
+vent)
+>   		return -1;
+>   	}
+>
+> +	interface =3D NULL;
+>   	if (drv !=3D dev->driver) {
+>   		ret =3D EFI_CALL(efi_disconnect_controller(netobj->handle, NULL, NUL=
+L));
+> -		if (ret !=3D EFI_SUCCESS)
+> -			return -1;
+> -		ret =3D EFI_CALL(efi_close_event(netobj->wait_for_packet));
+> -		if (ret !=3D EFI_SUCCESS)
+> -			return -1;
+> -		ret =3D EFI_CALL(efi_close_event(netobj->network_timer_event));
+>   		if (ret !=3D EFI_SUCCESS)
+>   			return -1;
+>
+> @@ -1581,6 +1582,15 @@ int efi_net_unregister(void *ctx, struct event *e=
+vent)
+>   		}
+>   	}
+>
+> +	if (netobj->snp_owner) {
+> +		ret =3D EFI_CALL(efi_close_event(netobj->wait_for_packet));
 > +		if (ret !=3D EFI_SUCCESS)
-> +			return ret;
+> +			return -1;
+> +		ret =3D EFI_CALL(efi_close_event(netobj->network_timer_event));
+> +		if (ret !=3D EFI_SUCCESS)
+> +			return -1;
 > +	}
 > +
->   	return EFI_SUCCESS;
->   }
->  =20
-> @@ -72,6 +215,22 @@ efi_net_init_drv(struct efi_driver_binding_extended_=
-protocol *this)
->   	return EFI_SUCCESS;
->   }
->  =20
-> +/* Net device driver operators */
-> +static const struct eth_ops efi_eth_ops =3D {
-> +	.start	=3D efi_net_start,
-> +	.send	=3D efi_net_send,
-> +	.recv	=3D efi_net_recv,
-> +	.stop	=3D efi_net_stop,
-> +};
+>   #if IS_ENABLED(CONFIG_EFI_IP4_CONFIG2_PROTOCOL)
+>   	if (netobj->ip4_config2) {
+>   		r =3D efi_ipconfig_unregister(netobj->handle, netobj->ip4_config2);
+> @@ -1603,8 +1613,11 @@ int efi_net_unregister(void *ctx, struct event *e=
+vent)
+>   		ret =3D efi_delete_handle(netobj->handle);
+>   		if (ret !=3D EFI_SUCCESS)
+>   			return -1;
+> +	}
 > +
-> +/* Identify as net device driver */
-> +U_BOOT_DRIVER(efi_netdev) =3D {
-> +	.name		=3D "efi_netdev",
-> +	.id		=3D UCLASS_ETH,
-> +	.ops		=3D &efi_eth_ops,
-> +	.plat_auto	=3D sizeof(struct efi_netdev_plat),
-> +};
-> +
->   /* EFI driver operators */
->   static const struct efi_driver_ops driver_ops =3D {
->   	.protocol	=3D &efi_net_guid,
+> +	efi_free_pool(interface);
+>
+> -		efi_free_pool(interface);
+> +	if (netobj->snp_owner) {
+>   		if (netobj->net)
+>   			free(netobj->net);
+>   		if (netobj->net_mode)
 
