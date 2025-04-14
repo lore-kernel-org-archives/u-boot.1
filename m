@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2895EC3601E
-	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 06:02:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF704C3601E
+	for <u-boot@archiver.kernel.org>; Mon, 14 Apr 2025 06:02:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6D3082047;
-	Mon, 14 Apr 2025 08:01:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1152E8209F;
+	Mon, 14 Apr 2025 08:01:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gqex6Nfm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z00Yg35f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77B45820EB; Mon, 14 Apr 2025 08:01:14 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 9CAB882047; Mon, 14 Apr 2025 08:01:16 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 452038206E
- for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 08:01:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BC8D81F7E
+ for <u-boot@lists.denx.de>; Mon, 14 Apr 2025 08:01:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac3fcf5ab0dso664982066b.3
- for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 23:01:12 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5e61375c108so4906247a12.1
+ for <u-boot@lists.denx.de>; Sun, 13 Apr 2025 23:01:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744610472; x=1745215272; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744610473; x=1745215273; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FQ+2XaUXhHhSK6CBEKQQqELuPZHMmDssrupUU6YjTTk=;
- b=Gqex6Nfm6OtHe0QA2JzC3CWjY4BoNRkrJ6t5VnjkxmXfclv4RrXSym0GToeG88NZjk
- GQftNIsBrMnMXvaQuMweWDCXz4r3ZhVVf6sHdcrn6mX1MwJavrcm5lykkd0c565kNbOH
- 7EUZ9wgAJIaCMP4xPooIaGIwfVeNA+u4VncvXEAD0Oo8IODR9NUJW9FiGZH92u2ugR8x
- HwvZiPAEtEen9zkjM+m9JxEdQTUPlz9Y/8b6ytU+tsPRqf4GQmxdSHlBiV1/fEEtXt5D
- Z7XpXM8epseLOR4kMxXwoF3y52vTqJMIV5NO2IBOxOnVS6LTmcLVENAS7MBiMirTLJu5
- 1KaQ==
+ bh=xoFX1iIJL4777Hn257+fn5zrGyHpvMN5/MwiaxcVecE=;
+ b=Z00Yg35fg8j0U+v/hEECJM26kAA6hjKXaS7s/Q8F+Ohoz6s+niuRQvaYCNzX9uQhYO
+ iOIJHwTcfi/5SClkK6KfBEqoIjXE358wztvGG3fk60SbWXZqHqK4najHecr4yq27d6Cd
+ wd77upY9PSX21cvUdhsDZS1brVfn2FC4jxClun8ST4KtOA/Gq+045M/2OkCFGS7M3qpO
+ sbHUPIttPKw3ksijXE/FvqaPKNpKWrsGSx1dqq07pR86C1D4r7zoSOG44j8q5YcYkMoA
+ okAGrDMVg468vGMqWLqgG+c+7WZHU03M225PG24LhHIsNBN8Yf3Bnd5rqM4ZcmBy+Bwy
+ hDFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744610472; x=1745215272;
+ d=1e100.net; s=20230601; t=1744610473; x=1745215273;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FQ+2XaUXhHhSK6CBEKQQqELuPZHMmDssrupUU6YjTTk=;
- b=KVNGeg3AvHsAJI5r+vH3/kdY9nIfH7/gefFptnWCVv9SH3zUoLKVNpdexvhxtA65WF
- G6mCFiR6jZidl5l0y93EhkezR1RfRpXAnarZHioUu75NvZsG8OhL3UN4FpmWdhDifLlJ
- ckgN8JYA10P0WtaXrLaAz71oSZLQ9k5U2aLphb0Q/0kGHe0rfZI/9z/kdZPSojHcf/7J
- B2397jjv+El70d3ZJZ4FH4fhjco5tclCZQB0qVW2JOoAosdudWLv2lRvXLenbWDbOZDv
- np5CqMKt2yiL6MxEIqBOS1rqQYe8TI8o/jYBTJDCZXgCZuePN8zeREsjJf4Dw5Jn4cbk
- rxzA==
-X-Gm-Message-State: AOJu0YxdSX7QW2o2gboX4mwjACBpWSQQgHr3q3sDSI+3emKd2elenB/t
- 99DY206X206OkhnwXRIHwVjIaS41KyTZD5Nh92lyXL0CvqKEsA9O
-X-Gm-Gg: ASbGncvjJFyIffYN0trhDFMwXpTfYtbBQTQuQ1rkO6DsDvPL0fLPDlJp0SO+QDLSuKI
- AcyvOsuWJadcSDSLX4VYGanU4stSJvYQ+A+lIsQxInRenVOVUJYj32UBofivmFLpojJzVHe8fHU
- WVhOmxiWbU1GUvSLNjvJSoTIhZqn9xE91CA/qZH8rWYwknLi+/013+W8+KPAe060TQLgwdKE9co
- 96V4REP8BF1zFd/lxXpY9VtF6YHoACZv+y0UtixS2XbT8eahdofgFPNkcTqS1MD/R1uAmDCmxI+
- +q7hQLmjhmhuhG/Lt41Lz+3vI8N8CtrH
-X-Google-Smtp-Source: AGHT+IFNnTRluSgphTVZr6dyVZAsmb3xf4gBqyF5QOmxnOxTRqwyDHWcvzm78hba+Hf7OCU4I/Fjnw==
-X-Received: by 2002:a17:907:6ea1:b0:ac7:150b:57b2 with SMTP id
- a640c23a62f3a-acad36a46d2mr1012867766b.41.1744610471426; 
- Sun, 13 Apr 2025 23:01:11 -0700 (PDT)
+ bh=xoFX1iIJL4777Hn257+fn5zrGyHpvMN5/MwiaxcVecE=;
+ b=Ylqaq8n6X3wlE/HDYIIpfo4LYcuooiJPthp/jDgyP52BbESDpR2aekSHSezFk0fnH+
+ stKXpPxsMIxeNP4lza0iId5qaWhe7sPa6+mUARbAY+lOHpmbORWApm0HkUQUp6/B4E4w
+ vJeS5uCUIkDI7aV+49GqGJj65u+YofDRvdiL2EjexUIid6cmU1e8GKf2fQOAO2caruzj
+ AAcXjdm6RqvF49Pewb4R9v/8jU5mND9Z+XgprOJn2+0oTr9nrcjFalibuirCFpMZ8pBr
+ 2BKtgsXJHOTy1DxJJ8SKFPE31TXqAWjOtv4quu4fhAC/9XyhWuvI6HR06N61Nv3hsMhC
+ yQZw==
+X-Gm-Message-State: AOJu0YwmYss5oqvG4PrYe3cn1omf9HIF6aBURsOuVLOk/mDqDJZ4NG03
+ l7EGBCdpoAtsW868DrWu1gfvd4/sCS1on24InP5/Y7G1mNTMGECQ
+X-Gm-Gg: ASbGnctyQ2Mo4TIJxnzYTeICO+bbg7UGB20idDKInn9rjWdaAmvv3BW3d/EKmDCqqoK
+ W4aTmovvjb8tY2MmsAGKDrcS42Zyn/TaZSrpcSPWgDRzNm7P4OTxgXFmZzZw0wDrWWXDFdxfw8k
+ mo8qeoBT+jCAGW1Yps4KWBRucXklqbYoeLohsKlCSScu4L7otSSVeQVWWOPLZNpdcPDZKpjRhat
+ z3FBxmpI2Ue9fggeFDYY3DJQQ4E5JE1DzUtJtr2odjaQOJMTQ7yv7uuPbs/j4B2VArgGKJqdWyi
+ hVzm/2eG8IvKTeHhHItNTRZG8mYg/hvo
+X-Google-Smtp-Source: AGHT+IEUIgly6TjVbNoL6F0FIbn0xAJabhfZUABkRSRzv/OhIgMxLXjFxeh/Y6fUXKV6RkbQ6DV/DA==
+X-Received: by 2002:a17:907:3d12:b0:aca:cda9:3170 with SMTP id
+ a640c23a62f3a-acad36a0781mr1002291766b.46.1744610472555; 
+ Sun, 13 Apr 2025 23:01:12 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acaa1ce7fd1sm838050466b.168.2025.04.13.23.01.10
+ a640c23a62f3a-acaa1ce7fd1sm838050466b.168.2025.04.13.23.01.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Apr 2025 23:01:11 -0700 (PDT)
+ Sun, 13 Apr 2025 23:01:12 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Thierry Reding <treding@nvidia.com>,
@@ -76,10 +76,10 @@ To: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Ion Agorria <ion@agorria.com>, Artur Kowalski <arturkow2000@gmail.com>,
  Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 7/9] video: panel: add LG LH400WV3-SD04 MIPI DSI panel
- driver
-Date: Mon, 14 Apr 2025 09:00:17 +0300
-Message-ID: <20250414060021.14545-8-clamor95@gmail.com>
+Subject: [PATCH v1 8/9] video: backlight: add Skyworks/Analogictech AAT2870
+ led controller driver
+Date: Mon, 14 Apr 2025 09:00:18 +0300
+Message-ID: <20250414060021.14545-9-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250414060021.14545-1-clamor95@gmail.com>
 References: <20250414060021.14545-1-clamor95@gmail.com>
@@ -101,284 +101,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-LG LH400WV3-SD04 is a color active matrix TFT (Thin Film Transistor)
-liquid crystal display (LCD). The resolution of a 4" contains 480 x 800
-pixels.
+Add support for Skyworks AAT2870 LED Backlight Driver and Multiple LDO
+Lighting Management Unit. Only backlight is supported as for now. Supported
+backlight level range is from 2 to 255 with step of 1.
 
+Tested-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/Kconfig            |   8 ++
- drivers/video/Makefile           |   1 +
- drivers/video/lg-lh400wv3-sd04.c | 230 +++++++++++++++++++++++++++++++
- 3 files changed, 239 insertions(+)
- create mode 100644 drivers/video/lg-lh400wv3-sd04.c
+ drivers/video/Kconfig             |  10 +++
+ drivers/video/Makefile            |   1 +
+ drivers/video/aat2870_backlight.c | 132 ++++++++++++++++++++++++++++++
+ 3 files changed, 143 insertions(+)
+ create mode 100644 drivers/video/aat2870_backlight.c
 
 diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index c2f6a72af42..3551aefae89 100644
+index 3551aefae89..d855883fad9 100644
 --- a/drivers/video/Kconfig
 +++ b/drivers/video/Kconfig
-@@ -554,6 +554,14 @@ config VIDEO_LCD_LG_LD070WX3
- 	  Say Y here if you want to enable support for LG LD070WX3
- 	  800x1280 DSI video mode panel.
+@@ -754,6 +754,16 @@ config ATMEL_HLCD
+ 	help
+ 	   HLCDC supports video output to an attached LCD panel.
  
-+config VIDEO_LCD_LG_LH400WV3
-+	bool "LH400WV3-SD04 DSI LCD panel support"
-+	depends on PANEL && BACKLIGHT
-+	select VIDEO_MIPI_DSI
++config BACKLIGHT_AAT2870
++	bool "Backlight Driver for AAT2870"
++	depends on BACKLIGHT
++	select DM_I2C
 +	help
-+	  Say Y here if you want to enable support for LG LH400WV3
-+	  480x800 DSI video mode panel.
++	  Say Y to enable the backlight driver for Skyworks AAT2870 LED
++	  Backlight Driver and Multiple LDO Lighting Management Unit.
++	  Only backlight is supported as for now. Supported backlight
++	  level range is from 2 to 255 with step of 1.
 +
- config VIDEO_LCD_RAYDIUM_RM68200
- 	bool "RM68200 DSI LCD panel support"
- 	select VIDEO_MIPI_DSI
+ config BACKLIGHT_LM3532
+ 	bool "Backlight Driver for LM3532"
+ 	depends on BACKLIGHT
 diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index 914ae885b70..ccd791cac59 100644
+index ccd791cac59..a1bf92d9099 100644
 --- a/drivers/video/Makefile
 +++ b/drivers/video/Makefile
-@@ -61,6 +61,7 @@ obj-$(CONFIG_VIDEO_LCD_HIMAX_HX8394) += himax-hx8394.o
- obj-$(CONFIG_VIDEO_LCD_HITACHI_TX10D07VM0BAA) += hitachi-tx10d07vm0baa.o
- obj-$(CONFIG_VIDEO_LCD_HITACHI_TX18D42VM) += hitachi_tx18d42vm_lcd.o
- obj-$(CONFIG_VIDEO_LCD_LG_LD070WX3) += lg-ld070wx3.o
-+obj-$(CONFIG_VIDEO_LCD_LG_LH400WV3) += lg-lh400wv3-sd04.o
- obj-$(CONFIG_VIDEO_LCD_MOT) += mot-panel.o
- obj-$(CONFIG_VIDEO_LCD_ORISETECH_OTM8009A) += orisetech_otm8009a.o
- obj-$(CONFIG_VIDEO_LCD_RAYDIUM_RM68200) += raydium-rm68200.o
-diff --git a/drivers/video/lg-lh400wv3-sd04.c b/drivers/video/lg-lh400wv3-sd04.c
+@@ -29,6 +29,7 @@ obj-$(CONFIG_$(PHASE_)BMP) += bmp.o
+ 
+ endif
+ 
++obj-$(CONFIG_BACKLIGHT_AAT2870) += aat2870_backlight.o
+ obj-$(CONFIG_BACKLIGHT_LM3532) += lm3532_backlight.o
+ obj-$(CONFIG_BACKLIGHT_LM3533) += lm3533_backlight.o
+ obj-$(CONFIG_BACKLIGHT_LP855x) += lp855x_backlight.o
+diff --git a/drivers/video/aat2870_backlight.c b/drivers/video/aat2870_backlight.c
 new file mode 100644
-index 00000000000..0385b39867f
+index 00000000000..209d15b3639
 --- /dev/null
-+++ b/drivers/video/lg-lh400wv3-sd04.c
-@@ -0,0 +1,230 @@
++++ b/drivers/video/aat2870_backlight.c
+@@ -0,0 +1,132 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * LG LH400WV3-SD04 DSI panel driver
-+ *
-+ * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
++ * Copyright (c) 2024 Svyatoslav Ryhel <clamor95@gmail.com>
 + */
++
++#define LOG_CATEGORY UCLASS_PANEL_BACKLIGHT
 +
 +#include <backlight.h>
 +#include <dm.h>
-+#include <panel.h>
++#include <i2c.h>
 +#include <log.h>
-+#include <mipi_dsi.h>
-+#include <linux/delay.h>
-+#include <power/regulator.h>
++#include <linux/err.h>
 +#include <asm/gpio.h>
++#include <power/regulator.h>
 +
-+struct lg_lh400wv3_priv {
-+	struct udevice *avci;
-+	struct udevice *iovcc;
++#define AAT2870_BL_MIN_BRIGHTNESS	0x01
++#define AAT2870_BL_DEF_BRIGHTNESS	0x64
++#define AAT2870_BL_MAX_BRIGHTNESS	0xff
 +
-+	struct udevice *backlight;
++#define AAT2870_BL_CH_EN		0x00
++#define AAT2870_BLM			0x01
 +
-+	struct gpio_desc reset_gpio;
++#define AAT2870_BL_CH_ALL		0xff
++
++#define AAT2870_CURRENT_MAX		27900000
++#define AAT2870_CURRENT_STEP		900000
++
++struct aat2870_backlight_priv {
++	struct gpio_desc enable_gpio;
++
++	int channels;
++	int max_current;
 +};
 +
-+static struct display_timing default_timing = {
-+	.pixelclock.typ		= 29816000,
-+	.hactive.typ		= 480,
-+	.hfront_porch.typ	= 10,
-+	.hback_porch.typ	= 10,
-+	.hsync_len.typ		= 10,
-+	.vactive.typ		= 800,
-+	.vfront_porch.typ	= 4,
-+	.vback_porch.typ	= 4,
-+	.vsync_len.typ		= 4,
-+};
-+
-+#define dsi_generic_write_seq(dsi, cmd, seq...) do {			\
-+		static const u8 b[] = { cmd, seq };			\
-+		int ret;						\
-+		ret = mipi_dsi_dcs_write_buffer(dsi, b, ARRAY_SIZE(b));	\
-+		if (ret < 0)						\
-+			return ret;					\
-+	} while (0)
-+
-+static int lg_lh400wv3_enable_backlight(struct udevice *dev)
++static int aat2870_backlight_enable(struct udevice *dev)
 +{
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+	struct mipi_dsi_device *dsi = plat->device;
++	struct aat2870_backlight_priv *priv = dev_get_priv(dev);
 +	int ret;
 +
-+	dsi_generic_write_seq(dsi, MIPI_DCS_EXIT_INVERT_MODE);
-+	dsi_generic_write_seq(dsi, MIPI_DCS_SET_TEAR_ON);
++	dm_gpio_set_value(&priv->enable_gpio, 1);
 +
-+	ret = mipi_dsi_dcs_set_pixel_format(dsi, MIPI_DCS_PIXEL_FMT_24BIT |
-+					    MIPI_DCS_PIXEL_FMT_24BIT << 4);
-+	if (ret < 0) {
-+		log_debug("%s: failed to set pixel format: %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	dsi_generic_write_seq(dsi, 0xb2, 0x00, 0xc8);
-+	dsi_generic_write_seq(dsi, 0xb3, 0x00);
-+	dsi_generic_write_seq(dsi, 0xb4, 0x04);
-+	dsi_generic_write_seq(dsi, 0xb5, 0x42, 0x10, 0x10, 0x00, 0x20);
-+	dsi_generic_write_seq(dsi, 0xb6, 0x0b, 0x0f, 0x3c, 0x13, 0x13, 0xe8);
-+	dsi_generic_write_seq(dsi, 0xb7, 0x4c, 0x06, 0x0c, 0x00, 0x00);
-+
-+	dsi_generic_write_seq(dsi, 0xc0, 0x01, 0x11);
-+	dsi_generic_write_seq(dsi, 0xc3, 0x07, 0x03, 0x04, 0x04, 0x04);
-+	dsi_generic_write_seq(dsi, 0xc4, 0x12, 0x24, 0x18, 0x18, 0x02, 0x49);
-+	dsi_generic_write_seq(dsi, 0xc5, 0x65);
-+	dsi_generic_write_seq(dsi, 0xc6, 0x41, 0x63);
-+
-+	dsi_generic_write_seq(dsi, 0xd0, 0x00, 0x46, 0x74, 0x32, 0x1d, 0x03, 0x51, 0x15, 0x04);
-+	dsi_generic_write_seq(dsi, 0xd1, 0x00, 0x46, 0x74, 0x32, 0x1d, 0x03, 0x51, 0x15, 0x04);
-+	dsi_generic_write_seq(dsi, 0xd2, 0x00, 0x46, 0x74, 0x32, 0x1f, 0x03, 0x51, 0x15, 0x04);
-+	dsi_generic_write_seq(dsi, 0xd3, 0x00, 0x46, 0x74, 0x32, 0x1f, 0x03, 0x51, 0x15, 0x04);
-+	dsi_generic_write_seq(dsi, 0xd4, 0x01, 0x46, 0x74, 0x25, 0x00, 0x03, 0x51, 0x15, 0x04);
-+	dsi_generic_write_seq(dsi, 0xd5, 0x01, 0x46, 0x74, 0x25, 0x00, 0x03, 0x51, 0x15, 0x04);
-+
-+	dsi_generic_write_seq(dsi, MIPI_DCS_SET_COLUMN_ADDRESS, 0x00, 0x00, 0x01, 0xdf);
-+	dsi_generic_write_seq(dsi, MIPI_DCS_SET_PAGE_ADDRESS, 0x00, 0x00, 0x03, 0x1f);
-+
-+	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
-+	if (ret < 0) {
-+		log_debug("%s: failed to exit sleep mode: %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	mdelay(120);
-+
-+	dsi_generic_write_seq(dsi, MIPI_DCS_WRITE_MEMORY_START);
-+
-+	ret = mipi_dsi_dcs_set_display_on(dsi);
-+	if (ret < 0) {
-+		log_debug("%s: failed to set display on: %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int lg_lh400wv3_set_backlight(struct udevice *dev, int percent)
-+{
-+	struct lg_lh400wv3_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = backlight_enable(priv->backlight);
++	/* Enable backlight for defined set of channels */
++	ret = dm_i2c_reg_write(dev, AAT2870_BL_CH_EN, priv->channels);
 +	if (ret)
 +		return ret;
 +
-+	return backlight_set_brightness(priv->backlight, percent);
-+}
-+
-+static int lg_lh400wv3_timings(struct udevice *dev, struct display_timing *timing)
-+{
-+	memcpy(timing, &default_timing, sizeof(*timing));
 +	return 0;
 +}
 +
-+static int lg_lh400wv3_of_to_plat(struct udevice *dev)
++static int aat2870_backlight_set_brightness(struct udevice *dev, int percent)
 +{
-+	struct lg_lh400wv3_priv *priv = dev_get_priv(dev);
++	struct aat2870_backlight_priv *priv = dev_get_priv(dev);
++	int brightness, ret;
++
++	if (percent == BACKLIGHT_DEFAULT)
++		percent = AAT2870_BL_DEF_BRIGHTNESS;
++
++	if (percent < AAT2870_BL_MIN_BRIGHTNESS)
++		percent = AAT2870_BL_MIN_BRIGHTNESS;
++
++	if (percent > AAT2870_BL_MAX_BRIGHTNESS)
++		percent = AAT2870_BL_MAX_BRIGHTNESS;
++
++	brightness = percent * priv->max_current;
++	brightness /= AAT2870_BL_MAX_BRIGHTNESS;
++
++	/* Set brightness level */
++	ret = dm_i2c_reg_write(dev, AAT2870_BLM, brightness);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static int aat2870_backlight_of_to_plat(struct udevice *dev)
++{
++	struct aat2870_backlight_priv *priv = dev_get_priv(dev);
 +	int ret;
 +
-+	ret = uclass_get_device_by_phandle(UCLASS_PANEL_BACKLIGHT, dev,
-+					   "backlight", &priv->backlight);
++	ret = gpio_request_by_name(dev, "enable-gpios", 0,
++				   &priv->enable_gpio, GPIOD_IS_OUT);
 +	if (ret) {
-+		log_debug("%s: cannot get backlight: ret = %d\n",
-+			  __func__, ret);
++		log_err("%s: cannot get enable-gpios (%d)\n",
++			__func__, ret);
 +		return ret;
 +	}
 +
-+	ret = device_get_supply_regulator(dev, "avci-supply", &priv->avci);
-+	if (ret) {
-+		log_debug("%s: cannot get avci-supply: ret = %d\n",
-+			  __func__, ret);
-+		return ret;
-+	}
++	/* Backlight is one of children but has no dedicated driver */
++	ofnode backlight = ofnode_find_subnode(dev_ofnode(dev), "backlight");
++	if (ofnode_valid(backlight) && ofnode_is_enabled(backlight)) {
++		/* Number of channel is equal to bit number */
++		priv->channels = dev_read_u32_default(dev, "channels", AAT2870_BL_CH_ALL);
++		if (priv->channels != AAT2870_BL_CH_ALL)
++			priv->channels = BIT(priv->channels);
 +
-+	ret = device_get_supply_regulator(dev, "iovcc-supply", &priv->iovcc);
-+	if (ret) {
-+		log_debug("%s: cannot get iovcc-supply: ret = %d\n",
-+			  __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = gpio_request_by_name(dev, "reset-gpios", 0,
-+				   &priv->reset_gpio, GPIOD_IS_OUT);
-+	if (ret) {
-+		log_debug("%s: cannot decode reset-gpios (%d)\n",
-+			  __func__, ret);
-+		return ret;
++		/* 450mA - 27900mA range with a 900mA step */
++		priv->max_current = dev_read_u32_default(dev, "current-max-microamp",
++							 AAT2870_CURRENT_MAX);
++		priv->max_current /= AAT2870_CURRENT_STEP;
 +	}
 +
 +	return 0;
 +}
 +
-+static int lg_lh400wv3_hw_init(struct udevice *dev)
++static int aat2870_backlight_probe(struct udevice *dev)
 +{
-+	struct lg_lh400wv3_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 1);
-+	if (ret) {
-+		log_debug("%s: error entering reset (%d)\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = regulator_set_enable_if_allowed(priv->iovcc, 1);
-+	if (ret) {
-+		log_debug("%s: enabling iovcc-supply failed (%d)\n",
-+			  __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = regulator_set_enable_if_allowed(priv->avci, 1);
-+	if (ret) {
-+		log_debug("%s: enabling avci-supply failed (%d)\n",
-+			  __func__, ret);
-+		return ret;
-+	}
-+
-+	mdelay(1);
-+
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 0);
-+	if (ret) {
-+		log_debug("%s: error exiting reset (%d)\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	mdelay(10);
++	if (device_get_uclass_id(dev->parent) != UCLASS_I2C)
++		return -EPROTONOSUPPORT;
 +
 +	return 0;
 +}
 +
-+static int lg_lh400wv3_probe(struct udevice *dev)
-+{
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+
-+	/* fill characteristics of DSI data link */
-+	plat->lanes = 2;
-+	plat->format = MIPI_DSI_FMT_RGB888;
-+	plat->mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_LPM;
-+
-+	return lg_lh400wv3_hw_init(dev);
-+}
-+
-+static const struct panel_ops lg_lh400wv3_ops = {
-+	.enable_backlight	= lg_lh400wv3_enable_backlight,
-+	.set_backlight		= lg_lh400wv3_set_backlight,
-+	.get_display_timing	= lg_lh400wv3_timings,
++static const struct backlight_ops aat2870_backlight_ops = {
++	.enable = aat2870_backlight_enable,
++	.set_brightness = aat2870_backlight_set_brightness,
 +};
 +
-+static const struct udevice_id lg_lh400wv3_ids[] = {
-+	{ .compatible = "lg,lh400wv3-sd04" },
++static const struct udevice_id aat2870_backlight_ids[] = {
++	{ .compatible = "analogictech,aat2870" },
++	{ .compatible = "skyworks,aat2870" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(lg_lh400wv3) = {
-+	.name		= "lg_lh400wv3",
-+	.id		= UCLASS_PANEL,
-+	.of_match	= lg_lh400wv3_ids,
-+	.ops		= &lg_lh400wv3_ops,
-+	.of_to_plat	= lg_lh400wv3_of_to_plat,
-+	.probe		= lg_lh400wv3_probe,
-+	.plat_auto	= sizeof(struct mipi_dsi_panel_plat),
-+	.priv_auto	= sizeof(struct lg_lh400wv3_priv),
++U_BOOT_DRIVER(aat2870_backlight) = {
++	.name		= "aat2870_backlight",
++	.id		= UCLASS_PANEL_BACKLIGHT,
++	.of_match	= aat2870_backlight_ids,
++	.of_to_plat	= aat2870_backlight_of_to_plat,
++	.probe		= aat2870_backlight_probe,
++	.ops		= &aat2870_backlight_ops,
++	.priv_auto	= sizeof(struct aat2870_backlight_priv),
 +};
 -- 
 2.43.0
