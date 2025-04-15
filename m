@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE95CC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 13:35:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AB93C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 13:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40EF68209C;
-	Tue, 15 Apr 2025 15:35:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A81678209C;
+	Tue, 15 Apr 2025 15:36:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DcZuGIUq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fb4M8zU2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A344F82A96; Tue, 15 Apr 2025 15:35:41 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 76A9F82AF4; Tue, 15 Apr 2025 15:36:58 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 994B3810F4
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 15:35:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3ADF810F4
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 15:36:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5f3f04b5dbcso4887575a12.1
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 06:35:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43ede096d73so39586055e9.2
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 06:36:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744724139; x=1745328939; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tjuEzGbY8+asJq+627u3/lXKMj+s0oRfRvfhiqW89Gs=;
- b=DcZuGIUqiTq+Wxgcmk50V7gMjRmA1G1P8WviIIuh+Ceq54R+uEVWX4aXeO8bjf0IGP
- BvIyPnbuMWkhJwM6+Pdjr2wmhS/t4MIsA87Y1pvDYz65DQM7RhlJMejFHTjhl4jgZZY8
- DRTYX4rhc7fdEw9aj8tkKzXrvXV2PRLOHboP+G8sOC7QZ5A8CjHIO8WAWSXx53DGrktm
- SNwva1ijQPGEHdbDzWC7XoiOeUdjliidRlVrMUUk1piFEKgK6fsmtPXsu+2Pa8FqVBdn
- boiTjgeeJJ9HkagF1V/YlNJnQ2EPRdZAQrLxbQq4I2U38nDmbj3YOVRG98lRo+xZPl+G
- 6Ipg==
+ d=linaro.org; s=google; t=1744724215; x=1745329015; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YsNuSyec7jdXM8C0OT1Z7BlmcFgFpsMV6lUQ9PrZ5xs=;
+ b=Fb4M8zU2mQudZiwqbj4kwbs02uC9Ce97ZPjVDdjGq/twiDZDIauSabwoYZh0KzBwW7
+ M2LCPZqpg/j762k1iVSF1105XfXPValW44A3C6egX5rM7xNwQae1gYH8unoHrVFCKke/
+ 15xfNHIGF/kyPNH+fHy9In8KP5y1OniFjtGKW5s1ivmx81U7s3puiR4Oh86CbY0vIg7h
+ AHp5tCFk5otv9PGlKfwp+N23p90lyIqFKgO5LlG3QNzYz/yN9bKbQWg2re9ev35GZhDm
+ Y9oA9ir4k84oK1ZOegltezvS4iTtJqv0vxTOG/B2ij2MUg1WaJCmJFGVoj6+hVudnVjU
+ YvKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744724139; x=1745328939;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tjuEzGbY8+asJq+627u3/lXKMj+s0oRfRvfhiqW89Gs=;
- b=gcGXmIIEnD8HSTsJS82ULFhKT7+5nXxbe0MfE6ACfhJ2UpObsraldnOImL/wRpdiXZ
- nCFNf0+JALEUYVyZK7fRgEr+GfMv32MVW0C+dAowCF4dofEAEwGobPXLFTYFMWWudJca
- MHTPQqKpscEFNeEYk/sA+Qjk7V4MpCudQxAZd7hMLESiG9/ZX9iPUD79Hm2K2GBofQp8
- JwiMjPfBH7zY8obPv+L0N/S3VdPuEydgxjjXca4r5nfZBUJp8iNYgN+fXh4+jtgKzU3A
- Y3HXx9UVZVG6GRXyQNwxCmy02YXYAtHtqgRdTQX6nUOgvp9NVPaKdG4Ap0pmJ4ZXS9cA
- wBOg==
-X-Gm-Message-State: AOJu0Yw+CcFbgzK1c2MRvGjC60ep1r2pP5HkxKAHkA2VfOfWkot2nieE
- y6KzUvxVTmFV5sDQ0DZeyB6hisqLpWWMZqxSg91VnLKBp1Vqms20VxW1Nw3cJrEoKpFiCclpRkI
- RUFPRY7uXOjbaKknaB+erFDVxQDc=
-X-Gm-Gg: ASbGncvr9bX+YEmYhZrt4qW1L11a5RPi7XNNw+qMI8flEBEUJMJpPv9ZV0W8VsLg3iH
- GuSg57/FiUQN5k2TpEJ3Vegq1tVtvClGklKPEiSutntbNz7ysR7A34ra5XmsFqxYLiQ4PKwrVXT
- 3BIDXsyVtsE0zFf2e2SMgQqpjiqIaOmnu0oD8S6d+Jo3Ap4skAXc7IOcU=
-X-Google-Smtp-Source: AGHT+IFIzwqOFVa8HAU228zw0jSMFroP1KaWMivhApGA03xpCx1G/3IQUW8TUght6/T2wof9zG3UquD32mWXjetUMqY=
-X-Received: by 2002:a05:6402:84d:b0:5e5:c3bc:f4e0 with SMTP id
- 4fb4d7f45d1cf-5f370118051mr11817383a12.29.1744724138685; Tue, 15 Apr 2025
- 06:35:38 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744724215; x=1745329015;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YsNuSyec7jdXM8C0OT1Z7BlmcFgFpsMV6lUQ9PrZ5xs=;
+ b=icmxMvuzZ2omThn74JVd1A0IkmNG5nOadm79N9Zc9VV8eJjckT4NDHDJ56wayLEuAF
+ 7pNosucnEN4rKPtuSJ8YGjpv+N1Fbn323wh0jSk0wA2NfRV4EaI2O8HsTBdPvt5m4yO5
+ nmfwBQvy3VbbQR7NxDDfucB8IIFp0sVTIx2v/sEGbBKir69cnvHWz3/haULnoEBM5pmE
+ aP/HuwgJHQmWPkDgvZxzUosHrQSpWPSsOo59Fvd9BFf2HhRqSn6jWFfWLuDOFiJj3ies
+ s/6rDlEn92DoaS4d0qbxD0D0ho7XhV/cqF7kvVq0nK00oMsQIODNd3f8CicAvwAj/iBq
+ 1q5w==
+X-Gm-Message-State: AOJu0YzM+eRzzRZxWnpjTWQcBewXo5dFB+9L023WufeH4Tna8B97l+Vq
+ AX71PGmyjy7C5dAaqGzi2GwH9niVLvf2rZM00eYDG7AsowQjRFLIwBP5pD76in9ul6xiUkEDwwn
+ KNtQ=
+X-Gm-Gg: ASbGncuw6uYkFPBa1qrRmOKe418HYB1Wj0eNxARgPJwxwAJeBadd9FLHxhDxUO3aUvf
+ nRm3SB1aQX05XtxsuPySY3dr4X6P/ftf5uI/MkFsPhQjSaIyQ1ZEtsjFTh42i72RXMsdpFXwgfA
+ 6WIXWEwSATHL16wTatc4MbyZfdT/XhMfo732xXrY/ZjiigICtjzr39N3NyuArssyfNlpsLWS4F3
+ Zir+FZ2G8gDJBu0sjcFoU9iNXPI5Vsd2iArAwh8pql/XsALLbYBRFYISmoIjJNI2PJzBjAyCA2l
+ ZIql+Vh1Xzh7VHmqKbJycr6uBmoQRjBG8ntPXBNiqAjMUxbNPM0=
+X-Google-Smtp-Source: AGHT+IE5CkLAnGAzzfK2IA9VcO/guI+5Do+feO/wyTQCBv8TJWPW/a4+xzo+XW3pgGwg3FHk42RMQA==
+X-Received: by 2002:a05:600c:5107:b0:43d:585f:ebf5 with SMTP id
+ 5b1f17b1804b1-43f3a925f4dmr133828815e9.1.1744724215392; 
+ Tue, 15 Apr 2025 06:36:55 -0700 (PDT)
+Received: from [10.100.0.2] ([45.84.137.216]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39eae9640a9sm14374888f8f.10.2025.04.15.06.36.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Apr 2025 06:36:55 -0700 (PDT)
+Message-ID: <8f1d8b98-6eff-4986-acad-f4eb7da87446@linaro.org>
+Date: Tue, 15 Apr 2025 15:36:53 +0200
 MIME-Version: 1.0
-References: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
- <20250415083017.3523317-2-brunosampaioleite@gmail.com>
-In-Reply-To: <20250415083017.3523317-2-brunosampaioleite@gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 15 Apr 2025 14:35:25 +0100
-X-Gm-Features: ATxdqUFaRGjQd6LrNdTQPUH_EXSJaY6PsqZ5CaGz7OQU2VrTIUrS8dyqB8PUjeY
-Message-ID: <CALeDE9MdZSrfNeSicy2dXdVOROLMQ8Hx7zzJv=Cnptxm_kxUDA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] rpi: copy over uart clock-frequency in DT
-To: Bruno Leite <brunosampaioleite@gmail.com>
-Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, clast@prevas.dk,
- ravi@prevas.dk, Bruno Leite <brule@prevas.dk>, Fiona Klute <fiona.klute@gmx.de>,
- Francois Berder <fberder@outlook.fr>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Martin Stolpe <martinstolpe@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/16] Uthreads
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
+ <20250411202910.GA141451@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250411202910.GA141451@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,43 +99,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Apr 2025 at 09:30, Bruno Leite <brunosampaioleite@gmail.com>
-wrote:
+Hi Tom,
 
-> From: Bruno Leite <brule@prevas.dk>
->
-> rpi5 firmware sets uart_clk clock-frequency in
-> the firmware and patches it to the DT, copy it
-> over when loading a new DT.
->
-> Signed-off-by: Bruno Leite <brule@prevas.dk>
->
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-Tested-by: Peter Robinson <pbrobinson@gmail.com>
+On 4/11/25 22:29, Tom Rini wrote:
+> On Mon, Mar 31, 2025 at 02:30:54PM +0200, Jerome Forissier wrote:
+> 
+>> This series introduces threads and uses them for two things:
+>> - Improve the performance of the USB bus scanning code (scan multiple
+>> busses simultaneously),
+>> - Implement background jobs in the shell via two new commands: 'spawn'
+>> and 'wait'.
+>>
+>> The threading framework is called 'uthread' and is inspired from the
+>> barebox threads [2]. setjmp() and longjmp() are used to save and
+>> restore contexts, as well as a non-standard extension called initjmp().
+>> This new function is added in several patches, one for each
+>> architecture that supports HAVE_SETJMP. A new symbol is defined:
+>> HAVE_INITJMP. Two tests, one for initjmp() and one for the uthread
+>> scheduling, are added to the lib suite.
+>>
+>> The schedule() and udelay() function are updated to become thread
+>> re-scheduling points, and mutex objects are introduced. With that the
+>> USB stack initialization is modified to benefit from concurrency when
+>> UTHREAD is enabled, where uthreads are used in usb_init() to initialize
+>> and scan multiple busses at the same time. The code was tested on arm64
+>> and arm QEMU with 4 simulated XHCI buses and some devices. On this
+>> platform the USB scan takes 2.2 s instead of 5.6 s. Tested on i.MX93 EVK
+>> with two USB hubs, one ethernet adapter and one webcam on each, "usb
+>> start" takes 2.4 s instead of 4.6 s.
+>>
+>> Finally, the spawn and wait commands are introduced, allowing the use of
+>> threads from the shell. Tested on the i.MX93 EVK with a spinning HDD
+>> connected to USB1 and the network connected to ENET1. The USB plus DHCP
+>> init sequence "spawn usb start; spawn dhcp; wait" takes 4.5 seconds
+>> instead of 8 seconds for "usb start; dhcp".
+>>
+>> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=446674
+>> [2] https://github.com/barebox/barebox/blob/master/common/bthread.c
+> 
+> So, we're nearly there. But there's some CI problems. First, CI isn't
+> testing this because nothing enables UTHREADS.
 
+Thanks for looking into this.
 
->
-> ---
->
->  board/raspberrypi/rpi/rpi.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index 70d3c35499b..5c84c324c71 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -602,6 +602,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
->
->         /* Bluetooth device address as provided by the firmware */
->         copy_property(fdt, fw_fdt, "/soc/serial@7e201000/bluetooth",
-> "local-bd-address");
-> +
-> +       /* copy uart clk as provided by the firmware */
-> +       copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
->  }
->
->  int ft_board_setup(void *blob, struct bd_info *bd)
-> --
-> 2.45.2
->
->
+I do have a TESTING patch [0] that enables this for various QEMU plaforms
+(arm, arm64, riscv32, riscv64) and for sandbox64. Please refer to the
+following CI pipeline [1].
+
+[0] https://source.denx.de/u-boot/custodians/u-boot-net/-/commit/8460f6abefff
+[1] https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/25706
+
+> I don't know if we should
+> enable it by default on qemu_arm64 for example or not.
+
+Good question. Perhaps we could have a separate defconfig for the somewhat
+experimental stuff?
+
+> But for testing,
+> I added this to .gitlab-ci.yml (and something similar would work for
+> Azure):
+> qemu_arm64_uthread test.py:
+>   variables:
+>     TEST_PY_BD: "qemu_arm64"
+>     TEST_PY_TEST_SPEC: "not sleep"
+>     OVERRIDE: "-a CONFIG_UTHREAD=y -a CONFIG_CMD_SPAWN=y -a CONFIG_UNIT_TEST=y"
+>   <<: *buildman_and_testpy_dfn
+> 
+> This however leads first to unrelated tests failing:
+> https://source.denx.de/u-boot/u-boot/-/jobs/1099921
+
+Unrelated indeed. It turns out UNIT_TEST=y on qemu_arm64 is broken in master.
+I just posted a fix [2].
+
+[2] https://lists.denx.de/pipermail/u-boot/2025-April/586897.html
+
+> And I didn't see if the new tests ran either.
+
+It seems you need to enable CMD_TIME too. In my testing patch I added -v
+(verbose) to the test.py command so that we can clearly see that
+lib_initjmp [3], lib_uthread [4] and lib_uthread_mutex [5] are run in CI.
+
+[3] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1103031#L457
+[4] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1103031#L504
+[5] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1103031#L505
+
+Thanks,
+-- 
+Jerome
