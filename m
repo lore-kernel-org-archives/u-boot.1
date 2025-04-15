@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA974C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:20:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1330AC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:50:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A6C82C44;
-	Tue, 15 Apr 2025 23:18:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A9AE81F7E;
+	Tue, 15 Apr 2025 23:50:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RQ25774L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UYmXHLja";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB6BB82C2B; Tue, 15 Apr 2025 23:18:39 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 6559382A27; Tue, 15 Apr 2025 23:50:40 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF23482B53
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 23:18:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB9B081F6B
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 23:50:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-39c30d9085aso3859790f8f.1
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 14:18:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3feaedb39e9so1780351b6e.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 14:50:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744751917; x=1745356717; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LkP5Bcms/nyn0YXLuMG2fTx1wYMuCd6jOe/gbm85Qj4=;
- b=RQ25774LAlPqRVet6yE5ot88VkmYcATYdrraMnrFXYZC599CPyqYeBZCgmRqDzIzyt
- a9IRr9shBKuzG0ddzqorDvZyFyCxha4Oy30HLm8RUG5YZKT46aw+QSOtCfmIh2G93veE
- cWsfD/kQi49mBZtrfkLRTJu3s1OfmO5ddkvOaVRAT8kXXNvzH9d7TAmBP9i6V1nHfQ5b
- 1wMEPYtbqSnyxljUFc5a6544XjA6tpZPscKW7qbZyaWcvTud6XjO/i/WlmDmY4U1S8OC
- V5Ct1bMnC9dRAOXjcGMvb1HiayldQJNo2LJsuCudOGOpzlwLSeZCUtleXVqkRfPrAq90
- MofA==
+ d=konsulko.com; s=google; t=1744753836; x=1745358636; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WU3YbvHvf+y56SNxSE04WvFfbetAsntn/y8Tu0zpxDU=;
+ b=UYmXHLjajpNVgBzMQntXWYF1TPzOLBDvwL2eM6mXnxlPFVvELSxHooJeDpcqGqfXUx
+ ChF5IBRTGJyNvGYWd/Paad7AHQYp77p9iA8jiWQEGgk9rFbtpWjNonK9cMSkQoppKWpK
+ AjsI3F1mPvfXlqmYq6eZ4el1j1hGSDkBUIs3Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744751917; x=1745356717;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LkP5Bcms/nyn0YXLuMG2fTx1wYMuCd6jOe/gbm85Qj4=;
- b=aW+fAdeUWjiRw4bs0CRpINKa1bLrqaRM8YuoXKnCYr/8eWRvjQ4t4lBz1TteA6HWZF
- Kft0jqadsAil9cUFDmEs0xzw+sXV7rEYTDFLL6LEJS0pGgIAYxwvmJBUw+Jug6AheUlD
- TtuS0U4L9sekINDIhM4BpNxkB4/qZeQfVV7ddz3yoOOom9QQE93bnCIFn71SYdpsWER6
- hORhBqjDXLLD2aj+pfeDuDa2tKHBZI7oFkRGdX6U8rcGCT8gxXO3Ka+034pVocBRG2Nf
- grme+zIouP8J4MTwK+gvhyLJQsA/hwa5CiNyKfAyyzqWyzkxPFfo9SrGgHAbqOuE4kYa
- X5pA==
-X-Gm-Message-State: AOJu0YxUIHyfc2qJkH9kAcCbTedaC1vPUXhQFeL03xWT+zyRb4zPFyhj
- utJdX+zpAC4yMs0U+waGjO22rYUQZW8ZPinjf7tmwYHSwy+97pmQGzhaKiNU3QCYOO1ty5tDdIj
- VvrQ=
-X-Gm-Gg: ASbGncvgtk9sDe0yioN07V+zgS+U1kBmRQ2Jc2TFmVAPct2jZYSw10LYlt98ymPWrfN
- I+lSam8b55ojG4+mhfBob4ztPYcT9sDFfkKA9MqLpfA58h/G4OKWK13Ua1mrh84ihQ98RNJaanK
- pq/pXov3AkJE+xFh6j7xu5pPWDTddtAPxCiblwahdWOguWVuhmetEcT9a/r5gZRsd1/LO4JKVWV
- KZrPbAlY7OGDIcryuZcZ1pISi3MRlObJkAb0MLBytckznAHMN/XZnKHTMt4PHzVYxzcwBXGXEv1
- yjyKgQpiRHOeBjkD327RCVJAb57xCxJXctMOwBv1iZoQrE3T
-X-Google-Smtp-Source: AGHT+IFTFk2xli0TJ7b947mLBbTEyRx0asvZes+qY79Y2n27vuF1yV5SAb/IQg1vBQIjSo/VMjLiUQ==
-X-Received: by 2002:a05:6000:22c2:b0:390:e5c6:920 with SMTP id
- ffacd0b85a97d-39ee272a0e6mr872158f8f.3.1744751917254; 
- Tue, 15 Apr 2025 14:18:37 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:6ebc:6ce:770e:95f9])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf43cce3sm15530917f8f.74.2025.04.15.14.18.36
+ d=1e100.net; s=20230601; t=1744753836; x=1745358636;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WU3YbvHvf+y56SNxSE04WvFfbetAsntn/y8Tu0zpxDU=;
+ b=L4jPfc4LlsfWr/nMXPihLqgJFw8XcAeJ/CHYLM7sCsXx6dOzVpX34CF+5bF7nWFPBm
+ fqJInMHvHJPk0OuFIskI10ils3UEc+2SfowNkQuyyH5Dymmi4t+DS2hLXwtMquaERQH6
+ ZMt4CyZkXT7vl1ZWFQObvBC8NOdi0LuSGFVXMlHoyP2tDGSYs7vkgMtkZrjZzdKfTFpS
+ eQb5YX1190/4E+U6crhFb/jA+wxw1sCjS1G71p8/l8bm5TpafISu/wBLpX+2JhGAq84Z
+ klJeIVt9irw2NoT4pAA86SvK46hI57e2MQa89xVzK73TAojpWsEUyesqMqYaPsAC1LDo
+ wrTw==
+X-Gm-Message-State: AOJu0YyX2l7dE2U5hk7scATCOhpDbZHowvHcsbtHtvqLCMz41fYEMAfm
+ b1toPwCoRbThXLUFfjdg6gkLW0pbqfYD4KEgb1fcpHpxDr0N8XW6+A1+kbC+PYPb44EEFJoSD0G
+ 6
+X-Gm-Gg: ASbGncvmAJny1cxg48qEiSkVtbZ8jf1ENMHf6IS2jCHxejk69Vn4Kio5eIoNelod+Bx
+ G4C5XpfPD6tWLSZFXI4yAykvwQVaPgSVc7TImEmwTmkKqY2jjBmfIpRzoi5Piv3EkKsXNLbwteq
+ Bqko6liFa3QHJjugYJRQh19rnSg43mYLDa/dUGuvWVcGJ+6erYkYTWrlN04IF7baOpi05nZmiMd
+ QqkiQU5xatqoueipxeHW90geIjqSp9limdPYEKfnDE5FOjuP7b2NZSHmUX7MNhqdg8gu1nl37Nt
+ k1omVzAdkMx4k9ottxz0FDIlSn51+1ZyeKQAfZxpNZf1XQ3BvwNNPWxXvdjKvk7xlv/6nifpUEH
+ W83pF
+X-Google-Smtp-Source: AGHT+IGQCJDmy0I3jga33y4b4R89PcbkIG0OjpHkhISR27UZwtN9/Z/ouRfR8xSHMNwHwonpJxlccg==
+X-Received: by 2002:a05:6808:21a1:b0:3f8:498c:9ef7 with SMTP id
+ 5614622812f47-400acb5d1bcmr724566b6e.24.1744753836646; 
+ Tue, 15 Apr 2025 14:50:36 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-604a5c4bdb4sm79504eaf.27.2025.04.15.14.50.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 14:18:37 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 11/11] CI: add sandbox64_lwip
-Date: Tue, 15 Apr 2025 23:17:46 +0200
-Message-ID: <20250415211819.1254435-12-jerome.forissier@linaro.org>
+ Tue, 15 Apr 2025 14:50:36 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Harrison Mutai <harrison.mutai@arm.com>,
+ Manish Pandey <Manish.Pandey2@arm.com>, nd <nd@arm.com>
+Subject: [u-boot-test-hooks][PATCH] Add support for FVP emulator and fiptool
+Date: Tue, 15 Apr 2025 15:50:34 -0600
+Message-ID: <20250415215034.1679664-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250415211819.1254435-1-jerome.forissier@linaro.org>
-References: <20250415211819.1254435-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,53 +93,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add sandbox64_lwip_defconfig to the list of tested boards.
+This adds support for the vexpress_fvp platforms. In order to do that we
+need to add support for calling fiptool to update an existing "fip" file
+with our U-Boot build. We also need to support launching the FVP
+emulator itself. This is a little tricky in that we need to use "telnet"
+to reach the created serial ports and cannot just use an existing
+file descriptor for our needs. Finally, we add in conf files for
+vexpress_fvp to make use of this, and a symlink for the
+vexpress_fvp_bloblist platform.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
+Cc: Harrison Mutai <harrison.mutai@arm.com>
+Cc: Manish Pandey <Manish.Pandey2@arm.com>
+Cc: nd <nd@arm.com>
+---
+ bin/console.fvp                             | 28 ++++++++++++++++++++
+ bin/flash.fiptool                           | 22 ++++++++++++++++
+ bin/travis-ci/conf.vexpress_fvp_bloblist_na |  1 +
+ bin/travis-ci/conf.vexpress_fvp_na          | 29 +++++++++++++++++++++
+ 4 files changed, 80 insertions(+)
+ create mode 100644 bin/console.fvp
+ create mode 100644 bin/flash.fiptool
+ create mode 120000 bin/travis-ci/conf.vexpress_fvp_bloblist_na
+ create mode 100644 bin/travis-ci/conf.vexpress_fvp_na
 
-(no changes since v1)
-
- .azure-pipelines.yml |  2 ++
- .gitlab-ci.yml       | 11 +++++++++++
- 2 files changed, 13 insertions(+)
-
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index cb787d32f14..01ab0c11f98 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -350,6 +350,8 @@ stages:
-         sandbox64_clang:
-           TEST_PY_BD: "sandbox64"
-           OVERRIDE: "-O clang-18"
-+        sandbox64_lwip:
-+          TEST_PY_BD: "sandbox64_lwip"
-         sandbox_spl:
-           TEST_PY_BD: "sandbox_spl"
-           TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 5f3418e482f..145bdad83bf 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -290,6 +290,17 @@ sandbox64 with clang test.py:
-     OVERRIDE: "-O clang-18"
-   <<: *buildman_and_testpy_dfn
- 
-+sandbox64_lwip test.py:
-+  parallel:
-+    matrix:
-+      - HOST: "fast arm64"
-+      - HOST: "fast amd64"
-+  tags:
-+    - ${HOST}
-+  variables:
-+    TEST_PY_BD: "sandbox64_lwip"
-+  <<: *buildman_and_testpy_dfn
+diff --git a/bin/console.fvp b/bin/console.fvp
+new file mode 100644
+index 000000000000..eacae7d107d3
+--- /dev/null
++++ b/bin/console.fvp
+@@ -0,0 +1,28 @@
++# Copyright (c) 2025 Konsulko Group. All rights reserved.
++#
++# Permission is hereby granted, free of charge, to any person obtaining a
++# copy of this software and associated documentation files (the "Software"),
++# to deal in the Software without restriction, including without limitation
++# the rights to use, copy, modify, merge, publish, distribute, sublicense,
++# and/or sell copies of the Software, and to permit persons to whom the
++# Software is furnished to do so, subject to the following conditions:
++#
++# The above copyright notice and this permission notice shall be included in
++# all copies or substantial portions of the Software.
++#
++# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++# DEALINGS IN THE SOFTWARE.
 +
- sandbox_spl test.py:
-   variables:
-     TEST_PY_BD: "sandbox_spl"
++# We must be passed the arguments to pass to FVP
++ARGS="${fvp_args}"
++
++"${fvp_binary}" ${ARGS} &
++
++# We need to wait for FVP to have spawned itself before launching telnet
++sleep 1
++exec telnet localhost 5000
+diff --git a/bin/flash.fiptool b/bin/flash.fiptool
+new file mode 100644
+index 000000000000..23014f2bbe82
+--- /dev/null
++++ b/bin/flash.fiptool
+@@ -0,0 +1,22 @@
++# Copyright (c) 2025 Konsulko Group. All rights reserved.
++#
++# Permission is hereby granted, free of charge, to any person obtaining a
++# copy of this software and associated documentation files (the "Software"),
++# to deal in the Software without restriction, including without limitation
++# the rights to use, copy, modify, merge, publish, distribute, sublicense,
++# and/or sell copies of the Software, and to permit persons to whom the
++# Software is furnished to do so, subject to the following conditions:
++#
++# The above copyright notice and this permission notice shall be included in
++# all copies or substantial portions of the Software.
++#
++# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++# DEALINGS IN THE SOFTWARE.
++
++# Call fiptool to update an existing fip.bin file
++fiptool update --nt-fw="${U_BOOT_BUILD_DIR}/u-boot.bin" ${fip}
+diff --git a/bin/travis-ci/conf.vexpress_fvp_bloblist_na b/bin/travis-ci/conf.vexpress_fvp_bloblist_na
+new file mode 120000
+index 000000000000..ef6f0a4ee827
+--- /dev/null
++++ b/bin/travis-ci/conf.vexpress_fvp_bloblist_na
+@@ -0,0 +1 @@
++conf.vexpress_fvp_na
+\ No newline at end of file
+diff --git a/bin/travis-ci/conf.vexpress_fvp_na b/bin/travis-ci/conf.vexpress_fvp_na
+new file mode 100644
+index 000000000000..0f99cc9aead9
+--- /dev/null
++++ b/bin/travis-ci/conf.vexpress_fvp_na
+@@ -0,0 +1,29 @@
++# Copyright (c) 2025 Konsulko Group. All rights reserved.
++#
++# Permission is hereby granted, free of charge, to any person obtaining a
++# copy of this software and associated documentation files (the "Software"),
++# to deal in the Software without restriction, including without limitation
++# the rights to use, copy, modify, merge, publish, distribute, sublicense,
++# and/or sell copies of the Software, and to permit persons to whom the
++# Software is furnished to do so, subject to the following conditions:
++#
++# The above copyright notice and this permission notice shall be included in
++# all copies or substantial portions of the Software.
++#
++# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++# DEALINGS IN THE SOFTWARE.
++
++if [ -z "${fip}" -o -z "${bl1}" ]; then
++	echo "The environment must point 'fip' and 'bl1' at existing fip and bl1 files"
++	exit 1
++fi
++console_impl=fvp
++fvp_binary="FVP_Base_RevC-2xAEMvA"
++fvp_args="-C bp.flashloader0.fname=${fip} -C bp.secureflashloader.fname=${bl1} -C bp.vis.disable_visualisation=1"
++reset_impl=none
++flash_impl=fiptool
 -- 
 2.43.0
 
