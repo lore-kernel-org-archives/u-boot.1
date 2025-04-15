@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75404C369B8
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:19:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57B6BC369B8
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:19:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD9FC82B97;
-	Tue, 15 Apr 2025 23:18:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BFA782BAB;
+	Tue, 15 Apr 2025 23:18:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fgha74XX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rvsEM+Ll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 248AA82B97; Tue, 15 Apr 2025 23:18:35 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 8686E82B97; Tue, 15 Apr 2025 23:18:35 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BABF808AF
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 23:18:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7801682B45
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 23:18:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-39c1efbefc6so3665698f8f.1
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 14:18:33 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3912d2c89ecso5769613f8f.2
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 14:18:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1744751912; x=1745356712; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BMFSo5rTzMOkXMbVrWRVb8mV2yauGRyvMKAne1KLBYI=;
- b=Fgha74XXfNg8T/6uzm7I7yohzqGtMTGmsinCM7d1bRro1ySiyVAoFaGJNDIlL/eFi6
- +TcDEEH86hXsveXaYJMUfHPWYF322K3HRxF809VLaI0voDlgVL4Fh7jaicIwcN/Fnt2A
- n456LJsu2l53w+GUYXb1OST2o7dLVGWRxDqblZ5Oc61f//G78RnpFSTj3TcOCuRJDuLg
- PDpAH0NGXJyFpr8zJzXQnQyLP0Nsmsu2FH+azgoH50saDnRPY3B6AHKOardhgCUtfITt
- b0g6vVd1r1rSrrbpj0ssP1W+a7zstAticgcBzuPusSSCJm10Aev84foZMi2zBKEMK7TW
- 2hrQ==
+ bh=tgM4cLiCJ9uzG8h9WiqEBy5itKu7ia2cOKYoWvK8MPE=;
+ b=rvsEM+LlFrvH009YfF4BA8J1bcSL4QERq7yAckJo0zXjhBhaBpDu7sEPQgJvDt9LkB
+ IqikjP4OlKWgeywi3F/V+iZBzgv9Q5MiDEOMpzY91ZcTFww21MKrmZ/csSu6/s8G0iJO
+ H/lhuYXhZ3heGXqS+HM4MmoCtNvbvqjP+nS3l0CRswao+eNQW+0ErZADP/kFdqnRBWg+
+ qhRvRGC6ukCjwWLMvj/bTBbYHLRRqM5DmtWa0trEaIvNZ6XHFd9Z/aaaPnvp92BzdUVs
+ c7SrYfitcwvJ17SN+LUhzmixB2VFWHP8S4WFDJjaudp94pZRu5drVPxFO1ByonWhwWhR
+ KoTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1744751912; x=1745356712;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BMFSo5rTzMOkXMbVrWRVb8mV2yauGRyvMKAne1KLBYI=;
- b=i/n7rBWNE4TrymCP6Lo1szHgy0aj2yOu3i7HLlPiGkUG05irT4yaSzkWjzu50vR4CG
- 9JL9FYOCtPdo4nn2OP6hQGHFIFtIhGFFWc0g0LQZoDlbBnHE3+y5+VYfdAN9MX7LN0zm
- KY4YpxX62DLVkBA3Oo0kbq1FxAp9kPy0knOin11u9wQFrsqCpy5altwiZVuhwoMymtA+
- Csz49pwUmPfdFRGMfYCi2cPyJbNzCIPooAR4d9zv51LJHhoOCBOsG5r5xZoXXKUFQJqs
- OsIcT/zHre5C7cYc5II8CQQf1uME7Zn9+mnTNr4aAgF0qTT1JifDqeG57Q3GCLUzrpwW
- b6rg==
-X-Gm-Message-State: AOJu0YwED5ulIZp8aYPrUPe/IXFNCcI1JXQzc8jvCKNZXjjwE9sPPuvl
- koMcNk5K6bvhX9tz4TlTttdkyNzgSCIuCfzlyUB8OUbo/x4xVwJtFoJKCkRcd3T23r2guMqngxq
- bU34=
-X-Gm-Gg: ASbGnculFttrEaNT+9YVrcpdRTlgOVUcH4gymIFmWgk638tyImyB2Et7r3ee5//xoew
- p3KENjzQ080aK0UqC2ru4teOQAh0OEzgXKeXGnlD/c9wn+jlLnQtikiehcOXbghi9yCZMBCAGCr
- jWy6bRWclA/vh7pwyN5p5daOKpj0kt4hPw5CTfcBvW5O8Jaith0A2JpiOSY2QoDkKVXxJpxPpVq
- gNLnOIlCVMTJSjWF7g6hr1TNCABRiSnIo7nl71k3/MMGKFBZQDrPhWrJyHDNO4U+3zHO1UgQJFX
- aj+YZ11GWzAp+lVv/ImfT/8l8t2OmTpWlxBmzGpelTfv05rX
-X-Google-Smtp-Source: AGHT+IFyKkreboc4quJMTgmp4lbtSGnJv5tbFtUBVBXVlYYoKdxjS52FUja5aVwG5v359wVioGdHzw==
-X-Received: by 2002:a5d:598e:0:b0:39c:12ce:1054 with SMTP id
- ffacd0b85a97d-39ee2737d2amr783938f8f.8.1744751912448; 
- Tue, 15 Apr 2025 14:18:32 -0700 (PDT)
+ bh=tgM4cLiCJ9uzG8h9WiqEBy5itKu7ia2cOKYoWvK8MPE=;
+ b=jcr7QswXKwnQ1N9S6DWKNTB4VQTMo6bYURd65ATAgdcuHVmFlR9SYwywxlbMNKkn1I
+ oX6w90BwMC2p0Qxt07lb9gtFOqgmU9VPhGQ73r4+osFpVmsN91B6CjoPX3GZy4pf4HqM
+ HHuq504GK+y6hTBWUksDQheXo8sN9Dt1l3foNsk/h5SnzCZ1yGouyxQ2lPyJ4ZoHjqoY
+ GXJ7W1hZ/LodjFnPeTyFNCp9On5XK9dlIQtQjptHQCeEteMwW409pVUpTRXNsivNb9q1
+ JLOyXPKpTboOu1k1wovcMOecHfTW99pEdOyhvbZ/RlFbt4hAmotYIIXgQc2Wkyl0bha2
+ g9iQ==
+X-Gm-Message-State: AOJu0YyXghasXDSOPduNzLhjsLK1ZJEKXuynVQToDYECdiYbrZrcZX0e
+ 71c+fgsEXtDdYu2K14QwxpEH2DagdPNwSdrn3smQ0lnV05rjcSGjITdYWqEH50bFAGjE2ZJqbag
+ Mt0M=
+X-Gm-Gg: ASbGnctVJWKaVVd8ILRi3YzblbVH9oo1HS6JGUut8OQkAYgvH8Z4Jjv5FJBbWYX7R2W
+ 0o7iH4VxHiTIWhwe4DGlaZMgf/+WbUwrqE640QyGW/FeVZabvk+OBuFUQFhxpclIz/rJouw/Txx
+ iHgS8vK/Xq2eXuGgC1hJtdlVUB9NRG0KS3eqSc863NNoA8bb4WkdVoLllfc4Sxt2INsV9WKaczt
+ nL4UMJtlPkNoU7vnAtV9Ksq/HnVqxUZDYM0tdCOXJnqO7lGYIusg3Ze7Ywb8VEAozsWLN2UOfRK
+ NK2BDU65R1F1vUO0936kkynMWxVNwmVVoH7eS7uuJUx7f0YM/XgwlEhCli0=
+X-Google-Smtp-Source: AGHT+IEZ02ru1NAJEr808TkCoip1oMzp33P29fYTuuWQ0yyl0NmiBcqmU685sG91ATOV6Dtn3T0wyA==
+X-Received: by 2002:a05:6000:4a1a:b0:39c:1257:cd41 with SMTP id
+ ffacd0b85a97d-39ee2777206mr619344f8f.59.1744751911799; 
+ Tue, 15 Apr 2025 14:18:31 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6ebc:6ce:770e:95f9])
  by smtp.gmail.com with ESMTPSA id
  ffacd0b85a97d-39eaf43cce3sm15530917f8f.74.2025.04.15.14.18.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 14:18:32 -0700 (PDT)
+ Tue, 15 Apr 2025 14:18:31 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
@@ -77,10 +77,9 @@ Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 04/11] net: lwip: use timer_early_get_count() when
- CONFIG_SANDBOX_TIMER=y
-Date: Tue, 15 Apr 2025 23:17:39 +0200
-Message-ID: <20250415211819.1254435-5-jerome.forissier@linaro.org>
+Subject: [PATCH v2 03/11] net: lwip: add restart support to ping
+Date: Tue, 15 Apr 2025 23:17:38 +0200
+Message-ID: <20250415211819.1254435-4-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250415211819.1254435-1-jerome.forissier@linaro.org>
 References: <20250415211819.1254435-1-jerome.forissier@linaro.org>
@@ -102,8 +101,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the sandbox timer is available, use it. This allows skipping
-time in the tests (sandbox_eth_skip_timeout()).
+Use net_start_again() in do_ping() to determine if a failed ping should
+be restarted on a different interface.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -111,33 +110,32 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- net/lwip/net-lwip.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ net/lwip/ping.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index d566f9f8e6b..f05c4cd3f64 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -14,6 +14,7 @@
- #include <lwip/init.h>
- #include <lwip/prot/etharp.h>
- #include <net.h>
-+#include <timer.h>
+diff --git a/net/lwip/ping.c b/net/lwip/ping.c
+index 542ef2cb148..d8042ceecf9 100644
+--- a/net/lwip/ping.c
++++ b/net/lwip/ping.c
+@@ -168,11 +168,13 @@ int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	if (!ipaddr_aton(argv[1], &addr))
+ 		return CMD_RET_USAGE;
  
- /* xx:xx:xx:xx:xx:xx\0 */
- #define MAC_ADDR_STRLEN 18
-@@ -339,7 +340,11 @@ int net_loop(enum proto_t protocol)
+-	if (net_lwip_eth_start() < 0)
+-		return CMD_RET_FAILURE;
+-
+-	if (ping_loop(eth_get_dev(), &addr) < 0)
+-		return CMD_RET_FAILURE;
++restart:
++	if (net_lwip_eth_start() < 0 || ping_loop(eth_get_dev(), &addr) < 0) {
++		if (net_start_again() == 0)
++			goto restart;
++		else
++			return CMD_RET_FAILURE;
++	}
  
- u32_t sys_now(void)
- {
-+#if CONFIG_IS_ENABLED(SANDBOX_TIMER)
-+	return timer_early_get_count();
-+#else
- 	return get_timer(0);
-+#endif
+ 	return CMD_RET_SUCCESS;
  }
- 
- int net_start_again(void)
 -- 
 2.43.0
 
