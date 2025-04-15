@@ -4,66 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1EBBC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 07:42:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C919C369BA
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 08:19:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F4018294C;
-	Tue, 15 Apr 2025 09:42:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foxmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1552881F7E;
+	Tue, 15 Apr 2025 10:19:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=foxmail.com header.i=@foxmail.com header.b="Xv8ANUwO";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="r7nU6f2P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4262F829A1; Tue, 15 Apr 2025 09:42:06 +0200 (CEST)
-Received: from xmbghk7.mail.qq.com (xmbghk7.mail.qq.com [43.163.128.48])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 35B3882047; Tue, 15 Apr 2025 10:19:14 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AC9281F0D
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 09:42:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1580E81F6B
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 10:19:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foxmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiehui.he@foxmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1744702613;
- bh=TgAqpShaLdOb9Ih5lAplhGW7a0qPc7EwDcl+kkh+RlE=;
- h=From:To:Cc:Subject:Date;
- b=Xv8ANUwOFqfnhyzTSxeDtlVMtHEaQWltt+5SaRNRkc0hPHaiyQmJngZySbzjkKR0U
- L7aX8GTjZlIzJvcg+Bq+Wwee574qG1cumLdUY8+uGpKPc/oq6Da+ifFayEMHP3+FJW
- r4wkLa/l4LlFXyinnlfYCrY6QTFJ4EcxzJQCtEdg=
-Received: from localhost.localdomain ([119.131.137.145])
- by newxmesmtplogicsvrszb20-0.qq.com (NewEsmtp) with SMTP
- id 9338C669; Tue, 15 Apr 2025 15:36:51 +0800
-X-QQ-mid: xmsmtpt1744702611t02kjf8ej
-Message-ID: <tencent_93CD49DECE6851B4BCA7C46427864CB0340A@qq.com>
-X-QQ-XMAILINFO: NT7uTz3cNku2j4L6QhztrmPPzgQT2yLvJd42KOLnUG90waYjkKfCG3vIh0ek6j
- +fm4kabIZ4mjJK9aYtWEGD8cy+YvaSKnB1avMHU65WSyVF4GGoIM8kpeJl3e/U9GwrR4+nkwgk2f
- O1ovOx/FisvdpDw8lRqKhBm806UBeN4c063VkcZnL8gATP8372qZI6z0zwZUhpbbpQe4r/hois16
- rcE5ZxnqTxqHCga3NN5g2eMmBP6sB665MpeS+qdsjOOaxvWZKv2cwpKYHrroCLnv/irdggh+oR8d
- WF0yx3Qb3USOXJeNBHECOeEgBMHOGm0t6KfvqyXlFziRhJEkgCzJg9FBPzTNieyO/KLGmQRSeDdw
- YpuMpdFhTv4Nq/kIKVNWXRi4W8LRhHWiPdfQJ3tT1Vi0/8T6d0jZNtU9MoKV995zQD/FgUwvsoQm
- Je7B9PQ9CMIXzcGcvqfbhgrHbmbbKTEZHrMwMmBswBTk9LMFc/p+N6rhuQgktmHVcvuVMFb4u0TS
- XDsxAg7sVZkF2hNHbs0KaPoFE7NzvXJclxv7VB3/MPNRRQa77Mu02cDmiTvBrgCIG9zaFaQus7MZ
- Opus5DIc+027rNMmygF/vWEsrhVunW90B6n0eVvsnFvrRjqA/iD7rWJ3tp4oM/K5qTa6r4YRjgFi
- i6JIrqVK7f+ioEy2dg32Xtqd7dU3HTULXqvr22aLB6CHROLJz1fmuRnXBzS0aBn94FeAhjj/yPYz
- UiSeaaZre1QHtZQgbvKMORhRVGBOVYFSMazyeC7EFw7/Tnk501MGIstRoa9UduDu2lz9Dm+StYUB
- nHgR8uaKLmkg7oCjqlQyCctAl2m+xUIZwUZQvBwBLnqSNictwSNgfypV18nFv8UUq20jJuBnZGl+
- pQaNQLb5p4noZoxaWHoB4USeZL4iNSs5pcuPPPkRknqztTTgQIkiHDcY44JI4g1oF+yjGqGN9CfM
- JjFsnZZJaSTuT5+fDZKKFchPIW5i7lX3khF6r9o5l6W9zdCN80Ep/WxCUmfbYi8Rv7bf0x3cVZzw
- 05K75DTOgNSo+cLmDgRzIsNGWC7IkaHGrQSLUS9AiRwEG4REFlvy4EdayDP8h86UPCUmIkQVjt2O
- /j9g4dZJE26strMQc=
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
-From: Jiehui He <jiehui.he@foxmail.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, kever.yang@rock-chips.com, trini@konsulko.com,
- chenjh@rock-chips.com, jonas@kwiboo.se, Jiehui He <jiehui.he@foxmail.com>
-Subject: [PATCH v2] board: rockchip: Add LCKFB TaishanPi RK3566 Board
-Date: Tue, 15 Apr 2025 03:36:50 -0400
-X-OQ-MSGID: <20250415073650.18407-1-jiehui.he@foxmail.com>
-X-Mailer: git-send-email 2.39.5
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1744705142; x=1745309942; i=xypron.glpk@gmx.de;
+ bh=Uak7Vtl42wV9BWVj1f1ZvdvIY157KOMUpG0DaJk6VgM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=r7nU6f2PqIayxNX4u8hsyRn+2PjSeNGVkD7E6bItnDEFD92iiU9FI3k0GIONbayK
+ cKFGzci8JKZzeKLrXhaY0r8/gYCXKzfuh9NDG67Z67obid5Qiy92wKBws2/WHUolX
+ rEFOA4nU9D2/A674Dfg0D7MVoW59SqGmrjwO1PorBlTxaHSPG7vm9lTbd/20kPJSq
+ BnaccTd4R0Btnow+/Fri9/BjNmXuzXfg1VGbfC0l9H7PRZNOwrE/wSuZ4gRs7SIWE
+ jrg97nCFrcIWHU3jdTWS/eEGrQyJnX/vHH2oXyZM6kn+mZREe+PHy34vSKXXa6o6p
+ ENT58yWB7GfNxboR4g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MV67y-1tceUC1CPm-00UL35; Tue, 15
+ Apr 2025 10:19:02 +0200
+Message-ID: <b9395b36-16d8-4089-b0fb-85982d9c0564@gmx.de>
+Date: Tue, 15 Apr 2025 10:18:54 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/16] efi_net: efi_loader: Add efi_netobj_alloc to
+ allocate an efi_net_obj
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
+ =trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
+ u-boot@lists.denx.de
+References: <20250311164758.421900-1-adriano.cordova@canonical.com>
+ <20250311164758.421900-6-adriano.cordova@canonical.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250311164758.421900-6-adriano.cordova@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:SBoenpHUL+0HNZZoFByCCXKB+iRNHQjkMPV1SjXHqOZKqSgkQjt
+ 8LMjy9LhqKPjsag0eZ3xGbWBPtlFy70C2ANqzyjd8KsmDwzYbw0TruXJUHy8ZgwWSuhtgiX
+ xZa8Wi6g7FYC7W88Oy2KSBDOU5FVDJEjLCI73LimpTmNSR8RJiYDYRcBUapFhAVuLIt+5Yy
+ S+VUkjqL2Zw0g2B1yGQ1w==
+UI-OutboundReport: notjunk:1;M01:P0:yubY8nsABM0=;glB6sGv4Zb0emIRcAC8OUC18Sdv
+ E8dPR1sLyIMzfY5x6wSYZ1wP7Sz4vCpx7NO1Sr5uz+kB/bdsnTWnkldNeHa+TtMKLRxgo35Gd
+ YDpaGjkTPVFhvh2MDvM3YnNry4TISzN+awFif6GHsU3Aeh/zQUHywuqkQ6FAEuLnmGfD1Mcph
+ /X7nmYi0wSC3zVRhyAjpX6HJI6XU/a8PVYpPk8h9R68oHioAH6svA0Dd5EAK6DXOqUaM3raXM
+ kzIDQR2/J2nUDrBeqnHzE5R33oDjH2//9b12dMTCyeW3COJ6FG/4IZIcH2x/RuhbxeehHFDUo
+ cdjRMmGDRFe+C6E7TS2ZJpDKuxlCLpAx3Uygx52SyG9u5IY857jXadaYadCWO+/OL8pxtqTrN
+ etf0Nw/0Vmh4u3HqbEoF7cCFUpBj0G/ToFoxEgthyEWeUdcNs5QwEH7LVy4jXksKjrCnmXhzV
+ 1SrzPU3sswCZI6aiQV2kpEhvPU3No0dwBFAdCPmZjkq2M/A5eb2jS6mnBOOZL75IO07RrQCB3
+ md0l+yto+EsZ7hE6k9xv60WILfFk4QPKAD6bptpjXr1r6hH3pIwfiqZfznQdxZ8P1+/kyYOH2
+ ejjCPP/3SjGXfeoeR3Q0J3oveKoUMn2RLkqaIvD+LdpKvjIQZyp0Cf8++U07O96bH/2kKjwA6
+ CVsr+RQxBBsxwxw1lkcysFZuUY7JgzuiYYcFvmS9exgm9kzuZbI/sU5iiZtzrCxgQSNFcfJSS
+ Etz3QyOd7bWYzIWuUTHfGtl5CpGjU6DIvGsBma/LGGxYNnUi0aCHO16zdLTj2mBrj7Oimpbqp
+ m5VYJ6ndM/GzR3f0zYUsGvaTpmJ7tgY9QDtAPDnUiAtiLX+5slWfCpIIEIps+x7xl8f0SKaD5
+ ZOWdbDq9Y5u/BCngGd+QFP4SeC5wE9Vset2EORF9Mr/CfB6o6LXdfyo6TuStexFmBjD8/3iFT
+ IWRDCA0dLyVSUodAhJdPl1wBFORrTCN7cVYUpjBsplpoj7bqk0M5Sk8yLO/rq0s4HqSG7iIFK
+ M+Lf9ffAmaHxDqoyUOCjvz+H2mjMlC81DYX75D75Md/gt9oXLAlonsHQwK9myJQPQJUbxVR9r
+ 4B4SLJyKpcVnaGOs9p7zE4iqLYq9h0IW6hopU7eXQjPq/OxJio3+JX/j3RhwPPmKLQhF+38hS
+ xDk6nI2qSi4VsM1PALFEZetvQ2PuDsHtzmVbNRRBSgg0L1hmb2YRY8jv8M+GPa5zcCFfRbMgK
+ KPoTybMXHkfwy58TmJLUcE5KNVH/RCtrrGIMPXhU+k8tgTQFA/UM4GNUWn8BNz32gI1GlxWVo
+ SBXWtYd1PpWvKVwKmUa55OTU5QrV4ec7LOCdWvNHYK2TE/XGsHjAOmlO0hwi5Xpnm/3zAC0Ee
+ XgGJCT5CWR9edLyeoo5LqV5BQ9dw7x6EDUbTcW9UvVqMj++mIHrx9m41NRtAH8Ou7e27Tbhto
+ Nr+XBJSnqvXDQTuKzgxhbqx55gPI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,167 +103,235 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LCKFB TaishanPi is a single-board computer based on the RK3566 SoC.
+On 11.03.25 17:47, Adriano Cordova wrote:
+> Rework the logic to allocate an efi_net_obj and its members. An
+> efi_net_obj now gets allocated only in efi_netobj_alloc.
+>
+> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> ---
+>   lib/efi_loader/efi_net.c | 131 ++++++++++++++++++++++++---------------
+>   1 file changed, 80 insertions(+), 51 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> index a40d319a27f..a14ecf3d182 100644
+> --- a/lib/efi_loader/efi_net.c
+> +++ b/lib/efi_loader/efi_net.c
+> @@ -1152,19 +1152,10 @@ static int efi_netobj_init(struct efi_net_obj *n=
+etobj)
+>   	size_t *receive_lengths =3D NULL;
+>   	int i, j;
+>
+> -	if (!netobj || efi_netobj_is_active(netobj))
+> +	if (!netobj || !netobj->net || efi_netobj_is_active(netobj))
+>   		return 0;
+>
+>   	dev =3D netobj->dev;
+> -	if (!dev) {
+> -		/* No network device active, don't expose any */
+> -		return 0;
+> -	}
+> -
+> -	if (!netobj->net)
+> -		netobj->net =3D calloc(1, sizeof(*netobj->net));
+> -	if (!netobj->net)
+> -		goto out_of_resources;
+>
+>   	if (!netobj->net_mode)
+>   		netobj->net_mode =3D calloc(1, sizeof(*netobj->net_mode));
+> @@ -1344,6 +1335,84 @@ efi_status_t efi_net_init(void)
+>   	return EFI_SUCCESS;
+>   }
+>
+> +/**
+> + * efi_netobj_alloc() - allocate an efi_net_obj from either a simple
+> + *			network protocol interface or a net udevice
+> + *
+> + * @handle:	EFI handle
+> + * @net:	pointer to simple network protocol
+> + * @dev:	pointer to net udevice
+> + * Return:	pointer to EFI net object, NULL on error
+> + */
+> +struct efi_net_obj *efi_netobj_alloc(efi_handle_t handle,
+> +					struct efi_simple_network *net,
+> +					struct udevice *dev)
+> +{
+> +	int i;
+> +	struct efi_net_obj *netobj;
+> +
+> +	// Find a slot for this efi_net_obj
+> +
+> +	// Try to recycle
+> +	for (i =3D 0; i < MAX_EFI_NET_OBJS; i++) {
 
-Specification:
-- 1/2 Gib RAM
-- Optinal EMMC
-- SD-Card
-- HDMI / MIPI CSI / MIPI DSI
-- USB 2.0 Host (Type-A)
-- USB 2.0 Host / OTG (Type-C)
-- No Ethernet
+We should avoid artificial limitations like MAX_EFI_NET_OBJS.
 
-This patch adds U-Boot support for the LCKFB TaishanPi RK3566 board, including:
-- U-Boot device tree
-- Default defconfig
-- Board documentation
-- MAINTAINERS entry
+Objects that exist once per handle should be linked to the handle by
+installing a protocol interface.
 
-Changes in v2:
-- Removed unused configs from `lckfb-tspi-rk3566_defconfig`
-- Reordered TaishanPi entry in `doc/board/rockchip/rockchip.rst` alphabetically
+> +		if (net_objs[i] && !net_objs[i]->net && !net_objs[i]->dev && !net_obj=
+s[i]->handle)
+> +			break;
+> +	}
+> +	if (i =3D=3D MAX_EFI_NET_OBJS) {
+> +		for (i =3D 0; i < MAX_EFI_NET_OBJS; i++) {
+> +			if (!net_objs[i])
+> +				break;
+> +		}
+> +	}
+> +	if (i =3D=3D MAX_EFI_NET_OBJS)
+> +		return NULL;
+> +
+> +	if (!net_objs[i]) {
+> +		netobj =3D calloc(1, sizeof(*netobj));
+> +		net_objs[i] =3D netobj;
+> +	} else {
+> +		netobj =3D net_objs[i];
+> +	}
+> +	if (!netobj)
+> +		return NULL;
+> +
+> +	if (netobj->net) {
+> +		if (netobj->net->mode)
+> +			free(netobj->net->mode);
+> +		free(netobj->net);
+> +	}
+> +
+> +	if (handle) {
+> +		netobj->handle =3D handle;
+> +	}
+> +	else {
+> +		netobj->handle =3D calloc(1, sizeof(*netobj->handle));
 
-Link to v1:
-https://lore.kernel.org/u-boot/tencent_95ED0C0545D87B6A8C4B62EC045D53AD2406@qq.com/
+All handles in U-Boot have to be in a linked list, see
+LIST_HEAD(efi_obj_list) in lib/efi_loader/efi_boottime.c.
 
-Signed-off-by: Jiehui He <jiehui.he@foxmail.com>
----
- arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi | 11 +++
- board/rockchip/evb_rk3568/MAINTAINERS      |  6 ++
- configs/lckfb-tspi-rk3566_defconfig        | 78 ++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst            |  1 +
- 4 files changed, 96 insertions(+)
- create mode 100644 arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
- create mode 100644 configs/lckfb-tspi-rk3566_defconfig
+The only way to create an EFI handle is by installing a protocol
+interface calling InstallMultipleProtocolInterfaces(*handle) or
+InstallProtocolInterface(*handle) with handle =3D NULL.
 
-diff --git a/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi b/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
-new file mode 100644
-index 00000000000..0c8e7018f13
---- /dev/null
-+++ b/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk356x-u-boot.dtsi"
-+
-+&rgb_led_r {
-+	default-state = "off";
-+};
-+
-+&rgb_led_b {
-+	default-state = "off";
-+};
-diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-index b2780401a39..6cf568ad150 100644
---- a/board/rockchip/evb_rk3568/MAINTAINERS
-+++ b/board/rockchip/evb_rk3568/MAINTAINERS
-@@ -89,3 +89,9 @@ M:	Maxim Moskalets <maximmosk4@gmail.com>
- S:	Maintained
- F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
- F:	configs/rock-3c-rk3566_defconfig
-+
-+LCKFB-TaishanPi
-+M:	Jiehui He <jiehui.he@foxmail.com>
-+S:	Maintained
-+F:	configs/lckfb-tspi-rk3566_defconfig
-+F:	arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
-diff --git a/configs/lckfb-tspi-rk3566_defconfig b/configs/lckfb-tspi-rk3566_defconfig
-new file mode 100644
-index 00000000000..bc54be5ca53
---- /dev/null
-+++ b/configs/lckfb-tspi-rk3566_defconfig
-@@ -0,0 +1,78 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-lckfb-tspi"
-+CONFIG_ROCKCHIP_RK3568=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFE660000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-lckfb-tspi.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_FAN53555=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_GENERIC=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 1407080f1f4..abffbf36f40 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -101,6 +101,7 @@ List of mainline supported Rockchip boards:
-      - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
-      - FriendlyElec NanoPi R3S (nanopi-r3s-rk3566)
-      - Hardkernel ODROID-M1S (odroid-m1s-rk3566)
-+     - LCKFB TaishanPi (lckfb-tspi-rk3566)
-      - Pine64 PineTab2 (pinetab2-rk3566)
-      - Pine64 Quartz64-A Board (quartz64-a-rk3566)
-      - Pine64 Quartz64-B Board (quartz64-b-rk3566)
--- 
-2.39.5
+
+> +		if (!netobj->handle) {
+> +			free(netobj);
+> +			return NULL;
+> +		}
+> +	}
+> +
+> +	if (net) {
+> +		netobj->net =3D net;
+> +		netobj->net_mode =3D net->mode;
+> +	} else {
+> +		netobj->net =3D calloc(1, sizeof(*netobj->net));
+> +		if (!netobj->net) {
+> +			free(netobj->handle);
+
+EFI handles can only be deleted by uninstalling all protocol interfaces.
+
+> +			free(netobj);
+> +			return NULL;
+> +		}
+> +	}
+> +
+> +	netobj->dev =3D dev;
+> +	netobj->efi_seq_num =3D i;
+> +
+> +	printf("\nefi_net: allocated EFI net device %d\n", netobj->efi_seq_num=
+);
+
+This printf could be useful for debugging but it is disrupting the
+output of network devices and nothing that an end user would be
+interested in.
+
+efi_net: allocated EFI net device 0
+eth0: eth@10002000
+efi_net: allocated EFI net device 1
+, eth5: eth@10003000
+efi_net: allocated EFI net device 2
+, eth3: sbe5
+efi_net: allocated EFI net device 3
+, eth6: eth@10004000
+efi_net: allocated EFI net device 4
+, eth8: phy-test-eth
+efi_net: allocated EFI net device 5
+, eth4: dsa-test-eth
+efi_net: allocated EFI net device 6
+, eth2: lan0
+efi_net: allocated EFI net device 7
+, eth7: lan1
+
+How about:
+
+log_debug("efinet %d\n", netobj->efi_seq_num);
+
+Best regards
+
+Heinrich
+
+> +
+> +	return netobj;
+> +}
+> +
+>   /**
+>    * efi_net_register() - register a net device
+>    *
+> @@ -1356,9 +1425,7 @@ efi_status_t efi_net_init(void)
+>   int efi_net_register(void *ctx, struct event *event)
+>   {
+>   	struct udevice *dev;
+> -	int seq_num;
+>   	enum uclass_id id;
+> -	struct efi_net_obj *netobj;
+>   	int i;
+>
+>   	dev =3D event->data.dm.dev;
+> @@ -1378,48 +1445,10 @@ int efi_net_register(void *ctx, struct event *ev=
+ent)
+>   		}
+>   	}
+>
+> -	// Find a slot for this efi_net_obj
+> -	seq_num =3D -1;
+> -	// Try to recycle
+> -	for (i =3D 0; i < MAX_EFI_NET_OBJS; i++) {
+> -		if (net_objs[i] && !net_objs[i]->dev) {
+> -			seq_num =3D i;
+> -			break;
+> -		}
+> -	}
+> -	if (seq_num < 0) {
+> -		for (i =3D 0; i < MAX_EFI_NET_OBJS; i++) {
+> -			if (!net_objs[i]) {
+> -				seq_num =3D i;
+> -				break;
+> -			}
+> -		}
+> -	}
+> -	if (seq_num < 0)
+> +	if (!efi_netobj_alloc(NULL, NULL, dev))
+>   		return -1;
+>
+> -	if (!net_objs[seq_num]) {
+> -		netobj =3D calloc(1, sizeof(*netobj));
+> -		net_objs[seq_num] =3D netobj;
+> -	} else {
+> -		netobj =3D net_objs[seq_num];
+> -	}
+> -	if (!netobj)
+> -		goto out_of_resources;
+> -
+> -	netobj->handle =3D calloc(1, sizeof(*netobj->handle));
+> -	if (!netobj->handle) {
+> -		free(netobj);
+> -		goto out_of_resources;
+> -	}
+> -
+> -	netobj->dev =3D dev;
+> -	netobj->efi_seq_num =3D seq_num;
+> -	printf("efi_net registered device number %d\n", netobj->efi_seq_num);
+>   	return 0;
+> -out_of_resources:
+> -	printf("ERROR: Out of memory\n");
+> -	return -1;
+>   }
+>
+>   /**
 
