@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53134C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EAE6C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:51:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAFDE82AF6;
-	Tue, 15 Apr 2025 14:50:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 308EB82AFB;
+	Tue, 15 Apr 2025 14:50:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lUkcFGZt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NLOXFHyi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9529E8209C; Tue, 15 Apr 2025 10:30:24 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 349F98056A; Tue, 15 Apr 2025 10:30:28 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9911E8056A
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 10:30:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3962A82047
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 10:30:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=brunosampaioleite@gmail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-3104ddb8051so31907671fa.1
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 01:30:22 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-30bfc8faef9so49423241fa.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 01:30:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744705822; x=1745310622; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yA8U4jcHBU1qLoRd/hi4ojBgCldiyI08upRnsxT8iN0=;
- b=lUkcFGZtjkGu/fRQH9lVzXieHfx/bCHCksS0s4GW6zTJ3OZBd+RVmaSyX4I6Y8DMjg
- sck+PvT01tNCPLgi3OPr/r0u3kdFDRE4SNirSnG4uZQLOKf8VSBnGIu/daE7nIY2MDu/
- RBuYasyY+z8AlroOz/O2I55uJxgqPKRTbQUW2NTT3lt+p/cGxrW5zzfLN051TrQLtr1d
- 4wEiXkQF6WBS6CmBY7UTZx5oAZ+cc0/Fr23QVw9XJxSHF7VwixTGgB4rjgz9B7Y0yHJ7
- cGO+4XbqHJqwJl12a5IdFqg5KL+/2nVkbzWhmAji/Kd8X+iDTkxlFZuFl3+Pu9Loo28I
- jjOw==
+ d=gmail.com; s=20230601; t=1744705825; x=1745310625; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G/bK1K44Dr1qFbZickUlvWkto/6r+BtRySFxyVDIYKY=;
+ b=NLOXFHyi7dXqHhrg8fkx5lISJ9rd6xXpixrCEDfKShdvqjvn2vMkVHivrB/UmT5q/m
+ Rcn0ad8zpPX+B1FfTwwkq4froYJpiBB3hfDhWs7VhphrtvcoOdo1odSLFDY+94ycwMrH
+ SByxwk76lvnn/WPl/K20jk3AacL4eitsWe6coH11QAw1Ff7ub3lukIMOHwph9KvyBBCO
+ rDC59cJIVrN7JGycd5bVjEbPQL20S8ElhQFxzpA/Oay5mRcuWOz9kPtXDepqVY3OTeRD
+ xVYZBQmbfdH+ddX0djm3HK4NeFgarV9FrclE37evniLeATkMGoB6vWwtfQHQzGnZi9XM
+ 1yZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744705822; x=1745310622;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yA8U4jcHBU1qLoRd/hi4ojBgCldiyI08upRnsxT8iN0=;
- b=p1ufip2fQ41VzOb1oiQqG1qcIFz4Bu+uv1A2DpfDBqrY+3+yF6kb/qYINfEw5UCnv0
- /cec2nAI8n2GLblIWk9dDKwK8beNC1/hwVn7poqu9MhoMDvVeaZv9OUvJR9WEpu+MMW/
- SXunhIdOWOjKZuCVVqqfzNaLCo+mB+J3it6/4j8B/maVCryqQGxfGagn8tSJS7Hi1jMO
- jBBL4uws/WpONFgqidXqXQ/nYpTNqmRhO30hDUVcw4vQbSk8frSK9jMYtKfgOxVZTbb9
- C1B+/Sk+B1ejmv1vx8N64IEC1xbpmNe8/dMfzRfGhPu8xn2cZ/TYrAo0MChkiVC4l/Tm
- cVMg==
-X-Gm-Message-State: AOJu0YxsfJDuKLQkwcEQEU5dJfmNNWHDZIkTauvf+7O9xdh+YFV14cMd
- IPHb0DDClpzr3d07zWIoisNn2xECe5R7E6S2ZnNxyMVFL6xroz4H/kgxtBYp
-X-Gm-Gg: ASbGncsxgxMzHQHN3trLrBwgz8oa3QqSYY/mbh3lLbwMVqSnx9hOKwAPcBS70oTVKBX
- Y9jotxLzo8739PnrpKqU5YDKoaubktwzTx50cXUTLnulmykxacEDCFq//FkSY6A7nHdiCk0qCTD
- yOlTL9PbrnemddTYDwDI13HAqdN+GRBaZQN86+JwpmzZw3HTP0O0okwLv2Pnt+eyGHoVebCO+cV
- GBFIugz8J1gLJbdVt3kJ9Gyi26YACEgX3PMLpAJamdmekA6ZsaTZZwhNr0m6WvCxS5h8nGwYMN5
- Tiay1M5MRai2JIEQfZiyor5n4obKbhbou6KfGD/4rjDBpN03KDh+8t3mdKyrxAsZeCU2CINdwg=
- =
-X-Google-Smtp-Source: AGHT+IF1E5Iqij9wcx9h/iWPP4PEQGjGirLDWB4HMug7+VeW2gM5p2ioAG1u0po1YgUhHBm0erFNFA==
-X-Received: by 2002:a2e:a5c9:0:b0:30d:e104:cd57 with SMTP id
- 38308e7fff4ca-31049aba5b9mr46742341fa.40.1744705821325; 
- Tue, 15 Apr 2025 01:30:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744705825; x=1745310625;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=G/bK1K44Dr1qFbZickUlvWkto/6r+BtRySFxyVDIYKY=;
+ b=aJrgDOltnMKa4/yUhPGvvzqv8fUsRjhtiQXqF20Ymo2bHr0kbVeb5jFe/TzFShZYoD
+ bmirjua4chjbqAuDu0hPub/QpZdCyKrlFKWI/+yp82mTlCakauWD+2ouH+uTR3LgV9/T
+ p2etUHhRr/1cdNUumKjbHK5ePRPZ1fj4kTq3Tr7PFfE2F1HctVcGt+5Eg0eGdDxB/CNY
+ fzT82UD+QbEtpyLp3b1DL5m2kvMNPjVtsUMnaldTfwrA3UicBAXnx5/aNwK8mi3ZbF1p
+ zd+QdEDjuLtdboBfffvanhpOnx7DFBWHxiQYy3nIx9kGV9apFJZZw6g2w46mIHxJ9qpK
+ vs4A==
+X-Gm-Message-State: AOJu0YwFtor9kanZ4bPXgxW0Caq1SXAjjr1eoMtteqd6a/rCRGtBSoCz
+ 2nTZsmUy7rN+RuLT0b0YkYdB4Nap8ZheIEJjBpYYy86I0HBvDOCEorH+8zHIOu0Q2A==
+X-Gm-Gg: ASbGncuvhE42LjbCtWsarbjkyrOyVA/mrkKOUPBAgzW/qnUKh7MwX9QNl5kSLSTzn2x
+ NVqmx7hNTBoFrwXVi4qN6/9oQbYDvg5w3q4qaRjK1FSsBvwHor7Qrqso4bleSYBBbp89rvTNKGN
+ cQxKrjEuhwK1IGGp5Si31mh/uHdkNoNlXvJGgUhNC5jjedj0tGwWLzKuau775LircGiFhFkXlmg
+ vvKDSS9iaFj9jLuUnbu7i3HGC98ZSaO1UWogeOvncthddQXzEPMwtiiR4+HzAFh27h9pihboSgQ
+ bf41IZ0AmlDUKSrxJRPRtfUlOJ1TRA5TMFL2vAPYxty+pgqFrriC8oOsemfm5DvdxQNjoM2NG7/
+ ZxkxfMxEZ
+X-Google-Smtp-Source: AGHT+IHMd8cQWJx/NJpA+NT/8JfqwmGZg8ekGgpeyeFGMd3DfCJ5kuQYxSAip7G9Y3zA2jvJMPH6xw==
+X-Received: by 2002:a2e:b8c4:0:b0:309:1fee:378d with SMTP id
+ 38308e7fff4ca-31049a1cf35mr46597761fa.19.1744705825108; 
+ Tue, 15 Apr 2025 01:30:25 -0700 (PDT)
 Received: from brule-Precision-3590.prevas.se ([81.216.59.226])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30f464cc0a2sm19679971fa.31.2025.04.15.01.30.20
+ 38308e7fff4ca-30f464cc0a2sm19679971fa.31.2025.04.15.01.30.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 01:30:20 -0700 (PDT)
+ Tue, 15 Apr 2025 01:30:24 -0700 (PDT)
 From: Bruno Leite <brunosampaioleite@gmail.com>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, Matthias Brugger <mbrugger@suse.com>,
@@ -79,10 +80,12 @@ Cc: pbrobinson@gmail.com, Matthias Brugger <mbrugger@suse.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/1] Fix RPI5 uart clock when loading kernel with non-boot DT
-Date: Tue, 15 Apr 2025 10:30:13 +0200
-Message-ID: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
+Subject: [PATCH 1/1] rpi: copy over uart clock-frequency in DT
+Date: Tue, 15 Apr 2025 10:30:14 +0200
+Message-ID: <20250415083017.3523317-2-brunosampaioleite@gmail.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
+References: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 15 Apr 2025 14:50:26 +0200
@@ -104,22 +107,31 @@ X-Virus-Status: Clean
 
 From: Bruno Leite <brule@prevas.dk>
 
+rpi5 firmware sets uart_clk clock-frequency in
+the firmware and patches it to the DT, copy it
+over when loading a new DT.
 
-When loading the kernel with a DT that was not used to boot
-the rpi (e.g. when using a FIT image), the uart-clk property
-that should have been patched by the firmware will be passed
-as is to the driver and thus cause the divisor to be set
-incorrectly, hence the uart will not work properly. Fix that
-by copying the correct uart-clk set by the firmware to the new
-DT loaded to be passed to the kernel.
+Signed-off-by: Bruno Leite <brule@prevas.dk>
 
-
-Bruno Leite (1):
-  rpi: copy over uart clock-frequency in DT
+---
 
  board/raspberrypi/rpi/rpi.c | 3 +++
  1 file changed, 3 insertions(+)
 
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index 70d3c35499b..5c84c324c71 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -602,6 +602,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+ 
+ 	/* Bluetooth device address as provided by the firmware */
+ 	copy_property(fdt, fw_fdt, "/soc/serial@7e201000/bluetooth", "local-bd-address");
++
++	/* copy uart clk as provided by the firmware */
++	copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
+ }
+ 
+ int ft_board_setup(void *blob, struct bd_info *bd)
 -- 
 2.45.2
 
