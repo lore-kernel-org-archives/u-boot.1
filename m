@@ -4,111 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90067C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B76FAC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:50:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5D1A8214D;
-	Tue, 15 Apr 2025 14:50:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 236FF82A33;
+	Tue, 15 Apr 2025 14:50:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kaod.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JrxFp8jo";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90C908294C; Tue, 15 Apr 2025 14:50:12 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 5806B82145; Tue, 15 Apr 2025 09:12:29 +0200 (CEST)
+Received: from mail.ozlabs.org (mail.ozlabs.org [IPv6:2404:9400:2221:ea00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58F1D8214B
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 14:50:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B1468209C
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 09:12:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1744721373; x=1745326173; i=xypron.glpk@gmx.de;
- bh=QmUW4D1/z5dwBeEtMT7lfQ6cTGv7Sz3eSxJ4OwQPJuk=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=JrxFp8joHgpVn8fDZ7gTwlWgIsBvVO1+r0K1Z1iJyDXSj5dZP/d/6k7VxhzhPEyG
- LIpXChJYFVcvrO5ZF590ZLS1rHirc/l+TJ4eFqOfxrv5WMUjgxQwRu7ghFrwC6ezW
- Uhwrpw9eGeeeT0owLcL3QQflBsmL+lFBVM/ZjjTCRlPVEpxAqfeXIbmQTCQZ5P3k1
- rVG6aVlVERH9xra/MJB9co8V47SzmKZ0z8X/9YrdeShuBKcorfZ97iCo9KMiOQo7U
- xuZPgDrIhJwbYn+yEKIyxS2o6bRkVdRoGVstqECQz8N8XufN/AhQeyNGQCm9x9oZ+
- 0WDfM1XjEVOjDr7RIw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MNbp3-1tg7cs299P-00RS75; Tue, 15
- Apr 2025 14:49:33 +0200
-Message-ID: <12569b73-03e2-4365-bd98-55b341f7a1d8@gmx.de>
-Date: Tue, 15 Apr 2025 14:49:32 +0200
+ dmarc=none (p=none dis=none) header.from=kaod.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=I9GX=XB=kaod.org=clg@ozlabs.org
+Received: from mail.ozlabs.org (mail.ozlabs.org [IPv6:2404:9400:2221:ea00::3])
+ by gandalf.ozlabs.org (Postfix) with ESMTP id 4ZcFj168Vpz4xM1;
+ Tue, 15 Apr 2025 17:12:21 +1000 (AEST)
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4ZcFhz0cS2z4wbf;
+ Tue, 15 Apr 2025 17:12:18 +1000 (AEST)
+Message-ID: <576a8d4b-9b01-4ba2-a6b5-51c9b3811a1c@kaod.org>
+Date: Tue, 15 Apr 2025 09:12:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/16] efi_driver: efi_net: Add efi_net_unbind_drv method
- to efi_net driver
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- =trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
- u-boot@lists.denx.de
-References: <20250311164758.421900-1-adriano.cordova@canonical.com>
- <20250311164758.421900-11-adriano.cordova@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250311164758.421900-11-adriano.cordova@canonical.com>
+Subject: Re: Gitlab runner timeout on evb-ast2600 ?
+To: Tom Rini <trini@konsulko.com>
+Cc: Joel Stanley <joel@jms.id.au>, Eugen Hristev <eugen.hristev@linaro.org>,
+ open list <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>
+References: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
+ <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
+ <20250410231444.GK5495@bill-the-cat>
+ <89f2eac8-4e76-42a6-b56e-fc62abdaffe9@kaod.org>
+ <20250411150120.GQ5495@bill-the-cat>
+ <ef7019b2-1a81-46b2-8612-ead1139b742e@kaod.org>
+ <20250411164248.GS5495@bill-the-cat>
+Content-Language: en-US, fr
+From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
+Autocrypt: addr=clg@kaod.org; keydata=
+ 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
+In-Reply-To: <20250411164248.GS5495@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:sNmjdlO7tOtsd5go0COrkA26MaY5CJ+5/umS4gqwkaCxFSrT3x5
- w4uJmR3QWki637NAzt3VWqwQ8KNMptUaNjKFc5CUwURPbmXA+WdJt+zzvwBuY+RJ5v/A8sw
- RcsCtPGBsiOTEP1/6wLbiyGCSU+YrS0nAAIAgpnOFcZHZJkrIs3UdX6galmfxubh2pksX/G
- mYxT4JDGrO2DYLK9yAUBQ==
-UI-OutboundReport: notjunk:1;M01:P0:BagNgVoxhrM=;/R8554zXD64NPlTFGwcZwS2dnpw
- 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
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 15 Apr 2025 14:50:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,93 +111,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11.03.25 17:47, Adriano Cordova wrote:
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> ---
->   lib/efi_driver/efi_net_device.c | 44 +++++++++++++++++++++++++++++++++
->   1 file changed, 44 insertions(+)
->=20
-> diff --git a/lib/efi_driver/efi_net_device.c b/lib/efi_driver/efi_net_de=
-vice.c
-> index 3838cc47158..bc4edde19b0 100644
-> --- a/lib/efi_driver/efi_net_device.c
-> +++ b/lib/efi_driver/efi_net_device.c
-> @@ -9,6 +9,7 @@
->   #include <malloc.h>
->   #include <net.h>
->   #include <dm/device-internal.h>
-> +#include <dm/lists.h>
->   #include <dm/root.h>
->   #include <dm/tag.h>
->   #include <dm/uclass-internal.h>
-> @@ -172,6 +173,48 @@ static efi_status_t efi_net_bind_drv(
->   	return EFI_SUCCESS;
->   }
->  =20
-> +/**
-> + * efi_net_unbind_drv() - TODO
+On 4/11/25 18:42, Tom Rini wrote:
+> On Fri, Apr 11, 2025 at 05:26:55PM +0200, Cédric Le Goater wrote:
+>> On 4/11/25 17:01, Tom Rini wrote:
+>>> On Fri, Apr 11, 2025 at 09:23:59AM +0200, Cédric Le Goater wrote:
+>>>> Hi,
+>>>>
+>>>> On 4/11/25 01:14, Tom Rini wrote:
+>>>>> On Fri, Apr 11, 2025 at 08:07:15AM +0930, Joel Stanley wrote:
+>>>>>> On Mon, 7 Apr 2025 at 23:25, Eugen Hristev <eugen.hristev@linaro.org> wrote:
+>>>>>>>
+>>>>>>> Hi everyone,
+>>>>>>>
+>>>>>>> I keep getting an error on running the CI loop on -next on my tree :
+>>>>>>>
+>>>>>>> https://source.denx.de/u-boot/custodians/u-boot-at91/-/jobs/1090517
+>>>>>>
+>>>>>> Thanks for the report.
+>>>>>>
+>>>>>>>
+>>>>>>> ! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - no other
+>>>>>>> tests will run !
+>>>>>>>
+>>>>>>> Any clue ? It's been like this for few days. It doesn't look like a
+>>>>>>> faulty patch.
+>>>>>>
+>>>>>> I can't see that link you sent me, it 403s.
+>>>>>>
+>>>>>> Do you have any other traces or information to share?
+>>>>>
+>>>>> It's been intermittent recently. I was able to put qemu + gdb together
+>>>>> and see it's one of the early initcalls that fails and hang()s but
+>>>>> didn't see why. You should be able to use commit 1f0281294d8b ("Merge
+>>>>> patch series "Annotate switch/case fallthrough cases"") as a starting
+>>>>> point of failure.
+>>>>>
+>>>>
+>>>> Do you have logs ?
+>>>>
+>>>> Things look ok from the QEMU side (latest 10.0.0-rc and 9.1) :
+>>>>       uboot_build=/path/to/u-boot/
+>>>>       flashsize=65536
+>>>>       flash=./flash-ast2600-evb-uboot
+>>>>       dd of=$flash bs=1K if=/dev/zero count=$flashsize
+>>>>       dd of=$flash conv=notrunc bs=1K if=$uboot_build/spl/u-boot-spl.bin
+>>>>       dd of=$flash conv=notrunc bs=1K if=$uboot_build/u-boot.img seek=64
+>>>>       $ qemu-system-arm -M ast2600-evb -net nic,netdev=net0 -netdev user,id=net0 -nographic -snapshot -serial mon:stdio   -drive file=flash-ast2600-evb-uboot,format=raw,if=mtd
+>>>>       qemu-system-arm: warning: nic ftgmac100.1 has no peer
+>>>>       qemu-system-arm: warning: nic ftgmac100.2 has no peer
+>>>>       qemu-system-arm: warning: nic ftgmac100.3 has no peer
+>>>>       U-Boot SPL 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +0200)
+>>>>       Trying to boot from RAM
+>>>>       ## Checking hash(es) for config conf-1 ... OK
+>>>>       ## Checking hash(es) for Image firmware-1 ... crc32+ OK
+>>>>       ## Checking hash(es) for Image fdt-1 ... crc32+ OK
+>>>>       U-Boot 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +0200)
+>>>
+>>> Please note that it's inconsistent about what commit fails. I would
+>>> expect 1f0281294d8b in U-Boot to fail but I don't know about
+>>> cb7555e93075.
+>>>
+>>> Also can you please check QEMU v8.2.0? That's what we're on, and I can
+>>> try and test 9.1.3 or 10.0.0-rc and see if it's a QEMU problem instead.
+>>> Thanks!
+>>
+>> Same result :
+>>
+>> qemu-system-arm -M ast2600-evb -net nic,netdev=net0 -netdev user,id=net0 -nographic -snapshot -serial mon:stdio   -drive file=flash-ast2600-evb-uboot,format=raw,if=mtd
+>> qemu-system-arm: warning: nic ftgmac100.1 has no peer
+>> qemu-system-arm: warning: nic ftgmac100.2 has no peer
+>> qemu-system-arm: warning: nic ftgmac100.3 has no peer
+>>
+>> U-Boot SPL 2025.04-00881-g1f0281294d8b (Apr 11 2025 - 17:23:25 +0200)
+>> Trying to boot from RAM
+>> ## Checking hash(es) for config conf-1 ... OK
+>> ## Checking hash(es) for Image firmware-1 ... crc32+ OK
+>> ## Checking hash(es) for Image fdt-1 ... crc32+ OK
+>>
+>>
+>> U-Boot 2025.04-00881-g1f0281294d8b (Apr 11 2025 - 17:23:25 +0200)
+>>
+>> Model: Aspeed BMC
+>> DRAM:  already initialized, 1008 MiB (capacity:1024 MiB, VGA:64 MiB), ECC off
+>> Core:  266 devices, 24 uclasses, devicetree: separate
+>> WDT:   Started watchdog@1e785000 with servicing every 1000ms (60s timeout)
+>> MMC:   sdhci@1e750100: 0
+>> Loading Environment from SPIFlash... SF: Detected mx25u51245g with page size 256 Bytes, erase size 64 KiB, total 64 MiB
+>> *** Warning - bad CRC, using default environment
+>>
+>> In:    serial@1e784000
+>> Out:   serial@1e784000
+>> Err:   serial@1e784000
+>> Net:   eth0: ftgmac@1e660000, eth1: ftgmac@1e680000, eth2: ftgmac@1e670000, eth3: ftgmac@1e690000
+>> Hit any key to stop autoboot:  0
+>> libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+>> Error loading kernel FIT image
+>> => QEMU 8.2.10 monitor - type 'help' for more information
+>> (qemu) q
+>>
+>>
+>> What about the compiler ?
+> 
+> It's:
+> https://www.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-gcc-13.2.0-nolibc-aarch64-linux.tar.xz
+> 
 
-TODO is not a valid description.
+1f0281294d8b fails to compile :
 
-> + *
-> + * @this:	driver binding protocol
-> + * @handle:	handle
-> + * Return:	status code
-> + */
-> +static efi_status_t efi_net_unbind_drv(
-> +			struct efi_driver_binding_extended_protocol *this,
-> +			efi_handle_t handle)
-> +{
-> +	EFI_PRINT("%s: handle %p\n", __func__, handle);
-> +
-> +	struct driver *drv;
-> +	struct udevice *dev;
-> +	int r;
-> +
-> +	if (!handle || !handle->dev)
-> +		return EFI_DEVICE_ERROR;
-> +
-> +	drv =3D lists_driver_lookup_name("efi_netdev");
-> +	if (!drv) {
-> +		log_err("Cannot find driver 'efi_netdev'\n");
-> +		return EFI_DEVICE_ERROR;
-> +	}
+   cc1: error: unknown value 'generic-armv7-a' for '-mtune'
 
-Why do we have to check the driver? How could this unbind function be=20
-invoked with the wrong driver?
+I use most of the time :
 
-Can we move unbind() up to the uclass?
+arm-none-eabi-gcc (Fedora 14.1.0-2.fc41) 14.1.0
 
-Best regards
+Thanks,
 
-Heinrich
-
-> +
-> +	if (drv =3D=3D handle->dev->driver) {
-> +		dev =3D handle->dev;
-> +		r =3D efi_unlink_dev(handle);
-> +		if (r)
-> +			return EFI_DEVICE_ERROR;
-> +		r =3D device_remove(dev, DM_REMOVE_NORMAL);
-> +		if (r)
-> +			return EFI_DEVICE_ERROR;
-> +		r =3D device_unbind(dev);
-> +		if (r)
-> +			return EFI_DEVICE_ERROR;
-> +	}
-> +
-> +	return EFI_SUCCESS;
-> +}
-> +
->   /**
->    * efi_net_init_drv() - initialize network device driver
->    *
-> @@ -236,6 +279,7 @@ static const struct efi_driver_ops driver_ops =3D {
->   	.protocol	=3D &efi_net_guid,
->   	.init		=3D efi_net_init_drv,
->   	.bind		=3D efi_net_bind_drv,
-> +	.unbind		=3D efi_net_unbind_drv,
->   };
->  =20
->   /* Identify as EFI driver */
+C.
 
