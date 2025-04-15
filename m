@@ -4,46 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27903C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 10:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5272AC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 10:48:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6747A82A33;
-	Tue, 15 Apr 2025 12:02:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CC9481F6B;
+	Tue, 15 Apr 2025 12:48:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A53DD82A60; Tue, 15 Apr 2025 12:02:12 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 7E9F580C93
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 12:02:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: RDPdy2HRSKiRQ/0NPFVtPQ==
-X-CSE-MsgGUID: yNAd28kkSUeNsdQAJT+xSQ==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 15 Apr 2025 19:02:06 +0900
-Received: from [10.226.92.203] (unknown [10.226.92.203])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 429CD41D7272;
- Tue, 15 Apr 2025 19:02:04 +0900 (JST)
-Message-ID: <b874c3e3-b0f0-4e6e-bb90-5fa9c6ed6d52@bp.renesas.com>
-Date: Tue, 15 Apr 2025 11:02:02 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="ShNT68sR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1A302829E4; Tue, 15 Apr 2025 12:48:01 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F781810F4
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 12:47:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from gaggiata.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 4D6F81F8F7;
+ Tue, 15 Apr 2025 12:47:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1744714077;
+ bh=mI6zlx+ghS81wX1zqcIpPqms1OCJWI56+L8etwaA5gI=;
+ h=Received:From:To:Subject;
+ b=ShNT68sRe54LvAzhAAMWXu2z61VPejpvuEVwaf4im/024s5P+uDpQHkaRN7N7WoFD
+ vh540AaAnfocBzWKE6ko3DkogpVaz5ouqrWy0ws6j9943PkDRuxDNK6j2BNFWv9UsQ
+ +tpYomLn2dvkKe+nuYaLfIkAp7xe0qIjvfxiLT5QSHhGIdaPwvZxQsa5tEXfHf0ie0
+ 7NpczN/NWrdRClTnflJg5c4bJ6LfhFMrfgRN0GkIDgJfegRcy05fTuicAsN8vvZH+I
+ s5z+8b5B5Wt19VHjMT45xWqhPJLbuq/VxcU7+lmQcMCaAm9FsJxQz3AdxkE2aH7CVc
+ 6xIAgH4WpW1MA==
+Received: by gaggiata.pivistrello.it (Postfix, from userid 1000)
+ id C27F57FA6A; Tue, 15 Apr 2025 12:47:56 +0200 (CEST)
+Date: Tue, 15 Apr 2025 12:47:56 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Francesco Dolcini <francesco@dolcini.it>,
+ Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Fabio Estevm <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Mario Six <mario.six@gdsys.cc>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
+ Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
+Message-ID: <Z_45XKwccE7r8UiT@gaggiata.pivistrello.it>
+References: <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
+ <20250414180727.5d5zyenfagdc5qw2@unable>
+ <20250414200635.GC5495@bill-the-cat>
+ <20250414210041.GA8754@francesco-nb>
+ <352905ca-4308-4928-9a39-5d9842f1ae9c@ti.com>
+ <20250415065115.GA10924@francesco-nb> <87wmblyh6j.fsf@bootlin.com>
+ <1d83aeee-7399-4467-8b4b-fdcde9f8e192@ti.com>
+ <87sem9wy6e.fsf@bootlin.com>
+ <2a006764-d335-490a-9bb4-1fdb5f851df4@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: ravb: Fix RX error handling
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250413131129.68990-1-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250413131129.68990-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------mJ4we0JP0LeOZ9yGFsPZJZvF"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2a006764-d335-490a-9bb4-1fdb5f851df4@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,177 +89,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------mJ4we0JP0LeOZ9yGFsPZJZvF
-Content-Type: multipart/mixed; boundary="------------yXca6sygz9Wld0dN8z0PebpJ";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Message-ID: <b874c3e3-b0f0-4e6e-bb90-5fa9c6ed6d52@bp.renesas.com>
-Subject: Re: [PATCH] net: ravb: Fix RX error handling
-References: <20250413131129.68990-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250413131129.68990-1-marek.vasut+renesas@mailbox.org>
+On Tue, Apr 15, 2025 at 03:29:09PM +0530, Neha Malcom Francis wrote:
+> On 15/04/25 15:20, Miquel Raynal wrote:
+> >>> Francesco, are you also testing on K3 platforms?
+> >>>
+> >>
+> >> Yes he would be, since the firmware print is K3 firmware.
+> >>
+> >>> Can one of you boot with the patch below applied? It should partially
+> >>> revert the commit to the ancient behaviour, while adding more debug
+> >>> traces (please enable the debug logs as well). This should clarify
+> >>> which one of the 3 different path is likely failing. It should also help
+> >>> identify who's the user that fails to enable/disable its own power
+> >>> domain. I will need to know what board/SoC was used for the test, so I
+> >>> can look the relevant driver up.
+> >>
+> >> Booted on j784s4_evm
+> >>
+> >> https://gist.github.com/nehamalcom/b09687a523bec89f9df3537fdd99b6f3
+> 
+> ^
+> >>
+> >> Currently debugging on my build where I hang in console_init itself, I
+> >> think the path for failure is different here, will confirm.
+> > 
+> > Thanks a lot for your feedback. Normally by applying the diff shared in
+> > my previous e-mail, you should have the console back. If not, maybe
+> > there is something else involved and the blamed commit is just the first
+> > showing an underlying problem.
+> 
+> I do have console back with that patch, see the gist link above. What I
+> meant was the path of failure seems to be different, it's looking like
+> with my version of firmware the serial driver probe
+> (ns16550_serial_probe) tries to do a readb() and fails, this could
+> possibly be because the device was not powered on to begin with. Whereas
+> in another case (what Francesco is seeing), this issue is not run into.
 
---------------yXca6sygz9Wld0dN8z0PebpJ
-Content-Type: multipart/mixed; boundary="------------FWdytzjxSzkSU9gO3QELWxv0"
+For the record, my logs and tests are on Verdin AM62 (that uses a TI AM625 SoC).
 
---------------FWdytzjxSzkSU9gO3QELWxv0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Francesco
 
-On 13/04/2025 14:11, Marek Vasut wrote:
-> Correctly handle RX errors in ravb_recv() by returning 0 instead
-> of -EAGAIN on RX error.
->=20
-> In case the RAVB driver detects an RX error in ravb_recv(), it must
-> not return the -EAGAIN, but instead must return 0. Both error codes
-> are handled in eth-uclass.c eth_rx() and -EAGAIN is rewritten to 0
-> at the end of eth_rx(), but negative return code from the .recv()
-> callback does not trigger .free_pkt() callback, which would clean
-> up and re-enqueue the descriptor which holds the currently received
-> corrupted packet. The .free_pkt() must be called for this descriptor,
-> otherwise the follow up received data become corrupted too, even if
-> those packets are correctly received. Returning 0 from the .recv()
-> callback assures the corrupted packet is not processed by the network
-> stack, but is skipped instead.
->=20
-> For TFTP loading, an RX error produces the timeout "T" output and
-> resumes the TFTP loading operation shortly afterward, without any
-> data corruption.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/net/ravb.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-> index 539fd37ee59..da3e9dbeacd 100644
-> --- a/drivers/net/ravb.c
-> +++ b/drivers/net/ravb.c
-> @@ -192,7 +192,7 @@ static int ravb_recv(struct udevice *dev, int flags=
-, uchar **packetp)
->  	/* Check for errors */
->  	if (desc->data.ctrl & RAVB_RX_DESC_MSC_RX_ERR_MASK) {
->  		desc->data.ctrl &=3D ~RAVB_RX_DESC_MSC_MASK;
-> -		return -EAGAIN;
-> +		return 0;
-
-Hi Marek,
-
-At this point in the function we haven't stored anything to *packetp.
-
-Looking at the relevant bit of eth_rx():
-
-        for (i =3D 0; i < ETH_PACKETS_BATCH_RECV; i++) {
-                ret =3D eth_get_ops(current)->recv(current, flags, &packe=
-t);
-                flags =3D 0;
-                if (ret > 0)
-                        net_process_received_packet(packet, ret);
-                if (ret >=3D 0 && eth_get_ops(current)->free_pkt)
-                        eth_get_ops(current)->free_pkt(current, packet, r=
-et);
-                if (ret <=3D 0)
-                        break;
-        }
-
-So if ->recv() returns zero without storing to *packetp, we will call
-->free_pkt() with a packet argument that is either uninitialized or
-points to the packet from the last iteration through the loop.
-
-Thanks,
-
---=20
-Paul Barker
---------------FWdytzjxSzkSU9gO3QELWxv0
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------FWdytzjxSzkSU9gO3QELWxv0--
-
---------------yXca6sygz9Wld0dN8z0PebpJ--
-
---------------mJ4we0JP0LeOZ9yGFsPZJZvF
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ/4umgUDAAAAAAAKCRDbaV4Vf/JGvXvi
-AQC7WEseCE/S9o1Vy5FzqrNEmDz5nycJ68P8DxqzPxFFjAD/civRtE64jL6lkm3g7MONB2do7uKw
-/2KjfUjRlGHRMQY=
-=Gvm9
------END PGP SIGNATURE-----
-
---------------mJ4we0JP0LeOZ9yGFsPZJZvF--
