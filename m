@@ -4,82 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A53EC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 07:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1EBBC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 07:42:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5CA28212A;
-	Tue, 15 Apr 2025 09:40:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F4018294C;
+	Tue, 15 Apr 2025 09:42:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foxmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CnLYGaYM";
+	dkim=pass (1024-bit key; unprotected) header.d=foxmail.com header.i=@foxmail.com header.b="Xv8ANUwO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAA368294C; Tue, 15 Apr 2025 09:40:43 +0200 (CEST)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4262F829A1; Tue, 15 Apr 2025 09:42:06 +0200 (CEST)
+Received: from xmbghk7.mail.qq.com (xmbghk7.mail.qq.com [43.163.128.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 666A081F0D
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 09:40:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AC9281F0D
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 09:42:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=foxmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e7040987879so4747576276.2
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 00:40:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744702840; x=1745307640; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jo7PpOPZWyEFsH7UZciirN31NNJRB/QiwvVZMHdlGNE=;
- b=CnLYGaYMUMQ/Zk2OcAPrc0v3k484cujnNSobGHXlHZ5kA+CTjHzSK/hQPgjnkiIytk
- e4DFlPvu6Uja/UWnGXZbqcjkmNV68cofYhglMYC0etYHqnCx7Mc1y+mQew3Pv7nuXA8v
- ZVpqXvnBRHS+iS2riagE6R5+JUAONsupqiIIo+1uJy192lLIkkTaB6vI7cCMIsVzlZYP
- zO6AHY7atAkwuD3gEdJgQE+1hRM8jZ5QECeCSTjX9q/i/FxoIcdLuC2ej5ocD/yWU1tC
- OGGzS2TCUyRDI8EDzgXApknAuf38xB1AW27zZu2t3UeoLTg9uB6WgHyiX0R0YgDq69dg
- zUSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744702840; x=1745307640;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jo7PpOPZWyEFsH7UZciirN31NNJRB/QiwvVZMHdlGNE=;
- b=JJwccwkXjumKHJtFMtbOZgWBVKi+KUAkQ7PI8eX1o4ACPw+R9SDZE1/Uwba1d+gFYF
- cdeZZFX57FilS6LOWd1v2XjDlFwjhaSh9dlQHjZvegGwsn3ipjl7fDCTkuEsLIHUhNij
- zNiWHCql4WzuFS5GVtef5pwkrHze2KRkNveIY5nlzEJ4F7svkaD/WjKf2HYk5P4vSANY
- au7D1s/eWgxeps3MroNzKnNzsV8KLBmUD1Kd9Xdqh+F2vvUY09ILlBFLkFEVczTBlrto
- qJ0v3tjtUvHMMuIeGiNHUvSMeFNHSFLLRxezmartFOlx/CUmQxUsBXmaiUo7dKAptNFI
- qMwA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUYxVvu+jJY/xH5+WmJYa+fFsLIqRcF8D7ftQWwo43Imcnr8Off9kNsG2KaC0wOecYWfY4KQms=@lists.denx.de
-X-Gm-Message-State: AOJu0YyXU65vhONYLAhc/TL9meJ3hAyxrW+ySEargj1JuKMU1MvDlLz8
- foDp1TWHaqNdSdDNk/PFX74FhpUkriX+pO846E3Cz6+f1Fc71tkJCKmGPWbNGNXC+vG5CE04FlV
- ZUll8oYHjPPlpN81EkvL8IzC/3N9LQpYGeJdEWg==
-X-Gm-Gg: ASbGncuZQG78XcFo5uzC/i8UVzNw4amgr3VuNUHC0qc1ypB7NjEoAxxoMB9KWQta7ss
- Eu8MvbSMZeAmygsoYZqKi1sPivnzoHOuw/c9+U65XwpXsoqGLCwujDWTmD0m3g3Jw1EjxH3hvF5
- y5OW+3Jkr+D94eGRXH0VtrMvI=
-X-Google-Smtp-Source: AGHT+IEMNxXQToCnyKh8+9U0C6uLRNq8e6ayPMDmGNYxxi30ARxZ+21Qvrf42+C07U/lqOvF+tnV5eq9OierEEwAbq0=
-X-Received: by 2002:a05:6902:4802:b0:e6e:5ef:a090 with SMTP id
- 3f1490d57ef6-e704df62aa9mr22951569276.34.1744702840193; Tue, 15 Apr 2025
- 00:40:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=jiehui.he@foxmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
+ s=s201512; t=1744702613;
+ bh=TgAqpShaLdOb9Ih5lAplhGW7a0qPc7EwDcl+kkh+RlE=;
+ h=From:To:Cc:Subject:Date;
+ b=Xv8ANUwOFqfnhyzTSxeDtlVMtHEaQWltt+5SaRNRkc0hPHaiyQmJngZySbzjkKR0U
+ L7aX8GTjZlIzJvcg+Bq+Wwee574qG1cumLdUY8+uGpKPc/oq6Da+ifFayEMHP3+FJW
+ r4wkLa/l4LlFXyinnlfYCrY6QTFJ4EcxzJQCtEdg=
+Received: from localhost.localdomain ([119.131.137.145])
+ by newxmesmtplogicsvrszb20-0.qq.com (NewEsmtp) with SMTP
+ id 9338C669; Tue, 15 Apr 2025 15:36:51 +0800
+X-QQ-mid: xmsmtpt1744702611t02kjf8ej
+Message-ID: <tencent_93CD49DECE6851B4BCA7C46427864CB0340A@qq.com>
+X-QQ-XMAILINFO: NT7uTz3cNku2j4L6QhztrmPPzgQT2yLvJd42KOLnUG90waYjkKfCG3vIh0ek6j
+ +fm4kabIZ4mjJK9aYtWEGD8cy+YvaSKnB1avMHU65WSyVF4GGoIM8kpeJl3e/U9GwrR4+nkwgk2f
+ O1ovOx/FisvdpDw8lRqKhBm806UBeN4c063VkcZnL8gATP8372qZI6z0zwZUhpbbpQe4r/hois16
+ rcE5ZxnqTxqHCga3NN5g2eMmBP6sB665MpeS+qdsjOOaxvWZKv2cwpKYHrroCLnv/irdggh+oR8d
+ WF0yx3Qb3USOXJeNBHECOeEgBMHOGm0t6KfvqyXlFziRhJEkgCzJg9FBPzTNieyO/KLGmQRSeDdw
+ YpuMpdFhTv4Nq/kIKVNWXRi4W8LRhHWiPdfQJ3tT1Vi0/8T6d0jZNtU9MoKV995zQD/FgUwvsoQm
+ Je7B9PQ9CMIXzcGcvqfbhgrHbmbbKTEZHrMwMmBswBTk9LMFc/p+N6rhuQgktmHVcvuVMFb4u0TS
+ XDsxAg7sVZkF2hNHbs0KaPoFE7NzvXJclxv7VB3/MPNRRQa77Mu02cDmiTvBrgCIG9zaFaQus7MZ
+ Opus5DIc+027rNMmygF/vWEsrhVunW90B6n0eVvsnFvrRjqA/iD7rWJ3tp4oM/K5qTa6r4YRjgFi
+ i6JIrqVK7f+ioEy2dg32Xtqd7dU3HTULXqvr22aLB6CHROLJz1fmuRnXBzS0aBn94FeAhjj/yPYz
+ UiSeaaZre1QHtZQgbvKMORhRVGBOVYFSMazyeC7EFw7/Tnk501MGIstRoa9UduDu2lz9Dm+StYUB
+ nHgR8uaKLmkg7oCjqlQyCctAl2m+xUIZwUZQvBwBLnqSNictwSNgfypV18nFv8UUq20jJuBnZGl+
+ pQaNQLb5p4noZoxaWHoB4USeZL4iNSs5pcuPPPkRknqztTTgQIkiHDcY44JI4g1oF+yjGqGN9CfM
+ JjFsnZZJaSTuT5+fDZKKFchPIW5i7lX3khF6r9o5l6W9zdCN80Ep/WxCUmfbYi8Rv7bf0x3cVZzw
+ 05K75DTOgNSo+cLmDgRzIsNGWC7IkaHGrQSLUS9AiRwEG4REFlvy4EdayDP8h86UPCUmIkQVjt2O
+ /j9g4dZJE26strMQc=
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+From: Jiehui He <jiehui.he@foxmail.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, kever.yang@rock-chips.com, trini@konsulko.com,
+ chenjh@rock-chips.com, jonas@kwiboo.se, Jiehui He <jiehui.he@foxmail.com>
+Subject: [PATCH v2] board: rockchip: Add LCKFB TaishanPi RK3566 Board
+Date: Tue, 15 Apr 2025 03:36:50 -0400
+X-OQ-MSGID: <20250415073650.18407-1-jiehui.he@foxmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250414135506.87892-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250414135506.87892-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 15 Apr 2025 10:40:03 +0300
-X-Gm-Features: ATxdqUFvOQdB-uTl4yYzz2PaLoO6VhBsQiBhj-PAfJsen96GJs8CWYd3QZkOycQ
-Message-ID: <CAC_iWjK+uRwWxgv0ZQjR-DYihvt-kPRPAEc8asneoXDBOv-6DQ@mail.gmail.com>
-Subject: Re: [PATCH] net: make initr_net() invocation command line agnostic
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Michal Simek <michal.simek@amd.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,44 +80,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Apr 2025 at 16:55, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> initr_net() initalizes the network devices by calling eth_initalize().
-> There is no good reason to disable this if no command line interface is
-> present.
->
-> Let initr_net() depend on CONFIG_NET || CONFIG_NET_LWIP.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  common/board_r.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 62228a723e1..0b1dbd4196d 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -482,7 +482,7 @@ static int initr_boot_led_on(void)
->         return 0;
->  }
->
-> -#if defined(CONFIG_CMD_NET)
-> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
->  static int initr_net(void)
->  {
->         puts("Net:   ");
-> @@ -747,7 +747,7 @@ static init_fnc_t init_sequence_r[] = {
->  #ifdef CONFIG_PCI_ENDPOINT
->         pci_ep_init,
->  #endif
-> -#if defined(CONFIG_CMD_NET)
-> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
->         INIT_FUNC_WATCHDOG_RESET
->         initr_net,
->  #endif
-> --
-> 2.48.1
->
+The LCKFB TaishanPi is a single-board computer based on the RK3566 SoC.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Specification:
+- 1/2 Gib RAM
+- Optinal EMMC
+- SD-Card
+- HDMI / MIPI CSI / MIPI DSI
+- USB 2.0 Host (Type-A)
+- USB 2.0 Host / OTG (Type-C)
+- No Ethernet
+
+This patch adds U-Boot support for the LCKFB TaishanPi RK3566 board, including:
+- U-Boot device tree
+- Default defconfig
+- Board documentation
+- MAINTAINERS entry
+
+Changes in v2:
+- Removed unused configs from `lckfb-tspi-rk3566_defconfig`
+- Reordered TaishanPi entry in `doc/board/rockchip/rockchip.rst` alphabetically
+
+Link to v1:
+https://lore.kernel.org/u-boot/tencent_95ED0C0545D87B6A8C4B62EC045D53AD2406@qq.com/
+
+Signed-off-by: Jiehui He <jiehui.he@foxmail.com>
+---
+ arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi | 11 +++
+ board/rockchip/evb_rk3568/MAINTAINERS      |  6 ++
+ configs/lckfb-tspi-rk3566_defconfig        | 78 ++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst            |  1 +
+ 4 files changed, 96 insertions(+)
+ create mode 100644 arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
+ create mode 100644 configs/lckfb-tspi-rk3566_defconfig
+
+diff --git a/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi b/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
+new file mode 100644
+index 00000000000..0c8e7018f13
+--- /dev/null
++++ b/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk356x-u-boot.dtsi"
++
++&rgb_led_r {
++	default-state = "off";
++};
++
++&rgb_led_b {
++	default-state = "off";
++};
+diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+index b2780401a39..6cf568ad150 100644
+--- a/board/rockchip/evb_rk3568/MAINTAINERS
++++ b/board/rockchip/evb_rk3568/MAINTAINERS
+@@ -89,3 +89,9 @@ M:	Maxim Moskalets <maximmosk4@gmail.com>
+ S:	Maintained
+ F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+ F:	configs/rock-3c-rk3566_defconfig
++
++LCKFB-TaishanPi
++M:	Jiehui He <jiehui.he@foxmail.com>
++S:	Maintained
++F:	configs/lckfb-tspi-rk3566_defconfig
++F:	arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
+diff --git a/configs/lckfb-tspi-rk3566_defconfig b/configs/lckfb-tspi-rk3566_defconfig
+new file mode 100644
+index 00000000000..bc54be5ca53
+--- /dev/null
++++ b/configs/lckfb-tspi-rk3566_defconfig
+@@ -0,0 +1,78 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-lckfb-tspi"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-lckfb-tspi.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_DM_PMIC_FAN53555=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_GENERIC=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 1407080f1f4..abffbf36f40 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -101,6 +101,7 @@ List of mainline supported Rockchip boards:
+      - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
+      - FriendlyElec NanoPi R3S (nanopi-r3s-rk3566)
+      - Hardkernel ODROID-M1S (odroid-m1s-rk3566)
++     - LCKFB TaishanPi (lckfb-tspi-rk3566)
+      - Pine64 PineTab2 (pinetab2-rk3566)
+      - Pine64 Quartz64-A Board (quartz64-a-rk3566)
+      - Pine64 Quartz64-B Board (quartz64-b-rk3566)
+-- 
+2.39.5
+
