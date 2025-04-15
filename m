@@ -4,65 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E9EC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 17:37:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5D8C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 17:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F040B82A27;
-	Tue, 15 Apr 2025 19:37:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1488C82102;
+	Tue, 15 Apr 2025 19:40:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HIiLQpnk";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="YMEjgJVT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A3AF82B27; Tue, 15 Apr 2025 19:37:09 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40E6982102
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 19:37:07 +0200 (CEST)
+ id B279982A27; Tue, 15 Apr 2025 19:40:10 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C57281E14
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 19:40:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53FHb4gC081591
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 15 Apr 2025 12:37:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744738624;
- bh=NcaulaH+yjvS3kKhQYyaWOKanmX4YTRhy1lUGx6EYK0=;
- h=From:To:CC:Subject:Date;
- b=HIiLQpnksU11ULKdqUZDqZbB1rXbba1wnCNY/9M8L21paNsKOgHiG6keuaqB44hrk
- MjzGuYyUXUPaHhNW7Sq8LqDS2GbvhXfC6B4NM9FeIP8yvoFApt+0+LnHC3rR9ri75k
- TS3VV+Glf6eKxcxNXKz986EHOT27Wj/63bBdqUYw=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53FHb3NG028076
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 15 Apr 2025 12:37:04 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
- Apr 2025 12:37:02 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 15 Apr 2025 12:37:02 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53FHax4J003858;
- Tue, 15 Apr 2025 12:37:00 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>, <m-shah@ti.com>,
- Bhavya Kapoor <b-kapoor@ti.com>, KEERTHY <j-keerthy@ti.com>
-Subject: [PATCH] arm: mach-k3: r5: j7200: Add clk dev data for WKUP UART
-Date: Tue, 15 Apr 2025 23:06:51 +0530
-Message-ID: <20250415173651.88646-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=f7e1=XC=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1744738807;
+ bh=nZSID/Jfffl6+n12FXwxYEOXE8HogSwqNt96tPrHpCg=;
+ b=YMEjgJVT6opRvIS5eBJmlmBxjFAc6inuUqkO7Ivn6O+5IEefXShwSk66nCECiGWDDpO9CLAOE
+ fHcTs0juVSTk2lD2Ao3ahtI7ZDqrCDytzS/HXCy3wsYMS56SAhYia5fZKkfQ90sX8e1/zsq3x3S
+ TcAR6T9gFeYj716b/6PDyHki7DCs0iKsydBQWhY9DSqA/AHZrPlmjECKHT9KgMZSvBGSh2Xj2i5
+ I1iVG4amafCJ64Egqk9cuBcvM/ao4oD/hJ0WPN8WsMy6WCkSsoTueCRAvrYIqlsZxNFMnYrMUxA
+ xeewJfuE4A6kg0TMkr4WGNyfDbMfNjzaT/2Rr7Ccg+kw==
+X-Forward-Email-ID: 67fe99f3999e81140c54a5b9
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.0.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <2e74c3ef-b54a-4648-9371-882648c2ad44@kwiboo.se>
+Date: Tue, 15 Apr 2025 19:39:59 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 02/16] rockchip: mkimage: Add rk3576 support
+To: Heiko Stuebner <heiko@sntech.de>
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
+ detlev.casanova@collabora.com, u-boot@lists.denx.de,
+ sebastian.reichel@collabora.com, Xuhui Lin <xuhui.lin@rock-chips.com>
+References: <20250414200111.1357867-1-heiko@sntech.de>
+ <20250414200111.1357867-3-heiko@sntech.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250414200111.1357867-3-heiko@sntech.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,71 +77,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Bhavya Kapoor <b-kapoor@ti.com>
+On 2025-04-14 22:00, Heiko Stuebner wrote:
+> From: Xuhui Lin <xuhui.lin@rock-chips.com>
+> 
+> Add support for rk3576 package header in mkimage tool.
+> 
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> ---
+>  tools/rkcommon.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+> index f158d156228..a0caa029cc0 100644
+> --- a/tools/rkcommon.c
+> +++ b/tools/rkcommon.c
+> @@ -136,6 +136,7 @@ static struct spl_info spl_infos[] = {
+>  	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
+>  	{ "rk3528", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+>  	{ "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+> +	{ "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
 
-Add clk and dev data for wakeup uart to enable wakeup
-UART as console.
+Works and matches size of SYS_SRAM (512kB) in datasheet.
 
-Reported-by: KEERTHY <j-keerthy@ti.com>
-Signed-off-by: Bhavya Kapoor <b-kapoor@ti.com>
----
- arch/arm/mach-k3/r5/j7200/clk-data.c | 16 ++++++++++++++++
- arch/arm/mach-k3/r5/j7200/dev-data.c |  1 +
- 2 files changed, 17 insertions(+)
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 
-diff --git a/arch/arm/mach-k3/r5/j7200/clk-data.c b/arch/arm/mach-k3/r5/j7200/clk-data.c
-index eb8436decbd..996ba2023fe 100644
---- a/arch/arm/mach-k3/r5/j7200/clk-data.c
-+++ b/arch/arm/mach-k3/r5/j7200/clk-data.c
-@@ -62,6 +62,16 @@ static const char * const wkup_i2c0_mcupll_bypass_clksel_out0_parents[] = {
- 	"gluelogic_hfosc0_clkout",
- };
- 
-+static const char * const wkupusart_clk_sel_out0_parents[] = {
-+	"hsdiv4_16fft_mcu_1_hsdivout3_clk",
-+	"postdiv2_16fft_main_1_hsdivout5_clk",
-+};
-+
-+static const char * const wkup_usart_mcupll_bypass_clksel_out0_parents[] = {
-+	"wkupusart_clk_sel_out0",
-+	"gluelogic_hfosc0_clkout",
-+};
-+
- static const char * const main_pll_hfosc_sel_out0_parents[] = {
- 	"gluelogic_hfosc0_clkout",
- 	"board_0_hfosc1_clk_out",
-@@ -345,6 +355,8 @@ static const struct clk_data clk_list[] = {
- 	CLK_MUX("mcuusart_clk_sel_out0", mcuusart_clk_sel_out0_parents, 2, 0x40f081c0, 0, 1, 0),
- 	CLK_MUX("wkup_gpio0_clksel_out0", wkup_gpio0_clksel_out0_parents, 4, 0x43008070, 0, 2, 0),
- 	CLK_MUX("wkup_i2c0_mcupll_bypass_clksel_out0", wkup_i2c0_mcupll_bypass_clksel_out0_parents, 2, 0x43008060, 0, 1, 0),
-+	CLK_MUX("wkupusart_clk_sel_out0", wkupusart_clk_sel_out0_parents, 2, 0x43008064, 0, 1, 0),
-+	CLK_MUX("wkup_usart_mcupll_bypass_clksel_out0", wkup_usart_mcupll_bypass_clksel_out0_parents, 2, 0x43008060, 0, 1, 0),
- 	CLK_MUX("main_pll_hfosc_sel_out0", main_pll_hfosc_sel_out0_parents, 2, 0x43008080, 0, 1, 0),
- 	CLK_MUX("main_pll_hfosc_sel_out12", main_pll_hfosc_sel_out12_parents, 2, 0x430080b0, 0, 1, 0),
- 	CLK_MUX("main_pll_hfosc_sel_out14", main_pll_hfosc_sel_out14_parents, 2, 0x430080b8, 0, 1, 0),
-@@ -543,6 +555,10 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 	DEV_CLK(203, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
- 	DEV_CLK(278, 2, "usart_programmable_clock_divider_out1"),
- 	DEV_CLK(278, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(287, 2, "wkup_usart_mcupll_bypass_clksel_out0"),
-+	DEV_CLK(287, 3, "wkupusart_clk_sel_out0"),
-+	DEV_CLK(287, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(287, 5, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
- 	DEV_CLK(288, 3, "postdiv2_16fft_main_1_hsdivout7_clk"),
- 	DEV_CLK(288, 4, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(288, 6, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-diff --git a/arch/arm/mach-k3/r5/j7200/dev-data.c b/arch/arm/mach-k3/r5/j7200/dev-data.c
-index 8ce6796fd04..12a1386f9d1 100644
---- a/arch/arm/mach-k3/r5/j7200/dev-data.c
-+++ b/arch/arm/mach-k3/r5/j7200/dev-data.c
-@@ -66,6 +66,7 @@ static struct ti_dev soc_dev_list[] = {
- 	PSC_DEV(149, &soc_lpsc_list[12]),
- 	PSC_DEV(113, &soc_lpsc_list[13]),
- 	PSC_DEV(197, &soc_lpsc_list[13]),
-+	PSC_DEV(287, &soc_lpsc_list[13]),
- 	PSC_DEV(103, &soc_lpsc_list[14]),
- 	PSC_DEV(104, &soc_lpsc_list[15]),
- 	PSC_DEV(102, &soc_lpsc_list[16]),
--- 
-2.34.1
+Regards,
+Jonas
+
+>  	{ "rk3588", "RK35", 0x100000 - 0x1000, false, RK_HEADER_V2 },
+>  };
+>  
 
