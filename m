@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16685C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 17:48:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73786C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 17:49:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FA2A81F30;
-	Tue, 15 Apr 2025 19:48:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0207F82B1C;
+	Tue, 15 Apr 2025 19:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dE2vIkaF";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CRPQMgAI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0793C81F7E; Tue, 15 Apr 2025 19:48:28 +0200 (CEST)
+ id 66DC982B07; Tue, 15 Apr 2025 19:49:54 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C484808AF
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 19:48:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF07A82B07
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 19:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,14 +28,14 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744739303;
- bh=pm0FMzU3mnKSXtnwN44cyKHNxcOQUkm+Hiz9LsxKJ8E=;
- b=dE2vIkaFsy1BUEMQcoW8LDFPnJmYulnQcohFTB/jgxrx+GKHrf5VVNve5RIEerw1JKmUzKskE
- iqQsLCfPOP/mX0ACm0tPHu542Bn1qi6sO3+5ilNC1cePJBhyf+s9ifHutZDk12n8+RydkPtmig5
- Ap2gPo/FAyVP+Ui7rFowhKXJ93AHIgXwfgirHgWa/OkoYq16GcYHmqVzgl4/4dvkn33zvZdFMb3
- sbw+Gr2rwxDN52+qPhEH9x0vDUJyamh8x6xMkS8EYdBx4XV9lyuHbq/rzlDMSqasyf7KVOIKOz2
- szINOzJ4oNY+JDamP2CiAv13nK6MMn5rxJHTv9G9WVHw==
-X-Forward-Email-ID: 67fe9be3999e81140c54a950
+ s=fe-e1b5cab7be; t=1744739390;
+ bh=1jgx29nh3iotEjBq1ZMYr7ySRkXCrk4wAj1wq1jdP9s=;
+ b=CRPQMgAIMDET++6RTpeizw/O/Ibk12xOSgAUXl75031XGEIgW4F3qRu9wi6SLv00vuayoiNBB
+ gEFSKXMjIlXM/9ZoeqC531bOgcBl38RXNA/XYJN7FUOYCN0w9K1AsBLKvpIguQb9s9E9GApnfB7
+ ImQarLIWyF+DF2ijh+i5kOlSQ3d8cHyAjZGXd85DNklVSeAWFddwm+9wR6NrGKf8B5UH7Ns5gHp
+ 5qaNbBLXZ+jX7QnvBkUq/jF7+ypd34dOFeOWzB94Pk7nS4FvqP5brm3zMckR7oGzVyr3aTnOY65
+ UfkeTb1nwp7z0iRbt3aeC63snxCnU9ovTSLwnM6PQ6yA==
+X-Forward-Email-ID: 67fe9c39999e81140c54a9c8
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.0.2
@@ -43,22 +43,22 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a58ce868-1cd5-48fa-873a-5254d39e7e12@kwiboo.se>
-Date: Tue, 15 Apr 2025 19:48:15 +0200
+Message-ID: <10f73fc4-a66b-4628-9f51-fd69e7225e7e@kwiboo.se>
+Date: Tue, 15 Apr 2025 19:49:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/16] reset: rockchip: implement rk3576 lookup table
+Subject: Re: [PATCH v2 08/16] ram: rockchip: Add rk3576 ddr driver support
 To: Heiko Stuebner <heiko@sntech.de>
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
  joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
  detlev.casanova@collabora.com, u-boot@lists.denx.de,
- sebastian.reichel@collabora.com, Elaine Zhang <zhangqing@rock-chips.com>
+ sebastian.reichel@collabora.com
 References: <20250414200111.1357867-1-heiko@sntech.de>
- <20250414200111.1357867-8-heiko@sntech.de>
+ <20250414200111.1357867-9-heiko@sntech.de>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250414200111.1357867-8-heiko@sntech.de>
+In-Reply-To: <20250414200111.1357867-9-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,54 +77,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
-
 On 2025-04-14 22:01, Heiko Stuebner wrote:
-> From: Elaine Zhang <zhangqing@rock-chips.com>
+> Add ddr driver for rk3576 to get the ram capacity.
 > 
-> The current DT bindings for the rk3576 clock use a different ID than the
-> one that is supposed to be written to the hardware registers.
-> Thus, we cannot use directly the id provided in the phandle, but rather
-> use a lookup table to correctly setup the hardware.
-> 
-> This follows the implementation done in the Linux-Kernel and also
-> how the rk3588 does this both in the Linux-Kernel as well as U-Boot.
-> 
-> Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
-> [adapted from mainline Linux code for u-boot]
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> ---
->  arch/arm/include/asm/arch-rockchip/clock.h |  10 +
->  drivers/reset/Makefile                     |   2 +-
->  drivers/reset/rst-rk3576.c                 | 647 +++++++++++++++++++++
->  3 files changed, 658 insertions(+), 1 deletion(-)
->  create mode 100644 drivers/reset/rst-rk3576.c
 
-[snip]
-
-> diff --git a/drivers/reset/rst-rk3576.c b/drivers/reset/rst-rk3576.c
-> new file mode 100644
-> index 00000000000..e64e27c1987
-> --- /dev/null
-> +++ b/drivers/reset/rst-rk3576.c
-> @@ -0,0 +1,647 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
-> + * Copyright (c) 2024 Collabora Ltd.
-> + * Author: Detlev Casanova <detlev.casanova@collabora.com>
-> + * Based on Sebastien Reichel's implementation for RK3588
-
-nitpick: s/Sebastien/Sebastian/ ?
-
-Regardless, this is:
+Correct DRAM amount is reported on my boards.
 
 Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 
 Regards,
 Jonas
 
-> + */
-> +
+> ---
+>  drivers/ram/rockchip/Makefile       |  1 +
+>  drivers/ram/rockchip/sdram_rk3576.c | 35 +++++++++++++++++++++++++++++
+>  2 files changed, 36 insertions(+)
+>  create mode 100644 drivers/ram/rockchip/sdram_rk3576.c
 
-
+[snip]
