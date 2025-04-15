@@ -4,132 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE89DC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 09:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4F97C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 09:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 371FB8043C;
-	Tue, 15 Apr 2025 11:41:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 1856382102;
+	Tue, 15 Apr 2025 11:50:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Bk3mFVLC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Fythwk6R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF767810EA; Tue, 15 Apr 2025 11:41:26 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20626.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::626])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0472480194
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 11:41:24 +0200 (CEST)
+ id 5AFAA820E8; Tue, 15 Apr 2025 11:50:52 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 24E49820E8
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 11:50:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HLCWgiSPt1wuc+Bm8wFIMFWb6GrIW92OfYCeX9k5+q6MpYTDYEzub2lr/PRyj33Te2cIXAsPaQCGvEdQzUGilkIVWbPPw6B64QB06zGBoCIxRwXP9Iq+aGQie45qv/kUd2O1MdnvTeGqenDBeXCawn9bfiaLqeEOMhhnUlEgPHWwOBa1/WEVpYGkXETIauwxtdDwU5YNgatYSBUkJxvqhAi/4VR/2nfqXECWl+XlLmnP3qR3ahrKgsxjC/H8vaKh4BNHVx4Dcjl88631Izz8etenB9EOctEbjHWJoFmCqdXzG6UVrqNJu/ZrsdQt0PH5LcdaeMaZaAG1vVMR88MObg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E4CxZm/k1p6gqZUNSN5KywRvqB9IunBqOslVysgShJ4=;
- b=eKm/q8G9ZX2K9GupiLcmrVy4B0yNUgpFrbuFTHEE0+PZQgrzF5lThqDlM81sWG89SqkvtvpLxZD8A5rKisK7l4O3Hvy+n2laE9Mpaw1Ebbe8aUvi2iqSnn8Llm4qLMk55EbkSVAy9z2/FK9fI4WgXFE956BcwtMHfgd0xH1IADc+ofArFhOPjiQ5Z0epuVQg0gIoMmAj0+smmkFscCf610/4mkKtLqhldM2eo9Ej554Cufzm0OqZTkfvUj5q7c6jpsov2fSB96xe0UZXwPiHRtuEcd0Iqfdz3aFk+N6AChB4PZIUkd6J2HyHeRUDz54oJcP/yuBPGoCkEv8Eib+Ksg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E4CxZm/k1p6gqZUNSN5KywRvqB9IunBqOslVysgShJ4=;
- b=Bk3mFVLC5ZIYTqz5ytjwOLG8+z1RsYKj61FCizP6xrtnRNiNJ1cylSVHpTscbM+umXBZ6YoWr+1The1QftcIf+yhLktL78pWm5w4A13XSVlr2OZi9JNJjy8XpZctCo1vs3A2OGQ4Q6Hv8s6RkpX1wq7bnRBZq+CuBeE/yGdvz3E=
-Received: from CH5PR02CA0014.namprd02.prod.outlook.com (2603:10b6:610:1ed::18)
- by BL3PR12MB9049.namprd12.prod.outlook.com (2603:10b6:208:3b8::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.35; Tue, 15 Apr
- 2025 09:41:20 +0000
-Received: from DS3PEPF000099DC.namprd04.prod.outlook.com
- (2603:10b6:610:1ed:cafe::3f) by CH5PR02CA0014.outlook.office365.com
- (2603:10b6:610:1ed::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.36 via Frontend Transport; Tue,
- 15 Apr 2025 09:41:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099DC.mail.protection.outlook.com (10.167.17.198) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Tue, 15 Apr 2025 09:41:19 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 15 Apr
- 2025 04:41:17 -0500
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Tue, 15 Apr 2025 04:41:15 -0500
-From: Love Kumar <love.kumar@amd.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
- <padmarao.begari@amd.com>, <mkorpershoek@kernel.org>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH] test/py: spi: Prevent to overwrite the reserved memory
-Date: Tue, 15 Apr 2025 15:11:09 +0530
-Message-ID: <abb932b3b23cb3c6035bfdf1929f91fb958d74b6.1744709852.git.love.kumar@amd.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53F9oldT3005681
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 15 Apr 2025 04:50:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744710647;
+ bh=ZZRCZuPP1my24Ez7KtvDp0KVyRYkzORrVnt+NiM+Iyc=;
+ h=From:To:CC:Subject:Date;
+ b=Fythwk6RrJzolOI+s611gAkc38hzn/4YJSGBQPY4oQqMV5GDLa+PEe6RdmrTFwJTM
+ /SO2NSJOB0hoBrZ5G24gBcjTM2niBVwp09cnQQWIY8TE2e0y/GRkFWp5aDTZU0KFXb
+ 1MPu6q//D7GYC2noN3D9aygLa9cp3zisNSxAR+RU=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53F9olOZ009459
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 15 Apr 2025 04:50:47 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
+ Apr 2025 04:50:46 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 15 Apr 2025 04:50:46 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53F9oktk086909;
+ Tue, 15 Apr 2025 04:50:46 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v3] configs: set SPL_TEXT_BASE by default for k3 platforms
+Date: Tue, 15 Apr 2025 15:20:27 +0530
+Message-ID: <20250415095028.446254-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: love.kumar@amd.com does not designate
- permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DC:EE_|BL3PR12MB9049:EE_
-X-MS-Office365-Filtering-Correlation-Id: c2a1f77f-9cb7-4812-ec9e-08dd7c01ad0a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DtmMaeaxmYk40WVkf6Ot/oWBh1cPDjYzcleIKhlJx5521lhRbNZyVKyz2Fhp?=
- =?us-ascii?Q?n52QX9jiJFd4r39QYICF94Q9zcUe9Vl/Ltj8zmiRNDrBPh4wyX9krpzru/17?=
- =?us-ascii?Q?JKs+3gvkJvOa42WoLLlfSVsZNlwIF4d4KBmJCNu8Oq8k7ngcpgDWLKJF/XEU?=
- =?us-ascii?Q?foruQXU9txUnhYyWSSIfhchVO2T4V24rz/jvkxsvPiO6jF+6m/veFnwL9bXT?=
- =?us-ascii?Q?xa4k1McLb5/nkSsXAxUX6+33lGBKEbTyjGftaw8QCdGb0cWbulZFOwVwZtXR?=
- =?us-ascii?Q?horsKS+p3u2jQVSnVdVXdMgkQ66EL/R6hyKqk95zK9kb8g5SVJOm9PD2iNaO?=
- =?us-ascii?Q?FPCxS5HwBjuB0Fsi6mU2A0SOA9avcVHr/Az/wsDxiz9XSLPiN4ZtEKsKPqEQ?=
- =?us-ascii?Q?6oWDSeUC8HtPiRzgB9HNl/6n5DzyqOoF9CYeI4UCVoCQ4kpTbZhz8dXb2cnR?=
- =?us-ascii?Q?oV5vvsvWilrb92pWOnF1tQV9feQqmgr/BwE45lj3DwgmjKWwtiLBttmSp+0g?=
- =?us-ascii?Q?Kt0vG9xZOnDy9PW/VwGwzKc/hSoESWzpCR3qEreJxtbGw/BZ4UJvcXCUMLjD?=
- =?us-ascii?Q?qv10UDC/q2VO7bi13bir6Oyfbbo9POYnjEaeqH+IAx4gb7+bvZnbFcKaIrqL?=
- =?us-ascii?Q?tIH2BL4kaNxvBMlZK2WQN/HgSwFfG1kGBf+C6TdJOigcObAFpCGdt5gBVEdS?=
- =?us-ascii?Q?IBY2emj7fOK2EtyFoGGoBGswph2bhNFSCHYQFw0EyEX1J399zqNeyU98P6JU?=
- =?us-ascii?Q?pe/HIEuwCTSfMiL4BHTPdTyJvRap0cgnehn5V7Pl5ri6jY8/3EviogvRGORg?=
- =?us-ascii?Q?nB91I2p1IhOGmc3bK4nYFXyRS5L2X0C+cACuheZIXYp6OIs28xAgrMNKh5O2?=
- =?us-ascii?Q?qC2+O243smZCN7GNHNJBveFhTZghKLD3DNMSQ/mDY8GWdu9NcFafu8fyXUyg?=
- =?us-ascii?Q?By5C6Cssnj0mA9WXlgKpzcmEG64BVRFK9vf8WHO1wnya1zRzTAENNwfEB46v?=
- =?us-ascii?Q?XweEXG9MPsvcs5mY7re/ljduR4XYm7IDyPAfh1v0KB0l9w2m0yzeo4WA2WHi?=
- =?us-ascii?Q?4Ct11HCKJ6ZjADqeeNhhrHA3fJUah/1vMqoY8sBkfO062fd+QhEguxNAulop?=
- =?us-ascii?Q?H8OxOqwV1QpU0Bqd6cMLVGgqqVXCPZdpsbGOfDta0wJ8CHkXMEFPVq2+LcoQ?=
- =?us-ascii?Q?MZ9AqfnkEdR61lP/rZVXePSTIiYtPMugamW5ZqrOmRr2Tlba8GU1yqFdZqbk?=
- =?us-ascii?Q?0exheJGJ2iPFOYXWKBrZx7QZtFlVCOgweg2h1Nf7oDCeD8NuervnZ67qtS0B?=
- =?us-ascii?Q?aVz22bkih2JIGd9vcyTFFckUSamZHaRIlIG2Yx4JC+dEgGYufpX/3lbEx12P?=
- =?us-ascii?Q?HY3ueMKKkHqk+lK8+ev1QyeZW5D/BuA3d/hn9yIVPXXz14MTjnNJv8R9Er++?=
- =?us-ascii?Q?Q7OwebSxuW47fIelGJi62xIisGqxvQsa9nVri4MtrdaGruKqDBXvtg1BqXhi?=
- =?us-ascii?Q?IiSamnhfBS0S7C7Mb/wQaOYPgLTKBIgmqdSJ?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2025 09:41:19.5683 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c2a1f77f-9cb7-4812-ec9e-08dd7c01ad0a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DC.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB9049
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,52 +77,368 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update SPI negative tests to prevent SF command from overwriting the
-reserved memory area.
+SPL_TEXT_BASE is used as the load address for the main domain SPL on k3
+platforms.
 
-Signed-off-by: Love Kumar <love.kumar@amd.com>
+Since the config value is the same for every board, this patch sets the
+value 0x80080000 as default for all 64-bit ARCH_K3, 0x43c00000 as
+default for the R5 cores and deletes the instances of SPL_TEXT_BASE in
+individual defconfigs.
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- test/py/tests/test_spi.py | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+Changes in v3:
+ * Added Reviewed-by
+ * Moved SPL_TEXT_BASE for phycore_am62x and j784s4
+v2:
+https://lore.kernel.org/u-boot/20250410135401.946596-1-anshuld@ti.com/
+Changes in v2:
+ * Moved SPL_TEXT_BASE for r5 cores
+v1:
+https://lore.kernel.org/u-boot/20250409124739.3843126-1-anshuld@ti.com/
+---
+ common/spl/Kconfig                         | 2 ++
+ configs/am62ax_evm_a53_defconfig           | 1 -
+ configs/am62ax_evm_r5_defconfig            | 1 -
+ configs/am62px_evm_a53_defconfig           | 1 -
+ configs/am62px_evm_r5_defconfig            | 1 -
+ configs/am62x_beagleplay_a53_defconfig     | 1 -
+ configs/am62x_beagleplay_r5_defconfig      | 1 -
+ configs/am62x_evm_a53_defconfig            | 1 -
+ configs/am62x_evm_r5_defconfig             | 1 -
+ configs/am64x_evm_a53_defconfig            | 1 -
+ configs/am65x_evm_a53_defconfig            | 1 -
+ configs/iot2050_defconfig                  | 1 -
+ configs/j7200_evm_a72_defconfig            | 1 -
+ configs/j721e_beagleboneai64_a72_defconfig | 1 -
+ configs/j721e_evm_a72_defconfig            | 1 -
+ configs/j721s2_evm_a72_defconfig           | 1 -
+ configs/j722s_evm_a53_defconfig            | 1 -
+ configs/j722s_evm_r5_defconfig             | 1 -
+ configs/j784s4_evm_a72_defconfig           | 1 -
+ configs/phycore_am62ax_a53_defconfig       | 1 -
+ configs/phycore_am62ax_r5_defconfig        | 1 -
+ configs/phycore_am62x_a53_defconfig        | 1 -
+ configs/phycore_am62x_r5_defconfig         | 1 -
+ configs/phycore_am64x_a53_defconfig        | 1 -
+ configs/verdin-am62_a53_defconfig          | 1 -
+ configs/verdin-am62_r5_defconfig           | 1 -
+ 26 files changed, 2 insertions(+), 25 deletions(-)
 
-diff --git a/test/py/tests/test_spi.py b/test/py/tests/test_spi.py
-index dd767528dbfb..09174f91e987 100644
---- a/test/py/tests/test_spi.py
-+++ b/test/py/tests/test_spi.py
-@@ -703,4 +703,33 @@ def test_spi_negative(ubman):
-             ubman, 'read', start, size, res_area, 1, error_msg, EXPECTED_READ
-         )
- 
-+        # Start reading from the reserved area
-+        m = re.search(r'reserved\[0\]\s*\[(0x.+)-(0x.+)\]', output)
-+        if not m or int(m.group(1), 16) == 0:
-+            ubman.log.info('No reserved area is defined or start addr is 0x0!')
-+        else:
-+            rstart_area = int(m.group(1), 16)
-+            rend_area = int(m.group(2), 16)
-+
-+            # Case 1: Start reading from the middle of the reserved area
-+            r_size = rend_area - rstart_area
-+            r_area = rstart_area + r_size
-+            flash_ops(
-+                ubman, 'read', start, size, r_area, 1, error_msg, EXPECTED_READ
-+            )
-+
-+            # Case 2: Start reading from before the reserved area to cross-over
-+            # the reserved area
-+            rstart_area = rstart_area - int(size/2)
-+            flash_ops(
-+                ubman, 'read', start, size, rstart_area, 1, error_msg, EXPECTED_READ
-+            )
-+
-+            # Case 3: Start reading till after the reserved area to cross-over
-+            # the reserved area
-+            rend_area = rend_area - int(size/2)
-+            flash_ops(
-+                ubman, 'read', start, size, rend_area, 1, error_msg, EXPECTED_READ
-+            )
-+
-         i = i + 1
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index f02e03e3737..35161d02d19 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -270,6 +270,8 @@ config SPL_TEXT_BASE
+ 	default 0x40200000 if OMAP34XX
+ 	default 0x402F4000 if AM43XX
+ 	default 0x402F0400 if AM33XX
++	default 0x80080000 if ARCH_K3 && ARM64
++	default 0x43c00000 if ARCH_K3 && !ARM64
+ 	default 0x00908000 if ARCH_MX6
+ 	default 0x00912000 if ARCH_MX7
+ 	default 0x40301350 if OMAP54XX
+diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+index d77ff2d7221..5577ec50690 100644
+--- a/configs/am62ax_evm_a53_defconfig
++++ b/configs/am62ax_evm_a53_defconfig
+@@ -15,7 +15,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
+index cbdc219e25e..4ea551b509b 100644
+--- a/configs/am62ax_evm_r5_defconfig
++++ b/configs/am62ax_evm_r5_defconfig
+@@ -16,7 +16,6 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x7145
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c3b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+index dae87c3b788..0208217f847 100644
+--- a/configs/am62px_evm_a53_defconfig
++++ b/configs/am62px_evm_a53_defconfig
+@@ -13,7 +13,6 @@ CONFIG_ENV_SIZE=0x40000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62p5-sk"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
+index 39b6a83ab42..f2e1f31ef0f 100644
+--- a/configs/am62px_evm_r5_defconfig
++++ b/configs/am62px_evm_r5_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c4b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
+diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+index cedd0f75378..f61e701e3c9 100644
+--- a/configs/am62x_beagleplay_a53_defconfig
++++ b/configs/am62x_beagleplay_a53_defconfig
+@@ -11,7 +11,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-beagleplay"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
+index 5a465bff158..7ca5f58ea0c 100644
+--- a/configs/am62x_beagleplay_r5_defconfig
++++ b/configs/am62x_beagleplay_r5_defconfig
+@@ -18,7 +18,6 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x7000
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c3b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index 130ff392438..5dee82ce1e8 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -12,7 +12,6 @@ CONFIG_SF_DEFAULT_SPEED=25000000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-sk"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am62x_evm_r5_defconfig b/configs/am62x_evm_r5_defconfig
+index 8eb59400eb2..4e3ed7801e6 100644
+--- a/configs/am62x_evm_r5_defconfig
++++ b/configs/am62x_evm_r5_defconfig
+@@ -20,7 +20,6 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x7000
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c3b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
+diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+index 22288655bfd..1bb6d7c4eb6 100644
+--- a/configs/am64x_evm_a53_defconfig
++++ b/configs/am64x_evm_a53_defconfig
+@@ -16,7 +16,6 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am642-evm"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
+index 12c4cb96815..67dda773169 100644
+--- a/configs/am65x_evm_a53_defconfig
++++ b/configs/am65x_evm_a53_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
+index 72d4b8e3695..5bb692ef3ad 100644
+--- a/configs/iot2050_defconfig
++++ b/configs/iot2050_defconfig
+@@ -21,7 +21,6 @@ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
+index 3126ba3d771..fbdec74d872 100644
+--- a/configs/j7200_evm_a72_defconfig
++++ b/configs/j7200_evm_a72_defconfig
+@@ -22,7 +22,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+index fad01c27104..e3cd59343f0 100644
+--- a/configs/j721e_beagleboneai64_a72_defconfig
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-beagleboneai64"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+index 6bc716650cf..99461cf6007 100644
+--- a/configs/j721e_evm_a72_defconfig
++++ b/configs/j721e_evm_a72_defconfig
+@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-common-proc-board"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
+index 5e84abf8f21..084deea28d0 100644
+--- a/configs/j721s2_evm_a72_defconfig
++++ b/configs/j721s2_evm_a72_defconfig
+@@ -21,7 +21,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j722s_evm_a53_defconfig b/configs/j722s_evm_a53_defconfig
+index 5d2bb52b440..19f4a3b0e92 100644
+--- a/configs/j722s_evm_a53_defconfig
++++ b/configs/j722s_evm_a53_defconfig
+@@ -19,7 +19,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j722s_evm_r5_defconfig b/configs/j722s_evm_r5_defconfig
+index d96392db479..40db0da9f62 100644
+--- a/configs/j722s_evm_r5_defconfig
++++ b/configs/j722s_evm_r5_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c7b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
+diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
+index 1280194c7a7..56af0230860 100644
+--- a/configs/j784s4_evm_a72_defconfig
++++ b/configs/j784s4_evm_a72_defconfig
+@@ -21,7 +21,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62ax_a53_defconfig
+index d86e19d914f..94176929f9a 100644
+--- a/configs/phycore_am62ax_a53_defconfig
++++ b/configs/phycore_am62ax_a53_defconfig
+@@ -24,7 +24,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/phycore_am62ax_r5_defconfig b/configs/phycore_am62ax_r5_defconfig
+index 25d2d9babba..7bcfbe94850 100644
+--- a/configs/phycore_am62ax_r5_defconfig
++++ b/configs/phycore_am62ax_r5_defconfig
+@@ -17,7 +17,6 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x7145
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c3b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
+diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
+index 03d4618df38..7b2fe34dece 100644
+--- a/configs/phycore_am62x_a53_defconfig
++++ b/configs/phycore_am62x_a53_defconfig
+@@ -22,7 +22,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x83000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80c80000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/phycore_am62x_r5_defconfig b/configs/phycore_am62x_r5_defconfig
+index f157103be4a..a5d494cf87a 100644
+--- a/configs/phycore_am62x_r5_defconfig
++++ b/configs/phycore_am62x_r5_defconfig
+@@ -21,7 +21,6 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c3b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
+diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
+index 4ee1bd829a3..2032a34030f 100644
+--- a/configs/phycore_am64x_a53_defconfig
++++ b/configs/phycore_am64x_a53_defconfig
+@@ -24,7 +24,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
+index ecd3284faaf..4bdcb4b6c46 100644
+--- a/configs/verdin-am62_a53_defconfig
++++ b/configs/verdin-am62_a53_defconfig
+@@ -20,7 +20,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80c80000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/verdin-am62_r5_defconfig b/configs/verdin-am62_r5_defconfig
+index 9ac4b534f6c..f9580e697ff 100644
+--- a/configs/verdin-am62_r5_defconfig
++++ b/configs/verdin-am62_r5_defconfig
+@@ -17,7 +17,6 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x7000
+-CONFIG_SPL_TEXT_BASE=0x43c00000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x43c3b000
+ CONFIG_SPL_BSS_MAX_SIZE=0x3000
 -- 
-2.25.1
+2.49.0
 
