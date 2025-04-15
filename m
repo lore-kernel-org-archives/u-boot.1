@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736CFC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 22:46:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DAB9C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 22:48:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9DE482C7C;
-	Wed, 16 Apr 2025 00:46:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 55C3A81F45;
+	Wed, 16 Apr 2025 00:48:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="bfhEmiOU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XBuOOX2u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48C4C82C7F; Wed, 16 Apr 2025 00:46:40 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id C22F082C4C; Wed, 16 Apr 2025 00:48:03 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 490F382C4C
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 00:46:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39A1C803CC
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 00:48:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sbellary@baylibre.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2264aefc45dso91228635ad.0
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 15:46:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-6041e84715eso4221083eaf.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 15:48:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1744757196; x=1745361996;
- darn=lists.denx.de; 
+ d=konsulko.com; s=google; t=1744757280; x=1745362080; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jzJ0Rwf0DrkqLknqoXdzwUHIJI7/0kFzstpVsbkLgYs=;
- b=bfhEmiOUcRdb0MO34+TFS2w+1BjWwv752a7WOvhVI1rkUjo0uxPddvQkfxI+mD9ety
- dpWAAqlXAeMcGiMw4QD47Srs+ErET51vPrFt/baL7Bv5hr4eztqfGccivH7mZrfPoopv
- oc8df+wV86siBDdMXaJo9HEdGwEhvx/cnfzo4OZVcqLLsoEW0gn0T2N1Raszg0ZYB4kt
- ghjr5u+ZSKrP46Agh/19qON1ZL+wNmmi73VEJwT/Wa1vZLGT2r9sLpO3qgG4qZZoq1y3
- XQMW7CYqM2ei4iQeah7/gTE4tKiYs2XLouot4Qruil7Qb8KRvbFSyO3QsTq8bjwKeaFO
- TezA==
+ bh=q/b3PsacZrQF5B6lDxRwk59pyEoMknrnX/9UARz8KYg=;
+ b=XBuOOX2uQ/vRUykNVda0fmIHZyJe8dYhuR1mmqwc9fbAkCmId09Tq9KPPG78x7e7Hl
+ HeBN1Lr2F+1dlvVF7VuGRJ6njjJ9c4YJ15RMjZGCGr0mUDq589/X3ZFoca6uWZeCjpUI
+ hv5htaCebESFJPohT5B9hNhIm9JM5tuiz44ao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744757196; x=1745361996;
+ d=1e100.net; s=20230601; t=1744757280; x=1745362080;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jzJ0Rwf0DrkqLknqoXdzwUHIJI7/0kFzstpVsbkLgYs=;
- b=WIN8V3cNhH4kpx1zrTXwPIo2mIEkrFXeAhRHSpUqAeoOSR1gS1+kwF5zTIT8BW/l1+
- YO7JAkNzU+1O7iCXbeRbOYm7L3tNRKtOvEjYBVISriBHx9F4oDcK2XvlOKUYMxYA9FIg
- EdTkTR57LqomNhm4bGw0phBq2xgo8qyWg/lClUcefvmT5R3lITyXiRxMigD7pug3H0Zx
- 3ohSlSZBbzIOsEq9oGMz+KINPEV9LsFXZjNKsYHgBNJ+Nyp2ZYWTvUF19zM28xCfphgH
- 2hDYS1fYXSV/ZA6EdT37Dfm3Fr39qUv98D3itWHmjRO29NmMoGENjhXq8wARhTThYcB7
- BXhA==
+ bh=q/b3PsacZrQF5B6lDxRwk59pyEoMknrnX/9UARz8KYg=;
+ b=YIx/LoTb8BaAUDk3RO2CW/KmpqkpMl7o0EYYZaGAP2AnXqafbVlvYMaAHDm5aHBEe9
+ V4v3SX4kp8CjphIANEYdRU3A1aDOjbXksHaV3LK49mgBqeuO2ig0fhy/Vmohko5+EoAA
+ o2GpEMOsanE8pLyRDgCYDKRL6djSb1K79rMDrTM1OIteSoxpsr/Ter9ks4DfAjiF4L6C
+ q6X6OPRp8eCuPSuUbuXpCtVPuBwddk0FTfFAxMVUBWcyDJ4945FO8UAXuJHgwYYGUUcr
+ sZ2Pd9HiAL5hUigSAzYO36o9biXWd0d3I2iACCQ1t8yY8qvmjZ/FYPmXkb8mw4ufY6Zw
+ cgjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvHxBplJvyFBlGHbpQXewuk3yVc6Ewl+V1KhpWrbjozcRKEazyPylHUhwqaydsjq8FlNIpN+A=@lists.denx.de
-X-Gm-Message-State: AOJu0YxT1G2VooZcZTL3CT12XJxaClLm4ClgxY7MLjbwpsmSE4rdZ2ER
- TxSwsNvvS4Hm27lJCHP3NeYYIUIgeMueyf1U+ZsIPZKA5L3ggcBckzneJrGts44=
-X-Gm-Gg: ASbGncvEyFdrPrboKyfBM4g0kwWKXKi9G9/kiMIOhZwEBwZa8PY2HaI17JKS9hn8bru
- +FbFtGKywffdnSpkVF28ZvfnjgsMwFauxTqfK3ltzrodDq1unULla33Tkw0gvmNBnidl/F8YRRC
- cv14OO1hcCcebIDqjgLqZJ156WLkGWnHfKn8ER+Y0fwPX2ypzUHCzaK0ogW+82JFUiTGtE92t0f
- 0y1WTVlSY2IMcJ5Tbr0FGqNITMze/Vm1Xk0szobGKAA/p8pFLT44VhUylQr6NlDRAXeXSQgvon6
- yqOwXien5l4IMqJcwiid68wucYrmSG2NDMCIeZkBEiQAV8KPr/0tpoBxVGSvlsMQl1Ell19/eJS
- w
-X-Google-Smtp-Source: AGHT+IGGwMbl56PmkqDeX2KkZGgr/Z/EmKnkpRHxEKWExaqQuWaar2KeeLri/HLQH2Ri2ghA3QxvZA==
-X-Received: by 2002:a17:903:192:b0:224:26f5:9c1e with SMTP id
- d9443c01a7336-22c318a8ee0mr11164405ad.2.1744757195821; 
- Tue, 15 Apr 2025 15:46:35 -0700 (PDT)
-Received: from dev-linux (syn-076-088-115-008.res.spectrum.com. [76.88.115.8])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22c33fe7105sm569845ad.230.2025.04.15.15.46.34
+ AJvYcCWhaolKRn8+MT4WhotfZLsgU3HE65/Ram916a8/tkwjXQVCX9+ZeFBGntuRk+TaZdtekK02L9Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8InjbQrV/D3YnfC3MU/cknt3/xu82F1pFFLdafGsTBCBHK12C
+ D2dJ6T72CEmdtSIcD5ef46nFl4UX4BrQ6s1Hg+RSxomvWZEdaf2EsOBLXaiJ67lvGR3QTxOyZpM
+ I
+X-Gm-Gg: ASbGnct/CD4ykd24GNFpVQypikgF+JagfMHzedHCXPwQUFZca+40qvKapSK5m2ZWxS4
+ afHJ3BEue8EF/qecI53zKvgvdPBkJddC/Sb9b0VG3DYVasvntSUEo+yx3GNJn7pIlWFgmQ/6h0q
+ x0MKZn3PvNMSWqEZhAVLBDakN9vqh94Wom2F3+UjwCGOvntExMipi132YadMUKdMSAT2UcqShi+
+ W8vpAa0mV9jyWlVbFjccaxUDFF9qqcjCSO62h9sUb0kfeySee3zIuIu+PO4Zakj1RKUG+6UiiXn
+ 7v9/m4McC9kIT6VABylVcjAaEUDt2i4LEhncm88+9sMOwqyTyLzw5qp224MdgWHQYSNQam4IQOi
+ YbQ==
+X-Google-Smtp-Source: AGHT+IGcr2x8uLTAER1W16cKFlHDX8WAvNeEKxsQvlePfHcCv8tb5uBG4dxTeYsYzSfJyDH+syWmbw==
+X-Received: by 2002:a05:6820:4c17:b0:602:15e6:4559 with SMTP id
+ 006d021491bc7-604a5c54836mr522791eaf.6.1744757279883; 
+ Tue, 15 Apr 2025 15:47:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-604a5bbac4fsm102459eaf.17.2025.04.15.15.47.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 15:46:35 -0700 (PDT)
-Date: Tue, 15 Apr 2025 15:46:32 -0700
-From: Sukrut Bellary <sbellary@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
+ Tue, 15 Apr 2025 15:47:59 -0700 (PDT)
+Date: Tue, 15 Apr 2025 16:47:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sukrut Bellary <sbellary@baylibre.com>
 Cc: Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
  Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
 Subject: Re: [PATCH 3/3] arm: dts: am335x: Add nodes for lcdc, panel and
  backlight
-Message-ID: <Z/7hyM22GguAlnx+@dev-linux>
+Message-ID: <20250415224757.GO5495@bill-the-cat>
 References: <20250319202516.3300444-1-sbellary@baylibre.com>
  <20250319202516.3300444-4-sbellary@baylibre.com>
  <20250324172009.GB93000@bill-the-cat> <Z+MEeuDZNr7z0mZh@dev-linux>
+ <Z/7hyM22GguAlnx+@dev-linux>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ODduhHoCt53kUpnH"
 Content-Disposition: inline
-In-Reply-To: <Z+MEeuDZNr7z0mZh@dev-linux>
+In-Reply-To: <Z/7hyM22GguAlnx+@dev-linux>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,42 +103,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 25, 2025 at 12:31:06PM -0700, Sukrut Bellary wrote:
-> On Mon, Mar 24, 2025 at 11:20:09AM -0600, Tom Rini wrote:
-> > On Wed, Mar 19, 2025 at 01:25:16PM -0700, Sukrut Bellary wrote:
-> > 
-> > > For AM335x EVM[1], enable nodes required to enable the support for LCD
-> > > and PWM backlight.
-> > > This is required for the splash screen support.
-> > > 
-> > > [1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
-> > > 
-> > > Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
-> > > ---
-> > >  arch/arm/dts/am335x-evm.dts | 15 ++++++++++++++-
-> > >  1 file changed, 14 insertions(+), 1 deletion(-)
-> > 
-> > Can you see how hard moving to OF_UPSTREAM here is first please? Thanks.
-> >
-> 
-> Sure, I will check.
-> Thanks.
 
-I checked OF_UPSTREAM for AM335x.
-For the panel driver, timings are fetched differently in the u-boot and kernel.
-For OF_UPSTREAM, we need to change the lcdc panel driver in u-boot to be in
-sync with kernel dts or see if we can reuse the simple_panel driver.
+--ODduhHoCt53kUpnH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We plan to take care of OF_UPSTREAM later.
-So, For now, can we split this series into two as
-1. Enable Auxillary PWM using eCAP and pin muxing(These are independent
-of OF_UPSTREAM)
-2. Handle dts changes once we have OF_UPSTREAM for AM33xx.
-If this is ok, I will post the patches per pt.1
+On Tue, Apr 15, 2025 at 03:46:32PM -0700, Sukrut Bellary wrote:
+> On Tue, Mar 25, 2025 at 12:31:06PM -0700, Sukrut Bellary wrote:
+> > On Mon, Mar 24, 2025 at 11:20:09AM -0600, Tom Rini wrote:
+> > > On Wed, Mar 19, 2025 at 01:25:16PM -0700, Sukrut Bellary wrote:
+> > >=20
+> > > > For AM335x EVM[1], enable nodes required to enable the support for =
+LCD
+> > > > and PWM backlight.
+> > > > This is required for the splash screen support.
+> > > >=20
+> > > > [1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
+> > > >=20
+> > > > Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
+> > > > ---
+> > > >  arch/arm/dts/am335x-evm.dts | 15 ++++++++++++++-
+> > > >  1 file changed, 14 insertions(+), 1 deletion(-)
+> > >=20
+> > > Can you see how hard moving to OF_UPSTREAM here is first please? Than=
+ks.
+> > >
+> >=20
+> > Sure, I will check.
+> > Thanks.
+>=20
+> I checked OF_UPSTREAM for AM335x.
+> For the panel driver, timings are fetched differently in the u-boot and k=
+ernel.
+> For OF_UPSTREAM, we need to change the lcdc panel driver in u-boot to be =
+in
+> sync with kernel dts or see if we can reuse the simple_panel driver.
+>=20
+> We plan to take care of OF_UPSTREAM later.
+> So, For now, can we split this series into two as
+> 1. Enable Auxillary PWM using eCAP and pin muxing(These are independent
+> of OF_UPSTREAM)
+> 2. Handle dts changes once we have OF_UPSTREAM for AM33xx.
+> If this is ok, I will post the patches per pt.1
 
-Thanks.
+Yes, that's fine, thanks.
 
-> > -- 
-> > Tom
-> 
-> 
+--=20
+Tom
+
+--ODduhHoCt53kUpnH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf+4hYACgkQFHw5/5Y0
+tyyuEAv0DuW6DfxSGiGhaDKHpX5Cj6gBevBqyr/86y33J9364nWOVbPf/GP7XwCt
+Wp78rqC6Ks0yQCZ4dVktv9nsapUdwYgizaFeAOIZlatpwkQ/LbUncpKIeYETlawn
+PcfcuGjxlsAmSBJrpTJMWxA1qcNkzsQSn6WYE+2fJrb6ToufhjqDCTEr7xz2TUkc
+KpWl7LmeT/PIIWdK2rITt/vqSe2spTYLmuVVcTiNl2o8y1ElUTWoWScN6+GcGt9d
+fwmHXWK5BQwIhV5AC/++kvo9vMdEiEhnoeTu3NeElffY5jdPQ7vyKW37Qh8Q6RnP
+/yrg87XOnpXBnh7ku5+zjbbE+e6K20YaUUiwqef7rUYJH0Wvb2iduiLn+K/7AVhE
+ir2QQdR250p4B72NvogpG1C9YFfUtlbG4J3GZOdjO86YUa8DMU20sBk5fhQKgYK4
+3RoTR+0iCS7eM79qPLluDL4MIoaceqG9TMU2WcBtTtDmucPGMFmvDz6BD+cM2uen
+F+hZD2w=
+=pBca
+-----END PGP SIGNATURE-----
+
+--ODduhHoCt53kUpnH--
