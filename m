@@ -4,56 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21EA5C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 18:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6348AC369BA
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 18:17:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F86F82B32;
+	by phobos.denx.de (Postfix) with ESMTP id F3E5F82B4A;
 	Tue, 15 Apr 2025 20:16:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="m5YnSTY8";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="4KvU2pLw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XkA/3bnv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F41F8209C; Tue, 15 Apr 2025 17:04:23 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9E66381F7E; Tue, 15 Apr 2025 18:24:30 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E488081F54
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 17:04:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57F8081E14
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 18:24:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=martin.kaistra@linutronix.de
-From: Martin Kaistra <martin.kaistra@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1744729460;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=uCqKRkaL4/7CnQZ2/QtrPMTwKqUdlEzULqV4B2dU3vY=;
- b=m5YnSTY8iit1Inva8vHeMXovP6JSQuym9JpM5ihqZbH/ObTLZvFQvWxmyFOhfw8ajC/HY5
- INDmaqLxTkAt5BWft1gYgjX+syYuAzmYAWEQCeMe5QJeoUUzd4RjckMnb8JyYRvu4cTGlP
- bfXjLLKm1RjC7T34Gz0ChH4+aMzv5UAEAQ0cA4f2ctChkmU3PGfzp6wFQIXUN1qlkZuPDw
- UX9P3lPsxG4WNgJy4NcX+m1HdmN32sYeMvhpGdOwIavz0o60AQAIU79OZalNXuX/H0ZNkZ
- gUR8GIc41K/0Y10SAuKmrD2s2uebnkb2FHdncvj1X66/L2c6pvme2DqOveAeBg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1744729460;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=uCqKRkaL4/7CnQZ2/QtrPMTwKqUdlEzULqV4B2dU3vY=;
- b=4KvU2pLwmlZyDpfHbdXL+6EyIy/6yY5LFsZTUjG/7caAmWrIyqNCvhlLkGVYHLN1bJ/+5r
- hS/gSAqj2FE/DmDQ==
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com,
-	rfried.dev@gmail.com,
-	michal.simek@amd.com
-Subject: [PATCH] net: gem: ignore tx_clk if MII is used
-Date: Tue, 15 Apr 2025 17:04:00 +0200
-Message-Id: <20250415150400.136723-1-martin.kaistra@linutronix.de>
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43cf628cb14so48105435e9.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 09:24:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744734268; x=1745339068; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DCRKdw+4YeAZFGN3liwpk9DXiweOgOfIm/Wbhz2aqM8=;
+ b=XkA/3bnvJPMSMQIl08U4N4ghdwckecsC6JB84TSPE82N3LbGC1Rm9Firyk5BM5mL+r
+ Clsq+tGvyi+0SWCCcSWwoLru1SAhwGclpoE0OLmE+anp8R7JF272MV8Z1sRJHIPX8Hy9
+ pfq5Tk9HbnWoz0yxkCkCTa5gf37xYuvVhu43HI2n/mXMg/auSvGlf3lSkLNYeqxzRxN5
+ RQnVccVch8hSDk1eyESp9q1BoGngHorJMDwCNEbqa5XKiqsHykS9WWPOBOvV7rB7kL/l
+ LIjxaeQRD0DCIFZYWn+AQAwydPcfsJOPdq0/Knz7W4QP1mrhYHOSiQqrM3zpk6zm0ylE
+ 6vPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744734268; x=1745339068;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DCRKdw+4YeAZFGN3liwpk9DXiweOgOfIm/Wbhz2aqM8=;
+ b=gS29hnO7L84rMzbj71JlOsGbX65mTwx5zy23uTSzkRVQOKpXsXhdzWJ5APUuznaM/1
+ 2FJ8Suuw8q5iwHm5b+oYubn5HdLgko/zSQaz6IrZ1E/MTCo1fy6lmiqsugxrsl0tlAhH
+ QnBollTBfgaa30t0YikztwBwmRLUBnMrOiJQi0hQLlCCQR85lIeak1nlTMpmfwkubzkq
+ 1QL/UUrRsOlschLMp1CEVQpfzfxQlujg/JfhJYx1/djVLIdM2hMEEM34SaLTgSBf5dOT
+ XLKNSfg5G+4v6xWmV/OvihYYInNd4sLG7gDi1a344PG/1Pe/jA3pHfHCtBYF0ppreDD5
+ kQrg==
+X-Gm-Message-State: AOJu0YzZo3iDLesHAvtr+lem+vYcPYbodfB6HP/dDv0iYqi61MzBdItC
+ WCxLmOi4jn0/qbK9ck56MBa19e2tQhUDoi3MI+7tdvICQ7Xul/qIBWMVGgek4To=
+X-Gm-Gg: ASbGncs6P1n9COTHw61X05cxxoMpjpGu11HUv6EoqGdF3ocLa1Qlej6If9DKDTVQkPS
+ HZEjOwQInaMFDYO7eKvoxzdsP3tb1p3SjZoi9MsV7xNL4l8iFfV3fZDdg1IHQ1mUS9BTYMEyzPB
+ V1OSE+a4Un8riVbpjWxVjXmlYIy21Y+DXzQrN48Ejco8Nx+ceEGSP1bz+rifVn2z2F3AIvVma62
+ Dzdf7cPH5rLkivwZq/3BLkbbpZS6MzEOzk+niS0BCW/7JamEDQeEmCghuA7TNLBiRglJhe07gVW
+ +RLLgzlNBIewHBqNRIjFBqcY24iY/pBG+ukdTfa50N1VdM8tAqcjJwPD8+CLLsKHRfkoNKSHxpA
+ 2XiG8j9jEchj0NSU=
+X-Google-Smtp-Source: AGHT+IF+ncpVzsOO1H9DxjGhbagbdgaSOoJ8F2qNMLIcmNp4S7U3tS3pk9ALX9lhLUFwIeuIR7gUlg==
+X-Received: by 2002:a05:600c:3b23:b0:43b:c857:e9d7 with SMTP id
+ 5b1f17b1804b1-440597a14f3mr872385e9.5.1744734267821; 
+ Tue, 15 Apr 2025 09:24:27 -0700 (PDT)
+Received: from localhost.localdomain (i5E863ACE.versanet.de. [94.134.58.206])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39eae96407esm14835197f8f.17.2025.04.15.09.24.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Apr 2025 09:24:27 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Eugen Hristev <eugen.hristev@linaro.org>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] mailmap: update my name and email
+Date: Tue, 15 Apr 2025 18:24:08 +0200
+Message-ID: <20250415162409.4548-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 15 Apr 2025 20:16:52 +0200
@@ -73,41 +103,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the MII interface is used, the PHY is the clock master, thus don't
-set the clock rate. On Zynq-7000, this will prevent the following
-error:
-  zynq_gem ethernet@e000b000: failed to set tx clock rate 25000000
+Update my name and email address
 
-Signed-off-by: Martin Kaistra <martin.kaistra@linutronix.de>
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/net/zynq_gem.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ .mailmap | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/net/zynq_gem.c b/drivers/net/zynq_gem.c
-index 461805ae53f..703e22479d2 100644
---- a/drivers/net/zynq_gem.c
-+++ b/drivers/net/zynq_gem.c
-@@ -567,12 +567,14 @@ static int zynq_gem_init(struct udevice *dev)
- 	}
- #endif
- 
--	ret = clk_get_rate(&priv->tx_clk);
--	if (ret != clk_rate) {
--		ret = clk_set_rate(&priv->tx_clk, clk_rate);
--		if (IS_ERR_VALUE(ret)) {
--			dev_err(dev, "failed to set tx clock rate %ld\n", clk_rate);
--			return ret;
-+	if (priv->interface != PHY_INTERFACE_MODE_MII) {
-+		ret = clk_get_rate(&priv->tx_clk);
-+		if (ret != clk_rate) {
-+			ret = clk_set_rate(&priv->tx_clk, clk_rate);
-+			if (IS_ERR_VALUE(ret)) {
-+				dev_err(dev, "failed to set tx clock rate %ld\n", clk_rate);
-+				return ret;
-+			}
- 		}
- 	}
- 
+diff --git a/.mailmap b/.mailmap
+index 85086602cd50..717daa9adc4a 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -34,8 +34,9 @@ Bhargava Sreekantappa Gayathri <bhargava.sreekantappa-gayathri@amd.com> <bhargav
+ Bhupesh Sharma <bhupesh.linux@gmail.com> <bhupesh.sharma@linaro.org>
+ Bin Meng <bmeng.cn@gmail.com> <bin.meng@windriver.com>
+ Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@bootlin.com>
+ Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@free-electrons.com>
++Casey Connolly <casey.connolly@linaro.org> <caleb.connolly@linaro.org>
+ Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
+ Christopher Obbard <christopher.obbard@linaro.org> <chris.obbard@collabora.com>
+ Dirk Behme <dirk.behme@googlemail.com>
+ Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
 -- 
-2.39.5
+2.49.0
 
