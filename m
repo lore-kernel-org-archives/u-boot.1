@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA76C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 17:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E9EC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 17:37:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D2DE82A27;
-	Tue, 15 Apr 2025 19:35:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id F040B82A27;
+	Tue, 15 Apr 2025 19:37:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GYedKHnZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HIiLQpnk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7182082A5E; Tue, 15 Apr 2025 19:35:43 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E62FA82102
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 19:35:40 +0200 (CEST)
+ id 9A3AF82B27; Tue, 15 Apr 2025 19:37:09 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 40E6982102
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 19:37:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f7e1=XC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744738540;
- bh=T8yXsexG8pZVQsi2Ud56CFOnIWJykkSKqp4K6TjjFrQ=;
- b=GYedKHnZ0zqP5MeULAUiHSz85l7Ia0DaEfEXMk1bXa9bXB8Tw81vi1WgtCiRFO1M2X22sUwDv
- +0TT7V7D+qODErPoTi8PLpdtNT1A6xvzH/nBE/r9rGSQ7GAUOIWi31+qNL42uZ5+JFXNPMEIcEq
- s1+GKyid7F0vHHPxfzf9q5d/5I48F4GH5RhdtJsrymzbTsPZwIj2UfRxviecsFDqZKC6gn7QunY
- rS7b18Sr5TIdc9Csj21EluBDeywxcoFy4hIEKOJCS+Yu6Yx5yj3vQmlKutPTO4uFbKc4lQTv9VJ
- ehyIdib5sQCo8+zrotBgLAPzndO+2zrXUMIN1fh+hfUQ==
-X-Forward-Email-ID: 67fe98e6999e81140c54a3a7
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a1f9c618-96ce-493e-ba1e-bd00b505f558@kwiboo.se>
-Date: Tue, 15 Apr 2025 19:35:29 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53FHb4gC081591
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 15 Apr 2025 12:37:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744738624;
+ bh=NcaulaH+yjvS3kKhQYyaWOKanmX4YTRhy1lUGx6EYK0=;
+ h=From:To:CC:Subject:Date;
+ b=HIiLQpnksU11ULKdqUZDqZbB1rXbba1wnCNY/9M8L21paNsKOgHiG6keuaqB44hrk
+ MjzGuYyUXUPaHhNW7Sq8LqDS2GbvhXfC6B4NM9FeIP8yvoFApt+0+LnHC3rR9ri75k
+ TS3VV+Glf6eKxcxNXKz986EHOT27Wj/63bBdqUYw=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53FHb3NG028076
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 15 Apr 2025 12:37:04 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
+ Apr 2025 12:37:02 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 15 Apr 2025 12:37:02 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53FHax4J003858;
+ Tue, 15 Apr 2025 12:37:00 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>, <m-shah@ti.com>,
+ Bhavya Kapoor <b-kapoor@ti.com>, KEERTHY <j-keerthy@ti.com>
+Subject: [PATCH] arm: mach-k3: r5: j7200: Add clk dev data for WKUP UART
+Date: Tue, 15 Apr 2025 23:06:51 +0530
+Message-ID: <20250415173651.88646-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/16] rockchip: sdram: honor CFG_SYS_SDRAM_BASE when
- defining ram regions
-To: Heiko Stuebner <heiko@sntech.de>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
- detlev.casanova@collabora.com, u-boot@lists.denx.de,
- sebastian.reichel@collabora.com
-References: <20250414200111.1357867-1-heiko@sntech.de>
- <20250414200111.1357867-2-heiko@sntech.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250414200111.1357867-2-heiko@sntech.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,71 +79,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+From: Bhavya Kapoor <b-kapoor@ti.com>
 
-On 2025-04-14 22:00, Heiko Stuebner wrote:
-> Currently the sdram code for arm64 expects CFG_SYS_SDRAM_BASE to be 0.
-> The ram being in front and the device-area behind it.
-> 
-> The upcoming RK3576 uses a different layout, with the device area
-> in front the ram, which then also extends past the 4G mark.
-> 
-> Adapt both the generic zone definitions as well as the ATAG parser
-> to be usable on devices where CFG_SYS_SDRAM_BASE is not 0.
-> 
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  arch/arm/mach-rockchip/sdram.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-> index aa3f47c3f20..f6d9c503bfd 100644
-> --- a/arch/arm/mach-rockchip/sdram.c
-> +++ b/arch/arm/mach-rockchip/sdram.c
-> @@ -182,9 +182,9 @@ static int rockchip_dram_init_banksize(void)
->  		 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
->  		 * have it, so force this space as reserved.
->  		 */
-> -		if (start_addr < SZ_2M) {
-> -			size -= SZ_2M - start_addr;
-> -			start_addr = SZ_2M;
-> +		if (start_addr < SZ_2M + CFG_SYS_SDRAM_BASE) {
+Add clk and dev data for wakeup uart to enable wakeup
+UART as console.
 
-A small nitpick for consistency:
+Reported-by: KEERTHY <j-keerthy@ti.com>
+Signed-off-by: Bhavya Kapoor <b-kapoor@ti.com>
+---
+ arch/arm/mach-k3/r5/j7200/clk-data.c | 16 ++++++++++++++++
+ arch/arm/mach-k3/r5/j7200/dev-data.c |  1 +
+ 2 files changed, 17 insertions(+)
 
-	if (start_addr < CFG_SYS_SDRAM_BASE + SZ_2M) {
-
-That would result in 4x grep-able "CFG_SYS_SDRAM_BASE + SZ_2M" in this
-file.
-
-Regards,
-Jonas
-
-> +			size -= CFG_SYS_SDRAM_BASE + SZ_2M - start_addr;
-> +			start_addr = CFG_SYS_SDRAM_BASE + SZ_2M;
->  		}
->  
->  		/*
-> @@ -229,7 +229,7 @@ static int rockchip_dram_init_banksize(void)
->  					return -EINVAL;
->  				}
->  
-> -				size -= rsrv_end - start_addr;
-> +				size -= rsrv_end - (start_addr - CFG_SYS_SDRAM_BASE);
->  				start_addr = rsrv_end;
->  				break;
->  			}
-> @@ -302,8 +302,8 @@ int dram_init_banksize(void)
->  	debug("Couldn't use ATAG (%d) to detect DDR layout, falling back...\n",
->  	      ret);
->  
-> -	/* Reserve 0x200000 for ATF bl31 */
-> -	gd->bd->bi_dram[0].start = 0x200000;
-> +	/* Reserve 2M for ATF bl31 */
-> +	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE + SZ_2M;
->  	gd->bd->bi_dram[0].size = top - gd->bd->bi_dram[0].start;
->  
->  	/* Add usable memory beyond the blob of space for peripheral near 4GB */
+diff --git a/arch/arm/mach-k3/r5/j7200/clk-data.c b/arch/arm/mach-k3/r5/j7200/clk-data.c
+index eb8436decbd..996ba2023fe 100644
+--- a/arch/arm/mach-k3/r5/j7200/clk-data.c
++++ b/arch/arm/mach-k3/r5/j7200/clk-data.c
+@@ -62,6 +62,16 @@ static const char * const wkup_i2c0_mcupll_bypass_clksel_out0_parents[] = {
+ 	"gluelogic_hfosc0_clkout",
+ };
+ 
++static const char * const wkupusart_clk_sel_out0_parents[] = {
++	"hsdiv4_16fft_mcu_1_hsdivout3_clk",
++	"postdiv2_16fft_main_1_hsdivout5_clk",
++};
++
++static const char * const wkup_usart_mcupll_bypass_clksel_out0_parents[] = {
++	"wkupusart_clk_sel_out0",
++	"gluelogic_hfosc0_clkout",
++};
++
+ static const char * const main_pll_hfosc_sel_out0_parents[] = {
+ 	"gluelogic_hfosc0_clkout",
+ 	"board_0_hfosc1_clk_out",
+@@ -345,6 +355,8 @@ static const struct clk_data clk_list[] = {
+ 	CLK_MUX("mcuusart_clk_sel_out0", mcuusart_clk_sel_out0_parents, 2, 0x40f081c0, 0, 1, 0),
+ 	CLK_MUX("wkup_gpio0_clksel_out0", wkup_gpio0_clksel_out0_parents, 4, 0x43008070, 0, 2, 0),
+ 	CLK_MUX("wkup_i2c0_mcupll_bypass_clksel_out0", wkup_i2c0_mcupll_bypass_clksel_out0_parents, 2, 0x43008060, 0, 1, 0),
++	CLK_MUX("wkupusart_clk_sel_out0", wkupusart_clk_sel_out0_parents, 2, 0x43008064, 0, 1, 0),
++	CLK_MUX("wkup_usart_mcupll_bypass_clksel_out0", wkup_usart_mcupll_bypass_clksel_out0_parents, 2, 0x43008060, 0, 1, 0),
+ 	CLK_MUX("main_pll_hfosc_sel_out0", main_pll_hfosc_sel_out0_parents, 2, 0x43008080, 0, 1, 0),
+ 	CLK_MUX("main_pll_hfosc_sel_out12", main_pll_hfosc_sel_out12_parents, 2, 0x430080b0, 0, 1, 0),
+ 	CLK_MUX("main_pll_hfosc_sel_out14", main_pll_hfosc_sel_out14_parents, 2, 0x430080b8, 0, 1, 0),
+@@ -543,6 +555,10 @@ static const struct dev_clk soc_dev_clk_data[] = {
+ 	DEV_CLK(203, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
+ 	DEV_CLK(278, 2, "usart_programmable_clock_divider_out1"),
+ 	DEV_CLK(278, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(287, 2, "wkup_usart_mcupll_bypass_clksel_out0"),
++	DEV_CLK(287, 3, "wkupusart_clk_sel_out0"),
++	DEV_CLK(287, 4, "gluelogic_hfosc0_clkout"),
++	DEV_CLK(287, 5, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
+ 	DEV_CLK(288, 3, "postdiv2_16fft_main_1_hsdivout7_clk"),
+ 	DEV_CLK(288, 4, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+ 	DEV_CLK(288, 6, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+diff --git a/arch/arm/mach-k3/r5/j7200/dev-data.c b/arch/arm/mach-k3/r5/j7200/dev-data.c
+index 8ce6796fd04..12a1386f9d1 100644
+--- a/arch/arm/mach-k3/r5/j7200/dev-data.c
++++ b/arch/arm/mach-k3/r5/j7200/dev-data.c
+@@ -66,6 +66,7 @@ static struct ti_dev soc_dev_list[] = {
+ 	PSC_DEV(149, &soc_lpsc_list[12]),
+ 	PSC_DEV(113, &soc_lpsc_list[13]),
+ 	PSC_DEV(197, &soc_lpsc_list[13]),
++	PSC_DEV(287, &soc_lpsc_list[13]),
+ 	PSC_DEV(103, &soc_lpsc_list[14]),
+ 	PSC_DEV(104, &soc_lpsc_list[15]),
+ 	PSC_DEV(102, &soc_lpsc_list[16]),
+-- 
+2.34.1
 
