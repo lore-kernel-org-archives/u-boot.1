@@ -4,96 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB670C369BA
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 18:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D20C369BD
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 19:34:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 090448209C;
-	Tue, 15 Apr 2025 20:45:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8663982B3D;
+	Tue, 15 Apr 2025 21:34:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xJv5wFZR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZrLvDttE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEA2182A27; Tue, 15 Apr 2025 20:45:51 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 563DC82B3D; Tue, 15 Apr 2025 21:34:52 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82B2B81F7E
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 20:45:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BFE182A27
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 21:34:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e455bf1f4d3so4502794276.2
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 11:45:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43cebe06e9eso45355275e9.3
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 12:34:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744742748; x=1745347548; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xa8Tevl7fuuXtePq2J+RMxSfDH3bIgwfORWYmZrhpnk=;
- b=xJv5wFZRhY4+8FE5FNOgaM5U/L1U/EbRL4Zdckdo7H5W72wnVTPywRkriXQjUqOrox
- 2zkDDbvLA67MnXMDx8SYYofghCeu1NrsTF3aDwvy+PMP0+K1iP8LJBtMp3xbP0cELiZO
- +XaYZaqwlQRh8hDbQdqqz1gFb3r2G3Famx2TXwTJHnJVSAIqk9CGTwJNqI1uUbJ0KlIg
- mlCwNN+KoMthzo29qm0Stb2nMmOs2uVGRAqIA6mHL/3x/+rdO+ZMZoLOvghRRI/5jFaR
- TpodSt0CEzM2gi/8v+5qmBab+SNbB6v7KF7DoeNCKc14SWxxLgnm6lEIfdzyIf9Xs1wi
- +FpA==
+ d=linaro.org; s=google; t=1744745689; x=1745350489; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=W1h5b16QTIYZyya3n51BOaw9+qGTKuF6uRQJIPs/x8M=;
+ b=ZrLvDttEQN6erP8n4OLH3oaCM6awXpJ42IgGWkleCLhyjeRT1ZHJgGlV8bvW/6ZXvW
+ WAVYIorksa39XEe2RDqWNEeHs/TXfuSVObChKOFpWTo2M4yqS+8kUdbYPzFXris3cAZv
+ X/TdQhfQJa/lb66Tp4QCswGFerinH9o6oGzhF1d6XLhl/ntAzt0beq/w/siwXv28LmvS
+ Uft8nohJSdG22WrUSCoStS9d5+Ktlhl2CRheWEuYGIS3kKf+lccJbkkPSUAEy5FhPBv3
+ TuIyEnMar/GlNnnMO9M55r3R1vtJocta9LPrumTz9O618QdnmuTeCCnpQPQIarR3wdH4
+ ORaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744742748; x=1745347548;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1744745689; x=1745350489;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xa8Tevl7fuuXtePq2J+RMxSfDH3bIgwfORWYmZrhpnk=;
- b=TQ41iTtgUGm5Xk/ylCui22frsVY8r+erwgV/huZzZySHei4bSg43eSBTMJxGLaCZGr
- oHLdtkeF+X1P9pGn7QKG38m0zxWXI1pZrO8ielTgoOiXZq+uuLblb55mCJTMIdhDbd0I
- mPKLXRBirZUsL65BLk0wmPXr+97/kl8qfNTuvY5OTPtWcWvqaF1luMyYaqvu6ul+l73t
- H2KfoIjMyInkYorHdswgco9xH9+KdOhxaOKE8PFAMUV8cbk//Q6k/P2X6R5br2tHerLO
- lBAM4E7fjpnfup3Fd9i+hQHl1tIIqd9o17oFq934eZvlE2F/+0SQkEX3qZhKz1kCZwqw
- fdaQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU8AQG7MjG0sUqsWBWzVrU66lmGWntbsX39jDFxSVWnJvjl1yucUkliF94QievXNH74jFmj+4g=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVZ04ajnMbiSpyvkeO4XPpzj5Jqm90HcOJDAh+TavKhdT/bcdG
- 8dJShodhfrSGyfWhowXCF0En4bMYcuc0EG+6u6Y3T1xJjD+EDU30sK4lDEgPQBKeiTrdr9FycNw
- BXdDPnSU+W+SV2N1HDOKDTtl3rEzYiijs6Z2f9A==
-X-Gm-Gg: ASbGncskgvE8tCK5F816XImaPvlIhpoEn7SLcBgt/LBpup46lvW9+HCdzTCFf144rNO
- XhWnDLz3kcuFnX4Aa3qN4vfeAU9842rFUhyj5SkmBJbEn53Bgx0SNZKbPrN8PGWSP9066ffXueQ
- srmaVX1FwRpAYU4RdZJtyKAfmOc6ZpmWtYXA==
-X-Google-Smtp-Source: AGHT+IFaZG0v3tF/UWiSlXKSaHOsrHxw669nMrYGhBcgJpoLKwoMQauS3Jsob2ooxqLWYO014I9JEHZDDF7fStJcWB0=
-X-Received: by 2002:a05:6902:2211:b0:e70:a3ae:4797 with SMTP id
- 3f1490d57ef6-e726e7c60e2mr514729276.11.1744742748245; Tue, 15 Apr 2025
- 11:45:48 -0700 (PDT)
+ bh=W1h5b16QTIYZyya3n51BOaw9+qGTKuF6uRQJIPs/x8M=;
+ b=sZoCAVDtEPLtbJvqBjBwJlRT3ndP1AVFvg3N7HAZht0Is6zjMHx92BooGv1i+luETM
+ J8l3sU60vwGSTmf0jya22KgTsNoGG4vy+kE/ZQHk9QzJYspn/BYUimU3fOdbN0Z55cFs
+ 0O6HXTEsY8jt8Eip+ptif7hSr6puJDrN3VCFCoXIeCznw2vqNfkGqHWQ94zjv7mfXLfB
+ +SNy06uoZf0kmB4MYFYs/mPhhFRi50rbkHrYf2Rc5+yTVXLLPOxGq2uJpcs37ovpXB66
+ mbksXdc1vTjhPs4s4oLtMtt6xHZHXeihaXKeUCPoZEfuuxMqWiJ3ZP0J/6EHu6xPejF/
+ 4Khg==
+X-Gm-Message-State: AOJu0YxWCvjhqXzWhM0/48RCOZGbj4pp2uXmLtEuODpZS/opUQ5p6o4p
+ GTwKmoFAaMRyIBEq/oxRm0nKssM8AdozomaJx9qhllOH8wLRvCuZbWAjrw0R1E+8k/VVCZ800n1
+ 0VQQ=
+X-Gm-Gg: ASbGncsp+WQa3wZzMgg3D0hXRN4XbCXvehhjs2xTNtSqnAp5CvxAYC2h9xq26A3k/r+
+ FXmxPgccuq9F6gkYV1aozfjcqAa5kFI1UJP03LVV2dvgPP2ZfeiXmmPM9/wV/hn9dZ0wnTj4MJ0
+ 2IILcTLOeeRqbUfBpnapX7YKYEu0lwGbYf6+dXIwS0Tbeal/FAKJ61hI/+x6P45q++t+YAi8lz8
+ QX2SDZ8le2hOCOoT/tAHIE2g2eXXOIbfVxmMmpQ0m/vJc+hA5Ajy4UhJS0Ls2miUGn3dEIjjq3f
+ l1Yq23A3dGpwnukPRvUQ5fe6eV9wkwjEvnl4Dlnk+ui8iWPQ
+X-Google-Smtp-Source: AGHT+IGvQXbot/at6dje3BHvio4RQo7HFtkMREzg74gvuY+I5Yq+0byq+G40D4D+Juszk7UX7h8mww==
+X-Received: by 2002:a5d:5f48:0:b0:391:4674:b10f with SMTP id
+ ffacd0b85a97d-39ee2760552mr633721f8f.36.1744745689483; 
+ Tue, 15 Apr 2025 12:34:49 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:6ebc:6ce:770e:95f9])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39eaf43d046sm15520484f8f.63.2025.04.15.12.34.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Apr 2025 12:34:48 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 0/4] NET_LWIP LMB fixes
+Date: Tue, 15 Apr 2025 21:34:25 +0200
+Message-ID: <20250415193436.1240804-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250405190711.365419-1-sjg@chromium.org>
- <20250414225307.GH5495@bill-the-cat>
- <CAC_iWjKUBp1dUkGVts7aCcJEFNrE95Lu9ApmpPR5itCaWanJRQ@mail.gmail.com>
- <20250415141226.GJ5495@bill-the-cat>
-In-Reply-To: <20250415141226.GJ5495@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 15 Apr 2025 21:45:12 +0300
-X-Gm-Features: ATxdqUEYXwsRujs_i_SAtBMKzEM7svKuFitzdukPrjtAOaBdU-tcLupo0ZKSKeM
-Message-ID: <CAC_iWj+480bm2w5pgSOY6cA_R-BfeH3aUhQyUgwceOogkN0Gvw@mail.gmail.com>
-Subject: Re: [PATCH v2] emulation: fdt: Allow using U-Boot's device tree with
- QEMU
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Peter Maydell <peter.maydell@linaro.org>,
- Andrew Phelps <andrew.phelps@canonical.com>, 
- Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>,
- Jerry Van Baren <vanbaren@cideas.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Lukas Funke <lukas.funke@weidmueller.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Max Filippov <jcmvbkbc@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>, 
- Sumit Garg <sumit.garg@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,54 +101,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Apr 2025 at 17:12, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Apr 15, 2025 at 10:22:50AM +0300, Ilias Apalodimas wrote:
-> > Hi Tom
-> >
-> > Thanks for roping me in.
->
-> You were cc'd on the original, FWIW.
+Two small patches fixing issues with tftp and wget when the network
+stack is NET_LWIP and LMB is enabled. Plus one prerequisite patch
+fixing a problem with wget that does printf()/puts()/putc() when
+called from EFI which is not allowed (messes with the console output)
+and a small refactoring in net/lwip/wget.c.
 
-I completely missed that and only noticed it with your reply. Thanks!
+Changes in v4:
+- See changelog in the individual patches
 
->
-> >
-> > On Tue, 15 Apr 2025 at 01:53, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Apr 06, 2025 at 07:07:04AM +1200, Simon Glass wrote:
-> > >
-> > > > At present it is impossible to change the qemu_arm64 defconfig to
-> > > > obtain a devicetree from the U-Boot build.
-> > > >
-> > > > This is necessary for FIT validation, for example, where the signature
-> > > > node must be compiled into U-Boot.
-> >
-> > I'll repeat once more, that using the DT to store whatever random data
-> > you invent makes little sense.
-> > No one is obliged to follow internal U-Boot ABIs. Instead, it would
-> > make much more sense to store the data in the U-Boot binary somewhere
-> > and retrieve them. On top of that we now have proper memory
-> > permissions at least for arm64 and you can place certificates in
-> > .rodata.
->
-> I don't see the high level difference really between blob with a
-> signature attached somewhere being good (signed EFI files where the
-> signature isn't an external file) vs blob with a signature attached
-> somewhere being bad (what Simon is doing with FIT here).
+Jerome Forissier (4):
+  net-lwip: change static function wget_loop() to be wget_do_request()
+  net, net-lwip: wget: suppress console output when called by EFI
+  net-lwip: wget: add LMB and buffer checks
+  net-lwip: tftp: add LMB and buffer checks
 
-There really isn't a technical one. The only thing that makes our
-lives a lot easier is that DT is governed by a spec and adding u-boot
-signatures in there feels a bit weird. It also *requires* us to do
-things like the current patchset, while using the binary itself
-doesn't.
+ include/net-common.h     |   2 +
+ lib/efi_loader/efi_net.c |   2 +-
+ net/lwip/tftp.c          |  56 +++++++++++++++----
+ net/lwip/wget.c          | 113 +++++++++++++++++++++++++++++----------
+ net/wget.c               |  23 +++++---
+ 5 files changed, 150 insertions(+), 46 deletions(-)
 
->  So as long as
-> we can drop the antagonism (and don't break other use cases) I'm fine
-> with letting this alternate way of securing a system proceed.
->
+-- 
+2.43.0
 
-Thanks
-/Ilias
-> --
-> Tom
