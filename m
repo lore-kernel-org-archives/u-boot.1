@@ -4,83 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6736C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 14:19:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42656C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 14:26:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E42B082AAF;
-	Tue, 15 Apr 2025 16:19:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 56BFB82AAF;
+	Tue, 15 Apr 2025 16:26:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D8LLnMQm";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hwQdG5tz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89B2082ABB; Tue, 15 Apr 2025 16:19:48 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 484BC82ABB; Tue, 15 Apr 2025 16:26:44 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D28E88294C
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 16:19:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DEF28294C
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 16:26:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2c76a1b574cso2156500fac.2
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 07:19:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744726784; x=1745331584; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ygoJgnvmaSFTnIS14UmhKeoWrz8bFAXxPCKWo1qx6iU=;
- b=D8LLnMQmFOGk8/4ms1CWeBK5YJcOIPVr5PB9ZBq0gPzfgS3aMEUvutl4X3TOYiQZMe
- AbjSxYFR6qrkAmyVO1EuFZwP3EAXflZpCjq58Q0kXWeHFuA//3ncTT6U4Zw8JJvQb+OE
- SKALo1Ha15+EaeTB6ajciMtN3b9M7cjkP+3xA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744726784; x=1745331584;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ygoJgnvmaSFTnIS14UmhKeoWrz8bFAXxPCKWo1qx6iU=;
- b=PymLPewpY5vOB0kvrJ9UUB/o5lr7DBg8rO1BWNd9vXXqJmPflp6IZ1Fvj9iZTX9pfi
- 98zNJ+VAR9XdC9he7mu7nTtpFzyZyxigx1+EFQW0dnX5CL3au4vKnjlgTTFsoEurK6TT
- 0Gx6/sVT8QV+uMfIiEhp7htP4w3n1k5/PSlvBvzw8of0LzG0sBxeKYy7Lpms0mZOIyQY
- S9+DXXCpcSkAS7zg0E+QdWtRUH677AH53PZxWSOm+AdaFOYCpy2zeE/Mb6MSzpIq6oLm
- cawikdthzHZZqT3JpCFviWAK/JKW3FugMlLsOmfd/+qKUPblPUHdAGPVklHLOlyz4YFV
- JCIw==
-X-Gm-Message-State: AOJu0YxYwivpL7OG/kiVsOEGN1W9r+ZCUqzY+qhUgCIqyMjl5zvzUKXC
- IU78JJToIKUX1i5xkOqC+eFA+Yy9CsIazIMvuJu7vFs9bfb0fkbsO0JZTSSIKJE=
-X-Gm-Gg: ASbGncvZPAKYieT5tVDDPDpHuzw8X8R8W9V4WL5AlyMMv+KWOgaFYfcH/CSk6mPF1qE
- yWN+AmtfN6T6Ae8UMwdglNRGZLav2ViKFc7iuhEYEGQ92RqFgHswN2EGrUW1V2WQ8ST3Q+5eYJL
- mDaSuolVTpvY+cdOR/6+zhy++umZtZkLdCPoDSSXlgLjt78PKdEwvtu5oKCJKRkfGz66Txps64v
- hJstaOYFjefC51t/CcUqwLCYnAHFbcxo4m3ugHRGCE9/hE4g1G6Np+3eVuWUVyjd0e+1hvL1343
- S++GjS9MmlBg3VBUUqAJmOaPrgBJsNU+a7U6M0AoVPVK2BaEPod+QXfLp19E2JHENUZjZk2lOOQ
- /wA==
-X-Google-Smtp-Source: AGHT+IFmff9e+wDWs1F9iniycLvnb3CMmUmzmqzPZTqAayQliv9VBKte5tcOJXN5SlryRMSuVgBO0w==
-X-Received: by 2002:a05:6870:ce46:b0:29e:69d9:8834 with SMTP id
- 586e51a60fabf-2d0d57dd009mr9284909fac.0.1744726784438; 
- Tue, 15 Apr 2025 07:19:44 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73e677f1sm2376937a34.65.2025.04.15.07.19.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 07:19:43 -0700 (PDT)
-Date: Tue, 15 Apr 2025 08:19:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v5 00/16] Uthreads
-Message-ID: <20250415141941.GK5495@bill-the-cat>
-References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
- <20250411202910.GA141451@bill-the-cat>
- <8f1d8b98-6eff-4986-acad-f4eb7da87446@linaro.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1744727201; x=1745332001; i=xypron.glpk@gmx.de;
+ bh=4RdvAH3v3BHE2Y3Wq9nJJKyFZjCYoBm6loPHKOWgWmE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=hwQdG5tzXlnl823T5wNW2ulSLBcgDbtJJVNQGoAaLxRkzxiAIUAFlcKgYP2NktOv
+ 1QsXjpNUkLd1E5u/SXQIkm9zFaOo3ZexVlAgXQGTsSrGPpbhjZEBkLPiIl9QNH1Qq
+ fgCnR/4jeJWyOEg+qBDwgmZKffCeEJoqYanzC7VOOQUzALn3f9CepcpbuqdH6quJK
+ T+awSUDYX7X84xUX71mtsB1i5NlIdAJh76UuomPvJ0ML24mTCqIBQjkK9dSR9H3Mm
+ umtrU4s7pvLURR0UE8LW9FgBMudHiQHrCPRKV3jh/92FKNoLp6O13CcHyB3pJQBP+
+ mXVZJqG7C1VJ+Ne/2A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MpUUw-1tF6g13NpU-00aLlc; Tue, 15
+ Apr 2025 16:26:41 +0200
+Message-ID: <c517a968-0ea4-4374-b477-c9f06f104e19@gmx.de>
+Date: Tue, 15 Apr 2025 16:26:41 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EA0s2itjt1j28Lyx"
-Content-Disposition: inline
-In-Reply-To: <8f1d8b98-6eff-4986-acad-f4eb7da87446@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/2] test: fix print_guid()
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, U-Boot mailing list <u-boot@lists.denx.de>
+References: <20250415125345.427420-1-jerome.forissier@linaro.org>
+ <20250415125345.427420-2-jerome.forissier@linaro.org>
+ <b4d515cd-57de-4094-96b2-54749129a284@gmx.de>
+ <e84b805c-49b9-41dd-84d8-1b40dad0b2f5@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <e84b805c-49b9-41dd-84d8-1b40dad0b2f5@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Ml7q/OdqdV7XOQ/piGLuX0mAYxisOSFMlKJ99nl4W4e3E/B0jet
+ D4xjzI+Q60JrjBxEhqiJjr4qmQQeT+fPqCHBvc7WddMt/RIOz4y5DkjfE+Ni+7a0P30mFew
+ FwPtrsV8uF9klyKN8kH3GHkJKT8UzFOY69jUXHvncBYasX3qlB/ENOYJCbKROYb14Bu6iVU
+ EROseUJzdTvIypac7MIPA==
+UI-OutboundReport: notjunk:1;M01:P0:hhjtIH+lrZ0=;tbWqMQjqQR01/mjkgCHzTNgXzTy
+ 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
+ Q==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,144 +125,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---EA0s2itjt1j28Lyx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Apr 15, 2025 at 03:36:53PM +0200, Jerome Forissier wrote:
-> Hi Tom,
+On 15.04.25 15:51, Jerome Forissier wrote:
+> Hi Heinrich,
 >=20
-> On 4/11/25 22:29, Tom Rini wrote:
-> > On Mon, Mar 31, 2025 at 02:30:54PM +0200, Jerome Forissier wrote:
-> >=20
-> >> This series introduces threads and uses them for two things:
-> >> - Improve the performance of the USB bus scanning code (scan multiple
-> >> busses simultaneously),
-> >> - Implement background jobs in the shell via two new commands: 'spawn'
-> >> and 'wait'.
-> >>
-> >> The threading framework is called 'uthread' and is inspired from the
-> >> barebox threads [2]. setjmp() and longjmp() are used to save and
-> >> restore contexts, as well as a non-standard extension called initjmp().
-> >> This new function is added in several patches, one for each
-> >> architecture that supports HAVE_SETJMP. A new symbol is defined:
-> >> HAVE_INITJMP. Two tests, one for initjmp() and one for the uthread
-> >> scheduling, are added to the lib suite.
-> >>
-> >> The schedule() and udelay() function are updated to become thread
-> >> re-scheduling points, and mutex objects are introduced. With that the
-> >> USB stack initialization is modified to benefit from concurrency when
-> >> UTHREAD is enabled, where uthreads are used in usb_init() to initialize
-> >> and scan multiple busses at the same time. The code was tested on arm64
-> >> and arm QEMU with 4 simulated XHCI buses and some devices. On this
-> >> platform the USB scan takes 2.2 s instead of 5.6 s. Tested on i.MX93 E=
-VK
-> >> with two USB hubs, one ethernet adapter and one webcam on each, "usb
-> >> start" takes 2.4 s instead of 4.6 s.
-> >>
-> >> Finally, the spawn and wait commands are introduced, allowing the use =
-of
-> >> threads from the shell. Tested on the i.MX93 EVK with a spinning HDD
-> >> connected to USB1 and the network connected to ENET1. The USB plus DHCP
-> >> init sequence "spawn usb start; spawn dhcp; wait" takes 4.5 seconds
-> >> instead of 8 seconds for "usb start; dhcp".
-> >>
-> >> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D446674
-> >> [2] https://github.com/barebox/barebox/blob/master/common/bthread.c
-> >=20
-> > So, we're nearly there. But there's some CI problems. First, CI isn't
-> > testing this because nothing enables UTHREADS.
+> On 4/15/25 15:25, Heinrich Schuchardt wrote:
+>> On 15.04.25 14:53, Jerome Forissier wrote:
+>>> The %pUs format specifier prints the system partition GUID as "System
+>>> Partition" if PARTITION_TYPE_GUID is disabled but either CMD_EFIDEBUG
+>>> or EFI are enabled. See list_guid[] in lib/uuid.c. Fix the print_guid(=
+)
+>>> unit test accordingly.
+>>>
+>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>> ---
+>>>
+>>>  =C2=A0 test/common/print.c | 2 ++
+>>>  =C2=A0 1 file changed, 2 insertions(+)
+>>>
+>>> diff --git a/test/common/print.c b/test/common/print.c
+>>> index e3711b10809..574c84b2eee 100644
+>>> --- a/test/common/print.c
+>>> +++ b/test/common/print.c
+>>> @@ -47,6 +47,8 @@ static int print_guid(struct unit_test_state *uts)
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sprintf(str, "%pUs", guid_esp);
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_PARTITION_TYPE_G=
+UID)) { /* brace needed */
+>>
+>> I would not know why a brace should be needed for a define using
+>> {( some expressions }).
+>>
+>> The problem should be resolved since fa847bb409d6 ("test: Wrap assert m=
+acros in ({ ... }) and fix missing semicolons").
 >=20
-> Thanks for looking into this.
+> Most probably, yes. I'll reformat in v2.
 >=20
-> I do have a TESTING patch [0] that enables this for various QEMU plaforms
-> (arm, arm64, riscv32, riscv64) and for sandbox64. Please refer to the
-> following CI pipeline [1].
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ut_asserteq_st=
+r("system", str);
+>>> +=C2=A0=C2=A0=C2=A0 } else if (IS_ENABLED(CONFIG_CMD_EFIDEBUG) || IS_E=
+NABLED(CONFIG_EFI)) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ut_asserteq_str("System Pa=
+rtition", str);
+>>
+>> Printing two different strings depending on configuration settings is n=
+ot very helpful for users.
 >=20
-> [0] https://source.denx.de/u-boot/custodians/u-boot-net/-/commit/8460f6ab=
-efff
-> [1] https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/25706
-
-Oh good, thanks.
-
-> > I don't know if we should
-> > enable it by default on qemu_arm64 for example or not.
+> Agreed.
 >=20
-> Good question. Perhaps we could have a separate defconfig for the somewhat
-> experimental stuff?
-
-Well, personally, I'd like to see the literal qemu targets (ie
-qemu_arm64 but not sifive_unleashed) enable UNIT_TEST and a few other
-things so that those features are tested somewhere, and I don't know the
-use case for U-Boot for QEMU virtual machine target for production,
-where the final use case isn't "... for testing $X". Happy to be
-informed otherwise of course. And then yes, we could just enable UTHREAD
-for at least some if not all qemu targets that support it, and test it
-there. Especially since it's not just a single flag to enable.
-
-> > But for testing,
-> > I added this to .gitlab-ci.yml (and something similar would work for
-> > Azure):
-> > qemu_arm64_uthread test.py:
-> >   variables:
-> >     TEST_PY_BD: "qemu_arm64"
-> >     TEST_PY_TEST_SPEC: "not sleep"
-> >     OVERRIDE: "-a CONFIG_UTHREAD=3Dy -a CONFIG_CMD_SPAWN=3Dy -a CONFIG_=
-UNIT_TEST=3Dy"
-> >   <<: *buildman_and_testpy_dfn
-> >=20
-> > This however leads first to unrelated tests failing:
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1099921
+>> Can we print "ESP" in all cases, please?
 >=20
-> Unrelated indeed. It turns out UNIT_TEST=3Dy on qemu_arm64 is broken in m=
-aster.
-> I just posted a fix [2].
+> Fine with me in principle but...
+> - Don't we risk breaking things which would depend on the partition name=
+?
+> - I find "ESP" a bit cryptic. I would suggest "EFI System Partition" but=
+ it
+
+Fine with me.
+
+> is quite long and I see that CONFIG_PARTITION_TYPE_GUID defines only sho=
+rt
+> names ("system", "mbr", "msft"...) so there must be a reason.
+
+The place where the string is printed is part_print_efi().
+It is on a separate line:
+
+Partition Map for host device 0  --   Partition Type: EFI
+
+Part    Start LBA       End LBA         Name
+         Attributes
+         Type GUID
+         Partition GUID
+   1     0x00000800      0x0003f7ff      "EFI system partition"
+         attrs:  0x0000000000000000
+         type:   c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+                 (system)
+         guid:   3795c782-a55d-490b-b0f6-c1da67bef048
+
+The gpt command uses GUIDs and not strings.
+
+Thus any string value should be fine.
+
+Best regards
+
+Heinrich
+
 >=20
-> [2] https://lists.denx.de/pipermail/u-boot/2025-April/586897.html
+> Regards,
 
-Ah thanks, nice.
-
-> > And I didn't see if the new tests ran either.
->=20
-> It seems you need to enable CMD_TIME too. In my testing patch I added -v
-> (verbose) to the test.py command so that we can clearly see that
-> lib_initjmp [3], lib_uthread [4] and lib_uthread_mutex [5] are run in CI.
->=20
-> [3] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1103031#L4=
-57
-> [4] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1103031#L5=
-04
-> [5] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1103031#L5=
-05
-
-Ah very good, I was worried about hitting further issues.
-
-So I think in sum for v6, we just need to respin v5 such that some
-representative sets of qemu enable UTHREAD, and then a stand alone
-series (v2 of your series in [2]) to enable UNIT_TEST more widely in
-qemu. Thanks!
-
---=20
-Tom
-
---EA0s2itjt1j28Lyx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf+av0ACgkQFHw5/5Y0
-tyyCuQv+JzfiA5+cAb+ikVR5KCKtJ58i0V60fiRci6Ik9ZYR513ql+jVwGHTD9wQ
-NMHl6RcMaTcG64DZgjT+zUxKTSdvvwBGN/SEEy2vqKLrgYsSiDa6UVw4Y9+EWPDc
-vS45WNGTmbDLtU4N05yiTo8AyszCcYBCXxXQy+k0yFx/nvuH2cEHuOvush6VF7vJ
-tax1TxZpA8F8CK4y1kamkMZXXauCS/Sv/nMSPE7gINJL0T1VzLLfG3scM+y/I1G2
-+b7n9FL86v7vxYkwoA7d2BlCoYsGYua8EQIg8SOI7+Vn3D3Zwdg5zrmjH330DhSG
-XEfY52qvc0PbYR10kJ5oYGE9ATakHYuqbn0lqVafrnD4rWEIdUrOUaXNXzLrRUt3
-8EIa6wOnEiBi/y0YKPyRIK4KtySnb2qCcy5zPUFgzz4x3uvKj+JNwzyPm3zJKn6p
-04kJJk7FugwD3tKFtI1NPzL3MSyQPI8aakCE2y5OXShVQS9PQdStYb0RXs2Xlz3o
-phmuDUyM
-=+yK3
------END PGP SIGNATURE-----
-
---EA0s2itjt1j28Lyx--
