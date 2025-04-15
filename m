@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5450CC369B9
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DD53C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAACD82CAC;
-	Tue, 15 Apr 2025 23:52:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1930182CB5;
+	Tue, 15 Apr 2025 23:52:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="eiQWCVG/";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="1K+BFztC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2E5F82C27; Tue, 15 Apr 2025 23:52:12 +0200 (CEST)
+ id C9DE782C27; Tue, 15 Apr 2025 23:52:12 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D7BF82C30
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 23:52:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEE4381F6B
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 23:52:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
  s=gloria202408;
- h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID;
- bh=fBl47YLCBV+9rG461y/owSxiOrPp4SPfK8qOQUIF4Zk=; b=eiQWCVG/4roRZa9BvxDnaF0IUm
- Cur6iKnx1PSBHeizVwZ3OR1nhV6AI1oUTgib17FCaiZ1JuAyXrmpEgmCY66OwuAN2ce1RE+e7gnfN
- 9ChX0MjZ1VDIs8xMLZ5rmdkdTcIhP4zgm0ym7ZtJU9MsUv886jOUiMcHi9ammK4w1213goEM+SIKG
- JqZT2LA0ox8NWM8uqB3sEsocef61wK/HX7wUZjC4wivzZ9YCophh5ynbeOU6WLqw86WOKb/05cKjo
- MhBl0Pb/cgotTaenQYOzffsg6Q4F86GAyMpAD/kuK3LP54B01uWwApLSS3NfliLvUm9YRyUfur+Ud
- hNEvSu5g==;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=fcV34ti0GhUZ0/Gk4MstYRqX4n0PX9l68XVcvezEShg=; b=1K+BFztCc4t+BS7v+Y99HiabwF
+ k6rxIVptkkrcJsW3Q+cc5MK1SIEAXIIkECmQaohaXE0npF6bnJLUVr41L+hySP+UpVdgooCaNcIro
+ xVlivvWSTocnZazY3aM2d0p3R9k+JQRwaSODx5rQqYDYjlEANQYl7La1E4ROkdeG7ucagzReM37aD
+ mWQGkerq4uwaW6ZalPtpkVX4lGAt26iropCAHXX4NYvV0ThGZm2GQRrXvJwbrHinI+JsdgaEO5/xQ
+ MxBVGVaik7FkFP78U6M7f+09dBATYuXr9QHngm24eVTAUK6UOd7SXAxSU/ic4732Pm5XyO6J+TQVv
+ sc/VmRCA==;
 Received: from i53875b95.versanet.de ([83.135.91.149]
  helo=localhost.localdomain)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1u4oCH-0007Uo-AT; Tue, 15 Apr 2025 23:52:01 +0200
+ id 1u4oCC-0007Uo-Qw; Tue, 15 Apr 2025 23:51:56 +0200
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
@@ -50,12 +50,10 @@ Cc: heiko@sntech.de, lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
  jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
  jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
  u-boot@lists.denx.de, sebastian.reichel@collabora.com
-Subject: [PATCH v3 07/15] ram: rockchip: Add rk3576 ddr driver support
-Date: Tue, 15 Apr 2025 23:51:20 +0200
-Message-ID: <20250415215128.1475593-8-heiko@sntech.de>
+Subject: [PATCH v3 00/15] Support for the RK3576
+Date: Tue, 15 Apr 2025 23:51:13 +0200
+Message-ID: <20250415215128.1475593-1-heiko@sntech.de>
 X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250415215128.1475593-1-heiko@sntech.de>
-References: <20250415215128.1475593-1-heiko@sntech.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,69 +72,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ddr driver for rk3576 to get the ram capacity.
+This adds support for the RK3576 SoC from Rockchip.
 
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
----
- drivers/ram/rockchip/Makefile       |  1 +
- drivers/ram/rockchip/sdram_rk3576.c | 35 +++++++++++++++++++++++++++++
- 2 files changed, 36 insertions(+)
+Currently supported (and tested) features are accessing and reading from
+sdhci and sdmmc devices as well as pxe-booting via the network interface.
+
+As can be seen by the DONOTMERGE labels, this needs to wait a bit still.
+
+The core RK3576 devicetrees will be part of 6.13-rc1, but the Firefly
+board I only submitted last week, so this would only appear in 6.14-rc1 .
+
+If someone from Collabora could provide a board patch for the ArmSom
+board they are working with, this would speed things up a bit ;-) .
+
+Checkpatch seems mostly happy too.
+
+changes in v2:
+- rebase on top of rockchip-for-next (including the rk3528 addition)
+- drop patches now coming from mainline Linux
+- cherry pick the now mainline comits for roc-rk3576-pc board and otp
+- nitpicks in CFG_SYS_SDRAM_BASE handling (Quentin, Jonas)
+- fold in Jonas' fixes for (roc-rk3576-pc board, dwc_eth, sdhci, pinctrl,
+  clk, ram, rk3576-core), they all look nice and also match the review
+  comments submitted.  
+- add received reviewed-bys for sdhci and mmc
+
+changes in v3:
+- drop unneeded syscon-ids
+- drop !XPL_BULLD limit from rk3576_common.h
+- drop nr_pins from pinctrl
+- move SYS_CONFIG_NAME symbol in rk3576/Kconfig
+- one more CFG_SYS_SDRAM_BASE nitpick :-)
+
+
+Elaine Zhang (2):
+  clk: rockchip: Add rk3576 clk support
+  reset: rockchip: implement rk3576 lookup table
+
+Heiko Stuebner (10):
+  rockchip: sdram: honor CFG_SYS_SDRAM_BASE when defining ram regions
+  ram: rockchip: Add rk3576 ddr driver support
+  rockchip: otp: Add support for RK3576
+  mmc: rockchip_sdhci: Add support for RK3576
+  mmc: rockchip_dw_mmc: Add support for rk3576
+  net: dwc_eth_qos_rockchip: Add support for RK3576
+  arm64: dts: rockchip: add rk3576 otp node
+  dt-bindings: arm: rockchip: Add Firefly ROC-RK3576-PC binding
+  arm64: dts: rockchip: Add devicetree for the ROC-RK3576-PC
+  rockchip: rk3576: Add support for ROC-RK3576-PC board
+
+Steven Liu (1):
+  pinctrl: rockchip: support rk3576 pinctrl
+
+Xuhui Lin (2):
+  rockchip: mkimage: Add rk3576 support
+  arm: rockchip: Add RK3576 arch core support
+
+ arch/arm/dts/rk3576-roc-pc-u-boot.dtsi        |   11 +
+ arch/arm/dts/rk3576-u-boot.dtsi               |  131 +
+ arch/arm/include/asm/arch-rk3576/boot0.h      |   11 +
+ arch/arm/include/asm/arch-rk3576/gpio.h       |   11 +
+ arch/arm/include/asm/arch-rockchip/clock.h    |   10 +
+ .../include/asm/arch-rockchip/cru_rk3576.h    |  491 ++++
+ arch/arm/mach-rockchip/Kconfig                |   51 +
+ arch/arm/mach-rockchip/Makefile               |    1 +
+ arch/arm/mach-rockchip/rk3576/Kconfig         |   23 +
+ arch/arm/mach-rockchip/rk3576/Makefile        |    9 +
+ arch/arm/mach-rockchip/rk3576/clk_rk3576.c    |   18 +
+ arch/arm/mach-rockchip/rk3576/rk3576.c        |  155 +
+ arch/arm/mach-rockchip/rk3576/syscon_rk3576.c |   22 +
+ arch/arm/mach-rockchip/sdram.c                |   13 +-
+ board/firefly/roc-pc-rk3576/Kconfig           |   12 +
+ board/firefly/roc-pc-rk3576/MAINTAINERS       |    7 +
+ configs/roc-pc-rk3576_defconfig               |   45 +
+ doc/board/rockchip/rockchip.rst               |   12 +
+ drivers/clk/rockchip/Makefile                 |    1 +
+ drivers/clk/rockchip/clk_rk3576.c             | 2513 +++++++++++++++++
+ drivers/misc/rockchip-otp.c                   |   11 +
+ drivers/mmc/rockchip_dw_mmc.c                 |    1 +
+ drivers/mmc/rockchip_sdhci.c                  |   15 +
+ drivers/net/dwc_eth_qos.c                     |    4 +
+ drivers/net/dwc_eth_qos_rockchip.c            |  154 +-
+ drivers/pinctrl/rockchip/Makefile             |    1 +
+ drivers/pinctrl/rockchip/pinctrl-rk3576.c     |  278 ++
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h   |    3 +
+ drivers/ram/rockchip/Makefile                 |    1 +
+ drivers/ram/rockchip/sdram_rk3576.c           |   35 +
+ drivers/reset/Makefile                        |    2 +-
+ drivers/reset/rst-rk3576.c                    |  647 +++++
+ dts/upstream/Bindings/arm/rockchip.yaml       |    5 +
+ .../src/arm64/rockchip/rk3576-roc-pc.dts      |  736 +++++
+ dts/upstream/src/arm64/rockchip/rk3576.dtsi   |   39 +
+ include/configs/rk3576_common.h               |   41 +
+ include/configs/roc-pc-rk3576.h               |   15 +
+ tools/rkcommon.c                              |    1 +
+ 38 files changed, 5528 insertions(+), 8 deletions(-)
+ create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3576-u-boot.dtsi
+ create mode 100644 arch/arm/include/asm/arch-rk3576/boot0.h
+ create mode 100644 arch/arm/include/asm/arch-rk3576/gpio.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3576.h
+ create mode 100644 arch/arm/mach-rockchip/rk3576/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rk3576/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rk3576/clk_rk3576.c
+ create mode 100644 arch/arm/mach-rockchip/rk3576/rk3576.c
+ create mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
+ create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
+ create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
+ create mode 100644 configs/roc-pc-rk3576_defconfig
+ create mode 100644 drivers/clk/rockchip/clk_rk3576.c
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3576.c
  create mode 100644 drivers/ram/rockchip/sdram_rk3576.c
+ create mode 100644 drivers/reset/rst-rk3576.c
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts
+ create mode 100644 include/configs/rk3576_common.h
+ create mode 100644 include/configs/roc-pc-rk3576.h
 
-diff --git a/drivers/ram/rockchip/Makefile b/drivers/ram/rockchip/Makefile
-index f222cc99f1e..fd94aad0cd4 100644
---- a/drivers/ram/rockchip/Makefile
-+++ b/drivers/ram/rockchip/Makefile
-@@ -15,6 +15,7 @@ obj-$(CONFIG_ROCKCHIP_RK3328) = sdram_rk3328.o sdram_pctl_px30.o sdram_phy_px30.
- obj-$(CONFIG_ROCKCHIP_RK3399) += sdram_rk3399.o
- obj-$(CONFIG_ROCKCHIP_RK3528) += sdram_rk3528.o
- obj-$(CONFIG_ROCKCHIP_RK3568) += sdram_rk3568.o
-+obj-$(CONFIG_ROCKCHIP_RK3576) += sdram_rk3576.o
- obj-$(CONFIG_ROCKCHIP_RK3588) += sdram_rk3588.o
- obj-$(CONFIG_ROCKCHIP_RV1126) += sdram_rv1126.o sdram_pctl_px30.o
- obj-$(CONFIG_ROCKCHIP_SDRAM_COMMON) += sdram_common.o
-diff --git a/drivers/ram/rockchip/sdram_rk3576.c b/drivers/ram/rockchip/sdram_rk3576.c
-new file mode 100644
-index 00000000000..5a66032ef8f
---- /dev/null
-+++ b/drivers/ram/rockchip/sdram_rk3576.c
-@@ -0,0 +1,35 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2024 Rockchip Electronics Co., Ltd.
-+ */
-+
-+#include <dm.h>
-+#include <ram.h>
-+#include <asm/arch-rockchip/sdram.h>
-+
-+#define PMU1GRF_BASE			0x26026000
-+#define OS_REG2_REG			0x208
-+
-+static int rk3576_dmc_get_info(struct udevice *dev, struct ram_info *info)
-+{
-+	info->base = CFG_SYS_SDRAM_BASE;
-+	info->size = rockchip_sdram_size(PMU1GRF_BASE + OS_REG2_REG);
-+
-+	return 0;
-+}
-+
-+static struct ram_ops rk3576_dmc_ops = {
-+	.get_info = rk3576_dmc_get_info,
-+};
-+
-+static const struct udevice_id rk3576_dmc_ids[] = {
-+	{ .compatible = "rockchip,rk3576-dmc" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(rockchip_rk3576_dmc) = {
-+	.name = "rockchip_rk3576_dmc",
-+	.id = UCLASS_RAM,
-+	.of_match = rk3576_dmc_ids,
-+	.ops = &rk3576_dmc_ops,
-+};
 -- 
 2.47.2
 
