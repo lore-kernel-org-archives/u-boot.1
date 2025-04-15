@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C601C369B8
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:20:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7658C369B8
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 21:20:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6061C82BBF;
+	by phobos.denx.de (Postfix) with ESMTP id A141C82BF2;
 	Tue, 15 Apr 2025 23:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zM8GiUT8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qrbJu3bb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B19A82BF6; Tue, 15 Apr 2025 23:18:39 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 49B53820F8; Tue, 15 Apr 2025 23:18:39 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 067C381F0D
+ by phobos.denx.de (Postfix) with ESMTPS id 530C482BD7
  for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 23:18:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cfb6e9031so56106825e9.0
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3914bc3e01aso3472201f8f.2
  for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 14:18:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1744751916; x=1745356716; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O0Zm8Na5fwVuYfu9BObkGOuH/jGZrLK/SEqltjGvPys=;
- b=zM8GiUT8xw+IZC46ZYh89bm8L7JiMNGw5yWSd0fSK8tpzO0qLA5j8mpSjsK9rWh1fQ
- lZnUuADp5Uf9hVXcmmKc0gZC6zdZPQ3XOLinjlmG8DvhkPjPIdbbzACSAHoClCnPk+yr
- MCnbPLNLvq3tW4LM7tTwDb9fvmT/9lO5+CJnrTVV9zxpulZjnZtUDuPkZptdyWxJg1ii
- Rm2xHbC++wDDZhAHwcrOedoXja1wKKMZD/mP0GXCF2FA5dSeSAawx51T1/BIWnJRhQXw
- gGfp/0d3me/Wd9tel014WN9/HzZVm3vZmjjjM8yNW6xjBPNytXXrU9Yuelo7HtwpXFtb
- qaZQ==
+ bh=cdMU/EbfK6U0f1W9N0eR+lOtwJhaDFZbo9KfaF/CUyg=;
+ b=qrbJu3bbpilGZ22JuaIivtJH5nUgV+8MQw/5vjtrmdxzaBRJbcPvMPh1PTKkkLz7MR
+ 2UJdUyyvgw+l7TQhI228TY66Rl1yBKoXmj6swjQxcjtAzlx+PYt5h6/V3IZD6sY6XWNx
+ pJQNlzATYCcbdVvf5jwvI+GbZLEsFLIMBgCYc/oTUQQTrOH14mB9qerwmHdonJ2OKJxR
+ KLPhMEv6sRDAT8Ox9oGkMFol0qHIyWDV9rCHMonqa75J16FZHnv7RzbIt3TrnzZk8api
+ jEBdpVZ8gkeSciQpGIJcuqWa/EQzWazC2sMAgBJbrzpJbcOxU7wSifzy7a0enLbVaaqe
+ Gzxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1744751916; x=1745356716;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O0Zm8Na5fwVuYfu9BObkGOuH/jGZrLK/SEqltjGvPys=;
- b=XSOmAjfsWTMRRw57m+lfeYsTWETR+ZGBcTo3jwd4tNF04h+saS0G3pQX4ol8ytd4+J
- ImtTRYYXN+L9U30BxUAGExmSJI2tg/F86/gR0vKqHwgTrduqSuFoj2OVUR9wq+6ZAnK2
- h9aH9Fqer6IWONhGpyBEcmNsdzrHJg+YViIEW82zsa+yb5JyTwVKw6fhldIPR3cskVi5
- A/cSWlEscW0Ybw0xr8NnJHHxovZx9ve98lq0PC8cBADaC82kzb0txJCI/4wGO6635G5N
- EYLNVybnKPLZEd85figMV1xEV/KhYtlhmItD6B1sms48ZAd468h1CY9AfBmt9kfVNdFn
- sakA==
-X-Gm-Message-State: AOJu0YyuFCjyJbag/dPeTBAq7NLWSv+wIh1SEdIkSAt/GNfj3C59OI8V
- YuGW+OqPSHEMlA04fyqDt7fdo4GTPjwgw0Xjr+smbSLV9Vv8mPVMVnfLprNvgPJSuHOK4OFBEl+
- e7gY=
-X-Gm-Gg: ASbGncuwpxyRy9G5P1axr+bokAh4toMufSXVHcT3WrEgTgvBnk4bw2ErL9TNGBmW7NB
- GyB5+NpYhOjyZRDaspdAr60GnX449f+mzfIJbgUIwb3vSh3gdt1mlSgzEmTQf7L+5DGQm04oRyi
- C/OkV+5zxvSf886lldJJrJ+CJ4oHfspF+43jKmwq2XDMQ6tYi6D/R2hcrjhyLggciHe/SsPHUY1
- r3rBHcEYA36TiPNluQ9kxuftnoj1JMcASMejqOgRIy0i8vBSGxWw4IKPzoi4WB9zs6dUxoLzTfo
- GlD9ju1s7tL5vQx3MsMM+ZPG5lJSlRHqIoDTl/kp0Cn7l2UNk/wX9RkJOyo=
-X-Google-Smtp-Source: AGHT+IFgMxCi7X/Nmwv8TmlRima8rMwyeShBK2QMSVAYSbH5DrcdQ5H7IGNNBaSS4iLWgaVNrJ7DPg==
-X-Received: by 2002:a05:600c:8709:b0:43d:683:8cb2 with SMTP id
- 5b1f17b1804b1-4405a015cb2mr6233295e9.14.1744751916112; 
+ bh=cdMU/EbfK6U0f1W9N0eR+lOtwJhaDFZbo9KfaF/CUyg=;
+ b=Ex9YUz4FCLR9My+t8vTwanyVCSkhb9vyZoXUn3QSCiWRHUC9ToqQh/WyLMVCqPxRat
+ bRXlnlyxsAm+Wz8zOpa0VeqIyqBLddPkTsoMb1jktHVGgaom2KGoZ8OpYtUUVjeyPjD/
+ mHv57/0o/4fVjngkNfEZFHUPcUkLRkiDRRtIWr2izgknz1hr749Ha4Dd3cX0awsvabkE
+ R3LLjLRY/NF+t8CBMEPWgmtm7aAT6nT4a9D4QefalqUrbLcnbKwTl7vCOJQUfq8AHkMT
+ nU8KQr9mSEyRFSJ2a3Ju5rlOqCKHpaReWV654kuE3BPjBxdzeAcu1NLDHX32OzJcclPq
+ 3itQ==
+X-Gm-Message-State: AOJu0YxiLr2lfUVADKHINabW21RuGOKx2o+LTfnUVjJNo+p4BZ3W2U8Q
+ o6VN/M7DryS0xkSuGP5NkxJ1Or5gRpP0U0UiZw07Q1bN+y88kskzegQGTDv8g5CNxvlP+eOr4xG
+ YOwI=
+X-Gm-Gg: ASbGncsjSz/RV7+H9KHhPgKtAWE0DxyfqUpyt7gh4huuv2NOhpm1uYLjWHIGcizGoqr
+ c1NELuW2yWM4vMCzdadcpf4On8P+W6hyR7GMYVMYcG8VsMV4rNJCILzCfcwO3ThfJ9AT+qKeN1X
+ bKBIlpVWmYTBWlmCWUawzAt8ANAHbR2DLuOVGOeVtN1/9SWYBevoCghXvIFCdxIr4tSE56R4TBi
+ hykAZxfL1pi4u4nWv5tKlw6ZeGWL0miApy5lSB1Rm0Nb4Cx6WkWtXARGbOUQW1pSM8GbHg5OUG2
+ 6QpYIg78S0ZZZg9XiX/zopNRatmsatbjaWvI3Oh5GRxZce6sQ++ydzffuzA=
+X-Google-Smtp-Source: AGHT+IF48AhT47KW9egV/fJaFxfDrHtHvfsHoHaNtHZiPmXjQ8NsmSSIIQ4CftFVdwnvZTVuldVxLA==
+X-Received: by 2002:a5d:59a7:0:b0:38f:503a:d93f with SMTP id
+ ffacd0b85a97d-39ee27610camr757771f8f.40.1744751916684; 
  Tue, 15 Apr 2025 14:18:36 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6ebc:6ce:770e:95f9])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf43cce3sm15530917f8f.74.2025.04.15.14.18.35
+ ffacd0b85a97d-39eaf43cce3sm15530917f8f.74.2025.04.15.14.18.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 14:18:35 -0700 (PDT)
+ Tue, 15 Apr 2025 14:18:36 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
- Boon Khai Ng <boon.khai.ng@intel.com>, Hanyuan Zhao <hanyuan-z@qq.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
- Ramon Fried <rfried.dev@gmail.com>, Romain Naour <romain.naour@smile.fr>,
- Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v2 09/11] net: lwip: allow DM_DSA=y when NET_LWIP=y
-Date: Tue, 15 Apr 2025 23:17:44 +0200
-Message-ID: <20250415211819.1254435-10-jerome.forissier@linaro.org>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 10/11] configs: add sandbox64_lwip_defconfig
+Date: Tue, 15 Apr 2025 23:17:45 +0200
+Message-ID: <20250415211819.1254435-11-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250415211819.1254435-1-jerome.forissier@linaro.org>
 References: <20250415211819.1254435-1-jerome.forissier@linaro.org>
@@ -104,8 +98,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the DSA tests in test/dm/dsa.c are compatible with NET_LWIP,
-remove the dependency of DM_DSA on NET.
+Add sandbox64_lwip_defconfig based on sandbox64_defconfig with NET_LWIP
+enabled.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -113,42 +107,21 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- drivers/net/Kconfig | 1 -
- net/Makefile        | 2 +-
- 2 files changed, 1 insertion(+), 2 deletions(-)
+ configs/sandbox64_lwip_defconfig | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 configs/sandbox64_lwip_defconfig
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 933bad9b00b..3d338a81e81 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -48,7 +48,6 @@ config DM_DSA
- 	bool "Enable Driver Model for DSA switches"
- 	depends on DM_MDIO
- 	depends on PHY_FIXED
--	depends on !NET_LWIP
- 	help
- 	  Enable driver model for DSA switches
- 
-diff --git a/net/Makefile b/net/Makefile
-index 41edbacabc9..d63f62b7c8a 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -11,7 +11,6 @@ obj-$(CONFIG_NET)      += arp.o
- obj-$(CONFIG_CMD_BOOTP) += bootp.o
- obj-$(CONFIG_CMD_CDP)  += cdp.o
- obj-$(CONFIG_CMD_DNS)  += dns.o
--obj-$(CONFIG_DM_DSA)   += dsa-uclass.o
- obj-$(CONFIG_CMD_LINK_LOCAL) += link_local.o
- obj-$(CONFIG_IPV6)     += ndisc.o
- obj-$(CONFIG_$(PHASE_)DM_ETH) += net.o
-@@ -39,6 +38,7 @@ CFLAGS_eth_common.o += -Wno-format-extra-args
- endif
- 
- ifeq ($(filter y,$(CONFIG_NET) $(CONFIG_NET_LWIP)),y)
-+obj-$(CONFIG_DM_DSA)   += dsa-uclass.o
- obj-$(CONFIG_$(PHASE_)DM_ETH) += eth-uclass.o
- obj-$(CONFIG_$(PHASE_)BOOTDEV_ETH) += eth_bootdev.o
- obj-$(CONFIG_DM_MDIO)  += mdio-uclass.o
+diff --git a/configs/sandbox64_lwip_defconfig b/configs/sandbox64_lwip_defconfig
+new file mode 100644
+index 00000000000..0e92728533f
+--- /dev/null
++++ b/configs/sandbox64_lwip_defconfig
+@@ -0,0 +1,5 @@
++#include <configs/sandbox64_defconfig>
++
++CONFIG_SANDBOX=y
++
++CONFIG_NET_LWIP=y
 -- 
 2.43.0
 
