@@ -4,75 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 932ABC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:50:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53134C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:50:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCB1482AC4;
-	Tue, 15 Apr 2025 14:50:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id DAFDE82AF6;
+	Tue, 15 Apr 2025 14:50:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="FEpkQaJb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lUkcFGZt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C339B82047; Tue, 15 Apr 2025 10:15:05 +0200 (CEST)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
- [217.70.183.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9529E8209C; Tue, 15 Apr 2025 10:30:24 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 607D581F6B
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 10:15:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9911E8056A
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 10:30:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 8FFBB42E79;
- Tue, 15 Apr 2025 08:15:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1744704902;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=IKzGuRlkt/bgYhxnImD97YEhJW4bX0cOyGEmRbh/nz0=;
- b=FEpkQaJbORbj4Kj4AMeJw/ZysEv4fNvBMZa2iVrfdU1KHSZ8DvHmt0u/s5UUYZ/XACvKkB
- IHpUxzEFgUG2QqFSdrSpeFcucwt26V0sMc03PfOTAzhUzme03GCyseUqe1UgR92T4p7t5A
- UaPFLIWykUvlfgXEFy60NyD7IcbE8UT2U6CJQR1oPee9uws8Cb9rqUS3uHl8ga/BBFleIG
- peHVbBBWrfkF4tVTkBflwK7QlSI9rhMzQJ/ng8uhfWtRoUtUpb4aVjyEYhMNBm37FPdeIL
- tPU2XpJZivFyQ87ThPiR/fRWVd4OmMTNwm0AWlQuh4N4iDh4D05cuzoZ6qw+6g==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Neha Malcom Francis <n-francis@ti.com>,  Tom Rini <trini@konsulko.com>,
- Nishanth Menon <nm@ti.com>,  Simon Glass <sjg@chromium.org>,  Jaehoon
- Chung <jh80.chung@samsung.com>,  Lukasz Majewski <lukma@denx.de>,  Sean
- Anderson <seanga2@gmail.com>,  Anatolij Gustschin <agust@denx.de>,  Fabio
- Estevm <festevam@gmail.com>,  Peng Fan <peng.fan@nxp.com>,  Mario Six
- <mario.six@gdsys.cc>,  Svyatoslav Ryhel <clamor95@gmail.com>,  Thomas
- Petazzoni <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
- <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
- <michael@amarulasolutions.com>,  Dario Binacchi
- <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
- Marek Vasut <marex@denx.de>,  Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
-In-Reply-To: <20250415065115.GA10924@francesco-nb> (Francesco Dolcini's
- message of "Tue, 15 Apr 2025 08:51:15 +0200")
-References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
- <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
- <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
- <20250414180727.5d5zyenfagdc5qw2@unable>
- <20250414200635.GC5495@bill-the-cat>
- <20250414210041.GA8754@francesco-nb>
- <352905ca-4308-4928-9a39-5d9842f1ae9c@ti.com>
- <20250415065115.GA10924@francesco-nb>
-User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Tue, 15 Apr 2025 10:15:00 +0200
-Message-ID: <87wmblyh6j.fsf@bootlin.com>
+ spf=pass smtp.mailfrom=brunosampaioleite@gmail.com
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-3104ddb8051so31907671fa.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 01:30:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744705822; x=1745310622; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yA8U4jcHBU1qLoRd/hi4ojBgCldiyI08upRnsxT8iN0=;
+ b=lUkcFGZtjkGu/fRQH9lVzXieHfx/bCHCksS0s4GW6zTJ3OZBd+RVmaSyX4I6Y8DMjg
+ sck+PvT01tNCPLgi3OPr/r0u3kdFDRE4SNirSnG4uZQLOKf8VSBnGIu/daE7nIY2MDu/
+ RBuYasyY+z8AlroOz/O2I55uJxgqPKRTbQUW2NTT3lt+p/cGxrW5zzfLN051TrQLtr1d
+ 4wEiXkQF6WBS6CmBY7UTZx5oAZ+cc0/Fr23QVw9XJxSHF7VwixTGgB4rjgz9B7Y0yHJ7
+ cGO+4XbqHJqwJl12a5IdFqg5KL+/2nVkbzWhmAji/Kd8X+iDTkxlFZuFl3+Pu9Loo28I
+ jjOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744705822; x=1745310622;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yA8U4jcHBU1qLoRd/hi4ojBgCldiyI08upRnsxT8iN0=;
+ b=p1ufip2fQ41VzOb1oiQqG1qcIFz4Bu+uv1A2DpfDBqrY+3+yF6kb/qYINfEw5UCnv0
+ /cec2nAI8n2GLblIWk9dDKwK8beNC1/hwVn7poqu9MhoMDvVeaZv9OUvJR9WEpu+MMW/
+ SXunhIdOWOjKZuCVVqqfzNaLCo+mB+J3it6/4j8B/maVCryqQGxfGagn8tSJS7Hi1jMO
+ jBBL4uws/WpONFgqidXqXQ/nYpTNqmRhO30hDUVcw4vQbSk8frSK9jMYtKfgOxVZTbb9
+ C1B+/Sk+B1ejmv1vx8N64IEC1xbpmNe8/dMfzRfGhPu8xn2cZ/TYrAo0MChkiVC4l/Tm
+ cVMg==
+X-Gm-Message-State: AOJu0YxsfJDuKLQkwcEQEU5dJfmNNWHDZIkTauvf+7O9xdh+YFV14cMd
+ IPHb0DDClpzr3d07zWIoisNn2xECe5R7E6S2ZnNxyMVFL6xroz4H/kgxtBYp
+X-Gm-Gg: ASbGncsxgxMzHQHN3trLrBwgz8oa3QqSYY/mbh3lLbwMVqSnx9hOKwAPcBS70oTVKBX
+ Y9jotxLzo8739PnrpKqU5YDKoaubktwzTx50cXUTLnulmykxacEDCFq//FkSY6A7nHdiCk0qCTD
+ yOlTL9PbrnemddTYDwDI13HAqdN+GRBaZQN86+JwpmzZw3HTP0O0okwLv2Pnt+eyGHoVebCO+cV
+ GBFIugz8J1gLJbdVt3kJ9Gyi26YACEgX3PMLpAJamdmekA6ZsaTZZwhNr0m6WvCxS5h8nGwYMN5
+ Tiay1M5MRai2JIEQfZiyor5n4obKbhbou6KfGD/4rjDBpN03KDh+8t3mdKyrxAsZeCU2CINdwg=
+ =
+X-Google-Smtp-Source: AGHT+IF1E5Iqij9wcx9h/iWPP4PEQGjGirLDWB4HMug7+VeW2gM5p2ioAG1u0po1YgUhHBm0erFNFA==
+X-Received: by 2002:a2e:a5c9:0:b0:30d:e104:cd57 with SMTP id
+ 38308e7fff4ca-31049aba5b9mr46742341fa.40.1744705821325; 
+ Tue, 15 Apr 2025 01:30:21 -0700 (PDT)
+Received: from brule-Precision-3590.prevas.se ([81.216.59.226])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-30f464cc0a2sm19679971fa.31.2025.04.15.01.30.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Apr 2025 01:30:20 -0700 (PDT)
+From: Bruno Leite <brunosampaioleite@gmail.com>
+To: u-boot@lists.denx.de
+Cc: pbrobinson@gmail.com, Matthias Brugger <mbrugger@suse.com>,
+ clast@prevas.dk, ravi@prevas.dk, Bruno Leite <brule@prevas.dk>,
+ Fiona Klute <fiona.klute@gmx.de>, Francois Berder <fberder@outlook.fr>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Martin Stolpe <martinstolpe@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/1] Fix RPI5 uart clock when loading kernel with non-boot DT
+Date: Tue, 15 Apr 2025 10:30:13 +0200
+Message-ID: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="=-=-="
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvvddvleekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtsehmtderredtreejnecuhfhrohhmpefoihhquhgvlhcutfgrhihnrghluceomhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepgeefleehkefhgeeuhfdtiedtkeduheethfejhfegkefhffdvieeuiefhleevieevnecukfhppeelvddrudekgedruddtkedrvdeftdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeelvddrudekgedruddtkedrvdeftddphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepvddupdhrtghpthhtohepfhhrrghntggvshgtohesugholhgtihhnihdrihhtpdhrtghpthhtohepnhdqfhhrrghntghishesthhirdgtohhmpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepnhhmsehtihdrtghomhdprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghom
- hdprhgtphhtthhopehluhhkmhgrseguvghngidruggvpdhrtghpthhtohepshgvrghnghgrvdesghhmrghilhdrtghomh
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 15 Apr 2025 14:50:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,111 +102,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---=-=-=
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Hello,
-
-Thanks for the report.
-
->> >>> Neha bisected it down to 197376fbf300e92afa0a1583815d9c9eb52d613a co=
-mmit
->> >>> which is this patch.
->> >>
->> >> And assuming it's the same failure I got reported this morning by one=
- of
->> >> my coworkers, we just get:
->> >> U-Boot SPL 2025.04-01050-ga40fc5afaec0 (Apr 14 2025 - 07:31:32 +0000)
->> >> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
->>=20
->> This is not the failure I am seeing, we hang before console comes up so
->> no prints. Looks like the different failure signature is due to TIFS
->> (SYSFW) firmware being different (v9.2.7 vs. 11.0.4)
->
-> To me it was failing freezing just after this
->
-> U-Boot SPL 2025.04-01076-g739ad58dbee8 (Apr 14 2025 - 17:23:46 +0200)
-> SYSFW ABI: 4.0 (firmware rev 0x000b '11.0.7--v11.00.07 (Fancy Rat)')
->
-> and, with commit 197376fbf300 ("power-domain: Add refcounting") reverted
-> the issue is fixed and I get to the U-Boot command line.
-
-Francesco, are you also testing on K3 platforms?
-
-Can one of you boot with the patch below applied? It should partially
-revert the commit to the ancient behaviour, while adding more debug
-traces (please enable the debug logs as well). This should clarify
-which one of the 3 different path is likely failing. It should also help
-identify who's the user that fails to enable/disable its own power
-domain. I will need to know what board/SoC was used for the test, so I
-can look the relevant driver up.
-
-Thanks for your help,
-Miqu=C3=A8l
-
----
+From: Bruno Leite <brule@prevas.dk>
 
 
---=-=-=
-Content-Type: text/x-patch
-Content-Disposition: inline;
- filename=0001-HACK-power-domain-Add-debug-traces-without-actually-.patch
+When loading the kernel with a DT that was not used to boot
+the rpi (e.g. when using a FIT image), the uart-clk property
+that should have been patched by the firmware will be passed
+as is to the driver and thus cause the divisor to be set
+incorrectly, hence the uart will not work properly. Fix that
+by copying the correct uart-clk set by the firmware to the new
+DT loaded to be passed to the kernel.
 
-From 4b128872b2dbcdfb626b8683fbb6c75d17a5089c Mon Sep 17 00:00:00 2001
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Tue, 15 Apr 2025 10:07:05 +0200
-Subject: [PATCH] HACK: power-domain: Add debug traces without actually failing
 
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
----
- drivers/power/domain/power-domain-uclass.c | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
+Bruno Leite (1):
+  rpi: copy over uart clock-frequency in DT
 
-diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
-index a6e5f9ed0369..18ace2cc7256 100644
---- a/drivers/power/domain/power-domain-uclass.c
-+++ b/drivers/power/domain/power-domain-uclass.c
-@@ -117,10 +117,12 @@ int power_domain_on_lowlevel(struct power_domain *power_domain)
- 	struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
- 	int ret;
- 
--	debug("%s(power_domain=%p)\n", __func__, power_domain);
-+	debug("%s(power_domain=%p, id %d)\n", __func__, power_domain, power_domain->id);
- 
--	if (priv->on_count++ > 0)
--		return -EALREADY;
-+	if (priv->on_count++ > 0) {
-+		debug("Power domain %s already on.\n", power_domain->dev->name);
-+		//return -EALREADY;
-+	}
- 
- 	ret = ops->on ? ops->on(power_domain) : 0;
- 	if (ret) {
-@@ -137,15 +139,17 @@ int power_domain_off_lowlevel(struct power_domain *power_domain)
- 	struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
- 	int ret;
- 
--	debug("%s(power_domain=%p)\n", __func__, power_domain);
-+	debug("%s(power_domain=%p, id %d)\n", __func__, power_domain, power_domain->id);
- 
- 	if (priv->on_count <= 0) {
- 		debug("Power domain %s already off.\n", power_domain->dev->name);
--		return -EALREADY;
-+		//return -EALREADY;
- 	}
- 
--	if (priv->on_count-- > 1)
--		return -EBUSY;
-+	if (priv->on_count-- > 1) {
-+		debug("Power domain %s still in use.\n", power_domain->dev->name);
-+		//return -EBUSY;
-+	}
- 
- 	ret = ops->off ? ops->off(power_domain) : 0;
- 	if (ret) {
+ board/raspberrypi/rpi/rpi.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
 -- 
-2.48.1
+2.45.2
 
-
---=-=-=--
