@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D717C369BA
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 19:35:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B09C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 19:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFC2982BA7;
-	Tue, 15 Apr 2025 21:34:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0411B82A27;
+	Tue, 15 Apr 2025 21:58:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jzJTSAxx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G1ayeOYY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B218682B92; Tue, 15 Apr 2025 21:34:56 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 43ECC82A8B; Tue, 15 Apr 2025 21:58:25 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63E5182B4A
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 21:34:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B0EA8214B
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 21:58:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-39c0e0bc733so5168484f8f.1
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 12:34:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e6405b5cd9bso20823276.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 12:58:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744745693; x=1745350493; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g48XLGI3oYJiC+FEguq2qZRcjoaBxDTm/BABIiCSeQY=;
- b=jzJTSAxxVDpg5ndWE3PxZPn5f5SiMI8exzQr7h3oCJcbQu33AuL8NhvNmqmHhv/f67
- vs5emf/5rjem/LnzCoHM9tuwY6y8sk5ahKxbwXR9hVWSWJw3p6j4UX9Eh/1YkrglSHzO
- hJSG4sqakslomfD1C2KMQuvrcoUXUR0k0SSoUcjXPQ0npbk4bw3cj4EySmrM371BKJh0
- 9AEkUp34Y2XBrzYvKfBXxQNLBmE+zWpFHgIYqXNNQJeW+ThDjH+5LifiorZ9EiG/kl9c
- uMbeKo+zsYAnAJyrXFft76x7sDlP4h0ihUUZ1hIgb1yK2KfA6vi95clO6FTzdGT3PTV0
- bFwA==
+ d=linaro.org; s=google; t=1744747102; x=1745351902; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zy7QjacZJk4OLrqSTxNbchhhKZ2dKHqYNLFjBJIbanA=;
+ b=G1ayeOYYJqH40x1fjEVFBJGXeJPxnAYHJ/yjyECdU3zCWOVsZmby3lgrBTSMpAR3KB
+ dfxjx7ms7zp+8LMLq9+75Go20Bp67haVWSfxz8/A4JlBbQNkjOiu9B341aAzlJAbIsTm
+ lDNvENSna2EYDqXy+bwUgELPNy2y9xzIMkGFDJgTwQJJz2HIuulGz07trQ4y4fVJ33Kw
+ xfRrEGHMPXN7d0n4VFeFfASraRTOMRsRx8RRuGcxiTlwAzj8HOgIZKwiqMo4NUmdVo9p
+ +1yfvLV/ElXmUwMn774LXfhGkX5Ev3O61cbG/MEWETrr2o86IfN6ANuSniT2suEYAALu
+ k0XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744745693; x=1745350493;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=g48XLGI3oYJiC+FEguq2qZRcjoaBxDTm/BABIiCSeQY=;
- b=tkJAP4ifmwitoIEsNg5fGMHWkbnSHTjAoVfdbkxJHZ86I+qcm4Orv6101wnrPd0bLe
- /FTPEbTCEJRQ0V1YybhXWQxmtMF6KnDa601t0cST1J88YRhIlPoXueo4f10Np1u+Ir84
- 3RXFoZgcF18/TKyIoIak/H7CqnK/VAMFagWXe1/uugFg0irWb8CxL0v+KBdO6Gt1mup3
- ZdRopD4jbWKGbnutIgqzChL7IJY2nSTkWBxF62Dxsmugnv+lxOFZgfMNOmQKBqiJi3gD
- Ec1ZWOVA8wyJBbWJr8xbssm5q24Xi/IlRJCnotsQNWcPrbrJL45yeXDFSeFkVfc/RNv5
- p6JA==
-X-Gm-Message-State: AOJu0YxJc5jyqlcNacXsvzVWgdqmNHRnNqYj2lsWH9b+0qK+SgoTNXMn
- 2waL6C+QzjN7mgvuA5b6hjTRcZJfCOQ/smDdLfvPRL8TQk2XgLcmJeefqidQMT6+6+S+O6noTjE
- 3E0k=
-X-Gm-Gg: ASbGncsa1mSv6C3pmVkV1IygpEjr4eNuEYA4V/fS41+R5h+xxK+87sqwpvRvykXeniB
- QU7o0Eb8s2aw+O73mMNygBqP87f4yp6waQ/WSnbrDIEx5f59sAap4becg2kWqFcBkmfKF6txiWs
- K6u9xnGNvXr8MgdvoQQYJZS5GlgiVWUBG8m/dKuPpmbmdOGk3VAV1TXkmfH6xup6hD/YoCZQ4s6
- m69286mQ2wTDY5grrXOcSW7DdAgCqRctyo88D9RSH15EjjrsfKW2C7cNo0oD3Z7vO4ZWvd2rUnF
- iMwsC2SVLiry6Ee6Ya7D4BngMzw8AHzcmKb66vOTsFZz+GNr
-X-Google-Smtp-Source: AGHT+IEbr2JvLlr+zzZYtgF0tjrfjYz/KKgR7+KKUEGs6sQG7CEQnWEUKZU3/cGqM4XAaSJgbmhnbg==
-X-Received: by 2002:a05:6000:22c2:b0:39e:cbde:8889 with SMTP id
- ffacd0b85a97d-39ee27295fdmr652202f8f.6.1744745693582; 
- Tue, 15 Apr 2025 12:34:53 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:6ebc:6ce:770e:95f9])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eaf43d046sm15520484f8f.63.2025.04.15.12.34.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 12:34:53 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 4/4] net-lwip: tftp: add LMB and buffer checks
-Date: Tue, 15 Apr 2025 21:34:29 +0200
-Message-ID: <20250415193436.1240804-5-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250415193436.1240804-1-jerome.forissier@linaro.org>
-References: <20250415193436.1240804-1-jerome.forissier@linaro.org>
+ d=1e100.net; s=20230601; t=1744747102; x=1745351902;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Zy7QjacZJk4OLrqSTxNbchhhKZ2dKHqYNLFjBJIbanA=;
+ b=uIYuIe5zv7k2CScjl3HiLuR4/vlYAxnnPb500Yqtb6sp8KDWSnzHWrHwmI2dQkxGVu
+ iZPSZ/8xTPFnZEqhWmug6tDXGw+75SBDcotCrbrBpl4ZexHjW9Xh+j3LN4n0p8q8c0Rw
+ IvQ0nbnigOTmmF2cdBedPvW/OJu6Qp0Vg+n0dfwmKU8HEDmuKd9r75VCFM3fIBkMIR+Y
+ izj6JlYanAuE8Ft2HfLw48811mQaApD1GG3l/G9zUwi4o+QvxGfV5L1nW8QhbwLzIlks
+ nR39Fp95dzMMzGg3wc4D1TU5Q96V6+RGUA7XCj34RwVkWvNS9HtXy+Vzr9Br8wqKDuqf
+ brDg==
+X-Gm-Message-State: AOJu0YxSDPzhUDu7d7nDtcEW+NwFNJra28TgFD+XGJN93gHY/9t0jau0
+ bMSug0HSj6Ldf8HPzgD7QmwFJJiYoWo1OYcW41Y+6KmQkcCj3AHmiH9ZnoFEdQoVirCD2saQje8
+ AAJbAco0mfly1g/xeXgOhExIDZ3eejFyvbevdyw==
+X-Gm-Gg: ASbGnctdt7If7jfD5sXdNHQkjThdyI5DJtVGgtYWet+PfkUFujgvpLmU7qakllEv2tB
+ rrVm+jfr6rBye5sxiZQR3l3WvygObS2I7QtC9MSxR6ZNLI9czUIwR7ae7UgcqIhJZli0gtBQn7p
+ p5H7LCcSGnksd6PNb7ZaQBSknF3bpWkgaNiw==
+X-Google-Smtp-Source: AGHT+IEm5QdcN7wZNa+TPYuKNUm2l8OAy7znafwEpPKejGsQ4S5ItcoP4Uol7hfjRWaIT92OdUCaea88Zr3ou+kH9F4=
+X-Received: by 2002:a05:6902:724:b0:e5d:f98f:6f33 with SMTP id
+ 3f1490d57ef6-e70a600deccmr7129464276.10.1744747101866; Tue, 15 Apr 2025
+ 12:58:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250415125345.427420-1-jerome.forissier@linaro.org>
+ <20250415125345.427420-3-jerome.forissier@linaro.org>
+In-Reply-To: <20250415125345.427420-3-jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 15 Apr 2025 22:57:44 +0300
+X-Gm-Features: ATxdqUFhVPp8O09Sivv6VAYolRxDvSPBihV_nEWJJ3p4ERtQmSW9_wwlNWL84K0
+Message-ID: <CAC_iWjL8ccKiAKC9eHCQGmPaWXJG+9wT7AG-4i-Q5vVv5zhj9A@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] qemu-arm64: enable UNIT_TEST
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,102 +93,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Legacy NET tftp invokes a store_block() function which performs buffer
-validation (LMB, address wrapping). Do the same with NET_LWIP.
+Thanks Jerome,
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Suggested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
+On Tue, 15 Apr 2025 at 15:54, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Enable CONFIG_UNIT_TEST in configs/qemu_arm64_defconfig so that the unit
+> tests are run in CI.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>
+>  configs/qemu_arm64_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+> index 6c9d2505a69..cd9a4f2ae26 100644
+> --- a/configs/qemu_arm64_defconfig
+> +++ b/configs/qemu_arm64_defconfig
+> @@ -75,3 +75,4 @@ CONFIG_MBEDTLS_LIB=y
+>  CONFIG_TPM=y
+>  CONFIG_TPM_PCR_ALLOCATE=y
+>  CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
+> +CONFIG_UNIT_TEST=y
+> --
+> 2.43.0
+>
 
-(no changes since v3)
-
-Changes in v3:
-- store_block(): add Sphinx-like documentation
-
- net/lwip/tftp.c | 56 +++++++++++++++++++++++++++++++++++++++----------
- 1 file changed, 45 insertions(+), 11 deletions(-)
-
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 123d66b5dba..c7f1420ca0f 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -8,6 +8,7 @@
- #include <efi_loader.h>
- #include <image.h>
- #include <linux/delay.h>
-+#include <linux/kconfig.h>
- #include <lwip/apps/tftp_client.h>
- #include <lwip/timeouts.h>
- #include <mapmem.h>
-@@ -31,6 +32,47 @@ struct tftp_ctx {
- 	enum done_state done;
- };
- 
-+/**
-+ * store_block() - copy received data
-+ *
-+ * This function is called by the receive callback to copy a block of data
-+ * into its final location (ctx->daddr). Before doing so, it checks if the copy
-+ * is allowed.
-+ *
-+ * @ctx: the context for the current transfer
-+ * @src: the data received from the TCP stack
-+ * @len: the length of the data
-+ */
-+static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
-+{
-+	ulong store_addr = ctx->daddr;
-+	void *ptr;
-+
-+	if (CONFIG_IS_ENABLED(LMB)) {
-+		if (store_addr + len < store_addr ||
-+		    lmb_read_check(store_addr, len)) {
-+			puts("\nTFTP error: ");
-+			puts("trying to overwrite reserved memory...\n");
-+			return -1;
-+		}
-+	}
-+
-+	ptr = map_sysmem(store_addr, len);
-+	memcpy(ptr, src, len);
-+	unmap_sysmem(ptr);
-+
-+	ctx->daddr += len;
-+	ctx->size += len;
-+	ctx->block_count++;
-+	if (ctx->block_count % 10 == 0) {
-+		putc('#');
-+		if (ctx->block_count % (65 * 10) == 0)
-+			puts("\n\t ");
-+	}
-+
-+	return 0;
-+}
-+
- static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
- {
- 	return NULL;
-@@ -71,17 +113,9 @@ static int tftp_write(void *handle, struct pbuf *p)
- 	struct tftp_ctx *ctx = handle;
- 	struct pbuf *q;
- 
--	for (q = p; q; q = q->next) {
--		memcpy((void *)ctx->daddr, q->payload, q->len);
--		ctx->daddr += q->len;
--		ctx->size += q->len;
--		ctx->block_count++;
--		if (ctx->block_count % 10 == 0) {
--			putc('#');
--			if (ctx->block_count % (65 * 10) == 0)
--				puts("\n\t ");
--		}
--	}
-+	for (q = p; q; q = q->next)
-+		if (store_block(ctx, q->payload, q->len) < 0)
-+			return -1;
- 
- 	return 0;
- }
--- 
-2.43.0
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
