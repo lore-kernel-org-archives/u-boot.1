@@ -4,49 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B76FAC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 424A1C369B4
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 236FF82A33;
+	by phobos.denx.de (Postfix) with ESMTP id 7093D82AA7;
 	Tue, 15 Apr 2025 14:50:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kaod.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5806B82145; Tue, 15 Apr 2025 09:12:29 +0200 (CEST)
-Received: from mail.ozlabs.org (mail.ozlabs.org [IPv6:2404:9400:2221:ea00::3])
+ id 475BE82998; Tue, 15 Apr 2025 09:25:40 +0200 (CEST)
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B1468209C
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 09:12:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C469810E8
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 09:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=kaod.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=I9GX=XB=kaod.org=clg@ozlabs.org
 Received: from mail.ozlabs.org (mail.ozlabs.org [IPv6:2404:9400:2221:ea00::3])
- by gandalf.ozlabs.org (Postfix) with ESMTP id 4ZcFj168Vpz4xM1;
- Tue, 15 Apr 2025 17:12:21 +1000 (AEST)
+ by gandalf.ozlabs.org (Postfix) with ESMTP id 4ZcG0G0nF0z4xG0;
+ Tue, 15 Apr 2025 17:25:34 +1000 (AEST)
 Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4ZcFhz0cS2z4wbf;
- Tue, 15 Apr 2025 17:12:18 +1000 (AEST)
-Message-ID: <576a8d4b-9b01-4ba2-a6b5-51c9b3811a1c@kaod.org>
-Date: Tue, 15 Apr 2025 09:12:15 +0200
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4ZcG0C33Hyz4wbv;
+ Tue, 15 Apr 2025 17:25:31 +1000 (AEST)
+Message-ID: <a35e80fe-5b71-4d7c-88a9-b0be953f53f8@kaod.org>
+Date: Tue, 15 Apr 2025 09:25:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Gitlab runner timeout on evb-ast2600 ?
-To: Tom Rini <trini@konsulko.com>
-Cc: Joel Stanley <joel@jms.id.au>, Eugen Hristev <eugen.hristev@linaro.org>,
- open list <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Andrew Jeffery <andrew@codeconstruct.com.au>
-References: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
- <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
- <20250410231444.GK5495@bill-the-cat>
- <89f2eac8-4e76-42a6-b56e-fc62abdaffe9@kaod.org>
- <20250411150120.GQ5495@bill-the-cat>
- <ef7019b2-1a81-46b2-8612-ead1139b742e@kaod.org>
- <20250411164248.GS5495@bill-the-cat>
+Subject: Re: [PATCH] Revert "CI: Disable evb-ast2600"
+To: Joel Stanley <joel@jms.id.au>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+References: <20250414220439.529572-1-trini@konsulko.com>
+ <CACPK8XcXJS0X4kRWxncCjnbR1ADBprGXFsvgB63Bb7b81rHfnw@mail.gmail.com>
 Content-Language: en-US, fr
 From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
 Autocrypt: addr=clg@kaod.org; keydata=
@@ -91,9 +86,9 @@ Autocrypt: addr=clg@kaod.org; keydata=
  3GlqivBNkmYsHYSlFsbxc37E1HpTEaSWsGfAHQoPn9qrDJgsgcbBVc1gkUT6hnxShKPp4Pls
  ZVMNjvPAnr5TEBgHkk54HQRhhwcYv1T2QumQizDiU6iOrUzBThaMhZO3i927SG2DwWDVzZlt
  KrCMD1aMPvb3NU8FOYRhNmIFR3fcalYr+9gDuVKe8BVz4atMOoktmt0GWTOC8P4=
-In-Reply-To: <20250411164248.GS5495@bill-the-cat>
+In-Reply-To: <CACPK8XcXJS0X4kRWxncCjnbR1ADBprGXFsvgB63Bb7b81rHfnw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Tue, 15 Apr 2025 14:50:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,120 +106,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/11/25 18:42, Tom Rini wrote:
-> On Fri, Apr 11, 2025 at 05:26:55PM +0200, Cédric Le Goater wrote:
->> On 4/11/25 17:01, Tom Rini wrote:
->>> On Fri, Apr 11, 2025 at 09:23:59AM +0200, Cédric Le Goater wrote:
->>>> Hi,
->>>>
->>>> On 4/11/25 01:14, Tom Rini wrote:
->>>>> On Fri, Apr 11, 2025 at 08:07:15AM +0930, Joel Stanley wrote:
->>>>>> On Mon, 7 Apr 2025 at 23:25, Eugen Hristev <eugen.hristev@linaro.org> wrote:
->>>>>>>
->>>>>>> Hi everyone,
->>>>>>>
->>>>>>> I keep getting an error on running the CI loop on -next on my tree :
->>>>>>>
->>>>>>> https://source.denx.de/u-boot/custodians/u-boot-at91/-/jobs/1090517
->>>>>>
->>>>>> Thanks for the report.
->>>>>>
->>>>>>>
->>>>>>> ! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - no other
->>>>>>> tests will run !
->>>>>>>
->>>>>>> Any clue ? It's been like this for few days. It doesn't look like a
->>>>>>> faulty patch.
->>>>>>
->>>>>> I can't see that link you sent me, it 403s.
->>>>>>
->>>>>> Do you have any other traces or information to share?
->>>>>
->>>>> It's been intermittent recently. I was able to put qemu + gdb together
->>>>> and see it's one of the early initcalls that fails and hang()s but
->>>>> didn't see why. You should be able to use commit 1f0281294d8b ("Merge
->>>>> patch series "Annotate switch/case fallthrough cases"") as a starting
->>>>> point of failure.
->>>>>
->>>>
->>>> Do you have logs ?
->>>>
->>>> Things look ok from the QEMU side (latest 10.0.0-rc and 9.1) :
->>>>       uboot_build=/path/to/u-boot/
->>>>       flashsize=65536
->>>>       flash=./flash-ast2600-evb-uboot
->>>>       dd of=$flash bs=1K if=/dev/zero count=$flashsize
->>>>       dd of=$flash conv=notrunc bs=1K if=$uboot_build/spl/u-boot-spl.bin
->>>>       dd of=$flash conv=notrunc bs=1K if=$uboot_build/u-boot.img seek=64
->>>>       $ qemu-system-arm -M ast2600-evb -net nic,netdev=net0 -netdev user,id=net0 -nographic -snapshot -serial mon:stdio   -drive file=flash-ast2600-evb-uboot,format=raw,if=mtd
->>>>       qemu-system-arm: warning: nic ftgmac100.1 has no peer
->>>>       qemu-system-arm: warning: nic ftgmac100.2 has no peer
->>>>       qemu-system-arm: warning: nic ftgmac100.3 has no peer
->>>>       U-Boot SPL 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +0200)
->>>>       Trying to boot from RAM
->>>>       ## Checking hash(es) for config conf-1 ... OK
->>>>       ## Checking hash(es) for Image firmware-1 ... crc32+ OK
->>>>       ## Checking hash(es) for Image fdt-1 ... crc32+ OK
->>>>       U-Boot 2025.04-00921-gcb7555e93075 (Apr 11 2025 - 09:08:40 +0200)
->>>
->>> Please note that it's inconsistent about what commit fails. I would
->>> expect 1f0281294d8b in U-Boot to fail but I don't know about
->>> cb7555e93075.
->>>
->>> Also can you please check QEMU v8.2.0? That's what we're on, and I can
->>> try and test 9.1.3 or 10.0.0-rc and see if it's a QEMU problem instead.
->>> Thanks!
+On 4/15/25 01:44, Joel Stanley wrote:
+> On Tue, 15 Apr 2025 at 07:34, Tom Rini <trini@konsulko.com> wrote:
 >>
->> Same result :
+>> Upstream developers have been unable to replicate this failure exactly.
+>> Furthermore, with commit 8c98b57d72d5 ('Merge patch series "Static
+>> initcalls"') we have now replaced the part of the U-Boot code which the
+>> platform was hanging in when I was debugging. Moving forward, if we have
+>> a failure again the next steps are to upgrade QEMU (which should be done
+>> regardless).
 >>
->> qemu-system-arm -M ast2600-evb -net nic,netdev=net0 -netdev user,id=net0 -nographic -snapshot -serial mon:stdio   -drive file=flash-ast2600-evb-uboot,format=raw,if=mtd
->> qemu-system-arm: warning: nic ftgmac100.1 has no peer
->> qemu-system-arm: warning: nic ftgmac100.2 has no peer
->> qemu-system-arm: warning: nic ftgmac100.3 has no peer
+>> This reverts commit 8a2cf6307a2ccc09c39dde486b6d9375b78c82c2.
 >>
->> U-Boot SPL 2025.04-00881-g1f0281294d8b (Apr 11 2025 - 17:23:25 +0200)
->> Trying to boot from RAM
->> ## Checking hash(es) for config conf-1 ... OK
->> ## Checking hash(es) for Image firmware-1 ... crc32+ OK
->> ## Checking hash(es) for Image fdt-1 ... crc32+ OK
->>
->>
->> U-Boot 2025.04-00881-g1f0281294d8b (Apr 11 2025 - 17:23:25 +0200)
->>
->> Model: Aspeed BMC
->> DRAM:  already initialized, 1008 MiB (capacity:1024 MiB, VGA:64 MiB), ECC off
->> Core:  266 devices, 24 uclasses, devicetree: separate
->> WDT:   Started watchdog@1e785000 with servicing every 1000ms (60s timeout)
->> MMC:   sdhci@1e750100: 0
->> Loading Environment from SPIFlash... SF: Detected mx25u51245g with page size 256 Bytes, erase size 64 KiB, total 64 MiB
->> *** Warning - bad CRC, using default environment
->>
->> In:    serial@1e784000
->> Out:   serial@1e784000
->> Err:   serial@1e784000
->> Net:   eth0: ftgmac@1e660000, eth1: ftgmac@1e680000, eth2: ftgmac@1e670000, eth3: ftgmac@1e690000
->> Hit any key to stop autoboot:  0
->> libfdt fdt_check_header(): FDT_ERR_BADMAGIC
->> Error loading kernel FIT image
->> => QEMU 8.2.10 monitor - type 'help' for more information
->> (qemu) q
->>
->>
->> What about the compiler ?
+>> Signed-off-by: Tom Rini <trini@konsulko.com>
 > 
-> It's:
-> https://www.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-gcc-13.2.0-nolibc-aarch64-linux.tar.xz
-> 
+> Thanks Tom! Sorry we couldn't help with the failure.
 
-1f0281294d8b fails to compile :
 
-   cc1: error: unknown value 'generic-armv7-a' for '-mtune'
+One thing to know about the Aspeed SoC AST2600 is that the Cortex
+A7 CPU has an FPU implementing VFPv4 without NEON support, which
+can break user space. buildroot was fixed with BR2_ARM_FPU_VFPV4D16
+and the QEMU model was adjusted to be more precise with HW,
+in version 8.1 and above.
 
-I use most of the time :
-
-arm-none-eabi-gcc (Fedora 14.1.0-2.fc41) 14.1.0
+It might be related. Having some logs would help to corner the issue.
 
 Thanks,
 
 C.
+
+
+> 
+> Acked-by: Joel Stanley <joel@jms.id.au>
+> 
+>> ---
+>> Cc: Ryan Chen <ryan_chen@aspeedtech.com>
+>> Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+>> Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+>> Cc: Joel Stanley <joel@jms.id.au>
+>> ---
+>>   .azure-pipelines.yml | 4 ++++
+>>   .gitlab-ci.yml       | 7 +++++++
+>>   2 files changed, 11 insertions(+)
+>>
+>> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+>> index cb787d32f142..24b6661c9c94 100644
+>> --- a/.azure-pipelines.yml
+>> +++ b/.azure-pipelines.yml
+>> @@ -424,6 +424,10 @@ stages:
+>>             TEST_PY_BD: "evb-ast2500"
+>>             TEST_PY_ID: "--id qemu"
+>>             TEST_PY_TEST_SPEC: "not sleep"
+>> +        evb_ast2600:
+>> +          TEST_PY_BD: "evb-ast2600"
+>> +          TEST_PY_ID: "--id qemu"
+>> +          TEST_PY_TEST_SPEC: "not sleep"
+>>           vexpress_ca9x4:
+>>             TEST_PY_BD: "vexpress_ca9x4"
+>>             TEST_PY_ID: "--id qemu"
+>> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+>> index 5f3418e482fe..aa15e009b39e 100644
+>> --- a/.gitlab-ci.yml
+>> +++ b/.gitlab-ci.yml
+>> @@ -331,6 +331,13 @@ evb-ast2500 test.py:
+>>       TEST_PY_ID: "--id qemu"
+>>     <<: *buildman_and_testpy_dfn
+>>
+>> +evb-ast2600 test.py:
+>> +  variables:
+>> +    TEST_PY_BD: "evb-ast2600"
+>> +    TEST_PY_TEST_SPEC: "not sleep"
+>> +    TEST_PY_ID: "--id qemu"
+>> +  <<: *buildman_and_testpy_dfn
+>> +
+>>   sandbox_flattree test.py:
+>>     tags:
+>>       - ${DEFAULT_AMD64_TAG}
+>> --
+>> 2.43.0
+>>
 
