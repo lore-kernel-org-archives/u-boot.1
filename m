@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C96FC369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 03:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6650DC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 05:21:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F81C82102;
-	Tue, 15 Apr 2025 05:36:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foxmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F974826AD;
+	Tue, 15 Apr 2025 07:21:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=foxmail.com header.i=@foxmail.com header.b="vTdpvniy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YL8eF3ZO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B90B882145; Tue, 15 Apr 2025 05:36:39 +0200 (CEST)
-Received: from out203-205-221-149.mail.qq.com (out203-205-221-149.mail.qq.com
- [203.205.221.149])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9133E820F8
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 05:36:33 +0200 (CEST)
+ id 8249C828D0; Tue, 15 Apr 2025 07:21:14 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AFABA8215D
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 07:21:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foxmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiehui.he@foxmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1744688184;
- bh=4+l/K97z7q4v7HLoyJTJYqOhfgawu/IlxTvirbTnHiQ=;
- h=From:To:Cc:Subject:Date:References:In-Reply-To;
- b=vTdpvniy/Na/Oeyp0UaPs0+uRFNza8gynu0Cl4xLiUoDR/lznwVgg6Jg2LM78YMi5
- XMFok4YapNSreH4BSgTI4H0Tz7bxQwDxAP7GNn3tdN9Yt4dvzYbUepi2iC1K/Enx+K
- ZQrV/NH4I4yQeJOvj1fUWQyIIjYiGTrNiVcw0dP8=
-X-QQ-XMRINFO: NS+P29fieYNw95Bth2bWPxk=
-X-QQ-XMAILINFO: NbiOBCZD5TwSocbg2caT+H1X/8YABsazFqhxq0mrvKZl9GKW/UkUwgy6QdHGUQ
- 7El5VfQdH+I4WnbiGzLKVrMFeb+5LuVE4DzFHkYcKOZT3beN0nnSDjj1uMa1BwcAf8Vv6t/xLbtrr
- lYqTf5JM8kLVDEqy4NaPJINSwgVtZXtZBZXVGjo3Fkmh4veY1IVW/dYQ7Wg0oBZ288ifA4UpKA5/s
- eINnoKqFYxE9z1h2h4Frew3yAEKDxnlnpwcED+27QeUVBgR1Z8gULhZtPtpr4uIxv20lRTUo0pgYh
- upYRYh0orC+l9C7y0Fptb9y6TchSJle+rDpZyrzgKhPcr+HVr3cXkPhN0Ai2z85OL+ZecsrkskCJU
- OGsBY7aOIyQX/YncBI8/IYpqjP1xwXJqt1bBkruFqCghRXamntX1/wFXhpW3VIwHFWmAjuQrN7qgb
- b8bbWjVFGCHMdJKLYJk/cujOwRuh217EwPNqd37e+51D5L7GoEgFVPFYun+eJ7qLdZMcgx6dY6sx0
- eCoXh43tfWpH/phrsQCJEHE5mjP24uXIN6cIni5SmxZe8Z3OOKYbKuFeawdjsdaapMNKAkVBigM8v
- Jh9N4NauonKF6V+PeodpJWDwoitbA5CNxjeuUQTQw7wM+xKeHMAk65+krdecjnQ0xPy0K66AoBD8/
- ew5CMIyCgeUhkTRYEBetoBKC2MnTE3VpFGBG2m876dWfaV3SWU16OTxYnva6B28SeVXtd0UB1xjo4
- lNJqKPZAeGqHPfA82212KQlF/KSocpMgNhuj92nbXhOD/UUIZNxlAHSfSpEK+m71DiprbDG4274xl
- qDLgW7KL/mBUycWi4iFsZYKCa8pQTQdWkj3AOWIBXJc+ZHOM4CXGJofXNA7+y3QdrtWm7hQSFpfH9
- RWhVJGHIJXVMs04KPqRfW42e6yeXQcvawA9gkFBGMmupngb3nz3UQEbJXgC4jt9UpuGTle4YGYMgt
- NcIf7z15Q7pvpIP8QN+WCidkkqQjKw4kGCppQ9j7IvLOIrb9iY
-From: "=?utf-8?B?SmllaHVpIEhl?=" <jiehui.he@foxmail.com>
-To: "=?utf-8?B?Sm9uYXMgS2FybG1hbg==?=" <jonas@kwiboo.se>
-Cc: "=?utf-8?B?dS1ib290?=" <u-boot@lists.denx.de>,
- "=?utf-8?B?c2pn?=" <sjg@chromium.org>,
- "=?utf-8?B?cGhpbGlwcC50b21zaWNo?=" <philipp.tomsich@vrull.eu>,
- "=?utf-8?B?a2V2ZXIueWFuZw==?=" <kever.yang@rock-chips.com>,
- "=?utf-8?B?dHJpbmk=?=" <trini@konsulko.com>,
- "=?utf-8?B?Y2hlbmpo?=" <chenjh@rock-chips.com>
-Subject: Re: [PATCH] board: rockchip: Add LCKFB TaishanPi RK3566 Board
-Mime-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
-Date: Tue, 15 Apr 2025 11:36:17 +0800
-X-Priority: 3
-Message-ID: <tencent_7CC544247A4DF034D14A52CFD850DCBC4F0A@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-References: <tencent_95ED0C0545D87B6A8C4B62EC045D53AD2406@qq.com>
- <97b55630-1a02-4e0c-9b0a-d90dd867618f@kwiboo.se>
-In-Reply-To: <97b55630-1a02-4e0c-9b0a-d90dd867618f@kwiboo.se>
-X-QQ-mid: xmsezc28-0t1744688177teqc1b15l
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53F5KnTO2373040
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 15 Apr 2025 00:20:49 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744694449;
+ bh=zSYzZXraj+sHzuaN9sQ+TaR2GECN4Crp5bltCetmtvw=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=YL8eF3ZOrZ8rR0x8QDhAdNMMBOuSmn6tAhp1p3sibo3OgEtpEotGKPS3c9YwJh/8e
+ QfxB64o7vpe/Dqogn5J2eskMJgwoWrO5G99axwP7xMcDx1j4ziQADOAbEC4+Ej4NMw
+ fRjViVdzbWp+jnYzsfJ7juU9mFXpDq1JLCDiss8g=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53F5KnDq010198
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 15 Apr 2025 00:20:49 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
+ Apr 2025 00:20:48 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 15 Apr 2025 00:20:48 -0500
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53F5KhQo128528;
+ Tue, 15 Apr 2025 00:20:43 -0500
+Message-ID: <352905ca-4308-4928-9a39-5d9842f1ae9c@ti.com>
+Date: Tue, 15 Apr 2025 10:50:42 +0530
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
+To: Francesco Dolcini <francesco@dolcini.it>, Tom Rini <trini@konsulko.com>
+CC: Nishanth Menon <nm@ti.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Fabio Estevm <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Mario Six <mario.six@gdsys.cc>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ <u-boot@lists.denx.de>, Ian Ray <ian.ray@gehealthcare.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
+ Udit Kumar <u-kumar1@ti.com>
+References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
+ <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
+ <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
+ <20250414180727.5d5zyenfagdc5qw2@unable> <20250414200635.GC5495@bill-the-cat>
+ <20250414210041.GA8754@francesco-nb>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250414210041.GA8754@francesco-nb>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,65 +97,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkmbmJzcDtKb25hcyw8YnIvPjxici8+VGhhbmtzJm5ic3A7Zm9yJm5ic3A7eW91ciZuYnNw
-O3JldmlldyZuYnNwO2FuZCZuYnNwO2hlbHBmdWwmbmJzcDtzdWdnZXN0aW9ucyE8YnIvPjxi
-ci8+T24mbmJzcDsyMDI1LTAzLTMwJm5ic3A7MTk6MjcsJm5ic3A7Sm9uYXMmbmJzcDtLYXJs
-bWFuJm5ic3A7d3JvdGU6PGJyLz4mZ3Q7Jmd0OyZuYnNwO2RpZmYmbmJzcDstLWdpdCZuYnNw
-O2EvY29uZmlncy9sY2tmYi10c3BpLXJrMzU2Nl9kZWZjb25maWcmbmJzcDtiL2NvbmZpZ3Mv
-bGNrZmItdHNwaS1yazM1NjZfZGVmY29uZmlnPGJyLz4mZ3Q7Jmd0OyZuYnNwO25ldyZuYnNw
-O2ZpbGUmbmJzcDttb2RlJm5ic3A7MTAwNjQ0PGJyLz4mZ3Q7Jmd0OyZuYnNwO2luZGV4Jm5i
-c3A7MDAwMDAwMDAuLjEyNmVkZTM3PGJyLz4mZ3Q7Jmd0OyZuYnNwOy0tLSZuYnNwOy9kZXYv
-bnVsbDxici8+Jmd0OyZndDsmbmJzcDsrKysmbmJzcDtiL2NvbmZpZ3MvbGNrZmItdHNwaS1y
-azM1NjZfZGVmY29uZmlnPGJyLz4mZ3Q7Jmd0OyZuYnNwO0BAJm5ic3A7LTAsMCZuYnNwOysx
-LDg0Jm5ic3A7QEA8YnIvPiZndDsmZ3Q7Jm5ic3A7K0NPTkZJR19BUk09eTxici8+Jmd0OyZn
-dDsmbmJzcDsrQ09ORklHX1NLSVBfTE9XTEVWRUxfSU5JVD15PGJyLz4mZ3Q7Jmd0OyZuYnNw
-OytDT05GSUdfQ09VTlRFUl9GUkVRVUVOQ1k9MjQwMDAwMDA8YnIvPiZndDsmZ3Q7Jm5ic3A7
-K0NPTkZJR19BUkNIX1JPQ0tDSElQPXk8YnIvPiZndDsmZ3Q7Jm5ic3A7K0NPTkZJR19TUExf
-R1BJTz15PGJyLz48YnIvPiZndDsmbmJzcDtUaGUmbmJzcDtTUEwmbmJzcDtjb250cm9sJm5i
-c3A7RkRUJm5ic3A7aXMmbmJzcDtub3QmbmJzcDtpbmNsdWRpbmcmbmJzcDthbnkmbmJzcDtn
-cGlvJm5ic3A7cmVsYXRlZCZuYnNwO25vZGVzLCZuYnNwO3RoaXMmbmJzcDtjb3VsZDxici8+
-Jmd0OyZuYnNwO2JlJm5ic3A7ZHJvcHBlZC48YnIvPjxici8+QWNrLiZuYnNwO0kmbmJzcDt3
-aWxsJm5ic3A7cmVtb3ZlJm5ic3A7YENPTkZJR19TUExfR1BJT2AuPGJyLz48YnIvPiZndDsm
-Z3Q7Jm5ic3A7Li4uPGJyLz4mZ3Q7Jmd0OyZuYnNwOytDT05GSUdfU1BMX1BPV0VSPXk8YnIv
-Pjxici8+Jmd0OyZuYnNwO1RoZSZuYnNwO1NQTCZuYnNwO2NvbnRyb2wmbmJzcDtGRFQmbmJz
-cDtpcyZuYnNwO25vdCZuYnNwO2luY2x1ZGluZyZuYnNwO2FueSZuYnNwO3Bvd2VyJm5ic3A7
-cmVsYXRlZCZuYnNwO25vZGVzLCZuYnNwO3RoaXMmbmJzcDtjb3VsZDxici8+Jmd0OyZuYnNw
-O2JlJm5ic3A7ZHJvcHBlZC48YnIvPjxici8+V2lsbCZuYnNwO2Ryb3AmbmJzcDtgQ09ORklH
-X1NQTF9QT1dFUmAuPGJyLz48YnIvPiZndDsmZ3Q7Jm5ic3A7Li4uPGJyLz4mZ3Q7Jmd0OyZu
-YnNwOytDT05GSUdfRFdDX0VUSF9RT1M9eTxici8+Jmd0OyZndDsmbmJzcDsrQ09ORklHX0RX
-Q19FVEhfUU9TX1JPQ0tDSElQPXk8YnIvPjxici8+Jmd0OyZuYnNwO0l0Jm5ic3A7ZG9lcyZu
-YnNwO25vdCZuYnNwO2xvb2smbmJzcDtsaWtlJm5ic3A7dGhlJm5ic3A7ZGV2aWNlJm5ic3A7
-dHJlZSZuYnNwO2VuYWJsZSZuYnNwO2FueSZuYnNwO0V0aGVybmV0Jm5ic3A7ZGV2aWNlcywm
-bmJzcDt0aGVzZTxici8+Jmd0OyZuYnNwO3R3byZuYnNwO2NvdWxkJm5ic3A7YmUmbmJzcDtk
-cm9wcGVkLjxici8+PGJyLz5J4oCZbGwmbmJzcDtyZW1vdmUmbmJzcDtib3RoJm5ic3A7YENP
-TkZJR19EV0NfRVRIX1FPU2AmbmJzcDthbmQmbmJzcDtgQ09ORklHX0RXQ19FVEhfUU9TX1JP
-Q0tDSElQYC48YnIvPjxici8+Jmd0OyZndDsmbmJzcDsuLi48YnIvPiZndDsmZ3Q7Jm5ic3A7
-K0NPTkZJR19TUExfRE1fUkVHVUxBVE9SPXk8YnIvPiZndDsmZ3Q7Jm5ic3A7K0NPTkZJR19T
-UExfRE1fUkVHVUxBVE9SX0ZJWEVEPXk8YnIvPjxici8+Jmd0OyZuYnNwO1RoZSZuYnNwO1NQ
-TCZuYnNwO2NvbnRyb2wmbmJzcDtGRFQmbmJzcDtpcyZuYnNwO25vdCZuYnNwO2luY2x1ZGlu
-ZyZuYnNwO2FueSZuYnNwO2ZpeGVkJm5ic3A7cmVndWxhdG9ycywmbmJzcDt0aGVzZSZuYnNw
-O3R3bzxici8+Jmd0OyZuYnNwO2NvdWxkJm5ic3A7YmUmbmJzcDtkcm9wcGVkLjxici8+PGJy
-Lz5JJm5ic3A7d2lsbCZuYnNwO3JlbW92ZSZuYnNwO2BDT05GSUdfU1BMX0RNX1JFR1VMQVRP
-UmAmbmJzcDthbmQmbmJzcDtgQ09ORklHX1NQTF9ETV9SRUdVTEFUT1JfRklYRURgLjxici8+
-PGJyLz4mZ3Q7Jmd0OyZuYnNwOy4uLjxici8+Jmd0OyZndDsmbmJzcDtkaWZmJm5ic3A7LS1n
-aXQmbmJzcDthL2RvYy9ib2FyZC9yb2NrY2hpcC9yb2NrY2hpcC5yc3QmbmJzcDtiL2RvYy9i
-b2FyZC9yb2NrY2hpcC9yb2NrY2hpcC5yc3Q8YnIvPiZndDsmZ3Q7Jm5ic3A7aW5kZXgmbmJz
-cDsxNDA3MDgwZi4uYWU5YThjOGEmbmJzcDsxMDA2NDQ8YnIvPiZndDsmZ3Q7Jm5ic3A7LS0t
-Jm5ic3A7YS9kb2MvYm9hcmQvcm9ja2NoaXAvcm9ja2NoaXAucnN0PGJyLz4mZ3Q7Jmd0OyZu
-YnNwOysrKyZuYnNwO2IvZG9jL2JvYXJkL3JvY2tjaGlwL3JvY2tjaGlwLnJzdDxici8+Jmd0
-OyZndDsmbmJzcDtAQCZuYnNwOy0xMTIsNiZuYnNwOysxMTIsNyZuYnNwO0BAJm5ic3A7TGlz
-dCZuYnNwO29mJm5ic3A7bWFpbmxpbmUmbmJzcDtzdXBwb3J0ZWQmbmJzcDtSb2NrY2hpcCZu
-YnNwO2JvYXJkczo8YnIvPiZndDsmZ3Q7Jm5ic3A7LSZuYnNwO1JhZHhhJm5ic3A7Uk9DSyZu
-YnNwOzNDJm5ic3A7KHJvY2stM2MtcmszNTY2KTxici8+Jmd0OyZndDsmbmJzcDstJm5ic3A7
-UmFkeGEmbmJzcDtaRVJPJm5ic3A7M1cvM0UmbmJzcDsocmFkeGEtemVyby0zLXJrMzU2Nik8
-YnIvPiZndDsmZ3Q7Jm5ic3A7LSZuYnNwO1h1bmxvbmcmbmJzcDtPcmFuZ2UmbmJzcDtQaSZu
-YnNwOzNCJm5ic3A7KG9yYW5nZXBpLTNiLXJrMzU2Nik8YnIvPiZndDsmZ3Q7Jm5ic3A7KyZu
-YnNwOy0mbmJzcDtMQ0tGQiZuYnNwO1RhaXNoYW5QaSZuYnNwOyhsY2tmYi10c3BpLXJrMzU2
-Nik8YnIvPjxici8+Jmd0OyZuYnNwO1BsZWFzZSZuYnNwO2FkZCZuYnNwO3RoaXMmbmJzcDts
-aW5lJm5ic3A7aW4mbmJzcDtjb3JyZWN0Jm5ic3A7YWxwaGFiZXRpY2FsJm5ic3A7b3JkZXIm
-bmJzcDthbmQmbmJzcDtub3QmbmJzcDthdCZuYnNwO3RoZSZuYnNwO2JvdHRvbS48YnIvPjxi
-ci8+VGhhbmtzISZuYnNwO0nigJlsbCZuYnNwO2ZpeCZuYnNwO3RoZSZuYnNwO29yZGVyJm5i
-c3A7YW5kJm5ic3A7cGxhY2UmbmJzcDtpdCZuYnNwO2FscGhhYmV0aWNhbGx5Jm5ic3A7aW4m
-bmJzcDt0aGUmbmJzcDtuZXh0Jm5ic3A7cmV2aXNpb24uPGJyLz48YnIvPkJlc3QmbmJzcDty
-ZWdhcmRzLCZuYnNwOyZuYnNwOzxici8+SmllaHVpPGJyLz4=
 
+
+On 15/04/25 02:30, Francesco Dolcini wrote:
+> On Mon, Apr 14, 2025 at 02:06:35PM -0600, Tom Rini wrote:
+>> On Mon, Apr 14, 2025 at 01:07:27PM -0500, Nishanth Menon wrote:
+>>> On 23:06-20250414, Francis, Neha wrote:
+>>>> On 4/3/2025 1:09 PM, Miquel Raynal wrote:
+>>>>> It is very surprising that such an uclass, specifically designed to
+>>>>> handle resources that may be shared by different devices, is not keeping
+>>>>> the count of the number of times a power domain has been
+>>>>> enabled/disabled to avoid shutting it down unexpectedly or disabling it
+>>>>> several times.
+>>>>>
+>>>>> Doing this causes troubles on eg. i.MX8MP because disabling power
+>>>>> domains can be done in recursive loops were the same power domain
+>>>>> disabled up to 4 times in a row. PGCs seem to have tight FSM internal
+>>>>> timings to respect and it is easy to produce a race condition that puts
+>>>>> the power domains in an unstable state, leading to ADB400 errors and
+>>>>> later crashes in Linux.
+>>>>>
+>>>>> CI tests using power domains are slightly updated to make sure the count
+>>>>> of on/off calls is even and the results match what we *now* expect.
+>>>>>
+>>>>> As we do not want to break existing users while stile getting
+>>>>> interesting error codes, the implementation is split between:
+>>>>> - a low-level helper reporting error codes if the requested transition
+>>>>>   could not be operated,
+>>>>> - a higher-level helper ignoring the "non error" codes, like EALREADY and
+>>>>>   EBUSY.
+>>>>>
+>>>>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>>>>> ---
+>>>>
+>>>> This commit looks to be breaking K3 platforms boot, please see "Latest Boot
+>>>> Summary" [0]. Reverting the commit fixes boot.
+>>>>
+>>>> [0] https://lcpd.itg.ti.com/upstream/k3-boot-build/main/build-trends.html
+
+My bad on the internal link.
+
+>>>
+>>> Uggh. This link is a TI internal link. Nutshell, it is broken
+>>> between:
+>>> v2025.04-921-gcb7555e93075 : https://source.denx.de/u-boot/u-boot.git
+>>> and
+>>> v2025.04-1041-g407d68638fe3 : https://source.denx.de/u-boot/u-boot.git
+>>>
+>>> Neha bisected it down to 197376fbf300e92afa0a1583815d9c9eb52d613a commit
+>>> which is this patch.
+>>
+>> And assuming it's the same failure I got reported this morning by one of
+>> my coworkers, we just get:
+>> U-Boot SPL 2025.04-01050-ga40fc5afaec0 (Apr 14 2025 - 07:31:32 +0000)
+>> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
+
+This is not the failure I am seeing, we hang before console comes up so
+no prints. Looks like the different failure signature is due to TIFS
+(SYSFW) firmware being different (v9.2.7 vs. 11.0.4)
+> I have not tried reverting that commit yet, but I do have the same
+> failure.
+> 
+> Francesco
+> 
+
+
+
+-- 
+Thanking You
+Neha Malcom Francis
