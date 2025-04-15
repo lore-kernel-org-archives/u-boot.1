@@ -4,68 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD101C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 15:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 225B5C369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 16:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D28A781F7E;
-	Tue, 15 Apr 2025 17:53:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2F686820E8;
+	Tue, 15 Apr 2025 18:55:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="xgDARTTd";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1744736117;
+	bh=i9o3alRWIvo0NzjG9ZoFsP/s56uEFHw8mWQ1jmrV19A=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Q0sxP095IA6PiVnhIIbgOV/i3vpn5nd9ouEBHbv48fdojFiUDiLy1ZHyp++F5OpVJ
+	 SZkZ7IcDJCtaXWMd9YFCMz8+24S3lBbHcLgBcL4qiGS/EbXQ42jl8d3jjh80yBHhfc
+	 bE93ManUqgFy9ydWSR6eDUXOzPraNFqMke7ksHiEUjjCyvKbw43GjjyPvGiWxcejf8
+	 m/34kf4/vIOwlf4A7O6XHTgyt4dU96TUyuEn/np9Dx0A4+7sg2npBYVQ1RdCxUVkoq
+	 Gm+1iky+DZgnqvNYbxGWa9vAmRAfbdvjGLrmNWf+/i5n196doptTN1M2y/N5YYjzkL
+	 vcrureiVL6mAQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 148A0820E8; Tue, 15 Apr 2025 17:53:09 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 0A48682102; Tue, 15 Apr 2025 18:55:16 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7368B81CAF
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 17:53:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8036E8209C
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 18:55:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f7e1=XC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744732385;
- bh=BNG9zo88//CNBj/2/ZyJb0fXWSzQ/lEBlUenpAuBQTY=;
- b=xgDARTTdsKDi4zoGQKfyB6iNnre69ZJETWzvGe5koByCEsrCQ/Foq0l/CKtXZLOodcz8WB8QL
- NkjoTejghq17W54WT1GmZa9jRpFk/X2rA4/ftuqiUL3MHjLdPAjpSyCeMKJAY+J6oHJnxsJpY01
- N2nmBjgdoU5+ILQYS56aL08ZGKvjck9TjqStyMa79JpTtDYBS0SmQud3dZfB7B+ukV1savjIZwT
- sC6w1NVZRuKjabdbttWnuYqkr/q2Ru/uOrZ3SdOB2wf1CVjquNbjjI2aByMXgeJjQLMd8YjV4dm
- 2Bg9E9O8tT0kWyyfhly4jAb/wQkJa45zAqzYpJtIzFAA==
-X-Forward-Email-ID: 67fe80dc999e81140c546361
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <e36d58f5-6a92-4080-9648-1583250cce37@kwiboo.se>
-Date: Tue, 15 Apr 2025 17:52:55 +0200
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="R9k9w+ir"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E3147102A4BD3; 
+ Tue, 15 Apr 2025 18:55:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1744736112; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=i9o3alRWIvo0NzjG9ZoFsP/s56uEFHw8mWQ1jmrV19A=;
+ b=R9k9w+irE1l9dAr4jKWEVxi+atrvimgfkONWSYC59tg2vfZGWqWwjUwZSj8sUY3XhkAQPL
+ Fu5J5kZ4zJQDcMnSNxXPlaFbKv89Tv/BcZSrp0AqkgLkcH8FBLXI2T6rdwFyNzPmkZC8w3
+ 5kiTNmik6VA6FN19JmvXcj4tVkqmm/rMyDfILlPa7gLRQ5mtojK0MH+Y4Jta8EiQqQDl57
+ uPn0iFOHAsK1/zuVdOh6WkVVr9jG6jeLI/kAfjV+IfJ6KweB8d5eNnGNLKOnct926YjwMD
+ vohptsJdB+evsbnu/O3XRIV0ZC/gSYX2qbDqVHpTtmc3cEgGVnnQF2aXf+hY5g==
+Message-ID: <b396cb96-ff95-4822-ad24-ddff2e3b6545@denx.de>
+Date: Tue, 15 Apr 2025 18:50:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/12] configs: pinetab2-rk3566: Enable video and USB
- keyboard
-To: Dang Huynh <danct12@riseup.net>
-Cc: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Ondrej Jirman <megi@xff.cz>, Dragan Simic <dsimic@manjaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- Piotr Zalewski <pZ010001011111@proton.me>
-References: <20250412-vop2-pt2-v3-0-7c796db335e9@riseup.net>
- <20250412-vop2-pt2-v3-11-7c796db335e9@riseup.net>
- <6d852aca-dcc8-4098-9406-fc09738a205d@kwiboo.se> <Z_5fNUPHuDP1cPmC@melt-pi5>
+Subject: Re: [REGRESSION] Re: [PATCH v2 16/24] clk: imx: Convert clock-osc-*
+ back to osc_*
+To: Francesco Dolcini <francesco@dolcini.it>, Adam Ford <aford173@gmail.com>
+Cc: Fabio Estevam <festevam@denx.de>, u-boot@lists.denx.de,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan
+ <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com
+References: <20250323160107.145749-1-marex@denx.de>
+ <20250323160107.145749-17-marex@denx.de>
+ <20250415142846.GA244333@francesco-nb>
+ <CAHCN7xLa5W-AtRso6RUZwZG_sfDm9CHierfzt_WfOqFjSGJZoA@mail.gmail.com>
+ <20250415150344.GA246483@francesco-nb>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <Z_5fNUPHuDP1cPmC@melt-pi5>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250415150344.GA246483@francesco-nb>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,106 +89,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-04-15 15:29, Dang Huynh wrote:
-> On Sun, Apr 13, 2025 at 05:26:03PM +0200, Jonas Karlman wrote:
->> Hi,
->>
->> On 2025-04-12 16:27, Dang Huynh wrote:
->>> Now that we have VOP2 support, let's enable it and support the
->>> built in USB keyboard.
+On 4/15/25 5:03 PM, Francesco Dolcini wrote:
+> On Tue, Apr 15, 2025 at 09:43:12AM -0500, Adam Ford wrote:
+>> On Tue, Apr 15, 2025 at 9:28 AM Francesco Dolcini <francesco@dolcini.it> wrote:
 >>>
->>> Signed-off-by: Dang Huynh <danct12@riseup.net>
->>> ---
->>>  configs/pinetab2-rk3566_defconfig | 11 +++++++++++
->>>  1 file changed, 11 insertions(+)
+>>> Hello Marex, Fabio, all
 >>>
->>> diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
->>> index 45e63b42d192dc172f24e071b09c8203675965d8..792ec0ec119437fd7a920558a149363c886c87de 100644
->>> --- a/configs/pinetab2-rk3566_defconfig
->>> +++ b/configs/pinetab2-rk3566_defconfig
->>> @@ -57,6 +57,7 @@ CONFIG_BUTTON=y
->>>  CONFIG_BUTTON_ADC=y
->>>  CONFIG_BUTTON_GPIO=y
->>>  CONFIG_SPL_CLK=y
->>> +CONFIG_CLK_CCF=y
+>>> On Sun, Mar 23, 2025 at 04:58:45PM +0100, Marek Vasut wrote:
+>>>> Convert clock-osc-24m back to osc_24m and clock-osc-32k back to osc_32k.
+>>>> These are the clock which match clock tables in Linux. This is now
+>>>> possible because the clock drivers now resolve clock names based on
+>>>> clock-names DT property in the CCM DT node.
+>>>>
+>>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>>
+>>> Current USB fastboot functionality from U-Boot proper in master is broken
+>>> on Verdin iMX8M Plus since commit b4734c9c333b ("clk: imx: Convert
+>>> clock-osc-* back to osc_*"). Other i.MX SoCs might be affected, I have
+>>> not looked into every detail.
+>>>
+>>>    Could not fetch index
+>>>    Failed to get PHY0 for usb@38100000
+>>>    Could not fetch index
+>>>    Failed to get PHY0 for usb@38100000
+>>>    No USB device found
+>>>    USB init failed: -19
+>>>
+>>> Reverting this commit on top of master is not trivial (there are
+>>> conflicts, and I have not looked into the details).
+>>>
+>>> Full log for reference
+>>>
+>>>    U-Boot SPL 2025.04-rc4-00537-gb4734c9c333b (Apr 15 2025 - 16:14:09 +0200)
+>>>    Training FAILED
+>>>    DDR configured as single rank
+>>>    WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+>>>    SEC0:  RNG instantiated
+>>>    Normal Boot
+>>>    Trying to boot from BOOTROM
+>>>    Boot Stage: USB boot
+>>>    Find img info 0x4802ec00, size 1116
+>>>    Need continue download 1024
+>>>    NOTICE:  Do not release JR0 to NS as it can be used by HAB
+>>>    NOTICE:  BL31: v2.12.0(release):v2.12.0-946-g4d913df8f85e
+>>>    NOTICE:  BL31: Built : 13:19:07, Apr 15 2025
+>>>
+>>>
+>>>    U-Boot 2025.04-rc4-00537-gb4734c9c333b (Apr 15 2025 - 16:14:09 +0200)
+>>>
+>>>    CPU:   Freescale i.MX8MP[8] rev1.1 1600 MHz (running at 1200 MHz)
+>>>    CPU:   Industrial temperature grade (-40C to 105C) at 56C
+>>>    Reset cause: POR
+>>>    DRAM:  4 GiB
+>>>    Core:  309 devices, 31 uclasses, devicetree: separate
+>>>    WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+>>>    MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+>>>    Loading Environment from nowhere... OK
+>>>    In:    serial@30880000
+>>>    Out:   serial@30880000
+>>>    Err:   serial@30880000
+>>>    Model: Toradex 0058 Verdin iMX8M Plus Quad 4GB WB IT V1.0B
+>>>    Serial#: 06849144
+>>>    Carrier: Toradex Dahlia V1.1A, Serial# 10763256
+>>>    SEC0:  RNG instantiated
+>>>    Setting variant to wifi
+>>>    Net:   pca953x gpio-expander@21: Error reading output register
+>>>    eth1: ethernet@30be0000, eth0: ethernet@30bf0000 [PRIME]
+>>>    Hit any key to stop autoboot:  0
+>>>    Could not fetch index
+>>>    Failed to get PHY0 for usb@38100000
+>>>    Could not fetch index
+>>>    Failed to get PHY0 for usb@38100000
 >>
->> Rockchip clk drivers does not use this, and I do not see any new clock
->> driver being added in this series.
->>
->> Why is this needed?
-> I initially added this to get around clk_enable error, but it seems like
-> you don't need to enable VOP clocks.
+>> When running my 8M Plus in Host mode, I got similar "Failed to get
+>> PHY0 for usb" failures, but I hadn't yet bisected it.  The PHY itself
+>> doesn't appear to have a clock reference itself, but it does reference
+>> a power-domain which uses multiple clocks. I wonder if one of the
+>> clocks in the hsio power domain isn't registering properly.   I won't
+>> be near my 8MP until much later tonight, but can you run 'dm tree' to
+>> see what clocks are enumerated and which might be missing?
 > 
-> However, I noticed that enabling CCF will give us clock rate that are
-> pretty close to how it's configured on Linux.
-
-As mentioned on IRC with CCF enabled the clk enable() ops does not need
-to be enabled however without CFF the enable() ops must be enable or the
-set_parent() ops is just ignored.
-
-So I expect the issue with different rates is that some clock is never
-changing parent as requested by DT or driver code.
-
-Please try following diff with CCF disabled:
-
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 4b3d812f9c65..93dd32ebe74d 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -624,7 +624,7 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
- 		return -ENOSYS;
- 
- 	ret = clk_enable(parent);
--	if (ret) {
-+	if (ret && ret != -ENOSYS) {
- 		printf("Cannot enable parent %s\n", parent->dev->name);
- 		return ret;
- 	}
-
-
-Not sure this is a good solution or if it will be better to let the
-clk_rk3568.c driver just implement a dummy enable() ops.
-
-Regards,
-Jonas
-
+> Here the logs,
+> https://gist.github.com/dolcini/035ede9e94026c8f7f34e64ee07e124b
 > 
->>
->> Regards,
->> Jonas
->>
->>>  # CONFIG_USB_FUNCTION_FASTBOOT is not set
->>>  CONFIG_ROCKCHIP_GPIO=y
->>>  CONFIG_SYS_I2C_ROCKCHIP=y
->>> @@ -69,6 +70,7 @@ CONFIG_MMC_SDHCI_SDMA=y
->>>  CONFIG_MMC_SDHCI_ROCKCHIP=y
->>>  CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->>>  CONFIG_SPI_FLASH_SILICONKAISER=y
->>> +CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY=y
->>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->>>  CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
->>>  CONFIG_SPL_PINCTRL=y
->>> @@ -94,6 +96,7 @@ CONFIG_USB_OHCI_HCD=y
->>>  CONFIG_USB_OHCI_GENERIC=y
->>>  CONFIG_USB_DWC3=y
->>>  CONFIG_USB_DWC3_GENERIC=y
->>> +CONFIG_USB_KEYBOARD=y
->>>  CONFIG_USB_HOST_ETHER=y
->>>  CONFIG_USB_ETHER_ASIX=y
->>>  CONFIG_USB_ETHER_ASIX88179=y
->>> @@ -101,4 +104,12 @@ CONFIG_USB_ETHER_RTL8152=y
->>>  CONFIG_USB_GADGET=y
->>>  CONFIG_USB_GADGET_DOWNLOAD=y
->>>  CONFIG_USB_FUNCTION_ROCKUSB=y
->>> +CONFIG_VIDEO=y
->>> +CONFIG_VIDEO_LCD_BOE_TH101MB31IG002_28A=y
->>> +CONFIG_DISPLAY=y
->>> +CONFIG_VIDEO_ROCKCHIP=y
->>> +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
->>> +CONFIG_DISPLAY_ROCKCHIP_DW_MIPI=y
->>> +CONFIG_VIDEO_BRIDGE=y
->>> +CONFIG_VIDEO_REMOVE=y
->>>  CONFIG_ERRNO_STR=y
->>>
->>
-
+> commit bcb141d11428 ("clk: imx: Pass struct udevice into
+> imx_clk_composite*()") is the last good, commit b4734c9c333b ("clk: imx:
+> Convert clock-osc-* back to osc_*") is the first bad.
+Do you have af9cdd1ccd2d ("Revert "arm64: dts: imx8mn: Include 32kHz 
+oscillator clock in SPL DTs"") in place ? If so, try and revert it, does 
+it help ?
