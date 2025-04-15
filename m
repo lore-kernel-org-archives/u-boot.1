@@ -4,90 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EAE6C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:51:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2406CC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 12:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 308EB82AFB;
+	by phobos.denx.de (Postfix) with ESMTP id 7833382B07;
 	Tue, 15 Apr 2025 14:50:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NLOXFHyi";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="PR1UXCRj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 349F98056A; Tue, 15 Apr 2025 10:30:28 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D21E5829CF; Tue, 15 Apr 2025 11:50:54 +0200 (CEST)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [217.70.183.196])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3962A82047
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 10:30:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5604582145
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 11:50:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=brunosampaioleite@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-30bfc8faef9so49423241fa.1
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 01:30:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744705825; x=1745310625; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G/bK1K44Dr1qFbZickUlvWkto/6r+BtRySFxyVDIYKY=;
- b=NLOXFHyi7dXqHhrg8fkx5lISJ9rd6xXpixrCEDfKShdvqjvn2vMkVHivrB/UmT5q/m
- Rcn0ad8zpPX+B1FfTwwkq4froYJpiBB3hfDhWs7VhphrtvcoOdo1odSLFDY+94ycwMrH
- SByxwk76lvnn/WPl/K20jk3AacL4eitsWe6coH11QAw1Ff7ub3lukIMOHwph9KvyBBCO
- rDC59cJIVrN7JGycd5bVjEbPQL20S8ElhQFxzpA/Oay5mRcuWOz9kPtXDepqVY3OTeRD
- xVYZBQmbfdH+ddX0djm3HK4NeFgarV9FrclE37evniLeATkMGoB6vWwtfQHQzGnZi9XM
- 1yZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744705825; x=1745310625;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G/bK1K44Dr1qFbZickUlvWkto/6r+BtRySFxyVDIYKY=;
- b=aJrgDOltnMKa4/yUhPGvvzqv8fUsRjhtiQXqF20Ymo2bHr0kbVeb5jFe/TzFShZYoD
- bmirjua4chjbqAuDu0hPub/QpZdCyKrlFKWI/+yp82mTlCakauWD+2ouH+uTR3LgV9/T
- p2etUHhRr/1cdNUumKjbHK5ePRPZ1fj4kTq3Tr7PFfE2F1HctVcGt+5Eg0eGdDxB/CNY
- fzT82UD+QbEtpyLp3b1DL5m2kvMNPjVtsUMnaldTfwrA3UicBAXnx5/aNwK8mi3ZbF1p
- zd+QdEDjuLtdboBfffvanhpOnx7DFBWHxiQYy3nIx9kGV9apFJZZw6g2w46mIHxJ9qpK
- vs4A==
-X-Gm-Message-State: AOJu0YwFtor9kanZ4bPXgxW0Caq1SXAjjr1eoMtteqd6a/rCRGtBSoCz
- 2nTZsmUy7rN+RuLT0b0YkYdB4Nap8ZheIEJjBpYYy86I0HBvDOCEorH+8zHIOu0Q2A==
-X-Gm-Gg: ASbGncuvhE42LjbCtWsarbjkyrOyVA/mrkKOUPBAgzW/qnUKh7MwX9QNl5kSLSTzn2x
- NVqmx7hNTBoFrwXVi4qN6/9oQbYDvg5w3q4qaRjK1FSsBvwHor7Qrqso4bleSYBBbp89rvTNKGN
- cQxKrjEuhwK1IGGp5Si31mh/uHdkNoNlXvJGgUhNC5jjedj0tGwWLzKuau775LircGiFhFkXlmg
- vvKDSS9iaFj9jLuUnbu7i3HGC98ZSaO1UWogeOvncthddQXzEPMwtiiR4+HzAFh27h9pihboSgQ
- bf41IZ0AmlDUKSrxJRPRtfUlOJ1TRA5TMFL2vAPYxty+pgqFrriC8oOsemfm5DvdxQNjoM2NG7/
- ZxkxfMxEZ
-X-Google-Smtp-Source: AGHT+IHMd8cQWJx/NJpA+NT/8JfqwmGZg8ekGgpeyeFGMd3DfCJ5kuQYxSAip7G9Y3zA2jvJMPH6xw==
-X-Received: by 2002:a2e:b8c4:0:b0:309:1fee:378d with SMTP id
- 38308e7fff4ca-31049a1cf35mr46597761fa.19.1744705825108; 
- Tue, 15 Apr 2025 01:30:25 -0700 (PDT)
-Received: from brule-Precision-3590.prevas.se ([81.216.59.226])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30f464cc0a2sm19679971fa.31.2025.04.15.01.30.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 01:30:24 -0700 (PDT)
-From: Bruno Leite <brunosampaioleite@gmail.com>
-To: u-boot@lists.denx.de
-Cc: pbrobinson@gmail.com, Matthias Brugger <mbrugger@suse.com>,
- clast@prevas.dk, ravi@prevas.dk, Bruno Leite <brule@prevas.dk>,
- Fiona Klute <fiona.klute@gmx.de>, Francois Berder <fberder@outlook.fr>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Martin Stolpe <martinstolpe@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/1] rpi: copy over uart clock-frequency in DT
-Date: Tue, 15 Apr 2025 10:30:14 +0200
-Message-ID: <20250415083017.3523317-2-brunosampaioleite@gmail.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
-References: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 6716343AD8;
+ Tue, 15 Apr 2025 09:50:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1744710651;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pklktYNZLN60du+KVGABFNL3qEDS8+E/gwmUzOK8v50=;
+ b=PR1UXCRjgY3lOk2lN6DpaVLHchQ6if6En5usrJ2SlBofSeZ1dWb9f9G/u2NhTYp4+xxi9+
+ qwdtebAXXGsLvWJa60r3HvrU3fMA+hpK1p2sfXrbKzkpfsh4E+mKu/aGpote5tS9DdK+/d
+ /4JrKyUrO8YZc0R+WzGZ0Yxpkr1G0+DAjxj4dtK1xbDpcpcR+7vUiUO/4j5co+06dNqhms
+ Zry3+vUlXhyne3oZByuSY6XRYk9aM20fP8LCdXIBCFqBtkKzseMgZ+NdoVa+OSJ30op7kF
+ jvdr8PzHDw58d6Z6Q/Imdbn0i3RULAWWwgRcjT7D1j7uPKdXpwP0FKNOrAWC2w==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: Francesco Dolcini <francesco@dolcini.it>,  Tom Rini
+ <trini@konsulko.com>,  Nishanth Menon <nm@ti.com>,  Simon Glass
+ <sjg@chromium.org>,  Jaehoon Chung <jh80.chung@samsung.com>,  Lukasz
+ Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,  Anatolij
+ Gustschin <agust@denx.de>,  Fabio Estevm <festevam@gmail.com>,  Peng Fan
+ <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Svyatoslav Ryhel
+ <clamor95@gmail.com>,  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ <u-boot@lists.denx.de>,  Ian Ray <ian.ray@gehealthcare.com>,  Michael
+ Nazzareno Trimarchi <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>,  Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
+In-Reply-To: <1d83aeee-7399-4467-8b4b-fdcde9f8e192@ti.com> (Neha Malcom
+ Francis's message of "Tue, 15 Apr 2025 14:29:21 +0530")
+References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
+ <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
+ <7ae54055-7106-47f3-9e99-c7799f84a0f8@ti.com>
+ <20250414180727.5d5zyenfagdc5qw2@unable>
+ <20250414200635.GC5495@bill-the-cat>
+ <20250414210041.GA8754@francesco-nb>
+ <352905ca-4308-4928-9a39-5d9842f1ae9c@ti.com>
+ <20250415065115.GA10924@francesco-nb> <87wmblyh6j.fsf@bootlin.com>
+ <1d83aeee-7399-4467-8b4b-fdcde9f8e192@ti.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Tue, 15 Apr 2025 11:50:49 +0200
+Message-ID: <87sem9wy6e.fsf@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvvdefudejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeelveetiedufedugfejveehvefgvefgvdehleefkedutedtffevhfegjeeggfekkeenucffohhmrghinhepghhithhhuhgsrdgtohhmnecukfhppeelvddrudekgedruddtkedrvdeftdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeelvddrudekgedruddtkedrvdeftddphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepvddupdhrtghpthhtohepnhdqfhhrrghntghishesthhirdgtohhmpdhrtghpthhtohepfhhrrghntggvshgtohesugholhgtihhnihdrihhtpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepnhhmsehtihdrtghomhdprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehjh
+ hektddrtghhuhhnghesshgrmhhsuhhnghdrtghomhdprhgtphhtthhopehluhhkmhgrseguvghngidruggvpdhrtghpthhtohepshgvrghnghgrvdesghhmrghilhdrtghomh
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-Mailman-Approved-At: Tue, 15 Apr 2025 14:50:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,33 +93,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Bruno Leite <brule@prevas.dk>
+>> Francesco, are you also testing on K3 platforms?
+>>=20
+>
+> Yes he would be, since the firmware print is K3 firmware.
+>
+>> Can one of you boot with the patch below applied? It should partially
+>> revert the commit to the ancient behaviour, while adding more debug
+>> traces (please enable the debug logs as well). This should clarify
+>> which one of the 3 different path is likely failing. It should also help
+>> identify who's the user that fails to enable/disable its own power
+>> domain. I will need to know what board/SoC was used for the test, so I
+>> can look the relevant driver up.
+>
+> Booted on j784s4_evm
+>
+> https://gist.github.com/nehamalcom/b09687a523bec89f9df3537fdd99b6f3
+>
+> Currently debugging on my build where I hang in console_init itself, I
+> think the path for failure is different here, will confirm.
 
-rpi5 firmware sets uart_clk clock-frequency in
-the firmware and patches it to the DT, copy it
-over when loading a new DT.
+Thanks a lot for your feedback. Normally by applying the diff shared in
+my previous e-mail, you should have the console back. If not, maybe
+there is something else involved and the blamed commit is just the first
+showing an underlying problem.
 
-Signed-off-by: Bruno Leite <brule@prevas.dk>
-
----
-
- board/raspberrypi/rpi/rpi.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-index 70d3c35499b..5c84c324c71 100644
---- a/board/raspberrypi/rpi/rpi.c
-+++ b/board/raspberrypi/rpi/rpi.c
-@@ -602,6 +602,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
- 
- 	/* Bluetooth device address as provided by the firmware */
- 	copy_property(fdt, fw_fdt, "/soc/serial@7e201000/bluetooth", "local-bd-address");
-+
-+	/* copy uart clk as provided by the firmware */
-+	copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
- }
- 
- int ft_board_setup(void *blob, struct bd_info *bd)
--- 
-2.45.2
-
+Thanks,
+Miqu=C3=A8l
