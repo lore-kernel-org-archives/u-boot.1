@@ -4,64 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 813E1C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 13:29:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE95CC369AB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 13:35:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12BF08056A;
-	Tue, 15 Apr 2025 15:29:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
+	by phobos.denx.de (Postfix) with ESMTP id 40EF68209C;
+	Tue, 15 Apr 2025 15:35:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="NdYcoFkL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DcZuGIUq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A954D829CF; Tue, 15 Apr 2025 15:29:38 +0200 (CEST)
-Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A344F82A96; Tue, 15 Apr 2025 15:35:41 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B20580107
- for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 15:29:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 994B3810F4
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 15:35:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=riseup.net
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danct12@riseup.net
-Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx0.riseup.net (Postfix) with ESMTPS id 4ZcQ4F2NSwz9wKJ;
- Tue, 15 Apr 2025 13:29:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1744723773; bh=gBISVC/1AzO1ElNW8IrvV+nRShjV+3TC7UfK71KsyBw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=NdYcoFkLLN+9bXYotai7WwLrLMcYUjh6p/FWDe+0sVSE6uQ4qKByRVbSUb5u18u6E
- cGxcAFEGnBeUcSSBxGupX/j2otl9aiaS02u+H6TOAGwjR++fD+M+su/4s+/U/YbG+0
- Wac8TGTSQs0vJY7EZM5XVAYXaqoDgGiaOl/O30kc=
-X-Riseup-User-ID: 663AA7B50286B41CEA10FA58615D98469F9EA94C39CC35AFFD91656E7A386EA6
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4ZcQ486f6KzJv3q;
- Tue, 15 Apr 2025 13:29:28 +0000 (UTC)
-Date: Tue, 15 Apr 2025 20:29:25 +0700
-From: Dang Huynh <danct12@riseup.net>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Ondrej Jirman <megi@xff.cz>, Dragan Simic <dsimic@manjaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, Piotr Zalewski <pZ010001011111@proton.me>
-Subject: Re: [PATCH v3 11/12] configs: pinetab2-rk3566: Enable video and USB
- keyboard
-Message-ID: <Z_5fNUPHuDP1cPmC@melt-pi5>
-References: <20250412-vop2-pt2-v3-0-7c796db335e9@riseup.net>
- <20250412-vop2-pt2-v3-11-7c796db335e9@riseup.net>
- <6d852aca-dcc8-4098-9406-fc09738a205d@kwiboo.se>
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5f3f04b5dbcso4887575a12.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 06:35:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744724139; x=1745328939; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tjuEzGbY8+asJq+627u3/lXKMj+s0oRfRvfhiqW89Gs=;
+ b=DcZuGIUqiTq+Wxgcmk50V7gMjRmA1G1P8WviIIuh+Ceq54R+uEVWX4aXeO8bjf0IGP
+ BvIyPnbuMWkhJwM6+Pdjr2wmhS/t4MIsA87Y1pvDYz65DQM7RhlJMejFHTjhl4jgZZY8
+ DRTYX4rhc7fdEw9aj8tkKzXrvXV2PRLOHboP+G8sOC7QZ5A8CjHIO8WAWSXx53DGrktm
+ SNwva1ijQPGEHdbDzWC7XoiOeUdjliidRlVrMUUk1piFEKgK6fsmtPXsu+2Pa8FqVBdn
+ boiTjgeeJJ9HkagF1V/YlNJnQ2EPRdZAQrLxbQq4I2U38nDmbj3YOVRG98lRo+xZPl+G
+ 6Ipg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744724139; x=1745328939;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tjuEzGbY8+asJq+627u3/lXKMj+s0oRfRvfhiqW89Gs=;
+ b=gcGXmIIEnD8HSTsJS82ULFhKT7+5nXxbe0MfE6ACfhJ2UpObsraldnOImL/wRpdiXZ
+ nCFNf0+JALEUYVyZK7fRgEr+GfMv32MVW0C+dAowCF4dofEAEwGobPXLFTYFMWWudJca
+ MHTPQqKpscEFNeEYk/sA+Qjk7V4MpCudQxAZd7hMLESiG9/ZX9iPUD79Hm2K2GBofQp8
+ JwiMjPfBH7zY8obPv+L0N/S3VdPuEydgxjjXca4r5nfZBUJp8iNYgN+fXh4+jtgKzU3A
+ Y3HXx9UVZVG6GRXyQNwxCmy02YXYAtHtqgRdTQX6nUOgvp9NVPaKdG4Ap0pmJ4ZXS9cA
+ wBOg==
+X-Gm-Message-State: AOJu0Yw+CcFbgzK1c2MRvGjC60ep1r2pP5HkxKAHkA2VfOfWkot2nieE
+ y6KzUvxVTmFV5sDQ0DZeyB6hisqLpWWMZqxSg91VnLKBp1Vqms20VxW1Nw3cJrEoKpFiCclpRkI
+ RUFPRY7uXOjbaKknaB+erFDVxQDc=
+X-Gm-Gg: ASbGncvr9bX+YEmYhZrt4qW1L11a5RPi7XNNw+qMI8flEBEUJMJpPv9ZV0W8VsLg3iH
+ GuSg57/FiUQN5k2TpEJ3Vegq1tVtvClGklKPEiSutntbNz7ysR7A34ra5XmsFqxYLiQ4PKwrVXT
+ 3BIDXsyVtsE0zFf2e2SMgQqpjiqIaOmnu0oD8S6d+Jo3Ap4skAXc7IOcU=
+X-Google-Smtp-Source: AGHT+IFIzwqOFVa8HAU228zw0jSMFroP1KaWMivhApGA03xpCx1G/3IQUW8TUght6/T2wof9zG3UquD32mWXjetUMqY=
+X-Received: by 2002:a05:6402:84d:b0:5e5:c3bc:f4e0 with SMTP id
+ 4fb4d7f45d1cf-5f370118051mr11817383a12.29.1744724138685; Tue, 15 Apr 2025
+ 06:35:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6d852aca-dcc8-4098-9406-fc09738a205d@kwiboo.se>
+References: <20250415083017.3523317-1-brunosampaioleite@gmail.com>
+ <20250415083017.3523317-2-brunosampaioleite@gmail.com>
+In-Reply-To: <20250415083017.3523317-2-brunosampaioleite@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 15 Apr 2025 14:35:25 +0100
+X-Gm-Features: ATxdqUFaRGjQd6LrNdTQPUH_EXSJaY6PsqZ5CaGz7OQU2VrTIUrS8dyqB8PUjeY
+Message-ID: <CALeDE9MdZSrfNeSicy2dXdVOROLMQ8Hx7zzJv=Cnptxm_kxUDA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] rpi: copy over uart clock-frequency in DT
+To: Bruno Leite <brunosampaioleite@gmail.com>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, clast@prevas.dk,
+ ravi@prevas.dk, Bruno Leite <brule@prevas.dk>, Fiona Klute <fiona.klute@gmx.de>,
+ Francois Berder <fberder@outlook.fr>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Martin Stolpe <martinstolpe@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,73 +98,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Apr 13, 2025 at 05:26:03PM +0200, Jonas Karlman wrote:
-> Hi,
-> 
-> On 2025-04-12 16:27, Dang Huynh wrote:
-> > Now that we have VOP2 support, let's enable it and support the
-> > built in USB keyboard.
-> > 
-> > Signed-off-by: Dang Huynh <danct12@riseup.net>
-> > ---
-> >  configs/pinetab2-rk3566_defconfig | 11 +++++++++++
-> >  1 file changed, 11 insertions(+)
-> > 
-> > diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
-> > index 45e63b42d192dc172f24e071b09c8203675965d8..792ec0ec119437fd7a920558a149363c886c87de 100644
-> > --- a/configs/pinetab2-rk3566_defconfig
-> > +++ b/configs/pinetab2-rk3566_defconfig
-> > @@ -57,6 +57,7 @@ CONFIG_BUTTON=y
-> >  CONFIG_BUTTON_ADC=y
-> >  CONFIG_BUTTON_GPIO=y
-> >  CONFIG_SPL_CLK=y
-> > +CONFIG_CLK_CCF=y
-> 
-> Rockchip clk drivers does not use this, and I do not see any new clock
-> driver being added in this series.
-> 
-> Why is this needed?
-I initially added this to get around clk_enable error, but it seems like
-you don't need to enable VOP clocks.
+On Tue, 15 Apr 2025 at 09:30, Bruno Leite <brunosampaioleite@gmail.com>
+wrote:
 
-However, I noticed that enabling CCF will give us clock rate that are
-pretty close to how it's configured on Linux.
+> From: Bruno Leite <brule@prevas.dk>
+>
+> rpi5 firmware sets uart_clk clock-frequency in
+> the firmware and patches it to the DT, copy it
+> over when loading a new DT.
+>
+> Signed-off-by: Bruno Leite <brule@prevas.dk>
+>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Tested-by: Peter Robinson <pbrobinson@gmail.com>
 
-> 
-> Regards,
-> Jonas
-> 
-> >  # CONFIG_USB_FUNCTION_FASTBOOT is not set
-> >  CONFIG_ROCKCHIP_GPIO=y
-> >  CONFIG_SYS_I2C_ROCKCHIP=y
-> > @@ -69,6 +70,7 @@ CONFIG_MMC_SDHCI_SDMA=y
-> >  CONFIG_MMC_SDHCI_ROCKCHIP=y
-> >  CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> >  CONFIG_SPI_FLASH_SILICONKAISER=y
-> > +CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY=y
-> >  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> >  CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> >  CONFIG_SPL_PINCTRL=y
-> > @@ -94,6 +96,7 @@ CONFIG_USB_OHCI_HCD=y
-> >  CONFIG_USB_OHCI_GENERIC=y
-> >  CONFIG_USB_DWC3=y
-> >  CONFIG_USB_DWC3_GENERIC=y
-> > +CONFIG_USB_KEYBOARD=y
-> >  CONFIG_USB_HOST_ETHER=y
-> >  CONFIG_USB_ETHER_ASIX=y
-> >  CONFIG_USB_ETHER_ASIX88179=y
-> > @@ -101,4 +104,12 @@ CONFIG_USB_ETHER_RTL8152=y
-> >  CONFIG_USB_GADGET=y
-> >  CONFIG_USB_GADGET_DOWNLOAD=y
-> >  CONFIG_USB_FUNCTION_ROCKUSB=y
-> > +CONFIG_VIDEO=y
-> > +CONFIG_VIDEO_LCD_BOE_TH101MB31IG002_28A=y
-> > +CONFIG_DISPLAY=y
-> > +CONFIG_VIDEO_ROCKCHIP=y
-> > +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
-> > +CONFIG_DISPLAY_ROCKCHIP_DW_MIPI=y
-> > +CONFIG_VIDEO_BRIDGE=y
-> > +CONFIG_VIDEO_REMOVE=y
-> >  CONFIG_ERRNO_STR=y
-> > 
-> 
+
+>
+> ---
+>
+>  board/raspberrypi/rpi/rpi.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index 70d3c35499b..5c84c324c71 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -602,6 +602,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+>
+>         /* Bluetooth device address as provided by the firmware */
+>         copy_property(fdt, fw_fdt, "/soc/serial@7e201000/bluetooth",
+> "local-bd-address");
+> +
+> +       /* copy uart clk as provided by the firmware */
+> +       copy_property(fdt, fw_fdt, "/clocks/clk-uart", "clock-frequency");
+>  }
+>
+>  int ft_board_setup(void *blob, struct bd_info *bd)
+> --
+> 2.45.2
+>
+>
