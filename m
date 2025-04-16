@@ -4,114 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54CF4C369B1
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 03:54:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED54C369B1
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 04:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F29A82AE1;
-	Wed, 16 Apr 2025 05:54:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2AF6781E14;
+	Wed, 16 Apr 2025 06:38:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LvFEwX5S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j6ebwoKW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AF7682B44; Wed, 16 Apr 2025 05:54:53 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C2BF881E72; Wed, 16 Apr 2025 06:38:30 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3985A812BC
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 05:54:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82D2E81DE3
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 06:38:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1744775685; x=1745380485; i=xypron.glpk@gmx.de;
- bh=r6K1UtqwOt5YPJXckMCzlQcKLx9MTOOadpybGAU62gc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=LvFEwX5SWNfDeweOdFKlHrR6/GUilaLe3rtxVn3GyG2UVWqwICPMVxksb4kBVB8h
- /wdGbv/JM3ADU/kosTAeMCnRu9YruePrBtk+JAcdor9o4ube8c8YHi3l+4alZPjMt
- Z4vP+CVeb+nGX2aM1lXlLsTvKhlGilhfFQdEVBpda2gCgNwhNTzd6YWdOsFoeuedO
- 1KzSZFJG50A7tY3crHaSVvPchiMzhg1eS9Hk4yvt6GAek8iTlTOoxDC/oNvD87/+E
- LGUeXL4eT+ehaE0bWMCjVhlal4txz8joxKd+sZTtpZYE8Os3xpvC2qfD8kH8OirW1
- AxirigdPh2P1sGyKhg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.106.10]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MxDkw-1t7ifd0g0m-00zghe; Wed, 16
- Apr 2025 05:54:45 +0200
-Message-ID: <7de2fb23-b008-42a9-8661-90e92c87a990@gmx.de>
-Date: Wed, 16 Apr 2025 05:54:33 +0200
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-af55b7d56a1so4807650a12.2
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 21:38:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744778307; x=1745383107; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5fPxvXgQbo90nohQ4+HR2bSKfsk5ii0mh8Cv5vQ1Zuk=;
+ b=j6ebwoKWzbf2zAZUQgnXPBqt/XnAnxju2IyuHsaiRo2XfPRmummuN+HxcA5Wcjms/a
+ ixWHEkDJIUCrVUAtC+ZpfaecXctXpsYkj131nHEMBOxCYMwMlm4qDaVrJm/cjPdIHgzP
+ +hqoYEbOVCQun0Y+JaA3HkQwNPOsj6r+Lwx7fw1pLvmxi/kVteL6l9GvLYzIJVPd4ziG
+ 9fZ9rfX7Sqi+8GA8Y5o0p2gqwgvh3PBLFrVKbJI33p3LAYdDREDkssIb+xZ0QXJFYFB0
+ UzA5yomn2zpZuLFnh6W3ckSmhI2gNbVZjaSUI26W8XpBUvkCBPpD8Eh4cycuaWgHT13m
+ Kzyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744778307; x=1745383107;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5fPxvXgQbo90nohQ4+HR2bSKfsk5ii0mh8Cv5vQ1Zuk=;
+ b=HVdlh8vDdeYW6pYmWTiYbZWU7Ezp9ooRTdoTkVHf9ZaVxdIyAy3LkJVYBi12n7v65A
+ RjjLYRDx4Ry9swCvHp9apRHPPKvoxE2sTwfGOXZPqwjw0NiEXH9Epkyo4kzPVkV8M641
+ 5NNTBqb5kvifWBESNz3iSv8IPz3vEA1ev0syCvWPqktNsH5hG7/Vs3aFwQvqHUJz6ITy
+ 3NNHFr+egfIgH6722iueyVqdZl51VgQ5seQuLzNW7LtLVG4zZ7WL2EJnP7YM8vDylWsd
+ 6u6QHO1JjBQDfZbO0U1t/KxhlYpAV/xvIwYzPbdfFz+NQXFvGlRHK4T/9ZCuzpD67fWC
+ u+VQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXHCw7F4q4nhKx3sosCvRPu9FNDgdLNByxWzWY9xidCFsph5sIdxeD2oTuOX4ZKbtIX2dSWRYM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwC+U5ZvMxH+p24GEijkiHErSg24Lp2wBeKIclZa+piHK6sPrtQ
+ oIqKtUIMr+c2FCmYwRQiGE10195k5kkNPx7ZKBcDSLpa2Ajz3joXxV/LvFqk5cNUhXt0FbIAgTS
+ ACylyy4GbVFqI/PIERR8LTCMucxg=
+X-Gm-Gg: ASbGncvJzZ9ILrhik8q5fhFoX6f5Z5tyP/k0iKUnrSwo9Lzp12/E3krr9Ea79fq0Bpe
+ pubkEcG7wf6NIOGldF+Z5MptC7qLPX4hL/Vq7F5Q0A28WrAnzDHo3eijtXC+EUYgE/7dNM0k9f8
+ MB7MVfl1axgvQ5/E9Bu75OYA==
+X-Google-Smtp-Source: AGHT+IFF2XMak2r4TjD+xu93Ds60lXLJM2urGD3hBqGglKFo0qlipndAIRMKPatpui/FFKwpp5lTY3JyLvhqD8Iwp/o=
+X-Received: by 2002:a17:90b:2f0b:b0:2f9:c139:b61f with SMTP id
+ 98e67ed59e1d1-30863f19dffmr581237a91.14.1744778306791; Tue, 15 Apr 2025
+ 21:38:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] lib/uuid.c: use unique name for
- PARTITION_SYSTEM_GUID
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
- <vincent.stehle@arm.com>, U-Boot mailing list <u-boot@lists.denx.de>
-References: <20250415204917.1250109-1-jerome.forissier@linaro.org>
- <20250415204917.1250109-2-jerome.forissier@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250415204917.1250109-2-jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20250323160107.145749-1-marex@denx.de>
+ <20250323160107.145749-17-marex@denx.de>
+ <20250415142846.GA244333@francesco-nb>
+ <CAHCN7xLa5W-AtRso6RUZwZG_sfDm9CHierfzt_WfOqFjSGJZoA@mail.gmail.com>
+ <20250415150344.GA246483@francesco-nb>
+ <b396cb96-ff95-4822-ad24-ddff2e3b6545@denx.de>
+ <CAOMZO5B=j=k8U6to2TDzohS11j4hPWQOho9bdrYCPe0WXtrQjw@mail.gmail.com>
+In-Reply-To: <CAOMZO5B=j=k8U6to2TDzohS11j4hPWQOho9bdrYCPe0WXtrQjw@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Tue, 15 Apr 2025 23:38:15 -0500
+X-Gm-Features: ATxdqUE_B5MmzgNL22rPZ8rwW3F0NSmsUULNb-byXE1Uaz_cRW9f2Ocp1uLnPo8
+Message-ID: <CAHCN7x+1YrF_-R4aqRy5OioGWpLKmhacZjhT6=EGEK97i3WO9g@mail.gmail.com>
+Subject: Re: [REGRESSION] Re: [PATCH v2 16/24] clk: imx: Convert clock-osc-*
+ back to osc_*
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Marek Vasut <marex@denx.de>, Francesco Dolcini <francesco@dolcini.it>, 
+ Fabio Estevam <festevam@denx.de>, u-boot@lists.denx.de, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Peng Fan <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:0yHy9tTpb+Tnypdi8Hs4vtau6r12dFhitlXqVGHZkxEc2ruwsiT
- ywjUQKXehKkuGOdXKePrQUesodHjkcppVSde09oQ5LOSRtlmrVH3Aycur7ZcHYBi20jeWs0
- YRH/GULEWvvbaKAuCOEOlzcNaQO6D2JYS3ZW/daqKX1m/uSw5WXjZ2tGJWyxw3TuW6Vcio8
- e5qu8rk1YFNefOVS0IvAg==
-UI-OutboundReport: notjunk:1;M01:P0:bWMhn/9i9hM=;iYlEkIwNol7eR1wp3VfsdBrqjJC
- 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,83 +106,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/15/25 22:49, Jerome Forissier wrote:
-> The name defined for PARTITION_SYSTEM_GUID in list_guid[] depends on
-> configuration options. It is "system" if CONFIG_PARTITION_TYPE_GUID is
-> enabled or "System Partition" if CONFIG_CMD_EFIDEBUG or CONFIG_EFI are
-> enabled. In addition, the unit test in test/common/print.c is incorrect
-> because it expects only "system" (or a hex GUID).
->=20
-> Make things more consistent by using a clear and unique name: "EFI
-> System Partition" whatever the configuration, and update the unit test
-> accordingly.
->=20
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->=20
-> Changes in v2:
-> - Remove useless braces in if expression
-> - Change partition name and make it the same for all configs. Update the
->    commit subject.
->=20
->   lib/uuid.c          | 4 ++--
->   test/common/print.c | 8 ++++----
->   2 files changed, 6 insertions(+), 6 deletions(-)
->=20
-> diff --git a/lib/uuid.c b/lib/uuid.c
-> index 75658778044..4ad2cca64c5 100644
-> --- a/lib/uuid.c
-> +++ b/lib/uuid.c
-> @@ -68,7 +68,7 @@ static const struct {
->   } list_guid[] =3D {
->   #ifndef USE_HOSTCC
->   #ifdef CONFIG_PARTITION_TYPE_GUID
-> -	{"system",	PARTITION_SYSTEM_GUID},
-> +	{"EFI System Partition", PARTITION_SYSTEM_GUID},
->   	{"mbr",		LEGACY_MBR_PARTITION_GUID},
->   	{"msft",	PARTITION_MSFT_RESERVED_GUID},
->   	{"data",	PARTITION_BASIC_DATA_GUID},
-> @@ -184,7 +184,7 @@ static const struct {
->   		EFI_TCG2_PROTOCOL_GUID,
->   		},
->   	{
-> -		"System Partition",
-> +		"EFI System Partition",
->   		PARTITION_SYSTEM_GUID
+On Tue, Apr 15, 2025 at 12:13=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
+ wrote:
+>
+> On Tue, Apr 15, 2025 at 1:55=E2=80=AFPM Marek Vasut <marex@denx.de> wrote=
+:
+>
+> > Do you have af9cdd1ccd2d ("Revert "arm64: dts: imx8mn: Include 32kHz
+> > oscillator clock in SPL DTs"") in place ? If so, try and revert it, doe=
+s
+> > it help ?
+>
+> It seems I have not pushed the "Revert "arm64: dts: imx8mn: Include 32kHz
+> oscillator clock in SPL DTs" fix. Sorry about that.
 
-We should avoid having the entry twice in the array for
-CONFIG_PARTITION_TYPE_GUID=3Dy && (CONFIG_CMD_EFIDEBUG=3Dy || CONFIG_EFI=
-=3Dy).
+On my Nano, if I revert arm64: dts: imx8mn: Include 32kHz oscillator
+clock in SPL DTs" it does not boot any more.
 
-I guess it needs its own #if block.
+I haven't tried on my Mini and Plus yet, but if you want, I can.
 
-Otherwise looks good to me.
-
-Best regards
-
-Heinrich
-
->   	},
->   	{
-> diff --git a/test/common/print.c b/test/common/print.c
-> index e3711b10809..c48efc2783f 100644
-> --- a/test/common/print.c
-> +++ b/test/common/print.c
-> @@ -45,11 +45,11 @@ static int print_guid(struct unit_test_state *uts)
->   	sprintf(str, "%pUL", guid);
->   	ut_asserteq_str("04030201-0605-0807-090A-0B0C0D0E0F10", str);
->   	sprintf(str, "%pUs", guid_esp);
-> -	if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID)) { /* brace needed */
-> -		ut_asserteq_str("system", str);
-> -	} else {
-> +	if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID) ||
-> +	    IS_ENABLED(CONFIG_CMD_EFIDEBUG) || IS_ENABLED(CONFIG_EFI))
-> +		ut_asserteq_str("EFI System Partition", str);
-> +	else
->   		ut_asserteq_str("c12a7328-f81f-11d2-ba4b-00a0c93ec93b", str);
-> -	}
->   	ret =3D snprintf(str, 4, "%pUL", guid);
->   	ut_asserteq(0, str[3]);
->   	ut_asserteq(36, ret);
-
+adam
+>
+> As Francesco is using imx8mp, then I guess we also need to do the same
+> for imx8mp:
+>
+> diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot=
+.dtsi
+> index 96a6df94c6cf..6cc910ee9835 100644
+> --- a/arch/arm/dts/imx8mn-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mn-u-boot.dtsi
+> @@ -68,11 +68,6 @@
+>         bootph-all;
+>  };
+>
+> -&osc_32k {
+> -       bootph-pre-ram;
+> -       bootph-all;
+> -};
+> -
+>  #ifdef CONFIG_FSL_CAAM
+>  &sec_jr0 {
+>         bootph-pre-ram;
+> diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot=
+.dtsi
+> index 6de9ab5d37cf..35af412f01b0 100644
+> --- a/arch/arm/dts/imx8mp-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+> @@ -37,11 +37,6 @@
+>         /delete-property/ assigned-clock-rates;
+>  };
+>
+> -&osc_32k {
+> -       bootph-pre-ram;
+> -       bootph-all;
+> -};
+> -
+>  &osc_24m {
+>         bootph-pre-ram;
+>         bootph-all;
+>
+> Does this fix the boot problem?
