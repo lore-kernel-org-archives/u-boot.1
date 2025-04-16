@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A093C369BD
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 13:52:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FEF6C369BD
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 13:58:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF4E081B4B;
-	Wed, 16 Apr 2025 15:52:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B81348144A;
+	Wed, 16 Apr 2025 15:58:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ohaBZOZS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bL+a3xpB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CD1981E14; Wed, 16 Apr 2025 15:52:38 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 15C4E82E34; Wed, 16 Apr 2025 15:58:04 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 117A88144A
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 15:52:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE77980944
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 15:58:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-603ff8e90acso1371211eaf.1
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 06:52:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43cfa7e7f54so5283435e9.1
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 06:58:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744811554; x=1745416354; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Iz3kQpppk+6rAA6m3kHObKnU2cQWHhQeZFg1TzPQSBM=;
- b=ohaBZOZSA2BQ4i95XI2/pFXQ6mXfrWNe6muMRrfQBrhUfkaariJldMfbUX9FJzKBj6
- GrPaon7BSEKlY0x4J68VK+VnkrqQxa52ud8tL61O4WfkQNT9rv+0zI4qtHyaOgG7R2RC
- aNSCuPn8mI8ruKxlkaocGBByZB4HykX/juN+M=
+ d=linaro.org; s=google; t=1744811881; x=1745416681; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eAgJNbjm6PTVLNRBjL1Y+EWtlgnvN5b4MEkilmjETT4=;
+ b=bL+a3xpBcTmJ/zK3f0LlBfkrlnQyBn/fQWwRNxvQyjSgdFf7i1v1q9Yc1uG4NKEAXc
+ C3s+ZImznA9ABz9V4nvqYN8Dt7AWQkMGJAVc/LEwRMeyvpGfgJKIyABjevwCXS5aAsCf
+ 8EiZQ6lorZGK4SzaoZzkE9xTaHwsCwFF8aaj1CfWgcAC/wL43xywrCzfXIHN3OVpEiOo
+ HUtnOsVGbNKKDHozErI694c0dJC0sBLgz8y3DSzLXcJTGzrzHuhNQ8FDMDY+wHm2EGJg
+ LIYZpGjsBhQSPUMqjyhkX1cRt/1ZaoY09HuOrTrLlXI0NorORrnqug06LbWQGrHXxuQW
+ xSlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744811554; x=1745416354;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Iz3kQpppk+6rAA6m3kHObKnU2cQWHhQeZFg1TzPQSBM=;
- b=IkAIUyyGR1r+U8kvriJv0nhGBhdlLVX/VyVY0obflAFIu3gQpKNnzKZG+zOZiXjoht
- uaejOQyy6Ti7BxlpPfnJ5CQh+W71/CNYQNOY3PHix7FBsm2V8q5aVO02UhfQaiaxRbqt
- 1qf2LFgtHf6QOp5vWLm8bf2LRZVVeSo0FCu8w6fpG2VV9wuUlBKod8Bgw00N5h7j/346
- lczohx/QK1VfPn5Yu9XFifP1rb8zUbw1/xhH+aEodjK6mW/0jAq0arn8vGtuRHxtPKa0
- +3vG/lWaNgiPlvTUAFft5eSIzraYQ3MdEtSBmHmNslDMMM9xluEZHZPwG37MuJ3dva2B
- +Unw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVM1philLuXVcUj6yilmvZ0ro9JmUUJyaPudCcCMXeKFN5/mJRK31lQRc0p+faJgmgIkiOV6C4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2TI9cS13Q1oNcit80yDLfql325F2PH/eZz2/yF01a13aP0lRK
- ooqSCW/chvIkn29FY9EcKTE3Vvljch4r751aZ4jqAyS9affcO4t97Aw9LvUHCQk=
-X-Gm-Gg: ASbGncvYaPx19/ANCSowFUPHNb/dpUfZfJixonBseLJ7kbLER2onvSjlnfIpxvahob+
- v0dsDZ2P2h3tXw7impQxoIs5bQDgijYK0xzhUGbi3DojtiEjUg+/F/CX81+tCfqX5k4MMq/BQZ3
- J6LbEuplixZYoB4UUoWP5tDqLoYf3bueNSC+99yGWmqdD+0gxYvfzSeohNbs9un2irY8iJ5yU7p
- CEijNsl4wXR1bJXbvmq2vQxFfjuQbXMMZ6GF32c4YVdbfxohyFyL05smSg/X0qA+e4URp1ka612
- XfbQg0IcM/jhhpMCGVoxvXQ1vI9BX2bxecDZCSwjlQXvmUf5VihyP5LMgayvkfZtqQWnTfxxwd7
- FVg==
-X-Google-Smtp-Source: AGHT+IHkogFK9K25ROy95YiVpRhRAT5iXqBi5I52GwTUXx9vbEn9NKK5Cq1b0fPcaBWSYoq7+QUg8Q==
-X-Received: by 2002:a05:6871:bd07:b0:2d4:c40e:8535 with SMTP id
- 586e51a60fabf-2d4d2a91eacmr1307255fac.9.1744811554625; 
- Wed, 16 Apr 2025 06:52:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73d8ee59sm2779986a34.35.2025.04.16.06.52.33
+ d=1e100.net; s=20230601; t=1744811881; x=1745416681;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eAgJNbjm6PTVLNRBjL1Y+EWtlgnvN5b4MEkilmjETT4=;
+ b=YvDNfXsyjjC7pEO27v00pRsKUg2UGq92hIqa55VpX8FNqHCAhgJO9aaji4lYbW+dKA
+ U3OyPNK/6ebvN3sLvmUha3EUKgZeIdv09DSYmsjBvbx6+0Q6+catfIaZwlLbPWTSOVJ9
+ NTLPyveQT4NcAxC93503LPjIGPjUIeJi5RtZ5Tp1xv9ktG40LwOHXo6Rp/L2Gux1nJZH
+ RWKTmYF2N6z3+g16cRZdzx//tgz4YBxbwTHuS/Ad6bRYOBEeK3W8+c/BkoV5EJxegkyP
+ w6e+fqzT5nmyFvhPMVQQUG89+B1IA+VLAIdFH1fQdGW+k8551K0DfwEWnon7coH1HprW
+ XXtQ==
+X-Gm-Message-State: AOJu0YzpCexX5rRqdYL/iCPwsmH4XcvwtoACkgNaAD4N8rUYoiJEdqCn
+ gx5iXxSXI3BP+N9IqMzssWzmYJ1puJvxWqmVjAU12uzuCNH2yTSUWMgAUiOOof00FNaoAQHqpdb
+ 1tFM=
+X-Gm-Gg: ASbGnctqGekCK5XS6pVDaq6QB1G7pm2svFmqBHrFXvOuPM8T5UVO9WLmQD/lu6YUWrv
+ 0ulMmpNlr1zUgtKukWjzqp7DEdwu+XQQi1SOU0pRyrthlsGTuE9W6t5v8KY26usT21aAZtOLmVs
+ T1IIVz8TlweCflKfHRnPxEagiI4h5q1fw+4uH4ksgo+5VRQTor10Yx6qgC2vGP2/zv6R1uDQk+C
+ XA4WMCcy2Lu6eDXl2kX27Ok7YihJL+81woWf54A+Kp5ydp8CzMy7LIXTL9I6qC0YDMGoaXeGryQ
+ T/gG8f4iB9aASNWwcgt5Va6/SaUDgD4g4fSMqO9ZTgHtGgtw
+X-Google-Smtp-Source: AGHT+IE/7YfYnrCq0x6ahAP5wnx3ENo0H7zZCbGRmZFQKTXh+3taEfweL8qhcVP2oOhvSqGXn0jH/g==
+X-Received: by 2002:a05:600c:5490:b0:43d:16a0:d98d with SMTP id
+ 5b1f17b1804b1-4405d7c5282mr16406225e9.15.1744811880972; 
+ Wed, 16 Apr 2025 06:58:00 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:7ba5:2291:675f:52e])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4405b5437c7sm22013765e9.39.2025.04.16.06.58.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 06:52:33 -0700 (PDT)
-Date: Wed, 16 Apr 2025 07:52:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: sjg@chromium.org, Neha Malcom Francis <n-francis@ti.com>,
- u-kumar1@ti.com, afd@ti.com, vigneshr@ti.com, devarsht@ti.com,
- quentin.schulz@cherry.de, j-choudhary@ti.com, jonas@kwiboo.se,
- richard@nod.at, raymond.mao@linaro.org, m-chawdhry@ti.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/2] Change DRAM message and add RAM doc
-Message-ID: <20250416135231.GQ5495@bill-the-cat>
-References: <20250319140327.301266-1-n-francis@ti.com>
- <174424957616.1824423.4212381391788741775.b4-ty@konsulko.com>
- <20250416-unlocked-economist-6b0607b00fae@thorsis.com>
+ Wed, 16 Apr 2025 06:58:00 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: [PATCH v1 0/2] Enable UNIT_TEST for all qemu* generic targets
+Date: Wed, 16 Apr 2025 15:57:29 +0200
+Message-ID: <20250416135744.1995084-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LMdWNSnr/o7QDpiZ"
-Content-Disposition: inline
-In-Reply-To: <20250416-unlocked-economist-6b0607b00fae@thorsis.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,64 +100,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable CONFIG_UNIT_TEST in most of the configs/qemu*_defconfig files
+to increase test coverage in CI, and fix what needs to be fixed.
 
---LMdWNSnr/o7QDpiZ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 16, 2025 at 09:39:07AM +0200, Alexander Dahl wrote:
-> Hello Tom,
->=20
-> Am Wed, Apr 09, 2025 at 07:46:16PM -0600 schrieb Tom Rini:
-> > On Wed, 19 Mar 2025 19:33:25 +0530, Neha Malcom Francis wrote:
-> >=20
-> > > This short series is an ongoing effort to make RAM utilization cleare=
-r for
-> > > easier debugging and understanding of code. Intention is for users to=
- quickly
-> > > be able to identify the CONFIGs needed to modify for their RAM usecas=
-e.
-> > >=20
-> > > Neha Malcom Francis (2):
-> > >   board_f: Modify DRAM message
-> > >   doc: memory: Add documentation for system RAM
-> > >=20
-> > > [...]
-> >=20
-> > Applied to u-boot/master, thanks!
-> >=20
-> > [1/2] board_f: Modify DRAM message
-> >       commit: 7dfe3cdc6c58f428803b0f1698bbd4b283103adf
-> > [2/2] doc: memory: Add documentation for system RAM
-> >       commit: 284ef1bbcefcf3180592ed48f522c79618099bd6
->=20
-> Something went wrong here.  We have a file 'spl_before_reloc.svg' with
-> size zero now in patch doc/develop/pics =E2=80=A6
+Jerome Forissier (2):
+  test: run some test commands only if HUSH_PARSER is enabled
+  configs: enable CONFIG_UNIT_TEST for all qemu* generic targets
 
-Sigh, I thought I caught the problems there, but it seems not. Neha can
-you address Alex's other feedback too and post new before/after svg
-files? Thanks.
+ configs/qemu-arm-sbsa_defconfig      |  1 +
+ configs/qemu-ppce500_defconfig       |  1 +
+ configs/qemu-riscv32_defconfig       |  1 +
+ configs/qemu-riscv32_smode_defconfig |  1 +
+ configs/qemu-riscv32_spl_defconfig   |  1 +
+ configs/qemu-riscv64_defconfig       |  1 +
+ configs/qemu-riscv64_smode_defconfig |  1 +
+ configs/qemu-riscv64_spl_defconfig   |  1 +
+ configs/qemu-x86_64_defconfig        |  1 +
+ configs/qemu_arm64_defconfig         |  1 +
+ test/cmd/command.c                   | 31 ++++++++++++++--------------
+ 11 files changed, 26 insertions(+), 15 deletions(-)
 
---=20
-Tom
+-- 
+2.43.0
 
---LMdWNSnr/o7QDpiZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf/th8ACgkQFHw5/5Y0
-tyzxtwv/YAfhyj5Rtq3UvCVfgeYaDdhXJC9ucfsFDnSTg7aNqByWsbt0t0U9vZVp
-wD3KLYfb4zCiZQOxgHIdb3mEwEZTU1ChCQfB8YhjJlKjpci0n87o8IdJQr6H1zs1
-fLWEX/Zsn79eTFJbDvjfKaRg/Vw8Sw8/S3lmDhAzRY4Sqr6g9mh4QBeENndok8Id
-vFQbjmLXJD0pIvqQftMnf4+BLmMmluFKbJMSwN1asjjcer79Q5c8lb1XlLr6VNUy
-4Y3z9ZQ2fEsnkESM8x8lSVy7frVa7ik/gahLk1vxXpxe19tzpRfRR+4QY0vxRdJ6
-BWaNCUfel7dCmCkSG/1xHt2wYKaKwBeeYlYiFUlaI0CGmXzXgsQ+2jLDxL4VF2OO
-PRXfNQCfmy2owvyviGhys1REQBFdNlr+iJS08KwquAGZHJdvXDrCViHhpRT+5SQZ
-f8acmtCh8c+phL9CpdS/rZKSuAQdJx0cKp4dh2m4wXJnNQM5Dxzl2aENra2ZKt6m
-EPoslpGn
-=6064
------END PGP SIGNATURE-----
-
---LMdWNSnr/o7QDpiZ--
+base-commit: a08425586799374ccded78eb5fdef6e2235e1ad9
+branch: qemu-enable-unit-test
