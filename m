@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E520C369BA
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 18:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F24C369BA
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 18:57:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75A1D82E38;
-	Wed, 16 Apr 2025 20:51:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4651282E38;
+	Wed, 16 Apr 2025 20:57:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="isA2RgVw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LxWWqE7j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 187BE82E3F; Wed, 16 Apr 2025 20:51:57 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 6EF3882E3F; Wed, 16 Apr 2025 20:57:05 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D75CC82BA2
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 20:51:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 518FB82BA2
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 20:57:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5e677f59438so10471318a12.2
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 11:51:54 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-abbd96bef64so1357937666b.3
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 11:57:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744829514; x=1745434314; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744829823; x=1745434623; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VknqdcgxoGYyUks+mPwEA3ElVy42oLBxPzb0mS4Pk6s=;
- b=isA2RgVw60yK3oMHVyoDyL7Gig7cowmb2Cbu1qrXD55qav3HW6SMHLUs91TqDJW5ld
- o3Vtd86P7FlhJLf+Fbnzxeh4Ae5YzRkJgZ3PpgHovjMVa1hWEwap0qebWE3fvi7wM+tF
- MxrUyp97ydniWuY0tjycG6WmfHfQCBArKD0/guUowcjCJco3HPAH0yQe9F7csTPAQAdo
- svNIW8eFhUHkHGxb+Yhx64AbovAds3Uqwe7uhJruUStzjrjFIhDf5HLLtd/RA2ykJm0N
- RwjaNXTDEHu735FY8rhVOb5f6mQPC1+8t35clSnAoyOHGN6EBRe1cooEfxPzaYUJAP1Y
- qTfw==
+ bh=xKrumP+0w2SfAg39fBeId0HIeJZUwWoEXoWOmDtxS/I=;
+ b=LxWWqE7jiGjEdv73anuIh5SNyn+4a8QnfH940C7JO8TreQMqpbaGjZ6PDy5jyuDWU9
+ 5xWb4VRrP3y2+Ftc+WcdNya7IGNlSiQ96bsyGr9kcKo5ed/nmYFaaA5p767j++FfFKu5
+ ELERDYgH1BsYkyI27KOhmeqJ2ZtF73UpeeKqUFv8iUOgvKobqTDXBL40sTRPvHkroPfa
+ pFTQzD9XSyJoDFEa19Vx2lAXPO1436tzJnyASl5t/4q6arg+Wnw2077Dr+vGNeFrcR7g
+ LRiY0k21EV8aQTs9lFa1VRmHsIuGsfLgoGC5KV5u9XCyhbtFTO2plpVEJghQzdTKo5Wc
+ I9TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744829514; x=1745434314;
+ d=1e100.net; s=20230601; t=1744829823; x=1745434623;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VknqdcgxoGYyUks+mPwEA3ElVy42oLBxPzb0mS4Pk6s=;
- b=dYP+GYZuUpJYaDvW2JJOMGa98dh+xu5ZIZrAljjNLYb4wWyGKmQbMDpCQmqglHzGEe
- fURKDdRAG0Hj/72eHzR14I2CxzP1wE3DCaBBjJ0OkJ5Oe+Mfj5oaHmYodVELFODkA6jx
- hxWMxjfWKkhe5oJ6ldEJzjFJvk/EMADUGCzWTIf/5D0lnLPX7f91a9C2fFLQLONW2wuN
- YHr+DzWlZJ7PVkjs2XLC3sqhHrzN0wBwYC0E9YWHFuYcIKggYxIOk2Rga+NOK1Yw7rnU
- ZJnCa7q/zFWu16MCACaYf+TZxMR0abmdXTnrTI7LRhyKdgzAoKP1VYE/7PrChne2QW7c
- g5Eg==
+ bh=xKrumP+0w2SfAg39fBeId0HIeJZUwWoEXoWOmDtxS/I=;
+ b=VsG4Yzq+nGVD44AKSVdGb/I0OfIugGq5PGJa0JUYQYe3oUyyoq44I7SQckgny3h6KD
+ XB9GEgoTK8gwZklx/5dMVhCWoINXJlFKrUyw4dsJzyR9l7NedHPRCJyzT/uYub9rL59B
+ zOoK/Ah4T0XZWVKBXvuC2/5hftYbSED0Gjea1ZoOUCoTCoAD+4s2X1BrQi7Tbo81aDFC
+ JhLMsAoo9hYB/MSBQKlp6KlGnKI2FPhoxVPX28etlIw2f5kItILpHM3QFX5VyolvAbO+
+ g0GOidqFnyXH1OswN6JvLpFDlZOrny4adX4ag47lID+YPGU0AY63Ry+Cb0BP8Tr6RLtI
+ CPsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIDb3iQIgqIeWOqdfSkFVqnPVV3TCNH6GRjDfhS1t292QsZ3ROJJBpgYbKQLdndOKk7qIlUe4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw9e112jKCVmKJuKkBxAsyvBSyyo4yHiS+GUEH50Jba5laV6VgI
- f2NFXJc09DWL+bc/oUGeoHpD97cTYrAN/tLPzoH499keLkRmd5lkBLqrEuq+TZM=
-X-Gm-Gg: ASbGnctN0n3AE9b6rmCNeNJdeek+BM0jAiEeu8WOzjtCo5aweWHnwSq06+7Cc3mGP3P
- FapZ172fXRimOxt0LyZec7jTfsomjEZDZXBZAQS8Tp5m5G1b+e1ut/7B1s7QpAnZwKnl0W1pj+A
- 8JNwFDqPEZJc6cKTXruABEVJhpT2xD4Et9CJD9VFRizAya6VBifAjA/vIjqNGyDP2tM3ka1XbDT
- zSuqhRIeOKFy22bjZapTCuZQafaAUagvv2HWTCTTJTHbSOcMI7GiQTWxQT89vOCx/gU8XB5DrUP
- 67IwUwy8ld+4xkZ89XyltDgCH8Rhi7vc/jiGRDM/TjctPkvyFfk=
-X-Google-Smtp-Source: AGHT+IEjGyfWqbfdHlArc1VL4O3PDfGpM8C3MkXN8JVjgVwPj8SfjQssD90M67qu9ZUeFu/fCheNqg==
-X-Received: by 2002:a05:6402:210a:b0:5e5:437b:74a7 with SMTP id
- 4fb4d7f45d1cf-5f4b71fc23bmr2725398a12.8.1744829513988; 
- Wed, 16 Apr 2025 11:51:53 -0700 (PDT)
+ AJvYcCWaxAjKwemaahBiekWRaeXpS72D7NRkwCNbDCcBp104wkuSlRW2V8mI5cmrXAYPJn9qS/QRdao=@lists.denx.de
+X-Gm-Message-State: AOJu0YzebdDivXAN6jFl6MFuupCsMAaWd0vxq5dQdUswUTvluUgtvAV0
+ /RcBmyj6ympRsIBmiktERSLN8YfjTrVI+0uUg03G60WauAnSudnlOLOuUtkWKDBYtWRCHjFzsqF
+ I
+X-Gm-Gg: ASbGncuUhn92h/4D2o00KIZlQaH+kuj+kJ9czMDNoLgvthTfbEe5ntRQZFLPrmrfyhz
+ TOMUTkDdR+y/PHcSHYnT7+JY1W/1VM91iVETGp/qx3r6p5+ZjRvf+FtsCfN1yqdA3EHGdajCzfT
+ 9+ehK7U5ZF7rxZt8HxKwcXSyo/S7f1MOIzeT2w+tRrAtszsui6nXezZzz20sWNnIaNz7W68tqYC
+ +UxxXKhCHpgE12lefHGMpUq1vnclPScQjar5tzDO2eyejcp9SqSCoEd4omwLCFA/WPhEqHAU4lh
+ 2ZaMrjk1YF7RyFXcfNqjXLic/VXU5dZdrR8UTqB5irtlMwRaV1qiGaNM5FEtZg==
+X-Google-Smtp-Source: AGHT+IFP09S3EYb5/pBqgZYZWg94fE14s82cZgILxCA+Ud1908JrUDpw0R+YeeubqQ9Me9pycPPdjQ==
+X-Received: by 2002:a17:907:7285:b0:aca:d571:7790 with SMTP id
+ a640c23a62f3a-acb4298397bmr285815466b.16.1744829822630; 
+ Wed, 16 Apr 2025 11:57:02 -0700 (PDT)
 Received: from linaro.org ([2a02:2454:ff21:ef30:4dd7:8393:2255:f87])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f36f5054dbsm9376273a12.49.2025.04.16.11.51.53
+ a640c23a62f3a-acb3d128583sm179532266b.98.2025.04.16.11.57.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 11:51:53 -0700 (PDT)
-Date: Wed, 16 Apr 2025 20:51:48 +0200
+ Wed, 16 Apr 2025 11:57:02 -0700 (PDT)
+Date: Wed, 16 Apr 2025 20:57:00 +0200
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
 To: Sam Day <me@samcday.com>
 Cc: Lukasz Majewski <lukma@denx.de>,
@@ -80,14 +81,15 @@ Cc: Lukasz Majewski <lukma@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
-Subject: Re: [PATCH 1/3] usb: udc: ci: support USB gadget driver model
-Message-ID: <Z__8RKVP37t6Aw1K@linaro.org>
+Subject: Re: [PATCH 2/3] usb: host: ehci-msm: Register ChipIdea UDC from glue
+ wrapper
+Message-ID: <Z__9fHFbNoAojR4Q@linaro.org>
 References: <20250412-msm8916-usb-v1-0-2925239caf4b@samcday.com>
- <20250412-msm8916-usb-v1-1-2925239caf4b@samcday.com>
+ <20250412-msm8916-usb-v1-2-2925239caf4b@samcday.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250412-msm8916-usb-v1-1-2925239caf4b@samcday.com>
+In-Reply-To: <20250412-msm8916-usb-v1-2-2925239caf4b@samcday.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,164 +106,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Apr 12, 2025 at 07:39:57PM +0000, Sam Day wrote:
-> When CONFIG_DM_USB_GADGET is enabled, a UCLASS_USB_GADGET_GENERIC driver
-> will be defined that wraps the ChipIdea UDC operations. The
-> (dm_)?usb_gadget_.* symbols will no longer be defined (as these are now
-> handled by the UDC uclass).
-> 
-> If CONFIG_DM_USB_GADGET is not enabled, this driver behaves as it
-> previously did.
-> 
-> This new driver does not declare any compatibles of its own. It requires
-> a glue driver to bind it. The ehci_msm driver will be updated in the
-> following commit to do exactly that.
+On Sat, Apr 12, 2025 at 07:40:03PM +0000, Sam Day wrote:
+> When CONFIG_DM_USB_GADGET is enabled, the CI UDC driver needs to be
+> explicitly bound. So we do this from the newly introduced glue driver.
 > 
 > Signed-off-by: Sam Day <me@samcday.com>
-
-Thanks a lot for working on this. Seems to work without problems on my
-dragonboard410c. Just some minor nits below to reduce code duplication.
-
 > ---
->  drivers/usb/gadget/ci_udc.c | 84 ++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 83 insertions(+), 1 deletion(-)
+>  drivers/usb/host/ehci-msm.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
 > 
-> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
-> index 4bff75da759ded6716641713fbe47f6ba79386dc..179f8540da30c693d11d772aacc00cc37f7669c5 100644
-> --- a/drivers/usb/gadget/ci_udc.c
-> +++ b/drivers/usb/gadget/ci_udc.c
-> @@ -10,6 +10,7 @@
->  #include <command.h>
->  #include <config.h>
->  #include <cpu_func.h>
-> +#include <dm.h>
->  #include <net.h>
->  #include <malloc.h>
->  #include <wait_bit.h>
-> @@ -94,8 +95,18 @@ static struct usb_request *
->  ci_ep_alloc_request(struct usb_ep *ep, unsigned int gfp_flags);
->  static void ci_ep_free_request(struct usb_ep *ep, struct usb_request *_req);
+> diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
+> index 8aeb6a915563453ad2a02721d4828fd1b300a4e4..ae40e96e6349b1a352608e6350ce950a3cff95af 100644
+> --- a/drivers/usb/host/ehci-msm.c
+> +++ b/drivers/usb/host/ehci-msm.c
+> @@ -161,6 +161,13 @@ static int qcom_ci_hdrc_bind(struct udevice *dev)
+>  	if (ret)
+>  		return ret;
 >  
-> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> +static int ci_udc_gadget_start(struct usb_gadget *g,
-> +		struct usb_gadget_driver *driver);
-> +static int ci_udc_gadget_stop(struct usb_gadget *g);
-> +#endif
-> +
->  static const struct usb_gadget_ops ci_udc_ops = {
->  	.pullup = ci_pullup,
-> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> +	.udc_start = ci_udc_gadget_start,
-> +	.udc_stop = ci_udc_gadget_stop,
-> +#endif
->  };
->  
->  static const struct usb_ep_ops ci_ep_ops = {
-> @@ -927,7 +938,7 @@ void udc_irq(void)
->  	}
->  }
->  
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> +static int ci_udc_handle_interrupts(struct udevice *dev)
->  {
->  	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
->  	u32 value;
-> @@ -1072,6 +1083,71 @@ static int ci_udc_probe(void)
->  	return 0;
->  }
->  
-> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-> +static int ci_udc_generic_probe(struct udevice *dev)
-> +{
-> +	int ret;
-> +#if CONFIG_IS_ENABLED(DM_USB)
-> +	ret = usb_setup_ehci_gadget(&controller.ctrl);
-> +#else
-> +	ret = usb_lowlevel_init(0, USB_INIT_DEVICE, (void **)&controller.ctrl);
-> +#endif
+> +	if (IS_ENABLED(CONFIG_DM_USB_GADGET) && IS_ENABLED(CONFIG_CI_UDC)) {
+> +		ret = device_bind_driver_to_node(dev, "ci-udc", "ci-udc",
+> +				dev_ofnode(dev), NULL);
 
-...
-
-> [...]
-> +static int ci_udc_generic_remove(struct udevice *dev)
-> +{
-> +	usb_del_gadget_udc(&controller.gadget);
-> +
-> +	if (IS_ENABLED(CONFIG_DM_USB)) {
-> +		usb_remove_ehci_gadget(&controller.ctrl);
-> +	} else {
-> +		usb_lowlevel_stop(0);
-> +		controller.ctrl = NULL;
-> +	}
-
-This style is nice for compile testing. But in the probe() function
-above you're still using the #if/#else pre-processor style. Can it use
-if (IS_ENABLED(...)) too?
-
-	if (IS_ENABLED(CONFIG_DM_USB))
-		ret = usb_setup_ehci_gadget(&controller.ctrl);
-	else
-		ret = usb_lowlevel_init(0, USB_INIT_DEVICE, (void **)&controller.ctrl);
-	if (ret)
-		return ret;
-
-This seems to compile at least.
-
-If yes, can you make the same cleanup for the old !DM_USB_GADGET case,
-so the two code paths are consistent?
-
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct usb_gadget_generic_ops ci_udc_generic_ops = {
-> +	.handle_interrupts	= ci_udc_handle_interrupts,
-> +};
-> +
-> +U_BOOT_DRIVER(ci_udc_generic) = {
-> +	.name = "ci-udc",
-> +	.id = UCLASS_USB_GADGET_GENERIC,
-> +	.ops = &ci_udc_generic_ops,
-> +	.probe = ci_udc_generic_probe,
-> +	.remove = ci_udc_generic_remove,
-> +};
-> +
-> +static int ci_udc_gadget_start(struct usb_gadget *g,
-> +				 struct usb_gadget_driver *driver)
-> +{
-> +	controller.driver = driver;
-> +	return 0;
-> +}
-> +
-> +static int ci_udc_gadget_stop(struct usb_gadget *g)
-> +{
-> +	controller.driver = NULL;
-> +	udc_disconnect();
-> +
-> +	ci_ep_free_request(&controller.ep[0].ep, &controller.ep0_req->req);
-> +	free(controller.items_mem);
-> +	free(controller.epts);
-> +
-> +	return 0;
-> +}
-
-I wonder if you could just define the start and stop function outside
-the #if blocks and call them from usb_gadget_unregister_driver()
-and usb_gadget_register_driver(). This would avoid duplicating the code,
-reducing the risk that someone forgets to update one of those when
-making changes.
-
-The same could be also said for probe()/remove(), i.e. moving the
-
-	if (IS_ENABLED(CONFIG_DM_USB)) {
-		usb_remove_ehci_gadget(&controller.ctrl);
-	} else {
-		usb_lowlevel_stop(0);
-		controller.ctrl = NULL;
-	}
-
-block to a separate function and calling that from both variants. Not
-sure if that would also be worth it?
+Nitpick: Indentation looks off here (we usually align with the open
+parenthesis (
 
 Thanks,
 Stephan
