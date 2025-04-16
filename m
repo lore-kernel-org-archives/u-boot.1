@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87ABEC369BD
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 13:58:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81610C369C2
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 13:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10E8D82E27;
-	Wed, 16 Apr 2025 15:58:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51DB582F28;
+	Wed, 16 Apr 2025 15:58:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BfeOAFJi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xMKZqeK3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89CA580944; Wed, 16 Apr 2025 15:58:04 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 4969382EAA; Wed, 16 Apr 2025 15:58:06 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DF7F81B4B
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 15:58:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73A9981E18
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 15:58:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43edecbfb94so70339895e9.1
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 06:58:02 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43cf58eea0fso35229855e9.0
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 06:58:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744811882; x=1745416682; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744811883; x=1745416683; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ExNEXryQ1la6CTBw1MiWKMnNLYwRBZKJzUgABvRPBQM=;
- b=BfeOAFJi4YXWNtPZukQCTquPXyRJzSMyFuR4xrehGJzFdn4RMPiVAglXCsKUNGxWba
- YZTLxwBiteeDMvkRyyDeQaK+LEkl2wk3tYfP9D4JHTesrLgHRneSJ+Ji9UJSuWw5YhGH
- NRzv2wnhc8AzO1fgZ1bkQIivAo/N0K9ynFn7pVtJgz3zPvnFjihMKF1N+Xt05hWW+7IJ
- 3bukcUutYso1FMVZ7OF2+Swz6+M0+8UpvMASo7j06Gonp4aMJuC7qOpA7I9l/+2+1lii
- tNliiF47f+/WZGxir3+Q6ixsDxZYxq6NdVmcVAa6KsUZX4NvxGkJPn1vf9b1gSjgXJzj
- HkRQ==
+ bh=4Jm9Vvv0p89LHXDSLVmTdRhLme8yXeEfPvqMflJatKo=;
+ b=xMKZqeK369/mxw09QKDy+MRpH9kOiIWfDTRhUsPTomgUs94i9nJKBFSZx0Y4coU0sI
+ yGl9TFAdKIQX4rkuSIVRxcd3Os0zPVfALoUq8cc/twdLk+XO9kzXNgJVw4wOraW2kTzj
+ m4zcs1T1X0bBsBqT4B9HR3xfy7/GGZ7pqJPj/otvb3Z3pFHCwUQa1LbHGgqGhTwnfkc4
+ juGEe/TXtuTqwKn9tUY+W/FyfAftqWCrC0BMpy55wJP1GhqqdNcOvCNIPjeF2VEuHAie
+ dc19m1TxKxk45AEjSYY5yrfJ0n5Oh4PAQGxW0PCKcxOX/qs6c1yyjp5tkq3/ffbDlSCY
+ AOnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744811882; x=1745416682;
+ d=1e100.net; s=20230601; t=1744811883; x=1745416683;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ExNEXryQ1la6CTBw1MiWKMnNLYwRBZKJzUgABvRPBQM=;
- b=RaPQDZ0xXouNzhKrKW+1OAOsDgjXKddAmxA3DlYFyABmhpiqYJaHsGBkDI9CafMPRr
- mH2h5n+H1symUplFQ/dUFE3BraQCRgEIXtDXtwdgNF6wTUMxGBh4pe+PRw0wxhS5nYqR
- Ym6J4W5A5UU4B9MCwORdau63QOUTo7bgdXVEht1LCHG+CytBTWv7P/43r7ksG8fdWfW0
- c/6QKBb8wVk933MmSFVFvthz7vgtNKzkypYCwx9XKmnLIuAeUoBZOGqhtt/xI9MdBVKt
- ZhKYhInoMx/r3gt7NEjuagQpZVr3MUeIxV2i8R4ZWyUT+PNUlIGALA2ywXOu8VT1fE1O
- kHUQ==
-X-Gm-Message-State: AOJu0Yy9Spl0vXd1fH7P4Zwrq50rGnXOoJOvmVMzmYEPvIH+8tb3dIh1
- RiJOnpIzMotjCisS1LeVLVEjkJ+4CcmEBcNgFaS2N7FDEp0QK5KuvWgpKKMhRPcZdkOQprhBVkF
- q65I=
-X-Gm-Gg: ASbGncscviH+JXZ38IYnhrUzeIietzsyESjdpLr8jYBM8tQwR2p956RhuOgwRztmt6f
- y2HsBKVwY3ZBJxVTmlg8lr7Qak68QLxghOk89HNzCWlvLHf5do08Oh7kh6U/ZB7vSPqbqbjoLSy
- jK401SVwUTpmggDHYCofWs1+n+laUPl8DVY4cx7YwIk19irgmzOdzGd904Utngh545EZXYc4NLZ
- AV5+zls9HCRZm8qWbeC9UR516iT2z4aGaznNGI1pUww5MxYPS2TMN80Qk3pN22q1H1wH36LVCY4
- W9yMmKZEVRkeAxoigdvCWez9v2x5VEnaGxVrb/41odUmAHsq
-X-Google-Smtp-Source: AGHT+IGiY5Wmi3Uh582I4bsuxYT+IZ4pHIIqysAhiUlQNll7c1PtFR7X2GRKhcw7RLQ2h/ki/VFz7g==
-X-Received: by 2002:a05:600c:450d:b0:43d:ac5:11e8 with SMTP id
- 5b1f17b1804b1-4405d6aadbcmr13660575e9.21.1744811881700; 
- Wed, 16 Apr 2025 06:58:01 -0700 (PDT)
+ bh=4Jm9Vvv0p89LHXDSLVmTdRhLme8yXeEfPvqMflJatKo=;
+ b=CWbuKREGM7m+BA4mmZrxDndoO1FrwhgUskcDRe/YnsC0kNhYHXn7nrmkziV0C2Cli0
+ uYNGPO6JhReZ1V+CT9VOPl77XqYnpZBM8xwXWUhkbAhpmw7jPE4zQWTwRngpK7dPN2Br
+ z6kHoI5uSpDAsIj/St44kgquHGbcW0+h/dH6dXUg5wjwa00OhTDLRwi9fJm7offXI0uC
+ o2xPbzM36NUfV7IV4IxLgQZ64cHszj52icvHYXdix0rpwVbsEEDPDiFfAXYgREuK875U
+ cbd//o8rWlMkIrrGLl3Py6CNpZw3KcHzNyvVsDreNz2PXjYrE3vp38yCnb2p0wNGIkw7
+ nn7Q==
+X-Gm-Message-State: AOJu0YzQRwbV2NZ/B+/w9YPatrJLtmjyzvwRQ5CmMna6QuTn58TbJD9h
+ hD3Lmx2hflVBvQF9gQ9OIJ5SAXzShExJRQSkjg0b5avfN5pqvMZRc8eNF83rk2uijbIa15+ib3G
+ GGyE=
+X-Gm-Gg: ASbGncsZrjGpPffDL/2qNU3CTfVK5+n2zcmWmLhlmF79pKGdpI+DupWBIAwq5BdPahB
+ I3sEx5OH7Amc7FzofVQ6s+Skp1KoK1MaUQP89xcPIfzPbd43bIlAN8GrvMvYmkTNQVKBgf1qpMy
+ JSVxxcT0SFnB2JM0RPV9OAh/nHENlraKntKgqo5tcjeHlkyC1+8eNldZWGb9lp+AyjM0dpAmfyW
+ UxME2YsT/nVC4PGSMtYFkUMwZoX1r05BK4HLvDkdb4mSMft3xqOuZmogi7HbC4pOpkQKMOWCmn3
+ IBF90A7DA0HAld8iNnRM94d0aSgn5D/Yjg+f199ny1BYkgyiNrgkU0M46ig=
+X-Google-Smtp-Source: AGHT+IHfXNAADGP1atapnqsFKmGt6Pb1neBTZ5iwDT9MHNI5P+2XDUP7OsFCNfHPcSGbQp+Iipv80g==
+X-Received: by 2002:a05:600c:1c04:b0:43b:c0fa:f9dd with SMTP id
+ 5b1f17b1804b1-4405d6aae72mr15668765e9.25.1744811882705; 
+ Wed, 16 Apr 2025 06:58:02 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:7ba5:2291:675f:52e])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-4405b5437c7sm22013765e9.39.2025.04.16.06.58.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 06:58:01 -0700 (PDT)
+ Wed, 16 Apr 2025 06:58:02 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 1/2] test: run some test commands only if HUSH_PARSER is
- enabled
-Date: Wed, 16 Apr 2025 15:57:30 +0200
-Message-ID: <20250416135744.1995084-2-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Alexander Graf <agraf@csgraf.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: [PATCH v1 2/2] configs: enable CONFIG_UNIT_TEST for all qemu* generic
+ targets
+Date: Wed, 16 Apr 2025 15:57:31 +0200
+Message-ID: <20250416135744.1995084-3-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250416135744.1995084-1-jerome.forissier@linaro.org>
 References: <20250416135744.1995084-1-jerome.forissier@linaro.org>
@@ -99,67 +104,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some test commands (such as "false", or the empty string) need
-CONFIG_HUSH_PARSER=y. Fix test/cmd/command.c.
+The qemu* "generic" targets (i.e. not those emulating a particular
+board) are typically used for testing as many features as possible,
+especially in CI so it makes sense to have UNIT_TEST enabled for
+all of the defconfigs for these targets.
 
+Not enabling UNIT_TEST in qemu-x86_defconfig due to:
+
+    LD      u-boot
+  ld.bfd: section .rel.dyn VMA wraps around address space
+  ld.bfd: section .start16 LMA [fffff800,fffff86f] overlaps section .rel.dyn LMA [ffffb77c,0002ac93]
+  make: *** [Makefile:1824: u-boot] Error 1
+
+Suggested-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
 
- test/cmd/command.c | 31 ++++++++++++++++---------------
- 1 file changed, 16 insertions(+), 15 deletions(-)
+ configs/qemu-arm-sbsa_defconfig      | 1 +
+ configs/qemu-ppce500_defconfig       | 1 +
+ configs/qemu-riscv32_defconfig       | 1 +
+ configs/qemu-riscv32_smode_defconfig | 1 +
+ configs/qemu-riscv32_spl_defconfig   | 1 +
+ configs/qemu-riscv64_defconfig       | 1 +
+ configs/qemu-riscv64_smode_defconfig | 1 +
+ configs/qemu-riscv64_spl_defconfig   | 1 +
+ configs/qemu-x86_64_defconfig        | 1 +
+ configs/qemu_arm64_defconfig         | 1 +
+ 10 files changed, 10 insertions(+)
 
-diff --git a/test/cmd/command.c b/test/cmd/command.c
-index 5ec93d490ba..5b1e5a77e5d 100644
---- a/test/cmd/command.c
-+++ b/test/cmd/command.c
-@@ -45,31 +45,32 @@ static int command_test(struct unit_test_state *uts)
- 		"setenv list ${list}3", strlen("setenv list 1"), 0);
- 	ut_assert(!strcmp("1", env_get("list")));
- 
--	ut_asserteq(1, run_command("false", 0));
- 	ut_assertok(run_command("echo", 0));
--	ut_asserteq(1, run_command_list("false", -1, 0));
- 	ut_assertok(run_command_list("echo", -1, 0));
- 
--#ifdef CONFIG_HUSH_PARSER
--	run_command("setenv foo 'setenv black 1\nsetenv adder 2'", 0);
--	run_command("run foo", 0);
--	ut_assertnonnull(env_get("black"));
--	ut_asserteq(0, strcmp("1", env_get("black")));
--	ut_assertnonnull(env_get("adder"));
--	ut_asserteq(0, strcmp("2", env_get("adder")));
--#endif
--
--	ut_assertok(run_command("", 0));
--	ut_assertok(run_command(" ", 0));
-+	if (IS_ENABLED(CONFIG_HUSH_PARSER)) {
-+		ut_asserteq(1, run_command("false", 0));
-+		ut_asserteq(1, run_command_list("false", -1, 0));
-+		run_command("setenv foo 'setenv black 1\nsetenv adder 2'", 0);
-+		run_command("run foo", 0);
-+		ut_assertnonnull(env_get("black"));
-+		ut_asserteq(0, strcmp("1", env_get("black")));
-+		ut_assertnonnull(env_get("adder"));
-+		ut_asserteq(0, strcmp("2", env_get("adder")));
-+		ut_assertok(run_command("", 0));
-+		ut_assertok(run_command(" ", 0));
-+	}
- 
- 	ut_asserteq(1, run_command("'", 0));
- 
- 	/* Variadic function test-cases */
-+	if (IS_ENABLED(CONFIG_HUSH_PARSER)) {
- #pragma GCC diagnostic push
- #pragma GCC diagnostic ignored "-Wformat-zero-length"
--	ut_assertok(run_commandf(""));
-+		ut_assertok(run_commandf(""));
- #pragma GCC diagnostic pop
--	ut_assertok(run_commandf(" "));
-+		ut_assertok(run_commandf(" "));
-+	}
- 	ut_asserteq(1, run_commandf("'"));
- 
- 	ut_assertok(run_commandf("env %s %s", "delete -f", "list"));
+diff --git a/configs/qemu-arm-sbsa_defconfig b/configs/qemu-arm-sbsa_defconfig
+index 8c5d3eb4be8..3819670defe 100644
+--- a/configs/qemu-arm-sbsa_defconfig
++++ b/configs/qemu-arm-sbsa_defconfig
+@@ -9,3 +9,4 @@ CONFIG_EFI_PARTITION=y
+ CONFIG_PARTITION_TYPE_GUID=y
+ CONFIG_EFI_MEDIA=y
+ CONFIG_FS_FAT=y
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-ppce500_defconfig b/configs/qemu-ppce500_defconfig
+index 9f20b3fcd73..a444899db33 100644
+--- a/configs/qemu-ppce500_defconfig
++++ b/configs/qemu-ppce500_defconfig
+@@ -66,3 +66,4 @@ CONFIG_VIRTIO_NET=y
+ CONFIG_VIRTIO_BLK=y
+ CONFIG_ADDR_MAP=y
+ CONFIG_PANIC_HANG=y
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-riscv32_defconfig b/configs/qemu-riscv32_defconfig
+index 1cd80f5769e..6f8f9827611 100644
+--- a/configs/qemu-riscv32_defconfig
++++ b/configs/qemu-riscv32_defconfig
+@@ -20,3 +20,4 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_DM_MTD=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_SYS_MAX_FLASH_BANKS=2
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-riscv32_smode_defconfig b/configs/qemu-riscv32_smode_defconfig
+index 6f871c83644..1d57b68086a 100644
+--- a/configs/qemu-riscv32_smode_defconfig
++++ b/configs/qemu-riscv32_smode_defconfig
+@@ -21,3 +21,4 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_DM_MTD=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_SYS_MAX_FLASH_BANKS=2
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-riscv32_spl_defconfig b/configs/qemu-riscv32_spl_defconfig
+index 9906f8b2dad..8d5f9d9f5cc 100644
+--- a/configs/qemu-riscv32_spl_defconfig
++++ b/configs/qemu-riscv32_spl_defconfig
+@@ -26,3 +26,4 @@ CONFIG_DM_MTD=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_SYS_MAX_FLASH_BANKS=2
+ # CONFIG_BINMAN_FDT is not set
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-riscv64_defconfig b/configs/qemu-riscv64_defconfig
+index cdd511b0e72..e00050db4e1 100644
+--- a/configs/qemu-riscv64_defconfig
++++ b/configs/qemu-riscv64_defconfig
+@@ -20,3 +20,4 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_DM_MTD=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_SYS_MAX_FLASH_BANKS=2
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-riscv64_smode_defconfig b/configs/qemu-riscv64_smode_defconfig
+index 2f62f17bc8c..a424f978294 100644
+--- a/configs/qemu-riscv64_smode_defconfig
++++ b/configs/qemu-riscv64_smode_defconfig
+@@ -23,3 +23,4 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_DM_MTD=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_SYS_MAX_FLASH_BANKS=2
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-riscv64_spl_defconfig b/configs/qemu-riscv64_spl_defconfig
+index 27e092bd208..18b7e049d86 100644
+--- a/configs/qemu-riscv64_spl_defconfig
++++ b/configs/qemu-riscv64_spl_defconfig
+@@ -25,3 +25,4 @@ CONFIG_DM_MTD=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_SYS_MAX_FLASH_BANKS=2
+ # CONFIG_BINMAN_FDT is not set
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
+index 58b1fbf132d..47075dc265a 100644
+--- a/configs/qemu-x86_64_defconfig
++++ b/configs/qemu-x86_64_defconfig
+@@ -93,3 +93,4 @@ CONFIG_SPL_VIDEO=y
+ CONFIG_GENERATE_ACPI_TABLE=y
+ CONFIG_CMD_DHRYSTONE=y
+ # CONFIG_GZIP is not set
++CONFIG_UNIT_TEST=y
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 6c9d2505a69..cd9a4f2ae26 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -75,3 +75,4 @@ CONFIG_MBEDTLS_LIB=y
+ CONFIG_TPM=y
+ CONFIG_TPM_PCR_ALLOCATE=y
+ CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
++CONFIG_UNIT_TEST=y
 -- 
 2.43.0
 
