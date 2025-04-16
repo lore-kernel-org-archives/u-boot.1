@@ -4,79 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC10C369B1
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 09:16:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D93CC369B1
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 09:26:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7888882D2A;
-	Wed, 16 Apr 2025 11:16:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A5CB482CA2;
+	Wed, 16 Apr 2025 11:26:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ck1VLRps";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="x2WIYPE/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF39582D43; Wed, 16 Apr 2025 11:16:11 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BEDC82CA2
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 11:16:09 +0200 (CEST)
+ id AB1C582D17; Wed, 16 Apr 2025 11:26:47 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 59BFB82C49
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 11:26:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53G9G2RA2722431
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 04:16:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744794962;
- bh=woa/O1PSAO4iyp2W2vlQ2ReJ/1Vqs2nhkvdw6O9Bwqo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Ck1VLRpsY8y5JWYrAoSRdu/ez2YKm+TTnR7iP4zwCJ2WwHREbklPWuVjHMO2Cxlua
- 5zc6q3GYkJ3hRrVkaEsi3lMaEzVizEySyQFydo/evhDxrAprDP1ZO1sXPlWrmT70Sl
- sOi7OPCChE8I5tC0oRJJ0RVufVbT+U/MxaH1Sl7w=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53G9G2v4081932
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 16 Apr 2025 04:16:02 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
- Apr 2025 04:16:02 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 16 Apr 2025 04:16:02 -0500
-Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
- [172.24.227.136])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53G9Fx7s064943;
- Wed, 16 Apr 2025 04:15:59 -0500
-Message-ID: <b11e0c13-d7a3-42db-820b-a89e415588a9@ti.com>
-Date: Wed, 16 Apr 2025 14:45:58 +0530
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (31-10-206-125.static.upc.ch [31.10.206.125])
+ by mail11.truemail.it (Postfix) with ESMTPA id 251631FAC0;
+ Wed, 16 Apr 2025 11:26:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1744795604;
+ bh=+oyn42A4NICRagEY6lvBSwPDwtmcYlerUG8oVuPYxgk=; h=From:To:Subject;
+ b=x2WIYPE/jVzp6WBkTqMbln4lWWe0rJTZ7rvUckjLmy6vJRKj1MCHI6wwUTaikxdgg
+ Qo27miyhPf80AMC9d63vg16M7JIwHv7zSoegqS0SSvC0SDQGWFW2JvpVwesxqrgDoJ
+ nBryR//ORIECKp7lHfbA86fNVjivPEVmg3aNOH3hQade9b+XTU9CXgIoqbTDp6zv6M
+ qY+B6Z2jBSDe7ISgKyKutkCHlcVj/xDn6elj2HHqrMRjPRtSOor5tDhMzYRoA8OhIB
+ FdzPmBUqVleV2wyhc4M8MLB5Uiy8qpK3Oy16DRbr+grXgw6SuNUlXv0ZVWnpeABeI+
+ zg+id/98AHCxw==
+Date: Wed, 16 Apr 2025 11:26:39 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Fabio Estevam <festevam@gmail.com>, Marek Vasut <marex@denx.de>
+Cc: Francesco Dolcini <francesco@dolcini.it>,
+ Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@denx.de>,
+ u-boot@lists.denx.de,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Peng Fan <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com
+Subject: Re: [REGRESSION] Re: [PATCH v2 16/24] clk: imx: Convert clock-osc-*
+ back to osc_*
+Message-ID: <20250416092639.GA24345@francesco-nb>
+References: <20250323160107.145749-1-marex@denx.de>
+ <20250323160107.145749-17-marex@denx.de>
+ <20250415142846.GA244333@francesco-nb>
+ <CAHCN7xLa5W-AtRso6RUZwZG_sfDm9CHierfzt_WfOqFjSGJZoA@mail.gmail.com>
+ <20250415150344.GA246483@francesco-nb>
+ <b396cb96-ff95-4822-ad24-ddff2e3b6545@denx.de>
+ <CAOMZO5B=j=k8U6to2TDzohS11j4hPWQOho9bdrYCPe0WXtrQjw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
- properties to supernodes
-To: "Kumar, Udit" <u-kumar1@ti.com>, Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <alpernebiyasak@gmail.com>, 
- <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
- <vigneshr@ti.com>, <a-chavda@ti.com>
-References: <20250327080642.2269856-1-m-shah@ti.com>
- <20250327080642.2269856-2-m-shah@ti.com>
- <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
- <3d2c894b-11f1-462c-b9f5-8d3f45dc0b61@ti.com>
- <CAFLszThs5W+=tFpUsCE0Qi5mvuymtsHF57jeLpV9KUQfGXBXnA@mail.gmail.com>
- <3287617e-3b6a-4387-90d4-7bbfc810f9c7@ti.com>
- <ec117e91-7b13-4ca9-8509-3075d7071427@ti.com>
- <CAFLszTjD+Aofu8jLMyX4FPxatmt_SaRC8amf7rziNmNKECFrGQ@mail.gmail.com>
- <f39453a5-fdaa-4fab-8230-0d8ddcacb040@ti.com>
- <cecd2c70-92bf-4e7f-a3b5-b4fde4635044@ti.com>
-Content-Language: en-US
-From: Moteen Shah <m-shah@ti.com>
-In-Reply-To: <cecd2c70-92bf-4e7f-a3b5-b4fde4635044@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <CAOMZO5B=j=k8U6to2TDzohS11j4hPWQOho9bdrYCPe0WXtrQjw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,83 +79,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Udit,
+On Tue, Apr 15, 2025 at 02:13:30PM -0300, Fabio Estevam wrote:
+> On Tue, Apr 15, 2025 at 1:55 PM Marek Vasut <marex@denx.de> wrote:
+> > Do you have af9cdd1ccd2d ("Revert "arm64: dts: imx8mn: Include 32kHz
+> > oscillator clock in SPL DTs"") in place ? If so, try and revert it, does
+> > it help ?
+> 
+> It seems I have not pushed the "Revert "arm64: dts: imx8mn: Include 32kHz
+> oscillator clock in SPL DTs" fix. Sorry about that.
+> 
+> As Francesco is using imx8mp, then I guess we also need to do the same
+> for imx8mp:
+> 
+> diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
+> index 6de9ab5d37cf..35af412f01b0 100644
+> --- a/arch/arm/dts/imx8mp-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+> @@ -37,11 +37,6 @@
+>         /delete-property/ assigned-clock-rates;
+>  };
+> 
+> -&osc_32k {
+> -       bootph-pre-ram;
+> -       bootph-all;
+> -};
+> -
+>  &osc_24m {
+>         bootph-pre-ram;
+>         bootph-all;
+> 
+> Does this fix the boot problem?
 
-The public documentation[0] has the required information which is 
-sufficient. The build instructions mentioned below are a subset of the 
-information present in [0] which should be faster in recreating the issue.
+My issue is not the boot. The issue is that USB is not working.
 
-[0] https://docs.u-boot.org/en/latest/board/ti/j7200_evm.html
+With this patch applied nothing changes, the issue is not solved.
 
-Regards,
-Moteen
+Francesco
 
-On 16/04/25 13:47, Kumar, Udit wrote:
-> Hello Moteen
->
-> On 4/16/2025 1:23 PM, Moteen Shah wrote:
->> Hey Simon,
->>
->> I missed some essential build instructions I should have given to 
->> you, apologies.
->
-> I assume our u-boot public document should capture this information,
->
-> It not, then please fix
->
->
->>
->> 1. Clone ti-linux-firmware: 
->> https://git.ti.com/git/processor-firmware/ti-linux-firmware.git and 
->> switch to ti-linux-firmware-next branch
->> 2. Clone U-Boot: https://github.com/Jamm02/U-Boot-patchwork
->> 3. Set variables :
->>         $ export CC64=aarch64-linux-gnu-
->>         $ export LNX_FW_PATH=path/to/ti-linux-firmware
->>         $ export UBOOT_CFG_CORTEXA=j7200_evm_a72_defconfig
->>
->> 4. Inside U-Boot source:
->>         $ touch bl31.bin
->>         $ touch tee-raw.bin
->>         $ make $UBOOT_CFG_CORTEXA
->>         $ make CROSS_COMPILE=$CC64 BINMAN_INDIRS=$LNX_FW_PATH \
->>                      BL31=bl31.bin \
->>                      TEE=tee-raw.bin
->>
->> Let me know if this works.
->>
->> Regards,
->> Moteen
->>
->> On 15/04/25 00:18, Simon Glass wrote:
->>> Hi Moteen,
->>>
->>> On Thu, 10 Apr 2025 at 05:39, Moteen Shah <m-shah@ti.com> wrote:
->>>> Hey Simon,
->>>>
->>>> Is the problem discussed in the thread an actual bug or am I missing
->>>> something in the implementation?
->>>>
->>>> Regards,
->>>> Moteen
->>>>
->>>> On 03/04/25 11:51, Moteen Shah wrote:
->>>>> Hey Simon,
->>>>>
->>>>> On 03/04/25 00:52, Simon Glass wrote:
->>>>>> Hi Moteen,
->>>>>>
->>>>>> On Wed, 2 Apr 2025 at 22:01, Moteen Shah <m-shah@ti.com> wrote:
->>>>>>> Hey Simon,
->>>>>>>
->>>>>>> On 29/03/25 05:17, Simon Glass wrote:
->>>>>>>> Hi Moteen,
->>>>>>>>
->>>>>>>> On Thu, 27 Mar 2025 at 08:06, Moteen Shah <m-shah@ti.com> wrote:
->>>>>>>>> Add a function to scan through all the nodes in the device-tree
->>>>>>>>> recusively for bootph-* property. If found, propagate it to all
->>>>>>>>> of its parent nodes up the hierarchy.
->>>>>>>>>
->>>>>>>>> Signed-off-by: Moteen Shah <m-shah@ti.com>
->>>>>>>>> ---
->>>>>>>>> [..]
