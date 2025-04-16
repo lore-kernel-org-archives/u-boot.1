@@ -4,71 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2163CC369C5
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 19:51:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09190C369C9
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 21:55:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 593E482E9F;
-	Wed, 16 Apr 2025 21:51:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 32B3582DE7;
+	Wed, 16 Apr 2025 23:55:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V0hrEWMn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EaX1XFoS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A30082EAA; Wed, 16 Apr 2025 21:51:20 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 845EE82DE7
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 21:51:17 +0200 (CEST)
+ id 11C5482E38; Wed, 16 Apr 2025 23:55:38 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BA08282DB4
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 23:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53GJpD302753678
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 14:51:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744833074;
- bh=nzDjy5fAiG4Lms6Nq0SE6NcuZ7IdRPtsTAY8WuxPd4I=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=V0hrEWMnV2GjTCIDnC/ye8d8vijHo/gv22V/uH2qUN3W+qr7v5/rCL5+g5wNfsPZD
- RzRqj34sjDVQSBGYPSCBYZa8OEDKVd1LyXFVhZREzLkW7qqqwGApHMbcxqB7jufj0r
- 1dFc9BRM0x4O9aRpUpTumrwmBxP0RY9lMWgJbSK4=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53GJpDcB095159
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 16 Apr 2025 14:51:13 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
- Apr 2025 14:51:13 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 16 Apr 2025 14:51:13 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53GJpDfw047539;
- Wed, 16 Apr 2025 14:51:13 -0500
-Date: Wed, 16 Apr 2025 14:51:13 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>, 
- <trini@konsulko.com>, <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <a-nandan@ti.com>
-Subject: Re: [PATCH v1 0/4] k3: migrate SPL_TEXT_BASE to new address
-Message-ID: <20250416195113.mtfdclfvb756vpll@scoreless>
-References: <20250416073058.1441001-1-anshuld@ti.com>
- <20250416112418.nod2fut4v77qlmfq@hummus>
- <D983ZXCIAF06.2I0POMKUFPF2L@ti.com>
- <20250416150506.ws22odswwkjn2wth@deflected>
- <8146a036-681d-4c45-9285-c58259fec14b@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7c5e2fe5f17so6753285a.3
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 14:55:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744840534; x=1745445334; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sukhggooi7ba8x0ymKoXy4GKxqwpohvtz72u1VRpvbk=;
+ b=EaX1XFoS+P3kgSGWDXDOjRwOBJ+Yh80AZaf68m2jJSQMSCDkD058D341eW4I7pzCqi
+ NFtdvQ2GayfSVCR6NvbPLmjNvmcdD+zq0Dora/D1co09h8/GUp8NSbJTWjdqTaXtsxQH
+ xVvck6ScI9DEaZRMx9MTc/oJWrJZNCJrxI79OTzvqyUoXrJahd4G+A1iO5cnyU2KPT2Z
+ MeSOizJHp1uL1PFOcpBFB+8eZa3LtzX73xIAjvP1LHTukuLSe1kPbkDJ6ji4L8K6Oe9/
+ hiUBM2xPgcWhm6Q3wqnCFTUmssvB75iBeU+MZN3Yn89yzjqAoslHA5MJHyGT2pAVnE2a
+ EaOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744840534; x=1745445334;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sukhggooi7ba8x0ymKoXy4GKxqwpohvtz72u1VRpvbk=;
+ b=jkNalE39k/eZmgHquVRmgyIrWT1VGVMfuIN4voe6zf6rC9iAbspuW1AvI9oQg/PeRu
+ 54Oeuo61gnboAeeqLsVC0RDqYBhjmz2dTXsmiI6y1ej4rH/CycZkJuCNMRv3sBne7sFf
+ 2OUQDa296G7V+Y6hrNGm0TUzlsSwlznsHOraYS1yfq30AuqjnHGGyoIgv8mpAjfH8G9p
+ QKe22wos6xtGdbfyjrphe3dH2BnyNmnq1nXJNWLIfj5gLEEcR6DvNIuDtkLLiUxeVgnj
+ yPVTH8CeBOdjTOwRPZ4VZ6HzrJuP2SY9mf4eDiqWv22tjrWp+TCyRoROieoWWL+4VDl5
+ MNBg==
+X-Gm-Message-State: AOJu0YzdTuc/vgJpGIdnSPlCYpzq1CVm4uazeD5u3TBfZQhoaON/nYLO
+ IqEPFczOeE2JLUkNvyI82JFy9aakyqh11rPPyLUN08mjqwKnZsYeTtBEEA==
+X-Gm-Gg: ASbGnctcLPh5JmH5o12NbaI3uaGBmSTYi5pKNpuYBdXvVBdCDGqeQWv6AkUlOg02T7w
+ 34qFc4neg+SJ1fykdNR9HYnrCnBf9Lz47rUH9tu+MsEM5i48OpygpI283wFSEb/rE3rTTPzsdPF
+ a75PIDGUkDHexPr/W/7PtHVT08QCcoB6VIHyoLW1BhzvRceISE3Gr5Wac6+Ex8TrsPMW0US//03
+ zXPjGTrmXnLbRPXKalu3hRVyEa46OOELwR5qOoVX6w8qZnYIG8wfVm70QKfgV00f2cFrByCE5QH
+ YWsaGHWd2fcjT/EkH3559y/jb6botduLUkTpLx2R5PE9CqNVqT3rgBrx4RDM8JL7PsjePZa/MLl
+ 2L7jXnpQ2n2lAGBU=
+X-Google-Smtp-Source: AGHT+IEToQEL5QiIQMd3CGGlEA/2gBtpXJ6vVfi7t1wa5ipP07THMTPIcjcQNBdy4UCqIXfP5vyV6A==
+X-Received: by 2002:a05:620a:29c8:b0:7c5:6cf5:9439 with SMTP id
+ af79cd13be357-7c919064075mr541310585a.37.1744840533782; 
+ Wed, 16 Apr 2025 14:55:33 -0700 (PDT)
+Received: from aford-System-Version.. (c-75-72-162-184.hsd1.mn.comcast.net.
+ [75.72.162.184]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c7a896b01fsm1102784585a.65.2025.04.16.14.55.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Apr 2025 14:55:33 -0700 (PDT)
+From: Adam Ford <aford173@gmail.com>
+To: u-boot@lists.denx.de
+Cc: aford@beaconembedded.com, cniedermaier@dh-electronics.com,
+ Adam Ford <aford173@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH] clk: imx: Finish converting clock-osc-24 back to osc_24
+Date: Wed, 16 Apr 2025 16:55:24 -0500
+Message-ID: <20250416215524.3963310-1-aford173@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <8146a036-681d-4c45-9285-c58259fec14b@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,40 +100,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11:38-20250416, Andrew Davis wrote:
-> > > > 	How about u-boot documentation?
-> > > 
-> > > I will update that in the next revision along with any feedback I
-> > > receive on this patch.
-> > 
-> > IMHO, This change is too intrusive and impacts downstream customers
-> > including inflight production devices.
-> > 
-> 
-> Could you elaborate a little?
-> 
-> They do not even need to update their TF-A version, if they want to
-> use their current version they simply recompile it with a single
-> extra build flag:
-> 
-> PRELOADED_BL33_BASE=0x822000000
+The UART clocks were added around the same time some other clock
+updates were happening, so converting clock-osc-24 back to osc_24
+was missed on the UART clocks for imx8mm and imx8mn, so update
+them here.
 
-For folks who are trying to boot linux from TFA, they could do the same.
-> 
-> They should have no reason not to be able to do this. But even *if*
-> they cannot do that, the whole point of the jump-stub here is to
-> save them even having to do a simple compile.
-> 
-> IMHO "downstream customers including inflight production devices"
-> should not be a reason to block good and useful changes here in
-> upstream. But again, this change doesn't break anything for them in
-> the first place, so why bring that up?
+Fixes: b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*")
+Signed-off-by: Adam Ford <aford173@gmail.com>
 
-I dont see a specific value here. U-boot just works. For folks who want
-direct TFA to kernel jump (which is a niche fast boot usecase), go ahead
-and use TFA with the mentioned build option.
-
+diff --git a/drivers/clk/imx/clk-imx8mm.c b/drivers/clk/imx/clk-imx8mm.c
+index b81db516a69..7eb05180e15 100644
+--- a/drivers/clk/imx/clk-imx8mm.c
++++ b/drivers/clk/imx/clk-imx8mm.c
+@@ -81,19 +81,19 @@ static const char * const imx8mm_i2c4_sels[] = {"osc_24m", "sys_pll1_160m", "sys
+ 						"sys_pll3_out", "audio_pll1_out", "video_pll1_out",
+ 						"audio_pll2_out", "sys_pll1_133m", };
+ 
+-static const char * const imx8mm_uart1_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mm_uart1_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 					  "sys_pll2_100m", "sys_pll3_out", "clk_ext2", "clk_ext4",
+ 					  "audio_pll2_out", };
+ 
+-static const char * const imx8mm_uart2_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mm_uart2_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 					  "sys_pll2_100m", "sys_pll3_out", "clk_ext2", "clk_ext3",
+ 					  "audio_pll2_out", };
+ 
+-static const char * const imx8mm_uart3_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mm_uart3_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 					  "sys_pll2_100m", "sys_pll3_out", "clk_ext2", "clk_ext4",
+ 					  "audio_pll2_out", };
+ 
+-static const char * const imx8mm_uart4_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mm_uart4_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 					  "sys_pll2_100m", "sys_pll3_out", "clk_ext2", "clk_ext3",
+ 					  "audio_pll2_out", };
+ 
+diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.c
+index be5b7933a8d..2dfa860bf37 100644
+--- a/drivers/clk/imx/clk-imx8mn.c
++++ b/drivers/clk/imx/clk-imx8mn.c
+@@ -97,19 +97,19 @@ static const char * const imx8mn_i2c4_sels[] = {"osc_24m", "sys_pll1_160m", "sys
+ 						"sys_pll3_out", "audio_pll1_out", "video_pll_out",
+ 						"audio_pll2_out", "sys_pll1_133m", };
+ 
+-static const char * const imx8mn_uart1_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mn_uart1_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 						 "sys_pll2_100m", "sys_pll3_out", "clk_ext2",
+ 						 "clk_ext4", "audio_pll2_out", };
+ 
+-static const char * const imx8mn_uart2_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mn_uart2_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 						 "sys_pll2_100m", "sys_pll3_out", "clk_ext2",
+ 						 "clk_ext3", "audio_pll2_out", };
+ 
+-static const char * const imx8mn_uart3_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mn_uart3_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 						 "sys_pll2_100m", "sys_pll3_out", "clk_ext2",
+ 						 "clk_ext4", "audio_pll2_out", };
+ 
+-static const char * const imx8mn_uart4_sels[] = {"clock-osc-24m", "sys_pll1_80m", "sys_pll2_200m",
++static const char * const imx8mn_uart4_sels[] = {"osc_24m", "sys_pll1_80m", "sys_pll2_200m",
+ 						 "sys_pll2_100m", "sys_pll3_out", "clk_ext2",
+ 						 "clk_ext3", "audio_pll2_out", };
+ 
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.48.1
+
