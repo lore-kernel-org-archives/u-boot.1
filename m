@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F51C369C2
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 14:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E485BC369C2
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 14:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7550C82F67;
-	Wed, 16 Apr 2025 16:11:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE8FC82F46;
+	Wed, 16 Apr 2025 16:11:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m4YIFSp5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L+cTGu/T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B8F682F5D; Wed, 16 Apr 2025 16:11:02 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 661FA82F54; Wed, 16 Apr 2025 16:11:04 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5445181B4B
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 16:11:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4315C82F54
+ for <u-boot+nodisclaimer@lists.denx.de>; Wed, 16 Apr 2025 16:11:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-2d4e91512b4so26034fac.1
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 07:11:00 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2cc57330163so4004557fac.2
+ for <u-boot+nodisclaimer@lists.denx.de>; Wed, 16 Apr 2025 07:11:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744812659; x=1745417459; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744812661; x=1745417461; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=V60cUsUS3fj9itED1mDyPOPUvNb4JOf2+wFNQw+jrcA=;
- b=m4YIFSp5B4ktW3k+yGddjWwxE9ww8CEaYP6wcGTTARJeSRug8ahTKU5kfE+qF+4JgT
- +GlNxL1OmAwcIxocYrDWgnCcRYtG1Z6fywUnNUVOWmM1V35GMac5vC5h77WiaozwaKez
- 9vgwVYAb91sxevqIiC02NyaY8WCObijGellmU=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bgP/lX5cflPnDAuzWoNKAZZeyKdfGXuMeKnnfDa8oBM=;
+ b=L+cTGu/Tv0SZ6vz2SWIYPanYiX7aQt8+KtmvUoohVeEIn2h6bEpZIxg+Is+HR5V3AR
+ 5WsXZRFUze2Nre6M2wUqjFqMqxqeBzx2ehSkB8ZGjDX+T5UQKVNOtnN/KVMX0Nfc6nGj
+ Pc6wipcPFLVotQFhXOkVHWDTjoZ9wG1Z+j248=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744812659; x=1745417459;
+ d=1e100.net; s=20230601; t=1744812661; x=1745417461;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V60cUsUS3fj9itED1mDyPOPUvNb4JOf2+wFNQw+jrcA=;
- b=gGVdvzMQ4JGdrQT60Woidzl9atMwMfbKZNrF+Ks2AigICu2DbinW6NXKo2Uj2JW1Pj
- qUD/13a14BfrDJxdpjU7Ili9vxdH/qBYr4rSzrVFZZVmekCZekSFYSfviXGcFvKgd7OB
- I4qCYW/55q9hLy5XAgUOTiQ9gz2TmdRkaXeIvCZiS01t9LDvapb+q7/SumLV5lJnuaNJ
- Ie/zDDIfRKGPTDodeqX2hJRFSryWAQ3YSbCPstCpPE0Zvkw0il+1EKG1ZDt5anb4kz+t
- zZAtTx7v4bsXBJLFmxPHBkHR0ALdrnzOLttVsgxAxpv1x4uNnQ24M/4UGRB9JdCATmjF
- COjA==
-X-Gm-Message-State: AOJu0YwaWWOwu3vyAVDNez9fZR/CRYp2HqTdVf3syPyS5ZhXIfBKWy/l
- 2Me39tsErqGxjDvCUhqa4rwBkJuztrsdM8IkNTOylFbJX6DS5HavFfazlC481nmxCv184U3Hbfu
- I
-X-Gm-Gg: ASbGncvdUtGds6HQQ3sgAFTk3ATa2X/B7tNq3MSh3/3UB7f+KZWm6T41oVCjGuHGphI
- sdirMlJq1uwusKxIDxPlod+s8O3zji4NHMyVtjczKqg2Tq0sStnGv28AwrLPPrBTlrS2xMbEMXj
- dWxSHO2zhCijs3Uj+6RgJLVyE/hLnw2RTgjcLD3IY1FJjBKgLNTY6f/BdnjfLLaemSaXEvUaS5g
- oSaiSiLfGV1ZrvRlVoINvcgxKahBiRKB8ihZYYaaDqonrVbpV+DuA1ChfOv0Qs+5ZcEXuqgw8/1
- kVJ0i2Xd+YM4Hc7y4AMw8EsIhwfUrwHQwz4RWO5yNPLBCQLyqkdr44I55qPDnlmjzdYvvoDyWBD
- x
-X-Google-Smtp-Source: AGHT+IGi5+RyIQiTCDZPaIQmoS31eNXrKBvQfb8gJJN5eFp7SNSGcYwYojU3DWHIRegsbLcV5NGimA==
-X-Received: by 2002:a05:6870:b023:b0:2c2:5ac3:4344 with SMTP id
- 586e51a60fabf-2d4d2b19b02mr1137175fac.15.1744812659123; 
- Wed, 16 Apr 2025 07:10:59 -0700 (PDT)
+ bh=bgP/lX5cflPnDAuzWoNKAZZeyKdfGXuMeKnnfDa8oBM=;
+ b=Hr9JKlvY55OMqxkDHiOAGiFQnmA6qI3Wrr+VLusdsHcDcaZn3EtWpJrbTf5Ni4yT4y
+ u/T03l0pXodxuGuBjPjubDmCLn0xxLIMp3hNPXkC30+DBi0qYQt0OIhz0sMcuGFrhXsW
+ r+JJ7USb7xQpLYEYHbX5TmBZ6YX0I7EvPxrSKkc9oFetNRB/ENX5Cs67+FyBLb81m24K
+ 5oJmVTtI9wMsBPUsvT0aRNb90SsX38fRs8FZ6KX+oFSxWkAo/yEvoNyyE8ufc1zwdyhR
+ b9DcbZ/4XsVErsdmsZSdsAOZQHdiiPchCnNL6bUZc/4TNSIXf8o+AHVdGiu5GkQjrLy9
+ y1gQ==
+X-Gm-Message-State: AOJu0YzYD8x6CVh16h+ag0yud+191IFVqBjjkbIggwD+tKi0rgpEsKq0
+ JmQqKqfKTRShsCGLnUNV/X8xQwa/GzfXmzx7VgtCoAHN2cJnkyD5daeNeGEnOoIbLQgZ09fsMBH
+ g
+X-Gm-Gg: ASbGncs1GNa4z2zshn8JeqFk9Q55fob/tJIu1EXnXAYICTb77jwCFJtwEDE/wst3GWA
+ BoCYhOA7hw26jd8lkPaTxkvesyIiPRQ5vdHIms2Wp29nbtP6YD+dsNNZ7AVZ8yfFCFvnPEEE0Ox
+ DvBUTP1rZnAUWaFIq6Ejj5BFrlOOkzYWIkohXKseaqRXKxf5bEprJVIzOFkPDLlRHACDdUNS+eA
+ NvdjlF+X2Cb3Sf9ri/q1xjoKpBQmjatYcvATaPWNOOPxFWmQ0bdtptQXzHMAaJk77tnNvR3I6YR
+ xrygmv96GE3MmGUiJjGKTDnMPEotFSVTEck9o4r2ibiwNQI8FNd7C3hqqVk6V6I1ENwjT4KwRKG
+ f
+X-Google-Smtp-Source: AGHT+IF8kDkyEmU/hm7kipH8HgE+I5D7fNvgnwnMoL0/fjuzaOCjBpmpO2DrACESwFiVX+m7G/cEYg==
+X-Received: by 2002:a05:6871:9e13:b0:2d4:d9d6:c8d7 with SMTP id
+ 586e51a60fabf-2d4d9d73bf5mr1095989fac.31.1744812661097; 
+ Wed, 16 Apr 2025 07:11:01 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d09695a14csm3314722fac.15.2025.04.16.07.10.58
+ 586e51a60fabf-2d09695a14csm3314722fac.15.2025.04.16.07.11.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 07:10:58 -0700 (PDT)
+ Wed, 16 Apr 2025 07:11:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250411170406.3250498-1-trini@konsulko.com>
-References: <20250411170406.3250498-1-trini@konsulko.com>
-Subject: Re: [PATCH] buildman: Update to grabbing gcc-14.2.0 toolchains by
- default
-Message-Id: <174481265849.2150978.13318823259363905428.b4-ty@konsulko.com>
-Date: Wed, 16 Apr 2025 08:10:58 -0600
+To: trini+nodisclaimer@konsulko.com, yan wang <yan.wang@softathome.com>
+Cc: u-boot+nodisclaimer@lists.denx.de
+In-Reply-To: <20250410092850.316905-1-yan.wang@softathome.com>
+References: <20250410092850.316905-1-yan.wang@softathome.com>
+Subject: Re: [PATCH] spin_table: add missing header for ENODEV and ENOSPC
+ symbols
+Message-Id: <174481266041.2150978.6602099655762108321.b4-ty@konsulko.com>
+Date: Wed, 16 Apr 2025 08:11:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,18 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 11 Apr 2025 11:04:06 -0600, Tom Rini wrote:
+On Thu, 10 Apr 2025 11:28:50 +0200, yan wang wrote:
 
-> With the switch to using GCC 14.2.0 in commit 001bac5f16ad ("Dockerfile:
-> Update to gcc-14.2.0 and clang-18") in CI, we should make buildman match
-> this.
+> Add the necessary header as <common.h> is removed
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] buildman: Update to grabbing gcc-14.2.0 toolchains by default
-      commit: 05a2b6984159e83d91420af283dd204bdbe07d65
+[1/1] spin_table: add missing header for ENODEV and ENOSPC symbols
+      commit: 3bf5e4411acca17c58b83913c150f00992ecf942
 -- 
 Tom
 
