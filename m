@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2684C369BD
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 14:11:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F51C369C2
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 14:11:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3098882F4E;
+	by phobos.denx.de (Postfix) with ESMTP id 7550C82F67;
 	Wed, 16 Apr 2025 16:11:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XJyuyQG7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m4YIFSp5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C336382F4B; Wed, 16 Apr 2025 16:11:00 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 8B8F682F5D; Wed, 16 Apr 2025 16:11:02 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C91081E18
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 16:10:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5445181B4B
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 16:11:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2c7e5f7f0e3so1969332fac.3
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 07:10:58 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-2d4e91512b4so26034fac.1
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 07:11:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744812657; x=1745417457; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744812659; x=1745417459; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZUWo38jpgOzzbL/d/32J9yYZVOGfnjQpIIEj88z5bEI=;
- b=XJyuyQG7g98egjutPIsXhL6STrw+cWtkCny1x8q+rsywd/Sem1v0x3jqP9DD1G/DNU
- amj1R8skAhgoK9adUjEYYSdz2sub2xSwSUtG4+G8JFdYl9YG4Da3nOl+9dy95S6rnDCV
- rLZo99Dzsq7FlIWszB6ALgMLbdd28p9GvsM6M=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=V60cUsUS3fj9itED1mDyPOPUvNb4JOf2+wFNQw+jrcA=;
+ b=m4YIFSp5B4ktW3k+yGddjWwxE9ww8CEaYP6wcGTTARJeSRug8ahTKU5kfE+qF+4JgT
+ +GlNxL1OmAwcIxocYrDWgnCcRYtG1Z6fywUnNUVOWmM1V35GMac5vC5h77WiaozwaKez
+ 9vgwVYAb91sxevqIiC02NyaY8WCObijGellmU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744812657; x=1745417457;
+ d=1e100.net; s=20230601; t=1744812659; x=1745417459;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZUWo38jpgOzzbL/d/32J9yYZVOGfnjQpIIEj88z5bEI=;
- b=REErKkYLQzT3VtZ+t3jpiiP0UGGi4JdPys+g3g2IaAXPouALVeMrUFeG4h71wjWFN1
- BtliTcV1qIY/Rd9kAvn8YaICmWvBL6sOE7SCTEUdlkfdt2Lx/MVLBJzr+BUsy3NX7PdL
- AgJNURjNkDcwLtVWawHcizgUWcE6xb/FuD95QmJ+3yK6a5eHUa9XHdOkUGPCbyEblOsH
- qECszCsKcMsf9TcC9qgI1HlHPJwnoEMeDUz6KGdJZaf69DAyFELcdalrxkHlQva9xAx2
- E0I7Lr27gwawlQpLzDhBpN9mgpSGUQwwnOThPyO0fU3D3XA16l5uhue4PUwZqjfHcmSv
- VFCA==
-X-Gm-Message-State: AOJu0YzxLZr6sp/cyT34ZI8AP1v7OJ5XHY4EGmXZa/WAYMSkPsllPSso
- AzdYWKeQbwuIdWuT/KVR/DtK5jduML49157Z0DLhUidkHiEkFqAkVH9v9WrVV7k=
-X-Gm-Gg: ASbGncs2X43Z5Qicw+ptNk30h+UilO5MudvDFghV9qGUUgO/Yq61m9LFvAkcltki3X1
- RnxhU0Vd7fwhFK+SOPzjN/YidPU8m7kgYvMMZQ/Li13QdOT2xEJsd9bPGV1HFTLgFXREu4QBoAE
- ufJmyPcNZXAzNccbK9Ladaq9JU5m6WaMPtF8ko3DkURP1Bj1JxC3XXpz/m93KaHAvbkvFSAMpiK
- zLKwPbU+AUfViaQWRVUEof6rDJuMlCpPVbaTz6iNnjHzaniEMJpLxuFe0n+k3vscwZIdEb7N70b
- RTC0NI3UibWRX7lo47zR3iGr11KfPUn4eXrl30tfhJ1iQVtGjm4VzfEcy8+j1yZBaJe2H361VUN
- X
-X-Google-Smtp-Source: AGHT+IGRojut7oGZqaBkqCSbI4u2glJwggbaCThqYo+BgqWQ42I9ex7C1CE8L2RF5ddP5prgMF9JNQ==
-X-Received: by 2002:a05:6871:d423:b0:29e:7a13:1341 with SMTP id
- 586e51a60fabf-2d4d29d6befmr1156180fac.8.1744812657332; 
- Wed, 16 Apr 2025 07:10:57 -0700 (PDT)
+ bh=V60cUsUS3fj9itED1mDyPOPUvNb4JOf2+wFNQw+jrcA=;
+ b=gGVdvzMQ4JGdrQT60Woidzl9atMwMfbKZNrF+Ks2AigICu2DbinW6NXKo2Uj2JW1Pj
+ qUD/13a14BfrDJxdpjU7Ili9vxdH/qBYr4rSzrVFZZVmekCZekSFYSfviXGcFvKgd7OB
+ I4qCYW/55q9hLy5XAgUOTiQ9gz2TmdRkaXeIvCZiS01t9LDvapb+q7/SumLV5lJnuaNJ
+ Ie/zDDIfRKGPTDodeqX2hJRFSryWAQ3YSbCPstCpPE0Zvkw0il+1EKG1ZDt5anb4kz+t
+ zZAtTx7v4bsXBJLFmxPHBkHR0ALdrnzOLttVsgxAxpv1x4uNnQ24M/4UGRB9JdCATmjF
+ COjA==
+X-Gm-Message-State: AOJu0YwaWWOwu3vyAVDNez9fZR/CRYp2HqTdVf3syPyS5ZhXIfBKWy/l
+ 2Me39tsErqGxjDvCUhqa4rwBkJuztrsdM8IkNTOylFbJX6DS5HavFfazlC481nmxCv184U3Hbfu
+ I
+X-Gm-Gg: ASbGncvdUtGds6HQQ3sgAFTk3ATa2X/B7tNq3MSh3/3UB7f+KZWm6T41oVCjGuHGphI
+ sdirMlJq1uwusKxIDxPlod+s8O3zji4NHMyVtjczKqg2Tq0sStnGv28AwrLPPrBTlrS2xMbEMXj
+ dWxSHO2zhCijs3Uj+6RgJLVyE/hLnw2RTgjcLD3IY1FJjBKgLNTY6f/BdnjfLLaemSaXEvUaS5g
+ oSaiSiLfGV1ZrvRlVoINvcgxKahBiRKB8ihZYYaaDqonrVbpV+DuA1ChfOv0Qs+5ZcEXuqgw8/1
+ kVJ0i2Xd+YM4Hc7y4AMw8EsIhwfUrwHQwz4RWO5yNPLBCQLyqkdr44I55qPDnlmjzdYvvoDyWBD
+ x
+X-Google-Smtp-Source: AGHT+IGi5+RyIQiTCDZPaIQmoS31eNXrKBvQfb8gJJN5eFp7SNSGcYwYojU3DWHIRegsbLcV5NGimA==
+X-Received: by 2002:a05:6870:b023:b0:2c2:5ac3:4344 with SMTP id
+ 586e51a60fabf-2d4d2b19b02mr1137175fac.15.1744812659123; 
+ Wed, 16 Apr 2025 07:10:59 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d09695a14csm3314722fac.15.2025.04.16.07.10.56
+ 586e51a60fabf-2d09695a14csm3314722fac.15.2025.04.16.07.10.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 07:10:56 -0700 (PDT)
+ Wed, 16 Apr 2025 07:10:58 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: marex@denx.de, festevam@gmail.com, 
- "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250409075352.535194-1-alice.guo@oss.nxp.com>
-References: <20250409075352.535194-1-alice.guo@oss.nxp.com>
-Subject: Re: [PATCH RESEND] firmware: scmi: support to manage SCMI protocol
- drivers with a linker-genetated array
-Message-Id: <174481265661.2150978.4093686244723426987.b4-ty@konsulko.com>
-Date: Wed, 16 Apr 2025 08:10:56 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250411170406.3250498-1-trini@konsulko.com>
+References: <20250411170406.3250498-1-trini@konsulko.com>
+Subject: Re: [PATCH] buildman: Update to grabbing gcc-14.2.0 toolchains by
+ default
+Message-Id: <174481265849.2150978.13318823259363905428.b4-ty@konsulko.com>
+Date: Wed, 16 Apr 2025 08:10:58 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,18 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 09 Apr 2025 15:53:51 +0800, Alice Guo (OSS) wrote:
+On Fri, 11 Apr 2025 11:04:06 -0600, Tom Rini wrote:
 
-> U_BOOT_SCMI_PROTO_DRIVER macro is used to add a SCMI protocol driver to
-> scmi_proto_driver list. scmi_proto_driver_get() function can be used to
-> match a SCMI protocol id and its driver.
+> With the switch to using GCC 14.2.0 in commit 001bac5f16ad ("Dockerfile:
+> Update to gcc-14.2.0 and clang-18") in CI, we should make buildman match
+> this.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] firmware: scmi: support to manage SCMI protocol drivers with a linker-genetated array
-      (no commit info)
+[1/1] buildman: Update to grabbing gcc-14.2.0 toolchains by default
+      commit: 05a2b6984159e83d91420af283dd204bdbe07d65
 -- 
 Tom
 
