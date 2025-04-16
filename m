@@ -4,69 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87305C369BD
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 12:36:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96643C369BD
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 12:38:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8453682DF2;
-	Wed, 16 Apr 2025 14:36:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19C7781E14;
+	Wed, 16 Apr 2025 14:38:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DW3Z+E/6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Y2TQ58Rg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D3F382E27; Wed, 16 Apr 2025 14:36:38 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id BFC1082DF2; Wed, 16 Apr 2025 14:38:06 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EADC8003E
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 14:36:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B3FB80FDA
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 14:38:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 2A18361135;
- Wed, 16 Apr 2025 12:36:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50245C4CEE2;
- Wed, 16 Apr 2025 12:36:33 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 70BCF61135;
+ Wed, 16 Apr 2025 12:37:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7128DC4CEE2;
+ Wed, 16 Apr 2025 12:38:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744806993;
- bh=zc2dwSRPE12gzkGGkgVyB1LH1GiTlivYtm5CwcyH724=;
- h=From:Date:Subject:To:Cc:From;
- b=DW3Z+E/6DR4+TQeMKUbSwBe6pbGVOwKpYRkT6MRD1lKF2vZlHJU9T5+AZbUt+AINC
- i9SCMsVyPoXFbQigbKQuRRHer6PMN9i2AAwBqPbGdjlhFalJGMY8O+pdhe78Ir3PpJ
- 3tQm4bBWpIJqfgSQhmsfOKT02exDPPsSOTC+1mbrMbCbF6CMp8UlChZNRllwx+s/cW
- /Vu5NtXRhHcGR7zqBGK2QXcfVGuVMccdkrvvy0xMryzdBgPLY7eYj+foZVWTaa/sAQ
- 7LXZ1wzbP1bWSz5TzQUfrHztFCDC9PRYp1KqYoypOI5Os7kY5M+j7q0iwklOfxQ9fM
- Ykykw6K84gy6A==
+ s=k20201202; t=1744807082;
+ bh=jGrXogK6N4bCIUkVLLmW2LZq/HK5nuYTKWAJDf5FXCU=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=Y2TQ58RgK+5f2D35FuphXKoXRyEiogLgmdNPesmnnOZ7gQCsQZ3HewX6TLslrlJpV
+ Ify4KH0nXwlY9LfWlwL3uACFUas3bWZQn6w67hjM4zE/uRmNo9oi+uxde/VGQFkcmH
+ FX76B3+HfMzf4iEVLyUDYR7+3V6qq1oJaus8C1ogJwTQRvGjXBKhOylrazN+q59mtc
+ iuiTzjQClOeDWZnCjLP2PesmY8B9Cy23/GaeuKmtcyRZ7tqj1dKBEgsH9XOW/82qtP
+ 7G/2ziYx7SwZXFYGwuHQFzTEpIUmZuJkpCpCjtcgNzKk45dMwcXDevgpj8iW7YD/mT
+ 9TrW5N7jzh6UA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Date: Wed, 16 Apr 2025 14:36:28 +0200
-Subject: [PATCH v2] tools/make_pip: Use venv when invoking pip
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
+ <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] tools/make_pip: Use virtualenv when invoking pip
+In-Reply-To: <87ikn44io3.fsf@kernel.org>
+References: <20250409-ubuntu-24-04-v1-1-056728207b6c@kernel.org>
+ <20250415175944.GA650630@bill-the-cat> <87ikn44io3.fsf@kernel.org>
+Date: Wed, 16 Apr 2025 14:38:00 +0200
+Message-ID: <87fri846zb.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250416-ubuntu-24-04-v2-1-bad2be600857@kernel.org>
-X-B4-Tracking: v=1; b=H4sIAEuk/2cC/1XMwQ6CMAzG8VchPTvTVcbAk+9hOAhUWDQb6YBoC
- O/uJPFg0su/yfdbIbI4jnDOVhBeXHTBp6BDBu1w8z0r16UGQjKYY6nmZvbTrChXmK5r+URNZax
- FSJNR+O5eO3etUw8uTkHeu77o7/cHVf/QopVWaApLJaFtivbyYPH8PAbpod627QM99jzeqQAAA
- A==
-X-Change-ID: 20250408-ubuntu-24-04-0dce32b95770
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-X-Mailer: b4 0.14.3-dev-7b9b9
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1777;
- i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=zc2dwSRPE12gzkGGkgVyB1LH1GiTlivYtm5CwcyH724=;
- b=owEBbQGS/pANAwAIARkNHbRmThk1AcsmYgBn/6RPwqWxPJ+JS7/xChIhtCU3jeU55n+xH9320
- 9FykHkVZZyJATMEAAEIAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCZ/+kTwAKCRAZDR20Zk4Z
- Nf7WB/0U9xy9jI3WNcnJByi5aWCDBWXDZYhMqWmH5dPyS+jmj6UdmfDAjHNNNmoLlB4I6tEaT9q
- V2wc2EcjXtuV29TvTKOC7Lj8rMLJQNvxd/YdA2QPvLPg2jk0ZTr+9O4aIqGD/myAl/GlDS/9xyL
- jA79yIfBJNtUffnR23Q38ZsFl+6Zsw9AgNftb2B2PeSq7o2HUajkkMfaxYx/f486kHQmE3H51gQ
- L6dLKb+CjftU91HF9xYf3uMduwawxoucGc7Zf+1wJT3dn61ktaHlW0Ge9qN+ty/0/JtFuAhDNEX
- lHIpfbWhAds4WuHGkdGTMn6cXUzwVG1jfedxm7PF4I3Fgg0x
-X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
- fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,68 +69,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Recent Ubuntu versions (24.04+) disallow pip by default when
-installing packages. The recommended approach is to use a virtual
-environment (venv) instead.
-Because of this, "make pip" is failing on such versions.
+On mer., avril 16, 2025 at 10:25, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
 
-To prepare CI container migration to Ubuntu 24.04, use a venv in the
-make_pip script.
+> Hi Tom,
+>
+> On mar., avril 15, 2025 at 11:59, Tom Rini <trini@konsulko.com> wrote:
+>
+>> On Wed, Apr 09, 2025 at 09:46:34AM +0200, Mattijs Korpershoek wrote:
+>>
+>>> Recent Ubuntu versions (24.04+) disallow pip by default when
+>>> installing packages. The recommended approach is to use a virtualenv
+>>> instead.
+>>> Because of this, "make pip" is failing on such versions.
+>>> 
+>>> To prepare CI container migration to Ubuntu 24.04, use a virtualenv
+>>> in the make_pip script.
+>>> 
+>>> Note: This has been reported on [1]
+>>> 
+>>> [1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/37
+>>> 
+>>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>>> Reviewed-by: Tom Rini <trini@konsulko.com>
+>>> ---
+>>> This has been tested in docker on ubuntu:24.04 after running:
+>>> $ apt install python3 python3-virtualenv
+>>> 
+>>> with:
+>>> $ ./scripts/make_pip.sh u_boot_pylib "-n"
+>>> 
+>>> And shows:
+>>> Successfully built u_boot_pylib-0.0.6.tar.gz and u_boot_pylib-0.0.6-py3-none-any.whl
+>>> 
+>>> Also tested with "$ make pip".
+>>> ---
+>>>  scripts/make_pip.sh | 6 ++++++
+>>>  1 file changed, 6 insertions(+)
+>>
+>> So, this ends up failing with Ubuntu 22.04 thusly:
+>> https://source.denx.de/u-boot/u-boot/-/jobs/1103567
+>
+> Argh, sorry I did not test that.
+>
+>>
+>> And in short, I think your original plan to use venv not virtualenv is
+>> correct, sorry for the noise. I'll post something to install
+>> python3-venv to our container shortly and switch to venv not virtualenv
+>> as that seems to be the long term best answer.
+>
+> Ok, will send a v2 to use venv instead.
 
-Note: This has been reported on [1]
+Posted here:
+https://lore.kernel.org/all/87ikn44io3.fsf@kernel.org/
 
-[1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/37
+As mentioned in the cover letter, this requires python3-venv to be added
+in the container and I've assumed you will be doing that, Tom.
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
----
-This has been tested in docker on ubuntu:24.04 after running:
-$ apt install python3 python3-venv
+Thanks!
 
-with:
-$ ./scripts/make_pip.sh u_boot_pylib "-n"
-
-And shows:
-Successfully built u_boot_pylib-0.0.6.tar.gz and u_boot_pylib-0.0.6-py3-none-any.whl
-
-Also tested with "$ make pip".
----
-Changes in v2:
-- Use venv instead of virtualenv (Tom)
-- Link to v1: https://lore.kernel.org/r/20250409-ubuntu-24-04-v1-1-056728207b6c@kernel.org
----
- scripts/make_pip.sh | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/scripts/make_pip.sh b/scripts/make_pip.sh
-index d2639ffd6e43..33ad51ada703 100755
---- a/scripts/make_pip.sh
-+++ b/scripts/make_pip.sh
-@@ -106,6 +106,10 @@ fi
- mkdir ${dir}/tests
- cd ${dir}
- 
-+# Use virtual environment
-+python3 -m venv .venv
-+source .venv/bin/activate
-+
- # Make sure the tools are up to date
- python3 -m pip install --upgrade build
- python3 -m pip install --upgrade twine
-@@ -122,6 +126,8 @@ if [ -n "${upload}" ]; then
- 	echo "Completed upload of ${tool}"
- fi
- 
-+# Finish using virtual environment
-+deactivate
- rm -rf "${dir}"
- 
- echo -e "done\n\n"
-
----
-base-commit: 9d9fbdab0e9664bff147109cc89ad2786f6ecd83
-change-id: 20250408-ubuntu-24-04-0dce32b95770
-
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+>
+>>
+>> -- 
+>> Tom
