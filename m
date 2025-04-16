@@ -4,51 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40958C369BD
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 13:35:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73FFCC369C4
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 13:49:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A99AC82DB4;
-	Wed, 16 Apr 2025 15:35:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BCF29808AF;
+	Wed, 16 Apr 2025 15:49:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1744810533;
-	bh=8i4pNUO3xizHr4kcLhxvtNNqv7M1W0JA/dxy3dX9V8s=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=AIQ0gcxknbt0glVyjzI63Q+C2LnP6Ouf/60FYAfH9uCwUObqlApEctvQiwpYnAp7m
-	 h0CY9TtesExQhHyzma6QnFUSDbsBwR65bIRHL7pprRA7qPajypn6sjN4f0KkdZnJnV
-	 jzG9cGhBgimcFIoa4selpR1N2XvUPf5BfzrELR3/RE1O+D05pvc1OpoaFEzFOZgY20
-	 +XuGdArtqNXJGL7BFdFuUt5ZsBugigqvxM2nv+wM1OPd7sTC8ZsYWUN1yRP2CMgiKg
-	 ISLuN83gaZSgHiM8a9mWmVFLbMVbtbrwlDT2v/NNnQf4UFBUmugOpol/UyLiFlcZcB
-	 dLg/vhRuGVCpA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C0D0E82E9F; Wed, 16 Apr 2025 15:35:32 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23D3D82B5B
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 15:35:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Zd28Z3bY7z9sw7;
- Wed, 16 Apr 2025 15:35:26 +0200 (CEST)
-Message-ID: <b42d26fc-263f-45c0-aede-783a401ec724@denx.de>
-Date: Wed, 16 Apr 2025 15:35:25 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SS1kI1xH";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8CAB88006D; Wed, 16 Apr 2025 15:49:15 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D44F8006D
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 15:49:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53GDn9Hq2788327
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 16 Apr 2025 08:49:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744811349;
+ bh=BjlP/RatMA9H6Ei7nnchfsACKHXLQDshKFlULsQuH3I=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=SS1kI1xHoyfgLDZFZtCUPsW8fk1pbU3QEdk8FdvuMew0TgsUyCHSvJxPPmsEerKx7
+ RNZr4f8V33nDHHVFJdSP7/70j60VEBWjAdGgIPkDYwfvaPlmJAw52vQPMwQ1nMVceC
+ r5v4K1FAKoK8peB4izwM+jCwUxmgqWFbCnrspYvQ=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53GDn9YB129997
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 16 Apr 2025 08:49:09 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Apr 2025 08:49:08 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Apr 2025 08:49:09 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53GDn8CD121085;
+ Wed, 16 Apr 2025 08:49:08 -0500
 MIME-Version: 1.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-marvell/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4Zd28Z3bY7z9sw7
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Wed, 16 Apr 2025 19:18:54 +0530
+Message-ID: <D983ZXCIAF06.2I0POMKUFPF2L@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <trini@konsulko.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>
+Subject: Re: [PATCH v1 0/4] k3: migrate SPL_TEXT_BASE to new address
+From: Anshul Dalal <anshuld@ti.com>
+To: Nishanth Menon <nm@ti.com>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250416073058.1441001-1-anshuld@ti.com>
+ <20250416112418.nod2fut4v77qlmfq@hummus>
+In-Reply-To: <20250416112418.nod2fut4v77qlmfq@hummus>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,65 +83,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Wed Apr 16, 2025 at 4:54 PM IST, Nishanth Menon wrote:
+> On 13:00-20250416, Anshul Dalal wrote:
+>> The change to ATF's PRELOADED_BL33_BASE[1] requires respective changes t=
+o
+>> SPL_TEXT_BASE on u-boot side. This is necessary to allow the ATF to jump
+>> directly to linux kernel (like in falcon mode) which requires a 2MiB ali=
+gned
+>> load address[2]. The current address ATF jumps to is 0x80080000 which is=
+ not
+>> 2MiB aligned.
+>>=20
+>> Therefore in parallel to the ATF change, this patch set makes the corres=
+ponding
+>> changes to u-boot. To maintain backwards compatibility with older ATF bu=
+ilds
+>> (that still use older address of 0x80080000), the patch set also adds a
+>> jump-stub which modifies the execution as follows:
+>>=20
+>> Old ATF -> 0x80080000 -> 0x822000000 (Main domain SPL or kernel image)
+>>            jump stub    SPL_TEXT_BASE
+>>=20
+>> With the following instructions loaded by the jump-stub:
+>> ADDR       | Instruction
+>> 0x80080000 |   mov x15, CONFIG_SPL_TEXT_BASE (0x822000000)
+>> 0x80080004 |   br x15
+>>=20
+>> Depends on:
+>>  * [PATCH v3] configs: set SPL_TEXT_BASE by default for k3 platforms
+>>    https://lore.kernel.org/u-boot/20250415095028.446254-1-anshuld@ti.com=
+/
+>>=20
+>> [1]:
+>> https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/37447
+>> [2]:
+>> "The Image must be placed text_offset bytes from a 2MB aligned base
+>> address anywhere in usable system RAM and called there."
+>> - Documentation/arch/arm64/booting.rst (linux kernel)
+>>=20
+>> Anshul Dalal (4):
+>>   spl: Kconfig: k3: set SPL_TEXT_BASE to 0x82200000
+>>   mach-k3: add a jump stub to support older ATF builds
+>>   binman: k3: add jump-stub to tispl.bin
+>>   binman: k3: add jump-stub as loadable
+>
+>
+> 	How about u-boot documentation?
 
-please pull this next batch of mostly Marvell related patches:
+I will update that in the next revision along with any feedback I
+receive on this patch.
 
-----------------------------------------------------------------
-- mvebu_espressobin_ultra-88f3720_defconfig: disable SATA
-- helios4: enable ddr odt0 on write for both chip-select
-- clearfog,helios4: disable sdhci sdma
-- mvebu/bubt: Correct usage of IS_ENABLED() macro
-- mvebu: Correct SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR usage
-----------------------------------------------------------------
+Regards
 
-Here the Azure build, without any issues:
-
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=390&view=results
-
-Thanks,
-Stefan
-
-
-The following changes since commit a08425586799374ccded78eb5fdef6e2235e1ad9:
-
-   Merge tag 'tpm-master-14042025' of 
-https://source.denx.de/u-boot/custodians/u-boot-tpm (2025-04-15 07:36:25 
--0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-marvell.git 
-tags/u-boot-marvell-20250516
-
-for you to fetch changes up to 9af45190d6dbe4d7369c01c34b6fe40dc00d8663:
-
-   ARM: mvebu: Correct SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR usage 
-(2025-04-16 08:05:15 +0200)
-
-----------------------------------------------------------------
-Benjamin Schneider (1):
-       configs: mvebu_espressobin_ultra-88f3720_defconfig: disable SATA
-
-Chris Packham (1):
-       arm: mvebu: Fix typos in Kconfig help text
-
-Josua Mayer (2):
-       board: kobol: helios4: enable ddr odt0 on write for both chip-select
-       configs: clearfog,helios4: disable sdhci sdma
-
-Tom Rini (2):
-       cmd: mvebu/bubt: Correct usage of IS_ENABLED() macro
-       ARM: mvebu: Correct SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR usage
-
-  arch/arm/mach-mvebu/Kconfig                       | 5 ++---
-  board/kobol/helios4/helios4.c                     | 6 +++++-
-  cmd/mvebu/bubt.c                                  | 2 +-
-  common/spl/Kconfig                                | 1 +
-  configs/clearfog_defconfig                        | 1 -
-  configs/clearfog_sata_defconfig                   | 1 -
-  configs/clearfog_spi_defconfig                    | 1 -
-  configs/helios4_defconfig                         | 1 -
-  configs/mvebu_espressobin_ultra-88f3720_defconfig | 1 -
-  9 files changed, 9 insertions(+), 10 deletions(-)
+>>=20
+>>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |  2 +-
+>>  arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  4 +--
+>>  arch/arm/dts/k3-am625-sk-binman.dtsi          |  4 +--
+>>  .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  |  4 +--
+>>  arch/arm/dts/k3-am62a-phycore-som-binman.dtsi |  4 +--
+>>  arch/arm/dts/k3-am62a-sk-binman.dtsi          |  4 +--
+>>  arch/arm/dts/k3-am62p-sk-binman.dtsi          |  2 +-
+>>  arch/arm/dts/k3-am642-phycore-som-binman.dtsi |  8 ++---
+>>  arch/arm/dts/k3-am64x-binman.dtsi             |  8 ++---
+>>  arch/arm/dts/k3-am65-iot2050-boot-image.dtsi  |  2 +-
+>>  arch/arm/dts/k3-am65x-binman.dtsi             |  4 +--
+>>  arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi  |  2 +-
+>>  arch/arm/dts/k3-binman.dtsi                   | 31 +++++++++++++++++++
+>>  arch/arm/dts/k3-j7200-binman.dtsi             |  4 +--
+>>  .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   |  2 +-
+>>  arch/arm/dts/k3-j721e-binman.dtsi             |  4 +--
+>>  arch/arm/dts/k3-j721s2-binman.dtsi            |  4 +--
+>>  arch/arm/dts/k3-j722s-binman.dtsi             |  2 +-
+>>  arch/arm/dts/k3-j784s4-binman.dtsi            |  4 +--
+>>  arch/arm/mach-k3/Makefile                     |  7 +++++
+>>  arch/arm/mach-k3/jump_stub.S                  | 16 ++++++++++
+>>  common/spl/Kconfig                            |  2 +-
+>>  22 files changed, 89 insertions(+), 35 deletions(-)
+>>  create mode 100644 arch/arm/mach-k3/jump_stub.S
+>>=20
+>> --=20
+>> 2.49.0
+>>=20
 
