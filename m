@@ -4,67 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D22AC369C4
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 12:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD6B1C369BD
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 13:19:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69BF082BA2;
-	Wed, 16 Apr 2025 14:57:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 046E780FEC;
+	Wed, 16 Apr 2025 15:19:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rFMsKBkE";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1744809552;
+	bh=iA7Ee5yGdvV20EUtPk4OJqLkrI2U/Hc5xF7+JwWeFcE=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=TUAMDqp786XeMnlOiEf2utCRZidyUSIutWjsBwFRWAuhEpGsjy+liaw+6GAS50O9G
+	 7CoKD6/NRUlKwlO7tE4/B9d1kClTxQkinJoz8XIrEOL++R7eBsZUYigCy+E/nFaaTR
+	 ueRCjZ67jJ6bpRWNxPhACi4PTDGkpDe32gOzoXhzmA8qQ7U7wKRzAEelLRgHGg6eET
+	 v9mgIxV57HNU1bVwyDFxE78nSBjH2PdsDVL+d/FlnRQfV1zUhQ7WNeWlMVyRS2XAbk
+	 S3jFZNKZzYxbTzDQXvymMPeGH0FDlu2imwSztomokSwNRdnTxnYDaIt16kEFl6WY4U
+	 P76rtA8idF4Sg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0FC782C96; Wed, 16 Apr 2025 14:56:59 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5C4B82B5B
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 14:56:56 +0200 (CEST)
+ id AE41B82B5B; Wed, 16 Apr 2025 15:19:10 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C066280F03
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 15:19:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53GCumZo2659441
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 07:56:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744808208;
- bh=89zxXgy5d30nG2/8vs4jbqDKJjPV7gx6ou449/J35A0=;
- h=From:To:CC:Subject:Date;
- b=rFMsKBkEgJqdPx5bKbIJbsBfarMLPs5TwO1LAGGs4Cdh5rb9EkRNEDRAacs+/KGE3
- 14/JTfGAJ5/i9YdtpRBnjmYC9eX2W76Ruer9x17VMCfdMvK2/wW3j+fZov0BEtaTM0
- CfMgfWX3kd3X0/Xf1cOBVxMEUI/kWqwePL9hiSYo=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53GCumMh076119
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 16 Apr 2025 07:56:48 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
- Apr 2025 07:56:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 16 Apr 2025 07:56:47 -0500
-Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.113])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53GCuiuE055204; 
- Wed, 16 Apr 2025 07:56:44 -0500
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <trini@konsulko.com>, <joe.hershberger@ni.com>, <rfried.dev@gmail.com>,
- <matthias.schiffer@ew.tq-group.com>, <richard.genoud@bootlin.com>,
- <c-vankar@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH] net: ti: am65-cpsw-nuss: invoke phy_config() in driver's
- .start callback
-Date: Wed, 16 Apr 2025 18:26:43 +0530
-Message-ID: <20250416125643.2234165-1-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Zd1nk3lyqz9sq3;
+ Wed, 16 Apr 2025 15:19:06 +0200 (CEST)
+Message-ID: <2352916b-0b35-470a-bf68-d1d069b0aca0@denx.de>
+Date: Wed, 16 Apr 2025 15:19:05 +0200
 MIME-Version: 1.0
+Subject: Re: [PATCH] configs: mvebu_espressobin_ultra-88f3720_defconfig:
+ disable SATA
+From: Stefan Roese <sr@denx.de>
+To: Benjamin Schneider <bschnei@gmail.com>
+Cc: Benjamin Schneider <ben@bens.haus>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ u-boot@lists.denx.de
+References: <20250228192240.129406-1-ben@bens.haus>
+ <9d9d3196-2e59-45bd-b388-72b75ee645e5@denx.de>
+Content-Language: en-US
+In-Reply-To: <9d9d3196-2e59-45bd-b388-72b75ee645e5@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,59 +73,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, the phy_config() API is invoked by the driver only once since it
-has been probed. While this works in general, it doesn't allow the driver
-to bring the PHY back to its default reset state. As a result, the driver
-might not be able to recover the PHY from a bad state. To address this,
-move phy_config() into the driver's start callback (am65_cpsw_start()).
+On 20.03.25 07:55, Stefan Roese wrote:
+> On 28.02.25 20:22, Benjamin Schneider wrote:
+>> This device uses the SCSI subsystem to interface with SATA devices.
+>> Trying to use the sata command results in an unhandled exception.
+>> This has the side effect of also causing bootflow scan to raise
+>> an unhandled exception when it attempts to probe the SATA
+>> subsystem. Disabling the sata command fixes this issue and does
+>> not remove support for any boot devices.
+>>
+>> Signed-off-by: Benjamin Schneider <ben@bens.haus>
+> 
+> Reviewed-by: Stefan Roese <sr@denx.de>
 
-Apart from providing the means to recover the PHY in the event of failure,
-the implementation is in line with the idea of "reset and configure" that
-is already followed by am65_cpsw_start() when it comes to programming the
-CPSW MAC.
+Applied to u-boot-marvell/master
 
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
----
+Thanks,
+Stefan
 
-Hello,
+> 
+> Thanks,
+> Stefan
+> 
+>> ---
+>>
+>>   configs/mvebu_espressobin_ultra-88f3720_defconfig | 1 -
+>>   1 file changed, 1 deletion(-)
+>>
+>> diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/ 
+>> configs/mvebu_espressobin_ultra-88f3720_defconfig
+>> index 6f1a66f5f1..1cbeee8fcb 100644
+>> --- a/configs/mvebu_espressobin_ultra-88f3720_defconfig
+>> +++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+>> @@ -34,7 +34,6 @@ CONFIG_CMD_I2C=y
+>>   CONFIG_CMD_MMC=y
+>>   CONFIG_CMD_MTD=y
+>>   CONFIG_CMD_PCI=y
+>> -CONFIG_CMD_SATA=y
+>>   CONFIG_CMD_SPI=y
+>>   CONFIG_CMD_USB=y
+>>   CONFIG_CMD_WDT=y
+> 
 
-This patch is based on commit
-f892a7f397a Revert "Merge patch series "pxe: Precursor series for supporting read_all() in extlinux / PXE""
-of the next branch of U-Boot.
+Viele Grüße,
+Stefan Roese
 
-Regards,
-Siddharth.
-
- drivers/net/ti/am65-cpsw-nuss.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
-index 3c62fc0b428..9b69f36d04d 100644
---- a/drivers/net/ti/am65-cpsw-nuss.c
-+++ b/drivers/net/ti/am65-cpsw-nuss.c
-@@ -438,6 +438,12 @@ static int am65_cpsw_start(struct udevice *dev)
- 		       port->port_sgmii_base + AM65_CPSW_SGMII_CONTROL_REG);
- 	}
- 
-+	ret = phy_config(priv->phydev);
-+	if (ret < 0) {
-+		dev_err(dev, "phy_config failed: %d", ret);
-+		goto err_dis_rx;
-+	}
-+
- 	ret = phy_startup(priv->phydev);
- 	if (ret) {
- 		dev_err(dev, "phy_startup failed\n");
-@@ -639,9 +645,6 @@ static int am65_cpsw_phy_init(struct udevice *dev)
- 	phydev->advertising = phydev->supported;
- 
- 	priv->phydev = phydev;
--	ret = phy_config(phydev);
--	if (ret < 0)
--		dev_err(dev, "phy_config() failed: %d", ret);
- 
- 	return ret;
- }
 -- 
-2.34.1
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 
