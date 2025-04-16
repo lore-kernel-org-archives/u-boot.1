@@ -4,42 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81128C369AB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Apr 2025 23:41:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E2EDC369AB
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 01:14:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 004F782C2B;
-	Wed, 16 Apr 2025 01:41:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C5ECE82BDC;
+	Wed, 16 Apr 2025 03:14:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="PaM70ijk";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BC4382C49; Wed, 16 Apr 2025 01:41:12 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 636A182BE3
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 01:41:09 +0200 (CEST)
+ id 531BD82C2B; Wed, 16 Apr 2025 03:14:26 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D24BC82BC1
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 03:14:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C88B71595;
- Tue, 15 Apr 2025 16:41:06 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B65C3F59E;
- Tue, 15 Apr 2025 16:41:07 -0700 (PDT)
-Date: Wed, 16 Apr 2025 00:40:04 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jernej Skrabec <jernej.skrabec@gmail.com>
-Cc: jagan@amarulasolutions.com, trini@konsulko.com, macromorgan@hotmail.com,
- uwu@icenowy.me, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 5/5] sunxi: h6/h616: Reuse common DRAM infrastructure
-Message-ID: <20250416003942.12d13ee4@minigeek.lan>
-In-Reply-To: <20250411161439.4743-6-jernej.skrabec@gmail.com>
-References: <20250411161439.4743-1-jernej.skrabec@gmail.com>
- <20250411161439.4743-6-jernej.skrabec@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=samuel.holland@sifive.com
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-3d589227978so765275ab.1
+ for <u-boot@lists.denx.de>; Tue, 15 Apr 2025 18:14:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1744766062; x=1745370862; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=L3e6B/JqtdZrMe9EU5bSt8c3j3ZDZN+9NOJPragMol8=;
+ b=PaM70ijkmXIv4EtztdZ+ogbWWQNaosYcvkNdFs5MxqU2hSqGKOM5Po77OjeEjfr+mV
+ 9HZ1CZLkCGoYpe9LWAgHnByh8jDcKfjblUNtISAmaewG19BKLtm2AoV2VydrSuBCwTql
+ lWxiMm5Ur+baLn1HPNEF8Kc3MNInQF9952AP541Zzj6JPC/ORG8a76tqawMYA7yImHuK
+ exPyUpgh23OgsG1xwxoFzMI1dzn74d5Bl8eQ2gTlTmzUQC2Wkhg3LRhVahgtFKnhjlp4
+ WTYUYWsefeC8dgQyGLt+V1AgfdwfyNDcA0BbGf4suvYwdPzTvqu0SfolD1fWOFzcZTcI
+ HllA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744766062; x=1745370862;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=L3e6B/JqtdZrMe9EU5bSt8c3j3ZDZN+9NOJPragMol8=;
+ b=qpK4Wi6aPYruqck1T2J2KvvbBoSAa4LndWYHM4u3Yxd5IoUY7yUrP9Svlcky4Cxfro
+ GOxtsCkYMPIl7mSn6EkOxw7rSxXLBq/XDL4eXFgWc/cfz4RjBjagXmnleTR55hUHidEz
+ EsTojVzEEnr7OUMXvpMCgk+waqHhFhWCTANGyBp+3bbgqdQ5rHFXfoLL52tskTo/nhy+
+ vUnF6SFIAsu947qYGIWzSnc5XU8vQV4DEfnTNORlESLOS3ZL29lWbt5j3W2TC4an7a9P
+ SMZiSx2YGtY1n9l7SeTphk6XD/DoONwL5zhkI0LJJCZTJzNRRnudm6wbGdXh8pgUvRLA
+ noRA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgMzqyjHxKMEQ7N0LbilMhyNbL/ID1VQpj8ConzqKamWCzBBgI5/s8N8QQRG3TG8qGOGjMg6Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6f5rPUlViFtrz4FbiT/ybnXiJoQFCagxu1JxVCFKOHfk8YpVg
+ uWkI3wYyRVlbiYvJQKO5ClNXATBhQbe2kdCq+HCJbkTmspzoxd24Nn06PnEb5rk=
+X-Gm-Gg: ASbGncsQoLl000A7ykoogyUUHXT5Wtiq2TQnfMJOY0u6Xj3z/zDfA3r8+tvwf/l7PDK
+ 84cLzCMAEv8DTPOt3lvlR94cSQ7tLlLH2NbLuCthU/rHhxAHmIayCOrpEbtNdbnRKxZ3zYYUhCr
+ D9+ePMlxMinI3kTuZaG5Z2YnOJmt4Z2UKU2osdHbBnS4Y9BksijISnAyCbGyR21dBpCbwUaRmSL
+ aEIeAzu5XwS5UdYjJpBxpN4ggP8Jc4mlbo8z09ZFpuOzrY9kvPx+m+54J3mKscZ5RLK584H/vW2
+ d4OmxywvH1E/Zad6p0gtC3Tx/qtHhID/Ofw=
+X-Google-Smtp-Source: AGHT+IGJAAITS69vrs96Pun3NszYPq/VPK/eST+HZ+chkNEyOvfmWq488J2WvV+wqfe4o+4RwYD3Kw==
+X-Received: by 2002:a05:6e02:1565:b0:3d4:2acc:81fa with SMTP id
+ e9e14a558f8ab-3d8120f9dbamr20337285ab.2.1744766062476; 
+ Tue, 15 Apr 2025 18:14:22 -0700 (PDT)
+Received: from [100.64.0.1] ([170.85.6.166]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3d7dc591f82sm35225115ab.65.2025.04.15.18.14.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Apr 2025 18:14:22 -0700 (PDT)
+Message-ID: <27af893c-9711-49f8-8aa8-89d7d84eab59@sifive.com>
+Date: Tue, 15 Apr 2025 20:14:19 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
+ Ian Ray <ian.ray@gehealthcare.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Fabio Estevm <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Mario Six <mario.six@gdsys.cc>
+References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
+ <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
+From: Samuel Holland <samuel.holland@sifive.com>
+Content-Language: en-US
+In-Reply-To: <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -57,560 +110,251 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 11 Apr 2025 18:14:39 +0200
-Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
+Hi Miquel,
 
-Hi Jernej,
-
-> H616 rank and size detection code is superior to the H6. Nevertheless,
-> they are structurally the same. Split functions from H616 into new file
-> and reuse them in H6 DRAM driver too. This should also fix some bugs for
-> H6 too, like incorrect DRAM size detection.
-
-that's a nice patch, but actually breaks on my Pine H64:
-
-U-Boot SPL 2025.04-01089-g14694431269f (Apr 15 2025 - 22:55:07 +0100)
-DRAM:DRAM init failed: Can't detect number of columns!
-resetting ...
-
-It's none of the previous H6 reworks that causes the problem, but it's
-actually already in the current code somehow: If I apply the equivalent
-of [PATCH 1/5] to the H6 code, it already complains. Replacing the
-panic with a printf() gives me (on mainline):
-
-U-Boot SPL 2025.04-01085-g7a43fe97dc86-dirty (Apr 15 2025 - 23:48:42 +0100)
-DRAM:detected 14 rows (found=1)
-detected 11 columns (found=0)
- 2048 MiB
-Trying to boot from FEL
-NOTICE:  BL31: v2.12.0(debug):v2.12.0-724-gf745e004a
-   < continues booting >
-
-So it seems like the match failed, but apparently 11 columns are correct anyway.
-And since the same happens after this patch, I assume that even the
-newer and better matching routine doesn't change that, unfortunately.
-
-The config on this board is: 2 ranks, full width, 11 cols, 14 rows => 2GB.
-And that seems to work (in Linux).
-It's a single chip Elpida FA232A2MA JD-F, listed by Micron as
-EDFA232A2MA-JD-F-D, though I couldn't find a datasheet quickly.
-
-Cheers,
-Andre
-
-> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
-> ---
->  .../include/asm/arch-sunxi/dram_dw_helpers.h  |  22 +++
->  arch/arm/mach-sunxi/Makefile                  |   4 +-
->  arch/arm/mach-sunxi/dram_dw_helpers.c         | 160 ++++++++++++++++++
->  arch/arm/mach-sunxi/dram_sun50i_h6.c          |  91 +---------
->  arch/arm/mach-sunxi/dram_sun50i_h616.c        | 155 +----------------
->  5 files changed, 190 insertions(+), 242 deletions(-)
->  create mode 100644 arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
->  create mode 100644 arch/arm/mach-sunxi/dram_dw_helpers.c
+On 2025-04-03 2:39 AM, Miquel Raynal wrote:
+> It is very surprising that such an uclass, specifically designed to
+> handle resources that may be shared by different devices, is not keeping
+> the count of the number of times a power domain has been
+> enabled/disabled to avoid shutting it down unexpectedly or disabling it
+> several times.
 > 
-> diff --git a/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h b/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
-> new file mode 100644
-> index 000000000000..bc9e0d868c55
-> --- /dev/null
-> +++ b/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
-> @@ -0,0 +1,22 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Helpers that are commonly used with DW memory controller.
-> + *
-> + * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
-> + *
-> + */
-> +
-> +#ifndef _DRAM_DW_HELPERS_H
-> +#define _DRAM_DW_HELPERS_H
-> +
-> +#include <asm/arch/dram.h>
-> +
-> +bool mctl_core_init(const struct dram_para *para,
-> +		    const struct dram_config *config);
-> +void mctl_auto_detect_rank_width(const struct dram_para *para,
-> +				 struct dram_config *config);
-> +void mctl_auto_detect_dram_size(const struct dram_para *para,
-> +				struct dram_config *config);
-> +unsigned long mctl_calc_size(const struct dram_config *config);
-> +
-> +#endif
-> diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
-> index eb6a49119a13..a33cd5b0f07a 100644
-> --- a/arch/arm/mach-sunxi/Makefile
-> +++ b/arch/arm/mach-sunxi/Makefile
-> @@ -41,8 +41,8 @@ obj-$(CONFIG_DRAM_SUN9I)	+= dram_sun9i.o
->  obj-$(CONFIG_SPL_SPI_SUNXI)	+= spl_spi_sunxi.o
->  obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_sunxi_dw.o
->  obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_timings/
-> -obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o
-> +obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o dram_dw_helpers.o
->  obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_timings/
-> -obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o
-> +obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o dram_dw_helpers.o
->  obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_timings/
->  endif
-> diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunxi/dram_dw_helpers.c
-> new file mode 100644
-> index 000000000000..885d1f2c0b12
-> --- /dev/null
-> +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
-> @@ -0,0 +1,160 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Helpers that are commonly used with DW memory controller.
-> + *
-> + * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
-> + *
-> + */
-> +
-> +#include <init.h>
-> +#include <asm/arch/dram_dw_helpers.h>
-> +
-> +void mctl_auto_detect_rank_width(const struct dram_para *para,
-> +				 struct dram_config *config)
-> +{
-> +	/* this is minimum size that it's supported */
-> +	config->cols = 8;
-> +	config->rows = 13;
-> +
-> +	/*
-> +	 * Strategy here is to test most demanding combination first and least
-> +	 * demanding last, otherwise HW might not be fully utilized. For
-> +	 * example, half bus width and rank = 1 combination would also work
-> +	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
-> +	 * visible.
-> +	 */
-> +
-> +	debug("testing 32-bit width, rank = 2\n");
-> +	config->bus_full_width = 1;
-> +	config->ranks = 2;
-> +	if (mctl_core_init(para, config))
-> +		return;
-> +
-> +	debug("testing 32-bit width, rank = 1\n");
-> +	config->bus_full_width = 1;
-> +	config->ranks = 1;
-> +	if (mctl_core_init(para, config))
-> +		return;
-> +
-> +	debug("testing 16-bit width, rank = 2\n");
-> +	config->bus_full_width = 0;
-> +	config->ranks = 2;
-> +	if (mctl_core_init(para, config))
-> +		return;
-> +
-> +	debug("testing 16-bit width, rank = 1\n");
-> +	config->bus_full_width = 0;
-> +	config->ranks = 1;
-> +	if (mctl_core_init(para, config))
-> +		return;
-> +
-> +	panic("This DRAM setup is currently not supported.\n");
-> +}
-> +
-> +static void mctl_write_pattern(void)
-> +{
-> +	unsigned int i;
-> +	u32 *ptr, val;
-> +
-> +	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-> +	for (i = 0; i < 16; ptr++, i++) {
-> +		if (i & 1)
-> +			val = ~(ulong)ptr;
-> +		else
-> +			val = (ulong)ptr;
-> +		writel(val, ptr);
-> +	}
-> +}
-> +
-> +static bool mctl_check_pattern(ulong offset)
-> +{
-> +	unsigned int i;
-> +	u32 *ptr, val;
-> +
-> +	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-> +	for (i = 0; i < 16; ptr++, i++) {
-> +		if (i & 1)
-> +			val = ~(ulong)ptr;
-> +		else
-> +			val = (ulong)ptr;
-> +		if (val != *(ptr + offset / 4))
-> +			return false;
-> +	}
-> +
-> +	return true;
-> +}
-> +
-> +void mctl_auto_detect_dram_size(const struct dram_para *para,
-> +				struct dram_config *config)
-> +{
-> +	unsigned int shift, cols, rows, found;
-> +	u32 buffer[16];
-> +
-> +	/* max. config for columns, but not rows */
-> +	config->cols = 11;
-> +	config->rows = 13;
-> +	mctl_core_init(para, config);
-> +
-> +	/*
-> +	 * Store content so it can be restored later. This is important
-> +	 * if controller was already initialized and holds any data
-> +	 * which is important for restoring system.
-> +	 */
-> +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-> +
-> +	mctl_write_pattern();
-> +
-> +	shift = config->bus_full_width + 1;
-> +
-> +	/* detect column address bits */
-> +	found = 0;
-> +	for (cols = 8; cols < 11; cols++) {
-> +		if (mctl_check_pattern(1ULL << (cols + shift))) {
-> +			found = 1;
-> +			break;
-> +		}
-> +	}
-> +	if (!found)
-> +		panic("DRAM init failed: Can't detect number of columns!");
-> +	debug("detected %u columns\n", cols);
-> +
-> +	/* restore data */
-> +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-> +
-> +	/* reconfigure to make sure that all active rows are accessible */
-> +	config->cols = 8;
-> +	config->rows = 17;
-> +	mctl_core_init(para, config);
-> +
-> +	/* store data again as it might be moved */
-> +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-> +
-> +	mctl_write_pattern();
-> +
-> +	/* detect row address bits */
-> +	shift = config->bus_full_width + 4 + config->cols;
-> +	found = 0;
-> +	for (rows = 13; rows < 17; rows++) {
-> +		if (mctl_check_pattern(1ULL << (rows + shift))) {
-> +			found = 1;
-> +			break;
-> +		}
-> +	}
-> +	if (!found)
-> +		panic("DRAM init failed: Can't detect number of rows!");
-> +	debug("detected %u rows\n", rows);
-> +
-> +	/* restore data again */
-> +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-> +
-> +	config->cols = cols;
-> +	config->rows = rows;
-> +}
-> +
-> +unsigned long mctl_calc_size(const struct dram_config *config)
-> +{
-> +	u8 width = config->bus_full_width ? 4 : 2;
-> +
-> +	/* 8 banks */
-> +	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-> +}
-> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-> index 6a9e53f965eb..fbb865131e08 100644
-> --- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
-> +++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-> @@ -10,6 +10,7 @@
->  #include <asm/io.h>
->  #include <asm/arch/clock.h>
->  #include <asm/arch/dram.h>
-> +#include <asm/arch/dram_dw_helpers.h>
->  #include <asm/arch/cpu.h>
->  #include <asm/arch/prcm.h>
->  #include <linux/bitops.h>
-> @@ -40,8 +41,8 @@ static void mctl_com_init(const struct dram_para *para,
->  static bool mctl_channel_init(const struct dram_para *para,
->  			      const struct dram_config *config);
+> Doing this causes troubles on eg. i.MX8MP because disabling power
+> domains can be done in recursive loops were the same power domain
+> disabled up to 4 times in a row. PGCs seem to have tight FSM internal
+> timings to respect and it is easy to produce a race condition that puts
+> the power domains in an unstable state, leading to ADB400 errors and
+> later crashes in Linux.
+> 
+> CI tests using power domains are slightly updated to make sure the count
+> of on/off calls is even and the results match what we *now* expect.
+> 
+> As we do not want to break existing users while stile getting
+> interesting error codes, the implementation is split between:
+> - a low-level helper reporting error codes if the requested transition
+>   could not be operated,
+> - a higher-level helper ignoring the "non error" codes, like EALREADY and
+>   EBUSY.
+> 
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> ---
+>  drivers/firmware/scmi/sandbox-scmi_devices.c     |  1 +
+>  drivers/power/domain/power-domain-uclass.c       | 40 ++++++++++++++--
+>  drivers/power/domain/sandbox-power-domain-test.c |  1 +
+>  include/power-domain.h                           | 60 ++++++++++++++++++++----
+>  test/dm/power-domain.c                           |  2 +-
+>  5 files changed, 91 insertions(+), 13 deletions(-)
+> 
+> diff --git a/drivers/firmware/scmi/sandbox-scmi_devices.c b/drivers/firmware/scmi/sandbox-scmi_devices.c
+> index 96c2922b067e2886b3fa963bcd7e396f4569a569..9f253b0fd40f703a5ec11d34c197423d27ad8b01 100644
+> --- a/drivers/firmware/scmi/sandbox-scmi_devices.c
+> +++ b/drivers/firmware/scmi/sandbox-scmi_devices.c
+> @@ -163,4 +163,5 @@ U_BOOT_DRIVER(sandbox_scmi_devices) = {
+>  	.priv_auto = sizeof(struct sandbox_scmi_device_priv),
+>  	.remove = sandbox_scmi_devices_remove,
+>  	.probe = sandbox_scmi_devices_probe,
+> +	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>  };
+> diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
+> index 938bd8cbc9ffd1ba2109d702f886b6a99288d063..a6e5f9ed0369eb9d2dfa66edc9e938bac6720dab 100644
+> --- a/drivers/power/domain/power-domain-uclass.c
+> +++ b/drivers/power/domain/power-domain-uclass.c
+> @@ -12,6 +12,10 @@
+>  #include <power-domain-uclass.h>
+>  #include <dm/device-internal.h>
 >  
-> -static bool mctl_core_init(const struct dram_para *para,
-> -			   const struct dram_config *config)
-> +bool mctl_core_init(const struct dram_para *para,
-> +		    const struct dram_config *config)
+> +struct power_domain_priv {
+> +	int on_count;
+> +};
+> +
+>  static inline struct power_domain_ops *power_domain_dev_ops(struct udevice *dev)
 >  {
->  	mctl_sys_init(para->clk);
->  	mctl_com_init(para, config);
-> @@ -560,92 +561,6 @@ static bool mctl_channel_init(const struct dram_para *para,
->  	return true;
+>  	return (struct power_domain_ops *)dev->driver->ops;
+> @@ -107,22 +111,49 @@ int power_domain_free(struct power_domain *power_domain)
+>  	return ops->rfree ? ops->rfree(power_domain) : 0;
 >  }
 >  
-> -static void mctl_auto_detect_rank_width(const struct dram_para *para,
-> -					struct dram_config *config)
-> -{
-> -	/* this is minimum size that it's supported */
-> -	config->cols = 8;
-> -	config->rows = 13;
-> -
-> -	/*
-> -	 * Previous versions of this driver tried to auto detect the rank
-> -	 * and width by looking at controller registers. However this proved
-> -	 * to be not reliable, so this approach here is the more robust
-> -	 * solution. Check the git history for details.
-> -	 *
-> -	 * Strategy here is to test most demanding combination first and least
-> -	 * demanding last, otherwise HW might not be fully utilized. For
-> -	 * example, half bus width and rank = 1 combination would also work
-> -	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
-> -	 * visible.
-> -	 */
-> -
-> -	debug("testing 32-bit width, rank = 2\n");
-> -	config->bus_full_width = 1;
-> -	config->ranks = 2;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	debug("testing 32-bit width, rank = 1\n");
-> -	config->bus_full_width = 1;
-> -	config->ranks = 1;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	debug("testing 16-bit width, rank = 2\n");
-> -	config->bus_full_width = 0;
-> -	config->ranks = 2;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	debug("testing 16-bit width, rank = 1\n");
-> -	config->bus_full_width = 0;
-> -	config->ranks = 1;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	panic("This DRAM setup is currently not supported.\n");
-> -}
-> -
-> -static void mctl_auto_detect_dram_size(const struct dram_para *para,
-> -				       struct dram_config *config)
-> -{
-> -	/* TODO: non-(LP)DDR3 */
-> -
-> -	/* detect row address bits */
-> -	config->cols = 8;
-> -	config->rows = 18;
-> -	mctl_core_init(para, config);
-> -
-> -	for (config->rows = 13; config->rows < 18; config->rows++) {
-> -		/* 8 banks, 8 bit per byte and 16/32 bit width */
-> -		if (mctl_mem_matches((1 << (config->rows + config->cols +
-> -					    4 + config->bus_full_width))))
-> -			break;
-> -	}
-> -
-> -	/* detect column address bits */
-> -	config->cols = 11;
-> -	mctl_core_init(para, config);
-> -
-> -	for (config->cols = 8; config->cols < 11; config->cols++) {
-> -		/* 8 bits per byte and 16/32 bit width */
-> -		if (mctl_mem_matches(1 << (config->cols + 1 +
-> -					   config->bus_full_width)))
-> -			break;
-> -	}
-> -}
-> -
-> -unsigned long mctl_calc_size(const struct dram_config *config)
-> -{
-> -	u8 width = config->bus_full_width ? 4 : 2;
-> -
-> -	/* TODO: non-(LP)DDR3 */
-> -
-> -	/* 8 banks */
-> -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-> -}
-> -
->  #define SUN50I_H6_LPDDR3_DX_WRITE_DELAYS			\
->  	{{  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
->  	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
-> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> index d1768a7e7d3a..80d9de557876 100644
-> --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> @@ -17,6 +17,7 @@
->  #include <asm/io.h>
->  #include <asm/arch/clock.h>
->  #include <asm/arch/dram.h>
-> +#include <asm/arch/dram_dw_helpers.h>
->  #include <asm/arch/cpu.h>
->  #include <asm/arch/prcm.h>
->  #include <linux/bitops.h>
-> @@ -1310,164 +1311,14 @@ static bool mctl_ctrl_init(const struct dram_para *para,
->  	return true;
->  }
->  
-> -static bool mctl_core_init(const struct dram_para *para,
-> -			   const struct dram_config *config)
-> +bool mctl_core_init(const struct dram_para *para,
-> +		    const struct dram_config *config)
+> -int power_domain_on(struct power_domain *power_domain)
+> +int power_domain_on_lowlevel(struct power_domain *power_domain)
 >  {
->  	mctl_sys_init(para->clk);
+> +	struct power_domain_priv *priv = dev_get_uclass_priv(power_domain->dev);
+>  	struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
+> +	int ret;
 >  
->  	return mctl_ctrl_init(para, config);
+>  	debug("%s(power_domain=%p)\n", __func__, power_domain);
+>  
+> -	return ops->on ? ops->on(power_domain) : 0;
+> +	if (priv->on_count++ > 0)
+> +		return -EALREADY;
+
+This change is broken for power domain providers with #power-domain-cells = <1>,
+which can have multiple domains per provider device. There would need to be a
+separate reference count per domain, and currently the uclass doesn't know the
+range of valid domain IDs.
+
+Regards,
+Samuel
+
+> +
+> +	ret = ops->on ? ops->on(power_domain) : 0;
+> +	if (ret) {
+> +		priv->on_count--;
+> +		return ret;
+> +	}
+> +
+> +	return 0;
 >  }
 >  
-> -static void mctl_auto_detect_rank_width(const struct dram_para *para,
-> -					struct dram_config *config)
-> -{
-> -	/* this is minimum size that it's supported */
-> -	config->cols = 8;
-> -	config->rows = 13;
-> -
-> -	/*
-> -	 * Strategy here is to test most demanding combination first and least
-> -	 * demanding last, otherwise HW might not be fully utilized. For
-> -	 * example, half bus width and rank = 1 combination would also work
-> -	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
-> -	 * visible.
-> -	 */
-> -
-> -	debug("testing 32-bit width, rank = 2\n");
-> -	config->bus_full_width = 1;
-> -	config->ranks = 2;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	debug("testing 32-bit width, rank = 1\n");
-> -	config->bus_full_width = 1;
-> -	config->ranks = 1;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	debug("testing 16-bit width, rank = 2\n");
-> -	config->bus_full_width = 0;
-> -	config->ranks = 2;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	debug("testing 16-bit width, rank = 1\n");
-> -	config->bus_full_width = 0;
-> -	config->ranks = 1;
-> -	if (mctl_core_init(para, config))
-> -		return;
-> -
-> -	panic("This DRAM setup is currently not supported.\n");
-> -}
-> -
-> -static void mctl_write_pattern(void)
-> -{
-> -	unsigned int i;
-> -	u32 *ptr, val;
-> -
-> -	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-> -	for (i = 0; i < 16; ptr++, i++) {
-> -		if (i & 1)
-> -			val = ~(ulong)ptr;
-> -		else
-> -			val = (ulong)ptr;
-> -		writel(val, ptr);
-> -	}
-> -}
-> -
-> -static bool mctl_check_pattern(ulong offset)
-> -{
-> -	unsigned int i;
-> -	u32 *ptr, val;
-> -
-> -	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-> -	for (i = 0; i < 16; ptr++, i++) {
-> -		if (i & 1)
-> -			val = ~(ulong)ptr;
-> -		else
-> -			val = (ulong)ptr;
-> -		if (val != *(ptr + offset / 4))
-> -			return false;
-> -	}
-> -
-> -	return true;
-> -}
-> -
-> -static void mctl_auto_detect_dram_size(const struct dram_para *para,
-> -				       struct dram_config *config)
-> -{
-> -	unsigned int shift, cols, rows, found;
-> -	u32 buffer[16];
-> -
-> -	/* max. config for columns, but not rows */
-> -	config->cols = 11;
-> -	config->rows = 13;
-> -	mctl_core_init(para, config);
-> -
-> -	/*
-> -	 * Store content so it can be restored later. This is important
-> -	 * if controller was already initialized and holds any data
-> -	 * which is important for restoring system.
-> -	 */
-> -	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-> -
-> -	mctl_write_pattern();
-> -
-> -	shift = config->bus_full_width + 1;
-> -
-> -	/* detect column address bits */
-> -	found = 0;
-> -	for (cols = 8; cols < 11; cols++) {
-> -		if (mctl_check_pattern(1ULL << (cols + shift))) {
-> -			found = 1;
-> -			break;
-> -		}
-> -	}
-> -	if (!found)
-> -		panic("DRAM init failed: Can't detect number of columns!");
-> -	debug("detected %u columns\n", cols);
-> -
-> -	/* restore data */
-> -	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-> -
-> -	/* reconfigure to make sure that all active rows are accessible */
-> -	config->cols = 8;
-> -	config->rows = 17;
-> -	mctl_core_init(para, config);
-> -
-> -	/* store data again as it might be moved */
-> -	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-> -
-> -	mctl_write_pattern();
-> -
-> -	/* detect row address bits */
-> -	shift = config->bus_full_width + 4 + config->cols;
-> -	found = 0;
-> -	for (rows = 13; rows < 17; rows++) {
-> -		if (mctl_check_pattern(1ULL << (rows + shift))) {
-> -			found = 1;
-> -			break;
-> -		}
-> -	}
-> -	if (!found)
-> -		panic("DRAM init failed: Can't detect number of rows!");
-> -	debug("detected %u rows\n", rows);
-> -
-> -	/* restore data again */
-> -	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-> -
-> -	config->cols = cols;
-> -	config->rows = rows;
-> -}
-> -
-> -static unsigned long mctl_calc_size(const struct dram_config *config)
-> -{
-> -	u8 width = config->bus_full_width ? 4 : 2;
-> -
-> -	/* 8 banks */
-> -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-> -}
-> -
->  static const struct dram_para para = {
->  	.clk = CONFIG_DRAM_CLK,
->  #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
+> -int power_domain_off(struct power_domain *power_domain)
+> +int power_domain_off_lowlevel(struct power_domain *power_domain)
+>  {
+> +	struct power_domain_priv *priv = dev_get_uclass_priv(power_domain->dev);
+>  	struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
+> +	int ret;
+>  
+>  	debug("%s(power_domain=%p)\n", __func__, power_domain);
+>  
+> -	return ops->off ? ops->off(power_domain) : 0;
+> +	if (priv->on_count <= 0) {
+> +		debug("Power domain %s already off.\n", power_domain->dev->name);
+> +		return -EALREADY;
+> +	}
+> +
+> +	if (priv->on_count-- > 1)
+> +		return -EBUSY;
+> +
+> +	ret = ops->off ? ops->off(power_domain) : 0;
+> +	if (ret) {
+> +		priv->on_count++;
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+>  }
+>  
+>  #if CONFIG_IS_ENABLED(OF_REAL)
+> @@ -180,4 +211,5 @@ int dev_power_domain_off(struct udevice *dev)
+>  UCLASS_DRIVER(power_domain) = {
+>  	.id		= UCLASS_POWER_DOMAIN,
+>  	.name		= "power_domain",
+> +	.per_device_auto = sizeof(struct power_domain_priv),
+>  };
+> diff --git a/drivers/power/domain/sandbox-power-domain-test.c b/drivers/power/domain/sandbox-power-domain-test.c
+> index 08c15ef342b3dd3ce01807ee59b7e97337f7dde5..5b530974e942ffcba453e53be330baaf3a113a13 100644
+> --- a/drivers/power/domain/sandbox-power-domain-test.c
+> +++ b/drivers/power/domain/sandbox-power-domain-test.c
+> @@ -51,4 +51,5 @@ U_BOOT_DRIVER(sandbox_power_domain_test) = {
+>  	.id = UCLASS_MISC,
+>  	.of_match = sandbox_power_domain_test_ids,
+>  	.priv_auto	= sizeof(struct sandbox_power_domain_test),
+> +	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>  };
+> diff --git a/include/power-domain.h b/include/power-domain.h
+> index 18525073e5e3534fcbac6fae4e18462f29a4dc49..ad33dea76ce5808beaa4fbf4388438a504e36027 100644
+> --- a/include/power-domain.h
+> +++ b/include/power-domain.h
+> @@ -147,37 +147,81 @@ static inline int power_domain_free(struct power_domain *power_domain)
+>  #endif
+>  
+>  /**
+> - * power_domain_on - Enable power to a power domain.
+> + * power_domain_on_lowlevel - Enable power to a power domain (with refcounting)
+>   *
+>   * @power_domain:	A power domain struct that was previously successfully
+>   *		requested by power_domain_get().
+> - * Return: 0 if OK, or a negative error code.
+> + * Return: 0 if the transition has been performed correctly,
+> + *         -EALREADY if the domain is already on,
+> + *         a negative error code otherwise.
+>   */
+>  #if CONFIG_IS_ENABLED(POWER_DOMAIN)
+> -int power_domain_on(struct power_domain *power_domain);
+> +int power_domain_on_lowlevel(struct power_domain *power_domain);
+>  #else
+> -static inline int power_domain_on(struct power_domain *power_domain)
+> +static inline int power_domain_on_lowlevel(struct power_domain *power_domain)
+>  {
+>  	return -ENOSYS;
+>  }
+>  #endif
+>  
+>  /**
+> - * power_domain_off - Disable power to a power domain.
+> + * power_domain_on - Enable power to a power domain (ignores the actual state
+> + *		      of the power domain)
+>   *
+>   * @power_domain:	A power domain struct that was previously successfully
+>   *		requested by power_domain_get().
+> - * Return: 0 if OK, or a negative error code.
+> + * Return: a negative error code upon error during the transition, 0 otherwise.
+> + */
+> +static inline int power_domain_on(struct power_domain *power_domain)
+> +{
+> +	int ret;
+> +
+> +	ret = power_domain_on_lowlevel(power_domain);
+> +	if (ret == -EALREADY)
+> +		ret = 0;
+> +
+> +	return ret;
+> +}
+> +
+> +/**
+> + * power_domain_off_lowlevel - Disable power to a power domain (with refcounting)
+> + *
+> + * @power_domain:	A power domain struct that was previously successfully
+> + *		requested by power_domain_get().
+> + * Return: 0 if the transition has been performed correctly,
+> + *         -EALREADY if the domain is already off,
+> + *         -EBUSY if another device is keeping the domain on (but the refcounter
+> + *         is decremented),
+> + *         a negative error code otherwise.
+>   */
+>  #if CONFIG_IS_ENABLED(POWER_DOMAIN)
+> -int power_domain_off(struct power_domain *power_domain);
+> +int power_domain_off_lowlevel(struct power_domain *power_domain);
+>  #else
+> -static inline int power_domain_off(struct power_domain *power_domain)
+> +static inline int power_domain_off_lowlevel(struct power_domain *power_domain)
+>  {
+>  	return -ENOSYS;
+>  }
+>  #endif
+>  
+> +/**
+> + * power_domain_off - Disable power to a power domain (ignores the actual state
+> + *		      of the power domain)
+> + *
+> + * @power_domain:	A power domain struct that was previously successfully
+> + *		requested by power_domain_get().
+> + * Return: a negative error code upon error during the transition, 0 otherwise.
+> + */
+> +static inline int power_domain_off(struct power_domain *power_domain)
+> +{
+> +	int ret;
+> +
+> +	ret = power_domain_off_lowlevel(power_domain);
+> +	if (ret == -EALREADY || ret == -EBUSY)
+> +		ret = 0;
+> +
+> +	return ret;
+> +}
+> +
+>  /**
+>   * dev_power_domain_on - Enable power domains for a device .
+>   *
+> diff --git a/test/dm/power-domain.c b/test/dm/power-domain.c
+> index 896cf5b2ae9d26701150fad70e888f8b135a22b0..8a95f6bdb903be9d1993528d87d5cae0075a83e4 100644
+> --- a/test/dm/power-domain.c
+> +++ b/test/dm/power-domain.c
+> @@ -27,7 +27,7 @@ static int dm_test_power_domain(struct unit_test_state *uts)
+>  
+>  	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "power-domain-test",
+>  					      &dev_test));
+> -	ut_asserteq(1, sandbox_power_domain_query(dev_power_domain,
+> +	ut_asserteq(0, sandbox_power_domain_query(dev_power_domain,
+>  						  TEST_POWER_DOMAIN));
+>  	ut_assertok(sandbox_power_domain_test_get(dev_test));
+>  
+> 
 
