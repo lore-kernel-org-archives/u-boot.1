@@ -4,58 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98154C369B1
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 07:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B1AC369B1
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 07:31:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1D9581E14;
-	Wed, 16 Apr 2025 09:29:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 5CAF982CAC;
+	Wed, 16 Apr 2025 09:31:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="KNiCiooj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y43bqoej";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC5DE8214B; Wed, 16 Apr 2025 09:29:10 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0864E819FC
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 09:29:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0ED4314831B8; Wed, 16 Apr 2025 09:29:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1744788547; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=lYZNHL11ssJ0+Ulh1ZmhLnbAuuebt9o7MHGD3R4p4Q0=;
- b=KNiCioojltKMw0jhkMxLBKQxGwlU7Z9c1TOTuRzGPON2/lfdjWjNaKZUvbHpZ79BmeTz0n
- 5Ovi9PASubcXYRPBgx9RsBBTNWDx9YZb78I+w7OHxRXNqYRh8fJVF8Od4IHc0IJ5wRASKR
- Oi6jXxuwAkG5RzrR5mZ5M2feHHtrjk5Rmz+CyuwMNRCn5zjfsKvU/sMBNFHN5zyhNIV3Lw
- MNs+agFvEtqZrgK/0BvSe5tJdUJZ/Yyw5WUDjoZrkNVFcAYZcYXC7O6ovib8TdqPlTGb28
- TwJXmT7rUEgWX/TCmDtLBA4YnxR5qF4Cf3nNvxjVHwP0MaVThuC7gOdJt8pRgw==
-Date: Wed, 16 Apr 2025 09:29:04 +0200
-From: Alexander Dahl <ada@thorsis.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: trini@konsulko.com, sjg@chromium.org, u-kumar1@ti.com, afd@ti.com,
- vigneshr@ti.com, devarsht@ti.com, quentin.schulz@cherry.de,
- j-choudhary@ti.com, jonas@kwiboo.se, richard@nod.at,
- raymond.mao@linaro.org, m-chawdhry@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/2] doc: memory: Add documentation for system RAM
-Message-ID: <Z_9cQJDHEqy29zW-@ada-pc.thorsis.com>
-Mail-Followup-To: Neha Malcom Francis <n-francis@ti.com>,
- trini@konsulko.com, sjg@chromium.org, u-kumar1@ti.com, afd@ti.com,
- vigneshr@ti.com, devarsht@ti.com, quentin.schulz@cherry.de,
- j-choudhary@ti.com, jonas@kwiboo.se, richard@nod.at,
- raymond.mao@linaro.org, m-chawdhry@ti.com, u-boot@lists.denx.de
-References: <20250319140327.301266-1-n-francis@ti.com>
- <20250319140327.301266-3-n-francis@ti.com>
+ id F3BCC82CD6; Wed, 16 Apr 2025 09:31:19 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 33D5D81E14
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 09:31:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53G7VFm3261706
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 16 Apr 2025 02:31:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744788675;
+ bh=b70juzi8/vzCOBAsOZDXtLU/xusY+0RmAYXJk5ByUZI=;
+ h=From:To:CC:Subject:Date;
+ b=y43bqoejrJNRK51kpRBa8qW6qH6FM5oRee5h454/paxTWlinGoMLG2w4Jp5K69cQN
+ RtalGjKvf1KGOQLH6xZI6nptzlB7roqVzLyLu0dy/RsJe9t85QVK8Ubygr8UwNRC4i
+ 7jnhFdII439RLOe/R0/1XMOmr3VOlk98CdblSLT0=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53G7VEsr120740
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 16 Apr 2025 02:31:14 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Apr 2025 02:31:14 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Apr 2025 02:31:14 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53G7VD4Y051418;
+ Wed, 16 Apr 2025 02:31:14 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
+ <nm@ti.com>, <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>
+Subject: [PATCH v1 0/4] k3: migrate SPL_TEXT_BASE to new address
+Date: Wed, 16 Apr 2025 13:00:53 +0530
+Message-ID: <20250416073058.1441001-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250319140327.301266-3-n-francis@ti.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,40 +80,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Moin,
+The change to ATF's PRELOADED_BL33_BASE[1] requires respective changes to
+SPL_TEXT_BASE on u-boot side. This is necessary to allow the ATF to jump
+directly to linux kernel (like in falcon mode) which requires a 2MiB aligned
+load address[2]. The current address ATF jumps to is 0x80080000 which is not
+2MiB aligned.
 
-Am Wed, Mar 19, 2025 at 07:33:27PM +0530 schrieb Neha Malcom Francis:
-> Add documentation for system RAM utilization in U-Boot.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
->  .gitattributes                        |   1 +
->  doc/develop/memory.rst                | 158 +++++++++++++++++++++++++-
->  doc/develop/pics/spl_after_reloc.svg  | Bin 0 -> 193600 bytes
->  doc/develop/pics/spl_before_reloc.svg | Bin 0 -> 224608 bytes
+Therefore in parallel to the ATF change, this patch set makes the corresponding
+changes to u-boot. To maintain backwards compatibility with older ATF builds
+(that still use older address of 0x80080000), the patch set also adds a
+jump-stub which modifies the execution as follows:
 
-Had a look at the first svg.  It's just some rectangles, arrows, and
-text.  This should _not_ be ~200k but really small not much more than
-20k!  Actually there are pixel images embedded in your grahipcs
-instead of just using text.  This is contradicting a vector image
-format, please invest some time for proper graphics instead of
-throwing bmp cloaked as svg to git as binary.
+Old ATF -> 0x80080000 -> 0x822000000 (Main domain SPL or kernel image)
+           jump stub    SPL_TEXT_BASE
 
->  4 files changed, 158 insertions(+), 1 deletion(-)
->  create mode 100644 doc/develop/pics/spl_after_reloc.svg
->  create mode 100644 doc/develop/pics/spl_before_reloc.svg
-> 
-> diff --git a/.gitattributes b/.gitattributes
-> index 7a7c4163560..735b13da278 100644
-> --- a/.gitattributes
-> +++ b/.gitattributes
-> @@ -6,3 +6,4 @@
->  *.ttf binary
->  *.gz binary
->  *.png binary
-> +*.svg binary
+With the following instructions loaded by the jump-stub:
+ADDR       | Instruction
+0x80080000 |   mov x15, CONFIG_SPL_TEXT_BASE (0x822000000)
+0x80080004 |   br x15
 
-nack, svg is by definition no binary format.
+Depends on:
+ * [PATCH v3] configs: set SPL_TEXT_BASE by default for k3 platforms
+   https://lore.kernel.org/u-boot/20250415095028.446254-1-anshuld@ti.com/
 
-Greets
-Alex
+[1]:
+https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/37447
+[2]:
+"The Image must be placed text_offset bytes from a 2MB aligned base
+address anywhere in usable system RAM and called there."
+- Documentation/arch/arm64/booting.rst (linux kernel)
+
+Anshul Dalal (4):
+  spl: Kconfig: k3: set SPL_TEXT_BASE to 0x82200000
+  mach-k3: add a jump stub to support older ATF builds
+  binman: k3: add jump-stub to tispl.bin
+  binman: k3: add jump-stub as loadable
+
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |  2 +-
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  4 +--
+ arch/arm/dts/k3-am625-sk-binman.dtsi          |  4 +--
+ .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  |  4 +--
+ arch/arm/dts/k3-am62a-phycore-som-binman.dtsi |  4 +--
+ arch/arm/dts/k3-am62a-sk-binman.dtsi          |  4 +--
+ arch/arm/dts/k3-am62p-sk-binman.dtsi          |  2 +-
+ arch/arm/dts/k3-am642-phycore-som-binman.dtsi |  8 ++---
+ arch/arm/dts/k3-am64x-binman.dtsi             |  8 ++---
+ arch/arm/dts/k3-am65-iot2050-boot-image.dtsi  |  2 +-
+ arch/arm/dts/k3-am65x-binman.dtsi             |  4 +--
+ arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi  |  2 +-
+ arch/arm/dts/k3-binman.dtsi                   | 31 +++++++++++++++++++
+ arch/arm/dts/k3-j7200-binman.dtsi             |  4 +--
+ .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   |  2 +-
+ arch/arm/dts/k3-j721e-binman.dtsi             |  4 +--
+ arch/arm/dts/k3-j721s2-binman.dtsi            |  4 +--
+ arch/arm/dts/k3-j722s-binman.dtsi             |  2 +-
+ arch/arm/dts/k3-j784s4-binman.dtsi            |  4 +--
+ arch/arm/mach-k3/Makefile                     |  7 +++++
+ arch/arm/mach-k3/jump_stub.S                  | 16 ++++++++++
+ common/spl/Kconfig                            |  2 +-
+ 22 files changed, 89 insertions(+), 35 deletions(-)
+ create mode 100644 arch/arm/mach-k3/jump_stub.S
+
+-- 
+2.49.0
+
