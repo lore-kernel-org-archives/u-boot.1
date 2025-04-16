@@ -4,73 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D6CFC369BD
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 12:52:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D22AC369C4
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 12:57:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 234E882B44;
-	Wed, 16 Apr 2025 14:52:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 69BF082BA2;
+	Wed, 16 Apr 2025 14:57:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="PICO5YlO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rFMsKBkE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA9F82CBC; Wed, 16 Apr 2025 11:06:30 +0200 (CEST)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [217.70.183.193])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECCD681F45
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 11:06:27 +0200 (CEST)
+ id A0FC782C96; Wed, 16 Apr 2025 14:56:59 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D5C4B82B5B
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 14:56:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 69CC5439E7;
- Wed, 16 Apr 2025 09:06:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1744794387;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YlqMSwMbX/dvhxeR8wMZuaTJI+BWCZkWzjXapSKMUNg=;
- b=PICO5YlOfaDDNyGSOt4oI8bOSLyptRmFzb7HkN1M8rnpUgnZuXoxwBdy78SyGRXz37Kh+F
- w5ve5m+Z3Zy5kchyC0TBX7U/WE6UlkvXBsxmkoZ2i1JUDTLKbT6wd/sT0iEnPVdRTcIIAR
- c6to2eYnEVod2NrhtdYXWn0eKRCT0sdoEQfJ0xuMaNVl+kvGQ1xAy7LRM7jMp+prlfBpWs
- DBqwfTOPWNjQWrbJKS+EREC89fqkbhdVy0RzNtVV4/JGWn6eRnHo2w2yOABlnOx3pyAPzp
- TgUKCZs2EZwDuzaPL1Qz/2nWgy+psaKUBeqpWUsZ/hNdCSicIgBvU+DEEB8Asg==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: Samuel Holland <samuel.holland@sifive.com>,  Svyatoslav Ryhel
- <clamor95@gmail.com>,  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- <u-boot@lists.denx.de>,  Ian Ray <ian.ray@gehealthcare.com>,  Michael
- Nazzareno Trimarchi <michael@amarulasolutions.com>,  Dario Binacchi
- <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
- Marek Vasut <marex@denx.de>,  Tom Rini <trini@konsulko.com>,  Simon Glass
- <sjg@chromium.org>,  Jaehoon Chung <jh80.chung@samsung.com>,  Lukasz
- Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,  Anatolij
- Gustschin <agust@denx.de>,  Fabio Estevm <festevam@gmail.com>,  Peng Fan
- <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>
-Subject: Re: [PATCH v6 05/12] power-domain: Add refcounting
-In-Reply-To: <c4b1e75d-6304-4bc5-b03c-546c4fe8b260@ti.com> (Neha Malcom
- Francis's message of "Wed, 16 Apr 2025 14:06:05 +0530")
-References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
- <20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com>
- <27af893c-9711-49f8-8aa8-89d7d84eab59@sifive.com>
- <c4b1e75d-6304-4bc5-b03c-546c4fe8b260@ti.com>
-User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Wed, 16 Apr 2025 11:06:25 +0200
-Message-ID: <87o6wwv5ke.fsf@bootlin.com>
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53GCumZo2659441
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 16 Apr 2025 07:56:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744808208;
+ bh=89zxXgy5d30nG2/8vs4jbqDKJjPV7gx6ou449/J35A0=;
+ h=From:To:CC:Subject:Date;
+ b=rFMsKBkEgJqdPx5bKbIJbsBfarMLPs5TwO1LAGGs4Cdh5rb9EkRNEDRAacs+/KGE3
+ 14/JTfGAJ5/i9YdtpRBnjmYC9eX2W76Ruer9x17VMCfdMvK2/wW3j+fZov0BEtaTM0
+ CfMgfWX3kd3X0/Xf1cOBVxMEUI/kWqwePL9hiSYo=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53GCumMh076119
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 16 Apr 2025 07:56:48 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Apr 2025 07:56:47 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Apr 2025 07:56:47 -0500
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.113])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53GCuiuE055204; 
+ Wed, 16 Apr 2025 07:56:44 -0500
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <joe.hershberger@ni.com>, <rfried.dev@gmail.com>,
+ <matthias.schiffer@ew.tq-group.com>, <richard.genoud@bootlin.com>,
+ <c-vankar@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH] net: ti: am65-cpsw-nuss: invoke phy_config() in driver's
+ .start callback
+Date: Wed, 16 Apr 2025 18:26:43 +0530
+Message-ID: <20250416125643.2234165-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvvdehleejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgefhjedtfeeigeduudekudejkedtiefhleelueeiueevheekvdeludehiedvfeenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghloheplhhotggrlhhhohhsthdpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeduledprhgtphhtthhopehnqdhfrhgrnhgtihhssehtihdrtghomhdprhgtphhtthhopehsrghmuhgvlhdrhhholhhlrghnugesshhifhhivhgvrdgtohhmpdhrtghpthhtoheptghlrghmohhrleehsehgmhgrihhlrdgtohhmpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrt
- ghpthhtohepihgrnhdrrhgrhiesghgvhhgvrghlthhhtggrrhgvrdgtohhmpdhrtghpthhtohepmhhitghhrggvlhesrghmrghruhhlrghsohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepuggrrhhiohdrsghinhgrtggthhhisegrmhgrrhhulhgrshholhhuthhiohhnshdrtghomh
-X-GND-Sasl: miquel.raynal@bootlin.com
-X-Mailman-Approved-At: Wed, 16 Apr 2025 14:52:03 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,43 +81,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Currently, the phy_config() API is invoked by the driver only once since it
+has been probed. While this works in general, it doesn't allow the driver
+to bring the PHY back to its default reset state. As a result, the driver
+might not be able to recover the PHY from a bad state. To address this,
+move phy_config() into the driver's start callback (am65_cpsw_start()).
+
+Apart from providing the means to recover the PHY in the event of failure,
+the implementation is in line with the idea of "reset and configure" that
+is already followed by am65_cpsw_start() when it comes to programming the
+CPSW MAC.
+
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
+
 Hello,
 
->>> -int power_domain_on(struct power_domain *power_domain)
->>> +int power_domain_on_lowlevel(struct power_domain *power_domain)
->>>  {
->>> +	struct power_domain_priv *priv =3D dev_get_uclass_priv(power_domain->=
-dev);
->>>  	struct power_domain_ops *ops =3D power_domain_dev_ops(power_domain->d=
-ev);
->>> +	int ret;
->>>=20=20
->>>  	debug("%s(power_domain=3D%p)\n", __func__, power_domain);
->>>=20=20
->>> -	return ops->on ? ops->on(power_domain) : 0;
->>> +	if (priv->on_count++ > 0)
->>> +		return -EALREADY;
->>=20
->> This change is broken for power domain providers with #power-domain-cell=
-s =3D <1>,
->> which can have multiple domains per provider device. There would need to=
- be a
->> separate reference count per domain, and currently the uclass doesn't kn=
-ow the
->> range of valid domain IDs.
->
-> I didn't see this reply earlier, would've saved some time debugging to
-> come to the same conclusion :) but yes this is the reason for
-> breaking.
+This patch is based on commit
+f892a7f397a Revert "Merge patch series "pxe: Precursor series for supporting read_all() in extlinux / PXE""
+of the next branch of U-Boot.
 
-That's indeed the reason, thanks a lot for figuring this out. I am
-looking for a solution. I can reproduce on imx8mp by enabling the two
-LCD interfaces, as they have a similar pattern as on k3 platform: a
-single power domain node and one cell for figuring out which PD to
-enable.
+Regards,
+Siddharth.
 
-The uclass does not save any data, so I don't have an immediate fix to
-propose. Let me dig a bit more into that and find a solution.
+ drivers/net/ti/am65-cpsw-nuss.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-Thanks,
-Miqu=C3=A8l
+diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+index 3c62fc0b428..9b69f36d04d 100644
+--- a/drivers/net/ti/am65-cpsw-nuss.c
++++ b/drivers/net/ti/am65-cpsw-nuss.c
+@@ -438,6 +438,12 @@ static int am65_cpsw_start(struct udevice *dev)
+ 		       port->port_sgmii_base + AM65_CPSW_SGMII_CONTROL_REG);
+ 	}
+ 
++	ret = phy_config(priv->phydev);
++	if (ret < 0) {
++		dev_err(dev, "phy_config failed: %d", ret);
++		goto err_dis_rx;
++	}
++
+ 	ret = phy_startup(priv->phydev);
+ 	if (ret) {
+ 		dev_err(dev, "phy_startup failed\n");
+@@ -639,9 +645,6 @@ static int am65_cpsw_phy_init(struct udevice *dev)
+ 	phydev->advertising = phydev->supported;
+ 
+ 	priv->phydev = phydev;
+-	ret = phy_config(phydev);
+-	if (ret < 0)
+-		dev_err(dev, "phy_config() failed: %d", ret);
+ 
+ 	return ret;
+ }
+-- 
+2.34.1
+
