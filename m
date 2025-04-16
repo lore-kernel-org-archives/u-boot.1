@@ -4,77 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF629C369BA
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 08:17:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0625C369B1
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 08:25:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA06E82CE7;
-	Wed, 16 Apr 2025 10:17:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 387F982D17;
+	Wed, 16 Apr 2025 10:25:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Z73xpj1X";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="N5OeADY3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54D7782CF6; Wed, 16 Apr 2025 10:17:42 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B495A81E72
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 10:17:39 +0200 (CEST)
+ id 0D3B882D1B; Wed, 16 Apr 2025 10:25:39 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 89DF582CE7
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 10:25:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53G8HYJj276132
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 03:17:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744791454;
- bh=CVbZSIcv/wluRV2ZfQp5vG6khwYfNmAJNEdllUEdgik=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Z73xpj1XiIR7qMc0DPdN+GcdX5TH9neGHLK5KtkmJc8sCBH3xUbQcfhpN9RvEa60O
- P8uQmrw8hDHs8FXK2d2hn1vkrc8qZTzRSTpPpQrWOqMlfZk3zQuFEcSuXb8LsLoqOH
- Hz1ZBsPH4tqezAioxm7Ukv17GRT5/wKttjqP2NcY=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53G8HY7H023267
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 16 Apr 2025 03:17:34 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
- Apr 2025 03:17:33 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 16 Apr 2025 03:17:33 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53G8HUI0121047;
- Wed, 16 Apr 2025 03:17:31 -0500
-Message-ID: <cecd2c70-92bf-4e7f-a3b5-b4fde4635044@ti.com>
-Date: Wed, 16 Apr 2025 13:47:30 +0530
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id CE1BF6115F;
+ Wed, 16 Apr 2025 08:25:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 989EFC4CEE2;
+ Wed, 16 Apr 2025 08:25:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1744791935;
+ bh=SUxECwTV2YtlGw3pidMjEcOy6R1oBw9fOX9Lxec/QL8=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=N5OeADY3cWFRNcJSpeCBZhN+kv9UMDELTP8y63qcNlPzBv1HMqO1xHlDJcBky2Gk2
+ 3Da/2zaN3AQw8ybwBTr88DRH98cTXQjwJB1wC5I46Sed/dOonl7495H8a3EDvwb4Uq
+ SwVwf4ZFeQeJ/HsZuhVasm7YVcoMnwYNTvLCSwzsRZIOSHrBKF8D5+jQt+ClrlMILT
+ Am35NPUCB1AvWBrlcKpU36oYB1b8p6s0P5cFrp1mT7o1gZiUuBVpglBSKSSklsPeBu
+ RR5n4RPhzFCTU8KsQd5Y0BOm/1apt4PUKEauyHHuKGQ+KwjcFi0Z8OiMhAoPzODdYi
+ Yfi822SOtcz0g==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] tools/make_pip: Use virtualenv when invoking pip
+In-Reply-To: <20250415175944.GA650630@bill-the-cat>
+References: <20250409-ubuntu-24-04-v1-1-056728207b6c@kernel.org>
+ <20250415175944.GA650630@bill-the-cat>
+Date: Wed, 16 Apr 2025 10:25:32 +0200
+Message-ID: <87ikn44io3.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
- properties to supernodes
-To: Moteen Shah <m-shah@ti.com>, Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <alpernebiyasak@gmail.com>, 
- <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
- <vigneshr@ti.com>, <a-chavda@ti.com>
-References: <20250327080642.2269856-1-m-shah@ti.com>
- <20250327080642.2269856-2-m-shah@ti.com>
- <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
- <3d2c894b-11f1-462c-b9f5-8d3f45dc0b61@ti.com>
- <CAFLszThs5W+=tFpUsCE0Qi5mvuymtsHF57jeLpV9KUQfGXBXnA@mail.gmail.com>
- <3287617e-3b6a-4387-90d4-7bbfc810f9c7@ti.com>
- <ec117e91-7b13-4ca9-8509-3075d7071427@ti.com>
- <CAFLszTjD+Aofu8jLMyX4FPxatmt_SaRC8amf7rziNmNKECFrGQ@mail.gmail.com>
- <f39453a5-fdaa-4fab-8230-0d8ddcacb040@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <f39453a5-fdaa-4fab-8230-0d8ddcacb040@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,71 +68,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Moteen
+Hi Tom,
 
-On 4/16/2025 1:23 PM, Moteen Shah wrote:
-> Hey Simon,
->
-> I missed some essential build instructions I should have given to you, 
-> apologies.
+On mar., avril 15, 2025 at 11:59, Tom Rini <trini@konsulko.com> wrote:
 
-I assume our u-boot public document should capture this information,
+> On Wed, Apr 09, 2025 at 09:46:34AM +0200, Mattijs Korpershoek wrote:
+>
+>> Recent Ubuntu versions (24.04+) disallow pip by default when
+>> installing packages. The recommended approach is to use a virtualenv
+>> instead.
+>> Because of this, "make pip" is failing on such versions.
+>> 
+>> To prepare CI container migration to Ubuntu 24.04, use a virtualenv
+>> in the make_pip script.
+>> 
+>> Note: This has been reported on [1]
+>> 
+>> [1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/37
+>> 
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>> Reviewed-by: Tom Rini <trini@konsulko.com>
+>> ---
+>> This has been tested in docker on ubuntu:24.04 after running:
+>> $ apt install python3 python3-virtualenv
+>> 
+>> with:
+>> $ ./scripts/make_pip.sh u_boot_pylib "-n"
+>> 
+>> And shows:
+>> Successfully built u_boot_pylib-0.0.6.tar.gz and u_boot_pylib-0.0.6-py3-none-any.whl
+>> 
+>> Also tested with "$ make pip".
+>> ---
+>>  scripts/make_pip.sh | 6 ++++++
+>>  1 file changed, 6 insertions(+)
+>
+> So, this ends up failing with Ubuntu 22.04 thusly:
+> https://source.denx.de/u-boot/u-boot/-/jobs/1103567
 
-It not, then please fix
+Argh, sorry I did not test that.
 
+>
+> And in short, I think your original plan to use venv not virtualenv is
+> correct, sorry for the noise. I'll post something to install
+> python3-venv to our container shortly and switch to venv not virtualenv
+> as that seems to be the long term best answer.
+
+Ok, will send a v2 to use venv instead.
 
 >
-> 1. Clone ti-linux-firmware: 
-> https://git.ti.com/git/processor-firmware/ti-linux-firmware.git and 
-> switch to ti-linux-firmware-next branch
-> 2. Clone U-Boot: https://github.com/Jamm02/U-Boot-patchwork
-> 3. Set variables :
->         $ export CC64=aarch64-linux-gnu-
->         $ export LNX_FW_PATH=path/to/ti-linux-firmware
->         $ export UBOOT_CFG_CORTEXA=j7200_evm_a72_defconfig
->
-> 4. Inside U-Boot source:
->         $ touch bl31.bin
->         $ touch tee-raw.bin
->         $ make $UBOOT_CFG_CORTEXA
->         $ make CROSS_COMPILE=$CC64 BINMAN_INDIRS=$LNX_FW_PATH \
->                      BL31=bl31.bin \
->                      TEE=tee-raw.bin
->
-> Let me know if this works.
->
-> Regards,
-> Moteen
->
-> On 15/04/25 00:18, Simon Glass wrote:
->> Hi Moteen,
->>
->> On Thu, 10 Apr 2025 at 05:39, Moteen Shah <m-shah@ti.com> wrote:
->>> Hey Simon,
->>>
->>> Is the problem discussed in the thread an actual bug or am I missing
->>> something in the implementation?
->>>
->>> Regards,
->>> Moteen
->>>
->>> On 03/04/25 11:51, Moteen Shah wrote:
->>>> Hey Simon,
->>>>
->>>> On 03/04/25 00:52, Simon Glass wrote:
->>>>> Hi Moteen,
->>>>>
->>>>> On Wed, 2 Apr 2025 at 22:01, Moteen Shah <m-shah@ti.com> wrote:
->>>>>> Hey Simon,
->>>>>>
->>>>>> On 29/03/25 05:17, Simon Glass wrote:
->>>>>>> Hi Moteen,
->>>>>>>
->>>>>>> On Thu, 27 Mar 2025 at 08:06, Moteen Shah <m-shah@ti.com> wrote:
->>>>>>>> Add a function to scan through all the nodes in the device-tree
->>>>>>>> recusively for bootph-* property. If found, propagate it to all
->>>>>>>> of its parent nodes up the hierarchy.
->>>>>>>>
->>>>>>>> Signed-off-by: Moteen Shah <m-shah@ti.com>
->>>>>>>> ---
->>>>>>>> [..]
+> -- 
+> Tom
