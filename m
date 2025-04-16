@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C797DC369BD
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 11:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEBBFC369BD
+	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 11:45:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33BBC82CD6;
-	Wed, 16 Apr 2025 13:44:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4758482DA1;
+	Wed, 16 Apr 2025 13:45:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="dDy2O+NP";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="EI7ZfiSk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BBF982D17; Wed, 16 Apr 2025 13:44:18 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id E83F082DF2; Wed, 16 Apr 2025 13:45:38 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C63081F45
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 13:44:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB97581F45
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 13:45:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chf.fritz@googlemail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-39c14016868so6148772f8f.1
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 04:44:16 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-39c1ef4ae3aso374530f8f.1
+ for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 04:45:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1744803856; x=1745408656; darn=lists.denx.de; 
- h=mime-version:user-agent:content-transfer-encoding:date:cc:to
- :reply-to:from:subject:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=sUbPesgil7r2bEyVl4wGVhR8zmoTPEt85om+FE7i9XE=;
- b=dDy2O+NPzLqSHT91auZSe5UJtZaSFsK17d7XTRgUC2r1qK+75ax83rUJtXPDdiaf5a
- 8A7gi0CUev0t/aI6IDs3budrN3ODp2Je5j9nBSAfMVe37p9c6Clwteg8+/OPxZgq01JE
- 9iWsC6rAMlHRt+RgftIPZXi+iELLdjzT04V4ORXrlZE2iZtTTg3SjOsgP5096oH7AHZG
- n+yGRXWmp2FKaGxPQWUGH2Se3/nilwCqiPBWjr+4CpNoUwQ1M9KRYtSVVSnSdzLA4mhz
- eX1mcMMgXnd+YlV3yTDwktRS37IN0HHKRvLIjDweSGZXBa6QlF3SvdsWRQy7ws5l+5HH
- ij0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744803856; x=1745408656;
- h=mime-version:user-agent:content-transfer-encoding:date:cc:to
- :reply-to:from:subject:message-id:x-gm-message-state:from:to:cc
+ d=googlemail.com; s=20230601; t=1744803936; x=1745408736; darn=lists.denx.de; 
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:reply-to:from:subject:message-id:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sUbPesgil7r2bEyVl4wGVhR8zmoTPEt85om+FE7i9XE=;
- b=K1O9BTy++o+j38274jPA/KMouNPn3etXvb+CORocKa84fPPesaPUi3OUDYAVkY1rM5
- YBwHq+0YUNkbJ3+1MuYtlHx2wvMp8fIvkzec017LdISc85xIC5A+9xX3/eicBUEwcOHZ
- exKUyEIZR/Cu+zsIoCLrF8vztrjUbSgsBIIToH87/csnwGpYtOOUIac9D9n/3LHO/0K6
- yuFCmIOXEhS5E5ecoGXtBBnrf0JXCXsDWT3GV45gtijavSAv8Oagv00NxqDl9RScg2ob
- l6aBvjCR1kSHGKkDUO4X3VIS3ve85X+MRNfAzwcqfCibTCh5rz+YCb+vwBjdVinIT0B8
- gIUQ==
+ bh=AjbcDiZaTSk61OeJzZ2YpS1Fi8UbohnHwB6/eFidNsQ=;
+ b=EI7ZfiSkVg7BUTgIRUMi31W3CXx119sMpkioo6WrqE9lvsnV2d9qHTr1YXlaPim3HU
+ R55D7SSgY+Oe1H6+i4O2IOQP90nYqfXqIo4jxbtWfMHyVoUzcDtyOLquYepirUsvfiJM
+ b2vYeGefV0TmPl0jnIXqHgbVHZE4uOAOKuMFWWlop0R/XLiglKjJtgNzs1vYLPh3rpD0
+ 6nRQd+eiwLeWmEaRUO4Gdc7LGkbGdKuV9hxN0oGjyG9Ugwr39Y0bJ7M2FMkuMtsuYPzs
+ FjG8efFQVU63zahKWFUVg4pB33+ku0PMtp2JAziGXGCd/FVVVqJ9Dj8K8WMO8wJiB0px
+ Tp1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744803936; x=1745408736;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:reply-to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=AjbcDiZaTSk61OeJzZ2YpS1Fi8UbohnHwB6/eFidNsQ=;
+ b=tTRRoP7kIfCYxhBL/ysfRY2bVv7/6JQ6QN8oFwbNXg8LyDR4180vVvgXrrZfPP7Fyi
+ faYO0yp3dJk64Hx0najkTb3aGrwoXOUWgzLvdj1q6Rtj0pzxQTl/RST0SJxZpPaDug+I
+ QkBW3NQ2rJmi6zBKIvmg90Dloys25LBbEtZtDbrzWXFNfUB3Tp0Pk2gMdhAHQHb/ZGbZ
+ Y9NMENYlxNLV737mhzAvAKvT5HtZ51zh8Vd+cXAP29Dp1gpxswc9kLEZD9024fP+Wiyx
+ 77ItHQHNDVLamcuGqMGJuhG9E+GKhXxUlIePW4tTdD4wVguT0uhmpIs8+sXFn8i0d3sZ
+ YGwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUiAfKEHC+tmlaK1KoU0MTfwpdbxH1lteF5YEb1pUkep5vW1o+KFW425+KNxVkZpeM6OAkHykw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUOjVq+9IJn6gIN9FMoPUTVpziNvp4gZku6CypWtO1PWCmD7OA
- Mo4iMt+Blm6VuYA5CCswwehjBZmJfx066b7LVZGiFZinD5c/TI1h
-X-Gm-Gg: ASbGncsusAHvAZonqMOEwKa8xR30ZZ1UCHuSkfHyy6TK3HEh9Ni+ugpBE5yhIISjibG
- DSylvsOzALMp5JkMqZSGeAKhlEgNEGgqVA5SfuSPlRHQEuXv+2SprRSR04akfbeDeTaDKhKYHE+
- ji0ZhvnSkUi9n4024d+zLJhYNn5MuohDzB4/r1LBuVsNzT5sU1RsAHCiQl6fFOupJ3kpXoQIWze
- ybKpBW8K5PFFWv0kGkQ+Le6kVH60tpGcLWttiDbpXR8YNK2bZJ18qrvnYZvTKu71+S0T7ufmD17
- e8s5t3XrmFtPzUQABpm0+y9VlNaEGRWHbZMCh2FSrM8YGJ1qZ1FPwTw=
-X-Google-Smtp-Source: AGHT+IGzAWXLuEMmBaXDzbsoR/jMdPbk8hI2qEftkh7VdZRQQrXAC+3EjEAiN10iC23QUlylY1ZjFA==
-X-Received: by 2002:a5d:6485:0:b0:390:eb50:37c3 with SMTP id
- ffacd0b85a97d-39ee5b37b83mr1646513f8f.27.1744803855386; 
- Wed, 16 Apr 2025 04:44:15 -0700 (PDT)
+ AJvYcCWTg1bUUJ7a4QBVUsc8HiZ9SaZBWur4LKI1xyhYC3CggqeTr3F/GbZRjaZWkLByIXQ4thq7umc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXBl/Nnt9t+MT9x63HjwQ9aku0Xzk5iOrRumrbJ3/X/PMmNzAf
+ gZkA+sVWxXa6s3nGZWgfmbSF1HPy0D56sEvtHdNrxz3gyJlCL7Eo
+X-Gm-Gg: ASbGncu6evEkXlNViwPBpuwHqwlgIQOyOdjFH+g4HPJBbNp9Ag2g4EbjGiU3wS1WOfu
+ c7JBhoZWMOEiP1PPVb1M19swxr2jTTwz8c3jQdkGQSLAamcdjd5cgeeMyxoglFX9Zr6I+NswhRI
+ n51cYP5/0nZen7NZ69r/ibcKKrTOImKhZO0S8rucbKdFNlhKK/mCrC0aEaw3zyalOYw8Ih1xmDY
+ JcKhYKMoUIE/PwABQY/JpPokB8V14KhsktuOmKYPOO/GOzBYyHKIVNMkP+Pv35nuJWM8KjhpAl+
+ IU6huTMuir8fPjfX4ge/IGbyGwTVM5v2BUA6op4PuBBz/Zqn/tMyBXvKcwHFOet+yQ==
+X-Google-Smtp-Source: AGHT+IHmgWdTXZKVFFmKLrwSu51gXCNVlRAoTZBz6rz1WIoDicUXdCBr8BYkfpYupHZDCiq2i4XRfg==
+X-Received: by 2002:a05:6000:220c:b0:390:f116:d220 with SMTP id
+ ffacd0b85a97d-39ee5ea43f5mr1350212f8f.17.1744803936295; 
+ Wed, 16 Apr 2025 04:45:36 -0700 (PDT)
 Received: from mars.fritz.box ([2a02:8071:7130:82c0:da34:bd1d:ae27:5be6])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4405b4f3df8sm18894225e9.24.2025.04.16.04.44.14
+ ffacd0b85a97d-39eae96c684sm17070813f8f.33.2025.04.16.04.45.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Apr 2025 04:44:14 -0700 (PDT)
-Message-ID: <13931598d2714780f91ce96d054664f304de7c1f.camel@googlemail.com>
-Subject: [PATCH 1/2] rockchip: rk3288: grf: Unify speed/flowctrl fields for
- clarity
+ Wed, 16 Apr 2025 04:45:35 -0700 (PDT)
+Message-ID: <b8247c8953823fc1b61ec7447b37b9844d6c3db3.camel@googlemail.com>
+Subject: [PATCH 2/2] net: gmac_rockchip: Add RMII support for rk3288
 From: Christoph Fritz <chf.fritz@googlemail.com>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich
  <philipp.tomsich@vrull.eu>,  Fabio Estevam <festevam@gmail.com>
 Cc: Kever Yang <kever.yang@rock-chips.com>, Joe Hershberger
  <joe.hershberger@ni.com>, RamonFried <rfried.dev@gmail.com>, u-boot
  <u-boot@lists.denx.de>
-Date: Wed, 16 Apr 2025 13:44:13 +0200
+Date: Wed, 16 Apr 2025 13:45:35 +0200
+In-Reply-To: <13931598d2714780f91ce96d054664f304de7c1f.camel@googlemail.com>
+References: <13931598d2714780f91ce96d054664f304de7c1f.camel@googlemail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.46.4-2 
@@ -101,51 +103,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update GMAC speed and flow control fields in GRF_SOC_CON1 to use
-RK3288_GMAC_* prefix, ensuring a consistent naming convention. It also
-shifts each mask/bit definition to match the actual hardware bits, which
-makes future usage easier.
+Add RMII-specific handling to rk3288_gmac_fix_mac_speed() so that it
+properly sets the RMII clock (2.5=E2=80=AFMHz vs. 25=E2=80=AFMHz) and speed=
+ bits
+(10=E2=80=AFMbps vs. 100=E2=80=AFMbps). Also define a new rk3288_gmac_set_t=
+o_rmii()
+function to set the PHY interface field and RMII_MODE bit.
 
 Signed-off-by: Christoph Fritz <chf.fritz@googlemail.com>
 ---
- arch/arm/include/asm/arch-rockchip/grf_rk3288.h | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ drivers/net/gmac_rockchip.c | 69 ++++++++++++++++++++++++++++---------
+ 1 file changed, 53 insertions(+), 16 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/grf_rk3288.h b/arch/arm/inc=
-lude/asm/arch-rockchip/grf_rk3288.h
-index 894d3a40b09..0111b3a0ded 100644
---- a/arch/arm/include/asm/arch-rockchip/grf_rk3288.h
-+++ b/arch/arm/include/asm/arch-rockchip/grf_rk3288.h
-@@ -934,21 +934,21 @@ enum {
- 	RK3288_RMII_CLK_SEL_2_5M  =3D (0 << RK3288_RMII_CLK_SEL_SHIFT),
- 	RK3288_RMII_CLK_SEL_25M   =3D (1 << RK3288_RMII_CLK_SEL_SHIFT),
+diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
+index 8cfeeffe95b..c8cfe7448d4 100644
+--- a/drivers/net/gmac_rockchip.c
++++ b/drivers/net/gmac_rockchip.c
+@@ -151,26 +151,51 @@ static int rk3228_gmac_fix_mac_speed(struct dw_eth_de=
+v *priv)
 =20
--	GMAC_SPEED_SHIFT	=3D 0xa,
--	GMAC_SPEED_MASK		=3D 1,
--	GMAC_SPEED_10M		=3D 0,
--	GMAC_SPEED_100M,
-+	RK3288_GMAC_SPEED_SHIFT	=3D 0xa,
-+	RK3288_GMAC_SPEED_MASK	=3D (1 << RK3288_GMAC_SPEED_SHIFT),
-+	RK3288_GMAC_SPEED_10M	=3D (0 << RK3288_GMAC_SPEED_SHIFT),
-+	RK3288_GMAC_SPEED_100M	=3D (1 << RK3288_GMAC_SPEED_SHIFT),
+ static int rk3288_gmac_fix_mac_speed(struct dw_eth_dev *priv)
+ {
++	struct dw_eth_pdata *dw_pdata =3D dev_get_plat(priv->dev);
++	struct eth_pdata *eth_pdata =3D &dw_pdata->eth_pdata;
+ 	struct rk3288_grf *grf;
++	grf =3D syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+ 	int clk;
 =20
--	GMAC_FLOWCTRL_SHIFT	=3D 0x9,
--	GMAC_FLOWCTRL_MASK	=3D 1,
-+	RK3288_GMAC_FLOWCTRL_SHIFT =3D 0x9,
-+	RK3288_GMAC_FLOWCTRL_MASK =3D (1 << RK3288_GMAC_FLOWCTRL_SHIFT),
+-	switch (priv->phydev->speed) {
+-	case 10:
+-		clk =3D RK3288_GMAC_CLK_SEL_2_5M;
+-		break;
+-	case 100:
+-		clk =3D RK3288_GMAC_CLK_SEL_25M;
+-		break;
+-	case 1000:
+-		clk =3D RK3288_GMAC_CLK_SEL_125M;
+-		break;
+-	default:
+-		debug("Unknown phy speed: %d\n", priv->phydev->speed);
+-		return -EINVAL;
+-	}
++	if (eth_pdata->phy_interface =3D=3D PHY_INTERFACE_MODE_RMII) {
++		switch (priv->phydev->speed) {
++		case 10:
++			rk_clrsetreg(&grf->soc_con1,
++				     RK3288_RMII_CLK_SEL_MASK |
++				     RK3288_GMAC_SPEED_MASK,
++				     RK3288_RMII_CLK_SEL_2_5M |
++				     RK3288_GMAC_SPEED_10M);
++			break;
++		case 100:
++			rk_clrsetreg(&grf->soc_con1,
++				     RK3288_RMII_CLK_SEL_MASK |
++				     RK3288_GMAC_SPEED_MASK,
++				     RK3288_RMII_CLK_SEL_25M |
++				     RK3288_GMAC_SPEED_100M);
++			break;
++		default:
++			debug("Unknown phy speed: %d\n", priv->phydev->speed);
++			return -EINVAL;
++		}
++	} else {
++		switch (priv->phydev->speed) {
++		case 10:
++			clk =3D RK3288_GMAC_CLK_SEL_2_5M;
++			break;
++		case 100:
++			clk =3D RK3288_GMAC_CLK_SEL_25M;
++			break;
++		case 1000:
++			clk =3D RK3288_GMAC_CLK_SEL_125M;
++			break;
++
++		default:
++			debug("Unknown phy speed: %d\n", priv->phydev->speed);
++			return -EINVAL;
++		}
 =20
- 	RK3288_GMAC_PHY_INTF_SEL_SHIFT =3D 6,
- 	RK3288_GMAC_PHY_INTF_SEL_MASK  =3D (7 << RK3288_GMAC_PHY_INTF_SEL_SHIFT),
- 	RK3288_GMAC_PHY_INTF_SEL_RGMII =3D (1 << RK3288_GMAC_PHY_INTF_SEL_SHIFT),
- 	RK3288_GMAC_PHY_INTF_SEL_RMII  =3D (4 << RK3288_GMAC_PHY_INTF_SEL_SHIFT),
+-	grf =3D syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+-	rk_clrsetreg(&grf->soc_con1, RK3288_GMAC_CLK_SEL_MASK, clk);
++		rk_clrsetreg(&grf->soc_con1, RK3288_GMAC_CLK_SEL_MASK, clk);
++	}
 =20
--	HOST_REMAP_SHIFT	=3D 0x5,
--	HOST_REMAP_MASK		=3D 1
-+	RK3288_HOST_REMAP_SHIFT	=3D 0x5,
-+	RK3288_HOST_REMAP_MASK	=3D (1 << RK3288_HOST_REMAP_SHIFT),
+ 	return 0;
+ }
+@@ -401,6 +426,17 @@ static void rk3228_gmac_set_to_rgmii(struct gmac_rockc=
+hip_plat *pdata)
+ 		     pdata->tx_delay << RK3228_CLK_TX_DL_CFG_GMAC_SHIFT);
+ }
+=20
++static void rk3288_gmac_set_to_rmii(struct gmac_rockchip_plat *pdata)
++{
++	struct rk3288_grf *grf;
++
++	grf =3D syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
++
++	rk_clrsetreg(&grf->soc_con1,
++		     RK3288_GMAC_PHY_INTF_SEL_MASK | RK3288_RMII_MODE_MASK,
++		     RK3288_GMAC_PHY_INTF_SEL_RMII | RK3288_RMII_MODE);
++}
++
+ static void rk3288_gmac_set_to_rgmii(struct gmac_rockchip_plat *pdata)
+ {
+ 	struct rk3288_grf *grf;
+@@ -703,6 +739,7 @@ const struct rk_gmac_ops rk3228_gmac_ops =3D {
+ const struct rk_gmac_ops rk3288_gmac_ops =3D {
+ 	.fix_mac_speed =3D rk3288_gmac_fix_mac_speed,
+ 	.set_to_rgmii =3D rk3288_gmac_set_to_rgmii,
++	.set_to_rmii =3D rk3288_gmac_set_to_rmii,
  };
 =20
- /* GRF_SOC_CON2 */
+ const struct rk_gmac_ops rk3308_gmac_ops =3D {
 --=20
 2.39.5
 
