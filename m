@@ -4,68 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97144C369B2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 14:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2FFAC369B2
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 14:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06CE8830C0;
-	Thu, 17 Apr 2025 16:45:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E89AF82AB1;
+	Thu, 17 Apr 2025 16:58:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1744901144;
-	bh=zZKHqwJqdbWlaG3TChe8lRwnofUpYCvJehw5xzT7tnw=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=NqP0EavkZlVhMxIfVqiJj0K+kD24Wo+Cta1JrbAN2HI4GUaT2MfqyDk+jqRSzx4H5
-	 sH8sdnQtBqLpTQd6gT4o7ZGZz90kC1XVSnpTSrmjASfFXZTcnsRlNpA9AF5nhJZAtm
-	 tcOVaiFqOD7qCRPi5HtloZwpzotLrx99Vzg4BLAIHqArhZ6N8HEh7PcH0zl1Bz47Bf
-	 rVkRV7vFbh2bG/b21/vLRKdAj8AyN6BKKicLwefk7feOYf1cXeF5HMNKkniQB4SJul
-	 SP/jZP9MKPmQ6mJDJyKNCarxDzEfn3a4UjAa+a8rtyvHF8kCl91uF4TfVbajHzwyVO
-	 j3z+Ixeak3EKw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Fv4vx+Po";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC1A5830B3; Thu, 17 Apr 2025 16:45:42 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 77FDF82B7C; Thu, 17 Apr 2025 16:58:50 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADA0282D21
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 16:45:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A52181F45
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 16:58:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="KaQGJtrI"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DED061039EF33; 
- Thu, 17 Apr 2025 16:45:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1744901139;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=zZKHqwJqdbWlaG3TChe8lRwnofUpYCvJehw5xzT7tnw=;
- b=KaQGJtrIp62NwnO32sN43MzNGmn2ZtiaYIWRewlQt/9sJWAJxjYCr4PnfAI2PaDeZynseu
- RoBhTNHsoQmLcyEfziP5ROaXNDEjFboA5ziWFmnmEqSueG8K/9xHhv5ZHsz2PrAGKz+//l
- apHGWJHbZfnt4bydlt6xh3Oyjn9iJfVtIr38/B/Av8EHcBtb0WYQ0BVtQoesb5a687TvLb
- Pf/BwbTe8obF/KPSRDg1v/QyD+UafCYJL0Cz2nFxKBkylUizwozGsZE5Nu7DHkne535wSJ
- zL73ZeC7qTiPx95beNqib152haj8oMqYEe14ga2p3X2MquBdF9ECqRcetFbmGA==
-Message-ID: <475e2654-715a-0139-7cc5-734a3457db9b@denx.de>
-Date: Thu, 17 Apr 2025 16:46:13 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 7D6B54A179;
+ Thu, 17 Apr 2025 14:58:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE8DAC4CEEA;
+ Thu, 17 Apr 2025 14:58:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1744901925;
+ bh=gQdL01t68RbFTnNhadpDsSbQ5Z36CDgR9ydHhU7lXJ8=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=Fv4vx+Pom1diU9HPekR9Qa2XlewOuaxdSVzMrlq3yoge0B6tnNCNlGy5ErIi9ywRq
+ +RUJn+M44IzBgmBDKZyQbyPZ2Zj3hlS+sIVdNh4A+parUc+USvRSiuK87/exs8FZLW
+ XWkpfJQJ1eSwPx/tin8EnOUSm4eeS9jUejolzqxpFhAE7L0BftvEbjinpW53nZyN6o
+ oAOjrjWZUUtTgepcyIDW8ZvwpROeouQ/LC4cgF/pSKlf4ZVRG6/zGRQ+cq+QrrMh0n
+ iSvsROLa4QC5nB1Fn2J4r4J3qfebH+YIsMYmQJhat13LGOLR15go5Hdi+bqCA1IJsP
+ 8nAR14bDpfgQA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>,
+ Dmitrii Merkurev <dimorinny@google.com>
+Subject: Re: [PATCH RFT v2 0/3] fastboot: add support for generic block
+ flashing
+In-Reply-To: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
+References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
+Date: Thu, 17 Apr 2025 16:58:41 +0200
+Message-ID: <87y0vy7s2m.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: imx8mp: pci enumeration fails with current HEAD
-Content-Language: en-US
-From: Heiko Schocher <hs@denx.de>
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Fabio Estevam <festevam@denx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <c533393a-ca65-49a4-55a5-77bcb3cf589d@denx.de>
-In-Reply-To: <c533393a-ca65-49a4-55a5-77bcb3cf589d@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,148 +65,96 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Miquel,
+Hey Neil,
 
-On 17.04.25 16:37, Heiko Schocher wrote:
-> Hi Miquel,
-> 
-> I have here an imx8mp based board for which I just prepare mainlining.
-> 
-> pci enumeration works fine with U-Boot 2025.04
-> 
-> u-boot=> pci enum
-> PCIE-0: Link up (Gen1-x1, Bus0)
-> u-boot=>
-> 
-> and tftp through the ethernet interface works fine.
-> 
-> Using current HEAD
-> 
-> * 5b4ae0f3f04 - (origin/master, origin/HEAD) mailmap: update my name and email (vor 2 Tagen) <Casey 
-> Connolly>
-> 
-> It breaks with:
-> 
-> u-boot=> pci enum
-> nxp_imx8_pcie_phy pcie-phy@32f00000: PHY: Failed to power on pcie-phy@32f00000: -110.
-> pcie_dw_imx pcie@33800000: failed to power on PHY
-> u-boot=>
-> 
-> git bisect dropped your patch:
-> 
-> 197376fbf300e92afa0a1583815d9c9eb52d613a is the first bad commit
-> commit 197376fbf300e92afa0a1583815d9c9eb52d613a
-> Author: Miquel Raynal <miquel.raynal@bootlin.com>
-> Date:   Thu Apr 3 09:39:05 2025 +0200
-> 
->      power-domain: Add refcounting
-> 
->      It is very surprising that such an uclass, specifically designed to
->      handle resources that may be shared by different devices, is not keeping
->      the count of the number of times a power domain has been
->      enabled/disabled to avoid shutting it down unexpectedly or disabling it
->      several times.
-> 
->      Doing this causes troubles on eg. i.MX8MP because disabling power
->      domains can be done in recursive loops were the same power domain
->      disabled up to 4 times in a row. PGCs seem to have tight FSM internal
->      timings to respect and it is easy to produce a race condition that puts
->      the power domains in an unstable state, leading to ADB400 errors and
->      later crashes in Linux.
-> 
->      CI tests using power domains are slightly updated to make sure the count
->      of on/off calls is even and the results match what we *now* expect.
-> 
->      As we do not want to break existing users while stile getting
->      interesting error codes, the implementation is split between:
->      - a low-level helper reporting error codes if the requested transition
->        could not be operated,
->      - a higher-level helper ignoring the "non error" codes, like EALREADY and
->        EBUSY.
-> 
->      Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> 
-> 
-> reverting this patch, and it works again fine for me!
-> 
-> Do you have a imx8mp based hardware with pci?
-> 
-> Can you (or anyone else with an imx8mp based hardware with pci) approve
-> this on a similiar HW?
-> 
-> I try to dig into it, but may you have a fast idea!
-> 
-> Okay, thought about it ... it tries to power on "blk-ctrl@32f10000"
-> driver:/drivers/power/domain/imx8mp-hsiomix.c
-> 
-> imx8mp.dtsi:
->                          hsio_blk_ctrl: blk-ctrl@32f10000 {
->                                  compatible = "fsl,imx8mp-hsio-blk-ctrl", "syscon";
-> 
-> which has several different power domains ... and your patch prevents to
-> enable more than one of them ... adding some debugs shows:
-> 
-> u-boot=> pci enum
-> [...]
-> power_domain_on_lowlevel(power_domain=00000000fe5942f8) blk-ctrl@32f10000 priv->on_count: 0
-> power_domain_on_lowlevel(power_domain=00000000fe5942f8) blk-ctrl@32f10000 power_domain->id: 4
-> 
-> Here pwoer domain id
-> 
-> #define IMX8MP_HSIOBLK_PD_PCIE_PHY                      4
-> 
-> gets enabled and on_count increases...
-> 
-> imx8mp_hsiomix_set: ------------ power_domain->id: 4 IMX8MP_HSIOBLK_PD_PCIE: 3 4
-> power_domain_on_lowlevel(power_domain=00000000fe5d2408) power-domain@17 priv->on_count: 0
-> power_domain_on_lowlevel(power_domain=00000000fe5d2408) power-domain@17 power_domain->id: 0
-> power_domain_on_lowlevel: ret: 0
-> power_domain_on_lowlevel(power_domain=00000000fe5d2480) power-domain@1 priv->on_count: 0
-> power_domain_on_lowlevel(power_domain=00000000fe5d2480) power-domain@1 power_domain->id: 0
-> power_domain_on_lowlevel: ret: 0
-> imx8mp_hsiomix_set: ------------ power_domain->id: 4 IMX8MP_HSIOBLK_PD_PCIE: 3 4 END OKAY
-> power_domain_on_lowlevel: ret: 0
-> power_domain_get_by_index(dev=00000000fe5b2410, power_domain=00000000fe594458)
-> power_domain_on_lowlevel(power_domain=00000000fe594458) blk-ctrl@32f10000 priv->on_count: 1
-> power_domain_on_lowlevel(power_domain=00000000fe594458) blk-ctrl@32f10000 power_domain->id: 3
+Thank you for the series.
 
-okay, the "power_domain=00000000fe594458" for the IMX8MP_HSIOBLK_PD_PCIE case
-is different as the one for the IMX8MP_HSIOBLK_PD_PCIE_PHY case ... so priv pointer
-should also be different... so that should be fine ... I do not see any debug output
-where this "power_domain=00000000fe594458" gets enabled (or disabled before) ... I
-have to debug deeper into it... sorry. But may you have an idea...
+On mer., avril 09, 2025 at 09:58, neil.armstrong@linaro.org wrote:
 
-bye,
-Heiko
-> 
-> Now power domain
-> 
-> #define IMX8MP_HSIOBLK_PD_PCIE                          3
-> 
-> should be enabled, but since your patch this gets prevented as "priv->on_count: 1"
-> 
-> imx8_pcie_phy_power_on: ------------ pad_mode: 1
-> imx8_pcie_phy_power_on: ------------ pad_mode: 1 ret: -110
-> nxp_imx8_pcie_phy pcie-phy@32f00000: PHY: Failed to power on pcie-phy@32f00000: -110.
-> pcie_dw_imx pcie@33800000: failed to power on PHY
-> u-boot=>
-> 
-> I have not a fast solution, may you have an idea? I try to look
-> after the easter holidays into it. May we need for each power_domain-> id such
-> an on counter...
-> 
-> Thanks!
-> 
-> bye,
-> Heiko
+> This serie permits using any block device as target
+> for fastboot by moving the generic block logic into
+> a common set of helpers and also use them as generic
+> backend.
+>
+> The erase logic has been extended to support software
+> erase since only 2 block drivers exposes the erase
+> operation.
+>
+> Tests are welcome to make sure this series doesn't
+> introduce any regressions on the emmc backend.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+On top of master (commit 5b4ae0f3f040 ("mailmap: update my name and email")),
+Using khadas-vim3_android_defconfig, I did the following:
+
+boot the newly generated U-Boot with boot-g12.py:
+$ boot-g12.py ~/work/upstream/yukawa/bootloader/u-boot_kvim3_noab.bin
+
+Run fastboot from U-Boot console:
+=> fastboot usb 0
+crq->brequest:0x0
+
+Then, on the host, reflash the bootloader:
+$ fastboot flash bootloader u-boot_kvim3_noab.bin
+
+In U-Boot, everything seems fine:
+** Bad device specification mmc bootloader_a **
+** Bad device specification mmc bootloader_a **
+Couldn't find partition mmc bootloader_a
+Starting download of 1288048 bytes
+.........
+downloading of 1288048 bytes finished
+Flashing Raw Image
+........ wrote 1288192 bytes to 'bootloader'
+resetting ...
+bl31 reboot reason: 0xd
+bl31 reboot reason: 0x0
+system cmd  1.
+G12B:BL:6e7c85:2a3b91;FEAT:E0F83180:402000;POC:D;RCY:0;USB:0;
+
+And after rebooting the board, we are on the newly flashed bootloader.
+
+So, to me:
+
+Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+I do need some more time to review, though.
+Thank you for your patience!
+
+> ---
+> Changes in v2:
+> - Dropped applied virtio erase patch
+> - Reorganize patches, introducing helpers first, using them in mmc afterwards
+> - Added soft-erase logic
+> - Added move helpers to handle the partitions erase & flash from emmc
+> - Fixed const var on last patch
+> - Link to v1: https://lore.kernel.org/all/20240306185921.1854109-1-dimorinny@google.com/
+>
+> ---
+> Dmitrii Merkurev (3):
+>       fastboot: blk: introduce fastboot block flashing support
+>       fastboot: blk: switch emmc to use the block helpers
+>       fastboot: integrate block flashing back-end
+>
+>  drivers/fastboot/Kconfig      |  20 ++-
+>  drivers/fastboot/Makefile     |   4 +-
+>  drivers/fastboot/fb_block.c   | 313 ++++++++++++++++++++++++++++++++++++++++++
+>  drivers/fastboot/fb_command.c |   8 ++
+>  drivers/fastboot/fb_common.c  |  16 ++-
+>  drivers/fastboot/fb_getvar.c  |   8 +-
+>  drivers/fastboot/fb_mmc.c     | 210 ++--------------------------
+>  include/fb_block.h            | 104 ++++++++++++++
+>  8 files changed, 477 insertions(+), 206 deletions(-)
+> ---
+> base-commit: f892a7f397a66d8d09f418d1e0e06dfb48bac27d
+> change-id: 20250408-topic-fastboot-blk-c5e14cd59224
+>
+> Best regards,
+> -- 
+> Neil Armstrong <neil.armstrong@linaro.org>
