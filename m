@@ -4,64 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035BDC369CA
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 16:58:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A6CC369B2
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 17:06:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AB1282B3F;
-	Thu, 17 Apr 2025 18:58:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sfconservancy.org
+	by phobos.denx.de (Postfix) with ESMTP id 97EF382E37;
+	Thu, 17 Apr 2025 19:06:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sfconservancy.org header.i=@sfconservancy.org header.b="HOBUZukG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sXWeRLcm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBBF582D39; Thu, 17 Apr 2025 18:46:00 +0200 (CEST)
-Received: from pine.sfconservancy.org (pine.sfconservancy.org [192.237.253.17])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BC99982CDF; Thu, 17 Apr 2025 19:06:40 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 527A182B3F
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 18:45:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=sfconservancy.org
+ by phobos.denx.de (Postfix) with ESMTPS id 86DC981E18
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 19:06:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=karen@sfconservancy.org
-Received: from mail.sfconservancy.org (unknown [192.237.253.17])
- (Authenticated sender: karen)
- by pine.sfconservancy.org (Postfix) with ESMTPSA id B5CBEE445;
- Thu, 17 Apr 2025 16:45:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=sfconservancy.org;
- s=pine; t=1744908357;
- bh=nB8rKEmGDe0bR5Wo3qFZgG8ynKEozq/MHY62sgZAf0M=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=HOBUZukGYnwBvxXB7/Tlpzzo356TU2wDF2S77RHmLyFOdYi/uQMNa3FfZ0H+QiRy7
- agxHTqmOA4cCmp201EQfF5iitTxjoqPLg6NPQILUW8uyC1qXMNGKnJUhNeIq2+uSgP
- sbfOBzhN0W6kvzC9/c4DTn+CLdPoUhjai2rDbY2uVFgfuth9M/alaM4fukCW6S5jxb
- JO5jzrcViFeEPiihgtY6Va6a/ZsjdIGfwZEXSHtJkLLXN4ccBob/16WExnQ9B+92lc
- U7vFh1dshxTulHZr7pWyhsaUMWa6PjYmHlXeHmhZeuf/DWfLc6ZllyK3EGQIjyyydp
- dDTep4gcdGpXw==
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3f8df49e75fso238525b6e.1
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 10:06:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744909597; x=1745514397; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=uLy+z2QXpk8q6TSg6KrnxsyhmKQzgx4KF2wVwlChSmM=;
+ b=sXWeRLcmu0UOv/Qv2qvRUn5wOxpidLPG7TU8XZv/+SA5U9GU8ZfKeM7cL8Wn/9x9fz
+ dBNgU3uTxURA+Eefq7umMwadOBQ7sPgtGfipjk6MdfzKfCei0eUqWkHB2S4MKxPF//wW
+ cN8tb0FW8EndHlwfsMpJasGE2tcPQFQKmZD2c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744909597; x=1745514397;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uLy+z2QXpk8q6TSg6KrnxsyhmKQzgx4KF2wVwlChSmM=;
+ b=qf79H5okSk7SpQ08/6zm2Z6NI9ib1jOBS0uveHFgGQ+GXQospzMJR8cKNjlUusQ0j4
+ G19Nfruu3eSc6JmHFZZTPOnKfBG4v6PYTL/0pGSRdyFDGpiANso4YbXcLmuhJsAbsWsv
+ eLoVW1yP1TG6XYYgf5JlZvS8isiY55FxNi2AwnX7dUeJQhrmcaFPUsYipWXF7S+YOjJF
+ +Vr+yZlK9geFo+WuDf8V2il6LYONX3vE5euJ9PdQvUCzJF1+jYyUlv9A+CdkYphx/IxD
+ fAm/MR0rRXhNyGEmpkInwgeBcXiIm30l5iFrOoTqieLrbiPBleMJ/vVyrbf+A4qalJn6
+ M5NQ==
+X-Gm-Message-State: AOJu0YyS5LytYoqqm8gGpsKfIiywiqXXd9sgxgKH5sLELFkZ07yjSJRu
+ VrTHsAWpNqqnwKShe6g7ghqv8T5BwAppq5ocMei+r+7DbZb05WRY+ryLplEwJRCOk1os+WNO1p4
+ C
+X-Gm-Gg: ASbGncvDxCBg9/LDDeeQuCAlgd0nqeNcXdzBv0vKo8nJmJv0kUBBySVhat0bYSHhg+W
+ sOGLGyxWBrzPWjQwcaBwR/Z8mLlMFHxVfKygFUxQYYWMkGKnnBFs+SQzRJc7XQM/xZ10EFgkWMb
+ 7Vo995s6YP7VO1sPgM/BzKkVhtfycl6o8gA9pt0cV5XBuWjSw2nlJ1t9WDPgn2Z73DG8/RmpC0E
+ YKWkZ0VKroUENgZQeZUwdbJ2STltsqG/fQWnvd44N5lzkeBqSlo6P/aXQiclyejCA9dr1z2VAdM
+ yFNbMmU/InMweJFW37NQXF5giBS7POSoNQHuHtYXNoAitkq2KHfMMU5QIc+61lQAzhtMrUzV+0L
+ C
+X-Google-Smtp-Source: AGHT+IHJESLYcsy9yOaJuHgSQMpgSBonRyYEr99Hnw6vZWVj/AP8bZb0qO6WZP4on5DMulxgj2iDRw==
+X-Received: by 2002:a05:6808:3ca:b0:3fb:2937:937c with SMTP id
+ 5614622812f47-400b01c2d43mr3384124b6e.6.1744909597056; 
+ Thu, 17 Apr 2025 10:06:37 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-605ff6aacf5sm28411eaf.39.2025.04.17.10.06.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Apr 2025 10:06:36 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>
+In-Reply-To: <b42d26fc-263f-45c0-aede-783a401ec724@denx.de>
+References: <b42d26fc-263f-45c0-aede-783a401ec724@denx.de>
+Subject: Re: Please pull u-boot-marvell/master
+Message-Id: <174490959627.2996754.15614300307813446702.b4-ty@konsulko.com>
+Date: Thu, 17 Apr 2025 11:06:36 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Date: Thu, 17 Apr 2025 12:45:56 -0400
-From: "Karen M. Sandler" <karen@sfconservancy.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Levi
- Yun <yeoreum.yun@arm.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Denver Gingerich
- <denver@sfconservancy.org>, Bkuhn <bkuhn@sfconservancy.org>
-Subject: Re: [PATCH] bloblist: Drop BSD license
-In-Reply-To: <20250417163326.GZ5495@bill-the-cat>
-References: <20250101195817.995321-1-sjg@chromium.org>
- <CAFLszTj_JvCRNQw716CGD=i+eJm1YMb=WjOqpF0VFFiac3GmCg@mail.gmail.com>
- <20250417160423.GX5495@bill-the-cat>
- <CAFLszTgWUNP6L6ZML639wz76CuuBoPDt447vjfz8MRZyLE5gFw@mail.gmail.com>
- <20250417163326.GZ5495@bill-the-cat>
-Message-ID: <5b0876bbed279e41a741fdcaf6091694@sfconservancy.org>
-X-Sender: karen@sfconservancy.org
-User-Agent: Roundcube Webmail/1.2.3
-X-Mailman-Approved-At: Thu, 17 Apr 2025 18:58:07 +0200
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,45 +94,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-04-17 12:33, Tom Rini wrote:
-> On Thu, Apr 17, 2025 at 10:26:53AM -0600, Simon Glass wrote:
->> Hi Tom,
->> 
->> On Thu, 17 Apr 2025 at 10:04, Tom Rini <trini@konsulko.com> wrote:
->> >
->> > On Thu, Apr 17, 2025 at 09:58:42AM -0600, Simon Glass wrote:
->> > > On Wed, 1 Jan 2025 at 12:58, Simon Glass <sjg@chromium.org> wrote:
->> > > >
->> > > > Linaro has decided to write their own version of bloblist from scratch,
->> > > > so there is no point in having a non-GPL license on this file. Change
->> > > > it, to better fit with the U-Boot project.
->> > > >
->> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
->> > > > Link: https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/22215
->> > > >
->> > > > ---
->> > > >
->> > > >  common/bloblist.c  | 2 +-
->> > > >  include/bloblist.h | 2 +-
->> > > >  2 files changed, 2 insertions(+), 2 deletions(-)
->> > >
->> > > Applied to sjg/master, thanks!
->> > >
->> > > (Tom, this one seemed to get dropped but I'm not sure why)
->> >
->> > Because AFAICT you legally cannot unilaterally change the license as
->> > others have changed the code.
->> 
->> OK, let's put this on the list of things to discuss.
+On Wed, 16 Apr 2025 15:35:25 +0200, Stefan Roese wrote:
+
+> please pull this next batch of mostly Marvell related patches:
 > 
-> Sure. And I know I'm behind on getting process going with Conservancy
-> but Karen can you or someone else please be on the call next Tuesday
-> (22nd, same time/dial in as before)? For background
-> https://lore.kernel.org/u-boot/20250101195817.995321-1-sjg@chromium.org/
-> is hopefully enough but I'm sure Simon and myself would be happy to
-> point at any other links that might help. Thanks!
+> ----------------------------------------------------------------
+> - mvebu_espressobin_ultra-88f3720_defconfig: disable SATA
+> - helios4: enable ddr odt0 on write for both chip-select
+> - clearfog,helios4: disable sdhci sdma
+> - mvebu/bubt: Correct usage of IS_ENABLED() macro
+> - mvebu: Correct SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR usage
+> ----------------------------------------------------------------
+> 
+> [...]
+
+Merged into u-boot/master, thanks!
+
+-- 
+Tom
 
 
-Sure, at least one of us will attend.
-
-karen
