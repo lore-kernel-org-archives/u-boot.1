@@ -4,100 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D28EC369B2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:14:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE78C369C2
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:27:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F44882D21;
-	Thu, 17 Apr 2025 15:14:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CBC7B82D32;
+	Thu, 17 Apr 2025 15:27:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Uw/51PhD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J97mT8Hz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 201AD82D32; Thu, 17 Apr 2025 15:14:50 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id E70088303B; Thu, 17 Apr 2025 15:27:31 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF96C81F7E
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:14:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C725D82CA8
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:27:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-acb615228a4so104499266b.0
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:14:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-39c1ef4acf2so525111f8f.0
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:27:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744895687; x=1745500487; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xEgHnZxhh2i0u/3fITlTmIYNDQmreMA7l923ZimZvn8=;
- b=Uw/51PhDuRCF8AIl46jTJ1PCU8VwCM6jE3UWCvMgsG6LdfUy5QE+i1jm51tvKHZF6Z
- Zy5cn5hmrlSSfWZ5ZSIAQSNMz+A8BgHYC0EfhUbpXG+2nGywE7pjtPEKMx5hi9P6L71i
- rmE/6LjgsVh5ZG7CCzel9Of+5Q4NGLaa4t318=
+ d=linaro.org; s=google; t=1744896449; x=1745501249; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R7SEH6nJ8xB7rWVP/10oxAuEY7gkBPpgWzfowgTgTSA=;
+ b=J97mT8Hzo0rk3T5vgBFaJy2lhj207fudFdKfWmUIOZ79ZRmUwElT+SjjYuNg5mi8mm
+ Owu9fcCIAXWni7CMHp9z+7DdWZc2U6+nlUXJB+0MzYXfLzP+y0fi7xNqSqn4d8oIbY0+
+ iHTLAbFACNhN5kXkkdoH4tfyikkMGPjKeCx2bDynIxsIEIyrrznbinETE0OLjfIcQnKx
+ toyekmV0UiJ6zXcvz7gjbZQ+gR9lOZdUrxU0JmJDERu+HTcUGvT8E6DRqlwQaYsc/6Au
+ 9E36JtQ5dasgQ81Vy9ZMDFwnDoxwLyfvX9eubJNDrpr+4DglZMazFdU+uf4LbrKZBGZk
+ 13Rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744895687; x=1745500487;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1744896449; x=1745501249;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xEgHnZxhh2i0u/3fITlTmIYNDQmreMA7l923ZimZvn8=;
- b=SHWTIuEX/3JFVPbANLQm7Qd2O4+UDxXf1YMnGwCrot/O+s6xfvUGCyoiUOkd4hUaCJ
- 3zgQhiXEpVofzoQs0dj/J85O4N/II7AqN4LBQvHtBeVQTCWRlEpz3hFtb177f6UZvQaN
- J+etqKXLTZKOtQyFjkXE62G1FkxvPlezudUavJBCFVlWAym+A/Nv3swOAyfT70R+zJfX
- w+rWPNgZe556X1J0E/tIO/cZkvTLJvmmegn9NuXroFnGmjffQTDXHMLbmMnfLYJXGySS
- urZ3pkLvMvuIVJ9RJ2AOMF/yAyz+3Cxt0Sv8o+TLjTYmlayYTiXVqe8dl3KfEDS2lH+w
- qIUA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUyEE4BjQFABpE0vSmUnoqHpv32I3+y93r0kOAeANDnjhwC+WlKqjy5TJDVXYSHgzUagY1G32I=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPsWZ9GfUKNrJhSoPta9F5uhpnrRpUIrM43Aj9qB0KqwMiHRfN
- Y/TqlllMhZg1A2Hdfm3D1eyuKutgVTrYVw9yHDZPSNX7DShx25Dy8XiQ3KeHzcQnivwvMKu95nK
- PWZicDuZZChRTXl4VUVTE19aSEj66tWWH0mdd
-X-Gm-Gg: ASbGncuvDNpa3MewiWlTZDD+n9ysjEzQdZ/vLzcrRJWWBSxm0+DfDzj4fYG+TswJYD2
- XBlm6v/uOrn+jDYcWZ9vx4yVFAAGf/KG7ZTTLOu4Q0u3IZec3sJiFzBD1SgMS/lUQrYM8VlrIUi
- 0DSLhtG2H5IkTvzDAJszEZGd8=
-X-Google-Smtp-Source: AGHT+IFB4RJbnThEmkDAMBG7iJyRHzXlNGut8QyqyYVrcL1qU5w1dUIm1eXdktbrIZg7SdSkiZW2OAzBUngJwhw2FOg=
-X-Received: by 2002:a17:907:2d91:b0:ac7:b494:8c0c with SMTP id
- a640c23a62f3a-acb5a0e9110mr256215166b.16.1744895687168; Thu, 17 Apr 2025
- 06:14:47 -0700 (PDT)
+ bh=R7SEH6nJ8xB7rWVP/10oxAuEY7gkBPpgWzfowgTgTSA=;
+ b=V2sl6hqJtwWK0q+TOJ2wyyglR1rAWh973NTh+UsDlLMxfyqQxRB/uPbmJFvkh7kYVm
+ wQJVbt4pUOhGBGbWCgn4sjYxVkSyuhWB2JmPHDzwDDzMzpZfqdbxvM4jpT/n5Gz9nwNg
+ 0A4piOUTMYOkF1dqb6YycAyf/U3IkhN+VmYKflNXRtsywJahTvlpvuD8qGu5+upjVEez
+ mVfIoxgHHax0P3q6RA8sP8lPrujDiPx21cGnDB1E3Dgx4eNFxvGSGo/v296hKqv0z6tq
+ ASq5510FXHezaQOK1sKnXmg2H9ixyYxc07aYU+PDVxSb/Y4hyVEYTVPAhATH69xzGLQ0
+ asSA==
+X-Gm-Message-State: AOJu0Yy6pcDOBvpihs+DqyqXbMHV/yF0kIVYMOJqS2W5Sk4+PMkPXvFg
+ Auo0HRXF8fqDJfk1WLN7ng2YNZN6Cw2Ml2jY49RVy3NSpi3mzscVI1qnyg8PJSCRfgUozgpbHIv
+ ehDY=
+X-Gm-Gg: ASbGncsvqiTN/01wTcQyRlEFhrkCI68rLpwD02bbYuoBMWMwBrj3YoeIJZEbAB2vYnb
+ kPyRXKzPkDHlfOlbeU1bpHbbVa82ViA5M5UcAdgbY/NIPkGfa0XPU3mATVNQmzYDXLj7k0U0dcd
+ VptdoneaWhjU0FKkV0VM3mql8cjFEJVyks0FQ+37OJ800JVxiyher0SvBgVIZ/apPzX0SOr1b6f
+ +B+HrZqGMM4Bm8rTjX6bsRjp7AlCWPk4VLMJa5IqE5Ei5NFuAeuEFPJkR5ArNOCeoKKDNNmX4dR
+ 2lRTV/LKEbHwmksfZBzjp6MZeaY7kYhyJEYeWm4YAvIaApHLQWIrRZTRLBOP
+X-Google-Smtp-Source: AGHT+IFSk39LPvb4Gi3Ls3pFeoCqOypaw5jqxYuTgbTGBjH0O404ctXgfLTYUaajjND8bM4whx2XMA==
+X-Received: by 2002:a5d:5f49:0:b0:390:eebc:6f32 with SMTP id
+ ffacd0b85a97d-39ee5bade02mr5500576f8f.48.1744896448955; 
+ Thu, 17 Apr 2025 06:27:28 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:a07e:3f08:7eef:b036])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39eae977513sm19951605f8f.42.2025.04.17.06.27.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Apr 2025 06:27:28 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 0/4] NET_LWIP LMB fixes
+Date: Thu, 17 Apr 2025 15:26:56 +0200
+Message-ID: <20250417132718.2023555-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250403215239.GO5495@bill-the-cat>
- <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
- <20250403225058.GQ5495@bill-the-cat>
- <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
- <20250404175710.GU5495@bill-the-cat>
- <CAFLszTgBMP-WsAw=z807e9RUY1YNB=Ky+s1MhW=x6dYt7_V+-g@mail.gmail.com>
- <20250406223854.GE5495@bill-the-cat>
- <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
- <20250407143056.GL5495@bill-the-cat>
- <CAFLszTjJekLH7Z3NMewpK1hYvMgXfrJ_0TknKhuZ0QRk3ZO3sg@mail.gmail.com>
- <20250414203444.GE5495@bill-the-cat>
-In-Reply-To: <20250414203444.GE5495@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 17 Apr 2025 07:14:35 -0600
-X-Gm-Features: ATxdqUGGLIDY3pDPWHwM7Cr_WXDit0tSjVOVhrmd0fHKTdQpw3bjVs0owVS6cUs
-Message-ID: <CAFLszTiP9T=j1AAUDcxQDCF=sN82mxsZiEG3h5MbRsNyAFwmgg@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-To: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,191 +102,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Two small patches fixing issues with tftp and wget when the network
+stack is NET_LWIP and LMB is enabled. Plus one prerequisite patch
+fixing a problem with wget that does printf()/puts()/putc() when
+called from EFI which is not allowed (messes with the console output)
+and a small refactoring in net/lwip/wget.c.
 
-On Mon, 14 Apr 2025 at 14:34, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Apr 14, 2025 at 01:34:10PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 7 Apr 2025 at 08:31, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Apr 07, 2025 at 12:35:15PM +1200, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 7 Apr 2025 at 10:38, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Apr 07, 2025 at 10:06:07AM +1200, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Sat, 5 Apr 2025 at 06:57, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Sat, Apr 05, 2025 at 06:39:39AM +1300, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
-> > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
-> > > > > > > > > > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
-> > > > > > > > > > > > > > > > > > so that it is simpler to understand and manage.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > - Unwind some of the nesting in bloblist_init()
-> > > > > > > > > > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
-> > > > > > > > > > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
-> > > > > > > > > > > > > > > > > mandatorily use bloblist to hand over everything between boot stages
-> > > > > > > > > > > > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates that
-> > > > > > > > > > > > > > > > there must be a bloblist, not that it must contain a devicetree. So I
-> > > > > > > > > > > > > > > > wasn't sure about removing it.
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDATORY is
-> > > > > > > > > > > > > > > selected, we can override any fdt from board or env with the one from
-> > > > > > > > > > > > > > > the bloblist.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Yes, but we should be explicit about what is going on here. With
-> > > > > > > > > > > > > > OF_BLOBLIST we indicate that the devicetree is coming from the
-> > > > > > > > > > > > > > bloblist. It becomes one of the sources for devicetree, like
-> > > > > > > > > > > > > > OF_SEPARATE and OF_EMBED
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
-> > > > > > > > > > > > > mandatorily used and override other fdt sources like from the board or
-> > > > > > > > > > > > > env variables.
-> > > > > > > > > > > >
-> > > > > > > > > > > > So long as you are OK with OF_BLOBLIST as well, I have no objection to
-> > > > > > > > > > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
-> > > > > > > > > > > > very much. But I can see why it is called that as my standard passage
-> > > > > > > > > > > > series was actually never applied. So I suppose I'll need to have
-> > > > > > > > > > > > another try at that.
-> > > > > > > > > > > >
-> > > > > > > > > > > > So to be clear, I want a separate option for devicetree, called
-> > > > > > > > > > > > OF_BLOBLIST, which I can enable/disable as needed, without affecting
-> > > > > > > > > > > > your option.
-> > > > > > > > > > >
-> > > > > > > > > > > Sigh. Can I ask what the use case for this will be? And we are going to
-> > > > > > > > > > > get rid of BLOBLIST_FIXED at some point, yes?
-> > > > > > > > > >
-> > > > > > > > > > I thought we agreed that this was acceptable. We argued the toss for
-> > > > > > > > > > months on this point and I would rather not revisit it.
-> > > > > > > > > >
-> > > > > > > > > > Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
-> > > > > > > > > > pretty sure it can be done. The only tricky bit is coming up with a
-> > > > > > > > > > bloblist protocol for x86.
-> > > > > > > > >
-> > > > > > > > > Yes, I'm stuck between being "flexible and saying yes" and how long we
-> > > > > > > > > have to live with what I also think are bad designs.
-> > > > > > > > >
-> > > > > > > > > So maybe the pre-requisite here is that with "bloblist" and "standard
-> > > > > > > > > passage" being divorced, what is the requirement for bloblist again?
-> > > > > > > > > Because in practice, all of the problems we've had come down to looking
-> > > > > > > > > in fixed address locations before they're valid. You want to handle this
-> > > > > > > > > by saying "Ah, we won't look before it's valid with other CONFIG flags"
-> > > > > > > > > and I say we should handle this by not using a fixed address to start
-> > > > > > > > > with.
-> > > > > > > > >
-> > > > > > > > > If we have to add OF_BLOBLIST now and delete it in a few months, sigh,
-> > > > > > > > > OK. But it shouldn't need to exist long term.
-> > > > > > > >
-> > > > > > > > For me, OF_BLOBLIST is needed for x86 devices which don't pass the
-> > > > > > > > devicetree in the bloblist.
-> > > > > > >
-> > > > > > > I don't understand why that would become the case when it's not true
-> > > > > > > today.
-> > > > > >
-> > > > > > If you look at the top obbfdtdec_setup() in your tree you can see the
-> > > > > > special-case code related to TPL, that I'm wanting to get rid of.
-> > > > >
-> > > > > OK, but all of that too is for the case of a fixed bloblist being in
-> > > > > uninitialized memory. Which is why I don't like BLOBLIST_FIXED and want
-> > > > > to see passing of the bloblist from xPL -> PPL be implemented and so xPL
-> > > > > can allocate a bloblist (or grow a passed one if needed).
-> > > >
-> > > > We are going around in circles though. Having it is registers doesn't
-> > > > help with the problem that there isn't an FDT in the bloblist.
-> > >
-> > > Sure it does. If we're passed a bloblist in a register we can then see
-> > > if it has a DT (and use it) or not (and move to the next DT location).
-> > >
-> > > > Also, I thought you decided that I could maintain bloblist. Have you
-> > > > changed your mind?
-> > >
-> > > You just mis-understood me. Yes, you can maintain bloblist. But also,
-> > > Yes, I need to understand what you're doing. The root of the OF_BLOBLIST
-> > > problems is that no one understood you.
-> >
-> > No, that's not actually true. The problem is that no one would listen
-> > and everyone was sure I was wrong.
->
-> That's another way of saying "no one understood you", IMO.
->
-> > I sent the series on the basis that you were open to my maintaining
-> > bloblist in your tree. I didn't know there were extra conditions. So
-> > please let me know which way you want to go on this.
->
-> I thought we had made progress on the community call, but now you're
-> sending this so I don't know?
->
-> You need to:
-> - Not break handoff spec. Raymond is telling you how to get a QEMU that
->   uses that now, and I'm actively waiting on Harrison Mutai to answer
->   one last question I had before adding vexpress_fvp to our CI. So this
->   should be a reasonable requirement.
-> - You were going to add register passing of bloblist location for x86,
->   and then add register passing of bloblist between U-Boot phases
->   without relying on BLOBLIST_FiXED.
-> - Some amount of un-tangling "do we have a bloblist" from "did we get a
->   bloblist" is needed, so we can just check "Did we get a bloblist? Y/N"
->   in lib/fdtdec.c::fdtdec_setup(). With that, we can add OF_BLOBLIST as
->   a choice with OF_SEPARATE / OF_EMBEDED and we can remove a bunch of
->   the logic at the top of lib/fdtdec.c::fdtdec_setup() too.
+Changes in v5:
+- See changelog in the individual patches
 
-That seems very much like a list of instructions. So in fact you still
-want to be the maintainer?
+Jerome Forissier (4):
+  net-lwip: change static function wget_loop() to be wget_do_request()
+  net, net-lwip: wget: suppress console output when called by EFI
+  net-lwip: wget: add LMB and buffer checks
+  net-lwip: tftp: add LMB and buffer checks
 
-To be clear, I don't disagree with the list here but I am not willing
-to argue with people anymore about how it should work. I designed it
-and I know how it should work.
+ doc/usage/cmd/wget.rst                        |   2 +-
+ include/net-common.h                          |   2 +
+ lib/efi_loader/efi_net.c                      |   2 +-
+ .../src/apps/altcp_tls/altcp_tls_mbedtls.c    |   8 +-
+ net/lwip/tftp.c                               |  56 +++++++--
+ net/lwip/wget.c                               | 117 +++++++++++++-----
+ net/wget.c                                    |  23 +++-
+ 7 files changed, 159 insertions(+), 51 deletions(-)
 
-Also I think I now understand what you are saying about bloblist and
-standard passage being split. It's because most of my standard passage
-series from a few years back was never applied.
+-- 
+2.43.0
 
-So I'd like to go back and revisit that and get it applied, including
-the gitlab test for the new qemu_arm/64_spl
-
-Regards,
-Simon
