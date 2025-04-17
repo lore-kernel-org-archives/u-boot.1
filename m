@@ -4,80 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD435C369B2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 06:31:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D25C369CA
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 07:03:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28E1482FD4;
-	Thu, 17 Apr 2025 08:31:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 236FB82FB9;
+	Thu, 17 Apr 2025 09:03:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rqNBalt+";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1744873424;
+	bh=0PSbbePlLhOin7EflNp6ePKji1YHx1hNCWXU/BYBf6s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=q9lVvjdn0GrrIkOo2DJ8PSj3ym7M0VdK7qTRplLWnBcaSbqPMd5wWizPyA6fTZj3f
+	 Qfjv7JHqN8ais5XAX3JsODYRGAPuEY26+HTGJuX9h7d1vlefivlvX+lI8ZBh4Hny4E
+	 mrQ94NfELUlvc5LOSle9ELb/VQ3PpRqxpw24Q6MpSiBKujeknywetwIUAX3SAkr+UK
+	 EJqoHVDSKf92ymgH5gnfPPVBjPf5Pxd52Y3EhfNWl4EKTMS7a7+1V0dVAG6J2BUsK+
+	 Hg2HTntQvPzudD9PctCQzgKY+tihNBO+bTocB87bDZi/XAIqGo15VZbPugKsMyWMdq
+	 rjbsd8oDuzY4A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 950F782FD6; Thu, 17 Apr 2025 08:31:43 +0200 (CEST)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 13F3082FD4; Thu, 17 Apr 2025 09:03:43 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E98C82FB9
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 08:31:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E9C282F87
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 09:03:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e3978c00a5aso360725276.1
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 23:31:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744871500; x=1745476300; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ym2L5Cf40X69J8KkSnA7/WmL7CkPEENbl3lQ/tsEEqo=;
- b=rqNBalt+zRlxSmdiUSVl2HuTrVhotROP9vh1SSgVMQagZ3lcjdX6LjzaohyZLK1LaP
- l7cRrOJsogJhQlQo4Zuk+tHK79E3nwdCuJwQt2sWIMxuKmCjK+gf3u4OBneBGokVzwv7
- L988m7ExHdE3MRjYwt3+6X5Z34NhbW8g4sDqH9UvRvyn5+dr/lwoXoQbiV2R8z0Evvxw
- TDKVX5ju19vCuzr/fTpNdxPpJs7+pGnPyMcru0snHZw0siZ4Hmf9CSlnZxzevGWDfZVX
- mWfza9KgCW886dwFaPhzc1u9hNev75GAXp+1a3ypuELy3CyLMwqWlJgnHXu8eN0mNYH6
- gAyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744871500; x=1745476300;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ym2L5Cf40X69J8KkSnA7/WmL7CkPEENbl3lQ/tsEEqo=;
- b=WBayJdYktfUqpwg3X60PihbiD6Ww/lfsANuvRkFXwQV4+JxXFDbm5M58v1tOkRhG61
- 1g/68eVHeaHbYq5xIMNDx1rRSsiiqvWO6O+unOtdCTtspkjLqo2Bh/eGBSwdc5XIYBS3
- bYZt/MrZbqH61hDhsyoBpLiplrax1kSdnvXgTe8XwCS7sWU9gG/tbf9Uj9X08T1lmut9
- utvxcuNNr2joA9KBDknAD8+hCwtvc0+2Onr1IKH7FHWrLGi/voR8/ri0Hlh5lCNXwjq8
- 2VFMIWsVlp77LRn7yejePI/A/efQOxtaeS9uY8V88hf1WCIGOetbySC8+jcE9sRZ/A+C
- 1eOg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIVQhP9go9BOcORoK5FkvRhJ54ykCFnRnOq1RLFzuo22zV+XXMIAECx7v1y8YlmfiipAQFl38=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1PqRtf9KvtVjDM7f868BfYYuyokoizsn4F85PSMnH5TU+rcII
- ygMa/X457mBcUz/he0eZfbZ4GcVBQ6zevE5USMJMPjdE17VDeriIpXASAj+q55NuM+J8YJVwZ/F
- 428UCvwzWQjmHQsnkVCnfORFxv9VfrL7oo0P8My5lh6/8RsfT
-X-Gm-Gg: ASbGncspnKALMxF40T0BDM4b906Vja4BYaQA2j2BmtwFRovh0xzaovMTAW7tNhfUky1
- IFnQBxoRsj648uW5Zk1gRNaOCU5mNM60BCA1MGUCEucFceJZj1q2dDeuZCJZmrapoNcP7mUDy3h
- yJt2l+2RITzipZ3ECXjrk8+sU=
-X-Google-Smtp-Source: AGHT+IH/snnDhxYdIkDnfFZtoWQedBfiwv3e8I57bEzG+RiK/vAM2WbmY0GcoyyAcC5IB2na3AqFLB+Xq/05AwRhOL8=
-X-Received: by 2002:a05:6902:1583:b0:e6d:ecbb:e527 with SMTP id
- 3f1490d57ef6-e72759b42abmr6498898276.25.1744871500109; Wed, 16 Apr 2025
- 23:31:40 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4ZdTQ253Qtz9spB;
+ Thu, 17 Apr 2025 09:03:38 +0200 (CEST)
+Message-ID: <8f89cba3-b7bb-400b-9950-093c3bdf1427@denx.de>
+Date: Thu, 17 Apr 2025 09:03:37 +0200
 MIME-Version: 1.0
-References: <20250408-topic-gpt-cache-v2-0-de76e47debb7@linaro.org>
- <20250408-topic-gpt-cache-v2-2-de76e47debb7@linaro.org>
-In-Reply-To: <20250408-topic-gpt-cache-v2-2-de76e47debb7@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 17 Apr 2025 09:31:04 +0300
-X-Gm-Features: ATxdqUH5k-Go2C-sIO3aYqB-G6WzbV5Iizsdqq24i0MySoI5DB2d5jmlm9h9eWk
-Message-ID: <CAC_iWjKa+WaOQ5diQLx5BxP9wdDS5v5kvvqBdFDpa0bN_kV+JA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] part: efi: add GPT PTE cache used with
- part_get_info_cached() API
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] cmd: tlv_eeprom: return after successful read from EEPROM
+To: Martin Schiller <ms@dev.tdt.de>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, josua@solid-run.com
+References: <20250416061316.1348271-1-ms@dev.tdt.de>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20250416061316.1348271-1-ms@dev.tdt.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4ZdTQ253Qtz9spB
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,68 +70,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+On 16.04.25 08:13, Martin Schiller wrote:
+> Commit f6eff35b8c19 ("cmd: tlv_eeprom: handle -ENODEV error from
+> read_eeprom function") removed the needed 'return 0' after a successful
+> read. As a result, the usage message is shown when 'tlv_eeprom read' is
+> successfully called.
+> 
+> Let's fix it by adding the needed 'return 0'.
+> 
+> Signed-off-by: Martin Schiller <ms@dev.tdt.de>
 
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-On Tue, 8 Apr 2025 at 12:13, Neil Armstrong <neil.armstrong@linaro.org> wrote:
->
-> Implement a simple cache for part_efi to be used by the newly
-> introduced part_get_info_cached() API.
->
-> The cache simply stores a successfully scanned GPT PTE if called
-> from the part_get_info_cached() ops, and will return the cached
-> data if the blk_desc and lba offset matches, invalidating the
-> cache if not.
->
-> The cache will only operate if called from the part_get_info_cached()
-> API, all the over calls will operate uncached, making sure we
-> can still update & re-scan the GPT partitions like before.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Thanks,
+Stefan
+
 > ---
->  disk/part_efi.c | 114 +++++++++++++++++++++++++++++++++++++++++++++++---------
->  1 file changed, 96 insertions(+), 18 deletions(-)
->
-> diff --git a/disk/part_efi.c b/disk/part_efi.c
-> index 932d058c184ce6946b7142e7c2d9637b28e4661e..949968fcd30fc18766a023e73f43ca1381dcef89 100644
-> --- a/disk/part_efi.c
-> +++ b/disk/part_efi.c
-> @@ -55,12 +55,58 @@ static inline u32 efi_crc32(const void *buf, u32 len)
->  static int pmbr_part_valid(struct partition *part);
->  static int is_pmbr_valid(legacy_mbr * mbr);
->  static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
-> -                       gpt_entry **pgpt_pte);
-> +                       gpt_entry **pgpt_pte, bool cache);
->  static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
->                                          gpt_header *pgpt_head);
->  static int is_pte_valid(gpt_entry * pte);
->  static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
-> -                         gpt_entry **pgpt_pte);
-> +                         gpt_entry **pgpt_pte, bool cache);
-> +
-> +static struct gpt_pte_cache_data {
-> +       struct blk_desc *desc;
-> +       u64 lba;
-> +       gpt_entry *gpt_pte;
-> +       gpt_header gpt_head;
-> +} gpt_pte_cache;
+>   cmd/tlv_eeprom.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/cmd/tlv_eeprom.c b/cmd/tlv_eeprom.c
+> index 0aec7521770..d7c229e5441 100644
+> --- a/cmd/tlv_eeprom.c
+> +++ b/cmd/tlv_eeprom.c
+> @@ -476,6 +476,7 @@ int do_tlv_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>   
+>   		printf("EEPROM data loaded from device to memory.\n");
+>   		has_been_read = 1;
+> +		return 0;
+>   	}
+>   
+>   	// Subsequent commands require that the EEPROM has already been read.
 
-My only concern is that this is global, and I don't know how it will
-affect the caching with the threading framework that's under
-discussion.
-I don't know the block framework well enough, but it would make some
-sense to store this per block device eventually.
+Viele Grüße,
+Stefan Roese
 
-> +
-> +static void clear_gpt_pte_cache(void)
-> +{
-> +       if (gpt_pte_cache.desc) {
-> +               if (gpt_pte_cache.gpt_pte)
-> +                       free(gpt_pte_cache.gpt_pte);
-> +
-[...]
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 
-Other than that this looks sane to me
-
-Thanks
-/Ilias
