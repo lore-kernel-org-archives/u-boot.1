@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 766F1C369C9
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 18:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F76C369C9
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 18:23:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A3C82A27;
-	Thu, 17 Apr 2025 20:22:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 36CE182D57;
+	Thu, 17 Apr 2025 20:22:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y6Hq3KCu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I6qvLk7V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29FB482CFD; Thu, 17 Apr 2025 20:16:33 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 2164582F5A; Thu, 17 Apr 2025 20:16:46 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78CB281E14
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 20:16:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8869A82CFD
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 20:16:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-86142446f3fso26074739f.2
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 11:16:30 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3d7f111e9e1so9942155ab.1
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 11:16:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744913788; x=1745518588; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yec7nT2oNMy3X5KtebXpwLLDKHkPPXrwS66ThgFEa4E=;
- b=Y6Hq3KCuJU/pHWSgIrDSal94U2delJ7P+uBymBMyP2hBMar47EieSKAdfVv1NNWGhf
- 1fdKDAHaoBnojBUqGoa8lEuyhROm6tx0hodb0o1wdlNIYKgcs0n87xTmA3hJ6tbJFHON
- 75hWyva/DWMW3wEZFRKb3Oh0M2eIbZ+PmLjCI=
+ d=chromium.org; s=google; t=1744913801; x=1745518601; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uiWAaU50lG4Y2iaUOcZMhgXH6/EVORMionlzRyVcRHY=;
+ b=I6qvLk7VT4bjl5WldJTtq/AscIoECebVzJe9R+LfTPsFoAAkn9IYpq1HIsW/Z6oux7
+ 1TJjxUvkaRjZTmjvswRbF7DxqN0rWpGM8hmMRdUK815wM8pW62FifyOU/eLZhiA9bRaM
+ FPPoO3DG4U9dz9TClkpFRPGAi21DxvK8uEyNs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744913788; x=1745518588;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yec7nT2oNMy3X5KtebXpwLLDKHkPPXrwS66ThgFEa4E=;
- b=cZEopI8anRMVVOMAFjFm6gvSeKiLd0oWMw1nQIcLidlaXWAqpeUZc7BTTHmuNAOVWt
- yj5N7pArx0GvpzJxAWf+/s3/2Xj9Q9RRfbXrOTgpTnsZ54PhEZVUTXlewGulvnxXO0u6
- cnof1x3Q/o5dGlCtBTqv8GPoaAMi7dXx069HK5bGlJR8C9UipxbjPkxJY74dbHKBefSV
- DqaEf2DLC7X8ImgEDbwabfGcTt/Z68VkV1S50okvWj1GIW8YOBbviKRpXOXDXr62IcEO
- vNIZ9tVLnPoZdJEqypzSRjwkGX6CrQ2rcSbI99s41Wp+q3/UqP4FucF1qIAsaQJisOZG
- CU9A==
-X-Gm-Message-State: AOJu0YwX0y0xjKYL/ZYzmVQAr1FyafGSpXoXq/SNwQMgu4EoCaVpCbSC
- GzwR4Wk/qyum+QgEREMXFibCu/0cyn0semSZC+AWQKWH92cuFPRp0E/BTNMaDMCTW/aIRXyx5V4
+ d=1e100.net; s=20230601; t=1744913801; x=1745518601;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uiWAaU50lG4Y2iaUOcZMhgXH6/EVORMionlzRyVcRHY=;
+ b=HjADP7HpI780Rf0+YdwDMKC0vdreJXcl5k7ZTd2/PqWoPSiORzlVJpBy18rQyl4fn9
+ +ZgYmZ3BP3wDaOLtmVu4YWyMa07RPYhBvvJB6j2pPep5CAhTwphQyJ588DNC3D9SiEU9
+ Iptri4YKainD7QS0LMWaM32QQjKOH0EVcZndSFHg7up8yLlFwZ5Rq2rlSD9/7caU48un
+ OMZGfChzHBe/hIHBZeN79aMpjnz8CI696X20KX5RdBpj+/mpqHw3nUAmzEUHUh9sGnHI
+ lAgy3MtghR0W+BMzyYPoE0cQ/V5JqtYhLFK43Z5YNGuuZd9ZDyLM1/wfIevyikzjg+14
+ gGzA==
+X-Gm-Message-State: AOJu0YycdDpvykFo0H5Ufk27vZhjwS8/R+K8xdivLdR8FH31eEnEPXRe
+ ysy1Yim/6oNSrX3gKNbgewvvYGxlJTOUCRu4rb1clRu17wJQs2yXXA8r5Gvky7aZsv7wv8YT60I
  =
-X-Gm-Gg: ASbGnctQiLFK8FeuT7CWLIkT12Tz0KAPkb9pjXBsGeqBdPIEmXkJrHYzwaC4ec7CsLC
- 7+9GFZ8QOXeTZz6ePhqS+tyszYyJzdHH085yYvw0+tox3BpykoP7QniE6+cz4dl0ZCIuSvLqFOR
- 5iAhbsGRlcai+OU05BpEMhPxkMCC3u9l+fA+l8eS/Ku6JQtocklIpTnzfmX1q8JTXQWhjddlOrT
- CIzYs3U0wZwp8V8/5K9nTDZ/spuBbFmi0jDk8zGhJ4HE+BdrW8Wn0ZynOH5Qzq+oOzOgDRyXg/4
- EUyERne/BQO1lf+j75+HOYBLuGBvDQxjzrvVQiiFExkWUBFGkynHZS1vdhCmvQrhHQhaFmc55x4
- t9WUEhxeZydRD
-X-Google-Smtp-Source: AGHT+IFSXisKIU0/T314HoT0aOyKs76m5vHfpqAgFyKa8rnkwBUyumG7WvR4sgAqVF0+IUuYhdlwyg==
-X-Received: by 2002:a05:6602:728a:b0:85b:3f1a:30aa with SMTP id
- ca18e2360f4ac-861c57c1321mr737741639f.9.1744913788501; 
- Thu, 17 Apr 2025 11:16:28 -0700 (PDT)
+X-Gm-Gg: ASbGncuASxefBke0/z5x0w5gCvttfFV9VpOju81gwkYLc9LJz78caSdgrV+ZvUrujfi
+ 8iNzfbtrSlqE9VeorWZLmOnOLNSg6Kh/iMsqfBA0zGjA/z3wmMPdFYaV03SqLbIQFqfKHi9JfLq
+ hfRwbKrzCi4N1165Y8MK+tf3uq7RHQK+yChpu7ocgZKovfeByhzGNnumkW0qOqFcicYv3IJakVJ
+ fitLtZN5c3IAc2iRjNRdGOcjTEHFro9dIjBNeOHfCRGPmw77HNbSS9KkJpVLAWoXkipiaYENsnL
+ rWyp0vHg7uBWsZ/MEaOr2YVXhoDlYK72xAeQ7bb98GVC+K61RvMggqHEjwinRKNZs7cRkF+bhsK
+ +Sw==
+X-Google-Smtp-Source: AGHT+IFoNwLuXOSqmzbsfeUuvGQM46A77SMpwv3rMXLo20skewVxA1ikYPV1I4fOEcVUyoGo1bHlxg==
+X-Received: by 2002:a92:cda5:0:b0:3d0:4e0c:2c96 with SMTP id
+ e9e14a558f8ab-3d88ed6fb9emr1395785ab.2.1744913801555; 
+ Thu, 17 Apr 2025 11:16:41 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f6a37cb9aesm66673173.28.2025.04.17.11.16.25
+ 8926c6da1cb9f-4f6a37cb9aesm66673173.28.2025.04.17.11.16.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 11:16:27 -0700 (PDT)
+ Thu, 17 Apr 2025 11:16:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Peter Maydell <peter.maydell@linaro.org>,
@@ -75,40 +76,32 @@ Cc: Tom Rini <trini@konsulko.com>, Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Bill Mills <bill.mills@linaro.org>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Alex Shumsky <alexthreed@gmail.com>, Alexander Dahl <ada@thorsis.com>,
- Bin Meng <bmeng.cn@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Boyan Karatotev <boyan.karatotev@arm.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
  =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Fabio Estevam <festevam@gmail.com>,
- Harrison Mutai <harrison.mutai@arm.com>, Jason Liu <jason.hui.liu@nxp.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Liya Huang <1425075683@qq.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
- Mario Six <mario.six@gdsys.cc>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>, Sean Anderson <seanga2@gmail.com>,
- Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
- Sumit Garg <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Thierry Reding <treding@nvidia.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sumit Garg <sumit.garg@kernel.org>,
  This contributor prefers not to receive mails <noreply@example.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Xu Zhang <423756212@qq.com>
-Subject: [PATCH v3 00/22] passage: Define a standard for firmware data flow
-Date: Thu, 17 Apr 2025 12:15:42 -0600
-Message-ID: <20250417181613.1355024-1-sjg@chromium.org>
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: [PATCH v3 02/22] emulation: fdt: Allow using U-Boot's device tree
+ with QEMU
+Date: Thu, 17 Apr 2025 12:15:44 -0600
+Message-ID: <20250417181613.1355024-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250417181613.1355024-1-sjg@chromium.org>
+References: <20250417181613.1355024-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 17 Apr 2025 20:22:52 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -127,189 +120,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+At present it is impossible to change the qemu_arm64 defconfig to
+obtain a devicetree from the U-Boot build.
 
-This series adds a standard way of passing information between different
-firmware phases. This already exists in U-Boot at a very basic level, in
-the form of a bloblist containing an spl_handoff structure, but the intent
-here is to define something useful across projects.
+This is necessary for FIT validation, for example, where the signature
+node must be compiled into U-Boot.
 
-The need for this is growing as firmware fragments into multiple binaries
-each with its own purpose. Without any run-time connection, we must rely
-on build-time settings which are brittle and painful to keep in sync.
+A proposed change to QEMU to allow device tree additions has been
+blocked for several years. The only known workaround is to use QEMU's
+dumpdtb option, merge in the signature node manually, disable
+OF_HAS_PRIOR_STAGE and then start QEMU with special arguments. This is
+complicated enough that it is documented in U-Boot[1].
 
-This feature is named 'standard passage' since the name is more unique
-than many others that could be chosen, it is a passage in the sense that
-information is flowing from one place to another and it is standard,
-because that is what we want to create.
+Unfortunately the only way to disable OF_HAS_PRIOR_STAGE at present is
+to hack the Kconfig.
 
-The implementation is mostly a pointer to a bloblist in a register, with
-an extra register to point to a devicetree, for more complex data. This
-should cover all cases (small memory footprint as well as complex data
-flow) and be easy enough to implement on all architectures.
+Add a new QEMU_MANUAL_DTB Kconfig option which makes OF_HAS_PRIOR_STAGE
+optional, thus avoiding needing to patch U-Boot to get this working.
 
-The emphasis is on enabling open communcation between binaries, not
-enabling passage of secret, undocumented data, although this is possible
-in a private environment.
+This seems a clearer solution than just making OF_HAS_PRIOR_STAGE
+visible, since that symbol is intended to be set automatically by each
+platform.
 
-This series is available at u-boot-dm/pass-working
+[1] https://docs.u-boot.org/en/latest/develop/devicetree/dt_qemu.html
+Link: https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Tom Rini <trini@konsulko.com>
+---
 
 Changes in v3:
-- Add a build for aarch64 as well
-- Add conditions to avoid enaling the test on qemu_arm_sbsa
 - Add mention of QEMU_MANUAL_DTB in doc/
-- Add new patch to adjust how the bloblist is received from stdpass
-- Add new patch to redo how a devicetree is set up
-- Add passage_valid() to decide if stdpass was provided
-- Add support for a 64-bit test also
-- Add support for aarch64 also
-- Add test for aarch64
-- Add tests for azure
-- Drop common.h
-- Fix 'that' typo
 - Fix 'usiing' typo
-- Make the global_data fields present only when needed
-- Move arch_passage_entry() into this patch
-- Move passage.h into this patch
-- Rebase to -master
-- Refresh the U-Boot output in the documentation
-- Update docs for the various code changes
-- Update registers to match the Firmware Handoff protocol
-- Use bootph tags
 
 Changes in v2:
-- Add a devicetree for qemu-arm so that qemu_arm_spl can work
 - Add a new QEMU-specific Kconfig instead
-- Add comments about how to pass standard passage to EFI
-- Add comments about passing a bloblist to Linux
-- Add detailed arch-specific information
-- Add new patch with the arm-specific standard passage implementation
-- Fix 'it' typo
-- Make the stdpass calling standard arch-specific
 - Move patch into the standard-passage series
-- Rebase on -master
-- Rebase to master
-- Rebase to master (dropping bloblist patches already applied)
-- Rework global_data for new stdpass convention
-- Split the jump_to_image_no_args() change into its own patch
-- Update the commit message to mention the long lines
-- Use three registers instead of two for the entry
 
-Simon Glass (22):
-  RFC: scripts: Add a script for running QEMU
-  emulation: fdt: Allow using U-Boot's device tree with QEMU
-  spl: Tidy up the header includes
-  x86: Move Intel GNVS file into the common include directory
-  spl: Rename jump_to_image_no_args()
-  passage: Support an incoming passage
-  fdt: Redo devicetree setup
-  fdt: Support reading FDT from standard passage
-  bloblist: Adjust how the bloblist is received from passage
-  passage: arm: Accept a passage from the previous phase
-  passage: spl: Support adding the dtb to the passage bloblist
-  passage: spl: Support passing the passage to U-Boot
-  passage: arm: Add the arch-specific standard passage impl
-  arm: qemu: Add an SPL build
-  arm: qemu: Add a 64-bit SPL build
-  xferlist: Drop old xferlist code
-  passage: Add a qemu test for ARM
-  sandbox: Add a way of checking structs for standard passage
-  passage: Add documentation
-  passage: Add docs for spl_handoff
-  passage: Add checks for pre-existing blobs
-  CI: Add tests for gitlab and azure
+ arch/arm/Kconfig                   |  2 +-
+ board/emulation/common/Kconfig     | 12 ++++++++++++
+ doc/develop/devicetree/dt_qemu.rst |  8 ++++++++
+ dts/Kconfig                        |  9 +++++++--
+ 4 files changed, 28 insertions(+), 3 deletions(-)
 
- .azure-pipelines.yml                          |   6 +
- .gitlab-ci.yml                                |  12 +
- MAINTAINERS                                   |  10 +
- Makefile                                      |   2 +-
- arch/arm/Kconfig                              |   2 +-
- arch/arm/cpu/armv7/cpu.c                      |  18 +
- arch/arm/cpu/armv7/start.S                    |  10 +-
- arch/arm/cpu/armv8/cpu.c                      |  19 +
- arch/arm/cpu/armv8/start.S                    |  12 +
- arch/arm/dts/qemu-arm-u-boot.dtsi             |  22 +
- arch/arm/dts/qemu-arm.dts                     | 393 +++++++++++++++++-
- arch/arm/dts/qemu-arm64-u-boot.dtsi           |  29 ++
- arch/arm/dts/qemu-arm64.dts                   | 338 ++++++++++++++-
- arch/arm/lib/Makefile                         |   1 -
- arch/arm/lib/crt0.S                           |   6 +
- arch/arm/lib/crt0_64.S                        |   6 +
- arch/arm/lib/xferlist.c                       |  23 -
- arch/arm/lib/xferlist.h                       |  19 -
- arch/arm/mach-imx/imx8ulp/soc.c               |   2 +-
- arch/arm/mach-imx/spl.c                       |   2 +-
- arch/arm/mach-omap2/boot-common.c             |   2 +-
- arch/arm/mach-qemu/Kconfig                    |  20 +-
- arch/arm/mach-tegra/spl.c                     |   2 +-
- arch/mips/lib/spl.c                           |   2 +-
- arch/riscv/lib/spl.c                          |   2 +-
- arch/sandbox/cpu/spl.c                        |   4 +-
- arch/x86/cpu/apollolake/acpi.c                |   2 +-
- arch/x86/cpu/intel_common/acpi.c              |   2 +-
- .../include/asm/arch-apollolake/global_nvs.h  |   2 +-
- arch/x86/lib/spl.c                            |   2 +-
- arch/x86/lib/tpl.c                            |   2 +-
- board/emulation/common/Kconfig                |  12 +
- board/emulation/qemu-arm/Kconfig              |  29 +-
- board/emulation/qemu-arm/MAINTAINERS          |   2 +
- board/emulation/qemu-arm/Makefile             |   1 +
- board/emulation/qemu-arm/qemu-arm.c           |   3 +
- board/emulation/qemu-arm/spl.c                |  26 ++
- board/freescale/common/fsl_chain_of_trust.c   |   2 +-
- board/google/chromebook_coral/coral.c         |   2 +-
- board/renesas/common/rcar64-spl.c             |   2 +-
- board/sandbox/Makefile                        |   3 +-
- board/sandbox/stdpass_check.c                 | 104 +++++
- common/Kconfig                                |  58 ++-
- common/bloblist.c                             | 108 ++---
- common/board_f.c                              |  13 +-
- common/spl/spl.c                              | 112 +++--
- configs/qemu_arm64_spl_defconfig              |  95 +++++
- configs/qemu_arm_spl_defconfig                |  88 ++++
- configs/vexpress_fvp_bloblist_defconfig       |   2 +-
- doc/board/armltd/vexpress64.rst               |   2 +-
- doc/board/emulation/qemu-arm.rst              |  84 ++++
- doc/develop/bloblist.rst                      |   4 +-
- doc/develop/devicetree/dt_qemu.rst            |   8 +
- doc/develop/index.rst                         |   1 +
- doc/develop/std_passage.rst                   | 384 +++++++++++++++++
- drivers/usb/gadget/f_sdp.c                    |   2 +-
- dts/Kconfig                                   |  17 +-
- include/asm-generic/global_data.h             |  37 ++
- include/bloblist.h                            |  26 +-
- include/fdtdec.h                              |   4 +-
- include/handoff.h                             |  10 +-
- .../x86/include/asm => include}/intel_gnvs.h  |   0
- include/passage.h                             |  53 +++
- include/spl.h                                 |   4 +-
- include/stdpass/README                        |   4 +
- include/stdpass/tpm2_eventlog.h               |  42 ++
- include/stdpass/vboot_ctx.h                   | 267 ++++++++++++
- lib/asm-offsets.c                             |   8 +
- lib/fdtdec.c                                  |  42 +-
- scripts/Makefile.xpl                          |   2 +-
- scripts/build-qemu.sh                         | 226 ++++++++++
- test/py/tests/test_passage.py                 |  13 +
- 72 files changed, 2618 insertions(+), 258 deletions(-)
- create mode 100644 arch/arm/dts/qemu-arm-u-boot.dtsi
- create mode 100644 arch/arm/dts/qemu-arm64-u-boot.dtsi
- delete mode 100644 arch/arm/lib/xferlist.c
- delete mode 100644 arch/arm/lib/xferlist.h
- create mode 100644 board/emulation/qemu-arm/spl.c
- create mode 100644 board/sandbox/stdpass_check.c
- create mode 100644 configs/qemu_arm64_spl_defconfig
- create mode 100644 configs/qemu_arm_spl_defconfig
- create mode 100644 doc/develop/std_passage.rst
- rename {arch/x86/include/asm => include}/intel_gnvs.h (100%)
- create mode 100644 include/passage.h
- create mode 100644 include/stdpass/README
- create mode 100644 include/stdpass/tpm2_eventlog.h
- create mode 100644 include/stdpass/vboot_ctx.h
- create mode 100755 scripts/build-qemu.sh
- create mode 100644 test/py/tests/test_passage.py
-
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index d8c99d3ab19..e4fc16e0e9c 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1080,7 +1080,7 @@ config ARCH_QEMU
+ 	imply DM_RNG
+ 	imply DM_RTC
+ 	imply RTC_PL031
+-	imply OF_HAS_PRIOR_STAGE if !TARGET_QEMU_ARM_SBSA
++	imply OF_HAS_PRIOR_STAGE if !TARGET_QEMU_ARM_SBSA && !QEMU_MANUAL_DTB
+ 	imply VIDEO
+ 	imply VIDEO_BOCHS
+ 	imply SYS_WHITE_ON_BLACK
+diff --git a/board/emulation/common/Kconfig b/board/emulation/common/Kconfig
+index 4c15c8bcb89..3f9a6ea578f 100644
+--- a/board/emulation/common/Kconfig
++++ b/board/emulation/common/Kconfig
+@@ -13,3 +13,15 @@ config MTDPARTS_NOR1
+ 	help
+ 	  This define the partition of nor1 used to build mtparts dynamically
+ 	  for the u-boot env stored on nor1.
++
++config QEMU_MANUAL_DTB
++	bool "Manually provide a device tree to QEMU"
++	help
++	  For some use cases, such as FIT validation where a public key must be
++	  placed in U-Boot's device tree, we need to override the device tree
++	  that QEMU would normally provide to us.
++
++	  Note: this work-around is necessary since Linaro has blocked
++	  addition of a feature to support additions to the QEMU devicetree:
++
++	    Link: https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+diff --git a/doc/develop/devicetree/dt_qemu.rst b/doc/develop/devicetree/dt_qemu.rst
+index 8ba2b225590..79e71de9812 100644
+--- a/doc/develop/devicetree/dt_qemu.rst
++++ b/doc/develop/devicetree/dt_qemu.rst
+@@ -46,3 +46,11 @@ You can then run qemu with the merged devicetree, e.g.::
+ 
+ Note that there seems to be a bug in some versions of qemu where the output of
+ dumpdtb does not quite match what is provided to U-Boot.
++
++It is also possible to enable CONFIG_QEMU_MANUAL_DTB so that U-Boot's devicetree
++is built as part of u-boot.bin and can potentially be supplied to QEMU.
++
++See also the
++`rejected QEMU patch <https://patchwork.kernel.org/project/qemu-devel/patch/20231117021840.117874-1-sjg@chromium.org>`_
++and
++`discussion <https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org>`_.
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 6a5141b56e9..c544f948a15 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -197,8 +197,13 @@ config OF_HAS_PRIOR_STAGE
+ 	  development purposes, but it is not recommended, and likely will not
+ 	  even work, for production systems.
+ 
+-	  Note: This option must be set in Kconfig and cannot be enabled or
+-	  disabled in the board's defconfig file.
++	  Note: This option can be disabled for QEMU using QEMU_MANUAL_DTB thus
++	  allowing QEMU to support FIT validation, where the devicetree must
++	  include a public key.
++
++	  See also this for context:
++
++	  https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+ 
+ config OF_OMIT_DTB
+ 	bool "Omit the device tree output when building"
 -- 
 2.43.0
 
-base-commit: 278be62c052f3a5749c3c7a57bcd307b82dcdc2d
-branch: pass3
