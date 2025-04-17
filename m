@@ -4,98 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E37FC369BD
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 00:40:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6EFEC369BD
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 01:03:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7424282DB4;
-	Thu, 17 Apr 2025 02:40:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3485682B7C;
+	Thu, 17 Apr 2025 03:03:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=paulsajna.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BmbW4Lz/";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=paulsajna.com header.i=@paulsajna.com header.b="bGmf+IVS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550EC82EAA; Thu, 17 Apr 2025 02:40:42 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C67482BA4; Thu, 17 Apr 2025 03:03:30 +0200 (CEST)
+Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1202982BD6
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 02:40:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 799C582B44
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 03:03:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=paulsajna.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-54d68d0b530so228633e87.0
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 17:40:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744850439; x=1745455239; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZcPO98uj7lYDfLWTWvGUNlYSEKHRXeAbK4YZOiLNuL0=;
- b=BmbW4Lz/SFMqnGiXx+l6QYbQbM+Xm5etDZsnUFo1DbgtifX8PNi1RXTq56q8uWSS6F
- JcxlHf8QG3a9FP5sHjZRhzoUhIv3f+VAS+FonywRCRRh6efXi4SElu850WAaVx/dcNLY
- +MKgiN1RgRaNkw6jKK3n3WiN/ZmEy4hkeKxXLGCagoG+mrUWR1w7I+Zo8WgeSrzEvRjd
- JepfvnZWeAi6onZI942kKZLKrrIZN2DbyEYcKhLQKNRiu5AEjmjICsP4GHFg2KugvBof
- CJCLtOvGDcaO8L5la4NydIfbXW+yA1w9x1/Z91cuelqbhgmeX0S4/ghi8BB6FkTAltzh
- YYlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744850439; x=1745455239;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZcPO98uj7lYDfLWTWvGUNlYSEKHRXeAbK4YZOiLNuL0=;
- b=m5qtYSC93YqjkBZf0KufUNmwFxgqJDn8TWELR9rzRR+layYUm0N6ZHCAPO00Dslyk8
- ikeKBDgpjLhTUMHR6NGYQkHUQNM1L1IiiYy0Ug3NWo/akVQciqn83f23Z5ND9rmTF46p
- A0dg28SqNbs0IXlociToC87BFoR8utc67T5XXbJBKv9XNHhHOB1qjN+GhCWIgzR1DgX/
- NjseWgceUcRkjGPKIrZg7+NgHBXQ/jF2iKWx1/4RASfiLRzHB4keXgp2u8MSwIA9eUGo
- flDiHFzkwVz88pCJX06GmMknUdj4dw2tj6j975pB7Xxw2eeh3wxLuBbSGFv8H+pE3pcf
- hiow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXSTf04PFgJfMbEkxJPKXgng61248XUT/n/Cs25XyF7Y9FEJTasJrXn+vWxz99khUih2QtOQ/I=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxPhT4zwW3CYAJNFxJd9YzSd7qxB7ygNw+Gs8xARK2TBer9Y6H
- JARlYKutpqPj/RngRGd2+8+yQB2vCh9+2tzJaQQX6U+YGDpf6EzXk6I1CyG8WQ/XCMMzZSJWK/+
- UXb8b4ME5M1o89yPWuAZSaQ2yJj4=
-X-Gm-Gg: ASbGncu7yxDLGU1DBZDEGJnW7psia89JPmwHsnIs5BWpf8Z+ubs8hgA2cyKjgvPRB2p
- GXigzMyhSZwWB47+hTjUpMCBXfx+XEESNeHrcKgBhEjMGxvBvIiZbyd+6gYYWZaQQtaY/6zNhrB
- jfph9NQ7svuGkTt8/ALtxXVnp441ouborXEml5O6VhdEEi7kMgifZcaw==
-X-Google-Smtp-Source: AGHT+IEgkbWAl74yjWynlncn2WuwGDxJ2AGF6s3zZZuePtBT0zNelmDON5REapK8AD6wxrux2c8lrC6f/qwz2jpaNH0=
-X-Received: by 2002:a05:6512:2250:b0:54c:a49:d3de with SMTP id
- 2adb3069b0e04-54d64a7b3c7mr1405398e87.10.1744850439105; Wed, 16 Apr 2025
- 17:40:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=hello@paulsajna.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=paulsajna.com;
+ s=protonmail; t=1744851805; x=1745111005;
+ bh=l/Cv1Pp+yUxLALEYsl8Tagm8Jc+JPvI2KVGOtlmhueI=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=bGmf+IVSCdYLsxeW0FtE4sUiobrBEHgADW1rEPNLC3IIIP7ZbZCmlcBmqcpcjTx25
+ rVlnANzYWgcNAP/3zVJmm04mAAZoTo+qeJcK6N/632qhEo7N4a3nY7g+u8iv7m86zs
+ IRSbLqoNdMJ5YdrBBE1XEdfyJIuaLfttUge7by6en+NvsYnR8PHdvskIgIyeNprsxt
+ o06mcLK9Ol/AgSeW1NAoxRXm0m0xX7ILDEWPnsng+AOhnZk2RvcSAhEZRGRP9ECm/t
+ 50ODhl/AeCRSkTRGnIeXurjU2BsTeltvbpSkeYr7CohOXRKQ/xUnwQfury6PO/yYD4
+ buMiOjYVrIbhw==
+Date: Thu, 17 Apr 2025 01:03:21 +0000
+To: Neil Armstrong <neil.armstrong@linaro.org>
+From: Paul Sajna <hello@paulsajna.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
+ "u-boot-qcom@groups.io" <u-boot-qcom@groups.io>, Sam Day <me@samcday.com>
+Subject: Re: [PATCH] watchdog: qcom: introduce qcom-wdt driver
+Message-ID: <C6HWRLg5DwFTf3v_TLBOKKV6NTwmdbTMVPYMTBJIG4eQmlJHgraFd_-2jLKw6nTGr_95089RX1mkfX2CzKQmOE90YPDTjmqg6Jp6k5j1PlA=@paulsajna.com>
+In-Reply-To: <af42fc39-2283-4eb6-8844-085b72356e11@linaro.org>
+References: <20250413-b4-qcom-wdt-v1-1-db42cb93dff8@paulsajna.com>
+ <af42fc39-2283-4eb6-8844-085b72356e11@linaro.org>
+Feedback-ID: 29073965:user:proton
+X-Pm-Message-ID: 5938d5a9f3b3a4a896741053fe67fdb3e4565b12
 MIME-Version: 1.0
-References: <20250323160107.145749-1-marex@denx.de>
- <20250323160107.145749-17-marex@denx.de>
- <20250415142846.GA244333@francesco-nb>
- <CAHCN7xLa5W-AtRso6RUZwZG_sfDm9CHierfzt_WfOqFjSGJZoA@mail.gmail.com>
- <20250415150344.GA246483@francesco-nb>
- <b396cb96-ff95-4822-ad24-ddff2e3b6545@denx.de>
- <CAOMZO5B=j=k8U6to2TDzohS11j4hPWQOho9bdrYCPe0WXtrQjw@mail.gmail.com>
- <20250416092639.GA24345@francesco-nb>
- <db2d623afd944df2bca6d1e4657d4031@dh-electronics.com>
- <CAHCN7xKyoBQPeXDA90-kcBTw7BhObvn6PVzreoUQ5+GjiCewyg@mail.gmail.com>
- <CAHCN7xLgS7FZ4ajbBa+p-_w_s6oHnfMYcZEMsNBNkqkgAG-7Jw@mail.gmail.com>
- <b35218ca-df17-4423-9932-a2ad0ba14e50@denx.de>
- <CAOMZO5CA0_GUr2uQtQgFHe-9wVDCOQwo5HZzZ4sibXEPMpe8cA@mail.gmail.com>
-In-Reply-To: <CAOMZO5CA0_GUr2uQtQgFHe-9wVDCOQwo5HZzZ4sibXEPMpe8cA@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 16 Apr 2025 21:40:27 -0300
-X-Gm-Features: ATxdqUElvkbVBTSetARpb2Df88UZzk9ckAsc3_xKxneCRop6Iz0Mw8tWC2Jjrbc
-Message-ID: <CAOMZO5DsfWdawYx_ejCfjig9wB3BrmmqziWWK5_4yGs0U30ASQ@mail.gmail.com>
-Subject: Re: [REGRESSION] Re: [PATCH v2 16/24] clk: imx: Convert clock-osc-*
- back to osc_*
-To: Marek Vasut <marex@denx.de>
-Cc: Adam Ford <aford173@gmail.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Francesco Dolcini <francesco@dolcini.it>, 
- Fabio Estevam <festevam@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, 
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,11 +70,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 16, 2025 at 8:58=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
+Thanks for the feedback, I'll try to circle back to it in a few days, perha=
+ps on the weekend.
 
-> What do you think about registering the osc clocks like this?
->
-> https://paste.debian.net/1369857/
 
-With this patch, "ums 0 mmc 1" works on the imx8mp-evk.
+-------- Original Message --------
+On 4/14/25 12:24 AM, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+
+>  Hi,
+> =20
+>  On 13/04/2025 12:12, Paul Sajna wrote:
+>  > From: Caleb Connolly <caleb.connolly@linaro.org>
+>  >
+>  > Some Qualcomm device vendors decide to turn the watchdog on in the
+>  > bootloader, resulting in the device being reset if it isn't petted eve=
+ry
+>  > ~30 seconds. Introduce a driver to disable the watchdog and prevent th=
+is
+>  > annoying behaviour.
+>  >
+>  > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>  > Signed-off-by: Paul Sajna <hello@paulsajna.com>
+>  > Tested-by: Paul Sajna <hello@paulsajna.com>
+>  > ---
+>  > This patch introduces a simple watchdog driver for Qualcomm devices.
+>  >
+>  > Some devices, including one I have been spending a lot of time with,
+>  > the LG G7 ThinQ (codename judyln, arch sdm845) will reset within 30
+>  > seconds if the watchdog is not serviced.
+>  >
+>  > I have tested this patch from Caleb Connolly that is over a year old a=
+nd has
+>  > not yet been upstreamed, and it is very useful to me. I can hardly use
+>  > u-boot on this device without it. I have received Caleb's permission t=
+o
+>  > work on upstreaming this patch.
+>  >
+>  > This is my first contribution to U-Boot, and I am unfamiliar with
+>  > mailing list workflows, so please be patient :)
+>  > ---
+>  >   configs/qcom_defconfig      |   2 +
+>  >   drivers/watchdog/Kconfig    |   7 ++++
+>  >   drivers/watchdog/Makefile   |   1 +
+>  >   drivers/watchdog/qcom-wdt.c | 100 ++++++++++++++++++++++++++++++++++=
+++++++++++
+>  >   4 files changed, 110 insertions(+)
+>  >
+>  > diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+>  > index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..0232f6d51c552bd06c8ba7=
+2b71edb5cb72fe0706 100644
+>  > --- a/configs/qcom_defconfig
+>  > +++ b/configs/qcom_defconfig
+>  > @@ -144,3 +144,5 @@ CONFIG_VIDEO_FONT_16X32=3Dy
+>  >   CONFIG_SYS_WHITE_ON_BLACK=3Dy
+>  >   CONFIG_NO_FB_CLEAR=3Dy
+>  >   CONFIG_VIDEO_SIMPLE=3Dy
+>  > +CONFIG_WDT_QCOM=3Dy
+>  > +CONFIG_WDT=3Dy
+>  > diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+>  > index 1bb67f5035231df9f6ce01adb08d074855393143..808f4e578e28e7812f93b3=
+93a7f7d95d9501cdd4 100644
+>  > --- a/drivers/watchdog/Kconfig
+>  > +++ b/drivers/watchdog/Kconfig
+>  > @@ -335,6 +335,13 @@ config WDT_K3_RTI_FW_FILE
+>  >
+>  >   endif
+>  >
+>  > +config WDT_QCOM
+>  > +=09bool "Qualcomm watchdog timer support"
+>  > +=09depends on WDT && ARCH_SNAPDRAGON
+>  > +=09help
+>  > +=09  Select this to enable Qualcomm watchdog timer, which can be foun=
+d on
+>  > +=09  some Qualcomm chips.
+>  > +
+>  >   config WDT_SANDBOX
+>  >   =09bool "Enable Watchdog Timer support for Sandbox"
+>  >   =09depends on SANDBOX && WDT
+>  > diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+>  > index e6bd4c587af6133c405dde6dbada8050debc781c..5eaabd4aba58c815de4165=
+f901aecfba0e0da255 100644
+>  > --- a/drivers/watchdog/Makefile
+>  > +++ b/drivers/watchdog/Makefile
+>  > @@ -54,3 +54,4 @@ obj-$(CONFIG_WDT_SUNXI) +=3D sunxi_wdt.o
+>  >   obj-$(CONFIG_WDT_TANGIER) +=3D tangier_wdt.o
+>  >   obj-$(CONFIG_WDT_XILINX) +=3D xilinx_wwdt.o
+>  >   obj-$(CONFIG_WDT_ADI) +=3D adi_wdt.o
+>  > +obj-$(CONFIG_WDT_QCOM) +=3D qcom-wdt.o
+>  > diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
+>  > new file mode 100644
+>  > index 0000000000000000000000000000000000000000..a7ce31ef811c717fd16700=
+aa7d984a000763a93e
+>  > --- /dev/null
+>  > +++ b/drivers/watchdog/qcom-wdt.c
+>  > @@ -0,0 +1,100 @@
+>  > +// SPDX-License-Identifier: GPL-2.0+
+>  > +/*
+>  > + * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+>  > + * Copyright (c) Linaro Ltd. 2024
+>  > + *
+>  > + * Authors:
+>  > + *   Caleb Connolly <caleb.connolly@linaro.org>
+>  > + *
+>  > + * Derived from linux/drivers/watchdog/qcom-wdt.c
+>  > + */
+>  > +
+>  > +#include <dm.h>
+>  > +#include <wdt.h>
+>  > +
+>  > +#include <asm/io.h>
+>  > +
+>  > +enum wdt_reg {
+>  > +=09WDT_RST,
+>  > +=09WDT_EN,
+>  > +=09WDT_STS,
+>  > +=09WDT_BARK_TIME,
+>  > +=09WDT_BITE_TIME,
+>  > +};
+>  > +
+>  > +struct qcom_wdt_match_data {
+>  > +=09const u32 *offset;
+>  > +};
+>  > +
+>  > +struct qcom_wdt {
+>  > +=09void __iomem *base;
+>  > +=09const u32 *layout;
+>  > +};
+>  > +
+>  > +static const u32 reg_offset_data_kpss[] =3D {
+>  > +=09[WDT_RST] =3D 0x4,
+>  > +=09[WDT_EN] =3D 0x8,
+>  > +=09[WDT_STS] =3D 0xC,
+>  > +=09[WDT_BARK_TIME] =3D 0x10,
+>  > +=09[WDT_BITE_TIME] =3D 0x14,
+>  > +};
+>  > +
+>  > +static const struct qcom_wdt_match_data match_data_kpss =3D {
+>  > +=09.offset =3D reg_offset_data_kpss,
+>  > +};
+>  > +
+>  > +static void __iomem *wdt_addr(struct qcom_wdt *wdt, enum wdt_reg reg)
+>  > +{
+>  > +=09return wdt->base + wdt->layout[reg];
+>  > +}
+>  > +
+>  > +int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>  > +{
+>  > +=09/* unimplemented */
+>  > +=09return 0;
+>  > +}
+>  > +
+>  > +int qcom_wdt_stop(struct udevice *dev)
+>  > +{
+>  > +=09struct qcom_wdt *wdt =3D dev_get_priv(dev);
+>  > +
+>  > +=09writel(0, wdt_addr(wdt, WDT_EN));
+>  > +=09if (readl(wdt_addr(wdt, WDT_EN))) {
+>  > +=09=09printf("Failed to disable Qualcomm watchdog!\n");
+>  > +=09=09return -EIO;
+>  > +=09}
+>  > +
+>  > +=09return 0;
+>  > +}
+>  > +
+>  > +static int qcom_wdt_probe(struct udevice *dev)
+>  > +{
+>  > +=09struct qcom_wdt *wdt =3D dev_get_priv(dev);
+>  > +=09struct qcom_wdt_match_data *data =3D (void *)dev_get_driver_data(d=
+ev);
+>  > +=09int ret;
+>  > +
+>  > +=09wdt->base =3D dev_read_addr_ptr(dev);
+>  > +=09wdt->layout =3D data->offset;
+>  > +
+>  > +=09ret =3D qcom_wdt_stop(dev);
+> =20
+>  Fine but perhaps just add a simple code into qcom_wdt_start() and add
+>  a reset callback to allow people to actually use the wdog from u-boot
+>  with CONFIG_WATCHDOG_AUTOSTART and/or u-boot,autostart.
+> =20
+>  No need to implement set_timeout, we can use the bootloader value.
+> =20
+>  > +
+>  > +=09return ret;
+>  > +}
+>  > +
+>  > +static const struct wdt_ops qcom_wdt_ops =3D {
+>  > +=09.stop =3D qcom_wdt_stop,
+> =20
+>  You forgot qcom_wdt_start()
+> =20
+>  > +};
+>  > +
+>  > +static const struct udevice_id qcom_wdt_ids[] =3D {
+>  > +=09{ .compatible =3D "qcom,kpss-wdt", .data =3D (ulong)&match_data_kp=
+ss },
+>  > +=09{}
+>  > +};
+>  > +
+>  > +U_BOOT_DRIVER(qcom_wdt) =3D {
+>  > +=09.name =3D "qcom_wdt",
+>  > +=09.id =3D UCLASS_WDT,
+>  > +=09.of_match =3D qcom_wdt_ids,
+>  > +=09.ops =3D &qcom_wdt_ops,
+>  > +=09.probe =3D qcom_wdt_probe,
+>  > +=09.priv_auto =3D sizeof(struct qcom_wdt),
+>  > +};
+>  >
+>  > ---
+>  > base-commit: f3563fc30356c8079527b90e532407050dff7c7b
+>  > change-id: 20250413-b4-qcom-wdt-e7b913fc375e
+>  >
+>  > Best regards,
+> =20
+> =20
+>  
