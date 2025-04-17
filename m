@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99FDC369CA
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 21:36:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA824C369C9
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 21:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0145D83106;
-	Thu, 17 Apr 2025 23:36:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5EB4782DB8;
+	Thu, 17 Apr 2025 23:37:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MrltCJzt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HG1K7jiz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BD2C830EA; Thu, 17 Apr 2025 23:36:14 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id AAF2883086; Thu, 17 Apr 2025 23:37:22 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3609082CF1
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 23:36:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8770C82CF1
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 23:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ac25d2b2354so194832866b.1
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 14:36:12 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-abbd96bef64so198758566b.3
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 14:37:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744925772; x=1745530572; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744925840; x=1745530640; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n8AxwP1XckPZP6wBpWCmPzySX3mflzAuTxJ3etEC6gw=;
- b=MrltCJztMoXsdWCRladYzQa8wOnSzergmAPP65Bu1++8JxTgJZgnv1gcZWSJfGs2nF
- M5LLQY7lXOcNRC84Apw51z2K2XuES7pQQnn+/iR2j0fUXbZnDnbXiAEA8XUhMW4YhZEA
- gg5S8+9hwwGTaqKIPZ++nADHZHKbrMVft3tNk=
+ bh=UpsgRjn+SWc9QzeUgQHYdbCXgxnbH2cwVhrwxHCNy+0=;
+ b=HG1K7jiz6/3lKCC5i5r1RlJs80XyF4PyfyFMlacixtAT36o+6bcWE2AnpoCBB8+9Og
+ 3pPtQ78xOZ09e63seraeEi51yVfxvRJmujtFV85N8qh7G+XjiezIk0fDDGqQlnIJ9mO/
+ KwsrJG3so1/rC+LEg7y5xL0QdNNEKc3NPGEmc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744925772; x=1745530572;
+ d=1e100.net; s=20230601; t=1744925840; x=1745530640;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=n8AxwP1XckPZP6wBpWCmPzySX3mflzAuTxJ3etEC6gw=;
- b=D8yGi3ptRZAjTLFFfOmbz6atN44uFKBIfDw9iclF7WewNjtbOcKf26Qo3igr+WZfrr
- lKJfhsmLTLIzT9HiwXdaVVOqZsgbhBfxAnLlwWmCktct1xzTSP9d42uhzXfScXgG5Vpx
- iJjFmS0JUQXd/oknmWoJXW38ModLD8/Q/mqK9gwRgd1akBZPWpMGBS24xRZdqCu9Rflf
- d+YWKMKJIcoPJScOe5pTif9PzP59tsUtdbZsj10HDrfNeY2MXRAPYNJkKAZ0CDdPgo0C
- 8362sMwxdRmqrAI4kMWWnqJC4KWSk5vT8IDY5Lt2u2Ret+SvevalNSYEMpZV1z5H+629
- wOkQ==
+ bh=UpsgRjn+SWc9QzeUgQHYdbCXgxnbH2cwVhrwxHCNy+0=;
+ b=L+MFj0R2RD0Q60vkGB98EI+m3ADspxagjRFuRZLBQmI6XuxeWrr+ojDPFtbVAAJD0D
+ m2T27Q6Hh41F5ZfRbi1LV1EEt3ULbbFKZyYoRZLz/aRreP9YkUirnJrfEdNoosIqhIzO
+ Hrru3dD3xpc/uGUHKf5ZN9KjoQCbTEWI3fkIHOUUtsy+xQugon+UJU9nMGU0dePvJgpe
+ WcUdcB7PSh+7LRz8xDrHgEfdLzJkh9Xa4/Ar5FgY2Pa7oYKLOwLiYgvGTBgLst7k8aR/
+ w/sDWKbbHmXopXGluy2gBz05b5gZKajnlEuKMX/8DXqSIVZjecgW+ZR6kaUrv3KyZsp4
+ ih2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPIgOlQTrTWvyRIUrL1NA/I4w3ZvMcd3T3BkNKpUsoaYvTIaaTIbzZJQokNmE6wUSo84BRLFg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwlBs9qrBrtWnIMCaMrwU6EKMm0dL7fI11sbkjBqQsLz50yVy83
- MqBHS9n2jUSzSz7geDjQlVNR8dSDeTckU1CizBbNn7M01tHzslP1UvAd9U/JE3s4u6Gln0MsCI7
- +wfEnRuZ2h90IXlWt1aW+qqNIYxT1kw17XD/3/hxWclAap0I=
-X-Gm-Gg: ASbGnctamxHq4++waQfPmdU6IZCFXRHPo8vTSsuFvbsGcZJU5gR8xpbfHRgAqhllyX8
- 3dWdogYGto2fI4nVg5/1X+Ydd0xz2VzzwDCy3b2to4rgF67qXXDqPqNDuR6CHQcH3/U+jsws48+
- kmy7ikCifRpTz5DDtqdM1vVkMmKNZH9Pnerg==
-X-Google-Smtp-Source: AGHT+IGUOBx1S51SLbwshDsEADx7g7mKMO6QjzGEWsvVJKWXwOxcvQt2F6zkHCtGiHbNGpyB1p97g9T9C9gXpx6AdG8=
-X-Received: by 2002:a17:907:6e91:b0:aca:e33d:48af with SMTP id
- a640c23a62f3a-acb74e26190mr24759166b.61.1744925771600; Thu, 17 Apr 2025
- 14:36:11 -0700 (PDT)
+ AJvYcCWtWx+4mmijfmYkd9yUdVA12VhifjTLKnz3Ahx5P5IetM8iXDToQDwtiz/YwcaI6TVWLB0NSFc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQHNG2+mzqTKMXau8Hr88DPMA+Qx/hfRHGyRfoe3J0BaA/9SfA
+ n5EPyM2oVN1eG8wK/6AEGWATY+e7NfM16Fs3Jbh38QaaJYzOndSsa5mEti3qCrYnZ2+NP8dsVyz
+ mzr7Rh4NZPRGwCK9sj9moTljBFLv3y0PDL++9
+X-Gm-Gg: ASbGncvcnqk/P0BusYPLEXZkwRyZU4TbmRsIn2/LwK5EMmpcimpXppSWQS+X1Gnij5+
+ 6HPG+cNwZmma0DIMq4r9lqKTvvHkmcN18ozqilSnieVgMFfWfrFf9UVq/o75kzuwr6rTht5f6Ik
+ udc8YHAPhN5O3QudtJAajvZ2Q=
+X-Google-Smtp-Source: AGHT+IHbuAY2yF9r1fG+b7T4ZmY+r/8NngBmnBMvMjrtTNQ/ILo8y+F5YRET6MiSG7eCWBIE0p6/1cs1vGiI/4NGaJw=
+X-Received: by 2002:a17:907:2da5:b0:aca:d571:7790 with SMTP id
+ a640c23a62f3a-acb74b2e840mr38378666b.16.1744925839842; Thu, 17 Apr 2025
+ 14:37:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250329150626.2879942-1-jonas@kwiboo.se>
- <20250329150626.2879942-9-jonas@kwiboo.se>
- <01e8a4b3-a77c-42ca-a4de-e744755a2b89@cherry.de>
- <CAFLszTgSeGN_+adh6VviNxYmVCGR_iOQN_igBbdEaXxDqKsb_Q@mail.gmail.com>
- <e7ac70c7-676a-4df1-b1bf-5c4bbbc31a1c@cherry.de>
- <CAFLszTgGfXmBrTu4RnSo13WE82W+E-bVrCrif48BbHFxzx-TFA@mail.gmail.com>
- <53f32547-6758-49a2-8246-72b9046cac03@cherry.de>
- <CAFLszTh0et26pngJK1e6JjeLHaNsm7XDhZn3kfZZc7LBeAt-iw@mail.gmail.com>
- <fbd407cb-e0dd-4055-91d1-0b57b45a180e@cherry.de>
-In-Reply-To: <fbd407cb-e0dd-4055-91d1-0b57b45a180e@cherry.de>
+References: <20250411-livetree-fixup-v2-0-1236823377bb@linaro.org>
+ <20250411-livetree-fixup-v2-1-1236823377bb@linaro.org>
+ <CAFLszTg9d97fFaosbCfQqCyBHivfn00S01_0wK9mB3RXZ7VbRA@mail.gmail.com>
+ <e8a45df8-d71e-4e2f-8b4b-440684438c06@linaro.org>
+In-Reply-To: <e8a45df8-d71e-4e2f-8b4b-440684438c06@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 17 Apr 2025 15:35:56 -0600
-X-Gm-Features: ATxdqUGihusd90FqOtjb9jISpKs5xueyoWYn6D8jspZB_ZvftUURn3g-Atoy9OA
-Message-ID: <CAFLszTi0tM6NLzK02KQgYecBGCm=pOZjAC2F5zU0JDe_x3F5FA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/10] rockchip: binman: Use the skip-at-start prop in
- simple-bin image
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+Date: Thu, 17 Apr 2025 15:37:07 -0600
+X-Gm-Features: ATxdqUEwYHooYh2gM9nGHNbYSLViaZ8YmQhp4Dk8-RUrmZJYswS9d3oFcrpajkE
+Message-ID: <CAFLszTjwL0dpyy3hX55_bQDZ8U3RcZPF54tCgup+=_+cme4CJA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/8] event: signal when livetree has been built
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,134 +93,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Caleb,
 
-On Mon, 14 Apr 2025 at 09:10, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Mon, 14 Apr 2025 at 06:33, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
 > Hi Simon,
 >
-> On 4/9/25 4:30 PM, Simon Glass wrote:
-> > Hi Quentin,
+> On 4/11/25 20:27, Simon Glass wrote:
+> > Hi Caleb,
 > >
-> > On Wed, 9 Apr 2025 at 07:35, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > On Fri, 11 Apr 2025 at 06:47, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 > >>
-> >> Hi Simon,
+> >> OF_LIVE offers a variety of benefits, one of them being that the live
+> >> tree can be modified without caring about the underlying FDT. This is
+> >> particularly valuable for working around U-Boot limitations like lacking
+> >> USB superspeed support on Qualcomm platforms, no runtime OTG, or
+> >> peripherals like the sdcard being broken (and displaying potentially
+> >> worrying error messages).
 > >>
-> >> On 4/9/25 3:33 PM, Simon Glass wrote:
-> >>> Hi Quentin,
-> >>>
-> >>> On Wed, 9 Apr 2025 at 07:32, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>>>
-> >>>> Hi Simon,
-> >>>>
-> >>>> On 4/9/25 3:22 PM, Simon Glass wrote:
-> >>>>> Hi Quentin,
-> >>>>>
-> >>>>> On Wed, 9 Apr 2025 at 04:57, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>>>>>
-> >>>>>> Hi Jonas, Simon,
-> >>>>>>
-> >>>>>> On 3/29/25 4:06 PM, Jonas Karlman wrote:
-> >>>>>>> From: Simon Glass <sjg@chromium.org>
-> >>>>>>>
-> >>>>>>> The simple-bin image is normally written to MMC media at block 64, which
-> >>>>>>> is a 32K offset from start of storage media.
-> >>>>>>>
-> >>>>>>> Set the skip-at-start property to 0x8000 (32 KiB) so that fdtmap and
-> >>>>>>> other embedded binman symbols in the output binary is referencing image
-> >>>>>>> offsets correctly.
-> >>>>>>>
-> >>>>>>
-> >>>>>> Shouldn't we have this commit BEFORE we add the `fdtmap` node since we
-> >>>>>> know it's wrong before this commit?
-> >>>>>>
-> >>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> >>>>>>> ---
-> >>>>>>> Changes in v4:
-> >>>>>>> - Drop defconfig changes
-> >>>>>>> - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
-> >>>>>>>
-> >>>>>>> Changes in v2:
-> >>>>>>> - Move this patch to the end of the series
-> >>>>>>> - Drop 0x8000 offset for SPI
-> >>>>>>> ---
-> >>>>>>>      arch/arm/dts/rockchip-u-boot.dtsi | 3 ++-
-> >>>>>>>      1 file changed, 2 insertions(+), 1 deletion(-)
-> >>>>>>>
-> >>>>>>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> >>>>>>> index fb38b7b80c43..65b81bf58626 100644
-> >>>>>>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> >>>>>>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> >>>>>>> @@ -154,6 +154,7 @@
-> >>>>>>>          simple-bin {
-> >>>>>>>                  filename = "u-boot-rockchip.bin";
-> >>>>>>>                  pad-byte = <0xff>;
-> >>>>>>> +             skip-at-start = <0x8000>;
-> >>>>>>>
-> >>>>>>>                  mkimage {
-> >>>>>>>                          filename = "idbloader.img";
-> >>>>>>> @@ -178,7 +179,7 @@
-> >>>>>>>      #else
-> >>>>>>>                  u-boot-img {
-> >>>>>>>      #endif
-> >>>>>>> -                     offset = <CONFIG_SPL_PAD_TO>;
-> >>>>>>> +                     offset = <(CONFIG_SPL_PAD_TO + 0x8000)>;
-> >>>>>>
-> >>>>>> This is confusing. The documentation states:
-> >>>>>>
-> >>>>>> """
-> >>>>>> offset:
-> >>>>>>         This sets the offset of an entry within the image or section containing
-> >>>>>>         it.
-> >>>>>> """
-> >>>>>>
-> >>>>>> My understanding is that it should be relative to the beginning of the
-> >>>>>> image but this now needs the knowledge of where it will be stored on the
-> >>>>>> MMC device (via the value in skip-at-start).
-> >>>>>>
-> >>>>>> Why is skip-at-start automatically deducted from offset?
-> >>>>>
-> >>>>> This is how binman works[1]. We are trying to use the feature designs
-> >>>>
-> >>>> Why is it deducted?
-> >>>
-> >>> Are you asking why skip-at-start is deducted from the offset?
-> >>>
+> >> Add an event to signal when the live tree has been built so that we can
+> >> apply fixups to it directly before devices are bound.
 > >>
-> >> Yes
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >>   common/event.c  |  3 +++
+> >>   include/event.h | 18 ++++++++++++++++++
+> >>   lib/of_live.c   | 11 +++++++++++
+> >>   3 files changed, 32 insertions(+)
+> >>
+> >> diff --git a/common/event.c b/common/event.c
+> >> index dda569d447851f559a83f98fb7b1f3543156eab5..8d7513eb10b61919e1e784481dfdcc076be14986 100644
+> >> --- a/common/event.c
+> >> +++ b/common/event.c
+> >> @@ -47,8 +47,11 @@ const char *const type_name[] = {
+> >>          "ft_fixup",
+> >>
+> >>          /* main loop events */
+> >>          "main_loop",
+> >> +
+> >> +       /* livetree has been built */
+> >> +       "of_live_init",
+> >>   };
+> >>
+> >>   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
+> >>   #endif
+> >> diff --git a/include/event.h b/include/event.h
+> >> index 75141a192a48b0931667632f41be8ff4d6139f7c..1d267f1d10547642d381fa287ab4981a2bf03543 100644
+> >> --- a/include/event.h
+> >> +++ b/include/event.h
+> >> @@ -152,8 +152,17 @@ enum event_t {
+> >>           * A non-zero return value causes the boot to fail.
+> >>           */
+> >>          EVT_MAIN_LOOP,
+> >>
+> >> +       /**
+> >> +        * @EVT_OF_LIVE_BUILT:
+> >> +        * This event is triggered immediately after the live device tree has been
+> >> +        * built. This allows for machine specific fixups to be done to the live tree
+> >> +        * (like disabling known-unsupported devices) before it is used. This
+> >> +        * event is only available if OF_LIVE is enabled and is only used after relocation.
 > >
-> > It is confusing, unfortunately.
-> >
-> > When you use an offset (say 0x78000) then normally the entry will
-> > start at that offset in the image.
-> >
-> > When you use skip-at-start 0x8000, its value is added to all top-level
-> > offsets in the image, so the offset becomes 0x80000
-> >
-> > BUT the image built by binman does not contain the first 0x8000 bytes.
-> > It is expected that the image is written to offset 0x8000 so that the
-> > offsets will be correct when used within U-Boot itself.
-> >
+> > Add a bit more detail, e.g.: before it is used by U-Boot
+> > post-relocation. This means it is possible to affect the devices bound
+> > by driver model.
 >
-> I would assume all offsets are relative to the beginning of the image in
-> the binary? Adding skip-at-start doesn't add 0x8000 bytes at the
-> beginning of the binary file, so why would the offsets need to be modified?
->
-> Also, while 0x8000 is the typical address the image can be flashed, it
-> is not necessarily where it will be as the BootROM tries a few other
-> offsets if it cannot find one at 32KiB offset in the storage medium.
-> This seems to me to be a case of "somewhat helps in one case, but makes
-> things more confusing in others"? Will we need different offsets
-> depending on where the FIT is flashed? What happens for A/B updates then?
->
-> I understand that we currently essentially have skip-at-start = 0; and
-> that it is bad because it doesn't reflect the actual address, but how is
-> that worse than hardcoding a different offset?
+> I think this is really implied and made obvious by context clues. IF
+> there comes a time where we build the live tree more than once (e.g. to
+> build it as part of the DT_FIXUP_PROTOCOL for some reason) then the
+> extra info you propose adding would no longer be correct, where the
+> current wording would remain correct.
 
-It's probably best that we discuss this on a call. You could also give
-it a try, e.g. try accessing data in the U-Boot image from SPL and see
-how it works for you.
+OK, leave it alone if you like.
+
+>
+> >
+> > You should also note that the flattree is inactive when livetree is
+> > used and any changes may eventually be passed onto the OS, if it
+> > doesn't have its own devicetree. This is the point we were discussing
+> > on the other thread.
+>
+> This information is totally irrelevant though, and there is no broad
+> agreement with your proposed changes. The livetree API is also set up so
+> that one could build multiple livetrees (for whatever reason), this
+> event is modelled to reflect that (where you can see in my v1 patches
+> that the event assumed you would only ever build the global tree).
+
+Hmmm, if Linaro is going to block livetree fixups then we are going to
+have a problem. I have not heard that, but let me know.
+
+>
+> >
+> >> +        */
+> >> +       EVT_OF_LIVE_BUILT,
+> >> +
+> >>          /**
+> >>           * @EVT_COUNT:
+> >>           * This constants holds the maximum event number + 1 and is used when
+> >>           * looping over all event classes.
+> >> @@ -202,8 +211,17 @@ union event_data {
+> >>          struct event_ft_fixup {
+> >>                  oftree tree;
+> >>                  struct bootm_headers *images;
+> >>          } ft_fixup;
+> >> +
+> >> +       /**
+> >> +        * struct event_of_live_built - livetree has been built
+> >> +        *
+> >> +        * @root: The root node of the live device tree
+> >> +        */
+> >> +       struct event_of_live_built {
+> >> +               struct device_node *root;
+> >> +       } of_live_built;
+> >>   };
+> >>
+> >>   /**
+> >>    * struct event - an event that can be sent and received
+> >> diff --git a/lib/of_live.c b/lib/of_live.c
+> >> index 90b9459ede313e492e28c8556c730f3bd8aaa9df..c1620616513c2e32448b4a6d156a9162d97c76b7 100644
+> >> --- a/lib/of_live.c
+> >> +++ b/lib/of_live.c
+> >> @@ -10,8 +10,9 @@
+> >>
+> >>   #define LOG_CATEGORY   LOGC_DT
+> >>
+> >>   #include <abuf.h>
+> >> +#include <event.h>
+> >>   #include <log.h>
+> >>   #include <linux/libfdt.h>
+> >>   #include <of_live.h>
+> >>   #include <malloc.h>
+> >> @@ -320,8 +321,9 @@ int unflatten_device_tree(const void *blob, struct device_node **mynodes)
+> >>
+> >>   int of_live_build(const void *fdt_blob, struct device_node **rootp)
+> >>   {
+> >>          int ret;
+> >> +       union event_data evt;
+> >>
+> >>          debug("%s: start\n", __func__);
+> >>          ret = unflatten_device_tree(fdt_blob, rootp);
+> >>          if (ret) {
+> >> @@ -334,8 +336,17 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
+> >>                  return ret;
+> >>          }
+> >>          debug("%s: stop\n", __func__);
+> >>
+> >> +       if (CONFIG_IS_ENABLED(EVENT)) {
+> >> +               evt.of_live_built.root = *rootp;
+> >> +               ret = event_notify(EVT_OF_LIVE_BUILT, &evt, sizeof(evt));
+> >> +               if (ret) {
+> >> +                       log_debug("Failed to notify livetree build event: err=%d\n", ret);
+> >> +                       return ret;
+> >> +               }
+> >> +       }
+> >> +
+> >
+> > This should move to the caller of this function. We should also have a
+>
+> Why move it to the caller? Then every caller would need to signal the
+> event and we'd pointlessly duplicate code. The event signals that /a/
+> livetree has been built. Today this only happens once and we make the
+> assumption that this livetree is to be used by U-Boot and only U-Boot.
+>
+> Should this assumption become incorrect in the future, it would be
+> trivial to introduce a variable to the event_data that describes what
+> the livetree is and/or where it will be used so that anyone catching the
+> event can decide what to do.
+>
+> Since we don't yet know any other usecases, it would be overzealous to
+> try and capture this information since we just don't know what's important.
+
+There is (and will only ever be) one caller. At this point I really
+don't mind what you do.
+
+>
+> > sandbox test for this feature, e.g. catch the event and add a
+> > node/prop and check in a test in test-fdt.c (or similar) that it is
+> > present.
+>
+> What would this test other than that the event is sent? We already have
+> tests for the event framework...
+
+If the CI tests pass, then it's fine.
+
+
+>
+> >
+> > I'm not sure if you need to update test_event_dump.py but since CI
+> > presumably passes, I guess not.>
+> >>          return ret;
+> >>   }
+> >>
+> >>   void of_live_free(struct device_node *root)
+> >>
+> >> --
+> >> 2.49.0
+> >>
 
 Regards,
 Simon
