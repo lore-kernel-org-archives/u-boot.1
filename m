@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 831A0C369C2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05D4C369B2
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:56:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D08B382F87;
-	Thu, 17 Apr 2025 15:54:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5793382D32;
+	Thu, 17 Apr 2025 15:56:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jnga+sVG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nzGavX+C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E58D582D32; Thu, 17 Apr 2025 15:54:27 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id B3B6382F5A; Thu, 17 Apr 2025 15:56:20 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDDDD82D18
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:54:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8439082D18
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:56:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-30f30200b51so8781181fa.3
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:54:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2c873231e7bso438510fac.3
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:56:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744898065; x=1745502865; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u5Be8ZG/XfXv7B2xXM8yWX5mnifHNnRiUIAR7wc8Us0=;
- b=Jnga+sVG0GZwfsGE7vMcxDpwIF6YTf9UG+Xip6/4vNwin0ahIWxapmRGv8AKVzF5jl
- yrrnYcxIEOr+dDqUufw8jQ7Hjt5RO5qvs5e0MyD0D0Qlbv0KwGuc7YCB6A8Q1dSai+JY
- D90+cX8PXCguQt6eebfuY8yDfrgb6nQKMe5+YOfINfePT6tZ78x5+Yg0eSSB6YuiIRLo
- NLNMxi/G7cpTrKLfWqeP0NzbAuqgFRFNeAYVQu4Tx1N+xj5chEVU2N9jEqKhaa/3XD2K
- AnpFck7KOaExPun+ilI7IoUdF5DttANtv9xC/uhzMo0f63dwWIyuVjYhr9nk65XMOQ6H
- bm3Q==
+ d=konsulko.com; s=google; t=1744898177; x=1745502977; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9T4PkAz772+50Otk88itAJMvWo1vLjesXEIcMKgs7uE=;
+ b=nzGavX+Cc5+9ie56TF2kx3MLya2UrI4LT81l5kozSJYaPxhkXzw9vpOKmJMy/ZD+eB
+ 4xHxntAVvhz5rICwlUVSIEJAYPQAT38nj6aLVuc2BC2tJiVjyvL8dk7fP+6SzU4rJzPT
+ dikCWmKvKEtB680bDndSVEXqtaAWny7wqdJw4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744898065; x=1745502865;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=u5Be8ZG/XfXv7B2xXM8yWX5mnifHNnRiUIAR7wc8Us0=;
- b=mhWZoaugWg0PHf7djdYfmLTYwcyvonC/lHaGIO8DGL/770AjnJPFIs6z4Vrnyg8IMX
- 6eiu0MgWeuMWyX5pjihiowm9RJuTSv4On8rlDW8T+HaeLHDaaoD1NkNB4vIM+dZbhei/
- IF7Ji6FBAoz7glJwwPBfDhB70GgDC+6O0PtReaPNLMS/6dcxIUkb40X3ompJgU72RS/H
- 1g+UGdMCL8dqtfb+AbmOVYz3x7B/mAnT8GSTFu05On4txZOLUWYFdNBSY2vvlWG3AE3n
- R2pNCXhQCm6gtmHuvJH77IxnFTHw3Sa8/Yxr1MgWg8CUfsv1nix8ELy0ChA0hrxKIr+s
- iMFw==
-X-Gm-Message-State: AOJu0YyuyAmHLKAzwwB4rcIMj/E3cjk/QOD13tl/BTWL0zLGrAqrk0Dp
- w7UDyK2uHEBt6sGDmn0kqnl4N4uVfnDiZmeP91fl8iC9rUn/OfMicxosuVMnXXPAOWEuj5zAqOn
- xoXyEnMaP0rrHHlrOykt52VUWTxI=
-X-Gm-Gg: ASbGncvFgJwaA3P19SH6HHslKsZ04EgRzL8I8S2iLN5QXT/pO2ffBrX859dYmkzs2ON
- 1NKzm+LNu8ascxpy1CtgTPSxP2P7UkHRMMq+2ROZh1Xczr727CAc3vwUn8mLUTHBkirumAgxnMq
- TcbvpIXQXQqChPLdjr0eYKDzKYI2+V3A6tGr9wiANzhs/Gt8pUJ1krMg==
-X-Google-Smtp-Source: AGHT+IH70VGAnB6OLpJUXF7dXxsXr4YG6C4Zg7DOgQTEN0slPjHBO3mdeNzDY7wFUNAv+YLSXZ58mzEY/ZjPW1EV+Os=
-X-Received: by 2002:a05:651c:30cb:b0:30b:d17b:26aa with SMTP id
- 38308e7fff4ca-3107f68abc4mr37766181fa.2.1744898064878; Thu, 17 Apr 2025
- 06:54:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744898177; x=1745502977;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9T4PkAz772+50Otk88itAJMvWo1vLjesXEIcMKgs7uE=;
+ b=P0w3jFc97+SjlaemF9PEEhN7N4W22Nx49EtpRujezykCA9i8jciM7ET1qWB5Ecyk4K
+ wFGaoKl/0iFYZyJJrxoWH/xaCqqWjmNFPVDhS2Zof25rRg/ACfsvGc9bxC9vbWcfKujf
+ ah6cx7JczeADjQepslOy/vRtNdzreYD/p7ci4HQVghbWxR74OGKItVI6KYcSHau84Yct
+ qZzDn5Jy5CC7OQOpHwl0Ioz3/blTyjBpgFbLNUbRPZ01ed5/quB0INS292IrqjYjBaol
+ L2lk8nP5gVpOY9df8fOy7ehGpgakdlD8vGmec6iU8BHFMW0epCWLLYX/DTIEb36z8KkL
+ 1jzw==
+X-Gm-Message-State: AOJu0YyKbw2neIdz9WUUvE0RxaDIR106XicPN/2XvYNPvBltQA2G40bU
+ LUb5TF29gzCY397bTPVFosKrzLPH0TbYawph+g90GO3E8t7cntRpM2wE53aBtvfzp//9HMTubKd
+ e
+X-Gm-Gg: ASbGncvfTNOx9vIndPwKF2FNjEA7Omp7DZsETwiYv1VZ+za7OahDQ75CNLz8/m6yB0I
+ 6+GiZoLnWOOyahsS1DyM6IGbpp6qZFsgP24cJ63meYl+sJhxQIWHzt6qoD+fbAJPPyfF2SQdPtF
+ 83z6lM+Xe8pdg6dp4Y6XIblVysqAdujsp7+COs4yP653w2uNFCGmKl1TJnkI8yL+R4x8suTG7F8
+ xJcXTGKAP/MufcDfkdRtoZGKNe1qvHmAdG+nFq5LfPeObD/lxJAa1CGMfAhI3VU06AMYm0OUvSv
+ evKytSkh7EZMBYBP4XhUA4cvU+xsVqFArFdJegEAYDymQPwBVqy5zzFQZUQB/07HWoRKHvQup4v
+ Uh96z
+X-Google-Smtp-Source: AGHT+IEG6OUc00o3hLmZvayXuzfW9PuqYlpPlNMm907nd7Ze7uoDHtyp15Vgk9shOBLFjlj7UyoL+g==
+X-Received: by 2002:a05:6870:164a:b0:2c2:3ea8:eb3d with SMTP id
+ 586e51a60fabf-2d4d2d4f452mr3748244fac.33.1744898177230; 
+ Thu, 17 Apr 2025 06:56:17 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e73d5235csm3216793a34.4.2025.04.17.06.56.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Apr 2025 06:56:16 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH] cros_ec_sandbox.c: Drop spi.h include
+Date: Thu, 17 Apr 2025 07:56:15 -0600
+Message-ID: <20250417135615.2974560-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250403151050.3649150-1-festevam@gmail.com>
-In-Reply-To: <20250403151050.3649150-1-festevam@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 17 Apr 2025 10:54:13 -0300
-X-Gm-Features: ATxdqUFD0gCAG6t0QvbLRxvjvMf58MS80ql-SVkUyYQsdLjo0KMC3p0jYkGOKIs
-Message-ID: <CAOMZO5BT+yfWYab=Ltj5iJWWSGyAj_TVAuHd99RQP10rzauE4g@mail.gmail.com>
-Subject: Re: [PATCH] ARM: dts: at91: sama5d2: Pass bootph-all to the PIT timer
-To: eugen.hristev@linaro.org
-Cc: u-boot@lists.denx.de, trini@konsulko.com, Fabio Estevam <festevam@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,22 +92,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eugen,
+As this driver needs to use the special sandbox <asm/malloc.h> header
+rather than normal malloc, it must be careful of the includes it brings
+in. It does not need <spi.h> for anything, so drop it.
 
-On Thu, Apr 3, 2025 at 12:10=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> From: Fabio Estevam <festevam@denx.de>
->
-> The PIT timer needs to be available early in the SPL phase,
-> otherwise SPL fails to boot and only prints:
->
-> Could not initialize timer (err -96)
->
-> Fix this problem by passing 'bootph-all' to the sama5d2 PIT node.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Simon Glass <sjg@chromium.org>
+---
+ drivers/misc/cros_ec_sandbox.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-Do you have any comments, please?
+diff --git a/drivers/misc/cros_ec_sandbox.c b/drivers/misc/cros_ec_sandbox.c
+index 1cad51d474de..3ac690a37336 100644
+--- a/drivers/misc/cros_ec_sandbox.c
++++ b/drivers/misc/cros_ec_sandbox.c
+@@ -15,7 +15,6 @@
+ #include <log.h>
+ #include <os.h>
+ #include <u-boot/sha256.h>
+-#include <spi.h>
+ #include <time.h>
+ #include <asm/malloc.h>
+ #include <asm/state.h>
+-- 
+2.43.0
 
-This allows SPL to work on sama5d27.
-
-Thanks
