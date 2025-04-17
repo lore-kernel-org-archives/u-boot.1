@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CC9FC369C2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 831A0C369C2
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:54:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEA9E83082;
-	Thu, 17 Apr 2025 15:49:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D08B382F87;
+	Thu, 17 Apr 2025 15:54:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XkYPa8wW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jnga+sVG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B62A783095; Thu, 17 Apr 2025 15:49:49 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id E58D582D32; Thu, 17 Apr 2025 15:54:27 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C487B82D32
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:49:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DDDDD82D18
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-acacb8743a7so139152866b.1
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:49:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-30f30200b51so8781181fa.3
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:54:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744897787; x=1745502587; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=OjMFUG/dXUsLD9YLMDtjOGm9BsRP8qBNGMDZS7S3GMU=;
- b=XkYPa8wWwYwuMjKPwfTmli3eA7eJ+SBbNydgcyAgnmIvlkVUpLhp2NR+dFILlh8NG0
- KAjp6kAP9A2m0Vqh4aL/d/KXXH/BfoZbd93pLEgaEMq2mVDrnLKtRXExoXU0Z7TvT0DD
- SQdoAXLF3v3Pp94Zb5Wu25CnX7jRGRz1t5hw8yIW4PLtYA6/5fKl0puljpY2nhy3Wkne
- lFtvuhMNDF2rKYW3GD0IlBjPselGmqQOvmE0Q2Hdv3MJyhjy2Cc02cC45+IVgBkkvDIr
- 91jcibPWRn6gawzq4jeynKakGHTQq8EOkNT1fu3e/c+JQ3p9TKyWmHOPn8TEOwfIiHUT
- trrQ==
+ d=gmail.com; s=20230601; t=1744898065; x=1745502865; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u5Be8ZG/XfXv7B2xXM8yWX5mnifHNnRiUIAR7wc8Us0=;
+ b=Jnga+sVG0GZwfsGE7vMcxDpwIF6YTf9UG+Xip6/4vNwin0ahIWxapmRGv8AKVzF5jl
+ yrrnYcxIEOr+dDqUufw8jQ7Hjt5RO5qvs5e0MyD0D0Qlbv0KwGuc7YCB6A8Q1dSai+JY
+ D90+cX8PXCguQt6eebfuY8yDfrgb6nQKMe5+YOfINfePT6tZ78x5+Yg0eSSB6YuiIRLo
+ NLNMxi/G7cpTrKLfWqeP0NzbAuqgFRFNeAYVQu4Tx1N+xj5chEVU2N9jEqKhaa/3XD2K
+ AnpFck7KOaExPun+ilI7IoUdF5DttANtv9xC/uhzMo0f63dwWIyuVjYhr9nk65XMOQ6H
+ bm3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744897787; x=1745502587;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1744898065; x=1745502865;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OjMFUG/dXUsLD9YLMDtjOGm9BsRP8qBNGMDZS7S3GMU=;
- b=L09DW4Ipskr8Kcu8UNqKmyIO/vzWlxCPDjrO+UoJqAZEmV/oGRRjqBHe6BW83nBFVF
- lVENbNOhMIxR+9UA/CFhL1Ey/dHzpPYBJ73pUzxS07qnJWAHVYiK7b8X/AmSRvgupjWT
- OPhneXZuT2NWpn6qmcGIiIRhsmua8dl59YckGmqYoae97hSaQPBibvu1Bn+n/Y50r4od
- HFrOdduSVcKxBS7qFsrEf4iKhB+gqJB82wy0O8EwDT8FrFYXAYgVwZgJtuvzAyGAbSPD
- seDjdRIqsji70TH1UpFuhvH6YlOH5VMzxsaaS0eVhrQVRtrLOEZGmQdVQpmBjCzevkJF
- bxsQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOGM0f7mPG+1yY+F0sxJz6cozJUdPclXWz4XCLWvd9/icjAU3kTcktu/4BljCh5yx2CUowP60=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrLu5ivqi/vXbXutqj+FZzFYzwtvO3N/a2n9JSzm+ieQhK1apY
- L3tRdJgg6iqFEXUUHZgX+tsffe6gtU6hidQZv4oZbQHV5wGa5qWo/DSkOW/4Idc=
-X-Gm-Gg: ASbGncu5JJPS4YOsXdfw9zyBIUNurLJw2rJM0PTI1bujgDCrsncCqSkZ5gE/s0NH02S
- nKCBNwvBAfP6bfO8acuW72ry+uiyESX5Q+W1du9eyq3yrtfshZLOpqkVStMTpj1lUmHcgTYJiBO
- QUUQ3EMR+YAvThMLRiZtmDruykclKpTbu+jkz0gZhpuhLSIloLuw6AAxs3H6iNALEr339B2EHgd
- bH+rg3Dqsm6yOsNpDPr1XwiBnYjnl59noUcHIS3dUX/lD8KeY1d3B9sKYAXrNLv2SJoAid/cAyY
- +5Kw4lkfzO/k+EofdaZQbZTZllx8v5zjwcImfBjYgSmIioBNC4YS
-X-Google-Smtp-Source: AGHT+IEICFaO8qfTxxDXk7QvVgXQ4jNahP18vQrv1D+0jmVr1D5xppnKd7BHAUSjA4dz5A+HlNqHMg==
-X-Received: by 2002:a17:907:7d9f:b0:aca:b45a:7c85 with SMTP id
- a640c23a62f3a-acb5b50ed16mr255188966b.19.1744897787212; 
- Thu, 17 Apr 2025 06:49:47 -0700 (PDT)
-Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:893:de18:edbc:9b79])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acb4d5bc6fesm171515066b.37.2025.04.17.06.49.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 06:49:46 -0700 (PDT)
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Thu, 17 Apr 2025 15:49:13 +0200
-Subject: [PATCH 3/3] board: dragonboard410c: Enable support for KASLR in Linux
+ bh=u5Be8ZG/XfXv7B2xXM8yWX5mnifHNnRiUIAR7wc8Us0=;
+ b=mhWZoaugWg0PHf7djdYfmLTYwcyvonC/lHaGIO8DGL/770AjnJPFIs6z4Vrnyg8IMX
+ 6eiu0MgWeuMWyX5pjihiowm9RJuTSv4On8rlDW8T+HaeLHDaaoD1NkNB4vIM+dZbhei/
+ IF7Ji6FBAoz7glJwwPBfDhB70GgDC+6O0PtReaPNLMS/6dcxIUkb40X3ompJgU72RS/H
+ 1g+UGdMCL8dqtfb+AbmOVYz3x7B/mAnT8GSTFu05On4txZOLUWYFdNBSY2vvlWG3AE3n
+ R2pNCXhQCm6gtmHuvJH77IxnFTHw3Sa8/Yxr1MgWg8CUfsv1nix8ELy0ChA0hrxKIr+s
+ iMFw==
+X-Gm-Message-State: AOJu0YyuyAmHLKAzwwB4rcIMj/E3cjk/QOD13tl/BTWL0zLGrAqrk0Dp
+ w7UDyK2uHEBt6sGDmn0kqnl4N4uVfnDiZmeP91fl8iC9rUn/OfMicxosuVMnXXPAOWEuj5zAqOn
+ xoXyEnMaP0rrHHlrOykt52VUWTxI=
+X-Gm-Gg: ASbGncvFgJwaA3P19SH6HHslKsZ04EgRzL8I8S2iLN5QXT/pO2ffBrX859dYmkzs2ON
+ 1NKzm+LNu8ascxpy1CtgTPSxP2P7UkHRMMq+2ROZh1Xczr727CAc3vwUn8mLUTHBkirumAgxnMq
+ TcbvpIXQXQqChPLdjr0eYKDzKYI2+V3A6tGr9wiANzhs/Gt8pUJ1krMg==
+X-Google-Smtp-Source: AGHT+IH70VGAnB6OLpJUXF7dXxsXr4YG6C4Zg7DOgQTEN0slPjHBO3mdeNzDY7wFUNAv+YLSXZ58mzEY/ZjPW1EV+Os=
+X-Received: by 2002:a05:651c:30cb:b0:30b:d17b:26aa with SMTP id
+ 38308e7fff4ca-3107f68abc4mr37766181fa.2.1744898064878; Thu, 17 Apr 2025
+ 06:54:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250417-db410c-fixes2-v1-3-76ad994da152@linaro.org>
-References: <20250417-db410c-fixes2-v1-0-76ad994da152@linaro.org>
-In-Reply-To: <20250417-db410c-fixes2-v1-0-76ad994da152@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Sam Day <me@samcday.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-X-Mailer: b4 0.14.2
+References: <20250403151050.3649150-1-festevam@gmail.com>
+In-Reply-To: <20250403151050.3649150-1-festevam@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 17 Apr 2025 10:54:13 -0300
+X-Gm-Features: ATxdqUFD0gCAG6t0QvbLRxvjvMf58MS80ql-SVkUyYQsdLjo0KMC3p0jYkGOKIs
+Message-ID: <CAOMZO5BT+yfWYab=Ltj5iJWWSGyAj_TVAuHd99RQP10rzauE4g@mail.gmail.com>
+Subject: Re: [PATCH] ARM: dts: at91: sama5d2: Pass bootph-all to the PIT timer
+To: eugen.hristev@linaro.org
+Cc: u-boot@lists.denx.de, trini@konsulko.com, Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,35 +91,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When booting Linux, there is currently the following warning in the console
-when using the default dragonboard410c_defconfig:
+Hi Eugen,
 
-  [    0.000000] KASLR disabled due to lack of seed
+On Thu, Apr 3, 2025 at 12:10=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> From: Fabio Estevam <festevam@denx.de>
+>
+> The PIT timer needs to be available early in the SPL phase,
+> otherwise SPL fails to boot and only prints:
+>
+> Could not initialize timer (err -96)
+>
+> Fix this problem by passing 'bootph-all' to the sama5d2 PIT node.
 
-Fix this by enabling DM_RNG and RNG_MSM in the defconfig to generate the
-KASLR seed:
+Do you have any comments, please?
 
-  [    0.000000] KASLR enabled
+This allows SPL to work on sama5d27.
 
-Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
----
- configs/dragonboard410c_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
-index 6feba70b943ecafdb96de28b4bddc36095f089c6..d267b6ed34dbb945cb3c5af8e323bdbdc294197e 100644
---- a/configs/dragonboard410c_defconfig
-+++ b/configs/dragonboard410c_defconfig
-@@ -55,6 +55,8 @@ CONFIG_PINCONF=y
- CONFIG_PINCTRL_QCOM_APQ8016=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_MSM=y
- CONFIG_MSM_SERIAL=y
- CONFIG_SPMI_MSM=y
- CONFIG_USB=y
-
--- 
-2.47.2
-
+Thanks
