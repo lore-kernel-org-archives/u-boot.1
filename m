@@ -4,99 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF622C369C9
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 21:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 130F8C369C9
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 21:36:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B8E782CF1;
-	Thu, 17 Apr 2025 23:24:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4391C82DB8;
+	Thu, 17 Apr 2025 23:36:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KH1Fret7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JHRcN91g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B0C082E8E; Thu, 17 Apr 2025 23:24:32 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 9A96282E8E; Thu, 17 Apr 2025 23:35:59 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF85B82CBC
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 23:24:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE60782CF1
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 23:35:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ac2af2f15d1so150173566b.1
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 14:24:29 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ac3b12e8518so237584266b.0
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 14:35:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744925069; x=1745529869; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744925756; x=1745530556; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/cls7QSygK6rEJFbEK+B7leUUcpmQp4dmGjAxqOFMhU=;
- b=KH1Fret7fexyldO/zvSOcxXCFZLwWVA86zO/Lfgm38ZEUt4kRXbRRxRnplrrejpIum
- 8BoypyqMSKmwY+YeNgAM6Jn9fmIZdWh6fkIeCflfDryoTGltV0Gj6iz7YpJ+nzgiC89y
- unTL/RjWCw1pL6pP0wZZT9rsJr06FbVeyLDDU=
+ bh=QCGibdLoe6tVXugKe2uXrK67W9I5Zp6XMqLW086Bc9M=;
+ b=JHRcN91gFKD6Vv6Ghkw+NLgu0HBqxINX9N16V699oFTEJznboPWY0pYyl7kd1ApGgn
+ nz376StiwfVCwhnJtejE65N2rGiBQ4CLy33gGF3jQnCW76QJ6hMsecYedyKx40bJzsL4
+ tbK73SgLaDTeCfd5iyqkHntYHetCr6CK3tj7M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744925069; x=1745529869;
+ d=1e100.net; s=20230601; t=1744925756; x=1745530556;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/cls7QSygK6rEJFbEK+B7leUUcpmQp4dmGjAxqOFMhU=;
- b=mUkQWr8PfIGVQgdu1cOJbhmn2d010JXwD+fG0Bqq5UL73VnMP7sgPAge2PEIWswO5S
- KNpbRSi/gsGM/l1C1OpYA/7H+zQYMEnaFLrE4bt9RoJeBAxjYfuVosxR7R/QemaCj5Oz
- vUi02NCUdXX+fS7zfmzYMvwsJpt3AZ09yfv3Q8uM899HmryvpOnDMPL7AEtdH0239f+H
- GYK4tuqFIERIY3x5zLrmSkndz8qCHdoPH8TpzPtJYIy+364NmekhlVErnnfY9FrbVvLd
- KyPusxtKIcK+If7Wlo50EDOv9G/sHqtTXp9Xszxgofxh593PUse560r+Dzr58IUtJs6i
- RZrg==
+ bh=QCGibdLoe6tVXugKe2uXrK67W9I5Zp6XMqLW086Bc9M=;
+ b=jMfQLhHlOfnvp5UJDjrCl9EpCWOqhztuWxhhgvCi63cz7n9chgW4ksY4IUNGcnMGxQ
+ 7oivaCOG5DNUj3kURVvD2qxdFAOPezs3v2BSrbHl8LQ4vsL1Di0S1OFcO1Z7lMUf60NF
+ CUEweV1CUZKi31/Rw5pcLnifOCqVLKpAaD9A9Kamy4Euece1fptRL4cqWrLjLewnRsvj
+ tdED7NLFSv0XLtG6+Kcl2nskT6mePGeWpnVQsjZlHcJQBHLvxICG93UcK2qGlcWms0l2
+ BpGQHCaXVnEuFIjBhPv1lQu2tJmFqwECVjA6cSdQd43AGTcqoCDpTygmW4+3QF3/rwCr
+ VyrA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUw8dg38wxvx8fqygNkPYeEj3ry3kvRtZ4P4HYKkSYAPHqzXJKAAdx+QX9Cj8lB6CLOyNhElEk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUc0O8IpxqlkNmMscqlhAUr5QsCl/rcwKWXxAO9+OsVYUQ8xAd
- UasWl7FBdLai0h9WJy523b1ug4ZtihEk9LzDBbGScdgw+5kBczIT+iD1/SqZCOA3iKU/ypyX4xX
- WDmP/fk8DLje5mM70AsICTQDbPAhxneqgjwKA
-X-Gm-Gg: ASbGnctroVOk0iz3uQdMlE8qm4SPV5YYgl7eIv9eLj3vPo0OGz+aVNyIhGc9hX+0VoT
- EyESL2A3+Hkci1TtSoXj4LenoTVdeLz0Fu2QhFfbHCsjNWhpSzG0c5x7YnrucJfKjt1rnLabY8W
- ffx9ApQ4lBD5PQaWZQUm1NVuI=
-X-Google-Smtp-Source: AGHT+IG1XthC5NFshLngmsIuIJmC4nv2omecGrp3o6V1WU18KOug+wwOW9t4CAAgWFRh8bYoIZwtJZQBoTJcCHBbnl4=
-X-Received: by 2002:a17:907:f818:b0:aca:d490:4aff with SMTP id
- a640c23a62f3a-acb74b2d9a2mr28165766b.13.1744925069178; Thu, 17 Apr 2025
- 14:24:29 -0700 (PDT)
+ AJvYcCWoHVsYopAvo98lvyAKg+CmLlB4HZFinZuZlN2wfeqd/TxU9rVQXIRe9hvrItn2Srb5J1+xUyM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxutwMb4Lp25voCAAXjxbmKeosZQrS4RnQJuNLcCRDo9yrNTjEV
+ D4hiJ/SEM2ZixpWFgWJfB5WfzD2p3MnDpSiPyGVW8VN1Snay0lTGh0qkm0900AzfBleUTqlcSx1
+ Xpr5/pyLXEtg7yq0tGPoP1Ky1rg6ZkndOGW0e
+X-Gm-Gg: ASbGncva/R88Fqvkqc3ZhwH2CfT3XrkDiUCj0Mh7Dg4GkDlXPKhxdXsn6asSkmoENCv
+ A0g5J3y9Aq+aMWpl47rwicFtIBAhvzU2+J1NMZbI277QFvIJKIH6BSrGeaOh/oxNwfQdu31ZBv1
+ Z40bnZP94kwMi36x+oPg4uzUw=
+X-Google-Smtp-Source: AGHT+IHrxqTiZquFEMGMTG3VST6cbABrVtTP5NVq+o4/ZZ2/QBeDb9mDJ6jt8SdKPkVTQDTKy1AYW2qOnOQb4mA6kwU=
+X-Received: by 2002:a17:907:2d0b:b0:ac7:391b:e689 with SMTP id
+ a640c23a62f3a-acb74e75fcbmr24388266b.59.1744925756233; Thu, 17 Apr 2025
+ 14:35:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250403225058.GQ5495@bill-the-cat>
- <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
- <20250404175710.GU5495@bill-the-cat>
- <CAFLszTgBMP-WsAw=z807e9RUY1YNB=Ky+s1MhW=x6dYt7_V+-g@mail.gmail.com>
- <20250406223854.GE5495@bill-the-cat>
- <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
- <20250407143056.GL5495@bill-the-cat>
- <CAFLszTjJekLH7Z3NMewpK1hYvMgXfrJ_0TknKhuZ0QRk3ZO3sg@mail.gmail.com>
- <20250414203444.GE5495@bill-the-cat>
- <CAFLszTiP9T=j1AAUDcxQDCF=sN82mxsZiEG3h5MbRsNyAFwmgg@mail.gmail.com>
- <20250417141432.GV5495@bill-the-cat>
-In-Reply-To: <20250417141432.GV5495@bill-the-cat>
+References: <20250405190711.365419-1-sjg@chromium.org>
+ <82103ca6-0e9c-4f4a-bfbf-547d1c06d976@gmx.de>
+In-Reply-To: <82103ca6-0e9c-4f4a-bfbf-547d1c06d976@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 17 Apr 2025 15:24:17 -0600
-X-Gm-Features: ATxdqUFTeWqdisaKXwiQSLzpXbDvbhXMDtf-NpBGlt-iOCp0XxwuWLRpD8dU72w
-Message-ID: <CAFLszTga9RuHamjjWFRXR5X0uzq1zBqC5YiLjKEOhAj+ZSm0gA@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-To: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>, 
+Date: Thu, 17 Apr 2025 15:35:44 -0600
+X-Gm-Features: ATxdqUF_PEmbQgiW1tlsWlDeUPylhR1c8K2VzWVOoaAj43anUBNZgyXMvLPV1qM
+Message-ID: <CAFLszTg4xR0xsUj3i0ibauaKvS1+hPYCOf3sMeF4GFX5Ukf3Jw@mail.gmail.com>
+Subject: Re: [PATCH v2] emulation: fdt: Allow using U-Boot's device tree with
+ QEMU
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Peter Maydell <peter.maydell@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Andrew Phelps <andrew.phelps@canonical.com>, Alexander Graf <agraf@csgraf.de>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
  Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,211 +103,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Thu, 17 Apr 2025 at 08:14, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 15 Apr 2025 at 23:33, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On Thu, Apr 17, 2025 at 07:14:35AM -0600, Simon Glass wrote:
-> > Hi Tom,
+> On 4/5/25 21:07, Simon Glass wrote:
+> > At present it is impossible to change the qemu_arm64 defconfig to
+> > obtain a devicetree from the U-Boot build.
 > >
-> > On Mon, 14 Apr 2025 at 14:34, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Apr 14, 2025 at 01:34:10PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 7 Apr 2025 at 08:31, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Apr 07, 2025 at 12:35:15PM +1200, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Mon, 7 Apr 2025 at 10:38, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Mon, Apr 07, 2025 at 10:06:07AM +1200, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Sat, 5 Apr 2025 at 06:57, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Sat, Apr 05, 2025 at 06:39:39AM +1300, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
-> > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
-> > > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
-> > > > > > > > > > > > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
-> > > > > > > > > > > > > > > > > > > > so that it is simpler to understand and manage.
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > - Unwind some of the nesting in bloblist_init()
-> > > > > > > > > > > > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
-> > > > > > > > > > > > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
-> > > > > > > > > > > > > > > > > > > mandatorily use bloblist to hand over everything between boot stages
-> > > > > > > > > > > > > > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates that
-> > > > > > > > > > > > > > > > > > there must be a bloblist, not that it must contain a devicetree. So I
-> > > > > > > > > > > > > > > > > > wasn't sure about removing it.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDATORY is
-> > > > > > > > > > > > > > > > > selected, we can override any fdt from board or env with the one from
-> > > > > > > > > > > > > > > > > the bloblist.
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Yes, but we should be explicit about what is going on here. With
-> > > > > > > > > > > > > > > > OF_BLOBLIST we indicate that the devicetree is coming from the
-> > > > > > > > > > > > > > > > bloblist. It becomes one of the sources for devicetree, like
-> > > > > > > > > > > > > > > > OF_SEPARATE and OF_EMBED
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
-> > > > > > > > > > > > > > > mandatorily used and override other fdt sources like from the board or
-> > > > > > > > > > > > > > > env variables.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > So long as you are OK with OF_BLOBLIST as well, I have no objection to
-> > > > > > > > > > > > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
-> > > > > > > > > > > > > > very much. But I can see why it is called that as my standard passage
-> > > > > > > > > > > > > > series was actually never applied. So I suppose I'll need to have
-> > > > > > > > > > > > > > another try at that.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > So to be clear, I want a separate option for devicetree, called
-> > > > > > > > > > > > > > OF_BLOBLIST, which I can enable/disable as needed, without affecting
-> > > > > > > > > > > > > > your option.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Sigh. Can I ask what the use case for this will be? And we are going to
-> > > > > > > > > > > > > get rid of BLOBLIST_FIXED at some point, yes?
-> > > > > > > > > > > >
-> > > > > > > > > > > > I thought we agreed that this was acceptable. We argued the toss for
-> > > > > > > > > > > > months on this point and I would rather not revisit it.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
-> > > > > > > > > > > > pretty sure it can be done. The only tricky bit is coming up with a
-> > > > > > > > > > > > bloblist protocol for x86.
-> > > > > > > > > > >
-> > > > > > > > > > > Yes, I'm stuck between being "flexible and saying yes" and how long we
-> > > > > > > > > > > have to live with what I also think are bad designs.
-> > > > > > > > > > >
-> > > > > > > > > > > So maybe the pre-requisite here is that with "bloblist" and "standard
-> > > > > > > > > > > passage" being divorced, what is the requirement for bloblist again?
-> > > > > > > > > > > Because in practice, all of the problems we've had come down to looking
-> > > > > > > > > > > in fixed address locations before they're valid. You want to handle this
-> > > > > > > > > > > by saying "Ah, we won't look before it's valid with other CONFIG flags"
-> > > > > > > > > > > and I say we should handle this by not using a fixed address to start
-> > > > > > > > > > > with.
-> > > > > > > > > > >
-> > > > > > > > > > > If we have to add OF_BLOBLIST now and delete it in a few months, sigh,
-> > > > > > > > > > > OK. But it shouldn't need to exist long term.
-> > > > > > > > > >
-> > > > > > > > > > For me, OF_BLOBLIST is needed for x86 devices which don't pass the
-> > > > > > > > > > devicetree in the bloblist.
-> > > > > > > > >
-> > > > > > > > > I don't understand why that would become the case when it's not true
-> > > > > > > > > today.
-> > > > > > > >
-> > > > > > > > If you look at the top obbfdtdec_setup() in your tree you can see the
-> > > > > > > > special-case code related to TPL, that I'm wanting to get rid of.
-> > > > > > >
-> > > > > > > OK, but all of that too is for the case of a fixed bloblist being in
-> > > > > > > uninitialized memory. Which is why I don't like BLOBLIST_FIXED and want
-> > > > > > > to see passing of the bloblist from xPL -> PPL be implemented and so xPL
-> > > > > > > can allocate a bloblist (or grow a passed one if needed).
-> > > > > >
-> > > > > > We are going around in circles though. Having it is registers doesn't
-> > > > > > help with the problem that there isn't an FDT in the bloblist.
-> > > > >
-> > > > > Sure it does. If we're passed a bloblist in a register we can then see
-> > > > > if it has a DT (and use it) or not (and move to the next DT location).
-> > > > >
-> > > > > > Also, I thought you decided that I could maintain bloblist. Have you
-> > > > > > changed your mind?
-> > > > >
-> > > > > You just mis-understood me. Yes, you can maintain bloblist. But also,
-> > > > > Yes, I need to understand what you're doing. The root of the OF_BLOBLIST
-> > > > > problems is that no one understood you.
-> > > >
-> > > > No, that's not actually true. The problem is that no one would listen
-> > > > and everyone was sure I was wrong.
-> > >
-> > > That's another way of saying "no one understood you", IMO.
-> > >
-> > > > I sent the series on the basis that you were open to my maintaining
-> > > > bloblist in your tree. I didn't know there were extra conditions. So
-> > > > please let me know which way you want to go on this.
-> > >
-> > > I thought we had made progress on the community call, but now you're
-> > > sending this so I don't know?
-> > >
-> > > You need to:
-> > > - Not break handoff spec. Raymond is telling you how to get a QEMU that
-> > >   uses that now, and I'm actively waiting on Harrison Mutai to answer
-> > >   one last question I had before adding vexpress_fvp to our CI. So this
-> > >   should be a reasonable requirement.
-> > > - You were going to add register passing of bloblist location for x86,
-> > >   and then add register passing of bloblist between U-Boot phases
-> > >   without relying on BLOBLIST_FiXED.
-> > > - Some amount of un-tangling "do we have a bloblist" from "did we get a
-> > >   bloblist" is needed, so we can just check "Did we get a bloblist? Y/N"
-> > >   in lib/fdtdec.c::fdtdec_setup(). With that, we can add OF_BLOBLIST as
-> > >   a choice with OF_SEPARATE / OF_EMBEDED and we can remove a bunch of
-> > >   the logic at the top of lib/fdtdec.c::fdtdec_setup() too.
-> >
-> > That seems very much like a list of instructions. So in fact you still
-> > want to be the maintainer?
+> > This is necessary for FIT validation, for example, where the signature
+> > node must be compiled into U-Boot.
 >
-> I mean, I'm the project maintainer. No, I'm not going to sit over your
-> shoulder and tell you how to do that. But I am telling you what is and
-> isn't acceptable. I don't just blindly take patches from anyone. You are
-> not being singled out here.
+> This description looks wrong:
+>
+> Signatures are in FIT images.
+>
+> Only public keys to validate the signatures should be compiled into U-Boot.
+>
+> >
+> > A proposed change to QEMU to allow device tree additions has been
+> > blocked for several years. The only known workaround is to use QEMU's
+> > dumpdtb option, merge in the signature node manually, disable
+> > OF_HAS_PRIOR_STAGE and then start QEMU with special arguments. This is
+> > complicated enough that it is documented in U-Boot[1].
+>
+> This seems to relate to
+> [PATCH] hw/arm/virt: Allow additions to the generated device tree
+> https://lore.kernel.org/qemu-devel/20210926183410.256484-1-sjg@chromium.org/
+>
+> As your describe in [1] QEMU already provides a -dtb parameter if you
+> want a crafted device-tree. Your proposed change is confounding boot
+> stages and and would not provide value to the QEMU project. It was
+> therefore rejected for good.
+>
+> It remains unclear why you would disable OF_HAS_PRIOR_STAGE if you were
+> using QEMU's -dtb parameter.
+>
+> What would be the benefit of compiling the DT into U-Boot instead of
+> providing it via the -dtb parameter?
 
-Heaven forbid. Although I see that you reverted the PXE stuff rather
-than taking my fix-up patch. That's different from what you did with
-all the lmb breakage.
+It is helpful when testing things in U-Boot, e.g. FIT validation.
 
 >
-> > To be clear, I don't disagree with the list here but I am not willing
-> > to argue with people anymore about how it should work. I designed it
-> > and I know how it should work.
 > >
-> > Also I think I now understand what you are saying about bloblist and
-> > standard passage being split. It's because most of my standard passage
-> > series from a few years back was never applied.
+> > Unfortunately the only way to disable OF_HAS_PRIOR_STAGE at present is
+> > to hack the Kconfig.
 > >
-> > So I'd like to go back and revisit that and get it applied, including
-> > the gitlab test for the new qemu_arm/64_spl
+> > Add a new QEMU_MANUAL_DTB Kconfig option which makes OF_HAS_PRIOR_STAGE
+> > optional, thus avoiding needing to patch U-Boot to get this working.
+> >
+> > This seems a clearer solution than just making OF_HAS_PRIOR_STAGE
+> > visible, since that symbol is intended to be set automatically by each
+> > platform.
 >
-> I assume you'll be posting a v2 of something, which can be applied,
-> soon then?
+> To me the new parameter is harder to use than simply making
+> CONFIG_OF_HAS_PRIOR_STAGE always editable.
+>
+> >
+> > [1] https://docs.u-boot.org/en/latest/develop/devicetree/dt_qemu.html
+>
+> The instructions that you provide in [1] are incorrect.
+>
+> "qemu-system-arm -machine virt -machine dumpdtb=qemu.dtb"
+>
+> The second machine statement overrides the first one. And the second one
+> will use the default machine which for instance on riscv64 is not virt.
+>
+> The correct invocation to download the device-tree would be:
+>
+> qemu-system-arm -M virt,dumpdtb=qemudtb
 
-Yes, v3 is posted. It took a while as the original series was from 2021.
+I didn't actually send that code in this patch, but please do a patch
+if you have time.
 
-Regards,
-SImon
+>
+>
+> > Link: https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Suggested-by: Tom Rini <trini@konsulko.com>
+> > ---
+> >
+> > Changes in v2:
+> > - Add a new QEMU-specific Kconfig instead
+> >
+> >   arch/arm/Kconfig                   |  2 +-
+> >   board/emulation/common/Kconfig     | 12 ++++++++++++
+> >   doc/develop/devicetree/dt_qemu.rst |  5 +++++
+> >   dts/Kconfig                        |  9 +++++++--
+>
+> This patch lacks proper documentation in doc/
+
+OK I'll add something.
+
+>
+> >   4 files changed, 25 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > index db8758e6dfe..b55ed61894a 100644
+> > --- a/arch/arm/Kconfig
+> > +++ b/arch/arm/Kconfig
+> > @@ -1055,7 +1055,7 @@ config ARCH_QEMU
+> >       imply DM_RNG
+> >       imply DM_RTC
+> >       imply RTC_PL031
+> > -     imply OF_HAS_PRIOR_STAGE if !TARGET_QEMU_ARM_SBSA
+> > +     imply OF_HAS_PRIOR_STAGE if !TARGET_QEMU_ARM_SBSA && !QEMU_MANUAL_DTB
+> >       imply VIDEO
+> >       imply VIDEO_BOCHS
+> >       imply SYS_WHITE_ON_BLACK
+> > diff --git a/board/emulation/common/Kconfig b/board/emulation/common/Kconfig
+> > index 4c15c8bcb89..3f9a6ea578f 100644
+> > --- a/board/emulation/common/Kconfig
+> > +++ b/board/emulation/common/Kconfig
+> > @@ -13,3 +13,15 @@ config MTDPARTS_NOR1
+> >       help
+> >         This define the partition of nor1 used to build mtparts dynamically
+> >         for the u-boot env stored on nor1.
+> > +
+> > +config QEMU_MANUAL_DTB
+> > +     bool "Manually provide a device tree to QEMU"
+> > +     help
+> > +       For some use cases, such as FIT validation where a public key must be
+> > +       placed in U-Boot's device tree, we need to override the device tree
+> > +       that QEMU would normally provide to us.
+> > +
+> > +       Note: this work-around is necessary since Linaro has blocked
+> > +       addition of a feature to support additions to the QEMU devicetree:
+> > +
+> > +         Link: https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+> > diff --git a/doc/develop/devicetree/dt_qemu.rst b/doc/develop/devicetree/dt_qemu.rst
+> > index 8ba2b225590..c693b49d3d4 100644
+> > --- a/doc/develop/devicetree/dt_qemu.rst
+> > +++ b/doc/develop/devicetree/dt_qemu.rst
+> > @@ -46,3 +46,8 @@ You can then run qemu with the merged devicetree, e.g.::
+> >
+> >   Note that there seems to be a bug in some versions of qemu where the output of
+> >   dumpdtb does not quite match what is provided to U-Boot.
+> > +
+> > +See also the
+> > +`rejected QEMU patch <https://patchwork.kernel.org/project/qemu-devel/patch/20231117021840.117874-1-sjg@chromium.org>`_
+> > +and
+> > +`discussion <https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org>`_.
+> > diff --git a/dts/Kconfig b/dts/Kconfig
+> > index 2e88d210bb8..53f7e246a80 100644
+> > --- a/dts/Kconfig
+> > +++ b/dts/Kconfig
+> > @@ -205,8 +205,13 @@ config OF_HAS_PRIOR_STAGE
+> >         development purposes, but it is not recommended, and likely will not
+> >         even work, for production systems.
+> >
+> > -       Note: This option must be set in Kconfig and cannot be enabled or
+> > -       disabled in the board's defconfig file.
+> > +       Note: This option can be disabled for QEMU usiing QEMU_MANUAL_DTB thus
+>
+> %s/usiing/using/
+
+Will fix.
+
+
+>
+> Best regards
+>
+> Heinrich
+>
+> > +       allowing QEMU to support FIT validation, where the devicetree must
+> > +       include a public key.
+> > +
+> > +       See also this for context:
+> > +
+> > +       https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+> >
+> >   config OF_OMIT_DTB
+> >       bool "Omit the device tree output when building"
+>
