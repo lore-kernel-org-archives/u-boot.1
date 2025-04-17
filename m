@@ -4,98 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 314DFC369C2
-	for <u-boot@archiver.kernel.org>; Wed, 16 Apr 2025 23:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E24C369CA
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 00:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61DE482BD6;
-	Thu, 17 Apr 2025 01:59:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 37A9382F73;
+	Thu, 17 Apr 2025 02:06:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XT/hx4pN";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8FD882DB4; Thu, 17 Apr 2025 01:59:08 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7482880107
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 01:59:06 +0200 (CEST)
+ id 3E7F882F6A; Thu, 17 Apr 2025 02:06:37 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 0B9FD8192A
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 02:06:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-54954fa61c9so267106e87.1
- for <u-boot@lists.denx.de>; Wed, 16 Apr 2025 16:59:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744847946; x=1745452746; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S7G+wktPU1CuvNJ4W5oz1vX6x4Iukuct8SW+dxDqpbc=;
- b=XT/hx4pNis2bfON4zDi0xHxPMYH1/mm4Wah1VYxuGGKYNagER0M/F5IeFJmsswWrFJ
- ZvSQFEbVkikIrm70GIKvczuJEQDtoPxhxZnVmkq3hnTfxhfSpkE2GZfHtFd+WvVWsvS/
- nPy+UwN8YPEkdclUKy1R4QnC39dRBMwNMJB4JjPeqyJpTZvlRd0Z62xCQDiOV1LieVEe
- llWwubCyxc9oP+iG/FCLRnWM2yBUJpX/JXLv+M7jWkfHSikwMnA1/Ut69o4etrk8nyKs
- E3UfwNcnwNLU4xamxMS9M41Hrek8mLqeuksxRcKf7gw1//R53BNu8zpoQytZyBXa112f
- 2dDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744847946; x=1745452746;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S7G+wktPU1CuvNJ4W5oz1vX6x4Iukuct8SW+dxDqpbc=;
- b=WuC/2Or3TjndFkQqHr/+IELiQvKVRAMwAu/5NXNIlTGK3vJ0ErUMqt2YYRbqoODzEj
- TohDlbwyMi607SzdFcPQc0ztPMklAaMrARpb3P+hN6+AZ+eu+t/MiUUuJYFtNwX+gy7X
- fQ/sVemNU+vyemJuPNRGbpwMMAl0FAv0A12nAR+oaIQT4v9cIHCAkskDqNARGvfEql0L
- OlfUcfJkIbM8KYp6+4S5sh6RuHme9Xj76TVKKJLS8VSBOhn0msEZ457qsNuM11QMT6vT
- dWwP9YPmrb4UsvEK1CL9iLbkEefzwKXPjJoIB/eB3NwHfPcUdwACB5W/rfSJH/+q6aV9
- xxBQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXicAs4M2fCNqyTtHFcflsiCuZvB/GU6duaUUVocXw8NFwjJsEqQ9dnEoTMRjHTPYuuEo/wHUw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDEaIdLGHSY3Hg7DvzhExbaO6biI9iGjQQryflmCJtcUqiS8iC
- Wed9LdwV7iw/g88R8J7IQqp9oUglVGk0/hzckDvdiUfqoRruiL29QKkYGzXO+S3dkH4OVxHY1cY
- WlUpVlMc2ETDzl7E4VhIbCH1v7MQ=
-X-Gm-Gg: ASbGncvkEV5//r/XGXT485V9H25QLPHDcGBsDXR8NDIbg/IupiUuyN5b/x+VKtoLyNa
- LpYO4pkkMaB+ZiGLTpBib3xJhVVxV7B37o/E71MIw5tqzoTjegQpqsNUFnoUe1UXOEEfwwlEeF1
- AOlhvT37GiKjHl75KGHSmGCpa6ps/kOp2u4k481W8Wotq/eK/Tc/JOETW9PkmlsNfN
-X-Google-Smtp-Source: AGHT+IFnzeX14kMH7FDCQ1SB6XGEiXyUiL3K/IAE+2eGpvxbrpqMH3H5x3WQwW0mX0F7hMSP+0HVtCOKjvwiTaEtSro=
-X-Received: by 2002:a05:6512:3b0f:b0:549:903a:1bf with SMTP id
- 2adb3069b0e04-54d64af3e9amr1160969e87.48.1744847945378; Wed, 16 Apr 2025
- 16:59:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 04750152B;
+ Wed, 16 Apr 2025 17:06:32 -0700 (PDT)
+Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
+ [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 34B0A3F66E;
+ Wed, 16 Apr 2025 17:06:33 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+	u-boot@lists.denx.de
+Cc: Yixun Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev
+Subject: [PATCH v2 0/3] sunxi: add "fake" FEL button feature
+Date: Thu, 17 Apr 2025 01:05:36 +0100
+Message-ID: <20250417000539.3709-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.3
 MIME-Version: 1.0
-References: <20250323160107.145749-1-marex@denx.de>
- <20250323160107.145749-17-marex@denx.de>
- <20250415142846.GA244333@francesco-nb>
- <CAHCN7xLa5W-AtRso6RUZwZG_sfDm9CHierfzt_WfOqFjSGJZoA@mail.gmail.com>
- <20250415150344.GA246483@francesco-nb>
- <b396cb96-ff95-4822-ad24-ddff2e3b6545@denx.de>
- <CAOMZO5B=j=k8U6to2TDzohS11j4hPWQOho9bdrYCPe0WXtrQjw@mail.gmail.com>
- <20250416092639.GA24345@francesco-nb>
- <db2d623afd944df2bca6d1e4657d4031@dh-electronics.com>
- <CAHCN7xKyoBQPeXDA90-kcBTw7BhObvn6PVzreoUQ5+GjiCewyg@mail.gmail.com>
- <CAHCN7xLgS7FZ4ajbBa+p-_w_s6oHnfMYcZEMsNBNkqkgAG-7Jw@mail.gmail.com>
- <b35218ca-df17-4423-9932-a2ad0ba14e50@denx.de>
-In-Reply-To: <b35218ca-df17-4423-9932-a2ad0ba14e50@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 16 Apr 2025 20:58:54 -0300
-X-Gm-Features: ATxdqUHgVUQCuzwqMyNvJUoCuDHtMPm1iittgkh-6M6ix2qMhB2rKXv1DkyQJ6Y
-Message-ID: <CAOMZO5CA0_GUr2uQtQgFHe-9wVDCOQwo5HZzZ4sibXEPMpe8cA@mail.gmail.com>
-Subject: Re: [REGRESSION] Re: [PATCH v2 16/24] clk: imx: Convert clock-osc-*
- back to osc_*
-To: Marek Vasut <marex@denx.de>
-Cc: Adam Ford <aford173@gmail.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Francesco Dolcini <francesco@dolcini.it>, 
- Fabio Estevam <festevam@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, 
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,12 +55,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 16, 2025 at 8:47=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+Some boards with Allwinner SoCs feature a "FEL" key, sometimes also
+labelled "uboot", which allows to easily enter the BootROM FEL mode, when
+pressed upon power-on or reset. This allows to access the USB-OTG boot
+protocol, for convenient access to memory and uploading code.
 
-> You are not supposed to use "clock-output-names" for clock look up.
-> You are supposed to use "clocks"/"clock-names" DT properties and then
-> resolve the remote clock from information in those.
+Add a software emulation of this functionality for boards without a button
+connected to this special SoC pin, to give easy FEL access to more
+boards. Any GPIO can be used, as long as the button uses active-low
+logic.
 
-What do you think about registering the osc clocks like this?
+This is used on the X96 Mate TV box, where the hidden "update" button is
+actually just some GPIO, checked by the vendor firmware.
 
-https://paste.debian.net/1369857/
+Please have a look!
+
+Cheers,
+Andre
+
+Changelog v1 .. v2:
+- add patch to fix return_to_fel() prototype
+- document signal needs to be active-low
+- activate internal pull-up resistors
+- add patch to activate button on the X96 Mate TV box
+
+Andre Przywara (3):
+  sunxi: fix return_to_fel() prototype
+  sunxi: add "fake" FEL pin support
+  sunxi: x96_mate: Add "fake" FEL key definition
+
+ arch/arm/include/asm/arch-sunxi/sys_proto.h |  4 +--
+ arch/arm/mach-sunxi/Kconfig                 | 10 +++++++
+ arch/arm/mach-sunxi/board.c                 | 31 +++++++++++++++++++++
+ configs/x96_mate_defconfig                  |  1 +
+ 4 files changed, 44 insertions(+), 2 deletions(-)
+
+-- 
+2.46.3
+
