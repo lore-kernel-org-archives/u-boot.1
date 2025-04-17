@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDB59C369B2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 17:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59E4C369C9
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 18:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51A4282E20;
-	Thu, 17 Apr 2025 19:11:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 136D482BA1;
+	Thu, 17 Apr 2025 20:16:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HKEsBv03";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F8lVB96+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C139182E37; Thu, 17 Apr 2025 19:11:14 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 432CB82E20; Thu, 17 Apr 2025 20:16:44 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A64982E08
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 19:11:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E33E881E14
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 20:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2295d78b433so13458395ad.2
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 10:11:12 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-855bd88ee2cso29311839f.0
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 11:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744909871; x=1745514671; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YrxHfc5Xef1K0ZdHVBln/8vSR4wd0HlwipLysN0sBpg=;
- b=HKEsBv035WUDFrOJTZJkVRiIH4sIswQvWVm8zequgwGf+ADKaWUUsxKqH8N/wVVmsH
- C70M+40w6y46fCkQBwmJi2O3ubZ6kGFSiIncYFcHd/PUZwUwGu16wJfHR4ozu6r8XH9q
- aWNia0ZQD7dDW/3k4CrHYRJovfxbGI+vy2JneZ93QbgJoMYjiMJmRUfmhUqI6q656jI4
- n63TU6rGUkAd87qirgeaXI+QUdSiENKZ6KzPLVFu+OaWn+tSOkGg8pzdi9Hzhu3lKYCk
- YvE7v1GW70rOpoV4BwNPuugWxQ61benwUD2GIAMouUuL9GKnLS4ULYNO3h9F4/57F8Fx
- eYkA==
+ d=chromium.org; s=google; t=1744913799; x=1745518599; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mrAP+FmJNbcDvrJDAta/XAMk/Ppk3fyF1yM7Y6IfZaI=;
+ b=F8lVB96+O4Ex/MJT4x35V2J9/oNqqhTcXVU5QxWNyB1RBj6IwI80UUWQQkf28ofkbx
+ OSGf2SakizNshg/nQI47zT+GDS+E1XLetXDusql5pZ81HMr2B0Psuka/6/UjsomEw3IP
+ W88jFhHiq4GTVQVmwELbhKaAdlsHEktwmRs6g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744909871; x=1745514671;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YrxHfc5Xef1K0ZdHVBln/8vSR4wd0HlwipLysN0sBpg=;
- b=xO1/tQKeiWdhw2ldd4F7pCsHsuzq5ZdgqSl74rh2p05jXpO0CefFuDu3fJJrTzjenZ
- Nd3pZ24+hUMBs+E6bOy/4gOT9qU2jdrKKro+eF7HIV24JR/0qcQwuC69ie8QShMeqijM
- 1a8T9tdoa14baYjFxVlI2aFgCKr6kzshjKIzX+Ok+gThfPBdBq2/VjiIrS2ObIOUB01r
- GztyDgxXbAOTmV10sadVbatH9U4GhWJHADP/FPPtEWPfqP6uGHsf8tNMCxzkH4tvYF7M
- PNW4LTHeMlHmNAGl92+MnykEjXDBjaQmcBQWmx/U2/6eKGMhqSBvpsUzo3PEU246YRZk
- 0n+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdWoAS7gyobIRc/V2rX849NEfolDXV0xGhjgyTvGZWRwUmhzX8OXSzwcQ8BZnVZNaftpD0Rd4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRfG4AEdMNLSbpEBC+mGH7AZlaVXOsAMY2EY4F3+q2G7tmP7/q
- RK3MHNXxYDbVa03kIQ1z1bs4fML3Hcdu4WT25FJZw0nSrCDBww2i
-X-Gm-Gg: ASbGncuNXyF1Nvu3ndAJkBnfgJt8usObQo9Qkod0zCeCa8BTTDNIK3X0Uvbju6n8bmK
- Ch6iA/GBRSx2zHFX3LmWKaP8VHMPAUtUbzC+75OJUc45JESsg96P9ZUHspoyESy4lTNBPhSsYVR
- RcwoXBAepdUHaWhustVYx42NjmxCnN3GbooKY2KaoP5tydqgjj4LIJ36V+VfiCfvTrmAOkEK1Tb
- MrNg2vkhd3lw5isMtMETdcUSPR0K/cq/1Wdv92SQGVqcvUSJ9SBddebucKSChFLpWRZRhEXRGP1
- O3fCArhwGzjLYTrJOke4okxYwNl68pdg+l5c8B/dgz14+3VofeZWhI4=
-X-Google-Smtp-Source: AGHT+IHmgHK7A3Oec75tMNEJTxub4Qf5G8jxf5I15Yeev5g4B6/FA+rn0ZChSJVkyq6zLF/jdOmw5Q==
-X-Received: by 2002:a17:902:ef44:b0:215:8d49:e2a7 with SMTP id
- d9443c01a7336-22c35990b95mr97851745ad.50.1744909870909; 
- Thu, 17 Apr 2025 10:11:10 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:579d:5312:b7a3:7e17])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22c50bd9bd4sm2580855ad.51.2025.04.17.10.11.07
+ d=1e100.net; s=20230601; t=1744913799; x=1745518599;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mrAP+FmJNbcDvrJDAta/XAMk/Ppk3fyF1yM7Y6IfZaI=;
+ b=Z9HD2tIMqcXZVYwupATElmJP44MmAnRILUWyYySN6/ZMqNgDTTHThQRujGTwtkRul+
+ bXIdYFaaluNgM+5a/MNpz4fYJg2d6c0RV39qnBP3WotyMdVuW/I75I0ThfZMRX1mn18t
+ w5rEFfiS42ntfMe8OLe6Eh16EoZQyuKZv+N/eihHbWFAOTKk6CO5MRaAqWiDcSxA0lG3
+ cigVFXGtaa2IvLLAOgBrknIM4XgYwru7lmtbvF0c1axE1rPu6BMF5XLO4yngAppEXnQY
+ eDSSmrhBSQJexNb7DzduXt1wyMh+ZK/oY0ztXEJCvldBQ5sIrNH9wxyms9jVEBE19fo+
+ KkPQ==
+X-Gm-Message-State: AOJu0Yw7vVeWMpppbySBOQ6T/g37wfSYPdN0SpjVx/b0h8jx6DadP1Nd
+ V15ed3b8bMNpcfos+Fm5tFBL4I5YEhWyir0lraJIZezZL5yvt+1yhmHyiw3ogWEeEd0LwzazDho
+ =
+X-Gm-Gg: ASbGncvAduf2JHtT/pKArdQi8m0FwHn4XAxAhiRZIqJMB61gU/rzl9uA+Q8+2q90XL5
+ WzOhY73p9pu3hbmHmvY8Pvv1JWWialNNa+/eVdx04Mnw2XVmtabzHFV4ugHtWyNzbGl4oGw0vXP
+ 9eD1IZS5rr/67jlgaWgItPnimLnPsdM5DgHCuC/5B2/lidiRt+besZTJlon5gLYa4Hu0KGMZ+E5
+ Tt6mOXarem4KgrmBHzOqIAb+ZSUGU8n4BGWt2kYeNaTBJHXLMHoiLJJWOudTEg+IqKkvQ5SNBFv
+ aZrdSTCzrRLhnQOtgYENaIYR1XjXodMlJwaSDotSXApQ5/qSMWPo4N7LQKgr2Z2vn9Qclk0D4wJ
+ gAQ==
+X-Google-Smtp-Source: AGHT+IFSTJq7spVRDl+aF4hDkeOtOcbwsIWD3TxoInb3jYRIl5Csp0XftPX2BcVEPVm3iDH3hfxO5g==
+X-Received: by 2002:a05:6e02:216e:b0:3d4:36da:19a9 with SMTP id
+ e9e14a558f8ab-3d88ee75e56mr755025ab.15.1744913799214; 
+ Thu, 17 Apr 2025 11:16:39 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f6a37cb9aesm66673173.28.2025.04.17.11.16.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 10:11:10 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: lukma@denx.de, seanga2@gmail.com, marex@denx.de,
- francesco.dolcini@toradex.com, aford173@gmail.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name fixed
- clocks
-Date: Thu, 17 Apr 2025 14:11:01 -0300
-Message-Id: <20250417171101.2566447-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Thu, 17 Apr 2025 11:16:38 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Phelps <andrew.phelps@canonical.com>,
+ =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
+ Bill Mills <bill.mills@linaro.org>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 01/22] RFC: scripts: Add a script for running QEMU
+Date: Thu, 17 Apr 2025 12:15:43 -0600
+Message-ID: <20250417181613.1355024-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250417181613.1355024-1-sjg@chromium.org>
+References: <20250417181613.1355024-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,97 +100,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+This is present in my tree. Provide it as a patch to simplify testing
+this series with QEMU.
 
-Currently, fixed-rate clocks in U-Boot are named based on their devicetree
-node names. For example, given the following node:
-
-osc_24m: clock-osc-24m {
-	compatible = "fixed-clock";
-	#clock-cells = <0>;
-	clock-frequency = <24000000>;
-	clock-output-names = "osc_24m";
-};
-
-U-Boot registers the clock as "clock-osc-24m", derived from the node name,
-ignoring the clock-output-names property.
-
-This differs from Linux, which uses the clock-output-names property when
-assigning clock names. As a result, clock consumers expecting names
-like "osc_24m" (as defined in the property) may fail to resolve clocks
-correctly in U-Boot.
-
-Update the fixed-rate clock driver to check for the clock-output-names
-property and use it as the clock name if present. If not, the fallback
-remains the node name. This makes U-Boot behavior consistent with Linux.
-
-One concrete impact is on i.MX8MP, where USB clock lookup failed following
-commit b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*").
-
-With this change applied, fixed-clocks are correctly registered with their
-expected names:
-
-u-boot=> clk dump
- Rate               Usecnt      Name
-------------------------------------------
- 32768                0        |-- osc_32k
- 24000000             5        |-- osc_24m
-
-This change restores i.MX8MP USB functionality by ensuring the proper clock
-names are used.
-
-Fixes: b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*")
-Reported-by: Francesco Dolcini <francesco.dolcini@toradex.com>
-Signed-off-by: Fabio Estevam <festevam@denx.de>
-Tested-by: Adam Ford <aford173@gmail.com> #imx8mp-beacon
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-Changes since v1:
-- Included <dm/read.h> that defines dev_read_string_index() instead
-of relying on indirect inclusion via <dm.h>.
-- Removed superflous parenthesis around dev_read_string_index().
-- Added Adam's Reviewed-by tag.
 
- drivers/clk/clk_fixed_rate.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+(no changes since v1)
 
-diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
-index d1da05cc18a5..648e31b4fe14 100644
---- a/drivers/clk/clk_fixed_rate.c
-+++ b/drivers/clk/clk_fixed_rate.c
-@@ -9,6 +9,7 @@
- #include <dm.h>
- #include <log.h>
- #include <dm/device-internal.h>
-+#include <dm/read.h>
- #include <linux/clk-provider.h>
- 
- #define UBOOT_DM_CLK_FIXED_RATE "fixed_rate_clock"
-@@ -35,6 +36,8 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
- 				    struct clk_fixed_rate *plat)
- {
- 	struct clk *clk = &plat->clk;
-+	const char *clk_name;
+ scripts/build-qemu.sh | 222 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 222 insertions(+)
+ create mode 100755 scripts/build-qemu.sh
+
+diff --git a/scripts/build-qemu.sh b/scripts/build-qemu.sh
+new file mode 100755
+index 00000000000..678116d1cc7
+--- /dev/null
++++ b/scripts/build-qemu.sh
+@@ -0,0 +1,222 @@
++#!/bin/bash
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Script to build U-Boot suitable for booting with QEMU, possibly running
++# it, possibly with an OS image
 +
- 	if (CONFIG_IS_ENABLED(OF_REAL))
- 		plat->fixed_rate = dev_read_u32_default(dev, "clock-frequency",
- 							0);
-@@ -45,6 +48,16 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
- 
- 	clk->dev = dev;
- 	clk->enable_count = 0;
++# This just an example. It assumes that
 +
-+	/*
-+	 * If the "clock-output-names" property is present, use it
-+	 * as the clock name, like it is done in Linux.
-+	 * Otherwise, the original behavior will be preserved: the fixed clock
-+	 * name will be its node name.
-+	 *
-+	 */
-+	if (!dev_read_string_index(dev, "clock-output-names", 0, &clk_name))
-+		dev->name = clk_name;
- }
- 
- static ulong clk_fixed_rate_raw_get_rate(struct clk *clk)
++# - you build U-Boot in ${ubdir}/<name> where <name> is the U-Boot board config
++# - your OS images are in ${imagedir}/{distroname}/...
++
++# So far the script supports only ARM and x86.
++
++set -e
++
++usage() {
++	(
++	if [[ -n "$1" ]]; then
++		echo "$1"
++		echo
++	fi
++	echo "Usage: $0 -aBkrsw"
++	echo
++	echo "   -a <arch> - Select architecture (arm, x86)"
++	echo "   -B        - Don't build; assume a build exists"
++	echo "   -e        - Run UEFI Self-Certification Test (SCT)"
++	echo "   -k        - Use kvm (kernel-based Virtual Machine)"
++	echo "   -o <name> - Run Operating System ('ubuntu' only for now)"
++	echo "   -r        - Run QEMU with the image"
++	echo "   -R <os>   - Select OS release (e.g. 24.04)"
++	echo "   -s        - Use serial only (no display)"
++	echo "   -S <seq>  - Select SCT sequence-file"
++	echo "   -x        - Run SPL (xPL) image"
++	echo "   -w        - Use word version (32-bit)" ) >&2
++	exit 1
++}
++
++# Directory tree for OS images
++imagedir=${imagedir-/vid/software/linux}
++
++# Directory for UEFI Self-Certification Test (SCT)
++sctdir=${sctdir-/vid/software/devel/uefi/sct}
++
++# Mount point for use when writing to disk images
++mnt=${mnt-/mnt}
++
++# architecture (arm or x86)
++arch=arm
++
++# 32- or 64-bit build
++bitness=64
++
++# Build U-Boot
++build=yes
++
++# Extra setings
++extra=
++
++# Operating System to boot (ubuntu)
++os=
++
++release=24.04.1
++
++# run the image with QEMU
++run=
++
++# run QEMU without a display (U-Boot must be set to stdout=serial)
++serial=
++
++# Use kvm
++kvm=
++
++xpl=
++
++# Set ubdir to the build directory where you build U-Boot out-of-tree
++# We avoid in-tree build because it gets confusing trying different builds
++ubdir=${ubdir-/tmp/b}
++
++while getopts "a:Beko:rR:sS:wx" opt; do
++	case "${opt}" in
++	a)
++		arch=$OPTARG
++		;;
++	B)
++		build=
++		;;
++	e)
++		extra+=" -m 4G -smp 4"
++		extra+=" -display none"
++		extra+=" -device virtio-gpu-pci"
++		extra+=" -device qemu-xhci"
++		extra+=" -device usb-kbd"
++		extra+=" -drive file=${sctdir}/sct.img,format=raw,if=none,id=vda"
++		extra+=" -device virtio-blk-device,drive=vda,bootindex=1"
++		extra+=" -device virtio-net-device,netdev=net0"
++		extra+=" -netdev user,id=net0"
++		;;
++	k)
++		kvm="-enable-kvm"
++		;;
++	o)
++		os=$OPTARG
++
++		# Expand memory and CPUs
++		extra+=" -m 4G -smp 4"
++		;;
++	r)
++		run=1
++		;;
++	R)
++		release=$OPTARG
++		;;
++	s)
++		serial=1
++		;;
++	S)
++		seq=$OPTARG
++		;;
++	w)
++		bitness=32
++		;;
++	x)
++		xpl=1
++		;;
++	*)
++		usage
++		;;
++	esac
++done
++
++# Build U-Boot for the selected board
++build_u_boot() {
++	buildman -w -o $DIR --board $BOARD -I || exit $?
++}
++
++# Write the SCT test-sequence file into the SCT image
++update_sct_seq() {
++	if [[ -z "${seq}" ]]; then
++		return
++	fi
++	LOOP=$(sudo losetup --show -f -P "${sctdir}/sct.img")
++	PART="${LOOP}p1"
++	sudo mount -o loop ${PART} ${mnt} -o uid=$(id -u),gid=$(id -g)
++	cp "${seq}" "${mnt}/."
++	sudo umount ${mnt}
++	sudo losetup -d ${LOOP}
++}
++
++# Run QEMU with U-Boot
++run_qemu() {
++	if [[ -n "${os_image}" ]]; then
++		extra+=" -drive if=virtio,file=${os_image},format=raw,id=hd0"
++	fi
++	if [[ -n "${serial}" ]]; then
++		extra+=" -display none -serial mon:stdio"
++	else
++		extra+=" -serial mon:stdio"
++	fi
++	echo "Running ${qemu} ${extra}"
++	"${qemu}" -bios "$DIR/${BIOS}" \
++		-m 512 \
++		-nic none \
++		${kvm} \
++		${extra}
++}
++
++# Check architecture
++case "${arch}" in
++arm)
++	if [ -n "${xpl}" ]; then
++		BIOS="image.bin"
++		BOARD="qemu_arm_spl"
++	else
++		BOARD="qemu_arm"
++		BIOS="u-boot.bin"
++	fi
++	qemu=qemu-system-arm
++	extra+=" -machine virt -accel tcg"
++	suffix="arm"
++	if [[ "${bitness}" == "64" ]]; then
++		BOARD="qemu_arm64"
++		qemu=qemu-system-aarch64
++		extra+=" -cpu cortex-a57"
++		suffix="arm64"
++	fi
++	;;
++x86)
++	BOARD="qemu-x86"
++	BIOS="u-boot.rom"
++	qemu=qemu-system-i386
++	suffix="i386"
++	if [[ "${bitness}" == "64" ]]; then
++		BOARD="qemu-x86_64"
++		qemu=qemu-system-x86_64
++		suffix="amd64"
++	fi
++	;;
++*)
++	usage "Unknown architecture '${arch}'"
++esac
++
++# Check OS
++case "${os}" in
++ubuntu)
++	os_image="${imagedir}/${os}/${os}-${release}-desktop-${suffix}.iso"
++	;;
++"")
++	;;
++*)
++	usage "Unknown OS '${os}'"
++esac
++
++DIR=${ubdir}/${BOARD}
++
++if [[ -n "${build}" ]]; then
++	build_u_boot
++	update_sct_seq
++fi
++
++if [[ -n "${run}" ]]; then
++	run_qemu
++fi
 -- 
-2.34.1
+2.43.0
 
