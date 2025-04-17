@@ -4,81 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E3C6C369C9
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 20:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF622C369C9
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 21:24:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0A1082E8E;
-	Thu, 17 Apr 2025 22:58:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B8E782CF1;
+	Thu, 17 Apr 2025 23:24:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="paWU4aYu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KH1Fret7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E113782EDA; Thu, 17 Apr 2025 22:58:40 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 2B0C082E8E; Thu, 17 Apr 2025 23:24:32 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7AF38144A
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 22:58:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF85B82CBC
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 23:24:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72c27166ab3so784403a34.1
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 13:58:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ac2af2f15d1so150173566b.1
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 14:24:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744923517; x=1745528317; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6gIia96uG9LYkb3PoDUnBNHktbAN8nyz8ufgPVAaYew=;
- b=paWU4aYuSUBvnDE4mO02GYsIgkCZ4k/5tsWFaxqr/P3y6slbvk6aumVgY/z3j4Np2u
- mLhHskK5K6CCFnV1qYvwpQtA+rps7QdxnxbDVFFu/BrnqGykbJve+AefHH00jRCdrKMd
- xWCCVTAc0xnEh6XsqiszbIo4hG9qhYldzkVHw=
+ d=chromium.org; s=google; t=1744925069; x=1745529869; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/cls7QSygK6rEJFbEK+B7leUUcpmQp4dmGjAxqOFMhU=;
+ b=KH1Fret7fexyldO/zvSOcxXCFZLwWVA86zO/Lfgm38ZEUt4kRXbRRxRnplrrejpIum
+ 8BoypyqMSKmwY+YeNgAM6Jn9fmIZdWh6fkIeCflfDryoTGltV0Gj6iz7YpJ+nzgiC89y
+ unTL/RjWCw1pL6pP0wZZT9rsJr06FbVeyLDDU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744923517; x=1745528317;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6gIia96uG9LYkb3PoDUnBNHktbAN8nyz8ufgPVAaYew=;
- b=frHFyRaNT4yEDMiw+t7QNSt1FVgfbXHJTgqAVnEvL/54RWk4FFIr5jT7DkqtNfTdYR
- Md35aFIODFjYDSlk4VnifuwDbqUCjMuq0STtGQjYs+KkDBVXZkjkjlVBAis7YhzxUFf+
- +Fmxg3VeH7MtOJniehFEirsbtGhb9uv5fsd00gca6EhnsWUs2wZVzPTpHAOsvsph1DM9
- opQrWhAItiq4x8X9J9IHbqe2VTXGi9oM6bPdOx6YuXxDbHdAtqff8z6PzK4Wpxs88H/o
- 10At4zF6015MKT12eKMYT5QhD9bs7Q6rLrt88ZfG/z0gOrehFpV0crgtl7uCe69EHkmF
- 0vTw==
-X-Gm-Message-State: AOJu0YxPboVbloab+ZTVsrfBbvBzUb+WMJiXTPAgmmZ+xK4b637RDSPw
- 96sGjBgcJwapsdK4MA86fojv6yI389MuSoWTjhnX1br/mJ7S64UDcBY8i6CHYfQ=
-X-Gm-Gg: ASbGnctTxVfpUrc/QFTt6stBqhqHv0TOjLXMmv5FdLVzgDcHg1+Z05Hw2+/d/l0NXlh
- Iq6aRr7MBlnzf9BwUOKOs1v8AICWbYg30uFg39WEL8OrC+X2pU5/hNwnHKsB5tEEwpau/Q2hfAG
- z5cYrKJIK8j8e6JbdgqV5MyJUab93JQwxeVzioPhpUYyA4MgwO4WBxDSnxyAMXZmm6nZvYGQSVN
- 0uMkon39946Peodzr9SthnSRymlo1GKLdiDRVuM9Oo0m+AkxJKIjGscIrqwb0pbisYlcnb1rVf6
- se8D+BOfewEZ/ple8a57mV6mSLstb6Wxde0oi9K9xEatSd4P1+UBHZ7ehJV2Mn4qvmaQ/AOsGN3
- GFQ==
-X-Google-Smtp-Source: AGHT+IFkVgTIFp+SMTpJfgzc/UfcAEdsrve/gGvc9Xkn6PyfQOY0kJ9I/zrn+qCaekNlAP0R/LhP5Q==
-X-Received: by 2002:a05:6830:d89:b0:72b:f997:19c4 with SMTP id
- 46e09a7af769-7300633746bmr127829a34.26.1744923517342; 
- Thu, 17 Apr 2025 13:58:37 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73004884887sm87560a34.45.2025.04.17.13.58.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 13:58:36 -0700 (PDT)
-Date: Thu, 17 Apr 2025 14:58:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, nm@ti.com
-Subject: Re: [PATCH v7 1/4] spl: remove usage of CMD_BOOTx from image parsing
-Message-ID: <20250417205833.GA3017152@bill-the-cat>
-References: <20250408141436.712387-1-anshuld@ti.com>
+ d=1e100.net; s=20230601; t=1744925069; x=1745529869;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/cls7QSygK6rEJFbEK+B7leUUcpmQp4dmGjAxqOFMhU=;
+ b=mUkQWr8PfIGVQgdu1cOJbhmn2d010JXwD+fG0Bqq5UL73VnMP7sgPAge2PEIWswO5S
+ KNpbRSi/gsGM/l1C1OpYA/7H+zQYMEnaFLrE4bt9RoJeBAxjYfuVosxR7R/QemaCj5Oz
+ vUi02NCUdXX+fS7zfmzYMvwsJpt3AZ09yfv3Q8uM899HmryvpOnDMPL7AEtdH0239f+H
+ GYK4tuqFIERIY3x5zLrmSkndz8qCHdoPH8TpzPtJYIy+364NmekhlVErnnfY9FrbVvLd
+ KyPusxtKIcK+If7Wlo50EDOv9G/sHqtTXp9Xszxgofxh593PUse560r+Dzr58IUtJs6i
+ RZrg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUw8dg38wxvx8fqygNkPYeEj3ry3kvRtZ4P4HYKkSYAPHqzXJKAAdx+QX9Cj8lB6CLOyNhElEk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUc0O8IpxqlkNmMscqlhAUr5QsCl/rcwKWXxAO9+OsVYUQ8xAd
+ UasWl7FBdLai0h9WJy523b1ug4ZtihEk9LzDBbGScdgw+5kBczIT+iD1/SqZCOA3iKU/ypyX4xX
+ WDmP/fk8DLje5mM70AsICTQDbPAhxneqgjwKA
+X-Gm-Gg: ASbGnctroVOk0iz3uQdMlE8qm4SPV5YYgl7eIv9eLj3vPo0OGz+aVNyIhGc9hX+0VoT
+ EyESL2A3+Hkci1TtSoXj4LenoTVdeLz0Fu2QhFfbHCsjNWhpSzG0c5x7YnrucJfKjt1rnLabY8W
+ ffx9ApQ4lBD5PQaWZQUm1NVuI=
+X-Google-Smtp-Source: AGHT+IG1XthC5NFshLngmsIuIJmC4nv2omecGrp3o6V1WU18KOug+wwOW9t4CAAgWFRh8bYoIZwtJZQBoTJcCHBbnl4=
+X-Received: by 2002:a17:907:f818:b0:aca:d490:4aff with SMTP id
+ a640c23a62f3a-acb74b2d9a2mr28165766b.13.1744925069178; Thu, 17 Apr 2025
+ 14:24:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0hCW5zDHY6DIVJkL"
-Content-Disposition: inline
-In-Reply-To: <20250408141436.712387-1-anshuld@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250403225058.GQ5495@bill-the-cat>
+ <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
+ <20250404175710.GU5495@bill-the-cat>
+ <CAFLszTgBMP-WsAw=z807e9RUY1YNB=Ky+s1MhW=x6dYt7_V+-g@mail.gmail.com>
+ <20250406223854.GE5495@bill-the-cat>
+ <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
+ <20250407143056.GL5495@bill-the-cat>
+ <CAFLszTjJekLH7Z3NMewpK1hYvMgXfrJ_0TknKhuZ0QRk3ZO3sg@mail.gmail.com>
+ <20250414203444.GE5495@bill-the-cat>
+ <CAFLszTiP9T=j1AAUDcxQDCF=sN82mxsZiEG3h5MbRsNyAFwmgg@mail.gmail.com>
+ <20250417141432.GV5495@bill-the-cat>
+In-Reply-To: <20250417141432.GV5495@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 17 Apr 2025 15:24:17 -0600
+X-Gm-Features: ATxdqUFTeWqdisaKXwiQSLzpXbDvbhXMDtf-NpBGlt-iOCp0XxwuWLRpD8dU72w
+Message-ID: <CAFLszTga9RuHamjjWFRXR5X0uzq1zBqC5YiLjKEOhAj+ZSm0gA@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
+To: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,55 +114,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---0hCW5zDHY6DIVJkL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 17 Apr 2025 at 08:14, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Apr 17, 2025 at 07:14:35AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 14 Apr 2025 at 14:34, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Apr 14, 2025 at 01:34:10PM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Mon, 7 Apr 2025 at 08:31, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Apr 07, 2025 at 12:35:15PM +1200, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Mon, 7 Apr 2025 at 10:38, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Mon, Apr 07, 2025 at 10:06:07AM +1200, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Sat, 5 Apr 2025 at 06:57, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Sat, Apr 05, 2025 at 06:39:39AM +1300, Simon Glass wrote:
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
+> > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
+> > > > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Hi Simon,
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > Hi Simon,
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > Hi Simon,
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
+> > > > > > > > > > > > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
+> > > > > > > > > > > > > > > > > > > > so that it is simpler to understand and manage.
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > > > > > > > > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > > > > > > > > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
+> > > > > > > > > > > > > > > > > > > mandatorily use bloblist to hand over everything between boot stages
+> > > > > > > > > > > > > > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates that
+> > > > > > > > > > > > > > > > > > there must be a bloblist, not that it must contain a devicetree. So I
+> > > > > > > > > > > > > > > > > > wasn't sure about removing it.
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDATORY is
+> > > > > > > > > > > > > > > > > selected, we can override any fdt from board or env with the one from
+> > > > > > > > > > > > > > > > > the bloblist.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Yes, but we should be explicit about what is going on here. With
+> > > > > > > > > > > > > > > > OF_BLOBLIST we indicate that the devicetree is coming from the
+> > > > > > > > > > > > > > > > bloblist. It becomes one of the sources for devicetree, like
+> > > > > > > > > > > > > > > > OF_SEPARATE and OF_EMBED
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
+> > > > > > > > > > > > > > > mandatorily used and override other fdt sources like from the board or
+> > > > > > > > > > > > > > > env variables.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > So long as you are OK with OF_BLOBLIST as well, I have no objection to
+> > > > > > > > > > > > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
+> > > > > > > > > > > > > > very much. But I can see why it is called that as my standard passage
+> > > > > > > > > > > > > > series was actually never applied. So I suppose I'll need to have
+> > > > > > > > > > > > > > another try at that.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > So to be clear, I want a separate option for devicetree, called
+> > > > > > > > > > > > > > OF_BLOBLIST, which I can enable/disable as needed, without affecting
+> > > > > > > > > > > > > > your option.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Sigh. Can I ask what the use case for this will be? And we are going to
+> > > > > > > > > > > > > get rid of BLOBLIST_FIXED at some point, yes?
+> > > > > > > > > > > >
+> > > > > > > > > > > > I thought we agreed that this was acceptable. We argued the toss for
+> > > > > > > > > > > > months on this point and I would rather not revisit it.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
+> > > > > > > > > > > > pretty sure it can be done. The only tricky bit is coming up with a
+> > > > > > > > > > > > bloblist protocol for x86.
+> > > > > > > > > > >
+> > > > > > > > > > > Yes, I'm stuck between being "flexible and saying yes" and how long we
+> > > > > > > > > > > have to live with what I also think are bad designs.
+> > > > > > > > > > >
+> > > > > > > > > > > So maybe the pre-requisite here is that with "bloblist" and "standard
+> > > > > > > > > > > passage" being divorced, what is the requirement for bloblist again?
+> > > > > > > > > > > Because in practice, all of the problems we've had come down to looking
+> > > > > > > > > > > in fixed address locations before they're valid. You want to handle this
+> > > > > > > > > > > by saying "Ah, we won't look before it's valid with other CONFIG flags"
+> > > > > > > > > > > and I say we should handle this by not using a fixed address to start
+> > > > > > > > > > > with.
+> > > > > > > > > > >
+> > > > > > > > > > > If we have to add OF_BLOBLIST now and delete it in a few months, sigh,
+> > > > > > > > > > > OK. But it shouldn't need to exist long term.
+> > > > > > > > > >
+> > > > > > > > > > For me, OF_BLOBLIST is needed for x86 devices which don't pass the
+> > > > > > > > > > devicetree in the bloblist.
+> > > > > > > > >
+> > > > > > > > > I don't understand why that would become the case when it's not true
+> > > > > > > > > today.
+> > > > > > > >
+> > > > > > > > If you look at the top obbfdtdec_setup() in your tree you can see the
+> > > > > > > > special-case code related to TPL, that I'm wanting to get rid of.
+> > > > > > >
+> > > > > > > OK, but all of that too is for the case of a fixed bloblist being in
+> > > > > > > uninitialized memory. Which is why I don't like BLOBLIST_FIXED and want
+> > > > > > > to see passing of the bloblist from xPL -> PPL be implemented and so xPL
+> > > > > > > can allocate a bloblist (or grow a passed one if needed).
+> > > > > >
+> > > > > > We are going around in circles though. Having it is registers doesn't
+> > > > > > help with the problem that there isn't an FDT in the bloblist.
+> > > > >
+> > > > > Sure it does. If we're passed a bloblist in a register we can then see
+> > > > > if it has a DT (and use it) or not (and move to the next DT location).
+> > > > >
+> > > > > > Also, I thought you decided that I could maintain bloblist. Have you
+> > > > > > changed your mind?
+> > > > >
+> > > > > You just mis-understood me. Yes, you can maintain bloblist. But also,
+> > > > > Yes, I need to understand what you're doing. The root of the OF_BLOBLIST
+> > > > > problems is that no one understood you.
+> > > >
+> > > > No, that's not actually true. The problem is that no one would listen
+> > > > and everyone was sure I was wrong.
+> > >
+> > > That's another way of saying "no one understood you", IMO.
+> > >
+> > > > I sent the series on the basis that you were open to my maintaining
+> > > > bloblist in your tree. I didn't know there were extra conditions. So
+> > > > please let me know which way you want to go on this.
+> > >
+> > > I thought we had made progress on the community call, but now you're
+> > > sending this so I don't know?
+> > >
+> > > You need to:
+> > > - Not break handoff spec. Raymond is telling you how to get a QEMU that
+> > >   uses that now, and I'm actively waiting on Harrison Mutai to answer
+> > >   one last question I had before adding vexpress_fvp to our CI. So this
+> > >   should be a reasonable requirement.
+> > > - You were going to add register passing of bloblist location for x86,
+> > >   and then add register passing of bloblist between U-Boot phases
+> > >   without relying on BLOBLIST_FiXED.
+> > > - Some amount of un-tangling "do we have a bloblist" from "did we get a
+> > >   bloblist" is needed, so we can just check "Did we get a bloblist? Y/N"
+> > >   in lib/fdtdec.c::fdtdec_setup(). With that, we can add OF_BLOBLIST as
+> > >   a choice with OF_SEPARATE / OF_EMBEDED and we can remove a bunch of
+> > >   the logic at the top of lib/fdtdec.c::fdtdec_setup() too.
+> >
+> > That seems very much like a list of instructions. So in fact you still
+> > want to be the maintainer?
+>
+> I mean, I'm the project maintainer. No, I'm not going to sit over your
+> shoulder and tell you how to do that. But I am telling you what is and
+> isn't acceptable. I don't just blindly take patches from anyone. You are
+> not being singled out here.
 
-On Tue, Apr 08, 2025 at 07:44:30PM +0530, Anshul Dalal wrote:
+Heaven forbid. Although I see that you reverted the PXE stuff rather
+than taking my fix-up patch. That's different from what you did with
+all the lmb breakage.
 
-> Using CMD_* configs from spl doesn't make logical sense. Therefore this
-> patch replaces the checks for CMD_BOOTx with newly added library symbols
-> BOOTI, BOOTM and BOOTZ which are enabled by their respective CMD_* or
-> SPL_* counterparts.
->=20
-> SPL_BOOTZ is enabled by default for 32-bit ARM systems and SPL_BOOTI is
-> enabled by default for 64-bit ARM and RISCV.
->=20
-> The respective C files (image.c/zimage.c) are compiled based on library
-> symbols BOOTx instead which are in turn selected by both CMD_BOOTx and
-> SPL_BOOTx as required.
->=20
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>
+> > To be clear, I don't disagree with the list here but I am not willing
+> > to argue with people anymore about how it should work. I designed it
+> > and I know how it should work.
+> >
+> > Also I think I now understand what you are saying about bloblist and
+> > standard passage being split. It's because most of my standard passage
+> > series from a few years back was never applied.
+> >
+> > So I'd like to go back and revisit that and get it applied, including
+> > the gitlab test for the new qemu_arm/64_spl
+>
+> I assume you'll be posting a v2 of something, which can be applied,
+> soon then?
 
-So, for the series, we have a few problems, still. First, this is still
-not size neutral as we now end up dropping bootz from a few 32bit
-platforms (gwventana_nand, display5, gwventana_emmc, display5_factory)
-and growing colibri_vf. Next and more importantly, as after Nishanth's
-explanation, TF-A isn't going to support this case either, I believe
-it's best to just drop this part of the support as well. Thanks for the
-effort all the same.
+Yes, v3 is posted. It took a while as the original series was from 2021.
 
---=20
-Tom
-
---0hCW5zDHY6DIVJkL
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgBa3IACgkQFHw5/5Y0
-tyxHBAv/WJMCDYOozHPUWGubmdn1UOXVBlg8pCKvAIoLt4FA5xpiu4dWrR8F038r
-WCjD1tURqnXwE4tGcedh75VPrM4KUGQtXhL1R1jNY97x17G+zgKr1he69MHQjxuM
-NmWICCX2HckUqaCytG33/51CEt7fVmqTG6ANUDYCjiNL/i5PA5nVrrLgsiaKFFEU
-qmDi7h4ryQ1P/DAvKFYMWuSEIPQoELgEcw4n6mQ4xa0W0/MC4Dm7ZbbzZEEJDrKl
-NyaNP0KE3ip/DmZbGNrtVNKF2ZJg0uzp3BVNy2ZOSRW8oSflZUuig+RxJbdoWOFX
-YSZ8fp7uKd4f9TPkwCUj6M41hgv5PR8eIK+xj913Ay2Gth1IodsvsQwN5Z5TFEV5
-iL3Dm6n3VS9SWQyI4c5O2a5hvAFOr3PWsnNs8vTtUQJul+7wYUQqk4/l4YpBajFw
-2lx1T5Y0Pgd86/bKUnjwJmuL/+xU+Tz64wdpYJAIZnR4qjFVU72i0AM8FiDs1hzp
-T7ZjHRtm
-=etOI
------END PGP SIGNATURE-----
-
---0hCW5zDHY6DIVJkL--
+Regards,
+SImon
