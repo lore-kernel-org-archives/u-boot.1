@@ -4,100 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7992C369B2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 10:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA10C369B2
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 11:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5C1E82C8A;
-	Thu, 17 Apr 2025 12:52:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A325D82C8A;
+	Thu, 17 Apr 2025 13:30:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GMbII6G7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="L2C6fG/l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ACF182CD2; Thu, 17 Apr 2025 12:52:02 +0200 (CEST)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C80AE82A96
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 12:51:59 +0200 (CEST)
+ id CC76082CA8; Thu, 17 Apr 2025 13:30:18 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 71A0D82BA4
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 13:30:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-308702998fbso536556a91.1
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 03:51:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744887118; x=1745491918; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tj8ryDEvTSEPGIHR+bO6Yb/X7SetxJbUVs4oyzVtvuY=;
- b=GMbII6G7hNp0vmDVV/UYTqDp1DowPSCv/9TEof3E6hs+9YF8fv9PqTLMpJ5OnMmuY6
- PmUIWmzCBPjxdBQRnZQeCnrljhVQ/rdnW0ciwNIJgEtpCCFP0xqRGm2pjEUb1sMUCSSc
- T8JzMM0oCM2g77WZmscKyAaxsmetuNVdKNnhzuH32mhgYtDpIXzrKIc0g6dC+UtjZHD7
- XbUhPUiOK/UxM3RmkLk1J83ppe1Zd+4HHSlAG2Hd6+1NVB5YnmXwvaYz+/xhuHRouWM+
- 6UEU9cZc5WI1doeFbswvXgK8tunXo1+u7EDV2lrFZU2RKSSkon9ZltYGB7m7Jtgytk6D
- T/0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744887118; x=1745491918;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Tj8ryDEvTSEPGIHR+bO6Yb/X7SetxJbUVs4oyzVtvuY=;
- b=mFlKVrQLE8aum+sFCHyqZcB0CmLnBaNSjivJYSd376CzflWhKBYfAnNef4CV+uGskl
- tvH8pwcQxFpu5ikUiKZA5sj+OYTHDC0MX3CMubnd1KpZ7P2qYa8Wc8pnGrlHwVlRY0q8
- iFqPG7ZMQO8TGOJVvdj0fHqMDMO1uUWJUARhwiP7pOetuFAy2pEK7XKgHgAMeORstQnS
- UL4/solnsTWNWaSQvnaEEgt1hIORX4FlVP90ZCFOcxuIGQBuCrhKbLHbT9c/L96GjEne
- euuTinfT5RtL4sbmcDdanYs8roWWNSTwjmCRe979oZI5zc7HV9c2CWDvB98H8k2T2MG9
- 2ZAw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcdQ4M3DSbQV9Ov8/+jIb//dw51sm+ytrFkNmX7mc2mKS/7liVe+v39zSEyGbRL+hPXST8eFk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWW9MjdFDBsxbgYvJtYWv5T6tFocZJfGr8xAJA6LfOR/Uu1oCD
- 4HoXa55vzn6cXf8w3EnBjlFwIYDYcyMQYaOFTP/8JixDCprJQDxSqDG7ZqOP1KFl4lQHwHZL6YI
- fhZuUYv4EHbk8UPVwn18qgbfOLP4=
-X-Gm-Gg: ASbGncuLcQCmGxh7Kd9Xz5pdvS+7D/NTDp7TOo6v/kb09zG4yElzPwHUADv3XJUc3hV
- G++s/mtdzIN0FolRi7xOLjgoCKBqSdLZBfwJtHq69sFV3SSqzQWSBYOWOMysdrqCTI6MdEzMH42
- 8zc55FyVDZCZQpfi85k75Tbg==
-X-Google-Smtp-Source: AGHT+IGfoox65eScwxlpHsvqNIWfcZ7G4Fpvn+jWHnmTNVL9WwnVFvhexBxicACdU7kgrxoDJknsBohZKN4rvfkR8E8=
-X-Received: by 2002:a17:90b:498b:b0:2fe:a336:fe63 with SMTP id
- 98e67ed59e1d1-3086415ea28mr8259781a91.24.1744887118106; Thu, 17 Apr 2025
- 03:51:58 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53HBUD7D2949662
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 17 Apr 2025 06:30:13 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744889413;
+ bh=W+a7Ud8uzPwYGuxW0fgvPWeoKDHkZH6JBgBfiS4RHyE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=L2C6fG/lV+X7IhLw4kp4EQfKrpxJ3CV5ou6fG3t859Qhq9lFxVOOifcah8JZZ3fTh
+ Btk2OEhXkcYWHor55sBP9hyaClL2XDgMU7zEQYTnVqET4x3bIpt0NYfPKjan0cC81P
+ SMUMDf6droDw3M6nBDF3ovoOYNB02BEsS0Sp8LtY=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53HBUDbC057830
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 17 Apr 2025 06:30:13 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 17
+ Apr 2025 06:30:13 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 17 Apr 2025 06:30:13 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53HBUD7R096551;
+ Thu, 17 Apr 2025 06:30:13 -0500
+Date: Thu, 17 Apr 2025 06:30:13 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Anshul Dalal <anshuld@ti.com>
+CC: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
+ <trini@konsulko.com>, <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>
+Subject: Re: [PATCH v1 0/4] k3: migrate SPL_TEXT_BASE to new address
+Message-ID: <20250417113013.mrlhl65farooaiq2@extradite>
+References: <20250416073058.1441001-1-anshuld@ti.com>
+ <20250416112418.nod2fut4v77qlmfq@hummus>
+ <D983ZXCIAF06.2I0POMKUFPF2L@ti.com>
+ <20250416150506.ws22odswwkjn2wth@deflected>
+ <8146a036-681d-4c45-9285-c58259fec14b@ti.com>
+ <20250416195113.mtfdclfvb756vpll@scoreless>
+ <D98SY3X7C15U.15HUGCO6FK1T0@ti.com>
 MIME-Version: 1.0
-References: <20250323160107.145749-1-marex@denx.de>
- <20250323160107.145749-17-marex@denx.de>
- <20250415142846.GA244333@francesco-nb>
- <CAHCN7xLa5W-AtRso6RUZwZG_sfDm9CHierfzt_WfOqFjSGJZoA@mail.gmail.com>
- <20250415150344.GA246483@francesco-nb>
- <b396cb96-ff95-4822-ad24-ddff2e3b6545@denx.de>
- <CAOMZO5B=j=k8U6to2TDzohS11j4hPWQOho9bdrYCPe0WXtrQjw@mail.gmail.com>
- <20250416092639.GA24345@francesco-nb>
- <db2d623afd944df2bca6d1e4657d4031@dh-electronics.com>
- <CAHCN7xKyoBQPeXDA90-kcBTw7BhObvn6PVzreoUQ5+GjiCewyg@mail.gmail.com>
- <CAHCN7xLgS7FZ4ajbBa+p-_w_s6oHnfMYcZEMsNBNkqkgAG-7Jw@mail.gmail.com>
- <b35218ca-df17-4423-9932-a2ad0ba14e50@denx.de>
- <CAOMZO5CA0_GUr2uQtQgFHe-9wVDCOQwo5HZzZ4sibXEPMpe8cA@mail.gmail.com>
- <580024ad-b22e-424c-a1a2-84dcdc6d24ff@denx.de>
-In-Reply-To: <580024ad-b22e-424c-a1a2-84dcdc6d24ff@denx.de>
-From: Adam Ford <aford173@gmail.com>
-Date: Thu, 17 Apr 2025 05:51:46 -0500
-X-Gm-Features: ATxdqUGQrG_7Bqt4nkH-YlRo8oGk-jN-0zvEmCReoPWg2bx8GsEeRsa_6BhOLVA
-Message-ID: <CAHCN7xKvdKCnU-PRuGiNuDG9hGuk1Ea=jGtsuGaHd4CCxQximA@mail.gmail.com>
-Subject: Re: [REGRESSION] Re: [PATCH v2 16/24] clk: imx: Convert clock-osc-*
- back to osc_*
-To: Marek Vasut <marex@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Francesco Dolcini <francesco@dolcini.it>, 
- Fabio Estevam <festevam@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, 
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <D98SY3X7C15U.15HUGCO6FK1T0@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,33 +87,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 17, 2025 at 2:24=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
->
-> On 4/17/25 1:58 AM, Fabio Estevam wrote:
-> > On Wed, Apr 16, 2025 at 8:47=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
-te:
+On 14:51-20250417, Anshul Dalal wrote:
+> On Thu Apr 17, 2025 at 1:21 AM IST, Nishanth Menon wrote:
+> > On 11:38-20250416, Andrew Davis wrote:
+> >> > > > 	How about u-boot documentation?
+> >> > > 
+> >> > > I will update that in the next revision along with any feedback I
+> >> > > receive on this patch.
+> >> > 
+> >> > IMHO, This change is too intrusive and impacts downstream customers
+> >> > including inflight production devices.
+> >> > 
+> >> 
+> >> Could you elaborate a little?
+> >> 
+> >> They do not even need to update their TF-A version, if they want to
+> >> use their current version they simply recompile it with a single
+> >> extra build flag:
+> >> 
+> >> PRELOADED_BL33_BASE=0x822000000
 > >
-> >> You are not supposed to use "clock-output-names" for clock look up.
-> >> You are supposed to use "clocks"/"clock-names" DT properties and then
-> >> resolve the remote clock from information in those.
+> > For folks who are trying to boot linux from TFA, they could do the same.
+> 
+> This change would allow us to support both standard boot flow and falcon
+> mode from the same upstream source. With the only downside being the
+
+Other than trivial usecases, no you cannot. There is a lot of
+monkeying of dtb that u-boot does with mac address, HS-FS based dt node
+enable/disable etc. In effect, at a product level it ends up as a different
+flow.
+
+> slight overhead added by the jump-stub (~1.7KiB added to tispl.bin and
+> two extra instructions to jump to u-boot from older ATF builds).
+
+The boot flow is already a complex flow at the moment. If we go down
+this road, U-boot will have no choice but to support both variants of
+TFA for all eternity - any fallacy that people will upgrade U-boot and
+TFA baselines in sync is wrong.
+
+> 
+> And we can remove the stub altogether once all the customers have
+> migrated over to the new address.
+
+When would we know? There are gazillion usage models we are not aware
+of. U-boot is not the only game in town for bootloaders. Barebox, and
+other bootloader ecosystems will also need to pony up, that too hand in
+hand with migration to new address proposed in TFA.
+
+> 
+> In addition to that this also frees up the bottom of DDR which allows us
+> to more easily support low memory systems (512MiB or less) as we can use
+> the freed up space for more tightly packing OP-TEE, DM etc.  instead of
+> having the binaries loaded at scattered addresses like we do now.
+
+Now, we are suggesting an entire memory map revamp impacting more
+s/w components. For platforms with low DDR capabilities (e.g.
+PocketBeagle2), please do the necessary changes when introducing to
+mainline.
+
+> 
+> >> 
+> >> They should have no reason not to be able to do this. But even *if*
+> >> they cannot do that, the whole point of the jump-stub here is to
+> >> save them even having to do a simple compile.
+> >> 
+> >> IMHO "downstream customers including inflight production devices"
+> >> should not be a reason to block good and useful changes here in
+> >> upstream. But again, this change doesn't break anything for them in
+> >> the first place, so why bring that up?
 > >
-> > What do you think about registering the osc clocks like this?
-> >
-> > https://paste.debian.net/1369857/
->
-> It would be good to include the patch inline in this email, not in a
-> link to some paste site which will go away.
->
-> This also does not work in case 24 MHz or 32 kHz clock are provided by
-> something else than an xtal , and it will also lead to instantiation of
-> the same clock twice. The clock are already described in DT as
-> fixed-clock , there is fixed clock driver which binds to those clock
-> based on their DT description , the problem here seems to be related to
-> the look up of those 24 MHz or 32 kHz clock, not their (re)registration.
+> > I dont see a specific value here. U-boot just works. For folks who want
+> > direct TFA to kernel jump (which is a niche fast boot usecase), go ahead
+> > and use TFA with the mentioned build option.
+> 
 
+IMHO, there is a simpler alternate solution - build TFA, dtb etc in the
+model of your desire. let us leave the defaults be.
 
-Since that patch changed the lookup of the clock name broke USB on
-multiple boards, I would like to recommend we revert it until a proper
-solution is found.
+I will let Tom and other U-boot maintainers make their choice, as TFA
+maintainer, I have already rejected the approach. it is already
+PRELOADED_BL33_BASE ?= 0x80080000 which allows for override at build
+time instead of all the massive rework and downstream ecosystem impact.
 
-adam
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
