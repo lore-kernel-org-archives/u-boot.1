@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE78C369C2
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:27:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E41C369B2
+	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 13:27:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBC7B82D32;
-	Thu, 17 Apr 2025 15:27:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 277BC82CBC;
+	Thu, 17 Apr 2025 15:27:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J97mT8Hz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x2WlhfGe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E70088303B; Thu, 17 Apr 2025 15:27:31 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id A31BE8303B; Thu, 17 Apr 2025 15:27:32 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C725D82CA8
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:27:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E28182D21
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 15:27:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-39c1ef4acf2so525111f8f.0
- for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:27:29 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-39c0dfad22aso537324f8f.2
+ for <u-boot@lists.denx.de>; Thu, 17 Apr 2025 06:27:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744896449; x=1745501249; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=R7SEH6nJ8xB7rWVP/10oxAuEY7gkBPpgWzfowgTgTSA=;
- b=J97mT8Hzo0rk3T5vgBFaJy2lhj207fudFdKfWmUIOZ79ZRmUwElT+SjjYuNg5mi8mm
- Owu9fcCIAXWni7CMHp9z+7DdWZc2U6+nlUXJB+0MzYXfLzP+y0fi7xNqSqn4d8oIbY0+
- iHTLAbFACNhN5kXkkdoH4tfyikkMGPjKeCx2bDynIxsIEIyrrznbinETE0OLjfIcQnKx
- toyekmV0UiJ6zXcvz7gjbZQ+gR9lOZdUrxU0JmJDERu+HTcUGvT8E6DRqlwQaYsc/6Au
- 9E36JtQ5dasgQ81Vy9ZMDFwnDoxwLyfvX9eubJNDrpr+4DglZMazFdU+uf4LbrKZBGZk
- 13Rg==
+ d=linaro.org; s=google; t=1744896450; x=1745501250; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=D11ec35keRrC0Yq7WtMF0PySDIUXFOaHDLO+c2svLyM=;
+ b=x2WlhfGeXbLdqWpinIms+o2fOHf+zp/l6mnLwo1uRGuzXlv57lYF0Ziehr01PMnWkW
+ LbkUnXozZHPnlCFVSgq/lcQ7xMFkySspqvVe7VGXRqx3UN2HBY2bUU05b+mheTWbCrcn
+ 0e9aEgM09Uz4IuF51n83H01JwoTJ3CevXl5ZDkPV4J/qLv/Ub7QzZVXqZXcwHJZCDt9A
+ g1kj3nQ1XHrSBob7W3NWg1An0Srlsd+16KWmPFcRKVM0DEv1zUKqYVv02jVJ3dFU5+pw
+ u9zStZis2YJY/T/znGIOk0Lcf3xtCEM4xudKtXt9S6FwG/Xrca+TYSfsgJlC43xcl/kt
+ fHaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744896449; x=1745501249;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=R7SEH6nJ8xB7rWVP/10oxAuEY7gkBPpgWzfowgTgTSA=;
- b=V2sl6hqJtwWK0q+TOJ2wyyglR1rAWh973NTh+UsDlLMxfyqQxRB/uPbmJFvkh7kYVm
- wQJVbt4pUOhGBGbWCgn4sjYxVkSyuhWB2JmPHDzwDDzMzpZfqdbxvM4jpT/n5Gz9nwNg
- 0A4piOUTMYOkF1dqb6YycAyf/U3IkhN+VmYKflNXRtsywJahTvlpvuD8qGu5+upjVEez
- mVfIoxgHHax0P3q6RA8sP8lPrujDiPx21cGnDB1E3Dgx4eNFxvGSGo/v296hKqv0z6tq
- ASq5510FXHezaQOK1sKnXmg2H9ixyYxc07aYU+PDVxSb/Y4hyVEYTVPAhATH69xzGLQ0
- asSA==
-X-Gm-Message-State: AOJu0Yy6pcDOBvpihs+DqyqXbMHV/yF0kIVYMOJqS2W5Sk4+PMkPXvFg
- Auo0HRXF8fqDJfk1WLN7ng2YNZN6Cw2Ml2jY49RVy3NSpi3mzscVI1qnyg8PJSCRfgUozgpbHIv
- ehDY=
-X-Gm-Gg: ASbGncsvqiTN/01wTcQyRlEFhrkCI68rLpwD02bbYuoBMWMwBrj3YoeIJZEbAB2vYnb
- kPyRXKzPkDHlfOlbeU1bpHbbVa82ViA5M5UcAdgbY/NIPkGfa0XPU3mATVNQmzYDXLj7k0U0dcd
- VptdoneaWhjU0FKkV0VM3mql8cjFEJVyks0FQ+37OJ800JVxiyher0SvBgVIZ/apPzX0SOr1b6f
- +B+HrZqGMM4Bm8rTjX6bsRjp7AlCWPk4VLMJa5IqE5Ei5NFuAeuEFPJkR5ArNOCeoKKDNNmX4dR
- 2lRTV/LKEbHwmksfZBzjp6MZeaY7kYhyJEYeWm4YAvIaApHLQWIrRZTRLBOP
-X-Google-Smtp-Source: AGHT+IFSk39LPvb4Gi3Ls3pFeoCqOypaw5jqxYuTgbTGBjH0O404ctXgfLTYUaajjND8bM4whx2XMA==
-X-Received: by 2002:a5d:5f49:0:b0:390:eebc:6f32 with SMTP id
- ffacd0b85a97d-39ee5bade02mr5500576f8f.48.1744896448955; 
- Thu, 17 Apr 2025 06:27:28 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744896450; x=1745501250;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=D11ec35keRrC0Yq7WtMF0PySDIUXFOaHDLO+c2svLyM=;
+ b=Pt/JyNB73zdyBw3pCbSiNd05oZuwBmTX3XwjRpNDZitDQWzUD+ZFlsmzn6O2dUT6JC
+ JSWWyM4tvFtvu3XsLi3aIm0gYrnWHlGrm8l3kfiPevJIiREJSw+fIU8Vjn1QzxVf1tTV
+ AnekPPC5F6fRBewnM3g5WpnVkC5QwXvEf8x5Elpz0lZZuNyjln/Px8+j5SSV3e/3+4ws
+ 8jXFZzFaPSwocJpq5UhfgtXLL8PVUfSfaUxVKTrPU1IdONSCjNfdCjjwUYBJ8i27r8mM
+ nY9Ezr/fDk0LJyqnBXSjV46aKn25gfo5N1Shrl93lO7bvBeysk+rQz4sz5swh+xTg68p
+ BWvQ==
+X-Gm-Message-State: AOJu0YzgAHEUV+nPpmvlCSyE9JqYkKtrSu5CF5XOSkzMnKqc2yCZ+TJp
+ vTTZS6VIxT7HsHl46pnRiAJZhZqit/RPY5vK2kh/K9djlPrdtflQk2OL2J8vv7CanXSPwx+J0Do
+ EPF8=
+X-Gm-Gg: ASbGncsjROv1lJUWCOYlu2VEk8SAyNSJY2yu/94V/xz7SStZCPqa9CFrPNywgUro0ye
+ Wtnxio6cBlWDDYSKHxSOFKrAujdrM8wDkfyzODRGbtsc6lSRGY8tYuFO0rPvw60YgYwEzlJm/6t
+ m9V0bW5cLcgyyNVR5HdHg4A4m8pGQNeMycwvKlMS8weQDQHvKfSpur5om3TBi0FPbBjzzewygHf
+ hl4mIGma8aEax7T0p/RPxUomb9RFHdjC3k/BJkiRNXN9JAb4ft88TffkfJz/drwa4/goNogTuER
+ TmD0h7/d+bD1ouI+v24zx8IgPKtUTTCoWuSyb9dPS1di0fXm2w==
+X-Google-Smtp-Source: AGHT+IHcmA05TyhFdDaG/S6Ih5JEb741ZJpGYTVaMWi8/CQcUWracuRzgHi65GuqMCaRLJovwRH4Ew==
+X-Received: by 2002:a5d:64ae:0:b0:39c:11c0:eb98 with SMTP id
+ ffacd0b85a97d-39ee5b9f651mr5443973f8f.39.1744896449800; 
+ Thu, 17 Apr 2025 06:27:29 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:a07e:3f08:7eef:b036])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39eae977513sm19951605f8f.42.2025.04.17.06.27.28
+ ffacd0b85a97d-39eae977513sm19951605f8f.42.2025.04.17.06.27.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 06:27:28 -0700 (PDT)
+ Thu, 17 Apr 2025 06:27:29 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 0/4] NET_LWIP LMB fixes
-Date: Thu, 17 Apr 2025 15:26:56 +0200
-Message-ID: <20250417132718.2023555-1-jerome.forissier@linaro.org>
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 1/4] net-lwip: change static function wget_loop() to be
+ wget_do_request()
+Date: Thu, 17 Apr 2025 15:26:57 +0200
+Message-ID: <20250417132718.2023555-2-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250417132718.2023555-1-jerome.forissier@linaro.org>
+References: <20250417132718.2023555-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,30 +104,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Two small patches fixing issues with tftp and wget when the network
-stack is NET_LWIP and LMB is enabled. Plus one prerequisite patch
-fixing a problem with wget that does printf()/puts()/putc() when
-called from EFI which is not allowed (messes with the console output)
-and a small refactoring in net/lwip/wget.c.
+wget_do_request() currently does so little before calling the static
+function wget_loop() that we may as well rename wget_loop() to
+wget_do_request() and put everything in one function.
 
-Changes in v5:
-- See changelog in the individual patches
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+---
 
-Jerome Forissier (4):
-  net-lwip: change static function wget_loop() to be wget_do_request()
-  net, net-lwip: wget: suppress console output when called by EFI
-  net-lwip: wget: add LMB and buffer checks
-  net-lwip: tftp: add LMB and buffer checks
+(no changes since v4)
 
- doc/usage/cmd/wget.rst                        |   2 +-
- include/net-common.h                          |   2 +
- lib/efi_loader/efi_net.c                      |   2 +-
- .../src/apps/altcp_tls/altcp_tls_mbedtls.c    |   8 +-
- net/lwip/tftp.c                               |  56 +++++++--
- net/lwip/wget.c                               | 117 +++++++++++++-----
- net/wget.c                                    |  23 +++-
- 7 files changed, 159 insertions(+), 51 deletions(-)
+Changes in v4:
+- New patch
 
+ net/lwip/wget.c | 20 +++++++++-----------
+ 1 file changed, 9 insertions(+), 11 deletions(-)
+
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+index ec098148835..2b512a1bc84 100644
+--- a/net/lwip/wget.c
++++ b/net/lwip/wget.c
+@@ -372,13 +372,14 @@ static int set_cacert(char * const saddr, char * const ssz)
+ #endif
+ #endif  /* CONFIG_WGET_CACERT || CONFIG_WGET_BUILTIN_CACERT */
+ 
+-static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
++int wget_do_request(ulong dst_addr, char *uri)
+ {
+ #if CONFIG_IS_ENABLED(WGET_HTTPS)
+ 	altcp_allocator_t tls_allocator;
+ #endif
+ 	httpc_connection_t conn;
+ 	httpc_state_t *state;
++	struct udevice *udev;
+ 	struct netif *netif;
+ 	struct wget_ctx ctx;
+ 	char *path;
+@@ -394,6 +395,13 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+ 	if (parse_url(uri, ctx.server_name, &ctx.port, &path, &is_https))
+ 		return CMD_RET_USAGE;
+ 
++	net_lwip_set_current();
++
++	if (!wget_info)
++		wget_info = &default_wget_info;
++
++	udev = eth_get_dev();
++
+ 	netif = net_lwip_new_netif(udev);
+ 	if (!netif)
+ 		return -1;
+@@ -469,16 +477,6 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+ 	return -1;
+ }
+ 
+-int wget_do_request(ulong dst_addr, char *uri)
+-{
+-	net_lwip_set_current();
+-
+-	if (!wget_info)
+-		wget_info = &default_wget_info;
+-
+-	return wget_loop(eth_get_dev(), dst_addr, uri);
+-}
+-
+ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+ {
+ 	char *end;
 -- 
 2.43.0
 
