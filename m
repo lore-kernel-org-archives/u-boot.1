@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42A4CC369C9
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 19:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BA4C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 19:41:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7886883212;
+	by phobos.denx.de (Postfix) with ESMTP id B8CA1832EB;
 	Fri, 18 Apr 2025 21:40:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Vjbwui1q";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NaKmrCIn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 279068329F; Fri, 18 Apr 2025 21:40:09 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 84AE4832FE; Fri, 18 Apr 2025 21:40:09 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41D3F832B3
+ by phobos.denx.de (Postfix) with ESMTPS id 009F9832F7
  for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 21:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJdu4V1007477
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduCS365335
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Fri, 18 Apr 2025 14:39:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1745005196;
- bh=2nvG4+lX8D3yOVDTBm+Q5BcEHOk8mqCDZz1RVRwlQf0=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Vjbwui1qMI0yieAQXi7b8R/Db3tnen/h7lbVw4OkJ8nVbf18YYsW51ThjZlYkHVdE
- BW/SLNKSEF8Udkgnn8w+85LX+xPi1f/xlhlUxI1w4nTYuGEaUQUdMAyy/9pyFMn0/+
- PGvkSlWVpCGpXiliX14wtu3Quicu+UW9JxU52WCU=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduBq003015
+ bh=MlPTwy5Q0hFcbZWB7n3iKcUSixv+K7+hk6k3cTv+Xk0=;
+ h=From:To:CC:Subject:Date;
+ b=NaKmrCInQ9ZaxvoDsYenzpWBTgJMNqH87TO/RoF/kxTnqZRH6nMr30G/wAik8fjy1
+ AxekDbwmuxEy/HexeFqusWh//c9PPFOlZD9NW8C7eHTbu3f4m9xdKhJeY0o/XVij2u
+ lUR9+Inil8WqN6Ig8CN3Nj6VdJxsI4lDIR0GabdQ=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduYX003013
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 18 Apr 2025 14:39:56 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 18
- Apr 2025 14:39:56 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 14:39:55 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 18 Apr 2025 14:39:55 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53IJdtMA027813;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53IJdtPU028496;
  Fri, 18 Apr 2025 14:39:55 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -57,13 +57,10 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 CC: Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Jonathan
  Humphreys <j-humphreys@ti.com>, Andrew Davis <afd@ti.com>,
  <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V2 3/9] beagle: beagley-ai: env: Set up the boot devices and
- boot methods
-Date: Fri, 18 Apr 2025 14:39:37 -0500
-Message-ID: <20250418193943.953952-4-nm@ti.com>
+Subject: [PATCH V2 0/9] board: beagle: beagley-ai: Cleanups and stdboot
+Date: Fri, 18 Apr 2025 14:39:34 -0500
+Message-ID: <20250418193943.953952-1-nm@ti.com>
 X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20250418193943.953952-1-nm@ti.com>
-References: <20250418193943.953952-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -84,35 +81,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We just have a single MMC on BeagleY-AI. So drop all other boot options,
+Spin 2 of the series.
+Just happened to get a BeagleY-AI at desk and happened to test master
+branch (7dd49a9264a6 drivers: scsi: Add 'erase' support), noticed a few
+issues which were rather easy to solve.. so, here we go:
 
-In the meanwhile, we also will use efiboot and standard boot methods
-consistent with other K3 Beagle products.
+Current series is based off:
+master 71f497a6d390 ("Revert "power-domain: Add refcounting"")
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
-Changes Since v1:
-- None
+BootLog: https://gist.github.com/nmenon/d5d761371515ce0e9cc77021533c34d7
 
-V1: https://lore.kernel.org/r/20250411225717.3117370-4-nm@ti.com
+Changes since V1:
+- cosmetic fixups and pick up of acks
 
- board/beagle/beagley-ai/beagley-ai.env | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+V1: https://lore.kernel.org/all/20250411225717.3117370-1-nm@ti.com/
 
-diff --git a/board/beagle/beagley-ai/beagley-ai.env b/board/beagle/beagley-ai/beagley-ai.env
-index 10d62034e1af..db29d13420aa 100644
---- a/board/beagle/beagley-ai/beagley-ai.env
-+++ b/board/beagle/beagley-ai/beagley-ai.env
-@@ -11,7 +11,8 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
- 	${mtdparts}
- run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
- 
--boot_targets=mmc1 mmc0 pxe dhcp
-+boot_targets=mmc1
-+bootmeths=script extlinux efi pxe
- boot=mmc
- mmcdev=1
- bootpart=1:2
+Nishanth Menon (9):
+  board: beagle: beagley-ai: Add pattern match for MAINTAINERS
+  arch: arm: dts: k3-am67a-beagley-ai-u-boot: Mark main_gpio1 as
+    bootph-all
+  beagle: beagley-ai: env: Set up the boot devices and boot methods
+  beagle: beagley-ai: env: Setup scripts for LED control
+  beagle: beagley-ai: env: Enable DFU env options
+  configs: am67a_beagley_ai*: Use saveddefconfig
+  configs:am67a_beagley_ai*: Drop un-necessary config options
+  configs: am67a_beagley_ai_a53: Enable additional features
+  doc: beagle: Add BeagleY-AI documentation
+
+ arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi |   4 +
+ board/beagle/beagley-ai/MAINTAINERS          |   4 +-
+ board/beagle/beagley-ai/beagley-ai.env       |   7 +-
+ configs/am67a_beagley_ai_a53_defconfig       | 165 ++++++++++---
+ configs/am67a_beagley_ai_r5_defconfig        | 109 ++++++++-
+ doc/board/beagle/am67a_beagley_ai.rst        | 244 +++++++++++++++++++
+ doc/board/beagle/index.rst                   |   1 +
+ doc/board/ti/k3.rst                          |   1 +
+ 8 files changed, 494 insertions(+), 41 deletions(-)
+ create mode 100644 doc/board/beagle/am67a_beagley_ai.rst
+
 -- 
 2.47.0
 
