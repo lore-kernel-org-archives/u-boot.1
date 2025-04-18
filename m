@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E48C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA0DC369CA
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:12:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B491C8329B;
-	Fri, 18 Apr 2025 16:11:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18E5E832B3;
+	Fri, 18 Apr 2025 16:11:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JimfCtRI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FLiQMJ+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 592BC83287; Fri, 18 Apr 2025 16:11:37 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id BF6678328F; Fri, 18 Apr 2025 16:11:38 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C8C381F45
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F66D8321D
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4394a823036so10485375e9.0
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:35 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43cf848528aso14694595e9.2
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744985494; x=1745590294; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744985495; x=1745590295; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vjN9f8+RKUCM1bfAsnKFxh2T60ROTFd40n0Hwh5GyX0=;
- b=JimfCtRIAqWr8buAzsgg3bTcq9AvBdLJezOF/GrX+DoOwfOAH6dbx2yZGPF1gFfONk
- Cwb7gFi+U15upS8pgwFIOsrr3ReUNfO6fTentcF6u6uDS9PNfSfdOLmi5oNYrkKAqzm5
- +qc5GLyzpNJH6ir9CXIA2VzCAsXgklemDTftL7UrUPBkwefYDlZQDE//R9PM0Z2hFNYn
- 2hgxf0C0tPYhowEh6vNpLOcvs+85xnCNpUuXvGFrMxwwqceeB8iYkIuJIqloKBfT/mGT
- 7PU5zRGhmFXNy64f0tQDatNnz2yYPAah6uVDE8QkFlmb4xJsSRBNg3SpHvGP0M0GX1bV
- kN6Q==
+ bh=dG9VIxAb02a7A/HsEZ7z0UV/5H4lYe3f+d1yazMxX2g=;
+ b=FLiQMJ+h+A/1bJXKy9lR1ec7BXO5rCm8O1HHu82kn8PX4tAG2EEum7JInnGJD4MCSg
+ iieUpXhFEw80JegdLylTILEW0ul1suDhaieX3Rl8cr1qguL+cRWRJqmO5Y6JVWkPQGWU
+ cb5oMMokfT1ztVkSDhRMt7s9ajU+l/u0c1QZoEeNJDWdoC/vWcAJ4Qw4gTWnxdertZLd
+ 48Om50LfkvD/fILkILINrJFS7b+9zHlQ5YWKOdmfzQm+fIAZXSNCiioig+K9lMh30M/R
+ WVcON4L69CEi/DsPBtvEcn1Z/BBmTTrP4MStSr2ZMX7sVULGnNzZEO2IHc8w4KJnBZUT
+ xe1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744985494; x=1745590294;
+ d=1e100.net; s=20230601; t=1744985495; x=1745590295;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vjN9f8+RKUCM1bfAsnKFxh2T60ROTFd40n0Hwh5GyX0=;
- b=EOJTUc6V+3kUnyRsK2TP7E4tDh++JbxapZzELDhbxzWLETN7yJxSmQhkRsjQ3NKswi
- N4X9s+a0sWCMnN3qg/sZ9OXeJzUhFf439fKDv5smwE/fR2MGWOcOPw1dqcWt0NwlBBTF
- yO6s7Li1KVtr3aez4/h5USr+xqVqV6YMWbcCYZnBs+bsOLbkpaZMKUH6yREtHMMJepTA
- YGPB8FPLXfgO5Q6KTzUGaChlLNgcn9vUcMIwlr4PSUqMtlZT1Ma3PwEL0oOiZb9SwtW3
- YB2SopkW1cG3t0JJ35pD6qpRJEINQhALKuIryh+poqTupAZ76CS3rg64L/UXvpMNEO57
- EMSQ==
-X-Gm-Message-State: AOJu0YxBgmEhZdzLGGj5C41SMDv4imfdEi6++1Ehc0/HTL3BIK0jWmmn
- JkL43C57j+WXpgYFhVhPto29OjcaPdKytJxoRjVdOwIDSk8NdQzO1j+g0kOZtlNX1dYNPyJcgu8
- gm6tFmg==
-X-Gm-Gg: ASbGncs77+sA7qlbx5FZymvp09qkKqGm6pnIfTNVqtRMvVDbRGNt+kjyiRqwOCCcZG2
- dmwZDaPX+ahy6zPNGMz8yRHc4JGbsIBL/LmB1FcmarZSXlgVAJmRaqIkS3BbebjOEmFEOpWBdyG
- loyblQe2JZC984uBG5iuk5CXGfibneLD5mel+NKxAzE/uvaLZAtU1pURXq3fwehM8Qv9ge8nrH2
- I8UQl+acjcItSsCFri1ts2Cf95CHFudqFEgGsJ3++Hf5UnvY1X4U2HndAfbjQEpm3lKN9AAsCsl
- sYWKCVF5j3Yyh7W0a1Z/jC++M7xKJfXtVhAh/hQuY94OsQUuugprfGiNhG0t
-X-Google-Smtp-Source: AGHT+IFo+q4N0KuZWO+cglZvw5xl4HRBjhlqoRlmbn5E5SyEVDd3r6gF7hC1S9tdehmR/9/JB8HcPA==
-X-Received: by 2002:a05:6000:25e6:b0:39e:cbd2:9ad4 with SMTP id
- ffacd0b85a97d-39efba263e3mr2007719f8f.2.1744985494519; 
- Fri, 18 Apr 2025 07:11:34 -0700 (PDT)
+ bh=dG9VIxAb02a7A/HsEZ7z0UV/5H4lYe3f+d1yazMxX2g=;
+ b=xDdogqfZr2kw/2uctLVEmKTpEhBDF1NSfch3TfKFQe6FG041xLDMZMd4h3omgMWS7U
+ 9xkerBdeoe6LYgbYvlpOviN6oqzVIGLOMbzmsHIc900arJAvMZCDHnqcEkuq31mJsWXl
+ jqS1oGy1GziNHjoHAr3pMyytf83fbV+W8Q+vr1dUIi/0kPehonUZATgrsUweU7LAqa2a
+ RdXZ+pw//7EJJFvEsNAWvFbPvtJL3TQWg7Yz0HGXc5G6yB1LK2r8t0iiN1Xav1aqIZbw
+ aQ5CUC+w31idmzzf9dQLdEm5OmJJ41acRNEm94MpMdDO6SmEAd5Pz21fmQDQtw5e4wJS
+ /vSQ==
+X-Gm-Message-State: AOJu0YxPyKZl/ZsxZ2OI6aYZpUFRk6Fx4QF8q1f4GTAX1e/+gWKMTApU
+ bzg0UjckNsKs8oOVlk4p4CdVznXmUhvGzAe1JwFYPyXDYf6tzXO1LmPaK6EZvXLkMdib1VgZweM
+ Vg3gd8Q==
+X-Gm-Gg: ASbGncvjIgqxSl36gWVbnRURWGF5hfSdOsfUVMI2yQ0rayubGriQcHnXI6xrVPFOfEy
+ gsegxipaDn/lpgqPhMMP83NoTIu+Nl0Y+LIENA3FcPm4+xnyQGVLa4e/+tM7RDxErXCuVTc7Ksa
+ Ym/D8Nxbabz9l9/cBHp30onb3cyxuWp7fqBV66AqXy9U8QLC+D7OhOFpK2OBPttsDWjoKLBL3L0
+ 17S8Nu9ogNBX/gxSLEqIH3wtfMxiCwff8GVu9sfRkTcvRrYNGdnJL8af2d1TL0moBeO+LF/SPfa
+ pFWC/qrIk9PrHGoRsm1ITdYKgC/zvSKIpCLrBLZqwx8h0jYEnnaOW6angrz/
+X-Google-Smtp-Source: AGHT+IG4uETuSvZXK1OFkEiS1dzhgEY+45JyGrqwmkFv3cgzECULtXhFp/w7syPYofglkvdfJFmPTQ==
+X-Received: by 2002:a05:600c:138d:b0:440:6852:5b31 with SMTP id
+ 5b1f17b1804b1-4406ab9835bmr26710725e9.10.1744985495424; 
+ Fri, 18 Apr 2025 07:11:35 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:1526:5ffd:d63c:cc85])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.33
+ 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 07:11:34 -0700 (PDT)
+ Fri, 18 Apr 2025 07:11:35 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Leo <ycliang@andestech.com>,
- Rick Chen <rick@andestech.com>, Simon Glass <sjg@chromium.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Yu-Chien Peter Lin <peter.lin@sifive.com>
-Subject: [PATCH v6 03/17] riscv: add initjmp()
-Date: Fri, 18 Apr 2025 16:09:31 +0200
-Message-ID: <20250418141114.2056981-4-jerome.forissier@linaro.org>
+Subject: [PATCH v6 04/17] sandbox: add initjmp()
+Date: Fri, 18 Apr 2025 16:09:32 +0200
+Message-ID: <20250418141114.2056981-5-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250418141114.2056981-1-jerome.forissier@linaro.org>
 References: <20250418141114.2056981-1-jerome.forissier@linaro.org>
@@ -103,7 +102,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement initjmp() for RISC-V, a non-standard extension to setjmp()/
+Add initjm[() to sandbox, a non-standard extension to setjmp()/
 longjmp() allowing to initialize a jump buffer with a function pointer
 and a stack pointer. This will be useful to later introduce threads.
 With this new function it becomes possible to longjmp() to a particular
@@ -111,48 +110,248 @@ function pointer (rather than to a point previously reached during
 program execution as is the case with setjmp()), and with a custom stack.
 Both things are needed to spin off a new thread. Then the usual
 setjmp()/longjmp() pair is enough to save and restore a context, i.e.,
-switch thread.
+switch thread. The implementation is taken verbatim from barebox [1] with
+the exception of the additional stack_sz argument. It is quite complex
+because contrary to U-Boot platform code we don't know how the system's
+C library implements the jump buffer, so we can't just write the function
+and stack pointers into it.
+
+[1] https://github.com/barebox/barebox/blob/b2a15c383ddc/arch/sandbox/os/setjmp.c
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
 
-(no changes since v1)
+Changes in v6:
+- sandbox: select HAVE_INITJMP
 
- arch/Kconfig            |  1 +
- arch/riscv/lib/setjmp.S | 11 +++++++++++
- 2 files changed, 12 insertions(+)
+ arch/Kconfig               |   1 +
+ arch/sandbox/cpu/Makefile  |  11 ++-
+ arch/sandbox/cpu/initjmp.c | 175 +++++++++++++++++++++++++++++++++++++
+ 3 files changed, 186 insertions(+), 1 deletion(-)
+ create mode 100644 arch/sandbox/cpu/initjmp.c
 
 diff --git a/arch/Kconfig b/arch/Kconfig
-index 7a3141e92b3..aa60c5ff03c 100644
+index aa60c5ff03c..ea33d07c086 100644
 --- a/arch/Kconfig
 +++ b/arch/Kconfig
-@@ -153,6 +153,7 @@ config RISCV
- 	bool "RISC-V architecture"
- 	select CREATE_ARCH_SYMLINK
+@@ -180,6 +180,7 @@ config RISCV
+ config SANDBOX
+ 	bool "Sandbox"
  	select HAVE_SETJMP
 +	select HAVE_INITJMP
- 	select SUPPORT_ACPI
- 	select SUPPORT_LITTLE_ENDIAN
- 	select SUPPORT_OF_CONTROL
-diff --git a/arch/riscv/lib/setjmp.S b/arch/riscv/lib/setjmp.S
-index 99d6195827e..9e1f3d5749b 100644
---- a/arch/riscv/lib/setjmp.S
-+++ b/arch/riscv/lib/setjmp.S
-@@ -59,3 +59,14 @@ ENTRY(longjmp)
- 	ret
- ENDPROC(longjmp)
- .popsection
+ 	select ARCH_SUPPORTS_LTO
+ 	select BOARD_LATE_INIT
+ 	select BZIP2
+diff --git a/arch/sandbox/cpu/Makefile b/arch/sandbox/cpu/Makefile
+index bfcdc335d32..038ad78accc 100644
+--- a/arch/sandbox/cpu/Makefile
++++ b/arch/sandbox/cpu/Makefile
+@@ -5,7 +5,7 @@
+ # (C) Copyright 2000-2003
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-y	:= cache.o cpu.o state.o
++obj-y	:= cache.o cpu.o state.o initjmp.o
+ extra-y	:= start.o os.o
+ extra-$(CONFIG_SANDBOX_SDL)    += sdl.o
+ obj-$(CONFIG_XPL_BUILD)	+= spl.o
+@@ -29,6 +29,15 @@ cmd_cc_eth-raw-os.o = $(CC) $(filter-out -nostdinc, \
+ $(obj)/eth-raw-os.o: $(src)/eth-raw-os.c FORCE
+ 	$(call if_changed_dep,cc_eth-raw-os.o)
+ 
++# initjmp.c is build in the system environment, so needs standard includes
++# CFLAGS_REMOVE_initjmp.o cannot be used to drop header include path
++quiet_cmd_cc_initjmp.o = CC $(quiet_modtag)  $@
++cmd_cc_initjmp.o = $(CC) $(filter-out -nostdinc, \
++	$(patsubst -I%,-idirafter%,$(c_flags))) -c -o $@ $<
 +
-+.pushsection .text.initjmp, "ax"
-+ENTRY(initjmp)
-+	/* a1: entry point address, a2: stack base, a3: stack size */
-+	add a2, a2, a3
-+	STORE_IDX(a1, 12)
-+	STORE_IDX(a2, 13)
-+	li  a0, 0
-+	ret
-+ENDPROC(initjmp)
-+.popsection
++$(obj)/initjmp.o: $(src)/initjmp.c FORCE
++	$(call if_changed_dep,cc_initjmp.o)
++
+ # sdl.c fails to build with -fshort-wchar using musl
+ cmd_cc_sdl.o = $(CC) $(filter-out -nostdinc -fshort-wchar, \
+ 	$(patsubst -I%,-idirafter%,$(c_flags))) -fno-lto -c -o $@ $<
+diff --git a/arch/sandbox/cpu/initjmp.c b/arch/sandbox/cpu/initjmp.c
+new file mode 100644
+index 00000000000..6e72d32cb4b
+--- /dev/null
++++ b/arch/sandbox/cpu/initjmp.c
+@@ -0,0 +1,175 @@
++// SPDX-License-Identifier: LGPL-2.1-or-later
++/*
++ * An implementation of initjmp() in C, that plays well with the system's
++ * setjmp() and longjmp() functions.
++ * Taken verbatim from arch/sandbox/os/setjmp.c in the barebox project.
++ * Modified so that initjmp() accepts a stack_size argument.
++ *
++ * Copyright (C) 2006  Anthony Liguori <anthony@codemonkey.ws>
++ * Copyright (C) 2011  Kevin Wolf <kwolf@redhat.com>
++ * Copyright (C) 2012  Alex Barcelo <abarcelo@ac.upc.edu>
++ * Copyright (C) 2021  Ahmad Fatoum, Pengutronix
++ * Copyright (C) 2025  Linaro Ltd.
++ * This file is partly based on pth_mctx.c, from the GNU Portable Threads
++ *  Copyright (c) 1999-2006 Ralf S. Engelschall <rse@engelschall.com>
++ */
++
++/* XXX Is there a nicer way to disable glibc's stack check for longjmp? */
++#ifdef _FORTIFY_SOURCE
++#undef _FORTIFY_SOURCE
++#endif
++
++#include <pthread.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <setjmp.h>
++#include <signal.h>
++
++typedef sigjmp_buf _jmp_buf __attribute__((aligned((16))));
++_Static_assert(sizeof(_jmp_buf) <= 512, "sigjmp_buf size exceeds expectation");
++
++/*
++ * Information for the signal handler (trampoline)
++ */
++static struct {
++	_jmp_buf *reenter;
++	void (*entry)(void);
++	volatile sig_atomic_t called;
++} tr_state;
++
++/*
++ * "boot" function
++ * This is what starts the coroutine, is called from the trampoline
++ * (from the signal handler when it is not signal handling, read ahead
++ * for more information).
++ */
++static void __attribute__((noinline, noreturn))
++coroutine_bootstrap(void (*entry)(void))
++{
++	for (;;)
++		entry();
++}
++
++/*
++ * This is used as the signal handler. This is called with the brand new stack
++ * (thanks to sigaltstack). We have to return, given that this is a signal
++ * handler and the sigmask and some other things are changed.
++ */
++static void coroutine_trampoline(int signal)
++{
++	/* Get the thread specific information */
++	tr_state.called = 1;
++
++	/*
++	 * Here we have to do a bit of a ping pong between the caller, given that
++	 * this is a signal handler and we have to do a return "soon". Then the
++	 * caller can reestablish everything and do a siglongjmp here again.
++	 */
++	if (!sigsetjmp(*tr_state.reenter, 0)) {
++		return;
++	}
++
++	/*
++	 * Ok, the caller has siglongjmp'ed back to us, so now prepare
++	 * us for the real machine state switching. We have to jump
++	 * into another function here to get a new stack context for
++	 * the auto variables (which have to be auto-variables
++	 * because the start of the thread happens later). Else with
++	 * PIC (i.e. Position Independent Code which is used when PTH
++	 * is built as a shared library) most platforms would
++	 * horrible core dump as experience showed.
++	 */
++	coroutine_bootstrap(tr_state.entry);
++}
++
++int __attribute__((weak)) initjmp(_jmp_buf jmp, void (*func)(void),
++				  void *stack_base, size_t stack_size)
++{
++	struct sigaction sa;
++	struct sigaction osa;
++	stack_t ss;
++	stack_t oss;
++	sigset_t sigs;
++	sigset_t osigs;
++
++	/* The way to manipulate stack is with the sigaltstack function. We
++	 * prepare a stack, with it delivering a signal to ourselves and then
++	 * put sigsetjmp/siglongjmp where needed.
++	 * This has been done keeping coroutine-ucontext (from the QEMU project)
++	 * as a model and with the pth ideas (GNU Portable Threads).
++	 * See coroutine-ucontext for the basics of the coroutines and see
++	 * pth_mctx.c (from the pth project) for the
++	 * sigaltstack way of manipulating stacks.
++	 */
++
++	tr_state.entry = func;
++	tr_state.reenter = (void *)jmp;
++
++	/*
++	 * Preserve the SIGUSR2 signal state, block SIGUSR2,
++	 * and establish our signal handler. The signal will
++	 * later transfer control onto the signal stack.
++	 */
++	sigemptyset(&sigs);
++	sigaddset(&sigs, SIGUSR2);
++	pthread_sigmask(SIG_BLOCK, &sigs, &osigs);
++	sa.sa_handler = coroutine_trampoline;
++	sigfillset(&sa.sa_mask);
++	sa.sa_flags = SA_ONSTACK;
++	if (sigaction(SIGUSR2, &sa, &osa) != 0) {
++		return -1;
++	}
++
++	/*
++	 * Set the new stack.
++	 */
++	ss.ss_sp = stack_base;
++	ss.ss_size = stack_size;
++	ss.ss_flags = 0;
++	if (sigaltstack(&ss, &oss) < 0) {
++		return -1;
++	}
++
++	/*
++	 * Now transfer control onto the signal stack and set it up.
++	 * It will return immediately via "return" after the sigsetjmp()
++	 * was performed. Be careful here with race conditions.  The
++	 * signal can be delivered the first time sigsuspend() is
++	 * called.
++	 */
++	tr_state.called = 0;
++	pthread_kill(pthread_self(), SIGUSR2);
++	sigfillset(&sigs);
++	sigdelset(&sigs, SIGUSR2);
++	while (!tr_state.called) {
++		sigsuspend(&sigs);
++	}
++
++	/*
++	 * Inform the system that we are back off the signal stack by
++	 * removing the alternative signal stack. Be careful here: It
++	 * first has to be disabled, before it can be removed.
++	 */
++	sigaltstack(NULL, &ss);
++	ss.ss_flags = SS_DISABLE;
++	if (sigaltstack(&ss, NULL) < 0) {
++		return -1;
++	}
++	sigaltstack(NULL, &ss);
++	if (!(oss.ss_flags & SS_DISABLE)) {
++		sigaltstack(&oss, NULL);
++	}
++
++	/*
++	 * Restore the old SIGUSR2 signal handler and mask
++	 */
++	sigaction(SIGUSR2, &osa, NULL);
++	pthread_sigmask(SIG_SETMASK, &osigs, NULL);
++
++	/*
++	 * jmp can now be used to enter the trampoline again, but not as a
++	 * signal handler. Instead it's longjmp'd to directly.
++	 */
++	return 0;
++}
++
 -- 
 2.43.0
 
