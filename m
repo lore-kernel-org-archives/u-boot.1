@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296DAC369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 11:26:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08434C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 11:26:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9A2882C8A;
-	Fri, 18 Apr 2025 13:26:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F78883121;
+	Fri, 18 Apr 2025 13:26:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43ED682EBE; Fri, 18 Apr 2025 13:26:25 +0200 (CEST)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [84.16.66.169])
+ id 99938830B4; Fri, 18 Apr 2025 13:26:26 +0200 (CEST)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [83.166.143.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30EC882E25
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 13:26:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 781B382C15
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 13:26:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZfCBk60c3zmBR;
- Fri, 18 Apr 2025 13:26:22 +0200 (CEST)
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10:40ca:feff:fe05:1])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZfCBm10P1zndj;
+ Fri, 18 Apr 2025 13:26:24 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4ZfCBj6BJJzRTt; Fri, 18 Apr 2025 13:26:21 +0200 (CEST)
+ id 4ZfCBl0wyfzS45; Fri, 18 Apr 2025 13:26:23 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 18 Apr 2025 13:26:07 +0200
-Subject: [PATCH v2 1/2] binman: etype: fit: raise ValueError if
- key-name-hint is a path
+Date: Fri, 18 Apr 2025 13:26:08 +0200
+Subject: [PATCH v2 2/2] binman: etype: u_boot_spl_pubkey_dtb: provide more
+ explicit error for key-name-hint with path
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250418-binman-pubkey-dir-v2-1-b6b90a765ffe@cherry.de>
+Message-Id: <20250418-binman-pubkey-dir-v2-2-b6b90a765ffe@cherry.de>
 References: <20250418-binman-pubkey-dir-v2-0-b6b90a765ffe@cherry.de>
 In-Reply-To: <20250418-binman-pubkey-dir-v2-0-b6b90a765ffe@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -64,93 +64,68 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-mkimage doesn't fail if it cannot find the public key but it prints to
-stderr. Considering that btool.run() discards stderr, it means binman
-happily returns an unsigned FIT and doesn't tell you something went
-wrong.
+key-name-hint property in u-boot-spl-pubkey-dtb binman entry may contain
+a path instead of a filename due to user mistake.
 
-Binman will actually find the file if there's a path in the
-key-name-hint property but the current logic expects key-name-hint to be
-a filename and thus returns the dirname of the found path for the key,
-but with the original key-name-hint appended. This means we can have the
-following:
+Because we currently assume it is a filename instead of a path, binman
+will find the full path to the key based on that path, and return the
+dirname of the full path but keeps the path in key-name-hint instead of
+stripping the directories from it.
 
-- key-name-hint = "keys/dev"
-- name = "/home/qschulz/work/upstream/u-boot/keys/"
+This means mkimage will fail with the following error message if we have
+key-name-hint set to keys/dev:
 
-so we pass /home/qschulz/work/upstream/u-boot/keys/ to the -k option of
-mkimage but the FIT still contains "keys/dev" in key-name-hint which
-means mkimage will try to find the key at
-/home/qschulz/work/upstream/u-boot/keys/keys/, which doesn't exist.
+binman: Error 1 running 'fdt_add_pubkey -a sha256,rsa2048 -k /home/qschulz/work/upstream/u-boot/keys -n keys/dev -r conf /home/qschulz/work/upstream/u-boot/build/ringneck/u-boot-spl-dtbdhsfx3mf': Couldn't open RSA certificate: '/home/qschulz/work/upstream/u-boot/keys/keys/dev.crt': No such file or directory
 
-Let's assume paths are simply not supported (it is named key-name-hint
-and not key-path-hint after all) and raise an error if the property
-contains a path so that the build fails and not quietly.
+Let's make it a bit more obvious what the error is by erroring out in
+binman if a path is provided in key-name-hint (it is named key-name-hint
+and not key-path-hint after all).
 
-Fixes: 133c000ca334 ("binman: implement signing FIT images during image build")
+Fixes: 5609843b57a4 ("binman: etype: Add u-boot-spl-pubkey-dtb etype")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- tools/binman/etype/fit.py                          |  3 +
- tools/binman/ftest.py                              | 18 ++++
- .../test/347_key_name_hint_dir_fit_signature.dts   | 98 ++++++++++++++++++++++
- 3 files changed, 119 insertions(+)
+ tools/binman/etype/u_boot_spl_pubkey_dtb.py              |  2 ++
+ tools/binman/ftest.py                                    |  7 +++++++
+ .../binman/test/348_key_name_hint_dir_spl_pubkey_dtb.dts | 16 ++++++++++++++++
+ 3 files changed, 25 insertions(+)
 
-diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index 803fb66ea838f1f02da7fa42c121057de31ec2ef..284b19c4b882a91e4320e1c8267c3e6d935d8a00 100644
---- a/tools/binman/etype/fit.py
-+++ b/tools/binman/etype/fit.py
-@@ -557,6 +557,7 @@ class Entry_fit(Entry_section):
-         Raises:
-             ValueError: Filename 'rsa2048.key' not found in input path
-             ValueError: Multiple key paths found
-+            ValueError: 'dir/rsa2048' is a path not a filename
-         """
-         def _find_keys_dir(node):
-             for subnode in node.subnodes:
-@@ -565,6 +566,8 @@ class Entry_fit(Entry_section):
-                     if subnode.props.get('key-name-hint') is None:
-                         continue
-                     hint = subnode.props['key-name-hint'].value
-+                    if '/' in hint:
-+                        self.Raise(f"'{hint}' is a path not a filename")
-                     name = tools.get_input_filename(
-                         f"{hint}.key" if subnode.name.startswith('signature')
-                         else f"{hint}.bin")
+diff --git a/tools/binman/etype/u_boot_spl_pubkey_dtb.py b/tools/binman/etype/u_boot_spl_pubkey_dtb.py
+index cb196061de28610eb785fb44c887982e3979659f..3061c4bcdc4be5663696ed056ac6a55f30dc8676 100644
+--- a/tools/binman/etype/u_boot_spl_pubkey_dtb.py
++++ b/tools/binman/etype/u_boot_spl_pubkey_dtb.py
+@@ -87,6 +87,8 @@ class Entry_u_boot_spl_pubkey_dtb(Entry_blob_dtb):
+                                          dir=tools.get_output_dir())\
+                                               as pubkey_tdb:
+             tools.write_file(pubkey_tdb.name, self.GetData())
++            if '/' in self._key_name_hint:
++                self.Raise(f"'{self._key_name_hint}' is a path not a filename")
+             keyname = tools.get_input_filename(self._key_name_hint + ".crt")
+             self.fdt_add_pubkey.run(pubkey_tdb.name,
+                                     os.path.dirname(keyname),
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 948fcc02259ae61d8f7ff8d4ec8b867c7f513bbf..5ea15b36a717a3bfe8fade3892e4039c046d2102 100644
+index 5ea15b36a717a3bfe8fade3892e4039c046d2102..1b68f4b51cfb257c700abde069cc705d3327ed82 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -7940,6 +7940,24 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             entry_args=entry_args,
-             extra_indirs=[test_subdir])[0]
+@@ -7274,6 +7274,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+                          tools.to_bytes(''.join(node.props['key'].value)))
+         self.assertNotIn('key-source', node.props)
  
-+    def testKeyNameHintIsPathSimpleFit(self):
++    def testKeyNameHintIsPathSplPubkeyDtb(self):
 +        """Test that binman errors out on key-name-hint being a path"""
-+        if not elf.ELF_TOOLS:
-+            self.skipTest('Python elftools not available')
-+        entry_args = {
-+            'of-list': 'test-fdt1',
-+            'default-dt': 'test-fdt1',
-+            'atf-bl31-path': 'bl31.elf',
-+        }
-+        test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
 +        with self.assertRaises(ValueError) as e:
-+            self._DoReadFileDtb(
-+                    '347_key_name_hint_dir_fit_signature.dts',
-+                    entry_args=entry_args,
-+                    extra_indirs=[test_subdir])
++            self._DoReadFile('348_key_name_hint_dir_spl_pubkey_dtb.dts')
 +        self.assertIn(
-+            'Node \'/binman/fit\': \'keys/rsa2048\' is a path not a filename',
++            'Node \'/binman/u-boot-spl-pubkey-dtb\': \'keys/key\' is a path not a filename',
 +            str(e.exception))
  
-     def testSimpleFitEncryptedData(self):
-         """Test an image with a FIT containing data to be encrypted"""
-diff --git a/tools/binman/test/347_key_name_hint_dir_fit_signature.dts b/tools/binman/test/347_key_name_hint_dir_fit_signature.dts
+     def testSplPubkeyDtb(self):
+         """Test u_boot_spl_pubkey_dtb etype"""
+diff --git a/tools/binman/test/348_key_name_hint_dir_spl_pubkey_dtb.dts b/tools/binman/test/348_key_name_hint_dir_spl_pubkey_dtb.dts
 new file mode 100644
-index 0000000000000000000000000000000000000000..96e2126dadb319732b2a94769f1b20eaecc045e0
+index 0000000000000000000000000000000000000000..85ebd58b6c0cd18fc385f63dd95da2e414705249
 --- /dev/null
-+++ b/tools/binman/test/347_key_name_hint_dir_fit_signature.dts
-@@ -0,0 +1,98 @@
++++ b/tools/binman/test/348_key_name_hint_dir_spl_pubkey_dtb.dts
+@@ -0,0 +1,16 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +
 +/dts-v1/;
@@ -160,92 +135,10 @@ index 0000000000000000000000000000000000000000..96e2126dadb319732b2a94769f1b20ea
 +	#size-cells = <1>;
 +
 +	binman {
-+		fit {
-+			description = "test desc";
-+			#address-cells = <1>;
-+			fit,fdt-list = "of-list";
-+			fit,sign;
-+
-+			images {
-+				u-boot {
-+					description = "test u-boot";
-+					type = "standalone";
-+					arch = "arm64";
-+					os = "u-boot";
-+					compression = "none";
-+					load = <0x00000000>;
-+					entry = <0x00000000>;
-+
-+					u-boot-nodtb {
-+					};
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+
-+					signature {
-+						algo = "sha256,rsa2048";
-+						key-name-hint = "keys/rsa2048";
-+					};
-+				};
-+				@atf-SEQ {
-+					fit,operation = "split-elf";
-+					description = "test tf-a";
-+					type = "firmware";
-+					arch = "arm64";
-+					os = "arm-trusted-firmware";
-+					compression = "none";
-+					fit,load;
-+					fit,entry;
-+					fit,data;
-+
-+					atf-bl31 {
-+					};
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+
-+					signature {
-+						algo = "sha256,rsa2048";
-+						key-name-hint = "keys/rsa2048";
-+					};
-+				};
-+				@fdt-SEQ {
-+					description = "test fdt";
-+					type = "flat_dt";
-+					compression = "none";
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+
-+					signature {
-+						algo = "sha256,rsa2048";
-+						key-name-hint = "keys/rsa2048";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "@conf-uboot-DEFAULT-SEQ";
-+				@conf-uboot-SEQ {
-+					description = "uboot config";
-+					fdt = "fdt-SEQ";
-+					fit,firmware = "u-boot";
-+					fit,loadables;
-+
-+					hash {
-+						algo = "sha256";
-+					};
-+
-+					signature {
-+						algo = "sha256,rsa2048";
-+						key-name-hint = "keys/rsa2048";
-+						sign-images = "firmware", "loadables", "fdt";
-+					};
-+				};
-+			};
++		u-boot-spl-pubkey-dtb {
++			algo = "sha384,rsa4096";
++			required = "conf";
++			key-name-hint = "keys/key";
 +		};
 +	};
 +};
