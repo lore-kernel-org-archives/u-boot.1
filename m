@@ -4,97 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8D05C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 15:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9B6C369CA
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 16:54:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA479831F5;
-	Fri, 18 Apr 2025 17:39:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id AD1C383190;
+	Fri, 18 Apr 2025 18:54:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jqG04Jl1";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="GdEu5NG/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D47AB83205; Fri, 18 Apr 2025 17:39:46 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 453A3831D4; Fri, 18 Apr 2025 18:54:15 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A782383121
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 17:39:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D51598304C
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 18:54:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4721D3F2B1
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 15:39:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1744990783;
- bh=0IczIQ/ivnflisGIxb7o0uyrxNp3frXCazl0DLKxL4s=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=jqG04Jl1YT7pOarugjgVtf9tbvEJjmpA/GvkTpFA8CcNRRowEWTFiTSrn2kn4Eqfk
- xwh2p+iMXnqGUl04IjDTB9fli5RoQKEjVS39KmtqwVVAS/8H/DII1x8j7RUgrrb3+B
- Kh+vOq5qod7cZZl1ptXK+zs/otodqEO7lFRD7Ho3iPdwpOOwiJUIRoSszT5riw6sez
- fmiI1wvHA6RXsvA6uFaPy5YWtCYo4eCbJJ5Js12u/1OCF0oVmvHfcCWFs+B/aExY4O
- NLXm8GuHYM+HXlWDg1k54sddpjhjw2b4tfmd3a/Cva3HvR1nyyJ1zS693bERhLz/LF
- k5bbWMn14WdTg==
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-3054210ce06so2566922a91.2
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 08:39:43 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744990782; x=1745595582;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0IczIQ/ivnflisGIxb7o0uyrxNp3frXCazl0DLKxL4s=;
- b=obWB9IbgXRGDSLLQXJoenFeL3tkFrZvclQax78CLIcX/W86nTKx+lee5Jxn5TlCAfn
- jheCEKx013RYoOj8ge3oGhQuLcZqzaQokF5ihLryk+Qs0qVxKnj7HajrSFlnrKz2dXDC
- bL46a9aeTt0vOiNoQ7Xd6IQI+4qma5/LP7cfafk4drIa2f+AV6X+IgCQEobC2dIeQvG5
- XSC89d0DriST3ILhC7xRffZLEZu/wxEIZt0JvPP5+6vBTcPb9PyMTf76zuRdNFTW3BC5
- Wofohdf/6o/UgHp4NeMpK2scf+bnSacwmB5d3zMlLmBuxMvRLPYAfhAKqDQcAenj5EeH
- tRlw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXY02y/5jbRaqum9x9Q8oyrOagjQXtKwKy2WlbBeiEvo7tmdP0VKWMobuRJiwgAzJII476iuWE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyrpqx/qh/KsitOvRnfC91wWOab84nzt5nnixxtNBbvA2HxQJrC
- hPLtveYz4tWJPq3727mwPTO7jWtK1DhdA6q49l1ync35NArUfAGOcBni8FTBGC+NLfn/fq8ma1L
- 5ROQzOEmO7cjmA4wJqoENlB05SwJ3B9nudFiXxqFTYMMdG5JfWCDACggwzFLvoHvMSHes2nGLSf
- S193/TltwK9cK1qwuhuPJ6iorDihWp82zp7LlRvYIUag==
-X-Gm-Gg: ASbGncs7ZcPBM7FaGZ3jm73mW2IBRBeJxCXhrbdrBU4dBOxzL0iC6fB4HB8XLy26vNs
- j9qicUlkTofbLKaOZ7JF832dZN+2BOz6s7nYSvZgiLwNPo+UbNSqkSSPPuyIVNeaeSg==
-X-Received: by 2002:a17:90b:582b:b0:305:2d68:8d57 with SMTP id
- 98e67ed59e1d1-3087bb3f2b8mr4672292a91.5.1744990781803; 
- Fri, 18 Apr 2025 08:39:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFeFFzzhcY8jz5RU73Ihml02Lh3FmFetD687omlncEUAgn+r11qYZHJpUnacBWR9ii17cAe+gwprdLezUcZIQQ=
-X-Received: by 2002:a17:90b:582b:b0:305:2d68:8d57 with SMTP id
- 98e67ed59e1d1-3087bb3f2b8mr4672268a91.5.1744990781474; Fri, 18 Apr 2025
- 08:39:41 -0700 (PDT)
+ smtp.mailfrom=prvs=6203fb9c43=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53ICZZox009343;
+ Fri, 18 Apr 2025 18:54:04 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ CAIj0J6nqrA/IhennCWmDe3NfGu2SCZojyrSNEQMNi4=; b=GdEu5NG/04yvO7v0
+ uQEHbYBKidRroDCeXbV10y9ne/dI2WghJZtlokCVmscrUk7MCMPKtGwmmkWBsQXy
+ o8EV4vdULxyqFSw1hR6atmpEkCL1XZoEwL6BfKewcey33CsQ+3y62NpMmvQx66Cz
+ mpT/82G+1ZuRGx38TzLmCJuQx2cBwT6sCw0XEt2dFoPJL51FfDCNIZNnXIlZq2Ci
+ mvKvLzTVw1ESHp2XwsA4uhaXzTpGDS3AkY4lOv2QSRQclyLzcBsM5FJ6rByXrdKp
+ MxNW+NPOQF98ewS9z2gXFecJ+jBlVgCMfTQFWaCdT3Du+oMcsXcToDcd924t7NKh
+ 1QdkCA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46034njw5w-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 18 Apr 2025 18:54:04 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EBE0E40051;
+ Fri, 18 Apr 2025 18:53:08 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D8F17AC1775;
+ Fri, 18 Apr 2025 18:44:13 +0200 (CEST)
+Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 18 Apr
+ 2025 18:44:13 +0200
+Message-ID: <50fc39f9-8b4d-4620-a5df-3a4fa7253415@foss.st.com>
+Date: Fri, 18 Apr 2025 18:44:11 +0200
 MIME-Version: 1.0
-References: <20250416224032.144791-1-heinrich.schuchardt@canonical.com>
- <20250416224032.144791-2-heinrich.schuchardt@canonical.com>
- <d8f9a58a-10cd-4366-bd6f-85f4effc747c@cherry.de>
- <CAFLszThDLbf3fQySO_8u6OD3-BK2abE6NFVhvviRtrNs=PKdsA@mail.gmail.com>
- <3148f171-8bf5-4412-97d4-684c6c456499@cherry.de>
- <CAM=mAOm1SC_SjkC6AYr4T4ThjAMCTF89wz4SVuwOYaN5vj2H5Q@mail.gmail.com>
- <ed09ef74-2723-4add-8d16-a5ffb4bd8ac4@cherry.de>
-In-Reply-To: <ed09ef74-2723-4add-8d16-a5ffb4bd8ac4@cherry.de>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Fri, 18 Apr 2025 17:39:31 +0200
-X-Gm-Features: ATxdqUHjRzlj8snl91J8SsNMfWtEchG2LotTX8y6Z0_g7Byckmx986KinV1olmo
-Message-ID: <CAM=mAO=grtkK1chRFZz=A2T0czQ6JKNV=Pz4j+O1ojY2TOuiOA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] buildman: allow specifying configuration fragments
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] stm32mp: Add nvram driver
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Simeon Marijon
+ <simeon.marijon@foss.st.com>, Cheick Traore <cheick.traore@foss.st.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250411160326.4113545-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20250411160326.4113545-1-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.126]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-18_06,2025-04-17_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,85 +92,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Quentin Schulz <quentin.schulz@cherry.de> schrieb am Fr., 18. Apr. 2025,
-16:33:
+Hi,
 
-> Hi Heinrich,
+On 4/11/25 18:03, Patrice Chotard wrote:
+> From: Simeon Marijon <simeon.marijon@foss.st.com>
 >
-> On 4/18/25 4:17 PM, Heinrich Schuchardt wrote:
-> > Quentin Schulz <quentin.schulz@cherry.de> schrieb am Fr., 18. Apr. 2025,
-> > 15:52:
-> >
-> >> Hi Simon,
-> >>
-> >> On 4/18/25 1:39 PM, Simon Glass wrote:
-> >>> Hi Quentin,
-> >>>
-> >>> On Fri, 18 Apr 2025 at 05:27, Quentin Schulz <quentin.schulz@cherry.de
-> >
-> >> wrote:
-> >>>>
-> >>>> Hi Heinrich,
-> >>>>
-> >>>> On 4/17/25 12:40 AM, Heinrich Schuchardt wrote:
-> >>>>> Currently we are no able to build with configuration fragments in our
-> >> CI.
-> >>>>> With this patch buildman gets a new argument --fragments for passing
-> a
-> >>>>> comma separated list of configuration fragments to add to the board
-> >>>>> defconfigs, e.g.
-> >>>>>
-> >>>>>        tools/buildman/buildman \
-> >>>>>        -o build \
-> >>>>>        -k qemu-riscv64_smode \
-> >>>>>        --fragments acpi.config
-> >>>>>
-> >>>>
-> >>>> What about using:
-> >>>>
-> >>>> --fragment acpi.config --fragment fragment2.config
-> >>
-> >
-> > Why should we type so much?
-> >
-> > --fragments fragment1.config,fragment2.config is shorter.
-> >
-> >
+> TAMP backup registers will be exposed as nvmem cells.
 >
-> What was suggested by Simon after is:
+> Each registers ([0..127] for STM32MP2, [0..31] for STM32MP1) could be
+> exposed as nvmem cells under the nvram node in device tree
 >
-> --fragment acpi --fragment fragment2
+> Signed-off-by: Simeon Marijon <simeon.marijon@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
 >
-> vs
+>   arch/arm/mach-stm32mp/Kconfig  |   9 +
+>   arch/arm/mach-stm32mp/Makefile |   2 +
+>   arch/arm/mach-stm32mp/nvram.c  | 664 +++++++++++++++++++++++++++++++++
+>   3 files changed, 675 insertions(+)
+>   create mode 100644 arch/arm/mach-stm32mp/nvram.c
 >
-> --fragments acpi.config,fragment2.config
->
-> Shorter :) (until we have more fragments, and then the added --fragment
-> is an issue :)
->
-> But also because I like to use argparse features instead of reinventing
-> the wheel, but that's also not a big issue :)
->
-> >>> Another idea would be to also allow specifying the fragment name
-> >>> without the '.config' suffix. Less to type.
-> >>>
-> >
-> >
-> > We can follow all those ideas in future patches. But first let us see the
->
-> No, this is user interface, we want to change it as little as possible.
-> I don't think it makes sense to support --fragments
-> fragment.config,fragment2.config now to then switch to --fragment
-> fragment --fragment fragment2 later on, if that's what we want.
->
-> Cheers,
-> Quentin
+> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+> index 002da2e3d3b..d7323659811 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig
+> +++ b/arch/arm/mach-stm32mp/Kconfig
+> @@ -144,6 +144,15 @@ config STM32_ECDSA_VERIFY
+>   	  ROM API provided on STM32MP.
+>   	  The ROM API is only available during SPL for now.
+>   
+> +config STM32MP_TAMP_NVMEM
+> +	bool "STM32 TAMP backup registers via NVMEM API"
+> +	select NVMEM
+> +	default y
+> +	help
+> +	  Say y to enable the uclass driver for TAMP Backup registers using the
+> +	  NVMEM API. It allows to access to boot mode or others shared information
+> +	  between software components/execution levels.
+> +
+>   config CMD_STM32KEY
+>   	bool "command stm32key to fuse public key hash"
+>   	depends on CMDLINE
+> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
+> index 103e3410ad9..bc0fe9e2225 100644
+> --- a/arch/arm/mach-stm32mp/Makefile
+> +++ b/arch/arm/mach-stm32mp/Makefile
+> @@ -13,6 +13,8 @@ obj-$(CONFIG_STM32MP13X) += stm32mp1/
+>   obj-$(CONFIG_STM32MP25X) += stm32mp2/
+>   
+>   obj-$(CONFIG_MFD_STM32_TIMERS) += timers.o
+> +obj-$(CONFIG_STM32MP_TAMP_NVMEM) += nvram.o
 
 
-Why do want to type more? I don't.
+I don't see  reason to have reduce file name her ?
 
-Best regards
+filename indicate only the type nvram for nvmem used for TAMP backup 
+register.
 
-Heinrich
 
->
+I prefer fine name with indication of the device used, here TAMP ,
+
+and aligned with driver name "stm32_tamp_nvram"
+
+so rename nvram.c => tamp_nvram.c
+
+and
+
++obj-$(CONFIG_STM32MP_TAMP_NVMEM) += tamp_nvram.o
+
+
+thanks
+
+
+With this minor remark
+
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
+
+
+
+
