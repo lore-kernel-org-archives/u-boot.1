@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3791C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 08:30:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C9BDC369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 08:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64DA482EC6;
-	Fri, 18 Apr 2025 10:30:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF40A830A0;
+	Fri, 18 Apr 2025 10:33:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CCgzUdWI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f67ZZc58";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB71C830A0; Fri, 18 Apr 2025 10:30:14 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id B45AA82F33; Fri, 18 Apr 2025 10:33:02 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBF1582D5E
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:30:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2E7682EBE
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-30effbfaf61so19053551fa.0
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 01:30:12 -0700 (PDT)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-549b159c84cso2089601e87.3
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 01:33:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744965012; x=1745569812; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744965180; x=1745569980; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=Y4uUpiaxIe3f9U5zJl5ydilEyTzQIzGo6H4gPBo1x1c=;
- b=CCgzUdWIPgjJkFGE8LpLIjaHSHIopNu08+xTlu/4wla7bhzoytNxvGEg5s8EtKFXMh
- IJQWk9M+QsmH2vrjpVD9DDf3o+IZ76ycP3nB6i/9ivN8csxAHZ5Cklj11MTTFv4nG5ys
- zXAxz0ukEmEW2Z//xFnQqZbFp/7MTwt75RzTLEVReU5BkIC4kzZGpadKitURR77qnkZU
- qKzk0Pg+e6uMMCOA7RNjx+7VADWJO4mQ2BkX7rGbc3yC0QRyZPU9k1dLuSEvuXXxyVlh
- BeM9hpe5WE4p+Yj0LhGI1i5+0R5UhsQdWmB6uRigrJHFSWLcylpu6yyzroM6iMCcxYWZ
- xrgQ==
+ b=f67ZZc58q5NeU4ORJqzLusov2u2n5mcFJIn3uAO+oquT2ScPNNp3h8KrBrXMQMu5Ah
+ k6f9epbxMHp1577TYjyD1l8RqorJzBRUbqKcQNjupFMv6Z7fPXLFUWfQbkpaayl1fNhU
+ IuCPJWAegrUvHUTpjiZslTJLJH8RnqxWYhP1pbVRX729QGhH6aZoY+MZEHVpA23lGo4r
+ g/a88EojrBh9riMr9EhLuVZaO6w+cyrOyiHg8e4nDIVqgN6GvdRJzfC14hJo2qluTgeu
+ CruSU/E+Q3v0k2md9IUyMmfvoNR5H4kZAR6OAeS19KzrVINAwzV5sJJJZiXDKzgG0BnB
+ hFHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744965012; x=1745569812;
+ d=1e100.net; s=20230601; t=1744965180; x=1745569980;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=Y4uUpiaxIe3f9U5zJl5ydilEyTzQIzGo6H4gPBo1x1c=;
- b=UcAHU5/zk902F8qs72Lls+pWRu2y6yqdfxhInLeRWR5CgpWi9K/fQsRMd/cp6DkKwP
- R1QHvq/ZvbFA8NPHmwxuUH4DGEE83DnFsR4f9UveGt9rfwXH2f1sPdNA5a8qy2M+nc8d
- Q+/nmOIC6UtizOBj1V1Lugmd7XGoBqEnXd6iGc1SC61aeYhJnFW37EraDjzrwhQOJBvG
- NUdSN+DBA5FenUsx25Ijr0kvLROsVOFWgHLo8ZKogZLRLCa1FdXqw5EXI+fvKHqWrZvZ
- Sq4ZJsA1zjfINswqskvPyH8RJeFvzHzLi+hd68+MbOH++7Vepksyk8lRxV0A1xbY+htP
- Pmpw==
-X-Gm-Message-State: AOJu0YwASnTAZdGRIIy2ZIQsYQqGO/fNGnIZ2lmg+mQDiGleuLViBsZq
- 5HGcZPvNhK+bvyYsUP8BnMuDpyQv/t8NE6HFrG/OW9dDSmnnXQlenNG9gA==
-X-Gm-Gg: ASbGncvw/gGprGrTyOnaoCmptqsLe34thF+BERPA1zTORlAsmKlrXj7VnBVUHDSPALC
- 8/P4yXQ5MZy2n4tAxq/K6dedv3hl+GMB/SgvKMS7McHTpEvjyHJqeBqOsCGI4w15Pk8HZkF7kSO
- QO9282BJ8XRnikM9GMdszN0g6EAVyR2jwKhA/WQANyn0NWwQG0s0N1qlrkLc0dtkhnrlri35jtc
- QJJKddqhDL6+kyFGBZIgOfBF2QTMWwqZ74QExFRnYQSiDiY5FmCQlujceK+kRZzydbx8U2YfdvE
- 8MqXXpL3ZzlfZsE1dXsk/QM4DfAZBZSb0oVAFOdT7s5Cx+I5H8xJJ+r9eMOFkx4QzZzw7DQkyen
- QwNz6tk5n
-X-Google-Smtp-Source: AGHT+IEDFGxWK0Ipzm1vW7gWNb2PvcaLNHpsP35SlpxL/uSdWnVym73JeBz/fbRWI2V0fVjkU0eNOw==
-X-Received: by 2002:a05:651c:312b:b0:308:ee65:7f44 with SMTP id
- 38308e7fff4ca-31090df91f3mr4855871fa.8.1744965012016; 
- Fri, 18 Apr 2025 01:30:12 -0700 (PDT)
+ b=TuKPmzANPeWDh5sWYMRKuVxYPMGfeOrZDyZyDhkseyzh/pH3bOjoo6WerXXXmR2N/s
+ QcVEXcq81R2gHp4dc9b22uFcCa2zSNScL9qgdTFSLNsRbBa/Y7reYvg/apS1UNSVjZCd
+ FlC1/gdjNgpxxxYZfN0+aISq8ZWmuuXFzvNjXNoZOwJNg1Xj2H48+6p2U4JgfSQ7VVuH
+ ZUvOVrXguQb759XLFkDxOpkmJ1+lM5szrVQExnEu1D7iiTBhKUNGBi1b+zsonCtFNDVu
+ YrrMgwg2pA7eXH9bWqgOKRunu635Ouv3McUGhhR1VJSIKPfSw2MMu2ex1BkcDX13yasn
+ eiHg==
+X-Gm-Message-State: AOJu0YwMsQcz2NDgSDLvsfNuqOxOZQBxBm0Ws2weKi62fm86Tde6J+6b
+ TyyH4E4oxPPybXbYA8l5mOxZGfWB5wvJJLu907di3km0BQBbBpcv2rA4zA==
+X-Gm-Gg: ASbGncvlgcFNHuFuLZax0OPrRsASmcP3Tq7u+Lu9ozpfGLDTxOkRiFitF8e8U4VYXYk
+ tZ4TIYktFl2t6+FX81uDFiUVhUW1gEJgj+r8Tdfp1TMTb17OWMX2srU/f5b+eMacOf7MLDkpxnJ
+ XR4M+mfxdSg5kI0aGsFFvlmi5xJFnJQR8UX80PMWsVXcfYY7zqhdUfWnxN11POVyYVXHL9MOtiU
+ kUsF2frxEBkHFliWMkRC0d+RZlOjupMkxg9he2nBPGwnZwvPa4oEDV4GVQ3Gj0c+0fVHWx71A2a
+ nVgAQjw+9MXfozf4ASX8g4svGC7x2bRz5AX/9NRMkc2TtzIU4BagL5XJd+2ak690ITQ7zMefuAE
+ pYVaxrQh+KdyHbS+PVA==
+X-Google-Smtp-Source: AGHT+IFlfhHj19H0BYGylky8mqg/201ohXZtktaX0SJfWJ28wkmqTKwVvemvnuAxjTloe2KkndV1mA==
+X-Received: by 2002:a05:6512:2348:b0:549:8ed4:fb4f with SMTP id
+ 2adb3069b0e04-54d6e62cde9mr453260e87.23.1744965179419; 
+ Fri, 18 Apr 2025 01:32:59 -0700 (PDT)
 Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
  [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-310907a7635sm1625511fa.60.2025.04.18.01.30.11
+ 2adb3069b0e04-54d6e52482esm133161e87.1.2025.04.18.01.32.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 01:30:11 -0700 (PDT)
+ Fri, 18 Apr 2025 01:32:58 -0700 (PDT)
 From: ant.v.moryakov@gmail.com
 To: u-boot@lists.denx.de
 Cc: Maks Mishin <maks.mishinFZ@gmail.com>
 Subject: [PATCH] tools: image-host: Fix potential memory leak
-Date: Fri, 18 Apr 2025 11:30:09 +0300
-Message-Id: <20250418083009.15859-1-ant.v.moryakov@gmail.com>
+Date: Fri, 18 Apr 2025 11:32:56 +0300
+Message-Id: <20250418083256.16732-1-ant.v.moryakov@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
