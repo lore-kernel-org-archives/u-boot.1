@@ -4,67 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 677C3C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:53:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8D05C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 15:39:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DE3883212;
-	Fri, 18 Apr 2025 16:53:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id EA479831F5;
+	Fri, 18 Apr 2025 17:39:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1744988014;
-	bh=+WcTrdOzaqB+gYqNd1XOAE6HkUOW2GLuUJw+as9OIuU=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Vl3qM+LaZfwZp/CVFojTdBOgVGU4M5gWaiylusDeRmd0wDTpQDLugbU5T4vtuzfFo
-	 qc5+i16UF2UiPbVwga0uk96XRVUeT/DdGHDWaklkjhXZ30dBqsaOkHpmDHHkHs4PbP
-	 aLdgLlgAivm+PxnV9hrUW07Nsu+WtVws49w8S7Bg2iHJHt2g4MGZGa2sdg7PDNmpN/
-	 2izGfdp+0UhfcdoCKd7TPe5cXGNm1sjpxLLaslCFJ23AFsNdd/jxydcsLZv+FUk5YP
-	 sPXA5nnX/dJ0K32Fgnulo9AxwvQYnKDY8ZQMmQ62FQGauT4qgg5C4lCS4zCvwoYM/Y
-	 ebTVghSZfR4kA==
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jqG04Jl1";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CC528004F; Fri, 18 Apr 2025 16:53:32 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id D47AB83205; Fri, 18 Apr 2025 17:39:46 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2577182140
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:53:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A782383121
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 17:39:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="K5zuvrv4"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 41F571007A572; 
- Fri, 18 Apr 2025 16:53:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1744988009; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=+WcTrdOzaqB+gYqNd1XOAE6HkUOW2GLuUJw+as9OIuU=;
- b=K5zuvrv4iuQwAD7khvILYSsYOV/JfK1B060++B0r29Mp9rp/bNy8tz9iynLtUCacHzoJTH
- 6SKbARhzbdPVIXsyPOyGH1yInW3nFF+RcR+ipbjqd/VozEYLOOLeBghP2e1UsNnNRanvG7
- +5/b+CmmWfe4Leamgy5C9kg3i9QLJlUcGe+htqLMgEOzt1CPwJnoT4Km1FIHTkZxFcVHWY
- dyJyKQx+xTMcmIPKAlcz8v17EEdXnqjvnhwmqKL3Xxrw9IhGSGVYcrWsFBGQR2Hzc7aaFk
- U6+gjnZsXW8Z6MAYC3w9goAZR8Qc5QjPH/hKqVi/aP8GTznqe7iYAcENIAgU4Q==
-Message-ID: <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
-Date: Fri, 18 Apr 2025 16:51:26 +0200
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4721D3F2B1
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 15:39:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1744990783;
+ bh=0IczIQ/ivnflisGIxb7o0uyrxNp3frXCazl0DLKxL4s=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=jqG04Jl1YT7pOarugjgVtf9tbvEJjmpA/GvkTpFA8CcNRRowEWTFiTSrn2kn4Eqfk
+ xwh2p+iMXnqGUl04IjDTB9fli5RoQKEjVS39KmtqwVVAS/8H/DII1x8j7RUgrrb3+B
+ Kh+vOq5qod7cZZl1ptXK+zs/otodqEO7lFRD7Ho3iPdwpOOwiJUIRoSszT5riw6sez
+ fmiI1wvHA6RXsvA6uFaPy5YWtCYo4eCbJJ5Js12u/1OCF0oVmvHfcCWFs+B/aExY4O
+ NLXm8GuHYM+HXlWDg1k54sddpjhjw2b4tfmd3a/Cva3HvR1nyyJ1zS693bERhLz/LF
+ k5bbWMn14WdTg==
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-3054210ce06so2566922a91.2
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 08:39:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744990782; x=1745595582;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0IczIQ/ivnflisGIxb7o0uyrxNp3frXCazl0DLKxL4s=;
+ b=obWB9IbgXRGDSLLQXJoenFeL3tkFrZvclQax78CLIcX/W86nTKx+lee5Jxn5TlCAfn
+ jheCEKx013RYoOj8ge3oGhQuLcZqzaQokF5ihLryk+Qs0qVxKnj7HajrSFlnrKz2dXDC
+ bL46a9aeTt0vOiNoQ7Xd6IQI+4qma5/LP7cfafk4drIa2f+AV6X+IgCQEobC2dIeQvG5
+ XSC89d0DriST3ILhC7xRffZLEZu/wxEIZt0JvPP5+6vBTcPb9PyMTf76zuRdNFTW3BC5
+ Wofohdf/6o/UgHp4NeMpK2scf+bnSacwmB5d3zMlLmBuxMvRLPYAfhAKqDQcAenj5EeH
+ tRlw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXY02y/5jbRaqum9x9Q8oyrOagjQXtKwKy2WlbBeiEvo7tmdP0VKWMobuRJiwgAzJII476iuWE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyrpqx/qh/KsitOvRnfC91wWOab84nzt5nnixxtNBbvA2HxQJrC
+ hPLtveYz4tWJPq3727mwPTO7jWtK1DhdA6q49l1ync35NArUfAGOcBni8FTBGC+NLfn/fq8ma1L
+ 5ROQzOEmO7cjmA4wJqoENlB05SwJ3B9nudFiXxqFTYMMdG5JfWCDACggwzFLvoHvMSHes2nGLSf
+ S193/TltwK9cK1qwuhuPJ6iorDihWp82zp7LlRvYIUag==
+X-Gm-Gg: ASbGncs7ZcPBM7FaGZ3jm73mW2IBRBeJxCXhrbdrBU4dBOxzL0iC6fB4HB8XLy26vNs
+ j9qicUlkTofbLKaOZ7JF832dZN+2BOz6s7nYSvZgiLwNPo+UbNSqkSSPPuyIVNeaeSg==
+X-Received: by 2002:a17:90b:582b:b0:305:2d68:8d57 with SMTP id
+ 98e67ed59e1d1-3087bb3f2b8mr4672292a91.5.1744990781803; 
+ Fri, 18 Apr 2025 08:39:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFeFFzzhcY8jz5RU73Ihml02Lh3FmFetD687omlncEUAgn+r11qYZHJpUnacBWR9ii17cAe+gwprdLezUcZIQQ=
+X-Received: by 2002:a17:90b:582b:b0:305:2d68:8d57 with SMTP id
+ 98e67ed59e1d1-3087bb3f2b8mr4672268a91.5.1744990781474; Fri, 18 Apr 2025
+ 08:39:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
- fixed clocks
-To: Fabio Estevam <festevam@gmail.com>, trini@konsulko.com
-Cc: lukma@denx.de, seanga2@gmail.com, francesco.dolcini@toradex.com,
- aford173@gmail.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-References: <20250417171101.2566447-1-festevam@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20250417171101.2566447-1-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250416224032.144791-1-heinrich.schuchardt@canonical.com>
+ <20250416224032.144791-2-heinrich.schuchardt@canonical.com>
+ <d8f9a58a-10cd-4366-bd6f-85f4effc747c@cherry.de>
+ <CAFLszThDLbf3fQySO_8u6OD3-BK2abE6NFVhvviRtrNs=PKdsA@mail.gmail.com>
+ <3148f171-8bf5-4412-97d4-684c6c456499@cherry.de>
+ <CAM=mAOm1SC_SjkC6AYr4T4ThjAMCTF89wz4SVuwOYaN5vj2H5Q@mail.gmail.com>
+ <ed09ef74-2723-4add-8d16-a5ffb4bd8ac4@cherry.de>
+In-Reply-To: <ed09ef74-2723-4add-8d16-a5ffb4bd8ac4@cherry.de>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Fri, 18 Apr 2025 17:39:31 +0200
+X-Gm-Features: ATxdqUHjRzlj8snl91J8SsNMfWtEchG2LotTX8y6Z0_g7Byckmx986KinV1olmo
+Message-ID: <CAM=mAO=grtkK1chRFZz=A2T0czQ6JKNV=Pz4j+O1ojY2TOuiOA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] buildman: allow specifying configuration fragments
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,103 +111,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/17/25 7:11 PM, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@denx.de>
-> 
-> Currently, fixed-rate clocks in U-Boot are named based on their devicetree
-> node names. For example, given the following node:
-> 
-> osc_24m: clock-osc-24m {
-> 	compatible = "fixed-clock";
-> 	#clock-cells = <0>;
-> 	clock-frequency = <24000000>;
-> 	clock-output-names = "osc_24m";
-> };
-> 
-> U-Boot registers the clock as "clock-osc-24m", derived from the node name,
-> ignoring the clock-output-names property.
-> 
-> This differs from Linux, which uses the clock-output-names property when
-> assigning clock names. As a result, clock consumers expecting names
-> like "osc_24m" (as defined in the property) may fail to resolve clocks
-> correctly in U-Boot.
-> 
-> Update the fixed-rate clock driver to check for the clock-output-names
-> property and use it as the clock name if present. If not, the fallback
-> remains the node name. This makes U-Boot behavior consistent with Linux.
+Quentin Schulz <quentin.schulz@cherry.de> schrieb am Fr., 18. Apr. 2025,
+16:33:
 
-This part above ^ is fine.
+> Hi Heinrich,
+>
+> On 4/18/25 4:17 PM, Heinrich Schuchardt wrote:
+> > Quentin Schulz <quentin.schulz@cherry.de> schrieb am Fr., 18. Apr. 2025,
+> > 15:52:
+> >
+> >> Hi Simon,
+> >>
+> >> On 4/18/25 1:39 PM, Simon Glass wrote:
+> >>> Hi Quentin,
+> >>>
+> >>> On Fri, 18 Apr 2025 at 05:27, Quentin Schulz <quentin.schulz@cherry.de
+> >
+> >> wrote:
+> >>>>
+> >>>> Hi Heinrich,
+> >>>>
+> >>>> On 4/17/25 12:40 AM, Heinrich Schuchardt wrote:
+> >>>>> Currently we are no able to build with configuration fragments in our
+> >> CI.
+> >>>>> With this patch buildman gets a new argument --fragments for passing
+> a
+> >>>>> comma separated list of configuration fragments to add to the board
+> >>>>> defconfigs, e.g.
+> >>>>>
+> >>>>>        tools/buildman/buildman \
+> >>>>>        -o build \
+> >>>>>        -k qemu-riscv64_smode \
+> >>>>>        --fragments acpi.config
+> >>>>>
+> >>>>
+> >>>> What about using:
+> >>>>
+> >>>> --fragment acpi.config --fragment fragment2.config
+> >>
+> >
+> > Why should we type so much?
+> >
+> > --fragments fragment1.config,fragment2.config is shorter.
+> >
+> >
+>
+> What was suggested by Simon after is:
+>
+> --fragment acpi --fragment fragment2
+>
+> vs
+>
+> --fragments acpi.config,fragment2.config
+>
+> Shorter :) (until we have more fragments, and then the added --fragment
+> is an issue :)
+>
+> But also because I like to use argparse features instead of reinventing
+> the wheel, but that's also not a big issue :)
+>
+> >>> Another idea would be to also allow specifying the fragment name
+> >>> without the '.config' suffix. Less to type.
+> >>>
+> >
+> >
+> > We can follow all those ideas in future patches. But first let us see the
+>
+> No, this is user interface, we want to change it as little as possible.
+> I don't think it makes sense to support --fragments
+> fragment.config,fragment2.config now to then switch to --fragment
+> fragment --fragment fragment2 later on, if that's what we want.
+>
+> Cheers,
+> Quentin
 
-This part below v is wrong .
 
-> One concrete impact is on i.MX8MP, where USB clock lookup failed following
-> commit b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*").
-> 
-> With this change applied, fixed-clocks are correctly registered with their
-> expected names:
-> 
-> u-boot=> clk dump
->   Rate               Usecnt      Name
-> ------------------------------------------
->   32768                0        |-- osc_32k
->   24000000             5        |-- osc_24m
-> 
-> This change restores i.MX8MP USB functionality by ensuring the proper clock
-> names are used.
+Why do want to type more? I don't.
 
-This is wrong, because this is NOT how the clock look up works at all.
+Best regards
 
-The lookup works this way. Take for example:
+Heinrich
 
-drivers/clk/imx/clk-imx8mp.c
-
-240         clk_dm(IMX8MP_ARM_PLL_REF_SEL, imx_clk_mux(dev, 
-"arm_pll_ref_sel", base + 0x84, 0, 2, pll_ref_sels, 
-ARRAY_SIZE(pll_ref_sels)));
-
-pll_ref_sels:
-
-  21 static const char * const pll_ref_sels[] = { "osc_24m", "dummy", 
-"dummy", "dummy", };
-
-the "osc_24m" is looked up in the clock-controller@30380000 clock-names 
-property:
-
-dts/upstream/src/arm64/freescale/imx8mp.dtsi
-
-  745 clk: clock-controller@30380000 {
-...
-  751         clocks = <&osc_32k>, <&osc_24m>, <&clk_ext1>, <&clk_ext2>,
-  752                  <&clk_ext3>, <&clk_ext4>;
-  753         clock-names = "osc_32k", "osc_24m", ...
-                                        ^^^^^^^
-
-The offset of osc_24m in that clock-names property is 1 , so the phandle 
-in clocks property array at offset 1 is used to look up those clock:
-
-  745 clk: clock-controller@30380000 {
-...
-  751         clocks = <&osc_32k>, <&osc_24m>,
-                                    ^^^^^^^^
-
-Which leads to this clock node in DT:
-
-  188         osc_24m: clock-osc-24m {
-              ^^^^^^^^
-  189                 compatible = "fixed-clock";
-  190                 #clock-cells = <0>;
-
-The "clock-output-names" is NEVER used for any clock look up.
-
-...
-
-I am fine with the first half of the description, but the second half is 
-wrong and this actually does not fix anything. Simply remove 
-clock-output-names from the osc_24m and the code will be broken again.
-
-The clk_resolve_parent_clk() is meant to perform the aforementioned 
-resolution(), that is what "[PATCH v2 00/24] clk: Add 
-clk_resolve_parent_clk() and fix up iMX clock drivers" actually fixed. 
-It seems there is something still missing and clk_resolve_parent_clk() 
-does not do the resolution properly for some clock, but that is what 
-needs to be understood and fixed, not worked around this way.
+>
