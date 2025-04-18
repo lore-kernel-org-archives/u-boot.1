@@ -4,70 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A31BAC369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 19:41:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6728BC369C9
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 22:51:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59F4683339;
-	Fri, 18 Apr 2025 21:40:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A305682BA1;
+	Sat, 19 Apr 2025 00:51:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pK4UGiH6";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9980831D4; Fri, 18 Apr 2025 21:40:10 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 846F9832EB
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 21:40:03 +0200 (CEST)
+ id 546FB82C15; Sat, 19 Apr 2025 00:51:20 +0200 (CEST)
+Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BE28C82B17
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 00:51:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduLm365343
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 18 Apr 2025 14:39:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745005196;
- bh=E4EE27KCCVAviERBnGConvcL9FMpXA24wVkb1aUqjYM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pK4UGiH6i7cEv32JzEdmFLKlZH6vKdjlzFtvY2DWtvHFjZfPelhr3qyErbDknUPJZ
- QascoqG9ccZcRJloKYVP4qvIs40uVGLzOdbGl2k3MShRxN8dNL3gq4hOYImy0htOP2
- nrZEP61YkykLb79fHprL5Re0IPmnjZQAwv/xGJzE=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduNS008962
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 18 Apr 2025 14:39:56 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 18
- Apr 2025 14:39:55 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 18 Apr 2025 14:39:55 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53IJdtLH027809;
- Fri, 18 Apr 2025 14:39:55 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Neha Malcom Francis <n-francis@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>
-CC: Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Jonathan
- Humphreys <j-humphreys@ti.com>, Andrew Davis <afd@ti.com>,
- <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V2 1/9] board: beagle: beagley-ai: Add pattern match for
- MAINTAINERS
-Date: Fri, 18 Apr 2025 14:39:35 -0500
-Message-ID: <20250418193943.953952-2-nm@ti.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20250418193943.953952-1-nm@ti.com>
-References: <20250418193943.953952-1-nm@ti.com>
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Received: from localhost (unknown [116.232.27.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
+ server-digest SHA256) (No client certificate requested)
+ (Authenticated sender: dlan)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id 30DD0342FF8;
+ Fri, 18 Apr 2025 22:51:13 +0000 (UTC)
+Date: Fri, 18 Apr 2025 22:51:04 +0000
+From: Yixun Lan <dlan@gentoo.org>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH v2 2/3] sunxi: add "fake" FEL pin support
+Message-ID: <20250418225104-GYA37749@gentoo>
+References: <20250417000539.3709-1-andre.przywara@arm.com>
+ <20250417000539.3709-3-andre.przywara@arm.com>
+ <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,30 +60,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-just use beagley_ai as pattern match for the files and folders involved.
+Hi
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
-Changes Since v1:
-- None
+On 13:28 Fri 18 Apr     , Quentin Schulz wrote:
+> Hi Andre,
+> 
+> On 4/17/25 2:05 AM, Andre Przywara wrote:
+> > Some boards with Allwinner SoCs feature a "FEL" key, sometimes also
+> > labelled "uboot", which triggers the BootROM FEL mode, when pressed upon
+> > power-on or reset. This allows to access the SoC's memory via USB OTG,
+> > and to upload and execute code. There is a tool to upload our U-Boot image
+> > and immediately boot it, when the SoC is in FEL mode.
+> > 
+> > To mimic this convenient behaviour on boards without such a dedicated key,
+> > we can query a GPIO pin very early in the SPL boot, then trigger the
+> > BootROM FEL routine.  There has not been much of a SoC or board setup at
+> > this point, so we enter the BROM in a rather pristine state still. On
+> > 64-bit SoCs the required AArch32 reset guarantees a clean CPU state anyway.
+> > 
+> > Any GPIO can be used for that, the signal is expected to be active low,
+> > consequently we enable the pull-up resistors for that pin. A board (or a
+> > user) is expected to specify the GPIO name using the
+> > CONFIG_SUNXI_FAKE_FEL_PIN Kconfig variable. When this variable is not set,
+> > the compiler will optimise away the call.
+> > 
+> > Call the code first thing in board_init_f(), which is the first sunxi
+> > specific C routine.
+> > 
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > ---
+> >   arch/arm/mach-sunxi/Kconfig | 10 ++++++++++
+> >   arch/arm/mach-sunxi/board.c | 31 +++++++++++++++++++++++++++++++
+> >   2 files changed, 41 insertions(+)
+> > 
+> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> > index ab432390d3c..f1cfdb548bc 100644
+> > --- a/arch/arm/mach-sunxi/Kconfig
+> > +++ b/arch/arm/mach-sunxi/Kconfig
+> > @@ -825,6 +825,16 @@ config USB3_VBUS_PIN
+> >   	---help---
+> >   	See USB1_VBUS_PIN help text.
+> >   
+> > +config SUNXI_FAKE_FEL_PIN
+> > +	string "fake FEL GPIO pin"
+> > +	default ""
+> > +	---help---
+> > +	Define a GPIO that shall force entering FEL mode when a button
+> > +	connected to this pin is pressed at boot time. This must be an
+> > +	active low signal, the internal pull-up resistors are activated.
+> > +	This takes a string in the format understood by sunxi_name_to_gpio,
+> > +	e.g. PH1 for pin 1 of port H.
+> > +
+> 
+> Why not use the DT for that? Then you wouldn't even need to assume the 
+> polarity of the signal or whether pull-up/downs need to be activated, etc.
+> 
+> You can have the property in the -u-boot.dtsi then if you want?
+> 
+I've raised similar question in v1, but it's in SPL which has no DT available
+see Andre's commment
+https://lore.kernel.org/all/20250409110126.2cc59d30@donnerap.manchester.arm.com/
 
-V1: https://lore.kernel.org/r/20250411225717.3117370-2-nm@ti.com
+maybe better add a SPL prefix to config? or some info in help docs to
+state clearly it should only work in SPL phase?
 
- board/beagle/beagley-ai/MAINTAINERS | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+> While the FEL button on the X96 is "fake", it does what it says, just in 
+> software, maybe that is close enough to "hardware definition" which 
+> would make it suitable for the DT (well, we also store binman nodes in 
+> the DT, which aren't strictly speaking hardware definition either :) ).
+> 
+> Cheers,
+> Quentin
 
-diff --git a/board/beagle/beagley-ai/MAINTAINERS b/board/beagle/beagley-ai/MAINTAINERS
-index 1623329b7140..04d5f67aba6f 100644
---- a/board/beagle/beagley-ai/MAINTAINERS
-+++ b/board/beagle/beagley-ai/MAINTAINERS
-@@ -3,6 +3,4 @@ M:      Robert Nelson <robertcnelson@gmail.com>
- M:      Tom Rini <trini@konsulko.com>
- S:	Maintained
- F:	board/beagle/beagley-ai/
--F:	include/configs/beagley_ai.h
--F:	configs/am67a_beagley_ai_r5_defconfig
--F:	configs/am67a_beagley_ai_a53_defconfig
-+N:      beagley_ai
 -- 
-2.47.0
-
+Yixun Lan (dlan)
