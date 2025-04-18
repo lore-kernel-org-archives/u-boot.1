@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F28C369CA
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:12:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCFCEC369CA
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:12:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08A66832BC;
+	by phobos.denx.de (Postfix) with ESMTP id 51716832FE;
 	Fri, 18 Apr 2025 16:11:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HMeNkWfH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gclyxUu0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C26C832AF; Fri, 18 Apr 2025 16:11:41 +0200 (CEST)
+ id B9098832E6; Fri, 18 Apr 2025 16:11:41 +0200 (CEST)
 Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
  [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10B928321D
+ by phobos.denx.de (Postfix) with ESMTPS id C228E8327A
  for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
 Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43d0782d787so13681395e9.0
+ 5b1f17b1804b1-4394a0c65fcso19936875e9.1
  for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744985498; x=1745590298; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744985499; x=1745590299; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=30iCggiQxsg+n7n81V9I0g3OaEhSTqDQMaxbYhLD4SI=;
- b=HMeNkWfHYoMfYnwjXrAgtWXzTI4uI+A9ufD3AgVNAPhH9UX8TYktdvf4Ts1h0F6IBU
- oCszz05eIuk2/VA8rkGMSAAB6qV3zAlbWHRwESTSC8ogl3Bn7uqpp/JZEe5HAF9ZtxJK
- jsldiVkB5nvTtHf/j22MAkxCYQv4xgM0dusg0VeYcEdKxx04Qf8sivgP411j6eXCH67P
- C6ADA4CQ1ADaL+vjnUu9hVqWVCxYg66GmOwWcBcA0Oho406v6ADifGhzbvfU/zEHaWmJ
- fc/T5AuDcs2h6LLEqzFAas0sr0LgE7pNpsrzJorSsaqiuJbIAzAjxf7X7WiINUo2cnp7
- WL8w==
+ bh=T7y64nRkt+jVoLpphpzyDqiLu3YG1kfVphGiAgljCfI=;
+ b=gclyxUu0taUX/MCgP7ntmAvHjCDJnk1k7pmiFaTj/+gKwTwm3pya0OJG+viqZbWpGA
+ Qfd4Q2rCb+9DlWrOL58OerwX2GxdeiibbIzWNqsmcoN6MLdfevCNTiojHS3ufU8InnSD
+ 561KgAdjGQEvuXpdnr5jYsLm1epKAJ8+pS+U2sNzZ11VPMQZM6gSDH/6RvkzYvMd4WuS
+ HH8GtMwxzLyNtI9FGrrPxlk4JFPacrgrmU+mr0h8wUUEn7+rlkErMOtxV1N8BN6u+Kxx
+ HKQh/cECPCm9s1kvjYVGvBpWiF3QMIrZ+aeVz1eo82EyR3y0cuGdIWSFCRDuUiVpSvmH
+ zMtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744985498; x=1745590298;
+ d=1e100.net; s=20230601; t=1744985499; x=1745590299;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=30iCggiQxsg+n7n81V9I0g3OaEhSTqDQMaxbYhLD4SI=;
- b=Cd3XI3l07VeSu0RBHY8gJkuajYDUzx/3cRGe7CzbHSkOQLW29ox/Jz0ExQa5NJwSCd
- aLWA48pGuxCBIBv9P/LLlZd/QpIQgK6OgE2ca0hKuNIl7ci9+2d8nNgN4acJhztz6Nxh
- XYmVkx73fmeC7YMYYpedjWPD8L3JM5TStQhS33F/83liNd+NORPPJo1NJGinRy5Kuy3t
- jYz6GPqGKJa702kGY1F9YXxFNECKsJ8F97cjNTHMxkJuFLEFQRpz67AWdkFbRxPntkHy
- gNPwILDUETLWzpf1nIBXyIdzVhFfvCFOEyjtIv5fXtLx3/Ln0qGrlg+kKpVQlQ4B6WIz
- LnhA==
-X-Gm-Message-State: AOJu0YxZLZUCpxuSLAk9GLg0xaFZ1UZ2qsHGiiNQ9EQAHe1s7MucH4wN
- Hwc2e8aowlL7iSBcnNT4xMo28MApzlU2veEMTWSSVulMFCcSbKmq3F7DwCWnHtOW8xuaRqDqxyH
- YxtDZ3w==
-X-Gm-Gg: ASbGncupkpXVNGpUBKIeHgujA6Zxg4cviDylzqXJr43nFdklSh438Y7sgUR6Jx+gcr2
- bHEfKDWOyJZYrj7wbaPD6XRdHYUAmFmuq9Q1ViyNgGuzlVff5PfgVaKAzEcoE2092vbl8g1+jzD
- zDsc/v1AaUPxE4U2j/vBOqzlGVt4rdOg3dDtva61u2izG45Cpocw0K0up9qEnosVMPuu+cI/3xB
- 4lz274XPzV3rqqjBmefX9yKxP2Ng8t2MWbtg93TuZ+v/isrdZjzSqNfex+qGUfjVKXbbNRFP7AG
- BsDdKXLFiRxu03vh9gYbmlBQXyASyM1afBddtAPFjufaIdXGHA==
-X-Google-Smtp-Source: AGHT+IFo9L2CwvKL2JlQPhNomQRScrxuDFs94uQ0l4CpI4HS4ud9NR5Rh7Q8Vx090DsspOpD0vct2Q==
-X-Received: by 2002:a05:600c:3b9b:b0:439:643a:c8d5 with SMTP id
- 5b1f17b1804b1-4406aa872fdmr28696685e9.0.1744985498282; 
- Fri, 18 Apr 2025 07:11:38 -0700 (PDT)
+ bh=T7y64nRkt+jVoLpphpzyDqiLu3YG1kfVphGiAgljCfI=;
+ b=bEgSSEN2giCrJ+9H1B0KSaUk6mZvIWOAlXlotNG3x0RV7TdmJbGrjoVGrFi/5Wy4lG
+ q8pSTCX+qPSNdcCkbAtTGZ3Lgfd8LQcpFsJBfeP7lDJ27H5C0iRd53eY9sLh8p4lywaD
+ /oAiMZT26dA9LwGak24SxxW2jdwsXpDhW7WRs3Wg1U4K3R3vhaJZDkreIpSE77KbOPFJ
+ t0vQ/dx9rkUg+hXIRv078ywsN0lopWl79OIrrQnYJMjsDDv+iA6stmzbImx8atgAYaC6
+ XGhu6+x7I0lKmO82IbBFTIPBV/k3eSlmUTmJr4J+trU27BwPTh+umIKNOaBmG5ge8QKs
+ Lj4Q==
+X-Gm-Message-State: AOJu0YyF6bfzmmvOaPvMIKrtpIwoBSfiSMR5DALEZxhSOXvY4msGp4/q
+ mMTjn/heAowH8SZ9HCouehDD4AKWZDDnpyt0mJTXkDhJ33tnVVtqSjF/ey/0ayKApAk0ZpYiU5E
+ wRskSIA==
+X-Gm-Gg: ASbGncvKNw4ETDCfxBErqDV0n8uq5PafJqpUqogqywz8ARz3oZCCPrsZ2iH9YipbHGs
+ Nqvs10nlFoorIWaWcNrAVtFJVojnClJqawL7DPZRI120sYzdERk7nB208fNSbspRYtyIpsI+VNr
+ yRqVfEndVsFUFjcmDq0SVUwEa+tDXV9ADOPYPuZzoik5YzRhCXGAtREaq8iPZ047H9BVCa+ZNfK
+ xB/F7j6rZqDPtGJWWj8QxnTi0Th+nr1VcXYLtj55YAMCOus93ds1oDy4czNnUqKT/UCzFBAyXIG
+ +AZKfb9bUsmBlSfYbhX3nFJNFLaW1fCa7lSLm5BAzYejSjXJtQ==
+X-Google-Smtp-Source: AGHT+IEiy2+42tr9/DIZwwrM5Ua+CyNN2UW60XG9ajPFxX4B3Xpeqo0n7b9DS8gwG+HjPdGUZMDtng==
+X-Received: by 2002:a05:600c:350a:b0:43c:e7ae:4bc9 with SMTP id
+ 5b1f17b1804b1-4406ab7a56dmr18843825e9.1.1744985499111; 
+ Fri, 18 Apr 2025 07:11:39 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:1526:5ffd:d63c:cc85])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.37
+ 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 07:11:37 -0700 (PDT)
+ Fri, 18 Apr 2025 07:11:38 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Stefan Roese <sr@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v6 07/17] uthread: add uthread_mutex
-Date: Fri, 18 Apr 2025 16:09:35 +0200
-Message-ID: <20250418141114.2056981-8-jerome.forissier@linaro.org>
+Subject: [PATCH v6 08/17] cyclic: invoke uthread_schedule() from schedule()
+Date: Fri, 18 Apr 2025 16:09:36 +0200
+Message-ID: <20250418141114.2056981-9-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250418141114.2056981-1-jerome.forissier@linaro.org>
 References: <20250418141114.2056981-1-jerome.forissier@linaro.org>
@@ -99,146 +101,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add struct uthread_mutex and uthread_mutex_lock(),
-uthread_mutex_trylock(), uthread_mutex_unlock() to protect shared data
-structures from concurrent modifications.
+Make the schedule() call from the CYCLIC framework a uthread scheduling
+point too. This makes sense since schedule() is called from a lot of
+places where uthread_schedule() needs to be called.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Stefan Roese <sr@denx.de>
 ---
 
-Changes in v6:
-- uthread_mutex_trylock(): return -EBUSY instead of EBUSY
+(no changes since v1)
 
- include/uthread.h | 60 +++++++++++++++++++++++++++++++++++++++++++++++
- lib/uthread.c     | 27 +++++++++++++++++++++
- 2 files changed, 87 insertions(+)
+ common/cyclic.c           | 3 +++
+ include/u-boot/schedule.h | 3 +++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/include/uthread.h b/include/uthread.h
-index f796a16f25f..89fa552a6f6 100644
---- a/include/uthread.h
-+++ b/include/uthread.h
-@@ -50,6 +50,23 @@ struct uthread {
- 	struct list_head list;
- };
- 
-+/**
-+ * Internal state of a struct uthread_mutex
-+ */
-+enum uthread_mutex_state {
-+	UTHREAD_MUTEX_UNLOCKED = 0,
-+	UTHREAD_MUTEX_LOCKED = 1
-+};
-+
-+/**
-+ * Uthread mutex
-+ */
-+struct uthread_mutex {
-+	enum uthread_mutex_state state;
-+};
-+
-+#define UTHREAD_MUTEX_INITIALIZER { .state = UTHREAD_MUTEX_UNLOCKED }
-+
- #ifdef CONFIG_UTHREAD
- 
- /**
-@@ -94,6 +111,44 @@ unsigned int uthread_grp_new_id(void);
-  */
- bool uthread_grp_done(unsigned int grp_id);
- 
-+/**
-+ * uthread_mutex_lock() - lock a mutex
-+ *
-+ * If the cwmutexlock is available (i.e., not owned by any other thread), then
-+ * it is locked for use by the current thread. Otherwise the current thread
-+ * blocks: it enters a wait loop by scheduling other threads until the mutex
-+ * becomes unlocked.
-+ *
-+ * @mutex: pointer to the mutex to lock
-+ * Return: 0 on success, in which case the lock is owned by the calling thread.
-+ * != 0 otherwise (the lock is not owned by the calling thread).
-+ */
-+int uthread_mutex_lock(struct uthread_mutex *mutex);
-+
-+/**
-+ * uthread_mutex_trylock() - lock a mutex if not currently locked
-+ *
-+ * Similar to uthread_mutex_lock() except return immediately if the mutex is
-+ * locked already.
-+ *
-+ * @mutex: pointer to the mutex to lock
-+ * Return: 0 on success, in which case the lock is owned by the calling thread.
-+ * EBUSY if the mutex is already locked by another thread. Any other non-zero
-+ * value on error.
-+ */
-+int uthread_mutex_trylock(struct uthread_mutex *mutex);
-+
-+/**
-+ * uthread_mutex_unlock() - unlock a mutex
-+ *
-+ * The mutex is assumed to be owned by the calling thread on entry. On exit, it
-+ * is unlocked.
-+ *
-+ * @mutex: pointer to the mutex to unlock
-+ * Return: 0 on success, != 0 on error
-+ */
-+int uthread_mutex_unlock(struct uthread_mutex *mutex);
-+
- #else
- 
- static inline int uthread_create(struct uthread *uthr, void (*fn)(void *),
-@@ -119,5 +174,10 @@ static inline bool uthread_grp_done(unsigned int grp_id)
- 	return true;
- }
- 
-+/* These are macros for convenience on the caller side */
-+#define uthread_mutex_lock(_mutex) ({ 0; })
-+#define uthread_mutex_trylock(_mutex) ({ 0 })
-+#define uthread_mutex_unlock(_mutex) ({ 0; })
-+
- #endif /* CONFIG_UTHREAD */
- #endif /* _UTHREAD_H_ */
-diff --git a/lib/uthread.c b/lib/uthread.c
-index aa264b1d95f..062fca7d209 100644
---- a/lib/uthread.c
-+++ b/lib/uthread.c
-@@ -8,6 +8,7 @@
-  */
- 
- #include <compiler.h>
-+#include <linux/errno.h>
- #include <linux/kernel.h>
+diff --git a/common/cyclic.c b/common/cyclic.c
+index fad071a39c6..b695f092f52 100644
+--- a/common/cyclic.c
++++ b/common/cyclic.c
+@@ -16,6 +16,7 @@
  #include <linux/list.h>
- #include <malloc.h>
-@@ -136,3 +137,29 @@ bool uthread_grp_done(unsigned int grp_id)
+ #include <asm/global_data.h>
+ #include <u-boot/schedule.h>
++#include <uthread.h>
  
- 	return true;
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -100,6 +101,8 @@ void schedule(void)
+ 	 */
+ 	if (gd)
+ 		cyclic_run();
++
++	uthread_schedule();
  }
+ 
+ int cyclic_unregister_all(void)
+diff --git a/include/u-boot/schedule.h b/include/u-boot/schedule.h
+index 4fd34c41229..4605971fdcb 100644
+--- a/include/u-boot/schedule.h
++++ b/include/u-boot/schedule.h
+@@ -3,6 +3,8 @@
+ #ifndef _U_BOOT_SCHEDULE_H
+ #define _U_BOOT_SCHEDULE_H
+ 
++#include <uthread.h>
 +
-+int uthread_mutex_lock(struct uthread_mutex *mutex)
-+{
-+	while (mutex->state == UTHREAD_MUTEX_LOCKED)
-+		uthread_schedule();
-+
-+	mutex->state = UTHREAD_MUTEX_LOCKED;
-+	return 0;
-+}
-+
-+int uthread_mutex_trylock(struct uthread_mutex *mutex)
-+{
-+	if (mutex->state == UTHREAD_MUTEX_UNLOCKED) {
-+		mutex->state = UTHREAD_MUTEX_LOCKED;
-+		return 0;
-+	}
-+
-+	return -EBUSY;
-+}
-+
-+int uthread_mutex_unlock(struct uthread_mutex *mutex)
-+{
-+	mutex->state = UTHREAD_MUTEX_UNLOCKED;
-+
-+	return 0;
-+}
+ #if CONFIG_IS_ENABLED(CYCLIC)
+ /**
+  * schedule() - Schedule all potentially waiting tasks
+@@ -17,6 +19,7 @@ void schedule(void);
+ 
+ static inline void schedule(void)
+ {
++	uthread_schedule();
+ }
+ 
+ #endif
 -- 
 2.43.0
 
