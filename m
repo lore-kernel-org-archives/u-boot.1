@@ -4,57 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC386C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 13:41:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC11C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 13:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A5A683118;
-	Fri, 18 Apr 2025 15:41:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 1850D82AA4;
+	Fri, 18 Apr 2025 15:47:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="C76oPn1h";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bOft+zZ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD13F83121; Fri, 18 Apr 2025 15:41:30 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D467982B3F; Fri, 18 Apr 2025 15:47:13 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AC138304C
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 15:41:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE26682A1C
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 15:47:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 3889A25D16;
- Fri, 18 Apr 2025 15:41:28 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wr4G1aVCa44a; Fri, 18 Apr 2025 15:41:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1744983687; bh=c8+aq3PCnjWuORzJzIzFTHgcVVgfRhIdzm8ptAez0wU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=C76oPn1hNFKztJttwJSXLwObX1OkEUDbACCiiF1naIUfbt/PwZkwW1fw27Ujn9EzN
- AINDiXLNIBm4s6NPSkSYhGBrXIlTvj+pBSJ6873bEEi6Zo/ralJoi2zPp7rxfD11bM
- Km6E7TaMAwQDZFxzg3evDCsqA/bGoy8XDxoZQBgXrKTjulBvvoDuZrX75ZpFMcltOV
- NaaoWexG80lBmcEAnmZrBo/lK6CHaapsi9qphe52FjUAHPZVK1nVawyFrvtYEDE8xw
- SOdm9rblAod4rXCAeUgxhL/ukRvsEuOHW7Jxp8I+uSqfd7yUetuEstGeRXfm0sGO+7
- B9gHjIA0fm1nA==
-Date: Fri, 18 Apr 2025 13:41:13 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, E Shattow <lucent@gmail.com>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] riscv: dts: jh7110: add bootph-pre-ram for &pllclk
-Message-ID: <aAJWeYJxo2IYwDR_@pie.lan>
-References: <20250330162421.238483-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac345bd8e13so288391266b.0
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 06:47:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1744984031; x=1745588831; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tNHrvmfbRsXXqM16sGqa9DDBWSVJAMDhKgjZag2R1+0=;
+ b=bOft+zZ1xUkXf2Y8rCqGm6JCo2D2bHI3Lbf0Ed67/fs4SQVG0HlV5V2zYN4auKPuBD
+ D/9lpLuhtjNCA2NE7e2s009P0nxCtfbcA2aDwslAaogocN4qDJtDBZipG4jQ+WT844AS
+ f6i9LBqxHCfEDqhLv7dsK8MUjuQsWF5O9NMec=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744984031; x=1745588831;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tNHrvmfbRsXXqM16sGqa9DDBWSVJAMDhKgjZag2R1+0=;
+ b=dO0tPgFSFrQWY4lKYTrhsv5Hq/l8UKKSrrGQ8jNtOr10MB+ZZOts0FcTr8Ma+MenA3
+ lynXnFcBa6QZbH3GSSgOzwa8yFVLPXwbJ+Nm3e2rSb1FMd/a+MBI6Brdz1WgQfFlTvyR
+ cuyMyugoO3HqYubGUoVaJTaqqcUQjVb43Uvaqf2BfrUl8OR2Nc88au2deruerN2z9ox5
+ O11itZH2M/pVTuLOCoPx6K3yovJT4eup+cbk5AFaV0tPPlAMoBVhZbVxaW0KMJdIjabo
+ uGxPrz1wcSzvVIhs7H8cX8eAQ8luVn7o7f4MjyLtOLEibYnP11JYDYuMufbLTBGLkcoj
+ j6dw==
+X-Gm-Message-State: AOJu0Yx0jMjDxK6IP+r/REd4B5gtTPqWRYhHJjgCoPOMVygK4eI/kX80
+ /ZyzUHDHGYAq79oNWji6wcRzFz+Ku7IDbSZfM9C5qIFaMdVppHbAHEd9aRTlMZZ03eWoEHSB9V3
+ lWEtI6WQIVJYoEnOHAVyU8frHV3+hHH7y9c8S
+X-Gm-Gg: ASbGncsPwnqTulB1BDX1fhNewL2rOajbmXtQrD/f7QBjo8+N27fy1vNEzswplgfrZkW
+ JV4DkD7JGLYjI7nwflrs+WYMtV5CR56/VKBh9Xa3YFuHTnMF8OyoUInA14fIcvbawGewftKBkdw
+ I9ua7LLkLYVkQhGJ/t7UpR+wc=
+X-Google-Smtp-Source: AGHT+IFSVIxDUOzgysktqhFqbVWaLMJWJE/8P89dtLh4vlpl0Bd/iJJQC3w4DOqkOIf+EiNvkr732Pddhh9OuqHLxOo=
+X-Received: by 2002:a17:907:9712:b0:aca:c437:849e with SMTP id
+ a640c23a62f3a-acb74ad96ecmr267897466b.4.1744984031160; Fri, 18 Apr 2025
+ 06:47:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250330162421.238483-1-heinrich.schuchardt@canonical.com>
+References: <20250418125111.2193434-1-sjg@chromium.org>
+ <20250418133315.GJ5495@bill-the-cat>
+In-Reply-To: <20250418133315.GJ5495@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 18 Apr 2025 07:46:59 -0600
+X-Gm-Features: ATxdqUE0ifBZM-iuVgxt51rbvT9tcxje_h7lsJerJLyWbgBCtnH9OFpPNViabS4
+Message-ID: <CAFLszTg45QDjKT=5JH=Cpoy6Efv8KSPQbQ6KnA8QE6nM_bk+xw@mail.gmail.com>
+Subject: Re: [PATCH 0/3] booti: Remove the SYS_BOOTM_LEN limit for booti
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,51 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 30, 2025 at 06:24:21PM +0200, Heinrich Schuchardt wrote:
-> Since commit f98cd471f06b ("clk: clk-composite: Resolve parent clock by
-> name") the StarFive VisionFive 2 board fails to boot.
-> 
-> Before that patch the SPL debug UART showed warnings like:
-> 
->     clk_register: failed to get pll0_out device (parent of perh_root)
->     clk_register: failed to get pll0_out device (parent of qspi_ref_src)
->     clk_register: failed to get pll0_out device (parent of usb_125m)
->     clk_register: failed to get pll0_out device (parent of gmac_src)
->     clk_register: failed to get pll0_out device (parent of gmac1_gtxclk)
->     clk_register: failed to get pll0_out device (parent of gmac0_gtxclk)
-> 
-> The &pllclk clock needs to be enabled early.
-> 
-> Fixes: f98cd471f06b ("clk: clk-composite: Resolve parent clock by name")
-> Suggested-by: Marek Vasut <marex@denx.de>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/riscv/dts/jh7110-u-boot.dtsi | 4 ++++
->  1 file changed, 4 insertions(+)
+Hi Tom,
 
-Tested-by: Yao Zi <ziyao@disroot.org>
+On Fri, 18 Apr 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Apr 18, 2025 at 06:50:59AM -0600, Simon Glass wrote:
+>
+> > This series restores the original behaviour of extlinux booting linux
+> > 'Image' files, which is to ignore CONFIG_SYS_BOOTM_LEN and instead uses
+> > a limit of 10x the compressed size.
+> >
+> > It also adds RISC-V support, since it uses a similar format to ARM64.
+> >
+> > Future work should integrate the code in 'booti' into main 'bootm'
+> > logic.
+> >
+> >
+> > Simon Glass (3):
+> >   boot: Add a function to check if a linux Image is supported
+> >   bootm: Add RISC-V support in booti_is_supported()
+> >   booti: Allow ignoring SYS_BOOTM_LEN with the booti command
+> >
+> >  boot/bootm.c    | 31 +++++++++++++++++++++++++------
+> >  cmd/booti.c     |  1 +
+> >  include/bootm.h |  3 +++
+> >  3 files changed, 29 insertions(+), 6 deletions(-)
+>
+> This is like pulling teeth. We aren't ignoring SYS_BOOTM_LEN so much as
+> it was never relevant here to start with. The documentation
+> (doc/usage/cmd/booti.rst) has explained that we use 10 x
+> kernel_comp_size for the limit. The "bootm" namespace has largely been
+> about uImage (and then FIT images when not using it's own namespace)
+> images and not applied elsewhere, which is why bootz/booti handled
+> things outside that namespace. And then, still, this series doesn't
+> unify cmd/booti.c with your changes, it just introduces duplicated
+> functionality, which is generally understood to be a bad thing.
+>
+> So again, please do similar to what you did for cmd/bootz.c and that
+> report and move the existing functionality over. We can then look at
+> cleaning it up (which should look like / abstract what we do for
+> compressed FIT images) as a follow up, in order to make bisecting any
+> regressions here easier down the line. Thanks.
 
-Sadly this didn't catch up with v2025.04, in which JH7110 SoCs are
-broken...
+Well, I still don't understand what you are getting at here.
 
-> diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi b/arch/riscv/dts/jh7110-u-boot.dtsi
-> index ce7d9e16961..a9e318c4a31 100644
-> --- a/arch/riscv/dts/jh7110-u-boot.dtsi
-> +++ b/arch/riscv/dts/jh7110-u-boot.dtsi
-> @@ -102,6 +102,10 @@
->  	bootph-pre-ram;
->  };
->  
-> +&pllclk {
-> +	bootph-pre-ram;
-> +};
-> +
->  &syscrg {
->  	bootph-pre-ram;
->  };
-> -- 
-> 2.48.1
-> 
+The existing functionality for booti is already there. Marek added it
+a few years back. Can you please be more specific as to what
+functionality you think is missing?
 
-Thanks,
-Yao Zi
+Yes, the bootm implementation is separate from the booti command at
+present. They both call booti_setup(). But the booti command uses
+kernel_comp_addr_r which we shouldn't be using in bootm. In fact I'd
+like to get rid of those vars, not proliferate them. There is
+certainly some more common code which can be teased apart, but it's
+not the subject of this bugfix. I have to stop somewhere.
+
+Perhaps you should let me do this refactoring in the way that I
+believe it should be done?
+
+Regards,
+Simon
