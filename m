@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9B6C369CA
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 16:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF55C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 17:12:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD1C383190;
-	Fri, 18 Apr 2025 18:54:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 33123831D4;
+	Fri, 18 Apr 2025 19:12:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="GdEu5NG/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mMHs4WPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 453A3831D4; Fri, 18 Apr 2025 18:54:15 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9A9D1831EA; Fri, 18 Apr 2025 19:12:17 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D51598304C
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 18:54:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D32B83190
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 19:12:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6203fb9c43=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53ICZZox009343;
- Fri, 18 Apr 2025 18:54:04 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- CAIj0J6nqrA/IhennCWmDe3NfGu2SCZojyrSNEQMNi4=; b=GdEu5NG/04yvO7v0
- uQEHbYBKidRroDCeXbV10y9ne/dI2WghJZtlokCVmscrUk7MCMPKtGwmmkWBsQXy
- o8EV4vdULxyqFSw1hR6atmpEkCL1XZoEwL6BfKewcey33CsQ+3y62NpMmvQx66Cz
- mpT/82G+1ZuRGx38TzLmCJuQx2cBwT6sCw0XEt2dFoPJL51FfDCNIZNnXIlZq2Ci
- mvKvLzTVw1ESHp2XwsA4uhaXzTpGDS3AkY4lOv2QSRQclyLzcBsM5FJ6rByXrdKp
- MxNW+NPOQF98ewS9z2gXFecJ+jBlVgCMfTQFWaCdT3Du+oMcsXcToDcd924t7NKh
- 1QdkCA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46034njw5w-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 18 Apr 2025 18:54:04 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EBE0E40051;
- Fri, 18 Apr 2025 18:53:08 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D8F17AC1775;
- Fri, 18 Apr 2025 18:44:13 +0200 (CEST)
-Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 18 Apr
- 2025 18:44:13 +0200
-Message-ID: <50fc39f9-8b4d-4620-a5df-3a4fa7253415@foss.st.com>
-Date: Fri, 18 Apr 2025 18:44:11 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2c2dc6c30c2so557121fac.2
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:12:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744996333; x=1745601133; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oXbwg0ccMnYbClcHBxoLHO/2hHjl4HWcwqtd/zAt3Ks=;
+ b=mMHs4WPPRIWFJN/F8zVQ6kEp1SKMhdau/GOg6tEXRgE1mzc3cjA8hxTwx64E8CimED
+ GAegBMsor5ySYoIpStwvUfk1cP5rsmqp99rZdTzvMxiQHMV2vJo+6fcaioNz3tPulcl/
+ J6oCM30DHwLaIllzPJP05vdFhA2i9Gc74GfOI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744996333; x=1745601133;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oXbwg0ccMnYbClcHBxoLHO/2hHjl4HWcwqtd/zAt3Ks=;
+ b=oRJ7gfL0skJGlU5o3qqF3JfCo0PGj6BXGOtx/Ikw7CaJP+lIdQ0uWBgjcHOhEFgB9w
+ YELHa/vJwx2ElwOXJ1Xv4CKnq7HPlRj4Ub4WOmBZPy2xxGxAhqtgb/c9A6PSZWajpiaH
+ A3+zmYbOYsTGd1EcU6xK9gHH6E+J1/3a0ZLH680rlt1334AClRmoGksYiypApr00pVSz
+ r6m/Hy8owsUY3jGksGwtnQuLjUgIyw18lBemZ9BRlfSGYYXoXwTfMXrXm2GNGvZMo6/A
+ xZixo8pfCu8d/ugZ3XIFSwWgGGDuRTFJBMw7uyYy3wlo9kgB2JPQKuV2S8jLpy/i/uwk
+ U0Fg==
+X-Gm-Message-State: AOJu0Yz33s3JVote0wf7ijqz2h8/gxYUIIFemNWDqmUkIwGsnEqsGqXq
+ SpPqx53Gxgtz+PbNANbVfd7dKeXuxgwF/BK0PEIjvuyij2f4dd4hHOUX4lsoN6A=
+X-Gm-Gg: ASbGnctThC22QWnnh0PvK8R6f/wk+c82O4ObzVnnHEWRf1Pm4TrQCQjMEqJ/EhhxeFY
+ f6ffLi+1SOFRL/2y0WS6W8ayekdq8i4VzFzdw9Dwetex1FmthwPl4TnS0SXlmX/5oiIk4ZftzC8
+ GR9tDliFBbPPudg2J7FVJ2DsNPwIHGykCDDWl98jy/lGi3ycpHx318z7qXFag2Z9YPp24QZH2bH
+ SMgPH/OHvIAjHeWIHgffgBoEhWg39hutvJNenI3AleyhbMtG9agXYuW11LK3FQDgQWNVZMr7ZR2
+ ygZClCCilO3bjEt1tgbnf6JBf++RWVTQsHCfgkLHRxps9wzgJv9y3MOIWiF2rlB7qYh5ow2/4+C
+ j
+X-Google-Smtp-Source: AGHT+IGUyFVbOFjRN08gDGNEhWXc2NbNJvkcD+1isLBHexpFLX0zCen1kE1pD89xMsRPO9o43cg4DA==
+X-Received: by 2002:a05:6871:d043:b0:2d5:cb3:6b1c with SMTP id
+ 586e51a60fabf-2d526a5c6ecmr1910124fac.14.1744996333323; 
+ Fri, 18 Apr 2025 10:12:13 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7300478c4ecsm403979a34.3.2025.04.18.10.12.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Apr 2025 10:12:12 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, upstream@lists.phytec.de, 
+ Wadim Egorov <w.egorov@phytec.de>
+Cc: miquel.raynal@bootlin.com, jh80.chung@samsung.com, sjg@chromium.org, 
+ ilias.apalodimas@linaro.org, thomas.petazzoni@bootlin.com, 
+ ian.ray@gehealthcare.com, dario.binacchi@amarulasolutions.com, 
+ aford173@gmail.com, seanga2@gmail.com, nm@ti.com, francesco@dolcini.it
+In-Reply-To: <20250417115311.1905411-1-w.egorov@phytec.de>
+References: <20250417115311.1905411-1-w.egorov@phytec.de>
+Subject: Re: [PATCH] Revert "power-domain: Add refcounting"
+Message-Id: <174499633159.3148707.16976292298695242467.b4-ty@konsulko.com>
+Date: Fri, 18 Apr 2025 11:12:11 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] stm32mp: Add nvram driver
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Simeon Marijon
- <simeon.marijon@foss.st.com>, Cheick Traore <cheick.traore@foss.st.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250411160326.4113545-1-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20250411160326.4113545-1-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.126]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-18_06,2025-04-17_01,2024-11-22_01
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,86 +99,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Thu, 17 Apr 2025 13:53:11 +0200, Wadim Egorov wrote:
 
-On 4/11/25 18:03, Patrice Chotard wrote:
-> From: Simeon Marijon <simeon.marijon@foss.st.com>
->
-> TAMP backup registers will be exposed as nvmem cells.
->
-> Each registers ([0..127] for STM32MP2, [0..31] for STM32MP1) could be
-> exposed as nvmem cells under the nvram node in device tree
->
-> Signed-off-by: Simeon Marijon <simeon.marijon@foss.st.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->   arch/arm/mach-stm32mp/Kconfig  |   9 +
->   arch/arm/mach-stm32mp/Makefile |   2 +
->   arch/arm/mach-stm32mp/nvram.c  | 664 +++++++++++++++++++++++++++++++++
->   3 files changed, 675 insertions(+)
->   create mode 100644 arch/arm/mach-stm32mp/nvram.c
->
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index 002da2e3d3b..d7323659811 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -144,6 +144,15 @@ config STM32_ECDSA_VERIFY
->   	  ROM API provided on STM32MP.
->   	  The ROM API is only available during SPL for now.
->   
-> +config STM32MP_TAMP_NVMEM
-> +	bool "STM32 TAMP backup registers via NVMEM API"
-> +	select NVMEM
-> +	default y
-> +	help
-> +	  Say y to enable the uclass driver for TAMP Backup registers using the
-> +	  NVMEM API. It allows to access to boot mode or others shared information
-> +	  between software components/execution levels.
-> +
->   config CMD_STM32KEY
->   	bool "command stm32key to fuse public key hash"
->   	depends on CMDLINE
-> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
-> index 103e3410ad9..bc0fe9e2225 100644
-> --- a/arch/arm/mach-stm32mp/Makefile
-> +++ b/arch/arm/mach-stm32mp/Makefile
-> @@ -13,6 +13,8 @@ obj-$(CONFIG_STM32MP13X) += stm32mp1/
->   obj-$(CONFIG_STM32MP25X) += stm32mp2/
->   
->   obj-$(CONFIG_MFD_STM32_TIMERS) += timers.o
-> +obj-$(CONFIG_STM32MP_TAMP_NVMEM) += nvram.o
+> Unfortunately this change breaks boot on K3 platform.
+> U-Boot will hang after:
+> 
+>   U-Boot SPL 2025.04-01050-ga40fc5afaec0 (Apr 14 2025 - 07:31:32 +0000)
+>   SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
+> 
+> This reverts commit 197376fbf300e92afa0a1583815d9c9eb52d613a as
+> suggested in [1].
+> 
+> [...]
 
+Applied to u-boot/master, thanks!
 
-I don't see  reason to have reduce file name her ?
-
-filename indicate only the type nvram for nvmem used for TAMP backup 
-register.
-
-
-I prefer fine name with indication of the device used, here TAMP ,
-
-and aligned with driver name "stm32_tamp_nvram"
-
-so rename nvram.c => tamp_nvram.c
-
-and
-
-+obj-$(CONFIG_STM32MP_TAMP_NVMEM) += tamp_nvram.o
-
-
-thanks
-
-
-With this minor remark
-
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Thanks
-Patrick
-
-
-
+[1/1] Revert "power-domain: Add refcounting"
+      commit: 71f497a6d3908574a1b1c3813c2a1385910f76bd
+-- 
+Tom
 
 
