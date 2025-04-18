@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E3FC369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E48C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:11:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6012483236;
-	Fri, 18 Apr 2025 16:11:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B491C8329B;
+	Fri, 18 Apr 2025 16:11:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZTyxsf4R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JimfCtRI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76E748324C; Fri, 18 Apr 2025 16:11:36 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 592BC83287; Fri, 18 Apr 2025 16:11:37 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7406B83208
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C8C381F45
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-39c13fa05ebso1267221f8f.0
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:34 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4394a823036so10485375e9.0
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744985493; x=1745590293; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744985494; x=1745590294; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sWOckKqYXC1BgXfRaZVp2T9Ty29KaBSkqFhmOWssckE=;
- b=ZTyxsf4RdSnxx/4xc4M+UTnXuY/MUjbXdniAMfZ99QNYAbHLM/9pHADAHwn/MyYHOd
- 0OQ5KtJa8FkYSUx40VPQ4Qse47vYjqVt01VIkJPS95USfE/R+etlMV8DuWNRmLvKrKfq
- bELo8+80wFxfWoepmEeHcPkXkv+lTn0EbKw3RII/nzlBNm4gbv/shHvSKrvch16qflYo
- 5sXsnM/8DoOPl/hA8W3EIztidQdKooQcTxbM29CORroehhn/8pwmyF2eTgFtWPzmEh+/
- s6GcOWthNI3LUOF7ppJvWHlMqitCEShvSIlr/ny1WDg9i+RpHYObKOfHRXzy8V3rHPWw
- HPdw==
+ bh=vjN9f8+RKUCM1bfAsnKFxh2T60ROTFd40n0Hwh5GyX0=;
+ b=JimfCtRIAqWr8buAzsgg3bTcq9AvBdLJezOF/GrX+DoOwfOAH6dbx2yZGPF1gFfONk
+ Cwb7gFi+U15upS8pgwFIOsrr3ReUNfO6fTentcF6u6uDS9PNfSfdOLmi5oNYrkKAqzm5
+ +qc5GLyzpNJH6ir9CXIA2VzCAsXgklemDTftL7UrUPBkwefYDlZQDE//R9PM0Z2hFNYn
+ 2hgxf0C0tPYhowEh6vNpLOcvs+85xnCNpUuXvGFrMxwwqceeB8iYkIuJIqloKBfT/mGT
+ 7PU5zRGhmFXNy64f0tQDatNnz2yYPAah6uVDE8QkFlmb4xJsSRBNg3SpHvGP0M0GX1bV
+ kN6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744985493; x=1745590293;
+ d=1e100.net; s=20230601; t=1744985494; x=1745590294;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sWOckKqYXC1BgXfRaZVp2T9Ty29KaBSkqFhmOWssckE=;
- b=G8jMqdOoFPwL1eG7oVhsZe0LIjyKrgN8IhbgcvrSqfxt25A0M6/Pk7BlMEfsR4Glk3
- X6lkckWab8iU4wRrDy8A1fkIIzZoW5ytKmEYrf3OhA1MWGq4PEiVZuuY2p6dFA1tWdSo
- QFJXLloQXSOqEmQyD+OAe4sEQa8gVW3CoGwcC5WNBnD4Qx/NmZuHqJ5ZskjqYTIZZUng
- r/QBVBDTdSZPZLG5gOzbngbUo4rPmLCFBSGoXAqg2ea8rPWmKz7gzJ7nH7qbeUP7Z4qS
- YAjWTRab2XH58V3VgbsxSd3NzckpcOje9fErHRAJjIYdHK1PZehKCPY5C06GdhwXPvuO
- b07A==
-X-Gm-Message-State: AOJu0Yze6HTm2wFnkOv8pOGDDArPaqIx5J4HF0tu0PLFKfvOI+2exyog
- J9lJHfSDYAAwaQiAZbRsBUWhcDnIBRVvF7pRwP5/QJotDVsaf+1ZoWACssvro9HFXL2QEWhBIfs
- 9jtxdUA==
-X-Gm-Gg: ASbGnct8gYnQHC9DhdVAqVY8/f9Sok+NW21IgbbMhL+CpaLVQ1aMdT/oqABo4XMacns
- IHWkFWkw+Y8vXfUd4QRH33l9gjQxajgaZmL9eKy4WYwfvQ4AAfxRUqlvkGRGb8nnQ34JQoJawYG
- jYo7yTDf30840wudXoSIkLZEbjH8I/mAk/ZJbMTKzjTv84prS7BcLoATLhndRfQwljfuihVXt1D
- I9hQjm/UZbTUb/S/ZsYR1wQCmqAQFKM08fHYJD6G29YWcY1fayc40WZHEVIcHpDpHOjjEG/CJIL
- L5suRdu2aO1vWtaRJzs4qbPxK+po4YWeQKsCIWz5dcjh3x8KEjnu0+nsgT/u
-X-Google-Smtp-Source: AGHT+IHYRrQbqqUggbaxxeornYEnDBNVL5qzfFH2vDEgP5RpU4UTT2Vy3+M+zOGg5KQxP30VRjdRmQ==
-X-Received: by 2002:a05:6000:178a:b0:391:3f4f:a169 with SMTP id
- ffacd0b85a97d-39efba6da14mr2079290f8f.32.1744985493492; 
- Fri, 18 Apr 2025 07:11:33 -0700 (PDT)
+ bh=vjN9f8+RKUCM1bfAsnKFxh2T60ROTFd40n0Hwh5GyX0=;
+ b=EOJTUc6V+3kUnyRsK2TP7E4tDh++JbxapZzELDhbxzWLETN7yJxSmQhkRsjQ3NKswi
+ N4X9s+a0sWCMnN3qg/sZ9OXeJzUhFf439fKDv5smwE/fR2MGWOcOPw1dqcWt0NwlBBTF
+ yO6s7Li1KVtr3aez4/h5USr+xqVqV6YMWbcCYZnBs+bsOLbkpaZMKUH6yREtHMMJepTA
+ YGPB8FPLXfgO5Q6KTzUGaChlLNgcn9vUcMIwlr4PSUqMtlZT1Ma3PwEL0oOiZb9SwtW3
+ YB2SopkW1cG3t0JJ35pD6qpRJEINQhALKuIryh+poqTupAZ76CS3rg64L/UXvpMNEO57
+ EMSQ==
+X-Gm-Message-State: AOJu0YxBgmEhZdzLGGj5C41SMDv4imfdEi6++1Ehc0/HTL3BIK0jWmmn
+ JkL43C57j+WXpgYFhVhPto29OjcaPdKytJxoRjVdOwIDSk8NdQzO1j+g0kOZtlNX1dYNPyJcgu8
+ gm6tFmg==
+X-Gm-Gg: ASbGncs77+sA7qlbx5FZymvp09qkKqGm6pnIfTNVqtRMvVDbRGNt+kjyiRqwOCCcZG2
+ dmwZDaPX+ahy6zPNGMz8yRHc4JGbsIBL/LmB1FcmarZSXlgVAJmRaqIkS3BbebjOEmFEOpWBdyG
+ loyblQe2JZC984uBG5iuk5CXGfibneLD5mel+NKxAzE/uvaLZAtU1pURXq3fwehM8Qv9ge8nrH2
+ I8UQl+acjcItSsCFri1ts2Cf95CHFudqFEgGsJ3++Hf5UnvY1X4U2HndAfbjQEpm3lKN9AAsCsl
+ sYWKCVF5j3Yyh7W0a1Z/jC++M7xKJfXtVhAh/hQuY94OsQUuugprfGiNhG0t
+X-Google-Smtp-Source: AGHT+IFo+q4N0KuZWO+cglZvw5xl4HRBjhlqoRlmbn5E5SyEVDd3r6gF7hC1S9tdehmR/9/JB8HcPA==
+X-Received: by 2002:a05:6000:25e6:b0:39e:cbd2:9ad4 with SMTP id
+ ffacd0b85a97d-39efba263e3mr2007719f8f.2.1744985494519; 
+ Fri, 18 Apr 2025 07:11:34 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:1526:5ffd:d63c:cc85])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.32
+ 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 07:11:33 -0700 (PDT)
+ Fri, 18 Apr 2025 07:11:34 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Leo <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Yu-Chien Peter Lin <peter.lin@sifive.com>
-Subject: [PATCH v6 02/17] arm: add initjmp()
-Date: Fri, 18 Apr 2025 16:09:30 +0200
-Message-ID: <20250418141114.2056981-3-jerome.forissier@linaro.org>
+Subject: [PATCH v6 03/17] riscv: add initjmp()
+Date: Fri, 18 Apr 2025 16:09:31 +0200
+Message-ID: <20250418141114.2056981-4-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250418141114.2056981-1-jerome.forissier@linaro.org>
 References: <20250418141114.2056981-1-jerome.forissier@linaro.org>
@@ -104,7 +103,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement initjmp() for Arm. a non-standard extension to setjmp()/
+Implement initjmp() for RISC-V, a non-standard extension to setjmp()/
 longjmp() allowing to initialize a jump buffer with a function pointer
 and a stack pointer. This will be useful to later introduce threads.
 With this new function it becomes possible to longjmp() to a particular
@@ -119,58 +118,38 @@ Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 
 (no changes since v1)
 
- arch/Kconfig                  |  1 +
- arch/arm/lib/setjmp.S         | 12 ++++++++++++
- arch/arm/lib/setjmp_aarch64.S | 10 ++++++++++
- 3 files changed, 23 insertions(+)
+ arch/Kconfig            |  1 +
+ arch/riscv/lib/setjmp.S | 11 +++++++++++
+ 2 files changed, 12 insertions(+)
 
 diff --git a/arch/Kconfig b/arch/Kconfig
-index 14111ca14fb..7a3141e92b3 100644
+index 7a3141e92b3..aa60c5ff03c 100644
 --- a/arch/Kconfig
 +++ b/arch/Kconfig
-@@ -95,6 +95,7 @@ config ARC
- config ARM
- 	bool "ARM architecture"
+@@ -153,6 +153,7 @@ config RISCV
+ 	bool "RISC-V architecture"
+ 	select CREATE_ARCH_SYMLINK
  	select HAVE_SETJMP
 +	select HAVE_INITJMP
- 	select ARCH_SUPPORTS_LTO
- 	select CREATE_ARCH_SYMLINK
- 	select HAVE_PRIVATE_LIBGCC if !ARM64
-diff --git a/arch/arm/lib/setjmp.S b/arch/arm/lib/setjmp.S
-index 2f041aeef01..81bef578719 100644
---- a/arch/arm/lib/setjmp.S
-+++ b/arch/arm/lib/setjmp.S
-@@ -34,3 +34,15 @@ ENTRY(longjmp)
- 	ret  lr
- ENDPROC(longjmp)
- .popsection
-+
-+.pushsection .text.initjmp, "ax"
-+ENTRY(initjmp)
-+	stm  a1, {v1-v8}
-+	/* a2: entry point address, a3: stack base, a4: stack size */
-+	add  a3, a3, a4
-+	str  a3, [a1, #32]  /* where setjmp would save sp */
-+	str  a2, [a1, #36]  /* where setjmp would save lr */
-+	mov  a1, #0
-+	ret  lr
-+ENDPROC(initjmp)
-+.popsection
-diff --git a/arch/arm/lib/setjmp_aarch64.S b/arch/arm/lib/setjmp_aarch64.S
-index 1b8d000eb48..01193ccc426 100644
---- a/arch/arm/lib/setjmp_aarch64.S
-+++ b/arch/arm/lib/setjmp_aarch64.S
-@@ -39,3 +39,13 @@ ENTRY(longjmp)
+ 	select SUPPORT_ACPI
+ 	select SUPPORT_LITTLE_ENDIAN
+ 	select SUPPORT_OF_CONTROL
+diff --git a/arch/riscv/lib/setjmp.S b/arch/riscv/lib/setjmp.S
+index 99d6195827e..9e1f3d5749b 100644
+--- a/arch/riscv/lib/setjmp.S
++++ b/arch/riscv/lib/setjmp.S
+@@ -59,3 +59,14 @@ ENTRY(longjmp)
  	ret
  ENDPROC(longjmp)
  .popsection
 +
 +.pushsection .text.initjmp, "ax"
 +ENTRY(initjmp)
-+	/* x1: entry point address, x2: stack base, x3: stack size */
-+	add x2, x2, x3
-+	stp x1, x2, [x0,#88]
-+	mov  x0, #0
++	/* a1: entry point address, a2: stack base, a3: stack size */
++	add a2, a2, a3
++	STORE_IDX(a1, 12)
++	STORE_IDX(a2, 13)
++	li  a0, 0
 +	ret
 +ENDPROC(initjmp)
 +.popsection
