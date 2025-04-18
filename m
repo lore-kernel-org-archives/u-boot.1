@@ -4,90 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5E8C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:08:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B61C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6756281F45;
-	Fri, 18 Apr 2025 16:08:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1413E83264;
+	Fri, 18 Apr 2025 16:11:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jCa94+KA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wMpmiXWX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 012EA82012; Fri, 18 Apr 2025 16:08:51 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id A5DBF83249; Fri, 18 Apr 2025 16:11:35 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BA1E81E72
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:08:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F01D8324C
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-72ec4634414so1192676a34.1
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:08:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43cf3192f3bso18094815e9.1
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744985327; x=1745590127; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P1CCiySXYWgjLdaxTNfipRWtGW+rRpkdsISY0j7ELNQ=;
- b=jCa94+KAnsc6oSyRZk0jPRvv37ksqtJn5NdHHOH6RtMkm8c6wncv3uMsjhdgLFWdWp
- z3vsXgWT6ooVO1OkoCVJPZnDAY+ixHnGasvIah9Z/RaDg5ef5ZIzZN6IktpZhPfc97a0
- YJiZ23q1N7ygfpDBSUGEEQvJcyVGZF+LY2paQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744985327; x=1745590127;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1744985493; x=1745590293; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P1CCiySXYWgjLdaxTNfipRWtGW+rRpkdsISY0j7ELNQ=;
- b=qwsgtjtrk8WcRerXNJloJAXNaEw06DQF7DcYM+NTdjiQkyvMQSGAhKilkQIQBi2iY9
- xDyU9R/zuPt8RGS0E9DUVL9XMd5zEw/qD/c2R9Rf7yQD84POvVoZRsczOXIAMgmaxoTe
- tv81SqRCUshChhgvb6q3JIspZze5L5GQem67vxixQ/caNtDtHlVm+GKvldxrI1HkpjBX
- HCTvaIcl/BtOU+2fXNXunyyM2FXGpVqx0A6DscwIs77InStbl0zQnt/jjavJnFA/ARES
- 3sAXH7Y8i+kYN75f25hEYrn3Zr0BL1aVzPlq7vi5ppCGe6SLB6wlmBSJVvw3iwSMERCz
- UUPA==
-X-Gm-Message-State: AOJu0Yx1wX3TjWMOmMttk92GwWDJIYx25uwta9CPJikFL7GdjNE6og+E
- bIKGRNtYm6HfxtQxoCo8a4iH5ehIqifxEtd3NAiGeDusm9ffEZXf0KA/FGPiC5DS1qn003eB9Vz
- 7
-X-Gm-Gg: ASbGncvbXJ7cW3QKX8R5O3wzGrejhKJygb33ky7i/i+lUzVJ7YcDMUtObCf6bYZfAmG
- whox79a7dTZaiQKuhGggUA+S5w584JnrLGf5Z1uWNhIHxgECeRhqzzNLxL5OuVtdgaKlqDLNuwU
- V1lGdrXhWMnb02Xp45jYO/F0Y7BK3TMQFYCZzV+K5U6OMADBqt5JwJoz7cgNKyTCbXJEh7eSrjp
- /WDT/qa9CLwF2dSvDoIeXe8z6LclulmJZ2eBdOiahSXRDzV8jFbzaB+v5C8psjL4NpGH/Q6QRph
- vF3o672Y9dv94PsNvNKnQx2qutq/ljUzWCemVOTbUIeUgpW2Xuwzzw2gk2Ox4UBXiSqKSinRUmQ
- Dow==
-X-Google-Smtp-Source: AGHT+IG/+0NSVG13N/+W3Uv9croylyu8MOaGBM6PduEGa+UlbsOyGLmc+47FpZ8fZAHHi7R4as1Dvg==
-X-Received: by 2002:a05:6830:6687:b0:72c:320b:fc8c with SMTP id
- 46e09a7af769-730062f81f0mr1965499a34.21.1744985327106; 
- Fri, 18 Apr 2025 07:08:47 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-730048847b6sm358692a34.44.2025.04.18.07.08.45
+ bh=wE8Fj4ZBUDxONpVurV1GP5HifIm5+3mqTIntosh6lTU=;
+ b=wMpmiXWXNqc+YEB5ZEj7kWvuELq/OJtGKNuTpd1Qm4KVWMFsKOPXiHnn0KXmAGuC40
+ 5/v88D0JLZNRk+EyY1yRIGt17VMpmSKkPBoB/0Xvvg1/tQJGHkr3VlIH/lhuD2ae/sd+
+ /zbIA5ecFTjFfaL33l5PtzM6ndDaL6vN4ASlfsMc8QzBj1a5HIMl3y4vQx15Aul7YCoN
+ XHXaBxLk2m5FA6cr079IhaHwdWTTDqurZbDiWs9ANPhhLgUTzU+Kpc69n2OZyoBOJiWE
+ PQDBL2/J4DtZe8bnnAsaGEcKof3pZAdoleEHZIK/ZhtPLcN9mYO6NcRijmE6/Ucn1v8G
+ Iy1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744985493; x=1745590293;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wE8Fj4ZBUDxONpVurV1GP5HifIm5+3mqTIntosh6lTU=;
+ b=Pi6W2daaHJLqMaid/H8rEaLpPIEveHVFJnjb/R5vRqsIN+Tc56CptRxGFTfEiyt1R6
+ sYaco+Hj1WdC//hHIsDjFfb7hgbOzQD2wLfcaVWEOu1iOM1Cm+TAxJNNkal726wfd99n
+ Q94lTr+Aci2tMwlRKfUBt83nFFJ8GrcoS90K5b6J2G02tc0jaMel4bBRpcC0sT5qxDM2
+ gpZOQFbOgC1L28xoY+XGCA9J5fT03tbtMVhpSSUTYMyJzTRCzdQWjUzaJXk75dYW7DAb
+ 3TVGCi075mIYXTnr6tPJSqNIxsI7Q+Jk5KNo47WkyvhhsGNmBO8sDtsYAAuusE30ABAH
+ Tp7A==
+X-Gm-Message-State: AOJu0Yz263yvbbRHFMsG2MhxIkf/qcz3/AaoAzhlFz9zo+BvkODtl8eC
+ 2lFDUkOEjaYrVxc/cc+8uW0M0Jp40ByS8OO/ise6epgQbG3t0oIDcNS2i8Is2aevhTgZOTpTB0c
+ BLcyjaQ==
+X-Gm-Gg: ASbGncvLBJJf7X5lMjmaEBbDXpdFrXnvDxTdyGf9jIekvIcS9BuM256EE47yjuQLvTd
+ 8Of8rPLFh6023Pudoi0PDGASjR2uRMskvkKCVue9n64u5doXJdAR2FGchkOEUU29tZWatzgVvys
+ u1oXhbsJ93WYgfMVCHNU5xCjTFnOtWkes7LT+nqF3FnweKbUyhG43pZ25png/sLzPbwCb5XRr4N
+ ATiFjh34o5zXmr1r0gb3MJ8fm3jFalYGwZhpi/JDURHdG4aO0sBTFU2jJYNhR/Dek6R8Com7bdT
+ zy/czXJxLVd+tKE7vCjDEo3C6qAbeNzNXxq6p/3OQIKXefCew26NIsCbcRaz
+X-Google-Smtp-Source: AGHT+IGzO7Xa9/tAPuV6emxYbkylkQ29gUCW0+cPCzbozFl5xT+YMt8HsNH439c5cuhL1K3osvnySg==
+X-Received: by 2002:a05:600c:a06:b0:43c:ea1a:720c with SMTP id
+ 5b1f17b1804b1-4406aba7201mr27027255e9.18.1744985492652; 
+ Fri, 18 Apr 2025 07:11:32 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:1526:5ffd:d63c:cc85])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 07:08:46 -0700 (PDT)
-Date: Fri, 18 Apr 2025 08:08:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jonas Karlman <jonas@kwiboo.se>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 0/3] booti: Remove the SYS_BOOTM_LEN limit for booti
-Message-ID: <20250418140844.GP5495@bill-the-cat>
-References: <20250418125111.2193434-1-sjg@chromium.org>
- <20250418133315.GJ5495@bill-the-cat>
- <CAFLszTg45QDjKT=5JH=Cpoy6Efv8KSPQbQ6KnA8QE6nM_bk+xw@mail.gmail.com>
+ Fri, 18 Apr 2025 07:11:32 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@sysam.it>,
+ Bin Meng <bmeng.cn@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
+ Mario Six <mario.six@gdsys.cc>, Michal Simek <monstr@monstr.eu>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Scott McNutt <smcnutt@psyent.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Thomas Chou <thomas@wytron.com.tw>, Tom Rini <trini@konsulko.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>, Wolfgang Denk <wd@denx.de>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>
+Subject: [PATCH v6 01/17] arch: introduce initjmp() and Kconfig symbol
+ HAVE_INITJMP
+Date: Fri, 18 Apr 2025 16:09:29 +0200
+Message-ID: <20250418141114.2056981-2-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250418141114.2056981-1-jerome.forissier@linaro.org>
+References: <20250418141114.2056981-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rA5AYzczXi+cgw9O"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg45QDjKT=5JH=Cpoy6Efv8KSPQbQ6KnA8QE6nM_bk+xw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,104 +115,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add the HAVE_INIJMP symbol to be set by architectures that support
+initjmp(), a non-standard extension to setjmp()/longjmp() allowing to
+initialize a jump buffer with a function pointer and a stack pointer.
+This will be useful to later introduce threads. With this new function
+it becomes possible to longjmp() to a particular function pointer
+(rather than to a point previously reached during program execution as
+is the case with setjmp()), and with a custom stack. Both things are
+needed to spin off a new thread. Then the usual setjmp()/longjmp() pair
+is enough to save and restore a context, i.e., switch thread.
 
---rA5AYzczXi+cgw9O
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add the initjmp() prototype to <include/setjmp.h> since it is common to
+all architectures.
 
-On Fri, Apr 18, 2025 at 07:46:59AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 18 Apr 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Apr 18, 2025 at 06:50:59AM -0600, Simon Glass wrote:
-> >
-> > > This series restores the original behaviour of extlinux booting linux
-> > > 'Image' files, which is to ignore CONFIG_SYS_BOOTM_LEN and instead us=
-es
-> > > a limit of 10x the compressed size.
-> > >
-> > > It also adds RISC-V support, since it uses a similar format to ARM64.
-> > >
-> > > Future work should integrate the code in 'booti' into main 'bootm'
-> > > logic.
-> > >
-> > >
-> > > Simon Glass (3):
-> > >   boot: Add a function to check if a linux Image is supported
-> > >   bootm: Add RISC-V support in booti_is_supported()
-> > >   booti: Allow ignoring SYS_BOOTM_LEN with the booti command
-> > >
-> > >  boot/bootm.c    | 31 +++++++++++++++++++++++++------
-> > >  cmd/booti.c     |  1 +
-> > >  include/bootm.h |  3 +++
-> > >  3 files changed, 29 insertions(+), 6 deletions(-)
-> >
-> > This is like pulling teeth. We aren't ignoring SYS_BOOTM_LEN so much as
-> > it was never relevant here to start with. The documentation
-> > (doc/usage/cmd/booti.rst) has explained that we use 10 x
-> > kernel_comp_size for the limit. The "bootm" namespace has largely been
-> > about uImage (and then FIT images when not using it's own namespace)
-> > images and not applied elsewhere, which is why bootz/booti handled
-> > things outside that namespace. And then, still, this series doesn't
-> > unify cmd/booti.c with your changes, it just introduces duplicated
-> > functionality, which is generally understood to be a bad thing.
-> >
-> > So again, please do similar to what you did for cmd/bootz.c and that
-> > report and move the existing functionality over. We can then look at
-> > cleaning it up (which should look like / abstract what we do for
-> > compressed FIT images) as a follow up, in order to make bisecting any
-> > regressions here easier down the line. Thanks.
->=20
-> Well, I still don't understand what you are getting at here.
->=20
-> The existing functionality for booti is already there. Marek added it
-> a few years back. Can you please be more specific as to what
-> functionality you think is missing?
+Add an entry to the API documentation: doc/api/setjmp.rst.
 
-With:
-https://patchwork.ozlabs.org/project/uboot/patch/20250409155723.431102-1-sj=
-g@chromium.org/
-You moved the functionality from cmd/bootz.c and over to boot/bootm.c
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
-You need to do the same thing here.
+(no changes since v1)
 
-> Yes, the bootm implementation is separate from the booti command at
-> present. They both call booti_setup(). But the booti command uses
-> kernel_comp_addr_r which we shouldn't be using in bootm. In fact I'd
-> like to get rid of those vars, not proliferate them. There is
-> certainly some more common code which can be teased apart, but it's
-> not the subject of this bugfix. I have to stop somewhere.
->=20
-> Perhaps you should let me do this refactoring in the way that I
-> believe it should be done?
+ arch/Kconfig       |  7 +++++++
+ doc/api/index.rst  |  1 +
+ doc/api/setjmp.rst | 10 ++++++++++
+ include/setjmp.h   | 32 ++++++++++++++++++++++++++++++++
+ 4 files changed, 50 insertions(+)
+ create mode 100644 doc/api/setjmp.rst
 
-One of the big lessons learned I've had from all of the code refactors
-you've done over the years is we need to do them small and bisectable
-because corner cases become a nightmare to understand and resolve. So
-perhaps you should do the refactoring the way I believe it needs to be
-done.
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 35b19f9bfdc..14111ca14fb 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -13,6 +13,13 @@ config HAVE_SETJMP
+ 	help
+ 	 The architecture supports setjmp() and longjmp().
+ 
++config HAVE_INITJMP
++	bool
++	depends on HAVE_SETJMP
++	help
++	 The architecture supports initjmp(), a non-standard companion to
++	 setjmp() and longjmp().
++
+ config SUPPORT_BIG_ENDIAN
+ 	bool
+ 
+diff --git a/doc/api/index.rst b/doc/api/index.rst
+index a108718ea99..0dc9ad45d41 100644
+--- a/doc/api/index.rst
++++ b/doc/api/index.rst
+@@ -25,6 +25,7 @@ U-Boot API documentation
+    rng
+    sandbox
+    serial
++   setjmp
+    sysreset
+    timer
+    unicode
+diff --git a/doc/api/setjmp.rst b/doc/api/setjmp.rst
+new file mode 100644
+index 00000000000..7718047085c
+--- /dev/null
++++ b/doc/api/setjmp.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++Long jump API
++=============
++
++.. kernel-doc:: include/setjmp.h
++   :doc: Overview
++
++.. kernel-doc:: include/setjmp.h
++   :internal:
+diff --git a/include/setjmp.h b/include/setjmp.h
+index 37d3a8af85d..32dd48803e9 100644
+--- a/include/setjmp.h
++++ b/include/setjmp.h
+@@ -3,12 +3,27 @@
+ #ifndef _SETJMP_H_
+ #define _SETJMP_H_ 1
+ 
++/**
++ * DOC: Overview
++ *
++ * The long jump API allows to perform nonlocal gotos, that is jump from one
++ * function to another typically further down in the stack, while properly
++ * restoring the stack's state (unwinding). The two functions needed to do this
++ * are setjmp() and longjmp().
++ *
++ * In addition to these two standard POSIX.1-2001/C89 functions, a third one is
++ * present in U-Boot: initjmp(). It is an extension which allows to implement
++ * user-mode threads.
++ */
++
+ #ifdef CONFIG_HAVE_SETJMP
+ #include <asm/setjmp.h>
+ #else
+ struct jmp_buf_data {
+ };
+ #endif
++#include <linux/compiler_attributes.h>
++#include <stddef.h>
+ 
+ /**
+  * typedef jmp_buf - information needed to restore a calling environment
+@@ -37,4 +52,21 @@ int setjmp(jmp_buf env);
+  */
+ void longjmp(jmp_buf env, int val);
+ 
++/**
++ * initjmp() - prepare for a long jump to a given function with a given stack
++ *
++ * This function sets up a jump buffer for later use with longjmp(). It allows
++ * to branch to a specific function with a specific stack. Please note that
++ * @func MUST NOT return. It shall typically restore the main stack and resume
++ * execution by doing a long jump to a jump buffer initialized by setjmp()
++ * before the long jump. initjmp() allows to implement multithreading.
++ *
++ * @env:	jump buffer
++ * @func:	function to be called on longjmp(), MUST NOT RETURN
++ * @stack_base:	the stack to be used by @func (lower address)
++ * @stack_sz:	the stack size in bytes
++ */
++int initjmp(jmp_buf env, void __noreturn (*func)(void), void *stack_base,
++	    size_t stack_sz);
++
+ #endif /* _SETJMP_H_ */
+-- 
+2.43.0
 
---=20
-Tom
-
---rA5AYzczXi+cgw9O
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgCXOQACgkQFHw5/5Y0
-tyyC8Av/SU3dILiVHXFt7j2V7XQCQBFEbu9ep5lwB8Fxl19c8ef/GzatadvbdDrU
-sKbwqy9QfDQxhVk1dpdBm3S98bFDnt24CZjjir/dhN2TGlPKZbDMggAJpmejWHFB
-R8nU8DnZMxB3tQxjPSfqsrZKco7UHUed4L2FlmLducw1xzDpbbOAnnPehxk1ARvj
-NKVoyqpCAxH2pPcgTlnIwjDD+1rIgkDZP8/sRjdJj1Xx8whk15nyWKBzEXACRzED
-OAAZG9C//qk62PmTwGrmpaHSIpcrzhI1q+QZ3SIWJagipwXw3MmZgwTqRgKt39vo
-IAOK9sHyMRuD0wyyyhYTDGGtho2OjnglwCh9SpGUVYkn7ySqdPShIC9wQ0iL+Y1T
-cpbUzTg0SKVU9PS0xUYkuYRFdWG2olHLKvDbI/pJQIoCjYqxK5dckxSuS+gX1WvL
-WtbuekufWp5qo8C4uPLiDmBzX4Hij8e4XM1kDgHzA2WxPGwrIpVm8xUqWjJ2jlWs
-aISg6n61
-=zq6h
------END PGP SIGNATURE-----
-
---rA5AYzczXi+cgw9O--
