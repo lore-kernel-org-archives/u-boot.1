@@ -4,96 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B61C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E3FC369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1413E83264;
+	by phobos.denx.de (Postfix) with ESMTP id 6012483236;
 	Fri, 18 Apr 2025 16:11:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wMpmiXWX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZTyxsf4R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5DBF83249; Fri, 18 Apr 2025 16:11:35 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 76E748324C; Fri, 18 Apr 2025 16:11:36 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F01D8324C
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7406B83208
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43cf3192f3bso18094815e9.1
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:33 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-39c13fa05ebso1267221f8f.0
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1744985493; x=1745590293; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wE8Fj4ZBUDxONpVurV1GP5HifIm5+3mqTIntosh6lTU=;
- b=wMpmiXWXNqc+YEB5ZEj7kWvuELq/OJtGKNuTpd1Qm4KVWMFsKOPXiHnn0KXmAGuC40
- 5/v88D0JLZNRk+EyY1yRIGt17VMpmSKkPBoB/0Xvvg1/tQJGHkr3VlIH/lhuD2ae/sd+
- /zbIA5ecFTjFfaL33l5PtzM6ndDaL6vN4ASlfsMc8QzBj1a5HIMl3y4vQx15Aul7YCoN
- XHXaBxLk2m5FA6cr079IhaHwdWTTDqurZbDiWs9ANPhhLgUTzU+Kpc69n2OZyoBOJiWE
- PQDBL2/J4DtZe8bnnAsaGEcKof3pZAdoleEHZIK/ZhtPLcN9mYO6NcRijmE6/Ucn1v8G
- Iy1g==
+ bh=sWOckKqYXC1BgXfRaZVp2T9Ty29KaBSkqFhmOWssckE=;
+ b=ZTyxsf4RdSnxx/4xc4M+UTnXuY/MUjbXdniAMfZ99QNYAbHLM/9pHADAHwn/MyYHOd
+ 0OQ5KtJa8FkYSUx40VPQ4Qse47vYjqVt01VIkJPS95USfE/R+etlMV8DuWNRmLvKrKfq
+ bELo8+80wFxfWoepmEeHcPkXkv+lTn0EbKw3RII/nzlBNm4gbv/shHvSKrvch16qflYo
+ 5sXsnM/8DoOPl/hA8W3EIztidQdKooQcTxbM29CORroehhn/8pwmyF2eTgFtWPzmEh+/
+ s6GcOWthNI3LUOF7ppJvWHlMqitCEShvSIlr/ny1WDg9i+RpHYObKOfHRXzy8V3rHPWw
+ HPdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1744985493; x=1745590293;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wE8Fj4ZBUDxONpVurV1GP5HifIm5+3mqTIntosh6lTU=;
- b=Pi6W2daaHJLqMaid/H8rEaLpPIEveHVFJnjb/R5vRqsIN+Tc56CptRxGFTfEiyt1R6
- sYaco+Hj1WdC//hHIsDjFfb7hgbOzQD2wLfcaVWEOu1iOM1Cm+TAxJNNkal726wfd99n
- Q94lTr+Aci2tMwlRKfUBt83nFFJ8GrcoS90K5b6J2G02tc0jaMel4bBRpcC0sT5qxDM2
- gpZOQFbOgC1L28xoY+XGCA9J5fT03tbtMVhpSSUTYMyJzTRCzdQWjUzaJXk75dYW7DAb
- 3TVGCi075mIYXTnr6tPJSqNIxsI7Q+Jk5KNo47WkyvhhsGNmBO8sDtsYAAuusE30ABAH
- Tp7A==
-X-Gm-Message-State: AOJu0Yz263yvbbRHFMsG2MhxIkf/qcz3/AaoAzhlFz9zo+BvkODtl8eC
- 2lFDUkOEjaYrVxc/cc+8uW0M0Jp40ByS8OO/ise6epgQbG3t0oIDcNS2i8Is2aevhTgZOTpTB0c
- BLcyjaQ==
-X-Gm-Gg: ASbGncvLBJJf7X5lMjmaEBbDXpdFrXnvDxTdyGf9jIekvIcS9BuM256EE47yjuQLvTd
- 8Of8rPLFh6023Pudoi0PDGASjR2uRMskvkKCVue9n64u5doXJdAR2FGchkOEUU29tZWatzgVvys
- u1oXhbsJ93WYgfMVCHNU5xCjTFnOtWkes7LT+nqF3FnweKbUyhG43pZ25png/sLzPbwCb5XRr4N
- ATiFjh34o5zXmr1r0gb3MJ8fm3jFalYGwZhpi/JDURHdG4aO0sBTFU2jJYNhR/Dek6R8Com7bdT
- zy/czXJxLVd+tKE7vCjDEo3C6qAbeNzNXxq6p/3OQIKXefCew26NIsCbcRaz
-X-Google-Smtp-Source: AGHT+IGzO7Xa9/tAPuV6emxYbkylkQ29gUCW0+cPCzbozFl5xT+YMt8HsNH439c5cuhL1K3osvnySg==
-X-Received: by 2002:a05:600c:a06:b0:43c:ea1a:720c with SMTP id
- 5b1f17b1804b1-4406aba7201mr27027255e9.18.1744985492652; 
- Fri, 18 Apr 2025 07:11:32 -0700 (PDT)
+ bh=sWOckKqYXC1BgXfRaZVp2T9Ty29KaBSkqFhmOWssckE=;
+ b=G8jMqdOoFPwL1eG7oVhsZe0LIjyKrgN8IhbgcvrSqfxt25A0M6/Pk7BlMEfsR4Glk3
+ X6lkckWab8iU4wRrDy8A1fkIIzZoW5ytKmEYrf3OhA1MWGq4PEiVZuuY2p6dFA1tWdSo
+ QFJXLloQXSOqEmQyD+OAe4sEQa8gVW3CoGwcC5WNBnD4Qx/NmZuHqJ5ZskjqYTIZZUng
+ r/QBVBDTdSZPZLG5gOzbngbUo4rPmLCFBSGoXAqg2ea8rPWmKz7gzJ7nH7qbeUP7Z4qS
+ YAjWTRab2XH58V3VgbsxSd3NzckpcOje9fErHRAJjIYdHK1PZehKCPY5C06GdhwXPvuO
+ b07A==
+X-Gm-Message-State: AOJu0Yze6HTm2wFnkOv8pOGDDArPaqIx5J4HF0tu0PLFKfvOI+2exyog
+ J9lJHfSDYAAwaQiAZbRsBUWhcDnIBRVvF7pRwP5/QJotDVsaf+1ZoWACssvro9HFXL2QEWhBIfs
+ 9jtxdUA==
+X-Gm-Gg: ASbGnct8gYnQHC9DhdVAqVY8/f9Sok+NW21IgbbMhL+CpaLVQ1aMdT/oqABo4XMacns
+ IHWkFWkw+Y8vXfUd4QRH33l9gjQxajgaZmL9eKy4WYwfvQ4AAfxRUqlvkGRGb8nnQ34JQoJawYG
+ jYo7yTDf30840wudXoSIkLZEbjH8I/mAk/ZJbMTKzjTv84prS7BcLoATLhndRfQwljfuihVXt1D
+ I9hQjm/UZbTUb/S/ZsYR1wQCmqAQFKM08fHYJD6G29YWcY1fayc40WZHEVIcHpDpHOjjEG/CJIL
+ L5suRdu2aO1vWtaRJzs4qbPxK+po4YWeQKsCIWz5dcjh3x8KEjnu0+nsgT/u
+X-Google-Smtp-Source: AGHT+IHYRrQbqqUggbaxxeornYEnDBNVL5qzfFH2vDEgP5RpU4UTT2Vy3+M+zOGg5KQxP30VRjdRmQ==
+X-Received: by 2002:a05:6000:178a:b0:391:3f4f:a169 with SMTP id
+ ffacd0b85a97d-39efba6da14mr2079290f8f.32.1744985493492; 
+ Fri, 18 Apr 2025 07:11:33 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:1526:5ffd:d63c:cc85])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.31
+ 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 07:11:32 -0700 (PDT)
+ Fri, 18 Apr 2025 07:11:33 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Alison Wang <alison.wang@nxp.com>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@sysam.it>,
- Bin Meng <bmeng.cn@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <monstr@monstr.eu>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Scott McNutt <smcnutt@psyent.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Thomas Chou <thomas@wytron.com.tw>, Tom Rini <trini@konsulko.com>,
- Vasileios Amoiridis <vassilisamir@gmail.com>, Wolfgang Denk <wd@denx.de>,
- Yu-Chien Peter Lin <peter.lin@sifive.com>
-Subject: [PATCH v6 01/17] arch: introduce initjmp() and Kconfig symbol
- HAVE_INITJMP
-Date: Fri, 18 Apr 2025 16:09:29 +0200
-Message-ID: <20250418141114.2056981-2-jerome.forissier@linaro.org>
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Yu-Chien Peter Lin <peter.lin@sifive.com>
+Subject: [PATCH v6 02/17] arm: add initjmp()
+Date: Fri, 18 Apr 2025 16:09:30 +0200
+Message-ID: <20250418141114.2056981-3-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250418141114.2056981-1-jerome.forissier@linaro.org>
 References: <20250418141114.2056981-1-jerome.forissier@linaro.org>
@@ -115,134 +104,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the HAVE_INIJMP symbol to be set by architectures that support
-initjmp(), a non-standard extension to setjmp()/longjmp() allowing to
-initialize a jump buffer with a function pointer and a stack pointer.
-This will be useful to later introduce threads. With this new function
-it becomes possible to longjmp() to a particular function pointer
-(rather than to a point previously reached during program execution as
-is the case with setjmp()), and with a custom stack. Both things are
-needed to spin off a new thread. Then the usual setjmp()/longjmp() pair
-is enough to save and restore a context, i.e., switch thread.
-
-Add the initjmp() prototype to <include/setjmp.h> since it is common to
-all architectures.
-
-Add an entry to the API documentation: doc/api/setjmp.rst.
+Implement initjmp() for Arm. a non-standard extension to setjmp()/
+longjmp() allowing to initialize a jump buffer with a function pointer
+and a stack pointer. This will be useful to later introduce threads.
+With this new function it becomes possible to longjmp() to a particular
+function pointer (rather than to a point previously reached during
+program execution as is the case with setjmp()), and with a custom stack.
+Both things are needed to spin off a new thread. Then the usual
+setjmp()/longjmp() pair is enough to save and restore a context, i.e.,
+switch thread.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 (no changes since v1)
 
- arch/Kconfig       |  7 +++++++
- doc/api/index.rst  |  1 +
- doc/api/setjmp.rst | 10 ++++++++++
- include/setjmp.h   | 32 ++++++++++++++++++++++++++++++++
- 4 files changed, 50 insertions(+)
- create mode 100644 doc/api/setjmp.rst
+ arch/Kconfig                  |  1 +
+ arch/arm/lib/setjmp.S         | 12 ++++++++++++
+ arch/arm/lib/setjmp_aarch64.S | 10 ++++++++++
+ 3 files changed, 23 insertions(+)
 
 diff --git a/arch/Kconfig b/arch/Kconfig
-index 35b19f9bfdc..14111ca14fb 100644
+index 14111ca14fb..7a3141e92b3 100644
 --- a/arch/Kconfig
 +++ b/arch/Kconfig
-@@ -13,6 +13,13 @@ config HAVE_SETJMP
- 	help
- 	 The architecture supports setjmp() and longjmp().
- 
-+config HAVE_INITJMP
-+	bool
-+	depends on HAVE_SETJMP
-+	help
-+	 The architecture supports initjmp(), a non-standard companion to
-+	 setjmp() and longjmp().
+@@ -95,6 +95,7 @@ config ARC
+ config ARM
+ 	bool "ARM architecture"
+ 	select HAVE_SETJMP
++	select HAVE_INITJMP
+ 	select ARCH_SUPPORTS_LTO
+ 	select CREATE_ARCH_SYMLINK
+ 	select HAVE_PRIVATE_LIBGCC if !ARM64
+diff --git a/arch/arm/lib/setjmp.S b/arch/arm/lib/setjmp.S
+index 2f041aeef01..81bef578719 100644
+--- a/arch/arm/lib/setjmp.S
++++ b/arch/arm/lib/setjmp.S
+@@ -34,3 +34,15 @@ ENTRY(longjmp)
+ 	ret  lr
+ ENDPROC(longjmp)
+ .popsection
 +
- config SUPPORT_BIG_ENDIAN
- 	bool
- 
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index a108718ea99..0dc9ad45d41 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -25,6 +25,7 @@ U-Boot API documentation
-    rng
-    sandbox
-    serial
-+   setjmp
-    sysreset
-    timer
-    unicode
-diff --git a/doc/api/setjmp.rst b/doc/api/setjmp.rst
-new file mode 100644
-index 00000000000..7718047085c
---- /dev/null
-+++ b/doc/api/setjmp.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
++.pushsection .text.initjmp, "ax"
++ENTRY(initjmp)
++	stm  a1, {v1-v8}
++	/* a2: entry point address, a3: stack base, a4: stack size */
++	add  a3, a3, a4
++	str  a3, [a1, #32]  /* where setjmp would save sp */
++	str  a2, [a1, #36]  /* where setjmp would save lr */
++	mov  a1, #0
++	ret  lr
++ENDPROC(initjmp)
++.popsection
+diff --git a/arch/arm/lib/setjmp_aarch64.S b/arch/arm/lib/setjmp_aarch64.S
+index 1b8d000eb48..01193ccc426 100644
+--- a/arch/arm/lib/setjmp_aarch64.S
++++ b/arch/arm/lib/setjmp_aarch64.S
+@@ -39,3 +39,13 @@ ENTRY(longjmp)
+ 	ret
+ ENDPROC(longjmp)
+ .popsection
 +
-+Long jump API
-+=============
-+
-+.. kernel-doc:: include/setjmp.h
-+   :doc: Overview
-+
-+.. kernel-doc:: include/setjmp.h
-+   :internal:
-diff --git a/include/setjmp.h b/include/setjmp.h
-index 37d3a8af85d..32dd48803e9 100644
---- a/include/setjmp.h
-+++ b/include/setjmp.h
-@@ -3,12 +3,27 @@
- #ifndef _SETJMP_H_
- #define _SETJMP_H_ 1
- 
-+/**
-+ * DOC: Overview
-+ *
-+ * The long jump API allows to perform nonlocal gotos, that is jump from one
-+ * function to another typically further down in the stack, while properly
-+ * restoring the stack's state (unwinding). The two functions needed to do this
-+ * are setjmp() and longjmp().
-+ *
-+ * In addition to these two standard POSIX.1-2001/C89 functions, a third one is
-+ * present in U-Boot: initjmp(). It is an extension which allows to implement
-+ * user-mode threads.
-+ */
-+
- #ifdef CONFIG_HAVE_SETJMP
- #include <asm/setjmp.h>
- #else
- struct jmp_buf_data {
- };
- #endif
-+#include <linux/compiler_attributes.h>
-+#include <stddef.h>
- 
- /**
-  * typedef jmp_buf - information needed to restore a calling environment
-@@ -37,4 +52,21 @@ int setjmp(jmp_buf env);
-  */
- void longjmp(jmp_buf env, int val);
- 
-+/**
-+ * initjmp() - prepare for a long jump to a given function with a given stack
-+ *
-+ * This function sets up a jump buffer for later use with longjmp(). It allows
-+ * to branch to a specific function with a specific stack. Please note that
-+ * @func MUST NOT return. It shall typically restore the main stack and resume
-+ * execution by doing a long jump to a jump buffer initialized by setjmp()
-+ * before the long jump. initjmp() allows to implement multithreading.
-+ *
-+ * @env:	jump buffer
-+ * @func:	function to be called on longjmp(), MUST NOT RETURN
-+ * @stack_base:	the stack to be used by @func (lower address)
-+ * @stack_sz:	the stack size in bytes
-+ */
-+int initjmp(jmp_buf env, void __noreturn (*func)(void), void *stack_base,
-+	    size_t stack_sz);
-+
- #endif /* _SETJMP_H_ */
++.pushsection .text.initjmp, "ax"
++ENTRY(initjmp)
++	/* x1: entry point address, x2: stack base, x3: stack size */
++	add x2, x2, x3
++	stp x1, x2, [x0,#88]
++	mov  x0, #0
++	ret
++ENDPROC(initjmp)
++.popsection
 -- 
 2.43.0
 
