@@ -4,67 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36286C369C9
-	for <u-boot@archiver.kernel.org>; Thu, 17 Apr 2025 23:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 735EFC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 01:24:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E0BE831EA;
-	Fri, 18 Apr 2025 01:43:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 29A5282EBE;
+	Fri, 18 Apr 2025 03:24:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j3vEwh6L";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mcfOnRvj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 991F08312E; Fri, 18 Apr 2025 01:43:41 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 308B283086
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 01:43:36 +0200 (CEST)
+ id DAEB182EBE; Fri, 18 Apr 2025 03:23:59 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 869EE800B3
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 03:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53HNhYO4137859
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 17 Apr 2025 18:43:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744933415;
- bh=5JEpfNTFgNbzNEhf5XtA/6Ak3fi4hoRQaRUGmMbd75U=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=j3vEwh6LJMsHC7guhmlP+aRMHVG2+sc0VFtpqBEPA7PSH6xfcA5srpHtJ0SCx1EbY
- iRofakVZnRuE/3vQQtOVBhmD79IkCbrEa7gr6pgbvhNpvxplIKACJ7OZBfg7pwKcQ7
- 7THZ1bHdbRO9rtmiKyIYLDBKlpkZNIoDwhASc6YU=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53HNhYTS103322
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 17 Apr 2025 18:43:34 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 17
- Apr 2025 18:43:34 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 17 Apr 2025 18:43:34 -0500
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53HNhYUx036073;
- Thu, 17 Apr 2025 18:43:34 -0500
-From: Judith Mendez <jm@ti.com>
-To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
- <jh80.chung@samsung.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- <u-boot@lists.denx.de>, Judith Mendez <jm@ti.com>
-Subject: [PATCH v3 1/4] mmc: am654_sdhci: Add MMC_HS_52 to timing data
-Date: Thu, 17 Apr 2025 18:43:31 -0500
-Message-ID: <20250417234334.3661321-2-jm@ti.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250417234334.3661321-1-jm@ti.com>
-References: <20250417234334.3661321-1-jm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (dynamic-046-114-106-148.46.114.pool.telefonica.de
+ [46.114.106.148])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id AD79B3FB9F; 
+ Fri, 18 Apr 2025 01:23:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1744939437;
+ bh=JkgiLX3LZsUahLUXGBZQC4mNz5j+V31mfmLlxN+gHlw=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=mcfOnRvjCddnPZ76aOrHjhx93AxicgRfsNnOQRrk8O9g7+SnIQN8zbzlCj/rEJ+1X
+ iVRonLq+ONqmpGE+Wb8+yz+xmuk2EUCNaDKxvt3gwRVdj6tYbyAaRnQvDc58vEq3rz
+ G2B/3GT4/3uUboBjW3340+OHl3+HVCOSPtvE7Tf5BqU32KngrlvpJoGFGSAcgCAdiW
+ ZUcWfqVdR0/rrusi2vx1S6KvMc9i24FrMVCMjYcUwgzXb6K1knrSFPlt8xFAd4/+gz
+ lsdWyQdBTyHsmH7ayMM9vXUxGrZ1i2FJqj/s+G0hVRuNqJpA5K/2QkXD0ihToe7iHo
+ SqjNxVUv4toPg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 0/3] buildman: allow specifying configuration fragments
+Date: Fri, 18 Apr 2025 03:23:36 +0200
+Message-ID: <20250418012339.177968-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,45 +72,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds MMC_HS_52 to the timing data structure.
+Currently we are no able to build with configuration fragments in our CI.
+With this patch buildman gets a new argument --fragments for passing a
+comma separated list of configuration fragments to add to the board
+defconfigs.
 
-Previously, this bus mode tap settings were not populated and
-were instead populated for MMC_HS which is a different bus mode
-up to 26MHz. Since we intended these settings according to the
-device data sheet[0] for MMC_HS_52 up to 52MHz, populate MMC_HS
-tap settings for MMC_HS_52.
+v3:
+	Add missing argument descriptions
+	Always pass fragments argument where used
+	Avoid long lines
+v2:
+	Add documentation and a unit test
 
-While we are here, fix typo in ti,itap-del-sel-mms-hs.
+Heinrich Schuchardt (3):
+  buildman: allow specifying configuration fragments
+  doc/buildman: describe using fragments
+  buildman: unit test for configuration fragments
 
-[0] https://www.ti.com/lit/ds/symlink/am625.pdf Table 7-79
-Signed-off-by: Judith Mendez <jm@ti.com>
-Reviewed-by: Bryan Brattlof <bb@ti.com>
----
- drivers/mmc/am654_sdhci.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ tools/buildman/builder.py       |  5 ++++-
+ tools/buildman/builderthread.py | 18 +++++++++++-------
+ tools/buildman/buildman.rst     | 22 ++++++++++------------
+ tools/buildman/cmdline.py       |  2 ++
+ tools/buildman/control.py       |  3 ++-
+ tools/buildman/func_test.py     | 15 +++++++++++++++
+ tools/buildman/test.py          |  2 +-
+ 7 files changed, 45 insertions(+), 22 deletions(-)
 
-diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index b4c60a48d2e..e4fa8a88565 100644
---- a/drivers/mmc/am654_sdhci.c
-+++ b/drivers/mmc/am654_sdhci.c
-@@ -125,12 +125,15 @@ static const struct timing_data td[] = {
- 	[MMC_LEGACY]	= {"ti,otap-del-sel-legacy",
- 			   "ti,itap-del-sel-legacy",
- 			   0},
--	[MMC_HS]	= {"ti,otap-del-sel-mmc-hs",
--			   "ti,itap-del-sel-mms-hs",
-+	[MMC_HS]	= {"ti,otap-del-sel-mmc-hs26",
-+			   "ti,itap-del-sel-mmc-hs26",
- 			   MMC_CAP(MMC_HS)},
- 	[SD_HS]		= {"ti,otap-del-sel-sd-hs",
- 			   "ti,itap-del-sel-sd-hs",
- 			   MMC_CAP(SD_HS)},
-+	[MMC_HS_52]	= {"ti,otap-del-sel-mmc-hs",
-+			   "ti,itap-del-sel-mmc-hs",
-+			   MMC_CAP(MMC_HS_52)},
- 	[UHS_SDR12]	= {"ti,otap-del-sel-sdr12",
- 			   "ti,itap-del-sel-sdr12",
- 			   MMC_CAP(UHS_SDR12)},
 -- 
-2.49.0
+2.48.1
 
