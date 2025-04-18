@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E2D1C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 17:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8010C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 17:54:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 911A582A81;
-	Fri, 18 Apr 2025 19:49:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5172282B9C;
+	Fri, 18 Apr 2025 19:54:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hW8+BYpv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ll+gJm8I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95D3383212; Fri, 18 Apr 2025 19:49:46 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id F026B83290; Fri, 18 Apr 2025 19:54:26 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A52880584
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 19:49:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF7C982B7C
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 19:54:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-54acc04516fso2220597e87.0
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:49:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-6042c04fd18so990005eaf.2
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:54:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744998583; x=1745603383; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+92F8SLhc7OxPaIhdvKwOiLDi5EOaaWRepKchXN02R4=;
- b=hW8+BYpvOOy0NgYH1/gHBLRIQe3Fy2XGRZ9GrmfkDDz26YRpgIGSrYrcKeP2TfaoI+
- levGbrqp2Vo7xCeWJRfZH6tUWh5HsdbbxkSqSS69oCvZKPON8R159clJcGnV//CE2GS9
- LkhgdCbCz/NArIswdJ8R2TAu3RioS420XksjpDJ2iPWI4/x8kB69ctvLc9j8PwIjNdXM
- vID62vbWzwOAK3lcBG9Lio2HrAHjzSBXggwvXzO/awbt9LnU0vEQRDRJG9unoHzSxZCF
- h9IG30eLnCz8axGL7rrPMf0urxWIWna8FK46PrwX30DKxA0sKVPl20/bXC/hgl2eeTYX
- 0ZdQ==
+ d=konsulko.com; s=google; t=1744998863; x=1745603663; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2SFQ10pQ7rA6ljepvASdpsmOU/T7gUFwlbA+yawhsKw=;
+ b=ll+gJm8I4jng2Wp+wejYT3x3/1COwiKe6S9pGvslZTCDcmjjoINXzOqmARTu0r5NvN
+ vOcczrg05OoZB0efXnPrSRTRQJpbnyig00U40dHjP/kD1ywwRzy7Pcq05kxb+Pl1ENo4
+ tdnvwNOYM7hqVl3IJJ7UXGvukLNq2qBCm+U64=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744998583; x=1745603383;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+92F8SLhc7OxPaIhdvKwOiLDi5EOaaWRepKchXN02R4=;
- b=NUDTZ/kGzBIGjlkvPqNGN9Q2frQ75JMil/PRDOccccky7KFpeIw9uiKQgq0YRE6nmz
- xOl4fs0MIb0mpRiZ1IDbcREuVqgPkxl5HlNiY2+vwPvKisrOLRR0oJDUZnSY48Jwacbz
- gNcPMnnXHeYmT8OpJVf0wOq4L3VwEqCF33Gbe/iUNsP09cwy1H4F9uebEkiiNpHFPu+N
- xeSuZ+Rxr7bPqdvb63pyCN1GH/JPFcQfY9E5r5jwbkrIjbNthz0r+b/6Oxx9ppHylAyk
- gJwzX+e1jM1SSRkRm/+UKJJprcsEZwY1WDfOztM/Lvoom5iLxx1XFK58Sn4BwqB7xyIk
- SgWw==
-X-Gm-Message-State: AOJu0YyZX1Uuf7t6neCafBpD4IonZ1vM7vs4Ox+oZbF+RCZztUrxCkI7
- wzeyQm1sUctj9IhG3PGwFKU1ombbAPfpHENJIcRe8kiDyocn0Mbf8omdHw==
-X-Gm-Gg: ASbGncuTCJ4ju7FZ4tkypH4G95TS76nhI930GFnxBdNpDxB6L9cU55KcubeReeXc8Hu
- 71NtcQmOzg+xVU8PamGbqr2QMZ5lyFqYCoA3gdjQOXgNpn89f2qxLT/ROWcylPT3nhiN7u4IQSr
- zph7GmRcKLW2Gw0PrqcGQB1Xma/nqNAJfX4Ps/pWHIYSLu9WC8SFBr7Mi2Q9quopvMAaNSy0S3J
- IdXygfz/dVaVGw6A6NyLJZNisFmPpoB6eTVVdGRGcCUO+Kg1fveC/AZa3QxLMXG7Oqk22tqKEeZ
- zRtgbHazoN742BDkuTKOqzgsMODk9XWhzWnQY6mXs25U5my8tqYGUY0CfcM+it5YhOk60xykY/Y
- +hzZdb/MM
-X-Google-Smtp-Source: AGHT+IFkBZA2pQXUEPkLyBKLNa+Sy7cV+7Wt1rTAU/1+u/gsz2ez0rehIzUjsG5fSaayF98k5ggPHA==
-X-Received: by 2002:a05:6512:3b1f:b0:54b:117c:118a with SMTP id
- 2adb3069b0e04-54d6e66ca29mr1087191e87.55.1744998583415; 
- Fri, 18 Apr 2025 10:49:43 -0700 (PDT)
-Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
- [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-54d6e5f617csm242563e87.233.2025.04.18.10.49.42
+ d=1e100.net; s=20230601; t=1744998863; x=1745603663;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2SFQ10pQ7rA6ljepvASdpsmOU/T7gUFwlbA+yawhsKw=;
+ b=YGDJiGdP+GMs39dENw+IM+ftZV/MJQ5tuTVRXc1GgK4oVvHCVd/u3ddEdtdHB9r1DG
+ RADcisCKVzqTEEsN9KJfmMmZrgP5N2SZjCgkqS2TjSZDTlkxGWJvxLLH76XOM1vH9JaL
+ 3eSQpWxRvV9Fyof7oL+TR3z+LeE7OpFvNxwEfl9+YoVfN9v7UugD7ymkAkhzcUukZ3l2
+ Zuhn2d3VsWFiJ/T+FsSp821656trpHe10JZ6sCTilKHJHveWFspnpvcRnUnCpPA2RHcW
+ VbDyhAB/zVb30a8qFaPp3GOYt+fOxIqtgQk7EQuXw6P3N4SDfiEf9d8EH07x2DBgR0Ot
+ s+RQ==
+X-Gm-Message-State: AOJu0YzcISJueVYur+4PtQ/5sOfVbOcwbb63U8K5I3vCFZBdW87Jd7Ke
+ QuUk2DGMEJWUEY/dRf+fFy06TVsYto1DG8fg97y3xJFxQffMNiD5ZIjHDq00p0o=
+X-Gm-Gg: ASbGncue+pW0hCxOBvFAGOfyZ928tBIumD82ztUiJw1rYcp3RdsgiAte4Aq5M/H2p5q
+ WsqhCPi8nus9sS1bwCdspd0XV0xVr2pIKxvvwq0PslGaUBvUHW7ZBxyUvOc07p1wZUGi/hMRNDB
+ YWlmO7JZS5Uc0cNtgY7cSCdN48cFch4SEeTtyijcKoB8rzCeAjFoqN4Q4DDpqx22gBS0eMEnPYf
+ Zb3Z+u7mB/VrsA1YYUHsdkPnjI+/BG/LlOahHPcif7Kq7gFRcBaEVWvhE6VJdTWEot3ZIaLe9Tb
+ M/pwNywU/TH1J5u+6PbVGYbY5FTw7LFwlljeNcbRS4OErb1FKPlA9VsjCenHT2FQx0IfhRwmmwT
+ Ftw==
+X-Google-Smtp-Source: AGHT+IHE95jXL46L4CwG9EtdqQxJT0UMU+57JNCmMo8sz44gNc3/P5FYtyeGSD/3uULPFnwN5KH+QA==
+X-Received: by 2002:a05:6808:8314:b0:3f6:65fe:2672 with SMTP id
+ 5614622812f47-401c092fff7mr1761563b6e.2.1744998863510; 
+ Fri, 18 Apr 2025 10:54:23 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-401bf081e3csm412075b6e.32.2025.04.18.10.54.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 10:49:42 -0700 (PDT)
-From: ant.v.moryakov@gmail.com
-To: u-boot@lists.denx.de
-Cc: Maks Mishin <maks.mishinFZ@gmail.com>,
- Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] tools: Fix potential memory leak in aisimage.c
-Date: Fri, 18 Apr 2025 20:49:39 +0300
-Message-Id: <20250418174939.180817-1-ant.v.moryakov@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Fri, 18 Apr 2025 10:54:22 -0700 (PDT)
+Date: Fri, 18 Apr 2025 11:54:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: ant.v.moryakov@gmail.com
+Cc: u-boot@lists.denx.de, Maks Mishin <maks.mishinFZ@gmail.com>
+Subject: Re: [PATCH] tools: Fix memory and file descriptor leaks in
+ read_full_file()
+Message-ID: <20250418175420.GR5495@bill-the-cat>
+References: <20250418171947.172163-1-ant.v.moryakov@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OhxFEv5Td/VNyKl1"
+Content-Disposition: inline
+In-Reply-To: <20250418171947.172163-1-ant.v.moryakov@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,32 +96,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maks Mishin <maks.mishinFZ@gmail.com>
 
-The 'line' variable is dynamically allocated by getline() function
-during config file parsing but wasn't being freed before function
-exit, causing memory leak. This was detected by static analysis.
+--OhxFEv5Td/VNyKl1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add missing free() call before closing the file descriptor to
-prevent memory leak.
+On Fri, Apr 18, 2025 at 08:19:47PM +0300, ant.v.moryakov@gmail.com wrote:
 
-Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
-Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
----
- tools/aisimage.c | 1 +
- 1 file changed, 1 insertion(+)
+> From: Maks Mishin <maks.mishinFZ@gmail.com>
+>=20
+> Fixes potential memory and file descriptor leaks in the read_full_file()
+> function. If malloc succeeds but read() fails, the buffer was not freed,
+> and the file descriptor was not closed. This patch ensures both resources
+> are properly released using a common exit point.
+>=20
+> Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
+> Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+> ---
+>  tools/zynqmpbif.c | 14 +++++++++-----
+>  1 file changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/tools/aisimage.c b/tools/aisimage.c
-index b8b3ee32..6091c8d5 100644
---- a/tools/aisimage.c
-+++ b/tools/aisimage.c
-@@ -346,6 +346,7 @@ static int aisimage_generate(struct image_tool_params *params,
- 		}
- 
- 	}
-+	free(line);
- 	fclose(fd);
- 
- 	aishdr = ais_copy_image(params, aishdr);
--- 
-2.34.1
+Please note that this patch is malformed:
+patch: **** malformed patch at line 125: @@ -214,24 +215,29 @@ static char =
+*read_full_file(const char *filename, size_t *size)
+as it looks like you're hand-editing the patches.
+
+--=20
+Tom
+
+--OhxFEv5Td/VNyKl1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgCkcAACgkQFHw5/5Y0
+tyzhgAwAg3yDYuyAzwGmIBmWBVE4tAqsqxTKMu1JOxjXJHpNOd4mxHtUo787nF84
+NtB8Uj77ToMLI48xWoxGg1YsjCf/7K2FpWINDcsA1OSvGxyTI/rLcvw/7kZkqJiV
+nuitH75qoqnpIh8i0UPG9HD/oo3n09qQ67NgAhQkFQ46zjfwoHgchSvlhmUqU8QB
+zymSCC6pNWRSHHwVBXLtPRZEfo0wAYQRiXWgrEUAiMxk8w1p9Kojij0b5rT1N9es
+GROkuN6pRQ9fPeoZfoT6jeWQ3EV83zM0CZwqp6+DR4NwmYRpuyuOfeYbL8rQ5jNT
+DNzuFa4qQFnzVDLH0xnZhKGCLzVw11fWJibfaHgCeSwxUbCbOGZpVTNBFKUmjrFB
+zpYvGNl4fwsbtif/p7/Z/ee5MMIsv64rN2zllYJj7BZPWoUlmKO68CQtg09dLK/1
+yIMc1sHYPg2GfD3syspVImZtUHwnIlpcmXrvgLqIRs4rvxdjtAWXf0FjMQNb7IQo
+07z9PxwC
+=at48
+-----END PGP SIGNATURE-----
+
+--OhxFEv5Td/VNyKl1--
