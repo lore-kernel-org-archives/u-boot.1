@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5A7BC369CB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 01:24:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BE9C369CB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 01:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E75FA83171;
-	Fri, 18 Apr 2025 03:24:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F5C4831C8;
+	Fri, 18 Apr 2025 03:24:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Hnw/K0BG";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="uYX6zLQ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8352F83171; Fri, 18 Apr 2025 03:24:02 +0200 (CEST)
+ id 9E36382C15; Fri, 18 Apr 2025 03:24:03 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A944281E14
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 03:23:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 036C8800B3
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 03:24:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-106-148.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id A58023FFDC; 
- Fri, 18 Apr 2025 01:23:57 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 1F82E3FFDF; 
+ Fri, 18 Apr 2025 01:23:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1744939437;
- bh=i2EAm6EExuW2Iv7BR5v0unjKujsJpGkBPx5x1RrIdAc=;
+ s=20210705; t=1744939438;
+ bh=iGf4ubog8fA7AaiPPDRM/5hRkNh0Vo/tJe6xjXsW18E=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=Hnw/K0BGs/9YB6/ZvWPebbMbXuA6xMcVbZaYOYosa12Iu6pQvXmdrxF34V/gzk7yW
- AcCq2QvcuqkVh25U76x/vnX22+zKJk0qe263MxTNFwpdg8wLqR4CnWhD0pe6G1IC/1
- 1XPQMgztu8kO7N347nHmG3m2Ph4uQ5Ndq3p7LpDxwifjSvTJ0QFRizF/gWSFC5cwlg
- pnk34XsKuojPrsynqNgWmbAclA3IMTWY1dDhMAmA/zFyefGCrt3EWhorbdSPcQs3P+
- iFTI7AupWVI2o9dKtcsBgkOwzEhfqCzF2y+3MNC4ovFvqHWTyg/NchiOaOHXsC6/NM
- WNLECRfA4fCTA==
+ b=uYX6zLQ1JfQMUdqpEa1MddYWL5pkI3vI9/Q0jadmvQQ15JiXus5taEY2UxPRrUuzR
+ YMVdrXiXj1lmR3DSBQlAnCBf8iuPxERgpAWo5GTKRR20tnBe39ZhPsY9H4kuDDQdld
+ g/xsT4MDAjnRAkh0ntf/aHRYN+wpyKyuKsp1Y8IyQLdXue/6WLM9TOkEZb2jWogocZ
+ fFakSdSBBYTMV/UkzdlPo/1KLcR2i0VNqobUS6ZHHOea36b6w0SWNobWJEVDW6rbeL
+ h31nrAhAjLlcJdEWA7CCbnTcD9deV3qHI0Zu1oB9IXI2a+AXUnumavrwkyzx/qoDqs
+ 1qsGT3dsQRsRA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>,
@@ -51,9 +51,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Brandon Maier <brandon.maier@collins.com>,
  Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 2/3] doc/buildman: describe using fragments
-Date: Fri, 18 Apr 2025 03:23:38 +0200
-Message-ID: <20250418012339.177968-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 3/3] buildman: unit test for configuration fragments
+Date: Fri, 18 Apr 2025 03:23:39 +0200
+Message-ID: <20250418012339.177968-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250418012339.177968-1-heinrich.schuchardt@canonical.com>
 References: <20250418012339.177968-1-heinrich.schuchardt@canonical.com>
@@ -75,7 +75,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Describe the new --fragments parameter
+Check that configuration fragments provided to buildman as comma
+separated list are passed on to the make command of the builder.
+
+In the %_defconfig: target of scripts/kconfig/Makefile the defconfig
+file and the fragments are combined via the gcc preprocessor.
+Modeling this step in the buildman testbench without invoking the actual
+Makefile would not provide better test coverage.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
@@ -85,49 +91,35 @@ v3:
 v2:
 	new patch
 ---
- tools/buildman/buildman.rst | 22 ++++++++++------------
- 1 file changed, 10 insertions(+), 12 deletions(-)
+ tools/buildman/func_test.py | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-index 07ecc5c110c..ba898cdae5a 100644
---- a/tools/buildman/buildman.rst
-+++ b/tools/buildman/buildman.rst
-@@ -1126,10 +1126,16 @@ later comparison.
- defconfig fragments
- -------------------
+diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
+index b45eb95a1e6..95b51af0249 100644
+--- a/tools/buildman/func_test.py
++++ b/tools/buildman/func_test.py
+@@ -798,6 +798,21 @@ Some images are invalid'''
+         lines = self.check_command('-L')[0]
+         self.assertIn(b'NO_LTO=1', lines[0])
  
--Buildman provides some initial support for configuration fragments. It can scan
--these when present in defconfig files and handle the resuiting Kconfig
--correctly. Thus it is possible to build a board which has a ``#include`` in the
--defconfig file.
-+A comma separated list of configuration fragments can be added via the
-+--fragments parameter to all processed defconfig files, e.g.
++    def testFragments(self):
++        """Test passing of configuration fragments to the make command"""
++        # Single fragment passed as argument
++        extra_args = ['board0', '--fragments', 'f1.config']
++        lines, cfg_data = self.check_command(*extra_args)
++        self.assertRegex(lines[0].decode('utf-8'),
++                         r'make O=/.*board0_defconfig\s+f1\.config',
++                         'Test single fragment')
++        # Multiple fragments passed as comma separated list
++        extra_args = ['board0', '--fragments', 'f1.config,f2.config']
++        lines, cfg_data = self.check_command(*extra_args)
++        self.assertRegex(lines[0].decode('utf-8'),
++                         r'make O=/.*board0_defconfig\s+f1\.config\s+f2\.config',
++                         'Test multiple fragments')
 +
-+.. code-block:: bash
-+
-+    buildman -k qemu-riscv64_smode --fragments acpi.config
-+
-+Buildman also supports configuration fragments that are included in defconfig
-+files via an ``#include`` statement. It can scan these and handle the resulting
-+Kconfig correctly.
- 
- For now, Buildman simply includes the files to produce a single output file,
- using the C preprocessor. It does not call the ``merge_config.sh`` script. The
-@@ -1140,14 +1146,6 @@ useful.
- To specify the C preprocessor to use, set the ``CPP`` environment variable. The
- default is ``cpp``.
- 
--Note that Buildman does not support adding fragments to existing boards, e.g.
--like::
--
--    make qemu_riscv64_defconfig acpi.config
--
--This is partly because there is no way for Buildman to know which fragments are
--valid on which boards.
--
- Building with clang
- -------------------
- 
+     def testReproducible(self):
+         """Test that the -r flag works"""
+         lines, cfg_data = self.check_command('-r')
 -- 
 2.48.1
 
