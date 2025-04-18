@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A514C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 13:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00502C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 13:39:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A65F882A3B;
-	Fri, 18 Apr 2025 15:33:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 62E9683118;
+	Fri, 18 Apr 2025 15:39:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eLyeKAGE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YJdUBJbN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65D9482A3B; Fri, 18 Apr 2025 15:33:22 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 6419183121; Fri, 18 Apr 2025 15:39:49 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C60F82A1C
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 15:33:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3320D8304C
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 15:39:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-6042c04fd18so880345eaf.2
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 06:33:20 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-72c14138668so434746a34.2
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 06:39:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744983199; x=1745587999; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744983586; x=1745588386; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SuoudUQe8+OuDfnKwxYFxDuuG+EwTEZhuabqsyi8xhg=;
- b=eLyeKAGEo/FpT/3A9dtgTNyWllvweQISXS3GUTtNzvC0YWWRtIq//vtQgJj1T6MWpK
- Awxldz80p42h3BpielgLGjc7MOQXZ5qhRfDKcCjy2MjXN49WvEOt2OqjC0rgvsgqucYh
- E1xPNVboioOxXrWo9gsIG0loP5yZBrShQECZk=
+ bh=eVn3r4CjzeYMi9PJ6daGhUWfoy3FhbRogVLOkwn1zY8=;
+ b=YJdUBJbNYZyxHPoDLgMEDCehBFjth8bQICCauAbNDWrHxVxwKy8HquYhQH9SkcIAb2
+ zlu/wA8kKt6Xsm0pb7HipJ7b28d+Xwdx2oqwfrJAu2lqCh1MTxeVdLsKtv4iDOoFGQsC
+ 7HcMGPWDjKRlhKxiI9u4WbiNurnLmmgq9SMkI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744983199; x=1745587999;
+ d=1e100.net; s=20230601; t=1744983586; x=1745588386;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SuoudUQe8+OuDfnKwxYFxDuuG+EwTEZhuabqsyi8xhg=;
- b=I1ZWvVBa4ZSLmvUeBQ6SLcbvoAROLGnoHUCL3Ig52JQh/osixO+rfIETlALQlFmXrI
- s0jOjH9XZ7+mL1iW26qGeVaP/D4O5JgXggkGSldNLjN/v6d1tkAEPhnkjKzTIVpPygtZ
- avXIB7jfn++O5JoPSHR2YUoWtkJt23ryd3FIJ2YwbfjyovEJohsZFWx9lBlrassB75KC
- xrVkfl2KW4PNPIv0BwZfU2nebSbSalupmxaAbHJT/lft5y+TAr5W52wH/D8/Q0/u6ZdM
- XNwLseg6ImlXMam/jrNDU1NsyToSq7iUVnXyMUK1pijh0H/dsD5JwXujF/E+AMIe3XeD
- JXLg==
-X-Gm-Message-State: AOJu0YzgNhh5c0h9TcJL4KLhOOZYk/uJK8u33lIVuOlS+JzOveBDtZ6X
- K0JNiI6KByRNxz2H6TNRe/dE2tz0KsxxlALUWB1WVf2dWSU1b/4EZ7M62z9b+4s=
-X-Gm-Gg: ASbGncuKt7kYZFsZuF77J9kAojjoc8ZoBoNij3Af0jEf5tn0KRvkBwU0MYBiT1bL/XV
- AF0iohNgJbSC2T52RuJU9Q15KQX9sxuvHUY+jGvS7pb/ids9mjU8oSuD9MATtHdlot2+zQYZm+i
- MBWHeJspUgJaYzquDdaJGgzdRV8Np98R71Ma2AYTN6MZIE8gRzn/YrP/BDJGqNbblasVKm1fFxi
- FJsefiGdjpmTj215BXbsTn3ze2yubGtEaN1Tspxxys06g1E5CPVceyCL8eTGgbWR9zyHB923Hsz
- kPJWklJwerYPyONCSeFYtIDUZz54jnLQHk7v6swUn0NuDoy2wdyE9EyJSVu/EdQJ3T9eMTtiD5C
- HKFMK3PTf5swt
-X-Google-Smtp-Source: AGHT+IFNWMCue3L0Fj2tiLvSFSnWGiVVEYnZMssCJrz7pb7+dpCJ2pOJd2F6Oa36szXyLW6m6HfWIA==
-X-Received: by 2002:a05:6820:2295:b0:604:6b0:c259 with SMTP id
- 006d021491bc7-6060053e971mr1572381eaf.4.1744983198854; 
- Fri, 18 Apr 2025 06:33:18 -0700 (PDT)
+ bh=eVn3r4CjzeYMi9PJ6daGhUWfoy3FhbRogVLOkwn1zY8=;
+ b=LyNQSnBxlTvEeGGnc0sknyiSa8DIY7IOdNro/ss9D4h29z0RanevUWEEjBlzow1uWk
+ ZYe4PiJvMaaT7LjPthmnr6xXrUdYctZjPcEMBI9PF3vEEx/SSfOuUpwUIAXmMe+LfkJ2
+ bddRBOt9QdKwS64rkLOHsoe4YeYhqpL1mu8Y1xdOU3wnYNLnc/DM7jHZX3BNUAALyEGH
+ 1aijYAOWeOF2a4ZB4gtHv9MYvii4rVAg0Et7/K3qy3urDAg1+WYBR80oPFENyFwV1lCc
+ Gh9a5x1uWD39JSf8OrkQxrrpXwss/LA+Yo2hsFgQA2WjECZaJeD9EZUgj04SyhSvuMbV
+ 2u+A==
+X-Gm-Message-State: AOJu0Yzod4rz5le/Ta3eP+3d40FH9K7grSTPzVhlmBRkiOtQk5UNCkO6
+ QFZbW5COcbgrQu9HyUz1aU/vMt53RsTmWUYpSKgVLTMRyEM1AGSSV/gsxhVGHVM=
+X-Gm-Gg: ASbGncvistkIaqwDS+XmBRXXZ2dWt+jPqR9Njw8hS4eR9UyLq4I9+KlW1mY6lT5xo3L
+ jQcpOMjWpvSGIWvB7E41pnO7ia/iXKmRO193KD02/QDsZvOwukjNSGkxxfrQxW/kj9YLiXRIjtr
+ bHYV9JzzAKsA2vUarXr13OxYCzGOHit/ZI5IvYC6wNSkOtMKZg5GnMkjrIqnM9bmiWo3Xe1mUeP
+ AHSCqKRgnfBHsz8JoOjUyCn1JvEphx49cBPJdeF027Srfb94SlY3zJN8S2ExcxYYW9nV8jDexVI
+ WWR9Pdov8cCEMrxH/o3GV6fjTnnpmrWuR5jGfe3qK3AbXTN08ZoBWwfjHVZBDSnQlM+CWQ8sy/n
+ ftw==
+X-Google-Smtp-Source: AGHT+IFCmVG/i3/ofjM3wKDpI3UxVsEtHmvzw8banm++JtZ3z4LQtBoEQpuFzQ+uGSgGRuk+pn3+YA==
+X-Received: by 2002:a05:6870:2f12:b0:2c2:2e8e:2030 with SMTP id
+ 586e51a60fabf-2d526b8d784mr1214809fac.23.1744983585836; 
+ Fri, 18 Apr 2025 06:39:45 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-605ff69cc32sm367121eaf.29.2025.04.18.06.33.17
+ 46e09a7af769-730047b22e9sm340306a34.27.2025.04.18.06.39.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Apr 2025 06:33:18 -0700 (PDT)
-Date: Fri, 18 Apr 2025 07:33:15 -0600
+ Fri, 18 Apr 2025 06:39:45 -0700 (PDT)
+Date: Fri, 18 Apr 2025 07:39:43 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jonas Karlman <jonas@kwiboo.se>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 0/3] booti: Remove the SYS_BOOTM_LEN limit for booti
-Message-ID: <20250418133315.GJ5495@bill-the-cat>
-References: <20250418125111.2193434-1-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <simon.glass@canonical.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH v2 1/3] Bring in linux/limits.h
+Message-ID: <20250418133943.GK5495@bill-the-cat>
+References: <20250418105919.1645824-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qOoIW+46ZCApZ6+A"
+ protocol="application/pgp-signature"; boundary="qi7NhRa2adYr6E7M"
 Content-Disposition: inline
-In-Reply-To: <20250418125111.2193434-1-sjg@chromium.org>
+In-Reply-To: <20250418105919.1645824-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,68 +100,84 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qOoIW+46ZCApZ6+A
-Content-Type: text/plain; charset=us-ascii
+--qi7NhRa2adYr6E7M
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 18, 2025 at 06:50:59AM -0600, Simon Glass wrote:
+On Fri, Apr 18, 2025 at 04:59:13AM -0600, Simon Glass wrote:
 
-> This series restores the original behaviour of extlinux booting linux
-> 'Image' files, which is to ignore CONFIG_SYS_BOOTM_LEN and instead uses
-> a limit of 10x the compressed size.
+> From: Simon Glass <simon.glass@canonical.com>
 >=20
-> It also adds RISC-V support, since it uses a similar format to ARM64.
+> Add part of this file from Linux v6.14 so we can include it from the
+> linux/overflow.h file. Drop the relevant section from kernel.h
 >=20
-> Future work should integrate the code in 'booti' into main 'bootm'
-> logic.
+> The top of the file is omitted since it defines things used in mbedos
+> and we get an error on SIZE_MAX.
 >=20
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> ---
+> Error is:
 >=20
-> Simon Glass (3):
->   boot: Add a function to check if a linux Image is supported
->   bootm: Add RISC-V support in booti_is_supported()
->   booti: Allow ignoring SYS_BOOTM_LEN with the booti command
+>   In file included from include/limits.h:6,
+>                  from lib/mbedtls/external/mbedtls/library/constant_time.=
+c:14:
+>   include/linux/limits.h:7:35: error: missing binary operator before toke=
+n "0"
+>     7 | #define SIZE_MAX        (~(size_t)0)
+>       |                                   ^
+>   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:65:6: not=
+e: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
+>    65 | #if (SIZE_MAX > 0xffffffffffffffffULL)
+>       |      ^~~~~~~~
+>   include/linux/limits.h:7:35: error: missing binary operator before toke=
+n "0"
+>     7 | #define SIZE_MAX        (~(size_t)0)
+>       |                                   ^
+>   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:71:8: not=
+e: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
+>    71 | #elif (SIZE_MAX > 0xffffffff) || defined(MBEDTLS_HAVE_INT64)
+>       |        ^~~~~~~~
+>   make[3]: *** [scripts/Makefile.build:256: lib/mbedtls/external/mbedtls/=
+library/constant_time.o] Error 1
+>   make[2]: *** [scripts/Makefile.build:398: lib/mbedtls] Error 2
 >=20
->  boot/bootm.c    | 31 +++++++++++++++++++++++++------
->  cmd/booti.c     |  1 +
->  include/bootm.h |  3 +++
->  3 files changed, 29 insertions(+), 6 deletions(-)
+> Changes in v2:
+> - Add new patch to bring in linux/limits.h
+>=20
+>  include/limits.h       |  2 ++
+>  include/linux/kernel.h | 12 ------------
+>  include/linux/limits.h | 21 +++++++++++++++++++++
+>  3 files changed, 23 insertions(+), 12 deletions(-)
+>  create mode 100644 include/linux/limits.h
 
-This is like pulling teeth. We aren't ignoring SYS_BOOTM_LEN so much as
-it was never relevant here to start with. The documentation
-(doc/usage/cmd/booti.rst) has explained that we use 10 x
-kernel_comp_size for the limit. The "bootm" namespace has largely been
-about uImage (and then FIT images when not using it's own namespace)
-images and not applied elsewhere, which is why bootz/booti handled
-things outside that namespace. And then, still, this series doesn't
-unify cmd/booti.c with your changes, it just introduces duplicated
-functionality, which is generally understood to be a bad thing.
-
-So again, please do similar to what you did for cmd/bootz.c and that
-report and move the existing functionality over. We can then look at
-cleaning it up (which should look like / abstract what we do for
-compressed FIT images) as a follow up, in order to make bisecting any
-regressions here easier down the line. Thanks.
+Ugh. I think we need to:
+- Fix lib/string.c (and Fixes commit 7c7361b98d6e ("lib: implement
+  strnstr()")) to not bring in <limits.h> as that should be limited to
+  mbedtls usage.
+- Not bring <linux/limits.h> to <limits.h> to start with at least (we
+  can worry about handling wrappers around overflow protection there
+  separately).
 
 --=20
 Tom
 
---qOoIW+46ZCApZ6+A
+--qi7NhRa2adYr6E7M
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgCVJAACgkQFHw5/5Y0
-tyyTlwv4sEhGcUDYSAQNKgM2ZxWn6lyh76B+ukywL/CE9IT7ACfph0I+Wn1tqxw9
-RyXDxlt+uRkih+RFccCDHiZWna79GSBLd+q9X8vSkImuhObRHyTsewTFrgP0xb05
-X5r8uoNz4ohV5SOxmj6vjZWc29zo8pre55zCTKZpRXn7je/pzsdYMfT8qYFPWgL5
-vQeTWfh8W5mQ6jq2QbhYW9eYWwgSc4GIhHjn1SYK7825u9zREY4FKMTsKxjFq4KI
-w2V9y3JIQJd6AW0TDyLPqUYpJ6AGmYLkNVldAYBQMzLfvV53JlI2PeXqKBzdtQHj
-YHZTmol+QnnT9HV2yi8ppn2SSXxmEGMv7vLPPUn/jlB5g5sMhiC1BZgYHhSuxg/a
-sA3S4YvGanNx93YBBIWl+NtOGFI0YT7RLLSpiJi+RGOkvXx4ehYUoka5X4E+vloS
-P1OpsarOPNu7QZXhdbJRQpt0MCIem4/D9fBfFW44+Bx6ipalczunRP7j6noqKN7C
-IjjTOto=
-=aek8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgCVh8ACgkQFHw5/5Y0
+tyxV/AwAlrrr2NPlMZ9GF2rXqWxNH7X+KsbEE5w+oNpovou7YUJBpKJJ4OMWlVU5
+pumz++smhSlH4RD5/WHgeX/wfaEJ81JfPoEp23lWXAQlaLKg4dDEGe16iDyRv3R6
+eCKSP+lvijtDoTuVdRo1Vc2zU0loEO27dBFxOi1LpI+pu7sAcJUrPncAwqgKZrrX
+u7qIzuLj6s+51MNPXZ7GGCtPsJDcjrcH0byVn4u4cuVTBC6x29UNQMvr1dudpM4Q
+UHoN0ELHnzhlUGzCvM8gyduKC1HRc1+HYDCcV3g1tqWGdVpEIKKOchTC80HrfDhj
+2BC8G7CfnF3Idp38q/XTUTI/+A9WS0mCNPfCQYdyDAe6UkF7I7H3OojT60z7qb7F
+bDjrb1BM0vd4M8gb/SveR4uw/NF5GGQ5z3p5jwDJwYJT0MGnSSGf7SwoLVIoi3K0
+JnUQuEZpFQ5wuVx5Mp3QbvNZE4KOvu8OlgHDTFcYb4vm/zo9pkXS03v7lO8qR8Sm
+3Apg7qid
+=oOgx
 -----END PGP SIGNATURE-----
 
---qOoIW+46ZCApZ6+A--
+--qi7NhRa2adYr6E7M--
