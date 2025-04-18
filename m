@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BA4C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 19:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28320C369C9
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 19:41:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8CA1832EB;
-	Fri, 18 Apr 2025 21:40:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1131783327;
+	Fri, 18 Apr 2025 21:40:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NaKmrCIn";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hXTu9Xir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84AE4832FE; Fri, 18 Apr 2025 21:40:09 +0200 (CEST)
+ id 824B083346; Fri, 18 Apr 2025 21:40:09 +0200 (CEST)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 009F9832F7
+ by phobos.denx.de (Postfix) with ESMTPS id 16448832F9
  for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 21:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduCS365335
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJdudU365351
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Fri, 18 Apr 2025 14:39:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1745005196;
- bh=MlPTwy5Q0hFcbZWB7n3iKcUSixv+K7+hk6k3cTv+Xk0=;
- h=From:To:CC:Subject:Date;
- b=NaKmrCInQ9ZaxvoDsYenzpWBTgJMNqH87TO/RoF/kxTnqZRH6nMr30G/wAik8fjy1
- AxekDbwmuxEy/HexeFqusWh//c9PPFOlZD9NW8C7eHTbu3f4m9xdKhJeY0o/XVij2u
- lUR9+Inil8WqN6Ig8CN3Nj6VdJxsI4lDIR0GabdQ=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduYX003013
+ bh=teAiiZ+nBkHjTFJKwU0AaYA6YaEZdelzMY6ahYb9d5Y=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=hXTu9Xir9sS46Y2eWtzt7TVz4eg1KgKmJqC6svz5MT7mhyjdb6tZysN804zsN4AI/
+ 5SDlaFluFBQagJK6Yaj3NY6LfzMKjPadWKphpVjEk2SYNjXyOljQ11GJVG22fG0RHg
+ pCH8VEuwGs+aMzo/JYcnATq95II4QE41EaGltew0=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53IJduJS104895
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 18 Apr 2025 14:39:56 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 18
- Apr 2025 14:39:55 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 14:39:56 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 18 Apr 2025 14:39:55 -0500
+ Frontend Transport; Fri, 18 Apr 2025 14:39:56 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53IJdtPU028496;
- Fri, 18 Apr 2025 14:39:55 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53IJduhE028508;
+ Fri, 18 Apr 2025 14:39:56 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Neha Malcom Francis <n-francis@ti.com>, Robert Nelson
@@ -57,10 +57,13 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 CC: Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Jonathan
  Humphreys <j-humphreys@ti.com>, Andrew Davis <afd@ti.com>,
  <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V2 0/9] board: beagle: beagley-ai: Cleanups and stdboot
-Date: Fri, 18 Apr 2025 14:39:34 -0500
-Message-ID: <20250418193943.953952-1-nm@ti.com>
+Subject: [PATCH V2 8/9] configs: am67a_beagley_ai_a53: Enable additional
+ features
+Date: Fri, 18 Apr 2025 14:39:42 -0500
+Message-ID: <20250418193943.953952-9-nm@ti.com>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20250418193943.953952-1-nm@ti.com>
+References: <20250418193943.953952-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,44 +84,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Spin 2 of the series.
-Just happened to get a BeagleY-AI at desk and happened to test master
-branch (7dd49a9264a6 drivers: scsi: Add 'erase' support), noticed a few
-issues which were rather easy to solve.. so, here we go:
+Enable basic EFI debug features, switch over to stdboot, enable GPIO,
+LED and PMIC used on this platform. And enable UHS mode support for SD
+cards in U-Boot.
 
-Current series is based off:
-master 71f497a6d390 ("Revert "power-domain: Add refcounting"")
+Unlike other BeagleBoard products, BeagleY-AI does not have
+alternative onboard non-volatile memories, so capsule support does not
+make sense.
 
-BootLog: https://gist.github.com/nmenon/d5d761371515ce0e9cc77021533c34d7
+Acked-by: Andrew Davis <afd@ti.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Changes Since v1:
+- Andrew's ack, and improvements suggested by Jon.
 
-Changes since V1:
-- cosmetic fixups and pick up of acks
+V1: https://lore.kernel.org/r/20250411225717.3117370-9-nm@ti.com
 
-V1: https://lore.kernel.org/all/20250411225717.3117370-1-nm@ti.com/
+ configs/am67a_beagley_ai_a53_defconfig | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-Nishanth Menon (9):
-  board: beagle: beagley-ai: Add pattern match for MAINTAINERS
-  arch: arm: dts: k3-am67a-beagley-ai-u-boot: Mark main_gpio1 as
-    bootph-all
-  beagle: beagley-ai: env: Set up the boot devices and boot methods
-  beagle: beagley-ai: env: Setup scripts for LED control
-  beagle: beagley-ai: env: Enable DFU env options
-  configs: am67a_beagley_ai*: Use saveddefconfig
-  configs:am67a_beagley_ai*: Drop un-necessary config options
-  configs: am67a_beagley_ai_a53: Enable additional features
-  doc: beagle: Add BeagleY-AI documentation
-
- arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi |   4 +
- board/beagle/beagley-ai/MAINTAINERS          |   4 +-
- board/beagle/beagley-ai/beagley-ai.env       |   7 +-
- configs/am67a_beagley_ai_a53_defconfig       | 165 ++++++++++---
- configs/am67a_beagley_ai_r5_defconfig        | 109 ++++++++-
- doc/board/beagle/am67a_beagley_ai.rst        | 244 +++++++++++++++++++
- doc/board/beagle/index.rst                   |   1 +
- doc/board/ti/k3.rst                          |   1 +
- 8 files changed, 494 insertions(+), 41 deletions(-)
- create mode 100644 doc/board/beagle/am67a_beagley_ai.rst
-
+diff --git a/configs/am67a_beagley_ai_a53_defconfig b/configs/am67a_beagley_ai_a53_defconfig
+index cbf19a03b136..9a5172cda1f3 100644
+--- a/configs/am67a_beagley_ai_a53_defconfig
++++ b/configs/am67a_beagley_ai_a53_defconfig
+@@ -32,7 +32,7 @@ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
+ CONFIG_AUTOBOOT_DELAY_STR="d"
+ CONFIG_AUTOBOOT_STOP_STR=" "
+-CONFIG_BOOTCOMMAND="run findfdt; run envboot; run distro_bootcmd"
++CONFIG_BOOTCOMMAND="run set_led_state_start_load; run envboot; bootflow scan -lb; run set_led_state_fail_load"
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_PAD_TO=0x0
+@@ -49,7 +49,9 @@ CONFIG_SPL_RAM_DEVICE=y
+ CONFIG_SPL_THERMAL=y
+ CONFIG_SPL_YMODEM_SUPPORT=y
+ CONFIG_CMD_CLK=y
++CONFIG_CMD_GPIO_READ=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_EFIDEBUG=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_UPSTREAM=y
+@@ -81,6 +83,10 @@ CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
+ CONFIG_DA8XX_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_LED=y
++CONFIG_SPL_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_SPL_LED_GPIO=y
+ CONFIG_DM_MAILBOX=y
+ CONFIG_K3_SEC_PROXY=y
+ CONFIG_I2C_EEPROM=y
+@@ -88,6 +94,7 @@ CONFIG_SPL_I2C_EEPROM=y
+ CONFIG_FS_LOADER=y
+ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_SPL_MMC_SDHCI_ADMA=y
+@@ -99,12 +106,15 @@ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_SINGLE=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_TI_SCI_POWER_DOMAIN=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_TPS65219=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_SPL_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_SPL_DM_REGULATOR_GPIO=y
++CONFIG_DM_REGULATOR_TPS65219=y
+ CONFIG_K3_SYSTEM_CONTROLLER=y
+ CONFIG_RESET_TI_SCI=y
+ CONFIG_DM_SERIAL=y
 -- 
 2.47.0
 
