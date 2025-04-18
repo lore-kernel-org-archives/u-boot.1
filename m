@@ -4,59 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79D8FC369CB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 04:32:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91073C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 08:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AA5F831BF;
-	Fri, 18 Apr 2025 06:31:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CBEB482EC6;
+	Fri, 18 Apr 2025 10:15:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TYyDqIk6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cGPZW3Bg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B44683156; Fri, 18 Apr 2025 06:31:55 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8CE8F830A0; Fri, 18 Apr 2025 10:15:39 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD7EE8312C
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 06:31:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8376F82D57
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:15:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-106-148.46.114.pool.telefonica.de
- [46.114.106.148])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 5168E3FFD8; 
- Fri, 18 Apr 2025 04:31:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1744950709;
- bh=+BEgbdUEy/GxvCswS4f2Yz3a8Biw6XueU8PtZA6PgQ4=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=TYyDqIk6ShSF7ByzP7a7VhM6FBEsYrwHpBQx5SMzUu0vufNuc2KACwfEcSVg6OXSV
- pZi6Gja6NGfofFNbXpc8WFpW8Md70TTpPuPQLrS13/ksTVepAWQzEmPXZ+Jy5qV5WB
- sEXb2mZSF7Aoeaz0SQwbCjFW6H/w4yy1cAVrDDqhVMH2f/qMwKDLP++0MwIsnY8f/8
- 26R5B58N/eBZskkm9MKd9CK/y2JnftHlKDtn42avwccFhIrm1Vq6bbG3pGr9YuaRZS
- iC5F99VG9gkMtYR4xZU9E10TOjHPJHo1mr8b0zIG9n80zl7gHeME+hRuJdEgW7b5ER
- lh8v7VxeXngfQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v4 3/3] doc/buildman: describe using fragments
-Date: Fri, 18 Apr 2025 06:31:37 +0200
-Message-ID: <20250418043137.537340-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250418043137.537340-1-heinrich.schuchardt@canonical.com>
-References: <20250418043137.537340-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5499c5d9691so1987594e87.2
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 01:15:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744964137; x=1745568937; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DRFhT7WfMdhEOI9FLRMncMKgWxDpiHAsW6oVIaHa9HU=;
+ b=cGPZW3BgJYmXsPgRdy7tUMbqClQiVGaamHTA9xeVAITjzGJPd1fWmoBBlBoVLhXqVi
+ IwjzLa4BlqePhYD415OQile7OyQEyq65Isq2wYf3czstnFcVUuYJM9FIoxmyh97zlegF
+ LYDMjvcZWnLYCtYuUm/W2i3s8qtYhUUDcmOl1/kovOQoH8LK9aJHeNY0X8Jq5/+8UnYJ
+ U6ujf1Q1r7NoJ3Pr4HzVtXqVfp8KwO6rO0+rgEtjCo4BeLz5q2pBAC0jd+QcfZiLm7d1
+ h6JMWBkwjD7ytS4ATxKmiJk7twSDhCQ2ziJ1LEONhRLHcJ2ZpYIywwuZLVeBoC4xZ/zx
+ GWMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744964137; x=1745568937;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DRFhT7WfMdhEOI9FLRMncMKgWxDpiHAsW6oVIaHa9HU=;
+ b=S4jUwL0QtySb1uEOkMc99N98WTmsFHzw9tRofVOo9mIbe+NedcVUpYHj1ovgtsuf2p
+ v9Mtd03Zt4JHieBqpDFncYMkqlSR+2e7guoCusJ8eSt3hoKbwrMkFzh67bu8tUgzvGYX
+ 75SsHYyjxF8JfZdLiks4Trc57oKqIlmQ7qaVOVIh5vh7an16rOJi4wLErQ39lnSpXjwd
+ 33N+DYqmg6DIrIgp9PiEfmUaa49xnXieyLFt6VMxKwL+gmu8cp9+phob9hHf5m7i845A
+ j5JVrOs8OUrdkxtCMAE/rYYvedICAEpw7/ybDnMUuwU8FzceEYlb3eIVsaWTGj0hjwHN
+ kmUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0rLfvHRQInlJ491kIKB1FdKhxhwq/gZxPTjT/p5f6orepK/jKY9eycw1TIgYKrTkKwsuEJaM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxni4fPAIQt9gmvURtVamftLE1Kh8vepwxg2hGCl49jq0YAtZE2
+ aQmP8bOsH5WZCwkFkiPlA9HjXzO/JhS5+T3piN/RQs0jiU8B5eBW
+X-Gm-Gg: ASbGncv5nlHAYGCYBOXX48FIkXhoSllUSzygUQtatb5ByTXRGRvEYDXBB0Kmy/XejuP
+ PTj70S5BxaUrvmiwCtNFSySEQi4xzyKtTf1r3SF/7zKWv7Nuv3RCOuxV1YRmwwlvCrvI5iJbcbL
+ j2aALn4jy87p6/YiyXqqIKST94VALEpRU3/T91bJUFW1sLUWsawovgGcpmYfe69lEcAlBxRdIaN
+ HC7TxatMzqjVxXl1iFZecNm4uELI6B1ywS4KxHeM1fABr74liBIm4Gwa33GXM2lobBACQnNiXYg
+ y9S/9LYiJNwQA+uadL4SN3olUP+fBDZv2NLRNjP8H11bEqQMkQsElb0O3FlRDG6Gex3pgNQTFrG
+ AWnpFpA/UIlsKvl4/Now=
+X-Google-Smtp-Source: AGHT+IHtfwaTvQeFVSwfYF/NTYQfLhZxF6zK2DqVszlKsavuM9mPMHxwzQcgF+sgAcu3iAll1N55oQ==
+X-Received: by 2002:a05:6512:ace:b0:549:86c8:1132 with SMTP id
+ 2adb3069b0e04-54d6e627893mr637217e87.17.1744964136547; 
+ Fri, 18 Apr 2025 01:15:36 -0700 (PDT)
+Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
+ [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-54d6e5e47d1sm127145e87.159.2025.04.18.01.15.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Apr 2025 01:15:35 -0700 (PDT)
+From: ant.v.moryakov@gmail.com
+To: ant.v.moryakov@gmail.com,
+	u-boot@lists.denx.de
+Cc: Maks Mishin <maks.mishinFZ@gmail.com>
+Subject: [PATCH] tools: Fix handle leak in mmap_fdt function
+Date: Fri, 18 Apr 2025 11:15:23 +0300
+Message-Id: <20250418081526.11327-2-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250418081526.11327-1-ant.v.moryakov@gmail.com>
+References: <20250418081526.11327-1-ant.v.moryakov@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,64 +100,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Describe the new --fragments parameter
+From: Maks Mishin <maks.mishinFZ@gmail.com>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v4:
-	Describe the invocation of merge_config.sh
-v3:
-	no change
-v2:
-	new patch
----
- tools/buildman/buildman.rst | 28 ++++++++++++----------------
- 1 file changed, 12 insertions(+), 16 deletions(-)
+The handle 'ptr' is created at fit_common.c:91 by calling 
+function 'mmap' and lost at fit_common.c:127: 
+Added call of free for `ptr` if ptr != MAP_FAILED.
 
-diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-index 07ecc5c110c..0729f15f2b5 100644
---- a/tools/buildman/buildman.rst
-+++ b/tools/buildman/buildman.rst
-@@ -1126,27 +1126,23 @@ later comparison.
- defconfig fragments
- -------------------
+Trigger was found by the Svace static analyzer.
+
+Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
+---
+ tools/fit_common.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/fit_common.c b/tools/fit_common.c
+index d1cde16c1c..135e105929 100644
+--- a/tools/fit_common.c
++++ b/tools/fit_common.c
+@@ -123,6 +123,7 @@ err:
+ 		close(fd);
+ 	if (delete_on_error)
+ 		unlink(fname);
++	free(ptr);
  
--Buildman provides some initial support for configuration fragments. It can scan
--these when present in defconfig files and handle the resuiting Kconfig
--correctly. Thus it is possible to build a board which has a ``#include`` in the
--defconfig file.
-+A comma separated list of configuration fragments can be added via the
-+--fragments parameter to all processed defconfig files, e.g.
- 
--For now, Buildman simply includes the files to produce a single output file,
--using the C preprocessor. It does not call the ``merge_config.sh`` script. The
--redefined/redundant logic in that script could fairly easily be repeated in
--Buildman, to detect potential problems. For now it is not clear that this is
--useful.
-+.. code-block:: bash
- 
--To specify the C preprocessor to use, set the ``CPP`` environment variable. The
--default is ``cpp``.
-+    buildman -k qemu-riscv64_smode --fragments acpi.config
- 
--Note that Buildman does not support adding fragments to existing boards, e.g.
--like::
-+Buildman invokes ``make`` passing the defconfig file and the fragment files as
-+target arguments. In ``scripts/kconfig/Makefile`` the script ``merge_config.sh``
-+is called for each fragment file to add it to the configuration.
- 
--    make qemu_riscv64_defconfig acpi.config
-+Buildman also supports configuration fragments that are included in defconfig
-+files via an ``#include`` statement. It can scan these and handle the resulting
-+Kconfig correctly.
- 
--This is partly because there is no way for Buildman to know which fragments are
--valid on which boards.
-+To specify the C preprocessor to use, set the ``CPP`` environment variable. The
-+default is ``cpp``.
- 
- Building with clang
- -------------------
+ 	return -1;
+ }
 -- 
-2.48.1
-
+2.34.1
