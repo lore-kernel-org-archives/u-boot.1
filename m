@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B519C369AB
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 17:20:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 013C7C369CA
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 17:20:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 234F883290;
-	Fri, 18 Apr 2025 19:20:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 775E38329B;
+	Fri, 18 Apr 2025 19:20:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H2HPjc6L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JNWUmzmM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB95C832E6; Fri, 18 Apr 2025 19:19:59 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 4A17283190; Fri, 18 Apr 2025 19:20:06 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D80A883190
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 19:19:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7279F832E6
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 19:20:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5f6222c6c4cso2300594a12.1
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:19:57 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5499659e669so2283184e87.3
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 10:20:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744996797; x=1745601597; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tYeRnDftBRt+VKV13TlJ7mnxzM8ENwUkZt23o5+ovq4=;
- b=H2HPjc6LXQNBieHjSQWQwHq9utI1rP4VrUFCdUcyMF+B6NsueLPtJTbpMwrAZVLrii
- q0f55BWT9e2LaRYlNLYnhyNQui0qEsrZTNSXyP23Q/QmpBLrCeh3AQybf6tKTg6gbeaQ
- j3ye9WA80mocOAU9MiYJNouwRH+oE/8jxuRtU=
+ d=gmail.com; s=20230601; t=1744996799; x=1745601599; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vFW/qomCO/1pp+94VCNaYlUGVZoTD3BsZLzogVg5bqU=;
+ b=JNWUmzmMFfhlfAdnVyOOtLXA/eTDBIvWcVmpT7Q+LhoZ1BMm2T81cj2YgD3xpZoRNX
+ 0HJwQafZxqQkzXUVddLqVyrt7dUcB1TbuSL/8INsqdx9pzRmV/ad+kcE5aCvhsxrnBjJ
+ rVDA3gfkTfpSAS0vlN9tR6LmEi8YEcw/DfXaAH60YBe8iooxyIxsU9X+uwQiM3iGYVRy
+ Ue50OyE/U3E6IbXCdouqu/PjvTfta1vkievLLyhN2Mh085+CEX5crpWq7ExEYFfyVami
+ zD/ntZ35eC7EofRV4OP8cSYI0UQsTpXJb7mHKzHATkxK2TBoCy4GY+m0uVIEkOqGII/W
+ x0kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744996797; x=1745601597;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tYeRnDftBRt+VKV13TlJ7mnxzM8ENwUkZt23o5+ovq4=;
- b=TAXvYzuvPTEhlAEmHK08D8Osg9p4AxJetnSrITooVSikGhJ0hs0AE9k9QpA8YtKy56
- ekm4rGsb7PjXnkrCxCMgERPGGghnF3YTzivNkwe+OI+bv0x6QXq+++g8gRK/Vr2Fdt9i
- 6rBSGQSA6EBuz3mNSqv7s5Y4OOexmavjhA6COSCCt4MvhE/7pH+R3YpprN+ZL5mZlu8m
- HreDXjsUO6eSU06lMf9FcX0/mYcDOhVlWhtpWLSZHJXh2VjJm3N1yf02mzp5duoBy/mk
- u66swUfT2FjX/zfQREONe5FlNf5vtrsqQI1w5IBXGWN9E5F5AyXP94XGvmOws5LZhvvh
- ZX+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUz5D9Uwz7Mp1oqhOr96EYzBoTlRdcyEEZB0iKI2SpSI/pCg/rwLuZbC0kJK0m6e2I53chhPI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVxFfrPbUd0esxzrgf/1TzkdFqp8PFSJxaj/hQnz7Ynsa+jL4/
- sl+SI/CfCGVbu+wQI2m7K0di0GaFUAnkoS/XBI4AIX9aDV5ExbIdFU6HVolrHGf2L7TvZyNdS5K
- tgfbJ/hQ+5FKyAMc/gM91pDb7wLwHHtTloPFM
-X-Gm-Gg: ASbGncv1CG2l2auekTBvteX38OMVxyU3InQzYtLpaKrP2PjpvkMpb1HPtpgD1W0/fWt
- MosFaNg4NweKu1Puy+bdg8V+LnkODFt3/IJl8YHaq/dtpBz4LCQmM1C8Ar4i865NlHRENgbgvCt
- uf19QVVWOPRMFAcQBoYDuWH7c=
-X-Google-Smtp-Source: AGHT+IFdalsSD5Bu/45U8/d/GjF8femDxCFyb+/2HGVnJTWmr0GvPi5FW+78uoeT/T+0kiscuER6Cn3OqKlBfNXO5n4=
-X-Received: by 2002:a17:906:b88d:b0:acb:849d:1874 with SMTP id
- a640c23a62f3a-acb849d20c4mr88221966b.16.1744996797332; Fri, 18 Apr 2025
- 10:19:57 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744996799; x=1745601599;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vFW/qomCO/1pp+94VCNaYlUGVZoTD3BsZLzogVg5bqU=;
+ b=lWiqFpA9u0zt64x5FN2BvTkwVFYLgQ/3uhv3axMjf2CdSZHIBtsweoWEGs6r91m704
+ wwsjnHsbZBo/6izJYajJMwSAaZVRyFWi1bKQkcU8aLniMz+bz1WyaLrq2pRH0QmRLHXP
+ R6pFCyGXKh8M+7RWyrG6npo/xliYjoPTBZTXIjPHvqvxpYKEG2V79aKPo4ZEIknKTYtN
+ ECpmcGLF9mQiL3qlWI7NexSbYZhs7bKrt2QiJFQRgBHEpusHBhXlqHLB9SM9ciZ8BJ2i
+ p99OF0VUI0bHPz5yn/udJ/9eJgd0IfD7o3DMQtSlj2fVb7HzzT1En/Eoo2K6GsgZKSRy
+ IUnA==
+X-Gm-Message-State: AOJu0Yz1GpL7+zPpJNVsvXn0V5G3V6gjQvqvgFDnE59hu0N9zNd0OZ7t
+ Xvb0gasPMlxTcrLVduK729G8wHpoe8cIhxfiQyhqtEm0ShR8buE+5NtMxg==
+X-Gm-Gg: ASbGncuzK/50sD3nnNbvrbnpa9+dz2Bwe/ZpJnM4eybiWPRi2jMNup3a2mMcDdxgP7R
+ K67z20YgFWgITw8NThaMCLG9ree3zP62ULhZLlQr3VhUXXEbRF23QenKz3kN4XBzeeT6qi0tXc4
+ V3v/T7NKrUmeyaIoM3pSRS0KxigbDXKqgly69w7Gm21+5W4FXUuDtVcDdrxowVtoUgM4Rw1JBot
+ WoEhJ0HbN6joQ5isYHKKKuULYRl+QYwJJ3m90iZYe7tWNueylLCVCDAT0ym0t5+wTJxZw10KJmZ
+ LYTkOKbzLuc3jI4no9G3v3LHVcOYD2KRrppNejQMYA4yF0CJw4J9T0iMRUMt4hMHzke2kWmXL+C
+ zyCa6RVIz
+X-Google-Smtp-Source: AGHT+IHwpnFbCTzf8/OVd4guhCIJI8e8WUCartuLnazqCAc0KxWkkEZNKrlOlajPArmnS/5sU8KftA==
+X-Received: by 2002:a05:6512:398d:b0:54d:65b7:1375 with SMTP id
+ 2adb3069b0e04-54d6e66cecdmr1141204e87.48.1744996799114; 
+ Fri, 18 Apr 2025 10:19:59 -0700 (PDT)
+Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
+ [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-54d6e540decsm238554e87.73.2025.04.18.10.19.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Apr 2025 10:19:58 -0700 (PDT)
+From: ant.v.moryakov@gmail.com
+To: u-boot@lists.denx.de
+Cc: Maks Mishin <maks.mishinFZ@gmail.com>,
+ Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] tools: Fix memory and file descriptor leaks in
+ read_full_file()
+Date: Fri, 18 Apr 2025 20:19:47 +0300
+Message-Id: <20250418171947.172163-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250418-binman-pubkey-dir-v2-0-b6b90a765ffe@cherry.de>
- <20250418-binman-pubkey-dir-v2-2-b6b90a765ffe@cherry.de>
-In-Reply-To: <20250418-binman-pubkey-dir-v2-2-b6b90a765ffe@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Apr 2025 11:19:41 -0600
-X-Gm-Features: ATxdqUHAOPn42K7maQop0de8hXYnmHjPKPfe68KqH2osqckYkqBmkyfYHO6awgo
-Message-ID: <CAFLszTh49HqGC4P2=nefc8vgdWrLe_p6HoyoEZ=FkadNBLsp3Q@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] binman: etype: u_boot_spl_pubkey_dtb: provide more
- explicit error for key-name-hint with path
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
- Alexander Kochetkov <al.kochet@gmail.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,41 +96,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 18 Apr 2025 at 05:26, Quentin Schulz <foss+uboot@0leil.net> wrote:
->
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->
-> key-name-hint property in u-boot-spl-pubkey-dtb binman entry may contain
-> a path instead of a filename due to user mistake.
->
-> Because we currently assume it is a filename instead of a path, binman
-> will find the full path to the key based on that path, and return the
-> dirname of the full path but keeps the path in key-name-hint instead of
-> stripping the directories from it.
->
-> This means mkimage will fail with the following error message if we have
-> key-name-hint set to keys/dev:
->
-> binman: Error 1 running 'fdt_add_pubkey -a sha256,rsa2048 -k /home/qschul=
-z/work/upstream/u-boot/keys -n keys/dev -r conf /home/qschulz/work/upstream=
-/u-boot/build/ringneck/u-boot-spl-dtbdhsfx3mf': Couldn't open RSA certifica=
-te: '/home/qschulz/work/upstream/u-boot/keys/keys/dev.crt': No such file or=
- directory
->
-> Let's make it a bit more obvious what the error is by erroring out in
-> binman if a path is provided in key-name-hint (it is named key-name-hint
-> and not key-path-hint after all).
->
-> Fixes: 5609843b57a4 ("binman: etype: Add u-boot-spl-pubkey-dtb etype")
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  tools/binman/etype/u_boot_spl_pubkey_dtb.py              |  2 ++
->  tools/binman/ftest.py                                    |  7 +++++++
->  .../binman/test/348_key_name_hint_dir_spl_pubkey_dtb.dts | 16 ++++++++++=
-++++++
->  3 files changed, 25 insertions(+)
->
+From: Maks Mishin <maks.mishinFZ@gmail.com>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Fixes potential memory and file descriptor leaks in the read_full_file()
+function. If malloc succeeds but read() fails, the buffer was not freed,
+and the file descriptor was not closed. This patch ensures both resources
+are properly released using a common exit point.
 
-The change log seems to be missing?
+Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+---
+ tools/zynqmpbif.c | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/tools/zynqmpbif.c b/tools/zynqmpbif.c
+index 82ce0ac1a52..33c68eac9f3 100644
+--- a/tools/zynqmpbif.c
++++ b/tools/zynqmpbif.c
+@@ -205,7 +205,8 @@ static const struct bif_flags bif_flags[] = {
+ 
+ static char *read_full_file(const char *filename, size_t *size)
+ {
+-	char *buf, *bufp;
++	char *buf = NULL, *bufp;
+ 	struct stat sbuf;
+ 	int len = 0, r, fd;
+ 
+@@ -214,24 +215,29 @@ static char *read_full_file(const char *filename, size_t *size)
+ 		return NULL;
+ 
+ 	if (fstat(fd, &sbuf) < 0)
+-		return NULL;
++		goto out;
+ 
+ 	if (size)
+ 		*size = sbuf.st_size;
+ 
+ 	buf = malloc(sbuf.st_size);
+ 	if (!buf)
+-		return NULL;
++		goto out;
+ 
+ 	bufp = buf;
+ 	while (len < sbuf.st_size) {
+ 		r = read(fd, bufp, sbuf.st_size - len);
+-		if (r < 0)
+-			return NULL;
++		if (r < 0) {
++			free(buf);
++			buf = NULL;
++			goto out;
++		}
+ 		len += r;
+ 		bufp += r;
+ 	}
+ 
++out:
+ 	close(fd);
+ 
+ 	return buf;
+-- 
+2.30.2
