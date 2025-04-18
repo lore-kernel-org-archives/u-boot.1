@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C5AC369CA
-	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D6CAC369AB
+	for <u-boot@archiver.kernel.org>; Fri, 18 Apr 2025 14:13:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43CB0832F7;
+	by phobos.denx.de (Postfix) with ESMTP id 964A68333D;
 	Fri, 18 Apr 2025 16:11:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n2TAe6FM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aXc9psZw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CDBC8331F; Fri, 18 Apr 2025 16:11:45 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id A3E0883208; Fri, 18 Apr 2025 16:11:46 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2356A832E6
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CD5783253
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 16:11:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-39c1efbefc6so1200973f8f.1
- for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:42 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43cfebc343dso15489775e9.2
+ for <u-boot@lists.denx.de>; Fri, 18 Apr 2025 07:11:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744985501; x=1745590301; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744985502; x=1745590302; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jkWL1MaiqaXAhXj3hNcPT7tFwLYqRvBzsR/OrfCGyek=;
- b=n2TAe6FMizprySNQzSP0dWNQm2jQ074d4euUjW5aSlc0C31J4dX5qg6eutQ70Zbw7V
- js/BtI+YZ6T9Jzjq/y3fB66kI4D+eVA/gcRBFWIM4qmgSEAViwU6Wucxfy44g242Rd8U
- Bo5WwpniRyPqPg8EXc/xQC7AcXTCS4ScMAupd9YnCYxKRgWVBDkFuHhJp0Kc/FgztLJI
- ZlHZM7G83431qII2obAzLL6xk43FLVw2YtDt3s7bm17yoVHiq3yp96Iqdq68Mx5Od1cK
- oVN1yp17M73TyFf7G/PPCoaEWkjlCzSarThfbnHISlxHl6xpX3EntlDpKnGfutujl/SY
- Gj/A==
+ bh=On1IMPWoplq7DV/CKkFuhHU7kI0Fa68u+tVWTz1RtrI=;
+ b=aXc9psZwWPzGcl/ykxIckXL1ntKWMFcy5HW/XeTg0iiM2055d2S5f81Uv5EMs+IX9g
+ EPRzcpseXHVXiS9ZVzsXpDvnBH+vH8wPSGmTKI7eDwP/gJ5DhmcNtxVsWXI7+lAlIFp9
+ qfxuvR7+xJSUsz95L/lJ98rHF9if7WTTXlfCOHW4SvbDNPdo4xWN44kV9MknG6H6kRLx
+ 16S7ApsH1a69B7xQ3+NMgrfD+y3mUyFmKcdBL01p6+HLkPJL0in28WrXrpppwEmLkDgA
+ vHHkKKpQWcX68euiO7UtqUe7sNkskXj2UUwxCW4uPbtS0uxKzjxbhPFDgZBBIlNWFpjM
+ KonA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744985501; x=1745590301;
+ d=1e100.net; s=20230601; t=1744985502; x=1745590302;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jkWL1MaiqaXAhXj3hNcPT7tFwLYqRvBzsR/OrfCGyek=;
- b=DYQ6/KFh1opP2GfNZ8jcSV0Eto/JoNiALv0hBNaALiLT5CpirJ80WsBpZ/RnN3tZLn
- 9hZ463gN/oyJKztzqUAOa2iJz52nY3accEBOCNmGwVLBvLYC99rkfrf/ShLX+Nod86B+
- TOVd0wPHzTfz/Gg0QoaZ/54WxMmEpxehhTSqPRaocaapcU3aCsHwqjVhEvGTBE+40u/w
- lILpI6Vok/o8eQk80Ww90xCx2SNrKljfwDW/Fp9zoGBz2uqcXkSdLHs5xid1Z5Iw6mY3
- osLa9crS+0TO72dbLZncmvGENj0y7GREnrSO/Q8TO3Zwdt1REkQU7uRO+7Kbq0uiFRfh
- GtJg==
-X-Gm-Message-State: AOJu0YyaM1CpW/tRhSotHlXmKfP7MwV6hToqZajDj+m5BpbGdlUpYTxs
- z0RSsbXyszWS1UzpqomdsOxELnIgi2T6yXMEoQUVT3IqO1Df6nu2EpHsMwuO+GbPZwFD2f1P2OX
- GPLVE9w==
-X-Gm-Gg: ASbGnctbqVRuMoUTZFy8GS92s9pNZpeVc1S/ZpO1mcSYSCKiLFYUaBGK961vo4NFN6Z
- WZ+Rxdqg/WFUiAVc8EgW1zIlZW13cLH9pxxXlAwUwvNNKRwAVuwXQIMt1i5wIpfdJQDVuoSiKtm
- Tk2ZuvvlRPYAibhYwoTl6lc9Ls3dL29ORO1x381nAM009f/HnEsA/Fnx8JzwFmCVQ5lVx9pjBms
- osEKQlCSvfSZgkAteBD0xgFnyqwmjfh834OMGoxgryCNTGwQdN1tCRnOjQQU7kA8fJaekXAlkjF
- ZK9V0cGrlZjPJ0f0u5mO0SRBsQNIU+3lES6iDq2PUUY6gDqbfw==
-X-Google-Smtp-Source: AGHT+IHxN9aeSN8wdRGVTYjKu7UIVFWFPq5UJn/E4nwc94aUkv4bcE02CYJMWnKz9WsamOov5FRNRw==
-X-Received: by 2002:a05:6000:1acb:b0:39c:1258:2dc8 with SMTP id
- ffacd0b85a97d-39efbaf211bmr2256119f8f.57.1744985501438; 
- Fri, 18 Apr 2025 07:11:41 -0700 (PDT)
+ bh=On1IMPWoplq7DV/CKkFuhHU7kI0Fa68u+tVWTz1RtrI=;
+ b=eZm8MJAb6nUQGPj0WUT+6D26coqe9ogwnQQyStAWeRRaOLmQu9oZ/oZFWC5hEpu8Ww
+ E7jOjZyB0NZopLjIEEulYCUCtI9kHLINKMZ8jo01Cn86UUjr3XvPIVVmBuhhCOyxTcoM
+ JREcM5V+aSnydZT12Kc7F1U+TfUrNV5TE//OAAB/z4V5/HFIZBd76Cw92Fk0B7rclpYB
+ 4udPKha8juZu1XJDp7s+0M10eTe/AUyL+uTCXKwVUIdjHtLCx9x0N0wa34AQFzw6w0Qh
+ 8Wk4Vfrtz084wjP5o1qToxX0a2TAvxxETbmhHJdU1W0F11dtaJ3sc1FBgdQIchKgNjYC
+ ludQ==
+X-Gm-Message-State: AOJu0YzxKs3+sI16vkL3QVuSg8idlDfLaUefmGYWQRCR0pA8vyUBy1JO
+ czOPuFZ0EppY0aydSPvw5hh1635IjYNklZwr217LotRmQZ/aszki3p8i/2IVk1/Eeait/Tfenv+
+ fvIh9Jg==
+X-Gm-Gg: ASbGncsEKFpjtr2/HVjNcPu8tYaki76O17rk5IAC6ics9yb8TqJG41RJB5TVQAFuIO6
+ la0KjXOfBV0Y4tWQcMxtMB+GVRJ0uEOw5pPzYEbWSC6huXRZoggC55dIw8Dwf/fICdtMASKqLJh
+ h9xqNEf2No1nm5Qy1Ob1/GDFw6EEu9B1HevtNZD14fj3aFoGuHzWwy0a9yqzn8AioON3IkY1n7D
+ 4yHOeJOVdjYq1yP/0wffN307zyhRhNA6bQ95OVIQdSK5Z2b62QVOXTdVhoayQvhKH18x0yd6HGM
+ qnlUgxM5AUlmHR7pNt2H+GSC4A5dHZ+w3KV71J1SWyz1BHG+3g==
+X-Google-Smtp-Source: AGHT+IHg5G6Q7FVWVN/REZjfRZ8dPb+rnh6hqNtyEMD9qRZhMxSWryqrBmLoFZN4sWROboLTFHa3Zg==
+X-Received: by 2002:a05:600c:34c1:b0:43d:fa58:81d3 with SMTP id
+ 5b1f17b1804b1-4406ac227fbmr21989565e9.32.1744985502215; 
+ Fri, 18 Apr 2025 07:11:42 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:1526:5ffd:d63c:cc85])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.40
+ 5b1f17b1804b1-4406d5bbcc3sm23734385e9.19.2025.04.18.07.11.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 18 Apr 2025 07:11:41 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v6 11/17] test: lib: add uthread_mutex test
-Date: Fri, 18 Apr 2025 16:09:39 +0200
-Message-ID: <20250418141114.2056981-12-jerome.forissier@linaro.org>
+ Casey Connolly <casey.connolly@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v6 12/17] dm: usb: move bus initialization into new static
+ function usb_init_bus()
+Date: Fri, 18 Apr 2025 16:09:40 +0200
+Message-ID: <20250418141114.2056981-13-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250418141114.2056981-1-jerome.forissier@linaro.org>
 References: <20250418141114.2056981-1-jerome.forissier@linaro.org>
@@ -99,95 +103,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test for uthread mutexes.
+To prepare for the introduction of threads in the USB initialization
+sequence, move code out of usb_init() into a new helper function:
+usb_init_bus() and count the number of USB controllers initialized
+successfully by using the DM device_active() function.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
 
-Changes in v6:
-- Rename static function lib_uthread_mutex() to uthread_mutex() so that
-the test now shows as ut_lib_uthread_mutex in the test log rather than
-ut_lib_lib_uthread_mutex.
-- uthread_mutex_trylock() now returns -EBUSY not EBUSY when mutex is not
-available
+(no changes since v1)
 
- test/lib/uthread.c | 66 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
+ drivers/usb/host/usb-uclass.c | 83 +++++++++++++++++++----------------
+ 1 file changed, 44 insertions(+), 39 deletions(-)
 
-diff --git a/test/lib/uthread.c b/test/lib/uthread.c
-index ad0217485dc..10a94d1c560 100644
---- a/test/lib/uthread.c
-+++ b/test/lib/uthread.c
-@@ -78,3 +78,69 @@ static int uthread(struct unit_test_state *uts)
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index bfec303e7af..fa1af8f555a 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -287,6 +287,45 @@ static int usb_probe_companion(struct udevice *bus)
  	return 0;
  }
- LIB_TEST(uthread, 0);
-+
-+struct mw_args {
-+	struct unit_test_state *uts;
-+	struct uthread_mutex *m;
-+	int flag;
-+};
-+
-+static int mutex_worker_ret;
-+
-+static int _mutex_worker(struct mw_args *args)
+ 
++static void usb_init_bus(struct udevice *bus)
 +{
-+	struct unit_test_state *uts = args->uts;
++	int ret;
 +
-+	ut_asserteq(-EBUSY, uthread_mutex_trylock(args->m));
-+	ut_assertok(uthread_mutex_lock(args->m));
-+	args->flag = 1;
-+	ut_assertok(uthread_mutex_unlock(args->m));
++	/* init low_level USB */
++	printf("Bus %s: ", bus->name);
 +
-+	return 0;
++	/*
++	 * For Sandbox, we need scan the device tree each time when we
++	 * start the USB stack, in order to re-create the emulated USB
++	 * devices and bind drivers for them before we actually do the
++	 * driver probe.
++	 *
++	 * For USB onboard HUB, we need to do some non-trivial init
++	 * like enabling a power regulator, before enumeration.
++	 */
++	if (IS_ENABLED(CONFIG_SANDBOX) ||
++	    IS_ENABLED(CONFIG_USB_ONBOARD_HUB)) {
++		ret = dm_scan_fdt_dev(bus);
++		if (ret) {
++			printf("USB device scan from fdt failed (%d)", ret);
++			return;
++		}
++	}
++
++	ret = device_probe(bus);
++	if (ret == -ENODEV) {	/* No such device. */
++		puts("Port not available.\n");
++		return;
++	}
++
++	if (ret) {		/* Other error. */
++		printf("probe failed, error %d\n", ret);
++		return;
++	}
++
++	usb_probe_companion(bus);
 +}
 +
-+static void mutex_worker(void *arg)
-+{
-+	mutex_worker_ret = _mutex_worker((struct mw_args *)arg);
-+}
+ int usb_init(void)
+ {
+ 	int controllers_initialized = 0;
+@@ -305,47 +344,11 @@ int usb_init(void)
+ 	uc_priv = uclass_get_priv(uc);
+ 
+ 	uclass_foreach_dev(bus, uc) {
+-		/* init low_level USB */
+-		printf("Bus %s: ", bus->name);
+-
+-		/*
+-		 * For Sandbox, we need scan the device tree each time when we
+-		 * start the USB stack, in order to re-create the emulated USB
+-		 * devices and bind drivers for them before we actually do the
+-		 * driver probe.
+-		 *
+-		 * For USB onboard HUB, we need to do some non-trivial init
+-		 * like enabling a power regulator, before enumeration.
+-		 */
+-		if (IS_ENABLED(CONFIG_SANDBOX) ||
+-		    IS_ENABLED(CONFIG_USB_ONBOARD_HUB)) {
+-			ret = dm_scan_fdt_dev(bus);
+-			if (ret) {
+-				printf("USB device scan from fdt failed (%d)", ret);
+-				continue;
+-			}
+-		}
+-
+-		ret = device_probe(bus);
+-		if (ret == -ENODEV) {	/* No such device. */
+-			puts("Port not available.\n");
+-			controllers_initialized++;
+-			continue;
+-		}
+-
+-		if (ret) {		/* Other error. */
+-			printf("probe failed, error %d\n", ret);
+-			continue;
+-		}
+-
+-		ret = usb_probe_companion(bus);
+-		if (ret)
+-			continue;
+-
+-		controllers_initialized++;
+-		usb_started = true;
++		usb_init_bus(bus);
+ 	}
+ 
++	usb_started = true;
 +
-+/*
-+ * thread_mutex() - testing uthread mutex operations
-+ *
-+ */
-+static int uthread_mutex(struct unit_test_state *uts)
-+{
-+	struct uthread_mutex m = UTHREAD_MUTEX_INITIALIZER;
-+	struct mw_args args = { .uts = uts, .m = &m, .flag = 0 };
-+	int id;
-+	int i;
+ 	/*
+ 	 * lowlevel init done, now scan the bus for devices i.e. search HUBs
+ 	 * and configure them, first scan primary controllers.
+@@ -354,6 +357,8 @@ int usb_init(void)
+ 		if (!device_active(bus))
+ 			continue;
+ 
++		controllers_initialized++;
 +
-+	id = uthread_grp_new_id();
-+	ut_assert(id != 0);
-+	/* Take the mutex */
-+	ut_assertok(uthread_mutex_lock(&m));
-+	/* Start a thread */
-+	ut_assertok(uthread_create(NULL, mutex_worker, (void *)&args, 0,
-+				   id));
-+	/* Let the thread run for a bit */
-+	for (i = 0; i < 100; i++)
-+		ut_assert(uthread_schedule());
-+	/* Thread should not have set the flag due to the mutex */
-+	ut_asserteq(0, args.flag);
-+	/* Release the mutex */
-+	ut_assertok(uthread_mutex_unlock(&m));
-+	/* Schedule the thread until it is done */
-+	while (uthread_schedule())
-+		;
-+	/* Now the flag should be set */
-+	ut_asserteq(1, args.flag);
-+	/* And the mutex should be available */
-+	ut_assertok(uthread_mutex_trylock(&m));
-+	ut_assertok(uthread_mutex_unlock(&m));
-+
-+	/* Of course no error are expected from the thread routine */
-+	ut_assertok(mutex_worker_ret);
-+
-+	return 0;
-+}
-+LIB_TEST(uthread_mutex, 0);
+ 		priv = dev_get_uclass_priv(bus);
+ 		if (!priv->companion)
+ 			usb_scan_bus(bus, true);
 -- 
 2.43.0
 
