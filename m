@@ -4,62 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51317C369C9
-	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 10:24:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB33C369BD
+	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 12:55:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1AE082A96;
-	Sat, 19 Apr 2025 12:24:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 43C3E82105;
+	Sat, 19 Apr 2025 14:55:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="iExoa+Xp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XimreI6R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EFF082AB1; Sat, 19 Apr 2025 12:24:48 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 62B4D8209F; Sat, 19 Apr 2025 11:44:14 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6B3182CF1
- for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 12:24:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9279810F4
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 11:44:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-106-045.46.114.pool.telefonica.de
- [46.114.106.45])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8228240444; 
- Sat, 19 Apr 2025 10:24:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745058261;
- bh=skYV7PfxWoObskAqhS+BWHlH2mc7APsOErajWDB6GS4=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=iExoa+Xp+k9sGOTRIVv8osCH2rQk9CUN1u2JzfxY3l4RO7SqeHCtNFyKsg9rr6rss
- SEOj+oFKK324ID632zgk3yyxzC+VFaZhceWqWVvxwnhjNokVEnlpmH9Hyq8769lTXI
- USs0z48pPV64IQP2IGMh2J0b1b2vQIBvM3vf2h7tjvsELWZ26ErQaMlgLaaHbGY/ub
- ZSIFWq5h8S+Qwe7pbB8z/YXasj4sd+uFc59+PbOnfDX4bdWggUELzbEE2RyrFtEDIn
- G9M89AZuUUqDxrVL8DjQMJM7RyTULolVk6PI3uhihMVrqqNb+RhIDtfPsbYe6Kmi/5
- 0kIkAd6f/+GTg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Brandon Maier <brandon.maier@collins.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v5 3/3] doc/buildman: describe using fragments
-Date: Sat, 19 Apr 2025 12:23:58 +0200
-Message-ID: <20250419102358.13127-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250419102358.13127-1-heinrich.schuchardt@canonical.com>
-References: <20250419102358.13127-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7399838db7fso2518156b3a.0
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 02:44:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1745055850; x=1745660650; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vHFhnlC+B9D9aMB+LGki8Iy4qVX/C0gWd1F8ZA3sYP8=;
+ b=XimreI6RKIajKUYsC27P2vcVrc2GQzw34G+RLUCxaAK8OII/talZZYSVyf3HxPd9hu
+ 3JJiN6e+bjQ0YfVk7xzeHQxTZALk2gb9mKGF+X4WSLAVjaOT9ubIWkmq6G3L+MasECW4
+ LUorA8ZMnLzIEPCv6myXvLgD7/VXj//npcOVpqkHlmYOnzLYlsTnYz75l9t0u9yuZv2Z
+ LI7eo2bS9RiUeIa8av8yEakdXAMiA1e6UWmS/BDxinjschnSm5MmIgB+c5zdkhdWAvaR
+ EwJ1WIRbZA3rk6KcKS3TpKl0Jk3jMlIpN3ZQ7r3lT8Tmc8TK0PIsbKyWummMjfeOlG9V
+ mmaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745055850; x=1745660650;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vHFhnlC+B9D9aMB+LGki8Iy4qVX/C0gWd1F8ZA3sYP8=;
+ b=j8G9sJ1V7MS8XitiY25B3m9kErZK67zCnSvRrF0LKQlFuSvHAAuHLV76z/U+YEsSZH
+ jDaA6fk1uKYFwvt+g/5wOo/RIxjR6oiXlDKPfXA3mOnj4cP99rpMokMQK2lEGhg310Rv
+ X8z8i4pv+EIC8sEiYSVUdgjcDoVOeeQZpmFu63acrcY7+MZzUa6cNjJh59RCsLAKRuVa
+ fz5nyNFpgrxaSAbQTj4Hi8LUmHQgUN2p3EUMWgvmu0BOoDB4nsplA5KNnIEeDxJ9V4DE
+ ENun4x79iz+paQ4ynbmcOMmi6z5/DqV+rvB8rDfzDatA35JJ14YJmn1G5LM3ucHZm3Lq
+ SuCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX6w0xEJQkS68/tcU8oU4l+/r5bdM0MCdYPOdALx+fLcxjW59pVo1JHkNgBLglPQXOcKj5pNeA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy64KnYSNhhh26wi4csBLJJspJawisFA7EAaxtQ8nGhLAnTo78h
+ pD3FkrVxhvd5UxWObV4+EESpvK0HKA52RTwnCRbHrRIpkJrtHS6j
+X-Gm-Gg: ASbGnctbDhTl5lNTPYrzJq6vFhBbZwU6UznhayPackyy+VgwdtrQrN8K1IPGlj/mTvY
+ J0eTryYPHjLmF9EKyZDqWlTNv1RWoq90/Tbx/tmxgV3ctGK+z7VpNTKI0g0ULTFJtiwR0kE42ce
+ tG03uyeqJlSVvOLcwLjdpcmmMhR5rLLTYuxrfLGkKKrYbspE90g73WieTDiB9i0oLzmJscqXf+5
+ V286U7H5HGJtplmtCGAOOCE/PvY2wB4vvwN0/4hR5mxN8MzbGDU6t1ow88CzCyqmo/dWC3Ccw1k
+ usGYSAT9lg4poZXBf1Lw8RvZiwBSihK5Utvw+urWwacJw0WamuOIQJv6q9/NxChoT8CQEiQq9hx
+ gGnvbnD6CcppcreOlgocL49r624UivdagpCSi
+X-Google-Smtp-Source: AGHT+IGtB13ixnzWExSeNQZ/c+vQkJk6wAj+q6525z14k/vPoT2N8ypx71pnP4jO+y3ekekuFeBJ4A==
+X-Received: by 2002:a05:6a00:3995:b0:736:476b:fccc with SMTP id
+ d2e1a72fcca58-73dc1b5a9fcmr7707013b3a.8.1745055850064; 
+ Sat, 19 Apr 2025 02:44:10 -0700 (PDT)
+Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73dbf8e46basm3073776b3a.69.2025.04.19.02.44.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 19 Apr 2025 02:44:09 -0700 (PDT)
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+To: ilias.apalodimas@linaro.org, jerome.forissier@linaro.org,
+ marek.vasut+renesas@mailbox.org, paul.barker.ct@bp.renesas.com,
+ pbrobinson@gmail.com, lucienzx159@gmail.com, u-boot@lists.denx.de
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com,
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com
+Subject: [U-Boot, v1,
+ 1/1] net: phy: air_en8811h: load the PHY firmware from filesystem on
+ block device instead
+Date: Sat, 19 Apr 2025 17:43:19 +0800
+Message-Id: <20250419094319.148380-1-lucienzx159@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 19 Apr 2025 14:55:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,66 +102,237 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Describe the new --fragments parameter
+Locating the AIROHA FW within the filesystem at the designated partition
+and path will trigger its automatic loading and writing to the PHY via MDIO.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
 ---
-v5:
-	Fix typo comma-separated
-v4:
-	Describe the invocation of merge_config.sh
-v3:
-	no change
-v2:
-	new patch
----
- tools/buildman/buildman.rst | 28 ++++++++++++----------------
- 1 file changed, 12 insertions(+), 16 deletions(-)
+ drivers/net/phy/Kconfig       | 39 ++++++++------
+ drivers/net/phy/air_en8811h.c | 97 +++++++++++++++++++----------------
+ 2 files changed, 78 insertions(+), 58 deletions(-)
 
-diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
-index 07ecc5c110c..0729f15f2b5 100644
---- a/tools/buildman/buildman.rst
-+++ b/tools/buildman/buildman.rst
-@@ -1126,27 +1126,23 @@ later comparison.
- defconfig fragments
- -------------------
- 
--Buildman provides some initial support for configuration fragments. It can scan
--these when present in defconfig files and handle the resuiting Kconfig
--correctly. Thus it is possible to build a board which has a ``#include`` in the
--defconfig file.
-+A comma-separated list of configuration fragments can be added via the
-+--fragments parameter to all processed defconfig files, e.g.
- 
--For now, Buildman simply includes the files to produce a single output file,
--using the C preprocessor. It does not call the ``merge_config.sh`` script. The
--redefined/redundant logic in that script could fairly easily be repeated in
--Buildman, to detect potential problems. For now it is not clear that this is
--useful.
-+.. code-block:: bash
- 
--To specify the C preprocessor to use, set the ``CPP`` environment variable. The
--default is ``cpp``.
-+    buildman -k qemu-riscv64_smode --fragments acpi.config
- 
--Note that Buildman does not support adding fragments to existing boards, e.g.
--like::
-+Buildman invokes ``make`` passing the defconfig file and the fragment files as
-+target arguments. In ``scripts/kconfig/Makefile`` the script ``merge_config.sh``
-+is called for each fragment file to add it to the configuration.
- 
--    make qemu_riscv64_defconfig acpi.config
-+Buildman also supports configuration fragments that are included in defconfig
-+files via an ``#include`` statement. It can scan these and handle the resulting
-+Kconfig correctly.
- 
--This is partly because there is no way for Buildman to know which fragments are
--valid on which boards.
-+To specify the C preprocessor to use, set the ``CPP`` environment variable. The
-+default is ``cpp``.
- 
- Building with clang
- -------------------
--- 
-2.48.1
+diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+index 5b4cf30b0a3..384cef845e1 100644
+--- a/drivers/net/phy/Kconfig
++++ b/drivers/net/phy/Kconfig
+@@ -94,24 +94,33 @@ choice
+ 	depends on PHY_AIROHA_EN8811H
+
+ config PHY_AIROHA_FW_IN_MMC
+-	bool "Airoha firmware in MMC boot1 partition"
+-
+-endchoice
++	bool "Airoha firmware in MMC partition"
++	help
++		Airoha PHYs use firmware which can be loaded automatically
++		from storage directly attached to the PHY, and then loaded
++		via MDIO commands by the boot loader. The firmware is loaded
++		from a file specified by the PHY_AIROHA_FW_PART,
++		PHY_AIROHA_FW_DM_FILEPATH and PHY_AIROHA_FW_DSP_FILEPATH options.
++
++config PHY_AIROHA_FW_PART
++	string "Airoha firmware partition"
++	depends on PHY_AIROHA_FW_IN_MMC
++	help
++		Partition containing the firmware file.
+
+-config AIROHA_FW_ADDR
+-	hex "Airoha Firmware Address"
+-	depends on PHY_AIROHA_EN8811H
+-	default 0x0
++config PHY_AIROHA_FW_DM_FILEPATH
++	string "Airoha firmware DM file path in the filesystem"
++	depends on PHY_AIROHA_FW_IN_MMC
++	help
++		Specify Airoha firmware DM file path in the filesystem.
+
+-config AIROHA_MD32_DM_SIZE
+-	hex "Airoha Firmware MD32 DM Size"
+-	depends on PHY_AIROHA_EN8811H
+-	default 0x4000
++config PHY_AIROHA_FW_DSP_FILEPATH
++	string "Airoha firmware DSP file path in the filesystem"
++	depends on PHY_AIROHA_FW_IN_MMC
++	help
++		Specify Airoha firmware DSP file path in the filesystem.
+
+-config AIROHA_MD32_DSP_SIZE
+-	hex "Airoha Firmware MD32 DSP Size"
+-	depends on PHY_AIROHA_EN8811H
+-	default 0x20000
++endchoice
+
+ menuconfig PHY_AQUANTIA
+ 	bool "Aquantia Ethernet PHYs support"
+diff --git a/drivers/net/phy/air_en8811h.c b/drivers/net/phy/air_en8811h.c
+index 96bb24418a0..8a2a25a8c74 100644
+--- a/drivers/net/phy/air_en8811h.c
++++ b/drivers/net/phy/air_en8811h.c
+@@ -12,12 +12,14 @@
+  */
+ #include <phy.h>
+ #include <errno.h>
++#include <log.h>
+ #include <malloc.h>
++#include <fs.h>
+ #include <asm/unaligned.h>
+ #include <linux/iopoll.h>
+-#include <dm/device_compat.h>
+ #include <linux/bitops.h>
+-#include <mmc.h>
++#include <dm/device_compat.h>
++#include <u-boot/crc.h>
+
+ #define EN8811H_PHY_ID		0x03a2a411
+
+@@ -415,11 +417,6 @@ restore_page:
+ 	return air_phy_restore_page(phydev, saved_page, ret);
+ }
+
+-__weak ulong *en8811h_get_fw_addr(void)
+-{
+-	return (ulong *)CONFIG_AIROHA_FW_ADDR;
+-}
+-
+ static int en8811h_wait_mcu_ready(struct phy_device *phydev)
+ {
+ 	int ret, reg_value;
+@@ -437,85 +434,99 @@ static int en8811h_wait_mcu_ready(struct phy_device *phydev)
+ 	return 0;
+ }
+
++static void crc32_check(unsigned char *name, unsigned char *buf, u32 len)
++{
++	u32 ca_crc32;
++
++	ca_crc32 = crc32(0, buf, len);
++	debug("%s: crc32 is 0x%x\n", name, ca_crc32);
++}
++
+ static int en8811h_load_firmware(struct phy_device *phydev)
+ {
+ 	int ret;
+-	char *addr = NULL;
++	void *addr = NULL;
+ 	struct en8811h_priv *priv = phydev->priv;
+-	int dev = CONFIG_SYS_MMC_ENV_DEV;
+-	u32 cnt = (CONFIG_AIROHA_MD32_DM_SIZE +
+-		   CONFIG_AIROHA_MD32_DSP_SIZE) / 512;
+-	ulong airoha_fw_addr = (ulong)en8811h_get_fw_addr();
+-	u32 blk = airoha_fw_addr / 512;
+-
+-	addr = malloc(CONFIG_AIROHA_MD32_DM_SIZE + CONFIG_AIROHA_MD32_DSP_SIZE);
+-	if (!addr) {
+-		puts("cannot allocated buffer for firmware.\n");
+-		return -ENOMEM;
+-	}
+
+ 	if (IS_ENABLED(CONFIG_PHY_AIROHA_FW_IN_MMC)) {
+-		struct mmc *mmc = find_mmc_device(dev);
++		loff_t read;
+
+-		if (!mmc) {
+-			puts("Failed to find MMC device for Airoha ucode\n");
+-			goto en8811h_load_firmware_out;
++		addr = malloc(EN8811H_MD32_DM_SIZE +
++			      EN8811H_MD32_DSP_SIZE);
++		if (!addr) {
++			puts("cannot allocated buffer for firmware.\n");
++			return -ENOMEM;
+ 		}
+
+-		printf("MMC read: dev # %u, block # %u, count %u ...\n",
+-		       dev, blk, cnt);
++		debug("\nLoading Airoha FW from %s %s\n",
++		      CONFIG_PHY_AIROHA_FW_PART,
++		      CONFIG_PHY_AIROHA_FW_DM_FILEPATH);
++		ret = fs_set_blk_dev("mmc", CONFIG_PHY_AIROHA_FW_PART, FS_TYPE_ANY);
++		if (ret < 0)
++			goto en8811h_load_firmware_out;
+
+-		if (mmc_init(mmc)) {
+-			puts("initializing MMC device failed.\n");
++		ret = fs_read(CONFIG_PHY_AIROHA_FW_DM_FILEPATH,
++			      (ulong)addr, 0, EN8811H_MD32_DM_SIZE, &read);
++		if (ret < 0)
+ 			goto en8811h_load_firmware_out;
+-		}
+
+-		ret = mmc_set_part_conf(mmc, 1, 2, 2);
+-		if (ret) {
+-			puts("cannot access eMMC boot1 hw partition.\n");
++		/* Calculate the CRC32 */
++		crc32_check(CONFIG_PHY_AIROHA_FW_DM_FILEPATH,
++			    (unsigned char *)addr, EN8811H_MD32_DM_SIZE);
++
++		debug("Loading Airoha FW from %s %s\n",
++		      CONFIG_PHY_AIROHA_FW_PART,
++		      CONFIG_PHY_AIROHA_FW_DSP_FILEPATH);
++		ret = fs_set_blk_dev("mmc", CONFIG_PHY_AIROHA_FW_PART, FS_TYPE_ANY);
++		if (ret < 0)
+ 			goto en8811h_load_firmware_out;
+-		}
+
+-		(void)blk_dread(mmc_get_blk_desc(mmc), blk, cnt, addr);
++		ret = fs_read(CONFIG_PHY_AIROHA_FW_DSP_FILEPATH,
++			      (ulong)addr + EN8811H_MD32_DM_SIZE,
++			      0, EN8811H_MD32_DSP_SIZE, &read);
++		if (ret < 0)
++			goto en8811h_load_firmware_out;
+
+-		mmc_set_part_conf(mmc, 1, 1, 0);
++		/* Calculate the CRC32 */
++		crc32_check(CONFIG_PHY_AIROHA_FW_DSP_FILEPATH,
++			    (unsigned char *)addr + EN8811H_MD32_DM_SIZE,
++			    EN8811H_MD32_DSP_SIZE);
+
+ 	} else {
+ 		puts("EN8811H firmware loading not implemented");
+-		free(addr);
+-		addr = NULL;
+ 		return -EOPNOTSUPP;
+ 	}
+
+ 	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+ 				     EN8811H_FW_CTRL_1_START);
+ 	if (ret < 0)
+-		return ret;
++		goto en8811h_load_firmware_out;
+
+ 	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
+ 				      EN8811H_FW_CTRL_2_LOADING,
+ 				      EN8811H_FW_CTRL_2_LOADING);
+ 	if (ret < 0)
+-		return ret;
++		goto en8811h_load_firmware_out;
+
+-	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, CONFIG_AIROHA_MD32_DM_SIZE, addr);
++	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, EN8811H_MD32_DM_SIZE,
++			    (unsigned char *)addr);
+ 	if (ret < 0)
+ 		goto en8811h_load_firmware_out;
+
+-	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, CONFIG_AIROHA_MD32_DSP_SIZE,
+-			    addr + CONFIG_AIROHA_MD32_DM_SIZE);
++	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, EN8811H_MD32_DSP_SIZE,
++			    (unsigned char *)addr + EN8811H_MD32_DM_SIZE);
+ 	if (ret < 0)
+ 		goto en8811h_load_firmware_out;
+
+ 	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
+ 				      EN8811H_FW_CTRL_2_LOADING, 0);
+ 	if (ret < 0)
+-		return ret;
++		goto en8811h_load_firmware_out;
+
+ 	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+ 				     EN8811H_FW_CTRL_1_FINISH);
+ 	if (ret < 0)
+-		return ret;
++		goto en8811h_load_firmware_out;
+
+ 	ret = en8811h_wait_mcu_ready(phydev);
+
+--
+2.34.1
 
