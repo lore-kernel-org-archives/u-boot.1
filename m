@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5C10C369C9
-	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 10:24:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D113C369BD
+	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 10:24:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5794B82AA4;
-	Sat, 19 Apr 2025 12:24:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D92682B33;
+	Sat, 19 Apr 2025 12:24:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bXa2v3v5";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eiHWeXAT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A017082AAA; Sat, 19 Apr 2025 12:24:39 +0200 (CEST)
+ id 2FE8182A31; Sat, 19 Apr 2025 12:24:43 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54BF782AC3
- for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 12:24:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EA2682A96
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 12:24:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-106-045.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id B007B40440; 
- Sat, 19 Apr 2025 10:24:12 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7B2EF40443; 
+ Sat, 19 Apr 2025 10:24:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745058253;
- bh=NkS5XrN63s1eX+S9+EQonyElhonT/gjYxiSlm5N9luk=;
+ s=20210705; t=1745058257;
+ bh=h/K26hTeXV04NM+KiFJNY+KF3VcJTOdaejDs9qVJrHQ=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=bXa2v3v5+WQD1YEgBSCzdchWPq7iJotL6L+ZH22VBOFp3ToHeYhN6LZQUDMM6cgPR
- WOm+MKsqBdAAHWaa6xRWS3sZp3YBwhkx0APwDIMabjjaO+mDeuh9QIjZjP7419RoRL
- x9LM649yD8Crd0mY5lixHv3YFtA8be4Ev/Dsj/UOnpSANJridO3ZAWJ1rbglQw3o4Z
- /Cq7BYgs4LsaR6RuXHFuIaFtN8d1xXVaqL7u+SVvZbcs2rQa6QkWKwJakL3vHJQQO2
- RSuvSNpafJHPbhyUyvw78MTDzn/UX+ku7h5c3MtwEUtEH8QLllAX/LNDndObFqrj+t
- jbDIgveTrY/iA==
+ b=eiHWeXAT7RYVhHxfb19XQ9DXLz4g4HnFDlYhUlUktoKG+8c6jKum7UjE9L8CHp4Ik
+ JddGejHYY0U+rEjq7peCFH6cbF/fEFSRev7lzMj5BPEX12c6Gn5k91BIgWFZOLNnCF
+ ODorwALVSUCYPjkV5BniZKaQyqG29mXyAww2U5xjM9cZl5WcZ+LL1uml2SXOr8JawS
+ Q24mOV/GXVAvQDuHZo+RhfYTtrwC3vHZdjxQ62vYLhk+++jf0OMyKTCD4YHYzaCC21
+ 1jzbWygtLfjbs1XxvmtD0lVigOEFcEKH89BGlg+paI7X9HERK2rXDWKTi1xwyli8j3
+ dAFi28l4QQE1Q==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
@@ -52,9 +52,9 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
  Brandon Maier <brandon.maier@collins.com>,
  Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v5 1/3] buildman: allow specifying configuration fragments
-Date: Sat, 19 Apr 2025 12:23:56 +0200
-Message-ID: <20250419102358.13127-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v5 2/3] buildman: unit test for configuration fragments
+Date: Sat, 19 Apr 2025 12:23:57 +0200
+Message-ID: <20250419102358.13127-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250419102358.13127-1-heinrich.schuchardt@canonical.com>
 References: <20250419102358.13127-1-heinrich.schuchardt@canonical.com>
@@ -76,197 +76,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently we are no able to build with configuration fragments in our CI.
-With this patch buildman gets a new argument --fragments for passing a
-comma-separated list of configuration fragments to add to the board
-defconfigs, e.g.
+Check that configuration fragments provided to buildman as comma-
+separated list are passed on to the make command of the builder.
 
-    tools/buildman/buildman \
-    -o build \
-    -k qemu-riscv64_smode \
-    --fragments acpi.config
+In the %_defconfig: target of scripts/kconfig/Makefile the defconfig
+file and the fragments are combined via the gcc preprocessor.
+Modeling this step in the buildman testbench without invoking the actual
+Makefile would not provide better test coverage.
 
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v5:
-	Fix typo comma-separated in commit message
+	Fix typo comma-separated
 v4:
 	no change
 v3:
-	Add missing argument descriptions
-	Always pass fragments argument where used
-	Avoid long lines
-v2:
 	no change
+v2:
+	new patch
 ---
- tools/buildman/builder.py       |  5 ++++-
- tools/buildman/builderthread.py | 18 +++++++++++-------
- tools/buildman/cmdline.py       |  2 ++
- tools/buildman/control.py       |  3 ++-
- tools/buildman/test.py          |  2 +-
- 5 files changed, 20 insertions(+), 10 deletions(-)
+ tools/buildman/func_test.py | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
-index 4bea0a02b78..6ac535ef2f0 100644
---- a/tools/buildman/builder.py
-+++ b/tools/buildman/builder.py
-@@ -1784,7 +1784,8 @@ class Builder:
-                 shutil.rmtree(dirname)
-             terminal.print_clear()
+diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
+index b45eb95a1e6..95b51af0249 100644
+--- a/tools/buildman/func_test.py
++++ b/tools/buildman/func_test.py
+@@ -798,6 +798,21 @@ Some images are invalid'''
+         lines = self.check_command('-L')[0]
+         self.assertIn(b'NO_LTO=1', lines[0])
  
--    def build_boards(self, commits, board_selected, keep_outputs, verbose):
-+    def build_boards(self, commits, board_selected, keep_outputs, verbose,
-+                     fragments):
-         """Build all commits for a list of boards
- 
-         Args:
-@@ -1793,6 +1794,7 @@ class Builder:
-                     value is Board object
-             keep_outputs: True to save build output files
-             verbose: Display build results as they are completed
-+            fragments (str): config fragments added to defconfig
-         Returns:
-             Tuple containing:
-                 - number of boards that failed to build
-@@ -1822,6 +1824,7 @@ class Builder:
-             job.keep_outputs = keep_outputs
-             job.work_in_output = self.work_in_output
-             job.adjust_cfg = self.adjust_cfg
-+            job.fragments = fragments
-             job.step = self._step
-             if self.num_threads:
-                 self.queue.put(job)
-diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
-index b8578d5b97b..c7e429f1613 100644
---- a/tools/buildman/builderthread.py
-+++ b/tools/buildman/builderthread.py
-@@ -383,7 +383,7 @@ class BuilderThread(threading.Thread):
- 
-     def _config_and_build(self, commit_upto, brd, work_dir, do_config, mrproper,
-                           config_only, adjust_cfg, commit, out_dir, out_rel_dir,
--                          result):
-+                          fragments, result):
-         """Do the build, configuring first if necessary
- 
-         Args:
-@@ -397,6 +397,7 @@ class BuilderThread(threading.Thread):
-             commit (Commit): Commit only being built
-             out_dir (str): Output directory for the build
-             out_rel_dir (str): Output directory relatie to the current dir
-+            fragments (str): config fragments added to defconfig
-             result (CommandResult): Previous result
- 
-         Returns:
-@@ -412,6 +413,8 @@ class BuilderThread(threading.Thread):
-         args, cwd, src_dir = self._build_args(brd, out_dir, out_rel_dir,
-                                               work_dir, commit_upto)
-         config_args = [f'{brd.target}_defconfig']
-+        if fragments != None:
-+            config_args.extend(fragments.split(','))
-         config_out = io.StringIO()
- 
-         _remove_old_outputs(out_dir)
-@@ -450,7 +453,7 @@ class BuilderThread(threading.Thread):
- 
-     def run_commit(self, commit_upto, brd, work_dir, do_config, mrproper,
-                    config_only, force_build, force_build_failures,
--                   work_in_output, adjust_cfg):
-+                   work_in_output, adjust_cfg, fragments):
-         """Build a particular commit.
- 
-         If the build is already done, and we are not forcing a build, we skip
-@@ -475,6 +478,7 @@ class BuilderThread(threading.Thread):
-                      ~C to disable C
-                      C=val to set the value of C (val must have quotes if C is
-                          a string Kconfig
-+            fragments (str): config fragments added to defconfig
- 
-         Returns:
-             tuple containing:
-@@ -504,7 +508,7 @@ class BuilderThread(threading.Thread):
-                 result, do_config = self._config_and_build(
-                     commit_upto, brd, work_dir, do_config, mrproper,
-                     config_only, adjust_cfg, commit, out_dir, out_rel_dir,
--                    result)
-+                    fragments, result)
-             result.already_done = False
- 
-         result.toolchain = self.toolchain
-@@ -702,7 +706,7 @@ class BuilderThread(threading.Thread):
-                         self.builder.config_only,
-                         force_build or self.builder.force_build,
-                         self.builder.force_build_failures,
--                        job.work_in_output, job.adjust_cfg)
-+                        job.work_in_output, job.adjust_cfg, job.fragments)
-                 failed = result.return_code or result.stderr
-                 did_config = do_config
-                 if failed and not do_config and not self.mrproper:
-@@ -713,7 +717,7 @@ class BuilderThread(threading.Thread):
-                             brd, work_dir, True,
-                             self.mrproper or self.builder.fallback_mrproper,
-                             False, True, False, job.work_in_output,
--                            job.adjust_cfg)
-+                            job.adjust_cfg, job.fragments)
-                         did_config = True
-                 if not self.builder.force_reconfig:
-                     do_config = request_config
-@@ -759,14 +763,14 @@ class BuilderThread(threading.Thread):
-             result, request_config = self.run_commit(None, brd, work_dir, True,
-                         self.mrproper, self.builder.config_only, True,
-                         self.builder.force_build_failures, job.work_in_output,
--                        job.adjust_cfg)
-+                        job.adjust_cfg, job.fragments)
-             failed = result.return_code or result.stderr
-             if failed and not self.mrproper:
-                 result, request_config = self.run_commit(None, brd, work_dir,
-                             True, self.builder.fallback_mrproper,
-                             self.builder.config_only, True,
-                             self.builder.force_build_failures,
--                            job.work_in_output, job.adjust_cfg)
-+                            job.work_in_output, job.adjust_cfg, job.fragments)
- 
-             result.commit_upto = 0
-             self._write_result(result, job.keep_outputs, job.work_in_output)
-diff --git a/tools/buildman/cmdline.py b/tools/buildman/cmdline.py
-index 7573e5bdfe8..38ea7f9f335 100644
---- a/tools/buildman/cmdline.py
-+++ b/tools/buildman/cmdline.py
-@@ -62,6 +62,8 @@ def add_upto_m(parser):
-           help="Fetch a toolchain for architecture FETCH_ARCH ('list' to list)."
-               ' You can also fetch several toolchains separate by comma, or'
-               " 'all' to download all")
-+    parser.add_argument('--fragments', type=str,
-+          help="Comma separated list of configuration fragments to be applied")
-     parser.add_argument(
-           '--full-check', action='store_true',
-           help='Check maintainer entries and TARGET configs')
-diff --git a/tools/buildman/control.py b/tools/buildman/control.py
-index 5109b1cd5ce..8f37677269b 100644
---- a/tools/buildman/control.py
-+++ b/tools/buildman/control.py
-@@ -561,7 +561,8 @@ def run_builder(builder, commits, board_selected, args):
-         builder.show_summary(commits, board_selected)
-     else:
-         fail, warned, excs = builder.build_boards(
--            commits, board_selected, args.keep_outputs, args.verbose)
-+            commits, board_selected, args.keep_outputs, args.verbose,
-+            args.fragments)
-         if excs:
-             return 102
-         if fail:
-diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-index c5feb74a105..4eb82145f37 100644
---- a/tools/buildman/test.py
-+++ b/tools/buildman/test.py
-@@ -237,7 +237,7 @@ class TestBuild(unittest.TestCase):
-         # Build the boards for the pre-defined commits and warnings/errors
-         # associated with each. This calls our Make() to inject the fake output.
-         build.build_boards(self.commits, board_selected, keep_outputs=False,
--                           verbose=False)
-+                           verbose=False, fragments='')
-         lines = terminal.get_print_test_lines()
-         count = 0
-         for line in lines:
++    def testFragments(self):
++        """Test passing of configuration fragments to the make command"""
++        # Single fragment passed as argument
++        extra_args = ['board0', '--fragments', 'f1.config']
++        lines, cfg_data = self.check_command(*extra_args)
++        self.assertRegex(lines[0].decode('utf-8'),
++                         r'make O=/.*board0_defconfig\s+f1\.config',
++                         'Test single fragment')
++        # Multiple fragments passed as comma-separated list
++        extra_args = ['board0', '--fragments', 'f1.config,f2.config']
++        lines, cfg_data = self.check_command(*extra_args)
++        self.assertRegex(lines[0].decode('utf-8'),
++                         r'make O=/.*board0_defconfig\s+f1\.config\s+f2\.config',
++                         'Test multiple fragments')
++
+     def testReproducible(self):
+         """Test that the -r flag works"""
+         lines, cfg_data = self.check_command('-r')
 -- 
 2.48.1
 
