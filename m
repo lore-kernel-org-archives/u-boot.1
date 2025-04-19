@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB33C369BD
-	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 12:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BABCC369BD
+	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 12:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43C3E82105;
-	Sat, 19 Apr 2025 14:55:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB46A8210A;
+	Sat, 19 Apr 2025 14:59:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XimreI6R";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jq+BlCsN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62B4D8209F; Sat, 19 Apr 2025 11:44:14 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id 71967828BC; Sat, 19 Apr 2025 14:59:22 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9279810F4
- for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 11:44:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A63C82105
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 14:59:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-7399838db7fso2518156b3a.0
- for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 02:44:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-30549dacd53so2085693a91.1
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 05:59:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745055850; x=1745660650; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vHFhnlC+B9D9aMB+LGki8Iy4qVX/C0gWd1F8ZA3sYP8=;
- b=XimreI6RKIajKUYsC27P2vcVrc2GQzw34G+RLUCxaAK8OII/talZZYSVyf3HxPd9hu
- 3JJiN6e+bjQ0YfVk7xzeHQxTZALk2gb9mKGF+X4WSLAVjaOT9ubIWkmq6G3L+MasECW4
- LUorA8ZMnLzIEPCv6myXvLgD7/VXj//npcOVpqkHlmYOnzLYlsTnYz75l9t0u9yuZv2Z
- LI7eo2bS9RiUeIa8av8yEakdXAMiA1e6UWmS/BDxinjschnSm5MmIgB+c5zdkhdWAvaR
- EwJ1WIRbZA3rk6KcKS3TpKl0Jk3jMlIpN3ZQ7r3lT8Tmc8TK0PIsbKyWummMjfeOlG9V
- mmaQ==
+ d=gmail.com; s=20230601; t=1745067558; x=1745672358; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NJOeOP9Gn7ggjULlUoWNZDoRsCpkN4RGKdjoiOEq918=;
+ b=Jq+BlCsNvXa3DDSwjJFu+0Vrm5cbKIowat5dQb3ZMv6m1W4SpfUDARhYqRf3Yf5/LZ
+ L4rHpHJUlSUp9kKceiPo+Dzg6yJj1OgOSwSVTSWEt7izOyGRne/70xUCVFNhXmspzutp
+ jkRVyl0HhZVcZKzKxok8Hcd+rXP1cDqGC0lliWhP5pr6g3vwSwIix8SeWX1yRSpjwcl7
+ igs47pqZp0a+LTnQ15RZDK7JnollOORjxMkgeje9E+TJ8wZ4yLq6OA1E0luXnmvTUuvO
+ +PvepgIR3DzAzGrtDPtic6jEqdVu1IIoMMjYfs/e2/F04DZ3qyzFIWKfl0Nmbd2NJNRZ
+ QMtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745055850; x=1745660650;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vHFhnlC+B9D9aMB+LGki8Iy4qVX/C0gWd1F8ZA3sYP8=;
- b=j8G9sJ1V7MS8XitiY25B3m9kErZK67zCnSvRrF0LKQlFuSvHAAuHLV76z/U+YEsSZH
- jDaA6fk1uKYFwvt+g/5wOo/RIxjR6oiXlDKPfXA3mOnj4cP99rpMokMQK2lEGhg310Rv
- X8z8i4pv+EIC8sEiYSVUdgjcDoVOeeQZpmFu63acrcY7+MZzUa6cNjJh59RCsLAKRuVa
- fz5nyNFpgrxaSAbQTj4Hi8LUmHQgUN2p3EUMWgvmu0BOoDB4nsplA5KNnIEeDxJ9V4DE
- ENun4x79iz+paQ4ynbmcOMmi6z5/DqV+rvB8rDfzDatA35JJ14YJmn1G5LM3ucHZm3Lq
- SuCg==
+ d=1e100.net; s=20230601; t=1745067558; x=1745672358;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NJOeOP9Gn7ggjULlUoWNZDoRsCpkN4RGKdjoiOEq918=;
+ b=WUDawqGRxzp1iGYi3yCfi8eSrch6+WNOuxwUP4RFIHqQN57ucarT+7AvgC54OgOSIn
+ 5x6HI6I128DphgDlvxpzkfAfrKZmYfcakdS92P7b9+DPsmyeo6X9E2syHnPQw926ppxz
+ yhTAi6yLjGmQNyLV6vqrdmHYbcSiT65RDJXJYkrtrWrMHCRHlNbWvvioA9CKKPRcS+jm
+ wtzSPe8pjSMlwEnNLhdZsANIqi0VoTXI2LAdiWwsQekjnIKdduGTy7cps/hgrTBkwwh8
+ MiUtDuG6Bt8ZFoVZt+17hqaK+B1efKOMHq5z3WaLTigCOs1lwuldte2XeJxuyW14vhtA
+ pg1g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX6w0xEJQkS68/tcU8oU4l+/r5bdM0MCdYPOdALx+fLcxjW59pVo1JHkNgBLglPQXOcKj5pNeA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy64KnYSNhhh26wi4csBLJJspJawisFA7EAaxtQ8nGhLAnTo78h
- pD3FkrVxhvd5UxWObV4+EESpvK0HKA52RTwnCRbHrRIpkJrtHS6j
-X-Gm-Gg: ASbGnctbDhTl5lNTPYrzJq6vFhBbZwU6UznhayPackyy+VgwdtrQrN8K1IPGlj/mTvY
- J0eTryYPHjLmF9EKyZDqWlTNv1RWoq90/Tbx/tmxgV3ctGK+z7VpNTKI0g0ULTFJtiwR0kE42ce
- tG03uyeqJlSVvOLcwLjdpcmmMhR5rLLTYuxrfLGkKKrYbspE90g73WieTDiB9i0oLzmJscqXf+5
- V286U7H5HGJtplmtCGAOOCE/PvY2wB4vvwN0/4hR5mxN8MzbGDU6t1ow88CzCyqmo/dWC3Ccw1k
- usGYSAT9lg4poZXBf1Lw8RvZiwBSihK5Utvw+urWwacJw0WamuOIQJv6q9/NxChoT8CQEiQq9hx
- gGnvbnD6CcppcreOlgocL49r624UivdagpCSi
-X-Google-Smtp-Source: AGHT+IGtB13ixnzWExSeNQZ/c+vQkJk6wAj+q6525z14k/vPoT2N8ypx71pnP4jO+y3ekekuFeBJ4A==
-X-Received: by 2002:a05:6a00:3995:b0:736:476b:fccc with SMTP id
- d2e1a72fcca58-73dc1b5a9fcmr7707013b3a.8.1745055850064; 
- Sat, 19 Apr 2025 02:44:10 -0700 (PDT)
-Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73dbf8e46basm3073776b3a.69.2025.04.19.02.44.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Apr 2025 02:44:09 -0700 (PDT)
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-To: ilias.apalodimas@linaro.org, jerome.forissier@linaro.org,
- marek.vasut+renesas@mailbox.org, paul.barker.ct@bp.renesas.com,
- pbrobinson@gmail.com, lucienzx159@gmail.com, u-boot@lists.denx.de
-Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com,
- frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com
-Subject: [U-Boot, v1,
- 1/1] net: phy: air_en8811h: load the PHY firmware from filesystem on
- block device instead
-Date: Sat, 19 Apr 2025 17:43:19 +0800
-Message-Id: <20250419094319.148380-1-lucienzx159@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCXhBo2VsxDa1GES/Uavbk+IHgc3oj4oAPztpP6paCiD0g9oHxCG4TwwrXB8m1FzMNi8qc2DSzI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyo8g8Wop7QEkwMFdj/4zBr7tLX9hKT5lR3kjmeFc/zW7fYQVAi
+ cgbCq2REaQBim7F+4kH1HbphskaUDxTifH/OgjBIwBNyZ2yyTan/RMecTERu61S7Dc6Uu1jxkkr
+ ppOWtHPZFF2HljsGuBSyp70xHBpI=
+X-Gm-Gg: ASbGncsrGuOUMoZqyO9iSKBWLZBsQeOg6FDSyG0ZKm6/LvMJP6tznxn7vOxnY7M7OoR
+ hX6ieFMT6caPLqz9QLTi4i4ZJbaZPJb0x5dC/+XVPp19rLtisIT5/EzIr4+679OVr48ypL66snW
+ SIFWIEIFlQRp4ISNwzruCN4g==
+X-Google-Smtp-Source: AGHT+IEcjNynJ1zjvt8yuNYk3NAJqILes3v1AhlugSkTSxP3SzBipKAw35tjHtFIVknCu90A3RndXt9H7/u8dkmxjAY=
+X-Received: by 2002:a17:90b:2588:b0:2fa:17e4:b1cf with SMTP id
+ 98e67ed59e1d1-3087c2a5c11mr7727722a91.2.1745067558296; Sat, 19 Apr 2025
+ 05:59:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 19 Apr 2025 14:55:01 +0200
+References: <20250417171101.2566447-1-festevam@gmail.com>
+ <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
+In-Reply-To: <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
+From: Adam Ford <aford173@gmail.com>
+Date: Sat, 19 Apr 2025 07:59:07 -0500
+X-Gm-Features: ATxdqUGGTjllGHgdlqm42V0PACjJc4w1gEoWTWMTMqDCrf2qiL6Wo-EwZcgYg0o
+Message-ID: <CAHCN7xKGOmbj_NAV_XLhdyFX09i7Z_WMgZ-YDhyG3z2N3yF3cA@mail.gmail.com>
+Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
+ fixed clocks
+To: Marek Vasut <marex@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>, trini@konsulko.com, lukma@denx.de, 
+ seanga2@gmail.com, francesco.dolcini@toradex.com, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,237 +97,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Locating the AIROHA FW within the filesystem at the designated partition
-and path will trigger its automatic loading and writing to the PHY via MDIO.
+On Fri, Apr 18, 2025 at 9:53=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+>
+> On 4/17/25 7:11 PM, Fabio Estevam wrote:
+> > From: Fabio Estevam <festevam@denx.de>
+> >
+> > Currently, fixed-rate clocks in U-Boot are named based on their devicet=
+ree
+> > node names. For example, given the following node:
+> >
+> > osc_24m: clock-osc-24m {
+> >       compatible =3D "fixed-clock";
+> >       #clock-cells =3D <0>;
+> >       clock-frequency =3D <24000000>;
+> >       clock-output-names =3D "osc_24m";
+> > };
+> >
+> > U-Boot registers the clock as "clock-osc-24m", derived from the node na=
+me,
+> > ignoring the clock-output-names property.
+> >
+> > This differs from Linux, which uses the clock-output-names property whe=
+n
+> > assigning clock names. As a result, clock consumers expecting names
+> > like "osc_24m" (as defined in the property) may fail to resolve clocks
+> > correctly in U-Boot.
+> >
+> > Update the fixed-rate clock driver to check for the clock-output-names
+> > property and use it as the clock name if present. If not, the fallback
+> > remains the node name. This makes U-Boot behavior consistent with Linux=
+.
+>
+> This part above ^ is fine.
+>
+> This part below v is wrong .
+>
+> > One concrete impact is on i.MX8MP, where USB clock lookup failed follow=
+ing
+> > commit b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*").
+> >
+> > With this change applied, fixed-clocks are correctly registered with th=
+eir
+> > expected names:
+> >
+> > u-boot=3D> clk dump
+> >   Rate               Usecnt      Name
+> > ------------------------------------------
+> >   32768                0        |-- osc_32k
+> >   24000000             5        |-- osc_24m
+> >
+> > This change restores i.MX8MP USB functionality by ensuring the proper c=
+lock
+> > names are used.
+>
+> This is wrong, because this is NOT how the clock look up works at all.
+>
+> The lookup works this way. Take for example:
+>
+> drivers/clk/imx/clk-imx8mp.c
+>
+> 240         clk_dm(IMX8MP_ARM_PLL_REF_SEL, imx_clk_mux(dev,
+> "arm_pll_ref_sel", base + 0x84, 0, 2, pll_ref_sels,
+> ARRAY_SIZE(pll_ref_sels)));
+>
+> pll_ref_sels:
+>
+>   21 static const char * const pll_ref_sels[] =3D { "osc_24m", "dummy",
+> "dummy", "dummy", };
+>
+> the "osc_24m" is looked up in the clock-controller@30380000 clock-names
+> property:
+>
+> dts/upstream/src/arm64/freescale/imx8mp.dtsi
+>
+>   745 clk: clock-controller@30380000 {
+> ...
+>   751         clocks =3D <&osc_32k>, <&osc_24m>, <&clk_ext1>, <&clk_ext2>=
+,
+>   752                  <&clk_ext3>, <&clk_ext4>;
+>   753         clock-names =3D "osc_32k", "osc_24m", ...
+>                                         ^^^^^^^
+>
+> The offset of osc_24m in that clock-names property is 1 , so the phandle
+> in clocks property array at offset 1 is used to look up those clock:
+>
+>   745 clk: clock-controller@30380000 {
+> ...
+>   751         clocks =3D <&osc_32k>, <&osc_24m>,
+>                                     ^^^^^^^^
+>
+> Which leads to this clock node in DT:
+>
+>   188         osc_24m: clock-osc-24m {
+>               ^^^^^^^^
+>   189                 compatible =3D "fixed-clock";
+>   190                 #clock-cells =3D <0>;
+>
+> The "clock-output-names" is NEVER used for any clock look up.
 
-Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
----
- drivers/net/phy/Kconfig       | 39 ++++++++------
- drivers/net/phy/air_en8811h.c | 97 +++++++++++++++++++----------------
- 2 files changed, 78 insertions(+), 58 deletions(-)
+For what it's worth, I remove the "clock-out-names" from the device
+tree in Linux, and the Linux driver properly coped with it, but I am
+curious to know what the point of this entry is.
+>
+> ...
+>
+> I am fine with the first half of the description, but the second half is
+> wrong and this actually does not fix anything. Simply remove
+> clock-output-names from the osc_24m and the code will be broken again.
+>
+> The clk_resolve_parent_clk() is meant to perform the aforementioned
+> resolution(), that is what "[PATCH v2 00/24] clk: Add
+> clk_resolve_parent_clk() and fix up iMX clock drivers" actually fixed.
+> It seems there is something still missing and clk_resolve_parent_clk()
+> does not do the resolution properly for some clock, but that is what
+> needs to be understood and fixed, not worked around this way.
 
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 5b4cf30b0a3..384cef845e1 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -94,24 +94,33 @@ choice
- 	depends on PHY_AIROHA_EN8811H
+I added some debug code to clk_resolve_parent_clk it does return
+osc_24m as the name of the clock, but when searching for index, it
+appears to fail. Do you have any suggestion on how searching for the
+index can query up the chain to the parent CCM driver on how to return
+the reference to proper clock?  The clock-names property is at the CCM
+parent and not inside the children, and the number of levels vary
+depending on the child clocks, you can't assume the parent's parent
+has the 'clock-name's property.
 
- config PHY_AIROHA_FW_IN_MMC
--	bool "Airoha firmware in MMC boot1 partition"
--
--endchoice
-+	bool "Airoha firmware in MMC partition"
-+	help
-+		Airoha PHYs use firmware which can be loaded automatically
-+		from storage directly attached to the PHY, and then loaded
-+		via MDIO commands by the boot loader. The firmware is loaded
-+		from a file specified by the PHY_AIROHA_FW_PART,
-+		PHY_AIROHA_FW_DM_FILEPATH and PHY_AIROHA_FW_DSP_FILEPATH options.
-+
-+config PHY_AIROHA_FW_PART
-+	string "Airoha firmware partition"
-+	depends on PHY_AIROHA_FW_IN_MMC
-+	help
-+		Partition containing the firmware file.
-
--config AIROHA_FW_ADDR
--	hex "Airoha Firmware Address"
--	depends on PHY_AIROHA_EN8811H
--	default 0x0
-+config PHY_AIROHA_FW_DM_FILEPATH
-+	string "Airoha firmware DM file path in the filesystem"
-+	depends on PHY_AIROHA_FW_IN_MMC
-+	help
-+		Specify Airoha firmware DM file path in the filesystem.
-
--config AIROHA_MD32_DM_SIZE
--	hex "Airoha Firmware MD32 DM Size"
--	depends on PHY_AIROHA_EN8811H
--	default 0x4000
-+config PHY_AIROHA_FW_DSP_FILEPATH
-+	string "Airoha firmware DSP file path in the filesystem"
-+	depends on PHY_AIROHA_FW_IN_MMC
-+	help
-+		Specify Airoha firmware DSP file path in the filesystem.
-
--config AIROHA_MD32_DSP_SIZE
--	hex "Airoha Firmware MD32 DSP Size"
--	depends on PHY_AIROHA_EN8811H
--	default 0x20000
-+endchoice
-
- menuconfig PHY_AQUANTIA
- 	bool "Aquantia Ethernet PHYs support"
-diff --git a/drivers/net/phy/air_en8811h.c b/drivers/net/phy/air_en8811h.c
-index 96bb24418a0..8a2a25a8c74 100644
---- a/drivers/net/phy/air_en8811h.c
-+++ b/drivers/net/phy/air_en8811h.c
-@@ -12,12 +12,14 @@
-  */
- #include <phy.h>
- #include <errno.h>
-+#include <log.h>
- #include <malloc.h>
-+#include <fs.h>
- #include <asm/unaligned.h>
- #include <linux/iopoll.h>
--#include <dm/device_compat.h>
- #include <linux/bitops.h>
--#include <mmc.h>
-+#include <dm/device_compat.h>
-+#include <u-boot/crc.h>
-
- #define EN8811H_PHY_ID		0x03a2a411
-
-@@ -415,11 +417,6 @@ restore_page:
- 	return air_phy_restore_page(phydev, saved_page, ret);
- }
-
--__weak ulong *en8811h_get_fw_addr(void)
--{
--	return (ulong *)CONFIG_AIROHA_FW_ADDR;
--}
--
- static int en8811h_wait_mcu_ready(struct phy_device *phydev)
- {
- 	int ret, reg_value;
-@@ -437,85 +434,99 @@ static int en8811h_wait_mcu_ready(struct phy_device *phydev)
- 	return 0;
- }
-
-+static void crc32_check(unsigned char *name, unsigned char *buf, u32 len)
-+{
-+	u32 ca_crc32;
-+
-+	ca_crc32 = crc32(0, buf, len);
-+	debug("%s: crc32 is 0x%x\n", name, ca_crc32);
-+}
-+
- static int en8811h_load_firmware(struct phy_device *phydev)
- {
- 	int ret;
--	char *addr = NULL;
-+	void *addr = NULL;
- 	struct en8811h_priv *priv = phydev->priv;
--	int dev = CONFIG_SYS_MMC_ENV_DEV;
--	u32 cnt = (CONFIG_AIROHA_MD32_DM_SIZE +
--		   CONFIG_AIROHA_MD32_DSP_SIZE) / 512;
--	ulong airoha_fw_addr = (ulong)en8811h_get_fw_addr();
--	u32 blk = airoha_fw_addr / 512;
--
--	addr = malloc(CONFIG_AIROHA_MD32_DM_SIZE + CONFIG_AIROHA_MD32_DSP_SIZE);
--	if (!addr) {
--		puts("cannot allocated buffer for firmware.\n");
--		return -ENOMEM;
--	}
-
- 	if (IS_ENABLED(CONFIG_PHY_AIROHA_FW_IN_MMC)) {
--		struct mmc *mmc = find_mmc_device(dev);
-+		loff_t read;
-
--		if (!mmc) {
--			puts("Failed to find MMC device for Airoha ucode\n");
--			goto en8811h_load_firmware_out;
-+		addr = malloc(EN8811H_MD32_DM_SIZE +
-+			      EN8811H_MD32_DSP_SIZE);
-+		if (!addr) {
-+			puts("cannot allocated buffer for firmware.\n");
-+			return -ENOMEM;
- 		}
-
--		printf("MMC read: dev # %u, block # %u, count %u ...\n",
--		       dev, blk, cnt);
-+		debug("\nLoading Airoha FW from %s %s\n",
-+		      CONFIG_PHY_AIROHA_FW_PART,
-+		      CONFIG_PHY_AIROHA_FW_DM_FILEPATH);
-+		ret = fs_set_blk_dev("mmc", CONFIG_PHY_AIROHA_FW_PART, FS_TYPE_ANY);
-+		if (ret < 0)
-+			goto en8811h_load_firmware_out;
-
--		if (mmc_init(mmc)) {
--			puts("initializing MMC device failed.\n");
-+		ret = fs_read(CONFIG_PHY_AIROHA_FW_DM_FILEPATH,
-+			      (ulong)addr, 0, EN8811H_MD32_DM_SIZE, &read);
-+		if (ret < 0)
- 			goto en8811h_load_firmware_out;
--		}
-
--		ret = mmc_set_part_conf(mmc, 1, 2, 2);
--		if (ret) {
--			puts("cannot access eMMC boot1 hw partition.\n");
-+		/* Calculate the CRC32 */
-+		crc32_check(CONFIG_PHY_AIROHA_FW_DM_FILEPATH,
-+			    (unsigned char *)addr, EN8811H_MD32_DM_SIZE);
-+
-+		debug("Loading Airoha FW from %s %s\n",
-+		      CONFIG_PHY_AIROHA_FW_PART,
-+		      CONFIG_PHY_AIROHA_FW_DSP_FILEPATH);
-+		ret = fs_set_blk_dev("mmc", CONFIG_PHY_AIROHA_FW_PART, FS_TYPE_ANY);
-+		if (ret < 0)
- 			goto en8811h_load_firmware_out;
--		}
-
--		(void)blk_dread(mmc_get_blk_desc(mmc), blk, cnt, addr);
-+		ret = fs_read(CONFIG_PHY_AIROHA_FW_DSP_FILEPATH,
-+			      (ulong)addr + EN8811H_MD32_DM_SIZE,
-+			      0, EN8811H_MD32_DSP_SIZE, &read);
-+		if (ret < 0)
-+			goto en8811h_load_firmware_out;
-
--		mmc_set_part_conf(mmc, 1, 1, 0);
-+		/* Calculate the CRC32 */
-+		crc32_check(CONFIG_PHY_AIROHA_FW_DSP_FILEPATH,
-+			    (unsigned char *)addr + EN8811H_MD32_DM_SIZE,
-+			    EN8811H_MD32_DSP_SIZE);
-
- 	} else {
- 		puts("EN8811H firmware loading not implemented");
--		free(addr);
--		addr = NULL;
- 		return -EOPNOTSUPP;
- 	}
-
- 	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
- 				     EN8811H_FW_CTRL_1_START);
- 	if (ret < 0)
--		return ret;
-+		goto en8811h_load_firmware_out;
-
- 	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
- 				      EN8811H_FW_CTRL_2_LOADING,
- 				      EN8811H_FW_CTRL_2_LOADING);
- 	if (ret < 0)
--		return ret;
-+		goto en8811h_load_firmware_out;
-
--	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, CONFIG_AIROHA_MD32_DM_SIZE, addr);
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, EN8811H_MD32_DM_SIZE,
-+			    (unsigned char *)addr);
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
-
--	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, CONFIG_AIROHA_MD32_DSP_SIZE,
--			    addr + CONFIG_AIROHA_MD32_DM_SIZE);
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, EN8811H_MD32_DSP_SIZE,
-+			    (unsigned char *)addr + EN8811H_MD32_DM_SIZE);
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
-
- 	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
- 				      EN8811H_FW_CTRL_2_LOADING, 0);
- 	if (ret < 0)
--		return ret;
-+		goto en8811h_load_firmware_out;
-
- 	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
- 				     EN8811H_FW_CTRL_1_FINISH);
- 	if (ret < 0)
--		return ret;
-+		goto en8811h_load_firmware_out;
-
- 	ret = en8811h_wait_mcu_ready(phydev);
-
---
-2.34.1
-
+adam
