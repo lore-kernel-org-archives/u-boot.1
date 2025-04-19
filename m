@@ -4,58 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BE13C369C9
-	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 09:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9284AC369BD
+	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 10:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 981A882385;
-	Sat, 19 Apr 2025 11:32:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 723C382A18;
+	Sat, 19 Apr 2025 12:20:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="UoMH54xS";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IpUCBwsL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3824982977; Sat, 19 Apr 2025 11:32:13 +0200 (CEST)
-Received: from mail-10626.protonmail.ch (mail-10626.protonmail.ch
- [79.135.106.26])
+ id C2CB582A18; Sat, 19 Apr 2025 12:20:47 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5B2D81FFC
- for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 11:32:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B57AD80BA8
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 12:20:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail; t=1745055129; x=1745314329;
- bh=b1kRHEvLOOvp92la3i1wRZXiPpx+nnnMZCLJBhxiHVk=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=UoMH54xS1eVpHAGqnxELXF8hi5zVsIpATbjT8m6ccR6kWmmgPRPhQMH70NtuqI948
- 12uM7gqSesTEecZcekjxofL9rHVe3BQDL1oC9yurZsgJVA31C7EHHMDUHkxHsdYm8D
- XeqI2sh/UXdOHz0tD9dWY3eWn9pr5kFBJ+DNkIDt0fGjwgYx+D9mEi7rOlcokDKfu5
- BBb3ssbtSE1fE8dp8AX8pC8CPVDIcO5sPMC8CaAo3TVpzDhx6Iph0eucpUGhzlepbb
- OBdWNJiFEC6nTmSTdAhK9Eb4nGST2sx2Me9xO9KAPYOL/uqhcUuN8ZpZSgB1+R4uhm
- 4g14+yHP0UP0g==
-Date: Sat, 19 Apr 2025 09:32:04 +0000
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-From: Sam Day <me@samcday.com>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH 1/3] usb: udc: ci: support USB gadget driver model
-Message-ID: <D9AIEUQMBE8M.2OVJ76ZRNATCM@samcday.com>
-In-Reply-To: <Z__8RKVP37t6Aw1K@linaro.org>
-References: <20250412-msm8916-usb-v1-0-2925239caf4b@samcday.com>
- <20250412-msm8916-usb-v1-1-2925239caf4b@samcday.com>
- <Z__8RKVP37t6Aw1K@linaro.org>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 922f2599744b5ccc0738cd8af0436b20b2f76e90
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 017B941A03
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 10:20:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1745058044;
+ bh=yYYmpLvZGWs5gP2ecLKn8aHL+jygqg7HG71SvNgopd0=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=IpUCBwsLy2STbDTRFftFJ+GapAtITOratktWN5h0DpQJcoULcykOWdJ2l0eIygSUN
+ U502xkmzYVUoo1mQlc/eq5ZknFE5YoBykvwdjpeeJDtCA0M5nOX6Zpa4UqOZnNCQvI
+ CEuzd++ilFbTbI4o15XVyHSWoZqigTGJ69q2CZGccyrwJihEwv64oGG4XjUfDvpE8J
+ YN+bTx3pBPRg4ZN7nvrZY14fHVKlVXZYTeyCEKyDWIJJpU7meHAXrgfjQLG/ZkUY3j
+ zn6MH55kWBEH9jO8esgWTNCuV+83SWt0hji/s/FrH21zzxX7CZ+gXwy4nfob7hyWok
+ 3RmbYRrSAuBUw==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-43d0830c3f7so18160235e9.2
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 03:20:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745058043; x=1745662843;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yYYmpLvZGWs5gP2ecLKn8aHL+jygqg7HG71SvNgopd0=;
+ b=mXuduaz2nXxG/xvE3bpNd+Yh1Ox0u3MRiKac3Ea1zG9Gc0YDx3lZdOysuajZB4Rx4U
+ Hhk2QxlDvasVMK4ICaiTM9W8hRa37c+3CufN6q7veXnoqsFgXvkLRXTJ99Isra8hTK4n
+ MbhKiz2AzufRzx9U6e7hlm8mDhPECLudXcbVy+16bQ3AZVnmERHJPWPHV1v3C0SKoT30
+ t25i+B2epg/PmAK2gM/49+l+XXcMLIekr/sTSbkWOEcNxtPDCtCKYID5frZVFKg0KBqv
+ btLCTqavM8HnQiCjoBM79uh6RkaC87xhwrazFj2kxr42sbU8vlejMUQhatFNY3/VmOFE
+ QDpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBrKbQ1uSSTFt+HU4o9+i0pN5Wv5G6ad+zFuZdbxraasK+fFgk3Ssgamsengux0vZAK/Jn5es=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTu3K6dw4ZvEyorcQNO7AY92V2AIV3yXslttRfOXdD0FRZE1oq
+ TO3W2Qjar4odMPzhPSokIg2MPdF2hU43sBQu1/kKvEfyfV6soou+bos5BNk2YW6AxdxnWPpiP/m
+ XGad17mtSfbR2FkqBjXWT61oFCgl9haaQkNcHHAq2qW16Avk5LykZVPeQEHb6eX26nR8=
+X-Gm-Gg: ASbGncuXBZJa8nZRq1Nx075Uw8P9jJbrmNI+8t/iTGg/SrjbDAq/9CHzv0igMTjbyIz
+ lfh2akOqi3PFGnHwI0IJmwAPIbQdL8B/xHb5Y88JChQb9bol2KTLLzdB7bScFdB1FByFfD7qbht
+ MnDFHLnJyCmrtjirRO6t+ErUvE6Xgyr4gA3TDQ74S6lr6JnXUHJZmn2MT2BKBi0dGfYaeL78XSO
+ IngqhAQDkkYYWzPXaQMFdTVZK4zDd7blo+UUExVGLUDmLLq28Ak1gMDfQblrObc7VIg/drvEMaJ
+ 0wYgHTsLUnXTvcGdbUn2Ci0+xoCn42WOHorKdGJfGNe1jcn5XB6qHpO9lIgQreCztwsJtJm9uqU
+ JWg==
+X-Received: by 2002:a05:600c:8411:b0:43d:83a:417d with SMTP id
+ 5b1f17b1804b1-4406ab944edmr51932275e9.12.1745058043530; 
+ Sat, 19 Apr 2025 03:20:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGi5P/a5GPMhxPb2MDvY6rCin1sTJszCyewVkfrrMVyUTj0vpHGDmY916FoqA8ZRzwXViMJLg==
+X-Received: by 2002:a05:600c:8411:b0:43d:83a:417d with SMTP id
+ 5b1f17b1804b1-4406ab944edmr51932055e9.12.1745058043100; 
+ Sat, 19 Apr 2025 03:20:43 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:6e0:7543:2b69:829a:108e:3743?
+ ([2a02:3035:6e0:7543:2b69:829a:108e:3743])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4406d5a9eb8sm55115765e9.4.2025.04.19.03.20.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 19 Apr 2025 03:20:41 -0700 (PDT)
+Message-ID: <d448af91-ebe1-432c-ae20-3e8eb2efddf1@canonical.com>
+Date: Sat, 19 Apr 2025 12:20:37 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] buildman: allow specifying configuration fragments
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20250416224032.144791-1-heinrich.schuchardt@canonical.com>
+ <20250416224032.144791-2-heinrich.schuchardt@canonical.com>
+ <d8f9a58a-10cd-4366-bd6f-85f4effc747c@cherry.de>
+ <CAFLszThDLbf3fQySO_8u6OD3-BK2abE6NFVhvviRtrNs=PKdsA@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszThDLbf3fQySO_8u6OD3-BK2abE6NFVhvviRtrNs=PKdsA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,202 +118,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heya Stephan,
+On 4/18/25 13:39, Simon Glass wrote:
+> Hi Quentin,
+> 
+> On Fri, 18 Apr 2025 at 05:27, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>>
+>> Hi Heinrich,
+>>
+>> On 4/17/25 12:40 AM, Heinrich Schuchardt wrote:
+>>> Currently we are no able to build with configuration fragments in our CI.
+>>> With this patch buildman gets a new argument --fragments for passing a
+>>> comma separated list of configuration fragments to add to the board
+>>> defconfigs, e.g.
+>>>
+>>>       tools/buildman/buildman \
+>>>       -o build \
+>>>       -k qemu-riscv64_smode \
+>>>       --fragments acpi.config
+>>>
+>>
+>> What about using:
+>>
+>> --fragment acpi.config --fragment fragment2.config
+>>
+>> ?
+> 
+> Yes that could be useful. It would also allow wildcards, although the
+> code would need to drop the config/ directory prefix. Also, I see that
+> -z is available so perhaps that could be a (bad) short option?
 
-On Wed Apr 16, 2025 at 8:51 PM CEST, Stephan Gerhold wrote:
-> On Sat, Apr 12, 2025 at 07:39:57PM +0000, Sam Day wrote:
->> When CONFIG_DM_USB_GADGET is enabled, a UCLASS_USB_GADGET_GENERIC driver
->> will be defined that wraps the ChipIdea UDC operations. The
->> (dm_)?usb_gadget_.* symbols will no longer be defined (as these are now
->> handled by the UDC uclass).
->>
->> If CONFIG_DM_USB_GADGET is not enabled, this driver behaves as it
->> previously did.
->>
->> This new driver does not declare any compatibles of its own. It requires
->> a glue driver to bind it. The ehci_msm driver will be updated in the
->> following commit to do exactly that.
->>
->> Signed-off-by: Sam Day <me@samcday.com>
->
-> Thanks a lot for working on this. Seems to work without problems on my
-> dragonboard410c. Just some minor nits below to reduce code duplication.
+Hello Simon,
 
-\0/ Thanks for the review and testing!
+What do you mean by useful?
 
->
->> ---
->>  drivers/usb/gadget/ci_udc.c | 84 ++++++++++++++++++++++++++++++++++++++=
-++++++-
->>  1 file changed, 83 insertions(+), 1 deletion(-)
+--fragments a,b conveys the same information as --fragment a --fragment b.
+
+We are not passing any config/ directory with the fragment names.
+
+Using wildcards in does not depend on how fragment names are passed.
+
+As maintainer of buildman, please, clearly express how you want the 
+fragment names to be passed. "Could be useful" does not indicate any 
+decision but let's me hang in limbo.
+
+Best regards
+
+Heinrich
+
+> 
+> Another idea would be to also allow specifying the fragment name
+> without the '.config' suffix. Less to type.
+> 
 >>
->> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
->> index 4bff75da759ded6716641713fbe47f6ba79386dc..179f8540da30c693d11d772a=
-acc00cc37f7669c5 100644
->> --- a/drivers/usb/gadget/ci_udc.c
->> +++ b/drivers/usb/gadget/ci_udc.c
->> @@ -10,6 +10,7 @@
->>  #include <command.h>
->>  #include <config.h>
->>  #include <cpu_func.h>
->> +#include <dm.h>
->>  #include <net.h>
->>  #include <malloc.h>
->>  #include <wait_bit.h>
->> @@ -94,8 +95,18 @@ static struct usb_request *
->>  ci_ep_alloc_request(struct usb_ep *ep, unsigned int gfp_flags);
->>  static void ci_ep_free_request(struct usb_ep *ep, struct usb_request *_=
-req);
+>> ...
 >>
->> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
->> +static int ci_udc_gadget_start(struct usb_gadget *g,
->> +=09=09struct usb_gadget_driver *driver);
->> +static int ci_udc_gadget_stop(struct usb_gadget *g);
->> +#endif
->> +
->>  static const struct usb_gadget_ops ci_udc_ops =3D {
->>  =09.pullup =3D ci_pullup,
->> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
->> +=09.udc_start =3D ci_udc_gadget_start,
->> +=09.udc_stop =3D ci_udc_gadget_stop,
->> +#endif
->>  };
->>
->>  static const struct usb_ep_ops ci_ep_ops =3D {
->> @@ -927,7 +938,7 @@ void udc_irq(void)
->>  =09}
->>  }
->>
->> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
->> +static int ci_udc_handle_interrupts(struct udevice *dev)
->>  {
->>  =09struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
->>  =09u32 value;
->> @@ -1072,6 +1083,71 @@ static int ci_udc_probe(void)
->>  =09return 0;
->>  }
->>
->> +#if CONFIG_IS_ENABLED(DM_USB_GADGET)
->> +static int ci_udc_generic_probe(struct udevice *dev)
->> +{
->> +=09int ret;
->> +#if CONFIG_IS_ENABLED(DM_USB)
->> +=09ret =3D usb_setup_ehci_gadget(&controller.ctrl);
->> +#else
->> +=09ret =3D usb_lowlevel_init(0, USB_INIT_DEVICE, (void **)&controller.c=
-trl);
->> +#endif
->
-> ...
->
 >> [...]
->> +static int ci_udc_generic_remove(struct udevice *dev)
->> +{
->> +=09usb_del_gadget_udc(&controller.gadget);
->> +
->> +=09if (IS_ENABLED(CONFIG_DM_USB)) {
->> +=09=09usb_remove_ehci_gadget(&controller.ctrl);
->> +=09} else {
->> +=09=09usb_lowlevel_stop(0);
->> +=09=09controller.ctrl =3D NULL;
->> +=09}
->
-> This style is nice for compile testing. But in the probe() function
-> above you're still using the #if/#else pre-processor style. Can it use
-> if (IS_ENABLED(...)) too?
-
-Ah, I had converted a few of these when checkpatch reprimanded me. Guess
-I missed this one - oops!
-
->
-> =09if (IS_ENABLED(CONFIG_DM_USB))
-> =09=09ret =3D usb_setup_ehci_gadget(&controller.ctrl);
-> =09else
-> =09=09ret =3D usb_lowlevel_init(0, USB_INIT_DEVICE, (void **)&controller.=
-ctrl);
-> =09if (ret)
-> =09=09return ret;
->
-> This seems to compile at least.
->
-> If yes, can you make the same cleanup for the old !DM_USB_GADGET case,
-> so the two code paths are consistent?
-
-Thanks, I've done this in v2.
-
->
->> +
->> +=09return 0;
->> +}
->> +
->> +static const struct usb_gadget_generic_ops ci_udc_generic_ops =3D {
->> +=09.handle_interrupts=09=3D ci_udc_handle_interrupts,
->> +};
->> +
->> +U_BOOT_DRIVER(ci_udc_generic) =3D {
->> +=09.name =3D "ci-udc",
->> +=09.id =3D UCLASS_USB_GADGET_GENERIC,
->> +=09.ops =3D &ci_udc_generic_ops,
->> +=09.probe =3D ci_udc_generic_probe,
->> +=09.remove =3D ci_udc_generic_remove,
->> +};
->> +
->> +static int ci_udc_gadget_start(struct usb_gadget *g,
->> +=09=09=09=09 struct usb_gadget_driver *driver)
->> +{
->> +=09controller.driver =3D driver;
->> +=09return 0;
->> +}
->> +
->> +static int ci_udc_gadget_stop(struct usb_gadget *g)
->> +{
->> +=09controller.driver =3D NULL;
->> +=09udc_disconnect();
->> +
->> +=09ci_ep_free_request(&controller.ep[0].ep, &controller.ep0_req->req);
->> +=09free(controller.items_mem);
->> +=09free(controller.epts);
->> +
->> +=09return 0;
->> +}
->
-> I wonder if you could just define the start and stop function outside
-> the #if blocks and call them from usb_gadget_unregister_driver()
-> and usb_gadget_register_driver(). This would avoid duplicating the code,
-> reducing the risk that someone forgets to update one of those when
-> making changes.
-
-So, not quite unfortunately. In the case of ci_udc_gadget_stop(), the
-controller.driver =3D NULL happening before calling into udc_disconnect()
-is important: the generic UDC uclass code has already called
-driver->disconnect() and calling it again is a Very Bad Thing to do. So
-we can't just delegate usb_gadget_unregister_driver to
-ci_udc_gadget_stop outright.
-
-In v2 I've tried to unify the codepaths as much as possible though,
-both to avoid duplication and the risks of future patches making
-incomplete changes.
-
->
-> The same could be also said for probe()/remove(), i.e. moving the
->
-> =09if (IS_ENABLED(CONFIG_DM_USB)) {
-> =09=09usb_remove_ehci_gadget(&controller.ctrl);
-> =09} else {
-> =09=09usb_lowlevel_stop(0);
-> =09=09controller.ctrl =3D NULL;
-> =09}
->
-> block to a separate function and calling that from both variants. Not
-> sure if that would also be worth it?
-
-Good call, these ones are less problematic, and I've done that in v2.
-
-Rock on \m/,
--Sam
-
->
-> Thanks,
-> Stephan
-
+>>> @@ -412,6 +413,8 @@ class BuilderThread(threading.Thread):
+>>>            args, cwd, src_dir = self._build_args(brd, out_dir, out_rel_dir,
+>>>                                                  work_dir, commit_upto)
+>>>            config_args = [f'{brd.target}_defconfig']
+>>> +        if fragments != None:
+>>> +            config_args.extend(fragments.split(','))
+>>>            config_out = io.StringIO()
+>>>
+>>>            _remove_old_outputs(out_dir)
+>> [...]
+>>> diff --git a/tools/buildman/cmdline.py b/tools/buildman/cmdline.py
+>>> index 7573e5bdfe8..38ea7f9f335 100644
+>>> --- a/tools/buildman/cmdline.py
+>>> +++ b/tools/buildman/cmdline.py
+>>> @@ -62,6 +62,8 @@ def add_upto_m(parser):
+>>>              help="Fetch a toolchain for architecture FETCH_ARCH ('list' to list)."
+>>>                  ' You can also fetch several toolchains separate by comma, or'
+>>>                  " 'all' to download all")
+>>> +    parser.add_argument('--fragments', type=str,
+>>> +          help="Comma separated list of configuration fragments to be applied")
+>>
+>> ... and here have an action="append" instead, which will create a Python
+>> list already, which seems to be what you want to use anyway considering
+>> you later split this by comma? This would also allow to have config
+>> fragments with comma in their filename (which is maybe valid?).
+> 
+> Regards,
+> Simon
 
