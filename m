@@ -4,83 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F78FC369CA
-	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 19:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC0E0C369CA
+	for <u-boot@archiver.kernel.org>; Sat, 19 Apr 2025 19:22:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD3CB820FE;
-	Sat, 19 Apr 2025 21:12:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C88A8820FE;
+	Sat, 19 Apr 2025 21:22:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P/enCBOD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KlSOuaKI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB36C820FE; Sat, 19 Apr 2025 21:12:05 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D525F8210D; Sat, 19 Apr 2025 21:22:20 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0DD0820F6
- for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 21:12:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F147E820F6
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 21:22:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-30bf3f3539dso30024731fa.1
- for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 12:12:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745089923; x=1745694723; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CQBfIA9i8g0Ppwjk9cJ6TTQaL3UH4d4fzJY/MopZKZg=;
- b=P/enCBODMccx9zoE4SGFZwzAz+JkcfMbWkugHwRh68Zt48gsGKIR533oXOKHhSDfhP
- f2qcmAlsWsL6bsiS9b3nZ0KyoktEfmaARLDk1e52iBZfG0VK+gcyzuW+5TXwCNXAmw4h
- ryxWwlcMUXhxtdItuY+yj5A+zMsxaaMw8DMy/BCcJuzJ+CDqBr6VSDEU5Ra6ALhOHUVK
- pR5jDQe5sMS1uiG2VpeGJnRaB+/QIXAG1yO5ZAeSWZjQtgyI9WnqhBStZ+RN42CC/Ipn
- jom22rX9u/ruV16ZnCPNQMeEwejYgabfx+EcURJMOjv7yy8qFmhspPTkfBHWaiOvVNqk
- h87A==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5C2CB3FE57
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 19:22:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1745090536;
+ bh=rod5apMTrVygfcAixBGO+C8j6sew5xfydTYA+PTnybA=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=KlSOuaKIqatoRsi0QN/LeOtE86SNC7dFGvFXrZV3N+5MHSeqpafLWTl7NcFhzCXs3
+ cWhy/le8e3vjZ8mgRNIiMAhsVBHHGD3R6u2jYUQxFCf1ffMFwcUuKRGSGsetynyhjG
+ EAEcBGpvozH22IG+6fe+3kaJOEZ7e9OocgXmhCl3sqQPDPAaQYDGlmq1pVoCNMq/LK
+ q5eD0prkt4x4oEL0+SwM28uRIYv093WmKevXpSAnyueKVKsNQuArXoST0DklnuWU/C
+ K7sqWEoYv2pjiw9R32Qg05lO1FvhbhxdA+kUBmH3igPW7rsewIUxFUMB1t1lR9dOXN
+ TyGo9y80nuhxw==
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2240a96112fso42527075ad.2
+ for <u-boot@lists.denx.de>; Sat, 19 Apr 2025 12:22:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745089923; x=1745694723;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CQBfIA9i8g0Ppwjk9cJ6TTQaL3UH4d4fzJY/MopZKZg=;
- b=cheCKsAz+GUqMYlg90GMyuJgqHaNIV1sp5IP0uAAjXrV51p34XrpDd9mDAnGWdyfEC
- M9ziWozAeqtj0cBPZ862B4oOxS/1GEMJm3lJKlh5x7NpY4/nlL/6vwsBo3aYc/3pHfpM
- IJhF8K6FciTiJ+ffBkWPd8AN9pPD+qIlDSBwyBTvU2ATz7+G6IO5c+mAt2uqQy4UqJFZ
- +Lq2VT0PThlr1QiNvsjKx9+TfCEewJT+trY8pObvktLHYv1y01onZZlG5JFqiAemsHQy
- 5SubW8egkX2D1vwQISDqJ+qgaVkT0twQsmKhXMb9RUSyYrH1yMmc/RHq6isDCFbkdroY
- ZuEg==
+ d=1e100.net; s=20230601; t=1745090534; x=1745695334;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rod5apMTrVygfcAixBGO+C8j6sew5xfydTYA+PTnybA=;
+ b=D+FuReF2f6hAmuDJkDOJE+W4CTtTkkOkZJxq9Wrql9cPD4LPi1jTzQsJpFebqRFI1L
+ 4fPWzNvQj7EtkMkzf7BGodAQBa2TXYVN6Nt4ODuziIs80hLkqitL4fhq9rtiuuOf53jS
+ 5NRAwqw96qdGxaTWa0QRn3C8avTsP2PaV645xYyk5T63Hzm4p0vpuLEo7CG08Ods9PM7
+ JYpPXHNYax2/FRHslOkVfx9LysP4qcdy0WkzHkbyZ9yYisMAC8l6UEP3QevR7CSIGFDX
+ NEK2AZ4mroYvzpr3YMsXGhpL0Li+uaQ5kIKaCNCi7Tk8D2fX38fELf5Z3oVg77KFVl2e
+ 1INw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoyB9Rrij5jx40EG4Bs/UUeVGbgGD2JtP/xLOiQzO9NgynQgrJHGUuDDUc5oQcgxtFauBzibY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyCjkX6eWYUtfPOx7dQQF/lBTWbA4YTrPIFo4W6N13TkJYDnaOR
- bGVoLC3Ak+mVSFJ2eSFppV8g3kx6UfOlUB33d6eTm0chH4wRFt9vqYfLtHtR/LaEMBKKxNygBNu
- dSP+nm/W4Dhp4zAOZX8MunSu3CYQ=
-X-Gm-Gg: ASbGnctFGM1hJK0zRuZceYoW/vPa6zEFBStIELCLws5d4KjNodTitFS4Lmx98fbNwB4
- zt+mwe3W3VzQ9WP3rVWv28XyzHyFIk/t6QXJhfpuMrbqZMXd3HEuXMdMevd/g5X02fyE5UW9zW6
- /g9MeVFJ0fFHi+BPevF0wxz++NvATpwo1O2Bv6bXEWGMYt62E35YrUsg==
-X-Google-Smtp-Source: AGHT+IEXIIJkJFbNOulJAh3WNg9ezhpnW7YqJIXViEPAIZRBDsp0Man6JEJ+K/ceQaFvzm0k8EY1if8geLEGA7WW5Oc=
-X-Received: by 2002:a2e:f19:0:b0:30c:432c:5f36 with SMTP id
- 38308e7fff4ca-3108ef06779mr23004281fa.5.1745089922574; Sat, 19 Apr 2025
- 12:12:02 -0700 (PDT)
+ AJvYcCUCzswtH1cTMlrSxtlCOomCkuBq9J+OtyAgKHcFLdil1mzNrXDu1pJMYHjdj9n3gVYbF27lA9E=@lists.denx.de
+X-Gm-Message-State: AOJu0YzesCoFFW1r3uZxTEyThHv63rzdDch+Lamgr1UG0JxOF2VjuUzQ
+ Oihq7nSlggnNfrc85QmCmDmqpyhG91BtWH3qVlAG94DZnIyoJWegN7ZM59gt4nnUAlYoV9aKjdS
+ FNepHTlWc37zaTVStKWdYqKhfavlw2odzLgiRENn26TJY4rdBq86mpXu1XukujrlgaqJEid5Te6
+ XTjO635jPIdMEzZSHuwigjxf+2qZIInguSCxlPWilCkw==
+X-Gm-Gg: ASbGncsbagfAj9VGTsE0BMMArNdQ7W5nyAXZkvqISijYSAQGGvISyygdPX1NgvetTHY
+ wD62slS5+bUFkzpUsAmrKRH78y4HoYff44XBxRhUbglokhp0HS/nsHg3RrFR+HUtoRw==
+X-Received: by 2002:a17:902:f54c:b0:216:3c36:69a7 with SMTP id
+ d9443c01a7336-22c5361b628mr80616265ad.45.1745090534314; 
+ Sat, 19 Apr 2025 12:22:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGaR+k8gf+dEOqPxILquH+UFv9qRwGTDhgi2iFvsTdmtBvlTUPWG4dW2hQ/Q+TpIqTXxhGTQY4P4GsYfAEQ/ow=
+X-Received: by 2002:a17:902:f54c:b0:216:3c36:69a7 with SMTP id
+ d9443c01a7336-22c5361b628mr80616015ad.45.1745090533827; Sat, 19 Apr 2025
+ 12:22:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250417171101.2566447-1-festevam@gmail.com>
- <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
-In-Reply-To: <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 19 Apr 2025 16:11:51 -0300
-X-Gm-Features: ATxdqUGtDxv6ZoyMOkaPwyQKMaoHPCvQijtd8wJvNfsmRyiP5HD10h_89m9gl1g
-Message-ID: <CAOMZO5C_9yojvxO1NoNjtTHxD85ZcGd_cK2t-rofyY_Zxm1xcg@mail.gmail.com>
-Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
- fixed clocks
-To: Marek Vasut <marex@denx.de>
-Cc: trini@konsulko.com, lukma@denx.de, seanga2@gmail.com, 
- francesco.dolcini@toradex.com, aford173@gmail.com, u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>
+References: <20250416224032.144791-1-heinrich.schuchardt@canonical.com>
+ <20250416224032.144791-2-heinrich.schuchardt@canonical.com>
+ <d8f9a58a-10cd-4366-bd6f-85f4effc747c@cherry.de>
+ <CAFLszThDLbf3fQySO_8u6OD3-BK2abE6NFVhvviRtrNs=PKdsA@mail.gmail.com>
+ <d448af91-ebe1-432c-ae20-3e8eb2efddf1@canonical.com>
+ <CAFLszTh29kgQ_bE8_gnORWH0PQ=H94=q7757mFOfiopCUL3eTg@mail.gmail.com>
+In-Reply-To: <CAFLszTh29kgQ_bE8_gnORWH0PQ=H94=q7757mFOfiopCUL3eTg@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Sat, 19 Apr 2025 21:22:02 +0200
+X-Gm-Features: ATxdqUEP1fBkJoKRfIotjg-SEvnAdebF6uiewo1gI64wjfHCheknzApmiXoKMPc
+Message-ID: <CAM=mAOnLTX3ZB6ioyPOoR+wyNKoA2VnxCKFMUHrZyM_wpuGzOA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] buildman: allow specifying configuration fragments
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,52 +111,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Simon Glass <sjg@chromium.org> schrieb am Sa., 19. Apr. 2025, 16:14:
 
-On Fri, Apr 18, 2025 at 11:53=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+> Hi Heinrich,
+>
+> On Sat, 19 Apr 2025 at 04:20, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > On 4/18/25 13:39, Simon Glass wrote:
+> > > Hi Quentin,
+> > >
+> > > On Fri, 18 Apr 2025 at 05:27, Quentin Schulz <quentin.schulz@cherry.de>
+> wrote:
+> > >>
+> > >> Hi Heinrich,
+> > >>
+> > >> On 4/17/25 12:40 AM, Heinrich Schuchardt wrote:
+> > >>> Currently we are no able to build with configuration fragments in
+> our CI.
+> > >>> With this patch buildman gets a new argument --fragments for passing
+> a
+> > >>> comma separated list of configuration fragments to add to the board
+> > >>> defconfigs, e.g.
+> > >>>
+> > >>>       tools/buildman/buildman \
+> > >>>       -o build \
+> > >>>       -k qemu-riscv64_smode \
+> > >>>       --fragments acpi.config
+> > >>>
+> > >>
+> > >> What about using:
+> > >>
+> > >> --fragment acpi.config --fragment fragment2.config
+> > >>
+> > >> ?
+> > >
+> > > Yes that could be useful. It would also allow wildcards, although the
+> > > code would need to drop the config/ directory prefix. Also, I see that
+> > > -z is available so perhaps that could be a (bad) short option?
+> >
+> > Hello Simon,
+> >
+> > What do you mean by useful?
+> >
+> > --fragments a,b conveys the same information as --fragment a --fragment
+> b.
+> >
+> > We are not passing any config/ directory with the fragment names.
+> >
+> > Using wildcards in does not depend on how fragment names are passed.
+> >
+> > As maintainer of buildman, please, clearly express how you want the
+> > fragment names to be passed. "Could be useful" does not indicate any
+> > decision but let's me hang in limbo.
+>
+> NAK
+>
+> We need a file which lists the valid boards for each config fragment.
+> Buildman should parse that and it should be possible (with an argument
+> like --build-all-fragments) to build all fragments for a board (or all
+> boards), to make sure that things actually build. See [1]
+>
+> So until that is done I'm going to NAK the whole concept[2].
+>
 
-> The "clock-output-names" is NEVER used for any clock look up.
+Building all possible permutations can easily result in excessive numbers
+of CI builds.
 
-In Linux, "clock-output-names" is used to register the name of the
-fixed-rate clock.
+We have been breaking ACPI builds multiple times and now you block testing.
 
-From Linux drivers/clk/clk-fixed-rate.c:
+I am not amused.
 
-```
-static struct clk_hw *_of_fixed_clk_setup(struct device_node *node)
-{
-....
+Best regards
 
-of_property_read_string(node, "clock-output-names", &clk_name);
+Heinrich
 
-hw =3D clk_hw_register_fixed_rate_with_accuracy(NULL, clk_name, NULL,
-    0, rate, accuracy);
-```
 
-In U-Boot, we should register a fixed-rate clock with the same name as in L=
-inux.
-
-This patch aims to make the U-Boot fixed-rate clock name conform to
-Linux standards.
-
-> I am fine with the first half of the description, but the second half is
-> wrong and this actually does not fix anything. Simply remove
-> clock-output-names from the osc_24m and the code will be broken again.
-
-In Linux, if "clock-output-names" is removed from the osc_24m node,
-the console becomes corrupted
-on an imx8mp-evk.
-
-> The clk_resolve_parent_clk() is meant to perform the aforementioned
-> resolution(), that is what "[PATCH v2 00/24] clk: Add
-> clk_resolve_parent_clk() and fix up iMX clock drivers" actually fixed.
-> It seems there is something still missing and clk_resolve_parent_clk()
-> does not do the resolution properly for some clock, but that is what
-> needs to be understood and fixed, not worked around this way.
-
-Please try to reproduce the problem on your end.
-
-On an imx8mp-based board, run 'usb start' in U-Boot, and this command will =
-fail.
-
-Thanks
+> Regards,
+> Simon
+>
+> [1]
+> https://patchwork.ozlabs.org/project/uboot/patch/20241108152350.3686274-9-sjg@chromium.org/
+> [2] https://lore.kernel.org/u-boot/20250329002537.GN93000@bill-the-cat/
+>
