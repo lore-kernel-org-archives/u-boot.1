@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 038A0C369C2
-	for <u-boot@archiver.kernel.org>; Sun, 20 Apr 2025 08:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F75EC369C2
+	for <u-boot@archiver.kernel.org>; Sun, 20 Apr 2025 09:00:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C25A82076;
-	Sun, 20 Apr 2025 10:59:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7DA528206E;
+	Sun, 20 Apr 2025 10:59:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gOzOLHU7";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="U+Xh/qeR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C5B9820B7; Sun, 20 Apr 2025 10:59:55 +0200 (CEST)
+ id 1743C820B7; Sun, 20 Apr 2025 10:59:56 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00EE782027
- for <u-boot@lists.denx.de>; Sun, 20 Apr 2025 10:59:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 326D382075
+ for <u-boot@lists.denx.de>; Sun, 20 Apr 2025 10:59:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,27 +31,30 @@ Received: from LT2ubnt.. (dynamic-046-114-111-177.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id A09153FF07; 
- Sun, 20 Apr 2025 08:59:51 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 3DE2E40442; 
+ Sun, 20 Apr 2025 08:59:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745139591;
- bh=kTg8Q7C8J4meu/TOQHZcZ3TDkcHoE9x5c7BNDxWlM/Y=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=gOzOLHU7EzLzjk/SIfW9J9QDeDSORM2Vj8t1rPdfBz1ngBgq+Gv5Lk+BhsFaVcCSH
- QO5O/l9JfGsvNs+6Ukd5Z32cLudzv29jBEjQKnJSyx+e1XrO7DpmzAjD30frYfUMf4
- IdbOFZ1c02hROXcBjRQc4cRkZsKL/Qzi7IcAzU5+UV+LHQtvbZyPNnIKiqNkr4HPhY
- 6gVJnM+OOe+dCewfLO5YIbyrAEZ6L+90JsZVxsK1lxDj6aQ46vi5azEjG+hCGZ3r5X
- 6K2qWxOkjuKyHeA130D4+pnuwNMnzNWEL5LPaUe87sgK2ppBU2O0zztrpsbmeBo1hR
- P1idHIPwf5M8Q==
+ s=20210705; t=1745139592;
+ bh=m23fMOs2Ka/CXqJ82zt6lQsvgEDSNYpYMpsKfeo/sOU=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=U+Xh/qeRMjHXgYB9Cw8nz5BjgL9pq3jrYeJ/yE8HsKGdaLXh+vCcX38qQf4VeLVq9
+ 9i48DpfPz+5FR/6BTxhTVFdDf2MQF8RJUT3Bg85qymnbPeNRVNI01kltE6rUovge4D
+ FHKl23D4V2pejkfWho/onM1P11rYhJ8dg46XdjkwCockNdhAhYgVEfW03Xu7I9yq34
+ D8CTw3TCaOLj/K+97RNc8RXvFMEvoeSZSygW9OesMqB5BNcTBv53BtjZLk+q3GQmM/
+ 3nLHBZ6JoZaZzcwDs/LWzvS7XVLmjZqksQ/cKDqs55+5RRNieMjXHciED0+fRsMR+D
+ oeNCMuxuhsTqw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/4] configs: ACPI enabled QEMU defconfigs
-Date: Sun, 20 Apr 2025 10:59:25 +0200
-Message-ID: <20250420085929.36226-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/4] configs: add qemu_arm64_acpi_defconfig
+Date: Sun, 20 Apr 2025 10:59:26 +0200
+Message-ID: <20250420085929.36226-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250420085929.36226-1-heinrich.schuchardt@canonical.com>
+References: <20250420085929.36226-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -70,27 +73,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For QEMU we have developed supporting passsing through ACPI tables.
-This functionality has been broken multipled times due to missing CI
-builds.
+Add a qemu_arm64 variant that supports ACPI.
 
-* Two new defconfigs qemu_arm64_acpi and qemu-riscv64_smode_acpi.
-* Assign the defconfigs to the respective maintainers.
-
-Heinrich Schuchardt (4):
-  configs: add qemu_arm64_acpi_defconfig
-  MAINTAINERS: add all qemu_arm64* defconfigs to VIRT
-  configs: add qemu-riscv64_smode_acpi_defconfig
-  MAINTAINERS: add qemu-riscv* defconfigs to QEMU RISC-V 'VIRT' BOARD
-
- board/emulation/qemu-arm/MAINTAINERS      | 3 +--
- board/emulation/qemu-riscv/MAINTAINERS    | 7 +------
- configs/qemu-riscv64_smode_acpi_defconfig | 2 ++
- configs/qemu_arm64_acpi_defconfig         | 2 ++
- 4 files changed, 6 insertions(+), 8 deletions(-)
- create mode 100644 configs/qemu-riscv64_smode_acpi_defconfig
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ configs/qemu_arm64_acpi_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
  create mode 100644 configs/qemu_arm64_acpi_defconfig
 
+diff --git a/configs/qemu_arm64_acpi_defconfig b/configs/qemu_arm64_acpi_defconfig
+new file mode 100644
+index 00000000000..f85f2913530
+--- /dev/null
++++ b/configs/qemu_arm64_acpi_defconfig
+@@ -0,0 +1,2 @@
++#include <configs/qemu_arm64_defconfig>
++#include <board/emulation/configs/acpi.config>
 -- 
 2.48.1
 
