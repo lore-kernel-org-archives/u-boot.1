@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 663E6C369C2
-	for <u-boot@archiver.kernel.org>; Sun, 20 Apr 2025 11:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A490DC369C2
+	for <u-boot@archiver.kernel.org>; Sun, 20 Apr 2025 11:58:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F4C0820EA;
-	Sun, 20 Apr 2025 13:58:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B66558210D;
+	Sun, 20 Apr 2025 13:58:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=kpnmail.nl header.i=@kpnmail.nl header.b="RGqSfRWr";
+	dkim=pass (1024-bit key; secure) header.d=kpnmail.nl header.i=@kpnmail.nl header.b="tVoahEkG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF1CC82140; Sun, 20 Apr 2025 13:58:23 +0200 (CEST)
+ id 33DC582054; Sun, 20 Apr 2025 13:58:25 +0200 (CEST)
 Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D7318212F
- for <u-boot@lists.denx.de>; Sun, 20 Apr 2025 13:58:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25AF6820EB
+ for <u-boot@lists.denx.de>; Sun, 20 Apr 2025 13:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=kettenis@openbsd.org
-X-KPN-MessageId: de81d381-1dde-11f0-8ec8-005056994fde
+X-KPN-MessageId: df70d0cc-1dde-11f0-8ec8-005056994fde
 Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
  by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id de81d381-1dde-11f0-8ec8-005056994fde;
- Sun, 20 Apr 2025 13:59:10 +0200 (CEST)
+ id df70d0cc-1dde-11f0-8ec8-005056994fde;
+ Sun, 20 Apr 2025 13:59:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kpnmail.nl; s=kpnmail01;
  h=mime-version:message-id:date:subject:to:from;
- bh=Y8v9qPSAYI5I2oLk8LtqEbfWJ8ewF1GpAlEZZpOpsFA=;
- b=RGqSfRWrSteWXi1q2lAgo7D7a7fy7fNdyWBItwFs/g+mW/XphJ6T9afPqIpT53ypoxN+Cx1DS8ovC
- fXOfQzxgzgzGaUeV4erdmHP9y1bGt0eA/7G4BjfED7G9uuNDM4TKVKyHlI9SCaCmgUYQnbmce+REYN
- QVdAVJ8jLXX6lncQ=
-X-KPN-MID: 33|M4vfHiFytjlim26hECf9qdNRO8gp12JC2rSvAw8T+IfyVWUatsuSzb6MWyVFLPs
- PhchbqRl0KeSt7ynURpobSTuMU5pjBQNDmDU46Tu/aPU=
+ bh=tKXbFkwmPQwavWr1sj+1HQk3dAnGpeUPBYJhC73eOO4=;
+ b=tVoahEkGX0sCsqaOosEl1/AmhuMqpT8YWMa+9bg2cFrbQSDmUkGhZoozwrXghI39PhQ/lBNPVLXNu
+ qX7Eyk1sKz2Ig6DsJmqT0zzzebNlK31gFcnj1/r3KOZzICq+DaEOJ8lyxASI7B+GmH3VuuXZImPOBP
+ bu2P7PsslMdh0HWQ=
+X-KPN-MID: 33|XyWu2yR35dVG5M3rmHcEfeq2vRuLalgQ3Dceji8jnQrEzkD/a6P2YCnurb4Ke3P
+ K6soAJCfnT8ealN992YJ3jA==
 X-KPN-VerifiedSender: No
-X-CMASSUN: 33|2qcTS1eB179W2zLoODRUUAZHam38ZYdXs/MtPi238bVpUCX76V1k79MHaxdp0wY
- asaTOsT/aKF9FnQKkw5gkvg==
+X-CMASSUN: 33|l1CqXeWL/s3EkHtosrCJ06mL9vTJeXG5SGkBsj2o+ijLasb03/VuYCyL+wsFXh8
+ 8svkxMLw/E68iOCwkY0XtNg==
 X-Originating-IP: 80.61.163.207
 Received: from bizet.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
  [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id c12ee633-1dde-11f0-97e2-00505699d6e5;
- Sun, 20 Apr 2025 13:58:21 +0200 (CEST)
+ id c223874d-1dde-11f0-97e2-00505699d6e5;
+ Sun, 20 Apr 2025 13:58:22 +0200 (CEST)
 From: Mark Kettenis <kettenis@openbsd.org>
 To: u-boot@lists.denx.de
 Cc: kettenis@openbsd.org,
 	trini@konsulko.com,
 	marcan@marcan.st
-Subject: [PATCH 3/6] arm: apple: rtkit: Add a generic RTKit helper driver
-Date: Sun, 20 Apr 2025 13:58:05 +0200
-Message-ID: <20250420115808.94272-4-kettenis@openbsd.org>
+Subject: [PATCH 4/6] arm: apple: rtkit: Add OSLog buffer support
+Date: Sun, 20 Apr 2025 13:58:06 +0200
+Message-ID: <20250420115808.94272-5-kettenis@openbsd.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250420115808.94272-1-kettenis@openbsd.org>
 References: <20250420115808.94272-1-kettenis@openbsd.org>
@@ -78,141 +78,159 @@ X-Virus-Status: Clean
 
 From: Hector Martin <marcan@marcan.st>
 
-This driver handles the MTP ASC coprocessor, which does not need any
-special handling on the RTKit side and communicates out-of-band.
+This will work for u-boot itself, but needs a special workaround in the
+MTP driver for Linux handoff to work.
 
 Signed-off-by: Hector Martin <marcan@marcan.st>
 Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
 ---
- arch/arm/include/asm/arch-apple/rtkit.h |  2 +
- arch/arm/mach-apple/Makefile            |  1 +
- arch/arm/mach-apple/rtkit_helper.c      | 97 +++++++++++++++++++++++++
- 3 files changed, 100 insertions(+)
- create mode 100644 arch/arm/mach-apple/rtkit_helper.c
+ arch/arm/mach-apple/rtkit.c | 69 ++++++++++++++++++++++++++++++-------
+ 1 file changed, 56 insertions(+), 13 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-apple/rtkit.h b/arch/arm/include/asm/arch-apple/rtkit.h
-index b795215feb7..1b6c6ccd821 100644
---- a/arch/arm/include/asm/arch-apple/rtkit.h
-+++ b/arch/arm/include/asm/arch-apple/rtkit.h
-@@ -29,3 +29,5 @@ int apple_rtkit_boot(struct apple_rtkit *rtk);
- int apple_rtkit_set_ap_power(struct apple_rtkit *rtk, int pwrstate);
- int apple_rtkit_poll(struct apple_rtkit *rtk, ulong timeout);
- int apple_rtkit_shutdown(struct apple_rtkit *rtk, int pwrstate);
+diff --git a/arch/arm/mach-apple/rtkit.c b/arch/arm/mach-apple/rtkit.c
+index 5e8e282ec0e..d294ee09350 100644
+--- a/arch/arm/mach-apple/rtkit.c
++++ b/arch/arm/mach-apple/rtkit.c
+@@ -19,6 +19,7 @@
+ #define APPLE_RTKIT_EP_SYSLOG 2
+ #define APPLE_RTKIT_EP_DEBUG 3
+ #define APPLE_RTKIT_EP_IOREPORT 4
++#define APPLE_RTKIT_EP_OSLOG 8
+ #define APPLE_RTKIT_EP_TRACEKIT 10
+ 
+ /* Messages for management endpoint. */
+@@ -47,6 +48,11 @@
+ #define APPLE_RTKIT_MGMT_EPMAP_REPLY 8
+ #define APPLE_RTKIT_MGMT_EPMAP_REPLY_MORE BIT(0)
+ 
++#define APPLE_RTKIT_OSLOG_TYPE GENMASK_ULL(63, 56)
++#define APPLE_RTKIT_OSLOG_BUFFER_REQUEST 1
++#define APPLE_RTKIT_OSLOG_SIZE GENMASK_ULL(55, 36)
++#define APPLE_RTKIT_OSLOG_IOVA GENMASK_ULL(35, 0)
 +
-+int apple_rtkit_helper_poll(struct udevice *dev, ulong timeout);
-diff --git a/arch/arm/mach-apple/Makefile b/arch/arm/mach-apple/Makefile
-index 50b465b9473..d79a3a69592 100644
---- a/arch/arm/mach-apple/Makefile
-+++ b/arch/arm/mach-apple/Makefile
-@@ -3,4 +3,5 @@
- obj-y += board.o
- obj-y += lowlevel_init.o
- obj-y += rtkit.o
-+obj-$(CONFIG_APPLE_MTP_KEYB) += rtkit_helper.o
- obj-$(CONFIG_NVME_APPLE) += sart.o
-diff --git a/arch/arm/mach-apple/rtkit_helper.c b/arch/arm/mach-apple/rtkit_helper.c
-new file mode 100644
-index 00000000000..3b755008195
---- /dev/null
-+++ b/arch/arm/mach-apple/rtkit_helper.c
-@@ -0,0 +1,97 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR MIT
-+/*
-+ * Copyright The Asahi Linux Contributors
-+ */
-+
-+#include <dm.h>
-+#include <mailbox.h>
-+#include <mapmem.h>
-+#include <reset.h>
-+
-+#include <asm/io.h>
-+#include <asm/arch/rtkit.h>
-+#include <linux/iopoll.h>
-+
-+/* ASC registers */
-+#define REG_CPU_CTRL		0x0044
-+#define  REG_CPU_CTRL_RUN	BIT(4)
-+
-+struct rtkit_helper_priv {
-+	void *asc;		/* ASC registers */
-+	struct mbox_chan chan;
-+	struct apple_rtkit *rtk;
-+};
-+
-+static int rtkit_helper_probe(struct udevice *dev)
-+{
-+	struct rtkit_helper_priv *priv = dev_get_priv(dev);
-+	u32 ctrl;
-+	int ret;
-+
-+	priv->asc = dev_read_addr_ptr(dev);
-+	if (!priv->asc)
-+		return -EINVAL;
-+
-+	ret = mbox_get_by_index(dev, 0, &priv->chan);
-+	if (ret < 0)
-+		return ret;
-+
-+	ctrl = readl(priv->asc + REG_CPU_CTRL);
-+	writel(ctrl | REG_CPU_CTRL_RUN, priv->asc + REG_CPU_CTRL);
-+
-+	priv->rtk = apple_rtkit_init(&priv->chan, priv, NULL, NULL);
-+	if (!priv->rtk)
-+		return -ENOMEM;
-+
-+	ret = apple_rtkit_boot(priv->rtk);
-+	if (ret < 0) {
-+		printf("%s: Helper apple_rtkit_boot returned: %d\n", __func__, ret);
-+		return ret;
+ #define APPLE_RTKIT_MIN_SUPPORTED_VERSION 11
+ #define APPLE_RTKIT_MAX_SUPPORTED_VERSION 12
+ 
+@@ -66,6 +72,7 @@ struct apple_rtkit {
+ 	struct apple_rtkit_buffer syslog_buffer;
+ 	struct apple_rtkit_buffer crashlog_buffer;
+ 	struct apple_rtkit_buffer ioreport_buffer;
++	struct apple_rtkit_buffer oslog_buffer;
+ 
+ 	int iop_pwr;
+ 	int ap_pwr;
+@@ -98,6 +105,8 @@ void apple_rtkit_free(struct apple_rtkit *rtk)
+ 			rtk->shmem_destroy(rtk->cookie, &rtk->crashlog_buffer);
+ 		if (rtk->ioreport_buffer.buffer)
+ 			rtk->shmem_destroy(rtk->cookie, &rtk->ioreport_buffer);
++		if (rtk->oslog_buffer.buffer)
++			rtk->shmem_destroy(rtk->cookie, &rtk->oslog_buffer);
+ 	} else {
+ 		if (rtk->syslog_buffer.buffer)
+ 			free(rtk->syslog_buffer.buffer);
+@@ -105,6 +114,8 @@ void apple_rtkit_free(struct apple_rtkit *rtk)
+ 			free(rtk->crashlog_buffer.buffer);
+ 		if (rtk->ioreport_buffer.buffer)
+ 			free(rtk->ioreport_buffer.buffer);
++		if (rtk->oslog_buffer.buffer)
++			free(rtk->oslog_buffer.buffer);
+ 	}
+ 	free(rtk);
+ }
+@@ -112,16 +123,8 @@ void apple_rtkit_free(struct apple_rtkit *rtk)
+ static int rtkit_handle_buf_req(struct apple_rtkit *rtk, int endpoint, struct apple_mbox_msg *msg)
+ {
+ 	struct apple_rtkit_buffer *buf;
+-	size_t num_4kpages;
+ 	int ret;
+ 
+-	num_4kpages = FIELD_GET(APPLE_RTKIT_BUFFER_REQUEST_SIZE, msg->msg0);
+-
+-	if (num_4kpages == 0) {
+-		printf("%s: unexpected request for buffer without size\n", __func__);
+-		return -1;
+-	}
+-
+ 	switch (endpoint) {
+ 	case APPLE_RTKIT_EP_CRASHLOG:
+ 		buf = &rtk->crashlog_buffer;
+@@ -132,13 +135,31 @@ static int rtkit_handle_buf_req(struct apple_rtkit *rtk, int endpoint, struct ap
+ 	case APPLE_RTKIT_EP_IOREPORT:
+ 		buf = &rtk->ioreport_buffer;
+ 		break;
++	case APPLE_RTKIT_EP_OSLOG:
++		buf = &rtk->oslog_buffer;
++		break;
+ 	default:
+ 		printf("%s: unexpected endpoint %d\n", __func__, endpoint);
+ 		return -1;
+ 	}
+ 
++	switch (endpoint) {
++	case APPLE_RTKIT_EP_OSLOG:
++		buf->size = FIELD_GET(APPLE_RTKIT_OSLOG_SIZE, msg->msg0);
++		buf->dva = FIELD_GET(APPLE_RTKIT_OSLOG_IOVA, msg->msg0 << 12);
++		break;
++	default:
++		buf->size = FIELD_GET(APPLE_RTKIT_BUFFER_REQUEST_SIZE, msg->msg0) << 12;
++		buf->dva = FIELD_GET(APPLE_RTKIT_BUFFER_REQUEST_IOVA, msg->msg0);
++		break;
 +	}
 +
-+	ret = apple_rtkit_set_ap_power(priv->rtk, APPLE_RTKIT_PWR_STATE_ON);
-+	if (ret < 0) {
-+		printf("%s: Helper apple_rtkit_set_ap_power returned: %d\n", __func__, ret);
-+		return ret;
++	if (buf->size == 0) {
++		printf("%s: unexpected request for buffer without size\n", __func__);
++		return -1;
 +	}
 +
-+	return 0;
-+}
+ 	buf->dva = FIELD_GET(APPLE_RTKIT_BUFFER_REQUEST_IOVA, msg->msg0);
+-	buf->size = num_4kpages << 12;
+ 	buf->is_mapped = !!buf->dva;
+ 
+ 	if (rtk->shmem_setup) {
+@@ -157,10 +178,18 @@ static int rtkit_handle_buf_req(struct apple_rtkit *rtk, int endpoint, struct ap
+ 	}
+ 
+ 	if (!buf->is_mapped) {
+-		msg->msg0 = FIELD_PREP(APPLE_RTKIT_MGMT_TYPE, APPLE_RTKIT_BUFFER_REQUEST) |
+-				FIELD_PREP(APPLE_RTKIT_BUFFER_REQUEST_SIZE, num_4kpages) |
+-				FIELD_PREP(APPLE_RTKIT_BUFFER_REQUEST_IOVA, buf->dva);
+-		msg->msg1 = endpoint;
++		/* oslog uses different fields */
++		if (endpoint == APPLE_RTKIT_EP_OSLOG) {
++			msg->msg0 = FIELD_PREP(APPLE_RTKIT_OSLOG_TYPE,
++					       APPLE_RTKIT_OSLOG_BUFFER_REQUEST);
++			msg->msg0 |= FIELD_PREP(APPLE_RTKIT_OSLOG_SIZE, buf->size);
++			msg->msg0 |= FIELD_PREP(APPLE_RTKIT_OSLOG_IOVA, buf->dva >> 12);
++		} else {
++			msg->msg0 = FIELD_PREP(APPLE_RTKIT_MGMT_TYPE,
++					   APPLE_RTKIT_BUFFER_REQUEST);
++			msg->msg0 |= FIELD_PREP(APPLE_RTKIT_BUFFER_REQUEST_SIZE, buf->size >> 12);
++			msg->msg0 |= FIELD_PREP(APPLE_RTKIT_BUFFER_REQUEST_IOVA, buf->dva);
++		}
+ 
+ 		return mbox_send(rtk->chan, msg);
+ 	}
+@@ -193,6 +222,20 @@ int apple_rtkit_poll(struct apple_rtkit *rtk, ulong timeout)
+ 		}
+ 	}
+ 
++	if (endpoint == APPLE_RTKIT_EP_OSLOG) {
++		msgtype = FIELD_GET(APPLE_RTKIT_OSLOG_TYPE, msg.msg0);
 +
-+static int rtkit_helper_remove(struct udevice *dev)
-+{
-+	struct rtkit_helper_priv *priv = dev_get_priv(dev);
-+	u32 ctrl;
++		if (msgtype == APPLE_RTKIT_OSLOG_BUFFER_REQUEST) {
++			ret = rtkit_handle_buf_req(rtk, endpoint, &msg);
++			if (ret < 0)
++				return ret;
++			return 0;
++		} else {
++			/* Ignore */
++			return 0;
++		}
++	}
 +
-+	apple_rtkit_shutdown(priv->rtk, APPLE_RTKIT_PWR_STATE_QUIESCED);
-+
-+	ctrl = readl(priv->asc + REG_CPU_CTRL);
-+	writel(ctrl & ~REG_CPU_CTRL_RUN, priv->asc + REG_CPU_CTRL);
-+
-+	apple_rtkit_free(priv->rtk);
-+	priv->rtk = NULL;
-+
-+	return 0;
-+}
-+
-+int apple_rtkit_helper_poll(struct udevice *dev, ulong timeout)
-+{
-+	struct rtkit_helper_priv *priv = dev_get_priv(dev);
-+
-+	return apple_rtkit_poll(priv->rtk, timeout);
-+}
-+
-+static const struct udevice_id rtkit_helper_ids[] = {
-+	{ .compatible = "apple,rtk-helper-asc4" },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(rtkit_helper) = {
-+	.name = "rtkit_helper",
-+	.id = UCLASS_MISC,
-+	.of_match = rtkit_helper_ids,
-+	.priv_auto = sizeof(struct rtkit_helper_priv),
-+	.probe = rtkit_helper_probe,
-+	.remove = rtkit_helper_remove,
-+	.flags = DM_FLAG_OS_PREPARE,
-+};
+ 	if (endpoint == APPLE_RTKIT_EP_IOREPORT) {
+ 		// these two messages have to be ack-ed for proper startup
+ 		if (msgtype == 0xc || msgtype == 0x8) {
 -- 
 2.49.0
 
