@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FFAEC369D2
-	for <u-boot@archiver.kernel.org>; Sun, 20 Apr 2025 09:00:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E6EC369C2
+	for <u-boot@archiver.kernel.org>; Sun, 20 Apr 2025 11:58:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 595798214A;
-	Sun, 20 Apr 2025 10:59:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 678028205A;
+	Sun, 20 Apr 2025 13:58:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BNjshjwA";
+	dkim=pass (1024-bit key; secure) header.d=kpnmail.nl header.i=@kpnmail.nl header.b="C9H4b6xs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB36A82119; Sun, 20 Apr 2025 10:59:58 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 1DD628205B; Sun, 20 Apr 2025 13:58:15 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D444582105
- for <u-boot@lists.denx.de>; Sun, 20 Apr 2025 10:59:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41ABE82054
+ for <u-boot@lists.denx.de>; Sun, 20 Apr 2025 13:58:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-111-177.46.114.pool.telefonica.de
- [46.114.111.177])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4F4BC40445; 
- Sun, 20 Apr 2025 08:59:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745139594;
- bh=cayPxbPcy3PPDYFxWeLPbCgHfQT6SnsfIdsjiz0Utzs=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=BNjshjwA02XwJvArfzS1yoYrmANOt6pl4Uao1ooZ3c97ChqBvuNtzvdDE5lf1G7NN
- HRjH8VVpvCLHtw/bf8Nm8WVOTosl9rsYuYzz00zVUUOrI5HWjPQZWlw4W6pmS6Uor1
- +Q/wS7jb5EBLuGgP35x1RAevFuo2o9ja9BtLRshJMOmLzXrlNMDwqnlu5vnWeMZn7U
- SZLKqjQhnJ+lX/i4K8rXsmmR7E/sHIUxV2aBTdV5KpiP7ZGNc93yKVs+EDgvk+tKar
- Iq9gPU1Z/uwerAGSWVkDmv9wvRsV/W2yJ0Ju4NyN15v/HmZH/ckzmCxFfzCIX5RZcq
- 6Fk3eNOiI8HxQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 4/4] MAINTAINERS: add qemu-riscv* defconfigs to QEMU RISC-V
- 'VIRT' BOARD
-Date: Sun, 20 Apr 2025 10:59:29 +0200
-Message-ID: <20250420085929.36226-5-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250420085929.36226-1-heinrich.schuchardt@canonical.com>
-References: <20250420085929.36226-1-heinrich.schuchardt@canonical.com>
+ dmarc=none (p=none dis=none) header.from=openbsd.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=kettenis@openbsd.org
+X-KPN-MessageId: fd170a37-1dde-11f0-beb8-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id fd170a37-1dde-11f0-beb8-005056992ed3;
+ Sun, 20 Apr 2025 14:00:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kpnmail.nl; s=kpnmail01;
+ h=mime-version:message-id:date:subject:to:from;
+ bh=g1nxkIz+IKXNkAxavbL1g3Eke2buKyzLxgydNzVCBJU=;
+ b=C9H4b6xsfLwxJNsxnDa0WnUXfGnG6N39KjHTNFmWguPmSPb22vyea+2LMEP0i0qz6FAB76kQWnrxu
+ JdS6T2/giVFNIxmNzd1SEGwP3OCCsS5uAzs2+bNo/0KZ0aSueaOXIsdIMqZxx5bYm0HZVF4az6t0G+
+ Bm7BvtPRrCWf8GJ8=
+X-KPN-MID: 33|XHq2qnMKLrvnftZ0pBW4FLDFycy2+lEWpyq3xzExmNFe4isRCajGOi59qE+DM4F
+ 3yeoAeQN4UWz6tcJ6bU2nzZYnLqe2XOka5fI/TozhOOo=
+X-KPN-VerifiedSender: No
+X-CMASSUN: 33|+0LVNW/O3BYW0JF+oH6+wtIkjtClkLxYRoIBCxPZ6Vvx0oV7sz23a+1I4bgNazE
+ QuW8ITsT7bfj8uNsKYLIsDQ==
+X-Originating-IP: 80.61.163.207
+Received: from bizet.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id bb1ee4f9-1dde-11f0-97e2-00505699d6e5;
+ Sun, 20 Apr 2025 13:58:11 +0200 (CEST)
+From: Mark Kettenis <kettenis@openbsd.org>
+To: u-boot@lists.denx.de
+Cc: kettenis@openbsd.org,
+	trini@konsulko.com,
+	marcan@marcan.st
+Subject: [PATCH 0/6] Apple RTKit improvements
+Date: Sun, 20 Apr 2025 13:58:02 +0200
+Message-ID: <20250420115808.94272-1-kettenis@openbsd.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,30 +74,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the follow board to VIRT which otherwise would be unmaintained:
+This is a collection of improvements for the Apple RTKit code
+that we have been carrying downstream for some time now.
 
-* qemu-riscv64_smode_acpi_defconfig
+Hector Martin (6):
+  arm: apple: rtkit: Add support for AP power & syslogs
+  arm: apple: rtkit: Add default buffer handlers
+  arm: apple: rtkit: Add a generic RTKit helper driver
+  arm: apple: rtkit: Add OSLog buffer support
+  arm: apple: rtkit: Add endpoint field to buffers
+  arm: apple: rtkit: Support allocating OSLog out of SRAM in helper
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- board/emulation/qemu-riscv/MAINTAINERS | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ arch/arm/include/asm/arch-apple/rtkit.h |   5 +
+ arch/arm/mach-apple/Makefile            |   1 +
+ arch/arm/mach-apple/rtkit.c             | 234 ++++++++++++++++++------
+ arch/arm/mach-apple/rtkit_helper.c      | 145 +++++++++++++++
+ 4 files changed, 333 insertions(+), 52 deletions(-)
+ create mode 100644 arch/arm/mach-apple/rtkit_helper.c
 
-diff --git a/board/emulation/qemu-riscv/MAINTAINERS b/board/emulation/qemu-riscv/MAINTAINERS
-index 3d7453f1b43..d75d1b5f190 100644
---- a/board/emulation/qemu-riscv/MAINTAINERS
-+++ b/board/emulation/qemu-riscv/MAINTAINERS
-@@ -4,9 +4,4 @@ S:	Maintained
- F:	board/emulation/qemu-riscv/
- F:	board/emulation/common/
- F:	include/configs/qemu-riscv.h
--F:	configs/qemu-riscv32_defconfig
--F:	configs/qemu-riscv32_smode_defconfig
--F:	configs/qemu-riscv32_spl_defconfig
--F:	configs/qemu-riscv64_defconfig
--F:	configs/qemu-riscv64_smode_defconfig
--F:	configs/qemu-riscv64_spl_defconfig
-+F:	configs/qemu-riscv*
 -- 
-2.48.1
+2.49.0
 
