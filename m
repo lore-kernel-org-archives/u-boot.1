@@ -4,100 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 166BCC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9320EC369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:51:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE4BB820E8;
-	Mon, 21 Apr 2025 18:26:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD00A81703;
+	Mon, 21 Apr 2025 18:51:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vYdJO1d1";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="iTAhgj3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4CF481F0D; Mon, 21 Apr 2025 18:26:31 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 78CB98171B; Mon, 21 Apr 2025 18:51:17 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6B138197F
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 18:26:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7E62815D1
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 18:51:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 0E20B40006
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 16:26:28 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0AD0641A04
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 16:51:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745252788;
- bh=JIdSCG7RxchTyd9kL2u4nrA99x9/0NYpBSGxxqP0QNQ=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=vYdJO1d1v7dxYdV/3UaeoF1R7IOCpw2BSPRHXY8LNL02jPbf4Px+uNG2H1vk5CkNo
- 6e2mqoFJlmiEs/QZvjK62Bqy7pIlvFjcAma8wEJeWcrBEexedgmpTeds5d07Vz0Wq2
- kojfSKyCz1pY40miqUR6UAjGdNqJlv+3rGLrk2lncYHLD3ndsTa3tME3AWY3vJZxad
- m9ReES2+k2KNNiDunExiexXeSon6n8EAEaFUNpD2gfhVSj7pP1xCwiNzvgdRbxvhAB
- CrMCnjn1zESbmJm6bF4rHb32SSbxTUcv/HwNMztYDoxTMZ/Bf8r26+lk2QbVdSYBh/
- dTMXThkfo1xpw==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-391315098b2so1115463f8f.2
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:26:28 -0700 (PDT)
+ s=20210705; t=1745254274;
+ bh=ye7lKoaaT/TMbCUFXV32XJguO/a2CJdeLu1D+LgvAh8=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=iTAhgj3zZx3QdAkqiEdHTozfNUX+4VBhZIVGvrL/TG4HEGtO3xsRDsGFjk6YC3T15
+ 9+IdcUPJ3zQTXgJRU8hYuSoPr2hLILPLbmG/ccKjp0z3aick5TurvDz9xAMr0HxJKe
+ ZY8vTUlMaDzLmELFI1omkV1RX2LcNSs6tdLETPQaYmjMvvX4EZORLVJ49kHcDt/lIz
+ n9HWIY+ir1p+ODjwXuip8YRVQp3QlnJNolJV/H1gxMPuUbkx3jX2jookkLb14Av+ZP
+ rc9VsS0FwfEChUJ9bhUNfPtF9EHFhJa1Y4a8ww0EhryNhhVnVQnL8cijDZAMm/J5hr
+ 17nPNFI+R0Haw==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3913aaf1e32so1865654f8f.0
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:51:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745252787; x=1745857587;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JIdSCG7RxchTyd9kL2u4nrA99x9/0NYpBSGxxqP0QNQ=;
- b=At+Cu56MDAI/0nC7FQlGsUWuq8rnE4wMxQV6639AlH1BJgMW66FnNbDWEs+GHRzqWc
- AG+XVqrEvoUityP1dpHqlsQGPrzsJ8C6HF13uSIzbg/RVH7ktQIoMEy+T4eynGU6MWov
- zRk4FaMdAFy+N0EydymCmmU8ZEjdcZFdD5zjgUiLnZ8g+3Wer8SF+bTYrpR5IdWHKtC1
- xW7CttIFQgrUy0NdUlgiL/rmjYq1+pf0etDjqqNcqKQSXew7WybwTQ5KzwpJ/703YJBh
- K33QtY7vDMT9V2z5msvayZkNSsdFqpt6X0UeBMHp5o810tDDpp/qAoH26yjXRHEOkjoq
- cETA==
+ d=1e100.net; s=20230601; t=1745254271; x=1745859071;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ye7lKoaaT/TMbCUFXV32XJguO/a2CJdeLu1D+LgvAh8=;
+ b=IoEK4eofGqssoyAsWxVAawNdpE+9Kd5fosYn00CJRVT2Fgo8kU+CuOLAMtbvrXZi/g
+ LK/6bkHmXzs0BH/EB2XQ3Sp7ZOtLZm3GBB3JSElScQoflAAxjuyR/BTFGyE0mSa1T70R
+ 5uT9PLZlrYcPmyZLadkbs24fbwVHxGlK/5HkZ9cZKJ+aBI4xrjSD5Y61a/Bw3f8ku/3J
+ gsQK5r//noOKGBDf9uJ/TuFn5PV5HhXyl1E0yNax+SnoByIk41cRKWNi+vTZBemxLyEX
+ FsIJwGGwwdN2LiQQA5RtqZtYAeisyt2Cd4mlfH5ZSnJ/y1InIsOXUrsQY0J+oECYuHMU
+ 6ThA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZcr3Rq6K8/i8gPCrQAmLF59V9WKVM9YY3n3WoZozW3LuUsRkNKwoohEwCf6Pdodcfth1pvbg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTBG4fF/ZNd27cph0YBVmJeNtff7DWkAGLD2XK5pl4Ax5a5jHs
- ZKsLSWADHa0YiGLcl01GQOwPKbwfa4iGMVlfXPU8ivznLaMR/cVtLcQlxYr6HqB2oFaZdwel52Q
- ZwWvqvUxAqbY7bAJ6TpFulRxyD1a+8tFDR6aIEsb9b0QEYK+8s+5HIBRi+pGiFqdp+BM=
-X-Gm-Gg: ASbGncsAHGcUud7gqoaqiDW9321o3KfgtwC2G4V1/zddkIj4dazEjWckR5aj7s1VskW
- UzviFUswHEHio4Fngfh5hfTWAGtc1NJg4hQjkuh1mF9+nHWSf8vWjFw8sjjc0uDW40i5dddv0Zv
- 2vVUhs2JHn6LGWv1FErzhBEfIfXV4bIF/olD0eVX6I960yUAHBPu5/c2/L2e/3YlPkd+/sH8Xm+
- 6pBPOBZ3Ol61qYjaXtwdfStWiOnkHO40ljmWvihppe6O9TXPPTzme79etI/Gu/bas0xJhPsHdM8
- sf7Ukf2MpkiVFMVgasNslRzCpa1bZ8XFSFMdLn1auUgtfbV2x3Sa8vGzdgdo8U2b/bVLS61co/U
- 3PUvEUvwAZ+DPqg==
-X-Received: by 2002:a05:6000:1788:b0:391:2e6a:30fe with SMTP id
- ffacd0b85a97d-39efbad50a9mr9783293f8f.39.1745252787618; 
- Mon, 21 Apr 2025 09:26:27 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHrQDZ+D80ydgVSCpsEdH29hcp4EUaOzaTO2P/bE1ijUDMguuEhJ1JYF5NMoBgrXXKENdgwaw==
-X-Received: by 2002:a05:6000:1788:b0:391:2e6a:30fe with SMTP id
- ffacd0b85a97d-39efbad50a9mr9783275f8f.39.1745252787239; 
- Mon, 21 Apr 2025 09:26:27 -0700 (PDT)
-Received: from localhost.localdomain
+ AJvYcCVYFti8GoyMGwjYNCiLAoh1BL89Ws6ZMZ6I5pfk3E8kh6MWqlW5d9MkPU2wI4/wggLMuR87n5Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGvKeE/e7m7QHd7ex9TnKU2wE1RcfANiyTE27zLTh1L3w9rA1r
+ P7CB+sCWfNBQb4VdhlXEQ7Go9g2pn7XpAiZzx7yBtOqI/N8zjmFOiM5yWjUTN6aKLgZa0qfTNCb
+ Tx0ma4ZJThmK1ZO3qNmQLAFozbu7UmrLSklxV5ZsUsunpyfbqDWx9RgkwwpvwWn00zCk=
+X-Gm-Gg: ASbGncutpfWangw78BrEiveZgnaWvWej/IWRzUXQIpSaUCBp3Hv2Mv8plu5+0Abx5eW
+ XEdV/8V6Zfvrj4MBAR8PLN8ixzOFnGJI3Cn7SY9lUiKqUGwqZpJHArjOv6rHs6PQG27l75qeGIK
+ 9pj1Cif7Mh8ifkzoqVktV7eLTbJP9wkk9AsIcJshHaA1XOqh6Ys4Anz9cgHgnIqdHjeH8pOeT++
+ I+OH5JZHDyANVWR5yEujXCiUK36W/B9+/5m65QVr2Rm9B2PTaJFFMXsdNfyIPL7WGCmivOAlaXM
+ 61F5NRnjjyv0ki2UhgSa2wasZpH40FkMUl65UVL8pEpB5FPSrCPJWlFrkwhLe29qIrIezetZxvA
+ JszSo4PkR
+X-Received: by 2002:a05:6000:4021:b0:390:f9f9:3e9c with SMTP id
+ ffacd0b85a97d-39efba5dd7emr9656932f8f.25.1745254271496; 
+ Mon, 21 Apr 2025 09:51:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFOCGZpTO6Lc0Gp+To8+20LoDmaxL00HMTE6/3OS5DpnqK8sByd4l1RVIw97iIXTyh8AMncJg==
+X-Received: by 2002:a05:6000:4021:b0:390:f9f9:3e9c with SMTP id
+ ffacd0b85a97d-39efba5dd7emr9656916f8f.25.1745254271099; 
+ Mon, 21 Apr 2025 09:51:11 -0700 (PDT)
+Received: from [192.168.103.102]
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5acce9sm141456225e9.13.2025.04.21.09.26.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 09:26:26 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 8/8] board/emulation/qemu-arm: enable EFI boot manager
-Date: Mon, 21 Apr 2025 18:25:55 +0200
-Message-ID: <20250421162555.1200687-9-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
-References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+ ffacd0b85a97d-39efa421c6csm12592178f8f.18.2025.04.21.09.51.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Apr 2025 09:51:10 -0700 (PDT)
+Message-ID: <7b446edc-ec71-4be3-ada6-c677c25afdb6@canonical.com>
+Date: Mon, 21 Apr 2025 18:51:09 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] boot: BOOTMETH_DISTRO should select
+ BOOTMETH_EFI_BOOTMGR
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: sjg@chromium.org, trini@konsulko.com, mkorpershoek@kernel.org,
+ ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, u-boot@lists.denx.de
+References: <20250421094310.764765-1-heinrich.schuchardt@canonical.com>
+ <87jz7dvjjh.fsf@bloch.sibelius.xs4all.nl>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <87jz7dvjjh.fsf@bloch.sibelius.xs4all.nl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,34 +115,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add EFI boot manager to boot targets.
+On 21.04.25 13:30, Mark Kettenis wrote:
+>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> Date: Mon, 21 Apr 2025 11:43:10 +0200
+> 
+> Hi Heinrich,
+> 
+>> Distros expect the EFI boot manager to run. It falls back to launching
+>> EFI\BOOT\BOOT<ARCH>.EFI from the ESP.
+>>
+>> BOOTMETH_EFILOADER is obsolete.
+> 
+> I don't think this is true yet.  For one thing, on my Apple systems I
+> still get:
+> 
+>    ** Booting bootflow 'nvme@34bcc0000.blk#1.bootdev.part_4' with efi
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- board/emulation/qemu-arm/qemu-arm.env   | 2 +-
- board/emulation/qemu-sbsa/qemu-sbsa.env | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+There is also a bug in the EFI boot manager:
 
-diff --git a/board/emulation/qemu-arm/qemu-arm.env b/board/emulation/qemu-arm/qemu-arm.env
-index fb4adef281e..01d363baf2c 100644
---- a/board/emulation/qemu-arm/qemu-arm.env
-+++ b/board/emulation/qemu-arm/qemu-arm.env
-@@ -12,4 +12,4 @@ scriptaddr=0x40200000
- pxefile_addr_r=0x40300000
- kernel_addr_r=0x40400000
- ramdisk_addr_r=0x44000000
--boot_targets=qfw usb scsi virtio nvme dhcp
-+boot_targets=qfw usb scsi virtio nvme efimgr dhcp
-diff --git a/board/emulation/qemu-sbsa/qemu-sbsa.env b/board/emulation/qemu-sbsa/qemu-sbsa.env
-index 88fdb0ec1c5..010c6172bdd 100644
---- a/board/emulation/qemu-sbsa/qemu-sbsa.env
-+++ b/board/emulation/qemu-sbsa/qemu-sbsa.env
-@@ -11,4 +11,4 @@ scriptaddr=0x100000300000
- pxefile_addr_r=0x10000400000
- kernel_addr_r=0x10000200000
- ramdisk_addr_r=0x10001000000
--boot_targets=qfw usb scsi virtio nvme dhcp
-+boot_targets=qfw usb scsi virtio nvme efimgr dhcp
--- 
-2.48.1
+[RFC 1/8] boot: EFI boot manager does not depend on BootOrder
+https://lore.kernel.org/u-boot/20250421162555.1200687-2-heinrich.schuchardt@canonical.com/T/#u
+
+> 
+> even though
+> 
+>    CONFIG_BOOTMETH_EFI_BOOTMGR=y
+> 
+> Not sure what's going on here yet.  Maybe this is related to:
+> 
+>    Cannot persist EFI variables without system partition
+> 
+> (There definitely is an EFI system partition on this system).
+
+It seems that the block device is not scanned at that point.
+
+> 
+> To me this points out that something is broken again.
+> 
+> But I also think that there are other ways in which the integration of
+> the EFI boot manager code in U-Boot is flawed, and frankly I don't
+> think the idea of having a self-coontained EFI boot manager is
+> compatibe with what some users expect from U-Boot.  And I think
+> keeping something like BOOTMETH_EFILOADER is part of the answer.
+> 
+> I meant to explain my thoughts in a reply to earlier messages, but
+> could find the time until now.
+> 
+>  From eralier discussions I have composed the following (incomplete)
+> list of requirements:
+> 
+> 1. Some users want to contiue booting using "legacy" boot methods.
+> 
+> 2. Some users care about booting as fast as possible.
+
+This is why we need to move the boot manager after booting from block 
+devices.
+
+And we should not try to run EFI/BOOT/BOOT<ARCH>.EFI before running the 
+boot manager.
+
+That is why I am working on this series:
+
+https://lore.kernel.org/u-boot/20250421162555.1200687-2-heinrich.schuchardt@canonical.com/T/#m9bc0236cffe70ee06df4c482a958303faff3a32c
+
+where I have included the current patch.
+
+Best regards
+
+Heinrich
+
+> 
+> 3. Some users want to be able to boot from a specific device but don't
+>     really care about the boot method (EFI or "legacy").
+> 
+> 4. Some boards have sepcific boot methods (FEL on sunxi, maskrom on
+>     rockchip) that need to to be tried first.
+> 
+> The biggest issue is requirement #2.  The related issues in the EFI
+> subsystem and EFI boot manager are:
+> 
+> a. Scanning for ESPs to find the file that contains EFI variables when
+>     EFI_VARIABLE_FILE_STORE is selected takes time.  Unfortunately this
+>     is the only way we can support EFI variables on many boards.
+> 
+> b. Scanning for ESPs to boot from takes time as well.
+> 
+> Of course the way bootstd looks for additional boot methods by
+> scanning filesystems as similar issue.
+> 
+> Originally the EFI boot manager only handled the case where the user
+> explicitly configured EFI boot options.  The "fallback"
+> EFI\BOOT\BOOT<ARCH>.EFI loading was handled later when the distro boot
+> scripts looped over the list of configured boot targets.
+> 
+> Later code was added to the EFI boot manager to do that.  I believe
+> that was done as part of supporting an EFI boot menu, which to this
+> date isn't really used by any board, at least not in the default
+> configuration.  And the way that code works is by creating "default"
+> boot options for all devices with an ESP.
+> 
+> I think the way to fix this is splitting the EFI boot manager into
+> different phases.  The first phase should only look at the boot
+> options configured by the user (either explicitly or automatically by
+> an OS installer).  That still requires us to read the EFI variables.
+> So I think we should restrict EFI_VARIABLE_FILE_STORE to only scanning
+> the device from which we booted U-Boot.
+> 
+> The "fallback" EFI\BOOT\BOOT<ARCH>.EFI should then be done in a later
+> phase, after some of the other boot methods have been explored taking
+> into account preferences set by the user.  But that pretty much is
+> what BOOTMETH_EFILOADER already does.
+> 
+> Cheers,
+> 
+> Mark
+> 
+> 
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   boot/Kconfig | 5 ++++-
+>>   1 file changed, 4 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/boot/Kconfig b/boot/Kconfig
+>> index fb37d912bc9..89076220adb 100644
+>> --- a/boot/Kconfig
+>> +++ b/boot/Kconfig
+>> @@ -597,6 +597,9 @@ config BOOTMETH_EFILOADER
+>>   	imply CMD_TFTPBOOT if CMD_NET
+>>   	default y
+>>   	help
+>> +	  This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
+>> +	  launching EFI\BOOT\BOOT<ARCH>.EFI if no boot option matches.
+>> +
+>>   	  Enables support for EFI boot using bootdevs. This makes the
+>>   	  bootdevs look for a 'boot<arch>.efi' on each filesystem
+>>   	  they scan. The resulting file is booted after enabling U-Boot's
+>> @@ -648,7 +651,7 @@ config BOOTMETH_DISTRO
+>>   	select BOOTMETH_SCRIPT if CMDLINE # E.g. Armbian uses scripts
+>>   	select BOOTMETH_EXTLINUX  # E.g. Debian uses these
+>>   	select BOOTMETH_EXTLINUX_PXE if CMD_PXE && CMD_NET && DM_ETH
+>> -	select BOOTMETH_EFILOADER if EFI_BINARY_EXEC # E.g. Ubuntu uses this
+>> +	select BOOTMETH_EFI_BOOTMGR if EFI_BINARY_EXEC # E.g. Ubuntu uses this
+>>   
+>>   config SPL_BOOTMETH_VBE
+>>   	bool "Bootdev support for Verified Boot for Embedded (SPL)"
+>> -- 
+>> 2.48.1
+>>
+>>
 
