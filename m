@@ -4,95 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C39C369D3
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3881C369D3
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 17:42:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2E31820B3;
-	Mon, 21 Apr 2025 18:51:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2BB068129F;
+	Mon, 21 Apr 2025 19:42:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="evoz4Fdp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cE1CGLru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 302E680BAD; Mon, 21 Apr 2025 17:00:49 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 7B403817C4; Mon, 21 Apr 2025 19:42:10 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E110680584
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 17:00:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 422D681026
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 19:42:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-306b78ae2d1so3124510a91.3
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 08:00:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3fa0eb29cebso3177158b6e.0
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 10:42:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745247644; x=1745852444; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=79iOO8KLwnj2KcWhrGqhM/GiSlx+9DDsYwhvLIcT7WY=;
- b=evoz4FdpVZFpaPuqiEd3r2wgqpS6L/b/69PYau8K2rxGp5IHoTYsr/408NUIwpUwd4
- uQQ6x+zE0UeBshYtDcuCXPuUXvvkl1fU00JfX931yUYO7aUrgT1JmjbPjMOVHosM6n53
- vN2UJ9jf2fuopnBPx+T0z2MfDbkZk/kS13xFlSQhAitcuijOC3MCROkqnzjiMKp82PzU
- 8iqqBAL14LgwgZe7dP4HN6ukZkGoitF4aJUkLiAqYpw65uMzww7LrF51O4BpojNAxLKu
- 7F/Zz4oRPoj5y6tRfwYkkynQKTrox2Kt/fnGZIGyQzqZ0Eus1P/dSjes0zrYI2WuuGJ1
- 8XQA==
+ d=konsulko.com; s=google; t=1745257327; x=1745862127; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DBx8ZQMBhJYpwtCd1HX+sDO8CCoH/pwmGCiCv37bLDY=;
+ b=cE1CGLruNia7rC2wbiz9YGpr2cE+8ACWLuuVnK6hjGzDx3o3m1XiGJGehHj8ktZFpZ
+ tEuDn0Ts5r6ca4foEHMmfMOYEcGaqs+RtRU0px7AVYjcVL19cqDwlxtL5a38NacHZJy/
+ JXhapGmEuHjTEy6It1dR2MXI4bzaRTRgvZhmA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745247644; x=1745852444;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=79iOO8KLwnj2KcWhrGqhM/GiSlx+9DDsYwhvLIcT7WY=;
- b=cTWWhgDyUZK0SRksNZNwMvkkATOn5pLJuehaYSWOB02iDP2x0fTg1+0QerA4tOfLxf
- n2aKCLiinjydLWtnLmYIBsfcotZYA8I38VcQ2oMeZpOoOqi04og2xaNCbtF9u1bUkO4h
- J7VD7S0EluXjsydRDzEx4NLQni90D6S2YuoI2aA7mtfgWZWW2Mpsq41exSdfL/EMD9q3
- Dw/o3jjuUF0NO0BolkEFPeTliNPLxvRvKSIvHExbbvxtRT490ojY5JvJHiJNYDQMx5Ql
- zmB9rG35ufDB5o3yOPRfV0nclwkmkqzwc87n5EpFRJLVRy1ELwpFcMabuClst1aVBWoU
- LDEA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWzXOJudhgPfg+ba/pO32KKRWj1xA6VXWkgsEG9APY9z3WZY9AvZ72C7Ao6G8mnSPdO4gSMTq0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSim0Nty6cluZDPahO0NbstoZ3ANkom4m4C4CiohDfIhthE+cn
- SLH/cfRfub/0l6FvVTICVxIG7vsOsFfzs2vskqD00JAPeV32pOES
-X-Gm-Gg: ASbGncvXsfuI1iNUt7tEtshFJcwgaC6k2amQuJTBY05tWstKQCo98nCHH6SqIfLm10W
- 7EU6YmBUy+yoidbcereW/lqNc8nWfFwlindWE0MI98IiyjljAYY8knc8UBD+Bjh7mYmWJk2boDk
- KkMMCLBG4pXLg/pb4bQPDbWzqDwsor8qW+Shr6k+Lnq3ipzFov2KIEFv5i9bw8uo7k0detQXlNZ
- lnrmTNRU+C5ZarjkCb7fqX0G8DH8ObljeZDWq2JYBfkw1/avy/6DayfhEc50nt9AusKrUzXrybj
- lLwLYqFyjZ82U0ZPQwxr9z1xKBg1wZqvdfPaYD+QsfJ9/OP/J1OOjrFAauuqUUdojzDMLK0AZ/E
- GY3VHyU14wKqoAJd1NhKK+XiuUA==
-X-Google-Smtp-Source: AGHT+IFOGBIUgqNDL/UgGSpsH/c3OaOYn3AdFyru5sCNq0363cbxcso4UrG0YJgKV4gT9PYZLz6dHQ==
-X-Received: by 2002:a17:90b:380b:b0:2f6:d266:f45e with SMTP id
- 98e67ed59e1d1-3087bb3e794mr18062980a91.2.1745247644308; 
- Mon, 21 Apr 2025 08:00:44 -0700 (PDT)
-Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3087df24dfdsm6659405a91.23.2025.04.21.08.00.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Apr 2025 08:00:44 -0700 (PDT)
-Message-ID: <0f8cd909-b105-4d54-b1bc-0adeb4ca0051@gmail.com>
-Date: Mon, 21 Apr 2025 23:00:40 +0800
+ d=1e100.net; s=20230601; t=1745257327; x=1745862127;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DBx8ZQMBhJYpwtCd1HX+sDO8CCoH/pwmGCiCv37bLDY=;
+ b=ovgAm9zGzcgNb9YtAiQ017YYpmSMtXtgSRA4GzTwJsFJRQJ0mz/CI8HD1pfMi8npQP
+ URy79u0CuJAj6itssC7u53Ml4gXRoYM87yPvnJRn31SIaMc5dl8tXV6wCG1tOoatzhyy
+ ZlflIgO5Z8+CkdSd4dckV3te2iuBmTpZJb+p8T7lqTFrnE4SvWOcF8s0Scy7ps+0zOPA
+ Q3TwrvMVFb6yOWKLGAEBb8cCJjUizktCu57hd89g8y6va87GqpTOxexOpIfkNVZ+dvJU
+ AIgh9QrVXeUZmp6G1JTaO58NaACKy5b+yz6I7Ey/5eokVin6BALFcvo7gHzW43PRkKsc
+ eSdQ==
+X-Gm-Message-State: AOJu0Yzzt5ixJX6dHl/s+qKv+aM/X1M0MAyv0mwj1TZM4dgmQczKPHfm
+ R/aF/VG6ssA1CszI2cKM4tYXBP8XGT0eCcNvJr/scv7kPJscbwG7DgrdyDXPc2Y=
+X-Gm-Gg: ASbGncukqwzB9XhPs3t7+OSknKpukTyxvrcelRdcIznW9x7RIC2ajErfBwYMY1DsOSQ
+ WBotQjazkFDNBQiGn7y246AJ+ezglYdvvjMZmVOcfZ6YT0d1PZ/bDnQ6/JvVT4N8imta6fMpIIT
+ VemxZMS4RkzSwMZyuh4BNyKc0M5ZIZ4YJ2rGuGXsecoFcRnWiZoRtNMujzaA0zeGFtzwCM23lN0
+ ppKvyjhzeF+9nnY02YsTINrW/OwZ5UQZ8jQnUZYkzkvoes0c2z9O1Yf9/wRgfMA71TIbBfc+cic
+ z6iy0PB+DSquLqCszdRQSAU+bbZwIpFQn0kXJP9ytEtc5iBoxMj0zmscP0ydyo6H9CVEehQvJFF
+ C
+X-Google-Smtp-Source: AGHT+IEmM6s4T8do1Wl93uZCIM8MzK0Z9zk8DI/8GSeIe5RMNvthdeLDttxrfhTbHA4Btm63TOiGOA==
+X-Received: by 2002:a05:6808:ec4:b0:400:7dd3:2dbe with SMTP id
+ 5614622812f47-401bcf4bd3fmr7991020b6e.14.1745257327045; 
+ Mon, 21 Apr 2025 10:42:07 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-401bf09d018sm1611324b6e.43.2025.04.21.10.42.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Apr 2025 10:42:06 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Harrison Mutai <harrison.mutai@arm.com>, 
+ Manish Pandey <Manish.Pandey2@arm.com>, nd <nd@arm.com>
+In-Reply-To: <20250415215034.1679664-1-trini@konsulko.com>
+References: <20250415215034.1679664-1-trini@konsulko.com>
+Subject: Re: [u-boot-test-hooks][PATCH] Add support for FVP emulator and
+ fiptool
+Message-Id: <174525732609.3657668.11704133961918317550.b4-ty@konsulko.com>
+Date: Mon, 21 Apr 2025 11:42:06 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] net: phy: Add the Airoha EN8811H PHY driver
-To: Marek Vasut <marek.vasut@mailbox.org>, Daniel Golle <daniel@makrotopia.org>
-Cc: ilias.apalodimas@linaro.org, jerome.forissier@linaro.org,
- paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de,
- joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com,
- frank-w@public-files.de, ericwouds@gmail.com
-References: <20250406130244.19496-1-lucienzx159@gmail.com>
- <eacd3b66-0262-4bde-9b91-6ca7eea789fe@mailbox.org>
- <2aa57092-f844-4ef8-9b97-0998a697c0be@gmail.com>
- <aARRJ85ULmqsYgPo@makrotopia.org>
- <e011b2f3-afd3-425a-900a-db0ee4ace166@mailbox.org>
-Content-Language: en-US
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-In-Reply-To: <e011b2f3-afd3-425a-900a-db0ee4ace166@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 21 Apr 2025 18:51:44 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,14 +97,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek
+On Tue, 15 Apr 2025 15:50:34 -0600, Tom Rini wrote:
 
-Marek Vasut 於 2025/4/21 上午 01:55 寫道:
-> If the firmware size is fixed, it shouldn't be exposed via Kconfig in 
-> the first place. Linux doesn't do that either, why is it done here ? 
+> This adds support for the vexpress_fvp platforms. In order to do that we
+> need to add support for calling fiptool to update an existing "fip" file
+> with our U-Boot build. We also need to support launching the FVP
+> emulator itself. This is a little tricky in that we need to use "telnet"
+> to reach the created serial ports and cannot just use an existing
+> file descriptor for our needs. Finally, we add in conf files for
+> vexpress_fvp to make use of this, and a symlink for the
+> vexpress_fvp_bloblist platform.
+> 
+> [...]
 
-I misunderstood this part when I was porting the driver. I'll modify it 
-in the next commit,
+Applied to u-boot/u-boot-test-hooks.git/master, thanks!
 
-thank you.
+[1/1] Add support for FVP emulator and fiptool
+      commit: 0d8c51967901ae52c79ebe5180ad36fcac23b705
+-- 
+Tom
+
 
