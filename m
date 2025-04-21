@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37735C369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 08:34:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C768DC369D5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 09:11:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26FC08059D;
-	Mon, 21 Apr 2025 10:34:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27B8881E25;
+	Mon, 21 Apr 2025 11:11:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="d0s2eSh3";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RIgavUpA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F667806FC; Mon, 21 Apr 2025 10:34:34 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 7F80F81E72; Mon, 21 Apr 2025 11:11:55 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 743F580107
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 10:34:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 160D581E1F
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 11:11:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8714C3F27B
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 08:34:30 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 466F741A0C
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:11:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745224470;
- bh=VlfY6phWSgHLHUKacT+DjC0iCpjLaoJSwjLhPjIwxBY=;
+ s=20210705; t=1745226712;
+ bh=oDQ2C2gWp1HOFZKhmZ6dOskrDG5N4Y3NswuRe5CEmvI=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=d0s2eSh3jyxkvfT7LlncQdAgzBsV13xfO+XyNMbwtlsRvSWG17lMptdVS9aZioDxC
- fImZ5LqC2D40VhvMV4/EgHilKkTHwNlZNzHABLaPFjYnV12IyxGH5T9s1GmsSAhiwd
- wwd5YNv12MQfyVT4uBA7wqPcaejl2Me8w/1rE2m0YZDhFa8b7x2cRGhzmLA2DSlalU
- /YwUXhPbbbQezgJS3Ln0p4JCDth/p4L1NBzc+M+b3SSdlieB88jZzpJ86f4CuysDXN
- PcVHSJzuljdW+ujMm5lGfV+uckHgqSUed5RZt8yoFMZuVn0z5HYCDUL3tMyLczRVju
- VBEXxQPYLQ2Mw==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-43941ad86d4so15269725e9.2
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 01:34:30 -0700 (PDT)
+ b=RIgavUpAYzJnLcoH6TH3jeR0SDVsmv0x2hIqin3vv4GyrTggyH7VUvOQ49YK0stOR
+ vBsJWh80xRb1rvaoXs73InwMewZ8FUQCZqCcZcEtpempSKmv6kOFV+6bH/uYLPjgd+
+ boCMDUtmEGhxYqToSuwrUpp9bABHa1QHQLWekkxYBv7GkEx+Y9rN+8Kg2biB9oe3JR
+ HN7VzbRS0VIOyYRM2ThtlBzPVNNjmxBX8WqZabwniOUfd5R8u/J/eqzwHE9oM+4GC3
+ YsuxzTaQFEAnJkJU//GXwFeqtZQLh5+3MZQ/I6X1IL0Npgmdb0SqnZeUClbaKrcSVD
+ iXT71i0rrrq/w==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3912d5f6689so2094104f8f.1
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 02:11:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745224468; x=1745829268;
+ d=1e100.net; s=20230601; t=1745226708; x=1745831508;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VlfY6phWSgHLHUKacT+DjC0iCpjLaoJSwjLhPjIwxBY=;
- b=koJYursyavgfJ7hbsSv73lb/4iljpt9zch++LYWeiQbU7I3siFck1PV3XZIl0JJvCr
- bn87jh/7oGBGJ8b7FDegXguPh6OZB05Crt8j2X4ErKXwfNTWQEqJDJ9ol91hlxciHI6O
- OON2b1QOdq+XhkbIH1TKCIOGyTGGh5C1pOAqhE8DyJlE8n2qM/lHwjR8xg39KnvqzJyB
- 1dxjrk+EIXy/TRdVAYh40Eu06dSxMpZYrF4Iu0wva5XG/UanOzDhKGd0DfgIFsIzqvVd
- digdz6V0HNe3CHMp/PkDq7/hDSo5MiBnRHFY1mqsY/smbzwpw8yK+rKPl6gbz7J/F/5E
- oFng==
+ bh=oDQ2C2gWp1HOFZKhmZ6dOskrDG5N4Y3NswuRe5CEmvI=;
+ b=THHqmEPCTd6bXhwJ8uGjK3G1Udlp70Ka3Uv9jvRqn0BAod22Lk0WhX4uowNe5niqGH
+ CbHrcA1DieU3M7b2lU1nyL4goMExFAWjaTyP1KHnWcFVptbYNTxJhdZMBsHcDVs5YW61
+ TIW4LQVsaboEEJ+DCDoFghpCuzWeEJdG5gVEjcKC0wxDoJlriZLqpTmcGzgkr4tUbGGk
+ NX4dXIOcRs5K9945qLhlu+5SoQDbAb3QL1vJ2Z6RA7idr6jHQilVje+A3C5pTc04D5SC
+ MSct4d2enEZ8yKAHUP/D/BUvXYglXw8wwV6rip+7u/ru38Vt19auT1GM/96aILa/k+VG
+ YTWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJjOIl13m/It3LAhhludfmaV7TvJtADKRulU/tvd70D4Jqi8C9DHIQckgQx3KpFyCeAmDaEdI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4j5NRcllcSXCY6jj/wf6SuUqiPgrsizcC8bkytiezAG8Z3BHB
- 3xGkKuVB9/WWAU7UXKu3Oc0U452jRyanEIzN1ihMJX3UnWeW93ehfW8Ob4AALWESJGhig92kD3q
- YkEFrBcE0b0XOxzBZ3q23Cz6As3YJ6LHZLZZeGesoqyRI/pGKFwtE9Q8eScMaK6ky6Pw=
-X-Gm-Gg: ASbGnctfrardPjmUkIiUvNnx0lj1Um0OZuYpXQxA6P+H4ssAiX8ngMaiso6rVLclIRb
- MpnJKR8oTxxWncELeG6I8f+gqFkt2XtQGSHtOJ+vAsQ7ns5QGZP7+KAzG88QixWAAxJ160jx+2U
- oI/mi7pHKvefYkl+bA0Ur4n+91uoMg2gVZ9ncGG/XEsA7n9TczHjtn+eGvfUjIdLZKSLL67i1Mr
- 6lVVhfbhYd4rAiUKZQqOgJflkKmmXCcf6sNEdFWVUNa+lGqj/JZiESbtMmppURiQLOPU2In+FkP
- Mybg68604tbbIxCCkFQSZMdYREWUqOHdywQVg6yIro/fSwkC3arvDwfS26e5RZImLlid9P6eTjJ
- q+oTZxb/pqyTBmw==
-X-Received: by 2002:a5d:64ae:0:b0:39c:3107:c503 with SMTP id
- ffacd0b85a97d-39efba5bfffmr9257411f8f.31.1745224468361; 
- Mon, 21 Apr 2025 01:34:28 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH0VbTOup6kdnrJwv3mCust6rJKPXVQMZz5VaRyuZSLanwQf/1+YEBFi3d4CKdn/C6zKP9FHw==
-X-Received: by 2002:a5d:64ae:0:b0:39c:3107:c503 with SMTP id
- ffacd0b85a97d-39efba5bfffmr9257397f8f.31.1745224468019; 
- Mon, 21 Apr 2025 01:34:28 -0700 (PDT)
+ AJvYcCWCRh1wGrpdhHpCx/j8EudWDxz8dfiv98/dMyBx/bwAxWNbiG4DCkGl23FhO2ajGRZTqr8oQhE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNk2wuQoyd7RY0VFASOzpX3J6jKznwLfPDpvESb6d/DIUi0ogV
+ JWHU4EBlyVLpjOWBCZi3PR5PRUa6V1q8yBwa8wzWuSQuZsw8ZzE6YbVfNgj17C/A1mSE4fQ8vZp
+ sqQBoJexYVs9PzHbOgbqKYD9wGsFkcP0slDNXj5SZRtnTXZT3ysGdDM+z+yoQCT+bGWU=
+X-Gm-Gg: ASbGncvidgsKJEJirjIKr9ljQovOjXWZr2TbpvJq3L4RltVZvQ5W4bxVOw0xrlAGFu7
+ oDLg6Enp8ArL5J+JjPSO24ZZfN75aLWfVdQtzSJgMuucAUB+FBOra+hSvnkWZAXJ6wvUnasvi3s
+ zcKofTyNWjfuZj8OnT7QCqSpWwgC+tlMjmyKL4b/yT83oD9KCgqYdvT1kCjccv+j7iXLIYTTZs0
+ g6F8HDWFRNatPCzrNwj0vxRc8TU34sJ+R2XaSD17+68Kxbt74fcQiRhEbVz1fVrzJa8Wdm89/Fy
+ LPlRDXwyglDyZiCbWWkucIEIYLHdYBDZT747MR3eRYqc8MHtHbzQuDUUCyxfia5LpT+jdO542ra
+ jDkJEzxU26M+dQg==
+X-Received: by 2002:a5d:584a:0:b0:39c:141a:6c67 with SMTP id
+ ffacd0b85a97d-39efbad398fmr8280825f8f.45.1745226708672; 
+ Mon, 21 Apr 2025 02:11:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHZ6txp1hh7/idQ/aVoFsCwmA7Z/aqqe3Oufk1a+mSEjPebLxm8DRjbkMHl8L6TYveRNqVctg==
+X-Received: by 2002:a5d:584a:0:b0:39c:141a:6c67 with SMTP id
+ ffacd0b85a97d-39efbad398fmr8280810f8f.45.1745226708320; 
+ Mon, 21 Apr 2025 02:11:48 -0700 (PDT)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39efa43cbf1sm11349102f8f.54.2025.04.21.01.34.26
+ ffacd0b85a97d-39efa4331a9sm11411330f8f.36.2025.04.21.02.11.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 01:34:27 -0700 (PDT)
+ Mon, 21 Apr 2025 02:11:47 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 1/1] Dockerfile: use nasm from distfiles.macports.org
-Date: Mon, 21 Apr 2025 10:34:24 +0200
-Message-ID: <20250421083424.476809-1-heinrich.schuchardt@canonical.com>
+Subject: [RFC v2] Dockerfile: use nasm from distfiles.macports.org
+Date: Mon, 21 Apr 2025 11:11:41 +0200
+Message-ID: <20250421091141.762386-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -114,18 +114,21 @@ The build script for coreboot verifies the SHA1 checksum.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
+v2:
+	correct sed command
+---
  tools/docker/Dockerfile | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 772e980d0d1..7361408ba35 100644
+index 772e980d0d1..f314e38dfe7 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
 @@ -286,6 +286,7 @@ RUN mkdir /tmp/trace && \
  # Build coreboot
  RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
      cd /tmp/coreboot-24.08 && \
-+    sed -e 's|www.nasm.us\/pub\/nasm\/releasebuilds|distfiles.macports.org\/nasm|' util/crossgcc/buildgcc && \
++    sed -i 's|www.nasm.us\/pub\/nasm\/releasebuilds\/\${NASM_VERSION}|distfiles.macports.org\/nasm|' util/crossgcc/buildgcc && \
      make crossgcc-i386 CPUS=$(nproc) && \
      make -C payloads/coreinfo olddefconfig && \
      make -C payloads/coreinfo && \
