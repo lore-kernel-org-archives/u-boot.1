@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF7E3C369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 12:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13F27C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 12:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08B118070C;
-	Mon, 21 Apr 2025 14:22:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 705F2809D4;
+	Mon, 21 Apr 2025 14:23:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JYpjUfVK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W94y9S43";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 826AC807AE; Mon, 21 Apr 2025 14:22:50 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 5943C80BAD; Mon, 21 Apr 2025 14:23:44 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F8F5805D7
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 14:22:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4C308070C
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 14:23:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53LCMgHC1619738
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53LCNbxu914779
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 21 Apr 2025 07:22:42 -0500
+ Mon, 21 Apr 2025 07:23:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745238162;
- bh=wsEtO+X81tF97tF7zaMo77VizIwELSmXGKXU7Xa51uU=;
+ s=ti-com-17Q1; t=1745238217;
+ bh=bTHsccIxJpV1nItk+6GalqP0MnsS2Ays4OwNWjxqf50=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=JYpjUfVKvrJD7VQ3ddURzf4cfF4hS04wFmyLuOk7vX20dSatsAjuRjdm5W8PBgeqf
- fqvFqJy/8d576Rw3kagVQ0d9ctHUgLsMR5synU5fVMMqwtHM36RUKVPEw/C4qFzy+4
- oRA44mCq+asnLtWVwM2NHz5Pu4aEu6dr73ZbVz6Q=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53LCMg7B034431
+ b=W94y9S43bXwpzVOf6brXz4k6/qxMXZq7aYXFcP4IT9OKqJfN3x5vUxVnKgqgZg2Uh
+ Rg1SYbGfMWfP1Dq1sKHIFzXNgDXIW/AytPtD2e4j0lbvjJXLgVhendhaDDP5P/BBv1
+ W8cDy48IcqeJsYHj/AGlXzq4TflOUqxSToewKOYk=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53LCNbQj001561
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 21 Apr 2025 07:22:42 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 21 Apr 2025 07:23:37 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 21
- Apr 2025 07:22:41 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 07:23:36 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 21 Apr 2025 07:22:41 -0500
+ Frontend Transport; Mon, 21 Apr 2025 07:23:36 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53LCMf5X044310;
- Mon, 21 Apr 2025 07:22:41 -0500
-Date: Mon, 21 Apr 2025 07:22:41 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53LCNalb045128;
+ Mon, 21 Apr 2025 07:23:36 -0500
+Date: Mon, 21 Apr 2025 07:23:36 -0500
 From: Nishanth Menon <nm@ti.com>
 To: "Kumar, Udit" <u-kumar1@ti.com>
 CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -58,16 +58,16 @@ CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  <robertcnelson@gmail.com>, Beleswar Padhi <b-padhi@ti.com>, Jonathan
  Humphreys <j-humphreys@ti.com>, Andrew Davis <afd@ti.com>,
  <u-boot@lists.denx.de>
-Subject: Re: [PATCH V2 3/9] beagle: beagley-ai: env: Set up the boot devices
- and boot methods
-Message-ID: <20250421122241.mxydfegioouyt52y@power>
+Subject: Re: [PATCH V2 5/9] beagle: beagley-ai: env: Enable DFU env options
+Message-ID: <20250421122336.2mznwxkbf7i45pzc@simple>
 References: <20250418193943.953952-1-nm@ti.com>
- <20250418193943.953952-4-nm@ti.com>
- <cdf10124-cb4f-4953-b7f9-b39b91927a77@ti.com>
+ <20250418193943.953952-6-nm@ti.com>
+ <cb2e9c5a-e0c3-4078-8a85-f7de24de23cf@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Disposition: inline
-In-Reply-To: <cdf10124-cb4f-4953-b7f9-b39b91927a77@ti.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <cb2e9c5a-e0c3-4078-8a85-f7de24de23cf@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,42 +85,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18:40-20250419, Kumar, Udit wrote:
+On 18:45-20250419, Kumar, Udit wrote:
+> Hello Nishanth
 > 
 > On 4/19/2025 1:09 AM, Nishanth Menon wrote:
-> > We just have a single MMC on BeagleY-AI. So drop all other boot options,
-> > 
-> > In the meanwhile, we also will use efiboot and standard boot methods
-> > consistent with other K3 Beagle products.
+> > We just have sd/mmc, so set things up for the same
 > > 
 > > Signed-off-by: Nishanth Menon <nm@ti.com>
 > > ---
 > > Changes Since v1:
 > > - None
 > > 
-> > V1: https://lore.kernel.org/r/20250411225717.3117370-4-nm@ti.com
+> > V1: https://lore.kernel.org/r/20250411225717.3117370-6-nm@ti.com
 > > 
-> >   board/beagle/beagley-ai/beagley-ai.env | 3 ++-
-> >   1 file changed, 2 insertions(+), 1 deletion(-)
+> >   board/beagle/beagley-ai/beagley-ai.env | 2 ++
+> >   1 file changed, 2 insertions(+)
 > > 
 > > diff --git a/board/beagle/beagley-ai/beagley-ai.env b/board/beagle/beagley-ai/beagley-ai.env
-> > index 10d62034e1af..db29d13420aa 100644
+> > index 16a03acfca3c..26f12c8814cc 100644
 > > --- a/board/beagle/beagley-ai/beagley-ai.env
 > > +++ b/board/beagle/beagley-ai/beagley-ai.env
-> > @@ -11,7 +11,8 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-> >   	${mtdparts}
-> >   run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-> > -boot_targets=mmc1 mmc0 pxe dhcp
-> > +boot_targets=mmc1
-> > +bootmeths=script extlinux efi pxe
+> > @@ -1,5 +1,6 @@
+> >   #include <env/ti/ti_common.env>
+> >   #include <env/ti/mmc.env>
+> > +#include <env/ti/k3_dfu.env>
+> >   #if CONFIG_CMD_REMOTEPROC
+> >   #include <env/ti/k3_rproc.env>
+> > @@ -20,5 +21,6 @@ mmcdev=1
+> >   bootpart=1:2
+> >   bootdir=/boot
+> >   rd_spec=-
+> > +dfu_alt_info=${dfu_alt_info_mmc}
 > 
-> I am not too sure, if pxe boot is supported on this platform,
+> IMO  dfu_alt_info_ram could be another valid target for DFU ,
 > 
-> Please check once.
+> Other platform, set this dfu_alt_info variable before using,
+> 
+> Can we consider this as similar to other platforms ?
 
-What we support is PXE boot at U-boot level. All we need is Ethernet,
-which is enabled.
-
+Thanks for catching it, will drop the default dfu_alt_info and retain
+the env header inclusion.
 
 -- 
 Regards,
