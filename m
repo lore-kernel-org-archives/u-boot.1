@@ -4,54 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16C86C369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 23:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836F0C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 23:30:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73AE98129F;
-	Tue, 22 Apr 2025 01:29:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=paulsajna.com
+	by phobos.denx.de (Postfix) with ESMTP id DE47E8129F;
+	Tue, 22 Apr 2025 01:30:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=paulsajna.com header.i=@paulsajna.com header.b="g56qXCkG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R26jH3HH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8BAD812BC; Tue, 22 Apr 2025 01:29:23 +0200 (CEST)
-Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 419A5812BC; Tue, 22 Apr 2025 01:30:14 +0200 (CEST)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFF7E80F03
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 01:29:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02A7780F03
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 01:30:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=paulsajna.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hello@paulsajna.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=paulsajna.com;
- s=protonmail; t=1745278160; x=1745537360;
- bh=U3OBM4XQ6r0NId31CkuOdDrNtVTDR4tcCUFRdgHgTEI=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=g56qXCkGkdHOzmU1ogFSqlDJ9eGdFbGvYudBf9n+kVeYQbE0N/G8t8O8/wV4eueKR
- /AaHzQEA+jCURrwf3XCk/a+EMa0sOs5V10RcdaGreQu9y3iIT488ZRUIyH/jZLJK++
- twi0WO/DPlQ20xMAb8vDsN84VPf1umKFtF4oBdrbbeuReJBZ+u/fB4JS8F4bXomQJX
- 0r7Ksj5TGo1nd3Pw8uLzb9+ZjJLdXwIBpuG87KvJANqwxoVu2E7op4tSqQHCUcY9HO
- Ai7v1GcZWileCHWlfGJAOOgYcyDl9C5bhVh/Oxp8kC06jcrrl7fBIY679Q2WbdCpZ2
- 9iPmx+iWD7Sbw==
-Date: Mon, 21 Apr 2025 23:29:17 +0000
-To: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
-From: Paul Sajna <hello@paulsajna.com>
-Cc: u-boot-qcom@groups.io, Sam Day <me@samcday.com>,
- Paul Sajna <hello@paulsajna.com>
-Subject: Re: [PATCH v2 0/2] watchdog: qcom: introduce qcom-wdt driver
-Message-ID: <hyAGyOfR_pMcdHIMj2CuW1rBYK5oe64oHYWsaLjYKeDjWB8_2btUC6pnRQLedixSVaHAWoGTvSV1JWrMdgIloYex0C4KjZq_4nX_sbvrrtc=@paulsajna.com>
-In-Reply-To: <20250421-b4-qcom-wdt-v2-0-b2250efa0f39@paulsajna.com>
-References: <20250421-b4-qcom-wdt-v2-0-b2250efa0f39@paulsajna.com>
-Feedback-ID: 29073965:user:proton
-X-Pm-Message-ID: 3be7907a65aad31b8aacef4a70e0b3ebb42a346a
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-22423adf751so45205945ad.2
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 16:30:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1745278210; x=1745883010; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dRFf6f5lyxafxvXVB1O85/cnq2eVyNFz3uozsK/c67U=;
+ b=R26jH3HHmqKnXzhOYXRAtW0gY5OdIo6zAUUF6txaZqaGYJTeFu20k3WXFH8yTJWqeW
+ UoisGgo0+2RcR7aP9GX1+oTx9qca2D8ieCfvRW5hYo8iwcv8AaFQ87E8Bxrsw9QrrVlu
+ Ivx2rrHc6glo3yED3b/56FdjDNiuhgTq8tKGTSip3DkyMpAsUNxwVxV1CSqJ2bT0YZbZ
+ J3PgNONQzrhiJw3D+TcyrsaNe0XnGp/a49IfvxeaTXI0ESeD8VHKU2hgKjYPtj30dvtk
+ 1FwKZqqlHL4Xv/lvegx3eDE/pD85WwlfRVqsw/q4jRM3vdICSRHe4a1hOBu424JO11+l
+ nQpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745278210; x=1745883010;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dRFf6f5lyxafxvXVB1O85/cnq2eVyNFz3uozsK/c67U=;
+ b=ZwhkbpwyrCNe+2zNV4d36SAVXBsibXpDP4dtp0npLOkQBMuncrS/8jaX0U1nvls3Vq
+ 5winySS8n2dvBW2QeZAAQbdsZzADY3QmUaPX+9AN14UpPvvh747zAajtkCrTF6uCL76T
+ 4DuizP9iAlF0we4oYa50Xioi7vxMHqEelUyq/hbINAuygfbk8BpP0KFm+KIPpxlGiuc+
+ b2Lher2Ct59/36lvODi+EypSZSUUPKtug/Q0Rs5FjUF8RyEoztToWXW4LXBMlf5FG/X2
+ d1doCMHVOdtfboiKnmyF9ijh43VZT+ol9/JF9fqHsETqSPaGxfCCyP9bgK2Eth1FtKnM
+ vaOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQAi1U+y9bNVjnZssEynkSME156s5yD4XmnivcfuJa0+IxYJ5IEVN1qDWBbhIw2jg7BjGm0pQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyFWGgvTQuvOAFpp3F9n0V4GAGdiRvknsL3b+MAHztDhY6pZtjH
+ XrEyKl4YTI8W+G7q8X+rgJwmSQ6PnZkEaQWKrKtEMCnKAU324fjKfZy2SwdyOaPaa9tAoD2jthP
+ 74+9UMlewt/bwbMDRrM6NttZVH/UT/Q==
+X-Gm-Gg: ASbGncufIJ2HEUqZvz8a6s51vHwNj40bhG+uMrvtB2rOSBv336MJN1BHi/sKUBWCLCu
+ f3xGBIc2BkZsXBKYlksRr5aYcxex5n07hbNknH7L0r30WAu1YWGxL
+X-Google-Smtp-Source: AGHT+IE5gOdODRePVtJ0PYKZHIZz5x2hrBx7mMsX088jcmvHjJMzP2Qk1qRmuqSUeOUplG3UMqlLjGAgzB3pBbbWy9c=
+X-Received: by 2002:a17:902:e80f:b0:220:eade:d77e with SMTP id
+ d9443c01a7336-22c5360c1a1mr208971975ad.40.1745278210439; Mon, 21 Apr 2025
+ 16:30:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20250417171101.2566447-1-festevam@gmail.com>
+ <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
+ <CAOMZO5C_9yojvxO1NoNjtTHxD85ZcGd_cK2t-rofyY_Zxm1xcg@mail.gmail.com>
+ <CAHCN7xLkDnLX5PHFNjXYn7AFXA5+S22aksgv62PpWpg80ZDQmA@mail.gmail.com>
+ <d81112ad-017b-491a-b517-de828dd30c25@denx.de>
+ <CAOMZO5CpQ-yv=8GhNv7=yjnA+uzzP9ZmB=P2d+xmhY1ktQJX9A@mail.gmail.com>
+ <28b4bb24-4c56-4fe3-ae9b-db43c63290b1@denx.de>
+In-Reply-To: <28b4bb24-4c56-4fe3-ae9b-db43c63290b1@denx.de>
+From: Adam Ford <aford173@gmail.com>
+Date: Mon, 21 Apr 2025 18:29:58 -0500
+X-Gm-Features: ATxdqUHMelPMSRjP7yRONnqbT4hSmgdte42GtfJrEu95WOammx-Ejj4cnu3QkKU
+Message-ID: <CAHCN7x+RkN7XRo-YNLj1+Br--phDJHup5Xmnpj4b3OpvYEGohg@mail.gmail.com>
+Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
+ fixed clocks
+To: Marek Vasut <marex@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>, trini@konsulko.com, lukma@denx.de, 
+ seanga2@gmail.com, francesco.dolcini@toradex.com, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -69,74 +101,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sidenote: I needed to update the devicetree for judyln to use usb high-spee=
-d instead of super-speed with recent changes, I noticed while testing this.=
- Otherwise it crashed. I'd like to submit that separately, but I'm not sure=
- what's best.=20
+On Sun, Apr 20, 2025 at 2:20=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> On 4/20/25 3:07 AM, Fabio Estevam wrote:
+> > On Sat, Apr 19, 2025 at 9:48=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
+te:
+> >
+> >> Try something like this (also attached), maybe this needs to be made
+> >> generic ?
 
-The options I see are:
-1. copy my wip device tree from sdm845-mainline to the upstream folder
-2. copy my wip device tree from sdm845-mainline to a u-boot-specific device=
-tree
-3. only change the usb in the upstream folder
-4. only change the usb and make a new u-boot-specific-devicetree
+Thanks for doing this.
 
-Please let me know what would be the best way to proceed with this.
+> >
+> > It works for me:
+> >
+> > Tested-by: Fabio Estevam <festevam@gmail.com>
+>
+> Can you send that as a fix ?
+>
+> And also, fix this patch up and drop the bogus second half of the commit
+> message and do a V3.
 
-Thanks,
-Paul Sajna
+Feel free to add:
 
-On Monday, April 21st, 2025 at 11:20 PM, Paul Sajna <hello@paulsajna.com> w=
-rote:
+Tested-by: Adam Ford <aford173@gmail.com> # imx8mp-beacon
 
->=20
->=20
-> This patch introduces a simple watchdog driver for Qualcomm devices.
->=20
-> Some devices, including one I have been spending a lot of time with,
-> the LG G7 ThinQ (codename judyln, arch sdm845) will reset within 30
-> seconds if the watchdog is not serviced.
->=20
-> I have tested this patch from Casey Connolly that is over a year old and =
-has
-> not yet been upstreamed, and it is very useful to me. I can hardly use
-> u-boot on this device without it. I have received Casey's permission to
-> work on upstreaming this patch.
->=20
-> This is my first contribution to U-Boot, and I am unfamiliar with
-> mailing list workflows, so please be patient :)
->=20
-> Signed-off-by: Paul Sajna hello@paulsajna.com
->=20
-> ---
-> Changes in v2:
-> - Add watchdog start
-> - Add watchdog reset
-> - Remove stop from the probe function
-> - Use dev_err instead of printf
-> - Update Casey's name
-> - Add myself as an author
-> -
-> - Link to v1: https://lore.kernel.org/r/20250413-b4-qcom-wdt-v1-1-db42cb9=
-3dff8@paulsajna.com
->=20
-> ---
-> Casey Connolly (1):
-> watchdog: qcom: introduce qcom-wdt driver
->=20
-> Paul Sajna (1):
-> watchdog: qcom: improve driver with more functionality
->=20
-> configs/qcom_defconfig | 2 +
-> drivers/watchdog/Kconfig | 7 +++
-> drivers/watchdog/Makefile | 1 +
-> drivers/watchdog/qcom-wdt.c | 118 +++++++++++++++++++++++++++++++++++++++=
-+++++
-> 4 files changed, 128 insertions(+)
-> ---
-> base-commit: 0eebdd17888005751cd77cf3794c5292d36f481a
-> change-id: 20250413-b4-qcom-wdt-e7b913fc375e
->=20
-> Best regards,
-> --
-> Paul Sajna hello@paulsajna.com
+adam
+>
+> Thanks
