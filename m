@@ -4,45 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6548C369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 21:43:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 147A4C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 22:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A6CD8059D;
-	Mon, 21 Apr 2025 23:43:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 625B580FF7;
+	Tue, 22 Apr 2025 00:53:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KZaPojfg";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 844ED8070C; Mon, 21 Apr 2025 23:43:53 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D55A180050
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 23:43:50 +0200 (CEST)
+ id 5C6F581026; Tue, 22 Apr 2025 00:53:07 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CC8580AE1
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 00:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 234B312FC;
- Mon, 21 Apr 2025 14:43:46 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 339F63F59E;
- Mon, 21 Apr 2025 14:43:49 -0700 (PDT)
-Date: Mon, 21 Apr 2025 22:42:52 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Yixun Lan <dlan@gentoo.org>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, Tom Rini
- <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel
- Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 2/3] sunxi: add "fake" FEL pin support
-Message-ID: <20250421224252.318c885f@minigeek.lan>
-In-Reply-To: <20250417033935-GYA34332@gentoo>
-References: <20250417000539.3709-1-andre.przywara@arm.com>
- <20250417000539.3709-3-andre.przywara@arm.com>
- <20250417033935-GYA34332@gentoo>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e8274a74so6599512a12.1
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 15:53:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1745275983; x=1745880783; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DcNqDg0jFrPsqXEl/qGfYILzFTkR6QMc8G45hgXPtP8=;
+ b=KZaPojfgeLfD7kerXTfbVTNQy8TAxmj8x+XALTjhHhDb2VaD/dKaMSJeg88+31ibxD
+ Yss2Q/ARwPUAHgawxk9wE+OpgrRXVR8RxAoyQ+P/cNpUuYWZw/xfERvIPi0NAx/VNsxV
+ Kk+RQVcmMyIteuT6AfE3yy9t8ESsFFZ3F7rQM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745275983; x=1745880783;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DcNqDg0jFrPsqXEl/qGfYILzFTkR6QMc8G45hgXPtP8=;
+ b=Z4SWDD4ZzMcQ8ExT8pt79pGudENxgL22zVP4+TyYp92N+V56gYqhQhoEulfR+bved+
+ AAu84rJyzgB800BnXzo5WvJSzoFfR0zNoZvDJIB+wXoqMnvtq93fOTHFKg0gvKeNrQcc
+ kqy6xGYsMUgqcyLmi8j81Sipe4UMOmOKfPnbPHCER9pcMhagt7tDBlG8rkGngKk/okBB
+ 0mav8xkt0cV4xaFYWSo7MvJ9KAiyiQ1qK0r1rgsRkUlGDQ7/k2qMz1sGh6vYOGdvY5K0
+ LbwD2qqL5oIS8CA+XcOA7XVXpiaAAiMev55ipSEoryU6g6baG25k5qlgU7OziE9f+7a7
+ USqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXkhbIgRIeHyKQG8IUv/VS1/3sT1DyQgijK91937tP/6csgqmPkPKLcbuO60PLO6BBmxweBqPw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxttcixhQ1WhIdacLB6wM/V1AdvA2cMdop08Pf1BjztYuuWPyiX
+ sBEMzwDUlSMldv7Mkp0e9TWMbxd9CmGVQ8p/I38kN9yUwhztGL4of6iPNTZeJBGtqhvQFTTu7dN
+ yeidrNegZRSwai46knzqJB0mvgivFu4gXRhR4
+X-Gm-Gg: ASbGnctwN4/Dym0kJch1HlRPicLvLoYoyDI+no5lNEq3rETAAF0oOFfmv2PSsxNc85P
+ fD5zfw4gtL14vdZZSYnXhoCm03NA435MosvTjr2gYfhV37RVcS47Cx31j3J7Lfq/JOvZEJXp5w4
+ xppTAnqXaLoJk1H+S9uQR3aFw=
+X-Google-Smtp-Source: AGHT+IHSc2r/oWvDimHlAqWvjrAeSzjGVTswXTKKlTEAcsfhyxrMRq/30b/AgCzsO9K/a95owEb2rKyolvdx/mnm5M0=
+X-Received: by 2002:a17:907:3d91:b0:ac1:e6bd:a568 with SMTP id
+ a640c23a62f3a-acb74dd4e3emr986739966b.37.1745275982676; Mon, 21 Apr 2025
+ 15:53:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20250101195817.995321-1-sjg@chromium.org>
+ <CAFLszTj_JvCRNQw716CGD=i+eJm1YMb=WjOqpF0VFFiac3GmCg@mail.gmail.com>
+ <20250417160423.GX5495@bill-the-cat>
+ <CAFLszTgWUNP6L6ZML639wz76CuuBoPDt447vjfz8MRZyLE5gFw@mail.gmail.com>
+ <20250417163326.GZ5495@bill-the-cat>
+ <5b0876bbed279e41a741fdcaf6091694@sfconservancy.org>
+In-Reply-To: <5b0876bbed279e41a741fdcaf6091694@sfconservancy.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 21 Apr 2025 16:52:50 -0600
+X-Gm-Features: ATxdqUH0zusBicv--QbllHjE6sU2Zf06xi330b6_CqA_uAjZWjZySQrlaQDLnTs
+Message-ID: <CAFLszTjq5-6CZarV=mTmNae9dWAzcCMFQDJSAzkc=xu8ng7KVQ@mail.gmail.com>
+Subject: Re: [PATCH] bloblist: Drop BSD license
+To: "Karen M. Sandler" <karen@sfconservancy.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Denver Gingerich <denver@sfconservancy.org>, Bkuhn <bkuhn@sfconservancy.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,158 +97,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 17 Apr 2025 03:39:35 +0000
-Yixun Lan <dlan@gentoo.org> wrote:
-
 Hi,
 
-> Hi Andre,
-> 
-> On 01:05 Thu 17 Apr     , Andre Przywara wrote:
-> > Some boards with Allwinner SoCs feature a "FEL" key, sometimes also
-> > labelled "uboot", which triggers the BootROM FEL mode, when pressed upon
-> > power-on or reset. This allows to access the SoC's memory via USB OTG,
-> > and to upload and execute code. There is a tool to upload our U-Boot image
-> > and immediately boot it, when the SoC is in FEL mode.
-> > 
-> > To mimic this convenient behaviour on boards without such a dedicated key,
-> > we can query a GPIO pin very early in the SPL boot, then trigger the
-> > BootROM FEL routine.  There has not been much of a SoC or board setup at
-> > this point, so we enter the BROM in a rather pristine state still. On
-> > 64-bit SoCs the required AArch32 reset guarantees a clean CPU state anyway.
-> > 
-> > Any GPIO can be used for that, the signal is expected to be active low,
-> > consequently we enable the pull-up resistors for that pin. A board (or a
-> > user) is expected to specify the GPIO name using the
-> > CONFIG_SUNXI_FAKE_FEL_PIN Kconfig variable. When this variable is not set,
-> > the compiler will optimise away the call.
-> > 
-> > Call the code first thing in board_init_f(), which is the first sunxi
-> > specific C routine.
-> > 
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> >  arch/arm/mach-sunxi/Kconfig | 10 ++++++++++
-> >  arch/arm/mach-sunxi/board.c | 31 +++++++++++++++++++++++++++++++
-> >  2 files changed, 41 insertions(+)
-> > 
-> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> > index ab432390d3c..f1cfdb548bc 100644
-> > --- a/arch/arm/mach-sunxi/Kconfig
-> > +++ b/arch/arm/mach-sunxi/Kconfig
-> > @@ -825,6 +825,16 @@ config USB3_VBUS_PIN
-> >  	---help---
-> >  	See USB1_VBUS_PIN help text.
-> >  
-> > +config SUNXI_FAKE_FEL_PIN
-> > +	string "fake FEL GPIO pin"
-> > +	default ""
-> > +	---help---
-> > +	Define a GPIO that shall force entering FEL mode when a button
-> > +	connected to this pin is pressed at boot time. This must be an
-> > +	active low signal, the internal pull-up resistors are activated.
-> > +	This takes a string in the format understood by sunxi_name_to_gpio,
-> > +	e.g. PH1 for pin 1 of port H.
-> > +
-> >  config I2C0_ENABLE
-> >  	bool "Enable I2C/TWI controller 0"
-> >  	default y if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I_R40
-> > diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-> > index 701899ee4b2..4ee0b333176 100644
-> > --- a/arch/arm/mach-sunxi/board.c
-> > +++ b/arch/arm/mach-sunxi/board.c
-> > @@ -457,8 +457,39 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-> >  	return result;
-> >  }
-> >  
-> > +static void check_fake_fel_button(void)
-> > +{
-> > +	u32 brom_entry = 0x20;
-> > +	int pin, value, mux;
-> > +
-> > +	/* check for empty string at compile time */
-> > +	if (sizeof(CONFIG_SUNXI_FAKE_FEL_PIN) == sizeof(""))  
-> use 'sizeof("")' to express it's an empty string _explicitly_? 
+Just to note that I won't be attending tomorrow, but can attend next week.
 
-Yes, that was the idea.
+Regards,
+Simon
 
-> otherwise, I'd prefer '0' simply (save few chars)..
-
-sizeof("") is always 0, but 0 on the other hand can mean many things. So
-I used this to be specific and make it clear that I mean the empty
-string here.
-
-> > +		return;
-> > +
-> > +	pin = sunxi_name_to_gpio(CONFIG_SUNXI_FAKE_FEL_PIN);
-> > +	if (pin < 0)
-> > +		return;
-> > +
-> > +	mux = sunxi_gpio_get_cfgpin(pin);
-> > +	sunxi_gpio_set_cfgpin(pin, SUNXI_GPIO_INPUT);  
-> ...
-> > +	sunxi_gpio_set_pull(pin, SUNXI_GPIO_PULL_UP);  
-> it seems this doesn't work for me.
-> 
-> while I'm testing on A527, using pin PD6 (GPIO4_D6 in schematic)
-> it goes directly to FEL mode, not sure if I setup things wrong..
-> CONFIG_SUNXI_FAKE_FEL_PIN="PD6"
-
-As you already figured yourself, GPIO4_D6 is one of the few pins you
-cannot use, since it's not a GPIO, but going to GPADC2. Due to their
-analogue nature, those pins are not multiplexed and are hardwired to
-the GPADC device. Utilising them would be theoretically possible as
-well, but much more complicated, and being easy and simple was a
-requirement for this patch, as for instance many H6 and A64 SPL builds
-are already quite tight when it comes to the code size.
- 
-> 
-> > +	value = gpio_get_value(pin);
-> > +	sunxi_gpio_set_cfgpin(pin, mux);
-> > +
-> > +	if (value)
-> > +		return;
-> > +
-> > +	/* Older SoCs maps the BootROM high in the address space. */
-> > +	if (fel_stash.sctlr & BIT(13))
-> > +		brom_entry |= 0xffff0000;
-> > +
-> > +	return_to_fel(0, brom_entry);
-> > +}
-> > +
-> >  void board_init_f(ulong dummy)
-> >  {
-> > +	check_fake_fel_button();
-> > +  
-> this isn't a problem, I can understand calling it here will make board
-> enter FEL mode as early as possible..
-> 
-> just wondering if better to move this function after preloader_console_init(),
-> and log out a message to let user know explicitly - entering FEL mode from SPL..
-> (I personally find it helpful)
-
-I understand where you are coming from, and would see this confirmation
-as useful as well, but FEL mode is really supposed to be entered as
-early as possible (ideally straight from the BootROM), and in a rather
-clean SoC state. As the BootROM does not know about or touch the UART,
-this would be different from a real FEL boot.
-I often use FEL to dump some SoC state at reset, or do experiments in an
-"unspoiled" environment, so doing as little as possible was a real goal
-of this patch.
-
-Thanks anyway for looking at the patch and voicing your concerns and
-opinions!
-
-Cheers,
-Andre
- 
-> but, if you prefer not to change, then fine by me..
-> 
-> >  	sunxi_sram_init();
-> >  
-> >  	/* Enable non-secure access to some peripherals */
-> > -- 
-> > 2.46.3
-> >   
-> 
-
+On Thu, 17 Apr 2025 at 10:45, Karen M. Sandler <karen@sfconservancy.org> wrote:
+>
+> On 2025-04-17 12:33, Tom Rini wrote:
+> > On Thu, Apr 17, 2025 at 10:26:53AM -0600, Simon Glass wrote:
+> >> Hi Tom,
+> >>
+> >> On Thu, 17 Apr 2025 at 10:04, Tom Rini <trini@konsulko.com> wrote:
+> >> >
+> >> > On Thu, Apr 17, 2025 at 09:58:42AM -0600, Simon Glass wrote:
+> >> > > On Wed, 1 Jan 2025 at 12:58, Simon Glass <sjg@chromium.org> wrote:
+> >> > > >
+> >> > > > Linaro has decided to write their own version of bloblist from scratch,
+> >> > > > so there is no point in having a non-GPL license on this file. Change
+> >> > > > it, to better fit with the U-Boot project.
+> >> > > >
+> >> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >> > > > Link: https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/22215
+> >> > > >
+> >> > > > ---
+> >> > > >
+> >> > > >  common/bloblist.c  | 2 +-
+> >> > > >  include/bloblist.h | 2 +-
+> >> > > >  2 files changed, 2 insertions(+), 2 deletions(-)
+> >> > >
+> >> > > Applied to sjg/master, thanks!
+> >> > >
+> >> > > (Tom, this one seemed to get dropped but I'm not sure why)
+> >> >
+> >> > Because AFAICT you legally cannot unilaterally change the license as
+> >> > others have changed the code.
+> >>
+> >> OK, let's put this on the list of things to discuss.
+> >
+> > Sure. And I know I'm behind on getting process going with Conservancy
+> > but Karen can you or someone else please be on the call next Tuesday
+> > (22nd, same time/dial in as before)? For background
+> > https://lore.kernel.org/u-boot/20250101195817.995321-1-sjg@chromium.org/
+> > is hopefully enough but I'm sure Simon and myself would be happy to
+> > point at any other links that might help. Thanks!
+>
+>
+> Sure, at least one of us will attend.
+>
+> karen
