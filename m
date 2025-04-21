@@ -4,91 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C768DC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 09:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B128C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 09:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27B8881E25;
-	Mon, 21 Apr 2025 11:11:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A50B9803CC;
+	Mon, 21 Apr 2025 11:43:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RIgavUpA";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Mnkyh1s6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F80F81E72; Mon, 21 Apr 2025 11:11:55 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id D1F0B8144A; Mon, 21 Apr 2025 11:43:20 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 160D581E1F
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 11:11:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAA8380050
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 11:43:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 466F741A0C
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:11:52 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1A60140006
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:43:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745226712;
- bh=oDQ2C2gWp1HOFZKhmZ6dOskrDG5N4Y3NswuRe5CEmvI=;
+ s=20210705; t=1745228598;
+ bh=2zBe59de8th9k9ZQcw8SXPFK+6qbsM8Fdm1cefTYSvA=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=RIgavUpAYzJnLcoH6TH3jeR0SDVsmv0x2hIqin3vv4GyrTggyH7VUvOQ49YK0stOR
- vBsJWh80xRb1rvaoXs73InwMewZ8FUQCZqCcZcEtpempSKmv6kOFV+6bH/uYLPjgd+
- boCMDUtmEGhxYqToSuwrUpp9bABHa1QHQLWekkxYBv7GkEx+Y9rN+8Kg2biB9oe3JR
- HN7VzbRS0VIOyYRM2ThtlBzPVNNjmxBX8WqZabwniOUfd5R8u/J/eqzwHE9oM+4GC3
- YsuxzTaQFEAnJkJU//GXwFeqtZQLh5+3MZQ/I6X1IL0Npgmdb0SqnZeUClbaKrcSVD
- iXT71i0rrrq/w==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-3912d5f6689so2094104f8f.1
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 02:11:52 -0700 (PDT)
+ b=Mnkyh1s6DjXsnMdbVZ7sqzECU5fCdD66Ce+1XJkoFytXh1FnNpw0fIQwWJLBHNMwc
+ hpY833iUglNCKnHfTpK3StoDubfhp/N3B4PO2FmR+s0ZwXIx2fMuulXtpskHkdDp0M
+ Y8U39gtXE2vaekhmZj6kk1eMT9XEoCU50IsqEhZ9GwbUbtKSgCsagBveOm/j7sFjTB
+ c8qmUYeuIoq0k3Mw8tn6YURpOMp3Pvs7KzPyn8PGMRNsfQ3v/mrjaZxnrX5dISMRvV
+ axEmn2JDhG7QMunqEk+ZaPEow0/tdHvXsXx3UUGtnK6Ga/YrVwQu0B8+Oc8scmzSAL
+ UMCW9r15SINyw==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-39abdadb0f0so1164966f8f.0
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 02:43:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745226708; x=1745831508;
+ d=1e100.net; s=20230601; t=1745228597; x=1745833397;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oDQ2C2gWp1HOFZKhmZ6dOskrDG5N4Y3NswuRe5CEmvI=;
- b=THHqmEPCTd6bXhwJ8uGjK3G1Udlp70Ka3Uv9jvRqn0BAod22Lk0WhX4uowNe5niqGH
- CbHrcA1DieU3M7b2lU1nyL4goMExFAWjaTyP1KHnWcFVptbYNTxJhdZMBsHcDVs5YW61
- TIW4LQVsaboEEJ+DCDoFghpCuzWeEJdG5gVEjcKC0wxDoJlriZLqpTmcGzgkr4tUbGGk
- NX4dXIOcRs5K9945qLhlu+5SoQDbAb3QL1vJ2Z6RA7idr6jHQilVje+A3C5pTc04D5SC
- MSct4d2enEZ8yKAHUP/D/BUvXYglXw8wwV6rip+7u/ru38Vt19auT1GM/96aILa/k+VG
- YTWw==
+ bh=2zBe59de8th9k9ZQcw8SXPFK+6qbsM8Fdm1cefTYSvA=;
+ b=tNMJEQhGtv53aI7SAWhBlO5R8YmpysRzraCxdPazQ5pWgdAoQ3E3lllNZF8o1NxyrL
+ DsvRaaNCyZmpav4MtB08Dy2flYwUd0vrV5xbV+c9tikiQtVASXEIq/4UrgzCNal6jzXy
+ cb8JIQtc8qyWhWzEe3RUWx4PwIyiXzGJIA9HBNxmpHwEsMOKiNh6CqDDbH0DOhOEScRa
+ FwnhYYJ7gOzRByvr6TgVKSUNncXrSUQb17N3vazzvYoOGx1Y74jSQzqWdmB3J9ekdEF9
+ eeYYeyqPradXB+HygAJqBLdxErOSAzWTpAMY7xv7YBp7U75phOuJ2plG4DuQRV5r8y+t
+ HaFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWCRh1wGrpdhHpCx/j8EudWDxz8dfiv98/dMyBx/bwAxWNbiG4DCkGl23FhO2ajGRZTqr8oQhE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNk2wuQoyd7RY0VFASOzpX3J6jKznwLfPDpvESb6d/DIUi0ogV
- JWHU4EBlyVLpjOWBCZi3PR5PRUa6V1q8yBwa8wzWuSQuZsw8ZzE6YbVfNgj17C/A1mSE4fQ8vZp
- sqQBoJexYVs9PzHbOgbqKYD9wGsFkcP0slDNXj5SZRtnTXZT3ysGdDM+z+yoQCT+bGWU=
-X-Gm-Gg: ASbGncvidgsKJEJirjIKr9ljQovOjXWZr2TbpvJq3L4RltVZvQ5W4bxVOw0xrlAGFu7
- oDLg6Enp8ArL5J+JjPSO24ZZfN75aLWfVdQtzSJgMuucAUB+FBOra+hSvnkWZAXJ6wvUnasvi3s
- zcKofTyNWjfuZj8OnT7QCqSpWwgC+tlMjmyKL4b/yT83oD9KCgqYdvT1kCjccv+j7iXLIYTTZs0
- g6F8HDWFRNatPCzrNwj0vxRc8TU34sJ+R2XaSD17+68Kxbt74fcQiRhEbVz1fVrzJa8Wdm89/Fy
- LPlRDXwyglDyZiCbWWkucIEIYLHdYBDZT747MR3eRYqc8MHtHbzQuDUUCyxfia5LpT+jdO542ra
- jDkJEzxU26M+dQg==
-X-Received: by 2002:a5d:584a:0:b0:39c:141a:6c67 with SMTP id
- ffacd0b85a97d-39efbad398fmr8280825f8f.45.1745226708672; 
- Mon, 21 Apr 2025 02:11:48 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHZ6txp1hh7/idQ/aVoFsCwmA7Z/aqqe3Oufk1a+mSEjPebLxm8DRjbkMHl8L6TYveRNqVctg==
-X-Received: by 2002:a5d:584a:0:b0:39c:141a:6c67 with SMTP id
- ffacd0b85a97d-39efbad398fmr8280810f8f.45.1745226708320; 
- Mon, 21 Apr 2025 02:11:48 -0700 (PDT)
+ AJvYcCX2ASy4H6IvL0BqtI0vOra8ledKsRSOE/Cluaow8FbKUTiEuvPoUMWmdPowvWuixMusHdrnW4g=@lists.denx.de
+X-Gm-Message-State: AOJu0YzWjSctIy4XGT4p1YIMANcDgMbiDzwCd+UC3k11KpjcpFfX/ATS
+ /SyabgXT5gPYe3dO4s+P/XJqsc4RCFZ/ly57E1frDt2GC7dZRHsTx1t/WdsI/iKDNs7EoqMgTaA
+ gg9eLpoFhgisn+p+lDYYMLrKZUP9CeAw7RYGWILNkqWmx5q4A76U5C48KxfNMvWF0nWI=
+X-Gm-Gg: ASbGncuzlNPaHsVA0gdd4etClWaBFCoA2a641qPiqxYBTELH7w0JsuROIkBmgWlLXa7
+ f4g4s3qe6AJFddP2KKKjnqEZXL0OoMs5zBQ7HQu14kQ+hZPc8cHpEvl/UnhN9KNjOEfAWLHb5/y
+ wj73YGyTB9qtxMbWCJmoDRmBj+iFGv5YQmZnkJ8n7T1Nh3bpC621MzXOoOngtTtl30on2DbU4Au
+ uLB8HFHhKmtZw46YFLovbpsr4R043fQH6ocp1qOpQSIfR1IcdR8eIr//X1zj7H/5KHnirefJqqo
+ QNH9JueEiPFjMYHODbjulTVsrcJMmgDY6DFSy04DaHbYt/EbqT7UTgIheQub2FYVW9Gsp5Mfexf
+ qIYFUPDSrGx4MBg==
+X-Received: by 2002:a5d:47cb:0:b0:39a:d336:16 with SMTP id
+ ffacd0b85a97d-39efba6d8fbmr7929238f8f.34.1745228597522; 
+ Mon, 21 Apr 2025 02:43:17 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHInyPkej0dBnxA8a6S2uU1y1e/9hq4zBfB3u+TRrGfKBMe6N18kTgTbZk9abomI4H1HePuww==
+X-Received: by 2002:a5d:47cb:0:b0:39a:d336:16 with SMTP id
+ ffacd0b85a97d-39efba6d8fbmr7929221f8f.34.1745228597169; 
+ Mon, 21 Apr 2025 02:43:17 -0700 (PDT)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39efa4331a9sm11411330f8f.36.2025.04.21.02.11.47
+ 5b1f17b1804b1-4406d5accddsm127075785e9.9.2025.04.21.02.43.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 02:11:47 -0700 (PDT)
+ Mon, 21 Apr 2025 02:43:15 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC v2] Dockerfile: use nasm from distfiles.macports.org
-Date: Mon, 21 Apr 2025 11:11:41 +0200
-Message-ID: <20250421091141.762386-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] boot: BOOTMETH_DISTRO should select BOOTMETH_EFI_BOOTMGR
+Date: Mon, 21 Apr 2025 11:43:10 +0200
+Message-ID: <20250421094310.764765-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -108,30 +111,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-nasm.us is currently not available.
-Download nasm from distfiles.macports.org.
-The build script for coreboot verifies the SHA1 checksum.
+Distros expect the EFI boot manager to run. It falls back to launching
+EFI\BOOT\BOOT<ARCH>.EFI from the ESP.
+
+BOOTMETH_EFILOADER is obsolete.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-v2:
-	correct sed command
----
- tools/docker/Dockerfile | 1 +
- 1 file changed, 1 insertion(+)
+ boot/Kconfig | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 772e980d0d1..f314e38dfe7 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -286,6 +286,7 @@ RUN mkdir /tmp/trace && \
- # Build coreboot
- RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
-     cd /tmp/coreboot-24.08 && \
-+    sed -i 's|www.nasm.us\/pub\/nasm\/releasebuilds\/\${NASM_VERSION}|distfiles.macports.org\/nasm|' util/crossgcc/buildgcc && \
-     make crossgcc-i386 CPUS=$(nproc) && \
-     make -C payloads/coreinfo olddefconfig && \
-     make -C payloads/coreinfo && \
+diff --git a/boot/Kconfig b/boot/Kconfig
+index fb37d912bc9..89076220adb 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -597,6 +597,9 @@ config BOOTMETH_EFILOADER
+ 	imply CMD_TFTPBOOT if CMD_NET
+ 	default y
+ 	help
++	  This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
++	  launching EFI\BOOT\BOOT<ARCH>.EFI if no boot option matches.
++
+ 	  Enables support for EFI boot using bootdevs. This makes the
+ 	  bootdevs look for a 'boot<arch>.efi' on each filesystem
+ 	  they scan. The resulting file is booted after enabling U-Boot's
+@@ -648,7 +651,7 @@ config BOOTMETH_DISTRO
+ 	select BOOTMETH_SCRIPT if CMDLINE # E.g. Armbian uses scripts
+ 	select BOOTMETH_EXTLINUX  # E.g. Debian uses these
+ 	select BOOTMETH_EXTLINUX_PXE if CMD_PXE && CMD_NET && DM_ETH
+-	select BOOTMETH_EFILOADER if EFI_BINARY_EXEC # E.g. Ubuntu uses this
++	select BOOTMETH_EFI_BOOTMGR if EFI_BINARY_EXEC # E.g. Ubuntu uses this
+ 
+ config SPL_BOOTMETH_VBE
+ 	bool "Bootdev support for Verified Boot for Embedded (SPL)"
 -- 
 2.48.1
 
