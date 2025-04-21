@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B5A4C369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 15:30:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E143C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 15:31:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17F1D8129B;
-	Mon, 21 Apr 2025 17:30:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A8478129B;
+	Mon, 21 Apr 2025 17:31:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IkHcrcK2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q4zBlP6f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 247B6812BC; Mon, 21 Apr 2025 17:30:49 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 7715F812BC; Mon, 21 Apr 2025 17:31:34 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B2AA81273
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 17:30:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C658681273
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 17:31:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-2d4e91512b4so2118148fac.1
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 08:30:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6f4b3ebe5so7313576a12.0
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 08:31:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745249445; x=1745854245; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=l5KQJMNiJ1E/s1e7pihPIY1MEjsPLw5t7x9Dhg5k6C8=;
- b=IkHcrcK2trZmDxLolrkPFA6NpQB3xenolcJ+o/DLyeVWGevdGWx3UFig/V38kwsGsQ
- yTSzMwUAVlo5Mh6DsUvfOsv6x+u/U1d3RqmxpTpGWQZz4dGgxdukm6UyN1u25DUeYrEY
- 21LCSJ5bXGmopZ5kDIhcKpO8+D+kLIHonU9z4=
+ d=chromium.org; s=google; t=1745249491; x=1745854291; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LwWvLaR8g5xbd1z5jSCDvYrtqqsX2SUsB35Abo+nJmY=;
+ b=Q4zBlP6ftHO1SWYUD87j8Q8lNAGOLN1WE+B9qdHSbPjZZZanvUJJ6Aw6vDrhFTSx8D
+ NyLK6ppAblFIovFcsS6+gPznkFXEQY9nLtuFxAeLPVyiLFE264beYhyGq6XMQcgiADY4
+ ou5bpDnExJVi16XYkM4FmbbgB5J9/BCZ4AqXw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745249445; x=1745854245;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=l5KQJMNiJ1E/s1e7pihPIY1MEjsPLw5t7x9Dhg5k6C8=;
- b=Ewx37EZlLb4w7lj+8M8JhTj61FYEw7JmdlMQbbM97Fe6kCJnnKZ7RCiUkeKSz6niFd
- dJYBjlUNwuVAfk1A5tPB6zSuo6JHfrZC2e+LgJDRLfkINoti1tlf6G+VzvRG7A4TC6tx
- YUFgB6A7Gnnqs22BSGxMDf6EV9fZSBn2HLBAc6yzthuUcAGyzcRK6QyoK/U3jHOSlvUo
- /g+N+SLs0kNkLCCZbr7/iAc/zx0kgyZQkDxH9/anZ92uxifLD/a9LZrl4cKwFF0CIwa0
- 67ePKuXE9B6ir5Ft1bzfwDDV99bp3Sv6MajxcL4gI4iWwRpETr0X4Ar5jzdlw8gXb1/3
- twEw==
-X-Gm-Message-State: AOJu0YxWHS/A0tCHhtgmaILe3n9iECqDGXRml0G3hj8QKrO6ym8dE56G
- Ac+MqTom5TtwC5ZS1dApq1ynALhLjhDpk4tiniOml3492XWZlUq0VtdwCclKb1nhwmi05bw9z5k
- p
-X-Gm-Gg: ASbGnctoFFzGcZmi83NiR1pVfmgKzfRfXJjFxoXD+IYpNJIvgnlLcwNTpnV8TazBoo3
- BIn4l7DtGjLK16UxfKWQGjbr9V74J10UHTDMt0J9oGyNXvjEjYaty9DSvyBdyl2a9VGZ1v5obHa
- 7O+1O8JjsgDRujkosFdVV4SykT5f+qKCIMPbjltj6DFjh4B+Q5AZ+Y1IiWBP20O9/z+BB6ZaSqD
- eixxIkDAwFmF3846N1HLjH5oXlL5cRH+euvE36DWjf0aqmdljdAX/UOX74JLsnzh9NYp8xyefVO
- gVINhaLRLNx4nWOtphlJT0vXGz7bZwmaVudRENhsnY1rf5T2W8eeq5k8yzAqXmAc1ErseyOs9he
- K2gqscKMNI9lG
-X-Google-Smtp-Source: AGHT+IHdHUVcyFZP4PgvsksLD7yjl2BQv4+7MI7y1yW2gr/HxmaNcxMfpwZ8qdumS0yFWGCVY1rBTQ==
-X-Received: by 2002:a05:6870:9c87:b0:29e:65ed:5c70 with SMTP id
- 586e51a60fabf-2d526d5690amr6377011fac.30.1745249445294; 
- Mon, 21 Apr 2025 08:30:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d5a3607ffbsm434125fac.50.2025.04.21.08.30.44
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 08:30:44 -0700 (PDT)
-Date: Mon, 21 Apr 2025 09:30:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Community meeting tomorrow (22 April 2025)
-Message-ID: <20250421153042.GW5495@bill-the-cat>
+ d=1e100.net; s=20230601; t=1745249491; x=1745854291;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LwWvLaR8g5xbd1z5jSCDvYrtqqsX2SUsB35Abo+nJmY=;
+ b=jHOIX/86v6evexbjEBKxVu1Pt8YnTEa23Kob1Oxyd8JoyP0oQJfIgf9pg2UlFJLD7z
+ WhymukFG4dg8+Umrk+C4x53X/DuOBTuheMUtvjosKXeWm/ohZNKrUqxJppy1EQFwPLfZ
+ 22n09YZxbuXfBye3+H3o5ni71EGs2k7vu/qyt0jMV+xk7rq3D/Fi5h4UYya3GV7ipzD/
+ 0RurhumfdytEPNIrbaxMNcLRjryu2JmLmAEJI8eaIOmVONST6MhfxVQeq3AN/gtPyVod
+ EPzH4OeMlYrOQ+HjZRSP+f/vhYDBrKUG2YEqbT+Q0u/UftwgAAwWb1jKs8zXk3AlH6k5
+ Rg3g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8Zj3Pkuw756o8/8aoibNbb5YaZcfXcesEkoozSMxzq+B4oSlcz03Q8qL+/H+rBBWPZdLLU6A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxqAuKs64HeQ6kzgHQbm6Fj/qU67xBRKp4DjS0MmcmtAUfwUd1d
+ nx4Iv1uadJIGfihYMjESWKJ/bUmaB1g2OlA/qjnF1KCP3yZhClId7Dx5ZtZfadwfWU+g3969V9Z
+ +u3lYD2vDvECP4mkmo8y5SRDuG7XhkSCuPllScnFfvgR3BGo=
+X-Gm-Gg: ASbGncvgZhe4qbpH8TpBtq1bI/utrE2UkC9xCOBc7/m5CODdZmxAkd44iXIkTv896RK
+ bABZX6WvzM7ztCmFjG0zNyrr8ZsykynV/y7q9gjPPQI9U8nKbf8/i4Omc3Fd/xxrg3P7Mgx8Cqs
+ 35pOsgSq/9FFkw6RbTov+IRdw=
+X-Google-Smtp-Source: AGHT+IEIzUy6EVNxg8kT0aS7iS6JFjQ7GIJSoX2xNN8n5nL6CbxM5TyPNh4I2YmGeJC2qXi+xQerKF7o1RS4TKH7At0=
+X-Received: by 2002:a17:907:2d0b:b0:ac7:391b:e689 with SMTP id
+ a640c23a62f3a-acb74e75fcbmr884359366b.59.1745249491203; Mon, 21 Apr 2025
+ 08:31:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zIvv9UBDUDV/hdFr"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250416224032.144791-1-heinrich.schuchardt@canonical.com>
+ <20250416224032.144791-2-heinrich.schuchardt@canonical.com>
+ <d8f9a58a-10cd-4366-bd6f-85f4effc747c@cherry.de>
+ <CAFLszThDLbf3fQySO_8u6OD3-BK2abE6NFVhvviRtrNs=PKdsA@mail.gmail.com>
+ <d448af91-ebe1-432c-ae20-3e8eb2efddf1@canonical.com>
+ <CAFLszTh29kgQ_bE8_gnORWH0PQ=H94=q7757mFOfiopCUL3eTg@mail.gmail.com>
+ <CAM=mAOnLTX3ZB6ioyPOoR+wyNKoA2VnxCKFMUHrZyM_wpuGzOA@mail.gmail.com>
+In-Reply-To: <CAM=mAOnLTX3ZB6ioyPOoR+wyNKoA2VnxCKFMUHrZyM_wpuGzOA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 21 Apr 2025 09:31:19 -0600
+X-Gm-Features: ATxdqUHrijKEPqI8xInsjUZZiJeNU7i1geV4B0D1oRP-qmwWpWnKebe7Js07u9A
+Message-ID: <CAFLszTinquyp9JW=Z+w6BFkGUy3sJJuJH_CfkOdEO0FvPteAbg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] buildman: allow specifying configuration fragments
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,45 +97,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---zIvv9UBDUDV/hdFr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, 19 Apr 2025 at 13:22, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+>
+>
+> Simon Glass <sjg@chromium.org> schrieb am Sa., 19. Apr. 2025, 16:14:
+>>
+>> Hi Heinrich,
+>>
+>> On Sat, 19 Apr 2025 at 04:20, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>> >
+>> > On 4/18/25 13:39, Simon Glass wrote:
+>> > > Hi Quentin,
+>> > >
+>> > > On Fri, 18 Apr 2025 at 05:27, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>> > >>
+>> > >> Hi Heinrich,
+>> > >>
+>> > >> On 4/17/25 12:40 AM, Heinrich Schuchardt wrote:
+>> > >>> Currently we are no able to build with configuration fragments in our CI.
+>> > >>> With this patch buildman gets a new argument --fragments for passing a
+>> > >>> comma separated list of configuration fragments to add to the board
+>> > >>> defconfigs, e.g.
+>> > >>>
+>> > >>>       tools/buildman/buildman \
+>> > >>>       -o build \
+>> > >>>       -k qemu-riscv64_smode \
+>> > >>>       --fragments acpi.config
+>> > >>>
+>> > >>
+>> > >> What about using:
+>> > >>
+>> > >> --fragment acpi.config --fragment fragment2.config
+>> > >>
+>> > >> ?
+>> > >
+>> > > Yes that could be useful. It would also allow wildcards, although the
+>> > > code would need to drop the config/ directory prefix. Also, I see that
+>> > > -z is available so perhaps that could be a (bad) short option?
+>> >
+>> > Hello Simon,
+>> >
+>> > What do you mean by useful?
+>> >
+>> > --fragments a,b conveys the same information as --fragment a --fragment b.
+>> >
+>> > We are not passing any config/ directory with the fragment names.
+>> >
+>> > Using wildcards in does not depend on how fragment names are passed.
+>> >
+>> > As maintainer of buildman, please, clearly express how you want the
+>> > fragment names to be passed. "Could be useful" does not indicate any
+>> > decision but let's me hang in limbo.
+>>
+>> NAK
+>>
+>> We need a file which lists the valid boards for each config fragment.
+>> Buildman should parse that and it should be possible (with an argument
+>> like --build-all-fragments) to build all fragments for a board (or all
+>> boards), to make sure that things actually build. See [1]
+>>
+>> So until that is done I'm going to NAK the whole concept[2].
+>
+>
+> Building all possible permutations can easily result in excessive numbers of CI builds.
+>
+> We have been breaking ACPI builds multiple times and now you block testing.
+>
+> I am not amused.
 
-Hey all,
+I'm happy to discuss the merits of both approaches, but remember, I am
+your mirror. So if you can be flexible, so can I. Maybe Tom might put
+up with having a file? We only need to list the combinations we want
+to test in CI.
 
-As a reminder we're having the next community meeting tomorrow. The
-details are the same as always:
-https://meet.google.com/btj-wgcg-euw and the calendar link on
-https://www.u-boot.org/ and the dail-in numbers are at:
-https://meet.google.com/tel/btj-wgcg-euw?pin=3D3D1307528552322&hs=3D3D1
+Regards,
+Simon
 
-The meeting will be on Tuesday, April 22nd at 9am (-0600).
-
-This is slightly off-schedule in that merge window is 3 weeks and
-release canidates are a two week cadence. Last call it was suggested
-that we have a meeting mid-merge window.
-
---=20
-Tom
-
---zIvv9UBDUDV/hdFr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgGZJoACgkQFHw5/5Y0
-tyxJnQv8Dk7zYnGiO/RfVllAeenv39nldtUTZnVGqYBmPzF/efNu2aajNBHKnr1C
-oezLg7Kbsy+mcCo4Q7qVJVp2jAfAMmenU1X6I5P8fRBy2h3lUbDDh4VZVWtCyaYd
-N+nFtA5vXPfnAqNyI7bCNGmOn4LYcdIRhv36gBngszzQu7UTI+7xy+tvZs3XGb00
-Wu93JdNegCceoNK35fuyPS00gbelWoTB3gXGaaVgvFfdBerTUrYDsH5R4WUnNJ2Q
-J1tvC2l0tBMSiB4kfvn5c19STWsh9Ycj3ZPlWkNveNMATzlQuFx6BzBKByQM3H26
-cvQMJVYsxPzbZ3PRhDIt35++9mjECsSI61Sq9rJ4L4eXtjVVoDc6DxflhlpOuu5z
-/1XXljvz3GS+BjLFO+P9ywmRadEfaKwluAOypuCx+zfn6EMWn5m4PDbFTUVvNu3I
-oAE06pu2eGnYS9EygW4ZNCyXU4I0W8MWASwyPf7LFKOhRcbI4+fCaTechCtXn52p
-Ntanb9cu
-=Onco
------END PGP SIGNATURE-----
-
---zIvv9UBDUDV/hdFr--
+>
+> Best regards
+>
+> Heinrich
+>
+>>
+>> Regards,
+>> Simon
+>>
+>> [1] https://patchwork.ozlabs.org/project/uboot/patch/20241108152350.3686274-9-sjg@chromium.org/
+>> [2] https://lore.kernel.org/u-boot/20250329002537.GN93000@bill-the-cat/
