@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B377C369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 13:56:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B5A4C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 15:30:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A864481B4B;
-	Mon, 21 Apr 2025 15:56:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17F1D8129B;
+	Mon, 21 Apr 2025 17:30:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gh6zc3wZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IkHcrcK2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D23D81B4B; Mon, 21 Apr 2025 15:56:03 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 247B6812BC; Mon, 21 Apr 2025 17:30:49 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 569CC807AE
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 15:56:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B2AA81273
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 17:30:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2c7e5f7f0e3so1035471fac.3
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 06:56:01 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-2d4e91512b4so2118148fac.1
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 08:30:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745243760; x=1745848560; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qH/+b8VXQ86TfhjB03W6WwQ7jGiauLdy55JaPZnaK8U=;
- b=Gh6zc3wZLYmM/V814HJSxN+TIpv1pPZ7+DxehxXE47BKo0CMWlp85U30ygqVNvihWn
- PylqdjC5FFyiNOk9ocfAO974oPLPwsjazFVCoMEAgFrQlOX9BOQtS9WT3+y/J5G8iYWl
- laJFnbiemDsgfWT6lvgOC7T/K//HsTB7XlyK4=
+ d=konsulko.com; s=google; t=1745249445; x=1745854245; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=l5KQJMNiJ1E/s1e7pihPIY1MEjsPLw5t7x9Dhg5k6C8=;
+ b=IkHcrcK2trZmDxLolrkPFA6NpQB3xenolcJ+o/DLyeVWGevdGWx3UFig/V38kwsGsQ
+ yTSzMwUAVlo5Mh6DsUvfOsv6x+u/U1d3RqmxpTpGWQZz4dGgxdukm6UyN1u25DUeYrEY
+ 21LCSJ5bXGmopZ5kDIhcKpO8+D+kLIHonU9z4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745243760; x=1745848560;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qH/+b8VXQ86TfhjB03W6WwQ7jGiauLdy55JaPZnaK8U=;
- b=NpR9pS1KbI2oLnkCYx9EwUDTfKrnHFs3XoRBGdQk8lqSnCmCF/RroOHDhImbtNf8Co
- 8I7+l9NVnMXoWNc/6GuY1qgr9g2pw1ibKAN6pTIxL3m5yDdRN5tJHAnrMsRMr18PvzrX
- EKDFX5BRan8w+owZNBBtOtUE7E8JNQs6U87eRp+gq/0V9Hek3uwTaF43XXFp7Azxh7Bj
- DaYqAeB/KkB6jgpTK8DT9hKIbxHgHhWAAMtwUMw3O5oBt6EMrvxUXrcgTI9Hv7M/yJXO
- T4ehyhcN5G1/b30psuYyQ5tbX07QeApUbpC4gs22pvjCAto9OceXZafLCmrXSvprELBE
- Uh+g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUd1AU6d77HFkLLuqBVgD63hGYN8IH3bVhaabK0mp86snC1HhjmcgE79GB260BemvwW3Ah8u3s=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUXMw0fh2RYOlvpQmM3p9OGW/JvENAHi8trPIvoGWMC2URVF1O
- ssqC57PxfARcNJfnRVGFX3rxhEY2Bm3ihc/zKw4pBm2GD+CiSVFsWoZn4GHmnCw=
-X-Gm-Gg: ASbGncuUycLy6Pz6tGvPx6xVmhTes2XM8vT7J1pKgRzeCseevp5mIcD/XGN+aiBmryE
- Vpc9dH5DXvVSlhzzovGvmyGzOz2pfXO/uGRKvln2FgbnoY/WU9SuT5v8s17cM7ndk9PmjE1Vapn
- lp8d9rmJY2jJwVYltTfH8tJuuQ2UDsllloEVcfDBeJ9eyOIAwx+BZBB56nKe6X0M6k4zCu3VGiU
- rsWFqJA8H60s0oLYiRS0d3/Ux7q94dz+FaBSmnZVb2/Zz6MtM1eeSkwZCtZEg4JfADJlIsvYQUh
- S28n5RtTsSrGFf6TqKeRg/rLR7uMfhPD05olw3XBn7Bn+du6VDpu+ZAFvW1Z9r8+JjLqia+n5uT
- +wA==
-X-Google-Smtp-Source: AGHT+IHlX+jtLKDIUoDp73X+XaSHmkl6gL4YdBLG9fux+BKl4FMF8/2kkQQYBcbGnFbUyewzmCdNpA==
-X-Received: by 2002:a05:6870:2f12:b0:2c2:2e8e:2030 with SMTP id
- 586e51a60fabf-2d526b8d784mr5499418fac.23.1745243760013; 
- Mon, 21 Apr 2025 06:56:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1745249445; x=1745854245;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=l5KQJMNiJ1E/s1e7pihPIY1MEjsPLw5t7x9Dhg5k6C8=;
+ b=Ewx37EZlLb4w7lj+8M8JhTj61FYEw7JmdlMQbbM97Fe6kCJnnKZ7RCiUkeKSz6niFd
+ dJYBjlUNwuVAfk1A5tPB6zSuo6JHfrZC2e+LgJDRLfkINoti1tlf6G+VzvRG7A4TC6tx
+ YUFgB6A7Gnnqs22BSGxMDf6EV9fZSBn2HLBAc6yzthuUcAGyzcRK6QyoK/U3jHOSlvUo
+ /g+N+SLs0kNkLCCZbr7/iAc/zx0kgyZQkDxH9/anZ92uxifLD/a9LZrl4cKwFF0CIwa0
+ 67ePKuXE9B6ir5Ft1bzfwDDV99bp3Sv6MajxcL4gI4iWwRpETr0X4Ar5jzdlw8gXb1/3
+ twEw==
+X-Gm-Message-State: AOJu0YxWHS/A0tCHhtgmaILe3n9iECqDGXRml0G3hj8QKrO6ym8dE56G
+ Ac+MqTom5TtwC5ZS1dApq1ynALhLjhDpk4tiniOml3492XWZlUq0VtdwCclKb1nhwmi05bw9z5k
+ p
+X-Gm-Gg: ASbGnctoFFzGcZmi83NiR1pVfmgKzfRfXJjFxoXD+IYpNJIvgnlLcwNTpnV8TazBoo3
+ BIn4l7DtGjLK16UxfKWQGjbr9V74J10UHTDMt0J9oGyNXvjEjYaty9DSvyBdyl2a9VGZ1v5obHa
+ 7O+1O8JjsgDRujkosFdVV4SykT5f+qKCIMPbjltj6DFjh4B+Q5AZ+Y1IiWBP20O9/z+BB6ZaSqD
+ eixxIkDAwFmF3846N1HLjH5oXlL5cRH+euvE36DWjf0aqmdljdAX/UOX74JLsnzh9NYp8xyefVO
+ gVINhaLRLNx4nWOtphlJT0vXGz7bZwmaVudRENhsnY1rf5T2W8eeq5k8yzAqXmAc1ErseyOs9he
+ K2gqscKMNI9lG
+X-Google-Smtp-Source: AGHT+IHdHUVcyFZP4PgvsksLD7yjl2BQv4+7MI7y1yW2gr/HxmaNcxMfpwZ8qdumS0yFWGCVY1rBTQ==
+X-Received: by 2002:a05:6870:9c87:b0:29e:65ed:5c70 with SMTP id
+ 586e51a60fabf-2d526d5690amr6377011fac.30.1745249445294; 
+ Mon, 21 Apr 2025 08:30:45 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d5212c9671sm1933406fac.2.2025.04.21.06.55.58
+ 586e51a60fabf-2d5a3607ffbsm434125fac.50.2025.04.21.08.30.44
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 06:55:59 -0700 (PDT)
-Date: Mon, 21 Apr 2025 07:55:57 -0600
+ Mon, 21 Apr 2025 08:30:44 -0700 (PDT)
+Date: Mon, 21 Apr 2025 09:30:42 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [RFC v2] Dockerfile: use nasm from distfiles.macports.org
-Message-ID: <20250421135557.GV5495@bill-the-cat>
-References: <20250421091141.762386-1-heinrich.schuchardt@canonical.com>
+To: u-boot@lists.denx.de
+Subject: Community meeting tomorrow (22 April 2025)
+Message-ID: <20250421153042.GW5495@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5+1qogTrBMwZOR4W"
+ protocol="application/pgp-signature"; boundary="zIvv9UBDUDV/hdFr"
 Content-Disposition: inline
-In-Reply-To: <20250421091141.762386-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,50 +94,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---5+1qogTrBMwZOR4W
+--zIvv9UBDUDV/hdFr
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 21, 2025 at 11:11:41AM +0200, Heinrich Schuchardt wrote:
+Hey all,
 
-> nasm.us is currently not available.
-> Download nasm from distfiles.macports.org.
-> The build script for coreboot verifies the SHA1 checksum.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
-> 	correct sed command
-> ---
->  tools/docker/Dockerfile | 1 +
->  1 file changed, 1 insertion(+)
+As a reminder we're having the next community meeting tomorrow. The
+details are the same as always:
+https://meet.google.com/btj-wgcg-euw and the calendar link on
+https://www.u-boot.org/ and the dail-in numbers are at:
+https://meet.google.com/tel/btj-wgcg-euw?pin=3D3D1307528552322&hs=3D3D1
 
-I want to give the nasm project (and also coreboot) time to sort this
-problem out, but this is certainly helpful for testing out other
-Dockerfile changes, thanks!
+The meeting will be on Tuesday, April 22nd at 9am (-0600).
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+This is slightly off-schedule in that merge window is 3 weeks and
+release canidates are a two week cadence. Last call it was suggested
+that we have a meeting mid-merge window.
 
 --=20
 Tom
 
---5+1qogTrBMwZOR4W
+--zIvv9UBDUDV/hdFr
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgGTmkACgkQFHw5/5Y0
-tyyMMAv/R+UiS3wRuBCa7rBe5Ckh94EOycSwEoDSsHKM77HKNtC7uB5WU9rWC+Ez
-Dz453Beo7zk/En1oOHbTdCniWfr9pyQ/zgYSH20dAjM05uVTwGCVUNjSxziAE8Nr
-H0u2myoX6pb7+wjmh0tc4NH6V300cBA33LLeZiApN/o2unIsYQIAGM6IF3mVF/5U
-rfdRKfh1EHImwj1uViTNAWdxUMDnjhyIkkOEq540DyK+iHQZO0tvdmKSHPvdpjUc
-QzkTSx4KnhWHN5ZCAYlPjvB3mi/l3F5jkKJ80e/77hs3FUk595nfZMr6naw8rqXg
-avFZ854JD8hAuKhTQi8Zq+8Hfr2iBxVfF0rK9/n0jP7Z5EUNuPlYSvvt0xIz/DjU
-P6p0b/dMZHNr0BDkuY5Oedr1bsL6pnDrW3I5p5b1dltQpVBOxVRjf//Pn2m9+I61
-C2lZtjv23qP7yI/oN6GZfe6JdwjFlWr5H6B1dxkY2QYKiR+alfGY8FyqBauv7O2M
-1nlngFtf
-=j9pf
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgGZJoACgkQFHw5/5Y0
+tyxJnQv8Dk7zYnGiO/RfVllAeenv39nldtUTZnVGqYBmPzF/efNu2aajNBHKnr1C
+oezLg7Kbsy+mcCo4Q7qVJVp2jAfAMmenU1X6I5P8fRBy2h3lUbDDh4VZVWtCyaYd
+N+nFtA5vXPfnAqNyI7bCNGmOn4LYcdIRhv36gBngszzQu7UTI+7xy+tvZs3XGb00
+Wu93JdNegCceoNK35fuyPS00gbelWoTB3gXGaaVgvFfdBerTUrYDsH5R4WUnNJ2Q
+J1tvC2l0tBMSiB4kfvn5c19STWsh9Ycj3ZPlWkNveNMATzlQuFx6BzBKByQM3H26
+cvQMJVYsxPzbZ3PRhDIt35++9mjECsSI61Sq9rJ4L4eXtjVVoDc6DxflhlpOuu5z
+/1XXljvz3GS+BjLFO+P9ywmRadEfaKwluAOypuCx+zfn6EMWn5m4PDbFTUVvNu3I
+oAE06pu2eGnYS9EygW4ZNCyXU4I0W8MWASwyPf7LFKOhRcbI4+fCaTechCtXn52p
+Ntanb9cu
+=Onco
 -----END PGP SIGNATURE-----
 
---5+1qogTrBMwZOR4W--
+--zIvv9UBDUDV/hdFr--
