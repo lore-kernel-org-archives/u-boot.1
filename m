@@ -4,41 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB8FC369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 21:30:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6548C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 21:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D96858129B;
-	Mon, 21 Apr 2025 23:30:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A6CD8059D;
+	Mon, 21 Apr 2025 23:43:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 112308129F; Mon, 21 Apr 2025 23:30:45 +0200 (CEST)
+ id 844ED8070C; Mon, 21 Apr 2025 23:43:53 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 90FD381273
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 23:30:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id D55A180050
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 23:43:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 94CC112FC;
- Mon, 21 Apr 2025 14:30:37 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 234B312FC;
+ Mon, 21 Apr 2025 14:43:46 -0700 (PDT)
 Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8772E3F59E;
- Mon, 21 Apr 2025 14:30:40 -0700 (PDT)
-Date: Mon, 21 Apr 2025 22:29:39 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 339F63F59E;
+ Mon, 21 Apr 2025 14:43:49 -0700 (PDT)
+Date: Mon, 21 Apr 2025 22:42:52 +0100
 From: Andre Przywara <andre.przywara@arm.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, Yixun Lan
- <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>, Jernej Skrabec
- <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>,
- linux-sunxi@lists.linux.dev
+To: Yixun Lan <dlan@gentoo.org>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, Tom Rini
+ <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel
+ Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev
 Subject: Re: [PATCH v2 2/3] sunxi: add "fake" FEL pin support
-Message-ID: <20250421222939.69832f73@minigeek.lan>
-In-Reply-To: <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
+Message-ID: <20250421224252.318c885f@minigeek.lan>
+In-Reply-To: <20250417033935-GYA34332@gentoo>
 References: <20250417000539.3709-1-andre.przywara@arm.com>
  <20250417000539.3709-3-andre.przywara@arm.com>
- <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
+ <20250417033935-GYA34332@gentoo>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -60,16 +59,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 18 Apr 2025 13:28:23 +0200
-Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Thu, 17 Apr 2025 03:39:35 +0000
+Yixun Lan <dlan@gentoo.org> wrote:
 
-Hi Quentin,
-
-thanks for having a look!
+Hi,
 
 > Hi Andre,
 > 
-> On 4/17/25 2:05 AM, Andre Przywara wrote:
+> On 01:05 Thu 17 Apr     , Andre Przywara wrote:
 > > Some boards with Allwinner SoCs feature a "FEL" key, sometimes also
 > > labelled "uboot", which triggers the BootROM FEL mode, when pressed upon
 > > power-on or reset. This allows to access the SoC's memory via USB OTG,
@@ -93,18 +90,18 @@ thanks for having a look!
 > > 
 > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 > > ---
-> >   arch/arm/mach-sunxi/Kconfig | 10 ++++++++++
-> >   arch/arm/mach-sunxi/board.c | 31 +++++++++++++++++++++++++++++++
-> >   2 files changed, 41 insertions(+)
+> >  arch/arm/mach-sunxi/Kconfig | 10 ++++++++++
+> >  arch/arm/mach-sunxi/board.c | 31 +++++++++++++++++++++++++++++++
+> >  2 files changed, 41 insertions(+)
 > > 
 > > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
 > > index ab432390d3c..f1cfdb548bc 100644
 > > --- a/arch/arm/mach-sunxi/Kconfig
 > > +++ b/arch/arm/mach-sunxi/Kconfig
 > > @@ -825,6 +825,16 @@ config USB3_VBUS_PIN
-> >   	---help---
-> >   	See USB1_VBUS_PIN help text.
-> >   
+> >  	---help---
+> >  	See USB1_VBUS_PIN help text.
+> >  
 > > +config SUNXI_FAKE_FEL_PIN
 > > +	string "fake FEL GPIO pin"
 > > +	default ""
@@ -114,35 +111,106 @@ thanks for having a look!
 > > +	active low signal, the internal pull-up resistors are activated.
 > > +	This takes a string in the format understood by sunxi_name_to_gpio,
 > > +	e.g. PH1 for pin 1 of port H.
+> > +
+> >  config I2C0_ENABLE
+> >  	bool "Enable I2C/TWI controller 0"
+> >  	default y if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I_R40
+> > diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+> > index 701899ee4b2..4ee0b333176 100644
+> > --- a/arch/arm/mach-sunxi/board.c
+> > +++ b/arch/arm/mach-sunxi/board.c
+> > @@ -457,8 +457,39 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+> >  	return result;
+> >  }
+> >  
+> > +static void check_fake_fel_button(void)
+> > +{
+> > +	u32 brom_entry = 0x20;
+> > +	int pin, value, mux;
+> > +
+> > +	/* check for empty string at compile time */
+> > +	if (sizeof(CONFIG_SUNXI_FAKE_FEL_PIN) == sizeof(""))  
+> use 'sizeof("")' to express it's an empty string _explicitly_? 
+
+Yes, that was the idea.
+
+> otherwise, I'd prefer '0' simply (save few chars)..
+
+sizeof("") is always 0, but 0 on the other hand can mean many things. So
+I used this to be specific and make it clear that I mean the empty
+string here.
+
+> > +		return;
+> > +
+> > +	pin = sunxi_name_to_gpio(CONFIG_SUNXI_FAKE_FEL_PIN);
+> > +	if (pin < 0)
+> > +		return;
+> > +
+> > +	mux = sunxi_gpio_get_cfgpin(pin);
+> > +	sunxi_gpio_set_cfgpin(pin, SUNXI_GPIO_INPUT);  
+> ...
+> > +	sunxi_gpio_set_pull(pin, SUNXI_GPIO_PULL_UP);  
+> it seems this doesn't work for me.
+> 
+> while I'm testing on A527, using pin PD6 (GPIO4_D6 in schematic)
+> it goes directly to FEL mode, not sure if I setup things wrong..
+> CONFIG_SUNXI_FAKE_FEL_PIN="PD6"
+
+As you already figured yourself, GPIO4_D6 is one of the few pins you
+cannot use, since it's not a GPIO, but going to GPADC2. Due to their
+analogue nature, those pins are not multiplexed and are hardwired to
+the GPADC device. Utilising them would be theoretically possible as
+well, but much more complicated, and being easy and simple was a
+requirement for this patch, as for instance many H6 and A64 SPL builds
+are already quite tight when it comes to the code size.
+ 
+> 
+> > +	value = gpio_get_value(pin);
+> > +	sunxi_gpio_set_cfgpin(pin, mux);
+> > +
+> > +	if (value)
+> > +		return;
+> > +
+> > +	/* Older SoCs maps the BootROM high in the address space. */
+> > +	if (fel_stash.sctlr & BIT(13))
+> > +		brom_entry |= 0xffff0000;
+> > +
+> > +	return_to_fel(0, brom_entry);
+> > +}
+> > +
+> >  void board_init_f(ulong dummy)
+> >  {
+> > +	check_fake_fel_button();
 > > +  
+> this isn't a problem, I can understand calling it here will make board
+> enter FEL mode as early as possible..
 > 
-> Why not use the DT for that? Then you wouldn't even need to assume the 
-> polarity of the signal or whether pull-up/downs need to be activated, etc.
+> just wondering if better to move this function after preloader_console_init(),
+> and log out a message to let user know explicitly - entering FEL mode from SPL..
+> (I personally find it helpful)
 
-As Yixun Lan already pointed out, the DT is not available at this
-point, and doing several pull-ups to get this information from the DT
-into the SPL image are really over the top for this purpose.
-This is more a sweet hacker device: I often have devices with eMMC and
-SPI flash, but without a FEL button. So the idea was to just pick a
-GPIO and use menuconfig to set it. Then I could just connect this pin
-to GND during boot, to get into FEL and test-boot firmware. "Connect to
-GND" could really be a jumper or even the tip of a screwdriver ;-)
-So I don't think this qualifies to being defined in the DT, really.
+I understand where you are coming from, and would see this confirmation
+as useful as well, but FEL mode is really supposed to be entered as
+early as possible (ideally straight from the BootROM), and in a rather
+clean SoC state. As the BootROM does not know about or touch the UART,
+this would be different from a real FEL boot.
+I often use FEL to dump some SoC state at reset, or do experiments in an
+"unspoiled" environment, so doing as little as possible was a real goal
+of this patch.
 
-> You can have the property in the -u-boot.dtsi then if you want?
-> 
-> While the FEL button on the X96 is "fake", it does what it says, just in 
-> software, maybe that is close enough to "hardware definition" which 
-> would make it suitable for the DT (well, we also store binman nodes in 
-
-Yes, I have a patch to add this particular button as a GPIO button into
-the DT, so people can use it for whatever they want in Linux (trigger
-reboot, update, you name it). But this is rather orthogonal to this
-problem, as mentioned above.
-
-> the DT, which aren't strictly speaking hardware definition either :) ).
-
-Please don't get me started on this, we don't need to make it worse ;-)
+Thanks anyway for looking at the patch and voicing your concerns and
+opinions!
 
 Cheers,
 Andre
+ 
+> but, if you prefer not to change, then fine by me..
+> 
+> >  	sunxi_sram_init();
+> >  
+> >  	/* Enable non-secure access to some peripherals */
+> > -- 
+> > 2.46.3
+> >   
+> 
+
