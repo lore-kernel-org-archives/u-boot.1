@@ -4,94 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A7CC369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:18:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2E32C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:26:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04AD280FEC;
-	Mon, 21 Apr 2025 18:18:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 234BB815D1;
+	Mon, 21 Apr 2025 18:26:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T5MeFl9l";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="d/ls+j4f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ABA5815D1; Mon, 21 Apr 2025 18:18:39 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1570B8197F; Mon, 21 Apr 2025 18:26:18 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D1C980BA8
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 18:18:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F044C810E8
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 18:26:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-72b82c8230aso1240739a34.2
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:18:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745252316; x=1745857116; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vvg1TByT1E3sMhegEhAfayIA4akwYUrriJ8eUJ3Wjtg=;
- b=T5MeFl9lUCnC+ERrhsYDOEPzz72seB0Sku9ffwpPd7bJFZ8LxtdL2z8D4/nNppthNb
- JVDK70QCLF/qsxfIfn9xooIJbX20q0AgZ3P+ADwcRT98LMEK+dZrJdp0yUPdo9FukINe
- SXjE3reYw6pCyswULumtRlVgxy7bPuwG3wIOs=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4914141A04
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 16:26:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1745252775;
+ bh=yxLq44wxPtd/ML0wQnze9zkZLbz3Tc1B6pd5AzJDYPA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=d/ls+j4fIILwAVAWltqRZLpZs7o/t19c672gHYr0lEIh6xEj1zj1RcxH7pipcUOuI
+ D+Oce2v2rvmD+DJey5FIGGKhBKb9lL3/cxaLV8v3blSOx4i+ps6Rmo5GrenWiq1g9q
+ ddY3BPUdovcwy4C3KS2u/2eCdG3UIhrH/cSFgX9t1SxdKLbcXwX/ckxKFZDMwx4K1R
+ rYFipO76lbVm02NIHwwfkZ4e72BG8KcFg9by3qcit8maxb5HdcnH1cL6DhRxXR9UwO
+ ekFYw05AhL/ldvn3AKnU4rnkNZiyVeOAY3OOBwXH8AYp085qhP4AHNpPsgnuoqR5+o
+ xyxlUkS01J9vA==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3913f97d115so1627401f8f.0
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:26:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745252316; x=1745857116;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vvg1TByT1E3sMhegEhAfayIA4akwYUrriJ8eUJ3Wjtg=;
- b=GyL53JldWuPA2YYIBWFPbetKNYI7dUePXQPdyEYSo3dr7gNUBDoJnivTcZG6Q0N4cm
- zpGpP3nHBiGk130O+7f4GfbBwclQtONiU3HZP50LpAZBOl3OF2wm4Qi/nN5hp/1igRq1
- qe/XYYseSvr7rGVQQDVmBaR0cEsX1vB9aOSDUvt5dNkxfEK4NIlpSCxbHh3XFnVpPya1
- Yyx0inFtEQl2uN7gv7OSBJAWH2K5BmW6Q3UprGzRAapMRmqJkPi9fnuHlbPlGvHmzinA
- mPV13jEbUhxWZRvzTSCzAUkcbGhjQKCvHzYVy8fdueAevsCS07bGjDJ8jJVsowY5baYQ
- YfRQ==
+ d=1e100.net; s=20230601; t=1745252774; x=1745857574;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yxLq44wxPtd/ML0wQnze9zkZLbz3Tc1B6pd5AzJDYPA=;
+ b=B4eNy9k7HFVnQfrRsPXSOLndENdkUYuBAjunFL3BJPQ2VFNw8msXlBCVoCiKlG+186
+ Z152aTnuRza+ZFEzCnKmWNVAbY2ljOy8jXmpOzGu+Yf3ofvi4VzWbM/P1nA9IWmHsgDW
+ maIc2JlI12vOagQ2REIkB8KLjRLs1AubLBIqp8xV7ecNJGQZgRBYZdAArnjvVm11+iXF
+ QsICUwyk+BLDncb8+42hD4IdDyaxPwYHVLWA+DjlkGccoJLeAiD3h1ROtaOZ1gyfQbS8
+ L7N2h4D0FjIiq9AfblTLoSy4sIaaZeLcrVY8clRCZFUP1MO5XhvwEoF1YitUjtZwCgyB
+ uFyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwGq7Kqp6IJP/du0bbhdIANejzOUopbumX7DyXJblahoUJvgwFMZe+5EU2UM+vLOA9Pf+jx8s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxxf5hf97H8GtRWHBhe8RfImeWj7+LVtI4dA/uQ6p6JJkdwgRsU
- H0PaPtIdiD8CchX/SZ9/ORgJA65AlmirnO40D41JXxRPHBKlwO9h8sLpVv3kbSQ=
-X-Gm-Gg: ASbGncsCWrR3tOS/TkqHh4zBoxn1Su7l9B17EYqQv8NHXkIOhsAlgmUbw0oH5YlR1zV
- GexshopvWq/AvtuZtNDuL2OCu2u43f2+BMR6nsjEjR4j2D0Acln4Kvv7mDIWQLh0wL/ldZz0+Ou
- jbyOoxCr43+TCBnoHRLKQG/nf/hyA29YJTIf2u81C8jk4RJ4pXu6RKteRp5RB1172aVXmbBR1CB
- dJ+CUZUmmKiKNE1l1nnGV+HHIBLpaQiwEp9Vpfveg3UiHetAJdsRPreC79rnwyn3tRB3M/fTbsZ
- lGc6Rt5RcwaBtu++caHGRTrn6Sqq5z67NvVvcPiVeURy9WxUXPvXF86zUQYDUVjmhZkG7jjxEZF
- Gqw==
-X-Google-Smtp-Source: AGHT+IFBaoqq9B/lmSg8xnutpA4Pfy9guodWvU4uQ0x25uXBj1XpYhgfF2qxR+NLRzZR88LwzBNbNw==
-X-Received: by 2002:a05:6830:3c0f:b0:72b:9180:cc7e with SMTP id
- 46e09a7af769-730061eac98mr7259427a34.4.1745252315635; 
- Mon, 21 Apr 2025 09:18:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-605ff6a9694sm1596038eaf.33.2025.04.21.09.18.34
+ AJvYcCVPQapUXiQauLzHM+ruj9xx1LVYEv8KabHp+v30Z7TSv5l3DyxM4jnVmJLnEfxfvdPck5XzZ1E=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMSzkFgQyJYIv3qSnOyK/kjzurY8wL9VYxWZBiN3hRV93RZZah
+ rt9eptYmdWWelLAiIHHbEVnHn9XGxODSXxM/kG6R37bHCJPqMVRm14L62PBq82hZvkH6Q6dCAnS
+ lGgdts9thk+qB6fe2UYnoE2wtMXqJ/q2Y6TgenjAz+pNC7WpdQTxGyUqin81SIKcU0HI=
+X-Gm-Gg: ASbGncuJC5xeAJUBAu3a2c8uSx+7sFpfPeB3aCuLRu0oFhPmUP1XU+SztZKrIA1TGSO
+ nqaw2bguE58uz0jUEQ3aTsVFc+l30pxjO6nV6hzeN79l5B0DEzhhJl8V64xJKWAjOEQ6ax8f7he
+ ppaNo/mP/+m1kzdNw41PhBlZZnrKK/8B5xIlb4WNpeC20rcDI8oQyDH8viHhY+q+vOTPcU1Q8e1
+ l2jPUeWwjPEugzIwH0e/eGtASNzSmi6Z/+iOfKXfbQXIqLhiWb/o4lrkmboYIJ2fVXqejUFGA64
+ EWU+//X54UIMZE+OrNxCcl2SoejIxiwaWLemI9P2+/AAHd6qyDVqMfTkgyGmLLiUgMRt1Zpiomw
+ 2LO47KWAXpXsfzQ==
+X-Received: by 2002:a05:6000:4211:b0:39c:2673:4f10 with SMTP id
+ ffacd0b85a97d-39ef9091616mr12327728f8f.23.1745252774563; 
+ Mon, 21 Apr 2025 09:26:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHILMdsdFN0nymgnyj6SdA5vMjLz94gz8IkHsuBi5vRXGGr2Y2rJoYSLtQ0iOmqr5RdH9xD4Q==
+X-Received: by 2002:a05:6000:4211:b0:39c:2673:4f10 with SMTP id
+ ffacd0b85a97d-39ef9091616mr12327706f8f.23.1745252774218; 
+ Mon, 21 Apr 2025 09:26:14 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4406d5acce9sm141456225e9.13.2025.04.21.09.26.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 09:18:34 -0700 (PDT)
-Date: Mon, 21 Apr 2025 10:18:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v2 1/3] buildman: allow specifying configuration fragments
-Message-ID: <20250421161831.GX5495@bill-the-cat>
-References: <20250416224032.144791-1-heinrich.schuchardt@canonical.com>
- <20250416224032.144791-2-heinrich.schuchardt@canonical.com>
- <d8f9a58a-10cd-4366-bd6f-85f4effc747c@cherry.de>
- <CAFLszThDLbf3fQySO_8u6OD3-BK2abE6NFVhvviRtrNs=PKdsA@mail.gmail.com>
- <d448af91-ebe1-432c-ae20-3e8eb2efddf1@canonical.com>
- <CAFLszTh29kgQ_bE8_gnORWH0PQ=H94=q7757mFOfiopCUL3eTg@mail.gmail.com>
- <CAM=mAOnLTX3ZB6ioyPOoR+wyNKoA2VnxCKFMUHrZyM_wpuGzOA@mail.gmail.com>
- <CAFLszTinquyp9JW=Z+w6BFkGUy3sJJuJH_CfkOdEO0FvPteAbg@mail.gmail.com>
+ Mon, 21 Apr 2025 09:26:13 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [RFC 0/8] boot: run EFI boot manager after block devices
+Date: Mon, 21 Apr 2025 18:25:47 +0200
+Message-ID: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FiJHDf4Am8F+i1Ta"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTinquyp9JW=Z+w6BFkGUy3sJJuJH_CfkOdEO0FvPteAbg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,132 +111,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Up to now the EFI boot manager is running as a global boot method before
+scanning block devices. This leads to failures to boot from unprobed
+devices. Scanning all devices before running the EFI boot manager is
+not wanted by some board maintainers.
 
---FiJHDf4Am8F+i1Ta
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Introduce a dummy bootdev with a priority between block devices and
+network devices.
 
-On Mon, Apr 21, 2025 at 09:31:19AM -0600, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Sat, 19 Apr 2025 at 13:22, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> >
-> >
-> > Simon Glass <sjg@chromium.org> schrieb am Sa., 19. Apr. 2025, 16:14:
-> >>
-> >> Hi Heinrich,
-> >>
-> >> On Sat, 19 Apr 2025 at 04:20, Heinrich Schuchardt
-> >> <heinrich.schuchardt@canonical.com> wrote:
-> >> >
-> >> > On 4/18/25 13:39, Simon Glass wrote:
-> >> > > Hi Quentin,
-> >> > >
-> >> > > On Fri, 18 Apr 2025 at 05:27, Quentin Schulz <quentin.schulz@cherr=
-y.de> wrote:
-> >> > >>
-> >> > >> Hi Heinrich,
-> >> > >>
-> >> > >> On 4/17/25 12:40 AM, Heinrich Schuchardt wrote:
-> >> > >>> Currently we are no able to build with configuration fragments i=
-n our CI.
-> >> > >>> With this patch buildman gets a new argument --fragments for pas=
-sing a
-> >> > >>> comma separated list of configuration fragments to add to the bo=
-ard
-> >> > >>> defconfigs, e.g.
-> >> > >>>
-> >> > >>>       tools/buildman/buildman \
-> >> > >>>       -o build \
-> >> > >>>       -k qemu-riscv64_smode \
-> >> > >>>       --fragments acpi.config
-> >> > >>>
-> >> > >>
-> >> > >> What about using:
-> >> > >>
-> >> > >> --fragment acpi.config --fragment fragment2.config
-> >> > >>
-> >> > >> ?
-> >> > >
-> >> > > Yes that could be useful. It would also allow wildcards, although =
-the
-> >> > > code would need to drop the config/ directory prefix. Also, I see =
-that
-> >> > > -z is available so perhaps that could be a (bad) short option?
-> >> >
-> >> > Hello Simon,
-> >> >
-> >> > What do you mean by useful?
-> >> >
-> >> > --fragments a,b conveys the same information as --fragment a --fragm=
-ent b.
-> >> >
-> >> > We are not passing any config/ directory with the fragment names.
-> >> >
-> >> > Using wildcards in does not depend on how fragment names are passed.
-> >> >
-> >> > As maintainer of buildman, please, clearly express how you want the
-> >> > fragment names to be passed. "Could be useful" does not indicate any
-> >> > decision but let's me hang in limbo.
-> >>
-> >> NAK
-> >>
-> >> We need a file which lists the valid boards for each config fragment.
-> >> Buildman should parse that and it should be possible (with an argument
-> >> like --build-all-fragments) to build all fragments for a board (or all
-> >> boards), to make sure that things actually build. See [1]
-> >>
-> >> So until that is done I'm going to NAK the whole concept[2].
-> >
-> >
-> > Building all possible permutations can easily result in excessive numbe=
-rs of CI builds.
-> >
-> > We have been breaking ACPI builds multiple times and now you block test=
-ing.
-> >
-> > I am not amused.
->=20
-> I'm happy to discuss the merits of both approaches, but remember, I am
-> your mirror. So if you can be flexible, so can I. Maybe Tom might put
-> up with having a file? We only need to list the combinations we want
-> to test in CI.
+Add the dummy bootdeb to the QEMU ARM environment.
 
-I wish you paid more attention to the mailing lists sometimes Simon.
-What we have today for fragments is me having compromised 2 or 3 times
-already (and the problems they've caused weren't ones I would have
-predicted). But no, what you want is just wrong on so many levels.
+Do not run the EFI bootdev as we must not run EFI\BOOT\BOOTARCH.EFI
+before the boot manager.
 
-And frankly, I think Heinrich's approach shows the problem with using
-fragments in some cases. This should have been some defconfigs to start
-with. But I'm willing to compromise, again, and take adding some special
-build jobs to CI (which slows down the pipelines, as there's non-trivial
-constant time bring-up/tear down and we have a hard limit of 10
-concurrent Azure jobs) and more arguments for buildman because maybe
-there's a use case for fragments as arguments I'm not seeing.
+Heinrich Schuchardt (8):
+  boot: EFI boot manager does not depend on BootOrder
+  boot: BOOTMETH_DISTRO should select BOOTMETH_EFI_BOOTMGR
+  boot: make BOOTMETH_EFILOADER default=n
+  boot: introduce BOOTDEVP_6_EFI
+  boot: prevent recursion in bootdev_hunt_drv()
+  boot: make EFI boot manager bootmeth non-global
+  efi_loader: create EFI BOOTDEV
+  board/emulation/qemu-arm: enable EFI boot manager
 
---=20
-Tom
+ board/emulation/qemu-arm/qemu-arm.env   |   2 +-
+ board/emulation/qemu-sbsa/qemu-sbsa.env |   2 +-
+ boot/Kconfig                            |   6 +-
+ boot/bootdev-uclass.c                   |   2 +-
+ boot/bootmeth_efi_mgr.c                 |  24 +-----
+ include/bootdev.h                       |  10 ++-
+ include/dm/uclass-id.h                  |   1 +
+ lib/efi_loader/Makefile                 |   1 +
+ lib/efi_loader/efi_bootdev.c            | 102 ++++++++++++++++++++++++
+ net/eth_bootdev.c                       |   4 +-
+ test/boot/bootflow.c                    |   2 +-
+ 11 files changed, 124 insertions(+), 32 deletions(-)
+ create mode 100644 lib/efi_loader/efi_bootdev.c
 
---FiJHDf4Am8F+i1Ta
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+2.48.1
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgGb9MACgkQFHw5/5Y0
-tywhZQv/dJhpzFWUwuTxqjAWHiiqiHOL6LQWf+5FoYlpPw+7qx6jh7x5lf4lZPi5
-HK5pCIgkXA/1t4ngip6vyKkUY7TS1Nzy/SgkChsMbrgAiNxLXKGordCKRZ231K4q
-i9rf920A07DoYD2TqXzXsLpxQN+NnyQzdGDQNhJ9QyLchy+Pzbpn1ErSMuCpFGka
-SBSz93mq/5xVajaodhnEe8zhu4SMqfgegBESbxPByupKnVN9Ujt/sms/ct1THG6j
-BcgIR3bsEw92OlMlRMCB0FGAeDAWDPVqi76asiU6s8DTG50/QetgEELvm1lj8gAw
-MqTah4fW0XL480ynOR+am/M6BJqo6d3UQbDLdKFwoFRbrCbrQHYf9rgCeAPajgvd
-ZeAu18NZQqC2EGpEXfoN5K2pNCM1AoUD1urXXSSQ/WPxZqn+ZSLA4VY5/UnQwwYl
-A2HlB++pGTThQ5HRSgt+MosgLMH19cPdHw6kSs95saI69J5LFKIm66y89rS1PYLY
-itvDwAvx
-=gy00
------END PGP SIGNATURE-----
-
---FiJHDf4Am8F+i1Ta--
