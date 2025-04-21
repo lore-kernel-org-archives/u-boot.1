@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3881C369D3
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 17:42:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBAAC369D3
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 17:42:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BB068129F;
-	Mon, 21 Apr 2025 19:42:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 70AB08197F;
+	Mon, 21 Apr 2025 19:42:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cE1CGLru";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TEmlOlqC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B403817C4; Mon, 21 Apr 2025 19:42:10 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 4DB1481026; Mon, 21 Apr 2025 19:42:11 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 422D681026
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 19:42:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 255E88144A
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 19:42:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3fa0eb29cebso3177158b6e.0
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 10:42:08 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3fb3f4bf97aso1323433b6e.2
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 10:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745257327; x=1745862127; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745257328; x=1745862128; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DBx8ZQMBhJYpwtCd1HX+sDO8CCoH/pwmGCiCv37bLDY=;
- b=cE1CGLruNia7rC2wbiz9YGpr2cE+8ACWLuuVnK6hjGzDx3o3m1XiGJGehHj8ktZFpZ
- tEuDn0Ts5r6ca4foEHMmfMOYEcGaqs+RtRU0px7AVYjcVL19cqDwlxtL5a38NacHZJy/
- JXhapGmEuHjTEy6It1dR2MXI4bzaRTRgvZhmA=
+ bh=mWMnSd04cQRIXchEV9kFNyEE6SbE+lNlln6flutPg1I=;
+ b=TEmlOlqCkLRYGT3/iM0jwmCB1GlzLjAyo536VwASKDspe0+g9LFQ48aqoCnUcBUYBC
+ 2UfDlbeDOzRrlKvaydV++cceedC9hYMHV0OOIdnq5+6bnSplfhJFB1JGXLEYLmuX52YL
+ gaRqfDf1ei7X72N3DR/SJgJeHjhs+fWpHssR0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745257327; x=1745862127;
+ d=1e100.net; s=20230601; t=1745257328; x=1745862128;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DBx8ZQMBhJYpwtCd1HX+sDO8CCoH/pwmGCiCv37bLDY=;
- b=ovgAm9zGzcgNb9YtAiQ017YYpmSMtXtgSRA4GzTwJsFJRQJ0mz/CI8HD1pfMi8npQP
- URy79u0CuJAj6itssC7u53Ml4gXRoYM87yPvnJRn31SIaMc5dl8tXV6wCG1tOoatzhyy
- ZlflIgO5Z8+CkdSd4dckV3te2iuBmTpZJb+p8T7lqTFrnE4SvWOcF8s0Scy7ps+0zOPA
- Q3TwrvMVFb6yOWKLGAEBb8cCJjUizktCu57hd89g8y6va87GqpTOxexOpIfkNVZ+dvJU
- AIgh9QrVXeUZmp6G1JTaO58NaACKy5b+yz6I7Ey/5eokVin6BALFcvo7gHzW43PRkKsc
- eSdQ==
-X-Gm-Message-State: AOJu0Yzzt5ixJX6dHl/s+qKv+aM/X1M0MAyv0mwj1TZM4dgmQczKPHfm
- R/aF/VG6ssA1CszI2cKM4tYXBP8XGT0eCcNvJr/scv7kPJscbwG7DgrdyDXPc2Y=
-X-Gm-Gg: ASbGncukqwzB9XhPs3t7+OSknKpukTyxvrcelRdcIznW9x7RIC2ajErfBwYMY1DsOSQ
- WBotQjazkFDNBQiGn7y246AJ+ezglYdvvjMZmVOcfZ6YT0d1PZ/bDnQ6/JvVT4N8imta6fMpIIT
- VemxZMS4RkzSwMZyuh4BNyKc0M5ZIZ4YJ2rGuGXsecoFcRnWiZoRtNMujzaA0zeGFtzwCM23lN0
- ppKvyjhzeF+9nnY02YsTINrW/OwZ5UQZ8jQnUZYkzkvoes0c2z9O1Yf9/wRgfMA71TIbBfc+cic
- z6iy0PB+DSquLqCszdRQSAU+bbZwIpFQn0kXJP9ytEtc5iBoxMj0zmscP0ydyo6H9CVEehQvJFF
- C
-X-Google-Smtp-Source: AGHT+IEmM6s4T8do1Wl93uZCIM8MzK0Z9zk8DI/8GSeIe5RMNvthdeLDttxrfhTbHA4Btm63TOiGOA==
-X-Received: by 2002:a05:6808:ec4:b0:400:7dd3:2dbe with SMTP id
- 5614622812f47-401bcf4bd3fmr7991020b6e.14.1745257327045; 
+ bh=mWMnSd04cQRIXchEV9kFNyEE6SbE+lNlln6flutPg1I=;
+ b=KlWS54JXjJ9ck+8CpoS24IkjI6teNF1xOetrG/Sub04tlIfyCd3uS5gU52IvcmNC/e
+ 6S1cmyMQ+EnVUQv4cXWZRizeFFY0X1Y2n2rKLwqcc0Y7BRSzBF+r/uYmSimVRRX/oh9O
+ YUzUPGC52pPqOXBaGIGdv41zabps4t0pS1bgKkqjiGpWZenbhETL4vKXWHVjNDE7iTI1
+ 550Kzgb/347YprlFomV6b41xbpT5+6hIoMigoAFedeCbJURFHVhjYc8sUr2KbIFpYwgM
+ 49cTyJDIKIoMLl00VQ93uG1J3t+2IyFquFGJ8GRvnl0wUQrps0YGoZVT9RQ10O3sRrQv
+ grXw==
+X-Gm-Message-State: AOJu0YxuSZUzu8alYi5UocgQTQrPyCFN1SMvGFvYTgNo6Lq/4Jm5SbEC
+ 2LYkpww0zIquWfzS/7fEpBUmbQQ8nGjtAGzXduTwrxY4qP3KoSlcA0DnqivmPoA=
+X-Gm-Gg: ASbGncu1waK6cATLmnWbEy10hmh/nvYKeJe+1U7KnMiPCOI0I3BlgIx25lFcKTRBBLp
+ 30VbhH9yiFd/CpDq55h75ed8rtbyF/bVeVba03Mv7udPRYInaGf44YSmFnevS+brxWZ+4FCy22j
+ 6MhtZm9/wGYoWO1D6EbhtegqyrYhQB+GFIPCLlMTOOWfBkTVL61Jc8RNJ8U3lgfQtT6TpWTZB8O
+ yH/bX7WRd89kXpOCfag+roY/y8GMLSKf+M/jZhPBTFk9urIExFk2XXCzdofQaZEAC0iiBFxD65P
+ WiTXqwIiynA7k+NRUBnf7H/bFGLKa268DlwOUTch3gaXdg+fr+k1t1QhXDZBfceDhOhKXyQxwbR
+ rh8Uv727RxTQ=
+X-Google-Smtp-Source: AGHT+IFE9z0dKyaqm3Ci6oH0CoJTmtx7iDFT8vPIprIujf7u6ORj27mSG6TYCp5joP0Ec2HrxdNLhA==
+X-Received: by 2002:a05:6808:2b07:b0:401:cd6d:25de with SMTP id
+ 5614622812f47-401cd6d283emr3739684b6e.22.1745257327905; 
  Mon, 21 Apr 2025 10:42:07 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-401bf09d018sm1611324b6e.43.2025.04.21.10.42.06
+ 5614622812f47-401bf09d018sm1611324b6e.43.2025.04.21.10.42.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 10:42:06 -0700 (PDT)
+ Mon, 21 Apr 2025 10:42:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Harrison Mutai <harrison.mutai@arm.com>, 
- Manish Pandey <Manish.Pandey2@arm.com>, nd <nd@arm.com>
-In-Reply-To: <20250415215034.1679664-1-trini@konsulko.com>
-References: <20250415215034.1679664-1-trini@konsulko.com>
-Subject: Re: [u-boot-test-hooks][PATCH] Add support for FVP emulator and
- fiptool
-Message-Id: <174525732609.3657668.11704133961918317550.b4-ty@konsulko.com>
-Date: Mon, 21 Apr 2025 11:42:06 -0600
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <20250416233134.2528387-1-sjg@chromium.org>
+References: <20250416233134.2528387-1-sjg@chromium.org>
+Subject: Re: [u-boot-test-hooks PATCH 1/2] travis-ci: Add qemu_arm/64_spl board
+Message-Id: <174525732716.3657668.11317766286557924623.b4-ty@konsulko.com>
+Date: Mon, 21 Apr 2025 11:42:07 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,23 +95,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Apr 2025 15:50:34 -0600, Tom Rini wrote:
+On Wed, 16 Apr 2025 17:31:31 -0600, Simon Glass wrote:
 
-> This adds support for the vexpress_fvp platforms. In order to do that we
-> need to add support for calling fiptool to update an existing "fip" file
-> with our U-Boot build. We also need to support launching the FVP
-> emulator itself. This is a little tricky in that we need to use "telnet"
-> to reach the created serial ports and cannot just use an existing
-> file descriptor for our needs. Finally, we add in conf files for
-> vexpress_fvp to make use of this, and a symlink for the
-> vexpress_fvp_bloblist platform.
+> These are similar to the existing qemu_arm/64 targets, except that the
+> 'bios' is image.bin (containing both SPL and U-Boot) rather than in
+> u-boot.bin
 > 
-> [...]
+> 
 
 Applied to u-boot/u-boot-test-hooks.git/master, thanks!
 
-[1/1] Add support for FVP emulator and fiptool
-      commit: 0d8c51967901ae52c79ebe5180ad36fcac23b705
+[1/2] travis-ci: Add qemu_arm/64_spl board
+      commit: 31e2cc963c5f50ab9d6c4029af9c8ca8bcb06b49
+[2/2] ellemere: Add qemu_arm/64_spl board
+      commit: f8132e1ce30a63533da7fbbb334095109293eb06
 -- 
 Tom
 
