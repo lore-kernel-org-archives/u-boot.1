@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24941C369C2
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 10:10:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FD76C369C2
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 10:10:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93F0D817C4;
-	Mon, 21 Apr 2025 12:10:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E42F58192A;
+	Mon, 21 Apr 2025 12:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lnMsgHBK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dGr0Encd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E490981F0D; Mon, 21 Apr 2025 12:10:01 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 79B0281F0D; Mon, 21 Apr 2025 12:10:13 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7A21810F4
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 12:09:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 764838192A
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 12:10:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5efe8d9eb1eso3544770a12.0
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 03:09:59 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ac25520a289so501422566b.3
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 03:10:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745230199; x=1745834999; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1745230211; x=1745835011; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G3b2NyfjciR2FYIyqJR+nAAZCgKCCpol1vOjg2PUeMk=;
- b=lnMsgHBKcoJ9qSNRJJOAZx5XbICCDj6dLpg7owuO4jqDNfGWyI4Z9+0A+S/rzyjgmI
- ZtkfjyzMrsO8ik5HluS+SsNnE/uYd7MwRK4TxAJVtI/5nRWrXjH7uVEINCTyMfbI0tvz
- vENkBbF3vQW2SLQHu1FuL+41P4sHZG1+nu9XGu1B9zPkjZljugvRwU2l4FCh/XLQkpHR
- gaQX5ZhomWWC89z3Em+SIFl/35xfRU7yc9PkXWrk24PYTIdVNskOiRkZd4OmvYBitsBs
- CPtFIcse2eEq9GRisJBPIvS2XBlhalMbXvtFHiWmHFUOzzOhu9HKsGDcckhfFep3R4iq
- oHCA==
+ bh=ZyCKXMmKhJNYk+h22nUYKXf8UMPT6u1SolGLi0CjMHA=;
+ b=dGr0EncdUgzLamuuM29PPbKz9uon/QgugeBCSQFz6ZL1LKetRbXN5PncsOD8dzbj/l
+ 8PVLR+zbn1C7S/meZiylCXevQXDiTobVcVv8QT0MLBhZTwBUQNzSrY6vn4qJB+B19Jaf
+ cKWmJQIewZe+DmsBloX7/FQGH3o4whgCR6HTAEzLCzJv+glV5P7NWlx6YirNXNJp/PvX
+ tf101iJ48/dC4MB7Nbsecm5tqn6YScH0+jVsActx2yhekj9yBfhf/q8bDpw0PO7pEdXJ
+ UI/JfuEKCSC27db/bJRMxyqZPgwr72aXINMWawkfom9eXDKzfbXnmzvZLx7wV3KgDq+e
+ VaKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745230199; x=1745834999;
+ d=1e100.net; s=20230601; t=1745230211; x=1745835011;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G3b2NyfjciR2FYIyqJR+nAAZCgKCCpol1vOjg2PUeMk=;
- b=wYrSexKgHQoOd8+wPF8HSlrd6azyltR10TdjHnH3kvA0fOaPkFoCs8g9Bp1WODSAqC
- aGKfJJXY27j5ZuAm63mAQcxCtJKg/8oEbgHUwpZ2sFiv7UdMA3jxJvV2fxfrRkMQ0P1F
- 1BIGlMWQ3T0+IL6gxIxwD2LKJWY5fwXAd79yoTcV/Q5f9r/Z0s6x8PlmXlNc178nXNxG
- 1Q4dWYFCYyB1bWxKxLmRch/SU+jJiRJWr8aY1b+NAPvtnO0nuRb/eNRrYXLHGbGUNzZ8
- 7HELiAfLs8e6hkLx3XIsPCyKZLFXzKrBnQrJl57MN8Fm6iGUCUTpLf8gMkCJy2MB3pBn
- 5X7Q==
-X-Gm-Message-State: AOJu0YyR4p7KrcRqfhHzdW0EBBSGQ8VpjsXEL8U+Nqd+MryR3xzeMJzV
- LjFsXJqBfhX+YW5uE2+V238E9efX3YPFVGeJiGurZiqD94fat4FLzcA7qzmE/xdvzw/lQh/09SM
- 3NkOyVA6LK29dJBZBlgRi6c5Y48s=
-X-Gm-Gg: ASbGncvRFrQ89nS7rG4fzNY4DYsVyOb4ji7qmIUmoZ2D+NxJ8jzO/NW+AKxTmFKUqhF
- Q0OtFno3C2QWNYH1X8ll0Axqafv7FiOjCgSrjfQnrmKkxahJcTDXOtOlxJqwxES4KlAAKh4c5Vz
- j096D30/aoBcHvWs0A1APrxBOSmnDx8Hqwwd5JTS719d2Cb7Amog==
-X-Google-Smtp-Source: AGHT+IGG0IP67IUII2i9LpjrSsjwEdwrlz4I49VoXfWehj1t1nyF7CuJqggm5eW6x04FGU+6dOXvjnqQgWhWjTddKHw=
-X-Received: by 2002:a05:6402:26d2:b0:5f3:4606:14c5 with SMTP id
- 4fb4d7f45d1cf-5f628593ab2mr9467409a12.15.1745230198798; Mon, 21 Apr 2025
- 03:09:58 -0700 (PDT)
+ bh=ZyCKXMmKhJNYk+h22nUYKXf8UMPT6u1SolGLi0CjMHA=;
+ b=HmCSKwxwBfxXIPXMKucaCIjeHhv/3z0SYc7MvDxriAb+12WOG/8otb6pfWJLsrjvQb
+ Mnzf4KynvbbXYjM0oj4Yv4b3RSKkGunnY1eP7nuzO0w9WtDZ3qGWm/hG8xRskO+DVNJe
+ GFinLQRpatjiE74yxkKiT9yOuxYOKYYBdkwkUvJTBhOXRWwHJ2ODmmvsUxRh7AsUYRbY
+ GPuhvy5fuGo4QJzpQkEve9hPUCHOKN2nhgjU+g+YRwD1t0fGU01rolcUtq4sn+wCtEdi
+ l/ZiaCL9z2hiqW3yFlzAQUSvXvOc0AvirTjGgKyIBJXW8ZspkyJ9ZK1EWi/Tqd2oX3Q1
+ CyQQ==
+X-Gm-Message-State: AOJu0YzH225me/bRKnV8Op1pvX0ADhVsll1MblXhwQIgUcXsR1XV68ou
+ CdwPJo7R56OILuuiO2j3w1fjWsdh3agnlewfL3BTDqSR+WdiX/9C4DX0sr8hSIxCocqyMppMrAi
+ FpAZtGaMhdWqHAA8vDX6t3zgzFlU=
+X-Gm-Gg: ASbGnctPbuNDzoR/JFGTs/MMaXvfagRBOGrIaAgQ2R5WVKlSAIEiLi0ZKgGuS7Z5QwW
+ qVMDaqGjNx8qP+4qlYk6FJ0s1nNGwEpkuX1J3Ie+4zMchjjRq/7LvVi4hsmg2KcmP41byM/9i/6
+ c0tibN9NL6r5X1nrAjomr9R4DCMvyWSWpCqdf2co6KRdFZs8aBEg==
+X-Google-Smtp-Source: AGHT+IEeLJM/bH04prIkVD72xUwtvtmnkla7QSS0hqF6qcoED30bGB3VaJdpODs/jbkEfsCnAIOJni3isqYfTWjW1qw=
+X-Received: by 2002:a17:907:98b:b0:ac1:e881:8997 with SMTP id
+ a640c23a62f3a-acb74aa9ffemr1113585166b.3.1745230210567; Mon, 21 Apr 2025
+ 03:10:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241220003447.2913443-1-sjg@chromium.org>
- <20241220003447.2913443-3-sjg@chromium.org>
-In-Reply-To: <20241220003447.2913443-3-sjg@chromium.org>
+ <20241220003447.2913443-5-sjg@chromium.org>
+In-Reply-To: <20241220003447.2913443-5-sjg@chromium.org>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 21 Apr 2025 11:09:47 +0100
-X-Gm-Features: ATxdqUEX3xAKGa1i7fEA-Otch7jYjK1y-W9oYwtkOXYGAv5COO1JfM-DvBXtats
-Message-ID: <CALeDE9MC24ju4MAZ4bv6WnMHOwywzh=F+j-Ln9j+bfFQMkzFQQ@mail.gmail.com>
-Subject: Re: [PATCH v4 2/5] rpi: Set bootm_size to 512MB
+Date: Mon, 21 Apr 2025 11:09:59 +0100
+X-Gm-Features: ATxdqUEMHw6L8-xtLTUv-cxE9_Njf6LgPWKT6cVfH1h5UnocNEb5IAhNMpHjBdA
+Message-ID: <CALeDE9MhePJOFBaW8HO=sEpRK8SRr=x4uCufas_bvS7cG4zhMQ@mail.gmail.com>
+Subject: Re: [PATCH v4 4/5] rpi: Update environment to support booti and large
+ initrd
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Stephen Warren <swarren@wwwdotorg.org>, 
@@ -95,45 +96,72 @@ X-Virus-Status: Clean
 
 Applied
 
-On Fri, 20 Dec 2024 at 00:34, Simon Glass <sjg@chromium.org> wrote:
+On Fri, 20 Dec 2024 at 00:35, Simon Glass <sjg@chromium.org> wrote:
 >
-> Set this option so that all boot images stay within the bottom 512MB of
-> memory. This should allow us to drop the fdt_high and initrd_high
-> options.
+> The existing values don't provide for decompressing an arm64 boot-image.
+> Add those values and move things apart a bit so that a 50MB kernel can be
+> accommodated.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Suggested-by: Tom Rini <trini@konsulko.com>
 > ---
 >
 > (no changes since v3)
 >
 > Changes in v3:
-> - Add to the existing comment block
+> - Update the comment block with the new values, including compression
 >
-> Changes in v2:
-> - Add new patch to set bootm_size
->
->  board/raspberrypi/rpi/rpi.env | 5 +++++
->  1 file changed, 5 insertions(+)
+>  board/raspberrypi/rpi/rpi.env | 27 ++++++++++++++++-----------
+>  1 file changed, 16 insertions(+), 11 deletions(-)
 >
 > diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-> index 30228285edd..a327fccc77f 100644
+> index 9b9fad82828..9ac9d6768ca 100644
 > --- a/board/raspberrypi/rpi/rpi.env
 > +++ b/board/raspberrypi/rpi/rpi.env
-> @@ -60,7 +60,12 @@ dfu_alt_info+=zImage fat 0 1
->   * Even with the smallest possible CPU-GPU memory split of the CPU getting
->   * only 64M, the remaining 25M starting at 0x02700000 should allow quite
->   * large initrds before they start colliding with U-Boot.
+> @@ -48,28 +48,33 @@ dfu_alt_info+=zImage fat 0 1
+>   *
+>   * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
+>   * conflict with something else. Reserving 1M for each of them at
+> - * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
+> + * 0x05400000-0x05500000 and 0x05500000-0x05600000 should be plenty.
+>   *
+>   * On ARM, both the DTB and any possible initrd must be loaded such that they
+>   * fit inside the lowmem mapping in Linux. In practice, this usually means not
+>   * more than ~700M away from the start of the kernel image but this number can
+>   * be larger OR smaller depending on e.g. the 'vmalloc=xxxM' command line
+>   * parameter given to the kernel. So reserving memory from low to high
+> - * satisfies this constraint again. Reserving 1M at 0x02600000-0x02700000 for
+> - * the DTB leaves rest of the free RAM to the initrd starting at 0x02700000.
+> - * Even with the smallest possible CPU-GPU memory split of the CPU getting
+> - * only 64M, the remaining 25M starting at 0x02700000 should allow quite
+> - * large initrds before they start colliding with U-Boot.
+> + * satisfies this constraint again. Reserving 1M at 0x05600000-0x05700000 for
+> + * the DTB leaves rest of the free RAM to the initrd starting at 0x05700000.
+> + * This means that the board must have at least 128MB of RAM available to
+> + * U-Boot, more if the initrd is large.
+>   *
+> - * Limit bootm_size to 512MB so that all boot images stay within the bottom
+> + * For compressed kernels, the maximum size is just under 32MB, with an area for
+> + * decompression at 0x02000000 with space for 52MB, which is plenty for current
+> + * kernels.
 > + *
-> + * Limit bootm_size to 512MB so that all boot images stay within the bottom
-> + * 512MB of memory
+> + * limit bootm_size to 512MB so that all boot images stay within the bottom
+>   * 512MB of memory
 >   */
-> +bootm_size=0x20000000
-> +
->  #ifdef CONFIG_ARM64
->  fdt_high=ffffffffffffffff
->  initrd_high=ffffffffffffffff
+>  bootm_size=0x20000000
+>
+>  kernel_addr_r=0x00080000
+> -scriptaddr=0x02400000
+> -pxefile_addr_r=0x02500000
+> -fdt_addr_r=0x02600000
+> -ramdisk_addr_r=0x02700000
+> +kernel_comp_addr_r=0x02000000
+> +kernel_comp_size=0x03400000
+> +scriptaddr=0x05400000
+> +pxefile_addr_r=0x05500000
+> +fdt_addr_r=0x05600000
+> +ramdisk_addr_r=0x05700000
+>
+>  boot_targets=mmc usb pxe dhcp
 > --
 > 2.34.1
 >
