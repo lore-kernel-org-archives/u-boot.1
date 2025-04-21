@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED8CC369AB
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:27:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33EE7C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E002482054;
-	Mon, 21 Apr 2025 18:26:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91338820B0;
+	Mon, 21 Apr 2025 18:26:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vWmqkCqR";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ugT4H1wP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FDEF82027; Mon, 21 Apr 2025 18:26:29 +0200 (CEST)
+ id 24FBA810E8; Mon, 21 Apr 2025 18:26:30 +0200 (CEST)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F4781F45
+ by phobos.denx.de (Postfix) with ESMTPS id 9A84181FC6
  for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 18:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 19FDE41A10
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 16:26:26 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0796141A13
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 16:26:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745252786;
- bh=cPviyKqqIOyQBXsrknCT452UWV+Ui7fneYH4L4kSM+4=;
+ s=20210705; t=1745252787;
+ bh=+m8n/lZ9nTCkcWH52NC7k9JcZheMp8XysTCjrht+XG8=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=vWmqkCqR73YXu+Qk3ULTrRwXZoIERhzSBBTuAq2V2CLPEwaesdkzT6Ryj82stkuOz
- V9KSclV4eFyByCnRFewaohGbJ1BIVr+oaYk54YnBUAbbbWSJl9jm6M9w46vZQBcCKR
- bV+ukLHHXbwr8E4Lnr6pO1PZ85dr8FuDwJK5sbZLfyPCC+GRVq0OGsrpVtKCCTet2V
- 6u7BdZ5KFuD7qRWByYrZ5Z0Z0FK7RN4FdrBKT5O/dMRg1mnO+HSJAvYCR9joXBx0Tn
- UJP4GQ4hrKBs9gPi223SJ296JleA3QS03mwinwIahphSypGE+DCKg/8H/7nNeZp3hJ
- yVTc0iZhwI4Dg==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-43cf172ff63so17495945e9.3
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:26:26 -0700 (PDT)
+ b=ugT4H1wP+1aKaEWMaKIX34eVIgjRB2PPkpM4tgk8Z447iV02b8p45ly1psl0ysjxc
+ yyjUp+iNL+43aZXv125/C0aTt2DY8PANwqOLuNqWD82T5JdVKH1w4dGj2qNQkm2XPm
+ LlTMqrVGvwb+ZTj5x6Ry2hjyyvJZ4hMJd5jYku1ZumVJHw0godUGcJd014NyK3bLEI
+ DcIZOVq+tUyGgwT6yO5KZaYIzC8EaMrH/zEnedQVAKXyshAkuD3GMPU3SmTXBDOLDf
+ 75gDnhKOUFnq595N/vMAv9E3w6z86H1gPpfhXazTSZ1jcpEHMm597swKZww4RUzbM+
+ PKPQRaf9DQYng==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3912539665cso2158675f8f.1
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 09:26:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745252784; x=1745857584;
+ d=1e100.net; s=20230601; t=1745252786; x=1745857586;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cPviyKqqIOyQBXsrknCT452UWV+Ui7fneYH4L4kSM+4=;
- b=t61tXnV5EtTdI9wO6J+lL7Oexbqii13UmkxhpZMkMuxutm0GvxboxrufAxr60+rTfI
- viVZJktLherc/Xp/oNZ3yUxdMFFmL9GsyPYI7IFEp8fm1kD+nN5OaXMRBs/ONYHQQt8t
- m+iAXJUOf19/Xw9whRkbzogM8nZFPpZNBQJD+BHLAqo11RoXYT+hCNDZHZHmS4WW7N2V
- uD+lYTOZIzoGo0HlFWPo4YD2AjcRLrjKDVDM1OUk5+vVZXeKpGLUYCLKeOrjDZ8C8evj
- C6LBpHihfvtEO0TXR/FlAtuNUryHOQLX39Udqdk/GyoQgA8yOkoJgUIaPSvrrnIuOD83
- EcKA==
+ bh=+m8n/lZ9nTCkcWH52NC7k9JcZheMp8XysTCjrht+XG8=;
+ b=KEaiCfddVxGVQdzkP6Lyg0voj+o+/HHaCmZdAN5cJTQngjBdvfPvHgZUxj1eOqx9Q4
+ 4Rj+6WpQcBFGZ3GD5MFexczj0fdzLicSgV3zBqZMWB/yPE1755Sbm5hPraN4QRmsBxZz
+ tJ1xMhDJtLgjZxy8SD3Pz17GzpJ7i0GaZS3WGXsA+oAH2e/P998oOHotUiWvBEUfzO2h
+ 2QCwmXJst2YgVJWDiGABqUNdi7jdkWZcC9c0qgBSjFV3N9e5FcCwiRUSEbHhMeQMU5o/
+ /PbybPkUMczZKMiERVZ1xmyHxGz/81JXFW1jiEH+NVfqvHPsg/50ukRfMwbDqKRghfLL
+ mxZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXui6T7vUg4FtQzPCnptJmfzF3Q5KPyI8ZQYVETx17spEhBzxtBLMIZ596ESRJIjrsJLPEqgC4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjvLekFF8zY5WyYu1QW/vJAxuImDWch4buqAnto13MloY5GL8b
- fT674LAGSZmpoYHU+jMajey0IufokRsAqVTRfwfbpldRL3CGHKocWKYABSJTqwVfc94j2/vKqWw
- oZkeNBf59hgtYXDPCXVnbq9/lmRC6EgnglKJ1wZ4CdookNjOe0tQ5PWJi+upFI5xzpRM=
-X-Gm-Gg: ASbGnct8bEwr+DqbZhppPIIf7i5qREw3XyWkUfI2eaMYhULdVWI9AURdiiPGOwPvhlQ
- pzGzQiMaq8oSLOK28z8wCX9fQcvTnmJU4XfNuZLexAbcTd7m5MdN+RKZmw+gYry7kebArMnjP+Y
- FTGu5E8dOfQAushqWpMYlkkx8yax2tbipOkNaH8rVzsJv1QqHdx9ofSnIkq4dx4a4UTewqf6kgX
- XuuByL6eV1JR9GyCKM1ELY2J902nTdgrKjbWjlVGOr1vUmUXeCcjVBLwWMRunMPtoAztrDkGP3v
- /c9FGgkvyHehMei5jWbR4xkZW0arAXGKhQrK3iaBaoQhMw/VzLY+IQz1kNAmVxPsk6R22yPRpMg
- 1NGhJY8Cc/8btxA==
-X-Received: by 2002:a05:600c:54c1:b0:43b:b756:f0a9 with SMTP id
- 5b1f17b1804b1-440711cce0emr65282815e9.11.1745252784414; 
- Mon, 21 Apr 2025 09:26:24 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGuBt60clrz7enpxvrpoPPx1looQ8fcgRabDmylzFKBKlRv/h7Y61XTM1vEnnbgpAWgGjdtxw==
-X-Received: by 2002:a05:600c:54c1:b0:43b:b756:f0a9 with SMTP id
- 5b1f17b1804b1-440711cce0emr65282675e9.11.1745252784105; 
- Mon, 21 Apr 2025 09:26:24 -0700 (PDT)
+ AJvYcCUtS16Jym3YtSfkWl06vA2ojK2x3jx3QPsSSPdWmaMSMvAem/KaI0JvrvcPIVKqlwZJdiKWYic=@lists.denx.de
+X-Gm-Message-State: AOJu0YxtVSwZCPRy4sUTN5uy6OfoaNILkEHG1wibYjKaZJ4Vft0c12ML
+ EQkN7Vfsl5r2o5SwAq4BkNW/g/7B1dJm/H4MFDJACxWPxoDCvnHnZ8aOo0EyvYb7FJF3mL0CAtq
+ H42KYaBp5ugaaPV4HwAzhRk/JFTHVV7RRBJqPPBU0T7kU2XRy9+4ExAgvKGVvzXUi7sE=
+X-Gm-Gg: ASbGncsacWhVOAvSDUQNioUwlJgEa8ywoGbsFS4VaW02jShX0o06seQCjS68BPZAlOK
+ iZ7HuGSFMocXQpz6vHJWhusLXU0d8r743EOFQLTrars+T9ho5ZQvpL8xEnTO/sVf1GILm+jE6JQ
+ FkAAw45Jexo9uJ9jldgiHvXla6JN57lmODaMn2JXMkJc/QPxYxdhH+Vyj+7GwkQP92kW1oXLzbF
+ XGhrZ7k9xNiGNEiR5q6XXo0Nk7kLReMihRuBDab8twEysoydnRbjXHaUf+g9tucRabcBmerJn7Z
+ r9K3Qjr/t+XnDwTFM7NS4zNancDSSZbi1MXhXZnIn2dif/OcUzCfYj72LFpuZDcen5CyX66jGR6
+ /3WnJNPUVVfdKPA==
+X-Received: by 2002:a05:6000:290e:b0:38d:df15:2770 with SMTP id
+ ffacd0b85a97d-39ef85ac297mr9603874f8f.0.1745252786385; 
+ Mon, 21 Apr 2025 09:26:26 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGLvNNoQUyN3j9iEP81gR3icc3JMCp7PSSjif4ZsyCD4okbCiYYn7NNKd88lu72/N8tyR9wJQ==
+X-Received: by 2002:a05:6000:290e:b0:38d:df15:2770 with SMTP id
+ ffacd0b85a97d-39ef85ac297mr9603860f8f.0.1745252786065; 
+ Mon, 21 Apr 2025 09:26:26 -0700 (PDT)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5acce9sm141456225e9.13.2025.04.21.09.26.22
+ 5b1f17b1804b1-4406d5acce9sm141456225e9.13.2025.04.21.09.26.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Apr 2025 09:26:22 -0700 (PDT)
+ Mon, 21 Apr 2025 09:26:24 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -90,9 +90,9 @@ Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 6/8] boot: make EFI boot manager bootmeth non-global
-Date: Mon, 21 Apr 2025 18:25:53 +0200
-Message-ID: <20250421162555.1200687-7-heinrich.schuchardt@canonical.com>
+Subject: [RFC 7/8] efi_loader: create EFI BOOTDEV
+Date: Mon, 21 Apr 2025 18:25:54 +0200
+Message-ID: <20250421162555.1200687-8-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
 References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
@@ -114,53 +114,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Global bootmeths are called before all device specific bootmeths.
-
-To move the EFI boot manager after the block devices it must be non-global.
-
-As sorting will be controlled boot device priority remove the digit 3 from
-the name that was only used for sorting reasons.
+Create a bootdev device for the EFI boot manager.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- boot/bootmeth_efi_mgr.c | 3 +--
- test/boot/bootflow.c    | 2 +-
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ include/dm/uclass-id.h       |   1 +
+ lib/efi_loader/Makefile      |   1 +
+ lib/efi_loader/efi_bootdev.c | 102 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 104 insertions(+)
+ create mode 100644 lib/efi_loader/efi_bootdev.c
 
-diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-index 1669cbed5bd..8f1d247c942 100644
---- a/boot/bootmeth_efi_mgr.c
-+++ b/boot/bootmeth_efi_mgr.c
-@@ -82,7 +82,6 @@ static int bootmeth_efi_mgr_bind(struct udevice *dev)
- 	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
- 
- 	plat->desc = "EFI bootmgr flow";
--	plat->flags = BOOTMETHF_GLOBAL;
- 
- 	return 0;
- }
-@@ -99,7 +98,7 @@ static const struct udevice_id efi_mgr_bootmeth_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(bootmeth_3efi_mgr) = {
-+U_BOOT_DRIVER(bootmeth_efi_mgr) = {
- 	.name		= "bootmeth_efi_mgr",
- 	.id		= UCLASS_BOOTMETH,
- 	.of_match	= efi_mgr_bootmeth_ids,
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 5f9c037ff53..db35dad10d3 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -395,7 +395,7 @@ static int bootflow_system(struct unit_test_state *uts)
- 	if (!IS_ENABLED(CONFIG_EFI_BOOTMGR))
- 		return -EAGAIN;
- 	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
--	ut_assertok(device_bind(bootstd, DM_DRIVER_GET(bootmeth_3efi_mgr),
-+	ut_assertok(device_bind(bootstd, DM_DRIVER_GET(bootmeth_efi_mgr),
- 				"efi_mgr", 0, ofnode_null(), &dev));
- 	ut_assertok(device_probe(dev));
- 	sandbox_set_fake_efi_mgr_dev(dev, true);
+diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+index 270088ad94f..d0795c13d14 100644
+--- a/include/dm/uclass-id.h
++++ b/include/dm/uclass-id.h
+@@ -59,6 +59,7 @@ enum uclass_id {
+ 	UCLASS_ECDSA,		/* Elliptic curve cryptographic device */
+ 	UCLASS_EFI_LOADER,	/* Devices created by UEFI applications */
+ 	UCLASS_EFI_MEDIA,	/* Devices provided by UEFI firmware */
++	UCLASS_EFI_BOOT_MGR,	/* EFI boot manager */
+ 	UCLASS_ETH,		/* Ethernet device */
+ 	UCLASS_ETH_PHY,		/* Ethernet PHY device */
+ 	UCLASS_EXTCON,		/* External Connector Class */
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index ab50a69e48b..c37f05d70e4 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -25,6 +25,7 @@ apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
+ obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+ obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+ obj-$(CONFIG_EFI_BINARY_EXEC) += efi_bootbin.o
++obj-$(CONFIG_BOOTMETH_EFI_BOOTMGR) += efi_bootdev.o
+ obj-y += efi_boottime.o
+ obj-y += efi_helper.o
+ obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += efi_capsule.o
+diff --git a/lib/efi_loader/efi_bootdev.c b/lib/efi_loader/efi_bootdev.c
+new file mode 100644
+index 00000000000..066df9462c8
+--- /dev/null
++++ b/lib/efi_loader/efi_bootdev.c
+@@ -0,0 +1,102 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Bootdev for boot manager
++ *
++ * Copyright 2025, Heinrich Schuchardt <xypron.glpk@gmx.de>
++ */
++
++#define LOG_CATEGORY UCLASS_BOOTSTD
++
++#include <bootdev.h>
++#include <bootflow.h>
++#include <dm.h>
++#include <dm/lists.h>
++
++static int efi_get_bootflow(struct udevice *dev, struct bootflow_iter *iter,
++			    struct bootflow *bflow)
++{
++	int ret;
++
++	ret = strcmp(iter->method->name, "efi_mgr");
++	if (!ret)
++		bflow->state = BOOTFLOWST_READY;
++
++	return ret;
++}
++
++struct bootdev_ops efi_bootdev_ops = {
++	.get_bootflow	= efi_get_bootflow,
++};
++
++static int efi_bootdev_bind(struct udevice *dev)
++{
++	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++
++	ucp->prio = BOOTDEVP_6_EFI;
++
++	return 0;
++}
++
++static const struct udevice_id efi_bootdev_ids[] = {
++	{ .compatible = "u-boot,bootdev-efi" },
++	{ }
++};
++
++U_BOOT_DRIVER(efi_bootdev) = {
++	.name		= "efi_bootdev",
++	.id		= UCLASS_BOOTDEV,
++	.ops		= &efi_bootdev_ops,
++	.bind		= efi_bootdev_bind,
++	.of_match	= efi_bootdev_ids,
++};
++
++/**
++ * efi_bootdev_hunt() - find devices used by EFI boot manager
++ *
++ * Invoke all hunters that have not been invoked by now.
++ * This should only be the network hunter.
++ *
++ * @info:	info structure describing this hunter
++ * @show:	true to show information from the hunter
++ *
++ * Return:	0 if device found, -EINVAL otherwise
++ */
++static int efi_bootdev_hunt(struct bootdev_hunter *info, bool show)
++{
++	return bootdev_hunt(NULL, 0);
++}
++
++BOOTDEV_HUNTER(efi_bootdev_hunt) = {
++	.prio		= BOOTDEVP_6_EFI,
++	.uclass		= UCLASS_EFI_BOOT_MGR,
++	.hunt		= efi_bootdev_hunt,
++	.drv		= DM_DRIVER_REF(efi_bootdev),
++};
++
++static int efi_bootdev_create(void)
++{
++	int ret;
++	struct udevice *dev_mgr;
++	struct udevice *dev;
++
++	ret = device_bind_driver(gd->dm_root, "efimgr",
++				 "efimgr", &dev_mgr);
++	if (ret)
++		return ret;
++
++	ret = device_bind_driver(dev_mgr, "efi_bootdev",
++				 "efimgr.bootdev", &dev);
++	return ret;
++}
++
++EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_R, efi_bootdev_create);
++
++U_BOOT_DRIVER(efimgr) = {
++	.name		= "efimgr",
++	.id		= UCLASS_EFI_BOOT_MGR,
++};
++
++UCLASS_DRIVER(efimgr) = {
++	.id		= UCLASS_EFI_BOOT_MGR,
++	.name		= "efimgr",
++};
 -- 
 2.48.1
 
