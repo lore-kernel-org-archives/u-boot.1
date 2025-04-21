@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B11FC369D3
-	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A30C369AB
+	for <u-boot@archiver.kernel.org>; Mon, 21 Apr 2025 16:52:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7147581FDE;
+	by phobos.denx.de (Postfix) with ESMTP id BB9EF82063;
 	Mon, 21 Apr 2025 18:51:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="d/6deny3";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="YJhWunxr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26AD881F0D; Mon, 21 Apr 2025 07:14:48 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 98B6381F0D; Mon, 21 Apr 2025 07:15:11 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 817AC81DE3
- for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 07:14:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51CDD81DE3
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 07:15:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tingting.meng@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q4CGsEjpRzrJs0HXo6RJ81lvdXPffl2x90a1+4sZnwckU3vsnmXnYgdYPYyIdo5JX6wX2EV0Kr9NeKCqLqgzAGVHm4KyaT34i6BSt6gUoYvpv2TnwdIeVX8wUCooKubSzjIjIZmHDaSzio39NGQ0YwUdEAm6pqkPOmGvyCXsejMNySXh43fF+n5p3BQGjpHSL00XlmrDq81BJkF8GWMIsRQZPdM3NrLWzvuj7ETKTmZv0iGCD3a2domao3+1glXDMc8Y9jB0famYs6zx9H5QAoNWANUyIj0sfTSAnKVRz/pVPX6IPJeTU7JzhV3n37IDq2iVDbEF7VV2BFwGRNau6Q==
+ b=vurfl45KnjojS84JRurxFWw+D9mJs9MonwL8GQfvBh31RVn3IU/B9IOpWoS6xuU/YZ/pq2sqTFuRLQmwZPlc1pSjXDXZc0ymtQ2mL9fjNBD1mF/l6LHKeXGGK0v7saQAbSBjvGGOemcnpO7sNrUSLBytv5abT+td92pqDxJ3Q1wOf9xM/bXAIPGEPBUTIs68nu8cx/iH12ItETUznPGfgUT9xZ7OZ95XI2I9Bb/7gnDW/OH9puhkXkehiCce2OPXa0LOsbq2UNkUdqzx+pYJdBXJ3P4C452YJIu1Pa82SDZ7XlXYnUCblK3XdlA5Z1w0TJ2fai5yymgwLC2bdYAB+A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LJk2d2KcxBcReJ91CmSqXOdQ+pYobgMBBkk7hfgjGk4=;
- b=muIPOUcB4d+EeFn+iZqFnmoYZzdIpi0MEMBq7WOmWfz4ea3o+Vs7BwNp8PfzxqZKI81wxNrSQQ1gh9L5ff7QnSJ4wvamg0oFVg9guWlhMUYb9dhx04IY+kVYB/hOLClOlv/77D0rUNESO+rYEgEsa1lqSH22GNl1ogYhX3+IXcaMOQiPAG6chBTl7c/mpO2IIEVEOYOZBluoYguk6N7UFZar3e14MhVurv4z4knO01bucmNOrmmdortS6MqiHBDsVlJO3bu+Ux6iYTzQ1C9ylBh+guf4qUadD1uHICOyKLs1UW66CEwxo8UBR80vEdDxYq3wAQ093GQQZiNh8oScbA==
+ bh=AdYdG2/rri/Rb6Jw5Ew0YyYpWr6ZaGN6CwFFHpyG6c4=;
+ b=yglX8vUm2FK0y/487ME1x6K7ap1TrUUhbGfE1dZ5TLSgZHxMyCqReH96t0Ki2zg6w4V1H9r19JyQaKghDe5Hguvu0ER3kdmveukjIXX5i0lijLrM16z3c72GDxrl+XXOXDeLfsncti1n53sDjw66zJF7lj2DSuPC/Rlc+1t9wymq2bB/k/NcWd8xrk1ljAiZhw8jwGp+T6AoxgwWS01QTQ6DidsSp2cYiO9Ve0se8G9F4Ro6FyNClEXIjCMkAZxu0UrojDbYjDa5Kn7a/htNE15hEz91ok9fIo+pc2X7qnVlRd+5ub6PHh7Mlca5V93N+VYsZq+B8YIAk4PuFDvL0g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LJk2d2KcxBcReJ91CmSqXOdQ+pYobgMBBkk7hfgjGk4=;
- b=d/6deny38lJW5BgZm9qkld8gOiVNGw6X6AQ3DpXtNkscF04pQNw/FO6E8cu9XqFesYRwkP1VqrKcTjBkxreEarXanSxFXKNlozjalsUH1OQv7MWsAz4GU0jRaFz7AGmZgy8qPimkn0lp7q3Wqc516vgHbaAN7FQY+ogsRvJy2fhU1Bl4tWpXJsuDcy7ZaKJXgcrWOB/OKkCFE2UXlvUPclSsqWOECBJ0fo1wfjaXmUGmr9N2UQ2UpzG4wcP+VxtRmJAXmYdm3vCpXH9/r4hhM4mFoM++RD6ORHaEjNp980FaXz3GD1P+NFmvGlL6cBeLQqF236ItTrzvUjNC8K/YQQ==
+ bh=AdYdG2/rri/Rb6Jw5Ew0YyYpWr6ZaGN6CwFFHpyG6c4=;
+ b=YJhWunxrvV35udiVAShnAbNeYVWPAKz9qbET+HiRSjEEm0SktqHdn0fYwfl4d5QjoSZwlZJY1+VbLSudofOjPkvkln7CjJJy7l7tUXvcYOP5s2RoUOFyWX0rmeAaSjbhzzLaChLXGzrfF3uFYWrhg3uZQ7appxAX/9b8FOyIAJ3L476VlpPGk6iWdPet4Umh56xzM892Nu+e2H+ztN4L9udF4VgBj89nouYV9QHz+jlaXiyE0PN4g30GhRD6GhwhzRmCPcKU7z7saVgp81WkjrthDVl+Ss1Ht2j78VGMQKHHALPmG08QeVfG+d64Djq3ATfJs1+OYSCGrE+Lv903Nw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from DS7PR03MB5621.namprd03.prod.outlook.com (2603:10b6:5:2c8::21)
  by SA1PR03MB7099.namprd03.prod.outlook.com (2603:10b6:806:330::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.30; Mon, 21 Apr
- 2025 05:14:42 +0000
+ 2025 05:15:07 +0000
 Received: from DS7PR03MB5621.namprd03.prod.outlook.com
  ([fe80::5337:db99:bde7:e33b]) by DS7PR03MB5621.namprd03.prod.outlook.com
  ([fe80::5337:db99:bde7:e33b%5]) with mapi id 15.20.8655.033; Mon, 21 Apr 2025
- 05:14:42 +0000
+ 05:15:07 +0000
 From: tingting.meng@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Tien Fong Chee <tien.fong.chee@altera.com>,
@@ -63,106 +63,90 @@ Cc: Marek Vasut <marex@denx.de>, Tien Fong Chee <tien.fong.chee@altera.com>,
  Danish <danish.ahmad.rosdi@altera.com>,
  Hazim <muhammad.hazim.izzat.zamri@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>
-Subject: [PATCH v1 4/5] ddr: altera: agilex5: LPDDRs in-line ECC support
-Date: Sun, 20 Apr 2025 22:14:31 -0700
-Message-Id: <20250421051431.29206-1-tingting.meng@altera.com>
+Subject: [PATCH v1 5/5] ddr: altera: iossm: Enhance debug information for ECC
+ errors
+Date: Sun, 20 Apr 2025 22:14:55 -0700
+Message-Id: <20250421051455.31365-1-tingting.meng@altera.com>
 X-Mailer: git-send-email 2.35.3
-Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SJ0PR13CA0033.namprd13.prod.outlook.com
- (2603:10b6:a03:2c2::8) To DS7PR03MB5621.namprd03.prod.outlook.com
+Content-Type: text/plain
+X-ClientProxiedBy: BY5PR17CA0004.namprd17.prod.outlook.com
+ (2603:10b6:a03:1b8::17) To DS7PR03MB5621.namprd03.prod.outlook.com
  (2603:10b6:5:2c8::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DS7PR03MB5621:EE_|SA1PR03MB7099:EE_
-X-MS-Office365-Filtering-Correlation-Id: acaf3656-71cd-4c23-72a2-08dd80936c88
+X-MS-Office365-Filtering-Correlation-Id: 458d3c31-a6b7-4502-52f8-08dd80937b01
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YXRZcWYwM1k5bzZ1bmVCSGVlSHZ5VS9lTTFiNzV5YXBHREQrRGpXTDQ0enpC?=
- =?utf-8?B?ZVFwZjNlR005RkdpQUk0cFZ3Y0t4QzBvalBDWElmU1Vud2tnTGdsUzRnMStU?=
- =?utf-8?B?MU9KL2NBYVNrMWttbVhsZzJzdWtDNHE3RWUzNENtL0RSWThUTy9tTEQ4a0JK?=
- =?utf-8?B?dnRFVXhReWpSSnZzN25FVXkwbUhvWXdBSE5hb2tFTURicHF1ZSsreHM5LzVv?=
- =?utf-8?B?VUZWQkQ3VjZhL0tsTEVlWnpDVHV3ZzlUa2JZMzNrUWJZRFd5NlYxMHBHTnZ5?=
- =?utf-8?B?ZjFhWVhOZzJ2bVFzbC84VmFCSGx2aE0wQTJXZElpT2ZTRGZ2NlNuVU85dm95?=
- =?utf-8?B?TW9iZWhoR3NYWWdwSEVIcGV5WFVIVEYzQm1HSDdvcWphM2ZhQklnd2ZvTDRh?=
- =?utf-8?B?ejVjS1VBSlhjaDNmVGY1cnFGV0R1eVViQ3NvbUZhalZDS2pJVVovNHo3UHBu?=
- =?utf-8?B?V3hWTGZMalNNb0xUSjRhNzVuZHFjZlhieEZGck9lT3I1L2IyWWovampRVFNs?=
- =?utf-8?B?dDc4NnJHS0dzV09wa0VENGpOYkxNTWl4UnlGYWZ5d2FjUHpRVjYvcWt0ZlJH?=
- =?utf-8?B?dGxVNW1kZnFMeEtyN1VITnFjYTFvdEFiTGRpZnhEb1NhRzJJQnVlbjhjSnA4?=
- =?utf-8?B?bDRoR3dLOWNtc1M3NkFqTFY1WUpYblU3WE9PampYelo0eEtFcm9zZmIrcXRx?=
- =?utf-8?B?NDB0a1Uwd0pXWm1PQkRHZHZyUDd6SHJBQU5mZC9VaGp4TWhCK3hyb05MSUlW?=
- =?utf-8?B?NlZnZlNnaVF3SW4xcXRYZExDNzI2aE50eHI3dTBCVWR0RXUyQ1k0cnA5bER2?=
- =?utf-8?B?ZmVlZDN6dFNDWHg2TFB0NWNEWGl0OG5JRnVsYlpaNm0xdk5URjJUb2cveHB5?=
- =?utf-8?B?U2ozMHkvNDdveEpHNS9NKzcwY3lxL2RORWpjZ3Y2STFWQXdEaVhGTk14Z3l3?=
- =?utf-8?B?UUVJb01KVDE0dTBnUDk2QkxqVkR0SkJoVjVDRGRBbjRtUEdBK0pGVU11VzhL?=
- =?utf-8?B?dk1ldG9iQW5CK0N0SExNR0pSTjdKRDVLK0w4cHVjNm5CWjJ3b3NWYVliNmMr?=
- =?utf-8?B?azF2RzJiZytwdUVXTE9oQnU5YXRsZTlzRHZxUktiSm80MmZlak5zRFJMelVZ?=
- =?utf-8?B?L1RuMnl1VUFVNmNONC8wWXUrYks0Qzk1a3J3NXpxL21MQU92Mk9TaTBKT2g3?=
- =?utf-8?B?ZGZtRWY5aXYxS200VFBXR0JJREh2ZUcrbklwcHI0UUc5ZEFrR01telVyeTRz?=
- =?utf-8?B?cXZGRXh1OWRKWmxEN1pDSlZLNXRRTnU2ajBmb1JxMDI0eWExRmRZTnNFbHJB?=
- =?utf-8?B?UGx0My9ReXdVajF0eGk4dWI4TmJ2MDNuekVlYVh5VjN5RkZ6SnFFdW1yNlFl?=
- =?utf-8?B?V0MwLysyaldNV3p2aEd1T2lTcUFXZzhVd1RTa2tWdUF6T3ZFOERTRVlteEZ5?=
- =?utf-8?B?QmsvSnhPUWJNZEpvdmt3NkdCUktzNHVDM3dpSW5wam5MNDNMbndFTG5SVmpL?=
- =?utf-8?B?NWFtNmt1YU5yTEJQL0R3VHpLYjUvcUxPTjFrZHhFZVpOMVJxMnJoUlhnWElM?=
- =?utf-8?B?Wjd5N0dYUFBZUkRndW94Q25lRkpSNnMxRmwvVXI2RmQwQkNaTTBKdWZxKzhq?=
- =?utf-8?B?M2t1YUwwYzFIb014L0o5dFprNzZmamYwbFBSUUcwM0ZEdDBVRGtibVoyVERE?=
- =?utf-8?B?OUZSYXdMMFhNM1JhTzJxckRtbWFRR2NveGZSend6cmlzc1o2VTVuR3JDQUZr?=
- =?utf-8?B?MEE4S29ZM2tQTmZFVmZaU1laeDFrZEFaTEZnNkhaMEtMQlFna1AwUXRKK2Nt?=
- =?utf-8?B?TGlJaTdTMjhnOERLalBRZ29mK2VSQXlJY2FPZnJmdkx3UmM1NlNiOUVZcElV?=
- =?utf-8?B?K0luMVd0dDVMSVhwWUU0MFZZSHVsT1I5Q1diL1FLS21qZkJRaXFPOVBNTVU2?=
- =?utf-8?Q?3Csi1AFPKT4=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?iLxHNjIf65j2F0fry31Oa30brff6xGewDQSNkYyX7rjemD1/wemQp5519k/M?=
+ =?us-ascii?Q?oYHffUGhRYHx3cQ3J3qeB3juEosGxukfTncx56S2krRwPPrNsqIfp4ACOH+H?=
+ =?us-ascii?Q?7Xiaz4PU9WKi/SoTUQQBuXFdJ2mokiUkHYqxVECC0HWgV+OH9fEYGcIKxtjn?=
+ =?us-ascii?Q?ESSncwU3bWLqwmiWQNK155mNFTZtplSjNlvY7aryHtseG9CnFox1e2viinus?=
+ =?us-ascii?Q?Bbg2gR4IoJBByPETmBWyn3hQCB7xA1DcLWHCANBf0zv5HFtHX7Hpj3bJq2E5?=
+ =?us-ascii?Q?utvEY5qLk7BUWfEVq/ovj+UAmOv5yZlt4fHU/dXWX2GQwbVaNABVCZTHcZR2?=
+ =?us-ascii?Q?s2mpoWqxAX3aJkQh6KmrCH0PEC8y2+AQV21rMrHbmkaVTN0dqO3UN4npDeSD?=
+ =?us-ascii?Q?HNoGsyS4qPcCmTLR/pb6o4XP+7mORw0drEw3Wemy0kImnoVqROKa9jsAwk2F?=
+ =?us-ascii?Q?1fw1hinr1Qg3rhIRtnrAU8StepiRR00AFNo5G+SwORuxB0uVp0ln4IaS609L?=
+ =?us-ascii?Q?925CykSjz9tB8L/Eaw5eCyeIm8RvNI7HbCQUvSlpNhpMTTPzUGQDIgNz6x4S?=
+ =?us-ascii?Q?9Sqg+RsLV+s34uxpQF+OqIdCnAS8YdZ/bk82V7RHPTP3wEXz38aNonTb0lKb?=
+ =?us-ascii?Q?r6P/mgDRapz1Dnt77Q0PXslnrfHcNBb68xLbeuaRP0K3d6ybuLJm6ekb+1A4?=
+ =?us-ascii?Q?BIIZ/XUIzXkjOy6PQFvKYo5VpR6yGnGNp/xIf/qXAup2A6U/JOKToyhPTcNs?=
+ =?us-ascii?Q?nALBHrcNcD5uGbbaKUXxrJms2E50J+sSZCeDsf8ORvYxLU2SH0wbCXSwNKbn?=
+ =?us-ascii?Q?Ziml/Kx35EMbZyb00aXNMYGYtxDBGDoQyR93kFIH5Pn7HL6TTil2J2plun64?=
+ =?us-ascii?Q?bp2iY2PwczWCfGhv9XgYlaoOTP1LOSNztlqPizomNHB3UFNQVwwA7ILt+sXE?=
+ =?us-ascii?Q?wFYSJ08t9HLv6jB8WgDh+e5UWBL1+sWzR+8Wy1IU3ErJObIDNgYseoubLBVd?=
+ =?us-ascii?Q?JXI5UL9LEFh6oUn7Zw6IlxST0dPeo2DXuHtz+MarbcJ4Y9eaQHrM121EjIBe?=
+ =?us-ascii?Q?V71Q4skXC0LtW6GHIDcNKXhl6dxjGC3J8MmSGXld/LbyBs/q0ukHMPiNRWGt?=
+ =?us-ascii?Q?xqiB+3J+nU7US8anXq+7+HYmhgLpBgzmF1upwAuhe2YDrJBBM53uv2gJNZJ9?=
+ =?us-ascii?Q?qc89b+ErFqZ1x8dVsrLc2U9bL6d694hWpDE7b3OnAzVAu0u0Fmit6cnRUP//?=
+ =?us-ascii?Q?ypmNtdZH1SFd8axWSNN6gHwaBXZMBtHjpEQQeCY1TCRcwyksru8QDpMGavIY?=
+ =?us-ascii?Q?TKufCtgUAsZeVxSzoawH7tavn7+Rptu30SdUyjlmbivFHe5AGru0RT88YX47?=
+ =?us-ascii?Q?Z5IFDSKPph+vu5VAjr8m6mQnAlGUYgH0n3WiRmiUHpfMLkxv4CYG7L4KF/2i?=
+ =?us-ascii?Q?tegwBht1d1g=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DS7PR03MB5621.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TENnMzBGZU1JM1FQdlF6RGxHSFJiT0ptclg0R3hFTzRyS3FVUDUxZXR2Y3Uw?=
- =?utf-8?B?UjFiUjFrTW9Rcy9YOUo0ZStxaXN6SGVmczlFc1FLM1VDNVgzN3Z0OUFjMHBh?=
- =?utf-8?B?aWtSeTZ3WmJkaUttZ1hmUWMxd05NZS9tRnZGdlVPNEhEb2dFdmFEWld2M0lQ?=
- =?utf-8?B?dG1raTVXdmpwa3pzMWE0WHU1TnlFRFZXc1pjS1NmTVVHUndhbXpVS3l0WUNZ?=
- =?utf-8?B?YkliNDl0UWhZTHFNOTdpREY1UU5pa3NyWkdVQldFdEZId25xZXhabjFXYmhL?=
- =?utf-8?B?UDRDRnFtZ2pWZWwxeHNxM1hmTkxqbWJuczVKdUtielEzd3JyaDcwMjBUNGZR?=
- =?utf-8?B?bXV5YjEwdUk3RDRWTWhkOXU0enpvZWNsMDZkQURPSzZkRDNxRG5zNXFTcUNt?=
- =?utf-8?B?eXNVbmlMWVI1eFVKK0llWmw0K0tPd05TMnNFc3c3Wm1kRDNZWGY2WGppVGpK?=
- =?utf-8?B?dm5RRmY2RHJ4dmpuZVZCRDNCU25HYVFDb252Ny95Qko4b1ZSZVNEbENNUGlR?=
- =?utf-8?B?bk90TDRjUXBhR3FqQWs2VkhIV29Sbkh1QUpPV0tNZjc0VmYrT2F1VmUxb1Ex?=
- =?utf-8?B?Y1MyVzZ5ZXVDVjRZcEtzRWg4emRCQ2ZCYjhVSmgzTWhwcUNQR0RkU3dzS3hy?=
- =?utf-8?B?RGR0UXRIYy93QUhKUEhRd1RKekUvSDUxYVFLTDZzWEFZaTA2MVBZWEJiZk1X?=
- =?utf-8?B?NVcyczcyRFNxL1VZeTA4alpyRUxIeWxTWHFpdzdRdVpFcEc3RjJIV0ZUc3Nh?=
- =?utf-8?B?ZEI1dm50UGJMZGRIUmhIblprL3RyUkZJUXc0bVVYYUpQS2FCZ0pTOWUyTWV1?=
- =?utf-8?B?UjdVbXZkczVZRisvcXdZdUJyN3pySktMcmloVXhNNVZDcU9TMzFxMmNTc01L?=
- =?utf-8?B?ZDR6MkkvZUpGbDNwZ0pGRnpqZHR1SVdXSElpZ2FLemUrT2lTbE81UXZJMU54?=
- =?utf-8?B?UTlibmtmQU5nMXBUTTg1UzFYYnJkakRjd3U3ZW1BZmdONlpWc3E3OE1nVWh6?=
- =?utf-8?B?b2d0djcvSm5VeWF3SGdiQk5sK3U5UGp1VThlUFBLN2hQbDJOUElaYU0yanJp?=
- =?utf-8?B?amFOejBMODUzaFFrTjJjSElUQTBhZHpjQWljYU9YUkNybllKTXV2MGlmM3NH?=
- =?utf-8?B?WmVLS3FTM212ai9xTi9Ddk1LLzR3ZUVMRnB0QmZ6bXFwaWJZNEJCZkF1ODVS?=
- =?utf-8?B?NHhPMGJhU0xkR25VbFVvOGRNWEdza0RGb3hGM21rWmFMMHpRR09ORmhFOTUw?=
- =?utf-8?B?Wjl5NXg2OWVMbDdNWDRCcSt6OEFpRTkzVXhML2hDSjEzZ2tMQk1zemd5bTdm?=
- =?utf-8?B?WE1UV1AxNHBWb0cvdE1TUmRmRjZuSE5Ja2l6NG9zZkFmTVdtRXZFMmtyQjJ6?=
- =?utf-8?B?UkN3RnF5UUlVaDFrRnpZbWdwS2xuV1dMUkVCbkNXTkpZVXA5NHg1YlBOM0hD?=
- =?utf-8?B?QWtZLzF6Q2RuMVpxUXRDMlkrdWhhRHBtR1E4dnR1ZkE4SGUyRkdPSkZoSUxp?=
- =?utf-8?B?ZWZiQkk5b1dJaFlwY0o3U2g0RzlzVXpxdzNVdXB5RnNJZ1VmNlJaT0lTc0hD?=
- =?utf-8?B?WldqK01WM3RRcnRzTUFYb29UZHRhOElSMTJjU2lnK0s3Vngybnltb2psbzdh?=
- =?utf-8?B?TDlSKzZCbXBIZXRVeGFmQXFLRWJGYVFXU0l0Y055VW9kMExBUy9jd0JMR05G?=
- =?utf-8?B?MHVKb3hMZ1dJZWdmWjcrejR5cmt4WlhKVnBzMURMM2pCOEVlbjMvajgvOEFT?=
- =?utf-8?B?WjZjZUd4QWdraFJmdzkvRzBMbDRaZ0tXSlE3VTRoVzBWRStiWU9Yc3VhTGRM?=
- =?utf-8?B?allEa3pid0h4bVFoODBBeUhnM0ZSZEFjYW1EcWgyY2tMQXlpNEQ0bTBybGsz?=
- =?utf-8?B?K0toV1VJa2UrWFpMVXJrZk55Y0FWRkJyYlZTeVhXNWk3dzVyMWcvQkRjdTlW?=
- =?utf-8?B?K04vY1Bva1ByWnBYMS9pdE9ETXdFK0NvNE5sK3lpR3k2Nk80eHlMYXRya1VN?=
- =?utf-8?B?STZoSXJYZXJieEZsemZ5RGt0ZUl0dXN4cUx0SWhVcFgvd0hkNnlqdHhDa3dm?=
- =?utf-8?B?TkYvalNMTlBJbXpwRFVpd0dRclhTZDg5QSt4ZjM4aWNhZ05iYlh2Z3FnNXFT?=
- =?utf-8?B?bGRDajdlQmRXY1JHMUpkWWpiUy9aS2NnaktMdVhDSFRoVGhrRkwwaHphUjBr?=
- =?utf-8?B?ZVE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?70xANqxVGTbNTfEAvoUQXtpncR4IZwPJvvIZNnqUsrA8igGaQOUfgSn+Fkmj?=
+ =?us-ascii?Q?u8rr7jo8ikjsuKkYtYQFPDge7w1tCP7V2dcdm2vN2onLz4HPARDulC4ITT6f?=
+ =?us-ascii?Q?gKcBqtyM0C8WvEqDrIPVTZ6L6vusZsvxXfaonpr8vjaMuqcUDrXpVLsB/YrG?=
+ =?us-ascii?Q?fxnTCDTRfcyZrUzkexhOcoggr95QFhOVyatRZrKuwU45MBgEvPxiTey2vNiy?=
+ =?us-ascii?Q?mNWtTJijcfTPQtQbfK2E0NG6e+PigeN+0l7bGQnDoc94PejXkoH1vYE4WQH7?=
+ =?us-ascii?Q?70wH5aDAnGwRQkH2gjfKdAptajVVjCxr6HOzUNs8i1lfodL5YJJ3Pj1xgkji?=
+ =?us-ascii?Q?/k/uA5SzcdBXCix7J7EBjkB7NbvrIocZkGY7SuEtljGxTwB2TkiFxUhFT3sN?=
+ =?us-ascii?Q?2bv6VCP9KuQxssjAKHsJCwgzIK5tVhcBjBshJgMA1axYs3CpUqZgfsX9PMJ0?=
+ =?us-ascii?Q?GW0olRFyRVAXMZf/g35gX1WXDDFIW+rgBFxwVvxR1B1bwdtbgWgHKJ5vDlsY?=
+ =?us-ascii?Q?h0rz4geDvzjPFRZ8ZPHkjdwL23eSwiaGtOR0bWRmJSsxbKfmv7iwXkENk3zN?=
+ =?us-ascii?Q?1AlYM9+VTxlX4U1/+WzPuaglxIwDEjwiVQ974TCS1gnbCZXjFI4PkflKJB1b?=
+ =?us-ascii?Q?vuOf/ibmDDtwmOJz6aKRTRe5P4liu5x/n7QliYCJx4ZW44Vi9CcNY3MHGMTi?=
+ =?us-ascii?Q?2EZgpRjDfwPEOBZi0gFB2+qDzW6y+7PFZcwnIYEGTIX9xnd+YLxGDbxwICMq?=
+ =?us-ascii?Q?P+IzZ8ZPiYHTU38lJyI/hwcNQ6GVbhvOBDs+6v36O4RjH5LpMVh5iTTXXq0E?=
+ =?us-ascii?Q?0FshFpCs2GBdO6q9e01pLDtJJ1QHB1pLvnoOjG7rwABcNX4lyT1rMm/b4MDS?=
+ =?us-ascii?Q?xPiUWaSqI66/idc8C9AbCfmTrGKuIHj8DuZ04oa0SizurCZrUHM4iiTzd0sH?=
+ =?us-ascii?Q?q8F4/G+difpUImHMKrZDZJlxeT9P1MOJZYwIy3ie4mQctkHrW7tk9KvpKI9V?=
+ =?us-ascii?Q?/ISfGa2bmMYGKLCVM20nP+/mpaLC6EmPDXUjthASpAAXdMNsHrpw4xSsVKal?=
+ =?us-ascii?Q?WLjZcFBFioSCgTyZE8ROzrbEQrGT21XsEfppvcMYonEmEqQrA3uTRHqOrNBw?=
+ =?us-ascii?Q?2ciYXo3tAsJP8EyMg8Cfwfv4xsGei61VRRHLIIkZm/grQ29SttF6q0flKbZ1?=
+ =?us-ascii?Q?WnPg8UOTPfKYcS1bjnYP5TEpLuQf+FpRfyEnHFs6+m1tRHAFI/5E6OduI5UL?=
+ =?us-ascii?Q?3pofUyjSHDlJ7rKMgVNwn1Tj/T6hE7auld6kYh/pwppDqn4zdYiN7dEtHpXr?=
+ =?us-ascii?Q?tPTIh5LzDOMZEmZlv0vBJeD7bu40mdyiwxHfo9EBeb1j4eW7OEgL9deusT7y?=
+ =?us-ascii?Q?D/pJqbsOts0kZDBpnbW024eIy0P75TXvm4KBMmEIcaBxZIMH3ANZxzClyquX?=
+ =?us-ascii?Q?ypFyfsyeT0Nk2ZOTOf35M9jQL0A3Rw7kx1t+dShkX+fFZNawEh+v3UCH3TXm?=
+ =?us-ascii?Q?YQLhHP+Nt+ALvx/n9xlDdZfmLarODhMrT9mVDv6kL4mRf/eZ9GFmvbEpSXrA?=
+ =?us-ascii?Q?42SscF/EvLFT3ViuuW4wbDIcps7AE/uIDuLDSxujdwdieo3dqkT546C21vBP?=
+ =?us-ascii?Q?dg=3D=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: acaf3656-71cd-4c23-72a2-08dd80936c88
+X-MS-Exchange-CrossTenant-Network-Message-Id: 458d3c31-a6b7-4502-52f8-08dd80937b01
 X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5621.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 05:14:42.7026 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2025 05:15:07.0128 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8XAaubJyjY5ZNverdcs8wp7cw/JKHcq4iewE1+1dVqCwd6CuqTCM8mVpe0usdFc6SxKaz3UqcedNphJFC5yyTwqQb3nn6PmqCkDNVhzJTUc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: jRLEAKNkIMHJYkg9JfyIh180vb0Dxn/6I7EpOa8lTKujTVOo/nc4R/KfBCXJ96heVKraoLAYxWp2c32v6ZV8DNgUaPsWby7vZ+Tk5XvCjZ0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB7099
 X-Mailman-Approved-At: Mon, 21 Apr 2025 18:51:44 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -183,498 +167,131 @@ X-Virus-Status: Clean
 
 From: Tingting Meng <tingting.meng@altera.com>
 
-In-line ECC support was added for LPDDR by reserving the last one-eighth
-of the memory space for ECC data. Full memory initialization using the
-BIST MEM INIT mailbox command, based on address and size, is required to
-correctly generate ECC data and enable proper ECC logic verification.
+ECC debug information was enhanced to improve the readability of error
+messages.
 
 Signed-off-by: Tingting Meng <tingting.meng@altera.com>
 ---
- .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi |  26 ++-
- drivers/ddr/altera/iossm_mailbox.c            | 161 ++++++++++++++++--
- drivers/ddr/altera/iossm_mailbox.h            |  11 +-
- drivers/ddr/altera/sdram_agilex5.c            |  19 ++-
- drivers/ddr/altera/sdram_soc64.c              |  52 ++++--
- 5 files changed, 220 insertions(+), 49 deletions(-)
+ drivers/ddr/altera/iossm_mailbox.c | 64 ++++++++++++++++++++++++------
+ 1 file changed, 51 insertions(+), 13 deletions(-)
 
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-index d7ab58267eb..8d7dc0945ab 100644
---- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-@@ -25,34 +25,44 @@
- 	/*
- 	 * Both Memory base address and size default info is retrieved from HW setting.
- 	 * Reconfiguration / Overwrite these info can be done with examples below.
--	 */
--	/*
-+	 *
-+	 * When LPDDR ECC is enabled, the last 1/8 of the memory region must
-+	 * be reserved for the Inline ECC buffer.
-+	 *
- 	 * Example for memory size with 2GB:
- 	 * memory {
- 	 *	reg = <0x0 0x80000000 0x0 0x80000000>;
- 	 * };
--	 */
--	/*
-+	 *
- 	 * Example for memory size with 8GB:
- 	 * memory {
- 	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
- 	 *	      <0x8 0x80000000 0x1 0x80000000>;
- 	 * };
--	 */
--	/*
-+	 *
- 	 * Example for memory size with 32GB:
- 	 * memory {
- 	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
- 	 *	      <0x8 0x80000000 0x7 0x80000000>;
- 	 * };
--	 */
--	/*
-+	 *
- 	 * Example for memory size with 512GB:
- 	 * memory {
- 	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
- 	 *	      <0x8 0x80000000 0x7 0x80000000>,
- 	 *	      <0x88 0x00000000 0x78 0x00000000>;
- 	 * };
-+	 *
-+	 * Example for memory size with 2GB with LPDDR Inline ECC ON:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x70000000>;
-+	 * };
-+	 *
-+	 * Example for memory size with 8GB with LPDDR Inline ECC ON:
-+	 * memory {
-+	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
-+	 *	      <0x8 0x80000000 0x1 0x40000000>;
-+	 * };
- 	 */
- 
- 	chosen {
 diff --git a/drivers/ddr/altera/iossm_mailbox.c b/drivers/ddr/altera/iossm_mailbox.c
-index db9435db657..26602858777 100644
+index 26602858777..fc09dde3f9e 100644
 --- a/drivers/ddr/altera/iossm_mailbox.c
 +++ b/drivers/ddr/altera/iossm_mailbox.c
-@@ -10,6 +10,7 @@
- #include <asm/arch/base_addr_soc64.h>
- #include <asm/io.h>
- #include <linux/bitfield.h>
-+#include <linux/sizes.h>
- #include "iossm_mailbox.h"
+@@ -98,6 +98,7 @@
  
- #define TIMEOUT_120000MS			120000
-@@ -87,6 +88,7 @@
+ /* offset info of ECC_ERR_STATUS */
+ #define ECC_ERR_COUNTER_MASK		GENMASK(15, 0)
++#define ECC_ERR_OVERFLOW_MASK		GENMASK(31, 16)
  
- /* offset info of ECC_ENABLE_INTF */
- #define INTF_ECC_ENABLE_TYPE_MASK	GENMASK(1, 0)
-+#define INTF_ECC_TYPE_MASK	BIT(8)
- 
- /* cmd opcode BIST_MEM_INIT_START, BIST performed on full memory address range */
- #define BIST_FULL_MEM			BIT(6)
-@@ -107,6 +109,10 @@
+ /* offset info of ECC_ERR_DATA */
+ #define ECC_ERR_IP_TYPE_MASK		GENMASK(24, 22)
+@@ -106,6 +107,8 @@
+ #define ECC_ERR_TYPE_MASK		GENMASK(9, 6)
+ #define ECC_ERR_ADDR_UPPER_MASK		GENMASK(5, 0)
+ #define ECC_ERR_ADDR_LOWER_MASK		GENMASK(31, 0)
++#define ECC_FULL_ADDR_UPPER_MASK	GENMASK(63, 32)
++#define ECC_FULL_ADDR_LOWER_MASK	GENMASK(31, 0)
  
  #define MAX_ECC_ERR_INFO_COUNT 16
  
-+#define BIST_START_ADDR_SPACE_MASK GENMASK(5, 0)
-+#define BIST_START_ADDR_LOW_MASK   GENMASK(31, 0)
-+#define BIST_START_ADDR_HIGH_MASK  GENMASK(37, 32)
-+
- #define IO96B_MB_REQ_SETUP(v, w, x, y, z) \
- 	usr_req.ip_type = v; \
- 	usr_req.ip_id = w; \
-@@ -512,7 +518,7 @@ int get_mem_width_info(struct io96b_info *io96b_ctrl)
- {
- 	int i, j, ret = 0;
- 	u32 mem_width_info;
--	u16 memory_size, total_memory_size = 0;
-+	phys_size_t memory_size, total_memory_size = 0;
- 
- 	u32 mem_total_capacity_intf_offset[MAX_MEM_INTERFACE_SUPPORTED] = {
- 		IOSSM_MEM_TOTAL_CAPACITY_INTF0_OFFSET,
-@@ -526,8 +532,11 @@ int get_mem_width_info(struct io96b_info *io96b_ctrl)
- 			mem_width_info = readl(io96b_ctrl->io96b[i].io96b_csr_addr +
- 					       mem_total_capacity_intf_offset[j]);
- 
--			memory_size = memory_size +
--					FIELD_GET(INTF_CAPACITY_GBITS_MASK, mem_width_info);
-+			io96b_ctrl->io96b[i].mb_ctrl.memory_size[j] =
-+				FIELD_GET(INTF_CAPACITY_GBITS_MASK, mem_width_info) * SZ_1G / SZ_8;
-+
-+			if (io96b_ctrl->io96b[i].mb_ctrl.memory_size[j] != 0)
-+				memory_size += io96b_ctrl->io96b[i].mb_ctrl.memory_size[j];
- 		}
- 
- 		if (!memory_size) {
-@@ -536,8 +545,6 @@ int get_mem_width_info(struct io96b_info *io96b_ctrl)
- 			goto err;
- 		}
- 
--		io96b_ctrl->io96b[i].size = memory_size;
--
- 		total_memory_size = total_memory_size + memory_size;
- 	}
- 
-@@ -556,7 +563,7 @@ int ecc_enable_status(struct io96b_info *io96b_ctrl)
- {
- 	int i, j, ret = 0;
- 	u32 ecc_enable_intf;
--	bool ecc_stat, ecc_stat_set = false;
-+	bool ecc_status, ecc_status_set = false, inline_ecc = false;
- 
- 	u32 ecc_enable_intf_offset[MAX_MEM_INTERFACE_SUPPORTED] = {
- 		IOSSM_ECC_ENABLE_INTF0_OFFSET,
-@@ -565,6 +572,7 @@ int ecc_enable_status(struct io96b_info *io96b_ctrl)
- 
- 	/* Initialize ECC status */
- 	io96b_ctrl->ecc_status = false;
-+	io96b_ctrl->inline_ecc = false;
- 
- 	/* Get and ensure all memory interface(s) same ECC status */
- 	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-@@ -572,15 +580,21 @@ int ecc_enable_status(struct io96b_info *io96b_ctrl)
- 			ecc_enable_intf = readl(io96b_ctrl->io96b[i].io96b_csr_addr +
- 						ecc_enable_intf_offset[j]);
- 
--			ecc_stat = (FIELD_GET(INTF_ECC_ENABLE_TYPE_MASK, ecc_enable_intf)
-+			ecc_status = (FIELD_GET(INTF_ECC_ENABLE_TYPE_MASK, ecc_enable_intf)
- 				    == 0) ? false : true;
-+			inline_ecc = FIELD_GET(INTF_ECC_TYPE_MASK, ecc_enable_intf);
-+
-+			if (!ecc_status_set) {
-+				io96b_ctrl->ecc_status = ecc_status;
- 
--			if (!ecc_stat_set) {
--				io96b_ctrl->ecc_status = ecc_stat;
--				ecc_stat_set = true;
-+				if (io96b_ctrl->ecc_status)
-+					io96b_ctrl->inline_ecc = inline_ecc;
-+
-+				ecc_status_set = true;
- 			}
- 
--			if (ecc_stat != io96b_ctrl->ecc_status) {
-+			if (ecc_status != io96b_ctrl->ecc_status ||
-+			    (io96b_ctrl->ecc_status && inline_ecc != io96b_ctrl->inline_ecc)) {
- 				printf("%s: Mismatch DDR ECC status on IO96B_%d\n", __func__, i);
- 
- 				ret = -EINVAL;
-@@ -673,7 +687,7 @@ bool ecc_interrupt_status(struct io96b_info *io96b_ctrl)
- 	return ecc_error_flag;
- }
- 
--int bist_mem_init_start(struct io96b_info *io96b_ctrl)
-+int out_of_band_bist_mem_init_start(struct io96b_info *io96b_ctrl)
- {
- 	struct io96b_mb_req usr_req;
- 	struct io96b_mb_resp usr_resp;
-@@ -746,3 +760,126 @@ int bist_mem_init_start(struct io96b_info *io96b_ctrl)
- err:
- 	return ret;
- }
-+
-+int bist_mem_init_by_addr(struct io96b_info *io96b_ctrl, int inst_id, int intf_id,
-+			  phys_addr_t base_addr, phys_size_t size)
-+{
-+	struct io96b_mb_req usr_req;
-+	struct io96b_mb_resp usr_resp;
-+	int n, ret = 0;
-+	bool bist_start, bist_success;
-+	u32 mem_exp, mem_init_status_intf, start;
-+	phys_size_t chunk_size;
-+
-+	u32 mem_init_status_offset[MAX_MEM_INTERFACE_SUPPORTED] = {
-+		IOSSM_MEM_INIT_STATUS_INTF0_OFFSET,
-+		IOSSM_MEM_INIT_STATUS_INTF1_OFFSET
-+	};
-+
-+	/* Check if size is a power of 2 */
-+	if (size == 0 || (size & (size - 1)) != 0) {
-+		ret = -EINVAL;
-+		goto err;
-+	}
-+
-+	mem_exp = 0;
-+	chunk_size = size;
-+
-+	while (chunk_size >>= 1)
-+		mem_exp++;
-+
-+	/* Start memory initialization BIST on the specified address range */
-+	IO96B_MB_REQ_SETUP(io96b_ctrl->io96b[inst_id].mb_ctrl.ip_type[intf_id],
-+			   io96b_ctrl->io96b[inst_id].mb_ctrl.ip_id[intf_id],
-+			   CMD_TRIG_CONTROLLER_OP, BIST_MEM_INIT_START, 0);
-+
-+	/* CMD_PARAM_0 bit[5:0] = mem_exp */
-+	/* CMD_PARAM_0 bit[6]: 0 - on the specified address range */
-+	usr_req.cmd_param[0] = FIELD_PREP(BIST_START_ADDR_SPACE_MASK, mem_exp);
-+	/* Extract address fields START_ADDR[31:0] */
-+	usr_req.cmd_param[1] = FIELD_GET(BIST_START_ADDR_LOW_MASK, base_addr);
-+	/* Extract address fields START_ADDR[37:32] */
-+	usr_req.cmd_param[2] = FIELD_GET(BIST_START_ADDR_HIGH_MASK, base_addr);
-+	/* Initialize memory to all zeros */
-+	usr_req.cmd_param[3] = 0;
-+
-+	bist_start = false;
-+	bist_success = false;
-+
-+	/* Send request to DDR controller */
-+	debug("%s:Initializing memory: Addr=0x%llx, Size=2^%u\n", __func__,
-+	      base_addr, mem_exp);
-+	ret = io96b_mb_req(io96b_ctrl->io96b[inst_id].io96b_csr_addr,
-+			   usr_req, 0, &usr_resp);
-+	if (ret)
-+		goto err;
-+
-+	bist_start = IOSSM_CMD_RESPONSE_DATA_SHORT(usr_resp.cmd_resp_status)
-+		& BIT(0);
-+
-+	if (!bist_start) {
-+		printf("%s: Failed to initialize memory on IO96B_%d\n", __func__,
-+		       inst_id);
-+		printf("%s: BIST_MEM_INIT_START Error code 0x%lx\n", __func__,
-+		       IOSSM_STATUS_CMD_RESPONSE_ERROR(usr_resp.cmd_resp_status));
-+
-+		ret = -EINVAL;
-+		goto err;
-+	}
-+
-+	/* Polling for the initiated memory initialization BIST status */
-+	start = get_timer(0);
-+	while (!bist_success) {
-+		udelay(1);
-+
-+		mem_init_status_intf = readl(io96b_ctrl->io96b[inst_id].io96b_csr_addr +
-+					     mem_init_status_offset[intf_id]);
-+
-+		bist_success = FIELD_GET(INTF_BIST_STATUS_MASK, mem_init_status_intf);
-+
-+		if (!bist_success && (get_timer(start) > TIMEOUT)) {
-+			printf("%s: Timeout initialize memory on IO96B_%d\n",
-+			       __func__, inst_id);
-+			printf("%s: BIST_MEM_INIT_STATUS Error code 0x%lx\n",
-+			       __func__,
-+			IOSSM_STATUS_CMD_RESPONSE_ERROR(usr_resp.cmd_resp_status));
-+
-+			ret = -ETIMEDOUT;
-+			goto err;
-+		}
-+	}
-+
-+	debug("%s:DDR memory initializationat 0x%llx completed.\n", __func__, base_addr);
-+
-+err:
-+	return ret;
-+}
-+
-+int inline_ecc_bist_mem_init(struct io96b_info *io96b_ctrl)
-+{
-+	int i, j, ret = 0;
-+
-+	/* Memory initialization BIST performed on all memory interfaces */
-+	for (i = 0; i < io96b_ctrl->num_instance; i++) {
-+		for (j = 0; j < io96b_ctrl->io96b[i].mb_ctrl.num_mem_interface; j++) {
-+			ret = bist_mem_init_by_addr(io96b_ctrl, i, j, 0,
-+						    io96b_ctrl->io96b[i].mb_ctrl.memory_size[j]);
-+			if (ret) {
-+				printf("Error: Memory init failed at Instance %d, Interface %d\n",
-+				       i, j);
-+				goto err;
-+			}
-+		}
-+	}
-+
-+err:
-+	return ret;
-+}
-+
-+int bist_mem_init_start(struct io96b_info *io96b_ctrl)
-+{
-+	if (io96b_ctrl->inline_ecc)
-+		return inline_ecc_bist_mem_init(io96b_ctrl);
-+	else
-+		return out_of_band_bist_mem_init_start(io96b_ctrl);
-+}
-diff --git a/drivers/ddr/altera/iossm_mailbox.h b/drivers/ddr/altera/iossm_mailbox.h
-index 6f794781d30..02d1db28e20 100644
---- a/drivers/ddr/altera/iossm_mailbox.h
-+++ b/drivers/ddr/altera/iossm_mailbox.h
-@@ -40,11 +40,13 @@ enum iossm_mailbox_cmd_opcode  {
-  * @num_mem_interface:	Number of memory interfaces instantiated
-  * @ip_type:		IP type implemented on the IO96B
-  * @ip_instance_id:	IP identifier for every IP instance implemented on the IO96B
-+ * @memory_size[2]:	Memory size for every IP instance implemented on the IO96B
-  */
- struct io96b_mb_ctrl {
- 	u32 num_mem_interface;
- 	u32 ip_type[2];
- 	u32 ip_id[2];
-+	phys_size_t memory_size[2];
+@@ -167,6 +170,24 @@ struct ecc_err_info {
+ 	u32 addr_lower;
  };
  
- /* CMD_REQ Register Definition */
-@@ -53,6 +55,9 @@ struct io96b_mb_ctrl {
- #define CMD_TYPE_MASK			GENMASK(23, 16)
- #define CMD_OPCODE_MASK			GENMASK(15, 0)
- 
-+/* Computes the Inline ECC data region size */
-+#define CALC_INLINE_ECC_HW_SIZE(size) (((size) * 7) / 8)
++struct ecc_overflow_error_desc {
++	int bit;
++	const char *msg;
++};
 +
- /*
-  * IOSSM mailbox request
-  * @ip_type:	    IP type for the specified memory interface
-@@ -83,13 +88,11 @@ struct io96b_mb_resp {
- /*
-  * IO96B instance specific information
-  *
-- * @size:		Memory size
-  * @io96b_csr_addr:	IO96B instance CSR address
-  * @cal_status:		IO96B instance calibration status
-  * @mb_ctrl:		IOSSM mailbox required information
-  */
- struct io96b_instance {
--	u16 size;
- 	phys_addr_t io96b_csr_addr;
- 	bool cal_status;
- 	struct io96b_mb_ctrl mb_ctrl;
-@@ -102,6 +105,7 @@ struct io96b_instance {
-  * @overall_cal_status: Overall calibration status for all IO96B instance(s)
-  * @ddr_type:		DDR memory type
-  * @ecc_status:		ECC enable status (false = disabled, true = enabled)
-+ * @inline_ecc:		Inline ECC or Out of Band ECC (false = Out of Band ECC, true = Inline ECC)
-  * @overall_size:	Total DDR memory size
-  * @io96b[]:		IO96B instance specific information
-  * @ckgen_lock:		IO96B GEN PLL lock (false = not locked, true = locked)
-@@ -115,7 +119,8 @@ struct io96b_info {
- 	bool overall_cal_status;
- 	const char *ddr_type;
- 	bool ecc_status;
--	u16 overall_size;
-+	bool inline_ecc;
-+	phys_size_t overall_size;
- 	struct io96b_instance io96b[MAX_IO96B_SUPPORTED];
- 	bool ckgen_lock;
- 	u8 num_port;
-diff --git a/drivers/ddr/altera/sdram_agilex5.c b/drivers/ddr/altera/sdram_agilex5.c
-index 801a6bbab46..ee66c72157a 100644
---- a/drivers/ddr/altera/sdram_agilex5.c
-+++ b/drivers/ddr/altera/sdram_agilex5.c
-@@ -291,7 +291,14 @@ int sdram_mmr_init_full(struct udevice *dev)
- 		goto err;
- 	}
- 
--	hw_size = (phys_size_t)io96b_ctrl->overall_size * SZ_1G / SZ_8;
-+	ret = ecc_enable_status(io96b_ctrl);
-+	if (ret) {
-+		printf("DDR: Failed to get ECC enabled status\n");
++static const struct ecc_overflow_error_desc ecc_overflow_errors[] = {
++	{ 0,  " - Single-bit error\n" },
++	{ 1,  " - Multiple single-bit errors\n" },
++	{ 2,  " - Double-bit error\n" },
++	{ 3,  " - Multiple double-bit errors\n" },
++	{ 8,  " - Single-bit error during ECC scrubbing\n" },
++	{ 9,  " - Write link ECC single-bit error (LPDDR5 only)\n" },
++	{ 10, " - Write link ECC double-bit error (LPDDR5 only)\n" },
++	{ 11, " - Read link ECC single-bit error (LPDDR5 only)\n" },
++	{ 12, " - Read link ECC double-bit error (LPDDR5 only)\n" },
++	{ 13, " - RMW read link ECC double-bit error (LPDDR5 only)\n" },
++};
 +
-+		goto err;
-+	}
-+
-+	hw_size = io96b_ctrl->overall_size;
- 
- 	/* Get bank configuration from devicetree */
- 	ret = fdtdec_decode_ram_size(gd->fdt_blob, NULL, 0, NULL,
-@@ -303,6 +310,9 @@ int sdram_mmr_init_full(struct udevice *dev)
- 		goto err;
- 	}
- 
-+	if (io96b_ctrl->inline_ecc)
-+		hw_size = CALC_INLINE_ECC_HW_SIZE(hw_size);
-+
- 	if (gd->ram_size > hw_size) {
- 		printf("DDR: Warning: DRAM size from device tree (%lld MiB) exceeds\n",
- 		       gd->ram_size >> 20);
-@@ -355,13 +365,6 @@ int sdram_mmr_init_full(struct udevice *dev)
- 
- 	printf("%s: %lld MiB\n", io96b_ctrl->ddr_type, gd->ram_size >> 20);
- 
--	ret = ecc_enable_status(io96b_ctrl);
--	if (ret) {
--		printf("DDR: Failed to get ECC enabled status\n");
--
--		goto err;
--	}
--
- 	/* Is HPS cold or warm reset? If yes, Skip full memory initialization if ECC
- 	 *  enabled to preserve memory content
- 	 */
-diff --git a/drivers/ddr/altera/sdram_soc64.c b/drivers/ddr/altera/sdram_soc64.c
-index 75c6de1e4ec..27fbe80ed41 100644
---- a/drivers/ddr/altera/sdram_soc64.c
-+++ b/drivers/ddr/altera/sdram_soc64.c
-@@ -185,35 +185,51 @@ void sdram_init_ecc_bits(struct bd_info *bd)
- void sdram_size_check(struct bd_info *bd)
+ static int is_ddr_csr_clkgen_locked(u8 io96b_pll)
  {
- 	phys_size_t total_ram_check = 0;
--	phys_size_t ram_check = 0;
--	phys_addr_t start = 0;
--	phys_size_t size, remaining_size;
- 	int bank;
+ 	int ret = 0;
+@@ -628,16 +649,28 @@ bool ecc_interrupt_status(struct io96b_info *io96b_ctrl)
+ {
+ 	int i, j;
+ 	u32 ecc_err_status;
+-	u16 ecc_err_counter;
++	u16 ecc_err_counter, ecc_overflow_status;
+ 	bool ecc_error_flag = false;
  
- 	/* Sanity check ensure correct SDRAM size specified */
- 	debug("DDR: Running SDRAM size sanity check\n");
- 
- 	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-+		phys_size_t ram_check = 0;
-+		phys_addr_t start = 0;
-+		phys_size_t remaining_size;
+ 	/* Get ECC double-bit error status */
+ 	for (i = 0; i < io96b_ctrl->num_instance; i++) {
+ 		ecc_err_status = readl(io96b_ctrl->io96b[i].io96b_csr_addr +
+ 					IOSSM_ECC_ERR_STATUS_OFFSET);
 +
- 		start = bd->bi_dram[bank].start;
- 		remaining_size = bd->bi_dram[bank].size;
-+		debug("Checking bank %d: start=0x%llx, size=0x%llx\n",
-+		      bank, start, remaining_size);
+ 		ecc_err_counter = FIELD_GET(ECC_ERR_COUNTER_MASK, ecc_err_status);
+-		debug("%s: ECC error number detected on IO96B_%d: %d\n",
+-		      __func__, i, ecc_err_counter);
++		log_err("%s: ECC error number detected on IO96B_%d: %d\n",
++			__func__, i, ecc_err_counter);
 +
- 		while (ram_check < bd->bi_dram[bank].size) {
--			size = min((phys_addr_t)SZ_1G,
--				   (phys_addr_t)remaining_size);
--
--			/*
--			 * Ensure the size is power of two, this is requirement
--			 * to run get_ram_size() / memory test
--			 */
--			if (size != 0 && ((size & (size - 1)) == 0)) {
--				ram_check += get_ram_size((void *)
--						(start + ram_check), size);
--				remaining_size = bd->bi_dram[bank].size -
--							ram_check;
--			} else {
--				puts("DDR: Memory test requires SDRAM size ");
--				puts("in power of two!\n");
-+			phys_size_t size, test_size, detected_size;
++		ecc_overflow_status = FIELD_GET(ECC_ERR_OVERFLOW_MASK, ecc_err_status);
++		if (ecc_overflow_status != 0) {
++			log_err("ECC Error Overflow Flags:\n");
 +
-+			size = min((phys_addr_t)SZ_1G, (phys_addr_t)remaining_size);
-+
-+			if (size < SZ_8) {
-+				puts("Invalid size: Memory size required to be multiple\n");
-+				puts("of 64-Bit word!\n");
- 				hang();
- 			}
-+
-+			/* Adjust size to the nearest power of two to support get_ram_size() */
-+			test_size = SZ_8;
-+
-+			while (test_size * 2 <= size)
-+				test_size *= 2;
-+
-+			debug("Testing memory at 0x%llx with size 0x%llx\n",
-+			      start + ram_check, test_size);
-+			detected_size = get_ram_size((void *)(start + ram_check), test_size);
-+
-+			if (detected_size != test_size) {
-+				debug("Detected size 0x%llx doesn’t match the test size 0x%llx!\n",
-+				      detected_size, test_size);
-+				puts("Memory testing failed!\n");
-+				hang();
++			for (int i = 0; i < ARRAY_SIZE(ecc_overflow_errors); i++) {
++				if (ecc_overflow_status & BIT(ecc_overflow_errors[i].bit)) {
++					log_err("%s", ecc_overflow_errors[i].msg);
++				}
 +			}
-+
-+			ram_check += detected_size;
-+			remaining_size = bd->bi_dram[bank].size - ram_check;
- 		}
++		}
  
- 		total_ram_check += ram_check;
+ 		if (ecc_err_counter != 0) {
+ 			phys_addr_t address;
+@@ -661,15 +694,20 @@ bool ecc_interrupt_status(struct io96b_info *io96b_ctrl)
+ 								ecc_err_data);
+ 				err_info.addr_lower = readl(address + sizeof(u32));
+ 
+-				debug("%s: ECC double-bit error detected on IO96B_%d:\n",
+-				      __func__, i);
+-				debug("- error info address :0x%llx\n", address);
+-				debug("- error ip type: %d\n", err_info.ip_type);
+-				debug("- error instance id: %d\n", err_info.instance_id);
+-				debug("- error source id: %d\n", err_info.source_id);
+-				debug("- error type: %d\n", err_info.err_type);
+-				debug("- error address upper: 0x%x\n", err_info.addr_upper);
+-				debug("- error address lower: 0x%x\n", err_info.addr_lower);
++				log_err(" %s: DDR ECC Error Detected on IO96B_%d number:%d\n",
++					__func__, i, j);
++				log_err(" - error info address :0x%llx\n", address);
++				log_err(" - error ip type: %d\n", err_info.ip_type);
++				log_err(" - error instance id: %d\n", err_info.instance_id);
++				log_err(" - error source id: %d\n", err_info.source_id);
++				log_err(" - error type: %s\n",
++					is_double_bit_error(err_info.err_type) ?
++					"Double-bit error" : "Single-bit error");
++				log_err(" - error address: 0x%016llx\n",
++					(u64)FIELD_PREP(ECC_FULL_ADDR_UPPER_MASK,
++							err_info.addr_upper) |
++					FIELD_PREP(ECC_FULL_ADDR_LOWER_MASK,
++						   err_info.addr_lower));
+ 
+ 				if (is_double_bit_error(err_info.err_type)) {
+ 					if (!ecc_error_flag)
+@@ -682,7 +720,7 @@ bool ecc_interrupt_status(struct io96b_info *io96b_ctrl)
+ 	}
+ 
+ 	if (ecc_error_flag)
+-		printf("\n%s: ECC double-bit error detected!\n", __func__);
++		log_err("\n%s: ECC double-bit error detected!\n", __func__);
+ 
+ 	return ecc_error_flag;
+ }
 -- 
 2.25.1
 
