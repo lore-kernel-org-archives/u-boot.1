@@ -4,48 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CA85C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:11:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB051C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBA8280FF7;
-	Tue, 22 Apr 2025 14:11:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id AED0281273;
+	Tue, 22 Apr 2025 14:19:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RY+45zpf";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C70B681273; Tue, 22 Apr 2025 14:11:30 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id F317180FEC
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:11:26 +0200 (CEST)
+ id B09D18144A; Tue, 22 Apr 2025 14:19:55 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AAC75807AE
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:19:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EFAB3152B;
- Tue, 22 Apr 2025 05:11:21 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2289E3F66E;
- Tue, 22 Apr 2025 05:11:25 -0700 (PDT)
-Date: Tue, 22 Apr 2025 13:11:21 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, <u-boot@lists.denx.de>, Yixun
- Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>, Jernej Skrabec
- <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>,
- <linux-sunxi@lists.linux.dev>
-Subject: Re: [PATCH v2 2/3] sunxi: add "fake" FEL pin support
-Message-ID: <20250422131121.7a491909@donnerap.manchester.arm.com>
-In-Reply-To: <e2d354dd-4be6-45b0-b263-7112b9320692@cherry.de>
-References: <20250417000539.3709-1-andre.przywara@arm.com>
- <20250417000539.3709-3-andre.przywara@arm.com>
- <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
- <20250421222939.69832f73@minigeek.lan>
- <e2d354dd-4be6-45b0-b263-7112b9320692@cherry.de>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-39ee5a5bb66so3527821f8f.3
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 05:19:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745324393; x=1745929193; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=2PWihE29HBgSdqraF0MPNcvlthj4A8+ckcsHyc1Yt4o=;
+ b=RY+45zpfDzeFejJ21bCzP4UVNXYarTHeZ7j+mUFGskzj7B1k0qwtfYn8FrTmKpnKBD
+ bDy3R7W1jXI4mhfCk9i6wcg8yvBTF1oS7rAcwtVYmRQ4X0mcn5h2n1o9qttJ7Zn+o92M
+ O/Dx1dLEI8EK9KliNldRBXmzjlTtxs7CeZJRjSavmzeP0DAMerWxHx62ovKpR+6xjoM8
+ EgHifCFxUmNF0vIHdGN5OMoETEGzmZPxVjjqotblWS2Vb1I4jfrTmWedwXp0tRklTk0S
+ eEvUhey5iN1tDz4WhOlnN5fj5+rFmPspIaFBYyV81xTRyfwAV+nJbDqdEOYnZJstSUmJ
+ 2aXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745324393; x=1745929193;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=2PWihE29HBgSdqraF0MPNcvlthj4A8+ckcsHyc1Yt4o=;
+ b=bjfNVIXv1d2i1HV/4QQ62hwq0IFhENkjE7j9KZfOGHChnPdTqwZwVSR/tjQOzyNP5Z
+ y27bHJADmdz4HeO3UWcucEWIHYMDTNl4grR7EUF5li3weauhqLBw2Pn8YCTxPkTCWVEu
+ AmcyCj3yH9ExW7M3LOaw5F5Qpr4PkLom2A/pBFcvofrEYqn+z9WpLa+QhTL+1nsyAqp7
+ tR/+y9oKhtYSAR3kmJsx6G0AlhYf38ZwkeekznW/wFYiQmfKRtjtmL8yRYn4Jlx+MVcB
+ di6F4UpX/lm28dLIEVbU3gKnni+jor7PkspHJHQ+1G6tg7mO/huve/hhc3bUTaMiGVAm
+ ErAA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcSF+jv/9zKunubOe7ZRFJ+F081sx/nJKr96kIB46/+0Gkm35ioBEyyrGjyfw101D2Fi9YZiQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwPmWyw5LnsjfwkwJ8b3mqegWh+/4qg9YaiIYqm+WTafT1PCFzb
+ NDoaXMUExgbYu5jTqLI5cGHz7Tax8yJ6VbSye6gE9r6dX9U7tcvynU9SXct736E=
+X-Gm-Gg: ASbGncvLhclLcR8O2DUpPrHe3iCwjLJiBUQ9fq8Gs8fOim1m9zgTVBt++bf14LFfIba
+ Sr4GVt5iyc12ZVvFsoK2nzqkJkSUyv3w9OubHyJkEe7WzlYNBQj/CEidFNJt0rsZ25qVksreyuR
+ VRbk+yLzQqJZfKMB1zMymP2i8jwAaiN3JNXJ1fUOz7AHqEFABr8mvy6aOABSERmbl7jYkcSKYxO
+ Jn3nmuXQUvAbfNS5XPgWHWCXJWgJlPTBdlb+Jt4lz35SUXuxMn3VcmD4VsH4GJTY7XK1MshKqBC
+ hxkHUgkfKjrGfUo1vYxLxZLBtEpq/lYDIZwWrG5qDLgeXPUAcmBTmy1JIFEIbl0syrwfHySiLHM
+ dKwhjrC9Syba97Hfpw81FualccqII
+X-Google-Smtp-Source: AGHT+IGY17L4djp7m0sCKEbDjRDnc80QI06Y9ziFOAYQXy2fTqD/5LqSwipwSZ2MnvRk60hFZq0lCw==
+X-Received: by 2002:a05:6000:1869:b0:391:952:c728 with SMTP id
+ ffacd0b85a97d-39efba26158mr10249319f8f.4.1745324393059; 
+ Tue, 22 Apr 2025 05:19:53 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:b137:7670:8eb9:746f?
+ ([2a01:e0a:3d9:2080:b137:7670:8eb9:746f])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39efa4207basm14877774f8f.5.2025.04.22.05.19.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Apr 2025 05:19:52 -0700 (PDT)
+Message-ID: <85c92d67-2a95-463c-a6a8-fc943ea7dbf9@linaro.org>
+Date: Tue, 22 Apr 2025 14:19:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 0/6] clk: qcom: apq8016: Clock fixes for U-Boot v2025.07
+To: Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Sam Day <me@samcday.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -58,159 +127,35 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 22 Apr 2025 12:49:40 +0200
-Quentin Schulz <quentin.schulz@cherry.de> wrote:
-
-Hi,
-
-> Hi Andre and Yixun Lan,
+On 22/04/2025 12:54, Stephan Gerhold wrote:
+> Fix some issues in the clock-apq8016 driver that I noticed while testing
+> U-Boot v2025.07-rc on the DragonBoard 410c. Make it possible to poll the
+> clock status with GATE_CLK() to avoid potential race conditions.
 > 
-> On 4/21/25 11:29 PM, Andre Przywara wrote:
-> > On Fri, 18 Apr 2025 13:28:23 +0200
-> > Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > 
-> > Hi Quentin,
-> > 
-> > thanks for having a look!
-> >   
-> >> Hi Andre,
-> >>
-> >> On 4/17/25 2:05 AM, Andre Przywara wrote:  
-> >>> Some boards with Allwinner SoCs feature a "FEL" key, sometimes also
-> >>> labelled "uboot", which triggers the BootROM FEL mode, when pressed upon
-> >>> power-on or reset. This allows to access the SoC's memory via USB OTG,
-> >>> and to upload and execute code. There is a tool to upload our U-Boot image
-> >>> and immediately boot it, when the SoC is in FEL mode.
-> >>>
-> >>> To mimic this convenient behaviour on boards without such a dedicated key,
-> >>> we can query a GPIO pin very early in the SPL boot, then trigger the
-> >>> BootROM FEL routine.  There has not been much of a SoC or board setup at
-> >>> this point, so we enter the BROM in a rather pristine state still. On
-> >>> 64-bit SoCs the required AArch32 reset guarantees a clean CPU state anyway.
-> >>>
-> >>> Any GPIO can be used for that, the signal is expected to be active low,
-> >>> consequently we enable the pull-up resistors for that pin. A board (or a
-> >>> user) is expected to specify the GPIO name using the
-> >>> CONFIG_SUNXI_FAKE_FEL_PIN Kconfig variable. When this variable is not set,
-> >>> the compiler will optimise away the call.
-> >>>
-> >>> Call the code first thing in board_init_f(), which is the first sunxi
-> >>> specific C routine.
-> >>>
-> >>> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> >>> ---
-> >>>    arch/arm/mach-sunxi/Kconfig | 10 ++++++++++
-> >>>    arch/arm/mach-sunxi/board.c | 31 +++++++++++++++++++++++++++++++
-> >>>    2 files changed, 41 insertions(+)
-> >>>
-> >>> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> >>> index ab432390d3c..f1cfdb548bc 100644
-> >>> --- a/arch/arm/mach-sunxi/Kconfig
-> >>> +++ b/arch/arm/mach-sunxi/Kconfig
-> >>> @@ -825,6 +825,16 @@ config USB3_VBUS_PIN
-> >>>    	---help---
-> >>>    	See USB1_VBUS_PIN help text.
-> >>>    
-> >>> +config SUNXI_FAKE_FEL_PIN
-> >>> +	string "fake FEL GPIO pin"
-> >>> +	default ""
-> >>> +	---help---
-> >>> +	Define a GPIO that shall force entering FEL mode when a button
-> >>> +	connected to this pin is pressed at boot time. This must be an
-> >>> +	active low signal, the internal pull-up resistors are activated.
-> >>> +	This takes a string in the format understood by sunxi_name_to_gpio,
-> >>> +	e.g. PH1 for pin 1 of port H.
-> >>> +  
-> >>
-> >> Why not use the DT for that? Then you wouldn't even need to assume the
-> >> polarity of the signal or whether pull-up/downs need to be activated, etc.  
-> > 
-> > As Yixun Lan already pointed out, the DT is not available at this
-> > point, and doing several pull-ups to get this information from the DT
-> > into the SPL image are really over the top for this purpose.  
+> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+> ---
+> Stephan Gerhold (6):
+>        clk: qcom: apq8016: Fix SDCC clock addresses
+>        clk: qcom: Move qcom_gate_clk_en() to C file
+>        clk: qcom: Use setbits_le32() for qcom_gate_clk_en()
+>        clk: qcom: Allow polling for clock status in qcom_gate_clk_en()
+>        clk: qcom: apq8016: Convert GATE_CLK() to BRANCH_CLK()
+>        clk: qcom: apq8016: Fix SDCC clock warnings
 > 
-> OK, we do have something "similar" for Rockchip boards, via the 
-> sysreset-gpio DT property in /config, see 
-> arch/arm/mach-rockchip/rk3399/rk3399.c and 
-> arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi.
+>   drivers/clk/qcom/clock-apq8016.c | 17 ++++++++---------
+>   drivers/clk/qcom/clock-qcom.c    | 27 +++++++++++++++++++++++++++
+>   drivers/clk/qcom/clock-qcom.h    | 22 ++++++----------------
+>   3 files changed, 41 insertions(+), 25 deletions(-)
+> ---
+> base-commit: cde0050618968aae335dfbc930641656d51ff5d0
+> change-id: 20250419-apq8016-clock-fixes2-66ace5b26ab4
 > 
-> I guess something similar could be implemented IFF there's an actual DT 
-> in SPL (or even TPL). We for sure have DT in SPL for most if not all 
-> Rockchip devices, and probably in TPL as well. Hence why I sometimes 
-> forget other Arm boards may not have DT in those stages :)
+> Best regards,
 
-Yeah, I know, there is some push for DT anywhere, but it would be quite
-some pain for sunxi, for very little benefit. We are very tight in the SPL
-code size for some SoCs, up to the point where for instance enabling this
-code here made the build break on some SoCs (I found something to free
-some code space elsewhere, might send that later). So pulling libfdt and
-DM code in would require going TPL, I guess. But I don't see the reason,
-really, as I tend to see the SPL more as the continuation of the BootROM,
-which manages without board specific knowledge at all. And for the small
-bits of info we need, we can happily use Kconfig. Most of it is actually
-SoC specific, not board specific, so users don't get bothered normally,
-and it just works (TM).
-There is tons of work and cleanup to do on the sunxi side, and were
-already have quite some backlog, so I want to avoid introducing more
-construction sites.
-
-> > This is more a sweet hacker device: I often have devices with eMMC and
-> > SPI flash, but without a FEL button. So the idea was to just pick a
-> > GPIO and use menuconfig to set it. Then I could just connect this pin
-> > to GND during boot, to get into FEL and test-boot firmware. "Connect to
-> > GND" could really be a jumper or even the tip of a screwdriver ;-)
-> > So I don't think this qualifies to being defined in the DT, really.
-> >   
-> 
-> If I understood correctly, this GPIO is essentially not fixed, you just 
-> pick a random one that you like and have access to and it may differ 
-> depending on the user I guess?
-
-Depends, for some boards which have this button (X96 Mate) it's more
-obvious, but yeah, I wanted to keep this hackable, so DT wouldn't be a
-good place anyway.
-
-> Then yeah, I understand.
-> 
-> Can you please specify this in the commit log and also why we are not 
-> going the DT route (if I read correctly, in addition to it not being 
-> suitable for DT due to the ability to the function being available on 
-> any unused GPIO, there's also no DT available in the stage when this 
-> needs to be done?).
-
-Sure, will do.
-
-> >> You can have the property in the -u-boot.dtsi then if you want?
-> >>
-> >> While the FEL button on the X96 is "fake", it does what it says, just in
-> >> software, maybe that is close enough to "hardware definition" which
-> >> would make it suitable for the DT (well, we also store binman nodes in  
-> > 
-> > Yes, I have a patch to add this particular button as a GPIO button into
-> > the DT, so people can use it for whatever they want in Linux (trigger
-> > reboot, update, you name it). But this is rather orthogonal to this
-> > problem, as mentioned above.
-> >   
-> 
-> Mmmmm but this will be in the Linux kernel DT and I assume you want the 
-> same GPIO to be used in U-Boot and in Linux, so it would probably be 
-> best to make sure they stay in sync? How are you planning to do that?
-
-On the Allwinner side we were syncing the DTs regularly for years already,
-and had no conflicting or different bindings at all. So I prefer to think
-of "the DT", with Linux or U-Boot just carrying slightly different
-versions for some time.
-
-Some SoCs (and all upcoming ones) use OF_UPSTREAM now, but I cannot roll
-this out to everyone, because there was one compatibility break in the DT
-in the past, and I want to keep support for older kernels with the U-Boot
-copy of the DT, so that the Debian Bullseye kernel on an installer USB
-drive would still work, for instance.
-
-Cheers,
-Andre
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
