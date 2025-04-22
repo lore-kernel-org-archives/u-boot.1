@@ -4,43 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27FBFC369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:07:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C6AC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:19:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40FFA80FEC;
-	Tue, 22 Apr 2025 12:07:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id AD3DF80FEC;
+	Tue, 22 Apr 2025 12:19:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 358F9810E8; Tue, 22 Apr 2025 12:07:39 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 413FB80C93
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:07:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.35] (unknown [98.97.24.15]) (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 901A5B4C0EF1;
- Tue, 22 Apr 2025 12:07:35 +0200 (CEST)
-Message-ID: <e909b829-e7da-4059-9f65-b83e097929bf@freeshell.de>
-Date: Tue, 22 Apr 2025 03:07:34 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tB3qMMb+";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2EFCB80FF7; Tue, 22 Apr 2025 12:19:17 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 18B7780F9C
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:19:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAJ7FV1191474
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 22 Apr 2025 05:19:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745317147;
+ bh=YM9WPP71Pxbq5Q7DuXQrgSLGY8cMWPEZH0u/8a2Qkh8=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=tB3qMMb+BCwqDYFb6Q3llqh2o1ZEWlW4vtjOCspnXxd0RryqvxmaD9k1bMunelJQD
+ v8MEtWK4hthrdx+b0YX7fLVoITHQ5eS/xJEvQDdjDRWRGMlLPmkhQ9+dPpi+d/An3p
+ JuDq0ukZ1jw2JQDaO79X4qmqzjgOqhu7NoX4lD0I=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAJ7N8001223
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 22 Apr 2025 05:19:07 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
+ Apr 2025 05:19:07 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 22 Apr 2025 05:19:07 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.113])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MAJ5Qk103988;
+ Tue, 22 Apr 2025 05:19:06 -0500
+Date: Tue, 22 Apr 2025 15:49:05 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Hrushikesh Salunke <h-salunke@ti.com>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <j-humphreys@ti.com>, <jm@ti.com>,
+ <sjg@chromium.org>, <s-k6@ti.com>, <n-francis@ti.com>,
+ <rogerq@kernel.org>, <danishanwar@ti.com>, <s-vadapalli@ti.com>,
+ <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH 1/3] pci: pcie_cdns_ti: Include linux/sizes.h header
+Message-ID: <ac71d2a6-5445-46e3-8d46-8ca2431aa3db@ti.com>
+References: <20250416120830.138965-1-h-salunke@ti.com>
+ <20250416120830.138965-2-h-salunke@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] board: starfive: visionfive2: Drop setting of
- $fdtfile
-To: Tom Rini <trini@konsulko.com>, Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-References: <20250422064541.635210-1-e@freeshell.de>
- <20250422064541.635210-3-e@freeshell.de>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20250422064541.635210-3-e@freeshell.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250416120830.138965-2-h-salunke@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,111 +83,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Oops should have compiled before sending.
-
-On 4/21/25 23:45, E Shattow wrote:
-> Remove board detection logic from main payload that is duplicated from SPL
-> and do not set convenience data into $fdtfile environment variable. U-Boot
-> "starfive visionfive2" board target(s) now boot on recent upstream Linux
-> Kernel releases without this manipulation since the JH7110 OF_UPSTREAM
-> migration. Changes to $fdtfile by users (i.e. following newer or older Linux
-> Kernel releases) should follow the advice in general U-Boot documentation.
+On Wed, Apr 16, 2025 at 05:38:28PM +0530, Hrushikesh Salunke wrote:
+> Driver uses macro SZ_4G to configure inbound base address register.
+> The macro is used without including the header file in which it is
+> defined. Fix this.
 > 
-> Signed-off-by: E Shattow <e@freeshell.de>
+> Fixes: 59ad5480098 ("pci: Add TI K3 Cadence PCIe Controller")
+> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+
+Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+
 > ---
->  .../visionfive2/starfive_visionfive2.c        | 61 -------------------
->  1 file changed, 61 deletions(-)
+>  drivers/pci/pcie_cdns_ti.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
-> index b8cd509bc89..039a32f1874 100644
-> --- a/board/starfive/visionfive2/starfive_visionfive2.c
-> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
-> @@ -17,14 +17,6 @@
->  DECLARE_GLOBAL_DATA_PTR;
->  #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
->  #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
-> -#define FDTFILE_MILK_V_MARS \
-> -	"starfive/jh7110-milkv-mars.dtb"
-> -#define FDTFILE_VISIONFIVE2_1_2A \
-> -	"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
-> -#define FDTFILE_VISIONFIVE2_1_3B \
-> -	"starfive/jh7110-starfive-visionfive-2-v1.3b.dtb"
-> -#define FDTFILE_PINE64_STAR64 \
-> -	"starfive/jh7110-pine64-star64.dtb"
->  
->  /* enable U74-mc hart1~hart4 prefetcher */
->  static void enable_prefetcher(void)
-> @@ -45,51 +37,6 @@ static void enable_prefetcher(void)
->  	}
->  }
->  
-> -/**
-> - * set_fdtfile() - set the $fdtfile variable based on the board revision
-> - */
-> -static void set_fdtfile(void)
-> -{
-> -	u8 version;
-> -	const char *fdtfile;
-> -	const char *product_id;
-> -
-> -	fdtfile = env_get("fdtfile");
-> -	if (fdtfile)
-> -		return;
-> -
-> -	product_id = get_product_id_from_eeprom();
-> -	if (!product_id) {
-> -		log_err("Can't read EEPROM\n");
-> -		return;
-> -	}
-> -	if (!strncmp(product_id, "MARS", 4)) {
-> -		fdtfile = FDTFILE_MILK_V_MARS;
-> -	} else if (!strncmp(product_id, "VF7110", 6)) {
-> -		version = get_pcb_revision_from_eeprom();
-> -
-> -		switch (version) {
-> -		case 'a':
-> -		case 'A':
-> -			fdtfile = FDTFILE_VISIONFIVE2_1_2A;
-> -			break;
-> -
-> -		case 'b':
-> -		case 'B':
-> -		default:
-> -			fdtfile = FDTFILE_VISIONFIVE2_1_3B;
-> -			break;
-> -		}
-> -	} else if (!strncmp(product_id, "STAR64", 6)) {
-> -		fdtfile = FDTFILE_PINE64_STAR64;
-> -	} else {
-> -		log_err("Unknown product\n");
-> -		return;
-> -	}
-> -
-> -	env_set("fdtfile", fdtfile);
-> -}
-> -
->  int board_init(void)
->  {
->  	enable_caches();
-> @@ -98,14 +45,6 @@ int board_init(void)
->  	return 0;
->  }
->  
+> diff --git a/drivers/pci/pcie_cdns_ti.c b/drivers/pci/pcie_cdns_ti.c
+> index 41469a186a3..e5bcc6eb53e 100644
+> --- a/drivers/pci/pcie_cdns_ti.c
+> +++ b/drivers/pci/pcie_cdns_ti.c
+> @@ -19,6 +19,7 @@
+>  #include <linux/io.h>
+>  #include <linux/ioport.h>
+>  #include <linux/log2.h>
+> +#include <linux/sizes.h>
+>  #include <power-domain.h>
+>  #include <regmap.h>
+>  #include <syscon.h>
 
-> -int board_late_init(void)
-> -{
-> -	if (CONFIG_IS_ENABLED(ID_EEPROM))
-> -		set_fdtfile();
-> -
-> -	return 0;
-> -}
-> -
-
-
-Need to keep board_late_init() or compile fails. Will fix in v2.
-
->  int board_fdt_blob_setup(void **fdtp)
->  {
->  	if (gd->arch.firmware_fdt_addr) {
-
--E
+Regards,
+Siddharth.
