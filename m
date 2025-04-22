@@ -4,99 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F4B5C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 20:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F287CC369D7
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 21:08:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31BA880FDA;
-	Tue, 22 Apr 2025 22:20:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B4F9810EB;
+	Tue, 22 Apr 2025 23:08:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SqlBQywX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aDYdcZHx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BAD780FEC; Tue, 22 Apr 2025 22:20:32 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0213C810F4; Tue, 22 Apr 2025 23:08:21 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19C8A80FA8
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 22:20:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D99E80EE5
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 23:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 105D541A21
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 20:20:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745353229;
- bh=OL4igv2JELLUjDSiJy4zfoJIHnFTA+ZPVvk4w5eZ+/M=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=SqlBQywXt+zV+BhF42R9d6IepM7vwyIv7Qb2ozaYbWcNZItd4HbUETZs1U635XNNs
- dLiXIe/TWUzN8jrp0gTAqO7TyPI7XzhB7ZcAAwKb2qzdZggPhcomFrgID9cRRkKVg8
- voQ1uFEhFZVyOYbhuYW/0w1/RnvtU7dyCOG0lbEl6RuccOF2ucd0YPMYqMN3IATlCc
- V6s81TO93+PMNZHSEQyCfhaVqx+gh8JXU7iDnjRsTvY2bLkp3BittRPBHLKBAqKmAT
- TOqnA5GfKvWz/oeCP7gFpnxAcYBNSqBx5WAijEP42LVfkqS2JeGca+QGf2uk6HZ+r8
- LOREA9IaUjgnA==
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-acb8f9f58ebso242734866b.2
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 13:20:29 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-72c47631b4cso3597633a34.1
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:08:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1745356097; x=1745960897; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zrzZIQRdYAew5a/eFYjurkDn5XgsbXo8//2amEZIJxY=;
+ b=aDYdcZHxk1SOBeQrliiNrhBxVGUuFmv/vRP1mBmggwimqhF0xnX3BBGGvj5dIKR10Z
+ DCCo3X5ik4vZ/J5RBXmX9g2sIwBQIuq7vEHAkk/Si+DSQwSj+mK0FJzvAw15U9jIl6iS
+ b/WUB3d5oMUM+kMlCKHchkrsYTW2UccNUL4GA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745353228; x=1745958028;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OL4igv2JELLUjDSiJy4zfoJIHnFTA+ZPVvk4w5eZ+/M=;
- b=oj5m2hN3AFsk83PULB+tb/kzoXlT9vR2G6z6XdsO0ih2c6KPZyPD+af/BkVf9V1nV+
- shHCRNa4IgQrOuuFYGDaotphUD50ZhFbCWrq2Pv7PpNRdv/9+4vYiXpNOsoYViQUYsD6
- TjfcaM/1MA/jcQ3tyKUCVFWw/6No1qwJy9AFkCcMvU0wjMXezaXSk6fHo9ZJjhhADGR9
- KfU9N/4v8fp+HdLiMOtDrroW3ehTT4VHxcaxYA/pHZ+rFzc+dUsVQi44gzJzSh0veq+X
- 8qqCWlq39ciFciqXryw6Zd/kCH/n2dt1yfI/pCfXyFVQEUeJaYrPDYts68+SCGMezxeM
- rmBA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0a82m5Tvt0DU8F+pe/lMZi0/NiU481bLHDuSm23B+844gNg/4/yHQBGX0LllK0tcm2J3L6jU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwN4vJapJJOcHE+iyekiazMg+nU4Jm6ycvnxbyi7gH7trjrLQ88
- bglwyXRomjje5HYAz2Njb1UgsJh32SEnO9NK4nKPY+sLrPm0VngJBu9FxXS91SXtdGB0MIhqajx
- FaOoaL0ZVAsODg3hAjVKEoZYQN6ZbRKapduKTONWv008da3B7e6kvobKBdwvaEbhXpbI=
-X-Gm-Gg: ASbGncsT1aoy+RZc8pvH6LM5ko6I9xdaluDshHPvNQn8NQN2F/IWczSyGsVhQUKr5sX
- FzHLJysI0F9ESTY9fQbmIdhG29j9ZbI8jjegck2T87qgiLLyjubg9PcUGH5JwljCO7tstsokAtE
- s8uP/W0d5lJraTiV+XlSxDkH6t/VEC9tJA4jZPGb4IczlMPoAxtMXNjEW6t46uw93iuwdycMS89
- OSdIiF3ViWqoMUIU1IpSr34fvjUynjvlxuEZmYdkxUELgCDPZF9N6+23fayOuPXP533Lbb5ZZ03
- fjXfM46rh58oHk1f5qH+iAvHlkIFyKSUCJW6lRhU9Ba0ROd0NIkwT5vjsz7lKBrcxiAAoQ92R1Z
- /OA==
-X-Received: by 2002:a17:907:2d8a:b0:acb:32c5:43ff with SMTP id
- a640c23a62f3a-acb74744a0amr1653324466b.0.1745353228629; 
- Tue, 22 Apr 2025 13:20:28 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHQtty+MsTjGfKSRMqKbsh/ZpqJjaDIF91NuDl9f39Qr6KU9hu6ZjpFUAin1GJlRJMBkheNHg==
-X-Received: by 2002:a17:907:2d8a:b0:acb:32c5:43ff with SMTP id
- a640c23a62f3a-acb74744a0amr1653323266b.0.1745353228220; 
- Tue, 22 Apr 2025 13:20:28 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:69cf:9f40:eca1:e402:dddd?
- ([2a02:3035:6e0:69cf:9f40:eca1:e402:dddd])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acb905183a0sm529967666b.110.2025.04.22.13.20.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Apr 2025 13:20:27 -0700 (PDT)
-Message-ID: <92ab7635-a6c8-4553-89b0-8eeeccec9eeb@canonical.com>
-Date: Tue, 22 Apr 2025 22:20:25 +0200
+ d=1e100.net; s=20230601; t=1745356097; x=1745960897;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zrzZIQRdYAew5a/eFYjurkDn5XgsbXo8//2amEZIJxY=;
+ b=Nv2/qYxCfR/DjErxlZ1PkWlhbCr8XMiEC2qHm5sYNh4qwtJty3c5k/WVRspbs82WXd
+ MpAYT76F3P172m5+PIF1sJFYLh9UQf/GvTTCppPuT5xiPF6RGB8TfualsfDmGJuZuTbY
+ CJEAiEn/lcrvli0SxdNtrE2KbQdqqNMOUSAOKIPpp7LRPtr9U5i6zSTMGdQmu8pdbtID
+ gMqOZOu6w1zADNJx1NS5l1WZY+SmBEmLBbi5lsME4F15Pgb1xXqNffVGIO0iKEVnJOYM
+ SYvFRNaixujKCo3kKMCu04wFtGFyFLXoStjs7XogQVLC18tyqKRu65y7Vtz3cfMSpSUa
+ zMRw==
+X-Gm-Message-State: AOJu0Yx+ykGVt2OWgl91QDJhwIRHpjS3lftiwd8/fihqpqQPhPiLc8fx
+ mo1pKnnnm/hF5G0TO8xp1g7imXjNu/wI4lQ07S2Nr8MrI3X3xWSpOlqN/7cUoWg=
+X-Gm-Gg: ASbGncuZwFm8a9yBHI1idWLE8Z6/EndSu5mCuxG6psCGD7rf4h9Ei2C00Ek7DcNIw93
+ tLtaT1UqpYs5OofJ62egYkMplZe+dsrViYyut8crJAoAc2S8SLpxbWQ0ZUrcHSkbFg4yIg9Drcb
+ wrKbR8K237MANXifxjBOgU7n3eR6Odiqp9qYND32YD3ioQMT0ATNqqN/CuplEMh18SnFy5+K3Ir
+ rJCG9HWiyrYR/NGoqlSk3KkaIdcdU9ZaVRpqUzFGJMsB+NkNElVUX395I4VmB/Npy5ydzeWL3oF
+ pTGV9WKGPPhauscn5eNe9UWpFg7Z48iEk37lRRRwQp3TLQQ000LdbqSe2sBzRs7F7ZUQuPYkJbq
+ E
+X-Google-Smtp-Source: AGHT+IFKPy7p0tsAqAyoGLXJxN2upSOM8goNWhXKoX0PC1bbXzP5KnMbUhnOKoxsk7uvezO8hudgBA==
+X-Received: by 2002:a05:6830:2aa0:b0:72c:320b:f0ed with SMTP id
+ 46e09a7af769-73006334126mr10919099a34.27.1745356097295; 
+ Tue, 22 Apr 2025 14:08:17 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7300488495asm2128388a34.43.2025.04.22.14.08.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Apr 2025 14:08:16 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot mailing list <u-boot@lists.denx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+In-Reply-To: <20250416135744.1995084-1-jerome.forissier@linaro.org>
+References: <20250416135744.1995084-1-jerome.forissier@linaro.org>
+Subject: Re: [PATCH v1 0/2] Enable UNIT_TEST for all qemu* generic targets
+Message-Id: <174535609616.3811396.12664828006695851450.b4-ty@konsulko.com>
+Date: Tue, 22 Apr 2025 15:08:16 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] configs: add UNIT_TESTS to big-endian Malta boards
-To: Paul Burton <paul.burton@mips.com>, Paul Burton <paulburton@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20250422185510.11561-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250422185510.11561-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,41 +101,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/22/25 20:55, Heinrich Schuchardt wrote:
-> We currently only run the unit tests on low-endian boards.
-> We should run them on big-endian, too.
+On Wed, 16 Apr 2025 15:57:29 +0200, Jerome Forissier wrote:
+
+> Enable CONFIG_UNIT_TEST in most of the configs/qemu*_defconfig files
+> to increase test coverage in CI, and fix what needs to be fixed.
 > 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-Cc: Paul Burton <paulburton@kernel.org>
-
-It seems U-Boot lacks a .mailmap entry.
-
-Best regards
-
-Heinrich
-
-> ---
->   configs/malta64_defconfig | 1 +
->   configs/malta_defconfig   | 1 +
->   2 files changed, 2 insertions(+)
 > 
-> diff --git a/configs/malta64_defconfig b/configs/malta64_defconfig
-> index ec5df0b5a7a..d1211b07f8a 100644
-> --- a/configs/malta64_defconfig
-> +++ b/configs/malta64_defconfig
-> @@ -46,3 +46,4 @@ CONFIG_PCI_MSC01=y
->   CONFIG_RTC_MC146818=y
->   CONFIG_SYS_NS16550=y
->   CONFIG_SYS_NS16550_PORT_MAPPED=y
-> +CONFIG_UNIT_TEST=y
-> diff --git a/configs/malta_defconfig b/configs/malta_defconfig
-> index ca017c4865d..dfa37d1ddd9 100644
-> --- a/configs/malta_defconfig
-> +++ b/configs/malta_defconfig
-> @@ -45,3 +45,4 @@ CONFIG_PCI_MSC01=y
->   CONFIG_RTC_MC146818=y
->   CONFIG_SYS_NS16550=y
->   CONFIG_SYS_NS16550_PORT_MAPPED=y
-> +CONFIG_UNIT_TEST=y
+> Jerome Forissier (2):
+>   test: run some test commands only if HUSH_PARSER is enabled
+>   configs: enable CONFIG_UNIT_TEST for all qemu* generic targets
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+[1/2] test: run some test commands only if HUSH_PARSER is enabled
+      commit: 83fc6005cdaf703ff26d635d72bcccf2081ad5d8
+[2/2] configs: enable CONFIG_UNIT_TEST for all qemu* generic targets
+      commit: 753b7219c23191cb2a6468cd1acbfaeccf1380a2
+-- 
+Tom
+
 
