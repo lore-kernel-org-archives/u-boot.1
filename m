@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689B1C369D1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB4EEC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:55:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09F2182054;
-	Tue, 22 Apr 2025 12:54:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E5DC812BC;
+	Tue, 22 Apr 2025 12:54:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ux6fs9HH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IiuthVap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12D8A817C4; Tue, 22 Apr 2025 12:54:42 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id EC4B381F54; Tue, 22 Apr 2025 12:54:42 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 157EA812BC
+ by phobos.denx.de (Postfix) with ESMTPS id EEFFA81E1F
  for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:54:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5f3f04b5dbcso6941867a12.1
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5f6214f189bso7882398a12.2
  for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 03:54:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745319279; x=1745924079; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1745319280; x=1745924080; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=S3cuc1N4YFsXf4X4TFbGvQl95S/zc1vp4BUoPJMKJ9o=;
- b=ux6fs9HHr3fAiFTDd4OH/RQ0Iv6hyMjUWp5LlPQqIzhq9LqQ8ndGWZgEfb0Moy5E2p
- I05pkAJ1AOpqE96fXRZbsptPj+P9GvPDuaEJ0dDoMIJfC6XI8ZFm5jUAD4xTVX+ILIjk
- 9EEA+mXozTk+ZghouMAcVpsM54MOWyhAJZpjuck5Agx0bv74t2ic2DnStZAKuNYLzYsO
- kxQ0XxvTRzWqaaV56YQdAFeltqaNRPAbJpglOB2/Y7CglEgRqjDUA/CgSLJRTysuYAND
- C6zTQz9pjDybY+yHTwE8vIqkauquxehYhrFEJYWvSDpIC9wt8Y37NMxadwPkOuYfr0hA
- jNJA==
+ :reply-to; bh=7lQLZNK2st2obVKa6WmWatHhBUzlo8OEXZ30099aP9A=;
+ b=IiuthVapZCi4P3QAMRMthCp13cUCTX3RwTYUL0Ql8GYzJIGTLS9O+K7J6g7HdtRsQm
+ +vxloRmiqa1YJyf6mN5HCLrsPAtXrDgnLhbI8i09x0bMXgo9wCsI4ECikbzkyC2IONnj
+ HCRJvUjBQDCSJqp2tPRu4LpHMP2T9Mewl1X42j5k5KYbd9cpL1L1bj1wKQI0GMYo4zpo
+ LVrl0EhGPLyUIaeq9fbJEEPuSwRrW02FWGxfM3WJ4rCOT5H8q217aGc4FZb7cKG4V114
+ J0LMrtJZs7hSvZXCXTHmmYeRPcW/IcotDnBvC+troF+7niRqfoQKg2N616680VqmBrRK
+ njEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745319279; x=1745924079;
+ d=1e100.net; s=20230601; t=1745319280; x=1745924080;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=S3cuc1N4YFsXf4X4TFbGvQl95S/zc1vp4BUoPJMKJ9o=;
- b=Oe9omTW0HWvS1CjDWLgk/F9ucxSlSv3Mr+S/GRWg3TCCsyKiJSdhLWWfhndImNAiyT
- sEsR1UqKhx/LEGDbO/WYkhU6l2R7RdHSPPiGc8+8M3AIFlcagqiCBMITCQka8LQr2cvg
- JmOdIWX7p78baNa4YJ8c6EU0uC1kwT9TAFe7ofSLyC80hWAhqgj8PL2ee5inRvb3W7/i
- LOPNyqzQOrvsLM4NBututpbhdpe/gLn9JbObtVkYyteemCU+6m9oPyaWUteBsLjwaaTY
- KvwiUa8cnvwwsfrmkQ0hl8xxiYeCFsEwnnIkQ9tqF5WDXQqYIa+WYBQ2+4FVvqRcTMTV
- ZwQQ==
+ bh=7lQLZNK2st2obVKa6WmWatHhBUzlo8OEXZ30099aP9A=;
+ b=kl7rSwk2YRZmlrhWt9kYaT7Ye9CiBRc7e3LY+QC0QiOu8s92eyKMzGsK7Ra0QAuWPX
+ 49Wm0pyL9nysgCmuPVu/Pxj9IAF8DcukxhoWyJPfRYryXyHsxee2YkQZ2QWDQum+aCXH
+ c7XMYXU2HXBqeESWBgQSfmMJ44GZQKOEOgUYAuo6pKIV5pOg1klvy451X5/ohO7Nppnc
+ bjMtSZbd1jnWGJTd7oosuAifXiKFowTVjZZlSGSQOGkRXXetbV5wH2xPTdsoaD/BcnYg
+ TMOwqF16XRWhNAPQnRx0rhdI2qD+fSxICGP2hUDVj8b66OwJ2OxWpZS3FjCElZApq7E1
+ v2GA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVKNCZLtkqIG3c5FXAgiB5LMOLqOJzkbsb4UJlK1Y5DUj2IyDVgQWws5fsYUvt2HFVufM+V/Y=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6pdrj+/7rcSWYvSlYyiyrVLgdT7eVVbFIDNm6Fp6HHlgCs7uF
- bEK49NcnuX8EDV2A5v+oPlJe1QwR/WjuWtmocHR196gYuLfSxM24Q4AvrNGhags=
-X-Gm-Gg: ASbGncsgJz5O+YDaipOyoNI4+60nFvIiZ1B5gtiblOjL9zcj1okV5ZVZ06ytFMHRjl3
- mS8EPboMcODn839S4dZ+BYwe596PSrDziG1AcVylqcooZFAV7P/3hjH11N/YLX1YM/xmIOnxkDV
- hSJN77Hewqh+f/fox3C0MtBtZzJMl67fGvcEjLr54wDuP4nVQUQN6yMDai8nXNz99fZjXqyhRB2
- vX/8uzUfmypMIZGeiuncE++gdRA9GUkn3EO+fl4FIt99E6rZV96/S+elISQoZsjQB4x2FnI8Ol/
- dCukJJGEuWhbgA3Qkqh7OBzJIU8B3xWngJVKfrfmZY/xVMQfez/K8g==
-X-Google-Smtp-Source: AGHT+IGRnRzndOjirozF7KuuTC9l/0751zI74SNEU/tCjyS2FSFWy3w73NOfAUrH5vQaDszkhglklw==
-X-Received: by 2002:a05:6402:4404:b0:5f3:f04b:b5d7 with SMTP id
- 4fb4d7f45d1cf-5f628578024mr13534162a12.18.1745319279497; 
- Tue, 22 Apr 2025 03:54:39 -0700 (PDT)
+ AJvYcCUDOlYCp9Tg0WWiI2Z+u8ylRtsTFfW4T1akxXpZ/wdT5BHfNalTBB2YX7zhTodPXqo3Vcqe5ew=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWlMOeY/rlzAlcaYE1o39/z8eHhWWml2m1EQ/FyxZsFDRwXnwf
+ WIw4fuLJmLXmS0xRqRNCZG5vjji99rUNR6rC2Ycaim6eblFhctk1YRRFAts639Q=
+X-Gm-Gg: ASbGncv+QEwlTYZvy+5STrmKw67hjOqRyt/E4OLbkIw+bKxWPebMZfl8qFtY8AWK43t
+ TeBD0AkHSsy449ky2dK5BLDqJ7JHetXivF65Ey88gjprHPtFoFfgnbp+dDHUYJb+pntiMeCrgGt
+ z+Mph4gkXzDxjaxSaijQ/DkQPh6XfZoRVE/rNrK4Topbtp5BRQW596ctgURyq0BlbasOJBuNaJv
+ 1F8rkJS+5DcgOub/xEwuaU9Uuh6Wb5mogX9txwz5MVxM9/0J+37uTN7/3080d3h7EUruuc5JH4d
+ hTwiOMkNOE+swdY0LyvXKDRcCKPWwlmA8rE7QatAB/HtI1OPtITxSQ==
+X-Google-Smtp-Source: AGHT+IGd8TXkV/6xRbAj/EGbCzYc4LmNDfhkx+PHbShiRx2lmiSjbEfEWODIgTeMPwWc73A5fO4vSA==
+X-Received: by 2002:a50:fb95:0:b0:5f3:f04b:5663 with SMTP id
+ 4fb4d7f45d1cf-5f6285d3f15mr10251884a12.24.1745319280345; 
+ Tue, 22 Apr 2025 03:54:40 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:d722:61ae:90dc:b4e7])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f62554a1desm5709635a12.8.2025.04.22.03.54.37
+ 4fb4d7f45d1cf-5f62554a1desm5709635a12.8.2025.04.22.03.54.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 03:54:38 -0700 (PDT)
+ Tue, 22 Apr 2025 03:54:39 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Tue, 22 Apr 2025 12:54:08 +0200
-Subject: [PATCH 3/6] clk: qcom: Use setbits_le32() for qcom_gate_clk_en()
+Date: Tue, 22 Apr 2025 12:54:09 +0200
+Subject: [PATCH 4/6] clk: qcom: Allow polling for clock status in
+ qcom_gate_clk_en()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250422-apq8016-clock-fixes2-v1-3-bfc9dd933da6@linaro.org>
+Message-Id: <20250422-apq8016-clock-fixes2-v1-4-bfc9dd933da6@linaro.org>
 References: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
 In-Reply-To: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
 To: Casey Connolly <casey.connolly@linaro.org>
@@ -102,37 +103,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The other clock enable functions in clock-qcom.c use setbits_le32() to
-read/modify/write the enable registers. Use the same for qcom_gate_clk_en()
-to simplify the code a bit.
+GATE_CLK() in its current state is unsafe: A simple write to the clock
+enable register does not guarantee that the clock is immediately running.
+Without polling the clock status, we may issue writes to registers before
+the necessary clocks start running. This doesn't seem to cause issues in
+U-Boot at the moment, but for example removing the CLK_OFF polling in TF-A
+for the SMMU clocks on DB410c reliably triggers an exception during boot.
+
+Make it possible to poll the branch clock status register, by adding a new
+BRANCH_CLK() macro that takes the extra register address. Existing usages
+work just as before, without polling the clock status. Ideally all usages
+should be updated to specify the correct poll address in the future.
 
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
- drivers/clk/qcom/clock-qcom.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ drivers/clk/qcom/clock-qcom.c | 15 +++++++++++++++
+ drivers/clk/qcom/clock-qcom.h |  7 +++++--
+ 2 files changed, 20 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 5018851725b03d1c55c6fc40934bd7bea6344da1..7a259db79342c31dfe85220c68c82197861ccdf6 100644
+index 7a259db79342c31dfe85220c68c82197861ccdf6..6b46d9db744b87538b796bf729d16785bca08545 100644
 --- a/drivers/clk/qcom/clock-qcom.c
 +++ b/drivers/clk/qcom/clock-qcom.c
-@@ -76,16 +76,13 @@ void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk)
- 
- int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
- {
--	u32 val;
- 	if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0) {
- 		log_err("gcc@%#08llx: unknown clock ID %lu!\n",
- 			priv->base, id);
- 		return -ENOENT;
+@@ -83,6 +83,21 @@ int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
  	}
  
--	val = readl(priv->base + priv->data->clks[id].reg);
--	writel(val | priv->data->clks[id].en_val, priv->base + priv->data->clks[id].reg);
--
-+	setbits_le32(priv->base + priv->data->clks[id].reg, priv->data->clks[id].en_val);
+ 	setbits_le32(priv->base + priv->data->clks[id].reg, priv->data->clks[id].en_val);
++	if (priv->data->clks[id].cbcr_reg) {
++		unsigned int count;
++		u32 val;
++
++		for (count = 0; count < 200; count++) {
++			val = readl(priv->base + priv->data->clks[id].cbcr_reg);
++			val &= BRANCH_CHECK_MASK;
++			if (val == BRANCH_ON_VAL || val == BRANCH_NOC_FSM_ON_VAL)
++				break;
++			udelay(1);
++		}
++		if (WARN(count == 200, "WARNING: Clock @ %#lx [%#010x] stuck at off\n",
++			 priv->data->clks[id].cbcr_reg, val))
++			return -EBUSY;
++	}
  	return 0;
  }
  
+diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+index ee0347d9d86716c09e7f57b343f12b5908f8cb92..28145061844255460e8a6868b69ffe9a7dd663b0 100644
+--- a/drivers/clk/qcom/clock-qcom.h
++++ b/drivers/clk/qcom/clock-qcom.h
+@@ -52,13 +52,16 @@ struct freq_tbl {
+ struct gate_clk {
+ 	uintptr_t reg;
+ 	u32 en_val;
++	uintptr_t cbcr_reg;
+ 	const char *name;
+ };
+ 
+ #ifdef DEBUG
+-#define GATE_CLK(clk, reg, val) [clk] = { reg, val, #clk }
++#define GATE_CLK(clk, reg, val) [clk] = { reg, val, 0, #clk }
++#define BRANCH_CLK(clk, en_reg, val, cbcr_reg) [clk] = { en_reg, val, cbcr_reg, #clk }
+ #else
+-#define GATE_CLK(clk, reg, val) [clk] = { reg, val, NULL }
++#define GATE_CLK(clk, reg, val) [clk] = { reg, val, 0, NULL }
++#define BRANCH_CLK(clk, en_reg, val, cbcr_reg) [clk] = { en_reg, val, cbcr_reg, NULL }
+ #endif
+ 
+ struct qcom_reset_map {
 
 -- 
 2.47.2
