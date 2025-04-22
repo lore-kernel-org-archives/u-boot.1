@@ -4,44 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E625C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 09:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD97C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 09:54:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F6158070C;
-	Tue, 22 Apr 2025 11:50:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id C4672810E8;
+	Tue, 22 Apr 2025 11:54:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DE55810F4; Tue, 22 Apr 2025 11:50:12 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4513A805D7
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 11:50:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.35] (unknown [98.97.24.15]) (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 885E5B4C12AF;
- Tue, 22 Apr 2025 11:50:08 +0200 (CEST)
-Message-ID: <ff43d790-6f54-4207-a1e3-18594c64f0b5@freeshell.de>
-Date: Tue, 22 Apr 2025 02:50:06 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XiV7B1h3";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 033578171B; Tue, 22 Apr 2025 11:54:39 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 497B2809A5
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 11:54:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53M9sYm01906125
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 22 Apr 2025 04:54:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745315674;
+ bh=SbFwUyYWlZIqqnDY+yaSH/CSGzoycyjOsq86Sz/Cx5Y=;
+ h=From:To:CC:Subject:Date;
+ b=XiV7B1h3GH8l4G2el5pUGpr2zk6a5/4ipJh7IRBGHZgp7JMfUbeFtlpW+M1uBvtDX
+ 4lRQLwAPgf3DpFZxl+ynTmZbHbd6IKr8ImB84FPEfD1Uvm2+YMIUsaTbfUAIIpKn7J
+ cZHy59x9lnFmlF6AiQE18NXZMqNehrW6S70AKdYY=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53M9sY9S050821
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 22 Apr 2025 04:54:34 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
+ Apr 2025 04:54:34 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 22 Apr 2025 04:54:34 -0500
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53M9sVGT088247;
+ Tue, 22 Apr 2025 04:54:31 -0500
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <trini@konsulko.com>
+CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <jm@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH 0/4] Add support to boot TI K3 HSM M4 core
+Date: Tue, 22 Apr 2025 15:24:26 +0530
+Message-ID: <20250422095430.363792-1-b-padhi@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] board: starfive: visionfive2: Drop setting of
- $fdtfile
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-References: <20250422064541.635210-1-e@freeshell.de>
- <20250422064541.635210-3-e@freeshell.de>
- <7C8FD49C-EDAD-45C5-8800-104D9CAAB372@gmx.de>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <7C8FD49C-EDAD-45C5-8800-104D9CAAB372@gmx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,180 +78,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Some TI K3 SoCs like J721S2, and J784S4 have a HSM (High Security
+Module) M4F core in the Wakeup Voltage Domain which could be used to
+run secure services like Authentication. Boot flow for HSM M4 core is
+different than the general purpose M4F cores, and is as below:
 
-On 4/22/25 00:28, Heinrich Schuchardt wrote:
-> Am 22. April 2025 08:45:26 MESZ schrieb E Shattow <e@freeshell.de>:
->> Remove board detection logic from main payload that is duplicated from SPL
->> and do not set convenience data into $fdtfile environment variable. U-Boot
->> "starfive visionfive2" board target(s) now boot on recent upstream Linux
->> Kernel releases without this manipulation since the JH7110 OF_UPSTREAM
->> migration. Changes to $fdtfile by users (i.e. following newer or older Linux
->> Kernel releases) should follow the advice in general U-Boot documentation.
-> 
+1. Request control of HSM M4F remote processor.
+2. Assert Reset on the HSM M4F remote processor.
+3. Request Secure Entity to Authenticate and Load HSM firmware into
+   core's internal SRAM memory region. For GP device, load the firmware
+   manually into core's SRAM region.
+4. Deassert Reset on the HSM M4F remote processor.
+5. Release control of HSM M4F remote processor.
 
-> We cannot expect that users have a U-Boot installed in SPI flash that matches the Linux they intend to boot.
+This series adds support to boot HSM M4 core from R5 SPL stage. The HSM
+firmware is packed inside the tispl.bin fit image. The firmware is
+unpacked into a temporary DDR address which is then used to load HSM
+core. The configs to boot HSM M4 core are disabled by default.
 
-Yes, but we must. We cannot expect that EFI System Partition will
-contain the correct single dtb compatible for many on-disk versions of
-Linux Kernel that we have no possible way to know which one will be
-booted. This is not any better... we're chasing a problem that is not in
-our domain.
+Test logs after enabling HSM boot configs:
+https://gist.github.com/3V3RYONE/608f16c7c60c27be1343957b4955dc1a
 
-From the downstream userland there's limits to U-Boot EFI variable
-writing (yes, still today? or has this changed) that prevent U-Boot from
-being informed by Linux distro-managed installation about the correct
-device-tree pairings for Linux Kernel boot entries that should be loaded.
+Beleswar Padhi (4):
+  arm: mach-k3: Add config option for booting HSM core
+  arm: dts: k3-binman: Add template for packing HSM firmware
+  arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM firmware inside
+    tispl.bin
+  arm: mach-k3: r5: common: Add support to boot HSM M4 core
 
-If that (EFI variable writing) were usable then we don't have to do
-anything in U-Boot since it's a userland issue of parsing the model and
-figuring this out when updating EFI variables.
+ arch/arm/dts/k3-binman.dtsi        | 11 ++++
+ arch/arm/dts/k3-j721s2-binman.dtsi | 12 +++++
+ arch/arm/dts/k3-j784s4-binman.dtsi | 14 +++++
+ arch/arm/mach-k3/Kconfig           |  8 +++
+ arch/arm/mach-k3/r5/common.c       | 84 +++++++++++++++++++++++++++++-
+ 5 files changed, 128 insertions(+), 1 deletion(-)
 
-In case of non-EFI then we're still doing it wrong and also not
-consistently over U-Boot boards that are OF_UPSTREAM;  there would be a
-mess of `fdt print` parsing to try and implement it as a U-Boot
-script... and I don't know of any userland boot menu updating tools that
-try to parse out the dtb path from Fdt as of yet, at least not for the
-jh7110 targets I am familiar with.
-
-The strategy I like to think of here is to make this generic and
-maintainable. Current approach to copy-paste detection logic duplicated
-from each U-Boot board target SPL to main payload init logic... it
-served some immediate needs to get riscv64 over the starting line with
-Linux distros but it smells weird and should get cleaned out.
-
-> 
-> Linux is known to break device-tree compatibility between versions.
-
-U-Boot releases from before JH7110 OF_UPSTREAM migration would just do
-wrong things because its internal Fdt was not consistent with any
-release version of Linux Kernel. Now since OF_UPSTREAM it is consistent
-with some known release version of upstream Linux Kernel. You can say
-now with certainty that U-Boot release 'x' will work with Linux Kernel
-version 'y' and intermediary boot loader versions (i.e. GRUB).
-
-> 
-> Without U-Boot providing a value of $fdtfile that matches the board, U-Boot will not pick up the device-tree on the ESP of Ubuntu's installer image which matches the kernel version.
-
-Meanwhile, require a certain release version of U-Boot for a given
-release of the (distro) installer, and then (distro) fixes userspace to
-do something more robust. If making EFI variable setting outside of
-U-Boot work properly is not feasible, and you must keep fdtfile var
-setting, then on to your next point that it should be *consistent* and
-general, applying to all OF_UPSTREAM board targets across U-Boot.
-
-> 
-> Please, keep U-Boot providing a value of $fdtfile that matches the actual board.
-> 
-> It would be preferable if that name could be based on the choice of the configuration by SPL instead of duplicating the logic. But I am not aware of logic that provides the configuration name to main U-Boot. Maybe we should simply match the model or conpatible string.
-> 
-
-Yes, Heinrich. For Simon, do you have any thoughts on this? The question
-is broadly: we have this callback at SPL phase that selects for dtb from
-multi fit and how can we bring some information of that outcome (namely
-the dtb pathname) forward to the U-Boot main payload?
-
-Is this to be a new (or existing? fdt print?) scripting command that
-emits such info? An immutable env variable (such that i.e. `env set
-fdtfile ${ofmake}/${ofmodel}.dtb` is valid for pre-boot) ?
-
--E
-
-> Best regards
-> 
-> Heinrich 
-> 
->>
->> Signed-off-by: E Shattow <e@freeshell.de>
->> ---
->> .../visionfive2/starfive_visionfive2.c        | 61 -------------------
->> 1 file changed, 61 deletions(-)
->>
->> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
->> index b8cd509bc89..039a32f1874 100644
->> --- a/board/starfive/visionfive2/starfive_visionfive2.c
->> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
->> @@ -17,14 +17,6 @@
->> DECLARE_GLOBAL_DATA_PTR;
->> #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
->> #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
->> -#define FDTFILE_MILK_V_MARS \
->> -	"starfive/jh7110-milkv-mars.dtb"
->> -#define FDTFILE_VISIONFIVE2_1_2A \
->> -	"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
->> -#define FDTFILE_VISIONFIVE2_1_3B \
->> -	"starfive/jh7110-starfive-visionfive-2-v1.3b.dtb"
->> -#define FDTFILE_PINE64_STAR64 \
->> -	"starfive/jh7110-pine64-star64.dtb"
->>
->> /* enable U74-mc hart1~hart4 prefetcher */
->> static void enable_prefetcher(void)
->> @@ -45,51 +37,6 @@ static void enable_prefetcher(void)
->> 	}
->> }
->>
->> -/**
->> - * set_fdtfile() - set the $fdtfile variable based on the board revision
->> - */
->> -static void set_fdtfile(void)
->> -{
->> -	u8 version;
->> -	const char *fdtfile;
->> -	const char *product_id;
->> -
->> -	fdtfile = env_get("fdtfile");
->> -	if (fdtfile)
->> -		return;
->> -
->> -	product_id = get_product_id_from_eeprom();
->> -	if (!product_id) {
->> -		log_err("Can't read EEPROM\n");
->> -		return;
->> -	}
->> -	if (!strncmp(product_id, "MARS", 4)) {
->> -		fdtfile = FDTFILE_MILK_V_MARS;
->> -	} else if (!strncmp(product_id, "VF7110", 6)) {
->> -		version = get_pcb_revision_from_eeprom();
->> -
->> -		switch (version) {
->> -		case 'a':
->> -		case 'A':
->> -			fdtfile = FDTFILE_VISIONFIVE2_1_2A;
->> -			break;
->> -
->> -		case 'b':
->> -		case 'B':
->> -		default:
->> -			fdtfile = FDTFILE_VISIONFIVE2_1_3B;
->> -			break;
->> -		}
->> -	} else if (!strncmp(product_id, "STAR64", 6)) {
->> -		fdtfile = FDTFILE_PINE64_STAR64;
->> -	} else {
->> -		log_err("Unknown product\n");
->> -		return;
->> -	}
->> -
->> -	env_set("fdtfile", fdtfile);
->> -}
->> -
->> int board_init(void)
->> {
->> 	enable_caches();
->> @@ -98,14 +45,6 @@ int board_init(void)
->> 	return 0;
->> }
->>
->> -int board_late_init(void)
->> -{
->> -	if (CONFIG_IS_ENABLED(ID_EEPROM))
->> -		set_fdtfile();
->> -
->> -	return 0;
->> -}
->> -
->> int board_fdt_blob_setup(void **fdtp)
->> {
->> 	if (gd->arch.firmware_fdt_addr) {
-> 
+-- 
+2.34.1
 
