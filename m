@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E99AAC369CB
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E487BC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:21:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C93F80FEC;
+	by phobos.denx.de (Postfix) with ESMTP id CF5A681E25;
 	Tue, 22 Apr 2025 12:20:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fRGqLtB7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="s2tpolM7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A70281FC0; Tue, 22 Apr 2025 12:20:53 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 4A30581FC0; Tue, 22 Apr 2025 12:20:55 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D0F8819FC
+ by phobos.denx.de (Postfix) with ESMTPS id C049180FEC
  for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:20:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKlao1191641
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKlf41178977
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Tue, 22 Apr 2025 05:20:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1745317247;
- bh=LmSGSApZR5k1+PXyE0+luR4GWB1oWKYfPse8onIfqCc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=fRGqLtB7e5TSlnSdOLowTm/Fu6YgsOC20b7bli2LnuM/TNIYGr8sNysaI+49kl2Hx
- wi5RYqqqNNtR60KCmPrc8JcB/vZhuML9nj2h+BUEQW4MpTBEqMobfi5n4HEi/ksZoH
- Zk4Cb7MzV7iVm31S8eYP02I/czLb1pVmpdbBhIBc=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKlnK097599
+ bh=n/nQKVMOtMmOh5pGPHu8VwASu89QdeVt5M+lj6Fxg74=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=s2tpolM7t4HRc6LhCXko37MlD52dw96bNzvPBzEDRKGiGubog1aV2s31tw+vCpNda
+ v3A1rqEPkS6pveYxRqXxkovLJGCdiO+Q5Nuq/Yc7U0P/nxHYzRrVtIa5GvYUZgiqQQ
+ tH8rUDh4RiwAl5WwnJvyT/UZy3QfcndnS81aMN9A=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKlev002429
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Tue, 22 Apr 2025 05:20:47 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
  Apr 2025 05:20:46 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 22 Apr 2025 05:20:46 -0500
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.113])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MAKjGm118880;
- Tue, 22 Apr 2025 05:20:46 -0500
-Date: Tue, 22 Apr 2025 15:50:45 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Hrushikesh Salunke <h-salunke@ti.com>
-CC: <vigneshr@ti.com>, <trini@konsulko.com>, <j-humphreys@ti.com>, <jm@ti.com>,
- <sjg@chromium.org>, <s-k6@ti.com>, <n-francis@ti.com>,
- <rogerq@kernel.org>, <danishanwar@ti.com>, <s-vadapalli@ti.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH 3/3] configs: am64x_evm_a53_defconfig: Enable configs for
- PCIe support
-Message-ID: <08fff904-fed8-4df0-8785-a0c03d6f4ff6@ti.com>
-References: <20250416120830.138965-1-h-salunke@ti.com>
- <20250416120830.138965-4-h-salunke@ti.com>
+Received: from psdkl-workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
+ [10.24.72.128])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MAKWRw105794;
+ Tue, 22 Apr 2025 05:20:43 -0500
+From: Aniket Limaye <a-limaye@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <hs@denx.de>, <marek.vasut+renesas@mailbox.org>,
+ <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
+ <virag.david003@gmail.com>, <w.egorov@phytec.de>, <j-keerthy@ti.com>,
+ <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>
+Subject: [PATCH v3 3/4] i2c: omap24xx_i2c: support CONFIG for repeated start
+ in DM_I2C xfer
+Date: Tue, 22 Apr 2025 15:49:51 +0530
+Message-ID: <20250422101957.1949448-4-a-limaye@ti.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250422101957.1949448-1-a-limaye@ti.com>
+References: <20250422101957.1949448-1-a-limaye@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250416120830.138965-4-h-salunke@ti.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,50 +84,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 16, 2025 at 05:38:30PM +0530, Hrushikesh Salunke wrote:
-> TI's AM64 SoC has single instance of PCIe Controller namely PCIe0 which
-> is Cadence PCIe Controller. To support PCIe functionality with PCIe0
-> instance in Root-Complex mode enable corresponding configs. Also enable
-> configs to support NVMe over PCIe.
-> 
-> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+Repeated Start Condition (Sr) can be used to transfer multiple i2c msgs
+without sending a Stop condition (P). So far, the driver default was to
+always send a Stop condition after every i2c msg.
 
-Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+Add support for a config option (CONFIG_SYS_I2C_OMAP24XX_REPEATED_START)
+to disable sending the Stop condition by default. If this config is
+enabled, Stop condition will be sent only if explicitly requested in the
+msg flags OR if it is the last msg in the transfer.
 
-> ---
->  configs/am64x_evm_a53_defconfig | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-> index c2ad1242d20..9fc95798ffb 100644
-> --- a/configs/am64x_evm_a53_defconfig
-> +++ b/configs/am64x_evm_a53_defconfig
-> @@ -31,6 +31,7 @@ CONFIG_SPL_FS_FAT=y
->  CONFIG_SPL_LIBDISK_SUPPORT=y
->  CONFIG_SPL_SPI_FLASH_SUPPORT=y
->  CONFIG_SPL_SPI=y
-> +CONFIG_PCI=y
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_SPL_LOAD_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
-> @@ -70,6 +71,7 @@ CONFIG_CMD_DFU=y
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_I2C=y
->  CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
->  CONFIG_CMD_USB=y
->  CONFIG_CMD_USB_MASS_STORAGE=y
->  CONFIG_CMD_EFIDEBUG=y
-> @@ -135,6 +137,9 @@ CONFIG_PHY_TI_DP83869=y
->  CONFIG_PHY_FIXED=y
->  CONFIG_TI_AM65_CPSW_NUSS=y
->  CONFIG_TI_ICSSG_PRUETH=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCI_CONFIG_HOST_BRIDGE=y
-> +CONFIG_PCIE_CDNS_TI=y
->  CONFIG_PHY=y
->  CONFIG_SPL_PHY=y
->  CONFIG_PHY_CADENCE_TORRENT=y
+Consequently, handle the Repeated Start condition (Sr) in the next msg
+by not calling the wait_for_bb() check since it will simply timeout in
+the absence of a stop condition (BB will be 1 until Stop is programmed)
 
-Regards,
-Siddharth.
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+---
+
+v2:
+- fixup code formatting and comment blocks
+- CONFIG_I2C_REPEATED_START -> CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
+- Link to v1: https://lore.kernel.org/u-boot/20250304220546.866602-3-a-limaye@ti.com/
+
+---
+ drivers/i2c/omap24xx_i2c.c | 22 ++++++++++++++++------
+ 1 file changed, 16 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
+index 4afdba02211..a6361d3d17d 100644
+--- a/drivers/i2c/omap24xx_i2c.c
++++ b/drivers/i2c/omap24xx_i2c.c
+@@ -1066,18 +1066,28 @@ static int omap_i2c_xfer(struct udevice *bus, struct i2c_msg *msg, int nmsgs)
+ 	u16 i2c_con_reg = 0;
+ 
+ 	debug("%s: %d messages\n", __func__, nmsgs);
+-	for (; nmsgs > 0; nmsgs--, msg++) {
+-		/* Wait until bus not busy */
+-		if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
+-			return -EREMOTEIO;
++	for (int i = 0; i < nmsgs; i++, msg++) {
++		/*
++		 * If previous msg sent a Stop or if this is the first msg
++		 * Wait until bus not busy
++		 */
++		if ((i2c_con_reg & I2C_CON_STP) || (i == 0))
++			if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
++				return -EREMOTEIO;
+ 
+-		/* Set Controller mode with Start and Stop bit */
+-		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT | I2C_CON_STP;
++		/* Set Controller mode with Start bit */
++		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT;
+ 		/* Set Transmitter/Receiver mode if it is a write/read msg */
+ 		if (msg->flags & I2C_M_RD)
+ 			i2c_con_reg &= ~I2C_CON_TRX;
+ 		else
+ 			i2c_con_reg |= I2C_CON_TRX;
++		/* Send Stop condition (P) by default */
++		if (!IS_ENABLED(CONFIG_SYS_I2C_OMAP24XX_REPEATED_START))
++			i2c_con_reg |= I2C_CON_STP;
++		/* Send Stop if explicitly requested or if this is the last msg */
++		if ((msg->flags & I2C_M_STOP) || (i == nmsgs - 1))
++			i2c_con_reg |= I2C_CON_STP;
+ 
+ 		debug("%s: chip=0x%x, len=0x%x, i2c_con_reg=0x%x\n",
+ 		      __func__, msg->addr, msg->len, i2c_con_reg);
+-- 
+2.49.0
+
