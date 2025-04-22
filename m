@@ -4,103 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A88DC369D6
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 03:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE01FC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 05:11:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8446B8129B;
-	Tue, 22 Apr 2025 05:14:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8D52F810F4;
+	Tue, 22 Apr 2025 07:11:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QSXpRDoj";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="k31qK/7Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3221180F03; Tue, 22 Apr 2025 05:14:02 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 62B3E81273; Tue, 22 Apr 2025 07:11:24 +0200 (CEST)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20621.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:240a::621])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32CCD8056A
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 05:14:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97C78810EB
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 07:11:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1745291634; x=1745896434; i=xypron.glpk@gmx.de;
- bh=oW6jJAVMt+XOHkQ6j3AfURtSf78MH4xWB2CQze30ZZU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=QSXpRDojdtxOjuJFNrks+OYEJ30UwNDY9osvXbOqFAshrxGGd/+KBYg4CjbZNY6l
- Co8X5ubNGefUjAnvyNsbh8aWyDHxW4jJhJhKeH4O4UcSpcBHEw1OFP8S2mWCQp2Lt
- XAsqPBHmSVhQYtaqQs7GtvpvwyTtprxtlLt7alLOYwQbcqT06aHG67NtcsFpbC3lh
- 9JvZ2HSpPeGaK0f5TSLt1i7h9CY0Rb0acLZdzfmLmmEVGT3j3oUkuDmJ5zKHs6jdR
- UGlIc/cyc794Vl2LckxOCcN2zkCKmJxqPe8lJZ1HcI84wLdNUn9KEM/v2j5nBSfgm
- DmsGlxngbn5ukrAWMQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.105.52]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MmDIu-1upEaQ1EYq-00nyBe; Tue, 22
- Apr 2025 05:13:54 +0200
-Message-ID: <17f988b0-787f-469b-8602-e324e0eae8d7@gmx.de>
-Date: Tue, 22 Apr 2025 05:13:52 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LtkDWZeCBaioq0T2eKSOm0dPRdcrtyvCCjljKX2R+igfyQBx+d2Q+sITW4ZTwGQ+EbQflFSSMJCEKQfhWvSkUOpjlB0wJzyuWkmhoNfzPBEjCkNBPJZuIAb8NjluK0IIBEnxdb5JjzHUL/Feq2W9QfP7AC4qhJ2SmuFTUYDJgvUZmd5kU/SEoo7lpE8XUqLPQZNOm8q6BI3LuWWX0Q5q08zJLJCwzSMNHHfJiw3w5GFlnf4cqOVU8Uz8cR/ZtcSfmxQqOk0sHHLaN9STWVBgUpATLkjBNi41vEQAVPjbWBWvhXBi1n4ddEht7FGTb7sCqXcIO7zeshH8nxGPok3g1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xNiuYXNAIIZRWInkwF9XRe1b+81sS4Bx8iSQruCnxxA=;
+ b=tNHSxb/S4hnkN+QLFWMXWanOTk5G0dFNd5zxKi46/OxbZ2/Ig4fXpk6AgT4CaqbERwYyHACZB4/oNBimtnN7H7Za2vt6KxQ3fPWO96Cbyx/h1uookKVqsxWDC6P2MfxE/dxd+ylg46T0/6ebn7KMzj70Gn+XTys1/sVwgiLWqAUVIKSSKOXPCebgHPxzb1j6xST+OsF7hJE7i7fFYqZOdm4KkYKTI6tcl9ptQx+f1uxIGUic3cB2QpnFesoumSFZbDI3elLrpt/y8hNkse+yhmtVFMbdOh5Dm0gxpdBvPdCoSI1TpUUz0aKCQvmqPGdmZ2EWVGbeJWOXjx34pvNksA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xNiuYXNAIIZRWInkwF9XRe1b+81sS4Bx8iSQruCnxxA=;
+ b=k31qK/7Z4aMbEFb9MhTQy57KW/Y6Q9EFLAedtTfs9QZLC6tIW550OFBbzSzgfZ2Qh/0KNdugASk01lLUBHt+eGblXoqccmIw76d+j6r2yqzFzJP2MTIb+OPhGmVrzRTCx2+c1dQ5TDuT6l6zT750qMVKisTqN65Vfm4BtrD8vIfCMlQcgaer68L6zOMVBMVSVeFnQ80PTFJqX0T+Fzvdxkj84QG5Rt8Du6FqifMyP5n3dZQf0/92b8pSBZ3tmrORVs8CGr6WdZ9CH/UIPj3cNecTgXwi/z7a9EeOOG5QoBiUy92Vr+fPAxnSxh5O0hIvhGVfk5NUFJHVydnHWAht4w==
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by BN5PR03MB8078.namprd03.prod.outlook.com (2603:10b6:408:2ac::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.35; Tue, 22 Apr
+ 2025 05:11:16 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5%5]) with mapi id 15.20.8655.033; Tue, 22 Apr 2025
+ 05:11:16 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+To: Tom Rini <trini@konsulko.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Yuslaimi, Alif Zakuan"
+ <alif.zakuan.yuslaimi@altera.com>, "Ravulapalli, Naresh Kumar"
+ <naresh.kumar.ravulapalli@altera.com>, "Meng, Tingting"
+ <tingting.meng@altera.com>, "Hea, Kok Kiang" <kok.kiang.hea@altera.com>
+Subject: Pull request: SoCFPGA changes for u-boot-socfpga-next-20250422
+Thread-Topic: Pull request: SoCFPGA changes for u-boot-socfpga-next-20250422
+Thread-Index: AduzPar8Um1UYP57Sxaq5MD1T3Dydw==
+Date: Tue, 22 Apr 2025 05:11:16 +0000
+Message-ID: <LV8PR03MB81371BBB1BF844425EB2DDC0A7BB2@LV8PR03MB8137.namprd03.prod.outlook.com>
+Accept-Language: en-US
 Content-Language: en-US
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: NET_LWIP breaks common/log_syslog.c
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|BN5PR03MB8078:EE_
+x-ms-office365-filtering-correlation-id: 8acf7017-4a98-4506-1bc3-08dd815c1c02
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|8096899003|13003099007|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?Dpj2aiSNt7V/gCIWJGkQEgC0l8qoJby6jw/m7YAZdInRUjDWiYw+UPIFPM75?=
+ =?us-ascii?Q?l0iQxA6VGSpjGBgaGZ/gNnnrFUyIxN9ktUKKTwe7z1qXbNaFoI7kav2sVpXy?=
+ =?us-ascii?Q?STJL0ouKxVa8LW9NlIsy0enNjfUflS+i5ZuJfhxMcHLVt+3RaRDc23H7Dbvx?=
+ =?us-ascii?Q?8p1dNoiMY2aPlPW69/EaAgQh5PRyqjLjHiIDdgqB6t3spkdaepT97Ds7rpIS?=
+ =?us-ascii?Q?OWoBn/E+53IOhqFvWNcKNyWLh8Kxd+ZwG74Kv7uXQ3MJibRwWvmy3GFGre3P?=
+ =?us-ascii?Q?p6KZN4OL2omh/9fdsWGzgVfUNSYyBFDZj/LKYe8xcvyGGE4kDATWVxu1TYOz?=
+ =?us-ascii?Q?vDmp3ATYTYsZYz953ubFsO/cqRNdEKor5DgFYSuVSVJlrI7NweMeouj43oi4?=
+ =?us-ascii?Q?fku5Ps+loWQM+2+4nYb19w6qOT664gEBKtItLwlmjBFyaU3fpO8Gn7XQW6c0?=
+ =?us-ascii?Q?p/ynhrgn8hPe7rW9yhgJ17uEYzmi9vSNCLpDrtbVllKXNc0LYmrsoz6K7XcJ?=
+ =?us-ascii?Q?NojtbtRyUGXj5jHSsDznMvO17vxQkpyGJUpOhTyAQyBe1y3b1ixw1BYDQvQY?=
+ =?us-ascii?Q?qfgBwRLgEm9ZxDSfZM83+KnwmrtgAzxW5BP82duB/BSW4FJnj397LRKSkpnn?=
+ =?us-ascii?Q?hqN0yaUWiHT36mNZQ2MDNZq91VCaGiGqcJENu9let3i0ULKuDwsmWaUFhUkE?=
+ =?us-ascii?Q?cmllfaQ7beZtrnEj3GTbAGKWQtYMZDPfx5eT4V06X1wx5fu5aZbdHQo8U978?=
+ =?us-ascii?Q?zGTZiwlFAECSN3ERDgF1jo88H4M8VytdSY0p0mwENnKQX/GeKG508aS2eBTJ?=
+ =?us-ascii?Q?gMd488DubeRboxQGWjT8B0O812O/0njRx2ZqWOOiaNHluSovZ7HpRLnAtgkg?=
+ =?us-ascii?Q?aKmZ1Q4ACuq6gOi8GQ1KSx2dnkI43NsjUoSlp58i2W1cD/JSsW6aW8eBiUzf?=
+ =?us-ascii?Q?IcOeGm0QRO/1wFbU3VyOQmkBapq1+g56QHQa3NmMdRzbqxzKGvN9RtacmoZh?=
+ =?us-ascii?Q?Xli77ui+K1+8kRdCcN7jsAnFXk6t/ebpvdWs+DQYkQY2c8mNopfJjE985vd4?=
+ =?us-ascii?Q?hXEMW7ESr2k/JMP0B5raD8A/S5r9kn1DXWgVotNJYcvpOfGs2GexB9JhFRF/?=
+ =?us-ascii?Q?snRZtdnD6Yf5ePUMUQR2QzCkwGWZ2JJybNCVpQ4cB2sw28vej826SnHn6AHZ?=
+ =?us-ascii?Q?vbq+qNKpaUWiIdgezQmUYiw/fDC1ANOknYATiXlAaLqWOkmzHhd8wh/PYTMK?=
+ =?us-ascii?Q?PrOyh3bFy5E8Kgx/BywHu1rtbI8l+OP4NKAFKTmr0oVq2vEY/z8POqIsx0Ts?=
+ =?us-ascii?Q?vFaa+KdhcEiDUHZtPeppUOii8p/YBsjKGdLyRx53ntc36EFr6KpsMr05mtFF?=
+ =?us-ascii?Q?Kmk4JI79QFQlyofI0+0Az+g7UcAwNT7u8PrXSdWHaK3SNpl9ciDm435ilUG/?=
+ =?us-ascii?Q?wmIW7b1S9wg=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(8096899003)(13003099007)(38070700018);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?FLYCmujdFfgmrD1L7QSlnxAWcTFfN8wDyD3xEFaQnNU343pfBMojsR/LmDdx?=
+ =?us-ascii?Q?QfwaRwApcDtHTKHrxVeoYj+dEoztP3zHRkoNH1v6CBl87aeHgYsW/l9HbfBJ?=
+ =?us-ascii?Q?Mngu4M+w8aEtSPluyOFIIm3e8AoyB2mMnxtwnoG2w50BjJMIH9tG50hrGTbh?=
+ =?us-ascii?Q?GGGoOEPp2yXfK2qKkAxGRq1YlzdRgXcb9axQhASfAsWOSSf7tmfH0WX+Fknh?=
+ =?us-ascii?Q?XHWzIisZqUdCMnJrXbJ/uMC79XHb6g9D6tdym9CvmSzPF3SQVWWyC9AUH81X?=
+ =?us-ascii?Q?l8dlXSstLvvNmdq3QcxqD4u7oCMppJV1sEZbrlMrH8akp/OnUrZDsa7y/QBC?=
+ =?us-ascii?Q?ADbWa0yUdAToq8hMHK2rr8Dr1Mcme7k41jz24MCkD0I+uUaZdFieWa+WeMmk?=
+ =?us-ascii?Q?KXwFf9YSNpCTnv7nf0PfthKerTY7xxSrEXC2/tWkogVLc2J0ayyU5lOG3A3J?=
+ =?us-ascii?Q?HID45K/Sl5Cbes4bnXvV3ZxG/rTy082xHs8HpcbRnT0CsfvMjT0wx57FpgpC?=
+ =?us-ascii?Q?LQMYMfTm8AjUmRiqTHDkBbtQrQS52kE9hYOq0+T9ko8lmSUddSJNdDsfjluX?=
+ =?us-ascii?Q?aR7amvSTGSf9V8845dwNFqxpg6m2mdMCOWSYlJXO8dw7ryNcr54g/FyQrv2V?=
+ =?us-ascii?Q?RQ11q6r9O9JY1FU9WKoq4af+iajMmPOvOvl9TMJ4UuC2I3YgvircUZuEQxMA?=
+ =?us-ascii?Q?6caJvQVhV8eaMJ1Zd47srLET2qnsuOT1hExpNs6IdeUQ6lQEimxq1cn9cDT0?=
+ =?us-ascii?Q?288IODQ3h8wVOPwZl92mcmmaJzjv3PaG7cMzo8n0wg2DVwhVhWPPsBu+qVcJ?=
+ =?us-ascii?Q?Le/dgTx82vKTvukqvWB6AqcPv2de/mhbqiuSFWlWxzDdYD3XtzLqhcpfjkwZ?=
+ =?us-ascii?Q?7r4gxqlXvMZmXOsbxrw+syOecUI/XMNq1Bx4W2059QhHJTtiYBQrkv6C3usT?=
+ =?us-ascii?Q?yHKgz4pkzQShQW1EAjbIJbSn7/NVzcJB3xk8uTHEMgtP8xOLZboK9QcxPG5+?=
+ =?us-ascii?Q?ajnUgWIorrsp9BDfLONN7Um0F5wVv0Gjtiuc8b+szZAUbz3gmOqG79PytE5u?=
+ =?us-ascii?Q?/qZK7TtaKGG1PxM4jEpV+hgT1B+eHlsLtoBaWmf/17ZOHAcI2Bc1uCfmNtBL?=
+ =?us-ascii?Q?+Yld7JTw1BpAW9XdDjc/RrEcdEoX1ZrwPFWhsPmjkpCLjxd5PAJrEp4LSYHg?=
+ =?us-ascii?Q?msv1px0Xiko0zV1Sa2Sy19CFNMr0q3U6gVOLpn5cnzSJLW7iBdKRu61y5otH?=
+ =?us-ascii?Q?F1/JpV3NdHOnqiI4OuV6iEjHwJMEq3DKpSguiJMH/zicX2quOTsvQZEFdqH4?=
+ =?us-ascii?Q?nNYTPLxbZCNVsL/QMlqP1DgS8nBs8/GaqqlIU9UfUtIZNme/Z8y9cIKa4n1Y?=
+ =?us-ascii?Q?caTICQi8abvyjG5Vd/J+Hlb5XurtsSQ+NiTiTx4pKX5v6zqL/uKNsMZyuvgj?=
+ =?us-ascii?Q?XxLpjdg5LHdWskESmZtbVf4AU/YmZZzTS96fsdutcTaMrt76FNzEsZubJUvz?=
+ =?us-ascii?Q?Pl7Ev03A3ShqWnAu+LhOnAVU6LHrTs9+pFi/BIHku1STtpBZMyeZ0aE6ZyWi?=
+ =?us-ascii?Q?GPi4gbTDtgqf3+ewWnj/0W7vALX85kOACsWri54A?=
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8acf7017-4a98-4506-1bc3-08dd815c1c02
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Apr 2025 05:11:16.3237 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: c7ugZrnanBWw9xz2LBY04VINYH23cu7NUdgise6R3W2DAmIZtNvdg9hXZVzOZunuJgOrAUePSUCvM6viBUxJ6waJkDPK9ZVsTXvSLKF+lcE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR03MB8078
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:vRUVoN1UPNdTR8u6XkqhIdicDmxVMhgFixUHxZzdhG2kW1m7Fy9
- kMp1Qf2FfxV++RShOpwYHcfjhKiIjE3B51Y6QNey5IVKPP3IdjiZlrGyIYWuJqm5Z5aXvEB
- dYEHa5ClgsDYteeJuR0Vd0Y92Uo6zXCuQrECnMHPCN4H6mlKDl3CKz+wDAAtNolBDzS67CG
- qDfVjpJzYtB+hhzGBv2/A==
-UI-OutboundReport: notjunk:1;M01:P0:fcqTI7kv4u4=;atpRvpGORe93BpmPSwNz4QB/2IK
- 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
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,30 +163,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jerome,
+Dear Tom,
 
-I am trying to compile with CONFIG_LOG_SYSLOG=3Dy and CONFIG_NET_LWIP=3Dy=
-=20
-and get:
+This pull request contains updates for the SoCFPGA platform, targeting the =
+2025.07 release cycle. Highlights include enhancements to Agilex5 support, =
+improvements in DDR error handling, and bridge reset handling for SoC64 dev=
+ices.
 
-common/log_syslog.c: In function =E2=80=98log_syslog_emit=E2=80=99:
-common/log_syslog.c:59:24: error: implicit declaration of function=20
-=E2=80=98net_set_ether=E2=80=99; did you mean =E2=80=98env_set_hex=E2=80=
-=99?=20
-[-Wimplicit-function-declaration]
-    59 |         eth_hdr_size =3D net_set_ether((uchar *)ptr,=20
-net_bcast_ethaddr, PROT_IP);
-       |                        ^~~~~~~~~~~~~
-       |                        env_set_hex
-common/log_syslog.c:102:9: error: implicit declaration of function=20
-=E2=80=98net_set_udp_header=E2=80=99 [-Wimplicit-function-declaration]
-   102 |         net_set_udp_header((uchar *)iphdr, bcast_ip, 514, 514,=20
-ptr - log_msg);
-       |         ^~~~~~~~~~~~~~~~~~
+Key updates:
 
-As these function just prepare packet buffers, should they be moved to=20
-common code used both for the legacy and the new network stack?
+Agilex5 platform enhancements:
 
-Best regards
 
-Heinrich
+  *   New MMU region mappings and memory layout updates using LMB_ARCH_MEM_=
+MAP.
+
+
+  *   Fixes for bloblist configuration, kernel FIT image generation, and VA=
+B flow enablement.
+
+
+  *   GPIO pin control added for SDIO selection.
+
+
+  *   Marvell PHY driver enabled in defconfig.
+
+Agilex5 / SoC64 DDR subsystem:
+
+
+  *   Added ECC debug improvements for IOSSM.
+
+
+  *   Introduced LPDDR inline ECC support.
+
+
+  *   Resolved size calculation overflow in memory driver.
+
+SoC64 improvements:
+
+
+  *   Enhanced mailbox communication with the SDM to reflect various boot s=
+tage transitions.
+
+
+  *   Implemented F2S bridge reset support and updated related reset manage=
+r registers.
+
+
+  *   Expanded SoC64 CPU info reporting.
+
+General maintenance:
+
+
+  *   Additional peripherals released from reset for Arria10.
+
+
+  *   Cleanup of legacy or incorrect Kconfig implications.
+
+
+
+
+This patch set has been tested on Agilex 5 devkit.
+
+
+
+Passing all pipeline tests at SoCFPGA U-boot custodian https://source.denx.=
+de/u-boot/custodians/u-boot-socfpga/-/pipelines/25867<https://source.denx.d=
+e/u-boot/custodians/u-boot-socfpga/-/pipelines/24816> .
+
+Thanks.
+
+Best regards,
+Tien Fong
+
+The following changes since commit cde0050618968aae335dfbc930641656d51ff5d0=
+:
+
+  Merge tag 'u-boot-at91-2025.07-b' of https://source.denx.de/u-boot/custod=
+ians/u-boot-at91 (2025-04-21 08:24:54 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-socfpga.git tags/u-boot-s=
+ocfpga-next-20250422
+
+for you to fetch changes up to 0415429935d7e19595d2997ee08415d0d8052d4d:
+
+  ddr: altera: iossm: Enhance debug information for ECC errors (2025-04-22 =
+11:47:41 +0800)
+
+----------------------------------------------------------------
+Alif Zakuan Yuslaimi (7):
+      arm: socfpga: mailbox: Notify SDM on HPS code execution stages
+      arm: socfpga: soc64: Update reset manager registers for F2S bridge
+      arm: socfpga: soc64: Enable F2S bridge reset support
+      arm: socfpga: spl: Notify SDM on FSBL execution
+      configs: agilex5: Enable Marvell PHY driver
+      arch: arm: dts: agilex5: Set SDIO_SEL GPIO pin as output
+      arm: socfpga: soc64: Update SoC64 CPU info
+
+Naresh Kumar Ravulapalli (4):
+      drivers: ddr: altera: Fix integer overflow during size calculation
+      reset: socfpga: release more A10 peripherals out of reset
+      arch: arm: dts: Enable kernel itb file generation for Agilex5 SoCFPGA
+      configs: Enable VAB flow for Agilex5 SoCFPGA boards
+
+Tingting Meng (6):
+      configs: agilex5: Restore fixed bloblist
+      arm: socfpga: agilex5: Add MMU mapping region
+      arm: socfpga: socfpga_soc64: Enable LMB_ARCH_MEM_MAP
+      arm: dts: agilex5: Update CCU configuration
+      ddr: altera: agilex5: LPDDRs in-line ECC support
+      ddr: altera: iossm: Enhance debug information for ECC errors
+
+Tom Rini (1):
+      ARM: socfpga: Drop incorrect imply SYS_MMCSD_RAW_MODE_U_BOOT_USE_PART=
+ITION*
+
+MAINTAINERS                                              |   1 +
+arch/arm/Kconfig                                         |   3 +-
+arch/arm/dts/socfpga_agilex5-u-boot.dtsi                 |  17 ++++-
+arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi           |  26 ++++---
+arch/arm/dts/socfpga_soc64_fit-u-boot.dtsi               |   5 ++
+arch/arm/mach-socfpga/Makefile                           |   2 +
+arch/arm/mach-socfpga/board.c                            |  13 ++++
+arch/arm/mach-socfpga/include/mach/base_addr_soc64.h     |   1 +
+arch/arm/mach-socfpga/include/mach/mailbox_s10.h         |   4 ++
+arch/arm/mach-socfpga/include/mach/reset_manager_soc64.h |  18 ++++-
+arch/arm/mach-socfpga/mailbox_s10.c                      |  12 ++++
+arch/arm/mach-socfpga/misc_soc64.c                       |   4 +-
+arch/arm/mach-socfpga/mmu-arm64_s10.c                    |  14 ++++
+arch/arm/mach-socfpga/reset_manager_s10.c                | 236 ++++++++++++=
++++++++++++++++++++++++++++++++++++++++----------
+arch/arm/mach-socfpga/spl_agilex.c                       |   6 +-
+arch/arm/mach-socfpga/spl_agilex5.c                      |   6 +-
+arch/arm/mach-socfpga/spl_n5x.c                          |   6 +-
+arch/arm/mach-socfpga/spl_s10.c                          |   6 +-
+configs/socfpga_agilex5_defconfig                        |   6 ++
+configs/socfpga_agilex5_vab_defconfig                    |   3 +
+drivers/ddr/altera/iossm_mailbox.c                       | 225 ++++++++++++=
++++++++++++++++++++++++++++++++++++++++-------
+drivers/ddr/altera/iossm_mailbox.h                       |  11 ++-
+drivers/ddr/altera/sdram_agilex5.c                       |  19 ++---
+drivers/ddr/altera/sdram_soc64.c                         |  54 +++++++++---=
+--
+drivers/reset/reset-socfpga.c                            |   3 +
+include/linux/intel-smc.h                                |  15 ++--
+26 files changed, 594 insertions(+), 122 deletions(-)
+create mode 100644 configs/socfpga_agilex5_vab_defconfig
