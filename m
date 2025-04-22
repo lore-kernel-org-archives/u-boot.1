@@ -4,58 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE8EC369D1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 21:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E857C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 21:23:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 125FA80050;
-	Tue, 22 Apr 2025 23:12:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9B30980F6B;
+	Tue, 22 Apr 2025 23:23:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ejgR2HNA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LzLvDnvf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 155E7812BC; Tue, 22 Apr 2025 23:12:45 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B897B80F9C; Tue, 22 Apr 2025 23:23:56 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 841A48003E
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 23:12:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8C1D80F03
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 23:23:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=e320=XJ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1745356361; bh=XvB8v+A90IcJShI+DByrD88NAckzuLoFkFmkAnWoyBA=;
- b=ejgR2HNAJEPhU+CpCNCU9GlFOqhvKYHUbIEwSeLnnD+PsMREunH5nNhzotXbMXa4xSO+yOeKV
- AYb/PdnunG25D43YanK2Na4n8edD9nADq8vH0xHHJQIq2Omu7NenSVh/9SEvkGGOem9lnGTu25i
- TRob39gnYGYEqyQR8O+eyetNlkSj1ue6BOQmAcG3pnDSBcBSkrggl2H3XwdB3ziqfSvV/0VXq+L
- yr5JWGKGc6X7RX0cWoADQbQYQQ4CakM0QMmAJhfpGtjVZndmaro34j9WNF1wElTqxEqF2e16Qnd
- 0lg+/I55JbrWVatXIn1P6v2eK51+bj7zmpbfeD2AQaMQ==
-X-Forward-Email-ID: 68080645305f69a6701c59d8
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Heiko Stuebner <heiko@sntech.de>,
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, u-boot@lists.denx.de
-Subject: [PATCH 4/4] board: rockchip: Add ArmSoM Sige5
-Date: Tue, 22 Apr 2025 21:12:09 +0000
-Message-ID: <20250422211216.3727559-5-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250422211216.3727559-1-jonas@kwiboo.se>
-References: <20250422211216.3727559-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5f5bef591d6so9838651a12.1
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:23:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1745357034; x=1745961834; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BEeypp1h39Sf6T1kdMR1EAQjcFDAlyQolX4sEEdY+08=;
+ b=LzLvDnvfAH1KxATbbKcYeYfzyhWinRgDcz3MVvLUI34MPZx1FjeyjRrwMLfVyyJNcI
+ t98vBrpmBdjvlhh4ygUf131VyWk//iEq7nwvqoPUib8ng4CMcsdH2fxVRV8BtSsyv9fe
+ dK4rQrw6+/EuoE7VqrUYQgCqdux/uz2970nrJpMCjpC6ALBA/9ObLNOQT0b5k0UwLwO1
+ tHsTPk5MRvBeT4kvOmphpd23Mm2kImcqjwPkR2hEQfaCwWZ1J4WoP6Fmeel7TEdOCbXS
+ ioC0cB52rrsAy8UL82Vci1aQbRFeOKg/mHpWzQ0T8lHW+iSKC1LTYfEkqiVR0Nni09Xy
+ OYEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745357034; x=1745961834;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BEeypp1h39Sf6T1kdMR1EAQjcFDAlyQolX4sEEdY+08=;
+ b=ne53Xq6F1XqPu75EHhmEigaNWgahdbSjhE4JFP1VRjKDQ8XSvFWm31FNNFQFs4UHay
+ kEMNax4o7QibpsTuKt3pRRudDNy4cmH9rLwO8H1Zb2ebRRuueeFxsRHmFQBhgNGCoSot
+ C09TFPL/pz3HNupT9Pqdtsm3GIfa8BC2KUTnFdEgDX/pmE7Ak7SDj9XPusf/HvXMzK9H
+ yIs4yhv6tLpdPRSl8NOS6uw43jNnRfj9qH6uVJOTwI8tXVkfbWEg4pL1Y/Ki1evWcfHc
+ EW/Fzh92jFctEJ0QW/t4NFb+RZb1BDlsHzoEiTVy5D5AxJBC0bbh87PyFbVJTnba29fW
+ spBg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUme11GKYI21pdXDUmjOnX4Ofa3mOeLLi8S/NI9B0Nzqpbh82FAmYUKcWbdcT7qTV6xYhGGu9c=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbIQ+xVHGRjtwIu1FJqqZ59SDB/vilmUHl6F9CTIYciRgycG1G
+ Zhakh5KhGTBxAXql8WaiJSCuHL24eHHcGqY7+Rpfpdjnp3E7gGsU
+X-Gm-Gg: ASbGnctY2DJw073/Df/GQzW8OW7sIDDU4dg2sSDUfEyvB4lvWNjSntix7T34Ac9qVLU
+ CyyEAUTQZHJhw1CfniOUiBmPkTrM9qST38oB1XLeR/FsFsmZybLkIAoiG73f2nglmYlHq/joj4g
+ 3ambaGgDvMZV9myvGI4dydB4TSbVLFPoNdm1MvOPTd8LrSmF/zfLaP4ZA0+Msymp6avLHAQaqXt
+ 9Iyf8FOf4YcMLoqhIa7CHTQt8L1mCY993s0DSglOix4DM4F0v+L1bVuoS4uo0S3FUD50d2ikNxq
+ HLWbczCX4Bv11mkVuhnIk2i7OWJOfVEEBynWyLzPGORexIpsfciIZDPcTYEl7WfHFVMBlz6IWjL
+ V7YoTTIIpv4ZLN0I=
+X-Google-Smtp-Source: AGHT+IHbRrjTVzzoPkZAPaIcJLv02tK1xXyPQFiACUIbqJF5WTNC+xqdt+r0vBgZvuQZXdPkBJxGYA==
+X-Received: by 2002:a17:907:d1b:b0:ac3:4487:6a99 with SMTP id
+ a640c23a62f3a-acb74db7e5emr1573011166b.47.1745357033946; 
+ Tue, 22 Apr 2025 14:23:53 -0700 (PDT)
+Received: from ?IPV6:2001:9e8:b6:eb10:20f9:129:a444:dc12?
+ ([2001:9e8:b6:eb10:20f9:129:a444:dc12])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-acb6ec0b706sm696303566b.22.2025.04.22.14.23.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Apr 2025 14:23:52 -0700 (PDT)
+Message-ID: <920d137f-75d4-43c0-ae56-fc3f5213e4ab@gmail.com>
+Date: Tue, 22 Apr 2025 23:23:52 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] configs: add UNIT_TESTS to big-endian Malta boards
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Paul Burton <paul.burton@mips.com>
+Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20250422185510.11561-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+In-Reply-To: <20250422185510.11561-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,131 +104,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ArmSoM-Sige5 adopts the second-generation 8nm high-performance AIOT
-platform Rockchip RK3576, with a 6 TOPS computing power NPU and support
-for up to 16GB of large memory. It supports 4K video encoding and
-decoding, offers rich interfaces including dual gigabit Ethernet ports,
-WiFi 6 & BT5, and various video outputs.
 
-Features tested on a ArmSoM Sige5 v1.1:
-- SD-card boot
-- eMMC boot
-- Ethernet
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi | 18 ++++++++
- arch/arm/mach-rockchip/rk3576/MAINTAINERS    |  6 +++
- configs/sige5-rk3576_defconfig               | 48 ++++++++++++++++++++
- doc/board/rockchip/rockchip.rst              |  1 +
- 4 files changed, 73 insertions(+)
- create mode 100644 arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
- create mode 100644 configs/sige5-rk3576_defconfig
+On 4/22/25 20:55, Heinrich Schuchardt wrote:
+> We currently only run the unit tests on low-endian boards.
+> We should run them on big-endian, too.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>   configs/malta64_defconfig | 1 +
+>   configs/malta_defconfig   | 1 +
+>   2 files changed, 2 insertions(+)
+> 
 
-diff --git a/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi b/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
-new file mode 100644
-index 000000000000..7e0530d85d16
---- /dev/null
-+++ b/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
-@@ -0,0 +1,18 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3576-u-boot.dtsi"
-+
-+/ {
-+	aliases {
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
-+	};
-+};
-+
-+&red_led {
-+	default-state = "on";
-+};
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+};
-diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-index b5190c818468..94ef74d429f9 100644
---- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-+++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-@@ -3,3 +3,9 @@ M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	arch/arm/dts/rk3576-generic*
- F:	configs/generic-rk3576_defconfig
-+
-+SIGE5-RK3576
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	arch/arm/dts/rk3576-armsom-sige5*
-+F:	configs/sige5-rk3576_defconfig
-diff --git a/configs/sige5-rk3576_defconfig b/configs/sige5-rk3576_defconfig
-new file mode 100644
-index 000000000000..a5b2bcbe5b6c
---- /dev/null
-+++ b/configs/sige5-rk3576_defconfig
-@@ -0,0 +1,48 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-armsom-sige5"
-+CONFIG_ROCKCHIP_RK3576=y
-+CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_DEBUG_UART_BASE=0x2AD40000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-armsom-sige5.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMINFO_MAP=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MISC=y
-+CONFIG_CMD_MMC=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 69c8fbf3b948..8dd5b44dd2d8 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -133,6 +133,7 @@ List of mainline supported Rockchip boards:
-      - Radxa ROCK 3B (rock-3b-rk3568)
- 
- * rk3576
-+     - ArmSoM Sige5 (sige5-rk3576)
-      - Firefly ROC-RK3576-PC (roc-pc-rk3576)
-      - Generic RK3576 (generic-rk3576)
- 
+Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+
 -- 
-2.49.0
-
+- Daniel
