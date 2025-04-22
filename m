@@ -4,54 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAEAAC369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 13:07:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 941E5C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 13:14:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A66781273;
-	Tue, 22 Apr 2025 15:07:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id CBF9F8197F;
+	Tue, 22 Apr 2025 15:14:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="c2WUTIPw";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QcyZTBf9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5957812BC; Tue, 22 Apr 2025 15:07:50 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2C1C8812BC; Tue, 22 Apr 2025 15:14:03 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88EB6805D7
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 15:07:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FC14805D7
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 15:13:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 94CD41F99E;
- Tue, 22 Apr 2025 15:07:47 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1745327267;
- bh=QnUjblsEoh7cFpGBD2/XX+yEhDy3uk9tU6tAIbeXrLs=; h=From:To:Subject;
- b=c2WUTIPwIYjqGPPnjShA2ITGFj/fSO2bT1IgG5SV+6+K9yUnMbEoiYoiisF5N5B00
- yV0kxB4UH0lrTHJ08mFT4/sPbKBkR35IDBmVfx19eaJG8yUFUvbOva4Ei9dtse8zr8
- WSxYJFnLnPr7AY71438qwkplfOuHBYeqdr+H9zMc5K0r+1pEX5bYRYNNZy4WkA+9L6
- lj5xkcm3i5Q4kT8wNtCwfl916Pi667sKcNPRO3Zv7MS/5qPePWCb0cXPWZXnmQKqKg
- FgiyTIl67BU0/9Wq0vrFEgb2YeAkzEYkF5iWZtLqb0ff6wKgmDWdcNIwgCSm+E5BCI
- UAVH+nkMwrJgA==
-Date: Tue, 22 Apr 2025 15:07:45 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Alexander Stein <alexander.stein@ew.tq-group.com>
-Cc: Tom Rini <trini@konsulko.com>, Francesco Dolcini <francesco@dolcini.it>,
- u-boot@lists.denx.de
-Subject: Re: [REGRESSION] [PATCH 1/1] mtd: mtdpart: Support
- MTD_SIZE_REMAINING with unallocated memory area
-Message-ID: <20250422130745.GB238494@francesco-nb>
-References: <20250220145808.1911832-1-alexander.stein@ew.tq-group.com>
- <20250422103732.GA117260@francesco-nb>
- <6153415.lOV4Wx5bFT@steina-w>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6207ada5ad=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53MBcKvi003475;
+ Tue, 22 Apr 2025 15:13:53 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ cgG4LWpeIFX4vIUQuwOicGIJ1gww+/MNWhd6rv7dWoU=; b=QcyZTBf9FMWLJcF6
+ gM4u3XLly5HIh1EIAvLVRZ/8VfjfVcX0B8baAT5fr6kzXXOlyaz+UcuuirQn6TSJ
+ 2n4q2tZ82PBiDdub5uTmBF/Kdq+0K2/7/0GK+4xNaCKOvm3mnyZ3+Lt5hgdQtgk6
+ DJTefxA7WbbpVfxAERYq0/ydYzK1R7Bx/aRYpiUvDPhMjiK9t2rTIi6LdTUR9o++
+ lfpNPa5eBd5a7yUWmSAR9O5BIyfFt9v2VXkZXQlZLlIdPTDe5XzxWjZg5SHcsnV+
+ OeV5arW9fX5en8nT82QVikWasvt0KRjhqdLHbGYQpUTdlfD87jsD068KpZmIClG5
+ odtF5w==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4642qga829-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 22 Apr 2025 15:13:53 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E182240050;
+ Tue, 22 Apr 2025 15:13:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2B6406F4714;
+ Tue, 22 Apr 2025 15:12:46 +0200 (CEST)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Apr
+ 2025 15:12:45 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Gatien Chevallier
+ <gatien.chevallier@foss.st.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 13/13] ARM: stm32mp: add RIFSC system bus driver for
+ STM32MP25
+Date: Tue, 22 Apr 2025 15:12:29 +0200
+Message-ID: <20250422131229.415020-14-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6153415.lOV4Wx5bFT@steina-w>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-22_06,2025-04-21_02,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,34 +91,446 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 22, 2025 at 03:05:58PM +0200, Alexander Stein wrote:
-> Am Dienstag, 22. April 2025, 12:37:32 CEST schrieb Francesco Dolcini:
-> > On Thu, Feb 20, 2025 at 03:58:07PM +0100, Alexander Stein wrote:
-> > > If there is an unallocated memory area before the last, filling parting
-> > > the size calculation for MTD_SIZE_REMAINING does not take this hole
-> > > into account.
-> > > Fix this by calculating the remaining size just based on total size
-> > > and partition offset.
-> > > 
-> > > Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
-> > 
-> > This change introduced a regression on colibri imx7 and imx6ull.
-> > 
-> > ```
-> > Booting from NAND...
-> > Partition size must be a multiple of 2048
-> > Could not parse device nand0
-> > Failed parsing MTD partitions from mtdparts!
-> > Partition ubi not found!
-> > ```
-> > 
-> > Reverting commit 1ca97ee90392 ("mtd: mtdpart: Support MTD_SIZE_REMAINING
-> > with unallocated memory area") on top of current master fixes the issue.
-> > 
-> > Any suggestion? I have not looked at the code, I just did a git bisect.
-> 
-> How does your mtdparts look like?
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-$ grep mtdparts configs/colibri_imx7_defconfig
-CONFIG_MTDPARTS_DEFAULT="mtdparts=gpmi-nand:512k(mx7-bcb),1536k(u-boot1)ro,1536k(u-boot2)ro,512k(u-boot-env),-(ubi)"
+This driver is checking the access rights of the different
+peripherals connected to the RIFSC bus. If access is denied,
+the associated device is not binded.
+
+Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+---
+
+Changes in v2:
+  - Replace LOG_CATEGORY UCLASS_SIMPLE_BUS by UCLASS_NOP in both
+    /arch/arm/mach-stm32mp/stm32mp2/rifsc.c and
+    /arch/arm/mach-stm32mp/stm32mp1/etzpc.c.
+  - Update board/st/stm32mp1/MAINTAINERS.
+  - Fix DSI clock ssetting.
+
+ arch/arm/mach-stm32mp/include/mach/rif.h |  26 ++
+ arch/arm/mach-stm32mp/stm32mp2/Makefile  |   1 +
+ arch/arm/mach-stm32mp/stm32mp2/rifsc.c   | 364 +++++++++++++++++++++++
+ 3 files changed, 391 insertions(+)
+ create mode 100644 arch/arm/mach-stm32mp/include/mach/rif.h
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+
+diff --git a/arch/arm/mach-stm32mp/include/mach/rif.h b/arch/arm/mach-stm32mp/include/mach/rif.h
+new file mode 100644
+index 00000000000..10b22108120
+--- /dev/null
++++ b/arch/arm/mach-stm32mp/include/mach/rif.h
+@@ -0,0 +1,26 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
++/*
++ * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
++ */
++
++#ifndef MACH_RIF_H
++#define MACH_RIF_H
++
++#include <linux/types.h>
++
++/**
++ * stm32_rifsc_check_access - Check RIF accesses for given device node
++ *
++ * @device_node		Node of the device for which the accesses are checked
++ */
++int stm32_rifsc_check_access(ofnode device_node);
++
++/**
++ * stm32_rifsc_check_access - Check RIF accesses for given id
++ *
++ * @device_node		Node of the device to get a reference on RIFSC
++ * @id			ID of the resource to check
++ */
++int stm32_rifsc_check_access_by_id(ofnode device_node, u32 id);
++
++#endif /* MACH_RIF_H*/
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/Makefile b/arch/arm/mach-stm32mp/stm32mp2/Makefile
+index b579ce5a800..5dbf75daa76 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/Makefile
++++ b/arch/arm/mach-stm32mp/stm32mp2/Makefile
+@@ -5,5 +5,6 @@
+ 
+ obj-y += cpu.o
+ obj-y += arm64-mmu.o
++obj-y += rifsc.o
+ obj-$(CONFIG_OF_SYSTEM_SETUP) += fdt.o
+ obj-$(CONFIG_STM32MP25X) += stm32mp25x.o
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/rifsc.c b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+new file mode 100644
+index 00000000000..50dececf77b
+--- /dev/null
++++ b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+@@ -0,0 +1,364 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
++ */
++
++#define LOG_CATEGORY UCLASS_NOP
++
++#include <dm.h>
++#include <asm/io.h>
++#include <dm/device.h>
++#include <dm/device_compat.h>
++#include <dm/lists.h>
++#include <linux/bitfield.h>
++#include <mach/rif.h>
++
++/* RIFSC offset register */
++#define RIFSC_RISC_SECCFGR0(id)		(0x10 + 0x4 * (id))
++#define RIFSC_RISC_PER0_CIDCFGR(id)	(0x100 + 0x8 * (id))
++#define RIFSC_RISC_PER0_SEMCR(id)	(0x104 + 0x8 * (id))
++
++/*
++ * SEMCR register
++ */
++#define SEMCR_MUTEX			BIT(0)
++
++/* RIFSC miscellaneous */
++#define RIFSC_RISC_SCID_MASK		GENMASK(6, 4)
++#define RIFSC_RISC_SEMWL_MASK		GENMASK(23, 16)
++
++#define IDS_PER_RISC_SEC_PRIV_REGS	32
++
++/*
++ * CIDCFGR register fields
++ */
++#define CIDCFGR_CFEN			BIT(0)
++#define CIDCFGR_SEMEN			BIT(1)
++
++#define SEMWL_SHIFT			16
++
++#define STM32MP25_RIFSC_ENTRIES		178
++
++/* Compartiment IDs */
++#define RIF_CID0			0x0
++#define RIF_CID1			0x1
++
++/*
++ * struct stm32_rifsc_plat: Information about RIFSC device
++ *
++ * @base: Base address of RIFSC
++ */
++struct stm32_rifsc_plat {
++	void *base;
++};
++
++/*
++ * struct stm32_rifsc_child_plat: Information about each child
++ *
++ * @domain_id: Domain id
++ */
++struct stm32_rifsc_child_plat {
++	u32 domain_id;
++};
++
++static bool stm32_rif_is_semaphore_available(void *base, u32 id)
++{
++	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
++
++	return !(readl(addr) & SEMCR_MUTEX);
++}
++
++static int stm32_rif_acquire_semaphore(void *base, u32 id)
++{
++	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
++
++	/* Check that the semaphore is available */
++	if (!stm32_rif_is_semaphore_available(base, id))
++		return -EACCES;
++
++	setbits_le32(addr, SEMCR_MUTEX);
++
++	/* Check that CID1 has the semaphore */
++	if (stm32_rif_is_semaphore_available(base, id) ||
++	    FIELD_GET(RIFSC_RISC_SCID_MASK, (readl(addr)) != RIF_CID1))
++		return -EACCES;
++
++	return 0;
++}
++
++static int stm32_rif_release_semaphore(void *base, u32 id)
++{
++	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
++
++	if (stm32_rif_is_semaphore_available(base, id))
++		return 0;
++
++	clrbits_le32(addr, SEMCR_MUTEX);
++
++	/* Ok if another compartment takes the semaphore before the check */
++	if (!stm32_rif_is_semaphore_available(base, id) &&
++	    FIELD_GET(RIFSC_RISC_SCID_MASK, (readl(addr)) == RIF_CID1))
++		return -EACCES;
++
++	return 0;
++}
++
++static int rifsc_parse_access_controller(ofnode node, struct ofnode_phandle_args *args)
++{
++	int ret;
++
++	ret = ofnode_parse_phandle_with_args(node, "access-controllers",
++					     "#access-controller-cells", 0,
++					     0, args);
++	if (ret) {
++		log_debug("failed to parse access-controller (%d)\n", ret);
++		return ret;
++	}
++
++	if (args->args_count != 1) {
++		log_debug("invalid domain args_count: %d\n", args->args_count);
++		return -EINVAL;
++	}
++
++	if (args->args[0] >= STM32MP25_RIFSC_ENTRIES) {
++		log_err("Invalid sys bus ID for %s\n", ofnode_get_name(node));
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static int rifsc_check_access(void *base, u32 id)
++{
++	u32 reg_offset, reg_id, sec_reg_value, cid_reg_value, sem_reg_value;
++
++	/*
++	 * RIFSC_RISC_PRIVCFGRx and RIFSC_RISC_SECCFGRx both handle configuration access for
++	 * 32 peripherals. On the other hand, there is one _RIFSC_RISC_PERx_CIDCFGR register
++	 * per peripheral
++	 */
++	reg_id = id / IDS_PER_RISC_SEC_PRIV_REGS;
++	reg_offset = id % IDS_PER_RISC_SEC_PRIV_REGS;
++	sec_reg_value = readl(base + RIFSC_RISC_SECCFGR0(reg_id));
++	cid_reg_value = readl(base + RIFSC_RISC_PER0_CIDCFGR(id));
++	sem_reg_value = readl(base + RIFSC_RISC_PER0_SEMCR(id));
++
++	/*
++	 * First check conditions for semaphore mode, which doesn't take into
++	 * account static CID.
++	 */
++	if (cid_reg_value & CIDCFGR_SEMEN)
++		goto skip_cid_check;
++
++	/*
++	 * Skip cid check if CID filtering isn't enabled or filtering is enabled on CID0, which
++	 * corresponds to whatever CID.
++	 */
++	if (!(cid_reg_value & CIDCFGR_CFEN) ||
++	    FIELD_GET(RIFSC_RISC_SCID_MASK, cid_reg_value) == RIF_CID0)
++		goto skip_cid_check;
++
++	/* Coherency check with the CID configuration */
++	if (FIELD_GET(RIFSC_RISC_SCID_MASK, cid_reg_value) != RIF_CID1) {
++		log_debug("Invalid CID configuration for peripheral %d\n", id);
++		return -EACCES;
++	}
++
++	/* Check semaphore accesses */
++	if (cid_reg_value & CIDCFGR_SEMEN) {
++		if (!(FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
++			log_debug("Not in semaphore whitelist for peripheral %d\n", id);
++			return -EACCES;
++		}
++		if (!stm32_rif_is_semaphore_available(base, id) &&
++		    !(FIELD_GET(RIFSC_RISC_SCID_MASK, sem_reg_value) & BIT(RIF_CID1))) {
++			log_debug("Semaphore unavailable for peripheral %d\n", id);
++			return -EACCES;
++		}
++	}
++
++skip_cid_check:
++	/* Check security configuration */
++	if (sec_reg_value & BIT(reg_offset)) {
++		log_debug("Invalid security configuration for peripheral %d\n", id);
++		return -EACCES;
++	}
++
++	return 0;
++}
++
++int stm32_rifsc_check_access_by_id(ofnode device_node, u32 id)
++{
++	struct ofnode_phandle_args args;
++	int err;
++
++	if (id >= STM32MP25_RIFSC_ENTRIES)
++		return -EINVAL;
++
++	err = rifsc_parse_access_controller(device_node, &args);
++	if (err)
++		return err;
++
++	return rifsc_check_access((void *)ofnode_get_addr(args.node), id);
++}
++
++int stm32_rifsc_check_access(ofnode device_node)
++{
++	struct ofnode_phandle_args args;
++	int err;
++
++	err = rifsc_parse_access_controller(device_node, &args);
++	if (err)
++		return err;
++
++	return rifsc_check_access((void *)ofnode_get_addr(args.node), args.args[0]);
++}
++
++static int stm32_rifsc_child_pre_probe(struct udevice *dev)
++{
++	struct stm32_rifsc_plat *plat = dev_get_plat(dev->parent);
++	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
++	u32 cid_reg_value;
++	int err;
++	u32 id = child_plat->domain_id;
++
++	cid_reg_value = readl(plat->base + RIFSC_RISC_PER0_CIDCFGR(id));
++
++	/*
++	 * If the peripheral is in semaphore mode, take the semaphore so that
++	 * the CID1 has the ownership.
++	 */
++	if (cid_reg_value & CIDCFGR_SEMEN &&
++	    (FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
++		err = stm32_rif_acquire_semaphore(plat->base, id);
++		if (err) {
++			dev_err(dev, "Couldn't acquire RIF semaphore for peripheral %d (%d)\n",
++				id, err);
++			return err;
++		}
++		dev_dbg(dev, "Acquiring semaphore for peripheral %d\n", id);
++	}
++
++	return 0;
++}
++
++static int stm32_rifsc_child_post_remove(struct udevice *dev)
++{
++	struct stm32_rifsc_plat *plat = dev_get_plat(dev->parent);
++	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
++	u32 cid_reg_value;
++	int err;
++	u32 id = child_plat->domain_id;
++
++	cid_reg_value = readl(plat->base + RIFSC_RISC_PER0_CIDCFGR(id));
++
++	/*
++	 * If the peripheral is in semaphore mode, release the semaphore so that
++	 * there's no ownership.
++	 */
++	if (cid_reg_value & CIDCFGR_SEMEN &&
++	    (FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
++		err = stm32_rif_release_semaphore(plat->base, id);
++		if (err)
++			dev_err(dev, "Couldn't release rif semaphore for peripheral %d (%d)\n",
++				id, err);
++	}
++
++	return 0;
++}
++
++static int stm32_rifsc_child_post_bind(struct udevice *dev)
++{
++	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
++	struct ofnode_phandle_args args;
++	int ret;
++
++	if (!dev_has_ofnode(dev))
++		return -EPERM;
++
++	ret = rifsc_parse_access_controller(dev_ofnode(dev), &args);
++	if (ret)
++		return ret;
++
++	child_plat->domain_id = args.args[0];
++
++	return 0;
++}
++
++static int stm32_rifsc_bind(struct udevice *dev)
++{
++	struct stm32_rifsc_plat *plat = dev_get_plat(dev);
++	struct ofnode_phandle_args args;
++	int ret = 0, err = 0;
++	ofnode node;
++
++	plat->base = dev_read_addr_ptr(dev);
++	if (!plat->base) {
++		dev_err(dev, "can't get registers base address\n");
++		return -ENOENT;
++	}
++
++	for (node = ofnode_first_subnode(dev_ofnode(dev));
++	     ofnode_valid(node);
++	     node = ofnode_next_subnode(node)) {
++		const char *node_name = ofnode_get_name(node);
++
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		err = rifsc_parse_access_controller(node, &args);
++		if (err) {
++			dev_dbg(dev, "%s failed to parse child on bus (%d)\n", node_name, err);
++			continue;
++		}
++
++		err = rifsc_check_access(plat->base, args.args[0]);
++		if (err) {
++			dev_info(dev, "%s not allowed on bus (%d)\n", node_name, err);
++			continue;
++		}
++
++		err = lists_bind_fdt(dev, node, NULL, NULL,
++				     gd->flags & GD_FLG_RELOC ? false : true);
++		if (err && !ret) {
++			ret = err;
++			dev_err(dev, "%s failed to bind on bus (%d)\n", node_name, ret);
++		}
++	}
++
++	if (ret)
++		dev_err(dev, "Some child failed to bind (%d)\n", ret);
++
++	return ret;
++}
++
++static int stm32_rifsc_remove(struct udevice *bus)
++{
++	struct udevice *dev;
++
++	/* Deactivate all child devices not yet removed */
++	for (device_find_first_child(bus, &dev); dev; device_find_next_child(&dev))
++		if (device_active(dev))
++			stm32_rifsc_child_post_remove(dev);
++
++	return 0;
++}
++
++static const struct udevice_id stm32_rifsc_ids[] = {
++	{ .compatible = "st,stm32mp25-rifsc" },
++	{},
++};
++
++U_BOOT_DRIVER(stm32_rifsc) = {
++	.name = "stm32_rifsc",
++	.id = UCLASS_NOP,
++	.of_match = stm32_rifsc_ids,
++	.bind = stm32_rifsc_bind,
++	.remove = stm32_rifsc_remove,
++	.child_post_bind = stm32_rifsc_child_post_bind,
++	.child_pre_probe = stm32_rifsc_child_pre_probe,
++	.child_post_remove = stm32_rifsc_child_post_remove,
++	.plat_auto = sizeof(struct stm32_rifsc_plat),
++	.per_child_plat_auto = sizeof(struct stm32_rifsc_child_plat),
++	.flags = DM_FLAG_OS_PREPARE,
++};
+-- 
+2.25.1
 
