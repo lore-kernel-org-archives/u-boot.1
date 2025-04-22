@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE32C369D3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:41:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62AA5C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:45:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D70981273;
-	Tue, 22 Apr 2025 16:41:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE84C80FA8;
+	Tue, 22 Apr 2025 16:45:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GddtSEvv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zUIjHuDO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50B51812BC; Tue, 22 Apr 2025 16:41:29 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 32C3680FEC; Tue, 22 Apr 2025 16:45:07 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07A1C80FA8
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:41:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD0498070C
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:45:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEfPVm1244942
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEj2SS1925464
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Apr 2025 09:41:25 -0500
+ Tue, 22 Apr 2025 09:45:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745332885;
- bh=AU2jaCAPQhoKkEg8QDapvTZxpkpMUbwl3VR7skI8ixw=;
+ s=ti-com-17Q1; t=1745333103;
+ bh=+YawMEsZdX0a41k5V0z97UdgKI7YjwQPiCkmW8a8z20=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=GddtSEvvBWPda9rWQDXGWcnP9lsgCiMUT+Qhmhr706zYoWqBF2g7jU32Ylp9VEotO
- 0rpjdS5oaryD9dhmcg4CKE+ErzGvE06PekiMN/FtjU9BKsOFfMGI9thu21xt5nnaYJ
- gqfYpV+navgdZqOLPqLowzevbNtz7+nUBRlR4X5c=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEfPcd103469
+ b=zUIjHuDOo3vAfwtXlAFEEZv5q6OtkzYPcV4S9RiwE/SMeoOhY29k7sajXph9IEpFc
+ bHh5yUeQQ0BjiwQrU1FCvMiRVoUPKSACBp4Afwr+/RuacuUYD5CMLiX/jAe7MDZ4Ks
+ oiTJ9hjWsodQgMtIE7tJZBPT4UibisxO4oQw4gsU=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEj29R108565
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 22 Apr 2025 09:41:25 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 22 Apr 2025 09:45:02 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Apr 2025 09:41:24 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 09:45:01 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Apr 2025 09:41:24 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MEfOmP036364;
- Tue, 22 Apr 2025 09:41:24 -0500
-Message-ID: <811b2834-aa4f-48b5-88b3-9c68e3d59224@ti.com>
-Date: Tue, 22 Apr 2025 09:41:24 -0500
+ Frontend Transport; Tue, 22 Apr 2025 09:45:01 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MEiwTw039451;
+ Tue, 22 Apr 2025 09:44:59 -0500
+Message-ID: <18e01808-499d-4690-995a-45ac5fd727d9@ti.com>
+Date: Tue, 22 Apr 2025 20:14:58 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 4/4] arm: mach-k3: r5: common: Add support to boot HSM M4
  core
 To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
-CC: <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <jm@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>
 References: <20250422095430.363792-1-b-padhi@ti.com>
  <20250422095430.363792-5-b-padhi@ti.com>
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
+From: "Kumar, Udit" <u-kumar1@ti.com>
 In-Reply-To: <20250422095430.363792-5-b-padhi@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
@@ -83,12 +83,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/22/25 4:54 AM, Beleswar Padhi wrote:
+Hello Beleswar
+
+On 4/22/2025 3:24 PM, Beleswar Padhi wrote:
 > The tispl.bin fit image is packed with the HSM firmware image. Populate
 > the "os" info of the image so that it can be detected and loaded at
 > corresponding DDR address. Further, invoke the load and boot of HSM core
 > at R5 SPL stage. Boot flow for HSM M4 core is as below:
-> 
+>
 > 1. Request control of HSM M4F remote processor.
 > 2. Assert Reset on the HSM M4F remote processor.
 > 3. For HS devices, Request Secure Entity to Authenticate and Load HSM
@@ -96,12 +98,12 @@ On 4/22/25 4:54 AM, Beleswar Padhi wrote:
 >     load the unsigned firmware manually.
 > 4. Deassert Reset on the HSM M4F remote processor.
 > 5. Release control of HSM M4F remote processor.
-> 
+>
 > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 > ---
 >   arch/arm/mach-k3/r5/common.c | 84 +++++++++++++++++++++++++++++++++++-
 >   1 file changed, 83 insertions(+), 1 deletion(-)
-> 
+>
 > diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
 > index fd188e7c90e..1af0f70d8d3 100644
 > --- a/arch/arm/mach-k3/r5/common.c
@@ -117,6 +119,9 @@ On 4/22/25 4:54 AM, Beleswar Padhi wrote:
 > +#define PROC_BOOT_CTRL_RESET_FLAG_HSM_M4	0x00000001
 > +#define HSM_SRAM0_0_ADDR			0x43C00000
 > +#define PROC_ID_HSM_M4F				0x00000080
+
+PROC_ID_HSM_M4F seems to have extra tab
+
 > +
 >   #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
 >   enum {
@@ -124,6 +129,10 @@ On 4/22/25 4:54 AM, Beleswar Padhi wrote:
 >   	IMAGE_ID_ATF,
 >   	IMAGE_ID_OPTEE,
 >   	IMAGE_ID_SPL,
+
+Do you see possibility to have HSM char and enum at last .
+
+
 > @@ -32,6 +38,7 @@ enum {
 >   
 >   #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
@@ -137,11 +146,6 @@ On 4/22/25 4:54 AM, Beleswar Padhi wrote:
 >   }
 >   
 > +#if IS_ENABLED(CONFIG_K3_HSM_FW)
-
-To avoid more #if preprocessor usage, how about just making
-this function __maybe_unused, then let the compiler remove
-it for you if it is not used below.
-
 > +static int boot_hsm_core(void)
 > +{
 > +	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
@@ -149,6 +153,10 @@ it for you if it is not used below.
 > +	u64 hsm_image_addr;
 > +	u32 hsm_image_size;
 > +	int device_type, ret;
+
+^^ may be in alphabetic order
+
+
 > +
 > +	hsm_image_addr = (u64)fit_image_info[IMAGE_ID_HSM].image_start;
 > +	hsm_image_size = (u32)fit_image_info[IMAGE_ID_HSM].image_len;
@@ -157,15 +165,6 @@ it for you if it is not used below.
 > +	ret = proc_ops->proc_request(ti_sci, PROC_ID_HSM_M4F);
 > +	if (ret) {
 > +		printf("Unable to request processor control for core %d\n",
-
-Printing the PROC_ID doesn't tell us much, how about:
-
-printf("Unable to request HSM processor control: %d\n", ret);
-
-Same below where PROC_ID_HSM_M4F is printed.
-
-Andrew
-
 > +		       PROC_ID_HSM_M4F);
 > +		return ret;
 > +	}
@@ -203,6 +202,11 @@ Andrew
 > +		flush_dcache_range(HSM_SRAM0_0_ADDR,
 > +				   HSM_SRAM0_0_ADDR + hsm_image_size);
 > +	}
+
+since you are doing if- elseif loop then final else you should consider 
+as error case
+
+
 > +
 > +	/* Release the reset from the remote processor*/
 > +	ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F, 0,
@@ -231,6 +235,10 @@ Andrew
 > +	else
 > +		printf("Successfully booted HSM core\n");
 > +#endif
+
+Should we go in hang state, if secure fw is not started correctly ?
+
+
 > +
 >   	/*
 >   	 * It is assumed that remoteproc device 1 is the corresponding
