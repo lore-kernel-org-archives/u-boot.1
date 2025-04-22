@@ -4,118 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB051C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:19:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 674C1C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AED0281273;
-	Tue, 22 Apr 2025 14:19:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C684381273;
+	Tue, 22 Apr 2025 14:35:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RY+45zpf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XywVUidR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B09D18144A; Tue, 22 Apr 2025 14:19:55 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 536E18129F; Tue, 22 Apr 2025 05:08:39 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAC75807AE
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:19:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14F2F81273
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 05:08:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-39ee5a5bb66so3527821f8f.3
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 05:19:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-736b0c68092so3847613b3a.0
+ for <u-boot@lists.denx.de>; Mon, 21 Apr 2025 20:08:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745324393; x=1745929193; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=2PWihE29HBgSdqraF0MPNcvlthj4A8+ckcsHyc1Yt4o=;
- b=RY+45zpfDzeFejJ21bCzP4UVNXYarTHeZ7j+mUFGskzj7B1k0qwtfYn8FrTmKpnKBD
- bDy3R7W1jXI4mhfCk9i6wcg8yvBTF1oS7rAcwtVYmRQ4X0mcn5h2n1o9qttJ7Zn+o92M
- O/Dx1dLEI8EK9KliNldRBXmzjlTtxs7CeZJRjSavmzeP0DAMerWxHx62ovKpR+6xjoM8
- EgHifCFxUmNF0vIHdGN5OMoETEGzmZPxVjjqotblWS2Vb1I4jfrTmWedwXp0tRklTk0S
- eEvUhey5iN1tDz4WhOlnN5fj5+rFmPspIaFBYyV81xTRyfwAV+nJbDqdEOYnZJstSUmJ
- 2aXg==
+ d=gmail.com; s=20230601; t=1745291315; x=1745896115; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=38QpkJ7tn3REqUn+narOmp9cLcOrI4xaUa9xwc6E5HY=;
+ b=XywVUidRhS4rDIH+ybO44BKrKLX8lUQ7WwHiIHWuj3cuw01e9rzwgG7vYgHjOdIOIA
+ iVEfuBj/J84vwCQViapOtaqg1gppYkQFqvHF2GqdTAL6kfAawwf11q12fsCL/P5K0nJL
+ TYZ0lTtBaisqa/B8RbUyjEhAi7dFGb+dPv446DnFIiCkgUepuJt6GVGw6naVbRtuBWHt
+ zJoPdrmNJQzq9cmLK4SL0udNEYV8nIjNOwJQzveuTUaEp1dYFjUdeXDgJENpZdzVKrb4
+ yNJpUnTg7ODTqOxFLMDUcn+aSmY2J90vXXPdYrYSA6xJNFvOinJnUjOMjYF8aq8WHYHF
+ clbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745324393; x=1745929193;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=2PWihE29HBgSdqraF0MPNcvlthj4A8+ckcsHyc1Yt4o=;
- b=bjfNVIXv1d2i1HV/4QQ62hwq0IFhENkjE7j9KZfOGHChnPdTqwZwVSR/tjQOzyNP5Z
- y27bHJADmdz4HeO3UWcucEWIHYMDTNl4grR7EUF5li3weauhqLBw2Pn8YCTxPkTCWVEu
- AmcyCj3yH9ExW7M3LOaw5F5Qpr4PkLom2A/pBFcvofrEYqn+z9WpLa+QhTL+1nsyAqp7
- tR/+y9oKhtYSAR3kmJsx6G0AlhYf38ZwkeekznW/wFYiQmfKRtjtmL8yRYn4Jlx+MVcB
- di6F4UpX/lm28dLIEVbU3gKnni+jor7PkspHJHQ+1G6tg7mO/huve/hhc3bUTaMiGVAm
- ErAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUcSF+jv/9zKunubOe7ZRFJ+F081sx/nJKr96kIB46/+0Gkm35ioBEyyrGjyfw101D2Fi9YZiQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPmWyw5LnsjfwkwJ8b3mqegWh+/4qg9YaiIYqm+WTafT1PCFzb
- NDoaXMUExgbYu5jTqLI5cGHz7Tax8yJ6VbSye6gE9r6dX9U7tcvynU9SXct736E=
-X-Gm-Gg: ASbGncvLhclLcR8O2DUpPrHe3iCwjLJiBUQ9fq8Gs8fOim1m9zgTVBt++bf14LFfIba
- Sr4GVt5iyc12ZVvFsoK2nzqkJkSUyv3w9OubHyJkEe7WzlYNBQj/CEidFNJt0rsZ25qVksreyuR
- VRbk+yLzQqJZfKMB1zMymP2i8jwAaiN3JNXJ1fUOz7AHqEFABr8mvy6aOABSERmbl7jYkcSKYxO
- Jn3nmuXQUvAbfNS5XPgWHWCXJWgJlPTBdlb+Jt4lz35SUXuxMn3VcmD4VsH4GJTY7XK1MshKqBC
- hxkHUgkfKjrGfUo1vYxLxZLBtEpq/lYDIZwWrG5qDLgeXPUAcmBTmy1JIFEIbl0syrwfHySiLHM
- dKwhjrC9Syba97Hfpw81FualccqII
-X-Google-Smtp-Source: AGHT+IGY17L4djp7m0sCKEbDjRDnc80QI06Y9ziFOAYQXy2fTqD/5LqSwipwSZ2MnvRk60hFZq0lCw==
-X-Received: by 2002:a05:6000:1869:b0:391:952:c728 with SMTP id
- ffacd0b85a97d-39efba26158mr10249319f8f.4.1745324393059; 
- Tue, 22 Apr 2025 05:19:53 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:b137:7670:8eb9:746f?
- ([2a01:e0a:3d9:2080:b137:7670:8eb9:746f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39efa4207basm14877774f8f.5.2025.04.22.05.19.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Apr 2025 05:19:52 -0700 (PDT)
-Message-ID: <85c92d67-2a95-463c-a6a8-fc943ea7dbf9@linaro.org>
-Date: Tue, 22 Apr 2025 14:19:51 +0200
+ d=1e100.net; s=20230601; t=1745291315; x=1745896115;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=38QpkJ7tn3REqUn+narOmp9cLcOrI4xaUa9xwc6E5HY=;
+ b=oO0f+VskfU9mfU9kc+ApvKIJbLRHNtkQp4oNJrENMEm5dUwPB0uyXcd9Ff4q7DcPTg
+ psCqQMmWNFnnRxgA35pEY2upS7KOcfAUgLzS2E9Arijw5QJ1bwpDbsI0gv6nnXpg78a1
+ 0i+x8TKYOMyau96x7HaI0Qg9Zh5L9hXiDIgIYWHmC+VssD0kScHIAihytP0a30KjuJ8L
+ MMV3w0O9nCRrglPYfYwOH7LiahhqZJJ7JS42Un16YGYFW4b/bNJd992SdVLEf7UrNxEy
+ Vd3zFEqK5Uh8Olg96dPNA/JdKIWNN735Z/0pJhv1VeqiBmiadbYC8Y3KVU7fvqGFkeKV
+ n5aQ==
+X-Gm-Message-State: AOJu0YzsT+knfN4EucKreGmt2cBlgsrg0I7x5BnpD2WH3L3HTtJdidIF
+ i2qFflEe9fmx9GMGalGaFHwVP/lPhVb0/Jm8SIF3Clp/yEyHODDthpyOmA==
+X-Gm-Gg: ASbGncufhQovDeVUSbM7DiwaUz0mq47DrMxIhZpWT+w+5lHqM8QOuYCs55a7MdvMAU7
+ iig4BNsbjUKQtHaURFNulwsrTzVjosz1Pryl9/oiSQMS6YI/W7zK1mcUvHNS59WyH19eL1/WeNh
+ zlfhVpxXRnjrG99GjwB+BKxDFpH6dXYLiN+3eI8epA4PeG4FDFQz9fcs5G3q5ed5YBHS1jgKfwn
+ 42p1/gbv278gpufkeMBUu6P19h7JnvHSLIc84IefUbZnGRQR5ZyU7StYYpDoFbEO/GG1PAHsXyt
+ MDFn+W7DTcYJjIevj6zhCxmd4shnzut8fOy6dxsTB6q/rrh2vR/HMwlY5EtDbzBJhM27I56rIYX
+ /qzo6KxEDb3RPoSz1pyKhjQ==
+X-Google-Smtp-Source: AGHT+IF+xUlKnG+bJWWSO91Q4AyiOTpKUQLLvaYLWJqxc41rwr/YfEm6sjVy1LB5bY3xdwJUmOqj/Q==
+X-Received: by 2002:a05:6a00:21c5:b0:736:5e28:cfba with SMTP id
+ d2e1a72fcca58-73dc156a8d7mr18953417b3a.18.1745291315120; 
+ Mon, 21 Apr 2025 20:08:35 -0700 (PDT)
+Received: from localhost.localdomain (118-163-61-247.hinet-ip.hinet.net.
+ [118.163.61.247]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73dbfaad42fsm7409138b3a.121.2025.04.21.20.08.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Apr 2025 20:08:34 -0700 (PDT)
+From: Aristo Chen <jj251510319013@gmail.com>
+X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.denx.de
+Cc: aristo.chen@canonical.com, trini@konsulko.com, casey.connolly@linaro.org
+Subject: [PATCH] doc: arch: arm64: fix typos
+Date: Tue, 22 Apr 2025 11:07:06 +0800
+Message-Id: <20250422030706.30210-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 0/6] clk: qcom: apq8016: Clock fixes for U-Boot v2025.07
-To: Stephan Gerhold <stephan.gerhold@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Sam Day <me@samcday.com>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 22 Apr 2025 14:35:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,35 +91,36 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22/04/2025 12:54, Stephan Gerhold wrote:
-> Fix some issues in the clock-apq8016 driver that I noticed while testing
-> U-Boot v2025.07-rc on the DragonBoard 410c. Make it possible to poll the
-> clock status with GATE_CLK() to avoid potential race conditions.
-> 
-> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-> ---
-> Stephan Gerhold (6):
->        clk: qcom: apq8016: Fix SDCC clock addresses
->        clk: qcom: Move qcom_gate_clk_en() to C file
->        clk: qcom: Use setbits_le32() for qcom_gate_clk_en()
->        clk: qcom: Allow polling for clock status in qcom_gate_clk_en()
->        clk: qcom: apq8016: Convert GATE_CLK() to BRANCH_CLK()
->        clk: qcom: apq8016: Fix SDCC clock warnings
-> 
->   drivers/clk/qcom/clock-apq8016.c | 17 ++++++++---------
->   drivers/clk/qcom/clock-qcom.c    | 27 +++++++++++++++++++++++++++
->   drivers/clk/qcom/clock-qcom.h    | 22 ++++++----------------
->   3 files changed, 41 insertions(+), 25 deletions(-)
-> ---
-> base-commit: cde0050618968aae335dfbc930641656d51ff5d0
-> change-id: 20250419-apq8016-clock-fixes2-66ace5b26ab4
-> 
-> Best regards,
+Fix typo from "recommened" to "recommended"
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ doc/arch/arm64.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/doc/arch/arm64.rst b/doc/arch/arm64.rst
+index 19662be6fc6..d72200ffdb9 100644
+--- a/doc/arch/arm64.rst
++++ b/doc/arch/arm64.rst
+@@ -14,11 +14,11 @@ Notes
+ -----
+ 
+ 1. U-Boot can run at any exception level it is entered in, it is
+-   recommened to enter it in EL3 if U-Boot takes some responsibilities of a
++   recommended to enter it in EL3 if U-Boot takes some responsibilities of a
+    classical firmware (like initial hardware setup, CPU errata workarounds
+    or SMP bringup). U-Boot can be entered in EL2 when its main purpose is
+    that of a boot loader. It can drop to lower exception levels before
+-   entering the OS. For ARMv8-R it is recommened to enter at S-EL1, as for this
++   entering the OS. For ARMv8-R it is recommended to enter at S-EL1, as for this
+    architecture there is no S-EL3.
+ 
+ 2. U-Boot for arm64 is compiled with AArch64-gcc. AArch64-gcc
+-- 
+2.34.1
+
