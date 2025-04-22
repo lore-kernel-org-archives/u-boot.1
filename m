@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91D0C369D1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:54:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 041CCC369D1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:54:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72CA681CF0;
-	Tue, 22 Apr 2025 12:54:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BACAA81FC0;
+	Tue, 22 Apr 2025 12:54:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S+Zh+kBQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k8k2CtHm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 894A581CAF; Tue, 22 Apr 2025 12:54:39 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 7925B810E8; Tue, 22 Apr 2025 12:54:40 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 928F0812BC
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:54:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80707810E8
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:54:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5e6f4b3ebe5so9084871a12.0
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 03:54:37 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5f62d3ed994so6227555a12.2
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 03:54:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745319277; x=1745924077; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1745319278; x=1745924078; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Y7WU/oizag/lowJHgE3Dpg7mwnI+gNVm0sXEVOxmMnY=;
- b=S+Zh+kBQbprLe7LAgEVBcgZYGRbq2tNvRF2RZkGTib9R5hFLPgKG/fMmSxCTr+ynjT
- Jd6GFuPYOZhmq4llgaTCo6hmo3YqLIp637Laq+ecKgJVtTB48rdJqNJwWfXzadIUCZyz
- /MDgoJifmMHi7PuQZjfx+ji2UBuTSqYzIYzppXRJy8yHFAd9qaejST61G/t6BOUQW8TJ
- Oek5ewIEBoH0OjpCIKbPf5EmwsBClt30g95MdcgpNLhbTXmvSKZkGPHQtlYdKDQ0qT/H
- jFXxHG7eebgSZDQHoSybz9UvjKAQ5cn6jwe2+FAx7PBXq/xGB54Ne/SgqsncdqJfMaeY
- NGZA==
+ :reply-to; bh=dUcI7MfQkW7X4R8QG3689yPkCv0tGLqKd5obOxVaDHA=;
+ b=k8k2CtHmw0llDGxkjE8llXpwK3bx84QYIIb1FSYdSigHQ9hCPW89FMMNQu+upsQjCF
+ gMFDh4u+d1/iKUB5JVKsej18kURFYRxplBowMbpfk5C0x5k/glnwAmWGXCewLkHSEbW1
+ Ukq9RJfX0bRybjFw40XphlkQlvvnBr0ef2faugaUvGcgACzWJ8auIps5CLY90EtMFAM+
+ aWoHBH+ruKcxlUl9UoEX3kAWFSz3TadGuhkt346h/pHyhRi1sMa8h9e9w8yZAlwp2Jmk
+ yYiHlB+7mj8xHPgyF4n1CTWki8IicLUk/8iGc4FjZj+AK1442kpok+mDgSgwn2KkTPzA
+ v2AA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745319277; x=1745924077;
+ d=1e100.net; s=20230601; t=1745319278; x=1745924078;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y7WU/oizag/lowJHgE3Dpg7mwnI+gNVm0sXEVOxmMnY=;
- b=IvwG3Qubo+Xm3bqARHdDggPvan7BnRcLeOne/V9fvMaaJrOx5e39US+MnriNhMR5Pt
- 5OaiqFdD82LtwjGlRy6pfO9FPjBPL72HjkTbl+rxlwxi+2Keeb2SY+IFG8PNXMUwzdxH
- K02gEg0BYHiPrDCH60gYJiyc/2AAFU48BkLMsriJwwRIJshtcQoKR5VgSQixnjjiswJJ
- lKeyMdmfiS8VzrmmwKVL0hd9qRx8qZXBIH0Edpmz9xLByISvqBvnQzB5PPgkSm2pwzUt
- mFYJ1RsrXzPD9HMJxY4F7t03U8PQMw9ze/7we6Wfp8vv3iv+DR9JrYhc7giwidZ2dCdr
- 55EQ==
+ bh=dUcI7MfQkW7X4R8QG3689yPkCv0tGLqKd5obOxVaDHA=;
+ b=qCUr/39K5VO49IBTEmb8QCGbKOjSCKE1sJX9ZI48lpPDgSQHQea8k8f304l0XGCL/R
+ QNPk2DgadILR/6esbViIlJDX+r/WVaoG5HwZOBQC8lAdI/tbjVLavTKzaEAeNelE0x90
+ TN9O/cNdZBdg+XRFbyITl/feCl9qNGPeHsNJuG8zkj1hYO6I6tB7F4xnHtVHJJnNL5n0
+ 9tXZv0LogftK1p56QKhdUk0oiHecEAi0lOrRAmR/mOVG3jJvC26Db2dB8r1+3khVroJ3
+ vIqNbKVhiVnmeGUPe4A3Ua+vP1gdfdXU0SW6I/I6uvzdy502vmzwsFVw9jZ9vTL0ZqZt
+ dzLQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVtQZJ29rH+d0kWs7r8iD3kDSRidaieCDx2mIS02wOGKJgEFZVbN4mvepiPT3yKexi+K/WE/C4=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywo2vL0I+ydW0Ah9oxjbJl9TyfBvlZBTchaf8Vg2HQ+YArQbbbC
- I+G0FN5F05Jqq8Ehb6+AVymqBcdYkVxN2JoGicxorQ4hPGro1EnS+wYyjnIGX1c=
-X-Gm-Gg: ASbGncv2h/T1cTRP3hwCihnTGeiNXIGdoPSt5KsIpqS5Zg+k9WplVgaVT/cbZLnQNmj
- 17CxERkvzJBGyjI+963x8czmb9NvRBIJs8AsJgX5McrFml/iYMF928kkH1S9CeafYlUk01qSEwB
- mmhrajDMINuYB5O/QMwTDIgH9ysltf4gcjczsNHFSs7itk3n2AUJYyqO3ClGNY0xxKqrKIt/TWa
- haqAAls03n3ldO7awNS3qxRIM4KA+/GklRPiWgVVBLRGqzy5SItBB3m0Jr2MHrC32VuFlO7F/2H
- IQGVbqkA/+qphCR7hz9LkHI+bqqQZ1mkCcXZ6AGtERs2XUI49x81ydW33Tf6oJLy
-X-Google-Smtp-Source: AGHT+IFFPqZje1+n4o5OfW25/Bg2/uqKj5ctHLJvuIvmvEBltigfl7tX1h1KjMDxf5EPDj/RyIetXA==
-X-Received: by 2002:a05:6402:1e96:b0:5eb:cc22:aa00 with SMTP id
- 4fb4d7f45d1cf-5f628551676mr13103495a12.19.1745319276948; 
- Tue, 22 Apr 2025 03:54:36 -0700 (PDT)
+ AJvYcCXul59JCFftzTqAvOgkc1/7wgz5/q1C7N4zTT5RtsxhNl+bfuxxLkHlxLvKubOqxeTt8b7V0Bw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQqSk8hJ1CNr2GfJZSO8Ddql6YH4dYt9fsjIEGTz4sPz8YmKrv
+ ghDWFF/RvGW5wu04vA4FLoLzQ8e/hK0lfvv9XvRfNsYGipdk+eW7fDQFCz7vFgI=
+X-Gm-Gg: ASbGncu5y8URwzL1hvp7tTvMal98o/PIsNrBSZA+jHEC5Qo6773FKoWrL5TTwa5O/Om
+ wNsSJJ4iDrbB+cotoYUuu+zFZ+UrO4HR9CP1vE+7MDKe5iltGnCK1o2iNTYaOTxAwQePWc7b87R
+ ayY/uEWxlUqUaTEbcYlFoubKaGAHgUReGqBCwmjVnEL4lLN9h0NsmS29UMxB3cFpaZp3gPbozQ9
+ WiQjbom73WA+1JpkU9slxjyPd8YRIqGDFb5JlRe43WV1oHmXkWEGiTniv2GddotyXPKqTjAXcoP
+ STSey74LRUf8NTjJvm4StCdE/hbVX1n9Pax54wyurCRrSCAItGwCMw==
+X-Google-Smtp-Source: AGHT+IHtmeRGnBzwA+OCoFH4KhlOGo4zmzSBKLkVrWVyIlH5/QnEp7137o3rDbcGpHJ/AEoRtYX38w==
+X-Received: by 2002:a05:6402:849:b0:5f3:4194:187 with SMTP id
+ 4fb4d7f45d1cf-5f62854636bmr13525616a12.18.1745319277806; 
+ Tue, 22 Apr 2025 03:54:37 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:d722:61ae:90dc:b4e7])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f62554a1desm5709635a12.8.2025.04.22.03.54.35
+ 4fb4d7f45d1cf-5f62554a1desm5709635a12.8.2025.04.22.03.54.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 03:54:36 -0700 (PDT)
+ Tue, 22 Apr 2025 03:54:37 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Tue, 22 Apr 2025 12:54:06 +0200
-Subject: [PATCH 1/6] clk: qcom: apq8016: Fix SDCC clock addresses
+Date: Tue, 22 Apr 2025 12:54:07 +0200
+Subject: [PATCH 2/6] clk: qcom: Move qcom_gate_clk_en() to C file
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250422-apq8016-clock-fixes2-v1-1-bfc9dd933da6@linaro.org>
+Message-Id: <20250422-apq8016-clock-fixes2-v1-2-bfc9dd933da6@linaro.org>
 References: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
 In-Reply-To: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
 To: Casey Connolly <casey.connolly@linaro.org>
@@ -102,48 +102,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SDCC_...(n) macros in clock-apq8016.c result in the wrong addresses:
+This avoids having to inline it separately into every single clock driver,
+when U-Boot is built with support for multiple SoCs.
 
- - SDCC1: SDCC_APPS_CBCR(0) = ((0 * 0x1000) + 0x41018) = 0x41018
-   Should be 0x42018, this is an invalid register close to the USB clocks.
- - SDCC2: SDCC_APPS_CBCR(1) = ((1 * 0x1000) + 0x41018) = 0x42018
-   Should be 0x43018, this is the SDCC1 clock.
-
-When we try to enable SDCC2, we actually end up enabling SDCC1. When we try
-to enable SDCC1, we just issue some broken register writes.
-
-This hasn't caused any trouble so far, because the boot firmware is keeping
-both SDCC clocks running. However, if these clocks are disabled when
-entering U-Boot, MMC initialization is failing.
-
-Fix this by using the proper offset for the macros. The SDCC_CMD_RCGR() was
-already correct, but change it the same way for consistency.
-
-Fixes: 085921368b7d ("arm: Add support for Qualcomm Snapdragon family")
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
- drivers/clk/qcom/clock-apq8016.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/clk/qcom/clock-qcom.c | 15 +++++++++++++++
+ drivers/clk/qcom/clock-qcom.h | 15 +--------------
+ 2 files changed, 16 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index 6a53f900a9e5c065714fea9eceb528e90d29c407..274c71c53ff76c9a7ea18e3698c12b20a9b1f418 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -23,10 +23,10 @@
- #define APCS_GPLL_ENA_VOTE		(0x45000)
- #define APCS_CLOCK_BRANCH_ENA_VOTE (0x45004)
+diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+index 7687bbe6a23b436e4ddf3b29d1c910062961126d..5018851725b03d1c55c6fc40934bd7bea6344da1 100644
+--- a/drivers/clk/qcom/clock-qcom.c
++++ b/drivers/clk/qcom/clock-qcom.c
+@@ -74,6 +74,21 @@ void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk)
+ 	} while ((val != BRANCH_ON_VAL) && (val != BRANCH_NOC_FSM_ON_VAL));
+ }
  
--#define SDCC_BCR(n)			((n * 0x1000) + 0x41000)
--#define SDCC_CMD_RCGR(n)		(((n + 1) * 0x1000) + 0x41004)
--#define SDCC_APPS_CBCR(n)		((n * 0x1000) + 0x41018)
--#define SDCC_AHB_CBCR(n)		((n * 0x1000) + 0x4101C)
-+#define SDCC_BCR(n)			(((n) * 0x1000) + 0x42000)
-+#define SDCC_CMD_RCGR(n)		(((n) * 0x1000) + 0x42004)
-+#define SDCC_APPS_CBCR(n)		(((n) * 0x1000) + 0x42018)
-+#define SDCC_AHB_CBCR(n)		(((n) * 0x1000) + 0x4201C)
++int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
++{
++	u32 val;
++	if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0) {
++		log_err("gcc@%#08llx: unknown clock ID %lu!\n",
++			priv->base, id);
++		return -ENOENT;
++	}
++
++	val = readl(priv->base + priv->data->clks[id].reg);
++	writel(val | priv->data->clks[id].en_val, priv->base + priv->data->clks[id].reg);
++
++	return 0;
++}
++
+ #define APPS_CMD_RCGR_UPDATE BIT(0)
  
- /* BLSP1 AHB clock (root clock for BLSP) */
- #define BLSP1_AHB_CBCR			0x1008
+ /* Update clock command via CMD_RCGR */
+diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+index f43edea25253305b34e7d879624ea5ee1a751746..ee0347d9d86716c09e7f57b343f12b5908f8cb92 100644
+--- a/drivers/clk/qcom/clock-qcom.h
++++ b/drivers/clk/qcom/clock-qcom.h
+@@ -107,19 +107,6 @@ void clk_rcg_set_rate(phys_addr_t base, uint32_t cmd_rcgr, int div,
+ 		      int source);
+ void clk_phy_mux_enable(phys_addr_t base, uint32_t cmd_rcgr, bool enabled);
+ 
+-static inline int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
+-{
+-	u32 val;
+-	if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0) {
+-		log_err("gcc@%#08llx: unknown clock ID %lu!\n",
+-			priv->base, id);
+-		return -ENOENT;
+-	}
+-
+-	val = readl(priv->base + priv->data->clks[id].reg);
+-	writel(val | priv->data->clks[id].en_val, priv->base + priv->data->clks[id].reg);
+-
+-	return 0;
+-}
++int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id);
+ 
+ #endif
 
 -- 
 2.47.2
