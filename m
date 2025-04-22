@@ -4,61 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97CCC369D3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B17BC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:36:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43B41817C4;
+	by phobos.denx.de (Postfix) with ESMTP id 8750381B4B;
 	Tue, 22 Apr 2025 14:35:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="BDmr2Ngf";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="o6uUDJoj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87456810EB; Tue, 22 Apr 2025 09:47:17 +0200 (CEST)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::221])
+ id 5F2C58171B; Tue, 22 Apr 2025 10:45:20 +0200 (CEST)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+ [217.70.183.201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C5CE8059A
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 09:47:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4A2980EE5
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 10:45:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id A4B0143A67;
- Tue, 22 Apr 2025 07:47:13 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 44FD341E0D;
+ Tue, 22 Apr 2025 08:45:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1745308034;
+ t=1745311517;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=j6ngE45FN5/GhhlRFd0IBtap4Ti5pztrqmUa7X3+Cwk=;
- b=BDmr2NgfZzYvoArxTbS5ge6hKf6Tdxo6mVQ/Fn47dzS+EGoU4eMZsF1xWfPmLuRyjCTKLB
- eN7niWVXOM7W79jyX9pfGMftbG/WVGCXFvS/mjqKuloJuXY8r/w/kM2x1Jl/qBdrEaFtr4
- rReFB7fa6Q/1w01fnqIGU/T8QLtBeS0YMtMYXb4vm38M+vl9vKxisVH7SsN3ux/1+LHifL
- X5zyrBNYQvsUVybrNFROApEw/9U/zZ7QC2IqKDgDyKZyWOsMfzMcjTDa1iLyQJ2Acsh9wW
- 0yUIOOYvr8YujNgZ7BFx4/nIRqDHnbZjoPbiP9y1F1yL56203hxb1PyacH9/eQ==
+ bh=fP7kpORqgwjNthoR1HIaw6Dy3OaXgwP39GSXR8fRjvI=;
+ b=o6uUDJojCZTNlurlptAbW1ADAXfnt0Ul+AWlggdmExbJsp7cHRf7hwsXmvx9muTsvophFa
+ fbG/EXeAF7H2ujii/1JGo53fqhXftxV7CoYUhdmg87fC0wM/AF41/N/kmI+9Y9F48H2OF9
+ OAWkTvgd6b5wDpNe81pEiASdWhxi+vhCBv8zhUb9eje7qyAjZtJW3kOb1UN90MQnASs2DU
+ 3177QYR5Tn1ARvnHIoEy+i5PxIgDVnzxK4jGiqo6IXGE6gRXXIGJFhFyfeOq4J2h/XBiLI
+ zKYxDQPO6+DSPi4SmbfJcgPnzzT+6ldsdOTOSUEdjiXuHtBgRf6M9PspaqAF5Q==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Lukasz Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>,  Kever Yang <kever.yang@rock-chips.com>,
- Dang Huynh <danct12@riseup.net>,  u-boot@lists.denx.de
-Subject: Re: [PATCH] clk: Fix clk_set_parent() regression
-In-Reply-To: <20250419090718.2469756-1-jonas@kwiboo.se> (Jonas Karlman's
- message of "Sat, 19 Apr 2025 09:07:16 +0000")
-References: <20250419090718.2469756-1-jonas@kwiboo.se>
+To: Simon Glass <sjg@chromium.org>
+Cc: Wadim Egorov <w.egorov@phytec.de>,  u-boot@lists.denx.de,
+ upstream@lists.phytec.de,  trini@konsulko.com,  jh80.chung@samsung.com,
+ ilias.apalodimas@linaro.org,  thomas.petazzoni@bootlin.com,
+ ian.ray@gehealthcare.com,  dario.binacchi@amarulasolutions.com,
+ aford173@gmail.com,  seanga2@gmail.com,  nm@ti.com,  francesco@dolcini.it
+Subject: Re: [PATCH] Revert "power-domain: Add refcounting"
+In-Reply-To: <CAFLszThLdBepQ+utC33iOJDO0da3u7o3zrH_nFKkJt8aPcpbdg@mail.gmail.com>
+ (Simon Glass's message of "Fri, 18 Apr 2025 11:19:28 -0600")
+References: <20250417115311.1905411-1-w.egorov@phytec.de>
+ <87mscendw3.fsf@bootlin.com>
+ <CAFLszThLdBepQ+utC33iOJDO0da3u7o3zrH_nFKkJt8aPcpbdg@mail.gmail.com>
 User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Tue, 22 Apr 2025 09:47:12 +0200
-Message-ID: <87o6woljsv.fsf@bootlin.com>
+Date: Tue, 22 Apr 2025 10:45:15 +0200
+Message-ID: <87plh4k2jo.fsf@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-GND-State: clean
 X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeefudejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgefhjedtfeeigeduudekudejkedtiefhleelueeiueevheekvdeludehiedvfeenucfkphepledvrddukeegrddutdekrdehieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeelvddrudekgedruddtkedrheeipdhhvghloheplhhotggrlhhhohhsthdpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeejpdhrtghpthhtohepjhhonhgrsheskhifihgsohhordhsvgdprhgtphhtthhopehluhhkmhgrseguvghngidruggvpdhrtghpthhtohepshgvrghnghgrvdesghhmrghilhdrtghomhdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehkvghvvghrrdihrghnghesrhhotghkqdgthhhiphhsrdgtohhmpdhrtghpthhtohepuggrnhgtthduvdesrhhishgvuhhpr
- dhnvghtpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvgeefvdelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgefhjedtfeeigeduudekudejkedtiefhleelueeiueevheekvdeludehiedvfeenucfkphepledvrddukeegrddutdekrdehieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeelvddrudekgedruddtkedrheeipdhhvghloheplhhotggrlhhhohhsthdpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedugedprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopeifrdgvghhorhhovhesphhhhihtvggtrdguvgdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehuphhsthhrvggrmheslhhishhtshdrphhhhihtvggtrdguvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehjhhektddrt
+ ghhuhhnghesshgrmhhsuhhnghdrtghomhdprhgtphhtthhopehilhhirghsrdgrphgrlhhoughimhgrsheslhhinhgrrhhordhorhhgpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhm
 X-GND-Sasl: miquel.raynal@bootlin.com
 X-Mailman-Approved-At: Tue, 22 Apr 2025 14:35:50 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -77,33 +81,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19/04/2025 at 09:07:16 GMT, Jonas Karlman <jonas@kwiboo.se> wrote:
+Hi Simon,
 
-> The commit ac30d90f3367 ("clk: Ensure the parent clocks are enabled
-> while reparenting") add a call to clk_enable() for the parent clock.
+>> This sadly needs to get in, there have been 3 or 4 reports already, as
+>> many boards are broken. We need to find another way to add refcounting
+>> (otherwise some imx8* features will stay broken), but it requires more
+>> thinking time.
+>>
+>> Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
 >
-> For clock drivers that do not implement the enable() ops, like most
-> Rockchip clock drivers, this now cause the set_parent() ops to never
-> be called when CLK_CCF=3Dn (default for Rockchip).
->
-> clk_enable() typically return -NOSYS when the enable() ops is not
-> implemented by the clock driver, with CLK_CCF=3Dy clk_enable() instead
-> return 0 when the enable() ops is unimplemented.
+> We had this discussion on your patch and you ended up with a
+> 'low-level' function to provide the base functionality. But it would
+> be easier if you retained the current behaviour and then added
+> ref-counting to two new functions. Then people can migrate.
 
-I am really not a big fan of this logic to return low-level information
-in high-level helpers. I am constantly disagreeing with this approach
-because this is exactly the kind of breakage it leads to.
+It's not the fact that people are using refcounting which breaks. It is
+the fact that the device model does not support well the fact that one
+DT node might be used to picture several devices. The clock subsystem
+handles that by registering all clocks manually, and at some point
+abuses one of the uclass internal structures (there is a FIXME about
+that). It's not even the drivers that break.
 
-> Change to ignore -NOSYS from the newly introduced clk_enable() call to
-> fix this regression and restore the old behavior of set_parent() ops
-> being called regardless of if enable() ops is implemented or not.
->
-> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while rep=
-arenting")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Of course, people perhaps won't migrate. This sort of thing is quite
+> tricky. But I still think this would be an easier route. You could
+> perhaps even add a Kconfig option like POWER_DOMAIN_NO_REF_COUNT which
+> uses the current behaviour.
 
-Thanks for the fix,
+I now have an idea how to improve the power domain uclass to make it
+fit, let's see if that works, otherwise I might fallback to this
+solution indeed.
 
-Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
-
+Thanks,
 Miqu=C3=A8l
