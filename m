@@ -4,87 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF81C369D3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 13:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E14BC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:18:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E37BD81E25;
-	Tue, 22 Apr 2025 15:58:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7304F810F4;
+	Tue, 22 Apr 2025 16:18:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NCmYFDG4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b34En2WF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A305819D2; Tue, 22 Apr 2025 15:58:48 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3CE280EE5
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 15:58:45 +0200 (CEST)
+ id 2F79581273; Tue, 22 Apr 2025 16:18:06 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7432580F9C
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:18:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-603fd257386so1021248eaf.1
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 06:58:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745330325; x=1745935125; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vbKlA+CkyeIxA43AQfi0tlpcDJ+SxUM373csFkU+FtM=;
- b=NCmYFDG4Rn5P6gD3UDk09o0+qtLqHBfmpaosbl8zHPCeeJ9ZN7OZPWol0+DUr7sejM
- bUl1DklROYq32FWUKY1eCnSlCeOl3EuiodcHMk4ep7/wOSNY0jJiP+F8zTvJNIPfVo+w
- i0HvzMHcN+6b5t5pYc+sQ04BZEZGHrMcJEPkY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745330325; x=1745935125;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vbKlA+CkyeIxA43AQfi0tlpcDJ+SxUM373csFkU+FtM=;
- b=tB3wlNUF/iC10RWstP+BpxzQBwwgxzqQe9KPx7kAQ4kwgNZ6aIxVrMWF+o21tB9n8M
- I2djWm9crgZaUJl6jqcLN3zMxn7g7nR5MhmPoswS5vINNgol0nhHv7ZnAMbPQd01VfLQ
- VkjG9nLy72kWseYOwIhYE8Obpwr4fnylzc2zBiJgDEVkeXy27oSs1WCTfRfwv0COvm8y
- 8PIayQB90eQ5YPK/a3OsgYzxG5E9sg9Pwu6vRqVz2LpKThsCrkc7WLTl+3gpryhej2mY
- PAkqvAFrgWbSOz/guUkWMnEEyb0gC4AoxNEQSD4x44vLfP5JWhp9MPtTaV9qkNfE6wn+
- jt7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWyOdofHBnPa+9n4E31vfPSZVtOCkKeycl3Di9W5iIf4fL8yu/96syWxlztatJtJ/ucpUM1d5M=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiPl42l8k86h7SM4yXKIobfKbQkI42eyMpOMf7SAw21ru6ygc2
- Zk4B1/9bPCeTgSaUkooH5MXQxi+4DPVFQeCDGxa9mSgEDbvtAzxF4NFFPQfyHW8=
-X-Gm-Gg: ASbGncvJ4DrtCQKKpG+19FQctBc7ZWjWkWMo4EpikYdCittsycmldOjWfft+cySUOkG
- nZfOJ77LpvwUDsvd+AUUuzBt5NmUO1eRt7VnE7iKvkFqJvTR+3bzC9RUDjxYRJqPyB0Pvr+c1OR
- Ym+yKhPKM4XFKUW9q29DJgpRtLQKER4LxEU0p0HhoJQ9vz09S91mORkpIc5yLdGJMHoI2lWqW3Q
- RDSYcHtyUedpzgz9Upiu+2qMkVkFiuleB3LVRhhWlxyx2o74Kr1UyTsWo0hOyR2LkjKzpbQcfMH
- uVZB72py+4R1HeCFYN4T9Nc2EBFAAfaPRWdhmWDL7Q8kFKdGzEcR6V8lyQ6XGZpcJNRN6muMdVK
- t
-X-Google-Smtp-Source: AGHT+IGbpJt6AO6UKdVffJU8qIayWLocvGOLzfQ5zoViG2z0a9UBdAHEudWmIZ/w6Gx7y6z9nCJAyg==
-X-Received: by 2002:a05:6820:1ac5:b0:603:fd3b:aef6 with SMTP id
- 006d021491bc7-606005e133dmr6697029eaf.8.1745330324665; 
- Tue, 22 Apr 2025 06:58:44 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-605ff69c9c7sm2094443eaf.28.2025.04.22.06.58.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 06:58:44 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Joao Marcos Costa <jmcosta944@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Richard Weinberger <richard@nod.at>, 
- Andrea della Porta <andrea.porta@suse.com>, u-boot@lists.denx.de
-In-Reply-To: <20250414131924.86672-1-heinrich.schuchardt@canonical.com>
-References: <20250414131924.86672-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH v2 1/1] fs/squashfs: avoid illegal free() in sqfs_opendir()
-Message-Id: <174533032322.481060.17100639062521683427.b4-ty@konsulko.com>
-Date: Tue, 22 Apr 2025 07:58:43 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEHuuU1237923
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 22 Apr 2025 09:17:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745331476;
+ bh=yxIDKXAWDko9sjp+g0wGe2P/+Oh8zugjGuq2nAn6iSg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=b34En2WFFesFnGk9OaUH5Ldt+hmu6lRIFM/XzXz4JtrTFsieVcfX4a+Z1zldLQbHY
+ /nMy/JHz1c5NKH77aIDFluug2GW7nJ2qxwub1+ZcWyoyR7NM8OTnPYcPR7TTr6Sven
+ 6mNRywSGMzC1MZA41Zny1adrAnJegX3ppcMTVIAI=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEHuYp089471
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 22 Apr 2025 09:17:56 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
+ Apr 2025 09:17:56 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 22 Apr 2025 09:17:56 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MEHqvC004034;
+ Tue, 22 Apr 2025 09:17:53 -0500
+Message-ID: <ed3dd7cf-0a49-4178-9132-c389880e788b@ti.com>
+Date: Tue, 22 Apr 2025 19:47:52 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/4] omap24xx_i2c: Enable Repeated Start functionality
+To: Aniket Limaye <a-limaye@ti.com>, <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <hs@denx.de>, <marek.vasut+renesas@mailbox.org>,
+ <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
+ <virag.david003@gmail.com>, <w.egorov@phytec.de>, <j-keerthy@ti.com>,
+ <u-kumar1@ti.com>
+References: <20250422101957.1949448-1-a-limaye@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20250422101957.1949448-1-a-limaye@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,19 +83,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Apr 2025 15:19:24 +0200, Heinrich Schuchardt wrote:
+Thanks for patch Aniket
 
-> * Use calloc() to allocate token_list. This avoids an illegal free if
->   sqfs_tokenize() fails.
-> * Do not iterate over token_list if it has not been allocated.
-> 
-> 
+On 4/22/2025 3:49 PM, Aniket Limaye wrote:
+> This series implements Repeated Start functionality for the DM_I2C xfer
+> API (omap_i2c_xfer())
+>
+> First, split out the actual implementation for each individual i2c msg
+> transfer into a new function __omap24_i2c_xfer_msg() and use this to
+> implement omap_i2c_xfer().
+>
+> Then, add support for the Repeated Start condition in omap_i2c_xfer()
+> through the CONFIG_I2C_REPEATED_START option.
 
-Applied to u-boot/master, thanks!
+For series
 
-[1/1] fs/squashfs: avoid illegal free() in sqfs_opendir()
-      commit: 185fdf5e94731df05748b1c576effb52ff7a3ec5
--- 
-Tom
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 
 
+>
+> Also add this config to Kconfig and enable it for ARCH_K3 platforms by
+> default.
+>
+> Test logs (On J7200 EVM with DEBUG enabled):
+> https://gist.github.com/aniket-l/9124c65a85a093a5bdc4517e0f813259
+>
+> ---
+> v3:
+> - Fixup [PATCH 2/4] to avoid unused function __omap24_i2c_xfer_msg()
+>    compile time warnings... Move this behind DM_I2C ifdef
+> - Link to v2: https://lore.kernel.org/all/20250310103702.1464782-1-a-limaye@ti.com/
+>
+> v2:
+> - Add another patch to remove unused CONFIG_I2C_REPEATED_START
+> - use new CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
+> - Return right error codes and update debug prints to be driver specific
+> - patch formatting updates
+> - Link to v1: https://lore.kernel.org/u-boot/20250304220546.866602-1-a-limaye@ti.com/
+>
+>
+> Aniket Limaye (4):
+>    i2c: omap24xx_i2c: Remove unused CONFIG_I2C_REPEATED_START
+>    i2c: omap24xx_i2c: Use new function __omap24_i2c_xfer_msg()
+>    i2c: omap24xx_i2c: support CONFIG for repeated start in DM_I2C xfer
+>    drivers: i2c: Kconfig: Add CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
+>
+>   drivers/i2c/Kconfig        |   9 ++
+>   drivers/i2c/omap24xx_i2c.c | 165 ++++++++++++++++++++++++++++++-------
+>   2 files changed, 144 insertions(+), 30 deletions(-)
+>
