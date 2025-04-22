@@ -4,91 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1F8C369D3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 15:37:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4271AC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 15:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0CC780F6B;
-	Tue, 22 Apr 2025 17:37:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7941C812BC;
+	Tue, 22 Apr 2025 17:46:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=paulsajna.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FkxrQV5z";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=paulsajna.com header.i=@paulsajna.com header.b="EHqM/N9s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E096680F9C; Tue, 22 Apr 2025 17:37:54 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 35A508144A; Tue, 22 Apr 2025 17:46:20 +0200 (CEST)
+Received: from mail-10624.protonmail.ch (mail-10624.protonmail.ch
+ [79.135.106.24])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78403803CC
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 17:37:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F364E81273
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 17:46:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=paulsajna.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=arturkow2000@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ac25520a289so702189966b.3
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 08:37:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745336272; x=1745941072; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=z3TbV7fALkiDaFrGtFdOas+mvNc6yq1omUGId+NNbuM=;
- b=FkxrQV5zKFdFuJZuYAzM5kzirVgPsGS8oY25hP7jRH214jzsOdOPSxZiKtSltnwnbf
- U8P8s2l4mOstIbvb/qzpjtPM8XJiI1wcLp2CDzaoBDf2qVQUgnGJcPAQSsvXVFJM7JqC
- x6SlUSKdSz4B25KTbKC1zMBot+N4+6ufM6LiugRlxb9SCovxuDGlae90N8ghZJntI3dU
- MjU78577NnDaMbEeXBdl3gWE7l9CoWzcdzXBatDSuShzLA25DXiWxI1R+POqMGJFWMYz
- YyJuX7R9JFkycyFfdFPYwGIJWyEyAsLxAizWnSmc0lz2A8U4R4JwdDUudBzYjPTLmlT8
- YYng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745336272; x=1745941072;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=z3TbV7fALkiDaFrGtFdOas+mvNc6yq1omUGId+NNbuM=;
- b=LmyyZ6kRDxdefuWmO8f9+/e6uRO4OlHke/fxQCQnwhOq7JbaMz84V56brv9Qcq4box
- q2lx3VxiU27YtaMecsLSiDfF25i5f4G6dDdTA2tFZqAp8MYgu92jMFAPhssxo/jtu40D
- ht3lC3g/5/gU0PLJaVDV6/AUwT/QAYjFQXyOdMnWmjuhZ6ZfwmW7F2IuPfINkS3Qukvr
- C66pYr5zsVEtwQlQXXpwrE36PhMt76FJFuOee/0CFTT+M+VBWNOpj4FGE6G+AMmYzfVm
- PFTWqu4Ekc+7AGpg3BBk68DPRqrZUmr6dk6+grenc0QYaKpPIvQLMzUfOyD7f/1erzlO
- 8ORg==
-X-Gm-Message-State: AOJu0Yyyk+BazYlEop7wB71tv+J0U0xFWZP6qrwm0XLZjFYTkH/sYqSm
- At2zpLWWQwgDG+GCp0F/8G8i2H53miF/AChf2i0ywhZAJiLJ25e1y49jwA==
-X-Gm-Gg: ASbGnctWMogzQo6qv2fBZAOmqmrc+C6XswwMhlTN5ZC9MaTERoFeVVkFyAiqt7n741h
- KGpVswEwUrfbyZ9SCTwBDgYvI6qlXGhzcF30ADh66+zWvT8RsfoUIre+ZStnLR0bar6szVuf7B5
- mVeqEnQ/OG3inWzr1pSee9J0nlYym1Ro6ZIh5RgbMuzkuTtK3wK0oOT9coirzAzvP+qLXNR1S/p
- 5n9UZYxPXsE2HtL12/UFhF6DcfCxbcKFRsBLC0c1nzOrtcvaLeBA6bC729LRFPi9YEiMGWc0Zyy
- RQxzMaaxo252wm3saoIssIw8afAh6UAqW65Qy7QUmW6UoUS77xSHRSKRxAkToE3wROxBaZEZDJg
- swGP/y4VchR8Ypg==
-X-Google-Smtp-Source: AGHT+IEooIsQBZIOvhnUOABInNZb95aBJOz2s9PsUd/4mihtivDdd16+8ArRg0IkacKqvn+KTB45Xg==
-X-Received: by 2002:a17:907:86a8:b0:ace:3a1b:d3d with SMTP id
- a640c23a62f3a-ace3a1b1372mr62238266b.2.1745336271631; 
- Tue, 22 Apr 2025 08:37:51 -0700 (PDT)
-Received: from [192.168.0.15] (89-64-21-19.dynamic.chello.pl. [89.64.21.19])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acb6ec04668sm671048266b.24.2025.04.22.08.37.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Apr 2025 08:37:51 -0700 (PDT)
-Message-ID: <e57d99da-5524-48a5-b672-39b05dc730a2@gmail.com>
-Date: Tue, 22 Apr 2025 17:37:49 +0200
+ spf=pass smtp.mailfrom=hello@paulsajna.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=paulsajna.com;
+ s=protonmail; t=1745336777; x=1745595977;
+ bh=jKzLrOEgglRonhDXEc7j96XZWLpPXzK3GrHD5j2TxFY=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=EHqM/N9smwRFmDfXiLAj2FdzVupzXkcD00oOcsaiFp6K3JlbR82cgUWNHZPmSWhvc
+ QVe3bw6aUdWZH6MM+13mGgcVjfWVKlZi5w7YTHmRH9NgelIkaxNBLpZ/HReTxH338D
+ 2Ux8haKQ2n8id2vcUKwyXFazLN7JC8vTq6DbawlY0mISDlsUt3R1sSb30zspS5fwP6
+ 6r4TmAWEKR4gPYvHC9+S8XumwlwGz3Hw2wFBSiuVYn9zM6O6R6mDLb+JkPyGv06iCm
+ CyvfN8IvYW7o2nFozQZyOqaQvCoZD69JtxLmzKyRWTf2rKzBt84709QQt0K9ME+ZJk
+ Dp5fu1gO4cJsQ==
+Date: Tue, 22 Apr 2025 15:46:14 +0000
+To: Casey Connolly <casey.connolly@linaro.org>
+From: Paul Sajna <hello@paulsajna.com>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Stefan Roese <sr@denx.de>, u-boot-qcom@groups.io, Sam Day <me@samcday.com>
+Subject: Re: [PATCH v2 2/2] watchdog: qcom: improve driver with more
+ functionality
+Message-ID: <w2nlv9FzBv_7cz1on576OdWuPItzYrbZP3o5tu8fnurwSBojeSEHitBNbxKX3PmJCRW7P4bbyl_7_yQz4xVhM1j8tG0ymgVgcjQbii-3Tr0=@paulsajna.com>
+In-Reply-To: <9eb12f16-2af5-49eb-bd09-c809c0debf59@linaro.org>
+References: <20250421-b4-qcom-wdt-v2-0-b2250efa0f39@paulsajna.com>
+ <20250421-b4-qcom-wdt-v2-2-b2250efa0f39@paulsajna.com>
+ <9eb12f16-2af5-49eb-bd09-c809c0debf59@linaro.org>
+Feedback-ID: 29073965:user:proton
+X-Pm-Message-ID: 45bf6583ad0f92a3cb11cfe72726f7d575a7750a
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] tegra: allow to expose UART on microSD slot
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Stephen Warren <swarren@nvidia.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>, Tom Warren <twarren@nvidia.com>
-References: <20250330192656.1280403-1-arturkow2000@gmail.com>
- <20250330212638.v2.3.I45a1ec3470905b1a7313ef907a83999f1163bb3b@changeid>
- <CAPVz0n0fRLgc7aOCpjVVRaX=dPMB9D9UDyNck8gsCJTpfh1pBg@mail.gmail.com>
- <0709393f-51f7-43e9-91b0-18ef5a7c0866@gmail.com>
- <CAPVz0n0umNySqe2QoRKknpktV-iRLF=xg4+vASaQApzMKqhY3w@mail.gmail.com>
-Content-Language: pl
-From: Artur Kowalski <arturkow2000@gmail.com>
-In-Reply-To: <CAPVz0n0umNySqe2QoRKknpktV-iRLF=xg4+vASaQApzMKqhY3w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,144 +72,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-W dniu 01.04.2025 o 15:48, Svyatoslav Ryhel pisze:
+I tested reset and stop pretty thoroughly. I suppose "start" could use some=
+ more checking. I'll squash and fix a line of code I noticed I accidentally=
+ duplicated, then retest that this evening (Pacific Time)
 
-> вт, 1 квіт. 2025 р. о 16:34 Artur Kowalski <arturkow2000@gmail.com> пише:
->>
->> W dniu 31.03.2025 o 07:51, Svyatoslav Ryhel pisze:
->>> нд, 30 бер. 2025 р. о 22:27 Artur Kowalski <arturkow2000@gmail.com> пише:
->>>> Tegra20 has mux allowing to repurpose microSD as UART on boards which
->>>> use sdmmc3 controller for microSD. Add TEGRA_UARTA_MICROSD to enable
->>>> this feature. It is currently supported on Transformer T20, support for
->>>> other boards may require Device Tree changes.
->>>>
->>>> Update Transformer T20 DTS to select correct pinmux and stdout-path
->>>> based on TEGRA_UARTA_MICROSD.
->>>>
->>>> Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
->>>> ---
->>>>
->>>> Changes in v2:
->>>> - added TEGRA_UARTA_MICROSD Kconfig option
->>>> - removed .dtsi for enabling UART over microSD
->>>> - modified transformer DT to use UARTA and correct pinmux when
->>>>     TEGRA_UARTA_MICROSD is enabled; it is enough to flip a single
->>>>     switch to enable/disable UART over microSD
->>>>
->>>>    arch/arm/dts/tegra20-asus-transformer.dtsi | 24 ++++++++++++++++++++++
->>>>    arch/arm/mach-tegra/tegra20/Kconfig        | 15 ++++++++++++++
->>>>    2 files changed, 39 insertions(+)
->>>>
->>>> diff --git a/arch/arm/dts/tegra20-asus-transformer.dtsi b/arch/arm/dts/tegra20-asus-transformer.dtsi
->>>> index 49efabbfd92..9ea323c81f3 100644
->>>> --- a/arch/arm/dts/tegra20-asus-transformer.dtsi
->>>> +++ b/arch/arm/dts/tegra20-asus-transformer.dtsi
->>>> @@ -5,7 +5,13 @@
->>>>
->>>>    / {
->>>>           chosen {
->>>> +#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
->>>> +               stdout-path = &uarta;
->>>> +#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
->>>>                   stdout-path = &uartd;
->>>> +#else
->>>> +#error Unsupported UART
->>>> +#endif
->>>>           };
->>>>
->>>>           aliases {
->>>> @@ -195,10 +201,17 @@
->>>>                                   nvidia,function = "i2c1";
->>>>                           };
->>>>
->>>> +#if CONFIG_IS_ENABLED(TEGRA_UARTA_SDB_SDD)
->>>> +                       dbguart {
->>>> +                               nvidia,pins = "sdb", "sdd";
->>>> +                               nvidia,function = "uarta";
->>>> +                       };
->>>> +#else
->>>>                           sdb {
->>>>                                   nvidia,pins = "sdb", "sdc", "sdd", "slxc", "slxk";
->>>>                                   nvidia,function = "sdio3";
->>>>                           };
->>>> +#endif
->>>>
->>>>                           sdio1 {
->>>>                                   nvidia,pins = "sdio1";
->>>> @@ -376,7 +389,13 @@
->>>>                   };
->>>>           };
->>>>
->>>> +#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
->>>> +       uarta: serial@70006000 {
->>>> +#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
->>>>           uartd: serial@70006300 {
->>>> +#else
->>>> +#error Unsupported UART
->>>> +#endif
->>>>                   status = "okay";
->>>>                   clock-frequency = <216000000>;
->>>>           };
->>>> @@ -434,7 +453,12 @@
->>>>           };
->>>>
->>>>           sdmmc3: sdhci@c8000400 {
->>>> +#if CONFIG_IS_ENABLED(TEGRA_UARTA_MICROSD)
->>>> +               /* Can't use both at the same time */
->>>> +               status = "disabled";
->>>> +#else
->>>>                   status = "okay";
->>>> +#endif
->>>>                   bus-width = <4>;
->>>>
->>>>                   cd-gpios = <&gpio TEGRA_GPIO(I, 5) GPIO_ACTIVE_LOW>;
->>>> diff --git a/arch/arm/mach-tegra/tegra20/Kconfig b/arch/arm/mach-tegra/tegra20/Kconfig
->>>> index 3349f1e2786..c2c51660216 100644
->>>> --- a/arch/arm/mach-tegra/tegra20/Kconfig
->>>> +++ b/arch/arm/mach-tegra/tegra20/Kconfig
->>>> @@ -77,6 +77,21 @@ endchoice
->>>>    config SYS_SOC
->>>>           default "tegra20"
->>>>
->>>> +config TEGRA_UARTA_MICROSD
->>>> +       bool "UARTA on MicroSD breakout board"
->>>> +       default n
->>>> +       depends on TEGRA_ENABLE_UARTA && TARGET_TRANSFORMER_T20
->>>> +       select TEGRA_UARTA_SDB_SDD
->>>> +       help
->>>> +         Repurpose the SD card slot for getting access to the UARTA serial
->>>> +         console. Primarily useful only for low level u-boot debugging on
->>>> +         tablets, where normal UARTD is difficult to access and requires
->>>> +         device disassembly and/or soldering. Enabling this option causes
->>>> +         UARTA TX to become exposed on SDD and RX on SDB pins which correspond
->>>> +         to microSD CLK and CMD pins respectively. Currently this is supported
->>>> +         only on Transformer T20, support for other platforms may require DT
->>>> +         and configs (from include/configs/*) updates.
->>>> +
->>>>    source "board/nvidia/harmony/Kconfig"
->>>>    source "board/avionic-design/medcom-wide/Kconfig"
->>>>    source "board/compal/paz00/Kconfig"
->>>> --
->>>> 2.48.1
->>>>
->>> This is not applicable since this is a hack by nature, BUT if you
->>> contain this in the transformer t20 board and Kconfig (no dts
->>> changes), this may be applied.
->> Ok, then I'll drop DTS changes. I will add few words about this option
->> in Transformer documentation
->> and a note in Kconfig help to not surprise users with not booting U-Boot
->> as enabling this option without
->> changing DTS causes U-Boot to hang.
-> You should remove then Kconfig option as well. Add a new chapter to
-> Transformer T20 documentation which describes this method, here[1] you
-> may find a similar approach but info is in the commit message of
-> tegra30 uart-e funcmux. Additionally, as I have said previously, these
-> changes can be contained in the transformer t20 board file by using
-> some device tree manipulations from there.
+On Tuesday, April 22nd, 2025 at 12:50 PM, Casey Connolly <casey.connolly@li=
+naro.org> wrote:
 
-Currently I'm working on few other things both in U-Boot in OS, some of 
-patches probably I will send to upstream
-in the coming weeks, but eventually, I will come back to this.
-
-> ---
-> 1 https://source.denx.de/u-boot/u-boot/-/commit/b515d7ae0de51a26f73b2ddb5ea4db0d95b67d7a
+>=20
+>=20
+> Hi Paul,
+>=20
+> Please squash this patch into the first one, otherwise this looks good.
+> Did you test start/stop/reset?
+>=20
+> Kind regards,
+>=20
+> On 4/22/25 01:20, Paul Sajna wrote:
+>=20
+> > - add the ability to start the watchdog
+> > - add the ability to reset the watchdog
+> > - remove the automatic disable in the probe function
+> > - use log macros for errors
+> >=20
+> > Signed-off-by: Paul Sajna hello@paulsajna.com
+> > ---
+> > drivers/watchdog/qcom-wdt.c | 32 +++++++++++++++++++++++++-------
+> > 1 file changed, 25 insertions(+), 7 deletions(-)
+> >=20
+> > diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
+> > index a7ce31ef811c717fd16700aa7d984a000763a93e..88e5fc7906825ac25839349=
+5682a75a5010473b0 100644
+> > --- a/drivers/watchdog/qcom-wdt.c
+> > +++ b/drivers/watchdog/qcom-wdt.c
+> > @@ -4,12 +4,14 @@
+> > * Copyright (c) Linaro Ltd. 2024
+> > *
+> > * Authors:
+> > - * Caleb Connolly caleb.connolly@linaro.org
+> > + * Casey Connolly casey.connolly@linaro.org
+> > + * Paul Sajna hello@paulsajna.com
+> > *
+> > * Derived from linux/drivers/watchdog/qcom-wdt.c
+> > */
+> >=20
+> > #include <dm.h>
+> > +#include <dm/device_compat.h>
+> > #include <wdt.h>
+> >=20
+> > #include <asm/io.h>
+> > @@ -50,7 +52,16 @@ static void __iomem *wdt_addr(struct qcom_wdt *wdt, =
+enum wdt_reg reg)
+> >=20
+> > int qcom_wdt_start(struct udevice dev, u64 timeout_ms, ulong flags)
+> > {
+> > - / unimplemented */
+> > + struct qcom_wdt *wdt =3D dev_get_priv(dev);
+> > +
+> > + writel(0, wdt_addr(wdt, WDT_EN));
+> > + writel(1, wdt_addr(wdt, WDT_RST));
+> > + writel(1, wdt_addr(wdt, WDT_EN));
+> > + writel(1, wdt_addr(wdt, WDT_EN));
+> > + if (readl(wdt_addr(wdt, WDT_EN)) !=3D 1) {
+> > + dev_err(dev, "Failed to enable Qualcomm watchdog!\n");
+> > + return -EIO;
+> > + }
+> > return 0;
+> > }
+> >=20
+> > @@ -60,29 +71,36 @@ int qcom_wdt_stop(struct udevice *dev)
+> >=20
+> > writel(0, wdt_addr(wdt, WDT_EN));
+> > if (readl(wdt_addr(wdt, WDT_EN))) {
+> > - printf("Failed to disable Qualcomm watchdog!\n");
+> > + dev_err(dev, "Failed to disable Qualcomm watchdog!\n");
+> > return -EIO;
+> > }
+> >=20
+> > return 0;
+> > }
+> >=20
+> > +int qcom_wdt_reset(struct udevice *dev)
+> > +{
+> > + struct qcom_wdt *wdt =3D dev_get_priv(dev);
+> > +
+> > + writel(1, wdt_addr(wdt, WDT_RST));
+> > + return 0;
+> > +}
+> > +
+> > static int qcom_wdt_probe(struct udevice *dev)
+> > {
+> > struct qcom_wdt *wdt =3D dev_get_priv(dev);
+> > struct qcom_wdt_match_data *data =3D (void *)dev_get_driver_data(dev);
+> > - int ret;
+> >=20
+> > wdt->base =3D dev_read_addr_ptr(dev);
+> > wdt->layout =3D data->offset;
+> >=20
+> > - ret =3D qcom_wdt_stop(dev);
+> > -
+> > - return ret;
+> > + return 0;
+> > }
+> >=20
+> > static const struct wdt_ops qcom_wdt_ops =3D {
+> > + .start =3D qcom_wdt_start,
+> > .stop =3D qcom_wdt_stop,
+> > + .reset =3D qcom_wdt_reset,
+> > };
+> >=20
+> > static const struct udevice_id qcom_wdt_ids[] =3D {
+>=20
+>=20
+> --
+> Casey (she/they)
