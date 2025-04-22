@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F034C369D9
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2237C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:53:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECB4F81F4D;
-	Tue, 22 Apr 2025 16:53:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4FFCB8070C;
+	Tue, 22 Apr 2025 16:53:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Yttygpt+";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="VJwb7Jmb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DED38059A; Tue, 22 Apr 2025 16:53:17 +0200 (CEST)
-Received: from mail-m1973180.qiye.163.com (mail-m1973180.qiye.163.com
- [220.197.31.80])
+ id 0AB1880FA8; Tue, 22 Apr 2025 16:53:51 +0200 (CEST)
+Received: from mail-m19731116.qiye.163.com (mail-m19731116.qiye.163.com
+ [220.197.31.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1814582047
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:53:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58B378059A
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:53:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.69.12] (unknown [218.17.18.106])
- by smtp.qiye.163.com (Hmail) with ESMTP id 12bf5b472;
- Tue, 22 Apr 2025 22:53:05 +0800 (GMT+08:00)
-Message-ID: <fb4a2995-2910-4407-97a3-b36fa2913fce@rock-chips.com>
-Date: Tue, 22 Apr 2025 22:53:05 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 12bf5b4b0;
+ Tue, 22 Apr 2025 22:53:42 +0800 (GMT+08:00)
+Message-ID: <da57c8c5-78ce-4999-92ee-2c83fbceeee0@rock-chips.com>
+Date: Tue, 22 Apr 2025 22:53:42 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 14/15] arm64: dts: rockchip: Add devicetree for the
- ROC-RK3576-PC
+Subject: Re: [PATCH v3 15/15] rockchip: rk3576: Add support for ROC-RK3576-PC
+ board
 To: Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org,
  philipp.tomsich@vrull.eu
 Cc: lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
@@ -42,25 +42,25 @@ Cc: lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
  jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
  u-boot@lists.denx.de, sebastian.reichel@collabora.com
 References: <20250415215128.1475593-1-heiko@sntech.de>
- <20250415215128.1475593-15-heiko@sntech.de>
+ <20250415215128.1475593-16-heiko@sntech.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250415215128.1475593-15-heiko@sntech.de>
+In-Reply-To: <20250415215128.1475593-16-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGkJOVkpNSEJOSkJMGUlDH1YVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlJSkNVSkxVSkNVSktNWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NJVUpLS1
- VLWQY+
-X-HM-Tid: 0a965dfd08c303afkunm12bf5b472
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHRhJVkkdGUtNT0MZTB8YQlYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlJSkNVSkxVSkNVSktNWVdZFhoPEhUdFFlBWU9LSFVKS0hJTEJLVUpLS1
+ VKQktLWQY+
+X-HM-Tid: 0a965dfd988603afkunm12bf5b4b0
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PT46TCo5TzJWS0lRAQFJAys0
- PCMaCT5VSlVKTE9OSEhITkNMTklCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlJSkNVSkxVSkNVSktNWVdZCAFZQUlJS0JONwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kxw6Pjo5TzJKFkkfUTBPPjk6
+ GChPFB5VSlVKTE9OSEhITUlIQk9KVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlJSkNVSkxVSkNVSktNWVdZCAFZQU1DQ043Bg++
 DKIM-Signature: a=rsa-sha256;
- b=Yttygpt+dUbjkSp6ainL6ynYBBiw1CPyjgRfZE0Horn+0AlqxURvTey8P8FgKv41UcMqTdOQAOeMGLrqDgoS+ockOWtzbxwsXsPM+2KtPndMInfi6W+X78qdoFXI3Ql2uG8nqN6WG6EZz+hYM18jpmJqfi9qyIABwS+gCwj6HNw=;
+ b=VJwb7JmbqbeCrs8zyNxKfBNPeeG/ZAW4cXfD80MswTrWVOLOgpdPvFIwxV106+e1v2xXzaijzW6UMK5nL4WRIwi7PaB28khGvuZqbeOi2pf6RUJaPPRZSYHyR8R2H3h1s0BwrBEGNzA0UPseouQxNziBP66qdAoUKdWthClELBU=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=zKKvKyL5x2VZdZNtAMzi54j4r4CNXtQrzgQ96qqSnsc=;
+ bh=SIxNwVBPHa6R8fbLqKmh6clN01liXo2Fo4zk8YYvB7g=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,776 +80,187 @@ X-Virus-Status: Clean
 
 
 On 2025/4/16 05:51, Heiko Stuebner wrote:
-> As the name implies, it is built around the RK3576 SoC with 4x Cortex-A72
-> cores, four Cortex-A53 cores and Mali-G52 MC3 GPU.
->
-> Storage options are EMMC, SD-Card, a 2242 M.2 slot and the possibility to
-> use UFS 2.0 storage.
->
-> Video Output options are a HDMI port, a DSI connector as well as Display-
-> Port via the TypeC connector (all of them not yet supported).
->
-> Networking options are a Low-profile Gigabit Ethernet RJ45 port with
-> Motorcomm YT8531 PHY as well as WiFi via an AMPAK AP6256 module.
->
-> USB ports on the board are 1x USB 3.0 port, 1x USB 2.0 port, 1x USB Type-C
-> and it comes with 40-pin GPIO header
+> The ROC-RK3576-PC is a SBC made by Firefly, designed around the RK3576
+> SoC. This adds the needed board infrastructure and config for it.
 >
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> Link: https://lore.kernel.org/r/20250210205126.1173631-3-heiko@sntech.de
->
-> [ upstream commit: 887ff17cdd8f088a52e2b61e71f2b6c9b9678de6 ]
->
-> (cherry picked from commit 388e7272d092bd20e414cd408bac39d8fd02d765)
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   .../src/arm64/rockchip/rk3576-roc-pc.dts      | 736 ++++++++++++++++++
->   1 file changed, 736 insertions(+)
->   create mode 100644 dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts
+>   arch/arm/dts/rk3576-roc-pc-u-boot.dtsi  | 11 ++++++
+>   arch/arm/mach-rockchip/rk3576/Kconfig   |  8 +++++
+>   board/firefly/roc-pc-rk3576/Kconfig     | 12 +++++++
+>   board/firefly/roc-pc-rk3576/MAINTAINERS |  7 ++++
+>   configs/roc-pc-rk3576_defconfig         | 45 +++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst         |  3 ++
+>   include/configs/roc-pc-rk3576.h         | 15 +++++++++
+>   7 files changed, 101 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+>   create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
+>   create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
+>   create mode 100644 configs/roc-pc-rk3576_defconfig
+>   create mode 100644 include/configs/roc-pc-rk3576.h
 >
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts b/dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts
+> diff --git a/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
 > new file mode 100644
-> index 00000000000..612b7bb0b74
+> index 00000000000..97240345ed4
 > --- /dev/null
-> +++ b/dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts
-> @@ -0,0 +1,736 @@
+> +++ b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+> @@ -0,0 +1,11 @@
 > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 > +/*
-> + * Copyright (c) 2024 Firefly Technology Co. Ltd
-> + * Copyright (c) 2024 Heiko Stuebner <heiko@sntech.de>
+> + * Copyright (c) 2023 Joshua Riek <jjriek@verizon.net>
+> + *
 > + */
 > +
-> +/dts-v1/;
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/input/input.h>
-> +#include <dt-bindings/pinctrl/rockchip.h>
-> +#include <dt-bindings/pwm/pwm.h>
-> +#include <dt-bindings/usb/pd.h>
-> +#include "rk3576.dtsi"
-> +
-> +/ {
-> +	model = "Firefly ROC-RK3576-PC";
-> +	compatible = "firefly,roc-rk3576-pc", "rockchip,rk3576";
-> +
-> +	aliases {
-> +		mmc0 = &sdhci;
-> +		mmc1 = &sdmmc;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path = "serial0:1500000n8";
-> +	};
-> +
-> +	adc-keys-0 {
-> +		compatible = "adc-keys";
-> +		io-channels = <&saradc 0>;
-> +		io-channel-names = "buttons";
-> +		keyup-threshold-microvolt = <1800000>;
-> +		poll-interval = <100>;
-> +
-> +		button-maskrom {
-> +			label = "Maskrom";
-> +			linux,code = <KEY_SETUP>;
-> +			press-threshold-microvolt = <17000>;
-> +		};
-> +	};
-> +
-> +	adc-keys-1 {
-> +		compatible = "adc-keys";
-> +		io-channels = <&saradc 1>;
-> +		io-channel-names = "buttons";
-> +		keyup-threshold-microvolt = <1800000>;
-> +		poll-interval = <100>;
-> +
-> +		button-recovery {
-> +			label = "Recovery";
-> +			linux,code = <KEY_VENDOR>;
-> +			press-threshold-microvolt = <17000>;
-> +		};
-> +	};
-> +
-> +	vbus5v0_typec: regulator-vbus5v0-typec {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		gpio = <&gpio0 RK_PD1 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&usb_otg0_pwren_h>;
-> +		regulator-name = "vbus5v0_typec";
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		vin-supply = <&vcc5v0_device_s0>;
-> +	};
-> +
-> +	vcc12v_dcin: regulator-vcc12v-dcin {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc12v_dcin";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <12000000>;
-> +		regulator-max-microvolt = <12000000>;
-> +	};
-> +
-> +	vcc1v2_ufs_vccq_s0: regulator-vcc1v2-ufs-vccq-s0 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc1v2_ufs_vccq_s0";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <1200000>;
-> +		regulator-max-microvolt = <1200000>;
-> +		vin-supply = <&vcc5v0_sys_s5>;
-> +	};
-> +
-> +	vcc1v8_ufs_vccq2_s0: regulator-vcc1v8-ufs-vccq2-s0 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc1v8_ufs_vccq2_s0";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <1800000>;
-> +		regulator-max-microvolt = <1800000>;
-> +		vin-supply = <&vcc_1v8_s3>;
-> +	};
-> +
-> +	vcc3v3_pcie: regulator-vcc3v3-pcie {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		gpio = <&gpio2 RK_PB3 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&pcie_pwren_h>;
-> +		regulator-name = "vcc3v3_pcie";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		startup-delay-us = <5000>;
-> +		vin-supply = <&vcc12v_dcin>;
-> +	};
-> +
-> +	vcc3v3_rtc_s5: regulator-vcc3v3-rtc-s5 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc3v3_rtc_s5";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		vin-supply = <&vcc5v0_sys_s5>;
-> +	};
-> +
-> +	vcc5v0_device_s0: regulator-vcc5v0-device-s0 {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		gpio = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&vcc5vd_en>;
-> +		regulator-name = "vcc5v0_device";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		vin-supply = <&vcc12v_dcin>;
-> +	};
-> +
-> +	vcc5v0_sys_s5: regulator-vcc5v0-sys-s5 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		vin-supply = <&vcc12v_dcin>;
-> +	};
-> +
-> +	vcc5v0_usb20_host1: regulator-vcc5v0-usb20-host1 {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		gpio = <&gpio0 RK_PC7 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&usb3_host_pwren_h>;
-> +		regulator-name = "vcc5v0_host1";
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		vin-supply = <&vcc5v0_device_s0>;
-> +	};
-> +
-> +	vcc_1v1_nldo_s3: regulator-vcc-1v1-nldo-s3 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_1v1_nldo_s3";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <1100000>;
-> +		regulator-max-microvolt = <1100000>;
-> +		vin-supply = <&vcc5v0_sys_s5>;
-> +	};
-> +
-> +	vcc_1v8_s0: regulator-vcc-1v8-s0 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_1v8_s0";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <1800000>;
-> +		regulator-max-microvolt = <1800000>;
-> +		vin-supply = <&vcc_1v8_s3>;
-> +	};
-> +
-> +	vcc_2v0_pldo_s3: regulator-vcc-2v0-pldo-s3 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_2v0_pldo_s3";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <2000000>;
-> +		regulator-max-microvolt = <2000000>;
-> +		vin-supply = <&vcc5v0_sys_s5>;
-> +	};
-> +
-> +	vcc_3v3_s0: regulator-vcc-3v3-s0 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_3v3_s0";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		vin-supply = <&vcc_3v3_s3>;
-> +	};
-> +
-> +	vcc_ufs_s0: regulator-vcc-ufs-s0 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_ufs_s0";
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		vin-supply = <&vcc5v0_sys_s5>;
-> +	};
-> +};
-> +
-> +&cpu_l0 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&cpu_l1 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&cpu_l2 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&cpu_l3 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&cpu_b0 {
-> +	cpu-supply = <&vdd_cpu_big_s0>;
-> +};
-> +
-> +&cpu_b1 {
-> +	cpu-supply = <&vdd_cpu_big_s0>;
-> +};
-> +
-> +&cpu_b2 {
-> +	cpu-supply = <&vdd_cpu_big_s0>;
-> +};
-> +
-> +&cpu_b3 {
-> +	cpu-supply = <&vdd_cpu_big_s0>;
-> +};
-> +
-> +&gpu {
-> +	mali-supply = <&vdd_gpu_s0>;
-> +	status = "okay";
-> +};
-> +
-> +&gmac0 {
-> +	clock_in_out = "output";
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&eth0m0_miim
-> +		     &eth0m0_tx_bus2
-> +		     &eth0m0_rx_bus2
-> +		     &eth0m0_rgmii_clk
-> +		     &eth0m0_rgmii_bus
-> +		     &ethm0_clk0_25m_out>;
-> +	/* Use rgmii-rxid mode to disable rx delay inside Soc */
-> +	phy-mode = "rgmii-rxid";
-> +	phy-handle = <&rgmii_phy0>;
-> +	tx_delay = <0x21>;
-> +	status = "okay";
-> +};
-> +
-> +&mdio0 {
-> +	status = "okay";
-> +
-> +	rgmii_phy0: phy@1 {
-> +		compatible = "ethernet-phy-ieee802.3-c22";
-> +		reg = <0x1>;
-> +		clocks = <&cru REFCLKO25M_GMAC0_OUT>;
-> +		/* Reset time is 20ms, 100ms for rtl8211f */
-> +		reset-delay-us = <20000>;
-> +		reset-gpios = <&gpio2 RK_PB5 GPIO_ACTIVE_LOW>;
-> +		reset-post-delay-us = <100000>;
-> +	};
-> +};
-> +
-> +&i2c1 {
-> +	status = "okay";
-> +
-> +	pmic@23 {
-> +		compatible = "rockchip,rk806";
-> +		reg = <0x23>;
-> +		interrupt-parent = <&gpio0>;
-> +		interrupts = <6 IRQ_TYPE_LEVEL_LOW>;
-> +		gpio-controller;
-> +		#gpio-cells = <2>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
-> +			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
-> +		system-power-controller;
-> +
-> +		vcc1-supply = <&vcc5v0_sys_s5>;
-> +		vcc2-supply = <&vcc5v0_sys_s5>;
-> +		vcc3-supply = <&vcc5v0_sys_s5>;
-> +		vcc4-supply = <&vcc5v0_sys_s5>;
-> +		vcc5-supply = <&vcc5v0_sys_s5>;
-> +		vcc6-supply = <&vcc5v0_sys_s5>;
-> +		vcc7-supply = <&vcc5v0_sys_s5>;
-> +		vcc8-supply = <&vcc5v0_sys_s5>;
-> +		vcc9-supply = <&vcc5v0_sys_s5>;
-> +		vcc10-supply = <&vcc5v0_sys_s5>;
-> +		vcc11-supply = <&vcc_2v0_pldo_s3>;
-> +		vcc12-supply = <&vcc5v0_sys_s5>;
-> +		vcc13-supply = <&vcc_1v1_nldo_s3>;
-> +		vcc14-supply = <&vcc_1v1_nldo_s3>;
-> +		vcca-supply = <&vcc5v0_sys_s5>;
-> +
-> +		rk806_dvs1_null: dvs1-null-pins {
-> +			pins = "gpio_pwrctrl1";
-> +			function = "pin_fun0";
-> +		};
-> +
-> +		rk806_dvs2_null: dvs2-null-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun0";
-> +		};
-> +
-> +		rk806_dvs3_null: dvs3-null-pins {
-> +			pins = "gpio_pwrctrl3";
-> +			function = "pin_fun0";
-> +		};
-> +
-> +		rk806_dvs1_slp: dvs1-slp-pins {
-> +			pins = "gpio_pwrctrl1";
-> +			function = "pin_fun1";
-> +		};
-> +
-> +		rk806_dvs1_pwrdn: dvs1-pwrdn-pins {
-> +			pins = "gpio_pwrctrl1";
-> +			function = "pin_fun2";
-> +		};
-> +
-> +		rk806_dvs1_rst: dvs1-rst-pins {
-> +			pins = "gpio_pwrctrl1";
-> +			function = "pin_fun3";
-> +		};
-> +
-> +		rk806_dvs2_slp: dvs2-slp-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun1";
-> +		};
-> +
-> +		rk806_dvs2_pwrdn: dvs2-pwrdn-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun2";
-> +		};
-> +
-> +		rk806_dvs2_rst: dvs2-rst-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun3";
-> +		};
-> +
-> +		rk806_dvs2_dvs: dvs2-dvs-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun4";
-> +		};
-> +
-> +		rk806_dvs2_gpio: dvs2-gpio-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun5";
-> +		};
-> +
-> +		rk806_dvs3_slp: dvs3-slp-pins {
-> +			pins = "gpio_pwrctrl3";
-> +			function = "pin_fun1";
-> +		};
-> +
-> +		rk806_dvs3_pwrdn: dvs3-pwrdn-pins {
-> +			pins = "gpio_pwrctrl3";
-> +			function = "pin_fun2";
-> +		};
-> +
-> +		rk806_dvs3_rst: dvs3-rst-pins {
-> +			pins = "gpio_pwrctrl3";
-> +			function = "pin_fun3";
-> +		};
-> +
-> +		rk806_dvs3_dvs: dvs3-dvs-pins {
-> +			pins = "gpio_pwrctrl3";
-> +			function = "pin_fun4";
-> +		};
-> +
-> +		rk806_dvs3_gpio: dvs3-gpio-pins {
-> +			pins = "gpio_pwrctrl3";
-> +			function = "pin_fun5";
-> +		};
-> +
-> +		regulators {
-> +			vdd_cpu_big_s0: dcdc-reg1 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <950000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_cpu_big_s0";
-> +				regulator-enable-ramp-delay = <400>;
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_npu_s0: dcdc-reg2 {
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <950000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_npu_s0";
-> +				regulator-enable-ramp-delay = <400>;
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_cpu_lit_s0: dcdc-reg3 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <950000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_cpu_lit_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +					regulator-suspend-microvolt = <750000>;
-> +				};
-> +			};
-> +
-> +			vcc_3v3_s3: dcdc-reg4 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-name = "vcc_3v3_s3";
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <3300000>;
-> +				};
-> +			};
-> +
-> +			vdd_gpu_s0: dcdc-reg5 {
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <900000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_gpu_s0";
-> +				regulator-enable-ramp-delay = <400>;
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +					regulator-suspend-microvolt = <850000>;
-> +				};
-> +			};
-> +
-> +			vddq_ddr_s0: dcdc-reg6 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-name = "vddq_ddr_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_logic_s0: dcdc-reg7 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <800000>;
-> +				regulator-name = "vdd_logic_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_1v8_s3: dcdc-reg8 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcc_1v8_s3";
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <1800000>;
-> +				};
-> +			};
-> +
-> +			vdd2_ddr_s3: dcdc-reg9 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-name = "vdd2_ddr_s3";
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_ddr_s0: dcdc-reg10 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <1200000>;
-> +				regulator-name = "vdd_ddr_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcca_1v8_s0: pldo-reg1 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcca_1v8_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcca1v8_pldo2_s0: pldo-reg2 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcca1v8_pldo2_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdda_1v2_s0: pldo-reg3 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1200000>;
-> +				regulator-max-microvolt = <1200000>;
-> +				regulator-name = "vdda_1v2_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcca_3v3_s0: pldo-reg4 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-name = "vcca_3v3_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vccio_sd_s0: pldo-reg5 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-name = "vccio_sd_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcca1v8_pldo6_s3: pldo-reg6 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcca1v8_pldo6_s3";
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <1800000>;
-> +				};
-> +			};
-> +
-> +			vdd_0v75_s3: nldo-reg1 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <750000>;
-> +				regulator-max-microvolt = <750000>;
-> +				regulator-name = "vdd_0v75_s3";
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <750000>;
-> +				};
-> +			};
-> +
-> +			vdda_ddr_pll_s0: nldo-reg2 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <850000>;
-> +				regulator-max-microvolt = <850000>;
-> +				regulator-name = "vdda_ddr_pll_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdda0v75_hdmi_s0: nldo-reg3 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <837500>;
-> +				regulator-max-microvolt = <837500>;
-> +				regulator-name = "vdda0v75_hdmi_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdda_0v85_s0: nldo-reg4 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <850000>;
-> +				regulator-max-microvolt = <850000>;
-> +				regulator-name = "vdda_0v85_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdda_0v75_s0: nldo-reg5 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <750000>;
-> +				regulator-max-microvolt = <750000>;
-> +				regulator-name = "vdda_0v75_s0";
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&i2c2 {
-> +	status = "okay";
-> +
-> +	/* pc9202 watchdog@3c with enable-gpio gpio0-c3 */
-> +
-> +	/* hnyetek,husb311 typec-portc@4e */
-> +
-> +	hym8563: rtc@51 {
-> +		compatible = "haoyu,hym8563";
-> +		reg = <0x51>;
-> +		#clock-cells = <0>;
-> +		clock-output-names = "hym8563";
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&rtc_int_l>;
-> +		interrupt-parent = <&gpio0>;
-> +		interrupts = <RK_PA0 IRQ_TYPE_LEVEL_LOW>;
-> +		wakeup-source;
-> +	};
-> +};
-> +
-> +&saradc {
-> +	vref-supply = <&vcca_1v8_s0>;
-> +	status = "okay";
-> +};
+> +#include "rk3576-u-boot.dtsi"
 > +
 > +&sdhci {
-> +	bus-width = <8>;
-> +	no-sdio;
-> +	no-sd;
-> +	non-removable;
-> +	max-frequency = <200000000>;
-> +	mmc-hs400-1_8v;
-> +	mmc-hs400-enhanced-strobe;
-> +	full-pwr-cycle-in-suspend;
-> +	status = "okay";
-> +};
-> +
-> +&sdmmc {
-> +	max-frequency = <200000000>;
-> +	no-sdio;
-> +	no-mmc;
-> +	bus-width = <4>;
 > +	cap-mmc-highspeed;
-> +	cap-sd-highspeed;
-> +	disable-wp;
-> +	sd-uhs-sdr104;
-> +	vqmmc-supply = <&vccio_sd_s0>;
-> +	status = "okay";
 > +};
+> diff --git a/arch/arm/mach-rockchip/rk3576/Kconfig b/arch/arm/mach-rockchip/rk3576/Kconfig
+> index a94dc6706f0..f347caf8904 100644
+> --- a/arch/arm/mach-rockchip/rk3576/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3576/Kconfig
+> @@ -1,5 +1,11 @@
+>   if ROCKCHIP_RK3576
+>   
+> +config TARGET_ROC_PC_RK3576
+> +	bool "Firefly ROC-RK3576-PC"
+> +	help
+> +	  ROC-RK3576-PC is a single board computer from Firefly
+> +	  using the Rockchip RK3576.
 > +
-> +&pinctrl {
-> +	hym8563 {
-> +		rtc_int_l: rtc-int-l {
-> +			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
+>   config ROCKCHIP_BOOT_MODE_REG
+>   	default 0x26024040
+>   
+> @@ -9,6 +15,8 @@ config ROCKCHIP_STIMER_BASE
+>   config SYS_SOC
+>   	default "rk3576"
+>   
+> +source board/firefly/roc-pc-rk3576/Kconfig
 > +
-> +	power {
-> +		vcc5vd_en: vcc5vd-en {
-> +			rockchip,pins = <2 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
+>   config SYS_CONFIG_NAME
+>   	default "rk3576_common"
+>   
+> diff --git a/board/firefly/roc-pc-rk3576/Kconfig b/board/firefly/roc-pc-rk3576/Kconfig
+> new file mode 100644
+> index 00000000000..2fc0f913c37
+> --- /dev/null
+> +++ b/board/firefly/roc-pc-rk3576/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_ROC_PC_RK3576
 > +
-> +		pcie_pwren_h: pcie-pwren-h {
-> +			rockchip,pins = <2 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
+> +config SYS_BOARD
+> +	default "roc-pc-rk3576"
 > +
-> +	usb {
-> +		hub_reset_h: hub-reset-h {
-> +			rockchip,pins = <2 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
+> +config SYS_VENDOR
+> +	default "firefly"
 > +
-> +		usb3_host_pwren_h: usb3-host-pwren-h {
-> +			rockchip,pins = <0 RK_PC7 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
+> +config SYS_CONFIG_NAME
+> +	default "roc-pc-rk3576"
 > +
-> +		usb_otg0_pwren_h: usb-otg0-pwren-h {
-> +			rockchip,pins = <0 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
+> +endif
+> diff --git a/board/firefly/roc-pc-rk3576/MAINTAINERS b/board/firefly/roc-pc-rk3576/MAINTAINERS
+> new file mode 100644
+> index 00000000000..aa8897c16fc
+> --- /dev/null
+> +++ b/board/firefly/roc-pc-rk3576/MAINTAINERS
+> @@ -0,0 +1,7 @@
+> +ROC-RK3576-PC
+> +M:	Heiko Stuebner <heiko@sntech.de>
+> +S:	Maintained
+> +F:	board/firefly/roc-pc-rk3576
+> +F:	include/configs/roc-pc-rk3576.h
+> +F:	configs/roc-pc-rk3576_defconfig
+> +F:	arch/arm/dts/rk3576-roc-pc*
+> diff --git a/configs/roc-pc-rk3576_defconfig b/configs/roc-pc-rk3576_defconfig
+> new file mode 100644
+> index 00000000000..af2c1026636
+> --- /dev/null
+> +++ b/configs/roc-pc-rk3576_defconfig
+> @@ -0,0 +1,45 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-roc-pc"
+> +CONFIG_ROCKCHIP_RK3576=y
+> +CONFIG_TARGET_ROC_PC_RK3576=y
+> +CONFIG_SYS_LOAD_ADDR=0x40c00800
+> +CONFIG_DEBUG_UART_BASE=0x2AD40000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-roc-pc.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_BUTTON=y
+> +CONFIG_BUTTON_ADC=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_PHY_MOTORCOMM=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_SYSRESET_PSCI=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index 1058a1ce990..8d7c2591e25 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -130,6 +130,9 @@ List of mainline supported Rockchip boards:
+>        - Radxa ROCK 3A (rock-3a-rk3568)
+>        - Radxa ROCK 3B (rock-3b-rk3568)
+>   
+> +* rk3576
+> +     - Firefly ROC-RK3576-PC (roc-pc-rk3576)
 > +
-> +		usbc0_int_l: usbc0-int-l {
-> +			rockchip,pins = <0 RK_PA5 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
+>   * rk3588
+>        - ArmSoM Sige7 (sige7-rk3588)
+>        - Rockchip EVB (evb-rk3588)
+> diff --git a/include/configs/roc-pc-rk3576.h b/include/configs/roc-pc-rk3576.h
+> new file mode 100644
+> index 00000000000..77c95f0c560
+> --- /dev/null
+> +++ b/include/configs/roc-pc-rk3576.h
+> @@ -0,0 +1,15 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
+> + */
 > +
-> +	watchdog {
-> +		wd_en: wd-en {
-> +			rockchip,pins = <0 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +};
+> +#ifndef __ROC_PC_RK3576_H
+> +#define __ROC_PC_RK3576_H
 > +
-> +&uart0 {
-> +	pinctrl-0 = <&uart0m0_xfer>;
-> +	status = "okay";
-> +};
+> +#define ROCKCHIP_DEVICE_SETTINGS \
+> +		"stdout=serial,vidconsole\0" \
+> +		"stderr=serial,vidconsole\0"
 > +
-> +&uart4 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&uart4m1_xfer &uart4m1_ctsn>;
-> +	status = "okay";
-> +};
+> +#include <configs/rk3576_common.h>
 > +
-> +/* On the extension pin header */
-> +&uart6 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&uart6m3_xfer>;
-> +	status = "okay";
-> +};
+> +#endif
