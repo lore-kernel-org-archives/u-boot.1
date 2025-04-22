@@ -4,80 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1049EC369D1
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 21:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0FFC369D1
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 21:08:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 677EB812BC;
-	Tue, 22 Apr 2025 23:08:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3B2D819FC;
+	Tue, 22 Apr 2025 23:08:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VZvPaBFc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XD3LDrUB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB64E810F4; Tue, 22 Apr 2025 23:08:21 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 2D26180EE5; Tue, 22 Apr 2025 23:08:23 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BA82810E8
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 23:08:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1406A80EE5
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 23:08:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-72c14235af3so3727039a34.3
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:08:19 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72b82c8230aso1718691a34.2
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:08:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745356098; x=1745960898; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745356100; x=1745960900; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JAXdix1kKwezPmn/wdZ326aC/G0GDDYI7+qoFCZnOhc=;
- b=VZvPaBFc1aUxBuRVhcXnXE3y9goLQFoPEk4nR5HjQJe7YvbS6+Xw7X3bYQegp28M++
- 0rQZmVdalo4EUtTl2fQqJi771xwh7iZ1D2c7a8C8Q3ItU2LvOASBRNPp/8JE5rBMN1BV
- j+sBsbC87kS5uUFAEcLKR29ARBaPM8nRXt6Ps=
+ bh=YjDghdTifvlNGsIK1HFr+ESgCYy/cVj/NRjuEMtw68g=;
+ b=XD3LDrUBoZ+unvk4GvbZc2pPMNE/CqUZ4GZw5slNuetG7O4uM1rjyKf1G7ieN/cIkS
+ VC1xDFDYuKX3OJuOETX2K3Lqz6Wnr/upk1mvgmBrtyF7n5v4nejqP6qmjuWR5ezzvIa0
+ IGywsSkBKbIGL+ptQICamyPzBn+8JflJ+zyVQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745356098; x=1745960898;
+ d=1e100.net; s=20230601; t=1745356100; x=1745960900;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JAXdix1kKwezPmn/wdZ326aC/G0GDDYI7+qoFCZnOhc=;
- b=TyBfYOsaP7HVGjHr5vGZP/bot8ZQ4POb6cELacAo2cu9W6tkuW1zfMiciHK7I+xYrD
- ujVpgTriWO/8ESdMHyk4aejJ+TUq/+bwmYMrk/+tEjlvCUITmysZqMk5oilsuR/dCvo4
- 0v0Y0s9p0b6axeUkFLZJljyCz0oKQFUIQHKdhDGJelXaYqW+aN0bOQboKv8snWRI2xet
- HgihwxR80aEne8GrgiYkCokQThGqKdfYOtWH/ohY54sARLarFyzW5MDhev0G5S1gi9f5
- 4TJFmB5SCnQVczoW2kgVfr/+ipCqzkI4ASZrNsJI3Hr5Vhu+bbYbqx6PY5op+0BBtoxk
- dwwQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVn1wJrBbWfRejBQslsJeKP/rFVaG6uyTRSkqRQIExDrZjRE2IGFDv77r4eQvYyYKJ220/xtt0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0ACkbAMZ9NoEsdmqSPvMv5Md3aly8giU5OiqeSdXFeS94zcSX
- tES4u85ndNj+JNj0g5O7RjYn+JXaToWZOFGE7yREVu4SeF/qsDxbNlukjV9vGSw=
-X-Gm-Gg: ASbGncsuDriR9EgS5gikOv814b7VxPHm3o5exM1jkJKC5U6VhU2M1mWNLPSgXD057S6
- ficEb1Jj7K6/YXlBA+MiFThjZq4wbg03og4gPMSWpNAJQaGRaKBScx7Deft1vo2tXeTZuif+LU3
- 6ysDNdpSOiHN+Q6W9wtdpKgh7tMzDt62sRcPG9uVdZFGvPSutbPKUvTKNX9P9IQgfTZfi1dWEU2
- ZFYHcdjbHUqJd1ORHje4tIct6EUGx7kkk6vKMGBBJM6rxKdmGPE2OQBkTxFS0Fs2CTHp6UuBlT4
- 45j/Ib0BXKcz3LmUqxFpyhcL1//cS7rZDYtaFMgIUVA0SxxHWsCs6q6wsDd8IS6Fo42ZdMI+3LR
- +
-X-Google-Smtp-Source: AGHT+IGvWWrBAppYervdsrL35atBqLoTOQ3geAUxPgJ7QcWknF73pxdbG2KfRHSjnsSUFvIYxrnN3w==
-X-Received: by 2002:a05:6830:61cc:b0:727:3f3e:53bb with SMTP id
- 46e09a7af769-73006336b1amr10398329a34.24.1745356098352; 
- Tue, 22 Apr 2025 14:08:18 -0700 (PDT)
+ bh=YjDghdTifvlNGsIK1HFr+ESgCYy/cVj/NRjuEMtw68g=;
+ b=qvQLSQlsiNBtbpmCQh9uhFDyD2M8b2aOHQO8kUsOv6XV1xGw0MqKNeCZaKjA48j2JK
+ /AtMyiyGPPFqYJCvI7gt9smuYuWIg+mT9e3pKYfJQ5GOVfrIRD1ZyXrbM4xL2rVUxPaE
+ T8oO8/hfRkfDLq5zjiQjlkm3h8enfe79J8LAeYhom+R8k+9nh1jaJcRoYz0vw+ql6cKE
+ 5mxXxfF7cFl/8wj0haLVd+LV1Xz6GAlwPCU0Q75LdyefB9w3iuChYc0Oo4uKVbNuLbDa
+ RhwNwP4WLrWuX5YHdr3906OdndWy/sXu5Ak0Dy4FC3MO42wUB8fIIvSsJtoSsQHmFmIz
+ kmMw==
+X-Gm-Message-State: AOJu0Yxomwlc6DZiwHgdLgJO9xIuYJF04o0rosUaUMJFr4J4sBN5ZD4h
+ oN6zgpOWFZQA8lC8OBkIETYKHCXwFlP2HaihkPXtQ306O9eV8qCegSylo3t/cFc=
+X-Gm-Gg: ASbGncu7BPo6HX+nXpihGuT5geEAb3xGsUZoaBILY16Rdfc2eoJIq/4PAMh6IjQ6v6e
+ L95SGmQZlhebYfxKga38vVY+E6in+3DapEjWdoyZ0ElrBUQ3wTe6hTyL9ob2D7nQEK+piciJ/v4
+ GuyaVQuE5MsSKUVA++RIBWvNaTKfZidQxX6O64dSj5+79QRZcTezlrJCj1b9wmPMFK81GqP/7Vx
+ MCP3/9VghoVXOWxiCLTlTg7N5lcIuWeKzvg1O7r4eoLNnz1znGw3g92BWqA2AzKrRwY/Sw6+RfS
+ gA06LVWhg/VN4QWKYStIVd9F4dGvmJ3GpbnCK1qxoMqDx7W+QURy9+qTA5qhSVLlqutobvHU6/W
+ m
+X-Google-Smtp-Source: AGHT+IEnnJiCgEUvXuGUQEQR01KUX4zQvUkF/yHqy0emRAyNJNgA6R0piYlM0EJpMLvfyUD8hJE79g==
+X-Received: by 2002:a05:6830:6112:b0:72b:98d9:6b2d with SMTP id
+ 46e09a7af769-7300620a0e5mr13750162a34.8.1745356099797; 
+ Tue, 22 Apr 2025 14:08:19 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7300488495asm2128388a34.43.2025.04.22.14.08.17
+ 46e09a7af769-7300488495asm2128388a34.43.2025.04.22.14.08.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 14:08:17 -0700 (PDT)
+ Tue, 22 Apr 2025 14:08:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de
-In-Reply-To: <20250420085929.36226-1-heinrich.schuchardt@canonical.com>
-References: <20250420085929.36226-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 0/4] configs: ACPI enabled QEMU defconfigs
-Message-Id: <174535609744.3811396.2471566515633936456.b4-ty@konsulko.com>
-Date: Tue, 22 Apr 2025 15:08:17 -0600
+To: U-Boot mailing list <u-boot@lists.denx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250416074839.1267396-1-jerome.forissier@linaro.org>
+References: <20250416074839.1267396-1-jerome.forissier@linaro.org>
+Subject: Re: [PATCH v3 0/2] ut: fix print_guid() and enable UNIT_TEST for
+ qemu_arm64
+Message-Id: <174535609846.3811396.518708877407201897.b4-ty@konsulko.com>
+Date: Tue, 22 Apr 2025 15:08:18 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,27 +105,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 20 Apr 2025 10:59:25 +0200, Heinrich Schuchardt wrote:
+On Wed, 16 Apr 2025 09:48:19 +0200, Jerome Forissier wrote:
 
-> For QEMU we have developed supporting passsing through ACPI tables.
-> This functionality has been broken multipled times due to missing CI
-> builds.
+> There is a bug in the print_guid() unit test in test/common/print.c when
+> PARTITION_TYPE_GUID is not enabled but either CMD_EFIDEBUG or EFI are.
 > 
-> * Two new defconfigs qemu_arm64_acpi and qemu-riscv64_smode_acpi.
-> * Assign the defconfigs to the respective maintainers.
+> The first patch fixes the issue and the second one enables UNIT_TEST in
+> the qemu_arm64 defconfig so that the unit tests are run in CI (this
+> platform has CMD_EFIDEBUG so the bug applies).
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/4] configs: add qemu_arm64_acpi_defconfig
-      commit: 2d6cf24d70ef1909e6dc037f47e8d5bfb76e417e
-[2/4] MAINTAINERS: add all qemu_arm64* defconfigs to VIRT
-      commit: ac8b4c063d9549b7c714925f6e8170700a400c5a
-[3/4] configs: add qemu-riscv64_smode_acpi_defconfig
-      commit: 72d54cb7e63459b6d7e7fc57290b69cd0b9d85df
-[4/4] MAINTAINERS: add qemu-riscv* defconfigs to QEMU RISC-V 'VIRT' BOARD
-      commit: d7820b1cc6d7cbd36fd7b4fb51bf5accacade983
+[1/2] lib/uuid.c: use unique name for PARTITION_SYSTEM_GUID
+      commit: d54e1004b8b171d18ad216a817018bb7aea6ec60
+[2/2] qemu-arm64: enable UNIT_TEST
+      commit: 020ecd7b464fa4d151580fd297b07ad6f1c38aab
 -- 
 Tom
 
