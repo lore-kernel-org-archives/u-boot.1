@@ -4,62 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36849C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 15:28:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1F8C369D3
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 15:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4172D8209F;
-	Tue, 22 Apr 2025 17:28:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id B0CC780F6B;
+	Tue, 22 Apr 2025 17:37:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="PD+X5QIX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FkxrQV5z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7F2D82054; Tue, 22 Apr 2025 17:28:29 +0200 (CEST)
-Received: from mail-m49242.qiye.163.com (mail-m49242.qiye.163.com
- [45.254.49.242])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E096680F9C; Tue, 22 Apr 2025 17:37:54 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3903981F4D
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 17:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 78403803CC
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 17:37:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.69.12] (unknown [218.17.18.106])
- by smtp.qiye.163.com (Hmail) with ESMTP id 12bfc617b;
- Tue, 22 Apr 2025 23:28:23 +0800 (GMT+08:00)
-Message-ID: <95dfac8a-e93c-4c90-a0c7-f9889f80f5e9@rock-chips.com>
-Date: Tue, 22 Apr 2025 23:28:22 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=arturkow2000@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac25520a289so702189966b.3
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 08:37:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1745336272; x=1745941072; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=z3TbV7fALkiDaFrGtFdOas+mvNc6yq1omUGId+NNbuM=;
+ b=FkxrQV5zKFdFuJZuYAzM5kzirVgPsGS8oY25hP7jRH214jzsOdOPSxZiKtSltnwnbf
+ U8P8s2l4mOstIbvb/qzpjtPM8XJiI1wcLp2CDzaoBDf2qVQUgnGJcPAQSsvXVFJM7JqC
+ x6SlUSKdSz4B25KTbKC1zMBot+N4+6ufM6LiugRlxb9SCovxuDGlae90N8ghZJntI3dU
+ MjU78577NnDaMbEeXBdl3gWE7l9CoWzcdzXBatDSuShzLA25DXiWxI1R+POqMGJFWMYz
+ YyJuX7R9JFkycyFfdFPYwGIJWyEyAsLxAizWnSmc0lz2A8U4R4JwdDUudBzYjPTLmlT8
+ YYng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745336272; x=1745941072;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=z3TbV7fALkiDaFrGtFdOas+mvNc6yq1omUGId+NNbuM=;
+ b=LmyyZ6kRDxdefuWmO8f9+/e6uRO4OlHke/fxQCQnwhOq7JbaMz84V56brv9Qcq4box
+ q2lx3VxiU27YtaMecsLSiDfF25i5f4G6dDdTA2tFZqAp8MYgu92jMFAPhssxo/jtu40D
+ ht3lC3g/5/gU0PLJaVDV6/AUwT/QAYjFQXyOdMnWmjuhZ6ZfwmW7F2IuPfINkS3Qukvr
+ C66pYr5zsVEtwQlQXXpwrE36PhMt76FJFuOee/0CFTT+M+VBWNOpj4FGE6G+AMmYzfVm
+ PFTWqu4Ekc+7AGpg3BBk68DPRqrZUmr6dk6+grenc0QYaKpPIvQLMzUfOyD7f/1erzlO
+ 8ORg==
+X-Gm-Message-State: AOJu0Yyyk+BazYlEop7wB71tv+J0U0xFWZP6qrwm0XLZjFYTkH/sYqSm
+ At2zpLWWQwgDG+GCp0F/8G8i2H53miF/AChf2i0ywhZAJiLJ25e1y49jwA==
+X-Gm-Gg: ASbGnctWMogzQo6qv2fBZAOmqmrc+C6XswwMhlTN5ZC9MaTERoFeVVkFyAiqt7n741h
+ KGpVswEwUrfbyZ9SCTwBDgYvI6qlXGhzcF30ADh66+zWvT8RsfoUIre+ZStnLR0bar6szVuf7B5
+ mVeqEnQ/OG3inWzr1pSee9J0nlYym1Ro6ZIh5RgbMuzkuTtK3wK0oOT9coirzAzvP+qLXNR1S/p
+ 5n9UZYxPXsE2HtL12/UFhF6DcfCxbcKFRsBLC0c1nzOrtcvaLeBA6bC729LRFPi9YEiMGWc0Zyy
+ RQxzMaaxo252wm3saoIssIw8afAh6UAqW65Qy7QUmW6UoUS77xSHRSKRxAkToE3wROxBaZEZDJg
+ swGP/y4VchR8Ypg==
+X-Google-Smtp-Source: AGHT+IEooIsQBZIOvhnUOABInNZb95aBJOz2s9PsUd/4mihtivDdd16+8ArRg0IkacKqvn+KTB45Xg==
+X-Received: by 2002:a17:907:86a8:b0:ace:3a1b:d3d with SMTP id
+ a640c23a62f3a-ace3a1b1372mr62238266b.2.1745336271631; 
+ Tue, 22 Apr 2025 08:37:51 -0700 (PDT)
+Received: from [192.168.0.15] (89-64-21-19.dynamic.chello.pl. [89.64.21.19])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-acb6ec04668sm671048266b.24.2025.04.22.08.37.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Apr 2025 08:37:51 -0700 (PDT)
+Message-ID: <e57d99da-5524-48a5-b672-39b05dc730a2@gmail.com>
+Date: Tue, 22 Apr 2025 17:37:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] rng: rockchip_rng: Update compatible for RK3588
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-References: <20250408221151.2762853-1-jonas@kwiboo.se>
- <20250408221151.2762853-5-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250408221151.2762853-5-jonas@kwiboo.se>
+Subject: Re: [PATCH v2 3/3] tegra: allow to expose UART on microSD slot
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Stephen Warren <swarren@nvidia.com>, Thierry Reding <treding@nvidia.com>,
+ Tom Rini <trini@konsulko.com>, Tom Warren <twarren@nvidia.com>
+References: <20250330192656.1280403-1-arturkow2000@gmail.com>
+ <20250330212638.v2.3.I45a1ec3470905b1a7313ef907a83999f1163bb3b@changeid>
+ <CAPVz0n0fRLgc7aOCpjVVRaX=dPMB9D9UDyNck8gsCJTpfh1pBg@mail.gmail.com>
+ <0709393f-51f7-43e9-91b0-18ef5a7c0866@gmail.com>
+ <CAPVz0n0umNySqe2QoRKknpktV-iRLF=xg4+vASaQApzMKqhY3w@mail.gmail.com>
+Content-Language: pl
+From: Artur Kowalski <arturkow2000@gmail.com>
+In-Reply-To: <CAPVz0n0umNySqe2QoRKknpktV-iRLF=xg4+vASaQApzMKqhY3w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHkxOVkJPTB5PT09CSk8fTFYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlJSkNVSkxVSkNVSktNWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
- VLWQY+
-X-HM-Tid: 0a965e1d565a03afkunm12bfc617b
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PRA6Qio6GjJLCklKEAEtPzA*
- Ez0aFA9VSlVKTE9OSEhOTEtPT0tIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlJSkNVSkxVSkNVSktNWVdZCAFZQUlOTUs3Bg++
-DKIM-Signature: a=rsa-sha256;
- b=PD+X5QIXmkuC2VSI19ss0Kd1RpdT9rHEaoEk4ikn1qsqdcAKM/ulroUerKAIpbvc97lfkyCHcJHZt0KFvwrCa1v4K0hYm1A3YrDWKCA8rk5hvRGiKYEcxQFUkGvaVe9wvmgOUUOKuPYQ7Tii0GxN7p87NlzsDYtf5RjbR+RLxTU=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=OZyEcwo9HCKGupqe+IDFQQss/yGArfR/4X9hrd2KBXs=;
- h=date:mime-version:subject:message-id:from;
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,54 +105,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+W dniu 01.04.2025 o 15:48, Svyatoslav Ryhel pisze:
 
-On 2025/4/9 06:11, Jonas Karlman wrote:
-> Linux commit 6ee0b9ad3995 ("arm64: dts: rockchip: Add rng node to
-> RK3588") merged for v6.15-rc1 add a proper rng node to the device tree.
-> The compatible used differs compared to what U-Boot is currently using.
->
-> Replace the old trngv1 compatible with the dts/upstream compatible in
-> the rng driver and remove the old rng node compatible override from SoC
-> u-boot.dtsi to keep rng working after the driver change.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> вт, 1 квіт. 2025 р. о 16:34 Artur Kowalski <arturkow2000@gmail.com> пише:
+>>
+>> W dniu 31.03.2025 o 07:51, Svyatoslav Ryhel pisze:
+>>> нд, 30 бер. 2025 р. о 22:27 Artur Kowalski <arturkow2000@gmail.com> пише:
+>>>> Tegra20 has mux allowing to repurpose microSD as UART on boards which
+>>>> use sdmmc3 controller for microSD. Add TEGRA_UARTA_MICROSD to enable
+>>>> this feature. It is currently supported on Transformer T20, support for
+>>>> other boards may require Device Tree changes.
+>>>>
+>>>> Update Transformer T20 DTS to select correct pinmux and stdout-path
+>>>> based on TEGRA_UARTA_MICROSD.
+>>>>
+>>>> Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
+>>>> ---
+>>>>
+>>>> Changes in v2:
+>>>> - added TEGRA_UARTA_MICROSD Kconfig option
+>>>> - removed .dtsi for enabling UART over microSD
+>>>> - modified transformer DT to use UARTA and correct pinmux when
+>>>>     TEGRA_UARTA_MICROSD is enabled; it is enough to flip a single
+>>>>     switch to enable/disable UART over microSD
+>>>>
+>>>>    arch/arm/dts/tegra20-asus-transformer.dtsi | 24 ++++++++++++++++++++++
+>>>>    arch/arm/mach-tegra/tegra20/Kconfig        | 15 ++++++++++++++
+>>>>    2 files changed, 39 insertions(+)
+>>>>
+>>>> diff --git a/arch/arm/dts/tegra20-asus-transformer.dtsi b/arch/arm/dts/tegra20-asus-transformer.dtsi
+>>>> index 49efabbfd92..9ea323c81f3 100644
+>>>> --- a/arch/arm/dts/tegra20-asus-transformer.dtsi
+>>>> +++ b/arch/arm/dts/tegra20-asus-transformer.dtsi
+>>>> @@ -5,7 +5,13 @@
+>>>>
+>>>>    / {
+>>>>           chosen {
+>>>> +#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
+>>>> +               stdout-path = &uarta;
+>>>> +#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
+>>>>                   stdout-path = &uartd;
+>>>> +#else
+>>>> +#error Unsupported UART
+>>>> +#endif
+>>>>           };
+>>>>
+>>>>           aliases {
+>>>> @@ -195,10 +201,17 @@
+>>>>                                   nvidia,function = "i2c1";
+>>>>                           };
+>>>>
+>>>> +#if CONFIG_IS_ENABLED(TEGRA_UARTA_SDB_SDD)
+>>>> +                       dbguart {
+>>>> +                               nvidia,pins = "sdb", "sdd";
+>>>> +                               nvidia,function = "uarta";
+>>>> +                       };
+>>>> +#else
+>>>>                           sdb {
+>>>>                                   nvidia,pins = "sdb", "sdc", "sdd", "slxc", "slxk";
+>>>>                                   nvidia,function = "sdio3";
+>>>>                           };
+>>>> +#endif
+>>>>
+>>>>                           sdio1 {
+>>>>                                   nvidia,pins = "sdio1";
+>>>> @@ -376,7 +389,13 @@
+>>>>                   };
+>>>>           };
+>>>>
+>>>> +#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
+>>>> +       uarta: serial@70006000 {
+>>>> +#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
+>>>>           uartd: serial@70006300 {
+>>>> +#else
+>>>> +#error Unsupported UART
+>>>> +#endif
+>>>>                   status = "okay";
+>>>>                   clock-frequency = <216000000>;
+>>>>           };
+>>>> @@ -434,7 +453,12 @@
+>>>>           };
+>>>>
+>>>>           sdmmc3: sdhci@c8000400 {
+>>>> +#if CONFIG_IS_ENABLED(TEGRA_UARTA_MICROSD)
+>>>> +               /* Can't use both at the same time */
+>>>> +               status = "disabled";
+>>>> +#else
+>>>>                   status = "okay";
+>>>> +#endif
+>>>>                   bus-width = <4>;
+>>>>
+>>>>                   cd-gpios = <&gpio TEGRA_GPIO(I, 5) GPIO_ACTIVE_LOW>;
+>>>> diff --git a/arch/arm/mach-tegra/tegra20/Kconfig b/arch/arm/mach-tegra/tegra20/Kconfig
+>>>> index 3349f1e2786..c2c51660216 100644
+>>>> --- a/arch/arm/mach-tegra/tegra20/Kconfig
+>>>> +++ b/arch/arm/mach-tegra/tegra20/Kconfig
+>>>> @@ -77,6 +77,21 @@ endchoice
+>>>>    config SYS_SOC
+>>>>           default "tegra20"
+>>>>
+>>>> +config TEGRA_UARTA_MICROSD
+>>>> +       bool "UARTA on MicroSD breakout board"
+>>>> +       default n
+>>>> +       depends on TEGRA_ENABLE_UARTA && TARGET_TRANSFORMER_T20
+>>>> +       select TEGRA_UARTA_SDB_SDD
+>>>> +       help
+>>>> +         Repurpose the SD card slot for getting access to the UARTA serial
+>>>> +         console. Primarily useful only for low level u-boot debugging on
+>>>> +         tablets, where normal UARTD is difficult to access and requires
+>>>> +         device disassembly and/or soldering. Enabling this option causes
+>>>> +         UARTA TX to become exposed on SDD and RX on SDB pins which correspond
+>>>> +         to microSD CLK and CMD pins respectively. Currently this is supported
+>>>> +         only on Transformer T20, support for other platforms may require DT
+>>>> +         and configs (from include/configs/*) updates.
+>>>> +
+>>>>    source "board/nvidia/harmony/Kconfig"
+>>>>    source "board/avionic-design/medcom-wide/Kconfig"
+>>>>    source "board/compal/paz00/Kconfig"
+>>>> --
+>>>> 2.48.1
+>>>>
+>>> This is not applicable since this is a hack by nature, BUT if you
+>>> contain this in the transformer t20 board and Kconfig (no dts
+>>> changes), this may be applied.
+>> Ok, then I'll drop DTS changes. I will add few words about this option
+>> in Transformer documentation
+>> and a note in Kconfig help to not surprise users with not booting U-Boot
+>> as enabling this option without
+>> changing DTS causes U-Boot to hang.
+> You should remove then Kconfig option as well. Add a new chapter to
+> Transformer T20 documentation which describes this method, here[1] you
+> may find a similar approach but info is in the commit message of
+> tegra30 uart-e funcmux. Additionally, as I have said previously, these
+> changes can be contained in the transformer t20 board file by using
+> some device tree manipulations from there.
 
-Thanks,
-- Kever
+Currently I'm working on few other things both in U-Boot in OS, some of 
+patches probably I will send to upstream
+in the coming weeks, but eventually, I will come back to this.
+
 > ---
-> v2: Remove the rng node instead of changing compatible
-> ---
->   arch/arm/dts/rk3588s-u-boot.dtsi | 5 -----
->   drivers/rng/rockchip_rng.c       | 2 +-
->   2 files changed, 1 insertion(+), 6 deletions(-)
->
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index 8880d162b11c..5eeb138f3513 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -18,11 +18,6 @@
->   		compatible = "rockchip,rk3588-dmc";
->   		bootph-all;
->   	};
-> -
-> -	rng: rng@fe378000 {
-> -		compatible = "rockchip,trngv1";
-> -		reg = <0x0 0xfe378000 0x0 0x200>;
-> -	};
->   };
->   
->   #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-> diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
-> index f673e2657c94..6e4e3abf08c8 100644
-> --- a/drivers/rng/rockchip_rng.c
-> +++ b/drivers/rng/rockchip_rng.c
-> @@ -321,7 +321,7 @@ static const struct udevice_id rockchip_rng_match[] = {
->   		.data = (ulong)&rk_cryptov2_soc_data,
->   	},
->   	{
-> -		.compatible = "rockchip,trngv1",
-> +		.compatible = "rockchip,rk3588-rng",
->   		.data = (ulong)&rk_trngv1_soc_data,
->   	},
->   	{},
+> 1 https://source.denx.de/u-boot/u-boot/-/commit/b515d7ae0de51a26f73b2ddb5ea4db0d95b67d7a
