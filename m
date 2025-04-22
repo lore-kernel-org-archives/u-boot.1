@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D27B9C369CB
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E99AAC369CB
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:21:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B830881D5D;
-	Tue, 22 Apr 2025 12:20:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8C93F80FEC;
+	Tue, 22 Apr 2025 12:20:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YWVCLtz6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fRGqLtB7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D954081B4B; Tue, 22 Apr 2025 12:20:51 +0200 (CEST)
+ id 7A70281FC0; Tue, 22 Apr 2025 12:20:53 +0200 (CEST)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40ED380F9C
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:20:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D0F8819FC
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:20:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKhWD1191625
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKlao1191641
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Apr 2025 05:20:43 -0500
+ Tue, 22 Apr 2025 05:20:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745317243;
- bh=+kQT7iH4+4+M0vmYCGgjwi17sfoy/G61KhkA4ZsuQ2w=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=YWVCLtz6/Zew0Q1iNtPv5JzPvJu7xuvnIDs+8YzdWHPQzr2PjPTuzF9LlK7dLj4CX
- keP/SNyZuVij/rIiBHTKAywsC7P/pII2E8pg48P2BMNySriEYwf3FIUeHJkYZYPjwS
- u4zJOqdf0qNcz1cRs3CLNs0+Q926HekS0vkt2+fI=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKhwS002415
+ s=ti-com-17Q1; t=1745317247;
+ bh=LmSGSApZR5k1+PXyE0+luR4GWB1oWKYfPse8onIfqCc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=fRGqLtB7e5TSlnSdOLowTm/Fu6YgsOC20b7bli2LnuM/TNIYGr8sNysaI+49kl2Hx
+ wi5RYqqqNNtR60KCmPrc8JcB/vZhuML9nj2h+BUEQW4MpTBEqMobfi5n4HEi/ksZoH
+ Zk4Cb7MzV7iVm31S8eYP02I/czLb1pVmpdbBhIBc=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MAKlnK097599
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 22 Apr 2025 05:20:43 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 22 Apr 2025 05:20:47 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Apr 2025 05:20:43 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 05:20:46 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Apr 2025 05:20:43 -0500
-Received: from psdkl-workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
- [10.24.72.128])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MAKWRv105794;
- Tue, 22 Apr 2025 05:20:40 -0500
-From: Aniket Limaye <a-limaye@ti.com>
-To: <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <hs@denx.de>, <marek.vasut+renesas@mailbox.org>,
- <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
- <virag.david003@gmail.com>, <w.egorov@phytec.de>, <j-keerthy@ti.com>,
- <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH v3 2/4] i2c: omap24xx_i2c: Use new function
- __omap24_i2c_xfer_msg()
-Date: Tue, 22 Apr 2025 15:49:50 +0530
-Message-ID: <20250422101957.1949448-3-a-limaye@ti.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250422101957.1949448-1-a-limaye@ti.com>
-References: <20250422101957.1949448-1-a-limaye@ti.com>
+ Frontend Transport; Tue, 22 Apr 2025 05:20:46 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.113])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MAKjGm118880;
+ Tue, 22 Apr 2025 05:20:46 -0500
+Date: Tue, 22 Apr 2025 15:50:45 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Hrushikesh Salunke <h-salunke@ti.com>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <j-humphreys@ti.com>, <jm@ti.com>,
+ <sjg@chromium.org>, <s-k6@ti.com>, <n-francis@ti.com>,
+ <rogerq@kernel.org>, <danishanwar@ti.com>, <s-vadapalli@ti.com>,
+ <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH 3/3] configs: am64x_evm_a53_defconfig: Enable configs for
+ PCIe support
+Message-ID: <08fff904-fed8-4df0-8785-a0c03d6f4ff6@ti.com>
+References: <20250416120830.138965-1-h-salunke@ti.com>
+ <20250416120830.138965-4-h-salunke@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250416120830.138965-4-h-salunke@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,223 +84,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove __omap24_i2c_read/write() usage from omap_i2c_xfer() in favour of
-the more flexible __omap24_i2c_xfer_msg().
-Consequently, these are also no longer needed when DM_I2C is enabled.
+On Wed, Apr 16, 2025 at 05:38:30PM +0530, Hrushikesh Salunke wrote:
+> TI's AM64 SoC has single instance of PCIe Controller namely PCIe0 which
+> is Cadence PCIe Controller. To support PCIe functionality with PCIe0
+> instance in Root-Complex mode enable corresponding configs. Also enable
+> configs to support NVMe over PCIe.
+> 
+> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
 
-New function __omap24_i2c_xfer_msg() will take care of individual read
-OR write transfers with a target device. It goes through below sequence:
-- Program the provided Target Chip address (OMAP_I2C_SA_REG)
-- Program the provided Data len (OMAP_I2C_CNT_REG)
-- Program the provided Control register flags (OMAP_I2C_CON_REG)
-- Read from or Write to the provided Data buffer (OMAP_I2C_DATA_REG)
+Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
-For a detailed programming guide, refer to the TRM[0] (12.1.3.4 I2C
-Programming Guide).
+> ---
+>  configs/am64x_evm_a53_defconfig | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+> index c2ad1242d20..9fc95798ffb 100644
+> --- a/configs/am64x_evm_a53_defconfig
+> +++ b/configs/am64x_evm_a53_defconfig
+> @@ -31,6 +31,7 @@ CONFIG_SPL_FS_FAT=y
+>  CONFIG_SPL_LIBDISK_SUPPORT=y
+>  CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>  CONFIG_SPL_SPI=y
+> +CONFIG_PCI=y
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SPL_LOAD_FIT=y
+>  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+> @@ -70,6 +71,7 @@ CONFIG_CMD_DFU=y
+>  CONFIG_CMD_GPT=y
+>  CONFIG_CMD_I2C=y
+>  CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+>  CONFIG_CMD_EFIDEBUG=y
+> @@ -135,6 +137,9 @@ CONFIG_PHY_TI_DP83869=y
+>  CONFIG_PHY_FIXED=y
+>  CONFIG_TI_AM65_CPSW_NUSS=y
+>  CONFIG_TI_ICSSG_PRUETH=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCI_CONFIG_HOST_BRIDGE=y
+> +CONFIG_PCIE_CDNS_TI=y
+>  CONFIG_PHY=y
+>  CONFIG_SPL_PHY=y
+>  CONFIG_PHY_CADENCE_TORRENT=y
 
-This patch by itself should be a transparent change. However this is
-needed for implementing a proper Repeated Start (Sr) functionality for
-i2c_msgs.
-
-Previous implementation for omap_i2c_xfer called __omap24_i2c_read/write
-functions, with hardcoded addr=0 and alen=0 for each i2c_msg. Each of
-these calls would program the registers always with a Stop bit set, not
-allowing for a repeated start between i2c_msgs in the same xfer().
-
-[0]: https://www.ti.com/lit/zip/spruj28 (TRM)
-
-Signed-off-by: Aniket Limaye <a-limaye@ti.com>
----
-
-v3:
-- Fixup to avoid unused function __omap24_i2c_xfer_msg() compile time
-  warnings... Move this behind DM_I2C ifdef
-- Link to v2: https://lore.kernel.org/all/20250310103702.1464782-3-a-limaye@ti.com/
-
-v2:
-- Use proper error codes in __omap24_i2c_xfer_msg()
-- Use proper error prints to indicate omap24xx i2c driver
-- Link to v1: https://lore.kernel.org/u-boot/20250304220546.866602-2-a-limaye@ti.com/
-
----
- drivers/i2c/omap24xx_i2c.c | 143 +++++++++++++++++++++++++++++++------
- 1 file changed, 123 insertions(+), 20 deletions(-)
-
-diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
-index 1fd5f5cc224..4afdba02211 100644
---- a/drivers/i2c/omap24xx_i2c.c
-+++ b/drivers/i2c/omap24xx_i2c.c
-@@ -535,6 +535,12 @@ pr_exit:
- 	return res;
- }
- 
-+#if !CONFIG_IS_ENABLED(DM_I2C)
-+/*
-+ * The legacy I2C functions. These need to get removed once
-+ * all users of this driver are converted to DM.
-+ */
-+
- /*
-  * i2c_read: Function now uses a single I2C read transaction with bulk transfer
-  *           of the requested number of bytes (note that the 'i2c md' command
-@@ -828,11 +834,6 @@ wr_exit:
- 	return i2c_error;
- }
- 
--#if !CONFIG_IS_ENABLED(DM_I2C)
--/*
-- * The legacy I2C functions. These need to get removed once
-- * all users of this driver are converted to DM.
-- */
- static void __iomem *omap24_get_base(struct i2c_adapter *adap)
- {
- 	switch (adap->hwadapnr) {
-@@ -963,28 +964,130 @@ U_BOOT_I2C_ADAP_COMPLETE(omap24_4, omap24_i2c_init, omap24_i2c_probe,
- 
- #else /* CONFIG_DM_I2C */
- 
-+static int __omap24_i2c_xfer_msg(void __iomem *i2c_base, int ip_rev, int waitdelay,
-+				 uchar chip, uchar *buffer, int len, u16 i2c_con_reg)
-+{
-+	int i;
-+	u16 status;
-+	int i2c_error = 0;
-+	int timeout = I2C_TIMEOUT;
-+
-+	if (len < 0) {
-+		printf("%s: data len < 0\n", __func__);
-+		return -EINVAL;
-+	}
-+
-+	if (!buffer) {
-+		printf("%s: NULL pointer passed\n", __func__);
-+		return -EINVAL;
-+	}
-+
-+	if (!(i2c_con_reg & I2C_CON_EN)) {
-+		printf("%s: I2C_CON_EN not set\n", __func__);
-+		return -EINVAL;
-+	}
-+
-+	/* Set slave address */
-+	omap_i2c_write_reg(i2c_base, ip_rev, chip, OMAP_I2C_SA_REG);
-+	/* Read/Write len bytes data */
-+	omap_i2c_write_reg(i2c_base, ip_rev, len, OMAP_I2C_CNT_REG);
-+	/* Configure the I2C_CON register */
-+	omap_i2c_write_reg(i2c_base, ip_rev, i2c_con_reg, OMAP_I2C_CON_REG);
-+
-+	/* read/write data bytewise */
-+	for (i = 0; i < len; i++) {
-+		status = wait_for_event(i2c_base, ip_rev, waitdelay);
-+		/* Ignore I2C_STAT_RRDY in transmitter mode */
-+		if (i2c_con_reg & I2C_CON_TRX)
-+			status &= ~I2C_STAT_RRDY;
-+		else
-+			status &= ~I2C_STAT_XRDY;
-+
-+		/* Try to identify bus that is not padconf'd for I2C */
-+		if (status == I2C_STAT_XRDY) {
-+			i2c_error = -EREMOTEIO;
-+			printf("%s: pads on bus probably not configured (status=0x%x)\n",
-+			       __func__, status);
-+			goto xfer_exit;
-+		}
-+		if (status == 0 || (status & I2C_STAT_NACK)) {
-+			i2c_error = -EREMOTEIO;
-+			printf("%s: error waiting for ACK (status=0x%x)\n",
-+			       __func__, status);
-+			goto xfer_exit;
-+		}
-+		if (status & I2C_STAT_XRDY) {
-+			/* Transmit data */
-+			omap_i2c_write_reg(i2c_base, ip_rev,
-+					   buffer[i], OMAP_I2C_DATA_REG);
-+			omap_i2c_write_reg(i2c_base, ip_rev,
-+					   I2C_STAT_XRDY, OMAP_I2C_STAT_REG);
-+		}
-+		if (status & I2C_STAT_RRDY) {
-+			/* Receive data */
-+			*buffer++ = omap_i2c_read_reg(i2c_base, ip_rev,
-+							OMAP_I2C_DATA_REG);
-+			omap_i2c_write_reg(i2c_base, ip_rev,
-+					   I2C_STAT_RRDY, OMAP_I2C_STAT_REG);
-+		}
-+	}
-+
-+	/*
-+	 * poll ARDY bit for making sure that last byte really has been
-+	 * transferred on the bus.
-+	 */
-+	do {
-+		status = wait_for_event(i2c_base, ip_rev, waitdelay);
-+	} while (!(status & I2C_STAT_ARDY) && timeout--);
-+	if (timeout <= 0) {
-+		printf("%s: timed out on last byte!\n", __func__);
-+		i2c_error = -EREMOTEIO;
-+		goto xfer_exit;
-+	} else {
-+		omap_i2c_write_reg(i2c_base, ip_rev, I2C_STAT_ARDY, OMAP_I2C_STAT_REG);
-+	}
-+
-+	/* If Stop bit set, flush FIFO. */
-+	if (i2c_con_reg & I2C_CON_STP)
-+		goto xfer_exit;
-+
-+	return 0;
-+
-+xfer_exit:
-+	flush_fifo(i2c_base, ip_rev);
-+	omap_i2c_write_reg(i2c_base, ip_rev, 0xFFFF, OMAP_I2C_STAT_REG);
-+	return i2c_error;
-+}
-+
- static int omap_i2c_xfer(struct udevice *bus, struct i2c_msg *msg, int nmsgs)
- {
- 	struct omap_i2c *priv = dev_get_priv(bus);
- 	int ret;
-+	u16 i2c_con_reg = 0;
- 
--	debug("i2c_xfer: %d messages\n", nmsgs);
-+	debug("%s: %d messages\n", __func__, nmsgs);
- 	for (; nmsgs > 0; nmsgs--, msg++) {
--		debug("i2c_xfer: chip=0x%x, len=0x%x\n", msg->addr, msg->len);
--		if (msg->flags & I2C_M_RD) {
--			ret = __omap24_i2c_read(priv->regs, priv->ip_rev,
--						priv->waitdelay,
--						msg->addr, 0, 0, msg->buf,
--						msg->len);
--		} else {
--			ret = __omap24_i2c_write(priv->regs, priv->ip_rev,
--						 priv->waitdelay,
--						 msg->addr, 0, 0, msg->buf,
--						 msg->len);
--		}
--		if (ret) {
--			debug("i2c_write: error sending\n");
-+		/* Wait until bus not busy */
-+		if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
- 			return -EREMOTEIO;
-+
-+		/* Set Controller mode with Start and Stop bit */
-+		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT | I2C_CON_STP;
-+		/* Set Transmitter/Receiver mode if it is a write/read msg */
-+		if (msg->flags & I2C_M_RD)
-+			i2c_con_reg &= ~I2C_CON_TRX;
-+		else
-+			i2c_con_reg |= I2C_CON_TRX;
-+
-+		debug("%s: chip=0x%x, len=0x%x, i2c_con_reg=0x%x\n",
-+		      __func__, msg->addr, msg->len, i2c_con_reg);
-+
-+		ret = __omap24_i2c_xfer_msg(priv->regs, priv->ip_rev, priv->waitdelay,
-+					    msg->addr, msg->buf, msg->len,
-+					    i2c_con_reg);
-+		if (ret) {
-+			printf("%s: errored out at msg %d: %d\n", __func__, i, ret);
-+			return ret;
- 		}
- 	}
- 
--- 
-2.49.0
-
+Regards,
+Siddharth.
