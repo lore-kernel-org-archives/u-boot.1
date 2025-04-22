@@ -4,88 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD63C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:55:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55327C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:59:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0AE28144A;
-	Tue, 22 Apr 2025 12:54:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DE0AD810F4;
+	Tue, 22 Apr 2025 12:59:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z3I6e70g";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1745319548;
+	bh=nkQtO8rs+L1n6sEGsXVXzgJeyR1mmXenHHd/AmtZaig=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=Y1CIEZB3eJeSF8Ne8XjtKUpG2QI6EkNlYlzeIbAxXoqYZPJTC8cz6SAXC4023kyC8
+	 DdJWpkTKkERu5ulOIKHy42j+Gl8RpxAkWb23hF7KvtIRVTYfOOef3vrfrWyli+OyNJ
+	 CUaTCcIjKIvGgTHyWlRR32IAa9uNwex/d5gryeQydRqZD8vSlezwfqjYqQEWxL+SwH
+	 ISVBCx+aybsxYX6F+7MNC+czblGw+kA/5tBTWSmJJMLyg1A04NdaHHSh6c/k3H1Ito
+	 OtxtRzhqiXq+RsURDrKa/n3QBpWhEVmUpSWW5F46NedPaEP7QTNe+SFWmd4fNq7Teo
+	 7INrD6QNynBRg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C29281273; Tue, 22 Apr 2025 12:54:46 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D39AA81273; Tue, 22 Apr 2025 12:59:07 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DEA98206E
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:54:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DEFA810E8
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:59:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5f4b7211badso7017172a12.2
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 03:54:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745319284; x=1745924084; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ObBkIYdiEtTaC73pm0GTTLysgzJRL6ojUUcKl245PKA=;
- b=z3I6e70g1GQP6vi9yigHWbJivQSXLsTvyPO1Rpozu02a6BDHwwQkfwa5Hl7s2RFnyF
- C3QZl28ntoj/ay7bsBKOgl+xVFz91TKLO/g7JWo70yIjaA092hnxd7KQYlAoCBrETlrl
- YTuSuCzWvPIO8QU8d5djUd2nqJJoUlWKMKDc3/d2qU6d/ovMa0RC+61c6/9krpEbOwjH
- RyKxwQqy1BpvfPqIqsvLF34FXbnu5W2tlIda7ridES4pmOcNCcSqa3ZqBDKL4DKVkK3M
- wUGX4qNPpGJvFlbMbFV+g6+t53S8Jl3d8GYELYQx5zxRHRgviHmJm5CFUtrdAP5Dx7mX
- wVfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745319284; x=1745924084;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ObBkIYdiEtTaC73pm0GTTLysgzJRL6ojUUcKl245PKA=;
- b=R7We1Tj1HhZNMYHY0Kr6rVb449R9O9IKn2IvJaPE0HsvhaTerkTytKXRn2PlYoFXBE
- 8ct/pewrO687CxW+tpC07CjZHCkdSrTXk0k8blTAYA63Pd2+0J/TQ8jd6S6moeUMn33R
- Vzyb+sNSCw90eMFkgy2g+Wr6bCC/yIkdFlEgrJvFkTkD7hKogHXRCK2NTTLbX25R1I/u
- V6O11fhRTRuDfKvY6+L2Q5WXHjATaSftgND6ydm+FTW6GGXP9QEtsHP1Gw+1KEf47TU6
- p/NLC2eBU1VR+kiP8MmOGMhjWWyHAVVU5+z4qEwYUvu5BAI7qOAlSOGZNZ8RyeHSTcW4
- vvgg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU9alS77naqr11BZRl9RrfkXVcxTlSlOeqRoIrLO1/E4i2cdFVbElgLuPg70cYdWzpCeQbthiA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzbn46J+3FNlH5vvmyQYtokon8rMlZy/CuEIaX5AssNBxPNIiUC
- l76IYlidGZ8KVBGDWoqt8lIYVx3v/dBaWZ9nQW5gw/GGYV67EhLbRs4jQXCjZ6k=
-X-Gm-Gg: ASbGnctX/t24+Ns/ZTwuYH9YlaTkuU1MMkq9Bsh7esLmhJdxD4ps6zLuQAid63tovQb
- Bm7e5YddDEAOWAD+e+sBMrZs8WCeJnhAmRCHMpswQM75vb5uM9NpTFZHQtrz03sKqSKxrFzda9v
- jZEn7lzthkUjgix/uz23VKikNujgpr44D9aP/a6ee1s2JaZkdEhu+AJKD/iRXKK/PlHhQM8Md4c
- mP447gHy2afwXCrHUDvq7+KhtkpKoa8elJmOoZKkqz/femDxSOUxVyvL7UMrbSm8rANwawSeqkD
- 8xY2YsNDExBIKmA093cMfwIDyrkoQlvY1rL1ZobnyLdZT+eIoZr8Ow==
-X-Google-Smtp-Source: AGHT+IFHMuBgWCH9RELqwZz80B1ypcmkVoS+vQmIUTeOVxq9jICaC0gg+c+40y4NGlnP99+TOQDJrg==
-X-Received: by 2002:a05:6402:350d:b0:5e4:9348:72c3 with SMTP id
- 4fb4d7f45d1cf-5f6285336femr11586787a12.10.1745319283676; 
- Tue, 22 Apr 2025 03:54:43 -0700 (PDT)
-Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:d722:61ae:90dc:b4e7])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f62554a1desm5709635a12.8.2025.04.22.03.54.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 03:54:42 -0700 (PDT)
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Tue, 22 Apr 2025 12:54:11 +0200
-Subject: [PATCH 6/6] clk: qcom: apq8016: Fix SDCC clock warnings
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="LmjfNuJA"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 2FC48102E13D0; 
+ Tue, 22 Apr 2025 12:59:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1745319544;
+ h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=nkQtO8rs+L1n6sEGsXVXzgJeyR1mmXenHHd/AmtZaig=;
+ b=LmjfNuJAGsjI7p5b8ptCAPJyGF+WLQiOc8k7FNIiwlEK+ILoQGDfuvUqOvnsUhngUUteaO
+ L/JzE4q3Bj40rpAnP1MP+c7/yZV9gKAhil6UQY3ijPMNmN09XOqsoy4JyDdQE9x3SXJ77R
+ ZW66mZuJRtUfCSoBfYpOoIw/6oHEwazcwmO2OagItm4VpbNI1oIC/Uozxp6Uzrhl8y8YDT
+ f1HUhjUic8vKwk28t1zvVargTf/BbHGRsX6CbcW8wd+FM8Kqugw9tQngV7B8m0M6UfhkO/
+ KJEbw/+qRAEwL/UB8tzAOUUeAGxBzYWM1h8GIOBgW8uRNbJYs5zEdGTceuUjsw==
+Message-ID: <cd02e1a4-45bd-354a-b3a9-c01b0370eae4@denx.de>
+Date: Tue, 22 Apr 2025 12:59:36 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v3 1/4] i2c: omap24xx_i2c: Remove unused
+ CONFIG_I2C_REPEATED_START
+Content-Language: en-US
+To: Aniket Limaye <a-limaye@ti.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ virag.david003@gmail.com, w.egorov@phytec.de, j-keerthy@ti.com,
+ u-kumar1@ti.com
+References: <20250422101957.1949448-1-a-limaye@ti.com>
+ <20250422101957.1949448-2-a-limaye@ti.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20250422101957.1949448-2-a-limaye@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250422-apq8016-clock-fixes2-v1-6-bfc9dd933da6@linaro.org>
-References: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
-In-Reply-To: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Sam Day <me@samcday.com>, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-X-Mailer: b4 0.14.2
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,70 +81,30 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As of commit dc8754e8e408 ("clk/qcom: apq8016: improve clk_enable logging")
-there are now warnings in the U-Boot console on DragonBoard 410c:
+Hello Aniket,
 
-  apq8016_clk_enable: unknown clk id 122
-  apq8016_clk_enable: unknown clk id 123
-  apq8016_clk_enable: unknown clk id 124
-  apq8016_clk_enable: unknown clk id 125
+On 22.04.25 12:19, Aniket Limaye wrote:
+> Remove unused piece of code under CONFIG_I2C_REPEATED_START which does
+> not have any Kconfig entry at all.
+> 
+> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> ---
+>   drivers/i2c/omap24xx_i2c.c | 10 +---------
+>   1 file changed, 1 insertion(+), 9 deletions(-)
 
-This is because we don't implement enable() properly for the SDCC clocks.
-Currently they are being enabled as part of set_rate().
+Thanks for the update!
 
-Fix this by moving the enable calls out of the apq8016_clk_init_sdc()
-function and convert them to the equivalent BRANCH_CLK() definitions.
+Reviewed-by: Heiko Schocher <hs@denx.de>
 
-Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
----
- drivers/clk/qcom/clock-apq8016.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index 4eb2ba52be0c6f59a987acd0eacea4c7490345a7..ad824aaed73ff15e3a7dd4ea75f7b0cf2ba825cb 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -23,10 +23,7 @@
- #define APCS_GPLL_ENA_VOTE		(0x45000)
- #define APCS_CLOCK_BRANCH_ENA_VOTE (0x45004)
- 
--#define SDCC_BCR(n)			(((n) * 0x1000) + 0x42000)
- #define SDCC_CMD_RCGR(n)		(((n) * 0x1000) + 0x42004)
--#define SDCC_APPS_CBCR(n)		(((n) * 0x1000) + 0x42018)
--#define SDCC_AHB_CBCR(n)		(((n) * 0x1000) + 0x4201C)
- 
- /* BLSP1 AHB clock (root clock for BLSP) */
- #define BLSP1_AHB_CBCR			0x1008
-@@ -55,6 +52,10 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
- 
- static const struct gate_clk apq8016_clks[] = {
- 	BRANCH_CLK(GCC_PRNG_AHB_CLK,		0x45004, BIT(8), 0x13004),
-+	BRANCH_CLK(GCC_SDCC1_AHB_CLK,		0x4201c, BIT(0), 0x4201c),
-+	BRANCH_CLK(GCC_SDCC1_APPS_CLK,		0x42018, BIT(0), 0x42018),
-+	BRANCH_CLK(GCC_SDCC2_AHB_CLK,		0x4301c, BIT(0), 0x4301c),
-+	BRANCH_CLK(GCC_SDCC2_APPS_CLK,		0x43018, BIT(0), 0x43018),
- 	BRANCH_CLK(GCC_USB_HS_AHB_CLK,		0x41008, BIT(0), 0x41008),
- 	BRANCH_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0), 0x41004),
- };
-@@ -67,12 +68,10 @@ static int apq8016_clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
- 	if (rate == 200000000)
- 		div = 4;
- 
--	clk_enable_cbc(priv->base + SDCC_AHB_CBCR(slot));
- 	/* 800Mhz/div, gpll0 */
- 	clk_rcg_set_rate_mnd(priv->base, SDCC_CMD_RCGR(slot), div, 0, 0,
- 			     CFG_CLK_SRC_GPLL0, 8);
- 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
--	clk_enable_cbc(priv->base + SDCC_APPS_CBCR(slot));
- 
- 	return rate;
- }
-
+bye,
+Heiko
 -- 
-2.47.2
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
