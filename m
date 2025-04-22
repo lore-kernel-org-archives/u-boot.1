@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB4EEC369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:55:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E80C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 10:55:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E5DC812BC;
+	by phobos.denx.de (Postfix) with ESMTP id 99CDE81F0D;
 	Tue, 22 Apr 2025 12:54:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IiuthVap";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VxY5MW2+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC4B381F54; Tue, 22 Apr 2025 12:54:42 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id DF8A5812BC; Tue, 22 Apr 2025 12:54:44 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEFFA81E1F
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:54:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8196781F30
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 12:54:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5f6214f189bso7882398a12.2
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 03:54:40 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e8274a74so7400559a12.1
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 03:54:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745319280; x=1745924080; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1745319282; x=1745924082; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=7lQLZNK2st2obVKa6WmWatHhBUzlo8OEXZ30099aP9A=;
- b=IiuthVapZCi4P3QAMRMthCp13cUCTX3RwTYUL0Ql8GYzJIGTLS9O+K7J6g7HdtRsQm
- +vxloRmiqa1YJyf6mN5HCLrsPAtXrDgnLhbI8i09x0bMXgo9wCsI4ECikbzkyC2IONnj
- HCRJvUjBQDCSJqp2tPRu4LpHMP2T9Mewl1X42j5k5KYbd9cpL1L1bj1wKQI0GMYo4zpo
- LVrl0EhGPLyUIaeq9fbJEEPuSwRrW02FWGxfM3WJ4rCOT5H8q217aGc4FZb7cKG4V114
- J0LMrtJZs7hSvZXCXTHmmYeRPcW/IcotDnBvC+troF+7niRqfoQKg2N616680VqmBrRK
- njEQ==
+ :reply-to; bh=mX2wP2lYOBoIYnWVBgbGFW7fPgyNEmvM+yolX1FkaSA=;
+ b=VxY5MW2+TYU9QG6RZ74KiUImprZjS55g8WjI1C11ymcg94ISH4DjjspvTZgOprUx96
+ R+/nWXWyOlw+ACDv/5K9MhMigvieBdrONiO66oVCHObSKZwulBNJWlREQ8EJlblUllvI
+ vnW0uL8/Sb97gLqgot/p70ujTL5h5VsD+xe/5CwlSYTddWtFtJWvCq8Vsk8Jb6EZtsVJ
+ aPhhX10fzMWo4s5fnloPmqYsxM3+izQhY/3XK5RiszZEmCYp8x1AyCLeS+BcpWMqCmxl
+ LIIscNoXuu9RGOuTIOOn2YJS9GooDr4iZ+KAs/DrqBR0I5M9+mx4VjkipR/woeBChk23
+ 2rmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745319280; x=1745924080;
+ d=1e100.net; s=20230601; t=1745319282; x=1745924082;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7lQLZNK2st2obVKa6WmWatHhBUzlo8OEXZ30099aP9A=;
- b=kl7rSwk2YRZmlrhWt9kYaT7Ye9CiBRc7e3LY+QC0QiOu8s92eyKMzGsK7Ra0QAuWPX
- 49Wm0pyL9nysgCmuPVu/Pxj9IAF8DcukxhoWyJPfRYryXyHsxee2YkQZ2QWDQum+aCXH
- c7XMYXU2HXBqeESWBgQSfmMJ44GZQKOEOgUYAuo6pKIV5pOg1klvy451X5/ohO7Nppnc
- bjMtSZbd1jnWGJTd7oosuAifXiKFowTVjZZlSGSQOGkRXXetbV5wH2xPTdsoaD/BcnYg
- TMOwqF16XRWhNAPQnRx0rhdI2qD+fSxICGP2hUDVj8b66OwJ2OxWpZS3FjCElZApq7E1
- v2GA==
+ bh=mX2wP2lYOBoIYnWVBgbGFW7fPgyNEmvM+yolX1FkaSA=;
+ b=OJOUmf4l3GGjMCj/H7lTWe7f7RtQ90weGTqXpMLtum9OAE6SAbnoeq1I5XOkMzN/0c
+ SkqENASNYzCioBnOmqMGYPrcy1rhJho6WiE0eJlb+CUEynh6+Bk3b8x50X5l3pgtPXFQ
+ WXqzp7QO0s5dw1S+NQKcA9hNl206aoUm353tTqU37ElVqHx5TtYeTviRSY3THTsOr+rG
+ W8TVgYjfIs8iRsmbtEcOyQ73886NaxNvQSLVXYyZy+o2JWvmFFbphlWcu4BmgsJ19+px
+ sWZnO6fMhdh2rX27pf0qA5v7o9egR+QT/ikSNdf5/VylONaXagl/PBqvmnDT6c5Gr60l
+ Tnsg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDOlYCp9Tg0WWiI2Z+u8ylRtsTFfW4T1akxXpZ/wdT5BHfNalTBB2YX7zhTodPXqo3Vcqe5ew=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWlMOeY/rlzAlcaYE1o39/z8eHhWWml2m1EQ/FyxZsFDRwXnwf
- WIw4fuLJmLXmS0xRqRNCZG5vjji99rUNR6rC2Ycaim6eblFhctk1YRRFAts639Q=
-X-Gm-Gg: ASbGncv+QEwlTYZvy+5STrmKw67hjOqRyt/E4OLbkIw+bKxWPebMZfl8qFtY8AWK43t
- TeBD0AkHSsy449ky2dK5BLDqJ7JHetXivF65Ey88gjprHPtFoFfgnbp+dDHUYJb+pntiMeCrgGt
- z+Mph4gkXzDxjaxSaijQ/DkQPh6XfZoRVE/rNrK4Topbtp5BRQW596ctgURyq0BlbasOJBuNaJv
- 1F8rkJS+5DcgOub/xEwuaU9Uuh6Wb5mogX9txwz5MVxM9/0J+37uTN7/3080d3h7EUruuc5JH4d
- hTwiOMkNOE+swdY0LyvXKDRcCKPWwlmA8rE7QatAB/HtI1OPtITxSQ==
-X-Google-Smtp-Source: AGHT+IGd8TXkV/6xRbAj/EGbCzYc4LmNDfhkx+PHbShiRx2lmiSjbEfEWODIgTeMPwWc73A5fO4vSA==
-X-Received: by 2002:a50:fb95:0:b0:5f3:f04b:5663 with SMTP id
- 4fb4d7f45d1cf-5f6285d3f15mr10251884a12.24.1745319280345; 
- Tue, 22 Apr 2025 03:54:40 -0700 (PDT)
+ AJvYcCW0HKwsQcJ9JRtVvaRbwIajfNQxjJ2BnPNUH7XzrBb+8gagqmloxleTa4RzYoRZlyOdwcu+DgM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvCUl93KWcRwq/5sJE/09kKPjo5UDH83aVYj3geLXLI+zjZtfV
+ lCBlLmBXaGbtqE35ldfKfiO+h14hQpjeHLdusEUVhMQPQAzG/C61/rN3jM9Qw0I=
+X-Gm-Gg: ASbGncsZH/gtZ4ah/+bUkgeg/zJgdMBCN76o2qMqnVgMOoaUQnDvk9Sg3RmnhaIsyVt
+ a+pkKmA+BVTUHtM5Elh2+bCJkA4ahgNrmW1BDquT/p/D22vJdLWLx+VBDZK9JQBR8ar9ZflUys9
+ 9hn0DD8cXt4PRCABv7FSueN1H51C2IZSEdF2ATnxZ2kQy0/WNuCotDeSpvlRtTOwNPL/NiuSKoh
+ YAcy0FtI+P6xIMj7vLMp097FNUUCGnkbH522ISHH5RzMAbLwjNTiHK2QvJvqnq6mbnV8lIFOK0e
+ K5fB84Hipzn7qJAlIxH5dYXm6E9+x9VceWR9h1FDYR6wr0AGxmk76A==
+X-Google-Smtp-Source: AGHT+IFIn8Vbhu5uNvAO03Nc8fzhLZnF7TYYogTzNVndSbuqtNEgGLFiYUBC9za7PkuTzfwDTe0Z2w==
+X-Received: by 2002:a05:6402:5193:b0:5f4:d4e7:3c37 with SMTP id
+ 4fb4d7f45d1cf-5f62850215emr13043042a12.6.1745319281984; 
+ Tue, 22 Apr 2025 03:54:41 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:d722:61ae:90dc:b4e7])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f62554a1desm5709635a12.8.2025.04.22.03.54.39
+ 4fb4d7f45d1cf-5f62554a1desm5709635a12.8.2025.04.22.03.54.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 03:54:39 -0700 (PDT)
+ Tue, 22 Apr 2025 03:54:41 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Tue, 22 Apr 2025 12:54:09 +0200
-Subject: [PATCH 4/6] clk: qcom: Allow polling for clock status in
- qcom_gate_clk_en()
+Date: Tue, 22 Apr 2025 12:54:10 +0200
+Subject: [PATCH 5/6] clk: qcom: apq8016: Convert GATE_CLK() to BRANCH_CLK()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250422-apq8016-clock-fixes2-v1-4-bfc9dd933da6@linaro.org>
+Message-Id: <20250422-apq8016-clock-fixes2-v1-5-bfc9dd933da6@linaro.org>
 References: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
 In-Reply-To: <20250422-apq8016-clock-fixes2-v1-0-bfc9dd933da6@linaro.org>
 To: Casey Connolly <casey.connolly@linaro.org>
@@ -103,73 +102,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-GATE_CLK() in its current state is unsafe: A simple write to the clock
-enable register does not guarantee that the clock is immediately running.
-Without polling the clock status, we may issue writes to registers before
-the necessary clocks start running. This doesn't seem to cause issues in
-U-Boot at the moment, but for example removing the CLK_OFF polling in TF-A
-for the SMMU clocks on DB410c reliably triggers an exception during boot.
+Convert the usages of GATE_CLK() in clock-apq8016 to BRANCH_CLK() to make
+sure that we poll the status when enabling clocks:
 
-Make it possible to poll the branch clock status register, by adding a new
-BRANCH_CLK() macro that takes the extra register address. Existing usages
-work just as before, without polling the clock status. Ideally all usages
-should be updated to specify the correct poll address in the future.
+ - PRNG_AHB_CLK is a vote clock, so we poll a different register address.
+ - The USB clocks are simple branches, so enable/poll is the same register.
 
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
- drivers/clk/qcom/clock-qcom.c | 15 +++++++++++++++
- drivers/clk/qcom/clock-qcom.h |  7 +++++--
- 2 files changed, 20 insertions(+), 2 deletions(-)
+ drivers/clk/qcom/clock-apq8016.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 7a259db79342c31dfe85220c68c82197861ccdf6..6b46d9db744b87538b796bf729d16785bca08545 100644
---- a/drivers/clk/qcom/clock-qcom.c
-+++ b/drivers/clk/qcom/clock-qcom.c
-@@ -83,6 +83,21 @@ int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
- 	}
- 
- 	setbits_le32(priv->base + priv->data->clks[id].reg, priv->data->clks[id].en_val);
-+	if (priv->data->clks[id].cbcr_reg) {
-+		unsigned int count;
-+		u32 val;
-+
-+		for (count = 0; count < 200; count++) {
-+			val = readl(priv->base + priv->data->clks[id].cbcr_reg);
-+			val &= BRANCH_CHECK_MASK;
-+			if (val == BRANCH_ON_VAL || val == BRANCH_NOC_FSM_ON_VAL)
-+				break;
-+			udelay(1);
-+		}
-+		if (WARN(count == 200, "WARNING: Clock @ %#lx [%#010x] stuck at off\n",
-+			 priv->data->clks[id].cbcr_reg, val))
-+			return -EBUSY;
-+	}
- 	return 0;
- }
- 
-diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-index ee0347d9d86716c09e7f57b343f12b5908f8cb92..28145061844255460e8a6868b69ffe9a7dd663b0 100644
---- a/drivers/clk/qcom/clock-qcom.h
-+++ b/drivers/clk/qcom/clock-qcom.h
-@@ -52,13 +52,16 @@ struct freq_tbl {
- struct gate_clk {
- 	uintptr_t reg;
- 	u32 en_val;
-+	uintptr_t cbcr_reg;
- 	const char *name;
+diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+index 274c71c53ff76c9a7ea18e3698c12b20a9b1f418..4eb2ba52be0c6f59a987acd0eacea4c7490345a7 100644
+--- a/drivers/clk/qcom/clock-apq8016.c
++++ b/drivers/clk/qcom/clock-apq8016.c
+@@ -54,9 +54,9 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
  };
  
- #ifdef DEBUG
--#define GATE_CLK(clk, reg, val) [clk] = { reg, val, #clk }
-+#define GATE_CLK(clk, reg, val) [clk] = { reg, val, 0, #clk }
-+#define BRANCH_CLK(clk, en_reg, val, cbcr_reg) [clk] = { en_reg, val, cbcr_reg, #clk }
- #else
--#define GATE_CLK(clk, reg, val) [clk] = { reg, val, NULL }
-+#define GATE_CLK(clk, reg, val) [clk] = { reg, val, 0, NULL }
-+#define BRANCH_CLK(clk, en_reg, val, cbcr_reg) [clk] = { en_reg, val, cbcr_reg, NULL }
- #endif
+ static const struct gate_clk apq8016_clks[] = {
+-	GATE_CLK(GCC_PRNG_AHB_CLK,	0x45004, BIT(8)),
+-	GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, BIT(0)),
+-	GATE_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0)),
++	BRANCH_CLK(GCC_PRNG_AHB_CLK,		0x45004, BIT(8), 0x13004),
++	BRANCH_CLK(GCC_USB_HS_AHB_CLK,		0x41008, BIT(0), 0x41008),
++	BRANCH_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0), 0x41004),
+ };
  
- struct qcom_reset_map {
+ /* SDHCI */
 
 -- 
 2.47.2
