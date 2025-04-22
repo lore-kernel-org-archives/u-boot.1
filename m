@@ -4,90 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E857C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 21:23:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2563C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 23:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B30980F6B;
-	Tue, 22 Apr 2025 23:23:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CD62810EB;
+	Wed, 23 Apr 2025 01:39:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LzLvDnvf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hvkATFlV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B897B80F9C; Tue, 22 Apr 2025 23:23:56 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id CA9B280F9C; Wed, 23 Apr 2025 01:39:45 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8C1D80F03
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 23:23:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81CB280FEC
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 01:39:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5f5bef591d6so9838651a12.1
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:23:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6f4b3ebe5so10561281a12.0
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:39:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745357034; x=1745961834; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=BEeypp1h39Sf6T1kdMR1EAQjcFDAlyQolX4sEEdY+08=;
- b=LzLvDnvfAH1KxATbbKcYeYfzyhWinRgDcz3MVvLUI34MPZx1FjeyjRrwMLfVyyJNcI
- t98vBrpmBdjvlhh4ygUf131VyWk//iEq7nwvqoPUib8ng4CMcsdH2fxVRV8BtSsyv9fe
- dK4rQrw6+/EuoE7VqrUYQgCqdux/uz2970nrJpMCjpC6ALBA/9ObLNOQT0b5k0UwLwO1
- tHsTPk5MRvBeT4kvOmphpd23Mm2kImcqjwPkR2hEQfaCwWZ1J4WoP6Fmeel7TEdOCbXS
- ioC0cB52rrsAy8UL82Vci1aQbRFeOKg/mHpWzQ0T8lHW+iSKC1LTYfEkqiVR0Nni09Xy
- OYEA==
+ d=chromium.org; s=google; t=1745365181; x=1745969981; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=uJV9Aj9Vk5+wGZntinc5u1XMxWMNocXCYwwBzEBMJzM=;
+ b=hvkATFlVq32PlPXOcHZnQXiZXCcWlIK6qlHGiviyI0FodVVcukmfDvfsCOpEXTSS6l
+ 6plnqhYtTjO7sNJZaltF+Ptd+9WemFzfSEDznVgfng3FhWupycEJORxVxEheVg25mwkB
+ M94WDBFdtsndfR0kBPVdgR4KB4CKwwrXciTvo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745357034; x=1745961834;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=BEeypp1h39Sf6T1kdMR1EAQjcFDAlyQolX4sEEdY+08=;
- b=ne53Xq6F1XqPu75EHhmEigaNWgahdbSjhE4JFP1VRjKDQ8XSvFWm31FNNFQFs4UHay
- kEMNax4o7QibpsTuKt3pRRudDNy4cmH9rLwO8H1Zb2ebRRuueeFxsRHmFQBhgNGCoSot
- C09TFPL/pz3HNupT9Pqdtsm3GIfa8BC2KUTnFdEgDX/pmE7Ak7SDj9XPusf/HvXMzK9H
- yIs4yhv6tLpdPRSl8NOS6uw43jNnRfj9qH6uVJOTwI8tXVkfbWEg4pL1Y/Ki1evWcfHc
- EW/Fzh92jFctEJ0QW/t4NFb+RZb1BDlsHzoEiTVy5D5AxJBC0bbh87PyFbVJTnba29fW
- spBg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUme11GKYI21pdXDUmjOnX4Ofa3mOeLLi8S/NI9B0Nzqpbh82FAmYUKcWbdcT7qTV6xYhGGu9c=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbIQ+xVHGRjtwIu1FJqqZ59SDB/vilmUHl6F9CTIYciRgycG1G
- Zhakh5KhGTBxAXql8WaiJSCuHL24eHHcGqY7+Rpfpdjnp3E7gGsU
-X-Gm-Gg: ASbGnctY2DJw073/Df/GQzW8OW7sIDDU4dg2sSDUfEyvB4lvWNjSntix7T34Ac9qVLU
- CyyEAUTQZHJhw1CfniOUiBmPkTrM9qST38oB1XLeR/FsFsmZybLkIAoiG73f2nglmYlHq/joj4g
- 3ambaGgDvMZV9myvGI4dydB4TSbVLFPoNdm1MvOPTd8LrSmF/zfLaP4ZA0+Msymp6avLHAQaqXt
- 9Iyf8FOf4YcMLoqhIa7CHTQt8L1mCY993s0DSglOix4DM4F0v+L1bVuoS4uo0S3FUD50d2ikNxq
- HLWbczCX4Bv11mkVuhnIk2i7OWJOfVEEBynWyLzPGORexIpsfciIZDPcTYEl7WfHFVMBlz6IWjL
- V7YoTTIIpv4ZLN0I=
-X-Google-Smtp-Source: AGHT+IHbRrjTVzzoPkZAPaIcJLv02tK1xXyPQFiACUIbqJF5WTNC+xqdt+r0vBgZvuQZXdPkBJxGYA==
-X-Received: by 2002:a17:907:d1b:b0:ac3:4487:6a99 with SMTP id
- a640c23a62f3a-acb74db7e5emr1573011166b.47.1745357033946; 
- Tue, 22 Apr 2025 14:23:53 -0700 (PDT)
-Received: from ?IPV6:2001:9e8:b6:eb10:20f9:129:a444:dc12?
- ([2001:9e8:b6:eb10:20f9:129:a444:dc12])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acb6ec0b706sm696303566b.22.2025.04.22.14.23.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Apr 2025 14:23:52 -0700 (PDT)
-Message-ID: <920d137f-75d4-43c0-ae56-fc3f5213e4ab@gmail.com>
-Date: Tue, 22 Apr 2025 23:23:52 +0200
+ d=1e100.net; s=20230601; t=1745365181; x=1745969981;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=uJV9Aj9Vk5+wGZntinc5u1XMxWMNocXCYwwBzEBMJzM=;
+ b=Dq+7MFeH4eMY4uQFvk/a9+82FD4EDZ3m7uyBuo07jHBPpEvuUk/yqPuwJ8n67stnEW
+ wWR6+bp5PF6W5YI+MLDDjaeYr4ow96YkvZnvClc4a2usZrn8iIDoBnA7nLVaztnt5KqV
+ gqCMkVWBbLj2Wg7dzaid3RcswV4Pg4XMX7yCNwvmWponCOvqKZfVzo9urpS6ANkvKiB0
+ 90a+OTS2Am9Enh3D3Uez+o4wXc0k1VOzIA/vqael34WRxK7dcFux03cQIRCl6AZgoAeV
+ B7JHjvmNDqTwR6nYucM0CaqmrRMdLvpsMZzPAwxtttpUzOwHqCbjYjZDrBQbl/oT73w4
+ JGgw==
+X-Gm-Message-State: AOJu0YxrIV0SCmpU1+Au6iZ9f/FzfUp8eAm5shJOzELuHrPEuhxR/uRm
+ dm5FAlRlBOVNcNJ8Xntvh957BjDEqOXuFcDEpf9N+I2+J0AAQyVquxVlARdrtxme/KPu8L1gFkb
+ G0ntuIvKoW2lpVQ7yt5IHFbVUw32Z5NREv+M3lN+/tgX2PBDDJg==
+X-Gm-Gg: ASbGncsVtMje/2MjuIxYB+9Sv4EAxpkpftrNrieD11VLxbppOVDtRe1SeFy/T3sl1Lw
+ 4DBQVWAWytnv3Fv17usenD52Tv5wF0pgtBA+ryOkpJShAFVK3uPzsYADvm+Ambc8lC94sP+A65b
+ daV4swEvm2NU1IykE1vd3xmxI=
+X-Google-Smtp-Source: AGHT+IHisYqgis/1ZT7ceDVshZAV1TWxmxfgVAOVLS7/vcpOigHnHLrFf3JkLKYLpOg/2hrctLJHI3jIxDFu6fvntuo=
+X-Received: by 2002:a17:907:d1b:b0:acb:34b2:851 with SMTP id
+ a640c23a62f3a-acb74dbf387mr1660279266b.44.1745365181389; Tue, 22 Apr 2025
+ 16:39:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] configs: add UNIT_TESTS to big-endian Malta boards
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Paul Burton <paul.burton@mips.com>
-Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20250422185510.11561-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-In-Reply-To: <20250422185510.11561-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 22 Apr 2025 17:39:30 -0600
+X-Gm-Features: ATxdqUEcHFtt52fDmrNxe3VytwTpyEA0Rn8Tc54I4z-VgcL4mH8uUMpEQrZ-9FU
+Message-ID: <CAFLszTjnXQu3bwWt3Do7S_Vu0UO5si4HRUeW9bv0981WbUn_7Q@mail.gmail.com>
+Subject: Maintenance of Python tools
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,20 +83,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
+Tom has indicated that he would like Patman to move out of his tree. I
+suggested on another thread[1] that I maintain it in my 'sjg' tree, so
+here is a new thread to discuss this.
 
-On 4/22/25 20:55, Heinrich Schuchardt wrote:
-> We currently only run the unit tests on low-endian boards.
-> We should run them on big-endian, too.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->   configs/malta64_defconfig | 1 +
->   configs/malta_defconfig   | 1 +
->   2 files changed, 2 insertions(+)
-> 
+I have already done this for the qemu/efi/coreboot scripts as Tom has
+NAK'ed patches for those.
 
-Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+For the other tools there is going to be quite a bit of churn, as I
+would like to resolve most of the many Python warnings.
 
--- 
-- Daniel
+Given the shared source between the tools, it would be easier for me
+to do the same for buildman, binman and qconfig. I am thinking that I
+might try a move to allow Gitlab pull-requests for reviews on these as
+well as the mailing list, if that is useful.
+
+For tools which need to sync back to Tom's tree (i.e. not patman), I
+or Tom could do a pull request every now and then, omitting any
+changes that relate to pylint.
+
+Please let me know your thoughts. The timing is good as I am going to
+be sending out a new Patman feature in the next few weeks and it is a
+few thousand more lines of code.
+
+Regards,
+Simon
+
+[1] https://lore.kernel.org/u-boot/CAFLszTg7-yM0L8uuJyN7Jpsb1LbvOYO76cUWj+H719mfc97mMQ@mail.gmail.com/
