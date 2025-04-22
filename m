@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D6FEC369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C671FC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 15:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B04C28070C;
-	Tue, 22 Apr 2025 16:54:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 28B8180F6B;
+	Tue, 22 Apr 2025 17:18:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RkBRRJSK";
+	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="cs1o8dgT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B965C81F4D; Tue, 22 Apr 2025 16:54:23 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 04B9B80FA8; Tue, 22 Apr 2025 17:18:00 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B389F8059A
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:54:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB28280F03
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 17:17:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 99B8E41A1B
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:54:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745333660;
- bh=fMmkUzYx5mkGgRAd+fjXaK5fZpyOiQ2GI3izTXt/PIM=;
- h=Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type;
- b=RkBRRJSKh9VxqSCUwOxsDNjk9VM6nrrqEknvJh0q4zm8i0Z7IXOa6VHnpJwVDG62p
- C+CvSnTPALTpnZWrLCUUPauCniob7K3paJdMEYejrB50qZycu4bsb0d/kEfcFq71hK
- wVSYI1GMdqbCVS/6EEFThvOo4e7KHmGeGZwACh40VAObvppJNOQGTGVybEQvua5ZHU
- CjtrbSfPqQI57K22NXFyX9DLAwcZtO+8aszHDL/x6efdlUojBn4tb7phX9R610kzsz
- 4jNxqjoWAhy2UMouaoMT1kh25e/7Jla2qe0w7AsODxQQXXHfsOUPakLAdSy8faZ2DU
- 7gUrCv9m8cXjg==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-3912539665cso2668974f8f.1
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 07:54:20 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=sifive.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=samuel.holland@sifive.com
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3d80bbf3aefso14074145ab.1
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 08:17:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1745335076; x=1745939876; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wPNdG/TmMJiZA5LpNxPq4mQSrVvq8+nIYg3pRZ+CaOs=;
+ b=cs1o8dgToWIQkapqeKSnx9trDg4g3j3iCSeUCloZ0mit3TMyqJ+U+Z8rJpoUKxNCB2
+ HVtpM/tjsUWsxMRSFc/2HyxZNcHDtqBhSpGqhhKJRkgBnfM8g9EV+9/7zpF12wfvdU8d
+ 1ZpbZJKDZ1i5pvi9T2bwxihsAksTWqyyArl0xGJGb5BT36RTCmU+sunlRDobAzJfmxIY
+ fUt8ME6djmrJX7U3daf/2dAqxk7zYppubU09REM2Y5TcDQe4j+Zk38hblMxVPzbJcXxw
+ x5f2iyiyCxx2aFRYx4jFhFk9vtc62SPZ0amhar0TEMLcv0lgQYkNM3j7w8OwduZYO7Oo
+ 5zMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745333660; x=1745938460;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=fMmkUzYx5mkGgRAd+fjXaK5fZpyOiQ2GI3izTXt/PIM=;
- b=GNAcKGxbLYoPtd3aRdD3YWUP1bgtCnZiORkNG5snH/ezdBvKBSfPD/JI1bB/7h11vT
- UhhBIqkK46w2ZzrkxXFyKm/0q0+fVD3WmxrMwaBRk1vam8uKANt7BXMGkhnyYPNCRD8G
- w/d9EMni2di1BUUgwjaw8Xk4yvxoJPn1rJoWiyTBUVy/ehjy0+G1Ro8u//F25h1W0+29
- sxUNwAM+hWSP/hVDsN6IJCOpuGd3gJX0LNKn9cnlcWfT5RZ0zDbHFiHtgJyZJ8lQiITe
- 2KjBhmRZOfBwKjvybpi8/A/jOefY/h53/wEDieHHkeJDxSQ/7HGLm7vZ9sm7RDS+8WDC
- 1R7g==
-X-Gm-Message-State: AOJu0YxF4IkNofmLahbMWXK5SnOOFtDkieJuOI4SxJe5IHneUjjWuHKD
- MIFGq1kdKPktevY+MCWDNf1wlmNLjMmMxXp/c4EeAKdmy9OHfh+xxFvPxLFbdnpUih0ce2A8n6v
- L42DnfZx6LRIg/EO2SH5c4Dxwk1t2JO9YjwdkApQuaWn9FaqC0bBqmwcqOosKhhahc2M=
-X-Gm-Gg: ASbGncunA28erUNmS3KZVeBhjTgPoE2t/1OdeZY4TaQ25g6aKyZiQ8+jxpqYUNhnPgG
- ly6MnBeYY3TBhN24Vlu5ngTvWTAszVgWZNSoItY4mJ26fxza7U4UcxA4ZwvCwIilRlpmqnlkCGm
- YGor0FgT3N9IfYk6WKQR69XCVXZc0738YPtmywwWx1j5oRUNuQRURD5qqHimHqxPGGGWtdbWSmm
- ysvOqxGKJ8T0y7PqUwSTgm1ypIgquDlgHEtV5xvIOcATsFAmGP8ZFecNK0bW0F/+VjsGrYGZ2Gc
- aN/f1U86YEDIRLgOA/NiEW9f1BEekWTtHofNBgwLUQnwzUlb0qw0l3hok2PJp+3LwbMvMRpWrzH
- mikJ26ycU
-X-Received: by 2002:a05:6000:4212:b0:39c:1258:d12c with SMTP id
- ffacd0b85a97d-39ef9468079mr11985938f8f.28.1745333660053; 
- Tue, 22 Apr 2025 07:54:20 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG+bpm/ojpIyou9nUzKsogUYgfXmHbNnH70tVXJAhYLof2l0FyEqkCHbls+r001/BvfOaw35A==
-X-Received: by 2002:a05:6000:4212:b0:39c:1258:d12c with SMTP id
- ffacd0b85a97d-39ef9468079mr11985916f8f.28.1745333659671; 
- Tue, 22 Apr 2025 07:54:19 -0700 (PDT)
-Received: from [192.168.103.102]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39efa493255sm15663663f8f.69.2025.04.22.07.54.18
+ d=1e100.net; s=20230601; t=1745335076; x=1745939876;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wPNdG/TmMJiZA5LpNxPq4mQSrVvq8+nIYg3pRZ+CaOs=;
+ b=sQynWGL09/1pzTOp0CQe146MOTWmYjsOgQZInbYPBPGiFqc1eF9ic1cXGJllPX/xY+
+ iAMIpZMx0oq0iqkz9SWrvjdGNxA9gCGpXJoKV9hT07nfMx6qsSqbiY+MNSn7U/OENtI8
+ S6B9tSE1WwRn/TBLzhCOscqI74wAGuKm8/Yw30Ng9VsL9wx4Fe2ieadDMlMxGVwLR9Eo
+ MpSw/V6cIG51vHwtHGRL3BAwc8Pf6YDe9WOgzfyclbeIC/qegsQah5GZsYuSwpDQwmM+
+ YGKnW49GqI90Bu52cT0z1ZPw6ffplEWIeZwtAxmvJ3S/XBvMjeNEoXJUZgRUyJJhNrSg
+ 0OQA==
+X-Gm-Message-State: AOJu0Yx1NedUWDRdINX1hLRl7p+zXpUmQDLZpz3hhLp1D0sl5+dJo9Ja
+ SOJd48AReSByIXHo6R7uq5AWxqKTa7ODu67KIj3Nj3ntyoyOOT0hrCpqcK44eCU=
+X-Gm-Gg: ASbGncvaO+qbYwpV20+nIB5XHsIJwvg80rGNNaONDBbpuI5tannaO5PjCwWwbu0DhFX
+ zAAZ6BxwytBXkQlSfSqAcrA+tnlSJoOpUPJSuPPVdZ/JRwBVX1uqj4A/37A9nhZwVoIxucIfn70
+ V03MD7YC2l0tA1GYTu0HJbhzvwpPIksKCy/e3FPPszDiO2OuiXDY2VV3K1eYicYiOOZVKW/odnj
+ +bU4oj4aihHJ7kOLu5oXb3Bwgr43OYEJyetNeBTe0KU8gXNR7Uld4H6/R6t1XTIIjXYvBuV2sKP
+ SGcAnpa16dm5/m97NZuTGzxia9yDUAOII6eCUm5hRajznIyWWcSSic7iBQ==
+X-Google-Smtp-Source: AGHT+IH8d5Up5I3Oi5obS1Yj3LB/bGpH6V9o6VCt3LQ8DdFlFFRB1AfNxo0oPvNTklIARhGSoWk9mA==
+X-Received: by 2002:a05:6e02:2683:b0:3d8:1ea5:26d1 with SMTP id
+ e9e14a558f8ab-3d89417e663mr175514815ab.18.1745335071323; 
+ Tue, 22 Apr 2025 08:17:51 -0700 (PDT)
+Received: from [100.64.0.1] ([170.85.6.166]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f6a37cb971sm2365049173.29.2025.04.22.08.17.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Apr 2025 07:54:19 -0700 (PDT)
-Message-ID: <c301b266-ba62-47c8-a484-4006dab5036a@canonical.com>
-Date: Tue, 22 Apr 2025 16:54:17 +0200
+ Tue, 22 Apr 2025 08:17:51 -0700 (PDT)
+Message-ID: <9ac45fe6-70f2-409e-9c63-124e3987220a@sifive.com>
+Date: Tue, 22 Apr 2025 10:17:49 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/2] board: starfive: visionfive2: Drop setting of
+ $fdtfile
+To: E Shattow <e@freeshell.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+References: <20250422064541.635210-1-e@freeshell.de>
+ <20250422064541.635210-3-e@freeshell.de>
+ <e909b829-e7da-4059-9f65-b83e097929bf@freeshell.de>
+From: Samuel Holland <samuel.holland@sifive.com>
 Content-Language: en-US
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: PXE is broken on LWIP
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <e909b829-e7da-4059-9f65-b83e097929bf@freeshell.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,28 +103,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jerome
+Hi,
 
-PXE booting from standard boot with NET_LWIP just stalls if the server 
-does not respond:
+On 2025-04-22 5:07 AM, E Shattow wrote:
+> Oops should have compiled before sending.
+> 
+> On 4/21/25 23:45, E Shattow wrote:
+>> Remove board detection logic from main payload that is duplicated from SPL
+>> and do not set convenience data into $fdtfile environment variable. U-Boot
+>> "starfive visionfive2" board target(s) now boot on recent upstream Linux
+>> Kernel releases without this manipulation since the JH7110 OF_UPSTREAM
+>> migration. Changes to $fdtfile by users (i.e. following newer or older Linux
+>> Kernel releases) should follow the advice in general U-Boot documentation.
+>>
+>> Signed-off-by: E Shattow <e@freeshell.de>
+>> ---
+>>  .../visionfive2/starfive_visionfive2.c        | 61 -------------------
+>>  1 file changed, 61 deletions(-)
+>>
+>> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+>> index b8cd509bc89..039a32f1874 100644
+>> --- a/board/starfive/visionfive2/starfive_visionfive2.c
+>> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+>> @@ -17,14 +17,6 @@
+>>  DECLARE_GLOBAL_DATA_PTR;
+>>  #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
+>>  #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
+>> -#define FDTFILE_MILK_V_MARS \
+>> -	"starfive/jh7110-milkv-mars.dtb"
+>> -#define FDTFILE_VISIONFIVE2_1_2A \
+>> -	"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
+>> -#define FDTFILE_VISIONFIVE2_1_3B \
+>> -	"starfive/jh7110-starfive-visionfive-2-v1.3b.dtb"
+>> -#define FDTFILE_PINE64_STAR64 \
+>> -	"starfive/jh7110-pine64-star64.dtb"
+>>  
+>>  /* enable U74-mc hart1~hart4 prefetcher */
+>>  static void enable_prefetcher(void)
+>> @@ -45,51 +37,6 @@ static void enable_prefetcher(void)
+>>  	}
+>>  }
+>>  
+>> -/**
+>> - * set_fdtfile() - set the $fdtfile variable based on the board revision
+>> - */
+>> -static void set_fdtfile(void)
+>> -{
+>> -	u8 version;
+>> -	const char *fdtfile;
+>> -	const char *product_id;
+>> -
+>> -	fdtfile = env_get("fdtfile");
+>> -	if (fdtfile)
+>> -		return;
+>> -
+>> -	product_id = get_product_id_from_eeprom();
+>> -	if (!product_id) {
+>> -		log_err("Can't read EEPROM\n");
+>> -		return;
+>> -	}
+>> -	if (!strncmp(product_id, "MARS", 4)) {
+>> -		fdtfile = FDTFILE_MILK_V_MARS;
+>> -	} else if (!strncmp(product_id, "VF7110", 6)) {
+>> -		version = get_pcb_revision_from_eeprom();
+>> -
+>> -		switch (version) {
+>> -		case 'a':
+>> -		case 'A':
+>> -			fdtfile = FDTFILE_VISIONFIVE2_1_2A;
+>> -			break;
+>> -
+>> -		case 'b':
+>> -		case 'B':
+>> -		default:
+>> -			fdtfile = FDTFILE_VISIONFIVE2_1_3B;
+>> -			break;
+>> -		}
+>> -	} else if (!strncmp(product_id, "STAR64", 6)) {
+>> -		fdtfile = FDTFILE_PINE64_STAR64;
+>> -	} else {
+>> -		log_err("Unknown product\n");
+>> -		return;
+>> -	}
+>> -
+>> -	env_set("fdtfile", fdtfile);
+>> -}
+>> -
+>>  int board_init(void)
+>>  {
+>>  	enable_caches();
+>> @@ -98,14 +45,6 @@ int board_init(void)
+>>  	return 0;
+>>  }
+>>  
+> 
+>> -int board_late_init(void)
+>> -{
+>> -	if (CONFIG_IS_ENABLED(ID_EEPROM))
+>> -		set_fdtfile();
+>> -
+>> -	return 0;
+>> -}
+>> -
+> 
+> 
+> Need to keep board_late_init() or compile fails. Will fix in v2.
 
-Using ethernet@16030000 device
-TFTP from server 192.168.99.1; our IP address is 192.168.99.47
-Filename 'pxelinux.cfg/01-6c-cf-39-00-2d-29'.
-Load address: 0x45900000
-Loading:
+Alternatively you can drop the "select BOARD_LATE_INIT" from arch/riscv/Kconfig.
 
-If a server cannot be connected, the network loop should be exited.
+Regards,
+Samuel
 
-When pressing CTRL-C multiple times I see crashes with a call chain
-
-tftp_open -> sys_check_timeouts -> memp_free -> do_memp_free_pool
-
-I guess in sys_check_timeouts() we must remove timed-out timers from the 
-chain to avoid freeing them twice.
-
-Best regards
-
-Heinrich
-
+>>  int board_fdt_blob_setup(void **fdtp)
+>>  {
+>>  	if (gd->arch.firmware_fdt_addr) {
+> 
+> -E
 
