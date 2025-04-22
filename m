@@ -4,69 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62AA5C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FADC369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 14:50:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE84C80FA8;
-	Tue, 22 Apr 2025 16:45:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E9F1980FA8;
+	Tue, 22 Apr 2025 16:50:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zUIjHuDO";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="SbWXyiTi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32C3680FEC; Tue, 22 Apr 2025 16:45:07 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD0498070C
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:45:04 +0200 (CEST)
+ id 8612880FF7; Tue, 22 Apr 2025 16:50:42 +0200 (CEST)
+Received: from mail-m1973182.qiye.163.com (mail-m1973182.qiye.163.com
+ [220.197.31.82])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D40E38070C
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 16:50:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEj2SS1925464
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Apr 2025 09:45:03 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745333103;
- bh=+YawMEsZdX0a41k5V0z97UdgKI7YjwQPiCkmW8a8z20=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=zUIjHuDOo3vAfwtXlAFEEZv5q6OtkzYPcV4S9RiwE/SMeoOhY29k7sajXph9IEpFc
- bHh5yUeQQ0BjiwQrU1FCvMiRVoUPKSACBp4Afwr+/RuacuUYD5CMLiX/jAe7MDZ4Ks
- oiTJ9hjWsodQgMtIE7tJZBPT4UibisxO4oQw4gsU=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53MEj29R108565
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 22 Apr 2025 09:45:02 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Apr 2025 09:45:01 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Apr 2025 09:45:01 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53MEiwTw039451;
- Tue, 22 Apr 2025 09:44:59 -0500
-Message-ID: <18e01808-499d-4690-995a-45ac5fd727d9@ti.com>
-Date: Tue, 22 Apr 2025 20:14:58 +0530
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.69.12] (unknown [218.17.18.106])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 12bf175d3;
+ Tue, 22 Apr 2025 22:50:31 +0800 (GMT+08:00)
+Message-ID: <ddc8c6cc-2133-482a-a465-9d43440438cb@rock-chips.com>
+Date: Tue, 22 Apr 2025 22:50:30 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] arm: mach-k3: r5: common: Add support to boot HSM M4
- core
-To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
-CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
- <jm@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>
-References: <20250422095430.363792-1-b-padhi@ti.com>
- <20250422095430.363792-5-b-padhi@ti.com>
+Subject: Re: [PATCH v3 01/15] rockchip: sdram: honor CFG_SYS_SDRAM_BASE when
+ defining ram regions
+To: Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org,
+ philipp.tomsich@vrull.eu
+Cc: lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
+ jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
+ u-boot@lists.denx.de, sebastian.reichel@collabora.com
+References: <20250415215128.1475593-1-heiko@sntech.de>
+ <20250415215128.1475593-2-heiko@sntech.de>
 Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20250422095430.363792-5-b-padhi@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20250415215128.1475593-2-heiko@sntech.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCSxpDVktKTUgeTE9JSBlNH1YVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlJSkNVSkxVSkNVSktNWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
+ VLWQY+
+X-HM-Tid: 0a965dfaabdd03afkunm12bf175d3
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OSo6KDo4MjJCFkk9EQweDAEC
+ LzkwCwxVSlVKTE9OSEhIT0hJTEpCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlJSkNVSkxVSkNVSktNWVdZCAFZQUhKSEg3Bg++
+DKIM-Signature: a=rsa-sha256;
+ b=SbWXyiTiFDhHUen7HlR37MfHyg14jR3YJouuZ3pOaYVdD4Ue3KPtKhepVLH/GM8EDpY49PFUzpMvSzY2sNaWu9OXtYcVPTNbyE8shDjtgsEq1FBSS1gnSBms2BIELgFGS5Ykiz8OD+AASNf6YKkMLWZ6J/eqB/5q2XGYJSbk0tE=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=kkaW2XK+DHdArJr7RvhTm+OXAAPVT1hN/r6qG3JcvKE=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,172 +78,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Beleswar
 
-On 4/22/2025 3:24 PM, Beleswar Padhi wrote:
-> The tispl.bin fit image is packed with the HSM firmware image. Populate
-> the "os" info of the image so that it can be detected and loaded at
-> corresponding DDR address. Further, invoke the load and boot of HSM core
-> at R5 SPL stage. Boot flow for HSM M4 core is as below:
+On 2025/4/16 05:51, Heiko Stuebner wrote:
+> Currently the sdram code for arm64 expects CFG_SYS_SDRAM_BASE to be 0.
+> The ram being in front and the device-area behind it.
 >
-> 1. Request control of HSM M4F remote processor.
-> 2. Assert Reset on the HSM M4F remote processor.
-> 3. For HS devices, Request Secure Entity to Authenticate and Load HSM
->     firmware into core's internal SRAM memory region. For GP devices,
->     load the unsigned firmware manually.
-> 4. Deassert Reset on the HSM M4F remote processor.
-> 5. Release control of HSM M4F remote processor.
+> The upcoming RK3576 uses a different layout, with the device area
+> in front the ram, which then also extends past the 4G mark.
 >
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> Adapt both the generic zone definitions as well as the ATAG parser
+> to be usable on devices where CFG_SYS_SDRAM_BASE is not 0.
+>
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+Thanks,
+- Kever
 > ---
->   arch/arm/mach-k3/r5/common.c | 84 +++++++++++++++++++++++++++++++++++-
->   1 file changed, 83 insertions(+), 1 deletion(-)
+>   arch/arm/mach-rockchip/sdram.c | 12 ++++++------
+>   1 file changed, 6 insertions(+), 6 deletions(-)
 >
-> diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-> index fd188e7c90e..1af0f70d8d3 100644
-> --- a/arch/arm/mach-k3/r5/common.c
-> +++ b/arch/arm/mach-k3/r5/common.c
-> @@ -15,11 +15,17 @@
->   #include <spl.h>
->   #include <remoteproc.h>
->   #include <elf.h>
-> +#include <cpu_func.h>
+> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+> index aa3f47c3f20..f20d30f3595 100644
+> --- a/arch/arm/mach-rockchip/sdram.c
+> +++ b/arch/arm/mach-rockchip/sdram.c
+> @@ -182,9 +182,9 @@ static int rockchip_dram_init_banksize(void)
+>   		 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
+>   		 * have it, so force this space as reserved.
+>   		 */
+> -		if (start_addr < SZ_2M) {
+> -			size -= SZ_2M - start_addr;
+> -			start_addr = SZ_2M;
+> +		if (start_addr < CFG_SYS_SDRAM_BASE + SZ_2M) {
+> +			size -= CFG_SYS_SDRAM_BASE + SZ_2M - start_addr;
+> +			start_addr = CFG_SYS_SDRAM_BASE + SZ_2M;
+>   		}
 >   
->   #include "../common.h"
+>   		/*
+> @@ -229,7 +229,7 @@ static int rockchip_dram_init_banksize(void)
+>   					return -EINVAL;
+>   				}
 >   
-> +#define PROC_BOOT_CTRL_RESET_FLAG_HSM_M4	0x00000001
-> +#define HSM_SRAM0_0_ADDR			0x43C00000
-> +#define PROC_ID_HSM_M4F				0x00000080
-
-PROC_ID_HSM_M4F seems to have extra tab
-
-> +
->   #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
->   enum {
-> +	IMAGE_ID_HSM,
->   	IMAGE_ID_ATF,
->   	IMAGE_ID_OPTEE,
->   	IMAGE_ID_SPL,
-
-Do you see possibility to have HSM char and enum at last .
-
-
-> @@ -32,6 +38,7 @@ enum {
+> -				size -= rsrv_end - start_addr;
+> +				size -= rsrv_end - (start_addr - CFG_SYS_SDRAM_BASE);
+>   				start_addr = rsrv_end;
+>   				break;
+>   			}
+> @@ -302,8 +302,8 @@ int dram_init_banksize(void)
+>   	debug("Couldn't use ATAG (%d) to detect DDR layout, falling back...\n",
+>   	      ret);
 >   
->   #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
->   static const char *image_os_match[IMAGE_AMT] = {
-> +	"hsm",
->   	"arm-trusted-firmware",
->   	"tee",
->   	"U-Boot",
-> @@ -136,6 +143,73 @@ void release_resources_for_core_shutdown(void)
->   	}
->   }
+> -	/* Reserve 0x200000 for ATF bl31 */
+> -	gd->bd->bi_dram[0].start = 0x200000;
+> +	/* Reserve 2M for ATF bl31 */
+> +	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE + SZ_2M;
+>   	gd->bd->bi_dram[0].size = top - gd->bd->bi_dram[0].start;
 >   
-> +#if IS_ENABLED(CONFIG_K3_HSM_FW)
-> +static int boot_hsm_core(void)
-> +{
-> +	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-> +	struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
-> +	u64 hsm_image_addr;
-> +	u32 hsm_image_size;
-> +	int device_type, ret;
-
-^^ may be in alphabetic order
-
-
-> +
-> +	hsm_image_addr = (u64)fit_image_info[IMAGE_ID_HSM].image_start;
-> +	hsm_image_size = (u32)fit_image_info[IMAGE_ID_HSM].image_len;
-> +
-> +	/* Request Control of Remote Processor */
-> +	ret = proc_ops->proc_request(ti_sci, PROC_ID_HSM_M4F);
-> +	if (ret) {
-> +		printf("Unable to request processor control for core %d\n",
-> +		       PROC_ID_HSM_M4F);
-> +		return ret;
-> +	}
-> +
-> +	/* Put the remote processor into reset */
-> +	ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F,
-> +					   PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
-> +	if (ret) {
-> +		printf("Unable to Halt core %d\n", PROC_ID_HSM_M4F);
-> +		goto release_proc_ctrl;
-> +	}
-> +
-> +	/*
-> +	 * Load the HSM firmware into core's internal memory.
-> +	 *
-> +	 * In case of HS device types, request secure entity to authenticate and
-> +	 * load the HSM firmware into the core memory.
-> +	 * In case of GP device types, copy the HSM firmware into the core
-> +	 * memory manually.
-> +	 */
-> +	device_type = get_device_type();
-> +	if (device_type == K3_DEVICE_TYPE_HS_SE ||
-> +	    device_type == K3_DEVICE_TYPE_HS_FS) {
-> +		ret = proc_ops->proc_auth_boot_image(ti_sci, &hsm_image_addr,
-> +						     &hsm_image_size);
-> +		if (ret) {
-> +			printf("Unable to Authenticate and Boot HSM image; ret = %d\n",
-> +			       ret);
-> +			goto release_proc_ctrl;
-> +		}
-> +	} else if (device_type == K3_DEVICE_TYPE_GP) {
-> +		debug("Loading HSM GP binary into SRAM0_0\n");
-> +		memcpy((void *)HSM_SRAM0_0_ADDR, (void *)(u32)hsm_image_addr,
-> +		       hsm_image_size);
-> +		flush_dcache_range(HSM_SRAM0_0_ADDR,
-> +				   HSM_SRAM0_0_ADDR + hsm_image_size);
-> +	}
-
-since you are doing if- elseif loop then final else you should consider 
-as error case
-
-
-> +
-> +	/* Release the reset from the remote processor*/
-> +	ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F, 0,
-> +					   PROC_BOOT_CTRL_RESET_FLAG_HSM_M4);
-> +	if (ret)
-> +		printf("Unable to Run core %d\n", PROC_ID_HSM_M4F);
-> +
-> +release_proc_ctrl:
-> +	/* Release Control of Remote Processor */
-> +	proc_ops->proc_release(ti_sci, PROC_ID_HSM_M4F);
-> +	return ret;
-> +}
-> +#endif
-> +
->   void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->   {
->   	typedef void __noreturn (*image_entry_noargs_t)(void);
-> @@ -157,6 +231,14 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->   				     &loadaddr);
->   	}
->   
-> +#if IS_ENABLED(CONFIG_K3_HSM_FW)
-> +	ret = boot_hsm_core();
-> +	if (ret)
-> +		printf("HSM core failed to boot, %d\n", ret);
-> +	else
-> +		printf("Successfully booted HSM core\n");
-> +#endif
-
-Should we go in hang state, if secure fw is not started correctly ?
-
-
-> +
->   	/*
->   	 * It is assumed that remoteproc device 1 is the corresponding
->   	 * Cortex-A core which runs ATF. Make sure DT reflects the same.
-> @@ -342,7 +424,7 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
->   	 * Only DM and the DTBs are being authenticated here,
->   	 * rest will be authenticated when A72 cluster is up
->   	 */
-> -	if ((i != IMAGE_ID_ATF) && (i != IMAGE_ID_OPTEE)) {
-> +	if (i != IMAGE_ID_ATF && i != IMAGE_ID_OPTEE && i != IMAGE_ID_HSM) {
->   		ti_secure_image_check_binary(p_image, p_size);
->   		ti_secure_image_post_process(p_image, p_size);
->   	} else {
+>   	/* Add usable memory beyond the blob of space for peripheral near 4GB */
