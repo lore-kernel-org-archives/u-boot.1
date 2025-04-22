@@ -4,79 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A29A1C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CA85C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:11:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE72280FF7;
-	Tue, 22 Apr 2025 14:09:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DBA8280FF7;
+	Tue, 22 Apr 2025 14:11:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c+cLepog";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36DA281273; Tue, 22 Apr 2025 14:09:24 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 010C480FEC
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:09:20 +0200 (CEST)
+ id C70B681273; Tue, 22 Apr 2025 14:11:30 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id F317180FEC
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:11:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-acb5ec407b1so683968766b.1
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 05:09:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745323760; x=1745928560; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FDWR9fuWtm2QvquaXjAxvC83tiAdDrSHeEZqpDGNdys=;
- b=c+cLepog2TTCmQfQt/yTqomb+PrXicca3LPqxSiy4oZCykR45lMbVO5WdAdc5vBCY3
- ibjy3K2vUXb9JSB5gwK9yK8rS+V21roHkLYkFmYkNP4E5q9mKzY9qVCIAMBKPBPRZwK5
- Kv0ADxNSxIJtzgDv+EdlFK2hpfQ96e4qTVPozILQ4JZIjiVFZ/HajoBihW3fSOV4X2cr
- LJDl1JmTqVHZo6HHm3nkdsDCb+Pxxx57mOeuKwPLVGBYHWxNvxiTE/gRqyFH12ohuKKa
- ny2qgW43MswgErELxntAXXPA5h0SeL0LRXLEmizW0LaJRhyEpdq73/x5EN9XX7R7D1BI
- nnxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745323760; x=1745928560;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FDWR9fuWtm2QvquaXjAxvC83tiAdDrSHeEZqpDGNdys=;
- b=fzGStL8HR9OuiKxsNnfa6+vgde16nfolpVH3deomKMHAD7OdCrRU/kV03vvzXFq4rW
- q8Qv9mLZN1CuS3uA7awdD8dj9CrwoNS1twKAH4+cdXbNeyw7Jmm/7eCqup1nhBu8Y6ry
- T/ZBZEN8x0f5ecQPX9GafsIIvdQU3PBC5BduZZWebV75R8cTyL8qF7qcCQlYFXXD/JjL
- tm5m0IDaJD4enBPks9O4gnPgC5mK1oKq9+sdjOgIqMg5hfvpj2D2soduMLVHsZ294BpI
- r57HDZ6wxJb97kyYqngfwfFg9UqIdfrVfn2gFyTjvJ7WkFfo2ea6jtNxLMHZj8fy4C0F
- 6YFg==
-X-Gm-Message-State: AOJu0Yx/HBSaGp1EFT3vODCB9fa1IFo4VVfFJtM2shYL8wAJ3ESwilAt
- x+pKIWV+YyXO1A8V9CQk+b2PvipvCwlg7ilCkbIiUsT6O71XYzwCTLX8HjElDDMheSjGnW6cTwX
- viIf5YPy/L95pmGuMjt8xdHHq7NzmbvTSRXHi+Q==
-X-Gm-Gg: ASbGncta6G5gmaJsKYGHmmignns8M9ZHaxxVLW/8oIEylqT8P+qEuIwF6KqVQHgqxi9
- zODEtdc9YjskFKPC4EfuzhFChraQoDRxrzcr8tx/Me0+EIY/WtvCrZJrpQxYdGytPX84Pcg0XAl
- gy+v88DxbwTc4rRmgnqvV1fQ==
-X-Google-Smtp-Source: AGHT+IGBLFux/P9H3kHSRi9RbzKSlvGoUQ++Q0y9uN1im6i8+XSeDsPDueO4TBVT2XyLhXt9pb9K9xWFqJMZIzmpf6E=
-X-Received: by 2002:a17:906:4fcc:b0:ac7:16eb:8499 with SMTP id
- a640c23a62f3a-acb74abf442mr1375371166b.5.1745323759762; Tue, 22 Apr 2025
- 05:09:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EFAB3152B;
+ Tue, 22 Apr 2025 05:11:21 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2289E3F66E;
+ Tue, 22 Apr 2025 05:11:25 -0700 (PDT)
+Date: Tue, 22 Apr 2025 13:11:21 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, <u-boot@lists.denx.de>, Yixun
+ Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>, Jernej Skrabec
+ <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>,
+ <linux-sunxi@lists.linux.dev>
+Subject: Re: [PATCH v2 2/3] sunxi: add "fake" FEL pin support
+Message-ID: <20250422131121.7a491909@donnerap.manchester.arm.com>
+In-Reply-To: <e2d354dd-4be6-45b0-b263-7112b9320692@cherry.de>
+References: <20250417000539.3709-1-andre.przywara@arm.com>
+ <20250417000539.3709-3-andre.przywara@arm.com>
+ <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
+ <20250421222939.69832f73@minigeek.lan>
+ <e2d354dd-4be6-45b0-b263-7112b9320692@cherry.de>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-References: <17f988b0-787f-469b-8602-e324e0eae8d7@gmx.de>
-In-Reply-To: <17f988b0-787f-469b-8602-e324e0eae8d7@gmx.de>
-From: =?UTF-8?B?SsOpcsO0bWUgRm9yaXNzaWVy?= <jerome.forissier@linaro.org>
-Date: Tue, 22 Apr 2025 14:09:08 +0200
-X-Gm-Features: ATxdqUHzjn76g_hW1afq74gXfVvFHRccQOwGZI1yIaeUtlRYE7cthcQWfFT59rs
-Message-ID: <CA+NB=mYLdD_PYgUsH_50E5vLakqJbjEYLq0vPWjU=dzv3cNgKQ@mail.gmail.com>
-Subject: Re: NET_LWIP breaks common/log_syslog.c
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,66 +63,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Tue, 22 Apr 2025 12:49:40 +0200
+Quentin Schulz <quentin.schulz@cherry.de> wrote:
 
-On Tue, 22 Apr 2025 at 05:13, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
-e:
->
-> Hello Jerome,
->
-> I am trying to compile with CONFIG_LOG_SYSLOG=3Dy and CONFIG_NET_LWIP=3Dy
-> and get:
->
-> common/log_syslog.c: In function =E2=80=98log_syslog_emit=E2=80=99:
-> common/log_syslog.c:59:24: error: implicit declaration of function
-> =E2=80=98net_set_ether=E2=80=99; did you mean =E2=80=98env_set_hex=E2=80=
-=99?
-> [-Wimplicit-function-declaration]
->     59 |         eth_hdr_size =3D net_set_ether((uchar *)ptr,
-> net_bcast_ethaddr, PROT_IP);
->        |                        ^~~~~~~~~~~~~
->        |                        env_set_hex
-> common/log_syslog.c:102:9: error: implicit declaration of function
-> =E2=80=98net_set_udp_header=E2=80=99 [-Wimplicit-function-declaration]
->    102 |         net_set_udp_header((uchar *)iphdr, bcast_ip, 514, 514,
-> ptr - log_msg);
->        |         ^~~~~~~~~~~~~~~~~~
->
-> As these function just prepare packet buffers, should they be moved to
-> common code used both for the legacy and the new network stack?
+Hi,
 
-Doing so may not be the best option, since it will be pulling a few more gl=
-obals
-we don't have (and don't want) with NET_LWIP: net_our_vlan, net_native_vlan=
-,
-net_ethaddr... I believe the best course of action is to rewrite
-log_syslog_emit()
-to use the lwIP UDP API when NET_LWIP is enabled. It should not be too hard=
-.
-Something like that:
+> Hi Andre and Yixun Lan,
+> 
+> On 4/21/25 11:29 PM, Andre Przywara wrote:
+> > On Fri, 18 Apr 2025 13:28:23 +0200
+> > Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > 
+> > Hi Quentin,
+> > 
+> > thanks for having a look!
+> >   
+> >> Hi Andre,
+> >>
+> >> On 4/17/25 2:05 AM, Andre Przywara wrote:  
+> >>> Some boards with Allwinner SoCs feature a "FEL" key, sometimes also
+> >>> labelled "uboot", which triggers the BootROM FEL mode, when pressed upon
+> >>> power-on or reset. This allows to access the SoC's memory via USB OTG,
+> >>> and to upload and execute code. There is a tool to upload our U-Boot image
+> >>> and immediately boot it, when the SoC is in FEL mode.
+> >>>
+> >>> To mimic this convenient behaviour on boards without such a dedicated key,
+> >>> we can query a GPIO pin very early in the SPL boot, then trigger the
+> >>> BootROM FEL routine.  There has not been much of a SoC or board setup at
+> >>> this point, so we enter the BROM in a rather pristine state still. On
+> >>> 64-bit SoCs the required AArch32 reset guarantees a clean CPU state anyway.
+> >>>
+> >>> Any GPIO can be used for that, the signal is expected to be active low,
+> >>> consequently we enable the pull-up resistors for that pin. A board (or a
+> >>> user) is expected to specify the GPIO name using the
+> >>> CONFIG_SUNXI_FAKE_FEL_PIN Kconfig variable. When this variable is not set,
+> >>> the compiler will optimise away the call.
+> >>>
+> >>> Call the code first thing in board_init_f(), which is the first sunxi
+> >>> specific C routine.
+> >>>
+> >>> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> >>> ---
+> >>>    arch/arm/mach-sunxi/Kconfig | 10 ++++++++++
+> >>>    arch/arm/mach-sunxi/board.c | 31 +++++++++++++++++++++++++++++++
+> >>>    2 files changed, 41 insertions(+)
+> >>>
+> >>> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> >>> index ab432390d3c..f1cfdb548bc 100644
+> >>> --- a/arch/arm/mach-sunxi/Kconfig
+> >>> +++ b/arch/arm/mach-sunxi/Kconfig
+> >>> @@ -825,6 +825,16 @@ config USB3_VBUS_PIN
+> >>>    	---help---
+> >>>    	See USB1_VBUS_PIN help text.
+> >>>    
+> >>> +config SUNXI_FAKE_FEL_PIN
+> >>> +	string "fake FEL GPIO pin"
+> >>> +	default ""
+> >>> +	---help---
+> >>> +	Define a GPIO that shall force entering FEL mode when a button
+> >>> +	connected to this pin is pressed at boot time. This must be an
+> >>> +	active low signal, the internal pull-up resistors are activated.
+> >>> +	This takes a string in the format understood by sunxi_name_to_gpio,
+> >>> +	e.g. PH1 for pin 1 of port H.
+> >>> +  
+> >>
+> >> Why not use the DT for that? Then you wouldn't even need to assume the
+> >> polarity of the signal or whether pull-up/downs need to be activated, etc.  
+> > 
+> > As Yixun Lan already pointed out, the DT is not available at this
+> > point, and doing several pull-ups to get this information from the DT
+> > into the SPL image are really over the top for this purpose.  
+> 
+> OK, we do have something "similar" for Rockchip boards, via the 
+> sysreset-gpio DT property in /config, see 
+> arch/arm/mach-rockchip/rk3399/rk3399.c and 
+> arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi.
+> 
+> I guess something similar could be implemented IFF there's an actual DT 
+> in SPL (or even TPL). We for sure have DT in SPL for most if not all 
+> Rockchip devices, and probably in TPL as well. Hence why I sometimes 
+> forget other Arm boards may not have DT in those stages :)
 
-struct pbuf *p;
-struct netif *netif;
+Yeah, I know, there is some push for DT anywhere, but it would be quite
+some pain for sunxi, for very little benefit. We are very tight in the SPL
+code size for some SoCs, up to the point where for instance enabling this
+code here made the build break on some SoCs (I found something to free
+some code space elsewhere, might send that later). So pulling libfdt and
+DM code in would require going TPL, I guess. But I don't see the reason,
+really, as I tend to see the SPL more as the continuation of the BootROM,
+which manages without board specific knowledge at all. And for the small
+bits of info we need, we can happily use Kconfig. Most of it is actually
+SoC specific, not board specific, so users don't get bothered normally,
+and it just works (TM).
+There is tons of work and cleanup to do on the sunxi side, and were
+already have quite some backlog, so I want to avoid introducing more
+construction sites.
 
-netif =3D net_lwip_new_netif(eth_get_dev());
-pcb =3D udp_new();
-udp_bind_netif(pcb, netif);
-udp_bind(pcb, ip, src_port); /* maybe not needed if src_port doesn't matter=
- */
-p =3D pbuf_alloc(PBUF_RAW, len, PBUF_RAM);
-memcpy(p->payload, data, len);
-udp_sendto_if(pcb, dst_ip, dst_port, netif);
-pbuf_free(p);
-udp_remove(pcb);
-net_lwip_remove_netif(netif);
+> > This is more a sweet hacker device: I often have devices with eMMC and
+> > SPI flash, but without a FEL button. So the idea was to just pick a
+> > GPIO and use menuconfig to set it. Then I could just connect this pin
+> > to GND during boot, to get into FEL and test-boot firmware. "Connect to
+> > GND" could really be a jumper or even the tip of a screwdriver ;-)
+> > So I don't think this qualifies to being defined in the DT, really.
+> >   
+> 
+> If I understood correctly, this GPIO is essentially not fixed, you just 
+> pick a random one that you like and have access to and it may differ 
+> depending on the user I guess?
 
-See also lib/lwip/lwip/src/apps/tftp/tftp.c for usage of the UDP API.
+Depends, for some boards which have this button (X96 Mate) it's more
+obvious, but yeah, I wanted to keep this hackable, so DT wouldn't be a
+good place anyway.
 
-HTH,
---=20
-Jerome
+> Then yeah, I understand.
+> 
+> Can you please specify this in the commit log and also why we are not 
+> going the DT route (if I read correctly, in addition to it not being 
+> suitable for DT due to the ability to the function being available on 
+> any unused GPIO, there's also no DT available in the stage when this 
+> needs to be done?).
 
->
-> Best regards
->
-> Heinrich
+Sure, will do.
+
+> >> You can have the property in the -u-boot.dtsi then if you want?
+> >>
+> >> While the FEL button on the X96 is "fake", it does what it says, just in
+> >> software, maybe that is close enough to "hardware definition" which
+> >> would make it suitable for the DT (well, we also store binman nodes in  
+> > 
+> > Yes, I have a patch to add this particular button as a GPIO button into
+> > the DT, so people can use it for whatever they want in Linux (trigger
+> > reboot, update, you name it). But this is rather orthogonal to this
+> > problem, as mentioned above.
+> >   
+> 
+> Mmmmm but this will be in the Linux kernel DT and I assume you want the 
+> same GPIO to be used in U-Boot and in Linux, so it would probably be 
+> best to make sure they stay in sync? How are you planning to do that?
+
+On the Allwinner side we were syncing the DTs regularly for years already,
+and had no conflicting or different bindings at all. So I prefer to think
+of "the DT", with Linux or U-Boot just carrying slightly different
+versions for some time.
+
+Some SoCs (and all upcoming ones) use OF_UPSTREAM now, but I cannot roll
+this out to everyone, because there was one compatibility break in the DT
+in the past, and I want to keep support for older kernels with the U-Boot
+copy of the DT, so that the Debian Bullseye kernel on an installer USB
+drive would still work, for instance.
+
+Cheers,
+Andre
