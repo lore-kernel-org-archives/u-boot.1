@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBCFC369CB
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 09:54:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46474C369CB
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 09:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B7DC817C4;
-	Tue, 22 Apr 2025 11:54:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6119E81E72;
+	Tue, 22 Apr 2025 11:54:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZIKj0Aom";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sjG2gZff";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B57C5809A5; Tue, 22 Apr 2025 11:54:40 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 827D680C93; Tue, 22 Apr 2025 11:54:43 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B89E9810E8
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 11:54:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CF4C819FC
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 11:54:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53M9sbRU1906129
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53M9sdQ51174285
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Apr 2025 04:54:37 -0500
+ Tue, 22 Apr 2025 04:54:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745315677;
- bh=206lHiNZCYNXpJqvKEl/BpTtMVpdMVYDFLfjQT5RlKg=;
+ s=ti-com-17Q1; t=1745315679;
+ bh=+tbGd1lyEhtqpr3z6CK77mYLORxtbGkwxHeZJhq4at0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ZIKj0Aom9i5Y1V0AmC+/4Urz0D16ZuCdqHrJOx3SGadjCK8B5Dqvd7oojg0gtvOtR
- jPnPBoW97wWOwu13cPXTzvgo/kbXFxMpD2/Pr5xpu4r8/XWwGdpbXecP381kMafoT0
- rlLjpaIgnGoBvdowKo6TUhF/tpoJuAbBgziSN7xU=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53M9sbTX080189
+ b=sjG2gZffufmEGoCV4xUzHLgUk2BIpZ4kY+5q8u2G2kPpMzZYNJKESx9dcMvvgqYe6
+ hlBMGVcwiNvTBkZ66v+8UbjWKudmdgzq11QhpesghVjdM6JhzfqiPU87I7GtKEM95C
+ pCrh1C7pA4l2bp6kTRUWrF99qZcXYHQCvU6J5Gm4=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53M9sd2X056676
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 22 Apr 2025 04:54:37 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 22 Apr 2025 04:54:39 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Apr 2025 04:54:36 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 04:54:39 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Apr 2025 04:54:37 -0500
+ Frontend Transport; Tue, 22 Apr 2025 04:54:39 -0500
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53M9sVGU088247;
- Tue, 22 Apr 2025 04:54:34 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53M9sVGV088247;
+ Tue, 22 Apr 2025 04:54:37 -0500
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>
 CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
  <jm@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 1/4] arm: mach-k3: Add config option for booting HSM core
-Date: Tue, 22 Apr 2025 15:24:27 +0530
-Message-ID: <20250422095430.363792-2-b-padhi@ti.com>
+Subject: [PATCH 2/4] arm: dts: k3-binman: Add template for packing HSM firmware
+Date: Tue, 22 Apr 2025 15:24:28 +0530
+Message-ID: <20250422095430.363792-3-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250422095430.363792-1-b-padhi@ti.com>
 References: <20250422095430.363792-1-b-padhi@ti.com>
@@ -80,35 +80,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some K3 SoCs like J721S2, and J784S4 have a HSM (High Security Module)
-M4F core in the Wakeup Voltage Domain which could be used to run secure
-services like Authentication. Add a config option which indicates that
-the SoC has a HSM core and the firmware for the core is available.
+The HSM M4 core needs to be booted at R5 SPL stage so that it can be
+used for further Authentication and security services. Therefore, the
+firmware for the HSM core needs to be packed in tispl.bin fit image so
+that it can be used by R5 SPL to boot the HSM core.
+
+Add a template for packing the HSM firmware in tispl.bin. The size of
+HSM firmware is padded upto 256 KB. The HSM binaries are unloaded at a
+temporary DDR address.
 
 Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 ---
- arch/arm/mach-k3/Kconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/arm/dts/k3-binman.dtsi | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 1b8c0b1eb96..b787d2da244 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -181,6 +181,14 @@ config K3_REMOTEPROC_PRU
- 	imply REMOTEPROC_TI_PRU
- 	default y if (SOC_K3_AM642 || SOC_K3_AM654)
+diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+index 5163161b94d..c2b8388b06e 100644
+--- a/arch/arm/dts/k3-binman.dtsi
++++ b/arch/arm/dts/k3-binman.dtsi
+@@ -297,6 +297,17 @@
+ 					};
+ 				};
  
-+config K3_HSM_FW
-+	bool "Load and Boot HSM core"
-+	default n
-+	help
-+	  Enabling this will indicate that the system has a HSM (High Security
-+	  Module) M4 Core and the firmware for the core is present. When
-+	  enabled, HSM core will be booted at R5 SPL execution time.
++#ifdef CONFIG_K3_HSM_FW
++				hsm {
++					description = "HSM binary";
++					type = "standalone";
++					compression = "none";
++					os = "hsm";
++					load = <0x82000000>;
++					entry = <0x82000000>;
++				};
++#endif
 +
- if CPU_V7R
- source "arch/arm/mach-k3/r5/Kconfig"
- endif
+ 				dm {
+ 					description = "DM binary";
+ 					type = "firmware";
 -- 
 2.34.1
 
