@@ -4,71 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84B86C369C2
-	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 11:00:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A29A1C369C2
+	for <u-boot@archiver.kernel.org>; Tue, 22 Apr 2025 12:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 159048197F;
-	Tue, 22 Apr 2025 13:00:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id EE72280FF7;
+	Tue, 22 Apr 2025 14:09:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1745319632;
-	bh=yY4t6PDwvKa+V9tNorFFuAn/AJHWAcZfSU4Ss1Dw/Ig=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=tiF/X4HEyezDWYFJUZBup+2EavZ3AowA2iBHznr1rH2nxFTLqSCiZmg2Vk8c8Gkn8
-	 Y8z2y7AQKar4Bx90eyOBIREle7CnLKfqYWbX2pxGPI0DcRlkAfmn0VOWXhiH7vDqZb
-	 gC0ELlmj80efFOiw+qMdAqJ/rU56RmNWEu9YTLW8VobDpsn9vSNzf9qBVko8OWxuCi
-	 ePGPnSCWYEer8m8iDPtfJC3svje8ajuLh6VjK0Qo8CKx/B1Z7s9RehWA4kX9vZqtgN
-	 2tq6h0RBz2Hrs3moqmDGtRi3HvPbwLgP56kZgsREiGSXu4ktTDA1qiARbz71yKzm2/
-	 qcYwt6g63RW5Q==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F89B810E8; Tue, 22 Apr 2025 13:00:30 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E14EB8197F
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 13:00:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="LD4drayp"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id BBEB5102A8C9C; 
- Tue, 22 Apr 2025 13:00:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1745319627;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=yY4t6PDwvKa+V9tNorFFuAn/AJHWAcZfSU4Ss1Dw/Ig=;
- b=LD4draypnZ+OHlxtMDKhWWqOF+sz7O0ZmTEFJ44VEX72rBRnibWzZiBY3KUr50bc7/XODo
- rxvB+FI0l/FIh27sX5laOvaWxeKnuzyvwp8WFEGsE4qRovmRoMtgRpmBqmwdHK4Luz+us5
- 3o4JU17NbDiLOuIWR7BXygQDayhImlDatCVGi9SzmZhbzEUDT0u43oVIeTLj6iD7cXd0Tw
- qr5h83OMbm3PJ9I1nTQDCNBAD/7mOqtMVCAS5ceXQrK972HL53k7wJptvMmofjALqFTiGt
- ri0zoWiS1qD0KAUNpPda/zEH2qXFW+ugqeorceK3bRfDGkVJaVnfVoJ5ipcGCw==
-Message-ID: <b2a48a0a-a6d1-9f6d-e704-5675f922184b@denx.de>
-Date: Tue, 22 Apr 2025 13:01:02 +0200
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c+cLepog";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 36DA281273; Tue, 22 Apr 2025 14:09:24 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 010C480FEC
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 14:09:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-acb5ec407b1so683968766b.1
+ for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 05:09:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745323760; x=1745928560; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FDWR9fuWtm2QvquaXjAxvC83tiAdDrSHeEZqpDGNdys=;
+ b=c+cLepog2TTCmQfQt/yTqomb+PrXicca3LPqxSiy4oZCykR45lMbVO5WdAdc5vBCY3
+ ibjy3K2vUXb9JSB5gwK9yK8rS+V21roHkLYkFmYkNP4E5q9mKzY9qVCIAMBKPBPRZwK5
+ Kv0ADxNSxIJtzgDv+EdlFK2hpfQ96e4qTVPozILQ4JZIjiVFZ/HajoBihW3fSOV4X2cr
+ LJDl1JmTqVHZo6HHm3nkdsDCb+Pxxx57mOeuKwPLVGBYHWxNvxiTE/gRqyFH12ohuKKa
+ ny2qgW43MswgErELxntAXXPA5h0SeL0LRXLEmizW0LaJRhyEpdq73/x5EN9XX7R7D1BI
+ nnxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745323760; x=1745928560;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FDWR9fuWtm2QvquaXjAxvC83tiAdDrSHeEZqpDGNdys=;
+ b=fzGStL8HR9OuiKxsNnfa6+vgde16nfolpVH3deomKMHAD7OdCrRU/kV03vvzXFq4rW
+ q8Qv9mLZN1CuS3uA7awdD8dj9CrwoNS1twKAH4+cdXbNeyw7Jmm/7eCqup1nhBu8Y6ry
+ T/ZBZEN8x0f5ecQPX9GafsIIvdQU3PBC5BduZZWebV75R8cTyL8qF7qcCQlYFXXD/JjL
+ tm5m0IDaJD4enBPks9O4gnPgC5mK1oKq9+sdjOgIqMg5hfvpj2D2soduMLVHsZ294BpI
+ r57HDZ6wxJb97kyYqngfwfFg9UqIdfrVfn2gFyTjvJ7WkFfo2ea6jtNxLMHZj8fy4C0F
+ 6YFg==
+X-Gm-Message-State: AOJu0Yx/HBSaGp1EFT3vODCB9fa1IFo4VVfFJtM2shYL8wAJ3ESwilAt
+ x+pKIWV+YyXO1A8V9CQk+b2PvipvCwlg7ilCkbIiUsT6O71XYzwCTLX8HjElDDMheSjGnW6cTwX
+ viIf5YPy/L95pmGuMjt8xdHHq7NzmbvTSRXHi+Q==
+X-Gm-Gg: ASbGncta6G5gmaJsKYGHmmignns8M9ZHaxxVLW/8oIEylqT8P+qEuIwF6KqVQHgqxi9
+ zODEtdc9YjskFKPC4EfuzhFChraQoDRxrzcr8tx/Me0+EIY/WtvCrZJrpQxYdGytPX84Pcg0XAl
+ gy+v88DxbwTc4rRmgnqvV1fQ==
+X-Google-Smtp-Source: AGHT+IGBLFux/P9H3kHSRi9RbzKSlvGoUQ++Q0y9uN1im6i8+XSeDsPDueO4TBVT2XyLhXt9pb9K9xWFqJMZIzmpf6E=
+X-Received: by 2002:a17:906:4fcc:b0:ac7:16eb:8499 with SMTP id
+ a640c23a62f3a-acb74abf442mr1375371166b.5.1745323759762; Tue, 22 Apr 2025
+ 05:09:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v3 4/4] drivers: i2c: Kconfig: Add
- CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
-Content-Language: en-US
-To: Aniket Limaye <a-limaye@ti.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org,
- virag.david003@gmail.com, w.egorov@phytec.de, j-keerthy@ti.com,
- u-kumar1@ti.com
-References: <20250422101957.1949448-1-a-limaye@ti.com>
- <20250422101957.1949448-5-a-limaye@ti.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250422101957.1949448-5-a-limaye@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <17f988b0-787f-469b-8602-e324e0eae8d7@gmx.de>
+In-Reply-To: <17f988b0-787f-469b-8602-e324e0eae8d7@gmx.de>
+From: =?UTF-8?B?SsOpcsO0bWUgRm9yaXNzaWVy?= <jerome.forissier@linaro.org>
+Date: Tue, 22 Apr 2025 14:09:08 +0200
+X-Gm-Features: ATxdqUHzjn76g_hW1afq74gXfVvFHRccQOwGZI1yIaeUtlRYE7cthcQWfFT59rs
+Message-ID: <CA+NB=mYLdD_PYgUsH_50E5vLakqJbjEYLq0vPWjU=dzv3cNgKQ@mail.gmail.com>
+Subject: Re: NET_LWIP breaks common/log_syslog.c
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,37 +88,71 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Aniket,
+Hi Heinrich,
 
-On 22.04.25 12:19, Aniket Limaye wrote:
-> Add a Kconfig option to disable sending Stop conditions between multiple
-> i2c_msgs within a single xfer. Enable this config by default for ARCH_K3
-> platforms.
-> 
-> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
-> ---
-> 
-> v2:
-> - CONFIG_I2C_REPEATED_START -> CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
-> - Link to v1: https://lore.kernel.org/u-boot/20250304220546.866602-4-a-limaye@ti.com/
-> 
-> ---
->   drivers/i2c/Kconfig | 9 +++++++++
->   1 file changed, 9 insertions(+)
+On Tue, 22 Apr 2025 at 05:13, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
+e:
+>
+> Hello Jerome,
+>
+> I am trying to compile with CONFIG_LOG_SYSLOG=3Dy and CONFIG_NET_LWIP=3Dy
+> and get:
+>
+> common/log_syslog.c: In function =E2=80=98log_syslog_emit=E2=80=99:
+> common/log_syslog.c:59:24: error: implicit declaration of function
+> =E2=80=98net_set_ether=E2=80=99; did you mean =E2=80=98env_set_hex=E2=80=
+=99?
+> [-Wimplicit-function-declaration]
+>     59 |         eth_hdr_size =3D net_set_ether((uchar *)ptr,
+> net_bcast_ethaddr, PROT_IP);
+>        |                        ^~~~~~~~~~~~~
+>        |                        env_set_hex
+> common/log_syslog.c:102:9: error: implicit declaration of function
+> =E2=80=98net_set_udp_header=E2=80=99 [-Wimplicit-function-declaration]
+>    102 |         net_set_udp_header((uchar *)iphdr, bcast_ip, 514, 514,
+> ptr - log_msg);
+>        |         ^~~~~~~~~~~~~~~~~~
+>
+> As these function just prepare packet buffers, should they be moved to
+> common code used both for the legacy and the new network stack?
 
-Thanks for the update!
+Doing so may not be the best option, since it will be pulling a few more gl=
+obals
+we don't have (and don't want) with NET_LWIP: net_our_vlan, net_native_vlan=
+,
+net_ethaddr... I believe the best course of action is to rewrite
+log_syslog_emit()
+to use the lwIP UDP API when NET_LWIP is enabled. It should not be too hard=
+.
+Something like that:
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+struct pbuf *p;
+struct netif *netif;
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+netif =3D net_lwip_new_netif(eth_get_dev());
+pcb =3D udp_new();
+udp_bind_netif(pcb, netif);
+udp_bind(pcb, ip, src_port); /* maybe not needed if src_port doesn't matter=
+ */
+p =3D pbuf_alloc(PBUF_RAW, len, PBUF_RAM);
+memcpy(p->payload, data, len);
+udp_sendto_if(pcb, dst_ip, dst_port, netif);
+pbuf_free(p);
+udp_remove(pcb);
+net_lwip_remove_netif(netif);
+
+See also lib/lwip/lwip/src/apps/tftp/tftp.c for usage of the UDP API.
+
+HTH,
+--=20
+Jerome
+
+>
+> Best regards
+>
+> Heinrich
