@@ -4,175 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDECCC369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58545C369D1
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 270DE815D1;
+	by phobos.denx.de (Postfix) with ESMTP id 77E05820E2;
 	Wed, 23 Apr 2025 16:25:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NGg2gSvx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JmznxkK5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C793880F03; Wed, 23 Apr 2025 13:28:49 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20628.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::628])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9188D80F03; Wed, 23 Apr 2025 13:55:43 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 089E4809A5
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 13:28:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C34EC8059D
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 13:55:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=harini.katakam@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HQCNFoYcSNLtEX8Ki2lIWurWELSpHoElwrzk0/FkDS34fKl4wQJqY0iVryYtq8W0HK8uz4ouXcUcFmKaRMhQkMbK9PL1pVVrGmrnX0tJa2p4zWTdGAzfjlwMnxRnGRY+yjSMl8Pm3jAvs/4R7jf3UXSvy1bW9kEb+5qpjCpEqXOYC+MgFW1NYMSC9Barm5ycZE/3V/RCpssvDPXOhLsKWgaz0E5IN8zNkAvPlhdX4vcvAZg6d1dxmIald3bDRDy1ZTHGS1KZZTCLG/piN13W9NxVMnAzgqxOE9OEwx13meOd2OzEN3u1MQZ8TfiOoadjvLxWW18Nh4XfD/Ke7DBboA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NAU2YsrHHG+/P9+grcrceDnPn4ZRQ8/BOUtrvIac++w=;
- b=rBPtx90LJchGJlOB0Pi7yjDcYCa6L82kZhFwn6jvpcQZNu5gPtzaW7/qgG/4UIH7eE071vNLFlZmi0rlbQrSoa/58X4KWndb4uylPKq9llMsOuwJ9g0ajUvTbdEDPyk0PtIQZV1AvGcfVfZDSzPCgBsMwAw8T4YKJt29yeUcCM7jLIr+Mt8XiUvI+ebTgWIlTJkmBU9avS0N79JT1QQI4dJRk5UNK4ALT1FOmyf50y+7fiBAbNNONhzm5Z8iezxX5ZHe3qI9jKFNkIw/kD4z3HKZKJOykiC5GyP5fS20sObmnjD7B/EfEYYbunLDmdF3iPoTYdwaqm5a0Qk4ohVVug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NAU2YsrHHG+/P9+grcrceDnPn4ZRQ8/BOUtrvIac++w=;
- b=NGg2gSvxZSkpKMA4OhJUfnVLh7XDiSDB7Fb9dTtHrKMiHU0JzOGjsUF4eICnxyHBicHgVFbKKumqD3Seh20Z54MKQpU2hmj9VrjWhIALNh4KOzctM+hxrQ18osI4Mp/OVbmh/IcK6o1z5olECG/Hi84/9Mg572p3DvSoRVvhZRE=
-Received: from SJ2PR12MB8739.namprd12.prod.outlook.com (2603:10b6:a03:549::10)
- by SN7PR12MB8171.namprd12.prod.outlook.com (2603:10b6:806:322::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.35; Wed, 23 Apr
- 2025 11:28:42 +0000
-Received: from SJ2PR12MB8739.namprd12.prod.outlook.com
- ([fe80::29bb:9aa:2a72:df1b]) by SJ2PR12MB8739.namprd12.prod.outlook.com
- ([fe80::29bb:9aa:2a72:df1b%3]) with mapi id 15.20.8655.033; Wed, 23 Apr 2025
- 11:28:42 +0000
-From: "Katakam, Harini" <harini.katakam@amd.com>
-To: Martin Kaistra <martin.kaistra@linutronix.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: "joe.hershberger@ni.com" <joe.hershberger@ni.com>, "rfried.dev@gmail.com"
- <rfried.dev@gmail.com>, "Simek, Michal" <michal.simek@amd.com>, "Abbarapu, 
- Venkatesh" <venkatesh.abbarapu@amd.com>
-Subject: RE: [PATCH] net: gem: ignore tx_clk if MII is used
-Thread-Topic: [PATCH] net: gem: ignore tx_clk if MII is used
-Thread-Index: AQHbs6Ia8v5LAhwFF0GMD5wF+Wsbv7Ow2FCAgABEuQA=
-Date: Wed, 23 Apr 2025 11:28:42 +0000
-Message-ID: <SJ2PR12MB8739D4C7BFF1192979C3BBC29EBA2@SJ2PR12MB8739.namprd12.prod.outlook.com>
-References: <20250415150400.136723-1-martin.kaistra@linutronix.de>
- <SJ2PR12MB87391F3A43374B5C2844CFD09EBB2@SJ2PR12MB8739.namprd12.prod.outlook.com>
- <2a5c6fbb-1788-40f7-9c35-9deeb67b0234@linutronix.de>
-In-Reply-To: <2a5c6fbb-1788-40f7-9c35-9deeb67b0234@linutronix.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_ActionId=b5bf6f19-e862-4442-b0d4-84f9f08c1db7;
- MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_ContentBits=0;
- MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_Enabled=true;
- MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_Method=Standard;
- MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_Name=AMD
- Internal Distribution Only;
- MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_SetDate=2025-04-23T11:23:35Z;
- MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
- MSIP_Label_dce362fe-1558-4fb5-9f64-8a6240d76441_Tag=10, 3, 0, 1;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SJ2PR12MB8739:EE_|SN7PR12MB8171:EE_
-x-ms-office365-filtering-correlation-id: 7ae7fb92-8204-4d28-2057-08dd825a00b9
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?Qk5nQ1B3K2J1akc5Q1VRSmRGTGdUaTZvRFRTTStYdXFkc2lCdS9iclpXdUN3?=
- =?utf-8?B?ajNVeEViU29EV2lINjVSRk9oUGpHVXFrQWZJbFZxOHlQcUpMalVRMEpVQk1m?=
- =?utf-8?B?K2RTYkMrMStUZFhmNkNmamRJeVJ5dmRWRnZZSVV6T0xrSjBNN2hSMWtuQ1Mx?=
- =?utf-8?B?Z3UxOWtObzR2d1RJUHBKa1QveEZDby9LUVUwb3N3ZE1GOEd2WWtCNTM1Q0JJ?=
- =?utf-8?B?U1UxNjBFWjBuTk11YlVWalhjbTBMMjJiSFRIamI0cy91V3hMcmwvUXM2dXJw?=
- =?utf-8?B?SUJTa1VUakJJUWhJN1dndlRYNWlLNnozdzU5MVNJZ1lZcG5YYjg0TXNucWZx?=
- =?utf-8?B?dHd0M0MzbFR2c2dEaHJkVE5XbzI3UEdvbGVQQzB3VWJ6SjQzeXFjVW40QlBa?=
- =?utf-8?B?aUVyUytkQ3hiUEQ5R01kKy90a1YveEIvcnBBNllDNjhLck9YVmJEa0pVUlFD?=
- =?utf-8?B?OE5pQVgrbG45emVnRWduQVZyYjd0TEVKekVuWkhqK3BNZElYVG5DU0VNamZr?=
- =?utf-8?B?aFR4aTNxOC9ZNmcybnlXalREUXFaZFZDT3BCMnZMVUI0aTNhM3RoTERsVXlo?=
- =?utf-8?B?NXlBQTc5UkQ4NmFzanFLSTRQUFlvRzdnSE9OZXpXcWJDQk1XbU5sQUZZZDdt?=
- =?utf-8?B?UEsrZEk5WGRlMHhFMjMyNjRxRTlnVHFRYnl2RVhDZ2QrOWh0cW9PYVpSdTlv?=
- =?utf-8?B?WGVjNkJBQ3k1M3lKa2N3RlRkS3M5L01BSHR1UVFHMGh5WVNWSFdTVTF4R1F0?=
- =?utf-8?B?R2k3QllHNlBId2Z2ZjUxWXVOTmh6M3Fwb2ExMXhMS1dodzVTSmFpZUdsRG54?=
- =?utf-8?B?VmRSNjBrdjRsQ3N1MFQ0a3c5bnpUR09jM01PU05sNzk5eUhGK3pvWTRaQmlK?=
- =?utf-8?B?Rm9zQmxsTkkrRTgrMDh0NXVPS3NnU1ZxK1BqbU5iNEZpVGdYMzBUcmI4cGor?=
- =?utf-8?B?OGVXYUxHT2J2WDUrVkRXODEvMFBTS2xlNFhqRlgyWmRXelZZdlR2MzRSY1Yw?=
- =?utf-8?B?cDEzby94UFAzellJNDJvNDV4T0Jhb0pJT0Jrcll0NjlmS0g0eGZrSWNOZ2dn?=
- =?utf-8?B?eWEvMm1zSEsrbHZvcmRxeW9mMG43RUYrWTh4MytKWVNFYmNJbGx1NGxzdXNL?=
- =?utf-8?B?SUx6YlRuUkphY2VGUytYSkUvdzhxQTl3MktteGxLblhyYXVuUy9Dam5ZdkZN?=
- =?utf-8?B?c3lnVlVVZldBVVkrNXZSQzBZT3lwV1ZBR0NBelNRampSRHVuZXNxZlVSMGJn?=
- =?utf-8?B?c0hiY2JSeHRyNmlLa3Y0ZUwzOVFIVW9mR0tDZFY1QTlWaDgwK3JVM1ltOWJy?=
- =?utf-8?B?TmxuMS9NbXY1eXo1N3RNU1dOa2ZwMGdrNXJzN1ZuYjN2Yi9MZTd4SWZqYklI?=
- =?utf-8?B?UDRDS2M1U1VlMUNrTWNWTW9zQmh1RndmbmNiM3d3LzlvemZaWDY0bkFMUWNF?=
- =?utf-8?B?bDZuMVdyTGpCSkNYUUZIajAzQ0UzY2k4aDlNL0RZRDJNb25DYzA0anZwVEow?=
- =?utf-8?B?dnBxWTN3am9weWdSOEtYYkxham53NEVCaGNWMFh4VHQva0JjZWtuQnE3TVlH?=
- =?utf-8?B?N3ljeTRneERZVW1FV3FZaDJIMHJsZjN4UTQ5a0NycXYrdUJpc2g5VllYWE1Q?=
- =?utf-8?B?MXg3SXo4Mzdid3N0enpXSy9vRnpESk44NVhYZlFLNjNDSFpXa3F4UGxkMGhi?=
- =?utf-8?B?dUlNdmlVaTZzeDE3QnlRbGV4ZVRjMW94VXdzbEhFSVZZTDU2WGtKSTVuV1h2?=
- =?utf-8?B?NHFLUnFubEpLNEw5U0tPUWRkaFkyeDZhbmw1N1BXMEhva0pLSE1UdExCMldP?=
- =?utf-8?B?clIzOGVLMjE4ODgwZHlvTWd1cC9sODhjNDh2dzUxUE54bHUzbUxVYzF0bkov?=
- =?utf-8?B?enFtdUZoTUo0U2NPYlk4NjNrNmJPSXM3aDBxbFRHVi9wb0ZPZ21tQTRQMXB2?=
- =?utf-8?B?L0N4L1JTNU54UlhnbTU2SVpHZGs3YTdyY1FML29Gc1ZRVTYwZ1QxMjZJQWhF?=
- =?utf-8?B?UjJTTkYyVDNRPT0=?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8739.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WllseFhBYnBIb1JYdi81YXFsVCtHM2RkeERwb3hOWHVTNXVmamdoKzh3dmhk?=
- =?utf-8?B?MFJIci9UWU5takl2eHNyb3d0Mktnc2k4NFZJV3orWFE2WkVVbmhzYi8vRFZy?=
- =?utf-8?B?ZnFHcVEwZ1FBdEVycHU5UU5FNnVZT0VabXZDSXR2YkpwL24vdTR4bDR3Q0pS?=
- =?utf-8?B?dndqbyt6TlhjVzNkeHRvb2hTN3NWYzRLWHBIeWdCL3J6b29LK3BhUTkxQ0lI?=
- =?utf-8?B?NDV5UUpXTXpVcGtWL2pXZHdKellLeTdHU1VST3VjdWRRL1lRSDBpcUcwZjdJ?=
- =?utf-8?B?SjFQWHFEeDlrRG9najI4M1BldEQ2UlExckJwRW04SnZxYjRUeXEvQ2lPb24w?=
- =?utf-8?B?OEhTM1gvRDd3VlBGRmc4WGVoZDhJRHl1Q1d2VzZsV0I2c3RpdUcwT3JJSnQr?=
- =?utf-8?B?OGlqeTY4eXJZdXMvVWVOcFB4bzUzZFZXOTlwVlBoTjErb3UxeXNxSkMzb0hv?=
- =?utf-8?B?d3JoUEUyc0g3M3JDek1oVS9peC9BWlkrWHVqUWtEYUtHY0dRa1kwcGZpZ1U5?=
- =?utf-8?B?RXZKak1hcWRHaDFnQ0RoUm5hcTE5bjZnWFBiaGxaZlpEQnhTSEhYSkhPb0xC?=
- =?utf-8?B?TGtOQnhTK1Q3S0c5QjhYN1k3U2Jockw3THh3ZDdNNFlmS1pIRHhCbjRzQW5a?=
- =?utf-8?B?Q0lSMHI5d1NsVm1yejNhUDZOOWczQ1BnTWh2M0laa3hVQjNlWHc1MHZJU0Zy?=
- =?utf-8?B?NjczMlNidlVxTkw5elJLckl3ZkJjckpNbG1lWGFCMVhHMlRrYkJpZjZpYjdH?=
- =?utf-8?B?Rk5tbU9JMzNZMnczUnl2K1BSSGFnb3YvWnJVOUMzcmZSS2ZGR3ErTzluWlpu?=
- =?utf-8?B?elhiZ0NZMkNjMURCaVZHVHNYWG9aOTFDckJkeVQzRGtmcTl2c1pveGdBbDZq?=
- =?utf-8?B?aVJtTmhrSUc2Rm5pUTFqU2EvOGV2S0tqTmpXTHllNUJ6T2labWFpUWRCMFR6?=
- =?utf-8?B?L0w3RW1SZHJhUzI4TkNwS3paN3NXR3Q3ek1Ha2NFTitqdjdqNGhtYWxZRk5p?=
- =?utf-8?B?amZ1ZFhCazZaZDFxSzEyUXdFYW9JdGpUR0laVlM2Tk81c05hOWZqMGY0TGdM?=
- =?utf-8?B?akVoT2p6d1dBYmJHb3FIdVBkclFQQVMrSlBvVkVzQlZBQTJCT3JJVjlzZ1BD?=
- =?utf-8?B?YzBXN2M4S3o4dkFkZHRUc1JjZnVRbkJwZmZ6UnFxTTZlMU16ZnlOLzJ3K2g3?=
- =?utf-8?B?WHdFbjdMakdWT2x3OTFMM2k0OVcyWnJMSGNNeDFvTkJYVFVZK3p4aGdnRWpZ?=
- =?utf-8?B?OExFeE1QZFNraXFTVzRIWmZnY1JtREVoOVZRdmZoZXdmNDFhTEFxK1ZYNDZn?=
- =?utf-8?B?azc3SEFMV29mbXN1U2l0YXVwWGxETHhiUXhYTjdQcWoyeUU3MXd5cGFHU09O?=
- =?utf-8?B?OXhFYlZoUDlYSXRLamEzUTBRUEdSaU5HektoRjdNUTQrUXBsL0MrT3dyS3U3?=
- =?utf-8?B?Rjk2MjlaeHZRdzZuMmJWVXE5RVNOcVFYdllmREx3ZHZ0RndmYlU5dVN1RG1w?=
- =?utf-8?B?aTJSVGZLTkwzcmRWSTZmWkVnTlU4c1lJeDlyajVuWVlQcTJhZ3htSUJYS2Jt?=
- =?utf-8?B?UVlpOCtQbnNTZlc5dEdyMmFwRzdyMUR1TXRYNWx3MDFOMTBrRXdnWEJDODYz?=
- =?utf-8?B?aXJVVHgwK1dsNDhwTk50SDhXWnMxQmE1T1R4L2R6UjN4dW8vYldDUzBydTg5?=
- =?utf-8?B?U3JYZFRBbnhiaEh3Myt0bHVwU2s2Ky8wK0JRN2RxSTNKS2d6NWJQb0RDVjI2?=
- =?utf-8?B?TUJlb1ZEUXJRQWFQQjd1Q3VyQzhOV3pod0xHZHZUNXFEQXoxUkkvQWtMbG9t?=
- =?utf-8?B?OUppZFBDMU01RGE0dVprZW1Qd3A0RTJraFFlSUp6Sit4MVpESHd2M0lPVkxW?=
- =?utf-8?B?UTVmMWNXQzNwN1FNRHZLc3dnTDRNTHBmamlWYWFkR3JsOHRxZ0kvL3RkczJH?=
- =?utf-8?B?WmQ4WTV6QWhoczdNRTk2ZWdkUm5PMVgwMkV5eFQ1OVJuT1JrT1ByWldUQVo4?=
- =?utf-8?B?UEZrekRPOWpqOEdHVUJBWU14cVlLS0xValBEa1p0WDNvSGRWQ2ppRnNnNFBP?=
- =?utf-8?B?djdPT2FON0NNR0hWdHBPSXB3cGdscWtsK3pPSEk1Tk4yR1VPOUNjVUFwZG1m?=
- =?utf-8?Q?+GrE=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-39ee5ac4321so6835828f8f.1
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 04:55:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745409340; x=1746014140; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lqIcabe56xJIgGuPglKjFMP3emZolTgCziiSFFKPn5E=;
+ b=JmznxkK5Yp5DjomcxYdc/STtKQ1U5Zg+GWhd5MX35Ls/3N3hSFxk8jqQNMiFQp11r1
+ eLVFps/oRgty9G6oYMXWSd6I/Kmx/yNEAcV9W4Zf4NQ0z3kBkQDNqwoWLFBsUIVdCKrf
+ M8VuoIKi5s1iO58ZfP+VIHYL45GzaHqnoAy3Il3REi0x/kHMlj82lWxxQ5CCyKiSSmTu
+ TRZytPzBLdOpEbprGN+swO5zCUOJoGioticTd/O0LpUxj5O9ux1UkIImgrpCxEWIGoWT
+ ouh23KC+kbAuKEBCG2yIJDH2XEZ72cKAc/w2lxVR85O9yPkUZBxHkcjwgppj3uH9hKPB
+ 7CrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745409340; x=1746014140;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=lqIcabe56xJIgGuPglKjFMP3emZolTgCziiSFFKPn5E=;
+ b=b/44U7X43wOdJrl7cEX+ZCa7Fic/iUUcmT8kfLK4pgm0gifTYZSlJhgouS4c6qpDdw
+ 2cGkIsIOfiLMQuuSndnLOkdxKM+R0UA0RCc/n9O9oMFmFuC89mm5eVmFljcoM2tblLxF
+ eEJ0WJ2OJZn1HMdMEZXBCdwL69VGu9rugOnDHRihb4+TwGvDIXBjHNPP+23+EmC0M8iW
+ 4Ow9ctc8bUrUgR3HkqU0gXfmTyZMOjyVvnHpZmHZFn4K4Al9w3jLR03ZwfPdBSvXPRUf
+ BpUsgB8tr7MyCg+drPSfNDYGZ+u7HQnvDtd2gLlOofGHqpLaqemQxwiTG1WyDwRup2Ps
+ Ilpg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWsMUa4E8GnWepRlxUTOme5RNt/aTS1GLd+Ccsnje5aZW4K8ofV1bwtuRGuj2Gi8YrKCO1ZmPQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy2JMmlGKfOQmzyg9nvCtLmF4CL+ncu+mwa10U+f6ryH9VkKbgw
+ 0zs/SpxYRBbCLpJ3KkqxylnQwGowazqn9zp2x5gD7vooBmJj5PUrhNENOwsGfbk=
+X-Gm-Gg: ASbGncuZFlj+ci0Fn/8p+VlaAK3mwUGSLLaNqpQMgOHujbUoWZmCwb19eg3cn6Zq2S4
+ J1Z2kFS6RSF5CYfA9uEePzsfhwwj6eiwPCJHozHpDq3P7qXuAEReULNJS9TrGEcIoz0UX5jMP1F
+ BrxrUPJiIWbaX82mOWz7S7DxhccHFKIInSzGQU3FGlA18W6hNrXWa4XrWmLmnVAyB7cGtLD2s7Z
+ FPNdJuvhfACPQQ4zsf+vyjStL+ApWotx47qyA5xHdN4oZ2XmRPDQSl1tQjIcIv70wFhoc5wAs42
+ 5SJBK+FzSRFHQgTfIHJhC5qenbjqOfptanYQZpblckBKm5pBCmDEFaYRoOcYqcwZM1VAjVc=
+X-Google-Smtp-Source: AGHT+IEUPltu9jKUFwGn66lqrWkiKyC2v4KokA7tFiQzckvDgyfOVVtzhr/stm4SWu1qRqWvvL72GA==
+X-Received: by 2002:a05:6000:4308:b0:390:f6aa:4e7c with SMTP id
+ ffacd0b85a97d-39efba5e837mr15151362f8f.28.1745409340115; 
+ Wed, 23 Apr 2025 04:55:40 -0700 (PDT)
+Received: from [192.168.1.47] (i5E863A78.versanet.de. [94.134.58.120])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-44092db2bd5sm23318795e9.26.2025.04.23.04.55.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Apr 2025 04:55:39 -0700 (PDT)
+Message-ID: <ff8bdd8e-c206-4bf7-824f-eb482507d53b@linaro.org>
+Date: Wed, 23 Apr 2025 13:55:38 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8739.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ae7fb92-8204-4d28-2057-08dd825a00b9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Apr 2025 11:28:42.7001 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: gRGYy6UkonyOe4Caz/ekchVS57KDMWCkAklTUq3jazwTLxiDS6iF1T0+rYpVLRvt
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8171
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] watchdog: qcom: introduce qcom-wdt driver
+To: Paul Sajna <hello@paulsajna.com>, u-boot@lists.denx.de,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Stefan Roese <sr@denx.de>
+Cc: u-boot-qcom@groups.io, Sam Day <me@samcday.com>
+References: <20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com>
+Content-Language: en-US
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Wed, 23 Apr 2025 16:25:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -190,69 +104,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-W0FNRCBPZmZpY2lhbCBVc2UgT25seSAtIEFNRCBJbnRlcm5hbCBEaXN0cmlidXRpb24gT25seV0N
-Cg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBNYXJ0aW4gS2Fpc3RyYSA8
-bWFydGluLmthaXN0cmFAbGludXRyb25peC5kZT4NCj4gU2VudDogV2VkbmVzZGF5LCBBcHJpbCAy
-MywgMjAyNSAxMjo0OCBQTQ0KPiBUbzogS2F0YWthbSwgSGFyaW5pIDxoYXJpbmkua2F0YWthbUBh
-bWQuY29tPjsgdS1ib290QGxpc3RzLmRlbnguZGUNCj4gQ2M6IGpvZS5oZXJzaGJlcmdlckBuaS5j
-b207IHJmcmllZC5kZXZAZ21haWwuY29tOyBTaW1laywgTWljaGFsDQo+IDxtaWNoYWwuc2ltZWtA
-YW1kLmNvbT47IEFiYmFyYXB1LCBWZW5rYXRlc2gNCj4gPHZlbmthdGVzaC5hYmJhcmFwdUBhbWQu
-Y29tPg0KPiBTdWJqZWN0OiBSZTogW1BBVENIXSBuZXQ6IGdlbTogaWdub3JlIHR4X2NsayBpZiBN
-SUkgaXMgdXNlZA0KPg0KPiBIaSBIYXJpbmksDQo+DQo+IEFtIDIyLjA0LjI1IHVtIDE4OjE3IHNj
-aHJpZWIgS2F0YWthbSwgSGFyaW5pOg0KPiA+IFtBTUQgT2ZmaWNpYWwgVXNlIE9ubHkgLSBBTUQg
-SW50ZXJuYWwgRGlzdHJpYnV0aW9uIE9ubHldDQo+ID4NCj4gPiBIaSBNYXJ0aW4NCj4gPg0KPiA+
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+PiBGcm9tOiBVLUJvb3QgPHUtYm9vdC1i
-b3VuY2VzQGxpc3RzLmRlbnguZGU+IE9uIEJlaGFsZiBPZiBNYXJ0aW4NCj4gPj4gS2Fpc3RyYQ0K
-PiA+PiBTZW50OiBUdWVzZGF5LCBBcHJpbCAxNSwgMjAyNSA4OjM0IFBNDQo+ID4+IFRvOiB1LWJv
-b3RAbGlzdHMuZGVueC5kZQ0KPiA+PiBDYzogam9lLmhlcnNoYmVyZ2VyQG5pLmNvbTsgcmZyaWVk
-LmRldkBnbWFpbC5jb207IFNpbWVrLCBNaWNoYWwNCj4gPj4gPG1pY2hhbC5zaW1la0BhbWQuY29t
-Pg0KPiA+PiBTdWJqZWN0OiBbUEFUQ0hdIG5ldDogZ2VtOiBpZ25vcmUgdHhfY2xrIGlmIE1JSSBp
-cyB1c2VkDQo+ID4+DQo+ID4+IElmIHRoZSBNSUkgaW50ZXJmYWNlIGlzIHVzZWQsIHRoZSBQSFkg
-aXMgdGhlIGNsb2NrIG1hc3RlciwgdGh1cyBkb24ndA0KPiA+PiBzZXQgdGhlIGNsb2NrDQo+ID4N
-Cj4gPiBDYW4geW91IHBsZWFzZSBkZXNjcmliZSB5b3VyIEhXIGNvbmZpZ3VyYXRpb24/DQo+DQo+
-IG9uIG15IEhXIHRoZSBQUyBHRU0gaXMgY29ubmVjdGVkIHRvIGEgTUlJLXRvLVJNSUkgY29udmVy
-dGVyIHdoaWNoIGlzIHRoZW4NCj4gY29ubmVjdGVkIHZpYSBSTUlJIHRvIHRoZSBQSFkuDQo+DQo+
-IFRoZSBsaW51eCBkcml2ZXIgKGRyaXZlcnMvbmV0L2V0aGVybmV0L2NhZGVuY2UvbWFjYl9tYWlu
-LmMpIGhhcyBhIHNpbWlsYXIgZXhjZXB0aW9uDQo+IGZvciBNSUkgbW9kZSBpbiBtYWNiX3NldF90
-eF9jbGsoKS4NCg0KT2ssIHRoYW5rcywgSSBiZWxpZXZlIHRoYXQgZmFsbHMgdW5kZXIgMTAvMTAw
-IG9wZXJhdGlvbiB3aXRoIGNsb2NrIHNvdXJjZSBmcm9tDQpQSFkuIFNraXBwaW5nIHR4X2NsayBz
-ZXR0aW5nIG1ha2VzIHNlbnNlIHRoZW4uDQoNClJlZ2FyZHMsDQpIYXJpbmkNCg0KPg0KPiBUaGFu
-a3MsDQo+IE1hcnRpbg0KPg0KPiA+IEJhc2VkIG9uIHRoZSBzcGVjLA0KPiA+IDEuIEluIDEwLzEw
-MCBHTUlJIG1vZGUsIHR4X2NsayB3aWxsIHJ1biBhdCBlaXRoZXIgMi41IE1IeiBvciAyNSBNSHog
-YXMNCj4gPiBkZXRlcm1pbmVkIGJ5IHRoZSBleHRlcm5hbCBQSFkgTUlJIGNsb2NrIGlucHV0Lg0K
-PiA+IDIuIFdoZW4gdXNpbmcgZ2lnYWJpdCBtb2RlLCB0aGUgdHJhbnNtaXQgY2xvY2sgbXVzdCBi
-ZSBzb3VyY2VkIGZyb20gYQ0KPiA+IDEyNSBNSHogcmVmZXJlbmNlIGNsb2NrLg0KPiA+IDMuIElu
-IFJNSUkgbW9kZSwgdHhfY2xrIHNob3VsZCBiZSBjb25uZWN0ZWQgdG8gdGhlIHJtaWlfdHhfY2xr
-IG91dHB1dHMuDQo+ID4gSW4gYm90aCBjYXNlcyAyIGFuZCAzLCB0aGUgTUFDIGlzIHRoZSBjbG9j
-ayBtYXN0ZXIuDQo+ID4NCj4gPiBJZiB5b3UgYXJlIHVzaW5nIGEgSFcgY29ubmVjdGlvbiBzdWNo
-IGFzIFp5bnE6DQo+ID4gUFMgR0VNIC0gR01JSSB0byBSR01JSS9TR01JSSBzaGltIC0gRXh0ZXJu
-YWwgUEhZLCB0aGVuIHRoZSBJDQo+ID4gdW5kZXJzdGFuZCB0aGF0IHlvdSdsbCBnZXQgc3VjaCBh
-biBlcnJvciBtZXNzYWdlIGFuZCB0aGF0IHNob3VsZCBiZQ0KPiA+IHJlbW92ZWQuIEJ1dCBJJ20g
-bm90IHN1cmUgaWYgdGhpcyBhcHBsaWVzIHRvIE1JSSB0eXBlLg0KPiA+DQo+ID4gUmVnYXJkcywN
-Cj4gPiBIYXJpbmkNCj4gPg0KPiA+PiByYXRlLiBPbiBaeW5xLTcwMDAsIHRoaXMgd2lsbCBwcmV2
-ZW50IHRoZSBmb2xsb3dpbmcNCj4gPj4gZXJyb3I6DQo+ID4+ICAgIHp5bnFfZ2VtIGV0aGVybmV0
-QGUwMDBiMDAwOiBmYWlsZWQgdG8gc2V0IHR4IGNsb2NrIHJhdGUgMjUwMDAwMDANCj4gPj4NCj4g
-Pj4gU2lnbmVkLW9mZi1ieTogTWFydGluIEthaXN0cmEgPG1hcnRpbi5rYWlzdHJhQGxpbnV0cm9u
-aXguZGU+DQo+ID4+IC0tLQ0KPiA+PiAgIGRyaXZlcnMvbmV0L3p5bnFfZ2VtLmMgfCAxNCArKysr
-KysrKy0tLS0tLQ0KPiA+PiAgIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDYgZGVs
-ZXRpb25zKC0pDQo+ID4+DQo+ID4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL25ldC96eW5xX2dlbS5j
-IGIvZHJpdmVycy9uZXQvenlucV9nZW0uYyBpbmRleA0KPiA+PiA0NjE4MDVhZTUzZi4uNzAzZTIy
-NDc5ZDIgMTAwNjQ0DQo+ID4+IC0tLSBhL2RyaXZlcnMvbmV0L3p5bnFfZ2VtLmMNCj4gPj4gKysr
-IGIvZHJpdmVycy9uZXQvenlucV9nZW0uYw0KPiA+PiBAQCAtNTY3LDEyICs1NjcsMTQgQEAgc3Rh
-dGljIGludCB6eW5xX2dlbV9pbml0KHN0cnVjdCB1ZGV2aWNlICpkZXYpDQo+ID4+ICAgICAgICB9
-DQo+ID4+ICAgI2VuZGlmDQo+ID4+DQo+ID4+IC0gICAgIHJldCA9IGNsa19nZXRfcmF0ZSgmcHJp
-di0+dHhfY2xrKTsNCj4gPj4gLSAgICAgaWYgKHJldCAhPSBjbGtfcmF0ZSkgew0KPiA+PiAtICAg
-ICAgICAgICAgIHJldCA9IGNsa19zZXRfcmF0ZSgmcHJpdi0+dHhfY2xrLCBjbGtfcmF0ZSk7DQo+
-ID4+IC0gICAgICAgICAgICAgaWYgKElTX0VSUl9WQUxVRShyZXQpKSB7DQo+ID4+IC0gICAgICAg
-ICAgICAgICAgICAgICBkZXZfZXJyKGRldiwgImZhaWxlZCB0byBzZXQgdHggY2xvY2sgcmF0ZSAl
-bGRcbiIsIGNsa19yYXRlKTsNCj4gPj4gLSAgICAgICAgICAgICAgICAgICAgIHJldHVybiByZXQ7
-DQo+ID4+ICsgICAgIGlmIChwcml2LT5pbnRlcmZhY2UgIT0gUEhZX0lOVEVSRkFDRV9NT0RFX01J
-SSkgew0KPiA+PiArICAgICAgICAgICAgIHJldCA9IGNsa19nZXRfcmF0ZSgmcHJpdi0+dHhfY2xr
-KTsNCj4gPj4gKyAgICAgICAgICAgICBpZiAocmV0ICE9IGNsa19yYXRlKSB7DQo+ID4+ICsgICAg
-ICAgICAgICAgICAgICAgICByZXQgPSBjbGtfc2V0X3JhdGUoJnByaXYtPnR4X2NsaywgY2xrX3Jh
-dGUpOw0KPiA+PiArICAgICAgICAgICAgICAgICAgICAgaWYgKElTX0VSUl9WQUxVRShyZXQpKSB7
-DQo+ID4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRldl9lcnIoZGV2LCAiZmFpbGVk
-IHRvIHNldCB0eCBjbG9jaw0KPiA+PiArIHJhdGUgJWxkXG4iLA0KPiA+PiBjbGtfcmF0ZSk7DQo+
-ID4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByZXQ7DQo+ID4+ICsgICAg
-ICAgICAgICAgICAgICAgICB9DQo+ID4+ICAgICAgICAgICAgICAgIH0NCj4gPj4gICAgICAgIH0N
-Cj4gPj4NCj4gPj4gLS0NCj4gPj4gMi4zOS41DQo+ID4NCj4NCg0K
+Hi Paul,
+
+Thanks for making it through the process :D LGTM.
+
+Kind regards,
+
+On 4/23/25 04:19, Paul Sajna wrote:
+> From: Casey Connolly <casey.connolly@linaro.org>
+> 
+> Some Qualcomm device vendors decide to turn the watchdog on in the
+> bootloader, resulting in the device being reset if it isn't petted every
+> ~30 seconds. Introduce a driver to keep the watchdog happy and prevent this
+> annoying behaviour.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> Signed-off-by: Paul Sajna <hello@paulsajna.com>
+> Co-authored-by: Paul Sajna <hello@paulsajna.com>
+> Tested-by: Paul Sajna <hello@paulsajna.com>
+> ---
+> This patch introduces a simple watchdog driver for Qualcomm devices.
+> 
+> Some devices, including one I have been spending a lot of time with,
+> the LG G7 ThinQ (codename judyln, arch sdm845) will reset within 30
+> seconds if the watchdog is not serviced.
+> 
+> I have tested this patch from Casey Connolly that is over a year old and has
+> not yet been upstreamed, and it is very useful to me. I can hardly use
+> u-boot on this device without it. I have received Casey's permission to
+> work on upstreaming this patch.
+> 
+> This is my first contribution to U-Boot, and I am unfamiliar with
+> mailing list workflows, so please be patient :)
+> ---
+> Changes in v3:
+> - Squash commit 1 and 2
+> - remove duplicated line of code
+> - Link to v2: https://lore.kernel.org/r/20250421-b4-qcom-wdt-v2-0-b2250efa0f39@paulsajna.com
+> 
+> Changes in v2:
+> - Add watchdog start
+> - Add watchdog reset
+> - Remove stop from the probe function
+> - Use dev_err instead of printf
+> - Update Casey's name
+> - Add myself as an author
+> -
+> - Link to v1: https://lore.kernel.org/r/20250413-b4-qcom-wdt-v1-1-db42cb93dff8@paulsajna.com
+> ---
+>   configs/qcom_defconfig      |   2 +
+>   drivers/watchdog/Kconfig    |   7 +++
+>   drivers/watchdog/Makefile   |   1 +
+>   drivers/watchdog/qcom-wdt.c | 117 ++++++++++++++++++++++++++++++++++++++++++++
+>   4 files changed, 127 insertions(+)
+> 
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..0232f6d51c552bd06c8ba72b71edb5cb72fe0706 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -144,3 +144,5 @@ CONFIG_VIDEO_FONT_16X32=y
+>   CONFIG_SYS_WHITE_ON_BLACK=y
+>   CONFIG_NO_FB_CLEAR=y
+>   CONFIG_VIDEO_SIMPLE=y
+> +CONFIG_WDT_QCOM=y
+> +CONFIG_WDT=y
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 1bb67f5035231df9f6ce01adb08d074855393143..808f4e578e28e7812f93b393a7f7d95d9501cdd4 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -335,6 +335,13 @@ config WDT_K3_RTI_FW_FILE
+>   
+>   endif
+>   
+> +config WDT_QCOM
+> +	bool "Qualcomm watchdog timer support"
+> +	depends on WDT && ARCH_SNAPDRAGON
+> +	help
+> +	  Select this to enable Qualcomm watchdog timer, which can be found on
+> +	  some Qualcomm chips.
+> +
+>   config WDT_SANDBOX
+>   	bool "Enable Watchdog Timer support for Sandbox"
+>   	depends on SANDBOX && WDT
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index e6bd4c587af6133c405dde6dbada8050debc781c..5eaabd4aba58c815de4165f901aecfba0e0da255 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -54,3 +54,4 @@ obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
+>   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
+>   obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
+>   obj-$(CONFIG_WDT_ADI) += adi_wdt.o
+> +obj-$(CONFIG_WDT_QCOM) += qcom-wdt.o
+> diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..3601ba93774730f78574b2fd74b8c513e7ce22e1
+> --- /dev/null
+> +++ b/drivers/watchdog/qcom-wdt.c
+> @@ -0,0 +1,117 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+> + * Copyright (c) Linaro Ltd. 2024
+> + *
+> + * Authors:
+> + *   Casey Connolly <casey.connolly@linaro.org>
+> + *   Paul Sajna <hello@paulsajna.com>
+> + *
+> + * Derived from linux/drivers/watchdog/qcom-wdt.c
+> + */
+> +
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <wdt.h>
+> +
+> +#include <asm/io.h>
+> +
+> +enum wdt_reg {
+> +	WDT_RST,
+> +	WDT_EN,
+> +	WDT_STS,
+> +	WDT_BARK_TIME,
+> +	WDT_BITE_TIME,
+> +};
+> +
+> +struct qcom_wdt_match_data {
+> +	const u32 *offset;
+> +};
+> +
+> +struct qcom_wdt {
+> +	void __iomem *base;
+> +	const u32 *layout;
+> +};
+> +
+> +static const u32 reg_offset_data_kpss[] = {
+> +	[WDT_RST] = 0x4,
+> +	[WDT_EN] = 0x8,
+> +	[WDT_STS] = 0xC,
+> +	[WDT_BARK_TIME] = 0x10,
+> +	[WDT_BITE_TIME] = 0x14,
+> +};
+> +
+> +static const struct qcom_wdt_match_data match_data_kpss = {
+> +	.offset = reg_offset_data_kpss,
+> +};
+> +
+> +static void __iomem *wdt_addr(struct qcom_wdt *wdt, enum wdt_reg reg)
+> +{
+> +	return wdt->base + wdt->layout[reg];
+> +}
+> +
+> +int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+> +{
+> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+> +
+> +	writel(0, wdt_addr(wdt, WDT_EN));
+> +	writel(1, wdt_addr(wdt, WDT_RST));
+> +	writel(1, wdt_addr(wdt, WDT_EN));
+> +	if (readl(wdt_addr(wdt, WDT_EN)) != 1) {
+> +		dev_err(dev, "Failed to enable Qualcomm watchdog!\n");
+> +		return -EIO;
+> +	}
+> +	return 0;
+> +}
+> +
+> +int qcom_wdt_stop(struct udevice *dev)
+> +{
+> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+> +
+> +	writel(0, wdt_addr(wdt, WDT_EN));
+> +	if (readl(wdt_addr(wdt, WDT_EN))) {
+> +		dev_err(dev, "Failed to disable Qualcomm watchdog!\n");
+> +		return -EIO;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +int qcom_wdt_reset(struct udevice *dev)
+> +{
+> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+> +
+> +	writel(1, wdt_addr(wdt, WDT_RST));
+> +	return 0;
+> +}
+> +
+> +static int qcom_wdt_probe(struct udevice *dev)
+> +{
+> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+> +	struct qcom_wdt_match_data *data = (void *)dev_get_driver_data(dev);
+> +
+> +	wdt->base = dev_read_addr_ptr(dev);
+> +	wdt->layout = data->offset;
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct wdt_ops qcom_wdt_ops = {
+> +	.start = qcom_wdt_start,
+> +	.stop = qcom_wdt_stop,
+> +	.reset = qcom_wdt_reset,
+> +};
+> +
+> +static const struct udevice_id qcom_wdt_ids[] = {
+> +	{ .compatible = "qcom,kpss-wdt", .data = (ulong)&match_data_kpss },
+> +	{}
+> +};
+> +
+> +U_BOOT_DRIVER(qcom_wdt) = {
+> +	.name = "qcom_wdt",
+> +	.id = UCLASS_WDT,
+> +	.of_match = qcom_wdt_ids,
+> +	.ops = &qcom_wdt_ops,
+> +	.probe = qcom_wdt_probe,
+> +	.priv_auto = sizeof(struct qcom_wdt),
+> +};
+> 
+> ---
+> base-commit: 0eebdd17888005751cd77cf3794c5292d36f481a
+> change-id: 20250413-b4-qcom-wdt-e7b913fc375e
+> 
+> Best regards,
+
+-- 
+Casey (she/they)
+
