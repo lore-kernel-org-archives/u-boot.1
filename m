@@ -4,63 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CF6C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 10:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB5B5C369D5
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 11:31:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FB39809D4;
-	Wed, 23 Apr 2025 12:04:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CD2CB80BA8;
+	Wed, 23 Apr 2025 13:31:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Xrirti5q";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A29580BA8; Wed, 23 Apr 2025 12:04:05 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A947809A5
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 12:04:01 +0200 (CEST)
+ id 5B34380BA8; Wed, 23 Apr 2025 13:31:49 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 46710809A5
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 13:31:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53NA3sTF2263940
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 23 Apr 2025 05:03:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745402634;
- bh=RO+ZR16tvkXbAcKwOsLw/rNCpluRZiG6c7x175+7Wq8=;
- h=Date:CC:Subject:From:To;
- b=Xrirti5qfciyYvC40BzA2/jbDR/qzACXqXO4/PYUw2diyElrlg5oYxQMngszY08G7
- TnKEx6bPBpBMK0M53IaD09qHCwL4AKC0UMtdAxXKor3uqRH/pXSVkyZhVtQQsLR3UT
- qUfwg2vHsuZ2a+8uW0d1okwxL6fv+uqlKPLauwxY=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53NA3rbs059575
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Apr 2025 05:03:53 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Apr 2025 05:03:53 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Apr 2025 05:03:53 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53NA3qZ5066008;
- Wed, 23 Apr 2025 05:03:53 -0500
+ dmarc=fail (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DEF771063;
+ Wed, 23 Apr 2025 04:31:41 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 351AF3F66E;
+ Wed, 23 Apr 2025 04:31:44 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH] lmb: use a different bit position for LMB_NOMAP
+Date: Wed, 23 Apr 2025 17:01:23 +0530
+Message-Id: <20250423113123.888700-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 23 Apr 2025 15:33:37 +0530
-Message-ID: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
-CC: <vigneshr@ti.com>, <rick@andestech.com>, <mporter@konsulko.com>
-Subject: [RFC] Expected behavior of the go command
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,30 +52,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+The LMB memory region attributes flags are used to specify the
+behaviour of the memory regions with respect to allocations -- for
+e.g. it is allowed to re-allocate a memory region already reserved
+with the LMB_NONE flag. The flags use values with different bit
+positions through the BIT() macro. Move the LMB_NOMAP value to bit
+position 1, and also move the other flags accordingly. Using bit
+position 0 for LMB_NOMAP results in the logic in
+lmb_print_region_flags() to break, which prints an incorrect value for
+the regions with LMB_NOMAP atribute.
 
-I was trying to understand how the go command is expected to work when
-used to load custom OSes. My use case requires getting a proprietary OS
-to boot using the go command on a TI K3 platform. The OS expects caches
-to be flushed and the mmu to be disabled before we jump to it.
+Fixes: 3d56c06551d ("lmb: Move enum lmb_flags to a u32")
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+---
+ include/lmb.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-The go command (do_go func in cmd/boot.c) calls the do_go_exec function
-underneath which does not seem to have a consistent implementation
-across various architectures.
+diff --git a/include/lmb.h b/include/lmb.h
+index 0d316c64c0a..606a92cca48 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -27,9 +27,9 @@
+  * %LMB_NONOTIFY: Do not notify other modules of changes to this memory region
+  */
+ #define LMB_NONE 0
+-#define LMB_NOMAP BIT(0)
+-#define LMB_NOOVERWRITE BIT(1)
+-#define LMB_NONOTIFY BIT(2)
++#define LMB_NOMAP BIT(1)
++#define LMB_NOOVERWRITE BIT(2)
++#define LMB_NONOTIFY BIT(3)
+ 
+ /**
+  * enum lmb_map_op - memory map operation
+-- 
+2.34.1
 
-In RISC-V the implementation (arch/riscv/lib/boot.c:10) calls
-cleanup_before_linux before jumping to the loaded binary. This behaviour
-would enable the direct use of the go command for booting a custom OS
-(like in my use case). Though no such generic implementation exists for
-ARM64.
-
-I was wondering why we have the call to cleanup_before_linux for RISCV
-and not ARM64?
-
-Also, is booting a custom OS using the go command a supported use-case?
-If yes, it might be better to rename the function to be more generic
-like cleanup_before_os from *_linux and call it for each invocation of
-the go command.
-
-Regards,
-Anshul
