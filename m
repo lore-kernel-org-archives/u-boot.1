@@ -4,82 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56B3AC369D1
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:09:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD603C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:15:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88AC680F9C;
-	Wed, 23 Apr 2025 16:08:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 548C380944;
+	Wed, 23 Apr 2025 16:15:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q9rXlbIq";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Koyq09nY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B6F880FDA; Wed, 23 Apr 2025 16:08:58 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9065480F9C; Wed, 23 Apr 2025 16:15:19 +0200 (CEST)
+Received: from mail-m15578.qiye.163.com (mail-m15578.qiye.163.com
+ [101.71.155.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CFCA80944
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 16:08:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8590803CC
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 16:15:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3f9832f798aso4565820b6e.2
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 07:08:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745417334; x=1746022134; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TYOix0ZFQ1Q2ZBUNsuUGQvvZjj5xpAUQgbUpRI5OeJE=;
- b=q9rXlbIqoyY3lUVirSM9knNyTqgIQedJjmtIa8ZgzMIpvrddLuRoAcKOzS/mp0Skja
- Y0etyCLDdv8kwP2UWokCLmbc2alw9vqhsunWCBy+v/9n5sQ5tHfPAUf+V1iteiuIyx6d
- QFzzvZOxSwAvKpwDVN1V2K802AjcJGdE66/8M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745417334; x=1746022134;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TYOix0ZFQ1Q2ZBUNsuUGQvvZjj5xpAUQgbUpRI5OeJE=;
- b=aYaMxmlj4WzXFSfrud6c85VK/f/DJkzv6PEtq3XPQj3QgcBn/RgsZPMpOh/A3tTFAs
- BPX36nefliqUP6SCuBa5imo9RgH2NXrTKofu5Uf3raAi6o0fjhYFBZ/Tyd3FHDGWeqJp
- yM3wxnj+9SiGOwEt0FtB4i+9BhnV39oPtVf2TGSHBq9JF4LTAlj4an/v4X+ysmHC5BpA
- KEwZM5cwZIp+55D+DWVP/y6tOMQ2rGCL/8WV1mbOGBRpHIhyU6650o+KgC52eBnRzG10
- 4ttPoW9GSMJ0MpbMbT81KXeYPy//buTm+NC02GupZfH8f1j7LaO4qZT1ioyuMDZHozkH
- SxOQ==
-X-Gm-Message-State: AOJu0Yxq1DXCnOd8G2vaf3PsGhgmM9uIE4Lqh5mkdToRcf784v6hp3Sa
- o2VTFwemr1gjAN6RLKYZpNczA0/ONUUUVxrtrR/9Cn1d1Olvj9uPpyJuQdchYoU=
-X-Gm-Gg: ASbGncucXRxZkEdoieBTPoFm/cy+9luxGtoSEBaq+Tm6cdiZOgjF/zVj7W5iVSlP9BQ
- 8lgMTo/uNSL2rnwcGRynpDwPike8vYFzpR7L1IXXquvyqZHIFmQ/J5XkC1j2elboo/xsDu5XTyK
- W2qD0Z8nZ31/I4ifkv/SKIsMBURTsYIjtp0bec19rrnD7Z8Thco5usOBhYqIrbQH89Hkgj4PJoa
- KXVCUedoldFCONTHmRkbJ+7mNF11ebEgyYjTCN0hvtI7fXSOM4Nz0VxlgLDrjQkZFQ2Myt1gBo9
- 5sjHBFTHTeB4yeR6QFz6rFOEShBVlDph+ftybqBj+deL/a3FdG5euXbD+P2JFj/BBsUWqQAjl60
- 5FA==
-X-Google-Smtp-Source: AGHT+IEAO6CZKO9N5REgmj/oAaAOaMyOiVH6ZVVwu1LhlPwCTAm333ly6j0H1NF1t/PT6gdXkLIgTw==
-X-Received: by 2002:a05:6808:6a94:b0:401:e5e0:48db with SMTP id
- 5614622812f47-401e5e04ddfmr1556404b6e.13.1745417334078; 
- Wed, 23 Apr 2025 07:08:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-401beed7401sm2627994b6e.13.2025.04.23.07.08.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 07:08:53 -0700 (PDT)
-Date: Wed, 23 Apr 2025 08:08:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Subject: Re: Maintenance of Python tools
-Message-ID: <20250423140850.GE5495@bill-the-cat>
-References: <CAFLszTjnXQu3bwWt3Do7S_Vu0UO5si4HRUeW9bv0981WbUn_7Q@mail.gmail.com>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.69.12] (unknown [218.17.18.106])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 12e1fe969;
+ Wed, 23 Apr 2025 22:15:09 +0800 (GMT+08:00)
+Message-ID: <0655f93c-d3eb-4131-91ff-77dada5e3821@rock-chips.com>
+Date: Wed, 23 Apr 2025 22:15:09 +0800
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KKeVO0qqpQ4Dy/oj"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjnXQu3bwWt3Do7S_Vu0UO5si4HRUeW9bv0981WbUn_7Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: Pull request: u-boot-rockchip-20250422
+To: Jonas Karlman <jonas@kwiboo.se>, trini@konsulko.com
+Cc: u-boot@lists.denx.de
+References: <20250422162945.26797-1-kever.yang@rock-chips.com>
+ <35fcf81a-34d3-41b1-8e73-3243654b4e17@kwiboo.se>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <35fcf81a-34d3-41b1-8e73-3243654b4e17@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQxodVh5PGkoaThpOQhoZGlYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlJSkNVSkxVSkNVSktNWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NJVUpLS1
+ VLWQY+
+X-HM-Tid: 0a966300a99603afkunm12e1fe969
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PSo6ASo6KjJMHk0NHTEVSyE2
+ GhkaFBJVSlVKTE9OT0pMTEpLTUNPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlJSkNVSkxVSkNVSktNWVdZCAFZQUxMQ0w3Bg++
+DKIM-Signature: a=rsa-sha256;
+ b=Koyq09nYaPoGyDtroZoyX2L1LvMHuCAa8bH++Ixa4V+XL8+N8mTpl17lru/IpB4SOgyjI21kMqt6meBKCpc9t5HluBPXyaNh2kz6DIucObZD3AARcIr7yAeZl5btfWmy/NbmopnN136JctLDj8SANpwyZJnjYqzZ1m9EiQREEGM=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=U4GENGRxGFMOx+SaWDjUR0SAi4/derY6gbARirgzIEE=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,74 +73,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
---KKeVO0qqpQ4Dy/oj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025/4/23 01:34, Jonas Karlman wrote:
+> Hi Kever,
+>
+> This is missing "[v2,25/30] rng: rockchip: Add support for rkrng variant"
+> from the RK3528 series, should apply after you picked up the rng patches.
 
-On Tue, Apr 22, 2025 at 05:39:30PM -0600, Simon Glass wrote:
+Yes, this patch is not able to apply when the first time I applied 
+without the rng patches,
 
-> Hi,
->=20
-> Tom has indicated that he would like Patman to move out of his tree. I
-> suggested on another thread[1] that I maintain it in my 'sjg' tree, so
-> here is a new thread to discuss this.
->=20
-> I have already done this for the qemu/efi/coreboot scripts as Tom has
-> NAK'ed patches for those.
->=20
-> For the other tools there is going to be quite a bit of churn, as I
-> would like to resolve most of the many Python warnings.
->=20
-> Given the shared source between the tools, it would be easier for me
-> to do the same for buildman, binman and qconfig. I am thinking that I
-> might try a move to allow Gitlab pull-requests for reviews on these as
-> well as the mailing list, if that is useful.
->=20
-> For tools which need to sync back to Tom's tree (i.e. not patman), I
-> or Tom could do a pull request every now and then, omitting any
-> changes that relate to pylint.
->=20
-> Please let me know your thoughts. The timing is good as I am going to
-> be sending out a new Patman feature in the next few weeks and it is a
-> few thousand more lines of code.
+and after rng patches picked up, it should able to apply now.
 
-My biggest objection to all of this is that you should NOT use
-sjg.u-boot.org as that perpetuates your abusing owning u-boot.org. As I
-said in the thread, it should be under https://source.denx.de/u-boot/
-somewhere and you should be the one to own it there. They should be
-managed like normal python projects and we could "pip install" what's
-needed. But yes, I do think them being managed like a regular python
-project instead will make your life, and also the rest of the
-communities life, easier.
+> https://patchwork.ozlabs.org/project/uboot/patch/20250407224743.2423921-26-jonas@kwiboo.se/
+>
+> Also please drop "rockchip: avoid rebuilding most binaries for
+> u-boot-rockchip-spi.bin" and pick up "[v6,0/7] rockchip: binman: Use a
+> template for FIT and other improvements" in its place.
 
-Un-bundling binman and making it a standalone tool might help make it
-easier for other projects to utilize it instead of reinventing the
-tooling themselves.
+I think I applied that patch two weeks ago, and  yes it's better to use 
+use your patches instead directly, will do it.
 
-I'm not sure why buildman and qconfig would need to be pulled out, but
-if it's just a matter of a "pip install", sure, fine.
 
---=20
-Tom
+Thanks,
 
---KKeVO0qqpQ4Dy/oj
-Content-Type: application/pgp-signature; name="signature.asc"
+- Kever
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgI9GoACgkQFHw5/5Y0
-tyye5Qv+PEelSBf14tgcSPDLxczODWXgZbUGj5BqB0qSlFMZn6DhkUFaUW5Haoy6
-2qDUdsxfCjlRK+KqmCI7/nq+7D9Gj8Ue5Rpee126Gv4Vl5oHtAAJGaVM2Gu/kfrw
-0cApLZArm8olAs1HKEu6GF4OV8AG4uZxiwT6C5Ei1Qru5LN2KcJsFVFcNORlX7x7
-U308FzguE1GONC5fgywi/Kg2MqwrWXf7UWHiZ9l6Zj5+YIQSRhPEG1DYm34l4E8P
-ji38/tRoA9tLaDDnVNw6R+9ZX4G4/snoUz72U60px0dMkIn5HxWJeF2BhjuUoVdG
-5up/NQA+qDw49D5MuhVlpynrjPhEfOphK61uWGJ672Hek70fIRrUYMoIhtY0LU0N
-fG1PAl3/i4+j3ZjoxvRGU4lWyFPO8AfpARoGiSzCcHaWLXZupSFSQ1QvmXnSZChH
-L4wNEoDseFRjR6OSws9U9o/sGfz8POGOgUkPYwHl8tZYj2ZT3vIG/yJOXUnJKEiW
-UdsgIdqJ
-=tEk4
------END PGP SIGNATURE-----
-
---KKeVO0qqpQ4Dy/oj--
+> Or should I rebase this series and include an indirect revert (all
+> changes in that patch is replaced with use of a fit template).
+>
+> https://patchwork.ozlabs.org/project/uboot/cover/20250413195949.432730-1-jonas@kwiboo.se/
+>
+> On 2025-04-22 18:29, Kever Yang wrote:
+>> Hi Tom,
+>>
+>> Please pull the updates for rockchip platform:
+>> - New SoC support: RK3528, RK3576
+>> - New Board support: rk3528 Radxa E20C, rk3576 Firefly ROC-RK3576-PC;
+>> - Add generic board for rk3288 and rk3399;
+> Commits for the generic boards are also missing ;-)
+>
+> Regards,
+> Jonas
+>
+>> - rng driver binding update;
+>> - misc updates on board level or header files;
+>>
+>>
+>> CI:
+>> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/25886
+>>
+>> Thanks,
+>> - Kever
+>>
+>>
+>> The following changes since commit 185fdf5e94731df05748b1c576effb52ff7a3ec5:
+>>
+>>    fs/squashfs: avoid illegal free() in sqfs_opendir() (2025-04-21 11:08:03 -0600)
+>>
+>> are available in the Git repository at:
+>>
+>>    https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20250422
+>>
+>> for you to fetch changes up to 30ac31ab1f167f55bb1206e3ec95048b6fc88371:
+>>
+>>    rng: rockchip_rng: Update compatible for RK3588 (2025-04-22 23:31:02 +0800)
+>>
+>> ----------------------------------------------------------------
+>> Chukun Pan (2):
+>>        arm64: dts: rockchip: Add rk3528 QoS register node
+>>        arm64: dts: rockchip: enable SCMI clk for RK3528 SoC
+>>
+>> Elaine Zhang (2):
+>>        clk: rockchip: Add rk3576 clk support
+>>        reset: rockchip: implement rk3576 lookup table
+>>
+>> Heiko Stuebner (10):
+>>        rockchip: sdram: honor CFG_SYS_SDRAM_BASE when defining ram regions
+>>        ram: rockchip: Add rk3576 ddr driver support
+>>        rockchip: otp: Add support for RK3576
+>>        mmc: rockchip_sdhci: Add support for RK3576
+>>        mmc: rockchip_dw_mmc: Add support for rk3576
+>>        net: dwc_eth_qos_rockchip: Add support for RK3576
+>>        arm64: dts: rockchip: add rk3576 otp node
+>>        dt-bindings: arm: rockchip: Add Firefly ROC-RK3576-PC binding
+>>        arm64: dts: rockchip: Add devicetree for the ROC-RK3576-PC
+>>        rockchip: rk3576: Add support for ROC-RK3576-PC board
+>>
+>> Jonas Karlman (42):
+>>        rockchip: rk3308: Drop unused rk_board_init()
+>>        rockchip: Move imply TPL_ROCKCHIP_COMMON_BOARD under SoC Kconfig symbol
+>>        rockchip: Make ROCKCHIP_COMMON_STACK_ADDR depend on TPL
+>>        rockchip: Improve ARMv7 support for ROCKCHIP_COMMON_STACK_ADDR
+>>        rockchip: Move imply ROCKCHIP_COMMON_STACK_ADDR under SoC Kconfig symbol
+>>        rockchip: Move imply ROCKCHIP_EXTERNAL_TPL under SoC Kconfig symbol
+>>        rockchip: Add RK3576 support for ROCKCHIP_COMMON_STACK_ADDR
+>>        rockchip: rk3588: Use hptimer reg names in rockchip_stimer_init
+>>        rockchip: Remove partitions env variable for RK356x
+>>        rockchip: Remove partitions env variable for RK3588
+>>        rockchip: Ensure device settings is defined before rk3568_common.h
+>>        rockchip: Ensure device settings is defined before rk3588_common.h
+>>        rockchip: Use rk3568_common.h by default for RK356x boards
+>>        rockchip: Use rk3588_common.h by default for RK3588 boards
+>>        rockchip: rk3568: Drop BOARD_LATE_INIT from target config
+>>        rockchip: rk3588: Drop BOARD_LATE_INIT from target config
+>>        rockchip: Enable meminfo and rng commands for Generic RK3566/RK3568
+>>        rockchip: Enable meminfo and rng commands for Generic RK3588
+>>        arm64: dts: rockchip: Add pinctrl and gpio nodes for RK3528
+>>        arm64: dts: rockchip: Add SARADC node for RK3528
+>>        arm64: dts: rockchip: Add SDHCI controller for RK3528
+>>        arm64: dts: rockchip: Add uart0 pinctrl to Radxa E20C
+>>        arm64: dts: rockchip: Add leds node to Radxa E20C
+>>        arm64: dts: rockchip: Add user button to Radxa E20C
+>>        arm64: dts: rockchip: Add maskrom button to Radxa E20C
+>>        arm64: dts: rockchip: Enable onboard eMMC on Radxa E20C
+>>        ram: rockchip: Add basic support for RK3528
+>>        arm: dts: rockchip: Add rk3528-u-boot.dtsi
+>>        arch: arm: rockchip: Add initial support for RK3528
+>>        mmc: rockchip_sdhci: Extend variant configuration
+>>        mmc: rockchip_sdhci: Add initial support for RK3528
+>>        mmc: rockchip_sdhci: Gate clock for glitch free phase switching
+>>        rockchip: otp: Add support for RK3528
+>>        adc: rockchip-saradc: Add support for RK3528
+>>        phy: rockchip-inno-usb2: Add support for clkout_ctl_phy
+>>        phy: rockchip-inno-usb2: Add support for RK3528
+>>        net: dwc_eth_qos_rockchip: Add support for RK3528
+>>        board: rockchip: Add minimal generic RK3528 board
+>>        board: rockchip: Add Radxa E20C
+>>        rng: rockchip_rng: Add compatible for RK3568
+>>        rockchip: rk356x: Remove rng node from u-boot.dtsi
+>>        rng: rockchip_rng: Update compatible for RK3588
+>>
+>> Joseph Chen (1):
+>>        clk: rockchip: Add support for RK3528
+>>
+>> Nicolas Frattaroli (1):
+>>        arm64: dts: rockchip: Add rng node to RK3588
+>>
+>> Quentin Schulz (7):
+>>        rockchip: theobroma-systems: use HAVE_VENDOR_COMMON_LIB to simplify Makefile
+>>        rockchip: px30: enable RNG for all boards
+>>        rockchip: px30: add fdtoverlay_addr_r default value to support FDTO
+>>        rockchip: ringneck-px30: enable DT overlay support
+>>        rockchip: rk3399: do not generate u-boot.rom anymore
+>>        rockchip: rk3288: do not generate u-boot.rom anymore
+>>        rockchip: avoid rebuilding most binaries for u-boot-rockchip-spi.bin
+>>
+>> Steven Liu (2):
+>>        pinctrl: rockchip: Add support for RK3528
+>>        pinctrl: rockchip: support rk3576 pinctrl
+>>
+>> Xuhui Lin (2):
+>>        rockchip: mkimage: Add rk3576 support
+>>        arm: rockchip: Add RK3576 arch core support
+>>
+>> Yao Zi (3):
+>>        dt-bindings: clock: Document clock and reset unit of RK3528
+>>        arm64: dts: rockchip: Add clock generators for RK3528 SoC
+>>        arm64: dts: rockchip: Add UART clocks for RK3528 SoC
+>>
+>> Yifeng Zhao (1):
+>>        rockchip: mkimage: Add support for RK3528
+> [snip]
+>
+>
