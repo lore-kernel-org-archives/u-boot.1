@@ -4,82 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8727CC369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 19:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3CEC369D5
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 20:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD9948070C;
-	Wed, 23 Apr 2025 21:19:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F1F1D8070C;
+	Wed, 23 Apr 2025 22:09:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s9HU7TBS";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B3FC807AE; Wed, 23 Apr 2025 21:19:21 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 95A8C807AE; Wed, 23 Apr 2025 22:09:13 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42978805D7
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 21:19:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A5D580194
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 22:09:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2d0920ce388so84202fac.0
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 12:19:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745435958; x=1746040758; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T+UIIJP7ae20e6Vv+Qw85mxQNYTRS6TROJmlz5zRfvM=;
- b=s9HU7TBS2JD8ucvExN4wsQooLHOglT7AZVmtUcHCrn6JIwirdDgLrjGvwcVe20/pQa
- bdS9glGFFhBYbdj6SdozdjLFgyIsYCwvF9oKdy1BQbfele7XvNxyKzpq384SxAlb2zuq
- eQRP1Ki606M2bPF98NFI8CWTMwsyitfKIwSXo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745435958; x=1746040758;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T+UIIJP7ae20e6Vv+Qw85mxQNYTRS6TROJmlz5zRfvM=;
- b=n0EdHUkq6uvhNf01EtTQW7WVkjfyPUE4HgyuwWMvw9bOKJB7//CAgL/I0HvTAbpYzv
- z/wGSLdgw1CkdfpwJmCDjWUTO748ypodUEzJTl6CmrB7DdDhgOrTGWNaldVTKHD4SKS+
- mhsZoLUZq+YiFTtRRtr3iyBoOCRaqoiseby7XWK/FZSfojcpF2GwfGPWf1ikPlGCMBcH
- FNDPMT2vN25J5KnubUnSMquB6S3SO0nk0QW/s4SMYsB2aP/leXxGjxul79OJXI9sCluq
- srlpJZvDQ67ahkx2SM+8XZTR/kodePABb/SolAHe3ZJf55xRfrtJyNFCp/0JW/P4s9Gp
- F+KA==
-X-Gm-Message-State: AOJu0YzwmVOD7PzqQmO1emPaB0l7IQXzrewmkHtcXXWMAn7BCRRob2fI
- 5o4kNyNcHlQqmUho43S3vYQiO0tbPiq3hXIJ/2y1JeYEgoT3JRnjc70EUbicA3vHMRzpmyMTLws
- ikx4=
-X-Gm-Gg: ASbGnctTjHQBiTFTpehfxdgyZHopr6q9GtIKcLrNdKUiOhMbWFT5GUgkdl8iQIKB8MB
- 8LKHqRztyOE6j1qmUcLtUkaLK2gvWCDJyxZiJyhB3I3paUxJ77wx9+cSuiesEDYcNYDVYfOgmHX
- mOQaMAunD18/hDfkk9Qq07VI5nFMWuHDX9fCwCfxX27+GnIDAxrIkImPoL51H9QU3L3DCl34B9k
- CmcSK7nXlURR0baQ9bGHNY7lGGZCJTJJI2s2W65YBzyY6s9vLvVublY+khd0tgZnceILdUPULk2
- LySAAonCZC/bu9b4SjjIUWDDJlFuYRHYDsUro/XVv1Dp0HhWY0um6gxgCimUsKUh2AHw8CUl/0g
- r
-X-Google-Smtp-Source: AGHT+IGGGq+w/hRpfO1ZQkCiYLpjoCN4jPDAct9QqlEDNVvFFaUnRPn9yRTJR1lRzX3lJ+5030wIeA==
-X-Received: by 2002:a05:6870:1589:b0:2bb:841a:4fd with SMTP id
- 586e51a60fabf-2d95dd9023bmr555315fac.32.1745435958004; 
- Wed, 23 Apr 2025 12:19:18 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d576ee0bffsm2346216fac.49.2025.04.23.12.19.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 12:19:17 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250423154251.83237-1-kever.yang@rock-chips.com>
-References: <20250423154251.83237-1-kever.yang@rock-chips.com>
-Subject: Re: Pull request: u-boot-rockchip-20250423
-Message-Id: <174543595732.3941862.1680487854815799714.b4-ty@konsulko.com>
-Date: Wed, 23 Apr 2025 13:19:17 -0600
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.35] (unknown [98.97.25.173])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 9A007B24F989
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 22:09:10 +0200 (CEST)
+Message-ID: <c0023d23-4614-40c5-b612-9c0cb5b4d8b1@freeshell.de>
+Date: Wed, 23 Apr 2025 13:09:08 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+From: E Shattow <e@freeshell.de>
+Subject: RISC-V (and others?) UART0 clock rate from OF_UPSTREAM
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +51,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Apr 2025 23:42:51 +0800, Kever Yang wrote:
+Quoting Emil reply to
+https://lore.kernel.org/lkml/CAJM55Z95pwTZmw-WPcUaB1BGpVoNgaRYYjUnqSFcLTNyVmZahg@mail.gmail.com/
 
-> Please pull the updates for rockchip platform:
-> - New SoC support: RK3528, RK3576
-> - New Board support: rk3528 Radxa E20C, rk3576 Firefly ROC-RK3576-PC;
-> - Add generic board for rk3288 and rk3399;
-> - rng driver binding update;
-> - misc updates on board level or header files;
-> 
-> 
-> [...]
+> diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+> index 8a59c3001339..6bb13af82147 100644
+> --- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+> +++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+> @@ -635,6 +635,7 @@ GPOEN_DISABLE,
+>  };
+>
+>  &uart0 {
+> +	clock-frequency = <24000000>;
+>  	pinctrl-names = "default";
+>  	pinctrl-0 = <&uart0_pins>;
+>  	status = "okay";
 
-Merged into u-boot/master, thanks!
+"The uart0 node already has a reference to the uart0_core clock, so it
+shouldn't need this property."
 
--- 
-Tom
+jh7110-common-u-boot.dtsi-26-&uart0 {
+jh7110-common-u-boot.dtsi-27-   bootph-pre-ram;
+jh7110-common-u-boot.dtsi-28-   reg-offset = <0>;
+jh7110-common-u-boot.dtsi-29-   current-speed = <115200>;
+jh7110-common-u-boot.dtsi:30:   clock-frequency = <24000000>;
 
+$ grep -B1 -rn 24000000 dts/upstream/src/riscv/starfive/
+dts/upstream/src/riscv/starfive/jh7110-common.dtsi-115-&osc {
+dts/upstream/src/riscv/starfive/jh7110-common.dtsi:116: clock-frequency
+= <24000000>;
 
+What should U-Boot be doing to get this uart0 setting when OF_UPSTREAM ?
+
+-E
