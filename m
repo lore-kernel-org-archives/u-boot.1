@@ -4,54 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B316DC369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 15:43:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0AB4C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 16:07:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE05D803CC;
-	Wed, 23 Apr 2025 17:43:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B021805D7;
+	Wed, 23 Apr 2025 18:07:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="HJPoCv77";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aQSeo1m5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F9BA8056A; Wed, 23 Apr 2025 17:43:01 +0200 (CEST)
-Received: from mail-m21471.qiye.163.com (mail-m21471.qiye.163.com
- [117.135.214.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7438D80944; Wed, 23 Apr 2025 16:50:10 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C63280194
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 17:42:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2872C8059D
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 16:50:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from localhost.localdomain (unknown [218.17.18.106])
- by smtp.qiye.163.com (Hmail) with ESMTP id 12e3855c3;
- Wed, 23 Apr 2025 23:42:52 +0800 (GMT+08:00)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-rockchip-20250423
-Date: Wed, 23 Apr 2025 23:42:51 +0800
-Message-Id: <20250423154251.83237-1-kever.yang@rock-chips.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-224019ad9edso92385615ad.1
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 07:50:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1745419806; x=1746024606; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MX1CGOIS64lLSJLwuwZWSUotudXFozbp9mWWugEJofA=;
+ b=aQSeo1m5PAO0k4Gm2OZEwKS/Vokv6KORGiZt2BWnF++9ElZPu9mjBdEqf6liywsasu
+ LAjz8csH3CrBKyvRd9O+WwJvxjFL+0bvgk9tRImyG/clBxAmG6OvmkE1ehjLuWrgHv9y
+ PMR5UOHpsZd/mt1QGWGIjkEkLousJBZ1+V8jlI2Y5Vm2dfdVj8xfu0qehxd3VmepN+bD
+ gW4idO3JfGvQLnVJvrMuQdoJKvEH+EQrBfQ3okd8ECLKrdyGsEpARhTCSinn7YxZDrdP
+ r5u23yU3NwjjVMgL4V8j1yV5cBDOGBQbmRk1Ug8iqLQ8B0oEdgPG3zUYW7jsE8VBLt7R
+ J2BA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745419806; x=1746024606;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MX1CGOIS64lLSJLwuwZWSUotudXFozbp9mWWugEJofA=;
+ b=FY2DpKBVuk1rPmi/L+1mrRPlGog1jPdCni+IAfPu/G7TtAZYJSL1lVG7Iw0jeW7atU
+ 3mqAyeIYsoykrdkT3yQHWqGh0sUxtn6SR/FoV/TlnIJtznW90r9KTLRK237NT2V1RyQS
+ 2dCwuw6wJEaK/ZZmm2BZhZFwuWcJRJgi/EsxDI2ejhpPSdydbpNVx1Grhrz/268KN5wr
+ WSCYDc0LMJjVY9uPtaBzIp728EiR3h6tivbwB1tk9AY5cmTPocuKTAvQ80BTm3X7pGN/
+ t3iCyqT9Gos0ylCx9Ll1kT95y3kZxvnewO7E38hAppjBTsReQ6pO1oDxPMvZlQQAqtG/
+ 1mTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU9uUE5t7dsAoneA3VkEx5P63l7cvI5emNLCmeyBhDl4AQl5dpx9ASOYiFyKVmTwW8rsGOw0m0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzpQwwt1t7RjP25VieI3Ag5Vi4vLnjPIzCONyovwb/s0P8G41Lc
+ KqMJJTdU/Dv+mhstujlGtWxXHHjmFJK1Rpfx1sXJBNrBYzR7Eha4
+X-Gm-Gg: ASbGncuMQT5XywVLAp5rnKhugapTx9tmc05q3hErDUE9gRmSJJi+VXCo3KJdoYQb3r9
+ /qxRBUlHFMTIyrlaLvJWzqTiZup4Mm3+ccuGWtEWyHCsTzIHBbx3Fd46r8J+ad7eJMA7WOV76yq
+ 88ddvjpAxl9UZmz80+V6GgNaBncEqtzF5VidNWj8/Vld1w7LKz0+bxFAhm/hSQ8pDf7nL5hTU52
+ yBzSpPl9o8hgzXuXmMroGW9oBg1vm1dhB5DCt7AuEOkfa7c3hfSm1o7kuAaMsJW3BywIvAizU1Z
+ plfvXszvFjPzmGM90S+umTH78CQ2bLnAJ4sQX9lLfADI6Ru6m43zuE5O2h307Ry4cDSLorrQKwC
+ bC2avtpR47FYi/pVyryDjDe/a49nAV95sxWKKcNIcHzZ9E9c=
+X-Google-Smtp-Source: AGHT+IG2rBeM4zHBBXbo3ZIpen+VYxiV9RL6b2D8uN+etiZfBjuRMFfr2eZ05pGB2fKU8fEBhUPsLg==
+X-Received: by 2002:a17:902:c40f:b0:224:10a2:cad5 with SMTP id
+ d9443c01a7336-22c5357a132mr307102635ad.10.1745419806336; 
+ Wed, 23 Apr 2025 07:50:06 -0700 (PDT)
+Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22c50fdbad2sm105470005ad.226.2025.04.23.07.50.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Apr 2025 07:50:06 -0700 (PDT)
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+To: ilias.apalodimas@linaro.org, jerome.forissier@linaro.org,
+ marek.vasut+renesas@mailbox.org, paul.barker.ct@bp.renesas.com,
+ pbrobinson@gmail.com, lucienzx159@gmail.com, u-boot@lists.denx.de
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com,
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com
+Subject: [U-Boot, v1,
+ 1/1] net: phy: air_en8811h: Configure the en8811h fw size as a fixed
+ setting
+Date: Wed, 23 Apr 2025 22:49:19 +0800
+Message-Id: <20250423144919.9319-1-lucienzx159@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCQ04aVktDGB5PGUlDS0JIGFYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlJSkNVSkxVSkNVSktNWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
- VLWQY+
-X-HM-Tid: 0a966350f4ec03afkunm12e3855c3
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OlE6Phw4PDJPOEwsKSITHxQ2
- MBoaCzJVSlVKTE9OT0lJQkxJTENJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlJSkNVSkxVSkNVSktNWVdZCAFZQUpOQ09ONwY+
-DKIM-Signature: a=rsa-sha256;
- b=HJPoCv77eDTm1Y8g59n7A1EZ1/9rcqCqdbFOPUSqbYCZiYrdHLT/rzvmpa4snrYMGPa+aOlU1Xcd77MG3PWvzjHRUqHjycwoj0qr+VSu/Cei25bz4LpzqWsEqNv17hdTFPSabaJP6gdtoQY/Tdy6zrnWtMsGToOWx+LTk+5W/to=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=Ha3rRCVfuuGaPftqa3xy47CO386rs+4en19/fgtIlQ0=;
- h=date:mime-version:subject:message-id:from;
+X-Mailman-Approved-At: Wed, 23 Apr 2025 18:07:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,289 +102,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Given that the EN8811H FW has a fixed size,
+exposing it via Kconfig is unnecessary
 
-Please pull the updates for rockchip platform:
-- New SoC support: RK3528, RK3576
-- New Board support: rk3528 Radxa E20C, rk3576 Firefly ROC-RK3576-PC;
-- Add generic board for rk3288 and rk3399;
-- rng driver binding update;
-- misc updates on board level or header files;
+Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+---
+ drivers/net/phy/Kconfig       | 10 ----------
+ drivers/net/phy/air_en8811h.c | 12 ++++++------
+ 2 files changed, 6 insertions(+), 16 deletions(-)
 
+diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+index 5b4cf30b0a3..db38b7e90ec 100644
+--- a/drivers/net/phy/Kconfig
++++ b/drivers/net/phy/Kconfig
+@@ -103,16 +103,6 @@ config AIROHA_FW_ADDR
+ 	depends on PHY_AIROHA_EN8811H
+ 	default 0x0
 
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/25909
+-config AIROHA_MD32_DM_SIZE
+-	hex "Airoha Firmware MD32 DM Size"
+-	depends on PHY_AIROHA_EN8811H
+-	default 0x4000
+-
+-config AIROHA_MD32_DSP_SIZE
+-	hex "Airoha Firmware MD32 DSP Size"
+-	depends on PHY_AIROHA_EN8811H
+-	default 0x20000
+-
+ menuconfig PHY_AQUANTIA
+ 	bool "Aquantia Ethernet PHYs support"
+ 	select PHY_GIGE
+diff --git a/drivers/net/phy/air_en8811h.c b/drivers/net/phy/air_en8811h.c
+index 96bb24418a0..0e11f68a52c 100644
+--- a/drivers/net/phy/air_en8811h.c
++++ b/drivers/net/phy/air_en8811h.c
+@@ -443,12 +443,12 @@ static int en8811h_load_firmware(struct phy_device *phydev)
+ 	char *addr = NULL;
+ 	struct en8811h_priv *priv = phydev->priv;
+ 	int dev = CONFIG_SYS_MMC_ENV_DEV;
+-	u32 cnt = (CONFIG_AIROHA_MD32_DM_SIZE +
+-		   CONFIG_AIROHA_MD32_DSP_SIZE) / 512;
++	u32 cnt = (EN8811H_MD32_DM_SIZE +
++		   EN8811H_MD32_DSP_SIZE) / 512;
+ 	ulong airoha_fw_addr = (ulong)en8811h_get_fw_addr();
+ 	u32 blk = airoha_fw_addr / 512;
 
-Thanks,
-- Kever
+-	addr = malloc(CONFIG_AIROHA_MD32_DM_SIZE + CONFIG_AIROHA_MD32_DSP_SIZE);
++	addr = malloc(EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
+ 	if (!addr) {
+ 		puts("cannot allocated buffer for firmware.\n");
+ 		return -ENOMEM;
+@@ -498,12 +498,12 @@ static int en8811h_load_firmware(struct phy_device *phydev)
+ 	if (ret < 0)
+ 		return ret;
 
-The following changes since commit 4446bc331c65d3efb8a9321d6368c61edb56479b:
+-	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, CONFIG_AIROHA_MD32_DM_SIZE, addr);
++	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, EN8811H_MD32_DM_SIZE, addr);
+ 	if (ret < 0)
+ 		goto en8811h_load_firmware_out;
 
-  mips: mt7688: gardena-smart-gateway: Increase CONFIG_SYS_BOOTM_LEN (2025-04-22 15:16:11 -0600)
+-	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, CONFIG_AIROHA_MD32_DSP_SIZE,
+-			    addr + CONFIG_AIROHA_MD32_DM_SIZE);
++	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, EN8811H_MD32_DSP_SIZE,
++			    addr + EN8811H_MD32_DM_SIZE);
+ 	if (ret < 0)
+ 		goto en8811h_load_firmware_out;
 
-are available in the Git repository at:
+--
+2.34.1
 
-  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20250423
-
-for you to fetch changes up to 1f07d257305c168551370fbaddbc2b2d83aedde4:
-
-  board: rockchip: Add minimal generic RK3399 board (2025-04-23 22:12:06 +0800)
-
-----------------------------------------------------------------
-Chukun Pan (2):
-      arm64: dts: rockchip: Add rk3528 QoS register node
-      arm64: dts: rockchip: enable SCMI clk for RK3528 SoC
-
-Elaine Zhang (2):
-      clk: rockchip: Add rk3576 clk support
-      reset: rockchip: implement rk3576 lookup table
-
-Heiko Stuebner (10):
-      rockchip: sdram: honor CFG_SYS_SDRAM_BASE when defining ram regions
-      ram: rockchip: Add rk3576 ddr driver support
-      rockchip: otp: Add support for RK3576
-      mmc: rockchip_sdhci: Add support for RK3576
-      mmc: rockchip_dw_mmc: Add support for rk3576
-      net: dwc_eth_qos_rockchip: Add support for RK3576
-      arm64: dts: rockchip: add rk3576 otp node
-      dt-bindings: arm: rockchip: Add Firefly ROC-RK3576-PC binding
-      arm64: dts: rockchip: Add devicetree for the ROC-RK3576-PC
-      rockchip: rk3576: Add support for ROC-RK3576-PC board
-
-Jonas Karlman (44):
-      rockchip: rk3308: Drop unused rk_board_init()
-      rockchip: Move imply TPL_ROCKCHIP_COMMON_BOARD under SoC Kconfig symbol
-      rockchip: Make ROCKCHIP_COMMON_STACK_ADDR depend on TPL
-      rockchip: Improve ARMv7 support for ROCKCHIP_COMMON_STACK_ADDR
-      rockchip: Move imply ROCKCHIP_COMMON_STACK_ADDR under SoC Kconfig symbol
-      rockchip: Move imply ROCKCHIP_EXTERNAL_TPL under SoC Kconfig symbol
-      rockchip: Add RK3576 support for ROCKCHIP_COMMON_STACK_ADDR
-      rockchip: rk3588: Use hptimer reg names in rockchip_stimer_init
-      rockchip: Remove partitions env variable for RK356x
-      rockchip: Remove partitions env variable for RK3588
-      rockchip: Ensure device settings is defined before rk3568_common.h
-      rockchip: Ensure device settings is defined before rk3588_common.h
-      rockchip: Use rk3568_common.h by default for RK356x boards
-      rockchip: Use rk3588_common.h by default for RK3588 boards
-      rockchip: rk3568: Drop BOARD_LATE_INIT from target config
-      rockchip: rk3588: Drop BOARD_LATE_INIT from target config
-      rockchip: Enable meminfo and rng commands for Generic RK3566/RK3568
-      rockchip: Enable meminfo and rng commands for Generic RK3588
-      rng: rockchip_rng: Add compatible for RK3568
-      rockchip: rk356x: Remove rng node from u-boot.dtsi
-      rng: rockchip_rng: Update compatible for RK3588
-      arm64: dts: rockchip: Add pinctrl and gpio nodes for RK3528
-      arm64: dts: rockchip: Add SARADC node for RK3528
-      arm64: dts: rockchip: Add SDHCI controller for RK3528
-      arm64: dts: rockchip: Add uart0 pinctrl to Radxa E20C
-      arm64: dts: rockchip: Add leds node to Radxa E20C
-      arm64: dts: rockchip: Add user button to Radxa E20C
-      arm64: dts: rockchip: Add maskrom button to Radxa E20C
-      arm64: dts: rockchip: Enable onboard eMMC on Radxa E20C
-      ram: rockchip: Add basic support for RK3528
-      arm: dts: rockchip: Add rk3528-u-boot.dtsi
-      arch: arm: rockchip: Add initial support for RK3528
-      mmc: rockchip_sdhci: Extend variant configuration
-      mmc: rockchip_sdhci: Add initial support for RK3528
-      mmc: rockchip_sdhci: Gate clock for glitch free phase switching
-      rockchip: otp: Add support for RK3528
-      adc: rockchip-saradc: Add support for RK3528
-      phy: rockchip-inno-usb2: Add support for clkout_ctl_phy
-      phy: rockchip-inno-usb2: Add support for RK3528
-      net: dwc_eth_qos_rockchip: Add support for RK3528
-      board: rockchip: Add minimal generic RK3528 board
-      board: rockchip: Add Radxa E20C
-      board: rockchip: Add minimal generic RK3328 board
-      board: rockchip: Add minimal generic RK3399 board
-
-Joseph Chen (1):
-      clk: rockchip: Add support for RK3528
-
-Lin Jinhan (1):
-      rng: rockchip: Add support for rkrng variant
-
-Nicolas Frattaroli (1):
-      arm64: dts: rockchip: Add rng node to RK3588
-
-Quentin Schulz (4):
-      rockchip: theobroma-systems: use HAVE_VENDOR_COMMON_LIB to simplify Makefile
-      rockchip: px30: enable RNG for all boards
-      rockchip: px30: add fdtoverlay_addr_r default value to support FDTO
-      rockchip: ringneck-px30: enable DT overlay support
-
-Steven Liu (2):
-      pinctrl: rockchip: Add support for RK3528
-      pinctrl: rockchip: support rk3576 pinctrl
-
-Xuhui Lin (2):
-      rockchip: mkimage: Add rk3576 support
-      arm: rockchip: Add RK3576 arch core support
-
-Yao Zi (3):
-      dt-bindings: clock: Document clock and reset unit of RK3528
-      arm64: dts: rockchip: Add clock generators for RK3528 SoC
-      arm64: dts: rockchip: Add UART clocks for RK3528 SoC
-
-Yifeng Zhao (1):
-      rockchip: mkimage: Add support for RK3528
-
- arch/arm/dts/px30-evb-u-boot.dtsi                  |   10 -
- arch/arm/dts/px30-u-boot.dtsi                      |    1 -
- arch/arm/dts/rk3328-generic-u-boot.dtsi            |   39 +
- arch/arm/dts/rk3328-generic.dts                    |   76 +
- arch/arm/dts/rk3399-generic-u-boot.dtsi            |   10 +
- arch/arm/dts/rk3399-generic.dts                    |   83 +
- arch/arm/dts/rk3528-generic-u-boot.dtsi            |   12 +
- arch/arm/dts/rk3528-generic.dts                    |   31 +
- arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi         |   12 +
- arch/arm/dts/rk3528-u-boot.dtsi                    |  148 ++
- arch/arm/dts/rk356x-u-boot.dtsi                    |    9 +-
- arch/arm/dts/rk3576-roc-pc-u-boot.dtsi             |   11 +
- arch/arm/dts/rk3576-u-boot.dtsi                    |  131 +
- arch/arm/dts/rk3588s-u-boot.dtsi                   |    5 -
- arch/arm/include/asm/arch-rk3528/boot0.h           |    9 +
- arch/arm/include/asm/arch-rk3528/gpio.h            |    9 +
- arch/arm/include/asm/arch-rk3576/boot0.h           |   11 +
- arch/arm/include/asm/arch-rk3576/gpio.h            |   11 +
- arch/arm/include/asm/arch-rockchip/clock.h         |   27 +
- arch/arm/include/asm/arch-rockchip/cru_rk3528.h    |  388 +++
- arch/arm/include/asm/arch-rockchip/cru_rk3576.h    |  491 ++++
- arch/arm/mach-rockchip/Kconfig                     |  172 +-
- arch/arm/mach-rockchip/Makefile                    |    2 +
- arch/arm/mach-rockchip/px30/Kconfig                |    3 -
- arch/arm/mach-rockchip/rk3308/Kconfig              |    3 -
- arch/arm/mach-rockchip/rk3308/rk3308.c             |   69 +-
- arch/arm/mach-rockchip/rk3328/Kconfig              |    3 -
- arch/arm/mach-rockchip/rk3399/Kconfig              |    3 -
- arch/arm/mach-rockchip/rk3528/Kconfig              |   15 +
- arch/arm/mach-rockchip/rk3528/MAINTAINERS          |   11 +
- arch/arm/mach-rockchip/rk3528/Makefile             |    5 +
- arch/arm/mach-rockchip/rk3528/clk_rk3528.c         |   16 +
- arch/arm/mach-rockchip/rk3528/rk3528.c             |  137 ++
- arch/arm/mach-rockchip/rk3528/syscon_rk3528.c      |   19 +
- arch/arm/mach-rockchip/rk3568/Kconfig              |    7 +-
- arch/arm/mach-rockchip/rk3576/Kconfig              |   23 +
- arch/arm/mach-rockchip/rk3576/Makefile             |    9 +
- arch/arm/mach-rockchip/rk3576/clk_rk3576.c         |   18 +
- arch/arm/mach-rockchip/rk3576/rk3576.c             |  155 ++
- arch/arm/mach-rockchip/rk3576/syscon_rk3576.c      |   22 +
- arch/arm/mach-rockchip/rk3588/Kconfig              |   26 +-
- arch/arm/mach-rockchip/rk3588/rk3588.c             |   19 +-
- arch/arm/mach-rockchip/sdram.c                     |   16 +-
- board/firefly/roc-pc-rk3576/Kconfig                |   12 +
- board/firefly/roc-pc-rk3576/MAINTAINERS            |    7 +
- board/rockchip/evb_rk3328/MAINTAINERS              |    6 +
- board/rockchip/evb_rk3399/MAINTAINERS              |    6 +
- board/theobroma-systems/common/Makefile            |    9 +
- board/theobroma-systems/jaguar_rk3588/Makefile     |    3 -
- board/theobroma-systems/puma_rk3399/Makefile       |    3 -
- board/theobroma-systems/ringneck_px30/Makefile     |    3 -
- board/theobroma-systems/tiger_rk3588/Makefile      |    3 -
- configs/generic-rk3328_defconfig                   |   90 +
- configs/generic-rk3399_defconfig                   |   77 +
- configs/generic-rk3528_defconfig                   |   40 +
- configs/generic-rk3568_defconfig                   |    3 +
- configs/generic-rk3588_defconfig                   |    3 +
- configs/radxa-e20c-rk3528_defconfig                |   56 +
- configs/ringneck-px30_defconfig                    |    1 +
- configs/roc-pc-rk3576_defconfig                    |   45 +
- doc/board/rockchip/rockchip.rst                    |   27 +
- drivers/adc/rockchip-saradc.c                      |   10 +
- drivers/clk/rockchip/Makefile                      |    2 +
- drivers/clk/rockchip/clk_pll.c                     |   23 +-
- drivers/clk/rockchip/clk_rk3528.c                  | 1754 ++++++++++++++
- drivers/clk/rockchip/clk_rk3576.c                  | 2513 ++++++++++++++++++++
- drivers/misc/rockchip-otp.c                        |   15 +
- drivers/mmc/rockchip_dw_mmc.c                      |    1 +
- drivers/mmc/rockchip_sdhci.c                       |   54 +-
- drivers/net/dwc_eth_qos.c                          |    8 +
- drivers/net/dwc_eth_qos_rockchip.c                 |  292 ++-
- drivers/phy/rockchip/phy-rockchip-inno-usb2.c      |   63 +-
- drivers/pinctrl/rockchip/Makefile                  |    2 +
- drivers/pinctrl/rockchip/pinctrl-rk3528.c          |  273 +++
- drivers/pinctrl/rockchip/pinctrl-rk3576.c          |  278 +++
- drivers/pinctrl/rockchip/pinctrl-rockchip.h        |    3 +
- drivers/ram/rockchip/Makefile                      |    2 +
- drivers/ram/rockchip/sdram_rk3528.c                |   33 +
- drivers/ram/rockchip/sdram_rk3576.c                |   35 +
- drivers/reset/Makefile                             |    2 +-
- drivers/reset/rst-rk3528.c                         |  302 +++
- drivers/reset/rst-rk3576.c                         |  647 +++++
- drivers/rng/rockchip_rng.c                         |   79 +-
- drivers/usb/gadget/Kconfig                         |    1 +
- dts/upstream/Bindings/arm/rockchip.yaml            |    5 +
- .../Bindings/clock/rockchip,rk3528-cru.yaml        |   64 +
- .../dt-bindings/clock/rockchip,rk3528-cru.h        |  453 ++++
- .../dt-bindings/reset/rockchip,rk3528-cru.h        |  241 ++
- .../src/arm64/rockchip/rk3528-pinctrl.dtsi         | 1397 +++++++++++
- .../src/arm64/rockchip/rk3528-radxa-e20c.dts       |  133 ++
- dts/upstream/src/arm64/rockchip/rk3528.dtsi        |  378 ++-
- dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts  |  736 ++++++
- dts/upstream/src/arm64/rockchip/rk3576.dtsi        |   39 +
- dts/upstream/src/arm64/rockchip/rk3588-base.dtsi   |    8 +
- include/configs/anbernic-rgxx3-rk3566.h            |    4 +-
- include/configs/evb_rk3568.h                       |    4 +-
- include/configs/evb_rk3588.h                       |    4 +-
- include/configs/khadas-edge2-rk3588s.h             |    4 +-
- include/configs/powkiddy-x55-rk3566.h              |    4 +-
- include/configs/px30_common.h                      |    1 +
- include/configs/rk3528_common.h                    |   38 +
- include/configs/rk3568_common.h                    |    5 +-
- include/configs/rk3576_common.h                    |   41 +
- include/configs/rk3588_common.h                    |    5 +-
- include/configs/roc-pc-rk3576.h                    |   15 +
- include/configs/toybrick_rk3588.h                  |    4 +-
- tools/rkcommon.c                                   |    2 +
- 107 files changed, 12440 insertions(+), 208 deletions(-)
- delete mode 100644 arch/arm/dts/px30-evb-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3328-generic-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3328-generic.dts
- create mode 100644 arch/arm/dts/rk3399-generic-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3399-generic.dts
- create mode 100644 arch/arm/dts/rk3528-generic-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3528-generic.dts
- create mode 100644 arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3528-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3576-u-boot.dtsi
- create mode 100644 arch/arm/include/asm/arch-rk3528/boot0.h
- create mode 100644 arch/arm/include/asm/arch-rk3528/gpio.h
- create mode 100644 arch/arm/include/asm/arch-rk3576/boot0.h
- create mode 100644 arch/arm/include/asm/arch-rk3576/gpio.h
- create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3528.h
- create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3576.h
- create mode 100644 arch/arm/mach-rockchip/rk3528/Kconfig
- create mode 100644 arch/arm/mach-rockchip/rk3528/MAINTAINERS
- create mode 100644 arch/arm/mach-rockchip/rk3528/Makefile
- create mode 100644 arch/arm/mach-rockchip/rk3528/clk_rk3528.c
- create mode 100644 arch/arm/mach-rockchip/rk3528/rk3528.c
- create mode 100644 arch/arm/mach-rockchip/rk3528/syscon_rk3528.c
- create mode 100644 arch/arm/mach-rockchip/rk3576/Kconfig
- create mode 100644 arch/arm/mach-rockchip/rk3576/Makefile
- create mode 100644 arch/arm/mach-rockchip/rk3576/clk_rk3576.c
- create mode 100644 arch/arm/mach-rockchip/rk3576/rk3576.c
- create mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
- create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
- create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
- create mode 100644 board/theobroma-systems/common/Makefile
- create mode 100644 configs/generic-rk3328_defconfig
- create mode 100644 configs/generic-rk3399_defconfig
- create mode 100644 configs/generic-rk3528_defconfig
- create mode 100644 configs/radxa-e20c-rk3528_defconfig
- create mode 100644 configs/roc-pc-rk3576_defconfig
- create mode 100644 drivers/clk/rockchip/clk_rk3528.c
- create mode 100644 drivers/clk/rockchip/clk_rk3576.c
- create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3528.c
- create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3576.c
- create mode 100644 drivers/ram/rockchip/sdram_rk3528.c
- create mode 100644 drivers/ram/rockchip/sdram_rk3576.c
- create mode 100644 drivers/reset/rst-rk3528.c
- create mode 100644 drivers/reset/rst-rk3576.c
- create mode 100644 dts/upstream/Bindings/clock/rockchip,rk3528-cru.yaml
- create mode 100644 dts/upstream/include/dt-bindings/clock/rockchip,rk3528-cru.h
- create mode 100644 dts/upstream/include/dt-bindings/reset/rockchip,rk3528-cru.h
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-pinctrl.dtsi
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts
- create mode 100644 include/configs/rk3528_common.h
- create mode 100644 include/configs/rk3576_common.h
- create mode 100644 include/configs/roc-pc-rk3576.h
