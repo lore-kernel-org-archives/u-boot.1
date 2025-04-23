@@ -4,67 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED43C369D1
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DF3FC369D1
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61FCE82054;
+	by phobos.denx.de (Postfix) with ESMTP id B732A82075;
 	Wed, 23 Apr 2025 16:25:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="UqQ7+m0j";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="K0EeG4Xm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ri1eFV0h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BEB180FA8; Wed, 23 Apr 2025 09:17:40 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4BA5E80F03; Wed, 23 Apr 2025 10:29:30 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5122680BA8
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 09:17:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D07E80BA8
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 10:29:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=martin.kaistra@linutronix.de
-Message-ID: <2a5c6fbb-1788-40f7-9c35-9deeb67b0234@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1745392657;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Sf59H9+12BDq22+dfko5Wkiw1lzuG7jex4iDc89I1Xs=;
- b=UqQ7+m0jfvJnpIgUKX1bsgL9JOdBOpEl5NaAjaI4dcuXmlzSDfZ3SwT9XCponsV0j+8xNt
- tc0yKzrU5UzYYYmnC1W3ZIRifK0pZBODsDveieLKjn7ZO8LiJjaTmlG8v+kTfugdxHZtr7
- wxdilW/oTE/onOHUpVzxAhizTBa6WTa9GzypuPv4JYJZLchru49dSXTvP8jYNxNHYts6s7
- QMH4udh3Ow11epGJjThD5XpsKT47ennPpzZXvSaGiz7m5Dfp8y4KyunBY+QYOKqRG6Pj79
- LF0LwDso2U1nQ/1H8I4PZ+GCwusDj067qTClbaOJbTxp1RR6rjkUp3t8eYq2Ow==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1745392657;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Sf59H9+12BDq22+dfko5Wkiw1lzuG7jex4iDc89I1Xs=;
- b=K0EeG4XmEtzZYU7nB3mVxjltcSYkY9vELqqHVbcoJgFYrlAmmc86bJN+rDAZadyN/MetI/
- IML4WhgUrNB9MECA==
-Date: Wed, 23 Apr 2025 09:17:37 +0200
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-54d42884842so7828187e87.2
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 01:29:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745396967; x=1746001767; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=86Tp9HDGpQ6Qip75ZShju/ejL1p8J736aXBEEMWZSdY=;
+ b=Ri1eFV0hYzRi8nhR9wP9XKXO3XmJFxsgoPzY9DttqfLOglVpzWxnJa4HmzJGlrJCga
+ 99rbzzHFNeq8qEWrYtYlctHz1UiDZAEOrT4QuGBFffSrhXTM38hO+dXdpxyqE/IUfpbe
+ kpIR+0Z7aDaEKW0OqInCUFfdX+pNz+1THKcQSAQvfWQJ6/yMEUC7hLGvv7yU2aLFW0LL
+ AGYFQ7lyxsf74hZY5AhOfcSLv6cGWidRneyFCYryKQGlahxFqUHVSLKhqr7E/nbySR6z
+ SW1J4w/7K2+WEYslBveMOZiOF1dG48Jx3aAiQdY6P9YeSjvYe7O/8WHnj1tc03/LO/Yv
+ q7iA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745396967; x=1746001767;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=86Tp9HDGpQ6Qip75ZShju/ejL1p8J736aXBEEMWZSdY=;
+ b=PreBsZn1KZWDTHSVx0pI2QZNvhCFI0FJ1nLAYS8/aXJpiZ1ipyy8ndv/PQY7sg2YXI
+ nDtFLCTRDW4wuEfdd+luCg7pwtmCPA8JapmI/CM5IdF01g8PE6SMaybq5yfk9kiLQUOF
+ 05azOyX9W1qRRoUpnTvCQ1+KRNZ/S4ePNBNtFIM6kd9e8XOa2OqruEICtxj82IqyNapa
+ i5+4Pa/Cpiuu7uo+8sil+p+jfEkzoAB2+3I31d/1GkbOyYr0JwZQuywMDNbtolNvAUUN
+ Hofjyc5joyTpi1CvzVdQ5ozu822nnH1a7dYUFPmGbmdMecKc48uUpibgk9DgkDgMSV0/
+ 0maA==
+X-Gm-Message-State: AOJu0YzvNDaM2W416hHxCj6zo4iJirxfQnKAif6bsbNs0vmwLYRmuRmM
+ QIpra63QoYyXnfUtY4q8/chXqvZuRv6KhMflAyNvY60RFZkWOMG548PGZElrmngjAJF+YJIbiFu
+ PKrUdlUuf/0dn0mC496bL16YKxCaciNQr7gQmkw==
+X-Gm-Gg: ASbGncuGeyqVcBKi53GIf9Y3hwNKPUQ8uFDfYZUbmeExlPxv+ki/Jqd2zAoLPB5mJN+
+ EZ1QZpNhJ2fry4H0fMaiajm4Kz43cOsonFO4Jkb4PvnZsFP3HqM6uCOuCWplSfMsOM7viU+1yFC
+ 7ZC800j0opgCDiLs7d85+O/Q==
+X-Google-Smtp-Source: AGHT+IHWkooQn8ZHHQpbjQ5KfSGh14xpiPKiV9QQfwKQBUboGW/7rhBWyE/COaowaCGv/y/DELyg6+iknL8+B82XQbU=
+X-Received: by 2002:a05:6512:4022:b0:549:6759:3982 with SMTP id
+ 2adb3069b0e04-54d6e658f33mr5624841e87.37.1745396967369; Wed, 23 Apr 2025
+ 01:29:27 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] net: gem: ignore tx_clk if MII is used
-To: "Katakam, Harini" <harini.katakam@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "Simek, Michal" <michal.simek@amd.com>,
- "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-References: <20250415150400.136723-1-martin.kaistra@linutronix.de>
- <SJ2PR12MB87391F3A43374B5C2844CFD09EBB2@SJ2PR12MB8739.namprd12.prod.outlook.com>
-Content-Language: de-DE
-From: Martin Kaistra <martin.kaistra@linutronix.de>
-In-Reply-To: <SJ2PR12MB87391F3A43374B5C2844CFD09EBB2@SJ2PR12MB8739.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Wed, 23 Apr 2025 10:29:16 +0200
+X-Gm-Features: ATxdqUGL3n04T9zIzfkeS3zXpw2W5UyPXwQNVDlJl4EYzFfqqUxDugUTjuR1DHU
+Message-ID: <CACRpkdZY946nqABY+4hdWJvK8gJrs-ra_iVYp-uVnMBUQvSm3A@mail.gmail.com>
+Subject: Re: [PATCH v2 00/13] Enable OF_UPSTREAM for STM32 and STi platforms
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>, 
+ Cheick Traore <cheick.traore@foss.st.com>, 
+ Christophe Roullier <christophe.roullier@st.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Dillon Min <dillon.minfei@gmail.com>, 
+ Fabio Estevam <festevam@denx.de>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Gatien Chevallier <gatien.chevallier@foss.st.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Kamil Lulko <kamil.lulko@gmail.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Lionel Debieve <lionel.debieve@foss.st.com>, Lukasz Majewski <lukma@denx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michal Simek <michal.simek@amd.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, 
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Wed, 23 Apr 2025 16:25:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,87 +116,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Harini,
+On Tue, Apr 22, 2025 at 3:16=E2=80=AFPM Patrice Chotard
+<patrice.chotard@foss.st.com> wrote:
 
-Am 22.04.25 um 18:17 schrieb Katakam, Harini:
-> [AMD Official Use Only - AMD Internal Distribution Only]
-> 
-> Hi Martin
-> 
->> -----Original Message-----
->> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Martin Kaistra
->> Sent: Tuesday, April 15, 2025 8:34 PM
->> To: u-boot@lists.denx.de
->> Cc: joe.hershberger@ni.com; rfried.dev@gmail.com; Simek, Michal
->> <michal.simek@amd.com>
->> Subject: [PATCH] net: gem: ignore tx_clk if MII is used
->>
->> If the MII interface is used, the PHY is the clock master, thus don't set the clock
-> 
-> Can you please describe your HW configuration?
+> This series is enabling OF_UPSTREAM flag for STM32 MCU's, MPU's and
+> STi platforms.
+> For some boards, some defconfig and DT update are needed to keep the
+> same functional level.
+>
+> The major impact concerns MPU's platform with introduction of STM32
+> System Bus.
 
-on my HW the PS GEM is connected to a MII-to-RMII converter which is then 
-connected via RMII to the PHY.
+Excellent work as always Patrice,
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
 
-The linux driver (drivers/net/ethernet/cadence/macb_main.c) has a similar 
-exception for MII mode in macb_set_tx_clk().
-
-Thanks,
-Martin
-
-> Based on the spec,
-> 1. In 10/100 GMII mode, tx_clk will run at either 2.5 MHz or 25 MHz as
-> determined by the external PHY MII clock input.
-> 2. When using gigabit mode, the transmit clock must be sourced from a
-> 125 MHz reference clock.
-> 3. In RMII mode, tx_clk should be connected to the rmii_tx_clk outputs.
-> In both cases 2 and 3, the MAC is the clock master.
-> 
-> If you are using a HW connection such as Zynq:
-> PS GEM - GMII to RGMII/SGMII shim - External PHY,
-> then the I understand that you'll get such an error message and that should
-> be removed. But I'm not sure if this applies to MII type.
-> 
-> Regards,
-> Harini
-> 
->> rate. On Zynq-7000, this will prevent the following
->> error:
->>    zynq_gem ethernet@e000b000: failed to set tx clock rate 25000000
->>
->> Signed-off-by: Martin Kaistra <martin.kaistra@linutronix.de>
->> ---
->>   drivers/net/zynq_gem.c | 14 ++++++++------
->>   1 file changed, 8 insertions(+), 6 deletions(-)
->>
->> diff --git a/drivers/net/zynq_gem.c b/drivers/net/zynq_gem.c index
->> 461805ae53f..703e22479d2 100644
->> --- a/drivers/net/zynq_gem.c
->> +++ b/drivers/net/zynq_gem.c
->> @@ -567,12 +567,14 @@ static int zynq_gem_init(struct udevice *dev)
->>        }
->>   #endif
->>
->> -     ret = clk_get_rate(&priv->tx_clk);
->> -     if (ret != clk_rate) {
->> -             ret = clk_set_rate(&priv->tx_clk, clk_rate);
->> -             if (IS_ERR_VALUE(ret)) {
->> -                     dev_err(dev, "failed to set tx clock rate %ld\n", clk_rate);
->> -                     return ret;
->> +     if (priv->interface != PHY_INTERFACE_MODE_MII) {
->> +             ret = clk_get_rate(&priv->tx_clk);
->> +             if (ret != clk_rate) {
->> +                     ret = clk_set_rate(&priv->tx_clk, clk_rate);
->> +                     if (IS_ERR_VALUE(ret)) {
->> +                             dev_err(dev, "failed to set tx clock rate %ld\n",
->> clk_rate);
->> +                             return ret;
->> +                     }
->>                }
->>        }
->>
->> --
->> 2.39.5
-> 
-
-
+Yours,
+Linus Walleij
