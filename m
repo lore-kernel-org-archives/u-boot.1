@@ -4,95 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1C3CC369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FBE8C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C990581E72;
-	Wed, 23 Apr 2025 16:25:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 299C181B4B;
+	Wed, 23 Apr 2025 16:25:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="hzvvudjN";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MRIWuaaK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FCFD80FA8; Wed, 23 Apr 2025 14:43:28 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ id AFEDD810EB; Wed, 23 Apr 2025 08:50:40 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CF1180F6B
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 14:43:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4761C80AE1
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 08:50:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1745412203;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dosAOhWBMypddcP/z7aLnBtp3ef396CgWxNfD/wPoVs=;
- b=hzvvudjNH8VmlQpyFMP2p4KtjyWc2aeE3fmStxMTubtRDY1+lwRigsmj/j5nWinqZiAlWm
- Lz5wjZJ5PS5gPhZt/OKg2zvCnDGJKfkEN44TbpZn74/IyuQ787VsqGyxm1GBSE7egmFFf6
- +J8NfmvmI0ub0AqVvqBZAVf5Q48STc0=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-425-CDsrMy-OPai0tnoieWwlQA-1; Wed, 23 Apr 2025 08:43:22 -0400
-X-MC-Unique: CDsrMy-OPai0tnoieWwlQA-1
-X-Mimecast-MFC-AGG-ID: CDsrMy-OPai0tnoieWwlQA_1745412201
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-39ef89b862dso2935620f8f.0
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 05:43:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745412201; x=1746017001;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dosAOhWBMypddcP/z7aLnBtp3ef396CgWxNfD/wPoVs=;
- b=H9Ad1rPxNKkq3LlRHtWsWSc4AO0pjZnuYjZ/pRoq21LKEP60iWm6gpAdapcs0gsEem
- n7M7oZfq1TaIB3t52hEhZGjJWqSvMcf+ngYw66Tz5qczRwlguIEuLitIAJj1PT0hkxnU
- TRDIulACL8yQ50heuHkX1/x235FAF8IUpXZIYVxaqFBppuCEuBPtmnrTbVyZaSsdi3RD
- MMuwc0FlxfoB2v857WDpJ/87rfpcELXdWipoLUgnRRZA3ZczIhsYfD3R8/2o8RVSStsj
- ofjQC1axsAW0pUPzzxy4Z3cmGA/vZrUV+BR0aVHZkQLFrqkM1G7je4n/YmvhWGwCbvOb
- gupA==
-X-Gm-Message-State: AOJu0YzbdfuCoWkzEvl36CqNOejZi5+KWfz7Gz79QFX3tuywOYYf1V/x
- pK7KvFNKciAd7zliRSi4MFicmuRyD9epQuBlxJpJAkt3OVegJwCAAylzgkFikmOF1SRfS2bbVA6
- H6kMvubRJAHtfsqzh2ADU7LYmolTrUYhZswrvrzMzZMHS/IZMis8=
-X-Gm-Gg: ASbGnctK7AQV9j8aeiKjT7llfLVQiCOL3scRdXOwkkGjuyN8gCRA/eJT9gnzDgxAtr5
- BF6SezFHShMgiPVyGYov9fTDoWX+e2rGQKVxU46IWvRUEuFHcxRQ3ZuPZDOatTLL6yYSfvl+431
- TujWhBLscC4pPENCWa9vGVosHvTCkDbadi7iPbmnG9gCAjxjYfnwEyfOwA+WBxZk9zb337w9mdi
- 5Qjv+3z1Jsc2USQpqKNZYV8QZCUTNxM8GijZmPbWNZosz7X/lqtfI4zImX4odI3E3F1jVi6sOtP
- BiKCjXHjdgtCt7tQ4WY=
-X-Received: by 2002:a05:6000:2510:b0:390:f9a5:bd79 with SMTP id
- ffacd0b85a97d-39efba5a86fmr15668774f8f.26.1745412201360; 
- Wed, 23 Apr 2025 05:43:21 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHv76QE9KGqicED+wfxs8YoHwCQLFQp9y4BmpIJI8e3lzJWocfhbqtHactULkjwX7q19XvXtw==
-X-Received: by 2002:a05:6000:2510:b0:390:f9a5:bd79 with SMTP id
- ffacd0b85a97d-39efba5a86fmr15668752f8f.26.1745412200982; 
- Wed, 23 Apr 2025 05:43:20 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39efa493207sm18765214f8f.79.2025.04.23.05.43.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 05:43:20 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@redhat.com>
-To: Simon Glass <sjg@chromium.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Subject: Re: Maintenance of Python tools
-In-Reply-To: <CAFLszTiThPOHm+D=Zts9QP0mm4dYHE=kAqS1LAnfF1MLmc=QEg@mail.gmail.com>
-References: <CAFLszTjnXQu3bwWt3Do7S_Vu0UO5si4HRUeW9bv0981WbUn_7Q@mail.gmail.com>
- <87a587fja8.fsf@kernel.org>
- <CAFLszTiThPOHm+D=Zts9QP0mm4dYHE=kAqS1LAnfF1MLmc=QEg@mail.gmail.com>
-Date: Wed, 23 Apr 2025 14:43:20 +0200
-Message-ID: <874iyff3pz.fsf@kernel.org>
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id E8A09A4C17A;
+ Wed, 23 Apr 2025 06:45:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDE0BC4CEEC;
+ Wed, 23 Apr 2025 06:50:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1745391036;
+ bh=2zAYnR0xUM0yP0KJdRCoxm0NV7BITpFndz+9/JH/2I0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=MRIWuaaKQv7ohnI7QEstIsX5Mx49ppraG6qsGKUPzUvy9kx0q0xjCdUGW2XE1oXbe
+ vmtUW+GIKV6g0yiZUujGk6gRaFPs80le/ADlbDIG43e3jVDJrievsNp23nN4VGY9ko
+ lG2TnLac5AAg7APYXJDyhs9f+/+jbjqgreDV7JLlJT3J4oJ5pRMsswFYZNs5e6Srgw
+ KiWbqB7FkuZ7Kpk9y0LYKeU20nwpGl51S3n74L06BeYOy/83l84RXV6u59/SDGTWzf
+ 0dnWTWhq63bP+7rmehBZE0+QGFUw8Fq5YFy3xY0x45uV8Ua5zj6aoXH/AWj5JaIXMy
+ zVlUPbiGeKBgA==
+Date: Wed, 23 Apr 2025 12:20:22 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
+ Cheick Traore <cheick.traore@foss.st.com>,
+ Christophe Roullier <christophe.roullier@st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Dillon Min <dillon.minfei@gmail.com>, Fabio Estevam <festevam@denx.de>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Gatien Chevallier <gatien.chevallier@foss.st.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Lionel Debieve <lionel.debieve@foss.st.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Matteo Lisi <matteo.lisi@engicam.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 00/13] Enable OF_UPSTREAM for STM32 and STi platforms
+Message-ID: <aAiNruK3MBVV7ZN_@sumit-X1>
+References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: pkg9qmG2gy7okBLkSBJHSTi3-FJiOZuk-R1wGqk9B1I_1745412201
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
-X-Mailman-Approved-At: Wed, 23 Apr 2025 16:25:16 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+X-Mailman-Approved-At: Wed, 23 Apr 2025 16:25:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,78 +95,250 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Tue, Apr 22, 2025 at 03:12:16PM +0200, Patrice Chotard wrote:
+> This series is enabling OF_UPSTREAM flag for STM32 MCU's, MPU's and
+> STi platforms.
+> For some boards, some defconfig and DT update are needed to keep the
+> same functional level.
+> 
+> The major impact concerns MPU's platform with introduction of STM32
+> System Bus.
+> 
+> Changes in v2:
+>   - Replace LOG_CATEGORY UCLASS_SIMPLE_BUS by UCLASS_NOP in both
+>     /arch/arm/mach-stm32mp/stm32mp2/rifsc.c and
+>     /arch/arm/mach-stm32mp/stm32mp1/etzpc.c.
+>   - Update board/st/stm32mp1/MAINTAINERS.
+>   - Fix DSI clock ssetting.
+> 
+> Lionel Debieve (3):
+>   ARM: stm32mp: add ETZPC system bus driver for STM32MP1
+>   ARM: dts: stm32: add ETZPC as a system bus for STM32MP1x boards
+>   stm32mp: fdt: remove ETZPC peripheral cleanup
+> 
 
-On mer., avril 23, 2025 at 06:28, Simon Glass <sjg@chromium.org> wrote:
+> Patrice Chotard (9):
+>   ARM: dts: sti: convert stih410-b2260 board to OF_UPSTREAM
+>   ARM: dts: stm32: convert stm23h7 boards to OF_UPSTREAM
+>   ARM: dts: stm32: convert stm23f7 boards to OF_UPSTREAM
+>   ARM: dts: stm32: convert stm23f4 boards to OF_UPSTREAM
+>   ARM: dts: stm32: convert stm32mp13 board to OF_UPSTREAM
+>   ARM: dts: stm32: convert stm32mp15 board to OF_UPSTREAM
+>   configs: stm32: introduce stm32mp15-odyssey_defconfig
+>   clk: stm32mp1: fix DSI clock setting
+>   ARM: dts: stm32: convert stm32mp2 board to OF_UPSTREAM
 
-> Hi Mattijs,
->
-> On Wed, 23 Apr 2025 at 01:07, Mattijs Korpershoek
-> <mkorpershoek@kernel.org> wrote:
->>
->> Hi Simon,
->>
->> On mar., avril 22, 2025 at 17:39, Simon Glass <sjg@chromium.org> wrote:
->>
->> > Hi,
->> >
->> > Tom has indicated that he would like Patman to move out of his tree. I
->> > suggested on another thread[1] that I maintain it in my 'sjg' tree, so
->> > here is a new thread to discuss this.
->> >
->> > I have already done this for the qemu/efi/coreboot scripts as Tom has
->> > NAK'ed patches for those.
->> >
->> > For the other tools there is going to be quite a bit of churn, as I
->> > would like to resolve most of the many Python warnings.
->> >
->> > Given the shared source between the tools, it would be easier for me
->> > to do the same for buildman, binman and qconfig. I am thinking that I
->> > might try a move to allow Gitlab pull-requests for reviews on these as
->> > well as the mailing list, if that is useful.
->> >
->> > For tools which need to sync back to Tom's tree (i.e. not patman), I
->> > or Tom could do a pull request every now and then, omitting any
->> > changes that relate to pylint.
->> >
->> > Please let me know your thoughts. The timing is good as I am going to
->> > be sending out a new Patman feature in the next few weeks and it is a
->> > few thousand more lines of code.
->>
->> I have a preference for binman staying in the U-Boot upstream (Tom's)
->> tree. AFAIK, binman is used by the CI and is also very useful for composing
->> "complex" bootloader images (For example for the TI k3 architecture).
->> I don't know a good replacement of binman and I'm afraid that people
->> will go back to ad-hoc scripts if binman gets removed from the tree :(
->>
->> On the other hand, patman is a workflow tool that's not (I think) that
->> specific to U-Boot and is (to me) replaceable by b4.
->>
->> I understand that code sharing makes it more difficult to only move
->> buildman out of upstream, but in a perfect world, I'd like binman to
->> stay in upstream.
->
-> Just to clarify this, I'm not suggesting removing binman. It's just
-> the maintenance and development of new features that I'm referring to.
-> We would still sync source back to Tom's tree.
+Glad to see the diff with OF_UPSTREAM adoption, feel free to add
+following to the OF_UPSTREAM adoption patches:
 
-Got it, thanks.
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-Wouldn't moving the binman development out of upstream reduce
-contributions/visibility?
-Or do you think that proposing alternative development process (like
-Gitlab merge requests) would attract more folks?
+-Sumit
 
-What would be the policy for development/syncing back to upstream?
-
-What happens if binman evolves in a way that's not aligned/practical for
-upstream (Tom's tree) ?
-
-Would that mean that we would have to maintain a fork in upstream?
-
->
-> Regards,
-> SImon
->
->> > [1] https://lore.kernel.org/u-boot/CAFLszTg7-yM0L8uuJyN7Jpsb1LbvOYO76cUWj+H719mfc97mMQ@mail.gmail.com/
-
+> 
+> Patrick Delaunay (1):
+>   ARM: stm32mp: add RIFSC system bus driver for STM32MP25
+> 
+>  arch/arm/dts/Makefile                         |   31 -
+>  arch/arm/dts/st-pincfg.h                      |   72 -
+>  arch/arm/dts/stih407-clock.dtsi               |  323 --
+>  arch/arm/dts/stih407-family.dtsi              | 1000 ------
+>  arch/arm/dts/stih407-pinctrl.dtsi             | 1262 --------
+>  arch/arm/dts/stih410-b2260-u-boot.dtsi        |   46 +-
+>  arch/arm/dts/stih410-b2260.dts                |  214 --
+>  arch/arm/dts/stih410-clock.dtsi               |  333 --
+>  arch/arm/dts/stih410-pinctrl.dtsi             |   31 -
+>  arch/arm/dts/stih410.dtsi                     |  300 --
+>  arch/arm/dts/stm32429i-eval.dts               |  284 --
+>  arch/arm/dts/stm32746g-eval.dts               |  186 --
+>  arch/arm/dts/stm32f4-pinctrl.dtsi             |  447 ---
+>  arch/arm/dts/stm32f429-disco.dts              |  190 --
+>  arch/arm/dts/stm32f429-pinctrl.dtsi           |   55 -
+>  arch/arm/dts/stm32f429.dtsi                   |  758 -----
+>  arch/arm/dts/stm32f469-disco.dts              |  213 --
+>  arch/arm/dts/stm32f469-pinctrl.dtsi           |   55 -
+>  arch/arm/dts/stm32f469.dtsi                   |   18 -
+>  arch/arm/dts/stm32f7-pinctrl.dtsi             |  415 ---
+>  arch/arm/dts/stm32f746-disco-u-boot.dtsi      |   13 +-
+>  arch/arm/dts/stm32f746-disco.dts              |  169 -
+>  arch/arm/dts/stm32f746-pinctrl.dtsi           |   11 -
+>  arch/arm/dts/stm32f746.dtsi                   |  613 ----
+>  arch/arm/dts/stm32f769-disco-u-boot.dtsi      |   60 +-
+>  arch/arm/dts/stm32f769-disco.dts              |  133 -
+>  arch/arm/dts/stm32f769-pinctrl.dtsi           |   11 -
+>  arch/arm/dts/stm32h7-pinctrl.dtsi             |  274 --
+>  arch/arm/dts/stm32h7-u-boot.dtsi              |    1 -
+>  arch/arm/dts/stm32h743.dtsi                   |  695 ----
+>  arch/arm/dts/stm32h743i-disco.dts             |   75 -
+>  arch/arm/dts/stm32h743i-eval.dts              |  160 -
+>  arch/arm/dts/stm32h750.dtsi                   |    5 -
+>  arch/arm/dts/stm32h750i-art-pi.dts            |  188 --
+>  arch/arm/dts/stm32mp13-pinctrl.dtsi           |  888 ------
+>  arch/arm/dts/stm32mp13-u-boot.dtsi            |    4 +
+>  arch/arm/dts/stm32mp131.dtsi                  | 1567 ---------
+>  arch/arm/dts/stm32mp133.dtsi                  |   98 -
+>  arch/arm/dts/stm32mp135.dtsi                  |   12 -
+>  arch/arm/dts/stm32mp135f-dk.dts               |  376 ---
+>  arch/arm/dts/stm32mp13xc.dtsi                 |   18 -
+>  arch/arm/dts/stm32mp13xf.dtsi                 |   18 -
+>  arch/arm/dts/stm32mp15-pinctrl.dtsi           | 2826 -----------------
+>  arch/arm/dts/stm32mp15-scmi.dtsi              |   88 -
+>  arch/arm/dts/stm32mp15-u-boot.dtsi            |    4 +
+>  arch/arm/dts/stm32mp151.dtsi                  | 1868 -----------
+>  arch/arm/dts/stm32mp153.dtsi                  |   59 -
+>  arch/arm/dts/stm32mp157.dtsi                  |   48 -
+>  arch/arm/dts/stm32mp157a-dk1-scmi.dts         |   82 -
+>  arch/arm/dts/stm32mp157a-dk1.dts              |   25 -
+>  .../stm32mp157a-icore-stm32mp1-ctouch2.dts    |   49 -
+>  ...157a-microgea-stm32mp1-microdev2.0-of7.dts |  161 -
+>  ...32mp157a-microgea-stm32mp1-microdev2.0.dts |   59 -
+>  .../dts/stm32mp157a-microgea-stm32mp1.dtsi    |  148 -
+>  arch/arm/dts/stm32mp157c-dk2-scmi.dts         |   88 -
+>  arch/arm/dts/stm32mp157c-dk2.dts              |   94 -
+>  arch/arm/dts/stm32mp157c-ed1-scmi.dts         |   87 -
+>  arch/arm/dts/stm32mp157c-ed1.dts              |  403 ---
+>  arch/arm/dts/stm32mp157c-ev1-scmi.dts         |   93 -
+>  arch/arm/dts/stm32mp157c-ev1.dts              |  414 ---
+>  arch/arm/dts/stm32mp15xc.dtsi                 |   18 -
+>  arch/arm/dts/stm32mp15xx-dkx.dtsi             |  741 -----
+>  arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi       |   85 -
+>  arch/arm/dts/stm32mp15xxab-pinctrl.dtsi       |   57 -
+>  arch/arm/dts/stm32mp15xxac-pinctrl.dtsi       |   73 -
+>  arch/arm/dts/stm32mp15xxad-pinctrl.dtsi       |   57 -
+>  arch/arm/dts/stm32mp25-pinctrl.dtsi           |   38 -
+>  arch/arm/dts/stm32mp251.dtsi                  |  301 --
+>  arch/arm/dts/stm32mp253.dtsi                  |   23 -
+>  arch/arm/dts/stm32mp255.dtsi                  |    9 -
+>  arch/arm/dts/stm32mp257.dtsi                  |    9 -
+>  arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi      |   65 +
+>  arch/arm/dts/stm32mp257f-ev1.dts              |   55 -
+>  arch/arm/dts/stm32mp25xc.dtsi                 |    8 -
+>  arch/arm/dts/stm32mp25xf.dtsi                 |    8 -
+>  arch/arm/dts/stm32mp25xxai-pinctrl.dtsi       |   83 -
+>  arch/arm/dts/stm32mp25xxak-pinctrl.dtsi       |   71 -
+>  arch/arm/dts/stm32mp25xxal-pinctrl.dtsi       |   71 -
+>  arch/arm/mach-stm32/Kconfig                   |    3 +
+>  arch/arm/mach-stm32mp/Kconfig                 |   11 +-
+>  arch/arm/mach-stm32mp/include/mach/etzpc.h    |   32 +
+>  arch/arm/mach-stm32mp/include/mach/rif.h      |   26 +
+>  arch/arm/mach-stm32mp/stm32mp1/Makefile       |    1 +
+>  arch/arm/mach-stm32mp/stm32mp1/etzpc.c        |  194 ++
+>  arch/arm/mach-stm32mp/stm32mp1/fdt.c          |  258 --
+>  arch/arm/mach-stm32mp/stm32mp2/Makefile       |    1 +
+>  arch/arm/mach-stm32mp/stm32mp2/rifsc.c        |  364 +++
+>  board/st/stm32mp1/MAINTAINERS                 |    2 +
+>  configs/stih410-b2260_defconfig               |    3 +-
+>  configs/stm32746g-eval_defconfig              |    3 +-
+>  configs/stm32746g-eval_spl_defconfig          |    3 +-
+>  configs/stm32f429-discovery_defconfig         |    2 +-
+>  configs/stm32f429-evaluation_defconfig        |    2 +-
+>  configs/stm32f469-discovery_defconfig         |    2 +-
+>  configs/stm32f746-disco_defconfig             |    3 +-
+>  configs/stm32f746-disco_spl_defconfig         |    3 +-
+>  configs/stm32f769-disco_defconfig             |    4 +-
+>  configs/stm32f769-disco_spl_defconfig         |    4 +-
+>  configs/stm32h743-disco_defconfig             |    2 +-
+>  configs/stm32h743-eval_defconfig              |    2 +-
+>  configs/stm32h750-art-pi_defconfig            |    2 +-
+>  configs/stm32mp13_defconfig                   |    2 +-
+>  ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |    2 +-
+>  ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |    2 +-
+>  ...-microgea-stm32mp1-microdev2-of7_defconfig |    2 +-
+>  ...mp15-microgea-stm32mp1-microdev2_defconfig |    2 +-
+>  configs/stm32mp15-odyssey_defconfig           |  172 +
+>  configs/stm32mp15_basic_defconfig             |    4 +-
+>  configs/stm32mp15_defconfig                   |    4 +-
+>  configs/stm32mp15_trusted_defconfig           |    4 +-
+>  configs/stm32mp25_defconfig                   |    2 +-
+>  drivers/clk/stm32/clk-stm32mp1.c              |    1 +
+>  include/configs/stm32f746-disco.h             |    2 +-
+>  include/dt-bindings/clock/stih407-clks.h      |   90 -
+>  include/dt-bindings/clock/stih410-clks.h      |   25 -
+>  include/dt-bindings/mfd/st-lpc.h              |   16 -
+>  include/dt-bindings/reset/stih407-resets.h    |   65 -
+>  117 files changed, 950 insertions(+), 20362 deletions(-)
+>  delete mode 100644 arch/arm/dts/st-pincfg.h
+>  delete mode 100644 arch/arm/dts/stih407-clock.dtsi
+>  delete mode 100644 arch/arm/dts/stih407-family.dtsi
+>  delete mode 100644 arch/arm/dts/stih407-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stih410-b2260.dts
+>  delete mode 100644 arch/arm/dts/stih410-clock.dtsi
+>  delete mode 100644 arch/arm/dts/stih410-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stih410.dtsi
+>  delete mode 100644 arch/arm/dts/stm32429i-eval.dts
+>  delete mode 100644 arch/arm/dts/stm32746g-eval.dts
+>  delete mode 100644 arch/arm/dts/stm32f4-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f429-disco.dts
+>  delete mode 100644 arch/arm/dts/stm32f429-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f429.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f469-disco.dts
+>  delete mode 100644 arch/arm/dts/stm32f469-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f469.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f7-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f746-disco.dts
+>  delete mode 100644 arch/arm/dts/stm32f746-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f746.dtsi
+>  delete mode 100644 arch/arm/dts/stm32f769-disco.dts
+>  delete mode 100644 arch/arm/dts/stm32f769-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32h7-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32h743.dtsi
+>  delete mode 100644 arch/arm/dts/stm32h743i-disco.dts
+>  delete mode 100644 arch/arm/dts/stm32h743i-eval.dts
+>  delete mode 100644 arch/arm/dts/stm32h750.dtsi
+>  delete mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
+>  delete mode 100644 arch/arm/dts/stm32mp13-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp131.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp133.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp135.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp135f-dk.dts
+>  delete mode 100644 arch/arm/dts/stm32mp13xc.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp13xf.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp15-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp15-scmi.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp151.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp153.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp157.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp157a-dk1-scmi.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157a-dk1.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp157c-dk2-scmi.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157c-dk2.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157c-ed1-scmi.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157c-ed1.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157c-ev1-scmi.dts
+>  delete mode 100644 arch/arm/dts/stm32mp157c-ev1.dts
+>  delete mode 100644 arch/arm/dts/stm32mp15xc.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp15xx-dkx.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp15xxab-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp15xxac-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp15xxad-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp251.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp253.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp255.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp257.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
+>  delete mode 100644 arch/arm/dts/stm32mp25xc.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp25xf.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
+>  delete mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
+>  create mode 100644 arch/arm/mach-stm32mp/include/mach/etzpc.h
+>  create mode 100644 arch/arm/mach-stm32mp/include/mach/rif.h
+>  create mode 100644 arch/arm/mach-stm32mp/stm32mp1/etzpc.c
+>  create mode 100644 arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+>  create mode 100644 configs/stm32mp15-odyssey_defconfig
+>  delete mode 100644 include/dt-bindings/clock/stih407-clks.h
+>  delete mode 100644 include/dt-bindings/clock/stih410-clks.h
+>  delete mode 100644 include/dt-bindings/mfd/st-lpc.h
+>  delete mode 100644 include/dt-bindings/reset/stih407-resets.h
+> 
+> -- 
+> 2.25.1
+> 
+> base-commit: cde0050618968aae335dfbc930641656d51ff5d0
+> branch: upstream_OF_UPSTREAM_V2
