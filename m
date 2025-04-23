@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF94C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 07:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84B5C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 07:38:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E590E80EE5;
-	Wed, 23 Apr 2025 09:31:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2CDBF80EE5;
+	Wed, 23 Apr 2025 09:38:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SL8knNIy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eXR4IYnE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87D4380F03; Wed, 23 Apr 2025 09:31:30 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 0E60280F03; Wed, 23 Apr 2025 09:38:53 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1684E80BA8
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 09:31:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F18E80BA8
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 09:38:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43d07ca6a80so29276505e9.1
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 00:31:28 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cec5cd73bso38183615e9.3
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 00:38:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745393487; x=1745998287; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1745393929; x=1745998729; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=BVLvS8BrUNK53ymjN9fzFohjYebq4XvIeoOmTvmODkw=;
- b=SL8knNIy0RrBz3lV6YJRkZVxKRkqk+fwR1lvIGJQSqzcSeEg3MEFcnYl6C85LUHbk7
- +7GsqcpDG06O4bNC98GLO2gkGmaR3jB4USQGHCZvPbMmCmNvpbv2AQe42Gq10RWT6xZR
- 6J+2LdxTojhPVZFUTKQEoYvixV1ngmIAIGC3o1jU308gi9GxGEcpypb+d3LmKfnXHGkT
- z365aBd/LVy72N9If223y/90IUZ7Xl2glEzPNdubbD/bdhmOesBSk37d5SXLMFqsInOY
- m1guhSgPQpGXGGdUUsWc14KWszvG/9/XQKKpP6JU8Hbao49j/1IwVPDj9I4XdRS982KH
- EdBA==
+ :reply-to; bh=aDluRQ3kJw/anEzNItaPESU2oZ9iGntKiWyVeCrHpRU=;
+ b=eXR4IYnEPLi4jXLLoJVPqNtEWwd7oiQArPWnIQS2Sw/pAtnw8pOav4wvvshhxwtfuJ
+ EH+fEDKYHomGN2iGHKW8bhtLGqQTLYCqV5hbNKQJZlhDjVfQ9BOxOe3bvdYJlbdOiyuZ
+ dGaTzDXuwq0FnMRucaPWYK4weUrD/leZdxfnFGh2GSpU5eRU6YSZKErQD7tUGolq5p5Z
+ oJqY44JxViq7O4CCcG69St+xgwaoUA+SrdprybS9GNPGfMsoT95gWjNXAZFLm0LfcMbx
+ RZhFE0tr/MJLaCm35wvWy1ebGGFAeKKKiLE6aUXdUbmwnhrS4TMlLIlJFqu/P1vWCxW/
+ 4FDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745393487; x=1745998287;
+ d=1e100.net; s=20230601; t=1745393929; x=1745998729;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=BVLvS8BrUNK53ymjN9fzFohjYebq4XvIeoOmTvmODkw=;
- b=AEGjQ0pQsV2CWfdg2AhsXVVpw+VIuolBiYPFRy29VLEGELvxdhtPRELREuCWme0uD6
- kkJ8mS9zoiX/3I9+vsiMSMWOnjTOjPJ91CtRSwu5UlbXKJObYrzGJZVGhOvG3RP0WI+f
- ibSnXYglPF+eWpHkf87+LVC7Nqino3lIs0fxUenADxvxDAZpYxks1vcajPy1yNIB3hGd
- lpwQDBaGjoCJckGW9a6he2RiZqYyMgU2kPmaeb2yQIc066VWK5hLqql8mK0N/wiNSfDW
- bqRBeb0fsCibnf1zEOcIrbN3w+O9ypMDZpL2NwQRZsOU5eESN7IfmojjkuC81OLNyrHX
- LPWQ==
-X-Gm-Message-State: AOJu0YxQMprlqeU/IgVFZ/6XJ59w8AUsLbxzlK6pL0usrmxsDbfHrZHQ
- kR0LU0HW/kC6YdsZueVyurHXp/fpjQxVAb568z/9uYpCjVYPz19SDq2PhtslHb4=
-X-Gm-Gg: ASbGncs1OmQgfFWTqBosG8J7h0y4ygox7yODglFzNVhHhwTX+nJYOZsk++E0LznNlwj
- C3g3T9JlIOF6/wDzUj/jnx3hj4Cc71ZUtGDntN+RlvKfaOKOAqeoqjO7yMnhQkJBMuryJN2n1JK
- HWIgAk8a7JBygnK1thfPaA7iY0RsanX6RyeUBMy9pZ4E7ulWoyD1uTmUOwaFeB1C9bYA4hC9EjR
- CoRSoxpZK1JPFr8T49A6LCLKNEAk5UNKcF3pKd7UuGdTSeFItjyDXBaAbBOcpigXroFQlbUsK7i
- omqpX6qz4898MM0HetEr+jLDVf/7l5gEoMy0gbVUMS/4M3dexjKH99tsAYE3swbpSY6mqNNGakp
- Zk5IHL9SEcJjp03kz/w==
-X-Google-Smtp-Source: AGHT+IFe0yQOJyW6QhlHfOg7UQgVMbLP2jGu26x74PcvC21V8ypsqiOXxp2JFUMYlNnC2kq6t+DqvA==
-X-Received: by 2002:a05:600c:1554:b0:43c:ea1a:720a with SMTP id
- 5b1f17b1804b1-4406ab676abmr138679075e9.1.1745393486254; 
- Wed, 23 Apr 2025 00:31:26 -0700 (PDT)
+ bh=aDluRQ3kJw/anEzNItaPESU2oZ9iGntKiWyVeCrHpRU=;
+ b=YGcVo/4/qp3qCuPaxTr8UdFN3IpLcLJnTpEEhG0T2ntRYtih3ONFxNOHpEjYDhorty
+ MrVoQT/jeYxyWhNV9YKeFeUyCJftvle2V1lKmkiJe4F9VgzrUuNJHv+2dT3Ryw0bo02K
+ YuIkBMPOQ8Q31Oyi7aZHP+3fV04uJd0flhzZyvTwWIhKtCMx5JDkokrxdTCHpPGxeUG1
+ CZGAcOgxF94lAD+O7q3lK+5iXUaT1iu0wjoXgpvwRaxaOOWklU07LC8tagUIAgZrXupy
+ M59YPtl/TRc3siX6WNk5Lfs09EvNlS562bBuemkByALGgPVAQRFmW1CkbZYnVJPgUmFv
+ QgPw==
+X-Gm-Message-State: AOJu0YwJLeG4QKBxydL/J5k08hKlsA/kfcBA65ZC+ngeEak/Ea0QxgCs
+ YPM0RPt2Wp+ZaPZrVzkYPwj39Nt/wLoan2O9OSUXCZIemTOcaZ7+kvjUXtJA2LI=
+X-Gm-Gg: ASbGncs/0XRh2lcVzCkGMbOgnVY/qIeWaCWM3pmWL9MuTe++eA5OOH1WLia87kZmJoh
+ KNNl8yOAQpNhoh2ahzh7mxjm/iuPUN7JAsDK4ahwu0zf9ErJoXsZeWcj/KXPfBkCX7oByuzNT8W
+ nvqSOMtaOS/TIk9s0TF23KPxJHc30NoXR238v3WIpm21H4bxnXG+vwRHEP/4RAA7rM7owhkQRvO
+ ep8VR/QC+hfnKeAXtP5tjyV9K2Az0YtK7KZFXLsKxuKnoQup6aLHLIbClvMIdDUJ0CpMAQnG3WM
+ EdlekpDJco5XdIfkwzFvaVYOlIg0i55Q8nH/IWgpu/m7TOV3mArmDJiwT/lYO0LFPpd3j9I4bWr
+ mPpX4yZhtDzwBMBtH7w==
+X-Google-Smtp-Source: AGHT+IFGLs17wWhzbrADF0gx+te7PK5oSdeX4EZPbrbDfVzTCnFOVVvk4fDiF/jH+sdrvzUTsC9IJQ==
+X-Received: by 2002:a05:600c:4f12:b0:43d:300f:fa51 with SMTP id
+ 5b1f17b1804b1-4406ab950admr138241675e9.9.1745393929515; 
+ Wed, 23 Apr 2025 00:38:49 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:2835:c2f4:c226:77dd?
  ([2a01:e0a:3d9:2080:2835:c2f4:c226:77dd])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-44092d2d558sm15438265e9.17.2025.04.23.00.31.25
+ 5b1f17b1804b1-4408d0a7802sm26922435e9.1.2025.04.23.00.38.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Apr 2025 00:31:25 -0700 (PDT)
-Message-ID: <e3911465-412b-4149-a6c8-9441462c8a17@linaro.org>
-Date: Wed, 23 Apr 2025 09:31:25 +0200
+ Wed, 23 Apr 2025 00:38:49 -0700 (PDT)
+Message-ID: <359a5f7c-4c65-4813-be8e-97e12c7786ae@linaro.org>
+Date: Wed, 23 Apr 2025 09:38:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v3] watchdog: qcom: introduce qcom-wdt driver
-To: Sumit Garg <sumit.garg@kernel.org>, Paul Sajna <hello@paulsajna.com>
-Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
- Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
- u-boot-qcom@groups.io, Sam Day <me@samcday.com>
-References: <20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com>
- <aAiQfnEwgwBQbznn@sumit-X1>
+Subject: Re: [PATCH RFT v2 1/3] fastboot: blk: introduce fastboot block
+ flashing support
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Dmitrii Merkurev <dimorinny@google.com>
+Cc: u-boot@lists.denx.de
+References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
+ <20250409-topic-fastboot-blk-v2-1-c676f21d414f@linaro.org>
+ <877c3cgwsf.fsf@kernel.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -110,7 +113,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <aAiQfnEwgwBQbznn@sumit-X1>
+In-Reply-To: <877c3cgwsf.fsf@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,231 +133,640 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23/04/2025 09:02, Sumit Garg wrote:
-> On Wed, Apr 23, 2025 at 02:19:39AM +0000, Paul Sajna wrote:
->> From: Casey Connolly <casey.connolly@linaro.org>
+Hi,
+
+On 22/04/2025 15:17, Mattijs Korpershoek wrote:
+> Hi Neil,
+> 
+> Thank you for the patch.
+
+Thx for the review
+
+> 
+> On mer., avril 09, 2025 at 09:58, neil.armstrong@linaro.org wrote:
+> 
+>> From: Dmitrii Merkurev <dimorinny@google.com>
 >>
->> Some Qualcomm device vendors decide to turn the watchdog on in the
->> bootloader, resulting in the device being reset if it isn't petted every
->> ~30 seconds. Introduce a driver to keep the watchdog happy and prevent this
->> annoying behaviour.
+>> Introduce fastboot block flashing functions and helpers
+>> to be shared with the MMC implementation.
 >>
->> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->> Signed-off-by: Paul Sajna <hello@paulsajna.com>
->> Co-authored-by: Paul Sajna <hello@paulsajna.com>
->> Tested-by: Paul Sajna <hello@paulsajna.com>
+>> The write logic comes from the mmc implementation, while
+>> the partition lookup is much simpler and could be extended.
+>>
+>> For the erase logic, allmost no block drivers exposes the
+>> erase operation, except mmc & virtio, so in order to allow
+>> erasiong any partition a soft-erase logic has been added
+>> to write zero-ed buffers in a loop.
+>>
+>> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 >> ---
->> This patch introduces a simple watchdog driver for Qualcomm devices.
+>>   drivers/fastboot/Kconfig    |  20 ++-
+>>   drivers/fastboot/Makefile   |   4 +-
+>>   drivers/fastboot/fb_block.c | 313 ++++++++++++++++++++++++++++++++++++++++++++
+>>   include/fb_block.h          | 104 +++++++++++++++
+>>   4 files changed, 438 insertions(+), 3 deletions(-)
 >>
->> Some devices, including one I have been spending a lot of time with,
->> the LG G7 ThinQ (codename judyln, arch sdm845) will reset within 30
->> seconds if the watchdog is not serviced.
->>
->> I have tested this patch from Casey Connolly that is over a year old and has
->> not yet been upstreamed, and it is very useful to me. I can hardly use
->> u-boot on this device without it. I have received Casey's permission to
->> work on upstreaming this patch.
->>
->> This is my first contribution to U-Boot, and I am unfamiliar with
->> mailing list workflows, so please be patient :)
->> ---
->> Changes in v3:
->> - Squash commit 1 and 2
->> - remove duplicated line of code
->> - Link to v2: https://lore.kernel.org/r/20250421-b4-qcom-wdt-v2-0-b2250efa0f39@paulsajna.com
->>
->> Changes in v2:
->> - Add watchdog start
->> - Add watchdog reset
->> - Remove stop from the probe function
->> - Use dev_err instead of printf
->> - Update Casey's name
->> - Add myself as an author
->> -
->> - Link to v1: https://lore.kernel.org/r/20250413-b4-qcom-wdt-v1-1-db42cb93dff8@paulsajna.com
->> ---
->>   configs/qcom_defconfig      |   2 +
->>   drivers/watchdog/Kconfig    |   7 +++
->>   drivers/watchdog/Makefile   |   1 +
->>   drivers/watchdog/qcom-wdt.c | 117 ++++++++++++++++++++++++++++++++++++++++++++
->>   4 files changed, 127 insertions(+)
->>
-> 
-> Looks reasonable to me, FWIW:
-> 
-> Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> 
-> -Sumit
-> 
->> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
->> index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..0232f6d51c552bd06c8ba72b71edb5cb72fe0706 100644
->> --- a/configs/qcom_defconfig
->> +++ b/configs/qcom_defconfig
->> @@ -144,3 +144,5 @@ CONFIG_VIDEO_FONT_16X32=y
->>   CONFIG_SYS_WHITE_ON_BLACK=y
->>   CONFIG_NO_FB_CLEAR=y
->>   CONFIG_VIDEO_SIMPLE=y
->> +CONFIG_WDT_QCOM=y
->> +CONFIG_WDT=y
->> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
->> index 1bb67f5035231df9f6ce01adb08d074855393143..808f4e578e28e7812f93b393a7f7d95d9501cdd4 100644
->> --- a/drivers/watchdog/Kconfig
->> +++ b/drivers/watchdog/Kconfig
->> @@ -335,6 +335,13 @@ config WDT_K3_RTI_FW_FILE
+>> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+>> index 1eb460f5a02a87089d85b252375202d9acaec9fa..76b35d8419e02a7f1d36988fbdac190b10bff35e 100644
+>> --- a/drivers/fastboot/Kconfig
+>> +++ b/drivers/fastboot/Kconfig
+>> @@ -92,7 +92,7 @@ config FASTBOOT_USB_DEV
+>>   config FASTBOOT_FLASH
+>>   	bool "Enable FASTBOOT FLASH command"
+>>   	default y if ARCH_SUNXI || ARCH_ROCKCHIP
+>> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
+>> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
+>>   	select IMAGE_SPARSE
+>>   	help
+>>   	  The fastboot protocol includes a "flash" command for writing
+>> @@ -114,12 +114,16 @@ choice
 >>   
->>   endif
+>>   config FASTBOOT_FLASH_MMC
+>>   	bool "FASTBOOT on MMC"
+>> -	depends on MMC
+>> +	depends on MMC && BLK
 >>   
->> +config WDT_QCOM
->> +	bool "Qualcomm watchdog timer support"
->> +	depends on WDT && ARCH_SNAPDRAGON
->> +	help
->> +	  Select this to enable Qualcomm watchdog timer, which can be found on
->> +	  some Qualcomm chips.
+>>   config FASTBOOT_FLASH_NAND
+>>   	bool "FASTBOOT on NAND"
+>>   	depends on MTD_RAW_NAND && CMD_MTDPARTS
+>>   
+>> +config FASTBOOT_FLASH_BLOCK
+>> +	bool "FASTBOOT on block device"
+>> +	depends on BLK
 >> +
->>   config WDT_SANDBOX
->>   	bool "Enable Watchdog Timer support for Sandbox"
->>   	depends on SANDBOX && WDT
->> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
->> index e6bd4c587af6133c405dde6dbada8050debc781c..5eaabd4aba58c815de4165f901aecfba0e0da255 100644
->> --- a/drivers/watchdog/Makefile
->> +++ b/drivers/watchdog/Makefile
->> @@ -54,3 +54,4 @@ obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
->>   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
->>   obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
->>   obj-$(CONFIG_WDT_ADI) += adi_wdt.o
->> +obj-$(CONFIG_WDT_QCOM) += qcom-wdt.o
->> diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
+>>   endchoice
+>>   
+>>   config FASTBOOT_FLASH_MMC_DEV
+>> @@ -194,6 +198,18 @@ config FASTBOOT_MMC_USER_NAME
+>>   	  defined here.
+>>   	  The default target name for erasing EMMC_USER is "mmc0".
+>>   
+>> +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
+>> +	string "Define FASTBOOT block interface name"
+>> +	depends on FASTBOOT_FLASH_BLOCK
+>> +	help
+>> +	  "Fastboot block interface name (mmc, virtio, etc)"
+> 
+> Maybe use another example in the help mmc. for MMC, we have FASTBOOT_FLASH_MMC.
+> FASTBOOT_FLASH_MMC has more features than FASTBOOT_FLASH_BLOCK_INTERFACE="mmc".
+> 
+> For example, boot partition labels.
+> 
+> When using this diff:
+> 
+> diff --git a/configs/khadas-vim3_android_defconfig b/configs/khadas-vim3_android_defconfig
+> index b77a44ce859b..bfe4db90963c 100644
+> --- a/configs/khadas-vim3_android_defconfig
+> +++ b/configs/khadas-vim3_android_defconfig
+> @@ -65,8 +65,9 @@ CONFIG_BUTTON_ADC=y
+>   CONFIG_USB_FUNCTION_FASTBOOT=y
+>   CONFIG_FASTBOOT_BUF_ADDR=0x6000000
+>   CONFIG_FASTBOOT_FLASH=y
+> -CONFIG_FASTBOOT_FLASH_MMC_DEV=2
+> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+> +CONFIG_FASTBOOT_FLASH_BLOCK=y
+> +CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="mmc"
+> +CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=2
+>   CONFIG_DM_I2C=y
+>   CONFIG_SYS_I2C_MESON=y
+>   CONFIG_MMC_MESON_GX=y
+> 
+> We cannot flash the "bootloader" partition:
+> $ fastboot flash bootloader u-boot_kvim3_noab.bin
+> Warning: skip copying bootloader image avb footer (bootloader partition size: 0, bootloader image size: 1285488).
+> Sending 'bootloader' (1255 KB)                     OKAY [  0.054s]
+> Writing 'bootloader'                               FAILED (remote: 'failed to get partition info')
+> fastboot: error: Command failed
+> 
+> If we do want to merge both (at some later time) the above should be supported.
+
+Right, I don't think we want to merge them, and boot partitions are an MMC specific feature,
+I don't think any other storages has those specific hardware boot partitions.
+
+In any case, we can still just name the boot partition "bootloader" and raw flash it.
+
+> 
+>> +
+>> +config FASTBOOT_FLASH_BLOCK_DEVICE_ID
+>> +	int "Define FASTBOOT block device id"
+>> +	depends on FASTBOOT_FLASH_BLOCK
+>> +	help
+>> +	  "Fastboot block device id"
+> 
+> This is similar as CONFIG_FASTBOOT_FLASH_MMC_DEV, no?
+
+No, the MMC one makes the mmc type implicit, while the block one
+can target any block device (and mmc)
+
+> 
+> To me, it's confusing to have similar KConfig entries based on interface
+> type.
+> 
+> If we really want to do it this way, then we should add a safeguard in
+> the code: test if FASTBOOT_FLASH_BLOCK_INTERFACE_NAME is "mmc" and if so, add a
+> warning to recommend using FASTBOOT_FLASH_MMC instead.
+> 
+> What's your opinion on this?
+
+Perhaps, not sure it's really problematic
+
+> 
+>> +
+>>   config FASTBOOT_GPT_NAME
+>>   	string "Target name for updating GPT"
+>>   	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
+>> diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
+>> index 048af5aa823436956142a536c5f7dcf1a8948726..91e98763e8eab84ccd9b8e5354ff1419f61ef372 100644
+>> --- a/drivers/fastboot/Makefile
+>> +++ b/drivers/fastboot/Makefile
+>> @@ -3,5 +3,7 @@
+>>   obj-y += fb_common.o
+>>   obj-y += fb_getvar.o
+>>   obj-y += fb_command.o
+>> -obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
+>> +obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
+>> +# MMC reuses block implementation
+>> +obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
+>>   obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
+>> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
 >> new file mode 100644
->> index 0000000000000000000000000000000000000000..3601ba93774730f78574b2fd74b8c513e7ce22e1
+>> index 0000000000000000000000000000000000000000..e79429a9732c1da1ce88358747cf1cb9419cd12b
 >> --- /dev/null
->> +++ b/drivers/watchdog/qcom-wdt.c
->> @@ -0,0 +1,117 @@
->> +// SPDX-License-Identifier: GPL-2.0+
+>> +++ b/drivers/fastboot/fb_block.c
+>> @@ -0,0 +1,313 @@
+>> +// SPDX-License-Identifier: BSD-2-Clause
+> 
+> Should this be GPL?
+
+Very good qustion, I'm not the copyright holder, the original author is Dmitrii, not sure about
+the legal things here.
+
+Tom can you help ?
+
+> 
+> See:
+> https://docs.u-boot.org/en/latest/develop/sending_patches.html#notes
+> 
 >> +/*
->> + * Copyright (c) 2014, The Linux Foundation. All rights reserved.
->> + * Copyright (c) Linaro Ltd. 2024
->> + *
->> + * Authors:
->> + *   Casey Connolly <casey.connolly@linaro.org>
->> + *   Paul Sajna <hello@paulsajna.com>
->> + *
->> + * Derived from linux/drivers/watchdog/qcom-wdt.c
+>> + * Copyright (C) 2024 The Android Open Source Project
 >> + */
 >> +
->> +#include <dm.h>
->> +#include <dm/device_compat.h>
->> +#include <wdt.h>
+>> +#include <blk.h>
+>> +#include <div64.h>
+>> +#include <fastboot-internal.h>
+>> +#include <fastboot.h>
+>> +#include <fb_block.h>
+>> +#include <image-sparse.h>
+>> +#include <part.h>
+>> +#include <malloc.h>
 >> +
->> +#include <asm/io.h>
+>> +/**
+>> + * FASTBOOT_MAX_BLOCKS_ERASE - maximum blocks to erase per derase call
+>> + *
+>> + * in the ERASE case we can have much larger buffer size since
+>> + * we're not transferring an actual buffer
+>> + */
+>> +#define FASTBOOT_MAX_BLOCKS_ERASE 1048576
+>> +/**
+>> + * FASTBOOT_MAX_BLOCKS_SOFT_ERASE - maximum blocks to software erase at once
+>> + */
+>> +#define FASTBOOT_MAX_BLOCKS_SOFT_ERASE 4096
+>> +/**
+>> + * FASTBOOT_MAX_BLOCKS_WRITE - maximum blocks to write per dwrite call
+>> + */
+>> +#define FASTBOOT_MAX_BLOCKS_WRITE 65536
 >> +
->> +enum wdt_reg {
->> +	WDT_RST,
->> +	WDT_EN,
->> +	WDT_STS,
->> +	WDT_BARK_TIME,
->> +	WDT_BITE_TIME,
+>> +struct fb_block_sparse {
+>> +	struct blk_desc	*dev_desc;
 >> +};
 >> +
->> +struct qcom_wdt_match_data {
->> +	const u32 *offset;
->> +};
->> +
->> +struct qcom_wdt {
->> +	void __iomem *base;
->> +	const u32 *layout;
->> +};
->> +
->> +static const u32 reg_offset_data_kpss[] = {
->> +	[WDT_RST] = 0x4,
->> +	[WDT_EN] = 0x8,
->> +	[WDT_STS] = 0xC,
->> +	[WDT_BARK_TIME] = 0x10,
->> +	[WDT_BITE_TIME] = 0x14,
->> +};
->> +
->> +static const struct qcom_wdt_match_data match_data_kpss = {
->> +	.offset = reg_offset_data_kpss,
->> +};
->> +
->> +static void __iomem *wdt_addr(struct qcom_wdt *wdt, enum wdt_reg reg)
+>> +static lbaint_t fb_block_write(struct blk_desc *block_dev, lbaint_t start,
+>> +			       lbaint_t blkcnt, const void *buffer)
 >> +{
->> +	return wdt->base + wdt->layout[reg];
->> +}
+>> +	lbaint_t blk = start;
+>> +	lbaint_t blks_written = 0;
+>> +	lbaint_t cur_blkcnt = 0;
+>> +	lbaint_t blks = 0;
+>> +	void *erase_buf = NULL;
+>> +	int erase_buf_blks = 0;
+>> +	int step = buffer ? FASTBOOT_MAX_BLOCKS_WRITE : FASTBOOT_MAX_BLOCKS_ERASE;
+>> +	int i;
 >> +
->> +int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
->> +{
->> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+>> +	for (i = 0; i < blkcnt; i += step) {
+>> +		cur_blkcnt = min((int)blkcnt - i, step);
+>> +		if (buffer) {
+>> +			if (fastboot_progress_callback)
+>> +				fastboot_progress_callback("writing");
+>> +			blks_written = blk_dwrite(block_dev, blk, cur_blkcnt,
+>> +						  buffer + (i * block_dev->blksz));
+>> +		} else {
+>> +			if (fastboot_progress_callback)
+>> +				fastboot_progress_callback("erasing");
 >> +
->> +	writel(0, wdt_addr(wdt, WDT_EN));
->> +	writel(1, wdt_addr(wdt, WDT_RST));
->> +	writel(1, wdt_addr(wdt, WDT_EN));
->> +	if (readl(wdt_addr(wdt, WDT_EN)) != 1) {
->> +		dev_err(dev, "Failed to enable Qualcomm watchdog!\n");
->> +		return -EIO;
->> +	}
->> +	return 0;
->> +}
+>> +			if (!erase_buf) {
+>> +				blks_written = blk_derase(block_dev, blk, cur_blkcnt);
 >> +
->> +int qcom_wdt_stop(struct udevice *dev)
->> +{
->> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+>> +				/* Allocate erase buffer if erase is not implemented */
+>> +				if ((long)blks_written == -ENOSYS) {
+>> +					erase_buf_blks = min_t(long, blkcnt,
+>> +							       FASTBOOT_MAX_BLOCKS_SOFT_ERASE);
+>> +					erase_buf = malloc(erase_buf_blks * block_dev->blksz);
+>> +					memset(erase_buf, 0, erase_buf_blks * block_dev->blksz);
 >> +
->> +	writel(0, wdt_addr(wdt, WDT_EN));
->> +	if (readl(wdt_addr(wdt, WDT_EN))) {
->> +		dev_err(dev, "Failed to disable Qualcomm watchdog!\n");
->> +		return -EIO;
->> +	}
+>> +					printf("Slowly writing empty buffers due to missing erase operation\n");
+>> +				}
+>> +			}
 >> +
->> +	return 0;
->> +}
+>> +			/* Write 0s instead of using erase operation, inefficient but functional */
+>> +			if (erase_buf) {
+>> +				int j;
 >> +
->> +int qcom_wdt_reset(struct udevice *dev)
->> +{
->> +	struct qcom_wdt *wdt = dev_get_priv(dev);
+>> +				blks_written = 0;
+>> +				for (j = 0; j < cur_blkcnt; j += erase_buf_blks) {
+>> +					lbaint_t remain = min_t(lbaint_t, cur_blkcnt - j,
+>> +								erase_buf_blks);
 >> +
->> +	writel(1, wdt_addr(wdt, WDT_RST));
->> +	return 0;
->> +}
->> +
->> +static int qcom_wdt_probe(struct udevice *dev)
->> +{
->> +	struct qcom_wdt *wdt = dev_get_priv(dev);
->> +	struct qcom_wdt_match_data *data = (void *)dev_get_driver_data(dev);
->> +
->> +	wdt->base = dev_read_addr_ptr(dev);
->> +	wdt->layout = data->offset;
->> +
->> +	return 0;
->> +}
->> +
->> +static const struct wdt_ops qcom_wdt_ops = {
->> +	.start = qcom_wdt_start,
->> +	.stop = qcom_wdt_stop,
->> +	.reset = qcom_wdt_reset,
->> +};
->> +
->> +static const struct udevice_id qcom_wdt_ids[] = {
->> +	{ .compatible = "qcom,kpss-wdt", .data = (ulong)&match_data_kpss },
->> +	{}
->> +};
->> +
->> +U_BOOT_DRIVER(qcom_wdt) = {
->> +	.name = "qcom_wdt",
->> +	.id = UCLASS_WDT,
->> +	.of_match = qcom_wdt_ids,
->> +	.ops = &qcom_wdt_ops,
->> +	.probe = qcom_wdt_probe,
->> +	.priv_auto = sizeof(struct qcom_wdt),
->> +};
->>
->> ---
->> base-commit: 0eebdd17888005751cd77cf3794c5292d36f481a
->> change-id: 20250413-b4-qcom-wdt-e7b913fc375e
->>
->> Best regards,
->> -- 
->> Paul Sajna <hello@paulsajna.com>
->>
->>
+>> +					blks_written += blk_dwrite(block_dev, blk + j,
+>> +								   remain, erase_buf);
+>> +					printf(".");
+> 
+> Can we move soft erase to a separate function? Here we already handle
+> normal block write and normal block erase. Having software erase as well
+> makes the function a bit too long/nested in my opinion.
+> 
+> I't also avoid writing things like:
+> 
+>      blks_written = blk_derase(block_dev, blk, cur_blkcnt);
+> 
+> Where blks_written actually means "amount of blocks that were erased".
+> 
+> Or maybe split write/erase to make each function do only one thing.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Sure, I'll move it to a separate function
+
+> 
+>> +				}
+>> +			}
+>> +		}
+>> +		blk += blks_written;
+>> +		blks += blks_written;
+>> +	}
+>> +
+>> +	if (erase_buf)
+>> +		free(erase_buf);
+>> +
+>> +	return blks;
+>> +}
+>> +
+>> +static lbaint_t fb_block_sparse_write(struct sparse_storage *info,
+>> +				      lbaint_t blk, lbaint_t blkcnt,
+>> +				      const void *buffer)
+>> +{
+>> +	struct fb_block_sparse *sparse = info->priv;
+>> +	struct blk_desc *dev_desc = sparse->dev_desc;
+>> +
+>> +	return fb_block_write(dev_desc, blk, blkcnt, buffer);
+>> +}
+>> +
+>> +static lbaint_t fb_block_sparse_reserve(struct sparse_storage *info,
+>> +					lbaint_t blk, lbaint_t blkcnt)
+>> +{
+>> +	return blkcnt;
+>> +}
+>> +
+>> +int fastboot_block_get_part_info(const char *part_name,
+>> +				 struct blk_desc **dev_desc,
+>> +				 struct disk_partition *part_info,
+>> +				 char *response)
+>> +{
+>> +	int ret;
+>> +	const char *interface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+>> +						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
+>> +						   NULL);
+>> +	const int device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+>> +					      CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
+>> +
+>> +	if (!part_name || !strcmp(part_name, "")) {
+>> +		fastboot_fail("partition not given", response);
+>> +		return -ENOENT;
+>> +	}
+>> +	if (!interface || !strcmp(interface, "")) {
+>> +		fastboot_fail("block interface isn't provided", response);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	*dev_desc = blk_get_dev(interface, device);
+>> +	if (!dev_desc) {
+>> +		fastboot_fail("no such device", response);
+>> +		return -ENODEV;
+>> +	}
+>> +
+>> +	ret = part_get_info_by_name(*dev_desc, part_name, part_info);
+>> +	if (ret < 0)
+>> +		fastboot_fail("failed to get partition info", response);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +void fastboot_block_raw_erase_disk(struct blk_desc *dev_desc, const char *disk_name,
+>> +				   char *response)
+>> +{
+>> +	lbaint_t written;
+>> +
+>> +	debug("Start Erasing %s...\n", disk_name);
+>> +
+>> +	written = fb_block_write(dev_desc, 0, dev_desc->lba, NULL);
+>> +	if (written != dev_desc->lba) {
+>> +		pr_err("Failed to erase %s\n", disk_name);
+>> +		fastboot_response("FAIL", response, "Failed to erase %s", disk_name);
+>> +		return;
+>> +	}
+>> +
+>> +	printf("........ erased " LBAFU " bytes from '%s'\n",
+>> +	       dev_desc->lba * dev_desc->blksz, disk_name);
+>> +	fastboot_okay(NULL, response);
+>> +}
+>> +
+>> +void fastboot_block_raw_erase(struct blk_desc *dev_desc, struct disk_partition *info,
+>> +			      const char *part_name, uint alignment, char *response)
+>> +{
+>> +	lbaint_t written, blks_start, blks_size;
+>> +
+>> +	if (alignment) {
+>> +		blks_start = (info->start + alignment - 1) & ~(alignment - 1);
+>> +		if (info->size >= alignment)
+>> +			blks_size = (info->size - (blks_start - info->start)) &
+>> +				(~(alignment - 1));
+>> +		else
+>> +			blks_size = 0;
+>> +
+>> +		printf("Erasing blocks " LBAFU " to " LBAFU " due to alignment\n",
+>> +		       blks_start, blks_start + blks_size);
+>> +	} else {
+>> +		blks_start = info->start;
+>> +		blks_size = info->size;
+>> +	}
+>> +
+>> +	written = fb_block_write(dev_desc, blks_start, blks_size, NULL);
+>> +	if (written != blks_size) {
+>> +		fastboot_fail("failed to erase partition", response);
+>> +		return;
+>> +	}
+>> +
+>> +	printf("........ erased " LBAFU " bytes from '%s'\n",
+>> +	       blks_size * info->blksz, part_name);
+>> +	fastboot_okay(NULL, response);
+>> +}
+>> +
+>> +void fastboot_block_erase(const char *part_name, char *response)
+>> +{
+>> +	struct blk_desc *dev_desc;
+>> +	struct disk_partition part_info;
+>> +
+>> +	if (fastboot_block_get_part_info(part_name, &dev_desc, &part_info, response) < 0)
+>> +		return;
+>> +
+>> +	fastboot_block_raw_erase(dev_desc, &part_info, part_name, 0, response);
+>> +}
+>> +
+>> +void fastboot_block_write_raw_disk(struct blk_desc *dev_desc, const char *disk_name,
+>> +				   void *buffer, u32 download_bytes, char *response)
+>> +{
+>> +	lbaint_t blkcnt;
+>> +	lbaint_t blks;
+>> +
+>> +	/* determine number of blocks to write */
+>> +	blkcnt = ((download_bytes + (dev_desc->blksz - 1)) & ~(dev_desc->blksz - 1));
+>> +	blkcnt = lldiv(blkcnt, dev_desc->blksz);
+>> +
+>> +	if (blkcnt > dev_desc->lba) {
+>> +		pr_err("too large for disk: '%s'\n", disk_name);
+>> +		fastboot_fail("too large for disk", response);
+>> +		return;
+>> +	}
+>> +
+>> +	puts("Flashing Raw Image\n");
+> 
+> Can't we use printf() here for consistency in the code?
+
+Ack
+
+> 
+>> +
+>> +	blks = fb_block_write(dev_desc, 0, blkcnt, buffer);
+>> +
+>> +	if (blks != blkcnt) {
+>> +		pr_err("failed writing to %s\n", disk_name);
+>> +		fastboot_fail("failed writing to device", response);
+>> +		return;
+>> +	}
+>> +
+>> +	printf("........ wrote " LBAFU " bytes to '%s'\n", blkcnt * dev_desc->blksz,
+>> +	       disk_name);
+>> +	fastboot_okay(NULL, response);
+>> +}
+>> +
+>> +void fastboot_block_write_raw_image(struct blk_desc *dev_desc,
+>> +				    struct disk_partition *info, const char *part_name,
+>> +				    void *buffer, u32 download_bytes, char *response)
+>> +{
+>> +	lbaint_t blkcnt;
+>> +	lbaint_t blks;
+>> +
+>> +	/* determine number of blocks to write */
+>> +	blkcnt = ((download_bytes + (info->blksz - 1)) & ~(info->blksz - 1));
+>> +	blkcnt = lldiv(blkcnt, info->blksz);
+>> +
+>> +	if (blkcnt > info->size) {
+>> +		pr_err("too large for partition: '%s'\n", part_name);
+>> +		fastboot_fail("too large for partition", response);
+>> +		return;
+>> +	}
+>> +
+>> +	puts("Flashing Raw Image\n");
+> 
+> Can't we use printf() here for consistency in the code?
+> 
+>> +
+>> +	blks = fb_block_write(dev_desc, info->start, blkcnt, buffer);
+>> +
+>> +	if (blks != blkcnt) {
+>> +		pr_err("failed writing to device %d\n", dev_desc->devnum);
+>> +		fastboot_fail("failed writing to device", response);
+>> +		return;
+>> +	}
+>> +
+>> +	printf("........ wrote " LBAFU " bytes to '%s'\n", blkcnt * info->blksz,
+>> +	       part_name);
+>> +	fastboot_okay(NULL, response);
+>> +}
+>> +
+>> +void fastboot_block_write_sparse_image(struct blk_desc *dev_desc, struct disk_partition *info,
+>> +				       const char *part_name, void *buffer, char *response)
+>> +{
+>> +	struct fb_block_sparse sparse_priv;
+>> +	struct sparse_storage sparse;
+>> +	int err;
+>> +
+>> +	sparse_priv.dev_desc = dev_desc;
+>> +
+>> +	sparse.blksz = info->blksz;
+>> +	sparse.start = info->start;
+>> +	sparse.size = info->size;
+>> +	sparse.write = fb_block_sparse_write;
+>> +	sparse.reserve = fb_block_sparse_reserve;
+>> +	sparse.mssg = fastboot_fail;
+>> +
+>> +	printf("Flashing sparse image at offset " LBAFU "\n",
+>> +	       sparse.start);
+>> +
+>> +	sparse.priv = &sparse_priv;
+>> +	err = write_sparse_image(&sparse, part_name, buffer,
+>> +				 response);
+>> +	if (!err)
+>> +		fastboot_okay(NULL, response);
+>> +}
+>> +
+>> +void fastboot_block_flash_write(const char *part_name, void *download_buffer,
+>> +				u32 download_bytes, char *response)
+>> +{
+>> +	struct blk_desc *dev_desc;
+>> +	struct disk_partition part_info;
+>> +
+>> +	if (fastboot_block_get_part_info(part_name, &dev_desc, &part_info, response) < 0)
+>> +		return;
+>> +
+>> +	if (is_sparse_image(download_buffer)) {
+>> +		fastboot_block_write_sparse_image(dev_desc, &part_info, part_name,
+>> +						  download_buffer, response);
+>> +	} else {
+>> +		fastboot_block_write_raw_image(dev_desc, &part_info, part_name,
+>> +					       download_buffer, download_bytes, response);
+>> +	}
+>> +}
+>> diff --git a/include/fb_block.h b/include/fb_block.h
+>> new file mode 100644
+>> index 0000000000000000000000000000000000000000..cfc824214acb515a0cc2f13fd786c606c6141489
+>> --- /dev/null
+>> +++ b/include/fb_block.h
+>> @@ -0,0 +1,104 @@
+>> +/* SPDX-License-Identifier: BSD-2-Clause */
+> 
+> Same here for the licence.
+> 
+> 
+>> +/*
+>> + * Copyright (C) 2024 The Android Open Source Project
+>> + */
+>> +
+>> +#ifndef _FB_BLOCK_H_
+>> +#define _FB_BLOCK_H_
+>> +
+>> +struct blk_desc;
+>> +struct disk_partition;
+>> +
+>> +/**
+>> + * fastboot_block_get_part_info() - Lookup block partition by name
+>> + *
+>> + * @part_name: Named partition to lookup
+>> + * @dev_desc: Pointer to returned blk_desc pointer
+>> + * @part_info: Pointer to returned struct disk_partition
+>> + * @response: Pointer to fastboot response buffer
+> 
+> The doc is missing a Return: section where we specify the return code.
+
+
+Ack
+
+> 
+>> + */
+>> +int fastboot_block_get_part_info(const char *part_name,
+>> +				 struct blk_desc **dev_desc,
+>> +				 struct disk_partition *part_info,
+>> +				 char *response);
+>> +
+>> +/**
+>> + * fastboot_block_raw_erase() - Erase raw block device partition
+>> + *
+>> + * @dev_desc: Block device we're going write to
+>> + * @info: Partition we're going write to
+>> + * @part_name: Name of partition we're going write to
+>> + * @alignment: erase start and size alignment, specify 0 to ignore
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_block_raw_erase(struct blk_desc *dev_desc, struct disk_partition *info,
+>> +			      const char *part_name, uint alignment, char *response);
+>> +
+>> +/**
+>> + * fastboot_block_raw_erase_disk() - Erase raw block device
+>> + *
+>> + * @dev_desc: Block device we're going write to
+>> + * @disk_name: Name of disk we're going write to
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_block_raw_erase_disk(struct blk_desc *dev_desc, const char *disk_name,
+>> +				   char *response);
+>> +
+>> +/**
+>> + * fastboot_block_erase() - Erase partition on block device for fastboot
+>> + *
+>> + * @part_name: Named partition to erase
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_block_erase(const char *part_name, char *response);
+>> +
+>> +/**
+>> + * fastboot_block_write_raw_disk() - Write raw image to block device
+>> + *
+>> + * @dev_desc: Block device we're going write to
+>> + * @disk_name: Name of disk we're going write to
+>> + * @buffer: Downloaded buffer pointer
+>> + * @download_bytes: Size of content on downloaded buffer pointer
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_block_write_raw_disk(struct blk_desc *dev_desc, const char *disk_name,
+>> +				   void *buffer, u32 download_bytes, char *response);
+>> +
+>> +/**
+>> + * fastboot_block_write_raw_image() - Write raw image to block device partition
+>> + *
+>> + * @dev_desc: Block device we're going write to
+>> + * @info: Partition we're going write to
+>> + * @part_name: Name of partition we're going write to
+>> + * @buffer: Downloaded buffer pointer
+>> + * @download_bytes: Size of content on downloaded buffer pointer
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_block_write_raw_image(struct blk_desc *dev_desc,
+>> +				    struct disk_partition *info, const char *part_name,
+>> +				    void *buffer, u32 download_bytes, char *response);
+>> +
+>> +/**
+>> + * fastboot_block_write_sparse_image() - Write sparse image to block device partition
+>> + *
+>> + * @dev_desc: Block device we're going write to
+>> + * @info: Partition we're going write to
+>> + * @part_name: Name of partition we're going write to
+>> + * @buffer: Downloaded buffer pointer
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_block_write_sparse_image(struct blk_desc *dev_desc, struct disk_partition *info,
+>> +				       const char *part_name, void *buffer, char *response);
+>> +
+>> +/**
+>> + * fastboot_block_flash_write() - Write image to block device for fastboot
+>> + *
+>> + * @part_name: Named partition to write image to
+>> + * @download_buffer: Pointer to image data
+>> + * @download_bytes: Size of image data
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_block_flash_write(const char *part_name, void *download_buffer,
+>> +				u32 download_bytes, char *response);
+>> +
+>> +#endif // _FB_BLOCK_H_
+>>
+>> -- 
+>> 2.34.1
+
