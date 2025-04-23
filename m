@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79FDBC369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 08:43:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA264C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 08:58:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D483581D5D;
-	Wed, 23 Apr 2025 10:43:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 30F5480F9C;
+	Wed, 23 Apr 2025 10:58:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gTE+xPlv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fXsutyWw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BFC08144A; Wed, 23 Apr 2025 10:43:03 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 1DFAB80FA8; Wed, 23 Apr 2025 10:58:08 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61FC280EE5
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 10:43:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8DED80EE5
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 10:58:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sbellary@baylibre.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2254e0b4b79so93865215ad.2
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 01:43:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43cf06eabdaso58723095e9.2
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 01:58:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1745397779; x=1746002579;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1745398685; x=1746003485; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=08hGVKvJljLPuQk7wEdoyKrFGTlDytmnWY6SeLup23w=;
- b=gTE+xPlv9U0S99iVnZD+qUiqxiTf7zxhgOjAlfbRDGFMjEV/SGVX3JeahflJYSEWbq
- 69s78V1RgaJ4IGw7xFAWJIdC/fvl08Me0La07Zgv1IL93HaIhm7GaoptMFMKs8KCs/+K
- pUJvkWJnx0kku5bnj1YW7KSnA0S3/LUqUQKXGdFVGbkeKwRc9NpQnmtA7G0MZxBQicV0
- jXAHancUwfnl0mGVOD0fmOeynKXeShjH24Q22nvnp6vZxWbdnabtSl3vieQRRV7bvuRv
- psPvdU41xNmiu9FZJpc3fIhBfHk0t8D+qHHYve+YgiCvvGv0Lpj7RbgEESbHGeRCDLyi
- UC6Q==
+ bh=fhLK6RRjeGJ0Y3JMB3VZh9HjJgoWOUJ4aTVRvBhg844=;
+ b=fXsutyWwqJuFyrK51N3700NHvNUC4WdNg3bEVA2GmMS0tuBoktj94/TKp3dFoSkDx5
+ l2PTGIdY0oVjapEa78d9D/BijnJmQ1goJmWY74PpT/xbd2g45vlTQAKsf9L9RhW7AUjf
+ 06tmddlq21L96eTheLLB1TqcEBk+k4lbgXlMQPpKVk7B2rDNnNXd1itXpGR2sYgR7sYM
+ HYAJUTMo1PSu0Rrj2rOjaFJFXXMGzLbmnSbIGclZGy8gQSH9N3FqErRR/nD6Ewih5SAh
+ T26Zb0y3RVJodlV+O7vmsjcmow0CrlhsxU2pgnkIYPwWwvFf73Yt6QtkRWZlwoDoSo+B
+ qrXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745397779; x=1746002579;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=08hGVKvJljLPuQk7wEdoyKrFGTlDytmnWY6SeLup23w=;
- b=O14L/a2oOZ4RrX1vn9SBs+BOV89SRrGF+DgYp8QdHmV44GIaKTdOV6O0e0Spm/k4bF
- 2Kb2zp682WbhXusyARflB0QZwkDpQn7xiC6GyvUgC5+5QjuWSoIIjYk3tBgSrT3Q1GAB
- 4TWHKZl4dNe/ZniHPtBo5n4m5b4SGxkvHqlUxyo8+kmEvW+cc8+TEDSWAxjVc4X2i2iH
- zwcDKKXNg8egyF+exXweFhdU4C81NEb2mYNec4gHtCZIjEn4TI36eHl6TXLx5WZhiRBe
- tu3D3Q7n+tonXV394yqDdeVdc0VoV+zXJVdwqQjm3fKGsrOjzpsJK2HxoZatItEv/V2C
- PRQw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWbFQ7l4do26RSJ90vMH94HKsBi4KQZVsmIoC6rHSyZuwx1kZ2Ev5C1aTnLzFj/XWM8kEYgEfg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGzrUZxpJTXqXbgDvvCbJv6lA/si863en79F/U3+8gT+2pSR8u
- VE/JLeka58BD0fsu92IVBREeakJ0NIXJaj3l5pwzE3btMtPSRL7lSlsugzWnarw=
-X-Gm-Gg: ASbGnctB9ccpXIrzBeaWSnODO/3mNNsAMqK5cOD22Fg+vClul7kcROxBq2v8mVNBREf
- bmfHDZhV4zIp6Xl0COdn76zdeNPW6as5t8E+oqSyeMPH2db4bcGH+oT2IXY47kH4daRNMGYxKHf
- XEIQJDCB1v9V/A9K3eeWEyiWJWwwwuWE6SJfQ/jpdZBOnpV6ZXwKyAOLarL6yXcUuU5CYvJ6Q/Q
- eQa5AbaQaVkugZp0aSVvXifpSzGImcZt4CmFrS+EM9H9N6fBofCjCAftdyQiwmuYj9B+V30Z2/C
- /gS9TrCHWzoN7rnghfB409lXjesine2njCrpvIDS8wjKaACGvXBp/tKNZWkTwwqMIZJFoEa3G9X
- 1wGw=
-X-Google-Smtp-Source: AGHT+IFL+w1e7G65fZYaHOjICKgj3aM3fEsfwNHTjnZ5f5cAsWFvtAnqzalvV0GSzolRUxW6ESWNnQ==
-X-Received: by 2002:a17:903:3d07:b0:223:668d:eba9 with SMTP id
- d9443c01a7336-22c53568411mr336445705ad.10.1745397778907; 
- Wed, 23 Apr 2025 01:42:58 -0700 (PDT)
-Received: from dev-linux.. (syn-076-088-115-008.res.spectrum.com.
- [76.88.115.8]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22c50bdae69sm98860085ad.1.2025.04.23.01.42.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 01:42:58 -0700 (PDT)
-From: Sukrut Bellary <sbellary@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Sukrut Bellary <sbellary@baylibre.com>,
- Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
- Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH 3/3] board: ti: am335x: Enable eCAP0 PWM and LCD pin muxing
-Date: Wed, 23 Apr 2025 01:42:49 -0700
-Message-Id: <20250423084249.197101-4-sbellary@baylibre.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250423084249.197101-1-sbellary@baylibre.com>
-References: <20250423084249.197101-1-sbellary@baylibre.com>
+ d=1e100.net; s=20230601; t=1745398685; x=1746003485;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=fhLK6RRjeGJ0Y3JMB3VZh9HjJgoWOUJ4aTVRvBhg844=;
+ b=BOXPfS9NvujwwU9I6Cc5bVvko6DyngGyO7eYX1lokOnyaPiAVfDdjXkGFYCkshNVZB
+ U0AtcM7vkx+tsaDV/iQVSWMPqmPSsIynzZYGAa0PSypbUbDZ48wlnfIlYLL36NtxJ5UF
+ WvAZ/4ov202X/4Dyw0fN0qF3bC8KcZ+bI8BBL26JPZZv+Yn3AuVoSVEN3GXsNiZbwnpB
+ YPstbaH2c0TntK8eyOMpYWr4verjglw+tBi+A0LUz1LMjxgINvynQfwcX/zF3rZtKcjE
+ T5DvoqqRbHu50jm7pX15dKqxrtVKGJpRbDFzdSFDM9KnTNDKL/YWnR4IJiLrl6M3hoNV
+ Oqxg==
+X-Gm-Message-State: AOJu0YzkHk2FneTh0YWhycSlHanhhlv/qWCzoda3waaiTuOKYobmN3eN
+ j77I4Y4ngeyHwXMEUFvqFAmddBLJk7J16xbJ+gt3VP33TjJi7gfGbJ10sSnxF9OCUbZP+IAUxvg
+ q3Nj29g==
+X-Gm-Gg: ASbGncu9AQtvbovUZRtyKzIdqPQFAWJWz6fHV4WRjljpuLUYMH3A1UeKgkvvYKgKLj7
+ N5wrPmhDnkpVO7Nm8jPRPoTaQDsQxPnSadCN7lRTMabgvzM9K+TWUhT/M6UzPfZzALGN4Sph9IP
+ lTcznpkCDwlLHpi+CFk6aAVnOsopBglv9xys61YSXxsD4lgUp3zX2SFFR6o0hhdZ5zEprVcS0w1
+ 6+XGEFXzXYvg8ymal9Iej0W6zrx4uqh9sBLjCWJMtPzSqMHT/QyZa+KYHA1U5slWYkDCWikVMwJ
+ KQuZzvZdHN0bZllxUvTnxyjU597Aum7KIKqMDtXUJ2wRJ4tVFBn79IEIEeIZTSvT9iRm5QJNVad
+ BXbVjePX/RTaoFPBfPQ==
+X-Google-Smtp-Source: AGHT+IFAELQA9/baUue0Ogah8yWipS9t8IpNXj+aon0Kdfx3ALeKy7rOnIwLuUZ2rjXifErb302K2g==
+X-Received: by 2002:a05:600c:4e4a:b0:43c:fffc:7855 with SMTP id
+ 5b1f17b1804b1-4406aba7c2fmr173080905e9.15.1745398685057; 
+ Wed, 23 Apr 2025 01:58:05 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:13dc:9cf9:ad6:a89e?
+ ([2a01:e0a:3cb:7bb0:13dc:9cf9:ad6:a89e])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-44092d16e60sm17976685e9.3.2025.04.23.01.58.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Apr 2025 01:58:04 -0700 (PDT)
+Message-ID: <cf77132e-2a29-4d9d-98a8-a7c5c65fee5e@linaro.org>
+Date: Wed, 23 Apr 2025 10:58:04 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Please pull net-20250423
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,88 +99,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On AM335x EVM[1],
-1. pin AM335X_ECAP0_IN_PWM0_OUT is used to enable the
-backlight. ECAP0 can be configured in single channel PWM mode.
-If CONFIG_PWM_TI_ECAP is enabled, perform eCAP0 pin muxing.
+Hi Tom,
 
-2. Pins LCD_DATA0 - LCD_DATA15, gpmc_ad8 - gpmc_ad15 and
-lcd_vsync, lcd_sync, lcd_ac_bias_en, lcd_pclk are used for driving LCD.
-If CONFIG_AM335X_LCD is enabled, perform the LCD pin muxing.
+The following changes since commit 4446bc331c65d3efb8a9321d6368c61edb56479b:
 
-This is required to enable splash screen support on AM335x EVM.
-[1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
+  mips: mt7688: gardena-smart-gateway: Increase CONFIG_SYS_BOOTM_LEN (2025-04-22 15:16:11 -0600)
 
-Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
----
- board/ti/am335x/mux.c | 47 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+are available in the Git repository at:
 
-diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
-index 960de15398f8..a359d1d6b2b4 100644
---- a/board/ti/am335x/mux.c
-+++ b/board/ti/am335x/mux.c
-@@ -274,6 +274,47 @@ static struct module_pin_mux uart3_icev2_pin_mux[] = {
- 	{-1},
- };
- 
-+#if (IS_ENABLED(CONFIG_AM335X_LCD))
-+static struct module_pin_mux lcd_pin_mux[] = {
-+	{OFFSET(lcd_data0), (MODE(0))},		/* LCD-Data(0) */
-+	{OFFSET(lcd_data1), (MODE(0))},		/* LCD-Data(1) */
-+	{OFFSET(lcd_data2), (MODE(0))},		/* LCD-Data(2) */
-+	{OFFSET(lcd_data3), (MODE(0))},		/* LCD-Data(3) */
-+	{OFFSET(lcd_data4), (MODE(0))},		/* LCD-Data(4) */
-+	{OFFSET(lcd_data5), (MODE(0))},		/* LCD-Data(5) */
-+	{OFFSET(lcd_data6), (MODE(0))},		/* LCD-Data(6) */
-+	{OFFSET(lcd_data7), (MODE(0))},		/* LCD-Data(7) */
-+	{OFFSET(lcd_data8), (MODE(0))},		/* LCD-Data(8) */
-+	{OFFSET(lcd_data9), (MODE(0))},		/* LCD-Data(9) */
-+	{OFFSET(lcd_data10), (MODE(0))},	/* LCD-Data(10) */
-+	{OFFSET(lcd_data11), (MODE(0))},	/* LCD-Data(11) */
-+	{OFFSET(lcd_data12), (MODE(0))},	/* LCD-Data(12) */
-+	{OFFSET(lcd_data13), (MODE(0))},	/* LCD-Data(13) */
-+	{OFFSET(lcd_data14), (MODE(0))},	/* LCD-Data(14) */
-+	{OFFSET(lcd_data15), (MODE(0))},	/* LCD-Data(15) */
-+	{OFFSET(gpmc_ad15), (MODE(1))},		/* LCD-Data(16) */
-+	{OFFSET(gpmc_ad14), (MODE(1))},		/* LCD-Data(17) */
-+	{OFFSET(gpmc_ad13), (MODE(1))},		/* LCD-Data(18) */
-+	{OFFSET(gpmc_ad12), (MODE(1))},		/* LCD-Data(19) */
-+	{OFFSET(gpmc_ad11), (MODE(1))},		/* LCD-Data(20) */
-+	{OFFSET(gpmc_ad10), (MODE(1))},		/* LCD-Data(21) */
-+	{OFFSET(gpmc_ad9), (MODE(1))},		/* LCD-Data(22) */
-+	{OFFSET(gpmc_ad8), (MODE(1))},		/* LCD-Data(23) */
-+	{OFFSET(lcd_vsync), (MODE(0))},		/* LCD-VSync */
-+	{OFFSET(lcd_hsync), (MODE(0))},		/* LCD-HSync */
-+	{OFFSET(lcd_ac_bias_en), (MODE(0))},	/* LCD-DE */
-+	{OFFSET(lcd_pclk), (MODE(0))},		/* LCD-CLK */
-+	{-1},
-+};
-+#endif
-+
-+#if (IS_ENABLED(CONFIG_PWM_TI_ECAP))
-+static struct module_pin_mux ecap_pin_mux[] = {
-+	{OFFSET(ecap0_in_pwm0_out), (MODE(0))},         /* ecap0_in_pwm0_out */
-+	{-1},
-+};
-+#endif
-+
- #if defined(CONFIG_NOR_BOOT)
- void enable_norboot_pin_mux(void)
- {
-@@ -389,6 +430,12 @@ void enable_board_pin_mux(void)
- 			configure_module_pin_mux(mmc1_pin_mux);
- 			configure_module_pin_mux(spi0_pin_mux);
- 		}
-+
-+		if (IS_ENABLED(CONFIG_AM335X_LCD))
-+			configure_module_pin_mux(lcd_pin_mux);
-+
-+		if (IS_ENABLED(CONFIG_PWM_TI_ECAP))
-+			configure_module_pin_mux(ecap_pin_mux);
- 	} else if (board_is_idk()) {
- 		/* Industrial Motor Control (IDK) */
- 		configure_module_pin_mux(mii1_pin_mux);
+  https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20250423
+
+for you to fetch changes up to 49ae68536f234c423c78e89913c64ae9b87ed0e8:
+
+  CI: add sandbox64_lwip (2025-04-23 10:02:49 +0200)
+
+----------------------------------------------------------------
+Pull request net-20250423
+
+net:
+- Make initr_net() invocation command line agnostic
+
+net-legacy:
+- net: dhcpv6: remove excluded middle expression
+- net: dhcp6: Send DHCPv6 using multicast MAC
+
+net-lwip:
+- lwIP sandbox tests
+
+misc:
+- cmd: Remove CMD_NET protection
+
+----------------------------------------------------------------
+Bryan Brattlof (1):
+      net: dhcpv6: remove excluded middle expression
+
+Heinrich Schuchardt (1):
+      net: make initr_net() invocation command line agnostic
+
+Jerome Forissier (11):
+      net: lwip: fix initialization sequence before a command
+      net: lwip: provide net_start_again()
+      net: lwip: add restart support to ping
+      net: lwip: use timer_early_get_count() when CONFIG_SANDBOX_TIMER=y
+      drivers: net: sandbox: add support for NET_LWIP
+      sandbox: provide static IP addresses for eth{2, 3, 5, 6, 7}
+      net: ping: make do_ping() available via <net.h>
+      test: dm: eth, dsa: update tests for NET_LWIP
+      net: lwip: allow DM_DSA=y when NET_LWIP=y
+      configs: add sandbox64_lwip_defconfig
+      CI: add sandbox64_lwip
+
+Michal Simek (1):
+      cmd: Remove CMD_NET protection
+
+Sean Edmond (1):
+      net: dhcp6: Send DHCPv6 using multicast MAC
+
+ .azure-pipelines.yml             |   2 +
+ .gitlab-ci.yml                   |  11 +++++
+ board/sandbox/sandbox.env        |   5 +++
+ cmd/net.c                        |   3 +-
+ cmd/pxe.c                        |   3 --
+ common/board_r.c                 |   4 +-
+ configs/sandbox64_lwip_defconfig |   5 +++
+ drivers/net/Kconfig              |  14 +------
+ drivers/net/Makefile             |   1 -
+ drivers/net/sandbox-lwip.c       |  85 -------------------------------------
+ drivers/net/sandbox.c            | 240 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------
+ include/net-common.h             |  15 +++++++
+ include/net-legacy.h             |   3 --
+ include/net-lwip.h               |  10 ++++-
+ include/net6.h                   |  10 +++++
+ net/Makefile                     |   2 +-
+ net/dhcpv6.c                     |  15 ++++---
+ net/dhcpv6.h                     |   8 +++-
+ net/lwip/dhcp.c                  |   3 +-
+ net/lwip/dns.c                   |   3 +-
+ net/lwip/net-lwip.c              |  86 ++++++++++++++++++++++++++++++++-----
+ net/lwip/ping.c                  |  11 +++--
+ net/lwip/tftp.c                  |   5 ++-
+ net/lwip/wget.c                  |   6 ++-
+ test/dm/Makefile                 |   2 -
+ test/dm/dsa.c                    |   8 ++--
+ test/dm/eth.c                    |  77 +++++++++++++++++++---------------
+ 27 files changed, 376 insertions(+), 261 deletions(-)
+ create mode 100644 configs/sandbox64_lwip_defconfig
+ delete mode 100644 drivers/net/sandbox-lwip.c
+
+CI link: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/25903
+
+Thanks,
 -- 
-2.34.1
-
+Jerome
