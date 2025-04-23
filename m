@@ -4,103 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2FF4C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 13:02:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F178C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 13:06:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 254ED80BA8;
-	Wed, 23 Apr 2025 15:02:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id AC59680BA8;
+	Wed, 23 Apr 2025 15:06:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="A4xYO9gf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gIyuiAUz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E96080F03; Wed, 23 Apr 2025 15:02:44 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D196980FDA; Wed, 23 Apr 2025 15:05:58 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CF58803DF
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 15:02:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B443803DF
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 15:05:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D41AE3F2A8
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 13:02:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745413361;
- bh=R6nnu/apLzslbGQSQDJsRPOS2nGi/IusCqrXMar0h0A=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=A4xYO9gfI1qL+nFqxrhgRHOG3Vy+i9PxtFAyViP2Z8aeJ3pdLQbF7wNR514V6LMDd
- KOxUDL3aoKD1e8+Aq8aklZtkLDuhawVGlCF42LL1fbDuTYtpQqGIti6l1fwABGv5PW
- YfPz/Zk9Dk/37wjbo/7pnX4e9oSjGxUfaOjc1tgwNKtf9cMNYGxYMhpk0heT8NygVM
- RNBq9rH5Svi6AIaFfODTkOoPHK1/iys1Au26XD6FT2GnY+E60Suw72f8FIk0+KXwDi
- AnrES4AIlOq9SOh7zzGWmqSMQpV4eACjD2pQGS8C2tEyZN4NjcruQH8EjoPg3xIvSB
- 5dkEjWp6UFmJQ==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-43eed325461so35869105e9.3
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 06:02:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ac2a81e41e3so1058688866b.1
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 06:05:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1745413555; x=1746018355; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pONad4W47YgH/NBOO5ftMONELQq6vVaWTq2YdYCZvKE=;
+ b=gIyuiAUzmrdcGJFWoPvWCW3sgw6SPrGLCi0xwM4xcr+LiUcEpy4wg03Yyin5YtTfBW
+ UT9QrnEtMVsH+ft+I6TqIQgPZNyqtbcy3uugUjzAHvFDbDWf067Kl6ivY/L303gW4ngD
+ gCeYdqfQjTOSWUUbW+ZttEixGsqEw4evr0alo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745413361; x=1746018161;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=R6nnu/apLzslbGQSQDJsRPOS2nGi/IusCqrXMar0h0A=;
- b=Gz2JHJFPqPExz2Inl9b+tv0pMmRV3zH2GzJTwdpHtKc/DExmiYimdK73wS6K2EwZ4N
- hvHytZkBecMlNbl/k6AqjjMf6je8hXpcklRQGQ7INGVnIf+g1vXGLzkz1diqZHjYQQJi
- C47TBAsB3N9+nBQUbI7QTnaHY89c9cttzmf1l7nwW/c6pU1pwREZWDqBQDm1tIDybV2D
- ylHLZutPgYA4R49u0IuUThS3fUMuL6a+4+FebZYpw4FS87sAVhAlkAKqNTAl1KAQUIXg
- RI562mvd7wd9KS6pImk4ylrGSj6eqXWvhhgjp624YoqLv+pU0UxW2CIwlr9YNhMZ8zVG
- RsHg==
+ d=1e100.net; s=20230601; t=1745413555; x=1746018355;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pONad4W47YgH/NBOO5ftMONELQq6vVaWTq2YdYCZvKE=;
+ b=v1/ojj8N3cWaQ092F+PnA3l2DuV2wMOijoAw66pxnb+N83T1r5AS8EWIlkHbsnCk/g
+ Yw17IRK0S6I52u1ziQzCBGynjhNCfZlEMe5Mc6sXRnNf9qTaeu9AS+FlYKCgEEvsILna
+ uH44a9oxaYcGcPscstFlHnBhqh18h1PjX8cxwEIHl4TOiAf20pNO5wqawvWrO+yhRWnP
+ 7yuIEtsplkpBoZhRIcxJlpe9xElahd1e9pGa2pq61DXtJffN7XV47WzY8BRN+pFY3/GM
+ FTpNZ8+q/v6HqlcP06bOP6pLiOyvbid/FjV8t7vHatO1FJXqGuo31ATdPrhH2BjY9xpy
+ X86Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPgQp5I99kkflOzUYxSFxcEmhREoFB6kdWQ8Lo1pdGZb4AFlxUm+nQ5RDvyIY3JICqBD4PhKA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzl7eOiuRe+u/xwUvaPznbZjo/B6N2pvJMZaF0vVxZWA4sh/Z1a
- 4KqzBfZRald7woG8Rn35L0CskssQC++iMVC84kb7cpCSInRwkhG/lFeMUvIcPZ5mp5FxwAAZJq7
- mwzFMqE4DlAKNMLSNrMC3A7ILDE3dS0EUs79U8WuO+H1Eugi3MUn3WrmDn/YjV9/o74M=
-X-Gm-Gg: ASbGncu7pgwruuyjP7ZZ4LoQ34t6pcF3hH5d7IdzOqwq6lR4VgyKk+RjNdCLSdZ2USU
- /6Jcz59Lw+dLt5FJHRiRvbs3d1gUtIrUW0UNU30ZQShOSvwUbaGMO7RMeEzt2Gdngo8AnvpdRYC
- IeOci/7pbXSUbE14Tty8MOV8NXPEAkFWE1krdVeiBZD0A7Ff9AIp6GcbdCiq3UeGwkY96K5VFjx
- 52/LTtSR+YZ9rVvZ+qq7/rOLI1C5tZWIl7NI0F8NMRfpp1one42ueWQ13s3qHhm8/F7fkuXE107
- KCeirg0vTi1nVlSGCBMAoNNxwZg/uZ6cdHhKxXCw2KxseBElH3717Zli6Ixh2QL7Z1Pcr0Obld9
- LQYw+h/h/
-X-Received: by 2002:a05:600c:1906:b0:43d:fa58:8378 with SMTP id
- 5b1f17b1804b1-4406ac11581mr159268015e9.33.1745413361230; 
- Wed, 23 Apr 2025 06:02:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHK6LFlHab5L6JEn8GrSYgWVmcYIC+l0xFMgQMjEpKYrteWH4rHcyXYNOutVKSS+QY77MLMSA==
-X-Received: by 2002:a05:600c:1906:b0:43d:fa58:8378 with SMTP id
- 5b1f17b1804b1-4406ac11581mr159267235e9.33.1745413360397; 
- Wed, 23 Apr 2025 06:02:40 -0700 (PDT)
-Received: from [192.168.103.102]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4408c8b0ea0sm28049345e9.2.2025.04.23.06.02.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Apr 2025 06:02:39 -0700 (PDT)
-Message-ID: <ecde0d49-f04a-4a75-bacf-a170c2ebb0df@canonical.com>
-Date: Wed, 23 Apr 2025 15:02:38 +0200
+ AJvYcCWsPUtviPJg6pqk95zENfce7FIe7FU6nbkZ0DMQOP82G5DHF54jzGrVJ0KPUTaBtIxJWcKKYxs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjYPHxnKewaAQ3e7TJDv/CMXvde3Y2av6CzGxliwc3a1UFb2Hz
+ A86I2wVluwqyY0ouAGxRl/KOndX3T4r2a/J3c8iRrellh+zwoGh23kZXGlSmZkdefSqD50wcfNO
+ +y5xxFMgya/iDucbt87e14TwZfpcrVwi47MDV
+X-Gm-Gg: ASbGnctXs/nh8ecAbFR74jGzA3Lku160CQnmmPR2wUKOG4v7hGUPd8A5XDQOAhYCTDH
+ F4Z9Qw/gynh4Jjplr6TbhBd8nx2O/oEbAESfM6M+/VEO18xaGlq2vICGpNNGAgQreKKCNdnVajb
+ 0BNBXG3/gA309YK46gLYIhXvbUtnJOU7cHqw==
+X-Google-Smtp-Source: AGHT+IFguhYjjLF0jeRiAgVQppZL64XFZD16Mgu+0FUcY+jcBbncB+03ErctJV6Yv2ajJUuCfcyrZFPneYfaWfcGmms=
+X-Received: by 2002:a17:907:1b17:b0:acb:3f1d:ca7e with SMTP id
+ a640c23a62f3a-acb74af0066mr1421545966b.8.1745413555154; Wed, 23 Apr 2025
+ 06:05:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] boot: BOOTMETH_DISTRO should select
- BOOTMETH_EFI_BOOTMGR
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20250421094310.764765-1-heinrich.schuchardt@canonical.com>
- <CAFLszTgeJ_kvdUrBC=btzKAQGVZDtyJzk1LuD4t58n0zMmvU8w@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTgeJ_kvdUrBC=btzKAQGVZDtyJzk1LuD4t58n0zMmvU8w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <CAFLszTjnXQu3bwWt3Do7S_Vu0UO5si4HRUeW9bv0981WbUn_7Q@mail.gmail.com>
+ <87a587fja8.fsf@kernel.org>
+ <CAFLszTiThPOHm+D=Zts9QP0mm4dYHE=kAqS1LAnfF1MLmc=QEg@mail.gmail.com>
+ <874iyff3pz.fsf@kernel.org>
+In-Reply-To: <874iyff3pz.fsf@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 23 Apr 2025 07:05:43 -0600
+X-Gm-Features: ATxdqUHKSUpnK2zvMbs9bkM--h-dFECRasFYFcQQSPYxNloKqWqHE-XHV1xGRgA
+Message-ID: <CAFLszTia74jHUx0VrESU2J_w092_M8rsLwNR2fmuHp+e4JX49w@mail.gmail.com>
+Subject: Re: Maintenance of Python tools
+To: Mattijs Korpershoek <mkorpershoek@redhat.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,60 +92,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23.04.25 14:28, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Mon, 21 Apr 2025 at 03:43, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> Distros expect the EFI boot manager to run. It falls back to launching
->> EFI\BOOT\BOOT<ARCH>.EFI from the ESP.
->>
->> BOOTMETH_EFILOADER is obsolete.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   boot/Kconfig | 5 ++++-
->>   1 file changed, 4 insertions(+), 1 deletion(-)
->>
->> diff --git a/boot/Kconfig b/boot/Kconfig
->> index fb37d912bc9..89076220adb 100644
->> --- a/boot/Kconfig
->> +++ b/boot/Kconfig
->> @@ -597,6 +597,9 @@ config BOOTMETH_EFILOADER
->>          imply CMD_TFTPBOOT if CMD_NET
->>          default y
->>          help
->> +         This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
->> +         launching EFI\BOOT\BOOT<ARCH>.EFI if no boot option matches.
->> +
->>            Enables support for EFI boot using bootdevs. This makes the
->>            bootdevs look for a 'boot<arch>.efi' on each filesystem
->>            they scan. The resulting file is booted after enabling U-Boot's
->> @@ -648,7 +651,7 @@ config BOOTMETH_DISTRO
->>          select BOOTMETH_SCRIPT if CMDLINE # E.g. Armbian uses scripts
->>          select BOOTMETH_EXTLINUX  # E.g. Debian uses these
->>          select BOOTMETH_EXTLINUX_PXE if CMD_PXE && CMD_NET && DM_ETH
->> -       select BOOTMETH_EFILOADER if EFI_BINARY_EXEC # E.g. Ubuntu uses this
->> +       select BOOTMETH_EFI_BOOTMGR if EFI_BINARY_EXEC # E.g. Ubuntu uses this
->>
->>   config SPL_BOOTMETH_VBE
->>          bool "Bootdev support for Verified Boot for Embedded (SPL)"
->> --
->> 2.48.1
->>
-> 
-> I don't want to make this bootmeth obsolete. What is the motivation for that?
+Hi Mattijs,
 
-This method was written in a way that per se violates the UEFI 
-specification as it does not set up required UEFI variables.
+On Wed, 23 Apr 2025 at 06:43, Mattijs Korpershoek
+<mkorpershoek@redhat.com> wrote:
+>
+> Hi Simon,
+>
+> On mer., avril 23, 2025 at 06:28, Simon Glass <sjg@chromium.org> wrote:
+>
+> > Hi Mattijs,
+> >
+> > On Wed, 23 Apr 2025 at 01:07, Mattijs Korpershoek
+> > <mkorpershoek@kernel.org> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> On mar., avril 22, 2025 at 17:39, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> > Hi,
+> >> >
+> >> > Tom has indicated that he would like Patman to move out of his tree. I
+> >> > suggested on another thread[1] that I maintain it in my 'sjg' tree, so
+> >> > here is a new thread to discuss this.
+> >> >
+> >> > I have already done this for the qemu/efi/coreboot scripts as Tom has
+> >> > NAK'ed patches for those.
+> >> >
+> >> > For the other tools there is going to be quite a bit of churn, as I
+> >> > would like to resolve most of the many Python warnings.
+> >> >
+> >> > Given the shared source between the tools, it would be easier for me
+> >> > to do the same for buildman, binman and qconfig. I am thinking that I
+> >> > might try a move to allow Gitlab pull-requests for reviews on these as
+> >> > well as the mailing list, if that is useful.
+> >> >
+> >> > For tools which need to sync back to Tom's tree (i.e. not patman), I
+> >> > or Tom could do a pull request every now and then, omitting any
+> >> > changes that relate to pylint.
+> >> >
+> >> > Please let me know your thoughts. The timing is good as I am going to
+> >> > be sending out a new Patman feature in the next few weeks and it is a
+> >> > few thousand more lines of code.
+> >>
+> >> I have a preference for binman staying in the U-Boot upstream (Tom's)
+> >> tree. AFAIK, binman is used by the CI and is also very useful for composing
+> >> "complex" bootloader images (For example for the TI k3 architecture).
+> >> I don't know a good replacement of binman and I'm afraid that people
+> >> will go back to ad-hoc scripts if binman gets removed from the tree :(
+> >>
+> >> On the other hand, patman is a workflow tool that's not (I think) that
+> >> specific to U-Boot and is (to me) replaceable by b4.
+> >>
+> >> I understand that code sharing makes it more difficult to only move
+> >> buildman out of upstream, but in a perfect world, I'd like binman to
+> >> stay in upstream.
+> >
+> > Just to clarify this, I'm not suggesting removing binman. It's just
+> > the maintenance and development of new features that I'm referring to.
+> > We would still sync source back to Tom's tree.
+>
+> Got it, thanks.
+>
+> Wouldn't moving the binman development out of upstream reduce
+> contributions/visibility?
+> Or do you think that proposing alternative development process (like
+> Gitlab merge requests) would attract more folks?
 
-You must never run this before the boot manager as booting 
-EFI/BOOT/BOOT<ARCH>.EFI if there is a boot option violates the UEFI 
-specification-
+I'm not sure, which is why I am asking about it here, to get feedback.
+I like patches on the mailing list myself, but perhaps others don't?
 
-The boot manager covers the functionality of this bootmeth.
+>
+> What would be the policy for development/syncing back to upstream?
+>
+> What happens if binman evolves in a way that's not aligned/practical for
+> upstream (Tom's tree) ?
+>
+> Would that mean that we would have to maintain a fork in upstream?
 
-Best regards
+My thinking here is that U-Boot would simply use binman / buildman as
+they are, similar to how dts-upstream (91MB), lwip (9MB) and mbedtls
+(48MB) work. But yes, if Tom decides that Binman (3MB) / Buildman
+(700KB) / other tools (small) have hared off in an undesirable
+direction, then it would be tricky.
 
-Heinrich
+Regards,
+Simon
+
+> >> > [1] https://lore.kernel.org/u-boot/CAFLszTg7-yM0L8uuJyN7Jpsb1LbvOYO76cUWj+H719mfc97mMQ@mail.gmail.com/
+>
