@@ -4,144 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60299C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:53:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E90C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:56:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F9BE807AE;
-	Wed, 23 Apr 2025 16:53:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 28C7C80944;
+	Wed, 23 Apr 2025 16:56:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="DQ0s4lBc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lOArBvAE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48B658070C; Wed, 23 Apr 2025 16:53:11 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170120003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 01E8480944; Wed, 23 Apr 2025 16:56:44 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB36280944
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 16:53:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61CB28070C
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 16:56:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KbTsN1gqs4MjzSwt7Tz4uD4fYHfnN37FqtnFsgaMEb3FnljjGw0lzgm6/aLRmFJbsr9ZffVYHgJi528ULomYIfzADMyCmeYMderLoidsQzv64vr9XWHRckXfEqzepzXuqSetAZ/g43cE9QEdOQTUrIbTWnXWJOfTFSOHrMq11j+ow+WhNbPB2mLpzqagyb7WL8OEExxOVqhZcscKDxi416RY7Y5W1JEVJk1oPHHfNOZWKt70W0Fv3/nKtE3Gc6z9Kq3Hh+yoDk6ZWbCGyLptLEQNidwazjwkX0+jbFK4sjNKxVrRg7id5hTeSosWVR2qBeTi/OidLZ4OxQ/mXbaaMg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/c79yDbHzCoYJN3sYNhWCUn7z9v2vkUVwJGglOZhKTU=;
- b=ismmuWVMGxsMrl35krTxTHOR2uSUKVDvSjJ0y2VJL8cqDQNNACM73w30rwNqzO4BBJS9X4G8z4dUhCR2hYarJ+InKpeO0Us+2eR9I6ZR7l5rZM33yHLcMHtK5xgm+qU8hCgogxTexk4rLRuKmK7XV1YFMUs6waGoBNkBJmyNwLkU6rkgqEvoaSF8SLsF0G618RP09dyLOvHwuGnvLVPL350w9tGlq2YXRrtd08/Panvj2uTO7pnZ10b6Ord9avK7n0g4f13tDicGNxT2NQbpgjIxa9tK3MjLixHtPMrDvBwzLe2ubW2kX1jJoFnUNsJPxD7V03dXo3OGz7GfSjBIrw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/c79yDbHzCoYJN3sYNhWCUn7z9v2vkUVwJGglOZhKTU=;
- b=DQ0s4lBcvPZaMyrb7dkoz0gJG2aIxiOyiWpg/JA+V4KzWvVoEJzcXqp1vulvIbEW1hs1lNNMUw+cr4xBbfGGgX36gmFPBssbOnntUGx/lge/XpGen4LxGMWPijdbSipW9vG/nJIrtgNZ5DdFYqA9xjJeIj8B/NaD8Wj9n2TJqkOhfe/XJSMiouSaPR4MFuoBoVxvlLheFPBo7ZkrpogiSL/UlcWNguP7Ad2D41JVgH6H1fHGbLy1ZNs3VB+j/L7qjdHd3RhunWh4Jpt16bX6wirOO1NmOGMiGobOzXzjH65jslEI+qlsGdFU95kvS5FPTKEV8mcLypZQkBcfM41Pug==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AM0PR04MB7169.eurprd04.prod.outlook.com (2603:10a6:208:19a::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.35; Wed, 23 Apr
- 2025 14:53:07 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8655.033; Wed, 23 Apr 2025
- 14:53:06 +0000
-Date: Thu, 24 Apr 2025 00:01:55 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull mmc-2025-04-23
-Message-ID: <20250423160155.GA30338@nxa18884-linux>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: SI2P153CA0005.APCP153.PROD.OUTLOOK.COM
- (2603:1096:4:140::11) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72bb9725de1so1459373a34.2
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 07:56:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1745420200; x=1746025000; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=heP9YC4KeP4Epl0CkF1Y/1c4ht3/PC9jbujbp0F1Nu4=;
+ b=lOArBvAESmBpW3r4xWj+605DCfgGUmr83Lah9gJflLGal84PDOgWe1Su8yjcgOaU21
+ fbrGxtGq9P36q7IVS5XQIXxbCy5EDZXQsCIBaJ9MCOlMSA+wdKvotvH8bTJHLiWeVNvI
+ DglKZLzzCTntGPd4xQB1cJnBBwHRP0j3J1/iA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745420200; x=1746025000;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=heP9YC4KeP4Epl0CkF1Y/1c4ht3/PC9jbujbp0F1Nu4=;
+ b=mhFT0Iibw7tN5IQ2s1RsPloTVKVCBErknLs8Orfvtn5qPMjiDLkuoqT22ls6az7ldZ
+ IOnTy+i7dWsSYQd5+ZVzv6qO12IEv4ys5yi4x5iJA2kzWGnDf/oYsa+7V+7SwrcIVQLn
+ HAxjReQMdAQc23Xsq+JlTtKPWtnC8qeOq1JrFBHTzbYYY00Tp8LZT2khfk85BSCppEK6
+ dky1L/3R/ucKoebQQfSGXC6lLCnclSp/HInJMwoapa/9aO86BMk0g33RMPL8XabsdH5x
+ DER6NF4ogart1z0IZFXIaZkTJgPlhZblkuZzYLzt+WmCQUzlP74yKUbyagfZzVdpZwh7
+ gn8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWE7IDYksbdlJghdn2mYDGbax/018gLHkTkWr6NTBLT4I4xyq+s2PRyCkXSPTqVsJ6DEjs9KoU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzlz3FxtDnoWNjlmAqs/zBONAeq83cuiy/rscwTVp/PSHv3eDTd
+ Enbk9pzRoFwiJFj4PifBW9TbHJsJ6KksLG6BMYRJ9XPkzy3mnH1CE6FYsZ7Hsy+vo7SlbGElgTI
+ BJko=
+X-Gm-Gg: ASbGncvURdUbjpLp/ISMcu58ploreuKWVI9gZwwjsV6KiGhLtw4TzhzuFhvjhXtfRf5
+ WigUddvseUaTNaoqaDVwkC/ds1pduRjRJtOUiRwL/bX1iYVHsHgAPVpUS/EiLsH95juo0oElJf8
+ QQPWyG0BcR+S+VnghjdRH3SN5pGQEakKTqDsCMohDRt4YHZBXwKDigLDMR0bI4aI96Ls3p0ll10
+ ih+JAVG5i7OgcI27UngdoR4ZD+a2CBaGiXKGAO5fThiAQuiv5BJaIaOgbCh9J79P9FahVV1wLu+
+ xAn9RXJZE546FXyMSmQiZUeWwexzY8pB1lQUnIK0sAWaq/W2nAkIgonz+T7HDhslglttPPVeVWi
+ BOA==
+X-Google-Smtp-Source: AGHT+IFR0rWQ8USjuwi/QOmJFVMYEhX5/jSGd08CL2MYo/IE7Wu1d/KZnXLC6JKguh6mhbYPzBf+Kg==
+X-Received: by 2002:a05:6830:64cb:b0:72b:8785:890 with SMTP id
+ 46e09a7af769-730061f2e40mr12713739a34.4.1745420200084; 
+ Wed, 23 Apr 2025 07:56:40 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7300478ee02sm2493025a34.14.2025.04.23.07.56.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Apr 2025 07:56:39 -0700 (PDT)
+Date: Wed, 23 Apr 2025 08:56:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, git@xilinx.com
+Subject: Re: [PATCH] Dockerfile: Simplify applying cadence_gem commit to QEMU
+Message-ID: <20250423145637.GF5495@bill-the-cat>
+References: <5061af5aef7e964431679bee94b7ccfd2579e521.1745412278.git.michal.simek@amd.com>
+ <b6e719bc-58dd-46b1-a4c5-79f2a8848358@gmx.de>
+ <678c1b23-402c-45f3-95c2-96bd3ca3d240@amd.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM0PR04MB7169:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77a07251-ab6b-48aa-eb70-08dd82768eaa
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bUcJvsajjdt/t1SKrtFL1wGtXxjkrP5Ub/VsV8MzF77JvZUI09gnJjiL/yfU?=
- =?us-ascii?Q?mNWpn+ePKKcTk71pR8lnKzur20vQGlQXzsBm3ZxoTI7hFeuDhtwEmcQe8g4n?=
- =?us-ascii?Q?Y8kSzq8yOimEeIeN75++lyt6m//cpxzHpK2A/IW5oywrJmKz8AId1cth/L5J?=
- =?us-ascii?Q?aajOtkireykEiuDdv/nqO305Y0P0VjrOaWb+xMzFruXGEYx8xZ3rL7yykLSp?=
- =?us-ascii?Q?9/b44VbviyTmy/qC4Omm9LCLT0uLmq0/8nd3SIe1/1P7JiRCNV97SkJ84SSU?=
- =?us-ascii?Q?DjOAGqcFmk/gCuNq192W8sX/hEj+/SjIgNMIfq8d3yWtpTtLbpmuyVyX9hus?=
- =?us-ascii?Q?LcJ87Ygf14HFWi2UBOSO9OVfbUHuvIx9ywGWX0x72YyJ9W23jZqdOwx23gLa?=
- =?us-ascii?Q?0SQywvl0/w2PqPYXPSGCFYoarpb9ZxRUZug9tVJLiGCHZS3a/HZ0jh4PFMl0?=
- =?us-ascii?Q?Vv3QZnCohEKXMkHJXuUw121cPXyUTBGhsTBMQc+RCClq11/jjNA5cYUMiTPx?=
- =?us-ascii?Q?sekzMr0poBBegB5wgL5F/PNmIHfwJV1d/OrGrlEmOqlISgoCeoRBII42sgNV?=
- =?us-ascii?Q?LVdO5WRc+P5moY4/eKJ58m1BNtcueFYsNQNRHEKPqRrgie9gR8OhxR/F05J8?=
- =?us-ascii?Q?IfcTsbJNqDse1NBGPP0wjpfbEUel0H5ZuQueoYzdcYJEtfWAa9APcx2GWgsn?=
- =?us-ascii?Q?hkZq+tP1HLKlR0s9IP/yv8s7DmguQy0j0bunmlFFrvb+/tFR3UdT1Up6HggM?=
- =?us-ascii?Q?cS0yPAJMuph4jzKfqsyV+n4MjwOg0b8bsUSzysGETO0fkPbY1egWKnUWnrO+?=
- =?us-ascii?Q?SWUlHnQQU6/1ZPEdl/bL8jeZbL5dOV7p+Sy7nNvcvSFRSbyo+YDoVV+58XNZ?=
- =?us-ascii?Q?trVYft+nWbc8OzAE2IxysOjyg7pKT96xOwpT23tyg8PfsmikyWc+m7HZ3YjY?=
- =?us-ascii?Q?O4dXhMa5LVgD6yFD0JLNKtuPgsbd0+w4lZu6gVHU2rWk612E3z+naSeTtFs0?=
- =?us-ascii?Q?u6H8KjqHtrEhiWcLLv42xNAFQ0U2YX1eR71WmgcSLhPB+gLLZ+uNo4Iz6lXs?=
- =?us-ascii?Q?Xts5V9xTcpNVV07OwdBEg99qRgmxDQ0vge+SydFYGVoJhXMKYUFzWqLYyiKH?=
- =?us-ascii?Q?Bo+pELZQhvl6It2h0HfibnYAT6Vbi36lghsyV11bJ5A2WwxmjMu5Jk5JsOUO?=
- =?us-ascii?Q?WhHK6WJUyU0kX5YDOAV4s3JbeC9dQdMIZEde7tS0DBjMSeZojn2OKXlnhlHa?=
- =?us-ascii?Q?VxhasVmAAsciP+y9ScsrB+oTCF1p38IqMaje5eJuAdXzGP0SIEBDFp3wg3sv?=
- =?us-ascii?Q?MxwUdeJIp3nMZABFVF0dT3NoM0yX1bL9oh8Ziwf6zbSmDPROwLljHZHR7gvA?=
- =?us-ascii?Q?vaEVf0PHwNJ49JaQhRnd37y/sp/jTG8dH/BKuEPXHapjjm6mtnXg+lBfijs8?=
- =?us-ascii?Q?unsreEXIPQc=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?38iG8nDDUq2OZgYD2N9I59VHmFXBRwL2aReb0FMCyYMpjsIScveu7x7y10zQ?=
- =?us-ascii?Q?xkFbnpljjDARw/jG+Fo11FW2jwM7qwQX37FwmmK+zgRWVz9htOVsi0rlxpEf?=
- =?us-ascii?Q?PWX1xdeaV+InO7z/m8Xi5UBgZwiEljClw9EHdaryBvWjZxV0VhssBP3FB5JI?=
- =?us-ascii?Q?VK0Ehm4K/lVKZjIIog2BEFFaKp6XSmRBvuJpwj/siszF9eg3qL7stcLEufH1?=
- =?us-ascii?Q?gicI45G2814RIXoMhGZaEf6xQLt5rpkpfNQiaMxOIbtYHNHzC5Ok7Mc0khyM?=
- =?us-ascii?Q?qiC7Tz65zAFZdEQJxR/JnbC+QgZMuwiGM1ApALHFvgLZus2cvLNn6QRA3Sa9?=
- =?us-ascii?Q?y6oeGrVMl4U1GUamsQyWXxLIxoKFZw1jvqx1TEPlYbibl04FixJRoD/W8rM9?=
- =?us-ascii?Q?oN1jqzMSSzoJ5vzljsGxvCmKg0v7k5BRR50M0s39RPx21HEuXDFNYM3OBfzO?=
- =?us-ascii?Q?4aEte5m3Ls49S9k3We+wire+znzmHY8BANvdqcRbgut6Az6DY5oTmmzVQE7H?=
- =?us-ascii?Q?66gGRYU/51qG2hoPl5AWfzciVPCNMMRbghuE1ZwRcvquSHc8aCmuLYU8Ppby?=
- =?us-ascii?Q?atdlc4EnIwJUsM0jMR3w4NVFPWQwhsFNcC4DC9hX3ZOoysvmsRoDo6HN11p6?=
- =?us-ascii?Q?sqooN1pnVgt4A2oO9phdWaaZMCNRMFxmygKiKg1EbZmuiGJeQ8m7DbWUaX8+?=
- =?us-ascii?Q?KXEX7ZpKEtJlJiXn5ftkP07UMQooX67ZVBNLS/V3GZGJ9nqymVgrdcIF17m6?=
- =?us-ascii?Q?bNV+qEwc9XC0KvFfxncNUmheTJ03gz+gGUepCIvLH1nXM34uKSfxjMmTq80f?=
- =?us-ascii?Q?G8Qdy6MkOSQM+pssQeeJq/tlszAEdgz78JviPHP2WaVz+A+myOhbdvW0qDPt?=
- =?us-ascii?Q?s0LTB5SAsNDuMr6mClkxSlgs2nwJcc/aQszgd6qXh2yenux/HBpgS9D7u6ii?=
- =?us-ascii?Q?JOsa8/BJ3Km4pfYxbZfDcGenNK1rXC1/qBH/Ku5mwe0yo3rQFma4X5bNJNWU?=
- =?us-ascii?Q?X577xCRy+hEtIBVgOj2QqLsqkOLLBYlpV3GuYoCqaABrvktfuqFg7mrBXe8+?=
- =?us-ascii?Q?1KsySs+kf3hQZv0HBtGoLpuEKD7teSi/0lk6VCxw4mIaWwTz7BOobpRTWPxo?=
- =?us-ascii?Q?Qr3ABtcXOVBi4XHFYTGGW+Ah2L6ZGuLJnFj/FQqXhIFUqBJaJHGEynfShfqy?=
- =?us-ascii?Q?/MD482VG0abADdSjhEm/A7im1SAAPz7irjNUPXyMy4e27fKH8/8thDkpS3kR?=
- =?us-ascii?Q?Er7hXC/McAyhcgn+70CHrbYCSW2dsqUI2D23N9wYWZLuwHiMG1H8Tzbc81A6?=
- =?us-ascii?Q?P2IS0PmZQjegk8cHtqX8VsZTRL0SR9PDbiGjXHLJ2umQnvh3ik65+LlNwtha?=
- =?us-ascii?Q?u/4/6YhaJEOJin0xPbckN7JbxpH5UL8C4BvKgsPy9LX30j6e9UcKmGifmMfv?=
- =?us-ascii?Q?x+gY1oRv/6PDzOWAq+f1Z2D1mVeF5p3TkewxhK37dYEouUDqcqxT+H8hSi8q?=
- =?us-ascii?Q?1+3C0oH49aAzuHkkg9/AGurmRbNBqm3df1zaKb73X+lZnh6vL8nGVmzQ9OFU?=
- =?us-ascii?Q?qACX4K71dos9DaDRLWCFQB94izcsLciQxKFjauYR?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77a07251-ab6b-48aa-eb70-08dd82768eaa
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2025 14:53:06.8923 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TxFc54GpY8gOogHrjkz5DM+NGxUJOlQkaoPkGae5hqHTMd1UyXwJIwGWBkAZ3mdhEFukFzYh59pezSVsjKBYPw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB7169
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="76clxLHL9EtWaTmy"
+Content-Disposition: inline
+In-Reply-To: <678c1b23-402c-45f3-95c2-96bd3ca3d240@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,54 +101,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Please pull mmc-2025-04-23
+--76clxLHL9EtWaTmy
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
--------------------------------------------------
-- Introducing back send_init_stream for omap_hsmmc
-  to perform the 74 clocks cycle sequence
-- Move scmi regulator subnode hack to scmi_regulator
-- Typo fix
--------------------------------------------------
+On Wed, Apr 23, 2025 at 03:50:35PM +0200, Michal Simek wrote:
+>=20
+>=20
+> On 4/23/25 15:42, Heinrich Schuchardt wrote:
+> > On 23.04.25 14:44, Michal Simek wrote:
+> > > No reason to call format-patch and then apply it with git am. It is e=
+nough
+> > > to cherry-pick it directly like it is done by commit 074bfab54d83 ("C=
+I:
+> > > Cherry-pick reset support for m68k for QEMU").
+> > >=20
+> > > Fixes: 50a907edbb2c ("docker: build QEMU v8.2.0")
+> > > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > > ---
+> > >=20
+> > > =A0 tools/docker/Dockerfile | 3 +--
+> > > =A0 1 file changed, 1 insertion(+), 2 deletions(-)
+> > >=20
+> > > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> > > index a0fd174ff602..0aa9d3ab3a84 100644
+> > > --- a/tools/docker/Dockerfile
+> > > +++ b/tools/docker/Dockerfile
+> > > @@ -222,8 +222,7 @@ RUN git clone
+> > > https://gitlab.com/qemu-project/qemu.git / tmp/qemu && \
+> > > =A0=A0=A0=A0=A0 # config user.name and user.email to make 'git am' ha=
+ppy
+> > > =A0=A0=A0=A0=A0 git config user.name u-boot && \
+> > > =A0=A0=A0=A0=A0 git config user.email u-boot@denx.de && \
+> > > -=A0=A0=A0 git format-patch 0c7ffc977195~..0c7ffc977195 && \
+> > > -=A0=A0=A0 git am 0001-hw-net-cadence_gem-Fix-MDIO_OP_xxx-values.patc=
+h && \
+> > > +=A0=A0=A0 git cherry-pick 0c7ffc977195 && \
+> > > =A0=A0=A0=A0=A0 git cherry-pick d3c79c3974 && \
+> > > =A0=A0=A0=A0=A0 ./configure --prefix=3D/opt/qemu
+> > > --target-list=3D"aarch64-softmmu,arm-
+> > > softmmu,i386-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64e=
+l-
+> > > softmmu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh=
+4-
+> > > softmmu,x86_64-softmmu,xtensa-softmmu" && \
+> > > =A0=A0=A0=A0=A0 make -j$(nproc) all install && \
+> >=20
+> > This change looks good but we should move to a newer QEMU version inste=
+ad, see
+> >=20
+> > [PATCH 1/1] Dockerfile: use QEMU 9.2.3
+> > https://lore.kernel.org/u-boot/20250418025743.529973-1-
+> > heinrich.schuchardt@canonical.com/
+> >=20
+> > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>=20
+> Definitely much better. v10.0.0 would be also good one because it has MB-=
+V enabled.
+>=20
+> Tom: Feel free to ignore if update patch to v9.2.3 is applied.
 
-I picked one scmi regulator patch from Marek, since Jaehoon is
-inactive these days. Hope this is fine.
+I plan to move to at least v9.2.3 soon. I see v10.0.0 was released
+yesterday. Perhaps we'll get ahead of the curve for once and update
+sooner rather than later. Heinrich, would you mind redoing your v9.2.3
+patch as v10.0.0 ?
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/25899
+--=20
+Tom
 
-Thanks,
-Peng.
+--76clxLHL9EtWaTmy
+Content-Type: application/pgp-signature; name="signature.asc"
 
-The following changes since commit bf2db18116137bb2f82165206be3f16baf314feb:
+-----BEGIN PGP SIGNATURE-----
 
-  Merge patch series "configs: ACPI enabled QEMU defconfigs" (2025-04-22 12:54:53 -0600)
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgI/6EACgkQFHw5/5Y0
+tyzi6Av8D+4+SA4rSD/AhUxhx3xvwylKd+xVAz/CGDeEYWhH/M7BZmn07DOfn2ZK
+ZsFYHVhWaNDXGwEQyQBkI7TaPi8knJsi/IfpuuFS3HPCyvwZlI83uAylaiHhX6Yo
+3AP/ELZvwlhR7ztzvOmRGlwd8XSEdbGJ6FpEhlVHizPsSkr2Ux/msq3dhnDrgYBv
+fFSQ+pVs4dyAV9KOGw5cg0nTs1PTayYajnQYhGMU6hPQIMoPf32XpU/+WU+285C8
+scB+f/IzhA+sqHu3vDACzcjIKQ4vow2chHQNECKVW0/7pca8TyCxjD4Tqii3WTWs
+mHwFph0DKtkWmoXcNewkOgEy+l1ESUY8Vtm9VS0xxAo7RGrd+1oFRIXtFDRKMqbG
+tGoKa6p1M4coC6Sr2uTOcsXTForIgJr2h3iW/9KkIcpZwsgF0G982gcl79FVpb4L
+93b33ziEZrfJQLAK+XoCPv0fL3ZB6JftszJj13xg1YxNEDF2tD2y5y1eDZG2MFee
+H6ddAOYh
+=QLSI
+-----END PGP SIGNATURE-----
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-mmc.git tags/mmc-2025-04-23
-
-for you to fetch changes up to 2a8e7ea4f948e3de7033b297fd827fe082cd63da:
-
-  power: regulator: scmi: Move regulator subnode hack to scmi_regulator (2025-04-23 11:28:12 +0800)
-
-----------------------------------------------------------------
-Heinrich Schuchardt (1):
-      mmc: type 'Relatvie'
-
-Jean-Jacques Hiblot (1):
-      mmc: Add a new callback function to perform the 74 clocks cycle sequence
-
-Marek Vasut (1):
-      power: regulator: scmi: Move regulator subnode hack to scmi_regulator
-
-Mathieu Othacehe (1):
-      mmc: omap_hsmmc: implement send_init_stream callback
-
- drivers/firmware/scmi/scmi_agent-uclass.c |  8 +-------
- drivers/mmc/mmc-uclass.c                  | 13 +++++++++++++
- drivers/mmc/mmc.c                         |  8 +++++++-
- drivers/mmc/omap_hsmmc.c                  | 13 +++++++++++--
- drivers/power/regulator/scmi_regulator.c  |  9 ++++++++-
- include/mmc.h                             |  9 +++++++++
- 6 files changed, 49 insertions(+), 11 deletions(-)
+--76clxLHL9EtWaTmy--
