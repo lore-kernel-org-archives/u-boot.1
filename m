@@ -4,161 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA582C369D3
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 09:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE3E9C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 09:14:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AD68809D4;
-	Wed, 23 Apr 2025 11:03:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 0C8B4809D4;
+	Wed, 23 Apr 2025 11:14:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="fXOOwPhQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gbOYS3Sz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A2DA80F9C; Wed, 23 Apr 2025 11:03:23 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4EA8D80FA8; Wed, 23 Apr 2025 11:14:32 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E09F800D7
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 11:03:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id C090F800D7
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 11:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YYWDBIyZL24wLTenY4qjynHOOHS5laTzW5tqFCiXr74nK6mxp+MadCTQHRrlfo25hFYKZaL4iqqBBJFk/zBl0PVjEwWKOGOO3Vl+7LhPDbSwJHORVNOrcRSev1Mz5pNfCA/pnYNaoWYIeMN3mP1wQktHTZHKkxrd8Cuy5dEV8ALCqD/GCTZCmny99EO0IUdpAPpRaOwK52DVRR4vTJbZOPktcVXh517rSIOoSMi0RAIxuE0Eg29OE4HLUdcfT7S7wlxxLKRKrxgu7zZaWtr8pDR5UV6agGYNrshtNf8VahoxbQbbjOL/pmeEeJCHb2oPHWQ1y8DXMru5wSGHklgFBg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WUefZPLTtFxtRYWTpedYInBm6qgGH14NHUSKpAMiKCs=;
- b=w4gRt761m8P53LEpY8i2/PFq0UnRe69hhw9TmpbTrSscaldckOE4Q2FP2hRYUNqGIm9FnZM1oNxuCt3j3QYLUJlIOhUYImVvzu0pSbG7FZBQ660oxsbS4BPHtQrUYapL5bH9jNlIGL16ceLTTcvRfMbPizbuUBJTDOOgx9AhJx8DdYM/T9MD2vYV+YmRPNPhEFepvLjfP0DL5jTAnIKMLw19O7xJ5lf/SjiYC01UicLzivcEQEKW/s+oxR6DzX19tfA5I8SIK8l+4X6YM0N58FFQXzbyT2zpNlwuRCnCj69vAxWlyr3qnKSfOKo/KpgpCX7k8dtRjfgXFnD+z3Mu6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WUefZPLTtFxtRYWTpedYInBm6qgGH14NHUSKpAMiKCs=;
- b=fXOOwPhQRZli5/jvub73VJ62b5I0NqUOplgEBzzfvndgfYvWg/OGtpCCnAjh4/LnkO04Cb/tc2bbMCwgpg91fYY7BN94hbME220cJSHa/OMRBfd8m2BcpwTuFyyOu3s2LV/S/zD/+bcM3Fr0J6wlFQ513AGzd3DF9Tdhpkd7FfI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM0PR04MB6884.eurprd04.prod.outlook.com (2603:10a6:208:183::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.23; Wed, 23 Apr
- 2025 09:03:18 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8678.021; Wed, 23 Apr 2025
- 09:03:18 +0000
-Message-ID: <3f221717-b5a2-472c-888c-cc8f777cde40@cherry.de>
-Date: Wed, 23 Apr 2025 11:03:17 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-39c1efc457bso3987494f8f.2
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 02:14:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745399669; x=1746004469; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=l/+4vKKuZMyfWtXjT7YL1QAVeQPDsVArICsGBWtFxJ0=;
+ b=gbOYS3Sz0H/Y4Um3ikScc8JIxYZTEwHAGPfKpLCCzvRqaNU5HyHBImmKXE6D1W70/O
+ XA/Ynd4V+5f2AwheGOigBO8HCuT2q/endhEw085Q3oUTO2CldEMMSSyv1qwFOcV0VPrB
+ rl7d/6i+HqxD77ms/IBsDw4ptvajfJL985W40VfPY1fD/omMDJoTuUML0jZr3+wRf//W
+ 6roxvQCTA3dCRei/2AcNs/o5mpoDjVFIGYkEmlel878T1o4THI0OuzI7PlZHISvO9o/Y
+ 5B4NdAdJQ6PecW5sqxuZ9au0RmHWhpdeQFMpwssooScQEKDI/M/H4JQ6c9Nj4bbnvIWP
+ 0aDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745399669; x=1746004469;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=l/+4vKKuZMyfWtXjT7YL1QAVeQPDsVArICsGBWtFxJ0=;
+ b=U0eKWAPPWLATwmDMzfQu+QG2QV0edqppTiItP+WXcm/ZI4GhLe921glPFYRAW1fH+h
+ Kz0rkBlIc1f+e7ywxZmx8CtnlXQTd6RkyIQ/6otUZD5wC0Ujw/jWBuvI1tMnuurNHpBJ
+ kSS8lhcqSPXfI6/lfTKWrx1uEIe43ECRYGUWC3RWGYbvBox05ucmDfiq9Yvw0XnSdY1x
+ GlI2fyl6c79V9IqDJkSOO1LmO7F0+Qedmt4dINeusc447vA+yoz4/QGPudnHbcGULEv+
+ AKag3QUJ9jH4kRy74DQtcqP/8hblsu4Wd2JKRQ9E5nMrVGJkH54Rayml3Tl1xAtYheIW
+ YnuQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWTgKN6CZ1AHTSv0KQLXBEclaKSeQJoFnUfFKVgfdIUYmplBTnEKPrHqKD69M3f3dnY43gh4Zs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxV0cNuovg6VcoC264xLJ6r3gt0VRsu7Uhr7DLaKEuKDKHChSRl
+ X0DUzz2pl3944zRgFT29rxrFRK67SfXfcruMFC9qhXGmTqN+LAUlqyIrfm6Bjks=
+X-Gm-Gg: ASbGncsALEjFx2Z4N5oGmiBPW4EuNAv1dlWqVpmvuviTqacsm+xvn70NPBcIy+fwGjf
+ 8cVfnekH9sQyZ2vIIsAK0zOj2S9Wi+wod360BMwFHyGot6YyRhGCEO8vKJYDiZXnBCCvuY4jHqw
+ UGObVF8HuKTQmKObcEQ5ghAo3DlV59Vwu6SFLHmK+PXheaSZWa+eRwNGygwMYzPRw0dVQKXVvPx
+ UoUJ1vO6OMnQDpeDNsiYhnD5oN7mw7aPU0uhGjkfecINGxYmh978EDzHQ9f4kBwUqqM3va/eTyA
+ d79Gi1w+D+jLOjhqpwfJVz79HNmlkI5ktWuPwae7fG3PVip0vCoEKSFMzPtCS8uya3puD+obM09
+ ccvv0ZSIkdE/Er6KJtQ==
+X-Google-Smtp-Source: AGHT+IGm0+ljMc+E/mQzO2T6vO0aDTe1Uj11qmdDLIkwYnnu51lI8TDAEKMid9IrwELkl2S2dvPSpg==
+X-Received: by 2002:a5d:648d:0:b0:38d:dd52:1b5d with SMTP id
+ ffacd0b85a97d-39efba2e5bfmr14157565f8f.4.1745399669152; 
+ Wed, 23 Apr 2025 02:14:29 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:2835:c2f4:c226:77dd?
+ ([2a01:e0a:3d9:2080:2835:c2f4:c226:77dd])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39efa433104sm18121180f8f.29.2025.04.23.02.14.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Apr 2025 02:14:28 -0700 (PDT)
+Message-ID: <132c8659-c000-432f-9d2d-7712de50fdf3@linaro.org>
+Date: Wed, 23 Apr 2025 11:14:28 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
 Subject: Re: Wiznet w5500 support
-To: "Verdun, Jean-Marie" <verdun@hpe.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+To: "Verdun, Jean-Marie" <verdun@hpe.com>
 References: <DM4PR84MB1976607AFF39ADF74D9AAF7BD6BB2@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <DM4PR84MB1976607AFF39ADF74D9AAF7BD6BB2@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
+ <3f221717-b5a2-472c-888c-cc8f777cde40@cherry.de>
+Content-Language: en-US, fr
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <3f221717-b5a2-472c-888c-cc8f777cde40@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0232.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e9::13) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM0PR04MB6884:EE_
-X-MS-Office365-Filtering-Correlation-Id: a5ea7d06-5bf3-4df2-6c43-08dd8245b051
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|10070799003|366016|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RTE3SUc2OWh3TVVNTTB4aXQ5alVnSW5UWk01VWppRHRMVlNwOTB6Z21iYmp5?=
- =?utf-8?B?RnJ5QlVhb0g5NjRKQUM3am9ibkVKRUN3TVE0R3JkWEI5c2oxcVZnYzE0eFNG?=
- =?utf-8?B?YmRkQkExZGk1cm5LSjRxbGlRYTdzb21OVjNSYWtsYmI3cHNkNVBnWUJrRG9S?=
- =?utf-8?B?MHdadGsydFJWWitkVWl2S0J1UFdvZmFDV2p3QXRUaGFrZ3dXRFk1Y1BuRHJI?=
- =?utf-8?B?dEZJSjRxVTZTVkF5RkRGU01jK0FHcjNwSTh1L0RRZGtQTTVRT3lxcnI3V2FN?=
- =?utf-8?B?RmZUZDhmT3QyK1VQckZrK3A3Vm1iN2wzS09ySkNFZ0FCQ3BMYlFZYkFiMndP?=
- =?utf-8?B?RHZHYnhNN2Y4RGcvcGhpemxNdVZNTlRqc1V1OUZ5ekk5aXAvSkN1aWFPYk53?=
- =?utf-8?B?T01GMWwyYUhjL05zSFFYNGx3bklJK2FZVGF4MHI3OFA1OUtVcFZ4ckxESTlq?=
- =?utf-8?B?RHQyZG9GUkQwWVRDUzdVVW1jcFVFSDNaRTZOTmdJOGtNYzdlYzh4dmtpTzRR?=
- =?utf-8?B?ZkdMeFYyZkFqMVZaWTAxOTc5QTBpTEJzUFY1V09zdld0bGlIbWtsYnUvS1pm?=
- =?utf-8?B?WTdsb2FOcUtTTzd5YmNPVnNiTkF6dFpoTU1Wb3FrM3poWFhaNzNDZUlHRHBJ?=
- =?utf-8?B?K1pRb3NpNmVXTExYVlJqNm1GR3NpVG5PLzU1aUp6elE2T2V5T2o3OFhsTXhM?=
- =?utf-8?B?eDFlY015RlgwVzJNL1hMNXppTWQ5MHVsQTYrUjBNakp4SGpzNjdwYmhLNjFR?=
- =?utf-8?B?Tzh1S3M5VVNjUS9kb3ZFK3J2bTlvZi83NnQrdXN2SkF3d09OYmJsQWRmRWFJ?=
- =?utf-8?B?TFVFOXcvaGZoZ3d2RE9tT3l0T250VjkwUm5JZXIxQ2o5Z09jM0RVYlE2U1VP?=
- =?utf-8?B?T05HQ3l5MHRxeDVqZmdqSWdTUDd4YmVzL2NmN2F5bHd0cll1eEl0dEliRTA5?=
- =?utf-8?B?bWJyMXBiYWtFN05CZm9jT1QwL2pCWENlSnd3ZVBaRCs2c3RoTlR5VFl2Q3JO?=
- =?utf-8?B?SjljcFFZVWRWWmFzN1hzR1hZMmtqemU0cEpndVdBYmlXTHM0R0V1TGZZQzQv?=
- =?utf-8?B?QmNqZ0s3eHpwald1TG1xb0dDWDVCUmx5NDJPYTRTSDZDQ3dFN0Z3K2wxWllh?=
- =?utf-8?B?aTBDNzlua1VaS25RU0lSdGdxK0txcGpmdVJmSjlIZDlZWURFR3doNCtlT0F3?=
- =?utf-8?B?MDBpa1ltN284ZXNKci9vZUc0OEJVbDhCUExoWEpMcVFTenU5YWIreDJGTVA2?=
- =?utf-8?B?dndZTGZQTzF6Uk1ySUxYaU1TRDFzQ0k0Vm1ka3JVeGgva0R1QTdqZklnRFpZ?=
- =?utf-8?B?Uis0Mm5NazQ1dTl0UmM2cEQxOXVSSHVzMFRiN1RHcUFHbWdNVFBDMy8zQk9O?=
- =?utf-8?B?YUFzTWhBWmFGUFg2bTd1cTkzRGQ0OUZ2N0RrdHp0ZUw2NTNqV2tKaGNZTG03?=
- =?utf-8?B?anNuaEF4dzJ3QUUxNW5TcDhEQVJMdHNoN0IrVnlLYkpPOGxJaXRMaWdVbTdk?=
- =?utf-8?B?WVNZdTM5cTdiVW55Qnc5TjJYOTY0bG05bEJSOHBlR2U2YzJEckZVOTQzSW1Q?=
- =?utf-8?B?MW9yWGZVb0J6WVg4b1g2MzE0RjRKdU5qWXF1YWtIU250QlRWNHpVd2VSVm4x?=
- =?utf-8?B?VjIrUHNRYzhIL3UxNWVHdUxzZkpWdmhNa3FzbUdCZmFqMmFtK2pKZ3NyUi9B?=
- =?utf-8?B?N1JkSHNtSk1MTEl1bDBDYWo0RkcvUkkwNmxXdEtCUXFGOFZNd3FGbHdRWmow?=
- =?utf-8?B?TzI3N0pqRENOOGV4VmRjRkNmMjhPWC8vY3NqMGpza0s4MDhlaGw2OVFQcHJP?=
- =?utf-8?Q?qibYSXH5NKxwX18tAS9+AZbmQ6D1YBw6ABJrk=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(10070799003)(366016)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RlBMSWs3cGViWEtLSEN3Z2lxb3Jsc1BBQmw3S3A4S3R2d09SWXFGUUJ2bVpv?=
- =?utf-8?B?ZHJEZzFmVXBoazdqMHllcDdwV3lYM0lKVjZGYThQbXRFb2NSVldxOEJ6R09q?=
- =?utf-8?B?emhKVFVpQXhKZ0R1T1hkeFkreW13QkNxeTUwMCswYlQ0d3pzUE1tdVlMU0Zp?=
- =?utf-8?B?a2VZZkFwUDhzQTBSdG9FVm96bkNNMTNkQjI1emRhUGVheDNqQTBPcXRBZFVi?=
- =?utf-8?B?c1QxSC9iMmREVEowb2JaVFBMV1BUVnN2U2E1U0wvTndkbHpNMmFTNmYzMDRY?=
- =?utf-8?B?dGVhNGlLbmVXeUdmeXQ5cGRQM01tbWI3QXFVNCt2ZThVVjMrNElFT0gyc1E2?=
- =?utf-8?B?YlBiSjVpUlJjRUVCcWxsOHlFaERCeENVcXZ5YW1mTnZxSCtOMk5seDAyTHlM?=
- =?utf-8?B?d1dUSU4rdWF1S0RuQ2xDSWtCWWNxOFhXcGUrdHpYRTJmS1JMWkhQVm5CWklr?=
- =?utf-8?B?bDE3bi9tbFBYdzZWOGxpeVZaSVYxcm10dlNJVUhjLzNxT0hoL09mRG43UFJp?=
- =?utf-8?B?bmxzZytJYXRKS2VBc0dMWDdGelRIRjRFMlRtU1RWS2Rvd1Z1bkpteVBUY1ly?=
- =?utf-8?B?dGMyZEdXNG84cjYvQ0s3V2Zua3pzdUtKOWdmY2lrNERDS2Fka1J6bzkxclhV?=
- =?utf-8?B?UEE4cG9zVUxxNkxvbjQrOExQMno5ZkI3ZTBrNUdmQkxOTzMvTDlpcTlnUzZE?=
- =?utf-8?B?d0pUK0VTcVpXVlFzQUNONkRyd0sxTS9FKzZ4NkpJOW9WdEYvR2JmNkZraDNZ?=
- =?utf-8?B?ckVnMUtTeUhXbTZoVDNkT2VxWmgwQjlSVG83YkIrY0dIT2ZlUjl2THcrU2VM?=
- =?utf-8?B?Zno1R00rbHFVU1VoWEkzVWxUTE80SzZkVmg0R0w4eTdKd212RFVlZ0dQckN4?=
- =?utf-8?B?NjJrOGJCUmQwRHhHeFRWbGN5N2lBYjdEWStyUFpITkZVWEp2M0VlbUt0UVV0?=
- =?utf-8?B?SjZLVEh4Zmp6VCtkZG5aM0tmQ1drT1Q2aE4wTTVqWmwzSmFwdHRXUE95bGJG?=
- =?utf-8?B?Y1RMUUNPSEl5NGt3b1BsSFdzOUxtUWJIczhHSUlYUWh3YlJrOG9VekY4dmVs?=
- =?utf-8?B?eTJ2SVo0ZVRkNjNmQVdwRDlYYUhRL0VVL1Q0dC8vc2RFeE5kekxLVmxJQzln?=
- =?utf-8?B?Q2drRDhqNGU5ajY2ZGFqemZhYldvbzNkUzMycTQyTjRHb0dRT2M5ejRzRjBL?=
- =?utf-8?B?NDAwamc2L2lMNEwxbXBobFJVWG50N0x0ZFFLNU9FaDRGc1l2SXdrNmkrTjZ3?=
- =?utf-8?B?ODFIV29SdXdnRDVNNFpNYWtxbjJzWVdzTkIvWGo0WnRVd1ZidHdKZDRPNWIx?=
- =?utf-8?B?djBzMGREeUVIVGg4UjN2Y3krdzJIZVlsR1Z1d29uRWN6WjZsWkRmOUEyY3A2?=
- =?utf-8?B?TTl6aktHa1c5MlZjSTVDZ2VTbjUrdXZTWmorbWR4LzdwN2ZmaEphY1VydVJu?=
- =?utf-8?B?L3UwMzR0Z3lGZXhya2F5TjFtLzh4QnF6cW0yMTlCaGNjZzJ3QjdYcUZCVW9D?=
- =?utf-8?B?VDRFNGhvVzF0UzA2b25zdWY3aDdOM2RpaUNyaTUzdGJLaXVtWkMva25pREdU?=
- =?utf-8?B?ZnQ2MkcxVDkzdjFyY3FDNnY0TjNoREFIdVpPTkNYejZGMFgzZHZtWEROa2VX?=
- =?utf-8?B?NzZIUDV5STQrRlNwZFc5aEpDNHZ0amxlWGNSSGlpVjEzY2xjbHZlWGNpUnA1?=
- =?utf-8?B?Z2p1dU9rU3M0ZlJITTJlUjMxbUM4WFBWcURlUjVVY3FaMC9nNFAra214NHdh?=
- =?utf-8?B?Ui9JQUpWalowd29qS0hjUkh3bEFDZFAvQy9Pd2g4RTk3ZUNhK3RxV1NuMVZQ?=
- =?utf-8?B?c056OE9Hc09qR0lLM09EbCtaLzNXRUxvbEhJMWJWSFJBTGdzaDBycWVNM0Nl?=
- =?utf-8?B?OUhtajZzckNtYlgrdUpscXV6dWJnRlJyc0pUTlVKcGxzenRpd0RhRFRKSTBX?=
- =?utf-8?B?NFZjek9OLzkwVDl3NkdCVzltNmQzSzFPeDFzMFVsdUNIOHlEU1JUNldTM3dW?=
- =?utf-8?B?ZmRYdlZvVnl1ZHJaUkk1V2tuYldtVTRZTFRhUEhKQUZUWGd1SWQ2cTZpR0xT?=
- =?utf-8?B?TnZ4QWpPNjJHNERLbDJSMHpHbkV0bmoreExab0ROWjA0OUhBWHBkemZPdVZh?=
- =?utf-8?B?c3lrOVUzRTZtZkVnNW9yYmltTDlTNE9YUVdhL1VFTS83aktEL2tHV2NZNnpa?=
- =?utf-8?B?RHlYWUNoZXB5TTNCTXBBekZYTE1lcmE1Ym9vMm9USFZMSG8zSnJ3aGI3Rmx5?=
- =?utf-8?B?WHh5T29HdDVSZWZMMGhyQ2kvRklRPT0=?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: a5ea7d06-5bf3-4df2-6c43-08dd8245b051
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2025 09:03:18.1216 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: spz5k9ubfcJBEoooxe+ubvf5o8TSpI/G7WxkHjxLfU+JszGwHYdaBL9zq733yWR43Ne1P4SF54JwtJx4OHXvqkADE707i/5beGZNMguHelw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6884
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,59 +124,57 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jean-Marie,
-
-On 4/22/25 8:36 PM, Verdun, Jean-Marie wrote:
-> [You don't often get email from verdun@hpe.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 23/04/2025 11:03, Quentin Schulz wrote:
+> Hi Jean-Marie,
 > 
-> Hi,
+> On 4/22/25 8:36 PM, Verdun, Jean-Marie wrote:
+>> [You don't often get email from verdun@hpe.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>>
+>> Hi,
+>>
+>> I have written a small patch for the wiznet W5500 adapter. (https://docs.wiznet.io/Product/iEthernet/W5500/overview).
+>> I am in some ways ready to push it into u-boot following approval from HPE, but as that will be a first for me, I just wanted to get feedback from you.
+>>
+>> The wiznet device allows me to add a network adapter to deep embedded devices like PCIe board and boot them by using ethernet through a spi bus or gpios by using the soft-spi drivers through u-boot. Usually, such devices boot locally through a spi-nor or other local storage. I want to promote a PXE like approach as to ease firmware updates, improve security, and boot speed. The wiznet device can load raw images at about 1.5MB/s in memory and the u-boot is in charge at bootstrapping the second stage through the in memory copu.
+>>
+>> I successfully tested it by using a raspberry pi 4 device through soft spi as we do not have a driver for it inside u-boot. It works at around 360kB/s compared to 400kB/s through the linux kernel.
+>>
+>> Wiznet device needs in fact 2 drivers, one which behave like “PHY”  and one which is perceived as an ethernet adapter. Both needs to be linked through a phandle as to use the relevant xfer function to push and receive the data.
+>>
 > 
-> I have written a small patch for the wiznet W5500 adapter. (https://docs.wiznet.io/Product/iEthernet/W5500/overview).
-> I am in some ways ready to push it into u-boot following approval from HPE, but as that will be a first for me, I just wanted to get feedback from you.
+> An Ethernet MAC you meant I assume.
 > 
-> The wiznet device allows me to add a network adapter to deep embedded devices like PCIe board and boot them by using ethernet through a spi bus or gpios by using the soft-spi drivers through u-boot. Usually, such devices boot locally through a spi-nor or other local storage. I want to promote a PXE like approach as to ease firmware updates, improve security, and boot speed. The wiznet device can load raw images at about 1.5MB/s in memory and the u-boot is in charge at bootstrapping the second stage through the in memory copu.
+>> So, my patchset will contain some work for the spi subsystem and some for the net subsystem. Do I need to break them down, or a single patch would be good enough ?
+>>
 > 
-> I successfully tested it by using a raspberry pi 4 device through soft spi as we do not have a driver for it inside u-boot. It works at around 360kB/s compared to 400kB/s through the linux kernel.
+> Separate drivers, separate patches please. It's likely going to go through different maintainer trees. They could be in the same patch series though, to give everybody ample context.
 > 
-> Wiznet device needs in fact 2 drivers, one which behave like “PHY”  and one which is perceived as an ethernet adapter. Both needs to be linked through a phandle as to use the relevant xfer function to push and receive the data.
+> Having had a quick glance at the diff in your U-boot fork, it's very unclear to me why we need an SPI bus driver (UCLASS_SPI)? The Linux kernel seems to only have the Ethernet driver. Is the w5500 acting as an SPI controller instead of as an SPI device? I find it hard to believe, but maybe :) ?
+
+Yeah looking at the code, the SPI controller driver simply call the buf xfer, so it can be dropped.
+
 > 
-
-An Ethernet MAC you meant I assume.
-
-> So, my patchset will contain some work for the spi subsystem and some for the net subsystem. Do I need to break them down, or a single patch would be good enough ?
+> I believe you should only need the Ethernet MAC driver (possibly Ethernet PHY driver as well?) but built on top of an SPI device (and not driver), essentially just calling spi functions taking a udevice as parameter?
 > 
+> Look at drivers/power/pmic/rk8xx.c for example, it is a PMIC driver for an I2C (or SPI) device. Or for something closer to your device, maybe have a look at the KSZ9477? It seems to require I2C and SPI (but is a DSA switch, so slightly different than yours).
+> 
+> Additionally, we do not allow modifications of the dts/upstream directory. The patches absolutely need to come from the devicetree-rebasing tree, via the `tools/update-subtree.sh pick <commit>` command, so please upstream the binding to the Linux kernel first.
 
-Separate drivers, separate patches please. It's likely going to go 
-through different maintainer trees. They could be in the same patch 
-series though, to give everybody ample context.
+The w550 bindings are already upstream in Linux and are already in the U-boot tree in `dts/upstream/Bindings/net/wiznet,w5x00.txt` so the driver should conform to this.
 
-Having had a quick glance at the diff in your U-boot fork, it's very 
-unclear to me why we need an SPI bus driver (UCLASS_SPI)? The Linux 
-kernel seems to only have the Ethernet driver. Is the w5500 acting as an 
-SPI controller instead of as an SPI device? I find it hard to believe, 
-but maybe :) ?
+If you want yaml bindings, please convert them to yaml and submit them to the Linux mailing-lists and they will be synced in dts/upstream when the next Linux release is done.
 
-I believe you should only need the Ethernet MAC driver (possibly 
-Ethernet PHY driver as well?) but built on top of an SPI device (and not 
-driver), essentially just calling spi functions taking a udevice as 
-parameter?
+Neil
 
-Look at drivers/power/pmic/rk8xx.c for example, it is a PMIC driver for 
-an I2C (or SPI) device. Or for something closer to your device, maybe 
-have a look at the KSZ9477? It seems to require I2C and SPI (but is a 
-DSA switch, so slightly different than yours).
+> 
+> Looking forward to seeing patches on the mailing list!
+> 
+> Cheers,
+> Quentin
 
-Additionally, we do not allow modifications of the dts/upstream 
-directory. The patches absolutely need to come from the 
-devicetree-rebasing tree, via the `tools/update-subtree.sh pick 
-<commit>` command, so please upstream the binding to the Linux kernel first.
-
-Looking forward to seeing patches on the mailing list!
-
-Cheers,
-Quentin
