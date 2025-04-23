@@ -4,85 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE7D8C369C2
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 01:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C620C369C2
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 02:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD0D480FF7;
-	Wed, 23 Apr 2025 03:49:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C497780F6B;
+	Wed, 23 Apr 2025 04:04:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=paulsajna.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PVybND6n";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=paulsajna.com header.i=@paulsajna.com header.b="NN2+sCp6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A95C80F9C; Wed, 23 Apr 2025 03:49:56 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D5D9580F9C; Wed, 23 Apr 2025 04:04:09 +0200 (CEST)
+Received: from mail-10625.protonmail.ch (mail-10625.protonmail.ch
+ [79.135.106.25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7348B80F03
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 03:49:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FF8880F03
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 04:04:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=paulsajna.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3fbc00143d6so3850260b6e.3
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 18:49:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745372991; x=1745977791; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ESAKoscm7PAou1xSZngTJqa6lnWPtKG6vS0e+9U9RrY=;
- b=PVybND6ny8+zk5X0IK6pMUf/NcXSedIYFxLdMbqTqPTGUbdI6W3ErxCdmAVGxitiGN
- qZebt5U86hpf2rCJj708RhinYj14NWdkaQn0eE3CGHPuEesVjKbI1uXCygOdCO4H1Q57
- XkLlEB/VrAVV1qRFpalFU9x5Gnz3T0SyeZQ+E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745372991; x=1745977791;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ESAKoscm7PAou1xSZngTJqa6lnWPtKG6vS0e+9U9RrY=;
- b=oYXHmknNRyy8HJcyYdgdtBv6bLux9IQJ5EaoTi44+2Wc5oMxBvHWB0lMLCFsdGRW0Q
- /auDEixFuBnlEjSzyCwn3wL2xW3CazsCi6NNWS1mFBIPcNA4MmDOfWGIkQLzzkau3MLy
- DtPJPdv+pOyet5DLXsQaYKxKH4pC+13wqFk21Zw+A1CbySWhBYvQ+wmjGvYuOyXIGGpr
- Mf6E9C4TLO2O4Wu4pEMwn/A3LZ0mhurZVN1nfbpdgiLvUapxnkTkGYoe2/jIr1e6Du1F
- lKuD1+Cg2bDdQdEtzUKpni9d9XyGmPpXr+xYOarYrRHN/fSps1LeRaL3fMVQBx4pUGIf
- oG8Q==
-X-Gm-Message-State: AOJu0YyEDy8PvaeRJ60ZDXMzqyLF6Y01n/8xusHPdW1rySf6izidA7XM
- v88WAizPIh3d1GXgTsQkcyAjp8EtMdp/EjCwfXcN44wBVqfRYYmiGBFXeh+HCGY=
-X-Gm-Gg: ASbGncs5JzynEIzyP0AYRqwaLDWWxaH8zZfYxNzq/+Ppra3fcCUlyU95VyOCl8riltP
- Xedi+W536dOPpSifn8HRh+YM0OQL5jXcK7wHfs5tnOMsljRZTua90ne+4QnRFKpcEftmExCtndn
- mjhVLOb+zHkZUO25FVv9Z93yVa03WCqssMMLe8h02/ANTqRXG2Nl/R902BaZTHP/lWqiWWpRkIr
- n77F1hwp2MtW21nRmSoYMpxARd4PnwBfnm/XjJTu9oQ0gxix8aOQ25HG7LUOQVhI5ZBZcdJ9Hgn
- cpLvfhSgPelU6vrsCXY4GYQfLxzLV4O2YgnplCTm4UmAlfs5tD+2LRBMK7InZEBIDjWQLkzVjEs
- 6
-X-Google-Smtp-Source: AGHT+IHUHpxScIoXRutiuk3pEqFWeIWwj8ZVnYIjCJDxcC4b8aW1u8bkpIaGGYuzIG13QjCFJrKl2g==
-X-Received: by 2002:a05:6808:8012:b0:3fb:a7d0:3b46 with SMTP id
- 5614622812f47-401c0925f03mr8769620b6e.8.1745372991090; 
- Tue, 22 Apr 2025 18:49:51 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-401d9e94fedsm961358b6e.1.2025.04.22.18.49.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 18:49:50 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Michal Simek <michal.simek@amd.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Paul Burton <paulburton@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Sumit Garg <sumit.garg@kernel.org>
-In-Reply-To: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
-References: <20240517-boston-v3-0-1ea7d23f4a1d@flygoat.com>
-Subject: Re: [PATCH v3 00/12] MIPS: Boston: Various enhancements
-Message-Id: <174537298898.3850697.14612800703368173610.b4-ty@konsulko.com>
-Date: Tue, 22 Apr 2025 19:49:48 -0600
+ spf=pass smtp.mailfrom=hello@paulsajna.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=paulsajna.com;
+ s=protonmail; t=1745373846; x=1745633046;
+ bh=6COQ5ZgOVnBtm2t/KG5tXTL8OAJw6F29eh3y1PFlRl8=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=NN2+sCp69hfjMkM64JzDLdEM8SydRIpbZugYsVl+PLhZV7C2MUrFOwY9VDFFtb5Dd
+ 593wU48jzMJ7OWmk2zg04znugCdFR76166k05gA5RGYf247Z1wOGiOgoh/yxP34dLy
+ IoW/fVzD3BXK1sb5Wcf4N1hC8WAjd3g/0pgvLNwHgzWoHCkNZnAwYoZYwOY+eZWE3Z
+ 52NoDj5QkY+JEwZmPL8cxNcNdrd7zZRXx0jNJDs4mRh+Q5YP+0a5s0bJUmQ1qDa/kZ
+ GbkrUcgXV3GqZUfBc/hy81je1MThAD7TAzoBiUG5IjHYAF9UdbUydpuCSgxU77scvs
+ Zjnd06GjvJcAA==
+Date: Wed, 23 Apr 2025 02:04:03 +0000
+To: Casey Connolly <casey.connolly@linaro.org>
+From: Paul Sajna <hello@paulsajna.com>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Stefan Roese <sr@denx.de>, u-boot-qcom@groups.io, Sam Day <me@samcday.com>
+Subject: Re: [PATCH v2 2/2] watchdog: qcom: improve driver with more
+ functionality
+Message-ID: <9IIfbR8-zwvCgMLLLEPmUQokw-LrsKXoqD859mitNycZfqbs6bLJDoAI1SYDI_dIvbBvcguPR5_fmnVCWUR5zTBUYrADscQk5u0eYVupsCQ=@paulsajna.com>
+In-Reply-To: <w2nlv9FzBv_7cz1on576OdWuPItzYrbZP3o5tu8fnurwSBojeSEHitBNbxKX3PmJCRW7P4bbyl_7_yQz4xVhM1j8tG0ymgVgcjQbii-3Tr0=@paulsajna.com>
+References: <20250421-b4-qcom-wdt-v2-0-b2250efa0f39@paulsajna.com>
+ <20250421-b4-qcom-wdt-v2-2-b2250efa0f39@paulsajna.com>
+ <9eb12f16-2af5-49eb-bd09-c809c0debf59@linaro.org>
+ <w2nlv9FzBv_7cz1on576OdWuPItzYrbZP3o5tu8fnurwSBojeSEHitBNbxKX3PmJCRW7P4bbyl_7_yQz4xVhM1j8tG0ymgVgcjQbii-3Tr0=@paulsajna.com>
+Feedback-ID: 29073965:user:proton
+X-Pm-Message-ID: 375702ca67ca0eada11638d6e6c111427ac54063
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,50 +73,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 17 May 2024 19:14:48 +0100, Jiaxun Yang wrote:
+Tested stop and start in the console with reset (service watchdog) commente=
+d out and ensured start eventually reset from the watchdog. All seems good.=
+ Squashed and preparing to push v3.
 
-> This is a huge series which promoted MIPS/Boston target into a
-> usable state, with fixes to drivers and general framework issues
-> I found in this process.
-> 
-> I also converted the target to OF_UPSTREAM.
-> 
-> This target is covered by QEMU, to test on QEMU:
-> ```
-> make boston64r6el_defconfig
-> make
-> qemu-system-mips64el -M boston -cpu I6500 -bios ./u-boot.bin -nographic
-> ```
-> 
-> [...]
+On Tuesday, April 22nd, 2025 at 3:46 PM, Paul Sajna <hello@paulsajna.com> w=
+rote:
 
-Applied to u-boot/master, thanks!
-
-[01/12] pci: xilinx: Handle size of ecam region properly
-        commit: cb5af7aa4f5119faf738542f6c066fa5bb352aa1
-[02/12] pci: auto: Reduce bridge mem alignment boundary for boston
-        commit: fc25cd0e1a1d5bea59c651782b93e70289d68c1f
-[03/12] pci: Enable PCI_MAP_SYSTEM_MEMORY when ARCH_MAP_SYSMEM is not set
-        commit: 1864dfb1c457e090d2e84d14ee56d9579a898e7f
-[04/12] ahci: DMA addressing fixes
-        commit: 8daa1fadc2c45bc954537a70942674e0a4cf85a8
-[05/12] ahci: dwc_ahsata: Generalize the driver
-        commit: 2b62ec62ac39723660bfeb6c0b4d336269a3adfc
-[06/12] MIPS: Provide dummy acpi_table.h
-        commit: 0fd4686df5fe7a7b1783eec6ff21ffdd1c2b0467
-[07/12] MIPS: boston: Imply various options
-        commit: 49cc0e1adceeeb8f149390e45a0aa8fa0c1e4ef4
-[08/12] MIPS: boston: Provide default env vars
-        commit: a6661e260c5f98b578a636a5e265690435167981
-[09/12] clk: boston: Allow to get regmap from parent device
-        commit: 964bb01f34741c9866917337afecab98262be562
-[10/12] dts/upstream: Add Makefile for MIPS
-        commit: d3730b53d9ae26bc0ec0f35d65d563f60800326d
-[11/12] MIPS: boston: Migrate to OF_UPSTREAM
-        commit: 4ba5026a0fb4a4a3825e250d8e76f07b5a5e4609
-[12/12] mailmap: Update email for Paul Burton
-        commit: baf4bdcdeda78874efa8e2e7875ab4a91f5aa502
--- 
-Tom
-
-
+>=20
+>=20
+> I tested reset and stop pretty thoroughly. I suppose "start" could use so=
+me more checking. I'll squash and fix a line of code I noticed I accidental=
+ly duplicated, then retest that this evening (Pacific Time)
+>=20
+> On Tuesday, April 22nd, 2025 at 12:50 PM, Casey Connolly casey.connolly@l=
+inaro.org wrote:
+>=20
+> > Hi Paul,
+> >=20
+> > Please squash this patch into the first one, otherwise this looks good.
+> > Did you test start/stop/reset?
+> >=20
+> > Kind regards,
+> >=20
+> > On 4/22/25 01:20, Paul Sajna wrote:
+> >=20
+> > > - add the ability to start the watchdog
+> > > - add the ability to reset the watchdog
+> > > - remove the automatic disable in the probe function
+> > > - use log macros for errors
+> > >=20
+> > > Signed-off-by: Paul Sajna hello@paulsajna.com
+> > > ---
+> > > drivers/watchdog/qcom-wdt.c | 32 +++++++++++++++++++++++++-------
+> > > 1 file changed, 25 insertions(+), 7 deletions(-)
+> > >=20
+> > > diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.=
+c
+> > > index a7ce31ef811c717fd16700aa7d984a000763a93e..88e5fc7906825ac258393=
+495682a75a5010473b0 100644
+> > > --- a/drivers/watchdog/qcom-wdt.c
+> > > +++ b/drivers/watchdog/qcom-wdt.c
+> > > @@ -4,12 +4,14 @@
+> > > * Copyright (c) Linaro Ltd. 2024
+> > > *
+> > > * Authors:
+> > > - * Caleb Connolly caleb.connolly@linaro.org
+> > > + * Casey Connolly casey.connolly@linaro.org
+> > > + * Paul Sajna hello@paulsajna.com
+> > > *
+> > > * Derived from linux/drivers/watchdog/qcom-wdt.c
+> > > */
+> > >=20
+> > > #include <dm.h>
+> > > +#include <dm/device_compat.h>
+> > > #include <wdt.h>
+> > >=20
+> > > #include <asm/io.h>
+> > > @@ -50,7 +52,16 @@ static void __iomem *wdt_addr(struct qcom_wdt *wdt=
+, enum wdt_reg reg)
+> > >=20
+> > > int qcom_wdt_start(struct udevice dev, u64 timeout_ms, ulong flags)
+> > > {
+> > > - / unimplemented */
+> > > + struct qcom_wdt *wdt =3D dev_get_priv(dev);
+> > > +
+> > > + writel(0, wdt_addr(wdt, WDT_EN));
+> > > + writel(1, wdt_addr(wdt, WDT_RST));
+> > > + writel(1, wdt_addr(wdt, WDT_EN));
+> > > + writel(1, wdt_addr(wdt, WDT_EN));
+> > > + if (readl(wdt_addr(wdt, WDT_EN)) !=3D 1) {
+> > > + dev_err(dev, "Failed to enable Qualcomm watchdog!\n");
+> > > + return -EIO;
+> > > + }
+> > > return 0;
+> > > }
+> > >=20
+> > > @@ -60,29 +71,36 @@ int qcom_wdt_stop(struct udevice *dev)
+> > >=20
+> > > writel(0, wdt_addr(wdt, WDT_EN));
+> > > if (readl(wdt_addr(wdt, WDT_EN))) {
+> > > - printf("Failed to disable Qualcomm watchdog!\n");
+> > > + dev_err(dev, "Failed to disable Qualcomm watchdog!\n");
+> > > return -EIO;
+> > > }
+> > >=20
+> > > return 0;
+> > > }
+> > >=20
+> > > +int qcom_wdt_reset(struct udevice *dev)
+> > > +{
+> > > + struct qcom_wdt *wdt =3D dev_get_priv(dev);
+> > > +
+> > > + writel(1, wdt_addr(wdt, WDT_RST));
+> > > + return 0;
+> > > +}
+> > > +
+> > > static int qcom_wdt_probe(struct udevice *dev)
+> > > {
+> > > struct qcom_wdt *wdt =3D dev_get_priv(dev);
+> > > struct qcom_wdt_match_data *data =3D (void *)dev_get_driver_data(dev)=
+;
+> > > - int ret;
+> > >=20
+> > > wdt->base =3D dev_read_addr_ptr(dev);
+> > > wdt->layout =3D data->offset;
+> > >=20
+> > > - ret =3D qcom_wdt_stop(dev);
+> > > -
+> > > - return ret;
+> > > + return 0;
+> > > }
+> > >=20
+> > > static const struct wdt_ops qcom_wdt_ops =3D {
+> > > + .start =3D qcom_wdt_start,
+> > > .stop =3D qcom_wdt_stop,
+> > > + .reset =3D qcom_wdt_reset,
+> > > };
+> > >=20
+> > > static const struct udevice_id qcom_wdt_ids[] =3D {
+> >=20
+> > --
+> > Casey (she/they)
