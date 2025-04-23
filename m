@@ -4,59 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B427DC369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 16:07:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F41CC369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 16:31:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A053A80BA8;
-	Wed, 23 Apr 2025 18:07:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=0upti.me
+	by phobos.denx.de (Postfix) with ESMTP id 8AAFE805D7;
+	Wed, 23 Apr 2025 18:31:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=paulsajna.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=0upti.me header.i=@0upti.me header.b="BwvV2n6h";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=paulsajna.com header.i=@paulsajna.com header.b="In+AgLN8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A10D38070C; Wed, 23 Apr 2025 17:36:54 +0200 (CEST)
-Received: from forward101d.mail.yandex.net (forward101d.mail.yandex.net
- [IPv6:2a02:6b8:c41:1300:1:45:d181:d101])
+ id A22EB8070C; Wed, 23 Apr 2025 18:31:43 +0200 (CEST)
+Received: from mail-24421.protonmail.ch (mail-24421.protonmail.ch
+ [109.224.244.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 202CF80194
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 17:36:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=0upti.me
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@0upti.me
-Received: from mail-nwsmtp-smtp-production-main-57.klg.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-57.klg.yp-c.yandex.net
- [IPv6:2a02:6b8:c42:921:0:640:b194:0])
- by forward101d.mail.yandex.net (Yandex) with ESMTPS id 3A510608FA;
- Wed, 23 Apr 2025 18:36:51 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-57.klg.yp-c.yandex.net
- (smtp/Yandex) with ESMTPSA id haRiePKLeiE0-UfaPXDg1; 
- Wed, 23 Apr 2025 18:36:50 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0upti.me; s=mail;
- t=1745422610; bh=t3+epUFMJxXHZU+d1q4ZOKjpH1l2TglcGon6a7GaMEU=;
- h=Cc:Message-Id:To:From:Date:Subject;
- b=BwvV2n6hdH5kqGzdVbs6eoExxgAQ5JoeAyN40dthhQPeoGQQnDjbk8ChN/Owqhp3D
- AZd5hJqoAzKwdc6jfELTNyW83klPhp+ENTuJaTHMjX1lgqI+DQS8DyoJyLxkiMDUpb
- kBW93Lfye4n8Td0iqf3bCuvE/1nPNbu16AkpYqkM=
-Authentication-Results: mail-nwsmtp-smtp-production-main-57.klg.yp-c.yandex.net;
- dkim=pass header.i=@0upti.me
-From: Ilya Katsnelson <me@0upti.me>
-Date: Wed, 23 Apr 2025 18:36:40 +0300
-Subject: [PATCH v4] board: rockchip: add Xunlong Orange Pi 5 Max
+ by phobos.denx.de (Postfix) with ESMTPS id EC3798059A
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 18:31:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=paulsajna.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hello@paulsajna.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=paulsajna.com;
+ s=protonmail; t=1745425899; x=1745685099;
+ bh=/mkgeI3cm9/B51Kkuruw5+I5uvhBTpkHbRjTKGtX1JE=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=In+AgLN8+pZh3bMpsDrb2MOKGYTuKN3frbAq5UARO7bFZ1paU7jnJqe5HhxKCp7ob
+ +WSgB8EPltwLfA+0bVnQ9I5GKriTD5kprvywly8gt6saKsND/NfRLFqBSNZv+Zb/aC
+ HXMdDNTdVgXNd6urE02YSCGV4B1pAqa253QtVKka6Whh8bbB5tIeODNH7APYV2btNk
+ +2uJmd3Kc7IXAmfd5Uc1XZmwfuy2xNIgs3UTF1ew50bCScb9SI4GXbMa4ZJnEE7lP0
+ r7RJDBx0koNU7JO3EN3qITH+xcZzSKxhTogGoydKcl3ogBr80ER9e39IVCS+NHx92s
+ n2DyRbN7es4tw==
+Date: Wed, 23 Apr 2025 16:31:32 +0000
+To: Casey Connolly <casey.connolly@linaro.org>
+From: Paul Sajna <hello@paulsajna.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
+ "u-boot-qcom@groups.io" <u-boot-qcom@groups.io>, Sam Day <me@samcday.com>
+Subject: Re: [PATCH v3] watchdog: qcom: introduce qcom-wdt driver
+Message-ID: <0c-XWvP6Crfbw8yuPKvbb9T_l3Z67EPvllg2T1xfAs3NNS7lAS_W_-l6YPNcqXgtdCWUPViBBE1vZGDpyoPfsi-4N5zfvzVIvtvjUENJBz0=@paulsajna.com>
+In-Reply-To: <ff8bdd8e-c206-4bf7-824f-eb482507d53b@linaro.org>
+References: <20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com>
+ <ff8bdd8e-c206-4bf7-824f-eb482507d53b@linaro.org>
+Feedback-ID: 29073965:user:proton
+X-Pm-Message-ID: e5a59de8857952b7ebb524ea3f4a44a8c1a76cd8
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250423-add-opi5-max-v4-1-6ca8dfddb1f0@0upti.me>
-X-B4-Tracking: v=1; b=H4sIAAcJCWgC/1XMsQ7CIBCA4VdpbvYMUMDq5HsYBwKHvYHSQG2aN
- H13iZOO3/D/O1QqTBVu3Q6FVq6cpwZ96sCPbnoRcmgGJZQRWvXoQsA8s8HkNozGXq27eK18hJb
- MhSJv393j2RxLTriMhdzPROr/ydqjRCOCt4MYnJTmLt7zwudEcBwfDQGxwaEAAAA=
-X-Change-ID: 20250423-add-opi5-max-f5696a7c42cf
-To: u-boot@lists.denx.de
-Cc: jonas@kwiboo.se, Ilya Katsnelson <me@0upti.me>
-X-Mailer: b4 0.14.2
-X-Mailman-Approved-At: Wed, 23 Apr 2025 18:07:28 +0200
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,201 +71,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 5 Max is another board in the Orange Pi 5 family.
+Thanks for all the reviews and guidance :D
 
-It's overall similar to the 5 Plus, but in a smaller form factor,
-which leads to some I/O being reshuffled, but nothing relevant
-to u-boot.
 
-So, just reuse the config for the 5 Plus and adjust the DT names.
+-------- Original Message --------
+On 4/23/25 4:55 AM, Casey Connolly <casey.connolly@linaro.org> wrote:
 
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-Signed-off-by: Ilya Katsnelson <me@0upti.me>
----
-The 5 Max is another board in the Orange Pi 5 family.
-
-It's overall similar to the 5 Plus, but in a smaller form factor,
-which leads to some I/O being reshuffled, but nothing relevant
-to u-boot.
-
-So, just reuse the config for the 5 Plus and adjust the DT names.
----
-Changes in v4:
-- fixed MAINTAINERS ordering
-- Link to v3: https://lore.kernel.org/r/20250414-add-opi5-max-v3-1-50dc6808a115@0upti.me/
-
-Changes in v3:
-- fixed silly copy/paste error
-- Link to v2: https://lore.kernel.org/r/20250412-add-opi5-max-v2-1-585197588511@0upti.me
-
-Changes in v2:
-- fixed pinctrl definition for the flash
-- added docs and MAINTAINERS entries
-- fixed signoff line to use my real name
-- Link to v1: https://lore.kernel.org/r/20250405-add-opi5-max-v1-1-e02686fc03b6@0upti.me
----
- arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi | 20 ++++++
- board/rockchip/evb_rk3588/MAINTAINERS          |  6 ++
- configs/orangepi-5-max-rk3588_defconfig        | 89 ++++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst                |  1 +
- 4 files changed, 116 insertions(+)
-
-diff --git a/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..afd33dd3248a92a721c2f5a6789f395a5b577ae5
---- /dev/null
-+++ b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588-u-boot.dtsi"
-+
-+&fspim2_pins {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-+
-+&sfc {
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+	};
-+};
-diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-index a858ab163f362f4fc0dd578830fe84b20d9ca429..1232f05a387ca54c38cc54f88a510da95a12047d 100644
---- a/board/rockchip/evb_rk3588/MAINTAINERS
-+++ b/board/rockchip/evb_rk3588/MAINTAINERS
-@@ -36,6 +36,12 @@ F:	configs/orangepi-5-rk3588s_defconfig
- F:	arch/arm/dts/rk3588s-orangepi-5.dts
- F:	arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi
- 
-+ORANGEPI-5-MAX-RK3588
-+M:	Ilya Katsnelson <me@0upti.me>
-+S:	Maintained
-+F:	configs/orangepi-5-max-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-+
- ORANGEPI-5-PLUS-RK3588
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
-diff --git a/configs/orangepi-5-max-rk3588_defconfig b/configs/orangepi-5-max-rk3588_defconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..a655dfe2d64168b2d6a3b400abd4c03d9d4bc402
---- /dev/null
-+++ b/configs/orangepi-5-max-rk3588_defconfig
-@@ -0,0 +1,89 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_SPEED=24000000
-+CONFIG_SF_DEFAULT_MODE=0x2000
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-max"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_EVB_RK3588=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_SF_DEFAULT_BUS=5
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-max.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DWC_AHCI=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_XMC=y
-+CONFIG_PHYLIB=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SFC=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 1407080f1f4fd226b80e34689a34c88f3c37150a..00d9587e9880937125f7ace229740f10f2c959c4 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -149,6 +149,7 @@ List of mainline supported Rockchip boards:
-      - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
-      - Turing Machines RK1 (turing-rk1-rk3588)
-      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
-+     - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
-      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
-      - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
-      - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
-
----
-base-commit: f892a7f397a66d8d09f418d1e0e06dfb48bac27d
-change-id: 20250423-add-opi5-max-f5696a7c42cf
-
-Best regards,
--- 
-Ilya Katsnelson <me@0upti.me>
-
+>  Hi Paul,
+> =20
+>  Thanks for making it through the process :D LGTM.
+> =20
+>  Kind regards,
+> =20
+>  On 4/23/25 04:19, Paul Sajna wrote:
+>  > From: Casey Connolly <casey.connolly@linaro.org>
+>  >
+>  > Some Qualcomm device vendors decide to turn the watchdog on in the
+>  > bootloader, resulting in the device being reset if it isn't petted eve=
+ry
+>  > ~30 seconds. Introduce a driver to keep the watchdog happy and prevent=
+ this
+>  > annoying behaviour.
+>  >
+>  > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+>  > Signed-off-by: Paul Sajna <hello@paulsajna.com>
+>  > Co-authored-by: Paul Sajna <hello@paulsajna.com>
+>  > Tested-by: Paul Sajna <hello@paulsajna.com>
+>  > ---
+>  > This patch introduces a simple watchdog driver for Qualcomm devices.
+>  >
+>  > Some devices, including one I have been spending a lot of time with,
+>  > the LG G7 ThinQ (codename judyln, arch sdm845) will reset within 30
+>  > seconds if the watchdog is not serviced.
+>  >
+>  > I have tested this patch from Casey Connolly that is over a year old a=
+nd has
+>  > not yet been upstreamed, and it is very useful to me. I can hardly use
+>  > u-boot on this device without it. I have received Casey's permission t=
+o
+>  > work on upstreaming this patch.
+>  >
+>  > This is my first contribution to U-Boot, and I am unfamiliar with
+>  > mailing list workflows, so please be patient :)
+>  > ---
+>  > Changes in v3:
+>  > - Squash commit 1 and 2
+>  > - remove duplicated line of code
+>  > - Link to v2: https://lore.kernel.org/r/20250421-b4-qcom-wdt-v2-0-b225=
+0efa0f39@paulsajna.com
+>  >
+>  > Changes in v2:
+>  > - Add watchdog start
+>  > - Add watchdog reset
+>  > - Remove stop from the probe function
+>  > - Use dev_err instead of printf
+>  > - Update Casey's name
+>  > - Add myself as an author
+>  > -
+>  > - Link to v1: https://lore.kernel.org/r/20250413-b4-qcom-wdt-v1-1-db42=
+cb93dff8@paulsajna.com
+>  > ---
+>  >   configs/qcom_defconfig      |   2 +
+>  >   drivers/watchdog/Kconfig    |   7 +++
+>  >   drivers/watchdog/Makefile   |   1 +
+>  >   drivers/watchdog/qcom-wdt.c | 117 ++++++++++++++++++++++++++++++++++=
+++++++++++
+>  >   4 files changed, 127 insertions(+)
+>  >
+>  > diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+>  > index 537806450dc4a61d3c617cdd2b0cfb8eab1c343c..0232f6d51c552bd06c8ba7=
+2b71edb5cb72fe0706 100644
+>  > --- a/configs/qcom_defconfig
+>  > +++ b/configs/qcom_defconfig
+>  > @@ -144,3 +144,5 @@ CONFIG_VIDEO_FONT_16X32=3Dy
+>  >   CONFIG_SYS_WHITE_ON_BLACK=3Dy
+>  >   CONFIG_NO_FB_CLEAR=3Dy
+>  >   CONFIG_VIDEO_SIMPLE=3Dy
+>  > +CONFIG_WDT_QCOM=3Dy
+>  > +CONFIG_WDT=3Dy
+>  > diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+>  > index 1bb67f5035231df9f6ce01adb08d074855393143..808f4e578e28e7812f93b3=
+93a7f7d95d9501cdd4 100644
+>  > --- a/drivers/watchdog/Kconfig
+>  > +++ b/drivers/watchdog/Kconfig
+>  > @@ -335,6 +335,13 @@ config WDT_K3_RTI_FW_FILE
+>  >
+>  >   endif
+>  >
+>  > +config WDT_QCOM
+>  > +=09bool "Qualcomm watchdog timer support"
+>  > +=09depends on WDT && ARCH_SNAPDRAGON
+>  > +=09help
+>  > +=09  Select this to enable Qualcomm watchdog timer, which can be foun=
+d on
+>  > +=09  some Qualcomm chips.
+>  > +
+>  >   config WDT_SANDBOX
+>  >   =09bool "Enable Watchdog Timer support for Sandbox"
+>  >   =09depends on SANDBOX && WDT
+>  > diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+>  > index e6bd4c587af6133c405dde6dbada8050debc781c..5eaabd4aba58c815de4165=
+f901aecfba0e0da255 100644
+>  > --- a/drivers/watchdog/Makefile
+>  > +++ b/drivers/watchdog/Makefile
+>  > @@ -54,3 +54,4 @@ obj-$(CONFIG_WDT_SUNXI) +=3D sunxi_wdt.o
+>  >   obj-$(CONFIG_WDT_TANGIER) +=3D tangier_wdt.o
+>  >   obj-$(CONFIG_WDT_XILINX) +=3D xilinx_wwdt.o
+>  >   obj-$(CONFIG_WDT_ADI) +=3D adi_wdt.o
+>  > +obj-$(CONFIG_WDT_QCOM) +=3D qcom-wdt.o
+>  > diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
+>  > new file mode 100644
+>  > index 0000000000000000000000000000000000000000..3601ba93774730f78574b2=
+fd74b8c513e7ce22e1
+>  > --- /dev/null
+>  > +++ b/drivers/watchdog/qcom-wdt.c
+>  > @@ -0,0 +1,117 @@
+>  > +// SPDX-License-Identifier: GPL-2.0+
+>  > +/*
+>  > + * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+>  > + * Copyright (c) Linaro Ltd. 2024
+>  > + *
+>  > + * Authors:
+>  > + *   Casey Connolly <casey.connolly@linaro.org>
+>  > + *   Paul Sajna <hello@paulsajna.com>
+>  > + *
+>  > + * Derived from linux/drivers/watchdog/qcom-wdt.c
+>  > + */
+>  > +
+>  > +#include <dm.h>
+>  > +#include <dm/device_compat.h>
+>  > +#include <wdt.h>
+>  > +
+>  > +#include <asm/io.h>
+>  > +
+>  > +enum wdt_reg {
+>  > +=09WDT_RST,
+>  > +=09WDT_EN,
+>  > +=09WDT_STS,
+>  > +=09WDT_BARK_TIME,
+>  > +=09WDT_BITE_TIME,
+>  > +};
+>  > +
+>  > +struct qcom_wdt_match_data {
+>  > +=09const u32 *offset;
+>  > +};
+>  > +
+>  > +struct qcom_wdt {
+>  > +=09void __iomem *base;
+>  > +=09const u32 *layout;
+>  > +};
+>  > +
+>  > +static const u32 reg_offset_data_kpss[] =3D {
+>  > +=09[WDT_RST] =3D 0x4,
+>  > +=09[WDT_EN] =3D 0x8,
+>  > +=09[WDT_STS] =3D 0xC,
+>  > +=09[WDT_BARK_TIME] =3D 0x10,
+>  > +=09[WDT_BITE_TIME] =3D 0x14,
+>  > +};
+>  > +
+>  > +static const struct qcom_wdt_match_data match_data_kpss =3D {
+>  > +=09.offset =3D reg_offset_data_kpss,
+>  > +};
+>  > +
+>  > +static void __iomem *wdt_addr(struct qcom_wdt *wdt, enum wdt_reg reg)
+>  > +{
+>  > +=09return wdt->base + wdt->layout[reg];
+>  > +}
+>  > +
+>  > +int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>  > +{
+>  > +=09struct qcom_wdt *wdt =3D dev_get_priv(dev);
+>  > +
+>  > +=09writel(0, wdt_addr(wdt, WDT_EN));
+>  > +=09writel(1, wdt_addr(wdt, WDT_RST));
+>  > +=09writel(1, wdt_addr(wdt, WDT_EN));
+>  > +=09if (readl(wdt_addr(wdt, WDT_EN)) !=3D 1) {
+>  > +=09=09dev_err(dev, "Failed to enable Qualcomm watchdog!\n");
+>  > +=09=09return -EIO;
+>  > +=09}
+>  > +=09return 0;
+>  > +}
+>  > +
+>  > +int qcom_wdt_stop(struct udevice *dev)
+>  > +{
+>  > +=09struct qcom_wdt *wdt =3D dev_get_priv(dev);
+>  > +
+>  > +=09writel(0, wdt_addr(wdt, WDT_EN));
+>  > +=09if (readl(wdt_addr(wdt, WDT_EN))) {
+>  > +=09=09dev_err(dev, "Failed to disable Qualcomm watchdog!\n");
+>  > +=09=09return -EIO;
+>  > +=09}
+>  > +
+>  > +=09return 0;
+>  > +}
+>  > +
+>  > +int qcom_wdt_reset(struct udevice *dev)
+>  > +{
+>  > +=09struct qcom_wdt *wdt =3D dev_get_priv(dev);
+>  > +
+>  > +=09writel(1, wdt_addr(wdt, WDT_RST));
+>  > +=09return 0;
+>  > +}
+>  > +
+>  > +static int qcom_wdt_probe(struct udevice *dev)
+>  > +{
+>  > +=09struct qcom_wdt *wdt =3D dev_get_priv(dev);
+>  > +=09struct qcom_wdt_match_data *data =3D (void *)dev_get_driver_data(d=
+ev);
+>  > +
+>  > +=09wdt->base =3D dev_read_addr_ptr(dev);
+>  > +=09wdt->layout =3D data->offset;
+>  > +
+>  > +=09return 0;
+>  > +}
+>  > +
+>  > +static const struct wdt_ops qcom_wdt_ops =3D {
+>  > +=09.start =3D qcom_wdt_start,
+>  > +=09.stop =3D qcom_wdt_stop,
+>  > +=09.reset =3D qcom_wdt_reset,
+>  > +};
+>  > +
+>  > +static const struct udevice_id qcom_wdt_ids[] =3D {
+>  > +=09{ .compatible =3D "qcom,kpss-wdt", .data =3D (ulong)&match_data_kp=
+ss },
+>  > +=09{}
+>  > +};
+>  > +
+>  > +U_BOOT_DRIVER(qcom_wdt) =3D {
+>  > +=09.name =3D "qcom_wdt",
+>  > +=09.id =3D UCLASS_WDT,
+>  > +=09.of_match =3D qcom_wdt_ids,
+>  > +=09.ops =3D &qcom_wdt_ops,
+>  > +=09.probe =3D qcom_wdt_probe,
+>  > +=09.priv_auto =3D sizeof(struct qcom_wdt),
+>  > +};
+>  >
+>  > ---
+>  > base-commit: 0eebdd17888005751cd77cf3794c5292d36f481a
+>  > change-id: 20250413-b4-qcom-wdt-e7b913fc375e
+>  >
+>  > Best regards,
+> =20
+>  --
+>  Casey (she/they)
+> =20
+>  
