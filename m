@@ -4,82 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3210CC369D1
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED43C369D1
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BBF881F6B;
+	by phobos.denx.de (Postfix) with ESMTP id 61FCE82054;
 	Wed, 23 Apr 2025 16:25:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j6iLM8LP";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="UqQ7+m0j";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="K0EeG4Xm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8527780EE5; Wed, 23 Apr 2025 08:53:23 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5BEB180FA8; Wed, 23 Apr 2025 09:17:40 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53C9B80194
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 08:53:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5122680BA8
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 09:17:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-7376dd56eccso6099645b3a.0
- for <u-boot@lists.denx.de>; Tue, 22 Apr 2025 23:53:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745391200; x=1745996000; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DlQROEKVyPCyauV4UIJJMsqfmdTSRp6p/JsfxTIA3rw=;
- b=j6iLM8LP/e2F22qYtledXDZJDlTXVYbi3aAr2TnoGUkw5vHJp3heDau85u5BXPUlpf
- cPNnJp4lSS6c/eTkyRUQIKPQlBluRVPI7USUr4iC9/C2jtQ7cKWVq643zQV4Ltwg+utg
- wt6pZpMy2Og1GyPBa91+UkcZcJHwimGuMyiMQjPaN9oayXQLZfuO+VMFRjYWKORs4fHn
- qZRDjfiEesf3MRln84Utm3g6zfvMxMYQx/mlEeQ1iI57OdsFzLQdTYjnB2Y2Fk2NGqkS
- JqFAkNXABSBOZOyryvoST6rXiS/ylP6mH1s44/6MtddOqzjsnoCIOuqKy009ebLjkyf6
- JQFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745391200; x=1745996000;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DlQROEKVyPCyauV4UIJJMsqfmdTSRp6p/JsfxTIA3rw=;
- b=fITFbreI3fL6geNLvwMI1FOWjPSrOyFWs70qyiKF7Rt2KeyxHLtgOVw5R7tpcXCQxj
- io/mhMjCyBqPxKOOI4ew1SGu1qMy8ReOFWA0PtqwsRKZLZQQmMneOF6tWjbv8OL2Nteg
- 1SAVsCMDA99yQXi0y2dkXbGsai1sJUpnUmmadVJpAGQAniCuZSp2o5Qkst8BKEPuddJ7
- V6JyNuIJ+X41syUvWwPeo6UD8s4/62HJ6YFqYP97ZNz1MpeCJJpzgWW4klXslJALHNKR
- NxSxvy7XTPTPOsUqhckyfp5iVj/q5xYcvKcChU0Y93KI+3iYmbGtpna2CS+fFzv0Hzov
- Rkzg==
-X-Gm-Message-State: AOJu0YwNpCMsF3pSHJM2Cye5IDfJFV9cokAmTCnzhgUKJtJKbdFuavIk
- f6/3m6yyXbkfOjL0jRYrDXyTojgnXOdj04PrLbTEx6TgjGv2S8u8t54tzA==
-X-Gm-Gg: ASbGncsKLTJjnQKn50c2a91oAQwP5iLhAMX/lcagXU3Kz9dr00NdVOCwMI16RAsJbAM
- 3UNcqO4jSXt6ho6FBoWJCMeiZ5eDAvXstgKCTQ7CJl+6t4gmQ10wppljX37NKzLIFvbQAqg6pFR
- vmm5G6o8bsU4MAbj9zXw9TkMtMZq+xywJjihlKSzom9YOZHPRebvxcmUeZnvz/E+aYEaqxZcgT1
- I24miuLo43b9+wIt/7dZtehcp4Ld4FCGuNu2i8PAYGeoY+NiJIKfAV5m0/uURTe1BaGT7vWnaPL
- 0JQ/DRmPeb9OrOskrFW7tl3fbTujNYicZLxt93HdWRSoi5U9Wx4ZWT0ZSkCxJSTP9tWQW9vQH74
- mXIJGL0WMsJCJKCIsVaYAHQ==
-X-Google-Smtp-Source: AGHT+IEKyT/x4D6HemdtbTi+xQVck3gPOsHl2XiX3uPSMqWLjWrjVTv9CcRTyANPfPRqGHB+52hlmA==
-X-Received: by 2002:a05:6a21:1645:b0:1f5:7e57:501c with SMTP id
- adf61e73a8af0-203cbd55500mr23707947637.39.1745391199669; 
- Tue, 22 Apr 2025 23:53:19 -0700 (PDT)
-Received: from localhost.localdomain (118-163-61-247.hinet-ip.hinet.net.
- [118.163.61.247]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b0db13a75d5sm8409191a12.23.2025.04.22.23.53.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Apr 2025 23:53:19 -0700 (PDT)
-From: Aristo Chen <jj251510319013@gmail.com>
-X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: aristo.chen@canonical.com,
-	trini@konsulko.com
-Subject: [PATCH] doc: fix typos
-Date: Wed, 23 Apr 2025 14:52:13 +0800
-Message-Id: <20250423065213.58016-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=martin.kaistra@linutronix.de
+Message-ID: <2a5c6fbb-1788-40f7-9c35-9deeb67b0234@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1745392657;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Sf59H9+12BDq22+dfko5Wkiw1lzuG7jex4iDc89I1Xs=;
+ b=UqQ7+m0jfvJnpIgUKX1bsgL9JOdBOpEl5NaAjaI4dcuXmlzSDfZ3SwT9XCponsV0j+8xNt
+ tc0yKzrU5UzYYYmnC1W3ZIRifK0pZBODsDveieLKjn7ZO8LiJjaTmlG8v+kTfugdxHZtr7
+ wxdilW/oTE/onOHUpVzxAhizTBa6WTa9GzypuPv4JYJZLchru49dSXTvP8jYNxNHYts6s7
+ QMH4udh3Ow11epGJjThD5XpsKT47ennPpzZXvSaGiz7m5Dfp8y4KyunBY+QYOKqRG6Pj79
+ LF0LwDso2U1nQ/1H8I4PZ+GCwusDj067qTClbaOJbTxp1RR6rjkUp3t8eYq2Ow==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1745392657;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Sf59H9+12BDq22+dfko5Wkiw1lzuG7jex4iDc89I1Xs=;
+ b=K0EeG4XmEtzZYU7nB3mVxjltcSYkY9vELqqHVbcoJgFYrlAmmc86bJN+rDAZadyN/MetI/
+ IML4WhgUrNB9MECA==
+Date: Wed, 23 Apr 2025 09:17:37 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] net: gem: ignore tx_clk if MII is used
+To: "Katakam, Harini" <harini.katakam@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
+ "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
+ "Simek, Michal" <michal.simek@amd.com>,
+ "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+References: <20250415150400.136723-1-martin.kaistra@linutronix.de>
+ <SJ2PR12MB87391F3A43374B5C2844CFD09EBB2@SJ2PR12MB8739.namprd12.prod.outlook.com>
+Content-Language: de-DE
+From: Martin Kaistra <martin.kaistra@linutronix.de>
+In-Reply-To: <SJ2PR12MB87391F3A43374B5C2844CFD09EBB2@SJ2PR12MB8739.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Wed, 23 Apr 2025 16:25:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,26 +82,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fix typo from "commnad" to "command"
+Hi Harini,
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- doc/usage/cmd/part.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Am 22.04.25 um 18:17 schrieb Katakam, Harini:
+> [AMD Official Use Only - AMD Internal Distribution Only]
+> 
+> Hi Martin
+> 
+>> -----Original Message-----
+>> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Martin Kaistra
+>> Sent: Tuesday, April 15, 2025 8:34 PM
+>> To: u-boot@lists.denx.de
+>> Cc: joe.hershberger@ni.com; rfried.dev@gmail.com; Simek, Michal
+>> <michal.simek@amd.com>
+>> Subject: [PATCH] net: gem: ignore tx_clk if MII is used
+>>
+>> If the MII interface is used, the PHY is the clock master, thus don't set the clock
+> 
+> Can you please describe your HW configuration?
 
-diff --git a/doc/usage/cmd/part.rst b/doc/usage/cmd/part.rst
-index e7faeccbb09..e7f6e54ecea 100644
---- a/doc/usage/cmd/part.rst
-+++ b/doc/usage/cmd/part.rst
-@@ -50,7 +50,7 @@ The 'part list' command prints or sets an environment variable to the list of pa
-     varname
-         an optional environment variable to store the list of partitions value into.
- 
--The 'part start' commnad sets an environment variable to the start of the partition (in blocks),
-+The 'part start' command sets an environment variable to the start of the partition (in blocks),
- part can be either partition number or partition name.
- 
-     interface
--- 
-2.34.1
+on my HW the PS GEM is connected to a MII-to-RMII converter which is then 
+connected via RMII to the PHY.
+
+The linux driver (drivers/net/ethernet/cadence/macb_main.c) has a similar 
+exception for MII mode in macb_set_tx_clk().
+
+Thanks,
+Martin
+
+> Based on the spec,
+> 1. In 10/100 GMII mode, tx_clk will run at either 2.5 MHz or 25 MHz as
+> determined by the external PHY MII clock input.
+> 2. When using gigabit mode, the transmit clock must be sourced from a
+> 125 MHz reference clock.
+> 3. In RMII mode, tx_clk should be connected to the rmii_tx_clk outputs.
+> In both cases 2 and 3, the MAC is the clock master.
+> 
+> If you are using a HW connection such as Zynq:
+> PS GEM - GMII to RGMII/SGMII shim - External PHY,
+> then the I understand that you'll get such an error message and that should
+> be removed. But I'm not sure if this applies to MII type.
+> 
+> Regards,
+> Harini
+> 
+>> rate. On Zynq-7000, this will prevent the following
+>> error:
+>>    zynq_gem ethernet@e000b000: failed to set tx clock rate 25000000
+>>
+>> Signed-off-by: Martin Kaistra <martin.kaistra@linutronix.de>
+>> ---
+>>   drivers/net/zynq_gem.c | 14 ++++++++------
+>>   1 file changed, 8 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/drivers/net/zynq_gem.c b/drivers/net/zynq_gem.c index
+>> 461805ae53f..703e22479d2 100644
+>> --- a/drivers/net/zynq_gem.c
+>> +++ b/drivers/net/zynq_gem.c
+>> @@ -567,12 +567,14 @@ static int zynq_gem_init(struct udevice *dev)
+>>        }
+>>   #endif
+>>
+>> -     ret = clk_get_rate(&priv->tx_clk);
+>> -     if (ret != clk_rate) {
+>> -             ret = clk_set_rate(&priv->tx_clk, clk_rate);
+>> -             if (IS_ERR_VALUE(ret)) {
+>> -                     dev_err(dev, "failed to set tx clock rate %ld\n", clk_rate);
+>> -                     return ret;
+>> +     if (priv->interface != PHY_INTERFACE_MODE_MII) {
+>> +             ret = clk_get_rate(&priv->tx_clk);
+>> +             if (ret != clk_rate) {
+>> +                     ret = clk_set_rate(&priv->tx_clk, clk_rate);
+>> +                     if (IS_ERR_VALUE(ret)) {
+>> +                             dev_err(dev, "failed to set tx clock rate %ld\n",
+>> clk_rate);
+>> +                             return ret;
+>> +                     }
+>>                }
+>>        }
+>>
+>> --
+>> 2.39.5
+> 
+
 
