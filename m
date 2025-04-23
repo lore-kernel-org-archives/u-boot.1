@@ -4,81 +4,220 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FBE8C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:26:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 094A0C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:38:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 299C181B4B;
-	Wed, 23 Apr 2025 16:25:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6BB7C8059D;
+	Wed, 23 Apr 2025 16:38:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MRIWuaaK";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="KsuLYtnc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFEDD810EB; Wed, 23 Apr 2025 08:50:40 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 377BC805D7; Wed, 23 Apr 2025 16:38:07 +0200 (CEST)
+Received: from mx0a-002e3701.pphosted.com (mx0a-002e3701.pphosted.com
+ [148.163.147.86])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4761C80AE1
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 08:50:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id B0298803DF
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 16:38:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id E8A09A4C17A;
- Wed, 23 Apr 2025 06:45:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDE0BC4CEEC;
- Wed, 23 Apr 2025 06:50:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745391036;
- bh=2zAYnR0xUM0yP0KJdRCoxm0NV7BITpFndz+9/JH/2I0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=MRIWuaaKQv7ohnI7QEstIsX5Mx49ppraG6qsGKUPzUvy9kx0q0xjCdUGW2XE1oXbe
- vmtUW+GIKV6g0yiZUujGk6gRaFPs80le/ADlbDIG43e3jVDJrievsNp23nN4VGY9ko
- lG2TnLac5AAg7APYXJDyhs9f+/+jbjqgreDV7JLlJT3J4oJ5pRMsswFYZNs5e6Srgw
- KiWbqB7FkuZ7Kpk9y0LYKeU20nwpGl51S3n74L06BeYOy/83l84RXV6u59/SDGTWzf
- 0dnWTWhq63bP+7rmehBZE0+QGFUw8Fq5YFy3xY0x45uV8Ua5zj6aoXH/AWj5JaIXMy
- zVlUPbiGeKBgA==
-Date: Wed, 23 Apr 2025 12:20:22 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
- Cheick Traore <cheick.traore@foss.st.com>,
- Christophe Roullier <christophe.roullier@st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dillon Min <dillon.minfei@gmail.com>, Fabio Estevam <festevam@denx.de>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Gatien Chevallier <gatien.chevallier@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Lionel Debieve <lionel.debieve@foss.st.com>,
- Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Matteo Lisi <matteo.lisi@engicam.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Prasad Kummari <prasad.kummari@amd.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 00/13] Enable OF_UPSTREAM for STM32 and STi platforms
-Message-ID: <aAiNruK3MBVV7ZN_@sumit-X1>
-References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=reject dis=none) header.from=hpe.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=verdun@hpe.com
+Received: from pps.filterd (m0134422.ppops.net [127.0.0.1])
+ by mx0b-002e3701.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53NC5f2s012200;
+ Wed, 23 Apr 2025 14:37:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=
+ content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=pps0720; bh=VFf2utWy68aDC8rwVhOmKM37nZ
+ y+pbVi1tvlmZyBl9o=; b=KsuLYtncinJcXdwqnYThjoph8B8wZ7nORxVYxaDiv4
+ PqzH2iMBs/iifjDohhbsIvj/mbvIPUUFs/l3K59Z9dunqqu090dpQCNKo8UIM6ao
+ H9IxI1m3+7HHdkarzODkR/CRwu/pFKV34KIRttiSvKpQ7vHbMwCmzQ5Mb0VgO5mO
+ bN5UAodH5XXqy/TZRv60obPEUVmlSLWXtXkV5Fdx1xwgIc0RGRVyRvUHr9a0wq4q
+ PQKxUXgeFbv8jfHdHVH43XdBvaS3nxgPC8YYCPADl7IL9nkdrj7kFvuOIBiXfi4A
+ iuk/t3nrkw6bc1CzD0YYZRSXxz4bSIYhO5BYfMu8UVxQ==
+Received: from p1lg14880.it.hpe.com ([16.230.97.201])
+ by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 466jmpyfpg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 23 Apr 2025 14:37:58 +0000 (GMT)
+Received: from p1wg14923.americas.hpqcorp.net (unknown [10.119.18.111])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by p1lg14880.it.hpe.com (Postfix) with ESMTPS id 00C5280045F;
+ Wed, 23 Apr 2025 14:37:21 +0000 (UTC)
+Received: from p1wg14923.americas.hpqcorp.net (10.119.18.111) by
+ p1wg14923.americas.hpqcorp.net (10.119.18.111) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Wed, 23 Apr 2025 02:37:10 -1200
+Received: from p1wg14919.americas.hpqcorp.net (16.230.19.122) by
+ p1wg14923.americas.hpqcorp.net (10.119.18.111) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11 via Frontend Transport; Wed, 23 Apr 2025 02:37:10 -1200
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (192.58.206.35)
+ by edge.it.hpe.com (16.230.19.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Wed, 23 Apr 2025 02:37:07 -1200
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hV/NlRLYP5BL7GZkJX+4a+/eQLchpliBTfyuUAk56hHEwx66m18Gy7ULXTxL5hmzZMWgewidgUBQ46iCTTHerkGEbrnUGG8J6LDmGDs65njNDmij3XKRhpnr25CfCCjunvCzugRgMVcUC6UZPoDzIK3NjCgbMf1FxzRlBjdRuF1IbbKjhDbe5NFS92c3Qwxz+oozC6WfOdCt1Wsmw6wOn9fGjGlwn8LqGI1lIheXAaTqo7L4OdBjkBj+dKNoV2mmfJrvt3G3xCdQs23rZngyb5M878hgNgWTRQukT4/4QhEHBssOG1uXazYGPdYKrlJ/xQToiIFiStE3LvKbrbbC6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VFf2utWy68aDC8rwVhOmKM37nZy+pbVi1tvlmZyBl9o=;
+ b=o2EYTguxwPUY2x6gdDKCjSepqJLZYa5F5XawJj8CKA3T081SQNf/PAarfCROBvZwm5I5QltJ4W08o07ZBvS6Hg0Ft2uryTZKWSUVdqrkSeIPJZy8GWzCpBsx3Yx76GyJUqK2GDntyls30Aebh83+mgDfYFNejpMS65G0sDOiSRFmDK8UNOerZJPHt7kvk60TMnu2ugX0eh5NXBQxSPYd2M6stgytue0peCqzUhKq5DAg1Qm9J7wrhLbVmzg4urznrc7wl/B0ge+a45TwBQX/jmt1eEoZrONxTI0BxzNq6xicMdQ+d4uJZ6MzZ27t/KzoCjDev4irk5DMfJ9xGxphEw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=hpe.com; dmarc=pass action=none header.from=hpe.com; dkim=pass
+ header.d=hpe.com; arc=none
+Received: from DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:8:4f::17) by
+ CYXPR84MB3666.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:930:da::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8655.35; Wed, 23 Apr 2025 14:37:05 +0000
+Received: from DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM
+ ([fe80::a5e9:4a65:e738:8b3a]) by DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM
+ ([fe80::a5e9:4a65:e738:8b3a%4]) with mapi id 15.20.8678.021; Wed, 23 Apr 2025
+ 14:37:04 +0000
+From: "Verdun, Jean-Marie" <verdun@hpe.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: Re: Wiznet w5500 support
+Thread-Topic: Wiznet w5500 support
+Thread-Index: AQHbs7P1niICEprfvUOJM72ihHrWULOw9bKAgABbxYQ=
+Date: Wed, 23 Apr 2025 14:37:04 +0000
+Message-ID: <DM4PR84MB1976A520AABEBD2B1C243683D6BA2@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
+References: <DM4PR84MB1976607AFF39ADF74D9AAF7BD6BB2@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
+ <3f221717-b5a2-472c-888c-cc8f777cde40@cherry.de>
+In-Reply-To: <3f221717-b5a2-472c-888c-cc8f777cde40@cherry.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-reactions: allow
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM4PR84MB1976:EE_|CYXPR84MB3666:EE_
+x-ms-office365-filtering-correlation-id: 61feafcd-67e1-40ee-fbd9-08dd82745157
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|38070700018|8096899003|13003099007|7053199007;
+x-microsoft-antispam-message-info: =?utf-8?B?dW5ldjhKbjJmbk5pN1E2U0E0UkxCTFRQdzlVbjVoYW5jaGdESkZrRmhYai83?=
+ =?utf-8?B?a3ZDMVlyKzIra3BNeXI5bnU0OEVBRFVyVHZ4TkdYMzJsUnVxaHFJZUZ6VnAr?=
+ =?utf-8?B?ZWcvbkU1TWp0bVNzVjFhclI4czNBeG51eU9IT3ptMUNlYUJ5SkVTR1RHYlJY?=
+ =?utf-8?B?T1VsdlhNbmZmUG1WNjlUNlhoUmI0RytGQnV5QitveGlzRlVaVzFNbEJqTXdy?=
+ =?utf-8?B?Z1RaQ3M2L2hETTgwaGdPRC9jcExSV0FWcElQc01iTDZLUDlROVQyWlpWc2JI?=
+ =?utf-8?B?YlZVNUZZSTFGSU4xb0h3dGp3NXJiMnJIVldxZWFsdlhsUG5IbEV6c1pqWSsr?=
+ =?utf-8?B?Q0IxK29mUTJ4RmZib1ZpUEdyYWxMdWU4MTZpY3d4REt6cVZyYWdiamhiRFBO?=
+ =?utf-8?B?c2FmK3hGT1NnNUpYVXFPZDZBRk92bXZIdFoxRXcrZC8zRitMcjRzdEVGOXpZ?=
+ =?utf-8?B?dUlCQ05tcGJkSUl1UGJtUU05eDhGNGlldWhwMGxoTVFiWGtJRy8wMll4SXow?=
+ =?utf-8?B?YUQzQ1B1V1huSXNzOEowbW9BT2YrQUpPem5PWnZrZVdSK0R2Y21PYUJBMUpo?=
+ =?utf-8?B?UXJodE5IdGNrenM1d1JKOGN0OTMrdWxzd05pZ0M2U3JtMXJOaE15L29DUXRi?=
+ =?utf-8?B?dlg0QnBqU1MrN0RHenNsRDBqcGRiOGZCUzVUZFUvRFl3SGVuNDJUbmpLVUlo?=
+ =?utf-8?B?SFZJdDBlTEs3M3ZIUGpHNFc0bExYTXp0dkxTSlA5ZmtFME5XMGxRYzFyTlNu?=
+ =?utf-8?B?YitSQlM1Z0xnRlh2NTM2SklpS0g3NUhqampjdnhqalNvRDUwTmlxMnN5NTM1?=
+ =?utf-8?B?QlA2dytDQTlpTDgwcld4UWNIRmEvZnc0cnlzTWlrazRna3ZYaGZSUWtybTBT?=
+ =?utf-8?B?S3hocnk5N3lKSWZyN2krK2FBcGZOMC9SY1IzcUNwd01ZQnFoR2E4NGN0S3Vp?=
+ =?utf-8?B?M2ticE9lc1pFREY0aDEwVDhKM1ZYOXFCSVI4SU9Wak91L05DbTRRdnBqK1BS?=
+ =?utf-8?B?VklQWGZjbC9LQ0VIYUJpMllVWWpsTy9oZXNvelo5cnVOSTdCYjNHWEszRTNJ?=
+ =?utf-8?B?M2Z1TEJnRjBJUXFjdGxSUHJGUXQyWmc3alpJQ2tjVW8wT0toK3IrMjR2Uksr?=
+ =?utf-8?B?VzlUaG5hQ05GV0VYc1pXbEwzN2dPUkV5V0F0ejIxdENoeXBoSDROWXI2SVJu?=
+ =?utf-8?B?MXoxYjlNK1RnQkI3c1ZnYm1tQU4vKzlGbzZDcWNCNEpCMXZjOHhsZzNlWjYr?=
+ =?utf-8?B?MCtzNUdxeklzUm1ac01YNVhwbSsyZm04eWdzcEZSQTkrb0pwdjNGZDhtUnVJ?=
+ =?utf-8?B?U0U0NWFOME1RMzRHSGpWRkVzRXZyWHZIbkE3QmZibmZqYmhyczBURmFhTzN4?=
+ =?utf-8?B?elBmcFVTZXFocmhUemJneWN1YTMrV21Yd28yOTRJdlF6K21QU2RieHIxRmlI?=
+ =?utf-8?B?TmNvdHJXbDJQK1J2TmV1TEZjTzE5QVp1OUlZcWNKN29YWitwa0hYOVYxTXZ5?=
+ =?utf-8?B?dFBQTGZ1UHZ3K3JOM3g1bUcvc1Ewa2JydVVSTUV6Z05WdkxtWjdaTW1sb2N0?=
+ =?utf-8?B?UStFSlEwWjhJNHJwbnk2dWNwTkgrTTRwaS96eitLcUN3b01NVC9xeW5JdUE1?=
+ =?utf-8?B?dHRBN3VRMUxtV3cva0JmemZmWE9IaEpQaENpRTNmWmxlOWdJODlTMmxDUWpr?=
+ =?utf-8?B?dUVRRWNFdEpwWWVQVk8waEowZjhhOFczazNTbzF6U2ZpSExibktqZnRNTFpq?=
+ =?utf-8?B?VnRXeG11L2t5UzFCSkRzeWptYWZOK3gxSXU4QmZlOEowL3NIdE80RThqUGNS?=
+ =?utf-8?B?UFFzcXZsRjA1aCtkdTRZd1U1cUw1WHcvL0R1NGprRTVCTlkwQUhlaFRLK05M?=
+ =?utf-8?B?NUU4Z2ZOSVRRVEl3cWQ2RUwyZk95TzBDS3ZOWGFpMVFic2YyNTl5dllEQVJw?=
+ =?utf-8?Q?PmF99G7srVg=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700018)(8096899003)(13003099007)(7053199007);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?N2VuWno1V3FyZ3hKWVRLbGlFOS91bVJ2SXNFYkpCQURzWlY2Y3lvYVJuajlR?=
+ =?utf-8?B?RVFpTHRmUjBMTStrUjZ6TWd4eVpBcnZlN0M2Zk1CbGYyNXUrMDROK0ZOT01l?=
+ =?utf-8?B?RXVwdFV5ZXRocmhQemEyd1dnS0xNQWNPaXhoZkhJYWJxZXhYeXk4bUJzSjR0?=
+ =?utf-8?B?SStIdDNhVnFoQVVJLzBKcmtIaXo5Smw0eHpWcjA5aUpSelRjRm0wWkF6azhY?=
+ =?utf-8?B?K2xxUUJWQ2pVZ1FhZ1NIU0wyTmgwZ3ErczJTQjM3U3laTnZBMFAwTGNSMmdj?=
+ =?utf-8?B?Y2l0UFNJSk9lTDFXenFXbjJmWFpvRGhkdWRYZDJ1aUhaRlQxNHZuOTExS3BS?=
+ =?utf-8?B?OTZIZVZ5TmwzLytiR0Uvb3RNUUZsNGxkODF3cWxpVVJSWlRVSnBVeGZiR0Ja?=
+ =?utf-8?B?TzZkQVh3c0VUTGVycnpJREczMlhkRVRBQ3JBdTVMaWVDcHJmNzlpbFhaOEtu?=
+ =?utf-8?B?UXovUU1HUnVJM005eldGQjU5VW8zV0ZGdDlUNEZLM0YwY29kWXdTMkdRb0Vq?=
+ =?utf-8?B?eEUwYlV4TVpqQVJlV3RNZTJ5SmxsWWllYUk0OHczVUdYeDJOZGlCMU1xRGla?=
+ =?utf-8?B?THVkSUhZMVVrNlMzakFvVUVnSGtVZE1GY0N0Mm96aXhJV1B1QWJmcFdrSXoz?=
+ =?utf-8?B?WGxrdm5sWlJadkg0NzNzck1Fc0U1MzVQa09sVHp6YUVZUFNrRDlUNnVMSERO?=
+ =?utf-8?B?Ny9QMG9QOTMwWGlTR01OU3h2djB6K2NocU41QXhhUEZQYlhkZWlvVnNEMytU?=
+ =?utf-8?B?cmN6Q0NEYk5Mbnc0TS93UzVsSU9qNTkwQjI5SUpQa0ZQQk1xYlo5TjFIeWdK?=
+ =?utf-8?B?U1MxYTNuUVhqZEpqcWRoS2czOEdzeXFkd2ZWL00wc0U2MHllNk5LTDdPYThC?=
+ =?utf-8?B?SkEyTXpMNmdpVXJuY0pmbDIvZmUwMnBobGFVYVhhMnZFaEUyMzB1QW1rVzFG?=
+ =?utf-8?B?VzFrbFY0Q1FpUmowU1QyNTBKSWxHL0dGbGtmMGpiMzJ0bjZDRkdSZ3NYZFF6?=
+ =?utf-8?B?MFR5cG93d0JTaHYzMldveFp0WlREdnRHOHZVWEljRVczOHRrcTkzbGlqMW5F?=
+ =?utf-8?B?UDE1NDV0bUIydXlhL21ra1JjcVNRTVFUTE1xVkFnbDF2Uk5hZzNwSGU5Y2li?=
+ =?utf-8?B?UWhycFZLd0oxRW4xK0V5YmN1S1o4Q1pnSTd1SUdXSVBZRFphK3hhcFVGbERk?=
+ =?utf-8?B?R2dyS2IzajVBNnlRMmlCMnBybnFWYmorYmxlSlBWMU4rMEhPNmJ1azlZZmM5?=
+ =?utf-8?B?OGRLMm83dXpFMGlCdTV2RTEzUHl3SkZLMERrbTAvaFYxNTVBMmp1QjF5SExt?=
+ =?utf-8?B?dk13S0ZqdGQ0YTJkM3NSVmUwbjIyZjlKYjQ3VUVCbzcxN0Y2RmJvQ2FZc0NC?=
+ =?utf-8?B?WHpybW5GNGVvaUhjbCt5U0hOUE5FR0loNC85bUZ5dVEvSnE2VmJzaDY0TktF?=
+ =?utf-8?B?WmN1c2Z5a0VXeXlJdmRJR3prZzJRdUdXcG5Sb3pWQUwwUW1mRkN2VFpJOGdj?=
+ =?utf-8?B?UDNObkRTemZHSVZ0ekpHSVd3YUdiUjFRYUN5OXRRcVBWRElEMkkyeTIzK0ZE?=
+ =?utf-8?B?VjRtdUtONW5kZ1lSdytJV1oyNjBSbHMvcmJSbmdrSWd3YkdxYmFJSkFlZUw0?=
+ =?utf-8?B?VWVkK2QxQnM2czZUOUszV3B0c3lvT3VHbFV1M3A0dVdtTVN5SGxMY3duay9t?=
+ =?utf-8?B?VW8xMCtSRDl4bE5SRXpWUExOQUM4QTA1WVh3RjkwT0lxNmJwc0lGSWM0c3pk?=
+ =?utf-8?B?a1dSbjdiRGhKazU5QmV3WVNhaENRWEdsZW9pcmphZXl6RWNkbENlSVUwU0lN?=
+ =?utf-8?B?K2VpTXRyNmJJblR5QUQyWTJJMHF1OVdtTm53dWFUb3VOeXl5TEI1WXB0ZzEz?=
+ =?utf-8?B?WjQxNFpUcy8yMXVLd05keksrWmEybHRrREFoWlM0Uzh1dmlSbU5heUVIQlNo?=
+ =?utf-8?B?aTBCTmw4VldPZzdEc1dLaU1LaDVCYXZwQnRlQ1hIRUR0RERZT2xNMTV3MzFH?=
+ =?utf-8?B?NjZ4OGhaS3RkNXVLalpiSDlCUjB6MGV0YmI0aHlnSXVJdDVhQksvaTlndnVO?=
+ =?utf-8?B?SzlqYVBmeXZ0REtYRHlzV2hyanVXZG1CdHdENUhSQzFDOUZxVXQrbHdodS9I?=
+ =?utf-8?Q?Vs4jbm0DlImsYXdnUyvHpTTS1?=
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250422131229.415020-1-patrice.chotard@foss.st.com>
-X-Mailman-Approved-At: Wed, 23 Apr 2025 16:25:29 +0200
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 61feafcd-67e1-40ee-fbd9-08dd82745157
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Apr 2025 14:37:04.8487 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 105b2061-b669-4b31-92ac-24d304d195dc
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Q65joRrvDVIB1nBpD/fgYBsycvncNd63ngefeOBIr+rQdvEB2TT/sdAA3FNWHCVT
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR84MB3666
+X-OriginatorOrg: hpe.com
+X-Proofpoint-GUID: UGQnX2Dln5sxXBDenD8nkp_osmJlwE8g
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDIzMDEwMyBTYWx0ZWRfXx1VSDqtQPFU8
+ lSZdhZfRa+3xaU9ICuezcMBMJvqV9t7NjVKO5aoE/zEPR6mTCSkmd2fMTI6DfL5DJEeGIKhp3Mn
+ 1LceeCO/rNtI4t9+orRr0Uh2/aWi6R0kFU0SXTs+X7kJ9wGPK2WiKIKcocvXvCg5hyIgf++V0Km
+ +hvFYH9wE7uGXzewMQTQYYJO+7uYKEnU6z8dcOVjx+ItOY5MS8VclKMYBJTcKnaRz+UHLDXrElb
+ WNura4z21sl+9NHr2DRMlYicKW6DmAE+D8HhdbgrSBfjad7z0ZCu4NpKaDk6w4idN579G5E7/xk
+ ioFuDQos8KzrhT5kF89uoOwz2GYP5jYxBgKFC1XLoRIMNeoQH/oB2OGmC4HHxz0OY6VTGux/jdT
+ paG7i+BA
+X-Proofpoint-ORIG-GUID: UGQnX2Dln5sxXBDenD8nkp_osmJlwE8g
+X-Authority-Analysis: v=2.4 cv=dLOmmPZb c=1 sm=1 tr=0 ts=6808fb46 cx=c_pps
+ a=A+SOMQ4XYIH4HgQ50p3F5Q==:117 a=A+SOMQ4XYIH4HgQ50p3F5Q==:17
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10
+ a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=_EeEMxcBAAAA:8 a=uherdBYGAAAA:8
+ a=eYv95HnKAAAA:8 a=MvuuwTCpAAAA:8 a=bpfYyewEUbeDUOqg6SIA:9 a=QEXdDO2ut3YA:10
+ a=yMhMjlubAAAA:8 a=SSmOFEACAAAA:8 a=KRyluQ8z4cW0j-tGi3cA:9
+ a=pXUOT8TYTRfRlmln:21 a=gKO2Hq4RSVkA:10
+ a=UiCQ7L4-1S4A:10 a=hTZeC7Yk6K0A:10 a=frz4AuCg-hUA:10
+ a=Fc7fxMuEZ4-5KipR1OOC:22
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.680,FMLib:17.12.80.40
+ definitions=2025-04-23_08,2025-04-22_01,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0
+ suspectscore=0 mlxlogscore=999 phishscore=0 priorityscore=1501
+ malwarescore=0 spamscore=0 adultscore=0 mlxscore=0 clxscore=1011
+ lowpriorityscore=0 bulkscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2504070000
+ definitions=main-2504230103
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,250 +234,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 22, 2025 at 03:12:16PM +0200, Patrice Chotard wrote:
-> This series is enabling OF_UPSTREAM flag for STM32 MCU's, MPU's and
-> STi platforms.
-> For some boards, some defconfig and DT update are needed to keep the
-> same functional level.
-> 
-> The major impact concerns MPU's platform with introduction of STM32
-> System Bus.
-> 
-> Changes in v2:
->   - Replace LOG_CATEGORY UCLASS_SIMPLE_BUS by UCLASS_NOP in both
->     /arch/arm/mach-stm32mp/stm32mp2/rifsc.c and
->     /arch/arm/mach-stm32mp/stm32mp1/etzpc.c.
->   - Update board/st/stm32mp1/MAINTAINERS.
->   - Fix DSI clock ssetting.
-> 
-> Lionel Debieve (3):
->   ARM: stm32mp: add ETZPC system bus driver for STM32MP1
->   ARM: dts: stm32: add ETZPC as a system bus for STM32MP1x boards
->   stm32mp: fdt: remove ETZPC peripheral cleanup
-> 
-
-> Patrice Chotard (9):
->   ARM: dts: sti: convert stih410-b2260 board to OF_UPSTREAM
->   ARM: dts: stm32: convert stm23h7 boards to OF_UPSTREAM
->   ARM: dts: stm32: convert stm23f7 boards to OF_UPSTREAM
->   ARM: dts: stm32: convert stm23f4 boards to OF_UPSTREAM
->   ARM: dts: stm32: convert stm32mp13 board to OF_UPSTREAM
->   ARM: dts: stm32: convert stm32mp15 board to OF_UPSTREAM
->   configs: stm32: introduce stm32mp15-odyssey_defconfig
->   clk: stm32mp1: fix DSI clock setting
->   ARM: dts: stm32: convert stm32mp2 board to OF_UPSTREAM
-
-Glad to see the diff with OF_UPSTREAM adoption, feel free to add
-following to the OF_UPSTREAM adoption patches:
-
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-
--Sumit
-
-> 
-> Patrick Delaunay (1):
->   ARM: stm32mp: add RIFSC system bus driver for STM32MP25
-> 
->  arch/arm/dts/Makefile                         |   31 -
->  arch/arm/dts/st-pincfg.h                      |   72 -
->  arch/arm/dts/stih407-clock.dtsi               |  323 --
->  arch/arm/dts/stih407-family.dtsi              | 1000 ------
->  arch/arm/dts/stih407-pinctrl.dtsi             | 1262 --------
->  arch/arm/dts/stih410-b2260-u-boot.dtsi        |   46 +-
->  arch/arm/dts/stih410-b2260.dts                |  214 --
->  arch/arm/dts/stih410-clock.dtsi               |  333 --
->  arch/arm/dts/stih410-pinctrl.dtsi             |   31 -
->  arch/arm/dts/stih410.dtsi                     |  300 --
->  arch/arm/dts/stm32429i-eval.dts               |  284 --
->  arch/arm/dts/stm32746g-eval.dts               |  186 --
->  arch/arm/dts/stm32f4-pinctrl.dtsi             |  447 ---
->  arch/arm/dts/stm32f429-disco.dts              |  190 --
->  arch/arm/dts/stm32f429-pinctrl.dtsi           |   55 -
->  arch/arm/dts/stm32f429.dtsi                   |  758 -----
->  arch/arm/dts/stm32f469-disco.dts              |  213 --
->  arch/arm/dts/stm32f469-pinctrl.dtsi           |   55 -
->  arch/arm/dts/stm32f469.dtsi                   |   18 -
->  arch/arm/dts/stm32f7-pinctrl.dtsi             |  415 ---
->  arch/arm/dts/stm32f746-disco-u-boot.dtsi      |   13 +-
->  arch/arm/dts/stm32f746-disco.dts              |  169 -
->  arch/arm/dts/stm32f746-pinctrl.dtsi           |   11 -
->  arch/arm/dts/stm32f746.dtsi                   |  613 ----
->  arch/arm/dts/stm32f769-disco-u-boot.dtsi      |   60 +-
->  arch/arm/dts/stm32f769-disco.dts              |  133 -
->  arch/arm/dts/stm32f769-pinctrl.dtsi           |   11 -
->  arch/arm/dts/stm32h7-pinctrl.dtsi             |  274 --
->  arch/arm/dts/stm32h7-u-boot.dtsi              |    1 -
->  arch/arm/dts/stm32h743.dtsi                   |  695 ----
->  arch/arm/dts/stm32h743i-disco.dts             |   75 -
->  arch/arm/dts/stm32h743i-eval.dts              |  160 -
->  arch/arm/dts/stm32h750.dtsi                   |    5 -
->  arch/arm/dts/stm32h750i-art-pi.dts            |  188 --
->  arch/arm/dts/stm32mp13-pinctrl.dtsi           |  888 ------
->  arch/arm/dts/stm32mp13-u-boot.dtsi            |    4 +
->  arch/arm/dts/stm32mp131.dtsi                  | 1567 ---------
->  arch/arm/dts/stm32mp133.dtsi                  |   98 -
->  arch/arm/dts/stm32mp135.dtsi                  |   12 -
->  arch/arm/dts/stm32mp135f-dk.dts               |  376 ---
->  arch/arm/dts/stm32mp13xc.dtsi                 |   18 -
->  arch/arm/dts/stm32mp13xf.dtsi                 |   18 -
->  arch/arm/dts/stm32mp15-pinctrl.dtsi           | 2826 -----------------
->  arch/arm/dts/stm32mp15-scmi.dtsi              |   88 -
->  arch/arm/dts/stm32mp15-u-boot.dtsi            |    4 +
->  arch/arm/dts/stm32mp151.dtsi                  | 1868 -----------
->  arch/arm/dts/stm32mp153.dtsi                  |   59 -
->  arch/arm/dts/stm32mp157.dtsi                  |   48 -
->  arch/arm/dts/stm32mp157a-dk1-scmi.dts         |   82 -
->  arch/arm/dts/stm32mp157a-dk1.dts              |   25 -
->  .../stm32mp157a-icore-stm32mp1-ctouch2.dts    |   49 -
->  ...157a-microgea-stm32mp1-microdev2.0-of7.dts |  161 -
->  ...32mp157a-microgea-stm32mp1-microdev2.0.dts |   59 -
->  .../dts/stm32mp157a-microgea-stm32mp1.dtsi    |  148 -
->  arch/arm/dts/stm32mp157c-dk2-scmi.dts         |   88 -
->  arch/arm/dts/stm32mp157c-dk2.dts              |   94 -
->  arch/arm/dts/stm32mp157c-ed1-scmi.dts         |   87 -
->  arch/arm/dts/stm32mp157c-ed1.dts              |  403 ---
->  arch/arm/dts/stm32mp157c-ev1-scmi.dts         |   93 -
->  arch/arm/dts/stm32mp157c-ev1.dts              |  414 ---
->  arch/arm/dts/stm32mp15xc.dtsi                 |   18 -
->  arch/arm/dts/stm32mp15xx-dkx.dtsi             |  741 -----
->  arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi       |   85 -
->  arch/arm/dts/stm32mp15xxab-pinctrl.dtsi       |   57 -
->  arch/arm/dts/stm32mp15xxac-pinctrl.dtsi       |   73 -
->  arch/arm/dts/stm32mp15xxad-pinctrl.dtsi       |   57 -
->  arch/arm/dts/stm32mp25-pinctrl.dtsi           |   38 -
->  arch/arm/dts/stm32mp251.dtsi                  |  301 --
->  arch/arm/dts/stm32mp253.dtsi                  |   23 -
->  arch/arm/dts/stm32mp255.dtsi                  |    9 -
->  arch/arm/dts/stm32mp257.dtsi                  |    9 -
->  arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi      |   65 +
->  arch/arm/dts/stm32mp257f-ev1.dts              |   55 -
->  arch/arm/dts/stm32mp25xc.dtsi                 |    8 -
->  arch/arm/dts/stm32mp25xf.dtsi                 |    8 -
->  arch/arm/dts/stm32mp25xxai-pinctrl.dtsi       |   83 -
->  arch/arm/dts/stm32mp25xxak-pinctrl.dtsi       |   71 -
->  arch/arm/dts/stm32mp25xxal-pinctrl.dtsi       |   71 -
->  arch/arm/mach-stm32/Kconfig                   |    3 +
->  arch/arm/mach-stm32mp/Kconfig                 |   11 +-
->  arch/arm/mach-stm32mp/include/mach/etzpc.h    |   32 +
->  arch/arm/mach-stm32mp/include/mach/rif.h      |   26 +
->  arch/arm/mach-stm32mp/stm32mp1/Makefile       |    1 +
->  arch/arm/mach-stm32mp/stm32mp1/etzpc.c        |  194 ++
->  arch/arm/mach-stm32mp/stm32mp1/fdt.c          |  258 --
->  arch/arm/mach-stm32mp/stm32mp2/Makefile       |    1 +
->  arch/arm/mach-stm32mp/stm32mp2/rifsc.c        |  364 +++
->  board/st/stm32mp1/MAINTAINERS                 |    2 +
->  configs/stih410-b2260_defconfig               |    3 +-
->  configs/stm32746g-eval_defconfig              |    3 +-
->  configs/stm32746g-eval_spl_defconfig          |    3 +-
->  configs/stm32f429-discovery_defconfig         |    2 +-
->  configs/stm32f429-evaluation_defconfig        |    2 +-
->  configs/stm32f469-discovery_defconfig         |    2 +-
->  configs/stm32f746-disco_defconfig             |    3 +-
->  configs/stm32f746-disco_spl_defconfig         |    3 +-
->  configs/stm32f769-disco_defconfig             |    4 +-
->  configs/stm32f769-disco_spl_defconfig         |    4 +-
->  configs/stm32h743-disco_defconfig             |    2 +-
->  configs/stm32h743-eval_defconfig              |    2 +-
->  configs/stm32h750-art-pi_defconfig            |    2 +-
->  configs/stm32mp13_defconfig                   |    2 +-
->  ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |    2 +-
->  ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |    2 +-
->  ...-microgea-stm32mp1-microdev2-of7_defconfig |    2 +-
->  ...mp15-microgea-stm32mp1-microdev2_defconfig |    2 +-
->  configs/stm32mp15-odyssey_defconfig           |  172 +
->  configs/stm32mp15_basic_defconfig             |    4 +-
->  configs/stm32mp15_defconfig                   |    4 +-
->  configs/stm32mp15_trusted_defconfig           |    4 +-
->  configs/stm32mp25_defconfig                   |    2 +-
->  drivers/clk/stm32/clk-stm32mp1.c              |    1 +
->  include/configs/stm32f746-disco.h             |    2 +-
->  include/dt-bindings/clock/stih407-clks.h      |   90 -
->  include/dt-bindings/clock/stih410-clks.h      |   25 -
->  include/dt-bindings/mfd/st-lpc.h              |   16 -
->  include/dt-bindings/reset/stih407-resets.h    |   65 -
->  117 files changed, 950 insertions(+), 20362 deletions(-)
->  delete mode 100644 arch/arm/dts/st-pincfg.h
->  delete mode 100644 arch/arm/dts/stih407-clock.dtsi
->  delete mode 100644 arch/arm/dts/stih407-family.dtsi
->  delete mode 100644 arch/arm/dts/stih407-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stih410-b2260.dts
->  delete mode 100644 arch/arm/dts/stih410-clock.dtsi
->  delete mode 100644 arch/arm/dts/stih410-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stih410.dtsi
->  delete mode 100644 arch/arm/dts/stm32429i-eval.dts
->  delete mode 100644 arch/arm/dts/stm32746g-eval.dts
->  delete mode 100644 arch/arm/dts/stm32f4-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32f429-disco.dts
->  delete mode 100644 arch/arm/dts/stm32f429-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32f429.dtsi
->  delete mode 100644 arch/arm/dts/stm32f469-disco.dts
->  delete mode 100644 arch/arm/dts/stm32f469-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32f469.dtsi
->  delete mode 100644 arch/arm/dts/stm32f7-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32f746-disco.dts
->  delete mode 100644 arch/arm/dts/stm32f746-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32f746.dtsi
->  delete mode 100644 arch/arm/dts/stm32f769-disco.dts
->  delete mode 100644 arch/arm/dts/stm32f769-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32h7-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32h743.dtsi
->  delete mode 100644 arch/arm/dts/stm32h743i-disco.dts
->  delete mode 100644 arch/arm/dts/stm32h743i-eval.dts
->  delete mode 100644 arch/arm/dts/stm32h750.dtsi
->  delete mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
->  delete mode 100644 arch/arm/dts/stm32mp13-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp131.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp133.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp135.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp135f-dk.dts
->  delete mode 100644 arch/arm/dts/stm32mp13xc.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp13xf.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp15-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp15-scmi.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp151.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp153.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp157.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp157a-dk1-scmi.dts
->  delete mode 100644 arch/arm/dts/stm32mp157a-dk1.dts
->  delete mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
->  delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
->  delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
->  delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp157c-dk2-scmi.dts
->  delete mode 100644 arch/arm/dts/stm32mp157c-dk2.dts
->  delete mode 100644 arch/arm/dts/stm32mp157c-ed1-scmi.dts
->  delete mode 100644 arch/arm/dts/stm32mp157c-ed1.dts
->  delete mode 100644 arch/arm/dts/stm32mp157c-ev1-scmi.dts
->  delete mode 100644 arch/arm/dts/stm32mp157c-ev1.dts
->  delete mode 100644 arch/arm/dts/stm32mp15xc.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp15xx-dkx.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp15xxab-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp15xxac-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp15xxad-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp251.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp253.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp255.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp257.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
->  delete mode 100644 arch/arm/dts/stm32mp25xc.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp25xf.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
->  create mode 100644 arch/arm/mach-stm32mp/include/mach/etzpc.h
->  create mode 100644 arch/arm/mach-stm32mp/include/mach/rif.h
->  create mode 100644 arch/arm/mach-stm32mp/stm32mp1/etzpc.c
->  create mode 100644 arch/arm/mach-stm32mp/stm32mp2/rifsc.c
->  create mode 100644 configs/stm32mp15-odyssey_defconfig
->  delete mode 100644 include/dt-bindings/clock/stih407-clks.h
->  delete mode 100644 include/dt-bindings/clock/stih410-clks.h
->  delete mode 100644 include/dt-bindings/mfd/st-lpc.h
->  delete mode 100644 include/dt-bindings/reset/stih407-resets.h
-> 
-> -- 
-> 2.25.1
-> 
-> base-commit: cde0050618968aae335dfbc930641656d51ff5d0
-> branch: upstream_OF_UPSTREAM_V2
+SGkgUXVlbnRpbiwNCg0KSSB3YXMgbG9va2luZyBmb3IgZXhhbXBsZSBsaWtlIHRoZSBvbmUgaW4g
+cG1pYy4gSSB3aWxsIHJlZmFjdG9yIG15IGNvZGUgdG8gdGFrZSBpdCBpbnRvIGNvbnNpZGVyYXRp
+b24uIFRoYXQgaXMgbXkgZmlyc3QgZHJpdmVyIHRoYXQgSSBzdWJtaXQgdG8gdS1ib290Lg0KDQpU
+aGUgbGludXgga2VybmVsIGhhcyBhIHNwaSBzaWRlDQoNCmh0dHBzOi8vZ2l0aHViLmNvbS90b3J2
+YWxkcy9saW51eC9ibG9iL21hc3Rlci9kcml2ZXJzL25ldC9ldGhlcm5ldC93aXpuZXQvdzUxMDAt
+c3BpLmMNCg0KQW5kIHRoZSBkZXZpY2UgdHJlZSBzZXR1cCBpcyBhIGxpdHRsZSBiaXQgY29uZnVz
+aW5nLiBSb3VnaGx5IHlvdSBjYWxsIHRoZSBuZXQgZHJpdmVyIGZyb20gYSBEVFMgbm9kZSB3aGlj
+aCBpcyBhIHNwaSBzbGF2ZSwgYW5kIHRoZSBuZXQgZHJpdmVyIGlzIHByb2JpbmcgdGhlIHNwaSBz
+aWRlIHdoaWNoIGlzIG5vdCBhdHRhY2hlZCB0byBhbnkgRFRTIG5vZGUuIEkgdHJpZWQgdG8gZG8g
+dGhlIHNhbWUgYXBwcm9hY2ggd2l0aCB1LWJvb3QgYnV0IGRpZCBzdHJ1Z2dsZSBhIGxvdCBhdCBk
+b2luZyBpdCwgYXMgaXQgc2VlbXMgdGhhdCB1LWJvb3QgbmVlZHMgdG8gaGF2ZSBhIGRldmljZSB0
+cmVlIG5vZGUgYXR0YWNoZWQgdG8gZWFjaCBkcml2ZXIgdG8gZ2V0IGl0IGFjdGl2YXRlZC4NCg0K
+SSB3aWxsIHRyeSB0byBnZXQgYXMgY2xvc2UgYXMgdGhlIGxpbnV4IGtlcm5lbCBkby4NCg0KVGhl
+IGdvb2QgbmV3cyBpcyB0aGF0IGl0IHNlZW1zIHRoYXQgSSBkbyBub3QgaGF2ZSBhbnkgcHVzaCBi
+YWNrIHRvIGdldCB0aGF0IGZlYXR1cmUgb25ib2FyZGVkIGluc2lkZSB1LWJvb3QuDQoNClRoZSBj
+b2RlIEkgd3JvdGUgaXMgcmVhbGx5IGEgcXVpY2sgYW5kIGRpcnR5IGltcGxlbWVudGF0aW9uIGFz
+IHRvIHJ1biBhIGRlbW8gbmV4dCB3ZWVrIHRvIHRoZSBPQ1AgU3VtbWl0IGluIER1Ymxpbi4gSSB3
+aWxsIG5vdyBtYWtlIGl0IGNvbXBsaWFudCB3aXRoIGNvZGUgc3R5bGluZyBhbmQgZXZlcnl0aGlu
+ZyBuZWVkZWQgdG8gZ2V0IGl0IGFjY2VwdGVkLiBJIHdpbGwganVzdCBuZWVkIHlvdXIgaGVscCwg
+cGF0aWVuY2UgYW5kIHJlc2lsaWVuY2UgdG8gZ3VpZGUgbWUuDQoNCkZvciB0aGUgbW9tZW50IHRo
+ZSBvbmx5IGNvZGUgY2hlY2ssIEkgYW0gZG9pbmcgaXMgdGhyb3VnaCB0aGUgY29tcGlsZXIgd2hp
+Y2ggZG9lc27igJl0IHJlcG9ydCBhbnkgd2FybmluZy4gSSB3aWxsIGFkZCBvdGhlciBjb2RlIGNo
+ZWNrcyBmcm9tIHRoZSBsaW51eCBrZXJuZWwgbW92aW5nIGZvcndhcmQNCg0KSmVhbi1NYXJpZQ0K
+DQpGcm9tOiBRdWVudGluIFNjaHVseiA8cXVlbnRpbi5zY2h1bHpAY2hlcnJ5LmRlPg0KRGF0ZTog
+V2VkbmVzZGF5LCBBcHJpbCAyMywgMjAyNSBhdCAyOjA04oCvQU0NClRvOiBWZXJkdW4sIEplYW4t
+TWFyaWUgPHZlcmR1bkBocGUuY29tPiwgdS1ib290QGxpc3RzLmRlbnguZGUgPHUtYm9vdEBsaXN0
+cy5kZW54LmRlPg0KU3ViamVjdDogUmU6IFdpem5ldCB3NTUwMCBzdXBwb3J0DQpIaSBKZWFuLU1h
+cmllLA0KDQpPbiA0LzIyLzI1IDg6MzYgUE0sIFZlcmR1biwgSmVhbi1NYXJpZSB3cm90ZToNCj4g
+W1lvdSBkb24ndCBvZnRlbiBnZXQgZW1haWwgZnJvbSB2ZXJkdW5AaHBlLmNvbS4gTGVhcm4gd2h5
+IHRoaXMgaXMgaW1wb3J0YW50IGF0IGh0dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMvX19odHRwczov
+L2FrYS5tcy9MZWFybkFib3V0U2VuZGVySWRlbnRpZmljYXRpb25fXzshIU5weFIhbkEtS0hscFFJ
+eU1Qdy1WOEY0d0hsYm5ERUhVczRvQlVDRE5Ja1FPYUxpV1FDVl9zU0lBc2gwbXAwYlA0Q1pLbWxl
+RXNTaGRjMXIxU3NZa2tyX1BpTFlBJDxodHRwczovL3VybGRlZmVuc2UuY29tL3YzL19faHR0cHM6
+L2FrYS5tcy9MZWFybkFib3V0U2VuZGVySWRlbnRpZmljYXRpb25fXzshIU5weFIhbkEtS0hscFFJ
+eU1Qdy1WOEY0d0hsYm5ERUhVczRvQlVDRE5Ja1FPYUxpV1FDVl9zU0lBc2gwbXAwYlA0Q1pLbWxl
+RXNTaGRjMXIxU3NZa2tyX1BpTFlBJD4gIF0NCj4NCj4gSGksDQo+DQo+IEkgaGF2ZSB3cml0dGVu
+IGEgc21hbGwgcGF0Y2ggZm9yIHRoZSB3aXpuZXQgVzU1MDAgYWRhcHRlci4gKGh0dHBzOi8vdXJs
+ZGVmZW5zZS5jb20vdjMvX19odHRwczovL2RvY3Mud2l6bmV0LmlvL1Byb2R1Y3QvaUV0aGVybmV0
+L1c1NTAwL292ZXJ2aWV3X187ISFOcHhSIW5BLUtIbHBRSXlNUHctVjhGNHdIbGJuREVIVXM0b0JV
+Q0ROSWtRT2FMaVdRQ1Zfc1NJQXNoMG1wMGJQNENaS21sZUVzU2hkYzFyMVNzWWtrelNzYVV4dyQg
+KS4NCj4gSSBhbSBpbiBzb21lIHdheXMgcmVhZHkgdG8gcHVzaCBpdCBpbnRvIHUtYm9vdCBmb2xs
+b3dpbmcgYXBwcm92YWwgZnJvbSBIUEUsIGJ1dCBhcyB0aGF0IHdpbGwgYmUgYSBmaXJzdCBmb3Ig
+bWUsIEkganVzdCB3YW50ZWQgdG8gZ2V0IGZlZWRiYWNrIGZyb20geW91Lg0KPg0KPiBUaGUgd2l6
+bmV0IGRldmljZSBhbGxvd3MgbWUgdG8gYWRkIGEgbmV0d29yayBhZGFwdGVyIHRvIGRlZXAgZW1i
+ZWRkZWQgZGV2aWNlcyBsaWtlIFBDSWUgYm9hcmQgYW5kIGJvb3QgdGhlbSBieSB1c2luZyBldGhl
+cm5ldCB0aHJvdWdoIGEgc3BpIGJ1cyBvciBncGlvcyBieSB1c2luZyB0aGUgc29mdC1zcGkgZHJp
+dmVycyB0aHJvdWdoIHUtYm9vdC4gVXN1YWxseSwgc3VjaCBkZXZpY2VzIGJvb3QgbG9jYWxseSB0
+aHJvdWdoIGEgc3BpLW5vciBvciBvdGhlciBsb2NhbCBzdG9yYWdlLiBJIHdhbnQgdG8gcHJvbW90
+ZSBhIFBYRSBsaWtlIGFwcHJvYWNoIGFzIHRvIGVhc2UgZmlybXdhcmUgdXBkYXRlcywgaW1wcm92
+ZSBzZWN1cml0eSwgYW5kIGJvb3Qgc3BlZWQuIFRoZSB3aXpuZXQgZGV2aWNlIGNhbiBsb2FkIHJh
+dyBpbWFnZXMgYXQgYWJvdXQgMS41TUIvcyBpbiBtZW1vcnkgYW5kIHRoZSB1LWJvb3QgaXMgaW4g
+Y2hhcmdlIGF0IGJvb3RzdHJhcHBpbmcgdGhlIHNlY29uZCBzdGFnZSB0aHJvdWdoIHRoZSBpbiBt
+ZW1vcnkgY29wdS4NCj4NCj4gSSBzdWNjZXNzZnVsbHkgdGVzdGVkIGl0IGJ5IHVzaW5nIGEgcmFz
+cGJlcnJ5IHBpIDQgZGV2aWNlIHRocm91Z2ggc29mdCBzcGkgYXMgd2UgZG8gbm90IGhhdmUgYSBk
+cml2ZXIgZm9yIGl0IGluc2lkZSB1LWJvb3QuIEl0IHdvcmtzIGF0IGFyb3VuZCAzNjBrQi9zIGNv
+bXBhcmVkIHRvIDQwMGtCL3MgdGhyb3VnaCB0aGUgbGludXgga2VybmVsLg0KPg0KPiBXaXpuZXQg
+ZGV2aWNlIG5lZWRzIGluIGZhY3QgMiBkcml2ZXJzLCBvbmUgd2hpY2ggYmVoYXZlIGxpa2Ug4oCc
+UEhZ4oCdICBhbmQgb25lIHdoaWNoIGlzIHBlcmNlaXZlZCBhcyBhbiBldGhlcm5ldCBhZGFwdGVy
+LiBCb3RoIG5lZWRzIHRvIGJlIGxpbmtlZCB0aHJvdWdoIGEgcGhhbmRsZSBhcyB0byB1c2UgdGhl
+IHJlbGV2YW50IHhmZXIgZnVuY3Rpb24gdG8gcHVzaCBhbmQgcmVjZWl2ZSB0aGUgZGF0YS4NCj4N
+Cg0KQW4gRXRoZXJuZXQgTUFDIHlvdSBtZWFudCBJIGFzc3VtZS4NCg0KPiBTbywgbXkgcGF0Y2hz
+ZXQgd2lsbCBjb250YWluIHNvbWUgd29yayBmb3IgdGhlIHNwaSBzdWJzeXN0ZW0gYW5kIHNvbWUg
+Zm9yIHRoZSBuZXQgc3Vic3lzdGVtLiBEbyBJIG5lZWQgdG8gYnJlYWsgdGhlbSBkb3duLCBvciBh
+IHNpbmdsZSBwYXRjaCB3b3VsZCBiZSBnb29kIGVub3VnaCA/DQo+DQoNClNlcGFyYXRlIGRyaXZl
+cnMsIHNlcGFyYXRlIHBhdGNoZXMgcGxlYXNlLiBJdCdzIGxpa2VseSBnb2luZyB0byBnbw0KdGhy
+b3VnaCBkaWZmZXJlbnQgbWFpbnRhaW5lciB0cmVlcy4gVGhleSBjb3VsZCBiZSBpbiB0aGUgc2Ft
+ZSBwYXRjaA0Kc2VyaWVzIHRob3VnaCwgdG8gZ2l2ZSBldmVyeWJvZHkgYW1wbGUgY29udGV4dC4N
+Cg0KSGF2aW5nIGhhZCBhIHF1aWNrIGdsYW5jZSBhdCB0aGUgZGlmZiBpbiB5b3VyIFUtYm9vdCBm
+b3JrLCBpdCdzIHZlcnkNCnVuY2xlYXIgdG8gbWUgd2h5IHdlIG5lZWQgYW4gU1BJIGJ1cyBkcml2
+ZXIgKFVDTEFTU19TUEkpPyBUaGUgTGludXgNCmtlcm5lbCBzZWVtcyB0byBvbmx5IGhhdmUgdGhl
+IEV0aGVybmV0IGRyaXZlci4gSXMgdGhlIHc1NTAwIGFjdGluZyBhcyBhbg0KU1BJIGNvbnRyb2xs
+ZXIgaW5zdGVhZCBvZiBhcyBhbiBTUEkgZGV2aWNlPyBJIGZpbmQgaXQgaGFyZCB0byBiZWxpZXZl
+LA0KYnV0IG1heWJlIDopID8NCg0KSSBiZWxpZXZlIHlvdSBzaG91bGQgb25seSBuZWVkIHRoZSBF
+dGhlcm5ldCBNQUMgZHJpdmVyIChwb3NzaWJseQ0KRXRoZXJuZXQgUEhZIGRyaXZlciBhcyB3ZWxs
+PykgYnV0IGJ1aWx0IG9uIHRvcCBvZiBhbiBTUEkgZGV2aWNlIChhbmQgbm90DQpkcml2ZXIpLCBl
+c3NlbnRpYWxseSBqdXN0IGNhbGxpbmcgc3BpIGZ1bmN0aW9ucyB0YWtpbmcgYSB1ZGV2aWNlIGFz
+DQpwYXJhbWV0ZXI/DQoNCkxvb2sgYXQgZHJpdmVycy9wb3dlci9wbWljL3JrOHh4LmMgZm9yIGV4
+YW1wbGUsIGl0IGlzIGEgUE1JQyBkcml2ZXIgZm9yDQphbiBJMkMgKG9yIFNQSSkgZGV2aWNlLiBP
+ciBmb3Igc29tZXRoaW5nIGNsb3NlciB0byB5b3VyIGRldmljZSwgbWF5YmUNCmhhdmUgYSBsb29r
+IGF0IHRoZSBLU1o5NDc3PyBJdCBzZWVtcyB0byByZXF1aXJlIEkyQyBhbmQgU1BJIChidXQgaXMg
+YQ0KRFNBIHN3aXRjaCwgc28gc2xpZ2h0bHkgZGlmZmVyZW50IHRoYW4geW91cnMpLg0KDQpBZGRp
+dGlvbmFsbHksIHdlIGRvIG5vdCBhbGxvdyBtb2RpZmljYXRpb25zIG9mIHRoZSBkdHMvdXBzdHJl
+YW0NCmRpcmVjdG9yeS4gVGhlIHBhdGNoZXMgYWJzb2x1dGVseSBuZWVkIHRvIGNvbWUgZnJvbSB0
+aGUNCmRldmljZXRyZWUtcmViYXNpbmcgdHJlZSwgdmlhIHRoZSBgdG9vbHMvdXBkYXRlLXN1YnRy
+ZWUuc2ggcGljaw0KPGNvbW1pdD5gIGNvbW1hbmQsIHNvIHBsZWFzZSB1cHN0cmVhbSB0aGUgYmlu
+ZGluZyB0byB0aGUgTGludXgga2VybmVsIGZpcnN0Lg0KDQpMb29raW5nIGZvcndhcmQgdG8gc2Vl
+aW5nIHBhdGNoZXMgb24gdGhlIG1haWxpbmcgbGlzdCENCg0KQ2hlZXJzLA0KUXVlbnRpbg0K
