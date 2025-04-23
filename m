@@ -4,38 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEE86C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 21:30:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB9BC369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 21:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F4768059D;
-	Wed, 23 Apr 2025 23:30:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 7B04B8070C;
+	Wed, 23 Apr 2025 23:32:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 993748070C; Wed, 23 Apr 2025 23:30:23 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CB158059A
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 23:30:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from hay.lan. (unknown
- [IPv6:2605:59c0:20f3:a400:6ecf:39ff:fe00:8375])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id E79C7B4C174B;
- Wed, 23 Apr 2025 23:30:19 +0200 (CEST)
-From: E Shattow <e@freeshell.de>
-To: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
-Cc: E Shattow <e@freeshell.de>,
-	u-boot@lists.denx.de
-Subject: [PATCH] doc: board: starfive: visionfive2: add missing format command
- to Flashing
-Date: Wed, 23 Apr 2025 14:28:51 -0700
-Message-ID: <20250423212859.654350-1-e@freeshell.de>
-X-Mailer: git-send-email 2.49.0
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bsc+nmdf";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C840F8070C; Wed, 23 Apr 2025 23:32:10 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 835518059A
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 23:32:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=grandpaul@gmail.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-736c1138ae5so238386b3a.3
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 14:32:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1745443926; x=1746048726; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=85Q9nMadSkLj9H8XTnkKa1aZzCHtEdPyLEHre0ewwrQ=;
+ b=bsc+nmdf03nS0sWfk2ahkqoGoBDE2i4I9jWxofZMbfQ7rSiuemt+ZKStyyNVpdXAvj
+ HjqL6116JMLeNAzvmI7bpf4+LV9IhrNXRUvKq4YvTGPtGiapF0GKykgiabiL4EiVHt4f
+ WD0k9rIn0vgqBOtqkhBZwclaO8she5jOCU3KA6lYbuoPX4hthmwxwNxJIg69nEOKfNzc
+ akqaSvNc0jLON+ckBzMe+DqWUnLG/tA+Mt25/7cGva/TSDRBxPiQNZqdHtx3mdbVMwRx
+ MMPcD642r9rKs3axsBgfYLWpuAqe0Cc5gAK/gueRiaF7QEIf32DFHwnobr2YDB47ezz5
+ cPXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745443926; x=1746048726;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=85Q9nMadSkLj9H8XTnkKa1aZzCHtEdPyLEHre0ewwrQ=;
+ b=VE+ix2jIRK88Ho2WfNaTOBrFNgZRYyOxvWRLXpAvngFGZSdUIvwGaylJYEDbiYqNjJ
+ NzCLoRXwCDXtwL43nht405/Tcz2hcRO95Bm8ztYMlZy4z0xP4ICZRlozqbXkGZdlTqAH
+ trjhBBTpYn59ep6l3ORa0dNub/sE+1CfQl/e9gM0G5t3zNT5rFgVoOaUAr9w0zFN6Hz3
+ DsZmjk8Zd90wcW0YC/631aRORVKk+McM/8ZjRfnTwID57JgsW5v1tAJ73V1PQT3Lgrlv
+ TcAacqxeZ1lsAdi7zAT2gQMGmiG9ZNht9wt1TkX52eATdunKRXGdnY0CT5T1PyZFTpWU
+ +lRA==
+X-Gm-Message-State: AOJu0YwV1iOPCdSF91htVPfBfeAxj9S1rM5WkJixE48v11+1u7JbHJGp
+ FJDcR9nmqwSmXe8IMiduExgRg1rtloASza6y+aiBAHG42zKMBOQ1E6BZGQ==
+X-Gm-Gg: ASbGncvwB4gtfeaZ+9gPB6shWgMbBOJu0A1xE09Znj6ZqGfn83FgLRgpHdJrXWCl5mP
+ LMQ0FolnVerm425/xDmYEKWiov41fkabNE3hKvxURdsmyHzH8UyLQkM8TS6bOUrjYzz0X+ZHjAy
+ M7B8h8fp+nW347yDDsEZJ3pHaGQFamLLryZCIKnhM32FxYGAzb2WwQwxN4SgnvOS2/5gVwVH0/M
+ NEkQmaI3T0G+fRDTv9O6Zth3b8NBV6oZF+ER/t2ZYYjsOIIVkLnq2/IyqnKcn+V8P51dlmQy0nD
+ nKTc02bdAO2N1uLXJKq8Ewh6KPJ/g41HuWbS
+X-Google-Smtp-Source: AGHT+IHNxwOHD1tOK17ldn8ZwmFS+rneaIeamu1CyRq8DWFOTN75qEd3g5SKPed2YE3jl2/LIv8Xdg==
+X-Received: by 2002:a05:6a20:d70f:b0:1f5:5614:18d3 with SMTP id
+ adf61e73a8af0-20444e8083emr172572637.8.1745443926346; 
+ Wed, 23 Apr 2025 14:32:06 -0700 (PDT)
+Received: from localhost ([61.71.79.124]) by smtp.gmail.com with UTF8SMTPSA id
+ 41be03b00d2f7-b0db13a3bdcsm9618547a12.19.2025.04.23.14.32.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Apr 2025 14:32:05 -0700 (PDT)
+From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+To: u-boot@lists.denx.de
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH 0/3] efi: Add EFI Debug Support Table feature
+Date: Thu, 24 Apr 2025 05:31:41 +0800
+Message-ID: <20250423213145.1959046-1-paulliu@debian.org>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -54,25 +92,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: E Shattow <e@freeshell.de>
----
- doc/board/starfive/visionfive2.rst | 1 +
- 1 file changed, 1 insertion(+)
+From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 
-diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
-index 2c68df3ce4d..4e88002bb11 100644
---- a/doc/board/starfive/visionfive2.rst
-+++ b/doc/board/starfive/visionfive2.rst
-@@ -116,6 +116,7 @@ Format the SD card (make sure the disk has GPT, otherwise use gdisk to switch)
- 	  --new=2:8192:16383 --change-name=2:uboot --typecode=2:BC13C2FF-59E6-4262-A352-B275FD6F7172  \
- 	  --new=3:16384:1654784 --change-name=3:system --typecode=3:EBD0A0A2-B9E5-4433-87C0-68B6B72699C7 \
- 	  /dev/sdb
-+	sudo mkfs.vfat -F32 /dev/sdb3
- 
- Program the SD card
- 
+I implemented the UEFI Specification version 2.10, specifically focusing on
+the functionality described in Section 18.4, which details the EFI Debug
+Support Table feature. This implementation ensures support for
+hardware-assisted debugging and provides a standardized mechanism for
+debuggers to discover and interact with system-level debug resources.
 
-base-commit: 6e325df4891cb9be954f1e62f16cd3096b267bdb
+Ying-Chun Liu (PaulLiu) (3):
+  efi: add EFI_SYSTEM_TABLE_POINTER for debug
+  efi: add EFI_DEBUG_IMAGE_INFO_TABLE for debug
+  efi: add EFI_DEBUG_IMAGE_INFO for debug
+
+ include/efi_api.h             |  32 ++++++
+ include/efi_loader.h          |   7 ++
+ lib/efi_loader/efi_boottime.c | 196 ++++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_setup.c    |   7 ++
+ 4 files changed, 242 insertions(+)
+
 -- 
-2.49.0
+2.39.5
 
