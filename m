@@ -4,61 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77627C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 07:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D41D1C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 08:43:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2F4580BA8;
-	Wed, 23 Apr 2025 09:53:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 03A64809A5;
+	Wed, 23 Apr 2025 10:43:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="A64Wp7Gp";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Ooi0ueft";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C01680EE5; Wed, 23 Apr 2025 09:53:47 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5D462809D4; Wed, 23 Apr 2025 10:42:58 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CE49800D7
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 09:53:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 9C9DA8082A
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 10:42:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C6FBB5C5EBD;
- Wed, 23 Apr 2025 07:51:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F1C0C4CEEA;
- Wed, 23 Apr 2025 07:53:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745394823;
- bh=m1WZVVWRlqt3T29bTTAZoiV2LWdwa8KTq86bkjjSfJQ=;
- h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=A64Wp7GpHN2UVMnrfOukwb5HlgXvqN84WYDo5jb/n+xSA/j8VOspi/JS1f8Ea5aaZ
- xja8wEsGi/VXrEgJQVqwz1pvH5ubieS0JAYKswzUG1o04/hUUTAqJ/oN0Wfvj//3nL
- gk93s3WMFng3A+PzrnFT58nejf79PuyN4lFas/taBLJTeYKQRiL7QFmwz/bX+HAsEn
- KAS3BQr0Hu9koK8NTVtszCfI9AOd/o8vpitV5bnQX90c8YNcO1ntWdfQqTS161K1wN
- 2dk6NMHFeQtAPArSbYuTy7pfiy7z1teRMfesfb1wLjd5DkyMhhZEAaCDHYjTgDLmKg
- KMK1BbD+iExYg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Jassi Brar <jaswinder.singh@linaro.org>, Marek Vasut <marex@denx.de>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250407170529.893307-1-vincent.stehle@arm.com>
-References: <20250407170529.893307-1-vincent.stehle@arm.com>
-Subject: Re: (subset) [PATCH 0/5] fix dfu alt buffer clearing
-Message-Id: <174539482144.9635.14403377545840814436.b4-ty@kernel.org>
-Date: Wed, 23 Apr 2025 09:53:41 +0200
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sbellary@baylibre.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-227d6b530d8so64115085ad.3
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 01:42:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1745397774; x=1746002574;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HUGWyYrn3bCJ5jT+k+8Nm0n5bHvAZrujycHKE4LXhtc=;
+ b=Ooi0ueftDuoGSaBiIYfQVXf2luJC1fljo60UNVQCgmywXgbupsSO18FTd3t3Pazths
+ MwnH8GqR6k250Wrl7oqyXYJPAiGDn9KhkqPUXa0K0DmZEX8aOipYA44komUb2mNDOrPC
+ RWwTqS7gfNEppdNUmICnXcrNv4r4mnZG0/52GidtoErRqtmHTFuciml8iovzh9fnbgon
+ GYqKyQAn+u/OTotnJ73sMcOz5uaOJ+YLsYbIhoQQRvxvZjXvmAttrRzwuHaTX+K+M+Xc
+ Zwvhnn05NbEvFJvdsgTv7it+h1XsK0qthuccTNQFGgPBUSdVuyMoBhnU56KacUsmevK7
+ tKOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745397774; x=1746002574;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HUGWyYrn3bCJ5jT+k+8Nm0n5bHvAZrujycHKE4LXhtc=;
+ b=XS6hyAaZUtrvC4GcFe/HfQm+6xkOQyTutqAz4JF5X2FBsGHhO1M7i0KBv06DMwOHCF
+ SlRB2xBesds1Cn8VBYoAO4ycKS/bsz4S0/EkHlZga1vS5S0HHZyiPBQTaZgNR5NibCAq
+ 4X/AAv6rMgl9CaPgMRSjbz/xKURtJOev9dlUxuayc+spuHEQ4rnL9fsWlfujZqDCs0p1
+ IDOTnWY862seMxYHAsnQdRLNGuCLdbEpYW8dl0vBhJtUSjXUnh2sht6gqmbXYD9nbgC/
+ oG8e/v5ggTyKZew5UyxzRk5h2sDDCaec3aBZEjOdeMD5Ol0HZaimXMCG2tBdZfR2FL2I
+ D0ng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX6JcREph1wH282lPa8zYEX5z5C1luJuePQc1LGBIrBYoMDqwLqInc3KQAtYzKEs969Q6flucw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzT9VotlRd+WwDrT1yt0VJL0q2MabSlmygE66GT9+Fd/bgkJYtb
+ 1V7PjhZWmu98+agYgmG5+bwr3jhMnerJBwHxizROPIMlsopP+l7eZC17ydLs8Zw=
+X-Gm-Gg: ASbGncudlZrS2J6hxB27EawgCOVJMBW5YcLKq0IltgXOfGIgmaerWM+lc59Kp+/WXM+
+ 1Klv4nJuiKU222eJPa809x5HzlPESnpsxju5tcm9KrCcjid87yzNsx2qeYKFw/tZCY8TC8bhi8h
+ aBI74c24Wp5crbKkMyml7iHvXCdkTyUTp6s7spOjFfEetX/VjL2h76VF4fNZfUYnN1qgc0jNExD
+ W0i3rT3b22ck0LxhAp3g7fk0mWN294p0gfKXwtVqc5BS4z/K25X//z2EBy1v2UQTqBm3zNEeaeL
+ JOYOnpODsMtMvDzY5WTrq0HvjzSoHAk9ojb3qEl3DK5XW2laCCsw/rrrQuth+KkACj7g78TUlSe
+ CIoVUi2s7TQf+uw==
+X-Google-Smtp-Source: AGHT+IG/zrt27ph4HRHnaRqlYSXyI3ypkifJpTf/gyLjbnDuGuz4z3R75EKEHtF1UvjG8J5oYMqSmQ==
+X-Received: by 2002:a17:902:ebc4:b0:223:5c77:7ef1 with SMTP id
+ d9443c01a7336-22c53586639mr276628475ad.21.1745397774158; 
+ Wed, 23 Apr 2025 01:42:54 -0700 (PDT)
+Received: from dev-linux.. (syn-076-088-115-008.res.spectrum.com.
+ [76.88.115.8]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22c50bdae69sm98860085ad.1.2025.04.23.01.42.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Apr 2025 01:42:53 -0700 (PDT)
+From: Sukrut Bellary <sbellary@baylibre.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Sukrut Bellary <sbellary@baylibre.com>,
+ Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
+ Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
+Subject: [PATCH 0/3] Add support for eCAP PWM and LCD pin mux
+Date: Wed, 23 Apr 2025 01:42:46 -0700
+Message-Id: <20250423084249.197101-1-sbellary@baylibre.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.14.3-dev-7b9b9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,27 +100,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+This patch series adds the support for
 
-On Mon, 07 Apr 2025 19:05:24 +0200, Vincent Stehlé wrote:
-> This patch series applies the same fix in five different locations (the
-> detailed description of the fix is in the patches).
-> 
-> I did validate statically by looking at the assembly before/after for all
-> five cases, using the following defconfigs:
-> 
->   stm32mp15_defconfig
->   synquacer_developerbox_defconfig
->   xilinx_versal_virt_defconfig
->   xilinx_zynq_virt_defconfig
->   xilinx_zynqmp_kria_defconfig
-> 
-> [...]
+1. In am33xx SoC[1], enhanced capture (eCAP) supports auxiliary PWM (APWM).
+This series adds the PWM driver support for the APWM feature for eCAP on
+AM33xx. AM335X_ECAP0_IN_PWM0_OUT is used to enable the backlight.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+2. Fix build warning in ti-ehrpwm driver in dev_deb().
 
-[1/5] fwu: developerbox: fix dfu alt buffer clearing
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/39a719dce59607d6abcac17cc2683aa9f2162539
+3. Enable eCAP0 PWM and LCD pin muxing to support splash screen on
+AM335x EVM[2].
 
---
-Mattijs
+[1] AM335x TRM - https://www.ti.com/lit/ug/spruh73q/spruh73q.pdf
+[2] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
+
+per discussion on the earlier patch series,
+https://lore.kernel.org/all/20250319202516.3300444-1-sbellary@baylibre.com/
+dropping the device tree changes in this series due to OF_UPSTREAM
+conflict.
+As we are dropping the DT patch, started with the new series instead of
+V2.
+
+This series doesn't contain defconfig changes since we don't want to
+enable LCD, splash screen and PWM support by default.
+Enabling splash screen and PWM support in defconfig causes u-boot crash
+on AM335x based beaglebone black. This will be handled in a separate
+patch.
+
+Sukrut Bellary (3):
+  pwm: ti: am33xx: Enable Auxiliary PWM using eCAP
+  pwm: ti: am33xx: Fix build warnings in dev_dbg()
+  board: ti: am335x: Enable eCAP0 PWM and LCD pin muxing
+
+ board/ti/am335x/mux.c       |  47 +++++++++
+ drivers/pwm/Kconfig         |   6 ++
+ drivers/pwm/Makefile        |   1 +
+ drivers/pwm/pwm-ti-ehrpwm.c |   2 +-
+ drivers/pwm/pwm-tiecap.c    | 198 ++++++++++++++++++++++++++++++++++++
+ 5 files changed, 253 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/pwm/pwm-tiecap.c
+
+-- 
+2.34.1
+
