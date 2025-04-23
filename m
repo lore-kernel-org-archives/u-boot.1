@@ -4,142 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E8DC369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 12:45:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 741E1C369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 12:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D12080FA8;
-	Wed, 23 Apr 2025 14:45:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id D049180F03;
+	Wed, 23 Apr 2025 14:50:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TMxCin1P";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RPyyjptu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 187E580FDA; Wed, 23 Apr 2025 14:45:03 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::614])
+ id 61A3180FDA; Wed, 23 Apr 2025 14:50:09 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 530F080F9C
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 14:45:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19AA680944
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 14:50:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RInUYg0Q8Nnu86GFLD5o1MbHhidZGc/4ILDXGRYEPxO/U6W95kjhEat50VPT2BjzvaTVfVKR2GXc+gLBnnp2/+3AycgOTE127XDJrCFbisioho4DVf5ZeBT1egASHvKiWfzNvu42gOkDZ0jvU0bwLQEehPYOfOF3uTuSiAkvSX6mHgymbPnfbEhdVA9ypaL7xHaWoOPnQrFi9Dlhk0A3yjyvXLJ5jvCaev/t+q80Mh7DlLbJUAnOX4woAGa4JaUqdy8+K0rMwLo7wOxXYTA2xqhzfrIkOCiRd6eVqChPiq4rIcGB82YwPH78rK+24jc9jNgBVBiT3z2LDr87RxtsIw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x/a/UVOB8dSE/f7iwzP0aGe5QTITvp5IQtlbDVlqd/A=;
- b=DpdNdbRDMr6kSeTBCYCv8Td4IqxvvCPwgswH8KjV08OJVjLEHGWQ0VOA0Ip5wYJLREk1aOd24q/9KMzu7JXhe5nWavNlvl547SppTxk4wBouyW9uaQBN9679WMeDzU/9F9NswhsSY9eOpUPfdF3bKL5r7BkuAbxyCWHyCa+ahm+MZZi6EBBciQUAAndEEvFtgS3h++u5jQ/oNKYYp/4eFEjQBkK4ADReMtcijOrsB7e4rw0bS1nkytlQ078iCySnRy1h/YoqhyL58VGv95LE3ogZw26Em0bqY4Zo0AKwpzTidAL4mrvmxOYKJs1KYOl6v71/aCGPrkRZ6Xus5tOCxQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=x/a/UVOB8dSE/f7iwzP0aGe5QTITvp5IQtlbDVlqd/A=;
- b=TMxCin1P1EhOid3vocmcyoG9bmhMuL1hEl8Lbhkjdk2h4sBdI09sGOUkyLYEffFNpJiyv7yl3KNtHT5FW8CdTJnU+1HyaK9lJKBbvHmyp8l+IlqZDtCZ+WR2UyyD7PsyU1b6he+0mz4uBFjV+LSIj5oCEwmwhV+zm1/bXi++eYc=
-Received: from DS7PR03CA0182.namprd03.prod.outlook.com (2603:10b6:5:3b6::7) by
- BY5PR12MB4083.namprd12.prod.outlook.com (2603:10b6:a03:20d::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.23; Wed, 23 Apr
- 2025 12:44:55 +0000
-Received: from CY4PEPF0000FCBE.namprd03.prod.outlook.com
- (2603:10b6:5:3b6:cafe::6) by DS7PR03CA0182.outlook.office365.com
- (2603:10b6:5:3b6::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.36 via Frontend Transport; Wed,
- 23 Apr 2025 12:44:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000FCBE.mail.protection.outlook.com (10.167.242.100) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8655.12 via Frontend Transport; Wed, 23 Apr 2025 12:44:54 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Apr
- 2025 07:44:54 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Apr
- 2025 07:44:52 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 23 Apr 2025 07:44:52 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] Dockerfile: Simplify applying cadence_gem commit to QEMU
-Date: Wed, 23 Apr 2025 14:44:40 +0200
-Message-ID: <5061af5aef7e964431679bee94b7ccfd2579e521.1745412278.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C3CF43F2A8
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 12:50:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1745412605;
+ bh=qWbcIPeF3FvIfpmE53AD9DTP36lV5XBYWFdV6vd0wMU=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=RPyyjptunLsYvNsF7K5x7U1zfkXy2Ef3Cn3/doEA9t7Np4coivUg8QvKpUGW66XVy
+ lWMTJAjNwt64Qdc4TfBkENmezcB3FTYLtFiJYjEzuAIG+w2P5LECGTCVb4dpQPcw8O
+ 5x1khvzMexBKolv0wzccTCjo1DPsgHzxbyevXeFzHkRnMzeUrNx7KTCcKrb9IaTc4F
+ 4u+zQZGJOEgkJr9WPGytVd8/UlBTdWY0BWUcok6pxnqz5ysz7j+8OK397v/5HSdqrW
+ 9qO5wRIjlviBdnV3W12a+nJZVgCM/QUvBatBleBZ72hHgeoyZb8dkoj01+1d48E57n
+ o89c/KoylnARw==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43e9a3d2977so46594485e9.1
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 05:50:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745412605; x=1746017405;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qWbcIPeF3FvIfpmE53AD9DTP36lV5XBYWFdV6vd0wMU=;
+ b=dszonRGQiOu9huIhMfFHPMcCfYFZ5UAjSpWE5QCJOALnVrkoqo4fgpFY1MwJBtKKGW
+ Y5puzs4lX1/YmGa2CBo6lQmahZHLdAi7fZ2TCqSEssHhrMizNQN4+oamOIneLBeM/xtG
+ w31TFf0wcOiwQN751nUYDPpq9w3JOg8gE1k307MIuETOFeuTyGBmbuZ+FedAs08+9Cfb
+ KMNlTSJgJ0qfUhgYHaloDfe6v9ysPX1yEab8niwfBmTjU2U9b3zUJvNfZ4q1wxF5tMkZ
+ 9s2Y7dyaNNNifEZYRnfEKOYO+1osWxvxaGO34UNGOIDthlg8hwcxbN1pHlzXRQOaUbK7
+ 4fvw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVRcGK1qAampJFq1328D/FadYX58Ht3LKbM1jy8pF5y4RrgmOkNevHnYarSTXrmoj6KXbIcicY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzbld49JHw94/o3yNJvM1pZA2gwBsFlvVeC5cbUSa6yTUqnAJz+
+ gosVjqOGk9Wh7ZeRce6mctHGH79eeTFF+zTOsOts6S5ugq2cdJw29UtFFX/g1Eg6RPzZKD0APBJ
+ r00oYFtsBWJrtxdWzpvU/IT5NUHILPgJmyE8rNrnQatVcN0RxJnjaVMmkrA7vUjxPpLs=
+X-Gm-Gg: ASbGncuVlqUyNLzcSNFts7LVjlkOAbQQGiF6BvU5uRZeg4nOxTULWd4F+GMeOfMV4HI
+ LVq9u7IspmAY3eDjZTHv7x+VBe1ESuO8alhgoXrf9C4/JgvTFmUQOvnv7QHkcXFIe7Wh9GhskNB
+ cg9fgngtDVFkKanadowbglOWoSxy36cnaBs+dHMVJfLGUbgRlOQmoaoUJ423eJNbRr1NHF3a0L0
+ iywVeujswzrtHnyGAMingZ4GMN93v9xOHcbWLgheY2hn/+M/KR9D4/lVkbvUCIfmMhr+hITQpvI
+ wV4q1bmJrwfNzXyOjyj+F0bABNHn9x5bpL93XPrWEk50d2ptDAwZnRNQRBvSCKtRDYCFi2uY6k3
+ Ae9o7vhPz
+X-Received: by 2002:a05:600c:cc4:b0:440:6a1a:d89f with SMTP id
+ 5b1f17b1804b1-4406ab6c569mr189469545e9.4.1745412605382; 
+ Wed, 23 Apr 2025 05:50:05 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFJSXKPC93ZRWfjazcHXSEJBBbAzsLVxsTkkUhUCTwiydrtso3BFKmBvuTK+wYzshllJGXFLA==
+X-Received: by 2002:a05:600c:cc4:b0:440:6a1a:d89f with SMTP id
+ 5b1f17b1804b1-4406ab6c569mr189469185e9.4.1745412604860; 
+ Wed, 23 Apr 2025 05:50:04 -0700 (PDT)
+Received: from [192.168.103.102]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-44092d17a36sm25195205e9.3.2025.04.23.05.50.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Apr 2025 05:50:04 -0700 (PDT)
+Message-ID: <785ae15f-62c0-45e3-ae7e-6b56c4a3c3d6@canonical.com>
+Date: Wed, 23 Apr 2025 14:50:03 +0200
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1369; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=cnAVDliYpxTS1a2YuLJzzHztL38AGHZKEB9iawDtThY=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhgyOBzvX9C0Ibl//YbnEsc8lOguWOUQaLnG4YGJ8lr2Pi
- yFd/rVaRywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZjI4gyGuZKbuT7dOcZs/FCQ
- 5xLz8sBnk9rXXWGYn1N6avv3G4GWnxvOvzvXPPXhvKQ2XQA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCBE:EE_|BY5PR12MB4083:EE_
-X-MS-Office365-Filtering-Correlation-Id: ea6143d6-ae69-4491-f41b-08dd8264a5ff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?c6D0v8qM3gIcGh6v9timLUkGAwsGJY0oCdFUf0zJ8Eo0PdJCfrlCU8YhhO3L?=
- =?us-ascii?Q?E3wi4p37CttZ2FDGpezgPBN7zaNTtAsKJlqPDk1oK3Is0MVlTu5TeY8ynJmb?=
- =?us-ascii?Q?Gd9JP6+Vn33gJS/MuaIfzML5jxCnQdQqw5u9Smr5hM93keVJIzPmAaNZc0Uo?=
- =?us-ascii?Q?/srKY+laRi+8jBokHb7NLwo9W6uUlRcjoXb/TScWQAImlSZUwi8JyO+3Fwgr?=
- =?us-ascii?Q?FiSnorewKQPd9Y3uvpz3qnIiT3diC/5SHJ8g1HmNbyO9UDDRk2BNsykvsGSQ?=
- =?us-ascii?Q?UubIAtCUjtOifz1OgwVIyU3vGS4PCa6WGxTIAiCvlYGd/zCNB3AvbdDOKWn2?=
- =?us-ascii?Q?BbV926Zd82Qz6cNaNyvsg9t3nrIwudZwTgyEWpz98z0op8a58bqlDw8AGAc7?=
- =?us-ascii?Q?WRUc/0KLWmt2YsVRsADmW4Pm071fQMUDtiEWsO+TPVq+zwsR7E/M0wTwkT80?=
- =?us-ascii?Q?qxShPQOtdiaCWubh1h+GTlYS3ACxpZPRO5JKzct7/7j/3DesZNk2kOIir9uN?=
- =?us-ascii?Q?YaNAQm5M9Z3k+TZsUD3Mz3haQplyyp5eMfGmr22ysWFWNSrk8eaX4KYiCq6e?=
- =?us-ascii?Q?AMt0dFxCNpH+CmMQWcIrEhkjMOlyN+VYPd/XCuUb+RosaweATphLgaC1YYM5?=
- =?us-ascii?Q?8ptAQZ+LYg2w03KqXfOWKZYIy/EP/TMulIQns0MeeeGJy5TD9sKnsU2hUz4V?=
- =?us-ascii?Q?3nUXWWW4sJ7gEoxda1pUqiUsFdLN67HpncxkXiPKRWfw6aiSQ36XMPBSL1hJ?=
- =?us-ascii?Q?REdTb+kOBVN384ExWictstodt/pyhAa/RL+hCmLS4IyuCswGxKfKDPfHsd+O?=
- =?us-ascii?Q?q67bAlA9drspkp2m7o2GFavhjiv8cSBQ2dHp+usII7s41RYUC77MUBxD+U+S?=
- =?us-ascii?Q?QiEfqL6B3svnUY4h9owKZxqzL8VPHJtUe5QncPCXXkU9ocVCfooJ9Cq2K7Mr?=
- =?us-ascii?Q?4b8leVG6GnO9otnthn7yVW3V6xCV9plXCAi0EkLt3HjGmVwXvO/3Xr0IW6w2?=
- =?us-ascii?Q?tNy3CKw3aLav3hkPjDCViq8gjeetzZaoiRuPaH52S1oDZlI33dbqlhpBdYc9?=
- =?us-ascii?Q?5kFHREnzxJtiwrMn+/VesHNgLlCSz9lbzbezGMyUvVeniquiw9/mKu+2vIwv?=
- =?us-ascii?Q?8WhkY7aggYUy/6lj0h7qDoC2a5K2WbctZsBJAG71IcfcCdYVhDrygBjg2OwA?=
- =?us-ascii?Q?N3H9F5eRTxcJc3r8XS8PLaQLzMExf7S/IAsq6ydyakR/EJwXMECEMTQy0c09?=
- =?us-ascii?Q?fGdj2QrUIiP+OVk25DW7IbkNoPbuYjg5qRR8z82OdH1y46KJtAjboQtVXI7c?=
- =?us-ascii?Q?SOTn4XPx91cI7ZjiSCTpNHX72xenG1flQKgzLPN7D79WnslBM0TRBabI+kv2?=
- =?us-ascii?Q?PmzcFqtSdDIwgyXSUQmUusKE0QVN96+TId7IfNUNdc7rzZMfv/TRfXkj+ZFT?=
- =?us-ascii?Q?/vKRCnMGpM1vF3svSy8YAmmOxUZr/CF6X40XP4pDbAt5UjbPpQdzvTKRb74L?=
- =?us-ascii?Q?1ZEvoWIttKayGZHv7qDDZGX+mxiVczccUjvo?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2025 12:44:54.8271 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ea6143d6-ae69-4491-f41b-08dd8264a5ff
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCBE.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4083
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 7/8] efi_loader: create EFI BOOTDEV
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+ <20250421162555.1200687-8-heinrich.schuchardt@canonical.com>
+ <CAFLszTiUL=zOtK3=yu_XpW_x=iKtBCFNqZ65Q+qv=AAPQMjUBw@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTiUL=zOtK3=yu_XpW_x=iKtBCFNqZ65Q+qv=AAPQMjUBw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,33 +117,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-No reason to call format-patch and then apply it with git am. It is enough
-to cherry-pick it directly like it is done by commit 074bfab54d83 ("CI:
-Cherry-pick reset support for m68k for QEMU").
+On 23.04.25 14:28, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Create a bootdev device for the EFI boot manager.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   include/dm/uclass-id.h       |   1 +
+>>   lib/efi_loader/Makefile      |   1 +
+>>   lib/efi_loader/efi_bootdev.c | 102 +++++++++++++++++++++++++++++++++++
+>>   3 files changed, 104 insertions(+)
+>>   create mode 100644 lib/efi_loader/efi_bootdev.c
+>>
+>> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+>> index 270088ad94f..d0795c13d14 100644
+>> --- a/include/dm/uclass-id.h
+>> +++ b/include/dm/uclass-id.h
+>> @@ -59,6 +59,7 @@ enum uclass_id {
+>>          UCLASS_ECDSA,           /* Elliptic curve cryptographic device */
+>>          UCLASS_EFI_LOADER,      /* Devices created by UEFI applications */
+>>          UCLASS_EFI_MEDIA,       /* Devices provided by UEFI firmware */
+>> +       UCLASS_EFI_BOOT_MGR,    /* EFI boot manager */
+>>          UCLASS_ETH,             /* Ethernet device */
+>>          UCLASS_ETH_PHY,         /* Ethernet PHY device */
+>>          UCLASS_EXTCON,          /* External Connector Class */
+>> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+>> index ab50a69e48b..c37f05d70e4 100644
+>> --- a/lib/efi_loader/Makefile
+>> +++ b/lib/efi_loader/Makefile
+>> @@ -25,6 +25,7 @@ apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
+>>   obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+>>   obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+>>   obj-$(CONFIG_EFI_BINARY_EXEC) += efi_bootbin.o
+>> +obj-$(CONFIG_BOOTMETH_EFI_BOOTMGR) += efi_bootdev.o
+>>   obj-y += efi_boottime.o
+>>   obj-y += efi_helper.o
+>>   obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += efi_capsule.o
+>> diff --git a/lib/efi_loader/efi_bootdev.c b/lib/efi_loader/efi_bootdev.c
+>> new file mode 100644
+>> index 00000000000..066df9462c8
+>> --- /dev/null
+>> +++ b/lib/efi_loader/efi_bootdev.c
+>> @@ -0,0 +1,102 @@
+>> +// SPDX-License-Identifier: GPL-2.0-or-later
+>> +/*
+>> + * Bootdev for boot manager
+>> + *
+>> + * Copyright 2025, Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> + */
+>> +
+>> +#define LOG_CATEGORY UCLASS_BOOTSTD
+>> +
+>> +#include <bootdev.h>
+>> +#include <bootflow.h>
+>> +#include <dm.h>
+>> +#include <dm/lists.h>
+>> +
+>> +static int efi_get_bootflow(struct udevice *dev, struct bootflow_iter *iter,
+>> +                           struct bootflow *bflow)
+>> +{
+>> +       int ret;
+>> +
+>> +       ret = strcmp(iter->method->name, "efi_mgr");
+>> +       if (!ret)
+>> +               bflow->state = BOOTFLOWST_READY;
+>> +
+>> +       return ret;
+>> +}
+>> +
+>> +struct bootdev_ops efi_bootdev_ops = {
+>> +       .get_bootflow   = efi_get_bootflow,
+>> +};
+>> +
+>> +static int efi_bootdev_bind(struct udevice *dev)
+>> +{
+>> +       struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
+>> +
+>> +       ucp->prio = BOOTDEVP_6_EFI;
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static const struct udevice_id efi_bootdev_ids[] = {
+>> +       { .compatible = "u-boot,bootdev-efi" },
+>> +       { }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(efi_bootdev) = {
+>> +       .name           = "efi_bootdev",
+>> +       .id             = UCLASS_BOOTDEV,
+>> +       .ops            = &efi_bootdev_ops,
+>> +       .bind           = efi_bootdev_bind,
+>> +       .of_match       = efi_bootdev_ids,
+>> +};
+>> +
+>> +/**
+>> + * efi_bootdev_hunt() - find devices used by EFI boot manager
+>> + *
+>> + * Invoke all hunters that have not been invoked by now.
+>> + * This should only be the network hunter.
+>> + *
+>> + * @info:      info structure describing this hunter
+>> + * @show:      true to show information from the hunter
+>> + *
+>> + * Return:     0 if device found, -EINVAL otherwise
+>> + */
+>> +static int efi_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>> +{
+>> +       return bootdev_hunt(NULL, 0);
+> 
+> This recursive calling of hunting is very strange. Since bootmgr seems
+> to need all the hunting to be done, you could move this line to
+> somewhere in bootmgr.
 
-Fixes: 50a907edbb2c ("docker: build QEMU v8.2.0")
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Thank you Simon for reviewing.
 
- tools/docker/Dockerfile | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+I added patch 5/8 to avoid infinite recursion.
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index a0fd174ff602..0aa9d3ab3a84 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -222,8 +222,7 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
- 	# config user.name and user.email to make 'git am' happy
- 	git config user.name u-boot && \
- 	git config user.email u-boot@denx.de && \
--	git format-patch 0c7ffc977195~..0c7ffc977195 && \
--	git am 0001-hw-net-cadence_gem-Fix-MDIO_OP_xxx-values.patch && \
-+	git cherry-pick 0c7ffc977195 && \
- 	git cherry-pick d3c79c3974 && \
- 	./configure --prefix=/opt/qemu --target-list="aarch64-softmmu,arm-softmmu,i386-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64el-softmmu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-softmmu,x86_64-softmmu,xtensa-softmmu" && \
- 	make -j$(nproc) all install && \
--- 
-2.43.0
+Maybe we should move this to efi_init_obj_list() because in the 
+eficonfig and and efidebug command we also assume that all boot devices 
+have been hunted down. If a device has not been probed you cannot create 
+a boot option for it.
 
-base-commit: 82ee3cc8d1854628688fe6ab89afaabf3112dd04
-branch: debian-sent3
+> 
+>> +}
+>> +
+>> +BOOTDEV_HUNTER(efi_bootdev_hunt) = {
+>> +       .prio           = BOOTDEVP_6_EFI,
+>> +       .uclass         = UCLASS_EFI_BOOT_MGR,
+>> +       .hunt           = efi_bootdev_hunt,
+>> +       .drv            = DM_DRIVER_REF(efi_bootdev),
+>> +};
+>> +
+>> +static int efi_bootdev_create(void)
+>> +{
+>> +       int ret;
+>> +       struct udevice *dev_mgr;
+>> +       struct udevice *dev;
+>> +
+>> +       ret = device_bind_driver(gd->dm_root, "efimgr",
+>> +                                "efimgr", &dev_mgr);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       ret = device_bind_driver(dev_mgr, "efi_bootdev",
+>> +                                "efimgr.bootdev", &dev);
+>> +       return ret;
+>> +}
+>> +
+>> +EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_R, efi_bootdev_create);
+>> +
+>> +U_BOOT_DRIVER(efimgr) = {
+>> +       .name           = "efimgr",
+>> +       .id             = UCLASS_EFI_BOOT_MGR,
+>> +};
+>> +
+>> +UCLASS_DRIVER(efimgr) = {
+>> +       .id             = UCLASS_EFI_BOOT_MGR,
+>> +       .name           = "efimgr",
+>> +};
+>> --
+>> 2.48.1
+>>
+> 
+> I am not seeing any tests in this series. At least we should update
+> the bootflow_efi() test or add something similar.
+
+I have not looked into the tests because I first wanted to have feedback 
+if the general direction is ok.
+
+Unfortunately most bootstd tests are checking console output line by 
+line instead of functional tests which makes them fail now.
+
+The bootstd tests should better have been written in a way that would 
+allow running them on real boards without making assumptions about the 
+board.
+
+Best regards
+
+Heinrich
