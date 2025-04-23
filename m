@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47264C369CB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 12:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DCC5C369D1
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 12:28:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6500180050;
-	Wed, 23 Apr 2025 14:27:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0111809A5;
+	Wed, 23 Apr 2025 14:28:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dzg8qzxr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D/vJYmui";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E48D8006D; Wed, 23 Apr 2025 14:27:43 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 472A5809D4; Wed, 23 Apr 2025 14:28:20 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 126308003E
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 14:27:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DE5780050
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 14:28:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ac2ab99e16eso1153583966b.0
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 05:27:40 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-aca99fc253bso906510566b.0
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 05:28:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745411260; x=1746016060; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tjNI3Hj4xaYykypNA08IALyerR+u/xwYGIUUdsU1pkM=;
- b=Dzg8qzxrbpthHqlcEbMFghn7rBAiT48decPrH3ShxLEXtw/xJyI8D1DJWjenewd5Et
- 4AIpp9c4prJR0IghrnRpKihnYtct48F1fQGpiIAaZw5LasP+cH7BDOnZsG1hZ/9zKeTk
- wspZNxr3diOfAC6G+O5sqMKpVyawyczNoG+KI=
+ d=chromium.org; s=google; t=1745411298; x=1746016098; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WwvWMajdewv4SjfHRz3ZWAJM3mU2nA8RHBL7ntODlEw=;
+ b=D/vJYmui2cF0ij+QWXHODj20jEPuQSi5kD2qPpHBH15WVg9j/m4cAFpy7q4DCF+1iP
+ gDHAu4igPR+NjU2S2NIgfT2k1dHDB/eUB6W2PwwmQn0sW6/KoW8mxQamMdOlqDzLiDpi
+ +aljx8xhf2lRa+w1u1htY4BcRWlrXhDZkg6mM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745411260; x=1746016060;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tjNI3Hj4xaYykypNA08IALyerR+u/xwYGIUUdsU1pkM=;
- b=oXCmCqk/356ZBnElKhS3rJlHbQ1tfTHGeTEqZltt6S7tF7HCT2ltCKlkbK9znuYnuU
- 2Te/nlJyamMa7bxqz8Ccjx9mEK82f89HquwZvGOQV0m8S0x58LjSr63vRSuYmOAWYp7s
- SR48PnZbCpy2CB+G3NbfJpaly+dEaMThauZXGmXH6lPr0RG+X/KC2ZZwpjheuNI+39AE
- yl/ak3AAe2tDKXAvlgnSXTZYGXtTpqRpZAvBVHW8LW3IhrmRGhl+SLTg2gi4teoAj1kz
- /UFUh3H/JqML0heGijQPROi5fyuPRuW9SCcOBBH2vWCeAl+LXorEOIH/qyiAY0iYXkTz
- Xqiw==
+ d=1e100.net; s=20230601; t=1745411298; x=1746016098;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WwvWMajdewv4SjfHRz3ZWAJM3mU2nA8RHBL7ntODlEw=;
+ b=Kr+FPMCKPyLigOTsT47JnwHqlCcQN/YvVLdlOWutIDjNZU67CQFKD23hA5s4xGyACW
+ hB8N7nz5XA6e1j4yn0XcnugSvGie4+3g8UqxYyBOrRA4Alg+C5uELzOBUKo3iCywL+M/
+ sKNm2T5NVRON7Faol2LcYwNfZU8GB9wL6WJ0y7DAE13IIouZsdGPmU5QovKO6fr9TMbx
+ fTYifLlby8DWSFV4k9pngzYWYa6bALxb2HnSRNZZ/61ok1pP7IG+sDU2JU0uDvmPwto2
+ D48S+7aiaQDMnBDSGvQLdDYpQzTMjUzv3pShkvh7bEWHf99nyAvEjXV+6bWe325RFfZz
+ f6dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkhGcqZ4G7rS9/3sswRk53LXREadTVI0T//ZseP9AXd2wDGKzEz5tlZp/FUIHhF7UTr/FzYPI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzv6DszQo6VFONU5GhIp6nL+7pZd8VZSDXDIblmoFzsc7LRUHZ5
- fLBewxMxDDA8W48szQkSCnOQW4PVTLn/XAdiwwry8oYIZ7tF9G0xG6qA/qaVdsESNEJAIjlQB7C
- LUqsXVKheGGzoRo0Kn/XUs9zpBc/toyZNvfhN
-X-Gm-Gg: ASbGncsl2IqA5teJOv24YA5rigsmsJ4fciJ2z08KQ5F8cumZXr3b3TBP/9a29WNt7xv
- JvdAh1fABMn2syfpmuqWiv3y+fkgY1Q1sp6N/jqpjjV8ao1HuFPQln+ZKFUnNnXwIDRizK5IH7H
- QJ+2GU/r+PSo1Y5vpNDOi9Vkirk8x/tMxoqg==
-X-Google-Smtp-Source: AGHT+IHg18PF19BuVClPeBtZ7VtbfqOcD6dYgXtRrzjNbzrfyhkWdJ+Rvpf6LLMCQ1rGUQyT0jqQipI6qWMgAXz20Cs=
-X-Received: by 2002:a17:907:86a0:b0:ace:3952:c375 with SMTP id
- a640c23a62f3a-ace3952d6ecmr354208666b.42.1745411260289; Wed, 23 Apr 2025
- 05:27:40 -0700 (PDT)
+ AJvYcCXvSunMXHf3n5iOY1btKpWsO7LatsksaOClDM7U7D0XL+hbVSTva/IhDtc0uJJXo7rZSU4JYXQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxmUArgjcNKJQLZkrgdrN2YRCIPqWFUzUQEZ39/mknoQrl0JWC2
+ cMkKl2BtfiIVRbobyGjSQUHxL/F5u5D8dzuiL5WAR8z8+kVWi6gg/OsA2fVUsBmX4V2dCNySvwi
+ ah/xG4RhjXlJuZCevS2wkMsIPwnXirQg07ujD
+X-Gm-Gg: ASbGncv8Av1tci9CTzad7madPP4lr+oe5rHzpjbXNfKvj5rya1vc/TdKrEM830J7QWC
+ uc53Wub3FNaRh0FAS74Hv+gjQEY0Opq+tIkm6JPq5YBuWuMp9gkraYzI+9XNgXUzBD5a3J1XVqq
+ zMqMPjwRDFHYsZZSfkwCwzUpc=
+X-Google-Smtp-Source: AGHT+IGjqOZQ8xwAdGGF2Y80veEiINL1XiGEnga+9omEBcJCjkwH8JJI2sywLVHwS4aZ1aA8XwbgtzLPzMU8k1rbrao=
+X-Received: by 2002:a17:907:d716:b0:ac3:8d34:1d73 with SMTP id
+ a640c23a62f3a-acb74ac515dmr1501347066b.8.1745411297765; Wed, 23 Apr 2025
+ 05:28:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250418-binman-pubkey-dir-v2-0-b6b90a765ffe@cherry.de>
- <20250418-binman-pubkey-dir-v2-2-b6b90a765ffe@cherry.de>
- <CAFLszTh49HqGC4P2=nefc8vgdWrLe_p6HoyoEZ=FkadNBLsp3Q@mail.gmail.com>
- <f9f57c41-9623-45da-878b-f62927beee9e@cherry.de>
-In-Reply-To: <f9f57c41-9623-45da-878b-f62927beee9e@cherry.de>
+References: <20250421094310.764765-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250421094310.764765-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 23 Apr 2025 06:27:28 -0600
-X-Gm-Features: ATxdqUGUkKpJ6Vt_hDYxIcfN-n0ifBr_hdVFA2LYhCuQ4bXKFwcUjZ3oGhzedKc
-Message-ID: <CAFLszTgDJsO5UFVhpWfo3zoLmjC_o=GnONjQeeWU=mejfMbNDQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] binman: etype: u_boot_spl_pubkey_dtb: provide more
- explicit error for key-name-hint with path
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Alexander Kochetkov <al.kochet@gmail.com>, 
- Lukas Funke <lukas.funke@weidmueller.com>, u-boot@lists.denx.de
+Date: Wed, 23 Apr 2025 06:28:05 -0600
+X-Gm-Features: ATxdqUEtwhVqAzrCqN9FggW9o478xexLM6AMna-KK0nx0vrH89x-pOI-0Wn_RIk
+Message-ID: <CAFLszTgeJ_kvdUrBC=btzKAQGVZDtyJzk1LuD4t58n0zMmvU8w@mail.gmail.com>
+Subject: Re: [PATCH 1/1] boot: BOOTMETH_DISTRO should select
+ BOOTMETH_EFI_BOOTMGR
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,69 +91,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Heinrich,
 
-On Tue, 22 Apr 2025 at 02:53, Quentin Schulz <quentin.schulz@cherry.de> wro=
-te:
+On Mon, 21 Apr 2025 at 03:43, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Hi Simon,
+> Distros expect the EFI boot manager to run. It falls back to launching
+> EFI\BOOT\BOOT<ARCH>.EFI from the ESP.
 >
-> On 4/18/25 7:19 PM, Simon Glass wrote:
-> > On Fri, 18 Apr 2025 at 05:26, Quentin Schulz <foss+uboot@0leil.net> wro=
-te:
-> >>
-> >> From: Quentin Schulz <quentin.schulz@cherry.de>
-> >>
-> >> key-name-hint property in u-boot-spl-pubkey-dtb binman entry may conta=
-in
-> >> a path instead of a filename due to user mistake.
-> >>
-> >> Because we currently assume it is a filename instead of a path, binman
-> >> will find the full path to the key based on that path, and return the
-> >> dirname of the full path but keeps the path in key-name-hint instead o=
-f
-> >> stripping the directories from it.
-> >>
-> >> This means mkimage will fail with the following error message if we ha=
-ve
-> >> key-name-hint set to keys/dev:
-> >>
-> >> binman: Error 1 running 'fdt_add_pubkey -a sha256,rsa2048 -k /home/qsc=
-hulz/work/upstream/u-boot/keys -n keys/dev -r conf /home/qschulz/work/upstr=
-eam/u-boot/build/ringneck/u-boot-spl-dtbdhsfx3mf': Couldn't open RSA certif=
-icate: '/home/qschulz/work/upstream/u-boot/keys/keys/dev.crt': No such file=
- or directory
-> >>
-> >> Let's make it a bit more obvious what the error is by erroring out in
-> >> binman if a path is provided in key-name-hint (it is named key-name-hi=
-nt
-> >> and not key-path-hint after all).
-> >>
-> >> Fixes: 5609843b57a4 ("binman: etype: Add u-boot-spl-pubkey-dtb etype")
-> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >> ---
-> >>   tools/binman/etype/u_boot_spl_pubkey_dtb.py              |  2 ++
-> >>   tools/binman/ftest.py                                    |  7 ++++++=
-+
-> >>   .../binman/test/348_key_name_hint_dir_spl_pubkey_dtb.dts | 16 ++++++=
-++++++++++
-> >>   3 files changed, 25 insertions(+)
-> >>
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > The change log seems to be missing?
+> BOOTMETH_EFILOADER is obsolete.
 >
-> The change log?
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  boot/Kconfig | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
-> Between v1 and v2? It's in the cover letter of the series, this is how
-> b4 handles it, not per-patch change log.
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index fb37d912bc9..89076220adb 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -597,6 +597,9 @@ config BOOTMETH_EFILOADER
+>         imply CMD_TFTPBOOT if CMD_NET
+>         default y
+>         help
+> +         This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
+> +         launching EFI\BOOT\BOOT<ARCH>.EFI if no boot option matches.
+> +
+>           Enables support for EFI boot using bootdevs. This makes the
+>           bootdevs look for a 'boot<arch>.efi' on each filesystem
+>           they scan. The resulting file is booted after enabling U-Boot's
+> @@ -648,7 +651,7 @@ config BOOTMETH_DISTRO
+>         select BOOTMETH_SCRIPT if CMDLINE # E.g. Armbian uses scripts
+>         select BOOTMETH_EXTLINUX  # E.g. Debian uses these
+>         select BOOTMETH_EXTLINUX_PXE if CMD_PXE && CMD_NET && DM_ETH
+> -       select BOOTMETH_EFILOADER if EFI_BINARY_EXEC # E.g. Ubuntu uses this
+> +       select BOOTMETH_EFI_BOOTMGR if EFI_BINARY_EXEC # E.g. Ubuntu uses this
+>
+>  config SPL_BOOTMETH_VBE
+>         bool "Bootdev support for Verified Boot for Embedded (SPL)"
+> --
+> 2.48.1
+>
 
-Oh dear, that's harder to work with. I believe someone is working on
-b4 so perhaps that feature could be added?
-
->
-> Or are you talking about another change log I am currently unaware of?
+I don't want to make this bootmeth obsolete. What is the motivation for that?
 
 Regards,
-SImon
+Simon
