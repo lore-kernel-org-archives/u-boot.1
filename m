@@ -4,171 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818FBC369D1
-	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 14:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B316DC369CB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Apr 2025 15:43:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2932E80BA8;
-	Wed, 23 Apr 2025 16:57:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id BE05D803CC;
+	Wed, 23 Apr 2025 17:43:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="yDdioj/w";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="HJPoCv77";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5E9380FA8; Wed, 23 Apr 2025 16:57:00 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::614])
+ id 8F9BA8056A; Wed, 23 Apr 2025 17:43:01 +0200 (CEST)
+Received: from mail-m21471.qiye.163.com (mail-m21471.qiye.163.com
+ [117.135.214.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B28BB81E72
- for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 16:56:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C63280194
+ for <u-boot@lists.denx.de>; Wed, 23 Apr 2025 17:42:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o8dFMqstf/xVB/LNKEDUpooNeC7kZMyAwTl6f3b0MrwPXEJA8VJ8f8tJd/Q3u0LmoY3l3IQad4iHl+XdOfErmyVWNcu6sKbmtofPXXQt30GCGiI1TjD2g98GpqoDr0krH/Ithg28sM4noaNLKPfOIpHybp2KMqR0vJBEkHRYI+Z70bmNTPloIrdaUEDGCHLdCzciJk/KPtOBNA7OgUMewMntU/Nsc/tdTtL6w0CduEzHPNV5+UCyPmBy7WUxB1floCOIGYMuIE6U4ko+jzGksAaZEuQVb8NSDU4oeDXwXVWjgdmtiH/iaRaYe7JlKHcsQoVp96VNBM/WiUJxvZcS+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=09YxUCfuscZBn68Ydgu3s9wNkUqQcbY8ndtKIdKpNpc=;
- b=iLa33Cx673aJNz7eddU+iBT0Ur0mL/mJmXPQxu1ua3+uuMPeS60sWDx4Ff51AwXQI15tosE+L6ocPWGq3ZFfwnOAWdy9WjOxo+OIxaAjlt7bMd51jXvKB2o258p2se3PnFwcAqQEGbntNzhj2B8ho9jQrnDRSFACAtUTa0R3+4da3hn92z5aWOTpnvyYglbMZ1GKB8s2c+Z121K9+/LRJZseZJyUMq0QnlBcxTr5Jt59yCnqcIctk9uC0HCPnl5n0qMaBEI/SIBydr1t/k98iRhq48tXbk8+H+Cg+hA67mV3UZRJfk6JdThL1CadXcXP0RuOoLUsE7f4z/hYS3Ol3A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=09YxUCfuscZBn68Ydgu3s9wNkUqQcbY8ndtKIdKpNpc=;
- b=yDdioj/w6hMdkny5Uiw41y9Tp74Q26tEa6GmdsD5gK0OtqvtfiSV4kvQh6AmOwUBhJXkxfW/FSR0cDJDqG1qxVY7DcI5GKf9cyt4A4Bq98rCJXJDW5q9kyItOYXeI2tFDzzcYM+nnICZ8M2jYsa5rWQXQl7UUXwxxYKJ3tfltvT2sVFbdC8mn2y5BRRzA2+sSwi3iPS3tEWNN4USvsOwMaY6O72zI+b+UUem3wmmqbZUo1tLEQoZdpdl0OiW6T1s669c3mEtacy+Y0oHced80TMbkEEjmvW/xQhT3FOxR5IfxLR6WcqxvjLx1iE848g4i7+7lXVdinn47KDuW+qYlQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PA4PR04MB8013.eurprd04.prod.outlook.com (2603:10a6:102:c4::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.22; Wed, 23 Apr
- 2025 14:56:57 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8655.033; Wed, 23 Apr 2025
- 14:56:57 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: u-boot@lists.denx.de,
-	Mathieu Othacehe <othacehe@gnu.org>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Tim Harvey <tharvey@gateworks.com>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
- regis.ray@landisgyr.com, pascal.dupuis@landisgyr.com
-Subject: Re: [PATCH 0/2] mmc: omap_hsmmc: Restore the init_stream sequence
-Date: Thu, 24 Apr 2025 00:05:36 +0800
-Message-Id: <174542428425.32054.2192372473014999385.b4-ty@nxp.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20250410090021.14446-1-othacehe@gnu.org>
-References: <20250410090021.14446-1-othacehe@gnu.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA0PR01CA0002.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:80::8) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from localhost.localdomain (unknown [218.17.18.106])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 12e3855c3;
+ Wed, 23 Apr 2025 23:42:52 +0800 (GMT+08:00)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20250423
+Date: Wed, 23 Apr 2025 23:42:51 +0800
+Message-Id: <20250423154251.83237-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PA4PR04MB8013:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4c767e5d-4994-4b04-9fd6-08dd827717db
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|52116014|7416014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dkRGTnI2U2xQaGhqdlZHQU13dVB1T2NKN1NMRll2Mjh5Qm8vY3psQmhtZ3NC?=
- =?utf-8?B?ajVLemhqZDEvdFlpdi9vY1ZBcGNnMFpvTTM3Y283MFN0M2lTNEk2OWd5Szhx?=
- =?utf-8?B?TWdybHhxNHJ3TFR0QWZ2NHd0WXJHRDZJUXJleFkzWCtWVDZmdG1VTy8xbk42?=
- =?utf-8?B?V3EwZkNvTWFUU29kZURKU3lnWFowbCtUNWM4T3ZjS0w1Tys2UDVQYnNKd0V4?=
- =?utf-8?B?cURpT3VDelJ1VzVtWXJEdlhWbWkvVkhqQmpmdDFDcU4zaHdPa0ViUjRzRFhp?=
- =?utf-8?B?Y3dhWWJqU2xEd0tub2M2L3FBakh5LzRtcHBuWk1iL1F5Nk9tYXp0K0xTcTdl?=
- =?utf-8?B?Z0NZdmI3cVd5dEUwNWdTWUkwZm4yYmJtNDhCWUJKQ0JuVlVVdW9IUzkzL2M2?=
- =?utf-8?B?eVRCdS9UWlBUUUt2SWlONExacmtaYSsvd2hQYngzeWVtSTU3NDE1YTBoQUQ2?=
- =?utf-8?B?QzBBZ3AxbUdaMGwyTGQyOXFueXJhN1VMSWh5M0NZZzZ5VXJOU3FlR0tDK2tw?=
- =?utf-8?B?WWZDNWcvRmRMcTJ1VmF1Z1NKc1Y4clRYSVlmNjIyTDBEN3ExMkF2ZlUreFdS?=
- =?utf-8?B?UTFLYjlnRW9uUThGdXBmTjltRXFiMmxtSGNFS05LaGJFVk54anFxZzcvN1Zq?=
- =?utf-8?B?TzIrTDhQV0VHVlp5QUJvU2dVMThKQ0hrNklPQXEwdEw3aDR5T3dlNTkwZzZl?=
- =?utf-8?B?Z2RENWFaaUx0UG9rMENvL2RRcmgxRENMdzBrdm5qYlRKRHdXZk51MVk5R1dT?=
- =?utf-8?B?V3hqZDJlbytvbGNqQTVCMUUxdVMzS0J5NHFXYXZnL0ttclJjeVRFY1ZpeVo4?=
- =?utf-8?B?ekZQSDNJVUNMWVJoVjVZQW1NMXN5emlETzF0ZVQvejBCS3JaeWQzdjE5a2o2?=
- =?utf-8?B?dGt2emRKTk1DWlBEdElvVVc3OElIanJPakRnb040bEZWaUJvRVFnUTB1dHBE?=
- =?utf-8?B?TlhHQUhmYk5ZaUJCdkc4MkM5YWZiTjZqYk1hUVJVNkphbUNsT0k5WWZvMlht?=
- =?utf-8?B?c2JxKzlyVE9WdC9Ta2xUdUF5NXFkRUVuMHJlNDRmdVhibURFWFVhNGZGanBU?=
- =?utf-8?B?KzdxWXVoWWsyTmJpRFQ2THhtZHdZRStOQlNrREF6aFhIZEhyamNIL29CMFpU?=
- =?utf-8?B?bjdXcjBRREdFb3R2dFlYY0c2cXZqWmdrUEhMbGp4UEdvQ0RvRGdubSs2eWpZ?=
- =?utf-8?B?QUlMWTBtV2NNcnpqZC9NTGdTQWw0V0taa1BnVFpPYzV3cUNsT0VXTlUyc3BD?=
- =?utf-8?B?V1prOW1oTUwySTVnaVkveC9pTnpDSXl3MHFXWDlLNFBCZE5wYTNKaHhURXZa?=
- =?utf-8?B?d0p1UDZxbUcyN0F5ckdvbjFzcE9WMStRdjBqb3ZBZUFrazdzVzVtem43TmIy?=
- =?utf-8?B?dHhqdWdDd1FnSEZwOWQvLzlyTmVQUEY1U2Jyd0lyOEZQWU8xN1pDZWhkOUJt?=
- =?utf-8?B?RnF6ZlJyOWpvNU1kZTdFK003Qk1wdXF1SEp4YnEzeUhsYVgrT085N0Vwbmtk?=
- =?utf-8?B?SjNYb3VxQWtXVXVyRmdRMFByMS9FQVlyR3RhQzFqNEs5KzhYZGhVcE1YRlZx?=
- =?utf-8?B?aFB2dC9sdWFkMDJ6Rkd2N2FYdlp2alJKdjFoMnBXQkRDL0JTRGtvNGxkV1NC?=
- =?utf-8?B?M0x2L3dCOUQyLy9JbGNBMC9BbWo5dEhGNWpvWjlQOHFvQTJ6MzhPeDlQb0Nl?=
- =?utf-8?B?OXRKSUdZcmk5Wk1wM2FURmw2R3l6QTNVOVFDU3RPQys1V1FvTjV3QnhibFdL?=
- =?utf-8?B?VTd5enMxM1A4U1BhNmY3aDhBVzFZN1N5S1RhVXJHNXozTXlRTnp3WEpwZmZ5?=
- =?utf-8?B?MTBqTm9jbi9PRUJOVS9yOEVOTmJqSlNzZjc5M0FmbFBSWTZnblpkeG8wOWth?=
- =?utf-8?B?UW5qbVdkWSs2OFliR1ZIRmdmRDlTTXczODJKTTlJeE5KTzZhTHhxTzMzN3dJ?=
- =?utf-8?B?NjY5UzUwUGhacUhkc2NBNFV3WXduZ3I0WnMxSlc5RWVLN05ib2liS3Awa3hi?=
- =?utf-8?B?MW1HVXZ4eTFRPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(52116014)(7416014)(1800799024)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Slpob3ZCSjh2VExPRWs5VmpRSUc0b1k0TGNMSmp4aGxVL0s0QVJYZktIMm1P?=
- =?utf-8?B?cWFZR241MlhOUm1yRmRaSUVNTERnSHArckVZVlJkV0h6bnBmUXZKY3ZGR3RR?=
- =?utf-8?B?TWRac0ptV2lKQ1lGYlZyZFdUeGdMTmFCNTFwOWhuS3hMYjFTbnJ0M3Z5d1hX?=
- =?utf-8?B?Q3RzbC9XRDZDVDFDVy9lY1drdDhjWVZONTB3VGJqU0xkamlwQWVtYXlya21t?=
- =?utf-8?B?YVYvM3U0NmZqbm5sQnNlUjJRcGJoNGpyY1BDcnNvbkw1K0ZBb3RLeloxMitx?=
- =?utf-8?B?NHRWYkI5SmRyU3dUTUQ0KzJpeVcycEdWcHFzVkJlMXJ1YWZIMWxCbmcrV3A1?=
- =?utf-8?B?ZmVCZHQ1ZEh3QllSQXB6K1BWQTVnQVd5STAvYlUxQlZNWm1FbWN0REVmT0Ry?=
- =?utf-8?B?ZWZkVkZ6VjMvV3JxWTJJM2NWUDhUWGV3OStkUkNZM05kWHVHWW5nL3FMTWMz?=
- =?utf-8?B?OXd0ekMwcVJkdEpYZkJHYjZOUFZSOGlrbzk2ZXE4aWlPRGpvUVYvR0dxTHhu?=
- =?utf-8?B?Q3h2Sm90dzd1S3kyaEpmWlh6aWRiSlV1Yk5qZDNpKzRiZ2RoRWxtTWN4alRm?=
- =?utf-8?B?RnBzOUVZbkVyVWgvSUdpVXVZOXRRUXBNUjExYmhUMGZBVmQzazFEcHRFZFZ0?=
- =?utf-8?B?Q0drQjZiZXVqS2hzSjVOSWpqRkdDUisxb0JOdkVoVmZIWUNqTkp3U1UvTzQ1?=
- =?utf-8?B?S1IwWVJpYk5mOVhMUXVjUUpyUWJhcURRYWVOL0Foc1JZV0g0Y1d0VVgwRThQ?=
- =?utf-8?B?QXMvOG5kTEtpQmFOdVVoeWFmTUQzbG02SFE4Z1lBUERZNTZQSHdGWkd4NnJq?=
- =?utf-8?B?QkNpZHcrNG9IYVNzYzdKeXBVODFlWUkvT3VsekxneUR6SVo5L0p0Uk93VnZL?=
- =?utf-8?B?ODZFT1NWVUpJV1BpZnI4RXlIcWFsODRVTSsybU1peU8yQWt4UHZQSHlUdUs4?=
- =?utf-8?B?Szd2c3VSdytwa1ZKZWFhVWhaNElhWFJUdjlUSWN3blZZVFZrMWQ3b2cwVmdQ?=
- =?utf-8?B?aVpOV0pTQVlIZ2NzNm4wdk1NVGRwS05OV3MvdlZIK2NFY2dNeDhzSUxqQSs1?=
- =?utf-8?B?YUd0N09QZVovc3Rwd1hQWitKMW03NE52RHRpeUpUbkpPZ3NZZzFZMzExRUI1?=
- =?utf-8?B?RHNKNTNYano1WHo1SHlzVFF4WHJieTZxVTJNWExVU2xuV295K2lnZm41eW1H?=
- =?utf-8?B?U3FqSTFSeGR5c3hVaGt3YzEwNVlDeWdFS25pclFsUXhKKzVtMXZXLzhiRElm?=
- =?utf-8?B?YjdrRHRNbzFLMFdpS0V0UEU5U0MyVmZqSzZ3L0RucE9OcHhSNTg1NEIzaFdM?=
- =?utf-8?B?QXhpNzNOQk02SFZqM0o3RjdYd0lhRVZGZWpsNFRvNFVYQXdsbjJHdWRhUnUy?=
- =?utf-8?B?UVVuTHlBSkVXQXBZb09wT3NwR3VLNmVrZ2trOEZNbUtDZnVwK2NPREltNkVa?=
- =?utf-8?B?SllHREZhcUNhT0g3UEdTelA1OXdFbEM5Q3hQUjdmakkrQ2J5eG9wVG5ZMStM?=
- =?utf-8?B?RE95UTFNZmwxQS9JeXRIc0ZSeEtVbm1iUHJUc083MXdBZFVRdE1aWnR0RFIv?=
- =?utf-8?B?ME9Sc0Fqb0JVTE1CSkRjcUpwTFZzQTh5eW80UFhzK3NuVVpsMUtNVUpXelU3?=
- =?utf-8?B?UWh4d1JJQ0Y2U0ZyT29NcjN6VzVSUGt0b1pOdGhlN09LaUNMUStMUEVNYncy?=
- =?utf-8?B?N1ZzQm04eHZCSHI0NFk0SVp2MVVyM3ZiR21zeFR3dkZ4Q1dmTFFXUTl3aVBh?=
- =?utf-8?B?L0RIcWliUHd2YTd2WUJ6cGZVaTVRclJqaUNwR2lVWi93aGV4MVRjdXdiZk9a?=
- =?utf-8?B?N2FtTDJnYW5FMitrNy80SEpoZFVWOXErbW5idlVLZTBnWWtvN1Z1QmR3WUtQ?=
- =?utf-8?B?ODB1OE01OXJSZm5rdXNIMU5HNlpFYWNyYjJscGxHcXVnd2FKWEJOeVVCMWk3?=
- =?utf-8?B?L2pFbjhjQU1TcUFoN1gyNEg1Z2VtTjF4c3R3bWgyb1JDNlkyUU9mMjFMNGoz?=
- =?utf-8?B?aERuYU1JSWhVYTJqaVRDSHdOUmdmczZuMzB5eGg1TUwzZDc3Y0tVQkRVclJQ?=
- =?utf-8?B?T1NMMjZqNlRodk5kZU5uVXMvalpsMFRZY2tLS3gxd0F4Z2J5d1dQWGJkTkhH?=
- =?utf-8?Q?06cTEGTk/+BiBaatqDzcrSQM2?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c767e5d-4994-4b04-9fd6-08dd827717db
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2025 14:56:57.2460 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 40TzXR1E38vfbP/6bfQP0MzTT7UoL5OvBTzaKrA7EXmCFY5OHodZlDMqoyAnu84iXLxM4wp8MaowEJqv3hHC8w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB8013
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCQ04aVktDGB5PGUlDS0JIGFYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlJSkNVSkxVSkNVSktNWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
+ VLWQY+
+X-HM-Tid: 0a966350f4ec03afkunm12e3855c3
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OlE6Phw4PDJPOEwsKSITHxQ2
+ MBoaCzJVSlVKTE9OT0lJQkxJTENJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlJSkNVSkxVSkNVSktNWVdZCAFZQUpOQ09ONwY+
+DKIM-Signature: a=rsa-sha256;
+ b=HJPoCv77eDTm1Y8g59n7A1EZ1/9rcqCqdbFOPUSqbYCZiYrdHLT/rzvmpa4snrYMGPa+aOlU1Xcd77MG3PWvzjHRUqHjycwoj0qr+VSu/Cei25bz4LpzqWsEqNv17hdTFPSabaJP6gdtoQY/Tdy6zrnWtMsGToOWx+LTk+5W/to=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=Ha3rRCVfuuGaPftqa3xy47CO386rs+4en19/fgtIlQ0=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,28 +68,289 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Hi Tom,
+
+Please pull the updates for rockchip platform:
+- New SoC support: RK3528, RK3576
+- New Board support: rk3528 Radxa E20C, rk3576 Firefly ROC-RK3576-PC;
+- Add generic board for rk3288 and rk3399;
+- rng driver binding update;
+- misc updates on board level or header files;
 
 
-On Thu, 10 Apr 2025 11:00:19 +0200, Mathieu Othacehe wrote:
-> Back in 2019, the init_stream sequence was disabled with db52e19ced because:
-> 
->   This is not required. The MMC core sends CMD0 right after the
->   initialization and it serves the same purpose.
-> 
-> That is wrong. It does not serve the same purpose at all. The init_stream
-> function role is to keep the CMD line high for 74 clock cycles which is
-> required by the SD specification[1]:
-> 
-> [...]
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/25909
 
-Applied, thanks!
+Thanks,
+- Kever
 
-[1/2] mmc: Add a new callback function to perform the 74 clocks cycle sequence
-      commit: d770e325e9d2fd3ba94481fc6ee41c25e799b325
-[2/2] mmc: omap_hsmmc: implement send_init_stream callback
-      commit: 991c9530fc0d52229e6196f6be2dd6e1ef17857c
+The following changes since commit 4446bc331c65d3efb8a9321d6368c61edb56479b:
 
-Best regards,
--- 
-Peng Fan <peng.fan@nxp.com>
+  mips: mt7688: gardena-smart-gateway: Increase CONFIG_SYS_BOOTM_LEN (2025-04-22 15:16:11 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20250423
+
+for you to fetch changes up to 1f07d257305c168551370fbaddbc2b2d83aedde4:
+
+  board: rockchip: Add minimal generic RK3399 board (2025-04-23 22:12:06 +0800)
+
+----------------------------------------------------------------
+Chukun Pan (2):
+      arm64: dts: rockchip: Add rk3528 QoS register node
+      arm64: dts: rockchip: enable SCMI clk for RK3528 SoC
+
+Elaine Zhang (2):
+      clk: rockchip: Add rk3576 clk support
+      reset: rockchip: implement rk3576 lookup table
+
+Heiko Stuebner (10):
+      rockchip: sdram: honor CFG_SYS_SDRAM_BASE when defining ram regions
+      ram: rockchip: Add rk3576 ddr driver support
+      rockchip: otp: Add support for RK3576
+      mmc: rockchip_sdhci: Add support for RK3576
+      mmc: rockchip_dw_mmc: Add support for rk3576
+      net: dwc_eth_qos_rockchip: Add support for RK3576
+      arm64: dts: rockchip: add rk3576 otp node
+      dt-bindings: arm: rockchip: Add Firefly ROC-RK3576-PC binding
+      arm64: dts: rockchip: Add devicetree for the ROC-RK3576-PC
+      rockchip: rk3576: Add support for ROC-RK3576-PC board
+
+Jonas Karlman (44):
+      rockchip: rk3308: Drop unused rk_board_init()
+      rockchip: Move imply TPL_ROCKCHIP_COMMON_BOARD under SoC Kconfig symbol
+      rockchip: Make ROCKCHIP_COMMON_STACK_ADDR depend on TPL
+      rockchip: Improve ARMv7 support for ROCKCHIP_COMMON_STACK_ADDR
+      rockchip: Move imply ROCKCHIP_COMMON_STACK_ADDR under SoC Kconfig symbol
+      rockchip: Move imply ROCKCHIP_EXTERNAL_TPL under SoC Kconfig symbol
+      rockchip: Add RK3576 support for ROCKCHIP_COMMON_STACK_ADDR
+      rockchip: rk3588: Use hptimer reg names in rockchip_stimer_init
+      rockchip: Remove partitions env variable for RK356x
+      rockchip: Remove partitions env variable for RK3588
+      rockchip: Ensure device settings is defined before rk3568_common.h
+      rockchip: Ensure device settings is defined before rk3588_common.h
+      rockchip: Use rk3568_common.h by default for RK356x boards
+      rockchip: Use rk3588_common.h by default for RK3588 boards
+      rockchip: rk3568: Drop BOARD_LATE_INIT from target config
+      rockchip: rk3588: Drop BOARD_LATE_INIT from target config
+      rockchip: Enable meminfo and rng commands for Generic RK3566/RK3568
+      rockchip: Enable meminfo and rng commands for Generic RK3588
+      rng: rockchip_rng: Add compatible for RK3568
+      rockchip: rk356x: Remove rng node from u-boot.dtsi
+      rng: rockchip_rng: Update compatible for RK3588
+      arm64: dts: rockchip: Add pinctrl and gpio nodes for RK3528
+      arm64: dts: rockchip: Add SARADC node for RK3528
+      arm64: dts: rockchip: Add SDHCI controller for RK3528
+      arm64: dts: rockchip: Add uart0 pinctrl to Radxa E20C
+      arm64: dts: rockchip: Add leds node to Radxa E20C
+      arm64: dts: rockchip: Add user button to Radxa E20C
+      arm64: dts: rockchip: Add maskrom button to Radxa E20C
+      arm64: dts: rockchip: Enable onboard eMMC on Radxa E20C
+      ram: rockchip: Add basic support for RK3528
+      arm: dts: rockchip: Add rk3528-u-boot.dtsi
+      arch: arm: rockchip: Add initial support for RK3528
+      mmc: rockchip_sdhci: Extend variant configuration
+      mmc: rockchip_sdhci: Add initial support for RK3528
+      mmc: rockchip_sdhci: Gate clock for glitch free phase switching
+      rockchip: otp: Add support for RK3528
+      adc: rockchip-saradc: Add support for RK3528
+      phy: rockchip-inno-usb2: Add support for clkout_ctl_phy
+      phy: rockchip-inno-usb2: Add support for RK3528
+      net: dwc_eth_qos_rockchip: Add support for RK3528
+      board: rockchip: Add minimal generic RK3528 board
+      board: rockchip: Add Radxa E20C
+      board: rockchip: Add minimal generic RK3328 board
+      board: rockchip: Add minimal generic RK3399 board
+
+Joseph Chen (1):
+      clk: rockchip: Add support for RK3528
+
+Lin Jinhan (1):
+      rng: rockchip: Add support for rkrng variant
+
+Nicolas Frattaroli (1):
+      arm64: dts: rockchip: Add rng node to RK3588
+
+Quentin Schulz (4):
+      rockchip: theobroma-systems: use HAVE_VENDOR_COMMON_LIB to simplify Makefile
+      rockchip: px30: enable RNG for all boards
+      rockchip: px30: add fdtoverlay_addr_r default value to support FDTO
+      rockchip: ringneck-px30: enable DT overlay support
+
+Steven Liu (2):
+      pinctrl: rockchip: Add support for RK3528
+      pinctrl: rockchip: support rk3576 pinctrl
+
+Xuhui Lin (2):
+      rockchip: mkimage: Add rk3576 support
+      arm: rockchip: Add RK3576 arch core support
+
+Yao Zi (3):
+      dt-bindings: clock: Document clock and reset unit of RK3528
+      arm64: dts: rockchip: Add clock generators for RK3528 SoC
+      arm64: dts: rockchip: Add UART clocks for RK3528 SoC
+
+Yifeng Zhao (1):
+      rockchip: mkimage: Add support for RK3528
+
+ arch/arm/dts/px30-evb-u-boot.dtsi                  |   10 -
+ arch/arm/dts/px30-u-boot.dtsi                      |    1 -
+ arch/arm/dts/rk3328-generic-u-boot.dtsi            |   39 +
+ arch/arm/dts/rk3328-generic.dts                    |   76 +
+ arch/arm/dts/rk3399-generic-u-boot.dtsi            |   10 +
+ arch/arm/dts/rk3399-generic.dts                    |   83 +
+ arch/arm/dts/rk3528-generic-u-boot.dtsi            |   12 +
+ arch/arm/dts/rk3528-generic.dts                    |   31 +
+ arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi         |   12 +
+ arch/arm/dts/rk3528-u-boot.dtsi                    |  148 ++
+ arch/arm/dts/rk356x-u-boot.dtsi                    |    9 +-
+ arch/arm/dts/rk3576-roc-pc-u-boot.dtsi             |   11 +
+ arch/arm/dts/rk3576-u-boot.dtsi                    |  131 +
+ arch/arm/dts/rk3588s-u-boot.dtsi                   |    5 -
+ arch/arm/include/asm/arch-rk3528/boot0.h           |    9 +
+ arch/arm/include/asm/arch-rk3528/gpio.h            |    9 +
+ arch/arm/include/asm/arch-rk3576/boot0.h           |   11 +
+ arch/arm/include/asm/arch-rk3576/gpio.h            |   11 +
+ arch/arm/include/asm/arch-rockchip/clock.h         |   27 +
+ arch/arm/include/asm/arch-rockchip/cru_rk3528.h    |  388 +++
+ arch/arm/include/asm/arch-rockchip/cru_rk3576.h    |  491 ++++
+ arch/arm/mach-rockchip/Kconfig                     |  172 +-
+ arch/arm/mach-rockchip/Makefile                    |    2 +
+ arch/arm/mach-rockchip/px30/Kconfig                |    3 -
+ arch/arm/mach-rockchip/rk3308/Kconfig              |    3 -
+ arch/arm/mach-rockchip/rk3308/rk3308.c             |   69 +-
+ arch/arm/mach-rockchip/rk3328/Kconfig              |    3 -
+ arch/arm/mach-rockchip/rk3399/Kconfig              |    3 -
+ arch/arm/mach-rockchip/rk3528/Kconfig              |   15 +
+ arch/arm/mach-rockchip/rk3528/MAINTAINERS          |   11 +
+ arch/arm/mach-rockchip/rk3528/Makefile             |    5 +
+ arch/arm/mach-rockchip/rk3528/clk_rk3528.c         |   16 +
+ arch/arm/mach-rockchip/rk3528/rk3528.c             |  137 ++
+ arch/arm/mach-rockchip/rk3528/syscon_rk3528.c      |   19 +
+ arch/arm/mach-rockchip/rk3568/Kconfig              |    7 +-
+ arch/arm/mach-rockchip/rk3576/Kconfig              |   23 +
+ arch/arm/mach-rockchip/rk3576/Makefile             |    9 +
+ arch/arm/mach-rockchip/rk3576/clk_rk3576.c         |   18 +
+ arch/arm/mach-rockchip/rk3576/rk3576.c             |  155 ++
+ arch/arm/mach-rockchip/rk3576/syscon_rk3576.c      |   22 +
+ arch/arm/mach-rockchip/rk3588/Kconfig              |   26 +-
+ arch/arm/mach-rockchip/rk3588/rk3588.c             |   19 +-
+ arch/arm/mach-rockchip/sdram.c                     |   16 +-
+ board/firefly/roc-pc-rk3576/Kconfig                |   12 +
+ board/firefly/roc-pc-rk3576/MAINTAINERS            |    7 +
+ board/rockchip/evb_rk3328/MAINTAINERS              |    6 +
+ board/rockchip/evb_rk3399/MAINTAINERS              |    6 +
+ board/theobroma-systems/common/Makefile            |    9 +
+ board/theobroma-systems/jaguar_rk3588/Makefile     |    3 -
+ board/theobroma-systems/puma_rk3399/Makefile       |    3 -
+ board/theobroma-systems/ringneck_px30/Makefile     |    3 -
+ board/theobroma-systems/tiger_rk3588/Makefile      |    3 -
+ configs/generic-rk3328_defconfig                   |   90 +
+ configs/generic-rk3399_defconfig                   |   77 +
+ configs/generic-rk3528_defconfig                   |   40 +
+ configs/generic-rk3568_defconfig                   |    3 +
+ configs/generic-rk3588_defconfig                   |    3 +
+ configs/radxa-e20c-rk3528_defconfig                |   56 +
+ configs/ringneck-px30_defconfig                    |    1 +
+ configs/roc-pc-rk3576_defconfig                    |   45 +
+ doc/board/rockchip/rockchip.rst                    |   27 +
+ drivers/adc/rockchip-saradc.c                      |   10 +
+ drivers/clk/rockchip/Makefile                      |    2 +
+ drivers/clk/rockchip/clk_pll.c                     |   23 +-
+ drivers/clk/rockchip/clk_rk3528.c                  | 1754 ++++++++++++++
+ drivers/clk/rockchip/clk_rk3576.c                  | 2513 ++++++++++++++++++++
+ drivers/misc/rockchip-otp.c                        |   15 +
+ drivers/mmc/rockchip_dw_mmc.c                      |    1 +
+ drivers/mmc/rockchip_sdhci.c                       |   54 +-
+ drivers/net/dwc_eth_qos.c                          |    8 +
+ drivers/net/dwc_eth_qos_rockchip.c                 |  292 ++-
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c      |   63 +-
+ drivers/pinctrl/rockchip/Makefile                  |    2 +
+ drivers/pinctrl/rockchip/pinctrl-rk3528.c          |  273 +++
+ drivers/pinctrl/rockchip/pinctrl-rk3576.c          |  278 +++
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h        |    3 +
+ drivers/ram/rockchip/Makefile                      |    2 +
+ drivers/ram/rockchip/sdram_rk3528.c                |   33 +
+ drivers/ram/rockchip/sdram_rk3576.c                |   35 +
+ drivers/reset/Makefile                             |    2 +-
+ drivers/reset/rst-rk3528.c                         |  302 +++
+ drivers/reset/rst-rk3576.c                         |  647 +++++
+ drivers/rng/rockchip_rng.c                         |   79 +-
+ drivers/usb/gadget/Kconfig                         |    1 +
+ dts/upstream/Bindings/arm/rockchip.yaml            |    5 +
+ .../Bindings/clock/rockchip,rk3528-cru.yaml        |   64 +
+ .../dt-bindings/clock/rockchip,rk3528-cru.h        |  453 ++++
+ .../dt-bindings/reset/rockchip,rk3528-cru.h        |  241 ++
+ .../src/arm64/rockchip/rk3528-pinctrl.dtsi         | 1397 +++++++++++
+ .../src/arm64/rockchip/rk3528-radxa-e20c.dts       |  133 ++
+ dts/upstream/src/arm64/rockchip/rk3528.dtsi        |  378 ++-
+ dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts  |  736 ++++++
+ dts/upstream/src/arm64/rockchip/rk3576.dtsi        |   39 +
+ dts/upstream/src/arm64/rockchip/rk3588-base.dtsi   |    8 +
+ include/configs/anbernic-rgxx3-rk3566.h            |    4 +-
+ include/configs/evb_rk3568.h                       |    4 +-
+ include/configs/evb_rk3588.h                       |    4 +-
+ include/configs/khadas-edge2-rk3588s.h             |    4 +-
+ include/configs/powkiddy-x55-rk3566.h              |    4 +-
+ include/configs/px30_common.h                      |    1 +
+ include/configs/rk3528_common.h                    |   38 +
+ include/configs/rk3568_common.h                    |    5 +-
+ include/configs/rk3576_common.h                    |   41 +
+ include/configs/rk3588_common.h                    |    5 +-
+ include/configs/roc-pc-rk3576.h                    |   15 +
+ include/configs/toybrick_rk3588.h                  |    4 +-
+ tools/rkcommon.c                                   |    2 +
+ 107 files changed, 12440 insertions(+), 208 deletions(-)
+ delete mode 100644 arch/arm/dts/px30-evb-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3328-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3328-generic.dts
+ create mode 100644 arch/arm/dts/rk3399-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3399-generic.dts
+ create mode 100644 arch/arm/dts/rk3528-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-generic.dts
+ create mode 100644 arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3576-u-boot.dtsi
+ create mode 100644 arch/arm/include/asm/arch-rk3528/boot0.h
+ create mode 100644 arch/arm/include/asm/arch-rk3528/gpio.h
+ create mode 100644 arch/arm/include/asm/arch-rk3576/boot0.h
+ create mode 100644 arch/arm/include/asm/arch-rk3576/gpio.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3528.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3576.h
+ create mode 100644 arch/arm/mach-rockchip/rk3528/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rk3528/MAINTAINERS
+ create mode 100644 arch/arm/mach-rockchip/rk3528/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rk3528/clk_rk3528.c
+ create mode 100644 arch/arm/mach-rockchip/rk3528/rk3528.c
+ create mode 100644 arch/arm/mach-rockchip/rk3528/syscon_rk3528.c
+ create mode 100644 arch/arm/mach-rockchip/rk3576/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rk3576/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rk3576/clk_rk3576.c
+ create mode 100644 arch/arm/mach-rockchip/rk3576/rk3576.c
+ create mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
+ create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
+ create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
+ create mode 100644 board/theobroma-systems/common/Makefile
+ create mode 100644 configs/generic-rk3328_defconfig
+ create mode 100644 configs/generic-rk3399_defconfig
+ create mode 100644 configs/generic-rk3528_defconfig
+ create mode 100644 configs/radxa-e20c-rk3528_defconfig
+ create mode 100644 configs/roc-pc-rk3576_defconfig
+ create mode 100644 drivers/clk/rockchip/clk_rk3528.c
+ create mode 100644 drivers/clk/rockchip/clk_rk3576.c
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3528.c
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3576.c
+ create mode 100644 drivers/ram/rockchip/sdram_rk3528.c
+ create mode 100644 drivers/ram/rockchip/sdram_rk3576.c
+ create mode 100644 drivers/reset/rst-rk3528.c
+ create mode 100644 drivers/reset/rst-rk3576.c
+ create mode 100644 dts/upstream/Bindings/clock/rockchip,rk3528-cru.yaml
+ create mode 100644 dts/upstream/include/dt-bindings/clock/rockchip,rk3528-cru.h
+ create mode 100644 dts/upstream/include/dt-bindings/reset/rockchip,rk3528-cru.h
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-pinctrl.dtsi
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts
+ create mode 100644 include/configs/rk3528_common.h
+ create mode 100644 include/configs/rk3576_common.h
+ create mode 100644 include/configs/roc-pc-rk3576.h
