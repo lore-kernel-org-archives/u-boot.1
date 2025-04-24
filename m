@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D4C8C369D5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA991C369D5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 938768209F;
-	Thu, 24 Apr 2025 08:08:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DC24C80F9C;
+	Thu, 24 Apr 2025 08:08:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FTr6nQvy";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7FQdDwfj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFF3A8082A; Thu, 24 Apr 2025 08:08:54 +0200 (CEST)
+ id 2BBF682103; Thu, 24 Apr 2025 08:08:56 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9E9B817C4
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:08:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29BA481F7E
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:08:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6209a59483=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53O64QLt005346;
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53O5ZOC0002508;
  Thu, 24 Apr 2025 08:08:51 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- MRRm/L8ksNL1BwMYq+gX63RSRhYQGS2ZK5DuybJLR3E=; b=FTr6nQvyciBWzmyQ
- G6fjERRSjCR186+j10WAsvBGpuyQP9TUVMJWpy45bnlNpXJ1V9OF+RnqzBk0s56z
- UglzCpoOPRdf7JO/3e0W9jZLb3oq+RnRHgkI+h9CBpoDG7PrZRdrPCBKBzgsoWcI
- 8s7ahei4unKgZ1KvnSWs/AZiGrUxXZdV8wupvjG2z+kg9ajoeV4meupkg55ehk6g
- AO/CM1qm4fdTmQrxSb+V99nb4MIm7Qzp4SLJ+T9AtyEGJxbjts1kUYN4vPd2Nm+h
- B2JxL7MBmYr4Uv1RJlSSr4sH/2FpVdgt0lxCMzgf61pwVBakamm9cNi6J+dbS86S
- 8kS8BQ==
+ 5VBJFUeJhCV1tAHFpjs9O8bfGT5M94AIxdnw9E4E3nk=; b=7FQdDwfjlUy1sHwf
+ UTbPyCfa1l/tiDi33yc5x3//sUQyiaad7Ncl4F9gZOxIYBJRzoEoY2VotQbSkIYt
+ e4yFBMGLu+p7Wqm5j9BE4DcmswS2HEGOeyZwTlZSCh28VvVTfmOezbkUjYOtZRKW
+ qwaQL1/pkQfgemwLo51vp1KGh22rYwUjF/KP5iGfzrZ3kise4+KLIgw/9QcQaXRT
+ nKKOCRrqrhk7COFRnCEl2j6jGhfTVsOHD2iWAjMAtU8lK7bfghU2ZDjb3bDxSMBQ
+ W1ye2GTELcLej3wpKXUZFid7d/6zi5Jpg1SaZncqTYs1KriKsRg0Df6/cQHFKQgB
+ 5AwvMQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk3e1ym-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk2e2wf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 24 Apr 2025 08:08:51 +0200 (MEST)
+ Thu, 24 Apr 2025 08:08:50 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 97F634002D;
- Thu, 24 Apr 2025 08:08:11 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 902DB40056;
+ Thu, 24 Apr 2025 08:08:07 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D3BCFA52445;
- Thu, 24 Apr 2025 08:07:56 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E1474A457AC;
+ Thu, 24 Apr 2025 08:07:53 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Apr
- 2025 08:07:56 +0200
+ 2025 08:07:53 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
- <lionel.debieve@foss.st.com>,
- Thomas Bourgoin <thomas.bourgoin@foss.st.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 19/21] arm: stm32mp: add helper function stm32mp_is_closed()
-Date: Thu, 24 Apr 2025 08:07:21 +0200
-Message-ID: <20250424060723.2695014-20-patrice.chotard@foss.st.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 16/21] arm: stm32mp: implement new STM32MP25 revision ID system
+Date: Thu, 24 Apr 2025 08:07:18 +0200
+Message-ID: <20250424060723.2695014-17-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
 References: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
@@ -94,63 +91,110 @@ X-Virus-Status: Clean
 
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Add the helper function stm32mp_is_closed() to check the "closed" state in
-product life cycle, when product secrets have  been provisioned into the
-device, by "secure secret provisioning" tools (SSP) for example.
+The STM32MP25 revision ID are now defined with the OTP102, this patch
+implements this new system.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Patrice CHOTARD <patrice.chotard@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/cmd_stm32key.c          | 22 +++++++++++++++++++
- .../arm/mach-stm32mp/include/mach/sys_proto.h |  7 ++++++
- 2 files changed, 29 insertions(+)
+ arch/arm/mach-stm32mp/include/mach/stm32.h    |  1 +
+ .../arm/mach-stm32mp/include/mach/sys_proto.h | 11 +++++++++-
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c   | 21 ++++++++++++++-----
+ 3 files changed, 27 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
-index d6bf72d8e32..6bfa67859e1 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32key.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
-@@ -618,3 +618,25 @@ U_BOOT_CMD_WITH_SUBCMDS(stm32key, "Manage key on STM32", stm32key_help_text,
- 	U_BOOT_SUBCMD_MKENT(read, 2, 0, do_stm32key_read),
- 	U_BOOT_SUBCMD_MKENT(fuse, 3, 0, do_stm32key_fuse),
- 	U_BOOT_SUBCMD_MKENT(close, 2, 0, do_stm32key_close));
-+
-+/*
-+ * Check the "closed" state in product life cycle, when product secrets have
-+ * been provisioned into the device, by SSP tools for example.
-+ * On closed devices, authentication is mandatory.
-+ */
-+bool stm32mp_is_closed(void)
-+{
-+	struct udevice *dev;
-+	bool closed;
-+	int ret;
-+
-+	ret = get_misc_dev(&dev);
-+	if (ret)
-+		return false;
-+
-+	ret = read_close_status(dev, false, &closed);
-+	if (ret)
-+		return false;
-+
-+	return closed;
-+}
+diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+index 156009f51e3..a9ac49bc5d2 100644
+--- a/arch/arm/mach-stm32mp/include/mach/stm32.h
++++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+@@ -212,6 +212,7 @@ enum forced_boot_mode {
+ #ifdef CONFIG_STM32MP25X
+ #define BSEC_OTP_SERIAL	5
+ #define BSEC_OTP_RPN	9
++#define BSEC_OTP_REVID	102
+ #define BSEC_OTP_PKG	122
+ #define BSEC_OTP_BOARD	246
+ #define BSEC_OTP_MAC	247
 diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-index bf1c39742c1..19073668497 100644
+index 2a65efc0a50..0770f0a0cf6 100644
 --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
 +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-@@ -120,3 +120,10 @@ u32 get_otp(int index, int shift, int mask);
+@@ -58,6 +58,7 @@ u32 get_cpu_type(void);
+ /* return CPU_DEV constants */
+ u32 get_cpu_dev(void);
  
- uintptr_t get_stm32mp_rom_api_table(void);
- uintptr_t get_stm32mp_bl2_dtb(void);
++/* Silicon revision = REV_ID[15:0] of Device Version */
+ #define CPU_REV1	0x1000
+ #define CPU_REV1_1	0x1001
+ #define CPU_REV1_2	0x1003
+@@ -65,7 +66,15 @@ u32 get_cpu_dev(void);
+ #define CPU_REV2_1	0x2001
+ #define CPU_REV2_2	0x2003
+ 
+-/* return Silicon revision = REV_ID[15:0] of Device Version */
++/* OTP revision ID = 6 bits : 3 for Major / 3 for Minor */
++#define OTP_REVID_1	0b001000
++#define OTP_REVID_1_1	0b001001
++#define OTP_REVID_1_2	0b001010
++#define OTP_REVID_2	0b010000
++#define OTP_REVID_2_1	0b010001
++#define OTP_REVID_2_2	0b010010
 +
-+/* helper function: check "closed" state in product "Life Cycle" */
-+#ifdef CONFIG_CMD_STM32KEY
-+bool stm32mp_is_closed(void);
-+#else
-+static inline bool stm32mp_is_closed(void) { return false; }
-+#endif
++/* return SoC revision = Silicon revision (STM32MP1) or OTP revision ID (STM32MP2)*/
+ u32 get_cpu_rev(void);
+ 
+ /* Get Package options from OTP */
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
+index 7f896a0d65d..ac229bdf7cc 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
++++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
+@@ -15,8 +15,10 @@
+ #define SYSCFG_DEVICEID_OFFSET		0x6400
+ #define SYSCFG_DEVICEID_DEV_ID_MASK	GENMASK(11, 0)
+ #define SYSCFG_DEVICEID_DEV_ID_SHIFT	0
+-#define SYSCFG_DEVICEID_REV_ID_MASK	GENMASK(31, 16)
+-#define SYSCFG_DEVICEID_REV_ID_SHIFT	16
++
++/* Revision ID = OTP102[5:0] 6 bits : 3 for Major / 3 for Minor*/
++#define REVID_SHIFT	0
++#define REVID_MASK	GENMASK(5, 0)
+ 
+ /* Device Part Number (RPN) = OTP9 */
+ #define RPN_SHIFT	0
+@@ -46,7 +48,7 @@ u32 get_cpu_dev(void)
+ 
+ u32 get_cpu_rev(void)
+ {
+-	return (read_deviceid() & SYSCFG_DEVICEID_REV_ID_MASK) >> SYSCFG_DEVICEID_REV_ID_SHIFT;
++	return get_otp(BSEC_OTP_REVID, REVID_SHIFT, REVID_MASK);
+ }
+ 
+ /* Get Device Part Number (RPN) from OTP */
+@@ -164,12 +166,21 @@ void get_soc_name(char name[SOC_NAME_SIZE])
+ 		}
+ 		/* REVISION */
+ 		switch (get_cpu_rev()) {
+-		case CPU_REV1:
++		case OTP_REVID_1:
+ 			cpu_r = "A";
+ 			break;
+-		case CPU_REV2:
++		case OTP_REVID_1_1:
++			cpu_r = "Z";
++			break;
++		case OTP_REVID_2:
+ 			cpu_r = "B";
+ 			break;
++		case OTP_REVID_2_1:
++			cpu_r = "Y";
++			break;
++		case OTP_REVID_2_2:
++			cpu_r = "X";
++			break;
+ 		default:
+ 			break;
+ 		}
 -- 
 2.25.1
 
