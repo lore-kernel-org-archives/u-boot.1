@@ -4,72 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E55C369D5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 17:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A92C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 17:39:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C35C480079;
-	Thu, 24 Apr 2025 19:36:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ED2498056A;
+	Thu, 24 Apr 2025 19:39:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bvqHzTlS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ea69GAWK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 496888056A; Thu, 24 Apr 2025 19:36:22 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id A46FB809D4; Thu, 24 Apr 2025 19:38:58 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A38A8003E
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 19:36:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D4B6803CC
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 19:38:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-3105ef2a071so14272961fa.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:36:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-401eff272b5so137869b6e.0
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:38:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745516179; x=1746120979; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=wzNkeIbwNMTNpZhJpRgxTJnUCEmJe5ED8i488X9Tysg=;
- b=bvqHzTlSi57LB26JuNb6Uy4kxkT2nSfsQp028bBGxT13maq6+eUO57eLZefXVDA2us
- AKnJLZ5dESKFyrcm0YKIuc13EE3jEyUQSEAYCDTqlYESy17qQLNHNCsq/pAqv4ywKSUC
- zq4YDiIDQxbJ0fqK7JIQNK9vPegRW/5e9EoCHunHz+M116a2DVC3zgdKts6lRR9/x3u1
- Zfj0i0dT5bfWCwDct9VBNbLDUbJo+VSSDaAa+rXu+ri7LEiukq/ABww1FgTIJdSzUqXb
- 6MwC88eEEUAeQ9F93Jqp3+9RR2zsAo1EirMS2FPBBC53mUVdJl+nZvlwFA50Yt8/+xcv
- Ojtg==
+ d=konsulko.com; s=google; t=1745516335; x=1746121135; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lquYw0E68tD9ZRiHPHlLLLy4QsHiJPTGwvZrdFJJwqc=;
+ b=Ea69GAWKzb9khjp4LnuaUzZsBqirWCJhsUSDIlvO9Y41afkeyYF1+aQfOKureCR33w
+ eeFq4xRIoHS1VEcbR8JwDwYNUVFaZjDvWM8dBRGQ2GFVaQHzAV7KdVJwtIcWvah3oMcr
+ 5IrzJ+FcxDt9ajVUTjIefMz/n0u4c7hzrAuFw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745516179; x=1746120979;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wzNkeIbwNMTNpZhJpRgxTJnUCEmJe5ED8i488X9Tysg=;
- b=WsB4bPffK3fq0t8BSnCgDrJqRgsTxXnogeF7S/0ilvFHGNSp/bwPFoGA44nehyrtxb
- iXKFld0ubIGB4tAbnCTKEk2hMylHdhUYscMFQPvGq5agg6fZJGFqqEavBpL5JdnWszNt
- qAjCSz79bE/7zuaVO/Orr71ANi9AEfAYvbecEuaVQcNB4UA2BS4R25mObrQdy58jyJYb
- F+Es9/qTZVAIMTQZgagKC9sSO+OYDRhrQz236sNPSpMDZzjX8Ql71jjZNu6gVvmB8Id9
- bnGlAAvApr7jAUb2bG/WnyxRMdyqflW3RUJYEMLVsvTyXPg0EU9/njzuNSqasQy8rNAN
- FA+w==
-X-Gm-Message-State: AOJu0YyuBlKW8FDKb3tkQQFXr+Ahps9kiv1XXFveXq0N1CVaCjQc1nh8
- sjZzrmtcZ3DHvPsIfLFtYOCG+kdwQCfpZj4lsjq83xe+oU4Jc9hy3wff/1VqIjO40gr6SwB/b1M
- oQMqO4nHLTh6YzF6booMlHuZT5xBxWKNV
-X-Gm-Gg: ASbGncvPsdC+Y/y9ug4lG3V9cqa++9k5SuFIter5uVHxU9KA6050sKA9/nCoCHMTLdw
- SmJRnVTSSdAmbVXx6bZXKhgJdNP0KDNx/aFD2dEFDraHx8VabSk35DZwaRw4TGc3jDsgvd4d/Bi
- OUDP7naxVzYT3gtU/ZTWhtmgmtiiWjQ9LzrklhxXwNDp3d33tG2uulrAZn
-X-Google-Smtp-Source: AGHT+IGDi6wQp/dO7bqZshKEHifpHsKLNglzG7Pp+B6W7hiDX9bbXwnZ7bZnbdfOBz3whwUfXTR7JemtM5PFxFvE89I=
-X-Received: by 2002:a05:651c:12ca:b0:30b:c22d:83b3 with SMTP id
- 38308e7fff4ca-318a7ef27f1mr1597171fa.15.1745516178879; Thu, 24 Apr 2025
- 10:36:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1745516335; x=1746121135;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lquYw0E68tD9ZRiHPHlLLLy4QsHiJPTGwvZrdFJJwqc=;
+ b=KanrtjgIVyIQ6+G9qgwTKFSFhW7TpzHUlOtkF28yvT4jmbXkn9L7KwkBbdWsWTt24e
+ dzd4GmngAISV9+LEu7C8oTgvkC/UosLDaCZ/ysVAT7wiCtikyUpelcV3XIsC87xT1ppQ
+ J0BNJvOvcW3VgT4Yc5yg2VJyTA01QZAsqT+KtyDj4ial8EEx9dq0G/EH5kB2fgz7mRPs
+ LwzqqbPfBI9G2AqPjmCERG3M7t6eK3YJWaqTf+NLkfL4ttYuIEg0Rvgu1MFlVxwU3wvj
+ Er6sAZDJt91UkVUqp5m3zYMMbgWJfu3NeGaZOW7OYJ5LciuLKtQtms7Mf7ZV63ybRfAo
+ /Mxw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAbZkgw+yvPvhsAqdvtm+eCvnavBHmLSTiO9aou0FRzckXFXDUwgBCZBvKfOkm7vYJhGxKJ6w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3SXHqVnHbwLyjkrWJuCSLmFzsBCx6/kA2Xtdc7ZFIWVw4H9Uc
+ F5QbCecbLfBcNGBSgCA7EohjpBbE9gtH/oCXT8/KkMQ1WudUfnXZ5NURXO051FI=
+X-Gm-Gg: ASbGncsXRUw1cr4qcV75Ye6H43arZr6N7DzV919dqgX4+qsBfroV2clZM0uIyLILBvX
+ GHfoh+ruPftHlN/lBW/R+LbJkN5VOnl7fjnv42qLzyCDJqPXia8fE9WRzUePon4emStHtyBE6sj
+ iSXSgB9e+nTBFZfVxp4d9xfvAd3QbzPd31ty4n19PDmt8RHkSFLGY/mgcET7uzb9XBLMTgosNyU
+ YT70EQpXOUSg0NJf4WRHDXBria2OlBsKcmMeXx9N9VHOvsGjntDxBFphhtvDhuus6Vnevua1RV+
+ LmnUu7gMduyjSHg4/jdgiKPLd3W6k8sLkfWfJfHMgJWanXyuJs8v9aXWtR7yqFel1cUNyrsdnVg
+ XBQ==
+X-Google-Smtp-Source: AGHT+IEjITRjlp/fOBfAr/ctMfhmaDC6dC70DcH4/bFDrumC2P+KncbMt6P/bHjRIOMrZrWKzMDXkw==
+X-Received: by 2002:a05:6808:6f8e:b0:3f8:eee4:7140 with SMTP id
+ 5614622812f47-401f11ae193mr240149b6e.22.1745516335044; 
+ Thu, 24 Apr 2025 10:38:55 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-401ec9782eesm328806b6e.49.2025.04.24.10.38.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Apr 2025 10:38:54 -0700 (PDT)
+Date: Thu, 24 Apr 2025 11:38:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>,
+ u-boot@lists.denx.de, vigneshr@ti.com, rick@andestech.com,
+ mporter@konsulko.com
+Subject: Re: [RFC] Expected behavior of the go command
+Message-ID: <20250424173852.GK5495@bill-the-cat>
+References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
+ <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
+ <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
 MIME-Version: 1.0
-From: Heiko Thiery <heiko.thiery@gmail.com>
-Date: Thu, 24 Apr 2025 19:36:06 +0200
-X-Gm-Features: ATxdqUFuzGE9R9jmfjiyAxSrOW-di3IWcM7D6AxEVXeiA-WEz-q2m_WOKFiqNOw
-Message-ID: <CAEyMn7b90ybqMOgb4ViAaQVqvTuma-HyYkwEvSVHfowfvEd3tA@mail.gmail.com>
-Subject: bootflow: extlinux and menu
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="kHtysvCS8GeVdF1E"
+Content-Disposition: inline
+In-Reply-To: <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,13 +101,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-I tried bootflow for the first time and wanted to test my extlinux
-configuration with separate menu entries. But I don't see that the
-menu is shown. The default value is always selected. Am I right in
-thinking that this is not supported with extlinux?
+--kHtysvCS8GeVdF1E
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-BR
---
-Heiko
+On Wed, Apr 23, 2025 at 04:22:51PM +0200, Ahmad Fatoum wrote:
+> Hi,
+>=20
+> On 4/23/25 14:28, Simon Glass wrote:
+> > Hi Anshul,
+> >=20
+> > On Wed, 23 Apr 2025 at 04:04, Anshul Dalal <anshuld@ti.com> wrote:
+> >>
+> >> Hi all,
+> >>
+> >> I was trying to understand how the go command is expected to work when
+> >> used to load custom OSes. My use case requires getting a proprietary OS
+> >> to boot using the go command on a TI K3 platform. The OS expects caches
+> >> to be flushed and the mmu to be disabled before we jump to it.
+> >>
+> >> The go command (do_go func in cmd/boot.c) calls the do_go_exec function
+> >> underneath which does not seem to have a consistent implementation
+> >> across various architectures.
+> >>
+> >> In RISC-V the implementation (arch/riscv/lib/boot.c:10) calls
+> >> cleanup_before_linux before jumping to the loaded binary. This behavio=
+ur
+> >> would enable the direct use of the go command for booting a custom OS
+> >> (like in my use case). Though no such generic implementation exists for
+> >> ARM64.
+> >>
+> >> I was wondering why we have the call to cleanup_before_linux for RISCV
+> >> and not ARM64?
+> >>
+> >> Also, is booting a custom OS using the go command a supported use-case?
+> >> If yes, it might be better to rename the function to be more generic
+> >> like cleanup_before_os from *_linux and call it for each invocation of
+> >> the go command.
+> >=20
+> > Yes it is supposed to do what you say. You could rationalise the code
+> > a bit, so that all archs do a similar thing, or perhaps just RISC-V
+> > and ARM for now.
+>=20
+> I ran into issues with go too trying to start barebox and I always
+> assumed that go is rather meant to start programs that call back into
+> U-Boot using the jump table mechanism. In that case, you likely don't
+> want to turn off caches.
+
+Exactly. "go" is really just "go $addr now", and so if things like
+caches need to be flushed / disabled, that needs to happen via a command
+first. RISC-V being helpful here is an unfortunate mis-implementation.
+
+> What I settled on is having the barebox build generate a FIT image that
+> can be used from U-Boot, barebox, coreboot ...etc.
+>=20
+> Maybe the same would be also suitable for you? Alternatively, you could
+> compile your custom OS as an ELF image and boot that properly as if it
+> were a kernel. Both ways would also allow you to specify a load address
+> if your OS is not relocatable and pass along arguments.
+>=20
+> I went with the FIT route for barebox, because we can now ship device
+> trees for all enabled boards in the same FIT image alongside one generic
+> second stage barebox with DT support. If you want to support different
+> boards with your OS image that might be of interest to you as well.
+
+A FIT image is a good idea. It's also possible and I think more commonly
+how custom OSes are done, to use "bootelf" instead.
+
+--=20
+Tom
+
+--kHtysvCS8GeVdF1E
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgKdyEACgkQFHw5/5Y0
+tyyPUwv/V5g5ZrqqMSpi4SNittRbfLzbl2m75Ndy4trj7rtxBb3+Kl7u4jhdR4Ep
+qnXxZg0rmzeJkLAOaKD7LUgzo0pO5xidFkpdQ50aAlCqUqTINuq8rYeHosmnT4BB
+WTIt7DhkcypRPPEGTIttdHsEtLzePeuYlhLazp2ByWH2sYUy8d1h5Gq76RoGUAOA
+2h3S6/kv1Zo/OxAjQAky6oao91VWk2J0MEXIOMPDRXyX0Hc2jAIG4X+5eTY3/nAx
+o2zclP+cpA0p1CC8Y8W8NKY9gYhZBKAtPYb6+D6J4Xhw3HKXHPOeYcrg6ch4Lgzl
+DzeuOwtOcJkFOuAc64mUnnCignuL8fBfySqpghRNDZ3IebJyxTSVjAebmYvMHuje
+31uBssg++5/9A4ZGav7D7zyvV/byVi8H8CBzrCRwbhSKK3IQBsiXJlkE9lkdZTzK
+C3E/w6L+gZiqfDXe2zxlJlFSK73C7/09zB5sbRQXeJ+LmRetSoTqGswe9H3VpR15
+bR1s5Q2F
+=swrT
+-----END PGP SIGNATURE-----
+
+--kHtysvCS8GeVdF1E--
