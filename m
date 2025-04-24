@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4025EC369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D2DC369D5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:09:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2255580FA8;
+	by phobos.denx.de (Postfix) with ESMTP id 65233819D2;
 	Thu, 24 Apr 2025 08:08:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="KYNNqOm0";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Kdg9ZixT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7859580FDA; Thu, 24 Apr 2025 08:08:43 +0200 (CEST)
+ id 6D4E781F45; Thu, 24 Apr 2025 08:08:43 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E94180BA8
+ by phobos.denx.de (Postfix) with ESMTPS id 0202F80FA8
  for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:08:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6209a59483=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53NGu1OF002185;
- Thu, 24 Apr 2025 08:08:37 +0200
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53O65kkG002455;
+ Thu, 24 Apr 2025 08:08:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- YSUc7UCFnp2IF1j0Kr8f7aEn+AeKMtaAZQfQXbB1bIs=; b=KYNNqOm0v6rc2d+F
- IdfMk12D4a3ELVS9AzMpxZ8I0ZhEim1qiC6cLJX5hYKIjd8lfdMI5HvjXRLS7hXW
- +bvViAyX1h5pLkquJBwOCa8gZqH98sVp4WGi9v8XkYBaBsQAQEvdNr1h4/0RlsWy
- /GrFjn/2c6MqLB3qQTdERSVveXafftbvL4/9LzMNcLTOoRdQzqGaau1jfVFUsIqB
- hf4fhz0cXLCkQ+UUlOaLkMQ+K5BIem8TfiGjIP0PlP3DWF06RCRnSuIzIvGSXRgU
- SRvJgpZd+rByt3AjryCiRS+Wrons5kZXcfetnfvLrDWx3ecAT3c7k/3uwUlWwn4z
- w9Sqcw==
+ dHRd45RoKu5QTXRdgTPVtQNzRqCGizA7RjC2EMlyiyE=; b=Kdg9ZixTRvlsMD/s
+ JsBUPEjSDVjPBdVuETCQ4OtWoupy1bXApV2B4KWHElSvoEq88GjXLBMgqrVjOuVT
+ 2urYh6xih+ZqfBfa8RqmjmA2m9mj4iiSY9AMTzileEZADycid26Nd6OUcIR07f+E
+ eENrUslDT7ze2eIF4YyFek01vOBD3qOUTCcvhigaecjDfc5+S3kTm4Qmex9lKdPX
+ J+S1/D0A5G0jI7U8cx0d/wSIkvM8/CTslbBgtFEV1Kew3NDFyZ0l5llj7pzNxCER
+ 6TL44GMr9TCOEbLw032J7rln/ru7Id8RoOXt0TX6jz0Oc9qHlumBWApcQ7XNY/VI
+ AXJ/vw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjye1pa-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk2e2vw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 24 Apr 2025 08:08:37 +0200 (MEST)
+ Thu, 24 Apr 2025 08:08:39 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EEE6140046;
- Thu, 24 Apr 2025 08:07:52 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E62AC4004B;
+ Thu, 24 Apr 2025 08:07:56 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 62C7BA46C85;
- Thu, 24 Apr 2025 08:07:40 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 43196A49BE3;
+ Thu, 24 Apr 2025 08:07:44 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Apr
- 2025 08:07:40 +0200
+ 2025 08:07:44 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
  <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 02/21] configs: stm32mp25: add bootcmd for stm32mp25 platform
-Date: Thu, 24 Apr 2025 08:07:04 +0200
-Message-ID: <20250424060723.2695014-3-patrice.chotard@foss.st.com>
+Subject: [PATCH 06/21] ARM: dts: stm32: add "u-boot,
+ mmc-env-partition" for stm32mp257f-ev1-u-boot
+Date: Thu, 24 Apr 2025 08:07:08 +0200
+Message-ID: <20250424060723.2695014-7-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
 References: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
@@ -89,102 +90,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Handle boot for the 3 instance of MMC and call the command stm32prog
-for serial boot on USB or on UART as it is done for other STM32MP platform.
+Add "u-boot,mmc-env-partition" property for stm32mp257f-ev1-u-boot.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- include/configs/stm32mp25_common.h | 77 ++++++++++++++++++++++++++++++
- 1 file changed, 77 insertions(+)
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/include/configs/stm32mp25_common.h b/include/configs/stm32mp25_common.h
-index ec980eea856..542de8f068d 100644
---- a/include/configs/stm32mp25_common.h
-+++ b/include/configs/stm32mp25_common.h
-@@ -21,4 +21,81 @@
-  */
- #define CFG_SYS_BOOTMAPSZ	SZ_256M
+diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+index 3beeaa19c12..d4a75b2f03e 100644
+--- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+@@ -6,6 +6,10 @@
+ #include "stm32mp25-u-boot.dtsi"
  
-+/*****************************************************************************/
-+#ifdef CONFIG_DISTRO_DEFAULTS
-+/*****************************************************************************/
+ / {
++	config {
++		u-boot,mmc-env-partition = "u-boot-env";
++	};
 +
-+#ifdef CONFIG_CMD_MMC
-+#define BOOT_TARGET_MMC0(func)	func(MMC, mmc, 0)
-+#define BOOT_TARGET_MMC1(func)	func(MMC, mmc, 1)
-+#define BOOT_TARGET_MMC2(func)	func(MMC, mmc, 2)
-+#else
-+#define BOOT_TARGET_MMC0(func)
-+#define BOOT_TARGET_MMC1(func)
-+#define BOOT_TARGET_MMC2(func)
-+#endif
-+
-+#define BOOT_TARGET_DEVICES(func)	\
-+	BOOT_TARGET_MMC1(func)		\
-+	BOOT_TARGET_MMC0(func)		\
-+	BOOT_TARGET_MMC2(func)
-+
-+/*
-+ * default bootcmd for stm32mp25:
-+ * for serial/usb: execute the stm32prog command
-+ * for mmc boot (eMMC, SD card), distro boot on the same mmc device
-+ * for other boot, use the default distro order in ${boot_targets}
-+ */
-+#define STM32MP_BOOTCMD "bootcmd_stm32mp=" \
-+	"echo \"Boot over ${boot_device}${boot_instance}!\";" \
-+	"if test ${boot_device} = serial || test ${boot_device} = usb;" \
-+	"then stm32prog ${boot_device} ${boot_instance}; " \
-+	"else " \
-+		"run env_check;" \
-+		"if test ${boot_device} = mmc;" \
-+		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
-+		"run distro_bootcmd;" \
-+	"fi;\0"
-+
-+#ifndef STM32MP_BOARD_EXTRA_ENV
-+#define STM32MP_BOARD_EXTRA_ENV
-+#endif
-+
-+#define STM32MP_EXTRA \
-+	"env_check=if env info -p -d -q; then env save; fi\0" \
-+	"boot_net_usb_start=true\0"
-+/*
-+ * memory layout for 96MB uncompressed/compressed kernel,
-+ * 1M fdt, 1M script, 1M pxe and 1M for overlay
-+ * and the ramdisk at the end.
-+ */
-+#define __KERNEL_COMP_ADDR_R	__stringify(0x84000000)
-+#define __KERNEL_COMP_SIZE_R	__stringify(0x04000000)
-+#define __KERNEL_ADDR_R		__stringify(0x8a000000)
-+#define __FDT_ADDR_R		__stringify(0x90000000)
-+#define __SCRIPT_ADDR_R		__stringify(0x90100000)
-+#define __PXEFILE_ADDR_R	__stringify(0x90200000)
-+#define __FDTOVERLAY_ADDR_R	__stringify(0x90300000)
-+#define __RAMDISK_ADDR_R	__stringify(0x90400000)
-+
-+#define STM32MP_MEM_LAYOUT \
-+	"kernel_addr_r=" __KERNEL_ADDR_R "\0" \
-+	"fdt_addr_r=" __FDT_ADDR_R "\0" \
-+	"scriptaddr=" __SCRIPT_ADDR_R "\0" \
-+	"pxefile_addr_r=" __PXEFILE_ADDR_R "\0" \
-+	"fdtoverlay_addr_r=" __FDTOVERLAY_ADDR_R "\0" \
-+	"ramdisk_addr_r=" __RAMDISK_ADDR_R "\0" \
-+	"kernel_comp_addr_r=" __KERNEL_COMP_ADDR_R "\0"	\
-+	"kernel_comp_size=" __KERNEL_COMP_SIZE_R "\0"
-+
-+#include <config_distro_bootcmd.h>
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	STM32MP_MEM_LAYOUT \
-+	STM32MP_BOOTCMD \
-+	BOOTENV \
-+	STM32MP_EXTRA \
-+	STM32MP_BOARD_EXTRA_ENV
-+
-+#endif
-+
- #endif /* __CONFIG_STM32MP25_COMMMON_H */
+ 	clocks {
+ 		ck_flexgen_08: ck-flexgen-08 {
+ 			#clock-cells = <0>;
 -- 
 2.25.1
 
