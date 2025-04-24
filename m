@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80028C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 05:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC090C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:07:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC9A7806FC;
-	Thu, 24 Apr 2025 07:40:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C248806FC;
+	Thu, 24 Apr 2025 08:07:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BKajcWVH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="I33hbx3+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A0B480944; Thu, 24 Apr 2025 07:40:28 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 9A4178070C; Thu, 24 Apr 2025 08:07:22 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B3948056A
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 07:40:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB0738056A
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:07:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53O5eOVf2406738
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53O67Hgm1761916
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 24 Apr 2025 00:40:24 -0500
+ Thu, 24 Apr 2025 01:07:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745473224;
- bh=tsaA9fhriBa7RZtWsSbFv/qfbEQ5LTeDcsUjrZu2L50=;
+ s=ti-com-17Q1; t=1745474837;
+ bh=Y9/RdosJRLUuoqDFHy/QSOhHfu+KylodzEWBzRbD3Nk=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=BKajcWVH+bRe/sD8KcvuEAVl1kZMb89BTnDtEKXX1cBppEVVRK51o/5Dvbj2bbTyH
- EjDAwCDefHoM4LAszveCLIH6wtJlQhtfQ3vpOQOO19zwtQp2Z7hXearhHqmXY2GftM
- JWky/4oR9CYtR8CMZ1bgY+zQ5nul2Z9YFHQzJfiA=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53O5eOOM028792
+ b=I33hbx3+FdaC2bBnKqXNMpsTE/yU3sPdKkv0Sk6gaYZ0KcAE5bkLKbZpwlvtYbNkl
+ Cz3CihjBDAt6nxHyVF7zZLh8ZddRjLvP08N7FpONOGmmEg+/2BUeQZO+3xz55G4Q8J
+ JpH9Nn1vAuiOe3vyGv/9GXHfwHP4CYdJW0qwBQug=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53O67HUB085784
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 24 Apr 2025 00:40:24 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 24 Apr 2025 01:07:17 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
- Apr 2025 00:40:23 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 01:07:17 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 24 Apr 2025 00:40:23 -0500
+ Frontend Transport; Thu, 24 Apr 2025 01:07:17 -0500
 Received: from [172.24.227.151] (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53O5eLO8098505;
- Thu, 24 Apr 2025 00:40:21 -0500
-Message-ID: <9621a0fd-d988-4885-8fd6-ea8826380e5e@ti.com>
-Date: Thu, 24 Apr 2025 11:10:20 +0530
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53O67ExC008473;
+ Thu, 24 Apr 2025 01:07:15 -0500
+Message-ID: <c7b799e4-9993-4e9a-8b49-969ff64e72e5@ti.com>
+Date: Thu, 24 Apr 2025 11:37:13 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] arm: mach-k3: Add config option for booting HSM core
-To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>
-CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
- <jm@ti.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 4/4] arm: mach-k3: r5: common: Add support to boot HSM M4
+ core
+To: Andrew Davis <afd@ti.com>, <trini@konsulko.com>
+CC: <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
+ <u-kumar1@ti.com>, <u-boot@lists.denx.de>
 References: <20250422095430.363792-1-b-padhi@ti.com>
- <20250422095430.363792-2-b-padhi@ti.com>
- <4917db59-9533-4540-a1d5-e648e4a0b5f3@ti.com>
+ <20250422095430.363792-5-b-padhi@ti.com>
+ <811b2834-aa4f-48b5-88b3-9c68e3d59224@ti.com>
 Content-Language: en-US
 From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <4917db59-9533-4540-a1d5-e648e4a0b5f3@ti.com>
+In-Reply-To: <811b2834-aa4f-48b5-88b3-9c68e3d59224@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -83,53 +84,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit,
 
-On 22/04/25 20:07, Kumar, Udit wrote:
+On 22/04/25 20:11, Andrew Davis wrote:
+> On 4/22/25 4:54 AM, Beleswar Padhi wrote:
+>> The tispl.bin fit image is packed with the HSM firmware image. Populate
+>> the "os" info of the image so that it can be detected and loaded at
+>> corresponding DDR address. Further, invoke the load and boot of HSM core
+>> at R5 SPL stage. Boot flow for HSM M4 core is as below:
+>>
+>> 1. Request control of HSM M4F remote processor.
+>> 2. Assert Reset on the HSM M4F remote processor.
+>> 3. For HS devices, Request Secure Entity to Authenticate and Load HSM
+>>     firmware into core's internal SRAM memory region. For GP devices,
+>>     load the unsigned firmware manually.
+>> 4. Deassert Reset on the HSM M4F remote processor.
+>> 5. Release control of HSM M4F remote processor.
+>>
+>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>> ---
+>>   arch/arm/mach-k3/r5/common.c | 84 +++++++++++++++++++++++++++++++++++-
+>>   1 file changed, 83 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+>> index fd188e7c90e..1af0f70d8d3 100644
+>> --- a/arch/arm/mach-k3/r5/common.c
+>> +++ b/arch/arm/mach-k3/r5/common.c
+>> @@ -15,11 +15,17 @@
+>>   #include <spl.h>
+>>   #include <remoteproc.h>
+>>   #include <elf.h>
+>> +#include <cpu_func.h>
+>>     #include "../common.h"
+>>   +#define PROC_BOOT_CTRL_RESET_FLAG_HSM_M4    0x00000001
+>> +#define HSM_SRAM0_0_ADDR            0x43C00000
+>> +#define PROC_ID_HSM_M4F                0x00000080
+>> +
+>>   #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
+>>   enum {
+>> +    IMAGE_ID_HSM,
+>>       IMAGE_ID_ATF,
+>>       IMAGE_ID_OPTEE,
+>>       IMAGE_ID_SPL,
+>> @@ -32,6 +38,7 @@ enum {
+>>     #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
+>>   static const char *image_os_match[IMAGE_AMT] = {
+>> +    "hsm",
+>>       "arm-trusted-firmware",
+>>       "tee",
+>>       "U-Boot",
+>> @@ -136,6 +143,73 @@ void release_resources_for_core_shutdown(void)
+>>       }
+>>   }
+>>   +#if IS_ENABLED(CONFIG_K3_HSM_FW)
 >
-> On 4/22/2025 3:24 PM, Beleswar Padhi wrote:
->> Some K3 SoCs like J721S2, and J784S4 have a HSM (High Security Module)
->> M4F core in the Wakeup Voltage Domain which could be used to run secure
->> services like Authentication. Add a config option which indicates that
->> the SoC has a HSM core and the firmware for the core is available.
+> To avoid more #if preprocessor usage, how about just making
+> this function __maybe_unused, then let the compiler remove
+> it for you if it is not used below.
+
+
+Thanks, that works. I will address this in revision.
+
 >
-> Config option can not indicate firmware is available for core.
+>> +static int boot_hsm_core(void)
+>> +{
+>> +    struct ti_sci_handle *ti_sci = get_ti_sci_handle();
+>> +    struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
+>> +    u64 hsm_image_addr;
+>> +    u32 hsm_image_size;
+>> +    int device_type, ret;
+>> +
+>> +    hsm_image_addr = (u64)fit_image_info[IMAGE_ID_HSM].image_start;
+>> +    hsm_image_size = (u32)fit_image_info[IMAGE_ID_HSM].image_len;
+>> +
+>> +    /* Request Control of Remote Processor */
+>> +    ret = proc_ops->proc_request(ti_sci, PROC_ID_HSM_M4F);
+>> +    if (ret) {
+>> +        printf("Unable to request processor control for core %d\n",
+>
+> Printing the PROC_ID doesn't tell us much, how about:
+>
+> printf("Unable to request HSM processor control: %d\n", ret);
+>
+> Same below where PROC_ID_HSM_M4F is printed.
 
 
-Correct. But since we don't have 'optional' property working in the expected way, enabling this CONFIG can lead to build failures when firmware is not available in correct path.
-
-So, the idea of this CONFIG was to let the developers decide at build-time that: they want to boot the core as well as the firmware is available for this core.
+That's better, will address in revision.
 
 Thanks,
 Beleswar
 
 >
-> Thic could be
+> Andrew
 >
-> Add a config option which allows load of HSM firmware and booting of HSM core.
->
->
->>
->> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->> ---
->>   arch/arm/mach-k3/Kconfig | 8 ++++++++
->>   1 file changed, 8 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
->> index 1b8c0b1eb96..b787d2da244 100644
->> --- a/arch/arm/mach-k3/Kconfig
->> +++ b/arch/arm/mach-k3/Kconfig
->> @@ -181,6 +181,14 @@ config K3_REMOTEPROC_PRU
->>       imply REMOTEPROC_TI_PRU
->>       default y if (SOC_K3_AM642 || SOC_K3_AM654)
->>   +config K3_HSM_FW
->> +    bool "Load and Boot HSM core"
->> +    default n
->> +    help
->> +      Enabling this will indicate that the system has a HSM (High Security
->> +      Module) M4 Core and the firmware for the core is present. When
->> +      enabled, HSM core will be booted at R5 SPL execution time.
+>> +               PROC_ID_HSM_M4F);
+>> +        return ret;
+>> +    }
 >> +
->>   if CPU_V7R
->>   source "arch/arm/mach-k3/r5/Kconfig"
->>   endif
+>> +    /* Put the remote processor into reset */
+>> +    ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F,
+>> +                       PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
+>> +    if (ret) {
+>> +        printf("Unable to Halt core %d\n", PROC_ID_HSM_M4F);
+>> +        goto release_proc_ctrl;
+>> +    }
+>> +
+>> +    /*
+>> +     * Load the HSM firmware into core's internal memory.
+>> +     *
+>> +     * In case of HS device types, request secure entity to authenticate and
+>> +     * load the HSM firmware into the core memory.
+>> +     * In case of GP device types, copy the HSM firmware into the core
+>> +     * memory manually.
+>> +     */
+>> +    device_type = get_device_type();
+>> +    if (device_type == K3_DEVICE_TYPE_HS_SE ||
+>> +        device_type == K3_DEVICE_TYPE_HS_FS) {
+>> +        ret = proc_ops->proc_auth_boot_image(ti_sci, &hsm_image_addr,
+>> +                             &hsm_image_size);
+>> +        if (ret) {
+>> +            printf("Unable to Authenticate and Boot HSM image; ret = %d\n",
+>> +                   ret);
+>> +            goto release_proc_ctrl;
+>> +        }
+>> +    } else if (device_type == K3_DEVICE_TYPE_GP) {
+>> +        debug("Loading HSM GP binary into SRAM0_0\n");
+>> +        memcpy((void *)HSM_SRAM0_0_ADDR, (void *)(u32)hsm_image_addr,
+>> +               hsm_image_size);
+>> +        flush_dcache_range(HSM_SRAM0_0_ADDR,
+>> +                   HSM_SRAM0_0_ADDR + hsm_image_size);
+>> +    }
+>> +
+>> +    /* Release the reset from the remote processor*/
+>> +    ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F, 0,
+>> +                       PROC_BOOT_CTRL_RESET_FLAG_HSM_M4);
+>> +    if (ret)
+>> +        printf("Unable to Run core %d\n", PROC_ID_HSM_M4F);
+>> +
+>> +release_proc_ctrl:
+>> +    /* Release Control of Remote Processor */
+>> +    proc_ops->proc_release(ti_sci, PROC_ID_HSM_M4F);
+>> +    return ret;
+>> +}
+>> +#endif
+>> +
+>>   void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+>>   {
+>>       typedef void __noreturn (*image_entry_noargs_t)(void);
+>> @@ -157,6 +231,14 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+>>                        &loadaddr);
+>>       }
+>>   +#if IS_ENABLED(CONFIG_K3_HSM_FW)
+>> +    ret = boot_hsm_core();
+>> +    if (ret)
+>> +        printf("HSM core failed to boot, %d\n", ret);
+>> +    else
+>> +        printf("Successfully booted HSM core\n");
+>> +#endif
+>> +
+>>       /*
+>>        * It is assumed that remoteproc device 1 is the corresponding
+>>        * Cortex-A core which runs ATF. Make sure DT reflects the same.
+>> @@ -342,7 +424,7 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
+>>        * Only DM and the DTBs are being authenticated here,
+>>        * rest will be authenticated when A72 cluster is up
+>>        */
+>> -    if ((i != IMAGE_ID_ATF) && (i != IMAGE_ID_OPTEE)) {
+>> +    if (i != IMAGE_ID_ATF && i != IMAGE_ID_OPTEE && i != IMAGE_ID_HSM) {
+>>           ti_secure_image_check_binary(p_image, p_size);
+>>           ti_secure_image_post_process(p_image, p_size);
+>>       } else {
