@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45273C369D5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:34:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31D75C369D5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:34:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F12EE80F9C;
-	Thu, 24 Apr 2025 08:34:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 574E381F4D;
+	Thu, 24 Apr 2025 08:34:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="N1ytKhox";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="BJg44DBM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D853F819FC; Thu, 24 Apr 2025 08:34:04 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 1331F81F4D; Thu, 24 Apr 2025 08:34:07 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B42CB80FF7
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:34:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA21180FF7
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:34:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=evzY47CEsa6dD4iso1aHTxMbnMomq1/cWcKwHrPRFDgP97o4vBdNSE4G5UwrbTMkYqnZwcKU7cdhFcZhxwdNAPoszBtoCCRRXN2lbUPY2+N4LesIYdv0TH3c7u5Vn+iEXzHmKxK92Ci5FND+vresSIc87ta4z2R6UcdbTVmcKhiyA86JaI7js41Sdqa6OYY3CtTTsVfOEVpj1DhyQ4efvy/bTRHlffFsY9HP1FTlS+PQy4jTfrqa52f7jbTpHktul1kIdIW7yrpViJj8ENB8F0ZGG2NqfvVcVtEO30h3O9VpEqUPXHpc3mRA0SNXAXjiaXzgg11BkH+NpWFn1xr6zg==
+ b=JFktJFCUuHDZssemFJVhJrHU/Y+2pUj3fmNbov0Hx97/WJt0gaEUa53yGO8I481bFzMbdGtbCNJhuOJiIwY45FgGfjHsqIflcHON07uBbLpPqEJLqBHSDAIOSbl9WgwcDJUGz5nXxLa27QT40RmrkrYjbRE32j8uYqw9nSZyXrwYzekOV4TCZ/3+2KL96bIDhLshHoXLf+oLK5V9SBjaeNYUzfiVAM6LnNuYZ4kQsaEl5QckbPLADU8gRElnQY/9dDyOsHOJvnShSDVBYde/PAmBDutKvH6TOF+nYJhR9TH2hbDEPpqIQ45hndTOxcxW8Vk/KVjfZx5dS3xBBcqmXQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P9bgJdxApWO0OK5m2ceaNl0WHVX+MUokdfxvbc9cgBg=;
- b=PZDXcJ7ii/iOAJ09yiCbZwgNkXmWeH3wt+DIaj0xDZX39AbEBUJiShvIWeG/qlR8j+3Z/r7hPZjhVNSIXhKWggleSYTu3N+6EBLQfYM/GOGAvM412rPetjntyJE/EvuB+elen6Q/w/T3oMbAKNWSSNxU8lJFpgJ+UvvakNyKEFggeiKCGeIdYYu6M7EZpYTzDiA4HlrWQjtCuvfn8x6snQyqCFaAGfC+OOkBEZgSGR7NqjCLRSauMBq3BStmZYxyYZjwYvijTHvlTrB55PLcLGpnYfY08PMII/xl/NYQWPfJyEba7JJcaikqu06leFYC2JSwyMC8WPNZI/zGE3+0Cg==
+ bh=0t3KYe6uAPJZ2aZ82fbgEZehFB+sxzS9i1r7pAUI1Jo=;
+ b=r74tumN20CEqYBtRE8gQ3N0sh4lnWe6ZmAbdchsCXXJSBjjdZENsNF8ypCb8K2RBcUg3VFPcAkS2g0/00wcTdU9TSEfP5yoQkFSuhtomRB4QEGKWZiA+jwWYJlxg/RkGN6hFtA1MMFSKJxZh5zCBwpkGa1qwDxMGPqA5eQNJuheit4Ti+2WZzkhqDQqZl2MX/Nh48n5hIWxHT3XC6RvUIHxTS2uDZeR5wrBXoepNnzEKhJxNGra6xLZ2p1nlDxRh0OAsofu+aiqqsnAYbZK/Rp9I5Z4N4eCLdFMbleEvlvI0dBUoUPBbSHdGCW/DliACe7fFis9pZzjWYotRmrvSfA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P9bgJdxApWO0OK5m2ceaNl0WHVX+MUokdfxvbc9cgBg=;
- b=N1ytKhoxQAl3A7gwzGV9ZIPo1wdpWsrXYf74hfczgMOLN/3cFQBZ1S/PvgtLGcYuHTIYMltjmxuLY+OjfqdGJz3E6XaIyxjNjWbCWh7ZIgLARAG5ws/ahFyuwmeMt7DWimLjRxn/jY0bmKxuA9nghFuA1aSCVJ3VkAGM7b84SsolEypD0x/9t4BpfniEAq2vOfegvOEv0WA8Dld0dbfd/NqyECLv0J1uTHW0OaD9E7w4V4PTo9nm41mhTxjYqANHHPG4OAtvHO8QECOEmIc/Yw+Vdpu7j4v783I075t/gDZwT83AgWCya5iY/zBR9aOTURLLZjtoUegyN+BrSESezg==
+ bh=0t3KYe6uAPJZ2aZ82fbgEZehFB+sxzS9i1r7pAUI1Jo=;
+ b=BJg44DBM06OZ1990tUyuMqfl7FKT4sWw4Y2AC20qCHULd2SKqmDxey5pd8IvlLhQtWR7LjH7Ic2bRYCxCxXyS5vlXhJnYMaMgUECe0Z//paTYF5UaWBjFEM3fSdsv4qAU7xIb2+LdTeEgDKtT5w03LbuXBiudPk/Btmmu8xP188Jkvx/VOZS5YlwZDdT96axZ//eXI0QC+DwMUvHeJeLd7RKQrnEOvqEb0L9LjO9J5rz2nNXGzL8ERtcZVsShDPWQIVv4OAfTqDvwogvy9BRCbXjFmfklwe29P8XBREBkoc+KCvC//PAsafUdcKSHd0jBLtj0SalTdVRmFQW+6lQxw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by DBBPR04MB7738.eurprd04.prod.outlook.com (2603:10a6:10:1ea::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.24; Thu, 24 Apr
- 2025 06:33:59 +0000
+ 2025 06:34:03 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8678.021; Thu, 24 Apr 2025
- 06:33:59 +0000
+ 06:34:03 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Date: Thu, 24 Apr 2025 14:32:58 +0800
-Subject: [PATCH v10 02/21] firmware: scmi: use scmi_proto_driver_get()
- function to get SCMI protocol driver
+Date: Thu, 24 Apr 2025 14:32:59 +0800
+Subject: [PATCH v10 03/21] pinctrl: nxp: add a pin controller driver based
+ on SCMI pin control protocol
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250424-imx95-v1-2-10a8449b1e5e@oss.nxp.com>
+Message-Id: <20250424-imx95-v1-3-10a8449b1e5e@oss.nxp.com>
 References: <20250424-imx95-v1-0-10a8449b1e5e@oss.nxp.com>
 In-Reply-To: <20250424-imx95-v1-0-10a8449b1e5e@oss.nxp.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -67,7 +67,9 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>, 
  Fabio Estevam <festevam@gmail.com>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
+ Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
 X-Mailer: b4 0.13.0
 X-ClientProxiedBy: SG2PR01CA0140.apcprd01.prod.exchangelabs.com
  (2603:1096:4:8f::20) To PAXPR04MB9644.eurprd04.prod.outlook.com
@@ -76,96 +78,96 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DBBPR04MB7738:EE_
-X-MS-Office365-Filtering-Correlation-Id: 03a66e5c-e31c-46b6-dd04-08dd82f9fecd
+X-MS-Office365-Filtering-Correlation-Id: a5fa2a3f-1aa0-4a1e-1530-08dd82fa014c
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|376014|7416014|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?c0xPWVduVlJCclY2Mk9yR2JCUXg4dVdGSjR3NTdpd0pTSFludzFPNFlON3lE?=
- =?utf-8?B?MWdzNkxOMm9PWUtKZWxjanUrRXZqTm5HQlFqaTc3bUs4b1NKQ1l1WUF6eUpt?=
- =?utf-8?B?aS85ZWpNZjY2dnBQdjcwdmJLSHBXdEdKUmpJbmdJL0w0QlN3ODNHbzZ1UWZs?=
- =?utf-8?B?cDRSb090OTV0dTlwdkozZ1NpMFBNSWN4cTdGRXloMFRMQ3lyYmF6RlBlRGJT?=
- =?utf-8?B?SUdqZ3phTWNwU1VNRi8yZDFjdEwybVdodThYd2VEVVNybkwvU2xOeFVLcnhL?=
- =?utf-8?B?MytDL0xPcGhrUW1lK3R6QjVpMWxYaVl0RHplMzUwTXRpQnlRSmNtRjEvcEVs?=
- =?utf-8?B?aGlRdm8xRVF4Z2YxYU4rekFkbGFqL3R6d0NTdU8wWDdHZWl6QlpKdUlWUlZ0?=
- =?utf-8?B?VU5hSng3UVN3V0k3ZnlLVHZya3ZPQmpoTnlnM3JhTDNsRU5NNmltZjduMW11?=
- =?utf-8?B?NmdDcTdLaTl4RktmL2cwWHZreFBqeUY4SE02TDRpM0cwdWJhMTJVUW5kZzBj?=
- =?utf-8?B?TFFQSURBYTlMNVhUYVpadHN4KzBiZzgxeHdCVE41WWVVS0ZzWm81dDNDL2Fs?=
- =?utf-8?B?RXFUNjU5M242YVlSeFV0OEhqcUV6NjJpNExSUFpPd1Y3NXdiNEgrNEl1cytP?=
- =?utf-8?B?QWgzTTZEdVJsNVM5dTRUM1pRdDdSVXUxT0xCQU4zb1crb2k3MWxUUnhGSnFB?=
- =?utf-8?B?dzNCSkZuV1hWSUlZbERHRjRoSFZ3d2U1c2tlM0haNDZ1UzdkV1VvbXNyR1Fx?=
- =?utf-8?B?YmVaN05iMHVyNVVJSW1EdWN5OTFPLzFwTk9BREQwT3krZFp1cWREMTYzODEv?=
- =?utf-8?B?Ull3VndsSjFySmRldEZTamNDaVpray96QjV5cUl2Ym80NTFrTGszSmNSZHZF?=
- =?utf-8?B?ZjRhemY0MFJpSDhrMW1uTnR0OUVDZWxaVW0vTUp4K0UzeGFJS01ZejBCbC9C?=
- =?utf-8?B?SFg0TE5Lc2NPYVFMSklFSjlUMFordkx3aVJtUmNHNmZNNGZKUWhYamRrdEda?=
- =?utf-8?B?SDhobkJCRDRqWVZGemZJZCs4ZlU0QUJtdVRqbTFKaFVLQU50a3pDZ1dsV2Q3?=
- =?utf-8?B?VW1BR3paeGd3U1BrdzFOL2dSOEwrelhMRnVUY3g1Z1o1dVgrS0ZmQ3BuU0w4?=
- =?utf-8?B?ejJOSktkYithV1UwSWs5Uk1iM3JBNHNMdHhhMUVHNkljK3RCQmF5eHFibEtJ?=
- =?utf-8?B?RnIyY0kyNHc3ZThINDNQcmtjN1ZpSWtCb05yNDJjQUNvSVNxRVpWUVpITld5?=
- =?utf-8?B?eEg1akMzUDhyL2FUTUJvUlJZelhmZUNlYmdNL2tpQ0ZFRDlrOXNQNnB2SVh0?=
- =?utf-8?B?S3JkYTVteWh6RlRVcHVZY0w3bHluVGhmYVVaNjF1NEptR3M2ZTU4cjZ2ODlr?=
- =?utf-8?B?R1VhQTNyQ3hmN0lGaU1NYXFxUDJZejZUQUoxOEdPQlZBK2FZYUZvK3JScnlW?=
- =?utf-8?B?OGZTY0U1KzkwMk5KUUV0SlBTRGFwUW5qaFYrbzZLajMyb0RhK0tYbVVrOUor?=
- =?utf-8?B?UGlsQXYwellqU0RiUVdQVGVlK1BwVSt6SWY1b0ZHdy92UjVQQkJ1Nzl3VjN2?=
- =?utf-8?B?SGRIZFpITVpjc1hreVBnNGU0VHlMS0ozRlR2RGdkcEJVUmZBeHI5dmIzbFoy?=
- =?utf-8?B?OWwxbDBQVGExdUhaMmlweTljMFdlRi8vTlRpRUJGTDRGamlMZUYxVUowYnVW?=
- =?utf-8?B?NlEyNnpKYjdIT210cWZOUG41S0xZUlRkSnVHM0lUS3JLc0RDc1RNU21EL3FV?=
- =?utf-8?B?dmR4aldwSTBTS2plM2ZBSDFoRGlBVXE2M0JuaTZ5ZTAyTTBtZmtESm5SNndT?=
- =?utf-8?B?aFJkMXZPUkpBQmkxVDl5TTR5aDdYb0pva0hnVk5JT09Kck5BQTA2UkpBekxo?=
- =?utf-8?B?RnI1MG9WZ2EyNXVqWnpJNm5FNnpOTXRobkZJVmViVEQ2N3g3RGlwRVhsWlhs?=
- =?utf-8?B?cG8ydjRhbk9mSStWblhXc3lDOE56WVlObTBFKzh2ek52SFpUbHhrY2doejlE?=
- =?utf-8?B?bEFwZ3RZak9BPT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?T3BjZTVvODZsREFxazZhb1VidTB2cjYvUC90UmlyLzJTSk9NNndKcnFaMGQx?=
+ =?utf-8?B?am4vdFJyM1phNnlBYTFwR3krQzF1cGlwaXRwc3FHTmlTejZSN1FQMVhqeVB2?=
+ =?utf-8?B?RW1uTVRXbVEvU3QwQXNvbnF1UzA3UHd4VXpSSGhrU1hzcW96WlJkS3FPSXYx?=
+ =?utf-8?B?aEdiOW1hSkdpcVMzbitaQW81NG5GR0pwNVFFZVdBZUh5VDdQcVFvU21ldmtH?=
+ =?utf-8?B?WklHRTZERnI4bHpQMUNqcFpnWUE5b0czSjFtZ1VTTXdEN0pFQy8ycHgvMUhX?=
+ =?utf-8?B?R0RaU2VIYVM2cU5oS0l6M1l4eU5ndWMrSWQwQnVZZkdsNU9Ub2xtWFZWOWI5?=
+ =?utf-8?B?T3hnTHJ2WGIwdnhwMlhWMXdmT3Jab0w3Nzc2Wk5aWVBiS1lpRVhwcnkxR2s3?=
+ =?utf-8?B?aVJWUzlSbWMyVldjNVlETTFwZGh6WEVJaFJyMXVhRjg1T1FtUlFjMENWNUEr?=
+ =?utf-8?B?UmlvUi9nK0pWdGV0dm9LeUl4aUVNc0hrcCtSQXhPQzBqWE1adFZaTzlpQS93?=
+ =?utf-8?B?KzBacDdwWGVjWnREVDVReVE5cDJiNkwwQmFtdmRUT2duZjBUb1VkZXUxQ2Rs?=
+ =?utf-8?B?MWgraHJBNnFaV1ZPNUthekhWVXgzSVVwREQ5RjlMSU5BaVRtRzFrTWp6N0lr?=
+ =?utf-8?B?UHRBZGRocjkrZVduWUxkTlp2bDQrOWRTa2x3MTlPbHJvSFNOMW1XYi90SGQ1?=
+ =?utf-8?B?QkxPTnZYQURnQXYySjY3enZCTGxwQmF3VGdaWFFEQmZhcjdDb0hBemltaUU2?=
+ =?utf-8?B?c01COGhPS0RvQ1VNd1Q0V210TEhLZ29maXd2eXJYQ21SNDBFL1cwNko4cWRI?=
+ =?utf-8?B?MWhrTEpuZ1luMldncGd3c2o0bjRNc3hBbHJ4dWZoekZiVXYrb2NIVTZsMEV2?=
+ =?utf-8?B?dk1YVlBpRGM5Mnd2YS9wVisydy80VHd2dHJlaUFpV29QMW8rTFNzcjdrTVpQ?=
+ =?utf-8?B?R01HZ0JxSFRjakJuR3pFckRHbkRIbmtvL0VsTzlZa0huaVlmSkZOYkJ0b0Nz?=
+ =?utf-8?B?RzQrcHNJVDJiaVpyZGxvbjkwdlo3LzkrTUMrdGl5akR4ek5ZNlRMSTZWZFg3?=
+ =?utf-8?B?ODl4N0pRM0I3MFordDhsVXdma1UwdjIvK0tDQVhITHFKaXNYeElMRlhKNnV5?=
+ =?utf-8?B?NDZOV25KVS9NaTNMVEFKbTN0a0tIQmNOWExsTzJIRDRCYnZYdzI3VmlBZCtl?=
+ =?utf-8?B?dUY0OWZ1aFdhTDRTUWZzTEtaNVIybVV1WUEzU05SblZTZDNkSll4Qm03ZXRM?=
+ =?utf-8?B?clZMS1ZPRCt4RkVCZjRoYzgxVE9Xa0RQRmJ3NVFGNFB5ZEpMRlVMbTVVNkdw?=
+ =?utf-8?B?SE51dGkreWpETytoazJuREVBMUg1VmZubDhSUDg0ZHJkenY4M0QyTU40ZWdJ?=
+ =?utf-8?B?ZUNLb1lSUjFESEM4ckd3M2syWlpiZmpFSlhNbUprd1RON0VFUnNQRjlnSnpN?=
+ =?utf-8?B?S08venJrZEcxYUluY29TSC94UWVpSEc4Lyt1eXc0MHkvRUJWQ2NkTTdBZmts?=
+ =?utf-8?B?OFFWTlNabjNTaXNBbU5mcjhMZEFRcXlYTWw4blpmY21HbUZKaWNNSzY5bGJB?=
+ =?utf-8?B?UTN5SkFVa0NVWXQ2VEZCWGFNeGJZclFtU3FCbDJORTd2QnFSNFpmeGRRd2hj?=
+ =?utf-8?B?bHJpZWVhckFjalFpZk9XMHJySGpxRDExdDloUnpKOVQ2b1hNa1F0WXI4b1Iz?=
+ =?utf-8?B?emxsaXpSNXlDM005YWJldnl3TVUyL3lJT0pWTkhSZ2FUS0JMd0FseENRWFYx?=
+ =?utf-8?B?Rk01YlRoK1lHRk1JOEhFdFN5L1V4cU5MTm5Rd1hmTmduSnJqRDllSzY2WVlV?=
+ =?utf-8?B?K0RjTHJjRkZzN291WjR5WlR0K0FtRGJvRW1XdWxwUUQ3NVl3Q0twWlQzdVkv?=
+ =?utf-8?B?MmdpdlV4MXU0OUk0TFlJNjB6bEJ5dWMwS0dIMmcyQVl6Nlg0OC9Dd1o5THVq?=
+ =?utf-8?B?NHoyREdIb0wyNUFnMytQazFhNHErNTVNc2JhZFJGU3BIbGdmd21jVjhVMWpq?=
+ =?utf-8?B?eHRycWJJdnpBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(52116014)(376014)(7416014)(366016)(1800799024)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UmhOQ21jeTVZczI0QjM0NUQ0azNMem0zWjF1YzkwTFNyK2hnb2RXM0J0Yll6?=
- =?utf-8?B?T1BMaGV4OUd2eDVpK0dvcXhPRW5GeGFIdVpYUUcyV3o5bDZhYjVuWlpkVlZy?=
- =?utf-8?B?TVVON25GdjF5aWNueE1aaUpTV1RjbkFET3V1ZDZGb0lsaWo1dlNIRWRDbktv?=
- =?utf-8?B?UjFoVkRoeXNNcDlJQ0F2WDlCM3NuMFlCSG5WbHFMSGxERGN3MHFGdlZNSll0?=
- =?utf-8?B?Zm5ZYlRtV3c5M2RmUGxDeVQzTytEYzFDamM0OWVxc3B4SkFZeU1OQURwbzVa?=
- =?utf-8?B?Vk93UFlCWWxJOXlPNFp1K3lPSWZxTGxlSkhBbE43dFQvK1Zuc01DZkFxdFQ2?=
- =?utf-8?B?MW4zMzcwNHJWZHZRNzZUdTYxTWQza0hzWEVtUy9NbGlySUlldWN5NVlxYXFB?=
- =?utf-8?B?Z0hUWVZwUkY2NWJQTVIvbjlWZlFlUjBFdmN6dUxUaWlsZ0ZlOVBtazNkaEdI?=
- =?utf-8?B?TVdlcWxDWDkvVXM4Z3dtaXQwQURkRFphNVlDUkpXT2Y5UGUrSHJ3bkwvdU1m?=
- =?utf-8?B?SGFXZ1R1K3J2UzRNRmU2clVIZlE5K3M5TVNUNlRTT1IxbW9USzh2YXlqbGtj?=
- =?utf-8?B?RE1WNk5XbVZoZjFWNTdGTXl0S2tna2dZMDJkbWJHcDM0bXpRUmNOR3RYZ0Fu?=
- =?utf-8?B?UGpLcG1kZE95ak51bTBON2RoVmxNN2tlN0k3b090bWRmNVVlTndyZU5WbENK?=
- =?utf-8?B?SG1YOFdaamNsWFlQOFJ6T3FXNVh4a01XaWFsNi9td0t6RkJtdGpjdFg5RFZt?=
- =?utf-8?B?WG9oTjlSOTA0bFowVDJLcWdheWZISXc5RkZsOGNnQzJhbm9zSkRYakozSTV5?=
- =?utf-8?B?OXBKeWMxdjNzdXVkaDN1bGJrYW1iODhFbGR6eWprNUZhYW8wN09oRCtaMDFF?=
- =?utf-8?B?WUdkVjBnSFlYTjBNU1hZTVdtS2p6NGpJTklVdUdXSUFWOElETzZhZFlUdi9T?=
- =?utf-8?B?R04yYU5YUEdYYjU3WUk2NjZUOG1nT0ZFY2FPcVphdy9IL2MwMkNXVTMyd0cx?=
- =?utf-8?B?N1Q5emsxMzR6MGREL3NJdkZDYTlBSXg5ZURHNWpFNEtSb2hKNFJsTUp3Yis1?=
- =?utf-8?B?a0FGZ2FMV1YvR2tkMVFPUDJiTGc1bXpsL3dERkppZEFCcFlyem1IZGgvRG5I?=
- =?utf-8?B?RGhzYUREbSs3dWFhcUVxWnhma3NWRU9zaCtvOFN6bUpzYW5odVM3cmdBaCtJ?=
- =?utf-8?B?bFZnaDJCVjI4UG5uYm9DeUJkTHdBeVJjTGNCcXphTnFsOXJaRWJxMUUrVHE2?=
- =?utf-8?B?QngrQ0JiTllVQitCOUtML0xnaUxPVFIxTzY4NGxWTHNzb2IrdnoyTHhGTzl4?=
- =?utf-8?B?U0xrSW51aVhYRDBaUVFBOHpBeFlBRzY3ZVVTRWVnUHBOY1QxSFpmRy9JdjFJ?=
- =?utf-8?B?VVFZczNFWHUwMC9yWTZsazhHa1NrWE81RmFCb1RwRzM2WUhMTWpJbkd6V2Jl?=
- =?utf-8?B?MXNOakNGNVl2RW1YRU5QV3pEbUZkcTlUSEdEYnMyaVJNcTFjUHlNTWpHZWJm?=
- =?utf-8?B?aE9ZbHcvRGNOZFViQXZpeG5xc21lVy9MUkF4VE9Ra2tOT1FTSU4zODNBR0Y2?=
- =?utf-8?B?RVlSWUIyYXp4bU9UOTFwSHN0WTArcjNhbTdOdXVaNkJES3pGU3pUUFhkd1Np?=
- =?utf-8?B?dmZKTWtNd21hS09CTTI4NFhZc1ZCNVQxek5OVFhsZDRyakpWaVNCMGJMekJE?=
- =?utf-8?B?MU1jZHFKSWtSN24xVzdPTkxLeVVoQ2F5cXd5U01rTjZ2RzVuZzQxeW5PU1Jn?=
- =?utf-8?B?c2EvQmN4Ulc2MEh6TlAzV2ZvdnVmK3VSK3hNKytkejJwbkUxT1RCR0dNWmFz?=
- =?utf-8?B?Q2p0dk9KcVhITWVXQm85Tkx2ZXFJUG9XaGRwUlA3L0pyTkdDYTlBUTAwaC9p?=
- =?utf-8?B?cHVNV2pEQk5Pam1rTUh0VTljTzV3aXpXTG9OWjcySndzaG10cE1jN3VaVUpp?=
- =?utf-8?B?a3B0bDNnYnVVTWJ1VmdsSGY2QUdqRnRLL29KYWZ3M1h4czBZbkxtWXRKcUhm?=
- =?utf-8?B?VmV1Yy9xSjBQZFZ2US9KWGl0cmJrZG9jUllHZ1pYckdBdlZTRkdHN00yUkFI?=
- =?utf-8?B?TGdEN1N2R3NYYWxpb2lpMlpvOGxYWEs0S1prenVNRzRDcWF2V2kwYzB1RjJs?=
- =?utf-8?Q?LMvhAEl2uouUhrUZE/KCEEalW?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UGFZWkUxTlg3M3UvdEVNbWVvdThZT0FBa1ZMYWlVdWhoVjZHcng4Nnl1SUlH?=
+ =?utf-8?B?TElVNSt5U09OcmZuZ0FVTUZjU3VXdXBFb05uUGtmQXRPVVMxYkpqYTcwK3cv?=
+ =?utf-8?B?YVVkY2pZZjVLQUFvbGgxOWNkYVlLODZoWlM4Mm5nZnoxYWhET1dqdXpSMzVm?=
+ =?utf-8?B?YTBMM0paK3IzSC9ydzZXMy94Y0UrUitveFJWZGpoTzc0cGdSSFZaQmh4aEVl?=
+ =?utf-8?B?aGtzVGxXcmZ1TnFaV0VFYWhYVjMvazRPMTliaGZzRXFuTkh3bi9YbkVLK0VS?=
+ =?utf-8?B?eVA2U0RIcUh3YjdmUjY0aVU4U20wMWF0dVpYQ1BCTnMvTHZPL3VHZXpwUUdY?=
+ =?utf-8?B?NzZqZlhieFRMQTNyWXVhZnByMXJDaklDTlpZeGhsMmxmc01YM0FsVHY5S1lx?=
+ =?utf-8?B?TnZ1TGFrRC93alBEODVTWTQva01WTGRLa0NnL2REWkEyNCswNGcvTHg5RXZj?=
+ =?utf-8?B?Q3hWUWttS2VreWM4K3dVNW5PMVVlZmFONUtDL3RyckM3RmI4ZXBsVlptc1Vq?=
+ =?utf-8?B?algwNVF2WnJuUkUwQTFLN2lubmNOVytvN0xTblRrajVTK0hjZml2VlU1QTNk?=
+ =?utf-8?B?amlzYXVibUJwdU5sTmFsRE41SE5RUnpmUnd1TEViQUFFcjlnS2kyaUFvVExG?=
+ =?utf-8?B?N2N0UGVWbjJQNjZtSWcxcENuNDk3S2s5Z2Z3K2owaytkcTB1UFVsWFo4b1po?=
+ =?utf-8?B?QXFBYnZsM0RsVEwyV05Pd2VsMzRSaFc3T2lxdHVMd0tuUkR5cUh3SndWaTFq?=
+ =?utf-8?B?VFY3eFBScEtILzh0Z3Z4UTJZWloyV29pa1pjMVlMQ2ZEOEV1RXp4MmFWSHJM?=
+ =?utf-8?B?Vk1tTXFDeFo5QUZscHNWcW1CUVg3UTMxNG5panNWbU51UzdhSFN2U3hlRTJu?=
+ =?utf-8?B?VExFSEhQcjJxOEtWakRhYXBQMnFDQjZGcjlTNWxCbVpiSVhPTXBYQTZoWXFJ?=
+ =?utf-8?B?ZkNISy9oZmJLNG94eENJdURTaWxpeHRLa2l3UERDSjkrUkd4QjZwNVREYTN2?=
+ =?utf-8?B?Qk0weVhqeW1NbFh0WHBTSHJVaG1Td0lLcjdNUkdsdG0rYnlJYXhpQndyT0NJ?=
+ =?utf-8?B?b1lvUlFyalRwUndmWS82YmZTVzdrb2g2dlJnM3VHR1M1U1VGckVHbEVVeG02?=
+ =?utf-8?B?bFZPV0Q0TFRGWVMyL3RWeEJKdytqaklVQXB3OVlvYWtyNVVQRUxQU2R2Tk9s?=
+ =?utf-8?B?eDI2OUcwZGgwWEJlc05IR25KTzdMc0E4Ny9DdDdSV0ZPeTlsZFcwLzFNM1Zr?=
+ =?utf-8?B?T2hLVDNPVmttNUdRWnEvdUxOVmdNYklBSU1sUTIwcWx0bndlQ1BGMDJNTjlY?=
+ =?utf-8?B?cGowdTFJMTkyeGZLRmd0M1JMWjNpNTlMR3plbTJxSzlDUUpkT0IzeEI1R215?=
+ =?utf-8?B?ZVdoUWU4MW9pdk1PM3pUUTJ1bTZNelhCNUI3d21HTTh3OFV4QXlXeFdMV1lB?=
+ =?utf-8?B?eXBVWEJwT05WcXAveVpuZ2hjQk1CaTZpRHIzYnJvTG5tQzRIYlBEMHNmNnAv?=
+ =?utf-8?B?UmV5Mkc4OU1NR2xRWStad3N5YkRGbFl6bHE1UTJqbGhTaTU5SWxRcWJSMWZH?=
+ =?utf-8?B?Wk9iekVPYlpnSnlDaEdzSWxuZEVKTzV3VEdaeXl6UExJMlViTHZsNXpwSlo4?=
+ =?utf-8?B?blRrSWZLLzU1cUlQRzYzdXBrcWVOTHR5WlhLZ1IyZitGSDVZSWc3TFFFMGpz?=
+ =?utf-8?B?eW8wMFVRa1B6dGtYUTR6dUdXWENYMHhEcTZCdjUwN1EvNkNDczNPVFJIbnRR?=
+ =?utf-8?B?Q1hTT0tUdzZ1ZmsvdDhKakh0emVQeXRmb0VDeEloQjhLTXIyNzVEdC80Z0U1?=
+ =?utf-8?B?dFBTTWt4bXpEU3FmY1U2Y2N2RFBMU3VINnRjOHN0K1BEaVVyK3NRdmR2Y3dG?=
+ =?utf-8?B?dXkrRFFocUk2ekFlTjdxamp3SXIxYTdVdGpEb2t5Q3lWT2Ixb1pBQ29FV0lY?=
+ =?utf-8?B?TkRRZkVpM2p6NW1BVjNJaUNBYzNqMEZwUGV4WkJGWDhxdzI0M3ZoSWlBcWZB?=
+ =?utf-8?B?Vjd2ejVkbjR3R3NhRXpvd3JDdGswOURyOTFXRGZPU3hCWmFTNEQzTVBMTDUr?=
+ =?utf-8?B?VmJZRUdoUERoVzNBVStwN3I3Y1d4ZTFDKythd1VPZmtKbHd0bHNQdUlzTVV4?=
+ =?utf-8?Q?sXFGnjFgsGYQJDOGORXocRTug?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03a66e5c-e31c-46b6-dd04-08dd82f9fecd
+X-MS-Exchange-CrossTenant-Network-Message-Id: a5fa2a3f-1aa0-4a1e-1530-08dd82fa014c
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 06:33:59.1334 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 06:34:03.3523 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yvyny6PB7jaJJkJZSxWRIp9EMwrGv/50nk2RoMt+kK+EX0hTmVBliOKB4wGxBONpg85yM/0gwKuCTxtqa8m3Tg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: rfyX9ayHCQUUPtxkg3HRjbpJ0jTtF9OgJH6mJrjqcu0maM8OqHC9ej3I4JtiCUDJby9aPThjD+Lr8TF88qG5fQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7738
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -185,151 +187,265 @@ X-Virus-Status: Clean
 
 From: Alice Guo <alice.guo@nxp.com>
 
-If there is a SoC specific SCMI protocol driver, using
-scmi_proto_driver_get() function can avoid to add SoC specific code to
-scmi_agent-uclass.c.
+This patch provides a pinctrl driver based on SCMI pin control protocol.
+Currently, only the PINCTRL_CONFIG_SET command is implemented.
 
+Signed-off-by: Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Reviewed-by: Ye Li <ye.li@nxp.com>
 ---
- drivers/clk/clk_scmi.c                    |  8 ++++++++
- drivers/firmware/scmi/scmi_agent-uclass.c | 28 ++++------------------------
- drivers/power/domain/scmi-power-domain.c  |  8 ++++++++
- drivers/power/regulator/scmi_regulator.c  |  8 ++++++++
- drivers/reset/reset-scmi.c                |  8 ++++++++
- 5 files changed, 36 insertions(+), 24 deletions(-)
+ drivers/pinctrl/nxp/Kconfig            |  13 +++
+ drivers/pinctrl/nxp/Makefile           |   1 +
+ drivers/pinctrl/nxp/pinctrl-imx-scmi.c | 154 +++++++++++++++++++++++++++++++++
+ include/scmi_protocols.h               |  36 ++++++++
+ 4 files changed, 204 insertions(+)
 
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index e42d2032d45..b8d40cc9653 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -8,6 +8,7 @@
- #include <clk-uclass.h>
- #include <dm.h>
- #include <scmi_agent.h>
-+#include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
- #include <asm/types.h>
- #include <linux/clk-provider.h>
-@@ -191,3 +192,10 @@ U_BOOT_DRIVER(scmi_clock) = {
- 	.ops = &scmi_clk_ops,
- 	.probe = scmi_clk_probe,
- };
+diff --git a/drivers/pinctrl/nxp/Kconfig b/drivers/pinctrl/nxp/Kconfig
+index d13c5f2a6d5..84d9a3641ff 100644
+--- a/drivers/pinctrl/nxp/Kconfig
++++ b/drivers/pinctrl/nxp/Kconfig
+@@ -139,6 +139,19 @@ config PINCTRL_IMXRT
+ 	  only parses the 'fsl,pins' property and configure related
+ 	  registers.
+ 
++config PINCTRL_IMX_SCMI
++	bool "IMX pinctrl SCMI driver"
++	depends on ARCH_IMX9 && PINCTRL_FULL
++	select PINCTRL_IMX
++	help
++	  This provides a simple pinctrl driver for i.MX SoC which supports
++	  SCMI. This feature depends on device tree configuration. This driver
++	  is different from the linux one, this is a simple implementation,
++	  only parses the 'fsl,pins' property and configure related
++	  registers.
 +
-+static struct scmi_proto_match match[] = {
-+	{ .proto_id = SCMI_PROTOCOL_ID_CLOCK },
-+	{ /* Sentinel */ }
++	  Say Y here to enable the imx pinctrl SCMI driver
++
+ config PINCTRL_VYBRID
+ 	bool "Vybrid (vf610) pinctrl driver"
+ 	depends on ARCH_VF610 && PINCTRL_FULL
+diff --git a/drivers/pinctrl/nxp/Makefile b/drivers/pinctrl/nxp/Makefile
+index 44e37c631e5..7d861ae52c1 100644
+--- a/drivers/pinctrl/nxp/Makefile
++++ b/drivers/pinctrl/nxp/Makefile
+@@ -11,3 +11,4 @@ obj-$(CONFIG_PINCTRL_IMX93)		+= pinctrl-imx93.o
+ obj-$(CONFIG_PINCTRL_MXS)		+= pinctrl-mxs.o
+ obj-$(CONFIG_PINCTRL_VYBRID)		+= pinctrl-vf610.o
+ obj-$(CONFIG_PINCTRL_IMXRT)		+= pinctrl-imxrt.o
++obj-$(CONFIG_PINCTRL_IMX_SCMI)		+= pinctrl-imx-scmi.o
+diff --git a/drivers/pinctrl/nxp/pinctrl-imx-scmi.c b/drivers/pinctrl/nxp/pinctrl-imx-scmi.c
+new file mode 100644
+index 00000000000..20ea55d40ae
+--- /dev/null
++++ b/drivers/pinctrl/nxp/pinctrl-imx-scmi.c
+@@ -0,0 +1,154 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2025 NXP
++ */
++
++#include <asm/io.h>
++#include <asm/mach-imx/sys_proto.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <dm/pinctrl.h>
++#include <scmi_agent.h>
++#include <scmi_protocols.h>
++
++#include "pinctrl-imx.h"
++
++#define DAISY_OFFSET_IMX95      0x408
++
++/* SCMI pin control types */
++#define PINCTRL_TYPE_MUX        192
++#define PINCTRL_TYPE_CONFIG     193
++#define PINCTRL_TYPE_DAISY_ID   194
++#define PINCTRL_TYPE_DAISY_CFG  195
++#define PINCTRL_NUM_CFGS_SHIFT  2
++
++struct imx_scmi_pinctrl_priv {
++	u16		daisy_offset;
 +};
 +
-+U_BOOT_SCMI_PROTO_DRIVER(scmi_clock, match);
-diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-index ea79cfa0cf2..cc3f31d881e 100644
---- a/drivers/firmware/scmi/scmi_agent-uclass.c
-+++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-@@ -425,31 +425,11 @@ static int scmi_bind_protocols(struct udevice *dev)
- 
- 		drv = NULL;
- 		name = ofnode_get_name(node);
--		switch (protocol_id) {
--		case SCMI_PROTOCOL_ID_POWER_DOMAIN:
--			if (CONFIG_IS_ENABLED(SCMI_POWER_DOMAIN) &&
--			    scmi_protocol_is_supported(dev, protocol_id))
--				drv = DM_DRIVER_GET(scmi_power_domain);
--			break;
--		case SCMI_PROTOCOL_ID_CLOCK:
--			if (CONFIG_IS_ENABLED(CLK_SCMI) &&
--			    scmi_protocol_is_supported(dev, protocol_id))
--				drv = DM_DRIVER_GET(scmi_clock);
--			break;
--		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
--			if (IS_ENABLED(CONFIG_RESET_SCMI) &&
--			    scmi_protocol_is_supported(dev, protocol_id))
--				drv = DM_DRIVER_GET(scmi_reset_domain);
--			break;
--		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
--			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI) &&
--			    scmi_protocol_is_supported(dev, protocol_id))
--				drv = DM_DRIVER_GET(scmi_voltage_domain);
--			break;
--		default:
--			break;
--		}
- 
-+		if (!scmi_protocol_is_supported(dev, protocol_id))
-+			continue;
++static int imx_pinconf_scmi_set(struct udevice *dev, u32 mux_ofs, u32 mux, u32 config_val,
++				u32 input_ofs, u32 input_val)
++{
++	struct imx_scmi_pinctrl_priv *priv = dev_get_priv(dev);
++	int ret, num_cfgs = 0;
++	struct scmi_msg msg;
 +
-+		drv = scmi_proto_driver_get(protocol_id);
- 		if (!drv) {
- 			dev_dbg(dev, "Ignore unsupported SCMI protocol %#x\n",
- 				protocol_id);
-diff --git a/drivers/power/domain/scmi-power-domain.c b/drivers/power/domain/scmi-power-domain.c
-index 3cd0f075d95..e8c0ba8878e 100644
---- a/drivers/power/domain/scmi-power-domain.c
-+++ b/drivers/power/domain/scmi-power-domain.c
-@@ -11,6 +11,7 @@
- #include <power-domain.h>
- #include <power-domain-uclass.h>
- #include <scmi_agent.h>
-+#include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
- #include <dm/device_compat.h>
- 
-@@ -190,3 +191,10 @@ U_BOOT_DRIVER(scmi_power_domain) = {
- 	.probe = scmi_power_domain_probe,
- 	.priv_auto = sizeof(struct scmi_power_domain_priv),
- };
++	/* Call SCMI API to set the pin mux and configuration. */
++	struct scmi_pinctrl_config_set_out out;
++	struct scmi_pinctrl_config_set_in in = {
++		.identifier = mux_ofs / 4,
++		.function_id = 0xFFFFFFFF,
++		.attributes = 0,
++	};
 +
-+static struct scmi_proto_match match[] = {
-+	{ .proto_id = SCMI_PROTOCOL_ID_POWER_DOMAIN },
-+	{ /* Sentinel */ }
++	if (mux_ofs) {
++		in.configs[num_cfgs].type = PINCTRL_TYPE_MUX;
++		in.configs[num_cfgs].val = mux;
++		num_cfgs++;
++	}
++
++	if (config_val) {
++		in.configs[num_cfgs].type = PINCTRL_TYPE_CONFIG;
++		in.configs[num_cfgs].val = config_val;
++		num_cfgs++;
++	}
++
++	if (input_ofs) {
++		in.configs[num_cfgs].type = PINCTRL_TYPE_DAISY_ID;
++		in.configs[num_cfgs].val = (input_ofs -  priv->daisy_offset) / 4;
++		num_cfgs++;
++		in.configs[num_cfgs].type = PINCTRL_TYPE_DAISY_CFG;
++		in.configs[num_cfgs].val = input_val;
++		num_cfgs++;
++	}
++
++	/* Update the number of configs sent in this call. */
++	in.attributes = num_cfgs << PINCTRL_NUM_CFGS_SHIFT;
++
++	msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_PINCTRL,
++			  SCMI_MSG_PINCTRL_CONFIG_SET, in, out);
++
++	ret = devm_scmi_process_msg(dev, &msg);
++	if (ret || out.status) {
++		dev_err(dev, "Failed to set PAD = %d, daisy = %d, scmi_err = %d, ret = %d\n",
++			mux_ofs / 4, input_ofs / 4, out.status, ret);
++	}
++
++	return ret;
++}
++
++static int imx_pinctrl_set_state_scmi(struct udevice *dev, struct udevice *config)
++{
++	int mux_ofs, mux, config_val, input_reg, input_val;
++	u32 *pin_data;
++	int i, j = 0;
++	int npins;
++	int ret;
++
++	ret = imx_pinctrl_set_state_common(dev, config, FSL_PIN_SIZE,
++					   &pin_data, &npins);
++	if (ret)
++		return ret;
++
++	/*
++	 * Refer to linux documentation for details:
++	 * Documentation/devicetree/bindings/pinctrl/fsl,imx-pinctrl.txt
++	 */
++	for (i = 0; i < npins; i++) {
++		mux_ofs = pin_data[j++];
++		/* Skip config_reg */
++		j++;
++		input_reg = pin_data[j++];
++
++		mux = pin_data[j++];
++		input_val = pin_data[j++];
++		config_val = pin_data[j++];
++
++		if (config_val & IMX_PAD_SION)
++			mux |= IOMUXC_CONFIG_SION;
++
++		config_val &= ~IMX_PAD_SION;
++
++		ret = imx_pinconf_scmi_set(dev, mux_ofs, mux, config_val, input_reg, input_val);
++		if (ret && ret != -EPERM) {
++			dev_err(dev, "Set pin %d, mux %d, val %d, error\n",
++				mux_ofs, mux, config_val);
++		}
++	}
++
++	return ret;
++}
++
++static const struct pinctrl_ops imx_scmi_pinctrl_ops = {
++	.set_state = imx_pinctrl_set_state_scmi,
 +};
 +
-+U_BOOT_SCMI_PROTO_DRIVER(scmi_power_domain, match);
-diff --git a/drivers/power/regulator/scmi_regulator.c b/drivers/power/regulator/scmi_regulator.c
-index 79db1a6a8aa..7d2db1e2bee 100644
---- a/drivers/power/regulator/scmi_regulator.c
-+++ b/drivers/power/regulator/scmi_regulator.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <errno.h>
- #include <scmi_agent.h>
-+#include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
- #include <asm/types.h>
- #include <dm/device.h>
-@@ -202,3 +203,10 @@ U_BOOT_DRIVER(scmi_voltage_domain) = {
- 	.id = UCLASS_NOP,
- 	.bind = scmi_regulator_bind,
- };
++static int imx_scmi_pinctrl_probe(struct udevice *dev)
++{
++	struct imx_scmi_pinctrl_priv *priv = dev_get_priv(dev);
 +
-+static struct scmi_proto_match match[] = {
-+	{ .proto_id = SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN },
-+	{ /* Sentinel */ }
++	if (IS_ENABLED(CONFIG_IMX95))
++		priv->daisy_offset = DAISY_OFFSET_IMX95;
++	else
++		return -EINVAL;
++
++	return devm_scmi_of_get_channel(dev);
++}
++
++static int imx_scmi_pinctrl_bind(struct udevice *dev)
++{
++	if (IS_ENABLED(CONFIG_IMX95))
++		return 0;
++
++	return -ENODEV;
++}
++
++U_BOOT_DRIVER(scmi_pinctrl_imx) = {
++	.name = "scmi_pinctrl_imx",
++	.id = UCLASS_PINCTRL,
++	.bind = imx_scmi_pinctrl_bind,
++	.probe = imx_scmi_pinctrl_probe,
++	.priv_auto = sizeof(struct imx_scmi_pinctrl_priv),
++	.ops = &imx_scmi_pinctrl_ops,
++	.flags = DM_FLAG_PRE_RELOC,
 +};
-+
-+U_BOOT_SCMI_PROTO_DRIVER(scmi_voltage_domain, match);
-diff --git a/drivers/reset/reset-scmi.c b/drivers/reset/reset-scmi.c
-index 6dc1fcb3365..f92a9e35579 100644
---- a/drivers/reset/reset-scmi.c
-+++ b/drivers/reset/reset-scmi.c
-@@ -9,6 +9,7 @@
- #include <errno.h>
- #include <reset-uclass.h>
- #include <scmi_agent.h>
-+#include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
- #include <asm/types.h>
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index 7abb2a6f36b..279ebbad440 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -24,6 +24,7 @@ enum scmi_std_protocol {
+ 	SCMI_PROTOCOL_ID_SENSOR = 0x15,
+ 	SCMI_PROTOCOL_ID_RESET_DOMAIN = 0x16,
+ 	SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN = 0x17,
++	SCMI_PROTOCOL_ID_PINCTRL = 0x19,
+ };
  
-@@ -81,3 +82,10 @@ U_BOOT_DRIVER(scmi_reset_domain) = {
- 	.ops = &scmi_reset_domain_ops,
- 	.probe = scmi_reset_probe,
+ enum scmi_status_code {
+@@ -1005,4 +1006,39 @@ struct scmi_voltd_level_get_out {
+ 	s32 voltage_level;
  };
-+
-+static struct scmi_proto_match match[] = {
-+	{ .proto_id = SCMI_PROTOCOL_ID_RESET_DOMAIN },
-+	{ /* Sentinel */ }
+ 
++/* SCMI Pinctrl Protocol */
++enum scmi_pinctrl_message_id {
++	SCMI_MSG_PINCTRL_CONFIG_SET = 0x6
 +};
 +
-+U_BOOT_SCMI_PROTO_DRIVER(scmi_reset_domain, match);
++struct scmi_pin_config {
++	u32 type;
++	u32 val;
++};
++
++/**
++ * struct scmi_pad_config_set_in - Message payload for PAD_CONFIG_SET command
++ * @identifier:		Identifier for the pin or group.
++ * @function_id:	Identifier for the function selected to be enabled
++ * 			for the selected pin or group. This field is set to
++ * 			0xFFFFFFFF if no function should be enabled by the
++ * 			pin or group.
++ * @attributes:		Bits[31:11] Reserved, must be zero.
++ * 			Bit[10] Function valid.
++ * 			Bits[9:2] Number of configurations to set.
++ * 			Bits[1:0] Selector: Whether the identifier field
++ * 				  refers to a pin or a group.
++ * @configs:	Array of configurations.
++ */
++struct scmi_pinctrl_config_set_in {
++	u32 identifier;
++	u32 function_id;
++	u32 attributes;
++	struct scmi_pin_config configs[4];
++};
++
++struct scmi_pinctrl_config_set_out {
++	s32 status;
++};
++
+ #endif /* _SCMI_PROTOCOLS_H */
 
 -- 
 2.43.0
