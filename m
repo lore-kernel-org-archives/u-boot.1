@@ -4,83 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8DDC369D5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 20:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE3EC369D7
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 20:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 020FC80BA8;
-	Thu, 24 Apr 2025 22:19:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
+	by phobos.denx.de (Postfix) with ESMTP id D3CD0809D4;
+	Thu, 24 Apr 2025 22:26:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BsLNVm0k";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AD958056A; Thu, 24 Apr 2025 22:19:49 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 330F180BA8; Thu, 24 Apr 2025 22:26:33 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1AA081D5D
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 22:19:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAC1E8056A
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 22:26:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=debian.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=grandpaul@gmail.com
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-7396f13b750so1614560b3a.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 13:19:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745525985; x=1746130785; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EqJ2/jVSMdtrxFKacJweFgaP6e++72nWfTIVTkeRVss=;
- b=BsLNVm0k7fioSNQw1PzXO+qPzNOWyvgzzYuv0gIKQOthlrUST+M/7BFnOZxYdmMMOs
- y4hI3zopBmzGJvtJfWSyKz7PF2E9YMu9Wnkk7gBchlkvIL0ef5sPqfcgUEOMzjJfqaNA
- TKssS5/wHAlTiNBILHETyk0dNv3pSDI4UqxlQ+D6KwEKUn1m5tcHPp/TYdtdvBEAyEy7
- Ul2JFCdJVVtp0X2lsesekfFJ8Q89rtIK6IBM8eYvuO6sBYi5UVMbrDa88rck1U3Vo6FF
- 33XNhx37DOyy106zfjNrJS31RHYHZYdodQouXe2wjm8OsMjTCCK4VrvX8Wcn+udL8X1a
- a4Cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745525985; x=1746130785;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=EqJ2/jVSMdtrxFKacJweFgaP6e++72nWfTIVTkeRVss=;
- b=C3iEEeUZzKU7NmTPUEvNoepxSMdVIB38StHM5wkXYbZYSVJ/Xa3GI6dZvl8jWGns/u
- JWeQrfxJN2kR62VstVxzQPq2MyyOIw51ml6zRUANTPHtivlf0HdFaY4OPU+6w0VQnVP9
- iJyDfGOKKQ63zd/ryoEZVnH1myO5WQw8etKjISoIcxmf3qmhpuc0q29QEYZ4zqRn6a1A
- YNKaXpnOOjlTaI91IwCVzuvk1cGBYvo2NCj6/oE3zMIMO4lYu6lDU3WNgZIzyk3gE0Qf
- VUfeAy2TI8cXKQH62O6AcBrnqOUlS66/ggEnNH9DTy6PAqnfP4edTctoN2iqe1FXQ4Gj
- kXyw==
-X-Gm-Message-State: AOJu0YyANYRD9qHXFFCvNbGpr5L/RCNmnXwn5y8FaI513hKTHLFWk0X/
- VBkQF1ElW3RgQu6s3FikaXaLFy2/cpseTdYm0R9aIHrROsRJeNqo1+98Mw==
-X-Gm-Gg: ASbGncvQ3C/v1u1PSitswtT0sTmg/LjRHGbWq0tghZBBLaFmGV1J/DrQN8fyjsBXJ7Z
- kSni+agTnq/ZhS9O/WbYLDnif0Y3P+Xo0+uUE8BmUa1p++JcKEppbl/WVY/1odE4qRzFCJeUAS9
- Vty8QXvnt2ShlU/Z7NREIFj+ktXQ6RzPO6I6p041Gh86apn7h/OXRAlQHLQjpaEVDAZNsp7nWP6
- 9d8QANfCdLF7OM7KbA3bvph21LPS4ToWMxY2ZFLr6/HD+dE9sx8A0gY/vdpzX10GxRm1goOCtfa
- QlAQUhg9ZwPOpJQmagx5v0Ak42E18jQ7FFil
-X-Google-Smtp-Source: AGHT+IH7VQmjlphnbh6fJ43S1wgw2wR9eAspbVopZdyqCUEZfSxCKzhqqSC5wphulm5d0ozBPw7T7w==
-X-Received: by 2002:a05:6a00:4685:b0:73e:30dc:bb9b with SMTP id
- d2e1a72fcca58-73e30dd11cdmr1608707b3a.2.1745525984806; 
- Thu, 24 Apr 2025 13:19:44 -0700 (PDT)
-Received: from localhost ([61.71.79.124]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-73e25a99a9esm1884419b3a.140.2025.04.24.13.19.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 13:19:44 -0700 (PDT)
-From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-To: u-boot@lists.denx.de
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2 3/3] efi: add EFI_DEBUG_IMAGE_INFO for debug
-Date: Fri, 25 Apr 2025 04:19:26 +0800
-Message-ID: <20250424201927.2027257-4-paulliu@debian.org>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250424201927.2027257-1-paulliu@debian.org>
-References: <20250424201927.2027257-1-paulliu@debian.org>
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.35] (unknown [98.97.25.173])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id BFBDFB4C1B1C;
+ Thu, 24 Apr 2025 22:26:27 +0200 (CEST)
+Message-ID: <e5e68920-cfa4-48f0-ba3a-301cf30c5eef@freeshell.de>
+Date: Thu, 24 Apr 2025 13:26:26 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 5/8] doc: add DeepComputing FML13V01 documentation
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
+ H Bell <dmoo_dv@protonmail.com>, Matthias Brugger <mbrugger@suse.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
+ <sjg@chromium.org>, Andreas Schwab <schwab@suse.de>, u-boot@lists.denx.de
+References: <20250424121315.144549-1-heinrich.schuchardt@canonical.com>
+ <20250424121315.144549-6-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250424121315.144549-6-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,222 +61,253 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Overall I think this patch is acceptable as-is and I'll be willing to
+make a later series with my suggestions; it's documentation so it is
+never really completed, I think, and I spend an hour or two editing then
+decide that what I want to do is its own other series. None of the what
+I'd like to suggest here should delay a PR for this series.
 
-This commit adds the functionality of generate EFI_DEBUG_IMAGE_INFO
-while loading the image.
+On 4/24/25 05:13, Heinrich Schuchardt wrote:
+> Describe building U-Boot for the board and booting.
+> 
+> Carve out common information for JH7110 boards into an include.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v4:
+> 	Correct the description of booting JH7110 boards from eMMC
+> v3:
+> 	rebased
+> v2:
+> 	carve out common information for JH7110 boards into an include
+> ---
+>  doc/board/starfive/deepcomputing_fml13v01.rst | 80 +++++++++++++++++
+>  doc/board/starfive/index.rst                  |  1 +
+>  doc/board/starfive/jh7110_common.rst          | 89 +++++++++++++++++++
+>  3 files changed, 170 insertions(+)
+>  create mode 100644 doc/board/starfive/deepcomputing_fml13v01.rst
+>  create mode 100644 doc/board/starfive/jh7110_common.rst
+> 
+> diff --git a/doc/board/starfive/deepcomputing_fml13v01.rst b/doc/board/starfive/deepcomputing_fml13v01.rst
+> new file mode 100644
+> index 00000000000..5d9612483b4
+> --- /dev/null
+> +++ b/doc/board/starfive/deepcomputing_fml13v01.rst
+> @@ -0,0 +1,80 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +DeepComputing Framework Motherboard (FLM13V01)
+> +==============================================
+> +
+> +The DeepComputing Framework motherboard (FLM13V01) can be combined with a
+> +13 inch Framework laptop chassis to provide a complete laptop.
+> +
+> +U-Boot for the board uses the same binaries as the VisionFive 2 board.
+> +Currently only serial console output is supported by mainline U-Boot.
+> +
+> +Building
+> +--------
+> +
+> +Setup the cross compilation environment variable:
+> +
+> +.. code-block:: bash
+> +
+> +   export CROSS_COMPILE=riscv64-linux-gnu-
+> +
+> +The M-mode software OpenSBI provides the supervisor binary interface (SBI) and
+> +is responsible for the switch to S-Mode. It is a prerequisite for building
+> +U-Boot. Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended
+> +to use a current release.
+> +
+> +.. code-block:: bash
+> +
+> +    git clone https://github.com/riscv/opensbi.git
+> +    cd opensbi
+> +    make PLATFORM=generic FW_TEXT_START=0x40000000 FW_OPTIONS=0
+> +    export OPENSBI="$(pwd)/build/platform/generic/firmware/fw_dynamic.bin"
+> +
+> +Now build U-Boot SPL and main U-Boot.
+> +
+> +.. code-block:: bash
+> +
+> +    cd <U-Boot-dir>
+> +    make starfive_visionfive2_defconfig
+> +    make
+> +
+> +This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
+> +as the FIT image (u-boot.itb) with OpenSBI, U-Boot, and device-trees.
+> +
+> +Device-tree selection
+> +---------------------
+> +
+> +The product ID stored in the board EEPROM is used by U-Boot SPL to select the
+> +right configuration and device-tree from the u-boot.itb FIT image.
+> +
+> +Furthermore if variable $fdtfile has not been saved in the environment it is
+> +set based on the product ID to *starfive/jh7110-deepcomputing-fml13v01.dtb*.
+> +
+> +To overrule this default the variable can be set manually and saved in the
+> +environment
+> +
+> +.. code-block:: console
+> +
+> +    setenv fdtfile my_device-tree.dtb
+> +    env save
+> +
+> +Power switch
+> +------------
+> +
+> +A tiny power switch is located in right upper corner of the board.
+> +
+> +Open case detection
+> +-------------------
+> +
+> +The board has an open case detection switch. Red lights will flash and the
+> +board will not boot if the switch is not held down.
+> +
+> +UART
+> +----
+> +
+> +UART 0 is exposed via the side channel contacts SBU1 and SBU2 of the lower,
+> +right USB C connector. A USB C cable and a breakout board are needed for
+> +physical access. It depends on the cable orientation on which of SBU1 and SBU2
+> +you will find RX and TX. The signal voltage is 3.3 V. The baud rate is 115200.
+> +
+> +.. include:: jh7110_common.rst
+> diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
+> index 2cba1b6dc56..66abc6f9d98 100644
+> --- a/doc/board/starfive/index.rst
+> +++ b/doc/board/starfive/index.rst
+> @@ -6,6 +6,7 @@ StarFive
+>  .. toctree::
+>     :maxdepth: 1
+>  
+> +   deepcomputing_fml13v01
+>     milk-v_mars
+>     pine64_star64
+>     visionfive2
+> diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive/jh7110_common.rst
+> new file mode 100644
+> index 00000000000..fb8d87a1551
+> --- /dev/null
+> +++ b/doc/board/starfive/jh7110_common.rst
+> @@ -0,0 +1,89 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +Boot source selection
+> +---------------------
+> +
+> +The board provides DIP switches to select the device for loading the boot
+> +firmware.
+> +
+> +=========== === ===
+> +Boot source SW1 SW2
+> +=========== === ===
+> +UART        OFF OFF
+> +SD-card     ON  OFF
+> +eMMC        OFF ON
+> +SPI flash   ON  ON
+> +=========== === ===
+> +
+> +Flashing a new U-Boot version
+> +-----------------------------
+> +
+> +U-Boot SPL is provided as file spl/u-boot-spl.bin.normal.out. Main U-Boot is
+> +in file u-boot.itb.
+> +
+> +Assuming your new U-Boot version is on partition 1 of an SD-card you could
+> +install it to the SPI flash with:
+> +
+> +.. code-block:: console
+> +
+> +    sf probe
+> +    load mmc 1:1 $kernel_addr_r u-boot-spl.bin.normal.out
+> +    sf update $kernel_addr_r 0 $filesize
+> +    load mmc 1:1 $kernel_addr_r u-boot.itb
+> +    sf update $kernel_addr_r 0x100000 $filesize
+> +
+> +For loading the files from a TFTP server refer to the dhcp and tftpboot
+> +commands.
+> +
+> +After updating U-Boot you may want to erase a saved environment and reboot.
+> +
+> +.. code-block:: console
+> +
+> +    env erase
+> +    reset
+> +
+> +Booting from SD-Card
+> +--------------------
+> +
+> +The device boot ROM loads U-Boot SPL (u-boot-spl.bin.normal.out) from the
+> +partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are free
+> +to choose any partition number.
+> +
+> +With the default configuration U-Boot SPL loads the U-Boot FIT image
+> +(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x2).
+> +When formatting it is recommended to use GUID
+> +BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> +
+> +Booting from eMMC
+> +-----------------
+> +
+> +The device boot ROM tries to load U-Boot SPL (u-boot-spl.bin.normal.out) from
+> +sector 0 of the eMMC's main hardware partition. But this conflicts with GPT
+> +partitioning. Fortunately eMMC can alternatively load U-Boot SPL from a backup
+> +position.
+> +
+> +For U-Boot SPL (u-boot-spl.bin.normal.out) starting at sector 2048 (position
+> +0x100000) write the following bytes to the eMMC device after GPT partitioning:
+> +
+> +======= ========================
+> +Address Bytes
+> +======= ========================
+> +0x0000  40 02 00 00  00 00 10 00
+> +0x0290  40 02 00 00  00 00 10 00
+> +======= ========================
+> +
+> +With the default configuration U-Boot SPL loads the U-Boot FIT image
+> +(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x2).
+> +When formatting it is recommended to use GUID
+> +BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> +
+> +Booting from UART
+> +-----------------
+> +
+> +The boot ROM supports the X-modem protocol to upload
+> +spl/u-boot-spl.bin.normal.out. U-Boot SPL support loading the FIT image
+> +u-boot.itb via the Y-modem protocol.
+> +
+> +Due to restrictions of the boot ROM not all X-modem implementations are
+> +compatible. The package tio (https://github.com/tio/tio) has been found to be
+> +usable.
 
-This feature is described in UEFI Spec 2.10. Section 18.4.3.
+JH7110 Boot User Guide says "Since document release 1.2, boot from SD
+Card or eMMC is no longer recommended. But to maintain the code
+structure, the following SD/eMMC boot address allocations are modified
+as "reserved". Be aware of this change when designing your device based
+on JH7110." [1]
 
-Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-V2: use Kconfig options to turn on/off this feature.
----
- include/efi_api.h             |   2 +
- include/efi_loader.h          |   5 ++
- lib/efi_loader/efi_boottime.c | 140 ++++++++++++++++++++++++++++++++++
- 3 files changed, 147 insertions(+)
+1:https://doc-en.rvspace.org/VisionFive2/Developer_Guide/JH7110_Boot_UG.pdf
 
-diff --git a/include/efi_api.h b/include/efi_api.h
-index 0f4245091f1..ba87af17c1f 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -571,6 +571,8 @@ struct efi_loaded_image {
- #define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
- #define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
- 
-+#define EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL  0x01
-+
- struct efi_debug_image_info_normal {
- 	u32 image_info_type;
- 	struct efi_loaded_image *loaded_image_protocol_instance;
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 370bc042f70..babe23a8a83 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -617,6 +617,11 @@ efi_status_t efi_root_node_register(void);
- efi_status_t efi_initialize_system_table(void);
- /* Called by bootefi to initialize debug */
- efi_status_t efi_initialize_system_table_pointer(void);
-+/* Called by efi_load_image for register debug info */
-+void efi_core_new_debug_image_info_entry(u32 image_info_type,
-+					 struct efi_loaded_image *loaded_image,
-+					 efi_handle_t image_handle);
-+void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle);
- /* efi_runtime_detach() - detach unimplemented runtime functions */
- void efi_runtime_detach(void);
- /* efi_convert_pointer() - convert pointer to virtual address */
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index e2665459e44..0d4df5ee6ae 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -2130,6 +2130,14 @@ efi_status_t EFIAPI efi_load_image(bool boot_policy,
- 		*image_handle = NULL;
- 		free(info);
- 	}
-+
-+	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT_TABLE)) {
-+		if (*image_handle) {
-+			efi_core_new_debug_image_info_entry(EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL,
-+							    info,
-+							    *image_handle);
-+		}
-+	}
- error:
- 	return EFI_EXIT(ret);
- }
-@@ -3359,6 +3367,9 @@ efi_status_t EFIAPI efi_unload_image(efi_handle_t image_handle)
- 		ret = EFI_INVALID_PARAMETER;
- 		goto out;
- 	}
-+	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT_TABLE)) {
-+		efi_core_remove_debug_image_info_entry(image_handle);
-+	}
- 	switch (efiobj->type) {
- 	case EFI_OBJECT_TYPE_STARTED_IMAGE:
- 		/* Call the unload function */
-@@ -4045,6 +4056,10 @@ efi_m_debug_info_table_header = {
- 	NULL
- };
- 
-+static u32 efi_m_max_table_entries;
-+
-+#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(void *))
-+
- const efi_guid_t efi_debug_image_info_table_guid =
- 	EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
- 
-@@ -4095,3 +4110,128 @@ efi_status_t efi_initialize_system_table_pointer(void)
- 
- 	return ret;
- }
-+
-+/**
-+ * Add a new efi_loaded_image structure to the efi_debug_image_info Table.
-+ * Re-Allocates the table if it's not large enough to accomidate another
-+ * entry.
-+ *
-+ * @param image_info_type  type of debug image information
-+ * @param loaded_image     pointer to the loaded image protocol for the image
-+ *                         being loaded
-+ * @param image_handle     image handle for the image being loaded
-+ **/
-+void efi_core_new_debug_image_info_entry(u32 image_info_type,
-+					 struct efi_loaded_image *loaded_image,
-+					 efi_handle_t image_handle)
-+{
-+	union efi_debug_image_info *table;
-+	union efi_debug_image_info *new_table;
-+	u32 index;
-+	u32 table_size;
-+
-+	/* Set the flag indicating that we're in the process of updating
-+	 * the table.
-+	 */
-+	efi_m_debug_info_table_header.update_status |=
-+		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-+
-+	table = efi_m_debug_info_table_header.efi_debug_image_info_table;
-+
-+	if (efi_m_debug_info_table_header.table_size < efi_m_max_table_entries) {
-+		/* We still have empty entries in the Table, find the first
-+		 * empty entry.
-+		 */
-+		index = 0;
-+		while (table[index].normal_image)
-+			index++;
-+	} else {
-+		/* table is full, re-allocate another page for a larger
-+		 * table.
-+		 */
-+		table_size = efi_m_max_table_entries * EFI_DEBUG_TABLE_ENTRY_SIZE;
-+		efi_allocate_pool(EFI_RUNTIME_SERVICES_DATA,
-+				  table_size + EFI_PAGE_SIZE,
-+				  (void **)&new_table);
-+
-+		if (!new_table) {
-+			efi_m_debug_info_table_header.update_status &=
-+				~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-+			return;
-+		}
-+
-+		memset(new_table, 0, table_size + EFI_PAGE_SIZE);
-+
-+		/* Copy the old table into the new one. */
-+		memcpy(new_table, table, table_size);
-+		/* Free the old table. */
-+		efi_free_pool(table);
-+		/* Update the table header. */
-+		table = new_table;
-+		efi_m_debug_info_table_header.efi_debug_image_info_table =
-+			new_table;
-+
-+		/* Enlarge the max table entries and set the first empty
-+		 * entry index to be the original max table entries.
-+		 */
-+		index = efi_m_max_table_entries;
-+		efi_m_max_table_entries +=
-+			EFI_PAGE_SIZE / EFI_DEBUG_TABLE_ENTRY_SIZE;
-+	}
-+
-+	/* Allocate data for new entry. */
-+	efi_allocate_pool(EFI_RUNTIME_SERVICES_DATA,
-+			  sizeof(struct efi_debug_image_info_normal),
-+			  (void **)(&table[index].normal_image));
-+	if (table[index].normal_image) {
-+		/* Update the entry. */
-+		table[index].normal_image->image_info_type = image_info_type;
-+		table[index].normal_image->loaded_image_protocol_instance =
-+			loaded_image;
-+		table[index].normal_image->image_handle = image_handle;
-+
-+		/* Increase the number of EFI_DEBUG_IMAGE_INFO elements and
-+		 * set the efi_m_debug_info_table_header in modified status.
-+		 */
-+		efi_m_debug_info_table_header.table_size++;
-+		efi_m_debug_info_table_header.update_status |=
-+			EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
-+	}
-+
-+	efi_m_debug_info_table_header.update_status &=
-+		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-+}
-+
-+void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle)
-+{
-+	union efi_debug_image_info *table;
-+	u32 index;
-+
-+	efi_m_debug_info_table_header.update_status |=
-+		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-+
-+	table = efi_m_debug_info_table_header.efi_debug_image_info_table;
-+
-+	for (index = 0; index < efi_m_max_table_entries; index++) {
-+		if (table[index].normal_image &&
-+		    table[index].normal_image->image_handle == image_handle) {
-+			/* Found a match. Free up the record, then NULL the
-+			 * pointer to indicate the slot is free.
-+			 */
-+			efi_free_pool(table[index].normal_image);
-+			table[index].normal_image = NULL;
-+
-+			/* Decrease the number of EFI_DEBUG_IMAGE_INFO
-+			 * elements and set the efi_m_debug_info_table_header
-+			 * in modified status.
-+			 */
-+			efi_m_debug_info_table_header.table_size--;
-+			efi_m_debug_info_table_header.update_status |=
-+				EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
-+			break;
-+		}
-+	}
-+
-+	efi_m_debug_info_table_header.update_status &=
-+		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-+}
--- 
-2.39.5
+So this is important we preserve documentation how SD-card and eMMC Boot
+source modes can be prepared that are since dropped from official
+documentation. Yet on my patch for bootph-pre-ram device-tree hints to
+LKML there is Hal (StarFive) and some other people that want this
+functionality of SD-card and eMMC boot to remain working in U-Boot even
+though it's recommended against and dropped from official StarFive
+documentation.
 
+I don't know, which is it? This appears to be an academic exercise to
+make those deprecated boot modes working. It certainly belongs in
+jh7110_common.rst as something interesting the hardware may be capable
+of, but not as the recommended standard operating procedure.
+
+@ Hal can you describe what the JH7110 boot code is doing for SD-card
+and eMMC Boot modes? What magic numbers and logic is this process? If
+you want these boot modes to be functional then please help with the
+documentation here that is now deleted from StarFive officially.
+
+With that,
+
+Reviewed-by: E Shattow <e@freeshell.de>
