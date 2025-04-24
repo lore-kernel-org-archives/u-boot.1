@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D9F4C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 16:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 294A2C369C2
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 16:44:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0581781E25;
+	by phobos.denx.de (Postfix) with ESMTP id 5F39281E72;
 	Thu, 24 Apr 2025 18:43:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/skAspy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lMYdljDY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E89481E72; Thu, 24 Apr 2025 18:43:47 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 5A82881F0D; Thu, 24 Apr 2025 18:43:47 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A597381F0D
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 18:43:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE3108003E
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 18:43:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-72bceb93f2fso1367393a34.0
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 09:43:44 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7304efb4b3bso544947a34.0
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 09:43:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745513023; x=1746117823; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745513022; x=1746117822; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=THMfupkigT8/iTIsVe9wJ9lDzhwFhaSNuFw2r/Iwqkg=;
- b=X/skAspyc+XRtR5welyZWX5Cj8+HAS1sshCw2ilAEKS3EnjCYsE3URkkZ3ar4/Flzu
- eYf+IqnspcF52f6DbxJ0NkHcjvakKcBsFur3GSFpl2jtLhdlNNoaBNGA6eotZHC53mle
- ZPdIQCESPijFcuoEwVJSSfLG1ucQPIyIUP1No=
+ bh=/IcqsDfnWYgjaTyl6LJjBqdZCOA8do+H2mIwGQk7tw8=;
+ b=lMYdljDY2Zm8nudZpF8nSDQV0caKvraviUwtNIpM6jfi83xBreLAtiDEa8yV1odku1
+ 4d0rQydsKtkDpsW9C1Nbjgc7LxNVdvA+aMToyoQkiyxPLOkmpAwbyVSToRltSAXYh6ig
+ zhAalUfESDT2Vw0p4Y0qJAHim9VmURDejq2+8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745513023; x=1746117823;
+ d=1e100.net; s=20230601; t=1745513022; x=1746117822;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=THMfupkigT8/iTIsVe9wJ9lDzhwFhaSNuFw2r/Iwqkg=;
- b=lWBjAonua1S2i/E3YjRKjrGZRb5/OlNbwaLV0x1jHgJuZ4N6Es29VCY69WJtLUvgtw
- 2gCTotwHTXe4bRjRPf5mazFORJW25I9SytNgob1zm6wSRq81xzTENdLaflnEMfdqsg1C
- cai9tpOzN+u3xll/7kUWxCGuvvSPFRwSkuPtKcknXL7ggig66B9aqAD3Oe3CT9plNVet
- QeqVRHzqZt6h21FSHfIxyamaHPsgLvBeoQq+UkjcXzf92trl7pFPavt3RrAzdoBjM7Ak
- wxly3kHSc5wh/pCxWeFwJuWVMf5Xq8upb3ZJMfxBSs9r/u4I1gXelfz5qaDDJg8rdZrn
- fxEw==
-X-Gm-Message-State: AOJu0YzABfN3Y15MpGmvbMH5J2wP2P6VEcbBT1gcM0JVNhTHbKMnsWIn
- H1hlrSCCNC9pISzUcWrZQ1v1zvqg2V89k9b7ZK9oNAl0YNEQRnmOxKWa3LUXkYo=
-X-Gm-Gg: ASbGncsBHDX7wVSTNtd0Xt2CvUtaJ5aF1f0wNtj6swm1aMaO2ohG+4b0ooieje1MB1w
- dFZE+SFLPTbTVC6efijhQjsbj8IKewmsag2OfCQtoPRmJLozZFPlt8c3Ya0ibXwxp4+3qk7g8AH
- n4iVZuw63CaCa3EUTjmC9ciTzY5at1RX94XmGJ0AY7q6my3uPmFT4XZf3+ZwbOKLMStY0z/HVtT
- i4hdMJQwJOB4oEXejwbLQRKqz9jIHqYpT8XmiGYJ7KZONvJo5vzXYZDUl6pTtNcblihAfCueHi3
- nAihCEljBBecxP5+Q37FlmqwXokYBuwjKazoH952d98Cv3c/SIGFCN8alx5MONwYcnOmOVF6Wge
- XSrbBs/i6k+Q=
-X-Google-Smtp-Source: AGHT+IEnpE+03/64UMVkWGbnmGgQB5Qcy7kHxcG2tXH/zWh4xD+xbTvVNdz4Dwts8LpJbTs4MwT8UA==
-X-Received: by 2002:a05:6830:3893:b0:72b:9422:aec with SMTP id
- 46e09a7af769-7304faa2d72mr1991037a34.8.1745513023456; 
- Thu, 24 Apr 2025 09:43:43 -0700 (PDT)
+ bh=/IcqsDfnWYgjaTyl6LJjBqdZCOA8do+H2mIwGQk7tw8=;
+ b=oAC/FXgYFut4qHy1SEa5zCFA1FU1rRaMoWBNJX35SNwnt3yGQYddgA15buxeQd1Ls5
+ dDGP2dVUbvB+QjEwpHA5C510bUGa6EJ0r8KAYagJdm7C4KC/rKzdSoJWci3tDxG4ukF+
+ JAGC6PFeK94uvIDf51QDVxgRRUC33LGHmujH83orqqePeRMn8hioV6Lupmf2Uh9jRcPc
+ PJRFmqkmcs/Mx3870lFw7JgS9Xkm0y0/dYS8RddlDHqpSMamr4ipJzorlaeWuTrgXAiR
+ CgJ2DLy0NwOjWvIcyKK0I1VdY0hOai0GAZFxam5N3xjvmCwI3ngDbbu42VRDOc+jmtw/
+ d/Kw==
+X-Gm-Message-State: AOJu0YxG6ZakaXhTqtAApyWHQssBJJiWqjgdWO76EmmiLnb12nT1IqSX
+ Jw4uuVPn2N9fgGvzQ4CiPNLvz8auLu83NC8Xwx4njN0Bfd3N4nfpdqJt0LJRdJY=
+X-Gm-Gg: ASbGncvqAxdKK4lzciE6sBn2bf1W9vkrKH2B7XEpG528zBgGLWwOsdfMRmXLh7L/lmi
+ dNW3oIo42WmZX+aiT/v8zg2AGFBTWQGaT+KrW8eVlFnNG+7z8hUI57pQUvJtISnOjWs7+qSxSD7
+ 1xT/YJnkKnu4d4yiRldkKmvA/fgv7M9xx4aCKpoZbhD2gSY+GQaRa8ap66Ghf3538TphPz2E/f0
+ RwUm5wBkccW30qrgmb+NxQqW+dA2TfJ5nVgYNddPMb0irJyQ1C2saOnvWlePrTqNRUFa9dKet+3
+ AeksFB+GDCcWq/p2wMm2VRaiU5FKjPsU95HcN/KkYbK/XmZ3hjrGGI/SNUbOXOw9PXJZN9GLo7q
+ 1
+X-Google-Smtp-Source: AGHT+IFXwJ4oyBDcvkj5GGeUvL82E0xDqZIEnyxtPbpMCd8ddNE1VEQjIQj9oaqtjarOjUVaQhuFXQ==
+X-Received: by 2002:a05:6830:600f:b0:72b:9316:d596 with SMTP id
+ 46e09a7af769-7304da4ce47mr2358510a34.3.1745513022609; 
+ Thu, 24 Apr 2025 09:43:42 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7304f2af97esm297869a34.41.2025.04.24.09.43.42
+ 46e09a7af769-7304f2af97esm297869a34.41.2025.04.24.09.43.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 09:43:43 -0700 (PDT)
+ Thu, 24 Apr 2025 09:43:42 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
 Cc: vigneshr@ti.com
-In-Reply-To: <20250415095138.447390-1-anshuld@ti.com>
-References: <20250415095138.447390-1-anshuld@ti.com>
-Subject: Re: [PATCH v1] arm: dts: am62a: allow booting from eMMC
-Message-Id: <174551302278.4069373.13860165233240279516.b4-ty@konsulko.com>
-Date: Thu, 24 Apr 2025 10:43:42 -0600
+In-Reply-To: <20250415095028.446254-1-anshuld@ti.com>
+References: <20250415095028.446254-1-anshuld@ti.com>
+Subject: Re: [PATCH v3] configs: set SPL_TEXT_BASE by default for k3 platforms
+Message-Id: <174551302192.4069373.15561249789496004711.b4-ty@konsulko.com>
+Date: Thu, 24 Apr 2025 10:43:41 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,21 +95,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Apr 2025 15:21:36 +0530, Anshul Dalal wrote:
+On Tue, 15 Apr 2025 15:20:27 +0530, Anshul Dalal wrote:
 
-> The bootph-all property in u-boot enables driver initialization prior to
-> relocation, this is necessary to use the device as boot media.
+> SPL_TEXT_BASE is used as the load address for the main domain SPL on k3
+> platforms.
 > 
-> sdhci0 is the phandle for eMMC on am62a, so this change allows us to use
-> eMMC as a boot media.
-> 
+> Since the config value is the same for every board, this patch sets the
+> value 0x80080000 as default for all 64-bit ARCH_K3, 0x43c00000 as
+> default for the R5 cores and deletes the instances of SPL_TEXT_BASE in
+> individual defconfigs.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] arm: dts: am62a: allow booting from eMMC
-      commit: 243a6dbfb680f9773e3c2a1e2e17e69068830666
+[1/1] configs: set SPL_TEXT_BASE by default for k3 platforms
+      commit: 7d8c3fa26c954f575842d739b4e0b9def4eefae6
 -- 
 Tom
 
