@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 220D6C369C2
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 16:44:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D9F4C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 16:44:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B304A81F6B;
-	Thu, 24 Apr 2025 18:43:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0581781E25;
+	Thu, 24 Apr 2025 18:43:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DbJ4noBK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/skAspy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEC10819FC; Thu, 24 Apr 2025 18:43:45 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 4E89481E72; Thu, 24 Apr 2025 18:43:47 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0490680F9C
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 18:43:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A597381F0D
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 18:43:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7303d9d5edeso442849a34.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 09:43:42 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-72bceb93f2fso1367393a34.0
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 09:43:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745513022; x=1746117822; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745513023; x=1746117823; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jV6EedStRmmbzspS0wqbrW7v/hdwzaC0xAU4zq/P1Z4=;
- b=DbJ4noBKuLINv1Ab3Kh2O76rFZzq2bDm/e9+FhiWtYHf7MoBreumpyu+e65PgDJ5u9
- IZO4Frd4j54H3K2MT8JlZ3MThqzaTO1hCQRYoNq8mHulEUfxFYEfdGT++zqWgkKVHIgh
- +IJV8J9+NiTFOuI/vgTRmdGVgdXH4c4z0rJRE=
+ bh=THMfupkigT8/iTIsVe9wJ9lDzhwFhaSNuFw2r/Iwqkg=;
+ b=X/skAspyc+XRtR5welyZWX5Cj8+HAS1sshCw2ilAEKS3EnjCYsE3URkkZ3ar4/Flzu
+ eYf+IqnspcF52f6DbxJ0NkHcjvakKcBsFur3GSFpl2jtLhdlNNoaBNGA6eotZHC53mle
+ ZPdIQCESPijFcuoEwVJSSfLG1ucQPIyIUP1No=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745513022; x=1746117822;
+ d=1e100.net; s=20230601; t=1745513023; x=1746117823;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jV6EedStRmmbzspS0wqbrW7v/hdwzaC0xAU4zq/P1Z4=;
- b=bFeR0EsWke6bcmbLdn2DCIyIfD3+f9ZZUUrp7/U+xpVEvpuJTjqFRt6N80Hc4uGRVx
- 1ALt74KyDvzAZhQ7lVEEO050Z3HphZu2kAedf/dVyb16sl9TsBhUupDsmFwNfYccT8sS
- p8x5MHLomF+EInuwlst3ShENCzGMnQxiAE/PjFIB7nTyWQvdk17WaI5uG8q0ZY1ea27o
- 6tykrah6qikT7KmY5buMUR9dd1Bqam1bKAIGWTvS4An+Syb0+aOkUJOD6Z685p2teZ6Y
- JPEQq2DkQ0RmI4gjAmf37rk7GUudgah1L4CGjK8uFOpPc5tu60zGONafRKhjmVSFWjct
- XngA==
-X-Gm-Message-State: AOJu0YyvCP3CeJPHa46CG12xjraQGv5o3cepb7/nlk6/QnsqkOsinG8l
- 1zSsRYUYQ/BKpyOSiEtriubj0BNpwoAKuLUiChfjFg1wG27WGVrOnfZdo0YQYOw=
-X-Gm-Gg: ASbGncuy8B7YqmRW5ukSXnFqccXfaGBiTZXY3hYR8c8XT6DbppBtt7YJHXp60pCms4S
- Pi1LuppI9HCbtYbqNN1jXQK8wIQQO+Yx6YW0BRD1iLCRh2JKzh3QVaEEZgcvSKpy/3iFQ+wJ1KW
- bCIaQS7jgWcGVSW1UXtxRzZDIrdQGSUX4Cnb4daUQn1CyYDAMNpCqOIKRtaVeXvRxzmHM4dBxjt
- RuNeklLYViEp0OJ+TOqKHf0h2C5N5ayrRV/+UuL4F5U01GMQ9qH2kE3hfQ3DZvRdNLpiaka+G+H
- xCDmUW6DJbxUBpDoxgCZy6pXBYP6/2ek571Zuqs9mDe/qk0dZ5mjCdtQSTd2HPeN2I6fty3CYgb
- P
-X-Google-Smtp-Source: AGHT+IH8rl3FIdagWN3FEpWNFqioZRu6H1AYl05nNHLiIvYp+H4R7F5oRuy2Vf34GnMrUvNkfF94Yw==
-X-Received: by 2002:a05:6830:6f8d:b0:72b:9b1f:2e33 with SMTP id
- 46e09a7af769-7304db79e2cmr2471919a34.18.1745513021812; 
- Thu, 24 Apr 2025 09:43:41 -0700 (PDT)
+ bh=THMfupkigT8/iTIsVe9wJ9lDzhwFhaSNuFw2r/Iwqkg=;
+ b=lWBjAonua1S2i/E3YjRKjrGZRb5/OlNbwaLV0x1jHgJuZ4N6Es29VCY69WJtLUvgtw
+ 2gCTotwHTXe4bRjRPf5mazFORJW25I9SytNgob1zm6wSRq81xzTENdLaflnEMfdqsg1C
+ cai9tpOzN+u3xll/7kUWxCGuvvSPFRwSkuPtKcknXL7ggig66B9aqAD3Oe3CT9plNVet
+ QeqVRHzqZt6h21FSHfIxyamaHPsgLvBeoQq+UkjcXzf92trl7pFPavt3RrAzdoBjM7Ak
+ wxly3kHSc5wh/pCxWeFwJuWVMf5Xq8upb3ZJMfxBSs9r/u4I1gXelfz5qaDDJg8rdZrn
+ fxEw==
+X-Gm-Message-State: AOJu0YzABfN3Y15MpGmvbMH5J2wP2P6VEcbBT1gcM0JVNhTHbKMnsWIn
+ H1hlrSCCNC9pISzUcWrZQ1v1zvqg2V89k9b7ZK9oNAl0YNEQRnmOxKWa3LUXkYo=
+X-Gm-Gg: ASbGncsBHDX7wVSTNtd0Xt2CvUtaJ5aF1f0wNtj6swm1aMaO2ohG+4b0ooieje1MB1w
+ dFZE+SFLPTbTVC6efijhQjsbj8IKewmsag2OfCQtoPRmJLozZFPlt8c3Ya0ibXwxp4+3qk7g8AH
+ n4iVZuw63CaCa3EUTjmC9ciTzY5at1RX94XmGJ0AY7q6my3uPmFT4XZf3+ZwbOKLMStY0z/HVtT
+ i4hdMJQwJOB4oEXejwbLQRKqz9jIHqYpT8XmiGYJ7KZONvJo5vzXYZDUl6pTtNcblihAfCueHi3
+ nAihCEljBBecxP5+Q37FlmqwXokYBuwjKazoH952d98Cv3c/SIGFCN8alx5MONwYcnOmOVF6Wge
+ XSrbBs/i6k+Q=
+X-Google-Smtp-Source: AGHT+IEnpE+03/64UMVkWGbnmGgQB5Qcy7kHxcG2tXH/zWh4xD+xbTvVNdz4Dwts8LpJbTs4MwT8UA==
+X-Received: by 2002:a05:6830:3893:b0:72b:9422:aec with SMTP id
+ 46e09a7af769-7304faa2d72mr1991037a34.8.1745513023456; 
+ Thu, 24 Apr 2025 09:43:43 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7304f2af97esm297869a34.41.2025.04.24.09.43.40
+ 46e09a7af769-7304f2af97esm297869a34.41.2025.04.24.09.43.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 09:43:41 -0700 (PDT)
+ Thu, 24 Apr 2025 09:43:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, sjg@chromium.org, padmarao.begari@amd.com, 
- mkorpershoek@kernel.org, Love Kumar <love.kumar@amd.com>
-Cc: michal.simek@amd.com, git@xilinx.com
-In-Reply-To: <abb932b3b23cb3c6035bfdf1929f91fb958d74b6.1744709852.git.love.kumar@amd.com>
-References: <abb932b3b23cb3c6035bfdf1929f91fb958d74b6.1744709852.git.love.kumar@amd.com>
-Subject: Re: [PATCH] test/py: spi: Prevent to overwrite the reserved memory
-Message-Id: <174551302090.4069373.5052733607111888828.b4-ty@konsulko.com>
-Date: Thu, 24 Apr 2025 10:43:40 -0600
+To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
+Cc: vigneshr@ti.com
+In-Reply-To: <20250415095138.447390-1-anshuld@ti.com>
+References: <20250415095138.447390-1-anshuld@ti.com>
+Subject: Re: [PATCH v1] arm: dts: am62a: allow booting from eMMC
+Message-Id: <174551302278.4069373.13860165233240279516.b4-ty@konsulko.com>
+Date: Thu, 24 Apr 2025 10:43:42 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Apr 2025 15:11:09 +0530, Love Kumar wrote:
+On Tue, 15 Apr 2025 15:21:36 +0530, Anshul Dalal wrote:
 
-> Update SPI negative tests to prevent SF command from overwriting the
-> reserved memory area.
+> The bootph-all property in u-boot enables driver initialization prior to
+> relocation, this is necessary to use the device as boot media.
+> 
+> sdhci0 is the phandle for eMMC on am62a, so this change allows us to use
+> eMMC as a boot media.
 > 
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] test/py: spi: Prevent to overwrite the reserved memory
-      commit: 140e1d7fc3a5634e8a3971b5c6bf9b0239591eb0
+[1/1] arm: dts: am62a: allow booting from eMMC
+      commit: 243a6dbfb680f9773e3c2a1e2e17e69068830666
 -- 
 Tom
 
