@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E43AC369D7
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C931C369D5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1BD88212B;
-	Thu, 24 Apr 2025 08:35:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20F4F82155;
+	Thu, 24 Apr 2025 08:35:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="yEqze7YI";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="lznGcDYo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62CA98214B; Thu, 24 Apr 2025 08:35:03 +0200 (CEST)
+ id 631698212B; Thu, 24 Apr 2025 08:35:03 +0200 (CEST)
 Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::608])
+ (mail-am7eur03on2060e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::60e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 499858212B
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:35:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DE2E82045
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:34:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GAPnRVEDnq+ZEgs1VgZwY3yi5UwSNxhctPkrhN2LA/XSZZHYphY+Tg9uvud37QLCzmsokQZv90u8CIRXXu/SHQIQwmvdheZ7YmIuR7eCittXLYzW3fH3b+GZ1oXksYenbRjEUqTW/a988LqzwQPXQ1GF4r3IB6bV7sHDY+OODIXouVS1EugB/hQxpqlqdRG1V7aQ6ajsq8iFPRhYmabJX8Mdmz37EgMaCTjx+cP3tNqQqL7QLxgm1GEvN42+z1lYNtcOBoy0YrUZG5Vsly0TJGGB4JNAymP55jn2YRsW3UK1nKT3uGgaEdTGuwOpRfg3A9W5PSRSq/hY/IbXSzhG0A==
+ b=n2XbG0l0jLfoPEiRplrZ+MTvMr/JRnpY/a+BoE2GZ4afx+iinYepw/Ir+Q5bEN9M5vSyRbDANrhdIADrM2QQT1/KAsUUMoVeQ7q4anKlvaQuWYRL8Eie8SsEWMy4vVQV02JLGJn99L81pKXNxngCCU3m1Npw7tuKbCpKgWULSDEyScm0IlUUNyfCGdbgnn7QqCByflG8PMIrkuO3Sr7CI/eyq2VxuuY0/jTY6bHfi0plExvhe2dnnIqlDdvnm6yyUgN6mpEjvc8d+AkgDh7QpPz3ZjgYkKPf1aAaTpWK8KtSzcIRfG66nY+bBfeH8KiYRFm+WpwN4vu1xR3riySMHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JKl8J0d5zTpvtomJ//rF2TLAfp0nZ4qBCJG0OxCcboA=;
- b=ZU/PlM7ULiJEUHs2qmLsMGIvCd2HcdXxmdDsUEINrPgKxdXzBaJPQx0fI9Fe9Qs1AsVnyanugMEh8/1p/F85hVLFDZH6ln9c4hH0HRE/1sT66NC6KUEQq5P2uHcoBWOqcSU3Ug6Mw9IGJyw1wr5PL+b1MjTtBOQu0GGzqe2HiTds7WYuIKLU5U1yz67gsCuTzqR7vos0ASwBoxneCs+8Ov63p/sH21g4Xtm6uT2wPOMc3+xHsVkHUsCJyrBdJZpcPrQ56M2wn1WYsLZyhJAhPcNicSjY3lsjw0Fm+gcYOUQ57KcsfzEsuNiFlBf64kS55Ugv4St9WN378i7RzthZCA==
+ bh=7g0SWdObg8lVEGXhgGO4ZLxRvem+7sEIy5wQ7gxqngU=;
+ b=OA8NT3mOivizNT5BjDrEdIOBFXTcjWeVXYY/G3z50HfM8z6BeZGFb/qMvXRjFRan6yxHk8tbu96PawAVVbO3KV6el4ZgLV1drf1/QIXNtqsvafBb7RlNXy0lulpTmI+NOTUWC1O3wdhL9EPXGmZkpOtO+XrgdopLJ9hc1Wngmq/2gdJix1KDRoWtlQvfZdxQnY7DOoUXfCxlEaLUXRxSbq7FCEY6CzA3ErmY6UKpPv6uaEu1fxzN3UHYQXqqMi3nZUmi31V6DBrkZRMhJISc6Ao0cFORR/U/eCis/JM8lbfV3qPRHeE2YjMoJY0MI2Ob+So5HGkJtoaKcZLZ9wybjQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JKl8J0d5zTpvtomJ//rF2TLAfp0nZ4qBCJG0OxCcboA=;
- b=yEqze7YIzCTIGyV+8RAaah1jWl8oTco3ZGHibwdqjQdZjx/6WogzMFklVFwNYOkBFUUDDWXRkjHNSJ5nwa5Cfy3sDVfAhKiGHrs2eW9JwMBbTahmXXhHc52VO32TdGjOWNdSx8RFH8lC99N1Cb6BrA6tx/2xzmKpSh+k6/X+be98DklsIq/u6QgvtjRB7s43Qdjyq4yyYmYKEGH9E3kqcbDUiCLH5Z9jIUy/x8QQUrq8JnE+UgLJFPX/VaIbYmhkei00iB8mlEpTjKQhpaa/5+yai6vfs4wXpwBki8QhPOcYlMPfffI/JtsHHK2ZqpxOEMHVqQXp67Eg4o8d8Me3gg==
+ bh=7g0SWdObg8lVEGXhgGO4ZLxRvem+7sEIy5wQ7gxqngU=;
+ b=lznGcDYoE2Wo/3KAGqJMfBNbW3c84cIMi9/p4NfkZ5qS7WbTfjxXGSnFlVAXgge6HB8rNLUSreFNTWwed989b8FIT02Sbtby510cdpyIm4S5qrT67cwrhpdUxR38UKtFa9UiahMzcjbY2clVkVs/lYfTTr67oi9AtVM2eTQxEIZv3D0xdhxXMBLMeF5c9t5LU5VGbgrTxOdjB1xO1i6Ig4YodVdCyvKn+n8er/KTwNt/WASlRRf/HA8TaACRx5b3WbPtMvZ2va8xt3jHI68Q28CTCp4s+emk3MUfJgk5d0k1cu4kGG798GiTzIlF/rnk2qLv0X3c04ykPu22fLrndg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by VI0PR04MB10661.eurprd04.prod.outlook.com (2603:10a6:800:265::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.23; Thu, 24 Apr
- 2025 06:34:58 +0000
+ 2025 06:34:55 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8678.021; Thu, 24 Apr 2025
- 06:34:58 +0000
+ 06:34:55 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Date: Thu, 24 Apr 2025 14:33:13 +0800
-Subject: [PATCH v10 17/21] tools: imx8image: add i.MX95 support
+Date: Thu, 24 Apr 2025 14:33:12 +0800
+Subject: [PATCH v10 16/21] binman: add a new entry type for packing DDR PHY
+ firmware images
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250424-imx95-v1-17-10a8449b1e5e@oss.nxp.com>
+Message-Id: <20250424-imx95-v1-16-10a8449b1e5e@oss.nxp.com>
 References: <20250424-imx95-v1-0-10a8449b1e5e@oss.nxp.com>
 In-Reply-To: <20250424-imx95-v1-0-10a8449b1e5e@oss.nxp.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -75,96 +76,96 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|VI0PR04MB10661:EE_
-X-MS-Office365-Filtering-Correlation-Id: 018ef0bc-6f09-4ec7-e74a-08dd82fa2244
+X-MS-Office365-Filtering-Correlation-Id: 2b62087f-f816-4099-ffcf-08dd82fa2025
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|376014|1800799024|366016|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?L3ZrdTdrWE0zTmhPRVljUjFoMm1NRXltbzlQN0hURld5MHk0Z1dWdk1uaHFs?=
- =?utf-8?B?c01HL3FpK1h6U3JxVUV4L3M2Zk1vc2ZsaXI4TG1kRmVETmxWOHo5bW52aU5x?=
- =?utf-8?B?eTFMRzFTdG5ZVDgzcllQa3VkdmRTNEdhVnRkSHF3bUxUek1pODVCbTZiM1Yw?=
- =?utf-8?B?SjFTellFcERud0ltYWZaL1BqTzIwbU92Yi9Ic0Z0Y0ZRTnRmNzRyWmNyb3cw?=
- =?utf-8?B?SmFmQ3pPTTNkL2xDd1V0eVFaL09xRVZYLzhDTit2Q2w4SmlRREE0cmRLeWV3?=
- =?utf-8?B?dk9wNFNCWGZvdXN5VVB6VUFSZ0hRTGNScW1hTml6MVpPM2t2enlmcU9IdDNS?=
- =?utf-8?B?SjVvY2tSTXRJRWdDNS9NbFllUm44TEtlN2QxSVVIMFFwS0VybzZKazZNYjJG?=
- =?utf-8?B?YmtTZzc0K2JPQjdtdDJmekFjalorQVlKbGF5UVAwL0JreTk3b25VTEdRODhj?=
- =?utf-8?B?dldZWGlNUWFWamhNUzdvYldYKzQ1QUw3OEhQMGc2UFA5cEZnUldrVS9oUVZF?=
- =?utf-8?B?Nk56YWE2VGJZZmlwbGFDRGMyNTV5YXVGdzAyNXo3c25ITkhDS3lNMkMxdk8r?=
- =?utf-8?B?WXpuRHJBZG1Eeld5VmY0c1pRV1BpQnZObnh0Wk85UFo3RDFhQmY1K0hKSmVM?=
- =?utf-8?B?dXI0akVHSENuZERlQnk0aFJMODBsMGhrazFSMFZieDVBUm1zRU9FZzZ1dHla?=
- =?utf-8?B?Rmd6di9Rb1Zsd3hzSDlNZnNhT28yOHhTdHU0eHB0RHR5VDRoMUpaMCtyQmlE?=
- =?utf-8?B?Wjd5S0V4cFdicjZERVFZV01nZU82dUdxZXR1bDlybTFPalU1N25yMmFSbXU4?=
- =?utf-8?B?ODFVbnptWndodlVIcTl1L1lEcDVOeE1CbEVTcDgvWUNHUXZRRVZmOUZKUW9p?=
- =?utf-8?B?dGU5Qm1sNEJDRisrQ2FRRTFoKzJCL3psQ3MzQTBWVUpraVpLelJsUHI5RTV3?=
- =?utf-8?B?ZkNpUGlyc2NVWnlaSTkvaHFGdktVZnRBNnRTYkJRWFJBdHBIK0J3MjlKMkVl?=
- =?utf-8?B?MEhvUXNuekdWQ1BmN3EyY21aMVZEcFhBMXh1b2RualdXb2RQSS9jalFUMzda?=
- =?utf-8?B?aVdJZ2hUcW1LaFhLQ3Q0eTRsNXkva1V3bVhyeEpNVFF6ZGVTdENLT2xOeDJa?=
- =?utf-8?B?RS9IanFnb1lvamJLNG0wMHRwYWdhWDhTTFYwQ3V6clNnMm9DZGNPVktnYUZx?=
- =?utf-8?B?T3J5bmNFNktqOGZwQkJlZnN5QjNxb0htTUwwUFBFWmNVVVdZMmhxbDhMUmdx?=
- =?utf-8?B?YmVsNVpZMmh5ODNxK1FkMVFGSER6YmxQdmxIb3EwOFN0SkNoZVZTaXFlQlVn?=
- =?utf-8?B?Vkt2ZXVEc05mZ3FER2tQMTVhN0RTZlFkYURNdGs1bGo3REhraC9kZ3d6Y1Jm?=
- =?utf-8?B?LzZmbi9IMjJCM1BITDROaFhna09PMk5ZZkpBcDlVREU2TVY4NXdmMWpnTjZD?=
- =?utf-8?B?ZTNWdVdCTkp5OXROalFYeHZRMFFzL1lwWXRaR1YrRkwxb3U0Slo1TTJrcDBx?=
- =?utf-8?B?VVZjSGZyMisybmVUR1JnWHNveTJwNWs3MUtIaG5DeXlPSWVpZm4rYWVheUFu?=
- =?utf-8?B?aHMwdWloR0VOZWxLdWpnTGhnd0hJT2RTWkxsUjc1cDJlWlNOcEpwb1JzbDNq?=
- =?utf-8?B?c25OQlBRTWZsL1U3OTlkYVlFNlVEdjhNWm1va1A5dW1IeFJHcFdESjdGV1Ur?=
- =?utf-8?B?dGJINlpLdk0ySDdHN3dFL0c4Z1RYa3JkUlFja29RUGhObTk4WWM4WTRkMDZp?=
- =?utf-8?B?eE9YVUdLTU9LK3VHNVN3UDVGaVJ5UVlORVhveE9LalZKbGVQUWdRaklNc1gx?=
- =?utf-8?B?TVNpZ3VaWnlOVGxwWE5RWHo2RDRZd1dobU01MWNtTndkcVNIdHVyTVE3VlBI?=
- =?utf-8?B?V1hnM2tTZHNxdE95QUVMNWlVR3hQemVEeHhic1FIbmZQVjlSa2ZXM3J4Z2sz?=
- =?utf-8?B?d3VGUmkwVTJtUlZyblZjOFQzdk5uaWdweU5mVVRWVW5KeW5oNmh3WnNXZjVY?=
- =?utf-8?B?L081TXNrS1FBPT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dGtwMkRvQWRXdTFTbDF1TWN1OG5ZTUlQMlVZQzA0STlWRytidStGM1VNeUtS?=
+ =?utf-8?B?TXVQanNPRUVJeFF5eEZYWVc5TEJNcXBzbDFhK2R2elUzQUFPbmxSUjJJSlE4?=
+ =?utf-8?B?SnZWM2dxWlVnRW8xcEZDdUw5Q3VoQ1BDT3hmT01ndWljeHF0RjFpZjVvVzJU?=
+ =?utf-8?B?aHUwQlVVL0krMnNlWnZCRnVWSDlsQXl0WG1IZnYza1dpemNvaU1MczFhL1pU?=
+ =?utf-8?B?Y1lTd2xvU3BiRHFJb2F6bmZmSFhuYnRSOU05SW5vR3ZtWlA3bnhaMzN5TjhO?=
+ =?utf-8?B?aTVIRXRUc3I0cEJtTm1TOG1JaUJQSjMzMmFGcHZrR1FlSmZzaTE5VWxEYzEv?=
+ =?utf-8?B?MDFmNnh2WjdQZ05jd1hyRDRkS2kvV2FoNjNWL0txbmM1SWF0YXZ5czVtN0hL?=
+ =?utf-8?B?dW1PU3lTNVp0eFNLQjBwWXFtK3dYWU5YY3BrZzNzTVR0VFA5VmFqd3FYZTJL?=
+ =?utf-8?B?S3U5YzQwMFRpZHU2RiswNEpMZWRKSUwxanZ2Z0NXVTRFay9zbG5aeFhRRWIy?=
+ =?utf-8?B?OVY1RVRIZVhvdEgrT3lXU0VFMzM3Zm5BcFIzRlJzTEFWQkNUSm0ycXEvb0Mw?=
+ =?utf-8?B?U3JJeG54eUJLMUMzNnZkWHMvQ3hLZ0c2K1ZPKzJSWmFISFlCTzRMVGVpN291?=
+ =?utf-8?B?aEcybXhFNExFa205MFNPcFNEWlhlZEYwZFV5d3NsRnpLcUgrYkdHNVVUQVRQ?=
+ =?utf-8?B?MlhDUGZzSGZ4N0w4NkV4V3VIelBWbDRuT2xrMUJUZnVyM3JQMzVjN3VCMklT?=
+ =?utf-8?B?UWtqQ012YjczSnBkcUNVLzE0WWc2OXEwcldYa284UTkveW5wRXBuZW5scDRI?=
+ =?utf-8?B?MU5NNGJQNk9pS25qWjB3Ymh6c1A1T2NMZ3o5SDJ4aGtDTnloYnMxQXJHWWhj?=
+ =?utf-8?B?OU5iNytGWXQvaWdna3FEK0lyekc5RkN4UlNZcGhqd2dNYUtvYkVqbXNhTmE4?=
+ =?utf-8?B?MHNYMlF6VHlPRXcwZzhYNGpFbkthaGlXY2FpS0xQQUtUYWtGK2tCSUJxL2NG?=
+ =?utf-8?B?M0haYmZLVDNxN3lrUGhQbFZrQlFaWmhsWHpXN1Y5T1lxYmRIa2Zod1lGRE91?=
+ =?utf-8?B?YTloMFR0WVoyK1lpaDFFZWYvSTlpSDJ0NlFBeUJyT2ZsbE0xMDMydFJEUzl4?=
+ =?utf-8?B?dUdKQjdWWDF6RTI4Y0lCTHNaSUhuQ2F6UFlOQkR5RHBoT2h0bGt3ZWJBbnRo?=
+ =?utf-8?B?b3Y0MHdiTG5LQVYrTWovZWN5SlVHV2VUYVl0Nm9MRlRsc0VVSVpGZU4wMkpk?=
+ =?utf-8?B?NnFrWVBqaFVkdlFHSWlIdXBkclpCTXhSQnFPZFVZN21EMFk2dU0vbUJnV0pR?=
+ =?utf-8?B?MHlOa1hvWkJ0YzlSVUxibGZTTzF3YWl5bmFmMjRRdURmM1M2RU43dGhid3N2?=
+ =?utf-8?B?VlFvbDFDdjZHTTFsYTRZYmxwNUlRK2hwM2RUL1JrbExEWC9wYlFiUHlwM1Bo?=
+ =?utf-8?B?VWFsSGMzek9jcHF5Nmg2akpJOXpWS0Z4VVZNbEpQVDlCMFB5VjZHUzJPUVl2?=
+ =?utf-8?B?Yk5uYUdiWFFXa2Z6YUJMbGtpMnVueVFnSkNkSHJoVlhUbXRKSncwUWlBb1ZT?=
+ =?utf-8?B?UFZlNGxuenZjR3NGN2FNRDVQeUVCMm9IeTB2S3o5OEZhdUtSTkh2QUQxdy9i?=
+ =?utf-8?B?OE04ZGlDUk45clVwMGJrVDIyMVI3RDJ5a1kvMUplcWZGeFVrSHQ3SldSNzlR?=
+ =?utf-8?B?SHF4Wlp1V25RR0o4ak9kTjZ1QXhJQVh4MXpuVVJINld1WUY5bmIzSTlvR3dD?=
+ =?utf-8?B?eWdiTXU3NE5EeisrWEhLR3pjblMrUS8wNllFWlZnSWNzSW8yT2RldXluM3JF?=
+ =?utf-8?B?S2FxdE43dko5MlpBZ1FWQlA4ejh5bkRPOWIySlFtWWR6TzZ1RXBVY21DMWpL?=
+ =?utf-8?B?UkxZTy9TMVB3T1FOQjVBcmEwczlRZ0twdFI5U0MxZVFpelFiVWtYVHhlakd0?=
+ =?utf-8?B?cVBmMjBxZjJreFVnZmE5akRyRVRnVWZiRnEvTU9EODdJLzhqQ0pMeG9TZE91?=
+ =?utf-8?B?WnZhMmIxOGhRPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(376014)(1800799024)(366016)(52116014)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R25EeDdHb2htM29reXgxQzYxdS9oU1VNU0lsbjRkWFhRMDhzMVFacyt1LzJC?=
- =?utf-8?B?a1VWbVRvdVdZWXpUQ1lIMDVxRmQxYk9UYTM0ODU3aTNTSUxNa3VJSjhmVHpV?=
- =?utf-8?B?S3JNS1Z5bHo3VjdBNnRhVlBqR3l6bldHRkhvU2cvRmVLWUVjdlhnaGRqUmpr?=
- =?utf-8?B?TGQ5OWxMZ0lGRWs1d2VvVm5aTXEvd05MSTQ4V2M4SkkxaWZwcnJ6cW1zY0Zp?=
- =?utf-8?B?MnJzcm1lZTR1aWlFS0lCU3RMSFY3RUZiQnhWYjhnSDVSSUw4VFpVUHBHSTQ5?=
- =?utf-8?B?M2l1b0RjK3dkQTcxVDhQcW5nRWZORzhkcU4yR01XZkdWMzdoN0ZrUm4ydXkr?=
- =?utf-8?B?T3kySGtYL2ppL3BMWDhkTEE4ODlwV0NwVEVxT09USFRzMnhPbDhTNGIwei9x?=
- =?utf-8?B?aDFzMndXVnJsQjY4NGlMMFZsdWVCY1NNbHFkZm5QZFYzTVk4VDdLSTNkdnRI?=
- =?utf-8?B?K3dldnJLUnA3cFo5TDkraXJpMVlSOC9zaDkvb0F6T2E0eFBMY0RCZ2lVMnlU?=
- =?utf-8?B?L21ZbVEzWFhMdHZzR2QzRUk3eXlsV3l1UTBoaHljcVErRURyMkxIZVlKY0dx?=
- =?utf-8?B?c1AvYTVPMDY4cEFyS3RUR0IwQ2k3RHZmZjJ2Z2ZINGtyOU1HUDM0aGRTRlk0?=
- =?utf-8?B?aUdrSjJGa1ZHd3pnQ0EwaHFROUtPNjUwaHJMRkd4N3pmKzNBR0FFOE9Vd3Jl?=
- =?utf-8?B?Nm9JUXNzdmZNa1NySlpOWG5OTzRwaWU1aXVKZDkzdDF6SFZRNW43bHlhSVV6?=
- =?utf-8?B?eXdoczZhWkpRWjF4bG1jUlBKeStSMkthV1AzM01ZTDdyWXRtUmNyREFLY1o0?=
- =?utf-8?B?dUNOT01paGpSNjg2Z3AwT0FyN3pTampRRnNYdGRlU0xlZFlwVnNDQkMyTzlN?=
- =?utf-8?B?YW9qb1REdUR1TGE1bWowTWFRYnlBSjczOFlrNmxMNEdoU0t6NGNLM3N2ODJP?=
- =?utf-8?B?Z1hkbEU4Mmh3dFhoL2IvT2pFK3gvNDgwalVESmZlVy9vakhyZi9FZS9HQjVE?=
- =?utf-8?B?OFhxYU9UN3UvK0ZGaktSWDlXcFpJVlNBbStxVHhuTmUvdGw1OTVROC95U3E2?=
- =?utf-8?B?bU5XM1ZheHR3RVRqV0VORjlTYmZrWTAxN2ZKM0ZzcC9LUThSVXVtc1QvNDN0?=
- =?utf-8?B?K3l5MGozS0x2ODJsTU1WSTIzcWluMWNiTEVPNFdlMlVLS2daQ1JuMkRzZlZ4?=
- =?utf-8?B?NlA2RFZwY2NGVHJPSXBOTzg4SjF0elJUS01QRmx1WkxrOTFwNlBraWxYV1E5?=
- =?utf-8?B?RS9na2x1T0NvMGhIc2F3dHA5cWxGS25ab1hFSXlFbUNPb0dyN2dZNC9tSFZI?=
- =?utf-8?B?RlN2dGtOWGdSMkREdXBwcTNIQXpxdjU2R1E3M3FNSzgvSzZBanh5dnNUSExS?=
- =?utf-8?B?M05naGphTEdySzFGNzZTZmNYekZzTU5iVGlTazQ3NG5iQUlZNXdPQm0xS3dy?=
- =?utf-8?B?VFdOdGxKOVpQbmVuelhPVi9tNDNFTXl1RERIUHg5SVJPTVYxSXEwR2owR25S?=
- =?utf-8?B?RTVFcGQ5VWhSQkV3ZmRIVjNlMXhOcXRLeFRWaDAvOGZqTzloaXlWOS9WYTE2?=
- =?utf-8?B?YXVsTTE0SXZPaEt5U1JabjhMSDk1UFI0a2pxYkJRZXpLY0g2c3BGMlI5c3V4?=
- =?utf-8?B?TDcyQzc3bnhVY25GVlpWVXJ1bDZ4WWp0cnZFOURQaTRobldRa1N6WFNGeHl0?=
- =?utf-8?B?WWZuM3ZEN0gzQ0VKa1pSZDNxeG9FdGJzeDFQRmhLMzlCMlNEcWNrdWhVNStJ?=
- =?utf-8?B?bWZCWW80WlN2VFVoSElhbEtsdk5SMkUwQmNCRFkrZFNnTVBPek8wTm5reW9s?=
- =?utf-8?B?ZUFDcUQ3ZU9vYjNQYU9UeUx1QTFSR0JtUnVCRnE1TjRQaGI4b1BYcnpFc2J6?=
- =?utf-8?B?b3ByR1U1Nm92UTI2dUhPOHJpSlZ4a1NSVmV5d0EvVjk0eGJCUWl0S01yMjk3?=
- =?utf-8?B?SkVKczdmMFV4RUJkdCtDc2U2eEhHV3U2QWVNeVJwTnZuUHRWV0E2Z2lKSmJz?=
- =?utf-8?B?WFp1S0hSMkpFaWRUYWlCZEZDS1JlT05sR3F1dURZTU5ueHlGdHQyYTY0U0gr?=
- =?utf-8?B?OERkTGdQTXQyQkNaQWtEWE91bjcvTDBKSkQ5Snp5LzVUcHhGT0QvZk5CSlRa?=
- =?utf-8?Q?tDav0MSz/h/7d7GIUCRjhsG8R?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WForSEJNMVFDcXpCK2YzY1Y3TkVMcTJSZXVlU0V3Vk9qMEdPSEJxOFg0QkM4?=
+ =?utf-8?B?amdFODE0d1dPMDByQ01DZHl2UmRiRmRQaHp5Sy9OWlB6ZUM5ODVCeDU2SVBS?=
+ =?utf-8?B?V1RONDQxazc5a3phd0xxWjFoUExKcVdNdS9rdDZiR0xxQlpVN3JIL1ZwSndm?=
+ =?utf-8?B?Zkk5T3hMWkFUd2lPT01FNnRPckhEd09GRFhkd2RGa2FnSENnSEx6YThKdGJS?=
+ =?utf-8?B?OE5UVzYyQ0g4U0VjK0ZLSlkwMDdnMVpGQ0JqZWNqKzEwVE8yTHRseXd4TnZv?=
+ =?utf-8?B?aDA3QzU5K3IvLysrRGE4L2JtdDhjanhqVUhSWGF4WDRmTWNvZ2k2dERuTVQ2?=
+ =?utf-8?B?Z2tYTTRuWUpVbHdwb2N4czZGaTNvbkkvSGtrRGlzT040dGk1VW1LWnBGaHB5?=
+ =?utf-8?B?ZnVaUHlVT21aVi9RWVdDTUhsZ25TQlF1cXNXSGE2SnRqcSt1WGVMeVZIVFR1?=
+ =?utf-8?B?cElrN29IRkNtMUJvcEx6cmpudi9XZGFyYmVIRkRERG84T2RhT1dGaGQyWFpo?=
+ =?utf-8?B?dk5ZWkcwWlV6UjIyaExRL2dqZTJkUlcxZE9iaFpLbHYwNk05UmpFSkJRTEox?=
+ =?utf-8?B?NDkzQVlBb0JTM2JaYlJDWGZZVThIUHR4SjV5Y0prVmxQRXFIbVErRWlVMVlp?=
+ =?utf-8?B?bTR6dExmVW1hSlNjSUxEbEFnVmJaSW5JaC9QRWk4dTA4THloanQrOFNTUGVw?=
+ =?utf-8?B?bnlDMm91anJSenJteWVObDRqWjY1ZlZlRUlZWFVMRWo5MlR2VTBUbk92dnp4?=
+ =?utf-8?B?ak15eEZLeUQzdk1YN2ZwRlNPTXluWG5TQmVRTVJyb3ErNjdjUVYySml2WmN5?=
+ =?utf-8?B?d05vTkl5K3FNZm14WGViOWdHTUhHMUtzN2dObTc2SEVNbkVsZUFEKzRGVlg5?=
+ =?utf-8?B?N28zaC9yQitjRnFLUjZ6LzloV1M5L3JVUnVYa0NVd2xZYlA0UW5yaGJkWmlq?=
+ =?utf-8?B?YXB1ck02NmlOQkliWmJ1U3RxWXovamFyaFlqaVBndU8xajYyaDVLM1B5d29X?=
+ =?utf-8?B?KzdGaDI2ZW5CWWFGU1RNSHZ5VytlUFRqNTVWMEo4SlBpeGpDZlF2MURhdFB3?=
+ =?utf-8?B?MGh3Y0h4WWJpVDBaWHJJRkl4WkFIWjJGbnkzL2JLMkFPVG9PRlhETlQ4NXZR?=
+ =?utf-8?B?QlBydjRpdkp3cU5vanJneTN4N0Jtb3V6R08xeFl4QjU2R1JlZXNCSlJmN1k2?=
+ =?utf-8?B?bzVWTG4rZzlpSFNvVDV6YVNhOFhYVkRySkVUcjRZT1VDUFBFc1haQkRUWjYv?=
+ =?utf-8?B?VHFUZ2QzdTYxUStxNzl3a3huNGY2QjBHaVpwNm1tenYvOUdIdWxqbzNxdmdt?=
+ =?utf-8?B?TjNIckdsbnI3WlpvSHIyL0hSUC9vNXhPZURwMzJJWC9rN2NhbnJKdmdKMlBI?=
+ =?utf-8?B?VWtXdm5wK1loSVhFc2MwODFsQnNESkNidmhQcHg5QlJxNjlZR3lVM2JwSFhW?=
+ =?utf-8?B?Qjl4T3h5bDhSWUx5RlIxMzFvSVNxdkovbWlRM2FsdEhLTFd2eVBzNkt5Z0ln?=
+ =?utf-8?B?ZjhVeWVPOGtHQ2dKZ2VzcU1TVzhRUjg4R2o4NXBRbmxVWFlqZkdUWTFLVkJy?=
+ =?utf-8?B?NWtHakJpTkhMcnB4WUs4NW1JTGgrZWxuYk9uamFkbzBCNVR3bnVXaGw3RVBp?=
+ =?utf-8?B?K1lidUU2UExtWVQ4QkhTSEttMlZ0NFNkV201ay80VEE0NVRXcU9vd2IreUVS?=
+ =?utf-8?B?VFlBL0F4Z2hWSDZ6M2JjVzNTaEZvTzllTFN5bnBBSDJONEVIK2hTUnFPSVRy?=
+ =?utf-8?B?WnBHaU1jUXUvVml5V3J5T1FWd0s1M1JaR2lyVm14V0VTejhST3JwLzhKeHJN?=
+ =?utf-8?B?NWQreDFaVVVLekJ3RWcwVS9Ga1c5OS9BR3E1VFM3NXVDcmRHOEhUUVBIR2tT?=
+ =?utf-8?B?eE9pT0p6NHEvSnc4QUorYTZTTmR3b1NpM1pWcGlQaWpzY0NtK0ZseGwwcm81?=
+ =?utf-8?B?NGVPajdVdS82RTRFWWNnOWtyTjhzdVRrY0hCOXFWV21zV1ovYWJPVDRVencw?=
+ =?utf-8?B?UXFacHh0bXRjYlVScGhGN2t3Q2JncXhTbWhrdHR1WEtyRVUwUFdkMkkrZFpN?=
+ =?utf-8?B?NFFzWnBKbEJrV0lXK3B2REd1NUQxMkhMQ2l2a3BicDRBZU1GRVBuZklkN2Zm?=
+ =?utf-8?Q?CSh9a9jpSBygWhv++etOI2b25?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 018ef0bc-6f09-4ec7-e74a-08dd82fa2244
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2b62087f-f816-4099-ffcf-08dd82fa2025
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 06:34:58.6582 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2025 06:34:55.0838 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ksBklH/FOWljEvz+zMIerqnwJAHkYBVR31928mtt2K8lpGXiaS/aw5RSgXn7I00r8Kd8WyL+rMHwhs4RoXidUw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Un7gORanofcLXvx8ksWPYemamq5ZQHNFx++waEFZX+CBs75rRGPTjZtkmdZI7dd4yRUCaS2yOL0qwxyhusQCvg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10661
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -184,443 +185,139 @@ X-Virus-Status: Clean
 
 From: Alice Guo <alice.guo@nxp.com>
 
-i.MX95 uses binman to invoke mkimage to create image container. 2 image
-containers are needed currently. The first one is composed of
-ahab-container.img, LPDDR firmware images, OEI images, System Manager
-image and u-boot-spl.bin. The second one is consisted of ARM Trusted
-firmware and u-boot.bin.
-
-Because DDR OEI image and LPDDR firmware images have to be packaged
-together and named as m33-oei-ddrfw.bin by binman, so imx9_image.sh does
-not check if m33-oei-ddrfw.bin exists.
-
-When using "make imx95_19x19_evk_defconfig; make", imx9_image.sh will
-delete the line for u-boot.bin in container.cfg. In fact, binman is
-always called after the u-boot.bin is built, so imx9_image.sh does not
-check if u-boot.bin exists.
+i.MX95 needs to combine DDR PHY firmware images and their byte counts
+together, so add a new entry type nxp-header-ddrfw for this requirement.
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
- include/imx8image.h |  19 +++++--
- tools/imx8image.c   | 147 ++++++++++++++++++++++++++++++++++++++++++++++------
- tools/imx9_image.sh |   8 +++
- 3 files changed, 155 insertions(+), 19 deletions(-)
+ tools/binman/entries.rst                  | 10 ++++++++++
+ tools/binman/etype/nxp_header_ddrfw.py    | 29 +++++++++++++++++++++++++++++
+ tools/binman/ftest.py                     | 11 +++++++++++
+ tools/binman/test/346_nxp_ddrfw_imx95.dts | 24 ++++++++++++++++++++++++
+ 4 files changed, 74 insertions(+)
 
-diff --git a/include/imx8image.h b/include/imx8image.h
-index 6b95e93fb50..e0d25c5b6c9 100644
---- a/include/imx8image.h
-+++ b/include/imx8image.h
-@@ -157,7 +157,9 @@ enum imx8image_cmd {
- 	CMD_SOC_TYPE,
- 	CMD_CONTAINER,
- 	CMD_IMAGE,
--	CMD_DATA
-+	CMD_DATA,
-+	CMD_DUMMY_V2X,
-+	CMD_HOLD,
- };
+diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+index 780e9817fb6..4f05aa0a323 100644
+--- a/tools/binman/entries.rst
++++ b/tools/binman/entries.rst
+@@ -1663,6 +1663,16 @@ Properties / Entry arguments:
  
- enum imx8image_core_type {
-@@ -169,7 +171,9 @@ enum imx8image_core_type {
- 	CFG_A35,
- 	CFG_A55,
- 	CFG_A53,
--	CFG_A72
-+	CFG_A72,
-+	CFG_M33,
-+	CFG_OEI,
- };
  
- enum imx8image_fld_types {
-@@ -208,7 +212,10 @@ typedef enum option_type {
- 	FILEOFF,
- 	MSG_BLOCK,
- 	SENTINEL,
--	UPOWER
-+	UPOWER,
-+	OEI,
-+	DUMMY_V2X,
-+	HOLD,
- } option_type_t;
  
- typedef struct {
-@@ -227,12 +234,16 @@ typedef struct {
- #define CORE_CA35       4
- #define CORE_CA72       5
- #define CORE_SECO       6
-+#define CORE_M33        7
- 
- #define CORE_ULP_CM33		0x1
- #define CORE_ULP_CA35		0x2
- #define CORE_ULP_UPOWER 	0x4
- #define CORE_ULP_SENTINEL 	0x6
- 
-+#define CORE_IMX95_M33P		0
-+#define CORE_IMX95_A55C0	2
++.. _etype_nxp_header_ddrfw:
 +
- #define SC_R_OTP	357U
- #define SC_R_DEBUG	354U
- #define SC_R_ROM_0	236U
-@@ -246,10 +257,12 @@ typedef struct {
- #define IMG_TYPE_EXEC    0x03   /* Executable image type */
- #define IMG_TYPE_DATA    0x04   /* Data image type */
- #define IMG_TYPE_DCD_DDR 0x05   /* DCD/DDR image type */
-+#define IMG_TYPE_OEI     0x05   /* Optional Executable image type */
- #define IMG_TYPE_SECO    0x06   /* SECO image type */
- #define IMG_TYPE_SENTINEL 0x06	/* SENTINEL image type */
- #define IMG_TYPE_PROV    0x07   /* Provisioning image type */
- #define IMG_TYPE_DEK     0x08   /* DEK validation type */
-+#define IMG_TYPE_V2X_DUMMY 0x0E /* V2X Dummy image */
- 
- #define IMG_TYPE_SHIFT   0
- #define IMG_TYPE_MASK    0x1f
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index 0135b190951..a333ded46e2 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -7,6 +7,7 @@
- 
- #include "imx8image.h"
- #include <image.h>
-+#include <linux/sizes.h>
- 
- static int p_idx;
- static int sector_size;
-@@ -54,7 +55,9 @@ static table_entry_t imx8image_cmds[] = {
- 	{CMD_CONTAINER,         "CONTAINER",            "new container",      },
- 	{CMD_IMAGE,             "IMAGE",                "new image",          },
- 	{CMD_DATA,              "DATA",                 "new data",           },
--	{-1,                    "",                     "",	              },
-+	{CMD_DUMMY_V2X,         "DUMMY_V2X",            "v2x",                },
-+	{CMD_HOLD,              "HOLD",                 "hold",               },
-+	{-1,                    "",                     "",	              }
- };
- 
- static table_entry_t imx8image_core_entries[] = {
-@@ -66,7 +69,9 @@ static table_entry_t imx8image_core_entries[] = {
- 	{CFG_A55,	"A55",			"A55 core",	},
- 	{CFG_A53,	"A53",			"A53 core",	},
- 	{CFG_A72,	"A72",			"A72 core",	},
--	{-1,		"",			"",		},
-+	{CFG_OEI,	"OEI",			"OEI", },
-+	{CFG_M33,	"M33",			"M33 core", },
-+	{-1,		"",			"",		}
- };
- 
- static table_entry_t imx8image_sector_size[] = {
-@@ -144,6 +149,14 @@ static void parse_cfg_cmd(image_t *param_stack, int32_t cmd, char *token,
- 			exit(EXIT_FAILURE);
- 		}
- 		break;
-+	case CMD_DUMMY_V2X:
-+		param_stack[p_idx].option = DUMMY_V2X;
-+		param_stack[p_idx++].entry = (uint32_t)strtoll(token, NULL, 0);
-+		break;
-+	case CMD_HOLD:
-+		param_stack[p_idx].option = HOLD;
-+		param_stack[p_idx].entry = (uint32_t)strtoll(token, NULL, 0);
-+		param_stack[p_idx++].filename = NULL;
- 	default:
- 		break;
- 	}
-@@ -221,6 +234,16 @@ static void parse_cfg_fld(image_t *param_stack, int32_t *cmd, char *token,
- 				(*cmd == CMD_DATA) ? DATA : AP;
- 			param_stack[p_idx].filename = token;
- 			break;
-+		case CFG_OEI:
-+			param_stack[p_idx].option = OEI;
-+			param_stack[p_idx].filename = token;
-+			param_stack[p_idx].ext = CORE_CM4_0;
-+			break;
-+		case CFG_M33:
-+			param_stack[p_idx].option = M40;
-+			param_stack[p_idx].ext = 0;
-+			param_stack[p_idx].filename = token;
-+			break;
- 		}
- 		break;
- 	case CFG_LOAD_ADDR:
-@@ -238,9 +261,15 @@ static void parse_cfg_fld(image_t *param_stack, int32_t *cmd, char *token,
- 		case CFG_A53:
- 		case CFG_A55:
- 		case CFG_A72:
-+		case CFG_M33:
- 			param_stack[p_idx++].entry =
- 				(uint32_t)strtoll(token, NULL, 0);
- 			break;
-+		case CFG_OEI:
-+			param_stack[p_idx].dst = (uint32_t)strtoll(token, NULL, 0);
-+			param_stack[p_idx].entry = param_stack[p_idx].dst + 1;
-+			p_idx++;
-+			break;
- 		}
- 	default:
- 		break;
-@@ -549,6 +578,7 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 				  char *tmp_filename, bool dcd_skip)
- {
- 	uint64_t entry = image_stack->entry;
-+	uint64_t dst = image_stack->dst;
- 	uint64_t core = image_stack->ext;
- 	uint32_t meta;
- 	char *tmp_name = "";
-@@ -558,7 +588,9 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 	img->offset = offset;  /* Is re-adjusted later */
- 	img->size = size;
- 
--	set_image_hash(img, tmp_filename, IMAGE_HASH_ALGO_DEFAULT);
-+	if (type != DUMMY_V2X) {
-+		set_image_hash(img, tmp_filename, IMAGE_HASH_ALGO_DEFAULT);
-+	}
- 
- 	switch (type) {
- 	case SECO:
-@@ -580,6 +612,27 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 		img->dst = 0xe4000000; /* S400 IRAM base */
- 		img->entry = 0xe4000000;
- 		break;
-+	case OEI:
-+		if (soc != IMX9) {
-+			fprintf(stderr, "Error: invalid core id: %" PRIi64 "\n", core);
-+			exit(EXIT_FAILURE);
-+		}
++Entry: nxp-header-ddrfw: add a header to DDR PHY firmware images
++----------------------------------------------------------------
 +
-+		img->hab_flags |= IMG_TYPE_OEI;
-+		if (core == CORE_CM4_0) {
-+			img->hab_flags |= CORE_ULP_CM33 << BOOT_IMG_FLAGS_CORE_SHIFT;
-+			meta = CORE_IMX95_M33P;
++This entry is used to combine DDR PHY firmware images and their byte counts
++together. See imx95_evk.rst for how to get DDR PHY Firmware Images.
 +
-+		} else {
-+			img->hab_flags |= CORE_ULP_CA35 << BOOT_IMG_FLAGS_CORE_SHIFT;
-+			meta = CORE_IMX95_A55C0;
-+		}
-+		tmp_name = "OEI";
-+		img->dst = (dst ? dst : entry);
-+		img->entry = entry;
-+		img->meta = meta;
-+		custom_partition = 0;
-+		break;
- 	case AP:
- 		if (soc == QX && core == CORE_CA35) {
- 			meta = IMAGE_A35_DEFAULT_META(custom_partition);
-@@ -587,8 +640,10 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 			meta = IMAGE_A53_DEFAULT_META(custom_partition);
- 		} else if (soc == QM && core == CORE_CA72) {
- 			meta = IMAGE_A72_DEFAULT_META(custom_partition);
--		} else if (((soc == ULP) || (soc == IMX9)) && core == CORE_CA35) {
-+		} else if ((soc == ULP) && core == CORE_CA35) {
- 			meta = 0;
-+		} else if ((soc == IMX9) && core == CORE_CA35) {
-+			meta = CORE_IMX95_A55C0;
- 		} else {
- 			fprintf(stderr,
- 				"Error: invalid AP core id: %" PRIu64 "\n",
-@@ -687,6 +742,15 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 			img->entry = 0x28300200;
- 		}
- 		break;
-+	case DUMMY_V2X:
-+		img->hab_flags |= IMG_TYPE_V2X_DUMMY;
-+		img->hab_flags |= CORE_SC << BOOT_IMG_FLAGS_CORE_SHIFT;
-+		tmp_name = "V2X Dummy";
-+		set_image_hash(img, "/dev/null", IMAGE_HASH_ALGO_DEFAULT);
-+		img->dst = entry;
-+		img->entry = entry;
-+		img->size = 0; /* dummy image has no size */
-+		break;
- 	default:
- 		fprintf(stderr, "unrecognized image type (%d)\n", type);
- 		exit(EXIT_FAILURE);
-@@ -709,15 +773,26 @@ void set_container(flash_header_v3_t *container,  uint16_t sw_version,
- 	fprintf(stdout, "container flags: 0x%x\n", container->flags);
- }
- 
--static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
-+static int get_container_image_start_pos(image_t *image_stack, uint32_t align, uint32_t *v2x)
- {
- 	image_t *img_sp = image_stack;
- 	/*8K total container header*/
- 	int file_off = CONTAINER_IMAGE_ARRAY_START_OFFSET;
- 	FILE *fd = NULL;
--	flash_header_v3_t header;
-+	flash_header_v3_t *header;
-+	flash_header_v3_t *header2;
-+	void *p;
- 	int ret;
- 
-+	p = calloc(1, SZ_4K);
-+	if (!p) {
-+		fprintf(stderr, "Fail to alloc 4K memory\n");
-+		exit(EXIT_FAILURE);
-+	}
 +
-+	header = p;
-+	header2 = p + FIRST_CONTAINER_HEADER_LENGTH;
 +
- 	while (img_sp->option != NO_IMG) {
- 		if (img_sp->option == APPEND) {
- 			fd = fopen(img_sp->filename, "r");
-@@ -726,7 +801,7 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
- 				exit(EXIT_FAILURE);
- 			}
+ .. _etype_opensbi:
  
--			ret = fread(&header, sizeof(header), 1, fd);
-+			ret = fread(header, SZ_4K, 1, fd);
- 			if (ret != 1) {
- 				printf("Failure Read header %d\n", ret);
- 				exit(EXIT_FAILURE);
-@@ -734,19 +809,27 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
- 
- 			fclose(fd);
- 
--			if (header.tag != IVT_HEADER_TAG_B0) {
--				fprintf(stderr, "header tag mismatched file %s\n", img_sp->filename);
-+			if (header->tag != IVT_HEADER_TAG_B0) {
-+				fprintf(stderr, "header tag mismatched \n");
- 				exit(EXIT_FAILURE);
- 			} else {
--				file_off +=
--					header.img[header.num_images - 1].size;
--				file_off = ALIGN(file_off, align);
-+				if (header2->tag != IVT_HEADER_TAG_B0) {
-+					file_off += header->img[header->num_images - 1].size;
-+					file_off = ALIGN(file_off, align);
-+				} else {
-+					file_off = header2->img[header2->num_images - 1].offset + FIRST_CONTAINER_HEADER_LENGTH;
-+					file_off += header2->img[header2->num_images - 1].size;
-+					file_off = ALIGN(file_off, align);
-+					fprintf(stderr, "Has 2nd container %x\n", file_off);
-+					*v2x = true;
-+				}
- 			}
- 		}
- 
- 		img_sp++;
- 	}
- 
-+	free(p);
- 	return file_off;
- }
- 
-@@ -838,6 +921,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	char *tmp_filename = NULL;
- 	uint32_t size = 0;
- 	uint32_t file_padding = 0;
-+	uint32_t v2x = false;
- 	int ret;
- 
- 	int container = -1;
-@@ -861,7 +945,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	set_imx_hdr_v3(&imx_header, 0);
- 	set_imx_hdr_v3(&imx_header, 1);
- 
--	file_off = get_container_image_start_pos(image_stack, sector_size);
-+	file_off = get_container_image_start_pos(image_stack, sector_size, &v2x);
- 	fprintf(stdout, "container image offset (aligned):%x\n", file_off);
- 
- 	/* step through image stack and generate the header */
-@@ -870,6 +954,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	/* stop once we reach null terminator */
- 	while (img_sp->option != NO_IMG) {
- 		switch (img_sp->option) {
-+		case OEI:
- 		case AP:
- 		case M40:
- 		case M41:
-@@ -892,6 +977,30 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 			file_off += ALIGN(sbuf.st_size, sector_size);
- 			break;
- 
-+		case DUMMY_V2X:
-+			if (container < 0) {
-+				fprintf(stderr, "No container found\n");
-+				exit(EXIT_FAILURE);
-+			}
-+			tmp_filename = "dummy";
-+			set_image_array_entry(&imx_header.fhdr[container],
-+						soc,
-+						img_sp,
-+						file_off,
-+						0,
-+						tmp_filename,
-+						dcd_skip);
-+			img_sp->src = file_off;
-+			break;
+ Entry: opensbi: RISC-V OpenSBI fw_dynamic blob
+diff --git a/tools/binman/etype/nxp_header_ddrfw.py b/tools/binman/etype/nxp_header_ddrfw.py
+new file mode 100644
+index 00000000000..655699e6ffa
+--- /dev/null
++++ b/tools/binman/etype/nxp_header_ddrfw.py
+@@ -0,0 +1,29 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright 2025 NXP
 +
-+		case HOLD:
-+			if (container < 0) {
-+				fprintf(stderr, "No container found\n");
-+				exit(EXIT_FAILURE);
-+			}
-+			file_off += ALIGN(img_sp->entry, sector_size);
-+			break;
++from binman.etype.section import Entry_section
 +
- 		case SECO:
- 		case SENTINEL:
- 			if (container < 0) {
-@@ -963,11 +1072,15 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	do {
- 		if (img_sp->option == APPEND) {
- 			copy_file(ofd, img_sp->filename, 0, 0);
--			file_padding += FIRST_CONTAINER_HEADER_LENGTH;
-+			if (v2x)
-+				file_padding += FIRST_CONTAINER_HEADER_LENGTH * 2;
-+			else
-+				file_padding += FIRST_CONTAINER_HEADER_LENGTH;
- 		}
- 		img_sp++;
- 	} while (img_sp->option != NO_IMG);
- 
-+	fprintf(stderr, "%s: %x %d\n", __func__, file_padding, v2x);
- 	/* Add padding or skip appended container */
- 	ret = lseek(ofd, file_padding, SEEK_SET);
- 	if (ret < 0) {
-@@ -980,6 +1093,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 		/* Note: Image offset are not contained in the image */
- 		tmp = flatten_container_header(&imx_header, container + 1,
- 					       &size, file_padding);
-+		fprintf(stderr, "error writing image hdr %x\n", size);
- 		/* Write image header */
- 		if (write(ofd, tmp, size) != size) {
- 			fprintf(stderr, "error writing image hdr\n");
-@@ -1000,7 +1114,8 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 		    img_sp->option == AP || img_sp->option == DATA ||
- 		    img_sp->option == SCD || img_sp->option == SCFW ||
- 		    img_sp->option == SECO || img_sp->option == MSG_BLOCK ||
--		    img_sp->option == UPOWER || img_sp->option == SENTINEL) {
-+		    img_sp->option == UPOWER || img_sp->option == SENTINEL ||
-+		    img_sp->option == OEI) {
- 			copy_file_aligned(ofd, img_sp->filename, img_sp->src,
- 					  sector_size);
- 		}
-@@ -1031,7 +1146,7 @@ int imx8image_copy_image(int outfd, struct image_tool_params *mparams)
- 	fprintf(stdout, "CONTAINER SW VERSION:\t0x%04x\n", sw_version);
- 
- 	build_container(soc, sector_size, emmc_fastboot,
--			img_sp, dcd_skip, fuse_version, sw_version, outfd);
-+			img_sp, false, fuse_version, sw_version, outfd);
- 
- 	return 0;
- }
-diff --git a/tools/imx9_image.sh b/tools/imx9_image.sh
-index ca78a57a19a..6523d1a0ad1 100755
---- a/tools/imx9_image.sh
-+++ b/tools/imx9_image.sh
-@@ -18,6 +18,14 @@ for f in $blobs; do
- 		continue
- 	fi
- 
-+	if [ $f = "m33-oei-ddrfw.bin" ]; then
-+		continue
-+	fi
++class Entry_nxp_header_ddrfw(Entry_section):
++    """Add a header to DDR PHY firmware images
 +
-+	if [ $f = "u-boot.bin" ]; then
-+		continue
-+	fi
++    This entry is used for i.MX95 to combine DDR PHY firmware images and their
++    byte counts together.
 +
- 	if [ ! -f $tmp ]; then
- 		echo "WARNING '$tmp' not found, resulting binary may be not-functional" >&2
++    See imx95_evk.rst for how to get DDR PHY Firmware Images.
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
++
++    def BuildSectionData(self, required):
++        section_data = bytearray()
++        header_data = bytearray()
++
++        for entry in self._entries.values():
++            entry_data = entry.GetData(required)
++
++            section_data += entry_data
++            header_data += entry.contents_size.to_bytes(4, 'little')
++
++        return header_data + section_data
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 92df2a03650..fa174900014 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -104,6 +104,8 @@ PRE_LOAD_VERSION      = 0x11223344.to_bytes(4, 'big')
+ PRE_LOAD_HDR_SIZE     = 0x00001000.to_bytes(4, 'big')
+ TI_BOARD_CONFIG_DATA  = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+ TI_UNSECURE_DATA      = b'unsecuredata'
++IMX_LPDDR_IMEM_DATA   = b'qwertyuiop1234567890'
++IMX_LPDDR_DMEM_DATA   = b'asdfghjklzxcvbnm'
  
+ # Subdirectory of the input dir to use to put test FDTs
+ TEST_FDT_SUBDIR       = 'fdts'
+@@ -202,6 +204,8 @@ class TestFunctional(unittest.TestCase):
+         TestFunctional._MakeInputFile('fsp_m.bin', FSP_M_DATA)
+         TestFunctional._MakeInputFile('fsp_s.bin', FSP_S_DATA)
+         TestFunctional._MakeInputFile('fsp_t.bin', FSP_T_DATA)
++        TestFunctional._MakeInputFile('lpddr5_imem.bin', IMX_LPDDR_IMEM_DATA)
++        TestFunctional._MakeInputFile('lpddr5_dmem.bin', IMX_LPDDR_DMEM_DATA)
+ 
+         cls._elf_testdir = os.path.join(cls._indir, 'elftest')
+         elf_test.BuildElfTestFiles(cls._elf_testdir)
+@@ -7848,6 +7852,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test that binman can produce an iMX8 image"""
+         self._DoTestFile('339_nxp_imx8.dts')
+ 
++    def testNxpHeaderDdrfw(self):
++        """Test that binman can add a header to DDR PHY firmware images"""
++        data = self._DoReadFile('346_nxp_ddrfw_imx95.dts')
++        self.assertEqual(len(IMX_LPDDR_IMEM_DATA).to_bytes(4, 'little') +
++                         len(IMX_LPDDR_DMEM_DATA).to_bytes(4, 'little') +
++                         IMX_LPDDR_IMEM_DATA + IMX_LPDDR_DMEM_DATA, data)
++
+     def testFitSignSimple(self):
+         """Test that image with FIT and signature nodes can be signed"""
+         if not elf.ELF_TOOLS:
+diff --git a/tools/binman/test/346_nxp_ddrfw_imx95.dts b/tools/binman/test/346_nxp_ddrfw_imx95.dts
+new file mode 100644
+index 00000000000..889f6f29860
+--- /dev/null
++++ b/tools/binman/test/346_nxp_ddrfw_imx95.dts
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		imx-lpddr {
++			type = "nxp-header-ddrfw";
++
++			imx-lpddr-imem {
++				filename = "lpddr5_imem.bin";
++				type = "blob-ext";
++			};
++
++			imx-lpddr-dmem {
++				filename = "lpddr5_dmem.bin";
++				type = "blob-ext";
++			};
++		};
++	};
++};
 
 -- 
 2.43.0
