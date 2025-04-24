@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A92C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 17:39:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB99C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 17:45:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED2498056A;
-	Thu, 24 Apr 2025 19:39:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C6588056A;
+	Thu, 24 Apr 2025 19:45:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ea69GAWK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gBSyskum";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A46FB809D4; Thu, 24 Apr 2025 19:38:58 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 500D28082A; Thu, 24 Apr 2025 19:45:46 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D4B6803CC
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 19:38:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B29CA803CC
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 19:45:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-401eff272b5so137869b6e.0
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:38:56 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-603fd257386so391413eaf.1
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:45:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745516335; x=1746121135; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745516742; x=1746121542; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lquYw0E68tD9ZRiHPHlLLLy4QsHiJPTGwvZrdFJJwqc=;
- b=Ea69GAWKzb9khjp4LnuaUzZsBqirWCJhsUSDIlvO9Y41afkeyYF1+aQfOKureCR33w
- eeFq4xRIoHS1VEcbR8JwDwYNUVFaZjDvWM8dBRGQ2GFVaQHzAV7KdVJwtIcWvah3oMcr
- 5IrzJ+FcxDt9ajVUTjIefMz/n0u4c7hzrAuFw=
+ bh=KrAxoB6Ysm0lwElVl0BUoHmokx+PkL4VIauVX0rqmww=;
+ b=gBSyskumfGbO8qB7/wKKkZ3JbTeGndFP9gtiR7VWC8NxHkfCsSR7pwcXTha56GvNZL
+ R0fwAzLgT7pYPgbe03DaSbmd79hZNdDx3RhmjGmy1fU4S0EbYLLFI6OG+Nicj1sW+9m3
+ QeiAWsXaxNIo2B6AZlLOIQq9EA9kZCRHS0nKw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745516335; x=1746121135;
+ d=1e100.net; s=20230601; t=1745516742; x=1746121542;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lquYw0E68tD9ZRiHPHlLLLy4QsHiJPTGwvZrdFJJwqc=;
- b=KanrtjgIVyIQ6+G9qgwTKFSFhW7TpzHUlOtkF28yvT4jmbXkn9L7KwkBbdWsWTt24e
- dzd4GmngAISV9+LEu7C8oTgvkC/UosLDaCZ/ysVAT7wiCtikyUpelcV3XIsC87xT1ppQ
- J0BNJvOvcW3VgT4Yc5yg2VJyTA01QZAsqT+KtyDj4ial8EEx9dq0G/EH5kB2fgz7mRPs
- LwzqqbPfBI9G2AqPjmCERG3M7t6eK3YJWaqTf+NLkfL4ttYuIEg0Rvgu1MFlVxwU3wvj
- Er6sAZDJt91UkVUqp5m3zYMMbgWJfu3NeGaZOW7OYJ5LciuLKtQtms7Mf7ZV63ybRfAo
- /Mxw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVAbZkgw+yvPvhsAqdvtm+eCvnavBHmLSTiO9aou0FRzckXFXDUwgBCZBvKfOkm7vYJhGxKJ6w=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3SXHqVnHbwLyjkrWJuCSLmFzsBCx6/kA2Xtdc7ZFIWVw4H9Uc
- F5QbCecbLfBcNGBSgCA7EohjpBbE9gtH/oCXT8/KkMQ1WudUfnXZ5NURXO051FI=
-X-Gm-Gg: ASbGncsXRUw1cr4qcV75Ye6H43arZr6N7DzV919dqgX4+qsBfroV2clZM0uIyLILBvX
- GHfoh+ruPftHlN/lBW/R+LbJkN5VOnl7fjnv42qLzyCDJqPXia8fE9WRzUePon4emStHtyBE6sj
- iSXSgB9e+nTBFZfVxp4d9xfvAd3QbzPd31ty4n19PDmt8RHkSFLGY/mgcET7uzb9XBLMTgosNyU
- YT70EQpXOUSg0NJf4WRHDXBria2OlBsKcmMeXx9N9VHOvsGjntDxBFphhtvDhuus6Vnevua1RV+
- LmnUu7gMduyjSHg4/jdgiKPLd3W6k8sLkfWfJfHMgJWanXyuJs8v9aXWtR7yqFel1cUNyrsdnVg
- XBQ==
-X-Google-Smtp-Source: AGHT+IEjITRjlp/fOBfAr/ctMfhmaDC6dC70DcH4/bFDrumC2P+KncbMt6P/bHjRIOMrZrWKzMDXkw==
-X-Received: by 2002:a05:6808:6f8e:b0:3f8:eee4:7140 with SMTP id
- 5614622812f47-401f11ae193mr240149b6e.22.1745516335044; 
- Thu, 24 Apr 2025 10:38:55 -0700 (PDT)
+ bh=KrAxoB6Ysm0lwElVl0BUoHmokx+PkL4VIauVX0rqmww=;
+ b=GUjoQ1zg1Pnfq7AvCYz63nr9N3/T+K6uIN+veV89huRoPNwujBssUNvnWictH7EhGg
+ QAD80Z/K+CcwcLC+ksiJsHqDEOVVxpR8bFbtRFfsrNom4orqjR1O7NIR+PC81dvdQIZc
+ eti3sV/bRsSszIjKE/eZ8gdyRvinPTClw3ZHO25thMkqDRMxWpa7CSU6eqvqUHy9dYq1
+ xZkkbfg7Zr9vXD6V4eNd8XIxwAGvrSVDlPFRl2yxgNylOYVwJElJqfkhWDR3kxz6D9rj
+ nXAvaz1uXj+bc/1ZEFXEUhEQW2eCbHUc+56KH3l/uYgM3pjd9wOAY7nKWKuAYIoo5ow9
+ 1O1A==
+X-Gm-Message-State: AOJu0YzbNruZCrQJvWynIJo7khTv3X1VQIZdSbkTwOINRVQTcebh29ln
+ Cd6hkcsRPCi7a2Zumz0q6kbZXMMviBVVRPVnFBNGyZqL8/yFLr9pQPmnZKzjoKQ=
+X-Gm-Gg: ASbGncsrT/S5iooi5FpvjyawkzONquUIxvHXNS7Q+fcI8aaT7k6hil+qqrD+wNQ4wym
+ fYs05mil3Gvfmz33/mdn2J7NQkfFkqXiA/Y407QL4+b+wORopu+cCRlZoZfY+kD99x7hsEGGL+H
+ IGbypZZGHZCvIyMD07nsxR/W8SV2rn5IhUmlCIvmfPuBzKZZ3H27NaAozMFnEIFfxAaiipQq7d9
+ aeYv2g+MO1PuKA/72Yo9sflv6Y0i/DqbgatiH7kTPguIwp3p4E+kDqpn1+tGxcqUpjhkEQQC+BC
+ xDjNxj34yBd8hc909uZtko24s02Cy1kfqXxsqmUHFOQBmNro1eDA4KoxVuMzcOT+xeXqloCpi3w
+ vCA==
+X-Google-Smtp-Source: AGHT+IG7JKw3asKykM8/aC8ZvRC64xk3Lr4c4A5qjOMRnjvE8hClYTrMdputS0TGjpqbrsZfpt9tAg==
+X-Received: by 2002:a05:6820:3105:b0:604:9c9b:d096 with SMTP id
+ 006d021491bc7-6064fcc52d4mr304355eaf.4.1745516742488; 
+ Thu, 24 Apr 2025 10:45:42 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-401ec9782eesm328806b6e.49.2025.04.24.10.38.53
+ 006d021491bc7-6064690d889sm343490eaf.25.2025.04.24.10.45.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 10:38:54 -0700 (PDT)
-Date: Thu, 24 Apr 2025 11:38:52 -0600
+ Thu, 24 Apr 2025 10:45:41 -0700 (PDT)
+Date: Thu, 24 Apr 2025 11:45:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Cc: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>,
- u-boot@lists.denx.de, vigneshr@ti.com, rick@andestech.com,
- mporter@konsulko.com
-Subject: Re: [RFC] Expected behavior of the go command
-Message-ID: <20250424173852.GK5495@bill-the-cat>
-References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
- <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
- <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
+To: Heiko Thiery <heiko.thiery@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: bootflow: extlinux and menu
+Message-ID: <20250424174539.GL5495@bill-the-cat>
+References: <CAEyMn7b90ybqMOgb4ViAaQVqvTuma-HyYkwEvSVHfowfvEd3tA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kHtysvCS8GeVdF1E"
+ protocol="application/pgp-signature"; boundary="2GaLDBtETxNFkOuZ"
 Content-Disposition: inline
-In-Reply-To: <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
+In-Reply-To: <CAEyMn7b90ybqMOgb4ViAaQVqvTuma-HyYkwEvSVHfowfvEd3tA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,93 +96,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kHtysvCS8GeVdF1E
+--2GaLDBtETxNFkOuZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 23, 2025 at 04:22:51PM +0200, Ahmad Fatoum wrote:
+On Thu, Apr 24, 2025 at 07:36:06PM +0200, Heiko Thiery wrote:
+
 > Hi,
 >=20
-> On 4/23/25 14:28, Simon Glass wrote:
-> > Hi Anshul,
-> >=20
-> > On Wed, 23 Apr 2025 at 04:04, Anshul Dalal <anshuld@ti.com> wrote:
-> >>
-> >> Hi all,
-> >>
-> >> I was trying to understand how the go command is expected to work when
-> >> used to load custom OSes. My use case requires getting a proprietary OS
-> >> to boot using the go command on a TI K3 platform. The OS expects caches
-> >> to be flushed and the mmu to be disabled before we jump to it.
-> >>
-> >> The go command (do_go func in cmd/boot.c) calls the do_go_exec function
-> >> underneath which does not seem to have a consistent implementation
-> >> across various architectures.
-> >>
-> >> In RISC-V the implementation (arch/riscv/lib/boot.c:10) calls
-> >> cleanup_before_linux before jumping to the loaded binary. This behavio=
-ur
-> >> would enable the direct use of the go command for booting a custom OS
-> >> (like in my use case). Though no such generic implementation exists for
-> >> ARM64.
-> >>
-> >> I was wondering why we have the call to cleanup_before_linux for RISCV
-> >> and not ARM64?
-> >>
-> >> Also, is booting a custom OS using the go command a supported use-case?
-> >> If yes, it might be better to rename the function to be more generic
-> >> like cleanup_before_os from *_linux and call it for each invocation of
-> >> the go command.
-> >=20
-> > Yes it is supposed to do what you say. You could rationalise the code
-> > a bit, so that all archs do a similar thing, or perhaps just RISC-V
-> > and ARM for now.
->=20
-> I ran into issues with go too trying to start barebox and I always
-> assumed that go is rather meant to start programs that call back into
-> U-Boot using the jump table mechanism. In that case, you likely don't
-> want to turn off caches.
+> I tried bootflow for the first time and wanted to test my extlinux
+> configuration with separate menu entries. But I don't see that the
+> menu is shown. The default value is always selected. Am I right in
+> thinking that this is not supported with extlinux?
 
-Exactly. "go" is really just "go $addr now", and so if things like
-caches need to be flushed / disabled, that needs to happen via a command
-first. RISC-V being helpful here is an unfortunate mis-implementation.
+I suspect Simon also found this recently and fixed it as part of another
+series. It's likely in:
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D449177&state=3D*
+It wasn't based on master or next:
+https://patchwork.ozlabs.org/project/uboot/cover/20250319143820.2385092-1-s=
+jg@chromium.org/
+And some of the tidying up lead to size growth in a number of platforms:
+https://patchwork.ozlabs.org/project/uboot/patch/20250319143820.2385092-2-s=
+jg@chromium.org/
+Along with needing to document some of the user visible changes:
+https://patchwork.ozlabs.org/project/uboot/patch/20250319143820.2385092-7-s=
+jg@chromium.org/
 
-> What I settled on is having the barebox build generate a FIT image that
-> can be used from U-Boot, barebox, coreboot ...etc.
->=20
-> Maybe the same would be also suitable for you? Alternatively, you could
-> compile your custom OS as an ELF image and boot that properly as if it
-> were a kernel. Both ways would also allow you to specify a load address
-> if your OS is not relocatable and pass along arguments.
->=20
-> I went with the FIT route for barebox, because we can now ship device
-> trees for all enabled boards in the same FIT image alongside one generic
-> second stage barebox with DT support. If you want to support different
-> boards with your OS image that might be of interest to you as well.
-
-A FIT image is a good idea. It's also possible and I think more commonly
-how custom OSes are done, to use "bootelf" instead.
+You might want to see if just patches 7 / 8 / 9 resolve the issue you
+see and if so we can get just those merged in.
 
 --=20
 Tom
 
---kHtysvCS8GeVdF1E
+--2GaLDBtETxNFkOuZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgKdyEACgkQFHw5/5Y0
-tyyPUwv/V5g5ZrqqMSpi4SNittRbfLzbl2m75Ndy4trj7rtxBb3+Kl7u4jhdR4Ep
-qnXxZg0rmzeJkLAOaKD7LUgzo0pO5xidFkpdQ50aAlCqUqTINuq8rYeHosmnT4BB
-WTIt7DhkcypRPPEGTIttdHsEtLzePeuYlhLazp2ByWH2sYUy8d1h5Gq76RoGUAOA
-2h3S6/kv1Zo/OxAjQAky6oao91VWk2J0MEXIOMPDRXyX0Hc2jAIG4X+5eTY3/nAx
-o2zclP+cpA0p1CC8Y8W8NKY9gYhZBKAtPYb6+D6J4Xhw3HKXHPOeYcrg6ch4Lgzl
-DzeuOwtOcJkFOuAc64mUnnCignuL8fBfySqpghRNDZ3IebJyxTSVjAebmYvMHuje
-31uBssg++5/9A4ZGav7D7zyvV/byVi8H8CBzrCRwbhSKK3IQBsiXJlkE9lkdZTzK
-C3E/w6L+gZiqfDXe2zxlJlFSK73C7/09zB5sbRQXeJ+LmRetSoTqGswe9H3VpR15
-bR1s5Q2F
-=swrT
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgKeMMACgkQFHw5/5Y0
+tyxrAQwAsRLlpe8kyQeAzCRdg1mrgFvS+I3ezv95ExYdGYm0QGkq4+eEBBLFfXq7
+mnhDJBQyVg/ckGiBYZcorRQyPE5X5B7Id7Gp8vaIA9twEi39F/hRxT331V1dMdKu
+TIKOjarHGpyjS2ZZcgZlkJp9L4aqvROnEj2PXOoZ9kIxwu136r2lrxpqlD3yvnzF
+ahW9ksNUBmVpJgUTeHQBAEIqveeijEyTki5+1YKeoVuAIoyljsVkBCumUvbKRTU0
+E87KY8IeaVUCUJa2sGdlq4mIv8Uf27QeBK8hypjwPyReI+EHvoC85wPtCNXnLGsc
+gB9QypZyzJY9wLl/UU1jrFvNGXeS5R0ucKeDHSWDc1ks7n6ubr8X4a0xulzRfOxH
+l4lGjwmy7/BFubpUT8YTWSfoevaUFW+9iW8XsvJFQnoLLPE/KiWhWOcgEevjSXyf
+0O0okYsyq9duAhATxzn7aUuH/AZPqwwDAWYcV3R5zPHGVZAOo0BF1sKuoXyxbrnw
+kUFfXot6
+=hHsU
 -----END PGP SIGNATURE-----
 
---kHtysvCS8GeVdF1E--
+--2GaLDBtETxNFkOuZ--
