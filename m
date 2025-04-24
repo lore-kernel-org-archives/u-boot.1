@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AAE7C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A44EC369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:09:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F02F5809D4;
-	Thu, 24 Apr 2025 08:08:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FC3280FF7;
+	Thu, 24 Apr 2025 08:08:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dntOT51J";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="vg8DT4wz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B42278082A; Thu, 24 Apr 2025 08:08:43 +0200 (CEST)
+ id 62CF18056A; Thu, 24 Apr 2025 08:08:44 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7C118056A
+ by phobos.denx.de (Postfix) with ESMTPS id 3909080FF7
  for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:08:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6209a59483=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53NGVqcR002179;
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53NGPa0W005683;
  Thu, 24 Apr 2025 08:08:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- DW1j7R4noGkrp/KpEXFdjSBNo2etC1b0g2CUs9glhRY=; b=dntOT51J/Eb+ZS25
- KW/fAfgcFI7dPdmUVSU/0tXnMyw5widP2aNCpftkdHP8Hlbar2rQuJ7tNYc1rQlp
- GxwVl5pa+1J63FB+dRri53vp/fXjpfzxvoPUCdZmZligNb2xcjOTw/pf5c0EmjxR
- 1cNid8+VEQXbNsW8q3/z/etIXEEaX39EImixcjRIkrwEKi+xmX1PHhDGUADkw4U1
- Iu4lZZfuds/pdNeRr96je8lnXw/xbgTYdeKq1XmzREBvtEggcLRhiWckAsGZF0Kj
- qzeqMp6Z6cZ6uVV+t1p41PZY39kRXb1zPcq+vNTYeDNe66QluU+FEsxdnsVhZRcK
- OZjEjw==
+ E18OQUALrBJ8J64z130lC2TBzy2JC2SOn4RBM9N4v1g=; b=vg8DT4wzv0XAvYCh
+ SXKHTcats9eV+wHCJi8jEKjbxYvjbq2X47silkqgawp8vsYURIzTuDeANX5ileFH
+ 1+DnpryX1ybTwbRJYrUYevL7x0as/iieLLezkdPeWTXminxXOAJS99N4eX3Mz6vA
+ hjvGz0avfrdSRgj1kSRIP0+bjbwYzzZV/37dPrTP3YWycHUKnJd4J4wrrCawaYdI
+ 7HH0pViItjVm35BoFRObKcMN7UdT+gt3IPX9NXHLECUBm33Xs2bpzJkylLDfDycv
+ ANMmd4TpIYSFh3qfZyc7pL06kdCvnTXefYEISiWFRV6A3f6P58MjAF7yUyNEAa03
+ xOlyTA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjye1pg-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk3e1y3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 24 Apr 2025 08:08:39 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A624140053;
- Thu, 24 Apr 2025 08:08:04 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D79A84004D;
+ Thu, 24 Apr 2025 08:08:02 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0069BA4FCE1;
- Thu, 24 Apr 2025 08:07:52 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 23E98A4C07D;
+ Thu, 24 Apr 2025 08:07:49 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Apr
- 2025 08:07:51 +0200
+ 2025 08:07:48 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
  <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 14/21] arm: stm32mp: increase EARLY_TLB_SIZE to 0x10000
-Date: Thu, 24 Apr 2025 08:07:16 +0200
-Message-ID: <20250424060723.2695014-15-patrice.chotard@foss.st.com>
+Subject: [PATCH 11/21] configs: stm32mp25: add USB host boot support
+Date: Thu, 24 Apr 2025 08:07:13 +0200
+Message-ID: <20250424060723.2695014-12-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
 References: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
@@ -89,34 +89,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Depending on Soc (STM32MP25 vs STM32MP21), the memory map can be
-different and it generates a different TLB page table configuration/size.
-
-Increase EARLY_TLB_SIZE to 0x10000 to fix following error message
-and panic:
-
-"Insufficient RAM for page table: 0xb000 > 0xa000. Please increase the
-size in get_page_table_size()"
+Add support for booting from USB pen drive, since USB host
+port is available on the STM32MP2.
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/stm32mp2/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/configs/stm32mp25_common.h | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-index 7cb71c518bd..9548b27cfa7 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-@@ -24,7 +24,7 @@
-  * early TLB into the .data section so that it not get cleared
-  * with 16kB alignment
-  */
--#define EARLY_TLB_SIZE 0xA000
-+#define EARLY_TLB_SIZE 0x10000
- u8 early_tlb[EARLY_TLB_SIZE] __section(".data") __aligned(0x4000);
+diff --git a/include/configs/stm32mp25_common.h b/include/configs/stm32mp25_common.h
+index 1c28ce1c1e9..481b25a1f02 100644
+--- a/include/configs/stm32mp25_common.h
++++ b/include/configs/stm32mp25_common.h
+@@ -41,11 +41,18 @@
+ #define BOOT_TARGET_UBIFS(func)
+ #endif
+ 
++#ifdef CONFIG_CMD_USB
++#define BOOT_TARGET_USB(func)	func(USB, usb, 0)
++#else
++#define BOOT_TARGET_USB(func)
++#endif
++
+ #define BOOT_TARGET_DEVICES(func)	\
+ 	BOOT_TARGET_MMC1(func)		\
+ 	BOOT_TARGET_UBIFS(func)		\
+ 	BOOT_TARGET_MMC0(func)		\
+-	BOOT_TARGET_MMC2(func)
++	BOOT_TARGET_MMC2(func)		\
++	BOOT_TARGET_USB(func)
  
  /*
+  * default bootcmd for stm32mp25:
 -- 
 2.25.1
 
