@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CE9C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:11:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 612E6C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:11:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C018582116;
-	Thu, 24 Apr 2025 08:09:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E7B1819FC;
+	Thu, 24 Apr 2025 08:09:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dYwNgsjG";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="cZjX/fW2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5168080944; Thu, 24 Apr 2025 08:09:11 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id B95B082119; Thu, 24 Apr 2025 08:09:12 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC96A82139
+ by phobos.denx.de (Postfix) with ESMTPS id 8F2AC82114
  for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:09:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6209a59483=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53NGQWU7019043;
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53NGWOJP009034;
  Thu, 24 Apr 2025 08:09:04 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- dQ3fa47pwLhHewc6bI9cuDFfsef6XCyQ19WThrRxBNs=; b=dYwNgsjGCx8FFktz
- jVIlPYo/tu4RzLX7g41BmsO1o7JUJW+x6Uhy7VoRTDX6c63ZMCbrX3tE3m9K8PEi
- GqQUxogW/fgiYebYNql9eXZAaGwpTJ9BBBvIphADVfhxhLbyFTeJ4M1sratLczA4
- 59Pv7e1ql/Kuv+KPGqFWOBfusE2x8Ph5z7RgVzx+EEHfCev+r4f+X/NqTSUqm8Vw
- 1dOhCKr7tc6JlipWxsg/o6aMjOzsu1ijgaxCYbebnA3CLXbgvC3XryO3kR9rqHP1
- jfj4LoktiIvKEXkuG+r6qi56LgOo5jFyqSdyDdpa5LOUgHIA0CtdZiemgTA7fGI5
- 7i+eWQ==
+ wZwi0MpIeKuQknrbFFAfCtsQFxnowCyhIpVYuul02ks=; b=cZjX/fW2gCIiKhSD
+ 5eBJjCNet+po9T0zlOo1+AqyRw7Zwmp0PESopcHqvRUjW7v8XZT96Z9y2AE0qCSQ
+ J0zi/jkFlY8GW6he8/hvOkgTTchc+/mVfw4CvyP4XUcdN+F5PzUAZ97IML2w8PmC
+ 13THJ9Jthx+TpWzhWISXVx7jNv2DiO6bjrx1ert8YUXjF/aRn0PDrIeetMUGADlz
+ ggDlgxB5EGr0LcjENd8qfEcSGkvABs1dQrh1KJ9zjTRZvVY+b07O734aw0KZL6d2
+ 5OV1MQR3WOtm1mFlzZKABEUt8iJd5J+MiAxg1ydGCoMfD+L7Q3G28C6dWkWcc8p9
+ IsZtYw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjvdw7q-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjxdvth-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 24 Apr 2025 08:09:03 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 937F640061;
- Thu, 24 Apr 2025 08:08:15 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 821F240060;
+ Thu, 24 Apr 2025 08:08:11 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 37A0DA4C068;
- Thu, 24 Apr 2025 08:07:47 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 447F6A46C94;
+ Thu, 24 Apr 2025 08:07:45 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Apr
- 2025 08:07:46 +0200
+ 2025 08:07:44 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
+ <uboot-stm32@st-md-mailman.stormreply.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Sughosh Ganu
  <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/21] configs: stm32mp25: add support of NAND and NOR boot
-Date: Thu, 24 Apr 2025 08:07:11 +0200
-Message-ID: <20250424060723.2695014-10-patrice.chotard@foss.st.com>
+Subject: [PATCH 07/21] board: st: stm32mp2: add led support
+Date: Thu, 24 Apr 2025 08:07:09 +0200
+Message-ID: <20250424060723.2695014-8-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
 References: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
@@ -92,139 +92,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support of UBI boot and activate the needed
-configuration for U-Boot environment in UBI volume for
-NAND or in a MTD partition for NOR device, SPI Flash:
-ENV_OFFSET, ENV_OFFSET_REDUND, ENV_SECT_SIZE is
-aligned with the default MTD partition on NOR device
-of the STMicroelectronics boards.
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Add led support, force default state on U-Boot initialization and put on
+the Linux heartbeat led = "blue-led" during U-Boot execution.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- board/st/stm32mp2/stm32mp2.c       | 13 +++++++++++++
- configs/stm32mp25_defconfig        | 13 +++++++++++++
- include/configs/stm32mp25_common.h | 11 +++++++++++
- 3 files changed, 37 insertions(+)
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |  1 +
+ board/st/stm32mp2/stm32mp2.c             | 43 ++++++++++++++++++++++++
+ configs/stm32mp25_defconfig              |  2 ++
+ 3 files changed, 46 insertions(+)
 
+diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+index d4a75b2f03e..a9bd5e042fa 100644
+--- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+@@ -7,6 +7,7 @@
+ 
+ / {
+ 	config {
++		u-boot,boot-led = "led-blue";
+ 		u-boot,mmc-env-partition = "u-boot-env";
+ 	};
+ 
 diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 6e4f19b1664..2547f2e4bb7 100644
+index 8446b8fd3d6..576a958c783 100644
 --- a/board/st/stm32mp2/stm32mp2.c
 +++ b/board/st/stm32mp2/stm32mp2.c
-@@ -138,6 +138,19 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 			return ENVL_MMC;
- 		else
- 			return ENVL_NOWHERE;
+@@ -8,6 +8,7 @@
+ #include <config.h>
+ #include <env_internal.h>
+ #include <fdt_support.h>
++#include <led.h>
+ #include <log.h>
+ #include <misc.h>
+ #include <mmc.h>
+@@ -54,9 +55,46 @@ int checkboard(void)
+ 	return 0;
+ }
+ 
++static int get_led(struct udevice **dev, char *led_string)
++{
++	const char *led_name;
++	int ret;
 +
-+	case BOOT_FLASH_NAND:
-+	case BOOT_FLASH_SPINAND:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_UBI))
-+			return ENVL_UBI;
-+		else
-+			return ENVL_NOWHERE;
++	led_name = ofnode_conf_read_str(led_string);
++	if (!led_name) {
++		log_debug("could not find %s config string\n", led_string);
++		return -ENOENT;
++	}
++	ret = led_get_by_label(led_name, dev);
++	if (ret) {
++		log_debug("get=%d\n", ret);
++		return ret;
++	}
 +
-+	case BOOT_FLASH_NOR:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
-+			return ENVL_SPI_FLASH;
-+		else
-+			return ENVL_NOWHERE;
- 	default:
- 		return ENVL_NOWHERE;
- 	}
++	return 0;
++}
++
++static int setup_led(enum led_state_t cmd)
++{
++	struct udevice *dev;
++	int ret;
++
++	if (!CONFIG_IS_ENABLED(LED))
++		return 0;
++
++	ret = get_led(&dev, "u-boot,boot-led");
++	if (ret)
++		return ret;
++
++	ret = led_set_state(dev, cmd);
++	return ret;
++}
++
+ /* board dependent setup after realloc */
+ int board_init(void)
+ {
++	setup_led(LEDST_ON);
++
+ 	return 0;
+ }
+ 
+@@ -142,3 +180,8 @@ int board_late_init(void)
+ 
+ 	return 0;
+ }
++
++void board_quiesce_devices(void)
++{
++	setup_led(LEDST_OFF);
++}
 diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-index 3f765346904..0e515e4af65 100644
+index fd5c36ec3e2..3d6665335f5 100644
 --- a/configs/stm32mp25_defconfig
 +++ b/configs/stm32mp25_defconfig
-@@ -3,11 +3,13 @@ CONFIG_ARCH_STM32MP=y
- CONFIG_SYS_MALLOC_F_LEN=0x400000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x90000000
- CONFIG_ENV_OFFSET=0x900000
-+CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp257f-ev1"
- CONFIG_SYS_BOOTM_LEN=0x2000000
- CONFIG_SYS_LOAD_ADDR=0x84000000
- CONFIG_STM32MP25X=y
- CONFIG_DDR_CACHEABLE_SIZE=0x10000000
-+CONFIG_ENV_OFFSET_REDUND=0x940000
- CONFIG_TARGET_ST_STM32MP25X=y
- CONFIG_SYS_MEMTEST_START=0x84000000
- CONFIG_SYS_MEMTEST_END=0x88000000
-@@ -33,9 +35,16 @@ CONFIG_CMD_RNG=y
- CONFIG_CMD_TIMER=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_LOG=y
-+CONFIG_CMD_UBI=y
- CONFIG_OF_LIVE=y
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_IS_IN_UBI=y
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_UBI_PART="UBI"
-+CONFIG_ENV_UBI_VOLUME="uboot_config"
-+CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
- CONFIG_SYS_MMC_ENV_DEV=-1
- CONFIG_NO_NET=y
- CONFIG_SYS_64BIT_LBA=y
-@@ -50,6 +59,7 @@ CONFIG_SUPPORT_EMMC_BOOT=y
+@@ -43,6 +43,8 @@ CONFIG_GPIO_HOG=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_STM32F7=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
  CONFIG_STM32_SDMMC2=y
  CONFIG_MTD=y
  CONFIG_USE_SYS_MAX_FLASH_BANKS=y
-+CONFIG_SPI_FLASH=y
- CONFIG_PINCONF=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
-@@ -57,8 +67,11 @@ CONFIG_RAM=y
- # CONFIG_STM32MP1_DDR is not set
- CONFIG_DM_RNG=y
- CONFIG_SERIAL_RX_BUFFER=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
- # CONFIG_OPTEE_TA_AVB is not set
- CONFIG_WDT=y
- CONFIG_WDT_STM32MP=y
- CONFIG_WDT_ARM_SMC=y
-+# CONFIG_UBIFS_SILENCE_DEBUG_DUMP is not set
- CONFIG_ERRNO_STR=y
-diff --git a/include/configs/stm32mp25_common.h b/include/configs/stm32mp25_common.h
-index 542de8f068d..1c28ce1c1e9 100644
---- a/include/configs/stm32mp25_common.h
-+++ b/include/configs/stm32mp25_common.h
-@@ -35,8 +35,15 @@
- #define BOOT_TARGET_MMC2(func)
- #endif
- 
-+#ifdef CONFIG_CMD_UBIFS
-+#define BOOT_TARGET_UBIFS(func)	func(UBIFS, ubifs, 0, UBI, boot)
-+#else
-+#define BOOT_TARGET_UBIFS(func)
-+#endif
-+
- #define BOOT_TARGET_DEVICES(func)	\
- 	BOOT_TARGET_MMC1(func)		\
-+	BOOT_TARGET_UBIFS(func)		\
- 	BOOT_TARGET_MMC0(func)		\
- 	BOOT_TARGET_MMC2(func)
- 
-@@ -44,6 +51,7 @@
-  * default bootcmd for stm32mp25:
-  * for serial/usb: execute the stm32prog command
-  * for mmc boot (eMMC, SD card), distro boot on the same mmc device
-+ * for NAND or SPI-NAND boot, distro boot with UBIFS on UBI partition
-  * for other boot, use the default distro order in ${boot_targets}
-  */
- #define STM32MP_BOOTCMD "bootcmd_stm32mp=" \
-@@ -54,6 +62,9 @@
- 		"run env_check;" \
- 		"if test ${boot_device} = mmc;" \
- 		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
-+		"if test ${boot_device} = nand ||" \
-+		  " test ${boot_device} = spi-nand ;" \
-+		"then env set boot_targets ubifs0; fi;" \
- 		"run distro_bootcmd;" \
- 	"fi;\0"
- 
 -- 
 2.25.1
 
