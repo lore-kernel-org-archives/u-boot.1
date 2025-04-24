@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3387EC369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 18:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 855E9C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 18:31:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B74E68056A;
-	Thu, 24 Apr 2025 20:31:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17C4B80BA8;
+	Thu, 24 Apr 2025 20:31:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AoCS4HcM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LMS5vFSY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E40680BA8; Thu, 24 Apr 2025 20:31:40 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 70828819FC; Thu, 24 Apr 2025 20:31:55 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64DB6803CC
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 20:31:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 139EE803CC
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 20:31:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ace3b03c043so218594266b.2
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:31:38 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac2bb7ca40bso248235066b.3
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:31:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745519498; x=1746124298; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745519512; x=1746124312; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kEAUnEPIr6LaG+yu6vZ9WznLvbekV3fzYQARbkqHz4o=;
- b=AoCS4HcMhx4iRG7ZI+SQ2ekecjOR61JVWxB5PFUGJV9swPJZtobQ570zhkFJ/Qyzo6
- UC9k1L6CGx3MMMUvXJ80kTMbabWOpD55Hsnss+iaTAjfwigthOzHIX2/lp+iPV2y24Ii
- hViEcmS0RwYGHvVOplzJX3iLsBg3iNcWNprTA=
+ bh=lYTivpyMcKjY9DVshLe04f15bk/dD7jYK+nf+i4DPNg=;
+ b=LMS5vFSYo5Ck54Dm6PIJFx5bUn8R5lf0e20SOxwGaxfkxDlwMgRJq8GCbv9EwEIJ8U
+ 9BoDaFzy+StrmJoXF6de1QwncjKbP8Uj1Xt2//iZ4XyZPO9jyX/I7aZIMQ3rM5oEm7D+
+ HIGOGb4zesN4kaLCMvP6ooquXATnM3vO5v8ns=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745519498; x=1746124298;
+ d=1e100.net; s=20230601; t=1745519512; x=1746124312;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kEAUnEPIr6LaG+yu6vZ9WznLvbekV3fzYQARbkqHz4o=;
- b=pFtWqGtm3AuJmqlsRZQXyiOVLAZpQRuI0sKjhykQrs+EKyQIAinG8Zmnz0qYMIhx6g
- utLjsCjOWKdLE1TqEsH+WpyK7qAODbVyoiQz4wkhx25KhjnKbQMmJpVMUgmKvAosQrYJ
- 6aPyn0WgBBSXc8Ywu8lJpLsy1yrxT+IENXu4z2aBBD+n4iRJsi1P7AsXBw0qKlbjKQhh
- v2fzj/pl9ogUOoDUsCnac2DPaL+mfQnB+5DpVowRdG0RYH1L5DGkTOj3ZVuLqxLjQ74m
- lQh4QY6UT+kJG2RJeA3DoWZs/qUtX5gD6NzbF2OBFwbTN4mDKttinvrYzYWl0o7yWaYL
- Y+kw==
-X-Gm-Message-State: AOJu0YzwT0/MYs5Hw0IM582KKo/LR6mJ1hEqdI4hSUJhWwgAIppC8TPm
- INH2vRKcKYUQid3ko/mRhg7eaQyolS9TAqzV/RwUlEuvMx2LpDVZxWJPbxwZIKOTBaYutiaFEat
- BLYUbXwMFyGekYVQJkJPD04O1dt3AidxWitNW
-X-Gm-Gg: ASbGncuGzHeHjoBCCLVI3ws3zKej7okMXLox60cPxctzz9J1PXwqRQRhrNAlPt4O44T
- +4Yyq1Zyqj/pHi0xHi0RTvn906QwOlepRndR+Vxp6z1oX+lMbOmfDJ/pjVOr1lLPMa0NNsAj1i+
- WkW3V6fTDZOcosfysPOkOFUQ0=
-X-Google-Smtp-Source: AGHT+IGeSh5CY6Dxgtaib0ZFt3XvARJ9vM1bsYQvORluO/kJo45RQ1ad5v7bwp5TOPtt1477ls6UeJqP3YmnDFNwoSk=
-X-Received: by 2002:a17:907:8693:b0:acb:6177:8fbb with SMTP id
- a640c23a62f3a-ace5728022fmr378862466b.32.1745519497760; Thu, 24 Apr 2025
- 11:31:37 -0700 (PDT)
+ bh=lYTivpyMcKjY9DVshLe04f15bk/dD7jYK+nf+i4DPNg=;
+ b=M2v2FS06KbzZm9r6jH3qFJXms6zM+gqcqk8Gl41QRn+/qTaC53zwvEpji2sb8X/wbM
+ 7vt/VP+GzFGq0uw2aYk0HyXeWkKRNjwqfn7I/86Hs04dTZkqkMHVwfLRsInWapsHX8H8
+ T/YFt//qSZH2yDxGKRJdfuQIA6zP+emj2wwCEh5v9dKFRWeJFXp6ucMCC/SICqbSJZrB
+ PLNPtciah9r7pZ7LgRSbh90LNRnk3jiNZPOswzLVRSuOjH1+KyqZ4v8WgW6nOI0SG5BT
+ F3A7OoFo2MYPlfuwboNrLO4w/osDSoe1Xojh83G0zw4dGc2DUPovsNCCZx1T/5FRZuH4
+ PioA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXmgMTlObqq9VKarMxR4uMpd40uQcR+bin97WNtZhb+EMfFq685jANOPa43RF7QhbkY01waKeA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzPRDHXs+xfbrp4un2wKDeAbKLAjs9LIvXEljRLoGBV3XnQ5dgo
+ O8H4zg2y6HYjHD52lb1PoKWUcFeIODHmLmmLrvfkLGqOPJl1/2Ium/XZOXfblAZ49NYKdCRuCcg
+ OqzL2GrcZMkS8wZkRQQstCL6F/WDOgMVEvK7b
+X-Gm-Gg: ASbGncuorayA8NhkoJ21VJPN8iykjqopxgG3vE6lromyznyQYLcRpWCa1+bLwymh+3v
+ 3l2IfCg+1UKaTu0RS+K2OQ44cTQgf+vGFSnp5UWLhoRk46BrxRl1Y6kUbgULWrqrH0AO+l7T3i6
+ YE4zgmvES8nVLG7mwmB7jeOZLiMAf3kPnooA==
+X-Google-Smtp-Source: AGHT+IGrnhrqqFhZa8EtK9AprgvS8qKynFkJcUv/NVIQ3yHlB98jQjcB4SrCeCl/1v6ZKq0kFr19JnswB6+zSDuU5ok=
+X-Received: by 2002:a17:907:3d92:b0:aca:a35e:59fe with SMTP id
+ a640c23a62f3a-ace570e3038mr378123766b.1.1745519512499; Thu, 24 Apr 2025
+ 11:31:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250417132718.2023555-1-jerome.forissier@linaro.org>
-In-Reply-To: <20250417132718.2023555-1-jerome.forissier@linaro.org>
+References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
+ <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
+ <CAFLszTinU=6v+3OyaH0pp8snYm9BgfVrU_+35x2Az7fVs_CfYw@mail.gmail.com>
+ <4aef8b9ffd41d4e36550806f4688fc18dbddc500.camel@phytec.de>
+In-Reply-To: <4aef8b9ffd41d4e36550806f4688fc18dbddc500.camel@phytec.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 24 Apr 2025 12:31:26 -0600
-X-Gm-Features: ATxdqUFhJGOTyI--yQCj9otzxEccdwSy2Qaz1hXVvf9KbhU1Ux5B8IZDs4YV2NY
-Message-ID: <CAFLszTiDw1VvRS_HLbqguC4YxU+4sZHV2oTyBo0ZLsURfSG45Q@mail.gmail.com>
-Subject: Re: [PATCH v5 0/4] NET_LWIP LMB fixes
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: U-Boot mailing list <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Date: Thu, 24 Apr 2025 12:31:38 -0600
+X-Gm-Features: ATxdqUH1BrqCZgsKcmLCkr-HHUdv_YBQF3z7odb93yOUUE_oUW0dlT84PQAfrNI
+Message-ID: <CAFLszTjPHBw-F0EkQJnT4TOsxdYzGH5EtRBaeRCoKGxQQ_cw4g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+To: Martin Schwan <M.Schwan@phytec.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,44 +92,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Martin,
 
-On Thu, 17 Apr 2025 at 07:27, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Thu, 24 Apr 2025 at 06:43, Martin Schwan <M.Schwan@phytec.de> wrote:
 >
-> Two small patches fixing issues with tftp and wget when the network
-> stack is NET_LWIP and LMB is enabled. Plus one prerequisite patch
-> fixing a problem with wget that does printf()/puts()/putc() when
-> called from EFI which is not allowed (messes with the console output)
-> and a small refactoring in net/lwip/wget.c.
+> Hi Simon,
 >
-> Changes in v5:
-> - See changelog in the individual patches
+> thanks for the review and sorry for my delayed reply.
 >
-> Jerome Forissier (4):
->   net-lwip: change static function wget_loop() to be wget_do_request()
->   net, net-lwip: wget: suppress console output when called by EFI
->   net-lwip: wget: add LMB and buffer checks
->   net-lwip: tftp: add LMB and buffer checks
->
->  doc/usage/cmd/wget.rst                        |   2 +-
->  include/net-common.h                          |   2 +
->  lib/efi_loader/efi_net.c                      |   2 +-
->  .../src/apps/altcp_tls/altcp_tls_mbedtls.c    |   8 +-
->  net/lwip/tftp.c                               |  56 +++++++--
->  net/lwip/wget.c                               | 117 +++++++++++++-----
->  net/wget.c                                    |  23 +++-
->  7 files changed, 159 insertions(+), 51 deletions(-)
->
-> --
-> 2.43.0
->
+> On Mon, 2025-04-14 at 05:32 -0600, Simon Glass wrote:
+> > Hi Martin,
+> >
+> > On Wed, 29 Jan 2025 at 07:25, Martin Schwan <m.schwan@phytec.de>
+> > wrote:
+> > >
+> > > Add a bootmeth driver which supports booting A/B system with RAUC
+> > > as
+> > > their update client.
+> > >
+> > > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+> > > ---
+> > >  boot/Kconfig         |  11 ++
+> > >  boot/Makefile        |   1 +
+> > >  boot/bootmeth_rauc.c | 408
+> > > +++++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  3 files changed, 420 insertions(+)
+> >
+> > This looks fine to me. Just some nits below.
+> >
 
-Now that you have your sandbox tests, is it possible to add a test for
-tftp and wget? It would be nice to see code in test/ for changes to
-net/
+[..]
 
-If you need help please let me know.
+> > > +
+> > > +       partitions = env_get("rauc_partitions");
+> > > +       if (!partitions)
+> > > +               return log_msg_ret("env", -ENOENT);
+> > > +       partitions_list = str_to_list(partitions);
+> > > +
+> > > +       slots = env_get("rauc_slots");
+> > > +       if (!slots)
+> > > +               return log_msg_ret("env", -ENOENT);
+> > > +       slots_list = str_to_list(slots);
+> > > +
+> > > +       boot_order = env_get("BOOT_ORDER");
+> >
+> > Environment variables should be in lower case.
+>
+> Unfortunately, we are bound to the naming RAUC uses for these
+> environment variables, which is upper case. See
+> https://rauc.readthedocs.io/en/latest/integration.html#set-up-u-boot-boot-script-for-rauc
+
+Can't you change it, since you are introducing new support here?
+
+If not, then you could perhaps set the env variables to lowercase when
+you find uppercase variables? I suppose that would require updating
+the client to do the same thing too?
+
+It would be very confusing for a user to have upper-case variables for
+some things.
+
+>
+> >
+> > > +       if (!boot_order) {
+> > > +               if (env_set("BOOT_ORDER", slots))
+> > > +                       return log_msg_ret("env", -EPERM);
+> > > +       }
+> > > +       priv->boot_order = strdup(boot_order);
+> > > +
+> > > +       default_tries = env_get_ulong("rauc_slot_default_tries",
+> > > 10, 3);
+> > > +       for (i = 0; slots_list[i] != NULL; i++) {
+> > > +               sprintf(boot_left, "BOOT_%s_LEFT", slots_list[i]);
+> >
+> > same here
+
+[..]
 
 Regards,
 Simon
