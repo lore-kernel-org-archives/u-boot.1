@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE708C369D1
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 08:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFE8C369D1
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 08:29:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 533BE81E72;
-	Thu, 24 Apr 2025 10:29:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D3338209F;
+	Thu, 24 Apr 2025 10:29:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="euUkz1/C";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kuChUAm7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAF7680FDA; Thu, 24 Apr 2025 10:29:19 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id CF1D081E14; Thu, 24 Apr 2025 10:29:20 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEA5D80FDA
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:29:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAF7180F9C
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-54b10594812so755721e87.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 01:29:17 -0700 (PDT)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-30effbfaf61so8759621fa.0
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 01:29:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745483357; x=1746088157; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=B99QiM1W2no73byo0GejxMQmTsIxPvkq6FptgSYAbPU=;
- b=euUkz1/C88eNMpGrH4sg4MT7Exvv60u6L6Jii9V/+MnQbBCWlHm7IzaxRJGi1nom7F
- PX/QxYVekTRFny8CioMpKf1vkOUfYUBYFO8mYozxyHcA/dqz2jpW1qjTO4Iv2yr6TWGy
- ASsbK0B99a3MSLJ3UDSg4J/FLDuo2dEtnLCdbNN/g54sy8TTf56Cd94HZwlNq5e8odCp
- iMunbrSudXTyDh5CPPIlLt6Q3yHjNU7XNzIvHUlDiFYfOeNxCT1eVcw2ZYvrdEGk+eW0
- r0YtdW8xK6eWZxtva1JwRPuJYDbwazh18/aLOtp7YwdLTnu0gnZezO35GV78qDaPuEFC
- mJqQ==
+ d=gmail.com; s=20230601; t=1745483358; x=1746088158; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xAf6v3ma3C2JcXHCxotmrm+VVxXSC/Oq/rX+EFNQu3w=;
+ b=kuChUAm7ayOHWSC7bdGTiFap5/jTlkx+ZAERH7j9eYsccubiIvz9qOkIJfQqNi80VW
+ les2AJmCosfCpbp8s1FiVxT0CzRV6DSd9XtBJItb/XVFzX1Oe3WzAQvXSsFfFuWMbYAe
+ tRR3R8ILXOYIosiJ+xbbHmnpD/ndlQstYtsm2VRllWYNPTX5oA+boFZyV5TkMSXoNjBl
+ G6Q9Xn2MBH52eImbZ9Z+lhEPgiH5vustbL6nyt7CRl+STzyY7U13Dv+byqFLRQJDvSyU
+ d6duTkB+3LieW8VYKAZALGnCCdwT9NU6jxAe3hn0yHva9nbx3aN5ukd8JhXqP5aha5QC
+ gI5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745483357; x=1746088157;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B99QiM1W2no73byo0GejxMQmTsIxPvkq6FptgSYAbPU=;
- b=L5bv5uW7QSvnQEGv+Jef+6+WJhTgmneIMXNAVRUzOA+pQF6w//D2QxTD1up/tUjjNM
- wpXvV9ZxcTi7UQaK70VceMemESI8qc0DJ4hD0FpiMXSBDPru5y/96fG61Jo7k9jC+PkJ
- OOkGUZd1d3Ah7NuZETRyoiqvldRP9o8ZKFgjhyNlFnhvwJzrfET44oEcJJS7SZ1MW3MW
- FBmll0lS51oZKytAgw2mgpNXQOGiP20MIsDfG0tpobAKplDGYTrW7/XAiRrTsQ5yUF+S
- xLHE2fDK3D9rZ+hwfVgUhWLmlpiqarkJ1jC8uMVfc+W4ohH3Rv3vaKRj/r+NoqyCNYBj
- F73A==
-X-Gm-Message-State: AOJu0YxiZVHtxNm7Imu3q6rinHq6a1Lh2lOdHJW7azKGXXPMHpLorq3w
- 8FBrTAuYwZV8sVBFLerriumMfmncgNmbnafXrlVAZcvupQdAdbMI
-X-Gm-Gg: ASbGnctKM3GPQg/w0ISJr6RST/07qfttKS/i/9EDL6ot0E8nGFxXAdkr0V/BPhN/cPN
- a6S8TaYqHFZLK5W9ClRD1seSM5mdHiqGCxBZN8QAGuaICzJy1KS4AD3JGSxykYS6eM/ZKBjsAKM
- NU+/57iAbAaBenFXGIv9sw2Mgbd61FZ7P//pfwkTznauElZUjWfjHVlvnkG2CLP/5syasvqI+yD
- wlIDOnc6EnsKyZIbCjpUR2+SBowr53km+NFfufmg1qoKLFmCW3dKIruyzZ9WJuypY52kZiLqeJh
- dGpsDJbvzqXuQtFq4Q2P4BiWDytl5uMm
-X-Google-Smtp-Source: AGHT+IFQrw4xpNzFJwqieidWj00jlnot/GZNxFfMI2MXZsv7nJ2p50FmKGK/ZM5ec+3KcK3s9o3feA==
-X-Received: by 2002:a05:6512:3053:b0:549:48c6:2a9a with SMTP id
- 2adb3069b0e04-54e7c44d523mr650387e87.40.1745483356768; 
- Thu, 24 Apr 2025 01:29:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1745483358; x=1746088158;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xAf6v3ma3C2JcXHCxotmrm+VVxXSC/Oq/rX+EFNQu3w=;
+ b=N/KjnuLco+unomDk55YWaZdy5uz0dJHqJrkgqCgTGbiZiqB8zteWBROXUoMDX1ZdfE
+ FFUQDHBOcIcRbh9qTuMFUSisHYipIrgWQ0pacKMOVVtaMkZBi3DV1y0NFSsoZ/K34T1i
+ ji4cDXRke5xCZtElM2FVRS1UhKRTVXWZRerdyX0Vj+LelPVfxjbjL0uLDSyDlqRyy5Ng
+ s+VF/VSrsJG0bXBeAimBRyTPM/Oe/TboAPcIyyFEmmgxqqBcvLBNArfDOP5szZETna3L
+ VEgAzHv4oCkIwXX98jJq5TLzXgHCaLKupnwTf2Mr+afDfMWEUfb9ozXI0mLnw9tHUbj8
+ DtHw==
+X-Gm-Message-State: AOJu0YyF4ehxjTw5ADG9HHxzEtMIqBj6JjlEvZA4LEqIqk456zYy69Ue
+ i/eJsv2zWe26OgLkgkCfT91oPx2Er8EJMcF0Y9VdeBU+WEZNqML/
+X-Gm-Gg: ASbGncslKnewPu8m41sdl7r5v05ozRnKRpNjSTn+hzmsLtkZjvSrmj7ESx8r1NGrPcY
+ VaLzWZK985oFJJB9lkLvIAKJJLeiifQbUDFmy7hsZ3oeApR+W7V02TgO02J+690rA2YgMFYF1SU
+ 0NjqYXtBzsCi9iNJgyaTt7srYN1oAwbIhJ3ZxsY8A/X8ZaCgVivBOqldXEEPdub+Um5Tas0sEY9
+ Z1YVhZZ89uX9b2E9rLAE1qdvglVulHZo/vyMMyyXqTs4T1wOVJd9cgzr87SK9SQVvFDrk7tcQzz
+ yx8nsIDq9r9xY+Zmg+8doZYOAinwV0iRWdIrEqBwR6U=
+X-Google-Smtp-Source: AGHT+IGMYfNCPovnKyaddZYcXhHWJHq6H/dD/y2werDt8LFa3RCJUwOCUcldutoZTN+139ZzyxPWRw==
+X-Received: by 2002:a05:651c:12c8:b0:30b:fc16:d482 with SMTP id
+ 38308e7fff4ca-317cc3b4babmr4368881fa.3.1745483357803; 
+ Thu, 24 Apr 2025 01:29:17 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-317d16a832csm1627581fa.67.2025.04.24.01.29.15
+ 38308e7fff4ca-317d16a832csm1627581fa.67.2025.04.24.01.29.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 01:29:16 -0700 (PDT)
+ Thu, 24 Apr 2025 01:29:17 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>,
@@ -75,10 +76,12 @@ To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/4] Tegra: general board changes
-Date: Thu, 24 Apr 2025 11:28:29 +0300
-Message-ID: <20250424082834.17538-1-clamor95@gmail.com>
+Subject: [PATCH v1 1/4] ARM: tegra: add PRAM Kconfig option
+Date: Thu, 24 Apr 2025 11:28:30 +0300
+Message-ID: <20250424082834.17538-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250424082834.17538-1-clamor95@gmail.com>
+References: <20250424082834.17538-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,70 +100,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Wrap CFG_PRAM into Kconfig option for Tegra devices and switch boards
-which used CFG_PRAM to new Kconfig option. Switch those boards to generic
-device header. Move SYS_CONFIG_NAME define to SoC Kconfig since they all
-use same generic header. Drop CONFIG_DISABLE_SDMMC1_EARLY since it is
-unused and not needed anymore.
+Wrap CFG_PRAM with Kconfig option.
 
-Svyatoslav Ryhel (4):
-  ARM: tegra: add PRAM Kconfig option
-  ARM: tegra: convert boards to use TEGRA_PRAM
-  ARM: tegra: set default SYS_CONFIG_NAME from SoC Kconfig
-  ARM: tegra: drop CONFIG_DISABLE_SDMMC1_EARLY
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
+ arch/arm/mach-tegra/Kconfig | 14 ++++++++++++++
+ include/configs/tegra.h     |  4 ++++
+ 2 files changed, 18 insertions(+)
 
- arch/arm/mach-tegra/Kconfig              | 17 ++++++++++++++++
- arch/arm/mach-tegra/board2.c             | 25 ------------------------
- board/acer/picasso/Kconfig               |  3 ---
- board/asus/grouper/Kconfig               |  3 ---
- board/asus/transformer-t114/Kconfig      |  7 ++++---
- board/asus/transformer-t20/Kconfig       |  3 ---
- board/asus/transformer-t30/Kconfig       |  3 ---
- board/avionic-design/medcom-wide/Kconfig |  3 ---
- board/avionic-design/plutux/Kconfig      |  3 ---
- board/avionic-design/tec-ng/Kconfig      |  3 ---
- board/avionic-design/tec/Kconfig         |  3 ---
- board/cei/cei-tk1-som/Kconfig            |  3 ---
- board/compal/paz00/Kconfig               |  3 ---
- board/compulab/trimslice/Kconfig         |  3 ---
- board/htc/endeavoru/Kconfig              |  3 ---
- board/lenovo/ideapad-yoga-11/Kconfig     |  3 ---
- board/lg/star/Kconfig                    |  3 ---
- board/lg/x3-t30/Kconfig                  |  3 ---
- board/microsoft/surface-rt/Kconfig       |  3 ---
- board/nvidia/beaver/Kconfig              |  3 ---
- board/nvidia/cardhu/Kconfig              |  3 ---
- board/nvidia/dalmore/Kconfig             |  3 ---
- board/nvidia/harmony/Kconfig             |  3 ---
- board/nvidia/jetson-tk1/Kconfig          |  3 ---
- board/nvidia/nyan-big/Kconfig            |  3 ---
- board/nvidia/p2371-0000/Kconfig          |  3 ---
- board/nvidia/p2371-2180/Kconfig          |  3 ---
- board/nvidia/p2571/Kconfig               |  3 ---
- board/nvidia/p2771-0000/Kconfig          |  3 ---
- board/nvidia/p3450-0000/Kconfig          |  3 ---
- board/nvidia/seaboard/Kconfig            |  3 ---
- board/nvidia/tegratab/Kconfig            |  7 ++++---
- board/nvidia/venice2/Kconfig             |  3 ---
- board/nvidia/ventana/Kconfig             |  3 ---
- board/ouya/ouya/Kconfig                  |  3 ---
- board/toradex/apalis_t30/Kconfig         |  3 ---
- board/toradex/colibri_t20/Kconfig        |  3 ---
- board/toradex/colibri_t30/Kconfig        |  3 ---
- board/wexler/qc750/Kconfig               |  3 ---
- board/xiaomi/mocha/Kconfig               |  7 ++++---
- doc/board/asus/transformer_t114.rst      |  2 +-
- doc/board/nvidia/tegratab.rst            |  2 +-
- doc/board/xiaomi/mocha.rst               |  2 +-
- include/configs/mocha.h                  | 19 ------------------
- include/configs/tegra.h                  |  4 ++++
- include/configs/tegratab.h               | 19 ------------------
- include/configs/transformer-t114.h       | 19 ------------------
- 47 files changed, 36 insertions(+), 199 deletions(-)
- delete mode 100644 include/configs/mocha.h
- delete mode 100644 include/configs/tegratab.h
- delete mode 100644 include/configs/transformer-t114.h
-
+diff --git a/arch/arm/mach-tegra/Kconfig b/arch/arm/mach-tegra/Kconfig
+index 4690dcb3ea6..67bd2398bfd 100644
+--- a/arch/arm/mach-tegra/Kconfig
++++ b/arch/arm/mach-tegra/Kconfig
+@@ -198,6 +198,20 @@ source "arch/arm/mach-tegra/tegra124/Kconfig"
+ source "arch/arm/mach-tegra/tegra210/Kconfig"
+ source "arch/arm/mach-tegra/tegra186/Kconfig"
+ 
++config TEGRA_PRAM
++	select TEGRA_SUPPORT_NON_SECURE if TEGRA114 || TEGRA124
++	bool "Support reservation of the protected RAM"
++	help
++	  This option indicates the presence of a region of protected RAM.
++
++config TEGRA_PRAM_SIZE
++	hex "Size of pRAM region"
++	depends on TEGRA_PRAM
++	default 0x1000
++	help
++	  Size in kB of carevout which will be reserved as protected RAM starting
++	  from the top of the RAM.
++
+ config TEGRA_SPI
+ 	def_bool y
+ 	depends on TEGRA20_SFLASH || TEGRA20_SLINK || TEGRA114_SPI
+diff --git a/include/configs/tegra.h b/include/configs/tegra.h
+index 77bc38930d2..5db3129fade 100644
+--- a/include/configs/tegra.h
++++ b/include/configs/tegra.h
+@@ -29,6 +29,10 @@
+ #include "tegra210-common.h"
+ #endif
+ 
++#ifdef CONFIG_TEGRA_PRAM
++  #define CFG_PRAM CONFIG_TEGRA_PRAM_SIZE
++#endif
++
+ #include "tegra-common-post.h"
+ 
+ #endif /* __CONFIG_H */
 -- 
 2.43.0
 
