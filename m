@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 390A3C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 18:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3925C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 18:49:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 702B180194;
-	Thu, 24 Apr 2025 20:49:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BB65881FDE;
+	Thu, 24 Apr 2025 20:49:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZvtrpVXb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gpk/UtI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8DD4803CC; Thu, 24 Apr 2025 20:49:29 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 796A181E14; Thu, 24 Apr 2025 20:49:35 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4648B80079
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 20:49:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D575819FC
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 20:49:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3feaedb4d2cso946246b6e.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:49:27 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-604f0d27c24so700380eaf.2
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:49:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745520566; x=1746125366; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745520572; x=1746125372; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hsaorh4JQROF89AjQMh5SGxMXYF/jrfpgIHaj1rEvSk=;
- b=ZvtrpVXbu4qK0yhu/wCPZLEnsT5eIFRth+Mz5s8fiCut7dqieW6yD8/M/vihee4wrO
- mqPSdK6TElbGLvTwfqhE84d84q5NAaBefnMChw/8A+f+kPoVnM+4iG1KZQGwHwYL9MXv
- /Nepse5Zg7BE3BH/GSCNBruXr+0NXANyD0v88=
+ bh=Q4ctwyIFHwC+ZvJp40IJD0nCZQca27rfWGmii47NElk=;
+ b=gpk/UtI4ivbJT8cMXXXKFL9BNvzVNrhbC2JF5pCZDoR6Fxz/EpWpzwV9fVNg4Rk+Fa
+ AVQ9SJgwAOSHcz5U51PNnwjLscL0P8LogbV5MIUBOF7Mhn+re+uuUNuJam9fVH7uCSso
+ l1e0st0U0OsI6l0mNeZXq7CqV1qckxbomJvaA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745520566; x=1746125366;
+ d=1e100.net; s=20230601; t=1745520572; x=1746125372;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hsaorh4JQROF89AjQMh5SGxMXYF/jrfpgIHaj1rEvSk=;
- b=Gf7HbfUhoU57FdJ/Fnh9uROeYfXDPtRMNG7Sa3wOf2hmcY/ukBum3z+Y8Og/H+9WZ6
- PgcTMx9NoXdlzZAEOTAwNI5LvcUT9EvgmJfWIUGp07p1CbzSUoTfvYLn49iVufJyK6S5
- TmIk87RQqqMjwpPzzDBggQU3ZCsmdB7hATYt1jP4ZU0t76Q6mUD2WoxB0DFa01lUZJYx
- HpETtxTv5vNNAWNsxvylU0EIsU1vxAy/AOto3QDw5VGgiKfp4P0K6ZK4OUu1beZwwHEp
- gmh7lL+OhMZMW2T/cMv2Ya6Zn1/oWdbC7JylzN3wmTbGamWTiPW/4QXXcZve5rFOyclX
- Bxrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsHV4mOahsdggeHE6y9w6K14RosRcvwtoGtEAGZo4bDwJwlNHtCx7TrW4zIGF+kZvoTiDHqN4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTLY0Y3l4bXps4yMIWR63ulPJZeB3axOzXkBV8GASEmk0Jb3EC
- w2yDD8QkMvmdJxrhIDmcts/w+CWztxZUqFiuKqg7olQgCLVvQZavdowEdOMz2Vo=
-X-Gm-Gg: ASbGnctL/jwNewVLvaz27WqY+WLfzoKBVrWRxuHCOfOMLpN/hrbI3Fv/W2jLH5s0Xwg
- xzNulOMsTv7J+wct2rsKCCiiMd8Yzb0mKi6pGSVN6eqL84zq6OabgWJ4FDpHWwWhGNHTs4A9E4i
- tCUB2IPOVwk6VVuH7iu3/mhs+I0hJQK3uDF8kiB2BhYLkJjhBbpQQhm/lkLBKlF+vmgLP5dcJ7b
- Ush3Z/bv72vF6rs1IHwUczGsZU/H/kbVLwtqhY/Fu06l11660FHobbPj692IoDZgde42nFDv/jA
- L8rpQtIwb3gTczZo1hLSjWPoWK+Zpwxgou7w08tkDswITfCQ8p8iaqYsQRjctnt5l5ogSVPBKat
- 91g==
-X-Google-Smtp-Source: AGHT+IHoxWfb9DH0jitZc4xREpCMzRSXDWQznraOeY/I+A64zYNszXZawOMxOyvTT2VUTQ95d5ZcRw==
-X-Received: by 2002:a05:6808:3998:b0:401:e610:3c62 with SMTP id
- 5614622812f47-401f11ae206mr387487b6e.19.1745520566009; 
- Thu, 24 Apr 2025 11:49:26 -0700 (PDT)
+ bh=Q4ctwyIFHwC+ZvJp40IJD0nCZQca27rfWGmii47NElk=;
+ b=pMuD2Tjfb8Q3OYxGNZXfi0nXADtQcQqNa8nO2bIFukV36DuZxkNeuSiveNKNREu6Z0
+ D1MVRUIUotimvf9SZOQPACa4YB+OnWxYvKWFzjYl4rKzOnMicV3HaG0xWrT8Hkl8EuiB
+ XsuFqY1xDFlznX1yH4vn20zdpHMfSHcXFwHpK0D/ugzZlrRmDi0O7OcmhAW0GYq+QgJz
+ UB+CqneQO3gqQ7decoNSiWJdgLmu/8nSE9tQNwaeLznqOmCMU4BZHPOnfi7/zj3VINm+
+ WI6CDuOcsSIfLnyGkgHifcav7KENcmsT8RNTUKUKKDDLn9XNYKKwHmXkb0n0o1l5hEM2
+ G+zg==
+X-Gm-Message-State: AOJu0YxTJk9/yEygdjDp0rELVLfSkWL8FWgBtNKNwpqxsnf8FqB33k5j
+ deEoAuOjkb1UalAYPZNtkSYpBRNey8NxN4OHz7XD3sT9uq2/LKStftk5jHf8r9w=
+X-Gm-Gg: ASbGncuvnERDGRk/gX0PSXDljvp0Ok54cZKYfTlw38X5ZM8FImDDwj204bbaY61bRDQ
+ MXMWdTil+ZDSj+2PSzYP2S+9JXrc9RguASZh9C6kPBpHSQmkACVOXGmAKJ7TDL4NZASre4GzA/1
+ 4TqMLRKQV69TO2tHL8RAfGvEJ1e0QYHHGmrm7PjxKoZ4g8GWpu5ObBTUlhhztIDJQjztL4C6mNF
+ RtT4mF+o7S5umWJxVkoT+m5anBPcUVSpUP80u+OtK5G/tb5jArpF5rKv+L2DDYfJqijaSjT2DPl
+ /T8vHWvJ9hnVwy2cmCT62zDAAclHj1pBjWIMTBzg3no0TZox2PtMBGbajm2RgiJMOqhkQk4CyOV
+ FgA==
+X-Google-Smtp-Source: AGHT+IFzxofwhfQ4M3Rg+Dx6K2Aehg7ha4rHu1KPtMleOKhzzLvkPCG8spTLO5QERGlVYH+OqB9e5Q==
+X-Received: by 2002:a05:6820:c90:b0:604:6e6c:7229 with SMTP id
+ 006d021491bc7-6064fad5f28mr479519eaf.0.1745520572083; 
+ Thu, 24 Apr 2025 11:49:32 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-401ec97174fsm359682b6e.33.2025.04.24.11.49.24
+ 006d021491bc7-6064690dd14sm366017eaf.27.2025.04.24.11.49.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 11:49:25 -0700 (PDT)
-Date: Thu, 24 Apr 2025 12:49:23 -0600
+ Thu, 24 Apr 2025 11:49:31 -0700 (PDT)
+Date: Thu, 24 Apr 2025 12:49:29 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Martin Schwan <M.Schwan@phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>
-Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
-Message-ID: <20250424184923.GM5495@bill-the-cat>
-References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
- <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
- <CAFLszTinU=6v+3OyaH0pp8snYm9BgfVrU_+35x2Az7fVs_CfYw@mail.gmail.com>
- <4aef8b9ffd41d4e36550806f4688fc18dbddc500.camel@phytec.de>
- <CAFLszTjPHBw-F0EkQJnT4TOsxdYzGH5EtRBaeRCoKGxQQ_cw4g@mail.gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] bootstd: Rework BLK dependency
+Message-ID: <20250424184929.GN5495@bill-the-cat>
+References: <20250423144913.3918472-1-trini@konsulko.com>
+ <CAFLszTh9vzZS1m3xbQt7Ws06myLU2WUjA6U_3yRvfKQsj9ejrg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DnkkyieSKEY1RzEN"
+ protocol="application/pgp-signature"; boundary="y9GhCctNCdfQaCkU"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjPHBw-F0EkQJnT4TOsxdYzGH5EtRBaeRCoKGxQQ_cw4g@mail.gmail.com>
+In-Reply-To: <CAFLszTh9vzZS1m3xbQt7Ws06myLU2WUjA6U_3yRvfKQsj9ejrg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,95 +97,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DnkkyieSKEY1RzEN
+--y9GhCctNCdfQaCkU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 24, 2025 at 12:31:38PM -0600, Simon Glass wrote:
-> Hi Martin,
->=20
-> On Thu, 24 Apr 2025 at 06:43, Martin Schwan <M.Schwan@phytec.de> wrote:
+On Thu, Apr 24, 2025 at 12:30:50PM -0600, Simon Glass wrote:
+> On Wed, 23 Apr 2025 at 08:49, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Hi Simon,
+> > The bootstd code itself does not have any dependency on BLK in order to
+> > build. However, in order to minimize size growth of non-migrated
+> > platforms, change this from being "default y" to "default y if BLK".
+> > This will make it easier to begin migration of platforms which do not
+> > have any BLK-class device but do want to use bootstd.
 > >
-> > thanks for the review and sorry for my delayed reply.
-> >
-> > On Mon, 2025-04-14 at 05:32 -0600, Simon Glass wrote:
-> > > Hi Martin,
-> > >
-> > > On Wed, 29 Jan 2025 at 07:25, Martin Schwan <m.schwan@phytec.de>
-> > > wrote:
-> > > >
-> > > > Add a bootmeth driver which supports booting A/B system with RAUC
-> > > > as
-> > > > their update client.
-> > > >
-> > > > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
-> > > > ---
-> > > >  boot/Kconfig         |  11 ++
-> > > >  boot/Makefile        |   1 +
-> > > >  boot/bootmeth_rauc.c | 408
-> > > > +++++++++++++++++++++++++++++++++++++++++++++++++++
-> > > >  3 files changed, 420 insertions(+)
-> > >
-> > > This looks fine to me. Just some nits below.
-> > >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Simon Glass <sjg@chromium.org>
+> > ---
+> >  boot/Kconfig | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
 >=20
-> [..]
->=20
-> > > > +
-> > > > +       partitions =3D env_get("rauc_partitions");
-> > > > +       if (!partitions)
-> > > > +               return log_msg_ret("env", -ENOENT);
-> > > > +       partitions_list =3D str_to_list(partitions);
-> > > > +
-> > > > +       slots =3D env_get("rauc_slots");
-> > > > +       if (!slots)
-> > > > +               return log_msg_ret("env", -ENOENT);
-> > > > +       slots_list =3D str_to_list(slots);
-> > > > +
-> > > > +       boot_order =3D env_get("BOOT_ORDER");
-> > >
-> > > Environment variables should be in lower case.
-> >
-> > Unfortunately, we are bound to the naming RAUC uses for these
-> > environment variables, which is upper case. See
-> > https://rauc.readthedocs.io/en/latest/integration.html#set-up-u-boot-bo=
-ot-script-for-rauc
->=20
-> Can't you change it, since you are introducing new support here?
->=20
-> If not, then you could perhaps set the env variables to lowercase when
-> you find uppercase variables? I suppose that would require updating
-> the client to do the same thing too?
->=20
-> It would be very confusing for a user to have upper-case variables for
-> some things.
+> Thank you for letting this happen.
 
-Simon, this is an unreasonable request. This is how RAUC has been
-working and deployed for years and years. It would be a nightmare trying
-to handle migration of existing deployments for an aesthetic change.
+It's what I was asking you to do, FWIW. As I was unsure what part of my
+message was unclear, I just went and did it.
 
 --=20
 Tom
 
---DnkkyieSKEY1RzEN
+--y9GhCctNCdfQaCkU
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgKh68ACgkQFHw5/5Y0
-tyxM9Qv/bLzXP4uW3JlcMB2MfHrSPbg8A6/TV4HbnaEkK1sOv2eKdeN451JKaj6T
-/EUJ+zE4NTAa3yrpp6XfS8LZIq9l93sboSVe/x851Ly2Ry/K2OXomfis+S/LWu+B
-tSVCOhq1MQk5pKUFWvK1rLhKZFxlLxxyBfIozioXzgwN6GVZz1R7V0swgienNvpn
-+8UhHv1wuiKOC8ohhFa4FTMRQaY+aWtXysheeaNx8HIELRa8xSne8ilS66kSi6Ya
-G4A35VDyUt6y/BdcA4rzl3Ssn/Owz+xLFWqscZtyNMo1xPPq8aJeIyicZBK1I2FE
-dXlZx0qifIFUaXGNF65rED+L/JHu9qkL91Ql9cBH/y1zTddtW8lVXF/vghA6qyfj
-3XYbAuwovp2jq5JdgA4LppUgYz5ePLu9mHg4VlaQ73PpPSctqwpMm5LdIJqFtxCb
-Eyt/NgtozB991wELG1uGD2IY+YzPNUWb6KmeNajEHGajMLx5rA5fAgh2WFZb2UXp
-IjHWpr/M
-=dQFT
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgKh7kACgkQFHw5/5Y0
+tyxbRgwAmVQ0zh4FKjt1oCT8k4IqztvCCTBxirnHuysnxTSH2Pfgup2JAl0YtQf+
+OaoYzcl8nNULRoKxueTgOc6uRW+qI9L/V2sQWYvfaPMT9sxd5q+fuppasnqpiyd9
+1qq+4QZ2htE/7pfDd2LFh3YfqLYkvHKqPEjZuvAAa1wOpTXzwsdgjPnOgURYxy0A
+QPLNXQDvLLKjXINNlzwW6T+/wToApgXSK0YJjmXfcY8rM4H7sdLmGuQ5ddVayvnM
+fUYzEifU3+nmmJp1E9/3wppIkryyZ1DTi0oztdZCYNcP5Zz5qY+GHs3cKMV2GsPL
+livfWF4A6lx9Nmg7swKL+fvgg10yUInzKZBgUFlX3kHpuTKRvXYyZQdv+3QPkg6j
+zrze+o3y2DDxnSFfICuQ9dn+pPO36fuY5hAXuXQ8u98pO7Gzi4A/8q6TOoKiyJNP
++e/YJaL1A8I8zuFakExp/6OjDls4uUbBtz1CEPFmZ/mHx9DkeqshhkIPFG9hWLzJ
+p1XodD7s
+=0K/l
 -----END PGP SIGNATURE-----
 
---DnkkyieSKEY1RzEN--
+--y9GhCctNCdfQaCkU--
