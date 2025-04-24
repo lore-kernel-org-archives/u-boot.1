@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 612E6C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF502C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:11:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E7B1819FC;
+	by phobos.denx.de (Postfix) with ESMTP id 84E8182103;
 	Thu, 24 Apr 2025 08:09:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="cZjX/fW2";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oBSFMbUK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B95B082119; Thu, 24 Apr 2025 08:09:12 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 46CA681E25; Thu, 24 Apr 2025 08:09:13 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F2AC82114
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:09:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DADE6819FC
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:09:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6209a59483=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53NGWOJP009034;
- Thu, 24 Apr 2025 08:09:04 +0200
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53O5ZOC2002508;
+ Thu, 24 Apr 2025 08:09:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- wZwi0MpIeKuQknrbFFAfCtsQFxnowCyhIpVYuul02ks=; b=cZjX/fW2gCIiKhSD
- 5eBJjCNet+po9T0zlOo1+AqyRw7Zwmp0PESopcHqvRUjW7v8XZT96Z9y2AE0qCSQ
- J0zi/jkFlY8GW6he8/hvOkgTTchc+/mVfw4CvyP4XUcdN+F5PzUAZ97IML2w8PmC
- 13THJ9Jthx+TpWzhWISXVx7jNv2DiO6bjrx1ert8YUXjF/aRn0PDrIeetMUGADlz
- ggDlgxB5EGr0LcjENd8qfEcSGkvABs1dQrh1KJ9zjTRZvVY+b07O734aw0KZL6d2
- 5OV1MQR3WOtm1mFlzZKABEUt8iJd5J+MiAxg1ydGCoMfD+L7Q3G28C6dWkWcc8p9
- IsZtYw==
+ /i2NBnoJIbjcX4t9ZGcXOriJjMlmQILD7JJ1fWTW2jo=; b=oBSFMbUK3FH8nIl/
+ OBo04KmHWbLVqrznOKwPTyucWATwOsOmasfw4c16IAWX96b144sG7L6TH0TdyZTQ
+ U72+KxVHsWcOca7IbihTyQPrjt4QdKqULHWEYj02wX6YhZtymyvRbT9HvhNNUtMw
+ zbXdPHWpyyQm5910+u/WQwLJjKTMB1ie5/M4pNMH91asAektXjx+JshRSEZ5Ac1K
+ U6nkYdtvpq+ug/pPKshIqGpFHxMWBdP68TrJIA67SC6qKj5hbzVxAg4xNnRLNLg2
+ 4RRwJlBZhtMsz6HUI2ssUcjjWpCzw0VYFtzbaDEPcnK7W3ciON3Vu0EgEo2EcIHS
+ pSE3EA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjxdvth-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk2e2xc-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 24 Apr 2025 08:09:03 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 821F240060;
- Thu, 24 Apr 2025 08:08:11 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 98E424005A;
+ Thu, 24 Apr 2025 08:08:08 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 447F6A46C94;
- Thu, 24 Apr 2025 08:07:45 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5AE71A3E773;
+ Thu, 24 Apr 2025 08:07:41 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Apr
- 2025 08:07:44 +0200
+ 2025 08:07:41 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Sughosh Ganu
+ <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
  <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 07/21] board: st: stm32mp2: add led support
-Date: Thu, 24 Apr 2025 08:07:09 +0200
-Message-ID: <20250424060723.2695014-8-patrice.chotard@foss.st.com>
+Subject: [PATCH 03/21] arm: stm32mp: add boot_mode support for STM32MP25
+Date: Thu, 24 Apr 2025 08:07:05 +0200
+Message-ID: <20250424060723.2695014-4-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
 References: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
@@ -94,111 +94,236 @@ X-Virus-Status: Clean
 
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Add led support, force default state on U-Boot initialization and put on
-the Linux heartbeat led = "blue-led" during U-Boot execution.
+Add support of all the boot mode supported by STM32MP25x family
+with information provided by TF-A in backup register
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |  1 +
- board/st/stm32mp2/stm32mp2.c             | 43 ++++++++++++++++++++++++
- configs/stm32mp25_defconfig              |  2 ++
- 3 files changed, 46 insertions(+)
+ arch/arm/mach-stm32mp/include/mach/stm32.h |  15 ++
+ arch/arm/mach-stm32mp/stm32mp2/cpu.c       | 155 +++++++++++++++++++--
+ configs/stm32mp25_defconfig                |   2 +
+ 3 files changed, 164 insertions(+), 8 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-index d4a75b2f03e..a9bd5e042fa 100644
---- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-@@ -7,6 +7,7 @@
+diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+index 6eb85ba7233..156009f51e3 100644
+--- a/arch/arm/mach-stm32mp/include/mach/stm32.h
++++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+@@ -42,6 +42,9 @@ enum boot_device {
  
- / {
- 	config {
-+		u-boot,boot-led = "led-blue";
- 		u-boot,mmc-env-partition = "u-boot-env";
- 	};
+ 	BOOT_FLASH_SPINAND = 0x70,
+ 	BOOT_FLASH_SPINAND_1 = 0x71,
++
++	BOOT_FLASH_HYPERFLASH = 0x80,
++	BOOT_FLASH_HYPERFLASH_1 = 0x81
+ };
  
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 8446b8fd3d6..576a958c783 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -8,6 +8,7 @@
- #include <config.h>
- #include <env_internal.h>
- #include <fdt_support.h>
-+#include <led.h>
- #include <log.h>
- #include <misc.h>
- #include <mmc.h>
-@@ -54,9 +55,46 @@ int checkboard(void)
- 	return 0;
+ #define TAMP_BOOT_MODE_MASK		GENMASK(15, 8)
+@@ -158,8 +161,20 @@ enum forced_boot_mode {
+ #endif /* CONFIG_STM32MP15X || CONFIG_STM32MP13X */
+ 
+ #ifdef CONFIG_STM32MP25X
++#define STM32_USART2_BASE		0x400E0000
++#define STM32_USART3_BASE		0x400F0000
++#define STM32_UART4_BASE		0x40100000
++#define STM32_UART5_BASE		0x40110000
++#define STM32_USART6_BASE		0x40220000
++#define STM32_UART9_BASE		0x402C0000
++#define STM32_USART1_BASE		0x40330000
++#define STM32_UART7_BASE		0x40370000
++#define STM32_UART8_BASE		0x40380000
+ #define STM32_RCC_BASE			0x44200000
+ #define STM32_TAMP_BASE			0x46010000
++#define STM32_SDMMC1_BASE		0x48220000
++#define STM32_SDMMC2_BASE		0x48230000
++#define STM32_SDMMC3_BASE		0x48240000
+ 
+ #define STM32_DDR_BASE			0x80000000
+ 
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+index 9530aa8534b..7cb71c518bd 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
++++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+@@ -67,14 +67,6 @@ void enable_caches(void)
+ 	dcache_enable();
  }
  
-+static int get_led(struct udevice **dev, char *led_string)
-+{
-+	const char *led_name;
-+	int ret;
+-int arch_misc_init(void)
+-{
+-	setup_serial_number();
+-	setup_mac_address();
+-
+-	return 0;
+-}
+-
+ /*
+  * Force data-section, as .bss will not be valid
+  * when save_boot_params is invoked.
+@@ -97,3 +89,150 @@ void save_boot_params(unsigned long r0, unsigned long r1, unsigned long r2,
+ 
+ 	save_boot_params_ret();
+ }
 +
-+	led_name = ofnode_conf_read_str(led_string);
-+	if (!led_name) {
-+		log_debug("could not find %s config string\n", led_string);
-+		return -ENOENT;
++u32 get_bootmode(void)
++{
++	/* read bootmode from TAMP backup register */
++	return (readl(TAMP_BOOT_CONTEXT) & TAMP_BOOT_MODE_MASK) >>
++		    TAMP_BOOT_MODE_SHIFT;
++}
++
++static void setup_boot_mode(void)
++{
++	const u32 serial_addr[] = {
++		STM32_USART1_BASE,
++		STM32_USART2_BASE,
++		STM32_USART3_BASE,
++		STM32_UART4_BASE,
++		STM32_UART5_BASE,
++		STM32_USART6_BASE,
++		STM32_UART7_BASE,
++		STM32_UART8_BASE,
++		STM32_UART9_BASE
++	};
++	const u32 sdmmc_addr[] = {
++		STM32_SDMMC1_BASE,
++		STM32_SDMMC2_BASE,
++		STM32_SDMMC3_BASE
++	};
++	char cmd[60];
++	u32 boot_ctx = readl(TAMP_BOOT_CONTEXT);
++	u32 boot_mode =
++		(boot_ctx & TAMP_BOOT_MODE_MASK) >> TAMP_BOOT_MODE_SHIFT;
++	unsigned int instance = (boot_mode & TAMP_BOOT_INSTANCE_MASK) - 1;
++	u32 forced_mode = (boot_ctx & TAMP_BOOT_FORCED_MASK);
++	struct udevice *dev;
++
++	log_debug("%s: boot_ctx=0x%x => boot_mode=%x, instance=%d forced=%x\n",
++		  __func__, boot_ctx, boot_mode, instance, forced_mode);
++	switch (boot_mode & TAMP_BOOT_DEVICE_MASK) {
++	case BOOT_SERIAL_UART:
++		if (instance > ARRAY_SIZE(serial_addr))
++			break;
++		/* serial : search associated node in devicetree */
++		sprintf(cmd, "serial@%x", serial_addr[instance]);
++		if (uclass_get_device_by_name(UCLASS_SERIAL, cmd, &dev)) {
++			/* restore console on error */
++			if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL))
++				gd->flags &= ~(GD_FLG_SILENT |
++					       GD_FLG_DISABLE_CONSOLE);
++			log_err("uart%d = %s not found in device tree!\n",
++				instance + 1, cmd);
++			break;
++		}
++		sprintf(cmd, "%d", dev_seq(dev));
++		env_set("boot_device", "serial");
++		env_set("boot_instance", cmd);
++
++		/* restore console on uart when not used */
++		if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL) && gd->cur_serial_dev != dev) {
++			gd->flags &= ~(GD_FLG_SILENT |
++				       GD_FLG_DISABLE_CONSOLE);
++			log_info("serial boot with console enabled!\n");
++		}
++		break;
++	case BOOT_SERIAL_USB:
++		env_set("boot_device", "usb");
++		env_set("boot_instance", "0");
++		break;
++	case BOOT_FLASH_SD:
++	case BOOT_FLASH_EMMC:
++		if (instance > ARRAY_SIZE(sdmmc_addr))
++			break;
++		/* search associated sdmmc node in devicetree */
++		sprintf(cmd, "mmc@%x", sdmmc_addr[instance]);
++		if (uclass_get_device_by_name(UCLASS_MMC, cmd, &dev)) {
++			printf("mmc%d = %s not found in device tree!\n",
++			       instance, cmd);
++			break;
++		}
++		sprintf(cmd, "%d", dev_seq(dev));
++		env_set("boot_device", "mmc");
++		env_set("boot_instance", cmd);
++		break;
++	case BOOT_FLASH_NAND:
++		env_set("boot_device", "nand");
++		env_set("boot_instance", "0");
++		break;
++	case BOOT_FLASH_SPINAND:
++		env_set("boot_device", "spi-nand");
++		env_set("boot_instance", "0");
++		break;
++	case BOOT_FLASH_NOR:
++		env_set("boot_device", "nor");
++		if (IS_ENABLED(CONFIG_SYS_MAX_FLASH_BANKS))
++			sprintf(cmd, "%d", CONFIG_SYS_MAX_FLASH_BANKS);
++		else
++			sprintf(cmd, "%d", 0);
++		env_set("boot_instance", cmd);
++		break;
++	case BOOT_FLASH_HYPERFLASH:
++		env_set("boot_device", "nor");
++		env_set("boot_instance", "0");
++		break;
++	default:
++		env_set("boot_device", "invalid");
++		env_set("boot_instance", "");
++		log_err("unexpected boot mode = %x\n", boot_mode);
++		break;
 +	}
-+	ret = led_get_by_label(led_name, dev);
-+	if (ret) {
-+		log_debug("get=%d\n", ret);
-+		return ret;
++
++	switch (forced_mode) {
++	case BOOT_FASTBOOT:
++		log_info("Enter fastboot!\n");
++		env_set("preboot", "env set preboot; fastboot 0");
++		break;
++	case BOOT_STM32PROG:
++		env_set("boot_device", "usb");
++		env_set("boot_instance", "0");
++		break;
++	case BOOT_UMS_MMC0:
++	case BOOT_UMS_MMC1:
++	case BOOT_UMS_MMC2:
++		log_info("Enter UMS!\n");
++		instance = forced_mode - BOOT_UMS_MMC0;
++		sprintf(cmd, "env set preboot; ums 0 mmc %d", instance);
++		env_set("preboot", cmd);
++		break;
++	case BOOT_RECOVERY:
++		env_set("preboot", "env set preboot; run altbootcmd");
++		break;
++	case BOOT_NORMAL:
++		break;
++	default:
++		log_debug("unexpected forced boot mode = %x\n", forced_mode);
++		break;
 +	}
++
++	/* clear TAMP for next reboot */
++	clrsetbits_le32(TAMP_BOOT_CONTEXT, TAMP_BOOT_FORCED_MASK, BOOT_NORMAL);
++}
++
++int arch_misc_init(void)
++{
++	setup_boot_mode();
++	setup_serial_number();
++	setup_mac_address();
 +
 +	return 0;
 +}
-+
-+static int setup_led(enum led_state_t cmd)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	if (!CONFIG_IS_ENABLED(LED))
-+		return 0;
-+
-+	ret = get_led(&dev, "u-boot,boot-led");
-+	if (ret)
-+		return ret;
-+
-+	ret = led_set_state(dev, cmd);
-+	return ret;
-+}
-+
- /* board dependent setup after realloc */
- int board_init(void)
- {
-+	setup_led(LEDST_ON);
-+
- 	return 0;
- }
- 
-@@ -142,3 +180,8 @@ int board_late_init(void)
- 
- 	return 0;
- }
-+
-+void board_quiesce_devices(void)
-+{
-+	setup_led(LEDST_OFF);
-+}
 diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-index fd5c36ec3e2..3d6665335f5 100644
+index 717724ff672..d11910f139f 100644
 --- a/configs/stm32mp25_defconfig
 +++ b/configs/stm32mp25_defconfig
-@@ -43,6 +43,8 @@ CONFIG_GPIO_HOG=y
- CONFIG_DM_I2C=y
+@@ -44,6 +44,8 @@ CONFIG_DM_I2C=y
  CONFIG_SYS_I2C_STM32F7=y
  CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
  CONFIG_STM32_SDMMC2=y
- CONFIG_MTD=y
- CONFIG_USE_SYS_MAX_FLASH_BANKS=y
++CONFIG_MTD=y
++CONFIG_USE_SYS_MAX_FLASH_BANKS=y
+ CONFIG_PINCONF=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
 -- 
 2.25.1
 
