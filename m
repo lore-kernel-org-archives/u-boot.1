@@ -4,105 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAF39C369C2
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 12:14:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D41DAC369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 12:19:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A6F18056A;
-	Thu, 24 Apr 2025 14:14:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 417CD809D4;
+	Thu, 24 Apr 2025 14:19:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kDcYet+4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IisNCIIW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64B548082A; Thu, 24 Apr 2025 14:14:25 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 37F1880F9C; Thu, 24 Apr 2025 14:19:11 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27D3B80F9C
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:14:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAA3280194
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:19:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B183841A01
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 12:14:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745496860;
- bh=82Mh9yp0cSN1h7ca2bidCTMX0L0WwedYebqvWTUIeY4=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=kDcYet+4R1CnpJQ5a0A8jA+H7h5i6nBk/Rwv1laQqIXJkSlsikSJqG0yx+Q5I52bw
- 36O3lmccE2npGGPgYzoEvxpPfCyC/BKWXLtKeKDx/iF1BVzGWIHvcZrmdC53s6DC44
- RIJH6P2aN36q18ejM77T8qNSAXGgjsKOHdPhCIT6smkcp8ABsvsJAuX6GO2XKSAzC3
- xn+ZPyChWJnvOeC9r2ohn5aprkDckL4br58+h+AIqSB3ZEwu4RUElIBfZWrJGuSArc
- 22DK+fpUhS42dzwQybAbLCOkP64f4xUGm9insukbuFDH3/UsbVmDHYUGyBeRqyTmDK
- sf6h5abyig7Sg==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-3912fe32a30so354444f8f.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 05:14:20 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43edb40f357so6245475e9.0
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 05:19:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745497148; x=1746101948; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=v22zDW2OgpQQ+4yWbgh3aX07aGYI2UZq24l+DYa5DAk=;
+ b=IisNCIIWPn1MFk9Wvy130BRotULFGjSDGgyxAi8/o53Rf1V7HAUniBmE0Tgm3MbfOB
+ ynBrliOptEJQdstSsQ3rLi9XzOsgo+566HYzbpQCrA1N/U9XAbs5iQFsYFZmc4y9h2j6
+ hOlICjQJiYQQK/Ox/It6+Ud/9FtWSAxcFDYDqysXHvUiceXqr9nH/I+Q0P4ze+IU/L+Y
+ Ac4cZ5vZSbxZap/4dHYZwcMXuSaJR+SUvYXFPMsw2Y6GnT4XfV1gVCjgLoFHUcZG7Rz9
+ Ncb/DFb57w5bbIgEnVAQRh4YpuWsOoZgZQi2SfwalGc/WcI8u3t4ggPx9yn12i1VAeAQ
+ mfXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745496812; x=1746101612;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=82Mh9yp0cSN1h7ca2bidCTMX0L0WwedYebqvWTUIeY4=;
- b=Tj/D6mmlROrQwM8MI7ZNuS6N2d8uZZdNMM5RTn3hf2HcthsBh4oQRplh/F4gFuF5cT
- /Sm17JkqRO3kwiXUpIkPArc9DquPUVH4RedwtTmuzsZ/aGoeRZ0pcDoG+lzyu6kVPtUw
- 7wQHgX9V8aLhGDKColhIw/cVgxhn+J4FNdCG789XjO9ufhaNaCowguiD+lCqMXOLkE4C
- 1dRy1faxIM8jNsn6GrsUJrsGDucCTs4Aq5UO3/KsNS0g/na2UQaRt+bbowwbys6mdp+u
- Eo9obIjYWjV4FlWHBIWG0qclfJBIUsFyult103tUb9fDzDtFQAliLPyRt8A6wVltqRH3
- fEdQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWbeIPBv886uAGixuuKuKuja2mn/MLzkmFDkBwlPcJI3PDgbrZDT6PBoKLrfJHnyBbdX21Sn8E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3nFv1aGhVmtr0ARdX6fecpAaxwKcwxvd6m53zUgOlCZ1sV96+
- PumL8VRiJSNJh70F84U444Xyf8GnuqbA1xgr0XsnzbFYtFLTJTsvL2YZ8H1udog+sKl60Jc0ox3
- FAR6YI4nKGBXSP1y7RkTJcSu0vRNQvNCP1lxoEn1nnmnVaKCxMJUET8qyQskrrzdGoDM=
-X-Gm-Gg: ASbGncvDQMP10yS1GdW55zOKWIpMCLjhTnNGX1mllpOOduefzmn0KiTpybBAzXRqRBq
- F9QjiM/By22bBrXY3Fvk05GLCcn2wPOZGRxY2Nm99U15vKYTN/XYNRSy4m11JXcCQE6jnLTjWQ7
- 7RezUHmp3hjJs4oa+tGJBzMSz/SuMmmmTHhrf1rrNDHEho6XiAGc8fZMKWtA9ZuWHHwV9stX3B7
- xmDJ22ZEG8/X6MVfrmA/aDnQ/BR0HpgtyCpOVV6KQrbxKnRahiLeXEeMzFlq3S54DmK67r9f550
- 9g10qQBKcj7SpgE9xp7eM7KMIeZib3zD38OJ2Fu5CifmPIpCZ2UAuudDwURNxe0PGsRlnk3IwqZ
- gZSfia52fMhSIgg==
-X-Received: by 2002:a05:6000:18a3:b0:39a:c9c1:5453 with SMTP id
- ffacd0b85a97d-3a06cfb079emr1971840f8f.49.1745496812154; 
- Thu, 24 Apr 2025 05:13:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGkVjtD9XVzCCHtqAMV4oFttEC7esoKScdFW/0K5OZukT4dGIuwxRcnjFbiSnfmmCMbwliXGg==
-X-Received: by 2002:a05:6000:18a3:b0:39a:c9c1:5453 with SMTP id
- ffacd0b85a97d-3a06cfb079emr1971807f8f.49.1745496811781; 
- Thu, 24 Apr 2025 05:13:31 -0700 (PDT)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ d=1e100.net; s=20230601; t=1745497148; x=1746101948;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=v22zDW2OgpQQ+4yWbgh3aX07aGYI2UZq24l+DYa5DAk=;
+ b=nmgOFvozTdYyQEHENfKCrnbLKGMTbvq+VibjWzdkDBGSRRpltJ/olf1UY+hY0DPJdM
+ F9wzgP1s7DiRFQviazpAnF2y37njv+0NFxm0O3jSVbyEV75TsjNMP/2gHOBPLJ44GORO
+ HYXNEFhPB8X0nDFldARYqKukUaa18EODn0TOORU1E/ZHQ7c/zT9SLWMsfUbLnNuKm7hn
+ w7BR6SXYCEq9WK76KXRJspEoax1sGELcRvZS/d5uhbXwkb9XCUfzaxfh0+KfN60RYKkh
+ JBofv+azspoR46H3aIoL4lYX/ijNS88t7ekTSJHKBMFPTskbK5c9iUQNLrRAEFKpcbkI
+ +pZQ==
+X-Gm-Message-State: AOJu0YzA6+5KFWwnj4LCE2BYTNVkeSUtrOaYGDWj3tuuJM3dE9qVnq60
+ 7uMq8lQqA64/m3bS3nan7bAFGSWPKKAGSQC0Iqw81btE3RmGIpYcPS6slxeAvB4=
+X-Gm-Gg: ASbGncvrosXr3KVJKzn/Lf8Odb/GfEbDDAgQ0FkcT3UvNlbGROjlecTLAF+fHhqh/aO
+ FmoB/q43+D+/H5zL8Czbx0x6SgWIMYYNYGPybdk43c1Dou/E4/jTq6WXU8pDUGB5dTsMkfCJgiC
+ C67a004NTBD44d8hyxT+LJ045rs8sYi8hEyUfAKJmacF/kkbnLCoT4iOV4Y/WYqqXlJL2zMOaC+
+ IT/DwGOc4RuTSG1MfrkQ9/7VNv1241QeykAExCu7q8gaEFk5gUaCR50MDqLRsqb9SGf4awzCM7X
+ kS5tlJF7QM/MOca/lfFfNEjPN7I2+jydYMHYY/Bx/GuVFn9a77o3C/dyhOrcm/fn/Qa8NBtKLwB
+ wjz9uAhXWo0Hj0Gnt8w==
+X-Google-Smtp-Source: AGHT+IFadImXcRzyCtM3or3nBHRftBPvWel2a4UkIdwl1YVF8Pg4MlvEcAzlfJdkBrf1YrnjQR0JmA==
+X-Received: by 2002:a05:600c:4fcc:b0:43d:7588:6687 with SMTP id
+ 5b1f17b1804b1-4409bd22e82mr20853415e9.12.1745497148271; 
+ Thu, 24 Apr 2025 05:19:08 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:1455:2ba2:63a:a22b?
+ ([2a01:e0a:3cb:7bb0:1455:2ba2:63a:a22b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a06d5326e1sm1900906f8f.70.2025.04.24.05.13.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 05:13:31 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>
-Cc: Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>,
- Sumit Garg <sumit.garg@kernel.org>, H Bell <dmoo_dv@protonmail.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Matthias Brugger <mbrugger@suse.com>, "E . Shattow" <lucent@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Andreas Schwab <schwab@suse.de>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v4 8/8] doc: jh7110: describe debug UART
-Date: Thu, 24 Apr 2025 14:13:15 +0200
-Message-ID: <20250424121315.144549-9-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250424121315.144549-1-heinrich.schuchardt@canonical.com>
-References: <20250424121315.144549-1-heinrich.schuchardt@canonical.com>
+ 5b1f17b1804b1-4409d29bf7csm20977205e9.4.2025.04.24.05.19.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Apr 2025 05:19:07 -0700 (PDT)
+Message-ID: <31982429-d675-4696-991c-a14600723d65@linaro.org>
+Date: Thu, 24 Apr 2025 14:19:07 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 0/4] NET_LWIP LMB fixes
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Mikhail Kshevetskiy
+ <mikhail.kshevetskiy@iopsys.eu>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20250417132718.2023555-1-jerome.forissier@linaro.org>
+ <CADg8p95zBr0H-gj1XQL+Wm6G=65Ts0sZVWdq1MrTo0wJTA=vSw@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CADg8p95zBr0H-gj1XQL+Wm6G=65Ts0sZVWdq1MrTo0wJTA=vSw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,42 +108,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide the settings for using the debug UART in SPL.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v4:
-	no change
-v3:
-	no change
-v2:
-	new patch
----
- doc/board/starfive/jh7110_common.rst | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
 
-diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive/jh7110_common.rst
-index fb8d87a1551..4a8058ee5da 100644
---- a/doc/board/starfive/jh7110_common.rst
-+++ b/doc/board/starfive/jh7110_common.rst
-@@ -87,3 +87,17 @@ u-boot.itb via the Y-modem protocol.
- Due to restrictions of the boot ROM not all X-modem implementations are
- compatible. The package tio (https://github.com/tio/tio) has been found to be
- usable.
-+
-+Debug UART
-+----------
-+
-+By default the SBI interface is used for the debug UART. But this only works
-+in main U-Boot. To enable the debug UART in SPL, too, use the following
-+settings::
-+
-+    CONFIG_DEBUG_UART=y
-+    CONFIG_DEBUG_UART_NS16550=y
-+    CONFIG_DEBUG_UART_BASE=0x10000000
-+    CONFIG_SPL_DEBUG_UART_BASE=0x10000000
-+    CONFIG_DEBUG_UART_CLOCK=24000000
-+    CONFIG_DEBUG_UART_SHIFT=2
+On 4/24/25 14:00, Sughosh Ganu wrote:
+> On Thu, 17 Apr 2025 at 18:57, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> Two small patches fixing issues with tftp and wget when the network
+>> stack is NET_LWIP and LMB is enabled. Plus one prerequisite patch
+>> fixing a problem with wget that does printf()/puts()/putc() when
+>> called from EFI which is not allowed (messes with the console output)
+>> and a small refactoring in net/lwip/wget.c.
+>>
+>> Changes in v5:
+>> - See changelog in the individual patches
+>>
+>> Jerome Forissier (4):
+>>   net-lwip: change static function wget_loop() to be wget_do_request()
+>>   net, net-lwip: wget: suppress console output when called by EFI
+>>   net-lwip: wget: add LMB and buffer checks
+>>   net-lwip: tftp: add LMB and buffer checks
+>>
+>>  doc/usage/cmd/wget.rst                        |   2 +-
+>>  include/net-common.h                          |   2 +
+>>  lib/efi_loader/efi_net.c                      |   2 +-
+>>  .../src/apps/altcp_tls/altcp_tls_mbedtls.c    |   8 +-
+>>  net/lwip/tftp.c                               |  56 +++++++--
+>>  net/lwip/wget.c                               | 117 +++++++++++++-----
+>>  net/wget.c                                    |  23 +++-
+>>  7 files changed, 159 insertions(+), 51 deletions(-)
+>>
+> 
+> Tested that the LMB checks are performed and wget/tftp commands do not
+> overwrite on an existing LMB reservation.
+> 
+> Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+
+Thanks Sughosh! Would you mind giving your Tested-by: by replying to [1]
+and [2] so that the tags are picked up automatically by patchwork? As I may not
+send another version if there are no more comments.
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20250417132718.2023555-4-jerome.forissier@linaro.org/
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20250417132718.2023555-5-jerome.forissier@linaro.org/
+
+Thanks,
 -- 
-2.48.1
+Jerome
 
+> 
+> -sughosh
+> 
+>> --
+>> 2.43.0
+>>
