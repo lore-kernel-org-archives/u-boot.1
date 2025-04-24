@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74732C369D5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:10:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F7F7C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 06:10:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0909281F45;
+	by phobos.denx.de (Postfix) with ESMTP id 4CD2F82105;
 	Thu, 24 Apr 2025 08:08:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="UoVJb3PA";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="fqefLs8T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FBDC820FE; Thu, 24 Apr 2025 08:08:54 +0200 (CEST)
+ id CAD3E8082A; Thu, 24 Apr 2025 08:08:54 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 361128056A
+ by phobos.denx.de (Postfix) with ESMTPS id DA75180F9C
  for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 08:08:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6209a59483=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53O63hpJ002198;
- Thu, 24 Apr 2025 08:08:50 +0200
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53O65O0M005380;
+ Thu, 24 Apr 2025 08:08:51 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- tV1c9gViFN9ThTZWwtA2YM++yGxqlY/+dvqsnTb6bms=; b=UoVJb3PAXGpGkhjG
- l8DVwEGrqvUBGAcK7B5OAjcP9Dqxt3tIwXYTWeiZ10Ze6ResoNQ30NMW6a9JAI3S
- f/OtFvljEJEnDkKcQkFQq2KPeTX8M7dwxni+hSqGRlr6bssVUXqSjeBivYCR589I
- XfAJg5iO7vH3krttOZqd8cSg7VzwNeRGOxBQ4He6hp9HpuK9ufRVx28LLtC3t0+d
- zJXpr5xdpA4WiEqsHn6q+/1XdpCfBEW3kGEc4f96aSJ5TCW6mWqWLmAnuO/X4W77
- 49D0H+72z8pqfTtD29DiFVGoBeKGmh6JF1nJBv5StZSOATVgzAUneA/tA/wgwUkg
- UWIwDg==
+ 2CknUPOw7Lxuhrsj/lZOPHPaWSWLUsspLSSUlTa/kfA=; b=fqefLs8TZQIkILYV
+ 5uI1PWxNj3SdwjL6OiWxkYI8hNyGnuhoUv9K89vdBQ6XzVKVbdt4tBD4+BQ8wnPS
+ FKREAPqXhTWaunB2tf7270CARF78aY92okKz9i4w06UNoBNWTbcKu0TXcc70zdL6
+ xkgG51bG37YQRU/eUunsQQDALPRLtf2PKlDSjta3DGqzamsgPqXxYnKDvhw4gPuQ
+ 7xYAltTgi4NpMQ46lASH2z6N7FTrMzNXRnYJiILw42cNm2roolcc04PRPsyee4S7
+ C8cdJZUc0l4+GxeJKNpj4QRm1zHWxcTE92x1Zdk7EnDDGmQbyO0r2PaI6AJ7eY7C
+ vt8Q7A==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjye1ps-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk3e1yk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 24 Apr 2025 08:08:50 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8A30840059;
- Thu, 24 Apr 2025 08:08:08 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9CB9F4005B;
+ Thu, 24 Apr 2025 08:08:11 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D6518A5094F;
- Thu, 24 Apr 2025 08:07:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B7CD5A5097A;
+ Thu, 24 Apr 2025 08:07:58 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Apr
- 2025 08:07:54 +0200
+ 2025 08:07:58 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
  <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 17/21] arm: stm32mp: fix package IDs for stm32mp25
-Date: Thu, 24 Apr 2025 08:07:19 +0200
-Message-ID: <20250424060723.2695014-18-patrice.chotard@foss.st.com>
+Subject: [PATCH 21/21] arm: stm32mp: stm32prog: add support rootfs-a for OTA
+Date: Thu, 24 Apr 2025 08:07:23 +0200
+Message-ID: <20250424060723.2695014-22-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
 References: <20250424060723.2695014-1-patrice.chotard@foss.st.com>
@@ -89,64 +89,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix package IDs for stm32mp25.
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
+Add support of "rootfs-a" name to allow support of A/B mechanism for OTA
+on rootfs.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
 ---
 
- arch/arm/mach-stm32mp/include/mach/sys_proto.h |  6 +++---
- arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c    | 10 +++++-----
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-index 0770f0a0cf6..bf1c39742c1 100644
---- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-+++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-@@ -89,9 +89,9 @@ u32 get_cpu_package(void);
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+index f6395bad0ec..5b027fad048 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+@@ -1157,7 +1157,8 @@ static int create_gpt_partitions(struct stm32prog_data *data)
  
- /* package used for STM32MP25x */
- #define STM32MP25_PKG_CUSTOM		0
--#define STM32MP25_PKG_AL_TBGA361	3
--#define STM32MP25_PKG_AK_TBGA424	4
--#define STM32MP25_PKG_AI_TBGA436	5
-+#define STM32MP25_PKG_AL_VFBGA361	1
-+#define STM32MP25_PKG_AK_VFBGA424	3
-+#define STM32MP25_PKG_AI_TFBGA436	5
- #define STM32MP25_PKG_UNKNOWN		7
- 
- /* Get SOC name */
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-index ac229bdf7cc..12b43ea5cdf 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-@@ -26,8 +26,8 @@
- 
- /* Package = bit 0:2 of OTP122 => STM32MP25_PKG defines
-  * - 000: Custom package
-- * - 011: TFBGA361 => AL = 10x10, 361 balls pith 0.5mm
-- * - 100: TFBGA424 => AK = 14x14, 424 balls pith 0.5mm
-+ * - 001: VFBGA361 => AL = 10x10, 361 balls pith 0.5mm
-+ * - 011: VFBGA424 => AK = 14x14, 424 balls pith 0.5mm
-  * - 101: TFBGA436 => AI = 18x18, 436 balls pith 0.5mm
-  * - others: Reserved
-  */
-@@ -189,13 +189,13 @@ void get_soc_name(char name[SOC_NAME_SIZE])
- 		case STM32MP25_PKG_CUSTOM:
- 			package = "XX";
- 			break;
--		case STM32MP25_PKG_AL_TBGA361:
-+		case STM32MP25_PKG_AL_VFBGA361:
- 			package = "AL";
- 			break;
--		case STM32MP25_PKG_AK_TBGA424:
-+		case STM32MP25_PKG_AK_VFBGA424:
- 			package = "AK";
- 			break;
--		case STM32MP25_PKG_AI_TBGA436:
-+		case STM32MP25_PKG_AI_TFBGA436:
- 			package = "AI";
- 			break;
- 		default:
+ 			/* partition UUID */
+ 			uuid_bin = NULL;
+-			if (!rootfs_found && !strcmp(part->name, "rootfs")) {
++			if (!rootfs_found && (!strcmp(part->name, "rootfs") ||
++					      !strcmp(part->name, "rootfs-a"))) {
+ 				mmc_id = part->dev_id;
+ 				rootfs_found = true;
+ 				if (mmc_id < ARRAY_SIZE(uuid_mmc))
 -- 
 2.25.1
 
