@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF046C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 09:17:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D393C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 09:17:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1D978210D;
-	Thu, 24 Apr 2025 11:17:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E3DA81E72;
+	Thu, 24 Apr 2025 11:17:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KQRuPiLQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U6R72Hfy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22FD2809D4; Thu, 24 Apr 2025 11:17:05 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 96036809D4; Thu, 24 Apr 2025 11:17:05 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 050BD81E14
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:17:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DDDA815D1
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:17:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43cef035a3bso4720285e9.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 02:17:02 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso8083125e9.3
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 02:17:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745486221; x=1746091021; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1745486223; x=1746091023; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=apXP5/3htbLyy39AfE+jXbzfAzZU0GnsTRn3fdGCZcY=;
- b=KQRuPiLQGXxiAkvLrXA8DwtdmK9iUAKUjX77AhEP7HCim0Q+t3qGwloSguO5bP/3QI
- UZ1H92udj/KpJgarOCNzyHKzGLdxR7kUU+x5fhL9iqnjjXOHv1MOOoGQvvkcUVTqg6Gv
- /QW58ur5+ndX7YX+ZWc4u8peWq2kUoVSQsJMYugYm/OTq87Fc5KToEzZ0UoZH5rRLPZJ
- tM/kYHfjBBUvkFb3k87iUZBS2JAm2yRaPN2XmjLkuXBWrfIHm9XYSyOC87Xqiz9ArIik
- T8jL542dZI/WLTUmiQ11ONQ4BW4Zun0RcPB7fWAh+Pi59CB/MVjKdktJrqWefvSRN1/v
- muvg==
+ :reply-to; bh=pXvkTRu6wqOFFqzFzfX5y0/x1cQjhfkMoGX0MNgjPQk=;
+ b=U6R72HfyOzIFMMPJ0KyzHrXTm+BmKTkAUEigrH54TRHm75CYQu9+qgV9pAe0mD/nlE
+ 7PoiO9mV60pcfpGQqrdOjlzs4kconu/ONnk0cZaoEc3uyTC4LZYsV1Lu7UBu+XFXb8Dt
+ eBAAgwC8hoVdEINF8G8pRy3nN9DygEE73JX2z3ZwfW9zzV8REFEis1RL3flI0S6FHUta
+ g0A77aysrUQYUEMAGBR4maYs53GyyySFWiOFZLEM6jGITDM2YCUbs+X40yLE0nNcKSiF
+ krL2qfxXZhn/WjnPnIEO/EXJ6jyo7pzs2ITA5jOAPJznL85sDJyUuvQ2Wqm3DqA6kYXe
+ WYpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745486221; x=1746091021;
+ d=1e100.net; s=20230601; t=1745486223; x=1746091023;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=apXP5/3htbLyy39AfE+jXbzfAzZU0GnsTRn3fdGCZcY=;
- b=azRLxZHNS0Wwhlcc+QvQi1RC9LU4oW5gB9S6bmhv01K8poB08Lo6sLeC1Fa9PSRntw
- QeG9zujQ3yFA5xV6hs0pQY9XNvMKkSVNKkWVAWndlB1l4/op6zUsFHbzSuI4ikw9ktt8
- /yIXHUyYct1CY+Di1ipxVZre+y/16au9WqGxRrDIEJmNbsuQyiDzZ4bb1HfO5UnxhPuK
- GSW1ath6PYyzR+iuStOsfuyl5+c1WMnAOh9aEAiIA68GNPIW497h596wm8B7SDsE+cn8
- 1m+FeNYfzH/55hj1LjeX88q94gJ5Ogjf+pkbzXM0OOswOpcRooASb2CP1oJrAmWCCT09
- K70Q==
+ bh=pXvkTRu6wqOFFqzFzfX5y0/x1cQjhfkMoGX0MNgjPQk=;
+ b=HZNLG9SAW5hI9p0zfi9ujVgc6RcpY/Tr5efl5Yqv64/32WNbf/Fw5SA/g2mwVeRKHp
+ YGngNcKnz2h9MMOdtSZEGKL1kxn9A/h6G+dpYKm08rpZz/nZ5O7jSPnP7STRZNdg3Cmn
+ kxyJTIts6A0frfPNrdwZN0VzqpzPpVwwvydmDp5jdU+8lEJqNNQ9GkvBqk2JIvLwkE76
+ ZgmneHKc5uQBv6D7h0c4/Eqm0fcnBqdsyPTGgDYzhIO3wrPXvKBUPJ1sn0vJdGdn4t4i
+ D3B7Oud3J8bj9nOZQN2/efUMSQg5W0fQTtH2Xn2Q9tZjiO+z9viuoAKBktkO3qvkq8Fs
+ rBXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXeC9n3IG1tyKiISkY3U/XIzjSt6KT5g4ghRpsbJ9LQFOTC5wRJF//sGtRQni1I8xzvEJ4LXO4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyM+4EJLVq1cMbv7JsT4rcp3+GdB6HyaRtL70zty77C8P1M3RLD
- RJhq3kGoaZBwcBaZcc4HNodeyrq8+zaSAK1WtPRptz6v65nCR2uJBNw0R0O5YTs=
-X-Gm-Gg: ASbGncu608RdZOHwNzQ5FbpbvnLog/tytreZfM2YpnfSxy9gQtSbyPf/mf9ExwJHaTD
- 6dhlEZkWipX4P3Pga7odKqnPjy6W6sUdHB8CMrproR+gi/lrHM2GWf9EwJat47MtRcZpgcLGhFQ
- 1/16kKfGRI6bSxL8Y8kbRUU0cAl3VKsI6lhEdtWi1KCBrIHcm/k7vvNfUm+kM5ysdP19IDX9zeS
- eWjzkqsoDlKsVMJ0PmWQnlnnfwhahuCK+2udHAwxh9sc8cZNqKpZa7pEdIM0Gk0hap6bdGwXcwy
- LKmLpUHrSQf/6trveGF8vDZnqpWeOixWD+La8l6CFjdVJMQP+dPy1MvSQZWc/A==
-X-Google-Smtp-Source: AGHT+IGtdOrkjTTyaLOMpOHaGJo0jDWEIrMDVHUtwgoS+Ld48VJpgqAXaDD58BrtdD/mm4JoW4/Izw==
-X-Received: by 2002:a05:600c:4e14:b0:440:6a68:8260 with SMTP id
- 5b1f17b1804b1-4409bcfb62dmr18992805e9.3.1745486221270; 
- Thu, 24 Apr 2025 02:17:01 -0700 (PDT)
+ AJvYcCULHfWllZkERXEShlnKE/k2Rwkba+eoAUu7I6uEnaeLoTYvuh9aLWnDX6lT65CRDnZzA4QtuEE=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywc09kOiuyl5dKy3sorlgrBhiZoRN0jbFUg1JFVLTOlDMWpFEq5
+ oABHFTIcB+4ie+N27s7xmKNwF/qeObjLsdv6Em7+f7n/cSYlzZhtw2RlF7/hB+w=
+X-Gm-Gg: ASbGnctQ1UCptwFnGAe4wUNY/6taa0m8jnQLKlEHsaxd0HWVgYhxVwZYP9X84a3pt28
+ 9fEegBFOnxjgBg6iVPPnzB2AxFucC6ZQnkA4q46ZwaCQAYyiFXubeK73I0nlctAslgB8/Nmrycf
+ FjwzXpNKz1+CdpbPB29Tm2vXhYRR9dfBQvtMW1xslq0tHRFLYJAZXVnHyda7jM1jaKsToqb6zsS
+ XWS7krLPuGU4YxwkODC70IZP39JsFGWnQN+bf/tUIa/NK+NFNiysCG35P9wuAcwkvNxku33FaM8
+ LsLj7cphqpZLDBjILLf8Lq9Eqghn24raUxQhgPCiuh1fxNUbyHn56cTXcCyixA==
+X-Google-Smtp-Source: AGHT+IGSMpvk4+PGIQNCamc7+Zl/NkWSl5GBruKNsk7MrhEWgw7UaAfSAAhP21azPh1qyZQcHC0i6w==
+X-Received: by 2002:a05:600c:444f:b0:43c:f689:88ce with SMTP id
+ 5b1f17b1804b1-4409bd8f0cbmr14272655e9.20.1745486222943; 
+ Thu, 24 Apr 2025 02:17:02 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:d677:e5de:3a6:836])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4409d1e19e1sm13000945e9.0.2025.04.24.02.17.00
+ 5b1f17b1804b1-4409d1e19e1sm13000945e9.0.2025.04.24.02.17.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 02:17:00 -0700 (PDT)
+ Thu, 24 Apr 2025 02:17:02 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Thu, 24 Apr 2025 11:16:43 +0200
-Subject: [PATCH v2 3/6] clk: qcom: Use setbits_le32() for
- qcom_gate_clk_en()
+Date: Thu, 24 Apr 2025 11:16:45 +0200
+Subject: [PATCH v2 5/6] clk: qcom: apq8016: Convert GATE_CLK() to
+ GATE_CLK_POLLED()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250424-apq8016-clock-fixes2-v2-3-fcc371c9e45f@linaro.org>
+Message-Id: <20250424-apq8016-clock-fixes2-v2-5-fcc371c9e45f@linaro.org>
 References: <20250424-apq8016-clock-fixes2-v2-0-fcc371c9e45f@linaro.org>
 In-Reply-To: <20250424-apq8016-clock-fixes2-v2-0-fcc371c9e45f@linaro.org>
 To: Casey Connolly <casey.connolly@linaro.org>
@@ -103,38 +103,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The other clock enable functions in clock-qcom.c use setbits_le32() to
-read/modify/write the enable registers. Use the same for qcom_gate_clk_en()
-to simplify the code a bit.
+Convert the usages of GATE_CLK() in clock-apq8016 to GATE_CLK_POLLED() to
+make sure that we poll the status when enabling clocks:
+
+ - PRNG_AHB_CLK is a vote clock, so we poll a different register address.
+ - The USB clocks are simple branches, so enable/poll is the same register.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
- drivers/clk/qcom/clock-qcom.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ drivers/clk/qcom/clock-apq8016.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 5018851725b03d1c55c6fc40934bd7bea6344da1..7a259db79342c31dfe85220c68c82197861ccdf6 100644
---- a/drivers/clk/qcom/clock-qcom.c
-+++ b/drivers/clk/qcom/clock-qcom.c
-@@ -76,16 +76,13 @@ void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk)
+diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+index 274c71c53ff76c9a7ea18e3698c12b20a9b1f418..e3a9807f580bc995395bd5debdb8d7a9dfa54795 100644
+--- a/drivers/clk/qcom/clock-apq8016.c
++++ b/drivers/clk/qcom/clock-apq8016.c
+@@ -54,9 +54,9 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
+ };
  
- int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
- {
--	u32 val;
- 	if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0) {
- 		log_err("gcc@%#08llx: unknown clock ID %lu!\n",
- 			priv->base, id);
- 		return -ENOENT;
- 	}
+ static const struct gate_clk apq8016_clks[] = {
+-	GATE_CLK(GCC_PRNG_AHB_CLK,	0x45004, BIT(8)),
+-	GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, BIT(0)),
+-	GATE_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0)),
++	GATE_CLK_POLLED(GCC_PRNG_AHB_CLK,	0x45004, BIT(8), 0x13004),
++	GATE_CLK_POLLED(GCC_USB_HS_AHB_CLK,	0x41008, BIT(0), 0x41008),
++	GATE_CLK_POLLED(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0), 0x41004),
+ };
  
--	val = readl(priv->base + priv->data->clks[id].reg);
--	writel(val | priv->data->clks[id].en_val, priv->base + priv->data->clks[id].reg);
--
-+	setbits_le32(priv->base + priv->data->clks[id].reg, priv->data->clks[id].en_val);
- 	return 0;
- }
- 
+ /* SDHCI */
 
 -- 
 2.47.2
