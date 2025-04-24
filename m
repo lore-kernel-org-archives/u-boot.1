@@ -4,108 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0BBC369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 22:02:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AD15C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 22:34:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91A46809D4;
-	Fri, 25 Apr 2025 00:02:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A71A48082A;
+	Fri, 25 Apr 2025 00:34:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NxEV8Txk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UESiPd/r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0E7D80F9C; Fri, 25 Apr 2025 00:02:41 +0200 (CEST)
+ id 5B0C6809D4; Fri, 25 Apr 2025 00:34:24 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EF148082A
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 00:02:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AD888059A
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 00:34:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1745532158; x=1746136958; i=xypron.glpk@gmx.de;
- bh=TjhBEm4u354OQ39ALTaXMJO4zn3DfgucX5YH/7LRh64=;
+ s=s31663417; t=1745534057; x=1746138857; i=xypron.glpk@gmx.de;
+ bh=dhxRWYW1TwGBIbc92wfJU7zur4ssqkPiaOlUhRm5c1E=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=NxEV8TxkxYSMHSViJWBvi7+k1qXGXQmtVgz/fh+4aHYpahKtMdl4J2hzwLVhfUNK
- LBlgU6+MwrFA5bgN8tLysC30bVFjFqWg3h/VZxtPkZAhuRKXUn0Q6cdSFAOe9x1Df
- cvLIR8MJp2L68s+WSMQNqImUHDSP++2SZX8VpEwEyi8RarcVFeDnuvbHFTMEGJuW3
- mxbs/dBSnpOFFWBNWG3o6FM/dC3lbR3zWkKGxg6cOAAVIdEEdF0SKS2ry4vf3AVmo
- YAAFx6oINfG3KwfST946kxUKucYDvrusI+DsZHVR9PBUnyh3eepQ0kXxwRQkODlAQ
- 7wbZvVzdzqD317N4iw==
+ b=UESiPd/rwsGWbRtP60WBtIVwjp3ynq4Kh+tPLaBx/4gMvQI2Ef6HFzHhsgUC6BxI
+ bsDHjWPly8gOt/k80esBeZHoweKFoq+3RLQDcosNaM8++yc481cWKHyaUFdbrJQMW
+ J4PUpYiisZiFl5Qgji8OUxazxI+5LJpwsrCo87MAHvtNNIHqZFvaZD6YwAUvWicyp
+ c0VHPrQGYLDGE628IDRNgdatYF5KVaUVGXGqKPaSyxEKJWnZROMXNs1oeucAIzjbP
+ cEIB0sAwZwidG1GQVDLoNKaXd/Z8lKHIuJTyioRqN1OGc6pTnVxd0R0Kc9Y1L9vaB
+ jbsvp6x5x9OFOQlHKQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MvsIv-1uzcoD1zK3-018CNX; Fri, 25
- Apr 2025 00:02:38 +0200
-Message-ID: <5b1181bf-1398-409c-b710-dc07e4eaa9d7@gmx.de>
-Date: Fri, 25 Apr 2025 00:02:38 +0200
+Received: from [192.168.103.102] ([46.114.109.177]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M89Gj-1uCC1C1hUh-00C5Nu; Fri, 25
+ Apr 2025 00:34:17 +0200
+Message-ID: <aded7723-931f-4d17-87ad-dbe788792892@gmx.de>
+Date: Fri, 25 Apr 2025 00:34:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] efi: add EFI_DEBUG_IMAGE_INFO_TABLE for debug
+Subject: Re: [PATCH v2 3/3] efi: add EFI_DEBUG_IMAGE_INFO for debug
 To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
 Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 References: <20250424201927.2027257-1-paulliu@debian.org>
- <20250424201927.2027257-3-paulliu@debian.org>
+ <20250424201927.2027257-4-paulliu@debian.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250424201927.2027257-3-paulliu@debian.org>
+In-Reply-To: <20250424201927.2027257-4-paulliu@debian.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:3sVXPC2BZOVjbwP1iIQhqjjoieyEau6c+ifSFDOwx6/3SMR2WZw
- ZTeNRb1MAGzrA4T69P7Q6elqs2fgLkAJQsk1Udoxw3M89NOz125Y4JPEK10jCnAuwquNj2K
- MmlnZSaSRxDRA8n3I1u/GldKIVl1V1GHCv3GXUUGM5JwB2ic63mbUJfyVZxyiKrZXTpzTZW
- II+L497CnXzkJh8GYDjJQ==
-UI-OutboundReport: notjunk:1;M01:P0:wZXetwsOpzU=;uHOWJtjMLK9U7w5y/GafPMITO+o
- 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
+X-Provags-ID: V03:K1:HNeivT0T/NsjK68LrOj5BMSzALmnhn+ppsyA6SmupJFJOZl2HWQ
+ reSVtgTHcrhfGgFjVf4w5uWSO05eF3+FZ5fo8oC56BRM6WvAFdiuxowcRzGg6If2Mf6Idzz
+ 9tlEDaR0lvgnrj+0lRhz+BmEFMv3nmprna7Pj4Zt+Exh/+Obm93yRRZKUeo3dLn5bwmXdDQ
+ ayVYCw5PvTpB3+eOFy9ng==
+UI-OutboundReport: notjunk:1;M01:P0:s2HJlsYqZyI=;BmrLeYSQQXm8bvkGvEx/xXS+i0h
+ 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
+ LMCw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,130 +127,265 @@ X-Virus-Status: Clean
 On 24.04.25 22:19, Ying-Chun Liu (PaulLiu) wrote:
 > From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 >=20
-> EFI_DEBUG_IMAGE_INFO_TABLE is used to store EFI_LOADED_IMAGE for
-> debug purpose. This commit adds the table to the EFI_CONFIGURATION_TABLE=
-.
+> This commit adds the functionality of generate EFI_DEBUG_IMAGE_INFO
+> while loading the image.
 >=20
-> This feature is described in UEFI Spec version 2.10. Section 18.4.
+> This feature is described in UEFI Spec 2.10. Section 18.4.3.
 >=20
 > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
->   include/efi_api.h             | 24 ++++++++++++++++++++++++
->   lib/efi_loader/efi_boottime.c | 16 ++++++++++++++++
->   2 files changed, 40 insertions(+)
+> V2: use Kconfig options to turn on/off this feature.
+> ---
+>   include/efi_api.h             |   2 +
+>   include/efi_loader.h          |   5 ++
+>   lib/efi_loader/efi_boottime.c | 140 ++++++++++++++++++++++++++++++++++
+>   3 files changed, 147 insertions(+)
 >=20
 > diff --git a/include/efi_api.h b/include/efi_api.h
-> index 5017d9037cd..0f4245091f1 100644
+> index 0f4245091f1..ba87af17c1f 100644
 > --- a/include/efi_api.h
 > +++ b/include/efi_api.h
-> @@ -238,6 +238,10 @@ enum efi_reset_type {
->   	EFI_GUID(0xcce33c35, 0x74ac, 0x4087, 0xbc, 0xe7, \
->   		 0x8b, 0x29, 0xb0, 0x2e, 0xeb, 0x27)
+> @@ -571,6 +571,8 @@ struct efi_loaded_image {
+>   #define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
+>   #define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
 >  =20
-> +#define EFI_DEBUG_IMAGE_INFO_TABLE_GUID \
-> +	EFI_GUID(0x49152e77, 0x1ada, 0x4764, 0xb7, 0xa2, \
-> +		 0x7a, 0xfe, 0xfe, 0xd9, 0x5e, 0x8b)
+> +#define EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL  0x01
 > +
->   struct efi_conformance_profiles_table {
->   	u16 version;
->   	u16 number_of_profiles;
-> @@ -564,6 +568,26 @@ struct efi_loaded_image {
->   	efi_status_t (EFIAPI *unload)(efi_handle_t image_handle);
+>   struct efi_debug_image_info_normal {
+>   	u32 image_info_type;
+>   	struct efi_loaded_image *loaded_image_protocol_instance;
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 370bc042f70..babe23a8a83 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -617,6 +617,11 @@ efi_status_t efi_root_node_register(void);
+>   efi_status_t efi_initialize_system_table(void);
+>   /* Called by bootefi to initialize debug */
+>   efi_status_t efi_initialize_system_table_pointer(void);
+> +/* Called by efi_load_image for register debug info */
+> +void efi_core_new_debug_image_info_entry(u32 image_info_type,
+> +					 struct efi_loaded_image *loaded_image,
+> +					 efi_handle_t image_handle);
+> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle);
+>   /* efi_runtime_detach() - detach unimplemented runtime functions */
+>   void efi_runtime_detach(void);
+>   /* efi_convert_pointer() - convert pointer to virtual address */
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
+.c
+> index e2665459e44..0d4df5ee6ae 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -2130,6 +2130,14 @@ efi_status_t EFIAPI efi_load_image(bool boot_poli=
+cy,
+>   		*image_handle =3D NULL;
+>   		free(info);
+>   	}
+> +
+> +	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT_TABLE)) {
+> +		if (*image_handle) {
+> +			efi_core_new_debug_image_info_entry(EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL=
+,
+> +							    info,
+> +							    *image_handle);
+> +		}
+> +	}
+>   error:
+>   	return EFI_EXIT(ret);
+>   }
+> @@ -3359,6 +3367,9 @@ efi_status_t EFIAPI efi_unload_image(efi_handle_t =
+image_handle)
+>   		ret =3D EFI_INVALID_PARAMETER;
+>   		goto out;
+>   	}
+> +	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT_TABLE)) {
+> +		efi_core_remove_debug_image_info_entry(image_handle);
+> +	}
+>   	switch (efiobj->type) {
+>   	case EFI_OBJECT_TYPE_STARTED_IMAGE:
+>   		/* Call the unload function */
+> @@ -4045,6 +4056,10 @@ efi_m_debug_info_table_header =3D {
+>   	NULL
 >   };
+>
+
+Please, describe this field.
+
+> +static u32 efi_m_max_table_entries;
+> +
+
+> +#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(void *))
+
+Wouldn't it be more readable to use sizeof(union efi_debug_image_info *)=
+=20
+instead of this constant?
+
+> +
+>   const efi_guid_t efi_debug_image_info_table_guid =3D
+>   	EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
 >  =20
-> +#define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
-> +#define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
+> @@ -4095,3 +4110,128 @@ efi_status_t efi_initialize_system_table_pointer=
+(void)
+>  =20
+>   	return ret;
+>   }
 > +
+> +/**
+> + * Add a new efi_loaded_image structure to the efi_debug_image_info Tab=
+le.
+> + * Re-Allocates the table if it's not large enough to accomidate anothe=
+r
+> + * entry.
+> + *
+> + * @param image_info_type  type of debug image information
+> + * @param loaded_image     pointer to the loaded image protocol for the=
+ image
+> + *                         being loaded
+> + * @param image_handle     image handle for the image being loaded
+> + **/
+> +void efi_core_new_debug_image_info_entry(u32 image_info_type,
+> +					 struct efi_loaded_image *loaded_image,
+> +					 efi_handle_t image_handle)
 
-All structures and unions and their elements should be describe according =
-to
-https://docs.kernel.org/doc-guide/kernel-doc.html#structure-union-and-enum=
-eration-documentation
+Reallocation can fail. The return value type void seems not to be adequate=
+.
 
-> +struct efi_debug_image_info_normal {
-> +	u32 image_info_type;
-> +	struct efi_loaded_image *loaded_image_protocol_instance;
-> +	efi_handle_t image_handle;
-> +};
+> +{
+> +	union efi_debug_image_info *table;
+> +	union efi_debug_image_info *new_table;
+> +	u32 index;
+> +	u32 table_size;
+> +
+> +	/* Set the flag indicating that we're in the process of updating
+> +	 * the table.
+> +	 */
+> +	efi_m_debug_info_table_header.update_status |=3D
+> +		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +
+> +	table =3D efi_m_debug_info_table_header.efi_debug_image_info_table;
+> +
+> +	if (efi_m_debug_info_table_header.table_size < efi_m_max_table_entries=
+) {
+> +		/* We still have empty entries in the Table, find the first
+> +		 * empty entry.
+> +		 */
+> +		index =3D 0;
+> +		while (table[index].normal_image)
+> +			index++;
+> +	} else {
+> +		/* table is full, re-allocate another page for a larger
 
-What are the assumptions about alignment?
-Should this structure be marked as packed like most UEFI structures?
+"Re-allocate the buffer increasing the size by 4 KiB" would be clearer.
+
+> +		 * table.
+> +		 */
+> +		table_size =3D efi_m_max_table_entries * EFI_DEBUG_TABLE_ENTRY_SIZE;
+> +		efi_allocate_pool(EFI_RUNTIME_SERVICES_DATA,
+> +				  table_size + EFI_PAGE_SIZE,
+> +				  (void **)&new_table);
+> +
+> +		if (!new_table) {
+> +			efi_m_debug_info_table_header.update_status &=3D
+> +				~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +			return;
+> +		}
+> +
+> +		memset(new_table, 0, table_size + EFI_PAGE_SIZE);
+
+Please, carve out an efi_realloc() function and place it in=20
+lib/efi_loader/efi_memory.c beside efi_alloc().
 
 > +
-> +union efi_debug_image_info {
-
-Why do we need the union? The first field of struct=20
-efi_debug_image_info_normal is image_info_type.
-
-> +	u32 *image_info_type;
-> +	struct efi_debug_image_info_normal *normal_image;
-> +};
+> +		/* Copy the old table into the new one. */
+> +		memcpy(new_table, table, table_size);
+> +		/* Free the old table. */
+> +		efi_free_pool(table);
+> +		/* Update the table header. */
+> +		table =3D new_table;
+> +		efi_m_debug_info_table_header.efi_debug_image_info_table =3D
+> +			new_table;
 > +
-> +struct efi_debug_image_info_table_header {
-> +	volatile u32 update_status;
+> +		/* Enlarge the max table entries and set the first empty
+> +		 * entry index to be the original max table entries.
+> +		 */
+> +		index =3D efi_m_max_table_entries;
+> +		efi_m_max_table_entries +=3D
+> +			EFI_PAGE_SIZE / EFI_DEBUG_TABLE_ENTRY_SIZE;
+> +	}
+> +
+> +	/* Allocate data for new entry. */
+> +	efi_allocate_pool(EFI_RUNTIME_SERVICES_DATA,
+> +			  sizeof(struct efi_debug_image_info_normal),
+> +			  (void **)(&table[index].normal_image));
 
-Why is volatile needed here?
+efi_allocate_pool() will consume a whole page. Shouldn't we have an=20
+array of consecutive structures and use realloc_pool() to enlarge it if=20
+we load too many images?
+
+> +	if (table[index].normal_image) {
+> +		/* Update the entry. */
+> +		table[index].normal_image->image_info_type =3D image_info_type;
+> +		table[index].normal_image->loaded_image_protocol_instance =3D
+> +			loaded_image;
+
+All protocols become invalid after ExitBootServices(). Why would you use=
+=20
+EFI_RUNTIME_SERVICES_DATA to store references to something that does not=
+=20
+exist at runtime?
+
+EDK II uses AllocateZeroPool() which does not use EfiRuntimeServicesData.
 
 Best regards
 
 Heinrich
 
-> +	u32 table_size;
-> +	union efi_debug_image_info *efi_debug_image_info_table;
-> +};
+> +		table[index].normal_image->image_handle =3D image_handle;
 > +
->   #define EFI_DEVICE_PATH_PROTOCOL_GUID \
->   	EFI_GUID(0x09576e91, 0x6d3f, 0x11d2, \
->   		 0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b)
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index 366bc0d2b1d..e2665459e44 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -4038,6 +4038,16 @@ efi_status_t efi_initialize_system_table(void)
->   	return ret;
->   }
->  =20
-
-
-
-> +struct efi_debug_image_info_table_header __efi_runtime_data
-
-
-
-> +efi_m_debug_info_table_header =3D {
-> +	0,
-> +	0,
-> +	NULL
-> +};
+> +		/* Increase the number of EFI_DEBUG_IMAGE_INFO elements and
+> +		 * set the efi_m_debug_info_table_header in modified status.
+> +		 */
+> +		efi_m_debug_info_table_header.table_size++;
+> +		efi_m_debug_info_table_header.update_status |=3D
+> +			EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
+> +	}
 > +
-> +const efi_guid_t efi_debug_image_info_table_guid =3D
-> +	EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
+> +	efi_m_debug_info_table_header.update_status &=3D
+> +		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +}
 > +
->   /**
->    * efi_initialize_system_table() - Initialize system table
->    *
-> @@ -4053,6 +4063,8 @@ efi_status_t efi_initialize_system_table_pointer(v=
-oid)
->   	u64 addr;
->   	u64 aligned_addr;
->   	u32 crc32_value;
-> +	efi_guid_t debug_image_info_table_guid =3D
-> +		efi_debug_image_info_table_guid;
->  =20
->   	/* Allocate configuration table array */
->   	ret =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> @@ -4077,5 +4089,9 @@ efi_status_t efi_initialize_system_table_pointer(v=
-oid)
->   			    (const unsigned char *)systab_pointer,
->   			    sizeof(struct efi_system_table_pointer));
->   	systab_pointer->crc32 =3D crc32_value;
+> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle)
+> +{
+> +	union efi_debug_image_info *table;
+> +	u32 index;
 > +
-> +	ret =3D efi_install_configuration_table(&debug_image_info_table_guid,
-> +					      &efi_m_debug_info_table_header);
+> +	efi_m_debug_info_table_header.update_status |=3D
+> +		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
 > +
->   	return ret;
->   }
+> +	table =3D efi_m_debug_info_table_header.efi_debug_image_info_table;
+> +
+> +	for (index =3D 0; index < efi_m_max_table_entries; index++) {
+> +		if (table[index].normal_image &&
+> +		    table[index].normal_image->image_handle =3D=3D image_handle) {
+> +			/* Found a match. Free up the record, then NULL the
+> +			 * pointer to indicate the slot is free.
+> +			 */
+> +			efi_free_pool(table[index].normal_image);
+> +			table[index].normal_image =3D NULL;
+> +
+> +			/* Decrease the number of EFI_DEBUG_IMAGE_INFO
+> +			 * elements and set the efi_m_debug_info_table_header
+> +			 * in modified status.
+> +			 */
+> +			efi_m_debug_info_table_header.table_size--;
+> +			efi_m_debug_info_table_header.update_status |=3D
+> +				EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
+> +			break;
+> +		}
+> +	}
+> +
+> +	efi_m_debug_info_table_header.update_status &=3D
+> +		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +}
 
