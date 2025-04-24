@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B81C369D5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 21:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 072FFC369D5
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 21:33:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC98880F9C;
-	Thu, 24 Apr 2025 23:32:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42CF58209F;
+	Thu, 24 Apr 2025 23:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LRQdnnhU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eFLDpZeH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CE7C81E25; Thu, 24 Apr 2025 23:32:43 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id B622382075; Thu, 24 Apr 2025 23:32:44 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E01DB809D4
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 23:32:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F6888082A
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 23:32:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-2d4f832069bso780115fac.3
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:32:40 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3fe83c8cbdbso531669b6e.3
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:32:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745530359; x=1746135159; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745530361; x=1746135161; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lngGyPPlFyF5Ta1R6BCDVxxCZiKMdX1coYU3FDnlW64=;
- b=LRQdnnhUA0uG2WwA0iTUbIxVoy027TqC/o/LhIH05yMO4k8Sd8yIfQII3ul5DoPWcX
- uug+Reija56XZ5yQYDbhu/m1WITYY4OLRiDcBftBFZ4eIKTYiDS98EMzZhrvqqwW+Qr5
- 9oV3K+SSPWazPL0l+cuLDebTyn1XIacHTjsYg=
+ bh=dZUvRpVsvXTpYSoDOyTyvrhTtCdoFARTnHnj57zdL/E=;
+ b=eFLDpZeHQPld0OSxilvmq5fGHOYXCbtDy1dRJ4UtMqfsiWNU2ilX9BAvK+Gy/rV2Dc
+ eynZFjwFvPy99iKmA7gZozC8ej5JKEZvxoYFrYyIC/PjuyEVuTPY81gDDYk5uuT4UUQE
+ ZrcPU1XZknpmSzLrVm4gDZpE7Vm0kqfo1o9oY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745530359; x=1746135159;
+ d=1e100.net; s=20230601; t=1745530361; x=1746135161;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lngGyPPlFyF5Ta1R6BCDVxxCZiKMdX1coYU3FDnlW64=;
- b=I4WjsHc7OE2zIKYsw9KAq49luk5ykoGYKo429z8h51dA4E6i6f9qs6aAmPeooBMx2+
- UIJQPfcR2gCXP3C7Ck9ox/tB7GVC+nupt1wUr+kcdyWg1cBRL4gP8nMyMVVg/8vSud/6
- G+DKuFmVD2oWH0AmOohgHflTpuPW5cSh2T5stcX9Qf3WOECotHKNwhw7qqEuOUPaWwM3
- NRNoIc2UtvO24RCcMMcvp+hAneyX+Rj8us5y1W02y4Ex8wE3UTCmthInnStK+1nWAXWG
- I1X8lgZkyK7tOFARgOVAltgOlPLeGqKZ/L/BjfkXr6kOaq0HbczUhuKcrpGP4bdy4irU
- OekA==
-X-Gm-Message-State: AOJu0YzTPX6SmnGTXK11k7q+qK6ow7LcgeOglMAVvnSqspopMo/Vz1TO
- sFlsxTAOqTVsCr3iqGyskh4xO7DGkcO9OLEeDJMMB70v8aW7K4L3sAGCQj8Yp+mXisqEHggFkll
- r
-X-Gm-Gg: ASbGncu1ge0PGE3YzvZWN/ziRxyYShbiPRlMUD/SSAjSUqyGmns+Nj2buIhnJCJH8Jl
- 55uV0rkuQxqQxf2u3cfmI4Pdj0gjEKdUarCs9IaUkika9G1aVMPX23haQH1/g/rmwAkKvFPLs8F
- pweqQmyQZ+B+SvpXWl2MuVlPm+VB2aL1Z9qA9qzHeLDvB24OxL8AZ5r9ncV5Yaw2tRs2HVkwSWw
- 461xhStLKoejvzwWxYkcYOlENJkY/JLdqM9jImZKKNXtd46QJc/CFDDOQvo9QhykFG2f8AR8wOW
- HS1pWzO92wIxrO3GV62GU7H4q94XLKR/b5m1miujCxwLMbAmP2YFdZvA7BLKBODuJ1dPfBdZPfb
- 1
-X-Google-Smtp-Source: AGHT+IECDl+ZJNy+8RPA/e2dJqPxoFHrVh35UVG/aqbPxyqOvTOyttIJ1HTVexKcbOIVFIiryPPdCw==
-X-Received: by 2002:a05:6870:6191:b0:2cc:3763:c7d0 with SMTP id
- 586e51a60fabf-2d99de8e4b6mr42111fac.33.1745530359639; 
- Thu, 24 Apr 2025 14:32:39 -0700 (PDT)
+ bh=dZUvRpVsvXTpYSoDOyTyvrhTtCdoFARTnHnj57zdL/E=;
+ b=k31m5vvU6pXhKtGg41sVChPLEgWcEJfHQ6+EK3LVKFv2SVckRG0swxD0rJO/5SYEKF
+ kjLwm+9sNVh0hNaT37MWZKWlXWlXUXmZFXXLi3xTedi700pJ9JNqWfz04AfaxEJfpgpl
+ EFFsHIuCDTVE/HqUYrAIGbrt57/sbVyUtpfjAbDSDvF9bzMcLmILAw17aX97Iz+wsvV+
+ Svi1zbAISV47sBD086AuVlr9SEEAQSAILl7i0O2kn3MpU0GkcF/ihW6XhlhrbiO+j81L
+ ySFyjvXeNcq/m1qiG5isD4jR75jufWFPY1IkNleXX9x43GO6+25s54lt+GkZGXHJOEzG
+ ml5A==
+X-Gm-Message-State: AOJu0Yx4DZcqCTw93QGIb7jtCoTCEAupUZ0q2Z4FOC9dxQfTHJYEg7rV
+ OiDcGbpSfFyff9jeer6fa8V2kqppWW/wgdyZTvJOQncGRgg5rWgefXkrqQxEMqo=
+X-Gm-Gg: ASbGncvjNA2rMfqKTl4T2T15yUR5XEe2CI7yHJbGIcosYhLYJCrCa/KIsi7Yt4Kz5J0
+ 5fLqMzm39Ua3aARNBaHVCT5qhOSiidLHJoIPjOsMNR5DwAeCn8kuCMqpfZaz57dwIT4iiYSe9Kx
+ 3HmbozIUXq89EVYLa2VmwKqfPKCS6lQI8YoRwGBO7oT1BwzP7uvAHZk1/QFe5UgBlaW0kYzZ92W
+ EGBx64FKH4vuBQvX6Lu+pWmRm8dMu9acVjRniIqHLOxmwdMEjjtm/LTqTmMWtU8YwBTFIYnrrN/
+ eN2TtNQevxM9ySp4t6hla9rFO/JltDMG3WG+cmt15zW7Lu0UbMUS6HVef1hsbaR9cJfIOaJq8eI
+ 5xJfv6R7SQ8o=
+X-Google-Smtp-Source: AGHT+IG0sjeKXNNqGo4czQOoSVeUyAnIYdVIFK6V6righkHqSh6zdtAdiduiDhajA7fP/xsT1tQ+6g==
+X-Received: by 2002:a05:6808:3385:b0:400:8252:a657 with SMTP id
+ 5614622812f47-401f116415fmr632353b6e.5.1745530361307; 
+ Thu, 24 Apr 2025 14:32:41 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d97364d9b6sm489419fac.8.2025.04.24.14.32.38
+ 586e51a60fabf-2d97364d9b6sm489419fac.8.2025.04.24.14.32.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 14:32:39 -0700 (PDT)
+ Thu, 24 Apr 2025 14:32:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250414-firewalls-v1-0-89090085c08b@ti.com>
-References: <20250414-firewalls-v1-0-89090085c08b@ti.com>
-Subject: Re: [PATCH 0/2] arm: mach-k3: remove some firewalls left over by ROM
-Message-Id: <174553035857.4093791.9095679010688995583.b4-ty@konsulko.com>
-Date: Thu, 24 Apr 2025 15:32:38 -0600
+To: vigneshr@ti.com, j-humphreys@ti.com, jm@ti.com, sjg@chromium.org, 
+ s-k6@ti.com, n-francis@ti.com, rogerq@kernel.org, danishanwar@ti.com, 
+ s-vadapalli@ti.com, Hrushikesh Salunke <h-salunke@ti.com>
+Cc: u-boot@lists.denx.de, srk@ti.com
+In-Reply-To: <20250416120830.138965-1-h-salunke@ti.com>
+References: <20250416120830.138965-1-h-salunke@ti.com>
+Subject: Re: [PATCH 0/3] Add PCIe support for TI AM64 SoC
+Message-Id: <174553035979.4093791.9500970934788936190.b4-ty@konsulko.com>
+Date: Thu, 24 Apr 2025 15:32:39 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,25 +97,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Apr 2025 15:20:01 -0500, Bryan Brattlof wrote:
+On Wed, 16 Apr 2025 17:38:27 +0530, Hrushikesh Salunke wrote:
 
-> This small series is here to remove some firewalls setup by ROM during
-> their boot and clean things up for Linux later on. Ideally this would be
-> a simple call to remove_fwl_configs() however the location of the
-> firewall is problematic (could potentially crash the core) when we're
-> currently executing from the memory region protected by the firewall.
+> TI's AM64 SoC has a single instance of Cadence PCIe Controller. This
+> series enables support for PCIe in AM64 SoC and to configure it in
+> Root-Complex mode of operation.
 > 
-> So we need to introduce a function which allows us to disable specific
-> firewall regions and skip others to ensure boot stability.
+> This series is based on following commit in U-Boot next:
+> f892a7f397a (origin/next) Revert "Merge patch series "pxe: Precursor series for supporting read_all() in extlinux / PXE""
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/2] arm: mach-k3: support disabling a single firewall region
-      commit: f393beedba7917ef8aaaedd67d143cd7b7440ae2
-[2/2] arm: mach-k3: am625: remove any firewalls ROM has configured for HSRAM
-      commit: 33b191997fc215e32cd51ffd979c5f6d1189c46e
+[1/3] pci: pcie_cdns_ti: Include linux/sizes.h header
+      commit: 29602a52903f34653081e6ecbaa4a5ab056409b9
+[2/3] pci: pcie_cdns_ti: Enable PCIe root-complex mode in AM64 SoC
+      commit: a478d0f05b20b96e0911d78ddf1751ba94e171fc
+[3/3] configs: am64x_evm_a53_defconfig: Enable configs for PCIe support
+      commit: f4baa55c5bee5a2eaedf80c8a84cc839230a9a73
 -- 
 Tom
 
