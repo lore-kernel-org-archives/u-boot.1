@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00699C369D5
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 21:32:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D04C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 21:32:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B97A80FDA;
-	Thu, 24 Apr 2025 23:32:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6CA6D81B4B;
+	Thu, 24 Apr 2025 23:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bPtLl8SG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AKXbetZ3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7BBB8082A; Thu, 24 Apr 2025 23:32:39 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id BE979809D4; Thu, 24 Apr 2025 23:32:40 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A7528082A
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 23:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D3B380F9C
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 23:32:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-2d060c62b61so1171387fac.0
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:32:37 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2c769da02b0so1285829fac.3
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:32:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745530356; x=1746135156; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745530357; x=1746135157; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AdU90JTg0Ni+W+X2Aq2zKe3BNu3cn+Uab/uTnvDJ344=;
- b=bPtLl8SGVY26+/Rbj3xkJxkeoWgSF15etW+UW9PQRVje0nn36X5sYij/qq4z7kO0eG
- bw1QZOQkGMCQoLxijeyeo0cLblPV8tLHAkt4OCV7KF/ZAF/Ib0fNx6VvJTmqLM9xZc7A
- liDQRkTDDXGm//v203cJRy0NrZKjx+3wuYP1w=
+ bh=EIewe6jtt9x59NsItlBLVgTZ234rAkVbTQvxmf8WLyM=;
+ b=AKXbetZ37wa5XZiuRBzsmrcSIOdypjTig1K0nfDhUgch+Oca6rKe2sP2A7gyWkd7Im
+ KKQNqU75px+LQvb+LhALcxJXXONU5byklouFREkrKfGDDuYPE4ABNI2XaJxT5RB0Y3et
+ ob55dW2N0MuUKNaDcz7Fwm2KNo39LoVpi38pE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745530356; x=1746135156;
+ d=1e100.net; s=20230601; t=1745530357; x=1746135157;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AdU90JTg0Ni+W+X2Aq2zKe3BNu3cn+Uab/uTnvDJ344=;
- b=Lr8+6qt+rRtgPcNZGq0MeqHZ6MCrVeoUISbZ6LGA6CU4V/C6k1sNlFjMt8W890tlto
- WER3Ss8bvdsQWIWpUXn+b3z+p31V4w10Tu1j6duEgdb408gpdlTsE7aNC8JXS/QnHOfP
- ZeQOsozPUld2E3tiKOKzDPSQaFIQDf4xfxsJrQaRvb+g+b8u4nNR4yDPqeBc6USqKqWd
- tmIQRt6QohqmRl77rlD9P1CV8zhTaULr3o0FNwUecflknjjiJFQJIvYYq495jPSITQAZ
- so5z1xyRskVeLOLrtBMQTgziyHvfgEjvhbklrPrcRmZPlYvz0JgCOcTTqTXBb2+Dvc/K
- 6C0A==
-X-Gm-Message-State: AOJu0YwgWQRvahYANuHDfkcLKaNbs6BNTwGwP64xSXoSvMP3RGUhRiLj
- friwYLWPbxE80QD489H7p/GfftHnfGoDnSapuDcci6/qNLK75pxxEHnxPmU1+tJ0xflahG+irB7
- 9
-X-Gm-Gg: ASbGnctMzAULcr8q8V7xodmF5JlCGmcHrewIEmT8FdtGaBihmvKEFEN1ZbJyUol5OjU
- sSyLFTGZi0PMlAFT4N0AY5srk7qR+9W53TrK3sBvpnX9PLQRW+a/3tE7Wf+NfiOoGKEdzxhPiUO
- cb+UtllKESgxXGq4XVSI6Xlnh174WWIGkb2879of+DztIu8cbuRLltxJnWLmDbyczgh2nMs4c5T
- Evr6vV9PIn+BACrSDjMqlUAXpuvK74J3oa3uj6MaZ8JuKj+KQrZoKjEdAZWKcT5q3W4HMIofgc3
- QiD/34LC4HULfmUk3JPOK8/9a4KAol+ihzgxx4GMdjq1pNAuF1BKscqokeJNRYZQ3LPGoe2iSi9
- t
-X-Google-Smtp-Source: AGHT+IEjwA5c5k30d5OrFlOFuYYaQHvQcxL+ntKe6OGi1FApKdvUtdhaQv5Fnv4pB3jWOeragcVwEQ==
-X-Received: by 2002:a05:6870:e985:b0:2c2:3ea8:eb3d with SMTP id
- 586e51a60fabf-2d99de4506emr47553fac.33.1745530356367; 
- Thu, 24 Apr 2025 14:32:36 -0700 (PDT)
+ bh=EIewe6jtt9x59NsItlBLVgTZ234rAkVbTQvxmf8WLyM=;
+ b=EBJkMz8zoOnjsMHwEzmb4iwAFH3VH5RrceNEbGXcY4XnwK8qf88E+GrN7cbKiLs4eO
+ euLutiPgmk6D5cXb8NW0k/p0ciIhXTPyklrUfPNMp3a1PWKrkxz39cWGyNQnM8Bf1gPR
+ 9p3QwUjp2C+om3QQEQm27SjTUO4JpAdL3wOyeL744xFLMQ+ztcfxZaFlNBpKQcvq/0pa
+ me2w7N2mqeC5ERmgRrce4L5W0Wdspgeo7XNaRQdRa+SXVW4mh3tWPhGJTtPgBY/tYIn6
+ 0LK56o86gighhtRYE7qGME0W1kK+mj8zKdg5YlcqFwbCe5JjmPAjqK/VLe+J9D4brbUi
+ e5pw==
+X-Gm-Message-State: AOJu0Yx4gppl0NDvQzol9OGUy7wUoRkVcym1ykYjANU8bied+zPswSdX
+ 9KaM9Nv7fYuu2wbN1TbGeYMXmJu8rm5bIJrfiik67HgvN0wU+SGNspdBFwzOTkI=
+X-Gm-Gg: ASbGncvUK4hYsrf3dSMDMDzPl65Ewxka21z5nXhNuhjAmb5IOjnLBfzihCIvZe4JNmm
+ nRt1Aau7YWGaCdI2KC0l5VaJLRQ3pFEavIkFC4HtYGjRv0vrNt5wZd1m00xR27J54s0Sc5mcg99
+ i44u8/nIuI2gAAsXUTf+DAcllhkZ0Avv/R+ljlkShwJyvmZENTM1ovYtTyvY4deo21/stM74Sfj
+ 82kKOJ8uhQ+vcR0FTs6GgBNZY1LFd1ZAespJ97pze8/DyZYfxEkWouNZ2dw8Gwwfr9DFadObGJD
+ Mqk+VZSAH6aQVkytgMUj6X8VHpxTWuPFJwWgRE8IK7DHqhK8OzrjRS95zwCpFc9UoWdJ4JvAYty
+ D
+X-Google-Smtp-Source: AGHT+IEzjMFZ5TQPZFn+xB9i4OlVsiRlqx29xGC0cNqh5QoqQIu3KiukOSn0ZFMTG9+EOxlNTl2WLA==
+X-Received: by 2002:a05:6870:a691:b0:2c2:5a63:9cd4 with SMTP id
+ 586e51a60fabf-2d99d863e08mr59364fac.19.1745530357367; 
+ Thu, 24 Apr 2025 14:32:37 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d97364d9b6sm489419fac.8.2025.04.24.14.32.35
+ 586e51a60fabf-2d97364d9b6sm489419fac.8.2025.04.24.14.32.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 14:32:35 -0700 (PDT)
+ Thu, 24 Apr 2025 14:32:36 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Anatolij Gustschin <agust@denx.de>
-In-Reply-To: <20250319112003.594938-1-sughosh.ganu@linaro.org>
-References: <20250319112003.594938-1-sughosh.ganu@linaro.org>
-Subject: Re: [PATCH] cmd: cls: do not repeat clearing of console
-Message-Id: <174553035515.4093791.17728314168299939022.b4-ty@konsulko.com>
-Date: Thu, 24 Apr 2025 15:32:35 -0600
+To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Lukasz Majewski <lukma@denx.de>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>, 
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+In-Reply-To: <87jz79enw0.fsf@kernel.org>
+References: <87jz79enw0.fsf@kernel.org>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-20250424 into master
+Message-Id: <174553035647.4093791.3193750966326833293.b4-ty@konsulko.com>
+Date: Thu, 24 Apr 2025 15:32:36 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Mar 2025 16:50:03 +0530, Sughosh Ganu wrote:
+On Thu, 24 Apr 2025 14:37:35 +0200, Mattijs Korpershoek wrote:
 
-> There is no need to repeat the command to clear the console. Remove
-> it's repeat attribute.
+> Please find the following fixes/developments for master:
 > 
+> Usb gadget:
+> - Fix ACM gadget release
+> - Allow ACM gadget restart after releasing it
+> - Add 'enabled' flag to usb_ep structure
 > 
+> DFU:
+> - Fix alt buffer clearing for DeveloperBox board
+> 
+> [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] cmd: cls: do not repeat clearing of console
-      commit: 068eebd065ce7f4dc1ffeacc6a15a41982561015
 -- 
 Tom
 
