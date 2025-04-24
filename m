@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0C7AC369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 08:29:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE708C369D1
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 08:29:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E47E819D2;
-	Thu, 24 Apr 2025 10:29:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 533BE81E72;
+	Thu, 24 Apr 2025 10:29:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GTE1WS6r";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="euUkz1/C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBEAD815D1; Thu, 24 Apr 2025 10:29:18 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id DAF7680FDA; Thu, 24 Apr 2025 10:29:19 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACE2180F9C
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:29:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEA5D80FDA
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 10:29:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-39141ffa9fcso778782f8f.0
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 01:29:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-54b10594812so755721e87.1
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 01:29:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745483356; x=1746088156; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1745483357; x=1746088157; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mTqSowR7onOzOmm7MikM97FYdP0iPjjpLW96GQIDaNI=;
- b=GTE1WS6r/JzQ4V7rVZxONZYmrLLb2xel6SZij70FvUR5coKS2bJZflxB2T3sm6NxtW
- 8t3XuFO8vuY4C5kLAqfgbJQE4OomnTgymAJ2OJDVnTkfvmcmfaP2DrDIy7QbJ87hG0uT
- wCIRhzWHTD2Dz+lO3l/YpePu3RCEqQq0KPFdM1OzE0U86abYv9jyxNNGSAJ+a+GVNx8l
- Qut6H47jk0n6LaP3dG+fRhnZwfKhDiLvonXZ4eUXLrpd+CtB649PG1sbDvwe26Ppk5rV
- wSheKYeiwbYka8GMR+UTbE32RO2txOI87JB9DEAMqLw5v7Oa7bcQ81DnCbe0+jTVRFLT
- +/1A==
+ bh=B99QiM1W2no73byo0GejxMQmTsIxPvkq6FptgSYAbPU=;
+ b=euUkz1/C88eNMpGrH4sg4MT7Exvv60u6L6Jii9V/+MnQbBCWlHm7IzaxRJGi1nom7F
+ PX/QxYVekTRFny8CioMpKf1vkOUfYUBYFO8mYozxyHcA/dqz2jpW1qjTO4Iv2yr6TWGy
+ ASsbK0B99a3MSLJ3UDSg4J/FLDuo2dEtnLCdbNN/g54sy8TTf56Cd94HZwlNq5e8odCp
+ iMunbrSudXTyDh5CPPIlLt6Q3yHjNU7XNzIvHUlDiFYfOeNxCT1eVcw2ZYvrdEGk+eW0
+ r0YtdW8xK6eWZxtva1JwRPuJYDbwazh18/aLOtp7YwdLTnu0gnZezO35GV78qDaPuEFC
+ mJqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745483356; x=1746088156;
+ d=1e100.net; s=20230601; t=1745483357; x=1746088157;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mTqSowR7onOzOmm7MikM97FYdP0iPjjpLW96GQIDaNI=;
- b=KnynDPn2svYnFyPZSxtacRbH1VYm1vAsuMO9Scxuw3iSwFA42hJoKU5T/Z0dJFgXct
- ZvWpJH4QaANoID3ATGj2gjG3Og2z7a0u8I7WaWea2gyUim+kbPKgRRy1om+Ut9ZvS80h
- d2G/b62oyb1E43yKnjIcQsoHvdHuKhlL73GKqQrP2ewcUBZJLixMJuUkTswEDLne+dmu
- mn7igi8hvPIH/nggZR+/3yh/bZoDJtH5J8DZ0Npupsi3vb7bQP0y1yJ2PQcy1aagcdSS
- faUvBbndLXWGs3JYgJBdaor++vSjlNiO4szFX7pb4p7EJLIZrLSjCmXOHSMG7cFQuiAa
- BNug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRX+Z+BclmndCk8MdXw+4KbADxGFTczk6y4P2CA2BBehPjUPA8BwGeOnimUwqY2sZhbdCxd/w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwyyqR2e+4kwncDZyp/EgtBPohIn35QhQQiIr5kRf4iGLUHIFFy
- FbhYDML1Pqm8jLCfZi6ZN/gsVJ7HG2s87K6iDcxyN4ZAtc7k8HAL
-X-Gm-Gg: ASbGncvSu1pF8ikCOxUuIdja3pYlSSZ8BfYWif+DMSInOchtkCwausXzHWg5C23azaS
- xtWFsK7y6Tk3fhoKmyIE1BffG0NCNdW/+VuXznpRLsB4F2CaSoBtTDdrm6mb6p98gqg6EbiXeqF
- Y58OsjFGWr0foq8LAm8WIcbf0qpT1DJ7CPG1s87fHK3UT713nuJuzQDQJZB/83YsSzi4rD9Mr5u
- 0asBJEOodqNe3FTnaJf/JduegVkojT53H5IkcSSzSmVEVYvL8K9vVkAlujGVCvCist3fRpYriQn
- Y42t+7oIqp34TBCSCS38tmbUH4NN4cw5FIkY/3ObGdGq85QZWz+YfZuCmnUxjS2XK+GhuFQv/A=
- =
-X-Google-Smtp-Source: AGHT+IGjHULPlIDuVagTv2OqJAda9I6MQU8YuOLRbaqy1uzE31LJNJGOb+ic1Ds71RwZ8LJ6wUy8mg==
-X-Received: by 2002:a05:6000:1a86:b0:391:20ef:6300 with SMTP id
- ffacd0b85a97d-3a06cfa5b56mr1143673f8f.37.1745483355893; 
- Thu, 24 Apr 2025 01:29:15 -0700 (PDT)
-Received: from localhost.localdomain ([2001:b07:aac:705d:2679:3538:2c5a:c691])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a06d4a8065sm1297206f8f.12.2025.04.24.01.29.15
+ bh=B99QiM1W2no73byo0GejxMQmTsIxPvkq6FptgSYAbPU=;
+ b=L5bv5uW7QSvnQEGv+Jef+6+WJhTgmneIMXNAVRUzOA+pQF6w//D2QxTD1up/tUjjNM
+ wpXvV9ZxcTi7UQaK70VceMemESI8qc0DJ4hD0FpiMXSBDPru5y/96fG61Jo7k9jC+PkJ
+ OOkGUZd1d3Ah7NuZETRyoiqvldRP9o8ZKFgjhyNlFnhvwJzrfET44oEcJJS7SZ1MW3MW
+ FBmll0lS51oZKytAgw2mgpNXQOGiP20MIsDfG0tpobAKplDGYTrW7/XAiRrTsQ5yUF+S
+ xLHE2fDK3D9rZ+hwfVgUhWLmlpiqarkJ1jC8uMVfc+W4ohH3Rv3vaKRj/r+NoqyCNYBj
+ F73A==
+X-Gm-Message-State: AOJu0YxiZVHtxNm7Imu3q6rinHq6a1Lh2lOdHJW7azKGXXPMHpLorq3w
+ 8FBrTAuYwZV8sVBFLerriumMfmncgNmbnafXrlVAZcvupQdAdbMI
+X-Gm-Gg: ASbGnctKM3GPQg/w0ISJr6RST/07qfttKS/i/9EDL6ot0E8nGFxXAdkr0V/BPhN/cPN
+ a6S8TaYqHFZLK5W9ClRD1seSM5mdHiqGCxBZN8QAGuaICzJy1KS4AD3JGSxykYS6eM/ZKBjsAKM
+ NU+/57iAbAaBenFXGIv9sw2Mgbd61FZ7P//pfwkTznauElZUjWfjHVlvnkG2CLP/5syasvqI+yD
+ wlIDOnc6EnsKyZIbCjpUR2+SBowr53km+NFfufmg1qoKLFmCW3dKIruyzZ9WJuypY52kZiLqeJh
+ dGpsDJbvzqXuQtFq4Q2P4BiWDytl5uMm
+X-Google-Smtp-Source: AGHT+IFQrw4xpNzFJwqieidWj00jlnot/GZNxFfMI2MXZsv7nJ2p50FmKGK/ZM5ec+3KcK3s9o3feA==
+X-Received: by 2002:a05:6512:3053:b0:549:48c6:2a9a with SMTP id
+ 2adb3069b0e04-54e7c44d523mr650387e87.40.1745483356768; 
+ Thu, 24 Apr 2025 01:29:16 -0700 (PDT)
+Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-317d16a832csm1627581fa.67.2025.04.24.01.29.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 01:29:15 -0700 (PDT)
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Fabio Estevam <festevam@gmail.com>
-Cc: Emanuele Ghidoli <ghidoliemanuele@gmail.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de
-Subject: [PATCH v1] toradex: tdx-cfg-block: fix verdin imx95 sku 0089 pid4
-Date: Thu, 24 Apr 2025 10:28:59 +0200
-Message-ID: <20250424082909.1396771-1-ghidoliemanuele@gmail.com>
+ Thu, 24 Apr 2025 01:29:16 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Allen Martin <amartin@nvidia.com>, Peter Geis <pgwipeout@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/4] Tegra: general board changes
+Date: Thu, 24 Apr 2025 11:28:29 +0300
+Message-ID: <20250424082834.17538-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -98,50 +97,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The memory size of the 0089 SKU is 8 GB instead of 16 GB.
-Fix PID4 0089 Verdin iMX95 definition, in the configuration block.
+Wrap CFG_PRAM into Kconfig option for Tegra devices and switch boards
+which used CFG_PRAM to new Kconfig option. Switch those boards to generic
+device header. Move SYS_CONFIG_NAME define to SoC Kconfig since they all
+use same generic header. Drop CONFIG_DISABLE_SDMMC1_EARLY since it is
+unused and not needed anymore.
 
-Fixes: ce53f46f33b4 ("toradex: tdx-cfg-block: add verdin imx95 sku 0089 pid4")
-Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
----
- board/toradex/common/tdx-cfg-block.c | 2 +-
- board/toradex/common/tdx-cfg-block.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Svyatoslav Ryhel (4):
+  ARM: tegra: add PRAM Kconfig option
+  ARM: tegra: convert boards to use TEGRA_PRAM
+  ARM: tegra: set default SYS_CONFIG_NAME from SoC Kconfig
+  ARM: tegra: drop CONFIG_DISABLE_SDMMC1_EARLY
 
-diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
-index 41e3852b8fa2..6c1cea77c8ce 100644
---- a/board/toradex/common/tdx-cfg-block.c
-+++ b/board/toradex/common/tdx-cfg-block.c
-@@ -157,7 +157,7 @@ const struct toradex_som toradex_modules[] = {
- 	{ VERDIN_IMX8MMDL_2G_IT,                 "Verdin iMX8M Mini DualLite 2GB IT",    TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
- 	{ VERDIN_IMX8MMQ_2G_IT_NO_CAN,           "Verdin iMX8M Mini Quad 2GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
- 	{ AQUILA_AM69O_32G_WIFI_BT_IT,           "Aquila AM69 Octa 32GB WB IT",          TARGET_IS_ENABLED(AQUILA_AM69_A72) },
--	{ VERDIN_IMX95H_16G_WIFI_BT_IT,          "Verdin iMX95 Hexa 16GB WB IT",         TARGET_IS_ENABLED(VERDIN_IMX95)    },
-+	{ VERDIN_IMX95H_8G_WIFI_BT_IT,           "Verdin iMX95 Hexa 8GB WB IT",          TARGET_IS_ENABLED(VERDIN_IMX95)    },
- 	{ VERDIN_IMX8MMQ_4G_WIFI_BT_ET,          "Verdin iMX8M Mini Quad 4GB WB ET",     TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
- 	{ APALIS_IMX8QM_WIFI_BT_IT_1300MHZ,      "Apalis iMX8QM 4GB WB IT",              TARGET_IS_ENABLED(APALIS_IMX8)     },
- 	{ APALIS_IMX8QM_IT_1300MHZ,              "Apalis iMX8QM 4GB IT",                 TARGET_IS_ENABLED(APALIS_IMX8)     },
-diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
-index 4a29c0bca848..f4dd853306b3 100644
---- a/board/toradex/common/tdx-cfg-block.h
-+++ b/board/toradex/common/tdx-cfg-block.h
-@@ -115,7 +115,7 @@ enum {
- 	VERDIN_IMX8MMDL_2G_IT,
- 	VERDIN_IMX8MMQ_2G_IT_NO_CAN,
- 	AQUILA_AM69O_32G_WIFI_BT_IT,
--	VERDIN_IMX95H_16G_WIFI_BT_IT,
-+	VERDIN_IMX95H_8G_WIFI_BT_IT,
- 	VERDIN_IMX8MMQ_4G_WIFI_BT_ET, /* 90 */
- 	APALIS_IMX8QM_WIFI_BT_IT_1300MHZ,
- 	APALIS_IMX8QM_IT_1300MHZ,
+ arch/arm/mach-tegra/Kconfig              | 17 ++++++++++++++++
+ arch/arm/mach-tegra/board2.c             | 25 ------------------------
+ board/acer/picasso/Kconfig               |  3 ---
+ board/asus/grouper/Kconfig               |  3 ---
+ board/asus/transformer-t114/Kconfig      |  7 ++++---
+ board/asus/transformer-t20/Kconfig       |  3 ---
+ board/asus/transformer-t30/Kconfig       |  3 ---
+ board/avionic-design/medcom-wide/Kconfig |  3 ---
+ board/avionic-design/plutux/Kconfig      |  3 ---
+ board/avionic-design/tec-ng/Kconfig      |  3 ---
+ board/avionic-design/tec/Kconfig         |  3 ---
+ board/cei/cei-tk1-som/Kconfig            |  3 ---
+ board/compal/paz00/Kconfig               |  3 ---
+ board/compulab/trimslice/Kconfig         |  3 ---
+ board/htc/endeavoru/Kconfig              |  3 ---
+ board/lenovo/ideapad-yoga-11/Kconfig     |  3 ---
+ board/lg/star/Kconfig                    |  3 ---
+ board/lg/x3-t30/Kconfig                  |  3 ---
+ board/microsoft/surface-rt/Kconfig       |  3 ---
+ board/nvidia/beaver/Kconfig              |  3 ---
+ board/nvidia/cardhu/Kconfig              |  3 ---
+ board/nvidia/dalmore/Kconfig             |  3 ---
+ board/nvidia/harmony/Kconfig             |  3 ---
+ board/nvidia/jetson-tk1/Kconfig          |  3 ---
+ board/nvidia/nyan-big/Kconfig            |  3 ---
+ board/nvidia/p2371-0000/Kconfig          |  3 ---
+ board/nvidia/p2371-2180/Kconfig          |  3 ---
+ board/nvidia/p2571/Kconfig               |  3 ---
+ board/nvidia/p2771-0000/Kconfig          |  3 ---
+ board/nvidia/p3450-0000/Kconfig          |  3 ---
+ board/nvidia/seaboard/Kconfig            |  3 ---
+ board/nvidia/tegratab/Kconfig            |  7 ++++---
+ board/nvidia/venice2/Kconfig             |  3 ---
+ board/nvidia/ventana/Kconfig             |  3 ---
+ board/ouya/ouya/Kconfig                  |  3 ---
+ board/toradex/apalis_t30/Kconfig         |  3 ---
+ board/toradex/colibri_t20/Kconfig        |  3 ---
+ board/toradex/colibri_t30/Kconfig        |  3 ---
+ board/wexler/qc750/Kconfig               |  3 ---
+ board/xiaomi/mocha/Kconfig               |  7 ++++---
+ doc/board/asus/transformer_t114.rst      |  2 +-
+ doc/board/nvidia/tegratab.rst            |  2 +-
+ doc/board/xiaomi/mocha.rst               |  2 +-
+ include/configs/mocha.h                  | 19 ------------------
+ include/configs/tegra.h                  |  4 ++++
+ include/configs/tegratab.h               | 19 ------------------
+ include/configs/transformer-t114.h       | 19 ------------------
+ 47 files changed, 36 insertions(+), 199 deletions(-)
+ delete mode 100644 include/configs/mocha.h
+ delete mode 100644 include/configs/tegratab.h
+ delete mode 100644 include/configs/transformer-t114.h
+
 -- 
 2.43.0
 
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
-	Marcel Ziswiler <marcel.ziswiler@toradex.com>,
-	u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v1 0/5] board: toradex: Add new Verdin and Aquila SKUs
-Date: Tue, 28 May 2024 11:59:36 +0200	[thread overview]
-Message-ID: <20240528095941.872693-1-ghidoliemanuele@gmail.com> (raw)
