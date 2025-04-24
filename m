@@ -4,88 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3FB0C369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 09:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67CBBC369D1
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 09:47:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8431E8209F;
-	Thu, 24 Apr 2025 11:17:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7C43781D5D;
+	Thu, 24 Apr 2025 11:47:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mg12ebYv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kHbT97Ve";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68285815D1; Thu, 24 Apr 2025 11:17:06 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 669838205A
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:17:04 +0200 (CEST)
+ id 1A47A815D1; Thu, 24 Apr 2025 11:47:12 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 72CC780F9C
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 11:47:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43cef035a3bso4720605e9.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 02:17:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745486224; x=1746091024; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9bwL1wd2CpXUlxB1fSA0JXQBPiq2c1OwdneCn7snAag=;
- b=mg12ebYvI+QytsZ9zrTxGrDNiTrvKpwgfEB1pUpFin+sNzVrsZy1ipzaqVERl2nHF9
- dK8H53ucwpWGVMAZisc5zZgUrW7b5a7JyqRMJTFREJ1OhSc2tm5F2VjsSTkDZPtcuuuG
- eSGNQ2OXmvyz5J3SFKzlqoBE/9PdJLJB22bC8Y1sbDnpsxFl+71kfoEK4wl0wIXYZIO/
- r+P75EGGNjBW7Z+lTSkfMeOBbsPKDhAWiiWsn01c5VBbq7tFiFrnNmOkIpJPlboNlsmC
- tqBktE/L7M5AYcSc/gS7e3K+rLpydcrzW1BNrhuawX9ZeXbELUBLl08rW3gAj4udp3z0
- +eOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745486224; x=1746091024;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9bwL1wd2CpXUlxB1fSA0JXQBPiq2c1OwdneCn7snAag=;
- b=NVjFUmJ7CJVNyku9rtfUFvJRPB2ZvIBwQKmvU8PCn/5gW0wxmO1WSKVofaOUz3ht3D
- 5u+KhEKgXCQ3Dj18ZAlBcEqd+dMOxrNrLsQvNO1eYyRa0RxJ/NCWK65B72lrNm32rkS+
- xiOJhDOowsO2VBkbv9UeKdE/PFvRDwLzfWvKUygaWBcmh6n81PZd83TrpL3DiRhsIJU7
- xJHsmrXw5fyLFJ4d9auSuD02+pdSz4RGezc0tVXUO7ccknMFpoKzgOi05fuN+CzcB2pT
- dQXHpUpj76J/CUvKgzCFe1zjbuc+qO/++z9xyUH6tdNwLxVKZK+DaLVRXY0pBsEE5ssV
- 831w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZ6M+VKcvOk/zLlYZND0Lt1WrhIcxouoeNonOCAT3Flu6vnif4dg382rhpVhACA/RkQcFTjvg=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywro6x9PF+583jUFbhYOxqQv8qf00wUJJQIgSfDfG+7t6teQVmt
- KPsuYxX1SUOpr3U8wN89NRgnyz2LxSh8BiKiFsdm3kESFGakjUlq61B+SJxKjsE=
-X-Gm-Gg: ASbGnct1c0TCT8AnZT04o0n7A+uH4faP6Ivi+z3lB+T8LUW5YxvlNUd4CBl5NVu7BPt
- lwcjLlPWLOw6lRovyQNr9ohCKpCg/7PRDI+8vxmJHZfXv0AqAgT0eItehLxtxh+kYKL7CxJ6YoU
- QayhDethnMdDrmGgY4CkR80X3fTvD7PlSPB/ApD5cLhHBt4ZVun6czbsxVymaeZkMwYlh9v30tL
- D1SVOHkdbWozDLMkY8Cy4EN2GLURG4Y9aDoYsztnhRMH5jndIaD7nGmKqQphXXFs7jZY17vr90n
- 5AqEs/NVOo+8Pb1xzVp7zNB+3x95UHlI72JJt+Y9iiGfrQpqao4iJbt5euoXOQ==
-X-Google-Smtp-Source: AGHT+IGAKA2RleqChaAoVUcdbNXY/HKz2ZoHg25IknkDTL8F3SOpH0Mn0T2R+jzThy00PPzjr9cajQ==
-X-Received: by 2002:a05:600c:524f:b0:43d:4e9:27f3 with SMTP id
- 5b1f17b1804b1-4409bd0d02cmr14485425e9.9.1745486223756; 
- Thu, 24 Apr 2025 02:17:03 -0700 (PDT)
-Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:d677:e5de:3a6:836])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4409d1e19e1sm13000945e9.0.2025.04.24.02.17.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 02:17:03 -0700 (PDT)
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Thu, 24 Apr 2025 11:16:46 +0200
-Subject: [PATCH v2 6/6] clk: qcom: apq8016: Fix SDCC clock warnings
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53O9l6UN2594526
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 24 Apr 2025 04:47:06 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745488026;
+ bh=YQxACvBb7In7/tYTX4sS4VoSDaRtuRYuIM7M8C3ikOI=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=kHbT97VeDbRojLHlFArvD2Z7tH1H67gJaxHdzSmT7xviwuGLd3PerJXIhYrhEHsgp
+ 1rOHAH0q7dX4e2oSjQB6/xOts7Um9mEv07axzboJ671/GSIQbZxe20ZFpjic5GyRaS
+ aLZ1Ugi1vP10u45rzo5icE3YH+g0QTUE671i+U4g=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53O9l6G8107701
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 24 Apr 2025 04:47:06 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
+ Apr 2025 04:47:06 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 24 Apr 2025 04:47:06 -0500
+Received: from [172.24.227.151] (uda0510294.dhcp.ti.com [172.24.227.151])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53O9l3fq008858;
+ Thu, 24 Apr 2025 04:47:03 -0500
+Message-ID: <226f38ab-b4b0-4283-b951-9ef4f1fc8ad3@ti.com>
+Date: Thu, 24 Apr 2025 15:17:02 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250424-apq8016-clock-fixes2-v2-6-fcc371c9e45f@linaro.org>
-References: <20250424-apq8016-clock-fixes2-v2-0-fcc371c9e45f@linaro.org>
-In-Reply-To: <20250424-apq8016-clock-fixes2-v2-0-fcc371c9e45f@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Sam Day <me@samcday.com>, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] arm: mach-k3: r5: common: Add support to boot HSM M4
+ core
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>
+CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <jm@ti.com>, <u-boot@lists.denx.de>
+References: <20250422095430.363792-1-b-padhi@ti.com>
+ <20250422095430.363792-5-b-padhi@ti.com>
+ <18e01808-499d-4690-995a-45ac5fd727d9@ti.com>
+Content-Language: en-US
+From: Beleswar Prasad Padhi <b-padhi@ti.com>
+In-Reply-To: <18e01808-499d-4690-995a-45ac5fd727d9@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,66 +84,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As of commit dc8754e8e408 ("clk/qcom: apq8016: improve clk_enable logging")
-there are now warnings in the U-Boot console on DragonBoard 410c:
+Hi Udit,
 
-  apq8016_clk_enable: unknown clk id 122
-  apq8016_clk_enable: unknown clk id 123
-  apq8016_clk_enable: unknown clk id 124
-  apq8016_clk_enable: unknown clk id 125
+On 22/04/25 20:14, Kumar, Udit wrote:
+> Hello Beleswar
+>
+> On 4/22/2025 3:24 PM, Beleswar Padhi wrote:
+>> The tispl.bin fit image is packed with the HSM firmware image. Populate
+>> the "os" info of the image so that it can be detected and loaded at
+>> corresponding DDR address. Further, invoke the load and boot of HSM core
+>> at R5 SPL stage. Boot flow for HSM M4 core is as below:
+>>
+>> 1. Request control of HSM M4F remote processor.
+>> 2. Assert Reset on the HSM M4F remote processor.
+>> 3. For HS devices, Request Secure Entity to Authenticate and Load HSM
+>>     firmware into core's internal SRAM memory region. For GP devices,
+>>     load the unsigned firmware manually.
+>> 4. Deassert Reset on the HSM M4F remote processor.
+>> 5. Release control of HSM M4F remote processor.
+>>
+>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>> ---
+>>   arch/arm/mach-k3/r5/common.c | 84 +++++++++++++++++++++++++++++++++++-
+>>   1 file changed, 83 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+>> index fd188e7c90e..1af0f70d8d3 100644
+>> --- a/arch/arm/mach-k3/r5/common.c
+>> +++ b/arch/arm/mach-k3/r5/common.c
+>> @@ -15,11 +15,17 @@
+>>   #include <spl.h>
+>>   #include <remoteproc.h>
+>>   #include <elf.h>
+>> +#include <cpu_func.h>
+>>     #include "../common.h"
+>>   +#define PROC_BOOT_CTRL_RESET_FLAG_HSM_M4    0x00000001
+>> +#define HSM_SRAM0_0_ADDR            0x43C00000
+>> +#define PROC_ID_HSM_M4F                0x00000080
+>
+> PROC_ID_HSM_M4F seems to have extra tab
 
-This is because we don't implement enable() properly for the SDCC clocks.
-Currently they are being enabled as part of set_rate().
 
-Fix this by moving the enable calls out of the apq8016_clk_init_sdc()
-function and convert them to the equivalent GATE_CLK_POLLED() definitions.
+Will fix in revision.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
----
- drivers/clk/qcom/clock-apq8016.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+>
+>> +
+>>   #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
+>>   enum {
+>> +    IMAGE_ID_HSM,
+>>       IMAGE_ID_ATF,
+>>       IMAGE_ID_OPTEE,
+>>       IMAGE_ID_SPL,
+>
+> Do you see possibility to have HSM char and enum at last .
 
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index e3a9807f580bc995395bd5debdb8d7a9dfa54795..b7bd9c9a342a4666738d87fb02eb679b2d189382 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -23,10 +23,7 @@
- #define APCS_GPLL_ENA_VOTE		(0x45000)
- #define APCS_CLOCK_BRANCH_ENA_VOTE (0x45004)
- 
--#define SDCC_BCR(n)			(((n) * 0x1000) + 0x42000)
- #define SDCC_CMD_RCGR(n)		(((n) * 0x1000) + 0x42004)
--#define SDCC_APPS_CBCR(n)		(((n) * 0x1000) + 0x42018)
--#define SDCC_AHB_CBCR(n)		(((n) * 0x1000) + 0x4201C)
- 
- /* BLSP1 AHB clock (root clock for BLSP) */
- #define BLSP1_AHB_CBCR			0x1008
-@@ -55,6 +52,10 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
- 
- static const struct gate_clk apq8016_clks[] = {
- 	GATE_CLK_POLLED(GCC_PRNG_AHB_CLK,	0x45004, BIT(8), 0x13004),
-+	GATE_CLK_POLLED(GCC_SDCC1_AHB_CLK,	0x4201c, BIT(0), 0x4201c),
-+	GATE_CLK_POLLED(GCC_SDCC1_APPS_CLK,	0x42018, BIT(0), 0x42018),
-+	GATE_CLK_POLLED(GCC_SDCC2_AHB_CLK,	0x4301c, BIT(0), 0x4301c),
-+	GATE_CLK_POLLED(GCC_SDCC2_APPS_CLK,	0x43018, BIT(0), 0x43018),
- 	GATE_CLK_POLLED(GCC_USB_HS_AHB_CLK,	0x41008, BIT(0), 0x41008),
- 	GATE_CLK_POLLED(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0), 0x41004),
- };
-@@ -67,12 +68,10 @@ static int apq8016_clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
- 	if (rate == 200000000)
- 		div = 4;
- 
--	clk_enable_cbc(priv->base + SDCC_AHB_CBCR(slot));
- 	/* 800Mhz/div, gpll0 */
- 	clk_rcg_set_rate_mnd(priv->base, SDCC_CMD_RCGR(slot), div, 0, 0,
- 			     CFG_CLK_SRC_GPLL0, 8);
- 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
--	clk_enable_cbc(priv->base + SDCC_APPS_CBCR(slot));
- 
- 	return rate;
- }
 
--- 
-2.47.2
+Thanks for the help in debug. A separate fix needs to be sent first, before putting new firmware at the end of the enum. I will include the fix in revision.
 
+>
+>
+>> @@ -32,6 +38,7 @@ enum {
+>>     #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
+>>   static const char *image_os_match[IMAGE_AMT] = {
+>> +    "hsm",
+>>       "arm-trusted-firmware",
+>>       "tee",
+>>       "U-Boot",
+>> @@ -136,6 +143,73 @@ void release_resources_for_core_shutdown(void)
+>>       }
+>>   }
+>>   +#if IS_ENABLED(CONFIG_K3_HSM_FW)
+>> +static int boot_hsm_core(void)
+>> +{
+>> +    struct ti_sci_handle *ti_sci = get_ti_sci_handle();
+>> +    struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
+>> +    u64 hsm_image_addr;
+>> +    u32 hsm_image_size;
+>> +    int device_type, ret;
+>
+> ^^ may be in alphabetic order
+
+
+Other functions in & around the same file define structs before than int and char.
+
+Let me know if you have a preference for the other way around.
+
+>
+>
+>> +
+>> +    hsm_image_addr = (u64)fit_image_info[IMAGE_ID_HSM].image_start;
+>> +    hsm_image_size = (u32)fit_image_info[IMAGE_ID_HSM].image_len;
+>> +
+>> +    /* Request Control of Remote Processor */
+>> +    ret = proc_ops->proc_request(ti_sci, PROC_ID_HSM_M4F);
+>> +    if (ret) {
+>> +        printf("Unable to request processor control for core %d\n",
+>> +               PROC_ID_HSM_M4F);
+>> +        return ret;
+>> +    }
+>> +
+>> +    /* Put the remote processor into reset */
+>> +    ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F,
+>> +                       PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
+>> +    if (ret) {
+>> +        printf("Unable to Halt core %d\n", PROC_ID_HSM_M4F);
+>> +        goto release_proc_ctrl;
+>> +    }
+>> +
+>> +    /*
+>> +     * Load the HSM firmware into core's internal memory.
+>> +     *
+>> +     * In case of HS device types, request secure entity to authenticate and
+>> +     * load the HSM firmware into the core memory.
+>> +     * In case of GP device types, copy the HSM firmware into the core
+>> +     * memory manually.
+>> +     */
+>> +    device_type = get_device_type();
+>> +    if (device_type == K3_DEVICE_TYPE_HS_SE ||
+>> +        device_type == K3_DEVICE_TYPE_HS_FS) {
+>> +        ret = proc_ops->proc_auth_boot_image(ti_sci, &hsm_image_addr,
+>> +                             &hsm_image_size);
+>> +        if (ret) {
+>> +            printf("Unable to Authenticate and Boot HSM image; ret = %d\n",
+>> +                   ret);
+>> +            goto release_proc_ctrl;
+>> +        }
+>> +    } else if (device_type == K3_DEVICE_TYPE_GP) {
+>> +        debug("Loading HSM GP binary into SRAM0_0\n");
+>> +        memcpy((void *)HSM_SRAM0_0_ADDR, (void *)(u32)hsm_image_addr,
+>> +               hsm_image_size);
+>> +        flush_dcache_range(HSM_SRAM0_0_ADDR,
+>> +                   HSM_SRAM0_0_ADDR + hsm_image_size);
+>> +    }
+>
+> since you are doing if- elseif loop then final else you should consider as error case
+
+
+Sure, will address in revision.
+
+>
+>
+>> +
+>> +    /* Release the reset from the remote processor*/
+>> +    ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F, 0,
+>> +                       PROC_BOOT_CTRL_RESET_FLAG_HSM_M4);
+>> +    if (ret)
+>> +        printf("Unable to Run core %d\n", PROC_ID_HSM_M4F);
+>> +
+>> +release_proc_ctrl:
+>> +    /* Release Control of Remote Processor */
+>> +    proc_ops->proc_release(ti_sci, PROC_ID_HSM_M4F);
+>> +    return ret;
+>> +}
+>> +#endif
+>> +
+>>   void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+>>   {
+>>       typedef void __noreturn (*image_entry_noargs_t)(void);
+>> @@ -157,6 +231,14 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+>>                        &loadaddr);
+>>       }
+>>   +#if IS_ENABLED(CONFIG_K3_HSM_FW)
+>> +    ret = boot_hsm_core();
+>> +    if (ret)
+>> +        printf("HSM core failed to boot, %d\n", ret);
+>> +    else
+>> +        printf("Successfully booted HSM core\n");
+>> +#endif
+>
+> Should we go in hang state, if secure fw is not started correctly ?
+
+
+We can. But I am thinking of the cases when people are running some demo applications in HSM core. In that case, if HSM boot fails, it is kind of expensive to hang the entire system boot.
+
+What do you think?
+
+Thanks,
+Beleswar
+
+>
+>
+>> +
+>>       /*
+>>        * It is assumed that remoteproc device 1 is the corresponding
+>>        * Cortex-A core which runs ATF. Make sure DT reflects the same.
+>> @@ -342,7 +424,7 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
+>>        * Only DM and the DTBs are being authenticated here,
+>>        * rest will be authenticated when A72 cluster is up
+>>        */
+>> -    if ((i != IMAGE_ID_ATF) && (i != IMAGE_ID_OPTEE)) {
+>> +    if (i != IMAGE_ID_ATF && i != IMAGE_ID_OPTEE && i != IMAGE_ID_HSM) {
+>>           ti_secure_image_check_binary(p_image, p_size);
+>>           ti_secure_image_post_process(p_image, p_size);
+>>       } else {
