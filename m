@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D2FAC369AB
-	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 12:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0831C369AB
+	for <u-boot@archiver.kernel.org>; Thu, 24 Apr 2025 12:13:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE8028056A;
-	Thu, 24 Apr 2025 14:13:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 21C3781F54;
+	Thu, 24 Apr 2025 14:13:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="EFBccosw";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="WKav2Adi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14D40806FC; Thu, 24 Apr 2025 14:13:41 +0200 (CEST)
+ id 07523817C4; Thu, 24 Apr 2025 14:13:46 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6F0C80194
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:13:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11D7C809D4
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 14:13:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E30B33F86C
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 12:13:25 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DB5A840327
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 12:13:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745496805;
- bh=owyivrzYnbK//Mz7/hN1GsElFQqGxAFOzgv+VYSAxgQ=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=EFBccoswQRQ67Ycn+daBkWEnYnsrttyuJRGMBGiNGql80M7H4TE6YCnDMhOTgq+8H
- jfXWfa/smWDg9kPND1mX7P4rhAjLEh4cq+3/OL2q2gvowseXCumZ//GX8WefOX3Wxv
- CKeXDlu15lOYnF2mRd1VFDvTBS2x1cMU3smZ0NMkYfewIQcwgK88UFCbP8SwiKwGqK
- 0Q72XC+q/ukCxlLLw1yfInO6Qcn6CT9k92o1qIvU/nvdJpCL+xM8yvoDVAgzJtY1t6
- F0cTF+2M6jmKNjnXHNePnDNvbDZ9faR9ZjOAjpv8xW9emApb23El6ViE741a1ac4Ip
- xq/egNCa3bZOg==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43cf44b66f7so6013655e9.1
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 05:13:25 -0700 (PDT)
+ s=20210705; t=1745496813;
+ bh=/1XzuE3AHi9RgtMhV/3LbVGKgIIatqJo0UPiIRuzCMk=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=WKav2Adi2h3J0h0gq8WVtLuFj/FJSvgH7JNWAV6/+XohRL4f3xyaZAPfqlHralIPL
+ 8bO3I4i28kRF1kT3+hjR/B4biNB1DxmwXf/z5Tegey8DHCNcaJPbYOBjuVFK67OTpU
+ 0YqZcAYRhoxJweYRtLKeLk0zr+JIHroEgiOgBef3ayktJPEredGmEWiN1c4IapV5cP
+ yGrx4uR0yBM4HWy6wwO92obNqbWZBs+NsNu2Dggr6WISOlD+UDaTyXIlEJ6m49OT5+
+ nUHaKKyBO/ZCM0h35H3SqAX+gNx59aN1iqCvA9NvbQbI70QHM9EmebSUGvC52f7yCa
+ qb0tP/lMISf2w==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3912fc9861cso324259f8f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 05:13:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745496801; x=1746101601;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=owyivrzYnbK//Mz7/hN1GsElFQqGxAFOzgv+VYSAxgQ=;
- b=LJjXTmCU+MC7wQ2JyUwg/RHlpjUDYHr90z1koZUUegDViScGApJL4XYQ13sz12pALW
- 5nuhOslWA9o7VT9/mr5sqy7cnKgst3Ryb5fqD6xEneEtDGSIdGFc5ss59GB+FBT5cqQC
- etTUTNXm0bzlhDPA2QlkkSnKpz5/ZkMKVa484k/4vVTRC7JBRqt1javpQaZiPedJXJFc
- hAAVHEo7z1olvhBru8hwWBmyAA8YRevE1RzTo0XDEg3VmJF90ZNWZlmCtXqeNESSvnES
- MBfhRBXE5uzbpZK0mStdFgbsFPV2mtLYQAW8FFUWouBd+sGdqG9l1zNOXo7WdkiWndht
- vm8Q==
+ d=1e100.net; s=20230601; t=1745496805; x=1746101605;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/1XzuE3AHi9RgtMhV/3LbVGKgIIatqJo0UPiIRuzCMk=;
+ b=dZrYA556UsI2BCuYEIYPlS4hwbGNgo/MEsf0PKfJDiwg+cngGQlutbMZCGvinUtDg/
+ wL0g0VO/KOc1dvVZU5I5mivtTVXVPQl4wjrJO23l5z8BcPKs+IsPDkDfIprEVwi8SV4U
+ 8aNikng6Z9nZ+APaKihWXM33dznhymF5nIxRrQfCXHs7YaBkxf0cdYwngKve0WSC7Dv4
+ FItPdkhcuhF5U/h5DECGCc4LQ+VYig3Ca9/R7fXePTVAN5E0vUk7VayRHCjYLCY6Dfmu
+ cVy14hfzlH1XqgMxCpAQ7joLLfiSfIf2naG4yMkcRjaJ+vOd3U5KvD2LVbrAAMd7BQHP
+ 6rvA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWl6CWB0CAXGKP9jRWsaZiKP/ufG/GdPmk+wevh4IJjIFa7WVeaeSWPIvOuankOGzdyNcis8b4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUbgzg8EKw000USDyKslC0GLlUHbg6au3G0rrBAUOwMdxavxrh
- drbO0gxWlMuO+05rXSKv6OQO+Nh8JR6uz8j+HRfI9BinskCr6W4yVJyx+QsQF2+WXQq7YyvmtB0
- EpNe4cDX5lGlypYsXBvYIxfckXrWUm4ki9PBTbMugSTbkMgWS3xzY8hGXSNZ7YBP89iM=
-X-Gm-Gg: ASbGncvTAdyU21cE4jA/hxFL8m/NDXBPCTi1/Qs1ly51PA9mBhtBdoLeg0OD3MYt/oR
- SC8sT28lcALzgMA3d+nWMVh1X3DKf8RbvdNx2YkrtO7k1sqUMJpQLGynMYTuYt+mdWZS37+4lVr
- hB0Cb4cNOZVSLlUSccTvATmt91zM3bw3bugiKk/sVqDW37rRoPNy31AdUG5bvspBdac/PyKKnNJ
- LY96V5k0QlMrUFbUg+7gV/mH/Tl2LzPVvubrHoAuuSYhyGKIlzvANbh+WEG/TBimwGYGFwF1e9a
- MDuP6UoyQVtIV7W07TdKS1a1BSyG98mhTNnRTRz+yqc9Yjc2lxNF444prsgtVST1lsZz1PMnocP
- gX3LhanlYzgL9aA==
-X-Received: by 2002:a05:6000:2485:b0:39e:e588:6745 with SMTP id
- ffacd0b85a97d-3a06cfa7872mr1954684f8f.46.1745496801536; 
- Thu, 24 Apr 2025 05:13:21 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGySUl1PCaW8fZENJ5qLwlF3RSy69759LMXeRCImHvKBZMoxXwEaaWpvyWhoAZm+5hEm9V6Dg==
-X-Received: by 2002:a05:6000:2485:b0:39e:e588:6745 with SMTP id
- ffacd0b85a97d-3a06cfa7872mr1954664f8f.46.1745496801194; 
- Thu, 24 Apr 2025 05:13:21 -0700 (PDT)
+ AJvYcCVLhkQoVgcXOfQCT4Ub07vvAgGoJa+Bo8e4Oql1NLQTs67Zk4fDbHRoZ2aL/q5b6UGcPZ3apWU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxye67CX7JSTN0hHJEJxaIk3fVeuKIrhUjncQgc3re4w6hr5gKL
+ xCEkxYbXrCOnUZOG781Jj05GbhkdrYlSjC2H5jO6Lq9MJaozp2558jMD+tqnVZ4vz1YCCe4pKZ0
+ QsT6sRDOFS7Uh3FVLLpVTO9/QcQYHAormygvRHd2pyip8DjA7SDLniKrcSHIFff3jM/4=
+X-Gm-Gg: ASbGncsNSJWLxfEbMkFWpdC5sDXp5ZgVqi0fFxbdGzXp4eie4xdm9Dh44kQYGh6qCY3
+ mLMszjBALRQ/JbzqR5MWlAXU2aRnQBZ1Z3Yg74b7ssG1mBZvOdurjr5iHsMSlsYUGwNDVQx4OOw
+ 2SWsxFgx0GnaTlSyciKHbrd8HYHuEA7OGXNBEOTBnWzigzCFkc2RLKZjd9aZeF8QJddQJta7VeJ
+ 1FLyhjiRwdcdCHe1zwuvVpwTGNSK5aIJyK/toJd/Z5yh/NAQXk+rgn6/I3FMhbp80LLKa+tNI2U
+ mWujmS7HqdO3M7fCJxHzdcgXGxWhOpOnS1aPQCgpYPh4WtgPZATKsIYJiWRRuyarbMg8it79bv2
+ ywO3hGvKg0j4+gQ==
+X-Received: by 2002:a05:6000:18a5:b0:391:29f:4f87 with SMTP id
+ ffacd0b85a97d-3a06cfc5ecfmr1982132f8f.49.1745496805576; 
+ Thu, 24 Apr 2025 05:13:25 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFNDDvv1U3k118sb/635WhLz8s51Ri7LjPT/oyTtsY72No7ko1iIPJ+WJEaUd4lB1zavtnnDA==
+X-Received: by 2002:a05:6000:18a5:b0:391:29f:4f87 with SMTP id
+ ffacd0b85a97d-3a06cfc5ecfmr1982100f8f.49.1745496805148; 
+ Thu, 24 Apr 2025 05:13:25 -0700 (PDT)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a06d5326e1sm1900906f8f.70.2025.04.24.05.13.20
+ ffacd0b85a97d-3a06d5326e1sm1900906f8f.70.2025.04.24.05.13.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 05:13:20 -0700 (PDT)
+ Thu, 24 Apr 2025 05:13:24 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Minda Chen <minda.chen@starfivetech.com>,
@@ -94,10 +95,12 @@ Cc: Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>,
  Simon Glass <sjg@chromium.org>, Andreas Schwab <schwab@suse.de>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v4 0/8] board: starfive: DeepComputing FML13V01
-Date: Thu, 24 Apr 2025 14:13:07 +0200
-Message-ID: <20250424121315.144549-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 3/8] board: starfive: DeepComputing FML13V01 fdt selection
+Date: Thu, 24 Apr 2025 14:13:10 +0200
+Message-ID: <20250424121315.144549-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250424121315.144549-1-heinrich.schuchardt@canonical.com>
+References: <20250424121315.144549-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -116,48 +119,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We use starfive_visionfive2_defconfig for supporting JH7110 based boards.
+We support all JH7110 boards with starfive_visionfive2_defconfig.
+The relevant device-tree is selected at runtime based on EEPROM data.
 
-The DeepComputing Framework motherboard is a new JH7110 device with
-upstream kernel support since v6.13.
+Support setting $fdtfile to the file name of the DeepComputing Framework
+motherboard (FML13V01) device-tree.
 
-Add support and documentation for the board.
-
+Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+Reviewed-by: Matthias Brugger <mbrugger@suse.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v4:
-	Correct the description of booting from eMMC on JH7110 boards.
+	no change
 v3:
-	Rebase upon Milk-V Mars CM removal patch
+	rebased upon Mars CM removal patch
 v2:
-	Rebase upon orgin/next
-	Carve out common documentation of JH7110 boards
-	Drop patch for binman config - not needed anymore
-	Add information about the debug UART
+	no change
+---
+ board/starfive/visionfive2/starfive_visionfive2.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Heinrich Schuchardt (8):
-  configs: add jh7110-deepcomputing-fml13v01 to VF2 defconfig
-  riscv: dts: jh7110: add DeepComputing FML13V01 device-tree
-  board: starfive: DeepComputing FML13V01 fdt selection
-  board: starfive: spl: support DeepComputing FML13V01
-  doc: add DeepComputing FML13V01 documentation
-  doc: starfive: use consistent formatting
-  doc: starfive: use jh7110_common.rst
-  doc: jh7110: describe debug UART
-
- .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |   7 ++
- board/starfive/visionfive2/spl.c              |   5 +-
- .../visionfive2/starfive_visionfive2.c        |   6 +-
- configs/starfive_visionfive2_defconfig        |   2 +-
- doc/board/starfive/deepcomputing_fml13v01.rst |  80 ++++++++++++++
- doc/board/starfive/index.rst                  |   1 +
- doc/board/starfive/jh7110_common.rst          | 103 ++++++++++++++++++
- doc/board/starfive/milk-v_mars.rst            |  18 +--
- doc/board/starfive/pine64_star64.rst          |  26 +----
- doc/board/starfive/visionfive2.rst            |  47 +-------
- 10 files changed, 215 insertions(+), 80 deletions(-)
- create mode 100644 arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
- create mode 100644 doc/board/starfive/deepcomputing_fml13v01.rst
- create mode 100644 doc/board/starfive/jh7110_common.rst
-
+diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+index b8cd509bc89..5fe888d4072 100644
+--- a/board/starfive/visionfive2/starfive_visionfive2.c
++++ b/board/starfive/visionfive2/starfive_visionfive2.c
+@@ -17,6 +17,8 @@
+ DECLARE_GLOBAL_DATA_PTR;
+ #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
+ #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
++#define FDTFILE_FML13V01 \
++	"starfive/jh7110-deepcomputing-fml13v01.dtb"
+ #define FDTFILE_MILK_V_MARS \
+ 	"starfive/jh7110-milkv-mars.dtb"
+ #define FDTFILE_VISIONFIVE2_1_2A \
+@@ -63,7 +65,9 @@ static void set_fdtfile(void)
+ 		log_err("Can't read EEPROM\n");
+ 		return;
+ 	}
+-	if (!strncmp(product_id, "MARS", 4)) {
++	if (!strncmp(product_id, "FML13V01", 8)) {
++		fdtfile = FDTFILE_FML13V01;
++	} else if (!strncmp(product_id, "MARS", 4)) {
+ 		fdtfile = FDTFILE_MILK_V_MARS;
+ 	} else if (!strncmp(product_id, "VF7110", 6)) {
+ 		version = get_pcb_revision_from_eeprom();
 -- 
 2.48.1
 
