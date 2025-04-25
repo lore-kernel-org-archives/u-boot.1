@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F6FC369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A49CC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:57:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C8608296B;
+	by phobos.denx.de (Postfix) with ESMTP id D29728293C;
 	Fri, 25 Apr 2025 16:57:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="k7C4W2h5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VZwljvlj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 141F2826AD; Fri, 25 Apr 2025 16:57:11 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 490DC82115; Fri, 25 Apr 2025 16:57:12 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC7E4826AD
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:57:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 394F5828BC
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:57:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PEv7Da2199889
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PEv8BH2816518
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 09:57:07 -0500
+ Fri, 25 Apr 2025 09:57:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745593027;
- bh=gd7HmkuA4wT/Jq+UOr7OGmzG8u6joNh1jPLdNxoGcAY=;
+ s=ti-com-17Q1; t=1745593028;
+ bh=4iNDeVbpaf8R595Z4v5c5V5GY4SmsDwHlzMRwGz218I=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=k7C4W2h5J2vhInitBs8uYgH67Tl2dqeiqdrrW6G5k4t05PtliabJck/hg7Nf11mbU
- j2BuT97ud/cdjOexg7I0wbx2ayfp0MgCTUKZmpu4MyzJfbM9zsMo6rZg9O6YX3NmuI
- Gj9TZnw5d4wOoH9zzN6hWlLcMboxvgvVKn6vlTeo=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PEv7v6023256
+ b=VZwljvljCzJHvOB3ajTy2thmKD31E/MuMVPYwVYvK92bEDF6dK2lbA6pDnoEZ22uz
+ PRMeS2GexJ6hYsc8tKZDtEzF1bd8Wf07oqud3CK1ldOpQvW3vsbv8Hlq1gSxP4tdh4
+ Fwk8W3Lq2T1kef5KvDnWtkjyUPolATlNhf/ek7lI=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PEv8xk023266
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 09:57:07 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 25 Apr 2025 09:57:08 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 09:57:06 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 09:57:08 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 09:57:06 -0500
+ Frontend Transport; Fri, 25 Apr 2025 09:57:08 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PEv53a067041;
- Fri, 25 Apr 2025 09:57:06 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PEv7O9056646;
+ Fri, 25 Apr 2025 09:57:07 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <khasim@ti.com>, <vigneshr@ti.com>,
  <trini@konsulko.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
  <n-francis@ti.com>, <b-liu@ti.com>
-Subject: [PATCH v5 3/9] arch: arm: k3-binman: add fit for falcon boot
-Date: Fri, 25 Apr 2025 20:26:34 +0530
-Message-ID: <20250425145644.2228186-4-anshuld@ti.com>
+Subject: [PATCH v5 4/9] mach-k3: sysfw-loader: update img_hdr for falcon
+Date: Fri, 25 Apr 2025 20:26:35 +0530
+Message-ID: <20250425145644.2228186-5-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250425145644.2228186-1-anshuld@ti.com>
 References: <20250425145644.2228186-1-anshuld@ti.com>
@@ -81,299 +81,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds creation of tispl_falcon.bin for the am62a, 62p and 62x.
+The returned legacy_img_hdr is used by booti_setup to compute the load
+address for the kernel image.
 
-The contents are the same as the existing tispl.bin but A53's spl and
-the fdt have been removed as they are not needed in falcon boot.
-
-This reduces boot time since the payload size is smaller and we also
-aren't authenticating the spl and fdt in secure boot.
+This change ensures the kernel load address is CONFIG_SYS_LOAD_ADDR in
+falcon boot.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/dts/k3-am625-sk-binman.dtsi | 64 ++++++++++++++++++++++++++++
- arch/arm/dts/k3-am62a-sk-binman.dtsi | 64 ++++++++++++++++++++++++++++
- arch/arm/dts/k3-am62p-sk-binman.dtsi | 51 ++++++++++++++++++++++
- arch/arm/dts/k3-binman.dtsi          | 54 +++++++++++++++++++++++
- 4 files changed, 233 insertions(+)
+ arch/arm/mach-k3/r5/sysfw-loader.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-index 534eb14795b..5ca1a4b28e8 100644
---- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-@@ -219,6 +219,70 @@
- 		};
- 	};
- 
-+	ti-falcon {
-+		insert-template = <&ti_falcon_template>;
-+
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				tifsstub-gp {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm_falcon: ti-dm {
-+						filename = "ti-dm.bin";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+				conf-0 {
-+					description = "k3-am625-sk-falcon";
-+					firmware = "atf";
-+					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
-+					"tifsstub-gp", "dm";
-+				};
-+			};
-+		};
-+	};
-+
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-index 2a8c260387b..bb1514c9d60 100644
---- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-@@ -211,6 +211,70 @@
- 		};
- 	};
- 
-+	ti-falcon {
-+		insert-template = <&ti_falcon_template>;
-+
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				tifsstub-gp {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm_falcon: ti-dm {
-+						filename = "ti-dm.bin";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+				conf-0 {
-+					description = "k3-am62a7-sk-falcon";
-+					firmware = "atf";
-+					loadables = "tee", "dm", "tifsstub-hs", "tifsstub-fs",
-+					"tifsstub-gp";
-+				};
-+			};
-+		};
-+	};
-+
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-diff --git a/arch/arm/dts/k3-am62p-sk-binman.dtsi b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-index 797644a7e0d..19c249bcfbc 100644
---- a/arch/arm/dts/k3-am62p-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-@@ -173,6 +173,57 @@
- 
- 	};
- 
-+	ti-falcon {
-+		insert-template = <&ti_falcon_template>;
-+
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm_falcon: ti-dm {
-+						filename = "ti-dm.bin";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+				conf-0 {
-+					description = "k3-am62p5-sk-falcon";
-+					firmware = "atf";
-+					loadables = "tee", "dm", "tifsstub-hs", "tifsstub-fs";
-+				};
-+			};
-+		};
-+	};
-+
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 5163161b94d..a678379dae9 100644
---- a/arch/arm/dts/k3-binman.dtsi
-+++ b/arch/arm/dts/k3-binman.dtsi
-@@ -489,6 +489,60 @@
- 		end_address = <0x0 0x9fffffff>;
- 	};
- 
-+	ti_falcon_template: template-9 {
-+		filename = "tispl_falcon.bin";
-+		pad-byte = <0xff>;
-+
-+		fit {
-+			description = "Configuration without SPL and FDT";
-+			#address-cells = <1>;
-+
-+			images {
-+				atf {
-+					description = "ARM Trusted Firmware";
-+					type = "firmware";
-+					arch = "arm64";
-+					compression = "none";
-+					os = "arm-trusted-firmware";
-+					load = <CONFIG_K3_ATF_LOAD_ADDR>;
-+					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
-+					ti-secure {
-+						content = <&atf_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					atf_falcon: atf-bl31 {
-+					};
-+				};
-+				tee {
-+					description = "OP-TEE";
-+					type = "tee";
-+					arch = "arm64";
-+					compression = "none";
-+					os = "tee";
-+					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
-+					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
-+					ti-secure {
-+						content = <&tee_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					tee_falcon: tee-os {
-+						optional;
-+					};
-+				};
-+				dm {
-+					description = "DM binary";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "DM";
-+					load = <0x89000000>;
-+					entry = <0x89000000>;
-+				};
-+
-+			};
-+		};
-+	};
-+
- };
- 
- #endif
+diff --git a/arch/arm/mach-k3/r5/sysfw-loader.c b/arch/arm/mach-k3/r5/sysfw-loader.c
+index 188731e673d..19607606965 100644
+--- a/arch/arm/mach-k3/r5/sysfw-loader.c
++++ b/arch/arm/mach-k3/r5/sysfw-loader.c
+@@ -89,7 +89,11 @@ static void *sysfw_load_address;
+ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+ {
+ 	if (sysfw_loaded)
+-		return (struct legacy_img_hdr *)(CONFIG_TEXT_BASE + offset);
++		if (IS_ENABLED(CONFIG_SPL_OS_BOOT))
++			return (struct legacy_img_hdr *)CONFIG_SYS_LOAD_ADDR;
++		else
++			return (struct legacy_img_hdr *)(CONFIG_TEXT_BASE +
++							 offset);
+ 	else if (sysfw_load_address)
+ 		return sysfw_load_address;
+ 	else
 -- 
 2.49.0
 
