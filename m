@@ -4,59 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3967EC369D1
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 05:34:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9468C369D1
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 05:34:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B6F981E14;
+	by phobos.denx.de (Postfix) with ESMTP id C33A381F0D;
 	Fri, 25 Apr 2025 07:34:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XfK5aSbY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ki9wuzTN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2956681E25; Fri, 25 Apr 2025 07:34:40 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 88DDA809D4; Fri, 25 Apr 2025 07:34:40 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED8558059A
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:34:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7300981B4B
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:34:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53P5YYHG2080685
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53P5YaoK2696230
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 00:34:35 -0500
+ Fri, 25 Apr 2025 00:34:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745559275;
- bh=SBO4cHSvmLiMHeFauJOjoIZCh8VBSN+6qraErwOJwRk=;
- h=From:To:CC:Subject:Date;
- b=XfK5aSbY5/uUNXTmczdUcvtTQTvAUaDBqrQnr5YRtWii7fJ6FNZG+7Nhc52ZGa9yP
- XnuLr3qeubmFWQZV6fBLGH8ZZR/42HT7cAwgf2i4FL9H33iMKGs/SHjqEmwDYLLskN
- 3LSevsbugtdevvuIz9s5G3cJzRjBeJ/DkFUyBe0M=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53P5YY39019199
+ s=ti-com-17Q1; t=1745559276;
+ bh=5GDTgXmURkQlHcFsYC2n5VvIzcpWZ49dx4VgDi7LqXc=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=ki9wuzTN/so6/1r4MuFQvsflf5Io4DfrS4sRMJkb36K2XAxDce5LmaqSBm2+AAEtx
+ ZPEqrtEqbcpX8HnEkvhnEqvLf/SAXTNsNdd+c5K5eL/XLSIczrZdQT1BKz6gRvLrAj
+ HCKM+1uZelujb4D3OmSxlRxn7IjjWbcKQQtVd3Do=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53P5YaRW020200
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 00:34:34 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 25 Apr 2025 00:34:36 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 00:34:34 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 00:34:36 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 00:34:34 -0500
+ Frontend Transport; Fri, 25 Apr 2025 00:34:36 -0500
 Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53P5YWp7048874;
- Fri, 25 Apr 2025 00:34:32 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53P5YWp8048874;
+ Fri, 25 Apr 2025 00:34:35 -0500
 From: Anurag Dutta <a-dutta@ti.com>
 To: <trini@konsulko.com>
 CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 0/2] AM57 Boot fixes 
-Date: Fri, 25 Apr 2025 11:04:29 +0530
-Message-ID: <20250425053431.1622267-1-a-dutta@ti.com>
+Subject: [PATCH 1/2] include: env: ti: mmc.h: Find DTB files in dtb directory
+ for AM57xx
+Date: Fri, 25 Apr 2025 11:04:30 +0530
+Message-ID: <20250425053431.1622267-2-a-dutta@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250425053431.1622267-1-a-dutta@ti.com>
+References: <20250425053431.1622267-1-a-dutta@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -77,21 +80,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The directory structure for omap has changed to /boot/dtb/ti/omap/<dtb file>.
-This results in "Failed to load '/boot/<dtb file>' error".
-Do relevant changes so that the fdtfile can be set from C code.
+Add dtb/ to the DTB search path.
 
-Logs: https://gist.github.com/anuragdutta731/3b58f48f7ddc07b7b8a98ca436a06e3a
+Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+---
+ include/env/ti/mmc.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Anurag Dutta (2):
-  include: env: ti: mmc.h: Find DTB files in dtb directory for AM57xx
-  board: ti: am57xx: Set fdtfile from C code instead of findfdt script
-
- board/ti/am57xx/board.c           | 19 ++++++++++++++++
- include/configs/ti_omap5_common.h | 36 -------------------------------
- include/env/ti/mmc.h              |  2 +-
- 3 files changed, 20 insertions(+), 37 deletions(-)
-
+diff --git a/include/env/ti/mmc.h b/include/env/ti/mmc.h
+index dbb0e3559ea..968d6ec03dc 100644
+--- a/include/env/ti/mmc.h
++++ b/include/env/ti/mmc.h
+@@ -24,7 +24,7 @@
+ 		"env import -t ${loadaddr} ${filesize}\0" \
+ 	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenvfile}\0" \
+ 	"loadimage=load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}\0" \
+-	"loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}\0" \
++	"loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/dtb/${fdtfile}\0" \
+ 	"envboot=mmc dev ${mmcdev}; " \
+ 		"if mmc rescan; then " \
+ 			"echo SD/MMC found on device ${mmcdev};" \
 -- 
 2.34.1
 
