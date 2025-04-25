@@ -4,66 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A163AC369D3
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 05:35:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F9B1C369D1
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 05:39:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19132809D4;
-	Fri, 25 Apr 2025 07:34:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 08A07809D4;
+	Fri, 25 Apr 2025 07:39:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gjMjs2Kh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B516E81F54; Fri, 25 Apr 2025 07:34:42 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 720C58059A
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:34:40 +0200 (CEST)
+ id 570FA810EB; Fri, 25 Apr 2025 07:39:29 +0200 (CEST)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D9FD08059A
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:39:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53P5YdV72696236
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 00:34:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745559279;
- bh=oHumZvfy7VlncGRrFMWqChhygzA6+lA8FJJ4PS17v8Q=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=gjMjs2Khqa5noatovJsNnJNrosML1E7gBjConTz50E5VZ3JuvHBhx9hbTI5q81uN1
- otGjpJZDt9j17xuSlS5lIf4sD+NPZFfuGIky1k71Icygz7jNRyTLKw4GUA+eXHZOUb
- MrfWCm+W29N1/XlpFmBnplvxswKSQ+Qq1JkCVnIE=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53P5YdIb020215
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 00:34:39 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 00:34:38 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 00:34:38 -0500
-Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53P5YWp9048874;
- Fri, 25 Apr 2025 00:34:37 -0500
-From: Anurag Dutta <a-dutta@ti.com>
-To: <trini@konsulko.com>
-CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 2/2] board: ti: am57xx: Set fdtfile from C code instead of
- findfdt script
-Date: Fri, 25 Apr 2025 11:04:31 +0530
-Message-ID: <20250425053431.1622267-3-a-dutta@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250425053431.1622267-1-a-dutta@ti.com>
-References: <20250425053431.1622267-1-a-dutta@ti.com>
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1u8BmV-0004c1-TN; Fri, 25 Apr 2025 07:39:23 +0200
+Message-ID: <5f87ac88-5552-4c5c-ae56-01c7ef9165dd@pengutronix.de>
+Date: Fri, 25 Apr 2025 07:39:21 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC] Expected behavior of the go command
+To: "Kumar, Udit" <u-kumar1@ti.com>, Simon Glass <sjg@chromium.org>,
+ Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, rick@andestech.com,
+ mporter@konsulko.com
+References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
+ <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
+ <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
+ <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
+Content-Language: en-US
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,116 +67,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We now can provide a map and have the standard fdtfile variable set from
-code itself. This allows for bootstd to "just work".
+Hi Udit,
 
-While at this, replace findfdt in environment with a warning as it is no
-longer needed.
+On 25.04.25 06:35, Kumar, Udit wrote:
+> 
+> On 4/23/2025 7:52 PM, Ahmad Fatoum wrote:
+>> I went with the FIT route for barebox, because we can now ship device
+>> trees for all enabled boards in the same FIT image alongside one generic
+>> second stage barebox with DT support. If you want to support different
+>> boards with your OS image that might be of interest to you as well.
+> 
+> Sorry for novice question.
+> 
+> But trying to understand how FIT fixes problem for you .
+> 
+> at the end, its a jump command to OS/other code be it through u-boot go or fit way.
 
-Signed-off-by: Anurag Dutta <a-dutta@ti.com>
----
- board/ti/am57xx/board.c           | 19 ++++++++++++++++
- include/configs/ti_omap5_common.h | 36 -------------------------------
- 2 files changed, 19 insertions(+), 36 deletions(-)
+The difference is whether, prior to the jump, the caches are flushed and the MMU
+is disabled and U-Boot's go does neither.
 
-diff --git a/board/ti/am57xx/board.c b/board/ti/am57xx/board.c
-index fc0d87daae4..a807c2a5464 100644
---- a/board/ti/am57xx/board.c
-+++ b/board/ti/am57xx/board.c
-@@ -42,6 +42,7 @@
- 
- #include "../common/board_detect.h"
- #include "../common/cape_detect.h"
-+#include "../common/fdt_ops.h"
- #include "mux_data.h"
- 
- #ifdef CONFIG_SUPPORT_EMMC_BOOT
-@@ -577,6 +578,23 @@ void do_board_detect(void)
- 			 "Board: %s REV %s\n", bname, board_ti_get_rev());
- }
- 
-+static struct ti_fdt_map ti_omap_am57_evm_fdt_map[] = {
-+	{"omap5_uevm", "ti/omap/omap5-uevm.dtb"},
-+	{"dra7xx", "ti/omap/dra7-evm.dtb"},
-+	{"dra72x-revc", "ti/omap/dra72-evm-revc.dtb"},
-+	{"dra72x", "ti/omap/dra72-evm.dtb"},
-+	{"dra71x", "ti/omap/dra71-evm.dtb"},
-+	{"dra76x_acd", "ti/omap/dra76-evm.dtb"},
-+	{"beagle_x15", "ti/omap/am57xx-beagle-x15.dtb"},
-+	{"beagle_x15_revb1", "ti/omap/am57xx-beagle-x15-revb1.dtb"},
-+	{"beagle_x15_revc", "ti/omap/am57xx-beagle-x15-revc.dtb"},
-+	{"am5729_beagleboneai", "ti/omap/am5729-beagleboneai.dtb"},
-+	{"am572x_idk", "ti/omap/am572x-idk.dtb"},
-+	{"am574x_idk", "ti/omap/am574x-idk.dtb"},
-+	{"am57xx_evm", "ti/omap/am57xx-beagle-x15.dtb"},
-+	{"am57xx_evm_reva3", "ti/omap/am57xx-beagle-x15.dtb"},
-+	{"am571x_idk", "ti/omap/am571x-idk.dtb"},
-+};
- static void setup_board_eeprom_env(void)
- {
- 	char *name = "beagle_x15";
-@@ -614,6 +632,7 @@ static void setup_board_eeprom_env(void)
- 
- invalid_eeprom:
- 	set_board_info_env(name);
-+	ti_set_fdt_env(name, ti_omap_am57_evm_fdt_map);
- }
- 
- #endif	/* CONFIG_XPL_BUILD */
-diff --git a/include/configs/ti_omap5_common.h b/include/configs/ti_omap5_common.h
-index 39102f15eb9..a0aaf750788 100644
---- a/include/configs/ti_omap5_common.h
-+++ b/include/configs/ti_omap5_common.h
-@@ -204,41 +204,6 @@
- 			"exit; " \
- 		"fi;\0"
- 
--#define DEFAULT_FDT_TI_ARGS \
--	"findfdt="\
--		"if test $board_name = omap5_uevm; then " \
--			"setenv fdtfile omap5-uevm.dtb; fi; " \
--		"if test $board_name = dra7xx; then " \
--			"setenv fdtfile dra7-evm.dtb; fi;" \
--		"if test $board_name = dra72x-revc; then " \
--			"setenv fdtfile dra72-evm-revc.dtb; fi;" \
--		"if test $board_name = dra72x; then " \
--			"setenv fdtfile dra72-evm.dtb; fi;" \
--		"if test $board_name = dra71x; then " \
--			"setenv fdtfile dra71-evm.dtb; fi;" \
--		"if test $board_name = dra76x_acd; then " \
--			"setenv fdtfile dra76-evm.dtb; fi;" \
--		"if test $board_name = beagle_x15; then " \
--			"setenv fdtfile am57xx-beagle-x15.dtb; fi;" \
--		"if test $board_name = beagle_x15_revb1; then " \
--			"setenv fdtfile am57xx-beagle-x15-revb1.dtb; fi;" \
--		"if test $board_name = beagle_x15_revc; then " \
--			"setenv fdtfile am57xx-beagle-x15-revc.dtb; fi;" \
--		"if test $board_name = am5729_beagleboneai; then " \
--			"setenv fdtfile am5729-beagleboneai.dtb; fi;" \
--		"if test $board_name = am572x_idk; then " \
--			"setenv fdtfile am572x-idk.dtb; fi;" \
--		"if test $board_name = am574x_idk; then " \
--			"setenv fdtfile am574x-idk.dtb; fi;" \
--		"if test $board_name = am57xx_evm; then " \
--			"setenv fdtfile am57xx-beagle-x15.dtb; fi;" \
--		"if test $board_name = am57xx_evm_reva3; then " \
--			"setenv fdtfile am57xx-beagle-x15.dtb; fi;" \
--		"if test $board_name = am571x_idk; then " \
--			"setenv fdtfile am571x-idk.dtb; fi;" \
--		"if test $fdtfile = undefined; then " \
--			"echo WARNING: Could not determine device tree to use; fi; \0"
--
- #define GET_OVERLAY_MMC_TI_ARGS \
- 	"get_overlay_mmc=" \
- 		"fdt address ${fdtaddr};" \
-@@ -278,7 +243,6 @@
- 	DEFAULT_FIT_TI_ARGS \
- 	"get_fit_config=setenv name_fit_config ${fdtfile}\0" \
- 	DEFAULT_COMMON_BOOT_TI_ARGS \
--	DEFAULT_FDT_TI_ARGS \
- 	GET_OVERLAY_MMC_TI_ARGS \
- 	DFUARGS \
- 	NETARGS \
+Thinking about it, I am wondering whether U-Boot go is inherently broken,
+even for the jump-table use case, if caches are enabled:
+Because go doesn't do any cache maintenance, what guarantee do we have
+that the I-Cache actually reflects the data that was freshly loaded?
+
+It might only work because the region you go to happens to not be resident
+in the I-Cache yet...
+
+FWIW, barebox go does cache maintenance and disables the MMU, which
+is why I mistakenly thought U-Boot's go would behave similarly.
+barebox didn't inherit the jump table mechanism.
+
+> In case OS/other code handles caches, then should not be an issue.
+> But this put requirement on next stage to take care of caches [0]
+
+In the fit case, MMU is disabled and so the next stage is free to
+not do any cache maintenance if it doesn't need to enable the MMU.
+Linux and barebox want to use the MMU/caches by default, so that's
+why they have to do cache maintenance.
+
+If they assume MMU is disabled on startup, it follows the lines in
+the cache are stale and unimportant and then memory corruption
+occurs once they are discarded.
+
+Cheers,
+Ahmad
+
+> 
+> 
+> [0] : https://github.com/torvalds/linux/blob/master/arch/arm64/kernel/head.S#L105
+> 
+> 
+>>
+>> Cheers,
+>> Ahmad
+>>
+>>> Regards,
+>>> Simon
+>>>
+> 
+
+
 -- 
-2.34.1
-
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
