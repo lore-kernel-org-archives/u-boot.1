@@ -4,82 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1EBCC369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01AC5C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:43:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 223D582958;
-	Fri, 25 Apr 2025 19:39:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 71A2082977;
+	Fri, 25 Apr 2025 19:43:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nathaniel.land
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S70MNXBU";
+	dkim=pass (2048-bit key; unprotected) header.d=nathaniel.land header.i=@nathaniel.land header.b="YfQhQr23";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BFA6829C7; Fri, 25 Apr 2025 19:39:15 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3DAC6829D4; Fri, 25 Apr 2025 19:43:16 +0200 (CEST)
+Received: from goldencat.email (host212.sub-63-47-114.myvzw.com
+ [63.47.114.212])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A24B48291D
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:39:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2ff6cf448b8so3517137a91.3
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 10:39:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745602751; x=1746207551; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YioYxKr/GyFEWMK8mddwd4trF5iaYox7PauIMSpN2Hk=;
- b=S70MNXBULgh/e8HQuCLkhMSPgG/AhZQSDW2kJcC1aYKavhP9kWd9Cedd4JNMJeKTRI
- nmV0UL6+IHPsLMIpM5JHLBCP48Mg+BoDiMaaYKgoiRMgf7nJOYvBoIFpy3wu30fPu6nn
- IYjwwgoRmYRP1ySTmSAFa/oA+7rbjL+642dyoinfK934j6XxUMkMN7uCPzsjzC7g4Sml
- LT1TxQKp+J1XE6dXmPCgxmrmK77+FKRBrly5+vFqYdxfA2wWKGjPko0/BuMFnSALvIoP
- SSnToOJbvOZ69Ae0pAPAqd0jWNCVjXdKjs8VnRN/c//lrJ0DbZgl8Q+FC6WltD3nKCC0
- VAPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745602751; x=1746207551;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YioYxKr/GyFEWMK8mddwd4trF5iaYox7PauIMSpN2Hk=;
- b=Rna8lalqDuXW0b928OaloVVnukYdl+/mkCnAYZPixDlJ+S57ukn6O30BdEOBQzGVvN
- MMiqceOTEGLZjLYT2Q/HUm+NaJltVu9o+lFJqTVnR9rqkb3pdQGWmNt070gvpfRbv8nh
- u9As6plkijR8wZ9YV7qDUUbq88HH+HGpl6SPV+AI5mzYGjIHqwqf5+eDTuyYTkk5ssJL
- TfKZlLyER02HI2I46FLI0CmdZ5/C87i7iQcjUL4twGupio5s/3FSCOssL05r2VAd3OV6
- yo0HCaDa2QVdUHtlmy/Lbk9DNmJh0F4fxVukb8KomlvcUyIi3JCrtsD0GYdmly8ozmzw
- cxmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXGoRepo3C/yoACwU2pbz3UofRMRZPVg8MEl+JELujn7kP198j8B/IrDQ/LFGSe2C6ecINKigc=@lists.denx.de
-X-Gm-Message-State: AOJu0YztYy+E4TL6GY0tGgKM/dSOJzTocpUmUpzOeE7UnTOXPs2R+k98
- gdrdRCMzr8h2OL6H0oGtq+UQyhackcbm3T2GQFJ6bBsXHag3T1t7MFZ+6g==
-X-Gm-Gg: ASbGncs/GLYBpfC2jjVoe7JD3vCfTC+T6THOqpRzPshgp9JC2cOGz6Rs5garfkEV1I5
- o6S80ncp2j4SgdCqpwcdmrYPn3es/qE7J0vYVxM7I1ddMVHfOvndDaUwtqsd5G5oMDnjwbADthW
- Z4x11j3lTHKvqtFM1aRuQhNklavTtpMbsKC5kvD8BKC7AA2vZHS4paHbmbkEiazs1d2fqvqQfcr
- kRfwq4LSh1GEQGby3awDUeSPFTsskfR0GoJz3XoapO45zCTnLUeRBVZpanaBJu4XwxfDHJrdD8R
- 1zwv/BPohm3gbcsgYs0tjm8IwX6Sbvi3pheY6BmzDfTFKSc+Tz7mHBZ1z3ewDKzc9g==
-X-Google-Smtp-Source: AGHT+IGhrhM2mrdgrNz1Y05Z0sGB8TpQhDy8/+F71s759tgBW0QUEY04mVrJEJGciXRQ/xd4X/CAyQ==
-X-Received: by 2002:a17:90b:57c8:b0:2fe:8c22:48b0 with SMTP id
- 98e67ed59e1d1-309f7dfddc6mr4967626a91.15.1745602751055; 
- Fri, 25 Apr 2025 10:39:11 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:6fb9:f343:690b:2e7d])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22db5100c70sm35308465ad.166.2025.04.25.10.39.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 10:39:10 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: marex@denx.de
-Cc: trini@konsulko.com, aford173@gmail.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] arm64: dts: imx8mm: Make osc_32k available in SPL
-Date: Fri, 25 Apr 2025 14:39:01 -0300
-Message-Id: <20250425173901.1965597-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id 49EE382958
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:43:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nathaniel.land
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=i@nathaniel.land
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nathaniel.land;
+ s=dkim; t=1745602989;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+44g1DlLbmqMqzYgP1BEGj1ndUkdUe7WFI4L0K6T9fw=;
+ b=YfQhQr23U2A+8iQhNI3TtIM2VFhAqmPGTSHj/LCUFSxF+B7Hg7IalXrsAfECT3NVjpe3wQ
+ pV3vXg/pZ4N+9g4SCoxFUHyR81XREE4r1MiNsXwQmSw1YIpm38xffPV4c2lOinbaaRV5ZD
+ mk2GF8Nzk+XVV6acPWJITdNXSxZOUNG1Vg/tOukWVN1JxNNWj+8NGhg6Lg7ERFGKxWbWuH
+ C7KZ+Ar+G+1dnpvQsHHAG1pPZ6p8A1HbztvHgATOiC9HmTEvHcu2syugwju0CvByze+7dL
+ 5kjJ227t5OPwH/NW05cb7kYF60/yGvVmtgTItfwhzMkG90jXiQD/k5S+lgabbw==
+Authentication-Results: goldencat.email;
+ auth=pass smtp.mailfrom=i@nathaniel.land
+Date: Fri, 25 Apr 2025 12:43:08 -0500
+From: Nathaniel Hourt <i@nathaniel.land>
+To: UBML <u-boot@lists.denx.de>
+Subject: Build for RISC-V with LLVM
+Message-ID: <932979cb47c4fded7ac19216ca172504@nathaniel.land>
+X-Sender: i@nathaniel.land
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
+X-Spamd-Bar: /
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,45 +65,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+Hi, all
 
-Since commit b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*")
-SPL takes a long time to load U-Boot proper on an imx8mm-evk board.
+I am trying to build u-boot and SPL for my Mars board (riscv, variant of 
+the starfive visionfive2) following the board-specific docs [1], using 
+LLVM/clang as my toolchain with the HOSTCC and CC make options mentioned 
+in [2]. I'm building from a RISC-V native chroot using qemu-binfmt so I 
+am not using the cross-compile options; thus my make invocation looks 
+like `make HOSTCC=clang CC=clang` (for OpenSBI, I just pass 'LLVM=1'). 
+Note that the chroot I'm building from does not contain gcc/binutils at 
+all; LLVM is the only toolchain present.
 
-The reason for the long delay is because the osc_32k clock is not available
-in the SPL phase.
+The build usually succeeds, so I try to pass the SPL to the MaskROM over 
+UART (using the u-boot-spl.bin.normal.out image) and it just hangs. No 
+output, no response, and I have to reset the board. If I pass a working 
+SPL I downloaded, it logs some output then accepts a main u-boot payload 
+over UART, so if I send the main u-boot payload I built (u-boot.itb), I 
+get a "Load address misaligned" error as in [3].
 
-Fix this problem by passing the 'bootph-all' and 'bootph-pre-ram'
-properties to make the osc_32k clock available in SPL.
+I attempted to configure my SPL to log to UART by turning on various 
+logging options in `menuconfig`, including the options recently 
+mentioned by Heinrich Schuchardt in [4], but I have been unsuccessful in 
+getting any output from the SPL I built.
 
-This also aligns with imx8mn and imx8mp-u-boot.dtsi files.
+So I am looking for guidance. Is building with LLVM/clang (for riscv) 
+supported? I don't know what to try next.
 
-Fixes: b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*")
-Suggested-by: Marek Vasut <marex@denx.de>
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
-Changes since v1:
-- Sent a standalone patch that makes osc_32k available in SPL. (Marek)
+Thanks
+—
+Nathaniel
 
- arch/arm/dts/imx8mm-u-boot.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
-index abb3aa5b6354..59453dc36d31 100644
---- a/arch/arm/dts/imx8mm-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-u-boot.dtsi
-@@ -240,6 +240,11 @@
- 	bootph-pre-ram;
- };
- 
-+&osc_32k {
-+	bootph-all;
-+	bootph-pre-ram;
-+};
-+
- #ifdef CONFIG_FSL_CAAM
- &sec_jr0 {
- 	bootph-pre-ram;
--- 
-2.34.1
-
+[1] 
+https://docs.u-boot.org/en/latest/board/starfive/milk-v_mars.html#milk-v-mars
+[2] https://docs.u-boot.org/en/latest/build/clang.html
+[3] https://pastebin.com/xwEcqEpz
+[4] https://lists.denx.de/pipermail/u-boot/2025-April/586264.html
