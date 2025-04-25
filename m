@@ -4,41 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409D3C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 13:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C11DBC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 13:16:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B52C282012;
-	Fri, 25 Apr 2025 15:02:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id F3F7E820E2;
+	Fri, 25 Apr 2025 15:16:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E5BF820E1; Fri, 25 Apr 2025 15:02:12 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23DFE81E14
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 15:02:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.35] (unknown [98.97.61.227])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id E5BBFB4C1604;
- Fri, 25 Apr 2025 15:02:08 +0200 (CEST)
-Message-ID: <849a10bd-deac-4735-9c6c-61a284045aa0@freeshell.de>
-Date: Fri, 25 Apr 2025 06:02:06 -0700
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Rm8Nev94";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id F4129820EB; Fri, 25 Apr 2025 15:16:35 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BFC6181E14
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 15:16:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6210cfe02c=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53P84pBl019090;
+ Fri, 25 Apr 2025 15:16:33 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ wEuOOxLdTigLXpm66MZgz2Psq5i2LH1KE5j9Stb01X4=; b=Rm8Nev94F4aTRB6J
+ 5cIQXxwPnGJ/QBt+/Qfod7IUs7gg2k6/NVaLHduHM2yg/SQ5OK3icjGwtnwrPfRD
+ czDaKx9KeCIls9QIFeEJAfwfAhxAu10Sky6dQkDNb783EQ9eTXvo9RZ62gVQFh8i
+ Rj8YcyWEdsjvfCqhv13sXp34t3lewL3FeFD8szLrU5oLOhNau0/0sOTGp/Xw1xZe
+ AjHIS1Ykth8W16pe9oVCXkvwgPYaGFg5Igy8K1W1o3iqim6nW3c5JwNV04zeSJb3
+ mAbzLZtSkVgkskka3fN8T0mrtNgY7bjIqB23Xpbc6965pSXO4OO26PsNEuNncSn6
+ Nf+Y2g==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjvm9h3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 25 Apr 2025 15:16:33 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EC5254004B;
+ Fri, 25 Apr 2025 15:15:54 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4B82C8A8FEB;
+ Fri, 25 Apr 2025 15:15:42 +0200 (CEST)
+Received: from localhost (10.252.18.92) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 25 Apr
+ 2025 15:15:42 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 06/22] ARM: dts: stm32: add "u-boot,
+ mmc-env-partition" for stm32mp257f-ev1-u-boot
+Date: Fri, 25 Apr 2025 15:15:17 +0200
+Message-ID: <20250425131533.392747-7-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250425131533.392747-1-patrice.chotard@foss.st.com>
+References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [GIT PULL] u-boot-riscv/master
-From: E Shattow <e@freeshell.de>
-To: Leo Liang <ycliang@andestech.com>, trini@konsulko.com
-Cc: u-boot@lists.denx.de, rick@andestech.com
-References: <aAte-nS8ZhO_Odw1@swlinux02>
- <c42c99d0-6ce1-452a-8d2f-fe8885214cb0@freeshell.de>
-Content-Language: en-US
-In-Reply-To: <c42c99d0-6ce1-452a-8d2f-fe8885214cb0@freeshell.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.18.92]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-25_03,2025-04-24_02,2025-02-21_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,118 +90,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Oops! actually, was merge conflict, I see...
+Add "u-boot,mmc-env-partition" property for stm32mp257f-ev1-u-boot.
 
-On 4/25/25 05:57, E Shattow wrote:
-> Hi Leo,
-> 
-> On 4/25/25 03:07, Leo Liang wrote:
->> Hi Tom,
->>
->> The following changes since commit 10f48365112b164bee6564033ab682747efcb483:
->>
->>   Merge patch series "Add PCIe support for TI AM64 SoC" (2025-04-24 10:46:17 -0600)
->>
->> are available in the Git repository at:
->>
->>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
->>
->> for you to fetch changes up to 5ac699efe94f24df561d33e420d3c73f5fb797e8:
->>
->>   board: starfive: visionfive2: Order board detection logic to match config (2025-04-25 17:04:09 +0800)
->>
->> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/25940
->> ----------------------------------------------------------------
->> - riscv: lib: Simplify FDT retrieving process
->> - board: k1: pinctrl: Add pinctrl support for bananapi-f3
->> - binman: riscv: Fix binman_sym functionality
->> - board: starfive: visionfive2: Reorder board detection logic
->> - board: starfive: Add DeepComputing FML13V01 support
->> ----------------------------------------------------------------
->> E Shattow (2):
->>       doc: board: starfive: visionfive2: add missing format command to Flashing
->>       board: starfive: visionfive2: Order board detection logic to match config
->>
->> Heinrich Schuchardt (9):
->>       configs: qemu-riscv raise CONFIG_NR_DRAM_BANKS
->>       configs: add jh7110-deepcomputing-fml13v01 to VF2 defconfig
->>       riscv: dts: jh7110: add DeepComputing FML13V01 device-tree
->>       board: starfive: DeepComputing FML13V01 fdt selection
->>       board: starfive: spl: support DeepComputing FML13V01
->>       doc: add DeepComputing FML13V01 documentation
->>       doc: starfive: use consistent formatting
->>       doc: starfive: use jh7110_common.rst
->>       doc: jh7110: describe debug UART
->>
->> Huan Zhou (2):
->>       riscv: dts: k1: add pinctrl property in dts.
->>       config: Enable pinctrl in bananapi-f3
->>
->> Minda Chen (1):
->>       MAINTAINERS: visionfive2: Add match N: starfive pattern
->>
->> Yao Zi (7):
->>       riscv: lib: Add a default implementation of board_fdt_blob_setup
->>       board: qemu: riscv: Remove duplicated board_fdt_blob_setup
->>       board: starfive: Remove duplicated board_fdt_blob_setup
->>       board: sifive: Remove dead board_fdt_blob_setup
->>       riscv: dts: binman.dtsi: Switch to u-boot-nodtb entry for proper U-Boot
->>       riscv: dts: starfive: Prevent binman from relocating symbols in SPL
->>       riscv: Provide __image_copy_{start_end} symbols in linkerscript
->>
->>  arch/riscv/cpu/u-boot-spl.lds                      |   2 +
->>  arch/riscv/cpu/u-boot.lds                          |   3 +
->>  arch/riscv/dts/binman.dtsi                         |   2 +-
->>  .../dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi  |   7 ++
->>  arch/riscv/dts/k1-bananapi-f3.dts                  |   3 +
->>  arch/riscv/dts/k1-pinctrl.dtsi                     |  19 ++++
->>  arch/riscv/dts/k1.dtsi                             |   8 +-
->>  arch/riscv/dts/starfive-visionfive2-binman.dtsi    |   1 +
->>  arch/riscv/lib/Makefile                            |   1 +
->>  arch/riscv/lib/board.c                             |  19 ++++
->>  board/emulation/qemu-riscv/qemu-riscv.c            |   8 --
->>  board/sifive/unleashed/unleashed.c                 |  11 ---
->>  board/sifive/unmatched/unmatched.c                 |  10 --
->>  board/starfive/visionfive2/MAINTAINERS             |   2 +-
->>  board/starfive/visionfive2/spl.c                   |  43 +++++----
->>  board/starfive/visionfive2/starfive_visionfive2.c  |  16 +---
->>  configs/bananapi-f3_defconfig                      |   2 +
->>  configs/qemu-riscv32_defconfig                     |   1 -
->>  configs/qemu-riscv32_smode_defconfig               |   1 -
->>  configs/qemu-riscv32_spl_defconfig                 |   1 -
->>  configs/qemu-riscv64_defconfig                     |   1 -
->>  configs/qemu-riscv64_smode_defconfig               |   1 -
->>  configs/qemu-riscv64_spl_defconfig                 |   1 -
->>  configs/starfive_visionfive2_defconfig             |   2 +-
->>  doc/board/starfive/deepcomputing_fml13v01.rst      |  80 ++++++++++++++++
->>  doc/board/starfive/index.rst                       |   1 +
->>  doc/board/starfive/jh7110_common.rst               | 103 +++++++++++++++++++++
->>  doc/board/starfive/milk-v_mars.rst                 |  18 +---
->>  doc/board/starfive/pine64_star64.rst               |  26 +-----
->>  doc/board/starfive/visionfive2.rst                 |  48 ++--------
->>  30 files changed, 292 insertions(+), 149 deletions(-)
->>  create mode 100644 arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
->>  create mode 100644 arch/riscv/dts/k1-pinctrl.dtsi
->>  create mode 100644 arch/riscv/lib/board.c
->>  create mode 100644 doc/board/starfive/deepcomputing_fml13v01.rst
->>  create mode 100644 doc/board/starfive/jh7110_common.rst
->>
->>
->> Best regards,
->> Leo
-> 
-> Looks to me like merging "Order board detection logic to match config"
-> series preserves the string pointer math that I deleted with the series.
-> The intent of the series is for the logic to match the literals in
-> configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST and not be
-> obfuscated by this string pointer math. Searching (grep ...) entries
-> from the list should lead to the code, which is hidden if we have that
-> bit that strips the prefix. Sorry if that adds a few bytes of
-> "starfive/" for each target added to SPL code size but the merge as-is
-> does not reflect all of what I wanted, FYI
-> 
-> Thanks,
-> 
-> -E
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-I can send another version ? -E
+(no changes since v1)
+
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+index 3beeaa19c12..d4a75b2f03e 100644
+--- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+@@ -6,6 +6,10 @@
+ #include "stm32mp25-u-boot.dtsi"
+ 
+ / {
++	config {
++		u-boot,mmc-env-partition = "u-boot-env";
++	};
++
+ 	clocks {
+ 		ck_flexgen_08: ck-flexgen-08 {
+ 			#clock-cells = <0>;
+-- 
+2.25.1
+
