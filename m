@@ -4,88 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE03BC369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 11:52:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE02C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 11:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13AB98205A;
-	Fri, 25 Apr 2025 13:52:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D68A82076;
+	Fri, 25 Apr 2025 13:55:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e11pNS11";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1745582151;
+	bh=aOQWbEiFrLQzKWAdq/R9jmgNs0idXWdfeE2R1QOhzhM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=votZX5QfgYo9eJjJkSiNhFa+xOA+OFLVKw1Q9i8KrdaJEyTNPgyRc5+FT2NQ+oIr5
+	 d0PeZ67TrDkuqzt9chNPqls/9p2qJg2eBRc0fjss+wXHV9K1xSWFc6V5apkKGzesgg
+	 iVDvQ2Ms4N8ANaOrfPk00JIiBuIcsJIqZJlx7B0Qn0AMzHWkVlDtH/nEmOBbaumYyd
+	 M/644kkTpElosKlBCiHs89MfqOoLRI80IqACURdN3vd/otDeIfieqwM3Et5lImxAJU
+	 kqoTKEKWT9P2SV9i7ZVQ1dCsF+PTLP1WBZzNadA/XyKYxVwv94lCAuPCm5/KjNyUBF
+	 RBJBJEXdwGjEg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 098CA81E14; Fri, 25 Apr 2025 13:52:11 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C36418209C; Fri, 25 Apr 2025 13:55:49 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D0D381E14
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 13:52:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFFAD81E14
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 13:55:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-31062172698so24577471fa.0
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 04:52:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745581928; x=1746186728; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=I/Gwd10UzpgQXQjWySgA5HH2yxEs4d03ypyCLTAedh8=;
- b=e11pNS11jgd+ssrg2mbJ9eAreyb6ALdElgS01l6BOtDg3N6hHKk5TmfXU9d0q2QfTg
- pps4LkSqTpwqVEZtZO2RiFPq+CpE5a6aU7i0KVKwxDdR+eUr8iaS/MapxM4SXClEuUrT
- A9zXpO1YnCRF1WA/3eXdSnd8DlJvdaf8V6n2wWjMZWhbq6lj1OEmJoR3Du2nGSRrqvGm
- Cm3q8GTr95xh3daiNn9SA/XktHqJYafBtRcX9/a5O/BM3m8dlx0WLZFVp/WP152TkonL
- Mx+I/ihhNf21wpdb4Igk/CierBBLPe1Ak6y2nyfNuIE7/FaIVI9S2JJRbV7W5U6ESLQp
- +tPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745581928; x=1746186728;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=I/Gwd10UzpgQXQjWySgA5HH2yxEs4d03ypyCLTAedh8=;
- b=qR6OVrUVnxdu/WmbDm6PI1tA6Iawn4ltbxcyzwDGKUWBZiR3uDdFhrwo2ZechOii4T
- trhXZtGX56oV/NblJb3eWa5pF9HJuWRs86Z8ywHNR2C85XrQVYm0R9MP9yseGJXoj4ME
- a3SAZAoLqfmTpo/4y4+ul4lWlaR+n6VRrbJyjPWOpK24x17yOJKLRQntag6L75bP6q8G
- NjYnlFQUCDzV4Of5ntdVRnvIQqT4P+iRwF4SfBVC/GHnNGq9gTwkOVYDhuqSLop6eDuo
- JjTUc9xB0ljBxSc5NsIOR83HEx7zhbEI9qaQPV+QTeu8FWa85VpXy2L0sBC3e820D4+d
- SlYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU+jDfqvKL3nrxEdBfE+7OPwRY+fhT1m/RMokFOOxsUWpYsLFQvgVEJLLfL4DFvlZsv8s7ZLVI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyl27azthLn9dtn8UGg2xQZpbS0jW75fpaC0mIEXab1KTnRblg5
- krUbfMbzt220JFVYVzaAJgi8WRKg0SlL0UNalSOukqYD/vDpb+nQkxLIgZU65qDv6NHDJ+CC1Xa
- +aLEA5h2VI57cHu2NtiGic3In+Js=
-X-Gm-Gg: ASbGncvW0YHukRPuVdWLfuWbaIu15vPqe12tAeMDLDmyWziyf1lLGJUrJ4mxWne4RMm
- DIhDrRWVRdwbZsE7bF3gqnC96ZaZEBX3/sy1E4yXxI/ZnT+FBBtTB+QFIPTobWX0wl03lcDi5nS
- M4YlO6gUS8CI9A0CSbXMKtOIXWslZ4nz/HCeWKsb3GWmLeHnB+NaJNoPWRm2UiALxb
-X-Google-Smtp-Source: AGHT+IFQCBtl6vaZ8hw49AMkaIZmk60gJAV79+YV7jDnsx4JkvnL3k3un3sxVPre+dbVsh3HUIzDpiilAZ0O1An+6Yc=
-X-Received: by 2002:a2e:b8d2:0:b0:307:9555:dc5e with SMTP id
- 38308e7fff4ca-31905976560mr5439931fa.3.1745581928149; Fri, 25 Apr 2025
- 04:52:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="REb/2b24"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 2CD6C102A8CB3; 
+ Fri, 25 Apr 2025 13:55:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1745582146;
+ h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=aOQWbEiFrLQzKWAdq/R9jmgNs0idXWdfeE2R1QOhzhM=;
+ b=REb/2b24u7q6IR+PxTdAplWQJgTxQ4+ZuNVxZDeJJe5lv4SiaAZ3ODq/mtySpKpIKD7Qbt
+ qk/NPru/XfOXYWMqabNvFk8a0eBqOpyOd1kKDD8/W5z61dr/SsROr0HQ3b95M5xNsAhWnd
+ F/aRYMsSqV1CyQIJUTU3guYyg3P/kOHwQ0BipLOs3QtFkVv0y3A89pGolzAkwPFzDxxcoT
+ VbnLTWhwSgPeUCmb+LFwyKv/LpMzsxs3qVj4KC2hblx80R5HZm+9600CBY+qUeNTOtRI4n
+ M3PhfpUN7KrOyIjczGzlXwUBNWU7h413hgfmgUORZGbFThNStY2oh3SvR+c0ug==
+Message-ID: <67011602-d3de-7c2d-43c7-172f7d08db06@denx.de>
+Date: Fri, 25 Apr 2025 13:56:19 +0200
 MIME-Version: 1.0
-References: <20250418210430.27458-1-dullfire.ref@yahoo.com>
- <20250418210430.27458-1-dullfire@yahoo.com>
-In-Reply-To: <20250418210430.27458-1-dullfire@yahoo.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 25 Apr 2025 08:51:57 -0300
-X-Gm-Features: ATxdqUH4MGjmb1FRXkc1oXAX9KycDt_aMGumDMB26YdKNnqF_TiotmqNHgcpNVQ
-Message-ID: <CAOMZO5CTPqW-KP0MbemiHbL3X9C_TtXUB4NZECKPemXHB=HGDw@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/3] Add FlexSPI support for i.MX RT1170
-To: Jonathan Currier <dullfire@yahoo.com>
-Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, Jesse Taube <mr.bossman075@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- William Zhang <william.zhang@broadcom.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Haibo Chen <haibo.chen@nxp.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v1 1/3] imx8qxp: capricorn defconfig: collect common
+ Kconfig options
+Content-Language: en-US
+To: Fabio Estevam <festevam@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Anatolij Gustschin <agust@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Tomas Peterka <atheiste@seznam.cz>
+References: <20250416090419.54781-1-hs@denx.de>
+ <20250416090419.54781-2-hs@denx.de>
+ <CAOMZO5BeTfD+o43BAA+TP3Sbv5M1Zww_rtAR8fv9AeZ6NH8X0Q@mail.gmail.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <CAOMZO5BeTfD+o43BAA+TP3Sbv5M1Zww_rtAR8fv9AeZ6NH8X0Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,31 +83,42 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonathan,
+Hello Fabio,
 
-Thanks for your patches.
+On 25.04.25 13:45, Fabio Estevam wrote:
+> Hi Heiko,
+> 
+> On Wed, Apr 16, 2025 at 6:04 AM Heiko Schocher <hs@denx.de> wrote:
+>>
+>> siemens have some defconfigs for different hardware versions,
+> 
+> s/siemens/Siemens
 
-On Fri, Apr 18, 2025 at 6:04=E2=80=AFPM Jonathan Currier <dullfire@yahoo.co=
-m> wrote:
->
-> The nxp_fspi driver is missing some per-device quirks that are needed
-> for imxrt1170 support.
->
-> Fortunately, linux (where the driver originated) has since added support
-> for these qirks.
->
-> This series cherry-picks the linux commit, then adds the imxrt1170
-> usage of the quirks.
->
-> I believe Jesse Taube is also working on this problem for the
-> i.mxrt1050, however the patches I saw were quite a bit different, thus
-> this RFC.
+Will fix.
 
-Jesse, could you please help test and review this series?
+>> all based on mainline cxg3 board. For easier updating the
+>> downstream defconfigs, move common settings into new file.
+>>
+>> configs/imx8qxp_capricorn.config
+>>
+>> Signed-off-by: Heiko Schocher <hs@denx.de>
+>> Signed-off-by: Walter Schweizer <walter.schweizer@siemens.com>
+> 
+> The other patches had authorship from Walter, but this one doesn't.
+> 
+> Just checking if this one is correct.
 
-Thanks
+Yep, as I moved this into the new file.
+
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
