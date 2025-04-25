@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5385C369D5
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 12:00:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02BD3C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 12:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C73081E14;
-	Fri, 25 Apr 2025 14:00:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1AFDC82012;
+	Fri, 25 Apr 2025 14:43:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1745582404;
-	bh=gZc9VNjs3l6OsaXOAcgC+KLx8LzMu0XUpVOfa5XijiE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=RnvwbmFHFIuKmOBsYbZnpWscCM/L3kPdHaB12igUKZglYunxP6+KdHwLYHpEpKl2T
-	 g6QMXJOmKMM4+P3F3QdyTlgXH9lhHUw/abeKrpwA1VO/d9hvdh6E2Npbnvs8IxuZ4P
-	 GIwRKZNHuLOdhhj+HDPgW+Ujy+HOGU0Lz2fduYuASwl1XahW7B6dahdXCbdQMUXSse
-	 82cpPXcULxe4qjSBAFb2egAQP2S3oeRgluvgigCvg2RyZ4fEEKbSYqMokndoC4Dj/m
-	 XS943NlaqYOXI4gJVrgE8e5On6u31Xgz3yHpqTnlVOje0m26U/ZFAfSHN6Syh1ygDs
-	 yIHa5UPO+7VDQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 54A1C82076; Fri, 25 Apr 2025 14:00:03 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5678B81E0F
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 14:00:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="AJW2oh9e"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 48EA810273DAC; 
- Fri, 25 Apr 2025 13:59:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1745582400;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=gZc9VNjs3l6OsaXOAcgC+KLx8LzMu0XUpVOfa5XijiE=;
- b=AJW2oh9eH/nHR0feCGXii7ncwnp3EA9yztJtL4NbU4051CI0Yii8DSJnjeMOopkswRFszA
- T6GjuCF+xwji+i7ceixpZ3CyJ/HK5baoezYqsCIse88b1fOzCqj81UtWwlD9ERfq7W5LiU
- CIvuKgXfgoTYV/piHdvPxOjzbe1OV+OgobmKp4DfxCBHnWT5ZZimCpRjg3zct02+bsesEy
- 8I5rue6ogHZ/HzC0QUPbGr6nFVZKCWQJZ/30XqXLHa2nDM6UgJ+7p4x7axTg/Tctw+1CmA
- xl76Vn8toZ0yr4Haxiaa+q0Bn9YHd+smgg+0XNHkXGBbtLM3VxBiVybA/hVUfQ==
-Message-ID: <998d6b2a-cbb9-7134-7265-b22ff93b1a3b@denx.de>
-Date: Fri, 25 Apr 2025 14:00:34 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UdoIoZb1";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C5B5682045; Fri, 25 Apr 2025 14:43:35 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 55C7581E14
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 14:43:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PChASV2793954
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 25 Apr 2025 07:43:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745584990;
+ bh=87rgHRZxiI/ZlZePxxqJmbFyPe9MihN12dl2or5lLwY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=UdoIoZb1nfLcpGKDY56f9vSRXu1Ik50pqW6TTY/2kKGY7bwtIxD3puyPaCcEoB49L
+ t0BiQdo2ROGAH5oIoCrFW9hYKdEt1b1iaJiGNlGZ7/5YGx9biUGoPfsh2TcT76PBER
+ 2xojhOH0lPET8/YB5O58DDhmvuouh2MsHn4V9+FM=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PChAHW004389
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 25 Apr 2025 07:43:10 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
+ Apr 2025 07:43:10 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 25 Apr 2025 07:43:10 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PCh7Un027462;
+ Fri, 25 Apr 2025 07:43:07 -0500
+Message-ID: <a8a5642a-d9cc-4918-8674-0a3285954695@ti.com>
+Date: Fri, 25 Apr 2025 18:13:06 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1 2/3] siemens: capricorn: enable text based default
- environment
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC] Expected behavior of the go command
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>, Simon Glass <sjg@chromium.org>,
+ Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <rick@andestech.com>,
+ <mporter@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>,
+ <u-kumar1@ti.com>
+References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
+ <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
+ <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
+ <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
+ <5f87ac88-5552-4c5c-ae56-01c7ef9165dd@pengutronix.de>
+ <d95b1919-ea47-4d58-8349-82e0f33fed5a@ti.com>
+ <842f0cba-b43e-4514-8a15-9b4c87a08104@pengutronix.de>
 Content-Language: en-US
-To: Fabio Estevam <festevam@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Anatolij Gustschin <agust@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20250416090419.54781-1-hs@denx.de>
- <20250416090419.54781-3-hs@denx.de>
- <CAOMZO5CPNY2tTF-dE9HMYBswLKX=idqkhw04M5YZ6sfPnHfcCA@mail.gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOMZO5CPNY2tTF-dE9HMYBswLKX=idqkhw04M5YZ6sfPnHfcCA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <842f0cba-b43e-4514-8a15-9b4c87a08104@pengutronix.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,31 +84,56 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
+Hi Ahmad
 
-On 25.04.25 13:43, Fabio Estevam wrote:
-> Hi Heiko,
-> 
-> On Wed, Apr 16, 2025 at 6:04 AM Heiko Schocher <hs@denx.de> wrote:
-> 
->> +initrd_addr=0x83100000
->> +initrd_high=0xffffffffffffffff
->> +ipaddr=192.168.251.1
-> 
-> Please don't hardcode the IP address.
-> 
+On 4/25/2025 4:28 PM, Ahmad Fatoum wrote:
+> Hi Udit,
+>
+> On 4/25/25 12:35, Kumar, Udit wrote:
+>> On 4/25/2025 11:09 AM, Ahmad Fatoum wrote:
+>>> Thinking about it, I am wondering whether U-Boot go is inherently broken,
+>>> even for the jump-table use case, if caches are enabled:
+>> Correct, this is what I think . Before jumping to new program go command
+>> should make sure
+>>
+>> things are in correct order by cache flush. Kind of below
+>>
+>> diff --git a/cmd/boot.c b/cmd/boot.c
+>> index 23496cafdf5..e6bb1d94a1c 100644
+>> --- a/cmd/boot.c
+>> +++ b/cmd/boot.c
+>> @@ -18,6 +18,7 @@ __attribute__((weak))
+>>   unsigned long do_go_exec(ulong (*entry)(int, char * const []), int argc,
+>>                                   char *const argv[])
+>>   {
+>> +       flush_cache(...)
+> yes, even with MMU left enabled, it looks like there should be an
+> I-Cache invalidate and D-Cache flush/clean here[1].
 
-yep, of course, will remove it.
+Yes, correct . This should be extended with above
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+>
+>> I see even ARM64, few board choose to over-ride default option (board/
+>> xilinx/versal/board.c)
+>>
+>> do_go_exec does dcache_disable()
+> I think __weak is a fundamental mistake and upstream boards abusing it
+> to not have to fix things generally shows that.
+>
+>> Sorry I was not clear in previous message,
+>>
+>> Here OS take care of caching , irrespective of how boot is done through fit
+> Yes, but with the assumption that MMU was disabled at start.
+>
+>> or kind of efi or other method.
+> Interestingly, with EFI MMU should be left enabled. Linux even
+> warns about the case that MMU was disabled when entering the stub.
+>
+> Cheers,
+> Ahmad
+>
