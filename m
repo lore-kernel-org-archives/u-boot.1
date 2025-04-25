@@ -4,65 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F55FC369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 22:54:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24D9CC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 23:26:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11AF382A31;
-	Sat, 26 Apr 2025 00:54:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 28C1E82A31;
+	Sat, 26 Apr 2025 01:26:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vsCIg3Qm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="luIR4lde";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE0FE82A46; Sat, 26 Apr 2025 00:54:11 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECD4382A0A
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 00:54:08 +0200 (CEST)
+ id 7A01C82A3B; Sat, 26 Apr 2025 01:26:23 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CDF278209C
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 01:26:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PMs6pT2295149
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 17:54:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745621646;
- bh=PPVJmACLNHB7Ti4iXWKjC0/9jvM1nKiFr5bnnxGtsMc=;
- h=From:To:CC:Subject:Date;
- b=vsCIg3QmJCui9iwa+N/xQsnLu+O5QZM6JJOYeNppOWmUD3JnTYOhwygYw1r0rLw7x
- rMdvyLQiyX3AL+wDlIC7nB6bAtK0JcE+Gpb0ZwbqfnzG6pb2GkivmP/hSWUiH3c7Ww
- 764Dd+18lqQoa8sYQeRITIiBsXhu4a2MNSdqs00M=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PMs6K7049383
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 17:54:06 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 17:54:04 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 17:54:04 -0500
-Received: from lelvsmtp5.itg.ti.com ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PMs40V067604;
- Fri, 25 Apr 2025 17:54:04 -0500
-From: Andrew Davis <afd@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
-Subject: [PATCH] arm: dts: k3: binman: Fix DM firmware selection
-Date: Fri, 25 Apr 2025 17:54:03 -0500
-Message-ID: <20250425225403.861034-1-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paul.liu@linaro.org
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-54b09cb06b0so2822849e87.1
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:26:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745623580; x=1746228380; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n5nOmateXuvgNSNLx2YSQJ/1OoSA7qiztjaZzn59Ibo=;
+ b=luIR4ldenxHeOpDqKJEea3sJQRjR6U8Cv0YlcFbl1vwBqFtyziz5fVY0vISvjfnZTt
+ 32RLPp91KUi6XaHXe1s+XQF/gehBPWjdlCxlAexwjzV8461xoZR6+2rtq4LNeHdYSDnr
+ wSrfFaeGlgzYUXDLo/Q/WQVPnp3HpD7xf7p4Xu1Az7c3zrK73+/IkKh7JH58dN1mdsdQ
+ L7gp1CUXR65i50G8Ww/Y0XyL35dY6b7MwoEUQAwOAl6lGIq3qy+0hCPnUdU7TSjmzGIc
+ ubepSFPepO3DgjjHuRa9bqH4mjNUuw9IH1nzuS5B6XG+UegVnkfZ1gUN6szvCpGvG5Lu
+ IGvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745623580; x=1746228380;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n5nOmateXuvgNSNLx2YSQJ/1OoSA7qiztjaZzn59Ibo=;
+ b=UB+dC9nYbaNRUsz7/AHqlLdBpw03HnapDFjpo7zqsB0LQX7y7i7l5U0jpARTe4UWyZ
+ RUPDin8UevCfGy25sCOQcHJFmcstoQEYRL+Dxw/5mnofcxG0zC+INOjx76hMHYuaLBnl
+ 6ZvzNCTuNYDrdJahDfxyVRAdI94EFQ1GAEX6nMhOOkpMn4difYixhBpDqPCBtH7vAqvu
+ XXAf5mvmliYnou0smsVIEHMmQ0AhprANJlhclh5Ov9XqeArCZ1HtBMxXY1sXesGNoTVd
+ sQ9p9d4HnhkLt7F25kTtwQVhnsIYaNNnX/vfG3BxHCBBMcIwtvUBA2Zf8ZNm5IA4lu42
+ /l3w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUyAPW7TRhDFmymtQZKTnQvrbSDzReUeVwocQ2r1O6E2gELHuzSlgdyMXNd1xNRZbNaTciKF5Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyxR9A3lpG/RciThE8tvRjnDm3alDWop4fbKcwCzEOfqiQRoQtA
+ b73OuPUa51/3PEcPOz/rfNWA1VTIKrylDCjDWjMQ1D6YvpyBIfiLHgTTWiu9ydrMgeQQ7SntpGD
+ hypkoYtj77kNZiAp4BlBMQMSyZxJ4z1y36nesQg==
+X-Gm-Gg: ASbGncvpvKUwK2JstwqxY8wq95HpHPDC4JxOmvNpgOt4Z/pSw8UIigGoStPDkn4FO7Z
+ kRNY6+ARt6a4YfLimXzstPR0AHR8u1STP+NoO/Yw/cOJIvjNII36pzsZl2UdU+SwVIENijcDbM/
+ 7R12QXY8R5IeFPKmp0SfTtiswim8QUYpo+VBDbaSdB8RFzeI7YkkATF+Y=
+X-Google-Smtp-Source: AGHT+IGXwBPfPsSxw8cg0ro6nEHLE7BKClSYNd43pXT0QDV4rkmUHQhSk7PXBlF1XTKB2hZL48+yvKFQ6ACSzND1+A0=
+X-Received: by 2002:a05:6512:1319:b0:54d:6981:4b83 with SMTP id
+ 2adb3069b0e04-54e8cbce641mr1262384e87.24.1745623579853; Fri, 25 Apr 2025
+ 16:26:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250424201927.2027257-1-paulliu@debian.org>
+ <20250424201927.2027257-3-paulliu@debian.org>
+ <5b1181bf-1398-409c-b710-dc07e4eaa9d7@gmx.de>
+ <CALG-KHz+spRA68RyzCUhWM4m_D2VoVLmiKJz85thuUbKyu6gOA@mail.gmail.com>
+ <ff4da769-1b8f-4c53-a311-12eeecc859e1@gmx.de>
+In-Reply-To: <ff4da769-1b8f-4c53-a311-12eeecc859e1@gmx.de>
+From: Paul Liu <paul.liu@linaro.org>
+Date: Sat, 26 Apr 2025 00:26:08 +0100
+X-Gm-Features: ATxdqUGF4A_Lz1rWiZSe_ch6GzRHSPTSEnTPhrSSVZPU5XiGg4CsF_jFAEHsaNA
+Message-ID: <CALG-KHw1HsY3HqwWi2y5v3N4s5965Hf8mBX1mZTyYgOCBvbuLw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] efi: add EFI_DEBUG_IMAGE_INFO_TABLE for debug
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,670 +97,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Just like TF-A and OP-TEE, the documentation states a custom path for DM
-can be provided at build time by setting TI_DM. This should then set
-ti-dm-path which updates ti-dm node filenames in binman.
+On Fri, 25 Apr 2025 at 21:31, Heinrich Schuchardt <xypron.glpk@gmx.de>
+wrote:
 
-Two issues prevent this from functioning for most K3 boards. One is when
-then DM firmware name is inside a blob-ext node instead of a ti-dm node.
+> On 4/25/25 21:05, Paul Liu wrote:
+> >
+> >
+> > On Thu, 24 Apr 2025 at 23:02, Heinrich Schuchardt <xypron.glpk@gmx.de
+> > <mailto:xypron.glpk@gmx.de>> wrote:
+> >
+> >     On 24.04.25 22:19, Ying-Chun Liu (PaulLiu) wrote:
+> >      > From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org
+> >     <mailto:paul.liu@linaro.org>>
+> >      >
+> >      > EFI_DEBUG_IMAGE_INFO_TABLE is used to store EFI_LOADED_IMAGE for
+> >      > debug purpose. This commit adds the table to the
+> >     EFI_CONFIGURATION_TABLE.
+> >      >
+> >      > This feature is described in UEFI Spec version 2.10. Section 18.4.
+> >      >
+> >      > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org
+> >     <mailto:paul.liu@linaro.org>>
+> >      > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de
+> >     <mailto:xypron.glpk@gmx.de>>
+> >      > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org
+> >     <mailto:ilias.apalodimas@linaro.org>>
+> >      > ---
+> >      >   include/efi_api.h             | 24 ++++++++++++++++++++++++
+> >      >   lib/efi_loader/efi_boottime.c | 16 ++++++++++++++++
+> >      >   2 files changed, 40 insertions(+)
+> >      >
+> >      > diff --git a/include/efi_api.h b/include/efi_api.h
+> >      > index 5017d9037cd..0f4245091f1 100644
+> >      > --- a/include/efi_api.h
+> >      > +++ b/include/efi_api.h
+> >      > @@ -238,6 +238,10 @@ enum efi_reset_type {
+> >      >       EFI_GUID(0xcce33c35, 0x74ac, 0x4087, 0xbc, 0xe7, \
+> >      >                0x8b, 0x29, 0xb0, 0x2e, 0xeb, 0x27)
+> >      >
+> >      > +#define EFI_DEBUG_IMAGE_INFO_TABLE_GUID \
+> >      > +     EFI_GUID(0x49152e77, 0x1ada, 0x4764, 0xb7, 0xa2, \
+> >      > +              0x7a, 0xfe, 0xfe, 0xd9, 0x5e, 0x8b)
+> >      > +
+> >      >   struct efi_conformance_profiles_table {
+> >      >       u16 version;
+> >      >       u16 number_of_profiles;
+> >      > @@ -564,6 +568,26 @@ struct efi_loaded_image {
+> >      >       efi_status_t (EFIAPI *unload)(efi_handle_t image_handle);
+> >      >   };
+> >      >
+> >      > +#define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
+> >      > +#define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
+> >      > +
+> >
+> >     All structures and unions and their elements should be describe
+> >     according to
+> >     https://docs.kernel.org/doc-guide/kernel-doc.html#structure-union-
+> >     and-enumeration-documentation <https://docs.kernel.org/doc-guide/
+> >     kernel-doc.html#structure-union-and-enumeration-documentation>
+> >
+> >      > +struct efi_debug_image_info_normal {
+> >      > +     u32 image_info_type;
+> >      > +     struct efi_loaded_image *loaded_image_protocol_instance;
+> >      > +     efi_handle_t image_handle;
+> >      > +};
+> >
+> >     What are the assumptions about alignment?
+> >     Should this structure be marked as packed like most UEFI structures?
+> >
+> >
+> > Not aligned. This structure in EDK2 is not aligned, not packed. And it
+> > is really not packed because the size of this structure is larger. 4
+> > bytes are padded in the 64-bit environment I think.
+>
+> All other structures in EDK II are packed. Did you look at the structure
+> in a debugger?
+>
+> The compiler will assume that a pointer to "struct
+> efi_debug_image_info_normal *" points to a sizeof(uintptr_t) aligned
+> structure if no other indication is made.
+>
+> Best regards
+>
+> Heinrich
+>
+>
+> Hi Heinrich,
 
-The second is when the filename in the ti-dm node is a pointer to a
-blob-ext node. In this case even though the filename is updated, the
-filename in the blob-ext is not, so build can fail if the default
-file in the blob-ext cannot be found, even if the updated ti-dm file
-does exist.
+Yes. All other structures in EDK II are packed. But this one is not packed.
 
-Fix both of these for all K3 by removing any indirect ti-dm nodes and
-making sure all DM nodes are labeled with "ti-dm".
+And yes, seems it is aligned to sizeof(uintptr_t) in edk2. How do we
+implement this if we want the alignment? I plan to just remove that union
+and use "struct efi_debug_image_info_normal" directly.
+But maybe the alignment is not important here? I'll do a bit of research on
+this.
+Because we are not searching for this structure in the debugger. We just
+read it from EFI_DEBUG_IMAGE_INFO_TABLE. Which will be in the Configuration
+Table with specific GUID.
+The only search in the debugger is for the SYSTEM_TABLE_POINTER structure.
 
-Signed-off-by: Andrew Davis <afd@ti.com>
----
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 11 ++-----
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 15 +++-------
- arch/arm/dts/k3-am625-sk-binman.dtsi          | 14 +++------
- .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 11 ++-----
- arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 14 +++------
- arch/arm/dts/k3-am62a-sk-binman.dtsi          | 14 +++------
- arch/arm/dts/k3-am62p-sk-binman.dtsi          | 11 ++-----
- arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi  | 12 ++------
- arch/arm/dts/k3-am69-sk-u-boot.dtsi           | 29 +++++++++++++------
- arch/arm/dts/k3-j7200-binman.dtsi             | 13 +++------
- .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 11 ++-----
- arch/arm/dts/k3-j721e-binman.dtsi             | 13 +++------
- arch/arm/dts/k3-j721s2-binman.dtsi            | 13 +++------
- arch/arm/dts/k3-j722s-binman.dtsi             | 12 ++------
- arch/arm/dts/k3-j742s2-evm-u-boot.dtsi        | 29 +++++++++++++------
- arch/arm/dts/k3-j784s4-binman.dtsi            |  8 ++---
- arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        | 29 +++++++++++++------
- 17 files changed, 104 insertions(+), 155 deletions(-)
-
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index a067b0ba354..01b6a8e417c 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -71,13 +71,6 @@
- #define AM625_BEAGLEPLAY_DTB "dts/upstream/src/arm64/ti/k3-am625-beagleplay.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
--	};
--
- 	tifsstub-gp {
- 		filename = "tifsstub.bin_gp";
- 		ti-secure-rom {
-@@ -153,8 +146,8 @@
- 					os = "DM";
- 					load = <0x89000000>;
- 					entry = <0x89000000>;
--					blob-ext {
--						filename = "ti-dm.bin";
-+					ti-dm {
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-index 4a65427e877..9b536d679af 100644
---- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-@@ -158,13 +158,6 @@
- #define AM625_PHYBOARD_LYRA_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
--	};
--
- 	tifsstub-hs {
- 		filename = "tifsstub.bin_hs";
- 		ti-secure-rom {
-@@ -270,8 +263,8 @@
- 						content = <&dm>;
- 						keyfile = "custMpk.pem";
- 					};
--					dm: blob-ext {
--						filename = "ti-dm.bin";
-+					dm: ti-dm {
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 					};
- 				};
- 
-@@ -418,8 +411,8 @@
- 		fit {
- 			images {
- 				dm {
--					blob-ext {
--						filename = "ti-dm.bin";
-+					ti-dm {
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-index 534eb14795b..cc619f5920e 100644
---- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-@@ -156,14 +156,6 @@
- #define AM625_SK_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	tifsstub-hs {
- 		filename = "tifsstub.bin_hs";
- 		ti-secure-rom {
-@@ -270,7 +262,8 @@
- 						keyfile = "custMpk.pem";
- 					};
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-@@ -397,7 +390,8 @@
- 
- 				dm {
- 					ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-index 0e6188907e4..5a8788b227b 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-@@ -144,13 +144,6 @@
- #define VERDIN_AM62_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
--	};
--
- 	tifsstub-hs {
- 		filename = "tifsstub.bin_hs";
- 		ti-secure-rom {
-@@ -257,7 +250,7 @@
- 						keyfile = "custMpk.pem";
- 					};
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 					};
- 				};
- 
-@@ -380,7 +373,7 @@
- 
- 				dm {
- 					ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
-index 325702ed6e0..1871926c207 100644
---- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
-@@ -164,14 +164,6 @@
- #define AM62A7_PHYBOARD_LYRA_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	tifsstub-hs {
- 		filename = "tifsstub.bin_hs";
- 		ti-secure-rom {
-@@ -276,7 +268,8 @@
- 						keyfile = "custMpk.pem";
- 					};
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-@@ -462,7 +455,8 @@
- 				};
- 				dm {
- 					ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-index 2a8c260387b..ed973541fff 100644
---- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-@@ -148,14 +148,6 @@
- #define AM62A7_SK_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	tifsstub-hs {
- 		filename = "tifsstub.bin_hs";
- 		ti-secure-rom {
-@@ -260,7 +252,8 @@
- 						keyfile = "custMpk.pem";
- 					};
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-@@ -385,7 +378,8 @@
- 				};
- 				dm {
- 					ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am62p-sk-binman.dtsi b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-index 797644a7e0d..8216add3498 100644
---- a/arch/arm/dts/k3-am62p-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-@@ -127,14 +127,6 @@
- #define AM62PX_SK_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--
--		blob-ext {
--			filename = "ti-dm/am62pxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
- 	tifsstub-hs {
- 		filename = "tifsstub.bin_hs";
- 		ti-secure-rom {
-@@ -210,7 +202,8 @@
- 					};
- 
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/am62pxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
-index 6c52038cdca..f1666f1ef76 100644
---- a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
-@@ -164,15 +164,6 @@
- #define BEAGLEY_AI_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--
--		blob-ext {
--			filename = "ti-dm/j722s/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-@@ -185,7 +176,8 @@
- 					};
- 
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j722s/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-index 2f119508e18..fc686087023 100644
---- a/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-@@ -58,17 +58,18 @@
- #else // CONFIG_ARM64
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--
--		blob-ext {
--			filename = "ti-dm/j784s4/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	tispl {
- 		insert-template = <&ti_spl>;
-+
-+		fit {
-+			images {
-+				dm {
-+					ti-dm {
-+						filename = "ti-dm/j784s4/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
- 	};
- 
- 	u-boot {
-@@ -77,6 +78,16 @@
- 
- 	tispl-unsigned {
- 		insert-template = <&ti_spl_unsigned>;
-+
-+		fit {
-+			images {
-+				dm {
-+					ti-dm {
-+						filename = "ti-dm/j784s4/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
- 	};
- 
- 	u-boot-unsigned {
-diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
-index 423badd7cb5..47a4cde6b85 100644
---- a/arch/arm/dts/k3-j7200-binman.dtsi
-+++ b/arch/arm/dts/k3-j7200-binman.dtsi
-@@ -237,13 +237,6 @@
- #define J7200_EVM_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/j7200/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-@@ -345,7 +338,8 @@
- 						keyfile = "custMpk.pem";
- 					};
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j7200/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-@@ -430,7 +424,8 @@
- 			images {
- 				dm {
- 					ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j7200/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-index 8cefa39290d..6a773c1b3d1 100644
---- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-@@ -212,13 +212,6 @@
- #define J721E_BBAI64_DTB "dts/upstream/src/arm64/ti/k3-j721e-beagleboneai64.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/j721e/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
--	};
--
- 	ti-spl_unsigned {
- 		filename = "tispl.bin_unsigned";
- 		pad-byte = <0xff>;
-@@ -263,8 +256,8 @@
- 					os = "DM";
- 					load = <0x89000000>;
- 					entry = <0x89000000>;
--					blob-ext {
--						filename = "ti-dm.bin";
-+					ti-dm {
-+						filename = "ti-dm/j721e/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-index 0d607296f0e..6adfab164ee 100644
---- a/arch/arm/dts/k3-j721e-binman.dtsi
-+++ b/arch/arm/dts/k3-j721e-binman.dtsi
-@@ -333,13 +333,6 @@
- #define J721E_EVM_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/j721e/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-@@ -467,7 +460,8 @@
- 						keyfile = "custMpk.pem";
- 					};
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j721e/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-@@ -551,7 +545,8 @@
- 			images {
- 				dm {
- 					ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j721e/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
-index d121d8c0c54..73af184d27e 100644
---- a/arch/arm/dts/k3-j721s2-binman.dtsi
-+++ b/arch/arm/dts/k3-j721s2-binman.dtsi
-@@ -145,13 +145,6 @@
- #define J721S2_EVM_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/j721s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-@@ -286,7 +279,8 @@
- 						keyfile = "custMpk.pem";
- 					};
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j721s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-@@ -371,7 +365,8 @@
- 			images {
- 				dm {
- 					ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j721s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-j722s-binman.dtsi b/arch/arm/dts/k3-j722s-binman.dtsi
-index 6b521166575..8f1471371e5 100644
---- a/arch/arm/dts/k3-j722s-binman.dtsi
-+++ b/arch/arm/dts/k3-j722s-binman.dtsi
-@@ -116,15 +116,6 @@
- #define J722S_EVM_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--
--		blob-ext {
--			filename = "ti-dm/j722s/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-@@ -137,7 +128,8 @@
- 					};
- 
- 					dm: ti-dm {
--						filename = "ti-dm.bin";
-+						filename = "ti-dm/j722s/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-j742s2-evm-u-boot.dtsi b/arch/arm/dts/k3-j742s2-evm-u-boot.dtsi
-index ede5d6e58f5..b1d79a3f64a 100644
---- a/arch/arm/dts/k3-j742s2-evm-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j742s2-evm-u-boot.dtsi
-@@ -43,17 +43,18 @@
- #else // CONFIG_ARM64
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--
--		blob-ext {
--			filename = "ti-dm/j742s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	tispl {
- 		insert-template = <&ti_spl>;
-+
-+		fit {
-+			images {
-+				dm {
-+					ti-dm {
-+						filename = "ti-dm/j742s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
- 	};
- 
- 	u-boot {
-@@ -62,6 +63,16 @@
- 
- 	tispl-unsigned {
- 		insert-template = <&ti_spl_unsigned>;
-+
-+		fit {
-+			images {
-+				dm {
-+					ti-dm {
-+						filename = "ti-dm/j742s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
- 	};
- 
- 	u-boot-unsigned {
-diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
-index 0553825b383..cb1fbc65923 100644
---- a/arch/arm/dts/k3-j784s4-binman.dtsi
-+++ b/arch/arm/dts/k3-j784s4-binman.dtsi
-@@ -165,8 +165,8 @@
- 						keyfile = "custMpk.pem";
- 					};
- 
--					dm: blob-ext {
--						filename = "ti-dm.bin";
-+					dm: ti-dm {
-+						optional;
- 					};
- 				};
- 
-@@ -254,8 +254,8 @@
- 		fit {
- 			images {
- 				dm {
--					blob-ext {
--						filename = "ti-dm.bin";
-+					ti-dm {
-+						optional;
- 					};
- 				};
- 
-diff --git a/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi b/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-index 8a60d7c6107..cc0b562d27e 100644
---- a/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-@@ -52,17 +52,18 @@
- #else // CONFIG_ARM64
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--
--		blob-ext {
--			filename = "ti-dm/j784s4/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--			optional;
--		};
--	};
--
- 	tispl {
- 		insert-template = <&ti_spl>;
-+
-+		fit {
-+			images {
-+				dm {
-+					ti-dm {
-+						filename = "ti-dm/j784s4/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
- 	};
- 
- 	u-boot {
-@@ -71,6 +72,16 @@
- 
- 	tispl-unsigned {
- 		insert-template = <&ti_spl_unsigned>;
-+
-+		fit {
-+			images {
-+				dm {
-+					ti-dm {
-+						filename = "ti-dm/j784s4/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+		};
- 	};
- 
- 	u-boot-unsigned {
--- 
-2.39.2
-
+Yours,
+Paul
