@@ -4,53 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F9B1C369D1
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 05:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F18C369D1
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 06:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08A07809D4;
-	Fri, 25 Apr 2025 07:39:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id D58F7809D4;
+	Fri, 25 Apr 2025 08:49:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 570FA810EB; Fri, 25 Apr 2025 07:39:29 +0200 (CEST)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9FD08059A
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:39:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1u8BmV-0004c1-TN; Fri, 25 Apr 2025 07:39:23 +0200
-Message-ID: <5f87ac88-5552-4c5c-ae56-01c7ef9165dd@pengutronix.de>
-Date: Fri, 25 Apr 2025 07:39:21 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="leXMFk3S";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 38448810EB; Fri, 25 Apr 2025 08:49:34 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 83A038059A
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 08:49:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53P6nTYj2859498
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 25 Apr 2025 01:49:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745563769;
+ bh=1ZC6oaQTDhbY4HkC2Dtatwyjpc6joqZWsI5lfU+hchg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=leXMFk3Su3IiE8nrIrq4tpYDnLSNr0j/2UOes9elIHuCtpw0EHGz7XKuleenWMBQ1
+ 09Mc2fT//reyBwAVNn/C6TeVMVC/q5KyEnqapvu0dWzZm9vlSRNk81t+xQrK6tIQIH
+ +KCG9Bw3kRb5iOFa9rbPXdO5d9OQ6QZMBO9Yfoz0=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53P6nTn7065983
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 25 Apr 2025 01:49:29 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
+ Apr 2025 01:49:29 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 25 Apr 2025 01:49:29 -0500
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53P6nRU1021798;
+ Fri, 25 Apr 2025 01:49:27 -0500
+Message-ID: <01ad9412-f1de-4628-aa1d-9fe391872fa5@ti.com>
+Date: Fri, 25 Apr 2025 12:19:26 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC] Expected behavior of the go command
-To: "Kumar, Udit" <u-kumar1@ti.com>, Simon Glass <sjg@chromium.org>,
- Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, rick@andestech.com,
- mporter@konsulko.com
-References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
- <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
- <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
- <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
+Subject: Re: [PATCH 1/2] include: env: ti: mmc.h: Find DTB files in dtb
+ directory for AM57xx
+To: Anurag Dutta <a-dutta@ti.com>, <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>
+References: <20250425053431.1622267-1-a-dutta@ti.com>
+ <20250425053431.1622267-2-a-dutta@ti.com>
 Content-Language: en-US
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-In-Reply-To: <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
-Content-Type: text/plain; charset=UTF-8
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250425053431.1622267-2-a-dutta@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,69 +84,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit,
+Hi Anurag
 
-On 25.04.25 06:35, Kumar, Udit wrote:
+On 25/04/25 11:04, Anurag Dutta wrote:
+> Add dtb/ to the DTB search path.
 > 
-> On 4/23/2025 7:52 PM, Ahmad Fatoum wrote:
->> I went with the FIT route for barebox, because we can now ship device
->> trees for all enabled boards in the same FIT image alongside one generic
->> second stage barebox with DT support. If you want to support different
->> boards with your OS image that might be of interest to you as well.
+> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+> ---
+>  include/env/ti/mmc.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Sorry for novice question.
-> 
-> But trying to understand how FIT fixes problem for you .
-> 
-> at the end, its a jump command to OS/other code be it through u-boot go or fit way.
+> diff --git a/include/env/ti/mmc.h b/include/env/ti/mmc.h
+> index dbb0e3559ea..968d6ec03dc 100644
+> --- a/include/env/ti/mmc.h
+> +++ b/include/env/ti/mmc.h
+> @@ -24,7 +24,7 @@
+>  		"env import -t ${loadaddr} ${filesize}\0" \
+>  	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenvfile}\0" \
+>  	"loadimage=load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}\0" \
+> -	"loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}\0" \
+> +	"loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/dtb/${fdtfile}\0" \
+>  	"envboot=mmc dev ${mmcdev}; " \
+>  		"if mmc rescan; then " \
+>  			"echo SD/MMC found on device ${mmcdev};" \
 
-The difference is whether, prior to the jump, the caches are flushed and the MMU
-is disabled and U-Boot's go does neither.
-
-Thinking about it, I am wondering whether U-Boot go is inherently broken,
-even for the jump-table use case, if caches are enabled:
-Because go doesn't do any cache maintenance, what guarantee do we have
-that the I-Cache actually reflects the data that was freshly loaded?
-
-It might only work because the region you go to happens to not be resident
-in the I-Cache yet...
-
-FWIW, barebox go does cache maintenance and disables the MMU, which
-is why I mistakenly thought U-Boot's go would behave similarly.
-barebox didn't inherit the jump table mechanism.
-
-> In case OS/other code handles caches, then should not be an issue.
-> But this put requirement on next stage to take care of caches [0]
-
-In the fit case, MMU is disabled and so the next stage is free to
-not do any cache maintenance if it doesn't need to enable the MMU.
-Linux and barebox want to use the MMU/caches by default, so that's
-why they have to do cache maintenance.
-
-If they assume MMU is disabled on startup, it follows the lines in
-the cache are stale and unimportant and then memory corruption
-occurs once they are discarded.
-
-Cheers,
-Ahmad
-
-> 
-> 
-> [0] : https://github.com/torvalds/linux/blob/master/arch/arm64/kernel/head.S#L105
-> 
-> 
->>
->> Cheers,
->> Ahmad
->>
->>> Regards,
->>> Simon
->>>
-> 
-
+Are there any other boards that use .h instead of .env other than AM57x?
+Would they break with this change?
 
 -- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+Thanking You
+Neha Malcom Francis
