@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52DF9C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 08:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 295F9C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 08:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D5E181F0B;
-	Fri, 25 Apr 2025 10:56:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A15181F45;
+	Fri, 25 Apr 2025 10:57:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="KPTUzKRj";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="g6w7ZtDV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1460081F0D; Fri, 25 Apr 2025 10:56:52 +0200 (CEST)
+ id BA79381E72; Fri, 25 Apr 2025 10:57:18 +0200 (CEST)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20716.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::716])
+ (mail-vi1eur05on2070a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::70a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9422981E72
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 10:56:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5997D81E72
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 10:57:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YrGSGImFZ4aahPFgkhO3WTa2exNjQwoSylZ8IdMGOS60aHVzGumBfnOmX2MvsQpRER+jdD4z1ZFy1t5Tvh9JMtVi63vrUZkIQedQ5yTXykwT/5tDAykL/Q36XjplVIdnFg0mh9fM5SR2VTuxmQbOKXxfY/1hEPavBkTLck5W1vHorI4vIRS48+tF4mm83oEK+4t98aPgDRFHSTMt5cNjmYcgpABqKRQEodMhonT4C0TA2uE6KOKHWuFlC7s5Y40KEvPWBX+CJm0v7wLnxfhZno5uHZHXHgE2wEt/2A+6d0rm26LQIkyRMKjJhyZ1fY0jHLB7eTW1hUTxB9NhU912nA==
+ b=FbNGYPvQO8ABXUuZ5SDem3K1SQtIQT+Z3JwWf2L0agsh0924coroodzJ7r6y4HLDlaBJFpnwVWWcBkcfM62uGsKREFO2QSS7x62Duhyb7Hn0D5Up1rz/oPNZCzAsBoChh/dKqntZ+zRFoaDzBmIDILNCfc7WHnnHYFflWut1sWXie38V2ai/Cygcy3FgYAW/dw8RBRnQXbFq/3CyVa4zA2ti5NdBEBr79P9ef6IupCjJnmOuuE1WNcM440Mb9rynoMzE32oHSJpJVVjXPZJva1cnmb4dtDNaQ1++K4sOfY8d8MIbhhPz6sDWia63gsqAQJJTqPuI8ENt/ZbywZRn8Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5XjQCtAJfYi7TOdcf6bPr1XLTTHGHZBoOlDyb1jptPQ=;
- b=CHLMSZW9JElNJwPAr1gXXSbFI5ZRrM5EAqu+0iSu33WlBuT4Qq2ovBTW6X/2c81PHaLTP6DhtfccoKhSXHZjUmujGMGVdHNy9MWXXUsa4qKjIbibMlhnBjjWnU63HoFFm/nphWtFnc0JWAKslRzINNkaZtQ7B3CnEZQSdrECeP4D/+krXYM2564rOZdEcyJ8zAzhBTelahb4vyN94H/86Whv+Um9hyVQvoFaFhgGNWHGv93iO2fpOeQf+/5pIJ4RHTzFW/aNJtZi2vnbIPaYJLt2D3Y7VL4L3t18WdB4e1sy5JM2GMVzJhtpPhroZyRPdA4qFGK+d6HDey9cr+smoA==
+ bh=BeyAzrxEF7SkrtJaeTPFyGC7C+ixE2DggJeNqQVapE8=;
+ b=Jb0tdP0sRsVxVwG8LlvBeUkGDFESs2DAIg3Miw+26p09lTRLaWV7Mtr4eNt0jFtWKfL655A1Zm1DHx0HkoiLgTDMvIXCL49kBcIRHETuQ97229WGDrGfLYSJ4JY2PYz/Xioa1B73raPpNIGvJqghx7t6ouUPHVLCBTXCVgXFeKtGydXz3kdvsdmx7FPPMQDWZ+nREv+lxAt9VY16ojNViY1GOPxhJ67R2MNFR9e+RUC04tETpv+lHIm4HZgtK+tuggOOYq60FMDNWWSTOX60cIrIcdy5uya/Of1duqFANXfTBWf/zrGZhm4Uw+urLezcXz0Qor8VanLQBuh28K4/Ew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
  dkim=pass header.d=phytec.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5XjQCtAJfYi7TOdcf6bPr1XLTTHGHZBoOlDyb1jptPQ=;
- b=KPTUzKRjLOsO/cl4+FVBtTJdq1OUecPj30YWieluqF45SbV2iGtnsPZXDYUp3P3TK6pFUCsPsrg3wtX+xFmc4NX08ZC/a/4XPlEoEtTTQObZNHzOae2WxtzfUo3YdXadu+c9RDjlUImcgghEFte0U0MHJDigMw+GBBSv7FGgL7Pp+wLBeD4VXZpX6W5GSxLNVeebykRdt7P5qElqzmvi8tDooOZt/RK5idxYQcdqXH/hWlXpp6TtuDf0XR/DnG9obKYeUeU8cKxgZ8sQ1BLu82DkwoT1Vig3WWHQv5ja8sbbDNp27aSWmjwM4/kN9UFO/dgfLTHRfHYGUg80CgNPCg==
+ bh=BeyAzrxEF7SkrtJaeTPFyGC7C+ixE2DggJeNqQVapE8=;
+ b=g6w7ZtDVR8mSTH2FHghQkoErvCCiY56qrBnlwwEycgMGRmMKbwmx99FXl41yMUuVyErurE14/Ursu/LDWiET2giaCsiKzuuBVU/Nyh5BoSq8RJuLBrWHfJLsXBH38WZeaafrFqs8mFrlSqKdHSXRsQFix8hdfW61v7zkIeX/VzaC1/yVikU/svvwmO93sbu8H2SlFBWPRZil/JBNkaP5vs1Wbo9k+p+8NdFmRgHWKDxFhQWUMsfYlE9Fwu/htAUHO5rXf+YJHArl77n7vWTIKzOp1wF0WgjLMjN5schwoWhEySTBQjO4Fv7Iq2kZb8A/SFEaXeZsTWaN/amEloNafQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=phytec.de;
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by DU2P195MB2423.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:49f::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8655.35; Fri, 25 Apr
- 2025 08:56:45 +0000
+ by AS1P195MB1544.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:48e::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.27; Fri, 25 Apr
+ 2025 08:57:14 +0000
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::369c:a760:5bf9:8d4a%4]) with mapi id 15.20.8655.033; Fri, 25 Apr 2025
- 08:56:45 +0000
-Message-ID: <e591f95c-2209-4623-95bd-4de3f09e3ed3@phytec.de>
-Date: Fri, 25 Apr 2025 11:56:42 +0300
+ 08:57:14 +0000
+Message-ID: <f66ee984-8140-4f36-bd08-4c71e8a44256@phytec.de>
+Date: Fri, 25 Apr 2025 11:57:12 +0300
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] power-domain: Enable uclass refcounting
+Subject: Re: [PATCH 1/2] power-domain: Add support for refcounting (again)
 To: Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
@@ -64,104 +64,107 @@ Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
  Neha Malcom Francis <n-francis@ti.com>, Heiko Schocher <hs@denx.de>,
  Fabio Estevam <festevam@denx.de>
 References: <20250425-ge-ian-display-support-v1-0-8a7a0fe75023@bootlin.com>
+ <20250425-ge-ian-display-support-v1-1-8a7a0fe75023@bootlin.com>
 Content-Language: en-US
 From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20250425-ge-ian-display-support-v1-0-8a7a0fe75023@bootlin.com>
+In-Reply-To: <20250425-ge-ian-display-support-v1-1-8a7a0fe75023@bootlin.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P195CA0096.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:802:59::49) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-ClientProxiedBy: VI1P195CA0068.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:59::21) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|DU2P195MB2423:EE_
-X-MS-Office365-Filtering-Correlation-Id: 96a9d5f5-21bb-4d4c-4da0-08dd83d71ac5
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AS1P195MB1544:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8fdd10c4-075a-4a48-6642-08dd83d72c60
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b3laVjNSMTZDdjIxQ0l0OFkrRi9yemdGczF2UHFhckx0K2xyNU92WVp1VjVy?=
- =?utf-8?B?UVAraGNWVzF5UHlZVVZyK2t0SjkrR3RidlNxRVllMkc0UktteFFSQXFqZFNa?=
- =?utf-8?B?TCtid2MrYlBJVENucXFqTWNjejVJaTRPN0ZIWTdOMGJKL29rNTR2RlZxeW9N?=
- =?utf-8?B?US81SEJnZnpabE9zYlBnOFRaaU0wbVVoYUgxbkdGMnNjSytuZDZCY2d3ZW1v?=
- =?utf-8?B?T0hpRjdZQXJWazJyZ2l4VmVGWjg5a2ZURkhmM3I5d1ZaNjRvcDNqOFR6K2Yv?=
- =?utf-8?B?M0JpQ3c2VDZZZEx5cC9KUDkwRE5pdlZNR1ZjS2xBeUZXWThpMHUzdGsrVVoz?=
- =?utf-8?B?Q1BXUHFIbkQ4amh5VmZ0ZlBsMHhuYVRTenpHaFJFWmNPMG1xaDlXR0tRZFpM?=
- =?utf-8?B?c1RMdDhqZVFrSWNzR0RCNXV4Qm9sTERMSXAvR2RxWEN3bXNVUiszSjhhSkNX?=
- =?utf-8?B?eExDam1lMEVaNUJXc3pxdEJtbFIwVWpHQTJsZy9jWU9hOUIvcDJJUEVzZlVn?=
- =?utf-8?B?em8wQ2ljNlV3WU52RTJNN0E5czBpWWRFWmpuT296MGlhQWNsWHZuK0pJTUVO?=
- =?utf-8?B?VUM3b2pFc2FxNzFpNGprVllkc1BuVDYvdEJGbEhaSkpOazFFMUJWTDBRa0Ni?=
- =?utf-8?B?dlJKNzhhNmhnemYxNm5zVkFUVHVheVRpM3ZVSmpiaFdxVmpnSkVLVDJxcmVj?=
- =?utf-8?B?VHpLeHhkbE5RblFuTlJHUytlQlFQcmsyL3hiU2VZQ244MitxSVpOSmlKcHpn?=
- =?utf-8?B?elRtTk5pZFlReUU2d3BLZi9pYmlKZWVHN1JMVEkvL0xQdkh5MVpYcGhyZUsw?=
- =?utf-8?B?WHdBZXRWc3VBa1ZMbDBLN3lTOUcwbDRLWjJrWVFHcnpxNFplWkgrdTNkODV3?=
- =?utf-8?B?U0Rld21BWDFsS3VHaEJnNFVUaXNUZVpFb1Y2dmtSNHFHTk1zU2c3MUgwM2dW?=
- =?utf-8?B?U1ZyRWdZa0U0aUJQdjVXZzJhaUtGNklXRnJFRGFmaldMaU5aWkxjeDhXTDI5?=
- =?utf-8?B?dXg1bjRYb2pFWWhVMjFzSnRVOVBWTmZVR3ZJdHJjSFJKTC8wVEJoWlFQQU91?=
- =?utf-8?B?Z3VrS09ZOEEyM1VTZ2czeEN4RFQzdjNDaW5YSEVUOVloYzR3bUZWQzVPdXFi?=
- =?utf-8?B?cG41RkxlbE9jUW1BSzkrMDJSRllsYjBZY2xDQm9JOEFCcjBMZndpL3pObnYw?=
- =?utf-8?B?Y1NDYVpQQUF2QUxUK0w1enptMnI0Y1BDU2NkTVdCUWNyTE0wUkJWVTFVSy80?=
- =?utf-8?B?QUZOYVAzQllSL200ODFtS1J6Z2NEMS9lb0VXeGFHRkZIN0JQYVBiSnpzNHRD?=
- =?utf-8?B?Rzk2SzYyZFJLRVlkU2tINkttbm1iUitxOFJaZEk5bFkzUWJVL2ZycjZYb0Ru?=
- =?utf-8?B?dWVXV3IwVXhzNTU2VmsyRGNEeDRPMHVhaXpvNGRRRWpNRzR5VGVBSGVybU00?=
- =?utf-8?B?eU0wU0JVRUQ5MTEwdFI2cS9pR2QyNmZOdUc1UXlOSkRqemlaTHc3Ykw5UW9M?=
- =?utf-8?B?WTJPVmpVY3h0dTJuY1VCUU9kbllKbDMwRm9VVjZ4bGVhK1RWcWtVdUF4cTZC?=
- =?utf-8?B?TGszMDNWNVJSZ1Y4T3lZVk5kOEFPNUs0TXdKcGgxOUlPckR4akdvWWJkOE9h?=
- =?utf-8?B?VHVuQm13NTUxQWtqWTlNN1BKNWhlMUl2RzQ2S3l5aHdDTGVBTVJHUUZqa2Nt?=
- =?utf-8?B?aWxjYnBWaTgrM3BrVXVSOE01bk1WODF3Q0NDY3M1cTN5MWsrTUlBNHBON0wr?=
- =?utf-8?B?bGxTTFFGeVpUa1BvQVh6TVlPR2VZUkVBb2t5RUgxaktUTm1pa2xtcEpMNkZs?=
- =?utf-8?B?YmlOYnZHb2Z0L0wzeU1JeEV0ajlZd1hKdGFaVVlCeStrd3FPcWZLZXNJaEE2?=
- =?utf-8?B?b3kvbkpFY2FvY21oMVlwT1FMQlJPYk4rU1ZTLyt3TEdLWkd4TEtPbnV3ZUVj?=
- =?utf-8?Q?0jN7MgxV48Y=3D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|7416014|376014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YUxVdjB0eXU1eS9KMmtiODJmaWpvWjR5TTVHN2EwQURTeVU3Q2NXWkF2ZlBv?=
+ =?utf-8?B?aHJMSkxwcVFQcHhqYml3bjU4aGdwR2Faa0JwbzZVM29ReC9qd2c2TUpKYXVa?=
+ =?utf-8?B?M1NOVFRCeGwzN0FGMkVOS2pXTE9NTDd3QkFYaHlCWmJ6OFkvMThIY05TY1Uv?=
+ =?utf-8?B?WFF6MVFXS1dyRGxnZ0NqcGhhWTlNUjRqa3Y3bFR4RWYrS3NZcnpJTmFTbFdB?=
+ =?utf-8?B?NHlTdlU3d2g5WXB0NnFpSE96QXBIcVhFcjJ1WHBaVDhCS2FxRHV5RkZ5Ykhu?=
+ =?utf-8?B?Uk50eUpkQWJ2dm1oelNWVzVQMGszaCtVbW1nSUYvUkJuUXBWcFF2WjdqL1VV?=
+ =?utf-8?B?d3FuRmxZeUVHam1peDBoMExWNm52NVdDTzNKNkhpaThMWGhXRUdNcVF5bFBD?=
+ =?utf-8?B?SVc0cXZyMndGeTFNeTJsa09ab1J0cnJobDY5bVJ5RDRldkxxNWJXMm1oYWRv?=
+ =?utf-8?B?VXpqc3owM04rbW82NU9odWgrRGgxaUd2ai84Y2l3eEJtK1NDeE5udHAvVEUy?=
+ =?utf-8?B?cEd4dWxXWEtRYzZkNFBDZkxmMzZobSs0NnZuSWxQdlk5RU9PSmVQV0pjclJq?=
+ =?utf-8?B?RkltT0FMMW0wZW1tRmFoV3pwTElGejRqUHYrdFoxV2ZhSnVWVmV6d1F2YnE4?=
+ =?utf-8?B?Ri90WHo5QnFJVmVOVXB4WnlyL0huazRGUmJwSUpoaW12RHBvVVdVZ25zNVhD?=
+ =?utf-8?B?aVluWEFaMitFTU44NHlTVEhMa2N4UEpYZm44TmdydEhzeHhHTUxUVzgxRTUv?=
+ =?utf-8?B?dFF1aDYxRVNjTTRQRitOKytwT2h2dFZWSjdFYkVubVV4dmExQUwzUEFVVGli?=
+ =?utf-8?B?b1cweWFzdzFkMExIWnV5Z0ExbWRoUXUwL0RZa2g2YjRUWW5NTG5aMHdPUkJZ?=
+ =?utf-8?B?TnBvWk1ZRjhKNStLUUtxaGpOdXNCazMySVNjT1ZPcDlIRlozUVdJM01NK3hJ?=
+ =?utf-8?B?ZjFvM3phVXpLOUIwWTZNc3Y2N3lrMk5DelhWZVZqNmxaN0JOcy82eW5RUmo5?=
+ =?utf-8?B?V05Kay84cURCVmhFWlBLMFJvbU5jc0xVSG9RaWxuekxIdWIwOWdHMGRlSFAx?=
+ =?utf-8?B?Umk2MTBidmp6UVJDZXllNGFjN0hEYWZHcVFnRlYyQTZ2TVBpQlQ4eGZ4cDMz?=
+ =?utf-8?B?UEFsOVdNcXM2QzE0bnovdjhJZldZbDFzTk1VTGZRa25qSTdjWXZDM2ZFQXVh?=
+ =?utf-8?B?b01nWElDTy80bGEvcEI2ei9lbVdFSXg1MWF0VGxnS1QxMXAwb0xNNFY4ZVZ2?=
+ =?utf-8?B?Sld3NHhBeUxEMFhrdEkzU2phRC9jdStrM0V2b2pGL3FVQy9XMWtMUmw2YXJQ?=
+ =?utf-8?B?QzR5Y3J5WnpZRVI5R2dSbmo3TzVBZFdQb3hlQXZtek55QU04a3FrdnJzaHlp?=
+ =?utf-8?B?cVNPK1pieXo0SWV6aDRZT0VVbkJkaUR5QXc2cVB0QmJqeWpqVHRsVTJTM0FF?=
+ =?utf-8?B?clQydm9VNUk1VFc0N1BwZzBqUGE0ZGFWYmQ3ZDF2SUhHUmRGU1BocHRtMW9B?=
+ =?utf-8?B?TGxsSlRybzV5M21XcWxYdnJmYkpWOVB3VDh4VHZmd2tEb2dJN21yeVV0eWs5?=
+ =?utf-8?B?WjNWMlN5R1BHNUt5bFFSc011N1ZhQndBSi90NmhiUDlSZGFaS0xpL01VTXp4?=
+ =?utf-8?B?bTYxTWN6L2NNUE4zL1Z2ZmJ1cnp6ci9ZNzJiRzZhbm85djdPN3h6QU1sbWVp?=
+ =?utf-8?B?d2k5bEZqN2IvQzRCTUVGbVc4SWpITW9QejdISnFyVEJiY1kyQk91dVBJNSt6?=
+ =?utf-8?B?Rjl3Zk1DS0JaNk9RdmpaRG5DeGhIbHB6aHQ4NVduWW1pVUlSaFJhZGZmMkJV?=
+ =?utf-8?B?SGhrVjNrb2JYajlSbmRhWG04cGdKOC9nRWtRZmhrdEZiSVNMczRGbXo0Ui9D?=
+ =?utf-8?B?YjhYSGlxS3Q5Sm1VNDE0MEo4OW5QU0pNR2RXcjIwR2kyYVBUT0owQWMvVjNP?=
+ =?utf-8?Q?hnDeQpXM/XM=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(1800799024)(7416014)(376014)(366016)(7053199007); DIR:OUT;
+ SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cnM4R2dNMTMzbVlMY1hwTVNNcUZkZHJCMmJuVnBBWWFJWkJ6RTBIN0E4b2Q1?=
- =?utf-8?B?N2NjeWFQRTFCTjRKK2RxQm92UERwZWFkbXo5QjZDYUo2R1BnNHJad1VETG85?=
- =?utf-8?B?K1U0Uk5CM3FlNGx0bG42d0pzM0RvV0gyUmpBc2J1U0VBVEpRYmZUUzJvVzVl?=
- =?utf-8?B?KzU3RW9oSFVYUGc1YUg5bGtnc3l1bkRDL2xwRk81L3c2b3lrdWhrSVpOdFZJ?=
- =?utf-8?B?cm5KRHI4ME9MRFZyb2VUU0tkSmM4RFhxMzdicENJdnF5Y3R3SEhlVTJBd2FN?=
- =?utf-8?B?b2NpVy8zNTBBZFA5dUxSNzdjVnJtRGlQTGxpcnhtZHVEcW53eG5ITXBCOFJi?=
- =?utf-8?B?SkhuWDRET0Y2cmFKOTdGanlSNldOUVZWUG5pZ1I0Nlh0QUoyMm9VTmNvY1Nu?=
- =?utf-8?B?cVZEWHNGYUVCamxtU1c3Y3dKRjF0TXlnSEIrMWl3M0lJUnF3a0F0UndMWXhy?=
- =?utf-8?B?OFdmSitrU2xLZ2RSSHRtNXZ1MWhlWWxHb3RUQTZXSk04ekdtcHkva0hHa1ZM?=
- =?utf-8?B?NXhOaGs1alR2VVRmZnN6dDQrYmZweGcxck1pRVBiaE5PMzVXNkRVWDVUUDNw?=
- =?utf-8?B?cUQ2OE5BdEg3NitkNlpkcUo1czk5dEtIbk1sTEcwRGYvcHVzWnJrT2kyNjBD?=
- =?utf-8?B?c2pUTVdmMk9TSHFIdFBFcHhXWkRGZ2UzcTVRb3IrQ1RaYm15dVhTZkU2Ykpr?=
- =?utf-8?B?YWV1MmlubUZIYmpkN3BreGVNbkN1RE8xZURCeWdGTlVwczZWcmQ4b3NnYmlB?=
- =?utf-8?B?L0tSaXg0TTN5V0xvcHhXSXNXSS9xb01MTkFqY2lxTEk5UmNuZk9wWTF2MFAw?=
- =?utf-8?B?SU9aVTMxMFJWZHFtOEJNZC9ycnliL2ZzZVFQQUk0RGdEZzVuY0RtUDQ3d2tZ?=
- =?utf-8?B?b0JReXlRZkNJczB3U2tLQmNyaFI4YThvWDk1N3lJaktaRmozbGxpMjI4ZitR?=
- =?utf-8?B?dWZmVVcydDgyUzg2VmJycHlsMytXNFhXd0ljZnYzL0F5c3lWY2R1a28xQWhs?=
- =?utf-8?B?SURXUm9hUHJid1E0bGZEdVFKMlE2RGlWbzEwcFZEa2gwcytYN241REZtcHVS?=
- =?utf-8?B?TWoyMURiY002dzNLcXpqUnJTNi9DZjVDdjROM3JiL3QzUkJ2azdJdHdJbGow?=
- =?utf-8?B?SnhTRGNJcDdHdjlXWXJhMjBtSVJSQ3NDcUpxcTBxcTd1S2xScWtmbndhVGVk?=
- =?utf-8?B?QWVvQmwxQlgzS1ROaWJ2K2JIWHpRd1VyaG9YalNtb3hoUHRtNkNMREtMSy83?=
- =?utf-8?B?VGl6d1JwQlRtbDkwVWs0aHZuaVJoM0o3TVM3S3hkVTNZT25JanFwdDhiZURT?=
- =?utf-8?B?SGtQelFiZG9iMjd2RzdBMU5xRExVb1kwSkRuZTlTTUFpY1Q1aUJYYjdCNG5v?=
- =?utf-8?B?Q3p1dGNrcktlQTJsWWxnNlA1aDBrVjBlbStYcS9ZckE4bkVnNVU3eFZGYXVE?=
- =?utf-8?B?TC9oS2NpM29zMGM2OHBnck90dmpUMG44OXEzNWtKOFRNSmx0Qi9yUEh2bWU0?=
- =?utf-8?B?ZWhwQzZEbjZyeGFDSWdUbjBDNm1zZEh6SmhvbWhNbU1ETnFGSzAvc280czNp?=
- =?utf-8?B?SkViQm1jYktBUzkwL1ZNWXcxTXF2QkhxeGtWMGVSK214anFEbzNYNEI4dDN4?=
- =?utf-8?B?M0RXaDB0VGFXUUxMeFg5eWp2d245QTFMdXZSMlZ4USsxQXd5NDVUcTIzalZN?=
- =?utf-8?B?aEZZVTVKdEZjaWZiUGFOdzFsN2dhZ0RwcHFiR21CVDlzL0dZcVNJR2tITXdD?=
- =?utf-8?B?SHQ0ZVlBdFVSc1RCUW5hbEVOSUZOTnV2Rit4c0ZLMWluNUVtQ01ZZFFUYXgx?=
- =?utf-8?B?eW5HamdEdXVLVkMzYXh1R3pXRGpVazhKQlNCZTdRTUlOaG05MTdpT2hMTU9n?=
- =?utf-8?B?QzhScWJIZXY1MUtRSG9OZnl6RFZ3WGlSV1BzQVRFNnlYaFpRUmlIbFhGTndC?=
- =?utf-8?B?bjVlZjh5TGd2OTlPam9sS2xqUzR3dXQ5SVVacDJ1RlpzdXY0OGE2elhKcC8v?=
- =?utf-8?B?aFBjb1NoOCt5Y3BJNGNWaUJtb3gyMzBpNU9HazJldTE2MjN5SFdFTnZTYk55?=
- =?utf-8?B?S2RXLzJLeTNiVUNXMUx1VGpNS3FWT1RVeEFhc0g2UmVkbmJRZmhlK20vU09C?=
- =?utf-8?Q?1sX9gSgr4ntgG/ZNf9aU50FnL?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MHNETGdOS0ZuMklIeHEvenF3QnRoOXMrRWV5QWVjdFBCeDhIWjFwLzBnRWdU?=
+ =?utf-8?B?U3FPc0U1c2VyY3Z3MXBScE8xMFlKd25DSjgzN2E3ek9CRWJzekMvQ1hndkpq?=
+ =?utf-8?B?L2ljU3N6VlNVSVJqQTZNMTc1ZzUyMWF5R2N6RG4zS1YzNkhLdjF2Mllxbmsx?=
+ =?utf-8?B?cjVub1dZZFMxdmdDWldIalJ1empWeDBuYnVLQU9UWmtDeXFxU3FsS3plSzV5?=
+ =?utf-8?B?b2lXdERpbkxZL0Z3R2tSYm0zd3ZDV1lIa3hKeG1SWGpaUXJpaVJ4bllld3Br?=
+ =?utf-8?B?RTdsbjVxaE12b3hZSTdDbEF2SklkTmdJNVExWFV3WTB0RjBkT1NNVnJKUVNE?=
+ =?utf-8?B?UnhIdVI4ZVhQbWtIcjNFcjhlV0pyVE5sRjh2VEtkUG5tVStGTWpCZXZiejdo?=
+ =?utf-8?B?WnJybmpYbEVxRzYzTVpQekxUUnRlVXA5K2diY1FqNjJrbm93S3V5OW1sVUt2?=
+ =?utf-8?B?MHR2SU9OZjdGY1JVdkZuanBVNDRZdzdqNTk5Q3hTamM2YWJUeGphZm1yUnJ1?=
+ =?utf-8?B?a0g4MWpvYlB1NWhVMXdLRnNGQWdaMWN1WDlESWk2QjVDc2hhSE5tbE1uVDV2?=
+ =?utf-8?B?U2N5QkJYWHM5RjBGbDQ1VlNkbFhvRUNIOTQxdHZ4QnhXdmdoSSs4emNvaC82?=
+ =?utf-8?B?YVY1Vld6MTUrQmprdlZjbDBVWitIVmJWb2tGYThReFIreTYzQ3Q4cE9ldHFT?=
+ =?utf-8?B?K2xWaGxPbzRMOVo3UDRGYVFMelBTS2pNYWpNMzYwSmEySWRYOUhKenRsbW9O?=
+ =?utf-8?B?a293WUNDZHlZaDhsNkY1bjdseFFSZlhxUUZ5UXRjTGw0dnBYcXkzSFhqQUpT?=
+ =?utf-8?B?bHFKc1YxWDc3VVlnSG5qeTFZLzRsMGUxZGo0blNnaEhuRXVMQ0ZDYlFXVUF6?=
+ =?utf-8?B?ZUdYRzZaajJyUGNjQUZDcG5qM2ZNY1FUalZhVlloWHczSXpUd3B6dVBHOWlB?=
+ =?utf-8?B?L3owa201WVpoVzhmK1U1ZUdiUzNZN0xUMExDWEIwT0xJUDZIdFdTcHI2cFo1?=
+ =?utf-8?B?dVM4bEQrYW1ZSFBBK1VHUXdkWlNVaVE0Y1JwM2RVdkxoOVVLODVKU3k3eVVt?=
+ =?utf-8?B?SnJsZUd1cW9UcDJldkZmTk5mRGdKVG1ObGczOFRwUjdTMVZUTmY3ZXBoaUdV?=
+ =?utf-8?B?bUl3djZ6ZzluQXExOHRDaG16blZIdjZLSnE5MDBBamxIejVtM0lxZFpzRUZm?=
+ =?utf-8?B?WTgzR0NNNmo1VWhrbDFPdFkzNFFGcmNUcXptRmVGK0xET1dLZFZlWFRydjVC?=
+ =?utf-8?B?bnFtRTNSaHBhamlQakZra3NpZlAwc3F3SWVEWkxLaktwZnBzRSsxb2ZCWFV6?=
+ =?utf-8?B?cjIxNGJqWUNrQU4rT1ZkM1NTTk9BbEFwRU5kNVFTcUxOZGI4UEw4SlJaaXE0?=
+ =?utf-8?B?M0hCOUh5d2dxU2dOZ3hvZHdwVEZqWlBVUG05eHRRS3lQckc5OTAwUm5tN21H?=
+ =?utf-8?B?YmIzWHVhamRCVGJnTGFDVTE3bGhyS1BpVDlNZFVlTlN1TXJ3dlhQbmhoTTBo?=
+ =?utf-8?B?VVNEKzNkWnBSMHFZVkFsc3c2Uk5xVlhINm1WeGY0NFdCKyt2SlV2NVM3cHIy?=
+ =?utf-8?B?MytEV3h4eWJoYlB2bWZaWjZGc2txS1BYc3hyN2lvTDcxWlcyblhkSGVXUThS?=
+ =?utf-8?B?blVKNVFWaU9Vbm94Vlh5S3VwVXVZQjFoTUhGbUJ3MjZlQytZUEtTaU5GRXU2?=
+ =?utf-8?B?WHJNK3psY3h5UkxyR1hCbllLQnJseUhhQjl0RmRhb1F3MnhEQURzNFZ0Q3d5?=
+ =?utf-8?B?ZFZGVnV5UTBFeTBkWFAyM045SjlYejlXdE1uam1KSzNMWFR0K1hXdmplVVZM?=
+ =?utf-8?B?eWkvU21tbXpBMXFpUEdUTWtUZXd3NDd6QkNERU8yQzZXSlNCLzFqcmRGTVdT?=
+ =?utf-8?B?b2FCaTBUUWpGOFNmQnlRTDhoYXhMSWhncERYYlJ0UUwxSEtGWUJ6WnZMSFZ5?=
+ =?utf-8?B?RjIwYWtINnM1QmxTUll3QkcwVHVTNFM3REMyNHNmbFh1anVHWTdjTW4yVVNU?=
+ =?utf-8?B?VlpRQlh6TnJVcXl5emNCSGlqMWZ5VnVLRWh5OXdJMGZhRUdzNFliU1VkZDNT?=
+ =?utf-8?B?RElrYjBRRjBIb09wbGk5b0t5UlUxNlFTS0JlOThHTUJBc3JaeVBvVDJMYWRG?=
+ =?utf-8?Q?3o2TcF/Fg8QpRkX5oUJRqpu5E?=
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96a9d5f5-21bb-4d4c-4da0-08dd83d71ac5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fdd10c4-075a-4a48-6642-08dd83d72c60
 X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2025 08:56:45.2162 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2025 08:57:14.3485 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T7kYXZUT0hXLrF2CLVIHneF0jlWon1MZ1i2Y6hyeBXG7VD4nnRKettwRDMzMizcn8Hqy768pklkB+TnMBw11Dg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2P195MB2423
+X-MS-Exchange-CrossTenant-UserPrincipalName: J/y2Ip7aDVWTa+wqzVuEykaKHk5AysZ4CzD+fNNRvSoSVVkMqzUlBjsOYRCnxTJFO0+jPyF/sZ1rGdAGWlatPA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1P195MB1544
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,42 +182,390 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Am 25.04.25 um 09:49 schrieb Miquel Raynal:
-> On one side we have a power domain uclass which is mostly clueless about
-> the topology of the power domains it manages.
+> It is very surprising that such an uclass, specifically designed to
+> handle resources that may be shared by different devices, is not keeping
+> the count of the number of times a power domain has been
+> enabled/disabled to avoid shutting it down unexpectedly or disabling it
+> several times.
 > 
-> On the other side we have SoCs which are getting more and more complex,
-> ie. with several layers of power domains. Sometimes (eg. on TI K3
-> platforms) all power domains are defined by a single device tree node
-> and the "subdomains" are referenced using an identification
-> cell (#power-domain-cells = <1 or more>). Sometimes however (eg. on NXP
-> i.MX8 SoCs), the description uses many device tree nodes.
+> Doing this causes troubles on eg. i.MX8MP because disabling power
+> domains can be done in recursive loops were the same power domain
+> disabled up to 4 times in a row. PGCs seem to have tight FSM internal
+> timings to respect and it is easy to produce a race condition that puts
+> the power domains in an unstable state, leading to ADB400 errors and
+> later crashes in Linux.
 > 
-> When a power domain is referenced several times, it is likely that the
-> power_domain_on() function will be called several times in a row, which
-> in some cases may lead to glitches or even breakages. This situation is
-> problematic on i.MX8MP and only with proper reference counting we can
-> safely support the video pipeline.
+> Some drivers implement their own mechanism for that, but it is probably
+> best to add this feature in the uclass and share the common code across
+> drivers. In order to avoid breaking existing drivers, refcounting is
+> only enabled if the number of subdomains a device node supports is
+> explicitly set in the probe function. ->xlate() callbacks will return
+> the power domain ID which is then being used as the array index to reach
+> the correct refcounter.
 > 
-> There was a first attempt to bring refcount support to the power domain
-> uclass, but it miserably failed because of the details mentioned
-> above:
-> https://lore.kernel.org/u-boot/20250403-ge-mainline-display-support-v6-5-478b5e3dd872@bootlin.com/
+> As we do not want to break existing users while stile getting
+> interesting error codes, the implementation is split between:
+> - a low-level helper reporting error codes if the requested transition
+>    could not be operated,
+> - a higher-level helper ignoring the "non error" codes, like EALREADY and
+>    EBUSY.
 > 
-> So here is a new version of it, which takes into consideration:
-> - the fact that a single power domain udev can target several power
-> domain IDs (referred as "subdomains")
-> - the fact that some platforms might count on a uneven count of on/off
-> calls to work, and "fixing" this may break the platforms.
+> CI tests using power domains are slightly updated to make sure the count
+> of on/off calls is even and the results match what we *now* expect. They
+> are also extended to test the low-level functions.
 > 
-> So refcounting is an opt-in parameter, it is a matter of filling the
-> platform (public part of a per-uclass structure) subdomains number with
-> the number of subdomains this device nodes features (one per
-> power_domain->id) in the probe function of the power domain driver.
-> 
-> This series shows how it can be done by enabling refcounting on i.MX8MP.
-> 
-> Samuel, Neha, Wadim, Heiko, could you please confirm it works on your
-> side?
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
-Booting works for me on the phycore-am62x.
+Tested-by: Wadim Egorov <w.egorov@phytec.de> # On phycore-am62x
+
+> ---
+>   arch/sandbox/include/asm/power-domain.h          |  2 +
+>   drivers/firmware/scmi/sandbox-scmi_devices.c     |  1 +
+>   drivers/power/domain/power-domain-uclass.c       | 90 ++++++++++++++++++++++--
+>   drivers/power/domain/sandbox-power-domain-test.c | 15 ++++
+>   drivers/power/domain/sandbox-power-domain.c      |  4 ++
+>   include/power-domain.h                           | 69 +++++++++++++++---
+>   test/dm/power-domain.c                           | 11 ++-
+>   7 files changed, 177 insertions(+), 15 deletions(-)
+> 
+> diff --git a/arch/sandbox/include/asm/power-domain.h b/arch/sandbox/include/asm/power-domain.h
+> index 4d5e861dbce2b6434ac9bcffe5fc8f704d32e62d..3b0717f8fa06f1c0493fe6ee758e2e72ff77141e 100644
+> --- a/arch/sandbox/include/asm/power-domain.h
+> +++ b/arch/sandbox/include/asm/power-domain.h
+> @@ -13,6 +13,8 @@ int sandbox_power_domain_query(struct udevice *dev, unsigned long id);
+>   int sandbox_power_domain_test_get(struct udevice *dev);
+>   int sandbox_power_domain_test_on(struct udevice *dev);
+>   int sandbox_power_domain_test_off(struct udevice *dev);
+> +int sandbox_power_domain_test_on_ll(struct udevice *dev);
+> +int sandbox_power_domain_test_off_ll(struct udevice *dev);
+>   int sandbox_power_domain_test_free(struct udevice *dev);
+>   
+>   #endif
+> diff --git a/drivers/firmware/scmi/sandbox-scmi_devices.c b/drivers/firmware/scmi/sandbox-scmi_devices.c
+> index 96c2922b067e2886b3fa963bcd7e396f4569a569..9f253b0fd40f703a5ec11d34c197423d27ad8b01 100644
+> --- a/drivers/firmware/scmi/sandbox-scmi_devices.c
+> +++ b/drivers/firmware/scmi/sandbox-scmi_devices.c
+> @@ -163,4 +163,5 @@ U_BOOT_DRIVER(sandbox_scmi_devices) = {
+>   	.priv_auto = sizeof(struct sandbox_scmi_device_priv),
+>   	.remove = sandbox_scmi_devices_remove,
+>   	.probe = sandbox_scmi_devices_probe,
+> +	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>   };
+> diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
+> index 938bd8cbc9ffd1ba2109d702f886b6a99288d063..d9fa8ad4bd2126ea564fd5be8124035946dbd432 100644
+> --- a/drivers/power/domain/power-domain-uclass.c
+> +++ b/drivers/power/domain/power-domain-uclass.c
+> @@ -12,6 +12,10 @@
+>   #include <power-domain-uclass.h>
+>   #include <dm/device-internal.h>
+>   
+> +struct power_domain_priv {
+> +	int *on_count;
+> +};
+> +
+>   static inline struct power_domain_ops *power_domain_dev_ops(struct udevice *dev)
+>   {
+>   	return (struct power_domain_ops *)dev->driver->ops;
+> @@ -107,22 +111,67 @@ int power_domain_free(struct power_domain *power_domain)
+>   	return ops->rfree ? ops->rfree(power_domain) : 0;
+>   }
+>   
+> -int power_domain_on(struct power_domain *power_domain)
+> +int power_domain_on_lowlevel(struct power_domain *power_domain)
+>   {
+> +	struct power_domain_priv *priv = dev_get_uclass_priv(power_domain->dev);
+> +	struct power_domain_plat *plat = dev_get_uclass_plat(power_domain->dev);
+>   	struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
+> +	int *on_count = plat->subdomains ? &priv->on_count[power_domain->id] : NULL;
+> +	int ret;
+>   
+> -	debug("%s(power_domain=%p)\n", __func__, power_domain);
+> +	/* Refcounting is not enabled on all drivers by default */
+> +	if (on_count) {
+> +		debug("Enable power domain %s.%ld: %d -> %d (%s)\n",
+> +		      power_domain->dev->name, power_domain->id, *on_count, *on_count + 1,
+> +		      (((*on_count + 1) > 1) ? "EALREADY" : "todo"));
+>   
+> -	return ops->on ? ops->on(power_domain) : 0;
+> +		(*on_count)++;
+> +		if (*on_count > 1)
+> +			return -EALREADY;
+> +	}
+> +
+> +	ret = ops->on ? ops->on(power_domain) : 0;
+> +	if (ret) {
+> +		if (on_count)
+> +			(*on_count)--;
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+>   }
+>   
+> -int power_domain_off(struct power_domain *power_domain)
+> +int power_domain_off_lowlevel(struct power_domain *power_domain)
+>   {
+> +	struct power_domain_priv *priv = dev_get_uclass_priv(power_domain->dev);
+> +	struct power_domain_plat *plat = dev_get_uclass_plat(power_domain->dev);
+>   	struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
+> +	int *on_count = plat->subdomains ? &priv->on_count[power_domain->id] : NULL;
+> +	int ret;
+>   
+> -	debug("%s(power_domain=%p)\n", __func__, power_domain);
+> +	/* Refcounting is not enabled on all drivers by default */
+> +	if (on_count) {
+> +		debug("Disable power domain %s.%ld: %d -> %d (%s%s)\n",
+> +		      power_domain->dev->name, power_domain->id, *on_count, *on_count - 1,
+> +		      (((*on_count) <= 0) ? "EALREADY" : ""),
+> +		      (((*on_count - 1) > 0) ? "BUSY" : "todo"));
+>   
+> -	return ops->off ? ops->off(power_domain) : 0;
+> +		if (*on_count <= 0)
+> +			return -EALREADY;
+> +
+> +		(*on_count)--;
+> +		if (*on_count > 0)
+> +			return -EBUSY;
+> +	}
+> +
+> +	ret = ops->off ? ops->off(power_domain) : 0;
+> +	if (ret) {
+> +		if (on_count)
+> +			(*on_count)++;
+> +
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+>   }
+>   
+>   #if CONFIG_IS_ENABLED(OF_REAL)
+> @@ -177,7 +226,36 @@ int dev_power_domain_off(struct udevice *dev)
+>   }
+>   #endif  /* OF_REAL */
+>   
+> +static int power_domain_post_probe(struct udevice *dev)
+> +{
+> +	struct power_domain_priv *priv = dev_get_uclass_priv(dev);
+> +	struct power_domain_plat *plat = dev_get_uclass_plat(dev);
+> +
+> +	if (plat->subdomains) {
+> +		priv->on_count = calloc(sizeof(int), plat->subdomains);
+> +		if (!priv->on_count)
+> +			return -ENOMEM;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int power_domain_pre_remove(struct udevice *dev)
+> +{
+> +	struct power_domain_priv *priv = dev_get_uclass_priv(dev);
+> +	struct power_domain_plat *plat = dev_get_uclass_plat(dev);
+> +
+> +	if (plat->subdomains)
+> +		free(priv->on_count);
+> +
+> +	return 0;
+> +}
+> +
+>   UCLASS_DRIVER(power_domain) = {
+>   	.id		= UCLASS_POWER_DOMAIN,
+>   	.name		= "power_domain",
+> +	.post_probe	= power_domain_post_probe,
+> +	.pre_remove	= power_domain_pre_remove,
+> +	.per_device_auto = sizeof(struct power_domain_priv),
+> +	.per_device_plat_auto = sizeof(struct power_domain_plat),
+>   };
+> diff --git a/drivers/power/domain/sandbox-power-domain-test.c b/drivers/power/domain/sandbox-power-domain-test.c
+> index 08c15ef342b3dd3ce01807ee59b7e97337f7dde5..df063001f517cae92df6b04a213c81b0d5584d18 100644
+> --- a/drivers/power/domain/sandbox-power-domain-test.c
+> +++ b/drivers/power/domain/sandbox-power-domain-test.c
+> @@ -34,6 +34,20 @@ int sandbox_power_domain_test_off(struct udevice *dev)
+>   	return power_domain_off(&sbrt->pd);
+>   }
+>   
+> +int sandbox_power_domain_test_on_ll(struct udevice *dev)
+> +{
+> +	struct sandbox_power_domain_test *sbrt = dev_get_priv(dev);
+> +
+> +	return power_domain_on_lowlevel(&sbrt->pd);
+> +}
+> +
+> +int sandbox_power_domain_test_off_ll(struct udevice *dev)
+> +{
+> +	struct sandbox_power_domain_test *sbrt = dev_get_priv(dev);
+> +
+> +	return power_domain_off_lowlevel(&sbrt->pd);
+> +}
+> +
+>   int sandbox_power_domain_test_free(struct udevice *dev)
+>   {
+>   	struct sandbox_power_domain_test *sbrt = dev_get_priv(dev);
+> @@ -51,4 +65,5 @@ U_BOOT_DRIVER(sandbox_power_domain_test) = {
+>   	.id = UCLASS_MISC,
+>   	.of_match = sandbox_power_domain_test_ids,
+>   	.priv_auto	= sizeof(struct sandbox_power_domain_test),
+> +	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>   };
+> diff --git a/drivers/power/domain/sandbox-power-domain.c b/drivers/power/domain/sandbox-power-domain.c
+> index 9dd490b14a3f6e502baccd94d32704e4b6bd56ed..a80316576384b27dc8159e81b5c79fc355af2860 100644
+> --- a/drivers/power/domain/sandbox-power-domain.c
+> +++ b/drivers/power/domain/sandbox-power-domain.c
+> @@ -64,8 +64,12 @@ static int sandbox_power_domain_bind(struct udevice *dev)
+>   
+>   static int sandbox_power_domain_probe(struct udevice *dev)
+>   {
+> +	struct power_domain_plat *plat = dev_get_uclass_plat(dev);
+> +
+>   	debug("%s(dev=%p)\n", __func__, dev);
+>   
+> +	plat->subdomains = 1;
+> +
+>   	return 0;
+>   }
+>   
+> diff --git a/include/power-domain.h b/include/power-domain.h
+> index 18525073e5e3534fcbac6fae4e18462f29a4dc49..7fd2c5e365b54889a156d0f0b969fae490ac41a7 100644
+> --- a/include/power-domain.h
+> +++ b/include/power-domain.h
+> @@ -65,6 +65,15 @@ struct power_domain {
+>   	void *priv;
+>   };
+>   
+> +/**
+> + * struct power_domain_plat - Per device accessible structure
+> + * @subdomains: Number of subdomains covered by this device, required
+> + *              for refcounting
+> + */
+> +struct power_domain_plat {
+> +	int subdomains;
+> +};
+> +
+>   /**
+>    * power_domain_get - Get/request the power domain for a device.
+>    *
+> @@ -147,37 +156,81 @@ static inline int power_domain_free(struct power_domain *power_domain)
+>   #endif
+>   
+>   /**
+> - * power_domain_on - Enable power to a power domain.
+> + * power_domain_on_lowlevel - Enable power to a power domain (with refcounting)
+>    *
+>    * @power_domain:	A power domain struct that was previously successfully
+>    *		requested by power_domain_get().
+> - * Return: 0 if OK, or a negative error code.
+> + * Return: 0 if the transition has been performed correctly,
+> + *         -EALREADY if the domain is already on,
+> + *         a negative error code otherwise.
+>    */
+>   #if CONFIG_IS_ENABLED(POWER_DOMAIN)
+> -int power_domain_on(struct power_domain *power_domain);
+> +int power_domain_on_lowlevel(struct power_domain *power_domain);
+>   #else
+> -static inline int power_domain_on(struct power_domain *power_domain)
+> +static inline int power_domain_on_lowlevel(struct power_domain *power_domain)
+>   {
+>   	return -ENOSYS;
+>   }
+>   #endif
+>   
+>   /**
+> - * power_domain_off - Disable power to a power domain.
+> + * power_domain_on - Enable power to a power domain (ignores the actual state
+> + *		      of the power domain)
+>    *
+>    * @power_domain:	A power domain struct that was previously successfully
+>    *		requested by power_domain_get().
+> - * Return: 0 if OK, or a negative error code.
+> + * Return: a negative error code upon error during the transition, 0 otherwise.
+> + */
+> +static inline int power_domain_on(struct power_domain *power_domain)
+> +{
+> +	int ret;
+> +
+> +	ret = power_domain_on_lowlevel(power_domain);
+> +	if (ret == -EALREADY)
+> +		ret = 0;
+> +
+> +	return ret;
+> +}
+> +
+> +/**
+> + * power_domain_off_lowlevel - Disable power to a power domain (with refcounting)
+> + *
+> + * @power_domain:	A power domain struct that was previously successfully
+> + *		requested by power_domain_get().
+> + * Return: 0 if the transition has been performed correctly,
+> + *         -EALREADY if the domain is already off,
+> + *         -EBUSY if another device is keeping the domain on (but the refcounter
+> + *         is decremented),
+> + *         a negative error code otherwise.
+>    */
+>   #if CONFIG_IS_ENABLED(POWER_DOMAIN)
+> -int power_domain_off(struct power_domain *power_domain);
+> +int power_domain_off_lowlevel(struct power_domain *power_domain);
+>   #else
+> -static inline int power_domain_off(struct power_domain *power_domain)
+> +static inline int power_domain_off_lowlevel(struct power_domain *power_domain)
+>   {
+>   	return -ENOSYS;
+>   }
+>   #endif
+>   
+> +/**
+> + * power_domain_off - Disable power to a power domain (ignores the actual state
+> + *		      of the power domain)
+> + *
+> + * @power_domain:	A power domain struct that was previously successfully
+> + *		requested by power_domain_get().
+> + * Return: a negative error code upon error during the transition, 0 otherwise.
+> + */
+> +static inline int power_domain_off(struct power_domain *power_domain)
+> +{
+> +	int ret;
+> +
+> +	ret = power_domain_off_lowlevel(power_domain);
+> +	if (ret == -EALREADY || ret == -EBUSY)
+> +		ret = 0;
+> +
+> +	return ret;
+> +}
+> +
+>   /**
+>    * dev_power_domain_on - Enable power domains for a device .
+>    *
+> diff --git a/test/dm/power-domain.c b/test/dm/power-domain.c
+> index 896cf5b2ae9d26701150fad70e888f8b135a22b0..1002d831764b5a62b05631aee0d70c5609b8574b 100644
+> --- a/test/dm/power-domain.c
+> +++ b/test/dm/power-domain.c
+> @@ -27,17 +27,26 @@ static int dm_test_power_domain(struct unit_test_state *uts)
+>   
+>   	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "power-domain-test",
+>   					      &dev_test));
+> -	ut_asserteq(1, sandbox_power_domain_query(dev_power_domain,
+> +	ut_asserteq(0, sandbox_power_domain_query(dev_power_domain,
+>   						  TEST_POWER_DOMAIN));
+>   	ut_assertok(sandbox_power_domain_test_get(dev_test));
+>   
+>   	ut_assertok(sandbox_power_domain_test_on(dev_test));
+>   	ut_asserteq(0, sandbox_power_domain_query(dev_power_domain, 0));
+> +	ut_asserteq(1, sandbox_power_domain_query(dev_power_domain,
+> +						  TEST_POWER_DOMAIN));
+> +	ut_asserteq(-EALREADY, sandbox_power_domain_test_on_ll(dev_test));
+> +	ut_asserteq(1, sandbox_power_domain_query(dev_power_domain,
+> +						  TEST_POWER_DOMAIN));
+> +	ut_asserteq(-EBUSY, sandbox_power_domain_test_off_ll(dev_test));
+>   	ut_asserteq(1, sandbox_power_domain_query(dev_power_domain,
+>   						  TEST_POWER_DOMAIN));
+>   
+>   	ut_assertok(sandbox_power_domain_test_off(dev_test));
+>   	ut_asserteq(0, sandbox_power_domain_query(dev_power_domain, 0));
+> +	ut_asserteq(0, sandbox_power_domain_query(dev_power_domain,
+> +						  TEST_POWER_DOMAIN));
+> +	ut_asserteq(-EALREADY, sandbox_power_domain_test_off_ll(dev_test));
+>   	ut_asserteq(0, sandbox_power_domain_query(dev_power_domain,
+>   						  TEST_POWER_DOMAIN));
+>   
+> 
 
