@@ -4,75 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02BD3C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 12:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AAE3C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 12:56:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AFDC82012;
-	Fri, 25 Apr 2025 14:43:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B2A7082012;
+	Fri, 25 Apr 2025 14:56:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UdoIoZb1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gJD7TJ9D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5B5682045; Fri, 25 Apr 2025 14:43:35 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55C7581E14
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 14:43:33 +0200 (CEST)
+ id D598882075; Fri, 25 Apr 2025 14:56:09 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C189E81E14
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 14:56:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PChASV2793954
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 07:43:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745584990;
- bh=87rgHRZxiI/ZlZePxxqJmbFyPe9MihN12dl2or5lLwY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=UdoIoZb1nfLcpGKDY56f9vSRXu1Ik50pqW6TTY/2kKGY7bwtIxD3puyPaCcEoB49L
- t0BiQdo2ROGAH5oIoCrFW9hYKdEt1b1iaJiGNlGZ7/5YGx9biUGoPfsh2TcT76PBER
- 2xojhOH0lPET8/YB5O58DDhmvuouh2MsHn4V9+FM=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PChAHW004389
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 07:43:10 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 07:43:10 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 07:43:10 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PCh7Un027462;
- Fri, 25 Apr 2025 07:43:07 -0500
-Message-ID: <a8a5642a-d9cc-4918-8674-0a3285954695@ti.com>
-Date: Fri, 25 Apr 2025 18:13:06 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-30effbfaf61so24181341fa.0
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 05:56:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1745585767; x=1746190567; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CHlPgW7TZkJ0YuNi/HQdAoBD2SSXvrvcpcJOUEPcLpA=;
+ b=gJD7TJ9DqkAsF8Lhl32fdtfV+I107iZEreGMJjIPzfvj39GN0iU+6OZU3hbaQ4rKGk
+ +RvT+AsrRcfco11IuoccoeXMTTE9lD5Iq3dc89osL6imFNcpDnfODuFQoT0lsRNJI9G0
+ MnnBRTlAAetIx6sFLz52GQglvkhkUQMxyxF1qcAK5SXGsLmfT09QeHXMUHU3IFu1Iynh
+ NVvXmd4CPljEKTY++ErB+2FsIAQl4G9f9dUZvhtlNDdZ8LVlbUyj8GNiFxWZ7QD2mfNA
+ DfkNIwuN6+8ZUakrI8VK4CmwQkvgGhWLZmYH+jRpguwzxON2Qh0E906m7FuTuuD27t5C
+ Inrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745585767; x=1746190567;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CHlPgW7TZkJ0YuNi/HQdAoBD2SSXvrvcpcJOUEPcLpA=;
+ b=Wz3cE2j4Z/dC5vZelWffMFyAe59QBHse+WkHTTy0DzOu4ND1vK/ivNS+THJ3vKt5Ln
+ MBOylQLD8lpBk9H6Ga3ghiwU27hOFIrEeRiEikWeoZKuzKAqyeo+EZ98sR3inOUZv4IQ
+ FyhrrzUXByTbH/0J8iZN2ZOrjaGiQHX6e5CGVMkI1R6fy+nq8Pk5NC/xah2XEXgNMD8A
+ ghUWIQhf+WmlgTLP6chnPXU5ZUQ5VzsjZuJtv+SLRY6hvR520HPyvXv41PerNDoEWSaH
+ juJIlAEIoz9mR2Tkbrb+aq5tRJnR9oYioYFMZ1k4cUXl2w1Ncw/Kzi3KS1NyCs3880aI
+ AIRw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUbsElis1OEkADsHdtERNhhTbCEP2/6hT4G6Swvua50g7DdL+20nvoi6XdGKKlt4JGJ5ixxT8U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyxKIK15E8UebL8Z6gexunH/vxepauRUyDP1vGmm+3qPmVHvquh
+ uY13niWMgY80wVrow2Db4HQDD+K5+HutDIcvOPyGLPPjXrf4B0t7zsyapKBrB60gNptdmbGSrE6
+ w7Cp0yQOpVGIkfMo1YxiFZwx+DnpX+Yg2
+X-Gm-Gg: ASbGncvzuCobSlI+RrNjQQu6m96kh29Q0GgJYJP3CpD8WMf+YedkxTSBUy9jI3+UgZG
+ cRo5Cdc3AO1ilo8seNe/iRaXXL5GN3DgqrDE7L8sRrrg1MEH3TO0tnLS2ShWtkLXTzReJ9rDupc
+ TeloM1TcvXte8dU7hIdM8t9gjxFL8VClB3ziHbTrIkKN/FVOH8fl4UHw==
+X-Google-Smtp-Source: AGHT+IFdu1kbZGB/9eLd7ZSQt4oZMqdgbb3yEbV0AdWrgda9S9FSMtO48yIqHZP0D6IS1jjN+7LuXtjNA/LAhsZ8FF4=
+X-Received: by 2002:a05:651c:b14:b0:30c:465c:51de with SMTP id
+ 38308e7fff4ca-319000ef95emr5508761fa.10.1745585766648; Fri, 25 Apr 2025
+ 05:56:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC] Expected behavior of the go command
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>, Simon Glass <sjg@chromium.org>,
- Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <rick@andestech.com>,
- <mporter@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>,
- <u-kumar1@ti.com>
-References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
- <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
- <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
- <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
- <5f87ac88-5552-4c5c-ae56-01c7ef9165dd@pengutronix.de>
- <d95b1919-ea47-4d58-8349-82e0f33fed5a@ti.com>
- <842f0cba-b43e-4514-8a15-9b4c87a08104@pengutronix.de>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <842f0cba-b43e-4514-8a15-9b4c87a08104@pengutronix.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250417171101.2566447-1-festevam@gmail.com>
+ <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
+ <CAOMZO5C_9yojvxO1NoNjtTHxD85ZcGd_cK2t-rofyY_Zxm1xcg@mail.gmail.com>
+ <CAHCN7xLkDnLX5PHFNjXYn7AFXA5+S22aksgv62PpWpg80ZDQmA@mail.gmail.com>
+ <d81112ad-017b-491a-b517-de828dd30c25@denx.de>
+ <CAOMZO5CpQ-yv=8GhNv7=yjnA+uzzP9ZmB=P2d+xmhY1ktQJX9A@mail.gmail.com>
+ <28b4bb24-4c56-4fe3-ae9b-db43c63290b1@denx.de>
+ <CAOMZO5Cz1atyi0OSOrzUfSGiLb-9XdnyX-d8L7un5PuAdkBeBQ@mail.gmail.com>
+ <703a0297-24b2-42f3-9fa7-62a78e38f1a2@denx.de>
+ <CAOMZO5BitKDL2QRAzBuKK9rdfPsob_jdsYx86CRXJq8RjC8xoA@mail.gmail.com>
+In-Reply-To: <CAOMZO5BitKDL2QRAzBuKK9rdfPsob_jdsYx86CRXJq8RjC8xoA@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 25 Apr 2025 09:55:55 -0300
+X-Gm-Features: ATxdqUF71n3_gjM2wNMQyTMHRboQFGtO4gctVH0VhOu0KOmAODKU9HTCZAzQQzs
+Message-ID: <CAOMZO5B6V4=5et8XpnN0-TkaCSLaiAf2sRw8C+_H97LeU17U+g@mail.gmail.com>
+Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
+ fixed clocks
+To: Marek Vasut <marex@denx.de>
+Cc: Adam Ford <aford173@gmail.com>, trini@konsulko.com, lukma@denx.de, 
+ seanga2@gmail.com, francesco.dolcini@toradex.com, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,51 +105,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ahmad
+On Thu, Apr 24, 2025 at 11:35=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 
-On 4/25/2025 4:28 PM, Ahmad Fatoum wrote:
-> Hi Udit,
->
-> On 4/25/25 12:35, Kumar, Udit wrote:
->> On 4/25/2025 11:09 AM, Ahmad Fatoum wrote:
->>> Thinking about it, I am wondering whether U-Boot go is inherently broken,
->>> even for the jump-table use case, if caches are enabled:
->> Correct, this is what I think . Before jumping to new program go command
->> should make sure
->>
->> things are in correct order by cache flush. Kind of below
->>
->> diff --git a/cmd/boot.c b/cmd/boot.c
->> index 23496cafdf5..e6bb1d94a1c 100644
->> --- a/cmd/boot.c
->> +++ b/cmd/boot.c
->> @@ -18,6 +18,7 @@ __attribute__((weak))
->>   unsigned long do_go_exec(ulong (*entry)(int, char * const []), int argc,
->>                                   char *const argv[])
->>   {
->> +       flush_cache(...)
-> yes, even with MMU left enabled, it looks like there should be an
-> I-Cache invalidate and D-Cache flush/clean here[1].
+> I haven't had a chance to debug this issue yet.
 
-Yes, correct . This should be extended with above
+I applied this debug patch:
 
->
->> I see even ARM64, few board choose to over-ride default option (board/
->> xilinx/versal/board.c)
->>
->> do_go_exec does dcache_disable()
-> I think __weak is a fundamental mistake and upstream boards abusing it
-> to not have to fix things generally shows that.
->
->> Sorry I was not clear in previous message,
->>
->> Here OS take care of caching , irrespective of how boot is done through fit
-> Yes, but with the assumption that MMU was disabled at start.
->
->> or kind of efi or other method.
-> Interestingly, with EFI MMU should be left enabled. Linux even
-> warns about the case that MMU was disabled when entering the stub.
->
-> Cheers,
-> Ahmad
->
+--- a/drivers/mmc/fsl_esdhc_imx.c
++++ b/drivers/mmc/fsl_esdhc_imx.c
+@@ -1539,6 +1539,7 @@ static int fsl_esdhc_probe(struct udevice *dev)
+        }
+
+        priv->sdhc_clk =3D clk_get_rate(&priv->per_clk);
++       printf("****** sdhc clk is %d\n", priv->sdhc_clk);
+ #else
+        init_clk_usdhc(dev_seq(dev));
+
+With the top-of-tree U-Boot, SPL calculates the wrong sdhc_clk on the
+imx8mm-evk:
+
+U-Boot SPL 2025.04-01380-ga9820e12db18-dirty (Apr 25 2025 - 09:40:45 -0300)
+No pmic
+WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+SEC0:  RNG instantiated
+Trying to boot from MMC1
+****** sdhc clk is 204522251
+
+If I revert b4734c9c333b ("clk: imx: Convert clock-osc-* back to
+osc_*"), the clock is calculated correctly:
+
+U-Boot 2025.04-01380-ga9820e12db18-dirty (Apr 25 2025 - 09:40:45 -0300)
+
+CPU:   NXP i.MX8MMQ Rev1.0 A53 at 1200 MHz
+CPU:   Consumer temperature grade (0C to 95C) at 42C
+Model: FSL i.MX8MM EVK board
+DRAM:  2 GiB
+Core:  188 devices, 24 uclasses, devicetree: separate
+WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+MMC:   fsl_esdhc mmc@30b50000: no vqmmc-supply
+****** sdhc clk is 200000000
+
+If I do:
+
+--- a/dts/upstream/src/arm64/freescale/imx8mm-evk.dtsi
++++ b/dts/upstream/src/arm64/freescale/imx8mm-evk.dtsi
+@@ -614,8 +614,6 @@
+ };
+
+ &usdhc2 {
+-       assigned-clocks =3D <&clk IMX8MM_CLK_USDHC2>;
+-       assigned-clock-rates =3D <200000000>;
+        pinctrl-names =3D "default", "state_100mhz", "state_200mhz";
+        pinctrl-0 =3D <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
+        pinctrl-1 =3D <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
+
+Then the pause is gone, but the printed clock is incorrect:
+
+U-Boot SPL 2025.04-01380-ga9820e12db18-dirty (Apr 25 2025 - 09:52:28 -0300)
+No pmic
+WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+SEC0:  RNG instantiated
+Trying to boot from MMC1
+****** sdhc clk is 1431655607
+
+Adam, imx8mm-beacon does not have the
+assigned-clocks/assigned-clock-rates properties.
+
+Maybe this is why you haven't observed the problem?
