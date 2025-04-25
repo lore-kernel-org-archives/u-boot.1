@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C91C6C369D1
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 13:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E4EC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 13:17:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D25F8214A;
+	by phobos.denx.de (Postfix) with ESMTP id 71ED482155;
 	Fri, 25 Apr 2025 15:16:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="2B2l+p4t";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="6hOO4lEp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35E7481E14; Fri, 25 Apr 2025 15:16:39 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 2E10481F4D; Fri, 25 Apr 2025 15:16:42 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E40281F6B
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 15:16:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30FE28210D
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 15:16:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6210cfe02c=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53PBp3BY002503;
- Fri, 25 Apr 2025 15:16:35 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53P7lA2G018475;
+ Fri, 25 Apr 2025 15:16:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- CZUQdhqE8KZ6m+B66cFIg1Z/oeJoVsxmI3/ikG+QMZ0=; b=2B2l+p4tyE8/FFEM
- G0wcUkDxEbvFBC54uEoNMoLaQu76n996G/jAXcJmaMFSWz4hEK2TantiEdIAzGWx
- 715IHblsUy8Bs2HH9B+0rylvl/cKPvM4+5DWoEeIb9m1eP6yoem0MBhsebaCVwhl
- uSI5TTLsXoYQiuXhAf2B9ioDfPtxLjIgcZ2HCwyrJW7fEGuUCQYkrLizAlI9dHzX
- fLvU6p+Fa8dpwk5CT52XVegBq1XlIO40SvAYC8qYRh6zm2SRNLHk2nlZ6KQ5t2d1
- mjxQtuokbk0jTksjban7zpHpyJ4Gooxj41l9vlhsMswQNFRjdUrC5+l/MXHN0Kes
- J/az2A==
+ VBLPBK+UL5x0GFR+cbxBZXGlekEFYfiPbf76vg6YEIU=; b=6hOO4lEpvIB2dycW
+ wkb6dcTFOCKF4PqXrHbzslxBbs5LdQsC5+fBXHKgqdoLqwXYYKDd8cBMLA30RH1I
+ yB+TE2B7dqp8uum0AXXZZSMJZNRZ7DsdTR6mwOlcP7EArbkZ5gzHRU0MdcNLzeBA
+ jcNTiTskqe3gI0fSz+WfxxoZN3jQHQ/u92LvPj2u4WlTDKeHv+HBmvmgGhoGTqjG
+ kGkthC9m1ZcS5bdLP1jCkd4G8BWNSKgSLkXE292NjFxRGhSjCgFORIH5zpLgY1nZ
+ 1/4K//FdqvKu0seIicRZO6cHnBikRbdr9ftl2dBQxQyNBVUu1YA+9lvwuBjTJSvu
+ oA+jbg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk2mq38-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jjvc8y2-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 25 Apr 2025 15:16:34 +0200 (MEST)
+ Fri, 25 Apr 2025 15:16:38 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E24034004C;
- Fri, 25 Apr 2025 15:15:59 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 08C9540045;
+ Fri, 25 Apr 2025 15:16:02 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 99FEF90BF57;
- Fri, 25 Apr 2025 15:15:47 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A4A3F90BF67;
+ Fri, 25 Apr 2025 15:15:48 +0200 (CEST)
 Received: from localhost (10.252.18.92) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 25 Apr
- 2025 15:15:47 +0200
+ 2025 15:15:48 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
  <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 11/22] configs: stm32mp25: add USB host boot support
-Date: Fri, 25 Apr 2025 15:15:22 +0200
-Message-ID: <20250425131533.392747-12-patrice.chotard@foss.st.com>
+Subject: [PATCH v2 12/22] configs: stm32mp25: add PXE boot support
+Date: Fri, 25 Apr 2025 15:15:23 +0200
+Message-ID: <20250425131533.392747-13-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250425131533.392747-1-patrice.chotard@foss.st.com>
 References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
@@ -89,9 +89,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for booting from USB pen drive, since USB host
-port is available on the STM32MP2.
+Configure the required configuration to allow PXE boot,
+without autoload support by default.
 
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
@@ -101,26 +102,29 @@ Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/include/configs/stm32mp25_common.h b/include/configs/stm32mp25_common.h
-index 1c28ce1c1e9..481b25a1f02 100644
+index 481b25a1f02..b42316fd8ac 100644
 --- a/include/configs/stm32mp25_common.h
 +++ b/include/configs/stm32mp25_common.h
-@@ -41,11 +41,18 @@
- #define BOOT_TARGET_UBIFS(func)
- #endif
+@@ -25,6 +25,12 @@
+ #ifdef CONFIG_DISTRO_DEFAULTS
+ /*****************************************************************************/
  
-+#ifdef CONFIG_CMD_USB
-+#define BOOT_TARGET_USB(func)	func(USB, usb, 0)
++#ifdef CONFIG_NET
++#define BOOT_TARGET_PXE(func)	func(PXE, pxe, na)
 +#else
-+#define BOOT_TARGET_USB(func)
++#define BOOT_TARGET_PXE(func)
 +#endif
 +
- #define BOOT_TARGET_DEVICES(func)	\
- 	BOOT_TARGET_MMC1(func)		\
+ #ifdef CONFIG_CMD_MMC
+ #define BOOT_TARGET_MMC0(func)	func(MMC, mmc, 0)
+ #define BOOT_TARGET_MMC1(func)	func(MMC, mmc, 1)
+@@ -52,7 +58,8 @@
  	BOOT_TARGET_UBIFS(func)		\
  	BOOT_TARGET_MMC0(func)		\
--	BOOT_TARGET_MMC2(func)
-+	BOOT_TARGET_MMC2(func)		\
-+	BOOT_TARGET_USB(func)
+ 	BOOT_TARGET_MMC2(func)		\
+-	BOOT_TARGET_USB(func)
++	BOOT_TARGET_USB(func)		\
++	BOOT_TARGET_PXE(func)
  
  /*
   * default bootcmd for stm32mp25:
