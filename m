@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D80A2C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:31:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54402C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:31:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 281D6829B8;
+	by phobos.denx.de (Postfix) with ESMTP id 6E56082A0A;
 	Fri, 25 Apr 2025 19:31:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C59mkOGR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="unaTy8q0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F392C829F5; Fri, 25 Apr 2025 19:31:30 +0200 (CEST)
+ id 0E2DF829F6; Fri, 25 Apr 2025 19:31:31 +0200 (CEST)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC46B82977
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:31:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75274829C3
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:31:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PHVNS52848241
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PHVOui2848247
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 12:31:23 -0500
+ Fri, 25 Apr 2025 12:31:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745602283;
- bh=lP6XbW6EET/8KEerNTWOCzWTU95/HYrZ3yXV+HL9veM=;
+ s=ti-com-17Q1; t=1745602284;
+ bh=4jQRZw5eDJ7Xe86xjDR4P6vKl2zaMIMnkNE9rKH0cN8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=C59mkOGRKX+R89DMQjstfgpxUXREyTDBmhwWmdtom1B0DcHTzIS7Hi9QbJIch8gar
- wyycy6JM+iGlfvmyruUhwKTrqz6tT832AOWAUPWzrOtFle4dtprWvcSgfPNXJiVox9
- YoihgLlTumOSwo3A6vq/eiO95odP1UmoPbNA4bJA=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PHVNnn007630
+ b=unaTy8q0QAdBwZkGUnFBq5wJBuLrtLwMNmwUT0mlE807g5YFY1PyNfJHkhUFWorEQ
+ WAs34QfOrCEV3gasfO963WlfLafbX9VoVXtQgcwWmdWHBn2b/qCnZNB3nwJ8+95R69
+ b+AZpCWhUW5wbK1ASNRaR5W7/Q66SzRtO7OqZeoM=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PHVOfd007643
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 12:31:23 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 25 Apr 2025 12:31:24 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
  Apr 2025 12:31:23 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 25 Apr 2025 12:31:23 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PHVN6w110066;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PHVNA4110060;
  Fri, 25 Apr 2025 12:31:23 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -57,9 +57,10 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 CC: Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Jonathan
  Humphreys <j-humphreys@ti.com>, Andrew Davis <afd@ti.com>,
  <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH 5/9] beagle: beagley-ai: env: Enable DFU env options
-Date: Fri, 25 Apr 2025 12:31:15 -0500
-Message-ID: <20250425173120.141503-6-nm@ti.com>
+Subject: [PATCH 2/9] arch: arm: dts: k3-am67a-beagley-ai-u-boot: Mark
+ main_gpio1 as bootph-all
+Date: Fri, 25 Apr 2025 12:31:12 -0500
+Message-ID: <20250425173120.141503-3-nm@ti.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20250425173120.141503-1-nm@ti.com>
 References: <20250425173120.141503-1-nm@ti.com>
@@ -83,30 +84,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Just enable dfu options, We have MMC and RAM as options here.
+main_gpio1 controls the voltage for the SDcard from 3.3v to 1.8v.
+This is required for proper operation of SDcard through various boot
+stages.
+
+Fixes the following seen in the boot log:
+failed to set vqmmc-voltage to 3.3V
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
 Changes Since v2:
-- Dropped the dfu_alt_info override option, let the users select it
-- Updated commit message to the effect.
+- None
 
-V2: https://lore.kernel.org/r/20250418193943.953952-6-nm@ti.com
+upstream kernel patch: https://lore.kernel.org/all/20250411203950.2859356-1-nm@ti.com/
+V2: https://lore.kernel.org/r/20250418193943.953952-3-nm@ti.com
 
- board/beagle/beagley-ai/beagley-ai.env | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/beagle/beagley-ai/beagley-ai.env b/board/beagle/beagley-ai/beagley-ai.env
-index 16a03acfca3c..70afbf9763f9 100644
---- a/board/beagle/beagley-ai/beagley-ai.env
-+++ b/board/beagle/beagley-ai/beagley-ai.env
-@@ -1,5 +1,6 @@
- #include <env/ti/ti_common.env>
- #include <env/ti/mmc.env>
-+#include <env/ti/k3_dfu.env>
+diff --git a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
+index 6c52038cdcaf..6330ca93fc74 100644
+--- a/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
++++ b/arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi
+@@ -53,6 +53,10 @@
+ 	status = "disabled";
+ };
  
- #if CONFIG_CMD_REMOTEPROC
- #include <env/ti/k3_rproc.env>
++&main_gpio1 {
++	bootph-all;
++};
++
+ #if IS_ENABLED(CONFIG_TARGET_J722S_R5_BEAGLEY_AI)
+ 
+ &binman {
 -- 
 2.47.0
 
