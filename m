@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A45C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD841C369D3
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCCB9829A1;
-	Fri, 25 Apr 2025 19:16:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C5628295C;
+	Fri, 25 Apr 2025 19:16:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1745601406;
-	bh=pzJzj+iuoyz/Hv3+6ODKdOs2SQTqtTl1usheblEXWZU=;
+	s=phobos-20191101; t=1745601409;
+	bh=2uJfMdHq0cNmDxvR7q06QtLAXjLSWUvf01YZVEPhDpk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=F+nYvfOUKCEIRNSB6itoNGPQ566NMkWB1G7tO8qJnn8mjE6oTSPGe44ijw3Et/Rfu
-	 Ag6BI6CXtRBh+hHTzkYq3hYgeUOBsNJ84uZVMeK7hUjPGqcWrQ92Yb1tBLFhG0Q6lx
-	 P38eCMjF3+wK0aZJPvE2Rc5ag+koY6T7MjrzIy4yPTzT9xBAa+7S5SvCHkowXmh7X/
-	 pQBK8Pg7aWggow7Ro4hXoYsbwVhnN3p7p5EIuCrX1BZJe0pe2Yey+TpsFRhhxY8Okv
-	 oODZMwohTV4VFxgeNXF+TYPlW6aUGbdyoid3J5I6BEKu7hPSJ/TMSsdrjFZ+RtIhr9
-	 YOwgoc8/NrJZQ==
+	b=JI5EjxpqE6FWEzsf3X4AUVPa9KWjjHHOeqYMERE2GUgBOjvvAIcxFUOIiejD1p3+C
+	 M9kbgk5krX67lHUqRLff2QWA/oecxle8t9e43f4iIc7RNrSspVQaXgHyO7r5yJJhRh
+	 LS2KpqoVh5foSv/SNIpwNdm5h5Tz8GQEZzpB0q/khzbf/OThn85OXuOZCTiEOkFJl+
+	 N9CGBjtRzagDB5QMIGxDTnNOaRXpz1d1aahyD/NkX/N46c5Fw6ZD8bwXGUUsOF5ZBK
+	 476y7EJPLNcr5p+ts7FPBcnYcyIR29DFXJ5cCBbmYHsMv2+kcRt1TTMpmGJEgk1VN+
+	 Xd6vGEmSARABg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A93388298E; Fri, 25 Apr 2025 19:16:44 +0200 (CEST)
+ id 620088298E; Fri, 25 Apr 2025 19:16:46 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8C9B82958
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:16:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D4CF8295C
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:16:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Qnp6cobD"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="cIYjgOLo"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 56E9310275AD5; 
- Fri, 25 Apr 2025 19:16:41 +0200 (CEST)
+ with ESMTPSA id 7FCF210271412; 
+ Fri, 25 Apr 2025 19:16:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1745601401; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1745601403; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=pzJzj+iuoyz/Hv3+6ODKdOs2SQTqtTl1usheblEXWZU=;
- b=Qnp6cobDJ0QU8e4JAzRRGWo0d2lsr7lcatM49Xn20gFpR5O7f2GMUwpBRRuJ/TYfW7m+uL
- 1FTAk4r1W2Gv9CjAwnsrp+dIrouFH9aS8ZCCIOAjGtiHwRHpV23d47mhuTrVagfU2YEUNn
- LXniQZ8cvbpZUgi7hoiEsRw7lGHG13toXUCZV74YmbWbZlM6JCwYeyLx8vk6S6s9ccTMpH
- iFwSLtE2QfMt8fNrFzshPC0mV6J4BMUZPPaXPwPAhIgTL9sOO0TwA25A2Q5360JXtzGSNJ
- AKinJQNyZCqeNh30HqvNQ9kdO6OjVXHEHw4AQ2GUuG/rJcj+xqJ4n7oc54svkg==
-Message-ID: <cd79aa6d-e291-4683-91e4-abc0046c25ab@denx.de>
-Date: Fri, 25 Apr 2025 19:10:10 +0200
+ bh=2uJfMdHq0cNmDxvR7q06QtLAXjLSWUvf01YZVEPhDpk=;
+ b=cIYjgOLo34ZiUJGC6CG483j8xAbp5uVC3t4PZbf42r1Gxy0sWZCs7DH3lVkQnIgTh34nQV
+ 6CPrt764N5ZkcXuOUxL57xPvx1nbcxqsTCFzKrJWrdMRewnjiqTDlmQv8AUN+p5oRHIeUq
+ xXdYgORI8f4Y/m1pKrNgjeRNTxMjZeRItmCuFqpNaP9UHy37/VRcWYewUqt5d9r3QKhUC7
+ Lbo61JcuJA2rWadEqQljkixpClTeySwz2HHiF9q/HIYgbAh15ukwDdlFsRt7VSq1w+4mvW
+ ZOnR932cHTb2WEd4DLpeuITfsfa7bjnks6HFvxt/GEJc0jFmGCFcfxTp4NyveA==
+Message-ID: <3d7c1428-5c47-4d54-b32c-d77f79a3b1ff@denx.de>
+Date: Fri, 25 Apr 2025 19:13:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] arm64: dts: imx8mn: Remove unreferenced
- clock-controller clocks in SPL DTs
+Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
+ fixed clocks
 To: Fabio Estevam <festevam@gmail.com>
-Cc: trini@konsulko.com, aford173@gmail.com, u-boot@lists.denx.de,
+Cc: Adam Ford <aford173@gmail.com>, trini@konsulko.com, lukma@denx.de,
+ seanga2@gmail.com, francesco.dolcini@toradex.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@denx.de>
-References: <20250425135220.1929510-1-festevam@gmail.com>
- <20250425135220.1929510-2-festevam@gmail.com>
+References: <20250417171101.2566447-1-festevam@gmail.com>
+ <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
+ <CAOMZO5C_9yojvxO1NoNjtTHxD85ZcGd_cK2t-rofyY_Zxm1xcg@mail.gmail.com>
+ <CAHCN7xLkDnLX5PHFNjXYn7AFXA5+S22aksgv62PpWpg80ZDQmA@mail.gmail.com>
+ <d81112ad-017b-491a-b517-de828dd30c25@denx.de>
+ <CAOMZO5CpQ-yv=8GhNv7=yjnA+uzzP9ZmB=P2d+xmhY1ktQJX9A@mail.gmail.com>
+ <28b4bb24-4c56-4fe3-ae9b-db43c63290b1@denx.de>
+ <CAOMZO5Cz1atyi0OSOrzUfSGiLb-9XdnyX-d8L7un5PuAdkBeBQ@mail.gmail.com>
+ <703a0297-24b2-42f3-9fa7-62a78e38f1a2@denx.de>
+ <CAOMZO5BitKDL2QRAzBuKK9rdfPsob_jdsYx86CRXJq8RjC8xoA@mail.gmail.com>
+ <CAOMZO5B6V4=5et8XpnN0-TkaCSLaiAf2sRw8C+_H97LeU17U+g@mail.gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250425135220.1929510-2-festevam@gmail.com>
+In-Reply-To: <CAOMZO5B6V4=5et8XpnN0-TkaCSLaiAf2sRw8C+_H97LeU17U+g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,40 +92,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/25/25 3:52 PM, Fabio Estevam wrote:
-> From: Marek Vasut <marex@denx.de>
+On 4/25/25 2:55 PM, Fabio Estevam wrote:
+> On Thu, Apr 24, 2025 at 11:35 PM Fabio Estevam <festevam@gmail.com> wrote:
 > 
-> Since 50cdd3f74af3 ("clk: imx: clk-imx8mn Fix nand and spi clock parent"),
-> drivers/clk/imx/clk-imx8mn.c clk_get_by_name(dev, "osc_24m", &osc_24m_clk)
-> fails with error -22 EINVAL in SPL. This is because clk_get_by_name() in the
-> end calls fdtdec_parse_phandle_with_args(), which iterates over all phandles
-> in clock-controller@30380000 { clocks = <&osc_32k>, <&osc_24m>, ... } node
-> 'clocks' property in an attempt to find the "osc_24m" clock, but fails to
-> resolve the &osc_32k phandle and returns with -EINVAL.
+>> I haven't had a chance to debug this issue yet.
 > 
-> Remove the clocks property phandles which cannot be resolved because their
-> matching nodes are removed from SPL DTs, so fdtdec_parse_phandle_with_args()
-> can resolve all the remaining valid nodes and successfully look up the osc_24m
-> clock.
+> I applied this debug patch:
 > 
-> Fixes: 50cdd3f74af3 ("clk: imx: clk-imx8mn Fix nand and spi clock parent")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> ---
->   arch/arm/dts/imx8mn-u-boot.dtsi | 4 ++++
->   1 file changed, 4 insertions(+)
+> --- a/drivers/mmc/fsl_esdhc_imx.c
+> +++ b/drivers/mmc/fsl_esdhc_imx.c
+> @@ -1539,6 +1539,7 @@ static int fsl_esdhc_probe(struct udevice *dev)
+>          }
 > 
-> diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
-> index 96a6df94c6c..bb0e5b4e31c 100644
-> --- a/arch/arm/dts/imx8mn-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mn-u-boot.dtsi
-> @@ -51,6 +51,10 @@
->   	/delete-property/ assigned-clocks;
->   	/delete-property/ assigned-clock-parents;
->   	/delete-property/ assigned-clock-rates;
-> +#ifdef CONFIG_SPL_BUILD
-> +	clocks = <&osc_24m>;
-> +	clock-names = "osc_24m";
-> +#endif
->   };
-See my comment on 4/4 .
+>          priv->sdhc_clk = clk_get_rate(&priv->per_clk);
+> +       printf("****** sdhc clk is %d\n", priv->sdhc_clk);
+>   #else
+>          init_clk_usdhc(dev_seq(dev));
+> 
+> With the top-of-tree U-Boot, SPL calculates the wrong sdhc_clk on the
+> imx8mm-evk:
+> 
+> U-Boot SPL 2025.04-01380-ga9820e12db18-dirty (Apr 25 2025 - 09:40:45 -0300)
+> No pmic
+> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+> SEC0:  RNG instantiated
+> Trying to boot from MMC1
+> ****** sdhc clk is 204522251
+
+Look at cmd/clk.c and import soc_clk_dump() into this driver, and then 
+call it here, so you would get the current topology of the clock tree. 
+What do you see there in the output ? Please include it here.
