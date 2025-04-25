@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22CC7C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 11:58:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5385C369D5
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 12:00:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C45A81E14;
-	Fri, 25 Apr 2025 13:58:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C73081E14;
+	Fri, 25 Apr 2025 14:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1745582284;
-	bh=k+0NMNrA79CVivUnIJ/dKX/gehsElEQtMKAIjTfN7lw=;
+	s=phobos-20191101; t=1745582404;
+	bh=gZc9VNjs3l6OsaXOAcgC+KLx8LzMu0XUpVOfa5XijiE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=aa1FKfO+UwdSkKTPMNXuJ3VNn81x+3WdlpYBP4to3hgIJfVV+oRV0z7d1h4Z8vcRw
-	 F//YgZWTxmIujlY2F8yMVrZe1ZQEycE/q1Z8QtvJBx2SvvbPyJEJynjXzunXd92iul
-	 0JeXa3KzBA05n/WpbjnCwDlyDiWsLus07aD5tJ81sfLvxA2tnbeAdW9sKBLw6lIYz6
-	 0OYYGf5Qd7XPnp0nZ3iAwkayeUpMh9B+AZJhjxSvmr6DdP0DnDXpQ6H9XpOLnAY9mD
-	 bowhdPoIuIcBWKH1242MTAMoFb4ySpvODplSbw0DhX1mwCf/4bnOynRV6D0PB3//xR
-	 uifFFdWiymEtw==
+	b=RnvwbmFHFIuKmOBsYbZnpWscCM/L3kPdHaB12igUKZglYunxP6+KdHwLYHpEpKl2T
+	 g6QMXJOmKMM4+P3F3QdyTlgXH9lhHUw/abeKrpwA1VO/d9hvdh6E2Npbnvs8IxuZ4P
+	 GIwRKZNHuLOdhhj+HDPgW+Ujy+HOGU0Lz2fduYuASwl1XahW7B6dahdXCbdQMUXSse
+	 82cpPXcULxe4qjSBAFb2egAQP2S3oeRgluvgigCvg2RyZ4fEEKbSYqMokndoC4Dj/m
+	 XS943NlaqYOXI4gJVrgE8e5On6u31Xgz3yHpqTnlVOje0m26U/ZFAfSHN6Syh1ygDs
+	 yIHa5UPO+7VDQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A8508205A; Fri, 25 Apr 2025 13:58:03 +0200 (CEST)
+ id 54A1C82076; Fri, 25 Apr 2025 14:00:03 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4158181E0F
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 13:58:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5678B81E0F
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 14:00:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Szy4BnNS"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="AJW2oh9e"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 21315102A8CB3; 
- Fri, 25 Apr 2025 13:57:58 +0200 (CEST)
+ with ESMTPSA id 48EA810273DAC; 
+ Fri, 25 Apr 2025 13:59:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1745582280;
+ t=1745582400;
  h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=k+0NMNrA79CVivUnIJ/dKX/gehsElEQtMKAIjTfN7lw=;
- b=Szy4BnNSb8biOLVYBr6NTJ904FWLdIhVEClLfxOxDTvHBhysPYlEdFHUpGOsCXhAJEKBew
- 8QOpatshD9A09hGkkpOjLsW8mPlYARlcQceMXYHgQ/KXSDyCSTdAIyuy2RyRC7EL2tn9sz
- F7Qf3xk5ResOi1a/L7+t14wb3OQq/1FzhEJeVC5GPKNfdM0YwxyIMM+lPBHd9c13nmE2D0
- ofwDIVcXYRgqpazKJQWV7Kh9EMBRZKRMZ10TTjQcZZ3z/6dAAiX8wctvYf5i0HtnDe2LTa
- HXKp1cnQYhwyG1SGgHTMqjzz25Dv108Mnl4/FaoMLMOg0HdWE4nIEcKto1pMyA==
-Message-ID: <94aebc95-b7cc-5b99-8257-8a42f65ff59e@denx.de>
-Date: Fri, 25 Apr 2025 13:58:33 +0200
+ bh=gZc9VNjs3l6OsaXOAcgC+KLx8LzMu0XUpVOfa5XijiE=;
+ b=AJW2oh9eH/nHR0feCGXii7ncwnp3EA9yztJtL4NbU4051CI0Yii8DSJnjeMOopkswRFszA
+ T6GjuCF+xwji+i7ceixpZ3CyJ/HK5baoezYqsCIse88b1fOzCqj81UtWwlD9ERfq7W5LiU
+ CIvuKgXfgoTYV/piHdvPxOjzbe1OV+OgobmKp4DfxCBHnWT5ZZimCpRjg3zct02+bsesEy
+ 8I5rue6ogHZ/HzC0QUPbGr6nFVZKCWQJZ/30XqXLHa2nDM6UgJ+7p4x7axTg/Tctw+1CmA
+ xl76Vn8toZ0yr4Haxiaa+q0Bn9YHd+smgg+0XNHkXGBbtLM3VxBiVybA/hVUfQ==
+Message-ID: <998d6b2a-cbb9-7134-7265-b22ff93b1a3b@denx.de>
+Date: Fri, 25 Apr 2025 14:00:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v1 3/3] siemens: capricorn: add ahab command and enable
- watchdog
+Subject: Re: [PATCH v1 2/3] siemens: capricorn: enable text based default
+ environment
 Content-Language: en-US
 To: Fabio Estevam <festevam@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
@@ -65,10 +65,10 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Anatolij Gustschin <agust@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <20250416090419.54781-1-hs@denx.de>
- <20250416090419.54781-4-hs@denx.de>
- <CAOMZO5Bo-W6M3Ax52QK8PzFYOb0=Vq2EmSd9SqN-sQZQ1b0QUA@mail.gmail.com>
+ <20250416090419.54781-3-hs@denx.de>
+ <CAOMZO5CPNY2tTF-dE9HMYBswLKX=idqkhw04M5YZ6sfPnHfcCA@mail.gmail.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOMZO5Bo-W6M3Ax52QK8PzFYOb0=Vq2EmSd9SqN-sQZQ1b0QUA@mail.gmail.com>
+In-Reply-To: <CAOMZO5CPNY2tTF-dE9HMYBswLKX=idqkhw04M5YZ6sfPnHfcCA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -91,37 +91,19 @@ X-Virus-Status: Clean
 
 Hello Fabio,
 
-On 25.04.25 13:47, Fabio Estevam wrote:
+On 25.04.25 13:43, Fabio Estevam wrote:
 > Hi Heiko,
 > 
-> On Wed, Apr 16, 2025 at 6:05 AM Heiko Schocher <hs@denx.de> wrote:
->>
->> From: Walter Schweizer <walter.schweizer@siemens.com>
->>
->> Handle watchdog in U-Boot to fix CI.
+> On Wed, Apr 16, 2025 at 6:04 AM Heiko Schocher <hs@denx.de> wrote:
 > 
-> This commit log must be improved.
-
-Indeed!
-
-> The watchdog's purpose inside the imx8qxp is not to make CI happy :-)
-
-:-P
-
+>> +initrd_addr=0x83100000
+>> +initrd_high=0xffffffffffffffff
+>> +ipaddr=192.168.251.1
 > 
->> @@ -16,6 +16,7 @@ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
->>   CONFIG_SYS_MMC_ENV_PART=2
->>
->>   CONFIG_DM_GPIO=y
->> +CONFIG_AHAB_BOOT=y
+> Please don't hardcode the IP address.
 > 
-> What do you think about this option? It seems unrelated to watchdog.
 
-Yep, as in subject the patch enables AHAB and WATCHDOG...
-
-I will improve the commit message.
-
-Thanks for the review!
+yep, of course, will remove it.
 
 bye,
 Heiko
