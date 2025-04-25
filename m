@@ -4,62 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F95FC369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 08:20:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE907C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 08:32:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 969B5810EB;
-	Fri, 25 Apr 2025 10:20:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 220D9809D4;
+	Fri, 25 Apr 2025 10:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E59881E14; Fri, 25 Apr 2025 10:20:55 +0200 (CEST)
+ id 59AA8810EB; Fri, 25 Apr 2025 10:32:45 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51BCD8059A
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 10:20:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 006938059A
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 10:32:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 53P8Juj7080687
+ by Atcsqr.andestech.com with ESMTPS id 53P8WTdT095019
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Fri, 25 Apr 2025 16:19:56 +0800 (+08)
+ Fri, 25 Apr 2025 16:32:29 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 25 Apr
- 2025 16:19:56 +0800
-Date: Fri, 25 Apr 2025 16:19:50 +0800
+ 2025 16:32:29 +0800
+Date: Fri, 25 Apr 2025 16:32:26 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: Yao Zi <ziyao@disroot.org>
-CC: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>, Bin Meng
- <bmeng.cn@gmail.com>, Paul Walmsley <paul.walmsley@sifive.com>, "Palmer
- Dabbelt" <palmer@dabbelt.com>,
- Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>,
- Green Wan <green.wan@sifive.com>, Minda Chen <minda.chen@starfivetech.com>,
- Simon Glass <sjg@chromium.org>, "Angelo
- Dureghello" <angelo@kernel-space.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 1/4] riscv: lib: Add a default implementation of
- board_fdt_blob_setup
-Message-ID: <aAtFpueAzqzM4wlV@swlinux02>
-References: <20250307131344.43762-1-ziyao@disroot.org>
- <20250307131344.43762-2-ziyao@disroot.org>
+To: E Shattow <e@freeshell.de>
+CC: Minda Chen <minda.chen@starfivetech.com>, Hal Feng
+ <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1] board: starfive: visionfive2: Order board detection
+ logic to match config
+Message-ID: <aAtImll9tZbxlH8k@swlinux02>
+References: <20250422064925.635394-1-e@freeshell.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250307131344.43762-2-ziyao@disroot.org>
+In-Reply-To: <20250422064925.635394-1-e@freeshell.de>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 53P8Juj7080687
+X-MAIL: Atcsqr.andestech.com 53P8WTdT095019
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,62 +69,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yao,
-
-On Fri, Mar 07, 2025 at 01:13:41PM +0000, Yao Zi wrote:
-> It's common for S-Mode proper U-Boot to retrieve a FDT blob along with
-> taking control from SBI firmware. Add a weak version of
-> board_fdt_blob_setup to make use of it by default, avoiding copy-pasting
-> similar functions among boards.
+On Mon, Apr 21, 2025 at 11:49:17PM -0700, E Shattow wrote:
+> Refactor inside-out EEPROM-checking logic to better match the board-seeking
+> callback and ordered list of targets from starfive_visionfive2_config since
+> the JH7110 OF_UPSTREAM migration.
 > 
-> Signed-off-by: Yao Zi <ziyao@disroot.org>
-> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+> Signed-off-by: E Shattow <e@freeshell.de>
 > ---
->  arch/riscv/lib/Makefile |  1 +
->  arch/riscv/lib/board.c  | 19 +++++++++++++++++++
->  2 files changed, 20 insertions(+)
->  create mode 100644 arch/riscv/lib/board.c
-> 
-> diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
-> index 268116f3757..b33f9c646dd 100644
-> --- a/arch/riscv/lib/Makefile
-> +++ b/arch/riscv/lib/Makefile
-> @@ -27,6 +27,7 @@ obj-$(CONFIG_$(XPL_)SMP) += smp.o
->  obj-$(CONFIG_XPL_BUILD)	+= spl.o
->  obj-y   += fdt_fixup.o
->  obj-$(CONFIG_$(SPL)CMD_BDI) += bdinfo.o
-> +obj-$(CONFIG_OF_BOARD) += board.o
->  
->  # For building EFI apps
->  CFLAGS_NON_EFI := -fstack-protector-strong
-> diff --git a/arch/riscv/lib/board.c b/arch/riscv/lib/board.c
-> new file mode 100644
-> index 00000000000..1630355b2b1
-> --- /dev/null
-> +++ b/arch/riscv/lib/board.c
-> @@ -0,0 +1,19 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * RISC-V-specific handling of firmware FDT
-> + */
-> +
-> +#include <asm/global_data.h>
-> +#include <linux/errno.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +__weak int board_fdt_blob_setup(void **fdtp)
-> +{
-> +	if (IS_ENABLED(CONFIG_XPL_BUILD) || !gd->arch.firmware_fdt_addr)
-> +		return -EEXIST;
-> +
-> +	*fdtp = (void *)gd->arch.firmware_fdt_addr;
+>  board/starfive/visionfive2/spl.c | 40 ++++++++++++++------------------
+>  1 file changed, 18 insertions(+), 22 deletions(-)
 
-I could fix the 'CONFIG_XPL_BUILD' check and add casting when merging.
-Thanks for the patch!
-
-Best regards,
-Leo
-> +
-> +	return 0;
-> +}
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
