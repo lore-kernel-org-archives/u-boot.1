@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75607C369D1
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 02:37:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D142C369AB
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 03:00:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D31688082A;
-	Fri, 25 Apr 2025 04:37:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 671598056A;
+	Fri, 25 Apr 2025 05:00:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DYl/lHFA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PquAk/PC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3292E810EB; Fri, 25 Apr 2025 04:37:26 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 2195780194; Fri, 25 Apr 2025 05:00:15 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4F308059A
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 04:37:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36A6F80194
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 05:00:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-b12b984e791so1534375a12.2
- for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 19:37:23 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-3014678689aso1538670a91.0
+ for <u-boot@lists.denx.de>; Thu, 24 Apr 2025 20:00:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745548642; x=1746153442; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1745550011; x=1746154811; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AsX/36X2+5pqUYiMythjZEqOjmPD8juTe+CHkYj4oa4=;
- b=DYl/lHFASgfXlqM0wzR63Js+pXLZ66v0sh8GkIPRW+lQspcyoUSSt/pMrLZqF+edQm
- uHG0IvX+JIwqXuP2MMB4fd86oXxTJpPV5syDc7/Z9OXQmZ90G8BG7JqGRXsB4qJgrnMm
- ATTDIqYpk831TXAGj0aeIuAGY58ukagnMjTFV2dCNfsXYKyaANyGQXvPT3JyP8+g7fiF
- AuIHIaOG33RAhHRwJZckyAr/1M1DPFewNJDprdwUDsnWWmr6/t/rfYMaCYVzjKnSBId6
- sq7lnet43lyFRRV80cKxt1U3TeWrv26w2NbIIng4FzJZQhhA7rdc/0vFI38gimqiBjvr
- SfGg==
+ bh=ooE2qrjeJwoouvfIoC2apSl/yg/qiqmR6yRIFip+HlQ=;
+ b=PquAk/PC3oVupDMCaGgBlmFY9MVw8nFmUFCEPXbZfEyCmWjJMJXbo5a22eMYpZ2J0v
+ CS2ZBvGxkTyze2S2qTN5JDNKCenViq0tnB++t9JSpx9jdxwIS7V0hm1+b1F60JGAUXvI
+ v70S7+Aeh1QED212m1+3V5uj6shIJXHiWeNFDb93p2zN8+NAXKtd8gvxsVjx5RRinnY8
+ c7ooZPsZhcfYlSpeE2NOGIRY84N24Izt76irR+KvWlDqe2ABaw3AhWeUgeWG7kIJhrI6
+ cKaIkRyIMCR8A8E7I5Cnd6qR1eYMypPE9hG2Q/0OJDL5uFyPJiIuoqzTAk1+Pd/7dPng
+ 52Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745548642; x=1746153442;
+ d=1e100.net; s=20230601; t=1745550011; x=1746154811;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AsX/36X2+5pqUYiMythjZEqOjmPD8juTe+CHkYj4oa4=;
- b=oFnQ08Cy7mWUE+mND/7T024N5yJI5/Ir9FDNtfYFNMtlueZL0tC06H2/1VIxAd5GLh
- LGLf6M3yCWPqZj/HMwK0ie/gVEnc27RH9Y3ssWwqxO4UtIGSFZD+JufIKul+hZDhrLD0
- I3lA6vcQc+uvM+Y0H5yKmjRZ2boo+RRv3knt3iAY8eVIi60p54/Q/+rB8UudMaxXd7UV
- CqAjW2TVqq26SO72DmV6iK/ILIhNn0NGPhBZWfuwJofG+mWMS6TqClmozTw/A4J4rO0J
- Ur4HFDFpePNWGOIzhJHFrUwVy8EvHXuHFxA/lN8aO3gK3Mf+hnivfegnfcUh47CLoORM
- CdGA==
+ bh=ooE2qrjeJwoouvfIoC2apSl/yg/qiqmR6yRIFip+HlQ=;
+ b=TUvK2IkMC8+m/FfrmsArKxG53N1y6n0i1OaBy27chq3SHhyjtZiEFQHxpckW42w7Ef
+ uyG4cv1uW8XGj6zffr8+erUZolUtSk9ZjJRoWwBBEAE9YE35uo+YZt8byBN1+NHSrxpb
+ yMA2FCQz432ztgjjtRWEF8RI5+Zogkpah5TTiZ4CBKnNeXPxdrdbS9wXDZyvZ9L5X6cX
+ IKjRSJF2EKnxa0xrb6UFrpNdJyfK7h8SZRWWWpjDrgxfbtybtzzasYrGo4yGLcGFfMmf
+ cZciRcYePWH+t9M7vXUHu3b1JPmnScYv4qU3BADLwQ2gdcpVoNQ4pWL858q5wHp/Gtue
+ +Zpw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWa3H13fbfSZ/Vp+RQaVyIvP/1hJ9ZIupPjt2qZCN5fFC5Hle6yM6dxWpNzKTuF54UAuDK+vfE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzjHPa1FyQuGK7rF2EddRvNEcE0Y5cUYk91+0EV8DqsZp55T2Wf
- CUHZqd43RySqU3x2Bl3L90X+MM1q7j71kpfvVmjJtpihVsx5gV4YdpJE9DrhBNwg6PH8DUdKPKq
- xoIDlHcssYq1FWqF0J0MWCPplVL0=
-X-Gm-Gg: ASbGncu6XzZwP0rSIxjq6aZdDG3LnPQjfP4hOUpPLa943mDa8cO/o1LFDs1bVy+T/Vt
- ekvV9PEJ6Y4LGkw0qrL/dxMFLGsGzY+pPeJ0VppR5zlQV2aYLRlEGDY/vqazwbsM1LXTRKaFYyg
- fISCnyJizc6KnKzM+VmrMOyQ==
-X-Google-Smtp-Source: AGHT+IGjiYUMCI7omSnxU6i/RaA3SuASmV9SY1rUkGgHiRpiEnOD6HAZ9GywQ7bDl+0U8bR6cOSMbhKgbLkjUYOR98g=
-X-Received: by 2002:a17:90b:586d:b0:2ff:62f3:5b31 with SMTP id
- 98e67ed59e1d1-309f7ebf8c4mr1088937a91.29.1745548642405; Thu, 24 Apr 2025
- 19:37:22 -0700 (PDT)
+ AJvYcCVE6zGMQGy/HxfYuPWCuXSHrF+1EpPSKL6yNlb+wVwSoEh+CZUNMXTfIVARSzIz6AzHNWgK9kM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvkltdQ2zRk0v3jCyyeiwL6PZBjoiJOUPEw1MQdB47TbEFgIUp
+ +KZ64vevMy/FzJTnwIJ8Pmwgo80XqE61Fc2HaAHYN2D8q1NHoZ518JhPPBv6PtayZxt9cSFdIcc
+ tw8GZWIfb0L+wWLG8Wl9VvcM2fIE=
+X-Gm-Gg: ASbGncsHsa5eXjG/QBTnTKgxL3RA0lY/OYF0pI4kHuNn+u6ImzMqkbr4OBpYqJ4OOui
+ 4Y/jmBzkb0HJY2Aub2oQEPrUN5CjAMWI05uzIsMKN6jdS7hOof0z0whTD5glvC1Ub/fpTGU3ikE
+ 7cnTLOxroZbW6iTuwcNsEVoA==
+X-Google-Smtp-Source: AGHT+IF9RgGInkfVQon2V+qOEJTwN89er3KwCqMF3V4I/X8//ZzG/1CGK4BIKuinCbD4/iT1nA0BMD21QUWZZ43ZwWU=
+X-Received: by 2002:a17:90b:57c8:b0:2f7:4cce:ae37 with SMTP id
+ 98e67ed59e1d1-309f7dfdd99mr1423707a91.18.1745550010585; Thu, 24 Apr 2025
+ 20:00:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250417171101.2566447-1-festevam@gmail.com>
  <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
@@ -76,11 +76,12 @@ References: <20250417171101.2566447-1-festevam@gmail.com>
  <CAOMZO5Cz1atyi0OSOrzUfSGiLb-9XdnyX-d8L7un5PuAdkBeBQ@mail.gmail.com>
  <703a0297-24b2-42f3-9fa7-62a78e38f1a2@denx.de>
  <CAOMZO5BitKDL2QRAzBuKK9rdfPsob_jdsYx86CRXJq8RjC8xoA@mail.gmail.com>
-In-Reply-To: <CAOMZO5BitKDL2QRAzBuKK9rdfPsob_jdsYx86CRXJq8RjC8xoA@mail.gmail.com>
+ <CAHCN7xK_6QdG91dC_FnZbvnZTONYKKt2qSeLb4ruORw4epG+0A@mail.gmail.com>
+In-Reply-To: <CAHCN7xK_6QdG91dC_FnZbvnZTONYKKt2qSeLb4ruORw4epG+0A@mail.gmail.com>
 From: Adam Ford <aford173@gmail.com>
-Date: Thu, 24 Apr 2025 21:37:11 -0500
-X-Gm-Features: ATxdqUF82WBUicfUvLA7iHclfTqIE6kiNx_AUk_svVUmbMkzVLzRiLC6csxpPs4
-Message-ID: <CAHCN7xK_6QdG91dC_FnZbvnZTONYKKt2qSeLb4ruORw4epG+0A@mail.gmail.com>
+Date: Thu, 24 Apr 2025 21:59:59 -0500
+X-Gm-Features: ATxdqUE-dIiCDkJ1zOuobkh4rkZ3xRGWNH2aSZ-5TEi9XNtKyiF5wpbrrctu_fk
+Message-ID: <CAHCN7xKERpu1woTG_3RW7uAweegGe_xPFOCKc+jBCoPnAGcziQ@mail.gmail.com>
 Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
  fixed clocks
 To: Fabio Estevam <festevam@gmail.com>
@@ -105,29 +106,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 24, 2025 at 9:35=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> On Thu, Apr 24, 2025 at 11:20=E2=80=AFPM Marek Vasut <marex@denx.de> wrot=
+On Thu, Apr 24, 2025 at 9:37=E2=80=AFPM Adam Ford <aford173@gmail.com> wrot=
 e:
 >
-> > Probably some timeout in the esdhc driver, maybe some clock are not
-> > enabled ? I don't see it on the MX8MP.
->
-> Same here. I didn't see this error on an imx8mp-evk.
-
-If memory serves, I thought SPL used the Boot ROM on Plus and Nano to
-load U-Boot where the Mini has an older boot ROM and required more
-driver initialization.
-
-I could be wrong.  I'll try to test my Mini this weekend.
-
-adam
->
+> On Thu, Apr 24, 2025 at 9:35=E2=80=AFPM Fabio Estevam <festevam@gmail.com=
+> wrote:
 > >
-> > Did you already apply
-> > Re: [PATCH] clk: imx: Finish converting clock-osc-24 back to osc_24
+> > On Thu, Apr 24, 2025 at 11:20=E2=80=AFPM Marek Vasut <marex@denx.de> wr=
+ote:
+> >
+> > > Probably some timeout in the esdhc driver, maybe some clock are not
+> > > enabled ? I don't see it on the MX8MP.
+> >
+> > Same here. I didn't see this error on an imx8mp-evk.
 >
-> Yes, I applied this one locally, but it didn't make a difference.
+> If memory serves, I thought SPL used the Boot ROM on Plus and Nano to
+> load U-Boot where the Mini has an older boot ROM and required more
+> driver initialization.
 >
-> I haven't had a chance to debug this issue yet.
+> I could be wrong.  I'll try to test my Mini this weekend.
+
+I pulled my mini out.  With Marek's clk.diff file applied on top of
+U-Boot next, it boots quickly without delay, and I don't get a PMIC
+error.  I don't have an EVK at my home lab to test.
+
+
+U-Boot SPL 2025.04-rc5-00835-g61128a5b704d-dirty (Apr 24 2025 - 21:53:22 -0=
+500)
+WDT:   Not starting watchdog@30280000
+Trying to boot from MMC1
+NOTICE:  Do not release JR0 to NS as it can be used by HAB
+NOTICE:  BL31: v2.10.14(release):lts-v2.10.14-380-gd7da75fef
+NOTICE:  BL31: Built : 20:12:47, Apr  3 2025
+
+
+U-Boot 2025.04-rc5-00835-g61128a5b704d-dirty (Apr 24 2025 - 21:53:22 -0500)
+
+CPU:   NXP i.MX8MMQ Rev1.0 A53 at 1200 MHz
+CPU:   Industrial temperature grade (-40C to 105C) at 30C
+Model: Beacon EmbeddedWorks i.MX8M Mini Development Kit
+DRAM:  2 GiB
+Core:  225 devices, 26 uclasses, devicetree: separate
+WDT:   Not starting watchdog@30280000
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... Reading from MMC(2)... OK
+In:    serial@30890000
+Out:   serial@30890000
+Err:   serial@30890000
+SEC0:  RNG instantiated
+Net:   eth0: ethernet@30be0000
+Hit any key to stop autoboot:  0
+u-boot=3D>
+
+
+
+>
+> adam
+> >
+> > >
+> > > Did you already apply
+> > > Re: [PATCH] clk: imx: Finish converting clock-osc-24 back to osc_24
+> >
+> > Yes, I applied this one locally, but it didn't make a difference.
+> >
+> > I haven't had a chance to debug this issue yet.
