@@ -4,79 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5299AC369D3
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D80A2C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 17:31:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71D7D82A0A;
-	Fri, 25 Apr 2025 19:16:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 281D6829B8;
+	Fri, 25 Apr 2025 19:31:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1745601409;
-	bh=0f6Czl41GpFZ9zSBxKsVpH6rPCFUT1+GJa2qZHFgrkM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=w04vvwkZYI0lmESVnaWqpOiHw9KrC4A8HVJ3sQu4LdUPXyiMvkNCo5FGIfUqmDlqA
-	 pmEzP/ZjT0vEMEYCWFY9qRnwLWh5cDDhl8fQNTEADlVdHiMi7rT8WJIa8d94EGMzX5
-	 H5QAA2SCMKgzwqrw/9roM4JIhm44l7xtnKqo9XEPFdlYVtuWz26S61B2EfaOGXtxBO
-	 4XzGJLwVVEImHEi8Xz5QSC/QVM221Ev+a6gmhnvspWbwlQfasXT9tgMDWSM6AAVZd2
-	 py4UFGRte8t6VWxD7cyLeLtgijjc5aaY6gCf5YrBa1OWvQrIELH6JU0i82P2qXdli1
-	 9SMwsdDUm91Tw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B40C828BC; Fri, 25 Apr 2025 19:16:47 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A08D2828BC
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:16:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="fYRydtq5"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 52EEF10275AD5; 
- Fri, 25 Apr 2025 19:16:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1745601405; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=0f6Czl41GpFZ9zSBxKsVpH6rPCFUT1+GJa2qZHFgrkM=;
- b=fYRydtq54QBugFaa8wZZXZjxoXFXrsCgFRHDCykI7v9XhhEGF5q3pPU0urc9cI5Xn3Zaqj
- lg6UFxGClBpK3P+kRV4u7CrBqU2jal4uvKc9zgbWgST6nIeyKbRlHtSeD8RjUphDTmDumL
- 2V3jLvp1h/zuXfyo5eXlxxVRJUupJc6zetvsiRk1UJKFbQoe2YGYAezYyh813GTeJMl4rj
- ct5qLQ3fkzWOApT00Fpw8ID+CvCYuHNDdwQ0S7Cl3wg0Kouzsqw+hQGMp+6ske+j/OCeOd
- dlkFKys7QvAJgFJcrJ9Ynxs7XHlpx0jVbKcdYrZdmTmElSdNjJpJGfuDHqe1KA==
-Message-ID: <26892d20-b71b-4e05-96c8-66c4120fb003@denx.de>
-Date: Fri, 25 Apr 2025 19:14:48 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C59mkOGR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id F392C829F5; Fri, 25 Apr 2025 19:31:30 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EC46B82977
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 19:31:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PHVNS52848241
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 25 Apr 2025 12:31:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745602283;
+ bh=lP6XbW6EET/8KEerNTWOCzWTU95/HYrZ3yXV+HL9veM=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=C59mkOGRKX+R89DMQjstfgpxUXREyTDBmhwWmdtom1B0DcHTzIS7Hi9QbJIch8gar
+ wyycy6JM+iGlfvmyruUhwKTrqz6tT832AOWAUPWzrOtFle4dtprWvcSgfPNXJiVox9
+ YoihgLlTumOSwo3A6vq/eiO95odP1UmoPbNA4bJA=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PHVNnn007630
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 25 Apr 2025 12:31:23 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
+ Apr 2025 12:31:23 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 25 Apr 2025 12:31:23 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PHVN6w110066;
+ Fri, 25 Apr 2025 12:31:23 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Neha Malcom Francis <n-francis@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>
+CC: Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Jonathan
+ Humphreys <j-humphreys@ti.com>, Andrew Davis <afd@ti.com>,
+ <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
+Subject: [PATCH 5/9] beagle: beagley-ai: env: Enable DFU env options
+Date: Fri, 25 Apr 2025 12:31:15 -0500
+Message-ID: <20250425173120.141503-6-nm@ti.com>
+X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20250425173120.141503-1-nm@ti.com>
+References: <20250425173120.141503-1-nm@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] clk: fixed-rate: Use "clock-output-names" to name
- fixed clocks
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Adam Ford <aford173@gmail.com>, trini@konsulko.com, lukma@denx.de,
- seanga2@gmail.com, francesco.dolcini@toradex.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-References: <20250417171101.2566447-1-festevam@gmail.com>
- <5eb55cce-28b0-436a-85c4-dcf86e6c6554@denx.de>
- <CAOMZO5C_9yojvxO1NoNjtTHxD85ZcGd_cK2t-rofyY_Zxm1xcg@mail.gmail.com>
- <CAHCN7xLkDnLX5PHFNjXYn7AFXA5+S22aksgv62PpWpg80ZDQmA@mail.gmail.com>
- <d81112ad-017b-491a-b517-de828dd30c25@denx.de>
- <CAOMZO5CpQ-yv=8GhNv7=yjnA+uzzP9ZmB=P2d+xmhY1ktQJX9A@mail.gmail.com>
- <28b4bb24-4c56-4fe3-ae9b-db43c63290b1@denx.de>
- <CAOMZO5Cz1atyi0OSOrzUfSGiLb-9XdnyX-d8L7un5PuAdkBeBQ@mail.gmail.com>
- <703a0297-24b2-42f3-9fa7-62a78e38f1a2@denx.de>
- <CAOMZO5BitKDL2QRAzBuKK9rdfPsob_jdsYx86CRXJq8RjC8xoA@mail.gmail.com>
- <CAOMZO5B6V4=5et8XpnN0-TkaCSLaiAf2sRw8C+_H97LeU17U+g@mail.gmail.com>
- <CAOMZO5B4_7bZ_+evgWUsEHtOhnhWtdNi4qavCAyes=91W9qjPg@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOMZO5B4_7bZ_+evgWUsEHtOhnhWtdNi4qavCAyes=91W9qjPg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,25 +83,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/25/25 3:55 PM, Fabio Estevam wrote:
-> On Fri, Apr 25, 2025 at 9:55 AM Fabio Estevam <festevam@gmail.com> wrote:
-> 
->> With the top-of-tree U-Boot, SPL calculates the wrong sdhc_clk on the
->> imx8mm-evk:
->>
->> U-Boot SPL 2025.04-01380-ga9820e12db18-dirty (Apr 25 2025 - 09:40:45 -0300)
->> No pmic
->> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
->> SEC0:  RNG instantiated
->> Trying to boot from MMC1
->> ****** sdhc clk is 204522251
-> 
-> I have just sent a series that fixes this problem.
-> 
-> It contains some clock patches from Marek that I missed applying
-> earlier, as well as an IMX8MM SPL OSC24 M clock fix.
-> 
-> Marek, care to submit your clk.diff patch formally so that the i.MX8MP
-> USB functionality could be restored?
-If it is OK with you, send it as part of the fixup series, else I will 
-send it sometimes next week.
+Just enable dfu options, We have MMC and RAM as options here.
+
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Changes Since v2:
+- Dropped the dfu_alt_info override option, let the users select it
+- Updated commit message to the effect.
+
+V2: https://lore.kernel.org/r/20250418193943.953952-6-nm@ti.com
+
+ board/beagle/beagley-ai/beagley-ai.env | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/board/beagle/beagley-ai/beagley-ai.env b/board/beagle/beagley-ai/beagley-ai.env
+index 16a03acfca3c..70afbf9763f9 100644
+--- a/board/beagle/beagley-ai/beagley-ai.env
++++ b/board/beagle/beagley-ai/beagley-ai.env
+@@ -1,5 +1,6 @@
+ #include <env/ti/ti_common.env>
+ #include <env/ti/mmc.env>
++#include <env/ti/k3_dfu.env>
+ 
+ #if CONFIG_CMD_REMOTEPROC
+ #include <env/ti/k3_rproc.env>
+-- 
+2.47.0
+
