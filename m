@@ -4,76 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5098CC369D3
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E107FC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:38:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9BB782757;
-	Fri, 25 Apr 2025 16:36:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FFA982063;
+	Fri, 25 Apr 2025 16:38:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G5LT9Z2L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RUh/STLe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC976828E1; Fri, 25 Apr 2025 16:36:30 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 9AB128212B; Fri, 25 Apr 2025 16:37:59 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F8C582757
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:36:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0125481F6B
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:37:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac345bd8e13so334478466b.0
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:36:28 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72bd5f25ea6so657196a34.1
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745591788; x=1746196588; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lfW3c6rfuysFW8hrHArQ4lVPBqbKyBADvrphRr+jg5o=;
- b=G5LT9Z2L1cJeNBsSLEMeFFuahOoYsacqz2AG3VHL0BkqOOZrX1u3TPbj3KTIv1CuMk
- TjMj7WRY4a+MGnI+33lVtT3+9cyxjU+oviuaqXfg/Cmy0EzuXaCZLlnaDuGnKe+QBnHP
- 8WFt9tjLfFpQbwI8DLMY/82EQMyYlB85a7XY4=
+ d=konsulko.com; s=google; t=1745591876; x=1746196676; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FELKzPZGn8K3eNXJpehfb6uMdKef97+paosXsd0SpxU=;
+ b=RUh/STLej4f+sGRS+6qYUUSMJhSE8nU9TZgCmL7xw/fEKb56n4jctB1OaoK+zrdxEs
+ anrkYb5yYi3HPrC4fYeVLy92ybqxUPrDk+kkotHSiXoE6Lrh/+RXYJuK8rMWAnB3TVJO
+ TzmDGkzd4sEMzcVXgO7m5b9uWsRovwv23VtLY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745591788; x=1746196588;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lfW3c6rfuysFW8hrHArQ4lVPBqbKyBADvrphRr+jg5o=;
- b=APpxC4Nynpu9n45dhPDiUiXb8cKv2LbnSz4/SdEPl4hqcz6Tup3SS9Ar9/fvCi6hvl
- U4HYXIlXLo/Yn7Pe9lBB+FzsC+xvqu4tD4JLxRp8scUy6ACZ3vd+rvRruaaIEbk9cGbM
- juJB8b8x13B6M7T7lnx7Ea7/a5rMfZXfebqnrO+a6WRO07KefxNf0ZkUZDfSoqZ13wRP
- j7JZafvjTeKc+AD5CF2xSOedu9aKGkx78IeDtJEGtHBWnpKmSTwFdEXCCZsBhbfD87TY
- fBbbeGPNGj5NS6qxYoySzq44KpHAcRNLUsusAp3qzr6MO4cTbzH3JM5vwgayAoS0XTxa
- /k4g==
+ d=1e100.net; s=20230601; t=1745591876; x=1746196676;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FELKzPZGn8K3eNXJpehfb6uMdKef97+paosXsd0SpxU=;
+ b=PFAzaxCZiSIWvNhZvG4ZWAxT2Bpfmg+wokTWxw5nR5lqAj8UDH+YC+eYdPu3X5hBrM
+ TIbtHdvvcOqEB5cANeTECsmGYz4SDeaOoV40cCkxzxiRX210i5kB09AAoyZai8DdjQ97
+ qBf70wF+ayIh51Dc0TKCa4dH3pzarfHQ6q8P/1SUnTQh+vTrIpEf7WjqGkGOs/PuSTnI
+ yNOaFRtlbbTvoBONbsAgAxR7ZNrqcVF/tTo7UJdc772NQTA3J6irSpA0/dWaJSFr9IHC
+ z+7c+xyGNaugnsi4+JtwauSDHns8CNjGNvqYhUxEXWNVl4V4YSlTOUy+p++uVvNsk3Pa
+ by/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYSMna2U63TwYu/H9IhdyuF15nXay9gWUGALWJ7khHNWc4Tk9VeqToJHPlk0c7l8ktrmS4/ZI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUJQvLw6fwYfD+62a7cPgFWJebXG0Nx7RTpye+w6LAp5/DuY/s
- 5vIH1zMdp/ba7779M89ODIj5qJWsNgMw3nEuG/l1xwE3pWPEj+rczGxwr9YN3A8gY+ZyA7Lce6x
- IaFCM7vkbbiqubseycHWj4Mxck7M2NKWfaNOpzar//LvFnKw=
-X-Gm-Gg: ASbGncss1wKgOBnjBEHDZ5qVowKOJyjV7XN1v7boOsX+e1rHqUFrQKkliSDI98b0FR5
- zW+gRRGYLknBojufdl3N69CRA0EBqiPYcm3CJn+UgvbWHDa9lEJg49InZEgWM+Iknxu7P5w7a4v
- yOW0uWZzvGsG4EM4AYT2iCmlSks3JEwfDfQQ==
-X-Google-Smtp-Source: AGHT+IFxpKzETpSnvGsdX9c9e+v4iLIFwWMU6ub1isZ36NaZYbzFbLgk4fAZbm4Q/obxmKizHcgIFbAwH61+tjfeHKk=
-X-Received: by 2002:a17:907:9409:b0:ac3:446d:142 with SMTP id
- a640c23a62f3a-ace7104eb61mr273007466b.2.1745591787761; Fri, 25 Apr 2025
- 07:36:27 -0700 (PDT)
+ AJvYcCWCEujFE56a3xX5k04U6ISio0YRdEvRcgBcrYSmNjs+L6abNMix9RybQGaof0KocE/xtO30+8E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0LT/9H++wwVPoe1QX6gKkocfTaMtCN6hs7T3Wrw8lm8i2UfQ5
+ WkFXzKfDHZb58I96KLbw8vfpnOvQkPx1/M91SY48qLWQG7RNVlHlheWCrHcBoGs=
+X-Gm-Gg: ASbGncvA3HDedL2GB4ZUykTQ8XAOpOU3twNh7mkzQlEKwbG/DWL3x2e0p62ByLKIPjT
+ bG3s/NeLYzB+CHgwcAfrOYt0mbMsWYRmwVOrTYMgl6Q66fV0EPI6GIhXYh80AMB5ceuiq9SJHUE
+ FT/odCkJacN1jJmylyxgNxJJncKISMHELn7hEjqxUOWMhD4P/IbBoTD0IBuVOGYygXT16cInbDW
+ 6DAmnpY3AV2Q41NR06ILI9O/4A3vbFGdwibUC9joZB7OBHYO+4DyrnDYk5fo8zM4W0hPQnYxMdV
+ AZh0GRel+fUWGCt1M6N36aIdT51MfKqJpiAxSNs0gh8tc9LSQP4aSvvt33p8rHWe1GI4NELtABl
+ fA3Cfb9DXBWHW
+X-Google-Smtp-Source: AGHT+IGFjxLo6XUXRIz+PBg5xS8ib32g633e2ASDAy/gjiJ8DslcA1deKJ+yi8qnt0o24ZQW+jCW6w==
+X-Received: by 2002:a05:6830:3919:b0:727:345d:3b72 with SMTP id
+ 46e09a7af769-7305c7c43b7mr1523562a34.16.1745591875530; 
+ Fri, 25 Apr 2025 07:37:55 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7304f1a2bcdsm693719a34.19.2025.04.25.07.37.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Apr 2025 07:37:54 -0700 (PDT)
+Date: Fri, 25 Apr 2025 08:37:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Martin Schwan <M.Schwan@phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+Message-ID: <20250425143752.GU5495@bill-the-cat>
+References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
+ <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
+ <CAFLszTinU=6v+3OyaH0pp8snYm9BgfVrU_+35x2Az7fVs_CfYw@mail.gmail.com>
+ <4aef8b9ffd41d4e36550806f4688fc18dbddc500.camel@phytec.de>
+ <CAFLszTjPHBw-F0EkQJnT4TOsxdYzGH5EtRBaeRCoKGxQQ_cw4g@mail.gmail.com>
+ <20250424184923.GM5495@bill-the-cat>
+ <CAFLszThPcJjhBVLvz=EkdeEP1K948cC=LyZhBk_Upk3iSWXCig@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAEyMn7b90ybqMOgb4ViAaQVqvTuma-HyYkwEvSVHfowfvEd3tA@mail.gmail.com>
- <20250424174539.GL5495@bill-the-cat>
- <CAEyMn7asyKz8MnXUBZqtuFehR4Vk8j_5ysRCq5=H3EqiL36aMw@mail.gmail.com>
- <CAEyMn7bb+9X3UhWuwd=zgnsUPf4naRi_WMFPU_i8LQbUshcb5g@mail.gmail.com>
-In-Reply-To: <CAEyMn7bb+9X3UhWuwd=zgnsUPf4naRi_WMFPU_i8LQbUshcb5g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 25 Apr 2025 08:36:16 -0600
-X-Gm-Features: ATxdqUGIX0p64H2iqP1THvf4dyDZ0rkmeRdx4h2-ycrA9HH7YHHXN70fq1crpno
-Message-ID: <CAFLszTg=gLDydqc-US7xwhR=yRw1ueRhSQOXDUNZ=2bnxs_=5w@mail.gmail.com>
-Subject: Re: bootflow: extlinux and menu
-To: Heiko Thiery <heiko.thiery@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JqjOt1Cst6pAJoWH"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThPcJjhBVLvz=EkdeEP1K948cC=LyZhBk_Upk3iSWXCig@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,144 +105,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
 
-On Fri, 25 Apr 2025 at 02:20, Heiko Thiery <heiko.thiery@gmail.com> wrote:
->
+--JqjOt1Cst6pAJoWH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Apr 25, 2025 at 08:35:52AM -0600, Simon Glass wrote:
 > Hi Tom,
->
-> Am Do., 24. Apr. 2025 um 19:49 Uhr schrieb Heiko Thiery
-> <heiko.thiery@gmail.com>:
+>=20
+> On Thu, 24 Apr 2025 at 12:49, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Hi,
-> >
-> > Am Do., 24. Apr. 2025 um 19:45 Uhr schrieb Tom Rini <trini@konsulko.com>:
+> > On Thu, Apr 24, 2025 at 12:31:38PM -0600, Simon Glass wrote:
+> > > Hi Martin,
 > > >
-> > > On Thu, Apr 24, 2025 at 07:36:06PM +0200, Heiko Thiery wrote:
-> > >
-> > > > Hi,
+> > > On Thu, 24 Apr 2025 at 06:43, Martin Schwan <M.Schwan@phytec.de> wrot=
+e:
 > > > >
-> > > > I tried bootflow for the first time and wanted to test my extlinux
-> > > > configuration with separate menu entries. But I don't see that the
-> > > > menu is shown. The default value is always selected. Am I right in
-> > > > thinking that this is not supported with extlinux?
+> > > > Hi Simon,
+> > > >
+> > > > thanks for the review and sorry for my delayed reply.
+> > > >
+> > > > On Mon, 2025-04-14 at 05:32 -0600, Simon Glass wrote:
+> > > > > Hi Martin,
+> > > > >
+> > > > > On Wed, 29 Jan 2025 at 07:25, Martin Schwan <m.schwan@phytec.de>
+> > > > > wrote:
+> > > > > >
+> > > > > > Add a bootmeth driver which supports booting A/B system with RA=
+UC
+> > > > > > as
+> > > > > > their update client.
+> > > > > >
+> > > > > > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+> > > > > > ---
+> > > > > >  boot/Kconfig         |  11 ++
+> > > > > >  boot/Makefile        |   1 +
+> > > > > >  boot/bootmeth_rauc.c | 408
+> > > > > > +++++++++++++++++++++++++++++++++++++++++++++++++++
+> > > > > >  3 files changed, 420 insertions(+)
+> > > > >
+> > > > > This looks fine to me. Just some nits below.
+> > > > >
 > > >
-> > > I suspect Simon also found this recently and fixed it as part of another
-> > > series. It's likely in:
-> > > https://patchwork.ozlabs.org/project/uboot/list/?series=449177&state=*
-> > > It wasn't based on master or next:
-> > > https://patchwork.ozlabs.org/project/uboot/cover/20250319143820.2385092-1-sjg@chromium.org/
-> > > And some of the tidying up lead to size growth in a number of platforms:
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20250319143820.2385092-2-sjg@chromium.org/
-> > > Along with needing to document some of the user visible changes:
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20250319143820.2385092-7-sjg@chromium.org/
+> > > [..]
 > > >
-> > > You might want to see if just patches 7 / 8 / 9 resolve the issue you
-> > > see and if so we can get just those merged in.
+> > > > > > +
+> > > > > > +       partitions =3D env_get("rauc_partitions");
+> > > > > > +       if (!partitions)
+> > > > > > +               return log_msg_ret("env", -ENOENT);
+> > > > > > +       partitions_list =3D str_to_list(partitions);
+> > > > > > +
+> > > > > > +       slots =3D env_get("rauc_slots");
+> > > > > > +       if (!slots)
+> > > > > > +               return log_msg_ret("env", -ENOENT);
+> > > > > > +       slots_list =3D str_to_list(slots);
+> > > > > > +
+> > > > > > +       boot_order =3D env_get("BOOT_ORDER");
+> > > > >
+> > > > > Environment variables should be in lower case.
+> > > >
+> > > > Unfortunately, we are bound to the naming RAUC uses for these
+> > > > environment variables, which is upper case. See
+> > > > https://rauc.readthedocs.io/en/latest/integration.html#set-up-u-boo=
+t-boot-script-for-rauc
+> > >
+> > > Can't you change it, since you are introducing new support here?
+> > >
+> > > If not, then you could perhaps set the env variables to lowercase when
+> > > you find uppercase variables? I suppose that would require updating
+> > > the client to do the same thing too?
+> > >
+> > > It would be very confusing for a user to have upper-case variables for
+> > > some things.
 > >
-> > Sounds promising. I will try to test this in the next days (when I'm
-> > back in office) and give you a feedback.
->
-> Unfortunately it does not solve the problem. What I have is the
-> following extlinux config file on my boot partition:
->
-> >>>> extlinux.conf
-> label Kontron SMARC-sAM67
->   kernel /Image
->   devicetree /k3-am67a-kontron-sa67.dtb
->   append root=PARTUUID=f615c46d-fe53-4547-8875-4c21438d931e rootwait
->
-> label Kontron SMARC-sAM67 on Evaluation Carrier 2.0
->   kernel /Image
->   devicetree /k3-am67a-kontron-sa67.dtb
->   devicetree-overlay /k3-am67a-kontron-sa67-ads2.dtbo
->   append root=PARTUUID=f615c46d-fe53-4547-8875-4c21438d931e rootwait
-> >>>>
->
-> >>>> output
-> [SDHC] => bootflow scan
-> Cannot persist EFI variables without system partition
-> Bus usb@31000000: Register 1000840 NbrPorts 1
-> Starting the controller
-> USB XHCI 1.10
-> Bus usb@31200000: cdns-usb3-host usb@31200000: set 1 has failed, back to 0
-> scanning bus usb@31000000 for devices... 1 USB Device(s) found
-> scanning bus usb@31200000 for devices... 1 USB Device(s) found
->
-> Error: ethernet@8000000ethernet@800000 No valid MAC address found.
->
-> Error: ethernet@8000000ethernet@800000 No valid MAC address found.
-> [SDHC] => bootflow list
-> Showing all bootflows
-> Seq  Method       State   Uclass    Part  Name                      Filename
-> ---  -----------  ------  --------  ----  ------------------------
-> ----------------
->   0  efi_mgr      ready   (none)       0  <NULL>
->   1  extlinux     ready   mmc          1  mmc@fa10000.bootdev.part_
-> /extlinux/extlinux.conf
->   2  extlinux     ready   mmc          1  mmc@fa00000.bootdev.part_
-> /extlinux/extlinux.conf
-> ---  -----------  ------  --------  ----  ------------------------
-> ----------------
-> (3 bootflows, 3 valid)
-> [SDHC] => bootflow select 1
-> [SDHC] => bootflow info
-> Name:      mmc@fa10000.bootdev.part_1
-> Device:    mmc@fa10000.bootdev
-> Block dev: mmc@fa10000.blk
-> Method:    extlinux
-> State:     ready
-> Partition: 1
-> Subdir:    (none)
-> Filename:  /extlinux/extlinux.conf
-> Buffer:    ffad2b80
-> Size:      17f (383 bytes)
-> OS:        Kontron SMARC-sAM67 on Evaluation Carrier 2.0
-> Cmdline:   (none)
-> Logo:      (none)
-> FDT:       <NULL>
-> Error:     0
-> [SDHC] => bootflow select 2
-> [SDHC] => bootflow info
-> Name:      mmc@fa00000.bootdev.part_1
-> Device:    mmc@fa00000.bootdev
-> Block dev: mmc@fa00000.blk
-> Method:    extlinux
-> State:     ready
-> Partition: 1
-> Subdir:    (none)
-> Filename:  /extlinux/extlinux.conf
-> Buffer:    ffad3b80
-> Size:      17f (383 bytes)
-> OS:        Kontron SMARC-sAM67 on Evaluation Carrier 2.0
-> Cmdline:   (none)
-> Logo:      (none)
-> FDT:       <NULL>
-> Error:     0
-> [SDHC] =>
-> >>>>
->
-> For both found extlinux based entries it shows in the OS info line
-> "Kontron SMARC-sAM67 on Evaluation Carrier 2.0" that is the name/label
-> of the seconds entry. But when booting either 1 or 2 it always loads
-> the first entry of extlinux without loading and applying the overlay.
->
-> Also support for having the menu shown is also not available.
+> > Simon, this is an unreasonable request. This is how RAUC has been
+> > working and deployed for years and years. It would be a nightmare trying
+> > to handle migration of existing deployments for an aesthetic change.
+>=20
+> Yes, I figured. Perhaps it could support lower case in future? This is
+> the first I have seen on RAUC in U-Boot, although I do see this file
+> which has both lower and upper case:
+>=20
+> include/env/phytec/rauc.env
 
-The behaviour you should see is that (after the bootflow menu) you
-should see a separate 'extlinux' menu which allows you to choose the
-correct entry. So you will need 'menu label' instead of label.
+I don't think there's any need to complicate RAUC support here (nor
+in the future Mender nor swupdate nor any other long standing OTA
+mechanism that might be more easily integrated via bootstd than
+environment patching).
 
-As Tom mentions my tree has some additional patches here:
+--=20
+Tom
 
-https://sjg.u-boot.org/u-boot/u-boot.git
+--JqjOt1Cst6pAJoWH
+Content-Type: application/pgp-signature; name="signature.asc"
 
-in case that helps.
+-----BEGIN PGP SIGNATURE-----
 
-As to what you really want (putting each extlinux item in a separate
-bootflow), that's the next step. I will get back to it, but most
-likely not before the end of June. If you would like to try
-implementing it yourself, let me know and I can send some pointers.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgLnjwACgkQFHw5/5Y0
+tyxXRAwAkzXD9pZoK6//CDETwWBd6oQy745TqOeB3wagom/PvOF+kuNPQNmQw2qu
+LapVjLpe75xXdXchL5jnO+gSwF2fNU8SjJbP7OmsqcogIUdYaxqdToKDvSTg5FAw
+m5+jfgVYXHwDbQRCAynQ1zLXLbt1JRPynTB4NMsUUKMr0ly+W75qK/GRiQxohIlj
+fHZ/gdqAVXWK/UYV8tLFMRYekF0vwe8TvoX/f+JrYOHCm3PrRXGqUZrVaFhLEjTY
+PO2zKD0VLESikvlIJZalfwDRI1eoy6CK++PBxVWLcGVdNvg41Gdqs9sR3uit3AQY
+C/5nuVlk7YRpoM/ZeiUeT7rxRJ/NZujwl6VVbMdJaifTj4gAEY+sJw1YifFkQjRQ
+2mcQt5bzRDZ8w9q1Wfww8cKOzFypxgLnNABsfhp9BU+VvNY1lBqpcX06/kcwOz9c
++Ak1s4HFKuQW5loceX0VxqHQDV332AY6pa120pj5pSC21rLD+7uf+HwYXITaEroh
+HiPDJryo
+=TXbh
+-----END PGP SIGNATURE-----
 
-Regards,
-Simon
+--JqjOt1Cst6pAJoWH--
