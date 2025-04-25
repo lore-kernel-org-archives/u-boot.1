@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E1A5C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:10:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D313BC369D7
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:17:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29C8582786;
-	Fri, 25 Apr 2025 16:09:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DA778212A;
+	Fri, 25 Apr 2025 16:17:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="xgP3YjHb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H9ydA4ZE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EA4F82114; Fri, 25 Apr 2025 15:50:28 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id C5503810EB; Fri, 25 Apr 2025 16:17:48 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E894E820F6
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 15:50:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8126C810EB
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-30db1bd3bebso24083051fa.2
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 06:50:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3feaedb39e9so779740b6e.1
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:17:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1745589025; x=1746193825;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oPsPq9mWA053oxxTa3qFiyaUA5FRTy3ZxAFVyNGvBAU=;
- b=xgP3YjHbzc6iPQNkZh1cGsEbuc6MUoRlBx7A70zp/esfy0+4cNmzMMb9k9t0RtyQZi
- ki7NZ7sf/tyoUS5bmILWKRVG0d9SBXmMCAMRJ03/v1XRS94QogniMkKB0ddW+++FqmJe
- 47hhGLMGJNwhklzx520Hcyc3qeGR9npLDIPESflCkvMcchHlSmzKnqy4oVbrz/9Ly/Zv
- 2lVdYB3Xx19z2EaHO99up7hnst0knAXcmklUdHJxcdoywwAr3uLGHbRZIJSWu42ZAwSF
- flWzQWWmy9OI0e4vWYwDmtywcqN43fMllUs68qvjL8DjKsoHVP4STsUnfdFipWlIfFQv
- oeBg==
+ d=konsulko.com; s=google; t=1745590664; x=1746195464; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PRDAJa/9OdS9xzNclxrX8NhhSczVwjTqOntXKSBOWnA=;
+ b=H9ydA4ZEJMxWlYAk7eIXl5eD9DdIEsgitcx6sp4/5FD+3DM8gJ1PaHrxdijPJQnVYg
+ DH2rD+el9bviZhvdwRGcSn/oQf866pIC0YPFqCKKdSvSzsMt9+cQUpmjBvUqQIncXbnw
+ Bx/Y/JFNh69Ue6Zvxe7zngd2g932H21lGmE6c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745589025; x=1746193825;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oPsPq9mWA053oxxTa3qFiyaUA5FRTy3ZxAFVyNGvBAU=;
- b=nP+VBaysuibCXiNNtuyOFDE85TbdX3CM7Hfa+dgiVqiKYXv7WWYJ6DPOg9c7idUbqE
- 7+KKq+bgH4OOQwzrM0NG5yerqI4xcJaLuwzfewDhuMWYbEsMbsLILPcYxiR/VCX6QeIn
- +xoHNJ39lIFZfhMluIg3cRjbcEs+10rRXeNkI/5cfJs7JdJoAl0m5DR29kAcSAVq0gM2
- lNNj8xjamFbJi0K3U58AkhIgbDM/Cx3cHQiZdUzTO5qkFttpBA1ygcquBt9mWFAQr7re
- I5a7pmGV8S4+nyNZpI7U8JPGOP1AZbxloRXxVg6Gh1rwTn0FRus33fFujQ/Dnvub07ZF
- 8Rtw==
+ d=1e100.net; s=20230601; t=1745590664; x=1746195464;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PRDAJa/9OdS9xzNclxrX8NhhSczVwjTqOntXKSBOWnA=;
+ b=edNedKsFm2BoAv2eMVWPQkynBXvTB7rdlRncRGbv2pn8P9FdaN8m+op2MqRwxvoStj
+ 2dOjMLa1JrAYa6i2Y6YZYUbUOZbRYh7s+zY4WttgfNIDvnWSUn0J8rxypsVln0CYOeRn
+ JukatWw6S1Wk2BD9CybWuNq2Jm863P8ED4nT5AFe++53alT1ZPnY68QyopJWvPINncYI
+ FmX72Y2jy+4jTaNK9H2VHjDMqaQW7T0UiQNsz2V1kGcc4Di2Ypssu0NIYnp6ZNlOPmSN
+ jgJgm4egK3C9FBV6L3+OlNxJ/PLNIVe0YRXDp+wpJeyrLspfINdBajqAycIxNmX1mAqm
+ iZ/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtN2ZyM5kC+KwMayCbdck2O/kLQnXgsBPifQtlk4clRfU2n2uQCBsc4jwuwgDSzkH/tvMJIsM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzIoC9WtiqfXUGZJDtixtUi64vMje1Hd4EZ1QaCubCbapv7UnSn
- z90ALhFMlGNMeuIldnbGJyEweJRZIK2h2pJ4UB+/ggjLRtxbVNmNJvhuiO+wuSl5VJE1nMdulOb
- uvhHr/+1tSbNtCtjm7oNVfWvHQhYZFYu2+hOalg==
-X-Gm-Gg: ASbGncsf7CP8yOwJ/yJsCDvijO3fu41ePo3BxcoLVSPkYd7+UXqPaGCG2jb5M53jHtS
- MGKf5DyWI6WPx1uHNIbkVFELHpaNEMW1JRJE9P5LeoZPIG0OAcQvz0Ey2ybLLgEL5CXCT4sqDSO
- duWyuNLXSBdj0h7o/x+svMRw==
-X-Google-Smtp-Source: AGHT+IEObN9j61kQOTQfGXzQlEPmc+OQnWFHljxvLtTE4TNc3++FytrZke0YhHBSUzm92dE5Yuqu6fD8ATvuTW5h1bc=
-X-Received: by 2002:a05:651c:3133:b0:30b:bf4e:f6fa with SMTP id
- 38308e7fff4ca-3190673cf65mr8251571fa.17.1745589024843; Fri, 25 Apr 2025
- 06:50:24 -0700 (PDT)
+ AJvYcCUnioxIAd5DEZ6yngQki/JRaTUcJekXvt971/f16yAEBd8S2VJLLdLALNgwUZu+q2RIUN+on5g=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0whmvBLToXDpvCJ+WJ6bLV6Tqk7PAxz6sjGBBnvBowtkUDr2C
+ 4oZraIDTnLxz6yW2TIY4ldx8fMpb5ScPudCsO5TD+9zRDOTYj/bIAihEeWxXuvY=
+X-Gm-Gg: ASbGncv+dsi1HqzDHUmeAj5QfKUu/7hVUU+B+2CjSBy1iPCrMEzH7R9sUDh/GE+lInv
+ LXYei1LK1K2FysS8IsiSDe3PsqZCY+HU3cxWoPXwBFeZNLI6e285F70ZMAXkA0X0giQTdHceWE1
+ YnKnjYCcLV9HVwSW7aORVzPeEF7lezl0ybgPmMjyXV/uD0MuEjzNVJ53si237jSU/CV0PysQk/0
+ duzRd1wkuUyDe/cuJWlMlV+ujZruhSt3E/FQBdG+aF6N1Iedzs5tK0hxt9wGAeN5q3s9qeUEEoI
+ Pww/Y00kiNg89p03y3MUEQ1fY6HyBbBBidcapAUstKCQKmoP20NMfYI9yhSvt52C/s0d0y0oQc6
+ 5uQ==
+X-Google-Smtp-Source: AGHT+IF5bOYm0Zqz+BJKxOP9kpgEAKTc/erg+3jXoJaAtPmYxrOBsviLpFJxmoCqxEggMWrs7zMm2g==
+X-Received: by 2002:a05:6808:5:b0:401:ea99:544 with SMTP id
+ 5614622812f47-401f28887ffmr1235212b6e.11.1745590664227; 
+ Fri, 25 Apr 2025 07:17:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-606468a16a7sm734197eaf.22.2025.04.25.07.17.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Apr 2025 07:17:43 -0700 (PDT)
+Date: Fri, 25 Apr 2025 08:17:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: marex@denx.de, aford173@gmail.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/4] build: Respect CONFIG_SPL_BUILD in DT sources
+Message-ID: <20250425141741.GS5495@bill-the-cat>
+References: <20250425135220.1929510-1-festevam@gmail.com>
 MIME-Version: 1.0
-References: <20250417-wdt-v2-0-49939de473e1@hifiphile.com>
- <20250417-wdt-v2-8-49939de473e1@hifiphile.com>
- <119e31f2-72a8-4826-9c92-4db928a1020c@linaro.org>
-In-Reply-To: <119e31f2-72a8-4826-9c92-4db928a1020c@linaro.org>
-From: Zixun LI <admin@hifiphile.com>
-Date: Fri, 25 Apr 2025 15:50:15 +0200
-X-Gm-Features: ATxdqUHNMldUAx_xA58KbAHWSPtQuiXNCsN1xI8QNFN96kQTHOGeR953mFklN7o
-Message-ID: <CA+Gyqeb+_LNGi0qa7S9M1E4LjJPe=O3anf9AFVrm3cOcZB83Tw@mail.gmail.com>
-Subject: Re: [PATCH v2 8/8] ARM: dts: at91: sam9x60-curiosity: Enable watchdog
- node
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 25 Apr 2025 16:09:21 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="68UbDihwBlsZFlbF"
+Content-Disposition: inline
+In-Reply-To: <20250425135220.1929510-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,26 +98,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 25, 2025 at 12:51=E2=80=AFPM Eugen Hristev <eugen.hristev@linar=
-o.org> wrote:
->
-> This 'timeout-sec' property is not in Linux DT. Any reason for adding it
-> ? is the default different in U-boot ?
->
 
-The timeout initialization is different in Linux, where the driver's
-default value (16s) is taken during probing. On U-Boot without
-<timeout-sec> the timeout is set to default value of 60s.
+--68UbDihwBlsZFlbF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Since at91_wdt's maximum timeout is 16s, any higher value will be clamped
-to 16s in the driver. I think it will make some confusion if the logs says
-watchdog has 60s timeout but reset happens earlier:
+On Fri, Apr 25, 2025 at 10:52:17AM -0300, Fabio Estevam wrote:
 
-WDT:   Started watchdog@ffffff80 with servicing every 1000ms (60s timeout)
+> From: Marek Vasut <marex@denx.de>
+>=20
+> Currently the U-Boot SPL build uses the same DTBs that were generated
+> during U-Boot proper build, and calls 'fdtgrep' on those DTBs to filter
+> out uninteresting nodes and properties. Those U-Boot proper DTBs are
+> built from DTS which are first preprocessed by CPP, but that CPP is
+> invoked in U-Boot proper build context and effectively ignores the
+> CONFIG_SPL_BUILD macro. In case the CONFIG_SPL_BUILD macro is used
+> in any .dts file, the content of the macro is removed by CPP.
+>=20
+> Fix this by building a separate set of DTBs for the SPL, which are
+> preprocessed by CPP with -DCONFIG_SPL_BUILD set. Use the same way
+> for the other PLs.
+>=20
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+>  dts/Makefile         |  5 ++++-
+>  scripts/Makefile.lib | 11 +++++++++++
+>  scripts/Makefile.xpl |  7 ++++++-
+>  3 files changed, 21 insertions(+), 2 deletions(-)
 
-What do you think, should we add a warning for the actual timeout ?
+There's already a thread here:
+https://lore.kernel.org/u-boot/20250305183544.40525-1-hd@os-cillation.de/
+saying that we shouldn't be doing what this patch adds.
 
-> I would add the support for sam9x60 as a single patch, this one and
-> previous (patch 5) which adds the registers definition.
+--=20
+Tom
 
-Which prefix should I use, arm:at91:wdt or watchdog: at91sam9_wdt ?
+--68UbDihwBlsZFlbF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgLmYEACgkQFHw5/5Y0
+tyw6qwv8DzDyZuYUpzaXZjlQzqgioz0oopsEYVzPVcM+LciWBA5aIjZNiwZTtwEI
+Wrs2Gw50pVhFd+YZR0nu1F+VJE8BkxSnNfT603b77MBWt2QkDtJEg0FeWknb2TDw
+Rbg2txJvaNMaFSTduZx9hkVeQWiOYYASDPYEVoMax/I5hGV4cAZ3Rfok1iuNgBPw
+Q0mb7mUsO/5r9KfqhhGzg3FgdxVPxbtyNPMrboC10IU2wCviFbJPH4wkbOaEIWhr
+o8cnKDbNLfucxW0DbHo3A209qx7oJoGpSlgAekAYFFAUS8X0aP0TG/weHWuJ35KJ
+61fMAtAve0DVpeSxi0infS6S24k0Ic1aRWadr62aS8xo3wc6q8VnCx2S7TwFvc2Z
+VJrkWskSYCKQwOVG1VPyZnftE2aTb9wNpt8ZGsXHEmC+fX0M9yYfpjUCIQ2bPeWE
++PEcrAfUZK9NLLM6nUnbcrrOmd6pVSi6RQ9c0S+i7RdUlgoozWJo314tRmMgSGx6
+Dfd0poTO
+=cADN
+-----END PGP SIGNATURE-----
+
+--68UbDihwBlsZFlbF--
