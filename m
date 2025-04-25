@@ -4,73 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A98C369D5
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 10:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D402FC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 10:46:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4D9C82063;
-	Fri, 25 Apr 2025 12:35:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 155FD81F0D;
+	Fri, 25 Apr 2025 12:46:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Cyz2/UXF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LFcPt/Rp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BBC381F6B; Fri, 25 Apr 2025 12:35:57 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2A0F81F0D
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 12:35:54 +0200 (CEST)
+ id 390B481F45; Fri, 25 Apr 2025 12:46:33 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 23E2D807B1
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 12:46:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PAZi4U2151663
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 05:35:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745577344;
- bh=SwcdZVs4l0SBvbInBQmOOPQRN6vxL5UxFO6yZFSpdbQ=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Cyz2/UXFQby5FJ1Ejnx7ZJIDYOWyn/bqTPdTFzNvoMaWC8ClZjNkftYf2Qn4SMnep
- B1g6/2+ErBBHCPRQjbKU8Je3+PGvib2RQBYfV4ab88xepxZRAvo7AOzq9y6zjbwInm
- Ht1H6bjVjpsiwT/7FJPDnQS4gh4QA05PCJLPE7ew=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PAZiE1083969
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 05:35:44 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 05:35:42 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 05:35:43 -0500
-Received: from [172.24.19.195] (lt5cd2489kgj.dhcp.ti.com [172.24.19.195])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PAZeB6032526;
- Fri, 25 Apr 2025 05:35:41 -0500
-Message-ID: <d95b1919-ea47-4d58-8349-82e0f33fed5a@ti.com>
-Date: Fri, 25 Apr 2025 16:05:40 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac28e66c0e1so272070666b.0
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 03:46:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745577990; x=1746182790; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7gc7qdbus5+D4JqN+89H3XfzPF+AHTMOK5HT/BklZsI=;
+ b=LFcPt/Rp8hwKEGxm6PT9EyEcyevHXfJu0GtubGSOtIaDW9HynkermMvVR4Q9rvG+hJ
+ 3+nLhakoMxSnGur3ArT5CL089cXThroMvwlvxig49CIFCPCeBC0LcEU3Pdk5ZVLQo/82
+ iKM8OsmwF//jZFpR2xeJezCLQbvhWgyrS0MWJW+pGIjMY1/8sWy/+xHphBfOn0OK9vWD
+ 4pLFRL5G4MAgxS86fQcGBsrtp/XFN7r99dmwyO0giBlih8TK2HuBxU2fs1o9lvcf5M13
+ OT0l5yKdHyBaaXvtYxSjHyGl5q9vNjm0L9SmsJyvquCS/zlNdGfE/cUPHzZs5aE2dbhg
+ GvGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745577990; x=1746182790;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7gc7qdbus5+D4JqN+89H3XfzPF+AHTMOK5HT/BklZsI=;
+ b=eMcoWyOYTX+en5sFxcPENECpsx0T2l/SmwaAW46wg0kGt0qXahyUVCa+3Zotpt+YOC
+ /0v28/YxHA7Lg6TBjcfjtugntMXSIULufqvGb0XMGCdGwKNvruYUkS3d+m0j+qV3d8dU
+ +Ou+vGHWxzoI6qxMJl2yroPa2dFeUEn7tWKHu+Vux7mUr9I6ZHetawz28XJQ06dx6ujK
+ cXnrj8LMR8MvfwD+OXyuLdkLGA/65KZrN/ut/3ZjEcqk7P3rhYYx5sdfzJ9MiGnh/HOI
+ lI8bkeBDAI4M1jYdqd2b3p1Y0nQZpj/5i2QNcjyQ/Lnize7dt2t7AfmeAQV12j/vgpKM
+ OLhA==
+X-Gm-Message-State: AOJu0YybOBlzwPUWFe7mpRIUyuHilWZ3ZAKG3Egho69dAbfZ44S1EZKc
+ /CfztdOKRNsHdRFOwxPJwxmB7dSQlfTC2mLE2yF4kdFLN4dRGKKP+N/BBlsdQFQ=
+X-Gm-Gg: ASbGncs2L15rjmakVUyM4ydvLDMgIhCjxsSt0RX6cEBCL7lPfHOp+5R/BqCAHI9n0/4
+ dji/IMjhJTYG7sSAGI+V6LA7miYUBxEGZdZTl+qaGNIwyn6Frb42sVCoIeh5s4xqtW4iYLbsoc4
+ TZnnz3S4qCUgOCWsXHgMb4GWoeh0VIuoChHIUDdQeL1x4+ILqE3WVOHlBZPQEryARhkJo3qxgVa
+ Ey3y+gRTfFJvDc7D/NnNxt4YaiNV2hxLFD6tpupxGjwsORYIZekeokL9nw1QrzwceRc1O9THM1l
+ Fi2y0ZVDdDWbDeyqt7QyGIIIZDuNxsvg5Ti8B8W7iHiDfQ3H
+X-Google-Smtp-Source: AGHT+IFn9WlUGMDzF80DRQ3yn+/5/+C8Jd299EjACzQuvS1aHV0O8i5K303/5jpqmZsQNotUMLAo3Q==
+X-Received: by 2002:a17:907:94cf:b0:ace:6d5b:e785 with SMTP id
+ a640c23a62f3a-ace7136c3cemr156363266b.47.1745577990455; 
+ Fri, 25 Apr 2025 03:46:30 -0700 (PDT)
+Received: from [192.168.0.32] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ace6ecf8c9bsm116591766b.101.2025.04.25.03.46.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Apr 2025 03:46:30 -0700 (PDT)
+Message-ID: <a75e8917-09a0-43d2-a45a-d80f4c0e5b3c@linaro.org>
+Date: Fri, 25 Apr 2025 13:46:29 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC] Expected behavior of the go command
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>, Simon Glass <sjg@chromium.org>,
- Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <rick@andestech.com>,
- <mporter@konsulko.com>, <u-kumar1@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>
-References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
- <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
- <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
- <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
- <5f87ac88-5552-4c5c-ae56-01c7ef9165dd@pengutronix.de>
+Subject: Re: [PATCH v2 7/8] ARM: dts: sam9x60: Add watchdog DT node.
+To: Zixun LI <admin@hifiphile.com>, Tom Rini <trini@konsulko.com>,
+ Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de
+References: <20250417-wdt-v2-0-49939de473e1@hifiphile.com>
+ <20250417-wdt-v2-7-49939de473e1@hifiphile.com>
+From: Eugen Hristev <eugen.hristev@linaro.org>
 Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <5f87ac88-5552-4c5c-ae56-01c7ef9165dd@pengutronix.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <20250417-wdt-v2-7-49939de473e1@hifiphile.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,95 +100,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Ahmad
 
-On 4/25/2025 11:09 AM, Ahmad Fatoum wrote:
-> Hi Udit,
->
-> On 25.04.25 06:35, Kumar, Udit wrote:
->> On 4/23/2025 7:52 PM, Ahmad Fatoum wrote:
->>> I went with the FIT route for barebox, because we can now ship device
->>> trees for all enabled boards in the same FIT image alongside one generic
->>> second stage barebox with DT support. If you want to support different
->>> boards with your OS image that might be of interest to you as well.
->> Sorry for novice question.
->>
->> But trying to understand how FIT fixes problem for you .
->>
->> at the end, its a jump command to OS/other code be it through u-boot go or fit way.
-> The difference is whether, prior to the jump, the caches are flushed and the MMU
-> is disabled and U-Boot's go does neither.
->
-> Thinking about it, I am wondering whether U-Boot go is inherently broken,
-> even for the jump-table use case, if caches are enabled:
+On 4/17/25 12:09, Zixun LI wrote:
+> Add the watchdog timer node for the sam9x60 SoC's.
+> 
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
 
-Correct, this is what I think . Before jumping to new program go command 
-should make sure
+Nitpick: no dot at the end of the subject
 
-things are in correct order by cache flush. Kind of below
+> ---
+>  arch/arm/dts/sam9x60.dtsi | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+> index 60de9140226981003c06747e103966b696b7b700..6a5465cf31d5ab48e1205896884f41d2203b5812 100644
+> --- a/arch/arm/dts/sam9x60.dtsi
+> +++ b/arch/arm/dts/sam9x60.dtsi
+> @@ -298,6 +298,13 @@
+>  				clocks = <&slow_rc_osc>, <&slow_xtal>;
+>  				#clock-cells = <1>;
+>  			};
+> +
+> +			watchdog: watchdog@ffffff80 {
+> +				compatible = "microchip,sam9x60-wdt";
+> +				reg = <0xffffff80 0x24>;
 
-diff --git a/cmd/boot.c b/cmd/boot.c
-index 23496cafdf5..e6bb1d94a1c 100644
---- a/cmd/boot.c
-+++ b/cmd/boot.c
-@@ -18,6 +18,7 @@ __attribute__((weak))
-  unsigned long do_go_exec(ulong (*entry)(int, char * const []), int argc,
-                                  char *const argv[])
-  {
-+       flush_cache(...)
-         return entry (argc, argv);
-  }
+Can you also add the interrupt line to make it identical with Linux node?
 
+> +				clocks = <&clk32 0>;
+> +				status = "disabled";
+> +			};
+>  		};
+>  	};
+>  
+> 
 
-I see even ARM64, few board choose to over-ride default option 
-(board/xilinx/versal/board.c)
-
-do_go_exec does dcache_disable()
-
-
-
-> Because go doesn't do any cache maintenance, what guarantee do we have
-> that the I-Cache actually reflects the data that was freshly loaded?
-
-correct , depends upon address etc , it may or may not work
-
-
-> It might only work because the region you go to happens to not be resident
-> in the I-Cache yet...
->
-> FWIW, barebox go does cache maintenance and disables the MMU, which
-> is why I mistakenly thought U-Boot's go would behave similarly.
-> barebox didn't inherit the jump table mechanism.
->
->> In case OS/other code handles caches, then should not be an issue.
->> But this put requirement on next stage to take care of caches [0]
-> In the fit case, MMU is disabled and so the next stage is free to
-> not do any cache maintenance if it doesn't need to enable the MMU.
-> Linux and barebox want to use the MMU/caches by default, so that's
-> why they have to do cache maintenance.
-
-Sorry I was not clear in previous message,
-
-Here OS take care of caching , irrespective of how boot is done through fit
-
-or kind of efi or other method.
-
-
-> If they assume MMU is disabled on startup, it follows the lines in
-> the cache are stale and unimportant and then memory corruption
-> occurs once they are discarded.
->
-> Cheers,
-> Ahmad
->
->>
->> [0] : https://github.com/torvalds/linux/blob/master/arch/arm64/kernel/head.S#L105
->>
->>
->>> Cheers,
->>> Ahmad
->>>
->>>> Regards,
->>>> Simon
->>>>
->
