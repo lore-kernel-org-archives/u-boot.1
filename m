@@ -4,99 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03966C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 18:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03302C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 19:05:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51F7882977;
-	Fri, 25 Apr 2025 20:58:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 43E3282A31;
+	Fri, 25 Apr 2025 21:05:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gcMPW4DW";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HcDbgn9I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8A9182A27; Fri, 25 Apr 2025 20:58:57 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1F29E82A33; Fri, 25 Apr 2025 21:05:33 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E8F782958
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 20:58:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7243282A25
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 21:05:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1C6AF3FE56
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 18:58:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745607534;
- bh=1+m/4ggT4CpN4gTQoXta75xtd//iejSb2ezewrxDe54=;
- h=Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type;
- b=gcMPW4DWBrx4sWyMrBONd+GWToXwWC0boX+EW1n/f10b1mwXoc9/yi7EjUFaqrESf
- 4VLbE4McVPnpO2qKVXv5OpkNinsh3ewlTEt/lD9V0KtyGGi3BCVFY15r9PxLWNKpwX
- Dgy+DoouflGwY+5WBXbgzhkFNwi7+kTBju2nwU2km8J1nXbZosi834QkAUshF+D8rn
- UGNO6ptSpPuKCIIKKOULECWsGEFprOJ6Ao50DK91MLdDlbtPeHNRvxsfyAZ7S2dsr5
- QMj2tnbKQxqEe9N0R7isGSHw0zpAdvCkwmwdWUHedihG0H3R+7Y6wY0iwtFKnM0Qya
- eqqgOfaCFRehg==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-39d9243b1c2so931819f8f.2
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 11:58:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paul.liu@linaro.org
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-54ac9b3ddf6so2360152e87.1
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 12:05:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745607930; x=1746212730; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FSwMBs9ZC/JkZS4Q4TdqbpkA86+SqFeRKJ7HHTsJeUo=;
+ b=HcDbgn9IPIwI5EFcBhbsUPtPD3bsrCEMjxOCUoxj34mbg7gumx//tT+kTSm++2IBf1
+ +xjld84iehjFF+nV7tgYQcSYPSb3noPBzWINYb58n1oBiIddjCRoKnKhcooL3uAB3DPM
+ TZwDaLF5g8ZV5kzsW4WWpcRIqx4jNAjhhnADiCySpeASWZySs2ComO8UN2Y2I6oF/SKp
+ M/as7Clyf/enAfX3aDJqKVmq9AHw9omca4q9p6LMyE/blK/OYLHhw4/YnvsN2BTM/JcZ
+ shYbJjHzr1jjgjGLssGhZbKAxMV/y8L/MS/E7YCaqpAfllJfIwospxPkkUXa4vE0oH/1
+ YMPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745607533; x=1746212333;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=1+m/4ggT4CpN4gTQoXta75xtd//iejSb2ezewrxDe54=;
- b=hnOB1NgqPiM6UF/cGxBpAv4gLK3E6PFFc5dz0Aj1JHL9MWRFnqBXct2Gq75wrWt3d5
- naPyJQYWcDUFvY2fTVQ+H2tPiFnQ0cnwkZfiUBl4uc0wjUE1Gq68PuyrAJrom8B0HXld
- VrMhIlfaWqwICFxihMY9rRzLPN9Oy62aG4wvcK84pTOls1lPNp2SAUbyAJHwydcf54vl
- h+21ypH+HemTGUbEz3N36oFPAyg8J3qksbEcGo+HRoe/K6De6UBte/8BFKjO5RXdVX7J
- 5T0a673NCHUuxnjwJBpg1ClPZxtPiT0cGJXHI/YC/LRl3agNLtqoCyv5ORE6OY7Vp3n8
- hfZw==
-X-Gm-Message-State: AOJu0YzarcI3xZUl5xXmxZNcC7V9SLf06eAKsHKkMlSkJlRLOoMbjwm3
- oef8+h2SC9nDHwc2VJ8YTqMmRYzNGT+/TyUiBemdOL1lCxo1zmSqv5hn4gSz2ndA1xV+XjKnsqk
- iL3k4KTe1B7UkMiWRl7iYo7LC0BUqC+yIFwceB4yPLxF1Gb9DUNKNC5JqZrGazPctGik=
-X-Gm-Gg: ASbGncsscdpKf0QhigxXB8xuKX8UjVlPTqQ3wAR1lcBu1hCAiCMic/HDEWlLcvVw8Yw
- p2c7YoWYtUtL9kcDoGFD7R1qCUxgt/o43ZOVrGInwIod+YrNa1dqF9Zg/a+KAZH3EHD091ssnNt
- h7Su5zPtN01XYGII0mePkFTcOVpkcKzy1U5P51aut59DshQC0cdNuAiUkwPOd7PUTo2Kc8W9lPS
- ef4bxTOBFfZUXmAL+9sKR0Pbsb6dOlHz3Gp7xXKy17ZfZm0MoFz+opVzpusyU1LRIDyoKVeai+O
- HemqN7xrd37+IMlwH3tFViGzc9+vEbN/kXAvERuPax7HVTFFOtey7+hm7Op9usH/iQUGEadiEyJ
- WoA==
-X-Received: by 2002:a05:6000:290b:b0:391:2df9:772d with SMTP id
- ffacd0b85a97d-3a07aa64fe7mr367485f8f.13.1745607533479; 
- Fri, 25 Apr 2025 11:58:53 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFbG6aN0OnQpiwzJnPQ8qEohMG5GTW0dX1cQbLpDb4HARa3ziAtMGStdo+McjfNvYYO/ntezw==
-X-Received: by 2002:a05:6000:290b:b0:391:2df9:772d with SMTP id
- ffacd0b85a97d-3a07aa64fe7mr367474f8f.13.1745607533115; 
- Fri, 25 Apr 2025 11:58:53 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:31a3:6e7e:b578:400a:f063?
- ([2a02:3035:6e0:31a3:6e7e:b578:400a:f063])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073c8da58sm3159979f8f.15.2025.04.25.11.58.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Apr 2025 11:58:52 -0700 (PDT)
-Message-ID: <feeb0d44-78d9-4652-9fd3-63c130a22637@canonical.com>
-Date: Fri, 25 Apr 2025 20:58:50 +0200
+ d=1e100.net; s=20230601; t=1745607930; x=1746212730;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FSwMBs9ZC/JkZS4Q4TdqbpkA86+SqFeRKJ7HHTsJeUo=;
+ b=fRTiVCWOgC5NbUFXRNUM8MW9wGp06g2xR5TcKyndSqKvGOFRXWOrpnENDeYNmsp27H
+ pFDjSqvtRD7D8bwBHn9aNVhHHxlZ4arKSSCp563VXzq/eAw5+Ng0pZdMRbfOiRY11bwv
+ b/es+l64TnXXGpYBUonRvXAMClhDBD1/gzlx4igMMi1mfi3jYNM588uKDWPp80FWRZPE
+ CTvWwmWySN31CwGH/IeVLpMvNEVWXi5zlZDrCOoQ7Yhs/QxW6Jf7ICdHN3961LVB2aVi
+ sFZRlqKjwE9Bq0hm2fz8g6KWOCOnBAdk1KwHAgdpyTTZwKcCmATnXhPs/FNyNzizZkKk
+ m0gg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWPHFXJPXK9dVxdEVv8fGTvfXbJStWGbtfOTLmXehRdYQ1glrNapxEZ6e1TyUPWDaTkVyNlg5Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6lb0dtbiwExuzOjkg37Jygc/cSOsnfsrObDLlO96C5qvTuzJC
+ VAxrkOp8h4e90KOeANUfDU7RZ+PJDVZF5kLI3L4MDQVqlHOM6sD61EvfCox3hJGsI9nL4pxq7ja
+ dHBJRyiHk8PzLPdlYrXr0u/ZnIQgLrI16ay+ZwQ==
+X-Gm-Gg: ASbGncvzjZmuDXJiPIB54PDQlF50xzm130ULNtj9f/8l1lRPfvIGPUxH/X77Lqv8Lmn
+ 7zDuxb1jtnFPnf+cFUF9BGUPLSrj5X95r9J0jpMTjqdgORaz3XJCj+scgAQDoeCoem2mja0rBav
+ Y83evxRtC6aypfFojp+HedugIsKjKDtrxl0YuAKFOWDrPBPA22JbWtdis=
+X-Google-Smtp-Source: AGHT+IFaijbuTeuw3c0bJn2qUrnA+DnT8tqbpzTg1XB9/2BY53V5itkp1kt6teE7+Z+c2fFIHdYSCwsa8+hZLRvlbjg=
+X-Received: by 2002:a05:6512:3088:b0:549:8d60:ca76 with SMTP id
+ 2adb3069b0e04-54e8cc0bcd1mr1108764e87.38.1745607929522; Fri, 25 Apr 2025
+ 12:05:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Aristo Chen <aristo.chen@canonical.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Pull request efi-2025-07-rc1-3
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250424201927.2027257-1-paulliu@debian.org>
+ <20250424201927.2027257-3-paulliu@debian.org>
+ <5b1181bf-1398-409c-b710-dc07e4eaa9d7@gmx.de>
+In-Reply-To: <5b1181bf-1398-409c-b710-dc07e4eaa9d7@gmx.de>
+From: Paul Liu <paul.liu@linaro.org>
+Date: Fri, 25 Apr 2025 20:05:17 +0100
+X-Gm-Features: ATxdqUH1lhIFYl8JeigcOj7zplBcQQ_G1FbGDvgVHa_TVjptvYyYe6un5TsyQvw
+Message-ID: <CALG-KHz+spRA68RyzCUhWM4m_D2VoVLmiKJz85thuUbKyu6gOA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] efi: add EFI_DEBUG_IMAGE_INFO_TABLE for debug
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,105 +95,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On Thu, 24 Apr 2025 at 23:02, Heinrich Schuchardt <xypron.glpk@gmx.de>
+wrote:
 
-I have added some board related patches to the pull-request:
+> On 24.04.25 22:19, Ying-Chun Liu (PaulLiu) wrote:
+> > From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+> >
+> > EFI_DEBUG_IMAGE_INFO_TABLE is used to store EFI_LOADED_IMAGE for
+> > debug purpose. This commit adds the table to the EFI_CONFIGURATION_TABLE.
+> >
+> > This feature is described in UEFI Spec version 2.10. Section 18.4.
+> >
+> > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   include/efi_api.h             | 24 ++++++++++++++++++++++++
+> >   lib/efi_loader/efi_boottime.c | 16 ++++++++++++++++
+> >   2 files changed, 40 insertions(+)
+> >
+> > diff --git a/include/efi_api.h b/include/efi_api.h
+> > index 5017d9037cd..0f4245091f1 100644
+> > --- a/include/efi_api.h
+> > +++ b/include/efi_api.h
+> > @@ -238,6 +238,10 @@ enum efi_reset_type {
+> >       EFI_GUID(0xcce33c35, 0x74ac, 0x4087, 0xbc, 0xe7, \
+> >                0x8b, 0x29, 0xb0, 0x2e, 0xeb, 0x27)
+> >
+> > +#define EFI_DEBUG_IMAGE_INFO_TABLE_GUID \
+> > +     EFI_GUID(0x49152e77, 0x1ada, 0x4764, 0xb7, 0xa2, \
+> > +              0x7a, 0xfe, 0xfe, 0xd9, 0x5e, 0x8b)
+> > +
+> >   struct efi_conformance_profiles_table {
+> >       u16 version;
+> >       u16 number_of_profiles;
+> > @@ -564,6 +568,26 @@ struct efi_loaded_image {
+> >       efi_status_t (EFIAPI *unload)(efi_handle_t image_handle);
+> >   };
+> >
+> > +#define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
+> > +#define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
+> > +
+>
+> All structures and unions and their elements should be describe according
+> to
+>
+> https://docs.kernel.org/doc-guide/kernel-doc.html#structure-union-and-enumeration-documentation
+>
+> > +struct efi_debug_image_info_normal {
+> > +     u32 image_info_type;
+> > +     struct efi_loaded_image *loaded_image_protocol_instance;
+> > +     efi_handle_t image_handle;
+> > +};
+>
+> What are the assumptions about alignment?
+> Should this structure be marked as packed like most UEFI structures?
+>
+>
+Not aligned. This structure in EDK2 is not aligned, not packed. And it is
+really not packed because the size of this structure is larger. 4 bytes are
+padded in the 64-bit environment I think.
 
-The patches for supporting the DeepComputing FML13V01 via 
-starfive_visionfive2_defconfig were positively reviewed by four 
-reviewers including the StarFive maintainer but I did not see any 
-pull-request for RISC-V.
 
-Enabling unit tests on big-endian Malta boards and raising the number of 
-supported DRAM banks on QEMU RISC-V are more on the trivial side but 
-were also reviewed by the respective maintainers.
+> > +
+> > +union efi_debug_image_info {
+>
+> Why do we need the union? The first field of struct
+> efi_debug_image_info_normal is image_info_type.
+>
+>
+I just copied it from the EDK2. But we can remove it. I think edk2 wants to
+support not only normal images. However, currently there is only a normal
+image.
+So it looks redundant.
+I will remove this union in the next version.
 
 
-The following changes since commit 9d3f1ebaf8751f0287b5d02158cc706435f8fb19:
+> > +     u32 *image_info_type;
+> > +     struct efi_debug_image_info_normal *normal_image;
+> > +};
+> > +
+> > +struct efi_debug_image_info_table_header {
+> > +     volatile u32 update_status;
+>
+> Why is volatile needed here?
+>
+>
+The volatile is needed because we like the status to be updated immediately
+to the memory.
+If we are using a hardware jtag. And it stops the code at random places at
+the beginning. It might have paused just inside these logics.
+So this update_status is to tell the gdb python extensions to not
+referencing EFI tables because it is not ready yet.
+Thus this value cannot be optimized for updating later. And thus the
+volatile is needed.
 
-   tools/make_pip: Use venv when invoking pip (2025-04-24 16:30:37 -0600)
 
-are available in the Git repository at:
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git 
-tags/efi-2025-07-rc1-3
-
-for you to fetch changes up to 0ded46384952ab74eb7dd54515a3e23bcbb9ca88:
-
-   configs: add UNIT_TESTS to big-endian Malta boards (2025-04-25 
-17:33:20 +0200)
-
-----------------------------------------------------------------
-Pull request efi-2025-07-rc1-3
-
-Documentation:
-
-* add documentation for the DeepComputing FML13V01
-* fix typos
-
-UEFI:
-
-* build with HII configuration protocol
-* print image load address in StartImage
-
-Boards:
-
-* qemu-riscv raise CONFIG_NR_DRAM_BANKS
-* add support for the DeepComputing FML13V01 board via
-   starfive_visionfive2_defconfig
-* add UNIT_TESTS to big-endian Malta boards
-
-----------------------------------------------------------------
-Aristo Chen (4):
-       doc: remove duplicated "commands"
-       doc: arch: arm64: fix typos
-       doc: fix typo commnad
-       doc: fix typo 'to'
-
-Heinrich Schuchardt (12):
-       efi_loader: build with HII configuration protocol
-       efi_loader: print image load address in StartImage
-       configs: qemu-riscv raise CONFIG_NR_DRAM_BANKS
-       configs: add jh7110-deepcomputing-fml13v01 to VF2 defconfig
-       riscv: dts: jh7110: add DeepComputing FML13V01 device-tree
-       board: starfive: DeepComputing FML13V01 fdt selection
-       board: starfive: spl: support DeepComputing FML13V01
-       doc: add DeepComputing FML13V01 documentation
-       doc: starfive: use consistent formatting
-       doc: starfive: use jh7110_common.rst
-       doc: jh7110: describe debug UART
-       configs: add UNIT_TESTS to big-endian Malta boards
-
-  .../dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi  |   7 ++
-  board/starfive/visionfive2/spl.c                   |   5 +-
-  board/starfive/visionfive2/starfive_visionfive2.c  |   6 +-
-  configs/malta64_defconfig                          |   1 +
-  configs/malta_defconfig                            |   1 +
-  configs/qemu-riscv32_defconfig                     |   1 -
-  configs/qemu-riscv32_smode_defconfig               |   1 -
-  configs/qemu-riscv32_spl_defconfig                 |   1 -
-  configs/qemu-riscv64_defconfig                     |   1 -
-  configs/qemu-riscv64_smode_defconfig               |   1 -
-  configs/qemu-riscv64_spl_defconfig                 |   1 -
-  configs/starfive_visionfive2_defconfig             |   2 +-
-  doc/arch/arm64.rst                                 |   4 +-
-  doc/board/starfive/deepcomputing_fml13v01.rst      |  80 ++++++++++++++++
-  doc/board/starfive/index.rst                       |   1 +
-  doc/board/starfive/jh7110_common.rst               | 103 
-+++++++++++++++++++++
-  doc/board/starfive/milk-v_mars.rst                 |  18 +---
-  doc/board/starfive/pine64_star64.rst               |  26 +-----
-  doc/board/starfive/visionfive2.rst                 |  47 +---------
-  doc/usage/blkmap.rst                               |   2 +-
-  doc/usage/cmd/md.rst                               |   2 +-
-  doc/usage/cmd/part.rst                             |   2 +-
-  lib/efi_loader/Makefile                            |   2 +-
-  lib/efi_loader/efi_boottime.c                      |   7 +-
-  lib/efi_loader/efi_hii_config.c                    |   4 -
-  lib/efi_loader/efi_root_node.c                     |   3 +
-  26 files changed, 230 insertions(+), 99 deletions(-)
-  create mode 100644 
-arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
-  create mode 100644 doc/board/starfive/deepcomputing_fml13v01.rst
-  create mode 100644 doc/board/starfive/jh7110_common.rst
-
+> Best regards
+>
+> Heinrich
+>
+> > +     u32 table_size;
+> > +     union efi_debug_image_info *efi_debug_image_info_table;
+> > +};
+> > +
+> >   #define EFI_DEVICE_PATH_PROTOCOL_GUID \
+> >       EFI_GUID(0x09576e91, 0x6d3f, 0x11d2, \
+> >                0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b)
+> > diff --git a/lib/efi_loader/efi_boottime.c
+> b/lib/efi_loader/efi_boottime.c
+> > index 366bc0d2b1d..e2665459e44 100644
+> > --- a/lib/efi_loader/efi_boottime.c
+> > +++ b/lib/efi_loader/efi_boottime.c
+> > @@ -4038,6 +4038,16 @@ efi_status_t efi_initialize_system_table(void)
+> >       return ret;
+> >   }
+> >
+>
+>
+>
+> > +struct efi_debug_image_info_table_header __efi_runtime_data
+>
+>
+>
+> > +efi_m_debug_info_table_header = {
+> > +     0,
+> > +     0,
+> > +     NULL
+> > +};
+> > +
+> > +const efi_guid_t efi_debug_image_info_table_guid =
+> > +     EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
+> > +
+> >   /**
+> >    * efi_initialize_system_table() - Initialize system table
+> >    *
+> > @@ -4053,6 +4063,8 @@ efi_status_t
+> efi_initialize_system_table_pointer(void)
+> >       u64 addr;
+> >       u64 aligned_addr;
+> >       u32 crc32_value;
+> > +     efi_guid_t debug_image_info_table_guid =
+> > +             efi_debug_image_info_table_guid;
+> >
+> >       /* Allocate configuration table array */
+> >       ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+> > @@ -4077,5 +4089,9 @@ efi_status_t
+> efi_initialize_system_table_pointer(void)
+> >                           (const unsigned char *)systab_pointer,
+> >                           sizeof(struct efi_system_table_pointer));
+> >       systab_pointer->crc32 = crc32_value;
+> > +
+> > +     ret = efi_install_configuration_table(&debug_image_info_table_guid,
+> > +
+>  &efi_m_debug_info_table_header);
+> > +
+> >       return ret;
+> >   }
+>
+>
