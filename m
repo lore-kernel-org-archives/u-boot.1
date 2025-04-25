@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D402FC369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 10:46:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A8BC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 10:46:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155FD81F0D;
-	Fri, 25 Apr 2025 12:46:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D4B481FDE;
+	Fri, 25 Apr 2025 12:46:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LFcPt/Rp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n5+ole1T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 390B481F45; Fri, 25 Apr 2025 12:46:33 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id C75DB8209C; Fri, 25 Apr 2025 12:46:38 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23E2D807B1
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 12:46:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C949C81F6B
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 12:46:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ac28e66c0e1so272070666b.0
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 03:46:31 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-acbb85ce788so418203866b.3
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 03:46:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745577990; x=1746182790; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1745577996; x=1746182796; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=7gc7qdbus5+D4JqN+89H3XfzPF+AHTMOK5HT/BklZsI=;
- b=LFcPt/Rp8hwKEGxm6PT9EyEcyevHXfJu0GtubGSOtIaDW9HynkermMvVR4Q9rvG+hJ
- 3+nLhakoMxSnGur3ArT5CL089cXThroMvwlvxig49CIFCPCeBC0LcEU3Pdk5ZVLQo/82
- iKM8OsmwF//jZFpR2xeJezCLQbvhWgyrS0MWJW+pGIjMY1/8sWy/+xHphBfOn0OK9vWD
- 4pLFRL5G4MAgxS86fQcGBsrtp/XFN7r99dmwyO0giBlih8TK2HuBxU2fs1o9lvcf5M13
- OT0l5yKdHyBaaXvtYxSjHyGl5q9vNjm0L9SmsJyvquCS/zlNdGfE/cUPHzZs5aE2dbhg
- GvGg==
+ bh=A/NO/4/+nKcJo1andROuEympeeRco8tLx5CCUVF8UoQ=;
+ b=n5+ole1T0Ehc/rR6OlQvqMFE3fmAX632Vw7snv1y26xnaiv7t8pfiko9vAHqqmUTVW
+ eq0mD5VrB178bX6h+JYc3PH6EZ+J7vP+87BBM1iqiKddU8QvvIxbScuT42epQPwNKLSo
+ KppD0LwdHbOsNSxBpsvwMEIt6lE3I7T+rnHsoaNTQfBVmLl5GLVkM9iPziZM7R09AdxJ
+ 8GeS1FWgs63exb+a6hhOxnMVwJilECEsEyWGbfIqgz21ANL/0kfEbUC6LUN5boa9ThEq
+ 6DMgR2jxIuTj8oIjrNuiRe7feQNzOWmUdVxEzdj7sZ6rjoYjCuyZcIjqFWb/wZvHEypA
+ ZYPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745577990; x=1746182790;
+ d=1e100.net; s=20230601; t=1745577996; x=1746182796;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7gc7qdbus5+D4JqN+89H3XfzPF+AHTMOK5HT/BklZsI=;
- b=eMcoWyOYTX+en5sFxcPENECpsx0T2l/SmwaAW46wg0kGt0qXahyUVCa+3Zotpt+YOC
- /0v28/YxHA7Lg6TBjcfjtugntMXSIULufqvGb0XMGCdGwKNvruYUkS3d+m0j+qV3d8dU
- +Ou+vGHWxzoI6qxMJl2yroPa2dFeUEn7tWKHu+Vux7mUr9I6ZHetawz28XJQ06dx6ujK
- cXnrj8LMR8MvfwD+OXyuLdkLGA/65KZrN/ut/3ZjEcqk7P3rhYYx5sdfzJ9MiGnh/HOI
- lI8bkeBDAI4M1jYdqd2b3p1Y0nQZpj/5i2QNcjyQ/Lnize7dt2t7AfmeAQV12j/vgpKM
- OLhA==
-X-Gm-Message-State: AOJu0YybOBlzwPUWFe7mpRIUyuHilWZ3ZAKG3Egho69dAbfZ44S1EZKc
- /CfztdOKRNsHdRFOwxPJwxmB7dSQlfTC2mLE2yF4kdFLN4dRGKKP+N/BBlsdQFQ=
-X-Gm-Gg: ASbGncs2L15rjmakVUyM4ydvLDMgIhCjxsSt0RX6cEBCL7lPfHOp+5R/BqCAHI9n0/4
- dji/IMjhJTYG7sSAGI+V6LA7miYUBxEGZdZTl+qaGNIwyn6Frb42sVCoIeh5s4xqtW4iYLbsoc4
- TZnnz3S4qCUgOCWsXHgMb4GWoeh0VIuoChHIUDdQeL1x4+ILqE3WVOHlBZPQEryARhkJo3qxgVa
- Ey3y+gRTfFJvDc7D/NnNxt4YaiNV2hxLFD6tpupxGjwsORYIZekeokL9nw1QrzwceRc1O9THM1l
- Fi2y0ZVDdDWbDeyqt7QyGIIIZDuNxsvg5Ti8B8W7iHiDfQ3H
-X-Google-Smtp-Source: AGHT+IFn9WlUGMDzF80DRQ3yn+/5/+C8Jd299EjACzQuvS1aHV0O8i5K303/5jpqmZsQNotUMLAo3Q==
-X-Received: by 2002:a17:907:94cf:b0:ace:6d5b:e785 with SMTP id
- a640c23a62f3a-ace7136c3cemr156363266b.47.1745577990455; 
- Fri, 25 Apr 2025 03:46:30 -0700 (PDT)
+ bh=A/NO/4/+nKcJo1andROuEympeeRco8tLx5CCUVF8UoQ=;
+ b=APQaufCLaygOmLgz+8ijqqGmjt8vFaScgiye8ALrsibTIBG+qLmaSm7RDJm9C9morK
+ dKO/k4Gtu0leqn9Kz9c5BAAf8WYjN1oEtCexM3Yt2+Au/XAypuAU81ZH4G34o5hUBpId
+ yjvWaPZG7KHO8dqwxi6/9YvgYZJN3tXHNQr5R5Hq8Mf9G0p+QLU59bN+yxphA2luiZ3k
+ fgghnbzW9O7RVgfQkVtC+CMQINYThaqjCxzy6z5rqheL45D+kCX/ZlIJ6GS6itRVnBIr
+ uWTLz/MnK8hNpGCgapT1lK/c7CXGo5SE6faE87uhgL55IxAZY5MpPk9v3baxVCn6qCz9
+ 2fXw==
+X-Gm-Message-State: AOJu0YxCxV+ks9KFGtCaEvQBWLMhGwulJFBaX0+IVx+uO8SWL1vyIZlR
+ 5RN33WFlNmve5K37cZILmktAOFGE88+8KQvsA0lhkd5NbnpldKjuErt60dqGepQ=
+X-Gm-Gg: ASbGncueNGkXiRZGKbcnNFqIKKWYRgpnw1QlMlBKowivJML/RYjwi1my6PpDc4bMy08
+ +/rdAILTS6/ZIxSUimdDE1kj51DwE56kCyCT5xOh608VyIskhYCKRsKL3EtBXIQ3rZTUfGFwN5K
+ e5GF3HUjPkUVKtg5+Myi824mWkQP2ywLAhaa+glQ8HksxM59Jcyu5cZUnsLFHmMcDW4Tu5hq3k/
+ y4bhbZMj474h+iuoS1+p8h8kuF1uBeInkvCV+4WEfMJ/RTFjCQEjZDSZ9vXpnQop4UI3CkjQhLb
+ zFy/VVfayROYLR6VQrrLNfb4ygIhDWhfnyEiYI399YDDR4jMGeBGaKBhfXE=
+X-Google-Smtp-Source: AGHT+IEb17qajE+tyxvA8CkoAKdNo8wVKlW7usSUW+Ncogh1LYeD3bDaC//7nqJ14ODsk5+ZZEJM9A==
+X-Received: by 2002:a17:907:7f8d:b0:acb:b1be:4873 with SMTP id
+ a640c23a62f3a-ace71038c6dmr162218166b.2.1745577996203; 
+ Fri, 25 Apr 2025 03:46:36 -0700 (PDT)
 Received: from [192.168.0.32] ([82.76.24.202])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ace6ecf8c9bsm116591766b.101.2025.04.25.03.46.29
+ a640c23a62f3a-ace6ecf8c9bsm116591766b.101.2025.04.25.03.46.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Apr 2025 03:46:30 -0700 (PDT)
-Message-ID: <a75e8917-09a0-43d2-a45a-d80f4c0e5b3c@linaro.org>
-Date: Fri, 25 Apr 2025 13:46:29 +0300
+ Fri, 25 Apr 2025 03:46:35 -0700 (PDT)
+Message-ID: <2e0114a9-6114-49f3-8dcf-75166b998358@linaro.org>
+Date: Fri, 25 Apr 2025 13:46:35 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/8] ARM: dts: sam9x60: Add watchdog DT node.
+Subject: Re: [PATCH v2 2/8] arm: at91: wdt: Remove unused at91_wdt struct
 To: Zixun LI <admin@hifiphile.com>, Tom Rini <trini@konsulko.com>,
  Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de
 References: <20250417-wdt-v2-0-49939de473e1@hifiphile.com>
- <20250417-wdt-v2-7-49939de473e1@hifiphile.com>
+ <20250417-wdt-v2-2-49939de473e1@hifiphile.com>
 From: Eugen Hristev <eugen.hristev@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20250417-wdt-v2-7-49939de473e1@hifiphile.com>
+In-Reply-To: <20250417-wdt-v2-2-49939de473e1@hifiphile.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,37 +101,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+
 On 4/17/25 12:09, Zixun LI wrote:
-> Add the watchdog timer node for the sam9x60 SoC's.
+> at91_wdt struct is not used by anyone, let's remove it.
 > 
 > Signed-off-by: Zixun LI <admin@hifiphile.com>
-
-Nitpick: no dot at the end of the subject
-
 > ---
->  arch/arm/dts/sam9x60.dtsi | 7 +++++++
->  1 file changed, 7 insertions(+)
+>  arch/arm/mach-at91/include/mach/at91_wdt.h | 6 ------
+>  1 file changed, 6 deletions(-)
 > 
-> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
-> index 60de9140226981003c06747e103966b696b7b700..6a5465cf31d5ab48e1205896884f41d2203b5812 100644
-> --- a/arch/arm/dts/sam9x60.dtsi
-> +++ b/arch/arm/dts/sam9x60.dtsi
-> @@ -298,6 +298,13 @@
->  				clocks = <&slow_rc_osc>, <&slow_xtal>;
->  				#clock-cells = <1>;
->  			};
-> +
-> +			watchdog: watchdog@ffffff80 {
-> +				compatible = "microchip,sam9x60-wdt";
-> +				reg = <0xffffff80 0x24>;
-
-Can you also add the interrupt line to make it identical with Linux node?
-
-> +				clocks = <&clk32 0>;
-> +				status = "disabled";
-> +			};
->  		};
->  	};
+> diff --git a/arch/arm/mach-at91/include/mach/at91_wdt.h b/arch/arm/mach-at91/include/mach/at91_wdt.h
+> index 8ef8e007d7767308a5b46be46b02c51073723a41..78ad0453fd9eb3e42674d10cb11ce3da820cdc6a 100644
+> --- a/arch/arm/mach-at91/include/mach/at91_wdt.h
+> +++ b/arch/arm/mach-at91/include/mach/at91_wdt.h
+> @@ -19,12 +19,6 @@
 >  
+>  #else
+>  
+> -typedef struct at91_wdt {
+> -	u32	cr;
+> -	u32	mr;
+> -	u32	sr;
+> -} at91_wdt_t;
+> -
+>  struct at91_wdt_priv {
+>  	void __iomem *regs;
+>  	u32 regval;
 > 
 
+I would merge patch 1 with patch 2 (this one).
+Removing references to a struct and removing the struct itself is a
+single logical step. Having just patch 1 in the tree would leave out a
+state where a non-used struct exists.
