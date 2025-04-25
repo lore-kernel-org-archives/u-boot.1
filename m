@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FCA9C369C2
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 13:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF42C369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 13:42:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7857381F6B;
-	Fri, 25 Apr 2025 15:17:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 3910A820F6;
+	Fri, 25 Apr 2025 15:42:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zFhUcnhs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GpzJ8rSK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 333F38288D; Fri, 25 Apr 2025 15:17:30 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F07058210D; Fri, 25 Apr 2025 15:42:49 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AA62828C2
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 15:17:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFAA481F4D
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 15:42:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6210cfe02c=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53PD2vFr002516;
- Fri, 25 Apr 2025 15:17:21 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- qocZglNn0Xq9XE5BVVzeobNnNA0S4dTE5eyxwIR8kAs=; b=zFhUcnhsAT+7+FJF
- V1bnuIdozNL1MB6aY/+I5KLKTrBJBDRSYrdjv4hBoToj/Ki5QQZVUEEwBhMQUb5T
- AMkDe/F3du8yEoL0rHk8JJghc2V1cqo43AoIWOnaYNNhGtkmEBLn7di1gFYCCkPw
- D920gEHj62ZiA2PIdO/agE6kpKdema0h5UIJQVKawIaDQfQnM1s5OvteIx19YKEm
- 5k4XWCINi/hm26Y84tTlSvi8LZrplxVTI5dLu0X5nuPfKCjmLNgRl4Z7kcblTM0j
- QEht4PDXTCs7KNdAOj8+rBJZ4TRtLlRJR5SkEs4DFrfTkAmPrwOp7ql+h8BFxIgT
- T7ZWUA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 466jk2mq64-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 25 Apr 2025 15:17:21 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EDD7840046;
- Fri, 25 Apr 2025 15:16:27 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1E3CD9114AF;
- Fri, 25 Apr 2025 15:15:59 +0200 (CEST)
-Received: from localhost (10.252.18.92) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 25 Apr
- 2025 15:15:58 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 22/22] configs: stm32mp25: enable DISTRO_DEFAULT and
- BOOTCOMMAND
-Date: Fri, 25 Apr 2025 15:15:33 +0200
-Message-ID: <20250425131533.392747-23-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250425131533.392747-1-patrice.chotard@foss.st.com>
-References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72b7a53ceb6so1454705a34.0
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 06:42:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1745588566; x=1746193366; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=j/gh0mYURWaprv9bdQ9D1yps2h+5cr7XEg1HqFZdQjc=;
+ b=GpzJ8rSKN8W9YgBg5GpFfxAAIoE+mjR+RStxJr/X+Ti+JeUSEjXlS0RKzd96AvCl1W
+ 1m6RVNU0wvOZPR2uXOpZArRuo+BEvPohReZ6bh6GRsQ7vmIAYfgRxfrCbDzwpDTxcZVk
+ G742dIA8CX2oVfhp08cCuofd4gB/jKyMIYBsA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745588566; x=1746193366;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=j/gh0mYURWaprv9bdQ9D1yps2h+5cr7XEg1HqFZdQjc=;
+ b=kwKQlm22+Xcso8YLLo5bBPXEFel5PI9yeHHPL8QW/wWgMorWVxL5uxBTFra4FWxxzz
+ KgoFyP5Z0XoirWncKt910QVM3XTJA2jrV4mJESDP1TYAaBUKg0Fb/RmWdTh85ErLpI8o
+ Yk7/6Fc5jku5y2r6Nvs5HlhAwwvnlXt36Jad705G51Ii25hSuXjs1zx4qXLsoqA88DF+
+ W43qJ4IulD998hTN4A3B4x8Tz15sIsUHmcmdO8MAXeBCIDn6kNmG2U80EKu3Hy/+fcJW
+ TnneLm9Avfr0avkcmfw9I0mnPqVJt97ebTazUrQyYIRBRVEvSXWSmLSzxZMmSrw19ggS
+ sumQ==
+X-Gm-Message-State: AOJu0YzLeyM/kdMQR8HB2DnDW71gGWf0bqz0KdLNTsqpwTMtQWKJqFSh
+ 670KLIX0ZLaLZXGZUvdueC/jPdpSnNykpwCd7GToWZKTowd4gwtOp+Xro4w5O1aORmPKSeyoGoN
+ m
+X-Gm-Gg: ASbGncvCi95CTTA7V94bK+DrkQ9riCJJbVorDRSPN9pRBBoXJsWfN79mQ72voNSgOK6
+ NcNiOgo8JoWEjhBftNIk2lUsjgeIrGS01HbZkBGqkuS3JOzNcmi85089tiGASQHNEi0DeW2upTa
+ o7V01NMB5J+tH5TX41V/9A/V1ixpUqm29wjlfuoaugtKcY7rjtsgSXBoPZxDixV/IeiWWwNt4Gk
+ ZBc2GF/CsM+TVBwrpXHGR5SCpJRd/ZjEE/8dNT2hr2E/NAbKGfsyJly55y0cQAcvGMv7nrsN8XB
+ osajo6Pz3BIEVQJOMSrGnk+kSRtgrD8E18s9Rm+/zOOuOxNckJhk00Ckra4UijU9XagXwnPdPab
+ g
+X-Google-Smtp-Source: AGHT+IHh4yay/D0VLnN0qsQmtlq7112kn2zPmbodFsnY7SQuXwO+8AFjyvM5u/gc6MTfpnpoV8wX+g==
+X-Received: by 2002:a05:6830:6812:b0:72b:9422:aec with SMTP id
+ 46e09a7af769-7305d02badbmr1262963a34.8.1745588566535; 
+ Fri, 25 Apr 2025 06:42:46 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7304f1a3267sm680272a34.22.2025.04.25.06.42.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Apr 2025 06:42:46 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250415181026.652393-1-trini@konsulko.com>
+References: <20250415181026.652393-1-trini@konsulko.com>
+Subject: Re: [PATCH] python: Use and refer to the venv module rather than
+ virtualenv
+Message-Id: <174558856583.695028.6071025459834109535.b4-ty@konsulko.com>
+Date: Fri, 25 Apr 2025 07:42:45 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.252.18.92]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-04-25_03,2025-04-24_02,2025-02-21_01
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,32 +95,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable DISTRO_DEFAULT and BOOTCOMMAND flags for stm32mp25
+On Tue, 15 Apr 2025 12:10:26 -0600, Tom Rini wrote:
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Using some form of sandbox with Python modules is a long standing best
+> practice with the language. There are a number of ways to have a Python
+> sandbox be created. At this point in time, it seems the Python community
+> is moving towards using the "venv" module provided with Python rather
+> than a separate tool. To match that we make the following changes:
+> 
+> - Refer to a "Python sandbox" rather than virtualenv in comments, etc.
+> - Install the python3-venv module in our container and not virtualenv.
+> - In our CI files, invoke "python -m venv" rather than "virtualenv".
+> - In documentation, tell users to install python3-venv and not
+>   virtualenv.
+> 
+> [...]
 
----
+Applied to u-boot/master, thanks!
 
-Changes in v2:
-  - Enable DISTRO_DEFAULT and BOOTCOMMAND flags
-
- configs/stm32mp25_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-index 0e515e4af65..317a6d5ecd6 100644
---- a/configs/stm32mp25_defconfig
-+++ b/configs/stm32mp25_defconfig
-@@ -16,7 +16,9 @@ CONFIG_SYS_MEMTEST_END=0x88000000
- CONFIG_API=y
- CONFIG_SYS_MMC_MAX_DEVICE=3
- CONFIG_FIT=y
-+CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
-+CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_SYS_PROMPT="STM32MP> "
- # CONFIG_CMD_BDI is not set
- CONFIG_CMD_BOOTZ=y
+[1/1] python: Use and refer to the venv module rather than virtualenv
+      commit: efd00b03455644b18eaf2b6dcd07f6d55b95b39e
 -- 
-2.25.1
+Tom
+
 
