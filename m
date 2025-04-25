@@ -4,105 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A334EC369D1
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E855EC369C2
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:36:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9CA98212A;
-	Fri, 25 Apr 2025 16:24:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=os-cillation.de
+	by phobos.denx.de (Postfix) with ESMTP id 2F8718215E;
+	Fri, 25 Apr 2025 16:36:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=os-cillation.de header.i=@os-cillation.de header.b="KZSZZTa1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G4YUX8PX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D32C88214A; Fri, 25 Apr 2025 16:24:07 +0200 (CEST)
-Received: from os-cillation.de (mx.os-c.de [213.165.83.196])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E3D648215F; Fri, 25 Apr 2025 16:36:06 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CBA082115
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:24:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=os-cillation.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6E5328212B
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:36:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hd@os-cillation.de
-Received: from core2024.osc.gmbh (p578a635d.dip0.t-ipconnect.de [87.138.99.93])
- by os-cillation.de (Postfix) with ESMTPSA id 05D51C0019;
- Fri, 25 Apr 2025 16:24:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=os-cillation.de;
- s=202409; t=1745591045;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=Fx/WSII95VQVZY+sK6wbn/VNgXZXN3kB82GeQeolz/k=;
- b=KZSZZTa1LiDOedJ6NvpDRSI795NClRGMRLo4TS+IJ7K1bb+MWZlFlbufLa38Ig50sT2/N/
- b/t7+Drz+eWZk4QpIouHRLquy4onFfyDsAE7+r8T7dUHbDavZlDQyVE4A348GN6e+gGLiP
- z8/8nRvuKX1rS4PyhV8SBQmzZhMP6Fhi0bx36oJ5uqGyLwO1snDFEcKoGC3B54Hnj1ijTX
- e/DfjtUjBp3HPZONPaXGB1zIAwMbLPA8t2hi5IKt+eir2yjmb7XN17umTem1ffp5cOP4qA
- v2UM4D5CLz0485Bk6cEqbua4lgRbii56LLn3aEfTfkpFIkS2ANL4Ab5p+lyJBw==
-Authentication-Results: os-cillation.de;
- auth=pass smtp.auth=os-c@schweissgut.net smtp.mailfrom=hd@os-cillation.de
-Received: from [192.168.3.45] (hd2022.osc.gmbh [192.168.3.45])
- by core2024.osc.gmbh (Postfix) with ESMTPSA id 9BF46200595;
- Fri, 25 Apr 2025 16:24:04 +0200 (CEST)
-Message-ID: <4598cbf6-337b-4743-8ce3-79e03e7a4187@os-cillation.de>
-Date: Fri, 25 Apr 2025 16:24:04 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5e8be1bdb7bso3768428a12.0
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:36:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1745591764; x=1746196564; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/WNxXHjsqid2n6pgmlu6wjSZnne0WjMKwYRnrEKY9bE=;
+ b=G4YUX8PXPdJH9zd3FuPQFlsgcXNeH7Jpaxl21uPx6rqJlT+dENN+AOHhmhReIvWM4g
+ QDjkX9eevQeP+wdxlzir9EWwApMCXhcJMXmDR+g8svCsTOT0eRARi5etjOSvhABDRVex
+ ILcJwtFf4oTqotl3lckpfNpYOkxsoKQGLSBjM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745591764; x=1746196564;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/WNxXHjsqid2n6pgmlu6wjSZnne0WjMKwYRnrEKY9bE=;
+ b=dUdgn2ZTe8M/H+1jB+x5yIWj1oslLltRQMkH9GSWuHUMbEVPrz791vkyez6RdDC8rF
+ nM0+9AVlg8yY2vk2l2khAz7vYgT44ntVpksw2F7mQQ54i/aaEvfHiMfCxpaB7VFp8cv7
+ +XtYGsyEiJeZ5DiPiPDFHGv8neQqTm0a1ZW+xWOxQPyF/MCk/Y0zpDKfaBidAWag8YVo
+ aFKfGLz184+6cG0BlvzCLA5TAVaun/PQCIQd4P5CUwKO6+vabbU0mtUndWQx3I0nBw6J
+ DP1DmSOtn2Kl4LflSYMq2RRZS6/Um/05OuO/6SRljLJEe2kT7qNv3rK7/DLwZdb+IfCW
+ ZkqA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWi5R7X8wF9rtv9efbgW7MQmThFUfKmUcpD7OOtaC2vryLIOY/VH1CnRKKFxtw9Ghm4XWQH6s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHtPwV3/mwwywGy9uVzZsmdcd0+zrcOTmfNzN2CD8hup5Aa0qc
+ Woe4RYyWLPZY+3XAKgqnNlGgXftMpvCsZoPrSPyzSZr2Xo2oeyKAfRYzoQq1TqMjHegbnt8Wtnk
+ VAKvvEkQFprzUhIMoUqXzc+/Km1dy98uTTNs7
+X-Gm-Gg: ASbGncvn+6egsh8hB+5Vn87TyqVWVzOON2bpsCOKJCdMNdUwF1eumcjRequTjE+uaZ4
+ S0FLB1Epbf+yBp66JJaGm3yy0cy+GRe0J8CnZ/FRKCjx+2eLeJJxuT7B/MkkFmkrBFx3TkxttbH
+ TWxNEEDB+VbIxtSThr3RmcjAY=
+X-Google-Smtp-Source: AGHT+IFsxcu1mK4P2Z7f0wrorAOF2ew81+huwxJTwxyacbn7bv7NiZXS4VZ4I7u0Z9kVYABUjjSyNe4UIZyEUFkr8os=
+X-Received: by 2002:a17:907:1c27:b0:ac4:3cd:2cb2 with SMTP id
+ a640c23a62f3a-ace7104e5d8mr251156566b.1.1745591763749; Fri, 25 Apr 2025
+ 07:36:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] build: Respect CONFIG_SPL_BUILD in DT sources
-To: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-Cc: marex@denx.de, aford173@gmail.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>, Simon Glass <sjg@chromium.org>
-References: <20250425135220.1929510-1-festevam@gmail.com>
- <20250425141741.GS5495@bill-the-cat>
-Content-Language: en-US
-From: Hendrik Donner <hd@os-cillation.de>
-Autocrypt: addr=hd@os-cillation.de; keydata=
- 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 li+2
-In-Reply-To: <20250425141741.GS5495@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
+ <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
+ <CAFLszTinU=6v+3OyaH0pp8snYm9BgfVrU_+35x2Az7fVs_CfYw@mail.gmail.com>
+ <4aef8b9ffd41d4e36550806f4688fc18dbddc500.camel@phytec.de>
+ <CAFLszTjPHBw-F0EkQJnT4TOsxdYzGH5EtRBaeRCoKGxQQ_cw4g@mail.gmail.com>
+ <20250424184923.GM5495@bill-the-cat>
+In-Reply-To: <20250424184923.GM5495@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 25 Apr 2025 08:35:52 -0600
+X-Gm-Features: ATxdqUH1mQaKSQtiKfMV-UwOFdUiJ2N_mgp7aR_xgJR4tvUcXMhL29DICevRtw0
+Message-ID: <CAFLszThPcJjhBVLvz=EkdeEP1K948cC=LyZhBk_Upk3iSWXCig@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+To: Tom Rini <trini@konsulko.com>
+Cc: Martin Schwan <M.Schwan@phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,44 +94,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Hi Tom,
 
-On 25.04.25 16:17, Tom Rini wrote:
-> On Fri, Apr 25, 2025 at 10:52:17AM -0300, Fabio Estevam wrote:
-> 
->> From: Marek Vasut <marex@denx.de>
->>
->> Currently the U-Boot SPL build uses the same DTBs that were generated
->> during U-Boot proper build, and calls 'fdtgrep' on those DTBs to filter
->> out uninteresting nodes and properties. Those U-Boot proper DTBs are
->> built from DTS which are first preprocessed by CPP, but that CPP is
->> invoked in U-Boot proper build context and effectively ignores the
->> CONFIG_SPL_BUILD macro. In case the CONFIG_SPL_BUILD macro is used
->> in any .dts file, the content of the macro is removed by CPP.
->>
->> Fix this by building a separate set of DTBs for the SPL, which are
->> preprocessed by CPP with -DCONFIG_SPL_BUILD set. Use the same way
->> for the other PLs.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> Signed-off-by: Fabio Estevam <festevam@denx.de>
->> ---
->>   dts/Makefile         |  5 ++++-
->>   scripts/Makefile.lib | 11 +++++++++++
->>   scripts/Makefile.xpl |  7 ++++++-
->>   3 files changed, 21 insertions(+), 2 deletions(-)
-> 
-> There's already a thread here:
-> https://lore.kernel.org/u-boot/20250305183544.40525-1-hd@os-cillation.de/
-> saying that we shouldn't be doing what this patch adds.
-> 
+On Thu, 24 Apr 2025 at 12:49, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Apr 24, 2025 at 12:31:38PM -0600, Simon Glass wrote:
+> > Hi Martin,
+> >
+> > On Thu, 24 Apr 2025 at 06:43, Martin Schwan <M.Schwan@phytec.de> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > thanks for the review and sorry for my delayed reply.
+> > >
+> > > On Mon, 2025-04-14 at 05:32 -0600, Simon Glass wrote:
+> > > > Hi Martin,
+> > > >
+> > > > On Wed, 29 Jan 2025 at 07:25, Martin Schwan <m.schwan@phytec.de>
+> > > > wrote:
+> > > > >
+> > > > > Add a bootmeth driver which supports booting A/B system with RAUC
+> > > > > as
+> > > > > their update client.
+> > > > >
+> > > > > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+> > > > > ---
+> > > > >  boot/Kconfig         |  11 ++
+> > > > >  boot/Makefile        |   1 +
+> > > > >  boot/bootmeth_rauc.c | 408
+> > > > > +++++++++++++++++++++++++++++++++++++++++++++++++++
+> > > > >  3 files changed, 420 insertions(+)
+> > > >
+> > > > This looks fine to me. Just some nits below.
+> > > >
+> >
+> > [..]
+> >
+> > > > > +
+> > > > > +       partitions = env_get("rauc_partitions");
+> > > > > +       if (!partitions)
+> > > > > +               return log_msg_ret("env", -ENOENT);
+> > > > > +       partitions_list = str_to_list(partitions);
+> > > > > +
+> > > > > +       slots = env_get("rauc_slots");
+> > > > > +       if (!slots)
+> > > > > +               return log_msg_ret("env", -ENOENT);
+> > > > > +       slots_list = str_to_list(slots);
+> > > > > +
+> > > > > +       boot_order = env_get("BOOT_ORDER");
+> > > >
+> > > > Environment variables should be in lower case.
+> > >
+> > > Unfortunately, we are bound to the naming RAUC uses for these
+> > > environment variables, which is upper case. See
+> > > https://rauc.readthedocs.io/en/latest/integration.html#set-up-u-boot-boot-script-for-rauc
+> >
+> > Can't you change it, since you are introducing new support here?
+> >
+> > If not, then you could perhaps set the env variables to lowercase when
+> > you find uppercase variables? I suppose that would require updating
+> > the client to do the same thing too?
+> >
+> > It would be very confusing for a user to have upper-case variables for
+> > some things.
+>
+> Simon, this is an unreasonable request. This is how RAUC has been
+> working and deployed for years and years. It would be a nightmare trying
+> to handle migration of existing deployments for an aesthetic change.
 
-i was even asked to add a checkpatch.pl check for that:
+Yes, I figured. Perhaps it could support lower case in future? This is
+the first I have seen on RAUC in U-Boot, although I do see this file
+which has both lower and upper case:
 
-https://lore.kernel.org/u-boot/20250306201540.127646-1-hd@os-cillation.de/
-
-The original thread has been idle for a few weeks, i was about to ask
-how to move forward with the initial problem.
+include/env/phytec/rauc.env
 
 Regards,
-Hendrik
+Simon
