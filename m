@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D313BC369D7
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D682C369D1
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 14:19:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DA778212A;
-	Fri, 25 Apr 2025 16:17:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 229458212A;
+	Fri, 25 Apr 2025 16:19:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H9ydA4ZE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R+S6GvFf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5503810EB; Fri, 25 Apr 2025 16:17:48 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 22FF482115; Fri, 25 Apr 2025 16:19:44 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8126C810EB
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B478B8212A
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 16:19:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3feaedb39e9so779740b6e.1
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:17:45 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3f8df49e75fso606713b6e.1
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 07:19:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745590664; x=1746195464; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745590780; x=1746195580; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PRDAJa/9OdS9xzNclxrX8NhhSczVwjTqOntXKSBOWnA=;
- b=H9ydA4ZEJMxWlYAk7eIXl5eD9DdIEsgitcx6sp4/5FD+3DM8gJ1PaHrxdijPJQnVYg
- DH2rD+el9bviZhvdwRGcSn/oQf866pIC0YPFqCKKdSvSzsMt9+cQUpmjBvUqQIncXbnw
- Bx/Y/JFNh69Ue6Zvxe7zngd2g932H21lGmE6c=
+ bh=ReNb1hPirEiPj5LvzEOanT6YocRGN47irSMZm6kretM=;
+ b=R+S6GvFfJGkR1Z0ZqPTA9Ck7VhwhzapqmLd1/bckZ6J34N1vyEz5kBC7Lqr6GOaAMl
+ fTvDugyB66JkuaBP+wa2vQgMXGbDkz6CMoSWaP/vdAVNH1au2VbCB3pEc3RqAQXEbMBm
+ 9mTlxshSP2NmRpxHeQu/OWTUVMPM29lf3yM9M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745590664; x=1746195464;
+ d=1e100.net; s=20230601; t=1745590780; x=1746195580;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PRDAJa/9OdS9xzNclxrX8NhhSczVwjTqOntXKSBOWnA=;
- b=edNedKsFm2BoAv2eMVWPQkynBXvTB7rdlRncRGbv2pn8P9FdaN8m+op2MqRwxvoStj
- 2dOjMLa1JrAYa6i2Y6YZYUbUOZbRYh7s+zY4WttgfNIDvnWSUn0J8rxypsVln0CYOeRn
- JukatWw6S1Wk2BD9CybWuNq2Jm863P8ED4nT5AFe++53alT1ZPnY68QyopJWvPINncYI
- FmX72Y2jy+4jTaNK9H2VHjDMqaQW7T0UiQNsz2V1kGcc4Di2Ypssu0NIYnp6ZNlOPmSN
- jgJgm4egK3C9FBV6L3+OlNxJ/PLNIVe0YRXDp+wpJeyrLspfINdBajqAycIxNmX1mAqm
- iZ/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUnioxIAd5DEZ6yngQki/JRaTUcJekXvt971/f16yAEBd8S2VJLLdLALNgwUZu+q2RIUN+on5g=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0whmvBLToXDpvCJ+WJ6bLV6Tqk7PAxz6sjGBBnvBowtkUDr2C
- 4oZraIDTnLxz6yW2TIY4ldx8fMpb5ScPudCsO5TD+9zRDOTYj/bIAihEeWxXuvY=
-X-Gm-Gg: ASbGncv+dsi1HqzDHUmeAj5QfKUu/7hVUU+B+2CjSBy1iPCrMEzH7R9sUDh/GE+lInv
- LXYei1LK1K2FysS8IsiSDe3PsqZCY+HU3cxWoPXwBFeZNLI6e285F70ZMAXkA0X0giQTdHceWE1
- YnKnjYCcLV9HVwSW7aORVzPeEF7lezl0ybgPmMjyXV/uD0MuEjzNVJ53si237jSU/CV0PysQk/0
- duzRd1wkuUyDe/cuJWlMlV+ujZruhSt3E/FQBdG+aF6N1Iedzs5tK0hxt9wGAeN5q3s9qeUEEoI
- Pww/Y00kiNg89p03y3MUEQ1fY6HyBbBBidcapAUstKCQKmoP20NMfYI9yhSvt52C/s0d0y0oQc6
- 5uQ==
-X-Google-Smtp-Source: AGHT+IF5bOYm0Zqz+BJKxOP9kpgEAKTc/erg+3jXoJaAtPmYxrOBsviLpFJxmoCqxEggMWrs7zMm2g==
-X-Received: by 2002:a05:6808:5:b0:401:ea99:544 with SMTP id
- 5614622812f47-401f28887ffmr1235212b6e.11.1745590664227; 
- Fri, 25 Apr 2025 07:17:44 -0700 (PDT)
+ bh=ReNb1hPirEiPj5LvzEOanT6YocRGN47irSMZm6kretM=;
+ b=lSy79pzNykBFuT9TUKUYUFw3frllPc9Edb0vy53UXbS+L7d2ZiUasysN+B767YlAHZ
+ H9glhUgVdaV/Lhm/lWzco3bvVAyUheaHE8dGE9bxsJXt9AsxhPjlae8p1OwLo6E34JQl
+ ow24RNdfXxYzmo2GkY4LA+RLsp0akvG+c1llh6PUUNXBFYJxf2fPQmPdRrSOyDuJ/Pe7
+ 8A/VNuV/wvQxlnLHGsnWZNa6hToXV381/BdQLCD8bq/Hq6gX/8VgA+jHywXhK3BtIXy1
+ QpjXpL62Idqi0wndI/4r/TzxoAmu7FxDG1BF4sLGOfSDr/bE/FBxyMo5iM2PaPD+g45I
+ fbfg==
+X-Gm-Message-State: AOJu0YxoOXfACwGTOdiUgnrROy3rKPm6fPmOuQniDRmgo6WqugwZAMaH
+ 9OSjIYdgVzze1wm7FfIzDFfy64AH1ZxMB90KhsDKIC9SMEhDWHPGL2Tc/slBjWSuXXq4+86RolO
+ A
+X-Gm-Gg: ASbGncvDVpz9Ieafi/XVVA/4bPjFrYKoXXeBanv1PxYODvE0OevTFRzt26DfEHkY5kM
+ vIXDCz4yb0OSPQM8eC9PTX2TLBqxxRe2MzvEXEICKxpzPsD5kUkm0s30k/Ayi56oLlOX8Kha8nA
+ aaPrnZeQ6rITkIigQnyP7YEqWi5PbYk+0nyuEm6KUpjKJGTzKR4Vk19blbdNASgy+5KZMeQBjk1
+ ySIuVvZ/LrLXDXE4sW1MX0tGR4b19+BgJhD5kYyBeIINX0ITow9DNeMI+jMkeAFQ4aiOmwcosdu
+ kBfpb2z0TxgWTAgSmmBlzs3D6RWkj+JyAdnQ98FKX7Qgltw4gA/RralHl9vyxw2JSSbziliAfx6
+ YQWfbUnBOQtgl
+X-Google-Smtp-Source: AGHT+IFDDFg/OqNO+g3MX7VytKm4YhGzF7DNkdUjJQk6Ttp5LqYmHK1kHM8nhmd7Fy7j7ovnj1HkoQ==
+X-Received: by 2002:a05:6808:318e:b0:3fb:54b0:caf6 with SMTP id
+ 5614622812f47-401f2b10715mr1656604b6e.36.1745590780471; 
+ Fri, 25 Apr 2025 07:19:40 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-606468a16a7sm734197eaf.22.2025.04.25.07.17.42
+ 006d021491bc7-60646862ec5sm726336eaf.3.2025.04.25.07.19.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 07:17:43 -0700 (PDT)
-Date: Fri, 25 Apr 2025 08:17:41 -0600
+ Fri, 25 Apr 2025 07:19:39 -0700 (PDT)
+Date: Fri, 25 Apr 2025 08:19:37 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: marex@denx.de, aford173@gmail.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/4] build: Respect CONFIG_SPL_BUILD in DT sources
-Message-ID: <20250425141741.GS5495@bill-the-cat>
-References: <20250425135220.1929510-1-festevam@gmail.com>
+To: Weijie Gao <weijie.gao@mediatek.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
+ Francesco Dolcini <francesco@dolcini.it>
+Subject: Re: [PATCH] mtd: mtdparts: calculate mtd partition offset before
+ calculating size
+Message-ID: <20250425141937.GT5495@bill-the-cat>
+References: <20250425034303.77100-1-weijie.gao@mediatek.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="68UbDihwBlsZFlbF"
+ protocol="application/pgp-signature"; boundary="jN//C3c4yh+0NJX0"
 Content-Disposition: inline
-In-Reply-To: <20250425135220.1929510-1-festevam@gmail.com>
+In-Reply-To: <20250425034303.77100-1-weijie.gao@mediatek.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,58 +101,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---68UbDihwBlsZFlbF
+--jN//C3c4yh+0NJX0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 25, 2025 at 10:52:17AM -0300, Fabio Estevam wrote:
+On Fri, Apr 25, 2025 at 11:43:03AM +0800, Weijie Gao wrote:
 
-> From: Marek Vasut <marex@denx.de>
+> The mtd partition offset must be calculated first as it will be
+> referenced when calculating the mtd partition size.
 >=20
-> Currently the U-Boot SPL build uses the same DTBs that were generated
-> during U-Boot proper build, and calls 'fdtgrep' on those DTBs to filter
-> out uninteresting nodes and properties. Those U-Boot proper DTBs are
-> built from DTS which are first preprocessed by CPP, but that CPP is
-> invoked in U-Boot proper build context and effectively ignores the
-> CONFIG_SPL_BUILD macro. In case the CONFIG_SPL_BUILD macro is used
-> in any .dts file, the content of the macro is removed by CPP.
->=20
-> Fix this by building a separate set of DTBs for the SPL, which are
-> preprocessed by CPP with -DCONFIG_SPL_BUILD set. Use the same way
-> for the other PLs.
->=20
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> Change-Id: Iccfd101b0a9597ac240c25670da638a82af28980
+> Fixes: 1ca97ee9039 (mtd: mtdpart: Support MTD_SIZE_REMAINING with unalloc=
+ated memory area)
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+
+Reported-by: Francesco Dolcini <francesco@dolcini.it>
+
 > ---
->  dts/Makefile         |  5 ++++-
->  scripts/Makefile.lib | 11 +++++++++++
->  scripts/Makefile.xpl |  7 ++++++-
->  3 files changed, 21 insertions(+), 2 deletions(-)
-
-There's already a thread here:
-https://lore.kernel.org/u-boot/20250305183544.40525-1-hd@os-cillation.de/
-saying that we shouldn't be doing what this patch adds.
+>  drivers/mtd/mtdpart.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
+> index 3f8edeb5093..99bea6f1c85 100644
+> --- a/drivers/mtd/mtdpart.c
+> +++ b/drivers/mtd/mtdpart.c
+> @@ -236,6 +236,10 @@ int mtd_parse_partitions(struct mtd_info *parent, co=
+nst char **_mtdparts,
+>  		if (ret)
+>  			return ret;
+> =20
+> +		if (parts[idx].offset =3D=3D MTD_OFFSET_NOT_SPECIFIED)
+> +			parts[idx].offset =3D cur_off;
+> +		cur_off +=3D parts[idx].size;
+> +
+>  		if (parts[idx].size =3D=3D MTD_SIZE_REMAINING)
+>  			parts[idx].size =3D parent->size - parts[idx].offset;
+> =20
+> @@ -246,10 +250,6 @@ int mtd_parse_partitions(struct mtd_info *parent, co=
+nst char **_mtdparts,
+>  			return -EINVAL;
+>  		}
+> =20
+> -		if (parts[idx].offset =3D=3D MTD_OFFSET_NOT_SPECIFIED)
+> -			parts[idx].offset =3D cur_off;
+> -		cur_off +=3D parts[idx].size;
+> -
+>  		parts[idx].ecclayout =3D parent->ecclayout;
+>  	}
+> =20
+> --=20
+> 2.34.1
+>=20
 
 --=20
 Tom
 
---68UbDihwBlsZFlbF
+--jN//C3c4yh+0NJX0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgLmYEACgkQFHw5/5Y0
-tyw6qwv8DzDyZuYUpzaXZjlQzqgioz0oopsEYVzPVcM+LciWBA5aIjZNiwZTtwEI
-Wrs2Gw50pVhFd+YZR0nu1F+VJE8BkxSnNfT603b77MBWt2QkDtJEg0FeWknb2TDw
-Rbg2txJvaNMaFSTduZx9hkVeQWiOYYASDPYEVoMax/I5hGV4cAZ3Rfok1iuNgBPw
-Q0mb7mUsO/5r9KfqhhGzg3FgdxVPxbtyNPMrboC10IU2wCviFbJPH4wkbOaEIWhr
-o8cnKDbNLfucxW0DbHo3A209qx7oJoGpSlgAekAYFFAUS8X0aP0TG/weHWuJ35KJ
-61fMAtAve0DVpeSxi0infS6S24k0Ic1aRWadr62aS8xo3wc6q8VnCx2S7TwFvc2Z
-VJrkWskSYCKQwOVG1VPyZnftE2aTb9wNpt8ZGsXHEmC+fX0M9yYfpjUCIQ2bPeWE
-+PEcrAfUZK9NLLM6nUnbcrrOmd6pVSi6RQ9c0S+i7RdUlgoozWJo314tRmMgSGx6
-Dfd0poTO
-=cADN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgLmfkACgkQFHw5/5Y0
+tywh2gv/XB6R8ngIinIkQevhi7nq5ug9SVJhQojcP4Zkhof6Svhg2/riTspsX0xZ
+lwK+b3Y/NL+vgdY/pV17GQQi5G9hTdMNWNILQMEGAKJlve0oz/ujPi0EyAXoQWs7
+7Cg08Xa0H5lYWPF+0YNZIdvIMlXb391N8daiX4TBcJtj/oiYz6st9sxw9DwbBR5Q
+ChRcskDduA5FPVbV/PubDUFkbmDR6qV6TEXeUE65PDraY68EQH+AVk0CM5NfPlwS
+OY/yUKAr4S1mK0JiGRt9KpC8A6vd7XfxCldYEWkI6iyM71Fg//9QUCoWM2ZY/0Rb
+/pYGV3Jd5KzqcDt4POa6FVcGGWgMxF6zVxWXvX2zNMn4S/uMjktijyKKCQeSuNFX
+B+M8M0Gc71+AsX+MVRfIlbI/ttX4aboWC650Gjb/bXQGnanZZ9DSQZEx0ixLbEE9
+jkjb0aQDYl63PprIj25KiVELFOaFA3lA+ZrrVQp8HYvPN9GeCRR9oyb/QgZ4L7ll
+g1nB6Zdq
+=zTwK
 -----END PGP SIGNATURE-----
 
---68UbDihwBlsZFlbF--
+--jN//C3c4yh+0NJX0--
