@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD849C369D1
-	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 03:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC9B8C369D1
+	for <u-boot@archiver.kernel.org>; Fri, 25 Apr 2025 04:35:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 236CE8059A;
-	Fri, 25 Apr 2025 05:43:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id C80CE809D4;
+	Fri, 25 Apr 2025 06:35:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="ONqZBILQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dGjEJXp3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0022809D4; Fri, 25 Apr 2025 05:43:41 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64B8A8056A
- for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 05:43:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ id 18EB1810EB; Fri, 25 Apr 2025 06:35:23 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 53AA58059A
+ for <u-boot@lists.denx.de>; Fri, 25 Apr 2025 06:35:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 756a6e30218711f09b6713c7f6bde12e-20250425
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=NHOPtEHstfIFlCFhUvZxoE3mO49YFQTBwZuYsIF2XlU=; 
- b=ONqZBILQEuRu03UdSEauP5lc1kQbBXE7NglkVYIr2Ldyw4ds6sUzyw8VlHlISJUGwb7b1B/fY/aQcpTyDliszBxcQjIi/3ZkbXiNDTm71/JfuLLlWWfZLDUOpWdUDjWCpDOH/RtIsUlGzemM3wW1RRiB7PpHv9wQZZUGr0Ow0+E=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.2.1, REQID:e5b959f2-6b73-4619-bacc-0156e82418f7, IP:0,
- UR
- L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
- elease,TS:0
-X-CID-META: VersionHash:0ef645f, CLOUDID:8f6799f0-ff26-40e8-a637-f0e9524b171a,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:ni
- l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
- :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 756a6e30218711f09b6713c7f6bde12e-20250425
-Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1802973031; Fri, 25 Apr 2025 11:43:32 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Fri, 25 Apr 2025 11:43:30 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Fri, 25 Apr 2025 11:43:30 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Alexander Stein <alexander.stein@ew.tq-group.com>,
- Francesco Dolcini <francesco@dolcini.it>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH] mtd: mtdparts: calculate mtd partition offset before
- calculating size
-Date: Fri, 25 Apr 2025 11:43:03 +0800
-Message-ID: <20250425034303.77100-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53P4ZBKQ2038096
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 24 Apr 2025 23:35:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745555711;
+ bh=cyBiVuFb4CMYHY1nsTSTOl6uja9bUOml6Cx7U2Bqx0c=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=dGjEJXp3JNX3AQn4QnnfoowmV1tGGTBPw+pPzoZLboKjLQMhAKV3ghXvHxfvhCfnJ
+ ySmudS/xXebOK3xibRF8P8GVkqAzXwXs//n6wDZ19CLwUgMpilk64QfY63ay6lqawN
+ N1zZ1HCd8enOIp0sRqw5mpvTbKOr+L9CGNq+ZsH4=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53P4ZBQT108015
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 24 Apr 2025 23:35:11 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
+ Apr 2025 23:35:11 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 24 Apr 2025 23:35:11 -0500
+Received: from [172.24.19.195] (lt5cd2489kgj.dhcp.ti.com [172.24.19.195])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53P4Z7KL109035;
+ Thu, 24 Apr 2025 23:35:08 -0500
+Message-ID: <5934ae86-16e8-4c97-afd6-d812fc0c5f7f@ti.com>
+Date: Fri, 25 Apr 2025 10:05:06 +0530
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC] Expected behavior of the go command
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>, Simon Glass <sjg@chromium.org>,
+ Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <rick@andestech.com>,
+ <mporter@konsulko.com>, <u-kumar1@ti.com>
+References: <D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com>
+ <CAFLszTg72Ai2V-L3MKvqDx8ROk97jiW4bvAbvFtZEAFBBp6qfQ@mail.gmail.com>
+ <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <ad4a911f-681a-4fea-b79c-8489b47d7360@pengutronix.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,42 +84,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mtd partition offset must be calculated first as it will be
-referenced when calculating the mtd partition size.
 
-Change-Id: Iccfd101b0a9597ac240c25670da638a82af28980
-Fixes: 1ca97ee9039 (mtd: mtdpart: Support MTD_SIZE_REMAINING with unallocated memory area)
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
- drivers/mtd/mtdpart.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+On 4/23/2025 7:52 PM, Ahmad Fatoum wrote:
+> Hi,
+>
+> On 4/23/25 14:28, Simon Glass wrote:
+>> Hi Anshul,
+>>
+>> On Wed, 23 Apr 2025 at 04:04, Anshul Dalal <anshuld@ti.com> wrote:
+>>> Hi all,
+>>>
+>>> I was trying to understand how the go command is expected to work when
+>>> used to load custom OSes. My use case requires getting a proprietary OS
+>>> to boot using the go command on a TI K3 platform. The OS expects caches
+>>> to be flushed and the mmu to be disabled before we jump to it.
+>>>
+>>> The go command (do_go func in cmd/boot.c) calls the do_go_exec function
+>>> underneath which does not seem to have a consistent implementation
+>>> across various architectures.
+>>>
+>>> In RISC-V the implementation (arch/riscv/lib/boot.c:10) calls
+>>> cleanup_before_linux before jumping to the loaded binary. This behaviour
+>>> would enable the direct use of the go command for booting a custom OS
+>>> (like in my use case). Though no such generic implementation exists for
+>>> ARM64.
+>>>
+>>> I was wondering why we have the call to cleanup_before_linux for RISCV
+>>> and not ARM64?
+>>>
+>>> Also, is booting a custom OS using the go command a supported use-case?
+>>> If yes, it might be better to rename the function to be more generic
+>>> like cleanup_before_os from *_linux and call it for each invocation of
+>>> the go command.
+>> Yes it is supposed to do what you say. You could rationalise the code
+>> a bit, so that all archs do a similar thing, or perhaps just RISC-V
+>> and ARM for now.
+> I ran into issues with go too trying to start barebox and I always
+> assumed that go is rather meant to start programs that call back into
+> U-Boot using the jump table mechanism. In that case, you likely don't
+> want to turn off caches.
+>
+> What I settled on is having the barebox build generate a FIT image that
+> can be used from U-Boot, barebox, coreboot ...etc.
+>
+> Maybe the same would be also suitable for you? Alternatively, you could
+> compile your custom OS as an ELF image and boot that properly as if it
+> were a kernel. Both ways would also allow you to specify a load address
+> if your OS is not relocatable and pass along arguments.
+>
+> I went with the FIT route for barebox, because we can now ship device
+> trees for all enabled boards in the same FIT image alongside one generic
+> second stage barebox with DT support. If you want to support different
+> boards with your OS image that might be of interest to you as well.
 
-diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
-index 3f8edeb5093..99bea6f1c85 100644
---- a/drivers/mtd/mtdpart.c
-+++ b/drivers/mtd/mtdpart.c
-@@ -236,6 +236,10 @@ int mtd_parse_partitions(struct mtd_info *parent, const char **_mtdparts,
- 		if (ret)
- 			return ret;
- 
-+		if (parts[idx].offset == MTD_OFFSET_NOT_SPECIFIED)
-+			parts[idx].offset = cur_off;
-+		cur_off += parts[idx].size;
-+
- 		if (parts[idx].size == MTD_SIZE_REMAINING)
- 			parts[idx].size = parent->size - parts[idx].offset;
- 
-@@ -246,10 +250,6 @@ int mtd_parse_partitions(struct mtd_info *parent, const char **_mtdparts,
- 			return -EINVAL;
- 		}
- 
--		if (parts[idx].offset == MTD_OFFSET_NOT_SPECIFIED)
--			parts[idx].offset = cur_off;
--		cur_off += parts[idx].size;
--
- 		parts[idx].ecclayout = parent->ecclayout;
- 	}
- 
--- 
-2.34.1
+Sorry for novice question.
 
+But trying to understand how FIT fixes problem for you .
+
+at the end, its a jump command to OS/other code be it through u-boot go 
+or fit way.
+
+
+In case OS/other code handles caches, then should not be an issue. But 
+this put requirement on next stage to take care of caches [0]
+
+
+[0] : 
+https://github.com/torvalds/linux/blob/master/arch/arm64/kernel/head.S#L105
+
+
+>
+> Cheers,
+> Ahmad
+>
+>> Regards,
+>> Simon
+>>
