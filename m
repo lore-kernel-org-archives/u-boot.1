@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C4C7C369CB
-	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 17:03:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B6D6C369CB
+	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 17:09:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9389F82105;
-	Sat, 26 Apr 2025 19:03:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBC5581E14;
+	Sat, 26 Apr 2025 19:09:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="OnUepC7I";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="dUB4FpbN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9591E81E0F; Sat, 26 Apr 2025 19:03:50 +0200 (CEST)
+ id 3C20A81F45; Sat, 26 Apr 2025 19:09:36 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5486782119
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 19:03:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9985810EB
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 19:09:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 1231325C33;
- Sat, 26 Apr 2025 19:03:47 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id 8964925C33;
+ Sat, 26 Apr 2025 19:09:33 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3id-L7mCh5Un; Sat, 26 Apr 2025 19:03:45 +0200 (CEST)
+ id CtgU5iiot9k6; Sat, 26 Apr 2025 19:09:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1745687025; bh=D1YV5R8L2xok4VY3Dz6/zl/IQaMACBEeKQG3eBCqEH8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=OnUepC7IUAUhqS3QM2FXjvnleV0ICHQAIU8x2hESWrEfh1QhQWtQ4xWAelAEri98W
- SceKz1IRCtJ9EXldHe7v5OpxBCFXi5E+74ClU2YPbxUnKWdEBIWSpIyI4L+QJzuyVF
- 11+52+OAUliziPu3yeK/E/t6ohbgqkqPhRd/vAmkM0yY61eAF+F3LQphU/DF4WbGfj
- IHdVKgrdU94AvF4EKFaE/27Sk+Gi8cha11WO6F3RLwmOo7fvzUVPF9nQ1PoBtX4etP
- MxCeizaCjiP7Tf4er6M46HgRB7AqB0mQQn55mNlLzrHwsNOTi9kobf9TEVARSVb8i6
- cEUMLg6aSuR4Q==
+ t=1745687372; bh=I76S7BzDIkYAyETdZHudMYV3jyByNsIIQBHl2HZStAc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=dUB4FpbNUFQRy8f6ekDdd81bG2mGVm0ZMLKbdrYfITjIjyoJeQ+ElC677ZUEcG/Eh
+ qzJ8YFOFSQXSO2DO5pMyAUgs/ZsuHlwSLii6DDiJtN+9LvDM1MHgjToWLQik7bgVPK
+ h9T2DkKFdYptOa+f6Tb/yolaeYRcypzYBV8rWneYhQCQBIvgefs8UelNteJ3xgd06P
+ 3q6kb0fm9lHB2ChG20f5m759cEzfEocMR1y8M8B3SQoaOZxXbV3K2cx5QwN7We2GLl
+ 2vWnUQpBm6zygq4oynNFwOiiT3PPAFS/w5l0On+b+LThI405C49Sg7uprqq9gm/Pkr
+ eb7Ff4qc3TIxg==
+Date: Sat, 26 Apr 2025 17:09:16 +0000
 From: Yao Zi <ziyao@disroot.org>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
@@ -52,14 +53,16 @@ To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Vaishnav Achath <vaishnav.a@ti.com>, Andrew Davis <afd@ti.com>,
  Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
- Han Gao <gaohan@iscas.ac.cn>, Yao Zi <ziyao@disroot.org>
-Subject: [PATCH 10/10] doc: thead: lpi4a: Update documentation
-Date: Sat, 26 Apr 2025 17:03:21 +0000
-Message-ID: <20250426170322.35601-2-ziyao@disroot.org>
-In-Reply-To: <20250426165704.35523-1-ziyao@disroot.org>
+ Han Gao <gaohan@iscas.ac.cn>
+Subject: Re: [PATCH 04/10] ram: thead: Add initial DDR controller support for
+ TH1520
+Message-ID: <aA0TPBV_YN3IHGAf@pie.lan>
 References: <20250426165704.35523-1-ziyao@disroot.org>
+ <20250426165704.35523-5-ziyao@disroot.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250426165704.35523-5-ziyao@disroot.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,109 +79,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support for eMMC, SD card, GPIO and SPL have been available in LPi4A
-port. Update the documentation of support status and build
-instructions.
+On Sat, Apr 26, 2025 at 04:56:58PM +0000, Yao Zi wrote:
+> This patch cleans the vendor code of DDR initialization up, converts the
+> driver to fit in DM framework and use a firmware[1] packaged by binman to
+> ship PHY configuration.
+> 
+> Currently the driver is only capable of initializing the controller to
+> work with dual-rank 3733MHz LPDDR4, which is shipped by 16GiB variants
+> of LicheePi 4A boards and I could test with. Support for other
+> configurations could be easily added later.
 
-Signed-off-by: Yao Zi <ziyao@disroot.org>
----
- doc/board/thead/lpi4a.rst | 58 +++++++++++++++++++++++++++++++++++++--
- 1 file changed, 55 insertions(+), 3 deletions(-)
+I wrongly repeated this patch twice when sending the series, sorry for
+the noise.
 
-diff --git a/doc/board/thead/lpi4a.rst b/doc/board/thead/lpi4a.rst
-index e395c6ae12c..7e4c4ea81ee 100644
---- a/doc/board/thead/lpi4a.rst
-+++ b/doc/board/thead/lpi4a.rst
-@@ -32,6 +32,8 @@ Mainline support
- The support for following drivers are already enabled:
- 
- 1. ns16550 UART Driver.
-+2. eMMC and SD card
-+
- 
- Building
- ~~~~~~~~
-@@ -43,15 +45,32 @@ Building
- 
-    export CROSS_COMPILE=<riscv64 toolchain prefix>
- 
--The U-Boot is capable of running in M-Mode, so we can directly build it.
-+3. Build DDR firmware
-+
-+DDR driver requires a firmware to function, to build it:
-+
-+.. code-block:: bash
-+
-+	git clone --depth 1 https://github.com/ziyao233/th1520-firmware
-+	cd th1520-firmware
-+	lua5.4 ddr-generate.lua src/<CONFIGURATION_NAME>.lua th1520-ddr-firmware.bin
-+
-+4. Build U-Boot images
-+
-+The U-Boot is capable of running in M-Mode, so we can directly build it without
-+OpenSBI. The DDR firmware should be copied to U-Boot source directory before
-+building.
- 
- .. code-block:: console
- 
- 	cd <U-Boot-dir>
-+	cp <path-to-ddr-firmware> th1520-ddr-firmware.bin
- 	make th1520_lpi4a_defconfig
- 	make
- 
--This will generate u-boot-dtb.bin
-+This will generate u-boot-dtb.bin and u-boot-with-spl.bin. The former contains
-+only proper U-Boot and is for chainloading; the later contains also SPL and
-+DDR firmware and is ready for booting by BROM directly.
- 
- Booting
- ~~~~~~~
-@@ -61,7 +80,7 @@ and chain load the mainline u-boot image either via tftp or emmc storage,
- then bootup from it.
- 
- Sample boot log from Lichee PI 4A board via tftp
--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
- .. code-block:: none
- 
-@@ -127,3 +146,36 @@ Sample boot log from Lichee PI 4A board via tftp
-         Err:   serial@ffe7014000
-         Model: Sipeed Lichee Pi 4A
-         LPI4A=>
-+
-+SPL support is still in an early stage and not all of the functionalities are
-+available when booting from mainline SPL. When using mainline SPL,
-+u-boot-with-spl.bin should be loaded to SRAM through fastboot.
-+
-+Sample boot log from Lichee PI 4A board via fastboot and mainline SPL
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. code-block:: none
-+
-+	brom_ver 8
-+	[APP][E] protocol_connect failed, exit.
-+	Starting download of 636588 bytes
-+
-+	downloading of 636588 bytes finished
-+
-+	U-Boot SPL 2025.04-rc2-00049-geaa9fc99d4cd-dirty (Apr 26 2025 - 13:31:41 +0000)
-+	Trying to boot from RAM
-+
-+
-+	U-Boot 2025.04-rc2-00049-geaa9fc99d4cd-dirty (Apr 26 2025 - 13:31:41 +0000)
-+
-+	CPU:   thead,c910
-+	Model: Sipeed Lichee Pi 4A
-+	DRAM:  8 GiB
-+	Core:  30 devices, 9 uclasses, devicetree: separate
-+	MMC:   mmc@ffe7080000: 0, mmc@ffe7090000: 1
-+	Loading Environment from <NULL>... OK
-+	In:    serial@ffe7014000
-+	Out:   serial@ffe7014000
-+	Err:   serial@ffe7014000
-+	Model: Sipeed Lichee Pi 4A
-+	LPI4A=>
--- 
-2.49.0
+> Link: https://github.com/ziyao233/th1520-firmware # [1]
+> Signed-off-by: Yao Zi <ziyao@disroot.org>
+> ---
+>  drivers/ram/Kconfig            |   1 +
+>  drivers/ram/Makefile           |   4 +
+>  drivers/ram/thead/Kconfig      |   5 +
+>  drivers/ram/thead/Makefile     |   1 +
+>  drivers/ram/thead/th1520_ddr.c | 781 +++++++++++++++++++++++++++++++++
+>  5 files changed, 792 insertions(+)
+>  create mode 100644 drivers/ram/thead/Kconfig
+>  create mode 100644 drivers/ram/thead/Makefile
+>  create mode 100644 drivers/ram/thead/th1520_ddr.c
 
+...
+
+> diff --git a/drivers/ram/thead/th1520_ddr.c b/drivers/ram/thead/th1520_ddr.c
+> new file mode 100644
+> index 00000000000..ff9860b9c3d
+> --- /dev/null
+> +++ b/drivers/ram/thead/th1520_ddr.c
+> @@ -0,0 +1,781 @@
+> +#include <binman.h>
+> +#include <binman_sym.h>
+> +#include <dm.h>
+> +#include <init.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/iopoll.h>
+> +#include <ram.h>
+
+And here is missing an SPDX license header and a copyright notice. I'll
+add them in v2.
+
+Thanks,
+Yao Zi
