@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 834A9C369CB
-	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 16:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 552F9C369CB
+	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 17:01:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 171D1820E1;
-	Sat, 26 Apr 2025 18:58:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A045181E0F;
+	Sat, 26 Apr 2025 19:01:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="RaAKH+sT";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="LHRKxC4j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92F25820AA; Sat, 26 Apr 2025 18:58:07 +0200 (CEST)
+ id F419581F45; Sat, 26 Apr 2025 19:01:30 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C59D82103
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 18:58:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FF42810EB
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 19:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id F0A5025F17;
- Sat, 26 Apr 2025 18:58:02 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id C3A9825BBE;
+ Sat, 26 Apr 2025 19:01:27 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UF0uDIjWM0Uv; Sat, 26 Apr 2025 18:57:59 +0200 (CEST)
+ id gVS3qfngioJ4; Sat, 26 Apr 2025 19:01:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1745686679; bh=oUThTE3O7FJb+w7xrRfx9SsQsr82VTieayMy3K45n00=;
+ t=1745686885; bh=oUThTE3O7FJb+w7xrRfx9SsQsr82VTieayMy3K45n00=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=RaAKH+sT8M/dt6VzvfVUhKSRiXu31GEVeI7gXi/aKP+hnE3il98SeUPgda51Ma9pL
- moJafiiA5ml+D+EDEf8OHPN9emMT20U0tXEUPtA9lzCuBPYN9jEo0gvo+6OfaHHBOE
- 0agcshoC0m+1wlOjhdYzaMXAEksLOE2bWnDoPKcq/Fy+z42xhtKF0enC53hM9DsyrG
- 5sVntApf/bpHHO5JHzVOmezwdm41I15vjKxb7lfk9bbcQ3M6fwNgCyswD+TmgHe742
- ONf2I85Sex6gTkyLiMbIf/eLOFfBUNxYH5r2vxlhRdRiAVNdl/trQKuml/Un1vYSZa
- kzJ5BK90W0gYw==
+ b=LHRKxC4jYxBgBWmwTy56xUFSQMKsjopfm/OpQikmKG4EGJeDhp/jj29JsPFnxR2M8
+ NCIbk2dZsyCyq8moJTh6LbUqfyV+CduH8FISS9VD9WRnPvQS5oaKr9zVoh7SCv+Hlw
+ K6A9Y16Loc8D2vthqb671gjpcOMa72hDZMkqKSo+zWi0wLVjMMuLEIbeHMs9TayzGL
+ Kk3CWCKZye4SNwHrj49uUGgER1GscFvZaHmZ4ibXl84cRcFjmf9Dc7fpQK84EhYaA8
+ U+pZv8LoKEGgsnpIpDOxe1CDt7/s52JxcocmbuUXyMy/fK5VUXbamX08ouGXR6u/4/
+ DSLlPTLHBQz8Q==
 From: Yao Zi <ziyao@disroot.org>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
@@ -55,8 +55,8 @@ Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
  Han Gao <gaohan@iscas.ac.cn>, Yao Zi <ziyao@disroot.org>
 Subject: [PATCH 04/10] ram: thead: Add initial DDR controller support for
  TH1520
-Date: Sat, 26 Apr 2025 16:56:58 +0000
-Message-ID: <20250426165704.35523-5-ziyao@disroot.org>
+Date: Sat, 26 Apr 2025 17:00:53 +0000
+Message-ID: <20250426170059.35571-1-ziyao@disroot.org>
 In-Reply-To: <20250426165704.35523-1-ziyao@disroot.org>
 References: <20250426165704.35523-1-ziyao@disroot.org>
 MIME-Version: 1.0
