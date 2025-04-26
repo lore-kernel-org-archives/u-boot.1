@@ -4,53 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81820C369CB
-	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 06:30:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A6DC369CB
+	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 12:10:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A94B781E0F;
-	Sat, 26 Apr 2025 08:30:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id F3A2181E0F;
+	Sat, 26 Apr 2025 14:10:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="HdIvKTkc";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 364DD81E14; Sat, 26 Apr 2025 08:30:21 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C874810EB
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 08:30:18 +0200 (CEST)
+ id C4D4581E14; Sat, 26 Apr 2025 14:10:22 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 95194810EB
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 14:10:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 2DE1225E01;
- Sat, 26 Apr 2025 08:30:18 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lZVhuaEC5Obk; Sat, 26 Apr 2025 08:30:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1745649017; bh=f4/rY0RpQiluUm0PL7wY2X9Ml2g41jbnl2ZsBIXj1xs=;
- h=Date:From:To:Subject:References:In-Reply-To;
- b=HdIvKTkcD8oBOZ7ywwjumG+b+DWBJVajNiMiokV/0ICdtRX1s8+M8idfgl6fVU853
- j8jGV/8w6j/7G8WNaFnMFIlbXyeV+2+AmecoLtgttk4jlLjxvFnLNuTHQYWvEvnyCU
- h7dcisKkzOJCJG39fjB4EC+Hz/nofkLMjXKneSqlR0ARIrknb0A3FKqgRHMik338Zq
- I/BUGFeMpbqGFQyc60VWQoMahg6bRX2ScSJLaKQkqeF+C7AESYwfd4EPy6dITR62em
- uMDgIY5k7ppsOni7gx9h4bfH23GhxIFPpKQEQmM36UsDShHfJqQeUCsyC2wMSXPl2Z
- 36QhAUFGNTJOw==
-Date: Sat, 26 Apr 2025 06:30:06 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: Nathaniel Hourt <i@nathaniel.land>, UBML <u-boot@lists.denx.de>
-Subject: Re: Build for RISC-V with LLVM
-Message-ID: <aAx9bjXivAAuth-y@pie>
-References: <932979cb47c4fded7ac19216ca172504@nathaniel.land>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 24E08106F;
+ Sat, 26 Apr 2025 05:10:14 -0700 (PDT)
+Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
+ [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D85953F66E;
+ Sat, 26 Apr 2025 05:10:18 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ linux-sunxi@lists.linux.dev, Jernej Skrabec <jernej.skrabec@gmail.com>
+Subject: [PATCH] sunxi: enable MMU_PGPROT proper page table protection
+Date: Sat, 26 Apr 2025 13:09:13 +0100
+Message-ID: <20250426120913.23314-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <932979cb47c4fded7ac19216ca172504@nathaniel.land>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,49 +54,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 25, 2025 at 12:43:08PM -0500, Nathaniel Hourt wrote:
-> Hi, all
-> 
-> I am trying to build u-boot and SPL for my Mars board (riscv, variant of the
-> starfive visionfive2) following the board-specific docs [1], using
-> LLVM/clang as my toolchain with the HOSTCC and CC make options mentioned in
-> [2]. I'm building from a RISC-V native chroot using qemu-binfmt so I am not
-> using the cross-compile options; thus my make invocation looks like `make
-> HOSTCC=clang CC=clang` (for OpenSBI, I just pass 'LLVM=1'). Note that the
-> chroot I'm building from does not contain gcc/binutils at all; LLVM is the
-> only toolchain present.
-> 
-> The build usually succeeds, so I try to pass the SPL to the MaskROM over
-> UART (using the u-boot-spl.bin.normal.out image) and it just hangs. No
-> output, no response, and I have to reset the board. If I pass a working SPL
+Select the new MMU_PGPROT Kconfig symbol for all Allwinner board builds,
+to use a write-protected .rodata, non-executable .data and .rodata
+sections, and non-writable .text sections.
 
-Have you tried to apply this patch[1]? U-Boot support for JH7110 is
-broken at least in v2025.04 release afaik.
+This might trigger runtime exceptions in misbehaving drivers, which
+should then be fixed.
+Please report on the list or on IRC if bisecting ends at this patch.
 
-Best regards,
-Yao Zi
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+---
+Hi,
 
-[1]: https://lore.kernel.org/all/20250330162421.238483-1-heinrich.schuchardt@canonical.com/
+I am planning on merging this ASAP, to get some exposure and use the time
+until the release for wider testing. If worst comes to the worst, we can
+revert it still before July.
 
-> I downloaded, it logs some output then accepts a main u-boot payload over
-> UART, so if I send the main u-boot payload I built (u-boot.itb), I get a
-> "Load address misaligned" error as in [3].
-> 
-> I attempted to configure my SPL to log to UART by turning on various logging
-> options in `menuconfig`, including the options recently mentioned by
-> Heinrich Schuchardt in [4], but I have been unsuccessful in getting any
-> output from the SPL I built.
-> 
-> So I am looking for guidance. Is building with LLVM/clang (for riscv)
-> supported? I don't know what to try next.
-> 
-> Thanks
-> —
-> Nathaniel
-> 
-> 
-> [1]
-> https://docs.u-boot.org/en/latest/board/starfive/milk-v_mars.html#milk-v-mars
-> [2] https://docs.u-boot.org/en/latest/build/clang.html
-> [3] https://pastebin.com/xwEcqEpz
-> [4] https://lists.denx.de/pipermail/u-boot/2025-April/586264.html
+Cheers,
+Andre
+
+ arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 99750072e55..f22d347d5ad 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1192,6 +1192,7 @@ config ARCH_SUNXI
+ 	select DM_KEYBOARD
+ 	select DM_SERIAL
+ 	select DM_PMIC
++	select MMU_PGPROT if ARM64
+ 	select OF_BOARD_SETUP
+ 	select OF_CONTROL
+ 	select PINCTRL
+-- 
+2.46.3
+
