@@ -4,86 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC50FC369CB
-	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 14:14:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5368C369D1
+	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 16:57:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30A66820F6;
-	Sat, 26 Apr 2025 16:14:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D8C7F81E0F;
+	Sat, 26 Apr 2025 18:57:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bf9KPVzt";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="jGBEPa7D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C3D280FDA; Sat, 26 Apr 2025 16:14:36 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C29D81E14; Sat, 26 Apr 2025 18:57:29 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6CFC82045
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 16:14:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DBED810EB
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 18:57:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-6065251725bso1117364eaf.1
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 07:14:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745676872; x=1746281672; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qtmeCxKENOitvlRhcZuY6Fswbr8diOkWAe1QsWTwpHE=;
- b=Bf9KPVzt788mYRbADDCMGVf+kCrVRMlnxDSblsbTdY5+s1krJqs3HiU3v8yuQtYGg2
- NsjCgQRhOGLAUz/SKsWENyeEoMo2yIZWuGP6aZKgLUo6s8OROyshi3nmUODfgyl8kbH4
- EHorcpxvI0KnAx8SATV9pA5iHWVhj4Emhp08g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745676872; x=1746281672;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qtmeCxKENOitvlRhcZuY6Fswbr8diOkWAe1QsWTwpHE=;
- b=dnvjlV5pfAqCMZf/0k2/iTKiAzYldZdA861ZKG0i6Uwl5cWSiZZlIhrA+M95jBoauI
- v5pRSYbeAeO5eegusyARs80CmQzNVWAGLU0crbXgJpPrS/lgo6NsTq7Vr76zIh0bbwmy
- Uacb1CIt7+QX2mULz3geV+cBa8WmQlULRcok075sPZ+svj1xgT3maQBKnU+ka+ySZfKv
- iMADv/2cJFkAPBWGgeorcTh9HBPBl0Yod8CL+uar3DqcW7hO/vKXdaPLlxC0iQY82mFn
- 67+mQTaX59v0ekJjohzVTMEGJygozdUrP/6odKgfSQa7HZF5kI7E6rAHhk9eNZ4EFdtE
- EByA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVYMPjTxMqOAPWqPH3jzrrhA0AH2kM998JaKmLLinT7kyx/mpZa1joSEE/3GSBh3yGKv7RoygI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+PzIKLttVcxXBIV2CiVlGzd/BRJmjZ7zAkNh/fcapaQUiQTq3
- zI0u6VAN1M3vfxgpC37OSzwy/hiExpMPCrAcgG7sJPjr5ZBLE9wP02YaPlKTyDY/QYHJJuzxAUW
- CPqY=
-X-Gm-Gg: ASbGnctkXZgvpHN/wRrKkaimcbrABFmnNqMcUGIQjQCna1MY0hBWGBuJq0Wxy6LFPyT
- HdQ9wlpkBHl5r61UyVZIUyQaCuvkXmKBHXYe7GEpMzHpHwxvyjxP53bCOHRx5TO2WfoBnNe+f5+
- +PbMCnoJ73nBkHg75/0hhVh8VGnI4QVFU3Zah94Ujg4zTEkjtLxT4d2sYqM3Wj7XnppS+j/k3ze
- PIOkFqyPGYwt7IJTSVK1VSdHbXS8f+W27my4UQUnORsbD+GPRJ71szFItqKhNSTKwFJNeSD6UbP
- PY4Uj64d7A6GGumwsBSDQlUvTpV5vJyMX/EhcPqJyJoizm3JNFfmWow3+uMOE4l90IhhCy4i+SD
- qd9CG3f+tari/
-X-Google-Smtp-Source: AGHT+IH2kYJzG9cKeLvWsrC90BPaQVW7CAsaRL3wnuvcvRwUFnstFFewIh/tJCS1OdK9Fy9IedmWWA==
-X-Received: by 2002:a05:6870:2045:b0:2a7:d856:94a with SMTP id
- 586e51a60fabf-2d99d86712cmr3284622fac.22.1745676872252; 
- Sat, 26 Apr 2025 07:14:32 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d97364d9c5sm1370901fac.7.2025.04.26.07.14.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Apr 2025 07:14:31 -0700 (PDT)
-Date: Sat, 26 Apr 2025 08:14:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: E Shattow <e@freeshell.de>
-Cc: Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [GIT PULL] u-boot-riscv/master
-Message-ID: <20250426141428.GY5495@bill-the-cat>
-References: <aAte-nS8ZhO_Odw1@swlinux02>
- <174562459055.746741.13011026537921584133.b4-ty@konsulko.com>
- <756019b8-60f6-4cab-92b0-cd1e857a375c@freeshell.de>
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id CA3B925E67;
+ Sat, 26 Apr 2025 18:57:25 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RJhPcPDVyU65; Sat, 26 Apr 2025 18:57:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1745686644; bh=E+B/F7V1yuBtI92N1MrcheIIGgRkNliWhOxXkRpA5Fo=;
+ h=From:To:Cc:Subject:Date;
+ b=jGBEPa7DcYUkVQmipc2b/NkPealn/OaykRXC6/pFznk5dbk3737LhlAm5aGm2YwjY
+ Lgfwq/SepM6PgSXjynpktyhHG+RPI6u65C/Qynk7nT/3Nfl37EhdxZt+n/AmXBo25v
+ p+a10cRuGDkPKmAycKMDC7W9GtpXUzwLKWWydldNELXocC5iGro/HF7EXQG/pVsgND
+ qgMAiGapZO8VyRlWjkm2Q36W+RMN8o8CFqMT2YzIzpqwKqaltDuI4Rd7W78cWDley5
+ ZZ7BFw20h+zkJjpTVc8Ck5cMijArv+mJcxwpP6EvZW5R5495HfmNywno6EdOdU5het
+ vHv684ghJyFsQ==
+From: Yao Zi <ziyao@disroot.org>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
+ Yixun Lan <dlan@gentoo.org>, Maksim Kiselev <bigunclemax@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Vaishnav Achath <vaishnav.a@ti.com>, Andrew Davis <afd@ti.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
+ Han Gao <gaohan@iscas.ac.cn>, Yao Zi <ziyao@disroot.org>
+Subject: [PATCH 00/10] Initial SPL support for T-Head TH1520 SoC
+Date: Sat, 26 Apr 2025 16:56:54 +0000
+Message-ID: <20250426165704.35523-1-ziyao@disroot.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3H4PAHPnMm53lFJl"
-Content-Disposition: inline
-In-Reply-To: <756019b8-60f6-4cab-92b0-cd1e857a375c@freeshell.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,57 +74,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds initial SPL support for T-Head TH1520 SoC and Sipeed
+Lichee Pi 4A board. Key changes include,
 
---3H4PAHPnMm53lFJl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+- Support for T-Head-specific cache management operations is split out
+  of CV1800B port and adapted for usage in other ports.
+- A new CPU target, THEAD_TH1520, is added with SPL support enabled.
+- Driver for TH1520's DDR controller is cleaned up from the vendor
+  U-Boot source.
+- For building the bootable image, of which TH1520's BROM executes from
+  the start, from SPL, DDR firmware and proper U-Boot, a binman
+  configuration for TH1520 is added.
 
-On Fri, Apr 25, 2025 at 06:13:38PM -0700, E Shattow wrote:
-> The outcome of that merge went a bit weird for
-> board/starfive/visionfive2/spl.c
->=20
-> On 4/25/25 16:43, Tom Rini wrote:
-> > On Fri, 25 Apr 2025 18:07:54 +0800, Leo Liang wrote:
-> >=20
-> >> The following changes since commit 10f48365112b164bee6564033ab682747ef=
-cb483:
-> >>
-> >>   Merge patch series "Add PCIe support for TI AM64 SoC" (2025-04-24 10=
-:46:17 -0600)
-> >>
-> >> are available in the Git repository at:
-> >>
-> >>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
-> >>
-> >> [...]
-> >=20
-> > Merged into u-boot/master, thanks!
-> >=20
->=20
-> # The fix:
+Note that the binman configuration doesn't inherit the default one for
+RISC-V, as our proper U-Boot runs in M-Mode and reusing
+riscv/dts/binman.dtsi doesn't help much.
 
-Sorry! Can you submit as a proper patch? I'll apply it quickly.  Thanks!
+Tested on the 16GiB variant of Sipeed Lichee Pi 4A. Loading
+u-boot-with-spl.bin to SRAM with fastboot through BROM, I've
+successfully booted into U-Boot console with DRAM initialized.
 
---=20
-Tom
+This series is based on the latest master branch. Additionally, the DDR
+driver depends on series "Fix binman_sym functionality on RISC-V
+port"[1] that has been merged earlier today to obtain the firmware.
 
---3H4PAHPnMm53lFJl
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks for your time and review.
 
------BEGIN PGP SIGNATURE-----
+[1]: https://lore.kernel.org/all/20250416162533.1396-1-ziyao@disroot.org/
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgM6kQACgkQFHw5/5Y0
-tyzJDQv9Hg+CrF0sRRiCs/6YsXYbJ1PdB4JsT0R1aI7cOR7VMQ8oQy6dDBv4Ev0L
-uRRzFyNkMXul5hbH6aX4eZtWTLmLITfZuEUlCvXWlw3obWuGOGnVbUCg6BKfZmIW
-MYHfnVD0j7dPxvQoOZ1BcQue0MLQGxPeG3uT5PtWrKVb7/ekLfCa3Z3LYWGXCODf
-yyJIEELsUEpsVs/Dr516vC/VomXPWkSB+6Bfsb3uX8bNdTS06Ef96ohb8mnkBxi6
-7s3xEBHjMzb59YTzvqphysNsk8pgJssedSd8Z8DzVYr9W4OqWn6q/6UF7vN74wyp
-hWI3FHhs/LTpVG6DDgbG6v5SywqB8tB/FMNVroajeC8/LSv5c6YxLabnlZVwQs0v
-W8cfx5P5Ju7tIUsc9Rb+++HVrr3wboFmwI1XLPyYWVE/UyhPGLEVSqyjRCjeYk1R
-0B+ZFmsIITpqvIK5HMT11s1KgbHr8bjqxwVZKlOjPiuUukUhn2zFW62aHyK08v9g
-3J0/xf5H
-=M500
------END PGP SIGNATURE-----
+Yao Zi (10):
+  riscv: lib: Split out support for T-Head cache management operations
+  riscv: dts: th1520: Add clock-frequency for UART0
+  riscv: cpu: Add TH1520 CPU support
+  ram: thead: Add initial DDR controller support for TH1520
+  riscv: dts: th1520: Preserve necessary devices for SPL
+  riscv: dts: lichee-module-4a: Preserve memory node for SPL
+  riscv: dts: th1520: Add DRAM controller
+  riscv: dts: th1520: Add binman configuration
+  board: thead: licheepi4a: Enable SPL support
+  doc: thead: lpi4a: Update documentation
 
---3H4PAHPnMm53lFJl--
+ arch/riscv/Kconfig                            |   9 +
+ arch/riscv/cpu/cv1800b/Kconfig                |   1 +
+ arch/riscv/cpu/cv1800b/Makefile               |   1 -
+ arch/riscv/cpu/th1520/Kconfig                 |  21 +
+ arch/riscv/cpu/th1520/Makefile                |   8 +
+ arch/riscv/cpu/th1520/cache.c                 |  32 +
+ arch/riscv/cpu/th1520/cpu.c                   |  21 +
+ arch/riscv/cpu/th1520/dram.c                  |  21 +
+ arch/riscv/cpu/th1520/spl.c                   |  31 +
+ arch/riscv/dts/th1520-lichee-module-4a.dtsi   |   1 +
+ arch/riscv/dts/th1520-lichee-pi-4a.dts        |   1 +
+ arch/riscv/dts/th1520.dtsi                    |  17 +
+ arch/riscv/dts/thead-th1520-binman.dtsi       |  55 ++
+ arch/riscv/include/asm/arch-th1520/cpu.h      |   9 +
+ arch/riscv/include/asm/arch-th1520/spl.h      |  10 +
+ arch/riscv/lib/Makefile                       |   1 +
+ .../{cpu/cv1800b/cache.c => lib/thead_cmo.c}  |   0
+ board/thead/th1520_lpi4a/Kconfig              |   5 +-
+ board/thead/th1520_lpi4a/Makefile             |   1 +
+ board/thead/th1520_lpi4a/spl.c                |  48 ++
+ configs/th1520_lpi4a_defconfig                |  18 +
+ doc/board/thead/lpi4a.rst                     |  58 +-
+ drivers/ram/Kconfig                           |   1 +
+ drivers/ram/Makefile                          |   4 +
+ drivers/ram/thead/Kconfig                     |   5 +
+ drivers/ram/thead/Makefile                    |   1 +
+ drivers/ram/thead/th1520_ddr.c                | 781 ++++++++++++++++++
+ 27 files changed, 1155 insertions(+), 6 deletions(-)
+ create mode 100644 arch/riscv/cpu/th1520/Kconfig
+ create mode 100644 arch/riscv/cpu/th1520/Makefile
+ create mode 100644 arch/riscv/cpu/th1520/cache.c
+ create mode 100644 arch/riscv/cpu/th1520/cpu.c
+ create mode 100644 arch/riscv/cpu/th1520/dram.c
+ create mode 100644 arch/riscv/cpu/th1520/spl.c
+ create mode 100644 arch/riscv/dts/thead-th1520-binman.dtsi
+ create mode 100644 arch/riscv/include/asm/arch-th1520/cpu.h
+ create mode 100644 arch/riscv/include/asm/arch-th1520/spl.h
+ rename arch/riscv/{cpu/cv1800b/cache.c => lib/thead_cmo.c} (100%)
+ create mode 100644 board/thead/th1520_lpi4a/spl.c
+ create mode 100644 drivers/ram/thead/Kconfig
+ create mode 100644 drivers/ram/thead/Makefile
+ create mode 100644 drivers/ram/thead/th1520_ddr.c
+
+-- 
+2.49.0
+
