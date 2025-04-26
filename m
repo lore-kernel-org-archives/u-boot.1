@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA3B2C369C2
-	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 02:26:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A75F6C369C2
+	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 02:30:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B06482A31;
-	Sat, 26 Apr 2025 04:26:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B09A82A96;
+	Sat, 26 Apr 2025 04:30:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="huLYqFp5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZQShasTX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3113882A31; Sat, 26 Apr 2025 04:26:22 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 349A482A81; Sat, 26 Apr 2025 04:30:53 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADA30828BC
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 04:26:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF274828BC
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 04:30:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53Q2QFEc2325998
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53Q2UnAI3066432
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 21:26:15 -0500
+ Fri, 25 Apr 2025 21:30:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745634375;
- bh=LRLDE8oeYuEQrbAMblon52AV3g+QV/0Qm6mPd+YN7HY=;
+ s=ti-com-17Q1; t=1745634649;
+ bh=iMigbJ3PSVXv+AAy35nOBxMwH96Z8R0DXbKe06cNDws=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=huLYqFp5mqSYZjPimQpDNs51M/4ggqJ7msIYGETCKeR9qYM8l+gMh/ayhko3Uo2Lo
- PuihavN3R6lQ5cWAkOfL6/S4leX8SjNmJiD1d7HL4907p++hJxIwlcpqLbNdkOBb1G
- yrMkc4pTKfhrTkEONMeUK7RsBZ5QHMN/CmYUTu1s=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53Q2QFY9012387
+ b=ZQShasTX/BxOEZPFOFgdFp6cekxgb7maCunnaV5VW85y94autN2pFl4USp0hFzikj
+ 81+WxjRzmRcIdSCiy0z4YLM0+yI+ej8cfVReEv0mySnOM+jq+X+l3SwD+BNBol3w4i
+ RVZPe3lAJbBFBXRmDq3gQO70N8cSzawo4ykTz8SM=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53Q2UnjQ044838
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Apr 2025 21:26:15 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 25 Apr 2025 21:30:49 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 21:26:14 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 21:30:48 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 21:26:15 -0500
+ Frontend Transport; Fri, 25 Apr 2025 21:30:48 -0500
 Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53Q2QAip039827;
- Fri, 25 Apr 2025 21:26:11 -0500
-Message-ID: <6e81e4f6-40fc-495a-9889-54b58a42b35c@ti.com>
-Date: Sat, 26 Apr 2025 07:56:10 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53Q2Ujcf034133;
+ Fri, 25 Apr 2025 21:30:46 -0500
+Message-ID: <334d7a69-6b84-4a0e-aeb0-f581008d3e79@ti.com>
+Date: Sat, 26 Apr 2025 08:00:44 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/9] beagle: beagley-ai: env: Enable DFU env options
-To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Neha Malcom Francis <n-francis@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>
-CC: Beleswar Padhi <b-padhi@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
- Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>
-References: <20250425173120.141503-1-nm@ti.com>
- <20250425173120.141503-6-nm@ti.com>
+Subject: Re: [PATCH 1/2] include: env: ti: mmc.h: Find DTB files in dtb
+ directory for AM57xx
+To: Neha Malcom Francis <n-francis@ti.com>, Anurag Dutta <a-dutta@ti.com>,
+ <trini@konsulko.com>
+CC: <nm@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>
+References: <20250425053431.1622267-1-a-dutta@ti.com>
+ <20250425053431.1622267-2-a-dutta@ti.com>
+ <01ad9412-f1de-4628-aa1d-9fe391872fa5@ti.com>
 Content-Language: en-US
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20250425173120.141503-6-nm@ti.com>
+In-Reply-To: <01ad9412-f1de-4628-aa1d-9fe391872fa5@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -85,32 +85,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 4/25/2025 11:01 PM, Nishanth Menon wrote:
-> Just enable dfu options, We have MMC and RAM as options here.
+On 4/25/2025 12:19 PM, Neha Malcom Francis wrote:
+> Hi Anurag
 >
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> ---
-> Changes Since v2:
-> - Dropped the dfu_alt_info override option, let the users select it
-> - Updated commit message to the effect.
->
-> V2: https://lore.kernel.org/r/20250418193943.953952-6-nm@ti.com
->
->   board/beagle/beagley-ai/beagley-ai.env | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/board/beagle/beagley-ai/beagley-ai.env b/board/beagle/beagley-ai/beagley-ai.env
-> index 16a03acfca3c..70afbf9763f9 100644
-> --- a/board/beagle/beagley-ai/beagley-ai.env
-> +++ b/board/beagle/beagley-ai/beagley-ai.env
-> @@ -1,5 +1,6 @@
->   #include <env/ti/ti_common.env>
->   #include <env/ti/mmc.env>
-> +#include <env/ti/k3_dfu.env>
+> On 25/04/25 11:04, Anurag Dutta wrote:
+>> Add dtb/ to the DTB search path.
+>>
+>> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+>> ---
+>>   include/env/ti/mmc.h | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/include/env/ti/mmc.h b/include/env/ti/mmc.h
+>> index dbb0e3559ea..968d6ec03dc 100644
+>> --- a/include/env/ti/mmc.h
+>> +++ b/include/env/ti/mmc.h
+>> @@ -24,7 +24,7 @@
+>>   		"env import -t ${loadaddr} ${filesize}\0" \
+>>   	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenvfile}\0" \
+>>   	"loadimage=load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}\0" \
+>> -	"loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}\0" \
+>> +	"loadfdt=load ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/dtb/${fdtfile}\0" \
+>>   	"envboot=mmc dev ${mmcdev}; " \
+>>   		"if mmc rescan; then " \
+>>   			"echo SD/MMC found on device ${mmcdev};" \
+> Are there any other boards that use .h instead of .env other than AM57x?
+> Would they break with this change?
 
-Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+Yes there are few
 
+include/configs/am62ax_evm.h:#include <env/ti/mmc.h>
+include/configs/am65x_evm.h:#include <env/ti/mmc.h>
+include/configs/da850evm.h:#include <env/ti/mmc.h>
+include/configs/omap3_evm.h:#include <env/ti/mmc.h>
+include/configs/omapl138_lcdk.h:#include <env/ti/mmc.h>
+include/configs/phycore_am335x_r2.h:#include <env/ti/mmc.h>
+include/configs/ti_omap4_common.h:#include <env/ti/mmc.h>
+include/configs/ti_omap5_common.h:#include <env/ti/mmc.h>
 
->   
->   #if CONFIG_CMD_REMOTEPROC
->   #include <env/ti/k3_rproc.env>
+One way, I see append dtb in search path in patch 2/2 
+ti_omap_am57_evm_fdt_map
+
+>
