@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 969F5C369CB
-	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 16:57:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 834A9C369CB
+	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 16:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B869A82063;
-	Sat, 26 Apr 2025 18:57:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 171D1820E1;
+	Sat, 26 Apr 2025 18:58:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="kIgU0Y/W";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="RaAKH+sT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABA00810EB; Sat, 26 Apr 2025 18:57:50 +0200 (CEST)
+ id 92F25820AA; Sat, 26 Apr 2025 18:58:07 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DCC1820AA
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 18:57:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C59D82103
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 18:58:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 4702D25F65;
- Sat, 26 Apr 2025 18:57:48 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id F0A5025F17;
+ Sat, 26 Apr 2025 18:58:02 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UBe-N9MPUJK7; Sat, 26 Apr 2025 18:57:44 +0200 (CEST)
+ id UF0uDIjWM0Uv; Sat, 26 Apr 2025 18:57:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1745686664; bh=emjFkVtbA5iUv31OPJBZnVFu9T9M9ISaumoJsyFsLOY=;
+ t=1745686679; bh=oUThTE3O7FJb+w7xrRfx9SsQsr82VTieayMy3K45n00=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=kIgU0Y/WIEZ8ifLo8XTVRz+S1ndivGxGJvX4ZVn3eK32ASD5PKuk4Q4wOFxaFQTaA
- EfTuQu9En+QDoLBjvTCZM2WOy+SSJw6t8m+WeHZJT5CmEDRlj5YjaipAUfElbOaZUX
- BJSYcU10GMLxmQE44M3p0PbNJoaR3pcLXQEXZkbAgaeG0HfDJltOYSCGaDKDBsxZ7f
- ahL8Bn4X2RK8kjVd+GOVpUW8yt/xw/Ni8DXl/gtefhjs08zfWXNpjNZ/tfdXJWOrYA
- vY+gsjHn4kFeI7PbpV4i20SoDrcI5WfBjPx9rZWI1KOfGlwo1q37Iqjen9fS+Kb+h+
- W+mAeeCgbq9dQ==
+ b=RaAKH+sT8M/dt6VzvfVUhKSRiXu31GEVeI7gXi/aKP+hnE3il98SeUPgda51Ma9pL
+ moJafiiA5ml+D+EDEf8OHPN9emMT20U0tXEUPtA9lzCuBPYN9jEo0gvo+6OfaHHBOE
+ 0agcshoC0m+1wlOjhdYzaMXAEksLOE2bWnDoPKcq/Fy+z42xhtKF0enC53hM9DsyrG
+ 5sVntApf/bpHHO5JHzVOmezwdm41I15vjKxb7lfk9bbcQ3M6fwNgCyswD+TmgHe742
+ ONf2I85Sex6gTkyLiMbIf/eLOFfBUNxYH5r2vxlhRdRiAVNdl/trQKuml/Un1vYSZa
+ kzJ5BK90W0gYw==
 From: Yao Zi <ziyao@disroot.org>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
@@ -53,9 +53,10 @@ To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
  Han Gao <gaohan@iscas.ac.cn>, Yao Zi <ziyao@disroot.org>
-Subject: [PATCH 03/10] riscv: cpu: Add TH1520 CPU support
-Date: Sat, 26 Apr 2025 16:56:57 +0000
-Message-ID: <20250426165704.35523-4-ziyao@disroot.org>
+Subject: [PATCH 04/10] ram: thead: Add initial DDR controller support for
+ TH1520
+Date: Sat, 26 Apr 2025 16:56:58 +0000
+Message-ID: <20250426165704.35523-5-ziyao@disroot.org>
 In-Reply-To: <20250426165704.35523-1-ziyao@disroot.org>
 References: <20250426165704.35523-1-ziyao@disroot.org>
 MIME-Version: 1.0
@@ -76,247 +77,854 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the SoC-specific code and corresponding Kconfig entries for
-TH1520 SoC. Following features are implemented for TH1520,
+This patch cleans the vendor code of DDR initialization up, converts the
+driver to fit in DM framework and use a firmware[1] packaged by binman to
+ship PHY configuration.
 
-- Cache enable/disable through customized CSR
-- Invalidation of customized PMP entries
-- DRAM driver probing for SPL
+Currently the driver is only capable of initializing the controller to
+work with dual-rank 3733MHz LPDDR4, which is shipped by 16GiB variants
+of LicheePi 4A boards and I could test with. Support for other
+configurations could be easily added later.
 
+Link: https://github.com/ziyao233/th1520-firmware # [1]
 Signed-off-by: Yao Zi <ziyao@disroot.org>
 ---
- arch/riscv/Kconfig                       |  1 +
- arch/riscv/cpu/th1520/Kconfig            | 21 ++++++++++++++++
- arch/riscv/cpu/th1520/Makefile           |  8 ++++++
- arch/riscv/cpu/th1520/cache.c            | 32 ++++++++++++++++++++++++
- arch/riscv/cpu/th1520/cpu.c              | 21 ++++++++++++++++
- arch/riscv/cpu/th1520/dram.c             | 21 ++++++++++++++++
- arch/riscv/cpu/th1520/spl.c              | 31 +++++++++++++++++++++++
- arch/riscv/include/asm/arch-th1520/cpu.h |  9 +++++++
- arch/riscv/include/asm/arch-th1520/spl.h | 10 ++++++++
- 9 files changed, 154 insertions(+)
- create mode 100644 arch/riscv/cpu/th1520/Kconfig
- create mode 100644 arch/riscv/cpu/th1520/Makefile
- create mode 100644 arch/riscv/cpu/th1520/cache.c
- create mode 100644 arch/riscv/cpu/th1520/cpu.c
- create mode 100644 arch/riscv/cpu/th1520/dram.c
- create mode 100644 arch/riscv/cpu/th1520/spl.c
- create mode 100644 arch/riscv/include/asm/arch-th1520/cpu.h
- create mode 100644 arch/riscv/include/asm/arch-th1520/spl.h
+ drivers/ram/Kconfig            |   1 +
+ drivers/ram/Makefile           |   4 +
+ drivers/ram/thead/Kconfig      |   5 +
+ drivers/ram/thead/Makefile     |   1 +
+ drivers/ram/thead/th1520_ddr.c | 781 +++++++++++++++++++++++++++++++++
+ 5 files changed, 792 insertions(+)
+ create mode 100644 drivers/ram/thead/Kconfig
+ create mode 100644 drivers/ram/thead/Makefile
+ create mode 100644 drivers/ram/thead/th1520_ddr.c
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index dc36d9b8566..8c6feae5735 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -126,6 +126,7 @@ source "arch/riscv/cpu/generic/Kconfig"
- source "arch/riscv/cpu/jh7110/Kconfig"
- source "arch/riscv/cpu/k1/Kconfig"
- source "arch/riscv/cpu/k230/Kconfig"
-+source "arch/riscv/cpu/th1520/Kconfig"
+diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+index 2a40b0c9f81..39d03e8d3d3 100644
+--- a/drivers/ram/Kconfig
++++ b/drivers/ram/Kconfig
+@@ -135,3 +135,4 @@ source "drivers/ram/sifive/Kconfig"
+ source "drivers/ram/stm32mp1/Kconfig"
+ source "drivers/ram/starfive/Kconfig"
+ source "drivers/ram/sunxi/Kconfig"
++source "drivers/ram/thead/Kconfig"
+diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
+index f92e86eaa3f..82afd5fcbcc 100644
+--- a/drivers/ram/Makefile
++++ b/drivers/ram/Makefile
+@@ -30,3 +30,7 @@ obj-$(CONFIG_ARCH_OCTEON) += octeon/
  
- # architecture-specific options below
- 
-diff --git a/arch/riscv/cpu/th1520/Kconfig b/arch/riscv/cpu/th1520/Kconfig
+ obj-$(CONFIG_ARCH_RENESAS) += renesas/
+ obj-$(CONFIG_CADENCE_DDR_CTRL) += cadence/
++
++ifdef CONFIG_XPL_BUILD
++obj-$(CONFIG_SPL_THEAD_TH1520_DDR) += thead/
++endif
+diff --git a/drivers/ram/thead/Kconfig b/drivers/ram/thead/Kconfig
 new file mode 100644
-index 00000000000..a916d364e6c
+index 00000000000..7b05abb6986
 --- /dev/null
-+++ b/arch/riscv/cpu/th1520/Kconfig
-@@ -0,0 +1,21 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-+# Copyright (C) 2025, Yao Zi <ziyao@disroot.org>
-+
-+config THEAD_TH1520
-+	bool
-+	select ARCH_EARLY_INIT_R
-+	select SYS_CACHE_SHIFT_6
-+	select SUPPORT_SPL
-+	select BINMAN if SPL
-+	select SYS_CACHE_THEAD_CMO
-+	imply CPU
-+	imply CPU_RISCV
-+	imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
-+	imply RISCV_ACLINT if RISCV_MMODE
-+	imply SPL_RISCV_ACLINT if SPL_RISCV_MMODE
-+	imply CMD_CPU
-+	imply SPL_CPU
-+	imply SPL_OPENSBI
-+	imply SPL_LOAD_FIT
-diff --git a/arch/riscv/cpu/th1520/Makefile b/arch/riscv/cpu/th1520/Makefile
++++ b/drivers/ram/thead/Kconfig
+@@ -0,0 +1,5 @@
++config SPL_THEAD_TH1520_DDR
++	bool "T-Head TH1520 DDR driver in SPL"
++	depends on SPL_RAM && THEAD_TH1520
++	help
++	  This enables DDR support for T-Head TH1520 platforms.
+diff --git a/drivers/ram/thead/Makefile b/drivers/ram/thead/Makefile
 new file mode 100644
-index 00000000000..5d806c06e2e
+index 00000000000..ad4d053cfc2
 --- /dev/null
-+++ b/arch/riscv/cpu/th1520/Makefile
-@@ -0,0 +1,8 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2025, Yao Zi <ziyao@disroot.org>
-+
-+obj-y += cache.o
-+obj-y += cpu.o
-+obj-y += dram.o
-+obj-y += spl.o
-diff --git a/arch/riscv/cpu/th1520/cache.c b/arch/riscv/cpu/th1520/cache.c
++++ b/drivers/ram/thead/Makefile
+@@ -0,0 +1 @@
++obj-$(CONFIG_SPL_THEAD_TH1520_DDR) += th1520_ddr.o
+diff --git a/drivers/ram/thead/th1520_ddr.c b/drivers/ram/thead/th1520_ddr.c
 new file mode 100644
-index 00000000000..08aa1f789fd
+index 00000000000..ff9860b9c3d
 --- /dev/null
-+++ b/arch/riscv/cpu/th1520/cache.c
-@@ -0,0 +1,32 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2025 Yao Zi <ziyao@disroot.org>
-+ */
-+
-+#include <asm/io.h>
-+#include <cpu_func.h>
-+#include <linux/bitops.h>
-+
-+#define CSR_MHCR		0x7c1
-+#define  CSR_MHCR_IE		BIT(0)
-+#define  CSR_MHCR_DE		BIT(1)
-+
-+void icache_enable(void)
-+{
-+	csr_write(CSR_MHCR, csr_read(CSR_MHCR) | CSR_MHCR_IE);
-+}
-+
-+void dcache_enable(void)
-+{
-+	csr_write(CSR_MHCR, csr_read(CSR_MHCR) | CSR_MHCR_DE);
-+}
-+
-+int icache_status(void)
-+{
-+	return (csr_read(CSR_MHCR) & CSR_MHCR_IE) != 0;
-+}
-+
-+int dcache_status(void)
-+{
-+	return (csr_read(CSR_MHCR) & CSR_MHCR_DE) != 0;
-+}
-diff --git a/arch/riscv/cpu/th1520/cpu.c b/arch/riscv/cpu/th1520/cpu.c
-new file mode 100644
-index 00000000000..b83f1272c67
---- /dev/null
-+++ b/arch/riscv/cpu/th1520/cpu.c
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2025 Yao Zi <ziyao@disroot.org>
-+ *
-+ * TH1520 SoC has a set of undocumented customized PMP registers that are
-+ * configured through MMIO operation. It must be disabled before entering
-+ * the DRAM region, or an exception will be raised.
-+ */
-+
-+#include <asm/io.h>
-+#include <cpu_func.h>
-+
-+#define TH1520_PMP_BASE		(void *)0xffdc020000
-+
-+void th1520_invalidate_pmp(void)
-+{
-+	/* Invalidate the PMP configuration as in vendor U-Boot code */
-+	writel(0x0, TH1520_PMP_BASE + 0x0);
-+
-+	invalidate_icache_all();
-+}
-diff --git a/arch/riscv/cpu/th1520/dram.c b/arch/riscv/cpu/th1520/dram.c
-new file mode 100644
-index 00000000000..91007c0a3d3
---- /dev/null
-+++ b/arch/riscv/cpu/th1520/dram.c
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-+ */
-+
-+#include <fdtdec.h>
-+#include <init.h>
-+#include <asm/global_data.h>
-+#include <linux/sizes.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-diff --git a/arch/riscv/cpu/th1520/spl.c b/arch/riscv/cpu/th1520/spl.c
-new file mode 100644
-index 00000000000..aec398528d1
---- /dev/null
-+++ b/arch/riscv/cpu/th1520/spl.c
-@@ -0,0 +1,31 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2025 Yao Zi <ziyao@disroot.org>
-+ */
++++ b/drivers/ram/thead/th1520_ddr.c
+@@ -0,0 +1,781 @@
++#include <binman.h>
++#include <binman_sym.h>
 +#include <dm.h>
-+#include <linux/sizes.h>
-+#include <log.h>
 +#include <init.h>
++#include <linux/bitfield.h>
++#include <linux/iopoll.h>
++#include <ram.h>
 +
 +DECLARE_GLOBAL_DATA_PTR;
 +
-+int spl_dram_init(void)
-+{
-+	int ret;
-+	struct udevice *dev;
++#pragma pack(push, 1)
 +
-+	ret = fdtdec_setup_mem_size_base();
-+	if (ret) {
-+		printf("failed to setup memory size and base: %d\n", ret);
-+		return ret;
++struct th1520_ddr_fw {
++	u64 magic;
++	u8 type, ranknum, bitwidth, freq;
++	u8 reserved[8];
++
++	u32 cfgnum;
++	union th1520_ddr_cfg {
++		u32 opaddr;
++
++		struct th1520_ddr_phy {
++			u32 opaddr;
++			u16 data;
++		} phy;
++
++		struct th1520_ddr_range {
++			u32 opaddr;
++			u32 num;
++			u16 data[];
++		} range;
++	} cfgs[];
++};
++
++#pragma pack(pop)
++
++/* Firmware constants */
++#define TH1520_DDR_MAGIC	0x4452444445415448
++
++#define TH1520_DDR_TYPE_LPDDR4	0
++#define TH1520_DDR_TYPE_LPDDR4X	1
++
++#define TH1520_DDR_FREQ_2133	0
++#define TH1520_DDR_FREQ_3200	1
++#define TH1520_DDR_FREQ_3733	2
++#define TH1520_DDR_FREQ_4266	3
++
++#define TH1520_DDR_CFG_OP	GENMASK(31, 24)
++#define TH1520_DDR_CFG_ADDR	GENMASK(23, 0)
++
++#define TH1520_DDR_CFG_PHY0	0
++#define TH1520_DDR_CFG_PHY1	1
++#define TH1520_DDR_CFG_PHY	2
++#define TH1520_DDR_CFG_RANGE	3
++#define TH1520_DDR_CFG_WAITFW0	4
++#define TH1520_DDR_CFG_WAITFW1	5
++
++/* Driver constants */
++#define TH1520_SYS_PLL_TIMEOUT_US	30
++#define TH1520_CTRL_INIT_TIMEOUT_US	1000000
++#define TH1520_PHY_MSG_TIMEOUT_US	1000000
++
++/* System configuration registers */
++#define TH1520_SYS_DDR_CFG0			0x00
++#define  TH1520_SYS_DDR_CFG0_APB_RSTN		BIT(4)
++#define  TH1520_SYS_DDR_CFG0_CTRL_RSTN		BIT(5)
++#define  TH1520_SYS_DDR_CFG0_PHY_PWROK_RSTN	BIT(6)
++#define  TH1520_SYS_DDR_CFG0_PHY_CORE_RSTN	BIT(7)
++#define  TH1520_SYS_DDR_CFG0_APB_PORT_RSTN(n)	BIT(n + 4 + 4)
++#define TH1520_SYS_DDR_CFG1			0x04
++#define TH1520_SYS_PLL_CFG0			0x08
++#define  TH1520_SYS_PLL_CFG0_POSTDIV2		GENMASK(26, 24)
++#define  TH1520_SYS_PLL_CFG0_POSTDIV1		GENMASK(22, 20)
++#define  TH1520_SYS_PLL_CFG0_FBDIV		GENMASK(19, 8)
++#define  TH1520_SYS_PLL_CFG0_REFDIV		GENMASK(5, 0)
++#define TH1520_SYS_PLL_CFG1			0x0c
++#define  TH1520_SYS_PLL_CFG1_RST		BIT(30)
++#define  TH1520_SYS_PLL_CFG1_FOUTPOSTDIVPD	BIT(27)
++#define  TH1520_SYS_PLL_CFG1_FOUT4PHASEPD	BIT(25)
++#define  Th1520_SYS_PLL_CFG1_DACPD		BIT(24)
++#define TH1520_SYS_PLL_CFG2		0x10
++#define TH1520_SYS_PLL_CFG3		0x14
++#define TH1520_SYS_PLL_STS		0x18
++#define  TH1520_SYS_PLL_STS_EN		BIT(16)
++#define  TH1520_SYS_PLL_STS_LOCKED	BIT(0)
++
++/* DDR Controller Registers */
++#define TH1520_CTRL_MSTR			0x0000
++#define TH1520_CTRL_STAT			0x0004
++#define TH1520_CTRL_MRCTRL0			0x0010
++#define TH1520_CTRL_MRCTRL1			0x0014
++#define TH1520_CTRL_MRSTAT			0x0018
++#define TH1520_CTRL_DERATEEN			0x0020
++#define TH1520_CTRL_DERATEINT			0x0024
++#define TH1520_CTRL_DERATECTL			0x002c
++#define TH1520_CTRL_PWRCTL			0x0030
++#define TH1520_CTRL_PWRTMG			0x0034
++#define TH1520_CTRL_HWLPCTL			0x0038
++#define TH1520_CTRL_RFSHCTL0			0x0050
++#define TH1520_CTRL_RFSHCTL1			0x0054
++#define TH1520_CTRL_RFSHCTL3			0x0060
++#define TH1520_CTRL_RFSHTMG			0x0064
++#define TH1520_CTRL_RFSHTMG1			0x0068
++#define TH1520_CTRL_CRCPARCTL0			0x00c0
++#define TH1520_CTRL_CRCPARSTAT			0x00cc
++#define TH1520_CTRL_INIT0			0x00d0
++#define TH1520_CTRL_INIT1			0x00d4
++#define TH1520_CTRL_INIT2			0x00d8
++#define TH1520_CTRL_INIT3			0x00dc
++#define TH1520_CTRL_INIT4			0x00e0
++#define TH1520_CTRL_INIT5			0x00e4
++#define TH1520_CTRL_INIT6			0x00e8
++#define TH1520_CTRL_INIT7			0x00ec
++#define TH1520_CTRL_DIMMCTL			0x00f0
++#define TH1520_CTRL_RANKCTL			0x00f4
++#define TH1520_CTRL_RANKCTL1			0x00f8
++#define TH1520_CTRL_DRAMTMG0			0x0100
++#define TH1520_CTRL_DRAMTMG1			0x0104
++#define TH1520_CTRL_DRAMTMG2			0x0108
++#define TH1520_CTRL_DRAMTMG3			0x010c
++#define TH1520_CTRL_DRAMTMG4			0x0110
++#define TH1520_CTRL_DRAMTMG5			0x0114
++#define TH1520_CTRL_DRAMTMG6			0x0118
++#define TH1520_CTRL_DRAMTMG7			0x011c
++#define TH1520_CTRL_DRAMTMG8			0x0120
++#define TH1520_CTRL_DRAMTMG12			0x0130
++#define TH1520_CTRL_DRAMTMG13			0x0134
++#define TH1520_CTRL_DRAMTMG14			0x0138
++#define TH1520_CTRL_DRAMTMG17			0x0144
++#define TH1520_CTRL_ZQCTL0			0x0180
++#define TH1520_CTRL_ZQCTL1			0x0184
++#define TH1520_CTRL_ZQCTL2			0x0188
++#define TH1520_CTRL_ZQSTAT			0x018c
++#define TH1520_CTRL_DFITMG0			0x0190
++#define TH1520_CTRL_DFITMG1			0x0194
++#define TH1520_CTRL_DFILPCFG0			0x0198
++#define TH1520_CTRL_DFIUPD0			0x01a0
++#define TH1520_CTRL_DFIUPD1			0x01a4
++#define TH1520_CTRL_DFIUPD2			0x01a8
++#define TH1520_CTRL_DFIMISC			0x01b0
++#define TH1520_CTRL_DFITMG2			0x01b4
++#define TH1520_CTRL_DFISTAT			0x01bc
++#define TH1520_CTRL_DBICTL			0x01c0
++#define TH1520_CTRL_DFIPHYMSTR			0x01c4
++#define TH1520_CTRL_ADDRMAP0			0x0200
++#define TH1520_CTRL_ADDRMAP1			0x0204
++#define TH1520_CTRL_ADDRMAP2			0x0208
++#define TH1520_CTRL_ADDRMAP3			0x020c
++#define TH1520_CTRL_ADDRMAP4			0x0210
++#define TH1520_CTRL_ADDRMAP5			0x0214
++#define TH1520_CTRL_ADDRMAP6			0x0218
++#define TH1520_CTRL_ADDRMAP7			0x021c
++#define TH1520_CTRL_ADDRMAP8			0x0220
++#define TH1520_CTRL_ADDRMAP9			0x0224
++#define TH1520_CTRL_ADDRMAP10			0x0228
++#define TH1520_CTRL_ADDRMAP11			0x022c
++#define TH1520_CTRL_ODTCFG			0x0240
++#define TH1520_CTRL_ODTMAP			0x0244
++#define TH1520_CTRL_SCHED			0x0250
++#define TH1520_CTRL_SCHED1			0x0254
++#define TH1520_CTRL_PERFHPR1			0x025c
++#define TH1520_CTRL_PERFLPR1			0x0264
++#define TH1520_CTRL_PERFWR1			0x026c
++#define TH1520_CTRL_SCHED3			0x0270
++#define TH1520_CTRL_SCHED4			0x0274
++#define TH1520_CTRL_DBG0			0x0300
++#define TH1520_CTRL_DBG1			0x0304
++#define TH1520_CTRL_DBGCAM			0x0308
++#define TH1520_CTRL_DBGCMD			0x030c
++#define TH1520_CTRL_DBGSTAT			0x0310
++#define TH1520_CTRL_SWCTL			0x0320
++#define TH1520_CTRL_SWSTAT			0x0324
++#define TH1520_CTRL_SWCTLSTATIC			0x0328
++#define TH1520_CTRL_POISONCFG			0x036c
++#define TH1520_CTRL_POISONSTAT			0x0370
++#define TH1520_CTRL_DERATESTAT			0x03f0
++#define TH1520_CTRL_PSTAT			0x03fc
++#define TH1520_CTRL_PCCFG			0x0400
++#define TH1520_CTRL_PCFGR_0			0x0404
++#define TH1520_CTRL_PCFGW_0			0x0408
++#define TH1520_CTRL_PCTRL_0			0x0490
++#define TH1520_CTRL_PCFGQOS0_0			0x0494
++#define TH1520_CTRL_PCFGQOS1_0			0x0498
++#define TH1520_CTRL_PCFGWQOS0_0			0x049c
++#define TH1520_CTRL_PCFGWQOS1_0			0x04a0
++#define TH1520_CTRL_PCFGR_1			0x04b4
++#define TH1520_CTRL_PCFGW_1			0x04b8
++#define TH1520_CTRL_PCTRL_1			0x0540
++#define TH1520_CTRL_PCFGQOS0_1			0x0544
++#define TH1520_CTRL_PCFGQOS1_1			0x0548
++#define TH1520_CTRL_PCFGWQOS0_1			0x054c
++#define TH1520_CTRL_PCFGWQOS1_1			0x0550
++#define TH1520_CTRL_PCFGR_2			0x0564
++#define TH1520_CTRL_PCFGW_2			0x0568
++#define TH1520_CTRL_PCTRL_2			0x05f0
++#define TH1520_CTRL_PCFGQOS0_2			0x05f4
++#define TH1520_CTRL_PCFGQOS1_2			0x05f8
++#define TH1520_CTRL_PCFGWQOS0_2			0x05fc
++#define TH1520_CTRL_PCFGWQOS1_2			0x0600
++#define TH1520_CTRL_PCFGR_3			0x0614
++#define TH1520_CTRL_PCFGW_3			0x0618
++#define TH1520_CTRL_PCTRL_3			0x06a0
++#define TH1520_CTRL_PCFGQOS0_3			0x06a4
++#define TH1520_CTRL_PCFGQOS1_3			0x06a8
++#define TH1520_CTRL_PCFGWQOS0_3			0x06ac
++#define TH1520_CTRL_PCFGWQOS1_3			0x06b0
++#define TH1520_CTRL_PCFGR_4			0x06c4
++#define TH1520_CTRL_PCFGW_4			0x06c8
++#define TH1520_CTRL_PCTRL_4			0x0750
++#define TH1520_CTRL_PCFGQOS0_4			0x0754
++#define TH1520_CTRL_PCFGQOS1_4			0x0758
++#define TH1520_CTRL_PCFGWQOS0_4			0x075c
++#define TH1520_CTRL_PCFGWQOS1_4			0x0760
++#define TH1520_CTRL_UMCTL2_VER_NUMBER		0x0ff0
++#define TH1520_CTRL_UMCTL2_VER_TYPE		0x0ff4
++#define TH1520_CTRL_DCH1_STAT			0x1b04
++#define TH1520_CTRL_DCH1_MRCTRL0		0x1b10
++#define TH1520_CTRL_DCH1_MRCTRL1		0x1b14
++#define TH1520_CTRL_DCH1_MRSTAT			0x1b18
++#define TH1520_CTRL_DCH1_DERATECTL		0x1b2c
++#define TH1520_CTRL_DCH1_PWRCTL			0x1b30
++#define TH1520_CTRL_DCH1_HWLPCTL		0x1b38
++#define TH1520_CTRL_DCH1_CRCPARCTL0		0x1bc0
++#define TH1520_CTRL_DCH1_ZQCTL2			0x1c88
++#define TH1520_CTRL_DCH1_DFISTAT		0x1cbc
++#define TH1520_CTRL_DCH1_ODTMAP			0x1d44
++#define TH1520_CTRL_DCH1_DBG1			0x1e04
++#define TH1520_CTRL_DCH1_DBGCMD			0x1e0c
++#define TH1520_CTRL_DCH1_DBGCAM			0x1e08
++
++/* PHY configuration registers */
++#define TH1520_DDR_PHY_REG(regid)	((regid) * 2)
++
++/* UctShadowRegs */
++#define TH1520_PHY_MSG_STATUS		TH1520_DDR_PHY_REG(0xd0004)
++#define  TH1520_PHY_MSG_STATUS_EMPTY	BIT(0)
++/* DctWriteProt */
++#define TH1520_PHY_MSG_ACK		TH1520_DDR_PHY_REG(0xd0031)
++#define  TH1520_PHY_MSG_ACK_EN		BIT(0)
++/* UctWriteOnlyShadow */
++#define TH1520_PHY_MSG_ID		TH1520_DDR_PHY_REG(0xd0032)
++#define  TH1520_PHY_MSG_ID_COMPLETION	0x7
++#define  TH1520_PHY_MSG_ID_ERROR	0xff
++/* UctDatWriteOnlyShadow */
++#define TH1520_PHY_MSG_DATA		TH1520_DDR_PHY_REG(0xd0034)
++
++struct th1520_ddr_priv {
++	void __iomem *phy0;
++	void __iomem *phy1;
++	void __iomem *ctrl;
++	void __iomem *sys;
++};
++
++binman_sym_declare(ulong, ddr_fw, image_pos);
++
++static int th1520_ddr_pll_config(void __iomem *sysreg, unsigned int frequency)
++{
++	u32 tmp;
++	int ret;
++
++	tmp = TH1520_SYS_PLL_CFG1_RST			|
++	      TH1520_SYS_PLL_CFG1_FOUTPOSTDIVPD		|
++	      TH1520_SYS_PLL_CFG1_FOUT4PHASEPD		|
++	      Th1520_SYS_PLL_CFG1_DACPD;
++	writel(tmp, sysreg + TH1520_SYS_PLL_CFG1);
++
++	switch (frequency) {
++	case TH1520_DDR_FREQ_3733:
++		writel(FIELD_PREP(TH1520_SYS_PLL_CFG0_REFDIV, 1)	|
++		       FIELD_PREP(TH1520_SYS_PLL_CFG0_FBDIV, 77)	|
++		       FIELD_PREP(TH1520_SYS_PLL_CFG0_POSTDIV1, 2)	|
++		       FIELD_PREP(TH1520_SYS_PLL_CFG0_POSTDIV2, 1),
++		       sysreg + TH1520_SYS_PLL_CFG0);
++		break;
++	default:
++		return -EINVAL;
 +	}
 +
-+	/* DDR init */
-+	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-+	if (ret) {
-+		printf("DRAM init failed: %d\n", ret);
++	udelay(2);
++	tmp &= ~TH1520_SYS_PLL_CFG1_RST;
++	writel(tmp, sysreg + TH1520_SYS_PLL_CFG1);
++
++	ret = readl_poll_timeout(sysreg + TH1520_SYS_PLL_STS, tmp,
++				 tmp & TH1520_SYS_PLL_STS_LOCKED,
++				 TH1520_SYS_PLL_TIMEOUT_US);
++
++	writel(TH1520_SYS_PLL_STS_EN, sysreg + TH1520_SYS_PLL_STS);
++
++	return ret;
++}
++
++static int th1520_ddr_ctrl_init(void __iomem *ctrlreg, struct th1520_ddr_fw *fw)
++{
++	int ret;
++	u32 tmp;
++
++	writel(0x00000001, ctrlreg + TH1520_CTRL_DBG1);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_PWRCTL);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_STAT, tmp,
++				 tmp == 0x00000000,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
 +		return ret;
++
++	if (fw->ranknum == 2)
++		writel(0x03080020, ctrlreg + TH1520_CTRL_MSTR);
++	else
++		return -EINVAL;
++
++	writel(0x00003030, ctrlreg + TH1520_CTRL_MRCTRL0);
++	writel(0x0002d90f, ctrlreg + TH1520_CTRL_MRCTRL1);
++
++	switch (fw->freq) {
++	case TH1520_DDR_FREQ_3733:
++		writel(0x000013f3, ctrlreg + TH1520_CTRL_DERATEEN);
++		writel(0x40000000, ctrlreg + TH1520_CTRL_DERATEINT);
++		writel(0x00000001, ctrlreg + TH1520_CTRL_DERATECTL);
++		writel(0x00000020, ctrlreg + TH1520_CTRL_PWRCTL);
++		writel(0x0040ae04, ctrlreg + TH1520_CTRL_PWRTMG);
++		writel(0x00430000, ctrlreg + TH1520_CTRL_HWLPCTL);
++		writel(0x00210004, ctrlreg + TH1520_CTRL_RFSHCTL0);
++		writel(0x000d0021, ctrlreg + TH1520_CTRL_RFSHCTL1);
++		writel(0x00000001, ctrlreg + TH1520_CTRL_RFSHCTL3);
++		writel(0x81c00084, ctrlreg + TH1520_CTRL_RFSHTMG);
++		writel(0x00540000, ctrlreg + TH1520_CTRL_RFSHTMG1);
++		writel(0x00000000, ctrlreg + TH1520_CTRL_CRCPARCTL0);
++		writel(0xc0020002, ctrlreg + TH1520_CTRL_INIT0);
++		writel(0x00010002, ctrlreg + TH1520_CTRL_INIT1);
++		writel(0x00001f00, ctrlreg + TH1520_CTRL_INIT2);
++		writel(0x00640036, ctrlreg + TH1520_CTRL_INIT3);
++		writel(0x00f20008, ctrlreg + TH1520_CTRL_INIT4);
++		writel(0x0004000b, ctrlreg + TH1520_CTRL_INIT5);
++		writel(0x00440012, ctrlreg + TH1520_CTRL_INIT6);
++		writel(0x0004001a, ctrlreg + TH1520_CTRL_INIT7);
++		writel(0x00000000, ctrlreg + TH1520_CTRL_DIMMCTL);
++		writel(0x0000ab9f, ctrlreg + TH1520_CTRL_RANKCTL);
++		writel(0x00000017, ctrlreg + TH1520_CTRL_RANKCTL1);
++		writel(0x1f263f28, ctrlreg + TH1520_CTRL_DRAMTMG0);
++		writel(0x00080839, ctrlreg + TH1520_CTRL_DRAMTMG1);
++		writel(0x08121d17, ctrlreg + TH1520_CTRL_DRAMTMG2);
++		writel(0x00d0e000, ctrlreg + TH1520_CTRL_DRAMTMG3);
++		writel(0x11040a12, ctrlreg + TH1520_CTRL_DRAMTMG4);
++		writel(0x02050e0e, ctrlreg + TH1520_CTRL_DRAMTMG5);
++		writel(0x01010008, ctrlreg + TH1520_CTRL_DRAMTMG6);
++		writel(0x00000502, ctrlreg + TH1520_CTRL_DRAMTMG7);
++		writel(0x00000101, ctrlreg + TH1520_CTRL_DRAMTMG8);
++		writel(0x00020000, ctrlreg + TH1520_CTRL_DRAMTMG12);
++		writel(0x0d100002, ctrlreg + TH1520_CTRL_DRAMTMG13);
++		writel(0x0000010c, ctrlreg + TH1520_CTRL_DRAMTMG14);
++		writel(0x03a50021, ctrlreg + TH1520_CTRL_ZQCTL0);
++		writel(0x02f00800, ctrlreg + TH1520_CTRL_ZQCTL1);
++		writel(0x00000000, ctrlreg + TH1520_CTRL_ZQCTL2);
++		writel(0x059f820c, ctrlreg + TH1520_CTRL_DFITMG0);
++		writel(0x000c0303, ctrlreg + TH1520_CTRL_DFITMG1);
++		writel(0x0351a101, ctrlreg + TH1520_CTRL_DFILPCFG0);
++		writel(0x00000011, ctrlreg + TH1520_CTRL_DFIMISC);
++		writel(0x00001f0c, ctrlreg + TH1520_CTRL_DFITMG2);
++		writel(0x00000007, ctrlreg + TH1520_CTRL_DBICTL);
++		writel(0x14000001, ctrlreg + TH1520_CTRL_DFIPHYMSTR);
++		writel(0x06090b40, ctrlreg + TH1520_CTRL_ODTCFG);
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	writel(0x00400018, ctrlreg + TH1520_CTRL_DFIUPD0);
++	writel(0x00280032, ctrlreg + TH1520_CTRL_DFIUPD1);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DFIUPD2);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_ODTMAP);
++	writel(0x1f829b1c, ctrlreg + TH1520_CTRL_SCHED);
++	writel(0x4400b00f, ctrlreg + TH1520_CTRL_SCHED1);
++	writel(0x0f000001, ctrlreg + TH1520_CTRL_PERFHPR1);
++	writel(0x0f00007f, ctrlreg + TH1520_CTRL_PERFLPR1);
++	writel(0x0f00007f, ctrlreg + TH1520_CTRL_PERFWR1);
++	writel(0x00000208, ctrlreg + TH1520_CTRL_SCHED3);
++	writel(0x08400810, ctrlreg + TH1520_CTRL_SCHED4);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DBG0);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DBG1);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DBGCMD);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_SWCTL);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_SWCTLSTATIC);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_POISONCFG);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_PCTRL_0);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_PCTRL_1);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_PCTRL_2);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_PCTRL_3);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_PCTRL_4);
++	writel(0x00003030, ctrlreg + TH1520_CTRL_DCH1_MRCTRL0);
++	writel(0x0002d90f, ctrlreg + TH1520_CTRL_DCH1_MRCTRL1);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_DCH1_DERATECTL);
++	writel(0x00000020, ctrlreg + TH1520_CTRL_DCH1_PWRCTL);
++	writel(0x00430002, ctrlreg + TH1520_CTRL_DCH1_HWLPCTL);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DCH1_CRCPARCTL0);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DCH1_ZQCTL2);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DCH1_ODTMAP);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DCH1_DBG1);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DCH1_DBGCMD);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_RFSHCTL3, tmp,
++				 tmp == 0x00000001,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000010, ctrlreg + TH1520_CTRL_PCCFG);
++	writel(0x0000500f, ctrlreg + TH1520_CTRL_PCFGR_0);
++	writel(0x0000500f, ctrlreg + TH1520_CTRL_PCFGW_0);
++	writel(0x00005020, ctrlreg + TH1520_CTRL_PCFGR_1);
++	writel(0x0000501f, ctrlreg + TH1520_CTRL_PCFGW_1);
++	writel(0x0000501f, ctrlreg + TH1520_CTRL_PCFGR_2);
++	writel(0x0000503f, ctrlreg + TH1520_CTRL_PCFGW_2);
++	writel(0x000051ff, ctrlreg + TH1520_CTRL_PCFGR_3);
++	writel(0x000051ff, ctrlreg + TH1520_CTRL_PCFGW_3);
++	writel(0x0000503f, ctrlreg + TH1520_CTRL_PCFGR_4);
++	writel(0x0000503f, ctrlreg + TH1520_CTRL_PCFGW_4);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_PWRCTL, tmp,
++				 tmp == 0x00000020,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000020, ctrlreg + TH1520_CTRL_PWRCTL);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_DCH1_PWRCTL, tmp,
++				 tmp == 0x00000020,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000020, ctrlreg + TH1520_CTRL_DCH1_PWRCTL);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DBG1);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_PWRCTL, tmp,
++				 tmp == 0x00000020,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000020, ctrlreg + TH1520_CTRL_PWRCTL);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_PWRCTL, tmp,
++				 tmp == 0x00000020,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000020, ctrlreg + TH1520_CTRL_PWRCTL);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DCH1_DBG1);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_DCH1_PWRCTL, tmp,
++				 tmp == 0x00000020,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000020, ctrlreg + TH1520_CTRL_DCH1_PWRCTL);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_DCH1_PWRCTL, tmp,
++				 tmp == 0x00000020,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000020, ctrlreg + TH1520_CTRL_DCH1_PWRCTL);
++	writel(0x14000001, ctrlreg + TH1520_CTRL_DFIPHYMSTR);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_SWCTL);
++	writel(0x00000010, ctrlreg + TH1520_CTRL_DFIMISC);
++	writel(0x00000010, ctrlreg + TH1520_CTRL_DFIMISC);
++	writel(0x00000002, ctrlreg + TH1520_CTRL_DBG1);
++	writel(0x00000002, ctrlreg + TH1520_CTRL_DCH1_DBG1);
++
++	switch (fw->bitwidth) {
++	case 64:
++		writel(0x00040018, ctrlreg + TH1520_CTRL_ADDRMAP0);
++		writel(0x00090909, ctrlreg + TH1520_CTRL_ADDRMAP1);
++		writel(0x00000000, ctrlreg + TH1520_CTRL_ADDRMAP2);
++		writel(0x01010101, ctrlreg + TH1520_CTRL_ADDRMAP3);
++		writel(0x00001f1f, ctrlreg + TH1520_CTRL_ADDRMAP4);
++		writel(0x080f0808, ctrlreg + TH1520_CTRL_ADDRMAP5);
++		writel(0x08080808, ctrlreg + TH1520_CTRL_ADDRMAP6);
++		writel(0x00000f0f, ctrlreg + TH1520_CTRL_ADDRMAP7);
++		writel(0x08080808, ctrlreg + TH1520_CTRL_ADDRMAP9);
++		writel(0x08080808, ctrlreg + TH1520_CTRL_ADDRMAP10);
++		writel(0x00000008, ctrlreg + TH1520_CTRL_ADDRMAP11);
++		break;
++	default:
++		return -EINVAL;
 +	}
 +
 +	return 0;
 +}
-diff --git a/arch/riscv/include/asm/arch-th1520/cpu.h b/arch/riscv/include/asm/arch-th1520/cpu.h
-new file mode 100644
-index 00000000000..837f0b8d06b
---- /dev/null
-+++ b/arch/riscv/include/asm/arch-th1520/cpu.h
-@@ -0,0 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2025 Yao Zi <ziyao@disroot.org>
-+ */
 +
-+#ifndef _ASM_TH1520_CPU_H_
-+#define _ASM_TH1520_CPU_H_
-+void th1520_invalidate_pmp(void);
-+#endif /* _ASM_TH1520_CPU_H_ */
-diff --git a/arch/riscv/include/asm/arch-th1520/spl.h b/arch/riscv/include/asm/arch-th1520/spl.h
-new file mode 100644
-index 00000000000..59aed8cad62
---- /dev/null
-+++ b/arch/riscv/include/asm/arch-th1520/spl.h
-@@ -0,0 +1,10 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2025 Yao Zi <ziyao@disroot.org>
-+ */
-+#ifndef _ASM_ARCH_TH1520_SPL_H_
-+#define _ASM_ARCH_TH1520_SPL_H_
++static int th1520_ddr_read_msg(void __iomem *phyreg, u16 *id, u16 *data)
++{
++	u32 tmp;
++	int ret;
 +
-+void spl_dram_init(void);
++	ret = readw_poll_timeout(phyreg + TH1520_PHY_MSG_STATUS, tmp,
++				 !(tmp & TH1520_PHY_MSG_STATUS_EMPTY),
++				 TH1520_PHY_MSG_TIMEOUT_US);
++	if (ret)
++		return ret;
 +
-+#endif // _ASM_ARCH_TH1520_SPL_H_
++	*id   = readw(phyreg + TH1520_PHY_MSG_ID);
++	*data = readw(phyreg + TH1520_PHY_MSG_DATA);
++
++	writew(0, phyreg + TH1520_PHY_MSG_ACK);
++
++	ret = readw_poll_timeout(phyreg + TH1520_PHY_MSG_STATUS, tmp,
++				 tmp & TH1520_PHY_MSG_STATUS_EMPTY,
++				 TH1520_PHY_MSG_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writew(TH1520_PHY_MSG_ACK_EN, phyreg + TH1520_PHY_MSG_ACK);
++
++	return 0;
++}
++
++static int th1520_phy_wait_pmu_completion(void __iomem *phyreg)
++{
++	u16 id, data;
++	int ret;
++
++	do {
++		ret = th1520_ddr_read_msg(phyreg, &id, &data);
++
++		if (ret)
++			return ret;
++	} while (id != TH1520_PHY_MSG_ID_COMPLETION	&&
++		 id != TH1520_PHY_MSG_ID_ERROR		&&
++		 !ret);
++
++	return id == TH1520_PHY_MSG_ID_COMPLETION ? ret : -EIO;
++}
++
++static int lpddr4_load_firmware(struct th1520_ddr_priv *priv,
++				struct th1520_ddr_fw *fw)
++{
++	union th1520_ddr_cfg *cfg;
++	size_t i, j;
++	int ret;
++
++	for (cfg = fw->cfgs, i = 0; i < fw->cfgnum; i++) {
++		u32 addr = FIELD_GET(TH1520_DDR_CFG_ADDR, cfg->opaddr) * 2;
++		u32 op = FIELD_GET(TH1520_DDR_CFG_OP, cfg->opaddr);
++
++		switch (op) {
++		case TH1520_DDR_CFG_PHY0:
++			writew(cfg->phy.data, priv->phy0 + addr);
++			break;
++		case TH1520_DDR_CFG_PHY1:
++			writew(cfg->phy.data, priv->phy1 + addr);
++			break;
++		case TH1520_DDR_CFG_PHY:
++			writew(cfg->phy.data, priv->phy0 + addr);
++			writew(cfg->phy.data, priv->phy1 + addr);
++			break;
++		case TH1520_DDR_CFG_RANGE:
++			for (j = 0; j < cfg->range.num; j++) {
++				writew(cfg->range.data[j],
++				       priv->phy0 + addr + j * 2);
++				writew(cfg->range.data[j],
++				       priv->phy1 + addr + j * 2);
++			}
++			break;
++		case TH1520_DDR_CFG_WAITFW0:
++			ret = th1520_phy_wait_pmu_completion(priv->phy0);
++
++			if (ret) {
++				pr_err("phy 0 training failed: %d\n", ret);
++				return ret;
++			}
++
++			break;
++		case TH1520_DDR_CFG_WAITFW1:
++			ret = th1520_phy_wait_pmu_completion(priv->phy1);
++
++			if (ret) {
++				pr_err("phy 1 training failed: %d\n", ret);
++				return ret;
++			}
++
++			break;
++		default:
++			pr_err("Unknown DRAM configuration %d\n", op);
++
++			return -EOPNOTSUPP;
++		}
++
++		if (op == TH1520_DDR_CFG_RANGE)
++			cfg = (void *)cfg + sizeof(cfg->range) +
++				      cfg->range.num * sizeof(u16);
++		else
++			cfg = (union th1520_ddr_cfg *)(&cfg->phy + 1);
++	}
++
++	return 0;
++}
++
++static int th1520_ddr_ctrl_enable(void __iomem *ctrlreg,
++				  struct th1520_ddr_fw *fw)
++{
++	u32 tmp;
++	int ret;
++
++	writel(0x00000030, ctrlreg + TH1520_CTRL_DFIMISC);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_DFISTAT, tmp,
++				 tmp == 0x00000001,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_DCH1_DFISTAT, tmp,
++				 tmp == 0x00000001,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x00000010, ctrlreg + TH1520_CTRL_DFIMISC);
++	writel(0x00000011, ctrlreg + TH1520_CTRL_DFIMISC);
++	writel(0x0000000a, ctrlreg + TH1520_CTRL_PWRCTL);
++	writel(0x0000000a, ctrlreg + TH1520_CTRL_DCH1_PWRCTL);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_SWCTL);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_SWSTAT, tmp,
++				 tmp == 0x00000001,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_STAT, tmp,
++				 tmp == 0x00000001,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_DCH1_STAT, tmp,
++				 tmp == 0x00000001,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++	if (ret)
++		return ret;
++
++	writel(0x14000001, ctrlreg + TH1520_CTRL_DFIPHYMSTR);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_SWCTL);
++	writel(0x00020002, ctrlreg + TH1520_CTRL_INIT0);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_SWCTL);
++
++	ret = readl_poll_timeout(ctrlreg + TH1520_CTRL_SWSTAT, tmp,
++				 tmp == 0x00000001,
++				 TH1520_CTRL_INIT_TIMEOUT_US);
++
++	if (ret)
++		return ret;
++
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DBG1);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_DCH1_DBG1);
++
++	return 0;
++}
++
++static void th1520_ddr_enable_self_refresh(void __iomem *ctrlreg,
++					   void __iomem *sysreg)
++{
++	writel(0x00000000, ctrlreg + TH1520_CTRL_RFSHCTL3);
++
++	writel(0x000a0000, sysreg + TH1520_SYS_DDR_CFG1);
++
++	writel(0x00000000, ctrlreg + TH1520_CTRL_SWCTL);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_SWCTLSTATIC);
++	writel(0x0040ae04, ctrlreg + TH1520_CTRL_PWRTMG);
++	writel(0x00430003, ctrlreg + TH1520_CTRL_HWLPCTL);
++	writel(0x00430003, ctrlreg + TH1520_CTRL_DCH1_HWLPCTL);
++	writel(0x00000001, ctrlreg + TH1520_CTRL_SWCTL);
++	writel(0x00000000, ctrlreg + TH1520_CTRL_SWCTLSTATIC);
++	writel(0x0000000b, ctrlreg + TH1520_CTRL_PWRCTL);
++	writel(0x0000000b, ctrlreg + TH1520_CTRL_DCH1_PWRCTL);
++}
++
++static int th1520_ddr_init(struct th1520_ddr_priv *priv)
++{
++	struct th1520_ddr_fw *fw = (void *)binman_sym(ulong, ddr_fw, image_pos);
++	u32 reset;
++	int ret;
++
++	ret = th1520_ddr_pll_config(priv->sys, fw->freq);
++	if (ret) {
++		pr_err("failed to configure PLL: %d\n", ret);
++		return ret;
++	}
++
++	reset = TH1520_SYS_DDR_CFG0_PHY_PWROK_RSTN;
++	writel(reset, priv->sys + TH1520_SYS_DDR_CFG0);
++	reset |= TH1520_SYS_DDR_CFG0_PHY_CORE_RSTN;
++	writel(reset, priv->sys + TH1520_SYS_DDR_CFG0);
++	reset |= TH1520_SYS_DDR_CFG0_APB_RSTN;
++	writel(reset, priv->sys + TH1520_SYS_DDR_CFG0);
++
++	ret = th1520_ddr_ctrl_init(priv->ctrl, fw);
++	if (ret) {
++		pr_err("failed to initialize DDR controller: %d\n", ret);
++		return ret;
++	}
++
++	reset |= TH1520_SYS_DDR_CFG0_APB_PORT_RSTN(0) |
++		 TH1520_SYS_DDR_CFG0_APB_PORT_RSTN(1) |
++		 TH1520_SYS_DDR_CFG0_APB_PORT_RSTN(2) |
++		 TH1520_SYS_DDR_CFG0_APB_PORT_RSTN(3) |
++		 TH1520_SYS_DDR_CFG0_APB_PORT_RSTN(4) |
++		 TH1520_SYS_DDR_CFG0_CTRL_RSTN;
++	writel(reset, priv->sys + TH1520_SYS_DDR_CFG0);
++
++	lpddr4_load_firmware(priv, fw);
++
++	ret = th1520_ddr_ctrl_enable(priv->ctrl, fw);
++	if (ret) {
++		pr_err("failed to enable DDR controller: %d\n", ret);
++		return ret;
++	}
++
++	th1520_ddr_enable_self_refresh(priv->ctrl, priv->sys);
++
++	return 0;
++}
++
++static int th1520_ddr_probe(struct udevice *dev)
++{
++	struct th1520_ddr_priv *priv = dev_get_priv(dev);
++	fdt_addr_t addr;
++
++	addr = dev_read_addr_name(dev, "phy-0");
++	priv->phy0 = (void __iomem *)addr;
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	addr = dev_read_addr_name(dev, "phy-1");
++	priv->phy1 = (void __iomem *)addr;
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	addr = dev_read_addr_name(dev, "ctrl");
++	priv->ctrl = (void __iomem *)addr;
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	addr = dev_read_addr_name(dev, "sys");
++	priv->sys = (void __iomem *)addr;
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	return th1520_ddr_init(priv);
++}
++
++static int th1520_ddr_get_info(struct udevice *dev, struct ram_info *info)
++{
++	info->base = gd->ram_base;
++	info->size = gd->ram_size;
++
++	return 0;
++}
++
++static struct ram_ops th1520_ddr_ops = {
++	.get_info = th1520_ddr_get_info,
++};
++
++static const struct udevice_id th1520_ddr_ids[] = {
++	{ .compatible = "thead,th1520-ddrc" },
++	{ }
++};
++
++U_BOOT_DRIVER(th1520_ddr) = {
++	.name = "th1520_ddr",
++	.id = UCLASS_RAM,
++	.ops = &th1520_ddr_ops,
++	.of_match = th1520_ddr_ids,
++	.probe = th1520_ddr_probe,
++	.priv_auto = sizeof(struct th1520_ddr_priv),
++};
 -- 
 2.49.0
 
