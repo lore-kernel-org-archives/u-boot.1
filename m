@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4001C369CB
-	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 17:45:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03ED8C369CB
+	for <u-boot@archiver.kernel.org>; Sat, 26 Apr 2025 18:43:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30FD081E0F;
-	Sat, 26 Apr 2025 19:45:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2215881E14;
+	Sat, 26 Apr 2025 20:43:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ajTq49NZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kQ6gYvbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F5EB81E14; Sat, 26 Apr 2025 19:45:00 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 827E681F0D; Sat, 26 Apr 2025 20:43:05 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99251810EB
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 19:44:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04FE881E0F
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 20:43:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5e8be1bdb7bso5304724a12.0
- for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 10:44:58 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-acb5ec407b1so561214966b.1
+ for <u-boot@lists.denx.de>; Sat, 26 Apr 2025 11:43:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745689498; x=1746294298; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1745692982; x=1746297782; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bbxITtHAcGXMiREQydyGZcJ4eVVA2TjDN/sMT0c7kME=;
- b=ajTq49NZ8ycp6weI33ka3dUdaGpkM8+uAxw61L+J7np5zB0KuBu5CUh3SfEmQdtxdZ
- X9E1RJ3JHTRJyK6JWsxNw6XROOR8t3+5dhAPyIUmsOs+KQrhA5eySaS04FUOp7jWUC2q
- wPvy3ZIvNbQcuIhPthtDdEp8vxj8juZHw2ZPwsTOvVtTD7U7NPvyizJFvLA7rU36pnNp
- +80QT/1Gwxqe8Kt9Q6Pej84M5xFBGK0y86sXUI4kq+CDrSob5IB1hhTy1JeqmZ0XbLHa
- ETqOVad5LeRUvx6lHYHG4HGhv96bJtt/Yvcb2RwYKffgkO70c5dESFgj9Tx0XO3mLVVu
- 8j0Q==
+ bh=DehPP6JpjFnVnYA2xWpzUjU2IIjRkGi0RkuvwVGtHZs=;
+ b=kQ6gYvbFtpSa8Uxe89He2Sr4nGAlizy9Oh/YNn0NiKUioAfi5tyOLegNj4rUcD8tNh
+ mMifcZcruoDEbULUWdR1A8SbMwTAtZfzHF6bkk54ocX+wshmGW+bnP41kS6+otzIbpiA
+ JGSfO73zT2ZVgjKdrJOb71pEX7QveFU7ekQfSHjQ4SgRUx55fZRijdv3yejaCM8NldXs
+ hfQTlcCGeKyk3Nv672keWXbia7Tz1I3ZpBtPsau5pOXWXS7yMFhYk10RoBgupvxid+oW
+ 5LP5X13x/S2UVM1iX1SOG4obyMs0Y35HK9vc+vIEME56w4qLFXwNQekydLlz1q+qw2G7
+ wx0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745689498; x=1746294298;
+ d=1e100.net; s=20230601; t=1745692982; x=1746297782;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bbxITtHAcGXMiREQydyGZcJ4eVVA2TjDN/sMT0c7kME=;
- b=IiYNLTrHGDAdH9ECggT878X61BJdq//jJaqVSArUoaLlbTExDdl/jRwkuNJkIxlV8T
- ABpLn42fSPlO0i921giFoB0NC9JUS2M20W/OLQqIs/zHWKLhs3wERK2xOcqAl4nCxpeK
- MbGsEk8oKaLYB3tmgLlawrmWmLyTVtViXt80l3R+evLFbFHdyLMz/H7u4NTshCjU3zFf
- wXIRFVOkh+M1Ex0lsVh2lTmUk4iRTvkS80dFhniWP8c2ou/kgLrZhKu2ShtkhoNgZe50
- lM9hAx//QqVhgrDluq9Gd4WJjkSFxGNZE9uBFyF3lSRRdqSGNGle96bqZQF0eQwStktG
- LGMg==
-X-Gm-Message-State: AOJu0YzKMlnmBsyUeYMH7nZwReAAWLvOv4zpw99C9GVG7az1agGh7+Eu
- ObMqo4p+ym+gN84NjUJl6/DmZ1dv6MgFMOvGHtanTeN1yi+5XmNnFR1iZw==
-X-Gm-Gg: ASbGncsQ3G/UCQYiDQD7mzutOb6CwQWmMDcaMXXpV7DJkMjuKS+Nwwm34V7yqQvQ4g6
- ZzpKiOqGUljCgIyl1NosN2Ewso0L/R+Iar38vmgRycw4kp0SsZGLInkkFwQ3417Wg2Lw8A6ergP
- Air7pOhzrmfkh3GLlVXk1ePnjII/efp4BI7qoivpxsWiM4HGznpC1IS7aSEVIG2QskbEcPrTrwY
- 6wPBQS2xLVMj2uARHrHQE2r5lyy768gBb/Oqt6Oltcx3gyN5bDs5AWqsWqy4Xd1NzUVYH5VARd3
- 6LBES9UgMQe8ToT8jWroaKeKJ9BKMufAQSWWRCR/QQpCllpX50OklojZj4Uj+A==
-X-Google-Smtp-Source: AGHT+IEYoP+s6tFCFsfMdNf9KlXDsfO+MPR416gnEOqDraQJNtj/S0B9IjLspGmK/DThc8WDCo1SSA==
-X-Received: by 2002:a05:6402:3513:b0:5ed:994c:7e75 with SMTP id
- 4fb4d7f45d1cf-5f72352cedamr4762738a12.24.1745689497686; 
- Sat, 26 Apr 2025 10:44:57 -0700 (PDT)
+ bh=DehPP6JpjFnVnYA2xWpzUjU2IIjRkGi0RkuvwVGtHZs=;
+ b=NmS8hL1whnvHKEL5rQb6fx5U3pEGAC8tzAUocu3g/iCJj13clDXSab3USN5bri0v9D
+ 4PCE0KhIKpzslx+K96PpiybJw/c0LyXIdZnLURm/zQNg6D5mE+NTNKF8W2FrwxcL4Z4o
+ 27skXJt0tpeGH77f0s37rmoAsLk7vSmLrap2CcS+BJov8HwG3gTs/qIRRTZkFyD0wr3F
+ vLciYbiKy7CWvCxkAJdP3gKuFdD3vY6zThCJH+QjFKlWuwNnUwOOxVegyPeiRUR+f+wX
+ kA87upwGW+3Z+8pu+sopM6vx9XRudEsCDkKpXcabBrxDYe7sswug9hs2Y9INEAZUhyuF
+ GG3Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDGsCJjCUHXrXGsWSs/JxhTqo6BWBSVfiw9E1bTcH2Ws1BvEnw5AJsJBu9ZdmbLBSCj/ilGqA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwInycav9OiVZwVUhG+d2ld801TOOqn1gd9RHs/jBnkgh+0ZC4v
+ zqUXzzXuoqfAzNJ1s1ygUp41XeJ37fYqYcqBiUDnsQjBpcsykL56
+X-Gm-Gg: ASbGncvPMqXQA7gegkuXdHd6eAB56GjRQmXyB9yQegFEf+m3e/uPk0DWfaBptLwlBhi
+ WRirT/j0OlVj1k59rcfS2JMAd0Bsn1JUeJkXerB/7GnZnyg3Gb2yPe6qEoxnKbWRRFg0CMy3uxa
+ oHBorZepz1IouLjJevBxLj2AKCuZAx4dvjbhpEBUxx+kkme2xEdrQaVdFXuaDKenf5aKLevoWc6
+ i/nWhYR/VgUmBu6bcDP/c2lwYq1v/Bm9Q9rsEZBDRvrOkeCsTQjqhSXg/cDdov7b9Tf5zzXyjqN
+ QiNNrZUo7KpQTJS4OLsn31AuMbP5zl7EPZx1/fbKZ7HRtGwVTAZhvRxoX5dM7A==
+X-Google-Smtp-Source: AGHT+IHPPwitCcaPzj7NHpXgt/t1L15IpZcfizT11SJlipQocXrvgo33ohM1kQulBTvz3ZMx9m4oPw==
+X-Received: by 2002:a17:907:97c9:b0:ace:63b0:6f70 with SMTP id
+ a640c23a62f3a-ace84b71607mr311437166b.61.1745692982062; 
+ Sat, 26 Apr 2025 11:43:02 -0700 (PDT)
 Received: from jernej-laptop.localnet ([188.159.248.16])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f70354638bsm2915649a12.63.2025.04.26.10.44.56
+ a640c23a62f3a-ace6ecf9a0csm329516066b.94.2025.04.26.11.43.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 26 Apr 2025 10:44:57 -0700 (PDT)
+ Sat, 26 Apr 2025 11:43:01 -0700 (PDT)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH] sunxi: enable MMU_PGPROT proper page table protection
-Date: Sat, 26 Apr 2025 19:44:55 +0200
-Message-ID: <5003571.31r3eYUQgx@jernej-laptop>
-In-Reply-To: <20250426120913.23314-1-andre.przywara@arm.com>
-References: <20250426120913.23314-1-andre.przywara@arm.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: jagan@amarulasolutions.com, trini@konsulko.com, macromorgan@hotmail.com,
+ uwu@icenowy.me, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 5/5] sunxi: h6/h616: Reuse common DRAM infrastructure
+Date: Sat, 26 Apr 2025 20:43:00 +0200
+Message-ID: <6148409.lOV4Wx5bFT@jernej-laptop>
+In-Reply-To: <20250417011825.66f1a134@minigeek.lan>
+References: <20250411161439.4743-1-jernej.skrabec@gmail.com>
+ <12645199.O9o76ZdvQC@jernej-laptop> <20250417011825.66f1a134@minigeek.lan>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -97,48 +100,650 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sobota, 26. april 2025 ob 14:09:13 Srednjeevropski poletni =C4=8Das je =
-Andre Przywara napisal(a):
-> Select the new MMU_PGPROT Kconfig symbol for all Allwinner board builds,
-> to use a write-protected .rodata, non-executable .data and .rodata
-> sections, and non-writable .text sections.
+Dne =C4=8Detrtek, 17. april 2025 ob 02:18:25 Srednjeevropski poletni =C4=8D=
+as je Andre Przywara napisal(a):
+> On Wed, 16 Apr 2025 18:30:43 +0200
+> Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 >=20
-> This might trigger runtime exceptions in misbehaving drivers, which
-> should then be fixed.
-> Please report on the list or on IRC if bisecting ends at this patch.
+> > Dne sreda, 16. april 2025 ob 01:40:04 Srednjeevropski poletni =C4=8Das =
+je Andre Przywara napisal(a):
+> > > On Fri, 11 Apr 2025 18:14:39 +0200
+> > > Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
+> > >=20
+> > > Hi Jernej,
+> > >  =20
+> > > > H616 rank and size detection code is superior to the H6. Neverthele=
+ss,
+> > > > they are structurally the same. Split functions from H616 into new =
+file
+> > > > and reuse them in H6 DRAM driver too. This should also fix some bug=
+s for
+> > > > H6 too, like incorrect DRAM size detection. =20
+> > >=20
+> > > that's a nice patch, but actually breaks on my Pine H64:
+> > >=20
+> > > U-Boot SPL 2025.04-01089-g14694431269f (Apr 15 2025 - 22:55:07 +0100)
+> > > DRAM:DRAM init failed: Can't detect number of columns!
+> > > resetting ...
+> > >=20
+> > > It's none of the previous H6 reworks that causes the problem, but it's
+> > > actually already in the current code somehow: If I apply the equivale=
+nt
+> > > of [PATCH 1/5] to the H6 code, it already complains. Replacing the
+> > > panic with a printf() gives me (on mainline):
+> > >=20
+> > > U-Boot SPL 2025.04-01085-g7a43fe97dc86-dirty (Apr 15 2025 - 23:48:42 =
++0100)
+> > > DRAM:detected 14 rows (found=3D1)
+> > > detected 11 columns (found=3D0)
+> > >  2048 MiB
+> > > Trying to boot from FEL
+> > > NOTICE:  BL31: v2.12.0(debug):v2.12.0-724-gf745e004a
+> > >    < continues booting >
+> > >=20
+> > > So it seems like the match failed, but apparently 11 columns are corr=
+ect anyway.
+> > > And since the same happens after this patch, I assume that even the
+> > > newer and better matching routine doesn't change that, unfortunately.
+> > >=20
+> > > The config on this board is: 2 ranks, full width, 11 cols, 14 rows =
+=3D> 2GB.
+> > > And that seems to work (in Linux).
+> > > It's a single chip Elpida FA232A2MA JD-F, listed by Micron as
+> > > EDFA232A2MA-JD-F-D, though I couldn't find a datasheet quickly. =20
+> >=20
+> > Thanks for testing! It looks like it's best just to drop first patch in=
+ the
+> > series. 11 columns is for sure valid. Not that sure about 17 rows, but
+> > better leave it as is.
+> > What do you think?
 >=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Well, that certainly works, and I will probably take it, as the series
+> itself is a nice cleanup and is in the right direction. However this
+> leaves this problem still being around: the mctl_check_pattern()
+> function fails, even if this is apparently the right configuration. So
+> we should figure out what's going on, even though with 1/5 dropped and
+> 5/5 changed accordingly it works (TM) the same as before.
 
-Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+I just checked JEDEC LPDDR3 standard and 11 columns is max. for full bus
+(32 lines) configuration. It's used for 2 GB chips, which it is in this
+case, so everything is fine.
+
+Code just scans if there is less than 11 columns. Not matching anything
+means there are 11 columns.
+
+I would say everything is in order.
 
 Best regards,
 Jernej
 
-> ---
-> Hi,
->=20
-> I am planning on merging this ASAP, to get some exposure and use the time
-> until the release for wider testing. If worst comes to the worst, we can
-> revert it still before July.
 >=20
 > Cheers,
 > Andre
 >=20
->  arch/arm/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+> >=20
+> >=20
+> > Best regards,
+> > Jernej
+> >=20
+> > >=20
+> > > Cheers,
+> > > Andre
+> > >  =20
+> > > > Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> > > > ---
+> > > >  .../include/asm/arch-sunxi/dram_dw_helpers.h  |  22 +++
+> > > >  arch/arm/mach-sunxi/Makefile                  |   4 +-
+> > > >  arch/arm/mach-sunxi/dram_dw_helpers.c         | 160 ++++++++++++++=
+++++
+> > > >  arch/arm/mach-sunxi/dram_sun50i_h6.c          |  91 +---------
+> > > >  arch/arm/mach-sunxi/dram_sun50i_h616.c        | 155 +-------------=
+=2D--
+> > > >  5 files changed, 190 insertions(+), 242 deletions(-)
+> > > >  create mode 100644 arch/arm/include/asm/arch-sunxi/dram_dw_helpers=
+=2Eh
+> > > >  create mode 100644 arch/arm/mach-sunxi/dram_dw_helpers.c
+> > > >=20
+> > > > diff --git a/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h b/ar=
+ch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
+> > > > new file mode 100644
+> > > > index 000000000000..bc9e0d868c55
+> > > > --- /dev/null
+> > > > +++ b/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
+> > > > @@ -0,0 +1,22 @@
+> > > > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > > > +/*
+> > > > + * Helpers that are commonly used with DW memory controller.
+> > > > + *
+> > > > + * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
+> > > > + *
+> > > > + */
+> > > > +
+> > > > +#ifndef _DRAM_DW_HELPERS_H
+> > > > +#define _DRAM_DW_HELPERS_H
+> > > > +
+> > > > +#include <asm/arch/dram.h>
+> > > > +
+> > > > +bool mctl_core_init(const struct dram_para *para,
+> > > > +		    const struct dram_config *config);
+> > > > +void mctl_auto_detect_rank_width(const struct dram_para *para,
+> > > > +				 struct dram_config *config);
+> > > > +void mctl_auto_detect_dram_size(const struct dram_para *para,
+> > > > +				struct dram_config *config);
+> > > > +unsigned long mctl_calc_size(const struct dram_config *config);
+> > > > +
+> > > > +#endif
+> > > > diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Mak=
+efile
+> > > > index eb6a49119a13..a33cd5b0f07a 100644
+> > > > --- a/arch/arm/mach-sunxi/Makefile
+> > > > +++ b/arch/arm/mach-sunxi/Makefile
+> > > > @@ -41,8 +41,8 @@ obj-$(CONFIG_DRAM_SUN9I)	+=3D dram_sun9i.o
+> > > >  obj-$(CONFIG_SPL_SPI_SUNXI)	+=3D spl_spi_sunxi.o
+> > > >  obj-$(CONFIG_SUNXI_DRAM_DW)	+=3D dram_sunxi_dw.o
+> > > >  obj-$(CONFIG_SUNXI_DRAM_DW)	+=3D dram_timings/
+> > > > -obj-$(CONFIG_DRAM_SUN50I_H6)	+=3D dram_sun50i_h6.o
+> > > > +obj-$(CONFIG_DRAM_SUN50I_H6)	+=3D dram_sun50i_h6.o dram_dw_helpers=
+=2Eo
+> > > >  obj-$(CONFIG_DRAM_SUN50I_H6)	+=3D dram_timings/
+> > > > -obj-$(CONFIG_DRAM_SUN50I_H616)	+=3D dram_sun50i_h616.o
+> > > > +obj-$(CONFIG_DRAM_SUN50I_H616)	+=3D dram_sun50i_h616.o dram_dw_hel=
+pers.o
+> > > >  obj-$(CONFIG_DRAM_SUN50I_H616)	+=3D dram_timings/
+> > > >  endif
+> > > > diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-=
+sunxi/dram_dw_helpers.c
+> > > > new file mode 100644
+> > > > index 000000000000..885d1f2c0b12
+> > > > --- /dev/null
+> > > > +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> > > > @@ -0,0 +1,160 @@
+> > > > +// SPDX-License-Identifier: GPL-2.0+
+> > > > +/*
+> > > > + * Helpers that are commonly used with DW memory controller.
+> > > > + *
+> > > > + * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
+> > > > + *
+> > > > + */
+> > > > +
+> > > > +#include <init.h>
+> > > > +#include <asm/arch/dram_dw_helpers.h>
+> > > > +
+> > > > +void mctl_auto_detect_rank_width(const struct dram_para *para,
+> > > > +				 struct dram_config *config)
+> > > > +{
+> > > > +	/* this is minimum size that it's supported */
+> > > > +	config->cols =3D 8;
+> > > > +	config->rows =3D 13;
+> > > > +
+> > > > +	/*
+> > > > +	 * Strategy here is to test most demanding combination first and =
+least
+> > > > +	 * demanding last, otherwise HW might not be fully utilized. For
+> > > > +	 * example, half bus width and rank =3D 1 combination would also =
+work
+> > > > +	 * on HW with full bus width and rank =3D 2, but only 1/4 RAM wou=
+ld be
+> > > > +	 * visible.
+> > > > +	 */
+> > > > +
+> > > > +	debug("testing 32-bit width, rank =3D 2\n");
+> > > > +	config->bus_full_width =3D 1;
+> > > > +	config->ranks =3D 2;
+> > > > +	if (mctl_core_init(para, config))
+> > > > +		return;
+> > > > +
+> > > > +	debug("testing 32-bit width, rank =3D 1\n");
+> > > > +	config->bus_full_width =3D 1;
+> > > > +	config->ranks =3D 1;
+> > > > +	if (mctl_core_init(para, config))
+> > > > +		return;
+> > > > +
+> > > > +	debug("testing 16-bit width, rank =3D 2\n");
+> > > > +	config->bus_full_width =3D 0;
+> > > > +	config->ranks =3D 2;
+> > > > +	if (mctl_core_init(para, config))
+> > > > +		return;
+> > > > +
+> > > > +	debug("testing 16-bit width, rank =3D 1\n");
+> > > > +	config->bus_full_width =3D 0;
+> > > > +	config->ranks =3D 1;
+> > > > +	if (mctl_core_init(para, config))
+> > > > +		return;
+> > > > +
+> > > > +	panic("This DRAM setup is currently not supported.\n");
+> > > > +}
+> > > > +
+> > > > +static void mctl_write_pattern(void)
+> > > > +{
+> > > > +	unsigned int i;
+> > > > +	u32 *ptr, val;
+> > > > +
+> > > > +	ptr =3D (u32 *)CFG_SYS_SDRAM_BASE;
+> > > > +	for (i =3D 0; i < 16; ptr++, i++) {
+> > > > +		if (i & 1)
+> > > > +			val =3D ~(ulong)ptr;
+> > > > +		else
+> > > > +			val =3D (ulong)ptr;
+> > > > +		writel(val, ptr);
+> > > > +	}
+> > > > +}
+> > > > +
+> > > > +static bool mctl_check_pattern(ulong offset)
+> > > > +{
+> > > > +	unsigned int i;
+> > > > +	u32 *ptr, val;
+> > > > +
+> > > > +	ptr =3D (u32 *)CFG_SYS_SDRAM_BASE;
+> > > > +	for (i =3D 0; i < 16; ptr++, i++) {
+> > > > +		if (i & 1)
+> > > > +			val =3D ~(ulong)ptr;
+> > > > +		else
+> > > > +			val =3D (ulong)ptr;
+> > > > +		if (val !=3D *(ptr + offset / 4))
+> > > > +			return false;
+> > > > +	}
+> > > > +
+> > > > +	return true;
+> > > > +}
+> > > > +
+> > > > +void mctl_auto_detect_dram_size(const struct dram_para *para,
+> > > > +				struct dram_config *config)
+> > > > +{
+> > > > +	unsigned int shift, cols, rows, found;
+> > > > +	u32 buffer[16];
+> > > > +
+> > > > +	/* max. config for columns, but not rows */
+> > > > +	config->cols =3D 11;
+> > > > +	config->rows =3D 13;
+> > > > +	mctl_core_init(para, config);
+> > > > +
+> > > > +	/*
+> > > > +	 * Store content so it can be restored later. This is important
+> > > > +	 * if controller was already initialized and holds any data
+> > > > +	 * which is important for restoring system.
+> > > > +	 */
+> > > > +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> > > > +
+> > > > +	mctl_write_pattern();
+> > > > +
+> > > > +	shift =3D config->bus_full_width + 1;
+> > > > +
+> > > > +	/* detect column address bits */
+> > > > +	found =3D 0;
+> > > > +	for (cols =3D 8; cols < 11; cols++) {
+> > > > +		if (mctl_check_pattern(1ULL << (cols + shift))) {
+> > > > +			found =3D 1;
+> > > > +			break;
+> > > > +		}
+> > > > +	}
+> > > > +	if (!found)
+> > > > +		panic("DRAM init failed: Can't detect number of columns!");
+> > > > +	debug("detected %u columns\n", cols);
+> > > > +
+> > > > +	/* restore data */
+> > > > +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> > > > +
+> > > > +	/* reconfigure to make sure that all active rows are accessible */
+> > > > +	config->cols =3D 8;
+> > > > +	config->rows =3D 17;
+> > > > +	mctl_core_init(para, config);
+> > > > +
+> > > > +	/* store data again as it might be moved */
+> > > > +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> > > > +
+> > > > +	mctl_write_pattern();
+> > > > +
+> > > > +	/* detect row address bits */
+> > > > +	shift =3D config->bus_full_width + 4 + config->cols;
+> > > > +	found =3D 0;
+> > > > +	for (rows =3D 13; rows < 17; rows++) {
+> > > > +		if (mctl_check_pattern(1ULL << (rows + shift))) {
+> > > > +			found =3D 1;
+> > > > +			break;
+> > > > +		}
+> > > > +	}
+> > > > +	if (!found)
+> > > > +		panic("DRAM init failed: Can't detect number of rows!");
+> > > > +	debug("detected %u rows\n", rows);
+> > > > +
+> > > > +	/* restore data again */
+> > > > +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> > > > +
+> > > > +	config->cols =3D cols;
+> > > > +	config->rows =3D rows;
+> > > > +}
+> > > > +
+> > > > +unsigned long mctl_calc_size(const struct dram_config *config)
+> > > > +{
+> > > > +	u8 width =3D config->bus_full_width ? 4 : 2;
+> > > > +
+> > > > +	/* 8 banks */
+> > > > +	return (1ULL << (config->cols + config->rows + 3)) * width * conf=
+ig->ranks;
+> > > > +}
+> > > > diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c b/arch/arm/mach-s=
+unxi/dram_sun50i_h6.c
+> > > > index 6a9e53f965eb..fbb865131e08 100644
+> > > > --- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> > > > +++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> > > > @@ -10,6 +10,7 @@
+> > > >  #include <asm/io.h>
+> > > >  #include <asm/arch/clock.h>
+> > > >  #include <asm/arch/dram.h>
+> > > > +#include <asm/arch/dram_dw_helpers.h>
+> > > >  #include <asm/arch/cpu.h>
+> > > >  #include <asm/arch/prcm.h>
+> > > >  #include <linux/bitops.h>
+> > > > @@ -40,8 +41,8 @@ static void mctl_com_init(const struct dram_para =
+*para,
+> > > >  static bool mctl_channel_init(const struct dram_para *para,
+> > > >  			      const struct dram_config *config);
+> > > > =20
+> > > > -static bool mctl_core_init(const struct dram_para *para,
+> > > > -			   const struct dram_config *config)
+> > > > +bool mctl_core_init(const struct dram_para *para,
+> > > > +		    const struct dram_config *config)
+> > > >  {
+> > > >  	mctl_sys_init(para->clk);
+> > > >  	mctl_com_init(para, config);
+> > > > @@ -560,92 +561,6 @@ static bool mctl_channel_init(const struct dra=
+m_para *para,
+> > > >  	return true;
+> > > >  }
+> > > > =20
+> > > > -static void mctl_auto_detect_rank_width(const struct dram_para *pa=
+ra,
+> > > > -					struct dram_config *config)
+> > > > -{
+> > > > -	/* this is minimum size that it's supported */
+> > > > -	config->cols =3D 8;
+> > > > -	config->rows =3D 13;
+> > > > -
+> > > > -	/*
+> > > > -	 * Previous versions of this driver tried to auto detect the rank
+> > > > -	 * and width by looking at controller registers. However this pro=
+ved
+> > > > -	 * to be not reliable, so this approach here is the more robust
+> > > > -	 * solution. Check the git history for details.
+> > > > -	 *
+> > > > -	 * Strategy here is to test most demanding combination first and =
+least
+> > > > -	 * demanding last, otherwise HW might not be fully utilized. For
+> > > > -	 * example, half bus width and rank =3D 1 combination would also =
+work
+> > > > -	 * on HW with full bus width and rank =3D 2, but only 1/4 RAM wou=
+ld be
+> > > > -	 * visible.
+> > > > -	 */
+> > > > -
+> > > > -	debug("testing 32-bit width, rank =3D 2\n");
+> > > > -	config->bus_full_width =3D 1;
+> > > > -	config->ranks =3D 2;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	debug("testing 32-bit width, rank =3D 1\n");
+> > > > -	config->bus_full_width =3D 1;
+> > > > -	config->ranks =3D 1;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	debug("testing 16-bit width, rank =3D 2\n");
+> > > > -	config->bus_full_width =3D 0;
+> > > > -	config->ranks =3D 2;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	debug("testing 16-bit width, rank =3D 1\n");
+> > > > -	config->bus_full_width =3D 0;
+> > > > -	config->ranks =3D 1;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	panic("This DRAM setup is currently not supported.\n");
+> > > > -}
+> > > > -
+> > > > -static void mctl_auto_detect_dram_size(const struct dram_para *par=
+a,
+> > > > -				       struct dram_config *config)
+> > > > -{
+> > > > -	/* TODO: non-(LP)DDR3 */
+> > > > -
+> > > > -	/* detect row address bits */
+> > > > -	config->cols =3D 8;
+> > > > -	config->rows =3D 18;
+> > > > -	mctl_core_init(para, config);
+> > > > -
+> > > > -	for (config->rows =3D 13; config->rows < 18; config->rows++) {
+> > > > -		/* 8 banks, 8 bit per byte and 16/32 bit width */
+> > > > -		if (mctl_mem_matches((1 << (config->rows + config->cols +
+> > > > -					    4 + config->bus_full_width))))
+> > > > -			break;
+> > > > -	}
+> > > > -
+> > > > -	/* detect column address bits */
+> > > > -	config->cols =3D 11;
+> > > > -	mctl_core_init(para, config);
+> > > > -
+> > > > -	for (config->cols =3D 8; config->cols < 11; config->cols++) {
+> > > > -		/* 8 bits per byte and 16/32 bit width */
+> > > > -		if (mctl_mem_matches(1 << (config->cols + 1 +
+> > > > -					   config->bus_full_width)))
+> > > > -			break;
+> > > > -	}
+> > > > -}
+> > > > -
+> > > > -unsigned long mctl_calc_size(const struct dram_config *config)
+> > > > -{
+> > > > -	u8 width =3D config->bus_full_width ? 4 : 2;
+> > > > -
+> > > > -	/* TODO: non-(LP)DDR3 */
+> > > > -
+> > > > -	/* 8 banks */
+> > > > -	return (1ULL << (config->cols + config->rows + 3)) * width * conf=
+ig->ranks;
+> > > > -}
+> > > > -
+> > > >  #define SUN50I_H6_LPDDR3_DX_WRITE_DELAYS			\
+> > > >  	{{  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+> > > >  	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+> > > > diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach=
+=2Dsunxi/dram_sun50i_h616.c
+> > > > index d1768a7e7d3a..80d9de557876 100644
+> > > > --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > > > +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > > > @@ -17,6 +17,7 @@
+> > > >  #include <asm/io.h>
+> > > >  #include <asm/arch/clock.h>
+> > > >  #include <asm/arch/dram.h>
+> > > > +#include <asm/arch/dram_dw_helpers.h>
+> > > >  #include <asm/arch/cpu.h>
+> > > >  #include <asm/arch/prcm.h>
+> > > >  #include <linux/bitops.h>
+> > > > @@ -1310,164 +1311,14 @@ static bool mctl_ctrl_init(const struct dr=
+am_para *para,
+> > > >  	return true;
+> > > >  }
+> > > > =20
+> > > > -static bool mctl_core_init(const struct dram_para *para,
+> > > > -			   const struct dram_config *config)
+> > > > +bool mctl_core_init(const struct dram_para *para,
+> > > > +		    const struct dram_config *config)
+> > > >  {
+> > > >  	mctl_sys_init(para->clk);
+> > > > =20
+> > > >  	return mctl_ctrl_init(para, config);
+> > > >  }
+> > > > =20
+> > > > -static void mctl_auto_detect_rank_width(const struct dram_para *pa=
+ra,
+> > > > -					struct dram_config *config)
+> > > > -{
+> > > > -	/* this is minimum size that it's supported */
+> > > > -	config->cols =3D 8;
+> > > > -	config->rows =3D 13;
+> > > > -
+> > > > -	/*
+> > > > -	 * Strategy here is to test most demanding combination first and =
+least
+> > > > -	 * demanding last, otherwise HW might not be fully utilized. For
+> > > > -	 * example, half bus width and rank =3D 1 combination would also =
+work
+> > > > -	 * on HW with full bus width and rank =3D 2, but only 1/4 RAM wou=
+ld be
+> > > > -	 * visible.
+> > > > -	 */
+> > > > -
+> > > > -	debug("testing 32-bit width, rank =3D 2\n");
+> > > > -	config->bus_full_width =3D 1;
+> > > > -	config->ranks =3D 2;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	debug("testing 32-bit width, rank =3D 1\n");
+> > > > -	config->bus_full_width =3D 1;
+> > > > -	config->ranks =3D 1;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	debug("testing 16-bit width, rank =3D 2\n");
+> > > > -	config->bus_full_width =3D 0;
+> > > > -	config->ranks =3D 2;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	debug("testing 16-bit width, rank =3D 1\n");
+> > > > -	config->bus_full_width =3D 0;
+> > > > -	config->ranks =3D 1;
+> > > > -	if (mctl_core_init(para, config))
+> > > > -		return;
+> > > > -
+> > > > -	panic("This DRAM setup is currently not supported.\n");
+> > > > -}
+> > > > -
+> > > > -static void mctl_write_pattern(void)
+> > > > -{
+> > > > -	unsigned int i;
+> > > > -	u32 *ptr, val;
+> > > > -
+> > > > -	ptr =3D (u32 *)CFG_SYS_SDRAM_BASE;
+> > > > -	for (i =3D 0; i < 16; ptr++, i++) {
+> > > > -		if (i & 1)
+> > > > -			val =3D ~(ulong)ptr;
+> > > > -		else
+> > > > -			val =3D (ulong)ptr;
+> > > > -		writel(val, ptr);
+> > > > -	}
+> > > > -}
+> > > > -
+> > > > -static bool mctl_check_pattern(ulong offset)
+> > > > -{
+> > > > -	unsigned int i;
+> > > > -	u32 *ptr, val;
+> > > > -
+> > > > -	ptr =3D (u32 *)CFG_SYS_SDRAM_BASE;
+> > > > -	for (i =3D 0; i < 16; ptr++, i++) {
+> > > > -		if (i & 1)
+> > > > -			val =3D ~(ulong)ptr;
+> > > > -		else
+> > > > -			val =3D (ulong)ptr;
+> > > > -		if (val !=3D *(ptr + offset / 4))
+> > > > -			return false;
+> > > > -	}
+> > > > -
+> > > > -	return true;
+> > > > -}
+> > > > -
+> > > > -static void mctl_auto_detect_dram_size(const struct dram_para *par=
+a,
+> > > > -				       struct dram_config *config)
+> > > > -{
+> > > > -	unsigned int shift, cols, rows, found;
+> > > > -	u32 buffer[16];
+> > > > -
+> > > > -	/* max. config for columns, but not rows */
+> > > > -	config->cols =3D 11;
+> > > > -	config->rows =3D 13;
+> > > > -	mctl_core_init(para, config);
+> > > > -
+> > > > -	/*
+> > > > -	 * Store content so it can be restored later. This is important
+> > > > -	 * if controller was already initialized and holds any data
+> > > > -	 * which is important for restoring system.
+> > > > -	 */
+> > > > -	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> > > > -
+> > > > -	mctl_write_pattern();
+> > > > -
+> > > > -	shift =3D config->bus_full_width + 1;
+> > > > -
+> > > > -	/* detect column address bits */
+> > > > -	found =3D 0;
+> > > > -	for (cols =3D 8; cols < 11; cols++) {
+> > > > -		if (mctl_check_pattern(1ULL << (cols + shift))) {
+> > > > -			found =3D 1;
+> > > > -			break;
+> > > > -		}
+> > > > -	}
+> > > > -	if (!found)
+> > > > -		panic("DRAM init failed: Can't detect number of columns!");
+> > > > -	debug("detected %u columns\n", cols);
+> > > > -
+> > > > -	/* restore data */
+> > > > -	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> > > > -
+> > > > -	/* reconfigure to make sure that all active rows are accessible */
+> > > > -	config->cols =3D 8;
+> > > > -	config->rows =3D 17;
+> > > > -	mctl_core_init(para, config);
+> > > > -
+> > > > -	/* store data again as it might be moved */
+> > > > -	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> > > > -
+> > > > -	mctl_write_pattern();
+> > > > -
+> > > > -	/* detect row address bits */
+> > > > -	shift =3D config->bus_full_width + 4 + config->cols;
+> > > > -	found =3D 0;
+> > > > -	for (rows =3D 13; rows < 17; rows++) {
+> > > > -		if (mctl_check_pattern(1ULL << (rows + shift))) {
+> > > > -			found =3D 1;
+> > > > -			break;
+> > > > -		}
+> > > > -	}
+> > > > -	if (!found)
+> > > > -		panic("DRAM init failed: Can't detect number of rows!");
+> > > > -	debug("detected %u rows\n", rows);
+> > > > -
+> > > > -	/* restore data again */
+> > > > -	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> > > > -
+> > > > -	config->cols =3D cols;
+> > > > -	config->rows =3D rows;
+> > > > -}
+> > > > -
+> > > > -static unsigned long mctl_calc_size(const struct dram_config *conf=
+ig)
+> > > > -{
+> > > > -	u8 width =3D config->bus_full_width ? 4 : 2;
+> > > > -
+> > > > -	/* 8 banks */
+> > > > -	return (1ULL << (config->cols + config->rows + 3)) * width * conf=
+ig->ranks;
+> > > > -}
+> > > > -
+> > > >  static const struct dram_para para =3D {
+> > > >  	.clk =3D CONFIG_DRAM_CLK,
+> > > >  #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333 =20
+> > >=20
+> > >  =20
+> >=20
+> >=20
+> >=20
+> >=20
+> >=20
 >=20
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 99750072e55..f22d347d5ad 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1192,6 +1192,7 @@ config ARCH_SUNXI
->  	select DM_KEYBOARD
->  	select DM_SERIAL
->  	select DM_PMIC
-> +	select MMU_PGPROT if ARM64
->  	select OF_BOARD_SETUP
->  	select OF_CONTROL
->  	select PINCTRL
 >=20
 
 
