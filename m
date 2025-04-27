@@ -4,61 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18923C369D5
-	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 07:03:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CB06C369D5
+	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 07:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A0D882105;
-	Sun, 27 Apr 2025 09:03:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 726DD8210F;
+	Sun, 27 Apr 2025 09:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XMmFA6v7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fW0/q+MH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8D098209F; Sun, 27 Apr 2025 09:03:38 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 3725A8210F; Sun, 27 Apr 2025 09:03:41 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 769EE82075
- for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 09:03:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2678B82075
+ for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 09:03:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53R73Rhs3123567
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53R73Zc82524956
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sun, 27 Apr 2025 02:03:27 -0500
+ Sun, 27 Apr 2025 02:03:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745737407;
- bh=L4cd5M93EP6DtYqmGKC0l5LYvImNPkS27Vf+fonfZT8=;
- h=From:To:CC:Subject:Date;
- b=XMmFA6v7gdcAw468UaX9mpRvMPaZDV12Dsj2Eb/aaxexVinfy2Ng9awVkS8B7QHAT
- q7Kvt3VCjhGW1cJHhCiMKvpa/gl9xEkwLfLxVt0OBFstU3XxL38cvIpEopXOoHofa3
- KrKmpALUugoP1GYxiqE4k5rlmATS9Gcp56oZ6FUU=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53R73RVO100798
+ s=ti-com-17Q1; t=1745737415;
+ bh=RGzK3R89YEBdI4A6JbcyBIWGE5i4mEFtvHrtIvqG52A=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=fW0/q+MHWI4rr1VDhBTg6W0CZUt7wkZFYb1t+7pXY3wFq4TKOjDlGLNFEmeVg7h/P
+ R+WJPhUVG49Z4L2385ClZGkxw+v2e9bT2+sHYWn5mo/OKXy+6qq3Has68DihNMRqx9
+ QzJBsKD4C2VDI3Syvptlknt2psATQ03G/W8STCTg=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53R73ZIK038411
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 27 Apr 2025 02:03:27 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Sun, 27 Apr 2025 02:03:35 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 27
- Apr 2025 02:03:27 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 02:03:35 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 27 Apr 2025 02:03:27 -0500
+ Frontend Transport; Sun, 27 Apr 2025 02:03:35 -0500
 Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53R73Ou9011250;
- Sun, 27 Apr 2025 02:03:24 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53R73OuC011250;
+ Sun, 27 Apr 2025 02:03:33 -0500
 From: Udit Kumar <u-kumar1@ti.com>
 To: <trini@konsulko.com>, <eballetbo@redhat.com>, <u-boot@lists.denx.de>
 CC: <nm@ti.com>, <b-padhi@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
  <u-kumar1@ti.com>
-Subject: [v3 PATCH 0/4] k3-j784s4*: Enable ESMs and related PMIC
-Date: Sun, 27 Apr 2025 12:33:19 +0530
-Message-ID: <20250427070323.590449-1-u-kumar1@ti.com>
+Subject: [v3 PATCH 3/4] board: ti: j784s4: Initialize the ESM & PMIC ESM
+Date: Sun, 27 Apr 2025 12:33:22 +0530
+Message-ID: <20250427070323.590449-4-u-kumar1@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250427070323.590449-1-u-kumar1@ti.com>
+References: <20250427070323.590449-1-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -79,48 +81,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables the ESMs and the associated PMIC. Programming these bits is
-a requirement to make the watchdog actually reset the board.
+From: Keerthy <j-keerthy@ti.com>
 
-Series supports WDT reset on all TI platforms based upon J784S4 SOC
-including cut down (J742S2).
+Initialize the ESM & PMIC ESM. This allows things like
+the watchdog to reset the board when tripped.
 
+Signed-off-by: Keerthy <j-keerthy@ti.com>
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Signed-off-by: Andrew Halaney <ahalaney@redhat.com>
+---
+ board/ti/j784s4/evm.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-Bootlogs for reset
-
-AM69: https://gist.github.com/uditkumarti/dca2171aafd6d50c82159346f9a0102f#file-am69-L2466 
-
-J784S4: https://gist.github.com/uditkumarti/dca2171aafd6d50c82159346f9a0102f#file-j784s4-L2704
-
-J742S2: https://gist.github.com/uditkumarti/dca2171aafd6d50c82159346f9a0102f#file-j742s2-L2614
+diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+index c6e46b7ee0e..c8d01bf0ca8 100644
+--- a/board/ti/j784s4/evm.c
++++ b/board/ti/j784s4/evm.c
+@@ -7,6 +7,7 @@
+  *
+  */
  
-Changes in v3:
-- Rebased to 2025.04
-- Link to v2: https://lore.kernel.org/all/20240911-j784s4-esm-enable-v2-0-957f56b588d9@redhat.com/
-
-Changes in v2:
-- Loop over ESMs, only configure if prior was successful
-  as without all of them they're not useful (Udit)
-- Add am69-sk PMIC ESM node (Udit)
-- Link to v1: https://lore.kernel.org/r/20240906-j784s4-esm-enable-v1-0-b83b17d5a744@redhat.com
-
-
-Andrew Halaney (2):
-  arm: dts: k3-am69-r5-evm: Add the PMIC ESM node
-  configs: j784s4_evm_r5: Enable ESM related configs
-
-Keerthy (1):
-  board: ti: j784s4: Initialize the ESM & PMIC ESM
-
-Neha Malcom Francis (1):
-  arm: dts: k3-j784s4-r5-evm: Add the PMIC ESM node
-
- arch/arm/dts/k3-am69-r5-sk.dts    |  7 +++++++
- arch/arm/dts/k3-j784s4-r5-evm.dts |  7 +++++++
- board/ti/j784s4/evm.c             | 24 ++++++++++++++++++++++++
- configs/j784s4_evm_r5_defconfig   |  5 +++++
- 4 files changed, 43 insertions(+)
-
++#include <dm.h>
+ #include <efi_loader.h>
+ #include <init.h>
+ #include <spl.h>
+@@ -67,4 +68,27 @@ int board_late_init(void)
+ 
+ void spl_board_init(void)
+ {
++	struct udevice *dev;
++	int ret;
++
++	if (IS_ENABLED(CONFIG_ESM_K3)) {
++		const char * const esms[] = {"esm@700000", "esm@40800000", "esm@42080000"};
++
++		for (int i = 0; i < ARRAY_SIZE(esms); ++i) {
++			ret = uclass_get_device_by_name(UCLASS_MISC, esms[i],
++							&dev);
++			if (ret) {
++				printf("MISC init for %s failed: %d\n", esms[i], ret);
++				break;
++			}
++		}
++	}
++
++	if (IS_ENABLED(CONFIG_ESM_PMIC) && ret == 0) {
++		ret = uclass_get_device_by_driver(UCLASS_MISC,
++						  DM_DRIVER_GET(pmic_esm),
++						  &dev);
++		if (ret)
++			printf("ESM PMIC init failed: %d\n", ret);
++	}
+ }
 -- 
 2.34.1
 
