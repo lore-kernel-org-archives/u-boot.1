@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15869C369D1
-	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 23:08:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65568C369D1
+	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 23:45:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68F1F80FDA;
-	Mon, 28 Apr 2025 01:08:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F16B80FDA;
+	Mon, 28 Apr 2025 01:45:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RNhq4DEL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YrsRHyJH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D67981E0F; Mon, 28 Apr 2025 01:08:11 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id AA94C81E0F; Mon, 28 Apr 2025 01:45:04 +0200 (CEST)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C2C180F9C
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 01:08:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56D0F80F9C
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 01:45:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=benwolsieffer@gmail.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-4769aef457bso62259121cf.2
- for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 16:08:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-736c1cf75e4so3485732b3a.2
+ for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 16:45:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745795288; x=1746400088; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1745797501; x=1746402301; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AZ/Jc7jJZvBtQZ98yg68lYULxcHKBizzPUn7CCl9+h0=;
- b=RNhq4DEL43Si+xtakfdB/RI5/24p2hy5UGSNaHEwxAvmg8EJvkSzXKFqqBtqpLOxA3
- iy66vVrKgrV2/M6dB1YRVWT4CA5soYaOe3xMTOtO7XagHPO4ywwZqFLJWGhw0/1IUQ9v
- cjUDG063norWSpgh5dgFxsh4RnYeb+Tw3RR4HdH8nTaQ2vHQ2R/iU6CcDfQdkGithRSM
- z+HdKWYVJjD62mSo9ZyuHykZhfLVvJdPHXmdTMnZ4+iT9/HQ/m5i5kw8bWK3ElWxa9zP
- a9bAmbG8gsurtmi+Px31v8fCbi5wzN2jEPXrQpd+m2180ILGd4qLu6uNBbpT19gy8RWG
- fZBQ==
+ bh=n006d3fOhf1FAurPSeKFVJBHXsTkx2gTwvmmKr2JWcs=;
+ b=YrsRHyJHFpVR4vnU0wnX3+scpNuNcrt9RYUJck/VwgH2JqaLQVpiRAEZzVzbzZDR7m
+ AnznszoXRdYR3PKwF3KSBVOlrQW5awwGcezVA3IhxU0s37FCgG+3jOSrIGwxA2TKih41
+ H3qspRGHnZeOuGBPO7zj2xFHmAD6fdoEnmHjDkBYupdGg3Ih0jBXClETcmsJkz3M3vDt
+ amR2veohvMVIMG4T190ZnH7FNjU3OKC3Mw5oH9eGnnl6frkLe2dDM4cDSeJO4K1d3ytu
+ z2W95Xwmr5C/MPmh51QJIHFk6gpB9p23XF4/+GMnXa0ORMeYLvGqh6v5l+P7BNzK7lSD
+ waLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745795288; x=1746400088;
+ d=1e100.net; s=20230601; t=1745797501; x=1746402301;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AZ/Jc7jJZvBtQZ98yg68lYULxcHKBizzPUn7CCl9+h0=;
- b=R8JBF9/FZIDaaz3bTePR2Fh8+CNC4cttmMqHffN/6KfNXkZ1orBJUvrZ8QKhZGR5pr
- QCSHyRj4bNbLb3v/BTl//ToIehEeS4C2M3IsZkcYskOiE6Wel8lGUwUOIO44AOJSw4GL
- bRhcXeUEDH8XTEFqg6B2fkWiDbfKaSLdoiyXVONcZ7J48QGBY3By2sTkbZC+qCYbzuK3
- EYR30ZMWCpzeL8uMtkAHKlIw+F2bXH8z/LWjlrW+8Zc9F6EwcDg0CioAmpZRjg2BYPOX
- W64VBhdSKBZjeOomvvBby7w/w6vM7713+Eu8Yx35Vq5LE8WFQkpFconDqkOKO114sPzt
- fGnA==
-X-Gm-Message-State: AOJu0YzWdXCPb2gJ+PdsigmR9CBo+u13cYvQ9kZBYKW4UbxjDfTcImii
- 4xy+cDIyP9M4+KXzrKXBeY/UwlXFohCatg7sKxw+Y07AxiDqRfx02H2UMg==
-X-Gm-Gg: ASbGncs/Lm3RI2fkSuqCtpk2OVCGNqSEFmOW7HYPwSfs7SSCJVDpl6YRo1ZC3YsZ/rw
- 9csz7zubOE0mJhI/ugCIBBnhzMpmPkfYKnFEaO5hXOZGBo/gAhs4Q8yW/lyKhCTAcsP31mebG2l
- 8Yjm09zLBEiJoPkZWw3QrxUlWxTDoVJ6eAi41MzykzmSvU5dlhiBO/yjBWHIoOIlYmYXzBXMRox
- rEoqHXVU7UaNF1xopZwZn7Bv9h9P+BAAfRtsgI40ErHuToxrEK8Zf8GZ6w8ereV3THF4wmG8jjN
- cOiuXWAysC8s7MUs6d5UKQ4FmEb50XQv+zjg8xjeN2sWiE0LAhpSaepSxb4bgA==
-X-Google-Smtp-Source: AGHT+IHVV55mSpJVmCRnksOrwKMGLYP38dxmc7/4QBGOLZVpqpcLfXagx50OfCFEYLUV8g/UE60YJg==
-X-Received: by 2002:a05:622a:11d6:b0:476:9f3e:1806 with SMTP id
- d75a77b69052e-4801e7ed9bamr179413921cf.46.1745795287725; 
- Sun, 27 Apr 2025 16:08:07 -0700 (PDT)
-Received: from localhost.localdomain ([2601:18c:8002:3d40:7920:e10c:26cf:ff86])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-47e9f7a8326sm57158731cf.37.2025.04.27.16.08.06
+ bh=n006d3fOhf1FAurPSeKFVJBHXsTkx2gTwvmmKr2JWcs=;
+ b=JPvCZKxK5Lw5MXXQoyQqb15i9KTG/kOruTOCkR+G8aIWGMF3RskBrMNUFQjyNjqiuO
+ D20OVPYRqAjaq1G5bnbxOG85UW4s/NaUJeVWxk/qkvD3LLJwkcDIG1Xeb6J1MX/93k4e
+ LOvfptsUrUeAC6AMT2IxnZd0lOQbsJLmagzwPu3WPgaac/uN/2Y16FJa5tHxMTFXdurl
+ oF9BW74slIMyuXvoTn8q0Ln70RAjut6w6MkbRb9VfVb5wBjOuKKOk0aICFiX7jlV75Lq
+ JTMtK50Xj3vLmPzflzFXOL4I12bFSPqc+KzPBN0trrpivRO70weyzUQ33vSxwsrZzcZP
+ GqnQ==
+X-Gm-Message-State: AOJu0YyAeNntB1MVwfceVftYeQwTmdNySfS+iVQRHEij6eWg5WNBDPsL
+ 3yWyHJdwBKq6Zlxokq1yr6uqUYPXtafeixMEj+cYBqoRK+fgpi5nDNJ4YgJiRUI=
+X-Gm-Gg: ASbGnctpzbZTCCrPvkREEQEY0sdvNBmbo1WJeNzffsyryOvNIpUbDaVHKglSSBOnhaF
+ tBEJ8I45U8fM5uS7LSOKfqjKtpTwAlK7PvRrnX/jmTCPvso02PBArfYp1UVPZvRQ+WN8fnZscS/
+ kRQWCkVmsdgzVku8Ss8a/CyU3G4LXrfRoxqub3VdMe2n5S5bV3xBjpdjwJS1PgG4dB8OAyppTX/
+ bUzVnq3GbHRvPxjEs4Fm8iRE+sJZDqBAI+cQYQt+WzLM/lYBqmMvM+7nRJ1eNtcwzUqswt7u2hx
+ he1bJ+Vhknlpp5k4nK+ZV+y1UnAbzKl9e5REUz341Fg82fiLBA==
+X-Google-Smtp-Source: AGHT+IGASfGby2PGHQdpNsKIeiZ2MZ9kY6VZdNYDM8WEr//Za98QfY96df4azAdr7zetiBHMoAeHZg==
+X-Received: by 2002:a05:6a00:39a1:b0:736:b9f5:47c6 with SMTP id
+ d2e1a72fcca58-73fd876d8d9mr13605202b3a.16.1745797499924; 
+ Sun, 27 Apr 2025 16:44:59 -0700 (PDT)
+Received: from adriano.. ([190.215.87.40]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73e25a6a874sm6945831b3a.97.2025.04.27.16.44.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Apr 2025 16:08:07 -0700 (PDT)
-From: Ben Wolsieffer <benwolsieffer@gmail.com>
+ Sun, 27 Apr 2025 16:44:59 -0700 (PDT)
+From: Adriano Cordova <adrianox@gmail.com>
+X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ben Wolsieffer <benwolsieffer@gmail.com>, ZHANG Yuntian <yt@radxa.com>
-Subject: [PATCH] Add HOST_ARCH detection for armv5tel and armv6l
-Date: Sun, 27 Apr 2025 19:07:25 -0400
-Message-ID: <20250427230725.46236-1-benwolsieffer@gmail.com>
-X-Mailer: git-send-email 2.49.0
+Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ trini@konsulko.com, o451686892@gmail.com,
+ Adriano Cordova <adriano.cordova@canonical.com>
+Subject: [PATCH] efi_loader: bootbin: do not load an initrd if none is provided
+Date: Sun, 27 Apr 2025 19:45:26 -0400
+Message-ID: <20250427234527.2076444-1-adriano.cordova@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,35 +95,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since 7506c15, HOST_ARCH is now used by the EFI loader even when
-CONFIG_SANDBOX is disabled. When cross-compiling, the Makefile defines
-HOST_ARCH based on the cross-compiler prefix, but this definition fails
-to cover some common compiler prefixes. When cross-compiling U-Boot in
-nixpkgs, we use CROSS_COMPILE=armv6l-unknown-linux-gnueabihf-, which
-results in HOST_ARCH being undefined and causes a build failure.
+Do not try to create an initrd device path nor try to register
+an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
 
-Fix this by adding armv6l to the match for ARM. Also add armv5tel,
-as this is another possible ARM compiler prefix.
+Handle initrd installation in efi_binary_run_dp with
+efi_install_initrd, imitating what is done for the fdt.
 
-Signed-off-by: ZHANG Yuntian <yt@radxa.com>
-Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
+Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
+Reported-by: Weizhao Ouyang <o451686892@gmail.com>
+Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ boot/bootm.c                 |  3 +++
+ include/efi_loader.h         |  2 ++
+ lib/efi_loader/efi_bootbin.c |  9 ++-------
+ lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
+ 4 files changed, 36 insertions(+), 7 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 73939748e54..a6535c71576 100644
---- a/Makefile
-+++ b/Makefile
-@@ -30,7 +30,7 @@ else ifneq (,$(findstring $(MK_ARCH), "i386" "i486" "i586" "i686"))
-   export HOST_ARCH=$(HOST_ARCH_X86)
- else ifneq (,$(findstring $(MK_ARCH), "aarch64" "armv8l"))
-   export HOST_ARCH=$(HOST_ARCH_AARCH64)
--else ifneq (,$(findstring $(MK_ARCH), "arm" "armv7" "armv7a" "armv7l"))
-+else ifneq (,$(findstring $(MK_ARCH), "arm" "armv5tel" "armv6l" "armv7" "armv7a" "armv7l"))
-   export HOST_ARCH=$(HOST_ARCH_ARM)
- else ifeq ("riscv32", $(MK_ARCH))
-   export HOST_ARCH=$(HOST_ARCH_RISCV32)
+diff --git a/boot/bootm.c b/boot/bootm.c
+index f5cbb10f0d1..9693e0d336d 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -1008,6 +1008,9 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 			ret = 0;
+ 	}
+ 
++	/* Clear the initrd from a previous boot */
++	images->initrd_start = 0;
++
+ 	/* Relocate the ramdisk */
+ #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 	if (!ret && (states & BOOTM_STATE_RAMDISK)) {
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 144b749278a..84e8cfe320e 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
+ void *efi_get_configuration_table(const efi_guid_t *guid);
+ /* Install device tree */
+ efi_status_t efi_install_fdt(void *fdt);
++/* Install initrd */
++efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
+ /* Execute loaded UEFI image */
+ efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
+ /* Run loaded UEFI image with given fdt */
+diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+index d0f7da309ce..94ba7c5589b 100644
+--- a/lib/efi_loader/efi_bootbin.c
++++ b/lib/efi_loader/efi_bootbin.c
+@@ -215,12 +215,11 @@ out:
+  * Return:	status code
+  */
+ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
+-				      void *initrd, size_t initd_sz,
++				      void *initrd, size_t initrd_sz,
+ 				      struct efi_device_path *dp_dev,
+ 				      struct efi_device_path *dp_img)
+ {
+ 	efi_status_t ret;
+-	struct efi_device_path *dp_initrd;
+ 
+ 	/* Initialize EFI drivers */
+ 	ret = efi_init_obj_list();
+@@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+ 
+-	dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, initd_sz);
+-	if (!dp_initrd)
+-		return EFI_OUT_OF_RESOURCES;
+-
+-	ret = efi_initrd_register(dp_initrd);
++	ret = efi_install_initrd(initrd, initrd_sz);
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+ 
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index 3936139ca41..6a863c3556c 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
+ 	return EFI_SUCCESS;
+ }
+ 
++/**
++ * efi_install_initrd() - install initrd
++ *
++ * Install the initrd located at @initrd using the EFI_LOAD_FILE2
++ * protocol.
++ *
++ * @initrd:	address of initrd or NULL if none is provided
++ * @initrd_sz:	size of initrd
++ * Return:	status code
++ */
++efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
++{
++	efi_status_t ret;
++	struct efi_device_path *dp_initrd;
++
++	if (!initrd)
++		return EFI_SUCCESS;
++
++	dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, initd_sz);
++	if (!dp_initrd)
++		return EFI_OUT_OF_RESOURCES;
++
++	ret = efi_initrd_register(dp_initrd);
++	if (ret != EFI_SUCCESS)
++		return ret;
++
++	return EFI_SUCCESS;
++}
++
+ /**
+  * do_bootefi_exec() - execute EFI binary
+  *
 -- 
-2.49.0
+2.48.1
 
