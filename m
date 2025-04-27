@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65568C369D1
-	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 23:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B99C369D1
+	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 23:49:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F16B80FDA;
-	Mon, 28 Apr 2025 01:45:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 918DF80F9C;
+	Mon, 28 Apr 2025 01:49:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YrsRHyJH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GyKcGT0P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA94C81E0F; Mon, 28 Apr 2025 01:45:04 +0200 (CEST)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id AEEDD80FDA; Mon, 28 Apr 2025 01:48:58 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56D0F80F9C
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 01:45:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A597680BAD
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 01:48:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-736c1cf75e4so3485732b3a.2
- for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 16:45:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-54e816aeca6so3990188e87.2
+ for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 16:48:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745797501; x=1746402301; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=n006d3fOhf1FAurPSeKFVJBHXsTkx2gTwvmmKr2JWcs=;
- b=YrsRHyJHFpVR4vnU0wnX3+scpNuNcrt9RYUJck/VwgH2JqaLQVpiRAEZzVzbzZDR7m
- AnznszoXRdYR3PKwF3KSBVOlrQW5awwGcezVA3IhxU0s37FCgG+3jOSrIGwxA2TKih41
- H3qspRGHnZeOuGBPO7zj2xFHmAD6fdoEnmHjDkBYupdGg3Ih0jBXClETcmsJkz3M3vDt
- amR2veohvMVIMG4T190ZnH7FNjU3OKC3Mw5oH9eGnnl6frkLe2dDM4cDSeJO4K1d3ytu
- z2W95Xwmr5C/MPmh51QJIHFk6gpB9p23XF4/+GMnXa0ORMeYLvGqh6v5l+P7BNzK7lSD
- waLA==
+ d=gmail.com; s=20230601; t=1745797736; x=1746402536; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Hs2rIsTJgBx/GRItHk4aWbdQOCQA9fRewwp+D7mat4I=;
+ b=GyKcGT0PdAWjUFHWMYtO2kYuZAU+vo0tvN5NKyxGbUXFUqcgNqFGXF8sLKNigmKUB7
+ 8w6aj4aMR15ynOATn5q5KDK/+/y02ubxsvFHC+xWeD4kMJaSlDca5fRgV2yGwpplsHAa
+ 6vyj/wVFmMDkKrbd0pqG6zMTz47yAxobaeV0FAPXv9DqyLsiMavDjqoNv+zmaY2h3LPQ
+ 0bEX2Xt0VDwhjWA6BfJM05AmcuVHwSRFvFHmaIao1HL1A7kMbtBokssGGqsJYBj6MTJJ
+ /lomkdCQDu+fZIulnN3KqbM1ONKDSjdJfXtBw/dxIrXbSbXyzccOB1dGtkguZpl6RS4t
+ QTGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745797501; x=1746402301;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=n006d3fOhf1FAurPSeKFVJBHXsTkx2gTwvmmKr2JWcs=;
- b=JPvCZKxK5Lw5MXXQoyQqb15i9KTG/kOruTOCkR+G8aIWGMF3RskBrMNUFQjyNjqiuO
- D20OVPYRqAjaq1G5bnbxOG85UW4s/NaUJeVWxk/qkvD3LLJwkcDIG1Xeb6J1MX/93k4e
- LOvfptsUrUeAC6AMT2IxnZd0lOQbsJLmagzwPu3WPgaac/uN/2Y16FJa5tHxMTFXdurl
- oF9BW74slIMyuXvoTn8q0Ln70RAjut6w6MkbRb9VfVb5wBjOuKKOk0aICFiX7jlV75Lq
- JTMtK50Xj3vLmPzflzFXOL4I12bFSPqc+KzPBN0trrpivRO70weyzUQ33vSxwsrZzcZP
- GqnQ==
-X-Gm-Message-State: AOJu0YyAeNntB1MVwfceVftYeQwTmdNySfS+iVQRHEij6eWg5WNBDPsL
- 3yWyHJdwBKq6Zlxokq1yr6uqUYPXtafeixMEj+cYBqoRK+fgpi5nDNJ4YgJiRUI=
-X-Gm-Gg: ASbGnctpzbZTCCrPvkREEQEY0sdvNBmbo1WJeNzffsyryOvNIpUbDaVHKglSSBOnhaF
- tBEJ8I45U8fM5uS7LSOKfqjKtpTwAlK7PvRrnX/jmTCPvso02PBArfYp1UVPZvRQ+WN8fnZscS/
- kRQWCkVmsdgzVku8Ss8a/CyU3G4LXrfRoxqub3VdMe2n5S5bV3xBjpdjwJS1PgG4dB8OAyppTX/
- bUzVnq3GbHRvPxjEs4Fm8iRE+sJZDqBAI+cQYQt+WzLM/lYBqmMvM+7nRJ1eNtcwzUqswt7u2hx
- he1bJ+Vhknlpp5k4nK+ZV+y1UnAbzKl9e5REUz341Fg82fiLBA==
-X-Google-Smtp-Source: AGHT+IGASfGby2PGHQdpNsKIeiZ2MZ9kY6VZdNYDM8WEr//Za98QfY96df4azAdr7zetiBHMoAeHZg==
-X-Received: by 2002:a05:6a00:39a1:b0:736:b9f5:47c6 with SMTP id
- d2e1a72fcca58-73fd876d8d9mr13605202b3a.16.1745797499924; 
- Sun, 27 Apr 2025 16:44:59 -0700 (PDT)
-Received: from adriano.. ([190.215.87.40]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73e25a6a874sm6945831b3a.97.2025.04.27.16.44.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Apr 2025 16:44:59 -0700 (PDT)
-From: Adriano Cordova <adrianox@gmail.com>
-X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
-To: u-boot@lists.denx.de
-Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
- trini@konsulko.com, o451686892@gmail.com,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH] efi_loader: bootbin: do not load an initrd if none is provided
-Date: Sun, 27 Apr 2025 19:45:26 -0400
-Message-ID: <20250427234527.2076444-1-adriano.cordova@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ d=1e100.net; s=20230601; t=1745797736; x=1746402536;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Hs2rIsTJgBx/GRItHk4aWbdQOCQA9fRewwp+D7mat4I=;
+ b=h/9uRRJAnk7xna0OSMMupKpbuhsgB8E9pallVFt96hDWXsXZ3FZAkC1ecSCR44oqrt
+ 1/1pzCYsWKG89TaxvYJXT4yl1QK123xwiJr8EV3GNSFllwPm5Eo3jy4YfNQ33mjMnmRv
+ nXbhp8CJklXhCZa3d70WjpV3QBVZiisieya+mIQZPUdnUScff0UVbAbQ+Bkp7YT2JMxo
+ CXvnP7DMrVloWjM7dKvvZ4VVySzo3PXz4cvlJjN2Ga+CKw6nKFfi8z2CS5vO9KoiNp5g
+ UXZyAXVRLs9/PAEh4mA6bFtaZEN/WS4NaF2kGap/oxueCl9Z6+nE4sBteY8Z5aiRmGMJ
+ 7mwQ==
+X-Gm-Message-State: AOJu0YzBuLHiz2b4XWq7eFhB85zT1PUQFbBXaOumU8DlnWnhN8ymFg/e
+ CzZZLN/J+3GUZTCfnF8RI8FTgKvl5Uye7OBplC91onFgC4WBCUbTT036kOC/cPJx4Px/dovg6cO
+ vVPJtlsTYMgQ5z11GJHsRT7IJ60w=
+X-Gm-Gg: ASbGnct4ey5LFMXipD9JvaZJLk9TEwEvYMQOM5buKjzy0Zp13dJ9RUJ3AOSKTiu3agI
+ Ov5UPLUuw+OrnZPP58sS7CYsQNmphKFemhwAHxpHesNNi48jKW7v8oJRwjHT9U2KeBMnJksvd+u
+ lUgvlXON7DOvd/gYA64BDZHKBhtNmjLwD1TWvLu9hWcJ6CpUAxf4m0eg==
+X-Google-Smtp-Source: AGHT+IGG6p0N2ePTMgam0Fe3xd80QI7u2sjLGVYvtq4JjdJZOeRX3a9zEl93OihtLs9UnGia6gxGgugsOVq5/KurgH4=
+X-Received: by 2002:a05:6512:3e0c:b0:549:8ebe:b3c8 with SMTP id
+ 2adb3069b0e04-54e8cbcd135mr3100557e87.11.1745797735590; Sun, 27 Apr 2025
+ 16:48:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250427154002.146276-1-marex@denx.de>
+In-Reply-To: <20250427154002.146276-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 27 Apr 2025 20:48:44 -0300
+X-Gm-Features: ATxdqUFZWTlIGSOO8C9VCkQumGa17Se3JJ6IyVZkud2W7grPo2ciYoxDiTXnguc
+Message-ID: <CAOMZO5DCEBjoVH2NCoPhuUC-M_Z_UagUX1MH0BdgC5vgkEAtug@mail.gmail.com>
+Subject: Re: [PATCH] clk: imx: Pass CCM udevice into clk_register_composite()
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Adam Ford <aford173@gmail.com>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sean Anderson <seanga2@gmail.com>, Shawn Guo <shawnguo@kernel.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,120 +97,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do not try to create an initrd device path nor try to register
-an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
+Hi Marek,
 
-Handle initrd installation in efi_binary_run_dp with
-efi_install_initrd, imitating what is done for the fdt.
+On Sun, Apr 27, 2025 at 12:40=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Pass the clock controller udevice into clk_register_composite(),
+> so it can be passed further to any registered composite clocks
+> and used for look up of parent clock referenced in DT "clocks"
+> and "clock-names" properties by phandle and name pair.
+>
+> Use the clock controller udevice in imx8m_clk_mux_set_parent()
+> to perform accurate look up of parent clock referenced in the
+> CCM driver by name. If the clock name that is being looked up
+> matches one of the names listed in the clock controller DT node
+> "clock-names" array property, then the offset of the name is
+> looked up in the "clocks" DT property and the phandle at that
+> offset is resolved to the parent clock udevice. The test to
+> determine whether a particular driver instance registered with
+> clock uclass matches the parent clock is done by comparing the
+> OF nodes of the clock registered with clock uclass and parent
+> clock resolved from the phandle.
+>
+> Example:
+>
+> drivers/clk/imx/clk-imx8mm.c:
+> static const char * const imx8mm_a53_sels[] =3D {"osc_24m", "arm_pll_out"=
+, ...
+>                                       _____________|
+> arch/arm/dts/imx8mm.dtsi:            |
+> clk: clock-controller@30380000 {     v
+>         clock-names =3D "osc_32k", "osc_24m", ...
+>                                    |
+>                                    v
+>         clocks =3D <&osc_32k>, <&osc_24m>, ...
+> };          _______________________|
+> ...        |
+> / {        v
+>         osc_24m: clock-osc-24m {
+>                 compatible =3D "fixed-clock";
+> ...
+> };
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Adam Ford <aford173@gmail.com>
 
-Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
-Reported-by: Weizhao Ouyang <o451686892@gmail.com>
-Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
----
- boot/bootm.c                 |  3 +++
- include/efi_loader.h         |  2 ++
- lib/efi_loader/efi_bootbin.c |  9 ++-------
- lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
- 4 files changed, 36 insertions(+), 7 deletions(-)
+Thanks for the fix.
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index f5cbb10f0d1..9693e0d336d 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -1008,6 +1008,9 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 			ret = 0;
- 	}
- 
-+	/* Clear the initrd from a previous boot */
-+	images->initrd_start = 0;
-+
- 	/* Relocate the ramdisk */
- #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
- 	if (!ret && (states & BOOTM_STATE_RAMDISK)) {
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 144b749278a..84e8cfe320e 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
- void *efi_get_configuration_table(const efi_guid_t *guid);
- /* Install device tree */
- efi_status_t efi_install_fdt(void *fdt);
-+/* Install initrd */
-+efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
- /* Execute loaded UEFI image */
- efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
- /* Run loaded UEFI image with given fdt */
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index d0f7da309ce..94ba7c5589b 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -215,12 +215,11 @@ out:
-  * Return:	status code
-  */
- static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
--				      void *initrd, size_t initd_sz,
-+				      void *initrd, size_t initrd_sz,
- 				      struct efi_device_path *dp_dev,
- 				      struct efi_device_path *dp_img)
- {
- 	efi_status_t ret;
--	struct efi_device_path *dp_initrd;
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
-@@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
- 	if (ret != EFI_SUCCESS)
- 		return ret;
- 
--	dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, initd_sz);
--	if (!dp_initrd)
--		return EFI_OUT_OF_RESOURCES;
--
--	ret = efi_initrd_register(dp_initrd);
-+	ret = efi_install_initrd(initrd, initrd_sz);
- 	if (ret != EFI_SUCCESS)
- 		return ret;
- 
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 3936139ca41..6a863c3556c 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
- 	return EFI_SUCCESS;
- }
- 
-+/**
-+ * efi_install_initrd() - install initrd
-+ *
-+ * Install the initrd located at @initrd using the EFI_LOAD_FILE2
-+ * protocol.
-+ *
-+ * @initrd:	address of initrd or NULL if none is provided
-+ * @initrd_sz:	size of initrd
-+ * Return:	status code
-+ */
-+efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
-+{
-+	efi_status_t ret;
-+	struct efi_device_path *dp_initrd;
-+
-+	if (!initrd)
-+		return EFI_SUCCESS;
-+
-+	dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, initd_sz);
-+	if (!dp_initrd)
-+		return EFI_OUT_OF_RESOURCES;
-+
-+	ret = efi_initrd_register(dp_initrd);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	return EFI_SUCCESS;
-+}
-+
- /**
-  * do_bootefi_exec() - execute EFI binary
-  *
--- 
-2.48.1
-
+Reported-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Tested-by: Fabio Estevam <festevam@gmail.com>
+Tested-by: Adam Ford <aford173@gmail.com> # imx8mp-beacon
