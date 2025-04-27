@@ -4,63 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED5BC369D1
-	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 14:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C596C369D1
+	for <u-boot@archiver.kernel.org>; Sun, 27 Apr 2025 15:19:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 165A1820E1;
-	Sun, 27 Apr 2025 16:52:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 6B81980FDE;
+	Sun, 27 Apr 2025 17:19:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="M2XmHXsb";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LS4XxuSc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A014F820E1; Sun, 27 Apr 2025 16:52:16 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ id 78F4981E0F; Sun, 27 Apr 2025 17:19:33 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A63FA80FDA
- for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 16:52:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F68D80FDA
+ for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 17:19:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 715F225D52;
- Sun, 27 Apr 2025 16:52:14 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HALkP8sUYLl6; Sun, 27 Apr 2025 16:52:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1745765533; bh=EaiAk+02Ty4Jbf9mFTjoJW9yimUG/8U02OhCFF6Fzr0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=M2XmHXsbqvNWn0Lc3dQkphjXEpVlIFpZMMaKh1Zci+EVAXlGQ1oRQUiYZLiF6wx2A
- d6w5qEACg82tDpQgmeyrjXMhOfFEuD3FsTtBeJ8yT4In9bjRHQUUyC0sQj6vtYc2MD
- 9e2tX7M/I7+Z1p0UWt1HDRZjbKDbY0lQQT6JeMGfOO61D0gwvUnDEY1coT2h2Uw9DJ
- clfQazuxpRmKDXMEyQY6lsgW8BhCug1MZb49bpmh5/D0KldLz/j9T2HhtcyQ+kGDoB
- Y7YF83919IdS587gxovLpzppiMNnZTAlQ+SEmOA7eY0RsIHId+9MJt4knIgrYvnMBM
- vKLBxi2MRnR2Q==
-From: Yao Zi <ziyao@disroot.org>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>,
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1745767149; x=1746371949; i=xypron.glpk@gmx.de;
+ bh=a8FzK71fslg+GfxY5KawX63+xDW2agG+VqDNyWJWROk=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=LS4XxuScYh0eCR875aP3kLOJG30CJKpaaMH1PNCK632q6l8pbCd4cdqTFD2QynCU
+ w1TVJyfic7sycwJU1rxWG/AOoPwIRm5zYIwKk8Y/kN87E1ENSOoa0eIoiuwsskXvT
+ sgCB7Cq0yfPRCPm8HBJAQfu6fTtTk7iHtGl0X7KDmpwoxxP7MisaJESIk5kO+QQMV
+ 5xCV2Fv1OCsQKnI90DuZQTgijNHiYHx2MupmR2B3gmROdX5siM9S7uJWSWotukVIu
+ tB+k/B6XvQL53g/ZMLlHQ/8RQO/alTNAVlsWdKIQst7daoQZ3uHeCB1Q2P17dt/GB
+ 0UNNHO0gore0BEAdxQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([61.8.153.191]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4s4r-1u7gjr2fd1-00HTSP; Sun, 27
+ Apr 2025 17:19:08 +0200
+Date: Sun, 27 Apr 2025 17:19:04 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Yao Zi <ziyao@disroot.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Anton Blanchard <antonb@tenstorrent.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Christian Marangi <ansuelsmth@gmail.com>, Andrew Davis <afd@ti.com>,
  Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, Nathaniel Hourt <I@nathaniel.land>,
- Yao Zi <ziyao@disroot.org>
-Subject: [PATCH 2/2] riscv: Access gd with inline assembly when building with
- LTO or Clang
-Date: Sun, 27 Apr 2025 14:50:11 +0000
-Message-ID: <20250427145011.17331-3-ziyao@disroot.org>
-In-Reply-To: <20250427145011.17331-1-ziyao@disroot.org>
+CC: u-boot@lists.denx.de, Nathaniel Hourt <I@nathaniel.land>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_1/2=5D_Makefile=3A_Strip_leading_sp?=
+ =?US-ASCII?Q?aces_when_preprocessing_generated=5Fdefconfig?=
+User-Agent: Thunderbird for Android
+In-Reply-To: <20250427145011.17331-2-ziyao@disroot.org>
 References: <20250427145011.17331-1-ziyao@disroot.org>
+ <20250427145011.17331-2-ziyao@disroot.org>
+Message-ID: <1526A781-5592-43DE-94F2-221DAA484192@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:DlLoz8O1aGrO7wtu39PsBDAo3zqvmRuwoMYBjhyi1IYKZfjN7Wt
+ CGUT66KSpvGNaps1rkVHH3jctHlLAr0kOS3k1bIxI2Znwp+wUQ4Cj6QRST7//wBgu7z89vZ
+ FehIAqVs6rsxrBn2Ojj1L5WIhpy9CnHI44CU2ub/qEX0Js+vn2/Bc8oX3+HfwAVPlECv0UQ
+ iSUcMs0i0CwDQhbMrGnsw==
+UI-OutboundReport: notjunk:1;M01:P0:EYh95JySME0=;MslLqklPuP1gHh9vzHTl8PfIdqK
+ JTFKUMaOMbk2FpHG8yjBhDdWNHBDNzKfUC5b2KjMZRBGUG3qbxqB2mQroRxfTLPRB1pjEDuYV
+ GVKJ+jodEhsSsK3u2MGiqbOyTxW8nsFlF+76uTRQRu+kxXGjsxwpt8zf3RC7eOk2hgNwQYP0v
+ s2pHMiIqU2Df3g6VRsUL8wrY7Jn6c7ixJMsxAqBrcdjIUmwJxG//ECGcfhob3RmCbWUpK2HxM
+ 9ZpwAUTwO9t5BKPilseGei/SaOOy2RGIOnN4jPhYPUp9HMGyu56HTh0T+7sM1HGxE86ADYUts
+ iiX1UPhjcwwQrgdEVcXUYfeE5b9Trk1AxBkpdc17JT4hn9J2sRsVREcY8HBcC9dB1FDcXiygC
+ 17eTgEyQj0gReGd1ELl5E6umzxzxVFvQAImANTkTM4a8InUpFEjTFJfvyPjGl+M7z4tqLdlPA
+ nVz/l+ULuhEpb/75VinjvwXMc25lNPtUBe42phuWQpI4VClqzdtuvXs3o38ayj//PmmR1jvC6
+ APrMJGilKKJO0IYfPLtP7IknR3airIIB6Zr3LLnq6S1giN+uZSvgJ3MXciVHERgDZWyixzvf/
+ Hts1jeW4DZ1qFQeP9kX4kdgx3dLfV5qdnmPZk9p0X+hW6SEWHt3I3IzYBT8V1hbEfe3muud9m
+ B+S+5yrKHajREclEWgG7c4grYOknQNgXIabOyt+JPNkt5im1SWmKI7UttIeCWgYJOwew3PNL2
+ A4z4Do4B4FyMlP30oJP7T2HIhGNk1wWt8DCg8AeOPwFPKe2/ZdhwNQhwWqxp42Q71dQ312SD3
+ S6QyUeYDIbMW57bdKQdM6savhWJ7tw6BqjBGs/Jr1NCOcSaqyDLt9dB+K1XQ6v3aFzeJJbZOR
+ 9tGI9QVKk1vDRvsXzEdUHbhiWTP69qieHhkbCdZqMAZWaRh9LH2afGN0ylPVGYanHTx4vH1jb
+ nLanniX6LnELIM8XidF0tAYDOkz+QnUIisiYEQVcmmarsQMOyuQv7ITP3WIhrvXTxMUddxinY
+ 83HjMXPGEN2Z0RIUA8ONoU8tnpolbTMdPQjJuVttOARZO2W+HY+ZlX5UxEydY1+RmDjurZhlI
+ 3Z8RdVU9FogeM165N9f8M5Cq/wKKJFKmNY3mR/ySEVVwzEbO4WHgX31qKFSOWeXhgLLtOmdYh
+ I3ta2I0gzkgokNro3eqPqhhTVT+g8MvmnThPzZf1Ab9c/bvjq4FWfM2F4VUeYJ3Gw+poZz3x7
+ wEG9oApJj00KjAhnxL1Qs6g9qSboqKNp8Sk8aPc2HjmpPZB3ZS9aKmgOYOc51JJp071ZdxTXt
+ e7AJ+DaLjcIr44sw03hQp4yHRN67EdvWU75DCjfpbzwQv9hqIqdcqgrkqe2v82+AadIPTuSds
+ HNkOQBt+gJSpDzxl+2Y9XRv57FaeFAmmaS0zTTlDXCPamn8ism0SByk2h33T0UuZshsBg3lgA
+ FrMAF6BkdbzulpCg458PbvsK0EkFiffDHWm48cj/N3YTZWTAKQ8EX8D6QVxP5O8kfP7D0qH8L
+ 8o6vtjo87lhQiRFXdHTmur6hN440FAtaLsOl4XA6CfVT57JkSINo5Qzfx/2M5LevF1Doc/kKd
+ 2JowoiQTmPrgz4Fzh741oTYgHC4JifsdI4y8rdj9LQ4SbYpiTOg38UXRMfF5UEYQyTo8vaHZh
+ f17zd2AiHblozY3os250yKfI+zGilezpLhnNbgfwvf5TApLsfIU3QX8qre6sLLdwo7ey8qgyI
+ pqQW+h2iAt6bE1ZBd1onPLwQpt3yMK7t4EQOa474dVBcopIgiYs4QE+yb7oh0t9iv/BMHK00H
+ fqJk/FlBXe/SAoezbftlcWEgB7We75yOAtBwCiTF3PpjIY6lFyhCNsd6izBCPDLNzf81aktGY
+ U6Hctkl5REuiHGDURQBFfSvWnsfSaCWkdVtnAEyLIkeSn7vYGYsu68IPEfnJ9/IavbCg+nabM
+ Ja/iIdVTn3r8KdJixogf62e642on+M/MHdGckNWylH3OQq2slYfT4t4YdAZ/t0sQ5anpupT2A
+ KlPvlyrlfBApLYCbUKh009vwCqStW1zk6H6JTdWQPK3B3v9zQlLm869ClYJ1qrujqMMVSbpBw
+ NY33n3XxRMgsdSmEKVx4p0AkB4gC50GHmyGZR+/lLEnYBlgDeMzUFiVg6vLVJk5FeQooEY9Bo
+ M/NCUr475JhdAQD/51DfktTJJHwWlxp0X+jqCJG/fxJXWN77+sgZ5PJzPVn0LnC5exagia4yi
+ Kkf2ff2v4OjGAvOy/8bY8nE7qqDunkbtopojSfUXZa+gChYqk0OCH1xtZoYpRxJLmoY6Uwii5
+ BD4CgRrSYT9etv5r1tJFvVMWZuMXbS3XnsUOr58Vvs5SkJQbtyHqFqLxy9nSXbgkgwztYmRVL
+ U1e9W+rip+l4TcTXrF4F3fGizJgviLqPHD46TMmpRKRy24sVrF7WvOSwlV5yNjvaNiQXKoSk3
+ ljudg3dKPvOnWrtBhl8bRc2+Ysap1cnfwPvi68wUfKDVcwszfuoJ+QP520L9vu/YQniQmeZyi
+ igKStLGQmoUpYIBAPiikaXoGSVxjFtrrtM11nNYvGiFMnUav+p9J9trQGRmAco1hNkfOsijon
+ SIcVLEpZRcGsVqVLnHN0yxBvp3kS5TBgQkM14vH6VcqKa2brmy2h/scSnTLgf6uyZVG3fIlf4
+ 2ZZu3xUfG/kYL1lRuzQXkXvrDdAEkTFqtT/TibL4Iz3CNav/NwfOv4Gp0ncPbzXfeHR+tRDIZ
+ UTwEld6vg9EomPyos0b6W11Wfjm/1G3Cm6rYCb0uB/r5Scnh1f+Uz0GGI2wtNx/3qit4nFxUe
+ EFpaRWu1rcYBnQbDgb+AQhnpC7KzxfSlG7JLuZl/oMjArzWaH00B7+8venz1C7QJT1NqzGPn6
+ I8RL7kH3QvL10lMJf1pts/CHpIsDqB1X1UShavq8lDD8w6ucm0Ajl/baB4SL1oPcXMvpV5EEO
+ 0CZ6UynBwENHoBlhhCrU8JzHVMQ+8v9v8clK86FJKGacCIDnFdKstFTCuQGzlDSO83hddbRmW
+ kOB0OuVLTi2UxMAgjCBTR3H8p9dzYktaXa/TnZmYYgK
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,117 +129,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Similar to AArch64's case, Clang may wrongly fold accesses to gd pointer
-which is defined with register qualifier into constants, breaking
-various components.
+Am 27=2E April 2025 16:50:10 MESZ schrieb Yao Zi <ziyao@disroot=2Eorg>:
+>Clang's preprocessor may emit extra spaces for lines starting with '#'=2E
+>Lines with these extra characters cannot be handled by Kconfig and will
+>be ignored with warnings like,
+>
 
-This patch defines gd as a macro when building with Clang or LTO, which
-expands to get_gd() that accesses gp pointer in assembly, making RISC-V
-ports function properly and preparing for introduction of LTO in the
-future. Board initialization code is also adapted for non-assignable gd.
 
-Reported-by: Nathaniel Hourt <I@nathaniel.land>
-Signed-off-by: Yao Zi <ziyao@disroot.org>
----
- arch/riscv/cpu/cpu.c                 |  6 ++++++
- arch/riscv/include/asm/global_data.h | 19 +++++++++++++++++++
- common/board_r.c                     |  4 +++-
- common/init/board_init.c             |  7 +++++--
- 4 files changed, 33 insertions(+), 3 deletions(-)
+Do you have an example for reprocing the issue?
+Is there an understanding why Clang behaves in this way?
 
-diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
-index 5b31da64cbd..15c4e14599d 100644
---- a/arch/riscv/cpu/cpu.c
-+++ b/arch/riscv/cpu/cpu.c
-@@ -18,6 +18,7 @@
- #include <asm/hwcap.h>
- #include <asm/cpufeature.h>
- #include <asm/cache.h>
-+#include <asm/global_data.h>
- #include <dm/uclass-internal.h>
- #include <linux/bitops.h>
- #include <linux/log2.h>
-@@ -746,3 +747,8 @@ __weak int cleanup_before_linux(void)
- 
- 	return 0;
- }
-+
-+void arch_setup_gd(gd_t *new_gd)
-+{
-+	set_gd(new_gd);
-+}
-diff --git a/arch/riscv/include/asm/global_data.h b/arch/riscv/include/asm/global_data.h
-index d356752a56a..47b5e2cfc8f 100644
---- a/arch/riscv/include/asm/global_data.h
-+++ b/arch/riscv/include/asm/global_data.h
-@@ -14,6 +14,7 @@
- #include <asm/smp.h>
- #include <asm/u-boot.h>
- #include <compiler.h>
-+#include <config.h>
- 
- /* Architecture-specific global data */
- struct arch_global_data {
-@@ -47,8 +48,26 @@ struct arch_global_data {
- 
- #include <asm-generic/global_data.h>
- 
-+#if defined(__clang__) || CONFIG_IS_ENABLED(LTO)
-+
-+#define DECLARE_GLOBAL_DATA_PTR
-+#define gd			get_gd()
-+
-+static inline gd_t *get_gd(void)
-+{
-+	gd_t *gd_ptr;
-+
-+	__asm__ volatile ("mv %0, gp\n" : "=r" (gd_ptr));
-+
-+	return gd_ptr;
-+}
-+
-+#else
-+
- #define DECLARE_GLOBAL_DATA_PTR register gd_t *gd asm ("gp")
- 
-+#endif
-+
- static inline void set_gd(volatile gd_t *gd_ptr)
- {
- #ifdef CONFIG_64BIT
-diff --git a/common/board_r.c b/common/board_r.c
-index bc6fd6448c2..4fa092ab596 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -815,7 +815,9 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
- 	if (CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP))
- 		arch_setup_gd(new_gd);
- 
--#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
-+#if defined(CONFIG_RISCV)
-+	set_gd(new_gd);
-+#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
- 	gd = new_gd;
- #endif
- 	gd->flags &= ~GD_FLG_LOG_READY;
-diff --git a/common/init/board_init.c b/common/init/board_init.c
-index a06ec1caa2c..2a6f39f51ad 100644
---- a/common/init/board_init.c
-+++ b/common/init/board_init.c
-@@ -13,8 +13,11 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--/* Unfortunately x86 or ARM can't compile this code as gd cannot be assigned */
--#if !defined(CONFIG_X86) && !defined(CONFIG_ARM)
-+/*
-+ * Unfortunately x86, ARM and RISC-V can't compile this code as gd is defined
-+ * as macro and cannot be assigned.
-+ */
-+#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
- __weak void arch_setup_gd(struct global_data *gd_ptr)
- {
- 	gd = gd_ptr;
--- 
-2.49.0
+Best regards=20
+
+Heinrich=20
+
+>        unexpected data:  # CONFIG_OF_BOARD_FIXUP is not set
+>
+>Those options that is expected to be assigned explicitly with N will be
+>set to the default value, messing up board configurations=2E
+>
+>Let's sed these spaces away to ensure board configurations could be
+>correctly generated with Clang=2E
+>
+>Fixes: 2027e99e61a ("Makefile: Run defconfig files through the C preproce=
+ssor")
+>Reported-by: Nathaniel Hourt <I@nathaniel=2Eland>
+>Signed-off-by: Yao Zi <ziyao@disroot=2Eorg>
+>---
+> scripts/kconfig/Makefile | 1 +
+> 1 file changed, 1 insertion(+)
+>
+>diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
+>index 079add4d5da=2E=2Eba30652f01a 100644
+>--- a/scripts/kconfig/Makefile
+>+++ b/scripts/kconfig/Makefile
+>@@ -94,6 +94,7 @@ endif
+>=20
+> %_defconfig: $(obj)/conf
+> 	$(Q)$(CPP) -nostdinc -P -I $(srctree) -undef -x assembler-with-cpp $(sr=
+ctree)/arch/$(SRCARCH)/configs/$@ -o generated_defconfig
+>+	$(Q)sed -i -e 's/^[[:space:]]//' generated_defconfig
+> 	$(Q)$< $(silent) --defconfig=3Dgenerated_defconfig $(Kconfig)
+>=20
+> # Added for U-Boot (backward compatibility)
 
