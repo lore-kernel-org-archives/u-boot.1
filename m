@@ -4,77 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8030C36005
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 10:03:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F652C369D3
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 10:06:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D44880EFB;
-	Mon, 28 Apr 2025 12:03:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B360280EFB;
+	Mon, 28 Apr 2025 12:06:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I+1Gvq1j";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DX7q+g5d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AE78820B7; Mon, 28 Apr 2025 12:03:29 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 21908820B7; Mon, 28 Apr 2025 12:06:36 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6223780EE5
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:03:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4AC180EE5
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:06:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-7080dd5f9f1so30949667b3.0
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 03:03:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745834605; x=1746439405; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BpxzvIAukrFnPR+cLt047y0bLLahCFiOu2MIqAHl0F4=;
- b=I+1Gvq1jd9NJbSaP6dQCs4uJ6ARr9pnZ+86pFn17D09Kj3hdX5wpC3BUP3Z/20Ih4B
- OQGr+ZqZMpMt20vucSbQ8PrKX52EMIf8zTriPjLtRNtXcKHICMtZSo5xBulTbWeq99rM
- 43kqaW8EQDPmTHROR/kwsoGxendr99KC6nGnwhi3COrI4t7ns7vIJIB19eSKGW5+hUjN
- 3njrhBqC97jpHf47sxPByCScAAdkgadSiAiImSLidlX21t1E0iRjyH8S5JiuSzaecb7U
- GTgcFPTQJVvQilbdxKPBAv90UY/Ff7pmSt85B6PQ9TXeTYNmtIqzopNLrF7OW+oxcUb/
- QuUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745834605; x=1746439405;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BpxzvIAukrFnPR+cLt047y0bLLahCFiOu2MIqAHl0F4=;
- b=k1dDkhQbdRnIGgPEch8ZdO/EHsA6j6GlLka6gcngnmbyulGyk3SDquDgD9+IdUWJ/E
- ahRvf2OIKsRL2IddGvQ1KD6m8rBiYh/CGKEoRLy3eFrKwS1rALikWGTPDxVcRYQ8wqgR
- +pofQW9BjWkasOvEQ23kym96s6U7dDpgjLQes93W+sv3jr1g5HTgPQB6k3jdkb0SFL9E
- Sd3HRlkxUfT/+FEeeOEntaGuKdW+LGCtOZIXlbuoOcLmgxQD4ScDxeFkKWFmFjhXDTj2
- PZNwwMrMPW/NsT9tpeQyxJ1GunuFd7CSJxrpvsjhisYb9MgmyvKx/rZFVXzHVttwWaHs
- voag==
-X-Gm-Message-State: AOJu0YxhtEulE6ZJ2TKVXHmALGlIugCkhFf7pA/jjnCncTQKiiH/QlTb
- GnTDjuvJGC6SbgonyAgtg9eJ/ANoSCC9pbXTd9tUeVnn+qEpPQQOvP6I4e29k21pPZ2Bt5rHIUr
- iI0oJNEAQReJNd96s0asDoUXOnWE4sjLSsFAUMg==
-X-Gm-Gg: ASbGncvK/xs5ljqiZYKLL18FU+aRDB9vsF5f4dvNWvxyhI1rRco5GZQgXKkyvCNMRpP
- iAJ+7yeSRuAnQtVdnas/9bwkv0ZneeF5fR/6LSMUbrbwDdpQpLCsONw1sa5h8JQc0y48wMBl16R
- W1KOaFmH6XB6fG82YI1bwLBDQ=
-X-Google-Smtp-Source: AGHT+IFc8wZEzC2d60GGSGpUba/lghQbOCnVJIs0SwEHlDn518WU1w/7rq8+2oomlmOJ8cT7cw3IkGM3g2usF0XySTA=
-X-Received: by 2002:a05:690c:6b88:b0:703:b5ae:a3da with SMTP id
- 00721157ae682-708541df751mr152426247b3.32.1745834605158; Mon, 28 Apr 2025
- 03:03:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250422193657.512324-1-trini@konsulko.com>
-In-Reply-To: <20250422193657.512324-1-trini@konsulko.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 28 Apr 2025 13:02:49 +0300
-X-Gm-Features: ATxdqUGPdnt8C3LELo6YRp8y9L1pBK6rhXnO2_qb4-l52jmwy_XDa7_6rj-v5qQ
-Message-ID: <CAC_iWjJRwbu0xJ=-+GmEvoxgzfm8HM0ydaGTY8D4-5Z7D-1gVw@mail.gmail.com>
-Subject: Re: [PATCH] Docker,
- CI: Add vexpress_fvp / vexpress_fvp_bloblist support
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Harrison Mutai <harrison.mutai@arm.com>,
- nd <nd@arm.com>, Manish Pandey <Manish.Pandey2@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 15BBCA4AB27;
+ Mon, 28 Apr 2025 10:01:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43005C4CEE4;
+ Mon, 28 Apr 2025 10:06:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1745834792;
+ bh=GRzluCKGfFU+jIooQVNnsAP7weLX49ITKeielkeJ6Gw=;
+ h=Date:Subject:Cc:From:To:References:In-Reply-To:From;
+ b=DX7q+g5dJ42GyRR5R0CWhwA95W50mIPFZk1TPaem7I+mJok0fO77KK+a+irxtW/Qg
+ 27Zk6F3+Xsubq/FBuA2Wggn4MYw50IBwKn+dm0ZEkOVBY4Pl3F4xUa+uFntF7H7pnX
+ cnYPLkyjsz+BHPO2/7fVHvW8Tt41PjfWR5xauqf5YFaPIq93g/DgYtopM7B0d0B5EA
+ EWj3vsYQcLOApQ7CP6PoSqogpYfVz+6WwBllXoxHdmuUs2gY605LLTRCcgCzVgKVxb
+ +3RWu9xcLfZlttPCkVj1T8Jf33u1Z4WIyI0jNbk/Qoov01Oalbs/2KE+ebjtF15wq7
+ VeRufyfQ2ZbKg==
+Content-Type: multipart/signed;
+ boundary=023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39;
+ micalg=pgp-sha384; protocol="application/pgp-signature"
+Date: Mon, 28 Apr 2025 12:06:28 +0200
+Message-Id: <D9I6S5PD32TJ.3AGU7UM3EUOF6@kernel.org>
+Subject: Re: [PATCH] net: fsl_enetc: fix imdio register calculation
+Cc: "Joe Hershberger" <joe.hershberger@ni.com>, "Ramon Fried"
+ <rfried.dev@gmail.com>, "Tom Rini" <trini@konsulko.com>, "Marek Vasut"
+ <marex@denx.de>, "Alice Guo" <alice.guo@nxp.com>, "Ye Li" <ye.li@nxp.com>,
+ "Tim Harvey" <tharvey@gateworks.com>, "Thomas Schaefer"
+ <thomas.schaefer@kontron.com>, "Vladimir Oltean" <vladimir.oltean@nxp.com>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Heiko Thiery" <heiko.thiery@gmail.com>, <u-boot@lists.denx.de>
+X-Mailer: aerc 0.16.0
+References: <20250428095945.1432389-1-heiko.thiery@gmail.com>
+In-Reply-To: <20250428095945.1432389-1-heiko.thiery@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,144 +72,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks for doing this
+--023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, 22 Apr 2025 at 22:36, Tom Rini <trini@konsulko.com> wrote:
->
-> This adds the vexpress_fvp and vexpress_fvp_bloblist platforms to the
-> list of platforms we test via emulator in CI. In order to do this we
-> need to first have our container runtime have TF-A builds for the
-> vexpress_fvp platform, both with and without transfer list support as
-> well as installing "telnet" so that we can access console. In the CI
-> files we check for the existence of /opt/tf-a/${TEST_PY_BD} and if
-> found, copy bl1.bin and fip.bin to /tmp and set the variables so that we
-> can later run FVP to run.
->
-> Note that we currently disable the hostfs (semihosting) tests as they
-> trigger a bug in FVP. This has been reported upstream, and can be
-> enabled when fixed.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Harrison Mutai <harrison.mutai@arm.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: nd <nd@arm.com>
-> Cc: Manish Pandey <Manish.Pandey2@arm.com>
-> ---
->  .azure-pipelines.yml    | 13 +++++++++++++
->  .gitlab-ci.yml          | 23 +++++++++++++++++++++++
->  tools/docker/Dockerfile | 17 +++++++++++++----
->  3 files changed, 49 insertions(+), 4 deletions(-)
->
-> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> index cb787d32f142..0a9f7b508ddd 100644
-> --- a/.azure-pipelines.yml
-> +++ b/.azure-pipelines.yml
-> @@ -307,6 +307,13 @@ stages:
->                /opt/coreboot/cbfstool \${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom remove -n fallback/payload;
->                /opt/coreboot/cbfstool \${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom add-flat-binary -f \${UBOOT_TRAVIS_BUILD_DIR}/u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000;
->            fi
-> +          # If we have TF-A binaries, we need to use them.
-> +          if [[ -d /opt/tf-a/"\${TEST_PY_BD}" ]]; then
-> +            cp /opt/tf-a/"\${TEST_PY_BD}"/fip.bin /opt/tf-a/"\${TEST_PY_BD}"/bl1.bin /tmp;
-> +            export fip=/tmp/fip.bin;
-> +            export bl1=/tmp/bl1.bin;
-> +            export PATH=/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3:\${PATH};
-> +          fi
->            export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
->            export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci
->            # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \$var" if not
-> @@ -428,6 +435,12 @@ stages:
->            TEST_PY_BD: "vexpress_ca9x4"
->            TEST_PY_ID: "--id qemu"
->            TEST_PY_TEST_SPEC: "not sleep"
-> +        vexpress_fvp:
-> +          TEST_PY_BD: "vexpress_fvp"
-> +          TEST_PY_TEST_SPEC: "not sleep and not hostfs"
-> +        vexpress_fvp_bloblist:
-> +          TEST_PY_BD: "vexpress_fvp_bloblist"
-> +          TEST_PY_TEST_SPEC: "not sleep and not hostfs"
->          integratorcp_cm926ejs:
->            TEST_PY_BD: "integratorcp_cm926ejs"
->            TEST_PY_ID: "--id qemu"
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 5f3418e482fe..0268938fea99 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -96,6 +96,13 @@ stages:
->          /opt/coreboot/cbfstool ${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom remove -n fallback/payload;
->          /opt/coreboot/cbfstool ${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom add-flat-binary -f ${UBOOT_TRAVIS_BUILD_DIR}/u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000;
->        fi
-> +    # If we have TF-A binaries, we need to use them.
-> +    - if [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
-> +        cp /opt/tf-a/"${TEST_PY_BD}"/fip.bin /opt/tf-a/"${TEST_PY_BD}"/bl1.bin /tmp/;
-> +        export fip=/tmp/fip.bin;
-> +        export bl1=/tmp/bl1.bin;
-> +        export PATH=/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3:${PATH};
-> +      fi
->      # "${var:+"-k $var"}" expands to "" if $var is empty, "-k $var" if not
->      - export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:${PATH};
->        export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci;
-> @@ -504,6 +511,22 @@ sifive_unleashed_spi-nor test.py:
->      TEST_PY_ID: "--id spi-nor_qemu"
->    <<: *buildman_and_testpy_dfn
->
-> +vexpress_fvp test.py:
-> +  variables:
-> +    TEST_PY_BD: "vexpress_fvp"
-> +    TEST_PY_TEST_SPEC: "not sleep and not hostfs"
-> +  tags:
-> +    - ${DEFAULT_AMD64_TAG}
-> +  <<: *buildman_and_testpy_dfn
-> +
-> +vexpress_fvp_bloblist test.py:
-> +  variables:
-> +    TEST_PY_BD: "vexpress_fvp_bloblist"
-> +    TEST_PY_TEST_SPEC: "not sleep and not hostfs"
-> +  tags:
-> +    - ${DEFAULT_AMD64_TAG}
-> +  <<: *buildman_and_testpy_dfn
-> +
->  xilinx_zynq_virt test.py:
->    variables:
->      TEST_PY_BD: "xilinx_zynq_virt"
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index be46135d6a52..37076de01011 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -90,6 +90,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
->         help2man \
->         iasl \
->         imagemagick \
-> +       inetutils-telnet \
->         iputils-ping \
->         libconfuse-dev \
->         libgit2-dev \
-> @@ -233,10 +234,18 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
->  RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a && \
->         cd /tmp/tf-a/ && \
->         git checkout v2.12.0 && \
-> -       cd tools/fiptool && \
-> -       make -j$(nproc) && \
-> -       mkdir -p /usr/local/bin && \
-> -       cp fiptool /usr/local/bin && \
-> +       make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
-> +               PLAT=fvp BL33=/dev/null -j$(nproc) all fip && \
-> +       mkdir -p /usr/local/bin /opt/tf-a/vexpress_fvp && \
-> +       cp tools/fiptool/fiptool /usr/local/bin && \
-> +       cp build/fvp/release/fip.bin build/fvp/release/bl1.bin \
-> +               /opt/tf-a/vexpress_fvp/ && \
-> +       rm -rf build/fvp && \
-> +       make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
-> +               PLAT=fvp BL33=/dev/null TRANSFER_LIST=1 -j$(nproc) all fip && \
-> +       mkdir -p /opt/tf-a/vexpress_fvp_bloblist && \
-> +       cp build/fvp/release/fip.bin build/fvp/release/bl1.bin \
-> +               /opt/tf-a/vexpress_fvp_bloblist/ && \
->         rm -rf /tmp/tf-a
->
->  # Download the Arm Architecture FVP platform. This file is double compressed.
-> --
-> 2.43.0
->
+[+ Vladimir]
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi,
+
+nice catch!
+
+> With commit cc4e8af2c552, fsl_enetc register accessors have been split to
+
+With 'commit cc4e8af2c552 ("net: fsl_enetc: Split register accessors")'
+
+> handle different register offsets on different SoCs. However, for
+> internal MDIO register calculation, only ENETC_PM_IMDIO_BASE was fixed
+> without adding the SoC specific MAC register offset.
+>
+> As a result, the network support for the Kontron SMARC-sAL28 and
+> probably other boards based on the LS1028A CPU is broken.
+>
+> Add the SoC specific MAC register offset to calculation of imdio.priv to
+> fix this.
+>
+> Fixes: cc4e8af2c552 ("net: fsl_enetc: Split register accessors")
+> Signed-off-by: Thomas Schaefer <thomas.schaefer@kontron.com>
+> Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+
+With the nitpick above:
+
+Reviewed-by: Michael Walle <mwalle@kernel.org>
+
+> ---
+>
+> But the question that now arises is, does this code path work on the imx
+> SoCs as well. Now the imx specific offset 0x5000 is added here and was no=
+t
+> used before.
+
+Maybe the imx9 doesn't use the internal MDIO controller or the board
+which was this tested on doesn't use the PCS?
+
+-michael
+
+> Can someone please test this on an imx9 and confirm?
+>
+>  drivers/net/fsl_enetc.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
+> index 52fa820f51..97cccda451 100644
+> --- a/drivers/net/fsl_enetc.c
+> +++ b/drivers/net/fsl_enetc.c
+> @@ -473,13 +473,15 @@ static int enetc_init_sxgmii(struct udevice *dev)
+>  /* Apply protocol specific configuration to MAC, serdes as needed */
+>  static void enetc_start_pcs(struct udevice *dev)
+>  {
+> +	struct enetc_data *data =3D (struct enetc_data *)dev_get_driver_data(de=
+v);
+>  	struct enetc_priv *priv =3D dev_get_priv(dev);
+> =20
+>  	/* register internal MDIO for debug purposes */
+>  	if (enetc_read_pcapr_mdio(dev)) {
+>  		priv->imdio.read =3D enetc_mdio_read;
+>  		priv->imdio.write =3D enetc_mdio_write;
+> -		priv->imdio.priv =3D priv->port_regs + ENETC_PM_IMDIO_BASE;
+> +		priv->imdio.priv =3D priv->port_regs + data->reg_offset_mac +
+> +		                   ENETC_PM_IMDIO_BASE;
+>  		strlcpy(priv->imdio.name, dev->name, MDIO_NAME_LEN);
+>  		if (!miiphy_get_dev_by_name(priv->imdio.name))
+>  			mdio_register(&priv->imdio);
+
+
+--023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCaA9TJBIcbXdhbGxlQGtl
+cm5lbC5vcmcACgkQEic87j4CH/gBoAF/W97SiwDxGWRxqHJbtKl5DSfbyn8OZAxc
+SS4NBV4P7UPJAyqUGvRBjNyTWQ48tx43AYCSnwu3EYIV16I/m4wgBvHo/RxTgL2H
+TB6wMdvpOrKFto16YAcNqjH40gPQir1BeL0=
+=ZDJR
+-----END PGP SIGNATURE-----
+
+--023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39--
