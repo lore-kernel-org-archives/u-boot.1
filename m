@@ -4,85 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFF08C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4FCEC369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:54:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C6F82B97;
-	Mon, 28 Apr 2025 16:53:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5571F82A53;
+	Mon, 28 Apr 2025 16:54:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lnT/mGMA";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jvCI+y88";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70FCE82B4A; Mon, 28 Apr 2025 16:53:21 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7804982A5E; Mon, 28 Apr 2025 16:54:13 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ECB582B33
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:53:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C1A782A33
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:54:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-736c3e7b390so4979027b3a.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 07:53:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745851998; x=1746456798; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UX4AMwM/U6aAgvjv+rJJQ6DwXbhVM2OuZE4HfGEcz1E=;
- b=lnT/mGMAsKPkMepf922miIBj2ukwMGeRi0DI5c6eZtYFYmhHW32UEs+hL8Id3HceHi
- 7Vrw9O9QmaCXJKzYq/T4TC7uDfFCboZN77iTMCuqm6Py0H/jxOFwJ3gSXb1QOFi+Yqg4
- DZpnLbxVRz5whPkTG+NgVp+v90iED5KO35YSIm34ydNzzXIVUWyACiW1AWCM2jn7yteP
- EzMt8cv4ZbY1f9j8zcLqlmuEZ2GNTuDW+klXYeT1znRxVXfVW/nDp+9v0TYzapqo4dXE
- cIOVGkbp4nH6iQpdnDF/PXq5nSKJII3juFPIghutSf4rFGmB0MaPkyBu3UzQ2Y4WXVK4
- np6w==
+ spf=pass smtp.mailfrom=adriano.cordova@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id ADA7D3F162
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 14:54:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1745852049;
+ bh=hIxsaIPqzHp5BjtZUGWPuYZscXi8HjXuqCuqKc1l68Q=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=jvCI+y88mbBdKqxaK5aUo5l2py5wVFaDLR2yCPuhh/TLuFlTxVOWIhLsPHU6F0+OF
+ Tegh7xMWM+LWWiUASA2m5dbZ6NRyqXSCYEk6W8rRB8BKH/gL4hxatZJdXqDELCZwCP
+ jSUQ3ko1+Ssq4sw1eLTJ+eDfgwxPbfmzPX2T/yryQKu/iv/cqE65KcAjdOaLJfuHEn
+ h7aHJjLNNdOF+HOBTB52dB6V324s7HQRWT2vurhVt8qcGj3J02EWeCRbuceTw8sYmo
+ mcKhSXlCxf8gNfwBOvFykQU++ncmDqVe+hychIu1dRdkC3WxVGv192JfaZWMm5lmvA
+ Bty2ckJDNYunw==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-39abdadb0f0so1582807f8f.0
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 07:54:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745851998; x=1746456798;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UX4AMwM/U6aAgvjv+rJJQ6DwXbhVM2OuZE4HfGEcz1E=;
- b=vzQFEXIqdlYiS3moO6ZM0zhHZ6kCWNuFELYcwN876l4pdAdVojgmKWk+IRNzV9fXXp
- 6RgiuhfYbbWu7xBSOLHc4Qv032OuQJUiRyJlNgzosKemzZHZpVJGADvIj0aY7zF4PfTD
- 3UrxRwplfg6ru/ZQIyhG8WN4GJObQfqBiuRMrk3TGnToD/3H07Zh62wPZGbdAHmE2tAD
- ekXaRI+N+VAGQUDbBchGlGaNxumsFRk6TKfzQn4KJN1+ns5wCe1nevEW1mUuVgqUPKEJ
- 8EAYzGcOafgAqnrZfqSYqkpuFLq1YL+3nYX30OJ99RjsM9oo/KyVeIFqSe3MFZ4+h+Zu
- yZfw==
-X-Gm-Message-State: AOJu0Yy+S7FPkUnMNOjchfc2of/yjnMjSCLd+W4xJYjyH7hEBAJVemwV
- JUXHR47/FP9t5FKYPDWdjfqwiZScE6yT5lXyuVMdIPqkppqTd50ps9/CGHpc
-X-Gm-Gg: ASbGncssA8A6wrGk81lWwTeYlofPNRDOVk9MWsf0g2ID6K/4LoMQc8pZlwyg9tEnKcJ
- L3x5vhr6U0yVNZjid8CgsUod60j4a9rTbESO66D5jUyS8jL8+WiXuqlevIW8xnZsHMhehYUxXu7
- WZqJ0CFiHHADggVyTjIqqtMWxqUxJkgcjXRtH9ZmI5P2Py2cTdtY6k/XzxBIXV0wHyO2oIa2WlT
- cRgLqrT3lezWuQ2kI/hKTfy4aWhKB7FFx/LlDMyjUAg6EC/+bz6umRhzSABGVj8qeU3WrAwVfsn
- xcav6pZhWlMzN2JACjmgvX/xze7ECxDNxNFwTeoD/6Xok/pv4hBw
-X-Google-Smtp-Source: AGHT+IG4U10SiBiwbp9fOCX4nag9hQRYHvrshgYtfclhRDCnDD1MqF5LlTWyoQnP9GmJigZKsIolsA==
-X-Received: by 2002:a05:6a00:1809:b0:736:34ca:dee2 with SMTP id
- d2e1a72fcca58-7402710a56emr172055b3a.4.1745851997557; 
- Mon, 28 Apr 2025 07:53:17 -0700 (PDT)
-Received: from adriano.. ([2800:300:6f54:8180:1104:675d:ec62:4e96])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73e25a9a58bsm8317367b3a.143.2025.04.28.07.53.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 07:53:17 -0700 (PDT)
-From: Adriano Cordova <adrianox@gmail.com>
-X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
-To: u-boot@lists.denx.de
-Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
- trini@konsulko.com, o451686892@gmail.com,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v2 2/2] efi_loader: fix typo initd_sz to initrd_sz
-Date: Mon, 28 Apr 2025 10:53:40 -0400
-Message-ID: <20250428145341.2091400-3-adriano.cordova@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250428145341.2091400-1-adriano.cordova@canonical.com>
-References: <20250428145341.2091400-1-adriano.cordova@canonical.com>
+ d=1e100.net; s=20230601; t=1745852049; x=1746456849;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hIxsaIPqzHp5BjtZUGWPuYZscXi8HjXuqCuqKc1l68Q=;
+ b=IZ8JOXEPbEkWJgKcUiYT+c4JQm52vhH6XAx5qD3IvxiXlcIxVkouBOITY1jYfQ01RQ
+ 9sN5rY3MJmgInwy6l5NBExizloORbEtU3OvlCCfb6DdyrXzpg8i4FYVrecFv4eGIR9kw
+ p3//0zUWXvQkQFuINbkqPPSGWObPXVaJC5QHUkeMm2FVYwNka1rGxJVqJOn4c29EN5js
+ llK0fPNHx8VWKpUXvQxyEPSKCa5n81rgA/ckxriKv5HDwEzcknzamNwbXRhY2kcuzriT
+ jzd+IBThf2bqRANA8bVC8TBybI6EY+cK5EuWpsGlAHHoAusYR45QMroz7WsG8ZxCzjDd
+ 5gdQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCW4ievB5A8cg3Ivf1CHra1bKMiKQiuS5yduS6ry5i5pGsaNDAwn2zcXwkaaXsTayJerQbrm8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCTOYbJgDaNmemV+wrjMpnr1mPQgdMiEF3awlkbubu8mNqiXIp
+ iuvsicAMOGhf0gJKZzn9p7tWzpaaw3dv46WtXqJgP5r2n7Qh5NXpHuy5omFURdAod082ofg3hbX
+ SDw3Sf+4A2vHyYsXH/qQzPoAD2TFfcrpyPd9CSc0icqM1qLqFFYY9o3sTlui5si3F0mMH0eimhG
+ JhSJVgvSbUwamlY2/lhl3fTvvnAqRhcICVqFR3nuAnbg==
+X-Gm-Gg: ASbGncsisbt6ba5EyuFmeDaIrVBhbSAR4YirROg+8pwi3k4h4OlmyBkVd9ePFxg6+3f
+ q0dpn/K4YbumcJ4Nj9dTX5dt8ATfwHsXig/ehgMLWtwVyCBExKcACdYkqaad1Wc/Z5xGP+zR8FR
+ aytmF+hNzJJZ1pNWtOhf18z97gNQ==
+X-Received: by 2002:a5d:4885:0:b0:39c:1404:312f with SMTP id
+ ffacd0b85a97d-3a07aa67ab0mr4821858f8f.1.1745852049027; 
+ Mon, 28 Apr 2025 07:54:09 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEthrLwhrgJP1+zgyrLyJ51ppXZIA0eWEcdtYCi4Es7EyccLHBy633LSubgDbhX4LdhT+zNpYwVAUGRCBNol0I=
+X-Received: by 2002:a5d:4885:0:b0:39c:1404:312f with SMTP id
+ ffacd0b85a97d-3a07aa67ab0mr4821841f8f.1.1745852048651; Mon, 28 Apr 2025
+ 07:54:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250427234527.2076444-1-adriano.cordova@canonical.com>
+ <CAC_iWjJ2-mA5URoT8A2CRBXG17zm-CCkSyiW2gN-V2nyv3Pa5g@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ2-mA5URoT8A2CRBXG17zm-CCkSyiW2gN-V2nyv3Pa5g@mail.gmail.com>
+From: Adriano Cordova Fedeli <adriano.cordova@canonical.com>
+Date: Mon, 28 Apr 2025 10:54:46 -0400
+X-Gm-Features: ATxdqUEzN7cfPvaWoK41Ti6ZUOWH51XHrKrLYbLKLhn1Xc75Q_vHc7nvt4VcFrU
+Message-ID: <CAFQa3M+E9_yx2vox3Psmi5XgcVG80KWQJiaKO7_P7hSPbYFSiA@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: bootbin: do not load an initrd if none is
+ provided
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
+ xypron.glpk@gmx.de, 
+ sjg@chromium.org, trini@konsulko.com, o451686892@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,33 +107,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
----
- lib/efi_loader/efi_bootbin.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Thanks, I updated the patch and split it into two
 
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index 6a189c31ffa..94ba7c5589b 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -215,7 +215,7 @@ out:
-  * Return:	status code
-  */
- static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
--				      void *initrd, size_t initd_sz,
-+				      void *initrd, size_t initrd_sz,
- 				      struct efi_device_path *dp_dev,
- 				      struct efi_device_path *dp_img)
- {
-@@ -233,7 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
- 	if (ret != EFI_SUCCESS)
- 		return ret;
- 
--	ret = efi_install_initrd(initrd, initd_sz);
-+	ret = efi_install_initrd(initrd, initrd_sz);
- 	if (ret != EFI_SUCCESS)
- 		return ret;
- 
--- 
-2.48.1
+On Mon, 28 Apr 2025 at 10:32, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
+> Hi Adriano,
+>
+> On Mon, 28 Apr 2025 at 02:45, Adriano Cordova <adrianox@gmail.com> wrote:
+> >
+> > Do not try to create an initrd device path nor try to register
+> > an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
+> >
+> > Handle initrd installation in efi_binary_run_dp with
+> > efi_install_initrd, imitating what is done for the fdt.
+> >
+> > Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
+> > Reported-by: Weizhao Ouyang <o451686892@gmail.com>
+> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> > ---
+> >  boot/bootm.c                 |  3 +++
+> >  include/efi_loader.h         |  2 ++
+> >  lib/efi_loader/efi_bootbin.c |  9 ++-------
+> >  lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
+> >  4 files changed, 36 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/boot/bootm.c b/boot/bootm.c
+> > index f5cbb10f0d1..9693e0d336d 100644
+> > --- a/boot/bootm.c
+> > +++ b/boot/bootm.c
+> > @@ -1008,6 +1008,9 @@ int bootm_run_states(struct bootm_info *bmi, int
+> states)
+> >                         ret = 0;
+> >         }
+> >
+> > +       /* Clear the initrd from a previous boot */
+> > +       images->initrd_start = 0;
+> > +
+> >         /* Relocate the ramdisk */
+> >  #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
+> >         if (!ret && (states & BOOTM_STATE_RAMDISK)) {
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index 144b749278a..84e8cfe320e 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t
+> handle, const char *env_var,
+> >  void *efi_get_configuration_table(const efi_guid_t *guid);
+> >  /* Install device tree */
+> >  efi_status_t efi_install_fdt(void *fdt);
+> > +/* Install initrd */
+> > +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
+> >  /* Execute loaded UEFI image */
+> >  efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
+> >  /* Run loaded UEFI image with given fdt */
+> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> > index d0f7da309ce..94ba7c5589b 100644
+> > --- a/lib/efi_loader/efi_bootbin.c
+> > +++ b/lib/efi_loader/efi_bootbin.c
+> > @@ -215,12 +215,11 @@ out:
+> >   * Return:     status code
+> >   */
+> >  static efi_status_t efi_binary_run_dp(void *image, size_t size, void
+> *fdt,
+> > -                                     void *initrd, size_t initd_sz,
+> > +                                     void *initrd, size_t initrd_sz,
+>
+> This change is unrelated, please split it on a different patch
+>
+> >                                       struct efi_device_path *dp_dev,
+> >                                       struct efi_device_path *dp_img)
+> >  {
+> >         efi_status_t ret;
+> > -       struct efi_device_path *dp_initrd;
+> >
+> >         /* Initialize EFI drivers */
+> >         ret = efi_init_obj_list();
+> > @@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image,
+> size_t size, void *fdt,
+> >         if (ret != EFI_SUCCESS)
+> >                 return ret;
+> >
+> > -       dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd,
+> initd_sz);
+> > -       if (!dp_initrd)
+> > -               return EFI_OUT_OF_RESOURCES;
+> > -
+> > -       ret = efi_initrd_register(dp_initrd);
+> > +       ret = efi_install_initrd(initrd, initrd_sz);
+> >         if (ret != EFI_SUCCESS)
+> >                 return ret;
+> >
+> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> > index 3936139ca41..6a863c3556c 100644
+> > --- a/lib/efi_loader/efi_helper.c
+> > +++ b/lib/efi_loader/efi_helper.c
+> > @@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
+> >         return EFI_SUCCESS;
+> >  }
+> >
+> > +/**
+> > + * efi_install_initrd() - install initrd
+> > + *
+> > + * Install the initrd located at @initrd using the EFI_LOAD_FILE2
+> > + * protocol.
+> > + *
+> > + * @initrd:    address of initrd or NULL if none is provided
+> > + * @initrd_sz: size of initrd
+> > + * Return:     status code
+> > + */
+> > +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
+> > +{
+> > +       efi_status_t ret;
+> > +       struct efi_device_path *dp_initrd;
+> > +
+> > +       if (!initrd)
+> > +               return EFI_SUCCESS;
+> > +
+> > +       dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd,
+> initd_sz);
+> > +       if (!dp_initrd)
+> > +               return EFI_OUT_OF_RESOURCES;
+> > +
+> > +       ret = efi_initrd_register(dp_initrd);
+> > +       if (ret != EFI_SUCCESS)
+>
+> You have to free the device path here
+>
+> > +               return ret;
+> > +
+> > +       return EFI_SUCCESS;
+>
+> Get rid of this and just return ret.
+>
+> > +}
+> > +
+> >  /**
+> >   * do_bootefi_exec() - execute EFI binary
+> >   *
+> > --
+> > 2.48.1
+> >
+> Thanks
+> /Ilias
+>
