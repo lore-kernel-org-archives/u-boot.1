@@ -4,169 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30819C36005
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 10:41:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C161CC36005
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 10:41:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BDAD82A0D;
-	Mon, 28 Apr 2025 12:40:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id ADF8D82958;
+	Mon, 28 Apr 2025 12:40:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ObG7SfDq";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="dB+pqdkI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6F24829E2; Mon, 28 Apr 2025 12:40:00 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20605.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::605])
+ id 0890082145; Mon, 28 Apr 2025 12:40:54 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2CBE82145
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:39:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6636829E7
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:40:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wqgBRjIdIDXWmxRX2ASiIO+ZHEPHXzmZxaDzojmmp3zP3smeBe7FtzWljk1W+ZJXdTV9NcHqUr+XctOCuPsNfpwzo+ZNMEiZ7nUGscT4VFhtWk2SymFk5YNC7PGsbAl9dKR92KFbyq5iDMNgi/cKS17zyDr2KScs0pWqRzm+GRf6pG6w3ze86gAYnHE93wVZsLuSvHsheo1Fl0D+4VSLCkR4HsUSTN62ChX9zmc8iJLxKltGmO3NrtHdBKAevFR5ntu1KtEILgXB4S5jt4TK59ACB3zLN1g9fIJCvhQlV7W8LhUTT/4mv0R8/Ne9IjWAk1iD9tFJbwnTOqQWPSE1kw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e2qrdSLzSxQ9sSMsD+oe638qbf8U+u14JXSMQcSdGR8=;
- b=zJsdg8gZwzc8MWo4PViP0QHlRCxjy9qJ2EA27LSbCT2sP4H7i9AwIp8/tjmvODeMRMwlG3ymtOWv+sgjOZJHpmPXMWH7aO6xW8SpF5RyrZBurD1F6pafFxvRZkAIc3Ddvdsqf/9XwMEZMHsTiE7GdDhq29EPBzzeOavHR5xq2xK1tZ064xsFj0qcDSL1YqkfeWJ5zpuG3vxXi7tv/kVc2w6ivOuRo4i/ph1IpU81LD6qMaV/Aec/iY9FHMq3iFn0j5dTdPICpcS4Po2DPg6T9Nsk6gNH3XeclNh0FSE/Y+4iRLHnTqywhCMJQbsRnxB1Ij2NJuAVUnwMtBJ5ZROuRA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e2qrdSLzSxQ9sSMsD+oe638qbf8U+u14JXSMQcSdGR8=;
- b=ObG7SfDqoVjBCw3MI7Ks5LbOfyr9zNLQAcZxQrcA85K1P5fPdGSUbhKFl316kGq8uEdzuOZbTgyqk6c/fNmp5VRq6PURTBo4Xl7bDcK2xItQFR+7Ys4PHHwxYtYtY4H4Is++ywt0mVHxyoyx2WvPTF04kGBGC4DnpXo0iChsjCWw+qDeUhpOtefK/kvm32V6byBWJqXerbAVeqs5nk0+NgZrUXyaG2BF2lRaoihSSBuATSy+xLt8kL711dNhfMItdGmY3vHi70iqE70urEYxhgbRQne+vrZcFJJw62G+wCLiHRsa8aRf39KVjBNsfWiu1/GorBcl17ReiDO8YlGRKg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by PAXPR04MB8895.eurprd04.prod.outlook.com (2603:10a6:102:20e::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.30; Mon, 28 Apr
- 2025 10:39:55 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8678.028; Mon, 28 Apr 2025
- 10:39:55 +0000
-From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Date: Mon, 28 Apr 2025 18:37:44 +0800
-Subject: [PATCH v11 21/21] Makefile: add some files to CLEAN_FILES
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250428-imx95-v1-21-a3df9c340ace@oss.nxp.com>
-References: <20250428-imx95-v1-0-a3df9c340ace@oss.nxp.com>
-In-Reply-To: <20250428-imx95-v1-0-a3df9c340ace@oss.nxp.com>
-To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>, 
- Fabio Estevam <festevam@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>
-Cc: u-boot@lists.denx.de, 
- =?utf-8?q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
-X-Mailer: b4 0.13.0
-X-ClientProxiedBy: SI2PR02CA0001.apcprd02.prod.outlook.com
- (2603:1096:4:194::10) To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1745836851; x=1746441651; i=xypron.glpk@gmx.de;
+ bh=OmAiNLZoBQMuI4xfcOeHUyPaArO/pjSb+iuR3qUKkuQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=dB+pqdkIvHgKysyk+Yd+Nzv0/AsjoEdVCQFeg5wFIzjY+OPwie4l+WL9oOP36Abz
+ IefUuNnyFZEjO208wrJuKw8AdaCZppFihCf2HaAm87k41q9Hq3xaX5uSmveyxif8j
+ hYxpufG9BbUQJCUVBBOOS8AqUAwpJz83H0NtFJ1NfcybkgoKPxxF45EJ37bZfDXlb
+ SeHQRIlNJ6QV0gHsP4bCMvqO3RyseorIRruN95gjx6Y5QQFmWhYt0deNVzAbnPxgu
+ Ntp0ODi/Gihc5uk/4E4AqYJqO4DP9tIqmCcClISYEpItJyeK1k5uPzVkLXSv4YIQi
+ dy4W+jYPIXETRc9fZA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.110.13]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1ML9uK-1uQKZN12oc-00Xlm7; Mon, 28
+ Apr 2025 12:40:51 +0200
+Message-ID: <f9010568-6a52-4486-9c29-794107f2e840@gmx.de>
+Date: Mon, 28 Apr 2025 12:40:46 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|PAXPR04MB8895:EE_
-X-MS-Office365-Filtering-Correlation-Id: c99c51fa-91b9-44c1-9fd8-08dd8641041a
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|7416014|52116014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?c0FHM3Njb0R1SGFBU0x4TkpTU0ljbndmSStRUUxpbDNNU2tkZEJpd095Vkdq?=
- =?utf-8?B?NUIvcGVvaFZ4WGozTWsyRU12UTFrWk1WRXNHRmZWVzBQR1VJc2hpMmpHZTRY?=
- =?utf-8?B?MkZ2M21SSithaVphNmZrWVhIb0VnYVJUL2V2QmRnL0M0U3F5RklKSjZBRDBn?=
- =?utf-8?B?S2E4ZDJ0OXphNFlvRkdxblNCY3A3VWt3YktjTXBFQ1l6V3NVMnlaWEVxYmE1?=
- =?utf-8?B?ZVdleHdiS2ZRM2NnaGVOMUZ3dXI4ZXlXMkNsU1NBbmtsOUlYMUpDb2Jxc3F0?=
- =?utf-8?B?M20vT0dQaktKTGNLMWZaVXB1b0J2Q2pVUTFSZ3d4MU1VWTkrYTBMZHJoTHRZ?=
- =?utf-8?B?TjFFdnNDN0FKL2UyRVJpNlNhWWhDZ0hXak9TaE5EYmk2azFyMlk5OUFLeHRE?=
- =?utf-8?B?czUyZXJlc09YOHdPQTFXL0xucEhpRTJJY0xST2dHVUlSQVNRNVdEbDZ1cUls?=
- =?utf-8?B?aUVUeVFHcmhLQ0h3S293Qi9lWFlyaFUwWFo2RjdUS1poOHNvNENXTWQzcm1M?=
- =?utf-8?B?aW9OVVZwajVJTlFVa0IzS0owYWVpaHVQRGY2NFppeDN4bEU3Ym5Jb0s5VUFU?=
- =?utf-8?B?MzlJVXY4WGtFZUxsT0JnZkVyd3FJU3g4ZWxMa0w0cHZERHljVUtUd1pURHJM?=
- =?utf-8?B?bXpRNnRlRnY4NTZlZEJLMmJGR3JJeXBIaEkxQmRMeUxjb3RwUjFtK2xvQVc4?=
- =?utf-8?B?MDQ2cEZTdHF2UWZUKzQ3UXI0TmhGRmx4dlh6T3FPZTJlMGNjRXpoV0xSTXJE?=
- =?utf-8?B?a0hoRUs0ZDJDVDNpbmo1cDhHdU11RFZMNmVqNUNZVUpSTWNoMEU1MXg1L2pu?=
- =?utf-8?B?VG5PempnMGx4aTlLQWZGL1BISFFDc20xSTVtZnpJclZzSUNDcUVtREQ3WXVX?=
- =?utf-8?B?Vnpla0tSWldkUkV4YkhLZ2hOUTJkYWpPRk9MQmpNVkZwYlRYYlNNalV0aU50?=
- =?utf-8?B?L1pweDNUQVNPVitMYUNpZFd1akgxaEFab2M1M1lESTVOSVNKN1dqOUpRZjJG?=
- =?utf-8?B?alFXdk5ZYUY1NHNQK2RwbDZTd1Z1SXNVQTBpYmVkK1BsWGw0ZVNBc21YQmR6?=
- =?utf-8?B?N3VuYmR5VWRYNFp5b3k2TG9XTU0vbTk1ZS96UnMyaU82WDZOU1dhckFKYjlz?=
- =?utf-8?B?d1hzQnlBbzEvWTNRWWw5YWFJWXU5K2RJOGpXV1ZQTjNRaVo3TFkvTG9kOWZp?=
- =?utf-8?B?blZiMm5TMDlybTRSTEZqcGdNZHV5OW4xVDNFTnVqRVJwZis4K21nSzhZZ29C?=
- =?utf-8?B?S003dGEvVkNzcGdqMDlNVkg1eEFmR3pacVZHa2hEck1Da0ZpRERkaG5vYzdH?=
- =?utf-8?B?M1lGMEN3bnVQczB2Y2NoclYyODMxL21EUHJrS1lzb3o0V1g3QTVoZ1hLWEZF?=
- =?utf-8?B?ZkFEU084Nk13ZGtFVHQ3TWFickFQM3J6dU5WYVp6SlhDNkFrSmhiZkpsbm05?=
- =?utf-8?B?MmF5VUhEQmNqbk1xbU15MFRnN3RoL2d5eDNRTW5WVVhmc2VqbHRyMDJkODJJ?=
- =?utf-8?B?elc0L3RWbWxuZmxJUCtmdTZxSG5TbnhORW1JMVRUb1VwK1dCMytWOWNNcUI5?=
- =?utf-8?B?ZWtKK3lDUERocFVjTlVTTlZBRHhXQis5MVFNTkFvakZxS3RTRG9JR0pEK3I1?=
- =?utf-8?B?aW1NQk4wWEVSajRISmEvN2tPQWNOMHJGbzhSc3RsM0lsdGlPQUpYWU50SUk3?=
- =?utf-8?B?SXFBSitudnQwcTlGUG16VE5GbUphNzRmTjFycnBVNENVWUgrS240dGVxRmR5?=
- =?utf-8?B?eHpGeW9lQTM0dGxuc2pDb0N0N1NPZGJld3JQNXhiamtxOTRsNGRISnk0Z0Vt?=
- =?utf-8?B?OGlXSGpsR2plNkgwZkpIbENWWFA2V0lGSFlhSDZERmlwdkN6dTRDczV4bHk0?=
- =?utf-8?B?WThuNVNhMjlvbFdIL1dmRngxanJTZm9XUlRDR1FRblJhcTcrZVVubC9XbVBG?=
- =?utf-8?B?TTF3djlQOFhEdTJlSHBMdno4Zi9YT21rUW1lTTVXcG9wTExYMXViR3Ftc1N5?=
- =?utf-8?B?VVlvU012TjlBPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(52116014)(366016)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dllPVXFwYlRrZUNRbWZCYnlsODFWL1EwdUNITm9KZUZDVXQ2U2hrVUFreUF5?=
- =?utf-8?B?U1lZUEhQTHRhUUd4cmxvckl5ZW0yNExMejg3Z2FPZUE4b2txNmQ2SkpoakNZ?=
- =?utf-8?B?a2YvZjk5dDNoL0M2SFFtSkpESmZ5YngrUEZXbXdkd2k0MnpiQm8vclRtQitO?=
- =?utf-8?B?QXBuM3RxNjZoSVlIcWtaaVFUbTQvSklKcFliaTdtMmQ3U3FBQ0x2TjBXUmx5?=
- =?utf-8?B?OG9ISWpBd0I4WDdlaWVNUnh1ai84TEdKUThvYk1Cb1NQNUtwRFZWdzlWbmNm?=
- =?utf-8?B?NFcwMWhYMUhKRkVPMnFTQU83WlBrTlNtOGxkODRqaXRSZnQ3NEVqNk5MQ05G?=
- =?utf-8?B?N25POWZmVGFSTDhHZGhpeW03VERUSW8wSXNteStYSEhLc3czdUVtRkhCek5w?=
- =?utf-8?B?dGY0bXdPbDB3MFQ4SUx2elJJUmNxTWhNSUxuOWhQalBLSEh3cE1jVnJmNTJp?=
- =?utf-8?B?TS9UVFpkaWp0c1lsTnUwTVExRnJQM0RPaG9oR05KcGRRL29wbGVVSDE0ZXdS?=
- =?utf-8?B?SlczdU83TnpTMG5IYnJpR2hmcmh6eW9mSzkwYldJU0FYRkdtY2ZIVlhZbzJ5?=
- =?utf-8?B?YjFEZHMwQVh3YUdqQllyckFjL0pwUjR3NWFEUnk5YlJ0c1kwSnptcW1SSmdM?=
- =?utf-8?B?UkdSSlZ5aDJnNk03MlArODRxSFdUOEFYYTlFNGpSWnA1ZDV0ZDhDU0VPK1Mz?=
- =?utf-8?B?Z3QwbGtERy9oYzhraDZnVmJDUThzQ3dmR0ZNQnBhZzlHeVlha2xxaUQzVVN2?=
- =?utf-8?B?MnI4WDRIaDNRaTRkVEhRRTJSS3FmUGI1eHRUZ0hvZW5WaDFaaEFwdkpHd0hW?=
- =?utf-8?B?aWNibDFKWHZ0cEszUUprQkNTd0RTUC9qdm1yWFNkYVpHOGZVSDZNcUVNd1oz?=
- =?utf-8?B?ek5EMndZMGNkZnM1Y25DR1NCK3NSTTd2UGRza2JOV1Y3QzZvb0hNOFYwK2xY?=
- =?utf-8?B?c2p2U2E3STZnbGtSUFFSRVdTb0FoQjhNVDVYYUp0SnpLYUN1WFZFS3pETzM3?=
- =?utf-8?B?d25TQmx2dGpmSVEvZFRucDJ6NDc3emdUWk9WNUhKYVdkTXhWUXZkVDV1RWdO?=
- =?utf-8?B?L0psVEtqNmgxVVYySmV0dCt2bGhEYkRtR1RFWStJWHRZMGFQbm4rNEg3YzBQ?=
- =?utf-8?B?TjZNU2dUOWtEMDVJa0ZoVXdGcWVqRW5ldzlVNWVRME1VaDZBT3pQQkV5OHAx?=
- =?utf-8?B?Y2QxYm1SbWpiVDhHQkZpcHpneXdDVFBuZHdtejIzaHdSS2Y1S1J4dmdicFFx?=
- =?utf-8?B?ME5SNTNraUcvVEF2SVpRWGxUbUx1eTJESHoyZUhxNFNjdEpIb0lXNUhtMFIw?=
- =?utf-8?B?UjZFN2R2MTgrOCtHTUdFejRGeEJEeGFZN0ZUT3lSQVZnUTJiNFR3L0QzNHRq?=
- =?utf-8?B?L2w0L1dGQjA4QklDNEZkYlRpRDNEWVJzelE1c3hIM01BTTVzMi9RVEhLZ0th?=
- =?utf-8?B?dXlIVitOMkFyTHNJOXJQZ1pjWmZQaHA4Z0FlYWF3T2NBQ2ZUTWE3bDVURnIw?=
- =?utf-8?B?K3lGYXphL0xCMlUvdEpNT2NURGRHcHdZaFIvS0kvVHN6OUZSMDhuUngrU0ht?=
- =?utf-8?B?T2YvZW54UXNtZUZRcWt1ZjdkRURVTVc1Zm9GODlUSXdZSmZTSEJsSURUZkV5?=
- =?utf-8?B?R3RyOVRIdUxnOGFwSS9aT1lNWk82eFhYSzV3dFdacHphdzBZeVpkMUIzQWps?=
- =?utf-8?B?TGl6dGxQTytkS3hLbDhnR3A2ZVhJblRPNzU1c2thdGhLcjFuTXlHTENQR0l1?=
- =?utf-8?B?ZTJPSlRocEtOZWhJQTFhZHh4ZjJKM0wxa0pveGxsSm5uSW9iU3JtYTgzRjlv?=
- =?utf-8?B?bWxUdzE3K3d1ZVRLZjBuNlU0NVBZMHRWS0F2ZUFmcUdYcE8wSDlTMlNLTlVz?=
- =?utf-8?B?NHAzT3BFRkhvaCsvNzFjZk90bUhwS05CcExxK3BUUDg5STM3N0piajNjUHN6?=
- =?utf-8?B?RHFPVDVqUCtiOFBMSnFCbGFpWWtPM2tWYTRNbkRwWUVHMm1yckJwcjVESmhV?=
- =?utf-8?B?WVA5eUozWWIva01Wc0l0WE1sNDl1WHVacnI2WGtKK2x2aDZPWkxJWmZoWEhU?=
- =?utf-8?B?bUh2NkdJQml1VWNYSGNWd1NwVXpobXFOZWd3bEc2YTI3d1htckZFaTFaS2c3?=
- =?utf-8?Q?6JR+G0DfyR3mHIosF0ath1+mX?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c99c51fa-91b9-44c1-9fd8-08dd8641041a
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2025 10:39:55.7372 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZMD+vkcaO/a6YnZC1CZAPwfRfN/ybetvtOhGuZB/jVR4C7W4MgHJG400U7nwUd37YuFZYMuTBHksfd8Zlhb1Ew==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8895
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] efi: add EFI_DEBUG_IMAGE_INFO for debug
+To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20250423213145.1959046-1-paulliu@debian.org>
+ <20250423213145.1959046-4-paulliu@debian.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250423213145.1959046-4-paulliu@debian.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:w2MLV/uIDgXase7jyF/wIOBXfV5mJBKoULMSOHKhUHfN/JJ3/NP
+ gUYxVaV7mb0926zfpsuUSl8eNP9ZM/bEbF26yl7xoY7k6xrojnMYOLTmgpJJ99IVSNzcuKi
+ y+mThez76UZurKpGN2cOQlcPB0L8HW24x0Uur+ki7HC1NN+EoIMCjIogCiqNFr6HeVxvgB3
+ L1OsgQyebAQPxxrb1xhGw==
+UI-OutboundReport: notjunk:1;M01:P0:jx3yBh9p6f4=;hKUigUHFT1CwLkv0yFYlChaKYej
+ 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
+ ZN5fBB8MFpxGEtsP/eOOzp6aJGThl+FLOJ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -183,34 +123,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+On 4/23/25 23:31, Ying-Chun Liu (PaulLiu) wrote:
+> From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+>=20
+> This commit adds the functionality of generate EFI_DEBUG_IMAGE_INFO
+> while loading the image.
+>=20
+> This feature is described in UEFI Spec 2.10. Section 18.4.3.
+>=20
+> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   include/efi_api.h             |   2 +
+>   include/efi_loader.h          |   5 ++
+>   lib/efi_loader/efi_boottime.c | 136 ++++++++++++++++++++++++++++++++++
+>   3 files changed, 143 insertions(+)
+>=20
+> diff --git a/include/efi_api.h b/include/efi_api.h
+> index 0f4245091f1..ba87af17c1f 100644
+> --- a/include/efi_api.h
+> +++ b/include/efi_api.h
+> @@ -571,6 +571,8 @@ struct efi_loaded_image {
+>   #define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
+>   #define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
+>  =20
+> +#define EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL  0x01
+> +
+>   struct efi_debug_image_info_normal {
+>   	u32 image_info_type;
+>   	struct efi_loaded_image *loaded_image_protocol_instance;
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 370bc042f70..babe23a8a83 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -617,6 +617,11 @@ efi_status_t efi_root_node_register(void);
+>   efi_status_t efi_initialize_system_table(void);
+>   /* Called by bootefi to initialize debug */
+>   efi_status_t efi_initialize_system_table_pointer(void);
+> +/* Called by efi_load_image for register debug info */
+> +void efi_core_new_debug_image_info_entry(u32 image_info_type,
+> +					 struct efi_loaded_image *loaded_image,
+> +					 efi_handle_t image_handle);
+> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle);
+>   /* efi_runtime_detach() - detach unimplemented runtime functions */
+>   void efi_runtime_detach(void);
+>   /* efi_convert_pointer() - convert pointer to virtual address */
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
+.c
+> index e2665459e44..bf37580c06b 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -2130,6 +2130,12 @@ efi_status_t EFIAPI efi_load_image(bool boot_poli=
+cy,
+>   		*image_handle =3D NULL;
+>   		free(info);
+>   	}
+> +
+> +	if (*image_handle) {
+> +		efi_core_new_debug_image_info_entry(EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL,
+> +						    info,
+> +						    *image_handle);
+> +	}
+>   error:
+>   	return EFI_EXIT(ret);
+>   }
+> @@ -3359,6 +3365,7 @@ efi_status_t EFIAPI efi_unload_image(efi_handle_t =
+image_handle)
+>   		ret =3D EFI_INVALID_PARAMETER;
+>   		goto out;
+>   	}
+> +	efi_core_remove_debug_image_info_entry(image_handle);
+>   	switch (efiobj->type) {
+>   	case EFI_OBJECT_TYPE_STARTED_IMAGE:
+>   		/* Call the unload function */
+> @@ -4045,6 +4052,10 @@ efi_m_debug_info_table_header =3D {
+>   	NULL
+>   };
+>  =20
+> +static u32 efi_m_max_table_entries;
+> +
+> +#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(void *))
+> +
+>   const efi_guid_t efi_debug_image_info_table_guid =3D
+>   	EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
+>  =20
+> @@ -4095,3 +4106,128 @@ efi_status_t efi_initialize_system_table_pointer=
+(void)
+>  =20
+>   	return ret;
+>   }
+> +
+> +/**
+> + * Add a new efi_loaded_image structure to the efi_debug_image_info Tab=
+le.
+> + * Re-Allocates the table if it's not large enough to accomidate anothe=
+r
+> + * entry.
+> + *
+> + * @param image_info_type  type of debug image information
+> + * @param loaded_image     pointer to the loaded image protocol for the=
+ image
+> + *                         being loaded
+> + * @param image_handle     image handle for the image being loaded
+> + **/
+> +void efi_core_new_debug_image_info_entry(u32 image_info_type,
+> +					 struct efi_loaded_image *loaded_image,
+> +					 efi_handle_t image_handle)
+> +{
+> +	union efi_debug_image_info *table;
+> +	union efi_debug_image_info *new_table;
+> +	u32 index;
+> +	u32 table_size;
+> +
+> +	/* Set the flag indicating that we're in the process of updating
+> +	 * the table.
+> +	 */
+> +	efi_m_debug_info_table_header.update_status |=3D
+> +		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +
+> +	table =3D efi_m_debug_info_table_header.efi_debug_image_info_table;
+> +
+> +	if (efi_m_debug_info_table_header.table_size < efi_m_max_table_entries=
+) {
+> +		/* We still have empty entries in the Table, find the first
+> +		 * empty entry.
+> +		 */
+> +		index =3D 0;
+> +		while (table[index].normal_image)
+> +			index++;
+> +	} else {
+> +		/* table is full, re-allocate another page for a larger
+> +		 * table.
+> +		 */
+> +		table_size =3D efi_m_max_table_entries * EFI_DEBUG_TABLE_ENTRY_SIZE;
+> +		efi_allocate_pool(EFI_RUNTIME_SERVICES_DATA,
+> +				  table_size + EFI_PAGE_SIZE,
+> +				  (void **)&new_table);
+> +
+> +		if (!new_table) {
+> +			efi_m_debug_info_table_header.update_status &=3D
+> +				~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +			return;
+> +		}
+> +
+> +		memset(new_table, 0, table_size + EFI_PAGE_SIZE);
+> +
+> +		/* Copy the old table into the new one. */
+> +		memcpy(new_table, table, table_size);
+> +		/* Free the old table. */
+> +		efi_free_pool(table);
+> +		/* Update the table header. */
+> +		table =3D new_table;
+> +		efi_m_debug_info_table_header.efi_debug_image_info_table =3D
+> +			new_table;
+> +
+> +		/* Enlarge the max table entries and set the first empty
+> +		 * entry index to be the original max table entries.
+> +		 */
+> +		index =3D efi_m_max_table_entries;
+> +		efi_m_max_table_entries +=3D
+> +			EFI_PAGE_SIZE / EFI_DEBUG_TABLE_ENTRY_SIZE;
+> +	}
+> +
+> +	/* Allocate data for new entry. */
+> +	efi_allocate_pool(EFI_RUNTIME_SERVICES_DATA,
+> +			  sizeof(struct efi_debug_image_info_normal),
+> +			  (void **)(&table[index].normal_image));
+> +	if (table[index].normal_image) {
+> +		/* Update the entry. */
+> +		table[index].normal_image->image_info_type =3D image_info_type;
+> +		table[index].normal_image->loaded_image_protocol_instance =3D
+> +			loaded_image;
+> +		table[index].normal_image->image_handle =3D image_handle;
+> +
+> +		/* Increase the number of EFI_DEBUG_IMAGE_INFO elements and
+> +		 * set the efi_m_debug_info_table_header in modified status.
+> +		 */
+> +		efi_m_debug_info_table_header.table_size++;
+> +		efi_m_debug_info_table_header.update_status |=3D
+> +			EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
+> +	}
+> +
+> +	efi_m_debug_info_table_header.update_status &=3D
+> +		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +}
+> +
+> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle)
+> +{
+> +	union efi_debug_image_info *table;
+> +	u32 index;
+> +
+> +	efi_m_debug_info_table_header.update_status |=3D
+> +		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +
+> +	table =3D efi_m_debug_info_table_header.efi_debug_image_info_table;
+> +
+> +	for (index =3D 0; index < efi_m_max_table_entries; index++) {
+> +		if (table[index].normal_image &&
+> +		    table[index].normal_image->image_handle =3D=3D image_handle) {
+> +			/* Found a match. Free up the record, then NULL the
+> +			 * pointer to indicate the slot is free.
+> +			 */
+> +			efi_free_pool(table[index].normal_image);
+> +			table[index].normal_image =3D NULL;
 
-When building the flash.bin of i.MX95 with binman,
-mkimage.imx-boot.spl, mkimage.imx-boot.u-boot,
-mkimage-out.imx-boot.spl and mkimage-out.imx-boot.u-boot are created.
-Add these files to CLEAN_FILES so that they can be removed when running
-"make clean".
+It seems that you just copied the logic from EDK II instead of=20
+programming according to the UEFI specification.
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+I cannot see that the UEFI specification allows NULL pointers inside the=
+=20
+array.
 
-diff --git a/Makefile b/Makefile
-index 73939748e54..261c4706c65 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2231,7 +2231,8 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
- 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
- 	       mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
- 	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
--	       Test* capsule*.*.efi-capsule capsule*.map
-+	       Test* capsule*.*.efi-capsule capsule*.map mkimage.imx-boot.spl \
-+	       mkimage.imx-boot.u-boot mkimage-out.imx-boot.spl mkimage-out.imx-boot.u-boot
- 
- # Directories & files removed with 'make mrproper'
- MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
+> +
+> +			/* Decrease the number of EFI_DEBUG_IMAGE_INFO
+> +			 * elements and set the efi_m_debug_info_table_header
+> +			 * in modified status.
+> +			 */
+> +			efi_m_debug_info_table_header.table_size--;
 
--- 
-2.43.0
+According to the UEFI specification the table_size must match the array=20
+size and not the number of non-NULL elements. If there is a NULL pointer=
+=20
+in the middle of the table and you decrease the table_size value, the=20
+last non-NULL element is not accessible anymore.
+
+A correct implementation would move all elements after the deleted one=20
+one slot to the front.
+
+Best regards
+
+Heinrich
+
+> +			efi_m_debug_info_table_header.update_status |=3D
+> +				EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
+> +			break;
+> +		}
+> +	}
+> +
+> +	efi_m_debug_info_table_header.update_status &=3D
+> +		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +}
 
