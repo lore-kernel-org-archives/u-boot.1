@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4440DC369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 21:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA1B1C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 21:34:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2D168267E;
+	by phobos.denx.de (Postfix) with ESMTP id EF397826AA;
 	Mon, 28 Apr 2025 23:34:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XNSOZUPc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nbtPqrTO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88A2F8210E; Mon, 28 Apr 2025 23:34:02 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id D61F3822D7; Mon, 28 Apr 2025 23:34:03 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4914082132
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 23:34:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A5AE8214B
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 23:34:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-72b0626c785so4568666a34.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 14:34:00 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-2d4f8c42f49so3720430fac.1
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 14:34:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745876039; x=1746480839; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745876040; x=1746480840; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DI7pSMGW1DFFL+MmCXjjiVxykiHZ6RAucpo8YZxnfc8=;
- b=XNSOZUPcRYif7TLdIGSpAAGVS39wW4W6ebtG0gFuUQtBcQBh2ulKXR3XR7VWqcD1TI
- Emod8an/o1aBe/i7jnhgXxbeEKK5iYo0/gC2OhGxmb1IfwH2R6eWOpkbaWkQ9PR8x/y9
- rTqkenjMUEZQZIU6FFnF7Tapddj1hAZHUaMZo=
+ bh=j3NIuFPC/ks9KHC0Lw7NzRpGn8YH4gsimG7eLRVTnPs=;
+ b=nbtPqrTOrDy+V+3CribOzx8Ol6GvTiYoKPhr2IU/JbLXeoLR9zioy0Y4qY0HLkSPhr
+ EdvCWJRgmS+MQ1ukeTzC4Pt//xknOTgeT/8XoJi7mHZY0K4FpfAX9Jk+9ysgDcJYZShz
+ GQIfXaP7rBhuWLyyZTuzD/bfg5kkDw3ZjgGPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745876039; x=1746480839;
+ d=1e100.net; s=20230601; t=1745876040; x=1746480840;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DI7pSMGW1DFFL+MmCXjjiVxykiHZ6RAucpo8YZxnfc8=;
- b=pArDrjr4LTxeuFfobobDbeKLm4pKqk+DCgjrER8PKZJP5KnnrNsMOgstBSanme6P+r
- 7l/S2+Hoe9pp4uAqb9IqNBO4F7SJrPSJwUxJmQpkomnhajZGXEHI1YbAub11fa2egfWT
- JrccRc5AtwfcSLDLiOUX5LSUPP+MxUzZ9G6qIMVeFje6/FxHgHkiz/rEBRrphtXnDqwj
- lNk6ZQmx2U8nJIhdmcRB6XRde+FlBepa0wTfn1MnNNzyCEDZQ2ggKIkHfat2ex3hssmy
- T1FpUlKtHw7PJ/Iv+07Ya2N82UGayTvVPbT9JlB/OYjLarxqj12JqOcoVo4s4ERGK7cH
- tG+g==
-X-Gm-Message-State: AOJu0Ywno7lJAGqSHS9U9QDP8i/DNEnzy5jLg+ygADMpVEiqEx5blxup
- gVdk3cXRc7a/zP98YXoxq/y9Idhl2P2sWN/8+VogldjrL+99HiT/aBzfStnGhvU=
-X-Gm-Gg: ASbGncvFFgmBeTAxQJyV1LiTCsRIeVZ1h0OrA03rCmX6H0FD/zzfNwN7ODjpgoiDZ4G
- 3/Yyrfv+9SYpQ+b0VmD8mw1JijyZwsWjr7h7JoS7kCibmcIPtQH/kc7rjIRff9lavFoddLEwRRO
- ota3Mv4oJ1lpBXqvv+sno5RXPQ+I+P6elh3sJ/n+CsbFdCKL8ErLvkcgnrgvCbf+bJhnR5aQCn+
- sPmlgp3rjbaabf65DOWk8RJ1CrBPSz9z2cs9WcR4pAVO30hFP3RqeLNxJLpmDWQBmHxuue7cWX5
- v5h2/awWP6RW4aQ9GfhHwXmRlR8nv5B1ph3cjKUMA2wMTpEyKxFUW5cafCDieFm0ScVBP0oYBdC
- V
-X-Google-Smtp-Source: AGHT+IEEPOQ1jJ+jWbvbF4kkdQqYj0sfDmr7YrpUYiEUxuP4kJueuoMakfGMnrTZkP6owJsBcSTuzg==
-X-Received: by 2002:a05:6830:43a1:b0:72c:10db:f210 with SMTP id
- 46e09a7af769-73088b63ce8mr799181a34.13.1745876039058; 
+ bh=j3NIuFPC/ks9KHC0Lw7NzRpGn8YH4gsimG7eLRVTnPs=;
+ b=HuIN56cdBPlS3qZgH2NRXEo8tJakvxNn5qrni4Uf3BQL4/9QiiR3aX3onoiD4zrMmr
+ YM4uTZFzIkLg1ArxGlvVHYObzNbbXr1TclBjfbjuxpoMXdE931GNKxwg77W7iiE2Q8ZI
+ xNw/ESDcfC1TarEbEUnH77Znkx+MXA57lA7CZO1cLtSn/V8PapUCagMbDECMrPJ4uR4Y
+ B+8L5FWBAlF0CWGtJVxvfOlaVnCyRhF88C9EqI2mRguwFxjlP/F6QnSOllJ7AcMDLDOF
+ yTW7NqrgNd7atV2zn7K9QLhEZm4/RITVrpn7Ep7TG1swAXd98J5geqY1CNeBUKlSWwk6
+ XUBQ==
+X-Gm-Message-State: AOJu0YxelQh85+wXQgL+buiWDGsMe7kpC2Fyosu3ExmLBpUUMDB3c6tx
+ wmk3v4gPcTer74+iUA8jR4tebYxRPDh4hByMOYLQY4szCwI0aKrieoXXuOCaFV38eKqwLy0yjZg
+ 6
+X-Gm-Gg: ASbGnctDGD6MC3DG/e4FbP1ryb9hxAT3rx/L2pGuvl1qdDx7oTCAg8Z5HAeQXygEPv+
+ dRhhKbWvl2TQEaovAFaOKFhtKpT3QRFJlC59ybXSiq9QpfqhWGY0nZ3+1em2Rl1NVHQR7RUqfcb
+ SkgKp3qbbFAf3RplD/xLaRP5Bhm7i7yqaiq7oXpjMTnOjWzb2KQ6gHDqiovvGZAWFSXb6xqTjwo
+ yRVw6PywQmnKkxAbnjwNfsDQDjFQp5fGahi3Cdnc/IwPpqUbFw2mGdXidVAYSBKEz5Hs6vp6fO7
+ lgxzDMyZ/yl3a1GM9N6sZT/bRlvuaV+sH7vGuHa4ypkJ6g4Hg352SAYijGqvMnk05OagvtWNYPA
+ R
+X-Google-Smtp-Source: AGHT+IFG0ELTbD7DD4rbpXJwsp0EmIl0LGOwFsO1QX6eaM4MLDIQj3vhj9b+3xIE/I3PqWNKR+PnHw==
+X-Received: by 2002:a05:6871:791:b0:29f:bdf0:f0f5 with SMTP id
+ 586e51a60fabf-2da464de0d8mr466252fac.17.1745876039982; 
  Mon, 28 Apr 2025 14:33:59 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b139000sm3108a34.40.2025.04.28.14.33.58
+ 46e09a7af769-7308b139000sm3108a34.40.2025.04.28.14.33.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 14:33:58 -0700 (PDT)
+ Mon, 28 Apr 2025 14:33:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: joe.hershberger@ni.com, rfried.dev@gmail.com, 
- matthias.schiffer@ew.tq-group.com, richard.genoud@bootlin.com, 
- c-vankar@ti.com, Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: u-boot@lists.denx.de, srk@ti.com
-In-Reply-To: <20250416125643.2234165-1-s-vadapalli@ti.com>
-References: <20250416125643.2234165-1-s-vadapalli@ti.com>
-Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: invoke phy_config() in
- driver's .start callback
-Message-Id: <174587603805.1121500.2508933261479177479.b4-ty@konsulko.com>
-Date: Mon, 28 Apr 2025 15:33:58 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20250417135615.2974560-1-trini@konsulko.com>
+References: <20250417135615.2974560-1-trini@konsulko.com>
+Subject: Re: [PATCH] cros_ec_sandbox.c: Drop spi.h include
+Message-Id: <174587603918.1121500.3795426693768890628.b4-ty@konsulko.com>
+Date: Mon, 28 Apr 2025 15:33:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,25 +96,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Apr 2025 18:26:43 +0530, Siddharth Vadapalli wrote:
+On Thu, 17 Apr 2025 07:56:15 -0600, Tom Rini wrote:
 
-> Currently, the phy_config() API is invoked by the driver only once since it
-> has been probed. While this works in general, it doesn't allow the driver
-> to bring the PHY back to its default reset state. As a result, the driver
-> might not be able to recover the PHY from a bad state. To address this,
-> move phy_config() into the driver's start callback (am65_cpsw_start()).
+> As this driver needs to use the special sandbox <asm/malloc.h> header
+> rather than normal malloc, it must be careful of the includes it brings
+> in. It does not need <spi.h> for anything, so drop it.
 > 
-> Apart from providing the means to recover the PHY in the event of failure,
-> the implementation is in line with the idea of "reset and configure" that
-> is already followed by am65_cpsw_start() when it comes to programming the
-> CPSW MAC.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] net: ti: am65-cpsw-nuss: invoke phy_config() in driver's .start callback
-      commit: 05dc050059d2759fde7134be06e5654ceab46127
+[1/1] cros_ec_sandbox.c: Drop spi.h include
+      commit: 7bf752238327deecda12190154864128d55f78bd
 -- 
 Tom
 
