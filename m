@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E241DC369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0215C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 440C282A8D;
-	Mon, 28 Apr 2025 15:24:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8AAA682948;
+	Mon, 28 Apr 2025 15:24:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="iKnUEDsr";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Jsudr7f4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41DBE82937; Mon, 28 Apr 2025 15:24:27 +0200 (CEST)
+ id 90C7882A8C; Mon, 28 Apr 2025 15:24:32 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3BAA82A0A
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:24:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BF1B82AA7
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:24:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9MJka009718;
- Mon, 28 Apr 2025 15:24:23 +0200
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9OevP009691;
+ Mon, 28 Apr 2025 15:24:26 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- j6wnyvvEV4fBFvKVwO0ZElzHdF7lSGZthjViw6VNBBI=; b=iKnUEDsrNKZSt2KL
- cVSjNy9PnZE/xE8pPeiWErGmiYLtNvmmm2ptzAJWPvAoZQNdtd94Fkdme6SmkJ+J
- 1rVW16k//czEwDfmNriEMcsYb2//HjSj3kyZVyQgi8ZPO8MfBQELqcIHyDx7L6KC
- UT2r+St8qY7UyDJDzYEGtnElsrAZ3PTAsN5BFnaT5DIm3HbY/zOCAk0Z8k59OfyD
- YttxQ5YLCOOPtU9b/uVVQ3fE/xYqmW+OZAaPnrKlBSMR5GWTMEdl9LZzyEf9MV8M
- fKw8QJUQxPITOvuGCt83E1AiVv9qEPRzEy86Sv+j0nsJiiSAg6Qq4s2pRYx+xlZ/
- l7ezSQ==
+ T+10oCZq3JqHewn9Tqzo4UsvCz7F2s8cgns/teNN37c=; b=Jsudr7f4AgQlAaCN
+ EBUIcLn4aRQJYvJ3rx+bteWPbhobFJUJEx86qE3urYf9Yne64B4/YyabH8koyXiY
+ rdK+iZw1PWXjZaeRNBLFWFbSEjbsodVufr34lqSzZpz16EADkcjKNmBFiTiXu3Gw
+ /M12kd/TXh8pyz7qZtOVRtiNMJEz4HGEOdtLpNjyeoawsPg0idTsWEZsO9k7bZD/
+ Ql//kou6xXgh1KsBaYhf6oBGvgrx0RRV6ktAAQyRBt6u3j5Zk+IXhhBbzeBUAYPv
+ 9COXYuc4qveEkWC2Cx6/ZRJTjlfeIZ/6c8vDS/tUBhom0VSiNAgDj9cljsEwIVWp
+ w/SJ2Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468pcg6qm5-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468pcg6qme-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:24:23 +0200 (MEST)
+ Mon, 28 Apr 2025 15:24:25 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 33BD24006D;
- Mon, 28 Apr 2025 15:23:52 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id BA62E40097;
+ Mon, 28 Apr 2025 15:23:27 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2D0D3A6FB4E;
- Mon, 28 Apr 2025 15:23:37 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7B301A80899;
+ Mon, 28 Apr 2025 15:22:51 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:23:36 +0200
-Message-ID: <5e9116ba-df0e-4728-a0e8-a8f4ca4871fa@foss.st.com>
-Date: Mon, 28 Apr 2025 15:23:35 +0200
+ 2025 15:22:50 +0200
+Message-ID: <3db0d58d-4ec9-4042-a37a-78076d9731bb@foss.st.com>
+Date: Mon, 28 Apr 2025 15:22:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/22] ARM: dts: stm32: add sdmmc1 fixed clock for
- stm32mp257f-ev1-u-boot
+Subject: Re: [PATCH v2 03/22] arm: stm32mp: add boot_mode support for STM32MP25
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-14-patrice.chotard@foss.st.com>
+ <20250425131533.392747-4-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-14-patrice.chotard@foss.st.com>
+In-Reply-To: <20250425131533.392747-4-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -94,45 +96,240 @@ X-Virus-Status: Clean
 
 
 On 4/25/25 15:15, Patrice Chotard wrote:
-> Add sdmmc1 temporary fixed clock for stm32mp257f-ev1-u-boot
+> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
+> Add support of all the boot mode supported by STM32MP25x family
+> with information provided by TF-A in backup register
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 > 
 > (no changes since v1)
 > 
->  arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 11 +++++++++++
->  1 file changed, 11 insertions(+)
+>  arch/arm/mach-stm32mp/include/mach/stm32.h |  15 ++
+>  arch/arm/mach-stm32mp/stm32mp2/cpu.c       | 155 +++++++++++++++++++--
+>  configs/stm32mp25_defconfig                |   2 +
+>  3 files changed, 164 insertions(+), 8 deletions(-)
 > 
-> diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-> index a9bd5e042fa..d778b8d8d05 100644
-> --- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
-> @@ -18,6 +18,12 @@
->  			clock-frequency = <64000000>;
->  		};
+> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+> index 6eb85ba7233..156009f51e3 100644
+> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
+> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+> @@ -42,6 +42,9 @@ enum boot_device {
 >  
-> +		ck_flexgen_51: ck-flexgen-51 {
-> +			#clock-cells = <0>;
-> +			compatible = "fixed-clock";
-> +			clock-frequency = <200000000>;
-> +		};
+>  	BOOT_FLASH_SPINAND = 0x70,
+>  	BOOT_FLASH_SPINAND_1 = 0x71,
 > +
->  		ck_icn_ls_mcu: ck-icn-ls-mcu {
->  			#clock-cells = <0>;
->  			compatible = "fixed-clock";
-> @@ -74,6 +80,11 @@
->  	clocks = <&ck_icn_ls_mcu>;
+> +	BOOT_FLASH_HYPERFLASH = 0x80,
+> +	BOOT_FLASH_HYPERFLASH_1 = 0x81
 >  };
 >  
-> +&sdmmc1 {
-> +	clocks = <&ck_flexgen_51>;
-> +	/delete-property/resets;
-> +};
+>  #define TAMP_BOOT_MODE_MASK		GENMASK(15, 8)
+> @@ -158,8 +161,20 @@ enum forced_boot_mode {
+>  #endif /* CONFIG_STM32MP15X || CONFIG_STM32MP13X */
+>  
+>  #ifdef CONFIG_STM32MP25X
+> +#define STM32_USART2_BASE		0x400E0000
+> +#define STM32_USART3_BASE		0x400F0000
+> +#define STM32_UART4_BASE		0x40100000
+> +#define STM32_UART5_BASE		0x40110000
+> +#define STM32_USART6_BASE		0x40220000
+> +#define STM32_UART9_BASE		0x402C0000
+> +#define STM32_USART1_BASE		0x40330000
+> +#define STM32_UART7_BASE		0x40370000
+> +#define STM32_UART8_BASE		0x40380000
+>  #define STM32_RCC_BASE			0x44200000
+>  #define STM32_TAMP_BASE			0x46010000
+> +#define STM32_SDMMC1_BASE		0x48220000
+> +#define STM32_SDMMC2_BASE		0x48230000
+> +#define STM32_SDMMC3_BASE		0x48240000
+>  
+>  #define STM32_DDR_BASE			0x80000000
+>  
+> diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> index 9530aa8534b..7cb71c518bd 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> @@ -67,14 +67,6 @@ void enable_caches(void)
+>  	dcache_enable();
+>  }
+>  
+> -int arch_misc_init(void)
+> -{
+> -	setup_serial_number();
+> -	setup_mac_address();
+> -
+> -	return 0;
+> -}
+> -
+>  /*
+>   * Force data-section, as .bss will not be valid
+>   * when save_boot_params is invoked.
+> @@ -97,3 +89,150 @@ void save_boot_params(unsigned long r0, unsigned long r1, unsigned long r2,
+>  
+>  	save_boot_params_ret();
+>  }
 > +
->  &usart2 {
->  	bootph-all;
->  	clocks = <&ck_flexgen_08>;
+> +u32 get_bootmode(void)
+> +{
+> +	/* read bootmode from TAMP backup register */
+> +	return (readl(TAMP_BOOT_CONTEXT) & TAMP_BOOT_MODE_MASK) >>
+> +		    TAMP_BOOT_MODE_SHIFT;
+> +}
+> +
+> +static void setup_boot_mode(void)
+> +{
+> +	const u32 serial_addr[] = {
+> +		STM32_USART1_BASE,
+> +		STM32_USART2_BASE,
+> +		STM32_USART3_BASE,
+> +		STM32_UART4_BASE,
+> +		STM32_UART5_BASE,
+> +		STM32_USART6_BASE,
+> +		STM32_UART7_BASE,
+> +		STM32_UART8_BASE,
+> +		STM32_UART9_BASE
+> +	};
+> +	const u32 sdmmc_addr[] = {
+> +		STM32_SDMMC1_BASE,
+> +		STM32_SDMMC2_BASE,
+> +		STM32_SDMMC3_BASE
+> +	};
+> +	char cmd[60];
+> +	u32 boot_ctx = readl(TAMP_BOOT_CONTEXT);
+> +	u32 boot_mode =
+> +		(boot_ctx & TAMP_BOOT_MODE_MASK) >> TAMP_BOOT_MODE_SHIFT;
+> +	unsigned int instance = (boot_mode & TAMP_BOOT_INSTANCE_MASK) - 1;
+> +	u32 forced_mode = (boot_ctx & TAMP_BOOT_FORCED_MASK);
+> +	struct udevice *dev;
+> +
+> +	log_debug("%s: boot_ctx=0x%x => boot_mode=%x, instance=%d forced=%x\n",
+> +		  __func__, boot_ctx, boot_mode, instance, forced_mode);
+> +	switch (boot_mode & TAMP_BOOT_DEVICE_MASK) {
+> +	case BOOT_SERIAL_UART:
+> +		if (instance > ARRAY_SIZE(serial_addr))
+> +			break;
+> +		/* serial : search associated node in devicetree */
+> +		sprintf(cmd, "serial@%x", serial_addr[instance]);
+> +		if (uclass_get_device_by_name(UCLASS_SERIAL, cmd, &dev)) {
+> +			/* restore console on error */
+> +			if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL))
+> +				gd->flags &= ~(GD_FLG_SILENT |
+> +					       GD_FLG_DISABLE_CONSOLE);
+> +			log_err("uart%d = %s not found in device tree!\n",
+> +				instance + 1, cmd);
+> +			break;
+> +		}
+> +		sprintf(cmd, "%d", dev_seq(dev));
+> +		env_set("boot_device", "serial");
+> +		env_set("boot_instance", cmd);
+> +
+> +		/* restore console on uart when not used */
+> +		if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL) && gd->cur_serial_dev != dev) {
+> +			gd->flags &= ~(GD_FLG_SILENT |
+> +				       GD_FLG_DISABLE_CONSOLE);
+> +			log_info("serial boot with console enabled!\n");
+> +		}
+> +		break;
+> +	case BOOT_SERIAL_USB:
+> +		env_set("boot_device", "usb");
+> +		env_set("boot_instance", "0");
+> +		break;
+> +	case BOOT_FLASH_SD:
+> +	case BOOT_FLASH_EMMC:
+> +		if (instance > ARRAY_SIZE(sdmmc_addr))
+> +			break;
+> +		/* search associated sdmmc node in devicetree */
+> +		sprintf(cmd, "mmc@%x", sdmmc_addr[instance]);
+> +		if (uclass_get_device_by_name(UCLASS_MMC, cmd, &dev)) {
+> +			printf("mmc%d = %s not found in device tree!\n",
+> +			       instance, cmd);
+> +			break;
+> +		}
+> +		sprintf(cmd, "%d", dev_seq(dev));
+> +		env_set("boot_device", "mmc");
+> +		env_set("boot_instance", cmd);
+> +		break;
+> +	case BOOT_FLASH_NAND:
+> +		env_set("boot_device", "nand");
+> +		env_set("boot_instance", "0");
+> +		break;
+> +	case BOOT_FLASH_SPINAND:
+> +		env_set("boot_device", "spi-nand");
+> +		env_set("boot_instance", "0");
+> +		break;
+> +	case BOOT_FLASH_NOR:
+> +		env_set("boot_device", "nor");
+> +		if (IS_ENABLED(CONFIG_SYS_MAX_FLASH_BANKS))
+> +			sprintf(cmd, "%d", CONFIG_SYS_MAX_FLASH_BANKS);
+> +		else
+> +			sprintf(cmd, "%d", 0);
+> +		env_set("boot_instance", cmd);
+> +		break;
+> +	case BOOT_FLASH_HYPERFLASH:
+> +		env_set("boot_device", "nor");
+> +		env_set("boot_instance", "0");
+> +		break;
+> +	default:
+> +		env_set("boot_device", "invalid");
+> +		env_set("boot_instance", "");
+> +		log_err("unexpected boot mode = %x\n", boot_mode);
+> +		break;
+> +	}
+> +
+> +	switch (forced_mode) {
+> +	case BOOT_FASTBOOT:
+> +		log_info("Enter fastboot!\n");
+> +		env_set("preboot", "env set preboot; fastboot 0");
+> +		break;
+> +	case BOOT_STM32PROG:
+> +		env_set("boot_device", "usb");
+> +		env_set("boot_instance", "0");
+> +		break;
+> +	case BOOT_UMS_MMC0:
+> +	case BOOT_UMS_MMC1:
+> +	case BOOT_UMS_MMC2:
+> +		log_info("Enter UMS!\n");
+> +		instance = forced_mode - BOOT_UMS_MMC0;
+> +		sprintf(cmd, "env set preboot; ums 0 mmc %d", instance);
+> +		env_set("preboot", cmd);
+> +		break;
+> +	case BOOT_RECOVERY:
+> +		env_set("preboot", "env set preboot; run altbootcmd");
+> +		break;
+> +	case BOOT_NORMAL:
+> +		break;
+> +	default:
+> +		log_debug("unexpected forced boot mode = %x\n", forced_mode);
+> +		break;
+> +	}
+> +
+> +	/* clear TAMP for next reboot */
+> +	clrsetbits_le32(TAMP_BOOT_CONTEXT, TAMP_BOOT_FORCED_MASK, BOOT_NORMAL);
+> +}
+> +
+> +int arch_misc_init(void)
+> +{
+> +	setup_boot_mode();
+> +	setup_serial_number();
+> +	setup_mac_address();
+> +
+> +	return 0;
+> +}
+> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+> index 717724ff672..d11910f139f 100644
+> --- a/configs/stm32mp25_defconfig
+> +++ b/configs/stm32mp25_defconfig
+> @@ -44,6 +44,8 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> +CONFIG_MTD=y
+> +CONFIG_USE_SYS_MAX_FLASH_BANKS=y
+>  CONFIG_PINCONF=y
+>  CONFIG_DM_REGULATOR_FIXED=y
+>  CONFIG_DM_REGULATOR_GPIO=y
 Applied to u-boot-stm32/master
 
 Thanks
