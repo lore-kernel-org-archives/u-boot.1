@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA1B1C369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 21:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27716C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 21:34:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF397826AA;
-	Mon, 28 Apr 2025 23:34:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 57F7F8211F;
+	Mon, 28 Apr 2025 23:34:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nbtPqrTO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fti/Zgr8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D61F3822D7; Mon, 28 Apr 2025 23:34:03 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id BF7DB822D7; Mon, 28 Apr 2025 23:34:04 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A5AE8214B
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 23:34:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BBF98211F
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 23:34:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-2d4f8c42f49so3720430fac.1
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 14:34:01 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-6065251725bso2385672eaf.1
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 14:34:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745876040; x=1746480840; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745876041; x=1746480841; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j3NIuFPC/ks9KHC0Lw7NzRpGn8YH4gsimG7eLRVTnPs=;
- b=nbtPqrTOrDy+V+3CribOzx8Ol6GvTiYoKPhr2IU/JbLXeoLR9zioy0Y4qY0HLkSPhr
- EdvCWJRgmS+MQ1ukeTzC4Pt//xknOTgeT/8XoJi7mHZY0K4FpfAX9Jk+9ysgDcJYZShz
- GQIfXaP7rBhuWLyyZTuzD/bfg5kkDw3ZjgGPk=
+ bh=de5I9TfZ3gpN000J4/KFCsUBDG/EzpaBwd/RuwJIQoY=;
+ b=fti/Zgr8HicXQSF8e1Z47zuzZEXugQZdIMNQbGS1VDxzUyLuGqkSLLZfR59XmNCZpn
+ jhMs7k6/USmw3O+px1DcsUhoNuHrkfz8826xa+KdafG2pbfc+RkS31A+Mo4SMGHZbjd5
+ G5wjMF1aOF0pybu+aWdir0mC5BNf/efe79Hx8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745876040; x=1746480840;
+ d=1e100.net; s=20230601; t=1745876041; x=1746480841;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j3NIuFPC/ks9KHC0Lw7NzRpGn8YH4gsimG7eLRVTnPs=;
- b=HuIN56cdBPlS3qZgH2NRXEo8tJakvxNn5qrni4Uf3BQL4/9QiiR3aX3onoiD4zrMmr
- YM4uTZFzIkLg1ArxGlvVHYObzNbbXr1TclBjfbjuxpoMXdE931GNKxwg77W7iiE2Q8ZI
- xNw/ESDcfC1TarEbEUnH77Znkx+MXA57lA7CZO1cLtSn/V8PapUCagMbDECMrPJ4uR4Y
- B+8L5FWBAlF0CWGtJVxvfOlaVnCyRhF88C9EqI2mRguwFxjlP/F6QnSOllJ7AcMDLDOF
- yTW7NqrgNd7atV2zn7K9QLhEZm4/RITVrpn7Ep7TG1swAXd98J5geqY1CNeBUKlSWwk6
- XUBQ==
-X-Gm-Message-State: AOJu0YxelQh85+wXQgL+buiWDGsMe7kpC2Fyosu3ExmLBpUUMDB3c6tx
- wmk3v4gPcTer74+iUA8jR4tebYxRPDh4hByMOYLQY4szCwI0aKrieoXXuOCaFV38eKqwLy0yjZg
- 6
-X-Gm-Gg: ASbGnctDGD6MC3DG/e4FbP1ryb9hxAT3rx/L2pGuvl1qdDx7oTCAg8Z5HAeQXygEPv+
- dRhhKbWvl2TQEaovAFaOKFhtKpT3QRFJlC59ybXSiq9QpfqhWGY0nZ3+1em2Rl1NVHQR7RUqfcb
- SkgKp3qbbFAf3RplD/xLaRP5Bhm7i7yqaiq7oXpjMTnOjWzb2KQ6gHDqiovvGZAWFSXb6xqTjwo
- yRVw6PywQmnKkxAbnjwNfsDQDjFQp5fGahi3Cdnc/IwPpqUbFw2mGdXidVAYSBKEz5Hs6vp6fO7
- lgxzDMyZ/yl3a1GM9N6sZT/bRlvuaV+sH7vGuHa4ypkJ6g4Hg352SAYijGqvMnk05OagvtWNYPA
- R
-X-Google-Smtp-Source: AGHT+IFG0ELTbD7DD4rbpXJwsp0EmIl0LGOwFsO1QX6eaM4MLDIQj3vhj9b+3xIE/I3PqWNKR+PnHw==
-X-Received: by 2002:a05:6871:791:b0:29f:bdf0:f0f5 with SMTP id
- 586e51a60fabf-2da464de0d8mr466252fac.17.1745876039982; 
- Mon, 28 Apr 2025 14:33:59 -0700 (PDT)
+ bh=de5I9TfZ3gpN000J4/KFCsUBDG/EzpaBwd/RuwJIQoY=;
+ b=TzSQaVxYZypJFqQoEi9QfE0zZ6A0n4yFXq4F2+yDk5+dqDnrDZwW0urToD6Tc0qUJH
+ qqBzJ1KS0/kiB+hVc3YeqF9+3DW8io3fwLPvH7Jt1MlzwoiXbNqwwyeGPuia3pIL2Be4
+ l1sA9axyrx8KefFP2is9WNXOcvq2cPx+ebrtV9Z3F9aycUDvC1K6KenGp0XzmzrvpVsJ
+ t6ldI8m1rzo/SarkKbL50Zhn0bcoDVR0DYjRfm6FqPrN+tF/lOtrmEK0xImBf820/l1h
+ QAw9UVSzldadY87CJIM/p3Filpd2VGeb+A+rEYxepYCga7rQWqaLm6kBjAeBjacYONkV
+ wNoA==
+X-Gm-Message-State: AOJu0Yy56fRoNCKlSp4/jyk1NgvXzAXxVHNw8ZeBHLxAA6j897vlNrBW
+ mb0/ZpDpMlz+zSXR0ctsPHp9zap1XXsTbjQPbtg6zQksylHOVmM9g6CcB6g5epw=
+X-Gm-Gg: ASbGnctR67LJ3IWbCBBgn8dIdVwAEIxq37BEZejpuko048OiXwqh4+p/oUta/WtFtkz
+ 6K0HEufikZoOdA341kkKZ2wsl7j9CcUyRphsQRjaYVkZ5YdKaFEqEKiTm+UMss+BRuuXCPE3p8u
+ yN83eTIz2PpFZ60m/jRsBDoB+chFiDSKp38mbqkJ2Q4mScOnhUzb44N3pLO7+28YsXC4GI+NYAI
+ v63E4uO6kT7otW3XbDb+IVZaaYGm6OSLSXJhLyyORJbyqdQ1A1+h1rFMbfZNjPnvLK/GzSDqJNM
+ NHbF1xrGUvD5+BhI5qKZsto3FWG5dxPXHlpZaZA3uMCqxhFJME68BAeFHcr21CYJtaTGqxorZHK
+ 3S+HHnu1sB48=
+X-Google-Smtp-Source: AGHT+IFxf0DSnBloz3nHzhGIG78CJeqrnGxg02qtTQ37IiuGUZRSVfC15tidrKi+Vf0KAPlL3EVTOg==
+X-Received: by 2002:a05:6870:910b:b0:2a7:d856:94a with SMTP id
+ 586e51a60fabf-2da3ffe9593mr666308fac.22.1745876041376; 
+ Mon, 28 Apr 2025 14:34:01 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b139000sm3108a34.40.2025.04.28.14.33.59
+ 46e09a7af769-7308b139000sm3108a34.40.2025.04.28.14.34.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 14:33:59 -0700 (PDT)
+ Mon, 28 Apr 2025 14:34:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250417135615.2974560-1-trini@konsulko.com>
-References: <20250417135615.2974560-1-trini@konsulko.com>
-Subject: Re: [PATCH] cros_ec_sandbox.c: Drop spi.h include
-Message-Id: <174587603918.1121500.3795426693768890628.b4-ty@konsulko.com>
-Date: Mon, 28 Apr 2025 15:33:59 -0600
+To: u-boot@lists.denx.de, Aristo Chen <jj251510319013@gmail.com>
+Cc: aristo.chen@canonical.com, ilias.apalodimas@linaro.org, 
+ jerome.forissier@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de, 
+ mkorpershoek@kernel.org, michal.simek@amd.com, ibai.erkiaga-elorza@amd.com
+In-Reply-To: <20250420081210.292644-1-aristo.chen@canonical.com>
+References: <20250420081210.292644-1-aristo.chen@canonical.com>
+Subject: Re: [PATCH] cmd: Kconfig: Fix typos
+Message-Id: <174587604018.1121500.621008133265577143.b4-ty@konsulko.com>
+Date: Mon, 28 Apr 2025 15:34:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,18 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 17 Apr 2025 07:56:15 -0600, Tom Rini wrote:
+On Sun, 20 Apr 2025 16:12:10 +0800, Aristo Chen wrote:
 
-> As this driver needs to use the special sandbox <asm/malloc.h> header
-> rather than normal malloc, it must be careful of the includes it brings
-> in. It does not need <spi.h> for anything, so drop it.
+> fix the following typos
+> - from "categorys" to "categories"
+> - from "indivdually" to "individually"
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] cros_ec_sandbox.c: Drop spi.h include
-      commit: 7bf752238327deecda12190154864128d55f78bd
+[1/1] cmd: Kconfig: Fix typos
+      commit: 1c07d22ebee96ae9c113f5674c3c134a899426ff
 -- 
 Tom
 
