@@ -4,81 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2DEC369D8
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 01:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C16C369C2
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 03:59:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32B6B80F9C;
-	Mon, 28 Apr 2025 03:48:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 296F8820B7;
+	Mon, 28 Apr 2025 05:59:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VerJiyIG";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="SfxhKMHl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E998080FDA; Mon, 28 Apr 2025 03:48:12 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5AD9E820E1; Mon, 28 Apr 2025 05:59:20 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A615380BAD
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 03:48:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5015980BAD
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 05:59:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-b041afe0ee1so4060226a12.1
- for <u-boot@lists.denx.de>; Sun, 27 Apr 2025 18:48:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745804888; x=1746409688; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xk4EnUMXCHNwZx/E4nT0um0+zhM0hL1UkYg89ffAlDc=;
- b=VerJiyIGEaEFcXqa0sduX7k29E0yd0scLoHrXz8l+UQmfJHb9d0ymgB9L2RbGkl465
- VLlA5UHAgvuvOI4BAgqQ4hWklUE7Wbh17Bc/RBOtRxGYBwWyqngk0m1VZ+oPuE0HbOdd
- qBuRB/Lygr0MQbcA+P/b+nHOQPsShFyY1hqYfLRv/QYCyLDNi9XX+So6XznGpJ65MV8S
- Tev8FYwq51JFEjC6KWWzg1itRYbrH5fPBzujtUyg27ZgUQtRJRHGnVW+kgRLKNDptR2V
- MlN4ljGNcmFTLikLQRwwaZfRRk3hSns8qcSpQ9i3l0xaGnM9iaSQVxTvLJNlbtLRRVSE
- mQNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745804888; x=1746409688;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xk4EnUMXCHNwZx/E4nT0um0+zhM0hL1UkYg89ffAlDc=;
- b=ogVeeUpMfjpIDQ+ioS4GrJzEbXG5fehH4U8ms5YMFXkMj9BeRQB2nTCuouod6K1Ls7
- 8kfaCRutNvefkAd86ibn7L5RGlZ4EFeWRFIEbW9hv+2stfPQRFehbJzhV8Sfnbux+E/6
- rBpsuLHyvonbX9mn0u37Wp0N8B6ZBy04a3sIV7tVrk7BummJu+XxvwQSNBndJvlzYdI1
- p7EPN4nyPkTTycw6xL/LOg4ev1ZQkOiTAfbM/K5OMgzAaWvqTXrFE0WF2CJLAN5KFBbd
- OKed/QghKgGW83aTpGl5pnzHUOXkQMT1yV99FR2N8BjSWk/5Eb+08Rz5DQNi7DeMOtaV
- Z1dQ==
-X-Gm-Message-State: AOJu0Ywui1OQ4FYQXcZdOeBtOPqxAZpS/mtwb/XV1P7m4m1h15rlMTXK
- ac85xmBO+gI7SKkxFkqHxivOiybbVftQQNAFtJ9i1ywbVnzAQaK87WR5fPCB9odcB3DYUSxc0wJ
- Q4H6+TPR9wFgxNMpYO7DRPuvbg3VlqNeCU+q08w==
-X-Gm-Gg: ASbGncuAOMFbsAvEojBPJ2H0mbxf59/nhruLpCOuQBAj/cTHhTZriNedBrhpDQF1VFL
- 25TMxLjAixxB1zypVXwFLDpE7Gn9tUC/MV+AmzcGmcPXYR9Jq9BNiK+86U/w1elJ1xbzUnWk4U5
- SSOFMFsE1iMW+Gz4H39gRFUg==
-X-Google-Smtp-Source: AGHT+IFCRfh6V1pm/WwASoppvRRSwh0Yo1dGHppBf97CR+jycZSKd4MjeJjCIqOn5fJiAS2GsuZjvW2cHPP7D2W/+/U=
-X-Received: by 2002:a17:90a:d888:b0:309:eb54:9ea2 with SMTP id
- 98e67ed59e1d1-309f7e00a65mr14350681a91.20.1745804887896; Sun, 27 Apr 2025
- 18:48:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id F000325D16;
+ Mon, 28 Apr 2025 05:59:16 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VXPhbYashRsu; Mon, 28 Apr 2025 05:59:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1745812756; bh=Yg35fOgI2TPlt6wWryZPdmwsvhXdp4ty6l/DRIUut80=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=SfxhKMHlkWqlq8VuqF69z0elSEm8FzA+XLg1bsPpP9R+JWJB4eLRf6iVavSXlJ1Dm
+ tQIX4gfNJ9uvHiMa3TKywCRn7hiSPOpnWepA1peO0jO8QnbQoG1yK46/+anj1TTMA3
+ mY9DHuBc1vCH3HP7TvoUmPInFP2NndWMUBg/KVJUj024LG/1qZLHcPwg11XECd6YPd
+ VuUYss5W2QKRyKZCh8fh1l/g0W0egTQ9lz9MHzk5jo7Vyl/GzJ/2Ytv91oM1Ug89+E
+ 7Rv+X1BYl0b3Hyd+nZgYJ/8jp/P7TC9Rv5rfyyrExurZ6xDWnzyt9RcI22dctRK6SD
+ mroNzVIkxqlDQ==
+Date: Mon, 28 Apr 2025 03:57:27 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Anton Blanchard <antonb@tenstorrent.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Andrew Davis <afd@ti.com>,
+ Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
+ Nathaniel Hourt <I@nathaniel.land>
+Subject: Re: [PATCH 1/2] Makefile: Strip leading spaces when preprocessing
+ generated_defconfig
+Message-ID: <aA78p0FgCZYmoeBM@pie>
+References: <20250427145011.17331-1-ziyao@disroot.org>
+ <20250427145011.17331-2-ziyao@disroot.org>
+ <1526A781-5592-43DE-94F2-221DAA484192@gmx.de>
+ <aA5RcIbI7uhsGmu8@pie.lan> <20250427161627.GZ5495@bill-the-cat>
 MIME-Version: 1.0
-References: <20250319144501.32277-1-adriano.cordova@canonical.com>
- <20250319144501.32277-3-adriano.cordova@canonical.com>
- <xzymlhbywmmlczgqdleia5jieynvc5ev7gkyms5c3zzvrj5jhm@4ee4fsnkp7ec>
-In-Reply-To: <xzymlhbywmmlczgqdleia5jieynvc5ev7gkyms5c3zzvrj5jhm@4ee4fsnkp7ec>
-From: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
-Date: Sun, 27 Apr 2025 21:48:45 -0400
-X-Gm-Features: ATxdqUHqYEB_9eTGS_uXd7pJUagG2x0igOr_W4FVyFf2LDevEnTqVLUSCavy-q4
-Message-ID: <CAMGU2hW7_LUVFvuc2myw4WcwpAWNJHXDWQmwJfgct39QC0cEog@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] efi_loader: binary_run: register an initrd
-To: Weizhao Ouyang <o451686892@gmail.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
- sjg@chromium.org, trini@konsulko.com, 
- Adriano Cordova <adriano.cordova@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250427161627.GZ5495@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,247 +80,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Weizhao,
+On Sun, Apr 27, 2025 at 10:16:27AM -0600, Tom Rini wrote:
+> On Sun, Apr 27, 2025 at 03:46:56PM +0000, Yao Zi wrote:
+> > On Sun, Apr 27, 2025 at 05:19:04PM +0200, Heinrich Schuchardt wrote:
+> > > Am 27. April 2025 16:50:10 MESZ schrieb Yao Zi <ziyao@disroot.org>:
+> > > >Clang's preprocessor may emit extra spaces for lines starting with '#'.
+> > > >Lines with these extra characters cannot be handled by Kconfig and will
+> > > >be ignored with warnings like,
+> > > >
+> > > 
+> > > 
+> > > Do you have an example for reprocing the issue?
+> > 
+> > Sure,
+> > 
+> > 	clang-19 -E -nostdinc -P -I . -undef -x assembler-with-cpp \
+> > 		configs/starfive_visionfive2_defconfig
+> > 
+> > or a smaller example for demonstrating the behaviour,
+> > 
+> > 	cat << EOF | clang -E -P -x assembler-with-cpp -
+> > 	# comment line
+> > 	normal line
+> > 	EOF
+> > 
+> > and you could see the strange indentation. For reproducing the exact
+> > Kconfig warnings,
+> > 
+> > 	make ARCH=riscv \
+> > 		CC='clang-19 --target=riscv64-unknown-linux-musl' \
+> > 		starfive_visionfive2_defconfig
+> > 
+> > (Clang is called clang-19 on my machine)
+> > 
+> > > Is there an understanding why Clang behaves in this way?
+> > 
+> > Sadly I have no idea. I guess it may serve for improving
+> > human-readability of the preprocessed output.
+> 
+> This is https://github.com/llvm/llvm-project/issues/78778
 
-Thank you for spotting this. I sent a patch, which you can also find here
-on top of master:
-https://github.com/0n41rd4/u-boot/tree/efi_initrd
+Thanks for the reference! I did a quick search among LLVM's issues
+before sending the patch but didn't find anything useful.
 
-Best,
-Adriano
+Do you think such workaround is acceptable? It seems the link should be
+included in commit message as well.
 
+> -- 
+> Tom
 
-El dom, 27 abr 2025 a las 5:08, Weizhao Ouyang (<o451686892@gmail.com>)
-escribi=C3=B3:
-
-> On Wed, Mar 19, 2025 at 11:45:00AM -0300, Adriano Cordova wrote:
-> > Add support to install an initrd when running an EFI binary
-> > with efi_binary_run
-> >
-> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
->
-> Hi Adriano,
->
-> Recently I bumped U-Boot version on my Debian kit then it crashed while
-> booting linux kernel:
->
-> GRUB log:
-> Loading Linux 6.12.22-arm64 ...
-> Loading initial ramdisk ...
-> error: failed to install protocols.
->
-> Kernel log:
-> [    0.794160] VFS: Cannot open root device
-> "UUID=3Debb74af9-b4b8-45bf-b1b9-d30d094a071d" or unknown-block(0,0): erro=
-r -6
-> [    0.795080] Please append a correct "root=3D" boot option; here are th=
-e
-> available partitions:
-> [    0.795814] List of all bdev filesystems:
-> [    0.796168]  fuseblk
-> [    0.796170]
-> [    0.796500] Kernel panic - not syncing: VFS: Unable to mount root fs o=
-n
-> unknown-block(0,0)
-> [    0.797226] CPU: 5 UID: 0 PID: 1 Comm: swapper/0 Not tainted
-> 6.12.22-arm64 #1  Debian 6.12.22-1
-> [    0.797993] Hardware name: armsom ArmSoM Sige7/ArmSoM Sige7, BIOS
-> 2025.04-g36835a9105cf-dirty 04/01/2025
-> [    0.798823] Call trace:
-> [    0.799041]  dump_backtrace+0xd8/0x130
-> [    0.799380]  show_stack+0x20/0x38
-> [    0.799675]  dump_stack_lvl+0x60/0x80
-> [    0.800003]  dump_stack+0x18/0x28
-> [    0.800298]  panic+0x164/0x378
-> [    0.800575]  mount_root_generic+0x200/0x2c8
-> [    0.800948]  mount_root+0x17c/0x1a8
-> [    0.801258]  prepare_namespace+0x1e0/0x250
-> [    0.801623]  kernel_init_freeable+0x2c4/0x2f0
-> [    0.802010]  kernel_init+0x28/0x150
-> [    0.802323]  ret_from_fork+0x10/0x20
-> [    0.802643] SMP: stopping secondary CPUs
-> [    0.803101] Kernel Offset: 0x48fed5ba0000 from 0xffff800080000000
-> [    0.803637] PHYS_OFFSET: 0xfff0f41e80000000
-> [    0.804005] CPU features: 0x18,00000017,00280928,4201720b
-> [    0.804482] Memory Limit: none
-> [    0.804756] ---[ end Kernel panic - not syncing: VFS: Unable to mount
-> root fs on unknown-block(0,0) ]---
->
-> I git bisect it to this commit. I didn't dive into the details, just did
-> a workaround as below, please check it out:
->
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index 2cf972343a45..cd947bb525c4 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -234,6 +234,9 @@ static efi_status_t efi_binary_run_dp(void *image,
-> size_t size, void *fdt,
->         if (ret !=3D EFI_SUCCESS)
->                 return ret;
->
-> +       if (!initrd)
-> +               goto out;
-> +
->         dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd,
-> initd_sz);
->         if (!dp_initrd)
->                 return EFI_OUT_OF_RESOURCES;
-> @@ -242,6 +245,7 @@ static efi_status_t efi_binary_run_dp(void *image,
-> size_t size, void *fdt,
->         if (ret !=3D EFI_SUCCESS)
->                 return ret;
->
-> +out:
->         return efi_run_image(image, size, dp_dev, dp_img);
->  }
->
->
-> BR,
-> Weizhao
->
-> > ---
-> >
-> > Changes in v2:
-> > - Change EFI_RESERVED_MEMORY_TYPE for EFI_LOADER_DATA for dp_initrd
-> >
-> >  boot/bootm_os.c              |  3 ++-
-> >  cmd/bootefi.c                |  2 +-
-> >  include/efi_loader.h         |  2 +-
-> >  lib/efi_loader/efi_bootbin.c | 20 +++++++++++++++++---
-> >  4 files changed, 21 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> > index e9522cd3299..f403f352be1 100644
-> > --- a/boot/bootm_os.c
-> > +++ b/boot/bootm_os.c
-> > @@ -507,7 +507,8 @@ static int do_bootm_efi(int flag, struct bootm_info
-> *bmi)
-> >
-> >       ret =3D efi_binary_run(image_buf, images->os.image_len,
-> >                            images->ft_len
-> > -                          ? images->ft_addr : EFI_FDT_USE_INTERNAL);
-> > +                          ? images->ft_addr : EFI_FDT_USE_INTERNAL,
-> > +                              NULL, 0);
-> >
-> >       return ret;
-> >  }
-> > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> > index c1454ffb948..dce8285b047 100644
-> > --- a/cmd/bootefi.c
-> > +++ b/cmd/bootefi.c
-> > @@ -211,7 +211,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int
-> flag, int argc,
-> >               }
-> >       }
-> >
-> > -     ret =3D efi_binary_run(image_buf, size, fdt);
-> > +     ret =3D efi_binary_run(image_buf, size, fdt, NULL, 0);
-> >
-> >       if (ret !=3D EFI_SUCCESS)
-> >               return CMD_RET_FAILURE;
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index cc732dc4807..ad60805ae4f 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -600,7 +600,7 @@ efi_status_t efi_install_fdt(void *fdt);
-> >  /* Execute loaded UEFI image */
-> >  efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
-> >  /* Run loaded UEFI image with given fdt */
-> > -efi_status_t efi_binary_run(void *image, size_t size, void *fdt);
-> > +efi_status_t efi_binary_run(void *image, size_t size, void *fdt, void
-> *initrd, size_t initrd_sz);
-> >
-> >  /**
-> >   * efi_bootflow_run() - Run a bootflow containing an EFI application
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.=
-c
-> > index deafb2ce1c2..2cf972343a4 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -204,6 +204,8 @@ out:
-> >   * @image:   memory address of the UEFI image
-> >   * @size:    size of the UEFI image
-> >   * @fdt:     device-tree
-> > + * @initrd:  initrd
-> > + * @initrd_sz:       initrd size
-> >   * @dp_dev:  EFI device-path
-> >   * @dp_img:  EFI image-path
-> >   *
-> > @@ -213,10 +215,12 @@ out:
-> >   * Return:   status code
-> >   */
-> >  static efi_status_t efi_binary_run_dp(void *image, size_t size, void
-> *fdt,
-> > +                                   void *initrd, size_t initd_sz,
-> >                                     struct efi_device_path *dp_dev,
-> >                                     struct efi_device_path *dp_img)
-> >  {
-> >       efi_status_t ret;
-> > +     struct efi_device_path *dp_initrd;
-> >
-> >       /* Initialize EFI drivers */
-> >       ret =3D efi_init_obj_list();
-> > @@ -230,6 +234,14 @@ static efi_status_t efi_binary_run_dp(void *image,
-> size_t size, void *fdt,
-> >       if (ret !=3D EFI_SUCCESS)
-> >               return ret;
-> >
-> > +     dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd,
-> initd_sz);
-> > +     if (!dp_initrd)
-> > +             return EFI_OUT_OF_RESOURCES;
-> > +
-> > +     ret =3D efi_initrd_register(dp_initrd);
-> > +     if (ret !=3D EFI_SUCCESS)
-> > +             return ret;
-> > +
-> >       return efi_run_image(image, size, dp_dev, dp_img);
-> >  }
-> >
-> > @@ -239,13 +251,15 @@ static efi_status_t efi_binary_run_dp(void *image=
-,
-> size_t size, void *fdt,
-> >   * @image:   memory address of the UEFI image
-> >   * @size:    size of the UEFI image
-> >   * @fdt:     device-tree
-> > + * @initrd:  initrd
-> > + * @initrd_sz:       initrd size
-> >   *
-> >   * Execute an EFI binary image loaded at @image.
-> >   * @size may be zero if the binary is loaded with U-Boot load command.
-> >   *
-> >   * Return:   status code
-> >   */
-> > -efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> > +efi_status_t efi_binary_run(void *image, size_t size, void *fdt, void
-> *initrd, size_t initrd_sz)
-> >  {
-> >       efi_handle_t mem_handle =3D NULL;
-> >       struct efi_device_path *file_path =3D NULL;
-> > @@ -273,7 +287,7 @@ efi_status_t efi_binary_run(void *image, size_t
-> size, void *fdt)
-> >               log_debug("Loaded from disk\n");
-> >       }
-> >
-> > -     ret =3D efi_binary_run_dp(image, size, fdt, bootefi_device_path,
-> > +     ret =3D efi_binary_run_dp(image, size, fdt, initrd, initrd_sz,
-> bootefi_device_path,
-> >                               bootefi_image_path);
-> >  out:
-> >       if (mem_handle) {
-> > @@ -355,7 +369,7 @@ efi_status_t efi_bootflow_run(struct bootflow *bflo=
-w)
-> >               log_debug("Booting with external fdt\n");
-> >               fdt =3D map_sysmem(bflow->fdt_addr, 0);
-> >       }
-> > -     ret =3D efi_binary_run_dp(bflow->buf, bflow->size, fdt, device,
-> image);
-> > +     ret =3D efi_binary_run_dp(bflow->buf, bflow->size, fdt, NULL, 0,
-> device, image);
-> >
-> >       return ret;
-> >  }
-> > --
-> > 2.48.1
-> >
->
+Thanks,
+Yao Zi
