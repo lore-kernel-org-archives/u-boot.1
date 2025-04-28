@@ -4,58 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F652C369D3
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 10:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B653AC36005
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 10:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B360280EFB;
-	Mon, 28 Apr 2025 12:06:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id E81DD8214B;
+	Mon, 28 Apr 2025 12:38:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DX7q+g5d";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="Wfy4GU61";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21908820B7; Mon, 28 Apr 2025 12:06:36 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 19ED882145; Mon, 28 Apr 2025 12:38:28 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4AC180EE5
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:06:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id A913580EFB
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:38:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 15BBCA4AB27;
- Mon, 28 Apr 2025 10:01:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43005C4CEE4;
- Mon, 28 Apr 2025 10:06:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745834792;
- bh=GRzluCKGfFU+jIooQVNnsAP7weLX49ITKeielkeJ6Gw=;
- h=Date:Subject:Cc:From:To:References:In-Reply-To:From;
- b=DX7q+g5dJ42GyRR5R0CWhwA95W50mIPFZk1TPaem7I+mJok0fO77KK+a+irxtW/Qg
- 27Zk6F3+Xsubq/FBuA2Wggn4MYw50IBwKn+dm0ZEkOVBY4Pl3F4xUa+uFntF7H7pnX
- cnYPLkyjsz+BHPO2/7fVHvW8Tt41PjfWR5xauqf5YFaPIq93g/DgYtopM7B0d0B5EA
- EWj3vsYQcLOApQ7CP6PoSqogpYfVz+6WwBllXoxHdmuUs2gY605LLTRCcgCzVgKVxb
- +3RWu9xcLfZlttPCkVj1T8Jf33u1Z4WIyI0jNbk/Qoov01Oalbs/2KE+ebjtF15wq7
- VeRufyfQ2ZbKg==
-Content-Type: multipart/signed;
- boundary=023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Mon, 28 Apr 2025 12:06:28 +0200
-Message-Id: <D9I6S5PD32TJ.3AGU7UM3EUOF6@kernel.org>
-Subject: Re: [PATCH] net: fsl_enetc: fix imdio register calculation
-Cc: "Joe Hershberger" <joe.hershberger@ni.com>, "Ramon Fried"
- <rfried.dev@gmail.com>, "Tom Rini" <trini@konsulko.com>, "Marek Vasut"
- <marex@denx.de>, "Alice Guo" <alice.guo@nxp.com>, "Ye Li" <ye.li@nxp.com>,
- "Tim Harvey" <tharvey@gateworks.com>, "Thomas Schaefer"
- <thomas.schaefer@kontron.com>, "Vladimir Oltean" <vladimir.oltean@nxp.com>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Heiko Thiery" <heiko.thiery@gmail.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.16.0
-References: <20250428095945.1432389-1-heiko.thiery@gmail.com>
-In-Reply-To: <20250428095945.1432389-1-heiko.thiery@gmail.com>
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fKeE7dOjeu1wiYXY2y3Rg6mB1v7lOf8XimmKt5k75dUL1sfd3Jr5B9vZyDF90NpIqapFBy6IxyQulN+13CFgP8Txa+1XS6et6XjVKJHOf3jrgxN6eZprGlXO0ROJyAlVCZ/qc5rTDhTvMPeu7JwQWnOxdefJ4dD7I831QFh3o2ZPCRIGfKrYTtprZuOfLhnjlSfcUgZjTNAymsVljjVJW0incHMIX9zCINkJLLUJnf9koWmbys7nwuIcq9iL/lcfjw3w56sd6gCHc8E2+ha8UPBpiyWk1WDPrk5i37xo9RFYaX5dUXuT9O5uOMWdvApTAm1ru2GaZqfcUdYBT5ycYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VXn9EgIoWx7IIawLSaCSnqegEwcvKnBHfVHlFCVfSHw=;
+ b=CXPv2OYGdtBO4ganbnv7gu+R5sN+uLuMUhbXFdygBJgcQRPUONbNDS4AbweKijaHBQKEWXiUMmO9XW28HpXGSHqZGe99piMwrlaISI99igKVFsQJSbnkby0/sAwuWKa/vfNpnxvxdfHpT02yEsg0xz+PsGdMxeci1/mWtHaOmeDxyI8H9ygzrfQEKGyhUmXqBN6FwCu/AYyxn15+Ikee+u4pBIHJSHza52g7Ucz7dqcDA5Te6xzMgt9S1oi8F5GojY4UTNkBdS22IRTxctYbJdyRpnqlwt1V6qtQVYj0zjBDE0+PIkSzrIrVjKv95UaHT7WAPeXiKiFntLF4Wre/Ug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VXn9EgIoWx7IIawLSaCSnqegEwcvKnBHfVHlFCVfSHw=;
+ b=Wfy4GU61wNYSl/hlVFJqaRqIlaYuWmYVpuIs8DQUh6VW9+Cyzf4zjq6Oe7hio3LlzTWnWVPoTy8a0L0RUekeniIC3My8Fp0Gm4thOO+Z7BWxgrjeyLwALnbYd0jgm6IEfB9x6dZFQHgUz+DswZWFotBCDt4q1rFWWjhqb2+gSIkzNkGVSadHwQDF6xOvLDQVqId0FetSow4/8qK2LuYvZu2qcsGvUryYz+vuyBdPkfNFlPz1t2T3V83UHhUdOhh/2tXlkdN4GsDTP8iGuNTneajoY4evwGcjt3nX+pDEbt1X/uSqKrhErP2g6aBySYmqcFi9X5f2rza/An+33nZndQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by GV1PR04MB10393.eurprd04.prod.outlook.com (2603:10a6:150:1c9::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.29; Mon, 28 Apr
+ 2025 10:38:22 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8678.028; Mon, 28 Apr 2025
+ 10:38:22 +0000
+From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Subject: [PATCH v11 00/21] imx: add i.MX95 support
+Date: Mon, 28 Apr 2025 18:37:23 +0800
+Message-Id: <20250428-imx95-v1-0-a3df9c340ace@oss.nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAGNaD2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDEyML3czcCktTXYM0Y8Pk5BQTI0tjSyWg2oKi1LTMCrA50UplhoZKsbW
+ 1ABRKDYZcAAAA
+To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>
+Cc: u-boot@lists.denx.de, 
+ =?utf-8?q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>, 
+ Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>, 
+ Marek Vasut <marex@denx.de>, Frank Li <Frank.Li@nxp.com>, 
+ Ji Luo <ji.luo@nxp.com>, Jindong Yue <jindong.yue@nxp.com>, 
+ Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>
+X-Mailer: b4 0.13.0
+X-ClientProxiedBy: SI2PR02CA0001.apcprd02.prod.outlook.com
+ (2603:1096:4:194::10) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|GV1PR04MB10393:EE_
+X-MS-Office365-Filtering-Correlation-Id: 540787a7-f8aa-4951-a88c-08dd8640cc6c
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|7416014|52116014|376014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?V2tXQ3NtaGhHUmZMUnYxR0hoM0liaGlsWTRhbEdtOVJpOUlLYXZaMnFXRW5q?=
+ =?utf-8?B?QUh2c21mVGpKMElQOHRNT1h2VnV1bzk4Y3JTczNleVhFUnMya3NLT1hmYlBN?=
+ =?utf-8?B?VWFxZXE5NHVKRWk1eGRRak1qVXVrQkE1Z1VpM0R6d2I1a2dKdVkyYUxxdzdh?=
+ =?utf-8?B?ZEprZTVyYmtHTlprSUpJSkdyWlhoRXJ2TjQ0WWZqL0ZqSXNiTENPckI3eEVy?=
+ =?utf-8?B?L0xXQzVUbWRzMXhmSVU3T1FCTzBPejNtMnVoVTA1cm0xdzhWN08zczl1QWd5?=
+ =?utf-8?B?aVY4MDlHQTZueVg3WUxpRFJZbjFIREtxd3Q2eFlvTGxQaDJMOC9nUlZqNndY?=
+ =?utf-8?B?R2hIOEQ5VE5SWVppZVZQZURHeVJCZVl3dnB3Z2xvMlNmbGhWWjBQeHZ4eVRL?=
+ =?utf-8?B?cGZqOUxFRGpET2svb1M4ZHBoaFhRbWpObnJBbVFFcW4vWGhoandqb1g1Rk9x?=
+ =?utf-8?B?RittbHNCOUFRNzhFUlpHL3YxeHNYaStITmcyNlRsZkc1R3F4MksrRFlTVHU0?=
+ =?utf-8?B?eEE0ZkYwR1hsWHpDRXBvTUpHNlJ1QVJUZTVUQlJ4RkFIUkIybGJWajlCbnFI?=
+ =?utf-8?B?dEJqSW9DTDRQQ1ozODVtNE9WOGZ4cHpaWmxtWnJkS0c3QjhEU3VHbVBXTlJo?=
+ =?utf-8?B?dlZxQ0s0eFVyT05MSXJHM1JpV1Z4MWd4b21pUnhYRE4vRjA3WFNhREp6WDF3?=
+ =?utf-8?B?SGx3UmplK0wwTWNPSFY0ZkNFUnNTbkFxMTRWOFVDTXo0c3paR3d4VDU2M2dW?=
+ =?utf-8?B?L3RxcUJUSUJoM0hPbEhuUVR0ZHFBUk1CS3hxWlllcU5XazZDMTIrcDN4VTRK?=
+ =?utf-8?B?N3RxeEVrZThxYyt5Y2E0ekZGOE1LNW5LMkQxeUJlRHpYRnRjSGQxa1o4TmZB?=
+ =?utf-8?B?eCtGWTh5MUFXVFFsMjdtMnRlY2xyVlp4NUNHOXJ0bm5hL2Q3dW9lOTc2VC9n?=
+ =?utf-8?B?T0pWQnVnTVk3VmgyMC84L0VzYlkvM0lsRExPbFhHZ0RnME1vSVVhTjJRc2lq?=
+ =?utf-8?B?SUdDUFZmN0ZCMWYyWWxSQ1pZa2Nyc29pOEVBSVQvbWtIV2ZReUJQeTRNNE55?=
+ =?utf-8?B?QkJ5M002WncyZmVucXROQUlHVHcyWlFMS1JiSU5ITGxqUnBIZExKU1JUaFIw?=
+ =?utf-8?B?WllVdUo0U1VmcW42OXVSazIxZVhRdTlqSjlxaHN3YUtnMVVLbHR1RmJheEc5?=
+ =?utf-8?B?UHhmU0dVZ2M4ZTBmeVozd3l4cklXWTB4K3RSVVRnaXFJdVBpQS9TM01XQVR0?=
+ =?utf-8?B?TTFCNjVlQitNM2ZHSVlwTlpLdTgxMEFyZUExbU5iQmdhTWVza1I0RFpSekcw?=
+ =?utf-8?B?dWhSS1ViQkhKYjJ2WE8vR0lsU0FtQXZIVXJ1K3FPc2JYNytEMDFxSWFUOFJT?=
+ =?utf-8?B?cE00QitId1NSK0g1dWxDMmRzVitLekwzRGVoaVpXSVBhak9YcVAvcWlCVi9J?=
+ =?utf-8?B?M3pEa0dmV2JHUFliQVpDaGtkNVlpU0dvYXc3czFsMGdOTGV6K1VkbmlNZzE4?=
+ =?utf-8?B?TTQzNWx0UWp2bzNXRkF4ek1pcHREblNoTHRmcTAzazZwUnlWek40Z2NETFA0?=
+ =?utf-8?B?ejMwNUM5aEZZZTVVQk5XTlhmMVlSTTAxRDl4RUw4RTd6UUJYMm03ZDUyemNF?=
+ =?utf-8?B?UzJscm5qQUY3QlJscEY0L0ExM2w3a1JLbkhZMmVyMGVLUUdXeGpyNDFqWUc3?=
+ =?utf-8?B?TUs4T1BsaDY3NDlNKzlEOWJNL3NISzZPT1I3eER3MGN1TXVtNmJ2d2tIK3pl?=
+ =?utf-8?B?dWw1dCtMclc3UlVBaVUwdndiU1hsbFpsdlhxcUFmRUZMT1U0aGV2WkVtblQ4?=
+ =?utf-8?B?OUFCczlOdFRFZ3BoSkVJNUZSemU4Y3NlVCtyd3kyNFBER0tXZ0gvL3llMzdQ?=
+ =?utf-8?B?TjRxYzFHMnVLWUI3ZzNDcG84eXlBVjVGbkdFVEdYRzk1QzZBWHRtV1ZxN0ww?=
+ =?utf-8?B?Ymh2MEpNKy9nU2FNVksvdjZVV1dIZXd3c0JFaHJ5Z2xZRjFma09IaTBXSTdo?=
+ =?utf-8?B?Y1RGeFhIejB3PT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(7416014)(52116014)(376014)(1800799024)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L01OdFJJblBwdmZtOGhJUlBqQWQ3eUV5UzhoSDh5U3Jkc1R0VDlnbkJ1aWJE?=
+ =?utf-8?B?TCs0bG9pU2J4VHJYRzdQOGZzU1BkRUtsOForejNuMXd1RUxzbnVZZUxia0Q0?=
+ =?utf-8?B?SEhiTDFJR1ZUdUVYOEVjcnd4emphTVJxOWxwb0lSTjBMY2taZGVGSlRwa21z?=
+ =?utf-8?B?Q2V2cTRYdDFHa1RMaWw1b0JwNFhyTUR6V01sWi9PUlc5TDNaVDdwYUFJaGo5?=
+ =?utf-8?B?L2V4TmhHWFBTQmxBeDVaYVB3T09BNCtGVSs2Wjk4ODdhK1l0MVFZUkZOSUpI?=
+ =?utf-8?B?TGlRSkVhTW1LMDlnYjlYRGlTbHhwTnNDR2xQdkNkTFFWRkFnYlkzYUsrbjg2?=
+ =?utf-8?B?Ukl4WEVYY0VpVGhKWGkyRTJhZGZqbitRelA5UlBkTSt2NzdYN0l0eEFkLzY5?=
+ =?utf-8?B?NGdnTmpNWkNZaUdtQk1wV3R1SnBRNkFBVkY0UlZlSlJzdlpMYnNUZ2pycVFq?=
+ =?utf-8?B?V1hJQ3hPTXRZTXp0a1gvZ3JJUjF3YmJpZjFhek9qMG9RYW01R0FXODJUV2hZ?=
+ =?utf-8?B?b2hhZmd1M0IwZTZ5TVpIbnJBcWk5MmE2UTZvYzh1eUd5dTZsQ0MzdHRaSXJw?=
+ =?utf-8?B?STFjWXR2MUFhR2d3L0w2SXcvdVh6Q1c5L2t0UW1PYnl1aWg0eERJNW9WZmps?=
+ =?utf-8?B?UTdKWXg4VXdyR01XWThpQjVmR2FNZGFQaitSRWJaQXJUNGhheHlvdTQzY21W?=
+ =?utf-8?B?MkVQMEs2VkFMN3hXQWxDdmlJY2s4QVhVbGN1bkdJNFpxQ2V3d2Y3VENCNWZL?=
+ =?utf-8?B?ZTBSeUNyUjdEYkwxak1mTWJ4N3htbkhCbE9JSUtNWWpJaVBWN1ZlenBaWDhJ?=
+ =?utf-8?B?TnZsWldNb0FYVGo3dXFZQlU1SFJIWGw0MngwSU50amRFVU8wQldySUNrR05J?=
+ =?utf-8?B?ZHd1bkNEdmFEQm55T29UeWpPeThBK2FQZk9BK0t3OGMrMks4eDlHek0xenJw?=
+ =?utf-8?B?MTBVc1JCY1JseDA5eStacnRPRnBSTnVFV3lYcmdOZ2JYWUNpU3JGTkZZR21z?=
+ =?utf-8?B?eTlQN2xEZ2pjS2VZV3h0R1d0bmpTeEZVaTBGWjVNYzRXRjFQQUQvRmR2MGkr?=
+ =?utf-8?B?WEtWRFFMdDQzdnlTaVJUSU5mRFJjUjdZdmpES1B4UjNwb25tekQ4d0EyTUMz?=
+ =?utf-8?B?anFZN25XZ2JKSXpVU0lOVk83UGtrQzZGaGxVWW5pSU0rYUtMM21xSExKVVZj?=
+ =?utf-8?B?YWszSFM0Y1hRM2xUYTdWR3NLQk53endhMnhxQ2V5ZlhMc1hUWUZjSVo0YzFL?=
+ =?utf-8?B?UWxHUHBHbk5YQTVmQk9XM1pEemNsL01uUXcrVm9hUUt0dFZCeWhQaWhWQ1BI?=
+ =?utf-8?B?a0p4Z3FKUFQ1SS9SUlZVTDkzdXNMS2ZsbTdNRUVZQTZPUmoyeFQvczN3ZkJJ?=
+ =?utf-8?B?VWlyVFVuMGlsckZaU3E4bVFSdGRrVmdpUmlRMS9qZWFzeFFLZEtOT1R2MHR3?=
+ =?utf-8?B?UzNQekxCTENDczBqRWRvSkt2T1BURkVJQjRUc1c3ZW5rSlJ4VndERWcwU1pi?=
+ =?utf-8?B?UGRyY1BSY1AzYUo1blpmU2huOGovY2Q4emVCRkpGQlNzVCt1eFpVSXhnZ0ts?=
+ =?utf-8?B?WEtva1hzYm5ERk5Na1lwUG15T1psNjZ2aHc0R3MreWxjbUZCMndDdythdlQ0?=
+ =?utf-8?B?by9PZllnbWY0V0U1ci8xWkY5RG9nNmpoMTRlVk44dlpqY0s3ZHFVbDFvMzBn?=
+ =?utf-8?B?VGtMTjgrZTRBbTNyaExvT3dkc1MzbUhCR1phT1YzeGVzWjNaR0Z0WGlWb1RQ?=
+ =?utf-8?B?d2FoY3JMblUxdDdqOVJPMDRFTkNhZGc4YStGUGtLWnJSZlFNZVVnMFlYcXlk?=
+ =?utf-8?B?VlBSZnBYMC9YOFZXeWdYMTJpWmhBVDdQL011ZTBrM1RzaC90NUorMzMweGpU?=
+ =?utf-8?B?VFBReUZqOFJoZi9mMFJRM3M5NUtnRnc0TnhoZzIyOEplTGtZSGxsK0VKaE9K?=
+ =?utf-8?B?cmFGMzRXdHN5RnZtTERHMkd0d2kzN0hVTDh0Y1BHZ0RHS0dhUFBoNWdHY21P?=
+ =?utf-8?B?WDJCVWxtOEp6bWRPWERBanJsOEQwblZUaEhMVjJwMjN0RFNPUWRpemppOWdM?=
+ =?utf-8?B?M1BNNW5lek9icVdlOVlOa0hkMUdCZWc0QVIzNm5GMVVkQk5uVHRZeVJ0WTFO?=
+ =?utf-8?Q?ZutSLSxjUw54GUYe4m9IW1TEd?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 540787a7-f8aa-4951-a88c-08dd8640cc6c
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2025 10:38:22.5783 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: efIKcxkv+J42WLxScKAS1RCC2SAR6De3gHuLaK8/uNE9P9UHyPdGrl+uVNFwMqTSjysmAxJ4Rd0mqbIxY4gXrQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10393
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,90 +189,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Changes for v11:
+ - update spl_imx_container.c according to comments from Lothar Waßmann
 
-[+ Vladimir]
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+---
+Alice Guo (12):
+      firmware: scmi: support to manage SCMI protocol drivers with a linker-genetated array
+      firmware: scmi: use scmi_proto_driver_get() function to get SCMI protocol driver
+      pinctrl: nxp: add a pin controller driver based on SCMI pin control protocol
+      firmware: scmi_agent: add SCMI pin control protocol support
+      clk: scmi: check the clock state/parent/rate control permissions
+      sandbox: add SCMI clock control permissions to sandbox
+      cpu: imx95: add i.MX95 support
+      imx: Kconfig: IMX8_ROMAPI is not configured for i.MX95
+      binman: add a new entry type for packing DDR PHY firmware images
+      tools: imx8image: add i.MX95 support
+      doc: imx: add document for i.MX95 Image Container Format
+      Makefile: add some files to CLEAN_FILES
 
-Hi,
+Peng Fan (4):
+      scmi_protocols: add SCMI misc protocol protocol_id and message_id for getting the ROM passover data
+      scmi_protocols: add SCMI Performance domain management protocol message IDs
+      clk: scmi: add the command CLOCK_PARENT_SET
+      imx9: scmi: add i.MX95 SoC and clock related code
 
-nice catch!
+Ye Li (5):
+      scmi_protocols: update struct scmi_base_discover_list_protocols_out
+      spl: imx: use trampoline buffer to load images to secure region
+      imx9: add i.MX95 Kconfig and Makefile
+      imx: container: add V2X container support for i.MX95
+      imx95_evk: add i.MX95 19x19 EVK board basic support
 
-> With commit cc4e8af2c552, fsl_enetc register accessors have been split to
+ Makefile                                      |   3 +-
+ arch/arm/dts/imx95-19x19-evk-u-boot.dtsi      |  62 +++
+ arch/arm/dts/imx95-u-boot.dtsi                | 188 +++++++
+ arch/arm/include/asm/arch-imx/cpu.h           |   2 +
+ arch/arm/include/asm/arch-imx9/clock.h        |  10 +
+ arch/arm/include/asm/arch-imx9/imx-regs.h     |   6 +
+ arch/arm/include/asm/arch-imx9/sys_proto.h    |   1 +
+ arch/arm/include/asm/mach-imx/sys_proto.h     |  39 ++
+ arch/arm/mach-imx/Kconfig                     |   2 +-
+ arch/arm/mach-imx/image-container.c           | 119 +++-
+ arch/arm/mach-imx/imx9/Kconfig                |  15 +
+ arch/arm/mach-imx/imx9/Makefile               |   9 +-
+ arch/arm/mach-imx/imx9/scmi/Makefile          |   6 +
+ arch/arm/mach-imx/imx9/scmi/clock.c           |  70 +++
+ arch/arm/mach-imx/imx9/scmi/clock_scmi.c      | 133 +++++
+ arch/arm/mach-imx/imx9/scmi/container.cfg     |  10 +
+ arch/arm/mach-imx/imx9/scmi/imximage.cfg      |  15 +
+ arch/arm/mach-imx/imx9/scmi/soc.c             | 749 ++++++++++++++++++++++++++
+ arch/sandbox/include/asm/scmi_test.h          |   4 +-
+ board/freescale/imx95_evk/Kconfig             |  12 +
+ board/freescale/imx95_evk/MAINTAINERS         |   6 +
+ board/freescale/imx95_evk/Makefile            |  11 +
+ board/freescale/imx95_evk/imx95_19x19_evk.env |  91 ++++
+ board/freescale/imx95_evk/imx95_evk.c         |  36 ++
+ board/freescale/imx95_evk/spl.c               |  69 +++
+ common/spl/Kconfig                            |   6 +
+ common/spl/spl_imx_container.c                |  38 +-
+ configs/imx95_19x19_evk_defconfig             | 152 ++++++
+ doc/board/nxp/imx95_evk.rst                   | 114 ++++
+ doc/board/nxp/index.rst                       |   1 +
+ doc/imx/imx95_container.txt                   | 136 +++++
+ drivers/clk/clk_scmi.c                        | 204 ++++++-
+ drivers/cpu/imx8_cpu.c                        |   2 +
+ drivers/firmware/scmi/base.c                  |  24 +-
+ drivers/firmware/scmi/sandbox-scmi_agent.c    |  56 +-
+ drivers/firmware/scmi/scmi_agent-uclass.c     |  50 +-
+ drivers/pinctrl/nxp/Kconfig                   |  13 +
+ drivers/pinctrl/nxp/Makefile                  |   1 +
+ drivers/pinctrl/nxp/pinctrl-imx-scmi.c        | 165 ++++++
+ drivers/power/domain/scmi-power-domain.c      |   8 +
+ drivers/power/regulator/scmi_regulator.c      |   8 +
+ drivers/reset/reset-scmi.c                    |   8 +
+ include/configs/imx95_evk.h                   |  24 +
+ include/imx8image.h                           |  19 +-
+ include/scmi_agent-uclass.h                   |  17 +
+ include/scmi_protocols.h                      | 104 +++-
+ tools/binman/entries.rst                      |  10 +
+ tools/binman/etype/nxp_header_ddrfw.py        |  29 +
+ tools/binman/ftest.py                         |  11 +
+ tools/binman/test/346_nxp_ddrfw_imx95.dts     |  24 +
+ tools/imx8image.c                             | 147 ++++-
+ tools/imx9_image.sh                           |   8 +
+ 52 files changed, 2947 insertions(+), 100 deletions(-)
+---
+base-commit: 62ea9c329a0d013993bae538c55dfea06e4551bd
+change-id: 20250428-imx95-0f31ccd42939
 
-With 'commit cc4e8af2c552 ("net: fsl_enetc: Split register accessors")'
+Best regards,
+-- 
+Alice Guo <alice.guo@oss.nxp.com>
 
-> handle different register offsets on different SoCs. However, for
-> internal MDIO register calculation, only ENETC_PM_IMDIO_BASE was fixed
-> without adding the SoC specific MAC register offset.
->
-> As a result, the network support for the Kontron SMARC-sAL28 and
-> probably other boards based on the LS1028A CPU is broken.
->
-> Add the SoC specific MAC register offset to calculation of imdio.priv to
-> fix this.
->
-> Fixes: cc4e8af2c552 ("net: fsl_enetc: Split register accessors")
-> Signed-off-by: Thomas Schaefer <thomas.schaefer@kontron.com>
-> Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
-
-With the nitpick above:
-
-Reviewed-by: Michael Walle <mwalle@kernel.org>
-
-> ---
->
-> But the question that now arises is, does this code path work on the imx
-> SoCs as well. Now the imx specific offset 0x5000 is added here and was no=
-t
-> used before.
-
-Maybe the imx9 doesn't use the internal MDIO controller or the board
-which was this tested on doesn't use the PCS?
-
--michael
-
-> Can someone please test this on an imx9 and confirm?
->
->  drivers/net/fsl_enetc.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-> index 52fa820f51..97cccda451 100644
-> --- a/drivers/net/fsl_enetc.c
-> +++ b/drivers/net/fsl_enetc.c
-> @@ -473,13 +473,15 @@ static int enetc_init_sxgmii(struct udevice *dev)
->  /* Apply protocol specific configuration to MAC, serdes as needed */
->  static void enetc_start_pcs(struct udevice *dev)
->  {
-> +	struct enetc_data *data =3D (struct enetc_data *)dev_get_driver_data(de=
-v);
->  	struct enetc_priv *priv =3D dev_get_priv(dev);
-> =20
->  	/* register internal MDIO for debug purposes */
->  	if (enetc_read_pcapr_mdio(dev)) {
->  		priv->imdio.read =3D enetc_mdio_read;
->  		priv->imdio.write =3D enetc_mdio_write;
-> -		priv->imdio.priv =3D priv->port_regs + ENETC_PM_IMDIO_BASE;
-> +		priv->imdio.priv =3D priv->port_regs + data->reg_offset_mac +
-> +		                   ENETC_PM_IMDIO_BASE;
->  		strlcpy(priv->imdio.name, dev->name, MDIO_NAME_LEN);
->  		if (!miiphy_get_dev_by_name(priv->imdio.name))
->  			mdio_register(&priv->imdio);
-
-
---023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCaA9TJBIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/gBoAF/W97SiwDxGWRxqHJbtKl5DSfbyn8OZAxc
-SS4NBV4P7UPJAyqUGvRBjNyTWQ48tx43AYCSnwu3EYIV16I/m4wgBvHo/RxTgL2H
-TB6wMdvpOrKFto16YAcNqjH40gPQir1BeL0=
-=ZDJR
------END PGP SIGNATURE-----
-
---023ce80dd54248dd5f9a7639834dde4601b16c56936be6b2ed251eccbe39--
