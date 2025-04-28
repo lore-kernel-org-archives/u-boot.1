@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD7DC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11E14C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDBAF8290A;
-	Mon, 28 Apr 2025 21:27:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 502EB82A4D;
+	Mon, 28 Apr 2025 21:27:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OVc8P5DX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n2JP2rCU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE0938210E; Mon, 28 Apr 2025 21:24:58 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 8816C8209F; Mon, 28 Apr 2025 21:25:00 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5DE3820F6
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BDFA80EFB
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-7399a2dc13fso7423510b3a.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:56 -0700 (PDT)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2254e0b4b79so78434905ad.2
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745868295; x=1746473095; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745868296; x=1746473096; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6dEkOebyHIW5sFbRQIjVlRYoEAWWpj+eXL/AHGOvwbs=;
- b=OVc8P5DXvD8/IPqwztMiCGUO8NI8+RXC7guP+Cp+Fv9ITf5h2YB/z9Gr5Fl/Vv3JUs
- 2p5jWfRvnpnAPrQY/ZaGDLIu9IJr9qtW2ukBgrc7IzeCTiJeIhpieyQGVK0G/OugSr7G
- ClU+zknsJfw+T6uwwGenNugoBr2kEypADZcBY=
+ bh=MvxOlecVI/99KO0pSUGtZ3fQ/eV9xTv4AQMdbrmP1ws=;
+ b=n2JP2rCUClJlxVfOt0QSsgeMRczQnXDa64IulP0drHn56ogTIOT1sI/ELidpGhFZxf
+ kmIBT03VjQVK+BbwbLuMwjfUBT9x1shBwHDUVM+NEPe9Lmf1ZWttuDDQ2u7dIVJWHINW
+ jdVdkt9+C36EgsDlT7BNaZQBP4wk4HOHSxfX0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745868295; x=1746473095;
+ d=1e100.net; s=20230601; t=1745868296; x=1746473096;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6dEkOebyHIW5sFbRQIjVlRYoEAWWpj+eXL/AHGOvwbs=;
- b=VrnC6+imZgPplDRHZla7znh86Q8aaelK8+aazlG8YUsr5HN5eGZPgdvLFRwN1SBqlP
- nN0jq/y197BPoL6A0UE2Zjtc/hlH4vFV8g4ZIqoaRU5Um0jatm85OmKiCdJdd4eNWqF9
- susFrfqUnSpdWhlv00qGDCh4QppvqbQ6q9ZMFTRXETUuVPXL9j451/IebKowXsVHjCTp
- 2FuTdX+28urtXtuMogj5GS6tGLc9q5JUuo8ZIja7Yg6UG/2rMZIwWczq658S5LcaFJUU
- 6IRJef6lXa/LFUESh5ffYF+GUfXASrTBxye2U2Y1xug2KtyXYNUOnlPt+YIl+/jRCI2W
- 5wGg==
-X-Gm-Message-State: AOJu0YypVNhSu9rRg/cwvY4xIRdyRKBjRuThPGfnkRj5ahnX09+y5iaN
- TJYsAPkRD2oiUWHpUnjtc7K6Qyvo2Ce/UBYatjVQysEyg6NLLJU4HowcWkE76CEQ3+6pHMAKsmM
+ bh=MvxOlecVI/99KO0pSUGtZ3fQ/eV9xTv4AQMdbrmP1ws=;
+ b=jtEHJv9yKO5+BN4xZGdd78tQjgg9K2QtP65KYkvZ7FV93EiMmy6aWnNCH4BwAEymZc
+ covuYSyUFspAZEQYbeUVZ0bdu4m8VEc4cZv6P0AM1P+HJ8zL+vrKDg+JDCczcky1NgpR
+ 1mmsFt7DWlbqFcufU84mRKa3yp2by9MZ1aTcaKdDB5uNlhbsAZBVpuca6H1hJxi92M8r
+ nDRGqNZCpj+xw48/4h9lZGqCZqUsXW7AUMnG9DcgT4ZiHsU45WYJQAlXt0F7qAyB5WNT
+ JiisHQfnuJACOGnpbXMIYTMgmiUUNu63fNgM8AR5g129k7nlAQ+y+jXXkDGffMwccJ5j
+ trRg==
+X-Gm-Message-State: AOJu0YyNl9stYTsXaZa58NaSuIeaXH1VdmRKeiwR49hwfHh8gAOx3Hf8
+ Nxez1Hl6WYuNVngOrZjeP7I8SLAGVy2BgciJlRytm0SKSAf2RCPqieXjJOsXCB6DKH7VGSaD7JU
  =
-X-Gm-Gg: ASbGncusqaZRo5G2Gos+5sCXy09hHXoIBkrcP+XMAHlTSHkFksLpoknEVxulfyUXsAf
- DTHbdzFICyjP8mhakiVfl7gma5SN4BdWk2F0IK7vy3tprqvdb+9mhDzFcHg4uxi2Qd1y/NA8JDV
- kKsewbX+95GeCZC4yAL0rbgq4cYhSdSsDAxv+2i5sIEJ69E/wj4UOXIacZgTxb307bqQ+YQUw2G
- yMeKxuf7qCMGQJqXVLqPvbXJ1NvPd8lcSFzbGfiSJ1TP1KkT+9t+HkexVc2iRBQoh6IxmtUm0U7
- kxEpbLMwo1H+Gt0lHOd+10oSDpuEpMRQ0JnKRB/DrfbXuxAKfk6zaIBNPlclb8io0djoYSeEVki
- 0hw==
-X-Google-Smtp-Source: AGHT+IEqpO8wcDw8JHa9ZXGkWIvbBLfyh0fc6kuD6F6wyhKAdoyiprHKb758cUygKvZ42p1+devGPg==
-X-Received: by 2002:a05:6a00:4b03:b0:736:34a2:8a18 with SMTP id
- d2e1a72fcca58-73ff73f4b0bmr15922782b3a.24.1745868295121; 
- Mon, 28 Apr 2025 12:24:55 -0700 (PDT)
+X-Gm-Gg: ASbGnctONC8cVTJS5ZPfQn88u4qdekS8j6UFReD8TolWKUH2MF6J1pv4wx5mkDhACf3
+ Rc+rBsPEibRFlKqoStf9AOprDpN3xEQSd/S0XPJI0pXOuHpJdBEMWcgaRPq5ps2Y0zTwNcb6mC0
+ +Ax+vLvhVZh9ZXjUA6ju+pZaUSjKWa+tM/T+J3f2RBd+sOzD9PGcIfEIskO2uHpT82paPI1Wd+b
+ Y1Zr5Dl8yJKQNolR7CvuSuCj2n7PkCvDcDOGaJuGWxe1VMROi0+Nd4p22UuIcWiyFcFOWFnG0VI
+ d4YvoOktjTQQEvQ9MDp2pjLNn4T4J7QyIvTB6g6d9cvjY1oYRAgkOgdcKIiDmm4tYeQjJpYPvsj
+ 9bw==
+X-Google-Smtp-Source: AGHT+IHcl1jyPhYUkbL2hnd8SUj5RpFGpOkXiEDZyARa5SkNqX67CIH1nvgy4AlBLEpf8PrklRz85Q==
+X-Received: by 2002:a17:903:2b10:b0:223:668d:eba9 with SMTP id
+ d9443c01a7336-22de5ebb11amr12771175ad.10.1745868296584; 
+ Mon, 28 Apr 2025 12:24:56 -0700 (PDT)
 Received: from localhost (199.24.125.34.bc.googleusercontent.com.
  [34.125.24.199]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-73e25acce16sm8655141b3a.175.2025.04.28.12.24.54
+ d9443c01a7336-22dc60bd15fsm54797335ad.15.2025.04.28.12.24.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Apr 2025 12:24:54 -0700 (PDT)
+ Mon, 28 Apr 2025 12:24:56 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -77,9 +77,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v3 16/17] cmd: ximg: Support LZO compressed images
-Date: Mon, 28 Apr 2025 12:24:23 -0700
-Message-ID: <20250428192427.3877612-17-swboyd@chromium.org>
+Subject: [PATCH v3 17/17] cmd: ximg: Support LZ4 compressed images
+Date: Mon, 28 Apr 2025 12:24:24 -0700
+Message-ID: <20250428192427.3877612-18-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.906.g1f30a19c02-goog
 In-Reply-To: <20250428192427.3877612-1-swboyd@chromium.org>
 References: <20250428192427.3877612-1-swboyd@chromium.org>
@@ -102,44 +102,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support to decompress LZO images.
+Add support to decompress LZ4 images. LZ4 is used on more recent
+Chromebooks to store the FIT image.
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- cmd/ximg.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ cmd/ximg.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
 diff --git a/cmd/ximg.c b/cmd/ximg.c
-index 29d7c3279b39..a6341a078019 100644
+index a6341a078019..eed66c776d12 100644
 --- a/cmd/ximg.c
 +++ b/cmd/ximg.c
-@@ -14,6 +14,9 @@
- #include <cpu_func.h>
- #include <env.h>
- #include <gzip.h>
-+#if IS_ENABLED(CONFIG_LZO)
-+#include <linux/lzo.h>
-+#endif
- #if IS_ENABLED(CONFIG_ZSTD)
- #include <linux/zstd.h>
- #endif
-@@ -238,6 +241,18 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+@@ -30,6 +30,7 @@
+ #include <asm/byteorder.h>
+ #include <asm/cache.h>
+ #include <asm/io.h>
++#include <u-boot/lz4.h>
+ 
+ static int
+ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+@@ -253,6 +254,18 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  			}
  			break;
- #endif /* CONFIG_BZIP2 */
-+#if IS_ENABLED(CONFIG_LZO)
-+		case IH_COMP_LZO:
+ #endif /* CONFIG_LZO */
++#if IS_ENABLED(CONFIG_LZ4)
++		case IH_COMP_LZ4:
 +			{
 +				int ret;
 +				size_t size = unc_len;
 +				printf("   Uncompressing part %d ... ", part);
 +
-+				ret = lzop_decompress((void *)data, len, (void *)dest, &size);
++				ret = ulz4fn((void *)data, len, (void *)dest, &size);
 +				len = size;
 +			}
 +			break;
-+#endif /* CONFIG_LZO */
++#endif /* CONFIG_LZ4 */
  #if IS_ENABLED(CONFIG_ZSTD)
  		case IH_COMP_ZSTD:
  			{
