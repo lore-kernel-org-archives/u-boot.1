@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50C07C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:29:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694A3C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3D7C829A1;
-	Mon, 28 Apr 2025 15:28:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F0E5B82893;
+	Mon, 28 Apr 2025 15:29:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="z86YAHTe";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="NtNA1dh1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43D8082724; Mon, 28 Apr 2025 15:28:52 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id A5DFE82935; Mon, 28 Apr 2025 15:29:22 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 492A382935
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:28:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B51FF82724
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:29:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9QT9t011078;
- Mon, 28 Apr 2025 15:28:49 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9Qdtn021410;
+ Mon, 28 Apr 2025 15:29:18 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- Je3dZFx50T2kTOaKz+bZf7JxMJBAU7jkOjOH7uID1Cw=; b=z86YAHTe/xqJeBF3
- liFxpKShCHGf0haw9PvLaxRxs0c6oObRaqhId87wF1/ueJHJxdm4Xe9NiWK6Q1c5
- n4pUL/Zm1KpuLt4+cHq9TiF/ylI69z18TvPoavRCm2dWJRHoo6BNIW9fLekCpFFv
- IlRAxmv5qNB7R3leFRXXwZeuHDoedHzPwysUGPgoF+eXhAglTXY3TPMeCI8hCm4f
- JBrH1Oru5qnzbEE9Jq66EWbNQwkc5IvosGRt/F8MdeWObHpfu3vmV+/iRDfU26Dr
- 28fWD6YK0CDCag3uOZw1ufwm8AjkKBBXq1dV5x42j10RGpv+JDlEyCqquK4R41X4
- qPJQUg==
+ TJR97h0ZaGxEucy0hcZde7JtiaLsD5nuDX0GUoh8ehI=; b=NtNA1dh1wgJcMgQp
+ twEJIIhg7TnsdbpGqKucIyCf+Y9MgD0XMjJ9D3Avsmr0eBHh2I0/Kis4fElW95nH
+ p3MZcNl5UV6Qx8m90MIXswHtnjiriMalxM5VXQnIeTbmaiVb8wnlHSD9pI2tZf1U
+ 3dkE+/ab6K14GTqj7hyPm5j/TygrHa49Bhu5I9zBSMGm99UmwkZ5FOFzoce/nMST
+ lfRpk1bhfSs0IiX5Wb+qLekJv6X0ZWWju5WICsuidXvbB/04D9HLXCjlUCfHvEoB
+ aKgmChuwhRH38lGAe9H/4Qvb8by/U2/YtU7y0rebn9qLSkrjli0wO2nLPl9JkGOt
+ omVkBg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 469aencgav-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mm9exq1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:28:49 +0200 (MEST)
+ Mon, 28 Apr 2025 15:29:18 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 407774004C;
- Mon, 28 Apr 2025 15:27:35 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 22D1140067;
+ Mon, 28 Apr 2025 15:27:52 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4BD0AA476F9;
- Mon, 28 Apr 2025 15:24:19 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AF7F8A47ADB;
+ Mon, 28 Apr 2025 15:24:28 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:24:18 +0200
-Message-ID: <438dcc5f-fef3-44f7-a99d-f00ae5f89557@foss.st.com>
-Date: Mon, 28 Apr 2025 15:24:18 +0200
+ 2025 15:24:28 +0200
+Message-ID: <ca7fb705-66da-488e-9306-dd17aa15668e@foss.st.com>
+Date: Mon, 28 Apr 2025 15:24:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 20/22] arm: stm32mp: stm32prog: PTA BSEC is not
- supported on closed device
+Subject: Re: [PATCH v2 22/22] configs: stm32mp25: enable DISTRO_DEFAULT and
+ BOOTCOMMAND
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-21-patrice.chotard@foss.st.com>
+ <20250425131533.392747-23-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-21-patrice.chotard@foss.st.com>
+In-Reply-To: <20250425131533.392747-23-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -94,46 +97,32 @@ X-Virus-Status: Clean
 
 
 On 4/25/25 15:15, Patrice Chotard wrote:
-> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Enable DISTRO_DEFAULT and BOOTCOMMAND flags for stm32mp25
 > 
-> On closed device the PTA BSEC is never supported and the current check if
-> PTA BSEC is supported cause a OP-TEE error:
-> 
->   E/TC tee_ta_open_session
-> 
-> This patch removed this warning on closed device, because the check is
-> skipped.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
 > ---
 > 
-> (no changes since v1)
+> Changes in v2:
+>   - Enable DISTRO_DEFAULT and BOOTCOMMAND flags
 > 
->  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  configs/stm32mp25_defconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> index 353aecc09de..f6395bad0ec 100644
-> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> @@ -13,6 +13,7 @@
->  #include <part.h>
->  #include <tee.h>
->  #include <asm/arch/stm32mp1_smc.h>
-> +#include <asm/arch/sys_proto.h>
->  #include <asm/global_data.h>
->  #include <dm/device_compat.h>
->  #include <dm/uclass.h>
-> @@ -1357,7 +1358,7 @@ static int dfu_init_entities(struct stm32prog_data *data)
->  
->  	alt_nb = 1; /* number of virtual = CMD*/
->  
-> -	if (IS_ENABLED(CONFIG_CMD_STM32PROG_OTP)) {
-> +	if (IS_ENABLED(CONFIG_CMD_STM32PROG_OTP) && !stm32mp_is_closed()) {
->  		/* OTP_SIZE_SMC = 0 if SMC is not supported */
->  		otp_size = OTP_SIZE_SMC;
->  		/* check if PTA BSEC is supported */
+> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+> index 0e515e4af65..317a6d5ecd6 100644
+> --- a/configs/stm32mp25_defconfig
+> +++ b/configs/stm32mp25_defconfig
+> @@ -16,7 +16,9 @@ CONFIG_SYS_MEMTEST_END=0x88000000
+>  CONFIG_API=y
+>  CONFIG_SYS_MMC_MAX_DEVICE=3
+>  CONFIG_FIT=y
+> +CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=1
+> +CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+>  CONFIG_SYS_PROMPT="STM32MP> "
+>  # CONFIG_CMD_BDI is not set
+>  CONFIG_CMD_BOOTZ=y
 Applied to u-boot-stm32/master
 
 Thanks
