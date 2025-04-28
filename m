@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B809C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AC4BC369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:26:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24AD282A5E;
-	Mon, 28 Apr 2025 15:24:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6B51982AAF;
+	Mon, 28 Apr 2025 15:24:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zuOhjDdP";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Chej1re7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02D48828A2; Mon, 28 Apr 2025 15:24:33 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 7571782A5C; Mon, 28 Apr 2025 15:24:38 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E420B82937
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:24:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7504A82A80
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:24:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9ULkd010140;
- Mon, 28 Apr 2025 15:24:29 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9MuAt021620;
+ Mon, 28 Apr 2025 15:24:32 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- 6cJ6lFeouGvX9i7Qev8QplI9XKBoxNKHqthIRDSpfZY=; b=zuOhjDdPbUFDyHJV
- l/78+9QGJh+o6Q2XNiKCkIz1PI9sEwopVDRvUcZJthncunGbJ4m4u6WrTRzuqvw9
- 7eGfiBcZMZMArEK0of0tn2DC0bDujEgdIERgXIQ2PtP/zMVKH5eNdBXuQUsT/iZk
- Z1+61R72U7M9BtgkzA3XpIgbk8SO4bS9Ux5HJrY/d7g/t6OkKw7kaGNeyNtueqZe
- /Hj8b67JrgmhFL6MKKKEPG7R/LghoixClsd3Rb/qZR/9bzC7bh1PTygnY6DFwveC
- rreoQoYrOMScSBr+ZjzoxkzfA9xDTGLh7mfei/iXxfKFpbbkGgV1i+jDM6/sbCxm
- mipK/g==
+ 6yhdxVEGPKFnGsLBO5S0qAN+uZhFtZvdkDkcsjC+GGc=; b=Chej1re7CwhOHBHN
+ Tr8Ds8GkOvwZI/+CROiXDfPpamtGr142HES5SBoMR4bOI6idl5PF2kjddk7og51z
+ J/poPoc4d5L8ZuTsviDdgX4f5JLw6XQ0SmLXjrg+WsTEjuXX1sDymOgZgrZrYbrA
+ dhXqFEFaNSwWonXwrqFlEZLDxlk90DLCwEuYVkTlsVuCwAxpsItDlil67j3ITRNT
+ QP7ZzAKZqCQq77oVCQwXK/n50Z1ABhpoBOpLCRzox2DKtoy6McvoGbTX3fQ4XxJG
+ LUIBaB6DNvIX3L8N8dOd62aJCwfk8ATTvhGEydUPLY+UnMlMww/QIvUOjDHUEHYr
+ 8a+0UA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 469aencfu0-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mm9ex56-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:24:28 +0200 (MEST)
+ Mon, 28 Apr 2025 15:24:32 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 33CC84006F;
- Mon, 28 Apr 2025 15:23:50 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3205F40065;
+ Mon, 28 Apr 2025 15:23:37 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 81A85A8087F;
- Mon, 28 Apr 2025 15:23:22 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B4508A80898;
+ Mon, 28 Apr 2025 15:23:09 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:23:21 +0200
-Message-ID: <6b7d0274-d071-4d5b-91ff-fd04bcfb14bf@foss.st.com>
-Date: Mon, 28 Apr 2025 15:23:21 +0200
+ 2025 15:23:08 +0200
+Message-ID: <d3a799ec-b1ee-4c63-8d42-9ec7d89cafd0@foss.st.com>
+Date: Mon, 28 Apr 2025 15:23:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/22] board: st: stm32mp2: change bootcmd for ST boards
+Subject: Re: [PATCH v2 07/22] board: st: stm32mp2: add led support
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-11-patrice.chotard@foss.st.com>
+ <20250425131533.392747-8-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-11-patrice.chotard@foss.st.com>
+In-Reply-To: <20250425131533.392747-8-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -95,107 +98,113 @@ X-Virus-Status: Clean
 On 4/25/25 15:15, Patrice Chotard wrote:
 > From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
-> For nor0 boot for the STMicroelectronics boards, the bootfs
-> is found in SD-Card = mmc0 for nor0 boot.
-> 
-> Introduce a new file configuration file stm32mp25_st_common.h
-> to manage this specific behavior for the STMicroelectronics
-> boards; change the boot order for nor0 boot and don't use
-> the default DISTRO order define in BOOT_TARGET_DEVICES:
-> mmc1, ubifs, mmc0, mmc2.
+> Add led support, force default state on U-Boot initialization and put on
+> the Linux heartbeat led = "blue-led" during U-Boot execution.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Signed-off-by: Patrice CHOTARD <patrice.chotard@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 > 
 > (no changes since v1)
 > 
->  board/st/stm32mp2/Kconfig             |  2 +-
->  board/st/stm32mp2/MAINTAINERS         |  1 +
->  include/configs/stm32mp25_st_common.h | 51 +++++++++++++++++++++++++++
->  3 files changed, 53 insertions(+), 1 deletion(-)
->  create mode 100644 include/configs/stm32mp25_st_common.h
+>  arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |  1 +
+>  board/st/stm32mp2/stm32mp2.c             | 43 ++++++++++++++++++++++++
+>  configs/stm32mp25_defconfig              |  2 ++
+>  3 files changed, 46 insertions(+)
 > 
-> diff --git a/board/st/stm32mp2/Kconfig b/board/st/stm32mp2/Kconfig
-> index 89039f068a2..f91e25f1f9a 100644
-> --- a/board/st/stm32mp2/Kconfig
-> +++ b/board/st/stm32mp2/Kconfig
-> @@ -7,7 +7,7 @@ config SYS_VENDOR
->  	default "st"
+> diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+> index d4a75b2f03e..a9bd5e042fa 100644
+> --- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+> @@ -7,6 +7,7 @@
 >  
->  config SYS_CONFIG_NAME
-> -	default "stm32mp25_common"
-> +	default "stm32mp25_st_common"
+>  / {
+>  	config {
+> +		u-boot,boot-led = "led-blue";
+>  		u-boot,mmc-env-partition = "u-boot-env";
+>  	};
 >  
->  source "board/st/common/Kconfig"
->  endif
-> diff --git a/board/st/stm32mp2/MAINTAINERS b/board/st/stm32mp2/MAINTAINERS
-> index e6bea910f92..8f624811f99 100644
-> --- a/board/st/stm32mp2/MAINTAINERS
-> +++ b/board/st/stm32mp2/MAINTAINERS
-> @@ -7,3 +7,4 @@ F:	arch/arm/dts/stm32mp25*
->  F:	board/st/stm32mp2/
->  F:	configs/stm32mp25_defconfig
->  F:	include/configs/stm32mp25_common.h
-> +F:	include/configs/stm32mp25_st_common.h
-> diff --git a/include/configs/stm32mp25_st_common.h b/include/configs/stm32mp25_st_common.h
-> new file mode 100644
-> index 00000000000..ab5a4a91644
-> --- /dev/null
-> +++ b/include/configs/stm32mp25_st_common.h
-> @@ -0,0 +1,51 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
-> +/*
-> + * Copyright (C) 2022, STMicroelectronics - All Rights Reserved
-> + *
-> + * Configuration settings for the STMicroelectonics STM32MP25x boards
-> + */
+> diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
+> index 8446b8fd3d6..576a958c783 100644
+> --- a/board/st/stm32mp2/stm32mp2.c
+> +++ b/board/st/stm32mp2/stm32mp2.c
+> @@ -8,6 +8,7 @@
+>  #include <config.h>
+>  #include <env_internal.h>
+>  #include <fdt_support.h>
+> +#include <led.h>
+>  #include <log.h>
+>  #include <misc.h>
+>  #include <mmc.h>
+> @@ -54,9 +55,46 @@ int checkboard(void)
+>  	return 0;
+>  }
+>  
+> +static int get_led(struct udevice **dev, char *led_string)
+> +{
+> +	const char *led_name;
+> +	int ret;
 > +
-> +#ifndef __CONFIG_STM32MP25_ST_COMMON_H__
-> +#define __CONFIG_STM32MP25_ST_COMMON_H__
+> +	led_name = ofnode_conf_read_str(led_string);
+> +	if (!led_name) {
+> +		log_debug("could not find %s config string\n", led_string);
+> +		return -ENOENT;
+> +	}
+> +	ret = led_get_by_label(led_name, dev);
+> +	if (ret) {
+> +		log_debug("get=%d\n", ret);
+> +		return ret;
+> +	}
 > +
-> +#define STM32MP_BOARD_EXTRA_ENV \
-> +	"usb_pgood_delay=2000\0" \
-> +	"console=ttySTM0\0"
+> +	return 0;
+> +}
 > +
-> +#include <configs/stm32mp25_common.h>
+> +static int setup_led(enum led_state_t cmd)
+> +{
+> +	struct udevice *dev;
+> +	int ret;
 > +
-> +#ifdef CFG_EXTRA_ENV_SETTINGS
-> +/*
-> + * default bootcmd for stm32mp25 STMicroelectronics boards:
-> + * for serial/usb: execute the stm32prog command
-> + * for mmc boot (eMMC, SD card), distro boot on the same mmc device
-> + * for nand or spi-nand boot, distro boot with ubifs on UBI partition or
-> + * sdcard
-> + * for nor boot, distro boot on SD card = mmc0 ONLY !
-> + */
-> +#define ST_STM32MP25_BOOTCMD "bootcmd_stm32mp=" \
-> +	"echo \"Boot over ${boot_device}${boot_instance}!\";" \
-> +	"if test ${boot_device} = serial || test ${boot_device} = usb;" \
-> +	"then stm32prog ${boot_device} ${boot_instance}; " \
-> +	"else " \
-> +		"run env_check;" \
-> +		"if test ${boot_device} = mmc;" \
-> +		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
-> +		"if test ${boot_device} = nand ||" \
-> +		  " test ${boot_device} = spi-nand ;" \
-> +		"then env set boot_targets ubifs0 mmc0; fi;" \
-> +		"if test ${boot_device} = nor;" \
-> +		"then env set boot_targets mmc0; fi;" \
-> +		"run distro_bootcmd;" \
-> +	"fi;\0"
+> +	if (!CONFIG_IS_ENABLED(LED))
+> +		return 0;
 > +
-> +#undef CFG_EXTRA_ENV_SETTINGS
-> +#define CFG_EXTRA_ENV_SETTINGS \
-> +	STM32MP_MEM_LAYOUT \
-> +	ST_STM32MP25_BOOTCMD \
-> +	BOOTENV \
-> +	STM32MP_EXTRA \
-> +	STM32MP_BOARD_EXTRA_ENV
+> +	ret = get_led(&dev, "u-boot,boot-led");
+> +	if (ret)
+> +		return ret;
 > +
-> +#endif
-> +#endif
+> +	ret = led_set_state(dev, cmd);
+> +	return ret;
+> +}
+> +
+>  /* board dependent setup after realloc */
+>  int board_init(void)
+>  {
+> +	setup_led(LEDST_ON);
+> +
+>  	return 0;
+>  }
+>  
+> @@ -142,3 +180,8 @@ int board_late_init(void)
+>  
+>  	return 0;
+>  }
+> +
+> +void board_quiesce_devices(void)
+> +{
+> +	setup_led(LEDST_OFF);
+> +}
+> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+> index fd5c36ec3e2..3d6665335f5 100644
+> --- a/configs/stm32mp25_defconfig
+> +++ b/configs/stm32mp25_defconfig
+> @@ -43,6 +43,8 @@ CONFIG_GPIO_HOG=y
+>  CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+>  CONFIG_STM32_SDMMC2=y
+>  CONFIG_MTD=y
+>  CONFIG_USE_SYS_MAX_FLASH_BANKS=y
 Applied to u-boot-stm32/master
 
 Thanks
