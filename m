@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F01C369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:13:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20717C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:13:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DFD382A9E;
-	Mon, 28 Apr 2025 16:13:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 600A782B19;
+	Mon, 28 Apr 2025 16:13:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dvy1cLWy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="McE5bFpm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75841829EF; Mon, 28 Apr 2025 16:13:04 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 6ED6F82AE2; Mon, 28 Apr 2025 16:13:06 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6390382A0A
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:13:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A283829E2
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:13:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53SED0NO2794541
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53SED2JH3412665
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 28 Apr 2025 09:13:00 -0500
+ Mon, 28 Apr 2025 09:13:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745849580;
- bh=UfaKJz8tO4M71JItb/5J52Dn9LUiYx/OApPNKclKgO0=;
+ s=ti-com-17Q1; t=1745849582;
+ bh=Y6OEXPHeNq9YwcKH5vbYqeMUH2MV+IW9Ggh6z6wGGDs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=dvy1cLWyIpOaWcXoV7l8X1Z8yDpee/6ZjU/ehboeOo7UKh0xopw77Ji35bif6LiBk
- e9J3gNL/+Wv7X9YDycGO7tl24NB30EYplhyYL5c43EHdAEckHMwKiDYHwppS65DoKr
- ACXEzbV62CIGNzrgk2Bqe97jOFN6NaMyG5whzSZk=
+ b=McE5bFpmnVIL+rEAL7bbXCyTvmDlVNZ5lgB0tVBihm/7n4M2GX3UY221b60EIO6MA
+ 9idf61F6UMk3bcS3uH7c7UltP4S5ZIPunqfjXx8FpxuYO2hRQmHnnpZQ48iQGxT1oy
+ 97+f8XqJpiPzdBCCe+8mcfcs6m7o/KnQvSrok2sw=
 Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53SED0Kp019191
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53SED24p066607
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 28 Apr 2025 09:13:00 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE104.ent.ti.com
+ Mon, 28 Apr 2025 09:13:02 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE104.ent.ti.com
  (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
- Apr 2025 09:13:00 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 09:13:01 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 28 Apr 2025 09:13:00 -0500
+ Frontend Transport; Mon, 28 Apr 2025 09:13:01 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53SECx0A044545;
- Mon, 28 Apr 2025 09:13:00 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53SED0Kj044687;
+ Mon, 28 Apr 2025 09:13:01 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
-Subject: [PATCH v6 1/9] spl: Kconfig: allow K3 devices to use falcon mode
-Date: Mon, 28 Apr 2025 19:42:23 +0530
-Message-ID: <20250428141235.1734014-2-anshuld@ti.com>
+Subject: [PATCH v6 2/9] mach-k3: fix reading size and addr from fdt on R5
+Date: Mon, 28 Apr 2025 19:42:24 +0530
+Message-ID: <20250428141235.1734014-3-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250428141235.1734014-1-anshuld@ti.com>
 References: <20250428141235.1734014-1-anshuld@ti.com>
@@ -80,31 +80,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b4437bc
-("ti_armv7_common: Disable Falcon Mode on HS devices") for older 32-bit
-HS devices and can be enabled on K3 devices.
+fdtdec_get_addr_size uses architecture dependent datatypes which causes
+the 32-bit R5 to fail when reading the 64-bit size and addr fields of
+reg nodes from the fdt.
 
-For secure boot, the kernel with x509 headers can be packaged in a fit
-container (fitImage) signed with TIFS keys for authentication.
+This changes it to a common api for both 64 and 32 bit platforms.
+Now fdt fixups can be applied to the fdt from R5.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-k3/common_fdt.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index c08045f9c8d..68e900e9b91 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1165,7 +1165,7 @@ config SPL_ONENAND_SUPPORT
- 
- config SPL_OS_BOOT
- 	bool "Activate Falcon Mode"
--	depends on !TI_SECURE_DEVICE
-+	depends on !TI_SECURE_DEVICE || ARCH_K3
- 	help
- 	  Enable booting directly to an OS from SPL.
- 	  for more info read doc/README.falcon
+diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
+index 361b0c0b31b..c227743f9f8 100644
+--- a/arch/arm/mach-k3/common_fdt.c
++++ b/arch/arm/mach-k3/common_fdt.c
+@@ -137,7 +137,9 @@ int fdt_fixup_reserved(void *blob, const char *name,
+ 			return -EINVAL;
+ 		if (!strncmp(node_name, name, strlen(name))) {
+ 			/* Read out old size first */
+-			addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
++			addr = fdtdec_get_addr_size_fixed(
++				blob, subnode, "reg", 0, 8 / sizeof(fdt32_t),
++				8 / sizeof(fdt32_t), &size, false);
+ 			if (addr == FDT_ADDR_T_NONE)
+ 				return -EINVAL;
+ 			new_size = size;
 -- 
 2.49.0
 
