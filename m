@@ -4,80 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694A3C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:29:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F565C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:36:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0E5B82893;
-	Mon, 28 Apr 2025 15:29:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 006EE829D4;
+	Mon, 28 Apr 2025 15:36:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="NtNA1dh1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oUp6BbRv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5DFE82935; Mon, 28 Apr 2025 15:29:22 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B51FF82724
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:29:20 +0200 (CEST)
+ id 932AB829E2; Mon, 28 Apr 2025 15:36:32 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B8C2828E1
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:36:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9Qdtn021410;
- Mon, 28 Apr 2025 15:29:18 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- TJR97h0ZaGxEucy0hcZde7JtiaLsD5nuDX0GUoh8ehI=; b=NtNA1dh1wgJcMgQp
- twEJIIhg7TnsdbpGqKucIyCf+Y9MgD0XMjJ9D3Avsmr0eBHh2I0/Kis4fElW95nH
- p3MZcNl5UV6Qx8m90MIXswHtnjiriMalxM5VXQnIeTbmaiVb8wnlHSD9pI2tZf1U
- 3dkE+/ab6K14GTqj7hyPm5j/TygrHa49Bhu5I9zBSMGm99UmwkZ5FOFzoce/nMST
- lfRpk1bhfSs0IiX5Wb+qLekJv6X0ZWWju5WICsuidXvbB/04D9HLXCjlUCfHvEoB
- aKgmChuwhRH38lGAe9H/4Qvb8by/U2/YtU7y0rebn9qLSkrjli0wO2nLPl9JkGOt
- omVkBg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mm9exq1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:29:18 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 22D1140067;
- Mon, 28 Apr 2025 15:27:52 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AF7F8A47ADB;
- Mon, 28 Apr 2025 15:24:28 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:24:28 +0200
-Message-ID: <ca7fb705-66da-488e-9306-dd17aa15668e@foss.st.com>
-Date: Mon, 28 Apr 2025 15:24:27 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53SDaRbs2788554
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 28 Apr 2025 08:36:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745847387;
+ bh=qBOyUFgexVoIAEquGmWEHD7R/Jtaxzf6x2ZE+CNrNRI=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=oUp6BbRv7Pfsd9zkNpaij/URmw1Y11Nhrc1JC4Jiw3h+naps7EX9ZtFBfT3pVUCnG
+ 0/iY9t3seNCnSwBnfWGJKh2dYyK+jUmkgyRPDxqdq1LtC7TDlNugHAXbVqSp2EETru
+ PkycWsRVLeJEAAWqMBZ/Ve3IM3s1hRlHSmRl9rwY=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53SDaRs5119367
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 28 Apr 2025 08:36:27 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
+ Apr 2025 08:36:26 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 28 Apr 2025 08:36:26 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53SDaQxb126870;
+ Mon, 28 Apr 2025 08:36:26 -0500
+Date: Mon, 28 Apr 2025 08:36:26 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] arm: dts: k3: binman: Fix DM firmware selection
+Message-ID: <20250428133626.iebmz3j3tgakrvkd@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250425225403.861034-1-afd@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 22/22] configs: stm32mp25: enable DISTRO_DEFAULT and
- BOOTCOMMAND
-To: <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-23-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-23-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-04-28_05,2025-04-24_02,2025-02-21_01
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20250425225403.861034-1-afd@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,36 +81,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 4/25/25 15:15, Patrice Chotard wrote:
-> Enable DISTRO_DEFAULT and BOOTCOMMAND flags for stm32mp25
+On April 25, 2025 thus sayeth Andrew Davis:
+> Just like TF-A and OP-TEE, the documentation states a custom path for DM
+> can be provided at build time by setting TI_DM. This should then set
+> ti-dm-path which updates ti-dm node filenames in binman.
 > 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Two issues prevent this from functioning for most K3 boards. One is when
+> then DM firmware name is inside a blob-ext node instead of a ti-dm node.
 > 
+> The second is when the filename in the ti-dm node is a pointer to a
+> blob-ext node. In this case even though the filename is updated, the
+> filename in the blob-ext is not, so build can fail if the default
+> file in the blob-ext cannot be found, even if the updated ti-dm file
+> does exist.
+> 
+> Fix both of these for all K3 by removing any indirect ti-dm nodes and
+> making sure all DM nodes are labeled with "ti-dm".
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+
+For the few sitars boards this works :)
+
+Reviewed-by: Bryan Brattlof <bb@ti.com>
+
 > ---
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 11 ++-----
+>  arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 15 +++-------
+>  arch/arm/dts/k3-am625-sk-binman.dtsi          | 14 +++------
+>  .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 11 ++-----
+>  arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 14 +++------
+>  arch/arm/dts/k3-am62a-sk-binman.dtsi          | 14 +++------
+>  arch/arm/dts/k3-am62p-sk-binman.dtsi          | 11 ++-----
+>  arch/arm/dts/k3-am67a-beagley-ai-u-boot.dtsi  | 12 ++------
+>  arch/arm/dts/k3-am69-sk-u-boot.dtsi           | 29 +++++++++++++------
+>  arch/arm/dts/k3-j7200-binman.dtsi             | 13 +++------
+>  .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 11 ++-----
+>  arch/arm/dts/k3-j721e-binman.dtsi             | 13 +++------
+>  arch/arm/dts/k3-j721s2-binman.dtsi            | 13 +++------
+>  arch/arm/dts/k3-j722s-binman.dtsi             | 12 ++------
+>  arch/arm/dts/k3-j742s2-evm-u-boot.dtsi        | 29 +++++++++++++------
+>  arch/arm/dts/k3-j784s4-binman.dtsi            |  8 ++---
+>  arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        | 29 +++++++++++++------
+>  17 files changed, 104 insertions(+), 155 deletions(-)
 > 
-> Changes in v2:
->   - Enable DISTRO_DEFAULT and BOOTCOMMAND flags
-> 
->  configs/stm32mp25_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index 0e515e4af65..317a6d5ecd6 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -16,7 +16,9 @@ CONFIG_SYS_MEMTEST_END=0x88000000
->  CONFIG_API=y
->  CONFIG_SYS_MMC_MAX_DEVICE=3
->  CONFIG_FIT=y
-> +CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=1
-> +CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
->  CONFIG_SYS_PROMPT="STM32MP> "
->  # CONFIG_CMD_BDI is not set
->  CONFIG_CMD_BOOTZ=y
-Applied to u-boot-stm32/master
 
-Thanks
-Patrice
+...
+
+>  
+> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
+> index 534eb14795b..cc619f5920e 100644
+> --- a/arch/arm/dts/k3-am625-sk-binman.dtsi
+> +++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
+> @@ -156,14 +156,6 @@
+>  #define AM625_SK_DTB "u-boot.dtb"
+>  
+>  &binman {
+> -	ti-dm {
+> -		filename = "ti-dm.bin";
+> -		blob-ext {
+> -			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+> -			optional;
+> -		};
+> -	};
+> -
+>  	tifsstub-hs {
+>  		filename = "tifsstub.bin_hs";
+>  		ti-secure-rom {
+> @@ -270,7 +262,8 @@
+>  						keyfile = "custMpk.pem";
+>  					};
+>  					dm: ti-dm {
+> -						filename = "ti-dm.bin";
+> +						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+> +						optional;
+>  					};
+
+So I was curious of this optional flag. Is the issue here that we only 
+check for mandatory binaries via BINMAN_INDIRS and not through all the 
+custom arguments like TI_DM?
+
+~Bryan
