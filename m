@@ -4,73 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5049EC369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:17:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C3E2C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66E3182A96;
-	Mon, 28 Apr 2025 15:38:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C2DF82A53;
+	Mon, 28 Apr 2025 16:23:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZO9wsEuH";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="cXF0OY2r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57DC082AA4; Mon, 28 Apr 2025 15:38:30 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7D65982A96; Mon, 28 Apr 2025 16:23:24 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D07982A8D
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:38:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC9AA82A33
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:23:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9P7Pr012480;
- Mon, 28 Apr 2025 15:38:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=zv5/YdQxbfHovGjyGz85X3
- e5B5okQxDz/jc4Cl87ijo=; b=ZO9wsEuHYYoHQUjUy3ArVa1oHy82z1asNjkjnt
- f07rpG9HKhCOK5AzK0lG7YSaViwMwxNhZHoadhKj/tqdle/XbmKIZeQDXjxFRZsB
- LfA9UFDQJl0t9M2Q0hin2ow0OVWeX7+Q3pe/MfWGEN6lhwhOCcaoUpvFXqaO/q6F
- pgvLWMQE7KpQ+WlPGM1WcXzEQpin1/YfNyh5ZT1NajDxWTBGmp2yH5E2txl98sYX
- dHG6TltmJ3uDzhKB2tsm27QNjKk8fXbtmIIsOE+A7TUWBSFRI4FL86tghU5ihi18
- oUlLQPdt8FY6kfWDCEiNZoCPlwkdwEqWhdjpiVdYLgMYYrzQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mwky8wp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:38:24 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B8FE640053;
- Mon, 28 Apr 2025 15:37:19 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C4294A6272D;
- Mon, 28 Apr 2025 15:35:04 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:35:04 +0200
-Message-ID: <e7fc1441-c4a6-4173-bf7f-974f347f9f67@foss.st.com>
-Date: Mon, 28 Apr 2025 15:35:03 +0200
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vladimir.oltean@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jqzdJBfTl7QwhhKq59/WIw1ZBXKBQ8a6vzeeNAuFrWKgHd4iJqou9iBdtlrzjA1j1bUPrfJ+YhYglbynButI7g3M9YmpilfN3ZQvChKvWJa8GyyMPwCb+yirGEl35hnvAYxNWtw0pzZlDrfdT8bT/d/L6Hc9XPwxb50+UDaGKfRO/2+r0XH0sLCTo2Wh5WeDzwqpNAdMR8B/bA0LGkv2xEl8+dYoSdSH6kzQhiVeLkrT2gk1qCap/HmMS/O/zxH/7/5k2IoTXi/gdtQIsALqZIX5QaDywI7K+9LaPhfIOklFeOifkAEeXNIbtLG7duqlzJa/e6gq834LRZ+tlLZHoQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gqdplueAoJUVZf0Ln1CNv87grTmU/eZtMi4L9bxz6BU=;
+ b=Yymg81Pqfh8wMFErWGH4FR99TLQowOcfThQfmrcl0DRw5RrR4qThcVr6XoUJCtU4jWgjtKPYddT57Rg+32mkp5qJ8waREf62pGXooKUN1Msmiwb24PfaLneq8nwx0iL76T22T929L/MidEcjhOJBpCkpwFoYRHyV7+utAOAXUB9ON4Ne4i6U1uF4/gRFBsnL9owQ5FEOIYNmC1x3oXNOdfVO+euBfjQqs4joGRsbV9F82oPLSyzs497AkhzkoonmtoBbzXKy510YNcVGQQXdIRxAOWc7WE56ux2blxTjN8jtew0YykNdBLPn2vjyKU4GJXYU2bQ9uiVo1yqledFk3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gqdplueAoJUVZf0Ln1CNv87grTmU/eZtMi4L9bxz6BU=;
+ b=cXF0OY2rMCKdnblnIWwDDWpDRZu8UlOvcAdlbGdVeFTqC/K8+SXtUcCZLrwgiBDHgsJxqXuNurPyJI0tN2aXDR5veJA/GNC5wI8jiEFrxXFzS1+mMs9C8EcFk64VJNIDpvMHUb76WncLq8R33LH61Fo3MCFZtyhJElgxv4HG2L5sdyg8adGw9eTWqT6MtAmiREyeeuZFT2MzNfBtMfPU2Fft/E9LPBHRIBtjUm1gcchR3av8gmQl2vNP6zAzUyDBLtncEnor5si2j7SJAi9JmXWPF/ivEjikOsOPAVT9QlwVjdWa4O4Ot+bduUMnmsASgYx5KMVAE4GjWBy8QtNmmQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from AM8PR04MB7779.eurprd04.prod.outlook.com (2603:10a6:20b:24b::14)
+ by AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.31; Mon, 28 Apr
+ 2025 14:23:20 +0000
+Received: from AM8PR04MB7779.eurprd04.prod.outlook.com
+ ([fe80::7417:d17f:8d97:44d2]) by AM8PR04MB7779.eurprd04.prod.outlook.com
+ ([fe80::7417:d17f:8d97:44d2%4]) with mapi id 15.20.8678.028; Mon, 28 Apr 2025
+ 14:23:19 +0000
+Date: Mon, 28 Apr 2025 17:23:16 +0300
+From: Vladimir Oltean <vladimir.oltean@nxp.com>
+To: Michael Walle <mwalle@kernel.org>, Wei Fang <wei.fang@nxp.com>
+Cc: Heiko Thiery <heiko.thiery@gmail.com>, u-boot@lists.denx.de,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
+ Ye Li <ye.li@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
+ Thomas Schaefer <thomas.schaefer@kontron.com>
+Subject: Re: [PATCH] net: fsl_enetc: fix imdio register calculation
+Message-ID: <20250428142316.geminnotbfmbkpxs@skbuf>
+References: <20250428095945.1432389-1-heiko.thiery@gmail.com>
+ <D9I6S5PD32TJ.3AGU7UM3EUOF6@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <D9I6S5PD32TJ.3AGU7UM3EUOF6@kernel.org>
+X-ClientProxiedBy: VI1PR06CA0095.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::24) To AM8PR04MB7779.eurprd04.prod.outlook.com
+ (2603:10a6:20b:24b::14)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Lionel Debieve
- <lionel.debieve@foss.st.com>, <patrice.chotard@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [PULL] Pull request for u-boot master / v2025.07 =
- u-boot-stm32-20250428
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-04-28_05,2025-04-24_02,2025-02-21_01
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7779:EE_|AS8PR04MB8897:EE_
+X-MS-Office365-Filtering-Correlation-Id: a1cfa72f-3048-40d7-8a91-08dd86603961
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nlTaYgZKpYza1oQv/4jb+VEUIA/m0bNgE0gqE0IMjLTY97YTdCI0UyLMA0EG?=
+ =?us-ascii?Q?loKg6XhCPXDYVHPCCu8cJsRPnt92PEgKCn/BqMIbMKEPwFQgOUKEBMXoGhaO?=
+ =?us-ascii?Q?UCxeaTcPapFj5wL23wHS5Eo1F8BOurPJJ1qo68I7VdmB8RQh70V7oeMk/5bI?=
+ =?us-ascii?Q?KWJqzmWn5GcfWcRWs37d46UicJ+SPmXWogq8+V1bv+th5FfLURbDuOwC9xU5?=
+ =?us-ascii?Q?u0WXQoUfcmHl8X+CZpElh6IRgSKJiyLm+ko7Mbo00cUQDoe9I16IZZjcPZGm?=
+ =?us-ascii?Q?3inwOXKkvo7Z3UZKVPTElBqNwsYXnOYTFqTjf83PKa5n5Aq0gJKChQnHR3iy?=
+ =?us-ascii?Q?cZgpPRaij40hclXHjd1RlNJxT1+Ia9rOTnxBIaT/hCVtU0WPcPBi1Zm8fyeb?=
+ =?us-ascii?Q?hMJI19M68Ry4kQqxt4K+LAVE6LUCtvam+X5NwJHCFOZsdKybVQfVdG4wyvGT?=
+ =?us-ascii?Q?eIogWdbrt3/jy0eXhO/xZ+4uxOnd0PpL8/yh4idBdjgZbAD6MSo1lvSGNdhw?=
+ =?us-ascii?Q?P5EfQO+GqihQOj6ecSKFnN8KUtGC96yR4uxjEF5nkWpjUcsd3A8Z+R11U4A0?=
+ =?us-ascii?Q?dJz2L1FVZz/HiFN9tKGijZwXW/mVvlQj05eMmHcICiT7jy42wSVJWqjIFDKR?=
+ =?us-ascii?Q?1DTGRG16a1jEEikA+9aFuOseEnSmrFrfE/8NY64jhNeFBnN2LlbJi6gtDDQH?=
+ =?us-ascii?Q?184ENr/1czFKN2akRJYQ62KXjlm6uBK3khIE5pW0T+UuKSDw2QejT2j8GsHg?=
+ =?us-ascii?Q?iwoyvtf+buBXxsEtVwjidvbWDF80x0l1YtrZCCDE1R/DRAU834iPCGgeqyLT?=
+ =?us-ascii?Q?Q0XUs6DVOphck5aWLraKaXwnhHVBXpdnCjfUMnSyx6tC2pf6awEbh1Dupy4z?=
+ =?us-ascii?Q?qE2J5jxSIsIzJHrm/U3eS/Sm+LixbbfjVZC7x5f0AW3IGXzUe6/1uqGNeJw1?=
+ =?us-ascii?Q?w9ugLLKwTDacWON9Ob9EvR53+39BlHazKc+TXKB1DDNnXJWdS3pLuUDHH/y7?=
+ =?us-ascii?Q?qmhyiA9AfZm/YR30+4EpYNApmSNFsjintpWlmGHmoHrX/qg4xrZMk4N25WYy?=
+ =?us-ascii?Q?fet24c6OktildnbpcO7jIY0mjafWKmgPkRqQFN4EvrRBnG7jKjf9tpZYppD8?=
+ =?us-ascii?Q?r7RRqjR/fx6ZCtD8V0qVdGc+mF0WQyeuqULagjSdfYFlDKF1qiyWX5wTxMOf?=
+ =?us-ascii?Q?E2KNC34ZU0iFxw2COm4fC0walz1RLq51+hAQLkB3GcJsV/Bn02Wsdvt/KeSg?=
+ =?us-ascii?Q?XTfvwkwLxrwDKOMSNlYtyr/pQ19InmU9h21exEJZs5gK04Nd97/TJEc57VnP?=
+ =?us-ascii?Q?EQaSKkynrrolhCMpa1IFMjhTFpO+a9O29Gl+wrKAravN8AjVtGZzcB2tCBh4?=
+ =?us-ascii?Q?zOvtOZOQHnX9oIvXOOmEv2COuhp4?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM8PR04MB7779.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?GOFQVyiSY3g/Mccdvlf50K1YrdVf6gEkyhBM/t2PE5DcsKQ++PzXsFjOaYoX?=
+ =?us-ascii?Q?XlWXcYYA401nZ7n4YigNLoVmFGjIiWMy2l3PIRLopq/LTKWI7Syf9OVKKNQf?=
+ =?us-ascii?Q?MkFrGRP5DzsGIoUxijeQVz1V0DMUnh9T/Ke17+9qKLHJElHcUHzd1rsnTzwl?=
+ =?us-ascii?Q?BEkpnxVt8Plir0DarSRrg7Fu6ectj/Axs1k5OpbGj6AVvr82EhuDwXIMBmUU?=
+ =?us-ascii?Q?VfjinHRtTEilNyEGrhxG0j3gB3wP957lZYfdaqx3gJSCGco+uDKfaQYdedVH?=
+ =?us-ascii?Q?4X+ijTxaulRGvHArL7YoWDeC/bcQrazqvhSNb/xslt4TLs4QdkM+N9VBV5ba?=
+ =?us-ascii?Q?CfZDRMn4CL+KVYs9l3BCVG96WJXPY1S3FXvDzpz/KTiJf2Qyih8khks1x9M8?=
+ =?us-ascii?Q?gfUIgb2mbVpL+OIXthlPpOMQzFddcZ1/wKwL7lBXE9bFGS0HnB8vTL6NMrfA?=
+ =?us-ascii?Q?lOFMptPfGyqtmogEJIWB0DxOOfVKohNXP5qAQO6Q1NVF6CKCqGhWKh6eFR48?=
+ =?us-ascii?Q?uM4gT//dk5KpFZZHCVBPOafZ6DgfaszSHZnvQGY3N8JczAmiGF6FbeexP4ge?=
+ =?us-ascii?Q?oI2xS17M0Jj5rTS3tkx7VMJk87+o2t42I/LwmKAM4wl3Mbk67SBNRGWu8uq7?=
+ =?us-ascii?Q?Wosbl3flEVnrpySUyCws/BOMAbWMAWDniiFgwuSRpq0Ojwz3tbIxsAykz+ht?=
+ =?us-ascii?Q?6plgqPgecjDOFFBMkAw4vM7JC50HhYUarwOw11PRq6EvV9wHCa2PpCVXDMbj?=
+ =?us-ascii?Q?gOItzGGt1UnWWmHwQ0suhc5A7CqdSuPxFlXW1vj/rQwthMdQimzWvGq8mbqq?=
+ =?us-ascii?Q?T1lKV6N1To4zJaxzF1OXPNKhnQ3QbX95lJNRUaen4PqI72sOAQIN1dsbkg+9?=
+ =?us-ascii?Q?cxMolLqjcVwVE5ezV36fqtj/WJ0yDFaByQ+g7yxOD0VEBDJijHmzf4bGcZjp?=
+ =?us-ascii?Q?LdjD8/hbxS9k2hVA3vVNygxnWvn3aNYz+adLw6+sJ99x5AjMolgypiTkgkOS?=
+ =?us-ascii?Q?0IDVvv/vDoMeDMx2vYXhgQO+FXB8yTE/iRuwvhY6krxHA0p1+n8wwPdwFeJ9?=
+ =?us-ascii?Q?wtWBDFJO6zdmM3IW65pYJaFcLKx986pZ/wHXbwnEavjHaHDKTeMXEkonrq3G?=
+ =?us-ascii?Q?E5rfiS1w/A4ByNO0Ws/9VZ1DMgdIT+jRXJp8gJCLgFli9lv7K110M5wpprsZ?=
+ =?us-ascii?Q?aDgSLPBXZBv33tLRBG0+h0t3j7iw/Ty6l73qGPzQNvqdsCo3vB95eFXLCtpS?=
+ =?us-ascii?Q?rcYAdOOlOzSK6/EPYwDfWMJOyD5vFBW9MdYCN+dhWOR8Fk4Y/e7rPXs47r3o?=
+ =?us-ascii?Q?JMjltNECoJ+uoj/8+gCjxQsa12mLJEUdT4iZQ8M99SuZ5UdD4G1b7u0znp/8?=
+ =?us-ascii?Q?A3W1NEG3TZluy4QiUcRMAA7O29r6WUrevKeeAj93CjCr8a4713Ki7g5kvMyj?=
+ =?us-ascii?Q?lIaMysVZBDEkSSstkwzwXD5oDh3nYhAQ+GEGSmUTHhsv6OzyWjNIgMklpGmH?=
+ =?us-ascii?Q?d4tOOibU9+pyzmCTVvT+wl9kernq1gO2N4Gwcd1QrKiKu5Q2Ouue7hDYU299?=
+ =?us-ascii?Q?IyCCVIqx06TKIO9NDhcN1m/FzCw7yfW6tb32+cuEt/DijXR2GaoWZKZvbgnP?=
+ =?us-ascii?Q?3w=3D=3D?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a1cfa72f-3048-40d7-8a91-08dd86603961
+X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7779.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2025 14:23:19.8113 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: irsVCcZzyesEo3XfRmaG2NmrTkgs+mgV47QHSvIVJpeWZu2Pnef00Z8bPLpHbvZAk20YSwaEV7uQ3JFUYn0nXg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8897
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,288 +161,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, Apr 28, 2025 at 12:06:28PM +0200, Michael Walle wrote:
+> [+ Vladimir]
+> 
+> Hi,
+> 
+> nice catch!
+> 
+> > With commit cc4e8af2c552, fsl_enetc register accessors have been split to
+> 
+> With 'commit cc4e8af2c552 ("net: fsl_enetc: Split register accessors")'
+> 
+> > handle different register offsets on different SoCs. However, for
+> > internal MDIO register calculation, only ENETC_PM_IMDIO_BASE was fixed
+> > without adding the SoC specific MAC register offset.
+> >
+> > As a result, the network support for the Kontron SMARC-sAL28 and
+> > probably other boards based on the LS1028A CPU is broken.
+> >
+> > Add the SoC specific MAC register offset to calculation of imdio.priv to
+> > fix this.
+> >
+> > Fixes: cc4e8af2c552 ("net: fsl_enetc: Split register accessors")
+> > Signed-off-by: Thomas Schaefer <thomas.schaefer@kontron.com>
+> > Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+> 
+> With the nitpick above:
+> 
+> Reviewed-by: Michael Walle <mwalle@kernel.org>
+> 
+> > ---
+> >
+> > But the question that now arises is, does this code path work on the imx
+> > SoCs as well. Now the imx specific offset 0x5000 is added here and was not
+> > used before.
+> 
+> Maybe the imx9 doesn't use the internal MDIO controller or the board
+> which was this tested on doesn't use the PCS?
+> 
+> -michael
 
+The imx specific offset 0x5000 should be correct.
 
-Please pull the STM32 related patches for u-boot/master, v2025.07 = u-boot-stm32-20250428
+In downstream, the ENETC_PM_IMDIO_BASE macro is used in common code, but
+defined twice - there is a conditional include of either fsl_enetc.h, or
+fsl_enetc4.h, depending on whether CONFIG_ARCH_IMX9 is defined. Thus,
+ENETC_PM_IMDIO_BASE is replaced either with 0x8030 or 0x5030 in downstream.
+https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/fsl_enetc.c#L25
+https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/fsl_enetc.h#L76
+https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/fsl_enetc4.h#L126
 
-CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/25970
+I guess Marek fell into the pitfall when upstreaming.
 
+> > Can someone please test this on an imx9 and confirm?
+> >
+> >  drivers/net/fsl_enetc.c | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
+> > index 52fa820f51..97cccda451 100644
+> > --- a/drivers/net/fsl_enetc.c
+> > +++ b/drivers/net/fsl_enetc.c
+> > @@ -473,13 +473,15 @@ static int enetc_init_sxgmii(struct udevice *dev)
+> >  /* Apply protocol specific configuration to MAC, serdes as needed */
+> >  static void enetc_start_pcs(struct udevice *dev)
+> >  {
+> > +	struct enetc_data *data = (struct enetc_data *)dev_get_driver_data(dev);
+> >  	struct enetc_priv *priv = dev_get_priv(dev);
+> >  
+> >  	/* register internal MDIO for debug purposes */
+> >  	if (enetc_read_pcapr_mdio(dev)) {
+> >  		priv->imdio.read = enetc_mdio_read;
+> >  		priv->imdio.write = enetc_mdio_write;
+> > -		priv->imdio.priv = priv->port_regs + ENETC_PM_IMDIO_BASE;
+> > +		priv->imdio.priv = priv->port_regs + data->reg_offset_mac +
+> > +		                   ENETC_PM_IMDIO_BASE;
+> >  		strlcpy(priv->imdio.name, dev->name, MDIO_NAME_LEN);
+> >  		if (!miiphy_get_dev_by_name(priv->imdio.name))
+> >  			mdio_register(&priv->imdio);
+>
 
-The following changes since commit 9d3f1ebaf8751f0287b5d02158cc706435f8fb19:
+Reviewed-by: Vladimir Oltean <vladimir.oltean@nxp.com>
+Tested-by: Vladimir Oltean <vladimir.oltean@nxp.com> # LS1028A
 
-  tools/make_pip: Use venv when invoking pip (2025-04-24 16:30:37 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20250428
-
-for you to fetch changes up to 9d679cc4adbf2fdf077411bb4e2cb5ef4c1fd8b8:
-
-  configs: stm32mp25: enable DISTRO_DEFAULT and BOOTCOMMAND (2025-04-25 16:00:23 +0200)
-
-----------------------------------------------------------------
-- Add OF_UPSTREAM flag support for STi, STM32 MCU and MPU platforms.
-- Add ETZPC as system bus for STM32MP1 platforms
-- Add RIFSC as sytem bus for STM32MP2 platforms
-- Update STM32MP2 board/machine support:
-  - update cmd_stm32key.
-  - update cmd_stm32prog.
-  - update STM32MP25 configs.
-  - add leds and buttons support.
-  - add boot_mode support (USB/PXE/MMC/NOR/NAND).
-  - add bootcmd support.
-  - enable MMC support.
-
-----------------------------------------------------------------
-Lionel Debieve (3):
-      ARM: stm32mp: add ETZPC system bus driver for STM32MP1
-      ARM: dts: stm32: add ETZPC as a system bus for STM32MP1x boards
-      stm32mp: fdt: remove ETZPC peripheral cleanup
-
-Patrice Chotard (23):
-      ARM: dts: sti: convert stih410-b2260 board to OF_UPSTREAM
-      ARM: dts: stm32: convert stm23h7 boards to OF_UPSTREAM
-      ARM: dts: stm32: convert stm23f7 boards to OF_UPSTREAM
-      ARM: dts: stm32: convert stm23f4 boards to OF_UPSTREAM
-      ARM: dts: stm32: convert stm32mp13 board to OF_UPSTREAM
-      ARM: dts: stm32: convert stm32mp15 board to OF_UPSTREAM
-      configs: stm32: introduce stm32mp15-odyssey_defconfig
-      clk: stm32mp1: fix DSI clock setting
-      ARM: dts: stm32: convert stm32mp2 board to OF_UPSTREAM
-      configs: stm32mp25: add MMC support
-      configs: stm32mp25: add bootcmd for stm32mp25 platform
-      board: st: stm32mp2: add env_get_location()
-      board: st: stm32mp2: add mmc_get_env_dev()
-      ARM: dts: stm32: add "u-boot,mmc-env-partition" for stm32mp257f-ev1-u-boot
-      configs: stm32mp25: add support of NAND and NOR boot
-      configs: stm32mp25: add USB host boot support
-      configs: stm32mp25: add PXE boot support
-      ARM: dts: stm32: add sdmmc1 fixed clock for stm32mp257f-ev1-u-boot
-      arm: stm32mp: increase EARLY_TLB_SIZE to 0x10000
-      arm: stm32mp: disable console for UART serial boot
-      arm: stm32mp: fix package IDs for stm32mp25
-      arm: stm32mp: cmd_stm32key: update command for stm32mp25x
-      configs: stm32mp25: enable DISTRO_DEFAULT and BOOTCOMMAND
-
-Patrick Delaunay (9):
-      ARM: stm32mp: add RIFSC system bus driver for STM32MP25
-      arm: stm32mp: add boot_mode support for STM32MP25
-      board: st: stm32mp2: add led support
-      board: st: stm32mp2: add user button support
-      board: st: stm32mp2: change bootcmd for ST boards
-      arm: stm32mp: implement new STM32MP25 revision ID system
-      arm: stm32mp: add helper function stm32mp_is_closed()
-      arm: stm32mp: stm32prog: PTA BSEC is not supported on closed device
-      arm: stm32mp: stm32prog: add support rootfs-a for OTA
-
- arch/arm/dts/Makefile                                          |   31 --
- arch/arm/dts/st-pincfg.h                                       |   72 ---
- arch/arm/dts/stih407-clock.dtsi                                |  323 -------------
- arch/arm/dts/stih407-family.dtsi                               | 1000 ----------------------------------------
- arch/arm/dts/stih407-pinctrl.dtsi                              | 1262 ---------------------------------------------------
- arch/arm/dts/stih410-b2260-u-boot.dtsi                         |   46 +-
- arch/arm/dts/stih410-b2260.dts                                 |  214 ---------
- arch/arm/dts/stih410-clock.dtsi                                |  333 --------------
- arch/arm/dts/stih410-pinctrl.dtsi                              |   31 --
- arch/arm/dts/stih410.dtsi                                      |  300 ------------
- arch/arm/dts/stm32429i-eval.dts                                |  284 ------------
- arch/arm/dts/stm32746g-eval.dts                                |  186 --------
- arch/arm/dts/stm32f4-pinctrl.dtsi                              |  447 ------------------
- arch/arm/dts/stm32f429-disco.dts                               |  190 --------
- arch/arm/dts/stm32f429-pinctrl.dtsi                            |   55 ---
- arch/arm/dts/stm32f429.dtsi                                    |  758 -------------------------------
- arch/arm/dts/stm32f469-disco.dts                               |  213 ---------
- arch/arm/dts/stm32f469-pinctrl.dtsi                            |   55 ---
- arch/arm/dts/stm32f469.dtsi                                    |   18 -
- arch/arm/dts/stm32f7-pinctrl.dtsi                              |  415 -----------------
- arch/arm/dts/stm32f746-disco-u-boot.dtsi                       |   13 +-
- arch/arm/dts/stm32f746-disco.dts                               |  169 -------
- arch/arm/dts/stm32f746-pinctrl.dtsi                            |   11 -
- arch/arm/dts/stm32f746.dtsi                                    |  613 -------------------------
- arch/arm/dts/stm32f769-disco-u-boot.dtsi                       |   60 +--
- arch/arm/dts/stm32f769-disco.dts                               |  133 ------
- arch/arm/dts/stm32f769-pinctrl.dtsi                            |   11 -
- arch/arm/dts/stm32h7-pinctrl.dtsi                              |  274 -----------
- arch/arm/dts/stm32h7-u-boot.dtsi                               |    1 -
- arch/arm/dts/stm32h743.dtsi                                    |  695 ----------------------------
- arch/arm/dts/stm32h743i-disco.dts                              |   75 ---
- arch/arm/dts/stm32h743i-eval.dts                               |  160 -------
- arch/arm/dts/stm32h750.dtsi                                    |    5 -
- arch/arm/dts/stm32h750i-art-pi.dts                             |  188 --------
- arch/arm/dts/stm32mp13-pinctrl.dtsi                            |  888 ------------------------------------
- arch/arm/dts/stm32mp13-u-boot.dtsi                             |    4 +
- arch/arm/dts/stm32mp131.dtsi                                   | 1567 ---------------------------------------------------------------
- arch/arm/dts/stm32mp133.dtsi                                   |   98 ----
- arch/arm/dts/stm32mp135.dtsi                                   |   12 -
- arch/arm/dts/stm32mp135f-dk.dts                                |  376 ---------------
- arch/arm/dts/stm32mp13xc.dtsi                                  |   18 -
- arch/arm/dts/stm32mp13xf.dtsi                                  |   18 -
- arch/arm/dts/stm32mp15-pinctrl.dtsi                            | 2826 -----------------------------------------------------------------------------------------------------------------
- arch/arm/dts/stm32mp15-scmi.dtsi                               |   88 ----
- arch/arm/dts/stm32mp15-u-boot.dtsi                             |    4 +
- arch/arm/dts/stm32mp151.dtsi                                   | 1868 ---------------------------------------------------------------------------
- arch/arm/dts/stm32mp153.dtsi                                   |   59 ---
- arch/arm/dts/stm32mp157.dtsi                                   |   48 --
- arch/arm/dts/stm32mp157a-dk1-scmi.dts                          |   82 ----
- arch/arm/dts/stm32mp157a-dk1.dts                               |   25 -
- arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts            |   49 --
- arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts |  161 -------
- arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts     |   59 ---
- arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi                |  148 ------
- arch/arm/dts/stm32mp157c-dk2-scmi.dts                          |   88 ----
- arch/arm/dts/stm32mp157c-dk2.dts                               |   94 ----
- arch/arm/dts/stm32mp157c-ed1-scmi.dts                          |   87 ----
- arch/arm/dts/stm32mp157c-ed1.dts                               |  403 ----------------
- arch/arm/dts/stm32mp157c-ev1-scmi.dts                          |   93 ----
- arch/arm/dts/stm32mp157c-ev1.dts                               |  414 -----------------
- arch/arm/dts/stm32mp15xc.dtsi                                  |   18 -
- arch/arm/dts/stm32mp15xx-dkx.dtsi                              |  741 ------------------------------
- arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi                        |   85 ----
- arch/arm/dts/stm32mp15xxab-pinctrl.dtsi                        |   57 ---
- arch/arm/dts/stm32mp15xxac-pinctrl.dtsi                        |   73 ---
- arch/arm/dts/stm32mp15xxad-pinctrl.dtsi                        |   57 ---
- arch/arm/dts/stm32mp25-pinctrl.dtsi                            |   38 --
- arch/arm/dts/stm32mp251.dtsi                                   |  301 ------------
- arch/arm/dts/stm32mp253.dtsi                                   |   23 -
- arch/arm/dts/stm32mp255.dtsi                                   |    9 -
- arch/arm/dts/stm32mp257.dtsi                                   |    9 -
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi                       |   81 ++++
- arch/arm/dts/stm32mp257f-ev1.dts                               |   55 ---
- arch/arm/dts/stm32mp25xc.dtsi                                  |    8 -
- arch/arm/dts/stm32mp25xf.dtsi                                  |    8 -
- arch/arm/dts/stm32mp25xxai-pinctrl.dtsi                        |   83 ----
- arch/arm/dts/stm32mp25xxak-pinctrl.dtsi                        |   71 ---
- arch/arm/dts/stm32mp25xxal-pinctrl.dtsi                        |   71 ---
- arch/arm/mach-stm32/Kconfig                                    |    3 +
- arch/arm/mach-stm32mp/Kconfig                                  |   11 +-
- arch/arm/mach-stm32mp/cmd_stm32key.c                           |  286 ++++++++++--
- arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig                    |    2 +
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c                |    6 +-
- arch/arm/mach-stm32mp/include/mach/etzpc.h                     |   32 ++
- arch/arm/mach-stm32mp/include/mach/rif.h                       |   26 ++
- arch/arm/mach-stm32mp/include/mach/stm32.h                     |   16 +
- arch/arm/mach-stm32mp/include/mach/sys_proto.h                 |   24 +-
- arch/arm/mach-stm32mp/stm32mp1/Makefile                        |    1 +
- arch/arm/mach-stm32mp/stm32mp1/etzpc.c                         |  194 ++++++++
- arch/arm/mach-stm32mp/stm32mp1/fdt.c                           |  258 -----------
- arch/arm/mach-stm32mp/stm32mp2/Makefile                        |    1 +
- arch/arm/mach-stm32mp/stm32mp2/cpu.c                           |  170 ++++++-
- arch/arm/mach-stm32mp/stm32mp2/rifsc.c                         |  364 +++++++++++++++
- arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c                    |   31 +-
- board/st/stm32mp1/MAINTAINERS                                  |    2 +
- board/st/stm32mp2/Kconfig                                      |    2 +-
- board/st/stm32mp2/MAINTAINERS                                  |    1 +
- board/st/stm32mp2/stm32mp2.c                                   |  140 +++++-
- configs/stih410-b2260_defconfig                                |    3 +-
- configs/stm32746g-eval_defconfig                               |    3 +-
- configs/stm32746g-eval_spl_defconfig                           |    3 +-
- configs/stm32f429-discovery_defconfig                          |    2 +-
- configs/stm32f429-evaluation_defconfig                         |    2 +-
- configs/stm32f469-discovery_defconfig                          |    2 +-
- configs/stm32f746-disco_defconfig                              |    3 +-
- configs/stm32f746-disco_spl_defconfig                          |    3 +-
- configs/stm32f769-disco_defconfig                              |    4 +-
- configs/stm32f769-disco_spl_defconfig                          |    4 +-
- configs/stm32h743-disco_defconfig                              |    2 +-
- configs/stm32h743-eval_defconfig                               |    2 +-
- configs/stm32h750-art-pi_defconfig                             |    2 +-
- configs/stm32mp13_defconfig                                    |    2 +-
- configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig             |    2 +-
- configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig            |    2 +-
- configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig    |    2 +-
- configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig        |    2 +-
- configs/stm32mp15-odyssey_defconfig                            |  172 +++++++
- configs/stm32mp15_basic_defconfig                              |    4 +-
- configs/stm32mp15_defconfig                                    |    4 +-
- configs/stm32mp15_trusted_defconfig                            |    4 +-
- configs/stm32mp25_defconfig                                    |   34 +-
- drivers/clk/stm32/clk-stm32mp1.c                               |    1 +
- include/configs/stm32f746-disco.h                              |    2 +-
- include/configs/stm32mp25_common.h                             |  102 +++++
- include/configs/stm32mp25_st_common.h                          |   51 +++
- include/dt-bindings/clock/stih407-clks.h                       |   90 ----
- include/dt-bindings/clock/stih410-clks.h                       |   25 -
- include/dt-bindings/mfd/st-lpc.h                               |   16 -
- include/dt-bindings/reset/stih407-resets.h                     |   65 ---
- 129 files changed, 1761 insertions(+), 20430 deletions(-)
- delete mode 100644 arch/arm/dts/st-pincfg.h
- delete mode 100644 arch/arm/dts/stih407-clock.dtsi
- delete mode 100644 arch/arm/dts/stih407-family.dtsi
- delete mode 100644 arch/arm/dts/stih407-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stih410-b2260.dts
- delete mode 100644 arch/arm/dts/stih410-clock.dtsi
- delete mode 100644 arch/arm/dts/stih410-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stih410.dtsi
- delete mode 100644 arch/arm/dts/stm32429i-eval.dts
- delete mode 100644 arch/arm/dts/stm32746g-eval.dts
- delete mode 100644 arch/arm/dts/stm32f4-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32f429-disco.dts
- delete mode 100644 arch/arm/dts/stm32f429-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32f429.dtsi
- delete mode 100644 arch/arm/dts/stm32f469-disco.dts
- delete mode 100644 arch/arm/dts/stm32f469-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32f469.dtsi
- delete mode 100644 arch/arm/dts/stm32f7-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32f746-disco.dts
- delete mode 100644 arch/arm/dts/stm32f746-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32f746.dtsi
- delete mode 100644 arch/arm/dts/stm32f769-disco.dts
- delete mode 100644 arch/arm/dts/stm32f769-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32h7-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32h743.dtsi
- delete mode 100644 arch/arm/dts/stm32h743i-disco.dts
- delete mode 100644 arch/arm/dts/stm32h743i-eval.dts
- delete mode 100644 arch/arm/dts/stm32h750.dtsi
- delete mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
- delete mode 100644 arch/arm/dts/stm32mp13-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp131.dtsi
- delete mode 100644 arch/arm/dts/stm32mp133.dtsi
- delete mode 100644 arch/arm/dts/stm32mp135.dtsi
- delete mode 100644 arch/arm/dts/stm32mp135f-dk.dts
- delete mode 100644 arch/arm/dts/stm32mp13xc.dtsi
- delete mode 100644 arch/arm/dts/stm32mp13xf.dtsi
- delete mode 100644 arch/arm/dts/stm32mp15-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp15-scmi.dtsi
- delete mode 100644 arch/arm/dts/stm32mp151.dtsi
- delete mode 100644 arch/arm/dts/stm32mp153.dtsi
- delete mode 100644 arch/arm/dts/stm32mp157.dtsi
- delete mode 100644 arch/arm/dts/stm32mp157a-dk1-scmi.dts
- delete mode 100644 arch/arm/dts/stm32mp157a-dk1.dts
- delete mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
- delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
- delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
- delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
- delete mode 100644 arch/arm/dts/stm32mp157c-dk2-scmi.dts
- delete mode 100644 arch/arm/dts/stm32mp157c-dk2.dts
- delete mode 100644 arch/arm/dts/stm32mp157c-ed1-scmi.dts
- delete mode 100644 arch/arm/dts/stm32mp157c-ed1.dts
- delete mode 100644 arch/arm/dts/stm32mp157c-ev1-scmi.dts
- delete mode 100644 arch/arm/dts/stm32mp157c-ev1.dts
- delete mode 100644 arch/arm/dts/stm32mp15xc.dtsi
- delete mode 100644 arch/arm/dts/stm32mp15xx-dkx.dtsi
- delete mode 100644 arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp15xxab-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp15xxac-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp15xxad-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp251.dtsi
- delete mode 100644 arch/arm/dts/stm32mp253.dtsi
- delete mode 100644 arch/arm/dts/stm32mp255.dtsi
- delete mode 100644 arch/arm/dts/stm32mp257.dtsi
- delete mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
- delete mode 100644 arch/arm/dts/stm32mp25xc.dtsi
- delete mode 100644 arch/arm/dts/stm32mp25xf.dtsi
- delete mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
- delete mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
- create mode 100644 arch/arm/mach-stm32mp/include/mach/etzpc.h
- create mode 100644 arch/arm/mach-stm32mp/include/mach/rif.h
- create mode 100644 arch/arm/mach-stm32mp/stm32mp1/etzpc.c
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/rifsc.c
- create mode 100644 configs/stm32mp15-odyssey_defconfig
- create mode 100644 include/configs/stm32mp25_st_common.h
- delete mode 100644 include/dt-bindings/clock/stih407-clks.h
- delete mode 100644 include/dt-bindings/clock/stih410-clks.h
- delete mode 100644 include/dt-bindings/mfd/st-lpc.h
- delete mode 100644 include/dt-bindings/reset/stih407-resets.h
++Fang Wei to confirm/test for i.MX95.
