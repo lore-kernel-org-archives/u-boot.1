@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803DBC369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B12BC369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:25:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1FFB82A38;
-	Mon, 28 Apr 2025 15:24:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5A7A3829E7;
+	Mon, 28 Apr 2025 15:24:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ECVH5euY";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="K7ZFbCil";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FAF3829EF; Mon, 28 Apr 2025 15:24:07 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 4070C82A27; Mon, 28 Apr 2025 15:24:08 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21C728269F
+ by phobos.denx.de (Postfix) with ESMTPS id B091682999
  for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:24:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9WdEN028692;
- Mon, 28 Apr 2025 15:24:01 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9eUiX010502;
+ Mon, 28 Apr 2025 15:23:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- trX2GYHfj8eFGAc1sx94uIjsHlWFMhdau2oMCOp8CMQ=; b=ECVH5euYgUWkWVnA
- o2UPbciEa+OQyLvJ62vXl1FZnIUxuCqlagRG5EA6N9QMxdOol0O5xLpx2tYnLX1s
- tWWph7rNVf5ACo7PqsVtzVqozQqTamA4HIgeHe6c9oa05HTkzZ725YAXkQwE5AF2
- /jPapwzS3Q0pDMMiqlu/p5jhkjZZJ4uh4vcpe0FxcUC3tonx8yBcKpxSK3OgAJY2
- 5Q7FekFU5h2y/ln6cij7bd1Mfbs5YcjubcYim3NuRsth4TIpYOy5J9fYSbLi3WvF
- BKiB9C+nb9EP7QgxbF99cR817+TXX+0udrPCK+4IK1piMj4ukIVgxPf4R5wv1hEX
- dVgykw==
+ kxVmnBrZeYauH9RgBt0yV0VzGs7FP+XHZef78YPGYZE=; b=K7ZFbCillw6qhNdB
+ 7vgYJ+azOR4kWnpCOchjThXktY/hIxeqEirZ3FBpi0CSzQfXI1R6/y2V6ktkANzg
+ G7pWakJtH3RlDHlTwjFVBpndJkoZrsU8eSB/PRvY39i5nG2m601l5fNf7X7INfNT
+ uiqDKCJSQ1agTGBp1xs0kE3DnCaaZXeD7sZ0N4sFpij32ZQLgjHTfKWZNnDbzSLv
+ HoMVE3sfkzobQsNAOYrZiyBc/EeDrJHVGSn+SjCsfnrDYmWTtM0TUGc5IoIglzUb
+ rtfJAEgPta0oW73UABtXfg1EQskeAkKGRcC7JS1j86ymODBMfE7MSD+EtVMHJoYw
+ 98Pn/w==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 469923vr2d-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468pcg6qjt-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:24:01 +0200 (MEST)
+ Mon, 28 Apr 2025 15:23:58 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 911C240056;
- Mon, 28 Apr 2025 15:23:09 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 15DAB40079;
+ Mon, 28 Apr 2025 15:22:47 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 132AEA80881;
- Mon, 28 Apr 2025 15:22:35 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0F44CA805AC;
+ Mon, 28 Apr 2025 15:21:49 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:22:34 +0200
-Message-ID: <e022ca56-ae09-4e55-9fc4-16e916850a1d@foss.st.com>
-Date: Mon, 28 Apr 2025 15:22:33 +0200
+ 2025 15:21:48 +0200
+Message-ID: <55c3609a-909f-4f42-8d6d-2ebaaf0f6714@foss.st.com>
+Date: Mon, 28 Apr 2025 15:21:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/22] configs: stm32mp25: add MMC support
+Subject: Re: [PATCH v2 10/13] ARM: dts: stm32: add ETZPC as a system bus for
+ STM32MP1x boards
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, Tom
- Rini <trini@konsulko.com>
-References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-2-patrice.chotard@foss.st.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
+ <lionel.debieve@foss.st.com>, Gatien Chevallier
+ <gatien.chevallier@foss.st.com>, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>
+References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+ <20250422131229.415020-11-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-2-patrice.chotard@foss.st.com>
+In-Reply-To: <20250422131229.415020-11-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -95,67 +96,58 @@ X-Virus-Status: Clean
 
 
 
-On 4/25/25 15:15, Patrice Chotard wrote:
-> Enable MMC related flags support for stm32mp25
+On 4/22/25 15:12, Patrice Chotard wrote:
+> From: Lionel Debieve <lionel.debieve@foss.st.com>
 > 
+> The STM32 System Bus is an internal bus on which devices are connected.
+> ETZPC is a peripheral overseeing the firewall bus that configures
+> and control access to the peripherals connected on it.
+> 
+> For more information on which peripheral is securable, please read
+> the STM32MP13 or STM32MP15 reference manual.
+> 
+> Signed-off-by: Lionel Debieve <lionel.debieve@foss.st.com>
+> Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
 > (no changes since v1)
 > 
->  configs/stm32mp25_defconfig | 11 +++++++++--
->  1 file changed, 9 insertions(+), 2 deletions(-)
+>  arch/arm/dts/stm32mp13-u-boot.dtsi | 4 ++++
+>  arch/arm/dts/stm32mp15-u-boot.dtsi | 4 ++++
+>  2 files changed, 8 insertions(+)
 > 
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index 2f8d34d15ff..717724ff672 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -2,6 +2,7 @@ CONFIG_ARM=y
->  CONFIG_ARCH_STM32MP=y
->  CONFIG_SYS_MALLOC_F_LEN=0x400000
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x90000000
-> +CONFIG_ENV_OFFSET=0x900000
->  CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp257f-ev1"
->  CONFIG_SYS_BOOTM_LEN=0x2000000
->  CONFIG_SYS_LOAD_ADDR=0x84000000
-> @@ -10,9 +11,10 @@ CONFIG_DDR_CACHEABLE_SIZE=0x10000000
->  CONFIG_TARGET_ST_STM32MP25X=y
->  CONFIG_SYS_MEMTEST_START=0x84000000
->  CONFIG_SYS_MEMTEST_END=0x88000000
-> +CONFIG_API=y
-> +CONFIG_SYS_MMC_MAX_DEVICE=3
->  CONFIG_FIT=y
->  CONFIG_BOOTDELAY=1
-> -CONFIG_LAST_STAGE_INIT=y
->  CONFIG_SYS_PROMPT="STM32MP> "
->  # CONFIG_CMD_BDI is not set
->  CONFIG_CMD_BOOTZ=y
-> @@ -24,6 +26,7 @@ CONFIG_CMD_CLK=y
->  CONFIG_CMD_FUSE=y
->  CONFIG_CMD_GPIO=y
->  # CONFIG_CMD_LOADB is not set
-> +CONFIG_CMD_MMC=y
->  CONFIG_CMD_CACHE=y
->  CONFIG_CMD_TIME=y
->  CONFIG_CMD_RNG=y
-> @@ -31,12 +34,16 @@ CONFIG_CMD_TIMER=y
->  CONFIG_CMD_REGULATOR=y
->  CONFIG_CMD_LOG=y
->  CONFIG_OF_LIVE=y
-> +CONFIG_ENV_IS_NOWHERE=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_SYS_MMC_ENV_DEV=1
->  CONFIG_NO_NET=y
->  CONFIG_SYS_64BIT_LBA=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_STM32F7=y
-> -# CONFIG_MMC is not set
-> +CONFIG_SUPPORT_EMMC_BOOT=y
-> +CONFIG_STM32_SDMMC2=y
->  CONFIG_PINCONF=y
->  CONFIG_DM_REGULATOR_FIXED=y
->  CONFIG_DM_REGULATOR_GPIO=y
+> diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> index af7edc7e2b2..1fe6966781c 100644
+> --- a/arch/arm/dts/stm32mp13-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> @@ -48,6 +48,10 @@
+>  	bootph-all;
+>  };
+>  
+> +&etzpc {
+> +	bootph-all;
+> +};
+> +
+>  &gpioa {
+>  	bootph-all;
+>  };
+> diff --git a/arch/arm/dts/stm32mp15-u-boot.dtsi b/arch/arm/dts/stm32mp15-u-boot.dtsi
+> index 3f57bd5fe0f..327d7760436 100644
+> --- a/arch/arm/dts/stm32mp15-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp15-u-boot.dtsi
+> @@ -106,6 +106,10 @@
+>  	operating-points-v2 = <&cpu0_opp_table>;
+>  };
+>  
+> +&etzpc {
+> +	bootph-all;
+> +};
+> +
+>  &gpioa {
+>  	bootph-all;
+>  };
 Applied to u-boot-stm32/master
 
 Thanks
