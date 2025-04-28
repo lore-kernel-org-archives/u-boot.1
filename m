@@ -4,63 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E790C36005
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 05:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD8D6C36005
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 05:29:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DFF082132;
+	by phobos.denx.de (Postfix) with ESMTP id 70FCE8214A;
 	Mon, 28 Apr 2025 07:29:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1745818154;
-	bh=C7clxjjB6K05pmhI1qGdW5/t90Mhh5QyzvvYUfGcJlc=;
+	bh=2gQ6zeHMrnECVmW2u++uTw7Z2w4rGvsP4WYuYyaKtvI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bKsjP/t0zxmy1Jh0mvlb2EdSV8v1ceB/F9bToykLrIznCvj1/RQJQLHImLGeX1bpz
-	 Ayw8ocn59xZddN3IOPOOgrRGyRcf7zNPZq3GcFWAd2mIpswlyzXrS7HhtOU/ptI2sK
-	 c/TKT+bsssiE23Qqb8XuaiJnUIhbQZiFSeY8YHo9HWCbeGq/vaGMhDW9qDRyNVFNzB
-	 ffQJELA30zpSO6mtKt9XeiBr2o9DWNsfofxGLW8QeVCxSw1Op68f8OuVw1Y8k0xqrx
-	 40o80Ehmu6jSY7HaDOZe0N1pQPUnJ7q/4qDHQH/M3l2eDD0iZLclclt2BoUHihBJaP
-	 zJkB0a2id6whw==
+	b=Qrb6poWaM1zKziBlMbClAigRGg46Wr8AV9OhCVtshH/PELDCR9p/M10Hg8uMvqHgc
+	 klYRCecFRlyH2IoH0lYn5mM1FaAvdEH0Eo0YmrUu6CT6SctTmV8Cf6WjZuZsSgYXhR
+	 KsKnD/SX/FM+czDUw3tRa/6VJNQmMoJPFKS5DrYsDuwkB2T9XWWmsSx9r79fekiVfp
+	 AfpK4guQcM99FsGkiPgGQ4+rxRLxFDfbJ46Kxq+TOlRqVrgp1bKd7OrhgQsOrB32wT
+	 nhH++knkhdW9tthCLZnqEzuTqWDmlg59hSf3VIRnf7WdA5KKNsnQNpDp3XP0T+pU+6
+	 2fgRlTkwXNb/w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD1DB82116; Mon, 28 Apr 2025 07:29:11 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 4E763820F6; Mon, 28 Apr 2025 07:29:12 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6392E820F6
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 07:29:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D0158210A
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 07:29:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="gDw4YleW"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Xkp/YFod"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 592BB10293381; 
- Mon, 28 Apr 2025 07:29:07 +0200 (CEST)
+ with ESMTPSA id 12C651026E03B; 
+ Mon, 28 Apr 2025 07:29:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1745818147; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1745818149; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=C7clxjjB6K05pmhI1qGdW5/t90Mhh5QyzvvYUfGcJlc=;
- b=gDw4YleWR1e3ln36RILPbkjvx9zik1qnPE1OyYGNI9G5ueC8Sc3yMZ4R5XfDRCd1/TfTjC
- 8FhW/cOnF7cJdJLtxHPE8jvUdWoYZcwjhkNX6sSKe2NTclLlT/XvL3uYi71QnGCo8wjPLv
- eo7oAFMEddDelWtnXNBC7tE0F66r9I3rIQB+fAh/DgcM9B6Vnwethgsq7Ag6m8Rdv2Pype
- IoaEivwEEC2gz0JsUyqBDxUzgLMTSyEWHeoTYfULQszcEq/zZxszlcoMKKb5hrKibCVwv0
- CctcbTqZH4dBOCtq26q28hsdGwRl7go9GSZCt17afZNOrgZVkkqTKtglL86Yjw==
+ bh=2gQ6zeHMrnECVmW2u++uTw7Z2w4rGvsP4WYuYyaKtvI=;
+ b=Xkp/YFodWOPaeeKotTfpj6ICfRuGuNlmF69KCLXZEtkoohb5CrdezbpU+1g14rY2SYXT2V
+ 3sIqnPBNLeZP9rpgh5Qg9MLt23//b6o+Ev08DvZZ6r9Kt+sgt/CfEW7wzZPlcT/4sm+a4i
+ ZU46CuQhfPCCobA2dcdSvEZ1qH5grPpU+pUYzV8L+paGRjSIIeTaWk9tCCui3AS3oni0Cw
+ I7c0sBHYg3paZjBUnRGDa1KhPkCt0PUbafRn8oiFqvy6blrNswuFgCr6V5Bt4G+pGw3o7N
+ sypw2qtQwYUiePWKipPAsONrSuWTUzecEaERlzUhz74Dxmf7mcZ7i7mCMrzaxA==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Walter Schweizer <walter.schweizer@siemens.com>,
- Heiko Schocher <hs@denx.de>,
+Cc: Heiko Schocher <hs@denx.de>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Anatolij Gustschin <agust@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Tomas Peterka <atheiste@seznam.cz>
-Subject: [PATCH v2 2/5] siemens: capricorn: enable text based default
- environment
-Date: Mon, 28 Apr 2025 07:28:54 +0200
-Message-Id: <20250428052858.100083-3-hs@denx.de>
+ Tom Rini <trini@konsulko.com>, Tomas Peterka <atheiste@seznam.cz>,
+ Walter Schweizer <walter.schweizer@siemens.com>
+Subject: [PATCH v2 4/5] arm: imx8qxp: capricorn: move env offset settings
+Date: Mon, 28 Apr 2025 07:28:56 +0200
+Message-Id: <20250428052858.100083-5-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20250428052858.100083-1-hs@denx.de>
 References: <20250428052858.100083-1-hs@denx.de>
@@ -83,167 +81,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Walter Schweizer <walter.schweizer@siemens.com>
-
-enable text based default U-Boot Environment by enabling
-CONFIG_ENV_SOURCE_FILE
-
-and adding default environment file:
-
-board/siemens/capricorn/capricorn_cxg3.env
+move the ENV_OFFSET settings from common config settings file
+configs/imx8qxp_capricorn.config to defconfig file for the
+cxg3 board, as other imx8qxp based boards from siemens has
+the environment on other offsets.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
-Signed-off-by: Walter Schweizer <walter.schweizer@siemens.com>
 
 ---
 
 Changes in v2:
-- removed ipaddr and serverip as suggested from Fabio
+- new patch arm: imx8qxp: capricorn: move env offset settings
+  in v2
 
- board/siemens/capricorn/capricorn_default.env | 49 +++++++++++++++++
- configs/capricorn_cxg3_defconfig              |  1 +
- include/configs/capricorn-common.h            | 52 +------------------
- 3 files changed, 51 insertions(+), 51 deletions(-)
- create mode 100644 board/siemens/capricorn/capricorn_default.env
+ configs/capricorn_cxg3_defconfig | 2 ++
+ configs/imx8qxp_capricorn.config | 2 --
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/board/siemens/capricorn/capricorn_default.env b/board/siemens/capricorn/capricorn_default.env
-new file mode 100644
-index 00000000000..4c26e9d43eb
---- /dev/null
-+++ b/board/siemens/capricorn/capricorn_default.env
-@@ -0,0 +1,49 @@
-+altbootcmd=run bootcmd
-+baudrate=115200
-+bootcmd=run flash_self;reset;
-+bootdelay=3
-+bootdir=targetdir/rootfs/boot
-+bootlimit=3
-+check_upgrade=if test ${upgrade_available} -eq 1; then echo  upgrade_available is set; if test ${bootcount} -gt ${bootlimit}; then setenv upgrade_available 0;echo toggle partition;run toggle_partition;fi;fi;
-+cntr_addr=0x88000000
-+cntr_file=os_cntr_signed.bin
-+console=ttyLP2
-+dtb_name_default=default
-+ethprime=eth1
-+fdt_addr=0x83000000
-+fdt_high=0xffffffffffffffff
-+flash_self=run mmc_boot
-+flash_self_test=setenv testargs test loglevel=3 systemd.unit=test.target; run mmc_boot
-+hostname=capricorn
-+initrd_addr=0x83100000
-+initrd_high=0xffffffffffffffff
-+ip_method=none
-+kernel_name=Image
-+loadaddr=0x80400000
-+mmc_boot=run set_bootargs;run check_upgrade; run set_partition;run set_bootargs_mmc;run mmc_load_bootfiles
-+mmc_boot_fit=ext4load mmc 0:${mmc_part_nr} 0x88000000 boot/fitImage;if test -n ${A};then setenv bootargs ${bootargs} rootfs_sig=${sig_a};fi;if test -n ${B};then setenv bootargs ${bootargs} rootfs_sig=${sig_b};fi;bootm 0x88000000#conf-${dtb_name}.dtb;bootm
-+mmc_boot_image=ext4load mmc 0:${mmc_part_nr} ${fdt_addr} boot/${dtb_name}.dtb;if test $? -eq 1;then ext4load mmc 0:${mmc_part_nr} ${fdt_addr} boot/${dtb_name_default}.dtb;fi; ext4load mmc 0:${mmc_part_nr} ${loadaddr} boot/${kernel_name}; booti ${loadaddr} - ${fdt_addr}
-+mmc_load_bootfiles=echo -n Loading from eMMC ...; if test -e mmc 0:${mmc_part_nr} boot/fitImage; then echo fit; setenv fdt_high; setenv initrd_high; run mmc_boot_fit; else echo image; run mmc_boot_image; fi
-+net_nfs=wdt dev scu-wdt; wdt stop; echo Booting from network ...; run set_bootargs_net; tftpboot ${loadaddr} ${bootdir}/${kernel_name}; printenv bootargs; if test ${kernel_name} = fitImage; then setenv fdt_high; setenv initrd_high; bootm ${loadaddr}#conf-${dtb_name}.dtb; else tftpboot ${fdt_addr} ${serverip}:${bootdir}/${dtb_name}.dtb; if test $? -eq 1; then echo Loading default.dtb!; tftpboot ${fdt_addr} ${serverip}:${bootdir}/${dtb_name_default}.dtb; fi; booti ${loadaddr} - ${fdt_addr}; fi
-+net_unfs=setenv nfsopts vers=3,udp,rsize=4096,wsize=4096,nolock,port=3049,mountport=3048 rw; run net_nfs
-+netdev=lan0
-+nfsopts=vers=3,udp,rsize=4096,wsize=4096,nolock rw
-+partitionset_active=A
-+rootfs_name=/dev/mmcblk0
-+rootpath=/home/projects/targetdir/rootfs
-+script_file=u-boot-commands.img
-+set_bootargs_mmc=setenv bootargs ${bootargs} root=${mmc_active_vol} ro rootdelay=1 rootwait rootfstype=ext4 ip=${ip_method}
-+set_bootargs_net=run set_bootargs; if test ${kernel_name} = fitImage; then setenv loadaddr 0x88000000; fi; setenv bootargs ${bootargs} root=/dev/nfs nfsroot=${serverip}:${rootpath},${nfsopts} ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:${hostname}:${netdev}:off
-+set_bootargs=setenv bootargs console=${console},${baudrate} target_env=${target_env} ${testargs} ${optargs}
-+set_partition=setenv ${partitionset_active} true;if test -n ${A}; then setenv mmc_part_nr 1;fi;if test -n ${B}; then setenv mmc_part_nr 2;fi;setenv mmc_active_vol ${rootfs_name}p${mmc_part_nr}
-+tftp_run_script=tftpboot ${kernel_loadaddr} ${serverip}:${script_file};if test $? -eq 0;then source ${kernel_loadaddr};fi
-+toggle_partition=setenv ${partitionset_active} true; if test -n ${A}; then setenv partitionset_active B; mmc partconf 0 1 2 0; env delete A; fi; if test -n ${B}; then setenv partitionset_active A; mmc partconf 0 1 1 0; env delete B; fi;saveenv; reset
-+upgrade_available=0
-+emmc_dev=0
-+sd_dev=1
-+mfgtool_args=setenv bootargs console=${console},${baudrate} rdinit=/linuxrc clk_ignore_unused
-+kboot=booti
-+bootcmd_mfg=run mfgtool_args; if iminfo ${initrd_addr}; then if test ${tee} = yes; then bootm ${tee_addr} ${initrd_addr} ${fdt_addr}; else booti ${loadaddr} ${initrd_addr} ${fdt_addr}; fi; else echo "Run fastboot ..."; fastboot usb auto; fi;
-+fastboot_bytes=124c00
-+fastboot_dev=mmc
-+mmcautodetect=yes
 diff --git a/configs/capricorn_cxg3_defconfig b/configs/capricorn_cxg3_defconfig
-index 530b1f47695..5f09ceee8bc 100644
+index 5f09ceee8bc..5689544c1d0 100644
 --- a/configs/capricorn_cxg3_defconfig
 +++ b/configs/capricorn_cxg3_defconfig
-@@ -3,6 +3,7 @@
- CONFIG_DEFAULT_DEVICE_TREE="imx8-capricorn-cxg3"
- CONFIG_IDENT_STRING=" ##v01.06"
+@@ -5,6 +5,8 @@ CONFIG_IDENT_STRING=" ##v01.06"
  
-+CONFIG_ENV_SOURCE_FILE="capricorn_default"
+ CONFIG_ENV_SOURCE_FILE="capricorn_default"
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_ENV_OFFSET=0x200000
++CONFIG_ENV_OFFSET_REDUND=0x202000
  CONFIG_USE_ETHPRIME=y
  CONFIG_ETHPRIME="eth1"
-diff --git a/include/configs/capricorn-common.h b/include/configs/capricorn-common.h
-index 4d95f3fd79b..7120a44d186 100644
---- a/include/configs/capricorn-common.h
-+++ b/include/configs/capricorn-common.h
-@@ -10,8 +10,6 @@
- #include <linux/sizes.h>
- #include <asm/arch/imx-regs.h>
- 
--#include "siemens-env-common.h"
--
- /* SPL config */
- #ifdef CONFIG_XPL_BUILD
- #define CFG_MALLOC_F_ADDR		0x00120000
-@@ -36,57 +34,9 @@
- #define AHAB_ENV "sec_boot=no\0"
- #endif
- 
--#define MFG_ENV_SETTINGS_DEFAULT \
--	"mfgtool_args=setenv bootargs console=${console},${baudrate} " \
--		"rdinit=/linuxrc " \
--		"clk_ignore_unused "\
--		"\0" \
--	"kboot=booti\0"\
--	"bootcmd_mfg=run mfgtool_args;" \
--	"if iminfo ${initrd_addr}; then " \
--	"if test ${tee} = yes; then " \
--		"bootm ${tee_addr} ${initrd_addr} ${fdt_addr}; " \
--	"else " \
--		"booti ${loadaddr} ${initrd_addr} ${fdt_addr}; " \
--	"fi; " \
--	"else " \
--	    "echo \"Run fastboot ...\"; fastboot 0; "  \
--	"fi;\0"
--
--/* Boot M4 */
--#define M4_BOOT_ENV \
--	"m4_0_image=m4_0.bin\0" \
--	"loadm4image_0=fatload mmc ${mmcdev}:${mmcpart} " \
--			"${loadaddr} ${m4_0_image}\0" \
--	"m4boot_0=run loadm4image_0; dcache flush; bootaux ${loadaddr} 0\0" \
--
--#define CFG_MFG_ENV_SETTINGS \
--	MFG_ENV_SETTINGS_DEFAULT \
--	"initrd_addr=0x83100000\0" \
--	"initrd_high=0xffffffffffffffff\0" \
--	"emmc_dev=0\0"
--
- /* Initial environment variables */
- #define CFG_EXTRA_ENV_SETTINGS \
--	CFG_MFG_ENV_SETTINGS \
--	M4_BOOT_ENV \
--	AHAB_ENV \
--	ENV_COMMON \
--	"script=boot.scr\0" \
--	"image=Image\0" \
--	"panel=NULL\0" \
--	"console=ttyLP2\0" \
--	"fdt_addr=0x83000000\0" \
--	"fdt_high=0xffffffffffffffff\0" \
--	"cntr_addr=0x88000000\0" \
--	"cntr_file=os_cntr_signed.bin\0" \
--	"initrd_addr=0x83800000\0" \
--	"initrd_high=0xffffffffffffffff\0" \
--	"netdev=eth0\0" \
--	"nfsopts=vers=3,udp,rsize=4096,wsize=4096,nolock rw\0" \
--	"hostname=capricorn\0" \
--	ENV_EMMC \
--	ENV_NET
-+	AHAB_ENV
- 
- /* Default location for tftp and bootm */
+ CONFIG_NET_RANDOM_ETHADDR=y
+diff --git a/configs/imx8qxp_capricorn.config b/configs/imx8qxp_capricorn.config
+index 032cab63af8..463e584530f 100644
+--- a/configs/imx8qxp_capricorn.config
++++ b/configs/imx8qxp_capricorn.config
+@@ -10,8 +10,6 @@ CONFIG_NR_DRAM_BANKS=3
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x200000
+-CONFIG_ENV_OFFSET_REDUND=0x202000
+ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+ CONFIG_SYS_MMC_ENV_PART=2
  
 -- 
 2.20.1
