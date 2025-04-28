@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E74C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 16:09:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B07C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 16:09:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 976978056A;
-	Mon, 28 Apr 2025 18:09:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1FA182103;
+	Mon, 28 Apr 2025 18:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WEGcBidd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BWDtFERU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00E6F82103; Mon, 28 Apr 2025 18:08:59 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 9193A8210E; Mon, 28 Apr 2025 18:09:49 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 098578004F
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 18:08:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90BDE8056A
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 18:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-54b0d638e86so5855187e87.1
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 09:08:57 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-54c0fa6d455so6367675e87.1
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 09:09:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745856536; x=1746461336; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1745856587; x=1746461387; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ehzhF4WDKP9zXC+pV+VRY9mfP4+qlL/a+IcLnfCSy8w=;
- b=WEGcBiddDCUFHmXcIyt3FNEQLHeDARZHaBvH8CbnaFogBo9KccYkwpkbYnT8tNWC36
- mJsSUEIACuKuQx+orPOEvKIUAnsP1t02GkAA/+/Xau1IPs8Av8dWXLjNqB/Eb3imCzs+
- sfyiYI2TQ3COHqL0KZnnalZjTfcrR3pgKpocfd4SjfpiIlDnBrdv0j2duo58MLs88b+g
- Kb1TlYofMwqHE9xpUK4fRZ/9QpJjoJwyvz4TN4TILB2YTovk6uzsQMDPuqNl4VsO6Yje
- 23cMYrHln7/bZxhAHq98TBMCmJi3PveT59vaFMYx0+kl4pHYqvSiJlcJLjFQe27Xs657
- 0MVQ==
+ bh=qWZN0vk+mTOC50xTf8+D+c3KhT56RcPJzZ3KHwOEulM=;
+ b=BWDtFERUnkpQAeA+bOXqaawA3mLKh2xo7H9lKIiVLWGkb1E3wAveCx6FOv4PZ34Rbf
+ q8AkZepRu18VycHpZ05VteNhBvBA97zZ0vWeP1U4y1cb3c94fIYjIQJ7ADCjDWey19mL
+ E1mTHz/Qsn/rRLvBRt6UOgmN8rTLEki+ogweoa8EsXTLjNl/BlSwrt+RXZcwSNF2nf9C
+ 8WfpFuk5OgoHGc1k09m4kJDgzaAt4+fIOJLlN7EHBATUGRgWyYUgXjV+1jVF/1CGCBYa
+ 0aVLpA8MSdpzcmkkP7bqwE2J4KXS1vxcNFhFCINpgqCnEgR6Zc8O0ksNPK9R3VubSUqF
+ zJoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745856536; x=1746461336;
+ d=1e100.net; s=20230601; t=1745856587; x=1746461387;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ehzhF4WDKP9zXC+pV+VRY9mfP4+qlL/a+IcLnfCSy8w=;
- b=HdvRuNxLDXtI91qslGzML4DmS9qqxnjLBTSRlypxLikafKvKlypJQBGJvBqoT8rELa
- X+IjVoc1gjwe+Yw2aGIj6YqZHULcVMywzJLclgxRch3bojU5zTL8huvsvK97YaIowLcj
- d+0DfqJNRy0VFWsgUjPmUFfjquK2ercpeinunkmen3mAIhXHGGon6ASvwp9Ro1bEZVgG
- xHiyUeC4o3USmOoufo0Sa3t6kW//sqgi8i9aqKufTacK5dTQ/z3Q4S8cnbssStkDqla0
- n9W4chU25UvtfBnwoBEkBSmaXR7yuEEhxK6OoJMaXar9zEtUkyASll4pwmQb1XizmfSf
- LeAA==
+ bh=qWZN0vk+mTOC50xTf8+D+c3KhT56RcPJzZ3KHwOEulM=;
+ b=MfW13rQ8w6RIVnvxDtgkws5cRATBLku4eHYEvxkdsVHML+iLNRkoMNerwc46+onHRq
+ QRGJdRzPf7TvExIYwX1R7iye5ys2bbDfeE89oJNuXRv5w75cOD6AcISvAtcYqtoo7lqq
+ ocHRzDpD3SZUM/coLfw1BnPXH4gaCn6pmi6pYMYJrLBjGp7loZ/KGbNl5uc1Peq/DrJY
+ zAlgl7U7dUjYzjWhZWFeQfA/WfbVaWT81dfyPZUZU6tn4rW4nMRp5WfQN3mnVgwdlKUr
+ PcN6NiLoQWDqzox5zEXaXzbx+JlZRvlnpE5T5cmIFCINGsqVd7bjZdkMpnt9plhocBcQ
+ lv4Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUGO9MG6HqF5fYpxo+N2Pxrfn7eM8iZBWlHBoZ7Qlte+XUBN8xIJGPVf/stn+ewSKD9StNBR2I=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/oTzRdeAw+Z6o6cbXh4vQwCdolvG+gn9sBIxU2Ss9HIgEWTmj
- vhcwqXOVjI2eJ6PEEo4mNSXVd4bDoEONkKdTWbQ2TRRay/FlnZulWymaycbm4xVG4uylwKji7p9
- /nyMMJeRwljUPkpo34j+hdCbCCgk=
-X-Gm-Gg: ASbGncswD2NZqZH1a61O6yC3XDf9EMLmSNq9ZLOzrgv+d3eoworkxMWKwtakx2E5czO
- Lle9+1KjECCFfXSr0PUDhy/Mkc9nZPNtWuuBEv/wyVsOthxbeGZ78euCiAoua4WTKeIX+ARDJ13
- XKm4X3/yKQW/DAb0LBBRfOIgAW9FMDJU6Hn0XnBY7DnvwrzCZL0Dz3ZQ==
-X-Google-Smtp-Source: AGHT+IEIUnpkeVu51ZNBXjnlZ2suSDhwLNcmYUeTlcB5Bpvb1y6HjbARQjJUh/emsUbdxNxNmUZ/YXLjFOQNCk3kIGg=
-X-Received: by 2002:a05:6512:3f26:b0:549:903a:1b4 with SMTP id
- 2adb3069b0e04-54e900110b0mr2416573e87.52.1745856535831; Mon, 28 Apr 2025
- 09:08:55 -0700 (PDT)
+ AJvYcCX8LomLRChBees6JhmkO/EtLKn25vRG40pzo7cwoEE4kmCQhea8FORrdCmzebEXt0H2GPfo4x4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRLBtOJaThzqRnXhVlXd37BqCJl1bSYW/CJJW+9YD8pQnrGnB0
+ WticEIlzt52XF0pfdJbVc7L5KizmwNyjv+L1U/AIvYUSGysqm2FUvOvSLkwFZD7wVd+tYIq6zif
+ Sb/YMaPb9o1lldr0rfcqmlOHJXjg=
+X-Gm-Gg: ASbGncuLCv/w2mxzdwmrJiPdyeKcBDcVnjygYVBMqyfPCsagpIqiY5HdhQWXesm+C9v
+ kQv/m9UPDrWZipX/93iR4I4qUHH6rVYEUZ5MrVa47AwImDr4pKih7cV4g846R0KA0C++URN8ngp
+ OB+n/8/kOEW2UiyraDt0C8+AnfnRPR6Z0lQ30TsF73zuyNM/o+EJ7JtQ==
+X-Google-Smtp-Source: AGHT+IEDEqmOJVHapK46Uo8gHLJ3a9NeYkWyFkh7Akfu5t11n3MApw8lzChPA6UFIDBko8X32cD3QH09Rah4l4O0SUA=
+X-Received: by 2002:a05:6512:1391:b0:545:1049:eb44 with SMTP id
+ 2adb3069b0e04-54e8d18d767mr3450849e87.36.1745856586620; Mon, 28 Apr 2025
+ 09:09:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250424082909.1396771-1-ghidoliemanuele@gmail.com>
-In-Reply-To: <20250424082909.1396771-1-ghidoliemanuele@gmail.com>
+References: <20250425173901.1965597-1-festevam@gmail.com>
+In-Reply-To: <20250425173901.1965597-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 28 Apr 2025 13:08:43 -0300
-X-Gm-Features: ATxdqUFR9iXmZhfH4qnY7qvfqL_cQzcd4_kYmNAXBHaFPGzdIleiPlDp-SjDuLE
-Message-ID: <CAOMZO5BXsO0eEjo4-5WqCrhWrizhmeDG_eMZ4HysiUerQSDUvg@mail.gmail.com>
-Subject: Re: [PATCH v1] toradex: tdx-cfg-block: fix verdin imx95 sku 0089 pid4
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de
+Date: Mon, 28 Apr 2025 13:09:34 -0300
+X-Gm-Features: ATxdqUFYCjgoyZ2NAiWQ-IaSlWuiAUS9xrrWX7yT06jwprV3xF5SY9iQ5WdAjOA
+Message-ID: <CAOMZO5B_XHEMZnmt7xaBYqmvwhiaxtuROBM_X=Mv7owASZg_KA@mail.gmail.com>
+Subject: Re: [PATCH] arm64: dts: imx8mm: Make osc_32k available in SPL
+To: marex@denx.de
+Cc: trini@konsulko.com, aford173@gmail.com, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,14 +94,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 24, 2025 at 5:29=E2=80=AFAM Emanuele Ghidoli
-<ghidoliemanuele@gmail.com> wrote:
+On Fri, Apr 25, 2025 at 2:39=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> The memory size of the 0089 SKU is 8 GB instead of 16 GB.
-> Fix PID4 0089 Verdin iMX95 definition, in the configuration block.
+> From: Fabio Estevam <festevam@denx.de>
 >
-> Fixes: ce53f46f33b4 ("toradex: tdx-cfg-block: add verdin imx95 sku 0089 p=
-id4")
-> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+> Since commit b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*")
+> SPL takes a long time to load U-Boot proper on an imx8mm-evk board.
+>
+> The reason for the long delay is because the osc_32k clock is not availab=
+le
+> in the SPL phase.
+>
+> Fix this problem by passing the 'bootph-all' and 'bootph-pre-ram'
+> properties to make the osc_32k clock available in SPL.
+>
+> This also aligns with imx8mn and imx8mp-u-boot.dtsi files.
+>
+> Fixes: b4734c9c333b ("clk: imx: Convert clock-osc-* back to osc_*")
+> Suggested-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+> Changes since v1:
+> - Sent a standalone patch that makes osc_32k available in SPL. (Marek)
 
 Applied, thanks.
