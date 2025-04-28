@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA6BFC369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3581C369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22976828A2;
-	Mon, 28 Apr 2025 15:24:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 671D98293C;
+	Mon, 28 Apr 2025 15:24:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Y7gzOuDE";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="pR/zVeU1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AEC482887; Mon, 28 Apr 2025 15:24:02 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id B7C5D82918; Mon, 28 Apr 2025 15:24:03 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E11038269F
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:23:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE50A82724
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:24:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9M5hn010817;
- Mon, 28 Apr 2025 15:23:57 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9aHYU021436;
+ Mon, 28 Apr 2025 15:23:59 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- QkpX353kcjN3yA/EkYEu08c3+xRCg3Yy2ilRLDnwmWw=; b=Y7gzOuDEAZFH1N3N
- CPgVhPN4rBbJEDIe8r66hJd76QSb63l9uAO33kuaqZ9CQ7f2uF9+rsVFrOuCs+BB
- IqtsjL2iyeYNDM3voKsyDRnqNViVlH+lY3jiMWrateYAg/Cl+7vg8cq0hzih7LxW
- lcswOPg9WhA29Kp+yRIYiqIoTmCjun4pUJEB4MBZBQsNQj5D5oFA4siK+0wT9MLR
- 87vUshpPWcYacIW0AB+wO8ZLPgDBr0xlfOb2PjVG26h1ttfbpj5S5XO18CJ+zExR
- V2BVRbUVqsGjjcfHYxM9mdtHDx6OXPXB2CkbN4jAhGs8OXjpIRSd+W51qhuXhvtD
- 8K1R/g==
+ l2CrAMQEAEKeZWG5Im2lMu0R/wDoOIeCJI5N9z5X3vs=; b=pR/zVeU1J/faAtrB
+ mhqsSHi7qIgsbI6RrKSgwT7FO5W1CwozF55E9xTr7bmUH0K7tAWeVTrfcQZqRSAV
+ zqHFTlHea2EDfz33nygXeRN92QdV6hV+PaHhEcfy3AzC5+Wlwc7F4moPtJZ1ywQw
+ eePeq5mSugNz4PWUVlcu4vmpZ7U87ZKdiQCcqqAviGpBcs7kPr/dgjSlVcXV9zOa
+ 0KISjZEcX0aDsIbIiqU7hzRFBDk1rEUGKmWChVhKbFstH1/kxqtYYOuzstIBFqgU
+ 0LzdaDwZarEEz6PtvWayD9jxBua2e9nhnzvGjd8mcbNvw8aEi3E0B3r3lrmke/XZ
+ dNoraw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 469aencfs5-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mm9ex3g-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:23:57 +0200 (MEST)
+ Mon, 28 Apr 2025 15:23:59 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 259A04007D;
- Mon, 28 Apr 2025 15:22:51 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1704840054;
+ Mon, 28 Apr 2025 15:23:06 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 26B8DA805DB;
- Mon, 28 Apr 2025 15:22:07 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 715CAA8088D;
+ Mon, 28 Apr 2025 15:22:43 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:22:06 +0200
-Message-ID: <73638885-febe-4cb4-8389-d52937e8f7eb@foss.st.com>
-Date: Mon, 28 Apr 2025 15:22:06 +0200
+ 2025 15:22:43 +0200
+Message-ID: <e44bf32a-a2e8-446e-a4d1-74664b2d84b3@foss.st.com>
+Date: Mon, 28 Apr 2025 15:22:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/13] ARM: stm32mp: add RIFSC system bus driver for
- STM32MP25
+Subject: Re: [PATCH v2 02/22] configs: stm32mp25: add bootcmd for stm32mp25
+ platform
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Gatien Chevallier
- <gatien.chevallier@foss.st.com>, Tom Rini <trini@konsulko.com>
-References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
- <20250422131229.415020-14-patrice.chotard@foss.st.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
+ <20250425131533.392747-3-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250422131229.415020-14-patrice.chotard@foss.st.com>
+In-Reply-To: <20250425131533.392747-3-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -94,447 +93,105 @@ X-Virus-Status: Clean
 
 
 
-On 4/22/25 15:12, Patrice Chotard wrote:
-> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+On 4/25/25 15:15, Patrice Chotard wrote:
+> Handle boot for the 3 instance of MMC and call the command stm32prog
+> for serial boot on USB or on UART as it is done for other STM32MP platform.
 > 
-> This driver is checking the access rights of the different
-> peripherals connected to the RIFSC bus. If access is denied,
-> the associated device is not binded.
-> 
-> Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> 
 > ---
 > 
-> Changes in v2:
->   - Replace LOG_CATEGORY UCLASS_SIMPLE_BUS by UCLASS_NOP in both
->     /arch/arm/mach-stm32mp/stm32mp2/rifsc.c and
->     /arch/arm/mach-stm32mp/stm32mp1/etzpc.c.
->   - Update board/st/stm32mp1/MAINTAINERS.
->   - Fix DSI clock ssetting.
+> (no changes since v1)
 > 
->  arch/arm/mach-stm32mp/include/mach/rif.h |  26 ++
->  arch/arm/mach-stm32mp/stm32mp2/Makefile  |   1 +
->  arch/arm/mach-stm32mp/stm32mp2/rifsc.c   | 364 +++++++++++++++++++++++
->  3 files changed, 391 insertions(+)
->  create mode 100644 arch/arm/mach-stm32mp/include/mach/rif.h
->  create mode 100644 arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+>  include/configs/stm32mp25_common.h | 77 ++++++++++++++++++++++++++++++
+>  1 file changed, 77 insertions(+)
 > 
-> diff --git a/arch/arm/mach-stm32mp/include/mach/rif.h b/arch/arm/mach-stm32mp/include/mach/rif.h
-> new file mode 100644
-> index 00000000000..10b22108120
-> --- /dev/null
-> +++ b/arch/arm/mach-stm32mp/include/mach/rif.h
-> @@ -0,0 +1,26 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
-> +/*
-> + * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
-> + */
-> +
-> +#ifndef MACH_RIF_H
-> +#define MACH_RIF_H
-> +
-> +#include <linux/types.h>
-> +
-> +/**
-> + * stm32_rifsc_check_access - Check RIF accesses for given device node
-> + *
-> + * @device_node		Node of the device for which the accesses are checked
-> + */
-> +int stm32_rifsc_check_access(ofnode device_node);
-> +
-> +/**
-> + * stm32_rifsc_check_access - Check RIF accesses for given id
-> + *
-> + * @device_node		Node of the device to get a reference on RIFSC
-> + * @id			ID of the resource to check
-> + */
-> +int stm32_rifsc_check_access_by_id(ofnode device_node, u32 id);
-> +
-> +#endif /* MACH_RIF_H*/
-> diff --git a/arch/arm/mach-stm32mp/stm32mp2/Makefile b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-> index b579ce5a800..5dbf75daa76 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp2/Makefile
-> +++ b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-> @@ -5,5 +5,6 @@
+> diff --git a/include/configs/stm32mp25_common.h b/include/configs/stm32mp25_common.h
+> index ec980eea856..542de8f068d 100644
+> --- a/include/configs/stm32mp25_common.h
+> +++ b/include/configs/stm32mp25_common.h
+> @@ -21,4 +21,81 @@
+>   */
+>  #define CFG_SYS_BOOTMAPSZ	SZ_256M
 >  
->  obj-y += cpu.o
->  obj-y += arm64-mmu.o
-> +obj-y += rifsc.o
->  obj-$(CONFIG_OF_SYSTEM_SETUP) += fdt.o
->  obj-$(CONFIG_STM32MP25X) += stm32mp25x.o
-> diff --git a/arch/arm/mach-stm32mp/stm32mp2/rifsc.c b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-> new file mode 100644
-> index 00000000000..50dececf77b
-> --- /dev/null
-> +++ b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-> @@ -0,0 +1,364 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
-> + */
+> +/*****************************************************************************/
+> +#ifdef CONFIG_DISTRO_DEFAULTS
+> +/*****************************************************************************/
 > +
-> +#define LOG_CATEGORY UCLASS_NOP
+> +#ifdef CONFIG_CMD_MMC
+> +#define BOOT_TARGET_MMC0(func)	func(MMC, mmc, 0)
+> +#define BOOT_TARGET_MMC1(func)	func(MMC, mmc, 1)
+> +#define BOOT_TARGET_MMC2(func)	func(MMC, mmc, 2)
+> +#else
+> +#define BOOT_TARGET_MMC0(func)
+> +#define BOOT_TARGET_MMC1(func)
+> +#define BOOT_TARGET_MMC2(func)
+> +#endif
 > +
-> +#include <dm.h>
-> +#include <asm/io.h>
-> +#include <dm/device.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/lists.h>
-> +#include <linux/bitfield.h>
-> +#include <mach/rif.h>
-> +
-> +/* RIFSC offset register */
-> +#define RIFSC_RISC_SECCFGR0(id)		(0x10 + 0x4 * (id))
-> +#define RIFSC_RISC_PER0_CIDCFGR(id)	(0x100 + 0x8 * (id))
-> +#define RIFSC_RISC_PER0_SEMCR(id)	(0x104 + 0x8 * (id))
+> +#define BOOT_TARGET_DEVICES(func)	\
+> +	BOOT_TARGET_MMC1(func)		\
+> +	BOOT_TARGET_MMC0(func)		\
+> +	BOOT_TARGET_MMC2(func)
 > +
 > +/*
-> + * SEMCR register
+> + * default bootcmd for stm32mp25:
+> + * for serial/usb: execute the stm32prog command
+> + * for mmc boot (eMMC, SD card), distro boot on the same mmc device
+> + * for other boot, use the default distro order in ${boot_targets}
 > + */
-> +#define SEMCR_MUTEX			BIT(0)
+> +#define STM32MP_BOOTCMD "bootcmd_stm32mp=" \
+> +	"echo \"Boot over ${boot_device}${boot_instance}!\";" \
+> +	"if test ${boot_device} = serial || test ${boot_device} = usb;" \
+> +	"then stm32prog ${boot_device} ${boot_instance}; " \
+> +	"else " \
+> +		"run env_check;" \
+> +		"if test ${boot_device} = mmc;" \
+> +		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
+> +		"run distro_bootcmd;" \
+> +	"fi;\0"
 > +
-> +/* RIFSC miscellaneous */
-> +#define RIFSC_RISC_SCID_MASK		GENMASK(6, 4)
-> +#define RIFSC_RISC_SEMWL_MASK		GENMASK(23, 16)
+> +#ifndef STM32MP_BOARD_EXTRA_ENV
+> +#define STM32MP_BOARD_EXTRA_ENV
+> +#endif
 > +
-> +#define IDS_PER_RISC_SEC_PRIV_REGS	32
-> +
+> +#define STM32MP_EXTRA \
+> +	"env_check=if env info -p -d -q; then env save; fi\0" \
+> +	"boot_net_usb_start=true\0"
 > +/*
-> + * CIDCFGR register fields
+> + * memory layout for 96MB uncompressed/compressed kernel,
+> + * 1M fdt, 1M script, 1M pxe and 1M for overlay
+> + * and the ramdisk at the end.
 > + */
-> +#define CIDCFGR_CFEN			BIT(0)
-> +#define CIDCFGR_SEMEN			BIT(1)
-> +
-> +#define SEMWL_SHIFT			16
-> +
-> +#define STM32MP25_RIFSC_ENTRIES		178
-> +
-> +/* Compartiment IDs */
-> +#define RIF_CID0			0x0
-> +#define RIF_CID1			0x1
-> +
-> +/*
-> + * struct stm32_rifsc_plat: Information about RIFSC device
-> + *
-> + * @base: Base address of RIFSC
-> + */
-> +struct stm32_rifsc_plat {
-> +	void *base;
-> +};
-> +
-> +/*
-> + * struct stm32_rifsc_child_plat: Information about each child
-> + *
-> + * @domain_id: Domain id
-> + */
-> +struct stm32_rifsc_child_plat {
-> +	u32 domain_id;
-> +};
-> +
-> +static bool stm32_rif_is_semaphore_available(void *base, u32 id)
-> +{
-> +	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
-> +
-> +	return !(readl(addr) & SEMCR_MUTEX);
-> +}
-> +
-> +static int stm32_rif_acquire_semaphore(void *base, u32 id)
-> +{
-> +	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
-> +
-> +	/* Check that the semaphore is available */
-> +	if (!stm32_rif_is_semaphore_available(base, id))
-> +		return -EACCES;
-> +
-> +	setbits_le32(addr, SEMCR_MUTEX);
-> +
-> +	/* Check that CID1 has the semaphore */
-> +	if (stm32_rif_is_semaphore_available(base, id) ||
-> +	    FIELD_GET(RIFSC_RISC_SCID_MASK, (readl(addr)) != RIF_CID1))
-> +		return -EACCES;
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_rif_release_semaphore(void *base, u32 id)
-> +{
-> +	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
-> +
-> +	if (stm32_rif_is_semaphore_available(base, id))
-> +		return 0;
-> +
-> +	clrbits_le32(addr, SEMCR_MUTEX);
-> +
-> +	/* Ok if another compartment takes the semaphore before the check */
-> +	if (!stm32_rif_is_semaphore_available(base, id) &&
-> +	    FIELD_GET(RIFSC_RISC_SCID_MASK, (readl(addr)) == RIF_CID1))
-> +		return -EACCES;
-> +
-> +	return 0;
-> +}
-> +
-> +static int rifsc_parse_access_controller(ofnode node, struct ofnode_phandle_args *args)
-> +{
-> +	int ret;
-> +
-> +	ret = ofnode_parse_phandle_with_args(node, "access-controllers",
-> +					     "#access-controller-cells", 0,
-> +					     0, args);
-> +	if (ret) {
-> +		log_debug("failed to parse access-controller (%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	if (args->args_count != 1) {
-> +		log_debug("invalid domain args_count: %d\n", args->args_count);
-> +		return -EINVAL;
-> +	}
-> +
-> +	if (args->args[0] >= STM32MP25_RIFSC_ENTRIES) {
-> +		log_err("Invalid sys bus ID for %s\n", ofnode_get_name(node));
-> +		return -EINVAL;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int rifsc_check_access(void *base, u32 id)
-> +{
-> +	u32 reg_offset, reg_id, sec_reg_value, cid_reg_value, sem_reg_value;
-> +
-> +	/*
-> +	 * RIFSC_RISC_PRIVCFGRx and RIFSC_RISC_SECCFGRx both handle configuration access for
-> +	 * 32 peripherals. On the other hand, there is one _RIFSC_RISC_PERx_CIDCFGR register
-> +	 * per peripheral
-> +	 */
-> +	reg_id = id / IDS_PER_RISC_SEC_PRIV_REGS;
-> +	reg_offset = id % IDS_PER_RISC_SEC_PRIV_REGS;
-> +	sec_reg_value = readl(base + RIFSC_RISC_SECCFGR0(reg_id));
-> +	cid_reg_value = readl(base + RIFSC_RISC_PER0_CIDCFGR(id));
-> +	sem_reg_value = readl(base + RIFSC_RISC_PER0_SEMCR(id));
-> +
-> +	/*
-> +	 * First check conditions for semaphore mode, which doesn't take into
-> +	 * account static CID.
-> +	 */
-> +	if (cid_reg_value & CIDCFGR_SEMEN)
-> +		goto skip_cid_check;
-> +
-> +	/*
-> +	 * Skip cid check if CID filtering isn't enabled or filtering is enabled on CID0, which
-> +	 * corresponds to whatever CID.
-> +	 */
-> +	if (!(cid_reg_value & CIDCFGR_CFEN) ||
-> +	    FIELD_GET(RIFSC_RISC_SCID_MASK, cid_reg_value) == RIF_CID0)
-> +		goto skip_cid_check;
-> +
-> +	/* Coherency check with the CID configuration */
-> +	if (FIELD_GET(RIFSC_RISC_SCID_MASK, cid_reg_value) != RIF_CID1) {
-> +		log_debug("Invalid CID configuration for peripheral %d\n", id);
-> +		return -EACCES;
-> +	}
-> +
-> +	/* Check semaphore accesses */
-> +	if (cid_reg_value & CIDCFGR_SEMEN) {
-> +		if (!(FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
-> +			log_debug("Not in semaphore whitelist for peripheral %d\n", id);
-> +			return -EACCES;
-> +		}
-> +		if (!stm32_rif_is_semaphore_available(base, id) &&
-> +		    !(FIELD_GET(RIFSC_RISC_SCID_MASK, sem_reg_value) & BIT(RIF_CID1))) {
-> +			log_debug("Semaphore unavailable for peripheral %d\n", id);
-> +			return -EACCES;
-> +		}
-> +	}
-> +
-> +skip_cid_check:
-> +	/* Check security configuration */
-> +	if (sec_reg_value & BIT(reg_offset)) {
-> +		log_debug("Invalid security configuration for peripheral %d\n", id);
-> +		return -EACCES;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +int stm32_rifsc_check_access_by_id(ofnode device_node, u32 id)
-> +{
-> +	struct ofnode_phandle_args args;
-> +	int err;
-> +
-> +	if (id >= STM32MP25_RIFSC_ENTRIES)
-> +		return -EINVAL;
-> +
-> +	err = rifsc_parse_access_controller(device_node, &args);
-> +	if (err)
-> +		return err;
-> +
-> +	return rifsc_check_access((void *)ofnode_get_addr(args.node), id);
-> +}
-> +
-> +int stm32_rifsc_check_access(ofnode device_node)
-> +{
-> +	struct ofnode_phandle_args args;
-> +	int err;
-> +
-> +	err = rifsc_parse_access_controller(device_node, &args);
-> +	if (err)
-> +		return err;
-> +
-> +	return rifsc_check_access((void *)ofnode_get_addr(args.node), args.args[0]);
-> +}
-> +
-> +static int stm32_rifsc_child_pre_probe(struct udevice *dev)
-> +{
-> +	struct stm32_rifsc_plat *plat = dev_get_plat(dev->parent);
-> +	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
-> +	u32 cid_reg_value;
-> +	int err;
-> +	u32 id = child_plat->domain_id;
-> +
-> +	cid_reg_value = readl(plat->base + RIFSC_RISC_PER0_CIDCFGR(id));
-> +
-> +	/*
-> +	 * If the peripheral is in semaphore mode, take the semaphore so that
-> +	 * the CID1 has the ownership.
-> +	 */
-> +	if (cid_reg_value & CIDCFGR_SEMEN &&
-> +	    (FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
-> +		err = stm32_rif_acquire_semaphore(plat->base, id);
-> +		if (err) {
-> +			dev_err(dev, "Couldn't acquire RIF semaphore for peripheral %d (%d)\n",
-> +				id, err);
-> +			return err;
-> +		}
-> +		dev_dbg(dev, "Acquiring semaphore for peripheral %d\n", id);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_rifsc_child_post_remove(struct udevice *dev)
-> +{
-> +	struct stm32_rifsc_plat *plat = dev_get_plat(dev->parent);
-> +	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
-> +	u32 cid_reg_value;
-> +	int err;
-> +	u32 id = child_plat->domain_id;
-> +
-> +	cid_reg_value = readl(plat->base + RIFSC_RISC_PER0_CIDCFGR(id));
-> +
-> +	/*
-> +	 * If the peripheral is in semaphore mode, release the semaphore so that
-> +	 * there's no ownership.
-> +	 */
-> +	if (cid_reg_value & CIDCFGR_SEMEN &&
-> +	    (FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
-> +		err = stm32_rif_release_semaphore(plat->base, id);
-> +		if (err)
-> +			dev_err(dev, "Couldn't release rif semaphore for peripheral %d (%d)\n",
-> +				id, err);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_rifsc_child_post_bind(struct udevice *dev)
-> +{
-> +	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
-> +	struct ofnode_phandle_args args;
-> +	int ret;
-> +
-> +	if (!dev_has_ofnode(dev))
-> +		return -EPERM;
-> +
-> +	ret = rifsc_parse_access_controller(dev_ofnode(dev), &args);
-> +	if (ret)
-> +		return ret;
-> +
-> +	child_plat->domain_id = args.args[0];
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_rifsc_bind(struct udevice *dev)
-> +{
-> +	struct stm32_rifsc_plat *plat = dev_get_plat(dev);
-> +	struct ofnode_phandle_args args;
-> +	int ret = 0, err = 0;
-> +	ofnode node;
-> +
-> +	plat->base = dev_read_addr_ptr(dev);
-> +	if (!plat->base) {
-> +		dev_err(dev, "can't get registers base address\n");
-> +		return -ENOENT;
-> +	}
-> +
-> +	for (node = ofnode_first_subnode(dev_ofnode(dev));
-> +	     ofnode_valid(node);
-> +	     node = ofnode_next_subnode(node)) {
-> +		const char *node_name = ofnode_get_name(node);
-> +
-> +		if (!ofnode_is_enabled(node))
-> +			continue;
-> +
-> +		err = rifsc_parse_access_controller(node, &args);
-> +		if (err) {
-> +			dev_dbg(dev, "%s failed to parse child on bus (%d)\n", node_name, err);
-> +			continue;
-> +		}
-> +
-> +		err = rifsc_check_access(plat->base, args.args[0]);
-> +		if (err) {
-> +			dev_info(dev, "%s not allowed on bus (%d)\n", node_name, err);
-> +			continue;
-> +		}
-> +
-> +		err = lists_bind_fdt(dev, node, NULL, NULL,
-> +				     gd->flags & GD_FLG_RELOC ? false : true);
-> +		if (err && !ret) {
-> +			ret = err;
-> +			dev_err(dev, "%s failed to bind on bus (%d)\n", node_name, ret);
-> +		}
-> +	}
-> +
-> +	if (ret)
-> +		dev_err(dev, "Some child failed to bind (%d)\n", ret);
-> +
-> +	return ret;
-> +}
-> +
-> +static int stm32_rifsc_remove(struct udevice *bus)
-> +{
-> +	struct udevice *dev;
-> +
-> +	/* Deactivate all child devices not yet removed */
-> +	for (device_find_first_child(bus, &dev); dev; device_find_next_child(&dev))
-> +		if (device_active(dev))
-> +			stm32_rifsc_child_post_remove(dev);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id stm32_rifsc_ids[] = {
-> +	{ .compatible = "st,stm32mp25-rifsc" },
-> +	{},
-> +};
-> +
-> +U_BOOT_DRIVER(stm32_rifsc) = {
-> +	.name = "stm32_rifsc",
-> +	.id = UCLASS_NOP,
-> +	.of_match = stm32_rifsc_ids,
-> +	.bind = stm32_rifsc_bind,
-> +	.remove = stm32_rifsc_remove,
-> +	.child_post_bind = stm32_rifsc_child_post_bind,
-> +	.child_pre_probe = stm32_rifsc_child_pre_probe,
-> +	.child_post_remove = stm32_rifsc_child_post_remove,
-> +	.plat_auto = sizeof(struct stm32_rifsc_plat),
-> +	.per_child_plat_auto = sizeof(struct stm32_rifsc_child_plat),
-> +	.flags = DM_FLAG_OS_PREPARE,
-> +};
+> +#define __KERNEL_COMP_ADDR_R	__stringify(0x84000000)
+> +#define __KERNEL_COMP_SIZE_R	__stringify(0x04000000)
+> +#define __KERNEL_ADDR_R		__stringify(0x8a000000)
+> +#define __FDT_ADDR_R		__stringify(0x90000000)
+> +#define __SCRIPT_ADDR_R		__stringify(0x90100000)
+> +#define __PXEFILE_ADDR_R	__stringify(0x90200000)
+> +#define __FDTOVERLAY_ADDR_R	__stringify(0x90300000)
+> +#define __RAMDISK_ADDR_R	__stringify(0x90400000)
+> +
+> +#define STM32MP_MEM_LAYOUT \
+> +	"kernel_addr_r=" __KERNEL_ADDR_R "\0" \
+> +	"fdt_addr_r=" __FDT_ADDR_R "\0" \
+> +	"scriptaddr=" __SCRIPT_ADDR_R "\0" \
+> +	"pxefile_addr_r=" __PXEFILE_ADDR_R "\0" \
+> +	"fdtoverlay_addr_r=" __FDTOVERLAY_ADDR_R "\0" \
+> +	"ramdisk_addr_r=" __RAMDISK_ADDR_R "\0" \
+> +	"kernel_comp_addr_r=" __KERNEL_COMP_ADDR_R "\0"	\
+> +	"kernel_comp_size=" __KERNEL_COMP_SIZE_R "\0"
+> +
+> +#include <config_distro_bootcmd.h>
+> +#define CFG_EXTRA_ENV_SETTINGS \
+> +	STM32MP_MEM_LAYOUT \
+> +	STM32MP_BOOTCMD \
+> +	BOOTENV \
+> +	STM32MP_EXTRA \
+> +	STM32MP_BOARD_EXTRA_ENV
+> +
+> +#endif
+> +
+>  #endif /* __CONFIG_STM32MP25_COMMMON_H */
 Applied to u-boot-stm32/master
 
 Thanks
