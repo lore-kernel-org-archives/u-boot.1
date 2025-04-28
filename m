@@ -4,93 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4FCEC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A328FC369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 15:09:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5571F82A53;
-	Mon, 28 Apr 2025 16:54:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 08A1B829C7;
+	Mon, 28 Apr 2025 17:09:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jvCI+y88";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7804982A5E; Mon, 28 Apr 2025 16:54:13 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C1A782A33
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:54:11 +0200 (CEST)
+ id 2529682A33; Mon, 28 Apr 2025 17:09:23 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 54D198293C
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 17:09:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adriano.cordova@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id ADA7D3F162
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 14:54:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1745852049;
- bh=hIxsaIPqzHp5BjtZUGWPuYZscXi8HjXuqCuqKc1l68Q=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=jvCI+y88mbBdKqxaK5aUo5l2py5wVFaDLR2yCPuhh/TLuFlTxVOWIhLsPHU6F0+OF
- Tegh7xMWM+LWWiUASA2m5dbZ6NRyqXSCYEk6W8rRB8BKH/gL4hxatZJdXqDELCZwCP
- jSUQ3ko1+Ssq4sw1eLTJ+eDfgwxPbfmzPX2T/yryQKu/iv/cqE65KcAjdOaLJfuHEn
- h7aHJjLNNdOF+HOBTB52dB6V324s7HQRWT2vurhVt8qcGj3J02EWeCRbuceTw8sYmo
- mcKhSXlCxf8gNfwBOvFykQU++ncmDqVe+hychIu1dRdkC3WxVGv192JfaZWMm5lmvA
- Bty2ckJDNYunw==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-39abdadb0f0so1582807f8f.0
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 07:54:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745852049; x=1746456849;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hIxsaIPqzHp5BjtZUGWPuYZscXi8HjXuqCuqKc1l68Q=;
- b=IZ8JOXEPbEkWJgKcUiYT+c4JQm52vhH6XAx5qD3IvxiXlcIxVkouBOITY1jYfQ01RQ
- 9sN5rY3MJmgInwy6l5NBExizloORbEtU3OvlCCfb6DdyrXzpg8i4FYVrecFv4eGIR9kw
- p3//0zUWXvQkQFuINbkqPPSGWObPXVaJC5QHUkeMm2FVYwNka1rGxJVqJOn4c29EN5js
- llK0fPNHx8VWKpUXvQxyEPSKCa5n81rgA/ckxriKv5HDwEzcknzamNwbXRhY2kcuzriT
- jzd+IBThf2bqRANA8bVC8TBybI6EY+cK5EuWpsGlAHHoAusYR45QMroz7WsG8ZxCzjDd
- 5gdQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXCW4ievB5A8cg3Ivf1CHra1bKMiKQiuS5yduS6ry5i5pGsaNDAwn2zcXwkaaXsTayJerQbrm8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCTOYbJgDaNmemV+wrjMpnr1mPQgdMiEF3awlkbubu8mNqiXIp
- iuvsicAMOGhf0gJKZzn9p7tWzpaaw3dv46WtXqJgP5r2n7Qh5NXpHuy5omFURdAod082ofg3hbX
- SDw3Sf+4A2vHyYsXH/qQzPoAD2TFfcrpyPd9CSc0icqM1qLqFFYY9o3sTlui5si3F0mMH0eimhG
- JhSJVgvSbUwamlY2/lhl3fTvvnAqRhcICVqFR3nuAnbg==
-X-Gm-Gg: ASbGncsisbt6ba5EyuFmeDaIrVBhbSAR4YirROg+8pwi3k4h4OlmyBkVd9ePFxg6+3f
- q0dpn/K4YbumcJ4Nj9dTX5dt8ATfwHsXig/ehgMLWtwVyCBExKcACdYkqaad1Wc/Z5xGP+zR8FR
- aytmF+hNzJJZ1pNWtOhf18z97gNQ==
-X-Received: by 2002:a5d:4885:0:b0:39c:1404:312f with SMTP id
- ffacd0b85a97d-3a07aa67ab0mr4821858f8f.1.1745852049027; 
- Mon, 28 Apr 2025 07:54:09 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEthrLwhrgJP1+zgyrLyJ51ppXZIA0eWEcdtYCi4Es7EyccLHBy633LSubgDbhX4LdhT+zNpYwVAUGRCBNol0I=
-X-Received: by 2002:a5d:4885:0:b0:39c:1404:312f with SMTP id
- ffacd0b85a97d-3a07aa67ab0mr4821841f8f.1.1745852048651; Mon, 28 Apr 2025
- 07:54:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0E5AA1516;
+ Mon, 28 Apr 2025 08:09:13 -0700 (PDT)
+Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.21])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 50E603F673;
+ Mon, 28 Apr 2025 08:09:18 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>
+Subject: Pull request: u-boot-sunxi/master for v2025.07
+Date: Mon, 28 Apr 2025 16:09:07 +0100
+Message-Id: <20250428150907.206134-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20250427234527.2076444-1-adriano.cordova@canonical.com>
- <CAC_iWjJ2-mA5URoT8A2CRBXG17zm-CCkSyiW2gN-V2nyv3Pa5g@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ2-mA5URoT8A2CRBXG17zm-CCkSyiW2gN-V2nyv3Pa5g@mail.gmail.com>
-From: Adriano Cordova Fedeli <adriano.cordova@canonical.com>
-Date: Mon, 28 Apr 2025 10:54:46 -0400
-X-Gm-Features: ATxdqUEzN7cfPvaWoK41Ti6ZUOWH51XHrKrLYbLKLhn1Xc75Q_vHc7nvt4VcFrU
-Message-ID: <CAFQa3M+E9_yx2vox3Psmi5XgcVG80KWQJiaKO7_P7hSPbYFSiA@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: bootbin: do not load an initrd if none is
- provided
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
- xypron.glpk@gmx.de, 
- sjg@chromium.org, trini@konsulko.com, o451686892@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,147 +54,215 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks, I updated the patch and split it into two
+Hi Tom,
 
-On Mon, 28 Apr 2025 at 10:32, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+please pull the sunxi/master branch, containing changes for the second
+part of this cycle's sunxi updates.
 
-> Hi Adriano,
->
-> On Mon, 28 Apr 2025 at 02:45, Adriano Cordova <adrianox@gmail.com> wrote:
-> >
-> > Do not try to create an initrd device path nor try to register
-> > an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
-> >
-> > Handle initrd installation in efi_binary_run_dp with
-> > efi_install_initrd, imitating what is done for the fdt.
-> >
-> > Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
-> > Reported-by: Weizhao Ouyang <o451686892@gmail.com>
-> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > ---
-> >  boot/bootm.c                 |  3 +++
-> >  include/efi_loader.h         |  2 ++
-> >  lib/efi_loader/efi_bootbin.c |  9 ++-------
-> >  lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
-> >  4 files changed, 36 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/boot/bootm.c b/boot/bootm.c
-> > index f5cbb10f0d1..9693e0d336d 100644
-> > --- a/boot/bootm.c
-> > +++ b/boot/bootm.c
-> > @@ -1008,6 +1008,9 @@ int bootm_run_states(struct bootm_info *bmi, int
-> states)
-> >                         ret = 0;
-> >         }
-> >
-> > +       /* Clear the initrd from a previous boot */
-> > +       images->initrd_start = 0;
-> > +
-> >         /* Relocate the ramdisk */
-> >  #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
-> >         if (!ret && (states & BOOTM_STATE_RAMDISK)) {
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index 144b749278a..84e8cfe320e 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t
-> handle, const char *env_var,
-> >  void *efi_get_configuration_table(const efi_guid_t *guid);
-> >  /* Install device tree */
-> >  efi_status_t efi_install_fdt(void *fdt);
-> > +/* Install initrd */
-> > +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
-> >  /* Execute loaded UEFI image */
-> >  efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
-> >  /* Run loaded UEFI image with given fdt */
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > index d0f7da309ce..94ba7c5589b 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -215,12 +215,11 @@ out:
-> >   * Return:     status code
-> >   */
-> >  static efi_status_t efi_binary_run_dp(void *image, size_t size, void
-> *fdt,
-> > -                                     void *initrd, size_t initd_sz,
-> > +                                     void *initrd, size_t initrd_sz,
->
-> This change is unrelated, please split it on a different patch
->
-> >                                       struct efi_device_path *dp_dev,
-> >                                       struct efi_device_path *dp_img)
-> >  {
-> >         efi_status_t ret;
-> > -       struct efi_device_path *dp_initrd;
-> >
-> >         /* Initialize EFI drivers */
-> >         ret = efi_init_obj_list();
-> > @@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image,
-> size_t size, void *fdt,
-> >         if (ret != EFI_SUCCESS)
-> >                 return ret;
-> >
-> > -       dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd,
-> initd_sz);
-> > -       if (!dp_initrd)
-> > -               return EFI_OUT_OF_RESOURCES;
-> > -
-> > -       ret = efi_initrd_register(dp_initrd);
-> > +       ret = efi_install_initrd(initrd, initrd_sz);
-> >         if (ret != EFI_SUCCESS)
-> >                 return ret;
-> >
-> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> > index 3936139ca41..6a863c3556c 100644
-> > --- a/lib/efi_loader/efi_helper.c
-> > +++ b/lib/efi_loader/efi_helper.c
-> > @@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
-> >         return EFI_SUCCESS;
-> >  }
-> >
-> > +/**
-> > + * efi_install_initrd() - install initrd
-> > + *
-> > + * Install the initrd located at @initrd using the EFI_LOAD_FILE2
-> > + * protocol.
-> > + *
-> > + * @initrd:    address of initrd or NULL if none is provided
-> > + * @initrd_sz: size of initrd
-> > + * Return:     status code
-> > + */
-> > +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
-> > +{
-> > +       efi_status_t ret;
-> > +       struct efi_device_path *dp_initrd;
-> > +
-> > +       if (!initrd)
-> > +               return EFI_SUCCESS;
-> > +
-> > +       dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd,
-> initd_sz);
-> > +       if (!dp_initrd)
-> > +               return EFI_OUT_OF_RESOURCES;
-> > +
-> > +       ret = efi_initrd_register(dp_initrd);
-> > +       if (ret != EFI_SUCCESS)
->
-> You have to free the device path here
->
-> > +               return ret;
-> > +
-> > +       return EFI_SUCCESS;
->
-> Get rid of this and just return ret.
->
-> > +}
-> > +
-> >  /**
-> >   * do_bootefi_exec() - execute EFI binary
-> >   *
-> > --
-> > 2.48.1
-> >
-> Thanks
-> /Ilias
->
+We have improvements to the reliability of H6 and H616 DRAM
+initialisation, hopefully avoiding those occasional size misdetections
+many people reported before.
+Also there is some modernisation of the USB PHY code, to use DT provided
+regulators and GPIOs, instead of relying on this being badly duplicated
+in Kconfig. This also happens to fix broken USB operations for older
+boards (using the A20 SoCs, for instance), which were clashing over
+grabbing some GPIOs, leading to a driver bailout.
+There is also some rework of the H6/H616 SPL clock code, to prepare it
+for being reused by the upcoming Allwinner A523 support. This drops the
+usage of C structs to model MMIO register frames, and replaces them by
+using an addition of the base address with a macro defined offset.
+Also in preparation for A523 there is one fix and one addition for the
+FEL code, to prepare for the GICv3 interrupt controller that the new SoC
+uses. And since this is a simple fix, and was ready, there is also the
+watchdog driver for that new SoC. Finally tossing in an easy fix to some
+H616 defconfig files to enable eMMC.
+
+I also use the opportunity to enable proper page table protection
+(observing read-only and no-execute attributes), support for which the
+arm64 port recently gained. I didn't spot any issues on my arm64 board
+tests, but it can be easily disabled or backed out again in case any
+issues arise.
+
+Full support for the two new SoC series (A133 and A523) we are working
+on is not quite ready yet, but might follow still a bit later if
+progress permits.
+
+CI passed, and boot-tested on at least one board with a H616, H6, A64,
+H3, A20, T113s.
+
+Thanks,
+Andre
+
+=================================
+The following changes since commit 5a0a93a768487e55ebe50a34cc90d751bf99cc56:
+
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-riscv (2025-04-25 13:13:17 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+
+for you to fetch changes up to d5837bbed841889428379ffff3cc19c9dca4cb6d:
+
+  sunxi: clock: H6: remove struct sunxi_prcm_reg (2025-04-28 15:03:28 +0100)
+
+----------------------------------------------------------------
+Andre Przywara (16):
+      sunxi: h616: defconfigs: enable eMMC
+      sunxi: enable MMU_PGPROT proper page table protection
+      phy: sun4i-usb: Determine VBUS detection pin from devicetree
+      phy: sun4i-usb: Determine USB OTG detection pin from devicetree
+      sunxi: Kconfig: Remove obsolete USBx_* pin symbols
+      watchdog: sunxi: add A523 support
+      sunxi: armv8: FEL: save and restore GICv3 registers
+      sunxi: armv8: FEL: save and restore SP_IRQ
+      sunxi: clock: H6: drop usage of struct sunxi_ccm_reg
+      sunxi: mmc: remove usage of struct sunxi_ccm_reg
+      sunxi: H616: dram: remove usage of struct sunxi_ccm_reg
+      sunxi: H6: dram: remove usage of struct sunxi_ccm_reg
+      sunxi: clock: H6: remove struct sunxi_ccm_reg
+      sunxi: clock: H6: drop usage of struct sunxi_prcm_reg
+      sunxi: H6/H616: dram: remove usage of struct sunxi_prcm_reg
+      sunxi: clock: H6: remove struct sunxi_prcm_reg
+
+Jernej Skrabec (4):
+      sunxi: H6: Remove useless DRAM timings parameter
+      sunxi: H6: DRAM: Constify function parameters
+      sunxi: h6: dram: split dram_para struct
+      sunxi: h6/h616: Reuse common DRAM infrastructure
+
+Samuel Holland (5):
+      power: regulator: Add a driver for the AXP PMIC drivevbus
+      sunxi: Enable PMIC drivevbus regulator support for USB supplies
+      phy: sun4i-usb: Control supplies via the regulator uclass
+      sunxi: Remove obsolete USBx_VBUS_PIN Kconfig symbols
+      gpio: axp: Remove virtual VBUS enable GPIO
+
+ arch/arm/Kconfig                                   |   1 +
+ arch/arm/cpu/armv8/fel_utils.S                     |   9 +
+ arch/arm/include/asm/arch-sunxi/boot0.h            |  12 +-
+ arch/arm/include/asm/arch-sunxi/clock_sun4i.h      |   6 +
+ arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h  | 229 ++-------------------
+ arch/arm/include/asm/arch-sunxi/clock_sun6i.h      |   7 +
+ arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h |   7 +
+ arch/arm/include/asm/arch-sunxi/clock_sun9i.h      |   7 +
+ arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h  |  22 ++
+ arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h   |   9 +-
+ arch/arm/include/asm/arch-sunxi/prcm_sun50i.h      |  44 +---
+ arch/arm/mach-sunxi/Kconfig                        |  43 ----
+ arch/arm/mach-sunxi/Makefile                       |   4 +-
+ arch/arm/mach-sunxi/board.c                        |   3 +
+ arch/arm/mach-sunxi/clock_sun50i_h6.c              |  72 +++----
+ arch/arm/mach-sunxi/dram_dw_helpers.c              | 150 ++++++++++++++
+ arch/arm/mach-sunxi/dram_sun50i_h6.c               | 212 ++++++-------------
+ arch/arm/mach-sunxi/dram_sun50i_h616.c             | 184 ++---------------
+ arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c    |   2 +-
+ arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c       |   2 +-
+ arch/arm/mach-sunxi/rmr_switch.S                   |  12 ++
+ configs/A10s-OLinuXino-M_defconfig                 |   1 -
+ configs/A13-OLinuXinoM_defconfig                   |   1 -
+ configs/A13-OLinuXino_defconfig                    |   2 -
+ configs/A20-OLinuXino-Lime2-eMMC_defconfig         |   2 -
+ configs/A20-OLinuXino-Lime2_defconfig              |   2 -
+ configs/A20-Olimex-SOM-EVB_defconfig               |   2 -
+ configs/A20-Olimex-SOM204-EVB-eMMC_defconfig       |   2 -
+ configs/A20-Olimex-SOM204-EVB_defconfig            |   2 -
+ configs/A33-OLinuXino_defconfig                    |   3 +-
+ configs/Ainol_AW1_defconfig                        |   1 -
+ configs/Ampe_A76_defconfig                         |   3 -
+ configs/Auxtek-T003_defconfig                      |   1 -
+ configs/Auxtek-T004_defconfig                      |   1 -
+ configs/Bananapi_M2_Ultra_defconfig                |   2 -
+ configs/Bananapi_m2m_defconfig                     |   1 -
+ configs/Bananapro_defconfig                        |   2 -
+ configs/CHIP_defconfig                             |   1 -
+ configs/CHIP_pro_defconfig                         |   1 -
+ configs/CSQ_CS908_defconfig                        |   2 -
+ configs/Chuwi_V7_CW0825_defconfig                  |   3 -
+ configs/Colombus_defconfig                         |   1 -
+ configs/Cubieboard4_defconfig                      |   5 +-
+ configs/Cubietruck_defconfig                       |   3 -
+ configs/Cubietruck_plus_defconfig                  |   5 +-
+ configs/Empire_electronix_d709_defconfig           |   3 -
+ configs/Empire_electronix_m712_defconfig           |   3 -
+ configs/Hummingbird_A31_defconfig                  |   2 -
+ configs/Hyundai_A7HD_defconfig                     |   4 -
+ configs/Linksprite_pcDuino3_Nano_defconfig         |   1 -
+ configs/Linksprite_pcDuino_defconfig               |   2 -
+ configs/MSI_Primo81_defconfig                      |   2 +-
+ configs/Mele_A1000G_quad_defconfig                 |   2 -
+ configs/Mele_I7_defconfig                          |   2 -
+ configs/Mele_M9_defconfig                          |   2 -
+ configs/Merrii_A80_Optimus_defconfig               |   5 +-
+ configs/Mini-X_defconfig                           |   1 -
+ configs/Orangepi_defconfig                         |   2 -
+ configs/Orangepi_mini_defconfig                    |   2 -
+ configs/Sinlinx_SinA31s_defconfig                  |   2 -
+ configs/Sinlinx_SinA33_defconfig                   |   1 -
+ configs/Sinovoip_BPI_M2_defconfig                  |   2 -
+ configs/Sinovoip_BPI_M3_defconfig                  |   4 +-
+ configs/Sunchip_CX-A99_defconfig                   |   3 -
+ configs/UTOO_P66_defconfig                         |   3 -
+ configs/Wexler_TAB7200_defconfig                   |   2 -
+ configs/Wobo_i5_defconfig                          |   1 -
+ configs/Yones_Toptech_BD1078_defconfig             |   1 -
+ configs/Yones_Toptech_BS1078_V2_defconfig          |   3 +-
+ configs/ba10_tv_box_defconfig                      |   2 -
+ configs/bananapi_m2_berry_defconfig                |   1 -
+ configs/colorfly_e708_q1_defconfig                 |   3 +-
+ configs/difrnce_dit4350_defconfig                  |   3 -
+ configs/dserve_dsrv9703c_defconfig                 |   3 -
+ configs/ga10h_v1_1_defconfig                       |   3 +-
+ configs/gt90h_v4_defconfig                         |   3 +-
+ configs/h8_homlet_v2_defconfig                     |   2 -
+ configs/iNet_3F_defconfig                          |   2 -
+ configs/iNet_3W_defconfig                          |   2 -
+ configs/iNet_86VS_defconfig                        |   2 -
+ configs/iNet_D978_rev2_defconfig                   |   3 +-
+ configs/icnova-a20-swac_defconfig                  |   3 -
+ configs/inet1_defconfig                            |   3 -
+ configs/inet86dz_defconfig                         |   3 +-
+ configs/inet97fv2_defconfig                        |   3 -
+ configs/inet98v_rev2_defconfig                     |   3 -
+ configs/inet9f_rev03_defconfig                     |   3 -
+ configs/inet_q972_defconfig                        |   3 +-
+ configs/jesurun_q5_defconfig                       |   1 -
+ configs/mixtile_loftq_defconfig                    |   2 -
+ configs/mk802_a10s_defconfig                       |   1 -
+ configs/mk802_defconfig                            |   1 -
+ configs/orangepi_2_defconfig                       |   1 -
+ configs/orangepi_plus_defconfig                    |   2 -
+ configs/orangepi_zero2_defconfig                   |   1 -
+ configs/orangepi_zero3_defconfig                   |   1 -
+ configs/parrot_r16_defconfig                       |   2 -
+ configs/pine_h64_defconfig                         |   1 -
+ configs/polaroid_mid2407pxe03_defconfig            |   3 +-
+ configs/polaroid_mid2809pxe04_defconfig            |   3 +-
+ configs/pov_protab2_ips9_defconfig                 |   3 -
+ configs/q8_a13_tablet_defconfig                    |   3 -
+ configs/q8_a23_tablet_800x480_defconfig            |   3 +-
+ configs/q8_a33_tablet_1024x600_defconfig           |   3 +-
+ configs/q8_a33_tablet_800x480_defconfig            |   3 +-
+ configs/r7-tv-dongle_defconfig                     |   1 -
+ configs/sun8i_a23_evb_defconfig                    |   3 -
+ configs/tanix_tx1_defconfig                        |   2 +
+ configs/tbs_a711_defconfig                         |   3 +-
+ configs/teres_i_defconfig                          |   1 -
+ configs/x96_mate_defconfig                         |   1 +
+ drivers/gpio/axp_gpio.c                            |  75 ++-----
+ drivers/gpio/sunxi_gpio.c                          |  12 +-
+ drivers/mmc/sunxi_mmc.c                            |  20 +-
+ drivers/phy/allwinner/phy-sun4i-usb.c              |  96 +++------
+ drivers/power/pmic/axp.c                           |   1 +
+ drivers/power/regulator/Kconfig                    |   7 +
+ drivers/power/regulator/Makefile                   |   1 +
+ drivers/power/regulator/axp_drivevbus.c            |  57 +++++
+ drivers/watchdog/sunxi_wdt.c                       |  11 +
+ include/axp221.h                                   |   4 -
+ include/axp809.h                                   |   4 -
+ include/axp818.h                                   |   4 -
+ include/sunxi_gpio.h                               |   8 -
+ 124 files changed, 552 insertions(+), 984 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
+ create mode 100644 arch/arm/mach-sunxi/dram_dw_helpers.c
+ create mode 100644 drivers/power/regulator/axp_drivevbus.c
