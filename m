@@ -4,59 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9345C369D3
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 08:28:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2BBDC36005
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 08:36:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17CAD8212B;
-	Mon, 28 Apr 2025 10:28:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id DB394820B7;
+	Mon, 28 Apr 2025 10:35:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="c7VJLJoi";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="cV4gE4qe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7831E82139; Mon, 28 Apr 2025 10:28:28 +0200 (CEST)
-Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
- [109.224.244.22])
+ id C0F8382145; Mon, 28 Apr 2025 10:35:57 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26B7480FDA
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 10:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail; t=1745828904; x=1746088104;
- bh=7cjWUxIbUavBgxdLqs8H81CYvix1CUjDBK8PXJesv10=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=c7VJLJoi4cdsPDMZK552HBV4VlqeHYB2GdswuJvFHLFHa0XOD5Vur78wLa5RUw8iK
- g2j+3So5ILmNXB3Oykc3Rn59HXjw3yHN+231xqw1O/wz9hNseEQHGCFPsAPslQv9UD
- KPcqYR4HvPtp+fFrlKrLYnheb/cizffGHlCZaPGBRjOgvZOcqKGLejYDXVX2sl6zGW
- BjFlavuD8ViU4moZgwNowyARR+giFvTWJ7DwYoHgWHCvxCLnGVznVOW4qmvyB+hZ9+
- rx1Jz0FiEhrAPgWSBFF8yQboINlnygfSCC1cppkLbbhE3K/L5yrcQNPc1WnqkXwOFz
- g4xXb9a/kDv3w==
-Date: Mon, 28 Apr 2025 08:28:18 +0000
-To: Sumit Garg <sumit.garg@kernel.org>
-From: Sam Day <me@samcday.com>
-Cc: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- caleb.connolly@linaro.org, neil.armstrong@linaro.org, sjg@chromium.org,
- ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org, marex@denx.de,
- robert.marko@sartura.hr, seashell11234455@gmail.com, ycliang@andestech.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/3] mach-snapdragon: Do not define reset_cpu() if
- SYSRESET is enabled
-Message-ID: <w1InK9OqkbhNU_HX-GJte1k3hTsdZsfbES8SsHIiNfuR6w3XP1euP6h7TCquwShzsy3vQTevbkX6uC5Ehasaz-HvSmY1OGvF04AN0BXuLhk=@samcday.com>
-In-Reply-To: <aA87W3wylwsZbKRr@sumit-X1>
-References: <20250410120208.4142087-1-quic_varada@quicinc.com>
- <20250410120208.4142087-2-quic_varada@quicinc.com>
- <aA87W3wylwsZbKRr@sumit-X1>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 9f2c5e1d455eb0f3a064c7ebe31202e7d5b37b9c
+ by phobos.denx.de (Postfix) with ESMTPS id 6B98180EFB
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 10:35:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1F5501481683; Mon, 28 Apr 2025 10:35:52 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1745829354; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=AmKNU11Cg2gO2r109Cw+JoRj0RynO0Z6jJw4qCr4CWU=;
+ b=cV4gE4qe4xAipOFrFyVqf0WeNShCmaI8hbcx/GXjewu3uljcWGnPdM7HZ8WLlwkc11qy9Y
+ UCjTYNpVGXDIOnsMY/hkEQRfvYSUAVdIkY37Nwi8YNuu6DQAVR9shY4WxJnb/h9hCHDcZt
+ 1hoDpBh1E/6gBPW5XXmOQn1XNfJR6zAdLd0zPKmmKZRNS8TNcHe0YM7Hniey4pigvepq3/
+ NoVRHusU71G2HblKamnl1CpJmrOfZ+xgXJ9nn8pySNtvcdqD08Y02XeulBicpSQMriMELj
+ CyxuwA7xecG4lSve1aWFgjMHcjXkaFbdTGP9ywktOKgLyjMwZog7bQEZQJ9/RQ==
+Date: Mon, 28 Apr 2025 10:35:46 +0200
+From: Alexander Dahl <ada@thorsis.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Martin Schwan <M.Schwan@phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ Jan =?iso-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
+Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+Message-ID: <20250428-appendix-repurpose-062e531ca9af@thorsis.com>
+Mail-Followup-To: Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Martin Schwan <M.Schwan@phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ Jan =?iso-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
+References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
+ <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
+ <CAFLszTinU=6v+3OyaH0pp8snYm9BgfVrU_+35x2Az7fVs_CfYw@mail.gmail.com>
+ <4aef8b9ffd41d4e36550806f4688fc18dbddc500.camel@phytec.de>
+ <CAFLszTjPHBw-F0EkQJnT4TOsxdYzGH5EtRBaeRCoKGxQQ_cw4g@mail.gmail.com>
+ <20250424184923.GM5495@bill-the-cat>
+ <CAFLszThPcJjhBVLvz=EkdeEP1K948cC=LyZhBk_Upk3iSWXCig@mail.gmail.com>
+ <20250425143752.GU5495@bill-the-cat>
+ <CAFLszTiYCObeLy+HPnpXSE3yQ20ZN-+hptoi_nYT4DXimjHFYA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAFLszTiYCObeLy+HPnpXSE3yQ20ZN-+hptoi_nYT4DXimjHFYA@mail.gmail.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,62 +81,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit, Varadarajan,
+Hei hei,
 
-On Monday, April 28th, 2025 at 6:25 PM, Sumit Garg <sumit.garg@kernel.org> =
-wrote:
+some references, see below.
 
->=20
->=20
-> On Thu, Apr 10, 2025 at 05:32:06PM +0530, Varadarajan Narayanan wrote:
->=20
-> > If CONFIG_SYSRESET is enabled, the reset_cpu() function defined in
-> > arch/arm/mach-snapdragon/board.c conflicts with the definition of
-> > reset_cpu() in drivers/sysreset/sysreset-uclass.c resulting in duplicat=
-e
-> > symbol error while compiling. So, do not include it if CONFIG_SYSRESET
-> > is enabled.
->=20
->=20
-> I would rather like to see all Qcom platforms migrating to SYSRESET but
-> this looks reasonable to me as of now, FWIW:
->=20
-> Reviewed-by: Sumit Garg sumit.garg@oss.qualcomm.com
+Am Fri, Apr 25, 2025 at 09:03:17AM -0600 schrieb Simon Glass:
+> Hi Tom,
+> 
+> On Fri, 25 Apr 2025 at 08:37, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Apr 25, 2025 at 08:35:52AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 24 Apr 2025 at 12:49, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Apr 24, 2025 at 12:31:38PM -0600, Simon Glass wrote:
+> > > > > Hi Martin,
+> > > > >
 
-reset_cpu was already dropped in commit 61a1a1b
+[…]
 
-So I think this patch can be dropped from the series?
+> > > > >
+> > > > > Can't you change it, since you are introducing new support here?
+> > > > >
+> > > > > If not, then you could perhaps set the env variables to lowercase when
+> > > > > you find uppercase variables? I suppose that would require updating
+> > > > > the client to do the same thing too?
+> > > > >
+> > > > > It would be very confusing for a user to have upper-case variables for
+> > > > > some things.
+> > > >
+> > > > Simon, this is an unreasonable request. This is how RAUC has been
+> > > > working and deployed for years and years. It would be a nightmare trying
+> > > > to handle migration of existing deployments for an aesthetic change.
+> > >
+> > > Yes, I figured. Perhaps it could support lower case in future? This is
+> > > the first I have seen on RAUC in U-Boot, although I do see this file
+> > > which has both lower and upper case:
+> > >
+> > > include/env/phytec/rauc.env
+> >
+> > I don't think there's any need to complicate RAUC support here (nor
+> > in the future Mender nor swupdate nor any other long standing OTA
+> > mechanism that might be more easily integrated via bootstd than
+> > environment patching).
+> 
+> Let's see what the author says. I assume that U-Boot has its own code
+> in RAUC so it might not be too bad.
 
-Cheers,
--Sam
+It has:
 
->=20
->=20
-> -Sumit
->=20
-> > Signed-off-by: Varadarajan Narayanan quic_varada@quicinc.com
-> > ---
-> > arch/arm/mach-snapdragon/board.c | 2 ++
-> > 1 file changed, 2 insertions(+)
-> >=20
-> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdrago=
-n/board.c
-> > index 2ef936aab75..2254e0b55a1 100644
-> > --- a/arch/arm/mach-snapdragon/board.c
-> > +++ b/arch/arm/mach-snapdragon/board.c
-> > @@ -187,10 +187,12 @@ int board_fdt_blob_setup(void **fdtp)
-> > return ret;
-> > }
-> >=20
-> > +#if !IS_ENABLED(CONFIG_SYSRESET)
-> > void reset_cpu(void)
-> > {
-> > psci_system_reset();
-> > }
-> > +#endif
-> >=20
-> > /*
-> > * Some Qualcomm boards require GPIO configuration when switching USB mo=
-des.
-> > --
-> > 2.34.1
+https://github.com/rauc/rauc/blob/master/src/bootloaders/uboot.c
+
+These env variable are names are hardcoded:
+
+BOOT_ORDER
+BOOT_A_LEFT
+BOOT_B_LEFT
+
+I played with RAUC and U-Boot back in 2021/2022, and if I remember
+correctly these variable names did not change since initial support
+for U-Boot in RAUC.  That probably was back in 2016 and done by Jan
+Lübbe: https://github.com/rauc/rauc/pull/45
+
+(I used a custom boot script based on the example coming with RAUC and
+hooked that into distroboot for my usecase back then.)
+
+In retrospect it might have been better from RAUC side to hook into
+the bootcount feature of U-Boot, which was already present at the
+time?  But now it's like Tom said: these env variables are the
+interface for years.  It would require at least coordination with RAUC
+devs if there should be used any other interface.
+
+Adding Jan in Cc, maybe he wants to add some context from RAUC side.
+
+Greets
+Alex
+
