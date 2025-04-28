@@ -4,59 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D46C36005
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 08:37:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF26C36005
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 08:51:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82DC5820B7;
-	Mon, 28 Apr 2025 10:37:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id B577C80FDA;
+	Mon, 28 Apr 2025 10:51:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HtsC9D02";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NEilYbWq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE8E482145; Mon, 28 Apr 2025 10:37:03 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4CDE2820B7; Mon, 28 Apr 2025 10:51:04 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4A0C80EFB
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 10:37:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 2ACBB80EFB
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 10:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 13ADB4A72B;
- Mon, 28 Apr 2025 08:36:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4EE07C4CEE4;
- Mon, 28 Apr 2025 08:36:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745829420;
- bh=XV7l3IdNDdw4/meHPUpsGDg45jN3apRiRqLSJFmuWDc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=HtsC9D02TyWZi1xbtLtEIKViqsSn5GDNQS3xpwC9+FmeLWLWdvp1I+pQsLVVhPfBi
- sAyFj9UBKObsVLhuGcfPzo4ScTHFyuwis3yggPng0z3tvM3i3kmBr+/ZbB2GaW1SDU
- HBZ06ACilnsncuGS5EqHCRYhMKLct//hxi4UWHsqCVZ+doeXdgG1C/Y1Y+ozHoZpfM
- 57K9RQ4hjq5quSWdOsDlQQe+9cF61jmirFxNUUMvbQcR2Yr+6RNCIJTLktTaZ3UOba
- ii34iwLdkyXrLWc4c1UbpkFZ5WNmVCSRzcieC2NBAr00GjUUaTiygT+/MVwG8dlH7L
- xbVGMbhgkIqNA==
-Date: Mon, 28 Apr 2025 14:06:52 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: trini@konsulko.com, caleb.connolly@linaro.org,
- neil.armstrong@linaro.org, sjg@chromium.org,
- ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org,
- me@samcday.com, marex@denx.de, robert.marko@sartura.hr,
- seashell11234455@gmail.com, ycliang@andestech.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 3/3] configs: qcs9100_defconfig: Enable SYSRESET
-Message-ID: <aA8-JChaN9WxC6Ew@sumit-X1>
-References: <20250410120208.4142087-1-quic_varada@quicinc.com>
- <20250410120208.4142087-4-quic_varada@quicinc.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5f5bef591d6so8611575a12.1
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 01:51:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745830261; x=1746435061; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1oIKO66VuQE/rjOFR+KWsccJllaAgBlpJx11Eou0zYM=;
+ b=NEilYbWqiICRrsiZoZ05XixVQPSgqDMAqcxtC8LcrYu7C9VvurM4dJ2fbAIP4pyqDd
+ X0F9pGEDxKbE3hnelgiy0v1hAH6Q6HE0AOBEkj5U77bNriAn1MvhyCIW8j/x2hlpj39q
+ ERr9Dk6yqeC7vh18bP0q6u4ZyAulFVeD+F45F9+B615lx1OfYaP2iL8yj5hd27akDjF1
+ y+R7v7XcnjPsMHh/TQs8EDdh8VzPvev4Jicc+26aXkmf/W+g8FfgTfBYjYhqz8sFL+n2
+ txhIknK5QjDpRD5Sp6xW+8EYHIk18tAueSQ78C/Pjj/W1qlJl3Nn+sBlVLoohOWU0Ik3
+ Du9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745830261; x=1746435061;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1oIKO66VuQE/rjOFR+KWsccJllaAgBlpJx11Eou0zYM=;
+ b=mrCSaQQNMrcVUxD8E/JUiuABAcPIktBtxH44PjZp/2wtEGQZ2DYpqtZPGxNBJZHViC
+ B3YCND3WmZPIhxuK6HC9qQMT/awp96WRT/jGwu8u31IKQsdDTA8d7MnfXF3+G+9LfVVS
+ DYWf/zyJwjqJA6DIamrB3reTHEKgJGG/yPaJXkys5Kw1JhWKKwk3bapQvtCUlEWsQ8pN
+ 98w2Ot/NNRCL/STvhV9wYrolrNKo2elhd+eJYlZOSGR0mvrL3x8y6+PgREVbU3DuMAAV
+ y228fp+P5QX1+O3fT001ei3eIxMsxmSc8SIyaqgMCGMa0aZo3jp9i+dk9pUXcxkJOfeP
+ 1fnQ==
+X-Gm-Message-State: AOJu0YxYnPpQg3QBFG7eLERojKM2fabMr/PMxckuLLAGsmNlVObLbWeg
+ ZB1UJm78RCUopKEAbZgPJPJUKig1bGP70OSU7/c8M/RQrNkS1hKx260NIWK7JOx1rk8U6gsdIZk
+ a
+X-Gm-Gg: ASbGncv9w9UOaxMKgv2IO+lffwSm+vatkY7WMczOwhL5GbwSxQuk184ywPBzkT5cg1J
+ U1Crqz2JhRDaZ9PnUmlfKiw4q5jpO1jim/U8hd2q9hsYrhDkhzurVed5ZCLgdYx9NwG/Iaoq1Vi
+ UZcyZXuAYqEAQLEbZ6N6n1WlOsrXJ2AywQND214CLcv5Hfq3Y16rNPEUJLOWyR+k1pkOakUmkSL
+ UYbIXxEInesnfTJ78QRCJQbi4mTf9mT2TLoN9puaL7n4xckcz3hFika1bFaMSmwNY6V0jxu9rML
+ GE+sylhM0+TyGaD8S7UPpMivQkJWFcMt1N+M5QjjFnOJU8sQ
+X-Google-Smtp-Source: AGHT+IEPfyLtq0fwV+URww8yuaZSgt09aTq4yC9a0872xWZM4vJ84iesy+XLj5bmN2fuPbhf7vAVbQ==
+X-Received: by 2002:a17:907:3f91:b0:acb:abff:a5b6 with SMTP id
+ a640c23a62f3a-ace73a45deemr908888566b.13.1745830261444; 
+ Mon, 28 Apr 2025 01:51:01 -0700 (PDT)
+Received: from [192.168.0.32] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ace6ed6fea9sm584206866b.127.2025.04.28.01.51.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Apr 2025 01:51:01 -0700 (PDT)
+Message-ID: <5b6e4fae-2193-45ed-abd6-43e277aa439c@linaro.org>
+Date: Mon, 28 Apr 2025 11:51:00 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250410120208.4142087-4-quic_varada@quicinc.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 5/6] ARM: dts: sam9x60: Add watchdog DT node
+To: Zixun LI <admin@hifiphile.com>, Tom Rini <trini@konsulko.com>,
+ Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de
+References: <20250428-wdt-v3-0-86f0c5d92c32@hifiphile.com>
+ <20250428-wdt-v3-5-86f0c5d92c32@hifiphile.com>
+From: Eugen Hristev <eugen.hristev@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20250428-wdt-v3-5-86f0c5d92c32@hifiphile.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,29 +101,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 10, 2025 at 05:32:08PM +0530, Varadarajan Narayanan wrote:
-> Move to SYSRESET for implementing the reset command.
+
+
+On 4/28/25 11:37, Zixun LI wrote:
+> Add the watchdog timer node for the sam9x60 SoC's.
 > 
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> A default timeout of 16s is added which is the maximum supported value,
+> also matching Linux driver's behavior.
+> 
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
 > ---
->  configs/qcs9100_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
-
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-
--Sumit
-
+>  arch/arm/dts/sam9x60.dtsi | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 > 
-> diff --git a/configs/qcs9100_defconfig b/configs/qcs9100_defconfig
-> index 10ff4d25398..1fb621b27ce 100644
-> --- a/configs/qcs9100_defconfig
-> +++ b/configs/qcs9100_defconfig
-> @@ -16,3 +16,5 @@ CONFIG_TEXT_BASE=0xaf000000
->  CONFIG_REMAKE_ELF=y
+> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+> index 7631dfaa07fc1e7c605c70840da1196c1daeb638..588d2cb9f5109396b11a11e497eac282dffb4fb0 100644
+> --- a/arch/arm/dts/sam9x60.dtsi
+> +++ b/arch/arm/dts/sam9x60.dtsi
+> @@ -311,6 +311,15 @@
+>  				clocks = <&slow_rc_osc>, <&slow_xtal>;
+>  				#clock-cells = <1>;
+>  			};
+> +
+> +			watchdog: watchdog@ffffff80 {
+> +				compatible = "microchip,sam9x60-wdt";
+> +				reg = <0xffffff80 0x24>;
+> +				interrupts = <1 IRQ_TYPE_LEVEL_HIGH 7>;
+> +				clocks = <&clk32 0>;
+> +				timeout-sec = <16>;
+
+As the 'timeout-sec' is not in Linux, please move it to
+at91-sam9x60-curiosity-u-boot.dtsi or sam9x60-u-boot.dtsi
+
+> +				status = "disabled";
+> +			};
+>  		};
+>  	};
 >  
->  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs9100-ride-r3"
-> +CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_QCOM_PSCI=y
-> -- 
-> 2.34.1
 > 
+
