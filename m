@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E8F9C369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:03:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B3EC369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C53048210A;
-	Mon, 28 Apr 2025 21:03:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 518C480FDA;
+	Mon, 28 Apr 2025 21:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZHMZJhK1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ed5Nf1Ap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4664880AE1; Mon, 28 Apr 2025 21:03:04 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 887F4820FE; Mon, 28 Apr 2025 21:05:38 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2574B80FDA
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:03:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07AA680F6B
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:05:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-72c14235af3so3379560a34.3
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:03:02 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2d060c62b61so4620703fac.0
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:05:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745866981; x=1746471781; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0HCtEVWJcmXFoOGzyVfgKGsZOhxofyUpfNpKsOvnito=;
- b=ZHMZJhK1dTM+ssnWJ/iGx9hEcTxf4lWrdbFzsysJaWv3wfVbmK+/26Azy2gdzn2sQO
- oylK5fq3c3dacAqvAcqS5/eIj7HWtAkOHRAmY20nqJLiD6j7btDalHTijInSxypCUBWa
- 2hFbLVBJq5mlWvuUpUgOheMJ0GNz+NhHn+Lak=
+ d=konsulko.com; s=google; t=1745867135; x=1746471935; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iz5tHaDCtivElLxBv0r1K5Hvs5E1kpZaNW+5X33tlwo=;
+ b=ed5Nf1ApzBuTxv1QeQoURQc1zdpR9g/VXbEQzoHM6HixUk3lMYmpQOjnMeYzKTICPc
+ 6usTeL7FP/Snd3yHTn8RanJ+rZ8ouEDXrHGi7cB4K7nb00cRLV+ReEZqDHKusCeT3ARZ
+ KoVFXGlcwwtIEfMiHiRCOWDJ7KJK5qdscT/+Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745866981; x=1746471781;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0HCtEVWJcmXFoOGzyVfgKGsZOhxofyUpfNpKsOvnito=;
- b=uiVYsltOWIrdNKRzhTAxfA/Z6lBZjus6+gqXRPdvfVAGzVGOuydO7kJCqCSr94VhZ0
- zH6zqDkhvsY5iRvwnQopxTjkNcugo3uG7u4ExQtD66YvpCvGzHxGowUofsqpshPJiipb
- 3yHZMso21wkb+pMjudxmEVE44GToCOKroVktMuXa/7H+v+SS6m/cza11ETvwLMBWDlBn
- e2RmV2/C4QnrXfJddazNzN3xk0nIIqyRxUaFW3B/hR7xvPFVgVitqeFMq0b8ccqINiB2
- g0UB2u6Ccxugeb/uhKzjaECSU926cEJEVhSGntV0/BDFifJRGnujDABRaF08ZapdYZ8S
- Lr9g==
-X-Gm-Message-State: AOJu0Yw8wtVulOgKypfnaLDDh2cghQYCzCMzO5StuYVNaGU7rGuFCSN9
- mBJf/jb54yD4xJSgOLNYlHKKuUxg5FbaM+9qm9QAYY/Xa9R9m8zni8FId5O5VXbP6XtcBs81o8w
- N
-X-Gm-Gg: ASbGnctzEXL7podjUk3vqUWh796YE/5gCx2TV8cE0BI7xma/wu/hQ+jXjKYRVG3sD2K
- sg4hO8KVLDVnO7zN2csUB+r7R0DDzE0As/6DHHbPtGG3lQDjSLWfNU0VPA12OkE6ZDds01RqYON
- 3PRzQd8vUr8TnT7XlNwyTAcsmOhWH7UE9ExZeceOhV6AHNN7V5Il5Ct2YgGg/Pyu+8Rd5JauHkl
- 8a1cs865aJXvDxGTEv/WN8/bkIDN4HhutNSBtUVOg2e6vB5o+lPcWawz6dlPZ4x+oY0ZSvWa+nw
- 2pAU5GujgB+bbVWHD0udKMVP3hxDXYnPCMOEcUe0s/9EdqIBHSLnJE+8agx2oMvlqa9OmyA89fE
- 4O78O+vhSzic=
-X-Google-Smtp-Source: AGHT+IEJteTCXWkYQZyrfEskPP1+L9+Q0iyopE6eLkQ+oYMQSNUnecezSpIL/y/sAmOaoqlzaKvwdQ==
-X-Received: by 2002:a05:6830:71a4:b0:72c:3289:d983 with SMTP id
- 46e09a7af769-7306519ad13mr6779407a34.10.1745866980946; 
- Mon, 28 Apr 2025 12:03:00 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1745867135; x=1746471935;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iz5tHaDCtivElLxBv0r1K5Hvs5E1kpZaNW+5X33tlwo=;
+ b=aKmvfxfD9eeSMh6N81JVxHSMWOraUafXG1QBtXJm0W60wDjb21a6qxgnVEoDyUY2vM
+ 4HtwZ9AI3pe/GT9W1ChRsZRhaXwyWjtKFmyZkHuVYUU8xCe/8fySvELUSTuhhy4cy3fk
+ 9UwajANPZkv9kxoJgwRWCaXUnApZ27dlDezT2AIIVtVKZ4mtuCNhywGJq7lrItOLsmZS
+ i9lhSCqMKmcR9go215XIupsZh5uCoP/TDDqiOhPJ4+Y7ekuxPbQ+KdL70gVXsfqzeske
+ XfotwlSawlGvH2omGxUTiltm7myQemZt78PvuMx1PqZMxLwRu8eX9Zpd2Rfbg3PFhR9N
+ hkBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVuqYbzDPg5KzsZY1ASmC0VPRJl03e1ZEDZuLv1gJIWVWVu8K8kqFxXTIE9E7Ltmno/6UtJod0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yys7wgrNy+ZA6L/bSz9ofC4SIAgV5Nh5N95vESGqqYcuVvWx0O5
+ fxPss3QwkMhiiUibOGI7MduNAAeSN8FJPQd6YfLBYvaI4Ss53rPMa4u6iX2cDkc=
+X-Gm-Gg: ASbGncvK/2r6to73QId3HsbhknOwdZRwvimRsg85C3Dquc72iyDoe2XxHGvaLFSJwFT
+ VxYFL1V2NWRppkTy68esXDPfUd6EEHEdg0WgvJOF+MUulI9ZmcwF1vu32azsATKqqW5zCc1wH22
+ 7x2MOvb0scoBmSQY8sQ/fn8lqIA2FqIF/VH2gxj5Eu/9tURmQRd82hTFNfFUCPVqNKL0VgrYISn
+ n/Lts/GF2VrxVmaTLQsGbCoy3BvO66soMcsimZohTffwwvDI7qKGliRUDgdUnOJ5JhNqetdQq9H
+ VMdPrO6NQpQO06H746uxVhIjAPQKTvUCi1fGYA6QecANJy40YxBrLwqn/j4wtR7YZ+gV18rDhE0
+ 5WA==
+X-Google-Smtp-Source: AGHT+IHn/p1YAF7unHdWhSvQ4pt+yJIK+0dkJUyk2kaAP+WvNQKGn9Ni3/g8IX/XACswbmQU9YBW9g==
+X-Received: by 2002:a05:6871:4d0:b0:2c2:5639:3a4d with SMTP id
+ 586e51a60fabf-2d9be93a4bdmr5542427fac.38.1745867133551; 
+ Mon, 28 Apr 2025 12:05:33 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7304f39b78esm1886623a34.68.2025.04.28.12.03.00
+ 586e51a60fabf-2d9737e77aasm2442612fac.25.2025.04.28.12.05.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 12:03:00 -0700 (PDT)
+ Mon, 28 Apr 2025 12:05:32 -0700 (PDT)
+Date: Mon, 28 Apr 2025 13:05:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250428160652.2592846-1-festevam@gmail.com>
-References: <20250428160652.2592846-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250428
-Message-Id: <174586698015.1102146.11753494488222570037.b4-ty@konsulko.com>
-Date: Mon, 28 Apr 2025 13:03:00 -0600
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>
+Subject: Re: Pull request: u-boot-sunxi/master for v2025.07
+Message-ID: <20250428190530.GF5495@bill-the-cat>
+References: <20250428150907.206134-1-andre.przywara@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9CkmJfo5L3Qd/xge"
+Content-Disposition: inline
+In-Reply-To: <20250428150907.206134-1-andre.przywara@arm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +100,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 28 Apr 2025 13:06:52 -0300, Fabio Estevam wrote:
 
-> Please pull from u-boot-imx/master, thanks.
-> 
-> The following changes since commit 10f48365112b164bee6564033ab682747efcb483:
-> 
->   Merge patch series "Add PCIe support for TI AM64 SoC" (2025-04-24 10:46:17 -0600)
-> 
+--9CkmJfo5L3Qd/xge
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Apr 28, 2025 at 04:09:07PM +0100, Andre Przywara wrote:
+
+> Hi Tom,
+>=20
+> please pull the sunxi/master branch, containing changes for the second
+> part of this cycle's sunxi updates.
+>=20
+> We have improvements to the reliability of H6 and H616 DRAM
+> initialisation, hopefully avoiding those occasional size misdetections
+> many people reported before.
+> Also there is some modernisation of the USB PHY code, to use DT provided
+> regulators and GPIOs, instead of relying on this being badly duplicated
+> in Kconfig. This also happens to fix broken USB operations for older
+> boards (using the A20 SoCs, for instance), which were clashing over
+> grabbing some GPIOs, leading to a driver bailout.
+> There is also some rework of the H6/H616 SPL clock code, to prepare it
+> for being reused by the upcoming Allwinner A523 support. This drops the
+> usage of C structs to model MMIO register frames, and replaces them by
+> using an addition of the base address with a macro defined offset.
+> Also in preparation for A523 there is one fix and one addition for the
+> FEL code, to prepare for the GICv3 interrupt controller that the new SoC
+> uses. And since this is a simple fix, and was ready, there is also the
+> watchdog driver for that new SoC. Finally tossing in an easy fix to some
+> H616 defconfig files to enable eMMC.
+>=20
+> I also use the opportunity to enable proper page table protection
+> (observing read-only and no-execute attributes), support for which the
+> arm64 port recently gained. I didn't spot any issues on my arm64 board
+> tests, but it can be easily disabled or backed out again in case any
+> issues arise.
+>=20
+> Full support for the two new SoC series (A133 and A523) we are working
+> on is not quite ready yet, but might follow still a bit later if
+> progress permits.
+>=20
+> CI passed, and boot-tested on at least one board with a H616, H6, A64,
+> H3, A20, T113s.
+>=20
+> Thanks,
+> Andre
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> The following changes since commit 5a0a93a768487e55ebe50a34cc90d751bf99cc=
+56:
+>=20
+>   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boo=
+t-riscv (2025-04-25 13:13:17 -0600)
+>=20
 > are available in the Git repository at:
-> 
-> [...]
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+>=20
+> for you to fetch changes up to d5837bbed841889428379ffff3cc19c9dca4cb6d:
+>=20
+>   sunxi: clock: H6: remove struct sunxi_prcm_reg (2025-04-28 15:03:28 +01=
+00)
+>=20
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
--- 
+--=20
 Tom
 
+--9CkmJfo5L3Qd/xge
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgP0XYACgkQFHw5/5Y0
+tyyqmwwAmvyC03pAvAaqZzRpeEebVesdI5x0wn6tFk7CfBhZNHsdu2F8g+9OK1vK
+npjs3gV/QjyPdZJTsAAlk281awIydokUNbnZPFbXKcFBZkfOD4chNm/8RJdT7ZDg
+gc0R1Lw1MO5yfQBPcEmPIGdhDgWCHtdP+c21RFFnd5YWyaJzFQDv5bV+t5WWfvKX
+1K6qOQGItsg3rwRKXaFnRpfKR5xv2kcomfwgWbDi2T+ktuZ8YiLUMHgCt8w2d1DL
+U4+/HJGy/87FtkN12i5Wwb5pUc7jBSa/vhSGNn+kz+VunGAv/PxIMg+51jbaFHob
+h6peWAa1uFlZKYpItvwG8YqQPYr7j2jyb5uF4jweIq6qlH+wnh3zLKf52v2+9fAz
+z5a0m8B6RNWWiOsQtOoY5MfV8o0p+pEUHcl40Ja4W9rvoJ2mlj9ml3vxKbzPrCES
+wZjpX5OF79EPltDygmWbuwb0PiEtEaesgxLm0W/WkqP0VNfPew4xkXb4rZQK9dnI
+OEodPs0e
+=tqNW
+-----END PGP SIGNATURE-----
+
+--9CkmJfo5L3Qd/xge--
