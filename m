@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E254C369D9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE3BC369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:12:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E565C82145;
-	Mon, 28 Apr 2025 19:10:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 386848219D;
+	Mon, 28 Apr 2025 19:10:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RUKAG6Pg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a993d07B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49F7582A31; Mon, 28 Apr 2025 15:53:45 +0200 (CEST)
+ id 69A3182A53; Mon, 28 Apr 2025 15:58:05 +0200 (CEST)
 Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
  [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7121C82A31
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:53:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61AC082A31
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:58:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
 Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43cf257158fso27605815e9.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 06:53:40 -0700 (PDT)
+ 5b1f17b1804b1-43d0359b1fcso30498715e9.0
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 06:58:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745848420; x=1746453220; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1745848683; x=1746453483; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pDiJCXHlO6jcf1IUS55c+Ue/lMn6tZ3wQgziSdyLlNE=;
- b=RUKAG6PgTD8cUq23Fr63B/2UfKYddH5Z+vnTUNVvulynmV3kvdYAwXD66uODo2hsQI
- 2pc5lXXI/+ZZvIkl2EuyYgPOvaSAqNZcM83YL432L+t0ErIcwDdRYanGeII6+mACMTXu
- ohf+c+SQWmChQJr85fOOs/F/20KsHmX8+/aNx8widTuY0FUdEeJK3HtxzpWnVsFTUj4R
- yh9cviSnvly3FXYbnGWjJ2vHZ9FPHdTSRwhW4jMpS25MZv9o7P9dcZG5NQGGT02L7Y8C
- 2H+Xa7r+vLq6x22mBJ2lonqmbBlYBR6gXAzEinWnOp9rPuk1XzqWJtpf/7E+p6PCZQcP
- WSQQ==
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=VH9WWmyHQK/rJhk+Gq9InhS42Ghml7LTlUroEhk88S0=;
+ b=a993d07BUV/VxWZCfo0epmt8dxcq4GrcDYy8MwQRke5XlfvC3QFRzds0WoUJ7TRejY
+ +7TQ1U/628A+FxAM1eF6axrjLmsdb/k9w0Xl2QZmvmKCyPSDX5MtiiTNc5kJl2Lgg3EV
+ lHRr3qb68BnIrq/h8JGuiqV78zzjAsSuVPD37Zzy2C7UTSkRj62x5xFtTLGg1hj7vqBB
+ Hkf/p86fc16IrECvinCwGnkED3Mu6awhD69GhqJRszqhxXGf+sGRyYgpyd0Fz9TwQ9Ec
+ 9NgOdWLnaAy5FkWelajD64g1ODP3oF3SkAvX/LEzBkShUbmVju3XQaNDVmisN/BqWkwU
+ qUXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745848420; x=1746453220;
+ d=1e100.net; s=20230601; t=1745848683; x=1746453483;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pDiJCXHlO6jcf1IUS55c+Ue/lMn6tZ3wQgziSdyLlNE=;
- b=v52ZQS7ng9/hfa6FmdLS+dhlAcwAhqhyDea5Gl2GJXOw2EeW587eSbcRdq4tOdQix+
- /NlYD/rUoK0kq27NfyADYDoS/uG9V6zWm/RQvlLSK8aQuqQS47MfSVZzvpqMi4i7P7fP
- NnBDLKwzDy+rZv9vMK9cgcD5KjGx7bR1bUAdXSTDZHwDv48cXVciE77j0Ocb3JNQdqCT
- VrdLR+uuRaqdDgimmoBvkKWeREhsLOMfK22tLlUUC0Ya2RiiUfD4r4f0Dz9iia7bQsbq
- xKSFrDcVxLz/CAf6RnF8aBzZKl71AZ+qNSuMhMIr8573XuaDsYFG1JNJVAoNJKrCNkxw
- bhYQ==
-X-Gm-Message-State: AOJu0YwJsamf0EdGV1auzSql1JSCLT2TEuYBCfFvM70HFTvaXcIT5G1N
- Ti0A1EKjE+AgsXaZSj15KM718siHL7Fs5DerXflqL7rPz9AlQDgZWkOHucGOjCVhX1G7WLkN1Ps
- vlQg=
-X-Gm-Gg: ASbGncvz0jG/niB4QZBygUoGxPayhApVDIg8zb5iIuHMxhcJ4u4VJmXGKkJQNyGXlSU
- MYAaM/lCNnKZZCOT9+J5tlbsWQQpE8ZOki1yFsScNeIEIxhXBkg1bgCjEGq/+6wJ0me+6GxICEw
- t1+Z5Hs1i/2cmhe+FV6c/rM4FIKvnjNs46YsdWU3NnBwogHnZqA9iVd9GsOQQyxfd0VrBqJXNrt
- 3X+NBP/vYmnL7rl/+FRb0Yc2B5MBtuqSR7EV9mXvNfsofHxALIjsGFXAn+i6KSM4hLnRocE7rdI
- VrfHctbiIpUsYd927HxdT21Tpq1p7eT68bDeo593m0jfcptB1HuklzgCiKioSsnjClB4dCU=
-X-Google-Smtp-Source: AGHT+IErgTmN9JX69AmpAeDCNZ4BwqhoHfhIg2Q/N58tPWwxypLhZvhpnyXtDiG5uMH0JumUjVtSTw==
-X-Received: by 2002:a05:600c:4e47:b0:43c:f513:9591 with SMTP id
- 5b1f17b1804b1-440ab7be06dmr91101585e9.14.1745848419820; 
- Mon, 28 Apr 2025 06:53:39 -0700 (PDT)
+ bh=VH9WWmyHQK/rJhk+Gq9InhS42Ghml7LTlUroEhk88S0=;
+ b=Q/BgaBkcFRUdJFbxOcPjEf4wJJ3V3HzTa+wkX6Zd1fMIX5YLv/cCJFIgdYtjee9UfX
+ vWC5kvqCnYBKYxy8MTPuL0wmkolrj6+ssXZvoJSJoEmD9yrAcuZvgEvPyh3CoAZpbR96
+ 5dodsGsnLA6UZ74pWRYGwkwrxYwoTy8mMKQQj/KE/Cr1l4scfoSmeenOWx+UArksNPLm
+ LF9X8Zbaw+ua0XEhmRl62fEM9SFVrZaHh9r249Qu9NHPmPANa7CXBFfjwO5RSrYhuEHi
+ MSj/x3SuaolRgKFM6LvunpJQowoLv9Jd+KQeyGGVMsikgzzBm+IauYHB0KcFq5HCYSVr
+ st5g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVx0pgYN3fpdGpFl1TWaTxHa9CypdPSCUGteYpE3AS2ZH4pVPhzEfLiA5JFw7JBWawGcBj3Hkk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbnZf3jOL3ZBI5nfTvxzD9Cf6N6nTPp1/wtVusU1QT8FibHyyy
+ Zf7AVsp6s1JFefjaEY6cuwUd7muzDkC6LP/pgcplk91iacZVIsOp4o0A034xw9U=
+X-Gm-Gg: ASbGnctGFVLFvs2vrL7YqtnqvDxyD4kAPS02cl6z1xoYJXwZcCeawsxm0jEBBW6b0IG
+ kykHhmOWA7/4g2ETWG+22rwSEvpslZ0iVzyHHAjqy/FQfR7E/TORG6D26m0t+z5lCKsSd3TL2Wc
+ VsDXnxEbOVNzGWK9GsC7Y3JU4rEBeMRTgWvQY9FUXA4oL2XUtAMkr7oPP4Tg5DN+HjcQJtKdLaM
+ qU52sw6O9WdbNJm/RsMsGygxcPciXhaJ5wh/shskz00nWAW6WJXmLLmyMyLsYxNvR+WSv5hYD/h
+ CbOB+P3GLGU8l/+IPDeUoOWQ+bR/jl6Y4QcDwEswFL+Xjvr9FHnIS4rfZw3LgkF4TX1qKg4=
+X-Google-Smtp-Source: AGHT+IFP6h+mgeslI1Ijmg6p98FL4sxQZcvM+nZqH2F7BwqcpPBQqOO6/x+OQTyNzB14VTveVRaOLg==
+X-Received: by 2002:a05:600c:45d0:b0:43d:5264:3cf0 with SMTP id
+ 5b1f17b1804b1-4409c4de02dmr132758955e9.11.1745848682877; 
+ Mon, 28 Apr 2025 06:58:02 -0700 (PDT)
 Received: from [192.168.1.47] (i5E863A78.versanet.de. [94.134.58.120])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4409d29b990sm162284925e9.4.2025.04.28.06.53.38
+ 5b1f17b1804b1-4409d2ac26dsm158188895e9.21.2025.04.28.06.58.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Apr 2025 06:53:38 -0700 (PDT)
-Message-ID: <dfe2c6d1-1935-4af3-b7d2-b04fdcbe6f29@linaro.org>
-Date: Mon, 28 Apr 2025 15:53:37 +0200
+ Mon, 28 Apr 2025 06:58:02 -0700 (PDT)
+Message-ID: <f39969d8-b1ab-4972-aaaa-8d790d2d2e32@linaro.org>
+Date: Mon, 28 Apr 2025 15:58:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] u-boot chain-loading LineageOS bootimg
-To: gchan9527@gmail.com, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass
- <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250427-android-boot-v1-0-bb6b37c9c9f1@gmail.com>
+Subject: Re: [PATCH v1 1/3] mach-snapdragon: Do not define reset_cpu() if
+ SYSRESET is enabled
+To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
+ caleb.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ sjg@chromium.org, ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org,
+ me@samcday.com, marex@denx.de, robert.marko@sartura.hr,
+ seashell11234455@gmail.com, ycliang@andestech.com, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20250410120208.4142087-1-quic_varada@quicinc.com>
+ <20250410120208.4142087-2-quic_varada@quicinc.com>
 Content-Language: en-US
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250427-android-boot-v1-0-bb6b37c9c9f1@gmail.com>
+In-Reply-To: <20250410120208.4142087-2-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Mon, 28 Apr 2025 19:10:31 +0200
@@ -103,107 +107,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi George,
+Hi Varadarajan,
 
-Thanks a lot for the series, it's super exciting to see support for 
-booting Android on top of U-Boot :D
+Please rebase on U-Boot master.
 
-On 4/27/25 13:25, George Chan via B4 Relay wrote:
-> This is a series of patches to enable chainloading LineageOS on qcom SOC.
+On 4/10/25 14:02, Varadarajan Narayanan wrote:
+> If CONFIG_SYSRESET is enabled, the reset_cpu() function defined in
+> arch/arm/mach-snapdragon/board.c conflicts with the definition of
+> reset_cpu() in drivers/sysreset/sysreset-uclass.c resulting in duplicate
+> symbol error while compiling. So, do not include it if CONFIG_SYSRESET
+> is enabled.
 > 
-> First patch is to workaround kernel/ramdisk invalid addr by identify
-> its physical memory address out-of-range. Since qcom SOC usually have
-> 0x80000000 as start/base/real memory address but androidboot img
-> specified to around 0x0. If other vendor bootloader behave similar then
-> this patch can also workaround it as well.
-
-I'm curious to know what values are there, tbh I think U-Boot should 
-entirely ignore the values in the boot image but I guess that could 
-break some other platforms.
-
-How about adding a config option CONFIG_ANDROID_BOOTIMG_IGNORE_ADDRS and 
-just ORing it in all the places that have checks like 
-"img_data->kernel_addr == 0". Then you can enable this for 
-mach-snapdragon by selecting it in the ARCH_SNAPDRAGON config definition.
-
-> 
-> Second patch is enable bootmeth-android to have chance for extra mem block.
-> Usually the fastboot mem block, to hold androidboot img, and loadaddr for
-> unzipped kernel. If other SOC have extra mem block available but
-> fastboot block, we can add extra logic to take care of it.
-
-There is a small hack in mach-snapdragon that we put kernel_addr_r and 
-loadaddr at the same address to avoid using up too much memory on 
-devices that only have 1GB which explains this crash because we try to 
-decompress the kernel to the same address it got loaded too.
-
-I think we can get away with giving loadaddr its own allocation of 64M 
-or so, maybe 96. This would make your second patch redundant (and feels 
-like the right fix to me)
-
-> 
-> Third patch is optional to enable snapdragon board to have extra cmdline
-> found from original bootloader that is required for LineageOS boot init.
-> An alternate method is to put the append string into a dummy device-tree
-> file, as /chosen/bootarg ofnode porperty, that also contain msm-id. Then
-> encapsulate as androidboot img and let u-boot as kernel binary. Below is
-> an example for Xiaomi Miatoll device.
-
-I assume you're chainloading U-Boot on this device? If so, isn't it 
-enough to just copy the boot args that ABL gives us and maybe tweak a few?
-
-I'd also rather keep this constrained, maybe an android specific board 
-callback to set boot args (if there isn't one already) and have the FDT 
-fixup code be alongside some other generic FDT fixup stuff. I'd rather 
-not have this stuff in board specific code.
-
-I hope this makes sense, feel free to ask for clarifications on anything.
-
-Thanks and kind regards,
-
-> 
-> /dts-v1/;
-> 
-> / {
->          qcom,msm-id = <443 0x0>;
->          qcom,board-id = <0 0>,
-> 			<0x10022 1>,
-> 			<0x20022 1>,
-> 			<0x30022 1>,
-> 			<0x40022 1>,
-> 			<0x50022 1>;
-> 
->          #address-cells = <2>;
->          #size-cells = <2>;
-> 
->          memory {
->                  ddr_device_type = <0x07>;
->                  /* We expect the bootloader to fill in the size */
->                  reg = <0 0 0 0>;
->          };
-> 
-> 	chosen {
-> 		bootargs = "";
-> 	};
-> };
-> 
-> Signed-off-by: George Chan <gchan9527@gmail.com>
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 > ---
-> George Chan (3):
->        boot/image-android.c: Workaround androidboot kernel/ramdisk addr
->        boot/bootmeth-android.c: Reuse fastboot memory block for unzip kernel
->        mach-snapdragon: Add support to append string to kernel cmdline
+>   arch/arm/mach-snapdragon/board.c | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
->   arch/arm/mach-snapdragon/Kconfig | 11 +++++
->   arch/arm/mach-snapdragon/board.c | 97 ++++++++++++++++++++++++++++++++++++++++
->   boot/bootmeth_android.c          | 12 +++++
->   boot/image-android.c             | 10 +++++
->   4 files changed, 130 insertions(+)
-> ---
-> base-commit: 5a0a93a768487e55ebe50a34cc90d751bf99cc56
-> change-id: 20250427-android-boot-ecbb768cda72
-> 
-> Best regards,
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 2ef936aab75..2254e0b55a1 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -187,10 +187,12 @@ int board_fdt_blob_setup(void **fdtp)
+>   	return ret;
+>   }
+>   
+> +#if !IS_ENABLED(CONFIG_SYSRESET)
+>   void reset_cpu(void)
+>   {
+>   	psci_system_reset();
+>   }
+> +#endif
+>   
+>   /*
+>    * Some Qualcomm boards require GPIO configuration when switching USB modes.
+
 -- 
 Casey (she/they)
 
