@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11E14C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:29:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58954C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 21:34:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 502EB82A4D;
-	Mon, 28 Apr 2025 21:27:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 531B582145;
+	Mon, 28 Apr 2025 23:34:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n2JP2rCU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GSzW3Uul";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8816C8209F; Mon, 28 Apr 2025 21:25:00 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id E425282153; Mon, 28 Apr 2025 23:34:01 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BDFA80EFB
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A7F68210E
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 23:33:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2254e0b4b79so78434905ad.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7300069c447so3012679a34.2
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 14:33:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745868296; x=1746473096; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1745876038; x=1746480838; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MvxOlecVI/99KO0pSUGtZ3fQ/eV9xTv4AQMdbrmP1ws=;
- b=n2JP2rCUClJlxVfOt0QSsgeMRczQnXDa64IulP0drHn56ogTIOT1sI/ELidpGhFZxf
- kmIBT03VjQVK+BbwbLuMwjfUBT9x1shBwHDUVM+NEPe9Lmf1ZWttuDDQ2u7dIVJWHINW
- jdVdkt9+C36EgsDlT7BNaZQBP4wk4HOHSxfX0=
+ bh=O9hwB/pBsnUL1odgHIR+vH81+v+MNhxyYeeTx5kGB0w=;
+ b=GSzW3Uul07c3BOodnq62rLEePvOOG4/zOs/0oQpXieEHB3wbva/GHXRbQ1eDg1UUjw
+ C78Y3tIxe4UT1AjaDeiDxasl+7Ddb9/cee67mkG8MdWF0xSB9k2b7i0y/hvy59WpMdeb
+ 9YM0EVDmZtKndJOmDQcO1oBKoUbiitZSHwz6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745868296; x=1746473096;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1745876038; x=1746480838;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MvxOlecVI/99KO0pSUGtZ3fQ/eV9xTv4AQMdbrmP1ws=;
- b=jtEHJv9yKO5+BN4xZGdd78tQjgg9K2QtP65KYkvZ7FV93EiMmy6aWnNCH4BwAEymZc
- covuYSyUFspAZEQYbeUVZ0bdu4m8VEc4cZv6P0AM1P+HJ8zL+vrKDg+JDCczcky1NgpR
- 1mmsFt7DWlbqFcufU84mRKa3yp2by9MZ1aTcaKdDB5uNlhbsAZBVpuca6H1hJxi92M8r
- nDRGqNZCpj+xw48/4h9lZGqCZqUsXW7AUMnG9DcgT4ZiHsU45WYJQAlXt0F7qAyB5WNT
- JiisHQfnuJACOGnpbXMIYTMgmiUUNu63fNgM8AR5g129k7nlAQ+y+jXXkDGffMwccJ5j
- trRg==
-X-Gm-Message-State: AOJu0YyNl9stYTsXaZa58NaSuIeaXH1VdmRKeiwR49hwfHh8gAOx3Hf8
- Nxez1Hl6WYuNVngOrZjeP7I8SLAGVy2BgciJlRytm0SKSAf2RCPqieXjJOsXCB6DKH7VGSaD7JU
- =
-X-Gm-Gg: ASbGnctONC8cVTJS5ZPfQn88u4qdekS8j6UFReD8TolWKUH2MF6J1pv4wx5mkDhACf3
- Rc+rBsPEibRFlKqoStf9AOprDpN3xEQSd/S0XPJI0pXOuHpJdBEMWcgaRPq5ps2Y0zTwNcb6mC0
- +Ax+vLvhVZh9ZXjUA6ju+pZaUSjKWa+tM/T+J3f2RBd+sOzD9PGcIfEIskO2uHpT82paPI1Wd+b
- Y1Zr5Dl8yJKQNolR7CvuSuCj2n7PkCvDcDOGaJuGWxe1VMROi0+Nd4p22UuIcWiyFcFOWFnG0VI
- d4YvoOktjTQQEvQ9MDp2pjLNn4T4J7QyIvTB6g6d9cvjY1oYRAgkOgdcKIiDmm4tYeQjJpYPvsj
- 9bw==
-X-Google-Smtp-Source: AGHT+IHcl1jyPhYUkbL2hnd8SUj5RpFGpOkXiEDZyARa5SkNqX67CIH1nvgy4AlBLEpf8PrklRz85Q==
-X-Received: by 2002:a17:903:2b10:b0:223:668d:eba9 with SMTP id
- d9443c01a7336-22de5ebb11amr12771175ad.10.1745868296584; 
- Mon, 28 Apr 2025 12:24:56 -0700 (PDT)
-Received: from localhost (199.24.125.34.bc.googleusercontent.com.
- [34.125.24.199]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-22dc60bd15fsm54797335ad.15.2025.04.28.12.24.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Apr 2025 12:24:56 -0700 (PDT)
-From: Stephen Boyd <swboyd@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v3 17/17] cmd: ximg: Support LZ4 compressed images
-Date: Mon, 28 Apr 2025 12:24:24 -0700
-Message-ID: <20250428192427.3877612-18-swboyd@chromium.org>
-X-Mailer: git-send-email 2.49.0.906.g1f30a19c02-goog
-In-Reply-To: <20250428192427.3877612-1-swboyd@chromium.org>
-References: <20250428192427.3877612-1-swboyd@chromium.org>
+ bh=O9hwB/pBsnUL1odgHIR+vH81+v+MNhxyYeeTx5kGB0w=;
+ b=Oi+BG4uXupPaJeRx4mI0ttDrlqW/DxxekKJ5AOqpa8Bs9phbG045eOuggSQeNzYAVq
+ HsoyjTVqSnZEVeCIn4jXHU7L2Iqdo6FVi/Zf3UlRb1HWUbzLjjZFmXlGXNH2bp/4ClQq
+ RUrdrH/mKtVOYVGvmE0o4UBefEqXtBO9VnuyfCM7WFBX3J2FtlGodKJlhtlwdrpDZu7w
+ 6JsdkpMJgglV8Robs8x2vbggPqOC+TxocpTzSJsUwhW0viLvXKSOEpIzhFDw3/4Ng+us
+ L83Hxt62sWm0SFrID0HeTlLkDjlDpeZmeiupgJZcB4xKOfoaYl3XMq2ajzoV1SsH0k0/
+ HwDQ==
+X-Gm-Message-State: AOJu0YwjLsltQNS1d13qXgq+R9zTevHdQfZ2uRoOlY7qT3dRTBEvUk64
+ YwHpAi3fPp5T9KmKbsCR/T7TXO0hOVubegggp/MWorNMCHwQJMxptd1EP55QHN99sePRU5TAIfQ
+ q
+X-Gm-Gg: ASbGncs7AkDFZzupg/B3tFW+HGHQFRRXPTDZEJZ7pFN+XGcpzp2+R9eZyHvNgkIGHDG
+ OZvPDblCnBY1a1GlgpcDk5OyMOTFBMoKgbxQmB/vXblslunve6g+DNnCnk5R0NPUR57X080B/BF
+ SWQ9vaLJWbMcU3job6OqzvNFVCw9lOFEWGcoZ0mvO/irlbvC2iQaR2QK1rjwO6H8MoEJyOqU6BM
+ l4759zQCIBN8sm6MasksaNWAun9tJiM3VsOVTD4S8bs3LIb3VWhwziacUnfPICcyIjD2cOUJjEe
+ EjslhNeso/1TKa3Rv8y7GmlOGFmMJYAdK66HJre96XcGvnLlocKt6QDVyhqLf5DLTL1oVkX96dN
+ k
+X-Google-Smtp-Source: AGHT+IHMP1azCrgatUs2WjR5SjzmsSpxcL91Q2a9HzoFBOqzQYziw2M5vXsTDwoeQF8IraE6N4+Rmw==
+X-Received: by 2002:a05:6830:4887:b0:72b:87bd:ad5b with SMTP id
+ 46e09a7af769-73088aab017mr859927a34.4.1745876037942; 
+ Mon, 28 Apr 2025 14:33:57 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7308b139000sm3108a34.40.2025.04.28.14.33.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Apr 2025 14:33:57 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Mark Kettenis <kettenis@openbsd.org>
+Cc: marcan@marcan.st
+In-Reply-To: <20250420115808.94272-1-kettenis@openbsd.org>
+References: <20250420115808.94272-1-kettenis@openbsd.org>
+Subject: Re: [PATCH 0/6] Apple RTKit improvements
+Message-Id: <174587603696.1121500.7934805869764857141.b4-ty@konsulko.com>
+Date: Mon, 28 Apr 2025 15:33:56 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 28 Apr 2025 21:26:55 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,46 +96,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support to decompress LZ4 images. LZ4 is used on more recent
-Chromebooks to store the FIT image.
+On Sun, 20 Apr 2025 13:58:02 +0200, Mark Kettenis wrote:
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Stephen Boyd <swboyd@chromium.org>
----
- cmd/ximg.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+> This is a collection of improvements for the Apple RTKit code
+> that we have been carrying downstream for some time now.
+> 
+> Hector Martin (6):
+>   arm: apple: rtkit: Add support for AP power & syslogs
+>   arm: apple: rtkit: Add default buffer handlers
+>   arm: apple: rtkit: Add a generic RTKit helper driver
+>   arm: apple: rtkit: Add OSLog buffer support
+>   arm: apple: rtkit: Add endpoint field to buffers
+>   arm: apple: rtkit: Support allocating OSLog out of SRAM in helper
+> 
+> [...]
 
-diff --git a/cmd/ximg.c b/cmd/ximg.c
-index a6341a078019..eed66c776d12 100644
---- a/cmd/ximg.c
-+++ b/cmd/ximg.c
-@@ -30,6 +30,7 @@
- #include <asm/byteorder.h>
- #include <asm/cache.h>
- #include <asm/io.h>
-+#include <u-boot/lz4.h>
- 
- static int
- do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-@@ -253,6 +254,18 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 			}
- 			break;
- #endif /* CONFIG_LZO */
-+#if IS_ENABLED(CONFIG_LZ4)
-+		case IH_COMP_LZ4:
-+			{
-+				int ret;
-+				size_t size = unc_len;
-+				printf("   Uncompressing part %d ... ", part);
-+
-+				ret = ulz4fn((void *)data, len, (void *)dest, &size);
-+				len = size;
-+			}
-+			break;
-+#endif /* CONFIG_LZ4 */
- #if IS_ENABLED(CONFIG_ZSTD)
- 		case IH_COMP_ZSTD:
- 			{
+Applied to u-boot/master, thanks!
+
+[1/6] arm: apple: rtkit: Add support for AP power & syslogs
+      commit: 72bc04b8744c8b2756cbf115a88bc48fbde57c6b
+[2/6] arm: apple: rtkit: Add default buffer handlers
+      commit: 89cb15788a16f2568083d984c547ff41c56a2d68
+[3/6] arm: apple: rtkit: Add a generic RTKit helper driver
+      commit: 7bac7f5f012f4990ac28116839043cf588499e3a
+[4/6] arm: apple: rtkit: Add OSLog buffer support
+      commit: 082789a4f7a1a7bac46ef75f98acf93ee8bfe837
+[5/6] arm: apple: rtkit: Add endpoint field to buffers
+      commit: fe593cc8ed9b9616eca9d094be1b1557824dcea4
+[6/6] arm: apple: rtkit: Support allocating OSLog out of SRAM in helper
+      commit: 4a55e7f0311df145662831576bbe0ed2113227ce
 -- 
-Sent by a computer, using git, on the internet
+Tom
+
 
