@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5376CC369D9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6617FC369D9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:11:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D29282161;
+	by phobos.denx.de (Postfix) with ESMTP id BF9C3822D7;
 	Mon, 28 Apr 2025 19:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="UfRJ7hfw";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="tJuG8Pdz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06AED8215F; Mon, 28 Apr 2025 11:16:29 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 6290C8215F; Mon, 28 Apr 2025 11:16:29 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F13E080EFB
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 11:16:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F5B2820B7
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 11:16:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-39ee5a5bb66so2813147f8f.3
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 02:16:26 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-39c0dfba946so3269444f8f.3
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 02:16:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1745831786; x=1746436586;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1745831787; x=1746436587;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/hpTiR2QRM6TRJhGTpPxEeGIVQs9JadMwGFAnqIzlUo=;
- b=UfRJ7hfwAbBmhl23IGhoHAdTTsEc6XlSxWoqvEtdbndcysZdNp3vIbC80Tet7niq/S
- TRS/2CyMg4gexk980/o6+DNvXY9OdEadJBo3OD3yinG7FV5cJcBWa2ZsXEYKEMIGtRko
- JlIgUNDXR4cL5DTLUZ6eHuOgfjnCiuGUJADyfZKtM+vXiYb5fkXQUlcHhoLWuIDPscWu
- /QKXzU6d/2hYdXlqEy/v0jWRADl6nkxTqnSnqFy+U1eb+q6mg0jHjupqQ6YMXvP7rUnj
- qGnu47UOXcYa9JkglY55BFO8k8yoyky2P3jqWTUiToR2zR3dixiC5Wf1I301e68MLj2H
- 888w==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=l/CE2kwFO2qZYUKG9bbswiG1ALPqoRJCEF+u5PVGRGY=;
+ b=tJuG8PdzKRF5F0Bd+H3PdQQbxs/GOKc56Dv67nFJcKtZ+6vPSA0ljVK5BswEbg5qqI
+ qZsg2SbLk8CRfDWVbOeX6F+fC2wuOZstNqQz0XoXYZ4uB+uqQCAkAhI82qn3teLR6Z5G
+ nHegIxZcIfgkUmeziDMtrsJLyHw168IiXgX+nj6g2Acf74qQqAEtN+fGOdRl4d9ZcQpI
+ xecmZIZaqOwRl/Oa9LZkMM22BK3/Dj39ts+0jYplFz0faimEGqDEh4ntie+NWCymtTWb
+ L5X3HXIjGSiCePzw8y49/UVo2ZfaAgJAHmBD6cJQvULwoYXH95kRmPBG3o9RIgcwsoXU
+ SwKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745831786; x=1746436586;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/hpTiR2QRM6TRJhGTpPxEeGIVQs9JadMwGFAnqIzlUo=;
- b=vM/NX678QZRwdPZvX9hM9bM8dUT5buDLu2/bjyK2AY2v9bel25eBiW2XJLwcvTYI89
- kOWM567rQ8Cokn+GMHstZK9sCEpLyQMad/HiXzZd+FWlX5VET7tehieIeEHofBTD3JVV
- +D9xFX5fSdOx3jQ/8AZ8UhBydFRn6Rdj0fq0N7xvcXz1lqsVuttGyo8AToXlCef5jSwg
- TkQ//KEiZCwX+TzpuFaR/44TNQTXNx/Vqwu9x9vSNs09GMG1kBqa44Y3vQitMjWqcB0D
- NdckuiHriTKuY0ifcPAYnkJos/13M5bY/3jP5Btjw9LW83ICnSLyuNsGDelEIg4bMRqZ
- hOLQ==
-X-Gm-Message-State: AOJu0YxROtW9Vgs+VK2TR3Sw0QlR09QnmfN/DTrd0dbd4sfUBMsR4ZTB
- ivXxawhOvis01pUuGRubMMUs4FJH3nVKJ3j+WWspsk1dgM8h5dlrxEeXScGoA2A=
-X-Gm-Gg: ASbGncvmTze1J9DUxILErs+6RfIwETx/pdb1xQ/f4E7TLC5naRW4CNg+rjX04nEfYrq
- 0yJzGUSUNa4cRLK1w1lQHKViqIYLrxarIViCqGV5LNPqVVZPKKk9ckv2OM7dMcVLqjs0Er9BLY0
- P1rcAK6Ri0aIqlTxANXNc+itUNebOlIx4AP0p2xs9U2oOYHPliJOU97CzckeEL73WQzVi462aXX
- HDF0tYjZBqf6OeIplFh/IbAhAPEZDGPaA4/De6vL/5QkJGAhfc5irfZeViOYf81iYuPmNOSI8lb
- hlsHiUoMvMqZyrhElt8Gfjdn8i/Dh1OEr97G59I=
-X-Google-Smtp-Source: AGHT+IHmcFWwztbNBzOv1sk7NIkOgwksbNVnSZycoVLpDI1vdjFuz9rDm4nkNTYtwWqimd8E1HHj6g==
-X-Received: by 2002:a05:6000:2505:b0:391:412b:e23f with SMTP id
- ffacd0b85a97d-3a074e1a1bfmr8847235f8f.15.1745831786346; 
+ d=1e100.net; s=20230601; t=1745831787; x=1746436587;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l/CE2kwFO2qZYUKG9bbswiG1ALPqoRJCEF+u5PVGRGY=;
+ b=VVVPvRmt9JCd4NXyw+XOFSNEh1ESN1vx5FYZMShrQOTVCKZsXsZtz1bxdrSSAkbgPm
+ yfG0mS7fV4SkWCAZcqWmDuskPiM+dn6yKhL7UUSyebJ1Ysrf37oOCOR948WJeGX67ifb
+ +5ozua1mMAa/KeX8vXZoiuQkr95UhXko0nSoF3tGd/awtK7Sgg+4fuMeBwMcIoEj9rZs
+ Apj3waS3atYs1a3qBVV+RVTSSZ+RQlMN1/YFGAMobgVOCd+3zuc9V8yu6CysPh7r6IQe
+ 2Ss7BDxVfromqi27qjtJ5G16j9+wpihCJrDZemyzyst52rypdjD7CrfoGc+qnDlo//BD
+ gUxg==
+X-Gm-Message-State: AOJu0YwN6o1HK5jA3JsjKbgbCMzRu5+rKTf5up0ECNNDabpLzHa4gsNr
+ XNpXz9cW1dYw67UDN+WJZJwFmXgP4FOLEux/oxQa4HpNXQ2x/uy6OpeiK9EcN6s=
+X-Gm-Gg: ASbGncuTMU82e48oNw/fSS0LyFqUociKd4Y29kqJO67ZJ/mFlr0Pd61oLrcK6SUUzWZ
+ pHmyRmVAzMEjyHWbHT53J6mYS9pBDFFR1xJ1EWL1wemHfxYq0uH5AaWwsMeKZJ4T5iff9HpgSHi
+ pJxij5Wr/6Z4vTrWHKGiVnxereCRu6GJgN9EnIboe0TIA92hIHPhI0PHuB2BeJe5FZCkE9MvP3K
+ mpNH2GkGnw7rebb+p4AWno5xa0mlFejKDi4H8sM9pSRYtPaBRNxTCH/t9h/bhzsLUkRHcS8rG5m
+ vLKVtlhMDWEMDL5kR6zkQtritUdVlXo+Qqthl2o=
+X-Google-Smtp-Source: AGHT+IE0e4OqOCqQgYz9KvUO8CynZDitEYc8d2FtwuoHAv+fGo/VRbhVD7i3eC170ExYfaj8+bfoHw==
+X-Received: by 2002:adf:f989:0:b0:39c:2678:302b with SMTP id
+ ffacd0b85a97d-3a07ab9be39mr5295623f8f.45.1745831786896; 
  Mon, 28 Apr 2025 02:16:26 -0700 (PDT)
 Received: from [127.0.1.1] ([78.199.60.143])
  by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3a073e5da0dsm10345258f8f.88.2025.04.28.02.16.25
+ ffacd0b85a97d-3a073e5da0dsm10345258f8f.88.2025.04.28.02.16.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 02:16:25 -0700 (PDT)
+ Mon, 28 Apr 2025 02:16:26 -0700 (PDT)
 From: Zixun LI <admin@hifiphile.com>
-Subject: [PATCH v4 0/6] watchdog: at91sam9_wdt driver enhancement
-Date: Mon, 28 Apr 2025 11:16:22 +0200
-Message-Id: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
+Date: Mon, 28 Apr 2025 11:16:23 +0200
+Subject: [PATCH v4 1/6] arm: at91: wdt: Remove at91_wdt struct
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGZHD2gC/12Oy07DMBBFf6Xythg5fqQxq5YuukEVEhVCIBYmG
- cdTNQ+c4LSq8u84YQNsRrrSnHvPlXTgETpyt7gSDwE7bOoY5M2C5M7UJVAsYiacccVksqJD0dP
- CpCplefLBVUbiZ+vB4nlueXuP2fqmor3zYGZ2u1nuLp/wujc20bJ+cdtzeE4fHu29OgIqHw77r
- +GpXO7KtB0UO4jjZl0ZPN2W882bahpx2PWNv8ymgU9Tf6UCp4xKrYUuQK4EJGuHFluHJ5grJrE
- gfnE8++FE5LLUslwVmueC/+fGcfwG/P4uEScBAAA=
-X-Change-ID: 20250417-wdt-da6560c1b258
+Message-Id: <20250428-wdt-v4-1-bb7d1c7c051a@hifiphile.com>
+References: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
+In-Reply-To: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>, 
  Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de, Zixun LI <admin@hifiphile.com>
@@ -103,79 +99,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series includes some code refactor and adds new device support
-for at91sam9_wdt driver.
+at91_wdt struct is only used by spl, remove this reference and the struct
+itself.
 
-Instead of add a new driver like Linux kernel, at91sam9_wdt driver is
-extended as new watchdog variant is similar to existing one, especially
-for the function subset used by u-boot.
-
-1. Remove typedef struct and rename variables for readability.
-
-2. Add SAMA5D4 compatible, it has the same watchdog as SAM9260 except a
-new lockout feature is added. Currently this feature is unimplemented.
-
-3. SAM9X60, SAM9X7 and SAMA7 series have a new watchdog variant, some
-bitfields bof MR register shifted their position, a new register is added
-for timer value.
-
-4. Add DT node to SAM9X60-Currently board
-
-It has been tested on SAM9X60-Currently board:
-- Start & stop
-- Set timeout from DT node
-- Reset kick in with a while(1) loop
-
-Changes in v4:
-- Move 'timeout-sec' to at91-sam9x60-curiosity-u-boot.dtsi
-
-Changes in v3:
-- Merge relevant commits into one
-- Match DT node with Linux
-- Move default timeout from board dts to sam9x60.dtsi
-
-Changes in v2:
-- Fix SPL build
-
-Zixun LI (7):
-  arm: at91: wdt: Remove unused at91_wdt struct
-  arm: at91: wdt: Rename regval in priv data to mr
-  watchdog: at91sam9_wdt: Rename priv to wdt
-  arm: at91: wdt: Add SAM9X60 register definition
-  watchdog: at91sam9_wdt: Add SAM9X60 support
-  ARM: dts: sam9x60: Add watchdog DT node.
-  ARM: dts: at91: sam9x60-curiosity: Enable watchdog node
-
- arch/arm/dts/at91-sam9x60_curiosity.dts    |  5 ++
- arch/arm/dts/sam9x60.dtsi                  |  7 +++
- arch/arm/mach-at91/include/mach/at91_wdt.h | 25 ++++++----
- drivers/watchdog/at91sam9_wdt.c            | 55 +++++++++++++++-------
- 4 files changed, 68 insertions(+), 24 deletions(-)
-
---
-2.49.0
-
+Signed-off-by: Zixun LI <admin@hifiphile.com>
 ---
-Zixun LI (6):
-      arm: at91: wdt: Remove at91_wdt struct
-      arm: at91: wdt: Rename regval in priv data to mr
-      watchdog: at91sam9_wdt: Rename priv to wdt
-      watchdog: at91sam9_wdt: Add SAM9X60 support
-      ARM: dts: sam9x60: Add watchdog DT node
-      ARM: dts: at91: sam9x60-curiosity: Enable watchdog node
+ arch/arm/mach-at91/include/mach/at91_wdt.h | 6 ------
+ arch/arm/mach-at91/spl.c                   | 4 +---
+ 2 files changed, 1 insertion(+), 9 deletions(-)
 
- arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi |  4 ++
- arch/arm/dts/at91-sam9x60_curiosity.dts         |  4 ++
- arch/arm/dts/sam9x60.dtsi                       |  8 ++++
- arch/arm/mach-at91/include/mach/at91_wdt.h      | 25 +++++++----
- arch/arm/mach-at91/spl.c                        |  4 +-
- drivers/watchdog/at91sam9_wdt.c                 | 55 ++++++++++++++++++-------
- 6 files changed, 73 insertions(+), 27 deletions(-)
----
-base-commit: 10f48365112b164bee6564033ab682747efcb483
-change-id: 20250417-wdt-da6560c1b258
+diff --git a/arch/arm/mach-at91/include/mach/at91_wdt.h b/arch/arm/mach-at91/include/mach/at91_wdt.h
+index 8ef8e007d7767308a5b46be46b02c51073723a41..78ad0453fd9eb3e42674d10cb11ce3da820cdc6a 100644
+--- a/arch/arm/mach-at91/include/mach/at91_wdt.h
++++ b/arch/arm/mach-at91/include/mach/at91_wdt.h
+@@ -19,12 +19,6 @@
+ 
+ #else
+ 
+-typedef struct at91_wdt {
+-	u32	cr;
+-	u32	mr;
+-	u32	sr;
+-} at91_wdt_t;
+-
+ struct at91_wdt_priv {
+ 	void __iomem *regs;
+ 	u32 regval;
+diff --git a/arch/arm/mach-at91/spl.c b/arch/arm/mach-at91/spl.c
+index 5feb8f735511a45dd37ee04bb3742f57d8f2e067..a814973242a723c47af210bd76db9210db061063 100644
+--- a/arch/arm/mach-at91/spl.c
++++ b/arch/arm/mach-at91/spl.c
+@@ -14,9 +14,7 @@
+ #if !defined(CONFIG_WDT_AT91)
+ void at91_disable_wdt(void)
+ {
+-	struct at91_wdt *wdt = (struct at91_wdt *)ATMEL_BASE_WDT;
+-
+-	writel(AT91_WDT_MR_WDDIS, &wdt->mr);
++	writel(AT91_WDT_MR_WDDIS, ATMEL_BASE_WDT + AT91_WDT_MR);
+ }
+ #endif
+ 
 
-Best regards,
 -- 
-Zixun LI <admin@hifiphile.com>
+2.49.0
 
