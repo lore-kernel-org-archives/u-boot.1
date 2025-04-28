@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA93C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 16:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B2DC369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 16:11:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A653D82103;
-	Mon, 28 Apr 2025 18:10:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 04F0C8214A;
+	Mon, 28 Apr 2025 18:11:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OfykYK6t";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RN7tPzjx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A386A8211F; Mon, 28 Apr 2025 18:10:57 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id DDE8282155; Mon, 28 Apr 2025 18:11:13 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B3208056A
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 18:10:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8C4C8211F
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 18:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3f9832f798aso3972107b6e.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 09:10:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-30dd5a93b49so45453361fa.0
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 09:11:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745856654; x=1746461454; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wru9iJyct6SD4osnyYsA49r/XtpXRrcrSo4nFe61tRg=;
- b=OfykYK6tTnm/gN8mPhr+sK6be905sUfRDzSVdJYyfRbsxYjy9Sc1LyqRiXA68eVHwD
- 6jyQQOJnw8RwMXL5q95+yr5/Kae9apMjzkO/Sf/c454qIbZNuoQUupL+BWCnTsWlzEFp
- XyrCI2Nkga9V7YxVdonkr6w7kCRshCH6zieJs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745856654; x=1746461454;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1745856671; x=1746461471; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wru9iJyct6SD4osnyYsA49r/XtpXRrcrSo4nFe61tRg=;
- b=p42cXmm98S4ZnpA1ZH+6QR+yMocqUR4dsXEkDAT0U1qjjhPR5B0ltldYrhev+FgyP1
- zqZT50EWGR7ygaz0j5faChqw8dkVt38biUoGL5HRWDLPJj/wFKazZbRj88tDXLkIgZ8A
- KYOx0VLpKMe1zGLTQmE6vuk1ASwFqWL2r7vQqqfNGIduubUmcVamvo7Z5pGls2Chw0OQ
- 1K4Mm0dmBkFCZ3+pOCBxp7VUOUB8Dv0rLRuE1Wnndz12FkCF6MfYKKhFLUuYujpRUW4h
- pi3eII+IrHV08Yi0fqdp8mZLLCGFjKkhC8Fy/o3hk6QSCfeV0foy9qwU0viqwxmDVViC
- 7CDw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCULkgNaQzGmHMzwQKfp6L2tYk4SE52qQTx/CjPRgFgwC8+FxLsljQRDZKI5GXcHPKmQlR2EXN4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzq32r4SoqzDnADRGhoooY8LMDPjf9omwxQrew4+FPfzmtCSxx+
- AiaM5tuQo2nqUbC3qoLjVkuloPtfA56nxj0ALfdLSLB+PaLENDYpJ8Nz7i+X8y4=
-X-Gm-Gg: ASbGncvAsvTCKDfNwh4P8u69bEG4xHu8G2x8By2X4WyyKmxdld27aHFnstiay1LkfCv
- +23JhABcvOf38o2UArG1/OVQgPIg3UGVrhwhMwHDrBXvxEFNvYIFfzaUIH4vPURuL1CuSfdAYAZ
- +3qjJT2bVKWydGcJU4W4GX6wyKEyQbjw4MbWe4qcq6WZ53z4ZfXQkFO6mFA71Z6Cgy16YJf5ayP
- ZDrzxAdBZDyKlPl5LWCZBjwZ89RqIJTrEKH8iD3ZHfQoE9jFEwa0EM5MpCfg6ZI5ZvxIkWtYsiX
- zNLb0xj5TYz20Z4bypP/irYt9vxmFiKA9MKUVhcHBh7cmVMVjq9T0DaTGKkJH8l/J1upGXvbvsa
- OeYweyat6tdrD
-X-Google-Smtp-Source: AGHT+IGSSvI7ivCwxt9t5hr5PxVJ/QRp2mQFgnCpCvui76Yo/m7fkzB4kMUjnRRmTSbnqRbHFI6Xpw==
-X-Received: by 2002:a05:6808:6f8e:b0:402:292:4417 with SMTP id
- 5614622812f47-40202924462mr3849584b6e.1.1745856654145; 
- Mon, 28 Apr 2025 09:10:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-401ec8e4f55sm2076126b6e.28.2025.04.28.09.10.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 09:10:53 -0700 (PDT)
-Date: Mon, 28 Apr 2025 10:10:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Schultz <d.schultz@phytec.de>
-Cc: ggiordano@phytec.com, w.egorov@phytec.de, u-boot@lists.denx.de,
- joe.hershberger@ni.com, bb@ti.com, nmorrisson@phytec.com,
- upstream@lists.phytec.de
-Subject: Re: [PATCH 3/3] board: phytec: phycore_am62ax: Update Environment
-Message-ID: <20250428161051.GC5495@bill-the-cat>
-References: <20250428144904.1058574-1-d.schultz@phytec.de>
- <20250428144904.1058574-3-d.schultz@phytec.de>
+ bh=Uo0Dxakwb5cxoazCvKN/+GfuTQRd+7T/7VHMgjFm8Uw=;
+ b=RN7tPzjxq+RssxDo/3KxpXAVdQZuYrfMtKPcnmJKQIPKvfRSUmAaLpyED+XuL+pBIt
+ iIpSlHndv2DUuwDDKUL+aX8yyIWzDNFfYIgnDYuDO74w6PxX0y5oboBUwLjNlRqJwyLL
+ Rr/CYsbbIz00mC3ZsFhhGILj19JU48Nxnf/vN9hs6YRKZ7TS+9gkhD+HTgrFY/iCG+UU
+ fXtjudsCED0eZhygsgsQMHSyqNaE5kk0Lv7f+VSnsXTgNptNNc1BK+XDyeBeA0y4YMmy
+ 4BaGDYHJOrJhR4mV/3XsOYdYsp0+YoD7icLK1CYLJYPTMvUkuKsXOPvr7memLAN/6MJ1
+ qaUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745856671; x=1746461471;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Uo0Dxakwb5cxoazCvKN/+GfuTQRd+7T/7VHMgjFm8Uw=;
+ b=YS7Xrgc0vUoN2NXH4pUHdLSfZeo1oO0zvpsC7EJa4a3naUvjc9QpaLKX/NobyNDCrZ
+ BJcBChw2rvO1kg1OzZbgQWtS09rP91hED/rujRwkd8+8xGpUkpcCdvF0We/w8E4Meqga
+ vrrTXLXZk4Mlma9oNr6a1AneLtmAlvR1HfZW22mjxG7n4lG7CP/nFUE7Ty+qV7+yxYbl
+ vjxvcJSdFBjPfRKT0OS+hRVnkuJh7VYavFm6neLwe9HeRF98JkJiC1Z5UgkJ+DHOUAmQ
+ S0s2+l3Q3pydbQntcLBRxA+zegtAwqDw4R/hR0jxGUS7ZxeGuLitxUdC2NkhQ4HWOpYE
+ LolQ==
+X-Gm-Message-State: AOJu0YxQ9yOq3nXTmF/lZ6MiIg80hR7MR+SdM6rbpwcDGtBMLbOTXxJt
+ DQdtmUjgMLvWx8CkTqnz+yHlhCI9ozbwm4NIbTSi/W2PrvrIBGY1GI6GN1bQ+TIOWuG0gYwGyAw
+ eS3hrDJiVjUEb7fO8mH5SD1lAiPI=
+X-Gm-Gg: ASbGncuc6TaZ/V4fwaTA5Y/3RU0obvfmj4XXXbABERs23OKf0VsWCFT9QJE+Ks9xorp
+ QrYCn5FNr4VaPiwUO5uAPx7CDUoHQIbMwhvJkLreZB7O6sx+ygAYdoixxc3G7Zu4YVEIFtBYCVp
+ QAPCVVS7iYAOH56+DKYniU0S+Ukw+KeWaV6pvxDpacIG696J13JOzakif7bAiH4Cl+
+X-Google-Smtp-Source: AGHT+IE+sRoHXSd1OxR24zKGk+3NdrCRCM67QuZETshiOkFZfns/8clJ4yJPfeQuAoSgdUGKJOXXrTDYZekqkqkT1xE=
+X-Received: by 2002:a05:651c:3134:b0:30c:3099:13d0 with SMTP id
+ 38308e7fff4ca-319dc41dd0fmr34316791fa.21.1745856670773; Mon, 28 Apr 2025
+ 09:11:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sebV5tBWghNMGYmy"
-Content-Disposition: inline
-In-Reply-To: <20250428144904.1058574-3-d.schultz@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250427154002.146276-1-marex@denx.de>
+In-Reply-To: <20250427154002.146276-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 28 Apr 2025 13:10:59 -0300
+X-Gm-Features: ATxdqUE6H52l7p1EHnpd2WTd_n7uzvyo1pqx3m7ljozWWLHyXSm8EQLMwOBIX9s
+Message-ID: <CAOMZO5B70rvt-BUo0riMQBoQ26BfnSUniYxhZpWtGWpgfE1how@mail.gmail.com>
+Subject: Re: [PATCH] clk: imx: Pass CCM udevice into clk_register_composite()
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Adam Ford <aford173@gmail.com>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sean Anderson <seanga2@gmail.com>, Shawn Guo <shawnguo@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,48 +96,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, Apr 27, 2025 at 12:40=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Pass the clock controller udevice into clk_register_composite(),
+> so it can be passed further to any registered composite clocks
+> and used for look up of parent clock referenced in DT "clocks"
+> and "clock-names" properties by phandle and name pair.
+>
+> Use the clock controller udevice in imx8m_clk_mux_set_parent()
+> to perform accurate look up of parent clock referenced in the
+> CCM driver by name. If the clock name that is being looked up
+> matches one of the names listed in the clock controller DT node
+> "clock-names" array property, then the offset of the name is
+> looked up in the "clocks" DT property and the phandle at that
+> offset is resolved to the parent clock udevice. The test to
+> determine whether a particular driver instance registered with
+> clock uclass matches the parent clock is done by comparing the
+> OF nodes of the clock registered with clock uclass and parent
+> clock resolved from the phandle.
+>
+> Example:
+>
+> drivers/clk/imx/clk-imx8mm.c:
+> static const char * const imx8mm_a53_sels[] =3D {"osc_24m", "arm_pll_out"=
+, ...
+>                                       _____________|
+> arch/arm/dts/imx8mm.dtsi:            |
+> clk: clock-controller@30380000 {     v
+>         clock-names =3D "osc_32k", "osc_24m", ...
+>                                    |
+>                                    v
+>         clocks =3D <&osc_32k>, <&osc_24m>, ...
+> };          _______________________|
+> ...        |
+> / {        v
+>         osc_24m: clock-osc-24m {
+>                 compatible =3D "fixed-clock";
+> ...
+> };
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
---sebV5tBWghNMGYmy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Apr 28, 2025 at 07:49:04AM -0700, Daniel Schultz wrote:
-
-> Add fit_addr_r to the environment to allow us to boot from a FIT image.
->=20
-> Increase the maximum Image size from 23 MB to 26 MB by moving the
-> initramfs start address up. This gives us a bigger ranger to
-> provide kernel images which are not stripped down too much.
->=20
-> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
-> ---
->  board/phytec/phycore_am62ax/phycore_am62ax.env | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-
-What is the minimum memory configuration you have to work with here?
-That's still a very small window unless you're shipping modules with
-512MiB or so.
-
---=20
-Tom
-
---sebV5tBWghNMGYmy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgPqH8ACgkQFHw5/5Y0
-tyyfggv+IsQNGh0qpgSSRo5ha8BCH8YgXtCiAN4AJvNdEA7gTU0xQ7bRMBsV1HpV
-Hy9ahix+K0wweVz2hLBc/sVlPiYQlcNSKsy2PvDoxfCisZgX2y8Te6mJ9h2R2nxM
-0EC4IKqCQF6gENk8071Oh/ImZJtyhXfXGRx4E40utrwM2jVPhFcXSMJpV7Z+ztF+
-hlE2ZU3p6rgYykm83F52fVMLakuOhPxZnUvnukT1iAoxlkdnjRDYk16Fp/QI01UB
-5ahu4notdN+NqCfxJakW5Vu9MDL1kI0vBWzn2/gBwWtDI0xpWvAyLbVUPqnxyYo5
-BhjlvPUXV19QS5K/jfO49TOXFGM+tkMTPFdqQr9jyuuDQvLy8YJIiOZTfTQt8NIM
-Fq7U0wlhmtiVeFgUo/MJ3GTW3Z8VgP2fAnLCmYkRZMWuxASHk40mCow3iHBkQBhQ
-Do3b6pUMLB3p9/9JUZkRz0091llfv2L3ghFA7rFEBGjR8lIUwjImmrc2mEUeh1eo
-FYc13abC
-=Ml1X
------END PGP SIGNATURE-----
-
---sebV5tBWghNMGYmy--
+Applied, thanks.
