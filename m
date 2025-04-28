@@ -4,66 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D9D5C369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5049EC369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:17:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91D6682B07;
-	Mon, 28 Apr 2025 16:13:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 66E3182A96;
+	Mon, 28 Apr 2025 15:38:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jUEn3EKW";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZO9wsEuH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6F9882A8D; Mon, 28 Apr 2025 16:13:16 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8D3482B45
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:13:13 +0200 (CEST)
+ id 57DC082AA4; Mon, 28 Apr 2025 15:38:30 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D07982A8D
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:38:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53SEDCUX3569424
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 28 Apr 2025 09:13:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745849592;
- bh=vipJ81gJqyIIaYR1onqzhvGc7nGh80NZI9/r/CnXzAc=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=jUEn3EKWlWJdUX1IDq37RZzkIDzG1QjeY3qJCt6In9Fq1PFd4di4KdxVyGBgqcn5w
- +tNxyqBkq5Ucsc+JNpd6zWQ2urwzUgNatQgKUVMY3n+2XqAKNrqBQcVWSZxcWPSs1A
- HPTm4iLXFZwSrz5aaYyRdX+n423he1NcEzUh/DxM=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53SEDC05066753
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 28 Apr 2025 09:13:12 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
- Apr 2025 09:13:11 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 28 Apr 2025 09:13:11 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53SEDBwo045290;
- Mon, 28 Apr 2025 09:13:11 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
-Subject: [PATCH v6 9/9] doc: ti: am62: add falcon mode documentation
-Date: Mon, 28 Apr 2025 19:42:31 +0530
-Message-ID: <20250428141235.1734014-10-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250428141235.1734014-1-anshuld@ti.com>
-References: <20250428141235.1734014-1-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9P7Pr012480;
+ Mon, 28 Apr 2025 15:38:24 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=zv5/YdQxbfHovGjyGz85X3
+ e5B5okQxDz/jc4Cl87ijo=; b=ZO9wsEuHYYoHQUjUy3ArVa1oHy82z1asNjkjnt
+ f07rpG9HKhCOK5AzK0lG7YSaViwMwxNhZHoadhKj/tqdle/XbmKIZeQDXjxFRZsB
+ LfA9UFDQJl0t9M2Q0hin2ow0OVWeX7+Q3pe/MfWGEN6lhwhOCcaoUpvFXqaO/q6F
+ pgvLWMQE7KpQ+WlPGM1WcXzEQpin1/YfNyh5ZT1NajDxWTBGmp2yH5E2txl98sYX
+ dHG6TltmJ3uDzhKB2tsm27QNjKk8fXbtmIIsOE+A7TUWBSFRI4FL86tghU5ihi18
+ oUlLQPdt8FY6kfWDCEiNZoCPlwkdwEqWhdjpiVdYLgMYYrzQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mwky8wp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 28 Apr 2025 15:38:24 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B8FE640053;
+ Mon, 28 Apr 2025 15:37:19 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C4294A6272D;
+ Mon, 28 Apr 2025 15:35:04 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
+ 2025 15:35:04 +0200
+Message-ID: <e7fc1441-c4a6-4173-bf7f-974f347f9f67@foss.st.com>
+Date: Mon, 28 Apr 2025 15:35:03 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Lionel Debieve
+ <lionel.debieve@foss.st.com>, <patrice.chotard@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [PULL] Pull request for u-boot master / v2025.07 =
+ u-boot-stm32-20250428
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-28_05,2025-04-24_02,2025-02-21_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,839 +87,288 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds user documentation for falcon boot for am62 platforms.
-The main section is added to am62x_sk.rst and other documents just
-include the section. Steps to build falcon support, usage and the
-modified R5 memory map have been documented.
+Hi Tom,
 
-Two svg images have also been added for reference, one for the modified
-tispl_falcon.bin and other for the falcon specific fitImage format.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- doc/board/ti/am62ax_sk.rst                    |   7 +
- doc/board/ti/am62px_sk.rst                    |   7 +
- doc/board/ti/am62x_sk.rst                     | 290 ++++++++++++++++++
- doc/board/ti/img/fitImage_falcon.svg          | 180 +++++++++++
- .../ti/img/tifsstub_dm_tispl_falcon.bin.svg   | 285 +++++++++++++++++
- 5 files changed, 769 insertions(+)
- create mode 100644 doc/board/ti/img/fitImage_falcon.svg
- create mode 100644 doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
+Please pull the STM32 related patches for u-boot/master, v2025.07 = u-boot-stm32-20250428
 
-diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
-index 262340ef59a..9830916e3e0 100644
---- a/doc/board/ti/am62ax_sk.rst
-+++ b/doc/board/ti/am62ax_sk.rst
-@@ -192,6 +192,13 @@ https://www.ti.com/lit/pdf/spruj16 under the `Boot Mode Pins` section.
- 
- For SW2 and SW1, the switch state in the "ON" position = 1.
- 
-+Falcon Mode
-+-----------
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_mode_start
-+    :end-before: .. am62x_evm_falcon_mode_end
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-index 99bdc034869..74f6dafa238 100644
---- a/doc/board/ti/am62px_sk.rst
-+++ b/doc/board/ti/am62px_sk.rst
-@@ -290,6 +290,13 @@ https://www.ti.com/lit/pdf/spruj83 under the `Boot Mode Pins` section.
- 
- For SW2 and SW1, the switch state in the "ON" position = 1.
- 
-+Falcon Mode
-+-----------
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_mode_start
-+    :end-before: .. am62x_evm_falcon_mode_end
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index dab2970a85c..cb84e662042 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -526,6 +526,296 @@ Next, based on NET_VCI_STRING string mentioned in respective defconfig file `tib
- fetches `tispl.bin` and then `tispl.bin` fetches `u-boot.img` from TFTP server which
- completes Ethernet boot on the device.
- 
-+Falcon Mode
-+-----------
-+
-+.. am62x_evm_falcon_mode_start
-+
-+Falcon boot flow on am62 platforms bypasses the A-core SPL and u-boot with the
-+overall boot flow as below:
-+
-+**Normal boot flow:**
-+
-+* R5 SPL -> ATF -> OP-TEE -> Cortex-A SPL -> U-Boot -> Kernel
-+
-+**With falcon mode:**
-+
-+* R5 SPL -> ATF -> OP-TEE -> Kernel
-+
-+Build Process
-+^^^^^^^^^^^^^
-+
-+Enabling falcon mode requires re-building ATF, U-boot and the kernel fitImage
-+as follows:
-+
-+0. Setup environment variables:
-+"""""""""""""""""""""""""""""""
-+
-+Refer to the build procedure above for setting up the environment variables.
-+
-+1. Trusted Firmware-A:
-+""""""""""""""""""""""
-+
-+The R5 SPL in falcon mode loads the kernel at ``0x82000000`` and the
-+corresponding DTB at ``0x88000000``. Therefore ATF needs to be rebuild with
-+changes to the respective addresses.
-+
-+.. prompt:: bash $
-+
-+ # Change load addresses for the kernel and DTB
-+ export TFA_EXTRA_ARGS="PRELOADED_BL33_BASE=0x82000000 K3_HW_CONFIG_BASE=0x88000000"
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+2. U-Boot:
-+""""""""""
-+
-+* **2.1 R5:**
-+
-+.. prompt:: bash $
-+
-+ # use the common falcon config fragment for am62 platforms
-+ export $UBOOT_FALCON_CFG_FRAGMENTR="am62x_r5_falcon.config"
-+ export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} ${UBOOT_FALCON_CFG_FRAGMENTR}"
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* **2.2 A53:**
-+
-+After rebuilding ATF, the binary needs to be repackaged inside the tispl
-+binaries:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+
-+3. fitImage:
-+""""""""""""
-+
-+.. warning::
-+
-+    The ``fitImage`` available by default under ``boot/fitImage`` in rootfs of
-+    the standard SDK release is not compatible with falcon mode.
-+
-+For secure boot in falcon mode, the compute heavy authentication required for
-+the ``fitImage`` is offloaded from the slower R5 core to TIFS. This requires
-+``fitImage`` to package the necessary binaries (kernel and dtb) with a
-+pre-signed x509 certificate.
-+
-+**fitImage for falcon mode:**
-+
-+.. image:: img/fitImage_falcon.svg
-+  :alt: fitImage for falcon boot image format
-+
-+* **Sources**
-+
-+  * **Core Secdev K3**
-+
-+    | **source:** https://git.ti.com/cgit/security-development-tools/core-secdev-k3
-+    | **branch:** master
-+
-+**Follow the steps below to create a falcon compatible fitImage:**
-+
-+**3.1 Environment setup**
-+
-+.. prompt:: bash $
-+
-+  export DTB=path/to/dtb
-+  export IMAGE=path/to/kernel-image
-+
-+**3.2 fitImage creation**
-+
-+  An Image tree source (*its*) file describes the structure and contents of the
-+  final image produced by the mkimage tool.
-+
-+  To create the ``fitImage`` for falcon mode, create a file ``fitImage.its``
-+  with the following contents inside the ``core-secdev-k3`` source directory,:
-+
-+.. code-block:: dts
-+
-+    /dts-v1/;
-+
-+    / {
-+        description = "Kernel fitImage for falcon mode";
-+        #address-cells = <1>;
-+
-+        images {
-+            kernel-1 {
-+                description = "Linux kernel";
-+                data = /incbin/("Image.sec");
-+                type = "kernel";
-+                arch = "arm64";
-+                os = "linux";
-+                compression = "none";
-+                load = <0x82000000>;
-+                entry = <0x82000000>;
-+            };
-+            falcon.dtb {
-+                description = "Flattened Device Tree blob";
-+                data = /incbin/("falcon.dtb.sec");
-+                type = "flat_dt";
-+                arch = "arm64";
-+                compression = "none";
-+                load = <0x88000000>;
-+                entry = <0x88000000>;
-+            };
-+        };
-+
-+        configurations {
-+            default = "conf-falcon";
-+            conf-falcon {
-+                description = "Pre-signed Kernel and DTB";
-+                kernel = "kernel-1";
-+                fdt = "falcon.dtb";
-+            };
-+        };
-+    };
-+
-+Sign the kernel and dtb using ``secure-binary-image.sh`` and create the
-+``fitImage`` using mkimage:
-+
-+.. prompt:: bash $
-+
-+  # inside core-secdev-k3 source
-+  cp $IMAGE Image
-+  cp $DTB falcon.dtb
-+  ./scripts/secure-binary-image.sh Image Image.sec
-+  ./scripts/secure-binary-image.sh falcon.dtb falcon.dtb.sec
-+  mkimage -f fitImage.its fitImage
-+
-+Usage
-+^^^^^
-+
-+Falcon mode makes use of a cut down variant of the tispl binary called
-+``tispl_falcon.bin`` with the Cortex-A SPL and it's corresponding DTBs removed.
-+This file should be present alongside the existing ``tispl.bin`` after building
-+U-Boot for the Cortex-A cores.
-+
-+- **tispl_falcon.bin**
-+
-+.. image:: img/tifsstub_dm_tispl_falcon.bin.svg
-+  :alt: tispl_falcon.bin image format
-+
-+1. eMMC/SD Boot:
-+""""""""""""""""
-+
-+Falcon mode for K3 devices only supports SD and eMMC in FS boot. The R5 SPL
-+once loaded from the ``tiboot3.bin`` file from the boot partition looks for
-+``tispl_falcon.bin``, the DTB and fitImage (or kernel image for unauthenticated
-+boot) inside the boot directory of the second partition (rootfs).
-+
-+.. list-table::
-+   :widths: 8 8 8 25
-+   :header-rows: 1
-+
-+   * - File
-+     - Copy path on SD/eMMC
-+     - Partition
-+     - Description
-+
-+   * - ``tiboot3.bin``
-+     - ``/tiboot3.bin``
-+     - boot (fat)
-+     - R5 SPL with falcon support
-+
-+   * - ``tispl_falcon.bin``
-+     - ``/boot/tispl_falcon.bin``
-+     - rootfs (ext4)
-+     - tispl binary without SPL for the A core and DTB
-+
-+   * - ``fitImage``
-+     - ``/boot/fitImage``
-+     - rootfs (ext4)
-+     - kernel and dtb fitImage with pre-signed binaries
-+
-+2. OSPI Boot:
-+"""""""""""""
-+
-+For OSPI boot, the ``tiboot3.bin`` and ``tispl_falcon.bin`` files should be
-+flashed to the same addresses in flash as regular boot flow but the DTB and the
-+fitImage (or kernel image for unauthenticated boot) are read from the rootfs's
-+boot directory.
-+
-+Below commands can be used to download ``tiboot3.bin`` and ``tispl_falcon.bin``
-+over tftp and then flash those to OSPI at their respective addresses.
-+
-+.. prompt:: bash =>
-+
-+  sf probe
-+  tftp ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  tftp ${loadaddr} tispl_falcon.bin
-+  sf update $loadaddr 0x80000 $filesize
-+
-+R5 SPL Memory Map:
-+^^^^^^^^^^^^^^^^^^
-+
-+Standard boot:
-+""""""""""""""
-+
-+.. code-block::
-+
-+    0x80000000 +-------------------------------+ Start of DDR
-+      512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-+               |                               |
-+    0x80080000 +-------------------------------+ PRELOADED_BL33_BASE in ATF
-+     29.5MiB   |         A53 SPL + DTB +       | CONFIG_SPL_LOAD_FIT_ADDRESS
-+               | Download region for FIT in DFU|
-+    0x81e00000 +-------------------------------+
-+               |  R5 U-Boot SPL Stack + Heap   |
-+        2MiB   |       (size defined by        |
-+               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-+    0x82000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
-+      112MiB   |            Unused             |
-+    0x89000000 +-------------------------------+
-+      331MiB   | Device Manager (DM) Load Addr |
-+    0x9db00000 +-------------------------------+
-+       12MiB   |          DM Reserved          |
-+    0x9e700000 +-------------------------------+
-+        1MiB   |            Unused             |
-+    0x9e800000 +-------------------------------+ BL32_BASE in ATF
-+       24MiB   |             OPTEE             |
-+    0xa0000000 +-------------------------------+ End of DDR (512MiB)
-+
-+Falcon mode:
-+""""""""""""
-+
-+.. code-block::
-+
-+    0x80000000 +-------------------------------+ Start of DDR
-+      512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-+    0x80080000 +-------------------------------+
-+     31.5MiB   |            Unused             |
-+    0x82000000 +-------------------------------+ PRELOADED_BL33_BASE in ATF
-+               |                               | CONFIG_SYS_LOAD_ADDR
-+       57MiB   |   Kernel + initramfs Image    | CONFIG_SPL_LOAD_FIT_ADDRESS
-+               |                               |
-+    0x85900000 +-------------------------------+
-+               |                               |
-+               |  R5 U-Boot SPL Stack + Heap   |
-+       39MiB   |       (size defined by        |
-+               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-+               |                               |
-+    0x88000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
-+               |                               | K3_HW_CONFIG_BASE in ATF
-+       16MiB   |          Kernel DTB           | CONFIG_SPL_PAYLOAD_ARGS_ADDR
-+               |                               |
-+    0x89000000 +-------------------------------+
-+      331MiB   | Device Manager (DM) Load Addr |
-+    0x9db00000 +-------------------------------+
-+       12MiB   |          DM Reserved          |
-+    0x9e700000 +-------------------------------+
-+        1MiB   |            Unused             |
-+    0x9e800000 +-------------------------------+ BL32_BASE in ATF
-+       24MiB   |             OPTEE             |
-+    0xa0000000 +-------------------------------+ End of DDR (512MiB)
-+
-+.. am62x_evm_falcon_mode_end
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/img/fitImage_falcon.svg b/doc/board/ti/img/fitImage_falcon.svg
-new file mode 100644
-index 00000000000..a22e0f6564e
---- /dev/null
-+++ b/doc/board/ti/img/fitImage_falcon.svg
-@@ -0,0 +1,180 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
-+
-+<!-- Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/ -->
-+
-+<svg
-+   version="1.1"
-+   width="231"
-+   height="220"
-+   viewBox="-0.5 -0.5 231 220"
-+   id="svg72"
-+   sodipodi:docname="fitImage_falcon.svg"
-+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg">
-+  <sodipodi:namedview
-+     id="namedview74"
-+     pagecolor="#ffffff"
-+     bordercolor="#666666"
-+     borderopacity="1.0"
-+     inkscape:pageshadow="2"
-+     inkscape:pageopacity="0.0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.9"
-+     inkscape:cx="83.62069"
-+     inkscape:cy="131.72414"
-+     inkscape:window-width="1918"
-+     inkscape:window-height="1078"
-+     inkscape:window-x="0"
-+     inkscape:window-y="0"
-+     inkscape:window-maximized="0"
-+     inkscape:current-layer="g62"
-+     inkscape:showpageshadow="2"
-+     inkscape:deskcolor="#d1d1d1" />
-+  <defs
-+     id="defs2">
-+    <inkscape:perspective
-+       sodipodi:type="inkscape:persp3d"
-+       inkscape:vp_x="0 : 104.5 : 1"
-+       inkscape:vp_y="0 : 1000 : 0"
-+       inkscape:vp_z="231 : 104.5 : 1"
-+       inkscape:persp3d-origin="115.5 : 46 : 1"
-+       id="perspective1" />
-+  </defs>
-+  <g
-+     id="g62">
-+    <rect
-+       x="-0.06279549"
-+       y="-0.062792346"
-+       width="230.12561"
-+       height="219.12558"
-+       rx="34.518837"
-+       ry="27.33382"
-+       fill="#d5e8d4"
-+       stroke="#82b366"
-+       pointer-events="all"
-+       id="rect4"
-+       style="display:inline;fill:#dbe4f4;fill-opacity:1;stroke:#8166b3;stroke-width:0.888796;stroke-dasharray:none;stroke-opacity:1" />
-+    <text
-+       x="115.15599"
-+       y="156.49472"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6"
-+       style="display:inline"
-+       inkscape:label="x509 cert">x509 Certificate</text>
-+    <text
-+       x="115.15598"
-+       y="85.615631"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-1"
-+       style="display:inline"
-+       inkscape:label="x509 cert">x509 Certificate</text>
-+    <text
-+       x="114.532"
-+       y="42.263863"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-5"
-+       style="display:inline"
-+       inkscape:label="x509 cert">Fit Header</text>
-+    <text
-+       x="114.78398"
-+       y="106.884"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-5-5"
-+       style="display:inline"
-+       inkscape:label="x509 cert">Kernel Image</text>
-+    <rect
-+       style="display:none;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"
-+       id="rect1"
-+       width="171.46796"
-+       height="210.89911"
-+       x="36.799908"
-+       y="21.652758"
-+       transform="translate(-7.533886,15.237117)" />
-+    <text
-+       xml:space="preserve"
-+       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
-+       x="90.327087"
-+       y="177.15775"
-+       id="text1"><tspan
-+         sodipodi:role="line"
-+         id="tspan1"
-+         x="90.327087"
-+         y="177.15775" /></text>
-+    <text
-+       xml:space="preserve"
-+       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
-+       x="106.45526"
-+       y="214.93161"
-+       id="text2"><tspan
-+         sodipodi:role="line"
-+         id="tspan2"
-+         x="106.45526"
-+         y="214.93161" /></text>
-+    <g
-+       id="g62-6"
-+       transform="translate(-5.6022949,-9.676433)">
-+      <text
-+         x="120.33229"
-+         y="188.7475"
-+         fill="#000000"
-+         font-family="Helvetica"
-+         font-size="12px"
-+         text-anchor="middle"
-+         id="text8-8-7-6-6-5-2"
-+         style="display:inline"
-+         inkscape:label="x509 cert">DTB</text>
-+    </g>
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386"
-+       id="rect2"
-+       width="82.644012"
-+       height="17.6518"
-+       x="73.677986"
-+       y="94.992081" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386;stroke-dasharray:none"
-+       id="rect2-7"
-+       width="32.336376"
-+       height="18.068098"
-+       x="98.83181"
-+       y="165.66302" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
-+       id="rect3"
-+       width="152.43475"
-+       height="70.500725"
-+       x="38.782627"
-+       y="127.54861" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
-+       id="rect3-9"
-+       width="152.43475"
-+       height="70.500732"
-+       x="38.782623"
-+       y="56.777336" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.78506;stroke-dasharray:none"
-+       id="rect5"
-+       width="152.41736"
-+       height="36.60006"
-+       x="38.791306"
-+       y="20.211617" />
-+  </g>
-+</svg>
-diff --git a/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg b/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
-new file mode 100644
-index 00000000000..7e2793c2ed9
---- /dev/null
-+++ b/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
-@@ -0,0 +1,285 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
-+
-+<!-- Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/ -->
-+
-+<svg
-+   version="1.1"
-+   width="231"
-+   height="280"
-+   viewBox="-0.5 -0.5 231 280"
-+   id="svg72"
-+   sodipodi:docname="tifsstub_dm_tispl_falcon.bin.svg"
-+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns:xlink="http://www.w3.org/1999/xlink"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg"
-+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-+  <sodipodi:namedview
-+     id="namedview74"
-+     pagecolor="#ffffff"
-+     bordercolor="#666666"
-+     borderopacity="1.0"
-+     inkscape:pageshadow="2"
-+     inkscape:pageopacity="0.0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.3561254"
-+     inkscape:cx="175.5"
-+     inkscape:cy="151.30774"
-+     inkscape:window-width="1920"
-+     inkscape:window-height="1080"
-+     inkscape:window-x="0"
-+     inkscape:window-y="0"
-+     inkscape:window-maximized="0"
-+     inkscape:current-layer="g62"
-+     inkscape:showpageshadow="2"
-+     inkscape:deskcolor="#d1d1d1" />
-+  <defs
-+     id="defs2">
-+    <inkscape:perspective
-+       sodipodi:type="inkscape:persp3d"
-+       inkscape:vp_x="0 : 104.5 : 1"
-+       inkscape:vp_y="0 : 1000 : 0"
-+       inkscape:vp_z="231 : 104.5 : 1"
-+       inkscape:persp3d-origin="115.5 : 46 : 1"
-+       id="perspective1" />
-+  </defs>
-+  <g
-+     id="g62">
-+    <rect
-+       x="-0.0064085587"
-+       y="-0.0064054145"
-+       width="230.01283"
-+       height="278.39682"
-+       rx="34.501923"
-+       ry="34.727341"
-+       fill="#d5e8d4"
-+       stroke="#82b366"
-+       pointer-events="all"
-+       id="rect4"
-+       style="stroke-width:1.00331" />
-+    <rect
-+       x="40"
-+       y="30"
-+       width="160"
-+       height="60"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect6" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g12">
-+      <switch
-+         id="switch10">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 60px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">FIT Header</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="64"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text8">FIT Header</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="160"
-+       width="160"
-+       height="50"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect14" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g20">
-+      <switch
-+         id="switch18">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 185px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TIFS Stub<xhtml:br />
-+
-+(GP, HS-FS, HS-SE)</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="189"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text16">TIFS Stub...</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="90"
-+       width="160"
-+       height="30"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect22" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g28">
-+      <switch
-+         id="switch26">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 105px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TF-A</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="109"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text24">TF-A</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="120"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect30" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g36">
-+      <switch
-+         id="switch34">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 140px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">OP-TEE</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="144"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text32">OP-TEE</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="210"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect38" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g44">
-+      <switch
-+         id="switch42">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 230px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">R5 DM FW</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="234"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text40">R5 DM FW</text>
-+      </switch>
-+    </g>
-+  </g>
-+  <switch
-+     id="switch70">
-+    <g
-+       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+       id="g64" />
-+    <a
-+       transform="translate(0,-5)"
-+       xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
-+       target="_blank"
-+       id="a68">
-+      <text
-+         text-anchor="middle"
-+         font-size="10px"
-+         x="50%"
-+         y="100%"
-+         id="text66">Text is not SVG - cannot display</text>
-+    </a>
-+  </switch>
-+</svg>
--- 
-2.49.0
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/25970
 
+
+The following changes since commit 9d3f1ebaf8751f0287b5d02158cc706435f8fb19:
+
+  tools/make_pip: Use venv when invoking pip (2025-04-24 16:30:37 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20250428
+
+for you to fetch changes up to 9d679cc4adbf2fdf077411bb4e2cb5ef4c1fd8b8:
+
+  configs: stm32mp25: enable DISTRO_DEFAULT and BOOTCOMMAND (2025-04-25 16:00:23 +0200)
+
+----------------------------------------------------------------
+- Add OF_UPSTREAM flag support for STi, STM32 MCU and MPU platforms.
+- Add ETZPC as system bus for STM32MP1 platforms
+- Add RIFSC as sytem bus for STM32MP2 platforms
+- Update STM32MP2 board/machine support:
+  - update cmd_stm32key.
+  - update cmd_stm32prog.
+  - update STM32MP25 configs.
+  - add leds and buttons support.
+  - add boot_mode support (USB/PXE/MMC/NOR/NAND).
+  - add bootcmd support.
+  - enable MMC support.
+
+----------------------------------------------------------------
+Lionel Debieve (3):
+      ARM: stm32mp: add ETZPC system bus driver for STM32MP1
+      ARM: dts: stm32: add ETZPC as a system bus for STM32MP1x boards
+      stm32mp: fdt: remove ETZPC peripheral cleanup
+
+Patrice Chotard (23):
+      ARM: dts: sti: convert stih410-b2260 board to OF_UPSTREAM
+      ARM: dts: stm32: convert stm23h7 boards to OF_UPSTREAM
+      ARM: dts: stm32: convert stm23f7 boards to OF_UPSTREAM
+      ARM: dts: stm32: convert stm23f4 boards to OF_UPSTREAM
+      ARM: dts: stm32: convert stm32mp13 board to OF_UPSTREAM
+      ARM: dts: stm32: convert stm32mp15 board to OF_UPSTREAM
+      configs: stm32: introduce stm32mp15-odyssey_defconfig
+      clk: stm32mp1: fix DSI clock setting
+      ARM: dts: stm32: convert stm32mp2 board to OF_UPSTREAM
+      configs: stm32mp25: add MMC support
+      configs: stm32mp25: add bootcmd for stm32mp25 platform
+      board: st: stm32mp2: add env_get_location()
+      board: st: stm32mp2: add mmc_get_env_dev()
+      ARM: dts: stm32: add "u-boot,mmc-env-partition" for stm32mp257f-ev1-u-boot
+      configs: stm32mp25: add support of NAND and NOR boot
+      configs: stm32mp25: add USB host boot support
+      configs: stm32mp25: add PXE boot support
+      ARM: dts: stm32: add sdmmc1 fixed clock for stm32mp257f-ev1-u-boot
+      arm: stm32mp: increase EARLY_TLB_SIZE to 0x10000
+      arm: stm32mp: disable console for UART serial boot
+      arm: stm32mp: fix package IDs for stm32mp25
+      arm: stm32mp: cmd_stm32key: update command for stm32mp25x
+      configs: stm32mp25: enable DISTRO_DEFAULT and BOOTCOMMAND
+
+Patrick Delaunay (9):
+      ARM: stm32mp: add RIFSC system bus driver for STM32MP25
+      arm: stm32mp: add boot_mode support for STM32MP25
+      board: st: stm32mp2: add led support
+      board: st: stm32mp2: add user button support
+      board: st: stm32mp2: change bootcmd for ST boards
+      arm: stm32mp: implement new STM32MP25 revision ID system
+      arm: stm32mp: add helper function stm32mp_is_closed()
+      arm: stm32mp: stm32prog: PTA BSEC is not supported on closed device
+      arm: stm32mp: stm32prog: add support rootfs-a for OTA
+
+ arch/arm/dts/Makefile                                          |   31 --
+ arch/arm/dts/st-pincfg.h                                       |   72 ---
+ arch/arm/dts/stih407-clock.dtsi                                |  323 -------------
+ arch/arm/dts/stih407-family.dtsi                               | 1000 ----------------------------------------
+ arch/arm/dts/stih407-pinctrl.dtsi                              | 1262 ---------------------------------------------------
+ arch/arm/dts/stih410-b2260-u-boot.dtsi                         |   46 +-
+ arch/arm/dts/stih410-b2260.dts                                 |  214 ---------
+ arch/arm/dts/stih410-clock.dtsi                                |  333 --------------
+ arch/arm/dts/stih410-pinctrl.dtsi                              |   31 --
+ arch/arm/dts/stih410.dtsi                                      |  300 ------------
+ arch/arm/dts/stm32429i-eval.dts                                |  284 ------------
+ arch/arm/dts/stm32746g-eval.dts                                |  186 --------
+ arch/arm/dts/stm32f4-pinctrl.dtsi                              |  447 ------------------
+ arch/arm/dts/stm32f429-disco.dts                               |  190 --------
+ arch/arm/dts/stm32f429-pinctrl.dtsi                            |   55 ---
+ arch/arm/dts/stm32f429.dtsi                                    |  758 -------------------------------
+ arch/arm/dts/stm32f469-disco.dts                               |  213 ---------
+ arch/arm/dts/stm32f469-pinctrl.dtsi                            |   55 ---
+ arch/arm/dts/stm32f469.dtsi                                    |   18 -
+ arch/arm/dts/stm32f7-pinctrl.dtsi                              |  415 -----------------
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi                       |   13 +-
+ arch/arm/dts/stm32f746-disco.dts                               |  169 -------
+ arch/arm/dts/stm32f746-pinctrl.dtsi                            |   11 -
+ arch/arm/dts/stm32f746.dtsi                                    |  613 -------------------------
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi                       |   60 +--
+ arch/arm/dts/stm32f769-disco.dts                               |  133 ------
+ arch/arm/dts/stm32f769-pinctrl.dtsi                            |   11 -
+ arch/arm/dts/stm32h7-pinctrl.dtsi                              |  274 -----------
+ arch/arm/dts/stm32h7-u-boot.dtsi                               |    1 -
+ arch/arm/dts/stm32h743.dtsi                                    |  695 ----------------------------
+ arch/arm/dts/stm32h743i-disco.dts                              |   75 ---
+ arch/arm/dts/stm32h743i-eval.dts                               |  160 -------
+ arch/arm/dts/stm32h750.dtsi                                    |    5 -
+ arch/arm/dts/stm32h750i-art-pi.dts                             |  188 --------
+ arch/arm/dts/stm32mp13-pinctrl.dtsi                            |  888 ------------------------------------
+ arch/arm/dts/stm32mp13-u-boot.dtsi                             |    4 +
+ arch/arm/dts/stm32mp131.dtsi                                   | 1567 ---------------------------------------------------------------
+ arch/arm/dts/stm32mp133.dtsi                                   |   98 ----
+ arch/arm/dts/stm32mp135.dtsi                                   |   12 -
+ arch/arm/dts/stm32mp135f-dk.dts                                |  376 ---------------
+ arch/arm/dts/stm32mp13xc.dtsi                                  |   18 -
+ arch/arm/dts/stm32mp13xf.dtsi                                  |   18 -
+ arch/arm/dts/stm32mp15-pinctrl.dtsi                            | 2826 -----------------------------------------------------------------------------------------------------------------
+ arch/arm/dts/stm32mp15-scmi.dtsi                               |   88 ----
+ arch/arm/dts/stm32mp15-u-boot.dtsi                             |    4 +
+ arch/arm/dts/stm32mp151.dtsi                                   | 1868 ---------------------------------------------------------------------------
+ arch/arm/dts/stm32mp153.dtsi                                   |   59 ---
+ arch/arm/dts/stm32mp157.dtsi                                   |   48 --
+ arch/arm/dts/stm32mp157a-dk1-scmi.dts                          |   82 ----
+ arch/arm/dts/stm32mp157a-dk1.dts                               |   25 -
+ arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts            |   49 --
+ arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts |  161 -------
+ arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts     |   59 ---
+ arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi                |  148 ------
+ arch/arm/dts/stm32mp157c-dk2-scmi.dts                          |   88 ----
+ arch/arm/dts/stm32mp157c-dk2.dts                               |   94 ----
+ arch/arm/dts/stm32mp157c-ed1-scmi.dts                          |   87 ----
+ arch/arm/dts/stm32mp157c-ed1.dts                               |  403 ----------------
+ arch/arm/dts/stm32mp157c-ev1-scmi.dts                          |   93 ----
+ arch/arm/dts/stm32mp157c-ev1.dts                               |  414 -----------------
+ arch/arm/dts/stm32mp15xc.dtsi                                  |   18 -
+ arch/arm/dts/stm32mp15xx-dkx.dtsi                              |  741 ------------------------------
+ arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi                        |   85 ----
+ arch/arm/dts/stm32mp15xxab-pinctrl.dtsi                        |   57 ---
+ arch/arm/dts/stm32mp15xxac-pinctrl.dtsi                        |   73 ---
+ arch/arm/dts/stm32mp15xxad-pinctrl.dtsi                        |   57 ---
+ arch/arm/dts/stm32mp25-pinctrl.dtsi                            |   38 --
+ arch/arm/dts/stm32mp251.dtsi                                   |  301 ------------
+ arch/arm/dts/stm32mp253.dtsi                                   |   23 -
+ arch/arm/dts/stm32mp255.dtsi                                   |    9 -
+ arch/arm/dts/stm32mp257.dtsi                                   |    9 -
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi                       |   81 ++++
+ arch/arm/dts/stm32mp257f-ev1.dts                               |   55 ---
+ arch/arm/dts/stm32mp25xc.dtsi                                  |    8 -
+ arch/arm/dts/stm32mp25xf.dtsi                                  |    8 -
+ arch/arm/dts/stm32mp25xxai-pinctrl.dtsi                        |   83 ----
+ arch/arm/dts/stm32mp25xxak-pinctrl.dtsi                        |   71 ---
+ arch/arm/dts/stm32mp25xxal-pinctrl.dtsi                        |   71 ---
+ arch/arm/mach-stm32/Kconfig                                    |    3 +
+ arch/arm/mach-stm32mp/Kconfig                                  |   11 +-
+ arch/arm/mach-stm32mp/cmd_stm32key.c                           |  286 ++++++++++--
+ arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig                    |    2 +
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c                |    6 +-
+ arch/arm/mach-stm32mp/include/mach/etzpc.h                     |   32 ++
+ arch/arm/mach-stm32mp/include/mach/rif.h                       |   26 ++
+ arch/arm/mach-stm32mp/include/mach/stm32.h                     |   16 +
+ arch/arm/mach-stm32mp/include/mach/sys_proto.h                 |   24 +-
+ arch/arm/mach-stm32mp/stm32mp1/Makefile                        |    1 +
+ arch/arm/mach-stm32mp/stm32mp1/etzpc.c                         |  194 ++++++++
+ arch/arm/mach-stm32mp/stm32mp1/fdt.c                           |  258 -----------
+ arch/arm/mach-stm32mp/stm32mp2/Makefile                        |    1 +
+ arch/arm/mach-stm32mp/stm32mp2/cpu.c                           |  170 ++++++-
+ arch/arm/mach-stm32mp/stm32mp2/rifsc.c                         |  364 +++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c                    |   31 +-
+ board/st/stm32mp1/MAINTAINERS                                  |    2 +
+ board/st/stm32mp2/Kconfig                                      |    2 +-
+ board/st/stm32mp2/MAINTAINERS                                  |    1 +
+ board/st/stm32mp2/stm32mp2.c                                   |  140 +++++-
+ configs/stih410-b2260_defconfig                                |    3 +-
+ configs/stm32746g-eval_defconfig                               |    3 +-
+ configs/stm32746g-eval_spl_defconfig                           |    3 +-
+ configs/stm32f429-discovery_defconfig                          |    2 +-
+ configs/stm32f429-evaluation_defconfig                         |    2 +-
+ configs/stm32f469-discovery_defconfig                          |    2 +-
+ configs/stm32f746-disco_defconfig                              |    3 +-
+ configs/stm32f746-disco_spl_defconfig                          |    3 +-
+ configs/stm32f769-disco_defconfig                              |    4 +-
+ configs/stm32f769-disco_spl_defconfig                          |    4 +-
+ configs/stm32h743-disco_defconfig                              |    2 +-
+ configs/stm32h743-eval_defconfig                               |    2 +-
+ configs/stm32h750-art-pi_defconfig                             |    2 +-
+ configs/stm32mp13_defconfig                                    |    2 +-
+ configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig             |    2 +-
+ configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig            |    2 +-
+ configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig    |    2 +-
+ configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig        |    2 +-
+ configs/stm32mp15-odyssey_defconfig                            |  172 +++++++
+ configs/stm32mp15_basic_defconfig                              |    4 +-
+ configs/stm32mp15_defconfig                                    |    4 +-
+ configs/stm32mp15_trusted_defconfig                            |    4 +-
+ configs/stm32mp25_defconfig                                    |   34 +-
+ drivers/clk/stm32/clk-stm32mp1.c                               |    1 +
+ include/configs/stm32f746-disco.h                              |    2 +-
+ include/configs/stm32mp25_common.h                             |  102 +++++
+ include/configs/stm32mp25_st_common.h                          |   51 +++
+ include/dt-bindings/clock/stih407-clks.h                       |   90 ----
+ include/dt-bindings/clock/stih410-clks.h                       |   25 -
+ include/dt-bindings/mfd/st-lpc.h                               |   16 -
+ include/dt-bindings/reset/stih407-resets.h                     |   65 ---
+ 129 files changed, 1761 insertions(+), 20430 deletions(-)
+ delete mode 100644 arch/arm/dts/st-pincfg.h
+ delete mode 100644 arch/arm/dts/stih407-clock.dtsi
+ delete mode 100644 arch/arm/dts/stih407-family.dtsi
+ delete mode 100644 arch/arm/dts/stih407-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stih410-b2260.dts
+ delete mode 100644 arch/arm/dts/stih410-clock.dtsi
+ delete mode 100644 arch/arm/dts/stih410-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stih410.dtsi
+ delete mode 100644 arch/arm/dts/stm32429i-eval.dts
+ delete mode 100644 arch/arm/dts/stm32746g-eval.dts
+ delete mode 100644 arch/arm/dts/stm32f4-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32f429-disco.dts
+ delete mode 100644 arch/arm/dts/stm32f429-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32f429.dtsi
+ delete mode 100644 arch/arm/dts/stm32f469-disco.dts
+ delete mode 100644 arch/arm/dts/stm32f469-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32f469.dtsi
+ delete mode 100644 arch/arm/dts/stm32f7-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32f746-disco.dts
+ delete mode 100644 arch/arm/dts/stm32f746-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32f746.dtsi
+ delete mode 100644 arch/arm/dts/stm32f769-disco.dts
+ delete mode 100644 arch/arm/dts/stm32f769-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32h7-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32h743.dtsi
+ delete mode 100644 arch/arm/dts/stm32h743i-disco.dts
+ delete mode 100644 arch/arm/dts/stm32h743i-eval.dts
+ delete mode 100644 arch/arm/dts/stm32h750.dtsi
+ delete mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
+ delete mode 100644 arch/arm/dts/stm32mp13-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp131.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp133.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp135.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp135f-dk.dts
+ delete mode 100644 arch/arm/dts/stm32mp13xc.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp13xf.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp15-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp15-scmi.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp151.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp153.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157a-dk1-scmi.dts
+ delete mode 100644 arch/arm/dts/stm32mp157a-dk1.dts
+ delete mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
+ delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
+ delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
+ delete mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157c-dk2-scmi.dts
+ delete mode 100644 arch/arm/dts/stm32mp157c-dk2.dts
+ delete mode 100644 arch/arm/dts/stm32mp157c-ed1-scmi.dts
+ delete mode 100644 arch/arm/dts/stm32mp157c-ed1.dts
+ delete mode 100644 arch/arm/dts/stm32mp157c-ev1-scmi.dts
+ delete mode 100644 arch/arm/dts/stm32mp157c-ev1.dts
+ delete mode 100644 arch/arm/dts/stm32mp15xc.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp15xx-dkx.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp15xxab-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp15xxac-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp15xxad-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp251.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp253.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp255.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp257.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
+ delete mode 100644 arch/arm/dts/stm32mp25xc.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp25xf.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
+ create mode 100644 arch/arm/mach-stm32mp/include/mach/etzpc.h
+ create mode 100644 arch/arm/mach-stm32mp/include/mach/rif.h
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp1/etzpc.c
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/rifsc.c
+ create mode 100644 configs/stm32mp15-odyssey_defconfig
+ create mode 100644 include/configs/stm32mp25_st_common.h
+ delete mode 100644 include/dt-bindings/clock/stih407-clks.h
+ delete mode 100644 include/dt-bindings/clock/stih410-clks.h
+ delete mode 100644 include/dt-bindings/mfd/st-lpc.h
+ delete mode 100644 include/dt-bindings/reset/stih407-resets.h
