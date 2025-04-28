@@ -4,109 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B184EC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:58:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B7C8C3ABA4
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 14:01:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47A0782A33;
-	Mon, 28 Apr 2025 15:58:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BD92082A33;
+	Mon, 28 Apr 2025 16:01:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QVUTOBxa";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D12CE82A53; Mon, 28 Apr 2025 15:58:35 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84CB082A31
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:58:33 +0200 (CEST)
+ id 69F0382A53; Mon, 28 Apr 2025 16:01:08 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 5DFB482A31
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 16:01:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1745848710; x=1746453510; i=xypron.glpk@gmx.de;
- bh=leXJLRg3FkNQKhf8999F1Kk5mJeDbCqjdYD9CIXpOLY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=QVUTOBxa/Ua4sMElIPKb7Fa30x4KVc+0fFxMk3gLTaMkF/4qRSQWZugoagQfNzPC
- ZYpsrA8GQzl12bl0BvhNNhpEmM55sVjQ9wgfjIvV1ExCAJH/ZBtHkNJZPIX+b0bwZ
- WjmTsXNcQev9hbD4WO4gGKuvDsGLlSmFkZ5Gi0Ks2x7CQJP1VkAL7iEv/hGAbnKR4
- 6FSq6ckOtUehTWuFbUTo6N+CSRSrSE2sZzje/6tI7cpJJ9NNGziiFLkrUK2ps8a6s
- Z+sgfLg1cZjx0qELWpDKdrro72s8r9Sp3U8v6dz4Q+sPr6siLWQn3HfmOTVto5pfq
- xEHZdwFu7OWXf9hkqA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mqb1c-1uviGE1qG8-00jYBs; Mon, 28
- Apr 2025 15:58:30 +0200
-Message-ID: <4883b282-0c35-45be-8483-aacf03a6c8c2@gmx.de>
-Date: Mon, 28 Apr 2025 15:58:26 +0200
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 28F271516;
+ Mon, 28 Apr 2025 07:00:58 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6232E3F66E;
+ Mon, 28 Apr 2025 07:01:03 -0700 (PDT)
+Date: Mon, 28 Apr 2025 15:01:00 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej Skrabec <jernej.skrabec@gmail.com>
+Cc: jagan@amarulasolutions.com, trini@konsulko.com, macromorgan@hotmail.com,
+ uwu@icenowy.me, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 5/5] sunxi: h6/h616: Reuse common DRAM infrastructure
+Message-ID: <20250428150100.30950848@donnerap.manchester.arm.com>
+In-Reply-To: <20250411161439.4743-6-jernej.skrabec@gmail.com>
+References: <20250411161439.4743-1-jernej.skrabec@gmail.com>
+ <20250411161439.4743-6-jernej.skrabec@gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] efi: add EFI_DEBUG_IMAGE_INFO for debug
-To: Paul Liu <paul.liu@linaro.org>
-Cc: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20250423213145.1959046-1-paulliu@debian.org>
- <20250423213145.1959046-4-paulliu@debian.org>
- <f9010568-6a52-4486-9c29-794107f2e840@gmx.de>
- <CALG-KHyi4R7q1Qb6OnMmZCGVySA5dg-pD9yNEnf7SQ8VJyobwA@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CALG-KHyi4R7q1Qb6OnMmZCGVySA5dg-pD9yNEnf7SQ8VJyobwA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LBMPZkUSZbcmuMWSxPOKAEfgfy2qzcuX+oJPCKsbANTdKxMi9CR
- e94yzQuncz36cmWyCV26+tzaIHPN4/e+enYy1I4y6Ol/UTan6wj6b3QcgMTvctilAbuf6Tw
- xNh2HhG8H6z1b9sfxm5yABxzTgx+lttZUmJxbJJ4nYuou2NECFFFfMTOl5ejjS+0imr7Z9y
- NfO5xU/kqQuujVJC+8KqA==
-UI-OutboundReport: notjunk:1;M01:P0:cRM5DIQLyt8=;jQB4NqB7YLkAfQuCAPd4/LQi5Bv
- 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
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,29 +58,539 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.04.25 14:14, Paul Liu wrote:
-> Hi Heinrich,
->=20
-> Yes. I just copied the code from EDK2. Seems this is incorrect. I'll try=
-=20
-> to ask some help from EDK2 people.
-> Actually I'm working on Android (AOSP)'s GBL project. It is an EFI=20
-> application, used as a bootloader for loading and booting Android images=
-.
-> So some people=C2=A0are asking how to debug that EFI application on real=
-=20
-> hardwares. And since GBL runs on both U-boot and EDK2, the debug method=
-=20
-> should
-> follow the standard so that the downstream people can have a unified way=
-=20
-> to debug the application.
->=20
-> I'll ask EDK2 people for help and then continue working on this patch.
+On Fri, 11 Apr 2025 18:14:39 +0200
+Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
 
-I have created https://github.com/tianocore/edk2/pull/11019
+> H616 rank and size detection code is superior to the H6. Nevertheless,
+> they are structurally the same. Split functions from H616 into new file
+> and reuse them in H6 DRAM driver too. This should also fix some bugs for
+> H6 too, like incorrect DRAM size detection.
 
-Best regards
+So as I dropped patch 1/5 for now, I also backed out the respective
+changes from this patch.
+The H616 part is basically identical before and after, but of course the
+H6 sees code changes. I tested this on my two H6 boards, and they still
+worked (TM), so I am going to take it.
 
-Heinrich
+> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> ---
+>  .../include/asm/arch-sunxi/dram_dw_helpers.h  |  22 +++
+>  arch/arm/mach-sunxi/Makefile                  |   4 +-
+>  arch/arm/mach-sunxi/dram_dw_helpers.c         | 160 ++++++++++++++++++
+>  arch/arm/mach-sunxi/dram_sun50i_h6.c          |  91 +---------
+>  arch/arm/mach-sunxi/dram_sun50i_h616.c        | 155 +----------------
+>  5 files changed, 190 insertions(+), 242 deletions(-)
+>  create mode 100644 arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
+>  create mode 100644 arch/arm/mach-sunxi/dram_dw_helpers.c
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h b/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
+> new file mode 100644
+> index 000000000000..bc9e0d868c55
+> --- /dev/null
+> +++ b/arch/arm/include/asm/arch-sunxi/dram_dw_helpers.h
+> @@ -0,0 +1,22 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Helpers that are commonly used with DW memory controller.
+> + *
+> + * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
+> + *
+> + */
+> +
+> +#ifndef _DRAM_DW_HELPERS_H
+> +#define _DRAM_DW_HELPERS_H
+> +
+> +#include <asm/arch/dram.h>
+> +
+> +bool mctl_core_init(const struct dram_para *para,
+> +		    const struct dram_config *config);
+> +void mctl_auto_detect_rank_width(const struct dram_para *para,
+> +				 struct dram_config *config);
+> +void mctl_auto_detect_dram_size(const struct dram_para *para,
+> +				struct dram_config *config);
+> +unsigned long mctl_calc_size(const struct dram_config *config);
+> +
+> +#endif
+> diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
+> index eb6a49119a13..a33cd5b0f07a 100644
+> --- a/arch/arm/mach-sunxi/Makefile
+> +++ b/arch/arm/mach-sunxi/Makefile
+> @@ -41,8 +41,8 @@ obj-$(CONFIG_DRAM_SUN9I)	+= dram_sun9i.o
+>  obj-$(CONFIG_SPL_SPI_SUNXI)	+= spl_spi_sunxi.o
+>  obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_sunxi_dw.o
+>  obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_timings/
+> -obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o
+> +obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o dram_dw_helpers.o
+>  obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_timings/
+> -obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o
+> +obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o dram_dw_helpers.o
+>  obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_timings/
+>  endif
+> diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> new file mode 100644
+> index 000000000000..885d1f2c0b12
+> --- /dev/null
+> +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> @@ -0,0 +1,160 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Helpers that are commonly used with DW memory controller.
+> + *
+> + * (C) Copyright 2025 Jernej Skrabec <jernej.skrabec@gmail.com>
+> + *
+> + */
+> +
+> +#include <init.h>
+> +#include <asm/arch/dram_dw_helpers.h>
+> +
+> +void mctl_auto_detect_rank_width(const struct dram_para *para,
+> +				 struct dram_config *config)
+> +{
+> +	/* this is minimum size that it's supported */
+> +	config->cols = 8;
+> +	config->rows = 13;
+> +
+> +	/*
+> +	 * Strategy here is to test most demanding combination first and least
+> +	 * demanding last, otherwise HW might not be fully utilized. For
+> +	 * example, half bus width and rank = 1 combination would also work
+> +	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
+> +	 * visible.
+> +	 */
+> +
+> +	debug("testing 32-bit width, rank = 2\n");
+> +	config->bus_full_width = 1;
+> +	config->ranks = 2;
+> +	if (mctl_core_init(para, config))
+> +		return;
+> +
+> +	debug("testing 32-bit width, rank = 1\n");
+> +	config->bus_full_width = 1;
+> +	config->ranks = 1;
+> +	if (mctl_core_init(para, config))
+> +		return;
+> +
+> +	debug("testing 16-bit width, rank = 2\n");
+> +	config->bus_full_width = 0;
+> +	config->ranks = 2;
+> +	if (mctl_core_init(para, config))
+> +		return;
+> +
+> +	debug("testing 16-bit width, rank = 1\n");
+> +	config->bus_full_width = 0;
+> +	config->ranks = 1;
+> +	if (mctl_core_init(para, config))
+> +		return;
+> +
+> +	panic("This DRAM setup is currently not supported.\n");
+> +}
+> +
+> +static void mctl_write_pattern(void)
+> +{
+> +	unsigned int i;
+> +	u32 *ptr, val;
+> +
+> +	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
+> +	for (i = 0; i < 16; ptr++, i++) {
+> +		if (i & 1)
+> +			val = ~(ulong)ptr;
+> +		else
+> +			val = (ulong)ptr;
+> +		writel(val, ptr);
+> +	}
+> +}
+> +
+> +static bool mctl_check_pattern(ulong offset)
+> +{
+> +	unsigned int i;
+> +	u32 *ptr, val;
+> +
+> +	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
+> +	for (i = 0; i < 16; ptr++, i++) {
+> +		if (i & 1)
+> +			val = ~(ulong)ptr;
+> +		else
+> +			val = (ulong)ptr;
+> +		if (val != *(ptr + offset / 4))
+> +			return false;
+> +	}
+> +
+> +	return true;
+> +}
+> +
+> +void mctl_auto_detect_dram_size(const struct dram_para *para,
+> +				struct dram_config *config)
+> +{
+> +	unsigned int shift, cols, rows, found;
+> +	u32 buffer[16];
+> +
+> +	/* max. config for columns, but not rows */
+> +	config->cols = 11;
+> +	config->rows = 13;
+> +	mctl_core_init(para, config);
+> +
+> +	/*
+> +	 * Store content so it can be restored later. This is important
+> +	 * if controller was already initialized and holds any data
+> +	 * which is important for restoring system.
+> +	 */
+> +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> +
+> +	mctl_write_pattern();
+> +
+> +	shift = config->bus_full_width + 1;
+> +
+> +	/* detect column address bits */
+> +	found = 0;
+> +	for (cols = 8; cols < 11; cols++) {
+> +		if (mctl_check_pattern(1ULL << (cols + shift))) {
+> +			found = 1;
+> +			break;
+> +		}
+> +	}
+> +	if (!found)
+> +		panic("DRAM init failed: Can't detect number of columns!");
+> +	debug("detected %u columns\n", cols);
+> +
+> +	/* restore data */
+> +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> +
+> +	/* reconfigure to make sure that all active rows are accessible */
+> +	config->cols = 8;
+> +	config->rows = 17;
+> +	mctl_core_init(para, config);
+> +
+> +	/* store data again as it might be moved */
+> +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> +
+> +	mctl_write_pattern();
+> +
+> +	/* detect row address bits */
+> +	shift = config->bus_full_width + 4 + config->cols;
+> +	found = 0;
+> +	for (rows = 13; rows < 17; rows++) {
+> +		if (mctl_check_pattern(1ULL << (rows + shift))) {
+> +			found = 1;
+> +			break;
+> +		}
+> +	}
+> +	if (!found)
+> +		panic("DRAM init failed: Can't detect number of rows!");
+> +	debug("detected %u rows\n", rows);
+> +
+> +	/* restore data again */
+> +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> +
+> +	config->cols = cols;
+> +	config->rows = rows;
+> +}
+> +
+> +unsigned long mctl_calc_size(const struct dram_config *config)
+> +{
+> +	u8 width = config->bus_full_width ? 4 : 2;
+> +
+> +	/* 8 banks */
+> +	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
+> +}
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c b/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> index 6a9e53f965eb..fbb865131e08 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> @@ -10,6 +10,7 @@
+>  #include <asm/io.h>
+>  #include <asm/arch/clock.h>
+>  #include <asm/arch/dram.h>
+> +#include <asm/arch/dram_dw_helpers.h>
+>  #include <asm/arch/cpu.h>
+>  #include <asm/arch/prcm.h>
+>  #include <linux/bitops.h>
+> @@ -40,8 +41,8 @@ static void mctl_com_init(const struct dram_para *para,
+>  static bool mctl_channel_init(const struct dram_para *para,
+>  			      const struct dram_config *config);
+>  
+> -static bool mctl_core_init(const struct dram_para *para,
+> -			   const struct dram_config *config)
+> +bool mctl_core_init(const struct dram_para *para,
+> +		    const struct dram_config *config)
+>  {
+>  	mctl_sys_init(para->clk);
+>  	mctl_com_init(para, config);
+> @@ -560,92 +561,6 @@ static bool mctl_channel_init(const struct dram_para *para,
+>  	return true;
+>  }
+>  
+> -static void mctl_auto_detect_rank_width(const struct dram_para *para,
+> -					struct dram_config *config)
+> -{
+> -	/* this is minimum size that it's supported */
+> -	config->cols = 8;
+> -	config->rows = 13;
+> -
+> -	/*
+> -	 * Previous versions of this driver tried to auto detect the rank
+> -	 * and width by looking at controller registers. However this proved
+> -	 * to be not reliable, so this approach here is the more robust
+> -	 * solution. Check the git history for details.
+> -	 *
+> -	 * Strategy here is to test most demanding combination first and least
+> -	 * demanding last, otherwise HW might not be fully utilized. For
+> -	 * example, half bus width and rank = 1 combination would also work
+> -	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
+> -	 * visible.
+> -	 */
+> -
+> -	debug("testing 32-bit width, rank = 2\n");
+> -	config->bus_full_width = 1;
+> -	config->ranks = 2;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	debug("testing 32-bit width, rank = 1\n");
+> -	config->bus_full_width = 1;
+> -	config->ranks = 1;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	debug("testing 16-bit width, rank = 2\n");
+> -	config->bus_full_width = 0;
+> -	config->ranks = 2;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	debug("testing 16-bit width, rank = 1\n");
+> -	config->bus_full_width = 0;
+> -	config->ranks = 1;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	panic("This DRAM setup is currently not supported.\n");
+> -}
+> -
+> -static void mctl_auto_detect_dram_size(const struct dram_para *para,
+> -				       struct dram_config *config)
+> -{
+> -	/* TODO: non-(LP)DDR3 */
+> -
+> -	/* detect row address bits */
+> -	config->cols = 8;
+> -	config->rows = 18;
+> -	mctl_core_init(para, config);
+> -
+> -	for (config->rows = 13; config->rows < 18; config->rows++) {
+> -		/* 8 banks, 8 bit per byte and 16/32 bit width */
+> -		if (mctl_mem_matches((1 << (config->rows + config->cols +
+> -					    4 + config->bus_full_width))))
+> -			break;
+> -	}
+> -
+> -	/* detect column address bits */
+> -	config->cols = 11;
+> -	mctl_core_init(para, config);
+> -
+> -	for (config->cols = 8; config->cols < 11; config->cols++) {
+> -		/* 8 bits per byte and 16/32 bit width */
+> -		if (mctl_mem_matches(1 << (config->cols + 1 +
+> -					   config->bus_full_width)))
+> -			break;
+> -	}
+> -}
+> -
+> -unsigned long mctl_calc_size(const struct dram_config *config)
+> -{
+> -	u8 width = config->bus_full_width ? 4 : 2;
+> -
+> -	/* TODO: non-(LP)DDR3 */
+> -
+> -	/* 8 banks */
+> -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
+> -}
+> -
+>  #define SUN50I_H6_LPDDR3_DX_WRITE_DELAYS			\
+>  	{{  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+>  	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> index d1768a7e7d3a..80d9de557876 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> @@ -17,6 +17,7 @@
+>  #include <asm/io.h>
+>  #include <asm/arch/clock.h>
+>  #include <asm/arch/dram.h>
+> +#include <asm/arch/dram_dw_helpers.h>
+>  #include <asm/arch/cpu.h>
+>  #include <asm/arch/prcm.h>
+>  #include <linux/bitops.h>
+> @@ -1310,164 +1311,14 @@ static bool mctl_ctrl_init(const struct dram_para *para,
+>  	return true;
+>  }
+>  
+> -static bool mctl_core_init(const struct dram_para *para,
+> -			   const struct dram_config *config)
+> +bool mctl_core_init(const struct dram_para *para,
+> +		    const struct dram_config *config)
+>  {
+>  	mctl_sys_init(para->clk);
+>  
+>  	return mctl_ctrl_init(para, config);
+>  }
+>  
+> -static void mctl_auto_detect_rank_width(const struct dram_para *para,
+> -					struct dram_config *config)
+> -{
+> -	/* this is minimum size that it's supported */
+> -	config->cols = 8;
+> -	config->rows = 13;
+> -
+> -	/*
+> -	 * Strategy here is to test most demanding combination first and least
+> -	 * demanding last, otherwise HW might not be fully utilized. For
+> -	 * example, half bus width and rank = 1 combination would also work
+> -	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
+> -	 * visible.
+> -	 */
+> -
+> -	debug("testing 32-bit width, rank = 2\n");
+> -	config->bus_full_width = 1;
+> -	config->ranks = 2;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	debug("testing 32-bit width, rank = 1\n");
+> -	config->bus_full_width = 1;
+> -	config->ranks = 1;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	debug("testing 16-bit width, rank = 2\n");
+> -	config->bus_full_width = 0;
+> -	config->ranks = 2;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	debug("testing 16-bit width, rank = 1\n");
+> -	config->bus_full_width = 0;
+> -	config->ranks = 1;
+> -	if (mctl_core_init(para, config))
+> -		return;
+> -
+> -	panic("This DRAM setup is currently not supported.\n");
+> -}
+> -
+> -static void mctl_write_pattern(void)
+> -{
+> -	unsigned int i;
+> -	u32 *ptr, val;
+> -
+> -	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
+> -	for (i = 0; i < 16; ptr++, i++) {
+> -		if (i & 1)
+> -			val = ~(ulong)ptr;
+> -		else
+> -			val = (ulong)ptr;
+> -		writel(val, ptr);
+> -	}
+> -}
+> -
+> -static bool mctl_check_pattern(ulong offset)
+> -{
+> -	unsigned int i;
+> -	u32 *ptr, val;
+> -
+> -	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
+> -	for (i = 0; i < 16; ptr++, i++) {
+> -		if (i & 1)
+> -			val = ~(ulong)ptr;
+> -		else
+> -			val = (ulong)ptr;
+> -		if (val != *(ptr + offset / 4))
+> -			return false;
+> -	}
+> -
+> -	return true;
+> -}
+> -
+> -static void mctl_auto_detect_dram_size(const struct dram_para *para,
+> -				       struct dram_config *config)
+> -{
+> -	unsigned int shift, cols, rows, found;
+> -	u32 buffer[16];
+> -
+> -	/* max. config for columns, but not rows */
+> -	config->cols = 11;
+> -	config->rows = 13;
+> -	mctl_core_init(para, config);
+> -
+> -	/*
+> -	 * Store content so it can be restored later. This is important
+> -	 * if controller was already initialized and holds any data
+> -	 * which is important for restoring system.
+> -	 */
+> -	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> -
+> -	mctl_write_pattern();
+> -
+> -	shift = config->bus_full_width + 1;
+> -
+> -	/* detect column address bits */
+> -	found = 0;
+> -	for (cols = 8; cols < 11; cols++) {
+> -		if (mctl_check_pattern(1ULL << (cols + shift))) {
+> -			found = 1;
+> -			break;
+> -		}
+> -	}
+> -	if (!found)
+> -		panic("DRAM init failed: Can't detect number of columns!");
+> -	debug("detected %u columns\n", cols);
+> -
+> -	/* restore data */
+> -	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> -
+> -	/* reconfigure to make sure that all active rows are accessible */
+> -	config->cols = 8;
+> -	config->rows = 17;
+> -	mctl_core_init(para, config);
+> -
+> -	/* store data again as it might be moved */
+> -	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> -
+> -	mctl_write_pattern();
+> -
+> -	/* detect row address bits */
+> -	shift = config->bus_full_width + 4 + config->cols;
+> -	found = 0;
+> -	for (rows = 13; rows < 17; rows++) {
+> -		if (mctl_check_pattern(1ULL << (rows + shift))) {
+> -			found = 1;
+> -			break;
+> -		}
+> -	}
+> -	if (!found)
+> -		panic("DRAM init failed: Can't detect number of rows!");
+> -	debug("detected %u rows\n", rows);
+> -
+> -	/* restore data again */
+> -	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> -
+> -	config->cols = cols;
+> -	config->rows = rows;
+> -}
+> -
+> -static unsigned long mctl_calc_size(const struct dram_config *config)
+> -{
+> -	u8 width = config->bus_full_width ? 4 : 2;
+> -
+> -	/* 8 banks */
+> -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
+> -}
+> -
+>  static const struct dram_para para = {
+>  	.clk = CONFIG_DRAM_CLK,
+>  #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
 
