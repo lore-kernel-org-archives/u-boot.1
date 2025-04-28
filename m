@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CE1CC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:28:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6AFCC369D5
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:28:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B80A829C7;
+	by phobos.denx.de (Postfix) with ESMTP id C59EC829F6;
 	Mon, 28 Apr 2025 21:27:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mgljxSu6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NbmnuEJO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5895C80FDA; Mon, 28 Apr 2025 21:24:51 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id 9C8D68210D; Mon, 28 Apr 2025 21:24:52 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04B7680EFB
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57EF0820F6
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-af9a6b3da82so3378046a12.0
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:48 -0700 (PDT)
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-7fd581c2bf4so4134917a12.3
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745868287; x=1746473087; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745868289; x=1746473089; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3cC9utU8UAjsJ/Xa5DG5ULlgeLK6o/9a66p5cN+bC5U=;
- b=mgljxSu6x+VOJkwiI+qHjJ9Ydu72hxFyhwaMuhPYO+MXLNknJPF9Z+7Iahewyx8Btt
- Rkl+twC1eotvbxbhSwI+fFdeNeHmixcrBowgHBr6XvqEaYFVvVYPI7Qnv5TFl6vtRXC+
- qdTu6a3r103bxWMaV12puMSW1hdtPV9WjDOsw=
+ bh=b6i1AhQSdVhBIOC5r+5bjgQ33qYMPQR4JFmbkQwP5Og=;
+ b=NbmnuEJOf+5+/EusUhmOtq3Es6DoNkIgFdOFdRIKbmmK+OtkjEw8Qm+mbiZkZ+/0Gz
+ MsiejyNuRc4wUfKEUn6IOVannIgam5CwtVbxUdmpnX08hRiLMc0Xywur2cI6QtrhVtKm
+ h0bZTh9dQtI5q0Ar54NgFbGubJbz6Svucqkxo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745868287; x=1746473087;
+ d=1e100.net; s=20230601; t=1745868289; x=1746473089;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3cC9utU8UAjsJ/Xa5DG5ULlgeLK6o/9a66p5cN+bC5U=;
- b=Io8xTHWFGjZA+u4oX5kTHWF3pr8e6uxQk+nfdMw9RE6zjK8945PsUmcNMubU6s7n8F
- p25lyAgWpGYNDuMpFnJ7LBm8OEnLQqG0S6X3H9ZIqA7N32w8wZzEuFiV55krzAP8HKHU
- //LDBLSHUe7UEbrnDrfVlXOJ/OsM2dfx1UdN1TFmE7kdmO0nwDAK+cWMhMVGkwzL/lX/
- qXQ0quTulsEd65X0uYoMkNYtLrhUmgDD1Mu46u3vc+9DC34J+3y8gLJs5oTCNI6zxdmk
- VH5eyUWQlroijwF80VgNY7FJX7LoCWMQ7tiBj35yXeQ5FWX93qkc++YP7Y/wGxnXQvqo
- ZYRQ==
-X-Gm-Message-State: AOJu0Yx71SFcr7NAh73+wemNFjEOO16xp0OUhwwutarPzKQMOj71p/O0
- qiUhcfNXxzLoPHdEsojd6pGLyrULfWJk0AOUdrI0Uq+B9MNai3VFWTyYtinZZsbO/dlvnCUnFR4
+ bh=b6i1AhQSdVhBIOC5r+5bjgQ33qYMPQR4JFmbkQwP5Og=;
+ b=VBBsfS6I0/FvNU8bmkWDeTf1d6cr4ztb4j2LUoyKtmVgVc1nKcBqg/kH/qpuadEpYz
+ o5dwnB/t6ZwFeFLgvz03EVBXX9giFuX4WwCXXhI+Z8zOQuZJ/RNbPxVxotiqKrXO7Ejh
+ 92/z0k3QjXfD2hvQdqktvnu+ueXJMZp2k+yHeaokNAFmq2Ga+Pm5/ROBsK6MVAkJp6ld
+ 1j5RCPvUTe+rELiGjnM0AgdhYGc3Oe82B0li1YrHl6Ojm0IM2WX5YJ0bQ5yDwOrs7+P4
+ qBWHlD4tSK8CXy2EEGt1Xu55hhgjpjPgbMnGckY27va4osNee1tg+qtsPI9Ov57xHLAx
+ sSJA==
+X-Gm-Message-State: AOJu0YxStKKu1bu0b0XOyr5VSnmbx7a7N1K9Hr9FqgHeHtXV3NiVyXGi
+ gQ9yuKwc2BiUgNDNS7UE8yebjk/3D+3gQrUxOat42GDWru3f6BQPkcleXJ+Ui6XaF8KUl/yNCu0
  =
-X-Gm-Gg: ASbGncv6Kx1yyk+vCOcIIpH04/a61RAY8U4hfYzmDq7CW/wXT9FhrjEtyUepInmXD+g
- CNpc4y5dlR4fOSNdz1gt/Wlf+nT6SkiTRx3qOu3vxWSwL5Q6xm/B/1TmvMY01qdLcvjMsnyXKDv
- DLp7ABTxjAakPrxEdoVuy2pjmp79yKz+jxlrl3m+pfSRI7KYwsoZVwysOdI1AmxMjoVOL7qX+Ye
- M5/uOBjbhjd0J5e1CKtyF3wfN6yjKHxvDUeaBI3aiDunDkh6lwJAlc4jfT5WqAi4rtkRMc1s9Tz
- XWSeKPFrz61Lgw2O3CNjitXodRhEwPM24gN2Jnr7fQmwbozENvLHIr/qswLwaseOc4HhiHAlkY1
- 6YyZoobZ4aDqY
-X-Google-Smtp-Source: AGHT+IGNTKNLlIpgfhuXUonF8vaC9ujaZPk51dhISfEc/vXca+kh5pKtlTT7exrrXhKXVGEvvIag8w==
-X-Received: by 2002:a05:6a21:3284:b0:1f5:64a4:aeac with SMTP id
- adf61e73a8af0-2095cec8c80mr289562637.33.1745868287240; 
- Mon, 28 Apr 2025 12:24:47 -0700 (PDT)
+X-Gm-Gg: ASbGnct5IEgxMY0Dwa4bGzTg8mC4wdlL5WmU5tgdByxsqbsJfN5ccjPX84YUJMet8V7
+ ExKmIqzGAk+59l8Y89iZYo4720dmDS2nBGW/HiK6OiPrXiIMkVCObjH5rT1o9ngRIW4RNOZaaDD
+ Gmq2zftFmU30MY0W96H9sFtXe+CTGVVbTdwemtN5DdSt5fWICSlcdr4YVDXPJTSkLj3PlP5zBAN
+ hu2yTKqTW05TfVdkZuqYMB3+9qGqlnmMJCJF3gXJDUt8ZANSEZrqDzb8XOYZSIc0DA5BUGnBHZV
+ lbMBf3Kg0HaF/2unYjX3PJWqQLebUpgUo+tDG3XdoyEX05BmDo4QR2mgMCJiAz9Kb7f7MOoYizS
+ 2jg==
+X-Google-Smtp-Source: AGHT+IF4QGrPl8tG2E4OqG/5Y8zHxKKVzzRvA1mNhwB4C0umFqesSuf80PRGVz6Cx3L6BV05AsXxag==
+X-Received: by 2002:a05:6a20:6f8f:b0:1fd:f48b:f397 with SMTP id
+ adf61e73a8af0-2093caf7aadmr834192637.23.1745868288682; 
+ Mon, 28 Apr 2025 12:24:48 -0700 (PDT)
 Received: from localhost (199.24.125.34.bc.googleusercontent.com.
  [34.125.24.199]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-73e2591349esm8414008b3a.8.2025.04.28.12.24.46
+ 41be03b00d2f7-b1d59d45835sm1851829a12.67.2025.04.28.12.24.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Apr 2025 12:24:46 -0700 (PDT)
+ Mon, 28 Apr 2025 12:24:48 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -77,13 +77,14 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v3 11/17] coreboot: Parse sku_id/fw_config from coreboot tables
-Date: Mon, 28 Apr 2025 12:24:18 -0700
-Message-ID: <20250428192427.3877612-12-swboyd@chromium.org>
+Subject: [PATCH v3 12/17] pstore: Add pstore address from coreboot tables
+Date: Mon, 28 Apr 2025 12:24:19 -0700
+Message-ID: <20250428192427.3877612-13-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.906.g1f30a19c02-goog
 In-Reply-To: <20250428192427.3877612-1-swboyd@chromium.org>
 References: <20250428192427.3877612-1-swboyd@chromium.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 28 Apr 2025 21:26:55 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -102,117 +103,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SKU ID is part of the coreboot tables. Historically, it was under
-the coreboot tag for sku_id specifically, but modern coreboot versions
-have put all the ID values together in one entry CB_TAG_BOARD_CONFIG
-along with fw_config. Parse that tag to populate the sku_id and
-fw_config fields.
+Set the pstore address and size based on the coreboot tables if the
+coreboot tables are populated.
 
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- cmd/cbsysinfo.c           |  2 ++
- include/cb_sysinfo.h      |  4 ++++
- include/coreboot_tables.h | 11 +++++++++++
- lib/coreboot/cb_sysinfo.c | 15 +++++++++++++++
- 4 files changed, 32 insertions(+)
+ cmd/pstore.c | 44 +++++++++++++++++++++++++++++++++++---------
+ 1 file changed, 35 insertions(+), 9 deletions(-)
 
-diff --git a/cmd/cbsysinfo.c b/cmd/cbsysinfo.c
-index ed7b50f6d0fc..d6ab71a3db8d 100644
---- a/cmd/cbsysinfo.c
-+++ b/cmd/cbsysinfo.c
-@@ -418,6 +418,8 @@ static void show_table(struct sysinfo_t *info, bool verbose)
- 	print_ptr("MRC cache", info->mrc_cache);
- 	print_ptr("ACPI GNVS", info->acpi_gnvs);
- 	print_hex("Board ID", info->board_id);
-+	print_hex("SKU ID", info->sku_id);
-+	print_addr64("FWCONFIG", info->fw_config);
- 	print_hex("RAM code", info->ram_code);
- 	print_ptr("WiFi calib", info->wifi_calibration);
- 	print_addr64("Ramoops buff", info->ramoops_buffer);
-diff --git a/include/cb_sysinfo.h b/include/cb_sysinfo.h
-index f24099fc0ef9..b11d42be549c 100644
---- a/include/cb_sysinfo.h
-+++ b/include/cb_sysinfo.h
-@@ -114,6 +114,8 @@
-  * acpi_gnvs: @Pointer to Intel Global NVS struct, see struct acpi_global_nvs
-  * @board_id: Board ID indicating the board variant, typically 0xffffffff
-  * @ram_code: RAM code indicating the SDRAM type, typically 0xffffffff
-+ * @sku_id: SKU ID indicating the board SKU, typically 0xffffffff
-+ * @fw_config: FW config indicating the firmware configuration, typically 0xffffffff
-  * @wifi_calibration: WiFi calibration info, NULL if none
-  * @ramoops_buffer: Address of kernel Ramoops buffer
-  * @ramoops_buffer_size: Sizeof of Ramoops buffer, typically 1MB
-@@ -204,6 +206,8 @@ struct sysinfo_t {
- 	void		*acpi_gnvs;
- 	u32		board_id;
- 	u32		ram_code;
-+	u32		sku_id;
-+	u64		fw_config;
- 	void		*wifi_calibration;
- 	u64	ramoops_buffer;
- 	u32	ramoops_buffer_size;
-diff --git a/include/coreboot_tables.h b/include/coreboot_tables.h
-index 54aeffb9889d..6e7686e360c5 100644
---- a/include/coreboot_tables.h
-+++ b/include/coreboot_tables.h
-@@ -438,6 +438,17 @@ struct cb_tsc_info {
- #define CB_TAG_SERIALNO			0x002a
- #define CB_MAX_SERIALNO_LENGTH		32
+diff --git a/cmd/pstore.c b/cmd/pstore.c
+index 9795eea2dbc3..dccbf455e299 100644
+--- a/cmd/pstore.c
++++ b/cmd/pstore.c
+@@ -3,8 +3,10 @@
+  * Copyright © 2019 Collabora Ltd
+  */
  
-+#define CB_TAG_BOARD_CONFIG		0x0040
-+struct cb_board_config {
-+	u32 tag;
-+	u32 size;
-+
-+	u64 fw_config;
-+	u32 board_id;
-+	u32 ram_code;
-+	u32 sku_id;
-+};
-+
- #define CB_TAG_ACPI_RSDP		0x0043
- 
- #define CB_TAG_CMOS_OPTION_TABLE	0x00c8
-diff --git a/lib/coreboot/cb_sysinfo.c b/lib/coreboot/cb_sysinfo.c
-index 101e5ff4037b..2e9b98d3ced5 100644
---- a/lib/coreboot/cb_sysinfo.c
-+++ b/lib/coreboot/cb_sysinfo.c
-@@ -141,6 +141,16 @@ static void cb_parse_acpi_gnvs(unsigned char *ptr, struct sysinfo_t *info)
- 	info->acpi_gnvs = map_sysmem(cbmem->cbmem_tab, 0);
++#include <cb_sysinfo.h>
+ #include <config.h>
+ #include <command.h>
++#include <event.h>
+ #include <fdtdec.h>
+ #include <fs.h>
+ #include <log.h>
+@@ -141,6 +143,19 @@ static void pstore_init_buffer_size(void)
+ 		buffer_size = pstore_pmsg_size;
  }
  
-+static void cb_parse_board_config(unsigned char *ptr, struct sysinfo_t *info)
++static void pstore_set_end(void)
 +{
-+	struct cb_board_config *const cbbcfg = (struct cb_board_config *)ptr;
++	if (pstore_length < (pstore_record_size + pstore_console_size
++			     + pstore_ftrace_size + pstore_pmsg_size)) {
++		printf("pstore <len> should be larger than the sum of all records sizes\n");
++		pstore_length = 0;
++	}
 +
-+	info->board_id = cbbcfg->board_id;
-+	info->ram_code = cbbcfg->ram_code;
-+	info->sku_id = cbbcfg->sku_id;
-+	info->fw_config = cbbcfg->fw_config;
++	log_debug("pstore set done: start 0x%08llx - length 0x%llx\n",
++		  (unsigned long long)pstore_addr,
++		  (unsigned long long)pstore_length);
 +}
 +
- static void cb_parse_board_id(unsigned char *ptr, struct sysinfo_t *info)
- {
- 	struct cb_board_id *const cbbid = (struct cb_board_id *)ptr;
-@@ -295,6 +305,8 @@ static int cb_parse_header(void *addr, int len, struct sysinfo_t *info)
- 	 */
- 	info->board_id = ~0;
- 	info->ram_code = ~0;
-+	info->sku_id = ~0;
-+	info->fw_config = ~0ULL;
+ /**
+  * pstore_set() - Initialize PStore settings from command line arguments
+  * @cmdtp: Command data struct pointer
+@@ -194,19 +209,30 @@ static int pstore_set(struct cmd_tbl *cmdtp, int flag,  int argc,
+ 	if (argc > 7)
+ 		pstore_ecc_size = hextoul(argv[7], NULL);
  
- 	/* Now, walk the tables */
- 	ptr += header->header_bytes;
-@@ -395,6 +407,9 @@ static int cb_parse_header(void *addr, int len, struct sysinfo_t *info)
- 		case CB_TAG_CBMEM_ENTRY:
- 			cb_parse_cbmem_entry(ptr, info);
- 			break;
-+		case CB_TAG_BOARD_CONFIG:
-+			cb_parse_board_config(ptr, info);
-+			break;
- 		case CB_TAG_BOARD_ID:
- 			cb_parse_board_id(ptr, info);
- 			break;
+-	if (pstore_length < (pstore_record_size + pstore_console_size
+-			     + pstore_ftrace_size + pstore_pmsg_size)) {
+-		printf("pstore <len> should be larger than the sum of all records sizes\n");
+-		pstore_length = 0;
+-	}
+-
+-	log_debug("pstore set done: start 0x%08llx - length 0x%llx\n",
+-	          (unsigned long long)pstore_addr,
+-	          (unsigned long long)pstore_length);
++	pstore_set_end();
+ 
+ 	return 0;
+ }
+ 
++#if CONFIG_IS_ENABLED(SYS_COREBOOT)
++static int pstore_coreboot_init(void)
++{
++	const struct sysinfo_t *sysinfo;
++
++	sysinfo = cb_get_sysinfo();
++	if (!sysinfo)
++		return 0;
++
++	pstore_addr = sysinfo->ramoops_buffer;
++	pstore_length = sysinfo->ramoops_buffer_size;
++
++	pstore_set_end();
++
++	return 0;
++}
++EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, pstore_coreboot_init);
++#endif
++
+ /**
+  * pstore_print_buffer() - Print buffer
+  * @type: buffer type
 -- 
 Sent by a computer, using git, on the internet
 
