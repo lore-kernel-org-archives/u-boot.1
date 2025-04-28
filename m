@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A832C369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22EB0C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAE4982AA7;
-	Mon, 28 Apr 2025 15:24:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41B388293C;
+	Mon, 28 Apr 2025 15:25:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="o8TZnkem";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="y6vIv38D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63D0A82AAA; Mon, 28 Apr 2025 15:24:58 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 3792282A5C; Mon, 28 Apr 2025 15:24:59 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 414F782A0D
+ by phobos.denx.de (Postfix) with ESMTPS id F1C718293C
  for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:24:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7213f5eaf8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9ULkg010140;
- Mon, 28 Apr 2025 15:24:50 +0200
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9MGYl006604;
+ Mon, 28 Apr 2025 15:24:55 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- QBJSEyWH8gG1YGmbNcgh7MA6xtJLRFVTgT5NMTBgsco=; b=o8TZnkem0AAJqMNf
- RIPEUpp6R+XR/VSKtni4NJgmEvJMCTO+bitG/rFsJNMHe31mHBQNh5CZZuSSjQgR
- S0Xz9sNN2v2Rwmlm3t+8RtFrfg4yNGuL0vRpceJ/WHUTxNzszWCETWoobofHzy2w
- OARlfJfqEPszTnrkxC+lT3fiG4X1bp4f/7zNxbB4SQLUL/uvUbqfwZx3X80agk32
- Ewvx73TCUlMRazMbCnicADzkfk48b5RFFq0j6KRGaP9hob8d17tKAEQWH9ozzFHX
- R5VCL44VTacpdqL4XoYykusp68ZuEQse2gDkQSF0sOjEWlgcBUEvFqDJiUnF6hlI
- ebA6gQ==
+ 2n5qz+nRoXZgstGw24af67eFwHiuQjYu84oRtD9CDNo=; b=y6vIv38DN4IzNQ/w
+ eLbAtWiwX5hvlFg+uo/V0BBCbgpHypTdXr6kY6dOjEjb4euYsbv+EBnJRSvpqdV8
+ e0Kb8ANuGCl8rN8ahu9lG8jBfATykUBmZGgvCsr5xD1Yk1U4YkclAzxLi0VRIuKk
+ wj8M0O63y+sKS4GSBY0AB+Qc1ex1VfHpKR8dVWGjZI8yr98LYVz22bvaO924DR9H
+ AUbK9wfti+1Qu13VoI3Q9iS4lmp9WuSFZQqABgOm8znOXY/FhX0EimbmbDMv3Q5a
+ V0tMPQi452fCiTxTb6tJWjVaN0yV6vIsoPWWJVIwg8ns/2uj7BtyqJrbJoNocdL6
+ Yk3grQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 469aencfv8-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468pu7exha-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:24:50 +0200 (MEST)
+ Mon, 28 Apr 2025 15:24:54 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4506B40068;
- Mon, 28 Apr 2025 15:23:47 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id BEEDF4004D;
+ Mon, 28 Apr 2025 15:24:15 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0A330A60F2C;
- Mon, 28 Apr 2025 15:23:01 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 74D7CA60998;
+ Mon, 28 Apr 2025 15:24:03 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:22:59 +0200
-Message-ID: <16d2ac8d-c6c4-45e5-b2cb-0c5bfa425b1a@foss.st.com>
-Date: Mon, 28 Apr 2025 15:22:59 +0200
+ 2025 15:24:02 +0200
+Message-ID: <7abb7883-ac2f-499d-a171-09702bf586f3@foss.st.com>
+Date: Mon, 28 Apr 2025 15:24:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/22] board: st: stm32mp2: add mmc_get_env_dev()
+Subject: Re: [PATCH v2 18/22] arm: stm32mp: cmd_stm32key: update command for
+ stm32mp25x
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
+ <lionel.debieve@foss.st.com>,
+ Thomas Bourgoin <thomas.bourgoin@foss.st.com>,
  Tom Rini <trini@konsulko.com>
 References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-6-patrice.chotard@foss.st.com>
+ <20250425131533.392747-19-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-6-patrice.chotard@foss.st.com>
+In-Reply-To: <20250425131533.392747-19-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -97,91 +97,408 @@ X-Virus-Status: Clean
 
 
 On 4/25/25 15:15, Patrice Chotard wrote:
-> Use the boot instance to select the correct mmc device identifier,
-> this patch only to save the environment on eMMC = MMC(1) on
-> STMicroelectronics boards.
+> Update key table for stm32mp25 platform.
 > 
-> Set the CONFIG_SYS_MMC_ENV_DEV to -1 to select the mmc boot instance
-> by default.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Signed-off-by: Lionel Debieve <lionel.debieve@foss.st.com>
+> Signed-off-by: Thomas Bourgoin <thomas.bourgoin@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 > 
 > (no changes since v1)
 > 
->  board/st/stm32mp2/stm32mp2.c | 37 ++++++++++++++++++++++++++++++++++++
->  configs/stm32mp25_defconfig  |  2 +-
->  2 files changed, 38 insertions(+), 1 deletion(-)
+>  arch/arm/mach-stm32mp/cmd_stm32key.c | 264 +++++++++++++++++++++++----
+>  1 file changed, 225 insertions(+), 39 deletions(-)
 > 
-> diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-> index c70ffaf5dbd..8446b8fd3d6 100644
-> --- a/board/st/stm32mp2/stm32mp2.c
-> +++ b/board/st/stm32mp2/stm32mp2.c
-> @@ -10,6 +10,7 @@
->  #include <fdt_support.h>
->  #include <log.h>
->  #include <misc.h>
-> +#include <mmc.h>
->  #include <asm/global_data.h>
->  #include <asm/arch/sys_proto.h>
->  #include <dm/device.h>
-> @@ -78,6 +79,42 @@ enum env_location env_get_location(enum env_operation op, int prio)
->  	}
->  }
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
+> index 040a70f581c..d6bf72d8e32 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32key.c
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
+> @@ -14,12 +14,23 @@
 >  
-> +int mmc_get_boot(void)
-> +{
-> +	struct udevice *dev;
-> +	u32 boot_mode = get_bootmode();
-> +	unsigned int instance = (boot_mode & TAMP_BOOT_INSTANCE_MASK) - 1;
-> +	char cmd[20];
-> +	const u32 sdmmc_addr[] = {
-> +		STM32_SDMMC1_BASE,
-> +		STM32_SDMMC2_BASE,
-> +		STM32_SDMMC3_BASE
-> +	};
+>  /*
+>   * Closed device: OTP0
+> - * STM32MP15x: bit 6 of OPT0
+> + * STM32MP15x: bit 6 of OTP0
+>   * STM32MP13x: 0b111111 = 0x3F for OTP_SECURED closed device
+> + * STM32MP25x: bit 0 of OTP18
+>   */
+> -#define STM32_OTP_CLOSE_ID		0
+> -#define STM32_OTP_STM32MP13X_CLOSE_MASK	0x3F
+> -#define STM32_OTP_STM32MP15X_CLOSE_MASK	BIT(6)
+> +#define STM32MP1_OTP_CLOSE_ID				0
+> +#define STM32_OTP_STM32MP13X_CLOSE_MASK		GENMASK(5, 0)
+> +#define STM32_OTP_STM32MP15X_CLOSE_MASK		BIT(6)
+> +#define STM32MP25_OTP_WORD8				8
+> +#define STM32_OTP_STM32MP25X_BOOTROM_CLOSE_MASK	GENMASK(7, 0)
+> +#define STM32MP25_OTP_CLOSE_ID			18
+> +#define STM32_OTP_STM32MP25X_CLOSE_MASK		GENMASK(3, 0)
+> +#define STM32_OTP_STM32MP25X_PROVISIONING_DONE_MASK	GENMASK(7, 4)
+> +#define STM32MP25_OTP_HWCONFIG			124
+> +#define STM32_OTP_STM32MP25X_DISABLE_SCAN_MASK	BIT(20)
 > +
-> +	if (instance > ARRAY_SIZE(sdmmc_addr))
-> +		return 0;
+> +#define STM32MP25_OTP_BOOTROM_CONF8	17
+> +#define STM32_OTP_STM32MP25X_OEM_KEY2_EN	BIT(8)
+>  
+>  /* PKH is the first element of the key list */
+>  #define STM32KEY_PKH 0
+> @@ -27,8 +38,9 @@
+>  struct stm32key {
+>  	char *name;
+>  	char *desc;
+> -	u8 start;
+> +	u16 start;
+>  	u8 size;
+> +	int (*post_process)(struct udevice *dev);
+>  };
+>  
+>  const struct stm32key stm32mp13_list[] = {
+> @@ -55,6 +67,99 @@ const struct stm32key stm32mp15_list[] = {
+>  	}
+>  };
+>  
+> +static int post_process_oem_key2(struct udevice *dev);
 > +
-> +	/* search associated sdmmc node in devicetree */
-> +	snprintf(cmd, sizeof(cmd), "mmc@%x", sdmmc_addr[instance]);
-> +	if (uclass_get_device_by_name(UCLASS_MMC, cmd, &dev)) {
-> +		log_err("mmc%d = %s not found in device tree!\n", instance, cmd);
-> +		return 0;
+> +const struct stm32key stm32mp25_list[] = {
+> +	[STM32KEY_PKH] = {
+> +		.name = "OEM-KEY1",
+> +		.desc = "Hash of the 8 ECC Public Keys Hashes Table (ECDSA is the authentication algorithm) for FSBLA or M",
+> +		.start = 144,
+> +		.size = 8,
+> +	},
+> +	{
+> +		.name = "OEM-KEY2",
+> +		.desc = "Hash of the 8 ECC Public Keys Hashes Table (ECDSA is the authentication algorithm) for FSBLM",
+> +		.start = 152,
+> +		.size = 8,
+> +		.post_process = post_process_oem_key2,
+> +	},
+> +	{
+> +		.name = "FIP-EDMK",
+> +		.desc = "Encryption/Decryption Master Key for FIP",
+> +		.start = 260,
+> +		.size = 8,
+> +	},
+> +	{
+> +		.name = "EDMK1",
+> +		.desc = "Encryption/Decryption Master Key for FSBLA or M",
+> +		.start = 364,
+> +		.size = 4,
+> +	},
+> +	{
+> +		.name = "EDMK2",
+> +		.desc = "Encryption/Decryption Master Key for FSBLM",
+> +		.start = 360,
+> +		.size = 4,
 > +	}
-> +
-> +	return dev_seq(dev);
 > +};
 > +
-> +int mmc_get_env_dev(void)
+> +struct otp_close {
+> +	u32 word;
+> +	u32 mask_wr;
+> +	u32 mask_rd;
+> +	bool (*close_status_ops)(u32 value, u32 mask);
+> +};
+> +
+> +static bool compare_mask_exact(u32 value, u32 mask)
 > +{
-> +	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_SYS_MMC_ENV_DEV), (-1));
-> +
-> +	if (mmc_env_dev >= 0)
-> +		return mmc_env_dev;
-> +
-> +	/* use boot instance to select the correct mmc device identifier */
-> +	return mmc_get_boot();
+> +	return ((value & mask) == mask);
 > +}
 > +
->  int board_late_init(void)
+> +static bool compare_any_bits(u32 value, u32 mask)
+> +{
+> +	return ((value & mask) != 0);
+> +}
+> +
+> +const struct otp_close stm32mp13_close_state_otp[] = {
+> +	{
+> +		.word = STM32MP1_OTP_CLOSE_ID,
+> +		.mask_wr = STM32_OTP_STM32MP13X_CLOSE_MASK,
+> +		.mask_rd = STM32_OTP_STM32MP13X_CLOSE_MASK,
+> +		.close_status_ops = compare_mask_exact,
+> +	}
+> +};
+> +
+> +const struct otp_close stm32mp15_close_state_otp[] = {
+> +	{
+> +		.word = STM32MP1_OTP_CLOSE_ID,
+> +		.mask_wr = STM32_OTP_STM32MP15X_CLOSE_MASK,
+> +		.mask_rd = STM32_OTP_STM32MP15X_CLOSE_MASK,
+> +		.close_status_ops = compare_mask_exact,
+> +	}
+> +};
+> +
+> +const struct otp_close stm32mp25_close_state_otp[] = {
+> +	{
+> +		.word = STM32MP25_OTP_WORD8,
+> +		.mask_wr = STM32_OTP_STM32MP25X_BOOTROM_CLOSE_MASK,
+> +		.mask_rd = 0,
+> +		.close_status_ops = NULL
+> +	},
+> +	{
+> +		.word = STM32MP25_OTP_CLOSE_ID,
+> +		.mask_wr = STM32_OTP_STM32MP25X_CLOSE_MASK |
+> +			   STM32_OTP_STM32MP25X_PROVISIONING_DONE_MASK,
+> +		.mask_rd = STM32_OTP_STM32MP25X_CLOSE_MASK,
+> +		.close_status_ops = compare_any_bits
+> +	},
+> +	{
+> +		.word = STM32MP25_OTP_HWCONFIG,
+> +		.mask_wr = STM32_OTP_STM32MP25X_DISABLE_SCAN_MASK,
+> +		.mask_rd = 0,
+> +		.close_status_ops = NULL
+> +	},
+> +};
+> +
+>  /* index of current selected key in stm32key list, 0 = PKH by default */
+>  static u8 stm32key_index;
+>  
+> @@ -65,6 +170,9 @@ static u8 get_key_nb(void)
+>  
+>  	if (IS_ENABLED(CONFIG_STM32MP15X))
+>  		return ARRAY_SIZE(stm32mp15_list);
+> +
+> +	if (IS_ENABLED(CONFIG_STM32MP25X))
+> +		return ARRAY_SIZE(stm32mp25_list);
+>  }
+>  
+>  static const struct stm32key *get_key(u8 index)
+> @@ -74,15 +182,33 @@ static const struct stm32key *get_key(u8 index)
+>  
+>  	if (IS_ENABLED(CONFIG_STM32MP15X))
+>  		return &stm32mp15_list[index];
+> +
+> +	if (IS_ENABLED(CONFIG_STM32MP25X))
+> +		return &stm32mp25_list[index];
+> +}
+> +
+> +static u8 get_otp_close_state_nb(void)
+> +{
+> +	if (IS_ENABLED(CONFIG_STM32MP13X))
+> +		return ARRAY_SIZE(stm32mp13_close_state_otp);
+> +
+> +	if (IS_ENABLED(CONFIG_STM32MP15X))
+> +		return ARRAY_SIZE(stm32mp15_close_state_otp);
+> +
+> +	if (IS_ENABLED(CONFIG_STM32MP25X))
+> +		return ARRAY_SIZE(stm32mp25_close_state_otp);
+>  }
+>  
+> -static u32 get_otp_close_mask(void)
+> +static const struct otp_close *get_otp_close_state(u8 index)
 >  {
->  	const void *fdt_compat;
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index d11910f139f..fd5c36ec3e2 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -36,7 +36,7 @@ CONFIG_CMD_LOG=y
->  CONFIG_OF_LIVE=y
->  CONFIG_ENV_IS_NOWHERE=y
->  CONFIG_ENV_IS_IN_MMC=y
-> -CONFIG_SYS_MMC_ENV_DEV=1
-> +CONFIG_SYS_MMC_ENV_DEV=-1
->  CONFIG_NO_NET=y
->  CONFIG_SYS_64BIT_LBA=y
->  CONFIG_GPIO_HOG=y
+>  	if (IS_ENABLED(CONFIG_STM32MP13X))
+> -		return STM32_OTP_STM32MP13X_CLOSE_MASK;
+> +		return &stm32mp13_close_state_otp[index];
+>  
+>  	if (IS_ENABLED(CONFIG_STM32MP15X))
+> -		return STM32_OTP_STM32MP15X_CLOSE_MASK;
+> +		return &stm32mp15_close_state_otp[index];
+> +
+> +	if (IS_ENABLED(CONFIG_STM32MP25X))
+> +		return &stm32mp25_close_state_otp[index];
+>  }
+>  
+>  static int get_misc_dev(struct udevice **dev)
+> @@ -96,13 +222,13 @@ static int get_misc_dev(struct udevice **dev)
+>  	return ret;
+>  }
+>  
+> -static void read_key_value(const struct stm32key *key, u32 addr)
+> +static void read_key_value(const struct stm32key *key, unsigned long addr)
+>  {
+>  	int i;
+>  
+>  	for (i = 0; i < key->size; i++) {
+>  		printf("%s OTP %i: [%08x] %08x\n", key->name, key->start + i,
+> -		       addr, __be32_to_cpu(*(u32 *)addr));
+> +		       (u32)addr, __be32_to_cpu(*(u32 *)addr));
+>  		addr += 4;
+>  	}
+>  }
+> @@ -157,26 +283,42 @@ static int read_key_otp(struct udevice *dev, const struct stm32key *key, bool pr
+>  
+>  static int read_close_status(struct udevice *dev, bool print, bool *closed)
+>  {
+> -	int word, ret, result;
+> -	u32 val, lock, mask;
+> -	bool status;
+> +	int ret, result, i;
+> +	const struct otp_close *otp_close = NULL;
+> +	u32 otp_close_nb = get_otp_close_state_nb();
+> +	u32 val, lock, mask, word = 0;
+> +	bool status = true;
+> +	bool tested_once = false;
+>  
+>  	result = 0;
+> -	word = STM32_OTP_CLOSE_ID;
+> -	ret = misc_read(dev, STM32_BSEC_OTP(word), &val, 4);
+> -	if (ret < 0)
+> -		result = ret;
+> -	if (ret != 4)
+> -		val = 0x0;
+> -
+> -	ret = misc_read(dev, STM32_BSEC_LOCK(word), &lock, 4);
+> -	if (ret < 0)
+> -		result = ret;
+> -	if (ret != 4)
+> -		lock = BSEC_LOCK_ERROR;
+> -
+> -	mask = get_otp_close_mask();
+> -	status = (val & mask) == mask;
+> +	for (i = 0; status && (i < otp_close_nb); i++) {
+> +		otp_close = get_otp_close_state(i);
+> +
+> +		if (!otp_close->close_status_ops)
+> +			continue;
+> +
+> +		mask = otp_close->mask_rd;
+> +		word = otp_close->word;
+> +
+> +		ret = misc_read(dev, STM32_BSEC_OTP(word), &val, 4);
+> +		if (ret < 0)
+> +			result = ret;
+> +		if (ret != 4)
+> +			val = 0x0;
+> +
+> +		ret = misc_read(dev, STM32_BSEC_LOCK(word), &lock, 4);
+> +		if (ret < 0)
+> +			result = ret;
+> +		if (ret != 4)
+> +			lock = BSEC_LOCK_ERROR;
+> +
+> +		status = otp_close->close_status_ops(val, mask);
+> +		tested_once = true;
+> +	}
+> +
+> +	if (!tested_once)
+> +		status = false;
+> +
+>  	if (closed)
+>  		*closed = status;
+>  	if (print)
+> @@ -185,7 +327,49 @@ static int read_close_status(struct udevice *dev, bool print, bool *closed)
+>  	return result;
+>  }
+>  
+> -static int fuse_key_value(struct udevice *dev, const struct stm32key *key, u32 addr, bool print)
+> +static int write_close_status(struct udevice *dev)
+> +{
+> +	int i;
+> +	u32 val, word, ret;
+> +	const struct otp_close *otp_close = NULL;
+> +	u32 otp_num = get_otp_close_state_nb();
+> +
+> +	for (i = 0; i < otp_num; i++) {
+> +		otp_close = get_otp_close_state(i);
+> +		val = otp_close->mask_wr;
+> +		word = otp_close->word;
+> +		ret = misc_write(dev, STM32_BSEC_OTP(word), &val, 4);
+> +		if (ret != 4) {
+> +			log_err("Error: can't update OTP %d\n", word);
+> +			return ret;
+> +		}
+> +	}
+> +	return 0;
+> +}
+> +
+> +static int post_process_oem_key2(struct udevice *dev)
+> +{
+> +	int ret;
+> +	u32 val;
+> +
+> +	ret = misc_read(dev, STM32_BSEC_OTP(STM32MP25_OTP_BOOTROM_CONF8), &val, 4);
+> +	if (ret != 4) {
+> +		log_err("Error %d failed to read STM32MP25_OTP_BOOTROM_CONF8\n", ret);
+> +		return -EIO;
+> +	}
+> +
+> +	val |= STM32_OTP_STM32MP25X_OEM_KEY2_EN;
+> +	ret = misc_write(dev, STM32_BSEC_OTP(STM32MP25_OTP_BOOTROM_CONF8), &val, 4);
+> +	if (ret != 4) {
+> +		log_err("Error %d failed to write OEM_KEY2_ENABLE\n", ret);
+> +		return -EIO;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int fuse_key_value(struct udevice *dev, const struct stm32key *key, unsigned long addr,
+> +			  bool print)
+>  {
+>  	u32 word, val;
+>  	int i, ret;
+> @@ -229,7 +413,7 @@ static int confirm_prog(void)
+>  static void display_key_info(const struct stm32key *key)
+>  {
+>  	printf("%s : %s\n", key->name, key->desc);
+> -	printf("\tOTP%d..%d\n", key->start, key->start + key->size);
+> +	printf("\tOTP%d..%d\n", key->start, key->start + key->size - 1);
+>  }
+>  
+>  static int do_stm32key_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> @@ -272,7 +456,7 @@ static int do_stm32key_read(struct cmd_tbl *cmdtp, int flag, int argc, char *con
+>  {
+>  	const struct stm32key *key;
+>  	struct udevice *dev;
+> -	u32 addr;
+> +	unsigned long addr;
+>  	int ret, i;
+>  	int result;
+>  
+> @@ -310,7 +494,7 @@ static int do_stm32key_read(struct cmd_tbl *cmdtp, int flag, int argc, char *con
+>  		return CMD_RET_USAGE;
+>  
+>  	key = get_key(stm32key_index);
+> -	printf("Read %s at 0x%08x\n", key->name, addr);
+> +	printf("Read %s at 0x%08x\n", key->name, (u32)addr);
+>  	read_key_value(key, addr);
+>  
+>  	return CMD_RET_SUCCESS;
+> @@ -320,7 +504,7 @@ static int do_stm32key_fuse(struct cmd_tbl *cmdtp, int flag, int argc, char *con
+>  {
+>  	const struct stm32key *key = get_key(stm32key_index);
+>  	struct udevice *dev;
+> -	u32 addr;
+> +	unsigned long addr;
+>  	int ret;
+>  	bool yes = false, lock;
+>  
+> @@ -361,6 +545,13 @@ static int do_stm32key_fuse(struct cmd_tbl *cmdtp, int flag, int argc, char *con
+>  	if (fuse_key_value(dev, key, addr, !yes))
+>  		return CMD_RET_FAILURE;
+>  
+> +	if (key->post_process) {
+> +		if (key->post_process(dev)) {
+> +			printf("Error: %s for post process\n", key->name);
+> +			return CMD_RET_FAILURE;
+> +		}
+> +	}
+> +
+>  	printf("%s updated !\n", key->name);
+>  
+>  	return CMD_RET_SUCCESS;
+> @@ -371,7 +562,6 @@ static int do_stm32key_close(struct cmd_tbl *cmdtp, int flag, int argc, char *co
+>  	const struct stm32key *key;
+>  	bool yes, lock, closed;
+>  	struct udevice *dev;
+> -	u32 val;
+>  	int ret;
+>  
+>  	yes = false;
+> @@ -407,12 +597,8 @@ static int do_stm32key_close(struct cmd_tbl *cmdtp, int flag, int argc, char *co
+>  	if (!yes && !confirm_prog())
+>  		return CMD_RET_FAILURE;
+>  
+> -	val = get_otp_close_mask();
+> -	ret = misc_write(dev, STM32_BSEC_OTP(STM32_OTP_CLOSE_ID), &val, 4);
+> -	if (ret != 4) {
+> -		printf("Error: can't update OTP %d\n", STM32_OTP_CLOSE_ID);
+> +	if (write_close_status(dev))
+>  		return CMD_RET_FAILURE;
+> -	}
+>  
+>  	printf("Device is closed !\n");
+>  
 Applied to u-boot-stm32/master
 
 Thanks
