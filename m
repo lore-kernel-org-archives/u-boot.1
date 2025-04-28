@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF11C369D9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E254C369D9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:12:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4980F8295C;
-	Mon, 28 Apr 2025 19:10:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id E565C82145;
+	Mon, 28 Apr 2025 19:10:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="D37UpDVR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RUKAG6Pg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C316820B7; Mon, 28 Apr 2025 11:16:33 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 49F7582A31; Mon, 28 Apr 2025 15:53:45 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9300F80EFB
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 11:16:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7121C82A31
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:53:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43cfba466b2so43166395e9.3
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 02:16:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43cf257158fso27605815e9.2
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 06:53:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1745831791; x=1746436591;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=QekO53Nxea6WJ1XBJYFyFllUcVjHcAdoPSTH/bjF7do=;
- b=D37UpDVR1suUXE5q/Yzqg5b6aAKQKS4qDuGazWGE0yAACV89ZWGBFhyTiQjhefkrpT
- b5AoVX8qEtC0bdQtIGddxPxWv26EZ5BQ7ABUL9YZSBsa+axgq4y55tJf64OsxwSFONWf
- OLhxOLirBKOP7yMZ5B3NCT/WFfSaPdRN0/Soky+oyvAIq4K2MgLiXWUY8sSNL0GpCvUX
- EagTK5Pi6du5LgFwdngC6ZBnbTsj6Gk0QsOXJjiCEswf14a/YlZ8mGdPxBx41VNl7HWY
- nJv+0gpQPbjRMVemy3/8H4VZI6LAE+3DFXoZ8nrT3xUOpGClUfOS8nZl/Rr2SGrgGElC
- N++g==
+ d=linaro.org; s=google; t=1745848420; x=1746453220; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pDiJCXHlO6jcf1IUS55c+Ue/lMn6tZ3wQgziSdyLlNE=;
+ b=RUKAG6PgTD8cUq23Fr63B/2UfKYddH5Z+vnTUNVvulynmV3kvdYAwXD66uODo2hsQI
+ 2pc5lXXI/+ZZvIkl2EuyYgPOvaSAqNZcM83YL432L+t0ErIcwDdRYanGeII6+mACMTXu
+ ohf+c+SQWmChQJr85fOOs/F/20KsHmX8+/aNx8widTuY0FUdEeJK3HtxzpWnVsFTUj4R
+ yh9cviSnvly3FXYbnGWjJ2vHZ9FPHdTSRwhW4jMpS25MZv9o7P9dcZG5NQGGT02L7Y8C
+ 2H+Xa7r+vLq6x22mBJ2lonqmbBlYBR6gXAzEinWnOp9rPuk1XzqWJtpf/7E+p6PCZQcP
+ WSQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745831791; x=1746436591;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QekO53Nxea6WJ1XBJYFyFllUcVjHcAdoPSTH/bjF7do=;
- b=lRlYeSLJ+yrA5UkVZtchafqanXI3vk2ZRk3o5n32IzMji1LDwcjA9LyTZJlEyUCod8
- XDIQJg8UlEOC1kvghCL1JQEaum9RK+RjjT2WaknpqwBhMD8SGqBU3mzUZZOXKIVW/VV4
- s6iJlGku9hycn3uktUJ/4hI5eIWJSGlgxVA+oJghd4qbLimdXJzNxKuNcRluDo+Ujc7N
- pj22AbGQonBcSoDkNGO6PlLhxrPP2eI4iGhfwMc2OlN/nlTA1afZjIE/dZwSMcFBlyz/
- 7TnOqWkCoP2CXKSUL2l1PX8GHzYH5w1KHxU81VoC/ijKZmWhhz7IWm6/RucDreNEql9F
- GiDQ==
-X-Gm-Message-State: AOJu0YwSxeeOM4R7E9UupGIZWuXcJOzFJg9g76gPJw3eHriytYj/tg27
- nPMLZ3NBQ3dPfnARe41XPWsvwnhON62ysKs0vZiq0QUEcEd8PhV6XH+AqlO3BXYhz6vFImPftbU
- h
-X-Gm-Gg: ASbGncsvns3LebaZxcDfJGRpZZ6uQka0CPIEZTlJtdwWTR4MFhPiy1uCPgAQlB2pY6X
- Nq/L+z6WyKl/8E/3Z2ybMyNAruSYCM62f9MSJ+AUoY4g2/60wF6HVn1Sf9v4t83fB8NktXFjsoK
- G+39ZMC3+LQmryyrYRBznUzmbXugR+Cyl7Tq1BKdsEqCdzwciZHxOzm8Kg/HTLLS02IcEJYr8em
- jyMR8TnBqiLl6ZHVY+R8J42CIk5r1WGsqlJSUrYUFMGwXKjHET8x6b8qIUeCVyjL4n68UAlVwwP
- fI4BVk0jO/z5DsV4vSCjCGE53bd7jUCC01/yCXo=
-X-Google-Smtp-Source: AGHT+IHRrcnXMPSrsJV71KLJYevfSOrWDHS/OW6dc0g/inQipcmYfKKWHuEWtPincA2lOIj0RkBI3w==
-X-Received: by 2002:a05:600c:4693:b0:43c:f969:13c0 with SMTP id
- 5b1f17b1804b1-440ab872201mr63579765e9.29.1745831790903; 
- Mon, 28 Apr 2025 02:16:30 -0700 (PDT)
-Received: from [127.0.1.1] ([78.199.60.143])
- by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3a073e5da0dsm10345258f8f.88.2025.04.28.02.16.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 02:16:30 -0700 (PDT)
-From: Zixun LI <admin@hifiphile.com>
-Date: Mon, 28 Apr 2025 11:16:28 +0200
-Subject: [PATCH v4 6/6] ARM: dts: at91: sam9x60-curiosity: Enable watchdog node
+ d=1e100.net; s=20230601; t=1745848420; x=1746453220;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pDiJCXHlO6jcf1IUS55c+Ue/lMn6tZ3wQgziSdyLlNE=;
+ b=v52ZQS7ng9/hfa6FmdLS+dhlAcwAhqhyDea5Gl2GJXOw2EeW587eSbcRdq4tOdQix+
+ /NlYD/rUoK0kq27NfyADYDoS/uG9V6zWm/RQvlLSK8aQuqQS47MfSVZzvpqMi4i7P7fP
+ NnBDLKwzDy+rZv9vMK9cgcD5KjGx7bR1bUAdXSTDZHwDv48cXVciE77j0Ocb3JNQdqCT
+ VrdLR+uuRaqdDgimmoBvkKWeREhsLOMfK22tLlUUC0Ya2RiiUfD4r4f0Dz9iia7bQsbq
+ xKSFrDcVxLz/CAf6RnF8aBzZKl71AZ+qNSuMhMIr8573XuaDsYFG1JNJVAoNJKrCNkxw
+ bhYQ==
+X-Gm-Message-State: AOJu0YwJsamf0EdGV1auzSql1JSCLT2TEuYBCfFvM70HFTvaXcIT5G1N
+ Ti0A1EKjE+AgsXaZSj15KM718siHL7Fs5DerXflqL7rPz9AlQDgZWkOHucGOjCVhX1G7WLkN1Ps
+ vlQg=
+X-Gm-Gg: ASbGncvz0jG/niB4QZBygUoGxPayhApVDIg8zb5iIuHMxhcJ4u4VJmXGKkJQNyGXlSU
+ MYAaM/lCNnKZZCOT9+J5tlbsWQQpE8ZOki1yFsScNeIEIxhXBkg1bgCjEGq/+6wJ0me+6GxICEw
+ t1+Z5Hs1i/2cmhe+FV6c/rM4FIKvnjNs46YsdWU3NnBwogHnZqA9iVd9GsOQQyxfd0VrBqJXNrt
+ 3X+NBP/vYmnL7rl/+FRb0Yc2B5MBtuqSR7EV9mXvNfsofHxALIjsGFXAn+i6KSM4hLnRocE7rdI
+ VrfHctbiIpUsYd927HxdT21Tpq1p7eT68bDeo593m0jfcptB1HuklzgCiKioSsnjClB4dCU=
+X-Google-Smtp-Source: AGHT+IErgTmN9JX69AmpAeDCNZ4BwqhoHfhIg2Q/N58tPWwxypLhZvhpnyXtDiG5uMH0JumUjVtSTw==
+X-Received: by 2002:a05:600c:4e47:b0:43c:f513:9591 with SMTP id
+ 5b1f17b1804b1-440ab7be06dmr91101585e9.14.1745848419820; 
+ Mon, 28 Apr 2025 06:53:39 -0700 (PDT)
+Received: from [192.168.1.47] (i5E863A78.versanet.de. [94.134.58.120])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4409d29b990sm162284925e9.4.2025.04.28.06.53.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Apr 2025 06:53:38 -0700 (PDT)
+Message-ID: <dfe2c6d1-1935-4af3-b7d2-b04fdcbe6f29@linaro.org>
+Date: Mon, 28 Apr 2025 15:53:37 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] u-boot chain-loading LineageOS bootimg
+To: gchan9527@gmail.com, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass
+ <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250427-android-boot-v1-0-bb6b37c9c9f1@gmail.com>
+Content-Language: en-US
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250427-android-boot-v1-0-bb6b37c9c9f1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250428-wdt-v4-6-bb7d1c7c051a@hifiphile.com>
-References: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
-In-Reply-To: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de, Zixun LI <admin@hifiphile.com>
-X-Mailer: b4 0.14.2
-X-Mailman-Approved-At: Mon, 28 Apr 2025 19:10:16 +0200
+X-Mailman-Approved-At: Mon, 28 Apr 2025 19:10:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,42 +103,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable watchdog node on SAM9X60-Curiosity board.
+Hi George,
 
-A default timeout of 16s is added which is the maximum supported value,
-also matching Linux driver's behavior.
+Thanks a lot for the series, it's super exciting to see support for 
+booting Android on top of U-Boot :D
 
-Signed-off-by: Zixun LI <admin@hifiphile.com>
----
- arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi | 4 ++++
- arch/arm/dts/at91-sam9x60_curiosity.dts         | 4 ++++
- 2 files changed, 8 insertions(+)
+On 4/27/25 13:25, George Chan via B4 Relay wrote:
+> This is a series of patches to enable chainloading LineageOS on qcom SOC.
+> 
+> First patch is to workaround kernel/ramdisk invalid addr by identify
+> its physical memory address out-of-range. Since qcom SOC usually have
+> 0x80000000 as start/base/real memory address but androidboot img
+> specified to around 0x0. If other vendor bootloader behave similar then
+> this patch can also workaround it as well.
 
-diff --git a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-index dd4623311c9df6004c1715d406d3873bbcc254b5..9144387861eca5ab14b756063b89866d280d7dea 100644
---- a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-+++ b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-@@ -95,3 +95,7 @@
- &slow_xtal {
- 	bootph-all;
- };
-+
-+&watchdog {
-+	timeout-sec = <16>;
-+};
-diff --git a/arch/arm/dts/at91-sam9x60_curiosity.dts b/arch/arm/dts/at91-sam9x60_curiosity.dts
-index 1c7f0fa6a49004943e5a4ac6637db5e806cc92f3..f165fdadb9e4abd08f9166e7cbec0507616c9939 100644
---- a/arch/arm/dts/at91-sam9x60_curiosity.dts
-+++ b/arch/arm/dts/at91-sam9x60_curiosity.dts
-@@ -336,3 +336,7 @@
- &usb2 {
- 	status = "okay";
- };
-+
-+&watchdog {
-+	status = "okay";
-+};
+I'm curious to know what values are there, tbh I think U-Boot should 
+entirely ignore the values in the boot image but I guess that could 
+break some other platforms.
 
+How about adding a config option CONFIG_ANDROID_BOOTIMG_IGNORE_ADDRS and 
+just ORing it in all the places that have checks like 
+"img_data->kernel_addr == 0". Then you can enable this for 
+mach-snapdragon by selecting it in the ARCH_SNAPDRAGON config definition.
+
+> 
+> Second patch is enable bootmeth-android to have chance for extra mem block.
+> Usually the fastboot mem block, to hold androidboot img, and loadaddr for
+> unzipped kernel. If other SOC have extra mem block available but
+> fastboot block, we can add extra logic to take care of it.
+
+There is a small hack in mach-snapdragon that we put kernel_addr_r and 
+loadaddr at the same address to avoid using up too much memory on 
+devices that only have 1GB which explains this crash because we try to 
+decompress the kernel to the same address it got loaded too.
+
+I think we can get away with giving loadaddr its own allocation of 64M 
+or so, maybe 96. This would make your second patch redundant (and feels 
+like the right fix to me)
+
+> 
+> Third patch is optional to enable snapdragon board to have extra cmdline
+> found from original bootloader that is required for LineageOS boot init.
+> An alternate method is to put the append string into a dummy device-tree
+> file, as /chosen/bootarg ofnode porperty, that also contain msm-id. Then
+> encapsulate as androidboot img and let u-boot as kernel binary. Below is
+> an example for Xiaomi Miatoll device.
+
+I assume you're chainloading U-Boot on this device? If so, isn't it 
+enough to just copy the boot args that ABL gives us and maybe tweak a few?
+
+I'd also rather keep this constrained, maybe an android specific board 
+callback to set boot args (if there isn't one already) and have the FDT 
+fixup code be alongside some other generic FDT fixup stuff. I'd rather 
+not have this stuff in board specific code.
+
+I hope this makes sense, feel free to ask for clarifications on anything.
+
+Thanks and kind regards,
+
+> 
+> /dts-v1/;
+> 
+> / {
+>          qcom,msm-id = <443 0x0>;
+>          qcom,board-id = <0 0>,
+> 			<0x10022 1>,
+> 			<0x20022 1>,
+> 			<0x30022 1>,
+> 			<0x40022 1>,
+> 			<0x50022 1>;
+> 
+>          #address-cells = <2>;
+>          #size-cells = <2>;
+> 
+>          memory {
+>                  ddr_device_type = <0x07>;
+>                  /* We expect the bootloader to fill in the size */
+>                  reg = <0 0 0 0>;
+>          };
+> 
+> 	chosen {
+> 		bootargs = "";
+> 	};
+> };
+> 
+> Signed-off-by: George Chan <gchan9527@gmail.com>
+> ---
+> George Chan (3):
+>        boot/image-android.c: Workaround androidboot kernel/ramdisk addr
+>        boot/bootmeth-android.c: Reuse fastboot memory block for unzip kernel
+>        mach-snapdragon: Add support to append string to kernel cmdline
+> 
+>   arch/arm/mach-snapdragon/Kconfig | 11 +++++
+>   arch/arm/mach-snapdragon/board.c | 97 ++++++++++++++++++++++++++++++++++++++++
+>   boot/bootmeth_android.c          | 12 +++++
+>   boot/image-android.c             | 10 +++++
+>   4 files changed, 130 insertions(+)
+> ---
+> base-commit: 5a0a93a768487e55ebe50a34cc90d751bf99cc56
+> change-id: 20250427-android-boot-ecbb768cda72
+> 
+> Best regards,
 -- 
-2.49.0
+Casey (she/they)
 
