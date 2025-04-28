@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7C0CC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:28:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26257C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89F0882A80;
-	Mon, 28 Apr 2025 21:27:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A7C982757;
+	Mon, 28 Apr 2025 21:27:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PaY/RROt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YnTGUNEL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F91C8209F; Mon, 28 Apr 2025 21:24:56 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 9BC9D82132; Mon, 28 Apr 2025 21:24:57 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDE4B820F6
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 493CF80EFB
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-af579e46b5dso3696267a12.3
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:53 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2295d78b433so56071695ad.2
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745868292; x=1746473092; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745868293; x=1746473093; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GeXHAdmnIiZqyKFLGLDl3YOnnIIfOxG3zhcbmDvUj+0=;
- b=PaY/RROt9I6kxMgkpY5LdgBuY68lT0hYgPigUnTAr4y/c/upOry89JPFoY5cFHZRxE
- L5aun3fTepthi4rAsIwGl1oHjmfKZmxqP5XiQbzNRn1jM1l0lEvxFKUPp81XIbbOuFFM
- 9Ql8KSR5fb8QRdhh58hzTA4sCQgcAoMWS/EZ8=
+ bh=q7vM9eXVVetOU2RTYxoukHh7g5LF1YG76H+8sBBj5Hc=;
+ b=YnTGUNELZ1ULOOTg+P9wVQk6i03BhzX/VuDneU+f31CSthL+YvS/pWf6mmaFWndrIC
+ 4B3HPw3RkQy06uRyu1lRgSFjkhbA18ZAWCEb45bS5nHcUqqUzNHomGZVwczxG3XD3bgl
+ B5/Y93pGe/X5hDfBTFSxtapjtK7lE7OjFbA+A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745868292; x=1746473092;
+ d=1e100.net; s=20230601; t=1745868293; x=1746473093;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GeXHAdmnIiZqyKFLGLDl3YOnnIIfOxG3zhcbmDvUj+0=;
- b=jqdP7Z3F5DB+kOrfYxZufmdkPVw3A0weR3zEEhiNONxGogP9jAWhZ7wkhA8K4NKlAy
- 7B77TbSQDY/nZi/eO6u5lryfxVT5PTj+R9yfkimw2Yazklr4OwCYgov7gazTpSrdp4rR
- 6+YL7JQLsCtr9YIQ0dSUxnzO18IRoo+BcfC2H+3BCgL26UQWjQ4ElCHdc/tkRV1O9tSC
- yi0uulgajv0piO6sFyO55Lf5VgQeg8f/zsnunYEBeGyMh8+OTnwQixgmOqtDSw+q3Leh
- ROypc2KsvY1ZISEQjZYU7/WfbGCCnepIcCS1r9YfYWNYPrZBCf66ITcW0oQpYQ4tQxq8
- kBfg==
-X-Gm-Message-State: AOJu0Yzx+84qyvUPjKQAhmEiBGxvfDg/XhtatHvpbAdTmDCneGJeo/6w
- qAt3NXLkU450vcP5XYMaAYDRZfH9dZu4mhgNHu9hBWGmHqg59esDAW6SrhN3qfF5/YzbU9hCx7M
+ bh=q7vM9eXVVetOU2RTYxoukHh7g5LF1YG76H+8sBBj5Hc=;
+ b=Tve8Dn4C0fGQeJo6uTfzgCoBL1UtClTEYRV+eGiRHlEvOh8Bm3e/s8JHUaiPwQzDCi
+ zGrD2LP9OVdK2lSDlWF92wExfsqlaUTcYx3mHV1OqkZ28YiJR902EvoC7vE6YCjJGmKZ
+ x8huW6Gg1WXrV2CcX9bmrsxdlNfuMaq7VFymWlOqryfoTzmm6XXjnrGaECHIm8CrWyGw
+ MZse6QWEFHzdWAA4/lAWs3X6sN6xhjrJbnmpx3AOE3ZPgJ6oB/BJUaQbGVJMN2j5PeD7
+ DLF8E1nG+66U0MvmTHpw/vx3pKDd/JRKOFV/TTUzAwUtmbs+HYEmjrd8dRk4eyJd5LhO
+ NsqQ==
+X-Gm-Message-State: AOJu0YzdwAIe0Detf+ZXtLmk6bnyVpjSuNYvgg4cpBPRWQyoSUVRwieG
+ Ntv1SPx1x190Ql41IGZiLKQt0EA6jk77cBD9ParDSfyaI4i0p8T7po86TBzqOUwRIPiuyZL8kIM
  =
-X-Gm-Gg: ASbGncu9G9EMVY9eM4HSL7SjQ1P5AFv8fZUzIgBiFjDLGonX5wKJUzjMB3gKhxLDwyI
- Izwstylnpz30imVslDUr1L6sogt+cbMkl8RNnOoJs0srrQZr7/bsWQJMZyyE8V07oUGt8vZ4KYH
- PWRF/8k9x9NAyryR1lQi/DMqx50dOYotkX5v7qdGaYFhF55O3Rxepg5ZG8UoV4cffpqcKB3uavj
- aOfN+K07NO1evbWPjRigU24NBQLEdwpQd6sfjK1YvdjB6de33FsQAWRubo24oubljAAgj8XsT2n
- ohTXux/8HVWDBTwVUI8aBXWtABTSqMRFkUoaGqU6RXOM4XGi5bMDw7wNw5u2znx2IR946rchtM1
- NbOoHrPgOPzzQ
-X-Google-Smtp-Source: AGHT+IH9L7ETKvNqIxPg1UXjYu91DvtowpwToPx6a/Tergvo68ZiHIsAeoYw5VBBAzs9PcvGmR0+lg==
-X-Received: by 2002:a17:90b:1f89:b0:2ee:741c:e9f4 with SMTP id
- 98e67ed59e1d1-30a21552f72mr1465405a91.11.1745868291948; 
- Mon, 28 Apr 2025 12:24:51 -0700 (PDT)
+X-Gm-Gg: ASbGncvFIEYgr062hfeHZhhl5fJKSJJzq10U57C3yaPVALAQTP+W58GORk72O1PNgTS
+ nh1sBjtTQtJFt4SbC5ljjDRW1hHVNeUApYwrZbDDDek6SSWQOBdKgAgPI4dQUamS0U3sRwhc2C5
+ oRg67sQd0FLiKHURRtmIkwhNzCt0MM5e86VMhjCO17kUKnrw2lQjXRqtgWpUYXHXaLsYGPzpYcQ
+ IpKXq2CqLypjTtIDJFvypHcCMT/O0xN9bBqkmvC5gTSKpeNdTodjOnaxHC4qpkApitFJq7NOhUd
+ BTOeOtMrqRLPHw6u/PGS6EbQf622x6mySudyzeLAyulZ/m36udWU4afo/RrYEVr8nirE+L13zD1
+ k9w==
+X-Google-Smtp-Source: AGHT+IEI9I1T2XbCVIvvPtUauq2eIXR0k2ybNuH+ozWVk6lxSAwWAy+l2R28hR2dOBOWN0VZdVjPvw==
+X-Received: by 2002:a17:902:e54b:b0:21f:2a2:3c8b with SMTP id
+ d9443c01a7336-22dc69efc1amr150345955ad.11.1745868293637; 
+ Mon, 28 Apr 2025 12:24:53 -0700 (PDT)
 Received: from localhost (199.24.125.34.bc.googleusercontent.com.
  [34.125.24.199]) by smtp.gmail.com with UTF8SMTPSA id
- 98e67ed59e1d1-309f77417d6sm7641834a91.4.2025.04.28.12.24.51
+ 41be03b00d2f7-b15f7ec22cfsm7604541a12.23.2025.04.28.12.24.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Apr 2025 12:24:51 -0700 (PDT)
+ Mon, 28 Apr 2025 12:24:53 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -77,9 +77,10 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v3 14/17] coreboot: Move timestamp parsing to generic place
-Date: Mon, 28 Apr 2025 12:24:21 -0700
-Message-ID: <20250428192427.3877612-15-swboyd@chromium.org>
+Subject: [PATCH v3 15/17] mach-snapdragon: Support booting as a coreboot
+ payload
+Date: Mon, 28 Apr 2025 12:24:22 -0700
+Message-ID: <20250428192427.3877612-16-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.906.g1f30a19c02-goog
 In-Reply-To: <20250428192427.3877612-1-swboyd@chromium.org>
 References: <20250428192427.3877612-1-swboyd@chromium.org>
@@ -102,202 +103,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the timestamp code out of x86/cpu/coreboot to lib/coreboot and make
-it generic. This lets us migrate the timestamp table from coreboot into
-U-Boot's version of boot stage timing and use it on ARM based devices.
----
- arch/x86/cpu/coreboot/Makefile                      |  1 -
- arch/x86/cpu/coreboot/coreboot.c                    |  6 +-----
- arch/x86/lib/bootm.c                                |  5 ++---
- arch/x86/lib/zimage.c                               |  3 ---
- .../timestamp.h => include/coreboot_timestamp.h     |  7 -------
- lib/coreboot/Makefile                               |  1 +
- lib/coreboot/cb_sysinfo.c                           |  3 +++
- {arch/x86/cpu => lib}/coreboot/timestamp.c          | 13 ++++++++-----
- 8 files changed, 15 insertions(+), 24 deletions(-)
- rename arch/x86/include/asm/arch-coreboot/timestamp.h => include/coreboot_timestamp.h (68%)
- rename {arch/x86/cpu => lib}/coreboot/timestamp.c (84%)
+Coreboot sets up the DRAM, CPU, and devices before booting a payload,
+meaning we can parse the coreboot tables at boot for memory info when
+running as a payload. Use the memory descriptors from coreboot if the
+tables are present so that Snapdragon SoCs can run U-boot as a coreboot
+payload.
 
-diff --git a/arch/x86/cpu/coreboot/Makefile b/arch/x86/cpu/coreboot/Makefile
-index a6c7d0e56d50..f7ba346b83cd 100644
---- a/arch/x86/cpu/coreboot/Makefile
-+++ b/arch/x86/cpu/coreboot/Makefile
-@@ -20,4 +20,3 @@ else
- obj-y += sdram.o
- endif
- obj-y += coreboot.o
--obj-y += timestamp.o
-diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
-index e1dbce4f0b29..33e37376e9f4 100644
---- a/arch/x86/cpu/coreboot/coreboot.c
-+++ b/arch/x86/cpu/coreboot/coreboot.c
-@@ -6,6 +6,7 @@
-  */
- 
- #include <cb_sysinfo.h>
-+#include <coreboot_timestamp.h>
- #include <cpu_func.h>
- #include <event.h>
- #include <fdtdec.h>
-@@ -15,7 +16,6 @@
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+---
+ arch/arm/mach-snapdragon/board.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index deae4d323789..6850f226f8eb 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -14,6 +14,7 @@
  #include <asm/io.h>
- #include <asm/msr.h>
- #include <asm/mtrr.h>
--#include <asm/arch/timestamp.h>
- #include <dm/ofnode.h>
+ #include <asm/psci.h>
+ #include <asm/system.h>
++#include <cb_sysinfo.h>
+ #include <dm/device.h>
+ #include <dm/pinctrl.h>
+ #include <dm/uclass-internal.h>
+@@ -48,6 +49,10 @@ static struct {
  
- int arch_cpu_init(void)
-@@ -35,8 +35,6 @@ int arch_cpu_init(void)
- 	gd_set_acpi_start(map_to_sysmem(lib_sysinfo.rsdp));
- 	gd_set_smbios_start(lib_sysinfo.smbios_start);
- 
--	timestamp_init();
--
- 	return 0;
+ int dram_init(void)
+ {
++#ifdef CONFIG_SYS_COREBOOT
++	if (gd->arch.coreboot_table)
++		return coreboot_dram_init();
++#endif
+ 	/*
+ 	 * gd->ram_base / ram_size have been setup already
+ 	 * in qcom_parse_memory().
+@@ -81,8 +86,21 @@ static void qcom_configure_bi_dram(void)
+ 	}
  }
  
-@@ -74,8 +72,6 @@ static void board_final_init(void)
- 
- static int last_stage_init(void)
- {
--	timestamp_add_to_bootstage();
--
- 	if (IS_ENABLED(CONFIG_XPL_BUILD))
- 		return 0;
- 
-diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-index 0827a884b1d2..f46d78946929 100644
---- a/arch/x86/lib/bootm.c
-+++ b/arch/x86/lib/bootm.c
-@@ -10,6 +10,8 @@
- #include <bootm.h>
- #include <bootstage.h>
- #include <command.h>
-+#include <coreboot_tables.h>
-+#include <coreboot_timestamp.h>
- #include <efi.h>
- #include <hang.h>
- #include <log.h>
-@@ -24,9 +26,6 @@
- #include <asm/cpu.h>
- #include <asm/byteorder.h>
- #include <asm/zimage.h>
--#ifdef CONFIG_SYS_COREBOOT
--#include <asm/arch/timestamp.h>
--#endif
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-index 2ea9bcf59c27..8d40714dad0b 100644
---- a/arch/x86/lib/zimage.c
-+++ b/arch/x86/lib/zimage.c
-@@ -31,9 +31,6 @@
- #include <asm/bootparam.h>
- #include <asm/efi.h>
- #include <asm/global_data.h>
--#ifdef CONFIG_SYS_COREBOOT
--#include <asm/arch/timestamp.h>
--#endif
- #include <linux/compiler.h>
- #include <linux/ctype.h>
- #include <linux/libfdt.h>
-diff --git a/arch/x86/include/asm/arch-coreboot/timestamp.h b/include/coreboot_timestamp.h
-similarity index 68%
-rename from arch/x86/include/asm/arch-coreboot/timestamp.h
-rename to include/coreboot_timestamp.h
-index 227316975047..8f34d801037d 100644
---- a/arch/x86/include/asm/arch-coreboot/timestamp.h
-+++ b/include/coreboot_timestamp.h
-@@ -14,11 +14,4 @@ void timestamp_init(void);
- void timestamp_add(enum timestamp_id id, uint64_t ts_time);
- void timestamp_add_now(enum timestamp_id id);
- 
--/**
-- * timestamp_add_to_bootstage - Add important coreboot timestamps to bootstage
-- *
-- * Return: 0 if ok, -1 if no timestamps were found
-- */
--int timestamp_add_to_bootstage(void);
--
- #endif
-diff --git a/lib/coreboot/Makefile b/lib/coreboot/Makefile
-index 0f5cb90a056e..daeebc6654e3 100644
---- a/lib/coreboot/Makefile
-+++ b/lib/coreboot/Makefile
-@@ -15,3 +15,4 @@ obj-y += cb_sysinfo.o
- ifndef CONFIG_XPL_BUILD
- obj-y += sdram.o
- endif
-+obj-y += timestamp.o
-diff --git a/lib/coreboot/cb_sysinfo.c b/lib/coreboot/cb_sysinfo.c
-index 0155b72ff37e..ec9a47242e34 100644
---- a/lib/coreboot/cb_sysinfo.c
-+++ b/lib/coreboot/cb_sysinfo.c
-@@ -7,6 +7,7 @@
-  */
- 
- #include <cb_sysinfo.h>
-+#include <coreboot_timestamp.h>
- #include <fdt_support.h>
- #include <init.h>
- #include <mapmem.h>
-@@ -491,6 +492,8 @@ int get_coreboot_info(struct sysinfo_t *info)
- 	gd->arch.coreboot_table = addr;
- 	gd->flags |= GD_FLG_SKIP_LL_INIT;
- 
-+	timestamp_init();
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++#ifdef CONFIG_SYS_COREBOOT
++	if (gd->arch.coreboot_table)
++		return coreboot_board_get_usable_ram_top(total_size);
++#endif
++	return gd->ram_top;
++}
 +
+ int dram_init_banksize(void)
+ {
++#ifdef CONFIG_SYS_COREBOOT
++	if (gd->arch.coreboot_table)
++		return coreboot_dram_init_banksize();
++#endif
+ 	qcom_configure_bi_dram();
+ 
  	return 0;
- }
- 
-diff --git a/arch/x86/cpu/coreboot/timestamp.c b/lib/coreboot/timestamp.c
-similarity index 84%
-rename from arch/x86/cpu/coreboot/timestamp.c
-rename to lib/coreboot/timestamp.c
-index 18be969ccea6..192a28d7188a 100644
---- a/arch/x86/cpu/coreboot/timestamp.c
-+++ b/lib/coreboot/timestamp.c
-@@ -7,10 +7,12 @@
- 
- #include <bootstage.h>
- #include <cb_sysinfo.h>
-+#include <coreboot_tables.h>
-+#include <coreboot_timestamp.h>
-+#include <event.h>
- #include <errno.h>
--#include <asm/arch/timestamp.h>
--#include <asm/u-boot-x86.h>
- #include <linux/compiler.h>
-+#include <time.h>
- 
- void timestamp_init(void)
- {
-@@ -33,10 +35,10 @@ void timestamp_add(enum timestamp_id id, uint64_t ts_time)
- 
- void timestamp_add_now(enum timestamp_id id)
- {
--	timestamp_add(id, rdtsc());
-+	timestamp_add(id, get_ticks());
- }
- 
--int timestamp_add_to_bootstage(void)
-+static int timestamp_add_to_bootstage(void)
- {
- 	const struct sysinfo_t *info = cb_get_sysinfo();
- 	const struct timestamp_table *ts_table = info->tstamp_table;
-@@ -69,9 +71,10 @@ int timestamp_add_to_bootstage(void)
- 		if (name) {
- 			bootstage_add_record(0, name, BOOTSTAGEF_ALLOC,
- 					     tse->entry_stamp /
--							get_tbclk_mhz());
-+							(get_tbclk() / 1000000));
- 		}
+@@ -235,6 +253,11 @@ int board_fdt_blob_setup(void **fdtp)
+ 		ret = qcom_parse_memory(external_fdt);
  	}
  
- 	return 0;
- }
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, timestamp_add_to_bootstage);
++#ifdef CONFIG_SYS_COREBOOT
++	if (gd->arch.coreboot_table)
++		debug("Using coreboot tables for memory ranges\n");
++	else
++#endif
+ 	if (ret < 0)
+ 		panic("No valid memory ranges found!\n");
+ 
 -- 
 Sent by a computer, using git, on the internet
 
