@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43CB0C369D9
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB683C369D9
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 17:10:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0427820F6;
-	Mon, 28 Apr 2025 19:10:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 478A48210E;
+	Mon, 28 Apr 2025 19:10:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="OjaHM6uy";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="ZqzbdRB6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B582826AA; Mon, 28 Apr 2025 10:37:59 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 37D2C82163; Mon, 28 Apr 2025 10:38:03 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 527E480EFB
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 10:37:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7F658216C
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 10:37:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43cef035a3bso31254235e9.1
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 01:37:57 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43d2d952eb1so30334775e9.1
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 01:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1745829477; x=1746434277;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1745829476; x=1746434276;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=KDNDf38hmz4ezf7Qlr8d8SB+WtVky07NqgNOy98MtjM=;
- b=OjaHM6uy2I02AarfTSpuD/QE+ggDHykxuWg/r69tZ/tjCiQy/ukpD37t2BAoRlgeAt
- LR8cd3/58NdP71iJLeUlOuTWy/mClMLbFmDL2SLiBpbi+cCfiPirErnbidUBCxrgglCG
- O1gJ4UVpfGtk9qmfejFJDD5nh7JlnLC/oC8GncCNWqc0aXy2DjbmIq1ahued1Ihg82hI
- 6wdElZK/0JfQ32AeNV81bkWyMP4un8I5kc7mGs+DeCEM3y1RA4vkY/bvBOeN/zFf6Isr
- 8mP9chbnyYtMyeFpLAz9QLJ+6pf6dvTvKFhkfcZ5T6zkHEZqJt0V7BZ4MVcz182KLrYk
- 29KQ==
+ :reply-to; bh=mlAuOD+vTyXfQv1BXCsnfisXupuzpvwN2h1BJe7TnM8=;
+ b=ZqzbdRB6r9v0iKsKoZ+I0Fop5ktilIDdg3Yg1V0j8ElKndDlfX+Z1lkZ9UShWeDoJL
+ TI1dLsvc3L9tW2r/bo06X/Gn2cB5f4IueukROO4xEEfM1NInqHVJ6VKzWJvDu2NQ4s05
+ 7d5YezpquWeU7beiK1FgxRjp/9yB+XViC7uBO4VgVZqCzd/Kt32fELDCLky0ly87xpRL
+ zXT7gdQgxG/UXetRcXxEhfMl95YNW6I717sWeiIzuNP2NcH/YWEYuQQ5LMbWcgFp+K9j
+ 0p/GJvw0sMCE79/jkGLjY21pOEqSmQKZlwLDuo6vQ7OVE3tdyxg0Jnm90TQfDhXjdcSJ
+ WwPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745829477; x=1746434277;
+ d=1e100.net; s=20230601; t=1745829476; x=1746434276;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KDNDf38hmz4ezf7Qlr8d8SB+WtVky07NqgNOy98MtjM=;
- b=kOqrAKtrRzZNkAR30Mu3vqjcaylgDy0k6S5Y0iS/oS8OC1sI6wAAqLqVpD0c3Zx16i
- 7Ro3DR2Q+Z6Jy57WINVFhmAjsTLCI002QZkcZ314GPzoQ7FPBMNOHnQM4skh651+g+vG
- k4JasDO49q60VuY4oyiUlbknWuUqKWYeA4IaFNYcDPmXNVxRv5VCB4EpjuSnuErb+xXz
- GtPbFbnUSHjE6BF8816/QfN2SF/dSpk5bhLQaFziqZvhJPD0rjvEtnef1uB7PimBCwpH
- hSJjoNc9Cq48Qwy5pi9ysqc3u1XsZA/jCVPfPQ1aryE/IoH3i+2IdFC5OJDvBieUMLz5
- YSrA==
-X-Gm-Message-State: AOJu0YwDmV7z3wUTKSIaQYYQIj3EjaL/0KRT8Css/q7kta/CAwJie/6g
- Lre/K57zcwD9zGbRcGWGpYezgCJ6AviiNH1AoAPaI78IDs1eJXD6htHkT4DS16U=
-X-Gm-Gg: ASbGncv9HlDThqgDwpHSUpukZgSgzeTIe37WsKdll6+ab8lYNiYxeEK7lZ9DA6Nquho
- sLSmI9nMdrWkX1JhYSJWgLpuLdMhcf0yF40Z/2dIb1+YTsztRkQFkYQF7o0exbVNRdw7iZWhhbs
- lyz9FSXl3uEseWfF7dgL7M7RBWbpH1qXqOouF2HkuqLhc/UN3HpnbcyY8YFDkibxtZtZuHbaBUm
- L0ebblrxZyT5CyQH51LneOr6RdVvhLXTZFah+2IL77RwrmcWngb/gELVagLGD+pqF/aJF/sqPE/
- 87d+Lw5hchkkDY79DeYKcKHnKu+i/peLSXJYUA1pyF+D/vd9UQ==
-X-Google-Smtp-Source: AGHT+IGd03+txDQ5+ORzfo5+NmcXHhv+Wvl5Sdg7d0up/Ye7jjicy0/5YF0GmQ8qEwDPlGOrtgaL2Q==
-X-Received: by 2002:a05:600c:1f91:b0:440:9b1a:cd78 with SMTP id
- 5b1f17b1804b1-440ab7b7969mr81432885e9.10.1745829476777; 
+ bh=mlAuOD+vTyXfQv1BXCsnfisXupuzpvwN2h1BJe7TnM8=;
+ b=k6pqA8Snu0lpUMrVVEWoN8SZ5B+JKK9UWIwHsw7nUPlqspt3mvIpukjGwM9efmR0c/
+ M9P20cyh78JD99RP07UFMPod41lWzduI9ysscjmnw+pWFTnkvDODEhPuRSb/7CcCQD2w
+ i43tigyWdE/0+PKNP0k3diq2gIOCURdRhOrJmpLavbt9hApyr7thfQklcSF4X9Lhgx/R
+ bPxyOnMcI1bQjD6d6RpaxkVYFKvm0loFSHSkO2SrOPiIuxlv6V+BLy0ekk/AJsvloTh0
+ i4SewcmQHAwbuypa9sWUM+EE0r5J+DnhPpJv4anscLcAYns6+toG3nr8dpCRqXp20Wi/
+ pVrg==
+X-Gm-Message-State: AOJu0YzjtQhJqVdrk3yIqaNzJrRh3FlGmoyhpOBMOASsiBrCsWOiMAZY
+ 0yB6+PQZWa6p93mNkz8dNuJoKtK/SEB19DXXdJW4ZQMGUQJOzkoRtebPx4Lhmjw=
+X-Gm-Gg: ASbGncvUvcnbOiZa2troyKMl1EuiKaUXlqN/5xVMESIwuN8JUTg6H5hTagfV5Kl4gj7
+ TQbyymwq/QqUWDXs6GZqkHWaQT62UAOvfk2Mm2SmiQxXwrJPrnCBYXQncbxjx098sGY02GnvrSj
+ HpaFHjBB5e4FRuPvlRYVhlu5S76a9o+CleIHzV7w6tlwsJsOOvUJ4GuL5Mj0P8CflB7MyGDj3ak
+ Q5ImroCSphTp5Im4c6YXgFxMyupmPQllVR6NFBvauaHY7GbyQ/6kzVw/seeoK+krudFXhzV+7OO
+ HZlW0qS4ubKkJINzouZ7ydL9dNo8TwUFsuzk8OE=
+X-Google-Smtp-Source: AGHT+IHzNxNBDIBfHXpLq6ZcQCovc3MfNgkeovUmd5ZmNxXqkL0XEc+nr7OZCBeicQijpyEZKoUu5Q==
+X-Received: by 2002:a05:600c:3d96:b0:43c:f16a:641e with SMTP id
+ 5b1f17b1804b1-440a65c6a6cmr88940115e9.6.1745829476170; 
  Mon, 28 Apr 2025 01:37:56 -0700 (PDT)
 Received: from [127.0.1.1] ([78.199.60.143])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-440a52f89b2sm121139285e9.8.2025.04.28.01.37.56
+ 5b1f17b1804b1-440a52f89b2sm121139285e9.8.2025.04.28.01.37.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 01:37:56 -0700 (PDT)
+ Mon, 28 Apr 2025 01:37:55 -0700 (PDT)
 From: Zixun LI <admin@hifiphile.com>
-Date: Mon, 28 Apr 2025 10:37:36 +0200
-Subject: [PATCH v3 3/6] watchdog: at91sam9_wdt: Rename priv to wdt
+Date: Mon, 28 Apr 2025 10:37:35 +0200
+Subject: [PATCH v3 2/6] arm: at91: wdt: Rename regval in priv data to mr
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250428-wdt-v3-3-86f0c5d92c32@hifiphile.com>
+Message-Id: <20250428-wdt-v3-2-86f0c5d92c32@hifiphile.com>
 References: <20250428-wdt-v3-0-86f0c5d92c32@hifiphile.com>
 In-Reply-To: <20250428-wdt-v3-0-86f0c5d92c32@hifiphile.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>, 
@@ -99,88 +99,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-"wdt" is a better name for watchdog rather than generic "priv".
+Use the name "mr" since we are referring to timer mode register.
 
 Signed-off-by: Zixun LI <admin@hifiphile.com>
 ---
- drivers/watchdog/at91sam9_wdt.c | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ arch/arm/mach-at91/include/mach/at91_wdt.h | 2 +-
+ drivers/watchdog/at91sam9_wdt.c            | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/arch/arm/mach-at91/include/mach/at91_wdt.h b/arch/arm/mach-at91/include/mach/at91_wdt.h
+index 78ad0453fd9eb3e42674d10cb11ce3da820cdc6a..a5accbae52186e99de0b113d6982a4cc54e36095 100644
+--- a/arch/arm/mach-at91/include/mach/at91_wdt.h
++++ b/arch/arm/mach-at91/include/mach/at91_wdt.h
+@@ -21,7 +21,7 @@
+ 
+ struct at91_wdt_priv {
+ 	void __iomem *regs;
+-	u32 regval;
++	u32 mr;
+ };
+ 
+ #endif
 diff --git a/drivers/watchdog/at91sam9_wdt.c b/drivers/watchdog/at91sam9_wdt.c
-index dab7b6a9b8ca09e6113109391560434ffe1f7cb6..5ca3e5a5fdefb3101c97754f10b65c0acd69a522 100644
+index c809a8936b8968c3322db4c86bc0571fbdfe3ae2..dab7b6a9b8ca09e6113109391560434ffe1f7cb6 100644
 --- a/drivers/watchdog/at91sam9_wdt.c
 +++ b/drivers/watchdog/at91sam9_wdt.c
-@@ -38,7 +38,7 @@ DECLARE_GLOBAL_DATA_PTR;
-  */
- static int at91_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
- {
--	struct at91_wdt_priv *priv = dev_get_priv(dev);
-+	struct at91_wdt_priv *wdt = dev_get_priv(dev);
- 	u64 timeout;
- 	u32 ticks;
- 
-@@ -49,7 +49,7 @@ static int at91_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
- 	ticks = WDT_SEC2TICKS(timeout);
- 
- 	/* Check if disabled */
--	if (readl(priv->regs + AT91_WDT_MR) & AT91_WDT_MR_WDDIS) {
-+	if (readl(wdt->regs + AT91_WDT_MR) & AT91_WDT_MR_WDDIS) {
- 		printf("sorry, watchdog is disabled\n");
- 		return -1;
- 	}
-@@ -60,31 +60,31 @@ static int at91_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+@@ -60,11 +60,11 @@ static int at91_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
  	 * Since WDV is a 12-bit counter, the maximum period is
  	 * 4096 / 256 = 16 seconds.
  	 */
--	priv->mr = AT91_WDT_MR_WDRSTEN	/* causes watchdog reset */
-+	wdt->mr = AT91_WDT_MR_WDRSTEN	/* causes watchdog reset */
+-	priv->regval = AT91_WDT_MR_WDRSTEN	/* causes watchdog reset */
++	priv->mr = AT91_WDT_MR_WDRSTEN	/* causes watchdog reset */
  		| AT91_WDT_MR_WDDBGHLT		/* disabled in debug mode */
  		| AT91_WDT_MR_WDD(0xfff)	/* restart at any time */
  		| AT91_WDT_MR_WDV(ticks);	/* timer value */
--	writel(priv->mr, priv->regs + AT91_WDT_MR);
-+	writel(wdt->mr, wdt->regs + AT91_WDT_MR);
+-	writel(priv->regval, priv->regs + AT91_WDT_MR);
++	writel(priv->mr, priv->regs + AT91_WDT_MR);
  
  	return 0;
  }
- 
- static int at91_wdt_stop(struct udevice *dev)
- {
--	struct at91_wdt_priv *priv = dev_get_priv(dev);
-+	struct at91_wdt_priv *wdt = dev_get_priv(dev);
+@@ -74,8 +74,8 @@ static int at91_wdt_stop(struct udevice *dev)
+ 	struct at91_wdt_priv *priv = dev_get_priv(dev);
  
  	/* Disable Watchdog Timer */
--	priv->mr |= AT91_WDT_MR_WDDIS;
--	writel(priv->mr, priv->regs + AT91_WDT_MR);
-+	wdt->mr |= AT91_WDT_MR_WDDIS;
-+	writel(wdt->mr, wdt->regs + AT91_WDT_MR);
+-	priv->regval |= AT91_WDT_MR_WDDIS;
+-	writel(priv->regval, priv->regs + AT91_WDT_MR);
++	priv->mr |= AT91_WDT_MR_WDDIS;
++	writel(priv->mr, priv->regs + AT91_WDT_MR);
  
  	return 0;
  }
- 
- static int at91_wdt_reset(struct udevice *dev)
- {
--	struct at91_wdt_priv *priv = dev_get_priv(dev);
-+	struct at91_wdt_priv *wdt = dev_get_priv(dev);
- 
--	writel(AT91_WDT_CR_WDRSTT | AT91_WDT_CR_KEY, priv->regs + AT91_WDT_CR);
-+	writel(AT91_WDT_CR_WDRSTT | AT91_WDT_CR_KEY, wdt->regs + AT91_WDT_CR);
- 
- 	return 0;
- }
-@@ -102,10 +102,10 @@ static const struct udevice_id at91_wdt_ids[] = {
- 
- static int at91_wdt_probe(struct udevice *dev)
- {
--	struct at91_wdt_priv *priv = dev_get_priv(dev);
-+	struct at91_wdt_priv *wdt = dev_get_priv(dev);
- 
--	priv->regs = dev_remap_addr(dev);
--	if (!priv->regs)
-+	wdt->regs = dev_remap_addr(dev);
-+	if (!wdt->regs)
- 		return -EINVAL;
- 
- 	debug("%s: Probing wdt%u\n", __func__, dev_seq(dev));
 
 -- 
 2.49.0
