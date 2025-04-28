@@ -4,137 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5AF5C369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:56:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C37CDC369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 13:57:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A239829E2;
-	Mon, 28 Apr 2025 15:45:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 6ED6A82AB1;
+	Mon, 28 Apr 2025 15:40:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="kUpb3Rua";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DA8882B07; Mon, 28 Apr 2025 15:45:49 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20702.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::702])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D1068297E
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:45:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ id 40C6282ABA; Mon, 28 Apr 2025 15:40:38 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id CB46C82A8D
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 15:40:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sVnM5kSDsAvmslo6G5IzbjO8lFcOFoaiWKPfjQHLboLpN1jTwLT9q9l5DW5u+EkibXVM3PFUi12QrWM2NLbqTQ56qwmAaAY9TiSCpn0K9qV7/FJka97SAVeikFGd18/Hdxrg5uxDqL/f2S8rBPqT25ujxOcx/5NS0kvxixBzTfBl42eNNQDuM6DRJDgZO+XY8KZKCQ3PQG/9cch26Y6Nu5VvJPQgWvJzh63ZAol+e5d1xO+7I3Rx4wPHHhjdYUUcjFdOdZ9+xXOLYncU+n+oC+YU0SBQo8zT+02BVZhpe9xqS0o/mS/cSdlxIpY4AVjHLQ7l6u8hTDWdvugGpuP65w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uFHIELUm9Nf74y1bBaPQeLjGCyRtAoBTl0stqvgKTz8=;
- b=uxGAysvDEM5DrZCKBjBgWoss4GAY1zTMB92m4l8M/f9BvXfmlIPH7FY5l8Up/rX9EnyCCo0NQLBRLxtgw/tV3ggseyOS7CGVQQbbHvUVf8n3d3cvmg4wtC8Mtw11xg/rAMrU4Gqhac2Gny7mfbFNQqmu8v7A2uZTI7WjZYs44F38SMM7ewyFtlm2L/blLb0Lsi6pDBlNf/YCaPimV5MyLyXHmL60lgUe093zKaXHIOgPO48s1DyH5rnHo6Hg5VfvVZ5ZG1gVtU5BxuCV/Mq+ZgZePLrlqzQ8MeQaa+uvDbW/aWDZn53PtKORVTmvXUfY88ZpFA9smfHMZ4UrLE5J0g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uFHIELUm9Nf74y1bBaPQeLjGCyRtAoBTl0stqvgKTz8=;
- b=kUpb3RuanxOLfoOLQIz5NUH1jZNRBWtxtg4K7yq9cFAxBZA2yjzsKbFK2sB2MlgR6liMCvmDt9MAGwUk48bI+aOsnJWujcJUr/5NV4BRrajBTTMaCvsQ1UKNuuvE53kzadIj3ewi/5DYU39Q75DMR46e3xVg4K0D0NNBQ9LLnmo2KsBEDRto/GugjD+KCzBSmzB1YrH5SUftk3HmLy5q9au/FCOSbXVTmLYAZ/0XxeNWPbyFFiL6t2tb31yC6HkYI6J0DgFTPo+er2f2zg5ENgeG4zh/wywBz8bKf8Et9VKaLTx8UE0ELhpL2nvBt61wZlwq/GNE1BfnKOeHr9rXqA==
-Received: from DU2PR04CA0041.eurprd04.prod.outlook.com (2603:10a6:10:234::16)
- by DU0P195MB1425.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:341::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.29; Mon, 28 Apr
- 2025 13:45:41 +0000
-Received: from DB1PEPF000509ED.eurprd03.prod.outlook.com
- (2603:10a6:10:234:cafe::d9) by DU2PR04CA0041.outlook.office365.com
- (2603:10a6:10:234::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.35 via Frontend Transport; Mon,
- 28 Apr 2025 13:45:41 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- DB1PEPF000509ED.mail.protection.outlook.com (10.167.242.71) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8678.33 via Frontend Transport; Mon, 28 Apr 2025 13:45:41 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 28 Apr
- 2025 15:45:41 +0200
-Received: from phytec.de (172.25.0.51) by Florix.phytec.de (172.25.0.13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 28 Apr
- 2025 15:45:41 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-CC: <trini@konsulko.com>, <ggiordano@phytec.com>, <d.schultz@phytec.de>,
- <n-francis@ti.com>, <nmorrisson@phytec.com>
-Subject: [PATCH 3/7] board: phytec: phycore_am6xx: Set bootmeths &
- boot_targets environment
-Date: Mon, 28 Apr 2025 15:45:27 +0200
-Message-ID: <20250428134531.2884940-3-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250428134531.2884940-1-w.egorov@phytec.de>
-References: <20250428134531.2884940-1-w.egorov@phytec.de>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AE5421516;
+ Mon, 28 Apr 2025 06:40:26 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 15EE13F673;
+ Mon, 28 Apr 2025 06:40:31 -0700 (PDT)
+Date: Mon, 28 Apr 2025 14:40:29 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej Skrabec <jernej.skrabec@gmail.com>
+Cc: jagan@amarulasolutions.com, trini@konsulko.com, macromorgan@hotmail.com,
+ uwu@icenowy.me, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 4/5] sunxi: h6: dram: split dram_para struct
+Message-ID: <20250428144029.0641d195@donnerap.manchester.arm.com>
+In-Reply-To: <20250411161439.4743-5-jernej.skrabec@gmail.com>
+References: <20250411161439.4743-1-jernej.skrabec@gmail.com>
+ <20250411161439.4743-5-jernej.skrabec@gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.51]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509ED:EE_|DU0P195MB1425:EE_
-X-MS-Office365-Filtering-Correlation-Id: 89ac7569-c223-4f7e-3605-08dd865af7c7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4livlnv+vSADEcbtGwB/2MekGmzQVRwZXe940jGyspqsT2iNDpN4vH4tT0Us?=
- =?us-ascii?Q?8PFbJKO2+4zh8bDuP3GzM87vwxvU70seilE74mFEim6vEu+T9z9faIJkLPv4?=
- =?us-ascii?Q?9Mx/SpENnUEYemYDD8OlaPswqzn5gz8+gNDnvuwaoRdAmhVvv9Zy/o8kQdkl?=
- =?us-ascii?Q?yqo4+PHNG3ilS+tWjiHXuNWK2tn4He8xthDKEo9xqXRmqQ836HK4qlCCTC5t?=
- =?us-ascii?Q?7qHueithmI9/ET1Z72lMNSCbaSNNSkv/e60FHjR+6WjvK5C/r4SKkvGemviW?=
- =?us-ascii?Q?W89ghkLJBIS+7M4jnSTQtiJPVaIWm61zpRUOI3GvuagSue+SO1jTU4XwgG9F?=
- =?us-ascii?Q?Ice0qA3Z3cyIXVlG7ZPWiYKuIZZ0l6+1mVGNIKer1vad7OBZuqS7wuFgeqAn?=
- =?us-ascii?Q?NLaGCqKyAXEx9hEmP5/q7Jb+FJHCWQyv13ijKpU1E87GcTarOXQNhBC01Muw?=
- =?us-ascii?Q?Hdy4yzg0Z61tOPHDXowOYE+X7MtM1tB2vI1GDeumZhyNveO2ToNDo8lUB4Lx?=
- =?us-ascii?Q?8uWuKx9Y8zvUh2vMH1U9wDdt/BPQ4UBajZ+i9Y6G5kjcKXIHFJyXCT2wUC61?=
- =?us-ascii?Q?/z9eP13f9DIvUeGvHUFryH3ecBtomb6oFp1G7qN4l6VrHMLL2ohsfYKppwoU?=
- =?us-ascii?Q?dRhXgRAhNAVlCKx9zadhjZGgP7e+H2URYnEs0PyahPhvEpKKekBfqASCVbQA?=
- =?us-ascii?Q?vkBikO2RGx/biFAPzuWKzVBUsqp/dChP8ZqX85O7YY/zdpw/UXRKutc58ne1?=
- =?us-ascii?Q?IcI/RJYjIBFJGDyuPBVqAlkk6KamFzPhYHaWhgjWN/lahCCtNBkoA00jstVx?=
- =?us-ascii?Q?tGNu0bLyGdSvBibNlTqKjrqYa27avXyE4xDeLWwUPP+y/KZq4vqNbbQfIQ8V?=
- =?us-ascii?Q?DYVF6FyQwwxbS0B8NDZOjN0UJCZiWi/n9xbbQqE9wdLm3TnJNpRWdiw2TXc3?=
- =?us-ascii?Q?doRE37eYzQhtuJrfwa0lR48gaCwLVCj9HSwRM0fNaA3zWn0B3ZgcWVMPqBN/?=
- =?us-ascii?Q?cZ1C1zVVmR6u8o5qo7028h5sDOIc8V/3W50ScBa55ivF0JqlaxZOoEx6d+t4?=
- =?us-ascii?Q?zHZ14iXGc/wcdt16PpRpxkWYqaHkJeB/yQTdC8AA1er6GGWTgTtlt1q8MnDv?=
- =?us-ascii?Q?GAhCeklQDfq19VkJwzXmGM7PZNh8YwbDXtQgEYKsPo28iHRZaQUZ41PtRLat?=
- =?us-ascii?Q?hO7SBfI1hUeHNHivhjFISen/GvEjOk8uWCvBxFkR0IpcxanErZn6tAcIWCbp?=
- =?us-ascii?Q?YhVcNKQEDLXqqFVRQBEoctITOP+lnSZDnEq2KoTgCmSSv1UrQpYjfkeSj0lE?=
- =?us-ascii?Q?WsjHb1uU1dpvmwbWWcriDcV1OSJZBmiqa0TUBNoN5VDj9w0zhDWD0PGV83pa?=
- =?us-ascii?Q?ATRKCZ2anzqwD2rZgIGXQQUSManpXm2S70wDrzTVqOuk/Rj6PpKmG53wXvWD?=
- =?us-ascii?Q?DZb1gi1+BgZD59NoaliYPQPTE/jKvfRUSDLoAzK5cETmmHmxXDKVWacUKkkh?=
- =?us-ascii?Q?cOJDGfgzjiMwclTPrrN8BgUMdR8cpE9pXsvP?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2025 13:45:41.7973 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 89ac7569-c223-4f7e-3605-08dd865af7c7
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509ED.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1425
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,49 +58,353 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As part of our migration to the standard boot process, configure the
-default values for the bootmeths and boot_targets environment variables.
+On Fri, 11 Apr 2025 18:14:38 +0200
+Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
- board/phytec/phycore_am62ax/phycore_am62ax.env | 3 +++
- board/phytec/phycore_am62x/phycore_am62x.env   | 3 +++
- board/phytec/phycore_am64x/phycore_am64x.env   | 3 +++
- 3 files changed, 9 insertions(+)
+> This change is same as in 78aa00c38e86 ("sunxi: H616: dram: split struct
+> dram_para"), but for H6. This is needed in order to extract common code
+> between H6 and H616 later.
 
-diff --git a/board/phytec/phycore_am62ax/phycore_am62ax.env b/board/phytec/phycore_am62ax/phycore_am62ax.env
-index a0eacd1dfc3..df452804f98 100644
---- a/board/phytec/phycore_am62ax/phycore_am62ax.env
-+++ b/board/phytec/phycore_am62ax/phycore_am62ax.env
-@@ -23,3 +23,6 @@ get_cmd=tftp
- spi_fdt_addr=0x700000
- spi_image_addr=0x800000
- spi_ramdisk_addr=0x1e00000
-+
-+bootmeths=script efi extlinux pxe
-+boot_targets=mmc1 mmc0 spi_flash dhcp
-diff --git a/board/phytec/phycore_am62x/phycore_am62x.env b/board/phytec/phycore_am62x/phycore_am62x.env
-index 40787b0cbcb..797904013dc 100644
---- a/board/phytec/phycore_am62x/phycore_am62x.env
-+++ b/board/phytec/phycore_am62x/phycore_am62x.env
-@@ -24,3 +24,6 @@ get_cmd=tftp
- spi_fdt_addr=0x700000
- spi_image_addr=0x800000
- spi_ramdisk_addr=0x2200000
-+
-+bootmeths=script efi extlinux pxe
-+boot_targets=mmc1 mmc0 spi_flash dhcp
-diff --git a/board/phytec/phycore_am64x/phycore_am64x.env b/board/phytec/phycore_am64x/phycore_am64x.env
-index d04a3be6864..36ab16e2f7a 100644
---- a/board/phytec/phycore_am64x/phycore_am64x.env
-+++ b/board/phytec/phycore_am64x/phycore_am64x.env
-@@ -23,3 +23,6 @@ get_cmd=tftp
- spi_fdt_addr=0x700000
- spi_image_addr=0x800000
- spi_ramdisk_addr=0x2200000
-+
-+bootmeths=script efi extlinux pxe
-+boot_targets=mmc1 mmc0 spi_flash dhcp
--- 
-2.34.1
+Thanks for doing that, and like that other patch, that results in some
+code savings: I count more than 450 bytes.
+
+> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> ---
+>  .../include/asm/arch-sunxi/dram_sun50i_h6.h   |   7 +-
+>  arch/arm/mach-sunxi/dram_sun50i_h6.c          | 145 ++++++++++--------
+>  2 files changed, 82 insertions(+), 70 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
+> index f05a1845b32b..af6cd337d7e0 100644
+> --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
+> +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
+> @@ -315,12 +315,15 @@ check_member(sunxi_mctl_phy_reg, dx[3].reserved_0xf0, 0xaf0);
+>  struct dram_para {
+>  	u32 clk;
+>  	enum sunxi_dram_type type;
+> +	const u8 dx_read_delays[NR_OF_BYTE_LANES][RD_LINES_PER_BYTE_LANE];
+> +	const u8 dx_write_delays[NR_OF_BYTE_LANES][WR_LINES_PER_BYTE_LANE];
+> +};
+> +
+> +struct dram_config {
+>  	u8 cols;
+>  	u8 rows;
+>  	u8 ranks;
+>  	u8 bus_full_width;
+> -	const u8 dx_read_delays[NR_OF_BYTE_LANES][RD_LINES_PER_BYTE_LANE];
+> -	const u8 dx_write_delays[NR_OF_BYTE_LANES][WR_LINES_PER_BYTE_LANE];
+>  };
+>  
+>  static inline int ns_to_t(int nanoseconds)
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c b/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> index 24b2cb1579f4..6a9e53f965eb 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> @@ -35,13 +35,16 @@
+>   */
+>  
+>  static void mctl_sys_init(u32 clk_rate);
+> -static void mctl_com_init(const struct dram_para *para);
+> -static bool mctl_channel_init(const struct dram_para *para);
+> +static void mctl_com_init(const struct dram_para *para,
+> +			  const struct dram_config *config);
+> +static bool mctl_channel_init(const struct dram_para *para,
+> +			      const struct dram_config *config);
+>  
+> -static bool mctl_core_init(struct dram_para *para)
+> +static bool mctl_core_init(const struct dram_para *para,
+> +			   const struct dram_config *config)
+>  {
+>  	mctl_sys_init(para->clk);
+> -	mctl_com_init(para);
+> +	mctl_com_init(para, config);
+>  	switch (para->type) {
+>  	case SUNXI_DRAM_TYPE_LPDDR3:
+>  	case SUNXI_DRAM_TYPE_DDR3:
+> @@ -50,7 +53,7 @@ static bool mctl_core_init(struct dram_para *para)
+>  	default:
+>  		panic("Unsupported DRAM type!");
+>  	};
+> -	return mctl_channel_init(para);
+> +	return mctl_channel_init(para, config);
+>  }
+>  
+>  /* PHY initialisation */
+> @@ -196,15 +199,15 @@ static void mctl_sys_init(u32 clk_rate)
+>  	writel(0x8000, &mctl_ctl->unk_0x00c);
+>  }
+>  
+> -static void mctl_set_addrmap(const struct dram_para *para)
+> +static void mctl_set_addrmap(const struct dram_config *config)
+>  {
+>  	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+>  			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
+> -	u8 cols = para->cols;
+> -	u8 rows = para->rows;
+> -	u8 ranks = para->ranks;
+> +	u8 cols = config->cols;
+> +	u8 rows = config->rows;
+> +	u8 ranks = config->ranks;
+>  
+> -	if (!para->bus_full_width)
+> +	if (!config->bus_full_width)
+>  		cols -= 1;
+>  
+>  	/* Ranks */
+> @@ -282,7 +285,8 @@ static void mctl_set_addrmap(const struct dram_para *para)
+>  	mctl_ctl->addrmap[8] = 0x3F3F;
+>  }
+>  
+> -static void mctl_com_init(const struct dram_para *para)
+> +static void mctl_com_init(const struct dram_para *para,
+> +			  const struct dram_config *config)
+>  {
+>  	struct sunxi_mctl_com_reg * const mctl_com =
+>  			(struct sunxi_mctl_com_reg *)SUNXI_DRAM_COM_BASE;
+> @@ -292,7 +296,7 @@ static void mctl_com_init(const struct dram_para *para)
+>  			(struct sunxi_mctl_phy_reg *)SUNXI_DRAM_PHY0_BASE;
+>  	u32 reg_val, tmp;
+>  
+> -	mctl_set_addrmap(para);
+> +	mctl_set_addrmap(config);
+>  
+>  	setbits_le32(&mctl_com->cr, BIT(31));
+>  
+> @@ -311,12 +315,12 @@ static void mctl_com_init(const struct dram_para *para)
+>  	clrsetbits_le32(&mctl_com->unk_0x008, 0x3f00, reg_val);
+>  
+>  	/* TODO: DDR4 */
+> -	reg_val = MSTR_BURST_LENGTH(8) | MSTR_ACTIVE_RANKS(para->ranks);
+> +	reg_val = MSTR_BURST_LENGTH(8) | MSTR_ACTIVE_RANKS(config->ranks);
+>  	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
+>  		reg_val |= MSTR_DEVICETYPE_LPDDR3;
+>  	if (para->type == SUNXI_DRAM_TYPE_DDR3)
+>  		reg_val |= MSTR_DEVICETYPE_DDR3 | MSTR_2TMODE;
+> -	if (para->bus_full_width)
+> +	if (config->bus_full_width)
+>  		reg_val |= MSTR_BUSWIDTH_FULL;
+>  	else
+>  		reg_val |= MSTR_BUSWIDTH_HALF;
+> @@ -328,7 +332,7 @@ static void mctl_com_init(const struct dram_para *para)
+>  		reg_val = DCR_DDR3 | DCR_DDR8BANK | DCR_DDR2T;
+>  	writel(reg_val | 0x400, &mctl_phy->dcr);
+>  
+> -	if (para->ranks == 2)
+> +	if (config->ranks == 2)
+>  		writel(0x0303, &mctl_ctl->odtmap);
+>  	else
+>  		writel(0x0201, &mctl_ctl->odtmap);
+> @@ -346,7 +350,7 @@ static void mctl_com_init(const struct dram_para *para)
+>  	}
+>  	writel(reg_val, &mctl_ctl->odtcfg);
+>  
+> -	if (!para->bus_full_width) {
+> +	if (!config->bus_full_width) {
+>  		writel(0x0, &mctl_phy->dx[2].gcr[0]);
+>  		writel(0x0, &mctl_phy->dx[3].gcr[0]);
+>  	}
+> @@ -411,7 +415,8 @@ static void mctl_bit_delay_set(const struct dram_para *para)
+>  	}
+>  }
+>  
+> -static bool mctl_channel_init(const struct dram_para *para)
+> +static bool mctl_channel_init(const struct dram_para *para,
+> +			      const struct dram_config *config)
+>  {
+>  	struct sunxi_mctl_com_reg * const mctl_com =
+>  			(struct sunxi_mctl_com_reg *)SUNXI_DRAM_COM_BASE;
+> @@ -446,14 +451,14 @@ static bool mctl_channel_init(const struct dram_para *para)
+>  
+>  	udelay(100);
+>  
+> -	if (para->ranks == 2)
+> +	if (config->ranks == 2)
+>  		setbits_le32(&mctl_phy->dtcr[1], 0x30000);
+>  	else
+>  		clrsetbits_le32(&mctl_phy->dtcr[1], 0x30000, 0x10000);
+>  
+>  	if (sunxi_dram_is_lpddr(para->type))
+>  		clrbits_le32(&mctl_phy->dtcr[1], BIT(1));
+> -	if (para->ranks == 2) {
+> +	if (config->ranks == 2) {
+>  		writel(0x00010001, &mctl_phy->rankidr);
+>  		writel(0x20000, &mctl_phy->odtcr);
+>  	} else {
+> @@ -555,11 +560,12 @@ static bool mctl_channel_init(const struct dram_para *para)
+>  	return true;
+>  }
+>  
+> -static void mctl_auto_detect_rank_width(struct dram_para *para)
+> +static void mctl_auto_detect_rank_width(const struct dram_para *para,
+> +					struct dram_config *config)
+>  {
+>  	/* this is minimum size that it's supported */
+> -	para->cols = 8;
+> -	para->rows = 13;
+> +	config->cols = 8;
+> +	config->rows = 13;
+>  
+>  	/*
+>  	 * Previous versions of this driver tried to auto detect the rank
+> @@ -575,68 +581,69 @@ static void mctl_auto_detect_rank_width(struct dram_para *para)
+>  	 */
+>  
+>  	debug("testing 32-bit width, rank = 2\n");
+> -	para->bus_full_width = 1;
+> -	para->ranks = 2;
+> -	if (mctl_core_init(para))
+> +	config->bus_full_width = 1;
+> +	config->ranks = 2;
+> +	if (mctl_core_init(para, config))
+>  		return;
+>  
+>  	debug("testing 32-bit width, rank = 1\n");
+> -	para->bus_full_width = 1;
+> -	para->ranks = 1;
+> -	if (mctl_core_init(para))
+> +	config->bus_full_width = 1;
+> +	config->ranks = 1;
+> +	if (mctl_core_init(para, config))
+>  		return;
+>  
+>  	debug("testing 16-bit width, rank = 2\n");
+> -	para->bus_full_width = 0;
+> -	para->ranks = 2;
+> -	if (mctl_core_init(para))
+> +	config->bus_full_width = 0;
+> +	config->ranks = 2;
+> +	if (mctl_core_init(para, config))
+>  		return;
+>  
+>  	debug("testing 16-bit width, rank = 1\n");
+> -	para->bus_full_width = 0;
+> -	para->ranks = 1;
+> -	if (mctl_core_init(para))
+> +	config->bus_full_width = 0;
+> +	config->ranks = 1;
+> +	if (mctl_core_init(para, config))
+>  		return;
+>  
+>  	panic("This DRAM setup is currently not supported.\n");
+>  }
+>  
+> -static void mctl_auto_detect_dram_size(struct dram_para *para)
+> +static void mctl_auto_detect_dram_size(const struct dram_para *para,
+> +				       struct dram_config *config)
+>  {
+>  	/* TODO: non-(LP)DDR3 */
+>  
+>  	/* detect row address bits */
+> -	para->cols = 8;
+> -	para->rows = 18;
+> -	mctl_core_init(para);
+> +	config->cols = 8;
+> +	config->rows = 18;
+> +	mctl_core_init(para, config);
+>  
+> -	for (para->rows = 13; para->rows < 18; para->rows++) {
+> +	for (config->rows = 13; config->rows < 18; config->rows++) {
+>  		/* 8 banks, 8 bit per byte and 16/32 bit width */
+> -		if (mctl_mem_matches((1 << (para->rows + para->cols +
+> -					    4 + para->bus_full_width))))
+> +		if (mctl_mem_matches((1 << (config->rows + config->cols +
+> +					    4 + config->bus_full_width))))
+>  			break;
+>  	}
+>  
+>  	/* detect column address bits */
+> -	para->cols = 11;
+> -	mctl_core_init(para);
+> +	config->cols = 11;
+> +	mctl_core_init(para, config);
+>  
+> -	for (para->cols = 8; para->cols < 11; para->cols++) {
+> +	for (config->cols = 8; config->cols < 11; config->cols++) {
+>  		/* 8 bits per byte and 16/32 bit width */
+> -		if (mctl_mem_matches(1 << (para->cols + 1 +
+> -					   para->bus_full_width)))
+> +		if (mctl_mem_matches(1 << (config->cols + 1 +
+> +					   config->bus_full_width)))
+>  			break;
+>  	}
+>  }
+>  
+> -unsigned long mctl_calc_size(struct dram_para *para)
+> +unsigned long mctl_calc_size(const struct dram_config *config)
+>  {
+> -	u8 width = para->bus_full_width ? 4 : 2;
+> +	u8 width = config->bus_full_width ? 4 : 2;
+>  
+>  	/* TODO: non-(LP)DDR3 */
+>  
+>  	/* 8 banks */
+> -	return (1ULL << (para->cols + para->rows + 3)) * width * para->ranks;
+> +	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
+>  }
+>  
+>  #define SUN50I_H6_LPDDR3_DX_WRITE_DELAYS			\
+> @@ -661,36 +668,38 @@ unsigned long mctl_calc_size(struct dram_para *para)
+>  	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+>  	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 }}
+>  
+> -unsigned long sunxi_dram_init(void)
+> -{
+> -	struct sunxi_mctl_com_reg * const mctl_com =
+> -			(struct sunxi_mctl_com_reg *)SUNXI_DRAM_COM_BASE;
+> -	struct sunxi_prcm_reg *const prcm =
+> -		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+> -	struct dram_para para = {
+> -		.clk = CONFIG_DRAM_CLK,
+> +static const struct dram_para para = {
+> +	.clk = CONFIG_DRAM_CLK,
+>  #ifdef CONFIG_SUNXI_DRAM_H6_LPDDR3
+> -		.type = SUNXI_DRAM_TYPE_LPDDR3,
+> -		.dx_read_delays  = SUN50I_H6_LPDDR3_DX_READ_DELAYS,
+> -		.dx_write_delays = SUN50I_H6_LPDDR3_DX_WRITE_DELAYS,
+> +	.type = SUNXI_DRAM_TYPE_LPDDR3,
+> +	.dx_read_delays  = SUN50I_H6_LPDDR3_DX_READ_DELAYS,
+> +	.dx_write_delays = SUN50I_H6_LPDDR3_DX_WRITE_DELAYS,
+>  #elif defined(CONFIG_SUNXI_DRAM_H6_DDR3_1333)
+> -		.type = SUNXI_DRAM_TYPE_DDR3,
+> -		.dx_read_delays  = SUN50I_H6_DDR3_DX_READ_DELAYS,
+> -		.dx_write_delays = SUN50I_H6_DDR3_DX_WRITE_DELAYS,
+> +	.type = SUNXI_DRAM_TYPE_DDR3,
+> +	.dx_read_delays  = SUN50I_H6_DDR3_DX_READ_DELAYS,
+> +	.dx_write_delays = SUN50I_H6_DDR3_DX_WRITE_DELAYS,
+>  #endif
+> -	};
+> +};
+> +
+> +unsigned long sunxi_dram_init(void)
+> +{
+> +	struct sunxi_mctl_com_reg * const mctl_com =
+> +			(struct sunxi_mctl_com_reg *)SUNXI_DRAM_COM_BASE;
+> +	struct sunxi_prcm_reg *const prcm =
+> +		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+> +	struct dram_config config;
+>  
+>  	unsigned long size;
+>  
+>  	setbits_le32(&prcm->res_cal_ctrl, BIT(8));
+>  	clrbits_le32(&prcm->ohms240, 0x3f);
+>  
+> -	mctl_auto_detect_rank_width(&para);
+> -	mctl_auto_detect_dram_size(&para);
+> +	mctl_auto_detect_rank_width(&para, &config);
+> +	mctl_auto_detect_dram_size(&para, &config);
+>  
+> -	mctl_core_init(&para);
+> +	mctl_core_init(&para, &config);
+>  
+> -	size = mctl_calc_size(&para);
+> +	size = mctl_calc_size(&config);
+>  
+>  	clrsetbits_le32(&mctl_com->cr, 0xf0, (size >> (10 + 10 + 4)) & 0xf0);
+>  
 
