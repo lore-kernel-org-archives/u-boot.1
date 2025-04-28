@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A78DC369D5
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:27:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E574C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:28:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53C9B82918;
+	by phobos.denx.de (Postfix) with ESMTP id 9AEB682958;
 	Mon, 28 Apr 2025 21:26:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JGB6kSmq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y7IjYTw6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33D258210D; Mon, 28 Apr 2025 21:24:45 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id B052D820F6; Mon, 28 Apr 2025 21:24:46 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC05D820FE
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53A3B80EFB
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-22d95f0dda4so77601535ad.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:42 -0700 (PDT)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-73bf1cef6ceso5252861b3a.0
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745868281; x=1746473081; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745868282; x=1746473082; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IiWapCmp00l3ec2RBkD7eMml6UDtFXkBKYOfIf4h0KM=;
- b=JGB6kSmqWBpD2bmodF+/J6DuMJ7X+Ao8o9W2C/17jGjNau9CUpa0+YDKqv7vE2ZAek
- peYAHfxPHS6Dc1E+IAqoktcdUoy8Z8HD7bkZ7vvGES5NlwO2UFtr5zB4tWorPs2LntyZ
- r2H6KYIOFePI2K8Qno85aSsHVGzYS6vLT0cD8=
+ bh=vPhLgWTaNDFKbWy6US5y0+GZA/iIcvgfjvNFkmIDZSU=;
+ b=Y7IjYTw6h5gZOFARmzDktZYyiqrj8nObrlSBlDtUtx8wLZ7suFzJGkd6Fc0X6cztuo
+ LoWxSgoIXNdZFqeL0A5KljL6TGlSbAyt0WRzyzg2ISoDidT3zt3iqL97ZLhIe6Uj0yb/
+ mkb1oZJ5o3SZ6QNKTSCsL4wfb3bYmDrTm6Ut8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745868281; x=1746473081;
+ d=1e100.net; s=20230601; t=1745868282; x=1746473082;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IiWapCmp00l3ec2RBkD7eMml6UDtFXkBKYOfIf4h0KM=;
- b=RwSaOplhgvuNsOXg6NnT+cxom+9Gp8/LgqxIeBQFBlKeCRt1B/9vC8ppiqFyoblMYq
- DY1hVYNXp4Au41yUoqkGJGbRw4H/WEKZAVf3jn16Bejq/Z7EC4HvIFc2mx3aY9b3pgBH
- pTyTvnH61rp2ZljUQnSlPR+ZMLDGLk3B0v6UxuB7MTYArGyp7FGKDY8IIGAA9aa9YgkC
- Dsz9OVxfH9HMuNrI2gR2fnWDtwrcAxLnBgCrSIGKDJ4skYN4rLPFVeEcn7nCugsuuUQN
- WDzYoai3dHOP1OClRGo9THK8bnCKdoKNJDg+gYPZtzktn0Q+jXCzCyhm2K4IIf7hCGgn
- OS/Q==
-X-Gm-Message-State: AOJu0Yw/gA/dKHqqTBdztaMrkYJFXya5Ek2CgCi8jz/RdfDDtSEWJMoS
- rMlOdj/d/KttjmDhvSg6DB6pyX76w/TwpDdCUKt6b8MTawZf9uLXauGleWdk86dzU171sZo6Ufw
+ bh=vPhLgWTaNDFKbWy6US5y0+GZA/iIcvgfjvNFkmIDZSU=;
+ b=ZruY4MNx7a2daNaPLIGpDiWUKaQvjeXzeHtZl4WtZixVahKa5GZ3xZvGJ80figawQ6
+ S4TyhMpxxzRAfswT+eOcTi4VuOKheJM9fOb+SAXTXvoXCDuxD9vDHkux4JyCLhownfP3
+ oAotMqXJ5nXIIoqABfe2Mt+zG718XUPI2hLoBJdtqGgvO69urnl0YhLGVNlyRbUIffqm
+ ywXLaViLN5GTWuYlmNVfGSDhGRetqSJ1eeQtJ17Wl0Yfs8cnvYX16IkDQO8+qwYDckCd
+ rGQzq9odH3CkeS0tFjIg0o2aIOUOFHPlhktWB1QelXxYHimgzA/lZmpFiTJccw9iuU6q
+ 0ITA==
+X-Gm-Message-State: AOJu0YwpGzwi4RG9quLKlFdDHIU6fuF1FEwmjZihvOTvYIw0W7pRTRwN
+ tq843CxfdM13kE477CjOSfrLn209o3CUQyUf1CNMo4NkuOkvW8qDn9ZfD/6sy6TNUP62jfS2qK8
  =
-X-Gm-Gg: ASbGncsYcvAW4tTy65bwljeZx/Vy3KB7F9BQTa3Hivl8nRfvnMs0LGZ9EIAGIkhikKP
- R2i5/5jX02ltPYMJv5d3WJPnLkv5DZI+v44gkNwqIqN1qL4PO/xeOR6LsCEPwbglw+s8aQRHtlk
- waBx9ev98DaHG5//M6HpWZOmCDjakkXFhwk8FeTbt6xTk5kRPisX0xElGe7XAYjd/mXPFoSDMQd
- 4st1ndTtGHyPBOHytPQu7tcVBbzNeXhpt3RHDZzKebqdhVm4z5sieo5XwM71nPO8eJzHAASB5tr
- pcRP3NlPfLNi4bxIqVd1eSBIrJuw+99WpgSDDM2Q9op9DYVOQ7uyVBlELMUpzw6Al5MLH+ViOAo
- m5w==
-X-Google-Smtp-Source: AGHT+IH1ZyIeU+cznBvnq7Qt2VW74jXxSl8Kxcgteaa9phGkD413sJMZL+2bA78B0GzkjxQKW7+meg==
-X-Received: by 2002:a17:903:22c3:b0:223:517a:d2a3 with SMTP id
- d9443c01a7336-22de6f9902cmr3858765ad.17.1745868281178; 
- Mon, 28 Apr 2025 12:24:41 -0700 (PDT)
+X-Gm-Gg: ASbGnctlbE2UVrAiTtkBZkNc+xqGLPgrHNhIlSa8h0Jj/mM/fBPnqpAL7NivyEbcX7N
+ 5m+g1jXbxA2mpK/OpAKnqMhGYq9wjdB5jjQjWep6sDIZpCgzLlkHaHiIydLI1J3ZF43ls+8x0Rj
+ wkUnPbAVtnAfjatCz+CGiNt7s2B0FTAPNLF6a8xipBLxWrVJfW/RVdy3PD56W3gpnBL/5mvjWnE
+ JI75IlYRsqy0ck42u3El4NY7yrLLreJbWjA8mKntpWcSgyYL6DlKh+P1IRD3gC3lURxbZPW+WK8
+ nwAGHf8ECGdSLPBLENGpPRsx6mzdIZhbvZe2iFtE30kvj9oqumLVtGXiWHtjhqWcfkXZVNXvdCM
+ pSnGVHkY65WkQ
+X-Google-Smtp-Source: AGHT+IEQ29Xakf9ZqDn+2vhG4vWZGeQtmPeZT2f9+yM8p0x1SKODgb90w1JhY6PrKIzoycVytPjIBw==
+X-Received: by 2002:a05:6a00:181c:b0:736:3c77:31fd with SMTP id
+ d2e1a72fcca58-73ff73d813bmr13061054b3a.23.1745868282618; 
+ Mon, 28 Apr 2025 12:24:42 -0700 (PDT)
 Received: from localhost (199.24.125.34.bc.googleusercontent.com.
  [34.125.24.199]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-22db5216adbsm86813245ad.234.2025.04.28.12.24.40
+ d2e1a72fcca58-73e25aca292sm8347179b3a.168.2025.04.28.12.24.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Apr 2025 12:24:40 -0700 (PDT)
+ Mon, 28 Apr 2025 12:24:42 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -77,9 +77,10 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v3 07/17] coreboot: Locate table earlier than arch_cpu_init()
-Date: Mon, 28 Apr 2025 12:24:14 -0700
-Message-ID: <20250428192427.3877612-8-swboyd@chromium.org>
+Subject: [PATCH v3 08/17] arm: Support running U-Boot as a coreboot payload on
+ ARM64
+Date: Mon, 28 Apr 2025 12:24:15 -0700
+Message-ID: <20250428192427.3877612-9-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.906.g1f30a19c02-goog
 In-Reply-To: <20250428192427.3877612-1-swboyd@chromium.org>
 References: <20250428192427.3877612-1-swboyd@chromium.org>
@@ -102,108 +103,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently we locate the coreboot table in arch_cpu_init(). One of the
-first things that happens in initcall_run_f() initialization is
-fdtdec_setup() is called which could inspect the DTB for memory
-information (see mach-snapdragon's board_fdt_blob_setup() code).
-Introduce an initcall specifically to locate the coreboot table early on
-in the boot process so that board_fdt_blob_setup() can know that the
-memory is described in the coreboot tables instead of the DTB that's
-either embedded in the ELF file or provided by the earlier stage
-bootloader. This will also help in the future when we want to pick the
-DTB from a FIT image based on the board and revision ID bits in the
-coreboot tables.
+Add a 'coreboot' cpu to armv8 that looks for the coreboot table near the
+top of the 4G address space.
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- arch/x86/cpu/coreboot/coreboot.c |  8 ++++----
- common/board_f.c                 |  4 ++++
- include/cb_sysinfo.h             |  7 +++++++
- lib/coreboot/cb_sysinfo.c        | 11 +++++++++++
- 4 files changed, 26 insertions(+), 4 deletions(-)
+ arch/arm/cpu/armv8/Makefile          |  1 +
+ arch/arm/cpu/armv8/coreboot/Makefile |  4 ++++
+ arch/arm/cpu/armv8/coreboot/cpu.c    | 22 ++++++++++++++++++++++
+ arch/arm/include/asm/global_data.h   |  3 +++
+ arch/x86/cpu/cpu.c                   | 13 -------------
+ include/cb_sysinfo.h                 |  7 +++++++
+ lib/coreboot/Kconfig                 | 14 +++++++-------
+ lib/coreboot/cb_sysinfo.c            | 13 +++++++++++++
+ 8 files changed, 57 insertions(+), 20 deletions(-)
+ create mode 100644 arch/arm/cpu/armv8/coreboot/Makefile
+ create mode 100644 arch/arm/cpu/armv8/coreboot/cpu.c
 
-diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
-index cd9ad22b3db3..e1dbce4f0b29 100644
---- a/arch/x86/cpu/coreboot/coreboot.c
-+++ b/arch/x86/cpu/coreboot/coreboot.c
-@@ -27,11 +27,11 @@ int arch_cpu_init(void)
- 	if (ret)
- 		return ret;
+diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
+index dd0191a12fac..8699433a96ae 100644
+--- a/arch/arm/cpu/armv8/Makefile
++++ b/arch/arm/cpu/armv8/Makefile
+@@ -48,3 +48,4 @@ obj-$(CONFIG_ARMV8_CE_SHA1) += sha1_ce_glue.o sha1_ce_core.o
+ obj-$(CONFIG_ARMV8_CE_SHA256) += sha256_ce_glue.o sha256_ce_core.o
  
--	ret = get_coreboot_info(&lib_sysinfo);
--	if (ret != 0) {
--		printf("Failed to parse coreboot tables.\n");
--		return ret;
-+	if (!gd->arch.coreboot_table)
-+		printf("Failed to locate coreboot tables.\n");
-+		return -ENOENT;
- 	}
+ obj-$(CONFIG_SYSINFO_SMBIOS) += sysinfo.o
++obj-$(CONFIG_SYS_COREBOOT) += coreboot/
+diff --git a/arch/arm/cpu/armv8/coreboot/Makefile b/arch/arm/cpu/armv8/coreboot/Makefile
+new file mode 100644
+index 000000000000..0eca9ff05900
+--- /dev/null
++++ b/arch/arm/cpu/armv8/coreboot/Makefile
+@@ -0,0 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0+
 +
- 	gd_set_acpi_start(map_to_sysmem(lib_sysinfo.rsdp));
- 	gd_set_smbios_start(lib_sysinfo.smbios_start);
- 
-diff --git a/common/board_f.c b/common/board_f.c
-index bff465d9cb2f..7e314b20c60e 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -12,6 +12,7 @@
- #include <config.h>
- #include <bloblist.h>
- #include <bootstage.h>
++obj-y += cpu.o
++
+diff --git a/arch/arm/cpu/armv8/coreboot/cpu.c b/arch/arm/cpu/armv8/coreboot/cpu.c
+new file mode 100644
+index 000000000000..d0133049a294
+--- /dev/null
++++ b/arch/arm/cpu/armv8/coreboot/cpu.c
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
 +#include <cb_sysinfo.h>
- #include <clock_legacy.h>
- #include <console.h>
- #include <cpu.h>
-@@ -896,6 +897,9 @@ static void initcall_run_f(void)
- 	 * For simplicity it should remain an ordered list of function calls.
- 	 */
- 	INITCALL(setup_mon_len);
-+#if CONFIG_IS_ENABLED(SYS_COREBOOT)
-+	INITCALL(coreboot_early_init);
-+#endif
- #if CONFIG_IS_ENABLED(OF_CONTROL)
- 	INITCALL(fdtdec_setup);
++#include <linux/errno.h>
++#include <linux/sizes.h>
++#include <log.h>
++
++long locate_coreboot_table(void)
++{
++	long addr;
++
++	/*
++	 * We look for LBIO somewhere inside the CBMEM arena, which is
++	 * typically at the top of the first 4G of RAM.
++	 */
++	addr = detect_coreboot_table_at(SZ_4G - SZ_8M, SZ_8M);
++	if (addr < 0)
++		return -ENOENT;
++
++	debug("Located coreboot table at %#lx\n", addr);
++	return addr;
++}
+diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+index 45401d5e3c8a..70299aec2df4 100644
+--- a/arch/arm/include/asm/global_data.h
++++ b/arch/arm/include/asm/global_data.h
+@@ -108,6 +108,9 @@ struct arch_global_data {
+ #ifdef CONFIG_SMBIOS
+ 	ulong smbios_start;		/* Start address of SMBIOS table */
  #endif
++#ifdef CONFIG_SYS_COREBOOT
++	ulong coreboot_table;		/* Address of coreboot table */
++#endif
+ };
+ 
+ #include <asm-generic/global_data.h>
+diff --git a/arch/x86/cpu/cpu.c b/arch/x86/cpu/cpu.c
+index a40563e5a400..f91cfb984c1a 100644
+--- a/arch/x86/cpu/cpu.c
++++ b/arch/x86/cpu/cpu.c
+@@ -340,19 +340,6 @@ int reserve_arch(void)
+ }
+ #endif
+ 
+-static long detect_coreboot_table_at(ulong start, ulong size)
+-{
+-	u32 *ptr, *end;
+-
+-	size /= 4;
+-	for (ptr = (void *)start, end = ptr + size; ptr < end; ptr += 4) {
+-		if (*ptr == 0x4f49424c) /* "LBIO" */
+-			return (long)ptr;
+-	}
+-
+-	return -ENOENT;
+-}
+-
+ long locate_coreboot_table(void)
+ {
+ 	long addr;
 diff --git a/include/cb_sysinfo.h b/include/cb_sysinfo.h
-index 62a483e10cef..40d8030dbb8b 100644
+index 40d8030dbb8b..f24099fc0ef9 100644
 --- a/include/cb_sysinfo.h
 +++ b/include/cb_sysinfo.h
-@@ -239,6 +239,13 @@ extern struct sysinfo_t lib_sysinfo;
-  */
- int get_coreboot_info(struct sysinfo_t *info);
+@@ -228,6 +228,13 @@ struct sysinfo_t {
+ 
+ extern struct sysinfo_t lib_sysinfo;
  
 +/**
-+ * coreboot_early_init() - locate the coreboot tables during early init
++ * detect_coreboot_table_at() - Helper to find coreboot table
 + *
-+ * Return: 0
++ * Return: Address of coreboot table or -ENOENT on failure
 + */
-+int coreboot_early_init(void);
++long detect_coreboot_table_at(ulong start, ulong size);
 +
  /**
-  * cb_get_sysinfo() - get a pointer to the parsed coreboot sysinfo
+  * get_coreboot_info() - parse the coreboot sysinfo table
   *
+diff --git a/lib/coreboot/Kconfig b/lib/coreboot/Kconfig
+index cec0bcc0885f..10b67138a400 100644
+--- a/lib/coreboot/Kconfig
++++ b/lib/coreboot/Kconfig
+@@ -1,9 +1,9 @@
+ menu "U-Boot as Coreboot payload"
+-	depends on VENDOR_COREBOOT
++	depends on ARM64 || VENDOR_COREBOOT
+ 
+ config SYS_COREBOOT
+-	bool
+-	default y
++	bool "Support for booting u-boot as a coreboot payload" if ARM64
++	default VENDOR_COREBOOT
+ 	imply SYS_NS16550
+ 	imply SCSI
+ 	imply SCSI_AHCI
+@@ -17,15 +17,15 @@ config SYS_COREBOOT
+ 	imply USB_XHCI_HCD
+ 	imply USB_STORAGE
+ 	imply USB_KEYBOARD
+-	imply VIDEO_COREBOOT
+-	imply E1000
++	imply VIDEO_COREBOOT if x86
++	imply E1000 if x86
+ 	imply ETH_DESIGNWARE
+-	imply PCH_GBE
++	imply PCH_GBE if X86
+ 	imply RTL8169
+ 	imply CMD_CBFS
+ 	imply FS_CBFS
+ 	imply CBMEM_CONSOLE
+-	imply X86_TSC_READ_BASE
++	imply X86_TSC_READ_BASE if X86
+ 	imply USE_PREBOOT
+ 	select BINMAN if X86_RUN_64BIT
+ 	select SYSINFO
 diff --git a/lib/coreboot/cb_sysinfo.c b/lib/coreboot/cb_sysinfo.c
-index f8f2002d46f0..1ea4ec4a0487 100644
+index 1ea4ec4a0487..101e5ff4037b 100644
 --- a/lib/coreboot/cb_sysinfo.c
 +++ b/lib/coreboot/cb_sysinfo.c
-@@ -465,6 +465,17 @@ int get_coreboot_info(struct sysinfo_t *info)
- 	return 0;
+@@ -446,6 +446,19 @@ static int cb_parse_header(void *addr, int len, struct sysinfo_t *info)
+ 	return 1;
  }
  
-+int coreboot_early_init(void)
++long detect_coreboot_table_at(ulong start, ulong size)
 +{
-+	int ret;
++	u32 *ptr, *end;
 +
-+	ret = get_coreboot_info(&lib_sysinfo);
-+	if (ret != 0)
-+		debug("Failed to parse coreboot tables.\n");
++	size /= 4;
++	for (ptr = (void *)start, end = ptr + size; ptr < end; ptr += 4) {
++		if (*ptr == 0x4f49424c) /* "LBIO" */
++			return (long)ptr;
++	}
 +
-+	return 0;
++	return -ENOENT;
 +}
 +
- const struct sysinfo_t *cb_get_sysinfo(void)
+ int get_coreboot_info(struct sysinfo_t *info)
  {
- 	if (!ll_boot_init())
+ 	long addr;
 -- 
 Sent by a computer, using git, on the internet
 
