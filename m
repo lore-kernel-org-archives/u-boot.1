@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFFC5C369DC
-	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:28:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C9F9C369DC
+	for <u-boot@archiver.kernel.org>; Mon, 28 Apr 2025 19:28:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0BF882991;
-	Mon, 28 Apr 2025 21:26:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 35185829B2;
+	Mon, 28 Apr 2025 21:27:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OBGnYhzG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N6zMKgw7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1143A80EFB; Mon, 28 Apr 2025 21:24:48 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id AD439820FE; Mon, 28 Apr 2025 21:24:49 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D039080FDA
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FEFA8210E
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 21:24:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-22c33677183so55052095ad.2
- for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:45 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-736c277331eso5905652b3a.1
+ for <u-boot@lists.denx.de>; Mon, 28 Apr 2025 12:24:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745868284; x=1746473084; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745868286; x=1746473086; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n7SxG6o68AcFiNYjjH0sbObrdENWHfjBEg0C66iZfMU=;
- b=OBGnYhzGmz4Ndf/2iOjZuevX1/hhiULnWmyiTxUQCYBdhCG6TpPjue5oLV8lPVy9Kg
- L9/owic2BaWOWJtW8FMO3r0/2tjgLjmU308R75uJI/l9LJjiRcCy7lYNMVeQG/anSh5R
- bCCo0VouYo9VEQWoVDezOLE1G2/IX0MGunWwQ=
+ bh=p6ZGLNfrm2E44Awrp1tQSTiBNj+s+vejgx0gvQ+/lDA=;
+ b=N6zMKgw7YYt0+rLJSU9m3KcG4nhY2f0WlSR0OycekLW+F0J8y41nrkCp7xPCZG7cMk
+ 0v9p8HInSDNhdWlp3X0veI66RZr1fz20SAQKlfq0z+GAjuxqEAq14f+moMPaAwuDwJTj
+ B+0oLnXYjhB4m2YKnkqJ2sK8CF3I8o6GJ6tvE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745868284; x=1746473084;
+ d=1e100.net; s=20230601; t=1745868286; x=1746473086;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n7SxG6o68AcFiNYjjH0sbObrdENWHfjBEg0C66iZfMU=;
- b=oF20Frs5ZyH+IBiCVB2/bbrukcF2O1HTWI8ggiNsTqKpgxReLWeYVpLYR0FkzaUjVy
- nZXUskQLtqET0FQ5hbebySwOk/9wCtnPgWpXgvrpyEtU7lI9OBtjhxNUUaGMAcKPwhcP
- RaYkrK/l3XQVzkqwjptsr05E8T+DAknBqdyXxLnXcCQwWqlLUSa/obbn43tOkiKNI4tV
- 0/JfDA7UQ0DFRbfhMssXEcwjijv8UUQxq2c+qT0OnvfdsP1HPjKuNgcSY3eDNjQtWCGD
- IuLQCYEDW7fBu1sP/RG8h0VK4iHrP6B6QvgFanBfqxzqkyJPrxSCQbyz73rF+QCBhu5e
- ko/Q==
-X-Gm-Message-State: AOJu0Yw5EP7zohT+vwJcn9gOdzsUfDJe+Ni9FJgRpURHvLST98Wl0OB/
- qTuEKTyTakSbAYL2dO662D0dGI+aS+nYMjF38lXqc/w0LpMS+G0zqgkqMdEIFr40cWUzECBSKnU
+ bh=p6ZGLNfrm2E44Awrp1tQSTiBNj+s+vejgx0gvQ+/lDA=;
+ b=ILz/hUJepVVMk9sxYcazWV1sEjRAnkk3nbhANbSuCeWBha3+fKqpY8Ov9x8mPpF28j
+ UqNnQ6WbasqGfeE6GjkC4yvxoxWo2iu8Rx63YkWrcWes5DDk44Y3eVtNH9A1WuLnGq6B
+ mlQ1OMnil/pZ2LRhHf1OlNnjK/q8DXFQluyiFeazldFbrgb0ay0NBLA2lQsKPwDeFzXz
+ B13bozTwlzApWdM9UVyzDQ0kUOX42eXKQy0qL6hXCwld6JBD4RkJQcoBsWX5zLtFw/Pz
+ RxAXVhipc/DfifEvvk/MFJ48sGTL0a0jMUAmAoYj+jrEHhOrSLRWqcxo4AI2VCtlhGJe
+ 8GgQ==
+X-Gm-Message-State: AOJu0YyixiIb1KM/mYtiEYUowiDEACMEmK/MnAyF7z3NCoMquO138c0t
+ 1PTIPiJjhe7P1qpVnAAX02+13AVhM59vxunGA+/ttKN49dv6brBVnxu/SqspC3B8eo0Rte9rqEc
  =
-X-Gm-Gg: ASbGnctSGSj6waIoPPPfbtY9R+ePVb4VA0rOArL5jMt/z8TMHBZYKm/7V5gaK8qba/r
- z/iZWIi45JtFXQMNSdm0FhDzds6cz9UUnqBT1sjbxurNuozkHOU1qw5HX+IjuC5qh9YO9e3Li3c
- wmdHyvYZmdQAui6E83gp3Rm9yAALV8ywaV/B6c/R0UBQifCvmSXHA9RKi7ZYJDhU7lt98z82fXa
- 4kMIRVv58vUHXy6LqxVGhANIL6Sh7ZOiFZUEn5zX0k+FrHWfau3E31I0MO84m03maRoha6+88IF
- +KJCcEIe22XSjoSGM66ZJKZmpcTY/OgiEzxaBA9jtJXMDJ2GBNJozO4M3MeXbDZEq33lW1Wxgzn
- Wew==
-X-Google-Smtp-Source: AGHT+IH3nz+H0Ihu4r9uZ8O8U91X5Yf7py8zUGjusM165B4m4TAsx8kXmYBAIWEhSWMwHwCwnR6K2Q==
-X-Received: by 2002:a17:902:f541:b0:223:fdac:2e4 with SMTP id
- d9443c01a7336-22dc69f5e37mr147931425ad.1.1745868284123; 
- Mon, 28 Apr 2025 12:24:44 -0700 (PDT)
+X-Gm-Gg: ASbGncuWBQmv68tsihJN+hi8gAQ1NbJQNqQPowVF3qBdEjfXrELuXgpmM3aq370x3/g
+ XW44cTDz1zP6nO2QznVASMxVC7TS6rCmrfMQEPVeIwKf/BizxkUO6OCVFUxAEuy7KMTJTdTEj0y
+ vKZ0Tm+8Dim0kvLPXKzVcwKkuk36xi0miCqSQ0WCqsUkyss2sycfVXx2mBvqgQyJF8VYG0/vx5E
+ NF8CSxNcplH0qEZoAmG4JrB5tJ+Ht3hI236ZMOtY9rJnBsGdsUvaTm4FNnLepSylN4gnhK4R6zY
+ ESPi6Ts8pk3eY2zMsJKOGsmfip86RutXl0RcBYJFiViFFBKbMXEgih6ZJD76vnDXP1povg5KVaL
+ u1T//3fu5g8Us
+X-Google-Smtp-Source: AGHT+IEvUngl63y9fsFyGPw7r876Ojy0xsF76x0iaVJsgpWsZ5ZIAilD5jn18aFG7YCBE5JXxuYBmA==
+X-Received: by 2002:a05:6a21:318b:b0:201:85f4:a885 with SMTP id
+ adf61e73a8af0-20951631e24mr442332637.13.1745868285760; 
+ Mon, 28 Apr 2025 12:24:45 -0700 (PDT)
 Received: from localhost (199.24.125.34.bc.googleusercontent.com.
  [34.125.24.199]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-22db5104cd5sm87037295ad.199.2025.04.28.12.24.43
+ 41be03b00d2f7-b15f7702f70sm7664933a12.10.2025.04.28.12.24.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Apr 2025 12:24:43 -0700 (PDT)
+ Mon, 28 Apr 2025 12:24:45 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -77,10 +77,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v3 09/17] cmd/cbsysinfo: Skip the CMOS 'option_table' when not
- present
-Date: Mon, 28 Apr 2025 12:24:16 -0700
-Message-ID: <20250428192427.3877612-10-swboyd@chromium.org>
+Subject: [PATCH v3 10/17] cmd/cbsysinfo: Allow on ARM as well
+Date: Mon, 28 Apr 2025 12:24:17 -0700
+Message-ID: <20250428192427.3877612-11-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.906.g1f30a19c02-goog
 In-Reply-To: <20250428192427.3877612-1-swboyd@chromium.org>
 References: <20250428192427.3877612-1-swboyd@chromium.org>
@@ -103,27 +102,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CMOS 'option_table' isn't populated on ARM devices running coreboot.
-Check to see if the pointer is NULL and bail out if it is.
+This command isn't x86 specific. Move it up one level so that it can be
+used on a platform that can find the coreboot table, i.e. x86 or ARM.
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- cmd/x86/cbsysinfo.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ cmd/Kconfig               | 4 ++--
+ cmd/Makefile              | 1 +
+ cmd/{x86 => }/cbsysinfo.c | 0
+ cmd/x86/Makefile          | 1 -
+ 4 files changed, 3 insertions(+), 3 deletions(-)
+ rename cmd/{x86 => }/cbsysinfo.c (100%)
 
-diff --git a/cmd/x86/cbsysinfo.c b/cmd/x86/cbsysinfo.c
-index 3936d30da0e1..ed7b50f6d0fc 100644
---- a/cmd/x86/cbsysinfo.c
-+++ b/cmd/x86/cbsysinfo.c
-@@ -224,7 +224,7 @@ static void show_option_table(const struct cb_cmos_option_table *tab)
- 	const void *ptr, *end;
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 2d31abcef730..5a35dba8681a 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2929,8 +2929,8 @@ menu "Debug commands"
  
- 	print_ptr("option_table", tab);
--	if (!tab->size)
-+	if (!tab || !tab->size)
- 		return;
+ config CMD_CBSYSINFO
+ 	bool "cbsysinfo"
+-	depends on X86
+-	default y if SYS_COREBOOT
++	depends on SYS_COREBOOT
++	default y
+ 	help
+ 	  This provides information about the coreboot sysinfo table stored in
+ 	  memory by coreboot before jumping to U-Boot. It can be useful for
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 80cf70b7fe8c..7587b258409c 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -44,6 +44,7 @@ obj-$(CONFIG_CMD_BUTTON) += button.o
+ obj-$(CONFIG_CMD_CAT) += cat.o
+ obj-$(CONFIG_CMD_CACHE) += cache.o
+ obj-$(CONFIG_CMD_CBFS) += cbfs.o
++obj-$(CONFIG_CMD_CBSYSINFO) += cbsysinfo.o
+ obj-$(CONFIG_CMD_CEDIT) += cedit.o
+ obj-$(CONFIG_CMD_CLK) += clk.o
+ obj-$(CONFIG_CMD_CLS) += cls.o
+diff --git a/cmd/x86/cbsysinfo.c b/cmd/cbsysinfo.c
+similarity index 100%
+rename from cmd/x86/cbsysinfo.c
+rename to cmd/cbsysinfo.c
+diff --git a/cmd/x86/Makefile b/cmd/x86/Makefile
+index 5f3f5be2882f..870e941dcf00 100644
+--- a/cmd/x86/Makefile
++++ b/cmd/x86/Makefile
+@@ -1,6 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
- 	printf(" Bit  Len  Cfg  ID  Name\n");
+-obj-$(CONFIG_CMD_CBSYSINFO) += cbsysinfo.o
+ obj-y += cpuid.o msr.o mtrr.o
+ obj-$(CONFIG_CMD_CBCMOS) += cbcmos.o
+ obj-$(CONFIG_CMD_EXCEPTION) += exception.o
 -- 
 Sent by a computer, using git, on the internet
 
