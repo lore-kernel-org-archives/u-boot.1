@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54267C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:26:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A02C3ABA5
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:27:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54F1382A2F;
-	Tue, 29 Apr 2025 15:25:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B9CB8272A;
+	Tue, 29 Apr 2025 15:25:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kXSlrDQl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hAQZq8tj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B746B82A8D; Tue, 29 Apr 2025 15:24:58 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 7A90282145; Tue, 29 Apr 2025 15:25:04 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 877D482145
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:24:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8D888291D
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:25:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-72a4793d4e2so4421794a34.2
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:24:56 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72c40235c34so1765116a34.3
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:25:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745933095; x=1746537895; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745933100; x=1746537900; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IsHBMR8NyUItIbd+8c+C5ptWrf7VddnyV/IwQjX+qG0=;
- b=kXSlrDQlj01pH3RR8zornFBxxlgyBGWl1Ldl1j8QPKc4DM/z1mfFBhVotGsqf4J42P
- 6kkxI6qBMC74fjGfKqTDjHzn+rYHPJ9an060M2Gex+JTNNnyAZdEEGdH2th1XvFmdbpf
- dyVMWyNcbYzxvnIV9LQPMAMgDyXckkSEXoP1Y=
+ bh=eilGowQGNdmbyF5+GKtbIeoMWW6q9RqLczrN93Azess=;
+ b=hAQZq8tjwxR6mevvx3Y0uO5u+w18/zi7xLRUwVx2od2mTxacw0ELbYmNue+cCBzlMJ
+ 1LyraxYN8YmqOlP8uL+KX+Drgopo0DOr5F5HRuMfQbu2cW06EvIZlkDPdnsEkrXbfpBt
+ 0tVmlSEIeb/kDQzMNQOuf8pKpeGF5PhpeLLqg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745933095; x=1746537895;
+ d=1e100.net; s=20230601; t=1745933100; x=1746537900;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IsHBMR8NyUItIbd+8c+C5ptWrf7VddnyV/IwQjX+qG0=;
- b=FS/uxW0J7maDNLZ4Wy0b5fNwbsWw7rYRB8EPqDZsfzqpVa5+5rOsK2KrkoshVJV0xy
- gXFtaAsRq3Oe1wWM+mVfiWcdU96z9sjKGdhUCDEQEnofImpFm5s3gZvhQGgIxB3iNAZB
- STNdZu+n3MneRShdYMjcSdY2tfVnsL5yZ5DDKXq5VNUPvnLez9MoMay+gCZ23lFhnBVV
- SLnluwed8mWEej14ychwbspVvYNjsfiwYNvg5hr7k4sZGLICMdmy6kFTiP0CPf9K5vzZ
- 6Ct0qrV5J5iEB32o6zQa4hWbm6pMthFaBxus+I15rbvR3eHFmJBRTTB3WfaCpaakWaBP
- YYhg==
-X-Gm-Message-State: AOJu0Yydv/ZLJ+NZFzc2Pis8oHiWNo8OIEHdfoTcU0pbaCH2fVpGnSQb
- T6+OpkwHrNdOSA/xQAU6k9EHo720WTLQz09WPVjzw67kVVG606nkhjiaCNo8OGlkZO+9aouRu2g
+ bh=eilGowQGNdmbyF5+GKtbIeoMWW6q9RqLczrN93Azess=;
+ b=ga+e3U/V3k+T0Z21EukZLcSrYQPOfe4Ko/BKsXjaDTKmy6aLFV/CFyvi85zNPth6PW
+ 0+u8zO+4pph+Yu7VTg2hwjI5YNvwWoF1ydcw+X1QPYmUvOMIsti67UmpxkUf/oWSPiLs
+ 8OSMZ9bc2r/UdH2pB3yXqT7Igmzsx90f0c9MiUxILsnByfbTAjLCgCNp/ZvutnGl0+NN
+ eOVEUnlDHpBLNpzpCm7cXjeG4SuWfeB5kCiHOjbubv5qV7HD1EqxElk10QhWg2QDRI4F
+ beQ4l+76oBzmm9TRrWLmIJs2fWQMqjHqWOIZtvOvFTCzebzMxmvvcY12265NPCOwRUZF
+ qMxw==
+X-Gm-Message-State: AOJu0Yy0I7yTqFfkCnsf89Vsf2swvZfSSJaASQLXUOF5JW+adytevYUr
+ PHDf4Gxfi7q4/CocUALOt2aXG7mHN3CvX53WlquagfFhwI8XRMA6RlyUBwjorD70DetMNduoT2U
  =
-X-Gm-Gg: ASbGncss3mVY71V8po4NxuP5mG39bBdwCmcoYmRbGEC5fZ7rc0A6J+rGJQAJResesqb
- K7Gpwvsz3DKIAKaN91RTEPFAersedBrDrgsPuJkRqJ2kn/0ob68AjADGxrBIEhI0GSZlw9v7Xvi
- C0HPM5mWVPEMNlPJmlkVMZbCZMNriklVa1mJkWqa/nz/ipGCh7mo2pYqOLWM+rCnmkrCwKr/WLy
- 8fJpvlfDMMfJ7n6a/abswI7XSZ5jwBM8Ew7NdpJIsNas7VcaOnpUvZ5nxps/dHU0DhkY7Yj9oX3
- FE1hoqMW9lpHUTF0LaWFYTQWgUaC/pNT2HmZ2Ve4XUeagvweXoVhrvM4J/E//fagcq0S3NOLJoe
- wbg==
-X-Google-Smtp-Source: AGHT+IExp0tb0a39iJDVuKPkcx08zqCQURrRrShLH7CLvcrnqxPZssUOY3j/3GJ9PA3PEeQA0yAytQ==
-X-Received: by 2002:a05:6830:3704:b0:72b:8aec:fbd4 with SMTP id
- 46e09a7af769-730897050b2mr2117414a34.3.1745933094733; 
- Tue, 29 Apr 2025 06:24:54 -0700 (PDT)
+X-Gm-Gg: ASbGnct6VsVIHLD2AqrMopV2maqilxFSRBpxEQKx/XYQZp4K9IqwPBGzamzAA2vB16J
+ liZfYUpuDgbgYMTC2WaB8AftrKaHaABAZEOVMSzcgN8bJh3ayK+AUW8eSbvA/WuYw69ts7/0V8q
+ YSdB9moOsmx5HbDxb5YPmi8RtAN+3YE6gkUSMy6Jm63Pbt1LctYHsnwVWJwk7ZbVzunstTrNbAa
+ cDnQDtRAsiFsC8vKurtakrU7Twqzzw1cyWiRVp9R9eWnneNfB5Jz36vCJ/SzYxAORaJBqovRr81
+ IKP51/1juoXCM2DwYluJZDtKJRYKMyiktca9+kpYDWBICi3BpQfyBlyTCu6LU/ONBJpJtU5sfEa
+ KdIfd7KFUg5GM
+X-Google-Smtp-Source: AGHT+IH9mgcP/1mXYcaqN+D90OoKQphwNAHSy8+LYJHDuW+kX8mR4riGbazus5rIfsAconRzxzf4kw==
+X-Received: by 2002:a05:6830:d84:b0:727:423c:95ea with SMTP id
+ 46e09a7af769-730652634c1mr7722647a34.19.1745933099683; 
+ Tue, 29 Apr 2025 06:24:59 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.24.52
+ 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.24.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 06:24:52 -0700 (PDT)
+ Tue, 29 Apr 2025 06:24:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 25/30] patman: Add more information to Patch
-Date: Tue, 29 Apr 2025 07:22:22 -0600
-Message-ID: <20250429132239.251756-26-sjg@chromium.org>
+Subject: [PATCH 26/30] patman: Use defaultdict directly
+Date: Tue, 29 Apr 2025 07:22:23 -0600
+Message-ID: <20250429132239.251756-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250429132239.251756-1-sjg@chromium.org>
 References: <20250429132239.251756-1-sjg@chromium.org>
@@ -95,43 +95,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The cover letter has some information on each patch, so allow this to be
-stored in the Patch object.
+Import defaultdict to avoid needing to specify its module in multiple
+places. Fix an extra blank line while here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/patchwork.py | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ tools/patman/status.py | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/tools/patman/patchwork.py b/tools/patman/patchwork.py
-index 3ec266f073e..8b0968c5765 100644
---- a/tools/patman/patchwork.py
-+++ b/tools/patman/patchwork.py
-@@ -52,8 +52,10 @@ class Patch(dict):
-         raw_subject (str): Raw patch subject
-         subject (str): Patch subject with [..] part removed (same as commit
-             subject)
-+        data (dict or None): Patch data:
-     """
--    def __init__(self, pid):
-+    def __init__(self, pid, state=None, data=None, comments=None,
-+                 series_data=None):
-         super().__init__()
-         self.id = pid  # Use 'id' to match what the Rest API provides
-         self.seq = None
-@@ -62,6 +64,11 @@ class Patch(dict):
-         self.version = None
-         self.raw_subject = None
-         self.subject = None
-+        self.state = state
-+        self.data = data
-+        self.comments = comments
-+        self.series_data = series_data
-+        self.name = None
+diff --git a/tools/patman/status.py b/tools/patman/status.py
+index c114a432bf3..8fc2a50b426 100644
+--- a/tools/patman/status.py
++++ b/tools/patman/status.py
+@@ -8,7 +8,7 @@ Allows creation of a new branch based on the old but with the review tags
+ collected from patchwork.
+ """
  
-     # These make us more like a dictionary
-     def __setattr__(self, name, value):
+-import collections
++from collections import defaultdict
+ import concurrent.futures
+ from itertools import repeat
+ 
+@@ -55,7 +55,7 @@ def process_reviews(content, comment_data, base_rtags):
+         list of patchwork.Review: reviews received on the patch
+     """
+     pstrm = patchstream.PatchStream.process_text(content, True)
+-    rtags = collections.defaultdict(set)
++    rtags = defaultdict(set)
+     for response, people in pstrm.commit.rtags.items():
+         rtags[response].update(people)
+ 
+@@ -70,7 +70,7 @@ def process_reviews(content, comment_data, base_rtags):
+             rtags[response].update(people)
+ 
+     # Find the tags that are not in the commit
+-    new_rtags = collections.defaultdict(set)
++    new_rtags = defaultdict(set)
+     for tag, people in rtags.items():
+         for who in people:
+             is_new = (tag not in base_rtags or
+@@ -115,7 +115,6 @@ def compare_with_series(series, patches):
+             warnings.append("Cannot find patch for commit %d ('%s')" %
+                             (seq + 1, cmt.subject))
+ 
+-
+     # Check the names match
+     commit_for_patch = {}
+     all_commits = set(series.commits)
 -- 
 2.43.0
 
