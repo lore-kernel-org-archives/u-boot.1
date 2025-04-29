@@ -4,72 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4D0C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 15:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE8CC369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 16:22:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C28A0829A1;
-	Tue, 29 Apr 2025 17:28:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3205182A39;
+	Tue, 29 Apr 2025 18:22:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1745940491;
-	bh=IOlpDrmPj6nx9eIsMif/jAqJXx/y2i1KDFNaYU3qTPs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=aiAz/4WSmNw9whdu1leXEXazNXZOPwJoy+GmMnrSdVd1D56auCaa7vIrqYqHXzlR2
-	 2UyBxDK0Gb49Zu7mDKShZR6n2T5uFZ7CpQa0CIvxk+Q0BBAm5bqCiDRrtKjBY7tRJ+
-	 x4yP/WU1K5MuDP6gi23yQsVm5R5Rn0VBiFfwI6CIzlGVXaXNO14Falsw+PJ/i4okHq
-	 o6nWV4uYgJUAsJMd05VUhyYeKc1AKe1wtHjGNqgw6ZzTGi0LiEbAmfQZQBHxYedMpV
-	 Pi6hzQczYtMmBWMDUipFXjM5WdZzIGKwHTGkKCOKLoEL+Zd0x5CnBiRy5DKZoIljjQ
-	 5za60vYJ6pXgw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E4BAA82A39; Tue, 29 Apr 2025 17:28:10 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E757782958
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 17:28:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="SQYcUI/h"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id B9C8010271400; 
- Tue, 29 Apr 2025 17:28:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1745940487; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=IOlpDrmPj6nx9eIsMif/jAqJXx/y2i1KDFNaYU3qTPs=;
- b=SQYcUI/hwVz69r5xeNju7TaL8a1aH+VBDJyGr3w6dcjAJtddRyFt7QbJ8sh663HHlwuYy8
- CEj0q+w0rjUxWrTOzfgETgX8ddg1v4PWCJlCEnNy1k8ZZw1S16SULjLNzzG2zvemBRJiaR
- f8HWDuxHPbvpCzL2Xa0E7xdfPvAL42NRjWSfPyC/qtS1fONw//yvu/ani9lX0F10cIbKO4
- SolEpwTz6v6Gz4r1v8mU1RFkUSNrGivSSFTQ3FiVZa6slxft8PM7bCl8dB62oYfnS0l4bd
- /cQ7uG4S4VEP+0x9TmPY6qqt4EOBKAuAFR7z7mSPxOqPLl0ISarQQQtN210VrQ==
-Message-ID: <6ac53871-954f-4321-9ab4-23038216c2ae@denx.de>
-Date: Tue, 29 Apr 2025 17:28:00 +0200
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="euJVyKDg";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 848D382A4D; Tue, 29 Apr 2025 18:22:28 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E1B4A82958
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 18:22:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43d2d952eb1so41529965e9.1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 09:22:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745943745; x=1746548545; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=Ptfsu6n9Lw0JxF0qSEA6dTyjREPmVakpCHOUxzcCsCI=;
+ b=euJVyKDgNVQi3V4Yfin5xLYMcXs9WUz8zBcSX867ZSpwU5a2fCYX1dtFc9Y8rrA9Sm
+ 7wsX5rV8iuVtfJigHGzTqNENV7iZPoLd37fxbP3iFjuESyxyZeO1jkInxKeYkRr65KfP
+ C+Z5Tfw9oWEzNEab0o8vnGJRrSzTUXSJH0gtf5UzgCJfigja0XwyPwExcp5y8S31RU1c
+ pad7HqT5BhCQXd6MDCjG7RlQjP1iPsogLX1bK65QY1YyDu61TSqlA5BrYsMF0dvRRkkA
+ M3ilZAU40uMXVdUTqmT5ngEZo8wSpa6viEIoq+GcX3CyIjniW1eHyR+88rYuOofibxgC
+ 8P+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745943745; x=1746548545;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Ptfsu6n9Lw0JxF0qSEA6dTyjREPmVakpCHOUxzcCsCI=;
+ b=VR1TagdodyNX8hAIkLB/FV4Y8rNrZyCKbPIwAbOf3VWY+xYDipS3zue9G+gBZvt5Jb
+ CmQceeXO6ptT7V68uXR5tCPe264iaq0WI0PsRH71nUhV3zsKbpuIJus8RrisMvgZ5Ocj
+ nAUmcIz8aiotgcBro7Fr5hASArhE2+mR0qKxPKnXScYh75RNwkK/Et2ET8hAF0OT/wNk
+ tQE9+fxTVp1MW3yzdfoF30X6aYX2/vFuHdwF3WVa7Y7EC5iu6ccrdZC8IWGBT3MTJpUj
+ FRgmrbRqRd2diE6ZevRY6MF1YN4nkIaSk2bUBIKN8uqw/4XC7krP5Jd3tb77d6X+DFo+
+ axDw==
+X-Gm-Message-State: AOJu0YyXRyD97xuStqpzMuGKpEDqFtrOfH38M/pq4Nl/B1+cNa3BPWpJ
+ PliRMgpqaigngws+A3OtdwtC6Mnbhr9wY3SvggQAwZFMPXp0M2CqNfm07dYurcQ=
+X-Gm-Gg: ASbGncvUHfn+vJgE+LiKrJ+B0g0BhZSVjbD5p6yhtRFlioQ7nBx5M03JBwI+1WgsQdQ
+ hwKgY+5OExd4ssqOdyK9nyI6HhCAbVSUIn/lbgF+OSiDEkZe3IH1rOFiDhlWeRarrdS/zIq4gl8
+ hDIb/CqA3nVigU+8uac7G0epketfiU5rj3hoFA9H0T6fvSI1FQ/a47rQiwU2wf+FTjMxa6ITiaG
+ TPYvrdY09DwFLyoHFzaQyWPyw476e+4XoMy4gCXnm7NhrjPf6uV+JPsUG3qatuKcLjVV5H4yhBG
+ 7bb3UgnYl1ln9o4qFepgnsr3fDXRCYikGN0H3CJaQcBGEgdq+44CP3ROz1kyaHV3nT3fx55VjvT
+ 6lnxGqf/MvP6jRBhIBA==
+X-Google-Smtp-Source: AGHT+IHAZuiBSZTyOeYX/1xhFpIbomO+Dbrs9ryvWZv43oK+uaGHiUHzCvtx7vupkFXEMh7smmnt5g==
+X-Received: by 2002:a05:6000:178f:b0:3a0:8033:1e3a with SMTP id
+ ffacd0b85a97d-3a08f754a7bmr9668f8f.2.1745943745184; 
+ Tue, 29 Apr 2025 09:22:25 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:7eea:fda1:4564:f556?
+ ([2a01:e0a:3d9:2080:7eea:fda1:4564:f556])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a073e46a25sm14535873f8f.69.2025.04.29.09.22.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Apr 2025 09:22:24 -0700 (PDT)
+Message-ID: <c95593d8-9590-46b8-8c29-231f506d77f2@linaro.org>
+Date: Tue, 29 Apr 2025 18:22:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2] tiny-printf: Handle formatting of %p with an extra
- Kconfig
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Michael Walle <mwalle@kernel.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Benedikt Spranger <b.spranger@linutronix.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- John Ogness <john.ogness@linutronix.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250429144756.2467039-1-cniedermaier@dh-electronics.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250429144756.2467039-1-cniedermaier@dh-electronics.com>
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH RFT v2 1/3] fastboot: blk: introduce fastboot block
+ flashing support
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Dmitrii Merkurev <dimorinny@google.com>
+Cc: u-boot@lists.denx.de
+References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
+ <20250409-topic-fastboot-blk-v2-1-c676f21d414f@linaro.org>
+ <877c3cgwsf.fsf@kernel.org> <359a5f7c-4c65-4813-be8e-97e12c7786ae@linaro.org>
+ <87zffzwfz9.fsf@kernel.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <87zffzwfz9.fsf@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,34 +128,75 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/29/25 4:47 PM, Christoph Niedermaier wrote:
-> The formatting with %pa / %pap behaves like %x, which results in an
-> incorrect value being output. To improve this, a new fine-tuning
-> Kconfig SPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
-> has been added. If it is enabled, the output of %pa / %pap should
-> be correct, and if it is disabled, the pointer formatting is
-> completely unsupported. In addition to indicate unsupported formatting,
-> '?' will be output. This allows enabling pointer formatting only
-> when needed. For SPL_NET and NET_LWIP it is selected by default.
-> Then it also supports the formatting with %pm, %pM and %pI4.
+Hi,
+
+
+<snip>
+> But using raw partition descriptors[1] does not work with the above
 > 
-> In summery this level of %p support for tiny printf is possible now:
+> [1] https://docs.u-boot.org/en/latest/android/fastboot.html#raw-partition-descriptors
+
+Right, not all features will work with generic block backend, but it's a start!
+
 > 
-> 1) The standard tiny printf won't have support for pointer formatting.
->     So it doesn't print misleading values for %pa, instead '?' will be
->     output:
->     %p   => ?
->     %pa  => ?a
->     %pap => ?ap
+>>
+>>>
+>>>> +
+>>>> +config FASTBOOT_FLASH_BLOCK_DEVICE_ID
+>>>> +	int "Define FASTBOOT block device id"
+>>>> +	depends on FASTBOOT_FLASH_BLOCK
+>>>> +	help
+>>>> +	  "Fastboot block device id"
+>>>
+>>> This is similar as CONFIG_FASTBOOT_FLASH_MMC_DEV, no?
+>>
+>> No, the MMC one makes the mmc type implicit, while the block one
+>> can target any block device (and mmc)
 > 
-> 2) If SPL_USE_TINY_PRINTF_POINTER_SUPPORT is enabled or DEBUG is defined
->     tiny printf supports formatting %p and %pa / %pap.
+> I understand, but when CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="mmc",
+> CONFIG_FASTBOOT_FLASH_MMC_DEV and FASTBOOT_FLASH_BLOCK_DEVICE_ID are the
+> same thing.
 > 
-> 3) If SPL_NET or NET_LWIP is enabled the support of pointers is extended
->     for %pm, %pM and %pI4.
-If you need rich printf formatting support , enable full printf instead?
+>>
+>>>
+>>> To me, it's confusing to have similar KConfig entries based on interface
+>>> type.
+>>>
+>>> If we really want to do it this way, then we should add a safeguard in
+>>> the code: test if FASTBOOT_FLASH_BLOCK_INTERFACE_NAME is "mmc" and if so, add a
+>>> warning to recommend using FASTBOOT_FLASH_MMC instead.
+>>>
+>>> What's your opinion on this?
+>>
+>> Perhaps, not sure it's really problematic
+> 
+> Maybe not for you, because you have the history on this project. But to
+> a newcomer, having both options seems a bit strange.
+> 
+> If we look at how the blk-uclass is implemented, it inconsisent with how
+> it's done with fastboot.
+> 
+> longer term, I'd rather deprecate the CONFIG_FASTBOOT_FLASH_MMC_DEV
+> entry so that we use FASTBOOT_FLASH_BLOCK_INTERFACE_NAME for everything
+> (including mmc)
+> 
+> I understand that you might not have the time for doing so, so as a
+> first step can we add a (printf) warning in the fastboot block layer
+> when the interface name is mmc ?
+> 
+
+Yeah my goal is to first have a support for generic block, merging
+both makes sense.
+
+Ok I'll add a warning
+
+Thanks,
+Neil
+
+
