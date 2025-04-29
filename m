@@ -4,112 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34167C369CB
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 07:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C66CC369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 07:07:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F2DC80EFB;
-	Tue, 29 Apr 2025 09:04:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EEA7B80EFB;
+	Tue, 29 Apr 2025 09:07:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PIYXPgVU";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="c8uRtLhc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15CAD80FDA; Tue, 29 Apr 2025 09:04:19 +0200 (CEST)
+ id 4D83580FDE; Tue, 29 Apr 2025 09:07:36 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF96780BAD
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 09:04:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 490A480BAD
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 09:07:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1745910246; x=1746515046; i=xypron.glpk@gmx.de;
- bh=mSWEyNMtCcaKIgQ1JNdEQPTGnu5Gur5uqwgtz4mmtq0=;
+ s=s31663417; t=1745910450; x=1746515250; i=xypron.glpk@gmx.de;
+ bh=4TMbm/mpzFfnV0RHldYPiZoulcbrAQrlBujVZdBbelk=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=PIYXPgVUF99+oFPVKqU04LpUA/VIdVemvqY7diYcc+IA7DnUQeioV32E0stVqMGM
- olpPQgz06uMaF9Usg1XOHWDgDuVQppZkPJMDJM11wNi3R+1RWDr2REmJnSh+I53jx
- 2xcvsT9CC8NQunn9ctqPX+fZXAqPj8qhpGevifHUGtpE2s9RXjntTZN6e5zXpnDqf
- QX6IVXLLfVJ+kHgELyVsLCAXcaVljIgQZ8uPg2jBORYH6dGJ7CavR56cAG+86OcLl
- uvpXrAiUK+DaZCigr7rYxr2enUySqJr7469HyzTFCg3fIclAfS5hDytX8+deKV1ba
- t62wPbO2hOjt97oPvA==
+ b=c8uRtLhczZxHRGNzdKl6nslbciPjuFKYYrMVATb9wHxRvC/+S49cNPUT3sKka9rC
+ l8KTNYaCfnaOxXzdbIhxJHc52zu2GAUG3yd5SKYqYJSa0ZnsLPw5ProuVFVPYdQy0
+ 7KzyrjDkl6avnXgCLqF1jWgO1a7lvvDk69yJdDmxMF359803AweHNoLpUfRltVAZs
+ 3JxeOvgs6z3F0CSbuvM+j1KkQzAEezaQaIYzeqaf8XgPrD3swmH58lFxSaYhpBJqc
+ 3cdP9dhojIct4fNXskuvm/bLe1ALt3yo03BLR12RvesYdTpvQzupwq2WDjjeZte3Q
+ 753Yp0yZu1qCwEU1LA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.105.79]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1vD8ae2aII-00uMEY; Tue, 29
- Apr 2025 09:04:06 +0200
-Message-ID: <2307cf95-6cb6-4c67-a6a8-ef33c9f52759@gmx.de>
-Date: Tue, 29 Apr 2025 09:04:00 +0200
+Received: from [192.168.143.105] ([46.114.105.79]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEV3C-1uGkSe08fi-00Cxjt; Tue, 29
+ Apr 2025 09:07:30 +0200
+Message-ID: <24787b46-69b4-405a-9f88-79fb8ab1d638@gmx.de>
+Date: Tue, 29 Apr 2025 09:07:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] efi_loader: bootbin: do not load an initrd if none
- is provided
-To: Adriano Cordova <adrianox@gmail.com>
+Subject: Re: [PATCH v2 2/2] efi_loader: fix typo initd_sz to initrd_sz
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com,
  o451686892@gmail.com, Adriano Cordova <adriano.cordova@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ Adriano Cordova <adrianox@gmail.com>
 References: <20250428145341.2091400-1-adriano.cordova@canonical.com>
- <20250428145341.2091400-2-adriano.cordova@canonical.com>
- <CAC_iWjKvcVOTx+1GiGwzfNGsciAa+jeAtvkLteaV01GWNAzWkw@mail.gmail.com>
+ <20250428145341.2091400-3-adriano.cordova@canonical.com>
+ <CAC_iWjKDqCWaOQcjOF5j_NvhxByKJhciv0LWxXLsBXyXdTLcMQ@mail.gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjKvcVOTx+1GiGwzfNGsciAa+jeAtvkLteaV01GWNAzWkw@mail.gmail.com>
+In-Reply-To: <CAC_iWjKDqCWaOQcjOF5j_NvhxByKJhciv0LWxXLsBXyXdTLcMQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Sqev5IOtNQ5A9whM7n4Qp3+xtBsoFmA2zqAOPsVfC2tj34B0Odj
- NciRF7TNoJuUYhNgPlR6miqU1S2sNwz/2DqL0wzS51AuAQIbDdhHxNT+kf5uY3FG+HqKSIG
- RrOPq7gkd5gDIy4SMIH3bSiE0dp2CXQmvYwy2s315bR4Xu3ye+URgXWb8zkcdlkLjWmfCDs
- vVcJEue0TY45nSZEp0cGQ==
-UI-OutboundReport: notjunk:1;M01:P0:1AGeOqyUPWs=;Y6Z+s9dpJv2jLD05fR6G1h6lmeK
- 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
- ++TPfS0kQ7uWI=
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:lAhaWjmz+2ZYdReOrHDxmym66ZqqwCn+/z8/4/sLbj45GEonMCV
+ sil+kt1sKmFqob186JApqojub8avod4TNJvGyePcK+DENovqch75COWDWw7GbwJDF+MQ/CW
+ phqRccxAKl0UoYSkJ7tFaDq9o7m1nB8B4MwKccNIkBBC9YtILtBIiLMoAcOtMbIKHg0pVe7
+ YfLaFWcE+oDY/PZsKBenw==
+UI-OutboundReport: notjunk:1;M01:P0:Q1YutAONCH8=;N9zFX0d9HA3/Dwh9QO+tL1+31bT
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,157 +124,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/29/25 08:24, Ilias Apalodimas wrote:
-> On Mon, 28 Apr 2025 at 17:53, Adriano Cordova <adrianox@gmail.com> wrote=
-:
+On 4/29/25 08:25, Ilias Apalodimas wrote:
+> On Mon, 28 Apr 2025 at 17:53, Adriano Cordova <adrianox@gmail.com> wrote:
 >>
->> Do not try to create an initrd device path nor try to register
->> an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
->>
->> Handle initrd installation in efi_binary_run_dp with
->> efi_install_initrd, imitating what is done for the fdt.
->>
->> Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
->> Reported-by: Weizhao Ouyang <o451686892@gmail.com>
 >> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 >> ---
->>   boot/bootm.c                 |  3 +++
->>   include/efi_loader.h         |  2 ++
->>   lib/efi_loader/efi_bootbin.c |  7 +------
->>   lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
->>   4 files changed, 35 insertions(+), 6 deletions(-)
+>>   lib/efi_loader/efi_bootbin.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
 >>
->> diff --git a/boot/bootm.c b/boot/bootm.c
->> index f5cbb10f0d1..9693e0d336d 100644
->> --- a/boot/bootm.c
->> +++ b/boot/bootm.c
->> @@ -1008,6 +1008,9 @@ int bootm_run_states(struct bootm_info *bmi, int =
-states)
->>                          ret =3D 0;
->>          }
->>
->> +       /* Clear the initrd from a previous boot */
->> +       images->initrd_start =3D 0;
-
-The bootm change should be in a different patch than the EFI change.
-
-Bootm passes through multiple stages, see parameter states.
-
-I don't believe that you want to zero images->initrd_start after the=20
-BOOTM_STATE_RAMDISK state.
-
-Specically you don't want to zero initrd_start in the BOOTM_STATE_OS_GO=20
-state otherwise you will always boot without initrd.
-
-Isn't initialization meant to happen for states =3D=3D BOOTM_STATE_START i=
-n=20
-bootm_start()?
-
-In test/py/tests/test_efi_fit.py we currently only test the case without=
-=20
-initrd. We need a test with initrd too.
-
-@Simon, @Tom,
-
-We lack a documentation of the the different BOOTM_STATEs.
-The documentation of the bootm command is incomplete, it does not=20
-contain the subcommands.
-
-Best regards
-
-Heinrich
-
->> +
->>          /* Relocate the ramdisk */
->>   #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
->>          if (!ret && (states & BOOTM_STATE_RAMDISK)) {
->> diff --git a/include/efi_loader.h b/include/efi_loader.h
->> index 144b749278a..84e8cfe320e 100644
->> --- a/include/efi_loader.h
->> +++ b/include/efi_loader.h
->> @@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t =
-handle, const char *env_var,
->>   void *efi_get_configuration_table(const efi_guid_t *guid);
->>   /* Install device tree */
->>   efi_status_t efi_install_fdt(void *fdt);
->> +/* Install initrd */
->> +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
->>   /* Execute loaded UEFI image */
->>   efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)=
-;
->>   /* Run loaded UEFI image with given fdt */
->> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.=
-c
->> index d0f7da309ce..6a189c31ffa 100644
+>> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+>> index 6a189c31ffa..94ba7c5589b 100644
 >> --- a/lib/efi_loader/efi_bootbin.c
 >> +++ b/lib/efi_loader/efi_bootbin.c
->> @@ -220,7 +220,6 @@ static efi_status_t efi_binary_run_dp(void *image, =
-size_t size, void *fdt,
+>> @@ -215,7 +215,7 @@ out:
+>>    * Return:     status code
+>>    */
+>>   static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
+>> -                                     void *initrd, size_t initd_sz,
+>> +                                     void *initrd, size_t initrd_sz,
+>>                                        struct efi_device_path *dp_dev,
 >>                                        struct efi_device_path *dp_img)
 >>   {
->>          efi_status_t ret;
->> -       struct efi_device_path *dp_initrd;
->>
->>          /* Initialize EFI drivers */
->>          ret =3D efi_init_obj_list();
->> @@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image,=
- size_t size, void *fdt,
->>          if (ret !=3D EFI_SUCCESS)
+>> @@ -233,7 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
+>>          if (ret != EFI_SUCCESS)
 >>                  return ret;
 >>
->> -       dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initr=
-d, initd_sz);
->> -       if (!dp_initrd)
->> -               return EFI_OUT_OF_RESOURCES;
->> -
->> -       ret =3D efi_initrd_register(dp_initrd);
->> +       ret =3D efi_install_initrd(initrd, initd_sz);
->>          if (ret !=3D EFI_SUCCESS)
+>> -       ret = efi_install_initrd(initrd, initd_sz);
+>> +       ret = efi_install_initrd(initrd, initrd_sz);
+>>          if (ret != EFI_SUCCESS)
 >>                  return ret;
 >>
->> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
->> index 3936139ca41..19fb5d03fec 100644
->> --- a/lib/efi_loader/efi_helper.c
->> +++ b/lib/efi_loader/efi_helper.c
->> @@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
->>          return EFI_SUCCESS;
->>   }
->>
->> +/**
->> + * efi_install_initrd() - install initrd
->> + *
->> + * Install the initrd located at @initrd using the EFI_LOAD_FILE2
->> + * protocol.
->> + *
->> + * @initrd:    address of initrd or NULL if none is provided
->> + * @initrd_sz: size of initrd
->> + * Return:     status code
->> + */
->> +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
->> +{
->> +       efi_status_t ret;
->> +       struct efi_device_path *dp_initrd;
->> +
->> +       if (!initrd)
->> +               return EFI_SUCCESS;
->> +
->> +       dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initr=
-d, initd_sz);
->> +       if (!dp_initrd)
->> +               return EFI_OUT_OF_RESOURCES;
->> +
->> +       ret =3D efi_initrd_register(dp_initrd);
->> +       if (ret !=3D EFI_SUCCESS)
->> +               efi_free_pool(dp_initrd);
->> +
->> +       return ret;
->> +}
->> +
->>   /**
->>    * do_bootefi_exec() - execute EFI binary
->>    *
 >> --
 >> 2.48.1
 >>
 > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
