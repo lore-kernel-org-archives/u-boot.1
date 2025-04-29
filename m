@@ -4,99 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10812C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 14:53:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4D0C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 15:28:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C7E8829A1;
-	Tue, 29 Apr 2025 16:53:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C28A0829A1;
+	Tue, 29 Apr 2025 17:28:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sbmmdjwR";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1745940491;
+	bh=IOlpDrmPj6nx9eIsMif/jAqJXx/y2i1KDFNaYU3qTPs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=aiAz/4WSmNw9whdu1leXEXazNXZOPwJoy+GmMnrSdVd1D56auCaa7vIrqYqHXzlR2
+	 2UyBxDK0Gb49Zu7mDKShZR6n2T5uFZ7CpQa0CIvxk+Q0BBAm5bqCiDRrtKjBY7tRJ+
+	 x4yP/WU1K5MuDP6gi23yQsVm5R5Rn0VBiFfwI6CIzlGVXaXNO14Falsw+PJ/i4okHq
+	 o6nWV4uYgJUAsJMd05VUhyYeKc1AKe1wtHjGNqgw6ZzTGi0LiEbAmfQZQBHxYedMpV
+	 Pi6hzQczYtMmBWMDUipFXjM5WdZzIGKwHTGkKCOKLoEL+Zd0x5CnBiRy5DKZoIljjQ
+	 5za60vYJ6pXgw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F28B82A0A; Tue, 29 Apr 2025 16:53:57 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E4BAA82A39; Tue, 29 Apr 2025 17:28:10 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22F0E82958
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:53:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E757782958
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 17:28:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-72c173211feso1625480a34.1
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 07:53:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745938434; x=1746543234; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DGBtYfAlTJyjf9Sc7arP/KpuPHLtPnDoafyRXlhQezU=;
- b=sbmmdjwR4tRIiMWP9aiJ7RotgquYhlZ1M5myHseYHVNWNIgdzfiLSh8EYmIASaYo+a
- i0S9SSmsJf0qov6IgMsBIsTQZYSi52W37gu6rGfjnuDPBbdoTnpug614sr056hx8tJlT
- MrO75OAAsMXAtaIXYogvyJ58AIkds7uuuuqoQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745938434; x=1746543234;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DGBtYfAlTJyjf9Sc7arP/KpuPHLtPnDoafyRXlhQezU=;
- b=wY3wA5hiSf+v6uAZMzfS3YhYCHOqOfaobDMnquEpdJ/scSE1WO+zYSTQBffNWnd/o+
- PHN0LDdEqwm7xjyOuAaQc2st5yqfugf0Fr/c5WBcOun4ag1BgqPrOU+zXGF2xg6Ss4ZC
- 9IxZK4aFsPku2Ma02bsiCK9DWqr6ljcYKEb1OZNtEZXOTKwH8KR0k+F4S5BNu4/986kO
- pM8nwUR464mFbMytHwdNyT6vNF7Rzs/+ORYXnMuCdMJyg+buvJ/9bXNduGtZbZJ+dUv3
- rAdXlYEE8b09gEW4IPxfnj53jf4xqdORpngz4T7E/EaGT8DXXX9NX5WpbuTyyKpxuvXO
- tDZw==
-X-Gm-Message-State: AOJu0YyMQs7+/WIL0kM1mXQCipP0fmolrIc3QQcXlwk8cU7toWMVFJfL
- klG8mhXwnDvrOMtj54thqJGQYW7ISnAx82F5ZBSMY729Clzn2gJk4qpHEZM+9IU=
-X-Gm-Gg: ASbGncv9mAZWRzwMFV7ZhqN40rYT8B3sg0cGLip+NXxQJMO8uE3GjtOwdRiMw2/aN30
- oY/hiyCxysbgjhYbgkvuh24PcZp7P7CIO2s+jq4Zu2SLW3jeVX4rQonOSicjGENWdpLa7l9ujnb
- wyNzclxwGqg/JXFa6tHU3861jUobv7uoOUpdAeSiqguAX7iEjTeWJllRUeZo+FXwTACsep25ooU
- f/4C07CiKx6GCXXag+240st/q6BfNwc7SMuSgTTpGJk+dOWeoFOmbGfBcyyg2vg5dU4RIYLenkC
- sE0ZRPt9J3Zue8xcMsr1wbZ9syvPGcPvPbIhMdELKXP3u92FyTYv6gtwkyB47sT8f2X4nGFlSoH
- 0cA==
-X-Google-Smtp-Source: AGHT+IGkJJKtSVFdsiz7TXEQbEdcGMwz6hQwuRWBcO3iYtM9HsCz2RqEcQMhuu4ZaUEYw+qcHzOIbQ==
-X-Received: by 2002:a05:6830:6817:b0:72b:9724:6a82 with SMTP id
- 46e09a7af769-7306523084cmr8227646a34.17.1745938433743; 
- Tue, 29 Apr 2025 07:53:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b312566sm306679a34.59.2025.04.29.07.53.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 07:53:53 -0700 (PDT)
-Date: Tue, 29 Apr 2025 08:53:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Kochetkov <al.kochet@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Douglas Anderson <dianders@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Leonard Anderweit <l.anderweit@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Sean Anderson <seanga2@gmail.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: Re: [PATCH 00/30] patman: Move to asyncio and other updates
-Message-ID: <20250429145347.GG1261075@bill-the-cat>
-References: <20250429132239.251756-1-sjg@chromium.org>
- <20250429134846.GA1261075@bill-the-cat>
- <CAFLszTgrJvgWJaCXFgefJ1bObsrGfZa6AC8C6ypFRKJQTWm5ZQ@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="SQYcUI/h"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id B9C8010271400; 
+ Tue, 29 Apr 2025 17:28:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1745940487; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=IOlpDrmPj6nx9eIsMif/jAqJXx/y2i1KDFNaYU3qTPs=;
+ b=SQYcUI/hwVz69r5xeNju7TaL8a1aH+VBDJyGr3w6dcjAJtddRyFt7QbJ8sh663HHlwuYy8
+ CEj0q+w0rjUxWrTOzfgETgX8ddg1v4PWCJlCEnNy1k8ZZw1S16SULjLNzzG2zvemBRJiaR
+ f8HWDuxHPbvpCzL2Xa0E7xdfPvAL42NRjWSfPyC/qtS1fONw//yvu/ani9lX0F10cIbKO4
+ SolEpwTz6v6Gz4r1v8mU1RFkUSNrGivSSFTQ3FiVZa6slxft8PM7bCl8dB62oYfnS0l4bd
+ /cQ7uG4S4VEP+0x9TmPY6qqt4EOBKAuAFR7z7mSPxOqPLl0ISarQQQtN210VrQ==
+Message-ID: <6ac53871-954f-4321-9ab4-23038216c2ae@denx.de>
+Date: Tue, 29 Apr 2025 17:28:00 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dW8vpOhKeA7aWOCM"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgrJvgWJaCXFgefJ1bObsrGfZa6AC8C6ypFRKJQTWm5ZQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V2] tiny-printf: Handle formatting of %p with an extra
+ Kconfig
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Michael Walle <mwalle@kernel.org>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Benedikt Spranger <b.spranger@linutronix.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ John Ogness <john.ogness@linutronix.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250429144756.2467039-1-cniedermaier@dh-electronics.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250429144756.2467039-1-cniedermaier@dh-electronics.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,73 +86,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---dW8vpOhKeA7aWOCM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Apr 29, 2025 at 08:35:24AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 29 Apr 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Apr 29, 2025 at 07:21:57AM -0600, Simon Glass wrote:
-> >
-> > > This series moves patman to use asyncio instead of ThreadPoolExecutor
-> > > since it makes it easier to handle requests sent from different parts
-> > > of the code.
-> > >
-> > > It also includes some updates to bring patman in line with the other
-> > > major Python tools (buildman and binman).
-> > >
-> > > With this series, we have a better basis to add support for syncing m=
-ore
-> > > data from a patchwork server.
-> > >
-> > > After this, the next step it to add a new 'patman series' subcommand,=
- to
-> > > track and manage series workflow.
-> >
-> > This conflicts with master, please rebase this if you intend for it to
-> > be merged to mainline.
->=20
-> I will take a look and see what patches my tree is missing.
->=20
-> >  And to avoid confusion, while I think managing
-> > these python projects in this manner (and not AFAICT following python
-> > best practices) makes life harder for everyone else, that is not me
-> > NAK'ing taking more patches, I continue to be compromising and "Saying
-> > Yes" to things you do that I disagree with on non-arbitrary technical
-> > grounds.
->=20
-> I'm open to managing them in my tree if that helps. For now it seems
-> like too much work to manage them separately, but if someone wants to
-> volunteer to help, I could do it.
-
-Again, if you won't manage them standalone as seems to be normal best
-practice, we'll just keep them in mainline. It's up to you if they
-diverge or not, but it would be easy to avoid I would think.
-
---=20
-Tom
-
---dW8vpOhKeA7aWOCM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgQ5+0ACgkQFHw5/5Y0
-tyyxtwv+LAe9D8+Jzv2+Apfa+dr0JInr5u15E6l7rKB5sNfld7B0Nx72LM/WaX82
-4yFVa/FYJDKIIHjFi/NoSEcsjrvfJ5SJ7J+pp1LnN/w/nDs4BiYEEE7sLG5aF2Hh
-keBMa7e3sXcgJ8LMJIEe6yg7HgNBW50DWjZli8BZhBzL08NR3MtEI85A2O6Wl8qH
-eRzZNn/aZB6KElgXd1HImeqSWi+eBO7dVo0O4mqdGOnqK+4s5R9ZPtkoMO//lPYY
-vyzex67TAKdgYOlJux3vnzIooNxVlpjfmg7vBiLkWn3rD0f1ND+J0OtuL0CnuT03
-IYwUatAtabq8Qfz+4mdRV+wf6ai9PyzO3ToO9yBaw0VxrZgOOyAWTFy0ew/JaCXf
-WoaRyqTSCwPjye6gmpaVfhXVbxgmWY4F2kFhOV4XBbXgG/N6S+5RQiT9bPHC6vtj
-tTqFWegsnFJm4MaA/cGGrpxoVrfSujHGn9q13j+9hXotQ/qrtM1cCxmdyBF2Yzcv
-ITEwpDfx
-=VrI1
------END PGP SIGNATURE-----
-
---dW8vpOhKeA7aWOCM--
+On 4/29/25 4:47 PM, Christoph Niedermaier wrote:
+> The formatting with %pa / %pap behaves like %x, which results in an
+> incorrect value being output. To improve this, a new fine-tuning
+> Kconfig SPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
+> has been added. If it is enabled, the output of %pa / %pap should
+> be correct, and if it is disabled, the pointer formatting is
+> completely unsupported. In addition to indicate unsupported formatting,
+> '?' will be output. This allows enabling pointer formatting only
+> when needed. For SPL_NET and NET_LWIP it is selected by default.
+> Then it also supports the formatting with %pm, %pM and %pI4.
+> 
+> In summery this level of %p support for tiny printf is possible now:
+> 
+> 1) The standard tiny printf won't have support for pointer formatting.
+>     So it doesn't print misleading values for %pa, instead '?' will be
+>     output:
+>     %p   => ?
+>     %pa  => ?a
+>     %pap => ?ap
+> 
+> 2) If SPL_USE_TINY_PRINTF_POINTER_SUPPORT is enabled or DEBUG is defined
+>     tiny printf supports formatting %p and %pa / %pap.
+> 
+> 3) If SPL_NET or NET_LWIP is enabled the support of pointers is extended
+>     for %pm, %pM and %pI4.
+If you need rich printf formatting support , enable full printf instead?
