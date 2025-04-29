@@ -4,67 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9600AC369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 12:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 815C1C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 12:32:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEBF982145;
-	Tue, 29 Apr 2025 14:31:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 079B68210F;
+	Tue, 29 Apr 2025 14:32:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="PJSipluc";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="U8o31vUP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3B708219D; Tue, 29 Apr 2025 14:31:48 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ id 70ABF82145; Tue, 29 Apr 2025 14:32:27 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63B028210D
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 14:31:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 776918210D
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 14:32:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 1AE3E25B33;
- Tue, 29 Apr 2025 14:31:46 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9gWlFu334O_H; Tue, 29 Apr 2025 14:31:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1745929905; bh=O5ZgJlxHzMKXb/08pyqbDn8k40+5Zwp5gOBixUSmf4U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=PJSiplucV/IyOWFeb1+sfZNCNGQXqpe45iCJZLFBF8pOwlVHHzs/GpMHk2d+zAOIk
- VslfHLWvOX7NxCiYb+MhTC3f04h4VgSI3oVYYU1gg533dEcaUYDeOw9bAPU+a/qmre
- b+OzcI3tg6BFiGXu3U/3gb8X774PTE9RBDva4joBj8PaSwfyQikQeDTqVQpSYRTP0z
- B7VEeOKcKxpmut8kMNzG4dqw5mfc8JnJ2TCES5qGk9VsNtPzCXWwGPQkbcp+hOwmwU
- 9tBca7FfNaUUnpiv4NmgOCNo6W4s2Lh3IvqsiOPJzIDeI4z3CiOIiJa3zBC3fbieE6
- mn0VjHdn+nIiA==
-Date: Tue, 29 Apr 2025 12:31:29 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Anton Blanchard <antonb@tenstorrent.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
- Nathaniel Hourt <I@nathaniel.land>
-Subject: Re: [PATCH 1/2] Makefile: Strip leading spaces when preprocessing
- generated_defconfig
-Message-ID: <aBDGoWxfU5I2_ZXs@pie.lan>
-References: <20250427145011.17331-1-ziyao@disroot.org>
- <20250427145011.17331-2-ziyao@disroot.org>
- <1526A781-5592-43DE-94F2-221DAA484192@gmx.de>
- <aA5RcIbI7uhsGmu8@pie.lan> <20250427161627.GZ5495@bill-the-cat>
- <aA78p0FgCZYmoeBM@pie> <20250428144943.GA5495@bill-the-cat>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 6379661567;
+ Tue, 29 Apr 2025 12:31:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2DDEC4CEE3;
+ Tue, 29 Apr 2025 12:32:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1745929944;
+ bh=8oijkBdwh1D5lPoQYCisHst9S5GLC46iYJ8Ekew4HdQ=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=U8o31vUPo6XdRsBA6A41JKW7rPYuX2xoZAErOFkf+x8fcspt38UVBYIwDtQ465KjZ
+ 3yN7lCxLUpJILygJDPfRsxDtqajR0vLVaKtGdpg00MpxUCwEhaCX7TzQrPJx+IhtqR
+ XKmCvRlk65dLazwdd0wergUonalv2IAzUmgAnD90WwvMgEUSmw7iHxeWgyArsa2QdQ
+ uqla3qH9pyw6h2KKfG401/9bdXS/MqEJjVtddxuh1pUJNi1btWMDWOqekY9ntoZmgc
+ 9IoDoI/VDb3y4OT1si5yxH8nSatq2kgUGq5gR+d6Q1VYh6bCm9o7I/BuEphzCICfp3
+ P6mzxa4p0rrqA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Dmitrii Merkurev <dimorinny@google.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>
+Cc: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH RFT v2 1/3] fastboot: blk: introduce fastboot block
+ flashing support
+In-Reply-To: <CAOWkq4kKyFjfeQviK+3rtEppeqNdmMg6uvHNXApN8zFQUuLU5w@mail.gmail.com>
+References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
+ <20250409-topic-fastboot-blk-v2-1-c676f21d414f@linaro.org>
+ <877c3cgwsf.fsf@kernel.org>
+ <359a5f7c-4c65-4813-be8e-97e12c7786ae@linaro.org>
+ <87zffzwfz9.fsf@kernel.org>
+ <CAOWkq4kKyFjfeQviK+3rtEppeqNdmMg6uvHNXApN8zFQUuLU5w@mail.gmail.com>
+Date: Tue, 29 Apr 2025 14:32:21 +0200
+Message-ID: <87ldrj5esq.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250428144943.GA5495@bill-the-cat>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,65 +74,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 28, 2025 at 08:49:43AM -0600, Tom Rini wrote:
-> On Mon, Apr 28, 2025 at 03:57:27AM +0000, Yao Zi wrote:
-> > On Sun, Apr 27, 2025 at 10:16:27AM -0600, Tom Rini wrote:
-> > > On Sun, Apr 27, 2025 at 03:46:56PM +0000, Yao Zi wrote:
-> > > > On Sun, Apr 27, 2025 at 05:19:04PM +0200, Heinrich Schuchardt wrote:
-> > > > > Am 27. April 2025 16:50:10 MESZ schrieb Yao Zi <ziyao@disroot.org>:
-> > > > > >Clang's preprocessor may emit extra spaces for lines starting with '#'.
-> > > > > >Lines with these extra characters cannot be handled by Kconfig and will
-> > > > > >be ignored with warnings like,
-> > > > > >
-> > > > > 
-> > > > > 
-> > > > > Do you have an example for reprocing the issue?
-> > > > 
-> > > > Sure,
-> > > > 
-> > > > 	clang-19 -E -nostdinc -P -I . -undef -x assembler-with-cpp \
-> > > > 		configs/starfive_visionfive2_defconfig
-> > > > 
-> > > > or a smaller example for demonstrating the behaviour,
-> > > > 
-> > > > 	cat << EOF | clang -E -P -x assembler-with-cpp -
-> > > > 	# comment line
-> > > > 	normal line
-> > > > 	EOF
-> > > > 
-> > > > and you could see the strange indentation. For reproducing the exact
-> > > > Kconfig warnings,
-> > > > 
-> > > > 	make ARCH=riscv \
-> > > > 		CC='clang-19 --target=riscv64-unknown-linux-musl' \
-> > > > 		starfive_visionfive2_defconfig
-> > > > 
-> > > > (Clang is called clang-19 on my machine)
-> > > > 
-> > > > > Is there an understanding why Clang behaves in this way?
-> > > > 
-> > > > Sadly I have no idea. I guess it may serve for improving
-> > > > human-readability of the preprocessed output.
-> > > 
-> > > This is https://github.com/llvm/llvm-project/issues/78778
-> > 
-> > Thanks for the reference! I did a quick search among LLVM's issues
-> > before sending the patch but didn't find anything useful.
-> > 
-> > Do you think such workaround is acceptable? It seems the link should be
-> > included in commit message as well.
-> 
-> I'd like to see if we can get llvm to fix this moving forward first. Can
-> you please comment on the issue as you're hitting this now too?
+On mar., avril 29, 2025 at 11:45, Dmitrii Merkurev <dimorinny@google.com> wrote:
 
-Sure it should be fixed in LLVM and I've left a comment in the issue.
+>>
+>> Dmitrii, are you okay to re-licence this code under GPL v2 (which is
+>> common licence for this project)
+>>
+>
+> Yes, I'm ok with that.
 
-But even though it's fixed in upstream, it will be nice to have such
-compatibility workarounds for some time to keep compatibile with older
-Clang toolchains, about which my concern is most.
-
-> -- 
-> Tom
-
-Best regards,
-Yao Zi
+Fantastic, thanks a lot for answering so quickly!
