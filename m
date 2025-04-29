@@ -4,195 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BD30C3ABA5
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 17:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E12DC369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 17:00:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C032482ABA;
-	Tue, 29 Apr 2025 19:00:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 2158382ACF;
+	Tue, 29 Apr 2025 19:00:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="KOg6phlV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RZ+uc/ew";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3263282A39; Tue, 29 Apr 2025 18:42:13 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B8B7B8297E; Tue, 29 Apr 2025 16:33:31 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF3E582958
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 18:42:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 69FE78293C
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:33:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Vkv//HbvQKG3V5ob/vP1IrNA20r05fDYc4JoGOmVaz8fUb5vGn5hdH4ZuvgDjJplLZVp9Yx8WgYPCVgRmVAshw5Xsm1sKIvu4vHkDBSF8dpYBULiEX98PHH9wyRaSwC1yL1iomSyD1OrAVMnNK4XJKvd5siwZwoyfJHRTUOQ+331R7xdnx+8tkW/ReirwwlLEiYLDYCsmuSG2ZPm5zbDe1wLKswWvwDghBFntqhixaitM9CRvyQaLfnRBpyJ2WX0p3xkU/OaM/Ii6e1w1HGmFh5Ckff6qfS92B5L07UQvEOrtYzYzxd3NjOlWJYYK0sn7iWkCWVQfDwWoM3TmgyZ4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1Jna0kx0gBvH4ZYOhehMEOruwcqpPoOwljiD7obulOs=;
- b=C9P56Tj4q1PgiUKtlsEbQotvAAHqjkHsLy1v27Xz2B69zPvYSp8A6C3J/Zuj3BKldTV3DH4y9X3hZtX6BF2MVyUf9XlQrZOBcjA134k0vvqYWfJ0Qu/6VnC+kl6MxWjDxbaslsw58EzqTQGJTrJsjfuQ+RR3yapXPRU2Jh5xsMnz2dzvDKd+61bKlvX9p8j3gtjwpIbsnXqonqOAklqFrGzWj3Tp43scr8iB9Nq/VrYv0WaeGEjhm6m9xBCz+7LBZatE+LurhGxG2eNP+T/ctPg6ydC3FNv8WNRsw/D/cP/6jCYwerroQzWTVleZdTUGeoW5FvVcZWn7Sf0meNlEOQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1Jna0kx0gBvH4ZYOhehMEOruwcqpPoOwljiD7obulOs=;
- b=KOg6phlVqvO+gRBmNWhDO0buAc76CdCKQkwl4BAu6rF86Wpkr+TQwrH4hWbkgX/cS1DVXEs7OEDDh/0vHzJMb3jPgQU6U9bYzbsMfzUvO0hx7dArr6mZZyopAELMXaV/ShXPUJQ3JEyBRlqiUKduWP920pb6+B+MyTj9eAVt+uU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by DU2PR04MB8823.eurprd04.prod.outlook.com (2603:10a6:10:2e2::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.19; Tue, 29 Apr
- 2025 16:42:08 +0000
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea%6]) with mapi id 15.20.8678.033; Tue, 29 Apr 2025
- 16:42:08 +0000
-Message-ID: <f0d8cb7b-fcab-4ecd-b16d-99ecb0afe4fc@cherry.de>
-Date: Tue, 29 Apr 2025 18:42:06 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] mmc: rockchip_sdhci: Enable by default for all
- supported SoCs
-To: Chen-Yu Tsai <wens@kernel.org>, u-boot@lists.denx.de
-Cc: Chen-Yu Tsai <wens@csie.org>, Akash Gajjar <gajjar04akash@gmail.com>,
- Alexandre Vicenzi <linux@alxd.me>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, Andy Yan <andyshrk@163.com>,
- Chris Morgan <macromorgan@hotmail.com>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Elon Zhang <zhangzj@rock-chips.com>, Eugen Hristev
- <eugen.hristev@linaro.org>, FUKAUMI Naoki <naoki@radxa.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- Heiko Stuebner <heiko.stuebner@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jacobe Zang <jacobe.zang@wesion.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jianfeng Liu <liujianfeng1994@gmail.com>, John Clark <inindev@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>,
- Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
- Klaus Goger <klaus.goger@cherry.de>, Levin Du <djw@t-chip.com.cn>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nick Xie <nick@khadas.com>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, Paul Kocialkowski <paulk@sys-base.io>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>, Ricardo Pardini <ricardo@pardini.net>,
- Sam Edwards <cfsworks@gmail.com>, Sebastian Kropatsch <seb-dev@mail.de>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Simon Glass <sjg@chromium.org>, Suniel Mahesh <sunil@amarulasolutions.com>,
- Tianling Shen <cnsztl@gmail.com>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
- Tom Rini <trini@konsulko.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Xiaobo Tian <peterwillcn@gmail.com>
-References: <20250429154453.2155923-1-wens@kernel.org>
- <20250429154453.2155923-2-wens@kernel.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250429154453.2155923-2-wens@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0111.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a3::14) To AM9PR04MB8906.eurprd04.prod.outlook.com
- (2603:10a6:20b:409::9)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-acb615228a4so1265964366b.0
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 07:33:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1745937209; x=1746542009; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SvUK12/4agiALikcnZzj8vKH/DK83KG3FmN+Jmbh8sc=;
+ b=RZ+uc/ewYgy7tL2pEI6FtNLtqDAz5gdeW3/GQfy8vIXg4rPBUyBBoxZwfWqAhYt9HA
+ dj8uQfUkN+a5TqcFvvyqtqDUFmaZvgZfF8CRciWl79iBMESypRQoMbwrOe4wktjUcebt
+ kZhlyEt2nDUXG8CrBHFqQktCLuq+7Ts6FMGHM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745937209; x=1746542009;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SvUK12/4agiALikcnZzj8vKH/DK83KG3FmN+Jmbh8sc=;
+ b=N46FLsgkaahjOEH8dONPRJsT3RreR1SPXFrJPK9rtfFVGLMkB2PH4XBbSYWjCxaj0B
+ ZFLrFmi7P9nnE8NN7oNiHDcM+8GSTCzWRB77QFTw57h+l3bdNvinwm3MjE0Jc/RgfJCf
+ aWaUtyZ+lCAJ/Ru4j4pjCC5RB1cw9nrc0ePXi9tTqNzuN3SB8JSZqgoI0qtnFR5h1eOi
+ tWEtXKWqCSf0+7rXLCjaHXXutG7akdyfoSKeTGYD9DxhnD0cA5KwzB7HIlB4RoGdSR7c
+ BXntfdtvffOue8i1QidQ+LpNpR18XNOr1VUSGXTDaLbpfQb8bgjY0LpMuQvgYZahuZXb
+ Tb/A==
+X-Gm-Message-State: AOJu0Yx1R7VWXvvWuMn5yXxJhHSlfm+fTgiFtQPPJi3Gk0gHyE/fiEYP
+ vg6Q5U53efUbuE1+lClGG2zTiFqdVPfwAVggIOW31fGah7s1dUy5Zy0dnjpnL8+AV/v5UcwPLwg
+ j/rTS92CtCltUDQ6qEBvL6gyo0mQfEzeUkPkt
+X-Gm-Gg: ASbGncvlzG4T5hovfPbjDe267Mp1kIAkhpjMv8sm/R98n3OGtMxrl86zErxogABptkn
+ MCjycixXk6dzvoQCgKUcqVGIdiEN7e5hY7Kx1MjZ3lGJFHX2FgdTz1sanWgymqXjLVaSqT93bLv
+ WptYHrE/LcKHn0epmXZOYZQ8E=
+X-Google-Smtp-Source: AGHT+IFT9bgUiTl4OI0ilg7jYc6rucKv0/AxG6LH6maHEYfdz6onP1tGUspt7WmkRFnF8ScR32HTYxDAqbxHwIbVWgI=
+X-Received: by 2002:a17:907:72cf:b0:ace:6f1f:2233 with SMTP id
+ a640c23a62f3a-acec6caa276mr311446266b.24.1745937208649; Tue, 29 Apr 2025
+ 07:33:28 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|DU2PR04MB8823:EE_
-X-MS-Office365-Filtering-Correlation-Id: c83c181e-3806-4f81-fe9f-08dd873cc84c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OFlLWFBuMG5tYmZiajA4NmRTcC9ITC9uWkhDTVhhemZLUllKZm5wRHJ2SEVk?=
- =?utf-8?B?VFR4ZHlsWnAvT051eC93dGtmckM3c2N0VmJJUnlUS24rMS8wMjNuRlgzSE8x?=
- =?utf-8?B?bVNzM3p2ZUdYM0JpQ1F4YXZTR0Y3Z3VjYmtCNVRFRklza3RzckNFMkpiK0N1?=
- =?utf-8?B?bkFpelhtaDF5L3MxY2JkRjZxSXV6MnVDQk8vMzBDVlRiMW1ybGJXdjR0S3hE?=
- =?utf-8?B?eXcxL2NwR2JZelFvMm1QQkRHOXhFazlWNFp4UDkxelFReGZKL01rMUpKM1kz?=
- =?utf-8?B?WDBmelRweTBBVEJHclFORmtrWWZWcEEzQW1QODh3N2F2UVlNWVhjaVc3aXNj?=
- =?utf-8?B?MnNGa05Eblg3MUZHdG1tNkRtRkw3ZG1zZ3J0NkEyb3A1WTRiVHY0dXh3Tzky?=
- =?utf-8?B?NDVoUFRtZGdKcGhJK0ZXSktNbmFTOG91bUJiVWFLYmpkOC9Ycm1kS1dsM0hz?=
- =?utf-8?B?cTRxR2JLclZEbHphSHA1UkFocTFqNGJHRW0vdWo5R3ZFWnZHUVNLT05ad2Jr?=
- =?utf-8?B?SUs1ZlovVkJiY0U4a1pYK2l2aExOVjltMlZ1bjhGMmk4Yis3QlZuZ0krSnJO?=
- =?utf-8?B?MUhZY2h5SVFYTEVDM0FoMWh4K0hoa3Z5RklSbS9HdXh3QkRMdlBuckVxMkxT?=
- =?utf-8?B?TWpYNEFnWCszRi9XL0M1c2tpR2FDdnQvLytkUUFUUncyUjhMSkM1R00vTmo2?=
- =?utf-8?B?em9lVEZRc21YRmNkbXNiUHVrdWJ5dktWRmViYzRRb2JkYllzaUVMNGVWZ2ly?=
- =?utf-8?B?L21oOVJEc2ZjVldvSFp4cFI2b0xkaVJYcGhvTk9CLzJVb1hqWVZKeDY5cnlY?=
- =?utf-8?B?Qnc0S25TaUVWeEI2MFd6S0QwK2hEeU80cG1LQmc4TXk0UDNlNkRhWTh4WFdG?=
- =?utf-8?B?NTFwclpySzZES25JVFN0Rk9rMEY2czFPdTNRTm9TUjB2N2xDOXBaYnhyZXdv?=
- =?utf-8?B?U1RtejRzNE9Id3lBRnlhZ1R2U0R1bTVOVmFybXJmR3FTd2lXdWVGcUJiSEpT?=
- =?utf-8?B?WUNuTC80WE8yVkdqYWN5Z3hOMkVQMzF0UnVPaFZLOTM0RUpWRm5pVFBFaU0v?=
- =?utf-8?B?YnMyOXpBZ1AzWGQrcnA1TnJWSDNuQzU4V3hwS2s3WDRmUzUwYjdLamQvNGho?=
- =?utf-8?B?S2t4NWUxM3FxcU1jM3JncWtxOFVyVUR4NmNXblZMZk5tcExFQkZCUHA4Q2Fw?=
- =?utf-8?B?QkhOS1pENEVuOFUxdFVzb0ZTUDNmTWFvblRSQ2xyd2VHUUdNcWVVR3NHa0o2?=
- =?utf-8?B?dmNZSzNFb0hYRFY3dU1aaW5QWVBBM09yYy9EeVNCTEtxQXNnNjQyYTNodEFO?=
- =?utf-8?B?Y29JaTUxYlkwdkZIaEoydGpPUStHMjg2a2xVbUlidUpqbUNhK0ZJY1RlTURK?=
- =?utf-8?B?eERUUm81UDNoZWhoaDBBcWdZQmRGaEUzKzI1NmRNSG9kOE9FRlFkQmxPK2U2?=
- =?utf-8?B?ZDI0bDhjaXU4YmsvcE1KY1EyT0FLMFRaMkMrc2lqWG9DU0tKWUFGVnJDNC9y?=
- =?utf-8?B?Wk9KN3JPRnY0NkJOTXRWYjR4cEdvWjBQZGZWQytFcTZUUldsWXlMU3NlNEdH?=
- =?utf-8?B?NXVOdUhGSnJMY21SNFZTSUlXUytaNkFOTWFzWWswdkZQSFFENDA3WmRQTmZ0?=
- =?utf-8?B?eG9lTUE2VWErRklvY2Q1T0NXZFBJc2xrQUNiN0JzellTSTVMWEZVeHFnZzFH?=
- =?utf-8?B?d3poYzE2anljMUtkcTlsczh3Q2RDY1F4Ukdpem9XWEZRRXdPNmVERkh6bUZp?=
- =?utf-8?B?MzREd1JVanV5YTJaSHpLeC8zZnNvYzhYUkZCejUvRDlmaHc1THdpY3h2Vmdk?=
- =?utf-8?B?d0s5dklnejloYUFRRng0Wk9kU1YyMzlHaFE4ajFoWiszQStNYUl5dVpaR1Jv?=
- =?utf-8?B?bWN4N3JSSFFTZHZGbWVSaVVEMUhCYm16ZC9zdXZvMjYxeXc9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WkhVNUN2QlVFT0RxaHRBUmtWYTFPVUprdWdGVkhqengvNkVIalJ2aEt3dXJt?=
- =?utf-8?B?c20vUWNrSUlrejdkbHVxZXEvdXRCOElzOW9KbWZwK0dpMUppZnlVdmpqSkZU?=
- =?utf-8?B?dUZqNHlBaHJIMGxJbmYwV3hRcnd3Qkg3bGRMZTAxOHVSc3hkbnZyei9DTCtM?=
- =?utf-8?B?TU1PTDV4ZVNzT0ZMaTJuK3NpMzJqeVRLb3hEbkZXODRzeTNHbjBKT0Q5ZTc0?=
- =?utf-8?B?WmwzcDR2dTVHM1kzRVVnZWh2Ri90czZ4YXVyMFYxS0RRNXJTN3l1VnJIVDZP?=
- =?utf-8?B?M2xTbTVXVmpNT3Bva0cxMVhyYUhadGdGMnV0MVFNMXdrczlkck5mTE56ZENI?=
- =?utf-8?B?L3ZBejJldjk2UmZnYURCZHZWVkllYVFFczc0a0xONVJoRm02N0ZiRnBPNjNH?=
- =?utf-8?B?cGI4a3RqZkFUS0dGMHRGNDJhK3VVdG9EQlZQTHZYOWN6SERtQzd2anhzdlov?=
- =?utf-8?B?c2xhb2RXSW1wK1lPVFVET2JRQUZmSGJZTkkyeUh6TEpGUWtKcVhTOVpxOTU4?=
- =?utf-8?B?eGFQMUR1d09HYXlBdERrdHVjTWZVUVRHak45dmFGSWh3dUVPdFBaMGlhWGp4?=
- =?utf-8?B?cTd1SmhCNlRDTEZ1N1NLR0VsMGxYelh3R2xwdGZDSjhBNlZucTkyWkkyV1Jh?=
- =?utf-8?B?Ly9ScEdib25RS0RBWjU3djAvcCs0RHNqaGlwK2s4cUVBeVBXWnZPOTIzSERN?=
- =?utf-8?B?eHpVV1JhNVMvR0REZkZCVmlsOVo5Z3hrOWpBd2l3Vno0dHhwaWtQd1pQRDVB?=
- =?utf-8?B?dms1OGpuYWpieng1SUF5QzJ6eGJodzlpZ3hXQnlJZjNEYVowUUptOXAyRnRV?=
- =?utf-8?B?RkU5UnorTmZvaUU4ajFzckVSdjMxNUpvRTdPazB3Yjd4QjVGOUpBRXI0RTY0?=
- =?utf-8?B?bmVXK0F4aGhBU2lFTHVQcklnWDF6QWY1ZStCOGR6Qi94SGZLdTdiMHJGNzg0?=
- =?utf-8?B?a2V6Vmg0dGxWbDlWdTJkRFFDbTYrRGxVNTBEcjAvWU9idzZEd3JCRWhXamFz?=
- =?utf-8?B?eUpqQVZkMEt2aitQMFpacE16MVRRbEhmNjZ6YVpWTnJPaHF6TENrS2N3QWpK?=
- =?utf-8?B?SWxvWkxnSlRKd0lXN0J2UHFsU0ZpUkpnV1ZLS25rNzJVU3VuSnk0eU9jblY4?=
- =?utf-8?B?ZEJvZ0NYZFptcVdCbjVJK1ljVDF2REVTVFFMT05wSHdXUDhiR3A4K2N4UkZ6?=
- =?utf-8?B?eGlRenlBbU1rdThWSitDRzY3Z2srUy9OQ21jNkx2Sm9TZU04ME1mY25NdVI1?=
- =?utf-8?B?a3VCWithY3d0UXVEWThpUEFXVDlORzJEUFYxNVlyM1BwWHMzSFA5Q2Z4M3l5?=
- =?utf-8?B?UkVmczZxY0gzb0dnVDNwb29MWWdxTEVmdm9TeGRJSVY5ZXNObm9LQ2lYa1Rh?=
- =?utf-8?B?RnhUZWdkVENVZ2pFMGI3T0syNzI0U0wwWWozSlhJY3c0RUsvTkdKcU1sNDV2?=
- =?utf-8?B?TUhVRU1JaWFzSERHV2x2ZHJxejFHaVgvTWhuenEvWndxQjgyR1BMODR2QTlY?=
- =?utf-8?B?VEJXaE1peWY3bExUb05WRlAvMmwycGY1bGFNSmxLWStZVm5SRTh6V2lHUWh4?=
- =?utf-8?B?d09hMDNzNngzNlRxY0ZGRmwzUldZeVpPK25NYWdWa2s0YzZ4TjJJNWE4T1dU?=
- =?utf-8?B?RUI5NlNkV0NyUllyY0o4L0grNTNNVkovTThZeDM2WER1cVYycnJNeFNjOVpa?=
- =?utf-8?B?RTZGSlhKQVVqYS93bjZPZVNQMHpGK1h4VEZSZnNTbEpOT1VWOEpIejJ0Szlx?=
- =?utf-8?B?K2tNREc4SjBLZDgrRUtxOTU5OExEam1WRk54UzgxUnBjWFFBVVJDMTQ2RjRh?=
- =?utf-8?B?TFRaZllzdm9XSUFDR2RKU21lL2J5czZUQ3hLeHpkbk1idFNReDNmcFpJcXVk?=
- =?utf-8?B?ZWdibUVBdFB2SE5YbTVsdnFQVXFoU1VkVFV6Q2tYZGVoRnJwMDRlZXl3VUZK?=
- =?utf-8?B?T2FrTENCeitNOGJzb21uZFJ0eVFNVmZreU9DT2lTWFdtbUU2cnFXL0pwSjlX?=
- =?utf-8?B?SFlwMFZZdHFKbWdpdThDbEVOdUlJMnhYaVdDUVBOTnhMZGs4cHFNcmV1cWdV?=
- =?utf-8?B?WktIWXBOS1cyS0lublE0VitlQU1iM2RKTnI1U1UxK3BoSFRZOWk2ekViWmxV?=
- =?utf-8?B?SHRsNFBzQXBnajkvdytsUVF1VGN2S2N1bkZGRmlrem1jelZuU2FYblhNUG96?=
- =?utf-8?B?NlE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c83c181e-3806-4f81-fe9f-08dd873cc84c
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2025 16:42:08.6239 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0F9PEFE70jstTmndcSwNK1jwLMh+zoChYN77TNZyeDt5eWzliXBlUY8CeoKPteyWsZix/HHEkhSUePT10ROjLp1Up7vfa3FxBuAuXRr4ta8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8823
-X-Mailman-Approved-At: Tue, 29 Apr 2025 19:00:22 +0200
+References: <20250417181613.1355024-1-sjg@chromium.org>
+ <CAEfUkUJpT8YxOgdakCBbjBo_a6a6pQDR_wh=iqX5LC+cFAFJ0Q@mail.gmail.com>
+In-Reply-To: <CAEfUkUJpT8YxOgdakCBbjBo_a6a6pQDR_wh=iqX5LC+cFAFJ0Q@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 29 Apr 2025 08:33:16 -0600
+X-Gm-Features: ATxdqUF3iCkSNmfA7E4fSBrQJCpyyVjkaSs3pkw11JfPkj9L-IVOM-B0Dx7DauY
+Message-ID: <CAFLszTjrv8hg=0QoHZM8Syu33nHuK7t9xQhAOmRk-xLGu=jrdw@mail.gmail.com>
+Subject: Re: [PATCH v3 00/22] passage: Define a standard for firmware data flow
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Peter Maydell <peter.maydell@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Phelps <andrew.phelps@canonical.com>, 
+ =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>, 
+ Bill Mills <bill.mills@linaro.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alex Shumsky <alexthreed@gmail.com>, Alexander Dahl <ada@thorsis.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Harrison Mutai <harrison.mutai@arm.com>, Jason Liu <jason.hui.liu@nxp.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ =?UTF-8?B?TWFyZWsgTW9qw61r?= <marek.mojik@nic.cz>, 
+ Mario Six <mario.six@gdsys.cc>,
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@denx.de>, 
+ Sumit Garg <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Thierry Reding <treding@nvidia.com>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Xu Zhang <423756212@qq.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Tue, 29 Apr 2025 19:00:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -209,63 +121,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chen-Yu,
+Hi Raymond,
 
-On 4/29/25 5:44 PM, Chen-Yu Tsai wrote:
-> From: Chen-Yu Tsai <wens@csie.org>
-> 
-> The rockchip_sdhci driver supports the alternative MMC controller found
-> in newer Rockchip SoCs. This controller is used for eMMC. Almost all
-> defconfigs for Rockchip platforms with this controller have it enabled.
-> 
-> Enable it by default for all supported Rockchip SoCs. Disable it
-> explicitly in defconfigs that previously didn't have it enabled.
-> 
+On Mon, 28 Apr 2025 at 08:41, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Thu, 17 Apr 2025 at 14:16, Simon Glass <sjg@chromium.org> wrote:
+> >
+> >
+> > This series adds a standard way of passing information between different
+> > firmware phases. This already exists in U-Boot at a very basic level, in
+> > the form of a bloblist containing an spl_handoff structure, but the intent
+> > here is to define something useful across projects.
+> >
+> > The need for this is growing as firmware fragments into multiple binaries
+> > each with its own purpose. Without any run-time connection, we must rely
+> > on build-time settings which are brittle and painful to keep in sync.
+> >
+> > This feature is named 'standard passage' since the name is more unique
+> > than many others that could be chosen, it is a passage in the sense that
+> > information is flowing from one place to another and it is standard,
+> > because that is what we want to create.
+> >
+> > The implementation is mostly a pointer to a bloblist in a register, with
+> > an extra register to point to a devicetree, for more complex data. This
+> > should cover all cases (small memory footprint as well as complex data
+> > flow) and be easy enough to implement on all architectures.
+> >
+> > The emphasis is on enabling open communcation between binaries, not
+> > enabling passage of secret, undocumented data, although this is possible
+> > in a private environment.
+> >
+> > This series is available at u-boot-dm/pass-working
+> >
+>
+> First of all, can you group those patches which are necessary for
+> refactoring the "passage" concept into a smaller series for an easy
+> review?
 
-Same remark as patch 1, maybe only keep changes that wouldn't be covered 
-by a simple make savedefconfig after your patch?
+What do you mean by refactoring? I don't believe my series has much
+value unless it actually brings in 'standard passage' and everything
+that goes with that, e.g. the validation and documentation.
 
-[...]
+>
+> Actually as I mentioned in our previous discussions, I don't agree to
+> add a OF_BLOBLIST as this is duplicated with "BLOBLIST +
+> BLOBLIST_PASSAGE_MANDATORY (aka PASSAGE_IN in the context of your
+> patch - I am not sure the reason you prefer to rename it - do we have
+> any other passage approaches other than using bloblist? And do you
+> have any considerations to allow a fallback or not in case passage
+> failures?)"
 
-> diff --git a/configs/orangepi-5-rk3588s_defconfig b/configs/orangepi-5-rk3588s_defconfig
-> index 5dc72ebd82a7..e90390f6daff 100644
-> --- a/configs/orangepi-5-rk3588s_defconfig
-> +++ b/configs/orangepi-5-rk3588s_defconfig
-> @@ -54,6 +54,7 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MISC=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
-> +# CONFIG_MMC_SDHCI is not set
->   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->   CONFIG_SPI_FLASH_XMC=y
->   CONFIG_PHY_MOTORCOMM=y
+This is how I would like it to work, i.e. that one specifically
+chooses OF_BLOBLIST. This split of bloblib and whether or not it is
+mandatory is just confusing.
 
-[...]
+>
+> Secondly I prefer to keep the register convention code as a xferlist
+> library that can be used for arm arches other than split them into
+> different low level assemblies. In case of any firmware handoff
+> specification update, we just need to maintain this library.
 
-Seems like the OrangePi 5B has sdhci enabled, but we don't support it in 
-U-Boot (yet), so fine :)
+I don't agree with that, sorry. This should be a standard feature of
+U-Boot. It is easier to update three 'store' instructions in the
+assembler than to figure out what is going on with the xferlist
+functions. They are really just an obfuscation from the Arm point of
+view, the only current implementer of the spec.
 
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index f2f0e7dbe601..94377a1a1419 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -481,6 +481,11 @@ config MMC_SANDBOX
->   
->   config MMC_SDHCI
->   	bool "Secure Digital Host Controller Interface support"
-> +	default y if ROCKCHIP_RK3399
-> +	default y if ROCKCHIP_RK3528
-> +	default y if ROCKCHIP_RK3568
-> +	default y if ROCKCHIP_RK3576
-> +	default y if ROCKCHIP_RK3588
->   	help
->   	  This selects the generic Secure Digital Host Controller Interface.
->   	  It is used by manufacturers such as Texas Instruments(R), Ricoh(R)
-> @@ -713,6 +718,7 @@ config MMC_SDHCI_ROCKCHIP
->   	bool "Arasan SDHCI controller for Rockchip support"
->   	depends on ARCH_ROCKCHIP
->   	depends on MMC_SDHCI
-> +	default y
+I have tried my series with your QEMU things but it doesn't work. So I
+went back to try your original instructions with your series and it
+didn't work either. Would it be possible for you to get the pending
+patches in the other projects submitted and then send me an update re
+the instructions? I would like to get the environment running again,
+but there are too many moving parts at present.
 
-I guess this is fine compared to patch 1 because of the depends on 
-ARCH_ROCKCHIP.
+Regards,
+SImon
+
+>
+> Regards,
+> Raymond
+>
+> > Changes in v3:
+> > - Add a build for aarch64 as well
+> > - Add conditions to avoid enaling the test on qemu_arm_sbsa
+> > - Add mention of QEMU_MANUAL_DTB in doc/
+> > - Add new patch to adjust how the bloblist is received from stdpass
+> > - Add new patch to redo how a devicetree is set up
+> > - Add passage_valid() to decide if stdpass was provided
+> > - Add support for a 64-bit test also
+> > - Add support for aarch64 also
+> > - Add test for aarch64
+> > - Add tests for azure
+> > - Drop common.h
+> > - Fix 'that' typo
+> > - Fix 'usiing' typo
+> > - Make the global_data fields present only when needed
+> > - Move arch_passage_entry() into this patch
+> > - Move passage.h into this patch
+> > - Rebase to -master
+> > - Refresh the U-Boot output in the documentation
+> > - Update docs for the various code changes
+> > - Update registers to match the Firmware Handoff protocol
+> > - Use bootph tags
+> >
+> > Changes in v2:
+> > - Add a devicetree for qemu-arm so that qemu_arm_spl can work
+> > - Add a new QEMU-specific Kconfig instead
+> > - Add comments about how to pass standard passage to EFI
+> > - Add comments about passing a bloblist to Linux
+> > - Add detailed arch-specific information
+> > - Add new patch with the arm-specific standard passage implementation
+> > - Fix 'it' typo
+> > - Make the stdpass calling standard arch-specific
+> > - Move patch into the standard-passage series
+> > - Rebase on -master
+> > - Rebase to master
+> > - Rebase to master (dropping bloblist patches already applied)
+> > - Rework global_data for new stdpass convention
+> > - Split the jump_to_image_no_args() change into its own patch
+> > - Update the commit message to mention the long lines
+> > - Use three registers instead of two for the entry
+> >
+> > Simon Glass (22):
+> >   RFC: scripts: Add a script for running QEMU
+> >   emulation: fdt: Allow using U-Boot's device tree with QEMU
+> >   spl: Tidy up the header includes
+> >   x86: Move Intel GNVS file into the common include directory
+> >   spl: Rename jump_to_image_no_args()
+> >   passage: Support an incoming passage
+> >   fdt: Redo devicetree setup
+> >   fdt: Support reading FDT from standard passage
+> >   bloblist: Adjust how the bloblist is received from passage
+> >   passage: arm: Accept a passage from the previous phase
+> >   passage: spl: Support adding the dtb to the passage bloblist
+> >   passage: spl: Support passing the passage to U-Boot
+> >   passage: arm: Add the arch-specific standard passage impl
+> >   arm: qemu: Add an SPL build
+> >   arm: qemu: Add a 64-bit SPL build
+> >   xferlist: Drop old xferlist code
+> >   passage: Add a qemu test for ARM
+> >   sandbox: Add a way of checking structs for standard passage
+> >   passage: Add documentation
+> >   passage: Add docs for spl_handoff
+> >   passage: Add checks for pre-existing blobs
+> >   CI: Add tests for gitlab and azure
+> >
+> >  .azure-pipelines.yml                          |   6 +
+> >  .gitlab-ci.yml                                |  12 +
+> >  MAINTAINERS                                   |  10 +
+> >  Makefile                                      |   2 +-
+> >  arch/arm/Kconfig                              |   2 +-
+> >  arch/arm/cpu/armv7/cpu.c                      |  18 +
+> >  arch/arm/cpu/armv7/start.S                    |  10 +-
+> >  arch/arm/cpu/armv8/cpu.c                      |  19 +
+> >  arch/arm/cpu/armv8/start.S                    |  12 +
+> >  arch/arm/dts/qemu-arm-u-boot.dtsi             |  22 +
+> >  arch/arm/dts/qemu-arm.dts                     | 393 +++++++++++++++++-
+> >  arch/arm/dts/qemu-arm64-u-boot.dtsi           |  29 ++
+> >  arch/arm/dts/qemu-arm64.dts                   | 338 ++++++++++++++-
+> >  arch/arm/lib/Makefile                         |   1 -
+> >  arch/arm/lib/crt0.S                           |   6 +
+> >  arch/arm/lib/crt0_64.S                        |   6 +
+> >  arch/arm/lib/xferlist.c                       |  23 -
+> >  arch/arm/lib/xferlist.h                       |  19 -
+> >  arch/arm/mach-imx/imx8ulp/soc.c               |   2 +-
+> >  arch/arm/mach-imx/spl.c                       |   2 +-
+> >  arch/arm/mach-omap2/boot-common.c             |   2 +-
+> >  arch/arm/mach-qemu/Kconfig                    |  20 +-
+> >  arch/arm/mach-tegra/spl.c                     |   2 +-
+> >  arch/mips/lib/spl.c                           |   2 +-
+> >  arch/riscv/lib/spl.c                          |   2 +-
+> >  arch/sandbox/cpu/spl.c                        |   4 +-
+> >  arch/x86/cpu/apollolake/acpi.c                |   2 +-
+> >  arch/x86/cpu/intel_common/acpi.c              |   2 +-
+> >  .../include/asm/arch-apollolake/global_nvs.h  |   2 +-
+> >  arch/x86/lib/spl.c                            |   2 +-
+> >  arch/x86/lib/tpl.c                            |   2 +-
+> >  board/emulation/common/Kconfig                |  12 +
+> >  board/emulation/qemu-arm/Kconfig              |  29 +-
+> >  board/emulation/qemu-arm/MAINTAINERS          |   2 +
+> >  board/emulation/qemu-arm/Makefile             |   1 +
+> >  board/emulation/qemu-arm/qemu-arm.c           |   3 +
+> >  board/emulation/qemu-arm/spl.c                |  26 ++
+> >  board/freescale/common/fsl_chain_of_trust.c   |   2 +-
+> >  board/google/chromebook_coral/coral.c         |   2 +-
+> >  board/renesas/common/rcar64-spl.c             |   2 +-
+> >  board/sandbox/Makefile                        |   3 +-
+> >  board/sandbox/stdpass_check.c                 | 104 +++++
+> >  common/Kconfig                                |  58 ++-
+> >  common/bloblist.c                             | 108 ++---
+> >  common/board_f.c                              |  13 +-
+> >  common/spl/spl.c                              | 112 +++--
+> >  configs/qemu_arm64_spl_defconfig              |  95 +++++
+> >  configs/qemu_arm_spl_defconfig                |  88 ++++
+> >  configs/vexpress_fvp_bloblist_defconfig       |   2 +-
+> >  doc/board/armltd/vexpress64.rst               |   2 +-
+> >  doc/board/emulation/qemu-arm.rst              |  84 ++++
+> >  doc/develop/bloblist.rst                      |   4 +-
+> >  doc/develop/devicetree/dt_qemu.rst            |   8 +
+> >  doc/develop/index.rst                         |   1 +
+> >  doc/develop/std_passage.rst                   | 384 +++++++++++++++++
+> >  drivers/usb/gadget/f_sdp.c                    |   2 +-
+> >  dts/Kconfig                                   |  17 +-
+> >  include/asm-generic/global_data.h             |  37 ++
+> >  include/bloblist.h                            |  26 +-
+> >  include/fdtdec.h                              |   4 +-
+> >  include/handoff.h                             |  10 +-
+> >  .../x86/include/asm => include}/intel_gnvs.h  |   0
+> >  include/passage.h                             |  53 +++
+> >  include/spl.h                                 |   4 +-
+> >  include/stdpass/README                        |   4 +
+> >  include/stdpass/tpm2_eventlog.h               |  42 ++
+> >  include/stdpass/vboot_ctx.h                   | 267 ++++++++++++
+> >  lib/asm-offsets.c                             |   8 +
+> >  lib/fdtdec.c                                  |  42 +-
+> >  scripts/Makefile.xpl                          |   2 +-
+> >  scripts/build-qemu.sh                         | 226 ++++++++++
+> >  test/py/tests/test_passage.py                 |  13 +
+> >  72 files changed, 2618 insertions(+), 258 deletions(-)
+> >  create mode 100644 arch/arm/dts/qemu-arm-u-boot.dtsi
+> >  create mode 100644 arch/arm/dts/qemu-arm64-u-boot.dtsi
+> >  delete mode 100644 arch/arm/lib/xferlist.c
+> >  delete mode 100644 arch/arm/lib/xferlist.h
+> >  create mode 100644 board/emulation/qemu-arm/spl.c
+> >  create mode 100644 board/sandbox/stdpass_check.c
+> >  create mode 100644 configs/qemu_arm64_spl_defconfig
+> >  create mode 100644 configs/qemu_arm_spl_defconfig
+> >  create mode 100644 doc/develop/std_passage.rst
+> >  rename {arch/x86/include/asm => include}/intel_gnvs.h (100%)
+> >  create mode 100644 include/passage.h
+> >  create mode 100644 include/stdpass/README
+> >  create mode 100644 include/stdpass/tpm2_eventlog.h
+> >  create mode 100644 include/stdpass/vboot_ctx.h
+> >  create mode 100755 scripts/build-qemu.sh
+> >  create mode 100644 test/py/tests/test_passage.py
+> >
+> > --
+> > 2.43.0
+> >
+> > base-commit: 278be62c052f3a5749c3c7a57bcd307b82dcdc2d
+> > branch: pass3
