@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44768C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 09:38:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B6BC369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 09:58:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64FF6809A5;
-	Tue, 29 Apr 2025 11:38:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5454F80BAD;
+	Tue, 29 Apr 2025 11:58:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PHe6o7sm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V2FN19zw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A570280BAD; Tue, 29 Apr 2025 11:38:56 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id DECAE80F03; Tue, 29 Apr 2025 11:58:04 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01A0D8070C
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 11:38:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4B70809A5
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 11:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-30c2d427194so47762121fa.0
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 02:38:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43cfe63c592so59401315e9.2
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 02:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745919533; x=1746524333; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mxqyLtTU83yQy1rXl79aZi86cn7poFlvb/mT7OkDlh0=;
- b=PHe6o7sm1M+m3IJ2xTs2AUbdABeGr9cjItG1AxQMveeFtYzrOB/qiERuATqOntk2ma
- Eon/Y8pa1bmE0nUSCfpR14o2lmf4GEGNe4sx5Pa9MiXFahZkU9o4Bief0hLJWl7G+UrE
- eSteWVAiy+0i73/oNpI0/NpO4YUDCGlh+aRVzOYUeuKYyge8rVdk8LGWRXD7wrHeBqSq
- U3rcqYbcXFRrDtOhjdrpf485ELG9Atv6pSTiy45eSx1q3/4XSzp2NybjrFtPrYj1xd4T
- wrzXc4rqERBvNGcRGSqkSw10HEMoNFz6vjEPnztV9fU+iuM63fCdEDq0w05HDM7sKu4m
- HBpA==
+ d=linaro.org; s=google; t=1745920682; x=1746525482; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0/z4Y/R/KQCEDvxoLHcyllV3vfJ/KcFBw3AcCvdqpq8=;
+ b=V2FN19zwFjls8cvyqoC0D/IqpauRhzHIso/iDiR8m5NppHb2143xT5pxkfTVrtlxm3
+ a8c2c4yjfGPfwRF+9vZdFJ+9ynFtTIdcuTqCB7rRcviETFP6ZucL/cTqqW5qIPxErh+k
+ +rT6k7E/ADdbtnGi0ngkt2gzmTpkFtuNtcvpSa4cop50R5Bwkwq15TSnAqh0XxWh4ZAl
+ v8Pa6RHy21LVn+FW+HsNPBYamAv+zdG7w+4mfm6xISPxKktEloQTPUSHL21s6heW6kOz
+ JPCJOEkjB5yldil0JE1bT2vYEUVElDndwdFbUalHwQkyFcTXbeZ4bGZpYAArr+tv1lXw
+ r2ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745919533; x=1746524333;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1745920682; x=1746525482;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mxqyLtTU83yQy1rXl79aZi86cn7poFlvb/mT7OkDlh0=;
- b=RhVOWjBMpgroz3q/lAdQwg2kxO0AFHm0EFjW073m8DV1nPqavfXz0mIxO0rTYEP0Fk
- uH5ehGZo2HzJs30wyo/MnGPBXhxmzFOWH2SqA+MSjsnNLmMH7Ln5J5mdoy04fb5CUt06
- vRnCwCGdBJ4/TucYiSLqaSvAwHYKa2QbixYW/G6n6V6tSUn2grbfMhNs84EduAp8i/T7
- uaZhTpWIQWfZt3fQe5yNyU+bHAkjOX+E6LyzQD7sktyukWgaxJbCsfdyFwK3Yw8G3Yn9
- euORTSn/BBNHtkAny8wT0ey28aDZlgGuDlYB31YWc6o8qyOcgqXQ6Z1cDu/Ff8C1aKjQ
- sVGw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7PE1pdLzrBN5WWtfMHAyzpRAu/3/gV4p9xQsoU1t3sI0z6oPem6J5icr4ZtA3poq4atOGaNI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzrtfh25hCGPPu/9CQsj+Z2X/0bB+No6RFjXrCBzuqSczlRuWNL
- uQF+dUUmZX8/jql2F3son36G3t64eFF/DbpjNLX0suqCVLNVbYtLRegOq8c7JV0yA11xLfDas0U
- q5Sq++zl4KIzx5p38y4yyCUE/IsY=
-X-Gm-Gg: ASbGnctjMMUkOufx3HTseKRBuhsfHpyicvVTmjTelLzOh4a09DRfaGmhd5fngB0C2ll
- qkyMVwayrP4cYkFeABcfIvi3LgwVary+TN9ZMUTplpXDROUcL1F224DNefAuK+ZVT0mrKgmAgBH
- Rg6lfgbjPar0lT8PlngZIdsYI=
-X-Google-Smtp-Source: AGHT+IGi4iS6HhAHksNk4savLmZjgvARi6geyabUQCpBJws4fmt+hRDdHj/7Lf3NP2U+yxonciFwakKQ9LG9LmpOcRw=
-X-Received: by 2002:a05:651c:1582:b0:310:506c:613 with SMTP id
- 38308e7fff4ca-31d5c4f0edemr6806451fa.37.1745919532291; Tue, 29 Apr 2025
- 02:38:52 -0700 (PDT)
+ bh=0/z4Y/R/KQCEDvxoLHcyllV3vfJ/KcFBw3AcCvdqpq8=;
+ b=Sks9y7REY+2ZQLQssRvW+lQ+Eun0pIFpNqTMDalHBsY7I4SgXCbZNaN/yTAmcdRTfL
+ ctEBRPGVLKJtJhbjjO4h3D/vNOyADLuDzEIiYuabZGN3a7zfGEhO01nLfPBAtO1sfgNl
+ GdVUyBjM7YBtkfNDRYxOeL2BsgNwnDubRXOFJBrrvmUovVxRRMOrdlFZb1C0Cy3QlqjF
+ VYxJt9JV7b7KNc+7FZW8AJ3jOCPOXKR108E+ByI0mDInGm/c8+kEaTJHSPDE2jYMpsTC
+ UE2iwYyWkF49uRaE4VTgaqTevfDvkS0Sa86Qs6M4b6UINnpJgl+HYfz4QWwKlwVt8EWG
+ HwiA==
+X-Gm-Message-State: AOJu0YwcKcsWv+s8ycftUiF3nGGFwZXH9wpxYikZI2653sUMmfXV4qfn
+ /xSVA5bs6PtlJMykxAJ4kmg1nNFjICr6u1PhqIzJP1WgshNo1lE9mVAfPn0VY2m7rsc6XtSLw07
+ PbqM=
+X-Gm-Gg: ASbGncve7c74eniJQhcaCYZ1QEO8NtM/RKrBp6uSZEUDLUGHkUreQBKkmRhCpXTsy2u
+ 0zeD29ZrVeSiaABS4ogl7czV0r8kPNx2qK2k8d1ozKdiNB6Jjkwp1xsxmKkVmlHzj13Fdp6WYvh
+ gKs32Q4yPDqu5jmxlCz29gxJx2hTS3eoxY9ZEhRwMRtWQhK3wxNYH3OOEJVy/qUL01MSJANnlco
+ I70hfSIkzNXeHa4I+81ARCvJ1o1/ZQ0G1gIviOx484kiXRwvJin2uC8tYuAF3uQ+cuAEABL4wW/
+ 8ZbAvqXH6YwupDPYWMMb61MSQrtsZ2Jhp0/GhOat6lfFSP7tcw==
+X-Google-Smtp-Source: AGHT+IGIWDxvt/057AvhjLw9hiVwzMGDfZCf8SUilOok5gIhIv2+3TiOXEY0j3VRPv9KnJXmTzhr0g==
+X-Received: by 2002:a05:600c:5247:b0:43c:ef55:f1e8 with SMTP id
+ 5b1f17b1804b1-441ac856c92mr22357445e9.13.1745920682064; 
+ Tue, 29 Apr 2025 02:58:02 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-440a5a74314sm155792445e9.4.2025.04.29.02.58.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Apr 2025 02:58:01 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] uthread: doc: fix inline documentation
+Date: Tue, 29 Apr 2025 11:57:34 +0200
+Message-ID: <20250429095747.3867260-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAEyMn7b90ybqMOgb4ViAaQVqvTuma-HyYkwEvSVHfowfvEd3tA@mail.gmail.com>
- <20250424174539.GL5495@bill-the-cat>
- <CAEyMn7asyKz8MnXUBZqtuFehR4Vk8j_5ysRCq5=H3EqiL36aMw@mail.gmail.com>
- <CAEyMn7bb+9X3UhWuwd=zgnsUPf4naRi_WMFPU_i8LQbUshcb5g@mail.gmail.com>
- <CAFLszTg=gLDydqc-US7xwhR=yRw1ueRhSQOXDUNZ=2bnxs_=5w@mail.gmail.com>
-In-Reply-To: <CAFLszTg=gLDydqc-US7xwhR=yRw1ueRhSQOXDUNZ=2bnxs_=5w@mail.gmail.com>
-From: Heiko Thiery <heiko.thiery@gmail.com>
-Date: Tue, 29 Apr 2025 11:38:39 +0200
-X-Gm-Features: ATxdqUEjzpKCaOvSkbwMHqQZoccAhzSs_FQYRRf5z7hnpn9AQoVLjsBKvkKpi-c
-Message-ID: <CAEyMn7Y+un5JHC4YCVkz=PzFiT-oM+Dtx_NLK6mzGi3GxpRNag@mail.gmail.com>
-Subject: Re: bootflow: extlinux and menu
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,170 +96,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Fix Sphinx warnings:
 
-Am Fr., 25. Apr. 2025 um 16:36 Uhr schrieb Simon Glass <sjg@chromium.org>:
+ $ make htmldocs
+ [...]
+ ./include/uthread.h:56: warning: cannot understand function prototype: 'enum uthread_mutex_state '
+ ./include/uthread.h:64: warning: cannot understand function prototype: 'struct uthread_mutex '
+ ./include/uthread.h:56: warning: cannot understand function prototype: 'enum uthread_mutex_state '
+ ./include/uthread.h:64: warning: cannot understand function prototype: 'struct uthread_mutex '
 
-> Hi Heiko,
->
-> On Fri, 25 Apr 2025 at 02:20, Heiko Thiery <heiko.thiery@gmail.com> wrote:
-> >
-> > Hi Tom,
-> >
-> > Am Do., 24. Apr. 2025 um 19:49 Uhr schrieb Heiko Thiery
-> > <heiko.thiery@gmail.com>:
-> > >
-> > > Hi,
-> > >
-> > > Am Do., 24. Apr. 2025 um 19:45 Uhr schrieb Tom Rini <
-> trini@konsulko.com>:
-> > > >
-> > > > On Thu, Apr 24, 2025 at 07:36:06PM +0200, Heiko Thiery wrote:
-> > > >
-> > > > > Hi,
-> > > > >
-> > > > > I tried bootflow for the first time and wanted to test my extlinux
-> > > > > configuration with separate menu entries. But I don't see that the
-> > > > > menu is shown. The default value is always selected. Am I right in
-> > > > > thinking that this is not supported with extlinux?
-> > > >
-> > > > I suspect Simon also found this recently and fixed it as part of
-> another
-> > > > series. It's likely in:
-> > > >
-> https://patchwork.ozlabs.org/project/uboot/list/?series=449177&state=*
-> > > > It wasn't based on master or next:
-> > > >
-> https://patchwork.ozlabs.org/project/uboot/cover/20250319143820.2385092-1-sjg@chromium.org/
-> > > > And some of the tidying up lead to size growth in a number of
-> platforms:
-> > > >
-> https://patchwork.ozlabs.org/project/uboot/patch/20250319143820.2385092-2-sjg@chromium.org/
-> > > > Along with needing to document some of the user visible changes:
-> > > >
-> https://patchwork.ozlabs.org/project/uboot/patch/20250319143820.2385092-7-sjg@chromium.org/
-> > > >
-> > > > You might want to see if just patches 7 / 8 / 9 resolve the issue you
-> > > > see and if so we can get just those merged in.
-> > >
-> > > Sounds promising. I will try to test this in the next days (when I'm
-> > > back in office) and give you a feedback.
-> >
-> > Unfortunately it does not solve the problem. What I have is the
-> > following extlinux config file on my boot partition:
-> >
-> > >>>> extlinux.conf
-> > label Kontron SMARC-sAM67
-> >   kernel /Image
-> >   devicetree /k3-am67a-kontron-sa67.dtb
-> >   append root=PARTUUID=f615c46d-fe53-4547-8875-4c21438d931e rootwait
-> >
-> > label Kontron SMARC-sAM67 on Evaluation Carrier 2.0
-> >   kernel /Image
-> >   devicetree /k3-am67a-kontron-sa67.dtb
-> >   devicetree-overlay /k3-am67a-kontron-sa67-ads2.dtbo
-> >   append root=PARTUUID=f615c46d-fe53-4547-8875-4c21438d931e rootwait
-> > >>>>
-> >
-> > >>>> output
-> > [SDHC] => bootflow scan
-> > Cannot persist EFI variables without system partition
-> > Bus usb@31000000: Register 1000840 NbrPorts 1
-> > Starting the controller
-> > USB XHCI 1.10
-> > Bus usb@31200000: cdns-usb3-host usb@31200000: set 1 has failed, back
-> to 0
-> > scanning bus usb@31000000 for devices... 1 USB Device(s) found
-> > scanning bus usb@31200000 for devices... 1 USB Device(s) found
-> >
-> > Error: ethernet@8000000ethernet@800000 No valid MAC address found.
-> >
-> > Error: ethernet@8000000ethernet@800000 No valid MAC address found.
-> > [SDHC] => bootflow list
-> > Showing all bootflows
-> > Seq  Method       State   Uclass    Part  Name
-> Filename
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> >   0  efi_mgr      ready   (none)       0  <NULL>
-> >   1  extlinux     ready   mmc          1  mmc@fa10000.bootdev.part_
-> > /extlinux/extlinux.conf
-> >   2  extlinux     ready   mmc          1  mmc@fa00000.bootdev.part_
-> > /extlinux/extlinux.conf
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> > (3 bootflows, 3 valid)
-> > [SDHC] => bootflow select 1
-> > [SDHC] => bootflow info
-> > Name:      mmc@fa10000.bootdev.part_1
-> > Device:    mmc@fa10000.bootdev
-> > Block dev: mmc@fa10000.blk
-> > Method:    extlinux
-> > State:     ready
-> > Partition: 1
-> > Subdir:    (none)
-> > Filename:  /extlinux/extlinux.conf
-> > Buffer:    ffad2b80
-> > Size:      17f (383 bytes)
-> > OS:        Kontron SMARC-sAM67 on Evaluation Carrier 2.0
-> > Cmdline:   (none)
-> > Logo:      (none)
-> > FDT:       <NULL>
-> > Error:     0
-> > [SDHC] => bootflow select 2
-> > [SDHC] => bootflow info
-> > Name:      mmc@fa00000.bootdev.part_1
-> > Device:    mmc@fa00000.bootdev
-> > Block dev: mmc@fa00000.blk
-> > Method:    extlinux
-> > State:     ready
-> > Partition: 1
-> > Subdir:    (none)
-> > Filename:  /extlinux/extlinux.conf
-> > Buffer:    ffad3b80
-> > Size:      17f (383 bytes)
-> > OS:        Kontron SMARC-sAM67 on Evaluation Carrier 2.0
-> > Cmdline:   (none)
-> > Logo:      (none)
-> > FDT:       <NULL>
-> > Error:     0
-> > [SDHC] =>
-> > >>>>
-> >
-> > For both found extlinux based entries it shows in the OS info line
-> > "Kontron SMARC-sAM67 on Evaluation Carrier 2.0" that is the name/label
-> > of the seconds entry. But when booting either 1 or 2 it always loads
-> > the first entry of extlinux without loading and applying the overlay.
-> >
-> > Also support for having the menu shown is also not available.
->
-> The behaviour you should see is that (after the bootflow menu) you
-> should see a separate 'extlinux' menu which allows you to choose the
-> correct entry. So you will need 'menu label' instead of label.
->
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reported-by: Tom Rini <trini@konsulko.com>
+---
 
-You are right. I added the missing keywords and now it works as expected.
-The menu appears.
+ include/uthread.h | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
+diff --git a/include/uthread.h b/include/uthread.h
+index 89fa552a6f6..11a19aa9488 100644
+--- a/include/uthread.h
++++ b/include/uthread.h
+@@ -51,7 +51,10 @@ struct uthread {
+ };
+ 
+ /**
+- * Internal state of a struct uthread_mutex
++ * enum uthread_mutex_state - internal state of a struct uthread_mutex
++ *
++ * @UTHREAD_MUTEX_UNLOCKED: mutex has no owner
++ * @UTHREAD_MUTEX_LOCKED: mutex has one owner
+  */
+ enum uthread_mutex_state {
+ 	UTHREAD_MUTEX_UNLOCKED = 0,
+@@ -59,7 +62,9 @@ enum uthread_mutex_state {
+ };
+ 
+ /**
+- * Uthread mutex
++ * struct uthread_mutex - a mutex object
++ *
++ * @state: the internal state of the mutex
+  */
+ struct uthread_mutex {
+ 	enum uthread_mutex_state state;
+-- 
+2.43.0
 
->
-> As Tom mentions my tree has some additional patches here:
->
-> https://sjg.u-boot.org/u-boot/u-boot.git
->
-> in case that helps.
->
-> As to what you really want (putting each extlinux item in a separate
-> bootflow), that's the next step. I will get back to it, but most
-> likely not before the end of June. If you would like to try
-> implementing it yourself, let me know and I can send some pointers.
->
-
-This is not what I expected to work. But it would also be good/nice to
-have. Unfortunately I cannot provide help here.
-
-
->
-> Regards,
-> Simon
->
+base-commit: b249e08ec9b71f9d0b4eb48e3e63f63e8366b7e6
+branch: uthread-doc-fix
