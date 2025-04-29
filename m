@@ -4,90 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C846EC369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 11:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12FEDC3ABA9
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 11:41:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2298809A5;
-	Tue, 29 Apr 2025 13:30:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=uni-duesseldorf.de
+	by phobos.denx.de (Postfix) with ESMTP id 6E2BB809A5;
+	Tue, 29 Apr 2025 13:41:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="YwZUN6aW";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D05038210F; Tue, 29 Apr 2025 13:30:18 +0200 (CEST)
-Received: from a2882.mx.srv.dfn.de (a2882.mx.srv.dfn.de [194.95.233.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B93C1809A5; Tue, 29 Apr 2025 13:41:18 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4F598070C
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 13:30:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=uni-duesseldorf.de
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=niklas.sombert@uni-duesseldorf.de
-Received: from mta-3.mail.zim.hhu.de (mta-3.mail.zim.hhu.de [134.99.128.231])
- by a2882.mx.srv.dfn.de (Postfix) with ESMTPS id CA81916D7E;
- Tue, 29 Apr 2025 13:30:14 +0200 (CEST)
-Received: from [10.125.45.125] (unknown [134.99.37.125])
- (Authenticated sender: nisom101@uni-duesseldorf.de)
- by mta-3.mail.zim.hhu.de (Postfix) with ESMTPA id 8FBB3E0305;
- Tue, 29 Apr 2025 13:30:14 +0200 (CEST)
-Message-ID: <0fe144dd-2885-4e13-bb09-4d939124a974@uni-duesseldorf.de>
-Date: Tue, 29 Apr 2025 13:29:43 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 191AB8070C
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 13:41:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53TAG2Xl005181;
+ Tue, 29 Apr 2025 11:40:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=FXzk/5oGFl7ef9XU8t7IQyut
+ G/5wuJoKmDubYpyExq8=; b=YwZUN6aWReRT1nqpLNyzoMNyC1+ZeuRD+JbHXLPX
+ eWAx64/tV1HSLtEXzMQy1QdE0akhhNEcgaQkcD2qx8ouCO/LSwif+dvf8TgJx3M0
+ LcygEh9q0L75ULo3mWdnspJzuTYby7FtkY/6kJl7OtOJnml5ejiWWNfffMoHPtBs
+ 3i0vRQ88qz0ElnG9r6k2DK04aaXijaU2Mt8rKlCPveVqKH8LzEguwnt0ort3EH5n
+ 578NWJS+C+oo3C/BLPvSDbbNOpt+AWv5facnww0DZzfk5vgdxp+tya2276anZck9
+ Ra3XGZ7r7/mym0uWUisQUVblrdd99yTUMeNrMjltGL5ToA==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 468rsbbbp9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 29 Apr 2025 11:40:55 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 53TBet0c028990
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 29 Apr 2025 11:40:55 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Tue, 29 Apr 2025 04:40:50 -0700
+Date: Tue, 29 Apr 2025 17:10:46 +0530
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: Casey Connolly <casey.connolly@linaro.org>
+CC: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <sumit.garg@kernel.org>,
+ <sjg@chromium.org>, <ilias.apalodimas@linaro.org>,
+ <sughosh.ganu@linaro.org>, <me@samcday.com>, <marex@denx.de>,
+ <robert.marko@sartura.hr>, <seashell11234455@gmail.com>,
+ <ycliang@andestech.com>, <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1 2/3] sysreset: Implement PSCI based reset to EDL mode
+ for QCOM SoCs
+Message-ID: <20250429114046.3hygqajx42tcsgv7@hu-varada-blr.qualcomm.com>
+References: <20250410120208.4142087-1-quic_varada@quicinc.com>
+ <20250410120208.4142087-3-quic_varada@quicinc.com>
+ <1e0e9a72-40a8-4ce3-a390-edef1d6a03d8@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250405204409.420738-1-sjg@chromium.org>
-Content-Language: de-DE
-From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-Autocrypt: addr=niklas.sombert@uni-duesseldorf.de; keydata=
- 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
-Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via EFI
-In-Reply-To: <20250405204409.420738-1-sjg@chromium.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------c9OfKUvh19AzfO9GWyKSi1wx"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <1e0e9a72-40a8-4ce3-a390-edef1d6a03d8@linaro.org>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI5MDA4NyBTYWx0ZWRfXwJT3eDtDlaoN
+ ZTU3Ipe6BEzpdQ8YEJtFlrmqUfYnjZLPa84camxzwzOSTwh7MUNG3UOqw/DEbqSdwtn3hw2YaPk
+ IBIxiknKRMH7D+A5kftS50Qzb8zqSJSBoMtpWBQ/TH2e7KyTxWA4/bFI0CJkms8QghwR73nHC37
+ AW3bTkhrVx3hWnNWvuUj89iW66G9PHb/cpZdw/YeJ/7+QVAAIo+bnrHjagtoy5mr7J4LWQcX4WM
+ uOtYswqan0vO1hI/33KdXI2HRGoA6ZPNb+vj+WFfEku3+CE4CkWyZWlcTz1m3dZr7pZxN469y3J
+ rv5/W/X/Uf909DdS3aVRa3rdc+fN2hV+WGAQG7hTQmtM+QCOdJBR1Yb1SjY/Wxg6OIFnlIr36q1
+ VOrf0j6IUkvgJ3YsEUviqxn+dM0/Ty1a6UcuaLzBgWaIV14k+hPfB7aypt0e0BfSKMVNBdOI
+X-Proofpoint-GUID: 1I-DMIqHhXGKkjSgXLXRsUU0b0HVg4du
+X-Proofpoint-ORIG-GUID: 1I-DMIqHhXGKkjSgXLXRsUU0b0HVg4du
+X-Authority-Analysis: v=2.4 cv=I8ZlRMgg c=1 sm=1 tr=0 ts=6810bac7 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=kj9zAlcOel0A:10 a=XR8D0OoHHMoA:10 a=COk6AnOGAAAA:8
+ a=c-n4J4-pAAAA:8 a=SK7vpsX4mJLF38ZNztMA:9
+ a=CjuIK1q_8ugA:10 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-29_04,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0
+ phishscore=0 suspectscore=0 priorityscore=1501 clxscore=1011
+ malwarescore=0 impostorscore=0 mlxscore=0 adultscore=0 spamscore=0
+ mlxlogscore=999 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2504070000
+ definitions=main-2504290087
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,90 +117,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------c9OfKUvh19AzfO9GWyKSi1wx
-Content-Type: multipart/mixed; boundary="------------0orVZKoqVuPN5b0nEAnUjcXR";
- protected-headers="v1"
-From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Message-ID: <0fe144dd-2885-4e13-bb09-4d939124a974@uni-duesseldorf.de>
-Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via
- EFI
-References: <20250405204409.420738-1-sjg@chromium.org>
-In-Reply-To: <20250405204409.420738-1-sjg@chromium.org>
+On Mon, Apr 28, 2025 at 04:22:47PM +0200, Casey Connolly wrote:
+>
+>
+> On 4/10/25 14:02, Varadarajan Narayanan wrote:
+> > Add SYSRESET_EDL to sysreset_t and handle the different SYSRESET_xxx
+> > requests in sysreset_qcom-psci.c.
+>
+> To be honest, I'm not really excited about this. Copying the entire PSCI
+> reset code and polluting the global sysreset reason enum with entirely
+> platform specific symbols is not good practise.
+>
+> Additionally, while this specific EDL implementation works on your platform,
+> it does not work on (for example) sdm845 and sm8250 which are platforms we
+> still very much care about. I'm also not sure if it works on SC7280.
+>
+> I think this should be handled in an/the SCM driver like it is in Linux, not
+> sure if Sam is working on that or if I can send a barebones version of the
+> one I have in my tree. It will need to be based on the compatible string for
+> the scm node in DT (and checking for the qcom,dload-mode property too I
+> think).
+>
+> As I proposed before on IRC, I think it makes sense to pass the "reset"
+> arguments into sysreset and allow the sysreset driver to implement a
+> callback/handler for them, this way the "edl" argument makes it all the way
+> to our platform-specific driver which can then call "psci_system_reset2()"
+>
+> I would implement this by adding a new op to sysreset_ops, something like
+> .request_args, then have a second for loop which calls this, since we want
+> any reset handler which /can/ parse the args to do so before we call the
+> normal .request callback (otherwise some other handler might do a normal
+> reset before we have parsed the arguments).
+>
+> For now I'm fine with this new sysreset-qcom.c driver being specific to
+> qcs9100, but please include a comment that the psci reset2 call is only
+> supported on some newer qualcomm platforms and that others can be supported
+> via SCM.
+>
+> On that note, how does this new driver actually get bound? It doesn't have
+> any compatible strings associated? Or am I missing something here... Please
+> explain this.
 
---------------0orVZKoqVuPN5b0nEAnUjcXR
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Apologies, my bad for not mentioning it. Presently it is not getting bound.
+Wanted to get feedback about the approach.
 
-SGkgU2ltb24sDQoNCnRoaXMgc29sdmVzIG15IHByb2JsZW0sIHRoYW5rcyENCg0KU2luY2Ug
-U01CSU9TIGlzIGJyb2tlbiBhZ2FpbiBpbiB2MjAyNS4wNy1yYzEgKGFuZCBkaXNhYmxpbmcg
-YmxvYmxpc3QgDQpkb2Vzbid0IHdvcmsgYW55bW9yZSksIEkgYXBwbGllZCB0aGlzIHBhdGNo
-IGFuZCBpdCB3b3JrZWQuDQpJIHByb2JhYmx5IHNob3VsZCBoYXZlIHRyaWVkIHRoaXMgc29v
-bmVyLg0KDQpHcmVldGluZ3MsDQpOaWtsYXMNCg0KU2ltb24gR2xhc3Mgd3JvdGU6DQo+IFRo
-ZSBFRkktbG9hZGVyIGNvZGUgaGFzIG5vdCBiZWVuIGZ1bGx5IGNvbnZlcnRlZCB0byB1c2Ug
-YmxvYmxpc3QsIHNvDQo+IHJlbGllcyBvbiB0aGUgU01CSU9TLXRhYmxlIGFkZHJlc3MgYmVp
-bmcgc2V0IGluIGdsb2JhbF9kYXRhLg0KPiANCj4gU2V0IHRoaXMgdXAgaW4gd3JpdGVfdGFi
-bGVzKCkgc28gdGhhdCB0aGUgU01CSU9TIHRhYmxlcyBhcmUgYWN0dWFsbHkNCj4gYXZhaWxh
-YmxlLg0KPiANCj4gRW5hYmxlIHRoZSBjb21tYW5kIGZvciB4ODYgUUVNVSBzbyB0aGF0IHRo
-ZSBTTUJJT1MgdGVzdHMgYWN0dWFsbHkgcnVuLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogU2lt
-b24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+DQo+IEZpeGVzOiA4M2NlMzVkNmViYiAoImVt
-dWxhdGlvbjogVXNlIGJsb2JsaXN0IHRvIGhvbGQgdGFibGVzIikNCj4gUmVwb3J0ZWQtYnk6
-IE5pa2xhcyBTb21iZXJ0IDxuaWtsYXMuc29tYmVydEB1bmktZHVlc3NlbGRvcmYuZGU+DQo+
-IC0tLQ0KPiANCj4gICBhcmNoL3g4Ni9saWIvdGFibGVzLmMgICAgICAgICAgICB8IDIgKysN
-Cj4gICBib2FyZC9lbXVsYXRpb24vcWVtdS14ODYvS2NvbmZpZyB8IDEgKw0KPiAgIGxpYi9l
-ZmlfbG9hZGVyL2VmaV9zbWJpb3MuYyAgICAgIHwgMSArDQo+ICAgMyBmaWxlcyBjaGFuZ2Vk
-LCA0IGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni9saWIvdGFi
-bGVzLmMgYi9hcmNoL3g4Ni9saWIvdGFibGVzLmMNCj4gaW5kZXggZWM1Mjk5MjIwOWYuLmQ3
-ZjE4M2Y5NWRjIDEwMDY0NA0KPiAtLS0gYS9hcmNoL3g4Ni9saWIvdGFibGVzLmMNCj4gKysr
-IGIvYXJjaC94ODYvbGliL3RhYmxlcy5jDQo+IEBAIC0xMjYsNiArMTI2LDggQEAgaW50IHdy
-aXRlX3RhYmxlcyh2b2lkKQ0KPiAgIAkJCXVzZV9oaWdoID0gdHJ1ZTsNCj4gICAJCQlpZiAo
-IWdkLT5hcmNoLnRhYmxlX3N0YXJ0X2hpZ2gpDQo+ICAgCQkJCWdkLT5hcmNoLnRhYmxlX3N0
-YXJ0X2hpZ2ggPSByb21fYWRkcjsNCj4gKwkJCWlmICh0YWJsZS0+dGFnID09IEJMT0JMSVNU
-VF9TTUJJT1NfVEFCTEVTKQ0KPiArCQkJCWdkX3NldF9zbWJpb3Nfc3RhcnQocm9tX2FkZHIp
-Ow0KPiAgIAkJfQ0KPiAgIAkJcm9tX3RhYmxlX2VuZCA9IHRhYmxlLT53cml0ZShyb21fYWRk
-cik7DQo+ICAgCQlpZiAoIXJvbV90YWJsZV9lbmQpIHsNCj4gZGlmZiAtLWdpdCBhL2JvYXJk
-L2VtdWxhdGlvbi9xZW11LXg4Ni9LY29uZmlnIGIvYm9hcmQvZW11bGF0aW9uL3FlbXUteDg2
-L0tjb25maWcNCj4gaW5kZXggYjJhNGUwODkxYTQuLmMxNTY0ZmJhN2NkIDEwMDY0NA0KPiAt
-LS0gYS9ib2FyZC9lbXVsYXRpb24vcWVtdS14ODYvS2NvbmZpZw0KPiArKysgYi9ib2FyZC9l
-bXVsYXRpb24vcWVtdS14ODYvS2NvbmZpZw0KPiBAQCAtMjMsNSArMjMsNiBAQCBjb25maWcg
-Qk9BUkRfU1BFQ0lGSUNfT1BUSU9OUyAjIGR1bW15DQo+ICAgCWltcGx5IFZJUlRJT19QQ0kN
-Cj4gICAJaW1wbHkgVklSVElPX05FVA0KPiAgIAlpbXBseSBWSVJUSU9fQkxLDQo+ICsJaW1w
-bHkgQ01EX1NNQklPUw0KPiAgIA0KPiAgIGVuZGlmDQo+IGRpZmYgLS1naXQgYS9saWIvZWZp
-X2xvYWRlci9lZmlfc21iaW9zLmMgYi9saWIvZWZpX2xvYWRlci9lZmlfc21iaW9zLmMNCj4g
-aW5kZXggOGQyZWY2ZGViNTEuLjUyNzVlOTY2ZGZlIDEwMDY0NA0KPiAtLS0gYS9saWIvZWZp
-X2xvYWRlci9lZmlfc21iaW9zLmMNCj4gKysrIGIvbGliL2VmaV9sb2FkZXIvZWZpX3NtYmlv
-cy5jDQo+IEBAIC0zNSw2ICszNSw3IEBAIGVmaV9zdGF0dXNfdCBlZmlfc21iaW9zX3JlZ2lz
-dGVyKHZvaWQpDQo+ICAgCXZvaWQgKmJ1ZjsNCj4gICANCj4gICAJYWRkciA9IGdkX3NtYmlv
-c19zdGFydCgpOw0KPiArCXByaW50ZigicmVnaXN0ZXIgJWx4XG4iLCBhZGRyKTsNCj4gICAJ
-aWYgKCFhZGRyKSB7DQo+ICAgCQlsb2dfZXJyKCJObyBTTUJJT1MgdGFibGVzIHRvIGluc3Rh
-bGxcbiIpOw0KPiAgIAkJcmV0dXJuIEVGSV9OT1RfRk9VTkQ7DQoNCg==
+> Otherwise, I'm looking forward to v2.
 
---------------0orVZKoqVuPN5b0nEAnUjcXR--
+Will post v2, with device_bind_driver("qcom_psci-sysreset") in psci_bind().
 
---------------c9OfKUvh19AzfO9GWyKSi1wx
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Thanks
+Varada
 
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEdIF40XVnlLMtKvF5apyYbs6R6OsFAmgQuCgACgkQapyYbs6R
-6OtTUg/7BjjGPpKbhrvE96ieDvJHt8P3eetiR1U+wzukH0LJYrGG9vXOxjM4TaHW
-x978NPfKeG5a1KFJHurDoFnRhVlM+S+o/e1ENkF7AtK8QdBmOowwCeAeqGBS6WlR
-rHTeuUAAYev0GWNMe/bAp8phMpN9IPC5gfgP9OwLU2rjvhI04i8nj46wygtOJXxS
-rTJr3YrSkG8Vu8+/8kzJqXMek4TcBKOclWO36VjqpT9E6Nkvq7xN4lA6jnve3a0i
-B3i1Z1hlrgLX4lkHwFF5U924yGONhwnjXqGm5sgx77pLkkaLXY3Rjdv67lH/aSAy
-JJpz5uHk362gWLS18NN9AuoqsqBORjknjYfqknD7L0QoALGh97OiTDwsNBdcEs6q
-QESLywVQWZY1hm1LRMD/6f2bJ/1j5cDCl18ITZqC4CS3b61hwpZQ+lYamWGHPGul
-sTGQvwSpVgN7Xzwo6M2eF5NubAHsVSsaJMYH1ws4TGcPliSMJ65hEjw3kaClpa5D
-KPxCSxCnw/QQ03jGITpQryoZuDKfoNEkqoblsOSmphrlafzu1KOgAUAjcMrXpVK6
-Mllqfr/5vjxkb0G7/SUnqTF3G79bisxsnM3GoqPv19yUOV32tn0/Sp3HW7TFmI1O
-daucK5htXPd5Y61DmvHMFyev787nnpSmOtDrviF8+lz4dstyQFg=
-=PchN
------END PGP SIGNATURE-----
-
---------------c9OfKUvh19AzfO9GWyKSi1wx--
+> Kind regards,
+>
+> >
+> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> > ---
+> >   drivers/sysreset/Kconfig              |  5 +++
+> >   drivers/sysreset/Makefile             |  1 +
+> >   drivers/sysreset/sysreset-uclass.c    |  7 ++--
+> >   drivers/sysreset/sysreset_qcom-psci.c | 47 +++++++++++++++++++++++++++
+> >   include/sysreset.h                    |  2 ++
+> >   5 files changed, 60 insertions(+), 2 deletions(-)
+> >   create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
+> >
+> > diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+> > index 121194e4418..a6a1e57b603 100644
+> > --- a/drivers/sysreset/Kconfig
+> > +++ b/drivers/sysreset/Kconfig
+> > @@ -240,6 +240,11 @@ config SYSRESET_RAA215300
+> >   	help
+> >   	  Add support for the system reboot via the Renesas RAA215300 PMIC.
+> > +config SYSRESET_QCOM_PSCI
+> > +	bool "Support sysreset for Qualcomm SoCs via PSCI"
+> > +	help
+> > +	  Add support for the system reboot on Qualcomm SoCs via PSCI.
+> > +
+> >   config SYSRESET_QCOM_PSHOLD
+> >   	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
+> >   	depends on ARCH_IPQ40XX
+> > diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+> > index 796fc9effa5..12dbad5254a 100644
+> > --- a/drivers/sysreset/Makefile
+> > +++ b/drivers/sysreset/Makefile
+> > @@ -29,5 +29,6 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+> >   obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
+> >   obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
+> >   obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
+> > +obj-$(CONFIG_SYSRESET_QCOM_PSCI) += sysreset_qcom-psci.o
+> >   obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
+> >   obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
+> > diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
+> > index 536ac727142..d06c0a6908a 100644
+> > --- a/drivers/sysreset/sysreset-uclass.c
+> > +++ b/drivers/sysreset/sysreset-uclass.c
+> > @@ -125,8 +125,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> >   	if (argc > 2)
+> >   		return CMD_RET_USAGE;
+> > -	if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'w') {
+> > -		reset_type = SYSRESET_WARM;
+> > +	if (argc == 2) {
+> > +		if (argv[1][0] == '-' && argv[1][1] == 'w')
+> > +			reset_type = SYSRESET_WARM;
+> > +		else if (!strncmp("edl", argv[1], 3))
+> > +			reset_type = SYSRESET_EDL;
+> >   	}
+> >   	printf("resetting ...\n");
+> > diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/sysreset_qcom-psci.c
+> > new file mode 100644
+> > index 00000000000..3afb79e2d2e
+> > --- /dev/null
+> > +++ b/drivers/sysreset/sysreset_qcom-psci.c
+> > @@ -0,0 +1,47 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
+> > + */
+> > +
+> > +#include <dm.h>
+> > +#include <sysreset.h>
+> > +#include <asm/system.h>
+> > +#include <linux/errno.h>
+> > +#include <linux/psci.h>
+> > +
+> > +__weak int qcom_psci_sysreset_get_status(struct udevice *dev, char *buf, int size)
+> > +{
+> > +	return -EOPNOTSUPP;
+> > +}
+> > +
+> > +static int qcom_psci_sysreset_request(struct udevice *dev, enum sysreset_t type)
+> > +{
+> > +	switch (type) {
+> > +	case SYSRESET_WARM:
+> > +	case SYSRESET_COLD:
+> > +		psci_sys_reset(type);
+> > +		break;
+> > +	case SYSRESET_POWER_OFF:
+> > +		psci_sys_poweroff();
+> > +		break;
+> > +	case SYSRESET_EDL:
+> > +		psci_system_reset2(0, 1);
+> > +		break;
+> > +	default:
+> > +		return -EPROTONOSUPPORT;
+> > +	}
+> > +
+> > +	return -EINPROGRESS;
+> > +}
+> > +
+> > +static struct sysreset_ops qcom_psci_sysreset_ops = {
+> > +	.request = qcom_psci_sysreset_request,
+> > +	.get_status = qcom_psci_sysreset_get_status,
+> > +};
+> > +
+> > +U_BOOT_DRIVER(qcom_psci_sysreset) = {
+> > +	.name = "qcom_psci-sysreset",
+> > +	.id = UCLASS_SYSRESET,
+> > +	.ops = &qcom_psci_sysreset_ops,
+> > +	.flags = DM_FLAG_PRE_RELOC,
+> > +};
+> > diff --git a/include/sysreset.h b/include/sysreset.h
+> > index ff20abdeed3..8bda9703cd9 100644
+> > --- a/include/sysreset.h
+> > +++ b/include/sysreset.h
+> > @@ -21,6 +21,8 @@ enum sysreset_t {
+> >   	SYSRESET_POWER,
+> >   	/** @SYSRESET_POWER_OFF: turn off power */
+> >   	SYSRESET_POWER_OFF,
+> > +	/** @SYSRESET_EDL: reset and boot into Emergency DownLoader */
+> > +	SYSRESET_EDL,
+> >   	/** @SYSRESET_COUNT: number of available reset types */
+> >   	SYSRESET_COUNT,
+> >   };
+> --
+> Casey (she/they)
+>
