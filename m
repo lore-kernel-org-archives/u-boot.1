@@ -4,161 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59175C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44D2C3ABA5
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:28:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C387F8283E;
-	Tue, 29 Apr 2025 15:28:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 1C459828C2;
+	Tue, 29 Apr 2025 15:28:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IRGWkMqE";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dFn6EtvY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79534828C2; Tue, 29 Apr 2025 15:28:41 +0200 (CEST)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on2061a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::61a])
+ id CC7BD82A4D; Tue, 29 Apr 2025 15:28:49 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52B6982145
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:28:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C51F829EF
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:28:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=inoiAfNYlERbuYPGHkR0vMUj2wHmVAt6c49bQog99iqHRp4DjqN4k/3I8D8qQeWs/KLuFgMrjdmdzfUYBmaIp1IlMgzqMKgzRCbE4N5hrIkh6sU3YJ7iSAzt4KBc5NXHOr7C9vsQCWp65k9zp572V+dZfYdMGR/zkOWxzNftu1RpzpA5EYd3p6VsNjPbCahUh7DD/TqqIHnozdiFTNO/d8KybzbATgAFmiliNshK9MgoIenmjiuVhiULHzFTF8AL/XedsHjXsPX6gdOWsRbOCcaYQcjZ6HUhZjHu/jZG018IFwyBjWzJEFfUraLG8ligLPVBJ+pTOpAXK/X9OWNRUA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lteNu5WNaqGhEq+venqxmfhj9HDfR9OUb14ntCGBMQI=;
- b=o+8Q994bcBQO0o3ap5t0UaX4aMRQu/RXYRCMakObALU6xv5eXI2RzYXjTwaMUwUwvdUY9tCG37G4Ihd5Fxzx/9PBRG2x1Q0kRlm9v/UJc1D4BjuMXqkEovkSTKyzchtU4GqFNJmwXbG1z1FWuuB/BoY1sFCQw9HEr1ISNkybNXlDroOwdWhHUl9/VC3/lao6Km0EVeRnmassMcSktiP6AIdPd5GdCUqiPouYBF+iOSQGK7/ilcv1+v/ZSmGbsrmHCqB5kbrQ6tg09zVbQKnGiR9Kzrb+Yvy851NMvGc5XbmJHjdB4etM8g1Jd7QQj/SCA1uRDpMxah0ngt/1UzTSZg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lteNu5WNaqGhEq+venqxmfhj9HDfR9OUb14ntCGBMQI=;
- b=IRGWkMqEDdqJLLTW4g35f0oaw7/R4yVpOYFb9nAMbjFRIWQh5eUACsm8XbgLChpjWd3aVboyqUujCYMn5hKEB390wfRKHFfG3wXaEDcyYcpzLCjI0rGt+jx4Db4UeiBZaFOHHDXvTT+2g0yiom074GyGHSX9FqX7dSwdrVoPuXo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PAXPR04MB9595.eurprd04.prod.outlook.com (2603:10a6:102:23d::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.31; Tue, 29 Apr
- 2025 13:28:36 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8678.028; Tue, 29 Apr 2025
- 13:28:36 +0000
-Message-ID: <016f585f-fd30-4604-8676-c7cabd9e40a1@cherry.de>
-Date: Tue, 29 Apr 2025 15:28:35 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] tools: Update the license specifiers
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250429131515.244061-1-sjg@chromium.org>
- <20250429131515.244061-2-sjg@chromium.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250429131515.244061-2-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0185.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ca::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 7A64CA4B33C;
+ Tue, 29 Apr 2025 13:23:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADE6BC4CEE3;
+ Tue, 29 Apr 2025 13:28:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1745933326;
+ bh=fjB5RQZurTtdik2BfZ0VgLSCdMlPbdGQCz5cmuSHjIA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=dFn6EtvYhOFv9O1LDTrucplm9AaYUTfn5TMDPM9jQRycgE5GT6QRDpz9g3Fo/775O
+ /P0bpmjrgloOIyDkCb+wz7bBajWcHkDgovRs7U1hm8WxE5tOONqTXf++7oRsZFAPxa
+ cLewrH7hhg2aNLycPaaRaK9YI9GoImfpTCZZKKGoyktEVbJ0f82DCbbnj4TxyB0jBD
+ k1G3RrTcznKccP256K+YBK5lancrIKpJtcoHj813EFp7IKPLm9p5MhdqQsgT3fWnSD
+ +XJX0BUgLBRv+Nw5puscRC0dfWwRY8smCVPnw8WSoScXNeqqOo5z8NYa6dn5r9pHtQ
+ 7KjF32JMqZKzQ==
+Received: by wens.tw (Postfix, from userid 1000)
+ id C550D5FBEA; Tue, 29 Apr 2025 21:28:42 +0800 (CST)
+From: Chen-Yu Tsai <wens@kernel.org>
+To: u-boot@lists.denx.de
+Cc: Chen-Yu Tsai <wens@csie.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Paul Kocialkowski <paulk@sys-base.io>, Jonas Karlman <jonas@kwiboo.se>,
+ Anand Moon <linux.amoon@gmail.com>, Akash Gajjar <gajjar04akash@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ FUKAUMI Naoki <naoki@radxa.com>, Harsha Vardhan V M <h-vm@ti.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Klaus Goger <klaus.goger@cherry.de>, Levin Du <djw@t-chip.com.cn>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Nick Xie <nick@khadas.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Xiaobo Tian <peterwillcn@gmail.com>
+Subject: [PATCH v2] rockchip: io-domain: Enable by default for all supported
+ SoCs
+Date: Tue, 29 Apr 2025 21:28:40 +0800
+Message-Id: <20250429132841.1929412-1-wens@kernel.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB9595:EE_
-X-MS-Office365-Filtering-Correlation-Id: b328c798-b426-45bf-8fb1-08dd8721beeb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aVEwL2N1YXp2S2Q1VlhOWDVLY1NVT1Ntc0ZzTTVYOTBSZEhBeHJybHNialV2?=
- =?utf-8?B?RGhJMnhoMThvaXlQSUxYYytwbW5vYStKQWhxeGZUajduaXBZMkgxd0hVQlBI?=
- =?utf-8?B?TGFyM2dWb2VleFFoc3pwaFNOUzdPQ1pOZC9PQlE2K0dxOERET0RKYi9pdTdn?=
- =?utf-8?B?dDBBZWk5eDVnM2l0RGdoZm84OGhIZmxBOEN4SUdjS1JwNjNqN1VQbVV2TzZF?=
- =?utf-8?B?L1RPRTFSaTJtNURZR1pmOWtaeVpzMm5JaDVZa3NCRWRMRFJoakg5aFZrZC8v?=
- =?utf-8?B?ZjQ3MVVCbjJtcXhXVFg0d3ltKzIvVnpHL3IvR3dnVGNlbExkSDA4NkJiMkRF?=
- =?utf-8?B?WjRoWEZ5ZVBIV2lnK3JlQ1RBa0I5b052L0ZSN1M1cmVLdnRLRHdNMEl1NEJl?=
- =?utf-8?B?VEtYRmVMOW9kK1Rhcjh5aWNCSXZLODczQktjN3VFWmI1ejF4MDRFZCtubW53?=
- =?utf-8?B?Sm1oa2dyWFI2K0tWTE9RYWhaelpxSnN6SXM2QVYwWTJxWDRWMjd4aTZ2YWg5?=
- =?utf-8?B?RkRDTHFPQm5Td0c3OE0xZzBrY3k1ZW8wQllIOXlMWTJWeGluOEdySjYrckZx?=
- =?utf-8?B?d2JIYnNBR3hiT29DdHEwQy9VK0xjSzcrRFRQamR1L3NlcXFncGVoOVJxMHNC?=
- =?utf-8?B?WmxnL3RsUVhUMDJRTVYvUU5GWHpYUWs2Nkt0aG1hd2JTa0YvdlRBd1VtS2Fx?=
- =?utf-8?B?eFo0ZkM3azg1L081S3M4TWl2OUdKMXp3NmJGYWkza0N4dElDN3BaeVMyVmhQ?=
- =?utf-8?B?N2Uybk9vNjJXNStLbll0Z2pSaWNPNW5lR25GaFYvcFZQSGxpU1BsSzZoYzBw?=
- =?utf-8?B?d2dLMVJIcGd5ek1UV3M5MlFCNGc0R0kyZE9TclBiRUpTNXN1NzVlUjcrcmdx?=
- =?utf-8?B?cHNMeTVBMW16Vnl0ZE1sN3ROR3pNWXlFUXRCMHp0YzZKWS9tSlphTk1KeDla?=
- =?utf-8?B?NWszTEZRTGdLVWNsTVQrQlBxei8vdmhvVWFwc2ZPTVBsN0l0ZkRCT20vbVV2?=
- =?utf-8?B?NWJmaUdZZXFIMFU5VTlWWSs1a0VQa013RmpnWitSZDBpZ1NWT0tUMi9KVytt?=
- =?utf-8?B?Mm1reXptdHFCaW5HNU1pYlBRZWx6akVmMS9nd3A3bFNDenBRbmJqaCsxcklr?=
- =?utf-8?B?YWcrV3c0UUVoY3ZXSTRhRDZPZkYrQlJ5Y0RCZEhoQkJCMU9HUHBETEpqQzEv?=
- =?utf-8?B?OVBnWGZnMkJCOHhFS2xFSzg4SW9VcEFQSWlkM2RkQVRUdGhtd0lVU2hlV3Rs?=
- =?utf-8?B?VzZmd2VEMWVDZnZrc3JqcXJ2cE1PZ0VlcFZVYkJlYmw5QVZha2UvNm1ncjN0?=
- =?utf-8?B?ZG9YbEN1Y0J5b3N3emZFZlFaMXM4UHMybERVMlhla1RTK3lHa09YTCtidGt5?=
- =?utf-8?B?cTR1QTlrSWVDcjZlaEF4TGNNdTlCd05seHFwM25PT0pnUU12Z3QyZWNVYUw3?=
- =?utf-8?B?L1FCNWtST3F0cjdLNG50eXhZR0Q3NmJidUdQaWFBbFZGdDhBTjRBL0JIMUgw?=
- =?utf-8?B?bktUY0IzYzlFMGVmanJtSFZDS1Q1NkNxa1FhM0VaWDJ2dGVzZW1TYkYwUmJu?=
- =?utf-8?B?a3pIU1c1Nkg0YS9GeFJpdWdvVE40TzJ2Z1pubVNTWHVNUTJBZVRLVzYwOHBj?=
- =?utf-8?B?SmtRekI1NkhodjkyOXlyeGdURlB6YXpJbVVFcmdqZHNMaGIwdmdoMGU4T3NV?=
- =?utf-8?B?bUtzQ0tJTlBCRUtEN29SVEQ1Qkg3cFRXUWt0VVBmQVl4aXF1WUMzOU9rVFQ5?=
- =?utf-8?B?ZTZhTzNJVFoyM2xnakkzOVdTWnRwSmc3aUQxK3cwT2pkS3lTakxVQzgwT3du?=
- =?utf-8?B?VkZQTFZBaWhldzFsMXpDc3BPYTMramhHOGFIdzB3T01ac0R4bHpnOHVITldG?=
- =?utf-8?B?QzZ6bjlSdTJvdG9Nb2RSTlIvMkdQYjlPdkVIaXpqSitDaXYyYzhRNENQckF2?=
- =?utf-8?Q?jpVW6D7RDME=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SG8wSWkvZ0x5VzFDTWtDTlN0UXhGVWhCbS9JVG1hWEJ5VnNsQnVtekdONTQ5?=
- =?utf-8?B?K2VtS0dFdERKQ1UvZHlyNXVDaXpERVcyUnE3QlN0MkViK2lUcXpJc2kxd2Jp?=
- =?utf-8?B?MXp1WXFxVU0zZ2FUYUZFaGxVRTVHMzBqMGI4Wm5qdy9lR05tYzdKUVM5aDhk?=
- =?utf-8?B?dis0S3lQNk5WQ2RCbHQrc0I5L3YyZXVwVGxrODZtOC9hNXlKUE5ZZ2cwYlFx?=
- =?utf-8?B?STB6K1BWNmJ6K2N0V3RMREJ0NFcxalpmWnBUTXZQN1F5OHRkcVNNOWh3MHpO?=
- =?utf-8?B?QkpvZklxLysvQmltcldCY2dCMmVmQzJuUVpDcjZxQXFDcWhJN1ozV3RJRUFz?=
- =?utf-8?B?Y3JxQ1NTRWl3S3I4aXlOUWp4NndRVXhmS3BJUHN0SmUrUlRnWDdPZGtqbk1j?=
- =?utf-8?B?NGF4TTUwSDFxNGhKNFhycm5YV1owR0VkSFBkWUsvQk5UZTgyZjlkNWFkY3Bi?=
- =?utf-8?B?NUpWTm0rRE9pTHd2bEh2ZXZZcWp5QVYvSVZxM3VyQnJkSURLcDhnNDlhM3Y1?=
- =?utf-8?B?VWhnbjhRN3d6M09LSzF2ZW1DcGV1OWJnNXpJZnlwUS9YTFBJTmJINXg0cVlp?=
- =?utf-8?B?ZFFKd3lhdFcxbGFZTG5qcEphTC9pTHUrMEJiOVcyU1ZEWVVhaFhJRXE5UllT?=
- =?utf-8?B?YnFCSFJjUWJ2L3FZdFdOOU0rWTJqZ3RlbzU1djFHeU5oSkM2R2x6eGEraUI2?=
- =?utf-8?B?UzhsbUNBQ1lrNDZtbUg3OS9oakdsQ1dtV254aG1BeFFUYTFOZ0wrc2Z3c3VB?=
- =?utf-8?B?c0FVUWFmbndsd2cxNjRJQ0NoZ3ZjMlM2TGVVVStKc0V0S2Y2MCsraFdzVjB4?=
- =?utf-8?B?eXo2RlQxN2hqT0VDVTZmTTNpYUFTOHdYUjVENW9RZTY4TEh2ZThUMzZFTW03?=
- =?utf-8?B?YUw4WVRpZE5lWnRBUXNRRCtLK3RFMWp4SXNheUFhUFNkcVRtQXNXUElxS0ZX?=
- =?utf-8?B?S3RJS2lTQ2ZqQXRramRJY21URHpac3o2M1ZYRjU5eTErRlMzbjRzbCtnRG5T?=
- =?utf-8?B?QnBMcXF6OE4xWm5Jdk1mcStnbEllNDNyRTVsaFF0WUZpMTVjNTI0REgzVEFB?=
- =?utf-8?B?MUV5Q2VNeTI2Uk53ME4rL2tVMC9vQ2xzUS9LWUI1Rk0zYUNlZHRZckd1b1Qx?=
- =?utf-8?B?aVFodHJQK0FCTnFsS1NnYmN4MS8zcytSaHNaK0daL1QyNElPZ01vMWdQaFNP?=
- =?utf-8?B?b2tIRXRUTTYrbDRDT3VndUhHZmRNZSszdUtscndZZU05NDVZaHhrcm8yYWpw?=
- =?utf-8?B?RGN6aXVzWlZBZmRBUG4xNUxOYUpyN3NhQ3VScWY4TGNiZzhzZW9zWDB4SEdx?=
- =?utf-8?B?M1Z5UUJ2NGhrc2t3V09xV1RNcDl1ejRaT2VFQWFCMFEzUm1OVFh1WFFHQXh0?=
- =?utf-8?B?ZS84RlU5em5yZEhYWlBEMm16R2MzUkNJNVRtY09iY1ZSd1F1cU94MTE1WnF5?=
- =?utf-8?B?TVRLaXlCU2N6aFQzeEdBTi9ZODhvS0xWcERaRjMrRitYTENBUkpsaTE4Ly8r?=
- =?utf-8?B?ZkJtQnE5T3hkUHBPLytWTmN3ajdEeEIwUXltL0RtMGRkMVdzeVkzTDhveUp6?=
- =?utf-8?B?ckw0dXRSN1BSM3laNUlvZ0NjczVDQTE2ZkgyczhWUDZYMlJ4SEd0bFkvbjZo?=
- =?utf-8?B?SFdTREI2bWhncUZ4L0JKakpKQ2pNUFpvd3FHVWpMaUIrbnRYTmkzVFNpVHNx?=
- =?utf-8?B?d1U0WGtPT3hWREtjVzc4Zy8zQk1JelIxK2JNK1dJRmlqbEU2MGE0QzBZKzJ1?=
- =?utf-8?B?d1krZWYwR3U4TGp5RzZHRHhLQTZIem1ZdmVEUEtEaUYxYlRVQ1YvVmN6ZkJS?=
- =?utf-8?B?SnN3TCtCY2RHM1YvZ1hxcjBEekx4Yy9aY3J6S3VUZUdUTzBxbG5JYnFRQ0Z3?=
- =?utf-8?B?ZFk2bWdBWnh2WmVVWHlnV1NobVBGN1FNK0lnU0NWTzkrYWJqTmR5SkR0Wito?=
- =?utf-8?B?QVV4QW9VT0hUem55bDBOdkRrRWpMeExJMDRxM3VQbS9SS0p4TGVsbng4ZEV5?=
- =?utf-8?B?ZTdZYTJITzZqNHNPOExZT093ZDRxeUN0TU9sVmhpZlV2bElET1g2cW5tSkxV?=
- =?utf-8?B?RFN5ME1pT3NFSnRMMUtRMXg1YVAyTW5YN0RCelIyaWoreWdvTGVzVzdVbG8w?=
- =?utf-8?B?L1p6Z05yUnFXd0E0MldWelJON2NjTVNJaVpxSExoNUx2Q0cyclRQOS9iWUs2?=
- =?utf-8?B?YUE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b328c798-b426-45bf-8fb1-08dd8721beeb
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2025 13:28:36.5281 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: V+sbqw9B2OI/kg90wE26Jro3wgcO+8iwHvjc0BQbzaUTv1RDo++fg6NF+ZeNA0zj3y/5hcM2t/yWjy5dynTzkDp3ZypHO7e9gMttojgG3+U=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9595
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,25 +84,459 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+From: Chen-Yu Tsai <wens@csie.org>
 
-On 4/29/25 3:15 PM, Simon Glass wrote:
-> Recent versions of Python complain about the license being in the
+The IO domain driver controls the I/O voltage for various pins,
+MMC included.
 
-I believe this isn't related to Python but rather setuptools.
+Enable it by default for all supported Rockchip SoCs.
 
-setuptools 77.0.3 and later support PEP-639 which recommends to ditch 
-the License :: classifier for a license property.
+Signed-off-by: Chen-Yu Tsai <wens@csie.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Anand Moon <linux.amoon@gmail.com>
+---
 
-The issue is that this license property also changed in PEP-639, with 
-something that isn't compatible with pre-PEP-639.
+Changes in v2:
+- Keep CONFIG_ROCKCHIP_IODOMAIN disabled for RK3399 EVB (Jonas)
 
-Therefore we need to bump the minimum requirement for the setuptools 
-dependency in the various pyproject.toml to 77.0.3 or later.
+ configs/chromebook_bob_defconfig             | 1 -
+ configs/chromebook_kevin_defconfig           | 1 -
+ configs/eaidk-610-rk3399_defconfig           | 1 -
+ configs/evb-rk3399_defconfig                 | 1 +
+ configs/ficus-rk3399_defconfig               | 1 -
+ configs/firefly-rk3399_defconfig             | 1 -
+ configs/khadas-edge-captain-rk3399_defconfig | 1 -
+ configs/khadas-edge-rk3399_defconfig         | 1 -
+ configs/khadas-edge-v-rk3399_defconfig       | 1 -
+ configs/leez-rk3399_defconfig                | 1 -
+ configs/nanopc-t4-rk3399_defconfig           | 1 -
+ configs/nanopi-m4-2gb-rk3399_defconfig       | 1 -
+ configs/nanopi-m4-rk3399_defconfig           | 1 -
+ configs/nanopi-m4b-rk3399_defconfig          | 1 -
+ configs/nanopi-neo4-rk3399_defconfig         | 1 -
+ configs/nanopi-r4s-rk3399_defconfig          | 1 -
+ configs/orangepi-rk3399_defconfig            | 1 -
+ configs/pinebook-pro-rk3399_defconfig        | 1 -
+ configs/pinephone-pro-rk3399_defconfig       | 1 -
+ configs/puma-rk3399_defconfig                | 1 -
+ configs/ringneck-px30_defconfig              | 1 -
+ configs/roc-pc-mezzanine-rk3399_defconfig    | 1 -
+ configs/roc-pc-rk3399_defconfig              | 1 -
+ configs/rock-4c-plus-rk3399_defconfig        | 1 -
+ configs/rock-4se-rk3399_defconfig            | 1 -
+ configs/rock-pi-4-rk3399_defconfig           | 1 -
+ configs/rock-pi-4c-rk3399_defconfig          | 1 -
+ configs/rock-pi-n10-rk3399pro_defconfig      | 1 -
+ configs/rock-pi-s-rk3308_defconfig           | 1 -
+ configs/rock-s0-rk3308_defconfig             | 1 -
+ configs/rock960-rk3399_defconfig             | 1 -
+ configs/rockpro64-rk3399_defconfig           | 1 -
+ drivers/misc/Kconfig                         | 6 +++++-
+ 33 files changed, 6 insertions(+), 32 deletions(-)
 
-I'm also wondering if we don't need to add a license-files property 
-(also PEP-639) to comply with the GPL-2.0-or-later which requires to 
-provide a copy of the license.
+diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
+index 5b8c0d35de6d..2c44afeddcd3 100644
+--- a/configs/chromebook_bob_defconfig
++++ b/configs/chromebook_bob_defconfig
+@@ -58,7 +58,6 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_I2C_MUX=y
+ CONFIG_CROS_EC_KEYB=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_CROS_EC=y
+ CONFIG_CROS_EC_SPI=y
+ CONFIG_PWRSEQ=y
+diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
+index a29a04aaddef..e7c42befe97f 100644
+--- a/configs/chromebook_kevin_defconfig
++++ b/configs/chromebook_kevin_defconfig
+@@ -59,7 +59,6 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_I2C_MUX=y
+ CONFIG_CROS_EC_KEYB=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_CROS_EC=y
+ CONFIG_CROS_EC_SPI=y
+ CONFIG_PWRSEQ=y
+diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
+index 8f9a76157f16..45a2d9016830 100644
+--- a/configs/eaidk-610-rk3399_defconfig
++++ b/configs/eaidk-610-rk3399_defconfig
+@@ -31,7 +31,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/evb-rk3399_defconfig b/configs/evb-rk3399_defconfig
+index 9481dfae7e40..87b4949de064 100644
+--- a/configs/evb-rk3399_defconfig
++++ b/configs/evb-rk3399_defconfig
+@@ -32,6 +32,7 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
++# CONFIG_ROCKCHIP_IODOMAIN is not set
+ CONFIG_MMC_HS400_SUPPORT=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
+index b32ca726b6cf..3a72156d3894 100644
+--- a/configs/ficus-rk3399_defconfig
++++ b/configs/ficus-rk3399_defconfig
+@@ -37,7 +37,6 @@ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
+index 3871627318b6..be8cde094466 100644
+--- a/configs/firefly-rk3399_defconfig
++++ b/configs/firefly-rk3399_defconfig
+@@ -34,7 +34,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/khadas-edge-captain-rk3399_defconfig b/configs/khadas-edge-captain-rk3399_defconfig
+index 89611a0535ed..ce425eb9b20c 100644
+--- a/configs/khadas-edge-captain-rk3399_defconfig
++++ b/configs/khadas-edge-captain-rk3399_defconfig
+@@ -45,7 +45,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/khadas-edge-rk3399_defconfig b/configs/khadas-edge-rk3399_defconfig
+index 3816f4327a61..10a20d749ba5 100644
+--- a/configs/khadas-edge-rk3399_defconfig
++++ b/configs/khadas-edge-rk3399_defconfig
+@@ -43,7 +43,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/khadas-edge-v-rk3399_defconfig b/configs/khadas-edge-v-rk3399_defconfig
+index 35e209425729..d3345c12fe25 100644
+--- a/configs/khadas-edge-v-rk3399_defconfig
++++ b/configs/khadas-edge-v-rk3399_defconfig
+@@ -45,7 +45,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
+index 57b097377fab..f12f39857e00 100644
+--- a/configs/leez-rk3399_defconfig
++++ b/configs/leez-rk3399_defconfig
+@@ -31,7 +31,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
+index 26c12c510785..40844753ccd8 100644
+--- a/configs/nanopc-t4-rk3399_defconfig
++++ b/configs/nanopc-t4-rk3399_defconfig
+@@ -34,7 +34,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
+index d24b7bc6d174..31b0e83cdea6 100644
+--- a/configs/nanopi-m4-2gb-rk3399_defconfig
++++ b/configs/nanopi-m4-2gb-rk3399_defconfig
+@@ -38,7 +38,6 @@ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
+index da3e44af8418..1a9b770c1692 100644
+--- a/configs/nanopi-m4-rk3399_defconfig
++++ b/configs/nanopi-m4-rk3399_defconfig
+@@ -37,7 +37,6 @@ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
+index 247056ab58b4..d3a8b5bb6d1f 100644
+--- a/configs/nanopi-m4b-rk3399_defconfig
++++ b/configs/nanopi-m4b-rk3399_defconfig
+@@ -37,7 +37,6 @@ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
+index 305877d20796..1e422befdf8e 100644
+--- a/configs/nanopi-neo4-rk3399_defconfig
++++ b/configs/nanopi-neo4-rk3399_defconfig
+@@ -32,7 +32,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
+index a6dafe3d9eb5..04642bca7cbd 100644
+--- a/configs/nanopi-r4s-rk3399_defconfig
++++ b/configs/nanopi-r4s-rk3399_defconfig
+@@ -32,7 +32,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
+index fdf3d6989393..d5091ee8a0c5 100644
+--- a/configs/orangepi-rk3399_defconfig
++++ b/configs/orangepi-rk3399_defconfig
+@@ -32,7 +32,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
+index dfa927ccb170..676d1e718945 100644
+--- a/configs/pinebook-pro-rk3399_defconfig
++++ b/configs/pinebook-pro-rk3399_defconfig
+@@ -51,7 +51,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_SPL_MMC_IO_VOLTAGE=y
+ CONFIG_MMC_UHS_SUPPORT=y
+diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
+index 5e16749ba7d4..85833c654b8f 100644
+--- a/configs/pinephone-pro-rk3399_defconfig
++++ b/configs/pinephone-pro-rk3399_defconfig
+@@ -47,7 +47,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+index 7a180b141303..95ed6eea953d 100644
+--- a/configs/puma-rk3399_defconfig
++++ b/configs/puma-rk3399_defconfig
+@@ -64,7 +64,6 @@ CONFIG_GPIO_HOG=y
+ CONFIG_SPL_GPIO_HOG=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
+index b6b3d3e2b3f4..a334d822e9e4 100644
+--- a/configs/ringneck-px30_defconfig
++++ b/configs/ringneck-px30_defconfig
+@@ -82,7 +82,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+ CONFIG_ROCKCHIP_OTP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_SUPPORT_EMMC_RPMB=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
+index 3ab5fd69c62a..9c063ce82d34 100644
+--- a/configs/roc-pc-mezzanine-rk3399_defconfig
++++ b/configs/roc-pc-mezzanine-rk3399_defconfig
+@@ -45,7 +45,6 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
+index 0ef867487787..68c4267d2426 100644
+--- a/configs/roc-pc-rk3399_defconfig
++++ b/configs/roc-pc-rk3399_defconfig
+@@ -43,7 +43,6 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
+index 0c73a212ea1f..2f1ea314302f 100644
+--- a/configs/rock-4c-plus-rk3399_defconfig
++++ b/configs/rock-4c-plus-rk3399_defconfig
+@@ -49,7 +49,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
+index 3ae19692155a..7387130ecc18 100644
+--- a/configs/rock-4se-rk3399_defconfig
++++ b/configs/rock-4se-rk3399_defconfig
+@@ -53,7 +53,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
+index f3a5c2c45f35..97a7db3730df 100644
+--- a/configs/rock-pi-4-rk3399_defconfig
++++ b/configs/rock-pi-4-rk3399_defconfig
+@@ -54,7 +54,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
+index 9bda50c8c77f..7da7ee4bce16 100644
+--- a/configs/rock-pi-4c-rk3399_defconfig
++++ b/configs/rock-pi-4c-rk3399_defconfig
+@@ -54,7 +54,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
+index a9c6d8a907a9..a38670d95d0e 100644
+--- a/configs/rock-pi-n10-rk3399pro_defconfig
++++ b/configs/rock-pi-n10-rk3399pro_defconfig
+@@ -35,7 +35,6 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
+index 4b08af309b1b..907b999b274d 100644
+--- a/configs/rock-pi-s-rk3308_defconfig
++++ b/configs/rock-pi-s-rk3308_defconfig
+@@ -40,7 +40,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_SUPPORT_EMMC_RPMB=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
+index 063e0b921d73..d46977b34a4b 100644
+--- a/configs/rock-s0-rk3308_defconfig
++++ b/configs/rock-s0-rk3308_defconfig
+@@ -41,7 +41,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_SUPPORT_EMMC_RPMB=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
+index aebfa73459ca..607aa61ba172 100644
+--- a/configs/rock960-rk3399_defconfig
++++ b/configs/rock960-rk3399_defconfig
+@@ -41,7 +41,6 @@ CONFIG_SYS_MMC_ENV_DEV=1
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
+index 75322073285c..1b887cd9f3ea 100644
+--- a/configs/rockpro64-rk3399_defconfig
++++ b/configs/rockpro64-rk3399_defconfig
+@@ -49,7 +49,6 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_LED_GPIO=y
+-CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 834e02850972..cd27ead88d3b 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -104,7 +104,11 @@ config ROCKCHIP_OTP
+ config ROCKCHIP_IODOMAIN
+ 	bool "Rockchip IO-domain driver support"
+ 	depends on DM_REGULATOR && ARCH_ROCKCHIP
+-	default y if ROCKCHIP_RK3328 || ROCKCHIP_RK3568
++	default y if ROCKCHIP_PX30
++	default y if ROCKCHIP_RK3308
++	default y if ROCKCHIP_RK3328
++	default y if ROCKCHIP_RK3399
++	default y if ROCKCHIP_RK3568
+ 	help
+ 	  Enable support for IO-domains in Rockchip SoCs. It is necessary
+ 	  for the IO-domain setting of the SoC to match the voltage supplied
+-- 
+2.39.5
 
-Cheers,
-Quentin
