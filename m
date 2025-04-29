@@ -4,74 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F6CC369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 14:20:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B90AC369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 14:27:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4373F8293C;
-	Tue, 29 Apr 2025 16:20:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 60B0782958;
+	Tue, 29 Apr 2025 16:27:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fmd6DKGu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s+5gaw8h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D844682A0A; Tue, 29 Apr 2025 16:20:09 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 701E88297E; Tue, 29 Apr 2025 16:27:22 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76DCA8272A
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:20:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A35398293C
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:27:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-abec8b750ebso993800566b.0
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 07:20:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-72bd5f25ea6so1576365a34.1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 07:27:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745936407; x=1746541207; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Kza11D+6TwKVXwUyUKIpGPiTt4c4s2Vmb+q8ioCBW78=;
- b=fmd6DKGuzApn7ITExHo/wRXm6dZDTdpHwYtQx2jgzMyUErAggr7+okz0nLTmOmv9Ty
- Fk/2C0HHGdcn3Fv1jh6L/wFYbm930q+XLSc2uM5XrCbLmZvWhhMXkdwtRkoYLZWWwcPd
- 0/8YA3YiHUiwKLSbpa3hX6873thMJ2b972NmE=
+ d=konsulko.com; s=google; t=1745936837; x=1746541637; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yorBtIyUyq9f1q/VDS9irk8bYq1okeVJx34lSyrcM7E=;
+ b=s+5gaw8hCRoj9QusA9npkF1JSZyk7/b1dZlAzRU1KYRGZvBzBjsXvrI8ifIxqQVH1T
+ NDOIaRiJOdC9D7eLkbWL5OirgBRpJ7tMLUDS4ub8Yhj/asuQw0c2gFii0o8KtE4sbhFU
+ CCslBivuYmyLw29SfLd0zx3NeSBMg6kLNriLg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745936407; x=1746541207;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Kza11D+6TwKVXwUyUKIpGPiTt4c4s2Vmb+q8ioCBW78=;
- b=UiGxO7mo1ImgaPyOuZ6rpIpjm9g3HUugrcfPPK4Z1AKeqIgwoZN4DBW1DL869WnofQ
- pbC7MiLH6Lf0odt56MYgd9kgaSlBkap6OQ6I2WUdHmhscAa2giWQGOXSGfM7MsQxBju+
- fWVe5LYYIHtBgxLbpVlrjmYRHC57dn5rAjvwrBlEeYPvaGowaj56+q/aCypKaKJ6WUZH
- KRwu5IwfbfH7NBpaiexCOl9AyrhTGlc2mcZteWloOSvX72oLHtbgcJFpIFGfY5MusHP0
- EP0GL892Y28V56cbY2waZ2WkDfClEJaXsQPMPIU5tOLy+Q/8LXE9JsJ62fMt52CdK/Qb
- h6yQ==
-X-Gm-Message-State: AOJu0YwRnr3+o5torss5wloYml4bMVsW4+2vrBpkQe+ya6/R8W8mSbgW
- EpgL5IQ6LR5cayNoUpeCldOloglGY9cVbSY9hlPbIk1IRat6jc56Z0/mTSTctCRFXN2+HjSLIT2
- 95iMHo0QIymileOXZ+Kgna72SFBSXiJ2uJcfK
-X-Gm-Gg: ASbGncuLfxRF6BNFpO3PQp9N5+AwUnE9ndvabxf2e22v3doaO7MhWoCojTF0tpojWfJ
- gXooKaTn4yi3NASyf1Qk57iE1GtpRWIHAuH0PN9DEyJy0CkFgFbwu3zXNucXBEX8KB725KnWUkf
- gKDwnMg+4nFQemvORO2+/csr8=
-X-Google-Smtp-Source: AGHT+IGQiduXP5qmSnkgpSVLoLXthc1fw6MUS8e3qLe2TR59l5/arixGGquojzMRXbf6Kws7+flG3uDtJdKTKqIkbB8=
-X-Received: by 2002:a17:907:1c10:b0:ac7:3918:50f3 with SMTP id
- a640c23a62f3a-acec87bb03amr306764166b.58.1745936406839; Tue, 29 Apr 2025
- 07:20:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1745936837; x=1746541637;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yorBtIyUyq9f1q/VDS9irk8bYq1okeVJx34lSyrcM7E=;
+ b=eqhLarhPFZv07MbB9mlff6r8F4B7kjRGS59w/GmGJiqZKuW3xjbf09wv+kz2XbpxUV
+ Da/rS9HleyzYs7OKcZaGrj9DOKgFpf3LyfIGOA+ey8uAfv9EXvj/g08LC/ANtijFpuIH
+ BTIHnn4JmqsWWpIgaJ9+xFwUZnh2jBnlyjnzTMfLJWKFg+D+IK6hsy62Kz9lHFgvsy0K
+ KHeUT0KcBEuBrlWlfVB7PISDxitBLXLRJZ7Eu1sk4l33OfjLd8P3aZjPEg9nKCGuFlxw
+ aUOWlOuOJ9tVsRfkFn/pY3jblwvsflHZ5SKTlmBjJeRJFyzc2WJaqx8XIJUaLKnZGmlf
+ JklQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6GfKsQklfl+q9UXoqY8Sv8F7g6ccGdWHAmtJjkqHpgtY6TD9nSe3ALeBdQ8w0vEEW+oT2TA8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyTpt+sR26sTt9cidxQxgIC/UEyzg9NIIvDVTIE5qF68FHORBt
+ HP03pbsSNZ0Ubf7gXZl8/6xx9P0eDj9zi0iiqbw7Wt4AjvViNujWcUp2iOjjKZW07W7jRhc5zQv
+ r
+X-Gm-Gg: ASbGncuA3azXIF4rrcTMr+r8z/QM5w9PewshOjWrY5EygLkLOv2UMPuOI/0lGpY0AHM
+ ylYUq7PLMSW9xNtqKezBfSjDAShRiOm4e5K1aeUXzcEfT1G02dCVAYjxfqrDNW7tjFgb4CUgcaD
+ mYKa5LE/P1g/iyLCN0o29TTtUFLSVaMy6SmM9kyb/Y/HIEayvsgYz65HdAUz9TmwF+657G5zVY8
+ gN+Eis/6wvXiB9P9me7EzyUHrHR9kdInPPIpqeXprM7cAdBMhmXKGsvRhXORiMKK2H12CR/Bove
+ fPr8D0TxZVhE+HKBWSnQSvFs8LPaWweuX6c44wfW7gBhr0rg1jByeLFoU9pg/zJJGu4RmEcNbTc
+ tnA==
+X-Google-Smtp-Source: AGHT+IGvKIOjHJen8zqAtNWvL/+kQnBq72ONnnQHpxxSKmKQoc/QoLrgV7R00g3+9ZEvnPmNdTWmKg==
+X-Received: by 2002:a05:6830:d1a:b0:72b:a020:a2c0 with SMTP id
+ 46e09a7af769-7306526343amr8163087a34.17.1745936837331; 
+ Tue, 29 Apr 2025 07:27:17 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7308b315147sm298029a34.65.2025.04.29.07.27.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Apr 2025 07:27:16 -0700 (PDT)
+Date: Tue, 29 Apr 2025 08:27:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Subject: Re: [PATCH 2/2] tools: Update the license specifiers
+Message-ID: <20250429142714.GF1261075@bill-the-cat>
+References: <20250429131515.244061-1-sjg@chromium.org>
+ <20250429131515.244061-2-sjg@chromium.org>
+ <016f585f-fd30-4604-8676-c7cabd9e40a1@cherry.de>
+ <20250429135241.GC1261075@bill-the-cat>
+ <290f70ad-bc06-41cc-910f-cecb89bdd6ff@cherry.de>
 MIME-Version: 1.0
-References: <20250405204409.420738-1-sjg@chromium.org>
- <0fe144dd-2885-4e13-bb09-4d939124a974@uni-duesseldorf.de>
-In-Reply-To: <0fe144dd-2885-4e13-bb09-4d939124a974@uni-duesseldorf.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 29 Apr 2025 08:19:54 -0600
-X-Gm-Features: ATxdqUECLLM6uy7wbqJfeX1LOP4rQR0g9OzI4JEcpgcoMCKtHG5hU_RaoucPHMc
-Message-ID: <CAFLszTjcV0e6AgRsbHdj2oW5o_4nE6KEEQ+QyxXgYVRgKtKn1Q@mail.gmail.com>
-Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via EFI
-To: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wo/4MA6PZkvaq+T+"
+Content-Disposition: inline
+In-Reply-To: <290f70ad-bc06-41cc-910f-cecb89bdd6ff@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,82 +103,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Niklas,
 
-On Tue, 29 Apr 2025 at 05:30, Niklas Sombert
-<niklas.sombert@uni-duesseldorf.de> wrote:
->
-> Hi Simon,
->
-> this solves my problem, thanks!
->
-> Since SMBIOS is broken again in v2025.07-rc1 (and disabling bloblist
-> doesn't work anymore), I applied this patch and it worked.
-> I probably should have tried this sooner.
+--wo/4MA6PZkvaq+T+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for testing this. Can you please reply with a 'Tested-by' tag?
+On Tue, Apr 29, 2025 at 04:04:32PM +0200, Quentin Schulz wrote:
+> Hi Tom,
+>=20
+> On 4/29/25 3:52 PM, Tom Rini wrote:
+> > On Tue, Apr 29, 2025 at 03:28:35PM +0200, Quentin Schulz wrote:
+> > > Hi Simon,
+> > >=20
+> > > On 4/29/25 3:15 PM, Simon Glass wrote:
+> > > > Recent versions of Python complain about the license being in the
+> > >=20
+> > > I believe this isn't related to Python but rather setuptools.
+> > >=20
+> > > setuptools 77.0.3 and later support PEP-639 which recommends to ditch=
+ the
+> > > License :: classifier for a license property.
+> > >=20
+> > > The issue is that this license property also changed in PEP-639, with
+> > > something that isn't compatible with pre-PEP-639.
+> > >=20
+> > > Therefore we need to bump the minimum requirement for the setuptools
+> > > dependency in the various pyproject.toml to 77.0.3 or later.
+> > >=20
+> > > I'm also wondering if we don't need to add a license-files property (=
+also
+> > > PEP-639) to comply with the GPL-2.0-or-later which requires to provid=
+e a
+> > > copy of the license.
+> >=20
+> > Thanks for digging in to this more. Is there not some way to both meet
+> > the PEP and utilize SPDX?
+> >=20
+>=20
+> AFAICT, the license field is for the SPDX identifier.
+>=20
+> Not all licenses require you to provide the license to comply with it I
+> guess? But my reading of GPL-2.0-or-later makes me believe that we need t=
+o.
+> You would then have the license file(s) included when license-files conta=
+ins
+> a file that is found at the root of the python project? I believe that the
+> default value for license-files is ['LICEN[CS]E*', 'COPYING*', 'NOTICE*',
+> 'AUTHORS*'] so it could be automatically included (and thus the
+> license-files not be explicit) if the license file(s) is named like that.
+>=20
+> It isn't necessarily a big deal (IANAL) to not have the license shipped if
+> we don't plan on pushing those to pypi or share sdist/wheels through anot=
+her
+> mean (e.g. GitLab/GitHub releases generated with `python3 -m build`)?
+>=20
+> I am not sure exactly what you meant by "both meet the PEP and utilize SP=
+DX"
+> as I believe they aren't related here? I mean, license property is the way
+> to define the SPDX identifier in PEP-639, but the missing license-files
+> doesn't have anything to do with SPDX I believe? Just that it wouldn't be
+> complying (I believe, still haven't become a lawyer in the last few
+> paragraphs) with the license itself if the license file isn't shipped.
+>=20
+> What I meant is that in order to use the license property, we need to bump
+> the setuptools version dependency in pyproject.toml so we're sure we're
+> building with a recent enough setuptools.
+>=20
+> Let me know if something isn't clear, I just happened to have had a glance
+> at the PEP this morning for another project, so I am as confident as some=
+one
+> who spent 5min reading a spec :)
 
-Regards,
-Simon
+Thanks for explaining more. I misunderstood for a moment. Yes, we still
+have "Licenses/gpl-2.0.txt" in-tree as the license text itself so we can
+point at that I hope.
 
+--=20
+Tom
 
->
-> Greetings,
-> Niklas
->
-> Simon Glass wrote:
-> > The EFI-loader code has not been fully converted to use bloblist, so
-> > relies on the SMBIOS-table address being set in global_data.
-> >
-> > Set this up in write_tables() so that the SMBIOS tables are actually
-> > available.
-> >
-> > Enable the command for x86 QEMU so that the SMBIOS tests actually run.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Fixes: 83ce35d6ebb ("emulation: Use bloblist to hold tables")
-> > Reported-by: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-> > ---
-> >
-> >   arch/x86/lib/tables.c            | 2 ++
-> >   board/emulation/qemu-x86/Kconfig | 1 +
-> >   lib/efi_loader/efi_smbios.c      | 1 +
-> >   3 files changed, 4 insertions(+)
-> >
-> > diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
-> > index ec52992209f..d7f183f95dc 100644
-> > --- a/arch/x86/lib/tables.c
-> > +++ b/arch/x86/lib/tables.c
-> > @@ -126,6 +126,8 @@ int write_tables(void)
-> >                       use_high = true;
-> >                       if (!gd->arch.table_start_high)
-> >                               gd->arch.table_start_high = rom_addr;
-> > +                     if (table->tag == BLOBLISTT_SMBIOS_TABLES)
-> > +                             gd_set_smbios_start(rom_addr);
-> >               }
-> >               rom_table_end = table->write(rom_addr);
-> >               if (!rom_table_end) {
-> > diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/Kconfig
-> > index b2a4e0891a4..c1564fba7cd 100644
-> > --- a/board/emulation/qemu-x86/Kconfig
-> > +++ b/board/emulation/qemu-x86/Kconfig
-> > @@ -23,5 +23,6 @@ config BOARD_SPECIFIC_OPTIONS # dummy
-> >       imply VIRTIO_PCI
-> >       imply VIRTIO_NET
-> >       imply VIRTIO_BLK
-> > +     imply CMD_SMBIOS
-> >
-> >   endif
-> > diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-> > index 8d2ef6deb51..5275e966dfe 100644
-> > --- a/lib/efi_loader/efi_smbios.c
-> > +++ b/lib/efi_loader/efi_smbios.c
-> > @@ -35,6 +35,7 @@ efi_status_t efi_smbios_register(void)
-> >       void *buf;
-> >
-> >       addr = gd_smbios_start();
-> > +     printf("register %lx\n", addr);
-> >       if (!addr) {
-> >               log_err("No SMBIOS tables to install\n");
-> >               return EFI_NOT_FOUND;
->
+--wo/4MA6PZkvaq+T+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgQ4cIACgkQFHw5/5Y0
+tywywwv+Nk3rlSc3+hJ94JaNEt8Y/xk+hzo1t534ei83tCX1Dtb3ots8TdB4sZe/
+uP8Q9Gj5WzFNYBJ0eu+EtcGlpSKxrDn99xatMm326JAoBjn/RxqJ52bWtOk9tak3
+gixFL2hGd9UBk6eK0H8ENXmsdiKUTksE59TqXpZkwJyoMx8aIrWbx896ugVbmSiB
+0XHF3STY9kBbIiya9Np7accVwR6SQOLCoUyXTTmhDcvtGlSo9hWfVV1ZL/Gj7Cs2
+WUtVXXSoHC/ans0atBbAWzjeZ4QvW0qrLQnBxfYeYao/ya6asF5cDOqUlKQDqwrH
+S/NyyZ9oaSDSjXi6LL3gr4jGjUI8SXh4cSXfzUQqfjrGkFYqSgtV00XH+saajbFj
+xHofnl0fWJtqoqCW1B2Y+kOPtzjjHzCn0pmgPl0wYYVD6VANAWEybbzwRf+BgiPA
+8xu5yTnHpaOlBCh/5QJ8dO/KGh4zK/gwTdRVdTALgHLL8Cp2hoWYE4NKnfCJQ+D6
+5KIgfW5C
+=b8tX
+-----END PGP SIGNATURE-----
+
+--wo/4MA6PZkvaq+T+--
