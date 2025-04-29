@@ -4,97 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F16A8C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 19:14:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75637C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 19:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E10F8829A1;
-	Tue, 29 Apr 2025 21:14:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B07EC829A1;
+	Tue, 29 Apr 2025 21:17:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KMHb6LFT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B15oUZe+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC9282A64; Tue, 29 Apr 2025 21:14:12 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id B5D6B82A7B; Tue, 29 Apr 2025 21:17:21 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4971782958
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 21:14:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85A9E82958
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 21:17:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-60219a77334so3327294eaf.1
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 12:14:10 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72c14138668so1735329a34.2
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 12:17:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745954049; x=1746558849; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1745954237; x=1746559037; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Yuk5jqHqV5tRuMqxHiHEeQFOFX+Nf+eBjTbA25EjkH8=;
- b=KMHb6LFTYSSrkukJXWQ9DWEbAHCK6+m62f9PaZ46aCNTPp/Y/pp99/3hedXk8jSray
- gmqH6Gd51J6RtaXWx/kH3XUmmsQXd11FK9wdy/MWMOisms18072Qll83HDcFE+oXzMVo
- 91oKoZEXIjWstM8iKvbyjXCd0gFt3V74xOhng=
+ bh=l786tExaKXRkkhdfHtwtzmqG0JZhpYVWzXkcseEoPOw=;
+ b=B15oUZe+gGyW/+KoDIbdBc2pLHqiABOPIXXb5T63OCHK1mJuJK0Af22eiTwVqXP5DU
+ d8Iaw4KnKYy6wzX5eHw3WRYSIXTTP7s5Wi94BtPaj4yznJADI4CRb0g+16DThTCLlXkk
+ T+Rv5Imtqqfc8FiH+9ZBmhIoXHSsuQx2hZCuM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745954049; x=1746558849;
+ d=1e100.net; s=20230601; t=1745954237; x=1746559037;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yuk5jqHqV5tRuMqxHiHEeQFOFX+Nf+eBjTbA25EjkH8=;
- b=sTAuhb9/O0VmGmlpS22WwTMrS7eIuFuw36XHrCeWU0LklbBbYHjtUxkUOxw6Elzger
- DKD5YCgsxWVrOEBSKc529n/YsXWkqg8S3iWb7aagKLZRaOF/jH3Th3OjxQs90rkBCABU
- JyB3SKNklrDydvy3a9q4oAVFz3qJlAxuzChWVaRmUhwXDtOGT3wq9f8VfqG3poZjW7zF
- O/G98yunPjvK7jw2nJ1o4/O/XuxQm8YAQ9fGN5mrUKvhxfJovFX2PtUEzIJu0KZVFOl5
- NLd5r8+bA1PBaqO81eMztGxK8c2beQ4VfKaYfXY3pB9YhDfhIWlFkOMqBRZVGjpM48Cz
- 9JgA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUjCKCzeyMq11NMFWTzACvsY0+irTF8GNh3T3+NNKmWnL9YeyOhkJSIM0IBRDRuiencAnNJeN8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzBGqe8XQL5+fTO0MRb7kWX+io0PsmZ7lKgxr/rImEX0LYzw7IX
- 5JWswQsVyD6S7oADG3EHtCagPRnYclEJWyt4TuSG0EC95Qdi83A7/MEMyLbx0aQ=
-X-Gm-Gg: ASbGncsFyXa4qdcx/nmTd61FzDqRaKAAMHhQYgjNhTNguUeB8g/6H4urG8BZiEAn/OV
- L3YbdvbB74e88ayB6tBA6I8gXEFyrDgPRNhUL3jX1ALh7gUmOadqeEjaFH9WVRn8fI1GUzlKJBQ
- 540wrVY/u062NfH//D64QrphPunPdEzqAvVsdK0XkD9+yTtJUMp33pFvhTtzLuVhijwh4wWekHm
- SG8zea5kbZOppnwAiMQ3OhEF+GlPiG6GqGInPcd+HucZt4FpaANxovQJsIhtgdjm0qov0Vy1RSM
- EEt6vaOfQYY8hFHDvkXKhYdXxnYHqVFNA9pR0GEiWKdB8OkOeKTmOXPvoDGY5kijcvLqBzTtQzs
- Y2g==
-X-Google-Smtp-Source: AGHT+IF0OzRP4/+QfFLcBT+B1bqAQBbqx1799wrAFRhJWdVa2O1w0HQBD9xQKXs5bPmY30Lob/stdw==
-X-Received: by 2002:a05:6871:7416:b0:2b8:3c87:b491 with SMTP id
- 586e51a60fabf-2da6a3433dfmr144313fac.26.1745954048816; 
- Tue, 29 Apr 2025 12:14:08 -0700 (PDT)
+ bh=l786tExaKXRkkhdfHtwtzmqG0JZhpYVWzXkcseEoPOw=;
+ b=ZxYQPg0VgWomxqRb5JVZ5Xq+VG61nfflOSraIX3XTmN30V8ybOqhNoZZQBDPFZHDd/
+ XveCmNXLCm7uMhEuW34VUvLwnqoVoQWdOQ7Ya04No6dmmFRTqmcozdVHhXY1NXpGkRWg
+ uAkqa1kIIcOyrAMKdylxNMPd0N34Y86qSqlmufAr2Ig3trsh9jQh/96ag626t7bm+wtA
+ 5NgUHCa3aJ1ppoNc8vWJpBFQiu7K/yzuGAWyj/MxFkzx7+cz7Sj1yQtyq2yTLZ140hz6
+ K/eBc9EgLQb0oPa2sG/qWcuIP8B0EXWmye8H9jTrrrF9d1nwVCdctt/6bDkcg5VtjjRU
+ kvKA==
+X-Gm-Message-State: AOJu0YzqFnbJiCG3pFAIxSKAHio0UjrPn90eDWUaBkwRee8kmDzDEswv
+ 3P19t+eOV53jsKdw2BjIz03ft338fCWhLKpkDl3j5Yz51eQ97zUR5ugeH01Wi90=
+X-Gm-Gg: ASbGncsVM9KXlvg1Yc4RRMypnVGpg6IWF94va6yTSMCXlMNg3BFYXNsaiT4lRm0cbL1
+ 0+CRh1KyKpd68Umsr3N0JGnTgqvy1UK61laQrbzZNLwHNaAVvY8NFmEKKPJhGlZpo6iPS26Mz0n
+ tzAz9wfuHvl+FyuKLpcCJpEorcTcF2inNIiNXDbgb1RIBGqn0nEBEnBZuN5p9DFzld5zPsRyDTe
+ 1T8la9sD0qQM+QNUM7vD4JfPuXdmWFSIUCp5EyEEQqVTTscRv6eR0LreKyfDLW1R5RW98j42Cac
+ 1WlPrj5UBPUN6WrQNxXjVn8XkB1/PMyCrrAIoZkG2HwxyEepKqY5/WkwA7tlpyIsBY0X9FL2WeI
+ NYA==
+X-Google-Smtp-Source: AGHT+IHRAe1fGBpe1AITKiKpG1lT9L98bY55Y1YwCAMoVylfDUhdsI7tvLcD1jFdsqvWKOLkLSlg+g==
+X-Received: by 2002:a05:6830:6f8d:b0:72b:99eb:7ce3 with SMTP id
+ 46e09a7af769-731c0a9c6d2mr274279a34.18.1745954237228; 
+ Tue, 29 Apr 2025 12:17:17 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d973b7959bsm2926907fac.36.2025.04.29.12.14.07
+ 586e51a60fabf-2d973b7a5efsm2945300fac.35.2025.04.29.12.17.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 12:14:07 -0700 (PDT)
-Date: Tue, 29 Apr 2025 13:14:05 -0600
+ Tue, 29 Apr 2025 12:17:16 -0700 (PDT)
+Date: Tue, 29 Apr 2025 13:17:14 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <ziyao@disroot.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Anton Blanchard <antonb@tenstorrent.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
- Nathaniel Hourt <I@nathaniel.land>
-Subject: Re: [PATCH 1/2] Makefile: Strip leading spaces when preprocessing
- generated_defconfig
-Message-ID: <20250429191405.GK1261075@bill-the-cat>
-References: <20250427145011.17331-1-ziyao@disroot.org>
- <20250427145011.17331-2-ziyao@disroot.org>
- <1526A781-5592-43DE-94F2-221DAA484192@gmx.de>
- <aA5RcIbI7uhsGmu8@pie.lan> <20250427161627.GZ5495@bill-the-cat>
- <aA78p0FgCZYmoeBM@pie> <20250428144943.GA5495@bill-the-cat>
- <aBDGoWxfU5I2_ZXs@pie.lan>
+To: Aristo Chen <jj251510319013@gmail.com>
+Cc: u-boot@lists.denx.de, aristo.chen@canonical.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org,
+ mkorpershoek@kernel.org, Zone.Niuzh@hotmail.com
+Subject: Re: [PATCH] bootm: improve error message when gzip decompression
+ buffer is too small
+Message-ID: <20250429191714.GL1261075@bill-the-cat>
+References: <20250428060757.125596-1-aristo.chen@canonical.com>
+ <20250428172439.GD5495@bill-the-cat>
+ <CAJwFiG++7ikLUQBGiz8QXsY=R4WQkWnsWC_ETan5syk-poTu_w@mail.gmail.com>
+ <20250429141529.GD1261075@bill-the-cat>
+ <CAJwFiGJTiDuFn-03vWbMPB2ui9jMTwWC2hcqMfDsgJieRAqqXw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fMUJCmjmCzsUcew5"
+ protocol="application/pgp-signature"; boundary="BY8FiHmdSAn/cSk/"
 Content-Disposition: inline
-In-Reply-To: <aBDGoWxfU5I2_ZXs@pie.lan>
+In-Reply-To: <CAJwFiGJTiDuFn-03vWbMPB2ui9jMTwWC2hcqMfDsgJieRAqqXw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,97 +103,131 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fMUJCmjmCzsUcew5
-Content-Type: text/plain; charset=us-ascii
+--BY8FiHmdSAn/cSk/
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 29, 2025 at 12:31:29PM +0000, Yao Zi wrote:
-> On Mon, Apr 28, 2025 at 08:49:43AM -0600, Tom Rini wrote:
-> > On Mon, Apr 28, 2025 at 03:57:27AM +0000, Yao Zi wrote:
-> > > On Sun, Apr 27, 2025 at 10:16:27AM -0600, Tom Rini wrote:
-> > > > On Sun, Apr 27, 2025 at 03:46:56PM +0000, Yao Zi wrote:
-> > > > > On Sun, Apr 27, 2025 at 05:19:04PM +0200, Heinrich Schuchardt wro=
-te:
-> > > > > > Am 27. April 2025 16:50:10 MESZ schrieb Yao Zi <ziyao@disroot.o=
-rg>:
-> > > > > > >Clang's preprocessor may emit extra spaces for lines starting =
-with '#'.
-> > > > > > >Lines with these extra characters cannot be handled by Kconfig=
- and will
-> > > > > > >be ignored with warnings like,
-> > > > > > >
-> > > > > >=20
-> > > > > >=20
-> > > > > > Do you have an example for reprocing the issue?
-> > > > >=20
-> > > > > Sure,
-> > > > >=20
-> > > > > 	clang-19 -E -nostdinc -P -I . -undef -x assembler-with-cpp \
-> > > > > 		configs/starfive_visionfive2_defconfig
-> > > > >=20
-> > > > > or a smaller example for demonstrating the behaviour,
-> > > > >=20
-> > > > > 	cat << EOF | clang -E -P -x assembler-with-cpp -
-> > > > > 	# comment line
-> > > > > 	normal line
-> > > > > 	EOF
-> > > > >=20
-> > > > > and you could see the strange indentation. For reproducing the ex=
-act
-> > > > > Kconfig warnings,
-> > > > >=20
-> > > > > 	make ARCH=3Driscv \
-> > > > > 		CC=3D'clang-19 --target=3Driscv64-unknown-linux-musl' \
-> > > > > 		starfive_visionfive2_defconfig
-> > > > >=20
-> > > > > (Clang is called clang-19 on my machine)
-> > > > >=20
-> > > > > > Is there an understanding why Clang behaves in this way?
-> > > > >=20
-> > > > > Sadly I have no idea. I guess it may serve for improving
-> > > > > human-readability of the preprocessed output.
-> > > >=20
-> > > > This is https://github.com/llvm/llvm-project/issues/78778
-> > >=20
-> > > Thanks for the reference! I did a quick search among LLVM's issues
-> > > before sending the patch but didn't find anything useful.
-> > >=20
-> > > Do you think such workaround is acceptable? It seems the link should =
-be
-> > > included in commit message as well.
-> >=20
-> > I'd like to see if we can get llvm to fix this moving forward first. Can
-> > you please comment on the issue as you're hitting this now too?
+On Tue, Apr 29, 2025 at 11:15:58PM +0800, Aristo Chen wrote:
+> Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B44=E6=9C=8829=E6=97=
+=A5 =E9=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=8810:15=E5=AF=AB=E9=81=93=EF=BC=9A
+> >
+> > On Tue, Apr 29, 2025 at 06:08:50PM +0800, =E9=99=B3=E5=81=89=E9=8A=98 w=
+rote:
+> > > Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B44=E6=9C=8829=E6=
+=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=881:24=E5=AF=AB=E9=81=93=EF=BC=9A
+> > > >
+> > > > On Mon, Apr 28, 2025 at 02:07:57PM +0800, Aristo Chen wrote:
+> > > >
+> > > > > Currently, when decompressing a gzip-compressed image during boot=
+m, a
+> > > > > generic error such as "inflate() returned -5" is shown when the b=
+uffer is
+> > > > > too small. However, it is not immediately clear that this is caus=
+ed by
+> > > > > CONFIG_SYS_BOOTM_LEN being too small.
+> > > > >
+> > > > > This patch improves error handling by:
+> > > > > - Detecting Z_BUF_ERROR (-5) returned from the inflate() call
+> > > > > - Suggesting the user to increase CONFIG_SYS_BOOTM_LEN when appli=
+cable
+> > > > > - Preserving the original return code from zunzip() instead of ov=
+erwriting
+> > > > >   it with -1
+> > > > >
+> > > > > By providing clearer hints when decompression fails due to insuff=
+icient
+> > > > > buffer size, this change helps users diagnose and fix boot failur=
+es more
+> > > > > easily.
+> > > > >
+> > > > > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> > > >
+> > > > I like the concept but:
+> > > >
+> > > > > @@ -573,12 +574,26 @@ static int handle_decomp_error(int comp_typ=
+e, size_t uncomp_size,
+> > > > >                              size_t buf_size, int ret)
+> > > > >  {
+> > > > >       const char *name =3D genimg_get_comp_name(comp_type);
+> > > > > +     bool likely_buf_too_small =3D false;
+> > > > >
+> > > > >       /* ENOSYS means unimplemented compression type, don't reset=
+=2E */
+> > > > >       if (ret =3D=3D -ENOSYS)
+> > > > >               return BOOTM_ERR_UNIMPLEMENTED;
+> > > > >
+> > > > > +     switch (comp_type) {
+> > > > > +     case IH_COMP_GZIP:
+> > > > > +             if (ret =3D=3D Z_BUF_ERROR) /* -5 */
+> > > > > +                     likely_buf_too_small =3D true;
+> > > > > +             break;
+> > > > > +     // Add more if necessary
+> > > > > +     default:
+> > > > > +             break;
+> > > > > +     }
+> > > > > +
+> > > > >       if (uncomp_size >=3D buf_size)
+> > > > > +             likely_buf_too_small =3D true;
+> > > > > +
+> > > > > +     if (likely_buf_too_small)
+> > > > >               printf("Image too large: increase CONFIG_SYS_BOOTM_=
+LEN\n");
+> > > > >       else
+> > > > >               printf("%s: uncompress error %d\n", name, ret);
+> > > >
+> > > > This is a lot of code, why not just:
+> > > > if (comp_type =3D=3D IH_COMP_GZIP && ret =3D=3D Z_BUF_ERROR)
+> > > >   printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
+> > > >
+> > > Thanks for your suggestion! I am not sure if I get it correctly, do
+> > > you mean that we should remove the original if condition( if
+> > > (uncomp_size >=3D buf_size) ) that prints the error message?
+> >
+> > Ah sorry for being unclear. I just meant we can handle the new print
+> > more directly.
+> No worries, and thanks for your patience.
 >=20
-> Sure it should be fixed in LLVM and I've left a comment in the issue.
+> Just to double confirm, would the following meet your expectation?
 >=20
-> But even though it's fixed in upstream, it will be nice to have such
-> compatibility workarounds for some time to keep compatibile with older
-> Clang toolchains, about which my concern is most.
+> if (comp_type =3D=3D IH_COMP_GZIP && ret =3D=3D Z_BUF_ERROR)
+>     printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
+> else if (uncomp_size >=3D buf_size)
+>     printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
+> else
+>     printf("%s: uncompress error %d\n", name, ret);
+>=20
+> Or would you prefer combining the first two conditions into one?
+>=20
+> if ((comp_type =3D=3D IH_COMP_GZIP && ret =3D=3D Z_BUF_ERROR) ||
+>     uncomp_size >=3D buf_size)
+>     printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
+> else
+>     printf("%s: uncompress error %d\n", name, ret);
 
-Depending on what the LLVM people say, we can say what / how long of a
-workaround to keep in.
+The second option yes, and then someone in the future can add
+(comp_type =3D=3D IH_COMP_LZO && ret =3D=3D LZO_EQUIVALENT_ERROR) ||
+and so forth.
 
 --=20
 Tom
 
---fMUJCmjmCzsUcew5
+--BY8FiHmdSAn/cSk/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgRJPYACgkQFHw5/5Y0
-tywyuQv9EiV68Uhu23zjPaVjjctZz+mZxCctwZ0KbK8gTGlbotDnHnADv/JBsSDg
-N1RWxcCRp7dcBqNdotno4GJoCXyikLI34DP04jsJnor2nsjVm4D/0q6cmwPASEHk
-BQWI5+1sdjnPhqfZr1S9tpy8CdaSPMeblAoFyN5hQajbXTt89ZQCVpWgM8y7/oA8
-iBp/pw51+P1fhPDgpnP6d4jzj/P7sjiTiHeamO78UymakHLTHa1CnrbozPpK7h5p
-/zuGvYHhpWfhlfDwPqFW+1rA7NNs3wDJTS4QkbVS+u01O63goLBmMdtTzbCr33EI
-L+/a2cVkEM0kUMDlWNjBQ1/DGilpQfImLRhUexpv/CL55RHeEGKgxWmenkh9Lykp
-dEixaFSsFpDyIM6R+8rV+MFyAM3nZsYugpEJZpFSKWc21+cDBoorvHh7TgUb6rIW
-naze2c0Oh6nQVPSv2plmY3qO/Tou3U5Gg2VRDVEKi3IOFPugMAqC14oVvFirWre3
-RHSjVtds
-=b7K/
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgRJboACgkQFHw5/5Y0
+tyyVOgv/ZiMbPjzHNvtTYtF+ulHGV0Mvc04170/YDbmtl0o5vXSrMzyfqU1SlFGb
+xsIHe5WzOF9CHVDhWdSa2wRikWkxMYVLGgTzoEi9OrALXFraKEELGyMUHA5h6IPz
+Y3Mb6d1ir11b4Rb+sJxs5mHNNRarNn2lEsh3FEnmMR3K2kNshi39icQsgu9H5QTv
+IYHrJBHmL5e/5yY6srPUVoSrOhp2GWl2fxMb0K/tfTmgNYaqsdq+sFjIGcm58x/x
+ofdd59F2PwNQ8SwFFhgX6jIqQScmAmchYrVWKAyDKCaEry/YOOrEIGA1Jz+qdJRb
++lXq/aMxBwPrk1jOareTH3B0QdYFqJ8Z0ht7EjHKpIkv/EKtVZ/yeLP80swVdCg9
+N9XBFGMz2WGzBpyChtWqQwk8aamZ5dWNvx/vjXLQUp1I5anIf7V+szuxtPo2RR9R
+j6Ks5aY2rf9QGqFJtiUhcMisx062F13f2VpExkDmPzSxZ0zCYafjelpdJLj9TBs1
+LOeXfLB5
+=05ep
 -----END PGP SIGNATURE-----
 
---fMUJCmjmCzsUcew5--
+--BY8FiHmdSAn/cSk/--
