@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F009C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:51:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7344C3ABAB
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:51:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3F0F8291D;
-	Tue, 29 Apr 2025 15:51:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 346E882958;
+	Tue, 29 Apr 2025 15:51:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SMJjhqX1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZbYLr57J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FA028293C; Tue, 29 Apr 2025 15:51:33 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id AFD128272A; Tue, 29 Apr 2025 15:51:34 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9EE18272A
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:51:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3900D8291D
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:51:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53TDpToK3682311
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53TDpURS3093369
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 29 Apr 2025 08:51:29 -0500
+ Tue, 29 Apr 2025 08:51:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1745934689;
- bh=pUHqG5K/jMB1f0Yq0WusebZ2T3Z3cptgtFFmm1nMgEg=;
- h=From:To:CC:Subject:Date;
- b=SMJjhqX1EMBbCOmoXYwRvoxLdeI7HswhbzEV59mM4yzEo/qlMwtrXOuHTybQy5MA+
- Dow2PlfYTQZSio6J39TOvpZVbvGZfy6LGIXFtgFzZ7s/9C6o7OTdQoik6fmajydv8g
- bh1fcl4l7ZwfX5Xi1ZMq+1SEjxlhesUZ5kKy9XcY=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53TDpS4q004875
+ s=ti-com-17Q1; t=1745934690;
+ bh=oB/f/8jLigCWXVHRT82lvQBwjVToWpf55oEAuTwAQew=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=ZbYLr57JF2+bWq4TW3zi1Smhh6BhXjeoq9cbMseZfAhXeVl22ANi4RVArgpm98lPy
+ 8hQMxs1ibXfE9hrqXbtBFktfIZoZJdzPIKS8vreO+92076BgExExRIu+Y5dMfkuS1N
+ 3dEnr/QQbS6x3kOsrhuymInP5Ok4xFa+3sAQJMhI=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53TDpUq4042101
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 29 Apr 2025 08:51:28 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 29 Apr 2025 08:51:30 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 29
- Apr 2025 08:51:28 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 08:51:30 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 29 Apr 2025 08:51:28 -0500
+ Frontend Transport; Tue, 29 Apr 2025 08:51:30 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53TDpRgi048228;
- Tue, 29 Apr 2025 08:51:28 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53TDpTZa048253;
+ Tue, 29 Apr 2025 08:51:29 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH v1 1/2] doc: ti: update bash code-block directives to prompt
-Date: Tue, 29 Apr 2025 19:21:07 +0530
-Message-ID: <20250429135109.631201-1-anshuld@ti.com>
+Subject: [PATCH v1 2/2] doc: ti: k3: add language for code-block directive
+Date: Tue, 29 Apr 2025 19:21:08 +0530
+Message-ID: <20250429135109.631201-2-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250429135109.631201-1-anshuld@ti.com>
+References: <20250429135109.631201-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -77,168 +79,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The code-block directive requires addition of the prompt symbol for each
-line, using the prompt directive instead allows for auto insertion of
-the symbol per line[1].
+The code-block directive supports the optional language property which
+enables syntax highlighting for the block[1].
 
-For the readers, the character added by the prompt directive is
-un-selectable i.e the entire line can be more easily selected for copy
-pasting etc. Whereas with code-block, the prompt symbol like "$" is also
-selectable which is usually not the intent.
+This patch adds the relevant language property for code-blocks in k3
+docs.
 
-This is mostly a QoL addition + making the docs consistent since k3.rst
-makes use of prompt directives which these board docs include from.
-
-[1]: https://pypi.org/project/sphinx-prompt/
+[1]:
+https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-code-block
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- doc/board/ti/am62ax_sk.rst  | 20 ++++++++++----------
- doc/board/ti/am62px_sk.rst  | 18 +++++++++---------
- doc/board/ti/j722s_evm.rst  | 14 +++++++-------
- doc/board/ti/j784s4_evm.rst | 16 ++++++++--------
- 4 files changed, 34 insertions(+), 34 deletions(-)
+ doc/board/ti/k3.rst | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
-index 262340ef59a..43a1db68873 100644
---- a/doc/board/ti/am62ax_sk.rst
-+++ b/doc/board/ti/am62ax_sk.rst
-@@ -81,16 +81,16 @@ Set the variables corresponding to this platform:
- .. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index 0deb4d768f9..b79f1526446 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -460,7 +460,7 @@ The Kernel FIT Image that we have has Kernel Image, DTB and the DTBOs.  It
+ supports packing multiple images and configurations that allow you to
+ choose any configuration at runtime to boot from.
  
-- $ export UBOOT_CFG_CORTEXR=am62ax_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=am62ax_evm_a53_defconfig
-- $ export TFA_BOARD=lite
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-am62ax
-- $ # we dont use any extra OPTEE parameters
-- $ unset OPTEE_EXTRA_ARGS
-+   export UBOOT_CFG_CORTEXR=am62ax_evm_r5_defconfig
-+   export UBOOT_CFG_CORTEXA=am62ax_evm_a53_defconfig
-+   export TFA_BOARD=lite
-+   # we dont use any extra TFA parameters
-+   unset TFA_EXTRA_ARGS
-+   export OPTEE_PLATFORM=k3-am62ax
-+   # we dont use any extra OPTEE parameters
-+   unset OPTEE_EXTRA_ARGS
+-.. code-block::
++.. code-block:: dts
  
- 1. Trusted Firmware-A:
+     /dts-v1/;
  
-@@ -212,6 +212,6 @@ detailed setup information.
+@@ -484,7 +484,7 @@ choose any configuration at runtime to boot from.
  
- To start OpenOCD and connect to the board
+ * Sample Images
  
--.. code-block:: bash
-+.. prompt:: bash
+-.. code-block::
++.. code-block:: dts
  
-   openocd -f board/ti_am62a7evm.cfg
-diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-index 99bdc034869..a07d6a4da45 100644
---- a/doc/board/ti/am62px_sk.rst
-+++ b/doc/board/ti/am62px_sk.rst
-@@ -91,15 +91,15 @@ Set the variables corresponding to this platform:
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
+     kernel-1 {
+             description = "Linux kernel";
+@@ -533,7 +533,7 @@ corresponding configuration node as follows.
  
--.. code-block:: bash
-+.. prompt:: bash
+ * Sample Configurations
  
-- $ export UBOOT_CFG_CORTEXR=am62px_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=am62px_evm_a53_defconfig
-- $ export TFA_BOARD=lite
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-am62x
-- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
-+   export UBOOT_CFG_CORTEXR=am62px_evm_r5_defconfig
-+   export UBOOT_CFG_CORTEXA=am62px_evm_a53_defconfig
-+   export TFA_BOARD=lite
-+   # we dont use any extra TFA parameters
-+   unset TFA_EXTRA_ARGS
-+   export OPTEE_PLATFORM=k3-am62x
-+   export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
+-.. code-block::
++.. code-block:: dts
  
- .. am62px_evm_rst_include_start_build_steps
+     conf-ti_k3-j721e-common-proc-board.dtb {
+             description = "Linux kernel, FDT blob";
+@@ -585,7 +585,7 @@ Generating the fitImage
  
-@@ -312,6 +312,6 @@ detailed setup information.
+         For e.g
  
- To start OpenOCD and connect to the board
+-        .. code-block::
++        .. code-block:: diff
  
--.. code-block:: bash
-+.. prompt:: bash
+             diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+             index a5c1df7e0054..6d0126d955ef 100644
+@@ -605,7 +605,7 @@ Generating the fitImage
  
-   openocd -f board/ti_am62pevm.cfg
-diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
-index e5a1be50c4f..0ca3399f263 100644
---- a/doc/board/ti/j722s_evm.rst
-+++ b/doc/board/ti/j722s_evm.rst
-@@ -68,13 +68,13 @@ Set the variables corresponding to this platform:
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
+         For e.g
  
--.. code-block:: bash
-+.. prompt:: bash
+-        .. code-block::
++        .. code-block:: diff
  
-- $ export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
-- $ export TFA_BOARD=lite
-- $ export OPTEE_PLATFORM=k3-am62x
-- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
-+   export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
-+   export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
-+   export TFA_BOARD=lite
-+   export OPTEE_PLATFORM=k3-am62x
-+   export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
- 
- .. j722s_evm_rst_include_start_build_steps
- 
-@@ -259,6 +259,6 @@ detailed setup information.
- 
- To start OpenOCD and connect to the board
- 
--.. code-block:: bash
-+.. prompt:: bash
- 
-   openocd -f board/ti_j722sevm.cfg
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-index a1e927cb743..349fb394d74 100644
---- a/doc/board/ti/j784s4_evm.rst
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -81,14 +81,14 @@ Set the variables corresponding to this platform:
- .. include::  k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash
- 
-- $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
-- $ export TFA_BOARD=j784s4
-- $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-- $ export OPTEE_PLATFORM=k3-j784s4
-- $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-+   export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
-+   export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
-+   export TFA_BOARD=j784s4
-+   export TFA_EXTRA_ARGS="K3_USART=0x8"
-+   export OPTEE_PLATFORM=k3-j784s4
-+   export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
- 
- .. j784s4_evm_rst_include_start_build_steps
- 
-@@ -326,6 +326,6 @@ Debugging U-Boot on J784S4-EVM and AM69-SK
- To start OpenOCD and connect to J784S4-EVM or AM69-SK board, use the
- following.
- 
--.. code-block:: bash
-+.. prompt:: bash
- 
-   openocd -f board/ti_j784s4evm.cfg
+             diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+                   index 673be646b1e3..752fa805fe8d 100644
 -- 
 2.49.0
 
