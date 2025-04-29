@@ -4,59 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 229DAC369CB
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 08:04:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26659C369CB
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 08:05:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FA6980EFB;
-	Tue, 29 Apr 2025 10:04:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 9EFCA82075;
+	Tue, 29 Apr 2025 10:05:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hQlafwq2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vNCx2b8F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5326E82075; Tue, 29 Apr 2025 10:04:51 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BCB09820EB; Tue, 29 Apr 2025 10:05:15 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 237C980BAD
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 10:04:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 2D22F80BAD
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 10:05:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 28ACE43D27;
- Tue, 29 Apr 2025 08:04:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9380BC4CEE3;
- Tue, 29 Apr 2025 08:04:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1745913886;
- bh=b9BK9xcbs37nW1uigghFeh7aQ/C0uDCv5tiZULGt4M4=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=hQlafwq2ASUrV8USdAJ3uqlotR530c4+9chKf2yOzvf6J8SZLJcHouYu+YuY0snz6
- cKN2xdzP77/J8h52b09CoXcjgjdzQjh6uvTwxAy5O9au98fPRKmzPySw9RZoYg5CKe
- hZWc9tIdQ6vWeSZ7WTN18PKENKJv9PLGIWiYjbDD7P8FNPDD9kNpMdTOVu1zt6UvYn
- FkkLS4YJFZ3vWQ6kNhfKHKlJQ5rPde9nGdjVwzfU19kF/nVeKZWF1pI39JMoIp6Fbc
- MhbWSaDdCEYb1f0sCnpWXwuj0SGQDq27XTSjJcwSQ1ZXeBREk4ZzH/aEHgVm1gMby2
- gHft1Nglph+Sg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: neil.armstrong@linaro.org, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>, Mattijs
- Korpershoek <mkorpershoek@baylibre.com>, Dmitrii Merkurev
- <dimorinny@google.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH RFT v2 1/3] fastboot: blk: introduce fastboot block
- flashing support
-In-Reply-To: <359a5f7c-4c65-4813-be8e-97e12c7786ae@linaro.org>
-References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
- <20250409-topic-fastboot-blk-v2-1-c676f21d414f@linaro.org>
- <877c3cgwsf.fsf@kernel.org>
- <359a5f7c-4c65-4813-be8e-97e12c7786ae@linaro.org>
-Date: Tue, 29 Apr 2025 10:04:42 +0200
-Message-ID: <87zffzwfz9.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-703cd93820fso49155237b3.2
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 01:05:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745913912; x=1746518712; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5n3g9/gXeLpoCZdUVd6I7IpvXgfHQCsS2CixWa42Ua8=;
+ b=vNCx2b8FdgahkJi7PtJk3mq+NAFpAJK3tQDW57H37HtaJzXHhQUqadlxfYMpZS5hUK
+ ch5cjnsguScf9m6mALGQo0g3WVeBtsbLLFcWtSIFJfZv5o7UBBIf+yd9Q1BI/3iyqasI
+ KOdysmcwSEkOtsYq3A8+6RuEPUJwywodY2C2jy4UxlzkqXJlb4zf5OTyw6tQEGJ+/+OL
+ KSD2UkI7nR1SLqDBzzEZva4MiADjc8VBhgSpfOZhQm406TarKF4aWTxJG5CsXzIq4uLI
+ 4qzGAs9GLHm+iZnzU0Q17qugi1Hhqe6traXs/mRElujsa8CMDRmypxckcOK+B9GnSkzg
+ l98A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745913912; x=1746518712;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5n3g9/gXeLpoCZdUVd6I7IpvXgfHQCsS2CixWa42Ua8=;
+ b=T6AxiUG1wIRB8VtrK2ltluf6qATCgfdtNveNBqXObiULVMm/J18bgJkZh5uzdtj5zi
+ oXBZoHNYODwYmHWEhSRVykstnxJHOhK1w/AKjQMSk0/1pmRw5mcWjGwGU5/BlaHMFLwM
+ taGi7PwKxnKSkYNrAj6oG1HM/ezQN2QnhxJ7ZPIZjhABA0PK66itWSAT1wy6ww5mA86C
+ fs1KnTNP1lU9J8jUqC3ztNXDj3dlalZmdhoRrSYyXQ5g8/y1kqMurhIMEOfVtHMdrZU6
+ nvf+FWt6ElIFsbhrb4M8VldL2rPt8z7RdwgWVnv1RYBGELffd5c4PED6naW2RcgQHZ7m
+ 7Hog==
+X-Gm-Message-State: AOJu0YwTivYb0KR/mlgCd8/FgpzCruhJvJRdU4SI2GXLJbbE8IIPRXIz
+ U3SmBGa8Rdp+7tj4t5mvY7x/gPid58MpkZm12+LrgMgVCNfGCRQqZNN/ZpEGcTtkCwCX6DbOlFm
+ BxNUEFqtaiXMVbPyjZboC6/brh81QigAHC+Yi/Q==
+X-Gm-Gg: ASbGncvqPGaFJLm2Zp9i7H30KvdNWj6EWoPL9YdHpiFkjVfuWuX/JZiYHtC2NsPUEKv
+ /PyZvTg5ImzI0Z2GvnJXdKkvqTNztf5KwlHc4NEwDANdZwDTBEmt2hYgFDhif28EhUszB6HvAkT
+ OcHPZbxyUMV/DjR1PM1theN2KCDa6WnmErHA==
+X-Google-Smtp-Source: AGHT+IFo9rZkmVAGCArBGv4NPsqWNC8el8aIxafLaJOPJsD3iPj7eR+0dCxSX7NEQDWhtxcmqdy8W2OUlGAjNK7/HEU=
+X-Received: by 2002:a05:690c:3605:b0:6fd:4900:bae1 with SMTP id
+ 00721157ae682-7085f04b8b6mr175034217b3.1.1745913911907; Tue, 29 Apr 2025
+ 01:05:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20250428080112.108658-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250428080112.108658-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 29 Apr 2025 11:04:36 +0300
+X-Gm-Features: ATxdqUGe4HbqUM8KIQAhimgHEkn3VFuqHZu0MU-9PrWuU3kYBqQIk31dPD4GE5k
+Message-ID: <CAC_iWjJFHU+ysJKcFGM5829QqimQn6MdimiUhf8-chnwv0jPuQ@mail.gmail.com>
+Subject: Re: [RFC 1/1] efi_loader: add dbginfodump.efi
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de, Ying-Chun Liu <paul.liu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,321 +89,410 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On mer., avril 23, 2025 at 09:38, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+Hello Heinrich
 
-> Hi,
+On Mon, 28 Apr 2025 at 11:01, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On 22/04/2025 15:17, Mattijs Korpershoek wrote:
->> Hi Neil,
->> 
->> Thank you for the patch.
+> Provide a test application to dump the EFI_DEBUG_IMAGE_INFO_TABLE
+> as implemented in EDK II.
 >
-> Thx for the review
->
->> 
->> On mer., avril 09, 2025 at 09:58, neil.armstrong@linaro.org wrote:
->> 
->>> From: Dmitrii Merkurev <dimorinny@google.com>
->>>
->>> Introduce fastboot block flashing functions and helpers
->>> to be shared with the MMC implementation.
->>>
->>> The write logic comes from the mmc implementation, while
->>> the partition lookup is much simpler and could be extended.
->>>
->>> For the erase logic, allmost no block drivers exposes the
->>> erase operation, except mmc & virtio, so in order to allow
->>> erasiong any partition a soft-erase logic has been added
->>> to write zero-ed buffers in a loop.
->>>
->>> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
->>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>> ---
->>>   drivers/fastboot/Kconfig    |  20 ++-
->>>   drivers/fastboot/Makefile   |   4 +-
->>>   drivers/fastboot/fb_block.c | 313 ++++++++++++++++++++++++++++++++++++++++++++
->>>   include/fb_block.h          | 104 +++++++++++++++
->>>   4 files changed, 438 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
->>> index 1eb460f5a02a87089d85b252375202d9acaec9fa..76b35d8419e02a7f1d36988fbdac190b10bff35e 100644
->>> --- a/drivers/fastboot/Kconfig
->>> +++ b/drivers/fastboot/Kconfig
->>> @@ -92,7 +92,7 @@ config FASTBOOT_USB_DEV
->>>   config FASTBOOT_FLASH
->>>   	bool "Enable FASTBOOT FLASH command"
->>>   	default y if ARCH_SUNXI || ARCH_ROCKCHIP
->>> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
->>> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
->>>   	select IMAGE_SPARSE
->>>   	help
->>>   	  The fastboot protocol includes a "flash" command for writing
->>> @@ -114,12 +114,16 @@ choice
->>>   
->>>   config FASTBOOT_FLASH_MMC
->>>   	bool "FASTBOOT on MMC"
->>> -	depends on MMC
->>> +	depends on MMC && BLK
->>>   
->>>   config FASTBOOT_FLASH_NAND
->>>   	bool "FASTBOOT on NAND"
->>>   	depends on MTD_RAW_NAND && CMD_MTDPARTS
->>>   
->>> +config FASTBOOT_FLASH_BLOCK
->>> +	bool "FASTBOOT on block device"
->>> +	depends on BLK
->>> +
->>>   endchoice
->>>   
->>>   config FASTBOOT_FLASH_MMC_DEV
->>> @@ -194,6 +198,18 @@ config FASTBOOT_MMC_USER_NAME
->>>   	  defined here.
->>>   	  The default target name for erasing EMMC_USER is "mmc0".
->>>   
->>> +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
->>> +	string "Define FASTBOOT block interface name"
->>> +	depends on FASTBOOT_FLASH_BLOCK
->>> +	help
->>> +	  "Fastboot block interface name (mmc, virtio, etc)"
->> 
->> Maybe use another example in the help mmc. for MMC, we have FASTBOOT_FLASH_MMC.
->> FASTBOOT_FLASH_MMC has more features than FASTBOOT_FLASH_BLOCK_INTERFACE="mmc".
->> 
->> For example, boot partition labels.
->> 
->> When using this diff:
->> 
->> diff --git a/configs/khadas-vim3_android_defconfig b/configs/khadas-vim3_android_defconfig
->> index b77a44ce859b..bfe4db90963c 100644
->> --- a/configs/khadas-vim3_android_defconfig
->> +++ b/configs/khadas-vim3_android_defconfig
->> @@ -65,8 +65,9 @@ CONFIG_BUTTON_ADC=y
->>   CONFIG_USB_FUNCTION_FASTBOOT=y
->>   CONFIG_FASTBOOT_BUF_ADDR=0x6000000
->>   CONFIG_FASTBOOT_FLASH=y
->> -CONFIG_FASTBOOT_FLASH_MMC_DEV=2
->> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->> +CONFIG_FASTBOOT_FLASH_BLOCK=y
->> +CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="mmc"
->> +CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=2
->>   CONFIG_DM_I2C=y
->>   CONFIG_SYS_I2C_MESON=y
->>   CONFIG_MMC_MESON_GX=y
->> 
->> We cannot flash the "bootloader" partition:
->> $ fastboot flash bootloader u-boot_kvim3_noab.bin
->> Warning: skip copying bootloader image avb footer (bootloader partition size: 0, bootloader image size: 1285488).
->> Sending 'bootloader' (1255 KB)                     OKAY [  0.054s]
->> Writing 'bootloader'                               FAILED (remote: 'failed to get partition info')
->> fastboot: error: Command failed
->> 
->> If we do want to merge both (at some later time) the above should be supported.
->
-> Right, I don't think we want to merge them, and boot partitions are an MMC specific feature,
-> I don't think any other storages has those specific hardware boot partitions.
 
-Yes, indeed. We should not want to merge all the code because we would
-end up with missing features for MMC.
+I have no objections is adding the efi app. It won't break anything.
+
+> The implementation in EDK II does not match the description in the
+> UEFI specification:
+>
+> In EDK II field EfiDebugImageInfoTable in EFI_DEBUG_IMAGE_INFO_TABLE_HEADER
+> is an array of pointers to EFI_DEBUG_IMAGE_INFO structures while the
+> specification says "A pointer to the first element of an array of
+> EFI_DEBUG_IMAGE_INFO structures."
+
+Hmm where? The definition in EDK2 is
+
+typedef struct {
+  volatile UINT32         UpdateStatus;
+  UINT32                  TableSize;
+  EFI_DEBUG_IMAGE_INFO    *EfiDebugImageInfoTable;
+} EFI_DEBUG_IMAGE_INFO_TABLE_HEADER;
+
+So it's still a pointer to the first element and later EDKII treats it
+as an array of EFI_DEBUG_IMAGE_INFO elements, which seems to be what
+the spec expects.
+
+
+Cheers
+/Ilias
 
 >
-> In any case, we can still just name the boot partition "bootloader" and raw flash it.
-
-But using raw partition descriptors[1] does not work with the above
-
-[1] https://docs.u-boot.org/en/latest/android/fastboot.html#raw-partition-descriptors
-
+> EFI_DEBUG_IMAGE_INFO is not packed in contrast to many other EFI
+> structures.
 >
->> 
->>> +
->>> +config FASTBOOT_FLASH_BLOCK_DEVICE_ID
->>> +	int "Define FASTBOOT block device id"
->>> +	depends on FASTBOOT_FLASH_BLOCK
->>> +	help
->>> +	  "Fastboot block device id"
->> 
->> This is similar as CONFIG_FASTBOOT_FLASH_MMC_DEV, no?
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/Makefile      |   1 +
+>  lib/efi_loader/dbginfodump.c | 340 +++++++++++++++++++++++++++++++++++
+>  2 files changed, 341 insertions(+)
+>  create mode 100644 lib/efi_loader/dbginfodump.c
 >
-> No, the MMC one makes the mmc type implicit, while the block one
-> can target any block device (and mmc)
-
-I understand, but when CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="mmc",
-CONFIG_FASTBOOT_FLASH_MMC_DEV and FASTBOOT_FLASH_BLOCK_DEVICE_ID are the
-same thing.
-
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index cf050e5385d..0ff068b4307 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -21,6 +21,7 @@ ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+>  apps-y += dtbdump
+>  endif
+>  apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
+> +apps-y += dbginfodump
 >
->> 
->> To me, it's confusing to have similar KConfig entries based on interface
->> type.
->> 
->> If we really want to do it this way, then we should add a safeguard in
->> the code: test if FASTBOOT_FLASH_BLOCK_INTERFACE_NAME is "mmc" and if so, add a
->> warning to recommend using FASTBOOT_FLASH_MMC instead.
->> 
->> What's your opinion on this?
+>  obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+>  obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+> diff --git a/lib/efi_loader/dbginfodump.c b/lib/efi_loader/dbginfodump.c
+> new file mode 100644
+> index 00000000000..8e6ed637836
+> --- /dev/null
+> +++ b/lib/efi_loader/dbginfodump.c
+> @@ -0,0 +1,340 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Copyright 2020, Heinrich Schuchardt <xypron.glpk@gmx.de>
+> + *
+> + * dbginfodump.efi prints out the content of the EFI_DEBUG_IMAGE_INFO_TABLE.
+> + * to a file.
+> + */
+> +
+> +#include <efi_api.h>
+> +
+> +#define BUFFER_SIZE 64
+> +
+> +static struct efi_simple_text_output_protocol *cerr;
+> +static struct efi_simple_text_output_protocol *cout;
+> +static struct efi_simple_text_input_protocol *cin;
+> +static efi_handle_t handle;
+> +static struct efi_system_table *systable;
+> +static struct efi_boot_services *bs;
+> +
+> +static efi_guid_t guid_device_path_to_text_protocol =
+> +       EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID;
+> +
+> +static struct efi_device_path_to_text_protocol *device_path_to_text;
+> +
+> +/* EFI_DEBUG_IMAGE_INFO_TAB */
+> +static const efi_guid_t dbg_info_guid =
+> +       EFI_GUID(0x49152E77, 0x1ADA, 0x4764, 0xB7, 0xA2,
+> +                0x7A, 0xFE, 0xFE, 0xD9, 0x5E, 0x8B);
+> +
+> +struct dbg_info {
+> +       u32 type;
+> +       struct efi_loaded_image *info;
+> +       efi_handle_t handle;
+> +};
+> +
+> +struct dbg_info_header {
+> +       u32 status;
+> +       u32 size;
+> +       struct dbg_info **info;
+> +};
+> +
+> +/**
+> + * print() - print string
+> + *
+> + * @string:    text
+> + */
+> +static void print(u16 *string)
+> +{
+> +       cout->output_string(cout, string);
+> +}
+> +
+> +/**
+> + * error() - print error string
+> + *
+> + * @string:    error text
+> + */
+> +static void error(u16 *string)
+> +{
+> +       cout->set_attribute(cout, EFI_LIGHTRED | EFI_BACKGROUND_BLACK);
+> +       print(string);
+> +       cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
+> +}
+> +
+> +/**
+> + * printu() - print unsigned
+> + *
+> + * @val:       value to print
+> + */
+> +static void printu(u32 val)
+> +{
+> +       u16 str[19] = u"0x";
+> +       u16 *ptr = &str[2];
+> +       u16 ch;
+> +
+> +       for (ssize_t i = 8 * sizeof(u32) - 4; i >= 0; i -= 4) {
+> +               ch = (val >> i & 0xf) + '0';
+> +               if (ch > '9')
+> +                       ch += 'a' - '9' - 1;
+> +               *ptr++ = ch;
+> +       }
+> +       *ptr = 0;
+> +       print(str);
+> +}
+> +
+> +/**
+> + * printp() - print pointer
+> + *
+> + * @p: pointer
+> + */
+> +static void printp(void *p)
+> +{
+> +       u16 str[19] = u"0x";
+> +       u16 *ptr = &str[2];
+> +       u16 ch;
+> +
+> +       for (ssize_t i = 8 * sizeof(void *) - 4; i >= 0; i -= 4) {
+> +               ch = ((uintptr_t)p >> i & 0xf) + '0';
+> +               if (ch > '9')
+> +                       ch += 'a' - '9' - 1;
+> +               *ptr++ = ch;
+> +       }
+> +       *ptr = 0;
+> +       print(str);
+> +}
+> +
+> +/**
+> + * efi_input() - read string from console
+> + *
+> + * @buffer:            input buffer
+> + * @buffer_size:       buffer size
+> + * Return:             status code
+> + */
+> +static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
+> +{
+> +       struct efi_input_key key = {0};
+> +       efi_uintn_t index;
+> +       efi_uintn_t pos = 0;
+> +       u16 outbuf[2] = u" ";
+> +       efi_status_t ret;
+> +
+> +       /* Drain the console input */
+> +       ret = cin->reset(cin, true);
+> +       *buffer = 0;
+> +       for (;;) {
+> +               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
+> +               if (ret != EFI_SUCCESS)
+> +                       continue;
+> +               ret = cin->read_key_stroke(cin, &key);
+> +               if (ret != EFI_SUCCESS)
+> +                       continue;
+> +               switch (key.scan_code) {
+> +               case 0x17: /* Escape */
+> +                       print(u"\r\nAborted\r\n");
+> +                       return EFI_ABORTED;
+> +               default:
+> +                       break;
+> +               }
+> +               switch (key.unicode_char) {
+> +               case 0x08: /* Backspace */
+> +                       if (pos) {
+> +                               buffer[pos--] = 0;
+> +                               print(u"\b \b");
+> +                       }
+> +                       break;
+> +               case 0x0a: /* Linefeed */
+> +               case 0x0d: /* Carriage return */
+> +                       print(u"\r\n");
+> +                       return EFI_SUCCESS;
+> +               default:
+> +                       break;
+> +               }
+> +               /* Ignore surrogate codes */
+> +               if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
+> +                       continue;
+> +               if (key.unicode_char >= 0x20 &&
+> +                   pos < buffer_size - 1) {
+> +                       *outbuf = key.unicode_char;
+> +                       buffer[pos++] = key.unicode_char;
+> +                       buffer[pos] = 0;
+> +                       print(outbuf);
+> +               }
+> +       }
+> +}
+> +
+> +/**
+> + * skip_whitespace() - skip over leading whitespace
+> + *
+> + * @pos:       UTF-16 string
+> + * Return:     pointer to first non-whitespace
+> + */
+> +static u16 *skip_whitespace(u16 *pos)
+> +{
+> +       for (; *pos && *pos <= 0x20; ++pos)
+> +               ;
+> +       return pos;
+> +}
+> +
+> +/**
+> + * starts_with() - check if @string starts with @keyword
+> + *
+> + * @string:    string to search for keyword
+> + * @keyword:   keyword to be searched
+> + * Return:     true fi @string starts with the keyword
+> + */
+> +static bool starts_with(u16 *string, u16 *keyword)
+> +{
+> +       for (; *keyword; ++string, ++keyword) {
+> +               if (*string != *keyword)
+> +                       return false;
+> +       }
+> +       return true;
+> +}
+> +
+> +/**
+> + * do_help() - print help
+> + */
+> +static void do_help(void)
+> +{
+> +       error(u"dump       - print debug info table\r\n");
+> +       error(u"exit       - exit the shell\r\n");
+> +}
+> +
+> +/**
+> + * get_dbg_info_table() - get debug info table
+> + *
+> + * Return:     debug info table or NULL
+> + */
+> +static void *get_dbg_info(void)
+> +{
+> +       void *dbg = NULL;
+> +       efi_uintn_t i;
+> +
+> +       for (i = 0; i < systable->nr_tables; ++i) {
+> +               if (!memcmp(&systable->tables[i].guid, &dbg_info_guid,
+> +                           sizeof(efi_guid_t))) {
+> +                       dbg = systable->tables[i].table;
+> +                       break;
+> +               }
+> +       }
+> +       return dbg;
+> +}
+> +
+> +/**
+> + * print_info() - print loaded image protocol
+> + */
+> +static void print_info(struct efi_loaded_image *info)
+> +{
+> +       print(u"  Address: [");
+> +       printp(info->image_base);
+> +       print(u", ");
+> +       printp(info->image_base + info->image_size - 1);
+> +       print(u"]\r\n");
+> +       if (device_path_to_text && info->file_path) {
+> +               u16 *string;
+> +
+> +               string = device_path_to_text->convert_device_path_to_text(
+> +                                       info->file_path, true, false);
+> +               if (!string) {
+> +                       error(u"ConvertDevicePathToText failed");
+> +               } else {
+> +                       print(u"  File: ");
+> +                       print(string);
+> +               }
+> +               print(u"\r\n");
+> +       }
+> +}
+> +
+> +/**
+> + * do_dump() - print debug info table
+> + */
+> +static efi_status_t do_dump(void)
+> +{
+> +       struct dbg_info_header *dbg;
+> +
+> +       dbg = get_dbg_info();
+> +       if (!dbg) {
+> +               error(u"Debug info table not found\r\n");
+> +               return EFI_NOT_FOUND;
+> +       }
+> +       if (dbg->status & 0x01) {
+> +               error(u"Update in progress\r\n");
+> +               return EFI_LOAD_ERROR;
+> +       }
+> +       if (dbg->status & 0x02)
+> +               print(u"Modified\r\n");
+> +       print(u"Number of entries: ");
+> +       printu(dbg->size);
+> +       print(u"\r\n");
+> +
+> +       for (u32 i = 0; i < dbg->size; ++i) {
+> +               struct dbg_info *info = dbg->info[i];
+> +
+> +               print(u"Info type ");
+> +               printu(info->type);
+> +               print(u"\r\n");
+> +               if (info->type != 1)
+> +                       continue;
+> +               print_info(info->info);
+> +               print(u"  Handle: ");
+> +               printp(info->handle);
+> +               print(u"\r\n");
+> +       }
+> +
+> +       return EFI_SUCCESS;
+> +}
+> +
+> +/**
+> + * efi_main() - entry point of the EFI application.
+> + *
+> + * @handle:    handle of the loaded image
+> + * @systab:    system table
+> + * Return:     status code
+> + */
+> +efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
+> +                            struct efi_system_table *systab)
+> +{
+> +       efi_status_t ret;
+> +
+> +       handle = image_handle;
+> +       systable = systab;
+> +       cerr = systable->std_err;
+> +       cout = systable->con_out;
+> +       cin = systable->con_in;
+> +       bs = systable->boottime;
+> +
+> +       cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
+> +       cout->clear_screen(cout);
+> +       cout->set_attribute(cout, EFI_WHITE | EFI_BACKGROUND_BLACK);
+> +       print(u"Debug Info Table Dump\r\n=====================\r\n\r\n");
+> +       cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
+> +
+> +       ret = bs->locate_protocol(&guid_device_path_to_text_protocol,
+> +                                 NULL, (void **)&device_path_to_text);
+> +       if (ret != EFI_SUCCESS) {
+> +               error(u"No device path to text protocol\r\n");
+> +               device_path_to_text = NULL;
+> +       }
+> +
+> +       for (;;) {
+> +               u16 command[BUFFER_SIZE];
+> +               u16 *pos;
+> +               efi_uintn_t ret;
+> +
+> +               print(u"=> ");
+> +               ret = efi_input(command, sizeof(command));
+> +               if (ret == EFI_ABORTED)
+> +                       break;
+> +               pos = skip_whitespace(command);
+> +               if (starts_with(pos, u"exit"))
+> +                       break;
+> +               else if (starts_with(pos, u"dump"))
+> +                       do_dump();
+> +               else
+> +                       do_help();
+> +       }
+> +
+> +       cout->set_attribute(cout, EFI_LIGHTGRAY | EFI_BACKGROUND_BLACK);
+> +       cout->clear_screen(cout);
+> +       return EFI_SUCCESS;
+> +}
+> --
+> 2.48.1
 >
-> Perhaps, not sure it's really problematic
-
-Maybe not for you, because you have the history on this project. But to
-a newcomer, having both options seems a bit strange.
-
-If we look at how the blk-uclass is implemented, it inconsisent with how
-it's done with fastboot.
-
-longer term, I'd rather deprecate the CONFIG_FASTBOOT_FLASH_MMC_DEV
-entry so that we use FASTBOOT_FLASH_BLOCK_INTERFACE_NAME for everything
-(including mmc)
-
-I understand that you might not have the time for doing so, so as a
-first step can we add a (printf) warning in the fastboot block layer
-when the interface name is mmc ?
-
->
->> 
->>> +
->>>   config FASTBOOT_GPT_NAME
->>>   	string "Target name for updating GPT"
->>>   	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
->>> diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
->>> index 048af5aa823436956142a536c5f7dcf1a8948726..91e98763e8eab84ccd9b8e5354ff1419f61ef372 100644
->>> --- a/drivers/fastboot/Makefile
->>> +++ b/drivers/fastboot/Makefile
->>> @@ -3,5 +3,7 @@
->>>   obj-y += fb_common.o
->>>   obj-y += fb_getvar.o
->>>   obj-y += fb_command.o
->>> -obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
->>> +obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
->>> +# MMC reuses block implementation
->>> +obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
->>>   obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
->>> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
->>> new file mode 100644
->>> index 0000000000000000000000000000000000000000..e79429a9732c1da1ce88358747cf1cb9419cd12b
->>> --- /dev/null
->>> +++ b/drivers/fastboot/fb_block.c
->>> @@ -0,0 +1,313 @@
->>> +// SPDX-License-Identifier: BSD-2-Clause
->> 
->> Should this be GPL?
->
-> Very good qustion, I'm not the copyright holder, the original author is Dmitrii, not sure about
-> the legal things here.
->
-> Tom can you help ?
-
-I think we need Dmitrii to acknowledge publicly (on the list) it's okay
-to re-licence this.
-
-Dmitrii, are you okay to re-licence this code under GPL v2 (which is
-common licence for this project)
-
->
->> 
->> See:
->> https://docs.u-boot.org/en/latest/develop/sending_patches.html#notes
->> 
->>> +/*
->>> + * Copyright (C) 2024 The Android Open Source Project
->>> + */
->>> +
->>> +#include <blk.h>
->>> +#include <div64.h>
->>> +#include <fastboot-internal.h>
->>> +#include <fastboot.h>
->>> +#include <fb_block.h>
->>> +#include <image-sparse.h>
->>> +#include <part.h>
->>> +#include <malloc.h>
->>> +
->>> +/**
->>> + * FASTBOOT_MAX_BLOCKS_ERASE - maximum blocks to erase per derase call
->>> + *
->>> + * in the ERASE case we can have much larger buffer size since
->>> + * we're not transferring an actual buffer
->>> + */
->>> +#define FASTBOOT_MAX_BLOCKS_ERASE 1048576
->>> +/**
->>> + * FASTBOOT_MAX_BLOCKS_SOFT_ERASE - maximum blocks to software erase at once
->>> + */
->>> +#define FASTBOOT_MAX_BLOCKS_SOFT_ERASE 4096
->>> +/**
->>> + * FASTBOOT_MAX_BLOCKS_WRITE - maximum blocks to write per dwrite call
->>> + */
->>> +#define FASTBOOT_MAX_BLOCKS_WRITE 65536
->>> +
->>> +struct fb_block_sparse {
->>> +	struct blk_desc	*dev_desc;
->>> +};
->>> +
->>> +static lbaint_t fb_block_write(struct blk_desc *block_dev, lbaint_t start,
->>> +			       lbaint_t blkcnt, const void *buffer)
->>> +{
->>> +	lbaint_t blk = start;
->>> +	lbaint_t blks_written = 0;
->>> +	lbaint_t cur_blkcnt = 0;
->>> +	lbaint_t blks = 0;
->>> +	void *erase_buf = NULL;
->>> +	int erase_buf_blks = 0;
->>> +	int step = buffer ? FASTBOOT_MAX_BLOCKS_WRITE : FASTBOOT_MAX_BLOCKS_ERASE;
->>> +	int i;
->>> +
->>> +	for (i = 0; i < blkcnt; i += step) {
->>> +		cur_blkcnt = min((int)blkcnt - i, step);
->>> +		if (buffer) {
->>> +			if (fastboot_progress_callback)
->>> +				fastboot_progress_callback("writing");
->>> +			blks_written = blk_dwrite(block_dev, blk, cur_blkcnt,
->>> +						  buffer + (i * block_dev->blksz));
->>> +		} else {
->>> +			if (fastboot_progress_callback)
->>> +				fastboot_progress_callback("erasing");
->>> +
->>> +			if (!erase_buf) {
->>> +				blks_written = blk_derase(block_dev, blk, cur_blkcnt);
->>> +
->>> +				/* Allocate erase buffer if erase is not implemented */
->>> +				if ((long)blks_written == -ENOSYS) {
->>> +					erase_buf_blks = min_t(long, blkcnt,
->>> +							       FASTBOOT_MAX_BLOCKS_SOFT_ERASE);
->>> +					erase_buf = malloc(erase_buf_blks * block_dev->blksz);
->>> +					memset(erase_buf, 0, erase_buf_blks * block_dev->blksz);
->>> +
->>> +					printf("Slowly writing empty buffers due to missing erase operation\n");
->>> +				}
->>> +			}
->>> +
->>> +			/* Write 0s instead of using erase operation, inefficient but functional */
->>> +			if (erase_buf) {
->>> +				int j;
->>> +
->>> +				blks_written = 0;
->>> +				for (j = 0; j < cur_blkcnt; j += erase_buf_blks) {
->>> +					lbaint_t remain = min_t(lbaint_t, cur_blkcnt - j,
->>> +								erase_buf_blks);
->>> +
->>> +					blks_written += blk_dwrite(block_dev, blk + j,
->>> +								   remain, erase_buf);
->>> +					printf(".");
->> 
->> Can we move soft erase to a separate function? Here we already handle
->> normal block write and normal block erase. Having software erase as well
->> makes the function a bit too long/nested in my opinion.
->> 
->> I't also avoid writing things like:
->> 
->>      blks_written = blk_derase(block_dev, blk, cur_blkcnt);
->> 
->> Where blks_written actually means "amount of blocks that were erased".
->> 
->> Or maybe split write/erase to make each function do only one thing.
->
-> Sure, I'll move it to a separate function
-
-Great, thanks.
-
-[...]
-
->
->>>
->>> -- 
->>> 2.34.1
