@@ -4,83 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF98C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:50:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F009C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:51:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50C208283E;
-	Tue, 29 Apr 2025 15:50:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B3F0F8291D;
+	Tue, 29 Apr 2025 15:51:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PqVQjFuq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SMJjhqX1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 703D18291D; Tue, 29 Apr 2025 15:50:40 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D67F58272A
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:50:37 +0200 (CEST)
+ id 9FA028293C; Tue, 29 Apr 2025 15:51:33 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B9EE18272A
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:51:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-2d9b61e02d1so890510fac.2
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:50:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745934636; x=1746539436; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ifRdTJEMB33PfNiHoNPXG0qTcvull3450eanfNj7dnw=;
- b=PqVQjFuqQegyzrbxVfs1rpADlZ6WGQERW0/MalYvOjRKr0pe/e60b12bjLwtP1PG5Y
- jcwLDjjMiUzsqqrBDTzHb+2zDpZSwkppn4BEfKkSW5juSXMaoyiOZNuMugVEDpW9N9ie
- HXU+mpJwwhU2rWSBuaXXxUZ0tyPQFOMUNc8BE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745934636; x=1746539436;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ifRdTJEMB33PfNiHoNPXG0qTcvull3450eanfNj7dnw=;
- b=n5u2NXXW26bmHzsuZi2halSnUrCwTIUEDUvoezOkYvpaa1buMJVwktzYga87VcS5NN
- f6FMtPjv9Wqyh0YZMVpqx+FDvj7c/NWspHKZp/7Mao6NEhHqQcIYY3yChiKB0XM91u0u
- qh60MY8a8fkqU/YB/tMMXJqEmxCWocYnUU47eUvWncjfzStHfsQc3wJBsN4fDNvsCRwJ
- tTDAfR4wdPGdV20LtD+EMu/E9sotPu0Xzl1QsHjT/I6rhSrNa3Y4hM7SSaBNB+KBZvMj
- Tp513gbqM0SqXjk2dG3P2OxY2TOnrOiyOLXoo5bAE5TbczrBaEFtjeqL6tnEx12iJ+ZV
- 1MWA==
-X-Gm-Message-State: AOJu0Ywz4X3SBO8gXrz5lo5+zRJ24k+rAGbAAE3yh6K5dqeMzv4LXMn4
- Mk7H7UtBv6P1jZcd7H68gGazBiO6Tt+2dBaX7pxs8Ha9w5mdPugnTDdeTZZ4eEhYXNnIOa96o+7
- 4
-X-Gm-Gg: ASbGncujqNRN8GtU4Q+ZSYaksxbx6eFSbnuEycd/7zHrJt2YWxj7A/90GXClBv+9tui
- HD+alLXMdXI8m8BwJcg5AAY4er9qypd4pgtyMmKBL95xguNT/Q/XffsvoM5lGm44SAyAJs22Tw0
- OwQ5jSDqOQRurWeyofgrB72xwc4CtcjddR1FZ8rvJwnc5jNSI0ZTde1/Sz23OwqwKMtjeTDF8ZK
- DQd1kUTzae/RjjHRCHutc55fLWwCnVf0ZaIulDuUZyTDd1hL2QZ1T/a81a+yxLXPgVGrV0AKZMT
- NEHMBjopMdz2XpjivCGxL3+rFDSS19hS/s5gqvLextbAUGCVWU9xGQVtvOEpP2k4CwoyVT8GbhA
- MiQ==
-X-Google-Smtp-Source: AGHT+IFm0scUAU48Hk6WzcqWPr96yusClUAVhPvoFhHfvqS/zcpK7jgr+apU0FpBEAyMNnwQKUBfuA==
-X-Received: by 2002:a05:6870:8989:b0:2d4:ce45:6994 with SMTP id
- 586e51a60fabf-2d9be84759cmr7209484fac.24.1745934636550; 
- Tue, 29 Apr 2025 06:50:36 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2d973b7e883sm2800057fac.37.2025.04.29.06.50.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 06:50:35 -0700 (PDT)
-Date: Tue, 29 Apr 2025 07:50:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: Missing UTHREAD doc annotations
-Message-ID: <20250429135033.GB1261075@bill-the-cat>
-References: <20250428214040.GH5495@bill-the-cat>
- <9b009d13-1145-4eae-9051-3837f3793749@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53TDpToK3682311
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 29 Apr 2025 08:51:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745934689;
+ bh=pUHqG5K/jMB1f0Yq0WusebZ2T3Z3cptgtFFmm1nMgEg=;
+ h=From:To:CC:Subject:Date;
+ b=SMJjhqX1EMBbCOmoXYwRvoxLdeI7HswhbzEV59mM4yzEo/qlMwtrXOuHTybQy5MA+
+ Dow2PlfYTQZSio6J39TOvpZVbvGZfy6LGIXFtgFzZ7s/9C6o7OTdQoik6fmajydv8g
+ bh1fcl4l7ZwfX5Xi1ZMq+1SEjxlhesUZ5kKy9XcY=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53TDpS4q004875
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 29 Apr 2025 08:51:28 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 29
+ Apr 2025 08:51:28 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 29 Apr 2025 08:51:28 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53TDpRgi048228;
+ Tue, 29 Apr 2025 08:51:28 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v1 1/2] doc: ti: update bash code-block directives to prompt
+Date: Tue, 29 Apr 2025 19:21:07 +0530
+Message-ID: <20250429135109.631201-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="q1AzSAqhZuIsKrQ+"
-Content-Disposition: inline
-In-Reply-To: <9b009d13-1145-4eae-9051-3837f3793749@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,64 +77,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The code-block directive requires addition of the prompt symbol for each
+line, using the prompt directive instead allows for auto insertion of
+the symbol per line[1].
 
---q1AzSAqhZuIsKrQ+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+For the readers, the character added by the prompt directive is
+un-selectable i.e the entire line can be more easily selected for copy
+pasting etc. Whereas with code-block, the prompt symbol like "$" is also
+selectable which is usually not the intent.
 
-On Tue, Apr 29, 2025 at 12:16:03PM +0200, Jerome Forissier wrote:
-> Hi Tom,
->=20
-> On 4/28/25 23:40, Tom Rini wrote:
-> > Hey,
-> >=20
-> > As part of manually building the docs before doing -rc1, I saw the
-> > following:
-> > ./include/uthread.h:56: warning: cannot understand function prototype:
-> > 'enum uthread_mutex_state '
-> > ./include/uthread.h:64: warning: cannot understand function prototype:
-> > 'struct uthread_mutex '
-> > ./include/uthread.h:56: warning: cannot understand function prototype:
-> > 'enum uthread_mutex_state '
-> > ./include/uthread.h:64: warning: cannot understand function prototype:
-> > 'struct uthread_mutex '
-> >=20
-> > Which should be fixed.
->=20
-> Please see https://lists.denx.de/pipermail/u-boot/2025-April/588263.html.
+This is mostly a QoL addition + making the docs consistent since k3.rst
+makes use of prompt directives which these board docs include from.
 
-Ah good, thanks.
+[1]: https://pypi.org/project/sphinx-prompt/
 
-> > I also noticed that with KDOC_WERROR=3D1 this did
-> > not fail and still produced an exit status of 0 which is why it was
-> > merged and not noticed until now.
->=20
-> That's unfortunate. I don't understand why warning don't stop the build
-> given that sphinx-build is given the -W option already.
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ doc/board/ti/am62ax_sk.rst  | 20 ++++++++++----------
+ doc/board/ti/am62px_sk.rst  | 18 +++++++++---------
+ doc/board/ti/j722s_evm.rst  | 14 +++++++-------
+ doc/board/ti/j784s4_evm.rst | 16 ++++++++--------
+ 4 files changed, 34 insertions(+), 34 deletions(-)
 
-Yes, I feel like there must be a bug there and so that's part of why I
-cc'd Heinrich.
+diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
+index 262340ef59a..43a1db68873 100644
+--- a/doc/board/ti/am62ax_sk.rst
++++ b/doc/board/ti/am62ax_sk.rst
+@@ -81,16 +81,16 @@ Set the variables corresponding to this platform:
+ .. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_common_env_vars_defn
+     :end-before: .. k3_rst_include_end_common_env_vars_defn
+-.. code-block:: bash
++.. prompt:: bash
+ 
+- $ export UBOOT_CFG_CORTEXR=am62ax_evm_r5_defconfig
+- $ export UBOOT_CFG_CORTEXA=am62ax_evm_a53_defconfig
+- $ export TFA_BOARD=lite
+- $ # we dont use any extra TFA parameters
+- $ unset TFA_EXTRA_ARGS
+- $ export OPTEE_PLATFORM=k3-am62ax
+- $ # we dont use any extra OPTEE parameters
+- $ unset OPTEE_EXTRA_ARGS
++   export UBOOT_CFG_CORTEXR=am62ax_evm_r5_defconfig
++   export UBOOT_CFG_CORTEXA=am62ax_evm_a53_defconfig
++   export TFA_BOARD=lite
++   # we dont use any extra TFA parameters
++   unset TFA_EXTRA_ARGS
++   export OPTEE_PLATFORM=k3-am62ax
++   # we dont use any extra OPTEE parameters
++   unset OPTEE_EXTRA_ARGS
+ 
+ 1. Trusted Firmware-A:
+ 
+@@ -212,6 +212,6 @@ detailed setup information.
+ 
+ To start OpenOCD and connect to the board
+ 
+-.. code-block:: bash
++.. prompt:: bash
+ 
+   openocd -f board/ti_am62a7evm.cfg
+diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+index 99bdc034869..a07d6a4da45 100644
+--- a/doc/board/ti/am62px_sk.rst
++++ b/doc/board/ti/am62px_sk.rst
+@@ -91,15 +91,15 @@ Set the variables corresponding to this platform:
+     :start-after: .. k3_rst_include_start_common_env_vars_defn
+     :end-before: .. k3_rst_include_end_common_env_vars_defn
+ 
+-.. code-block:: bash
++.. prompt:: bash
+ 
+- $ export UBOOT_CFG_CORTEXR=am62px_evm_r5_defconfig
+- $ export UBOOT_CFG_CORTEXA=am62px_evm_a53_defconfig
+- $ export TFA_BOARD=lite
+- $ # we dont use any extra TFA parameters
+- $ unset TFA_EXTRA_ARGS
+- $ export OPTEE_PLATFORM=k3-am62x
+- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++   export UBOOT_CFG_CORTEXR=am62px_evm_r5_defconfig
++   export UBOOT_CFG_CORTEXA=am62px_evm_a53_defconfig
++   export TFA_BOARD=lite
++   # we dont use any extra TFA parameters
++   unset TFA_EXTRA_ARGS
++   export OPTEE_PLATFORM=k3-am62x
++   export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
+ 
+ .. am62px_evm_rst_include_start_build_steps
+ 
+@@ -312,6 +312,6 @@ detailed setup information.
+ 
+ To start OpenOCD and connect to the board
+ 
+-.. code-block:: bash
++.. prompt:: bash
+ 
+   openocd -f board/ti_am62pevm.cfg
+diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
+index e5a1be50c4f..0ca3399f263 100644
+--- a/doc/board/ti/j722s_evm.rst
++++ b/doc/board/ti/j722s_evm.rst
+@@ -68,13 +68,13 @@ Set the variables corresponding to this platform:
+     :start-after: .. k3_rst_include_start_common_env_vars_defn
+     :end-before: .. k3_rst_include_end_common_env_vars_defn
+ 
+-.. code-block:: bash
++.. prompt:: bash
+ 
+- $ export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
+- $ export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
+- $ export TFA_BOARD=lite
+- $ export OPTEE_PLATFORM=k3-am62x
+- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++   export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
++   export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
++   export TFA_BOARD=lite
++   export OPTEE_PLATFORM=k3-am62x
++   export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
+ 
+ .. j722s_evm_rst_include_start_build_steps
+ 
+@@ -259,6 +259,6 @@ detailed setup information.
+ 
+ To start OpenOCD and connect to the board
+ 
+-.. code-block:: bash
++.. prompt:: bash
+ 
+   openocd -f board/ti_j722sevm.cfg
+diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+index a1e927cb743..349fb394d74 100644
+--- a/doc/board/ti/j784s4_evm.rst
++++ b/doc/board/ti/j784s4_evm.rst
+@@ -81,14 +81,14 @@ Set the variables corresponding to this platform:
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_common_env_vars_defn
+     :end-before: .. k3_rst_include_end_common_env_vars_defn
+-.. code-block:: bash
++.. prompt:: bash
+ 
+- $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
+- $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
+- $ export TFA_BOARD=j784s4
+- $ export TFA_EXTRA_ARGS="K3_USART=0x8"
+- $ export OPTEE_PLATFORM=k3-j784s4
+- $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
++   export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
++   export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
++   export TFA_BOARD=j784s4
++   export TFA_EXTRA_ARGS="K3_USART=0x8"
++   export OPTEE_PLATFORM=k3-j784s4
++   export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
+ 
+ .. j784s4_evm_rst_include_start_build_steps
+ 
+@@ -326,6 +326,6 @@ Debugging U-Boot on J784S4-EVM and AM69-SK
+ To start OpenOCD and connect to J784S4-EVM or AM69-SK board, use the
+ following.
+ 
+-.. code-block:: bash
++.. prompt:: bash
+ 
+   openocd -f board/ti_j784s4evm.cfg
+-- 
+2.49.0
 
---=20
-Tom
-
---q1AzSAqhZuIsKrQ+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgQ2SkACgkQFHw5/5Y0
-tyyC4Qv+PVXXpoVsdT25rBCgdzOhnfMBYF+CGEPKgMFk/d2g5SWUaid+BpRjlAUB
-gVHOVwA7t6InbnkABGtdTCxRDfE5mqKJnMbDcLpQ05j1gsxw1ETHFdx72WymrWzp
-ZbSQnIpljKg54Iti8P9paLIcGKUoEcOFigYR/itEoXZCzI4iE7GHNhn4E6T8tEqx
-oaFP9i4vXjNzAXLv500q3hvZ6MGe7Y/cCuR8ZvSPffVkhebBgQFu4NT7x46mw9jT
-83rWs4vKjxfM7TD+AMOU/+HR/IC24a9mjbNEJT47tWRA8r4z4s3wjfLQrnDbbJrX
-VF5BFE4RKc/KIrUkoXca3P2uFUWJgB5HefyzSc4PD8HOajUMXz+J/dp9ZB60h6gi
-kMZgEbj3l4dH/AIADx3gGC23liDPAKXuFrzOORGvzEAAxbFcugT2vP54Wcicy1ZI
-SQq/Ro6ntQ+UgxW+SPU78q2sStOFv98Lai1QMcT2R4YVaDOL+2Evt6fdwEYAJstc
-stW4VsvO
-=Wa5D
------END PGP SIGNATURE-----
-
---q1AzSAqhZuIsKrQ+--
