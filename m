@@ -4,83 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32487C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 10:46:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76445C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 10:54:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 163C4809A5;
-	Tue, 29 Apr 2025 12:46:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id B67AD809A5;
+	Tue, 29 Apr 2025 12:54:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="WU4Onh0+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kp9+Vmf7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B02180F03; Tue, 29 Apr 2025 12:46:00 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 529068059D
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 12:45:58 +0200 (CEST)
+ id B1D7080F03; Tue, 29 Apr 2025 12:54:51 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D663F8059D
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 12:54:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dimorinny@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac345bd8e13so835663766b.0
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 03:45:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1745923558; x=1746528358; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7hJpMsx/pz/3JXBQ96I6wuEB8vtoLJPB13rxvlOcu4c=;
- b=WU4Onh0+ZpZPErdz+qyFw3Ive+hM+z9OsYH4HQh+APTBBF0WMOObRfd92fpfmKAyYf
- RJ6WYX5ZCWrHQ9kNlz0fbjc5Ar/oVYB8qmrYEjethy2wJJvhXOzbs6RZEL3yisA3C6+m
- r8tBsGizSHt73RMEsFpyUpLV3luKwQUuO6bw2AtAh3qkSsw7gY/0vdk7V/S1wAqigs5I
- +0pqMbRkvGiBRbNvKrhB0SGDPpWHDTrxsv74FPzehIEWsQz7h3pW6RjoFZNkvUlgP2pR
- lc9i8rtTXNKjkXr9WbfgNLXzNQ52tuMHcLt3GV7ZqOiI4pYdDq43wNkhqg39piuA5DKe
- KcHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745923558; x=1746528358;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7hJpMsx/pz/3JXBQ96I6wuEB8vtoLJPB13rxvlOcu4c=;
- b=NLZoHJDZdgtzTnqO/Yr8He6kpAf4pRKQT7TKAbVqXbWwhl2sGhsGPUT8vl/WTFWYNC
- 8XYV1z2j1uElb9lwviuxG/oF8Qves/xOA+gWdW3lkjNrIRqlgs/nBTubhxo2Cce/XS0D
- Q+tq0vXy3lEGo7zfzhorS91oepMuvGhjyLrvOblXHBBM36xGpdlo4vRohb46hQaXh1lB
- JbeUpNI/JZquK6VBfN8Rd/U8lK4xItK4FyzLeaCUng2Qwiyrq6+zRLpUSwS06b0rrBmZ
- thQWKoFQOosyaSx3Se2RzQvZTkWFAJnHUdR+I3aQA/eaYCyNKYk34ApTW0+WokAJFRJ+
- ZrNw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUDh/wVWljNw+zAOsG8rWq9lGjRJC44fT4zgJ1CT0ilAlT6hh2a7i2Vk402RK9DhSilPi1MWw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxuM6mqTZIQ7r7TWMESABpfELiG4Ik9KeqkQ70LHCiwfVdwjZ2K
- RsKIdPv5HrIqXLYVQ9asDj1xiRil0qTRaJVO8JqZZjeOthusvACoumh1Z6a7+GihpNiOUcJLR+F
- tyjD2b+AP5Y2NdndMGFxilR1EYyuf4EP9FzZF
-X-Gm-Gg: ASbGncuM0qaJxj55SLeHO/DNWs8fgW3sZ1wNHe+84Zxprb26Z9x9PyI2kjvsWdRlMf5
- LNi1QY0kyvwZ+H096xYuNA5laCY7fZtfYhxHTv8t3hbv6tTTbKUDCR/L/myonhjILmH5aZ5tWB6
- qZ0EfCWPHFZcrg58gdIjU/zjmCEs57LMDv2RmSvM6pakOh32rKGmXMMy0h
-X-Google-Smtp-Source: AGHT+IFDP/ZMXc4Gg1tiy+iGH9Z9PuU2wyZGcPPTsVzR+4zUii6ZPpB17Q8vhY3dm/41vDgq2+mpdkusoZXV9/VQHqo=
-X-Received: by 2002:a17:907:7f92:b0:acb:58f5:4529 with SMTP id
- a640c23a62f3a-acec874d326mr206784366b.45.1745923557607; Tue, 29 Apr 2025
- 03:45:57 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53TAsken3074070
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 29 Apr 2025 05:54:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1745924086;
+ bh=E3sxL4FIUXUDIKI2YwbqYCk+1pfJjMNJOMIery5esME=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=kp9+Vmf7lOWn/ctCDtGtgBCgKuruwOKd+3Bnu96S3FvB/JV+C6IJeahMANmonLOKE
+ n+6KDnn3hYtx7TrBfn+kk+IZdwirNZZqFeFYdsRpk0bgNo0X3yaUda/DjRMkrB1Oye
+ 8ZWDhMo4rNiiLdUzyVfKoLcNr3PU65LkgzO+zqwY=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53TAskpD059146
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 29 Apr 2025 05:54:46 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 29
+ Apr 2025 05:54:45 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 29 Apr 2025 05:54:45 -0500
+Received: from [10.249.136.157] ([10.249.136.157])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53TAsgBY096667;
+ Tue, 29 Apr 2025 05:54:43 -0500
+Message-ID: <ea33d47d-39f8-4ebc-815f-be8a96fc4a6f@ti.com>
+Date: Tue, 29 Apr 2025 16:24:41 +0530
 MIME-Version: 1.0
-References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
- <20250409-topic-fastboot-blk-v2-1-c676f21d414f@linaro.org>
- <877c3cgwsf.fsf@kernel.org> <359a5f7c-4c65-4813-be8e-97e12c7786ae@linaro.org>
- <87zffzwfz9.fsf@kernel.org>
-In-Reply-To: <87zffzwfz9.fsf@kernel.org>
-From: Dmitrii Merkurev <dimorinny@google.com>
-Date: Tue, 29 Apr 2025 11:45:46 +0100
-X-Gm-Features: ATxdqUH3u19y1UQb7-D4-XU8xmE22CRjaxSKRit7RSjoNR3IV_3t4XI5P_TEcaA
-Message-ID: <CAOWkq4kKyFjfeQviK+3rtEppeqNdmMg6uvHNXApN8zFQUuLU5w@mail.gmail.com>
-Subject: Re: [PATCH RFT v2 1/3] fastboot: blk: introduce fastboot block
- flashing support
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] firmware: ti_sci: Add Initialization of dev_info head node
+To: Udit Kumar <u-kumar1@ti.com>, <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <d-gole@ti.com>, <vigneshr@ti.com>, <m-chawdhry@ti.com>,
+ <ilias.apalodimas@linaro.org>, <c-vankar@ti.com>
+References: <20250429074950.2262104-1-u-kumar1@ti.com>
+Content-Language: en-US
+From: "Francis, Neha" <n-francis@ti.com>
+In-Reply-To: <20250429074950.2262104-1-u-kumar1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,9 +81,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
->
-> Dmitrii, are you okay to re-licence this code under GPL v2 (which is
-> common licence for this project)
->
+Hi Udit
 
-Yes, I'm ok with that.
+On 4/29/2025 1:19 PM, Udit Kumar wrote:
+> On K3 devices two drivers ti_sci and ti_sci_dm are supporting firmware
+> functions. At run time one of driver is used.
+> 
+> Driver ti_sci already initializing head for dev_list in its probe
+> function, but it was missed in ti_sci_dm driver.
+> 
+> So add head list init support for ti_sci_dm driver.
+> 
+> Fixes: 5d5a699855a7("firmware: ti_sci: Add support for Resoure Management at R5 SPL stage")
+> 
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> ---
+>  drivers/firmware/ti_sci.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+> index 54d6689ce78..a599de9e013 100644
+> --- a/drivers/firmware/ti_sci.c
+> +++ b/drivers/firmware/ti_sci.c
+> @@ -2891,6 +2891,8 @@ static __maybe_unused int ti_sci_dm_probe(struct udevice *dev)
+>  
+>  	list_add_tail(&info->list, &ti_sci_list);
+>  
+> +	INIT_LIST_HEAD(&info->dev_list);
+> +
+>  	ops = &info->handle.ops;
+>  
+>  	rm_core_ops = &ops->rm_core_ops;
+
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+
+-- 
+Thanking You
+Neha Malcom Francis
+
