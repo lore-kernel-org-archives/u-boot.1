@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 617A9C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 10:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32487C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 10:46:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C68F980BAD;
-	Tue, 29 Apr 2025 12:16:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 163C4809A5;
+	Tue, 29 Apr 2025 12:46:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zBdQKjPv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="WU4Onh0+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 272BB80F03; Tue, 29 Apr 2025 12:16:07 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 4B02180F03; Tue, 29 Apr 2025 12:46:00 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB9EF809A5
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 12:16:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 529068059D
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 12:45:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43d0782d787so35604485e9.0
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 03:16:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=dimorinny@google.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ac345bd8e13so835663766b.0
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 03:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745921764; x=1746526564; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=rDq+g/9Ohm3/0UuxNYaIAYjZ6WefRY9AIhVEgsBHX7c=;
- b=zBdQKjPvZjR0qhUAnGaaHkWHujzm2kZbgiQKDAVYpgDe4jX5rw6eF626V+5x9ykier
- xtBvZpe0ZWBAju12wy/8x85nbJ+gAKeGvUJzBp2KETywDH2eG1+lLpeFy9G4s/oUYhp6
- ov1bliECKLzpzPodJslVvc1+l3jT7CZ/1X6tDGqflWoShgJWXy7dKbMJ82fc+7nwQtPs
- e9YFnnCWPZnLshYNBEUORlSsYp74KHUMIJ+6+GzTEtz6mJbTBfJ7JXd6kEuVHMWxumqT
- oGVKegbBNrfl2XsnvLBVF42kKE6HRem0/gBILyDAWYFTk0vFv1C9XiJ41n9qWzCDXRMY
- U6/A==
+ d=google.com; s=20230601; t=1745923558; x=1746528358; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7hJpMsx/pz/3JXBQ96I6wuEB8vtoLJPB13rxvlOcu4c=;
+ b=WU4Onh0+ZpZPErdz+qyFw3Ive+hM+z9OsYH4HQh+APTBBF0WMOObRfd92fpfmKAyYf
+ RJ6WYX5ZCWrHQ9kNlz0fbjc5Ar/oVYB8qmrYEjethy2wJJvhXOzbs6RZEL3yisA3C6+m
+ r8tBsGizSHt73RMEsFpyUpLV3luKwQUuO6bw2AtAh3qkSsw7gY/0vdk7V/S1wAqigs5I
+ +0pqMbRkvGiBRbNvKrhB0SGDPpWHDTrxsv74FPzehIEWsQz7h3pW6RjoFZNkvUlgP2pR
+ lc9i8rtTXNKjkXr9WbfgNLXzNQ52tuMHcLt3GV7ZqOiI4pYdDq43wNkhqg39piuA5DKe
+ KcHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745921764; x=1746526564;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rDq+g/9Ohm3/0UuxNYaIAYjZ6WefRY9AIhVEgsBHX7c=;
- b=OqAEI2pWJJIIoGo6lkjtqL8PSdxYXTOdTXVA2MjrqHVLMAMFZ5YXO2SxNt/tp0PLOf
- uqkwD7wxOctQHXqn8q3i31Yr/Tb0T3wTQVQNB/UMY5eB2i663ndoDSMlkrJmqfVE9xkY
- 8FoVTuf9VtJ9a2MvCXRq/QmXq1oUFNNcINUK2v31rVjB7BDSl5AFOCJ73fxU4PoU01Bv
- EfZxMZ0bD2nFNDlvB6CQvRC2QRdx1Ix18a5Is485Qi9OOfJ+R2GTI3S4pOIkfZ8svbW9
- xxGMxd5IZxM+WEM3kIiyTumxJhXdGfeK3q2ROcBr9b9yHq3dI6ViCx5lDIMoccG1gGGf
- GUxg==
+ d=1e100.net; s=20230601; t=1745923558; x=1746528358;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7hJpMsx/pz/3JXBQ96I6wuEB8vtoLJPB13rxvlOcu4c=;
+ b=NLZoHJDZdgtzTnqO/Yr8He6kpAf4pRKQT7TKAbVqXbWwhl2sGhsGPUT8vl/WTFWYNC
+ 8XYV1z2j1uElb9lwviuxG/oF8Qves/xOA+gWdW3lkjNrIRqlgs/nBTubhxo2Cce/XS0D
+ Q+tq0vXy3lEGo7zfzhorS91oepMuvGhjyLrvOblXHBBM36xGpdlo4vRohb46hQaXh1lB
+ JbeUpNI/JZquK6VBfN8Rd/U8lK4xItK4FyzLeaCUng2Qwiyrq6+zRLpUSwS06b0rrBmZ
+ thQWKoFQOosyaSx3Se2RzQvZTkWFAJnHUdR+I3aQA/eaYCyNKYk34ApTW0+WokAJFRJ+
+ ZrNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCVt5RRQxPVG6qQpkLIv1uN5FyH+TwSOKqYDSsUjQs5pfXYDQSKeZKs0ao8aZ6FMaIHXcaFR4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGJQMCdUQ+Rif83MjpPA7HNKdU4kFGnIsgp+0SGQaaiHeOz8u4
- v8YYGaKmc3Fgj2FS7S6d//CMdW+ZDV2fEdG7d1roSMrW0YELYWH6D5K0xzBSF9mIO9AfsU3IdWI
- bdks=
-X-Gm-Gg: ASbGncvIJsRA1lcoAOGrEcsykNuEXt3jS+v7TwbOgfMCIWL++7ymxCitDWAH1D//Uy0
- gcswfcitiN4vTCDZg4XTuZePXFt4qVx7nNpoEwyEmYQI/2U0XOgSxs1RfFZwfN1DepAH38l1IkD
- bYoJrjxrEtPloVwS0Beost27ramsFnUY5D+qXjLQK+ZIB1MyCZdQHrgKn7P6NX5dA1DESHcpU78
- gnZrpa4yAfJCA53wU8gr92UTorvX/zqDy2edl6xlOroTPrkHiMsJkf8U691sIn9Ac7rquC1TIs1
- NsGa2QrIEVb78PNffN5cBXTr8NZgHI6p8CvEIp5YjlV1bFioq8WUUA==
-X-Google-Smtp-Source: AGHT+IGYJyorTJstGVvaGI9G8ZkzWG+kc8OZJFA69XEbFFCUJBY6KpHz90DIo6R1nq7qiuCyRknwBg==
-X-Received: by 2002:a05:600c:1d9b:b0:43c:ea1a:720c with SMTP id
- 5b1f17b1804b1-441ac85dc2bmr23626065e9.18.1745921763982; 
- Tue, 29 Apr 2025 03:16:03 -0700 (PDT)
-Received: from [192.168.7.92] ([212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4409d2a1544sm187774135e9.11.2025.04.29.03.16.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Apr 2025 03:16:03 -0700 (PDT)
-Message-ID: <9b009d13-1145-4eae-9051-3837f3793749@linaro.org>
-Date: Tue, 29 Apr 2025 12:16:03 +0200
+ AJvYcCXUDh/wVWljNw+zAOsG8rWq9lGjRJC44fT4zgJ1CT0ilAlT6hh2a7i2Vk402RK9DhSilPi1MWw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxuM6mqTZIQ7r7TWMESABpfELiG4Ik9KeqkQ70LHCiwfVdwjZ2K
+ RsKIdPv5HrIqXLYVQ9asDj1xiRil0qTRaJVO8JqZZjeOthusvACoumh1Z6a7+GihpNiOUcJLR+F
+ tyjD2b+AP5Y2NdndMGFxilR1EYyuf4EP9FzZF
+X-Gm-Gg: ASbGncuM0qaJxj55SLeHO/DNWs8fgW3sZ1wNHe+84Zxprb26Z9x9PyI2kjvsWdRlMf5
+ LNi1QY0kyvwZ+H096xYuNA5laCY7fZtfYhxHTv8t3hbv6tTTbKUDCR/L/myonhjILmH5aZ5tWB6
+ qZ0EfCWPHFZcrg58gdIjU/zjmCEs57LMDv2RmSvM6pakOh32rKGmXMMy0h
+X-Google-Smtp-Source: AGHT+IFDP/ZMXc4Gg1tiy+iGH9Z9PuU2wyZGcPPTsVzR+4zUii6ZPpB17Q8vhY3dm/41vDgq2+mpdkusoZXV9/VQHqo=
+X-Received: by 2002:a17:907:7f92:b0:acb:58f5:4529 with SMTP id
+ a640c23a62f3a-acec874d326mr206784366b.45.1745923557607; Tue, 29 Apr 2025
+ 03:45:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Missing UTHREAD doc annotations
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20250428214040.GH5495@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250428214040.GH5495@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org>
+ <20250409-topic-fastboot-blk-v2-1-c676f21d414f@linaro.org>
+ <877c3cgwsf.fsf@kernel.org> <359a5f7c-4c65-4813-be8e-97e12c7786ae@linaro.org>
+ <87zffzwfz9.fsf@kernel.org>
+In-Reply-To: <87zffzwfz9.fsf@kernel.org>
+From: Dmitrii Merkurev <dimorinny@google.com>
+Date: Tue, 29 Apr 2025 11:45:46 +0100
+X-Gm-Features: ATxdqUH3u19y1UQb7-D4-XU8xmE22CRjaxSKRit7RSjoNR3IV_3t4XI5P_TEcaA
+Message-ID: <CAOWkq4kKyFjfeQviK+3rtEppeqNdmMg6uvHNXApN8zFQUuLU5w@mail.gmail.com>
+Subject: Re: [PATCH RFT v2 1/3] fastboot: blk: introduce fastboot block
+ flashing support
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,32 +97,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+>
+> Dmitrii, are you okay to re-licence this code under GPL v2 (which is
+> common licence for this project)
+>
 
-On 4/28/25 23:40, Tom Rini wrote:
-> Hey,
-> 
-> As part of manually building the docs before doing -rc1, I saw the
-> following:
-> ./include/uthread.h:56: warning: cannot understand function prototype:
-> 'enum uthread_mutex_state '
-> ./include/uthread.h:64: warning: cannot understand function prototype:
-> 'struct uthread_mutex '
-> ./include/uthread.h:56: warning: cannot understand function prototype:
-> 'enum uthread_mutex_state '
-> ./include/uthread.h:64: warning: cannot understand function prototype:
-> 'struct uthread_mutex '
-> 
-> Which should be fixed.
-
-Please see https://lists.denx.de/pipermail/u-boot/2025-April/588263.html.
-
-> I also noticed that with KDOC_WERROR=1 this did
-> not fail and still produced an exit status of 0 which is why it was
-> merged and not noticed until now.
-
-That's unfortunate. I don't understand why warning don't stop the build
-given that sphinx-build is given the -W option already.
-
--- 
-Jerome
+Yes, I'm ok with that.
