@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 951FCC3ABA5
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:26:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99CB5C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:26:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02095826B2;
-	Tue, 29 Apr 2025 15:24:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 487B682A55;
+	Tue, 29 Apr 2025 15:24:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eExisrKm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZokntOxj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17A2182A25; Tue, 29 Apr 2025 15:24:36 +0200 (CEST)
+ id 53BA182A2F; Tue, 29 Apr 2025 15:24:38 +0200 (CEST)
 Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
  [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54D8B828F8
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:24:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C816828F8
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:24:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-72c1425fbfcso4878645a34.3
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:24:33 -0700 (PDT)
+ 46e09a7af769-72ecc30903cso3583927a34.0
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:24:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745933071; x=1746537871; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745933074; x=1746537874; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oJHedOEm6YXHs+fRGaz/q/2Qd6VLv2KPst2tiMdjG4M=;
- b=eExisrKmMhbogn0tdufEQtg8dxd8miIXR98R/6TrYmYlV8QRB6PyRZ9Zki2PKSMBxg
- 1mYg4i54odrNSgk2GNIlZ7VJPNpYY4QbhtG0Egxwb+MHyuWZz6ahmCqZhZjOSGGPKlPT
- xjNmFNoo4oPqk1DMmcD9kvtlnkfMYDmXPlBaw=
+ bh=qzjsiCKj/Ch7reYDvdRB8vtv220sObtLRIcC9qJaN+0=;
+ b=ZokntOxjtzQXk8FpU1oHUysEJVGdTzfP3qeNrWxeQ2qxtgkfOLsvkZl5j84SA1lS+m
+ as91HMXrYD0ENjk3k5498hUvN/8jy6McLX8gw+vuPKfeoZ77L5/lbZJacb5Mir96LTTJ
+ jnE3q0+pMSbXH0+S7Rs6jyDYqyNj17Gyfmwpg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745933071; x=1746537871;
+ d=1e100.net; s=20230601; t=1745933074; x=1746537874;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oJHedOEm6YXHs+fRGaz/q/2Qd6VLv2KPst2tiMdjG4M=;
- b=W0PGYxovSm1JwM/rnOr7++CbuU+fc3ekpImeqQvoOj/ced/4rcdjbRVuj+wtw8u7FH
- aIPUK1xH2/s0KKO7i/tzBSypgRzNpyw9LTp7+HH1HJO0qLRFMGyjpC7G6uuRyyVwWDDa
- 5pw13sWcpXfWMWVPyLcN5hh+d8UyYlZWuAjqqouUclt4x8CvuSqpjrrXqGoMOjEFEZCR
- iaTpLNqz1YnUIxsxsgfCwgdEQ8up/A96h3E8dJAi94ZFx6IyIld9P3quIOmueZta9iep
- 89Ah6sTCxEfV6TX7qtlPwJpN7Rlf5iLcPpO7qQ7oysbkNJ5/MtEjNZg3XHPJjfUXqwA4
- dj9g==
-X-Gm-Message-State: AOJu0YxQZUiOjA24QMP+4YduIWzbOIyF7FHEigusGWzqKf4nhDN7CiN0
- tj06a3Y736s2qq9mHc8lJvXsaM4vf8pPGysXp/EHPsTBriUB5ZGRCEQOcRaz1F8AVITIyUuMpKw
+ bh=qzjsiCKj/Ch7reYDvdRB8vtv220sObtLRIcC9qJaN+0=;
+ b=aNGt+2nZyGf40CxUITXl4TDnMVcAqjEfWWKvr+BHcQSFWFyp7dXhqs7RAiBW4tsmh9
+ 66v8qqKePGlZTGVPFUNf0W3D+8KBp8tbNN29gD06eeQKBipqGzCRM71GiQCQD74zgOkB
+ k2wZeONvsQBnywj0a95i2LSdbPRvNRWPP3edtIiI1TuVMgQJ1JZ+MjIUrE4fvjvjXZOk
+ IjJi7x+aoGZMGUuZB46qlSqUQDDvcIT1ipubTxAEnehSTq38MKJieC6cfTcr7hEVfyfv
+ USMf/dRTn4x6yePUBVYdLRVtCq2hmiRvk8VqY/BhxNJ40/Rq4XZUkG874xBytxXE623C
+ X9pA==
+X-Gm-Message-State: AOJu0Yyq+Wj5avA4FpjaQvBvuqHCa6RU+rtIaI2gxUsc+Mzji3dBxIS3
+ V9IUmFIkO5Okwq6DrF5IfJISfVx/9XM0x3z5cEaJ17rRdfb8g1pBYowSk088Mq2I3nL4UZVdGnU
  =
-X-Gm-Gg: ASbGncs5LBmZ90H6v4yUVLBcchoE7hAl6QBmmVN2erFgtp/VES24lqYbnoYHO0FVvSp
- snoGdOLsEhuxeEWZDtXVmG52ywfuUM2FKm2P77CQFOb9oN6FtOLe7jEOU42OTQG/W97sGFAXpZX
- rWi/CG9xmTXtDZClrcZxEI15efeizDl5JEAxKvw9vh5CQzrl7Ajadz7f/KDWHdG/rcWMzh7z+re
- gJmZn3vPRIMCQmNwrK3gIGTYKLY8bIAozJyCgH9YCSdPuKiZWBLIbgxvdXZtlmEFohHb64OemX3
- m0Ga+4R3gvnCA3QzyZb5O6pJ3Beioyk4VxyFnHY8zeB1yzdjKjDqlwFTEtZ8Z/8HHc2fJI5N6t8
- 8lw==
-X-Google-Smtp-Source: AGHT+IEyR5dxE2vfREH+iahNUhbQQV3nQ4rfbO8qoVO0NcHZzjDqgagt1eLpD8LC+XyeipEqWp63cQ==
-X-Received: by 2002:a05:6830:6619:b0:72c:320c:d898 with SMTP id
- 46e09a7af769-73088c511f9mr2231389a34.22.1745933071472; 
- Tue, 29 Apr 2025 06:24:31 -0700 (PDT)
+X-Gm-Gg: ASbGncumI45XlTldcvMwtSxjqzJeyfQ49910Qq/IfAQcHtMrotTz4vgcefwe9MNWCZE
+ D5eVH//Ji7IcM+l9IPkX5MH1YXdwUu9S4BUPCB61SApQgP9faQ0x+S2VVZK2NlfBFmcVJrSFYiE
+ d/c6lVznfjaYYNv/5C0JeXcQJSEIe/EX7xKNDsSI7FHN7ke8lP7ncD+5lNZ5acNH3vGs3oN+NlC
+ pFyCPbfCfaOV8o34olEM8xpCrB/3TSIpXeW30l9yOxlpGVNtc8XfBZHpi2D3dUqiyg37idz0Uk5
+ RrPuAUtFoxhp+jg67bK1tAm9tpjfhKcg5bAN4BSV51+wReFAiSxx3wfSRp4ZsncwKtBgseCJFoH
+ xTg==
+X-Google-Smtp-Source: AGHT+IH6wtck7PziNiCVxdYe5rv4reESoc9hxwF7/9guGfTh2PKUzJJAxsg1jReziR//JhrZ+WQY6w==
+X-Received: by 2002:a05:6830:6b09:b0:72a:1e1a:e578 with SMTP id
+ 46e09a7af769-73088c6c56dmr2045770a34.19.1745933074314; 
+ Tue, 29 Apr 2025 06:24:34 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.24.28
+ 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.24.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 06:24:29 -0700 (PDT)
+ Tue, 29 Apr 2025 06:24:32 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 18/30] patman: Add reading of series and patch status
-Date: Tue, 29 Apr 2025 07:22:15 -0600
-Message-ID: <20250429132239.251756-19-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Douglas Anderson <dianders@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 19/30] patman: Rename check_patchwork_status()
+Date: Tue, 29 Apr 2025 07:22:16 -0600
+Message-ID: <20250429132239.251756-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250429132239.251756-1-sjg@chromium.org>
 References: <20250429132239.251756-1-sjg@chromium.org>
@@ -95,245 +95,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Expand the patchwork module so that it can match the current
-requirements of the 'patman status' command, i.e. reading the state of a
-series and the patches associated with it.
+This function actually shows the status and does some other things.
 
-Since the format of each patchwork response is a little tricky to
-understand, add examples in comments at the top of each function.
+Rename it to better reflect its purpose.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/patchwork.py | 218 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 218 insertions(+)
+ tools/patman/control.py   |  4 ++--
+ tools/patman/func_test.py | 14 +++++++-------
+ tools/patman/status.py    |  6 +++---
+ 3 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/tools/patman/patchwork.py b/tools/patman/patchwork.py
-index bb3645455fe..e0adbdb6481 100644
---- a/tools/patman/patchwork.py
-+++ b/tools/patman/patchwork.py
-@@ -177,3 +177,221 @@ class Patchwork:
-                 except aiohttp.client_exceptions.ServerDisconnectedError:
-                     if i == RETRIES:
-                         raise
-+
-+    async def get_series(self, client, link):
-+        """Read information about a series
-+
-+        Args:
-+            client (aiohttp.ClientSession): Session to use
-+            link (str): Patchwork series ID
-+
-+        Returns: dict containing patchwork's series information
-+            id (int): series ID unique across patchwork instance, e.g. 3
-+            url (str): Full URL, e.g.
-+                'https://patchwork.ozlabs.org/api/1.2/series/3/'
-+            web_url (str): Full URL, e.g.
-+                'https://patchwork.ozlabs.org/project/uboot/list/?series=3
-+            project (dict): project information (id, url, name, link_name,
-+                list_id, list_email, etc.
-+            name (str): Series name, e.g. '[U-Boot] moveconfig: fix error'
-+            date (str): Date, e.g. '2017-08-27T08:00:51'
-+            submitter (dict): id, url, name, email, e.g.:
-+                "id": 6125,
-+                "url": "https://patchwork.ozlabs.org/api/1.2/people/6125/",
-+                "name": "Chris Packham",
-+                "email": "judge.packham@gmail.com"
-+            version (int): Version number
-+            total (int): Total number of patches based on subject
-+            received_total (int): Total patches received by patchwork
-+            received_all (bool): True if all patches were received
-+            mbox (str): URL of mailbox, e.g.
-+                'https://patchwork.ozlabs.org/series/3/mbox/'
-+            cover_letter (dict) or None, e.g.:
-+                "id": 806215,
-+                "url": "https://patchwork.ozlabs.org/api/1.2/covers/806215/",
-+                "web_url": "https://patchwork.ozlabs.org/project/uboot/cover/
-+                    20170827094411.8583-1-judge.packham@gmail.com/",
-+                "msgid": "<20170827094411.8583-1-judge.packham@gmail.com>",
-+                "list_archive_url": null,
-+                "date": "2017-08-27T09:44:07",
-+                "name": "[U-Boot,v2,0/4] usb: net: Migrate USB Ethernet",
-+                "mbox": "https://patchwork.ozlabs.org/project/uboot/cover/
-+                    20170827094411.8583-1-judge.packham@gmail.com/mbox/"
-+            patches (list of dict), each e.g.:
-+                "id": 806202,
-+                "url": "https://patchwork.ozlabs.org/api/1.2/patches/806202/",
-+                "web_url": "https://patchwork.ozlabs.org/project/uboot/patch/
-+                    20170827080051.816-1-judge.packham@gmail.com/",
-+                "msgid": "<20170827080051.816-1-judge.packham@gmail.com>",
-+                "list_archive_url": null,
-+                "date": "2017-08-27T08:00:51",
-+                "name": "[U-Boot] moveconfig: fix error message do_autoconf()",
-+                "mbox": "https://patchwork.ozlabs.org/project/uboot/patch/
-+                    20170827080051.816-1-judge.packham@gmail.com/mbox/"
-+        """
-+        return await self._request(client, f'series/{link}/')
-+
-+    async def get_patch(self, client, patch_id):
-+        """Read information about a patch
-+
-+        Args:
-+            client (aiohttp.ClientSession): Session to use
-+            patch_id (str): Patchwork patch ID
-+
-+        Returns: dict containing patchwork's patch information
-+            "id": 185,
-+            "url": "https://patchwork.ozlabs.org/api/1.2/patches/185/",
-+            "web_url": "https://patchwork.ozlabs.org/project/cbe-oss-dev/patch/
-+                200809050416.27831.adetsch@br.ibm.com/",
-+            project (dict): project information (id, url, name, link_name,
-+                    list_id, list_email, etc.
-+            "msgid": "<200809050416.27831.adetsch@br.ibm.com>",
-+            "list_archive_url": null,
-+            "date": "2008-09-05T07:16:27",
-+            "name": "powerpc/spufs: Fix possible scheduling of a context",
-+            "commit_ref": "b2e601d14deb2083e2a537b47869ab3895d23a28",
-+            "pull_url": null,
-+            "state": "accepted",
-+            "archived": false,
-+            "hash": "bc1c0b80d7cff66c0d1e5f3f8f4d10eb36176f0d",
-+            "submitter": {
-+                "id": 93,
-+                "url": "https://patchwork.ozlabs.org/api/1.2/people/93/",
-+                "name": "Andre Detsch",
-+                "email": "adetsch@br.ibm.com"
-+            },
-+            "delegate": {
-+                "id": 1,
-+                "url": "https://patchwork.ozlabs.org/api/1.2/users/1/",
-+                "username": "jk",
-+                "first_name": "Jeremy",
-+                "last_name": "Kerr",
-+                "email": "jk@ozlabs.org"
-+            },
-+            "mbox": "https://patchwork.ozlabs.org/project/cbe-oss-dev/patch/
-+                200809050416.27831.adetsch@br.ibm.com/mbox/",
-+            "series": [],
-+            "comments": "https://patchwork.ozlabs.org/api/patches/185/
-+                comments/",
-+            "check": "pending",
-+            "checks": "https://patchwork.ozlabs.org/api/patches/185/checks/",
-+            "tags": {},
-+            "related": [],
-+            "headers": {...}
-+            "content": "We currently have a race when scheduling a context
-+                after we have found a runnable context in spusched_tick, the
-+                context may have been scheduled by spu_activate().
-+
-+                This may result in a panic if we try to unschedule a context
-+                been freed in the meantime.
-+
-+                This change exits spu_schedule() if the context has already
-+                scheduled, so we don't end up scheduling it twice.
-+
-+                Signed-off-by: Andre Detsch <adetsch@br.ibm.com>",
-+            "diff": '''Index: spufs/arch/powerpc/platforms/cell/spufs/sched.c
-+                =======================================================
-+                --- spufs.orig/arch/powerpc/platforms/cell/spufs/sched.c
-+                +++ spufs/arch/powerpc/platforms/cell/spufs/sched.c
-+                @@ -727,7 +727,8 @@ static void spu_schedule(struct spu *spu
-+                 \t/* not a candidate for interruptible because it's called
-+                 \t   from the scheduler thread or from spu_deactivate */
-+                 \tmutex_lock(&ctx->state_mutex);
-+                -\t__spu_schedule(spu, ctx);
-+                +\tif (ctx->state == SPU_STATE_SAVED)
-+                +\t\t__spu_schedule(spu, ctx);
-+                 \tspu_release(ctx);
-+                 }
-+                '''
-+            "prefixes": ["3/3", ...]
-+        """
-+        return await self._request(client, f'patches/{patch_id}/')
-+
-+    async def _get_patch_comments(self, client, patch_id):
-+        """Read comments about a patch
-+
-+        Args:
-+            client (aiohttp.ClientSession): Session to use
-+            patch_id (str): Patchwork patch ID
-+
-+        Returns: list of dict: list of comments:
-+            id (int): series ID unique across patchwork instance, e.g. 3331924
-+            web_url (str): Full URL, e.g.
-+                'https://patchwork.ozlabs.org/comment/3331924/'
-+            msgid (str): Message ID, e.g.
-+                '<d2526c98-8198-4b8b-ab10-20bda0151da1@gmx.de>'
-+            list_archive_url: (unknown?)
-+            date (str): Date, e.g. '2024-06-20T13:38:03'
-+            subject (str): email subject, e.g. 'Re: [PATCH 3/5] buildman:
-+                Support building within a Python venv'
-+            date (str): Date, e.g. '2017-08-27T08:00:51'
-+            submitter (dict): id, url, name, email, e.g.:
-+                "id": 61270,
-+                "url": "https://patchwork.ozlabs.org/api/people/61270/",
-+                "name": "Heinrich Schuchardt",
-+                "email": "xypron.glpk@gmx.de"
-+            content (str): Content of email, e.g. 'On 20.06.24 15:19,
-+                Simon Glass wrote:
-+                >...'
-+            headers: dict: email headers, see get_cover() for an example
-+        """
-+        return await self._request(client, f'patches/{patch_id}/comments/')
-+
-+    async def get_patch_comments(self, patch_id):
-+        async with aiohttp.ClientSession() as client:
-+            return await self._get_patch_comments(client, patch_id)
-+
-+    async def _get_patch_status(self, client, patch_id):
-+        """Get the patch status
-+
-+        Args:
-+            client (aiohttp.ClientSession): Session to use
-+            patch_id (int): Patch ID to look up in patchwork
-+
-+        Return:
-+            PATCH: Patch information
-+
-+        Requests:
-+            1 for patch, 1 for patch comments
-+        """
-+        data = await self.get_patch(client, patch_id)
-+        state = data['state']
-+        comment_data = await self._get_patch_comments(client, patch_id)
-+
-+        return Patch(patch_id, state, data, comment_data)
-+
-+    async def series_get_state(self, client, link, read_comments):
-+        """Sync the series information against patchwork, to find patch status
-+
-+        Args:
-+            client (aiohttp.ClientSession): Session to use
-+            link (str): Patchwork series ID
-+            read_comments (bool): True to read the comments on the patches
-+
-+        Return: tuple:
-+            list of Patch objects
-+        """
-+        data = await self.get_series(client, link)
-+        patch_list = list(data['patches'])
-+
-+        count = len(patch_list)
-+        patches = []
-+        if read_comments:
-+            # Returns a list of Patch objects
-+            tasks = [self._get_patch_status(client, patch_list[i]['id'])
-+                                            for i in range(count)]
-+
-+            patch_status = await asyncio.gather(*tasks)
-+            for patch_data, status in zip(patch_list, patch_status):
-+                status.series_data = patch_data
-+                patches.append(status)
-+        else:
-+            for i in range(count):
-+                info = patch_list[i]
-+                pat = Patch(info['id'], series_data=info)
-+                pat.raw_subject = info['name']
-+                patches.append(pat)
-+        if self._show_progress:
-+            terminal.print_clear()
-+
-+        return patches
+diff --git a/tools/patman/control.py b/tools/patman/control.py
+index c33ca821aa6..06a9dfd2bca 100644
+--- a/tools/patman/control.py
++++ b/tools/patman/control.py
+@@ -99,8 +99,8 @@ def patchwork_status(branch, count, start, end, dest_branch, force,
+     # Import this here to avoid failing on other commands if the dependencies
+     # are not present
+     from patman import status
+-    status.check_patchwork_status(series, found[0], branch, dest_branch, force,
+-                                  show_comments, url)
++    status.check_and_show_status(series, found[0], branch, dest_branch, force,
++                                 show_comments, url)
+ 
+ 
+ def do_patman(args):
+diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
+index 50fb53787d8..31ba708ab87 100644
+--- a/tools/patman/func_test.py
++++ b/tools/patman/func_test.py
+@@ -1045,8 +1045,8 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+         series = Series()
+         series.commits = [commit1, commit2]
+         terminal.set_print_test_mode()
+-        status.check_patchwork_status(series, '1234', None, None, False, False,
+-                                      None, self._fake_patchwork2)
++        status.check_and_show_status(series, '1234', None, None, False, False,
++                                     None, self._fake_patchwork2)
+         lines = iter(terminal.get_print_test_lines())
+         col = terminal.Color()
+         self.assertEqual(terminal.PrintLine('  1 Subject 1', col.BLUE),
+@@ -1159,9 +1159,9 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+         # <unittest.result.TestResult run=8 errors=0 failures=0>
+ 
+         terminal.set_print_test_mode()
+-        status.check_patchwork_status(series, '1234', branch, dest_branch,
+-                                      False, False, None, self._fake_patchwork3,
+-                                      repo)
++        status.check_and_show_status(series, '1234', branch, dest_branch,
++                                     False, False, None, self._fake_patchwork3,
++                                     repo)
+         lines = terminal.get_print_test_lines()
+         self.assertEqual(12, len(lines))
+         self.assertEqual(
+@@ -1361,8 +1361,8 @@ Reviewed-by: %s
+         series = Series()
+         series.commits = [commit1, commit2]
+         terminal.set_print_test_mode()
+-        status.check_patchwork_status(series, '1234', None, None, False, True,
+-                                      None, self._fake_patchwork2)
++        status.check_and_show_status(series, '1234', None, None, False, True,
++                                     None, self._fake_patchwork2)
+         lines = iter(terminal.get_print_test_lines())
+         col = terminal.Color()
+         self.assertEqual(terminal.PrintLine('  1 Subject 1', col.BLUE),
+diff --git a/tools/patman/status.py b/tools/patman/status.py
+index 8edb4ced449..57786e496be 100644
+--- a/tools/patman/status.py
++++ b/tools/patman/status.py
+@@ -300,9 +300,9 @@ def create_branch(series, new_rtag_list, branch, dest_branch, overwrite,
+             [parent.target])
+     return num_added
+ 
+-def check_patchwork_status(series, series_id, branch, dest_branch, force,
+-                           show_comments, url, rest_api=call_rest_api,
+-                           test_repo=None):
++def check_and_show_status(series, series_id, branch, dest_branch, force,
++                          show_comments, url, rest_api=call_rest_api,
++                          test_repo=None):
+     """Check the status of a series on Patchwork
+ 
+     This finds review tags and comments for a series in Patchwork, displaying
 -- 
 2.43.0
 
