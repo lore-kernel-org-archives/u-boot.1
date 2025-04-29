@@ -4,59 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F48CC369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 21:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2FB2C3ABA5
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 21:09:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E1FD8283E;
-	Tue, 29 Apr 2025 23:02:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id DA7C082ACC;
+	Tue, 29 Apr 2025 23:09:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="NA3ZB7RX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hnpVuqEN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF8B0829A1; Tue, 29 Apr 2025 23:02:29 +0200 (CEST)
-Received: from mail-24421.protonmail.ch (mail-24421.protonmail.ch
- [109.224.244.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CA01182AA8; Tue, 29 Apr 2025 23:09:29 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 631DE8272A
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 23:02:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0447D8272A
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 23:09:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail; t=1745960545; x=1746219745;
- bh=yjXBP/mP+QyNeKeYenDhHza38WYDqlDm+GygOI+oVME=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=NA3ZB7RXdDeJOxwh4jdf4wOzGGcL5zrZKWSkKxNgC0xjnE2NKz1FBGB6u5mhDerAT
- IVh0CKVTrPZkAsomQ09CnWwTKKWJJ5fHjQouUiNwu0674jqsr4rSgixWEuNjqFQ5K9
- 1lQF4v9YJw5qqUyjCWJZ8xdnlCcpvzfbel5e9/aKcON6BEJEMkMR5vE0fFE91xQNbd
- TOEOUZFlIg/HxF6IFeIjjIwDGG9C9vtJ17sCcyYcQE5lwU4wsTEr8bfeY08o16G7RF
- gufyHgM2cifZZz9UGdFlFw70Vmn0MTtxgzp2cxlw0EmbaYdt8xV9Xw9jkuOuhaVSNI
- a33z3a8TsvSYA==
-Date: Tue, 29 Apr 2025 21:02:18 +0000
-To: Casey Connolly <casey.connolly@linaro.org>
-From: Sam Day <me@samcday.com>
-Cc: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- caleb.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- sjg@chromium.org, ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org,
- marex@denx.de, robert.marko@sartura.hr, seashell11234455@gmail.com,
- ycliang@andestech.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 2/3] sysreset: Implement PSCI based reset to EDL mode
- for QCOM SoCs
-Message-ID: <LuL4WXnr__yuMdWjNvf8teZE0XqtpLYxukfJXSiHAOwA4XpuCGGZA1uZl-dkXbR9lA0ilkh9k-N6hvDayjRSgW-Trb8cxyZgdMCEcQ8LGts=@samcday.com>
-In-Reply-To: <1e0e9a72-40a8-4ce3-a390-edef1d6a03d8@linaro.org>
-References: <20250410120208.4142087-1-quic_varada@quicinc.com>
- <20250410120208.4142087-3-quic_varada@quicinc.com>
- <1e0e9a72-40a8-4ce3-a390-edef1d6a03d8@linaro.org>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 4aaa851d8c08c8ca1cd2c3320ef386add0636c40
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-72b82c8230aso1722610a34.2
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 14:09:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1745960965; x=1746565765; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DYt6/3RiUejJu2SToBnkXo8ijokImdbOXjUFrGrmd1I=;
+ b=hnpVuqENHXBO29WtisZBUpkruzWajz909RdYJHM27DMCtZEDdQKH1XiuqbXbREOGPR
+ I0Z+P35aavsj3AYrSppycRvzZNLJA11JS/tjfuYO+V2q+Wcc6LjY96Mt04Kr6wX3AZtk
+ u30QMedkjs/0XLmjZRSOm4VvmnLvyjV7jqolg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745960965; x=1746565765;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DYt6/3RiUejJu2SToBnkXo8ijokImdbOXjUFrGrmd1I=;
+ b=e883QSBgCf5OFzAc5oWVvj7QQ27hVQfBU4az14wgY+wqovpJEJyp6htRQ/a5N5FnMN
+ Yi4NIB/3WAqGj9O8w2pc7enzZwrtLDaLc7H7e1QxfBfU6hYIRQpfjIg3tjbMDEKg2B4h
+ sZTANl/kw+res5u646gl4kVRPqFNpL4B3+a+asuYs/KQRs/Qx0kVf/Aedlcvm9eJ4/M+
+ KXgu5B6XCKqB+uOUncJUO/l9HRaXuaWIepzdXMIL5Vwtu5LK/gxmObpBpp2rQ/AZnmxw
+ eo300j2Vb8pV4C/zDlWF/HV5qjW4fKMThrhbON76Ehg3BHWp+CWzb2EdDocDZ4SrAnSL
+ H2qA==
+X-Gm-Message-State: AOJu0YzXHWoVN1R57xsU5FXh4x8e9i6Y7p2vXHZuufP5gsywI4MfZEWe
+ oiLGKoUb8xD+s0M6kz91TokmuYAiWF0z59H9PflxmlAeMjCBkrUUTZv05oBszzEBBuTSdWbtblY
+ f
+X-Gm-Gg: ASbGncuSS8S+891LTZZYsJ971NgpLdUGeorKqzpxTLuga8RzmfMTywj+S2XCmg/1dHR
+ khW2dgjav+NLlmDegZ38okIHL4X9PFLjXFbkx2ZaFH12Xk+g6FybSyXhu6/TbsNXzgulVRgQZ6N
+ YOwHnn3hx5MByVWApOCeStCbrkRo3C2lD3bzQtOPo+uSoPQQQw8WB9E6GE+M/2czbVTnxmAbB6I
+ m43HzvtyecSc6DIC+t7iC0q8KG57BWDfi8ebG9XyiIoCdkxH6SENmRJnsSFKeHyRCoje8pBsr/u
+ QQLCmZCrOIe95vyFBb/B8Ul5T9WnHTBVwG2ZDh0CLsNMAlREjyL88jvvB85WBqIUenWRAWGZsPV
+ C8g==
+X-Google-Smtp-Source: AGHT+IENZARZLsUaA79wBdWjfJfQFIanV+mx1dZjCLCP7KJLaPYpURbobJCTHOPXYzfu/pSj7dMrnA==
+X-Received: by 2002:a05:6871:3a12:b0:2da:462f:ead4 with SMTP id
+ 586e51a60fabf-2da6a36d920mr329646fac.38.1745960964547; 
+ Tue, 29 Apr 2025 14:09:24 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2da6e4f7cc1sm7126fac.39.2025.04.29.14.09.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Apr 2025 14:09:23 -0700 (PDT)
+Date: Tue, 29 Apr 2025 15:09:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: Re: [ANN] U-Boot v2025.07-rc1 released
+Message-ID: <20250429210921.GM1261075@bill-the-cat>
+References: <20250428214032.GG5495@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vUP7NYUtwdfNciRs"
+Content-Disposition: inline
+In-Reply-To: <20250428214032.GG5495@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,199 +96,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Casey, Varadarajan,
 
-On Tuesday, April 29th, 2025 at 12:22 AM, Casey Connolly <casey.connolly@li=
-naro.org> wrote:
+--vUP7NYUtwdfNciRs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->=20
->=20
->=20
->=20
-> On 4/10/25 14:02, Varadarajan Narayanan wrote:
->=20
-> > Add SYSRESET_EDL to sysreset_t and handle the different SYSRESET_xxx
-> > requests in sysreset_qcom-psci.c.
->=20
->=20
-> To be honest, I'm not really excited about this. Copying the entire PSCI
-> reset code and polluting the global sysreset reason enum with entirely
-> platform specific symbols is not good practise.
->=20
-> Additionally, while this specific EDL implementation works on your
-> platform, it does not work on (for example) sdm845 and sm8250 which are
-> platforms we still very much care about. I'm also not sure if it works
-> on SC7280.
->=20
-> I think this should be handled in an/the SCM driver like it is in Linux,
-> not sure if Sam is working on that or if I can send a barebones version
-> of the one I have in my tree. It will need to be based on the compatible
-> string for the scm node in DT (and checking for the qcom,dload-mode
-> property too I think).
+On Mon, Apr 28, 2025 at 03:40:32PM -0600, Tom Rini wrote:
 
-I've started on the v2 of the SCM driver patch, but I'm behind on
-everything atm, and not expecting to resend that series for another
-couple of weeks.
+> Hey all,
+>=20
+> So it's release day and I have tagged and pushed things out. Looking at
+> my own TODO list, I think it's in reasonable shape. I do think there's a
+> few other pull requests that need to happen still and I am optimistic
+> will come shortly (but I've not reached out to anyone in particular). If
+> there's anything big that people see missing, please speak up.
+>=20
+> We're continuing with a community meeting following the release and the
+> calendar link is
+> https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DN280=
+N2tlcXE3aDVtbjlicnNkcm82YnA1bDAgODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1ZjB=
+hYmQxMWMxYjgzNjA2MWFlMDZjMWM3ZGJjZDE4ZGY0MUBn&tmsrc=3D89be7b813136bec06a83d=
+e4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.calendar.google.com
+> and once again this is the same time as the previous meeting. The
+> meeting details itself are:
+> https://meet.google.com/btj-wgcg-euw
+> April 29th, 2025. 9am (GMT -06:00)
+>=20
+> To join by phone:
+> https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
 
-If someone wants to pick up the SCM part please be my guest :D
+And here are the notes I took on the call.
 
-Thanks,
--Sam
+- I noted that rc1 is out, I think my queue looks good and while most of
+  the PRs I expected have come in, a few haven't yet. And I may need to
+  look at the SPI/NAND/NOR queue myself.
+- Heinrich asked about updating QEMU in CI and the two platform failures
+  that updating has shown. I've not had time to look at the
+  vexpress_ca9x4 failure to see if this is a regression in QEMU or
+  exposing a U-Boot bug. Heinrich has not had time to look at the RISC-V
+  failure of sifive_unleashed. He will try and boot -rc1 on an Icicle
+  platform which is the same cores at least as the unleashed. As part of
+  this we had a short general discussion of some of the RISC-V platforms
+  and cores they utilize.
+- Heinrich noted E Shattow's issue that was brought up on IRC, of having
+  RISC-V platforms that read the EEPROM in SPL to determine what the
+  platform is and then load the proper device tree, but that they need
+  to do this again in full U-Boot in order to set fdtfile in the
+  environment. Is there a better way of doing this to avoid the
+  double-read? Heinrich thinks there might be some mechanism to copy
+  some properties today, but not everything. Simon noted bloblist could
+  be an option. Further discussion about fdtfile was had. I suggested
+  looking at board/ti/common/ as they also have this problem and have
+  been doing something at least for a number of years. Simon noted
+  SPL_HANDOFFF may be another option here.
+- Heinrich noted there's many bootm stages and states are not well
+  documented. Wondered who has a good understanding these days of the
+  states and stages and who could describe it. Simon knows much of it,
+  but it's not comprehensive. Simon has been trying to make it so you
+  can work without CMDLINE, which means having function calls to go
+  through the states. Simon can start by describing the constants better
+  at least.
+- Heinrich brought up his RFC for efi boot manager + bootstd he posted.
+  Wanted to know if Simon had looked in to the rest of the patches.
+  Simon is OK enough with the approach. Simon thinks that boot manager
+  should be more iterative, but a discussion for later. Heinrich noted
+  that for background at least, the spec requires certain behaviors to
+  be done.
+- Andre noted that Heinrich said Ubuntu uses fdtfile, does that mean it
+  always ignores the U-Boot tree? sunxi takes the running tree and
+  modifies it in tf-a/u-boot and that's the right one for the OS. This
+  lead to a fairly long discussion of how Ubuntu does and doesn't work
+  today, but at the end of the day U-Boot can and does support the
+  various contrasting approaches used here.
+- Andre asked who pays for CI (Gitlba), I noted it's all donated and use
+  as much as you like as the jobs are split such that aside from
+  bottlenecks on the high end machines no one else should get overly
+  blocked. Simon asked if Andre can setup a lab of his HW visible to
+  Gitlab. Andre will see what if anything can be done, but the sunxi
+  stuff is his personal project.
+- Heinrich asked of sunxi has newer hardware for example and Andre gave
+  a short general update.
+- Simon wanted to talk about standard passage. Heinrich asked for a
+  brief overview. I asked that we not go over it without other people
+  that use the code on the call. I noted the vexpress_fvp option and
+  will enable it in CI later today.
+- Simon asked about the Python patches he posted earlier in the day and
+  I reiterated that all patches for mainline need to be against mainline
+  and not some other tree.
 
->=20
-> As I proposed before on IRC, I think it makes sense to pass the "reset"
-> arguments into sysreset and allow the sysreset driver to implement a
-> callback/handler for them, this way the "edl" argument makes it all the
-> way to our platform-specific driver which can then call
-> "psci_system_reset2()"
->=20
-> I would implement this by adding a new op to sysreset_ops, something
-> like .request_args, then have a second for loop which calls this, since
-> we want any reset handler which /can/ parse the args to do so before we
-> call the normal .request callback (otherwise some other handler might do
-> a normal reset before we have parsed the arguments).
->=20
-> For now I'm fine with this new sysreset-qcom.c driver being specific to
-> qcs9100, but please include a comment that the psci reset2 call is only
-> supported on some newer qualcomm platforms and that others can be
-> supported via SCM.
->=20
-> On that note, how does this new driver actually get bound? It doesn't
-> have any compatible strings associated? Or am I missing something
-> here... Please explain this.
->=20
-> Otherwise, I'm looking forward to v2.
->=20
-> Kind regards,
->=20
-> > Signed-off-by: Varadarajan Narayanan quic_varada@quicinc.com
-> > ---
-> > drivers/sysreset/Kconfig | 5 +++
-> > drivers/sysreset/Makefile | 1 +
-> > drivers/sysreset/sysreset-uclass.c | 7 ++--
-> > drivers/sysreset/sysreset_qcom-psci.c | 47 +++++++++++++++++++++++++++
-> > include/sysreset.h | 2 ++
-> > 5 files changed, 60 insertions(+), 2 deletions(-)
-> > create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
-> >=20
-> > diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-> > index 121194e4418..a6a1e57b603 100644
-> > --- a/drivers/sysreset/Kconfig
-> > +++ b/drivers/sysreset/Kconfig
-> > @@ -240,6 +240,11 @@ config SYSRESET_RAA215300
-> > help
-> > Add support for the system reboot via the Renesas RAA215300 PMIC.
-> >=20
-> > +config SYSRESET_QCOM_PSCI
-> > + bool "Support sysreset for Qualcomm SoCs via PSCI"
-> > + help
-> > + Add support for the system reboot on Qualcomm SoCs via PSCI.
-> > +
-> > config SYSRESET_QCOM_PSHOLD
-> > bool "Support sysreset for Qualcomm SoCs via PSHOLD"
-> > depends on ARCH_IPQ40XX
-> > diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-> > index 796fc9effa5..12dbad5254a 100644
-> > --- a/drivers/sysreset/Makefile
-> > +++ b/drivers/sysreset/Makefile
-> > @@ -29,5 +29,6 @@ obj-$(CONFIG_SYSRESET_RESETCTL) +=3D sysreset_resetct=
-l.o
-> > obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) +=3D sysreset_at91.o
-> > obj-$(CONFIG_$(PHASE_)SYSRESET_X86) +=3D sysreset_x86.o
-> > obj-$(CONFIG_SYSRESET_RAA215300) +=3D sysreset_raa215300.o
-> > +obj-$(CONFIG_SYSRESET_QCOM_PSCI) +=3D sysreset_qcom-psci.o
-> > obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) +=3D sysreset_qcom-pshold.o
-> > obj-$(CONFIG_TARGET_XTFPGA) +=3D sysreset_xtfpga.o
-> > diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysr=
-eset-uclass.c
-> > index 536ac727142..d06c0a6908a 100644
-> > --- a/drivers/sysreset/sysreset-uclass.c
-> > +++ b/drivers/sysreset/sysreset-uclass.c
-> > @@ -125,8 +125,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int =
-argc, char *const argv[])
-> > if (argc > 2)
-> > return CMD_RET_USAGE;
-> >=20
-> > - if (argc =3D=3D 2 && argv[1][0] =3D=3D '-' && argv[1][1] =3D=3D 'w') =
-{
-> > - reset_type =3D SYSRESET_WARM;
-> > + if (argc =3D=3D 2) {
-> > + if (argv[1][0] =3D=3D '-' && argv[1][1] =3D=3D 'w')
-> > + reset_type =3D SYSRESET_WARM;
-> > + else if (!strncmp("edl", argv[1], 3))
-> > + reset_type =3D SYSRESET_EDL;
-> > }
-> >=20
-> > printf("resetting ...\n");
-> > diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/s=
-ysreset_qcom-psci.c
-> > new file mode 100644
-> > index 00000000000..3afb79e2d2e
-> > --- /dev/null
-> > +++ b/drivers/sysreset/sysreset_qcom-psci.c
-> > @@ -0,0 +1,47 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * Copyright (C) 2017 Masahiro Yamada yamada.masahiro@socionext.com
-> > + /
-> > +
-> > +#include <dm.h>
-> > +#include <sysreset.h>
-> > +#include <asm/system.h>
-> > +#include <linux/errno.h>
-> > +#include <linux/psci.h>
-> > +
-> > +__weak int qcom_psci_sysreset_get_status(struct udevice dev, char buf,=
- int size)
-> > +{
-> > + return -EOPNOTSUPP;
-> > +}
-> > +
-> > +static int qcom_psci_sysreset_request(struct udevice dev, enum sysrese=
-t_t type)
-> > +{
-> > + switch (type) {
-> > + case SYSRESET_WARM:
-> > + case SYSRESET_COLD:
-> > + psci_sys_reset(type);
-> > + break;
-> > + case SYSRESET_POWER_OFF:
-> > + psci_sys_poweroff();
-> > + break;
-> > + case SYSRESET_EDL:
-> > + psci_system_reset2(0, 1);
-> > + break;
-> > + default:
-> > + return -EPROTONOSUPPORT;
-> > + }
-> > +
-> > + return -EINPROGRESS;
-> > +}
-> > +
-> > +static struct sysreset_ops qcom_psci_sysreset_ops =3D {
-> > + .request =3D qcom_psci_sysreset_request,
-> > + .get_status =3D qcom_psci_sysreset_get_status,
-> > +};
-> > +
-> > +U_BOOT_DRIVER(qcom_psci_sysreset) =3D {
-> > + .name =3D "qcom_psci-sysreset",
-> > + .id =3D UCLASS_SYSRESET,
-> > + .ops =3D &qcom_psci_sysreset_ops,
-> > + .flags =3D DM_FLAG_PRE_RELOC,
-> > +};
-> > diff --git a/include/sysreset.h b/include/sysreset.h
-> > index ff20abdeed3..8bda9703cd9 100644
-> > --- a/include/sysreset.h
-> > +++ b/include/sysreset.h
-> > @@ -21,6 +21,8 @@ enum sysreset_t {
-> > SYSRESET_POWER,
-> > / @SYSRESET_POWER_OFF: turn off power /
-> > SYSRESET_POWER_OFF,
-> > + / @SYSRESET_EDL: reset and boot into Emergency DownLoader /
-> > + SYSRESET_EDL,
-> > / @SYSRESET_COUNT: number of available reset types */
-> > SYSRESET_COUNT,
-> > };
->=20
-> --
-> Casey (she/they)
+--=20
+Tom
+
+--vUP7NYUtwdfNciRs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgRP/kACgkQFHw5/5Y0
+tywcRgv9E+IrT6IudJl1rL0Vxi++20vn2C+tJTcFGi7D5jYbn8ZWgI+Sl7j6thTA
+QD8te813xPNgk85qkSZSOepVfhoBczrj5HtTs1ZWxfScXegO5VaRqtvrWJ2uGB6R
+7AvGF4s+9TgSid/Sf3xfk2xJIsiJhRO9Gt3/AQF5407Alh96xWU2b9Sr+cfvBY9s
+5rm0I344faKAvzX7nOWYptnodBaS0XSSASo9icFoQzWliHLMqY6jkor1QZ3phhTj
+J9tDfeg/Vpwll/F3Dug+nesKDvjaW3TnvI+gSYb28jek29sqyvEr6dTc7ChE3hZ2
+I7gTNhb4v6F2d8nsrBrAQSSJLlR4qf96grJV/slOaPnHlXojStkxy9jKkzHeiW+9
+tqL1m5yZEPfdYNLSHsccsbanEwodIQi9atx7bjJAm80giSs06c6bsg/Q81e72HrG
+Pk81oNg9DFcgDa4ss/RWXTcr8f7gWBxvUXzfhmkcu1N3tipDtWfSUVJdfuT44k1H
+qBoFkPLr
+=41bC
+-----END PGP SIGNATURE-----
+
+--vUP7NYUtwdfNciRs--
