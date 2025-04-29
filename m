@@ -4,87 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BF06C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 17:44:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8847C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 17:44:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6054E82ABA;
-	Tue, 29 Apr 2025 19:44:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
+	by phobos.denx.de (Postfix) with ESMTP id B2A8682AF6;
+	Tue, 29 Apr 2025 19:44:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZSwbkv7t";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7407A82A7B; Tue, 29 Apr 2025 19:42:57 +0200 (CEST)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
- [209.85.167.50])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7DBC982A64; Tue, 29 Apr 2025 19:34:41 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC22F829A1
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 19:42:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=csie.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wens213@gmail.com
-Received: by mail-lf1-f50.google.com with SMTP id
- 2adb3069b0e04-54e7967cf67so6648600e87.0
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 10:42:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745948569; x=1746553369;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dyIVp0NR4LgxbTW0cOVVe0R3nWHYou2tSFJ31wSexQc=;
- b=vp1RdHff7FJzywzPl03OUOX3dH7nF077kaumlveQDcP4PAliBcCM4ScImn7FG+Ougd
- p2EMEHn/X+JXXc0L2TXjaZnTa3OD1RgxZsriZwsPiMwHFKdtrstmG/GctVnTI1zZVkk+
- ON7802hre0MrNTxe+7YkSk3B2pP2mMxD9ULpdegY+6vQ6wB3sLG6cWETW1YBX77gSA3b
- KgzCPWSQx8FLitKFUaslg6LE5N5ypZJHFxwJV8OB8LKgQpP+7Yp738g9+2ECX+Cr4sUj
- v14OKJA7Uq5XQDkdYtAcBhzAB/du3Tt2cQeIfzZZ58XnSjVO8LJ2G8j4KUsBEXBvGcPC
- cFIw==
-X-Gm-Message-State: AOJu0YwqbconuAOZbov+DCWo5YJ8IAxc+fBo1UgrZc6HGhGW00XrLb9K
- bUz7mZFDx8LYPRrGGEmypbe/+2d+7rgaMRAf+OnmG/rITPAqlRTlCY0HS7g3SvE=
-X-Gm-Gg: ASbGncvgfJ7cdEMojP/mDmdAYQeZQP+1SLUMkfwwy5oRVueNeaQr5kfszj+wnU1Y8t5
- HpQ/3almsvsREgiX1YIFHdacOL/gvATVaUSWtXpIFiundp5xd3CIn8GoJvDEFPhREuNNgUB3fqM
- 35CjxAkbGhe23Lh4fxEePrJ2UeH3GG1JQu6ueGZ3yVhWJ34qcRZHpY8hrgu+isLrh+X0oW7c7/t
- PWP8PihWGjoFNNtQxKh1ivHqY27G8aX7iRtrTyY452nHTMSzf3qoS/Ihn5/hVtYR5qWuYjHh1Ot
- DcTLgI2570n+ddAcoEGw3EyCMtTUWtr+cs7LdiC95qxaXzg1+AHMu5FeRkNJPdTGh786X4Dl/w=
- =
-X-Google-Smtp-Source: AGHT+IEy7EvcRdzZaR9lJkwd1I2sPBSu8oEVUqP601YNGG5Y5OlBuiL5OSR4AD5grheG+EleFo8WFQ==
-X-Received: by 2002:a05:6512:ac4:b0:54d:662b:c8a9 with SMTP id
- 2adb3069b0e04-54ea336f40cmr17297e87.25.1745948568856; 
- Tue, 29 Apr 2025 10:42:48 -0700 (PDT)
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com.
- [209.85.208.180]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-54e7ccb8055sm1894287e87.234.2025.04.29.10.42.47
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Apr 2025 10:42:48 -0700 (PDT)
-Received: by mail-lj1-f180.google.com with SMTP id
- 38308e7fff4ca-3105ef2a08dso59427901fa.0
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 10:42:47 -0700 (PDT)
-X-Received: by 2002:a05:651c:b14:b0:30d:e104:9ad3 with SMTP id
- 38308e7fff4ca-31e6bb7a8f2mr168281fa.40.1745948566804; Tue, 29 Apr 2025
- 10:42:46 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id C2AE7829A1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 19:34:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id C0D594A9A8
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 17:34:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4A9BC4CEF1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 17:34:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1745948076;
+ bh=Hcf1Wp+3MQrpt3jzyY6Kks/Ep7P+hWs89XO0tIIm2vI=;
+ h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc:From;
+ b=ZSwbkv7tEpHhPCISfVSmSYe3yjAeshlwPV2MXM+9HK3j1kOqqMATjVty+WWFfIo/B
+ vmBxxXhjNvc3ON8fHYCtEJy+iSR1Ozg2JHRwQF/joNQkyNsPBBv6AItxO6vSZ0Z8TF
+ zfIg3YZqoq0YUg9R97u/sI/wxZxQdsUu+wrp5e9+7py/M93rKX1EphGcUE/fGXkaIo
+ CcCmfJCmHDioQlS9vKOodo6a6VKBYi/DEl4TF73JaXLkOWKlW7QQOdor5aRNXtfSNl
+ 5puIQ8h1IR0dgc4h6RQ3CL/1LUCDe0cEZT2GOL1tZ6f0E7Tn3gKvRSA/BqlaHINsQs
+ LngFBz1YBYcwQ==
+Received: by mail-lj1-f182.google.com with SMTP id
+ 38308e7fff4ca-3104ddb8051so70950611fa.1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 10:34:36 -0700 (PDT)
+X-Gm-Message-State: AOJu0YxvsnDGvashHCZs95kD2OvazGHrnuUkZSpCgM1TcBnkIBRPulea
+ kp5t5vnlZNtagwzKitWZmbnfzCsS5++7G2IV5svosIaUByuZRRi0ZYPbs5IIw8rjtla2vPhTn0i
+ QF/n/f3usYQe6CS2JbAMguifiir0=
+X-Google-Smtp-Source: AGHT+IGkOUbWqMhmAZrWM1GKT1omov+5W0zHHZG1k8TBPI+T649+7rbSrIiITIXbowNK9Sq5SBdVCS/2h4j0NAbOcZA=
+X-Received: by 2002:a05:651c:199e:b0:30c:f60:6c6 with SMTP id
+ 38308e7fff4ca-31e69a2cb99mr202371fa.6.1745948074605; Tue, 29 Apr 2025
+ 10:34:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250429174125.2194499-1-wens@kernel.org>
-In-Reply-To: <20250429174125.2194499-1-wens@kernel.org>
-From: Chen-Yu Tsai <wens@csie.org>
-Date: Wed, 30 Apr 2025 01:42:34 +0800
-X-Gmail-Original-Message-ID: <CAGb2v65juY8iC6y_dgMJ6HzrFX5A+7pvDyZSvasjEu9c0o37dg@mail.gmail.com>
-X-Gm-Features: ATxdqUE-vabw961PGNhIfXNjqpzG4Lw8TYqOIm1aYVJRWJm3_KsczeEJCHv7Xw4
-Message-ID: <CAGb2v65juY8iC6y_dgMJ6HzrFX5A+7pvDyZSvasjEu9c0o37dg@mail.gmail.com>
+References: <20250429154453.2155923-1-wens@kernel.org>
+ <e4607f73-2d94-41c7-af35-bb94dcc5c336@cherry.de>
+In-Reply-To: <e4607f73-2d94-41c7-af35-bb94dcc5c336@cherry.de>
+From: Chen-Yu Tsai <wens@kernel.org>
+Date: Wed, 30 Apr 2025 01:34:22 +0800
+X-Gmail-Original-Message-ID: <CAGb2v65WWPSD2Z12uxUCrgPu5C4e9uBfHouB4JDaFw5AB1ed-A@mail.gmail.com>
+X-Gm-Features: ATxdqUFLnOBQmPgbQGhec7ZpwwEmg9-afaE0jherQBsToGnodw-1VUWTdZT_svY
+Message-ID: <CAGb2v65WWPSD2Z12uxUCrgPu5C4e9uBfHouB4JDaFw5AB1ed-A@mail.gmail.com>
 Subject: Re: [PATCH 1/2] mmc: rockchip_dw_mmc: Enable by default for all
  supported SoCs
-To: u-boot@lists.denx.de
-Cc: Andy Yan <andyshrk@163.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Maksim Kiselev <bigunclemax@gmail.com>, 
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Akash Gajjar <gajjar04akash@gmail.com>, 
+ Alexandre Vicenzi <linux@alxd.me>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>,
+ =?UTF-8?Q?Andreas_F=C3=A4rber?= <afaerber@suse.de>, 
+ Andy Yan <andyshrk@163.com>, Banglang Huang <banglang.huang@foxmail.com>, 
+ Chris Morgan <macromorgan@hotmail.com>, 
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ David Bauer <mail@david-bauer.net>, 
+ Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>, 
+ Elon Zhang <zhangzj@rock-chips.com>, Eugen Hristev <eugen.hristev@linaro.org>, 
+ FUKAUMI Naoki <naoki@radxa.com>, Fabio Estevam <festevam@gmail.com>, 
+ Frank Wunderlich <frank-w@public-files.de>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jacobe Zang <jacobe.zang@wesion.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jianfeng Liu <liujianfeng1994@gmail.com>, Johan Jonker <jbx6244@gmail.com>, 
+ John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Joseph Chen <chenjh@rock-chips.com>, 
+ Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>, 
+ Klaus Goger <klaus.goger@cherry.de>, Levin Du <djw@t-chip.com.cn>, 
+ Loic Devulder <ldevulder@suse.com>, Maksim Kiselev <bigunclemax@gmail.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, 
+ "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+ Nick Xie <nick@khadas.com>, 
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Otavio Salvador <otavio@ossystems.com.br>,
+ Paul Kocialkowski <paulk@sys-base.io>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Raymond Mao <raymond.mao@linaro.org>, 
+ Ricardo Pardini <ricardo@pardini.net>, Sam Edwards <cfsworks@gmail.com>, 
+ Sean Anderson <seanga2@gmail.com>, Sebastian Kropatsch <seb-dev@mail.de>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ Tianling Shen <cnsztl@gmail.com>, Tim Lunn <tim@feathertop.org>, 
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Tom Rini <trini@konsulko.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, Xiaobo Tian <peterwillcn@gmail.com>, 
+ huang lin <hl@rock-chips.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 29 Apr 2025 19:44:02 +0200
+X-Mailman-Approved-At: Tue, 29 Apr 2025 19:44:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,85 +120,144 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: wens@csie.org
+Reply-To: wens@kernel.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Please ignore this. I accidentally sent out the patches with incorrect
-patman tags.
+On Wed, Apr 30, 2025 at 12:30=E2=80=AFAM Quentin Schulz
+<quentin.schulz@cherry.de> wrote:
+>
+> Hi Chen-Yu,
+>
+> On 4/29/25 5:44 PM, Chen-Yu Tsai wrote:
+> > From: Chen-Yu Tsai <wens@csie.org>
+> >
+> > The rockchip_dw_mmc driver supports the MMC controller found in Rockchi=
+p
+> > SoCs. This controller is used for the SD card on all SoCs and eMMC on
+> > older SoCs. Almost all defconfigs for Rockchip platforms have this
+> > enabled.
+> >
+> > Enable it by default for all supported Rockchip SoCs. Disable it
+> > explicitly in defconfigs that previously didn't have it enabled.
+> >
+>
+> I'll let Tom confirm (or not), but I think it'd make sense to make this
+> patch lighter by not including the defconfig changes that would be
+> simply done automatically when doing a defconfig sync, e.g. like
+> bdf41fb7b386bdf60303b7a92431467c12779c86 did? This would be nice because
+> it would make your patch much easier to apply if they take long to be
+> applied (e.g. someone else changes the defconfig and now we have
+> conflicts all over the place). This also would remove unrelated changes
+> from the diff, specifically the ones for the PX30 boards which are just
+> noise at this point.
+>
+> [...]
+>
+> > diff --git a/configs/coolpi-cm5-genbook-rk3588_defconfig b/configs/cool=
+pi-cm5-genbook-rk3588_defconfig
+> > index 3eb5dc968af6..92676ebb984a 100644
+> > --- a/configs/coolpi-cm5-genbook-rk3588_defconfig
+> > +++ b/configs/coolpi-cm5-genbook-rk3588_defconfig
+> > @@ -65,6 +65,7 @@ CONFIG_MMC_HS400_ES_SUPPORT=3Dy
+> >   CONFIG_SPL_MMC_HS400_ES_SUPPORT=3Dy
+> >   CONFIG_MMC_HS400_SUPPORT=3Dy
+> >   CONFIG_SPL_MMC_HS400_SUPPORT=3Dy
+> > +# CONFIG_MMC_DW is not set
+> >   CONFIG_MMC_SDHCI=3Dy
+> >   CONFIG_MMC_SDHCI_SDMA=3Dy
+> >   CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
+>
+> Checked that and sdmmc and sio both seems to be disabled in the DTS, so
+> makes sense to have the driver disabled too.
+>
+> [...]
+>
+> > diff --git a/configs/evb-rv1108_defconfig b/configs/evb-rv1108_defconfi=
+g
+> > index 46b949531017..d23f90a6a606 100644
+> > --- a/configs/evb-rv1108_defconfig
+> > +++ b/configs/evb-rv1108_defconfig
+> > @@ -31,6 +31,7 @@ CONFIG_FASTBOOT_BUF_SIZE=3D0x08000000
+> >   CONFIG_FASTBOOT_FLASH_MMC_DEV=3D1
+> >   CONFIG_ROCKCHIP_GPIO=3Dy
+> >   CONFIG_SYS_I2C_ROCKCHIP=3Dy
+> > +# CONFIG_MMC_DW is not set
+> >   CONFIG_SPI_FLASH_GIGADEVICE=3Dy
+> >   CONFIG_SPI_FLASH_WINBOND=3Dy
+> >   CONFIG_SPI_FLASH_MTD=3Dy
+>
+> This one seems to be a mistake, sdmmc is enabled and is supported by
+> this driver as far as I know. A separate patch to enable it
+> (before/after this one, would be nice).
+
+After the patch it would be enabled by default, so nothing actually
+has to be done? I can mention in the commit message that this one
+and the Geekbox are intentionally enabled by default after the
+patch since the DTS have them enabled.
+
+> [...]
+>
+> > diff --git a/configs/geekbox_defconfig b/configs/geekbox_defconfig
+> > index 80f91de7a11d..9dc642dc4ad9 100644
+> > --- a/configs/geekbox_defconfig
+> > +++ b/configs/geekbox_defconfig
+> > @@ -22,6 +22,7 @@ CONFIG_REGMAP=3Dy
+> >   CONFIG_SYSCON=3Dy
+> >   CONFIG_BOUNCE_BUFFER=3Dy
+> >   CONFIG_CLK=3Dy
+> > +# CONFIG_MMC_DW is not set
+> >   CONFIG_PINCTRL=3Dy
+> >   CONFIG_RAM=3Dy
+> >   CONFIG_DEBUG_UART_SHIFT=3D2
+>
+> This one seems to be a mistake, emmc is enabled and is supported by this
+> driver as far as I know. A separate patch to enable it (before/after
+> this one, would be nice).
+
+Same here.
+
+> [...]
+>
+> > diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+> > index 6740591a6533..f2f0e7dbe601 100644
+> > --- a/drivers/mmc/Kconfig
+> > +++ b/drivers/mmc/Kconfig
+> > @@ -251,6 +251,7 @@ config MMC_DAVINCI
+> >   config MMC_DW
+> >       bool "Synopsys DesignWare Memory Card Interface"
+> >       select BOUNCE_BUFFER
+> > +     default y if ARCH_ROCKCHIP
+> >       help
+> >         This selects support for the Synopsys DesignWare Mobile Storage=
+ IP
+> >         block, this provides host support for SD and MMC interfaces, in=
+ both
+> > @@ -286,6 +287,7 @@ config MMC_DW_ROCKCHIP
+> >       bool "Rockchip SD/MMC controller support"
+> >       depends on OF_CONTROL
+> >       depends on MMC_DW
+> > +     default y
+>
+> default y if ARCH_ROCKCHIP
+>
+> maybe? To avoid boards from other vendors to have to disable it?
+
+Oops, I missed this.
+
+I think
+
+    depends on ARCH_ROCKCHIP
+    default y
+
+would make more sense, and also match the platform-specific options
+for the other platforms.
+
+What do you think?
+
+Thank you and Tom for the quick responses.
 
 
 ChenYu
-
-On Wed, Apr 30, 2025 at 1:41=E2=80=AFAM Chen-Yu Tsai <wens@kernel.org> wrot=
-e:
->
-> From: Chen-Yu Tsai <wens@csie.org>
->
-> The rockchip_dw_mmc driver supports the MMC controller found in Rockchip
-> SoCs. This controller is used for the SD card on all SoCs and eMMC on
-> older SoCs. Almost all defconfigs for Rockchip platforms have this
-> enabled.
->
-> Enable it by default for all supported Rockchip SoCs. Disable it
-> explicitly in defconfigs that previously didn't have it enabled. Of
-> these, only the Cool Pi GenBook w/ CM5 doesn't actually use the
-> controller. The other two, the Geekbox and the RV1108 EVB, both have
-> MMC enabled in their device trees. With this patch, they will gain
-> support for MMC automatically.
->
-> Also limit the driver to Rockchip platforms only, like what is done for
-> the other dw_mmc platform glue drivers.
->
-> Signed-off-by: Chen-Yu Tsai <wens@csie.org>
-> ---
->
-> Changes in v2:
-> - Made CONFIG_MMC_DW_ROCKCHIP depend on ARCH_ROCKCHIP
->
->  configs/coolpi-cm5-genbook-rk3588_defconfig | 1 +
->  drivers/mmc/Kconfig                         | 3 +++
->  2 files changed, 4 insertions(+)
->
-> diff --git a/configs/coolpi-cm5-genbook-rk3588_defconfig b/configs/coolpi=
--cm5-genbook-rk3588_defconfig
-> index 3eb5dc968af6..92676ebb984a 100644
-> --- a/configs/coolpi-cm5-genbook-rk3588_defconfig
-> +++ b/configs/coolpi-cm5-genbook-rk3588_defconfig
-> @@ -65,6 +65,7 @@ CONFIG_MMC_HS400_ES_SUPPORT=3Dy
->  CONFIG_SPL_MMC_HS400_ES_SUPPORT=3Dy
->  CONFIG_MMC_HS400_SUPPORT=3Dy
->  CONFIG_SPL_MMC_HS400_SUPPORT=3Dy
-> +# CONFIG_MMC_DW is not set
->  CONFIG_MMC_SDHCI=3Dy
->  CONFIG_MMC_SDHCI_SDMA=3Dy
->  CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index 6740591a6533..ec9e9d51fbf9 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -251,6 +251,7 @@ config MMC_DAVINCI
->  config MMC_DW
->         bool "Synopsys DesignWare Memory Card Interface"
->         select BOUNCE_BUFFER
-> +       default y if ARCH_ROCKCHIP
->         help
->           This selects support for the Synopsys DesignWare Mobile Storage=
- IP
->           block, this provides host support for SD and MMC interfaces, in=
- both
-> @@ -286,6 +287,8 @@ config MMC_DW_ROCKCHIP
->         bool "Rockchip SD/MMC controller support"
->         depends on OF_CONTROL
->         depends on MMC_DW
-> +       depends on ARCH_ROCKCHIP
-> +       default y
->         help
->           This enables support for the Rockchip SD/MMM controller, which =
-is
->           based on Designware IP. The device is compatible with at least
-> --
-> 2.39.5
->
