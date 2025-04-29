@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26B7EC369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:15:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C68C8C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:15:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 507438215E;
-	Tue, 29 Apr 2025 15:15:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9EC21826AD;
+	Tue, 29 Apr 2025 15:15:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gZyE+lNi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ATAFfC4m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E53EE8215F; Tue, 29 Apr 2025 15:15:26 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id AE47A82724; Tue, 29 Apr 2025 15:15:30 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9F6982145
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:15:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A038826AD
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:15:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3d81ca1d436so53579435ab.2
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:15:24 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-85b3f92c8f8so662873039f.1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:15:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745932523; x=1746537323; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ACyM7opzsaKcvW4RpDaCauuqhlApDhc4ThV1povD/zI=;
- b=gZyE+lNi7dnDp7iEtC4rA0kEuyGFK5mnI4DKoWdKlwQdsIHS2amPlufbyXZIitNKWS
- 5pQzHGZz/bLNIYxYoWk5uS8S2plyny5U/9Poahgu/Ot4+vCH5QdUvXpRF6B8aWAuUPwE
- 7zGwM+ZDkzPrmMXG0u2+rgC1u55BL5axdtmZQ=
+ d=chromium.org; s=google; t=1745932526; x=1746537326; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=e1qO9QEcXz+eFX+0ALNnhr5m6/Xn09L66y8ncXhJa28=;
+ b=ATAFfC4mB+OwwwuvRKKTHpHy/r77JR3YG9tueiXGm1Wu/xOHJXCkWvmAOwR3u6/Huv
+ kUHbSTxWGWoHW2Ydvn3uly8z6auOgzKuaA/4j6ONi7Ug+bo2iU6G1eacTszt2+8EDLEh
+ 4oL5rVI1Pu0BDv8rpUUOYYyJcHUclPCm5r/v8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745932523; x=1746537323;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ACyM7opzsaKcvW4RpDaCauuqhlApDhc4ThV1povD/zI=;
- b=pzGBM+b/zd3HwdlRWNOSOAcKTnd0hNnWXAvnv+cEiUo9F63AkN2askzrdZwobH3Qvj
- +xArhUB8HhYgnGGk9HCtC2rA3UnTaU6qJwfYRUvZJdbp3RNVgpUnIeCyFFCJU+eDH/fJ
- xw55AXKLoKezhwcxFkcVy9dh9rzJ8oqPVrNOk4oly1M3w9aYT7VVS6DkKEmA3Qgoriey
- GXb67q0xvMIlEajqmpx9dlwn/lOGTZLJBviSXEvSVYZ1u1ZCZ9h9swFerahubKKcOeLe
- BjBIMZ/JqkHPZycf1B5BznSf4Vmb6QIJammcM9z1nF2lOm24DMGIlPE3xOao0bebJRTf
- Wq9g==
-X-Gm-Message-State: AOJu0Yz0Xecl0rr2t7DWfMjhvVCInSFcxdIO1vvt7wRMsgh4JYu8ub55
- dP+3FQ3tQusRhIei4rGIhrqhbszHQaEL1XyZ4M7e2YE/E83JrC9KE1NSsNgNVruLOpI+bLRogrs
+ d=1e100.net; s=20230601; t=1745932526; x=1746537326;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=e1qO9QEcXz+eFX+0ALNnhr5m6/Xn09L66y8ncXhJa28=;
+ b=gCxxdQJ8YIWawa4tF94krcR9LDG2YkYPlsmQMA3J429fMfK58DS3tzee1PK7raON5e
+ +7AeKhiycu7gw+EiOM1tcZYWSEDZI2lpaaSsTXljmq0oJ9koXWbFXGkFn9xIfFz9qJIY
+ lDOGf8bkM+/nB2z1tnryN4B1SfnEXMKtpOZNfBENXIsnhqcrM4jLvsHyJ92qNchvnlcP
+ 75DRWGm1UVGQPbJnUVMQ3vlPiTNWnl4enWNUI3oYATfWcC4tJWy5f4xE0oL13mAxR+dJ
+ KQcJEFWzpEz5qjFcu5asMa29bMVnjsK5Np3SH77FxvBQ0zDuaUoqkFz4V45J3bwmY7Sl
+ ++XQ==
+X-Gm-Message-State: AOJu0YwXtaewDNIXCOxNMx1ta/nx49fVSaM8ON2QzVFO/iYNq++CbWxZ
+ b1lYIq1XI3oC+rsas2RKUiEwc90UaYJu73YfaCKg0taW9/wiJC2Y4k+/2Q8EOss3vLHw+j494t8
  =
-X-Gm-Gg: ASbGncthOq9V18N4hWRz1D3CuvHJhLJ9vhLqi0+eoiZBxpcNSdYXrdCDPsTjaoDHQnZ
- RgdTxR2J6Ol1+yVCmz8FiXSMP844ZLabJ9yeZcULyMfwAw2ndcsIQ+bHp4EtqDdD0qeiG51qqYL
- +0sACe6jRFiKGMgyJ2AFj4hH3SstSDz5NGuK86gWnGk6zxFu8naHytvcg8Wdic45Iw7+uE8vg8T
- D29iRpSYv3Lz56xRAHDFmBPxsVOs89FndZYuCBWmE+vbATOA+mYSMrH+wCr3lQhmYA51mfUrRbq
- 6HKOL1zs1KM5x0q1caa06mmZDO5fNZZaCEpwzEjesnoGyksEKH2eHXJAPHyUWasoVA5tdbG6ezS
- Erw==
-X-Google-Smtp-Source: AGHT+IEHNLsNbRHqFExDIUyyovv53t+Fi1jfBJBBzJOeCNQfYLVYOh5+HvBa02cmm1ItulnAvaiP5g==
-X-Received: by 2002:a05:6e02:3d87:b0:3d9:65f3:974f with SMTP id
- e9e14a558f8ab-3d965f398camr4315145ab.16.1745932522741; 
- Tue, 29 Apr 2025 06:15:22 -0700 (PDT)
+X-Gm-Gg: ASbGncvFcigAgoeU6gOTlhee80tcyHzH7WcGkADkFDlcvJL2oIYx+Ep32KoPCxm95c9
+ mepac1RZuPNkKQWzZIDXpW1kipYqLEmEgQVFFUG0Gz4fFGFQAoPwSN459r9OwSZRrCz8caPbRyS
+ 0Oi1H26nI0q/dBy3PeEV4DX6tcq1a+6slOKYpbzUa88Eqn4AsiUPgTTBTsnBhkqvAg8BMI1MoGA
+ OhiZu6ntHnBFt4oQPqGZowJhQZCYflblCC4dwXGlmt8mrb5h/Qwso0dgfJlXlEwGQShDk2qDAU0
+ 9hmq7sZxBFAN0xmVH99vsQklZo3MVXcsx7UKHGOEQxre6P796Olpw6gdqCd2qzNVH3hwqgagcs6
+ 7sF3Xx6VJDdNc
+X-Google-Smtp-Source: AGHT+IHOmSDjcfUy6bBZCtjVTUTsfPbJxMWYnuyBJQZ4dwrd6S9s3d0XSM8X1uhmZVjG9DfglS35zA==
+X-Received: by 2002:a05:6602:7286:b0:864:88f9:62f2 with SMTP id
+ ca18e2360f4ac-8648aedcf00mr335616139f.9.1745932526493; 
+ Tue, 29 Apr 2025 06:15:26 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f86311cccbsm271816173.84.2025.04.29.06.15.17
+ 8926c6da1cb9f-4f86311cccbsm271816173.84.2025.04.29.06.15.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 06:15:18 -0700 (PDT)
+ Tue, 29 Apr 2025 06:15:23 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] tools/make_pip.sh: Use debian packages instead of pip
-Date: Tue, 29 Apr 2025 07:15:05 -0600
-Message-ID: <20250429131515.244061-1-sjg@chromium.org>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/2] tools: Update the license specifiers
+Date: Tue, 29 Apr 2025 07:15:06 -0600
+Message-ID: <20250429131515.244061-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250429131515.244061-1-sjg@chromium.org>
+References: <20250429131515.244061-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,32 +95,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Recent distros complain about using 'pip install'. Adjust the script to
-use 'apt get' instead where possible/required (e.g. with Ubuntu 24.04).
+Recent versions of Python complain about the license being in the
+classifiers part. Use a 'license' property instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- scripts/make_pip.sh | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ tools/binman/pyproject.toml       | 2 +-
+ tools/buildman/pyproject.toml     | 2 +-
+ tools/dtoc/pyproject.toml         | 2 +-
+ tools/patman/pyproject.toml       | 2 +-
+ tools/u_boot_pylib/pyproject.toml | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/scripts/make_pip.sh b/scripts/make_pip.sh
-index d2639ffd6e4..90756279770 100755
---- a/scripts/make_pip.sh
-+++ b/scripts/make_pip.sh
-@@ -107,8 +107,10 @@ mkdir ${dir}/tests
- cd ${dir}
+diff --git a/tools/binman/pyproject.toml b/tools/binman/pyproject.toml
+index ba34437fc53..f17bc051ea1 100644
+--- a/tools/binman/pyproject.toml
++++ b/tools/binman/pyproject.toml
+@@ -10,11 +10,11 @@ authors = [
+ ]
+ dependencies = ["pylibfdt", "u_boot_pylib >= 0.0.6", "dtoc >= 0.0.6"]
+ description = "Binman firmware-packaging tool"
++license = "GPL-2.0-or-later"
+ readme = "README.rst"
+ requires-python = ">=3.7"
+ classifiers = [
+     "Programming Language :: Python :: 3",
+-    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+     "Operating System :: OS Independent",
+ ]
  
- # Make sure the tools are up to date
--python3 -m pip install --upgrade build
--python3 -m pip install --upgrade twine
-+if ! sudo apt install python3-build twine; then
-+	python3 -m pip install --upgrade build
-+	python3 -m pip install --upgrade twine
-+fi
+diff --git a/tools/buildman/pyproject.toml b/tools/buildman/pyproject.toml
+index 68bfa45c3f4..3d0842e470a 100644
+--- a/tools/buildman/pyproject.toml
++++ b/tools/buildman/pyproject.toml
+@@ -14,11 +14,11 @@ dependencies = [
+     "patch-manager >= 0.0.6"
+ ]
+ description = "Buildman build tool for U-Boot"
++license = "GPL-2.0-or-later"
+ readme = "README.rst"
+ requires-python = ">=3.7"
+ classifiers = [
+     "Programming Language :: Python :: 3",
+-    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+     "Operating System :: OS Independent",
+ ]
  
- # Build the PyPi package
- python3 -m build
+diff --git a/tools/dtoc/pyproject.toml b/tools/dtoc/pyproject.toml
+index 9f59788e616..3d75e5269c7 100644
+--- a/tools/dtoc/pyproject.toml
++++ b/tools/dtoc/pyproject.toml
+@@ -10,11 +10,11 @@ authors = [
+ ]
+ dependencies = ["pylibfdt", "u_boot_pylib >= 0.0.6"]
+ description = "Devicetree-to-C generator"
++license = "GPL-2.0-or-later"
+ readme = "README.rst"
+ requires-python = ">=3.7"
+ classifiers = [
+     "Programming Language :: Python :: 3",
+-    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+     "Operating System :: OS Independent",
+ ]
+ 
+diff --git a/tools/patman/pyproject.toml b/tools/patman/pyproject.toml
+index 06e169cdf48..be7bf1998a6 100644
+--- a/tools/patman/pyproject.toml
++++ b/tools/patman/pyproject.toml
+@@ -10,11 +10,11 @@ authors = [
+ ]
+ dependencies = ["u_boot_pylib >= 0.0.6", "aiohttp >= 3.9.1" ]
+ description = "Patman patch manager"
++license = "GPL-2.0-or-later"
+ readme = "README.rst"
+ requires-python = ">=3.7"
+ classifiers = [
+     "Programming Language :: Python :: 3",
+-    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+     "Operating System :: OS Independent",
+ ]
+ 
+diff --git a/tools/u_boot_pylib/pyproject.toml b/tools/u_boot_pylib/pyproject.toml
+index ce2355084ac..c0257caba84 100644
+--- a/tools/u_boot_pylib/pyproject.toml
++++ b/tools/u_boot_pylib/pyproject.toml
+@@ -9,11 +9,11 @@ authors = [
+   { name="Simon Glass", email="sjg@chromium.org" },
+ ]
+ description = "U-Boot python library"
++license = "GPL-2.0-or-later"
+ readme = "README.rst"
+ requires-python = ">=3.7"
+ classifiers = [
+     "Programming Language :: Python :: 3",
+-    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+     "Operating System :: OS Independent",
+ ]
+ 
 -- 
 2.43.0
 
