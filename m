@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5F8C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DAE7C3ABAB
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:27:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BD7A82A76;
-	Tue, 29 Apr 2025 15:25:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 885BD82AA8;
+	Tue, 29 Apr 2025 15:25:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DlCOmlGd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bkDbQ3Nv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE2B582A65; Tue, 29 Apr 2025 15:25:10 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 3FED682AC1; Tue, 29 Apr 2025 15:25:16 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4BB182145
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:25:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D69B08283E
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:25:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2d4e91512b4so3694517fac.1
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:25:08 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3f8ae3ed8f4so4161214b6e.3
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:25:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745933107; x=1746537907; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745933111; x=1746537911; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A2mpDX+V5wPiuOLaiPfnEWmQ327f7fJYG/uzBqODMkc=;
- b=DlCOmlGdqS4RO9rjRjnIIEt9T6cazFd/guuqW4qm8UDqAIuE12XG7zFeUzGrd37eQz
- Y+0sLo1X4oRAP0fAzLMMZtUbSVF72416c/IxnTjYqqyZlnMykeDZ+2w6kFK5hUxHpSkW
- zeNWFLs0lLfe5M44Lrr44fo1s0YVg+mRpCORA=
+ bh=fi0BnmchFDOCb71FSzlYPvrbyVLpKwN7v3twXbmRcjA=;
+ b=bkDbQ3Nvp+qwv5i+YhhcTCHErMu1CfRMtnUN69eZuuDNUcA+I1+inCrOBCQraEpqpq
+ F2hLsVKPNVUcovZ8uSdEnAj4E+mqhTLM32m42NeikR8Ix9axi0g5XduGOL2Ue+aV8yDI
+ VtjBnuUrWLflKARcHoQcoAFzBfzH1be3pRszk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745933107; x=1746537907;
+ d=1e100.net; s=20230601; t=1745933111; x=1746537911;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A2mpDX+V5wPiuOLaiPfnEWmQ327f7fJYG/uzBqODMkc=;
- b=EQeBWMNWO3PnvJZme5YM/mCOv5BgWIM3Lk+Fv/ivzl6icfK2mNFiAs9mf4enbcTSxu
- OHlRMrMRH3cnTY/+yCzURxEGCR5LE2Pz6ev381wFSkTp/Rmv2dKKy25j9LwWsiGh6LxP
- 2j8XCsk+rgPjXxI3bc8On4yKbMGeHK7P9ki+/X7AM2E7X8Fg756npPJ6WVeq3Pwmrr1w
- jr6JF5S5UNqu+/7+QgPnDX1TwsgmarkhT4k9ZTCI4wzD4HnUbz7Vh6eNjW7qWwC0tGOQ
- ZHo8IO/ukBsPpwPBxxrpUbGhPvNFYBlbbbLsm9DxE/PMsPt1hV6oBWG6NnpSdxlOredK
- 68hg==
-X-Gm-Message-State: AOJu0YxQ3gxzoGGgo4EO6updf+chP8yp0wwbU5IofgMvGURVCL7ojubM
- u86tHcGuM4KqyLdCRJvNwhn9yMrif81W3X+YaVsk5gdl2bIkT1yBt6E8AIqG1quCRFyp3pIF2dk
+ bh=fi0BnmchFDOCb71FSzlYPvrbyVLpKwN7v3twXbmRcjA=;
+ b=Ct//X8fn0T69TWPPJYxrizN3jyduuZ6FS1KCytZ8fo3VGHTi8SBjkscT6iCgmTLWSv
+ Xxf449HmXrofaANhn590Jc7r30f6i+aHM8ZxqW1b95kvGpsowT0eFOaOSJ4qp9kLbfol
+ xmWRUKTU9P9cPZtzYXcBoIzMw7XqtNrCl278ii54XAsW2MuTPldIvmPw5QV15kRZZZM2
+ aphZmJqZS2LbTvwtVGvCi/OVjiW1DZ+HS1YE8HKvwZPPMZICO8yHSKmLojNCXIqNgKH7
+ r2rqj4uBf2R82drbuP/7Rtlh9/J8epKnLJcpIynNuqnNw6wDQmaE2UItHnFn2MzQI4ZU
+ QyVw==
+X-Gm-Message-State: AOJu0YzuTJyOXjDns/7A52xpFSO/ddAjFcSkCWnon3T12+fXz7y4lO4c
+ KIWjVbkqdrR4kVyGWHJ0PsS1H7Rngz6nQkX3Mj2T4WrBZ8qKah4FWCpnY9h1fdJwQJfMAjAXl00
  =
-X-Gm-Gg: ASbGncsVQQkmfr6Nc//QyMtaCOjqnum1glbyga/9w7S/lbm6IdmDJB+1YRa3lVvC/gF
- TvvZnkYtoC47KexVejP6orzZubwXUglknK2FqMKFak4JZfI+LjbJt+qTcKaB6jH/QRAmHgJh8de
- u42WERPKQDO5j4E7SAUa07c/++qhYFe4kdyaQ7sgbodR9GqNgUULuBt7JBi8WncxHCIFc48kZc0
- 2VBOIH3s6Lt56R/lnEG2oow2SR0Z5kJlCQLBNmMfS8hKhV7VQICCc1sCQoAYAL6MwRszLWnyvzi
- ROuXCfWNaHGP9ke6QHRLcW7q1rmYSst2usLnPiXz0sacO2zVNSA063kjguz5DpC7XSbCYtuxgwf
- iocNmtMem0KLB
-X-Google-Smtp-Source: AGHT+IGzIYlXjgZ1VrcYLZM3/tezGg758DdEvOTtV90lVOr1ceMTdwl4bHiuo9oSXRmGE6cxRVAn4w==
-X-Received: by 2002:a05:6870:4792:b0:2c2:489d:887 with SMTP id
- 586e51a60fabf-2d9be59560amr7028566fac.17.1745933106976; 
- Tue, 29 Apr 2025 06:25:06 -0700 (PDT)
+X-Gm-Gg: ASbGnctmEMaz2Va6hdIg926N6ys5k2rKzGFskSEfMoAPJib29J4yupyTaGqX60NMW5N
+ D3eN+derE6h0v20IhQVMKcHvD9esMULTmPGKMw5ElmmBrFKuD2SOVqG50VEPzrQJ1JAJqctGuwC
+ 3tgJCMDwZFvyY8aExRrdXPxjTkLnHYmqfdBnajB2KNVVYj+zrZPuh6YwJ7VOqh2ngDaHR7Zzbdo
+ abhYBLKNf8mqB+Y1d0n8lIlvXuu1DRwVsCqbABexJ3n0+eO+0VNY4JfGwSruUWNdfu2RcaELdem
+ g7kQ9/IBqtlMH2WnU4Akw/QQ6fLMgfLPDMrFLxNo+Jjwc/fc2Ood1nixsxJ0NmHchIIa86D3S2S
+ Ytg==
+X-Google-Smtp-Source: AGHT+IFD1wMErefvvcrwWv8zYSmCnD4MV1Cn5sE5BAR6omxpeCiXci9JmkRJcfyLKcWIHa5XAelpiQ==
+X-Received: by 2002:a05:6808:1b90:b0:401:e67c:b3be with SMTP id
+ 5614622812f47-402115506f8mr1699638b6e.4.1745933111559; 
+ Tue, 29 Apr 2025 06:25:11 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.25.03
+ 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.25.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 06:25:04 -0700 (PDT)
+ Tue, 29 Apr 2025 06:25:07 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 28/30] patman: Provide an option to run in single-threaded mode
-Date: Tue, 29 Apr 2025 07:22:25 -0600
-Message-ID: <20250429132239.251756-29-sjg@chromium.org>
+Subject: [PATCH 29/30] patman: Use a pager when outputting status
+Date: Tue, 29 Apr 2025 07:22:26 -0600
+Message-ID: <20250429132239.251756-30-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250429132239.251756-1-sjg@chromium.org>
 References: <20250429132239.251756-1-sjg@chromium.org>
@@ -95,75 +95,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The pager makes it easier to review large number of comments. Add it
+around the output.
+
 Patman normally sends multiple concurrent requests to the patchwork
 server, as this is faster. Provide an option to disable this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/cmdline.py   | 2 ++
- tools/patman/control.py   | 4 ++--
- tools/patman/patchwork.py | 5 +++--
- 3 files changed, 7 insertions(+), 4 deletions(-)
+ tools/patman/status.py | 35 +++++++++++++++++++----------------
+ 1 file changed, 19 insertions(+), 16 deletions(-)
 
-diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
-index a7327a20665..cf32716b8e0 100644
---- a/tools/patman/cmdline.py
-+++ b/tools/patman/cmdline.py
-@@ -130,6 +130,8 @@ def parse_args():
-         help='Name of branch to create with collected responses')
-     status.add_argument('-f', '--force', action='store_true',
-                         help='Force overwriting an existing branch')
-+    status.add_argument('-T', '--single-thread', action='store_true',
-+                        help='Disable multithreading when reading patchwork')
+diff --git a/tools/patman/status.py b/tools/patman/status.py
+index f5be51461e7..dfc0f29faa4 100644
+--- a/tools/patman/status.py
++++ b/tools/patman/status.py
+@@ -382,22 +382,25 @@ def do_show_status(patches, series, branch, show_comments, col,
+     new_rtag_list = [None] * count
+     review_list = [None] * count
  
-     # Parse options twice: first to get the project and second to handle
-     # defaults properly (which depends on project)
-diff --git a/tools/patman/control.py b/tools/patman/control.py
-index cb8552ed550..cfea35ea648 100644
---- a/tools/patman/control.py
-+++ b/tools/patman/control.py
-@@ -44,7 +44,7 @@ def do_send(args):
+-    patch_for_commit, _, warnings = compare_with_series(series, compare)
+-    for warn in warnings:
+-        tout.do_output(tout.WARNING if warnings_on_stderr else tout.INFO, warn)
+-
+-    for seq, pw_patch in enumerate(patches):
+-        compare[seq].patch = pw_patch
+-
+-    for i in range(count):
+-        pat = patch_for_commit.get(i)
+-        if pat:
+-            patch_data = pat.patch.data
+-            comment_data = pat.patch.comments
+-            new_rtag_list[i], review_list[i] = process_reviews(
+-                patch_data['content'], comment_data, series.commits[i].rtags)
+-    num_to_add = _do_show_status(series, patch_for_commit, show_comments, new_rtag_list,
+-                   review_list, col)
++    with terminal.pager():
++        patch_for_commit, _, warnings = compare_with_series(series, compare)
++        for warn in warnings:
++            tout.do_output(tout.WARNING if warnings_on_stderr else tout.INFO,
++                           warn)
++
++        for seq, pw_patch in enumerate(patches):
++            compare[seq].patch = pw_patch
++
++        for i in range(count):
++            pat = patch_for_commit.get(i)
++            if pat:
++                patch_data = pat.patch.data
++                comment_data = pat.patch.comments
++                new_rtag_list[i], review_list[i] = process_reviews(
++                    patch_data['content'], comment_data,
++                    series.commits[i].rtags)
++        num_to_add = _do_show_status(series, patch_for_commit, show_comments, new_rtag_list,
++                       review_list, col)
+     return num_to_add, new_rtag_list, patches
  
  
- def patchwork_status(branch, count, start, end, dest_branch, force,
--                     show_comments, url):
-+                     show_comments, url, single_thread=False):
-     """Check the status of patches in patchwork
- 
-     This finds the series in patchwork using the Series-link tag, checks for new
-@@ -96,7 +96,7 @@ def patchwork_status(branch, count, start, end, dest_branch, force,
-     # Allow the series to override the URL
-     if 'patchwork_url' in series:
-         url = series.patchwork_url
--    pwork = patchwork.Patchwork(url)
-+    pwork = patchwork.Patchwork(url, single_thread=single_thread)
- 
-     # Import this here to avoid failing on other commands if the dependencies
-     # are not present
-diff --git a/tools/patman/patchwork.py b/tools/patman/patchwork.py
-index 2b7734bbfe4..47d7be28fdf 100644
---- a/tools/patman/patchwork.py
-+++ b/tools/patman/patchwork.py
-@@ -139,7 +139,7 @@ class Review:
- class Patchwork:
-     """Class to handle communication with patchwork
-     """
--    def __init__(self, url, show_progress=True):
-+    def __init__(self, url, show_progress=True, single_thread=False):
-         """Set up a new patchwork handler
- 
-         Args:
-@@ -151,7 +151,8 @@ class Patchwork:
-         self.proj_id = None
-         self.link_name = None
-         self._show_progress = show_progress
--        self.semaphore = asyncio.Semaphore(MAX_CONCURRENT)
-+        self.semaphore = asyncio.Semaphore(
-+            1 if single_thread else MAX_CONCURRENT)
-         self.request_count = 0
- 
-     async def _request(self, client, subpath):
 -- 
 2.43.0
 
