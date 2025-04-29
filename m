@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D2D5C3ABA9
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 11:41:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A19E3C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 12:02:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 103C4809A5;
-	Tue, 29 Apr 2025 13:41:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B47F8210D;
+	Tue, 29 Apr 2025 14:02:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j6WvEB0o";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gsLwbCg1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 016A3809A5; Tue, 29 Apr 2025 13:41:46 +0200 (CEST)
+ id 4337C82132; Tue, 29 Apr 2025 14:02:53 +0200 (CEST)
 Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
  [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAC888070C
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 13:41:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 247EB80BAD
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 14:02:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
 Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43cfa7e7f54so39395865e9.1
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 04:41:43 -0700 (PDT)
+ 5b1f17b1804b1-43ed8d32a95so52780295e9.3
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 05:02:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745926903; x=1746531703; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VcG72a3VYMisWUji/+qlZDQF0A0sxl0GhhNFM1vmv3s=;
- b=j6WvEB0owR9fkcN4zAioar8oXvVYbH3wVne69Mir3t5Yi7jHC/AGg3ISy6pexpo7sN
- 8rp2yNB2APctF9mUO5HeeBzLHI9ACiUAl83a9abU1ZZoemhlcPHdDBDNH9g7IrdmYuKi
- r9WdpqC4mGDyBgF9c0+OqiLZFvwHv1N4htCH7awOmqtij8yIpDEeqCXcfJlU2RMAJNnF
- inReGYdYU17qPT+W3XddlmBZIjpatk2c9nAM6SAc2ZvSrSHir2aul27Wryvw4GSVKwJW
- kPBSmVwMld6tmvqKbXA9udjTk1j9Xl70Hn7AXSvthxYUrDx8iZQboIZItnKw0zhPmVk5
- 3J3A==
+ d=linaro.org; s=google; t=1745928170; x=1746532970; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uVSYirWYl0h864O6R531dLP82l+Z+VwxuG/T2JUSIfc=;
+ b=gsLwbCg1eZfkgAmO0FXX5tEdbUbGk+XBrnyksuQhhBsLlyusf4ZIA4W0t1regtzWhS
+ K2iarGWyC6N0+UNFaq4upU04UCbuL29S28C42+l9tBvf9oXTivE7E/VY/8Mb7fm1b0XN
+ /l/Hv9sau+i0F3guYl92pvKD+kMz8q7Bn8ZmB0WnFhtDE38XWctdlxed1bUtf3LEbNkO
+ BY+8FrPUXE/0qXnpmBxcIDjfPNz1LSDmkk93jMLJt4vhDctW3j2y9Mu4vdbnJ+PmLXT3
+ YU69tgQDPxgt+DHUFTL061rWrydhY2dJerMzQsL+bcvhEa9S8Xa3fN3I5PPXvRxJDJA+
+ f+uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745926903; x=1746531703;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VcG72a3VYMisWUji/+qlZDQF0A0sxl0GhhNFM1vmv3s=;
- b=aNDs3X/7lPeu5wjAR1VzhcvrzhZaESk+qrvOtrZU8+l/JSbQuojMEjULGSDm8XMY3J
- oXgIyn24wwBm9v7wOfSKDxOOeWLDX84cVEaeLbV7X55eB+uYe1nFpUEfoED0UUy4gpLx
- jWPyrQXTJ7qIMWfDzTtD8eizEOslgtAogwknsfFH3KN8LZQDQp61bV5dpwqh/qGkNx1X
- Cg8Cx5RuVQyRYoNp01Rpv334S5l9ho1YKvrBIn01VI2YXeXmaB0/BdliFbKOPqzQH8ky
- gxFedg3FJFoLAjwBqOWLvKkabDfzJsiq/rpIAJMzgRu+tCXjMQYAcRjsvMyueUHXUM/u
- QuAw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW8dj+4uPPWvM4PA15Fc+mjWA268VqWuPvTmTiEYkcWqNXipnLy6+/Gn9u3v3nI15T891c9PEc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrezjlbTePIHjh5GfRb0KQ+jKvEdZtll8J6h62QMrVUUWA0wOF
- fxU2OijTmGNo7eh/L03YMMShWIxpvOQEGMi7c6kU3tVMu10SRepWV01Veb/rM44=
-X-Gm-Gg: ASbGncuDMXRViIGr/dFM7jcg/B0oLanD7PhSjO3vzdBXgAD37eSfa5Tn08eWnTr5e84
- hQ455rBUxnA9g2VOTzyENfhYWO0u0mL6AgzZ+N8eVpQx0PdWXN/DnU1bhiw8gsxe1wnbSrvGi6v
- 55/JolSXsSUSCTkWR8AOM6IjFYlNvWeqbABXJcQyLyUFw63BsnSk0ATF/9sBqUgFVTRrY8bjCHi
- SkCsm97xs343j/iyEsy3NJzQXxk8AN3aMMW6Vl/1wXWRf7ORwdnMejqzowtWjxNxpKE0+MgYSZh
- gUCyW34dEZglM1BFVQ4D+bb10ZSy1RK7r+GHoRMdxjEYwWHS7Qi9Dg==
-X-Google-Smtp-Source: AGHT+IGnngkJPHvSUChJ6uyyawIJU+2IoBK2X1heGjj0MMg//MQPM9A0FS8hStIvaj2u5Ik0iEDcnQ==
-X-Received: by 2002:a05:600c:210:b0:43c:f680:5c2e with SMTP id
- 5b1f17b1804b1-441acb70646mr21639025e9.13.1745926903240; 
- Tue, 29 Apr 2025 04:41:43 -0700 (PDT)
-Received: from [192.168.7.92] ([212.114.21.58])
+ d=1e100.net; s=20230601; t=1745928170; x=1746532970;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uVSYirWYl0h864O6R531dLP82l+Z+VwxuG/T2JUSIfc=;
+ b=oF383n4H471GzQLNvdJPDFrHwt2LOVDq7VxVFFgFj76sN7eNx9DBD+esylWkMDRBSj
+ SApn25QxRYPGzY18qPvJRy1mNc9ZmpKr3LKJDRPzYI+FJblJlitaaHfBkwQL6dPpF09I
+ xOTDxHgh9L1cmQ5mqVQzMxJePvo5svx+hDx/zHqwjdlPUKKmKjetECkIDaHA13gEWZ6/
+ clTW/As9JPIaqZmdUfq0yuKPVHsF2PCfpElUIJK0SXGENUsIFeWyinFOILSpSFOUwU9E
+ S4Pp38JM/iRer/57wESWBQ3rJSTFR/XKSpZ6MAZXPv8F68fuDbW1HWtP/pnAovsuHljb
+ QR+w==
+X-Gm-Message-State: AOJu0Yw9xlZTkyldVkTzh/C5jyEamLT3esFSubl1BcBFWYFZe8yzA+hu
+ LUfxFMLKdEin67jf/7ad4N2fLELPWihlPYtH0+Wtzkv6hmjrTcGHe10ZGctRoF0pwx9Xi8pHzBk
+ Udbs=
+X-Gm-Gg: ASbGncuZax5DhfQ5UH/RgfxUjlpYa02waL75sImQygJnlFW5Hh3AudGPSbCDQMvKkSU
+ OdNE5OEK0PQGdjGk0tjRYevhYm4/VI7RvwURrUmtq3Ya+WFjuPg+HvgeZ35f422C/ElKB4AkNA1
+ j2RacZyV6ipA4zLxmXos/RH71D95TpMthu1TmMtynn/mjMnvXwyCm11l25fHo3KnHFIxiNHBT+t
+ dEDQ/FpWS+4rx8TJ4Z/4rMpOpiEMJXr5sbS8+NdFGw4tERP0EHaA2kKn5T0/jiQ+o2Sgtyq4GvX
+ Cs0nvok8pHPMdXPCyBz+lyxGPkMpsCvDC09eXbB7pv+m3uKXyw==
+X-Google-Smtp-Source: AGHT+IHbpDfB8nkoOZbbEg2Na8ZRWp/OPs3NBhX0eW8b/5cF7nm+PUOEv6Ybi/+UJY6CYjlnA5xeqw==
+X-Received: by 2002:a5d:5f4f:0:b0:39f:e3b:406b with SMTP id
+ ffacd0b85a97d-3a08a348410mr2232563f8f.5.1745928170103; 
+ Tue, 29 Apr 2025 05:02:50 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4409d2ac079sm186738985e9.18.2025.04.29.04.41.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Apr 2025 04:41:43 -0700 (PDT)
-Message-ID: <1609cc3a-d061-435f-9061-31527c8ca606@linaro.org>
-Date: Tue, 29 Apr 2025 13:41:42 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] common: board: fix build condition of noncached memory
- initcall
-To: Weijie Gao <weijie.gao@mediatek.com>, u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>
-References: <20250429020424.48795-1-weijie.gao@mediatek.com>
-Content-Language: en-US
+ 5b1f17b1804b1-4409d29ba29sm188497915e9.7.2025.04.29.05.02.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Apr 2025 05:02:49 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250429020424.48795-1-weijie.gao@mediatek.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] cmd: spawn: reject 0 as an invalid job ID
+Date: Tue, 29 Apr 2025 14:02:18 +0200
+Message-ID: <20250429120232.3874362-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,35 +96,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Job IDs are positive integers greater than 1. 0 is not a valid job ID,
+therefore fix the comparison in do_wait().
 
+Fixes Coverity defects:
 
-On 4/29/25 04:04, Weijie Gao wrote:
-> CONFIG_SYS_NONCACHED_MEMORY is defined as hex, not bool. It should be
-> replaced with CONFIG_SYS_HAS_NONCACHED_MEMORY when switched from #ifdef to
-> CONFIG_IS_ENABLED().
-> 
-> Fixes: 6c171f7a184 (common: board: make initcalls static)
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> ---
->  common/board_r.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/common/board_r.c b/common/board_r.c
-> index bc6fd6448c2..b90a4d9ff69 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -639,7 +639,7 @@ static void initcall_run_r(void)
->  #if CONFIG_IS_ENABLED(CONSOLE_RECORD)
->  	INITCALL(console_record_init);
->  #endif
-> -#if CONFIG_IS_ENABLED(SYS_NONCACHED_MEMORY)
-> +#if CONFIG_IS_ENABLED(SYS_HAS_NONCACHED_MEMORY)
->  	INITCALL(noncached_init);
->  #endif
->  	INITCALL(initr_of_live);
+*** CID 550296:  Control flow issues  (NO_EFFECT)
+/cmd/spawn.c: 172 in do_wait()
+166                     for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
+167                             if (job[i])
+168                                     ret = wait_job(i);
+169             } else {
+170                     for (i = 1; i < argc; i++) {
+171                             id = dectoul(argv[i], NULL);
+>>>     CID 550296:  Control flow issues  (NO_EFFECT)
+>>>     This less-than-zero comparison of an unsigned value is never true.
+"id < 0UL".
+172                             if (id < 0 || id >
+CONFIG_CMD_SPAWN_NUM_JOBS)
+173                                     return CMD_RET_USAGE;
+174                             idx = (int)id - 1;
+175                             ret = wait_job(idx);
+176                     }
+177             }
 
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+*** CID 550297:  Integer handling issues  (INTEGER_OVERFLOW)
+/cmd/spawn.c: 174 in do_wait()
+168                                     ret = wait_job(i);
+169             } else {
+170                     for (i = 1; i < argc; i++) {
+171                             id = dectoul(argv[i], NULL);
+172                             if (id < 0 || id >
+CONFIG_CMD_SPAWN_NUM_JOBS)
+173                                     return CMD_RET_USAGE;
+>>>     CID 550297:  Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "idx", where "(int)id - 1" is known to be equal to -1,
+overflows the type of "idx", which is type "unsigned int".
+174                             idx = (int)id - 1;
+175                             ret = wait_job(idx);
+176                     }
+177             }
 
-Thanks,
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+CC: Tom Rini <trini@konsulko.com>
+---
+
+ cmd/spawn.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmd/spawn.c b/cmd/spawn.c
+index eddbcb792b3..37737b8627c 100644
+--- a/cmd/spawn.c
++++ b/cmd/spawn.c
+@@ -169,7 +169,7 @@ static int do_wait(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	} else {
+ 		for (i = 1; i < argc; i++) {
+ 			id = dectoul(argv[i], NULL);
+-			if (id < 0 || id > CONFIG_CMD_SPAWN_NUM_JOBS)
++			if (id < 1 || id > CONFIG_CMD_SPAWN_NUM_JOBS)
+ 				return CMD_RET_USAGE;
+ 			idx = (int)id - 1;
+ 			ret = wait_job(idx);
 -- 
-Jerome
+2.43.0
+
+base-commit: b249e08ec9b71f9d0b4eb48e3e63f63e8366b7e6
+branch: spawn-wait-fix
