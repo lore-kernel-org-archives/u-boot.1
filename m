@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC04EC369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 14:17:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA4E7C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 14:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3653F8293C;
-	Tue, 29 Apr 2025 16:17:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 018C4829A1;
+	Tue, 29 Apr 2025 16:20:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GL+xf3rl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PLTfC5+Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA9A8297E; Tue, 29 Apr 2025 16:17:41 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 3DC638297E; Tue, 29 Apr 2025 16:20:07 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72BF18272A
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:17:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A83338272A
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:20:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-73044329768so4842705a34.3
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 07:17:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5e8be1c6ff8so350298a12.1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 07:20:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1745936258; x=1746541058; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5UDHrtZwb9wMnbpL4+3hcuRlU0VJo8GhHqV9CzDg7V0=;
- b=GL+xf3rlUrNUcOEWhu2dgvbn8SW7dMV21oOpdiqgB3MuqvbBPAZHx5ktxPyMw7VU95
- DJst3vl/Lk7VwFs2oaos65DHrGQyzHIDeOuZ38zhf1iXOUXhnIr8MSnoB/I/JdRSrpqn
- sKnIv8ae2MJczxgm8eQyz8ARbOidVvEg/IDR8=
+ d=chromium.org; s=google; t=1745936403; x=1746541203; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FAQ+/WqSjmMASkWwOsm1TJ9vw1iaX9dMP7qmBmODRtc=;
+ b=PLTfC5+ZRUHPRHoQ8fSYcmEsAzmpzkc9YIvT5ouz9YoD/nyPoAy+D4/pzFdTojmZ9b
+ xIEiQB8yR47i7JaaVFNmp7+XaKsf5ckJZSkRWhsX+AzQDIZCRe4jIfgLUGM11Liftgtr
+ 4w4GuUatDBBwCAfw5+ALBbAMmlvgeCOrLYQtQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745936258; x=1746541058;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5UDHrtZwb9wMnbpL4+3hcuRlU0VJo8GhHqV9CzDg7V0=;
- b=gu2TUA6SeIgHG4QDPnSIQ2n0Pj5MTgLA22w6qSL5N9yYJ15HweJVjwYcQI7Jevot56
- FeqIjVqE7b07P8cTB0B/IRJU8uvKzcnlTbWCWXUbPElU7YUAmTTKm49P0gMOLIfnzd4c
- Mbu+OklDBUudcjl+Tr/8G0LeDq1wMMODK43IjIBskyRDjUlIv5tI7eVUmrm7JklANWYo
- FSPQZkX25SFd1D7Fdgy3Z7UqESg/lH0tdQ5Hz1vE1eS+HwtcRwttANJe9HXIZoi+YyCs
- xC/Zd2A8Oktzvr9E8mRNazsDtNM5tn5QCRho4TI57vmUFH9frWapb8nzEJE5InAhpM7y
- oYlA==
+ d=1e100.net; s=20230601; t=1745936403; x=1746541203;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FAQ+/WqSjmMASkWwOsm1TJ9vw1iaX9dMP7qmBmODRtc=;
+ b=I0AUwWJ5HoyOj60go696pff3SZNsCHK4PsTWXOIXuAHvtUJ2DDtRE/ppQ6dJchwDDM
+ k1PdirxgRKBT1PVMksACXni+sHlFuCPiq1DafngvJ5uPgEylwm6FuL8k8oq1PKiywdFI
+ aIcrFiIHm6RN9X3I7FP1+IYYqi14+9TIWrnPZ38/05u9/PdiWfVgrQAC5Z6d7k1OVvIf
+ RV3Gvp7il+ddkwLHZjx0gRlDraANWpX2ADFK6PQpGrliBuGn22jURXraWCzLPsg95U6g
+ fP7cl6+RspLdc9dD85n96+pNBScjrratulaCtEixoW7JE4CmcD/W/qwguZOGbROy+RAK
+ UmCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAUqMxmq3OIeAEq7e9201Etb9v53smcy1Sno2axm/zkevDvOG1byfu3tKbNDZOWot07ke8B14=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw9r4aUjq8GWprQQpF48Twr98TW8bL5TTWDczIvmWAdrLGDi7ee
- noOjr8xXXn+ysqQ7GXf8FFvaCcdP5xSTInqZAsKrjAYh2BTOKphSoTRXYAkiZdY=
-X-Gm-Gg: ASbGncuoqXvEkJHrZH0TPXLUFrspf41lq+sN9IM63WhKU5mKLa8ptm1DdtTJ1Cd2W42
- RSR3qbUOXUGpOR5EdzJuIjweD5cZyjR76F++r6L+DUOLVqlY5XVd0e1E2kWBZZcuvLNj63/0bgY
- 4DI4mohHmlNUJtfFPClMjUZ6BvnPjwAcN6N+kXwCG25A930EpyY6QxdiLpF8IvsdJzmQql5G41y
- n29YSZwf45NjofFnqoUHSm2Ss4pwsqEsNeBdZb6RJlydIyHqWbneboN5xSFuzP8nrhNwnGzldnI
- c8xfTIOwBX+yq1NW5CnSADoA5KPWzfhnrgyOamX/Egni4WPsJFiSrnsrYVk/7ad8fXAtJb5bNls
- 41g==
-X-Google-Smtp-Source: AGHT+IGLBrdgG1wQhZPgQxU5zv7CXHgZHmb6UY4d6hUrvSFPC8rvvtzk053NjPbdF3ulPKEuzXgeHw==
-X-Received: by 2002:a05:6830:2909:b0:72b:992b:e50 with SMTP id
- 46e09a7af769-73088c23454mr2952352a34.21.1745936258076; 
- Tue, 29 Apr 2025 07:17:38 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b314b5dsm291145a34.64.2025.04.29.07.17.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 07:17:37 -0700 (PDT)
-Date: Tue, 29 Apr 2025 08:17:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Schultz <d.schultz@phytec.de>
-Cc: ggiordano@phytec.com, w.egorov@phytec.de, u-boot@lists.denx.de,
- joe.hershberger@ni.com, bb@ti.com, nmorrisson@phytec.com,
- upstream@lists.phytec.de
-Subject: Re: [PATCH 3/3] board: phytec: phycore_am62ax: Update Environment
-Message-ID: <20250429141735.GE1261075@bill-the-cat>
-References: <20250428144904.1058574-1-d.schultz@phytec.de>
- <20250428144904.1058574-3-d.schultz@phytec.de>
- <20250428161051.GC5495@bill-the-cat>
- <4635ba6c-de1a-4c31-8823-7cc97dda3fc1@phytec.de>
+ AJvYcCUZD+j7/ThtQVqd2Q+f30jw+/3DwwEYJU0ZU7JqFeVItVvt1RjSLCCfCf272Hy8L/bbL994vDY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2X8uBHsPQByZNOBIRrHBA2nCfZyNRDpdJKfMNC998ncPOBeR0
+ b5YNO+bQbz4C4h52Ko3rolBRGqSVdk2eZrOSs3RccCjQzZDD2MpTOfqFXVHzLGnhPX0hz3MTLfW
+ iUSUPz0b7NZ9pjw/G7ZcI0wgZuPNkJtnW7/k2xShNw9fGo9s=
+X-Gm-Gg: ASbGncvbGeDBtBVI5UO6qA74wnPLC5G6tWw0B7qsTsdDnXkuRhd5K/IwTB+yQiP+3bv
+ O+6wQYiAzL9yJ4HkZRNPtoOvImlp0Yh63bpGy2RhcTsZnPHYM3zppFz8NG3J5LwNkIJQsS+afMe
+ ewGzB9YAUTbqGZ5EJfrc7HMnk=
+X-Google-Smtp-Source: AGHT+IF0PweySaOaHsKw/cSgY9RW2JRptFS3FRJvwxmnIq9+x9Df2aQn1ROIQFsHuyY/PofzqfDpKfl2Y7fmm1pGBPg=
+X-Received: by 2002:a17:907:7212:b0:acb:5f17:623d with SMTP id
+ a640c23a62f3a-acec4e3a418mr373917266b.24.1745936403057; Tue, 29 Apr 2025
+ 07:20:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OpZAsNdgxxcNCbcx"
-Content-Disposition: inline
-In-Reply-To: <4635ba6c-de1a-4c31-8823-7cc97dda3fc1@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
+ <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
+ <CAFLszTinU=6v+3OyaH0pp8snYm9BgfVrU_+35x2Az7fVs_CfYw@mail.gmail.com>
+ <4aef8b9ffd41d4e36550806f4688fc18dbddc500.camel@phytec.de>
+ <CAFLszTjPHBw-F0EkQJnT4TOsxdYzGH5EtRBaeRCoKGxQQ_cw4g@mail.gmail.com>
+ <20250424184923.GM5495@bill-the-cat>
+ <CAFLszThPcJjhBVLvz=EkdeEP1K948cC=LyZhBk_Upk3iSWXCig@mail.gmail.com>
+ <20250425143752.GU5495@bill-the-cat>
+ <CAFLszTiYCObeLy+HPnpXSE3yQ20ZN-+hptoi_nYT4DXimjHFYA@mail.gmail.com>
+ <20250425161935.GV5495@bill-the-cat>
+In-Reply-To: <20250425161935.GV5495@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 29 Apr 2025 08:19:51 -0600
+X-Gm-Features: ATxdqUFOZVmkIhtubsN-Nwzzb0XRx6fKv2I5uLQ8WVKtYb6qFq_aZGOeXdDHiaw
+Message-ID: <CAFLszTgRxa=Tb4ZRHappaDqTB39ERpDgf57Lwgev28p7f_ZPdg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+To: Tom Rini <trini@konsulko.com>
+Cc: Martin Schwan <M.Schwan@phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,64 +98,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---OpZAsNdgxxcNCbcx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 25 Apr 2025 at 10:19, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Apr 25, 2025 at 09:03:17AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 25 Apr 2025 at 08:37, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Apr 25, 2025 at 08:35:52AM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Thu, 24 Apr 2025 at 12:49, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Thu, Apr 24, 2025 at 12:31:38PM -0600, Simon Glass wrote:
+> > > > > > Hi Martin,
+> > > > > >
+> > > > > > On Thu, 24 Apr 2025 at 06:43, Martin Schwan <M.Schwan@phytec.de> wrote:
+> > > > > > >
+> > > > > > > Hi Simon,
+> > > > > > >
+> > > > > > > thanks for the review and sorry for my delayed reply.
+> > > > > > >
+> > > > > > > On Mon, 2025-04-14 at 05:32 -0600, Simon Glass wrote:
+> > > > > > > > Hi Martin,
+> > > > > > > >
+> > > > > > > > On Wed, 29 Jan 2025 at 07:25, Martin Schwan <m.schwan@phytec.de>
+> > > > > > > > wrote:
+> > > > > > > > >
+> > > > > > > > > Add a bootmeth driver which supports booting A/B system with RAUC
+> > > > > > > > > as
+> > > > > > > > > their update client.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+> > > > > > > > > ---
+> > > > > > > > >  boot/Kconfig         |  11 ++
+> > > > > > > > >  boot/Makefile        |   1 +
+> > > > > > > > >  boot/bootmeth_rauc.c | 408
+> > > > > > > > > +++++++++++++++++++++++++++++++++++++++++++++++++++
+> > > > > > > > >  3 files changed, 420 insertions(+)
+> > > > > > > >
+> > > > > > > > This looks fine to me. Just some nits below.
+> > > > > > > >
+> > > > > >
+> > > > > > [..]
+> > > > > >
+> > > > > > > > > +
+> > > > > > > > > +       partitions = env_get("rauc_partitions");
+> > > > > > > > > +       if (!partitions)
+> > > > > > > > > +               return log_msg_ret("env", -ENOENT);
+> > > > > > > > > +       partitions_list = str_to_list(partitions);
+> > > > > > > > > +
+> > > > > > > > > +       slots = env_get("rauc_slots");
+> > > > > > > > > +       if (!slots)
+> > > > > > > > > +               return log_msg_ret("env", -ENOENT);
+> > > > > > > > > +       slots_list = str_to_list(slots);
+> > > > > > > > > +
+> > > > > > > > > +       boot_order = env_get("BOOT_ORDER");
+> > > > > > > >
+> > > > > > > > Environment variables should be in lower case.
+> > > > > > >
+> > > > > > > Unfortunately, we are bound to the naming RAUC uses for these
+> > > > > > > environment variables, which is upper case. See
+> > > > > > > https://rauc.readthedocs.io/en/latest/integration.html#set-up-u-boot-boot-script-for-rauc
+> > > > > >
+> > > > > > Can't you change it, since you are introducing new support here?
+> > > > > >
+> > > > > > If not, then you could perhaps set the env variables to lowercase when
+> > > > > > you find uppercase variables? I suppose that would require updating
+> > > > > > the client to do the same thing too?
+> > > > > >
+> > > > > > It would be very confusing for a user to have upper-case variables for
+> > > > > > some things.
+> > > > >
+> > > > > Simon, this is an unreasonable request. This is how RAUC has been
+> > > > > working and deployed for years and years. It would be a nightmare trying
+> > > > > to handle migration of existing deployments for an aesthetic change.
+> > > >
+> > > > Yes, I figured. Perhaps it could support lower case in future? This is
+> > > > the first I have seen on RAUC in U-Boot, although I do see this file
+> > > > which has both lower and upper case:
+> > > >
+> > > > include/env/phytec/rauc.env
+> > >
+> > > I don't think there's any need to complicate RAUC support here (nor
+> > > in the future Mender nor swupdate nor any other long standing OTA
+> > > mechanism that might be more easily integrated via bootstd than
+> > > environment patching).
+> >
+> > Let's see what the author says. I assume that U-Boot has its own code
+> > in RAUC so it might not be too bad.
+>
+> I mean, sure? But "should" is not "must" and I have zero desire to
+> make supporting existing use cases harder. That will make migration to
+> bootstd less attractive, not more. We don't want people to decide that
+> can't upstream platform X or feature Y because they've already developed
+> and deployed it using capitals or camel case in their environment.
 
-On Tue, Apr 29, 2025 at 02:14:54PM +0200, Daniel Schultz wrote:
->=20
-> On 4/28/25 18:10, Tom Rini wrote:
-> > On Mon, Apr 28, 2025 at 07:49:04AM -0700, Daniel Schultz wrote:
-> >=20
-> > > Add fit_addr_r to the environment to allow us to boot from a FIT imag=
-e.
-> > >=20
-> > > Increase the maximum Image size from 23 MB to 26 MB by moving the
-> > > initramfs start address up. This gives us a bigger ranger to
-> > > provide kernel images which are not stripped down too much.
-> > >=20
-> > > Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
-> > > ---
-> > >   board/phytec/phycore_am62ax/phycore_am62ax.env | 3 ++-
-> > >   1 file changed, 2 insertions(+), 1 deletion(-)
-> > What is the minimum memory configuration you have to work with here?
-> > That's still a very small window unless you're shipping modules with
-> > 512MiB or so.
-> >=20
-> We currently support SPI boot on devices with a minimum size of 64MB. Our
-> kernel image is ~22MB. So, this change will make sure the kernel image st=
-ill
-> fits with future releases.
->=20
-> BTW, Wadim sent patches to enable standard boot for this product. So, this
-> patch series fixes some minor issues with the legacy boot flow. We just
-> wanna make sure we don't have broken boot flows upstream.
+Yes, agreed.
 
-OK thanks.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---OpZAsNdgxxcNCbcx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgQ338ACgkQFHw5/5Y0
-tyyRuQv/eU9/TzU9P2qR8qqXnJgwBcGs9ahPAn8xgOtUY9B703hVXi0UXZ+HCEYv
-7CRp1ra60+bs56ODlcX6khz1+3zutqgY+sBPRHxDuRVzw6YRqAbNoZrl/QS9Kmhx
-ofjlFRMFHA8uxR4Qsk/p5SWC75xxxLkPWpL2SljGByAfYl8iW1WQRtqn0dSh0Tyc
-yF2Aog5qRvFAzGuzAkLpHQ/L16c2BK2OCWgpZdDBns4eZVEM7cYR2PdNxBHNnwqB
-Nk/YbOmIKmCqeYyzCULSmJs9fOwFBFAZHbl5rmRRRTvd21ptOfq+1YfSHmt4PHge
-RffLYtFLFHFHJkvwnSmTaaKvTIP6VIzTtt+18cYas4sK0Oee8nwJGJGWu67hamof
-rgQdvcZZ6Z6D3YCLDmy/272H6jHVRq++4L1YErI4mNJGVDlAJK+fecKnWpvvPT8d
-IZ6LSmpeA8485U+fgOgewQmWLZispHxx2CdPdLu8mPp741hIL93YqvEXVpwbldu4
-thWZycvD
-=stJ2
------END PGP SIGNATURE-----
-
---OpZAsNdgxxcNCbcx--
+Regards,
+Simon
