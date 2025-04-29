@@ -4,76 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78DB4C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 06:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34167C369CB
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 07:04:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D414080BAD;
-	Tue, 29 Apr 2025 08:54:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F2DC80EFB;
+	Tue, 29 Apr 2025 09:04:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="6pe0PG4U";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PIYXPgVU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7379680FDA; Tue, 29 Apr 2025 08:54:35 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 15CAD80FDA; Tue, 29 Apr 2025 09:04:19 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFF158091A
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 08:54:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF96780BAD
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 09:04:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=72142f8a0e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53T6J34n021351;
- Tue, 29 Apr 2025 08:54:29 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=UwVGD7ioc6ZVIC2pf7ECn2
- HUqaWxmVcmlPw4DCUTkwY=; b=6pe0PG4UD7AbQpI1XzKba+/fSDxkq6cqxfHu0+
- lISYZt03EkGPSkpK7y/UjaCgu5A9vRLVLUNBhsvZVpLjXYlMPDpMBY8qVJ7Za3pE
- WQb9HBDe6XKpLpGClzBFWkPmKAEsvyTL+sHl9S29alI0RsGZ3xAQzayo5IxoigjC
- eJTSSeK0Z/kUrQpHTPl7Bpl08oerjVd4qC1DzmPUDibEQ2JgZvdfnxeiS9v/W+pt
- FtIZwlg4InIUlSgpHDfKX5OpzZkhNAw4lDTJnPEbHv5NTwsZn02aZohbdfTJ3zRb
- cx9xn6E16a6z9CWZQTnKsw1zm28YQygbrlDpebxEjIrCRv2g==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mm9hnqn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 29 Apr 2025 08:54:28 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 856394007C;
- Tue, 29 Apr 2025 08:53:35 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 22EFBA73FAB;
- Tue, 29 Apr 2025 08:53:15 +0200 (CEST)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 29 Apr
- 2025 08:53:14 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Simeon Marijon
- <simeon.marijon@foss.st.com>, Cheick Traore <cheick.traore@foss.st.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3] stm32mp: Add tamp_nvram driver
-Date: Tue, 29 Apr 2025 08:53:12 +0200
-Message-ID: <20250429065313.70121-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1745910246; x=1746515046; i=xypron.glpk@gmx.de;
+ bh=mSWEyNMtCcaKIgQ1JNdEQPTGnu5Gur5uqwgtz4mmtq0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=PIYXPgVUF99+oFPVKqU04LpUA/VIdVemvqY7diYcc+IA7DnUQeioV32E0stVqMGM
+ olpPQgz06uMaF9Usg1XOHWDgDuVQppZkPJMDJM11wNi3R+1RWDr2REmJnSh+I53jx
+ 2xcvsT9CC8NQunn9ctqPX+fZXAqPj8qhpGevifHUGtpE2s9RXjntTZN6e5zXpnDqf
+ QX6IVXLLfVJ+kHgELyVsLCAXcaVljIgQZ8uPg2jBORYH6dGJ7CavR56cAG+86OcLl
+ uvpXrAiUK+DaZCigr7rYxr2enUySqJr7469HyzTFCg3fIclAfS5hDytX8+deKV1ba
+ t62wPbO2hOjt97oPvA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.105.79]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1vD8ae2aII-00uMEY; Tue, 29
+ Apr 2025 09:04:06 +0200
+Message-ID: <2307cf95-6cb6-4c67-a6a8-ef33c9f52759@gmx.de>
+Date: Tue, 29 Apr 2025 09:04:00 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-04-29_02,2025-04-24_02,2025-02-21_01
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] efi_loader: bootbin: do not load an initrd if none
+ is provided
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com,
+ o451686892@gmail.com, Adriano Cordova <adriano.cordova@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250428145341.2091400-1-adriano.cordova@canonical.com>
+ <20250428145341.2091400-2-adriano.cordova@canonical.com>
+ <CAC_iWjKvcVOTx+1GiGwzfNGsciAa+jeAtvkLteaV01GWNAzWkw@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWjKvcVOTx+1GiGwzfNGsciAa+jeAtvkLteaV01GWNAzWkw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Sqev5IOtNQ5A9whM7n4Qp3+xtBsoFmA2zqAOPsVfC2tj34B0Odj
+ NciRF7TNoJuUYhNgPlR6miqU1S2sNwz/2DqL0wzS51AuAQIbDdhHxNT+kf5uY3FG+HqKSIG
+ RrOPq7gkd5gDIy4SMIH3bSiE0dp2CXQmvYwy2s315bR4Xu3ye+URgXWb8zkcdlkLjWmfCDs
+ vVcJEue0TY45nSZEp0cGQ==
+UI-OutboundReport: notjunk:1;M01:P0:1AGeOqyUPWs=;Y6Z+s9dpJv2jLD05fR6G1h6lmeK
+ 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
+ ++TPfS0kQ7uWI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,733 +126,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simeon Marijon <simeon.marijon@foss.st.com>
+On 4/29/25 08:24, Ilias Apalodimas wrote:
+> On Mon, 28 Apr 2025 at 17:53, Adriano Cordova <adrianox@gmail.com> wrote=
+:
+>>
+>> Do not try to create an initrd device path nor try to register
+>> an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
+>>
+>> Handle initrd installation in efi_binary_run_dp with
+>> efi_install_initrd, imitating what is done for the fdt.
+>>
+>> Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
+>> Reported-by: Weizhao Ouyang <o451686892@gmail.com>
+>> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+>> ---
+>>   boot/bootm.c                 |  3 +++
+>>   include/efi_loader.h         |  2 ++
+>>   lib/efi_loader/efi_bootbin.c |  7 +------
+>>   lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
+>>   4 files changed, 35 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/boot/bootm.c b/boot/bootm.c
+>> index f5cbb10f0d1..9693e0d336d 100644
+>> --- a/boot/bootm.c
+>> +++ b/boot/bootm.c
+>> @@ -1008,6 +1008,9 @@ int bootm_run_states(struct bootm_info *bmi, int =
+states)
+>>                          ret =3D 0;
+>>          }
+>>
+>> +       /* Clear the initrd from a previous boot */
+>> +       images->initrd_start =3D 0;
 
-TAMP backup registers will be exposed as nvmem cells.
+The bootm change should be in a different patch than the EFI change.
 
-Each registers ([0..127] for STM32MP2, [0..31] for STM32MP1) could be
-exposed as nvmem cells under the nvram node in device tree
+Bootm passes through multiple stages, see parameter states.
 
-Signed-off-by: Simeon Marijon <simeon.marijon@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+I don't believe that you want to zero images->initrd_start after the=20
+BOOTM_STATE_RAMDISK state.
 
----
+Specically you don't want to zero initrd_start in the BOOTM_STATE_OS_GO=20
+state otherwise you will always boot without initrd.
 
-Changes in v3:
-  - Fix typo in SPDX-License-Identifier
+Isn't initialization meant to happen for states =3D=3D BOOTM_STATE_START i=
+n=20
+bootm_start()?
 
- arch/arm/mach-stm32mp/Kconfig      |   9 +
- arch/arm/mach-stm32mp/Makefile     |   2 +
- arch/arm/mach-stm32mp/tamp_nvram.c | 664 +++++++++++++++++++++++++++++
- 3 files changed, 675 insertions(+)
- create mode 100644 arch/arm/mach-stm32mp/tamp_nvram.c
+In test/py/tests/test_efi_fit.py we currently only test the case without=
+=20
+initrd. We need a test with initrd too.
 
-diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-index 002da2e3d3b..d7323659811 100644
---- a/arch/arm/mach-stm32mp/Kconfig
-+++ b/arch/arm/mach-stm32mp/Kconfig
-@@ -144,6 +144,15 @@ config STM32_ECDSA_VERIFY
- 	  ROM API provided on STM32MP.
- 	  The ROM API is only available during SPL for now.
- 
-+config STM32MP_TAMP_NVMEM
-+	bool "STM32 TAMP backup registers via NVMEM API"
-+	select NVMEM
-+	default y
-+	help
-+	  Say y to enable the uclass driver for TAMP Backup registers using the
-+	  NVMEM API. It allows to access to boot mode or others shared information
-+	  between software components/execution levels.
-+
- config CMD_STM32KEY
- 	bool "command stm32key to fuse public key hash"
- 	depends on CMDLINE
-diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
-index 103e3410ad9..ecd49fe668d 100644
---- a/arch/arm/mach-stm32mp/Makefile
-+++ b/arch/arm/mach-stm32mp/Makefile
-@@ -13,6 +13,8 @@ obj-$(CONFIG_STM32MP13X) += stm32mp1/
- obj-$(CONFIG_STM32MP25X) += stm32mp2/
- 
- obj-$(CONFIG_MFD_STM32_TIMERS) += timers.o
-+obj-$(CONFIG_STM32MP_TAMP_NVMEM) += tamp_nvram.o
-+
- obj-$(CONFIG_STM32_ECDSA_VERIFY) += ecdsa_romapi.o
- ifndef CONFIG_XPL_BUILD
- obj-y += cmd_stm32prog/
-diff --git a/arch/arm/mach-stm32mp/tamp_nvram.c b/arch/arm/mach-stm32mp/tamp_nvram.c
-new file mode 100644
-index 00000000000..9edd001b540
---- /dev/null
-+++ b/arch/arm/mach-stm32mp/tamp_nvram.c
-@@ -0,0 +1,664 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-+ */
-+#define LOG_CATEGORY UCLASS_MISC
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <log.h>
-+#include <misc.h>
-+#include <regmap.h>
-+#include <tee.h>
-+#include <asm/io.h>
-+#include <dm/device.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
-+
-+#define RIF_CID1			0x1
-+#define CURRENT_CID			RIF_CID1
-+#define NB_ZONES_STM32MP1		3
-+#define NB_ZONES_STM32MP2		7
-+
-+#define _TAMP_SECCFGR			0x20U
-+#define _TAMP_BKPRIFR(x)		(0x70U + 0x4U * ((x) - 1))
-+#define _TAMP_RXCIDCFGR(x)		(0x80U + 0x4U * ((x)))
-+
-+#define BKPREG_PROTECTION_ZONE_1	0
-+#define BKPREG_PROTECTION_ZONE_2	1
-+#define BKPREG_PROTECTION_ZONE_3	2
-+
-+#define BKPREG_PROTECTION_ZONE_1_RIF1	0
-+#define BKPREG_PROTECTION_ZONE_1_RIF2	1
-+#define BKPREG_PROTECTION_ZONE_2_RIF1	2
-+#define BKPREG_PROTECTION_ZONE_2_RIF2	3
-+#define BKPREG_PROTECTION_ZONE_3_RIF1	4
-+#define BKPREG_PROTECTION_ZONE_3_RIF0	5
-+#define BKPREG_PROTECTION_ZONE_3_RIF2	6
-+#define NB_COMPARTMENT_STM32MP2		3
-+
-+enum stm32_tamp_bkpreg_access {
-+	BKP_READ_WRITE,
-+	BKP_READ,
-+	BKP_NO
-+};
-+
-+struct stm32_tamp_nvram_plat {
-+	void __iomem *base;
-+	void __iomem *parent_base;
-+	fdt_size_t size;
-+	fdt_size_t parent_size;
-+	unsigned int nb_total_regs;
-+};
-+
-+struct stm32_tamp_nvram_priv {
-+	int *idx_bkpreg_zones_end;
-+	struct regmap *config_regmap;
-+	struct regmap *bkpregs_regmap;
-+	enum stm32_tamp_bkpreg_access *bkpreg_access;
-+};
-+
-+struct stm32_tamp_nvram_drvdata {
-+	const unsigned int nb_zones;
-+	const struct reg_field *reg_fields;
-+};
-+
-+static const struct reg_field stm32mp1_tamp_nvram_zone_cfg_fields[NB_ZONES_STM32MP1 - 1] = {
-+	[BKPREG_PROTECTION_ZONE_1] = REG_FIELD(_TAMP_SECCFGR, 0, 7),
-+	[BKPREG_PROTECTION_ZONE_2] = REG_FIELD(_TAMP_SECCFGR, 16, 23),
-+};
-+
-+static const struct reg_field stm32mp25_tamp_nvram_zone_cfg_fields[NB_ZONES_STM32MP2 - 1] = {
-+	[BKPREG_PROTECTION_ZONE_1_RIF1] = REG_FIELD(_TAMP_BKPRIFR(1), 0,  7),
-+	[BKPREG_PROTECTION_ZONE_1_RIF2] = REG_FIELD(_TAMP_SECCFGR,    0,  7),
-+	[BKPREG_PROTECTION_ZONE_2_RIF1] = REG_FIELD(_TAMP_BKPRIFR(2), 0,  7),
-+	[BKPREG_PROTECTION_ZONE_2_RIF2] = REG_FIELD(_TAMP_SECCFGR,   16, 23),
-+	[BKPREG_PROTECTION_ZONE_3_RIF1] = REG_FIELD(_TAMP_BKPRIFR(3), 0,  7),
-+	[BKPREG_PROTECTION_ZONE_3_RIF0] = REG_FIELD(_TAMP_BKPRIFR(3), 16, 23),
-+};
-+
-+static const struct reg_field stm32mp25_tamp_nvram_rxcidcfg_cfen_fields[NB_COMPARTMENT_STM32MP2] = {
-+	REG_FIELD(_TAMP_RXCIDCFGR(0), 0, 0),
-+	REG_FIELD(_TAMP_RXCIDCFGR(1), 0, 0),
-+	REG_FIELD(_TAMP_RXCIDCFGR(2), 0, 0),
-+};
-+
-+static const struct reg_field stm32mp25_tamp_nvram_rxcidcfg_fields[NB_COMPARTMENT_STM32MP2] = {
-+	REG_FIELD(_TAMP_RXCIDCFGR(0), 4, 6),
-+	REG_FIELD(_TAMP_RXCIDCFGR(1), 4, 6),
-+	REG_FIELD(_TAMP_RXCIDCFGR(2), 4, 6),
-+};
-+
-+static enum stm32_tamp_bkpreg_access stm32mp1_tamp_bkpreg_access[NB_ZONES_STM32MP1] = {
-+	[BKPREG_PROTECTION_ZONE_1] = BKP_NO,
-+	[BKPREG_PROTECTION_ZONE_2] = BKP_READ,
-+	[BKPREG_PROTECTION_ZONE_3] = BKP_READ_WRITE,
-+};
-+
-+static const struct stm32_tamp_nvram_drvdata stm32mp1_tamp_nvram = {
-+	.nb_zones = NB_ZONES_STM32MP1,
-+	.reg_fields = stm32mp1_tamp_nvram_zone_cfg_fields,
-+};
-+
-+static const struct stm32_tamp_nvram_drvdata stm32mp25_tamp_nvram = {
-+	.nb_zones = NB_ZONES_STM32MP2,
-+	.reg_fields = stm32mp25_tamp_nvram_zone_cfg_fields,
-+};
-+
-+static int stm32_tamp_is_compartment_isolation_enabled_mp2X(struct udevice *dev)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	int nb_compartment_enabled = 0;
-+	u32 cfen;
-+	struct regmap_field *cfen_field;
-+
-+	for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
-+		cfen_field = devm_regmap_field_alloc(dev,
-+						     priv->config_regmap,
-+						     stm32mp25_tamp_nvram_rxcidcfg_cfen_fields[i]);
-+		if (IS_ERR_OR_NULL(cfen_field)) {
-+			dev_err(dev, "Can't allocate field for reading configuration\n");
-+			return -ENOMEM;
-+		}
-+		if (regmap_field_read(cfen_field, &cfen) != 0) {
-+			dev_err(dev, "Can't read field for registers zones\n");
-+			devm_regmap_field_free(dev, cfen_field);
-+			return -EINVAL;
-+		}
-+		nb_compartment_enabled += cfen;
-+		devm_regmap_field_free(dev, cfen_field);
-+	}
-+
-+	if (nb_compartment_enabled == 0)
-+		return 0;
-+	else if (nb_compartment_enabled == NB_COMPARTMENT_STM32MP2)
-+		return 1;
-+	else
-+		return -EINVAL;
-+}
-+
-+static bool *stm32_tamp_get_compartment_owner_mp2X(struct udevice *dev)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	struct regmap_field *cid_field;
-+	u32 cid_per_zone;
-+	int isolation_enabled;
-+	bool *compartment_owner;
-+
-+	isolation_enabled = stm32_tamp_is_compartment_isolation_enabled_mp2X(dev);
-+	if (isolation_enabled < 0)
-+		return NULL;
-+
-+	compartment_owner = devm_kcalloc(dev,
-+					 NB_COMPARTMENT_STM32MP2,
-+					 sizeof(*compartment_owner),
-+					 GFP_KERNEL);
-+	if (!compartment_owner)
-+		return ERR_PTR(-ENOMEM);
-+
-+	for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
-+		if (isolation_enabled) {
-+			cid_field = devm_regmap_field_alloc(dev,
-+							    priv->config_regmap,
-+							    stm32mp25_tamp_nvram_rxcidcfg_fields[i]
-+							    );
-+
-+			if (regmap_field_read(cid_field, &cid_per_zone) != 0) {
-+				dev_err(dev, "Can't read field for registers zones\n");
-+				devm_regmap_field_free(dev, cid_field);
-+				devm_kfree(dev, compartment_owner);
-+				return ERR_PTR(-EINVAL);
-+			}
-+			if (cid_per_zone == CURRENT_CID)
-+				compartment_owner[i] = true;
-+			else
-+				compartment_owner[i] = false;
-+
-+			devm_regmap_field_free(dev, cid_field);
-+		} else {
-+			compartment_owner[i] = true;
-+		}
-+	}
-+
-+	return compartment_owner;
-+}
-+
-+static enum stm32_tamp_bkpreg_access *stm32_tamp_get_access_rights_mp2X(struct udevice *dev)
-+{
-+	struct stm32_tamp_nvram_drvdata *drvdata =
-+		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
-+	unsigned int nb_zones = drvdata->nb_zones;
-+	bool *compartment_owner;
-+	enum stm32_tamp_bkpreg_access *bkpreg_access;
-+
-+	compartment_owner = stm32_tamp_get_compartment_owner_mp2X(dev);
-+	if (IS_ERR(compartment_owner))
-+		return ERR_PTR(-ENODEV);
-+
-+	bkpreg_access = devm_kcalloc(dev,
-+				     NB_ZONES_STM32MP2,
-+				     sizeof(*bkpreg_access),
-+				     GFP_KERNEL);
-+
-+	for (int protection_zone_idx = 0; protection_zone_idx < nb_zones;
-+	     protection_zone_idx++) {
-+		switch (protection_zone_idx) {
-+		case BKPREG_PROTECTION_ZONE_1_RIF1:
-+			bkpreg_access[protection_zone_idx] = BKP_NO;
-+			break;
-+		case BKPREG_PROTECTION_ZONE_1_RIF2:
-+			bkpreg_access[protection_zone_idx] = BKP_NO;
-+			break;
-+		case BKPREG_PROTECTION_ZONE_2_RIF1:
-+			if (compartment_owner[1] || compartment_owner[2])
-+				bkpreg_access[protection_zone_idx] = BKP_READ;
-+			else
-+				bkpreg_access[protection_zone_idx] = BKP_NO;
-+			break;
-+		case BKPREG_PROTECTION_ZONE_2_RIF2:
-+			if (compartment_owner[1] || compartment_owner[2])
-+				bkpreg_access[protection_zone_idx] = BKP_READ;
-+			else
-+				bkpreg_access[protection_zone_idx] = BKP_NO;
-+			break;
-+		case BKPREG_PROTECTION_ZONE_3_RIF1:
-+			if (compartment_owner[1])
-+				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
-+			else if (compartment_owner[0] || compartment_owner[2])
-+				bkpreg_access[protection_zone_idx] = BKP_READ;
-+			else
-+				bkpreg_access[protection_zone_idx] = BKP_NO;
-+			break;
-+		case BKPREG_PROTECTION_ZONE_3_RIF0:
-+			if (compartment_owner[0])
-+				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
-+			else if (compartment_owner[1] || compartment_owner[2])
-+				bkpreg_access[protection_zone_idx] = BKP_READ;
-+			else
-+				bkpreg_access[protection_zone_idx] = BKP_NO;
-+			break;
-+		case BKPREG_PROTECTION_ZONE_3_RIF2:
-+			if (compartment_owner[2])
-+				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
-+			else if (compartment_owner[0] || compartment_owner[1])
-+				bkpreg_access[protection_zone_idx] = BKP_READ;
-+			else
-+				bkpreg_access[protection_zone_idx] = BKP_NO;
-+			break;
-+		default:
-+			devm_kfree(dev, bkpreg_access);
-+			return ERR_PTR(-ENODEV);
-+		}
-+	}
-+
-+	return bkpreg_access;
-+}
-+
-+static int stm32_tamp_nvram_bkpreg_get_zone_idx(struct udevice *dev, int reg)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	struct stm32_tamp_nvram_drvdata *drvdata =
-+		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
-+	int *idx_bkpreg_zones_end = priv->idx_bkpreg_zones_end;
-+	int nb_zones = drvdata->nb_zones;
-+	int protection_zone_idx;
-+
-+	if (reg < 0)
-+		return -1; // negative reg is the boundary of an empty zone
-+
-+	for (protection_zone_idx = 0; protection_zone_idx < nb_zones; protection_zone_idx++) {
-+		if (reg <= idx_bkpreg_zones_end[protection_zone_idx])
-+			break;
-+	}
-+
-+	if (protection_zone_idx >= nb_zones)
-+		return -1; // the reg is not a part of any zone
-+
-+	return protection_zone_idx;
-+}
-+
-+static bool stm32_tamp_nvram_rights(struct udevice *dev, int reg, bool read_only)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	int protection_zone_idx = stm32_tamp_nvram_bkpreg_get_zone_idx(dev, reg);
-+
-+	if (protection_zone_idx < 0)
-+		return false;
-+
-+	switch (priv->bkpreg_access[protection_zone_idx]) {
-+	case BKP_READ_WRITE:
-+		return true;
-+	case BKP_READ:
-+		return read_only;
-+	case BKP_NO:
-+		return false;
-+	default:
-+		dev_err(dev, "Can't get access rights for the zone\n");
-+		return false;
-+	}
-+
-+	return false;
-+}
-+
-+static int stm32_tamp_nvram_write_byte(struct udevice *dev, u32 offset, u8 byte)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
-+	int byte_in_word = offset - offset_aligned;
-+	u32 read_value, to_be_writen_value;
-+	u32 reg_idx = offset_aligned / sizeof(u32);
-+
-+	if (!stm32_tamp_nvram_rights(dev, reg_idx, false))
-+		return -EIO;
-+
-+	regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
-+	to_be_writen_value = read_value & ~(0xFFUL << byte_in_word * 8);
-+	to_be_writen_value |=  (u32)byte << (byte_in_word * 8);
-+
-+	return regmap_write(priv->bkpregs_regmap, offset_aligned, to_be_writen_value);
-+}
-+
-+static int stm32_tamp_nvram_read_byte(struct udevice *dev, unsigned int offset, u8 *byte)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
-+	int byte_in_word = offset - offset_aligned;
-+	u32 read_value;
-+	u32 reg_idx = offset_aligned / sizeof(u32);
-+
-+	if (!stm32_tamp_nvram_rights(dev, reg_idx, true))
-+		return -EIO;
-+
-+	regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
-+	*byte = (read_value >> (byte_in_word * 8)) & 0xFF;
-+
-+	return 0;
-+}
-+
-+static int stm32_tamp_nvram_read(struct udevice *dev, int offset, void *buf, int size)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	u8 byte;
-+	u8 *buf_u8 = buf;
-+	u32 temp_u32;
-+	int i, ret;
-+	int total = offset + size;
-+	u32 reg_idx;
-+
-+	i = offset;
-+	while (i < total)  {
-+		reg_idx = i / sizeof(u32);
-+		if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
-+			if (!stm32_tamp_nvram_rights(dev, reg_idx, true)) {
-+				dev_dbg(dev, "Backup register %u is not allowed to be read\n",
-+					reg_idx);
-+				temp_u32 = 0;
-+			} else {
-+				regmap_read(priv->bkpregs_regmap, i, &temp_u32);
-+			}
-+			memcpy(buf_u8, &temp_u32, sizeof(u32));
-+			buf_u8 += sizeof(u32);
-+			i += sizeof(u32);
-+		} else {
-+			ret = stm32_tamp_nvram_read_byte(dev, i, &byte);
-+			if (ret != 0) {
-+				dev_dbg(dev, "Backup register %u is not allowed to be read\n",
-+					reg_idx);
-+				byte = 0;
-+			}
-+			*buf_u8 = byte;
-+			i++;
-+			buf_u8++;
-+		}
-+	}
-+
-+	return size;
-+}
-+
-+static int stm32_tamp_nvram_write(struct udevice *dev, int offset, const void *buf, int size)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	u8 *buf_u8 = (u8 *)buf;
-+	u32 temp_u32;
-+	size_t total = offset + size;
-+	int i, ret;
-+	u32 reg_idx;
-+
-+	i = offset;
-+	while (i < total)  {
-+		reg_idx = i / sizeof(u32);
-+		if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
-+			if (stm32_tamp_nvram_rights(dev, reg_idx, false)) {
-+				memcpy(&temp_u32, buf_u8, sizeof(u32));
-+				regmap_write(priv->bkpregs_regmap, i, temp_u32);
-+			} else {
-+				dev_dbg(dev, "Backup register %u is not allowed to be written",
-+					reg_idx);
-+			}
-+			buf_u8 += sizeof(u32);
-+			i += sizeof(u32);
-+		} else {
-+			ret = stm32_tamp_nvram_write_byte(dev, i, *buf_u8);
-+			if (ret != 0)
-+				dev_dbg(dev, "Backup register %u is not allowed to be written",
-+					reg_idx);
-+			i++;
-+			buf_u8++;
-+		}
-+	}
-+
-+	return size;
-+}
-+
-+static const struct misc_ops stm32_tamp_nvram_ops = {
-+	.read = stm32_tamp_nvram_read,
-+	.write = stm32_tamp_nvram_write,
-+};
-+
-+static u32 *stm32_tamp_nvram_get_backup_zones(struct udevice *dev)
-+{
-+	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	const struct stm32_tamp_nvram_drvdata *drvdata =
-+		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
-+	int nb_zones = drvdata->nb_zones;
-+	int zone_idx;
-+	int *idx_bkpreg_zones_end;
-+	struct regmap *tamp_regmap = priv->config_regmap;
-+	u32 offset_field;
-+
-+	idx_bkpreg_zones_end = devm_kcalloc(dev,
-+					    sizeof(*idx_bkpreg_zones_end),
-+					    nb_zones,
-+					    GFP_KERNEL);
-+	if (IS_ERR_OR_NULL(idx_bkpreg_zones_end)) {
-+		dev_err(dev, "Can't allocate registers zones\n");
-+		return ERR_PTR(-ENOMEM);
-+	}
-+
-+	//Get the n-1 frontiers of zone within the tamp configuration registers
-+	for (zone_idx = 0; zone_idx < nb_zones - 1; zone_idx++) {
-+		const struct reg_field reg_field = drvdata->reg_fields[zone_idx];
-+		struct regmap_field *field = devm_regmap_field_alloc(dev,
-+								     tamp_regmap,
-+								     reg_field);
-+
-+		if (IS_ERR_OR_NULL(field)) {
-+			dev_err(dev, "Can't allocate registers zones\n");
-+			devm_kfree(dev, idx_bkpreg_zones_end);
-+			return ERR_PTR(-ENOMEM);
-+		}
-+		if (regmap_field_read(field, &offset_field) != 0) {
-+			dev_err(dev, "Can't read field for registers zones\n");
-+			devm_kfree(dev, idx_bkpreg_zones_end);
-+			return ERR_PTR(-EIO);
-+		}
-+
-+		idx_bkpreg_zones_end[zone_idx] = offset_field - 1;
-+	}
-+
-+	//The last zone end is defined by the number of registers in TAMP
-+	idx_bkpreg_zones_end[zone_idx] = plat->nb_total_regs - 1;
-+
-+	return idx_bkpreg_zones_end;
-+}
-+
-+static void stm32_tamp_nvram_print_zones(struct udevice *dev)
-+{
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	int *zones_end = priv->idx_bkpreg_zones_end;
-+
-+	if (device_is_compatible(dev, "st,stm32mp25-tamp-nvram")) {
-+		dev_dbg(dev,
-+			"\n"
-+			"Zone 1-RIF1 %3d - %3d %c%c\n"
-+			"Zone 1-RIF2 %3d - %3d %c%c\n"
-+			"Zone 2-RIF1 %3d - %3d %c%c\n"
-+			"Zone 2-RIF2 %3d - %3d %c%c\n"
-+			"Zone 3-RIF1 %3d - %3d %c%c\n"
-+			"Zone 3-RIF0 %3d - %3d %c%c\n"
-+			"Zone 3-RIF2 %3d - %3d %c%c\n",
-+			0, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
-+						true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
-+						false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_1_RIF1] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
-+						true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
-+						false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_1_RIF2] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
-+						true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
-+						false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_2_RIF1] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
-+						true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
-+						false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_2_RIF2] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
-+						true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
-+						false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_3_RIF1] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
-+						true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
-+						false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_3_RIF0] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
-+						true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
-+						false) ?
-+				'W' :
-+				'-');
-+	} else if (device_is_compatible(dev, "st,stm32mp15-tamp-nvram")) {
-+		dev_dbg(dev,
-+			"\n"
-+			"Zone 1 %3d - %3d %c%c\n"
-+			"Zone 2 %3d - %3d %c%c\n"
-+			"Zone 3 %3d - %3d %c%c\n",
-+			0, zones_end[BKPREG_PROTECTION_ZONE_1],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_1] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_2],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], false) ?
-+				'W' :
-+				'-',
-+			zones_end[BKPREG_PROTECTION_ZONE_2] + 1,
-+			zones_end[BKPREG_PROTECTION_ZONE_3],
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], true) ?
-+				'R' :
-+				'-',
-+			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], false) ?
-+				'W' :
-+				'-');
-+	}
-+}
-+
-+static int stm32_tamp_nvram_of_to_plat(struct udevice *dev)
-+{
-+	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
-+	fdt_addr_t addr = dev_read_addr_size_index(dev, 0, &plat->size);
-+	fdt_addr_t parent_addr = dev_read_addr_size_index(dev->parent, 0, &plat->parent_size);
-+
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+	plat->base = (void __iomem *)addr;
-+
-+	if (parent_addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+	plat->parent_base = (void __iomem *)parent_addr;
-+
-+	if (plat->size == FDT_ADDR_T_NONE)
-+		return -EOPNOTSUPP;
-+
-+	plat->nb_total_regs =  plat->size / sizeof(uint32_t);
-+
-+	return 0;
-+}
-+
-+static int stm32_tamp_nvram_probe(struct udevice *dev)
-+{
-+	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
-+	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
-+	struct regmap_config config_regmap;
-+	struct regmap_config bckreg_regmap;
-+
-+	config_regmap.r_start = (ulong)(plat->parent_base);
-+	config_regmap.r_size = plat->parent_size;
-+	config_regmap.reg_offset_shift = 0;
-+	config_regmap.width = REGMAP_SIZE_32;
-+	priv->config_regmap = devm_regmap_init(dev, NULL, NULL, &config_regmap);
-+
-+	bckreg_regmap.r_start = (ulong)(plat->base);
-+	bckreg_regmap.r_size = plat->size;
-+	bckreg_regmap.reg_offset_shift = 0;
-+	bckreg_regmap.width = REGMAP_SIZE_32;
-+	priv->bkpregs_regmap = devm_regmap_init(dev, NULL, NULL, &bckreg_regmap);
-+
-+	priv->idx_bkpreg_zones_end = stm32_tamp_nvram_get_backup_zones(dev);
-+	if (IS_ERR_OR_NULL(priv->idx_bkpreg_zones_end)) {
-+		dev_err(dev, "Failed to get the backup zone from tamp regs\n\n");
-+		return -ENODEV;
-+	}
-+
-+	if (device_is_compatible(dev, "st,stm32mp25-tamp-nvram")) {
-+		priv->bkpreg_access = stm32_tamp_get_access_rights_mp2X(dev);
-+		if (IS_ERR_OR_NULL(priv->bkpreg_access))
-+			return -ENODEV;
-+	} else {
-+		priv->bkpreg_access = stm32mp1_tamp_bkpreg_access;
-+	}
-+
-+	stm32_tamp_nvram_print_zones(dev);
-+
-+	return 0;
-+}
-+
-+static int stm32_tamp_nvram_remove(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static const struct udevice_id stm32_tamp_nvram_ids[] = {
-+	{ .compatible = "st,stm32mp15-tamp-nvram", .data = (ulong)&stm32mp1_tamp_nvram },
-+	{ .compatible = "st,stm32mp25-tamp-nvram", .data = (ulong)&stm32mp25_tamp_nvram },
-+	{},
-+};
-+
-+U_BOOT_DRIVER(stm32_tamp_nvram) = {
-+	.name = "stm32_tamp_nvram",
-+	.id = UCLASS_MISC,
-+	.of_match = stm32_tamp_nvram_ids,
-+	.priv_auto = sizeof(struct stm32_tamp_nvram_priv),
-+	.plat_auto = sizeof(struct stm32_tamp_nvram_plat),
-+	.ops = &stm32_tamp_nvram_ops,
-+	.of_to_plat = of_match_ptr(stm32_tamp_nvram_of_to_plat),
-+	.probe = stm32_tamp_nvram_probe,
-+	.remove = stm32_tamp_nvram_remove,
-+};
-+
--- 
-2.25.1
+@Simon, @Tom,
 
-base-commit: cb7555e93075114fe4af0adb806877ac4d4ef80d
-branch: upstream_nvram_driver_v3
+We lack a documentation of the the different BOOTM_STATEs.
+The documentation of the bootm command is incomplete, it does not=20
+contain the subcommands.
+
+Best regards
+
+Heinrich
+
+>> +
+>>          /* Relocate the ramdisk */
+>>   #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
+>>          if (!ret && (states & BOOTM_STATE_RAMDISK)) {
+>> diff --git a/include/efi_loader.h b/include/efi_loader.h
+>> index 144b749278a..84e8cfe320e 100644
+>> --- a/include/efi_loader.h
+>> +++ b/include/efi_loader.h
+>> @@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t =
+handle, const char *env_var,
+>>   void *efi_get_configuration_table(const efi_guid_t *guid);
+>>   /* Install device tree */
+>>   efi_status_t efi_install_fdt(void *fdt);
+>> +/* Install initrd */
+>> +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
+>>   /* Execute loaded UEFI image */
+>>   efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)=
+;
+>>   /* Run loaded UEFI image with given fdt */
+>> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.=
+c
+>> index d0f7da309ce..6a189c31ffa 100644
+>> --- a/lib/efi_loader/efi_bootbin.c
+>> +++ b/lib/efi_loader/efi_bootbin.c
+>> @@ -220,7 +220,6 @@ static efi_status_t efi_binary_run_dp(void *image, =
+size_t size, void *fdt,
+>>                                        struct efi_device_path *dp_img)
+>>   {
+>>          efi_status_t ret;
+>> -       struct efi_device_path *dp_initrd;
+>>
+>>          /* Initialize EFI drivers */
+>>          ret =3D efi_init_obj_list();
+>> @@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image,=
+ size_t size, void *fdt,
+>>          if (ret !=3D EFI_SUCCESS)
+>>                  return ret;
+>>
+>> -       dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initr=
+d, initd_sz);
+>> -       if (!dp_initrd)
+>> -               return EFI_OUT_OF_RESOURCES;
+>> -
+>> -       ret =3D efi_initrd_register(dp_initrd);
+>> +       ret =3D efi_install_initrd(initrd, initd_sz);
+>>          if (ret !=3D EFI_SUCCESS)
+>>                  return ret;
+>>
+>> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+>> index 3936139ca41..19fb5d03fec 100644
+>> --- a/lib/efi_loader/efi_helper.c
+>> +++ b/lib/efi_loader/efi_helper.c
+>> @@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
+>>          return EFI_SUCCESS;
+>>   }
+>>
+>> +/**
+>> + * efi_install_initrd() - install initrd
+>> + *
+>> + * Install the initrd located at @initrd using the EFI_LOAD_FILE2
+>> + * protocol.
+>> + *
+>> + * @initrd:    address of initrd or NULL if none is provided
+>> + * @initrd_sz: size of initrd
+>> + * Return:     status code
+>> + */
+>> +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
+>> +{
+>> +       efi_status_t ret;
+>> +       struct efi_device_path *dp_initrd;
+>> +
+>> +       if (!initrd)
+>> +               return EFI_SUCCESS;
+>> +
+>> +       dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initr=
+d, initd_sz);
+>> +       if (!dp_initrd)
+>> +               return EFI_OUT_OF_RESOURCES;
+>> +
+>> +       ret =3D efi_initrd_register(dp_initrd);
+>> +       if (ret !=3D EFI_SUCCESS)
+>> +               efi_free_pool(dp_initrd);
+>> +
+>> +       return ret;
+>> +}
+>> +
+>>   /**
+>>    * do_bootefi_exec() - execute EFI binary
+>>    *
+>> --
+>> 2.48.1
+>>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
