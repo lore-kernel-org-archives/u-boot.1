@@ -4,50 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44E1C3ABA5
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 14:49:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10812C369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 14:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB8AA829A1;
-	Tue, 29 Apr 2025 16:49:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C7E8829A1;
+	Tue, 29 Apr 2025 16:53:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="d2RCEdG7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sbmmdjwR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF1E582A0A; Tue, 29 Apr 2025 16:49:44 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
- by phobos.denx.de (Postfix) with ESMTP id B133682958
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:49:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ id 5F28B82A0A; Tue, 29 Apr 2025 16:53:57 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 22F0E82958
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 16:53:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1745938162;
- bh=hmZceSamxrLVUarXql8+uUqJjZ13Xk0A03D1MSfSd8A=;
- h=From:To:CC:Subject:Date:From;
- b=d2RCEdG7T686igz76sx34ciCTci0TBZCvc5H+icWXXuTp1LjbJWb6aEz+UPiWHpbl
- bkNbo+NBrTVDwtd0IcAW1ySpc3rm2BusElacfC/grVpU7pmHJWPWzx4Hk1/OaZ+sf4
- 1CWhDhS1aShb6xE94LoNGDcXpO71Hfn8VeI64vhlNgoaFqw33xuo9USfgDNvrw5hKV
- 30PuPUmcEHB1k6PPN3xB0cGvU1Jql3y4TULq73E5bL9shidYOidAe/utsYVT/jWM/B
- h6+Yl9ss2hDOGqGONAl/Dct4iVt0CK3boIzUZKqSTXYcDzpoaIZEtAINtakg+c0cSx
- fB/rA67JCK88A==
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-To: <u-boot@lists.denx.de>
-CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Michael Walle
- <mwalle@kernel.org>, Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut
- <marex@denx.de>, Benedikt Spranger <b.spranger@linutronix.de>, Jerome
- Forissier <jerome.forissier@linaro.org>, John Ogness
- <john.ogness@linutronix.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH V2] tiny-printf: Handle formatting of %p with an extra Kconfig
-Date: Tue, 29 Apr 2025 16:47:56 +0200
-Message-ID: <20250429144756.2467039-1-cniedermaier@dh-electronics.com>
-X-klartext: yes
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-72c173211feso1625480a34.1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 07:53:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1745938434; x=1746543234; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DGBtYfAlTJyjf9Sc7arP/KpuPHLtPnDoafyRXlhQezU=;
+ b=sbmmdjwR4tRIiMWP9aiJ7RotgquYhlZ1M5myHseYHVNWNIgdzfiLSh8EYmIASaYo+a
+ i0S9SSmsJf0qov6IgMsBIsTQZYSi52W37gu6rGfjnuDPBbdoTnpug614sr056hx8tJlT
+ MrO75OAAsMXAtaIXYogvyJ58AIkds7uuuuqoQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745938434; x=1746543234;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DGBtYfAlTJyjf9Sc7arP/KpuPHLtPnDoafyRXlhQezU=;
+ b=wY3wA5hiSf+v6uAZMzfS3YhYCHOqOfaobDMnquEpdJ/scSE1WO+zYSTQBffNWnd/o+
+ PHN0LDdEqwm7xjyOuAaQc2st5yqfugf0Fr/c5WBcOun4ag1BgqPrOU+zXGF2xg6Ss4ZC
+ 9IxZK4aFsPku2Ma02bsiCK9DWqr6ljcYKEb1OZNtEZXOTKwH8KR0k+F4S5BNu4/986kO
+ pM8nwUR464mFbMytHwdNyT6vNF7Rzs/+ORYXnMuCdMJyg+buvJ/9bXNduGtZbZJ+dUv3
+ rAdXlYEE8b09gEW4IPxfnj53jf4xqdORpngz4T7E/EaGT8DXXX9NX5WpbuTyyKpxuvXO
+ tDZw==
+X-Gm-Message-State: AOJu0YyMQs7+/WIL0kM1mXQCipP0fmolrIc3QQcXlwk8cU7toWMVFJfL
+ klG8mhXwnDvrOMtj54thqJGQYW7ISnAx82F5ZBSMY729Clzn2gJk4qpHEZM+9IU=
+X-Gm-Gg: ASbGncv9mAZWRzwMFV7ZhqN40rYT8B3sg0cGLip+NXxQJMO8uE3GjtOwdRiMw2/aN30
+ oY/hiyCxysbgjhYbgkvuh24PcZp7P7CIO2s+jq4Zu2SLW3jeVX4rQonOSicjGENWdpLa7l9ujnb
+ wyNzclxwGqg/JXFa6tHU3861jUobv7uoOUpdAeSiqguAX7iEjTeWJllRUeZo+FXwTACsep25ooU
+ f/4C07CiKx6GCXXag+240st/q6BfNwc7SMuSgTTpGJk+dOWeoFOmbGfBcyyg2vg5dU4RIYLenkC
+ sE0ZRPt9J3Zue8xcMsr1wbZ9syvPGcPvPbIhMdELKXP3u92FyTYv6gtwkyB47sT8f2X4nGFlSoH
+ 0cA==
+X-Google-Smtp-Source: AGHT+IGkJJKtSVFdsiz7TXEQbEdcGMwz6hQwuRWBcO3iYtM9HsCz2RqEcQMhuu4ZaUEYw+qcHzOIbQ==
+X-Received: by 2002:a05:6830:6817:b0:72b:9724:6a82 with SMTP id
+ 46e09a7af769-7306523084cmr8227646a34.17.1745938433743; 
+ Tue, 29 Apr 2025 07:53:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7308b312566sm306679a34.59.2025.04.29.07.53.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Apr 2025 07:53:53 -0700 (PDT)
+Date: Tue, 29 Apr 2025 08:53:47 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Douglas Anderson <dianders@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Leonard Anderweit <l.anderweit@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Subject: Re: [PATCH 00/30] patman: Move to asyncio and other updates
+Message-ID: <20250429145347.GG1261075@bill-the-cat>
+References: <20250429132239.251756-1-sjg@chromium.org>
+ <20250429134846.GA1261075@bill-the-cat>
+ <CAFLszTgrJvgWJaCXFgefJ1bObsrGfZa6AC8C6ypFRKJQTWm5ZQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dW8vpOhKeA7aWOCM"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgrJvgWJaCXFgefJ1bObsrGfZa6AC8C6ypFRKJQTWm5ZQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,219 +113,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The formatting with %pa / %pap behaves like %x, which results in an
-incorrect value being output. To improve this, a new fine-tuning
-Kconfig SPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
-has been added. If it is enabled, the output of %pa / %pap should
-be correct, and if it is disabled, the pointer formatting is
-completely unsupported. In addition to indicate unsupported formatting,
-'?' will be output. This allows enabling pointer formatting only
-when needed. For SPL_NET and NET_LWIP it is selected by default.
-Then it also supports the formatting with %pm, %pM and %pI4.
 
-In summery this level of %p support for tiny printf is possible now:
+--dW8vpOhKeA7aWOCM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-1) The standard tiny printf won't have support for pointer formatting.
-   So it doesn't print misleading values for %pa, instead '?' will be
-   output:
-   %p   => ?
-   %pa  => ?a
-   %pap => ?ap
+On Tue, Apr 29, 2025 at 08:35:24AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 29 Apr 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Apr 29, 2025 at 07:21:57AM -0600, Simon Glass wrote:
+> >
+> > > This series moves patman to use asyncio instead of ThreadPoolExecutor
+> > > since it makes it easier to handle requests sent from different parts
+> > > of the code.
+> > >
+> > > It also includes some updates to bring patman in line with the other
+> > > major Python tools (buildman and binman).
+> > >
+> > > With this series, we have a better basis to add support for syncing m=
+ore
+> > > data from a patchwork server.
+> > >
+> > > After this, the next step it to add a new 'patman series' subcommand,=
+ to
+> > > track and manage series workflow.
+> >
+> > This conflicts with master, please rebase this if you intend for it to
+> > be merged to mainline.
+>=20
+> I will take a look and see what patches my tree is missing.
+>=20
+> >  And to avoid confusion, while I think managing
+> > these python projects in this manner (and not AFAICT following python
+> > best practices) makes life harder for everyone else, that is not me
+> > NAK'ing taking more patches, I continue to be compromising and "Saying
+> > Yes" to things you do that I disagree with on non-arbitrary technical
+> > grounds.
+>=20
+> I'm open to managing them in my tree if that helps. For now it seems
+> like too much work to manage them separately, but if someone wants to
+> volunteer to help, I could do it.
 
-2) If SPL_USE_TINY_PRINTF_POINTER_SUPPORT is enabled or DEBUG is defined
-   tiny printf supports formatting %p and %pa / %pap.
+Again, if you won't manage them standalone as seems to be normal best
+practice, we'll just keep them in mainline. It's up to you if they
+diverge or not, but it would be easy to avoid I would think.
 
-3) If SPL_NET or NET_LWIP is enabled the support of pointers is extended
-   for %pm, %pM and %pI4.
+--=20
+Tom
 
-Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
----
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Benedikt Spranger <b.spranger@linutronix.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: John Ogness <john.ogness@linutronix.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-V2: - Rebase on current master
-    - Extend commit message
-    - Restrict use to SPL
-    - Rename Kconfig to SPL_USE_TINY_PRINTF_POINTER_SUPPORT
-    - Replace _DEBUG with defined(DEBUG)
-    - Output '?' if %pm, %pM and %pI4 isn't available
-    - Add break on case '%'
----
- Kconfig            |  1 +
- common/spl/Kconfig |  1 +
- lib/Kconfig        |  8 ++++++++
- lib/tiny-printf.c  | 51 +++++++++++++++++++++++-----------------------
- 4 files changed, 35 insertions(+), 26 deletions(-)
+--dW8vpOhKeA7aWOCM
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/Kconfig b/Kconfig
-index 51358633762..b8eec3fc931 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -774,6 +774,7 @@ config NET
- 
- config NET_LWIP
- 	bool "Use lwIP for networking stack"
-+	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
- 	imply NETDEVICES
- 	help
- 	  Include networking support based on the lwIP (lightweight IP)
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index b076f49ac00..b89e0c9b4d4 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1116,6 +1116,7 @@ config SPL_DM_SPI_FLASH
- config SPL_NET
- 	bool "Support networking"
- 	depends on !NET_LWIP
-+	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
- 	help
- 	  Enable support for network devices (such as Ethernet) in SPL.
- 	  This permits SPL to load U-Boot over a network link rather than
-diff --git a/lib/Kconfig b/lib/Kconfig
-index b2aecd8a49e..e17396701c2 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -253,6 +253,14 @@ config VPL_USE_TINY_PRINTF
- 
- 	  The supported format specifiers are %c, %s, %u/%d and %x.
- 
-+config SPL_USE_TINY_PRINTF_POINTER_SUPPORT
-+	bool "Extend tiny printf with the pointer formatting %p"
-+	depends on SPL_USE_TINY_PRINTF
-+	help
-+	  This option enables the formatting of pointers %p. It supports
-+	  %p and %pa / %pap. If this option is selected by SPL_NET or NET_LWIP
-+	  it also supports the formatting with %pm, %pM and %pI4.
-+
- config PANIC_HANG
- 	bool "Do not reset the system on fatal error"
- 	help
-diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
-index 2a7a4d286c0..5d87f39314e 100644
---- a/lib/tiny-printf.c
-+++ b/lib/tiny-printf.c
-@@ -47,7 +47,7 @@ static void div_out(struct printf_info *info, unsigned long *num,
- 		out_dgt(info, dgt);
- }
- 
--#ifdef CONFIG_SPL_NET
-+#if defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP)
- static void string(struct printf_info *info, char *s)
- {
- 	char ch;
-@@ -141,7 +141,7 @@ static void ip4_addr_string(struct printf_info *info, u8 *addr)
- 
- 	string(info, ip4_addr);
- }
--#endif
-+#endif /* defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP) */
- 
- /*
-  * Show a '%p' thing.  A kernel extension is that the '%p' is followed
-@@ -157,18 +157,14 @@ static void ip4_addr_string(struct printf_info *info, u8 *addr)
-  *       decimal).
-  */
- 
--static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
--				   void *ptr)
-+#if defined(CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT) || defined(DEBUG)
-+static void pointer(struct printf_info *info, const char *fmt, void *ptr)
- {
--#ifdef DEBUG
- 	unsigned long num = (uintptr_t)ptr;
- 	unsigned long div;
--#endif
- 
- 	switch (*fmt) {
--#ifdef DEBUG
- 	case 'a':
--
- 		switch (fmt[1]) {
- 		case 'p':
- 		default:
-@@ -176,8 +172,7 @@ static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
- 			break;
- 		}
- 		break;
--#endif
--#ifdef CONFIG_SPL_NET
-+#if defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP)
- 	case 'm':
- 		return mac_address_string(info, ptr, false);
- 	case 'M':
-@@ -185,16 +180,22 @@ static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
- 	case 'I':
- 		if (fmt[1] == '4')
- 			return ip4_addr_string(info, ptr);
-+#else
-+	case 'm':
-+	case 'M':
-+	case 'I':
-+		out(info, '?');
-+		return;
- #endif
- 	default:
- 		break;
- 	}
--#ifdef DEBUG
-+
- 	div = 1UL << (sizeof(long) * 8 - 4);
- 	for (; div; div /= 0x10)
- 		div_out(info, &num, div);
--#endif
- }
-+#endif
- 
- static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
- {
-@@ -269,21 +270,18 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
- 						div_out(info, &num, div);
- 				}
- 				break;
-+#if defined(CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT) || defined(DEBUG)
- 			case 'p':
--				if (CONFIG_IS_ENABLED(NET) ||
--				    CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG) {
--					pointer(info, fmt, va_arg(va, void *));
--					/*
--					 * Skip this because it pulls in _ctype which is
--					 * 256 bytes, and we don't generally implement
--					 * pointer anyway
--					 */
--					while (isalnum(fmt[0]))
--						fmt++;
--					break;
--				}
--				islong = true;
--				fallthrough;
-+				pointer(info, fmt, va_arg(va, void *));
-+				/*
-+				 * Skip this because it pulls in _ctype which is
-+				 * 256 bytes, and we don't generally implement
-+				 * pointer anyway
-+				 */
-+				while (isalnum(fmt[0]))
-+					fmt++;
-+				break;
-+#endif
- 			case 'x':
- 			case 'X':
- 				if (islong) {
-@@ -310,6 +308,7 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
- 				break;
- 			case '%':
- 				out(info, '%');
-+				break;
- 			default:
- 				break;
- 			}
--- 
-2.30.2
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgQ5+0ACgkQFHw5/5Y0
+tyyxtwv+LAe9D8+Jzv2+Apfa+dr0JInr5u15E6l7rKB5sNfld7B0Nx72LM/WaX82
+4yFVa/FYJDKIIHjFi/NoSEcsjrvfJ5SJ7J+pp1LnN/w/nDs4BiYEEE7sLG5aF2Hh
+keBMa7e3sXcgJ8LMJIEe6yg7HgNBW50DWjZli8BZhBzL08NR3MtEI85A2O6Wl8qH
+eRzZNn/aZB6KElgXd1HImeqSWi+eBO7dVo0O4mqdGOnqK+4s5R9ZPtkoMO//lPYY
+vyzex67TAKdgYOlJux3vnzIooNxVlpjfmg7vBiLkWn3rD0f1ND+J0OtuL0CnuT03
+IYwUatAtabq8Qfz+4mdRV+wf6ai9PyzO3ToO9yBaw0VxrZgOOyAWTFy0ew/JaCXf
+WoaRyqTSCwPjye6gmpaVfhXVbxgmWY4F2kFhOV4XBbXgG/N6S+5RQiT9bPHC6vtj
+tTqFWegsnFJm4MaA/cGGrpxoVrfSujHGn9q13j+9hXotQ/qrtM1cCxmdyBF2Yzcv
+ITEwpDfx
+=VrI1
+-----END PGP SIGNATURE-----
+
+--dW8vpOhKeA7aWOCM--
