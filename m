@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DAE7C3ABAB
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8459DC369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:27:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 885BD82AA8;
-	Tue, 29 Apr 2025 15:25:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D3C0882A65;
+	Tue, 29 Apr 2025 15:25:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bkDbQ3Nv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Onqs/fmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FED682AC1; Tue, 29 Apr 2025 15:25:16 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 500578296B; Tue, 29 Apr 2025 15:25:19 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D69B08283E
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:25:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07E6E82A39
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:25:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3f8ae3ed8f4so4161214b6e.3
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:25:13 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-72c14138668so1588516a34.2
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:25:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1745933111; x=1746537911; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1745933115; x=1746537915; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fi0BnmchFDOCb71FSzlYPvrbyVLpKwN7v3twXbmRcjA=;
- b=bkDbQ3Nvp+qwv5i+YhhcTCHErMu1CfRMtnUN69eZuuDNUcA+I1+inCrOBCQraEpqpq
- F2hLsVKPNVUcovZ8uSdEnAj4E+mqhTLM32m42NeikR8Ix9axi0g5XduGOL2Ue+aV8yDI
- VtjBnuUrWLflKARcHoQcoAFzBfzH1be3pRszk=
+ bh=esnZngZUmbknv4yQW8nUYGaYEIT1OPjcqSj1kk7H/YM=;
+ b=Onqs/fmgMYBFkrjQThJO6XJkQWfc2qFsdjvczfwDUfLOxbguSj83rV+ORVjV2lP6dk
+ msNnMbNhWQ8g4qb8ToCozXW4pryxUT5AGwMXNbOB0qbTrXPUeCdtv6Hd8wBMKG52xWVR
+ ke1mLOxR9bMxEKE6rTah8OXmrHjg5uhX6JDjg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745933111; x=1746537911;
+ d=1e100.net; s=20230601; t=1745933115; x=1746537915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fi0BnmchFDOCb71FSzlYPvrbyVLpKwN7v3twXbmRcjA=;
- b=Ct//X8fn0T69TWPPJYxrizN3jyduuZ6FS1KCytZ8fo3VGHTi8SBjkscT6iCgmTLWSv
- Xxf449HmXrofaANhn590Jc7r30f6i+aHM8ZxqW1b95kvGpsowT0eFOaOSJ4qp9kLbfol
- xmWRUKTU9P9cPZtzYXcBoIzMw7XqtNrCl278ii54XAsW2MuTPldIvmPw5QV15kRZZZM2
- aphZmJqZS2LbTvwtVGvCi/OVjiW1DZ+HS1YE8HKvwZPPMZICO8yHSKmLojNCXIqNgKH7
- r2rqj4uBf2R82drbuP/7Rtlh9/J8epKnLJcpIynNuqnNw6wDQmaE2UItHnFn2MzQI4ZU
- QyVw==
-X-Gm-Message-State: AOJu0YzuTJyOXjDns/7A52xpFSO/ddAjFcSkCWnon3T12+fXz7y4lO4c
- KIWjVbkqdrR4kVyGWHJ0PsS1H7Rngz6nQkX3Mj2T4WrBZ8qKah4FWCpnY9h1fdJwQJfMAjAXl00
+ bh=esnZngZUmbknv4yQW8nUYGaYEIT1OPjcqSj1kk7H/YM=;
+ b=Fmj0Se7i7viMuonPPDMJvQ4XPnliPfBNe7+aLdLExYw9u/AI4VbuLh8ZS6avaE8kNT
+ yjvgayEFS+eO/kJ4aKanGrzED1IjsFqIdKg+i+wiDEaDaICVyMIjKL15RH4WNXceOaY+
+ PnBtD+IMEvZcULqCWhTJpFnqtvy065d+LWoexoSXTXTNcGA01MXZwqXGvgjJ/tI1N68C
+ 11u5RV+fgmRvMzswhCHIs5JP8oAh3Ps0q2u6Ymf18RolkRPVWBNCAtOdgWWMpaY8kvDg
+ Cn2qRtJ0ic9Ia+AFKqZWbAnbvIbNkPR8s1pgeJqXE/cW61gHK/BLoPwL138N+pZ5Sb1x
+ shXQ==
+X-Gm-Message-State: AOJu0YycIjMYUfzulhL1a5NlokUDthYwXE1d/CTqqSXjl0bGG9KfDX/M
+ lNbh5zpvv9sAy5xoGN6H9r/7as89lknV8LFIBxiRB5AZIUtaKW1j3BQg7MbHZ2M23sll/BtP/3Y
  =
-X-Gm-Gg: ASbGnctmEMaz2Va6hdIg926N6ys5k2rKzGFskSEfMoAPJib29J4yupyTaGqX60NMW5N
- D3eN+derE6h0v20IhQVMKcHvD9esMULTmPGKMw5ElmmBrFKuD2SOVqG50VEPzrQJ1JAJqctGuwC
- 3tgJCMDwZFvyY8aExRrdXPxjTkLnHYmqfdBnajB2KNVVYj+zrZPuh6YwJ7VOqh2ngDaHR7Zzbdo
- abhYBLKNf8mqB+Y1d0n8lIlvXuu1DRwVsCqbABexJ3n0+eO+0VNY4JfGwSruUWNdfu2RcaELdem
- g7kQ9/IBqtlMH2WnU4Akw/QQ6fLMgfLPDMrFLxNo+Jjwc/fc2Ood1nixsxJ0NmHchIIa86D3S2S
- Ytg==
-X-Google-Smtp-Source: AGHT+IFD1wMErefvvcrwWv8zYSmCnD4MV1Cn5sE5BAR6omxpeCiXci9JmkRJcfyLKcWIHa5XAelpiQ==
-X-Received: by 2002:a05:6808:1b90:b0:401:e67c:b3be with SMTP id
- 5614622812f47-402115506f8mr1699638b6e.4.1745933111559; 
- Tue, 29 Apr 2025 06:25:11 -0700 (PDT)
+X-Gm-Gg: ASbGncs71WalXU/jZcA8DSDMBJeH0MPIApStvsKvbbno5AJ2uKut+HGRC7U7LiNcdtl
+ a1jnmylZhrT5dqo7kAdo12Z+kV5UQL9LGD7pdfvX2crMrd2id8wUlMOYvOgR9xcPFzxr5YuEsiR
+ r5rPCLJ5CLddI6nvNAn8hH5NlasfhxiI9A20LmahAHXM/gHv0RknZW1vnO8DBWAcTATOWJaMmgC
+ 027eW+1MGhxwbgE4hQcn0nL7YJtKwrxmfk4iH/EuM0jHvg3sVEOpJCvvlozll7SzUw1UfgCR+0w
+ zY47loAmKuU+Q+Z/nQ3E3H1IbqLSu2Foxtb3Qo3qpmcmKPAZwU8NXsyoA/2agjScFhCpt9qYhB/
+ 3vw==
+X-Google-Smtp-Source: AGHT+IHZe3dqmfTdkk9G4F+WUj/KWL72hMDzOF2Z/rlKlAcn6GeNiE2GMyf0ARg9XVav1ALIrszG/w==
+X-Received: by 2002:a05:6830:488e:b0:72a:327:eed3 with SMTP id
+ 46e09a7af769-73065093b91mr9201501a34.5.1745933115209; 
+ Tue, 29 Apr 2025 06:25:15 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.25.07
+ 46e09a7af769-7308b117371sm277320a34.16.2025.04.29.06.25.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 06:25:07 -0700 (PDT)
+ Tue, 29 Apr 2025 06:25:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 29/30] patman: Use a pager when outputting status
-Date: Tue, 29 Apr 2025 07:22:26 -0600
-Message-ID: <20250429132239.251756-30-sjg@chromium.org>
+Subject: [PATCH 30/30] patman: Drop the old status code
+Date: Tue, 29 Apr 2025 07:22:27 -0600
+Message-ID: <20250429132239.251756-31-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250429132239.251756-1-sjg@chromium.org>
 References: <20250429132239.251756-1-sjg@chromium.org>
@@ -95,64 +95,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The pager makes it easier to review large number of comments. Add it
-around the output.
-
-Patman normally sends multiple concurrent requests to the patchwork
-server, as this is faster. Provide an option to disable this.
+Now that we have the new asyncio implementation, drop the unused
+ThreadPoolExecutor code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/status.py | 35 +++++++++++++++++++----------------
- 1 file changed, 19 insertions(+), 16 deletions(-)
+ tools/patman/status.py | 125 -----------------------------------------
+ 1 file changed, 125 deletions(-)
 
 diff --git a/tools/patman/status.py b/tools/patman/status.py
-index f5be51461e7..dfc0f29faa4 100644
+index dfc0f29faa4..74d05624226 100644
 --- a/tools/patman/status.py
 +++ b/tools/patman/status.py
-@@ -382,22 +382,25 @@ def do_show_status(patches, series, branch, show_comments, col,
-     new_rtag_list = [None] * count
-     review_list = [None] * count
+@@ -22,19 +22,6 @@ from patman import patchstream
+ from patman import patchwork
  
--    patch_for_commit, _, warnings = compare_with_series(series, compare)
+ 
+-def to_int(vals):
+-    """Convert a list of strings into integers, using 0 if not an integer
+-
+-    Args:
+-        vals (list): List of strings
+-
+-    Returns:
+-        list: List of integers, one for each input string
+-    """
+-    out = [int(val) if val.isdigit() else 0 for val in vals]
+-    return out
+-
+-
+ def process_reviews(content, comment_data, base_rtags):
+     """Process and return review data
+ 
+@@ -133,74 +120,6 @@ def compare_with_series(series, patches):
+ 
+     return patch_for_commit, commit_for_patch, warnings
+ 
+-def collect_patches(series_id, pwork):
+-    """Collect patch information about a series from patchwork
+-
+-    Uses the Patchwork REST API to collect information provided by patchwork
+-    about the status of each patch.
+-
+-    Args:
+-        series_id (str): Patch series ID number
+-        pwork (Patchwork): Patchwork object to use for reading
+-
+-    Returns:
+-        list of Patch: List of patches sorted by sequence number
+-
+-    Raises:
+-        ValueError: if the URL could not be read or the web page does not follow
+-            the expected structure
+-    """
+-    data = pwork.request('series/%s/' % series_id)
+-
+-    # Get all the rows, which are patches
+-    patch_dict = data['patches']
+-    count = len(patch_dict)
+-
+-    patches = []
+-
+-    # Work through each row (patch) one at a time, collecting the information
+-    warn_count = 0
+-    for pw_patch in patch_dict:
+-        patch = patchwork.Patch(pw_patch['id'])
+-        patch.parse_subject(pw_patch['name'])
+-        patches.append(patch)
+-    if warn_count > 1:
+-        tout.warning('   (total of %d warnings)' % warn_count)
+-
+-    # Sort patches by patch number
+-    patches = sorted(patches, key=lambda x: x.seq)
+-    return patches
+-
+-def find_new_responses(new_rtag_list, review_list, seq, cmt, patch, pwork):
+-    """Find new rtags collected by patchwork that we don't know about
+-
+-    This is designed to be run in parallel, once for each commit/patch
+-
+-    Args:
+-        new_rtag_list (list): New rtags are written to new_rtag_list[seq]
+-            list, each a dict:
+-                key: Response tag (e.g. 'Reviewed-by')
+-                value: Set of people who gave that response, each a name/email
+-                    string
+-        review_list (list): New reviews are written to review_list[seq]
+-            list, each a
+-                List of reviews for the patch, each a Review
+-        seq (int): Position in new_rtag_list to update
+-        cmt (Commit): Commit object for this commit
+-        patch (Patch): Corresponding Patch object for this patch
+-        pwork (Patchwork): Patchwork object to use for reading
+-    """
+-    if not patch:
+-        return
+-
+-    # Get the content for the patch email itself as well as all comments
+-    data = pwork.request('patches/%s/' % patch.id)
+-    comment_data = pwork.request('patches/%s/comments/' % patch.id)
+-
+-    new_rtags, reviews = process_reviews(data['content'], comment_data,
+-                                         cmt.rtags)
+-    new_rtag_list[seq] = new_rtags
+-    review_list[seq] = reviews
+ 
+ def show_responses(col, rtags, indent, is_new):
+     """Show rtags collected
+@@ -292,50 +211,6 @@ def create_branch(series, new_rtag_list, branch, dest_branch, overwrite,
+             [parent.target])
+     return num_added
+ 
+-def _check_status(series, series_id, pwork):
+-    """Check the status of a series on Patchwork
+-
+-    This finds review tags and comments for a series in Patchwork, displaying
+-    them to show what is new compared to the local series.
+-
+-    Args:
+-        series (Series): Series object for the existing branch
+-        series_id (str): Patch series ID number
+-        pwork (Patchwork): Patchwork object to use for reading
+-
+-    Return:
+-        tuple:
+-            list of Patch: List of patches sorted by sequence number
+-            dict: Patches for commit
+-                key: Commit number (0...n-1)
+-                value: Patch object for that commit
+-            list of dict: review tags:
+-                key: Response tag (e.g. 'Reviewed-by')
+-                value: Set of people who gave that response, each a name/email
+-                    string
+-            list for each patch, each a:
+-                list of Review objects for the patch
+-    """
+-    patches = collect_patches(series_id, pwork)
+-    count = len(series.commits)
+-    new_rtag_list = [None] * count
+-    review_list = [None] * count
+-
+-    patch_for_commit, _, warnings = compare_with_series(series, patches)
 -    for warn in warnings:
--        tout.do_output(tout.WARNING if warnings_on_stderr else tout.INFO, warn)
+-        tout.warning(warn)
 -
--    for seq, pw_patch in enumerate(patches):
--        compare[seq].patch = pw_patch
+-    patch_list = [patch_for_commit.get(c) for c in range(len(series.commits))]
 -
--    for i in range(count):
--        pat = patch_for_commit.get(i)
--        if pat:
--            patch_data = pat.patch.data
--            comment_data = pat.patch.comments
--            new_rtag_list[i], review_list[i] = process_reviews(
--                patch_data['content'], comment_data, series.commits[i].rtags)
--    num_to_add = _do_show_status(series, patch_for_commit, show_comments, new_rtag_list,
--                   review_list, col)
-+    with terminal.pager():
-+        patch_for_commit, _, warnings = compare_with_series(series, compare)
-+        for warn in warnings:
-+            tout.do_output(tout.WARNING if warnings_on_stderr else tout.INFO,
-+                           warn)
-+
-+        for seq, pw_patch in enumerate(patches):
-+            compare[seq].patch = pw_patch
-+
-+        for i in range(count):
-+            pat = patch_for_commit.get(i)
-+            if pat:
-+                patch_data = pat.patch.data
-+                comment_data = pat.patch.comments
-+                new_rtag_list[i], review_list[i] = process_reviews(
-+                    patch_data['content'], comment_data,
-+                    series.commits[i].rtags)
-+        num_to_add = _do_show_status(series, patch_for_commit, show_comments, new_rtag_list,
-+                       review_list, col)
-     return num_to_add, new_rtag_list, patches
+-    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
+-        futures = executor.map(
+-            find_new_responses, repeat(new_rtag_list), repeat(review_list),
+-            range(count), series.commits, patch_list, repeat(pwork))
+-    for fresponse in futures:
+-        if fresponse:
+-            raise fresponse.exception()
+-    return patches, patch_for_commit, new_rtag_list, review_list
+-
  
- 
+ def check_patch_count(num_commits, num_patches):
+     """Check the number of commits and patches agree
 -- 
 2.43.0
 
