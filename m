@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76700C369DC
-	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FFFC369DC
+	for <u-boot@archiver.kernel.org>; Tue, 29 Apr 2025 13:28:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0F1E82A3B;
-	Tue, 29 Apr 2025 15:27:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45DE18277D;
+	Tue, 29 Apr 2025 15:27:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GBUM78/s";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jlIynFld";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4F19829B2; Tue, 29 Apr 2025 15:27:21 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 2E9C982A55; Tue, 29 Apr 2025 15:27:23 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A20B182AAA
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:27:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE7DF8215B
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 15:27:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-af50f56b862so4081537a12.1
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:27:18 -0700 (PDT)
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-b1396171fb1so3782440a12.2
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 06:27:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745933237; x=1746538037; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1745933239; x=1746538039; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rkU4USPMzbiGMP1d9c43dN9ztVHy52m+jy3g/aCyjeE=;
- b=GBUM78/sP3MWKtaTWLGumIA9vL2S7ujiGkFuG7+qaX4uWUFaH7TBNZIdkpO0+5ikls
- ppcfJE9AXkEsEAJinONfyu076VVMb9fY+NKGBoYTucVLihkAPwtiMPfn+h6ineN7kiX3
- Qr24JfLVodD3NCt/qiz5QDr73HyRV3V4gfeg0HXZO5jvTQNIqe0YdPt6L1hhkzyUIgoD
- rH4kBDm3IMovitEWvbB4MPE4xWhvv/1PpFw2Yw+1ubLpeg8jTtN5LtJb5y8TIsXfq7GL
- IPkxhal9JHgNi5XCdqkbbVmlENLMhoUl6h7HTEukZgKI39PzgC7P9NPjWA7YQZsY6ynS
- AYCQ==
+ bh=y2rhJc8pjHgkvMTbm9Bz39NNl5ABXMl0rIjpqX3qe/s=;
+ b=jlIynFldVDlRkPnOAfDTASqFTG0N104ZKqTDpAMxKGqWVKsD9+bVIA1DrQ+SFSQ93G
+ dO3Ka6MPSXCIQT7EJ0+poX6sxUvJ3kqz8tA3x59RdafVUGExRL0IFY8TfGM9PWYnFDm0
+ f/Pc3wfCkw53tPHxgstVjLluWR2Q9VKRGRfFOkYh3in8tUwXfw5fPnknlqWQFjgnVwZi
+ OP/Z7Ll5RxS82mfC3xkC9oEfiNd+oWaQcvUtWtpOpBGEZO2IsBiava/rYGIZCvnPeZpb
+ NNj/bGaduawJfZUfiRuk7a0pjNOmcUi6gjJvN6w2eUlafFP3+09fJUAb/rkpY7tQh/z2
+ Kzag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745933237; x=1746538037;
+ d=1e100.net; s=20230601; t=1745933239; x=1746538039;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rkU4USPMzbiGMP1d9c43dN9ztVHy52m+jy3g/aCyjeE=;
- b=OVYDSNsK0/+mHsP4DEDnGqahyT2cqufQNMFq4HMGyFvk8FfgS1MpnzSqXMrago4Zr9
- iMpq+e0ZOrQWf76/f/WthbPwg5dWSvobJd0Rws0Es0wsGGzfkMIwariOZhvgG1xX5rhq
- C6o9EEDcTW1i46n8dqSTJBrVmp08Rc3gP8ssIFmemm27QPe6mtAqe9dfyf0Ub9uXeKHX
- BoY1tKCDoVVCllFX69Qt+Kljhpf5tTNAFU2jyma2VM8A6m7I4iZF25IPSbtK7wQxJari
- lpcunvqEg8UlBLZ4EOcosOff7FE96el6eAhG+dbN74MGrL+w9tEKBi7AbtiKZ7+un+2u
- pT5A==
-X-Gm-Message-State: AOJu0YxkW/nRycqvyAIkQ0VAJgeYwbz/kHh9cUzXvsnNCB2aDsZ9pNvT
- 5Kb8ZVqMOVD6Wsz+lh3JumNbkkUoQQ8o53MXTps8JdSde/6fjVoKtCZXlGofdIg=
-X-Gm-Gg: ASbGncsFZWTjyeuz24EShkeH9ZSjwttA0Wj63CWaWMhqqOeMH8DhW+hIV9cfxDAIsmS
- n6VBu5XHVyNRNdSW6n0CPC59RuJPfIcLICx/gMqEqYwTt6vdNVc6BXtTwcpxNSJYXJqDYNTPJhB
- amVULcmnHZ5uL/k4/xeHx1zdbJ/F6e3Kd28phi7+8gfMMis8151ZWli6B4ZENDTnoGq42F4SYMu
- z/x/dLakfcu6pg+6Q/pODOuhOFgNmqU7aiXV5vDL4NqmC98afWlac3McpWoxanVD/UU/WwsAM72
- SdbXsZdmmcC4MmMpkvqjWkNhSZQUHfylr2IP5xE9Pt+4IJdjWw==
-X-Google-Smtp-Source: AGHT+IGfopd3JD6YOi0Wh1sR8DcusFOi/+nLPMQYTmNs1XNv5ViKgxN99u5E/HfATlVONafkxH0p+w==
-X-Received: by 2002:a05:6a20:c990:b0:201:8a13:f392 with SMTP id
- adf61e73a8af0-2046a57d7a4mr17643715637.20.1745933237098; 
- Tue, 29 Apr 2025 06:27:17 -0700 (PDT)
+ bh=y2rhJc8pjHgkvMTbm9Bz39NNl5ABXMl0rIjpqX3qe/s=;
+ b=AGiCRIB7vUxVSmSZWbbKja8FhyJJtCF/xaAJnNnQX0SbOwKU6Ey1wsDjzreM3a9Twy
+ bnxR6T/7VgqbnmiUbkBn8jDGvyX5lqskG2j70LxL7ELT+leb6TlekjhNpPZRgs+Agxgv
+ YfKgVpOYli5Ar8ZPMmdVEusyUFSv6HMKT0C8Ah05ovHl2r8oSRylCTyPA5KZ3ppm2AV1
+ yJUCRP7cBPK9AaKG2QhnUtpRJ4jQswHb83bZgKluCmQfu62jmQqn3AEHydDiU0WK6hNi
+ lpGwWmegscoc4Ys+KMxDmmUjbP5sv15tCXKgn6jtMd1imc2WP2SXCMp0zD3z642+bftJ
+ MPGQ==
+X-Gm-Message-State: AOJu0YwhYR8AMcA7pxUGYVWYZAJrwZRu/lckjv+MRGnkyWRhcvYEJjMP
+ S3CQsQ/pEsXD90ZpaUuXQ/xsOSPg+f9i+Mzl9bFHIjDmQqnEQO8ZMZd73YhLATk=
+X-Gm-Gg: ASbGncvfD+M7zEZDJwiA2JVs4ft/b1mHJpmthEvXrTdxD8lfuaFePnhfgu9i9+RDE5O
+ vMD0VVRePVHzIcA73up1WiGeD+NZ2bLkNimPl/Q99N0+ZCFzF79f6lkzM6jI0J3YinaZxDqIfz7
+ J9bl5mVWTxUS08pQ9Q6wSbyNViN3g5iym+tK/ksvbssTynk5THsmj13+cONRoQhOj7Oi1rYww1m
+ SC0sRddyTYeiiMxJFJ0sh7YBQj4KquqlW4nyEikamMiVp4ZKA6Aq/rhbWJhJj+EB6qgglkAzWi0
+ bf60gt48ByLwQKOKYaq+gYn7nhUH8eCQzlfUDDIwzuGiOAjEsA==
+X-Google-Smtp-Source: AGHT+IHKK6JFQWug9vYvFBJ4a8Rk+0C+sAm3DKxclpu0Scvx3hqayHzrC1bAJzvTYE3VVJlq3ANt+w==
+X-Received: by 2002:a05:6a21:920b:b0:1f6:6539:e026 with SMTP id
+ adf61e73a8af0-2093c7e7570mr5050493637.15.1745933239392; 
+ Tue, 29 Apr 2025 06:27:19 -0700 (PDT)
 Received: from adriano.. ([190.215.87.40]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b15faded711sm8892333a12.66.2025.04.29.06.27.15
+ 41be03b00d2f7-b15faded711sm8892333a12.66.2025.04.29.06.27.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 06:27:16 -0700 (PDT)
+ Tue, 29 Apr 2025 06:27:19 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  trini@konsulko.com, o451686892@gmail.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v3 1/2] efi_loader: bootbin: do not load an initrd if none is
- provided
-Date: Tue, 29 Apr 2025 09:27:55 -0400
-Message-ID: <20250429132756.2105309-2-adriano.cordova@canonical.com>
+Subject: [PATCH v3 2/2] efi_loader: fix typo initd_sz to initrd_sz
+Date: Tue, 29 Apr 2025 09:27:56 -0400
+Message-ID: <20250429132756.2105309-3-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250429132756.2105309-1-adriano.cordova@canonical.com>
 References: <20250429132756.2105309-1-adriano.cordova@canonical.com>
@@ -99,108 +98,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do not try to create an initrd device path nor try to register
-an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
-
-Handle initrd installation in efi_binary_run_dp with
-efi_install_initrd, imitating what is done for the fdt.
-
-Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
-Reported-by: Weizhao Ouyang <o451686892@gmail.com>
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-Tested-by: Weizhao Ouyang <o451686892@gmail.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
-Changes in v3:
- - Do not clear images->initrd_start in boot/bootm.c, as this is
-   done in bootm_start().
+No changes since v1
 
-Changes in v2:
- - Free initrd_dp
+ lib/efi_loader/efi_bootbin.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- include/efi_loader.h         |  2 ++
- lib/efi_loader/efi_bootbin.c |  7 +------
- lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
- 3 files changed, 32 insertions(+), 6 deletions(-)
-
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 144b749278a..84e8cfe320e 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
- void *efi_get_configuration_table(const efi_guid_t *guid);
- /* Install device tree */
- efi_status_t efi_install_fdt(void *fdt);
-+/* Install initrd */
-+efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
- /* Execute loaded UEFI image */
- efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
- /* Run loaded UEFI image with given fdt */
 diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index d0f7da309ce..6a189c31ffa 100644
+index 6a189c31ffa..94ba7c5589b 100644
 --- a/lib/efi_loader/efi_bootbin.c
 +++ b/lib/efi_loader/efi_bootbin.c
-@@ -220,7 +220,6 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
+@@ -215,7 +215,7 @@ out:
+  * Return:	status code
+  */
+ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
+-				      void *initrd, size_t initd_sz,
++				      void *initrd, size_t initrd_sz,
+ 				      struct efi_device_path *dp_dev,
  				      struct efi_device_path *dp_img)
  {
- 	efi_status_t ret;
--	struct efi_device_path *dp_initrd;
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
-@@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
+@@ -233,7 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
  	if (ret != EFI_SUCCESS)
  		return ret;
  
--	dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, initd_sz);
--	if (!dp_initrd)
--		return EFI_OUT_OF_RESOURCES;
--
--	ret = efi_initrd_register(dp_initrd);
-+	ret = efi_install_initrd(initrd, initd_sz);
+-	ret = efi_install_initrd(initrd, initd_sz);
++	ret = efi_install_initrd(initrd, initrd_sz);
  	if (ret != EFI_SUCCESS)
  		return ret;
  
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 3936139ca41..19fb5d03fec 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
- 	return EFI_SUCCESS;
- }
- 
-+/**
-+ * efi_install_initrd() - install initrd
-+ *
-+ * Install the initrd located at @initrd using the EFI_LOAD_FILE2
-+ * protocol.
-+ *
-+ * @initrd:	address of initrd or NULL if none is provided
-+ * @initrd_sz:	size of initrd
-+ * Return:	status code
-+ */
-+efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
-+{
-+	efi_status_t ret;
-+	struct efi_device_path *dp_initrd;
-+
-+	if (!initrd)
-+		return EFI_SUCCESS;
-+
-+	dp_initrd = efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, initd_sz);
-+	if (!dp_initrd)
-+		return EFI_OUT_OF_RESOURCES;
-+
-+	ret = efi_initrd_register(dp_initrd);
-+	if (ret != EFI_SUCCESS)
-+		efi_free_pool(dp_initrd);
-+
-+	return ret;
-+}
-+
- /**
-  * do_bootefi_exec() - execute EFI binary
-  *
 -- 
 2.48.1
 
