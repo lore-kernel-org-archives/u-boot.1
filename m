@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755BBC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 09:12:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC62C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 09:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C34828059A;
-	Wed, 30 Apr 2025 11:11:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 442B48283E;
+	Wed, 30 Apr 2025 11:39:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=uni-duesseldorf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nD5yTAtN";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A81B2809D4; Wed, 30 Apr 2025 11:11:57 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 23EFB82B17; Wed, 30 Apr 2025 11:39:25 +0200 (CEST)
+Received: from c2882.mx.srv.dfn.de (c2882.mx.srv.dfn.de [194.95.239.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92C0A8056A
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 11:11:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1DDDE8215B
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 11:39:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=uni-duesseldorf.de
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id EB7C23FC41
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 09:11:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746004314;
- bh=v1mqNY2H/IinJls6Ku+irhr8UZinurmg11W/Yk1TfNs=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=nD5yTAtNhrJncl9UGa8aNr6GBKLkrc0yg+KCEEKLibauQXnAOnxkMJ3i6Jvg2mKT5
- fBYrC4QgNjtDkHEnNwUNJWiwhd4+o+j59FvrzPSyjhiZo2JlQomt0dn/w+18/s3VHQ
- s7L074AlB+DlmjZd1lYKVyaxuSSpHJ+difkjxMdlJsAl6MNezSM++7Do6+WZquOlqe
- Eu0UUoujvdXXpT1kGHW3InDJsaAjbVGZGQCrkniL9ENAt9/ehtfWebbPTphsmTAOgH
- wYnB3Xn7Zeaf+3Mrql0soWLiTrr7IQoqvhQB8K8rZLjCCT+/5yY9n6N0Op1SJPLjdv
- 3A2dPwe245AUA==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-43f251dc364so38131155e9.2
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 02:11:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746004314; x=1746609114;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=v1mqNY2H/IinJls6Ku+irhr8UZinurmg11W/Yk1TfNs=;
- b=MjYxcWJ6jQhx3B3ud/4/7IEYa+//DptKKAUX/ILZK+IKLX4TiLtrLLdzqaWdUrIBaq
- DD79joEn0z9MBloiOPWlyKjUer47/M9d9wxTh6qDIwVu9P/fyLcb2wUH2LPsD4a6ER/c
- LSNt4pJ3p3lpn/8odvdg88YJGtBo5T6aC9UWrLC548KJty5usZe0etA+/UGfxBEppvBl
- jmY4EcshegKVlRolL8Jzw8VicdtXIblIwl5KdP/u91udlalSDt7OydubOxMEoc91HYmy
- MH2lwhQagstIpHuO+j3p2LEw8K5AcTsj6qxe4Q2KFuXFyvbYEURcGfDswv3n+RrAPkpc
- t20w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVK9gAncX7bfFZoh+x6k9j/KEi+R9AQCOQSYIyvZbPsK5jvXlxOLPJSDb18wrf1bzlWUcIu4Xg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxULvHJ49d4qSY/cLoHf8GkUEg0NxzlrZMklxe8XmF43z0tsCLo
- s63v356DTTrpV65KFIGH6Ufgu1Hcox/Hl8xmmapxAcExhb+bMCz6HWmjTshmA+9lcHbSdgAqHfi
- 5uyXRNzANKs2AGs6YPwhgji21+jZ4sGhrkQiqRy7QRs9F5iQQjhQSVVKQUFvvDEU/7NWuVP0jc5
- E=
-X-Gm-Gg: ASbGncvj2/k4CAevvh3tPEM8Nxi+k/eLrNp2kyGkzASSmXNC3OQF21S4eZjwGtNo4mY
- jjpyGp6bkERh8OuyYxDQ86BJR+arweFJAW/3x2yhTwKWKRA4BsoI8hdL/sOrLdzRjYqLyfAUbg2
- ZGloCXqxvlhnI5/fLzj2g8A2FpRUG8pmqk8PtKfEoEuLTn2vQvLaQ0QqaK/yQYG/6hSrUdAnV5j
- K5MVishPRHo7zs9z3KPOVkDG18AvVYb5mZgu+Oyib5L97VoYnDVZRtPXregTkg6p46421puKcIh
- n9XKa6mT+3dKLCPG9oZXys0xn76qCUcFDH3Jr4/6Om8pJA==
-X-Received: by 2002:a05:600c:444c:b0:43c:fbbf:7bf1 with SMTP id
- 5b1f17b1804b1-441b1f61dbcmr22097005e9.30.1746004314274; 
- Wed, 30 Apr 2025 02:11:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHyudrAgz7jbK3g+B1ph3bPIKyPNcIaM1xAt/rCFdB9rs50SEURfyLB1FAUB39A1v5tlGcD/Q==
-X-Received: by 2002:a05:600c:444c:b0:43c:fbbf:7bf1 with SMTP id
- 5b1f17b1804b1-441b1f61dbcmr22096705e9.30.1746004313914; 
- Wed, 30 Apr 2025 02:11:53 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073ca435dsm16356068f8f.21.2025.04.30.02.11.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 02:11:53 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Richard Weinberger <richard@nod.at>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] boot: print the boot stage id in the report
-Date: Wed, 30 Apr 2025 11:11:47 +0200
-Message-ID: <20250430091147.321944-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ smtp.mailfrom=niklas.sombert@uni-duesseldorf.de
+Received: from mta-1.mail.zim.hhu.de (mta-1.mail.zim.hhu.de [134.99.128.229])
+ by c2882.mx.srv.dfn.de (Postfix) with ESMTPS id 57987893;
+ Wed, 30 Apr 2025 11:39:22 +0200 (CEST)
+Received: from [10.125.45.125] (unknown [134.99.37.125])
+ (Authenticated sender: nisom101@uni-duesseldorf.de)
+ by mta-1.mail.zim.hhu.de (Postfix) with ESMTPA id F3F6D24034D;
+ Wed, 30 Apr 2025 11:39:21 +0200 (CEST)
+Message-ID: <d058767c-7775-4b4b-a133-962e99dc0a1b@uni-duesseldorf.de>
+Date: Wed, 30 Apr 2025 11:39:12 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via EFI
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250405204409.420738-1-sjg@chromium.org>
+ <0fe144dd-2885-4e13-bb09-4d939124a974@uni-duesseldorf.de>
+ <CAFLszTjcV0e6AgRsbHdj2oW5o_4nE6KEEQ+QyxXgYVRgKtKn1Q@mail.gmail.com>
+Content-Language: de-DE
+From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
+Autocrypt: addr=niklas.sombert@uni-duesseldorf.de; keydata=
+ xsFNBGVeaQsBEACenaUYhzAqgpFHwV8gzURr3wqkxoZPjekz974Rqu4gFJ9C+NyPaWWhe6km
+ aKcsM28GvQ7UKCKFwQBPBQ+WRL/Qh2ln0uIf4+zjyjk1SlwyQ6MPc2NncPAtjmbuoBtUqxU0
+ DdTPi2cJ963kFgDc+zVfrUsEvr7Lz5R+a+mkLRpyBv9Rvt4yPKV0AHZ+uGPkZAVUp87sAtWr
+ Iz92VbEsvgw5MdGLi80bYG2qbYbHW+Pl3TKsPFDLMVff/HVzgfocZXWTmop5PWeX3FvmA5vJ
+ UFC1r9Fcigw1z3xjOZt5DJZnBGyextvOYjtIcPPhn5rKcfRc6U4TU1wLWXUwsb1bMEHXz7+v
+ 5vq7KMFXs1JGSuEXimwVgBsRbXswPhW/qCDJp6JQfdK34DxJp4nph5JR9+tg2k4Z5NY+pBbV
+ VkdQizuj4Qj+ayXs6g1HjHGlOZE909NLZRNeSv8izSQv8H1H1CQMTax713+cT665aPpgbyY1
+ grWcLwXM6qtlYbX0HvdgelNOO0kY0XEHUn2Eu5TjJO1TWAbIu9uygDLqSj/ED8PnMCLscN5z
+ iglpNsZyeyAj04F5D5nFU+TCAkXrfZYcTYu6osRp/0HpyHPLGWfSMIqt4+IzLt8v/2ZqXqYj
+ IVi8Qat+UJ5r2Tr/wzJOoPQh7dnCWw98EHWE2Kl6N4tRzA95RQARAQABzTJOaWtsYXMgU29t
+ YmVydCA8bmlrbGFzLnNvbWJlcnRAdW5pLWR1ZXNzZWxkb3JmLmRlPsLBcAQTAQoAGgQLCQgH
+ AhUKAhYBAhkABYJlXm4bAp4BApsDAAoJEGqcmG7OkejrmrUP+wbACd85XMLnohG6gfqyGies
+ 0P8BZtv6wpd8Gtff/lT2bEpUQRVttshIRwJZzUkbBEhwfqEjn6jMkDbT/3oDI8wLMmRlyf3a
+ mhhIVBtCkNuGQCVy9gXHVm/rlt2mNBcFTHpzButLH/anVRmcJ8o3nqWxRzv7kdBe92pVddT9
+ 5KGr+eV3UyBMwllOi9lwCG40qyGgutH40NSiWFZ2+376l6KYMEJr6lp35vCWaQ1tRon2BSef
+ iNKDbm9s9DGhz7MCHjTxSrWW53BiNbeon+SqEtYKE66d7p30aq0CCAn2OV9ci9zqxpJ5hJ7t
+ 3nDo7tIRqZ3DeRNJ5dd6j24dEfK7lvFaBi3wQeCJuPEXgH8WetZvb3EzVUAtiYlX1iMscg9g
+ ANUWms26u4AFjbVhemRb8OqiMrJqAg24RvSZwuCUWpBZFXIjR6CloAyCnX58IKmTTw1kIiaI
+ t0EpH4Pe4ZLw9igOAIwLNiO0LR+627pCRcg+WnH665pf/H5iDsvU905hjxsshSF7/zqsK3QA
+ NTf1yJmBtV4tvG4CZutYiXIjvZWcPz8NgolW7co+amKQ3CsZDeJI+TT5WLSTCs8QztrdttS6
+ A1REGyb5c4fByiE00LZmEZEisQdyEYBGFYZ7gz47TlLKoKRUe5az7uKUYvp6RZOxvZZ6TT9Z
+ WhIi8TGNdhtvzsFNBGVeaQsBEAC+CkiaN9BU+/FxrwCnACEgjBcrR4EMOP5iIl2sNeXrxAs9
+ SgZGlkq/ROcWH61+s2AY50RUDfHfvGUgb8A0YTf2Kj0KqyHWAmRQQSzAsjCcabPsz+ymZqoa
+ hrmUHW3AZJAHy12xcn9Ro4z8QnnYCH63sUGMWbwwsZ2s9D6KpNG2JqUD9kGql6DdVG4WWPVZ
+ FQ9XAPQRQjK6cNOd+qtnt0Wu6inrnKESe8f9TM/zDaWzHWgIVbiW89krU3CPZdxNpgdTb5qg
+ pw0kbSpMVipdhy9YalWZkmD1oB4r5dYTX86ogmuW4/PstbC3CMVUW/60PpQs9hJXzHCHkCno
+ cI4pajKcA9vriVwW9YrxtRPmDYw28IxmwvOWNDhOd4T3sPzdtCRDMcYc2Rkv+WuOct4iZ4T2
+ zVw+vCqHK7MXwNpojgfF3duauqClBvwiOU3xTIfuJvJt4rPmPsexlU9eFXCuGPV2HInUFT1Z
+ ZWiGOWo2AfYnzlG+PbnRoFkgnSd99NuMpOxA/cAmJW6pdpgwRbxP8ixsROH0QdRD+Fax7QxR
+ HUELB3QYVvjPDnrmtDrxDJveDoly7wl0JmgxRcljng1PlnkltCqO/vc1AL4Ct91tdAPsMlqi
+ qNJMyfBMqn3yoDCWYrPY6ks7kp8ErrogCpVqF2Yt329YtElEsCmSR04XN8UPsQARAQABwsF8
+ BBgBCgAmApsMFiEEdIF40XVnlLMtKvF5apyYbs6R6OsFAmVearsFCQlmAzAACgkQapyYbs6R
+ 6OvrEw//enMslQ6yDO4AwoBm+71b7/Gk3pKTwXQwbIYqsxbIgJ/SDYV4c8nj8iuJgehPj5WN
+ ckM7ZtHDLbIn4gL7osgkGVBo5wX6zpl2UaeSFSJrsFucqr2pn9xPJfvbP8RxNaGgdyGGeM+L
+ CTcd1qOFBOEsa2PJ2RfebgQ9DCRBHNB1wYp+2sJY+1l9rg/iNZXqrqlPhws2lnQygVxxM4ty
+ 567ob9rNMuHntQnBNhcwAHoabaZCabBHnllbVOgkFqv/WXxXMScVVkw0co/Hq0CdFtPU3TXZ
+ S7YOo+cbN55EwoxbbuqwLry+KZ732Ncy+XUW6fs7tPjpehzJLVS4a1HFo5aNmmJOXAatxFjV
+ RHX4fTgoJ0IvcNPgHL9zdySYOsQ+EakoC2blWIzaUQ7GJStpNTekS+US8miJDeFv5Nc3zXGk
+ 5hTMDFom8EBqSIpHTeYpSI7FHN/kEtr6nJDA99dCp79idiRYiPD+bn3SrOcw4ivqy8ijuyTw
+ 3OxnLh61NMGyDaQvgHvgY0PR6zwx/8d6Q/DgVC7uDqSm4+dXJWIo1SrdE0Xax0e5DWyAMrwD
+ HRuWnQjijwMQfl9P3LgnVk2mruRvaWDQDrdm2quUMVO3CSk1DMqkdEhVbXAQPu1R7ECe197Z
+ 4EHQBoz+vywSz4LsHyeKSVQX1c/wx3UYdZa1Gy+Jq+s=
+In-Reply-To: <CAFLszTjcV0e6AgRsbHdj2oW5o_4nE6KEEQ+QyxXgYVRgKtKn1Q@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------xXyamW510OOt3HvdDj2zacA9"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,73 +107,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An output like the following is not helpful:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------xXyamW510OOt3HvdDj2zacA9
+Content-Type: multipart/mixed; boundary="------------qwBpadnTH3Fx0Q5koP5hHDfu";
+ protected-headers="v1"
+From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Message-ID: <d058767c-7775-4b4b-a133-962e99dc0a1b@uni-duesseldorf.de>
+Subject: Re: [PATCH] x86: efi_loader: Ensure the SMBIOS tables are sent via
+ EFI
+References: <20250405204409.420738-1-sjg@chromium.org>
+ <0fe144dd-2885-4e13-bb09-4d939124a974@uni-duesseldorf.de>
+ <CAFLszTjcV0e6AgRsbHdj2oW5o_4nE6KEEQ+QyxXgYVRgKtKn1Q@mail.gmail.com>
+In-Reply-To: <CAFLszTjcV0e6AgRsbHdj2oW5o_4nE6KEEQ+QyxXgYVRgKtKn1Q@mail.gmail.com>
 
-    Timer summary in microseconds (40 records):
-           Mark    Elapsed  Stage
-              0          0  reset
-    ...
-     56,448,158      4,845  fit_image_load
-     56,448,186         28  fit_image_load
-     56,448,187          1  fit_image_load
-     56,451,971      3,784  fit_image_load
-     56,483,951     31,980  fit_image_load
-     56,483,956          5  fit_image_load
-     56,483,984         28  fit_image_load
-     56,484,001         17  fit_image_load
-     56,484,008          7  fit_image_load
+--------------qwBpadnTH3Fx0Q5koP5hHDfu
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-It provides no clue about what is happening in the fit_image_load stage.
+U2ltb24gR2xhc3Mgd3JvdGU6DQo+IFRoYW5rcyBmb3IgdGVzdGluZyB0aGlzLiBDYW4geW91
+IHBsZWFzZSByZXBseSB3aXRoIGEgJ1Rlc3RlZC1ieScgdGFnPw0KDQpTdXJlLg0KDQpUZXN0
+ZWQtYnk6IE5pa2xhcyBTb21iZXJ0IDxuaWtsYXMuc29tYmVydEB1bmktZHVlc3NlbGRvcmYu
+ZGU+DQo=
 
-Add the bootstage ID to the report. Now we get:
+--------------qwBpadnTH3Fx0Q5koP5hHDfu--
 
-    Timer summary in microseconds (40 records):
-           Mark    Elapsed    ID Stage
-              0          0   171 reset
-      3,181,017  3,181,017   178 board_init_f
-      3,229,282     48,265   179 board_init_r
-      4,184,866    955,584    64 eth_common_init
-      4,280,304     95,438    65 eth_initialize
-      4,284,509      4,205   186 main_loop
-      4,390,704    106,195   180 usb_start
-      5,694,146  1,303,442   187 cli_loop
-     59,908,029 54,213,883   184 bootm_start
-     59,908,031          2     1 boot_get_kernel
-     59,912,875      4,844   100 fit_image_load
-     59,912,903         28   101 fit_image_load
-     59,912,904          1   102 fit_image_load
-     59,916,688      3,784   110 fit_image_load
-     59,948,668     31,980   105 fit_image_load
-     59,948,673          5   106 fit_image_load
-    ...
+--------------xXyamW510OOt3HvdDj2zacA9
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- common/bootstage.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/common/bootstage.c b/common/bootstage.c
-index 4532100acea..0810c4e5271 100644
---- a/common/bootstage.c
-+++ b/common/bootstage.c
-@@ -254,7 +254,7 @@ static uint32_t print_time_record(struct bootstage_record *rec, uint32_t prev)
- 		print_grouped_ull(rec->time_us, BOOTSTAGE_DIGITS);
- 		print_grouped_ull(rec->time_us - prev, BOOTSTAGE_DIGITS);
- 	}
--	printf("  %s\n", get_record_name(buf, sizeof(buf), rec));
-+	printf("  %4u %s\n", rec->id, get_record_name(buf, sizeof(buf), rec));
- 
- 	return rec->time_us;
- }
-@@ -333,7 +333,7 @@ void bootstage_report(void)
- 
- 	printf("Timer summary in microseconds (%d records):\n",
- 	       data->rec_count);
--	printf("%11s%11s  %s\n", "Mark", "Elapsed", "Stage");
-+	printf("%11s%11s  %4s %s\n", "Mark", "Elapsed", "ID", "Stage");
- 
- 	prev = print_time_record(rec, 0);
- 
--- 
-2.48.1
+iQIzBAEBCgAdFiEEdIF40XVnlLMtKvF5apyYbs6R6OsFAmgR78AACgkQapyYbs6R
+6Ovygw/+KKejI/n4pYpgSzHRIUkaOl4nANnNkaDqrE3sYu/hUFPBIMilGh2TSjfG
+kVwgMQXclBaMGnLi2nWx9DakNHCkH2fI1p96rNZ3jaCQnH/bI1yOsPECl9tUmgMU
+f8D5TZsc7BQETewO/00Ej4tC0VvrUGUlRm+wsETCAKeo0xsIEDTYgAtzFcFLt22F
+7H5Qww/3DrtOaeP20ZfOMjnew8ZX9iyERI2egdX/6LOknoQqHWVRBE4B5mtmps0t
+BAgW7h2xDCEIkM/eNUsrTjP3v9shQP0yFSkaVj9DFGaPpdN6rYytLHDJfWzCJ/0r
+RZgJ7fgXf5H276gLBKd0VJ/3R0Ga4q0yS3WFth2Q36fcS0kZdF2QoG9TPqIhXESb
+DVyRD0qWCEBF3uc+enbhv763o+HPUX8UJok4Z8f3Q18J/LXoKLr3h6kEMERQmKPa
+7+eLfrQNhkxaBgvZIt+rFHOGjyiV8jlZdMaqf4MrpDbqZXsBrB6M9TkXmF2SE/pt
+ruCAe3cwA2UIgyqKXUVKKeaY0IsnG2swzEU0ftyPy/m4+LTuzReZk8bP/RwIOlf0
+wb6VoQp08i9cdhJ0MYzTOMQtT4j7DZ/74836SGZp1JxjWCgzKn2khJUpFaeNZAXw
+Cv62K5xkbxmhiOma6Xg9FSyEgrSHZTJKrY2WGUETli4ZZjVUWGk=
+=H5rH
+-----END PGP SIGNATURE-----
 
+--------------xXyamW510OOt3HvdDj2zacA9--
