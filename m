@@ -4,99 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B5CC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:25:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B71BAC369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:34:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E5128210F;
-	Wed, 30 Apr 2025 16:25:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B66BB8210F;
+	Wed, 30 Apr 2025 16:34:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XajqZGyO";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Dd1cnzSI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77B8182B45; Wed, 30 Apr 2025 16:25:45 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 316C782B45; Wed, 30 Apr 2025 16:34:45 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 344368210E
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:25:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A35D8210E
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:34:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 598393FC4C
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:25:42 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0E3BF3F2A9
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:34:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746023142;
- bh=FViRCWh3IEZgGmG0GgRAvYxZ21KfGq/TVjzlBIWowC8=;
+ s=20210705; t=1746023682;
+ bh=P9uPTvKQN/BDNe357teraufsf6pkWWNEHLrIWLIMC94=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=XajqZGyOGKFwvRge/B+twX/ROa1tCTiqTUeoB3xAgo46otnrgmJBr1/cuRknFHiwp
- 5pL0hn8tAIcivJDFwIwdtvkYXrXQt7wYu/N+xsAcAwkz9fdJH4d+Xh9OqLiVo9Rtny
- gTeimUb6WkZUO3RhLf2GW3Qom5jYLErbuunXOLpeuWF/AklZYN84/XkIkvUnlVRXW+
- ugIl3NJk2lf2DhTHJ/etwgYAeWkls5pz958thUYjJif7XrMwhDXHAI9Sj4Oq3ZiPkC
- pS6pdPOykvirPE8vtrjp3AndyTgoLR6XaVGfGQYEYy3FjqASQpDBXbGDYxZAJKsw3V
- las1qTfoQzZ+A==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-43ceb011ea5so42022215e9.2
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:25:42 -0700 (PDT)
+ b=Dd1cnzSIL3WpdPIq10QdFkzqr/aVSrnRCuLgxiUp/0f8zrKXYreIRXlCORuixRT+C
+ YsOQrxtNKnMk4UJjKvp8s9SWJs1Pir4KiTRczMAZ/8cvUFiC6+OSHmnzFPLLOpZmpq
+ jgF1FSG6NP+1bLVdq1kTNXMe8iHyxFtg1hYNUt1J5t2bWPVXN5UZnxj07GVawGC0DF
+ sg0qMjE3iqotkGcmYintiLcwI2I9itP0ynRm2clfVBcK/IdYDYmfWEYTYqyakwk4Fx
+ f20fVxtrl12SgnaG3dvCiK3INiPcv1x8q1doKHgEjoRw7/427lqsmtMwOsvTCobt9d
+ oKthIzjehaxdg==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43cf172ff63so30856255e9.3
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:34:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746023142; x=1746627942;
+ d=1e100.net; s=20230601; t=1746023681; x=1746628481;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FViRCWh3IEZgGmG0GgRAvYxZ21KfGq/TVjzlBIWowC8=;
- b=bgFt7IxXPS9mZinTEVKEpU5lfvM9qR1caDWjql70lhsiLjkr1A+MKU+JfGslWT0iC7
- TCLWc2OgK8TM36GIFJ3kYGapGs/gx/h/BELpFXkk69Fpq8KzoG8OJXc+0k+TpxaNvpv3
- slOqUJBA1wO4KFhDtYIKypATdnIZGwKrhnNlFD5GzCNhJRTgEdcy2fwJ0SOLD/4dPW9a
- cUKxCXt6lhF7AAMZrf20WPzkXORbti7DHwplnIGQ1VURVc9Rfp9aAHgqNXdy3g461Pw3
- ewKUWTUySaLVpm/YU/QhIfd/g4w5esRq7XNmcfpOTcVVYBr8iCz/ycI1NDGT0udcw6fU
- fQ5Q==
+ bh=P9uPTvKQN/BDNe357teraufsf6pkWWNEHLrIWLIMC94=;
+ b=OZXY0D0ZiYgbTMuWtUwALHEasC/n07uT3FOduKlKMoAEiQyhQ3wZq2yiePX04dDSVY
+ u9FHwFL/v0c5QlKIKYlPRkrUS1ZQrlHiQXvWF+8xhgOg3B8T4/w0KV8JoMdx+ZXaBXgC
+ 6mUOmw0PiYChPz/uMzLc+NX+/qw2QXbFAvgfi+CFjIK8z3/PInD/5XdfyxGiSpytDQls
+ 77HMCNhFO44eISWirji4mGzmZRJe94nLaEyl5wnQohAb1fsUUdiRPFQ+vBP/RVp22M5s
+ 4buQ82aDqaQAvN+l8IBk7bhsakUtcS0tlF8VNK3U6o2ExSAnqaaHoB+rLCDSRESit1ph
+ v1Xw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdBSOGdDJkxC8rBuKVZy9MPd+jeDtYptUkpW4dY0wi/czA7BIgxlbX1r2K2pKGz4CDaJ8PJ9g=@lists.denx.de
-X-Gm-Message-State: AOJu0Yydt//tDJNmjcz06gTllO1FcKjEViA14wfEf2/8lBJygTUT8sTe
- TTlwTd6dbp6HAi2BX020b0ne1VpZHsMagyIxTfE2rubvDI6lwQW37LIP9Ek0d8Vj4lQd9s6FiGo
- vT6rMLzf8r5qfX7Rd5vZm+O7lrawr+I/sRoH7KJu3MWhY1J62WN61v6NER1SZIksf5E8=
-X-Gm-Gg: ASbGncu2N4wBjd/Sx76DRZxmKpJpVBNkEepcf9OPnMBKDeFfwa+Xy+7KHJQ9DDoa5Mg
- jyHbGo1teShFqMUE+FVIQOQ9ZOiP/IEUnOMPywqUDcvaGThYfndsOIsDQ1P4TKjBv/Vb4iGJW5E
- ymuXJBpaDUU1vEDzgEWxMwg0UnbXZzd2yfxAqfzVslDwY468qEX3a3Lnl1a2WXa22IMrcvuWdBW
- Fy2h6jDKF1yktD5gjwtC+X67z36koeyxvOjthQdDawYJfjF++5cGjm9FrzwKumrOKbVex+cEfio
- lvNV+y4FF7HE2fMfb4qKtJp659/0tTfgU+wJg8ylocN/wcWYJ2DpSrITZ77lzusVhLCPUy/W7Pn
- beA==
-X-Received: by 2002:a05:600c:a44:b0:43d:224:86b5 with SMTP id
- 5b1f17b1804b1-441b2634af5mr24933035e9.4.1746023141874; 
- Wed, 30 Apr 2025 07:25:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG3B9l003B7VUmVQUHUP3cCMN3lKuNMzrfepzF5KwLfEpv7FHzlzXKkdiz5dDMk5ZV3bNXZNg==
-X-Received: by 2002:a05:600c:a44:b0:43d:224:86b5 with SMTP id
- 5b1f17b1804b1-441b2634af5mr24932735e9.4.1746023141514; 
- Wed, 30 Apr 2025 07:25:41 -0700 (PDT)
+ AJvYcCWiDUhA3Z8T+9j88MZIREA1Xs9Gfof0EguP+v8NYb/FPIHeXXh0tbVCjEU9VMMLz4/+0/gUdOM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhQkD6PuipiMp1UQvgXRbRqpbp5Hsll+6BGcw5YiHfK6WU3bKZ
+ Qmfw3FTom0qlhFAQJ62bhiRQGpn1PUK+RgQGdDp22cyRPvOT0Tj3Ge0wEZYSTbAANitdPVxDM60
+ jo2qlRdU2If+LIxEFgEsjRICD04BL1HfqSaF8m/FvBVKvLky8T7iWEJVLNN2XYZ0w1do=
+X-Gm-Gg: ASbGnctSywThBESxFd4TGS5pmVFm6adSHqBbs1tG76wQGvyCc4FcPC09JUeJbntEW4u
+ WQZiSKg6L5uo2HYvLcj2vnuLsxi6HE0NUlA5hTUhakOjOeFP+at29dc9WoKLb4BUtSM4LqGp7ri
+ /RD71ANPTp+kaKNGG5WQZ4Pz2+2P4YSH/ZHctADx3Tki5viYfl2O0MK0YylwOs2AHRPclJDlsqs
+ EZanyg6nmMVeEZYQ6Ll+IU6AC4q+IwYtOG4evZuPnLqGpygd+JEF/Ikv6Ox6gTooL3fE8u+ST3k
+ FSMKYTZK5X1FyXazNwewgZxm/Iw0gtGW/PmZxCfWq3MberAznteO8hFyUfWj1KGybpUFaH183xr
+ kxw==
+X-Received: by 2002:a05:600c:c86:b0:43c:ec4c:25b4 with SMTP id
+ 5b1f17b1804b1-441b1f35e4emr40042325e9.10.1746023681627; 
+ Wed, 30 Apr 2025 07:34:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF+26Q59mSQQhNovZ4UHmhPUPVf8LUoyMzUXGuPD070xwGpKEBo8bx5qaLXZElFUOYrgxfwqA==
+X-Received: by 2002:a05:600c:c86:b0:43c:ec4c:25b4 with SMTP id
+ 5b1f17b1804b1-441b1f35e4emr40042025e9.10.1746023681225; 
+ Wed, 30 Apr 2025 07:34:41 -0700 (PDT)
 Received: from ?IPV6:2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4?
  ([2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-441b2ad784asm26878195e9.7.2025.04.30.07.25.39
+ 5b1f17b1804b1-441b2bb3f72sm26753525e9.21.2025.04.30.07.34.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Apr 2025 07:25:40 -0700 (PDT)
-Message-ID: <5cb97876-fcb7-4920-b99e-fac3b69d8e3e@canonical.com>
-Date: Wed, 30 Apr 2025 16:25:38 +0200
+ Wed, 30 Apr 2025 07:34:40 -0700 (PDT)
+Message-ID: <e7d6597b-609f-4b52-ad92-4c37fd60ea22@canonical.com>
+Date: Wed, 30 Apr 2025 16:34:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] boot: print the boot stage id in the report
+Subject: Re: [PATCH 1/1] boot/image-fit: improve 'No Image' message
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>,
- Richard Weinberger <richard@nod.at>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-References: <20250430091147.321944-1-heinrich.schuchardt@canonical.com>
- <CAFLszTiqXtf9yyLN_JcviaxCkap-zpNnrW7epGoHMjJSVZ53sA@mail.gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Raymond Mao
+ <raymond.mao@linaro.org>, u-boot@lists.denx.de
+References: <20250430071613.13508-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTgoo=_0WK+ks8nccOUX4X8CqTryQnUQZuP8EwwLy0SEgA@mail.gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTiqXtf9yyLN_JcviaxCkap-zpNnrW7epGoHMjJSVZ53sA@mail.gmail.com>
+In-Reply-To: <CAFLszTgoo=_0WK+ks8nccOUX4X8CqTryQnUQZuP8EwwLy0SEgA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -116,123 +118,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 30.04.25 15:54, Simon Glass wrote:
-> +Michal Simek
-> 
 > Hi Heinrich,
 > 
-> On Wed, 30 Apr 2025 at 03:11, Heinrich Schuchardt
+> On Wed, 30 Apr 2025 at 01:16, Heinrich Schuchardt
 > <heinrich.schuchardt@canonical.com> wrote:
 >>
->> An output like the following is not helpful:
+>> If an initrd is invalid, we see output like
 >>
->>      Timer summary in microseconds (40 records):
->>             Mark    Elapsed  Stage
->>                0          0  reset
->>      ...
->>       56,448,158      4,845  fit_image_load
->>       56,448,186         28  fit_image_load
->>       56,448,187          1  fit_image_load
->>       56,451,971      3,784  fit_image_load
->>       56,483,951     31,980  fit_image_load
->>       56,483,956          5  fit_image_load
->>       56,483,984         28  fit_image_load
->>       56,484,001         17  fit_image_load
->>       56,484,008          7  fit_image_load
+>>      No Unknown OS RISC-V RAMDisk Image Image
+>>      Ramdisk image is corrupt or invalid
 >>
->> It provides no clue about what is happening in the fit_image_load stage.
->>
->> Add the bootstage ID to the report. Now we get:
->>
->>      Timer summary in microseconds (40 records):
->>             Mark    Elapsed    ID Stage
->>                0          0   171 reset
->>        3,181,017  3,181,017   178 board_init_f
->>        3,229,282     48,265   179 board_init_r
->>        4,184,866    955,584    64 eth_common_init
->>        4,280,304     95,438    65 eth_initialize
->>        4,284,509      4,205   186 main_loop
->>        4,390,704    106,195   180 usb_start
->>        5,694,146  1,303,442   187 cli_loop
->>       59,908,029 54,213,883   184 bootm_start
->>       59,908,031          2     1 boot_get_kernel
->>       59,912,875      4,844   100 fit_image_load
->>       59,912,903         28   101 fit_image_load
->>       59,912,904          1   102 fit_image_load
->>       59,916,688      3,784   110 fit_image_load
->>       59,948,668     31,980   105 fit_image_load
->>       59,948,673          5   106 fit_image_load
->>      ...
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   common/bootstage.c | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/common/bootstage.c b/common/bootstage.c
->> index 4532100acea..0810c4e5271 100644
->> --- a/common/bootstage.c
->> +++ b/common/bootstage.c
->> @@ -254,7 +254,7 @@ static uint32_t print_time_record(struct bootstage_record *rec, uint32_t prev)
->>                  print_grouped_ull(rec->time_us, BOOTSTAGE_DIGITS);
->>                  print_grouped_ull(rec->time_us - prev, BOOTSTAGE_DIGITS);
->>          }
->> -       printf("  %s\n", get_record_name(buf, sizeof(buf), rec));
->> +       printf("  %4u %s\n", rec->id, get_record_name(buf, sizeof(buf), rec));
->>
->>          return rec->time_us;
->>   }
->> @@ -333,7 +333,7 @@ void bootstage_report(void)
->>
->>          printf("Timer summary in microseconds (%d records):\n",
->>                 data->rec_count);
->> -       printf("%11s%11s  %s\n", "Mark", "Elapsed", "Stage");
->> +       printf("%11s%11s  %4s %s\n", "Mark", "Elapsed", "ID", "Stage");
->>
->>          prev = print_time_record(rec, 0);
->>
->> --
->> 2.48.1
+>> As most image type descriptions end on Image, we should not repeat that
+>> word.
 > 
-> This is largely a revert of [1] so you should mention that, at least
-> and cc the author.
+> Instead of that, remove the 'Image' from all the types and reduce the
+> size of U-Boot by 200+ bytes.
 
-There isn't anything reverting [1] in my patch.
+There are more places where genimg_get_type_name() is called. We would 
+have to consider all of these.
 
 > 
-> When I wrote the bootstage feature[2], Wolfgang asked me to replace
-> the old show_boot_progress() which used an integer. The whole series
-> was done with very tight size constraints.
+>> Instead of misleading 'No' we should write 'Invalid' here.
+>>
+>>      Invalid Unknown OS RISC-V RAMDisk Image
+>>      Ramdisk image is corrupt or invalid
 > 
-> The function name fit_image_load() is not at all useful in the case
-> you are showing.
+> What this is actually saying is that the image is not of the requested
+> type. It may be a valid image but it doesn't match the requested
+> image_type. So calling it invalid is going to be very confusing.
+> People might then start trying to figure out whether the image was
+> created incorrectly, etc.
 
-Booting via bootm is not very exotic.
+"No foo image" means there is no image of type "foo image" at all.
 
-> 
-> In this day and age we should add strings, included if BOOTSTAGE is
-> enabled, i.e. convert the calls like:
-> 
-> bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ARCH);
-> 
-> to
-> 
-> bootstage_mark(bootstage_id, BOOTSTAGE_SUB_CHECK_ARCH)
+"Invalid foo image" clearly expresses that it is not an image that can 
+be interpreted as "foo image".
 
-If the ID is not meant to be accessible to the user, why would we write 
-it to the records at all?
+No clue what confuses you here.
 
 Best regards
 
 Heinrich
 
 > 
-> and have it create a string comprising the base ID and the sub-ID,
-> e.g. "kernel: check arch"
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   boot/image-fit.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/boot/image-fit.c b/boot/image-fit.c
+>> index 41ab1f552b0..856de6b731a 100644
+>> --- a/boot/image-fit.c
+>> +++ b/boot/image-fit.c
+>> @@ -2196,7 +2196,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+>>           */
+>>          if ((!type_ok || !os_ok) && image_type != IH_TYPE_LOADABLE) {
+>>                  fit_image_get_os(fit, noffset, &os);
+>> -               printf("No %s %s %s Image\n",
+>> +               printf("Invalid %s %s %s\n",
+>>                         genimg_get_os_name(os),
+>>                         genimg_get_arch_name(arch),
+>>                         genimg_get_type_name(image_type));
+>> --
+>> 2.48.1
+>>
 > 
 > Regards,
 > Simon
-> 
-> [1] 55bc22760c3 bootstage: Show func name for bootstage_mark/error
-> [2] 770605e4f98 bootstage: Replace show_boot_progress/error() with
-> bootstage_...()
 
