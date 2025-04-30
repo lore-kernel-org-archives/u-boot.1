@@ -4,68 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75468C369DC
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 10:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1556C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 10:55:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 500F682B33;
-	Wed, 30 Apr 2025 12:43:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 629CF82B17;
+	Wed, 30 Apr 2025 12:55:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pGCmrKyR";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ItwrLDKt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99CC082B33; Wed, 30 Apr 2025 12:43:04 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E279C82B78
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 12:43:00 +0200 (CEST)
+ id 733A782B19; Wed, 30 Apr 2025 12:55:56 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C8B58283E
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 12:55:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-patra@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53UAgxBK3362538
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 30 Apr 2025 05:42:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746009779;
- bh=MWguxrO1i/yZCZ4SICD5Nkto1vFqv/kU9PrOCVgA5fo=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pGCmrKyR1C1+IUreoJ3NK8OTXiIbcvSYPz7zyOjwgA3TOJ2ef1RijnFMlTDMxKGs1
- cUblAuN1M9rPR2VQAIoWp+ZP3GgSHNQZhgTUgZdC2V8meeQHKlqHStiNSGgc/fKEkv
- Zdj/a3q2b07uywWDzvdmyBoJpdpE7W+WOFmyJlmk=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53UAgxoN007710
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 30 Apr 2025 05:42:59 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
- Apr 2025 05:42:58 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 30 Apr 2025 05:42:58 -0500
-Received: from aparna-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (aparna-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.139])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53UAgcZr053918;
- Wed, 30 Apr 2025 05:42:56 -0500
-From: Aparna Patra <a-patra@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <afd@ti.com>
-CC: <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <nm@ti.com>,
- <bb@ti.com>, Aparna Patra <a-patra@ti.com>
-Subject: [PATCH 3/3] arm: mach-k3: am62a: Fixup a53 max cpu frequency by
- speed-grade
-Date: Wed, 30 Apr 2025 16:12:36 +0530
-Message-ID: <20250430104236.2611089-4-a-patra@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250430104236.2611089-1-a-patra@ti.com>
-References: <20250430104236.2611089-1-a-patra@ti.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 7F9933FE57
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:55:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1746010553;
+ bh=fj9EOtnyQzcbue3MjJZHe/RMqsmf1OhsBIgASVQ03NQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ItwrLDKt3dDooGMH2Ai8FEz1OacIdaet1iw4VpLsYdAq/VxlKO6vZiifRAXeCtpnr
+ bKWWVIUxagsSYpooT78ZKttjUrgpJpVYkqk9c+jXb+m20Vaz2/D2hSinqmm/Q2bosB
+ Hl5kb90oKrPcZW96snbtaMbamw2t8bnXgCptAwVETFUORK3Qfzderf+9GdNjU/rB4Q
+ f0BO0d2AhAg6+G9DoQLHyy7D5wJT3L2O/ovkiHY9m/hmusauAJH5SBDJejQV3UxAeh
+ tk5pBnnZ/harJ4TlMlu4+a3K0YIjP5CIj2wSfKvDWV/YVc4/FQOuBrGC8BI9MAgr/6
+ QXltJIBCsCqdw==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3913aea90b4so2093118f8f.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 03:55:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746010553; x=1746615353;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fj9EOtnyQzcbue3MjJZHe/RMqsmf1OhsBIgASVQ03NQ=;
+ b=OYdzOCfllk7wSh+c0BaqQzR2oTj35UuejBMf9IeVCffgp9SuAmp7Ls5PdD2oXATpRe
+ nVwud8dhHSvN6rgK4zKH+g1k3/xU9TUtHrqFyMtGrywHuDxHf5DzJhcnaYNNg8P1gnRB
+ HcruGkZXTQiCaTNoCgL37vfxmPOF0Au4lJLNDFIkFdoc292k/k0i8gxzMkGD/RCbI+fR
+ ZgUgJLqEGpKxq6Kl+LEOIdciuqy0mjExuOUh2Pxv3ydL3wXDG5FBg5gYob4AONQGJulx
+ VWtHvbPkLUPPpgs/msmoJFmojMrBPpd15hbvbeBPP/vioCRGj5logDidx2d1Umu/u2mJ
+ UWRQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXttUiouWeEuJmxWWFoC3k7sPDjqUCHKr4RzrVTYpmJDwxKekoeNLYnZOcXWxpMkf8wJeeNAG4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxUBREiAIc3T+A8EAfKtrOo5sSO+Kl20hbxQ5WUj85Klih//CJ
+ 9bkbs6+yhYweVSA9wFuipJZSSgv8Y/zQzRcy4MVxbt1LH5Q5ciuTqihGdjViAaG64DtVUjQLbRM
+ AEAYTCsfwxMpdwPtygTrNj+VWkNnnLDsRRbsFmt98E+x1TJ9p87hrHjQDYrSY0iFAIBg=
+X-Gm-Gg: ASbGnctn0pok/AU5OhCZRH4IsOrjMF9aVy4ftdVoPflVn5MdneRbeI++WrtNwl4PWJf
+ 42XyTHICxYAa8pUUx/3UjDvoNQsmmKe0ktEm16e9DG7uN3Bql2GczRU/tkumwKA/Fk9nYDlnXYU
+ ipTjjcDBNK0qhoENOYEqnGqn9LhgXPTUBDq6ZAZJgo203R/KRSaAnU+uSxjUCIJKV5kw+bVArP3
+ Yz4O6IGB1CTTTvCQyuJm51czPao70UgD8RRyUCLhwlj9Mdtoah5Vxtl9WtzhR4lm1H4nG4OeIdY
+ Jz/X4Z4N29yvxl0cH6RylYjn/+vcQzy2uNXO+AaEypUnzA==
+X-Received: by 2002:a05:6000:402b:b0:399:71d4:b8 with SMTP id
+ ffacd0b85a97d-3a08f76626dmr2215997f8f.23.1746010553089; 
+ Wed, 30 Apr 2025 03:55:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF+x1UIvy1LNEcAtHGn4s1LKVoaw547pwOm5VAvhDKy2jIpKqmzLr8O/GG4jISofWQZjRPWvA==
+X-Received: by 2002:a05:6000:402b:b0:399:71d4:b8 with SMTP id
+ ffacd0b85a97d-3a08f76626dmr2215974f8f.23.1746010552725; 
+ Wed, 30 Apr 2025 03:55:52 -0700 (PDT)
+Received: from localhost.localdomain ([2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a073c8c968sm16422139f8f.8.2025.04.30.03.55.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Apr 2025 03:55:52 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?=E7=89=9B=20=E5=BF=97=E5=AE=8F?= <Zone.Niuzh@hotmail.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] bootm: pass kernel load address not entry point for
+ IH_OS_EFI
+Date: Wed, 30 Apr 2025 12:55:46 +0200
+Message-ID: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,91 +112,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AM62A SoC has multiple speed grades. Add function to delete
-non-relevant CPU frequency nodes, based on the information
-retrieved from hardware registers. Fastest grade's maximum
-frequency also depends on PMIC voltage,hence to simplify
-implementation use the smaller value.
+The EFI sub-system needs the load address and not the entry point
+to boot the binary passed from the bootm command. The entry point
+is derived from the PE-COFF header of the binary.
 
-Signed-off-by: Aparna Patra <a-patra@ti.com>
+Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/arm/mach-k3/am62ax/am62a7_fdt.c          | 14 +++++++++++
- .../arm/mach-k3/include/mach/am62a_hardware.h | 23 +++++++++++++++++++
- 2 files changed, 37 insertions(+)
+ boot/bootm_os.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_fdt.c b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
-index 40833ca392..9526c5b255 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_fdt.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
-@@ -81,6 +81,19 @@ static void fdt_fixup_thermal_zone_nodes_am62a(void *blob, int maxc)
- 	}
- }
+diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+index dc9d3e61fca..a3c7cb5332e 100644
+--- a/boot/bootm_os.c
++++ b/boot/bootm_os.c
+@@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
+ 	/* We expect to return */
+ 	images->os.type = IH_TYPE_STANDALONE;
  
-+static void fdt_fixup_cpu_freq_nodes_am62a(void *blob, int max_freq)
-+{
-+	if (max_freq >= 1250000000)
-+		return;
-+	if (max_freq <= 1000000000) {
-+		fdt_del_node_path(blob, "/opp-table/opp-1250000000");
-+		fdt_del_node_path(blob, "/opp-table/opp-1400000000");
-+	}
-+	if (max_freq <= 800000000) {
-+		fdt_del_node_path(blob, "/opp-table/opp-1000000000");
-+	}
-+}
-+
- int ft_system_setup(void *blob, struct bd_info *bd)
- {
- 	fdt_fixup_cores_wdt_nodes_am62a(blob, k3_get_core_nr());
-@@ -88,6 +101,7 @@ int ft_system_setup(void *blob, struct bd_info *bd)
- 	fdt_fixup_video_codec_nodes_am62a(blob, k3_has_video_codec());
- 	fdt_fixup_canfd_nodes_am62a(blob, k3_has_canfd());
- 	fdt_fixup_thermal_zone_nodes_am62a(blob, k3_get_max_temp());
-+	fdt_fixup_cpu_freq_nodes_am62a(blob, k3_get_a53_max_frequency());
- 	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
- 	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+-	image_buf = map_sysmem(images->ep, images->os.image_len);
++	image_buf = map_sysmem(images->os.image_start, images->os.image_len);
  
-diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h b/arch/arm/mach-k3/include/mach/am62a_hardware.h
-index 0ec04a72f5..64e4a379fa 100644
---- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
-@@ -28,6 +28,8 @@
- #define JTAG_DEV_VIDEO_CODEC_SHIFT			14
- #define JTAG_DEV_DSS_MASK			GENMASK(16, 13)
- #define JTAG_DEV_DSS_SHIFT			13
-+#define JTAG_DEV_SPEED_MASK			GENMASK(10, 6)
-+#define JTAG_DEV_SPEED_SHIFT			6
- #define JTAG_DEV_TEMP_MASK			GENMASK(5, 3)
- #define JTAG_DEV_TEMP_SHIFT			3
+ 	/* Run EFI image */
+ 	printf("## Transferring control to EFI (at address %08lx) ...\n",
+-	       images->ep);
++	       images->os.image_start);
+ 	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
  
-@@ -144,6 +146,27 @@ static inline int k3_get_max_temp(void)
- 		return JTAG_DEV_TEMP_EXTENDED_VALUE;
- }
- 
-+static inline char k3_get_speed_grade(void)
-+{
-+	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+	u32 speed_grade = (dev_id & JTAG_DEV_SPEED_MASK) >>
-+			   JTAG_DEV_SPEED_SHIFT;
-+
-+	return 'A' - 1 + speed_grade;
-+}
-+
-+static inline int k3_get_a53_max_frequency(void)
-+{
-+	if (k3_get_speed_grade() <= 'N')
-+		return 800000000;
-+
-+	else if (k3_get_speed_grade() <= 'R')
-+		return 1000000000;
-+
-+	else
-+		return 1250000000;
-+}
-+
- #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
- 
- static const u32 put_device_ids[] = {};
+ 	ret = efi_binary_run(image_buf, images->os.image_len,
 -- 
-2.34.1
+2.48.1
 
