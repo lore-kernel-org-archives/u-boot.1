@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D80C3ABA9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 15:01:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 703F5C3ABA9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 15:01:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8900282BAA;
-	Wed, 30 Apr 2025 17:00:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7DB48215F;
+	Wed, 30 Apr 2025 17:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gupZo9t+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ivf4D2j+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65CDD8215E; Wed, 30 Apr 2025 17:00:57 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 6224482B9D; Wed, 30 Apr 2025 17:01:28 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E118782BB4
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 17:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6047A8215E
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 17:01:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ac3eb3fdd2eso1306692966b.0
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 08:00:54 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ac339f53df9so1441586766b.1
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 08:01:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746025254; x=1746630054; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746025286; x=1746630086; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9lP0Mj7QfeHGxt7uNEbNUNNKB3b83sTFultnY8jdfm8=;
- b=gupZo9t+rIq1FU8KD5zM9c89XNT3DO332Wci9ffMJQBVX63brjYbCUyY65WVeH378l
- SaYSE85fc3TrZRCuHiPdDBmWfonWIABnim3vMzDZVclqySvLzzZU5ba9YgP/8Sh/kOs5
- ps5717ZjzaCpe2PIP8dVJWexl0rcZgSUEbbIE=
+ bh=iv2RMbtzfTXOhI6JwgXW97ZV1SpSKtjFIN09aLYIcU4=;
+ b=Ivf4D2j+brxdHO3mrXI9INUQdqPuyIRuwWH1Vr68Dg6MZhULbkesfoV73Db8GuSGYn
+ 8DRq9LzPpC/QiQ27TNaBFkSmgiMTSk0u81nPFrbdUnVOJwYgnRYQ9OnpPDX42sqXRtHx
+ jpSjj3Q0ebO5PR5MFKisbNjqcV/P+rHckmYyY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746025254; x=1746630054;
+ d=1e100.net; s=20230601; t=1746025286; x=1746630086;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9lP0Mj7QfeHGxt7uNEbNUNNKB3b83sTFultnY8jdfm8=;
- b=npbdzzuK6yngO6AUDnyfacdtbdzgKKJ0uUnRbLmoD6aOG+EIQa/r+zWhGKuCDtfLs7
- tl9J+PkOoB97YdZRyTnfetG3P2f3ic8EKgdzv6l7zjdctlJSz+mVogBSXVrgNFSbHLi5
- GMDABPUgogAhC34JF4dJqHIDay8kWZdacTRvqoEI0BprBI/+4B3MFemlRxvHb4majOWw
- jnEDSvdZK+Q2UWUcDVpQbdMbZ858Utt2N3/AR9wsE3g/GbKvLj0Wwz3gsQRc3aQOrZZ+
- ZbQCAtQWZTHjWpcOHhGzZntxprfw71vvBfAnp5r8S6Hl4/qs11nVdftAX3RrCMa3pRSc
- c2aQ==
+ bh=iv2RMbtzfTXOhI6JwgXW97ZV1SpSKtjFIN09aLYIcU4=;
+ b=S1sKT4u+Ne27qTWK7zadk0n+a1T6jdc2Xr+Rc9oktt5MWG3RJbd6M3rHS8AqidtoXY
+ rH+WCkjvA1/fNDilPtB5/ayb1dxr1SiZ19wsTjJKMAi6O13LDi/sadqKK90KXw+F2Cdl
+ T27mhitwJhe57X+AHu+5sHCwUDcy0vMof7xoNifhaP0gqA6AtlhusAND/2DmhQN7hdwu
+ +51lQ4kNaIgqdsuzbDPtv2EmkY0wQheO7SeGI9EhBxrTFo0QfjOKCuFFcT0GRJauE/av
+ EKsqPqhWZk/ODQ0VzCHkYxdyWjtcX3RrYImhCtG3VEY2r48qSjNzYql01v1JXiKtTR6Z
+ shZw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVw/Kf//f7IHu1rhzEh/sGL1DLTMkDVK4SswQDO9991d2osSP7SqBj1ay5zq/IKuZUJXWuqyY4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxcz34JxCkA2DUFNgr57IzQOpZFPCs3WxDGzXqKdKxxyzHTr/ic
- REyWYZFKD3DbCvB22Qtn5IgStuhIJRyB+zkQGseN/3Y56baqhBOmRsQrUG6gAelke6Q1kLApUPx
- 5AYWpSoP+dHuLLHkGQmdE34APR3b2j1itI1TW
-X-Gm-Gg: ASbGncvZX1fMq5qyPXmIP1CPod4eQOD0NJ+OheFo90drLm+gSR+TbBUNag3+/OEPHTb
- JoOvnts0zt8vI92gaBoOl4yVFWobxWnlK0HRayjFkRm8xsFkceyOl9sGGUwcRfY4DCjniA28czK
- E5EyuTcjbQf6iLBdve5pyUaJI=
-X-Google-Smtp-Source: AGHT+IFHV/6L7TmJqEjcV6J7GpMRAdFohWioqNQb0V+ouxYPzhufZy8HdJTw8DsQdcU60y02lh9VrVN2hLGndO78cVA=
-X-Received: by 2002:a17:907:9712:b0:ace:ca87:2306 with SMTP id
- a640c23a62f3a-acedc634e1fmr344208966b.34.1746025253911; Wed, 30 Apr 2025
- 08:00:53 -0700 (PDT)
+ AJvYcCUcP9WP63R65dqXiopg0tcUSmQ/PARuYiucriEEFx3KyWiFBaOgce3+V5frfybk91rBqUtaAoU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyn5uKfQ34qVsS+geLtzo7hM381QE6EZRS9wGXTkOYCvx2isreQ
+ Mnf2R1b3wHVjDvCGW2ftI9GqeIt1eIlYLgv/88PNOPMGGDldw03ROUf3szjdSWbajcRc+zL4jSo
+ T/1fxe12gekz9h+auP+IZt1aAcj6WW5izrTIV
+X-Gm-Gg: ASbGncszC62YmIE5yujpiOxJZHoUn+bye3vdAWL+qupzp5iqS38IEZ75U7DRg3U6wxe
+ mP8uHtGqheLnveD2jZNn2BxIId2bCrOzgEiSiLIbJP7hvunmaGnpulNk7vEpoGfztpvYNLDNysI
+ 1CAJID/h5BjMz+sGcbArbOOEHpblboFsZBqA==
+X-Google-Smtp-Source: AGHT+IGtX3oJ9vbEGPAsxen/YGfa1TZkbcqa/E0ez9Yq0Z+X94fylxkSGII/s7fXZWpuIGh76t65dE/qRf4pCC5EI6U=
+X-Received: by 2002:a17:907:6d15:b0:acb:4cd7:2963 with SMTP id
+ a640c23a62f3a-acee241c417mr316410566b.33.1746025285616; Wed, 30 Apr 2025
+ 08:01:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
- <18d1c97d9a420c40181352bf1445e2772d784d9a.camel@codethink.co.uk>
- <CAFLszTjjsdp7xijT1SVq9P3mou9vvGWmK5_ngb1Y6Ap4A99QSQ@mail.gmail.com>
- <20250430141513.GN1261075@bill-the-cat>
-In-Reply-To: <20250430141513.GN1261075@bill-the-cat>
+References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
+ <d7b41927-e375-4f85-b4fd-cda39defd9e3@canonical.com>
+In-Reply-To: <d7b41927-e375-4f85-b4fd-cda39defd9e3@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Apr 2025 09:00:40 -0600
-X-Gm-Features: ATxdqUFmlwVoXFTqCCI-AL6jfEGZcrul44tJVqLUM-cZpez51tCR8Jc6cHbZg6c
-Message-ID: <CAFLszTh-G4m2oXZya7SBBeYw2f4S0Od7=toS1H2iwMeumSsHgA@mail.gmail.com>
-Subject: Re: [REGRESSION] [PATCH v6 0/3] Static initcalls
-To: Tom Rini <trini@konsulko.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@codethink.co.uk>, 
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Stefan Roese <sr@denx.de>, 
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>
+Date: Wed, 30 Apr 2025 09:01:12 -0600
+X-Gm-Features: ATxdqUEyCiEIZkqLSYOJ4RgPGcDCi9cqFhCeWXGMPYtJ44uDmdTmEl18bYqCA2U
+Message-ID: <CAFLszTiEKdf2F6=jomTfxj-cmECefxmwd=MQ3drsP0pNC-4oFQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] bootm: pass kernel load address not entry point for
+ IH_OS_EFI
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,84 +95,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Wed, 30 Apr 2025 at 08:15, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 30 Apr 2025 at 08:04, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Wed, Apr 30, 2025 at 07:54:46AM -0600, Simon Glass wrote:
-> > Hi Tom,
+> On 30.04.25 15:54, Simon Glass wrote:
+> > Hi Heinrich,
 > >
-> > On Tue, 29 Apr 2025 at 16:32, Marcel Ziswiler
-> > <marcel.ziswiler@codethink.co.uk> wrote:
-> > >
-> > > Hi Jerome
-> > >
-> > > On Fri, 2025-04-04 at 15:50 +0200, Jerome Forissier wrote:
-> > > > This series replaces the dynamic initcalls (with function pointers) with
-> > > > static calls, and gets rid of initcall_run_list(), init_sequence_f,
-> > > > init_sequence_f_r and init_sequence_r. This makes the code simpler and the
-> > > > binary slighlty smaller: -2281 bytes/-0.21 % with LTO enabled and -510
-> > > > bytes/-0.05 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
-> > > >
-> > > > Execution time doesn't seem to change noticeably. There is no impact on
-> > > > the SPL.
-> > > >
-> > > > The inline assembly fixes, although they look unrelated, are triggered
-> > > > on some platforms with LTO enabled. For example: kirkwood_defconfig.
-> > > >
-> > > > CI: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/25514
-> > >
-> > > This series seems to cause a regression on rock5b. E.g. on today's master:
-> > >
-> > > => pci enum
-> > > => setenv ipaddr 192.168.10.2
-> > > => ping 192.168.10.1
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > No ethernet found.
-> > > failed to initialize card: -12
-> > > failed to initialize card: -12
-> > > ping failed; host 192.168.10.1 is not alive
-> > >
-> > > Seems the rtl8169 driver runs out of memory trying to allocate descriptors?
-> > >
-> > > If I revert this series on top of today's master:
-> > >
-> > > => pci enum
-> > > => setenv ipaddr 192.168.10.2
-> > > => ping 192.168.10.1
-> > >
-> > > Warning: eth_rtl8169 MAC addresses don't match:
-> > > Address in DT is                00:e0:4c:68:01:5a
-> > > Address in environment is       fe:b1:db:60:25:69
-> > > Using eth_rtl8169 device
-> > > host 192.168.10.1 is alive
-> > >
-> > > I just completed the bisection and will now look into what exactly could be going on.
-> > >
-> > > Any insights are much appreciated.
-> > >
-> > > Thanks!
+> > On Wed, 30 Apr 2025 at 04:55, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> The EFI sub-system needs the load address and not the entry point
+> >> to boot the binary passed from the bootm command. The entry point
+> >> is derived from the PE-COFF header of the binary.
+> >>
+> >> Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >>   boot/bootm_os.c | 4 ++--
+> >>   1 file changed, 2 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> >> index dc9d3e61fca..a3c7cb5332e 100644
+> >> --- a/boot/bootm_os.c
+> >> +++ b/boot/bootm_os.c
+> >> @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
+> >>          /* We expect to return */
+> >>          images->os.type = IH_TYPE_STANDALONE;
+> >>
+> >> -       image_buf = map_sysmem(images->ep, images->os.image_len);
+> >> +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
+> >>
+> >>          /* Run EFI image */
+> >>          printf("## Transferring control to EFI (at address %08lx) ...\n",
+> >> -              images->ep);
+> >> +              images->os.image_start);
+> >>          bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+> >>
+> >>          ret = efi_binary_run(image_buf, images->os.image_len,
 > >
-> > I have one of these boards in my lab. Could you please apply the
-> > pending lab patches, e.g. [1]? Also, can we get this board running
-> > network tests?
+> > In this case ep should be set to image_start as it is with many
+> > methods. How come it isn't in this case?
 >
-> Your lab patches sadly stopped applying, I think somewhere around where
-> you didn't comment on my feedback about needing to fix problems with how
-> modern i.MX platforms do/don't handle blobs, and also the "all" make
-> target.
+> As described above the entry point is encoded in the PE-COFF header.
+>
+> What makes you think that a user would set it in an its file containing
+> an EFI binary?
+>
+> If it where set, it would point to an address after the load address and
+> not to the start of the PE-COFF header.
+>
+> The proper design would completely remove load and entry addresses in
+> FIT images and use LMB for memory allocation.
 
-I believe it was when you didn't want to disable boards which don't
-work (e.g. samus).
+You are missing the point entirely.
 
-Still, any conflicts are trivial, so perhaps just apply them?
+However the image calculates the entry point is up to that image. But
+the correct entry point should be put into ->ep
+
+We can't have some OS--booting functions using ->ep and some using ->os.load
+
+So please dig in a little more and fix whatever is going wrong here
+and ensure that ->ep is set correctly. If you need help, please ask.
 
 Regards,
 SImon
