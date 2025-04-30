@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81BD5C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 19:14:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C398DC369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 19:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C75DE8007D;
-	Wed, 30 Apr 2025 21:14:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 37CF08007D;
+	Wed, 30 Apr 2025 21:15:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="moRK2Nuq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XJoFrscd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88F41800C1; Wed, 30 Apr 2025 21:14:39 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 5FDF9800D7; Wed, 30 Apr 2025 21:15:41 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CCED8004F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 21:14:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D3598004F
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 21:15:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-72c173211feso50489a34.1
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 12:14:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ac2963dc379so24528566b.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 12:15:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746040476; x=1746645276; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UyVrMqf5JDF2XZBishjnBfTkWZJQGH+FA1wll+Wgo2E=;
- b=moRK2NuqsqyOoFiO5ucQnf9/+X7zAcwFXS5hIBnD0QTJU7bgAhYxiC9c/9pEz7zSlw
- 79sxMuqo5Okab9T0qTK4EpDyIT4NUCMsb3kxJd1XNDzg3yqBb5r+rATzwD8S33AqtYkH
- m7JM1a617TzQdjdSyYn//FDFezcZI7U2BeIsQ=
+ d=chromium.org; s=google; t=1746040539; x=1746645339; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=I2qdKcy5vrHHWZC7Bp9opAry5kvqCavIfWTc1FysOLg=;
+ b=XJoFrscdd47j+1Pip7ynKHfx7y11klM6p9b68Qo2HJvVXkH8mHKTr677zxrdYHsUzg
+ hCU1lXLAbI3ceNd1qT3eN2j0KopqJxp02s6vyrMA/zSmXVrfnxCrV2V4LGgK0jLaPs+X
+ azPgNNH1vaZtcq4v6rrbDtF2WMgzOqTAnUOw8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746040476; x=1746645276;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UyVrMqf5JDF2XZBishjnBfTkWZJQGH+FA1wll+Wgo2E=;
- b=cFYGgTyoeqNBvNVVQ0XxCCGBtgZbFLirbU8rNyCmaAqr1dBPaOWA1A0i4LS7nTWsBQ
- TOIc5Ovv7ogRvpl+tLZYv+GqiUBux76M6DyrqxSe2k9i7griOqVUWoPEBVzPoOINkOpi
- 9P84gj0ESFd+NcuvMGE8OVxH5zK29BvhmVNL2ZbvqD07i7wEiuyKbrBe+MxPl1xRrWFM
- pkaE/+gG4fZUQy8pRPGNTYPDDLwe6R7YpWVBm7lgsBSU9+iK45aJ9b6H/VLNiz9Tbz7C
- XKrxvyjnUYLPthhWL96cNR1QhPHW1qhRnIUSuJmRPnXtA1VBT0omWKr7EBeLd1LSgNb4
- 2NFw==
-X-Gm-Message-State: AOJu0Yy+GoEag3xMf2ulvJvL/0cvF5b2y/rZL742Anw8IQKnjajsgggx
- yj5dmSMSm2YkQFBGeO8/BgCTDeRl/9jl4Iu/67ygMm0R1mo2mCEqHnhAT94aA+U=
-X-Gm-Gg: ASbGncslLvU1wkOfkHD4Q0Qr104KdxfLY5xVmouFM4eA1YaI87HeetqKgzZcLvE0YZV
- CE/wfKdAbwMLwW25LPr5PfZbcuxcThS6+G0Wp6D/B7SDxIAgBH8+laEX65Gv30RIuFDZB9Jlu3X
- RHlh7k1qlXtzojApKKMQORCLRmEG1n/2eGDCp6n76iekUss/K+ODUhv1cTguywKbkGypxaanCnC
- Hj4QDDpTLP7xGGmRtru/lae2ME7N1BDTX9hZbE39kcPTQ+p2/4y3T5p6Z/ro6rDeRhdrduFxriR
- /ZOpDkmkvGKe1lJO3I96+4MgeUjvjzqB4fRa06EGdOVLVtnaqSadAeGVdANWagYvNI3gKXc7AyX
- MYA==
-X-Google-Smtp-Source: AGHT+IEp7bRfFmJMx84Cx4j3fXlxCXYlfA5aSu7IUMCsktqz/e0BxJIJyaVfnSb37bLm2Qltcd0p0w==
-X-Received: by 2002:a05:6808:3308:b0:402:18a1:843f with SMTP id
- 5614622812f47-402d24f2d2bmr2468537b6e.32.1746040475889; 
- Wed, 30 Apr 2025 12:14:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-402129255a2sm911351b6e.13.2025.04.30.12.14.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 12:14:35 -0700 (PDT)
-Date: Wed, 30 Apr 2025 13:14:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Casey Connolly <casey.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Daniel Golle <daniel@makrotopia.org>, Simon Glass <sjg@chromium.org>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20250430191432.GY1261075@bill-the-cat>
-References: <20250428215930.GI5495@bill-the-cat>
- <0ffea631-2d8a-4f24-abfd-ef4aaeca01c8@gmx.de>
+ d=1e100.net; s=20230601; t=1746040539; x=1746645339;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=I2qdKcy5vrHHWZC7Bp9opAry5kvqCavIfWTc1FysOLg=;
+ b=FPrWWZOPyNDHUQZWK9zG9K8a+H16A2caAdK7CS3qSRBPHczA3nN5aKgz/pK+HxJKzR
+ Bhg+PNGOFrliXpuSYBfzCu6UtkSSxf6T/smkegwrvjMaxpJY3azjfYwVh+mLhsnyzZjJ
+ enA0U607PmfrET5+S3r57Glg44kWokpfQrdJh8ER14rpvm7fQ/gFFmv01Ic9FOfbFjuc
+ efahhcuLcAkfBqU1b6K47PSek692euKfCpqOnb1mYctsFWUyEaVTERSmnjFNCM+0rQZJ
+ Xot94hSzTPVoQwp1yoAYPz4NhIMYarXygC1MfAoFc4rGKOa8pfdVgdX0gQR/kckqPPRL
+ WLqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKFXqAzVS9I4FlhSQy/O/1XCu/eu5RxcoxT4SatqN58mEGkFyeQ1FxhMOLoDqhCydvlW32F1o=@lists.denx.de
+X-Gm-Message-State: AOJu0YyrM6pP6H55+ux0ZRw/l0zFbMcRvGYuGywRMgHmuljgQ93cEyNq
+ ea9bqT+jPFjRUUghMOhnTMxhlpQfjt1Yblp7oU5hayB4RCXUnb79B6hZpe586P4KGRbWtqztHWC
+ 2FJXG0g8Hp+yAOD2WPONhbgNNJoK6m7dPE//r
+X-Gm-Gg: ASbGncvVOdYI9ONgqm4wjGfWTYgInM507tKIZlm8BgJ2Rlwg/VVmnB+ZkV31tj+MTqI
+ 3Cz8zuhvX/ZDL182deM21NircWtaFOsBwHWUYW8X8SPV8fzndprcCVTwo3jp4RR/RuBLnhYgA9H
+ OIEDtJSlMvJA3DuTA47pUp7Xw=
+X-Google-Smtp-Source: AGHT+IGpOOyav4QiXCYpdzkYZ9W8D+ymlaq61D18wyokTXe6pDY4lKM0Hibru1iPS+WC2ZC0GshPTrvcdplx56sMC1c=
+X-Received: by 2002:a17:907:9494:b0:ace:d4f8:b687 with SMTP id
+ a640c23a62f3a-acee21aebb0mr411044966b.20.1746040538666; Wed, 30 Apr 2025
+ 12:15:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0FuBhzo+AAcSU0JU"
-Content-Disposition: inline
-In-Reply-To: <0ffea631-2d8a-4f24-abfd-ef4aaeca01c8@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
+ <d7b41927-e375-4f85-b4fd-cda39defd9e3@canonical.com>
+ <CAFLszTiEKdf2F6=jomTfxj-cmECefxmwd=MQ3drsP0pNC-4oFQ@mail.gmail.com>
+ <0ce6f15b-7fb9-46d6-b06f-15174d318e79@canonical.com>
+In-Reply-To: <0ce6f15b-7fb9-46d6-b06f-15174d318e79@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 30 Apr 2025 13:15:25 -0600
+X-Gm-Features: ATxdqUGqlacc0kGyfXHfgCVhSnWAJLqPp7IE_kpqJ8os5J9bfDwuqulLItfCp_g
+Message-ID: <CAFLszTgRfa6ER-UtpfSyKRkTQWrY_ZBvUU905+wn5T=sVjC3=g@mail.gmail.com>
+Subject: Re: [PATCH 1/1] bootm: pass kernel load address not entry point for
+ IH_OS_EFI
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,52 +97,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---0FuBhzo+AAcSU0JU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 30 Apr 2025 at 09:17, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 30.04.25 17:01, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Wed, 30 Apr 2025 at 08:04, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> On 30.04.25 15:54, Simon Glass wrote:
+> >>> Hi Heinrich,
+> >>>
+> >>> On Wed, 30 Apr 2025 at 04:55, Heinrich Schuchardt
+> >>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>>
+> >>>> The EFI sub-system needs the load address and not the entry point
+> >>>> to boot the binary passed from the bootm command. The entry point
+> >>>> is derived from the PE-COFF header of the binary.
+> >>>>
+> >>>> Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
+> >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >>>> ---
+> >>>>    boot/bootm_os.c | 4 ++--
+> >>>>    1 file changed, 2 insertions(+), 2 deletions(-)
+> >>>>
+> >>>> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> >>>> index dc9d3e61fca..a3c7cb5332e 100644
+> >>>> --- a/boot/bootm_os.c
+> >>>> +++ b/boot/bootm_os.c
+> >>>> @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
+> >>>>           /* We expect to return */
+> >>>>           images->os.type = IH_TYPE_STANDALONE;
+> >>>>
+> >>>> -       image_buf = map_sysmem(images->ep, images->os.image_len);
+> >>>> +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
+> >>>>
+> >>>>           /* Run EFI image */
+> >>>>           printf("## Transferring control to EFI (at address %08lx) ...\n",
+> >>>> -              images->ep);
+> >>>> +              images->os.image_start);
+> >>>>           bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+> >>>>
+> >>>>           ret = efi_binary_run(image_buf, images->os.image_len,
+> >>>
+> >>> In this case ep should be set to image_start as it is with many
+> >>> methods. How come it isn't in this case?
+> >>
+> >> As described above the entry point is encoded in the PE-COFF header.
+> >>
+> >> What makes you think that a user would set it in an its file containing
+> >> an EFI binary?
+> >>
+> >> If it where set, it would point to an address after the load address and
+> >> not to the start of the PE-COFF header.
+> >>
+> >> The proper design would completely remove load and entry addresses in
+> >> FIT images and use LMB for memory allocation.
+> >
+> > You are missing the point entirely.
+> >
+> > However the image calculates the entry point is up to that image. But
+> > the correct entry point should be put into ->ep
+> >
+> > We can't have some OS--booting functions using ->ep and some using ->os.load
+> >
+> > So please dig in a little more and fix whatever is going wrong here
+> > and ensure that ->ep is set correctly. If you need help, please ask.
+>
+> The only information that the EFI sub-system cares about is the start of
+> the image. That information is in os.start_image.
+>
+> Field ep is for the entry point and not for the start of the image and
+> EFI should never take it from the FIT meta-information.
+>
+> This is why whatever value I put into the field entry of my handcrafted
+> its file is completely irrelevant.
 
-On Wed, Apr 30, 2025 at 08:23:29PM +0200, Heinrich Schuchardt wrote:
-> On 28.04.25 23:59, Tom Rini wrote:
-> > Hey all,
-> >=20
-> > Here's the latest set of Coverity defects. Please let me know if some of
-> > these are false positives for example, thanks.
->=20
-> Hello Tom,
->=20
-> I have marked the acpi_update_header() items as "intentional" in Coverity:
->=20
-> 550301
-> 550291
-> 550288
-> 550287
->=20
-> We could change the parameter of acpi_update_checksum() to const void * to
-> make Coverity happy but we would loose the type checking.
+As discussed, we should split efi_binary_run() so that we can do the
+loading. For now:
 
-Sounds good, thanks!
-
---=20
-Tom
-
---0FuBhzo+AAcSU0JU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgSdpAACgkQFHw5/5Y0
-tyz1vgv+LMl+gDYuAXMPPLWPZfkBtoXFkBf61z1z/v3exf74SYMikVZOOVaSm8BX
-0DkaduXIYAedvBIeSwLsPTLiH0EUEsvrOvpUB3YRjo0tcn3wuohxEFv/D6uKQ6er
-+SoKerfjUZUkOp7d+mZ8K/fxvJOHzXfVinjrVZUUvH8bow3q/NF21Zq8wJpw9rjS
-mrz941zdtzaN71vs308qPhzS415YEYwoBpjwOe3wOP9B4F0GrpAaI0fUKrOHovnp
-2ARFMDtp4HjkwlBCanb89ylrjp7gJbOwbzh8M7Rhq/qx6LuVEd148gm52RdqWHBW
-Yntb0dIGwlaul9ALkqL/XAmOS8Bhircs2/6nUhNXozgZNfoqRtN5vnJugZHzHOZR
-js9Hw7M+xh3c4YRc9tl8bz8GxFWFWrNDs9uGQ4NwvJeaLNgMP6dW7QlxI+tT12n7
-1SDjMQcBB/pvAzjULsYbsSAc1ZuUWypwD0lDPCU56b2YeZhArOT2yp2y9jEje/et
-U6dVAjee
-=ZAeu
------END PGP SIGNATURE-----
-
---0FuBhzo+AAcSU0JU--
+Reviewed-by: Simon Glass <sjg@chromium.org>
