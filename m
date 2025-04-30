@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79162C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 17:01:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FEFC3ABAC
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 17:03:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E52D382BF2;
-	Wed, 30 Apr 2025 19:01:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 63EA082C2F;
+	Wed, 30 Apr 2025 19:03:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MWYUj+Vv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lsnwgcOu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C664A82BF6; Wed, 30 Apr 2025 19:01:44 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id AEEDF82C2B; Wed, 30 Apr 2025 19:03:44 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E0F782BB4
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 19:01:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83B2082BB4
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 19:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7306482f958so31044a34.0
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:01:42 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3f9832f798aso103832b6e.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746032501; x=1746637301; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=v7ejOORqcOW2GSUPEnpgco/Z1dcK5N2TQkczr2+WgAA=;
- b=MWYUj+Vvgl/iaz/RzveXlUUWK5BMea9DveTm7RkjfcDp8lVjbiZIjb5n4uJ85iwliV
- I7SFUV+c+B+7UB1pzoGJqOlwREiFrXR8qQ6xavsflRAqBL8a04TrB/KqJIPGA/Ldn862
- zRaZjs/V1Ke7nMoDZLcinb5HcOVS+nRZwo/yY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746032501; x=1746637301;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1746032621; x=1746637421; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v7ejOORqcOW2GSUPEnpgco/Z1dcK5N2TQkczr2+WgAA=;
- b=tkHwmnhh3+N55BfFs0ZXQOOf7d7dKDN32sFHFfrxbyWc33YiDWg545ZrHle4xQuAPd
- IjtHu9gdkqbIUfJYexYH9FByslBAbMxs1FgvbsvLDcUcpTAxJwGoN/X1y0BpMrT/Yq9z
- 7cshhumBGrNok1QuKKt+R/OMY/DjbsTrU7Mw9mAdQnnLBVXv3MSfq1dzaZHLode5TjBT
- eQ/a5gbUXPDYutrdYubZIB7EORU0aJc85/8YfvA8I8wIPh/AzpBBdLaddgyV+W2jTUti
- Lda9pWpdM7XsboziTnnYAIaI5JPQk5AnBg8zI/dEVCm6wJydrQ2FJvYSY9sCwNqX2Mrt
- 4wZg==
-X-Gm-Message-State: AOJu0YwNUnrl5hujn+H6NfjGSd/XQ/1NqPPSxVezE7xFDfLLipgmYk+x
- tqYJ+YMgXttfJNSfkWgCLuur69LWNNwj0XgnacqCs0g+gp46v7QncsrhopPYCws=
-X-Gm-Gg: ASbGncvB8Lgduhq85SJkrG9AfbSEUpMDxUTHr+WAclW7BRCN8Uol9vexc2Xv0j223vI
- fQMN3GmbY+GSUStSS5ctByc5xxuZ7Bgu9d1xBZcbTqP4HcxWCaTA04u9CHwV8adJx4TAPdaGMma
- P91KZHzPG89ta/yVpJNIqcf/0EnVXT2r0JgJq3e35Oo+wr/SrB4lEUPQH4UO3+n0adRRNTDIwM4
- 8y8mLWH3sDqiTARhgfYq3YoqPWidbKcTQnYqXS82iVot63/XZbbwPuC7h0z7H4JdQQDX1KWojYM
- lHcy8xRuV1PZ4rFYUIIte6jaWyJNWitWK77eWW0/dMtes0OtSQ9qFtL0JWvTlHpZ9BtQUiQbx2U
- hxQ==
-X-Google-Smtp-Source: AGHT+IHJcE6IsPzSqVZSl/RqZJCsVYdPkRcsowYm8MdXxtFxTV2N5bKCst7eWUcmGAq+wCcp1+iv/g==
-X-Received: by 2002:a05:6830:6189:b0:72b:81df:caf9 with SMTP id
- 46e09a7af769-731c24b824fmr2583024a34.8.1746032500818; 
- Wed, 30 Apr 2025 10:01:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ bh=+JxNiid4aRZSx8XZtlt56E5IDHicUKWSKY1MMg2BF7c=;
+ b=lsnwgcOum5OhJnux+UjERQhduTPnXJdgeAeIMUbkF57ixsDfIArvBkX0FDoyhmhktf
+ Rr2lFMPgL/Jx0LTIMukMrv54fxN/mpneg+6aeAg9zB14dZuY2kRju78KQEQ/ZPPPnr0M
+ 0ruceE0ODUlMITQVgMAWjjWz0wrYZrjm9Bg3Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746032621; x=1746637421;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+JxNiid4aRZSx8XZtlt56E5IDHicUKWSKY1MMg2BF7c=;
+ b=uVybQRs4SN10VO2O7HAsvOqYbhfT6uTkv42QGsrbhIZ0dF5PQ6ohdHxeqEEWPE+Gyw
+ lpVEJzZm9MVcLQ3OZn9FOdg9t0PTWKMu6UvwHbUwfStJAu9ERGt6zzHwZHP7xu+or8KB
+ 80i4DJl7SDHTUFf9RuUJzLiIyliGKZPtsg8MyNrH0oBjqLrafAfMWrW0+zWP2fZLQfrZ
+ b0dTfu6BlhFxTTvb9ZSwZNonmQehp12vQQzlBK2q7OQYTi2BRvbsMMKawaRyo61KzcQi
+ zIOkKItfLszZ3YeN6RwGgtdLmAfn+gTZCsc45QyvYecIq6S5FoUJ6AclTXCLtYZtqOkP
+ LE+Q==
+X-Gm-Message-State: AOJu0YwPdnhUzYFs3WyzzknigZMo1DSpy3vzSxfGaj5k0ZsiImxwMvnR
+ R/lZycbRm8FSjOoMbH8gBjY8XnLfMX224A+q7/GXJS02tJkjgDetPCMz02kNCTo=
+X-Gm-Gg: ASbGncvpiXb97fb7aNxZVFf0LulQiYnGWVtIdeWl/eUsQrBdTqzrT2zIkzMhSzo/neg
+ 0bc9WyDtmyYNE54899tuzYi/UFoJSdISfcIfuurcscShhtIQIMiNi4DNYeGhPvDgk72i7kZwkm0
+ AX3Z+5aZh1PFywZz3uxYFuoVoGlIBmbuwQ1KtxFzN4ROEYadRp3P/Sq/0OdeZPXXKhUvV0yHfH9
+ qJS9qd2zCzeRJ/kfdGk0NEUxqHwkZKV+cAXkyJoBu7VQabcaSduAfcPr4dyR9HsEFF+fcZr5rM2
+ rkv2xCyOWupjRv7lZ1YAamPmGbvHOwfESemc2wrST5KM2LrcLmAIQ39o23eNExlyWODBshLJ5sA
+ L
+X-Google-Smtp-Source: AGHT+IEwA5IIGK8Ntj4pY3OKur9hgnatSD0Zvsgj2bPfymSZRaZEYbIBaAR6rqAUL6tg1xF3ewHPKg==
+X-Received: by 2002:a05:6808:22a5:b0:3f8:acb4:8d8e with SMTP id
+ 5614622812f47-4024397f419mr2621228b6e.39.1746032621252; 
+ Wed, 30 Apr 2025 10:03:41 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b1315cfsm950880a34.34.2025.04.30.10.01.39
+ 5614622812f47-402e1c102c8sm456111b6e.16.2025.04.30.10.03.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 10:01:40 -0700 (PDT)
-Date: Wed, 30 Apr 2025 11:01:37 -0600
+ Wed, 30 Apr 2025 10:03:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Daniel Golle <daniel@makrotopia.org>, Simon Glass <sjg@chromium.org>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20250430170137.GW1261075@bill-the-cat>
-References: <20250428215930.GI5495@bill-the-cat>
- <19a791c9-19b9-47cd-9444-24846ae5c222@denx.de>
+To: u-boot@lists.denx.de, tudor.ambarus@linaro.org, j-humphreys@ti.com, 
+ marex@denx.de, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com, 
+ u-kumar1@ti.com, seanga2@gmail.com, sjg@chromium.org, 
+ william.zhang@broadcom.com, stefan_b@posteo.net, quentin.schulz@cherry.de, 
+ Takahiro.Kuwano@infineon.com, p-mantena@ti.com, git@amd.com, 
+ Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250327070443.680972-1-venkatesh.abbarapu@amd.com>
+References: <20250327070443.680972-1-venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH] mtd: spi-nor: Add NO_CHIP_ERASE flag for mt35xu01g/2g
+Message-Id: <174603261932.1760506.12956253964341895463.b4-ty@konsulko.com>
+Date: Wed, 30 Apr 2025 11:03:39 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w6s+cFGhjHCl/ow2"
-Content-Disposition: inline
-In-Reply-To: <19a791c9-19b9-47cd-9444-24846ae5c222@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,120 +100,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 27 Mar 2025 12:34:43 +0530, Venkatesh Yadav Abbarapu wrote:
 
---w6s+cFGhjHCl/ow2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Since the opcode SPINOR_OP_CHIP_ERASE (0xc7) is not supported
+> for the mt35xu01g/2g flashes, the NO_CHIP_ERASE flag has been added
+> to enable sector erase functionality instead.
+> 
+> 
 
-On Wed, Apr 30, 2025 at 06:50:50PM +0200, Marek Vasut wrote:
-> On 4/28/25 11:59 PM, Tom Rini wrote:
->  > ______________________________________________________________________=
-__________________________________
-> > *** CID 550306:  Control flow issues  (DEADCODE)
-> > /fs/exfat/io.c: 547 in exfat_generic_pwrite()
-> > 541             int rc;
-> > 542             cluster_t cluster;
-> > 543             const char* bufp =3D buffer;
-> > 544             off_t lsize, loffset, remainder;
-> > 545
-> > 546             if (offset < 0)
-> > > > >      CID 550306:  Control flow issues  (DEADCODE)
-> > > > >      Execution cannot reach this statement: "return -22L;".
-> > 547                     return -EINVAL;
-> > 548             if (uoffset > node->size)
-> > 549             {
-> > 550                     rc =3D exfat_truncate(ef, node, uoffset, true);
-> > 551                     if (rc !=3D 0)
-> > 552                             return rc;
->=20
-> This one is I think false positive, off_t can be signed integer, so the
-> check should be in place.
+Applied to u-boot/master, thanks!
 
-I've updated Coverity with this comment.
-
-> > ** CID 550305:  Security best practices violations  (STRING_OVERFLOW)
-> > /fs/exfat/io.c: 739 in exfat_fs_opendir()
-> >=20
-> >=20
-> > _______________________________________________________________________=
-_________________________________
-> > *** CID 550305:  Security best practices violations  (STRING_OVERFLOW)
-> > /fs/exfat/io.c: 739 in exfat_fs_opendir()
-> > 733                     return err;
-> > 734
-> > 735             dirs =3D calloc(1, sizeof(*dirs));
-> > 736             if (!dirs)
-> > 737                     return -ENOMEM;
-> > 738
-> > > > >      CID 550305:  Security best practices violations  (STRING_OVE=
-RFLOW)
-> > > > >      You might overrun the 1024-character fixed-size string
-> > "dirs->dirname" by copying "filename" without checking the length.
-> > 739             strcpy(dirs->dirname, filename);
-> > 740             dirs->offset =3D -1;
-> > 741
-> > 742             *dirsp =3D &dirs->fs_dirs;
-> > 743
-> > 744             return 0;
-> >=20
-> > ** CID 550304:  Error handling issues  (NEGATIVE_RETURNS)
-> > /tools/fit_check_sign.c: 98 in main()
->=20
-> Fixed:
->=20
-> https://patchwork.ozlabs.org/project/uboot/patch/20250430164559.27095-1-m=
-arex@denx.de/
->=20
-> > _______________________________________________________________________=
-_________________________________
-> > *** CID 550300:  Integer handling issues  (INTEGER_OVERFLOW)
-> > /fs/exfat/utils.c: 146 in exfat_humanize_bytes()
-> > 140             /* 16 EB (minus 1 byte) is the largest size that can be
-> > represented by
-> > 141                uint64_t */
-> > 142             const char* units[] =3D {"bytes", "KB", "MB", "GB", "TB=
-",
-> > "PB", "EB"};
-> > 143             uint64_t divisor =3D 1;
-> > 144             uint64_t temp =3D 0;
-> > 145
-> > > > >      CID 550300:  Integer handling issues  (INTEGER_OVERFLOW)
-> > > > >      Expression "divisor", overflows the type of "divisor", which=
- is
-> > type "uint64_t".
-> > 146             for (i =3D 0; ; i++, divisor *=3D 1024)
-> > 147             {
-> > 148                     temp =3D (value + divisor / 2) / divisor;
-> > 149
-> > 150                     if (temp =3D=3D 0)
-> > 151                             break;
-> Fixed:
->=20
-> https://patchwork.ozlabs.org/project/uboot/patch/20250430164559.27095-2-m=
-arex@denx.de/
-
-Thanks!
-
---=20
+[1/1] mtd: spi-nor: Add NO_CHIP_ERASE flag for mt35xu01g/2g
+      commit: 299371dc8ea1e777b12a1e7c95fc8f9c1d9542ee
+-- 
 Tom
 
---w6s+cFGhjHCl/ow2
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgSV24ACgkQFHw5/5Y0
-tyyNKgv9GyLGybk3Ai2WsvH6QbidP/BAl8KyVcekQ+7GrjQibprzP8CV/6IilC+x
-q7wzFE7zPRXxaa48TVWTQ8FjUz2N7A2whLspqQJJYpr17Pcb21SuTgvh6Rj8A3v7
-qbpFpIkN0FcYbqD+z8Xx0PRdhDg6ZGUnUV9WJAXNOqKLcrsnsiUtaiQLwed0PSrr
-3EMpdlRqARpnAmdCbKvkGu8OfULMG/05UphU2r1FMuZe6aiYviKEB12ZGuhf5vnT
-RIt1oK4FHPCfxC95r9zbjRP6ymxRV6owdwHgS4+imN/YHG2kwfe9Z61i9Mc+xLKr
-7qtlGpIKDNg9brtgqAWfbLM9rOGVfa2PM8Ahb+FvYXxVQoINZLF2BdfnV7A8DXyF
-7F/AxPP5CDnnnHF5ZGpeMAlEDwU7KygjZZJbdpUdvVBazytft+NCx+GYBrd3FCe/
-pA2BGfsilUdumIfioGn4twhPjJ1ZKm4N+u9pFvrJE+jPF+zjO+BGUjt1DZ7lwbv/
-BazDGzNh
-=6S1g
------END PGP SIGNATURE-----
-
---w6s+cFGhjHCl/ow2--
