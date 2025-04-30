@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C83CCC3ABA9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D49C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 15:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DCE48215F;
-	Wed, 30 Apr 2025 16:58:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5DEBE8215F;
+	Wed, 30 Apr 2025 17:00:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WUyjzC+k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nFwWbPo+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B37682BA1; Wed, 30 Apr 2025 16:58:08 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 2122782B97; Wed, 30 Apr 2025 17:00:38 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37B658215F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:58:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBF1A8215E
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 17:00:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e63162a0so11045443a12.3
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:58:06 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ac289147833so48014266b.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 08:00:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746025086; x=1746629886; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dXrn6uAORWC0kFHU+hAiId/YfqMcs+j2y8P/IViAPVM=;
- b=WUyjzC+kl7liSkhZpjUBDriLen96AZFUenaPH+hvtjoD1NYFkXE6MEWdwm0rOwZ446
- HybY+51x5FU9SGAi1CGM2Veyqyw7saO0XzHj3OjuiI1UiqvQie8N1GDx9MScO456oi2j
- o+lK2hZ8Itqgege3Mr2S3NO4z/1rCKgCbB8yt4+KTyGksL8uYwIFcZGiCVLROQeWpyqM
- iqm62cfeX1Rzy4eu0vnX62l2/hbhSRlX32ji1mq18/+nLActS+jrsvoPW1oZ9uwLbeOf
- 8jP1mYNWsI42QJcHVvThT5q9VbHzOKA4toT20dnHaW2obQhvI1CPAzSpRlc+gncFq3Hi
- CRjw==
+ d=chromium.org; s=google; t=1746025235; x=1746630035; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MkGO7Z0BQQ/tCfCi1UzumUxGDzHudc1umE1eMuosTJE=;
+ b=nFwWbPo+p+jRoxqKsCHWc09MlLSYqOZUL3QCYRwUhBUh/5fr4tHiVtihANt/NxbeyV
+ aE36COAW1qOGXWE3O7CHdZcdRb6yCC80Ks/g7ZppQpd1MKVGkCc3M2r1/+Q+1221eVad
+ RRDtVCw2PHVO9UJ1tlvfWOXFwWM0kiIU51gMI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746025086; x=1746629886;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dXrn6uAORWC0kFHU+hAiId/YfqMcs+j2y8P/IViAPVM=;
- b=RKe+3bJX/iokf2uLTFFSFx80mMwiKPzJzYZXiIXjaH+4jrQAfsbgSZUVJKvk3HKTjj
- v2efdxktWfMWA0jMO8+kk/t+4ipM8Yh9Y43uR4SgIB40nwg5Xtdpw3rjXdOxl1Ro5eOX
- s8dGpl2Zngx11bg+BrcVKWU6Ijr1wVg/5y1OI6HO8CpiHNF0Kas+HMmDgb5yYBqDcKyq
- omE2utHdjtNiFzZ8IurRQ3k/QvsYsHNcgV1JLtACkes1wPa3/S1WBjRN8Fn/ANzIMVEb
- 0uAjjBctofKmE0u14xdTb2CwXT9gW8JrI5h5Ha+X7VLzCig9LJYEQltxIfZ9n/5UAUD3
- jrcw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxW5RaOYjDYkvt9oae41grKS/vexZAc8cZQsKqpSqQ0so4LorY4q1fpV3y21uI9kORx5DSp9M=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywll7mCxyPdtzWPERfi3Ffinj5j+MOdQAcZhADBEruhaAHEoai7
- fn7JNej3jgVGyC9Eu7iYCuJac/DeCMhkkG2vVUe2LG5nlM5mwv+sKUb8x9wq6qc=
-X-Gm-Gg: ASbGncvvyEibudOB0T/u4QVISu9XvHvgV7AqTLshLW2Fe9Hp1863uCZtSrDJI52rBvO
- BxL3mYFgYKLNEYBlKy8zEfbKty/VnIGCLOxcrWs5eVkZhoCzNh7Ok2bkyFps5kH+igVkI66dhut
- XkcBBFpB8kDFvzWml/wCX/3Hc8LGaq1xKe7HXgp+J3Ro4mfzDCBl/W6LxJw0iCm+dUG/ZiAwVpI
- 9s2BOhQL6JbVeQkFFCMnoFknd91+cjfcpsBFYuAqNccISn/DU2McTn9SlaIlhpS1BGoZufaPABU
- DhDRS1x/PR6skGf9RCECTKHhlee+RyKdjyUrnN/dI6carqXg9fMCtM/xQY6NzBJH4kHzt8qsNGD
- ghPMEkyOOgKkLAmCppcXN
-X-Google-Smtp-Source: AGHT+IF7CleV8vDeAB2p3UzsmqgGDACRSggsmP63iVZKmT91g6wih68y/kfIhoKhihj/nRbmTqV9Ww==
-X-Received: by 2002:a05:6402:26d4:b0:5f6:c4ed:e270 with SMTP id
- 4fb4d7f45d1cf-5f89ab6617dmr3225508a12.3.1746025085424; 
- Wed, 30 Apr 2025 07:58:05 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:b269:e2f0:3646:3c73?
- ([2a01:e0a:3cb:7bb0:b269:e2f0:3646:3c73])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f7038323c1sm8764466a12.68.2025.04.30.07.58.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Apr 2025 07:58:05 -0700 (PDT)
-Message-ID: <51f0400b-d720-4a34-b338-14222c8cc4b5@linaro.org>
-Date: Wed, 30 Apr 2025 16:58:04 +0200
+ d=1e100.net; s=20230601; t=1746025235; x=1746630035;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MkGO7Z0BQQ/tCfCi1UzumUxGDzHudc1umE1eMuosTJE=;
+ b=V8mXGWKd7Hd28BDwGl6QsYGwm7B+kkw1zt3fLjHybxUVxy1zU/2DxhW099vYq91B9s
+ pF+vd9TCce/ekgJtP9H5B+/NOafIv0aTSFIS47SBvqcz/UlG/U90+aQP6ioSvFEhjhhr
+ 3AiUlMhO4VecK87DFaVcYQGdPdOAH7/glFN57Q0AS6VTJXafACNQvPvdoQpNgJcEEMQR
+ eCEhXhPiyvy4GQDsO67y5G7udzuC2UEKLXyj9G4LQ0tV7slTy715L/qj+gTeSeyiG7Yh
+ 12t80bog6K3ClKRBLVnuYuB7M/ODFSqV09XBl/rW5SXsIkPQTIUbiatJUMFxLgibudZg
+ tN1w==
+X-Gm-Message-State: AOJu0YyGqGsz43uvjV54CTOv0TJh81iF5SGo4n+wP+FR9ZpJXfMNG6Az
+ O+1H2WiHdELzB1fowaTQ0CkGzs6/9Kbv8vOtwB/qdOPNRZpnQjg5r0Gb/dYsbKzLTKU0oOUYFnA
+ IcZz4Lpln5SIUf0m/C/n2u5VVjM9VGwfQn6bS
+X-Gm-Gg: ASbGnct94R5SkKhCCKPhZL+iCPSNO3CnFlhsnweHFhlHLUQtA39Q5gkt6pbs2FkjpFp
+ jJDIWULRzNg4n0TGj8Q47C7oW/zEI2vZaa8AculUYa8+Rf18cg3g1umFmi/o+lJElbpMP4f4y9t
+ 0CfPOGpIEUKddEs6V1SgNCuxc=
+X-Google-Smtp-Source: AGHT+IE+zAUd2UE8ud+GDVLgSX6w91/ct/CsadePLJ3dhSgaRLun2cuwwyEkTSjEUDGWEKD5Z9DUh1A3Lun0xFa7PsA=
+X-Received: by 2002:a17:907:9605:b0:ace:4fcf:702b with SMTP id
+ a640c23a62f3a-acee21e30d9mr307641766b.28.1746025235195; Wed, 30 Apr 2025
+ 08:00:35 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] net: Move env_get_ip() out of the header file
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>
-References: <20250430144014.1698011-1-sjg@chromium.org>
- <20250430144014.1698011-2-sjg@chromium.org>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250430144014.1698011-2-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250429132239.251756-1-sjg@chromium.org>
+ <20250429134846.GA1261075@bill-the-cat>
+ <CAFLszTgrJvgWJaCXFgefJ1bObsrGfZa6AC8C6ypFRKJQTWm5ZQ@mail.gmail.com>
+ <20250429145347.GG1261075@bill-the-cat>
+ <CAFLszTjG4-3hjD2c4O7XaCQVheiY050rsVEh1RTyVH7QXYatTg@mail.gmail.com>
+ <20250430142142.GP1261075@bill-the-cat>
+In-Reply-To: <20250430142142.GP1261075@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 30 Apr 2025 09:00:23 -0600
+X-Gm-Features: ATxdqUFSAOqn2cldmUhQxbJ9zAJz3GS1IQCHGC9GJoqgSfoZqFaQ6Fw7qLLRUYk
+Message-ID: <CAFLszTi5jq0gA1GZZ6BudWA5z7TpGOS5amfPUKNXo-AGy_iXhQ@mail.gmail.com>
+Subject: Re: [PATCH 00/30] patman: Move to asyncio and other updates
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ Douglas Anderson <dianders@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Leonard Anderweit <l.anderweit@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,68 +106,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On Wed, 30 Apr 2025 at 08:21, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Apr 30, 2025 at 07:54:11AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 29 Apr 2025 at 08:53, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Apr 29, 2025 at 08:35:24AM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 29 Apr 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Apr 29, 2025 at 07:21:57AM -0600, Simon Glass wrote:
+> > > > >
+> > > > > > This series moves patman to use asyncio instead of ThreadPoolExecutor
+> > > > > > since it makes it easier to handle requests sent from different parts
+> > > > > > of the code.
+> > > > > >
+> > > > > > It also includes some updates to bring patman in line with the other
+> > > > > > major Python tools (buildman and binman).
+> > > > > >
+> > > > > > With this series, we have a better basis to add support for syncing more
+> > > > > > data from a patchwork server.
+> > > > > >
+> > > > > > After this, the next step it to add a new 'patman series' subcommand, to
+> > > > > > track and manage series workflow.
+> > > > >
+> > > > > This conflicts with master, please rebase this if you intend for it to
+> > > > > be merged to mainline.
+> > > >
+> > > > I will take a look and see what patches my tree is missing.
+> > > >
+> > > > >  And to avoid confusion, while I think managing
+> > > > > these python projects in this manner (and not AFAICT following python
+> > > > > best practices) makes life harder for everyone else, that is not me
+> > > > > NAK'ing taking more patches, I continue to be compromising and "Saying
+> > > > > Yes" to things you do that I disagree with on non-arbitrary technical
+> > > > > grounds.
+> > > >
+> > > > I'm open to managing them in my tree if that helps. For now it seems
+> > > > like too much work to manage them separately, but if someone wants to
+> > > > volunteer to help, I could do it.
+> > >
+> > > Again, if you won't manage them standalone as seems to be normal best
+> > > practice,
+> >
+> > I wonder whether that was intended to throw shade at my approach, but
+> > if so I'll let it go.
+> >
+> > Anyway, I don't completely understand the best-practice argument,
+> > although I am open to it. It is extra work to set up CI, etc, but
+> > probably not a huge amount. If I get keen one day perhaps I will take
+> > a look. Just so many things on my plate already, as you know.
+>
+> I'm the one who approved putting all of these tools in the main
+> repository initially. And I've griped in public more than once about
+> Python (not, you, Python) being less than ideal at times due to seeingly
+> ever-shifting best practices. I however make the "Python best practices"
+> argument because if we want to attract more developers to help with a
+> thing, we need to develop the thing following language specific best
+> practices.
+>
+> And I honestly believe it would be *less* work for you overall since
+> there's countless tutorials on setting up all of the automated CI/CD
+> stuff and you could just put it on public git forge and use their
+> regular CI/CD flows.
 
-On 4/30/25 16:40, Simon Glass wrote:
-> This function requires access to env.h but it is a lot to include just
-> for the env_get() function. It eventually pulls in linux/byteorder which
-> causes a conflict with exfat which has its own byteorder functions.
-> 
-> Move the function to a C file instead.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  include/net-common.h | 6 +-----
->  net/net-common.c     | 6 ++++++
->  2 files changed, 7 insertions(+), 5 deletions(-)
-> 
-> diff --git a/include/net-common.h b/include/net-common.h
-> index f2613a41ad8..64b475b7292 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -4,7 +4,6 @@
->  #define __NET_COMMON_H__
->  
->  #include <asm/cache.h>
-> -#include <env.h>
->  #include <hexdump.h>
->  #include <linux/if_ether.h>
->  #include <linux/sizes.h>
-> @@ -464,10 +463,7 @@ int update_tftp(ulong addr, char *interface, char *devstring);
->   *	0 to 255
->   * Return: IP address, or 0 if invalid
->   */
-> -static inline struct in_addr env_get_ip(char *var)
-> -{
-> -	return string_to_ip(env_get(var));
-> -}
-> +struct in_addr env_get_ip(char *var);
->  
->  int net_init(void);
->  
-> diff --git a/net/net-common.c b/net/net-common.c
-> index 45288fe5f80..9ff06b165df 100644
-> --- a/net/net-common.c
-> +++ b/net/net-common.c
-> @@ -1,4 +1,5 @@
->  // SPDX-License-Identifier: GPL-2.0
-> +#include <env.h>
->  #include <net-common.h>
->  
->  void copy_filename(char *dst, const char *src, int size)
-> @@ -25,3 +26,8 @@ int wget_request(ulong dst_addr, char *uri, struct wget_http_info *info)
->  	wget_info = info ? info : &default_wget_info;
->  	return wget_with_dns(dst_addr, uri);
->  }
-> +
-> +struct in_addr env_get_ip(char *var)
-> +{
-> +	return string_to_ip(env_get(var));
-> +}
+It would have to be gitlab, I think. The common files in u_boot_pylib
+would be a bit annoying (would need to be a fourth repo I suppose).
+Yes, I could set up an automatic release instead of typing 'make
+pip_release', which would be nice.
 
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
-
-Thanks,
--- 
-Jerome
+Regards,
+Simon
