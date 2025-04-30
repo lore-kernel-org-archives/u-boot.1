@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56AD6C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:58:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C83CCC3ABA9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:58:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5A208215E;
-	Wed, 30 Apr 2025 16:57:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2DCE48215F;
+	Wed, 30 Apr 2025 16:58:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cHjK6App";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WUyjzC+k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1563A8215F; Wed, 30 Apr 2025 16:57:58 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 3B37682BA1; Wed, 30 Apr 2025 16:58:08 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E304D8210F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:57:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37B658215F
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:58:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5f6c3f7b0b0so13810026a12.0
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:57:55 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e63162a0so11045443a12.3
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:58:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746025075; x=1746629875; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1746025086; x=1746629886; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=CsfOfnxTLsj8CKus/aD3W2fIg7OlIKV0+V8fn0r09iM=;
- b=cHjK6AppHFIbonRKsLMgf/yeFqQN8gmU1y8Jco14ArlgU5LiJyLi92IyUvva9hXU1u
- gnt03gnakO0Qmv7m9sCm+C6sABB6H5hcjApD+VGW7LQwfxC4P1V4i+nX3VxzrC+I12+Y
- AmG8xD7AJwV06tY1uP5fr/SM/HOEBqbVJQgrx9kaSOVMRLBKWuxrfj8+RGnccYWmK7Gs
- O4+pbI3fgyfdC0gv/6joxQpLOqTMqhFsLE3fnA83b1I/HAt1NHwI3yqr13eFnjB8annK
- /GiOS0wKY6H6+RfiMvUsLx+9dO9WESXbjUFjYXgsac0xUz24/fTftw4EcdGLlMAVy2g/
- duqw==
+ bh=dXrn6uAORWC0kFHU+hAiId/YfqMcs+j2y8P/IViAPVM=;
+ b=WUyjzC+kl7liSkhZpjUBDriLen96AZFUenaPH+hvtjoD1NYFkXE6MEWdwm0rOwZ446
+ HybY+51x5FU9SGAi1CGM2Veyqyw7saO0XzHj3OjuiI1UiqvQie8N1GDx9MScO456oi2j
+ o+lK2hZ8Itqgege3Mr2S3NO4z/1rCKgCbB8yt4+KTyGksL8uYwIFcZGiCVLROQeWpyqM
+ iqm62cfeX1Rzy4eu0vnX62l2/hbhSRlX32ji1mq18/+nLActS+jrsvoPW1oZ9uwLbeOf
+ 8jP1mYNWsI42QJcHVvThT5q9VbHzOKA4toT20dnHaW2obQhvI1CPAzSpRlc+gncFq3Hi
+ CRjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746025075; x=1746629875;
+ d=1e100.net; s=20230601; t=1746025086; x=1746629886;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CsfOfnxTLsj8CKus/aD3W2fIg7OlIKV0+V8fn0r09iM=;
- b=wQ6gcywEYMZNavwFzXYv8DV4sodmgftnsQh2s9uTH3yO4xl91XLQ15olMnr1wXZPgu
- psk6iEukWXRv81T4IuT1xoraf1R6XIzAipMy1GWsMB7RacQl/F/nkpJ4V4XMr7iBUbQa
- 2oyMNljGqChKbIft66qISV3D5c5DG4ZSGVp77yipewrxDf5MbWFGkYOXeIhADbDFbGbF
- swi8Cy2dboTdY6/oM2/5accBvyEeYbYz2GcBBwIpMO8FE31sKvMMZKtthMvennKdR+rt
- 5ooqxw3TAWSBJR90CcwfPFnwaZbHlubtjtvOR2x30eeM1DwDzWzYBbNPIvOdZi/VffQq
- KVIg==
+ bh=dXrn6uAORWC0kFHU+hAiId/YfqMcs+j2y8P/IViAPVM=;
+ b=RKe+3bJX/iokf2uLTFFSFx80mMwiKPzJzYZXiIXjaH+4jrQAfsbgSZUVJKvk3HKTjj
+ v2efdxktWfMWA0jMO8+kk/t+4ipM8Yh9Y43uR4SgIB40nwg5Xtdpw3rjXdOxl1Ro5eOX
+ s8dGpl2Zngx11bg+BrcVKWU6Ijr1wVg/5y1OI6HO8CpiHNF0Kas+HMmDgb5yYBqDcKyq
+ omE2utHdjtNiFzZ8IurRQ3k/QvsYsHNcgV1JLtACkes1wPa3/S1WBjRN8Fn/ANzIMVEb
+ 0uAjjBctofKmE0u14xdTb2CwXT9gW8JrI5h5Ha+X7VLzCig9LJYEQltxIfZ9n/5UAUD3
+ jrcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFbmbRYgobm18q6DEEo7w4fbUMK5HCLKab1t/CIW0/Sulf6E7baUb9bVzy/LnnVboqCqOELgM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3NJ+oigw5fjl/lIivAoCaIFNHBRUBi9ZGkGpQvcW5dbGF8jZO
- NXzW3eHB3KTXtYk3Ov8W1ykDA6SCsR5b/njNLxnPIiIXK8CEIQa7R3FONDZq4zeZnClY9ioM9+v
- fIsY=
-X-Gm-Gg: ASbGncud3E/HtRCqTWv/SaNquO8I10OWdTgOIFWPPbvLKhKjQwBhzFoEAc8cPZPdI7y
- GytdmdhO47pxM2W/0lYd8nskkdkUiDr1GyV6pZUQBfUW1MzIvmDjBDNSceVoK6wW8EMghP1eh1Z
- oXGENyIjmc0jYTafdu8M/+RI7Urb8R6jQD067ygua8tdpDTNXkF3+gUoz0y6iJ2LeX7mFg2+eaR
- NGibcA1KWlD/LBzjcx0vCvMjzCHyH5G0cFZ4Fi7iMOMvDwvKl5rRMFZa4fDqicAxNVbvRzS8qvR
- xJEG1jNbKudFcGoXlcGnqcOiqt/u/tivluGyi0dbNETgoImpJuuwBdRHN6kXs9F9vQ+ADyBzTxj
- lGzrqXkB+m580+5fwzPIT
-X-Google-Smtp-Source: AGHT+IFdWyc1Us1mLFcLFXR9zkp5n6VSxfH7a6qxWqexRiF2QTvK8YEoc8H35HmJ9QkOKHXcZ496qA==
-X-Received: by 2002:a05:6402:2353:b0:5f7:eaf0:8826 with SMTP id
- 4fb4d7f45d1cf-5f89b254f87mr2917488a12.16.1746025075361; 
- Wed, 30 Apr 2025 07:57:55 -0700 (PDT)
+ AJvYcCVxW5RaOYjDYkvt9oae41grKS/vexZAc8cZQsKqpSqQ0so4LorY4q1fpV3y21uI9kORx5DSp9M=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywll7mCxyPdtzWPERfi3Ffinj5j+MOdQAcZhADBEruhaAHEoai7
+ fn7JNej3jgVGyC9Eu7iYCuJac/DeCMhkkG2vVUe2LG5nlM5mwv+sKUb8x9wq6qc=
+X-Gm-Gg: ASbGncvvyEibudOB0T/u4QVISu9XvHvgV7AqTLshLW2Fe9Hp1863uCZtSrDJI52rBvO
+ BxL3mYFgYKLNEYBlKy8zEfbKty/VnIGCLOxcrWs5eVkZhoCzNh7Ok2bkyFps5kH+igVkI66dhut
+ XkcBBFpB8kDFvzWml/wCX/3Hc8LGaq1xKe7HXgp+J3Ro4mfzDCBl/W6LxJw0iCm+dUG/ZiAwVpI
+ 9s2BOhQL6JbVeQkFFCMnoFknd91+cjfcpsBFYuAqNccISn/DU2McTn9SlaIlhpS1BGoZufaPABU
+ DhDRS1x/PR6skGf9RCECTKHhlee+RyKdjyUrnN/dI6carqXg9fMCtM/xQY6NzBJH4kHzt8qsNGD
+ ghPMEkyOOgKkLAmCppcXN
+X-Google-Smtp-Source: AGHT+IF7CleV8vDeAB2p3UzsmqgGDACRSggsmP63iVZKmT91g6wih68y/kfIhoKhihj/nRbmTqV9Ww==
+X-Received: by 2002:a05:6402:26d4:b0:5f6:c4ed:e270 with SMTP id
+ 4fb4d7f45d1cf-5f89ab6617dmr3225508a12.3.1746025085424; 
+ Wed, 30 Apr 2025 07:58:05 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:b269:e2f0:3646:3c73?
  ([2a01:e0a:3cb:7bb0:b269:e2f0:3646:3c73])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f7ec0e6331sm5216650a12.78.2025.04.30.07.57.54
+ 4fb4d7f45d1cf-5f7038323c1sm8764466a12.68.2025.04.30.07.58.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Apr 2025 07:57:55 -0700 (PDT)
-Message-ID: <d9552c81-6139-4098-a9a1-94d8376ae1cf@linaro.org>
-Date: Wed, 30 Apr 2025 16:57:54 +0200
+ Wed, 30 Apr 2025 07:58:05 -0700 (PDT)
+Message-ID: <51f0400b-d720-4a34-b338-14222c8cc4b5@linaro.org>
+Date: Wed, 30 Apr 2025 16:58:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] net: Use a forward declaration for cmd_tbl in
- net-common.h
+Subject: Re: [PATCH 2/2] net: Move env_get_ip() out of the header file
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ramon Fried <rfried.dev@gmail.com>
 References: <20250430144014.1698011-1-sjg@chromium.org>
+ <20250430144014.1698011-2-sjg@chromium.org>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250430144014.1698011-1-sjg@chromium.org>
+In-Reply-To: <20250430144014.1698011-2-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -110,39 +110,62 @@ X-Virus-Status: Clean
 
 
 On 4/30/25 16:40, Simon Glass wrote:
-> We don't need to include command.h just for this declaration. It
-> eventually pulls in linux/byteorder which causes a conflict with exfat
-> which has its own byteorder functions.
+> This function requires access to env.h but it is a lot to include just
+> for the env_get() function. It eventually pulls in linux/byteorder which
+> causes a conflict with exfat which has its own byteorder functions.
 > 
-> Use a forward declaration instead.
+> Move the function to a C file instead.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
->  include/net-common.h | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  include/net-common.h | 6 +-----
+>  net/net-common.c     | 6 ++++++
+>  2 files changed, 7 insertions(+), 5 deletions(-)
 > 
 > diff --git a/include/net-common.h b/include/net-common.h
-> index 12c50e2a41e..f2613a41ad8 100644
+> index f2613a41ad8..64b475b7292 100644
 > --- a/include/net-common.h
 > +++ b/include/net-common.h
 > @@ -4,7 +4,6 @@
 >  #define __NET_COMMON_H__
 >  
 >  #include <asm/cache.h>
-> -#include <command.h>
->  #include <env.h>
+> -#include <env.h>
 >  #include <hexdump.h>
 >  #include <linux/if_ether.h>
-> @@ -13,6 +12,8 @@
->  #include <rand.h>
->  #include <time.h>
+>  #include <linux/sizes.h>
+> @@ -464,10 +463,7 @@ int update_tftp(ulong addr, char *interface, char *devstring);
+>   *	0 to 255
+>   * Return: IP address, or 0 if invalid
+>   */
+> -static inline struct in_addr env_get_ip(char *var)
+> -{
+> -	return string_to_ip(env_get(var));
+> -}
+> +struct in_addr env_get_ip(char *var);
 >  
-> +struct cmd_tbl;
+>  int net_init(void);
+>  
+> diff --git a/net/net-common.c b/net/net-common.c
+> index 45288fe5f80..9ff06b165df 100644
+> --- a/net/net-common.c
+> +++ b/net/net-common.c
+> @@ -1,4 +1,5 @@
+>  // SPDX-License-Identifier: GPL-2.0
+> +#include <env.h>
+>  #include <net-common.h>
+>  
+>  void copy_filename(char *dst, const char *src, int size)
+> @@ -25,3 +26,8 @@ int wget_request(ulong dst_addr, char *uri, struct wget_http_info *info)
+>  	wget_info = info ? info : &default_wget_info;
+>  	return wget_with_dns(dst_addr, uri);
+>  }
 > +
->  #define DEBUG_NET_PKT_TRACE 0	/* Trace all packet data */
->  
->  /*
+> +struct in_addr env_get_ip(char *var)
+> +{
+> +	return string_to_ip(env_get(var));
+> +}
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
