@@ -4,63 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1BC7C3ABA9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 13:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C50C3ABA9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 690BB8081A;
-	Wed, 30 Apr 2025 15:58:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E816F8081A;
+	Wed, 30 Apr 2025 16:01:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uy6KxM1J";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cmueGyZN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BA0781E72; Wed, 30 Apr 2025 15:58:20 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DE50807B1
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 15:58:16 +0200 (CEST)
+ id 93F8C820E2; Wed, 30 Apr 2025 16:01:29 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 39583807B1
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53UDwEuv4141793
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 30 Apr 2025 08:58:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746021494;
- bh=22tt7uspQQzJsrWzVNT9AK91ual5bv0oh1talbSaxok=;
- h=From:To:CC:Subject:Date;
- b=uy6KxM1J5q+BaDc8fAXKj88SUOPmLUIJ1LuWVoxMzcLa9SyPO5rfgaSwBlmFUK9F+
- dwhw4DZq2cBwQaraDMDD4BmUY+6YzOLSjFZ4Z+kvIaEpSp94rIC2gwQx/679f1pkB0
- 8l655lxwc+DhEWQHoe8EvBAspH15vQG67/+y98K4=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53UDwEGi100772
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 30 Apr 2025 08:58:14 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
- Apr 2025 08:58:14 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 30 Apr 2025 08:58:14 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53UDwDq6011863;
- Wed, 30 Apr 2025 08:58:13 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH v1] arm: add call to cleanup_before_linux for go command
-Date: Wed, 30 Apr 2025 19:27:50 +0530
-Message-ID: <20250430135751.2626849-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-72c09f8369cso2021081a34.3
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:01:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1746021686; x=1746626486; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=givJM5CYTZcU39HoIjqNenTGD+ULQw27+SNCLe/2PNw=;
+ b=cmueGyZNMjuDrs8bilrAjq3YIEQ9ZN1+jpZU9Jx7gx1Ktf9epdewONFvQqBfyFeX9X
+ WmfFQ4XkmzvDvU5jypj4imLtK4d0R7j+nnD8GDpdF3D2qkJWmsr6UJx1fcNkPwFUGH5Y
+ fygfCl08x6o+zx6F2LkaMQnhLxj1G5HTKTezN8YuJ3ha9kykHT9md1CtKlOkWzH3/vMr
+ jGIaqixzf4CwhEVfWAQDclLGkiyhIaYUq167x4qqqCWye2Ok3zCtPykobQwGvVSp3/Pb
+ WCkwid+3rvD+L5kqwnJ6VJYtVa7z6hRS9R0PBt4sgqrH47qxrH6O31FrYGNzsAswCsY/
+ d45A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746021686; x=1746626486;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=givJM5CYTZcU39HoIjqNenTGD+ULQw27+SNCLe/2PNw=;
+ b=AfrIjWKos0Qrol24TmCcf45Hjb/fu7I3XSPfIplBdvXc1St/N3yPqeDH1YJqbdrPPJ
+ aE1BIkoItskka4b/E69xSgcfIeQRcqDt2QFWuJ91L/9uklJDpNiIQP8MmnwD4paD6uZo
+ XLu3IlhzZLrfcnG1CVDtgtmtO0EHk9+lNKGofGEvtTtrL+yvi8wLJ5hvPjvNf0nNIFdC
+ +zsEmPo/t7VVzGMN14vFnKYqfquxCd/LVpzkEzoIbw/Ri4bgV0HFEfq0x2fSCzaZ9xBC
+ Cuzbe+ydC6kEzZ+tT4bQ3yYK0bdgFPlU1X0Et+1TPZagxZaA6yrO6BVC0bluFQETPc2e
+ jbQQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWxpYTS5wS0ujwP7sjO1DoF9Ayo2GnWi1dxCT6DW0hn4ZJv3FqI+lni/oPoVKN7xMVPDDADPCM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxY2uwRHmgelxWL7wz+KRzH9F+FRDjJ8yh3xy+k4mBQ3MxVm+0L
+ JCdlqq1GuUtrpldRTKJbxRLwo6aRsIHLWopQyULO3rg2fphb/MvLQHqGTG699q+ug4T0zNLSfLl
+ sX9kivaW7mh1rwncX3iiJcBQC5dZYuUyBCBbMFA==
+X-Gm-Gg: ASbGnctOQcPK5RUnE+szhgCOlmJx/dbgkepF2pVnxccNT5/buM4Pjt9tS5a8IMkKgTz
+ bqECxQysO03p9fzfsNocx9K7xM45f8iIcmaVYX2kuahXiIMb9qU9cNgKJlHmMZDIxIsUG6Ds9wH
+ YT0AsDCeAz2PvXgXrlfaLdkHc=
+X-Google-Smtp-Source: AGHT+IGII8vmvlNAXBn3I33VV1cqKLJn3e5wLuoorNXFD68IVEqD3Gb03GasONafJYLuAkBFkhvEOsodVbg6j6/2qbY=
+X-Received: by 2002:a05:6830:4990:b0:72b:80b4:dbca with SMTP id
+ 46e09a7af769-731c09deaccmr2269072a34.5.1746021685632; Wed, 30 Apr 2025
+ 07:01:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
+In-Reply-To: <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 30 Apr 2025 17:00:49 +0300
+X-Gm-Features: ATxdqUGkxaFOEowoQ3s3nZ1MOLCOuietHYCasw-qpWSUrybn2SP-6lIG0fNJH80
+Message-ID: <CAC_iWjLvCxHAb2yzpgqYL2PBT=iC-_bhKQe_h=3Pb1xc2UZBEQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] bootm: pass kernel load address not entry point for
+ IH_OS_EFI
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,60 +98,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As discussed here[1], the go command causes undefined behavior when used
-for running custom OSes since the icache might hold outdated data. OSes
-usually also expect the MMU to be disabled upon execution.
+Hi Simon
 
-Therefore this patch adds a call to cleanup_before_linux before we jump
-to the loaded program/os which disables both the caches and the MMU.
-This makes the go command's behavior consistent with riscv platforms.
+On Wed, 30 Apr 2025 at 16:54, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Heinrich,
+>
+> On Wed, 30 Apr 2025 at 04:55, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > The EFI sub-system needs the load address and not the entry point
+> > to boot the binary passed from the bootm command. The entry point
+> > is derived from the PE-COFF header of the binary.
+> >
+> > Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  boot/bootm_os.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> > index dc9d3e61fca..a3c7cb5332e 100644
+> > --- a/boot/bootm_os.c
+> > +++ b/boot/bootm_os.c
+> > @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
+> >         /* We expect to return */
+> >         images->os.type = IH_TYPE_STANDALONE;
+> >
+> > -       image_buf = map_sysmem(images->ep, images->os.image_len);
+> > +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
+> >
+> >         /* Run EFI image */
+> >         printf("## Transferring control to EFI (at address %08lx) ...\n",
+> > -              images->ep);
+> > +              images->os.image_start);
+> >         bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+> >
+> >         ret = efi_binary_run(image_buf, images->os.image_len,
+>
+> In this case ep should be set to image_start as it is with many
+> methods. How come it isn't in this case?
 
-NOTE: This might cause regressions with users expecting a configured MMU
-but I'm unsure if it's a supported use case for the go command anyway.
+It's explained in the commit message
 
-[1]: https://lore.kernel.org/u-boot/D9DXL95MTQ8I.3EUY0C6M2L4NE@ti.com/
-
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/lib/Makefile |  1 +
- arch/arm/lib/boot.c   | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+)
- create mode 100644 arch/arm/lib/boot.c
-
-diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index 74cd5051552..e4cb50a7f71 100644
---- a/arch/arm/lib/Makefile
-+++ b/arch/arm/lib/Makefile
-@@ -24,6 +24,7 @@ endif
- ifndef CONFIG_XPL_BUILD
- ifdef CONFIG_ARM64
- obj-y	+= relocate_64.o
-+obj-y	+= boot.o
- else
- obj-y	+= relocate.o
- endif
-diff --git a/arch/arm/lib/boot.c b/arch/arm/lib/boot.c
-new file mode 100644
-index 00000000000..eafdb0f9e5a
---- /dev/null
-+++ b/arch/arm/lib/boot.c
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
-+ * Anshul Dalal, <anshuld@ti.com>
-+ */
-+
-+#include <command.h>
-+#include <asm/u-boot-arm.h>
-+
-+unsigned long do_go_exec(ulong (*entry)(int, char *const[]), int argc,
-+			 char *const argv[])
-+{
-+	cleanup_before_linux();
-+
-+	return entry(argc, argv);
-+}
--- 
-2.49.0
-
+/Ilias
+>
+> > --
+> > 2.48.1
+> >
+>
+> Regards,
+> Simon
