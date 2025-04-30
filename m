@@ -4,84 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C50C3ABA9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:01:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E61C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:04:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E816F8081A;
-	Wed, 30 Apr 2025 16:01:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 794CE820E2;
+	Wed, 30 Apr 2025 16:04:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cmueGyZN";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gNEbcLr/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93F8C820E2; Wed, 30 Apr 2025 16:01:29 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C8CD82A27; Wed, 30 Apr 2025 16:04:47 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39583807B1
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:01:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7B7F81F0B
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:04:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-72c09f8369cso2021081a34.3
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:01:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746021686; x=1746626486; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=givJM5CYTZcU39HoIjqNenTGD+ULQw27+SNCLe/2PNw=;
- b=cmueGyZNMjuDrs8bilrAjq3YIEQ9ZN1+jpZU9Jx7gx1Ktf9epdewONFvQqBfyFeX9X
- WmfFQ4XkmzvDvU5jypj4imLtK4d0R7j+nnD8GDpdF3D2qkJWmsr6UJx1fcNkPwFUGH5Y
- fygfCl08x6o+zx6F2LkaMQnhLxj1G5HTKTezN8YuJ3ha9kykHT9md1CtKlOkWzH3/vMr
- jGIaqixzf4CwhEVfWAQDclLGkiyhIaYUq167x4qqqCWye2Ok3zCtPykobQwGvVSp3/Pb
- WCkwid+3rvD+L5kqwnJ6VJYtVa7z6hRS9R0PBt4sgqrH47qxrH6O31FrYGNzsAswCsY/
- d45A==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5BA7D3FC4D
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:04:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1746021883;
+ bh=OaOsXfbPuSDqLV7URcVIKDnriXaf+DHGDFMWbmfrrxM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=gNEbcLr/O/+y+pIgrGwZ7iUfSNhuj69dFxdy63gAZP8PeUqFKTAHVvRizY+9uOtm7
+ kN4Gnj3ei9Tgy2Tle4RDkzda3exZ771Ybi0LgQCSPA2k69dtAdSFjKwky7/7WKtHyO
+ 2YdWP6MMLhrEDnr/buvuRgXuEJZ5HAtOr7uj7Z38+wASvwumZ3Rd8qKjL4+wYwPG48
+ sx02M4GAYd4O4nKwoDc9XjSZxH1C+WCCv6ue51iiYwCA7uyfNLer/i+r2N5+KfcmI4
+ QcvlUNTdt7azVffk7z5KA4JzJ8bOEwA/BPs6+3oqASBlGbsZSpZya1dO0yIOK49p0D
+ PPZj3vwvgi9AA==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43ced8c2eb7so52731915e9.1
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:04:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746021686; x=1746626486;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=givJM5CYTZcU39HoIjqNenTGD+ULQw27+SNCLe/2PNw=;
- b=AfrIjWKos0Qrol24TmCcf45Hjb/fu7I3XSPfIplBdvXc1St/N3yPqeDH1YJqbdrPPJ
- aE1BIkoItskka4b/E69xSgcfIeQRcqDt2QFWuJ91L/9uklJDpNiIQP8MmnwD4paD6uZo
- XLu3IlhzZLrfcnG1CVDtgtmtO0EHk9+lNKGofGEvtTtrL+yvi8wLJ5hvPjvNf0nNIFdC
- +zsEmPo/t7VVzGMN14vFnKYqfquxCd/LVpzkEzoIbw/Ri4bgV0HFEfq0x2fSCzaZ9xBC
- Cuzbe+ydC6kEzZ+tT4bQ3yYK0bdgFPlU1X0Et+1TPZagxZaA6yrO6BVC0bluFQETPc2e
- jbQQ==
+ d=1e100.net; s=20230601; t=1746021883; x=1746626683;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OaOsXfbPuSDqLV7URcVIKDnriXaf+DHGDFMWbmfrrxM=;
+ b=OJFfLmH6UVq1ozWgCe+2/bT807Bq9ifWa+q1iPeAS1FN/QcFinTU0pkElh/0MhoL5y
+ sGCtkoj0iDS6iGYMP/SKYd6eJJNWasXna3mLCTUB6qLJQ/oY+xT7UK/gXewEaUoiTwBa
+ 1vrv51AxgpcrUFkDkiJ6d9UGyvaouIo9P1Gpy5RFCLgGIBC1bQgB7yQ9WkDpr8ApL+0Z
+ BVmUHqbDGe0JffFaOaP8ekttwnE1GKp3N4Mzg9IGrP6Si0PCa/MRUYow8eu9LOnBikZI
+ ULYHtQF+u0dFmAUlP1HCy2cDUlYN5KRWokKYgIWT/cB98h4WE9mqO5oAAQqGTecq4Cgl
+ Z2Cw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxpYTS5wS0ujwP7sjO1DoF9Ayo2GnWi1dxCT6DW0hn4ZJv3FqI+lni/oPoVKN7xMVPDDADPCM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxY2uwRHmgelxWL7wz+KRzH9F+FRDjJ8yh3xy+k4mBQ3MxVm+0L
- JCdlqq1GuUtrpldRTKJbxRLwo6aRsIHLWopQyULO3rg2fphb/MvLQHqGTG699q+ug4T0zNLSfLl
- sX9kivaW7mh1rwncX3iiJcBQC5dZYuUyBCBbMFA==
-X-Gm-Gg: ASbGnctOQcPK5RUnE+szhgCOlmJx/dbgkepF2pVnxccNT5/buM4Pjt9tS5a8IMkKgTz
- bqECxQysO03p9fzfsNocx9K7xM45f8iIcmaVYX2kuahXiIMb9qU9cNgKJlHmMZDIxIsUG6Ds9wH
- YT0AsDCeAz2PvXgXrlfaLdkHc=
-X-Google-Smtp-Source: AGHT+IGII8vmvlNAXBn3I33VV1cqKLJn3e5wLuoorNXFD68IVEqD3Gb03GasONafJYLuAkBFkhvEOsodVbg6j6/2qbY=
-X-Received: by 2002:a05:6830:4990:b0:72b:80b4:dbca with SMTP id
- 46e09a7af769-731c09deaccmr2269072a34.5.1746021685632; Wed, 30 Apr 2025
- 07:01:25 -0700 (PDT)
+ AJvYcCW6DO6BW2TeDFoju7rA54xjYJKijXvlOugpcYnr4WZPqlmtyIkjbrROIXS+G+sql0o4SJ0tugw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwssQZfCbr7kJ1xULOa+/q1ujvnoMRL1NWx+JJ2FKm61OEjOqQH
+ aUDW0/LOb0xylukPBPdwMJbBJo+ygZLVSUNZKPaJVE9JIaadIwegCPOu7p/ep/+H0G1CuP+kk8F
+ qk15XR3dTyuB4L9fvg9h+sgnjT9zJfXamMFGAtkqRkpTPcTNyvEltTv0hnDVlnRSUKEY=
+X-Gm-Gg: ASbGncv6mkvRYIGkXc7SX0eIBoz7Qpbxy6oOM6mIijxVY8jlFByHqOzNBJoDv75PtJF
+ ETbTUQmnT7RBYvc/zW8QCAztg5bNiDlqgjv0tOTaM2zIhlFb7Ak05orpv49X6Dd8rtq6g9tLz7B
+ LOfPMu1c14mAZDCKtZPrn0sxRtOXIz0qyR59R5T1jLQJcZ6YMDyjQuQOSKB0oMfNwQKPEytcl1J
+ AAnj6oTFMrcnd9kJ9MZWKyhE1faHLS1/HZw6PAjac3ocRIfLgt9TTUKuFK9K4f0p0flTXDARnJ7
+ PmfZmcr9ren4crw78fHpsDe8Nw4LjpaM87qSk0yumNWkkzM2wZiBTPs9Z4US94x3YYTcXcpogN5
+ Gsg==
+X-Received: by 2002:a05:600c:1c21:b0:43c:fe15:41cb with SMTP id
+ 5b1f17b1804b1-441b1f3a3f2mr32695705e9.15.1746021882771; 
+ Wed, 30 Apr 2025 07:04:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGaYHjk7FsdLCI+hr/yJ12K90q8Q7cfEI1tlMP/zAs/3fcMKl5bG2EBLuECSZ9yjNZAtESmwQ==
+X-Received: by 2002:a05:600c:1c21:b0:43c:fe15:41cb with SMTP id
+ 5b1f17b1804b1-441b1f3a3f2mr32695285e9.15.1746021882401; 
+ Wed, 30 Apr 2025 07:04:42 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4?
+ ([2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-441b2ba4a12sm26132685e9.9.2025.04.30.07.04.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Apr 2025 07:04:41 -0700 (PDT)
+Message-ID: <d7b41927-e375-4f85-b4fd-cda39defd9e3@canonical.com>
+Date: Wed, 30 Apr 2025 16:04:40 +0200
 MIME-Version: 1.0
-References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
- <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
-In-Reply-To: <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 30 Apr 2025 17:00:49 +0300
-X-Gm-Features: ATxdqUGkxaFOEowoQ3s3nZ1MOLCOuietHYCasw-qpWSUrybn2SP-6lIG0fNJH80
-Message-ID: <CAC_iWjLvCxHAb2yzpgqYL2PBT=iC-_bhKQe_h=3Pb1xc2UZBEQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/1] bootm: pass kernel load address not entry point for
  IH_OS_EFI
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, 
- Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>,
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, =?UTF-8?B?54mbIOW/l+Wujw==?=
+ <Zone.Niuzh@hotmail.com>, Maxim Moskalets <maximmosk4@gmail.com>,
  Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,54 +119,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
-
-On Wed, 30 Apr 2025 at 16:54, Simon Glass <sjg@chromium.org> wrote:
->
+On 30.04.25 15:54, Simon Glass wrote:
 > Hi Heinrich,
->
+> 
 > On Wed, 30 Apr 2025 at 04:55, Heinrich Schuchardt
 > <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > The EFI sub-system needs the load address and not the entry point
-> > to boot the binary passed from the bootm command. The entry point
-> > is derived from the PE-COFF header of the binary.
-> >
-> > Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> >  boot/bootm_os.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> > index dc9d3e61fca..a3c7cb5332e 100644
-> > --- a/boot/bootm_os.c
-> > +++ b/boot/bootm_os.c
-> > @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
-> >         /* We expect to return */
-> >         images->os.type = IH_TYPE_STANDALONE;
-> >
-> > -       image_buf = map_sysmem(images->ep, images->os.image_len);
-> > +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
-> >
-> >         /* Run EFI image */
-> >         printf("## Transferring control to EFI (at address %08lx) ...\n",
-> > -              images->ep);
-> > +              images->os.image_start);
-> >         bootstage_mark(BOOTSTAGE_ID_RUN_OS);
-> >
-> >         ret = efi_binary_run(image_buf, images->os.image_len,
->
+>>
+>> The EFI sub-system needs the load address and not the entry point
+>> to boot the binary passed from the bootm command. The entry point
+>> is derived from the PE-COFF header of the binary.
+>>
+>> Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   boot/bootm_os.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+>> index dc9d3e61fca..a3c7cb5332e 100644
+>> --- a/boot/bootm_os.c
+>> +++ b/boot/bootm_os.c
+>> @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
+>>          /* We expect to return */
+>>          images->os.type = IH_TYPE_STANDALONE;
+>>
+>> -       image_buf = map_sysmem(images->ep, images->os.image_len);
+>> +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
+>>
+>>          /* Run EFI image */
+>>          printf("## Transferring control to EFI (at address %08lx) ...\n",
+>> -              images->ep);
+>> +              images->os.image_start);
+>>          bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+>>
+>>          ret = efi_binary_run(image_buf, images->os.image_len,
+> 
 > In this case ep should be set to image_start as it is with many
 > methods. How come it isn't in this case?
 
-It's explained in the commit message
+As described above the entry point is encoded in the PE-COFF header.
 
-/Ilias
->
-> > --
-> > 2.48.1
-> >
->
-> Regards,
-> Simon
+What makes you think that a user would set it in an its file containing 
+an EFI binary?
+
+If it where set, it would point to an address after the load address and 
+not to the start of the PE-COFF header.
+
+The proper design would completely remove load and entry addresses in 
+FIT images and use LMB for memory allocation.
+
+Best regards
+
+Heinrich
