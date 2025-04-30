@@ -4,102 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C955AC369DC
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 08:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F303C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 08:55:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED71382B07;
-	Wed, 30 Apr 2025 10:32:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DAB48216C;
+	Wed, 30 Apr 2025 10:55:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tuUK12L7";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Q4uq4uVz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25E7682B11; Wed, 30 Apr 2025 10:32:49 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 68CB682B07; Wed, 30 Apr 2025 10:55:01 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E89E58216C
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:32:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E66D58215E
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:54:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 7C17A3FC4A
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 08:32:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746001966;
- bh=0wZBX+tjlhJX9KikQBdoLtotHF05hyQG2FdbUL24sk8=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=tuUK12L7ZoqDD5fSo0TN3p0BFKcYDkOWDySqfoQK7qf+Qx4sCDgI0E92iF0tMAIPL
- +qaeRvZMZJDpRCkFkDHoYwgNxgjm4RdoRgay3lv6j9w1rh0M36HGwDgGnUm+nnfvmO
- 98HbNzqs33B7hTDhpEQ5nnYXtCrK1luEdhPIz9S7ZYiQMrI4afcx/D8VSsvvBJLGBy
- UM7QHMTMdS89ybo18q+QWa4cqrtR93hKey0xaWtdBT/hYMVb0NZGcoR5gY+lOeAs7+
- Fo+xS3xDEyCJd99xf25iDS3FAvRJ7/uocn/dxUwEG+ztysqNK/2V1MmBrs2aSnQFtz
- xuV0/cAphYpqA==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-39131f2bbe5so1908696f8f.3
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 01:32:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746001966; x=1746606766;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0wZBX+tjlhJX9KikQBdoLtotHF05hyQG2FdbUL24sk8=;
- b=tT4Yv1jkC+K7r6I69Lm6scO8je/OsX21UBPj2cIfZWEWWIVubv3yNAvClxU1C/RA+s
- pLb7GbeZs5T6oa5d/Xj3y7PbyZzM3Ege2C9kRAWg+bPeDCgpZRoKTE7PROTK26xrBb5o
- XCDe5YMgWCan63NgbfG5ACqJZMbFxUoMer2GxkGE+upLX+wmmcIpXSvuYg5f1WtpLCg6
- g5RYNsA2PvWA06vxyoc2STLSo7y1Eq7d1TgquwFc+FPG5RbA6l3udXdnSjFDHIvu6ZTL
- BqXe2M7fc8CXQdPvizXoemRVLonDrX7+C8Xa8vwSDFYU4mf3+nYPlfsluJFtS7fNiTD4
- IfVw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUTEKtnN2vcO119oxA8qWuIhop6WFJ/8xi+m3YAWf+tU3a/DdrzXEPeSeBFi6DlTQtJVAwrELc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx09YE537pws58EaqpFlVjPGHZwxBUNvZhHSn1fR5eaN0HAxt7r
- 4ibVSiPV11AtSAVWlYcvJmz3fQxwjw8hdaYBF7k3UswperCEzW1vxvNWvc9FXMp9DepsBLIu0dJ
- nVr1MFoMiUI0psuh+7o/xYmkm8aSK+U3aPjNlDz6FfpnoILN0FxGPXjmGgh4980I+W5E=
-X-Gm-Gg: ASbGnctu89DDuYQ7Cl+pcQG9dL6UTGVf9yXw3T6Zm0+UZAoozDWS+V0G13Aolz1YsPC
- bdyHsItaD+LcsxG6RTXvNO0H51iq+SzZn2RUc90qLgFYMVPyjabAZLysWkLX+Iq6SUiOnAdZVMZ
- pNmxNBZCv3oYRWqjL0tkbIjtL1aBvQi4vyekCi0qTCRkfK2n44ozb9d3h8U8j9J0puaE+FV7n9c
- 77qsJlGjuzu1xwPezcrqdjl+cJy6yzH3q6ZIP/dFJ1HP3pxFxGgp5Y1yLqwux6ZU+OpUKv4PneP
- gwuq7p02jU3v7P3J/IQlKl9sWZ1jvbc9W5KFWScvaqZ7TIBU4aeqXlKm1+wtUWMQKRFjR7Qpeqa
- 4wg==
-X-Received: by 2002:adf:f7c3:0:b0:3a0:90c6:469e with SMTP id
- ffacd0b85a97d-3a090c646a5mr551133f8f.35.1746001966050; 
- Wed, 30 Apr 2025 01:32:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGBbrwUghsBpVgARFgQ8MSL1FozCrpaG2EhevN3kun5bpHxSFSNYj1kkmrWJB0kgBf2/Y8XKQ==
-X-Received: by 2002:adf:f7c3:0:b0:3a0:90c6:469e with SMTP id
- ffacd0b85a97d-3a090c646a5mr551112f8f.35.1746001965669; 
- Wed, 30 Apr 2025 01:32:45 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4?
- ([2a02:3035:6e0:9d1c:a02f:5865:bfa0:f5d4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073ca4742sm16020379f8f.23.2025.04.30.01.32.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Apr 2025 01:32:45 -0700 (PDT)
-Message-ID: <b1eefdec-6d0c-41d0-b895-ec14e8bfdc2f@canonical.com>
-Date: Wed, 30 Apr 2025 10:32:43 +0200
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53TLb4dr003467;
+ Wed, 30 Apr 2025 08:54:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=B1pFUlTXnrBjXynSf6spne
+ LoNlXdCyb/o0jO27AkNeA=; b=Q4uq4uVzPvom1id9cWxZUeOtPdvo0xKnyGg9MU
+ JInSQZbGepGnMi4hVZHxjOaOHaCpNho663L8fY2IVcecafCputVIZSrAuQfg9Dhc
+ 9tE/hjlKSUq2FtnWwiyD9o/7CTIbtg8ArKfjG0K/djoT1XvXq+/e9jh9silkrtfQ
+ W9zS0nYQL6dZzMZm32jc+vX8EBLRLWhIGqJj+t2k14yQUpWWImEAiQ9FwzPl4G85
+ bOQGkofLROHoFC2HKr77WtJlMigiNzEeHmyR1RqfugQePJtdTtt7DEGrPEJquQlL
+ izku62VYuEzdS0Qo1eqdiL+CdKdVbGw0GaX2ADDQSqHERGvQ==
+Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46b6u89erj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 30 Apr 2025 08:54:47 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 53U8skBG024361
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 30 Apr 2025 08:54:46 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Wed, 30 Apr 2025 01:54:42 -0700
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <casey.connolly@linaro.org>, <neil.armstrong@linaro.org>,
+ <sumit.garg@kernel.org>, <trini@konsulko.com>,
+ <quic_varada@quicinc.com>, <ilias.apalodimas@linaro.org>,
+ <seashell11234455@gmail.com>, <clamor95@gmail.com>,
+ <ycliang@andestech.com>, <me@samcday.com>, <robert.marko@sartura.hr>,
+ <sjg@chromium.org>, <marek.vasut+renesas@mailbox.org>,
+ <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
+Subject: [PATCH v2 0/2] Implement reset to EDL for qcs9100
+Date: Wed, 30 Apr 2025 14:24:26 +0530
+Message-ID: <20250430085428.1090801-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] boot: let BOOTSTAGE_RECORD_COUNT default to 50
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Peter Robinson <pbrobinson@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20250430073405.14396-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250430073405.14396-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Authority-Analysis: v=2.4 cv=B7i50PtM c=1 sm=1 tr=0 ts=6811e557 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=XR8D0OoHHMoA:10 a=bjHXrqQkaGKjFDGHEn0A:9
+X-Proofpoint-GUID: bihEu_R-lzcifhslPIOOIvnzy6LGbD-L
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDMwMDA2MSBTYWx0ZWRfXzWzk/vKyBQRW
+ mqDdE6LEw9E6HzUKKQapAAZthVo4Gp5tQoeW1G3xj4p0Y5qlI8upz0Jaa4lLETOjBea6DVSG7tw
+ XX1mLeZu9/ednqSyVUQYgGICwMeUnviN9E2qhHu9caRmFCMLfU8PiWpmzJjeuABn4ieW0jxcMtk
+ bBoI+9+ufjqyKR1c57jCFhJfFl5QQyLTlIaU9RRZcrlTkab7jbOVEaZ19gcuoSHXaRX78ycZqS5
+ NDbnAkAu1LFuIcyCl/WG3c1f2LLW+Ji/dRoJcKlqXSlvygh2Mo7WTFAzVOKMVfXzc6QWu+Q3eee
+ qIQnwpLd6gt/WIq7N7i8pxZSJ+qH2bNOzj22/ByUZh5DM0tZscO30KMrf1gwt/qzdK8UcQoYx8f
+ OJNUgAN0qiBGdGw4tglpbNjkMruphmE9OoJDRMbHMcIcMokgJqQYY0hOjQ/pzvFJi8z02gk4
+X-Proofpoint-ORIG-GUID: bihEu_R-lzcifhslPIOOIvnzy6LGbD-L
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-30_02,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 spamscore=0 clxscore=1015
+ mlxscore=0 impostorscore=0 mlxlogscore=755 lowpriorityscore=0
+ malwarescore=0 phishscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2504070000
+ definitions=main-2504300061
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,77 +111,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 30.04.25 09:34, Heinrich Schuchardt wrote:
-> BOOTSTAGE_RECORD_COUNT=30 is too small to record booting a FIT image
-> with EFI kernel, initrd, dtb as seen on the StarFive VisionFive 2
-> board.
-> 
-> Increase the default for BOOTSTAGE_RECORD_COUNT to 50.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->   boot/Kconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index fb37d912bc9..2456856a572 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -1170,7 +1170,7 @@ config BOOTSTAGE_REPORT
->   config BOOTSTAGE_RECORD_COUNT
->   	int "Number of boot stage records to store"
->   	depends on BOOTSTAGE
-> -	default 30
-> +	default 50
->   	help
->   	  This is the size of the bootstage record list and is the maximum
->   	  number of bootstage records that can be recorded.
+Using the 'reboot edl' command in Linux, the platform can reboot to the
+Emergency Download mode. Implement the same for U-Boot.
 
+v2: * Rebased to recent sources
+    * Dropped the first patch as it is not applicable anymore
+    * Bind the new driver from psci driver
 
-Here is a bootstage report for the board:
+Varadarajan Narayanan (2):
+  sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs
+  configs: qcs9100_defconfig: Enable SYSRESET
 
-StarFive # bootstage report
-Timer summary in microseconds (40 records):
-        Mark    Elapsed  Stage
-           0          0  reset
-   3,181,398  3,181,398  board_init_f
-   3,229,302     47,904  board_init_r
-   4,182,564    953,262  eth_common_init
-   4,276,615     94,051  eth_initialize
-   4,280,818      4,203  main_loop
-   4,380,713     99,895  usb_start
-   5,684,111  1,303,398  cli_loop
-  56,443,312 50,759,201  bootm_start
-  56,443,313          1  boot_get_kernel
-  56,448,158      4,845  fit_image_load
-  56,448,186         28  fit_image_load
-  56,448,187          1  fit_image_load
-  56,451,971      3,784  fit_image_load
-  56,483,951     31,980  fit_image_load
-  56,483,956          5  fit_image_load
-  56,483,984         28  fit_image_load
-  56,484,001         17  fit_image_load
-  56,484,008          7  fit_image_load
-  56,488,891      4,883  fit_image_load
-  56,488,918         27  fit_image_load
-  56,488,919          1  fit_image_load
-  56,524,164     35,245  fit_image_load
-  56,524,170          6  fit_image_load
-  56,524,201         31  fit_image_load
-  56,524,216         15  fit_image_load
-  56,528,502      4,286  fit_image_load
-  56,533,091      4,589  fit_image_load
-  56,533,118         27  fit_image_load
-  56,533,119          1  fit_image_load
-  56,562,211     29,092  fit_image_load
-  56,562,216          5  fit_image_load
-  56,562,219          3  fit_image_load
-  56,562,232         13  fit_image_load
-  56,566,246      4,014  fit_image_load
-  56,575,882      9,636  bootm_load_os
-  56,575,893         11  boot_ramdisk_high
-  56,585,438      9,545  do_bootm_efi
+ configs/qcs9100_defconfig             |  2 ++
+ drivers/firmware/psci.c               |  4 +++
+ drivers/sysreset/Kconfig              |  7 ++++
+ drivers/sysreset/Makefile             |  1 +
+ drivers/sysreset/sysreset-uclass.c    |  7 ++--
+ drivers/sysreset/sysreset_qcom-psci.c | 48 +++++++++++++++++++++++++++
+ include/sysreset.h                    |  7 ++++
+ 7 files changed, 74 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
 
-Accumulated time:
-                 14,772  dm_f
-                 88,688  dm_r
+--
+2.34.1
+
