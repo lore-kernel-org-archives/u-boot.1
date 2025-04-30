@@ -4,58 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97946C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 16:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79162C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 17:01:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0616582BF2;
-	Wed, 30 Apr 2025 18:57:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E52D382BF2;
+	Wed, 30 Apr 2025 19:01:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1746032272;
-	bh=ouifAjyMNpGwqixS0vmC7EqyAi2xTrNQ/+f6os6epms=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Vk071c7YomqiVOgf6mjKuxeCJOK7DMNb0GVX0Y47LHdXqUpx0wQMq4QSrKjMsFWUk
-	 txd1dCHFQ8K1edKqQyJjG6oTgDCdgsUP+wCTKttepyzEPSvI2i3keuGkvtUevdDlOP
-	 Cs1Cv9bc5Oe4CU61MLYY3N8Uc37ro79aDYAILDd62XuJVKQ8OdcPLXruVZpGsIVPp8
-	 mmtm2/uzlOEFpYrxJ2GiUPi7nWwyWlkQO07LzffGFa8aw2ZQSwcdut4bhJlIPPDs8b
-	 3RaeC5mSnJNkIDuac3jQo8CH6qoCC6/W606Jza9vxlfePT7mP4T14FUfaOEQ+dWTqu
-	 8bxhNlcUyTxoA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CE1A382BF3; Wed, 30 Apr 2025 18:57:50 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DB4F82BB4
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:57:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="R75E0qA7"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C02AB10269585; 
- Wed, 30 Apr 2025 18:57:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1746032267; h=from:subject:date:message-id:to:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=ouifAjyMNpGwqixS0vmC7EqyAi2xTrNQ/+f6os6epms=;
- b=R75E0qA7mwA/Z6pKKRgHJol5t5GOLz6bi1Vh5uSMdsfzjc4t1BhOzwDE5mKGoQi33nZ10H
- okRSJyPfm4HhRWk1tfSl1r9waQJYbQf0a0huPmV1bHWPC1sIYS3kwZbTdZ9YaMn+XrLud1
- ENQl5b6vBEsHrQCajjGFCE/DfUUK3oIBjpM3PRpJpGg7X0wUDJyCc5KiIvxRPmnLe2263N
- 7KsdaI1qoHp7T+dgxIC3tF0iGtwIN8U6lcMlFq9bAqlQ80U2Znqp2R+I4Au0dWJRCOSfHX
- 4w1R83hmAl4UJljxS5J7pMs27LSnd7BZjXa0M4LjxNWLeJNq5DAA5pUQZbPeew==
-Message-ID: <19a791c9-19b9-47cd-9444-24846ae5c222@denx.de>
-Date: Wed, 30 Apr 2025 18:50:50 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Jerome Forissier <jerome.forissier@linaro.org>,
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MWYUj+Vv";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C664A82BF6; Wed, 30 Apr 2025 19:01:44 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E0F782BB4
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 19:01:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7306482f958so31044a34.0
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:01:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746032501; x=1746637301; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=v7ejOORqcOW2GSUPEnpgco/Z1dcK5N2TQkczr2+WgAA=;
+ b=MWYUj+Vvgl/iaz/RzveXlUUWK5BMea9DveTm7RkjfcDp8lVjbiZIjb5n4uJ85iwliV
+ I7SFUV+c+B+7UB1pzoGJqOlwREiFrXR8qQ6xavsflRAqBL8a04TrB/KqJIPGA/Ldn862
+ zRaZjs/V1Ke7nMoDZLcinb5HcOVS+nRZwo/yY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746032501; x=1746637301;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v7ejOORqcOW2GSUPEnpgco/Z1dcK5N2TQkczr2+WgAA=;
+ b=tkHwmnhh3+N55BfFs0ZXQOOf7d7dKDN32sFHFfrxbyWc33YiDWg545ZrHle4xQuAPd
+ IjtHu9gdkqbIUfJYexYH9FByslBAbMxs1FgvbsvLDcUcpTAxJwGoN/X1y0BpMrT/Yq9z
+ 7cshhumBGrNok1QuKKt+R/OMY/DjbsTrU7Mw9mAdQnnLBVXv3MSfq1dzaZHLode5TjBT
+ eQ/a5gbUXPDYutrdYubZIB7EORU0aJc85/8YfvA8I8wIPh/AzpBBdLaddgyV+W2jTUti
+ Lda9pWpdM7XsboziTnnYAIaI5JPQk5AnBg8zI/dEVCm6wJydrQ2FJvYSY9sCwNqX2Mrt
+ 4wZg==
+X-Gm-Message-State: AOJu0YwNUnrl5hujn+H6NfjGSd/XQ/1NqPPSxVezE7xFDfLLipgmYk+x
+ tqYJ+YMgXttfJNSfkWgCLuur69LWNNwj0XgnacqCs0g+gp46v7QncsrhopPYCws=
+X-Gm-Gg: ASbGncvB8Lgduhq85SJkrG9AfbSEUpMDxUTHr+WAclW7BRCN8Uol9vexc2Xv0j223vI
+ fQMN3GmbY+GSUStSS5ctByc5xxuZ7Bgu9d1xBZcbTqP4HcxWCaTA04u9CHwV8adJx4TAPdaGMma
+ P91KZHzPG89ta/yVpJNIqcf/0EnVXT2r0JgJq3e35Oo+wr/SrB4lEUPQH4UO3+n0adRRNTDIwM4
+ 8y8mLWH3sDqiTARhgfYq3YoqPWidbKcTQnYqXS82iVot63/XZbbwPuC7h0z7H4JdQQDX1KWojYM
+ lHcy8xRuV1PZ4rFYUIIte6jaWyJNWitWK77eWW0/dMtes0OtSQ9qFtL0JWvTlHpZ9BtQUiQbx2U
+ hxQ==
+X-Google-Smtp-Source: AGHT+IHJcE6IsPzSqVZSl/RqZJCsVYdPkRcsowYm8MdXxtFxTV2N5bKCst7eWUcmGAq+wCcp1+iv/g==
+X-Received: by 2002:a05:6830:6189:b0:72b:81df:caf9 with SMTP id
+ 46e09a7af769-731c24b824fmr2583024a34.8.1746032500818; 
+ Wed, 30 Apr 2025 10:01:40 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7308b1315cfsm950880a34.34.2025.04.30.10.01.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Apr 2025 10:01:40 -0700 (PDT)
+Date: Wed, 30 Apr 2025 11:01:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>,
  Varadarajan Narayanan <quic_varada@quicinc.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -63,13 +77,16 @@ To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Adriano Cordova <adrianox@gmail.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>,
  Daniel Golle <daniel@makrotopia.org>, Simon Glass <sjg@chromium.org>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20250430170137.GW1261075@bill-the-cat>
 References: <20250428215930.GI5495@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250428215930.GI5495@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+ <19a791c9-19b9-47cd-9444-24846ae5c222@denx.de>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="w6s+cFGhjHCl/ow2"
+Content-Disposition: inline
+In-Reply-To: <19a791c9-19b9-47cd-9444-24846ae5c222@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,79 +103,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/28/25 11:59 PM, Tom Rini wrote:
-  > 
-________________________________________________________________________________________________________
-> *** CID 550306:  Control flow issues  (DEADCODE)
-> /fs/exfat/io.c: 547 in exfat_generic_pwrite()
-> 541             int rc;
-> 542             cluster_t cluster;
-> 543             const char* bufp = buffer;
-> 544             off_t lsize, loffset, remainder;
-> 545
-> 546             if (offset < 0)
->>>>      CID 550306:  Control flow issues  (DEADCODE)
->>>>      Execution cannot reach this statement: "return -22L;".
-> 547                     return -EINVAL;
-> 548             if (uoffset > node->size)
-> 549             {
-> 550                     rc = exfat_truncate(ef, node, uoffset, true);
-> 551                     if (rc != 0)
-> 552                             return rc;
 
-This one is I think false positive, off_t can be signed integer, so the 
-check should be in place.
+--w6s+cFGhjHCl/ow2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> ** CID 550305:  Security best practices violations  (STRING_OVERFLOW)
-> /fs/exfat/io.c: 739 in exfat_fs_opendir()
-> 
-> 
-> ________________________________________________________________________________________________________
-> *** CID 550305:  Security best practices violations  (STRING_OVERFLOW)
-> /fs/exfat/io.c: 739 in exfat_fs_opendir()
-> 733                     return err;
-> 734
-> 735             dirs = calloc(1, sizeof(*dirs));
-> 736             if (!dirs)
-> 737                     return -ENOMEM;
-> 738
->>>>      CID 550305:  Security best practices violations  (STRING_OVERFLOW)
->>>>      You might overrun the 1024-character fixed-size string
-> "dirs->dirname" by copying "filename" without checking the length.
-> 739             strcpy(dirs->dirname, filename);
-> 740             dirs->offset = -1;
-> 741
-> 742             *dirsp = &dirs->fs_dirs;
-> 743
-> 744             return 0;
-> 
-> ** CID 550304:  Error handling issues  (NEGATIVE_RETURNS)
-> /tools/fit_check_sign.c: 98 in main()
+On Wed, Apr 30, 2025 at 06:50:50PM +0200, Marek Vasut wrote:
+> On 4/28/25 11:59 PM, Tom Rini wrote:
+>  > ______________________________________________________________________=
+__________________________________
+> > *** CID 550306:  Control flow issues  (DEADCODE)
+> > /fs/exfat/io.c: 547 in exfat_generic_pwrite()
+> > 541             int rc;
+> > 542             cluster_t cluster;
+> > 543             const char* bufp =3D buffer;
+> > 544             off_t lsize, loffset, remainder;
+> > 545
+> > 546             if (offset < 0)
+> > > > >      CID 550306:  Control flow issues  (DEADCODE)
+> > > > >      Execution cannot reach this statement: "return -22L;".
+> > 547                     return -EINVAL;
+> > 548             if (uoffset > node->size)
+> > 549             {
+> > 550                     rc =3D exfat_truncate(ef, node, uoffset, true);
+> > 551                     if (rc !=3D 0)
+> > 552                             return rc;
+>=20
+> This one is I think false positive, off_t can be signed integer, so the
+> check should be in place.
 
-Fixed:
+I've updated Coverity with this comment.
 
-https://patchwork.ozlabs.org/project/uboot/patch/20250430164559.27095-1-marex@denx.de/
+> > ** CID 550305:  Security best practices violations  (STRING_OVERFLOW)
+> > /fs/exfat/io.c: 739 in exfat_fs_opendir()
+> >=20
+> >=20
+> > _______________________________________________________________________=
+_________________________________
+> > *** CID 550305:  Security best practices violations  (STRING_OVERFLOW)
+> > /fs/exfat/io.c: 739 in exfat_fs_opendir()
+> > 733                     return err;
+> > 734
+> > 735             dirs =3D calloc(1, sizeof(*dirs));
+> > 736             if (!dirs)
+> > 737                     return -ENOMEM;
+> > 738
+> > > > >      CID 550305:  Security best practices violations  (STRING_OVE=
+RFLOW)
+> > > > >      You might overrun the 1024-character fixed-size string
+> > "dirs->dirname" by copying "filename" without checking the length.
+> > 739             strcpy(dirs->dirname, filename);
+> > 740             dirs->offset =3D -1;
+> > 741
+> > 742             *dirsp =3D &dirs->fs_dirs;
+> > 743
+> > 744             return 0;
+> >=20
+> > ** CID 550304:  Error handling issues  (NEGATIVE_RETURNS)
+> > /tools/fit_check_sign.c: 98 in main()
+>=20
+> Fixed:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/20250430164559.27095-1-m=
+arex@denx.de/
+>=20
+> > _______________________________________________________________________=
+_________________________________
+> > *** CID 550300:  Integer handling issues  (INTEGER_OVERFLOW)
+> > /fs/exfat/utils.c: 146 in exfat_humanize_bytes()
+> > 140             /* 16 EB (minus 1 byte) is the largest size that can be
+> > represented by
+> > 141                uint64_t */
+> > 142             const char* units[] =3D {"bytes", "KB", "MB", "GB", "TB=
+",
+> > "PB", "EB"};
+> > 143             uint64_t divisor =3D 1;
+> > 144             uint64_t temp =3D 0;
+> > 145
+> > > > >      CID 550300:  Integer handling issues  (INTEGER_OVERFLOW)
+> > > > >      Expression "divisor", overflows the type of "divisor", which=
+ is
+> > type "uint64_t".
+> > 146             for (i =3D 0; ; i++, divisor *=3D 1024)
+> > 147             {
+> > 148                     temp =3D (value + divisor / 2) / divisor;
+> > 149
+> > 150                     if (temp =3D=3D 0)
+> > 151                             break;
+> Fixed:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/20250430164559.27095-2-m=
+arex@denx.de/
 
-> ________________________________________________________________________________________________________
-> *** CID 550300:  Integer handling issues  (INTEGER_OVERFLOW)
-> /fs/exfat/utils.c: 146 in exfat_humanize_bytes()
-> 140             /* 16 EB (minus 1 byte) is the largest size that can be
-> represented by
-> 141                uint64_t */
-> 142             const char* units[] = {"bytes", "KB", "MB", "GB", "TB",
-> "PB", "EB"};
-> 143             uint64_t divisor = 1;
-> 144             uint64_t temp = 0;
-> 145
->>>>      CID 550300:  Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "divisor", overflows the type of "divisor", which is
-> type "uint64_t".
-> 146             for (i = 0; ; i++, divisor *= 1024)
-> 147             {
-> 148                     temp = (value + divisor / 2) / divisor;
-> 149
-> 150                     if (temp == 0)
-> 151                             break;
-Fixed:
+Thanks!
 
-https://patchwork.ozlabs.org/project/uboot/patch/20250430164559.27095-2-marex@denx.de/
+--=20
+Tom
+
+--w6s+cFGhjHCl/ow2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgSV24ACgkQFHw5/5Y0
+tyyNKgv9GyLGybk3Ai2WsvH6QbidP/BAl8KyVcekQ+7GrjQibprzP8CV/6IilC+x
+q7wzFE7zPRXxaa48TVWTQ8FjUz2N7A2whLspqQJJYpr17Pcb21SuTgvh6Rj8A3v7
+qbpFpIkN0FcYbqD+z8Xx0PRdhDg6ZGUnUV9WJAXNOqKLcrsnsiUtaiQLwed0PSrr
+3EMpdlRqARpnAmdCbKvkGu8OfULMG/05UphU2r1FMuZe6aiYviKEB12ZGuhf5vnT
+RIt1oK4FHPCfxC95r9zbjRP6ymxRV6owdwHgS4+imN/YHG2kwfe9Z61i9Mc+xLKr
+7qtlGpIKDNg9brtgqAWfbLM9rOGVfa2PM8Ahb+FvYXxVQoINZLF2BdfnV7A8DXyF
+7F/AxPP5CDnnnHF5ZGpeMAlEDwU7KygjZZJbdpUdvVBazytft+NCx+GYBrd3FCe/
+pA2BGfsilUdumIfioGn4twhPjJ1ZKm4N+u9pFvrJE+jPF+zjO+BGUjt1DZ7lwbv/
+BazDGzNh
+=6S1g
+-----END PGP SIGNATURE-----
+
+--w6s+cFGhjHCl/ow2--
