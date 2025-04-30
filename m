@@ -4,57 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E65E0C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56AD6C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:58:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D7C18215E;
-	Wed, 30 Apr 2025 16:56:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D5A208215E;
+	Wed, 30 Apr 2025 16:57:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uP/Wt1EZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cHjK6App";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 142BF8215F; Wed, 30 Apr 2025 16:56:31 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1563A8215F; Wed, 30 Apr 2025 16:57:58 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9A968210F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:56:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id E304D8210F
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:57:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 20A87A4AD85;
- Wed, 30 Apr 2025 14:51:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 488B2C4CEEB;
- Wed, 30 Apr 2025 14:56:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746024987;
- bh=QRzY6e53uVxzIEoPED15KOUBrmWCq4haAV0MqUZ+ExM=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=uP/Wt1EZaj67wyiEobKR9eUDAwGpItwoWYxSyQd10orI2I259GLMN/DmcbYwlNYqx
- 6UYbdQd3ZESmkMqOx16b4KvJKRr9NH044iXssJJxlfudL8epDct5R7hCf2STR5o3cQ
- QjLHEFw4tH+XJoj64a1oT8tWrP6ZCcpU0cz34nazygzsee2+JTWXcrVwT1bNB0500A
- Dc4dT6XQbW9b6EEosv8aVTyiPdkvZkze4q3UYUdj2UR4qjUgTVhF87oLsD68StP4fN
- 8i1lmFjJBifpGH5cz1q+s1h+sFun2cQLuVTCI1doyeOmaMlOLbZUPDnmf8mucEcETM
- qyh6Xc/sZt+ng==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Aristo Chen <jj251510319013@gmail.com>, u-boot@lists.denx.de
-Cc: aristo.chen@canonical.com, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org,
- mkorpershoek@kernel.org, Zone.Niuzh@hotmail.com
-Subject: Re: [PATCH v2 1/1] bootm: improve error message when gzip
- decompression buffer is too small
-In-Reply-To: <20250430022325.156922-1-aristo.chen@canonical.com>
-References: <20250428060757.125596-1-aristo.chen@canonical.com>
- <20250430022325.156922-1-aristo.chen@canonical.com>
-Date: Wed, 30 Apr 2025 16:56:25 +0200
-Message-ID: <87r019r946.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5f6c3f7b0b0so13810026a12.0
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:57:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1746025075; x=1746629875; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=CsfOfnxTLsj8CKus/aD3W2fIg7OlIKV0+V8fn0r09iM=;
+ b=cHjK6AppHFIbonRKsLMgf/yeFqQN8gmU1y8Jco14ArlgU5LiJyLi92IyUvva9hXU1u
+ gnt03gnakO0Qmv7m9sCm+C6sABB6H5hcjApD+VGW7LQwfxC4P1V4i+nX3VxzrC+I12+Y
+ AmG8xD7AJwV06tY1uP5fr/SM/HOEBqbVJQgrx9kaSOVMRLBKWuxrfj8+RGnccYWmK7Gs
+ O4+pbI3fgyfdC0gv/6joxQpLOqTMqhFsLE3fnA83b1I/HAt1NHwI3yqr13eFnjB8annK
+ /GiOS0wKY6H6+RfiMvUsLx+9dO9WESXbjUFjYXgsac0xUz24/fTftw4EcdGLlMAVy2g/
+ duqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746025075; x=1746629875;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CsfOfnxTLsj8CKus/aD3W2fIg7OlIKV0+V8fn0r09iM=;
+ b=wQ6gcywEYMZNavwFzXYv8DV4sodmgftnsQh2s9uTH3yO4xl91XLQ15olMnr1wXZPgu
+ psk6iEukWXRv81T4IuT1xoraf1R6XIzAipMy1GWsMB7RacQl/F/nkpJ4V4XMr7iBUbQa
+ 2oyMNljGqChKbIft66qISV3D5c5DG4ZSGVp77yipewrxDf5MbWFGkYOXeIhADbDFbGbF
+ swi8Cy2dboTdY6/oM2/5accBvyEeYbYz2GcBBwIpMO8FE31sKvMMZKtthMvennKdR+rt
+ 5ooqxw3TAWSBJR90CcwfPFnwaZbHlubtjtvOR2x30eeM1DwDzWzYBbNPIvOdZi/VffQq
+ KVIg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUFbmbRYgobm18q6DEEo7w4fbUMK5HCLKab1t/CIW0/Sulf6E7baUb9bVzy/LnnVboqCqOELgM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3NJ+oigw5fjl/lIivAoCaIFNHBRUBi9ZGkGpQvcW5dbGF8jZO
+ NXzW3eHB3KTXtYk3Ov8W1ykDA6SCsR5b/njNLxnPIiIXK8CEIQa7R3FONDZq4zeZnClY9ioM9+v
+ fIsY=
+X-Gm-Gg: ASbGncud3E/HtRCqTWv/SaNquO8I10OWdTgOIFWPPbvLKhKjQwBhzFoEAc8cPZPdI7y
+ GytdmdhO47pxM2W/0lYd8nskkdkUiDr1GyV6pZUQBfUW1MzIvmDjBDNSceVoK6wW8EMghP1eh1Z
+ oXGENyIjmc0jYTafdu8M/+RI7Urb8R6jQD067ygua8tdpDTNXkF3+gUoz0y6iJ2LeX7mFg2+eaR
+ NGibcA1KWlD/LBzjcx0vCvMjzCHyH5G0cFZ4Fi7iMOMvDwvKl5rRMFZa4fDqicAxNVbvRzS8qvR
+ xJEG1jNbKudFcGoXlcGnqcOiqt/u/tivluGyi0dbNETgoImpJuuwBdRHN6kXs9F9vQ+ADyBzTxj
+ lGzrqXkB+m580+5fwzPIT
+X-Google-Smtp-Source: AGHT+IFdWyc1Us1mLFcLFXR9zkp5n6VSxfH7a6qxWqexRiF2QTvK8YEoc8H35HmJ9QkOKHXcZ496qA==
+X-Received: by 2002:a05:6402:2353:b0:5f7:eaf0:8826 with SMTP id
+ 4fb4d7f45d1cf-5f89b254f87mr2917488a12.16.1746025075361; 
+ Wed, 30 Apr 2025 07:57:55 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:b269:e2f0:3646:3c73?
+ ([2a01:e0a:3cb:7bb0:b269:e2f0:3646:3c73])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5f7ec0e6331sm5216650a12.78.2025.04.30.07.57.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Apr 2025 07:57:55 -0700 (PDT)
+Message-ID: <d9552c81-6139-4098-a9a1-94d8376ae1cf@linaro.org>
+Date: Wed, 30 Apr 2025 16:57:54 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] net: Use a forward declaration for cmd_tbl in
+ net-common.h
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20250430144014.1698011-1-sjg@chromium.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250430144014.1698011-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,70 +107,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
 
-Thank you for the patch.
 
-On mer., avril 30, 2025 at 10:23, Aristo Chen <jj251510319013@gmail.com> wrote:
-
-> Currently, when decompressing a gzip-compressed image during bootm, a
-> generic error such as "inflate() returned -5" is shown when the buffer is
-> too small. However, it is not immediately clear that this is caused by
-> CONFIG_SYS_BOOTM_LEN being too small.
->
-> This patch improves error handling by:
-> - Detecting Z_BUF_ERROR (-5) returned from the inflate() call
-> - Suggesting the user to increase CONFIG_SYS_BOOTM_LEN when applicable
-> - Preserving the original return code from zunzip() instead of overwriting
->   it with -1
->
-> By providing clearer hints when decompression fails due to insufficient
-> buffer size, this change helps users diagnose and fix boot failures more
-> easily.
->
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+On 4/30/25 16:40, Simon Glass wrote:
+> We don't need to include command.h just for this declaration. It
+> eventually pulls in linux/byteorder which causes a conflict with exfat
+> which has its own byteorder functions.
+> 
+> Use a forward declaration instead.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->  boot/bootm.c | 4 +++-
->  lib/gunzip.c | 2 +-
->  2 files changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index f5cbb10f0d1..f6aa32746b7 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -34,6 +34,7 @@
+> 
+>  include/net-common.h | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/net-common.h b/include/net-common.h
+> index 12c50e2a41e..f2613a41ad8 100644
+> --- a/include/net-common.h
+> +++ b/include/net-common.h
+> @@ -4,7 +4,6 @@
+>  #define __NET_COMMON_H__
 >  
->  #include <bootm.h>
->  #include <image.h>
-> +#include <u-boot/zlib.h>
+>  #include <asm/cache.h>
+> -#include <command.h>
+>  #include <env.h>
+>  #include <hexdump.h>
+>  #include <linux/if_ether.h>
+> @@ -13,6 +12,8 @@
+>  #include <rand.h>
+>  #include <time.h>
 >  
->  #define MAX_CMDLINE_SIZE	SZ_4K
+> +struct cmd_tbl;
+> +
+>  #define DEBUG_NET_PKT_TRACE 0	/* Trace all packet data */
 >  
-> @@ -578,7 +579,8 @@ static int handle_decomp_error(int comp_type, size_t uncomp_size,
->  	if (ret == -ENOSYS)
->  		return BOOTM_ERR_UNIMPLEMENTED;
->  
-> -	if (uncomp_size >= buf_size)
-> +	if ((comp_type == IH_COMP_GZIP && ret == Z_BUF_ERROR) ||
-> +	    uncomp_size >= buf_size)
->  		printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
->  	else
->  		printf("%s: uncompress error %d\n", name, ret);
-> diff --git a/lib/gunzip.c b/lib/gunzip.c
-> index 52007715bda..a05dcde9a75 100644
-> --- a/lib/gunzip.c
-> +++ b/lib/gunzip.c
-> @@ -299,7 +299,7 @@ __rcode int zunzip(void *dst, int dstlen, unsigned char *src,
->  		if (stoponerr == 1 && r != Z_STREAM_END &&
->  		    (s.avail_in == 0 || s.avail_out == 0 || r != Z_BUF_ERROR)) {
->  			printf("Error: inflate() returned %d\n", r);
-> -			err = -1;
-> +			err = r;
->  			break;
->  		}
->  	} while (r == Z_BUF_ERROR);
-> -- 
-> 2.34.1
+>  /*
+
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+
+Thanks,
+-- 
+Jerome
