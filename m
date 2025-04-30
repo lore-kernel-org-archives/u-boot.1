@@ -4,83 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C398DC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 19:15:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14C5C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 19:26:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37CF08007D;
-	Wed, 30 Apr 2025 21:15:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 254018007D;
+	Wed, 30 Apr 2025 21:26:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XJoFrscd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xzA+2ssy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FDF9800D7; Wed, 30 Apr 2025 21:15:41 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D3598004F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 21:15:39 +0200 (CEST)
+ id 6BFE4800D7; Wed, 30 Apr 2025 21:26:10 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FFF18004F
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 21:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac2963dc379so24528566b.2
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 12:15:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746040539; x=1746645339; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I2qdKcy5vrHHWZC7Bp9opAry5kvqCavIfWTc1FysOLg=;
- b=XJoFrscdd47j+1Pip7ynKHfx7y11klM6p9b68Qo2HJvVXkH8mHKTr677zxrdYHsUzg
- hCU1lXLAbI3ceNd1qT3eN2j0KopqJxp02s6vyrMA/zSmXVrfnxCrV2V4LGgK0jLaPs+X
- azPgNNH1vaZtcq4v6rrbDtF2WMgzOqTAnUOw8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746040539; x=1746645339;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I2qdKcy5vrHHWZC7Bp9opAry5kvqCavIfWTc1FysOLg=;
- b=FPrWWZOPyNDHUQZWK9zG9K8a+H16A2caAdK7CS3qSRBPHczA3nN5aKgz/pK+HxJKzR
- Bhg+PNGOFrliXpuSYBfzCu6UtkSSxf6T/smkegwrvjMaxpJY3azjfYwVh+mLhsnyzZjJ
- enA0U607PmfrET5+S3r57Glg44kWokpfQrdJh8ER14rpvm7fQ/gFFmv01Ic9FOfbFjuc
- efahhcuLcAkfBqU1b6K47PSek692euKfCpqOnb1mYctsFWUyEaVTERSmnjFNCM+0rQZJ
- Xot94hSzTPVoQwp1yoAYPz4NhIMYarXygC1MfAoFc4rGKOa8pfdVgdX0gQR/kckqPPRL
- WLqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKFXqAzVS9I4FlhSQy/O/1XCu/eu5RxcoxT4SatqN58mEGkFyeQ1FxhMOLoDqhCydvlW32F1o=@lists.denx.de
-X-Gm-Message-State: AOJu0YyrM6pP6H55+ux0ZRw/l0zFbMcRvGYuGywRMgHmuljgQ93cEyNq
- ea9bqT+jPFjRUUghMOhnTMxhlpQfjt1Yblp7oU5hayB4RCXUnb79B6hZpe586P4KGRbWtqztHWC
- 2FJXG0g8Hp+yAOD2WPONhbgNNJoK6m7dPE//r
-X-Gm-Gg: ASbGncvVOdYI9ONgqm4wjGfWTYgInM507tKIZlm8BgJ2Rlwg/VVmnB+ZkV31tj+MTqI
- 3Cz8zuhvX/ZDL182deM21NircWtaFOsBwHWUYW8X8SPV8fzndprcCVTwo3jp4RR/RuBLnhYgA9H
- OIEDtJSlMvJA3DuTA47pUp7Xw=
-X-Google-Smtp-Source: AGHT+IGpOOyav4QiXCYpdzkYZ9W8D+ymlaq61D18wyokTXe6pDY4lKM0Hibru1iPS+WC2ZC0GshPTrvcdplx56sMC1c=
-X-Received: by 2002:a17:907:9494:b0:ace:d4f8:b687 with SMTP id
- a640c23a62f3a-acee21aebb0mr411044966b.20.1746040538666; Wed, 30 Apr 2025
- 12:15:38 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53UJQ5et4051868
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 30 Apr 2025 14:26:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746041165;
+ bh=IaEk1gMoNo13Kw1ih5ENsV3bqP0hKlXgyibI8j2g42s=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=xzA+2ssyHjcyG6Razs7N+8FMFnoJTcv8TX8FTFTRRqcki9Jne65j3elq4cOLfohkZ
+ DD65x6mwXjt1Dg6We+C67XW1RkapAwamQx0DdOjq4AmOXrKm9rL+LrAla/kH+bnMiF
+ j1MAxjiuHd8txeGu5idbHnGwAvCXgypvlJn97V2g=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53UJQ5L2036056
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 30 Apr 2025 14:26:05 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
+ Apr 2025 14:26:05 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 30 Apr 2025 14:26:04 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53UJQ4dg098612;
+ Wed, 30 Apr 2025 14:26:04 -0500
+Date: Wed, 30 Apr 2025 14:26:04 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: "Raghavendra, Vignesh" <vigneshr@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1] arm: add call to cleanup_before_linux for go command
+Message-ID: <20250430192604.5dmv465thftsm2uj@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250430135751.2626849-1-anshuld@ti.com>
+ <20250430162904.nmjqomr2kmxhllfc@bryanbrattlof.com>
+ <20250430163156.GV1261075@bill-the-cat>
+ <fa03eca6-1cdc-4ff6-abb6-fde05682da01@ti.com>
+ <20250430174004.GX1261075@bill-the-cat>
 MIME-Version: 1.0
-References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
- <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
- <d7b41927-e375-4f85-b4fd-cda39defd9e3@canonical.com>
- <CAFLszTiEKdf2F6=jomTfxj-cmECefxmwd=MQ3drsP0pNC-4oFQ@mail.gmail.com>
- <0ce6f15b-7fb9-46d6-b06f-15174d318e79@canonical.com>
-In-Reply-To: <0ce6f15b-7fb9-46d6-b06f-15174d318e79@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Apr 2025 13:15:25 -0600
-X-Gm-Features: ATxdqUGqlacc0kGyfXHfgCVhSnWAJLqPp7IE_kpqJ8os5J9bfDwuqulLItfCp_g
-Message-ID: <CAFLszTgRfa6ER-UtpfSyKRkTQWrY_ZBvUU905+wn5T=sVjC3=g@mail.gmail.com>
-Subject: Re: [PATCH 1/1] bootm: pass kernel load address not entry point for
- IH_OS_EFI
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>,
- Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20250430174004.GX1261075@bill-the-cat>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,86 +84,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On April 30, 2025 thus sayeth Tom Rini:
+> On Wed, Apr 30, 2025 at 10:56:27PM +0530, Raghavendra, Vignesh wrote:
+> > 
+> > 
+> > On 4/30/2025 10:01 PM, Tom Rini wrote:
+> > > On Wed, Apr 30, 2025 at 11:29:04AM -0500, Bryan Brattlof wrote:
+> > >> On April 30, 2025 thus sayeth Anshul Dalal:
+> > >>> As discussed here[1], the go command causes undefined behavior when used
+> > >>> for running custom OSes since the icache might hold outdated data. OSes
+> > >>> usually also expect the MMU to be disabled upon execution.
+> > >>>
+> > >>> Therefore this patch adds a call to cleanup_before_linux before we jump
+> > >>> to the loaded program/os which disables both the caches and the MMU.
+> > >>> This makes the go command's behavior consistent with riscv platforms.
+> > >>>
+> > >>
+> > >> I know quite a few other OSes are beginning to use U-Boot (QNX, 
+> > >> GreenHills or all the other RTOSes) each with their own requirements 
+> > >> from the bootloader. I'm curious if we should make boot* a little more 
+> > >> generic rather than abuse the 'go' command.
+> > 
+> > VXworks has its own:
+> > https://docs.u-boot.org/en/stable/usage/os/vxworks.html
+> > 
+> > I suppose QNX and others should ideally have their own cmds as needed.
+> 
+> Well, what's the QNX output file format (options?) again?
 
-On Wed, 30 Apr 2025 at 09:17, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 30.04.25 17:01, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Wed, 30 Apr 2025 at 08:04, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> On 30.04.25 15:54, Simon Glass wrote:
-> >>> Hi Heinrich,
-> >>>
-> >>> On Wed, 30 Apr 2025 at 04:55, Heinrich Schuchardt
-> >>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>>
-> >>>> The EFI sub-system needs the load address and not the entry point
-> >>>> to boot the binary passed from the bootm command. The entry point
-> >>>> is derived from the PE-COFF header of the binary.
-> >>>>
-> >>>> Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
-> >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>>> ---
-> >>>>    boot/bootm_os.c | 4 ++--
-> >>>>    1 file changed, 2 insertions(+), 2 deletions(-)
-> >>>>
-> >>>> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> >>>> index dc9d3e61fca..a3c7cb5332e 100644
-> >>>> --- a/boot/bootm_os.c
-> >>>> +++ b/boot/bootm_os.c
-> >>>> @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
-> >>>>           /* We expect to return */
-> >>>>           images->os.type = IH_TYPE_STANDALONE;
-> >>>>
-> >>>> -       image_buf = map_sysmem(images->ep, images->os.image_len);
-> >>>> +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
-> >>>>
-> >>>>           /* Run EFI image */
-> >>>>           printf("## Transferring control to EFI (at address %08lx) ...\n",
-> >>>> -              images->ep);
-> >>>> +              images->os.image_start);
-> >>>>           bootstage_mark(BOOTSTAGE_ID_RUN_OS);
-> >>>>
-> >>>>           ret = efi_binary_run(image_buf, images->os.image_len,
-> >>>
-> >>> In this case ep should be set to image_start as it is with many
-> >>> methods. How come it isn't in this case?
-> >>
-> >> As described above the entry point is encoded in the PE-COFF header.
-> >>
-> >> What makes you think that a user would set it in an its file containing
-> >> an EFI binary?
-> >>
-> >> If it where set, it would point to an address after the load address and
-> >> not to the start of the PE-COFF header.
-> >>
-> >> The proper design would completely remove load and entry addresses in
-> >> FIT images and use LMB for memory allocation.
-> >
-> > You are missing the point entirely.
-> >
-> > However the image calculates the entry point is up to that image. But
-> > the correct entry point should be put into ->ep
-> >
-> > We can't have some OS--booting functions using ->ep and some using ->os.load
-> >
-> > So please dig in a little more and fix whatever is going wrong here
-> > and ensure that ->ep is set correctly. If you need help, please ask.
->
-> The only information that the EFI sub-system cares about is the start of
-> the image. That information is in os.start_image.
->
-> Field ep is for the entry point and not for the start of the image and
-> EFI should never take it from the FIT meta-information.
->
-> This is why whatever value I put into the field entry of my handcrafted
-> its file is completely irrelevant.
+I've only ever seen outputs in compressed binary formats but I've been 
+told there are tools to produce an ELF for the simulators
 
-As discussed, we should split efi_binary_run() so that we can do the
-loading. For now:
+> 
+> > > Well, that's what bootelf is for :)
+> > > 
+> > 
+> > And if its not an elf but some .bin file "go" cmd should be used in
+> > conjunction with "cache" cmd here to flush/disable cache, I guess?
+> 
+> Well, what exactly are we talking about? Is this an "in theory" or some
+> project(s) which exist today?
+> 
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+I noticed this thread mainly because of the number of RTOS people asking 
+me about low level stuff U-Boot and TF-A is doing. I haven't seen any 
+'In-Production' type bugs but I wouldn't be surprised if U-Boot is being 
+used in their CI environments today.
+
+~Bryan
+
+> There's a whole lot of reasons for either a legacy header and bootm or a
+> not-legacy FIT image. The "go" command is for the "U-Boot is a debugger"
+> side of the world, not how you should kick off some OS/application in
+> production. It is all of the "this is dangerous" idioms.
+> 
+> > If so, we should probably update the docs for this cmd appropriately so
+> > as to avoid end users overloading like what RISC-V did?
+> 
+> Yes, we should clarify things as needed and unwind, most likely, what
+> RISC-V is doing. But not blindly so as perhaps there's now, sigh, a
+> production / in-the-wild case here and we're now in a sticky spot.
+> 
+
+I like the idea of boot${OS} flags if only to standardize the interface 
+of how each OS should boot. I worry about situation where custom 
+scripting is being used to boot in production rather than stdboot
+
+~Bryan
