@@ -4,103 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B03A8C369DC
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 12:19:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 977FAC369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 13:54:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 860B682B7F;
-	Wed, 30 Apr 2025 14:19:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id A0DF082153;
+	Wed, 30 Apr 2025 15:54:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QzFVfJR6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YFqGaZcA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8F4282B45; Wed, 30 Apr 2025 14:03:11 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E067281E72; Wed, 30 Apr 2025 15:54:28 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18CAE82153
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:03:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 862EC8070C
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 15:54:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1746014587;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=80SPIOkxMpI1E0S/H6ROoM3HWNqd5Wmg6EEagJmHnY4=;
- b=QzFVfJR63MGqUmHgmVi+BBnnDTlJdsCQZR51mqPwAFbbyibCkyFQAylkgs7XUEdiOtKiGv
- Lrh19w/GJUAsK+trX1ZNfPCYLtmQI1bo/vqfZ3rXdicZwqnyT+qHAIh2GGuIPMympoUX2+
- 40KHALUTDumLCsnMf9mjqNcc2/x4a9c=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-640-TxWHnkTNO-S31A2sZ0Atew-1; Wed, 30 Apr 2025 08:03:06 -0400
-X-MC-Unique: TxWHnkTNO-S31A2sZ0Atew-1
-X-Mimecast-MFC-AGG-ID: TxWHnkTNO-S31A2sZ0Atew_1746014585
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3978ef9a284so2382093f8f.3
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 05:03:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ace333d5f7bso1197873566b.3
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 06:54:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1746021266; x=1746626066; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Bb2AtP0rl03IsctYqRhAqds4E0Ycqjd2mbSCSZUl+CA=;
+ b=YFqGaZcA/YfSOlGd/L87df8xkCrwOHqiX7XZGIadnBdJcWr935Y3PUDCpAtU6WkVxN
+ h6D4dM/rIBmyCqoBNtz68l56iTYFDQFdUrhm9SvqkGAxWQRWpowbxNT5THySiw13XHip
+ SwoDnUKWlnX3Dw/kvZCDEgIkJixp1JO7vGdO8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746014585; x=1746619385;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7FgjHmcc5b1UF/ZgUHB+OyzRPU/V5thX9VPaSfQ3OX0=;
- b=E4XE+jv1mSr7H8TydFLigABa64rqJbr59mpTqfaygc1409Vm98+MPg9eVjzIHFexHI
- TFUE4iQ7f+630BG0H1YxfJ6LhTw39y4mrheVcprxiJNWT+sISEalSbFCMmjhBNJUvGHt
- wfTIqSYw8+PSTnYJnTdQjLrTaR7vcrmqdQn3vRyEcXhzVubR+3/uL3eo4vrHo5HuAl6D
- 4V8nZKYf+zHUtmp3FnG5vXti78R19NawYMnmqx49hZCA58Q4jNHTXfrnDiC8MsOX0kuB
- l3jvs2TcggGcMFPszRYHdXIdK51q9CpVS1uy7xPrODOg1yfOWRciBzDiRtdQrsVK2H68
- cnGw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrEs6eytkE5bjBeGXgoCcboTM0r5zpNacZXaPqvaxpWgwZngrsboQhwVNUx2kYdXrWPPDPqKw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7CudkmfqtA3vX8wWicRfRSug8v8ng06pOA7YdZ9B9tstSu0fK
- swQbi03zpGr2DWaeM1kJ2aJLan8oTI1DBieNKPxQWPzK3tQtwkyxOtG0xPoxl8BkFbs4E6M6n/t
- edvgw1dei+vqN52M7oN79XCYfmv+R/wns8cMQsHqjU7MeWbKz3d0=
-X-Gm-Gg: ASbGncuU5iP0sdNIuBwFvsTTaUXuf593HbSLT0LcjBWL8D5T4cJE3HTCfVxb2q67afc
- 4835AdfhMsak9DjjfCJkDuvVWdUVDWFS1iwBMRKiTwje1qXJYHceN7ZOehT+tck/uaRnIhJs8re
- pDm3PPbOxKKuOK3XsB/jsHhJGZ5MiBu6u+H0WTdL78+lBd6EAb+puG2x0oAHMk0+HrGAx9VutYd
- ALuUC3AH3N2GPocudq+0f0xkFtC/8uBODwSWteuosrj3Mljl2z+MCFzfuwXZIOLf+0Qywo+hZcS
- 4BG1wqnUCE1tB8Kgp64=
-X-Received: by 2002:a05:6000:2284:b0:39a:ca04:3dff with SMTP id
- ffacd0b85a97d-3a08ff50af2mr2071533f8f.40.1746014584339; 
- Wed, 30 Apr 2025 05:03:04 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE5vig1TRMt6hoHhj+gnEtw7Z7H1yMxvCuM0kxuaA1iGADODfIDZWxjqpYfY+KUqB07v2aZAw==
-X-Received: by 2002:a05:6000:2284:b0:39a:ca04:3dff with SMTP id
- ffacd0b85a97d-3a08ff50af2mr2071432f8f.40.1746014583530; 
- Wed, 30 Apr 2025 05:03:03 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073e5d52bsm17305486f8f.90.2025.04.30.05.03.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 05:03:03 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@redhat.com>
-To: george chan <gchan9527@gmail.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH 0/3] u-boot chain-loading LineageOS bootimg
-In-Reply-To: <CADgMGSt5gRFymqX3mtpiAx77b3a_cH0_2kR+8-Y5SwT25XpeQg@mail.gmail.com>
-References: <20250427-android-boot-v1-0-bb6b37c9c9f1@gmail.com>
- <dfe2c6d1-1935-4af3-b7d2-b04fdcbe6f29@linaro.org>
- <87v7qnwesw.fsf@kernel.org>
- <CADgMGSt5gRFymqX3mtpiAx77b3a_cH0_2kR+8-Y5SwT25XpeQg@mail.gmail.com>
-Date: Wed, 30 Apr 2025 14:03:02 +0200
-Message-ID: <87v7qlrh55.fsf@kernel.org>
+ d=1e100.net; s=20230601; t=1746021266; x=1746626066;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Bb2AtP0rl03IsctYqRhAqds4E0Ycqjd2mbSCSZUl+CA=;
+ b=aVOUlmvpxpyKr8zt9n6LKGOHYia3JfcgXvX1STlpw9j58XJ1g8QzTdgqe3X61Jvsy1
+ 1UtTVTShbzFgZdu/fVTd4EP5qRMqIHlfT86yH4nAU79xPyD1z/Ai4kIM+gjP+Wwyxm52
+ vlLLhfzO9bYbQGx6+JWvfsubDDXGdsriRf5zGO96DvSJIAQ6oX8plUi1130bJ14pyjnw
+ hKwpBd4t2ZjaALraAt9+THSiq69pkyCA1BFPSFWKsjp1Y2cVln5xH8KabnAnuw3cf7e1
+ iukJR9dF8blqm0TD72hm1qb3iR/A2ev+tAKNfuAIBoIRGbNqfcqSOsqbP36l9uAtror8
+ Xvzw==
+X-Gm-Message-State: AOJu0Yw/xdA5HSsBHk3Qju0ihJDcbiB+fMFdOYVEj4t0D4Nrp/AqGW7G
+ HMU99OYVThBaSjrTNq6/SmRtXnTVH4KuOgGT5oaHYqjhPms51sWBhHLjnXaDvE7lOwJCkdNIt+5
+ Kl3/9CzS0SpqdhstU+5IaTlr7KuoBQZBVdlz9
+X-Gm-Gg: ASbGncsHYtPS48ULdJ7V2NSyvlJV8MWYF8EqKMdnWfumGB5GYwZgo0p+JGatkxi6w32
+ I6WIQ9xCvUqTHjzceZdc15oq4/VW/2u2RrDvmQzG6zR2Qn8FgVLXj0J2Xxt56CzCbNRI9FaZywP
+ Wgj9TBN0pE8KwLaeX678ApV2E=
+X-Google-Smtp-Source: AGHT+IHEn1V4EgpWoghi5UNU+Fs0yDXOSdH3qLEr7YwxVEye3ZUflZZVf4BjbAllmzMdkMMyhDOfkGA/UKkE4P2nUBo=
+X-Received: by 2002:a17:907:3f1a:b0:ace:6882:510d with SMTP id
+ a640c23a62f3a-acee21ec1a5mr276803666b.24.1746021265914; Wed, 30 Apr 2025
+ 06:54:25 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: GnMBnnEVM1SiWiaR9nZ-XG5rxwB7CqZwS5-o95Ngpu4_1746014585
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 30 Apr 2025 14:19:14 +0200
+References: <20250429132239.251756-1-sjg@chromium.org>
+ <20250429134846.GA1261075@bill-the-cat>
+ <CAFLszTgrJvgWJaCXFgefJ1bObsrGfZa6AC8C6ypFRKJQTWm5ZQ@mail.gmail.com>
+ <20250429145347.GG1261075@bill-the-cat>
+In-Reply-To: <20250429145347.GG1261075@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 30 Apr 2025 07:54:11 -0600
+X-Gm-Features: ATxdqUGir3-cSMeLUaWQ50WroJo_f88XK0XNKe9NCbxOTK2H5EZnoXGewrkcNoA
+Message-ID: <CAFLszTjG4-3hjD2c4O7XaCQVheiY050rsVEh1RTyVH7QXYatTg@mail.gmail.com>
+Subject: Re: [PATCH 00/30] patman: Move to asyncio and other updates
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ Douglas Anderson <dianders@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Leonard Anderweit <l.anderweit@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,230 +104,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi George,
+Hi Tom,
 
-On mer., avril 30, 2025 at 11:58, george chan <gchan9527@gmail.com> wrote:
+On Tue, 29 Apr 2025 at 08:53, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Apr 29, 2025 at 08:35:24AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 29 Apr 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Apr 29, 2025 at 07:21:57AM -0600, Simon Glass wrote:
+> > >
+> > > > This series moves patman to use asyncio instead of ThreadPoolExecutor
+> > > > since it makes it easier to handle requests sent from different parts
+> > > > of the code.
+> > > >
+> > > > It also includes some updates to bring patman in line with the other
+> > > > major Python tools (buildman and binman).
+> > > >
+> > > > With this series, we have a better basis to add support for syncing more
+> > > > data from a patchwork server.
+> > > >
+> > > > After this, the next step it to add a new 'patman series' subcommand, to
+> > > > track and manage series workflow.
+> > >
+> > > This conflicts with master, please rebase this if you intend for it to
+> > > be merged to mainline.
+> >
+> > I will take a look and see what patches my tree is missing.
+> >
+> > >  And to avoid confusion, while I think managing
+> > > these python projects in this manner (and not AFAICT following python
+> > > best practices) makes life harder for everyone else, that is not me
+> > > NAK'ing taking more patches, I continue to be compromising and "Saying
+> > > Yes" to things you do that I disagree with on non-arbitrary technical
+> > > grounds.
+> >
+> > I'm open to managing them in my tree if that helps. For now it seems
+> > like too much work to manage them separately, but if someone wants to
+> > volunteer to help, I could do it.
+>
+> Again, if you won't manage them standalone as seems to be normal best
+> practice,
 
-> Hi Mattijs,
-> CC: Casey,
->
-> Thx for your reply.
->
->
-> =E5=9C=A8 2025=E5=B9=B44=E6=9C=8829=E6=97=A5=E9=80=B1=E4=BA=8C 16:30=EF=
-=BC=8CMattijs Korpershoek <mkorpershoek@kernel.org> =E5=AF=AB=E9=81=93=EF=
-=BC=9A
->
->> Hi George,
->>
->> Thank you for contributing.
->>
->> On lun., avril 28, 2025 at 15:53, Casey Connolly <
->> casey.connolly@linaro.org> wrote:
->>
->> > Hi George,
->> >
->> > Thanks a lot for the series, it's super exciting to see support for
->> > booting Android on top of U-Boot :D
->> >
->> > On 4/27/25 13:25, George Chan via B4 Relay wrote:
->> >> This is a series of patches to enable chainloading LineageOS on qcom
->> SOC.
->> >>
->> >> First patch is to workaround kernel/ramdisk invalid addr by identify
->> >> its physical memory address out-of-range. Since qcom SOC usually have
->> >> 0x80000000 as start/base/real memory address but androidboot img
->> >> specified to around 0x0. If other vendor bootloader behave similar th=
-en
->> >> this patch can also workaround it as well.
->> >
->> > I'm curious to know what values are there, tbh I think U-Boot should
->> > entirely ignore the values in the boot image but I guess that could
->> > break some other platforms.
->>
->> Yes, some platforms actually use the values from the boot.img.
->> We had some breakage on Khadas VIM3 in this area. See:
->>
->> https://lore.kernel.org/all/20241003-android-fix-boot-v2-v1-1-13e8e44af4=
-b7@baylibre.com/
->>
->> The above thread also mentions how to repack a boot.img, where we can
->> specify a different ramdisk address.
->>
->> It's a bit unclear to me why it's impractical to repack the boot.img and
->> specify the appropriate address. Could you elaborate ?
->
->
-> It is hard to ask less experience people to modify the boot img....I do
-> prefer no mod is the best. Why get life so complicated, my friend?
+I wonder whether that was intended to throw shade at my approach, but
+if so I'll let it go.
 
-Sorry, In my opinion this is not a valid argument. Why is patching the
-bootloader more complicated than repacking the boot.img ?
+Anyway, I don't completely understand the best-practice argument,
+although I am open to it. It is extra work to set up CI, etc, but
+probably not a huge amount. If I get keen one day perhaps I will take
+a look. Just so many things on my plate already, as you know.
 
-Can you maybe illustrate with a detailed example?
+> we'll just keep them in mainline. It's up to you if they
+> diverge or not, but it would be easy to avoid I would think.
 
-The offsets can also be configured via the Android build system directly
-by modifying BOARD_MKBOOTIMG_ARGS, see:
-https://cs.android.com/android/platform/superproject/main/+/main:device/aml=
-ogic/yukawa/BoardConfig.mk;l=3D114?q=3DBOARD_MKBOOTIMG_ARGS&start=3D1
-https://cs.android.com/android/platform/superproject/main/+/main:device/lin=
-aro/dragonboard/linaro_swr/BoardConfig.mk;l=3D17?q=3DBOARD_MKBOOTIMG_ARGS&s=
-tart=3D21
+Yes I can't imagine it will be difficult as there are so few patches.
 
->
->
->> >
->> > How about adding a config option CONFIG_ANDROID_BOOTIMG_IGNORE_ADDRS a=
-nd
->> > just ORing it in all the places that have checks like
->> > "img_data->kernel_addr =3D=3D 0". Then you can enable this for
->> > mach-snapdragon by selecting it in the ARCH_SNAPDRAGON config definiti=
-on.
->>
->> If we need to add this in U-Boot, I'd prefer this option as suggested by
->> Casey.
->>
->
-> No problem. If this approach have wider audience and also benefit other
-> soc/device, I am glad to know. Lets wait for user of below code and see i=
-f
-> any willingness to migrate.
->
-> https://github.com/u-boot/u-boot/blob/d75998b476de439a05b2f7ec95d426410bc=
-aae18/boot/image-android.c#L271
->
-> And
->
-> https://github.com/u-boot/u-boot/blob/d75998b476de439a05b2f7ec95d426410bc=
-aae18/boot/image-android.c#L281
->
->
->> >
->> >>
->> >> Second patch is enable bootmeth-android to have chance for extra mem
->> block.
->> >> Usually the fastboot mem block, to hold androidboot img, and loadaddr
->> for
->> >> unzipped kernel. If other SOC have extra mem block available but
->> >> fastboot block, we can add extra logic to take care of it.
->> >
->> > There is a small hack in mach-snapdragon that we put kernel_addr_r and
->> > loadaddr at the same address to avoid using up too much memory on
->> > devices that only have 1GB which explains this crash because we try to
->> > decompress the kernel to the same address it got loaded too.
->> >
->> > I think we can get away with giving loadaddr its own allocation of 64M
->> > or so, maybe 96. This would make your second patch redundant (and feel=
-s
->> > like the right fix to me)
->>
->> I was not aware of this hack, but I agree with Casey.
->>
->
-> Hmm... I have no idea/experience about it. Casey will you follow this iss=
-ue
-> with a proper patch?
->
->
->> >
->> >>
->> >> Third patch is optional to enable snapdragon board to have extra cmdl=
-ine
->> >> found from original bootloader that is required for LineageOS boot in=
-it.
->> >> An alternate method is to put the append string into a dummy device-t=
-ree
->> >> file, as /chosen/bootarg ofnode porperty, that also contain msm-id. T=
-hen
->> >> encapsulate as androidboot img and let u-boot as kernel binary. Below=
- is
->> >> an example for Xiaomi Miatoll device.
->> >
->> > I assume you're chainloading U-Boot on this device? If so, isn't it
->> > enough to just copy the boot args that ABL gives us and maybe tweak a
->> few?
->> >
->> > I'd also rather keep this constrained, maybe an android specific board
->> > callback to set boot args (if there isn't one already) and have the FD=
-T
->> > fixup code be alongside some other generic FDT fixup stuff. I'd rather
->> > not have this stuff in board specific code.
->>
->> I also agree with Casey here. Looking at patch: "[PATCH 3/3]
->> mach-snapdragon: Add support to append string to kernel cmdline", the
->> android bootmethod already takes care of some androidboot.* arguments.
->> See:
->>
->>
->> https://source.denx.de/u-boot/u-boot/-/blob/master/boot/bootmeth_android=
-.c?ref_type=3Dheads#L504
->>
->> For androidboot.verifiedbootstate=3Dorange, this is done via
->> avb_append_commandline_arg() when AVB is enabled in U-Boot.
->>
->
-> Reasonable. My plan is remove all default params. I still not decided to
-> let kconfig do it or leave it as a new env var. And put that post-pending
-> logic into fdt-support.c
->
-> Thx again,
-> George
->
->
->> >
->> > I hope this makes sense, feel free to ask for clarifications on anythi=
-ng.
->> >
->> > Thanks and kind regards,
->> >
->> >>
->> >> /dts-v1/;
->> >>
->> >> / {
->> >>          qcom,msm-id =3D <443 0x0>;
->> >>          qcom,board-id =3D <0 0>,
->> >>                      <0x10022 1>,
->> >>                      <0x20022 1>,
->> >>                      <0x30022 1>,
->> >>                      <0x40022 1>,
->> >>                      <0x50022 1>;
->> >>
->> >>          #address-cells =3D <2>;
->> >>          #size-cells =3D <2>;
->> >>
->> >>          memory {
->> >>                  ddr_device_type =3D <0x07>;
->> >>                  /* We expect the bootloader to fill in the size */
->> >>                  reg =3D <0 0 0 0>;
->> >>          };
->> >>
->> >>      chosen {
->> >>              bootargs =3D "";
->> >>      };
->> >> };
->> >>
->> >> Signed-off-by: George Chan <gchan9527@gmail.com>
->> >> ---
->> >> George Chan (3):
->> >>        boot/image-android.c: Workaround androidboot kernel/ramdisk ad=
-dr
->> >>        boot/bootmeth-android.c: Reuse fastboot memory block for unzip
->> kernel
->> >>        mach-snapdragon: Add support to append string to kernel cmdlin=
-e
->> >>
->> >>   arch/arm/mach-snapdragon/Kconfig | 11 +++++
->> >>   arch/arm/mach-snapdragon/board.c | 97
->> ++++++++++++++++++++++++++++++++++++++++
->> >>   boot/bootmeth_android.c          | 12 +++++
->> >>   boot/image-android.c             | 10 +++++
->> >>   4 files changed, 130 insertions(+)
->> >> ---
->> >> base-commit: 5a0a93a768487e55ebe50a34cc90d751bf99cc56
->> >> change-id: 20250427-android-boot-ecbb768cda72
->> >>
->> >> Best regards,
->> > --
->> > Casey (she/they)
->>
-
+Regards,
+Simon
