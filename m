@@ -4,86 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A84D9C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:40:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A022CC369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:51:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6C2A82BAF;
-	Wed, 30 Apr 2025 16:40:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C5568215E;
+	Wed, 30 Apr 2025 16:51:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MZMrAfkP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TeFCOox3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB51B82B95; Wed, 30 Apr 2025 16:40:26 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id DEEE482153; Wed, 30 Apr 2025 15:55:15 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8F228210F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:40:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF49882B66
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 15:55:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3cfce97a3d9so33279565ab.2
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:40:24 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac2963dc379so1092232066b.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 06:55:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746024023; x=1746628823; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=K/gpf2M9mvWWhxVt4rKC10XtunU5UdKNkpjRNVX6ikA=;
- b=MZMrAfkPvO4yfGbnNsTjA5/wJdhHhuL7lZQWtS/RG0Ojr5JV289ACTBZTgzaGqc4LR
- gcthKhE9G8fqnOV06hpQpUE7by92yiYHOmtRYKftU7Z/WOgof5UPoFgIQx82wyjZg4Zv
- /VuhXV4EYod2uBfKVRKGw9AH9uN+bOyMRVBa8=
+ d=chromium.org; s=google; t=1746021313; x=1746626113; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qDRRPkvOm8rTawrPH3XDZ0kUtiK9FrL3dZ25X16e4/c=;
+ b=TeFCOox3RJAR9sf6apAGetw3yl8JZxtY7zp5snKi2ggSYps1n9xjktBYiohmzY2Gk0
+ qlVVGeSlyBb2QbDdtANIAwXbUa7oq3yEfpa7QbP6PWQk1aXrCrc/7c8wXZ65fhZN1POv
+ 08+BY0hVclsrJv3glfX4FnYZkUxXWxtGs5nVw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746024023; x=1746628823;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=K/gpf2M9mvWWhxVt4rKC10XtunU5UdKNkpjRNVX6ikA=;
- b=THHw9dP1smanYHlob9QVge9JuPiW9u+HenQ+8Bn361WJZAqMKpXRqay/g+l1icu/I3
- Et8kEht9FHI2bVVAPcx/1BZ5J4eyZtDfHVfVOEUvOxBh10i749pdKp2yFX0Vk6lMCVrv
- rtcDusZXeYGe3SmW8ApI+Vp7NUSeb1xBzD548XpzHqcUeXQCU2KpL0uWDr36Z0mW2Sof
- jIhfE6ChcMwHv8+JhokTVhlnVUpLuuYyD6KbU3OChvoM/NpNLa/hf+GSB2lSEN5jVPUm
- lqAZs39dvLJY340ho6zF8Tgxt1hY+YZapNdQdnA62460DgDvPY1wSbZLUVWN0KrR94/H
- BEGw==
-X-Gm-Message-State: AOJu0YzN9/hi3PeX0eqW/4jZVg6QAG9WKz9lDLB34B1dGvS9m4VZFCVt
- ctLwvBvp+P3fMnTQLYA8WdOv2oHEPuD6F8caRdtU525sQvIy+ZHWVUTvJAP2ustJbfxVoQokp4U
- =
-X-Gm-Gg: ASbGncuFg9skLWy7gCBSKwSC30Hjbjv9uP4tAhFlIAbmTIGNXqqzWnoVxJUmpZAB6xd
- aOgsYKfVZffHqZ4K7fIUt87pt24WOrHd6CI7i30pURZ21yWQswmQyO3LSJxPGf9q8hNQ6HbLuXw
- hC5DoMViJbr2fpe2QuQFVHZRVTuiVbnP/IOTU6nt4i6gyjTtKPzeY/7+QX8UmaCya0MUHl9L3na
- XKdyAB7C62+nN/sw3mFeKRCvaednhjc+MDK2GjyaR5kCSU8+mFoef5Yto22M8CuJq9BS3oQLkU3
- uObd889LcjE+5ny5LTtCm8XZuoSVrw/iYOlrnnNHtTKTLjXyypGn6x6EDA1oHsmjjVKYNwkk9dc
- WCw==
-X-Google-Smtp-Source: AGHT+IHAiB/fgKuv1MAWgApJzNzsT4OThF8lDdpuebMwfOxF5aiprXEhQKEzFJFBlTkBZ/MnTl9H+A==
-X-Received: by 2002:a05:6e02:1a89:b0:3d9:6379:86e9 with SMTP id
- e9e14a558f8ab-3d967fa3bcdmr27469465ab.5.1746024022866; 
- Wed, 30 Apr 2025 07:40:22 -0700 (PDT)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d95f2a2f73sm8580995ab.3.2025.04.30.07.40.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 07:40:22 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH 2/2] net: Move env_get_ip() out of the header file
-Date: Wed, 30 Apr 2025 08:40:01 -0600
-Message-ID: <20250430144014.1698011-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250430144014.1698011-1-sjg@chromium.org>
-References: <20250430144014.1698011-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1746021313; x=1746626113;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qDRRPkvOm8rTawrPH3XDZ0kUtiK9FrL3dZ25X16e4/c=;
+ b=amaDX+Q45PtZ36ZULvJ25LxIg0QjBdzjfBh2W5CU7oe1bPo4+8M8u2sMJETkIiqEND
+ bKe7ABD551Tw+qUph3oOFZxAiBMQL4+j4x2XKMc7D5gikeVIFKcCpHBT5I+709dQpKgN
+ bIoCngPWr9ucdw65wlG8rCe1NrhB+KzriFNjjM9gpHIhh0UEr41JEYPWUPhSn5UiTRKl
+ D5z08Z1LQmeYfMH1PA7qoSkP1JD0JHlllIkLz//xjPq0tWEJ8tgXIY80kcvLB90KyfU6
+ ixI0AzTFeDLoU9dKUHUNFJZij64DPtzTAdlxx0zMH9STbAGYMQMvLdZtesKVoZ4cJbWp
+ rTFA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWrahyA9n03tbzSsGGU3qj0VAbuYhBd3lw6h72nm+5iYttjYzNssVweUqzpbE0gsAYisYBrViQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbiP2HeIktLxsoYj2+mfQG6Yfs24NtnHQKQc+YCjv8YqiC4C2V
+ z5Ac/MSzejs+fUyl70IIUW7wUM8s4S0PVXiF9iXVUpEeEXbSpg6ieddo3FQ+JaAXnu0G8DxWQgF
+ +u09fqLlsblyNsdGDELfV9XG89yFpeb4n8NSB
+X-Gm-Gg: ASbGncstJi4ljp/V8yR1oDcw4qgpafa1WVdmILMUSIl+qa35TUpEm/H6q3rXeV0rRia
+ ecrhyOOgnGfliO68sPmFIYGeSnVcaRCBaCDd4LTQksEegYF2b9wIMhlOcpZUjsod1wRmxLZSowu
+ QolUMSNiGDDjX7saOujetQkAg=
+X-Google-Smtp-Source: AGHT+IETUwM4SYopb6PnW9YeuDvWgEVs7yt7VbAPS5PFU3n1vSnMOP7Z4iFxYKQVBxbDxjtFcrqYExQXSl5RgKPhBqI=
+X-Received: by 2002:a17:906:ef0a:b0:ac1:e6bd:a568 with SMTP id
+ a640c23a62f3a-acee25c84acmr248892766b.37.1746021313003; Wed, 30 Apr 2025
+ 06:55:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250417181613.1355024-1-sjg@chromium.org>
+ <CAEfUkUJpT8YxOgdakCBbjBo_a6a6pQDR_wh=iqX5LC+cFAFJ0Q@mail.gmail.com>
+ <20250429171154.GJ1261075@bill-the-cat>
+In-Reply-To: <20250429171154.GJ1261075@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 30 Apr 2025 07:55:01 -0600
+X-Gm-Features: ATxdqUHVo3u8GyjcNZmopreLS-LdbN1DM5slAJOoA_0B2NifYGFnxYncU1wGYuc
+Message-ID: <CAFLszTjfq1TVjYSiCQmtSOZK7MoVUOFU5ycOzeBK4-5-zCKxFQ@mail.gmail.com>
+Subject: Re: [PATCH v3 00/22] passage: Define a standard for firmware data flow
+To: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Peter Maydell <peter.maydell@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Phelps <andrew.phelps@canonical.com>, 
+ =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>, 
+ Bill Mills <bill.mills@linaro.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alex Shumsky <alexthreed@gmail.com>, Alexander Dahl <ada@thorsis.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Harrison Mutai <harrison.mutai@arm.com>, Jason Liu <jason.hui.liu@nxp.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ =?UTF-8?B?TWFyZWsgTW9qw61r?= <marek.mojik@nic.cz>, 
+ Mario Six <mario.six@gdsys.cc>,
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@denx.de>, 
+ Sumit Garg <sumit.garg@kernel.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Thierry Reding <treding@nvidia.com>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Xu Zhang <423756212@qq.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 30 Apr 2025 16:51:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,64 +125,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function requires access to env.h but it is a lot to include just
-for the env_get() function. It eventually pulls in linux/byteorder which
-causes a conflict with exfat which has its own byteorder functions.
+Hi Tom,
 
-Move the function to a C file instead.
+On Tue, 29 Apr 2025 at 11:11, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Apr 28, 2025 at 10:41:25AM -0400, Raymond Mao wrote:
+> > Hi Simon,
+> >
+> > On Thu, 17 Apr 2025 at 14:16, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > >
+> > > This series adds a standard way of passing information between different
+> > > firmware phases. This already exists in U-Boot at a very basic level, in
+> > > the form of a bloblist containing an spl_handoff structure, but the intent
+> > > here is to define something useful across projects.
+> > >
+> > > The need for this is growing as firmware fragments into multiple binaries
+> > > each with its own purpose. Without any run-time connection, we must rely
+> > > on build-time settings which are brittle and painful to keep in sync.
+> > >
+> > > This feature is named 'standard passage' since the name is more unique
+> > > than many others that could be chosen, it is a passage in the sense that
+> > > information is flowing from one place to another and it is standard,
+> > > because that is what we want to create.
+> > >
+> > > The implementation is mostly a pointer to a bloblist in a register, with
+> > > an extra register to point to a devicetree, for more complex data. This
+> > > should cover all cases (small memory footprint as well as complex data
+> > > flow) and be easy enough to implement on all architectures.
+> > >
+> > > The emphasis is on enabling open communcation between binaries, not
+> > > enabling passage of secret, undocumented data, although this is possible
+> > > in a private environment.
+> > >
+> > > This series is available at u-boot-dm/pass-working
+> > >
+> >
+> > First of all, can you group those patches which are necessary for
+> > refactoring the "passage" concept into a smaller series for an easy
+> > review?
+> >
+> > Actually as I mentioned in our previous discussions, I don't agree to
+> > add a OF_BLOBLIST as this is duplicated with "BLOBLIST +
+> > BLOBLIST_PASSAGE_MANDATORY (aka PASSAGE_IN in the context of your
+> > patch - I am not sure the reason you prefer to rename it - do we have
+> > any other passage approaches other than using bloblist? And do you
+> > have any considerations to allow a fallback or not in case passage
+> > failures?)"
+>
+> As preamble, I am actively working to push the changes for
+> vexpress_fvp_bloblist to be available in CI and so provide an easier
+> testing path.
+>
+> At the high level, I don't see what the difference is between "BLOBLIST
+> + BLOBLIST_PASSAGE_MANDATORY" and "BLOBLIST + OF_BLOBLIST" or "BLOBLIST
+> + whatever v4 of this series ends up showing". Everyone seems wildly in
+> agreement that if the prior stage is supposed to give us information
+> then it must have done so.
+>
+> One of the long running "jokes" in computer science about naming being
+> one of the hardest problems applies here, too.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+I want to use OF_BLOBLIST as it clearly indicates that the devicetree
+comes from a bloblist. The BLOBLIST_PASSAGE_MANDATORY thing is a
+work-around to try to avoid having OF_BLOBLIST.
 
- include/net-common.h | 6 +-----
- net/net-common.c     | 6 ++++++
- 2 files changed, 7 insertions(+), 5 deletions(-)
+>
+> > Secondly I prefer to keep the register convention code as a xferlist
+> > library that can be used for arm arches other than split them into
+> > different low level assemblies. In case of any firmware handoff
+> > specification update, we just need to maintain this library.
+>
+> Yes, if things can be written in a C file, they should be in a C file,
+> not assembler.
 
-diff --git a/include/net-common.h b/include/net-common.h
-index f2613a41ad8..64b475b7292 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -4,7 +4,6 @@
- #define __NET_COMMON_H__
- 
- #include <asm/cache.h>
--#include <env.h>
- #include <hexdump.h>
- #include <linux/if_ether.h>
- #include <linux/sizes.h>
-@@ -464,10 +463,7 @@ int update_tftp(ulong addr, char *interface, char *devstring);
-  *	0 to 255
-  * Return: IP address, or 0 if invalid
-  */
--static inline struct in_addr env_get_ip(char *var)
--{
--	return string_to_ip(env_get(var));
--}
-+struct in_addr env_get_ip(char *var);
- 
- int net_init(void);
- 
-diff --git a/net/net-common.c b/net/net-common.c
-index 45288fe5f80..9ff06b165df 100644
---- a/net/net-common.c
-+++ b/net/net-common.c
-@@ -1,4 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0
-+#include <env.h>
- #include <net-common.h>
- 
- void copy_filename(char *dst, const char *src, int size)
-@@ -25,3 +26,8 @@ int wget_request(ulong dst_addr, char *uri, struct wget_http_info *info)
- 	wget_info = info ? info : &default_wget_info;
- 	return wget_with_dns(dst_addr, uri);
- }
-+
-+struct in_addr env_get_ip(char *var)
-+{
-+	return string_to_ip(env_get(var));
-+}
--- 
-2.43.0
+In this case I disagree and if you look at the x86 code, this kind of
+approach is just not sensible. Please take a look at the contortions
+of xferlist_from_boot_arg(). It was written for one architecture only,
+yet purports to be a general API. My approach is simpler. Also, if
+save_boot_args() is implemented by the board, then standard passage
+will be broken for that board. It's a weak function!
 
-base-commit: b5d6220dd2f4612912989f3c2b5a710f2248cb36
-branch: fix-net
+More generally, please decide if you are willing to let me maintain bloblist.
+
+Regards,
+Simon
