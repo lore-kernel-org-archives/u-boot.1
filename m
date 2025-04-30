@@ -4,51 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AD7EC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 10:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 354BCC369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 10:42:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4E1282B6B;
-	Wed, 30 Apr 2025 12:37:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 5ACAB8283E;
+	Wed, 30 Apr 2025 12:42:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="M15Zawho";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qeMIa6GD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 864B68283E; Wed, 30 Apr 2025 12:37:43 +0200 (CEST)
-Received: from mx2.securetransport.de (mx2.securetransport.de
- [IPv6:2a03:4000:13:6c7::1])
- by phobos.denx.de (Postfix) with ESMTP id 8510C82B78
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 12:37:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ id 9E0CF8210F; Wed, 30 Apr 2025 12:42:46 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 41D228283E
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 12:42:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1746009429;
- bh=YOMAhfOVy1lbRdWJyvpLGFXcQjOrvke9e4AgnwLX9QY=;
- h=From:To:CC:Subject:Date:From;
- b=M15Zawho7lt03VeBi/jcMqZrA25hDzcFl2zpqyglvCjbwiC972URLEgFAvDCry0P7
- EAoJkC+43/a4CWYurjSWjA6rM1QcfZfEFzqMRN6fFhm9WQNGNHaYf1A3aSb4BcpZWf
- 66PM4AO8kunVRbUYmmfwBL0VXsii3/UXbS4zjh4oaoRxT/Q6JPSqHmPsYMWV9OyrJm
- qJsDMhMiz8s6OgUkyKHfXfmEQoDu6+aB4W+1sAOVbKkNtGMj1SUGTVvNZauSgf7GdA
- IBDa6IP5iBUJF2oxO6VtP6IgIARJwBSa8gU9S8+6f0mhOtyb+AsGz85FF98qCy47fy
- yb/SDOc3k4eSA==
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-To: <u-boot@lists.denx.de>
-CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Michael Walle
- <mwalle@kernel.org>, Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut
- <marex@denx.de>, Benedikt Spranger <b.spranger@linutronix.de>, Jerome
- Forissier <jerome.forissier@linaro.org>, John Ogness
- <john.ogness@linutronix.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH V3] tiny-printf: Handle formatting of %p with an extra Kconfig
-Date: Wed, 30 Apr 2025 12:35:48 +0200
-Message-ID: <20250430103548.4162289-1-cniedermaier@dh-electronics.com>
-X-klartext: yes
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-patra@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53UAggiC4104337
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 30 Apr 2025 05:42:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746009762;
+ bh=ReWZ1BWj9U6ikP3jEq8hG8Et/itYppRyrVvzW126ufA=;
+ h=From:To:CC:Subject:Date;
+ b=qeMIa6GDfmyp1nqTjjgszmJmi1KEESep1/hGk4JjWj1MvjOg6RoeZRFaZQ9F8M4Vj
+ 9MRNAUQVWP7PT2a23NkYxG8a5GDKsdO7nfcroHmFFyFCKW4fsdUAjZABJMl2NODfW1
+ Wsq7ffbXt8C8ca3dRv4hZ28gKUKkplZxQfkeAMYg=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53UAgg3P041840
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 30 Apr 2025 05:42:42 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
+ Apr 2025 05:42:41 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 30 Apr 2025 05:42:42 -0500
+Received: from aparna-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (aparna-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.139])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53UAgcZo053918;
+ Wed, 30 Apr 2025 05:42:39 -0500
+From: Aparna Patra <a-patra@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <afd@ti.com>
+CC: <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <nm@ti.com>,
+ <bb@ti.com>, Aparna Patra <a-patra@ti.com>
+Subject: [PATCH 0/3] Add fdt-fixups for AM62A variants
+Date: Wed, 30 Apr 2025 16:12:33 +0530
+Message-ID: <20250430104236.2611089-1-a-patra@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,222 +79,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The formatting with %pa / %pap behaves like %x, which results in an
-incorrect value being output. To improve this, a new fine-tuning
-Kconfig SPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
-has been added. If it is enabled, the output of %pa / %pap should
-be correct, and if it is disabled, the pointer formatting is
-completely unsupported. In addition to indicate unsupported formatting,
-'?' will be output. This allows enabling pointer formatting only
-when needed. For SPL_NET and NET_LWIP it is selected by default.
-Then it also supports the formatting with %pm, %pM and %pI4.
+This series implements fdt fixups, by reading hardware
+information from registers and accordingly delete/modify
+the DT nodes, at run-time.
 
-In summery this level of %p support for tiny printf is possible now:
+Aparna Patra (3):
+  arm: mach-k3: am62a: Fixup CPU core, DSS, CAN-FD and Video-codec nodes
+    in fdt
+  arm: mach-k3: am62a: Fixup thermal zone critical points
+  arm: mach-k3: am62a: Fixup a53 max cpu frequency by speed-grade
 
-1) The standard tiny printf won't have support for pointer formatting.
-   So it doesn't print misleading values for %pa, instead '?' will be
-   output:
-   %p   => ?
-   %pa  => ?a
-   %pap => ?ap
+ arch/arm/mach-k3/am62ax/am62a7_fdt.c          | 92 +++++++++++++++++++
+ .../arm/mach-k3/include/mach/am62a_hardware.h | 81 ++++++++++++++++
+ 2 files changed, 173 insertions(+)
 
-2) If SPL_USE_TINY_PRINTF_POINTER_SUPPORT is enabled or DEBUG is defined
-   tiny printf supports formatting %p and %pa / %pap.
 
-3) If SPL_NET or NET_LWIP is enabled the support of pointers is extended
-   for %pm, %pM and %pI4.
-
-Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
----
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Benedikt Spranger <b.spranger@linutronix.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: John Ogness <john.ogness@linutronix.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-V2: - Rebase on current master
-    - Extend commit message
-    - Restrict use to SPL
-    - Rename Kconfig to SPL_USE_TINY_PRINTF_POINTER_SUPPORT
-    - Replace _DEBUG with defined(DEBUG)
-    - Output '?' if %pm, %pM and %pI4 isn't available
-    - Add break on case '%'
-V3: - Add missing output '?' for the default case
----
- Kconfig            |  1 +
- common/spl/Kconfig |  1 +
- lib/Kconfig        |  8 +++++++
- lib/tiny-printf.c  | 52 +++++++++++++++++++++++-----------------------
- 4 files changed, 36 insertions(+), 26 deletions(-)
-
-diff --git a/Kconfig b/Kconfig
-index 51358633762..b8eec3fc931 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -774,6 +774,7 @@ config NET
- 
- config NET_LWIP
- 	bool "Use lwIP for networking stack"
-+	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
- 	imply NETDEVICES
- 	help
- 	  Include networking support based on the lwIP (lightweight IP)
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index b076f49ac00..b89e0c9b4d4 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1116,6 +1116,7 @@ config SPL_DM_SPI_FLASH
- config SPL_NET
- 	bool "Support networking"
- 	depends on !NET_LWIP
-+	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
- 	help
- 	  Enable support for network devices (such as Ethernet) in SPL.
- 	  This permits SPL to load U-Boot over a network link rather than
-diff --git a/lib/Kconfig b/lib/Kconfig
-index b2aecd8a49e..e17396701c2 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -253,6 +253,14 @@ config VPL_USE_TINY_PRINTF
- 
- 	  The supported format specifiers are %c, %s, %u/%d and %x.
- 
-+config SPL_USE_TINY_PRINTF_POINTER_SUPPORT
-+	bool "Extend tiny printf with the pointer formatting %p"
-+	depends on SPL_USE_TINY_PRINTF
-+	help
-+	  This option enables the formatting of pointers %p. It supports
-+	  %p and %pa / %pap. If this option is selected by SPL_NET or NET_LWIP
-+	  it also supports the formatting with %pm, %pM and %pI4.
-+
- config PANIC_HANG
- 	bool "Do not reset the system on fatal error"
- 	help
-diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
-index 2a7a4d286c0..6bbf8fb42a5 100644
---- a/lib/tiny-printf.c
-+++ b/lib/tiny-printf.c
-@@ -47,7 +47,7 @@ static void div_out(struct printf_info *info, unsigned long *num,
- 		out_dgt(info, dgt);
- }
- 
--#ifdef CONFIG_SPL_NET
-+#if defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP)
- static void string(struct printf_info *info, char *s)
- {
- 	char ch;
-@@ -141,7 +141,7 @@ static void ip4_addr_string(struct printf_info *info, u8 *addr)
- 
- 	string(info, ip4_addr);
- }
--#endif
-+#endif /* defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP) */
- 
- /*
-  * Show a '%p' thing.  A kernel extension is that the '%p' is followed
-@@ -157,18 +157,14 @@ static void ip4_addr_string(struct printf_info *info, u8 *addr)
-  *       decimal).
-  */
- 
--static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
--				   void *ptr)
-+#if defined(CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT) || defined(DEBUG)
-+static void pointer(struct printf_info *info, const char *fmt, void *ptr)
- {
--#ifdef DEBUG
- 	unsigned long num = (uintptr_t)ptr;
- 	unsigned long div;
--#endif
- 
- 	switch (*fmt) {
--#ifdef DEBUG
- 	case 'a':
--
- 		switch (fmt[1]) {
- 		case 'p':
- 		default:
-@@ -176,8 +172,7 @@ static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
- 			break;
- 		}
- 		break;
--#endif
--#ifdef CONFIG_SPL_NET
-+#if defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP)
- 	case 'm':
- 		return mac_address_string(info, ptr, false);
- 	case 'M':
-@@ -185,16 +180,22 @@ static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
- 	case 'I':
- 		if (fmt[1] == '4')
- 			return ip4_addr_string(info, ptr);
-+#else
-+	case 'm':
-+	case 'M':
-+	case 'I':
-+		out(info, '?');
-+		return;
- #endif
- 	default:
- 		break;
- 	}
--#ifdef DEBUG
-+
- 	div = 1UL << (sizeof(long) * 8 - 4);
- 	for (; div; div /= 0x10)
- 		div_out(info, &num, div);
--#endif
- }
-+#endif
- 
- static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
- {
-@@ -269,21 +270,18 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
- 						div_out(info, &num, div);
- 				}
- 				break;
-+#if defined(CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT) || defined(DEBUG)
- 			case 'p':
--				if (CONFIG_IS_ENABLED(NET) ||
--				    CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG) {
--					pointer(info, fmt, va_arg(va, void *));
--					/*
--					 * Skip this because it pulls in _ctype which is
--					 * 256 bytes, and we don't generally implement
--					 * pointer anyway
--					 */
--					while (isalnum(fmt[0]))
--						fmt++;
--					break;
--				}
--				islong = true;
--				fallthrough;
-+				pointer(info, fmt, va_arg(va, void *));
-+				/*
-+				 * Skip this because it pulls in _ctype which is
-+				 * 256 bytes, and we don't generally implement
-+				 * pointer anyway
-+				 */
-+				while (isalnum(fmt[0]))
-+					fmt++;
-+				break;
-+#endif
- 			case 'x':
- 			case 'X':
- 				if (islong) {
-@@ -310,7 +308,9 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
- 				break;
- 			case '%':
- 				out(info, '%');
-+				break;
- 			default:
-+				out(info, '?');
- 				break;
- 			}
- 
+base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
 -- 
-2.30.2
+2.34.1
 
