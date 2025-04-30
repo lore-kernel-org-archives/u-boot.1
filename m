@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B444C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 03:19:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E294C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 05:06:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0FE38283E;
-	Wed, 30 Apr 2025 05:19:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4876C8283E;
+	Wed, 30 Apr 2025 07:06:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hS/64i1W";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E7lE3ld/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4247882AAE; Wed, 30 Apr 2025 04:24:06 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 6D10C82ACF; Wed, 30 Apr 2025 05:58:26 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAFD68272A
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 04:24:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C6E18283E
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 05:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-73bf1cef6ceso6783084b3a.0
- for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 19:24:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=gchan9527@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-3105ef2a071so67660971fa.1
+ for <u-boot@lists.denx.de>; Tue, 29 Apr 2025 20:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745979842; x=1746584642; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YrQIv9xCchPUy7jlAtdKUI8idGFTXOVKXG6gDE2gPOU=;
- b=hS/64i1WdHEkVZDTPknsbnk6LzWGhbWBxCURdcRsC9e94wx7vfyOH2JQV+xCHsOauH
- iUfJUvO387iHDt5A13pHHOMr2xsd8v+1xcS11NhA7voa4iLMNMYELIPLHra5sAuuTRI+
- D9MsJPRZiZznXXF2ZafFWllruxSUQzPb245bX+6vBfDP798fK3DLsg1rtU7+DS+9pqZD
- ZUc8ziA/O1o1PJ+DG+vn6HmA4SCfMM0Gz9vLdurOv7X0vtARRx53PH/FAuNqswd39lZP
- CtpAplhTuY/5ea7SJsf9TIkkMnCMeZu7Mjph167/461MHShBWoMLlzEjH/lVkBgotXnr
- Wucw==
+ d=gmail.com; s=20230601; t=1745985503; x=1746590303; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XxaCHjUO3GNosUAVJs0bk/0+7nWjA0ydj6GwsVfBDqY=;
+ b=E7lE3ld/E6/rbajXXuz1MxUKrfaQ1VxTNJmDkgYNvBarrsxbdYAR7d41BbqmwJblt7
+ 1XDAEZIgBUWMNEiPpbVtg/DJLIhzkyC3bEgOiL92BxaxH0yqOtoQms3zio71rzFaaeQ/
+ rnTGPTvnOfIOMIDV7Abwfb0AXa5XaTc7/nS0hYOKqKbpz+Xy7P2tTneArEQaS6YsQESj
+ keXpO3ejVrxbsW97r2XKFRBMB7cWDvzHCpR1XuZaPdz7hKKbm4SizbsKvYCQ4FcoAgAI
+ 2Lyc8iOvCFNg0JUbT80S+5ZPRYznZF43TYanHM0Y5I/capIgBmBSgNFLb+rAcwqlJa34
+ hEAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745979842; x=1746584642;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YrQIv9xCchPUy7jlAtdKUI8idGFTXOVKXG6gDE2gPOU=;
- b=dOWDjrvIZa7wI2AWLoPaoIUacA9BJurb52wmCpSgFLW/5HnF/EpS5m9NHrlTMPilBv
- /4iqgKQ1wQHZYS8vxYh+vn1k+NjZDJftYk+otdwjLjfmTxQMjTDyQUpsXhsFbDijocH1
- Wf1o92ZY4Tf3OSUXfSm5qziU1H8Y5Ll4LcqBCM1hNDC8mhc2EwAdU9DH15/Cv7wenKys
- 33vtmgad8WV4LSGerlj0hPZJj4j4VdpsFBC9wzxV9JkTiuhsHWoC45b9dbjhpNSAKlo3
- L7fUtoc/OVcIki71RfT0YBbU3vRwKKutH0suxU+tckpxXdF/HFsOBL4d/lDUig0mySdM
- hiGw==
-X-Gm-Message-State: AOJu0YzhrVXZ4MWeixb1VI2V/IOMgQAySaXftaTfXv8v7cvL44nV4Iss
- HjQC7WPKjLGuRR/C2kfl+xtrTAb1KxIKuhWP82iU9M41k37DCXMSorHtGjjz
-X-Gm-Gg: ASbGncuIAFSXIHhQc426Qu11peFLj+/xWJ16rNW9INerFeVWRRzVSweeuil7y1ePNp3
- 04KexrA1TNYOhtQz5CXkjvmB9zHscPU0sLMx2yxF9lE/11CGnAoWvAHilPbNoJJydPX3NGMMAio
- GVsefkYSoCfABBA8+ypB0LRdLT2kxVNTTw2Lvfdg8/r30AXLyZ2hcWDtSzQhgMerh3ufpHg3wgh
- omhVAyc37XX/1dIQH1wo88K69wWH1GWuWv3ljAUs5YGK+brBOU765g8/ukDw2o9+eh1uAOgJdMn
- Ek/SEmiZsPTFHYA7LKPiNBFCx3pGyXHvocKzfO6L2glcUyKobIT1LVPDjUreTEkmu/UmyzUywUz
- Talf8xyglFPpgWw==
-X-Google-Smtp-Source: AGHT+IFBvvH4h6ieolBB128+Er5hn7JhxdSxXc2oryTTowD1/nfTJtWrNVQn7OdcJKcQufywD2LT7A==
-X-Received: by 2002:a05:6a00:1411:b0:736:50d1:fc84 with SMTP id
- d2e1a72fcca58-7403a831e52mr1335891b3a.21.1745979841881; 
- Tue, 29 Apr 2025 19:24:01 -0700 (PDT)
-Received: from aristo-b7flip.. (118-163-61-247.hinet-ip.hinet.net.
- [118.163.61.247]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74039a9478bsm467400b3a.174.2025.04.29.19.24.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 19:24:01 -0700 (PDT)
-From: Aristo Chen <jj251510319013@gmail.com>
-X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: aristo.chen@canonical.com, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org,
- mkorpershoek@kernel.org, Zone.Niuzh@hotmail.com
-Subject: [PATCH v2 1/1] bootm: improve error message when gzip decompression
- buffer is too small
-Date: Wed, 30 Apr 2025 10:23:25 +0800
-Message-Id: <20250430022325.156922-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250428060757.125596-1-aristo.chen@canonical.com>
-References: <20250428060757.125596-1-aristo.chen@canonical.com>
+ d=1e100.net; s=20230601; t=1745985503; x=1746590303;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XxaCHjUO3GNosUAVJs0bk/0+7nWjA0ydj6GwsVfBDqY=;
+ b=HcgGoBVHY/anbCZArBlLWQLSDDz+JxofI0FrE7k9nbWWYzdhpqSeB4+j0h/wHJa8Wv
+ zY/VBzg8WjG70VZn+MI6Bbh/bZSxWwx3V/w6Os5I7ERa6pIQuh/M/ktPALaMpbD0NPi5
+ gEIbQD3r8Z6Wat34BH8KrLN+x74KtR5YTx5R5zcAmm73QgeAxgzdmIG/Sk8oU4Qeq4lZ
+ nIjtRJAC/nx8ucjfrFk3JXkSochp53olX+kYbwuxsQ4XEYjjEEab9kz0IIZf1IqU1RKp
+ w3tDJPQLwoqJWccatoribbpz0DPV/F1BDJgE6/tHkpF5wbMKlYhQgju4yLKJy4IND0Af
+ 0FEQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVXUVULyFyNSzVDTudBavQzdP3ppPsIScP9IEimDxxCtmsR4ttUOBUB9phJcmCdyx7l7rBST5U=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCg+qJSOkTwNxZ04jeE2E/9lHSn+wcHJkWvXN/p6sJ+m6zqsQL
+ t7P4hPHw+oQ7pl0FKflgGv4Srf0N/9ou3xqM6Ac8SwmfWkM/FPIGsT5Jhfc0zGgnnpJGz7Wspba
+ Ys1EdDH+02SoZWC22PTx3oDJKR5c=
+X-Gm-Gg: ASbGnctfeuZkJ4vq7Ac0ZlWtPRKKWICr8pkvuYSSUY1JS0kwc3ZauMIU2h3+zKDEBMJ
+ 1MZiwBXgddkRGYwxKzX6Ftz4o1fDvYyesn3BlnPqAGaNSFtuZKZx9rHvtxSjWzndK0PwyvjPAn9
+ EsRkpmPNdSjVOdxHqaOADHaLA=
+X-Google-Smtp-Source: AGHT+IH3u8N0QElhkd+K2YNnnEz/X1BGN9qDmAC+HUt53KV2FF3gdQZcqGCO7WzVzOukhCdNmF5mT9b2CcNj5VB7JuU=
+X-Received: by 2002:a05:651c:544:b0:300:5c57:526b with SMTP id
+ 38308e7fff4ca-31ea2daa17dmr2383131fa.11.1745985502488; Tue, 29 Apr 2025
+ 20:58:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 30 Apr 2025 05:19:45 +0200
+References: <20250427-android-boot-v1-0-bb6b37c9c9f1@gmail.com>
+ <dfe2c6d1-1935-4af3-b7d2-b04fdcbe6f29@linaro.org> <87v7qnwesw.fsf@kernel.org>
+In-Reply-To: <87v7qnwesw.fsf@kernel.org>
+From: george chan <gchan9527@gmail.com>
+Date: Wed, 30 Apr 2025 11:58:09 +0800
+X-Gm-Features: ATxdqUEkbwWMhG7CZiMd-qD33AFqN5JWn_pRvjVb-aVH56_YLdf5bRv3-Pe114o
+Message-ID: <CADgMGSt5gRFymqX3mtpiAx77b3a_cH0_2kR+8-Y5SwT25XpeQg@mail.gmail.com>
+Subject: Re: [PATCH 0/3] u-boot chain-loading LineageOS bootimg
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailman-Approved-At: Wed, 30 Apr 2025 07:06:21 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,62 +97,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, when decompressing a gzip-compressed image during bootm, a
-generic error such as "inflate() returned -5" is shown when the buffer is
-too small. However, it is not immediately clear that this is caused by
-CONFIG_SYS_BOOTM_LEN being too small.
+Hi Mattijs,
+CC: Casey,
 
-This patch improves error handling by:
-- Detecting Z_BUF_ERROR (-5) returned from the inflate() call
-- Suggesting the user to increase CONFIG_SYS_BOOTM_LEN when applicable
-- Preserving the original return code from zunzip() instead of overwriting
-  it with -1
+Thx for your reply.
 
-By providing clearer hints when decompression fails due to insufficient
-buffer size, this change helps users diagnose and fix boot failures more
-easily.
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- boot/bootm.c | 4 +++-
- lib/gunzip.c | 2 +-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+=E5=9C=A8 2025=E5=B9=B44=E6=9C=8829=E6=97=A5=E9=80=B1=E4=BA=8C 16:30=EF=BC=
+=8CMattijs Korpershoek <mkorpershoek@kernel.org> =E5=AF=AB=E9=81=93=EF=BC=
+=9A
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index f5cbb10f0d1..f6aa32746b7 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -34,6 +34,7 @@
- 
- #include <bootm.h>
- #include <image.h>
-+#include <u-boot/zlib.h>
- 
- #define MAX_CMDLINE_SIZE	SZ_4K
- 
-@@ -578,7 +579,8 @@ static int handle_decomp_error(int comp_type, size_t uncomp_size,
- 	if (ret == -ENOSYS)
- 		return BOOTM_ERR_UNIMPLEMENTED;
- 
--	if (uncomp_size >= buf_size)
-+	if ((comp_type == IH_COMP_GZIP && ret == Z_BUF_ERROR) ||
-+	    uncomp_size >= buf_size)
- 		printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
- 	else
- 		printf("%s: uncompress error %d\n", name, ret);
-diff --git a/lib/gunzip.c b/lib/gunzip.c
-index 52007715bda..a05dcde9a75 100644
---- a/lib/gunzip.c
-+++ b/lib/gunzip.c
-@@ -299,7 +299,7 @@ __rcode int zunzip(void *dst, int dstlen, unsigned char *src,
- 		if (stoponerr == 1 && r != Z_STREAM_END &&
- 		    (s.avail_in == 0 || s.avail_out == 0 || r != Z_BUF_ERROR)) {
- 			printf("Error: inflate() returned %d\n", r);
--			err = -1;
-+			err = r;
- 			break;
- 		}
- 	} while (r == Z_BUF_ERROR);
--- 
-2.34.1
+> Hi George,
+>
+> Thank you for contributing.
+>
+> On lun., avril 28, 2025 at 15:53, Casey Connolly <
+> casey.connolly@linaro.org> wrote:
+>
+> > Hi George,
+> >
+> > Thanks a lot for the series, it's super exciting to see support for
+> > booting Android on top of U-Boot :D
+> >
+> > On 4/27/25 13:25, George Chan via B4 Relay wrote:
+> >> This is a series of patches to enable chainloading LineageOS on qcom
+> SOC.
+> >>
+> >> First patch is to workaround kernel/ramdisk invalid addr by identify
+> >> its physical memory address out-of-range. Since qcom SOC usually have
+> >> 0x80000000 as start/base/real memory address but androidboot img
+> >> specified to around 0x0. If other vendor bootloader behave similar the=
+n
+> >> this patch can also workaround it as well.
+> >
+> > I'm curious to know what values are there, tbh I think U-Boot should
+> > entirely ignore the values in the boot image but I guess that could
+> > break some other platforms.
+>
+> Yes, some platforms actually use the values from the boot.img.
+> We had some breakage on Khadas VIM3 in this area. See:
+>
+> https://lore.kernel.org/all/20241003-android-fix-boot-v2-v1-1-13e8e44af4b=
+7@baylibre.com/
+>
+> The above thread also mentions how to repack a boot.img, where we can
+> specify a different ramdisk address.
+>
+> It's a bit unclear to me why it's impractical to repack the boot.img and
+> specify the appropriate address. Could you elaborate ?
 
+
+It is hard to ask less experience people to modify the boot img....I do
+prefer no mod is the best. Why get life so complicated, my friend?
+
+
+> >
+> > How about adding a config option CONFIG_ANDROID_BOOTIMG_IGNORE_ADDRS an=
+d
+> > just ORing it in all the places that have checks like
+> > "img_data->kernel_addr =3D=3D 0". Then you can enable this for
+> > mach-snapdragon by selecting it in the ARCH_SNAPDRAGON config definitio=
+n.
+>
+> If we need to add this in U-Boot, I'd prefer this option as suggested by
+> Casey.
+>
+
+No problem. If this approach have wider audience and also benefit other
+soc/device, I am glad to know. Lets wait for user of below code and see if
+any willingness to migrate.
+
+https://github.com/u-boot/u-boot/blob/d75998b476de439a05b2f7ec95d426410bcaa=
+e18/boot/image-android.c#L271
+
+And
+
+https://github.com/u-boot/u-boot/blob/d75998b476de439a05b2f7ec95d426410bcaa=
+e18/boot/image-android.c#L281
+
+
+> >
+> >>
+> >> Second patch is enable bootmeth-android to have chance for extra mem
+> block.
+> >> Usually the fastboot mem block, to hold androidboot img, and loadaddr
+> for
+> >> unzipped kernel. If other SOC have extra mem block available but
+> >> fastboot block, we can add extra logic to take care of it.
+> >
+> > There is a small hack in mach-snapdragon that we put kernel_addr_r and
+> > loadaddr at the same address to avoid using up too much memory on
+> > devices that only have 1GB which explains this crash because we try to
+> > decompress the kernel to the same address it got loaded too.
+> >
+> > I think we can get away with giving loadaddr its own allocation of 64M
+> > or so, maybe 96. This would make your second patch redundant (and feels
+> > like the right fix to me)
+>
+> I was not aware of this hack, but I agree with Casey.
+>
+
+Hmm... I have no idea/experience about it. Casey will you follow this issue
+with a proper patch?
+
+
+> >
+> >>
+> >> Third patch is optional to enable snapdragon board to have extra cmdli=
+ne
+> >> found from original bootloader that is required for LineageOS boot ini=
+t.
+> >> An alternate method is to put the append string into a dummy device-tr=
+ee
+> >> file, as /chosen/bootarg ofnode porperty, that also contain msm-id. Th=
+en
+> >> encapsulate as androidboot img and let u-boot as kernel binary. Below =
+is
+> >> an example for Xiaomi Miatoll device.
+> >
+> > I assume you're chainloading U-Boot on this device? If so, isn't it
+> > enough to just copy the boot args that ABL gives us and maybe tweak a
+> few?
+> >
+> > I'd also rather keep this constrained, maybe an android specific board
+> > callback to set boot args (if there isn't one already) and have the FDT
+> > fixup code be alongside some other generic FDT fixup stuff. I'd rather
+> > not have this stuff in board specific code.
+>
+> I also agree with Casey here. Looking at patch: "[PATCH 3/3]
+> mach-snapdragon: Add support to append string to kernel cmdline", the
+> android bootmethod already takes care of some androidboot.* arguments.
+> See:
+>
+>
+> https://source.denx.de/u-boot/u-boot/-/blob/master/boot/bootmeth_android.=
+c?ref_type=3Dheads#L504
+>
+> For androidboot.verifiedbootstate=3Dorange, this is done via
+> avb_append_commandline_arg() when AVB is enabled in U-Boot.
+>
+
+Reasonable. My plan is remove all default params. I still not decided to
+let kconfig do it or leave it as a new env var. And put that post-pending
+logic into fdt-support.c
+
+Thx again,
+George
+
+
+> >
+> > I hope this makes sense, feel free to ask for clarifications on anythin=
+g.
+> >
+> > Thanks and kind regards,
+> >
+> >>
+> >> /dts-v1/;
+> >>
+> >> / {
+> >>          qcom,msm-id =3D <443 0x0>;
+> >>          qcom,board-id =3D <0 0>,
+> >>                      <0x10022 1>,
+> >>                      <0x20022 1>,
+> >>                      <0x30022 1>,
+> >>                      <0x40022 1>,
+> >>                      <0x50022 1>;
+> >>
+> >>          #address-cells =3D <2>;
+> >>          #size-cells =3D <2>;
+> >>
+> >>          memory {
+> >>                  ddr_device_type =3D <0x07>;
+> >>                  /* We expect the bootloader to fill in the size */
+> >>                  reg =3D <0 0 0 0>;
+> >>          };
+> >>
+> >>      chosen {
+> >>              bootargs =3D "";
+> >>      };
+> >> };
+> >>
+> >> Signed-off-by: George Chan <gchan9527@gmail.com>
+> >> ---
+> >> George Chan (3):
+> >>        boot/image-android.c: Workaround androidboot kernel/ramdisk add=
+r
+> >>        boot/bootmeth-android.c: Reuse fastboot memory block for unzip
+> kernel
+> >>        mach-snapdragon: Add support to append string to kernel cmdline
+> >>
+> >>   arch/arm/mach-snapdragon/Kconfig | 11 +++++
+> >>   arch/arm/mach-snapdragon/board.c | 97
+> ++++++++++++++++++++++++++++++++++++++++
+> >>   boot/bootmeth_android.c          | 12 +++++
+> >>   boot/image-android.c             | 10 +++++
+> >>   4 files changed, 130 insertions(+)
+> >> ---
+> >> base-commit: 5a0a93a768487e55ebe50a34cc90d751bf99cc56
+> >> change-id: 20250427-android-boot-ecbb768cda72
+> >>
+> >> Best regards,
+> > --
+> > Casey (she/they)
+>
