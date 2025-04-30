@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF2D1C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 17:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1C09C3ABA9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 17:04:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFA1282C44;
-	Wed, 30 Apr 2025 19:03:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1EFAC82C13;
+	Wed, 30 Apr 2025 19:03:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y5k2mppE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B4S5Dk7e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C358282C2B; Wed, 30 Apr 2025 19:03:45 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 527D782C44; Wed, 30 Apr 2025 19:03:47 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90B0082C03
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 19:03:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DAF5282BB4
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 19:03:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-605f7d3215cso16385eaf.0
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:03:43 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3fcfc85f1f5so46524b6e.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:03:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746032622; x=1746637422; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746032623; x=1746637423; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gORAMEuz66rWkhYsOJnnU7dJfk2GTNkKKYVTJXOsy1E=;
- b=Y5k2mppEou4UoHTLYs13nNYDw8aYWOdYWcJrU1AWUYou2cAlRHhOX2YExdJZDtkwTB
- wCB4Ij8AvIh4i6o1resYCTT+L5+3+SVkn4SBHypOUmIDC511MpWt27OrrWnX5kA4W5yz
- gWEjcDr4NDM9qoXfH+/wJrkLiyUTLm2UhAMy8=
+ bh=o3YGltD+S9I3ySn9G5yLLLtyVW0wNsdSyrWGsUEKOyY=;
+ b=B4S5Dk7e/dnyricJ7nEppyuL5uQaE9DIUTw0ot0GnqEyTeKkx9eqgc8wa0At6PyXGn
+ 2+KX6Pw9ZJ51Y9LKGcMdrXU8xiypLk4sDgOHRDYwVumDCmL6kCf5bgns7Cisfo00w0QH
+ +4vwH22ybClMhIi7fJE8Sx8uHT6oX/X7A7Z40=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746032622; x=1746637422;
+ d=1e100.net; s=20230601; t=1746032623; x=1746637423;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gORAMEuz66rWkhYsOJnnU7dJfk2GTNkKKYVTJXOsy1E=;
- b=xLu21WSzumsmZ8rt9SUfS6exW1aS0QohI3OED1FUHpUJgdbWGLmVivymIUGouV6cRw
- fS97O5Z0TAsWS96EDcelQ7ar1oU4y/HC6RuzlS5Q1aQTzn2Mydbi99sdQUuMQEvCJAeV
- askMdaMXGSttIrkzq5XK0si5H0BoNJ0fjCUW9QCuV3T6fZEtxB3EUgjKILkylh2bKO3L
- WSzQcF6COF/2LWFZDgAfvqjgAfjAtcFuUPCBLQmqnmWPKH7zKoMI8MmsZkJt3mlkq16E
- ibbh+eHZiVebCh02UlDmp7LkwdWGGDUBn/wQ/0eI/YOn6BmmFIa6gGbrJxwn0mli6Q6r
- RPvA==
-X-Gm-Message-State: AOJu0YxR3C4AEoo98aoVr64380MOajReaBCrCqsKhZSDrd5kORaIhlE3
- OoBemtYzvoWCOv5Gk2SvvRykylZFcuYW6FVbrAfJFuglORqHGC05C9qF/icBef5H1zPfBvsZ0R0
- 1vK4=
-X-Gm-Gg: ASbGncsAm01iWy/agpk5rKFqz368BL34BDBZiS8QRodhExi8pWSQZnzsr5QGjXH7BiE
- AAn/2oSVVp6M65H6DG1LPfe2DAPrHgIFJ8NsKw8XF7q/WqzII5VNEHctd4bve8rNlE7lRmJ1tAC
- bAIFAbHSleSvywnc+Y2W4O6KhCAltehMinCBr2y2fyZZgxmPScY/xM+u84Q1UxG7rt9hs5+P0Jt
- VxLb9/JIz5bRbS/ft7Baw6dfq7GbmTdoHQPXg+euzhtBnAghmUE3FGubdRyuh/UHFxrn2VZUBJV
- 8r1uO6p3pVoJy2NFuHtuE6QWZFW+J91xfF+wJ8FGw79wRKQHA2/Pn82hYvSMCBstTU0cp0vSbRH
- 1
-X-Google-Smtp-Source: AGHT+IFRdE4Y5BCOf9+Wj62Sbw9Zn6aHRzy1Y7NRCKFmaduIzEeXq16/7hm1xdGgiC12DS8eotRE2w==
-X-Received: by 2002:a05:6820:310b:b0:602:7078:df55 with SMTP id
- 006d021491bc7-607d4469421mr2452866eaf.5.1746032622403; 
- Wed, 30 Apr 2025 10:03:42 -0700 (PDT)
+ bh=o3YGltD+S9I3ySn9G5yLLLtyVW0wNsdSyrWGsUEKOyY=;
+ b=QOSki3Q7x/YvGGyFR56UPH1IKGcdwkieRi4flOKZnVNCbJsy7muqQQn0eVjsDnDYQi
+ uJPiOnAe3WzmMtzcMFAnYRxCY4DvHSnGoMJ1I1PSFqot+gdHKpnCl0GN0Bm4t7P5FQDk
+ bYsDh7q8x2QxkKj+dnZ9rDQ9Zv9VHyVLHRO9GEv209S029IN36+wHa6U6n9CEcCBax9q
+ UHq6Z+gWtr4CVdZzTVk/xM1Fvb1cf/Q3SZ/oyKZl+2dx4S3VmafpEKXZTltJL6nNI2eV
+ tCDBIho5QPZnz9DAQCC7J/Ij/qyxEwth7IQfRc3F5SqeVmJgj2l6pAAHZzZvVzykrYwv
+ CrzQ==
+X-Gm-Message-State: AOJu0Ywxompoo/uBq1EMPGS9k4Gyw+lO/dxGhIx2RMCZRwf1v91oc9jc
+ bFsK4n00bq2qXGPQo3ObiI5ciaNiSn+edtz7RSjM9427U6gQ9r6+LJHWqd5+l2jjxtDqu4GwsoE
+ o1s8=
+X-Gm-Gg: ASbGncvBRWnkKgjTzJCjmxIlr82frz3WLyKLO7MNaAjG07G+RxS1jdyspSrAqUVUm7m
+ 4QC5TRTVOM7r32JLu8ehVNM1EczBJgeN+6LgKpPDc6ZMLasWwRM2RUbevn3ZozbqMVapXP8HpL5
+ 1l9arZCTLLZIVsbyXTAsBAE+jKuRbvi2Bp6KCz9eqMjqhoci8XGYyQSRFj6qkb9g8JvTEq9JF2k
+ jZCJZiEyotl7aoVJ9tXPXYnmK3syZOQJzK9mviKFFOKOSuFtw1RAQuJp2X3+XRYMn3hMtxDWYLE
+ 6X/I4mOM7EjKCf3FonBvOPOABRyCB0q+uO2yr3FmOyOTDx7QDK87RtFtMGQ8vOktMv+d3f/zWtd
+ s
+X-Google-Smtp-Source: AGHT+IGzxhtyTcRl9+VJBVSFmmmHmO0GxHhJVcTfe6pbh7UXoxWg0aNqHcfrLr0ioK6HHfrwHwpB0A==
+X-Received: by 2002:a05:6808:338b:b0:3f9:bc8f:8145 with SMTP id
+ 5614622812f47-402c1462423mr1887107b6e.0.1746032623467; 
+ Wed, 30 Apr 2025 10:03:43 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-402e1c102c8sm456111b6e.16.2025.04.30.10.03.41
+ 5614622812f47-402e1c102c8sm456111b6e.16.2025.04.30.10.03.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 10:03:42 -0700 (PDT)
+ Wed, 30 Apr 2025 10:03:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>
-Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Pratyush Yadav <p.yadav@ti.com>, 
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, 
- Tudor Ambarus <tudor.ambarus@linaro.org>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Vignesh R <vigneshr@ti.com>
-In-Reply-To: <20250404095612.126753-1-bernhard.messerklinger@br-automation.com>
-References: <20250404095612.126753-1-bernhard.messerklinger@br-automation.com>
-Subject: Re: [PATCH] mtd: spi-nor: Use CONFIG_IS_ENABLED for
- CONFIG_SPI_FLASH_BAR defines
-Message-Id: <174603262138.1760506.5604642456222960435.b4-ty@konsulko.com>
-Date: Wed, 30 Apr 2025 11:03:41 -0600
+To: u-boot@lists.denx.de, tkuw584924@gmail.com
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org, 
+ pratyush@kernel.org, Bacem.Daassi@infineon.com, 
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+In-Reply-To: <cover.1743575001.git.Takahiro.Kuwano@infineon.com>
+References: <cover.1743575001.git.Takahiro.Kuwano@infineon.com>
+Subject: Re: [2nd RESEND PATCH 0/2] Add support for Infineon S28HL256T and
+ S28HL02GT
+Message-Id: <174603262251.1760506.2617656011004627261.b4-ty@konsulko.com>
+Date: Wed, 30 Apr 2025 11:03:42 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,21 +99,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 04 Apr 2025 11:56:07 +0200, Bernhard Messerklinger wrote:
+On Wed, 02 Apr 2025 15:26:39 +0900, tkuw584924@gmail.com wrote:
 
-> At the moment a mixture of ifdef(CONFIG_IS_ENABLED) and
-> CONFIG_IS_ENABLED(SPI_FLASH_BAR) is used in the spi-nor framework.
-> This leads to misbehaviour in the SPL as there is no Kconfig option
-> CONFIG_SPL_SPI_FLASH_BAR. This commit standardizes the use of
-> CONFIG_SPI_FLASH to get SPLs that load U-Boot proper from the
-> SPI flash to work again.
+> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> 
+> Those are 3.0V, 256Mb/2Gb NOR Flash devices with Octal interface.
+> Same fanctionalities with 1.8V version that are already supported.
+> 
+> Takahiro Kuwano (2):
+>   mtd: spi-nor-ids: Add support for S28HL256T
+>   mtd: spi-nor-ids: Add support for S28HL02GT
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] mtd: spi-nor: Use CONFIG_IS_ENABLED for CONFIG_SPI_FLASH_BAR defines
-      commit: 37ccf4a949c4b8b24ed45495a0960695ddb3f7a7
+[1/2] mtd: spi-nor-ids: Add support for S28HL256T
+      commit: 2aee40a49bf65505f5802376614bdf60b233a221
+[2/2] mtd: spi-nor-ids: Add support for S28HL02GT
+      commit: 10285e550a7e1576a8796da04fbe402920015dfe
 -- 
 Tom
 
