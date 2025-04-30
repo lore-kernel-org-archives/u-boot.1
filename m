@@ -4,68 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35E08C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 17:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC30C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 17:31:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FC3682C03;
-	Wed, 30 Apr 2025 19:26:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E77C982C03;
+	Wed, 30 Apr 2025 19:31:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sairon.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eb9mJHXo";
+	dkim=pass (2048-bit key; secure) header.d=sairon.cz header.i=@sairon.cz header.b="clQan9v4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 517E682C13; Wed, 30 Apr 2025 19:26:34 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D78E982BF2
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 19:26:31 +0200 (CEST)
+ id 9D37282C49; Wed, 30 Apr 2025 19:16:05 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B02482C2B
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 19:16:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53UHQU6C3444578
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 30 Apr 2025 12:26:30 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746033990;
- bh=V4tLZWtE51enZ0GUqvO+OurHz/Txbj+hBloZfMPRGps=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=eb9mJHXoRdVNIoRhNhL37EqErmb7eAQc48pnRMNSGaAftv+i0p6Yr4c4L9C0rLsC8
- X8hciLGauSb/rKTSLHfGiZ32fYZ2SZ1JEHq6UEQCn1jthpHK1EmIAy39FObYjUjkBk
- 5XM7JJABOt84fFgtFaLYJniWCel0boI97N7lyx7g=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53UHQU7h026081
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 30 Apr 2025 12:26:30 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
- Apr 2025 12:26:29 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 30 Apr 2025 12:26:29 -0500
-Received: from [10.249.142.58] ([10.249.142.58])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53UHQRuV121808;
- Wed, 30 Apr 2025 12:26:28 -0500
-Message-ID: <fa03eca6-1cdc-4ff6-abb6-fde05682da01@ti.com>
-Date: Wed, 30 Apr 2025 22:56:27 +0530
+ dmarc=pass (p=none dis=none) header.from=sairon.cz
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sairon@sairon.cz
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac2963dc379so5389166b.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 10:16:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sairon.cz; s=google; t=1746033362; x=1746638162; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EOqBxfjTnNqFtaQHZ+Bg4k+vLIL7mICU2BW5EpLqyOE=;
+ b=clQan9v4a3/WU5v4tzk+Eus9kKNKuX1DInSwl0lFWnCy7Ii5ZG3uo64iWGR5W6kMfg
+ DKQbMFO1Lf+6pQJh1j/1Ax2ddoYZDxk8Zr/ISqBZeLu/arRs96VfijYpGabJgu/97Ht7
+ ILLcSmH4fq7sj0GfRJvr/Z+vFgn2XOw8/Z9g7cD8giHm/28zmSILGHW8xzKP0xjDmBSG
+ hR7doAeX94bKXkPvy+MVZuPwU1F2jIyXFdHk5Dn+fO2SsGsYn+b8aZfEGBLBks+1Ep/f
+ QPaHzGW1+xH2k2/Gao8ddeDO5+f+Cb2yB4lTlhfyfCq1F3U+UCcPq2213zJ6O9dShaK1
+ 8SIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746033362; x=1746638162;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EOqBxfjTnNqFtaQHZ+Bg4k+vLIL7mICU2BW5EpLqyOE=;
+ b=v327Hz68sMSR3H3Hl3wFo4YR+98zgVrsYPa1I9BjulwYGlKUBCU0NzZ+uaOeHQDCi5
+ pAhG9bAK4MArEo4nHomS2ervCxnUVTWvE2n80BW/m9KQlnh1x+QPhDnbxqhq4wonQSt2
+ sPkucIl38PApBFeKpGZWpHpWs4PEJsnQBOhQejXIPLtAfG6IUrsuU1D455FPxC6zQWIs
+ ngSvuYoiN9ISoQZ9sBirySlKKvu9hS/xDImkxTsgVvi1QR+p+akTTm1PYeNbKJtuWkHh
+ ywRTC8xjhcWb3iqu/oi35gh/DWKOYBc2AjxZp/l7fSpYiJSnA4McT706D4Hbt4nUYvfC
+ rY5A==
+X-Gm-Message-State: AOJu0YwPSh3B18MoyeOK1ox4PuDM8OG+tYGVTYuw+A2dN6VDpQPwOoS9
+ ieGpXsUWt3iGe8A6fvRUmgxi2Ztrv9Xrlr5aLeucnoOu7xoi4tsTiO9xBryGwMdMGGAcP8G9ycB
+ 8upQ=
+X-Gm-Gg: ASbGncuzVVFDvMhpFRpfKWNireOx1qmRFV8j8I3TMszOpzqNijHsV68p6/2Mz/ETy6j
+ XJn8ujCGgWaqCCnNWkrnJ8TJ9aoh0hCANgMQkuF7FjFf2ZGGDJVtSnzZWAQqMY2DN2I/297OMpB
+ UZEu5u3P37ymK02G3Pg697z2NR921/qd9RxWfO3/ThupY8unb13oxlVTeLaYyw4lMT10F3JOohI
+ R+l4/ydM6GNk21YCH8rFlZF7n6AhJDGvMyCnxFb8l3S9jnC5McTsXQe0VYab6iXgnb6jITwWWhO
+ tx2nEF1tqx+dsgQjEo5IxUn4GwRqmIDH5sXQhqf3934+Hukpe0CaG1xePIaBtxVmPM/i
+X-Google-Smtp-Source: AGHT+IEj2F5pdkt4YzKpcz5TXIlXAFAKZ8UwWaBNYkPKt/zrnbd5O41eeExPypCj3gtogoI6IReU5w==
+X-Received: by 2002:a17:907:3f86:b0:abf:4da0:28e3 with SMTP id
+ a640c23a62f3a-acee21ae31dmr390184566b.18.1746033362251; 
+ Wed, 30 Apr 2025 10:16:02 -0700 (PDT)
+Received: from krabice.lan (ip-89-103-66-201.bb.vodafone.cz. [89.103.66.201])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ace6edb1580sm962044066b.175.2025.04.30.10.16.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Apr 2025 10:16:01 -0700 (PDT)
+From: =?UTF-8?q?Jan=20=C4=8Cerm=C3=A1k?= <sairon@sairon.cz>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: =?UTF-8?q?Jan=20=C4=8Cerm=C3=A1k?= <sairon@sairon.cz>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] configs: rpi: set NR_DRAM_BANKS to 8 to accommodate RAM on
+ 16GB models
+Date: Wed, 30 Apr 2025 19:15:35 +0200
+Message-ID: <20250430171555.144243-1-sairon@sairon.cz>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH v1] arm: add call to cleanup_before_linux for go command
-To: Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>
-CC: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-References: <20250430135751.2626849-1-anshuld@ti.com>
- <20250430162904.nmjqomr2kmxhllfc@bryanbrattlof.com>
- <20250430163156.GV1261075@bill-the-cat>
-From: "Raghavendra, Vignesh" <vigneshr@ti.com>
-Content-Language: en-US
-In-Reply-To: <20250430163156.GV1261075@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 30 Apr 2025 19:31:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,42 +99,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Raspberry Pi 5 can now have up to 16 GiB of RAM where the memory spans 8
+DRAM banks in total. Increase the config value to 8 to initialize the
+whole RAM. Without this change, kernel only sees 8 GiB of RAM on the 16
+GiB CM5 as reported in [1].
 
+[1] https://github.com/home-assistant/operating-system/issues/3989
 
-On 4/30/2025 10:01 PM, Tom Rini wrote:
-> On Wed, Apr 30, 2025 at 11:29:04AM -0500, Bryan Brattlof wrote:
->> On April 30, 2025 thus sayeth Anshul Dalal:
->>> As discussed here[1], the go command causes undefined behavior when used
->>> for running custom OSes since the icache might hold outdated data. OSes
->>> usually also expect the MMU to be disabled upon execution.
->>>
->>> Therefore this patch adds a call to cleanup_before_linux before we jump
->>> to the loaded program/os which disables both the caches and the MMU.
->>> This makes the go command's behavior consistent with riscv platforms.
->>>
->>
->> I know quite a few other OSes are beginning to use U-Boot (QNX, 
->> GreenHills or all the other RTOSes) each with their own requirements 
->> from the bootloader. I'm curious if we should make boot* a little more 
->> generic rather than abuse the 'go' command.
+Signed-off-by: Jan Čermák <sairon@sairon.cz>
+---
 
-VXworks has its own:
-https://docs.u-boot.org/en/stable/usage/os/vxworks.html
+ configs/rpi_arm64_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-I suppose QNX and others should ideally have their own cmds as needed.
-
-> 
-> Well, that's what bootelf is for :)
-> 
-
-And if its not an elf but some .bin file "go" cmd should be used in
-conjunction with "cache" cmd here to flush/disable cache, I guess?
-
-If so, we should probably update the docs for this cmd appropriately so
-as to avoid end users overloading like what RISC-V did?
-
-Regards
-Vignesh
-
-
-
+diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
+index 9fe5d177943..69e8e72c5d7 100644
+--- a/configs/rpi_arm64_defconfig
++++ b/configs/rpi_arm64_defconfig
+@@ -2,6 +2,7 @@ CONFIG_ARM=y
+ CONFIG_POSITION_INDEPENDENT=y
+ CONFIG_ARCH_BCM283X=y
+ CONFIG_TARGET_RPI_ARM64=y
++CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x4000
+ CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+-- 
+2.49.0
