@@ -4,90 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4F5C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 21:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE43C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 21:54:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCB8B800C1;
-	Wed, 30 Apr 2025 23:04:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B9EC800C1;
+	Wed, 30 Apr 2025 23:54:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZjS1xQ6H";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="P4q8zWlq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1BFD800D7; Wed, 30 Apr 2025 23:04:56 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id B3C3680194; Wed, 30 Apr 2025 23:54:52 +0200 (CEST)
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
+ [IPv6:2a00:1450:4864:20::444])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3798F8007D
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 23:04:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E64180079
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 23:54:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-72b0626c785so208358a34.2
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:04:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-wr1-x444.google.com with SMTP id
+ ffacd0b85a97d-39c14016868so373840f8f.1
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:54:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746047093; x=1746651893; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QxSJAGui6HyWnNADu0L9Oc0gQUQi0yvAUfAt/dTKvtc=;
- b=ZjS1xQ6HliHzwPAhWzJMwo3IL1UTPXQ5VK4QG1R0xE4j/RMvXMh0ot1SnAbxvzAycN
- 1CyCfWWWtsTATQtH17evOHZjEH4MV4r3ETBqvPnyjNkYq5EVOm4RMhnNcRmQefZkvOu0
- /pM9WusAkG1zbsC94tV8veTOIR3Eyqp0HuYns=
+ d=suse.com; s=google; t=1746050088; x=1746654888; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2mUdNIfaFL6rhY6NA8p5svZ4q5QVDtXLivXujYYcrl0=;
+ b=P4q8zWlqn2iVNRXG3gCgttNfK7Fw87kmlRQhLYYcc554kQLoFK0VM5enIIJcG1ixBe
+ 3ILehjSv+BZhTl8PWlIOZUOlkiDY1Uqq77z063wKqKcFQw/v4Otklso0TAXc499moeYI
+ b6mUofPu7kpKXpDSfVLoYL5f/xznaUGS5dzkXLfSQPJ3Sjet+IWhcbStiaiBCNgEbvJc
+ BGdFIlSX0qFrxII8bivGlcioBMMMRzc7x2ORiFiqgXrDzrjRLMYyLf/JVNR5VScKekDE
+ 2+GtV52wgpyZFSL0lvlcutrteF2lYnsxKiwuhIcHUNNyrxnCBn0YcLADyzakIlWk5GJT
+ vQTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746047093; x=1746651893;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QxSJAGui6HyWnNADu0L9Oc0gQUQi0yvAUfAt/dTKvtc=;
- b=RUt6AZVtDrprCVl0rzDqUMXmcvqoUb2ZYyv0B2JS4mazC0wKiGZvedlFu3qWSw62XB
- W+pkiYMUxckjGvyCJwoj/V5wy5WAbrZR31pEL6RwFBLY5mUuLviFDTEEP7Vv1qvMKSNn
- 826PqRM2PE/+QPZxdUom8FZeJhZoRCS0dNL07T9ytqwZwyzfS/yipMDgrm1qe3CMmlEP
- +wvi8PAeKseD0J7HbtGnrj1Ius9YsenAUEP0zLgDW+CuhopD568VSe3W4VCCUCr7146O
- EvkYJ3uUrGv0CBTrYaGAO/Rd63Jr1XrvtzHCq75yABraswh9tnuVOJ1jnFz0HOpSJS3z
- ZJ4Q==
+ d=1e100.net; s=20230601; t=1746050088; x=1746654888;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2mUdNIfaFL6rhY6NA8p5svZ4q5QVDtXLivXujYYcrl0=;
+ b=tXut4EraPT8WIlN0S7QltKYmkZpVhBQ91x7GBjJN1WjelRye7o4WWUh6hhFOgqFSjb
+ JxH9IKe4OpOUkCxenN4XTkTedY9sYJQ7bolvUMx56tIdFRCLx6fh7MpeYuSorOZGFLtN
+ znd+qBX8ktJFpo7GzLFyjZE2wH3l78UVipWxLtPPB4MRwVuw9ccLeDsYSz5Rrm6k+0HW
+ IAsXw+jz6/KX1MmMpLLANhdIckhMVqyucESF/tOevz+RGKlcwZl6d4suwlJ1T+LATcEl
+ ALegim+zkh70fVZwhz4CByvu//vp11B2bgM2d6C/acn4w8zhBX52NyFymPAIMdwMNHlw
+ D2Mg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXl/jr2x0ltfTJSga5V76qxH/HKQPizLyOtan72PV3rgCcRmHZgQPjD/xFiKMYAGLDmbnQA9P0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyy19JZ0qXcNEWVWmlks7ArRl1WRhp5gJmwzS9vHjmha9xuQLkV
- AtqF9swWYzsVctAmXYyV2kvUW8KzgZTJVQJy0HG5OQ6Y46c3F6t8t3CtpSNCbgQ=
-X-Gm-Gg: ASbGncvhe/hl06D9e4rzQRzeSruaxM9LOyzcx5ptTIbiklALvBNdUAKUb4j2ipxRhRr
- gDDO7kJlngwY2WXwsdJdzmZjfHjoURgvLlGoHiVhJpTDdR6qZLLn3kmaR6vuCgmW49Dly1LHpTs
- 7JqcQFaN0vCK0sWCyMUIAJ3aa7ENJxYNpLIM7MY7RfDHg+AdJ/wF776VQW+a6M9csrs9Q3CJYeB
- TRaX/X7M1EiyqGRL2281irs7CPxod5hBus/CF+XrLuK/uBbcvN4oXlLGmCYKQpSHOx8ewSbgUt6
- 2qPKo3B9WBBH8opF2wAptF8fh0tQAqEsdts990airHEg1K6dN9Q5mjlBuiF16P64t2KGfMFIzbb
- gTA==
-X-Google-Smtp-Source: AGHT+IGtSI0CR3mi5nCGyPW+Ct7D0TGFFpgecu8luFeKpBPiuQ/eS2xZ5p5FNrByNloVne/AzDRaRQ==
-X-Received: by 2002:a05:6830:3981:b0:72c:10db:f210 with SMTP id
- 46e09a7af769-731ce333847mr151597a34.13.1746047092882; 
- Wed, 30 Apr 2025 14:04:52 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7308b1315cfsm1041106a34.34.2025.04.30.14.04.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 14:04:52 -0700 (PDT)
-Date: Wed, 30 Apr 2025 15:04:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: "Raghavendra, Vignesh" <vigneshr@ti.com>, Anshul Dalal <anshuld@ti.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1] arm: add call to cleanup_before_linux for go command
-Message-ID: <20250430210449.GA1261075@bill-the-cat>
-References: <20250430135751.2626849-1-anshuld@ti.com>
- <20250430162904.nmjqomr2kmxhllfc@bryanbrattlof.com>
- <20250430163156.GV1261075@bill-the-cat>
- <fa03eca6-1cdc-4ff6-abb6-fde05682da01@ti.com>
- <20250430174004.GX1261075@bill-the-cat>
- <20250430192604.5dmv465thftsm2uj@bryanbrattlof.com>
- <20250430193149.gbfzi37e6yx2edfs@bryanbrattlof.com>
+ AJvYcCVuqzn3d1VuOrdsa+DOL8lQBDYFpvtnd3kdTzF6yJ4brktADRcQHW/YAXhNebhq5YMMlXnRNzc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyHzroIz2ReGZOD+B9lON57+oqHTplJcECuHz0/kz5Imix+kIjO
+ USh0p2urccfKq5fsaHNgkrzs400Tw0MstTeBHZO1inT2ZD8EiSVYjbPneF5htBU=
+X-Gm-Gg: ASbGncst3bedo8CU17fHziRKwe6JLixHgfMWTefZnXJfqs4abolL6NuGL36a0/rs8Gu
+ qGVOczePCeJFnrMIyFfpevL4rKEgJbpOF9zsoZYk1OB9aHi+irK3TObIGiN0IG/PFEol6+6tbUF
+ pghMEx9kmKVOw7BV4yBe/MxP2XwvWrZr/70/cBApsZlqOSoF57UPimsqpQp7nKVjfVOCvskcFNc
+ ctVdC/xC8C3UF4InDGJyE7V36KiPdbGrXH0sljTkPBiTdxiSueuojNmKcuV5+QC4cNQcSbKsVq1
+ VaNharcNdo6Pdg6TG5tR+0jImE+1j31LXYynhnE2QRo5vpoSM3CeEMk6NrqiM/DpoHb82qSF4Ki
+ 8Ig3OTTI7STX4AzFYZCQHGnEQYZxCHoiRGwOTaVucZJfb/G162gLaDUOXq1AgHLuzWatM
+X-Google-Smtp-Source: AGHT+IE+1uBJJA9pkhujYtrOP3i3TXR/bTOux5Qaw3mGD0SxEIr5o42MN9deJ+ha03SjNLAoASXLqA==
+X-Received: by 2002:a05:6000:1844:b0:3a0:8598:8e7c with SMTP id
+ ffacd0b85a97d-3a09404400dmr62056f8f.6.1746050088474; 
+ Wed, 30 Apr 2025 14:54:48 -0700 (PDT)
+Received: from ?IPV6:2003:ce:9701:5f00:17f5:3d4b:e519:e403?
+ (p200300ce97015f0017f53d4be519e403.dip0.t-ipconnect.de.
+ [2003:ce:9701:5f00:17f5:3d4b:e519:e403])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-441b3ae0c19sm29759515e9.24.2025.04.30.14.54.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Apr 2025 14:54:48 -0700 (PDT)
+Message-ID: <6f0bf199-73a1-4338-b3b9-87533cc1cdaf@suse.com>
+Date: Wed, 30 Apr 2025 23:54:47 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lxktUtfPXOTVQd8M"
-Content-Disposition: inline
-In-Reply-To: <20250430193149.gbfzi37e6yx2edfs@bryanbrattlof.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: rpi: set NR_DRAM_BANKS to 8 to accommodate RAM
+ on 16GB models
+To: =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20250430171555.144243-1-sairon@sairon.cz>
+Content-Language: en-US
+From: Matthias Brugger <mbrugger@suse.com>
+In-Reply-To: <20250430171555.144243-1-sairon@sairon.cz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,86 +107,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---lxktUtfPXOTVQd8M
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 30, 2025 at 02:31:49PM -0500, Bryan Brattlof wrote:
-> On April 30, 2025 thus sayeth Bryan Brattlof:
-> > On April 30, 2025 thus sayeth Tom Rini:
-> > > On Wed, Apr 30, 2025 at 10:56:27PM +0530, Raghavendra, Vignesh wrote:
-> > > >=20
-> > > >=20
-> > > > On 4/30/2025 10:01 PM, Tom Rini wrote:
-> > > > > On Wed, Apr 30, 2025 at 11:29:04AM -0500, Bryan Brattlof wrote:
-> > > > >> On April 30, 2025 thus sayeth Anshul Dalal:
-> > > > >>> As discussed here[1], the go command causes undefined behavior =
-when used
-> > > > >>> for running custom OSes since the icache might hold outdated da=
-ta. OSes
-> > > > >>> usually also expect the MMU to be disabled upon execution.
-> > > > >>>
-> > > > >>> Therefore this patch adds a call to cleanup_before_linux before=
- we jump
-> > > > >>> to the loaded program/os which disables both the caches and the=
- MMU.
-> > > > >>> This makes the go command's behavior consistent with riscv plat=
-forms.
-> > > > >>>
-> > > > >>
-> > > > >> I know quite a few other OSes are beginning to use U-Boot (QNX,=
-=20
-> > > > >> GreenHills or all the other RTOSes) each with their own requirem=
-ents=20
-> > > > >> from the bootloader. I'm curious if we should make boot* a littl=
-e more=20
-> > > > >> generic rather than abuse the 'go' command.
-> > > >=20
-> > > > VXworks has its own:
-> > > > https://docs.u-boot.org/en/stable/usage/os/vxworks.html
-> > > >=20
-> > > > I suppose QNX and others should ideally have their own cmds as need=
-ed.
-> > >=20
-> > > Well, what's the QNX output file format (options?) again?
-> >=20
-> > I've only ever seen outputs in compressed binary formats but I've been=
-=20
-> > told there are tools to produce an ELF for the simulators
-> >=20
->=20
-> Ah as soon as I hit send I find it in the QNX docs[0] it's their own IFS=
-=20
-> format :)
->=20
-> [0] https://www.qnx.com/developers/docs/7.1/#com.qnx.doc.neutrino.buildin=
-g/topic/intro/intro_ifs.html
+On 4/30/25 19:15, Jan Čermák wrote:
+> Raspberry Pi 5 can now have up to 16 GiB of RAM where the memory spans 8
+> DRAM banks in total. Increase the config value to 8 to initialize the
+> whole RAM. Without this change, kernel only sees 8 GiB of RAM on the 16
+> GiB CM5 as reported in [1].
+> 
+> [1] https://github.com/home-assistant/operating-system/issues/3989
+> 
+> Signed-off-by: Jan Čermák <sairon@sairon.cz>
 
-I see other mentions of U-Boot in the QNX documentation and even some
-forum posts that aren't 15+ years old. It would be great for someone
-=66rom QNX to chime in and explain what they recommend people do today,
-and from there we can see how to improve the situation if needed.
+Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 
---=20
-Tom
+> ---
+> 
+>   configs/rpi_arm64_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
+> index 9fe5d177943..69e8e72c5d7 100644
+> --- a/configs/rpi_arm64_defconfig
+> +++ b/configs/rpi_arm64_defconfig
+> @@ -2,6 +2,7 @@ CONFIG_ARM=y
+>   CONFIG_POSITION_INDEPENDENT=y
+>   CONFIG_ARCH_BCM283X=y
+>   CONFIG_TARGET_RPI_ARM64=y
+> +CONFIG_NR_DRAM_BANKS=8
+>   CONFIG_ENV_SIZE=0x4000
+>   CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
+>   CONFIG_OF_LIBFDT_OVERLAY=y
 
---lxktUtfPXOTVQd8M
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgSkGQACgkQFHw5/5Y0
-tyzEGgv9HpfdK+8dc22wGcUjyY94svb7/fmt5tppgCyjImWAub/I/Kw8yphEUbV/
-Y/qajOP6wab7vYvfeBJ9M90M6OcbEasD3DtfHY5SXOMU+UEjPsmerF7wmxYi+CVh
-4jxM4IkTm5TLP6fYgMiE3CydbhfO49XXYctxVUiooVGl9fJ8pSmDuqrgCQPMI5ND
-jxdgZJavncj/UJ4uWeEH9B1OmQbY0FY1WbKNG1Wm5obWRugZPXxMIRWjD6SbvGdP
-OnbShxq/X/OY6gGwKkQP2zSZaE4I8zx+l6HyZyXJ3S0A8j7pK6Lkg5EjZHaM8Uhs
-Wtjku8wToeEqe5E+jvJRa8IFZxD6zTNXVzvFEcTVwVgL/Z1HU+BiM+JNFfcyXK7V
-zibGmEioCGAvays1O9cKCx/ksSiVARrJIiy/9P7zpehgN2xF10mLbH4p1lquRNSG
-e2yOlWROlz/rjDSbrhz4Qzua59wrRc9ZJKP8SDdpm2p1xuvVdSdAYgivuHSS8LYo
-letQuAes
-=n8xA
------END PGP SIGNATURE-----
-
---lxktUtfPXOTVQd8M--
