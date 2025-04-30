@@ -4,77 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D63C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:55:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E65E0C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13DDD8215E;
-	Wed, 30 Apr 2025 16:55:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6D7C18215E;
+	Wed, 30 Apr 2025 16:56:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PTbm6akt";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uP/Wt1EZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BFBC8215F; Wed, 30 Apr 2025 16:55:25 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 142BF8215F; Wed, 30 Apr 2025 16:56:31 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 169118210F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:55:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9A968210F
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:56:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ac2902f7c2aso1215794266b.1
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:55:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746024922; x=1746629722; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GEGGsUJzveyQfOK+b2EVn3gtkQIJ6xhnYP7C6vGNrBY=;
- b=PTbm6akt/ODu8BMY+XIzhTUzarUT5UjnVf9u82EUqClzyadk7CSPn/Y9JBX47wMZmc
- VEMq5ZDpJArGuGoDwkSfEA4TqRg+eOKRY3VDz5dPI1VWLa9bZZxvLegoZh+UNOx4SPaL
- unHkFkImsGR/FMQqTvC05cCYCbqnvv0tzG8D0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746024922; x=1746629722;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GEGGsUJzveyQfOK+b2EVn3gtkQIJ6xhnYP7C6vGNrBY=;
- b=YlkSb98PDsjFD2WXvIZkQQg7Rs90fQuK7PenPdgr988vLhD+hT80xUZl0gyyO807ZJ
- Fw5/7uNcrrul6fohKhPlhlfGRtlTR6SYBp7WVjrXiOzl1uAxOJXZ+wGG2HJlrAriRMgJ
- Pq02RQeb79lpymyctVmMBBYvun5CGj6uX8e4qMEzqBgSls4toG7K1TUhRYR1umAI9o24
- zOF/9tQuh+E95Oq8MixI/Q+dRHDy/ejs2M4gdoo+176Qf0CHWgBGRoWJFVhbLJ495buj
- 1FQThalDlT0LQgyoa5x0JSrVkwwiB3EXOrx1kssL6zz26YLUOR3kuCl+9uF71tSmXg85
- mBNg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWizK2+AUQy7n/7AwxSCd8zD5rf4XUYQ076myV601jjZBVdyKGKytepo9XYm9yCqasBWA7GGdI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwyoGrgBB5aLasmIo0TMTm0emJxMD+JLZ9hwUGaeM52AYBYfdOm
- SGcZILsXnABsbdU3XfDJSnzynQwdnRLBv/+ihtokwU0Dq0cKseby8m3zqedkUHD2+JYKUbNYYkM
- jh1VfOm4hJhlB1Ybm2gTuD/zFZrOkJExfPxjq
-X-Gm-Gg: ASbGncsvD7gTGNAl3qRVb82IS08UrdLFubyfVsiLPBfYgucbFLYGQHSmU6ubC0PJv38
- N7ogDBD+iMOX6v1F3WPeuHoB+iw6/Ok1+EPiWMbJpT7g8aTxymIcnC/fc5TEV3WAXvLaoz9u/Ax
- enwc0u1GUfGcCXAqz1VERQGdU=
-X-Google-Smtp-Source: AGHT+IHy4JyP6zPvW9Ac3wfyIliXur97YrVbDOCXLv8n2TdAA+Dw/b0kEDB1mNnMUK8kuoNQMndVA50n7073Bbn+fZQ=
-X-Received: by 2002:a17:907:1ca7:b0:ace:c518:1327 with SMTP id
- a640c23a62f3a-acedc5d486bmr362444666b.14.1746024922518; Wed, 30 Apr 2025
- 07:55:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 20A87A4AD85;
+ Wed, 30 Apr 2025 14:51:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 488B2C4CEEB;
+ Wed, 30 Apr 2025 14:56:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1746024987;
+ bh=QRzY6e53uVxzIEoPED15KOUBrmWCq4haAV0MqUZ+ExM=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=uP/Wt1EZaj67wyiEobKR9eUDAwGpItwoWYxSyQd10orI2I259GLMN/DmcbYwlNYqx
+ 6UYbdQd3ZESmkMqOx16b4KvJKRr9NH044iXssJJxlfudL8epDct5R7hCf2STR5o3cQ
+ QjLHEFw4tH+XJoj64a1oT8tWrP6ZCcpU0cz34nazygzsee2+JTWXcrVwT1bNB0500A
+ Dc4dT6XQbW9b6EEosv8aVTyiPdkvZkze4q3UYUdj2UR4qjUgTVhF87oLsD68StP4fN
+ 8i1lmFjJBifpGH5cz1q+s1h+sFun2cQLuVTCI1doyeOmaMlOLbZUPDnmf8mucEcETM
+ qyh6Xc/sZt+ng==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Aristo Chen <jj251510319013@gmail.com>, u-boot@lists.denx.de
+Cc: aristo.chen@canonical.com, trini@konsulko.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, sughosh.ganu@linaro.org,
+ mkorpershoek@kernel.org, Zone.Niuzh@hotmail.com
+Subject: Re: [PATCH v2 1/1] bootm: improve error message when gzip
+ decompression buffer is too small
+In-Reply-To: <20250430022325.156922-1-aristo.chen@canonical.com>
+References: <20250428060757.125596-1-aristo.chen@canonical.com>
+ <20250430022325.156922-1-aristo.chen@canonical.com>
+Date: Wed, 30 Apr 2025 16:56:25 +0200
+Message-ID: <87r019r946.fsf@kernel.org>
 MIME-Version: 1.0
-References: <20250430091147.321944-1-heinrich.schuchardt@canonical.com>
- <CAFLszTiqXtf9yyLN_JcviaxCkap-zpNnrW7epGoHMjJSVZ53sA@mail.gmail.com>
- <5cb97876-fcb7-4920-b99e-fac3b69d8e3e@canonical.com>
-In-Reply-To: <5cb97876-fcb7-4920-b99e-fac3b69d8e3e@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Apr 2025 08:55:06 -0600
-X-Gm-Features: ATxdqUGaFRUf7FuDBVVraGLZkvmJp8TkiOs4fq2W-O4h8QfTPemPT2XJ5kOK5vg
-Message-ID: <CAFLszTigxxbjWBBGr4J0uyXDT8Ui4xoU0RCKg9yVGE2sqyncSw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] boot: print the boot stage id in the report
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Richard Weinberger <richard@nod.at>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,143 +71,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Aristo,
 
-On Wed, 30 Apr 2025 at 08:25, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 30.04.25 15:54, Simon Glass wrote:
-> > +Michal Simek
-> >
-> > Hi Heinrich,
-> >
-> > On Wed, 30 Apr 2025 at 03:11, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> An output like the following is not helpful:
-> >>
-> >>      Timer summary in microseconds (40 records):
-> >>             Mark    Elapsed  Stage
-> >>                0          0  reset
-> >>      ...
-> >>       56,448,158      4,845  fit_image_load
-> >>       56,448,186         28  fit_image_load
-> >>       56,448,187          1  fit_image_load
-> >>       56,451,971      3,784  fit_image_load
-> >>       56,483,951     31,980  fit_image_load
-> >>       56,483,956          5  fit_image_load
-> >>       56,483,984         28  fit_image_load
-> >>       56,484,001         17  fit_image_load
-> >>       56,484,008          7  fit_image_load
-> >>
-> >> It provides no clue about what is happening in the fit_image_load stage.
-> >>
-> >> Add the bootstage ID to the report. Now we get:
-> >>
-> >>      Timer summary in microseconds (40 records):
-> >>             Mark    Elapsed    ID Stage
-> >>                0          0   171 reset
-> >>        3,181,017  3,181,017   178 board_init_f
-> >>        3,229,282     48,265   179 board_init_r
-> >>        4,184,866    955,584    64 eth_common_init
-> >>        4,280,304     95,438    65 eth_initialize
-> >>        4,284,509      4,205   186 main_loop
-> >>        4,390,704    106,195   180 usb_start
-> >>        5,694,146  1,303,442   187 cli_loop
-> >>       59,908,029 54,213,883   184 bootm_start
-> >>       59,908,031          2     1 boot_get_kernel
-> >>       59,912,875      4,844   100 fit_image_load
-> >>       59,912,903         28   101 fit_image_load
-> >>       59,912,904          1   102 fit_image_load
-> >>       59,916,688      3,784   110 fit_image_load
-> >>       59,948,668     31,980   105 fit_image_load
-> >>       59,948,673          5   106 fit_image_load
-> >>      ...
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   common/bootstage.c | 4 ++--
-> >>   1 file changed, 2 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/common/bootstage.c b/common/bootstage.c
-> >> index 4532100acea..0810c4e5271 100644
-> >> --- a/common/bootstage.c
-> >> +++ b/common/bootstage.c
-> >> @@ -254,7 +254,7 @@ static uint32_t print_time_record(struct bootstage_record *rec, uint32_t prev)
-> >>                  print_grouped_ull(rec->time_us, BOOTSTAGE_DIGITS);
-> >>                  print_grouped_ull(rec->time_us - prev, BOOTSTAGE_DIGITS);
-> >>          }
-> >> -       printf("  %s\n", get_record_name(buf, sizeof(buf), rec));
-> >> +       printf("  %4u %s\n", rec->id, get_record_name(buf, sizeof(buf), rec));
-> >>
-> >>          return rec->time_us;
-> >>   }
-> >> @@ -333,7 +333,7 @@ void bootstage_report(void)
-> >>
-> >>          printf("Timer summary in microseconds (%d records):\n",
-> >>                 data->rec_count);
-> >> -       printf("%11s%11s  %s\n", "Mark", "Elapsed", "Stage");
-> >> +       printf("%11s%11s  %4s %s\n", "Mark", "Elapsed", "ID", "Stage");
-> >>
-> >>          prev = print_time_record(rec, 0);
-> >>
-> >> --
-> >> 2.48.1
-> >
-> > This is largely a revert of [1] so you should mention that, at least
-> > and cc the author.
->
-> There isn't anything reverting [1] in my patch.
+Thank you for the patch.
 
-Well it used to show just the number. That patch changed it to show
-just the function name. Your patch shows both, but the name is always
-the same, so it doesn't really make sense.
->
-> >
-> > When I wrote the bootstage feature[2], Wolfgang asked me to replace
-> > the old show_boot_progress() which used an integer. The whole series
-> > was done with very tight size constraints.
-> >
-> > The function name fit_image_load() is not at all useful in the case
-> > you are showing.
->
-> Booting via bootm is not very exotic.
->
-> >
-> > In this day and age we should add strings, included if BOOTSTAGE is
-> > enabled, i.e. convert the calls like:
-> >
-> > bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ARCH);
-> >
-> > to
-> >
-> > bootstage_mark(bootstage_id, BOOTSTAGE_SUB_CHECK_ARCH)
->
-> If the ID is not meant to be accessible to the user, why would we write
-> it to the records at all?
+On mer., avril 30, 2025 at 10:23, Aristo Chen <jj251510319013@gmail.com> wrote:
 
-It's put into the fdt and can be examined from Linux, for example. The
-ID-allocation is stable so bootstage can be used to programmatically
-collect things.
+> Currently, when decompressing a gzip-compressed image during bootm, a
+> generic error such as "inflate() returned -5" is shown when the buffer is
+> too small. However, it is not immediately clear that this is caused by
+> CONFIG_SYS_BOOTM_LEN being too small.
+>
+> This patch improves error handling by:
+> - Detecting Z_BUF_ERROR (-5) returned from the inflate() call
+> - Suggesting the user to increase CONFIG_SYS_BOOTM_LEN when applicable
+> - Preserving the original return code from zunzip() instead of overwriting
+>   it with -1
+>
+> By providing clearer hints when decompression fails due to insufficient
+> buffer size, this change helps users diagnose and fix boot failures more
+> easily.
+>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 
-Let's discuss this on a call sometime.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
+> ---
+>  boot/bootm.c | 4 +++-
+>  lib/gunzip.c | 2 +-
+>  2 files changed, 4 insertions(+), 2 deletions(-)
 >
-> Best regards
->
-> Heinrich
->
-> >
-> > and have it create a string comprising the base ID and the sub-ID,
-> > e.g. "kernel: check arch"
-> >
-> > Regards,
-> > Simon
-> >
-> > [1] 55bc22760c3 bootstage: Show func name for bootstage_mark/error
-> > [2] 770605e4f98 bootstage: Replace show_boot_progress/error() with
-> > bootstage_...()
->
-
-Regards,
-Simon
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index f5cbb10f0d1..f6aa32746b7 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -34,6 +34,7 @@
+>  
+>  #include <bootm.h>
+>  #include <image.h>
+> +#include <u-boot/zlib.h>
+>  
+>  #define MAX_CMDLINE_SIZE	SZ_4K
+>  
+> @@ -578,7 +579,8 @@ static int handle_decomp_error(int comp_type, size_t uncomp_size,
+>  	if (ret == -ENOSYS)
+>  		return BOOTM_ERR_UNIMPLEMENTED;
+>  
+> -	if (uncomp_size >= buf_size)
+> +	if ((comp_type == IH_COMP_GZIP && ret == Z_BUF_ERROR) ||
+> +	    uncomp_size >= buf_size)
+>  		printf("Image too large: increase CONFIG_SYS_BOOTM_LEN\n");
+>  	else
+>  		printf("%s: uncompress error %d\n", name, ret);
+> diff --git a/lib/gunzip.c b/lib/gunzip.c
+> index 52007715bda..a05dcde9a75 100644
+> --- a/lib/gunzip.c
+> +++ b/lib/gunzip.c
+> @@ -299,7 +299,7 @@ __rcode int zunzip(void *dst, int dstlen, unsigned char *src,
+>  		if (stoponerr == 1 && r != Z_STREAM_END &&
+>  		    (s.avail_in == 0 || s.avail_out == 0 || r != Z_BUF_ERROR)) {
+>  			printf("Error: inflate() returned %d\n", r);
+> -			err = -1;
+> +			err = r;
+>  			break;
+>  		}
+>  	} while (r == Z_BUF_ERROR);
+> -- 
+> 2.34.1
