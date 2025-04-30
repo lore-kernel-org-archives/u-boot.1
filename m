@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D03DC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A84D9C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 14:40:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C59582B72;
-	Wed, 30 Apr 2025 16:40:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A6C2A82BAF;
+	Wed, 30 Apr 2025 16:40:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k/Wk4qTX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MZMrAfkP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B89AB82B45; Wed, 30 Apr 2025 16:40:24 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id EB51B82B95; Wed, 30 Apr 2025 16:40:26 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A3FC8210F
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:40:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8F228210F
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 16:40:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-3d589ed2b47so23591415ab.2
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:40:22 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3cfce97a3d9so33279565ab.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:40:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746024020; x=1746628820; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MmRJ/qOdgy3jbAcT3h5m7d0uR3DLHnXK1kFOro9LTwI=;
- b=k/Wk4qTXbOtWlQnydZZx7IrdvKJtbiROwy1Ru5vFDZXdAZWgxNO+RxgkjLDNyM6Bfp
- SPhOLeXrK/cxfzcIr4IfGpqXVcU6roi9x6DoQAkCGl3m8bawQBSoOil4rfi0RDitacn8
- wTZkQf2hZmz1A7VfQA1Omkw03swE3wsM0pplQ=
+ d=chromium.org; s=google; t=1746024023; x=1746628823; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K/gpf2M9mvWWhxVt4rKC10XtunU5UdKNkpjRNVX6ikA=;
+ b=MZMrAfkPvO4yfGbnNsTjA5/wJdhHhuL7lZQWtS/RG0Ojr5JV289ACTBZTgzaGqc4LR
+ gcthKhE9G8fqnOV06hpQpUE7by92yiYHOmtRYKftU7Z/WOgof5UPoFgIQx82wyjZg4Zv
+ /VuhXV4EYod2uBfKVRKGw9AH9uN+bOyMRVBa8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746024020; x=1746628820;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MmRJ/qOdgy3jbAcT3h5m7d0uR3DLHnXK1kFOro9LTwI=;
- b=AxMcxZ4YW/wpn/iOapw2CJVq5oGN0bkwRMXz/kSWms0Hfw7jVwYAXKB/vmI5PpXkz4
- LVp7BTWwUjVs/bsWJLmKxaSI6LyLxpp1dQkofog3g/PMsPRlrSjMOelng1vP5mmi0dyl
- w+hPVgVaho3ImpqoK0J9Fa55XECIm5uHC1h7IwFJ4EFKdx8kiSQgmHcXEqjUBsqdM82p
- YAEZICIUZAMIHQdgF9Dmwsf/QDToQF58YL/RaEaewGrE8d2FrjGkdqOUE6MbefUfa/aG
- 27i2E6RsvnGaGB+/z9y06klX/b9CvcijwE+ndyYd/P5Xoqi/kZ9C9BnLhq3sYqdRCWdG
- 2wZA==
-X-Gm-Message-State: AOJu0Yz5yPCZ7oKr47CR2Log5WKOZpboKn3m/EyEH/XAIw7986FDwfFW
- jVoETh03Hxj15N8ldrQJhMOAsLLLwFM1zs/RcMdvZvXBQY4zAnqdzeryxz5fUB2NCqHlGYdPmhU
+ d=1e100.net; s=20230601; t=1746024023; x=1746628823;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=K/gpf2M9mvWWhxVt4rKC10XtunU5UdKNkpjRNVX6ikA=;
+ b=THHw9dP1smanYHlob9QVge9JuPiW9u+HenQ+8Bn361WJZAqMKpXRqay/g+l1icu/I3
+ Et8kEht9FHI2bVVAPcx/1BZ5J4eyZtDfHVfVOEUvOxBh10i749pdKp2yFX0Vk6lMCVrv
+ rtcDusZXeYGe3SmW8ApI+Vp7NUSeb1xBzD548XpzHqcUeXQCU2KpL0uWDr36Z0mW2Sof
+ jIhfE6ChcMwHv8+JhokTVhlnVUpLuuYyD6KbU3OChvoM/NpNLa/hf+GSB2lSEN5jVPUm
+ lqAZs39dvLJY340ho6zF8Tgxt1hY+YZapNdQdnA62460DgDvPY1wSbZLUVWN0KrR94/H
+ BEGw==
+X-Gm-Message-State: AOJu0YzN9/hi3PeX0eqW/4jZVg6QAG9WKz9lDLB34B1dGvS9m4VZFCVt
+ ctLwvBvp+P3fMnTQLYA8WdOv2oHEPuD6F8caRdtU525sQvIy+ZHWVUTvJAP2ustJbfxVoQokp4U
  =
-X-Gm-Gg: ASbGncurcTwP9qkIrjUr8Ihw77M/31qhy0vVwgVgPWhroF+EWfH/w4DAyfs91s8nlNw
- rZ9aGmR4WqdJmSkMxfrQArEry6N/6nlI4CZiZ7pqiYehhoaDuDTtghWxQ3VpBPm/TBpjIdr1ii9
- xX/MUMIuB/PfekXjUEImwL5ml11sEJaahsDdgf9fq6qPeb1Qs9ceURoR8aT5uBbgxCh0y4DYhiZ
- qEXXivSgzrsAUQeC9IgRa+PU5sQu8Up4SnBSSrOc65XIBNyAzezXVD30/oL4w6p03dg/kAull6n
- /Sot96DN2xYbOhfyIbR5JMCfqVQxaJtK+2aUOn39Ft9m6W4HhZQrMZc19DILI01IlTkZCtZSce4
- nmQoTFiDO+DHn
-X-Google-Smtp-Source: AGHT+IEJfo/8aOqpa31pcLlkk6Gqh362OjrsaWH/8ERfsREXEgUMKvHp/PsPK6lsWIJ/ylxAq87S9w==
-X-Received: by 2002:a92:ccc6:0:b0:3d9:6cb6:fa52 with SMTP id
- e9e14a558f8ab-3d96cb6fbefmr12905645ab.12.1746024020433; 
- Wed, 30 Apr 2025 07:40:20 -0700 (PDT)
+X-Gm-Gg: ASbGncuFg9skLWy7gCBSKwSC30Hjbjv9uP4tAhFlIAbmTIGNXqqzWnoVxJUmpZAB6xd
+ aOgsYKfVZffHqZ4K7fIUt87pt24WOrHd6CI7i30pURZ21yWQswmQyO3LSJxPGf9q8hNQ6HbLuXw
+ hC5DoMViJbr2fpe2QuQFVHZRVTuiVbnP/IOTU6nt4i6gyjTtKPzeY/7+QX8UmaCya0MUHl9L3na
+ XKdyAB7C62+nN/sw3mFeKRCvaednhjc+MDK2GjyaR5kCSU8+mFoef5Yto22M8CuJq9BS3oQLkU3
+ uObd889LcjE+5ny5LTtCm8XZuoSVrw/iYOlrnnNHtTKTLjXyypGn6x6EDA1oHsmjjVKYNwkk9dc
+ WCw==
+X-Google-Smtp-Source: AGHT+IHAiB/fgKuv1MAWgApJzNzsT4OThF8lDdpuebMwfOxF5aiprXEhQKEzFJFBlTkBZ/MnTl9H+A==
+X-Received: by 2002:a05:6e02:1a89:b0:3d9:6379:86e9 with SMTP id
+ e9e14a558f8ab-3d967fa3bcdmr27469465ab.5.1746024022866; 
+ Wed, 30 Apr 2025 07:40:22 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d95f2a2f73sm8580995ab.3.2025.04.30.07.40.19
+ e9e14a558f8ab-3d95f2a2f73sm8580995ab.3.2025.04.30.07.40.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 07:40:19 -0700 (PDT)
+ Wed, 30 Apr 2025 07:40:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
@@ -73,11 +74,14 @@ Cc: Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 1/2] net: Use a forward declaration for cmd_tbl in net-common.h
-Date: Wed, 30 Apr 2025 08:40:00 -0600
-Message-ID: <20250430144014.1698011-1-sjg@chromium.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH 2/2] net: Move env_get_ip() out of the header file
+Date: Wed, 30 Apr 2025 08:40:01 -0600
+Message-ID: <20250430144014.1698011-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250430144014.1698011-1-sjg@chromium.org>
+References: <20250430144014.1698011-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,39 +100,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't need to include command.h just for this declaration. It
-eventually pulls in linux/byteorder which causes a conflict with exfat
-which has its own byteorder functions.
+This function requires access to env.h but it is a lot to include just
+for the env_get() function. It eventually pulls in linux/byteorder which
+causes a conflict with exfat which has its own byteorder functions.
 
-Use a forward declaration instead.
+Move the function to a C file instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/net-common.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ include/net-common.h | 6 +-----
+ net/net-common.c     | 6 ++++++
+ 2 files changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/include/net-common.h b/include/net-common.h
-index 12c50e2a41e..f2613a41ad8 100644
+index f2613a41ad8..64b475b7292 100644
 --- a/include/net-common.h
 +++ b/include/net-common.h
 @@ -4,7 +4,6 @@
  #define __NET_COMMON_H__
  
  #include <asm/cache.h>
--#include <command.h>
- #include <env.h>
+-#include <env.h>
  #include <hexdump.h>
  #include <linux/if_ether.h>
-@@ -13,6 +12,8 @@
- #include <rand.h>
- #include <time.h>
+ #include <linux/sizes.h>
+@@ -464,10 +463,7 @@ int update_tftp(ulong addr, char *interface, char *devstring);
+  *	0 to 255
+  * Return: IP address, or 0 if invalid
+  */
+-static inline struct in_addr env_get_ip(char *var)
+-{
+-	return string_to_ip(env_get(var));
+-}
++struct in_addr env_get_ip(char *var);
  
-+struct cmd_tbl;
+ int net_init(void);
+ 
+diff --git a/net/net-common.c b/net/net-common.c
+index 45288fe5f80..9ff06b165df 100644
+--- a/net/net-common.c
++++ b/net/net-common.c
+@@ -1,4 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0
++#include <env.h>
+ #include <net-common.h>
+ 
+ void copy_filename(char *dst, const char *src, int size)
+@@ -25,3 +26,8 @@ int wget_request(ulong dst_addr, char *uri, struct wget_http_info *info)
+ 	wget_info = info ? info : &default_wget_info;
+ 	return wget_with_dns(dst_addr, uri);
+ }
 +
- #define DEBUG_NET_PKT_TRACE 0	/* Trace all packet data */
- 
- /*
++struct in_addr env_get_ip(char *var)
++{
++	return string_to_ip(env_get(var));
++}
 -- 
 2.43.0
 
