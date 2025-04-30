@@ -4,57 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F01BC369DC
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 12:08:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDC7C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 12:15:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95F938215E;
-	Wed, 30 Apr 2025 14:08:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E40638215E;
+	Wed, 30 Apr 2025 14:15:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1746014891;
-	bh=Zy94j+zmzfa6MutdlUK1tDrzPozoA8JpNLF93S8hjdw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=CzYC3+OGjpThBlfwFA+xkb3ynXlvdeOhXZMUycgFBHfJUrTnvwQrsIhAsot7IA443
-	 IkK5/N3Xq78QfWcbAHQaKW9Yk0i49ZCTRqd14FGaX/39ZbiUKxEyc7yWHHRiQB/69E
-	 Z4Qb/XGMjUQTfr9Q2EL9mZoKFdq8gd2q9Q0TsQ02xCmgc2RBD3zZr0Ln55A+yDKsXC
-	 p1tw5iqbWlki7BrFzYuKQHKyHMF0BmOkGOcbWe9dx8Uw2DsYfsxPdqFu0DBxDBa0oh
-	 Qh0Nhtc7st079O7ItZK2GL4fhK0PZUOxOhaGaSOt5OmWHBSYBf0ZYOC5nRReLOQ6Cx
-	 Berh80gPHJoCQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 785AA82B45; Wed, 30 Apr 2025 14:08:10 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D14482153
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:08:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iKOxWwRa";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9C10782B45; Wed, 30 Apr 2025 14:15:03 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4ZnbYK3DQVz9tnN;
- Wed, 30 Apr 2025 14:08:05 +0200 (CEST)
-Message-ID: <04e853ce-d728-4a52-ba6a-690ded563a4b@denx.de>
-Date: Wed, 30 Apr 2025 14:08:04 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 50E2E82153
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 14:15:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-7053f85f059so66657957b3.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 05:15:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1746015300; x=1746620100; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bH2H86GHi2QSCvk/4pj8iOTI6G14ddHgbpQzn3XUioU=;
+ b=iKOxWwRa2zLlp97As2Eo6FP5x6VVLlHeYamtWJXN5C/fMbyUSaQROikEtSwoCb/+dm
+ PK5q8PLs7WKWsXcuIGTfcJYuESG0VzxCevOqqi/1WMcCms8kVZ0iwagGtSzDhNbOavo0
+ LSfLj9bK/GK2F03KgbegujzwAfvwna666GvlsmX9wiW3OHZDy8Bc/FryulNHpGv/Yc4T
+ TLlFbsGvSzSmphw6Awf1xqREFaFGGG2dkUrC+Cs2kfUsNOyc1i1iDVY1Q6xXEFiJAc4C
+ RpoXcfOBjXCaSJaQs0rgG3Yg6gEmrw7AXbYMxp39QHqafSNaGUuC4tTNt2Vmh5UQBLYk
+ pWTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746015300; x=1746620100;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bH2H86GHi2QSCvk/4pj8iOTI6G14ddHgbpQzn3XUioU=;
+ b=ue+cXHP86+uGUit9z/LENSw3O/Bub3pNOqpYzSrnwqL0+Cc98Ol1NaXj9TlngbSEn8
+ Ph1Cu5jSHy6X46FBHk0+vi93HcZIamOLZsYAwmsyzu2NxIQi/Tl/L6zc+MXCcA1Upc+Z
+ TyzH3pPfF0KDtxbogoAmAOTOgVpTVaH6IjcJYbutHzfTA3gXYwbcPozckfwxYm7ASp1q
+ 3d49MG5vh1ID4g4ROOo8tzkQY7FBsAMXuHYLBXlpIAsApZMCFXaLtr+XKykbAYY15BEE
+ J1Xs1B50V3DSji3+zXoclRrWO7a/zZPJBGr2s/V6XT4eSRuXN9HJBUmsoDq0H0AaK9Yj
+ tSZg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXWVquev3R/KrVtX34B/5n4DxeerD+D/v6JFyUJ7PeJqJ39AFDLozsc1QfTVLBGHKXGOP38T7c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/I5AUpddT4DuQK8yAAUSjM6MdN6rGZp+sfab6yH80siTe+2zY
+ Z+vrShB/mqZay1F1kNucRh257atottqhGjQ440Li+5S2v3ozdjjnyKVSIS3grpg19bVwbakQrci
+ RN8CFzvVT3LT0Sql18pKKR0qOjHsD4y9xkYVJSQ==
+X-Gm-Gg: ASbGncuTzj+hEEmiDxcwF5iyXv8NIcINJvOMI/G9NI2bSnVGa7XQ214xH6aIYWjjkFH
+ 03i3rXjuJcYDeRROSerJ7whRcsdnoYPEqNzBLarP3fpP8fP5wSaGT/idqmPbTgP4c26fD0UT0rc
+ rR+CwvrNGVuPGpHqhqchZg3Ig=
+X-Google-Smtp-Source: AGHT+IEdfYLMzpE38KCbb1XBL02OPOscPoUnTuttPZHIF4cwx5dhJWv5nnwvQLu7Ku3mW4e7wjT+9U3donItICnj0DQ=
+X-Received: by 2002:a05:690c:4c03:b0:708:3dee:d76e with SMTP id
+ 00721157ae682-708abdac06emr40973687b3.22.1746015299957; Wed, 30 Apr 2025
+ 05:14:59 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] configs: mvebu_espressobin_ultra-88f3720_defconfig:
- enable hwrng
-To: Benjamin Schneider <bschnei@gmail.com>
-Cc: Benjamin Schneider <ben@bens.haus>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- u-boot@lists.denx.de
-References: <20250417193841.106509-1-ben@bens.haus>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250417193841.106509-1-ben@bens.haus>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 30 Apr 2025 15:14:23 +0300
+X-Gm-Features: ATxdqUE4BdhZXNbaPM7WPpuRNszT6lzTUzRpdysK94wID-UHEEeQrsqAnzLlbFQ
+Message-ID: <CAC_iWjJLrz-NQ6xR_UAR3z31nwKuw6nWPs7+=iPOUPQtuvntLQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] bootm: pass kernel load address not entry point for
+ IH_OS_EFI
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,41 +96,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17.04.25 21:37, Benjamin Schneider wrote:
-> This device has a hardware random number generator. Linux can
-> use this feature to randomize the location of the kernel in
-> memory for better security. However, that functionality is only
-> available if the bootloader firmware provides it. Enable support
-> for it in the default configuration for this device.
-> 
-> Signed-off-by: Benjamin Schneider <ben@bens.haus>
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
-
+On Wed, 30 Apr 2025 at 13:55, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> The EFI sub-system needs the load address and not the entry point
+> to boot the binary passed from the bootm command. The entry point
+> is derived from the PE-COFF header of the binary.
+>
+> Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> 
->   configs/mvebu_espressobin_ultra-88f3720_defconfig | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/mvebu_espressobin_ultra-88f3720_defconfig
-> index 1cbeee8fcb7..fb8efbdf0b9 100644
-> --- a/configs/mvebu_espressobin_ultra-88f3720_defconfig
-> +++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
-> @@ -97,3 +97,5 @@ CONFIG_USB_EHCI_HCD=y
->   # CONFIG_WATCHDOG_AUTOSTART is not set
->   CONFIG_WDT=y
->   CONFIG_WDT_ARMADA_37XX=y
-> +CONFIG_DM_RNG=y
-> +CONFIG_RNG_TURRIS_RWTM=y
+>  boot/bootm_os.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> index dc9d3e61fca..a3c7cb5332e 100644
+> --- a/boot/bootm_os.c
+> +++ b/boot/bootm_os.c
+> @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
+>         /* We expect to return */
+>         images->os.type = IH_TYPE_STANDALONE;
+>
+> -       image_buf = map_sysmem(images->ep, images->os.image_len);
+> +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
+>
+>         /* Run EFI image */
+>         printf("## Transferring control to EFI (at address %08lx) ...\n",
+> -              images->ep);
+> +              images->os.image_start);
+>         bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+>
+>         ret = efi_binary_run(image_buf, images->os.image_len,
+> --
+> 2.48.1
+>
 
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
