@@ -4,138 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E94FFC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 05:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8B7C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 07:04:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52C7F8283E;
-	Wed, 30 Apr 2025 07:09:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 87CA182145;
+	Wed, 30 Apr 2025 09:04:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eElzGkF4";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j3cK9EX6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B2CF82AAE; Wed, 30 Apr 2025 07:09:46 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::608])
+ id 913F08272A; Wed, 30 Apr 2025 09:04:06 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 434438272A
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 07:09:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E364809A5
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 09:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=neFZhIaEgvYg67YhZ84p3NyKMdwG9VFK18h2zYbMIjViYE2s8yJAk7yMGqarJdN1xcZ75BOaqCCV8J7sZEp4LN9GPpjAXM+UWohxPb+SUehkeNkl4ssy3kt0lmHkzpMkrvr3eYxRx1Ri/ZENQ05DNX7qYdk/SB6lUT67146saJLiiNFluJtcFocNHlBPdpWfzl921ak4usyHpwm2zfxJ1lT4uHq8wydR+J2xKWwffCsMrU6x9nWNSzoNgJSq9uQGJPS/dmqHAeo5y3tzdlrK7B4zJT3M0FMIAjHGwtSva6OyTwHsgmcRyghJAI43ERTgIyG08tYTy+Jeb82tPTR/Og==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eiQxaRBEqFguu1pd2NqfDMWdAnBOk15Rqku+Lsoywx8=;
- b=rf2pt6yd3CdT4Od+YrMTXaXSsNArThcvbprEgIyl6LuvW+svfXTj5g4eIy3rufM3nuwTQXQ9VuEgdNyPjCfhwJK0sznmQ68U/kFt08f+gHHTeWKYCR7vKfxcrM/Fj+GxXqa2Td59TrGY0TLcjlRcvzPajUEUXwevZwsUoJ/zPRa7a0cNEx577U9J5w546xxmJ70jfqYoRXNzuhj/RI+gPtHF+COnvjzZ+OULaE79KpYpzEuFW2V2Hh3XeneiyPP8L3yj1uguXiyzZoyHkx6ie0T4zJC8bGBfHXZAKAQLw0cpzW2AKD7Q11ZBp0ZenFkv0/9RrWUwtl4SdOfDkEOrAw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eiQxaRBEqFguu1pd2NqfDMWdAnBOk15Rqku+Lsoywx8=;
- b=eElzGkF49zKUNMdC/UWvP0rfgYvzkdqNRG1eJdt1UXV6YJVB/gqRZWs2XxpUOEZPFxFIlh/xHHC0CyYYeLKo/kb5uDOKv2NbJ0BhJNP5cIKrhG6kq83E3zJlp6EUZ3n3LfOaQ+sacy5aM4ydcDLN6SE4g8mINHcFoYzbQTUH9iE=
-Received: from BL0PR0102CA0034.prod.exchangelabs.com (2603:10b6:207:18::47) by
- SA1PR12MB7344.namprd12.prod.outlook.com (2603:10b6:806:2b7::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.30; Wed, 30 Apr
- 2025 05:09:37 +0000
-Received: from MN1PEPF0000F0E2.namprd04.prod.outlook.com
- (2603:10b6:207:18:cafe::39) by BL0PR0102CA0034.outlook.office365.com
- (2603:10b6:207:18::47) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.34 via Frontend Transport; Wed,
- 30 Apr 2025 05:09:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000F0E2.mail.protection.outlook.com (10.167.242.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8699.20 via Frontend Transport; Wed, 30 Apr 2025 05:09:36 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 30 Apr
- 2025 00:09:35 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 30 Apr 2025 00:09:30 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>, <tudor.ambarus@linaro.org>, <j-humphreys@ti.com>, 
- <marex@denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
- <caleb.connolly@linaro.org>, <sjg@chromium.org>,
- <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
- <quentin.schulz@cherry.de>, <Takahiro.Kuwano@infineon.com>,
- <p-mantena@ti.com>, <git@amd.com>
-Subject: [PATCH] spi: cadence_qspi: Disable the DAC mode in indirect read
-Date: Wed, 30 Apr 2025 10:39:23 +0530
-Message-ID: <20250430050923.135256-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.44.1
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1745996644; x=1746601444; i=xypron.glpk@gmx.de;
+ bh=vJpvkwnVrCD0LLgbA9zJ//iKeWcxjbsovED+8xm5Ui0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=j3cK9EX6snHyd+KjZr6ai5n/OXxE4Hn2J0eDDioWGURggV3WESWaX3pIF5G2cwJ6
+ DG+2TdyKYfdID4TsHsv49UI1bgZaQt25Bm1SfKEFYG3GrkM3uvW3VyMcvYKbqoX7Y
+ PaQEYJlkTnf0ijrjmUMo5kZTvnqXLkAsJIFhArV/PbqW7X8E/P7zcBIOowLdRBNQn
+ a6+CGJ01GKBKjUGmg6WHWTr5SdtBINmHMEHNFdLeBokgmOThbAZLd+sJ9F5XeWz8Y
+ u6/oTFNkuCInM6hyzO+Si7PpwTfeHCbrbvoXn6qphU//e8LSMm5grjQAKGDufos8f
+ yyylAuQjUhek9D6jPw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.108.68]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mirna-1ufo0N3uia-00hkKv; Wed, 30
+ Apr 2025 09:04:04 +0200
+Message-ID: <5516429f-074e-4ae6-bd7d-d49f020eae4a@gmx.de>
+Date: Wed, 30 Apr 2025 09:03:58 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E2:EE_|SA1PR12MB7344:EE_
-X-MS-Office365-Filtering-Correlation-Id: b85fc730-f387-4466-f663-08dd87a533f0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?c1ZWI6JchjhAHQccstq/LCjqtNUAT9m0gsTDB0qgDSPu+EJyaE3fpSOoNaNr?=
- =?us-ascii?Q?LHHaX/D4k2vejVf36rcgfkOPduW/FlmRhTmXhLfv5ogi/KO/OpoI9mgy97x/?=
- =?us-ascii?Q?Qk5XhcLTW8DMjod+F4f1Kp0RHTc2VfQDAU7celMgCZk/xOStUY37BcuIDuuf?=
- =?us-ascii?Q?MVgzvY0vWenmm2/9bSBjc4guvqhY62QwJaMvdcU+pb29XGSevbLQhCqsqZrR?=
- =?us-ascii?Q?707bkoinvRiyU+2xVBTGrshKFC5QuqxTzO0z8KSsqFo94D7/Nc61+X8tWCI5?=
- =?us-ascii?Q?D9Yvxd4a7CaBjMT9lnVuVeDDm8RQldk2he09XDigg6IWoA3YsZEcRv1YB9Hn?=
- =?us-ascii?Q?ahI681hCxWQuhpTFpAE9V84zXzkJCI+U7dma1pNvQLixLawS9zXCsdW3rNDd?=
- =?us-ascii?Q?BkeE1KeF40NgmsM2XrJq4FwQrb3MYH5yELyQZH1XzqP0Gwa5yLQyH/bwYHHH?=
- =?us-ascii?Q?j07dy6RbglzIzn4FmREloVjvd09BS5s2C94QwIytgTcCsZGWhRF5Tr8gKkVt?=
- =?us-ascii?Q?oyZi611HuAHT3wM//J1i88L2vnNo38n9LV9wYUTzSn8cGOfj1xiAuVLEkr2e?=
- =?us-ascii?Q?1qqmOmEBPh7WPZC+s7hzv94t3vfAgxnWkxSoil1Xsh1wWf6JIKOHwMI4Ibd3?=
- =?us-ascii?Q?cc9TqpdpoxGDYcTiOBNYAZmTwiKhkxdlq2mz4JOBqWyxF/s6Aqidm7FNYuey?=
- =?us-ascii?Q?5vbue7c572TmjkIV2yIS5ApGs7YGZ3HM2MMofwHT2K66+4HM9Bt1F6L3OXAU?=
- =?us-ascii?Q?Yx28IGYaBYD2EGdUTQj5hRPVhvc15BSdZz9SFm2JKk7hLJZcR9ArI5IhMyeE?=
- =?us-ascii?Q?Hk0wwdigXa3M2CfuVrcIVZbFtnHSuusFcQKKJODLxHxshxLdQoSWp44rJU+9?=
- =?us-ascii?Q?3lxTwuFUb0iRSzhSr653zdxesyxwS/EIRlS8JZt13wdDWo0QrQr/OjcpBDDO?=
- =?us-ascii?Q?fTnrZCVAaHg2krW6eWoKKac7ENjDNwpdwXdUaD2bV+yCd8luCEo4vLoavOKa?=
- =?us-ascii?Q?7gd9CoWu2Kb00y+MKLL5gia2AM6ozrQwJT17J7g11Z48uiPgMTuNA0j+tmoO?=
- =?us-ascii?Q?oBEzprLaFLVNYiqc7p5Dbh5cOQ7OvUhcn6TYnG02/fw12YVOg1VHSxlxIoEV?=
- =?us-ascii?Q?O8EHw0/5pTbOqVyLX9Jlw3m4NSVHH9ow3MY2gakhmSUxzYYkU3vyfUxdJGu6?=
- =?us-ascii?Q?2APR6AyoO/htYGbLEy7kbSqKDJ8WD/rySKgBncObC9hMtCPc8I0DigbKGFA3?=
- =?us-ascii?Q?NAz2Fhnj8/MNQ+bo9EI664lNXTYs+IAQf+LhAcoHXkn6xM7ZJxYH4UA6IJV8?=
- =?us-ascii?Q?xlNO9rpEZa5pJhsumnBaLqLB0KHp7c6M1KwTDhjAlU2T4RDDW/UEwH53A/zQ?=
- =?us-ascii?Q?eH9Zhhfh4nAEZqsP8NULB5io1HxVbWtjRGZp9Wr28WEquuHJS8DjiXbf8dPK?=
- =?us-ascii?Q?1JhOTx4lwuXc0j/JGR6izN33yCXOV8zF4R6SF1kX/2OhFg5Hkk+s2nkxkANP?=
- =?us-ascii?Q?+Ja5Q+t78TqLXcLyqxFfZFp1ct0I3J0L17Jc?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(7416014)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2025 05:09:36.6822 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b85fc730-f387-4466-f663-08dd87a533f0
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E2.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7344
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] efi_loader: bootbin: do not load an initrd if none
+ is provided
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, trini@konsulko.com,
+ o451686892@gmail.com, Adriano Cordova <adriano.cordova@canonical.com>,
+ u-boot@lists.denx.de
+References: <20250429132756.2105309-1-adriano.cordova@canonical.com>
+ <20250429132756.2105309-2-adriano.cordova@canonical.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250429132756.2105309-2-adriano.cordova@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:lxXqVF+euu8ydkUn5gqlvZ2FhvIyxUthU4yp2umOxfO2nK56G6o
+ bIjXTslqkoVg7iYZFURV/m6KX1WHhZlxIPROLvgB8XWqH++Jl05y3uczuK3xDitQjj08Yuj
+ zK1DymW4QOqwit8uTgZFOyWBKlX3A8lUa43hL182/TDUUQuVuP+Y5uhVBX/lxTgngu7FixC
+ XeYFB/OWic8ZRA1RkWZ/w==
+UI-OutboundReport: notjunk:1;M01:P0:BnOgl4BTv6U=;QFYgRqhayulIkZskn+LT6XbFVaA
+ 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
+ NXqWkAdZNWns4JCC76eFoD97EMu0g+a4Kj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,42 +125,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hang has been observed on QEMU, as it starts with indac
-read and fills sram, but after dma is triggered, it tries
-dac read instead (based on priority) which gets blocked.
-Disable the DAC mode in indirect DMA read and enable back
-for writes as DAC mode is used.
+On 4/29/25 15:27, Adriano Cordova wrote:
+> Do not try to create an initrd device path nor try to register
+> an initrd with the EFI_LOAD_FILE2_PROTOCOL if none is provided.
+>=20
+> Handle initrd installation in efi_binary_run_dp with
+> efi_install_initrd, imitating what is done for the fdt.
+>=20
+> Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
+> Reported-by: Weizhao Ouyang <o451686892@gmail.com>
+> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> Tested-by: Weizhao Ouyang <o451686892@gmail.com>
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/spi/cadence_ospi_versal.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+I built and installed U-Boot for the StarFive VisionFive 2 based on=20
+origin/master plus this series.
 
-diff --git a/drivers/spi/cadence_ospi_versal.c b/drivers/spi/cadence_ospi_versal.c
-index fbeb0c6a85c..a78a282c543 100644
---- a/drivers/spi/cadence_ospi_versal.c
-+++ b/drivers/spi/cadence_ospi_versal.c
-@@ -36,6 +36,10 @@ int cadence_qspi_apb_dma_read(struct cadence_spi_priv *priv,
- 	bytes_to_dma = n_rx - rx_rem;
- 
- 	if (bytes_to_dma) {
-+		if (priv->use_dac_mode)
-+			clrbits_le32(priv->regbase + CQSPI_REG_CONFIG,
-+				     CQSPI_REG_CONFIG_DIRECT);
-+
- 		cadence_qspi_apb_enable_linear_mode(false);
- 		reg = readl(priv->regbase + CQSPI_REG_CONFIG);
- 		reg |= CQSPI_REG_CONFIG_ENBL_DMA;
-@@ -116,6 +120,9 @@ int cadence_qspi_apb_dma_read(struct cadence_spi_priv *priv,
- 		memcpy(rxbuf, rxbuf + 1, n_rx - 1);
- 	}
- 
-+	if (priv->use_dac_mode)
-+		cadence_qspi_apb_dac_mode_enable(priv->regbase);
-+
- 	return 0;
- }
- 
--- 
-2.34.1
+I created a FIT images using the its file listed below.
+
+I loaded and tried to run the FIT image:
+
+StarFive # load nvme 0:1 $kernel_addr_r initrd.itb
+StarFive # bootm $kernel_addr_r
+
+and saw the following failure:
+
+## Transferring control to EFI (at address 00000000) ...
+Card did not respond to voltage select! : -110
+Booting /initrd.itb
+Not a PE-COFF file
+Loading image failed
+
+We use the entry point instead of the load address when transferring=20
+control to the EFI sub-system.
+
+This bug was introduced by ecc7fdaa9ef1 ("bootm: Add a bootm command for=
+=20
+type IH_OS_EFI") and is not related to your patches but we still need to=
+=20
+fix it.
+
+Afterwards I tried to boot into Ubuntu and got:
+
+   Loading Linux 6.14.0-13-generic ...
+   Loading initial ramdisk ...
+   error: failed to install protocols.
+   Loading device tree blob...
+
+   Press any key to continue...
+
+It seems that U-Boot did not uninstall the LoadFile2 protocol when=20
+discovering that the EFI image was invalid. We should have a look at the=
+=20
+error handling.
+
+The initrd for my test case can be created with:
+
+echo 'hello world' > hello
+echo hello | cpio -o -H newc > initrd
+
+Best regards
+
+Heinrich
+
+/dts-v1/;
+
+/ {
+     description =3D "EFI FIT";
+     #address-cells =3D <1>;
+
+     images {
+         initrddump {
+             description =3D "initrddump";
+             data =3D /incbin/("lib/efi_loader/initrddump.efi");
+             type =3D "kernel";
+             arch =3D "riscv";
+             os =3D "efi";
+             compression =3D "none";
+             load =3D <0x58000000>;
+             entry =3D <0x0>;
+         };
+         initrd {
+             description =3D "initrd";
+             data =3D /incbin/("initrd");
+             type =3D "ramdisk";
+             compression =3D "none";
+             arch =3D "riscv";
+             os =3D "efi";
+             load =3D <0x60000000>;
+         };
+         fdt {
+             description =3D "vf2";
+             data =3D=20
+/incbin/("dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2-v1.=
+3b.dtb");
+             type =3D "flat_dt";
+             arch =3D "riscv";
+             compression =3D "none";
+             load =3D <0x68000000>;
+         };
+     };
+
+     configurations {
+         default =3D "config-initrddump";
+
+         config-initrddump {
+             description =3D "initrddump";
+             kernel =3D "initrddump";
+             ramdisk =3D "initrd";
+             fdt =3D "fdt";
+         };
+     };
+};
+
+
+
+
+
+
+
+> ---
+>=20
+> Changes in v3:
+>   - Do not clear images->initrd_start in boot/bootm.c, as this is
+>     done in bootm_start().
+>=20
+> Changes in v2:
+>   - Free initrd_dp
+>=20
+>   include/efi_loader.h         |  2 ++
+>   lib/efi_loader/efi_bootbin.c |  7 +------
+>   lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
+>   3 files changed, 32 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 144b749278a..84e8cfe320e 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -597,6 +597,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t h=
+andle, const char *env_var,
+>   void *efi_get_configuration_table(const efi_guid_t *guid);
+>   /* Install device tree */
+>   efi_status_t efi_install_fdt(void *fdt);
+> +/* Install initrd */
+> +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz);
+>   /* Execute loaded UEFI image */
+>   efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
+>   /* Run loaded UEFI image with given fdt */
+> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> index d0f7da309ce..6a189c31ffa 100644
+> --- a/lib/efi_loader/efi_bootbin.c
+> +++ b/lib/efi_loader/efi_bootbin.c
+> @@ -220,7 +220,6 @@ static efi_status_t efi_binary_run_dp(void *image, s=
+ize_t size, void *fdt,
+>   				      struct efi_device_path *dp_img)
+>   {
+>   	efi_status_t ret;
+> -	struct efi_device_path *dp_initrd;
+>  =20
+>   	/* Initialize EFI drivers */
+>   	ret =3D efi_init_obj_list();
+> @@ -234,11 +233,7 @@ static efi_status_t efi_binary_run_dp(void *image, =
+size_t size, void *fdt,
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return ret;
+>  =20
+> -	dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, init=
+d_sz);
+> -	if (!dp_initrd)
+> -		return EFI_OUT_OF_RESOURCES;
+> -
+> -	ret =3D efi_initrd_register(dp_initrd);
+> +	ret =3D efi_install_initrd(initrd, initd_sz);
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return ret;
+>  =20
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index 3936139ca41..19fb5d03fec 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -622,6 +622,35 @@ efi_status_t efi_install_fdt(void *fdt)
+>   	return EFI_SUCCESS;
+>   }
+>  =20
+> +/**
+> + * efi_install_initrd() - install initrd
+> + *
+> + * Install the initrd located at @initrd using the EFI_LOAD_FILE2
+> + * protocol.
+> + *
+> + * @initrd:	address of initrd or NULL if none is provided
+> + * @initrd_sz:	size of initrd
+> + * Return:	status code
+> + */
+> +efi_status_t efi_install_initrd(void *initrd, size_t initd_sz)
+> +{
+> +	efi_status_t ret;
+> +	struct efi_device_path *dp_initrd;
+> +
+> +	if (!initrd)
+> +		return EFI_SUCCESS;
+> +
+> +	dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd, init=
+d_sz);
+> +	if (!dp_initrd)
+> +		return EFI_OUT_OF_RESOURCES;
+> +
+> +	ret =3D efi_initrd_register(dp_initrd);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		efi_free_pool(dp_initrd);
+> +
+> +	return ret;
+> +}
+> +
+>   /**
+>    * do_bootefi_exec() - execute EFI binary
+>    *
 
