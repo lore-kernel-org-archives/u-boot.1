@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 977FAC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 13:54:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B73C369DC
+	for <u-boot@archiver.kernel.org>; Wed, 30 Apr 2025 13:54:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0DF082153;
-	Wed, 30 Apr 2025 15:54:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E5C908081A;
+	Wed, 30 Apr 2025 15:54:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YFqGaZcA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hf/A1fLy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E067281E72; Wed, 30 Apr 2025 15:54:28 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 24B1582887; Wed, 30 Apr 2025 15:54:31 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 862EC8070C
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 15:54:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 251928070C
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 15:54:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ace333d5f7bso1197873566b.3
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 06:54:26 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5f728aeedacso8895128a12.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 06:54:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746021266; x=1746626066; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746021268; x=1746626068; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Bb2AtP0rl03IsctYqRhAqds4E0Ycqjd2mbSCSZUl+CA=;
- b=YFqGaZcA/YfSOlGd/L87df8xkCrwOHqiX7XZGIadnBdJcWr935Y3PUDCpAtU6WkVxN
- h6D4dM/rIBmyCqoBNtz68l56iTYFDQFdUrhm9SvqkGAxWQRWpowbxNT5THySiw13XHip
- SwoDnUKWlnX3Dw/kvZCDEgIkJixp1JO7vGdO8=
+ bh=iUQ8cCo+YQa+/Tieu+y2bitsu6X+GahAYWkcO0NqpGY=;
+ b=Hf/A1fLyGT9p6E1q2iMZ1Aw/zOPwMCGKH9eNKd7QXHjofBoRhg7c24DxokQDnxIh/h
+ EwbBODfG/2FeFTOtxBI2xNo5IM7n9jTm2GdOv/rJDDzghXDXRaXA0JUIcJiKKOst4dLC
+ yRPb+hT4XgfiwYCtRaVPHK0roQ/U/0fRG3uww=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746021266; x=1746626066;
+ d=1e100.net; s=20230601; t=1746021268; x=1746626068;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Bb2AtP0rl03IsctYqRhAqds4E0Ycqjd2mbSCSZUl+CA=;
- b=aVOUlmvpxpyKr8zt9n6LKGOHYia3JfcgXvX1STlpw9j58XJ1g8QzTdgqe3X61Jvsy1
- 1UtTVTShbzFgZdu/fVTd4EP5qRMqIHlfT86yH4nAU79xPyD1z/Ai4kIM+gjP+Wwyxm52
- vlLLhfzO9bYbQGx6+JWvfsubDDXGdsriRf5zGO96DvSJIAQ6oX8plUi1130bJ14pyjnw
- hKwpBd4t2ZjaALraAt9+THSiq69pkyCA1BFPSFWKsjp1Y2cVln5xH8KabnAnuw3cf7e1
- iukJR9dF8blqm0TD72hm1qb3iR/A2ev+tAKNfuAIBoIRGbNqfcqSOsqbP36l9uAtror8
- Xvzw==
-X-Gm-Message-State: AOJu0Yw/xdA5HSsBHk3Qju0ihJDcbiB+fMFdOYVEj4t0D4Nrp/AqGW7G
- HMU99OYVThBaSjrTNq6/SmRtXnTVH4KuOgGT5oaHYqjhPms51sWBhHLjnXaDvE7lOwJCkdNIt+5
- Kl3/9CzS0SpqdhstU+5IaTlr7KuoBQZBVdlz9
-X-Gm-Gg: ASbGncsHYtPS48ULdJ7V2NSyvlJV8MWYF8EqKMdnWfumGB5GYwZgo0p+JGatkxi6w32
- I6WIQ9xCvUqTHjzceZdc15oq4/VW/2u2RrDvmQzG6zR2Qn8FgVLXj0J2Xxt56CzCbNRI9FaZywP
- Wgj9TBN0pE8KwLaeX678ApV2E=
-X-Google-Smtp-Source: AGHT+IHEn1V4EgpWoghi5UNU+Fs0yDXOSdH3qLEr7YwxVEye3ZUflZZVf4BjbAllmzMdkMMyhDOfkGA/UKkE4P2nUBo=
-X-Received: by 2002:a17:907:3f1a:b0:ace:6882:510d with SMTP id
- a640c23a62f3a-acee21ec1a5mr276803666b.24.1746021265914; Wed, 30 Apr 2025
- 06:54:25 -0700 (PDT)
+ bh=iUQ8cCo+YQa+/Tieu+y2bitsu6X+GahAYWkcO0NqpGY=;
+ b=G8CN1cslSUVoqu5nbfIchZ6fWOQ7mtNUzV9D4M6tmnD3cOd2OQECNHQ0jJjIyjovxD
+ HTIBS08/S+oqb+6cs1h4oi92Y+mqs8wEr2ZM+mrCrMW4UdEzl6Fs9Lz1nHckxeu4haLD
+ lpjaZ5wlpD+eLpbQIJFp1kIYWmiMES8dDJcvrUCiq5mapMp2KgHQAHwa2ciYTuA92usg
+ 25e/eGqSndaInREhRg4dtDEgKdBnfVnix0kVuWVB0qYWKLAu3WLTK/ef6LQ1pBH/n2Ql
+ nKhnQzmVOZhWo2v48cFO+9po8pyHTjoBIp8xuORAj0bFyQsHnnx0ydTpWjzaP8fPClgt
+ q34g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfOcWTtfktsC1K8juXKyxvPNLBE3uatyhlmGTzgdDHLyG4gOqaTgb7nc/4Mf6aOtt4WwcRov0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzW8SG26jEDSSwZdMnG3NLwf6Hwd+DWRQqlntW9brApuCfekuhH
+ pVpdXe1LTATUuamNYiaqlT0xnZyeQfgmTjpr3/u3hC6AE55UKsapMt3GbeCOGhH19/6g2iz0ypf
+ CIglee4gbwKdGdoU4FUKup6c/21x3GOGFw7WE
+X-Gm-Gg: ASbGncst4nHOD/OZCn2+jAJqNDmZAaSGWdvvwFnm0YUhSKiPtsNmn81dI8Ph5ft+70k
+ eU+QQoZA0rRVUd7E8MEjmmDe0m6ovs1dYqN8Iu7g+IZ+ESxFzN4OPkCbfwFgE8HMVhbUEUyX8Vh
+ bdOGBnrh4CN9mp2lcVjJaIZ0s=
+X-Google-Smtp-Source: AGHT+IEBvzWGCdlX/JZE+/l6TLy1rBTQoZnQZEtmQKismxtt3mNPxdMwoqtfFXQMU3oR0sRGrV4lDzIOfFI2ZHCRwds=
+X-Received: by 2002:a17:907:6ea2:b0:ace:d95f:6582 with SMTP id
+ a640c23a62f3a-acedc766b9emr347755166b.53.1746021268567; Wed, 30 Apr 2025
+ 06:54:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250429132239.251756-1-sjg@chromium.org>
- <20250429134846.GA1261075@bill-the-cat>
- <CAFLszTgrJvgWJaCXFgefJ1bObsrGfZa6AC8C6ypFRKJQTWm5ZQ@mail.gmail.com>
- <20250429145347.GG1261075@bill-the-cat>
-In-Reply-To: <20250429145347.GG1261075@bill-the-cat>
+References: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250430105546.327442-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Apr 2025 07:54:11 -0600
-X-Gm-Features: ATxdqUGir3-cSMeLUaWQ50WroJo_f88XK0XNKe9NCbxOTK2H5EZnoXGewrkcNoA
-Message-ID: <CAFLszTjG4-3hjD2c4O7XaCQVheiY050rsVEh1RTyVH7QXYatTg@mail.gmail.com>
-Subject: Re: [PATCH 00/30] patman: Move to asyncio and other updates
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Kochetkov <al.kochet@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>, 
- Douglas Anderson <dianders@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Leonard Anderweit <l.anderweit@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Date: Wed, 30 Apr 2025 07:54:15 -0600
+X-Gm-Features: ATxdqUHCkCUYI0xmaIxoC3l8qBsuplxmUtDcldZHiCLBWEyWudgT3Fi9AgSAPT8
+Message-ID: <CAFLszTiGDHWpEEhZZ_uN5KEjc52huun3U93qomaK8o2RZW1sUA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] bootm: pass kernel load address not entry point for
+ IH_OS_EFI
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,61 +93,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Tue, 29 Apr 2025 at 08:53, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 30 Apr 2025 at 04:55, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Tue, Apr 29, 2025 at 08:35:24AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 29 Apr 2025 at 07:48, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Apr 29, 2025 at 07:21:57AM -0600, Simon Glass wrote:
-> > >
-> > > > This series moves patman to use asyncio instead of ThreadPoolExecutor
-> > > > since it makes it easier to handle requests sent from different parts
-> > > > of the code.
-> > > >
-> > > > It also includes some updates to bring patman in line with the other
-> > > > major Python tools (buildman and binman).
-> > > >
-> > > > With this series, we have a better basis to add support for syncing more
-> > > > data from a patchwork server.
-> > > >
-> > > > After this, the next step it to add a new 'patman series' subcommand, to
-> > > > track and manage series workflow.
-> > >
-> > > This conflicts with master, please rebase this if you intend for it to
-> > > be merged to mainline.
-> >
-> > I will take a look and see what patches my tree is missing.
-> >
-> > >  And to avoid confusion, while I think managing
-> > > these python projects in this manner (and not AFAICT following python
-> > > best practices) makes life harder for everyone else, that is not me
-> > > NAK'ing taking more patches, I continue to be compromising and "Saying
-> > > Yes" to things you do that I disagree with on non-arbitrary technical
-> > > grounds.
-> >
-> > I'm open to managing them in my tree if that helps. For now it seems
-> > like too much work to manage them separately, but if someone wants to
-> > volunteer to help, I could do it.
+> The EFI sub-system needs the load address and not the entry point
+> to boot the binary passed from the bootm command. The entry point
+> is derived from the PE-COFF header of the binary.
 >
-> Again, if you won't manage them standalone as seems to be normal best
-> practice,
+> Fixes: ecc7fdaa9ef1 ("bootm: Add a bootm command for type IH_OS_EFI")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  boot/bootm_os.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> index dc9d3e61fca..a3c7cb5332e 100644
+> --- a/boot/bootm_os.c
+> +++ b/boot/bootm_os.c
+> @@ -498,11 +498,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
+>         /* We expect to return */
+>         images->os.type = IH_TYPE_STANDALONE;
+>
+> -       image_buf = map_sysmem(images->ep, images->os.image_len);
+> +       image_buf = map_sysmem(images->os.image_start, images->os.image_len);
+>
+>         /* Run EFI image */
+>         printf("## Transferring control to EFI (at address %08lx) ...\n",
+> -              images->ep);
+> +              images->os.image_start);
+>         bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+>
+>         ret = efi_binary_run(image_buf, images->os.image_len,
 
-I wonder whether that was intended to throw shade at my approach, but
-if so I'll let it go.
+In this case ep should be set to image_start as it is with many
+methods. How come it isn't in this case?
 
-Anyway, I don't completely understand the best-practice argument,
-although I am open to it. It is extra work to set up CI, etc, but
-probably not a huge amount. If I get keen one day perhaps I will take
-a look. Just so many things on my plate already, as you know.
-
-> we'll just keep them in mainline. It's up to you if they
-> diverge or not, but it would be easy to avoid I would think.
-
-Yes I can't imagine it will be difficult as there are so few patches.
+> --
+> 2.48.1
+>
 
 Regards,
 Simon
