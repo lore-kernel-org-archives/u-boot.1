@@ -4,81 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E77F6C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 11:12:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 233E4C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:03:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EEDF8059D;
-	Thu,  1 May 2025 13:12:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3DD0A8081A;
+	Thu,  1 May 2025 14:03:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h2POuW0p";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF2898081A; Thu,  1 May 2025 13:12:44 +0200 (CEST)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 819688056A
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 13:12:42 +0200 (CEST)
+ id C8C508081A; Thu,  1 May 2025 14:03:00 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A72098056A
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:02:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3d81768268dso7597735ab.3
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 04:12:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746097960; x=1746702760; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=f/COofnDcyHhxuS0+E7GVfKqTFjHVDJR5T61jmlNRYI=;
- b=h2POuW0p5mUCJ7+xRzpJyXimT0BN19HP/VOG5zaAUoAn4a+BfTy3SsuqaFeovhP8aT
- 4g1tQbAEFx6PezXm1iH2XdB8Vcpfwyj0/MsXkvp3VhYhcQD7kplZEkvt4Ch28VOde1ie
- 1EqrWBLcvURYpjY5UtSaifX56nYKQfanoQIMI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746097960; x=1746702760;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=f/COofnDcyHhxuS0+E7GVfKqTFjHVDJR5T61jmlNRYI=;
- b=eYGSFuD/T0YbogAwQwjFhO6XzNKZtENvMC2eqj1syB+ovX3v4xEqXNvdpiIUc+uWZd
- qU5FEr7kQCS3EdrXRiqMD9EUNdpJ7YmMjtkVa9L4JtOZLq/3/QL1qwlLFVbwanGHin2y
- 8IQsBa+Kc21gHguScIwsTQ+HU/qtfZd0r7Izkd1XXtXleyWFgBfbOCC3e8Upazgg7iAr
- Pjeuh6QGUw0KflOlzf0X/1SUls/EwuySQOEA7/Ya6jFyrmCGnKnEKFvoPgk8m7uExLaY
- 9Yz6dVkfl6JH05NpqqNVAOMIBqTJQdJS2LtUMapG+9omaBND1pD67617SbPo6TLnd5mb
- BPOA==
-X-Gm-Message-State: AOJu0YzJiX3xJCnKLnZZnUqHWpEp6KvQ6k9FCEy7QETScPI+leyyQjgS
- McrRRxSOciyneN0XZSgEWeUtAyK3wAe2oMteVmjf96YkyJax0W7CDX2dkE5fdWaq7BxfWYjBpW0
- =
-X-Gm-Gg: ASbGncuwY8oqUz2qdTq6VKjdZv3bz91z60l1AoJwAIxO0N8NhLT0vH8oPlCshyAmdDv
- LEqIIbNf/D46IYPtZ6m/+wzJuX2KznnK77o6xys1FEYXUqPL++jH7XRD4kuwz7y49bfXJVXsC3j
- 3OZ8UdqOjEvYLB3dI68D06JytJefZppYGsBaGTPfbb1GpNYERnY1Fxu+V2lCU9vEw7nfxX3cYaM
- jotJG6e+ALRloGVDTgYg6+cqAFli05GrMlmluywG+nZPqx/3BK10+t7jxrLUPL5Hv1Bz3uEEJj0
- IH4/+dyc41ffVxqe1eJ17J5B/BWCo8HGeZYrNzKbjqsVatQuQq6NOUolYDe0g34aZXUhlq10at7
- ThA==
-X-Google-Smtp-Source: AGHT+IG5z7lTAnh7Mtp/9RylTV9EgrSS4lI/pS5i1DLMo+1j2g0zPan3ustucl+zs8CYAaLr7WkDqA==
-X-Received: by 2002:a05:6e02:18c8:b0:3d4:244b:db20 with SMTP id
- e9e14a558f8ab-3d967fffd51mr72663405ab.16.1746097960279; 
- Thu, 01 May 2025 04:12:40 -0700 (PDT)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d975ec7df4sm845175ab.32.2025.05.01.04.12.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 04:12:38 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Greg Malysa <greg.malysa@timesys.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Tom Rini <trini@konsulko.com>,
- Trevor Woerner <twoerner@gmail.com>
-Subject: [PATCH v2] sandbox: Enable PHYS_64BIT for 64-bit builds
-Date: Thu,  1 May 2025 05:12:32 -0600
-Message-ID: <20250501111235.707593-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=fail (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 490EC106F;
+ Thu,  1 May 2025 05:02:50 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4043B3F673;
+ Thu,  1 May 2025 05:02:55 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH 0/5] lmb: use a single API for all allocations
+Date: Thu,  1 May 2025 17:32:34 +0530
+Message-Id: <20250501120239.199829-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,56 +55,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sandbox is special in that we use the bitness of the host. This should
-extend to PHYS_64BIT as well, so enable this option when building on a
-64-bit host.
 
-Update the conditions in io.h so that 64-bit access is available.
+The LMB module has a bunch for API's which are used for allocating
+memory. There are a couple of API's for requesting memory, and two
+more for reserving regions of memory. Replace these different API's
+with a single one, lmb_allocate_mem(). The type of allocation to be
+made is specified through one of the parameters to the function.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Additionally, the two API's for reserving regions of memory,
+lmb_reserve() and lmb_alloc_addr() are the same with one
+difference. One can reserve any memory region with lmb_reserve(),
+while lmb_alloc_addr() actually checks that the memory region being
+requested is part of the LMB memory map. Reserving memory that is not
+part of the LMB memory map is pretty futile -- the allocation
+functions do not allocate memory which has not been added to the LMB
+memory map.
 
-Changes in v2:
-- Stand-alone patch
+This series also removes the functionality allowing for reserving
+memory regions outside the LMB memory map. Any request for reserving a
+region of memory outside the LMB memory map now returns an -EINVAL
+error.
 
- Kconfig                       | 1 +
- arch/sandbox/include/asm/io.h | 4 ++--
- 2 files changed, 3 insertions(+), 2 deletions(-)
+Certain places in the common code using the LMB API's were not
+checking the return value of the functions. Checks have been added for
+them. There are some calls being made from the architecture/platform
+specific code which too do not check the return value. Those have been
+kept the same, as I do not have the platform with me to check if it
+causes any issues on those platforms.
 
-diff --git a/Kconfig b/Kconfig
-index 589fed689c8..de9d9ad5653 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -448,6 +448,7 @@ endif # EXPERT
- config PHYS_64BIT
- 	bool "64bit physical address support"
- 	select FDT_64BIT
-+	default y if HOST_64BIT
- 	help
- 	  Say Y here to support 64bit physical memory address.
- 	  This can be used not only for 64bit SoCs, but also for
-diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
-index 3d09170063f..3c3545a2747 100644
---- a/arch/sandbox/include/asm/io.h
-+++ b/arch/sandbox/include/asm/io.h
-@@ -39,13 +39,13 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
- #define readb(addr) sandbox_read((const void *)addr, SB_SIZE_8)
- #define readw(addr) sandbox_read((const void *)addr, SB_SIZE_16)
- #define readl(addr) sandbox_read((const void *)addr, SB_SIZE_32)
--#ifdef CONFIG_SANDBOX64
-+#ifdef CONFIG_HOST_64BIT
- #define readq(addr) sandbox_read((const void *)addr, SB_SIZE_64)
- #endif
- #define writeb(v, addr) sandbox_write((void *)addr, v, SB_SIZE_8)
- #define writew(v, addr) sandbox_write((void *)addr, v, SB_SIZE_16)
- #define writel(v, addr) sandbox_write((void *)addr, v, SB_SIZE_32)
--#ifdef CONFIG_SANDBOX64
-+#ifdef CONFIG_HOST_64BIT
- #define writeq(v, addr) sandbox_write((void *)addr, v, SB_SIZE_64)
- #endif
- 
+
+Sughosh Ganu (5):
+  lmb: replace lmb_reserve() and lmb_alloc_addr() API's
+  lmb: replace the lmb_alloc() and lmb_alloc_base() API's
+  lmb: staticise lmb_add_memory()
+  lmb: use a single function to free up memory
+  doc: add lmb documentation
+
+ arch/arm/mach-apple/board.c      |  27 +++--
+ arch/arm/mach-mediatek/tzcfg.c   |   8 +-
+ arch/arm/mach-snapdragon/board.c |  13 ++-
+ arch/powerpc/cpu/mpc85xx/mp.c    |   4 +-
+ arch/powerpc/lib/misc.c          |   5 +-
+ boot/bootm.c                     |  11 +-
+ boot/image-board.c               |  49 +++++----
+ boot/image-fdt.c                 |  67 +++++++++---
+ cmd/booti.c                      |   8 +-
+ cmd/bootz.c                      |   8 +-
+ cmd/load.c                       |   6 +-
+ doc/api/index.rst                |   1 -
+ doc/api/lmb.rst                  |   7 --
+ doc/develop/index.rst            |   1 +
+ doc/develop/lmb.rst              | 166 ++++++++++++++++++++++++++++++
+ fs/fs.c                          |   3 +-
+ include/lmb.h                    | 101 ++++++++----------
+ lib/efi_loader/efi_memory.c      |  22 ++--
+ lib/lmb.c                        | 171 +++++++++++++++++--------------
+ test/lib/lmb.c                   | 102 ++++++++++++------
+ 20 files changed, 535 insertions(+), 245 deletions(-)
+ delete mode 100644 doc/api/lmb.rst
+ create mode 100644 doc/develop/lmb.rst
+
 -- 
-2.43.0
+2.34.1
 
-base-commit: b5d6220dd2f4612912989f3c2b5a710f2248cb36
-branch: schb2
+
