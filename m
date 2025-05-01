@@ -4,127 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FCE1C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 17:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B641BC369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 17:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B92698081A;
-	Thu,  1 May 2025 19:24:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D7748070C;
+	Thu,  1 May 2025 19:53:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="crltr0Rl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rXh9JAC7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B36D809D4; Thu,  1 May 2025 18:04:45 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D58548070C
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 18:04:41 +0200 (CEST)
+ id 1E9D58081A; Thu,  1 May 2025 19:53:21 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EFF28059D
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 19:53:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-601b6146b9cso564047eaf.0
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 09:04:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746115480; x=1746720280; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Z+wL1Sbw79jgjrajSadNjcJSClHi80lznkFF6y8poxU=;
- b=crltr0RlM2e9ns30y+RMLRnjCfp0BgIiKk0VDb6i2hzrZfEsNBSfH0KE4MYEJN/3Ef
- jZ4rJoLpyfVM0slkbPVLrEvtIvOkMT8TMqddX74on3zY1JzC1SkL+qLz5gYCYetJ1xGN
- HEfTg/Ya4B7xYUGmNwjl37DpM8PoalX94jpVI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746115480; x=1746720280;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z+wL1Sbw79jgjrajSadNjcJSClHi80lznkFF6y8poxU=;
- b=aSpIdLbYlTikZiWXjffWEag05YHWpb2SkSkiDIwdr6sJqKl8Xij/7WeZIiCIJnMnQ+
- QNiJBC6caj4qwOcNad73Tjm2x4mZd0Oc9YSzFhd8Y/pRVB7TVL4ZdN0/ZZ5X9ySPgETb
- 3H5087HwZLf1ExznNn3dC9DwDXVYx87Sxnen+X8RqgPPbZj1cHACUtX+waI72ZTu7Soa
- VokaZ2K740UfYZbr6AHABNlMAsRyoL1P75Bha0CBl1TVF8mjv174cb9qZMsoM6jg9EtY
- /z/dDEfzA/SyDQpQnD32IOfenVPMS90+GgbYmt87prow/S4PDZf7LXfDi2KWczu2gckb
- 21Eg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNFW+Mu6cvPWkKKd24nS9tm7XcQ/TUnQ+TRbNSEfahayfoYLXNaDWfru0G5DdWD7WJqldAcDo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzlwNiC0XPmtUcFPpar0dM179km95sM3tvYA0qyxw8zit1q6Gew
- +ND3Kq8gjh+l1LoLWi4IxEmHhXa10QNthkN9mSOGnvz7FOb2y4Z2tw+yCYIC+X0=
-X-Gm-Gg: ASbGncssysbomqBDogLOicqIAApTwsRzE8tmTm0nMNcjlY523nDTFTqF0CvZAseIx1t
- 8ujNLOvwZcNvN8Ok7/NYFhkEuBDPggep9zE3yiCJ9+ZY1oFObETtmBcgE2y7D1Xv1Qxb8qX+3IL
- MnFFDpQGXSoh3k6LJduob/NsomDU42eOGSbDvReZ08bRYa6eh+JYdgGlsJ8XM2laWLQnSzzR4eV
- AY4Z3Nj9EW4tSsIkGo0Ye2wha1XSsEv3p8ozXQGtee9RJqf/qtwqp9I4TxsPOjRtLgBAD340tdn
- dJL7USDoNvuX2H1kTfBzFVQ+QSt+rBiI2K/o9lPnkabyorcNmj0pHnzUzIyfD3UHaatNQ1PXyhk
- t1w==
-X-Google-Smtp-Source: AGHT+IEM7/sETgUm9nXNfSvdhon03ICxouXfmLOt30kRAe7QKKBIuzOukFmXB5NEFopCxfZQGsDYWA==
-X-Received: by 2002:a05:6820:2903:b0:606:293f:d2da with SMTP id
- 006d021491bc7-607d569edefmr3968455eaf.8.1746115480391; 
- Thu, 01 May 2025 09:04:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7d11e1bsm160519eaf.10.2025.05.01.09.04.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 09:04:39 -0700 (PDT)
-Date: Thu, 1 May 2025 10:04:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Peter Maydell <peter.maydell@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Phelps <andrew.phelps@canonical.com>,
- =?iso-8859-1?Q?Fran=E7ois?= Ozog <francois.ozog@linaro.org>,
- Bill Mills <bill.mills@linaro.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Alex Shumsky <alexthreed@gmail.com>,
- Alexander Dahl <ada@thorsis.com>, Bin Meng <bmeng.cn@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Duje =?utf-8?Q?Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Fabio Estevam <festevam@gmail.com>,
- Harrison Mutai <harrison.mutai@arm.com>, Jason Liu <jason.hui.liu@nxp.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
- Mario Six <mario.six@gdsys.cc>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@denx.de>, Sumit Garg <sumit.garg@kernel.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Xu Zhang <423756212@qq.com>
-Subject: Re: [PATCH v3 00/22] passage: Define a standard for firmware data flow
-Message-ID: <20250501160435.GJ1261075@bill-the-cat>
-References: <20250417181613.1355024-1-sjg@chromium.org>
- <CAEfUkUJpT8YxOgdakCBbjBo_a6a6pQDR_wh=iqX5LC+cFAFJ0Q@mail.gmail.com>
- <20250429171154.GJ1261075@bill-the-cat>
- <CAFLszTjfq1TVjYSiCQmtSOZK7MoVUOFU5ycOzeBK4-5-zCKxFQ@mail.gmail.com>
- <20250430142931.GQ1261075@bill-the-cat>
- <CAFLszTh0Z_wWj_zdpopphbtzj0qCiTviZsxT9T+M9oaOn70R0g@mail.gmail.com>
- <20250430152056.GS1261075@bill-the-cat>
- <CAFLszTjDMBORfC1bLXFyTEUuKCA7bU53VURO+Jykkb8BRL3d5g@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 541HrGIG3669851
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 1 May 2025 12:53:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746121996;
+ bh=EAEFiCeq392/ZhrdC3M6fSL9sBV4082CIAUDSA7Oc+8=;
+ h=From:To:CC:Subject:Date;
+ b=rXh9JAC7yxggvm2CHUqJxgC2vqRYTMA8twotQW/jkk0AMFjhE6Wogo1IDf2DrzEid
+ nBlLooFLcUH5F5jaWQBlnr2HZKgdRa0fLHCcT1JfAzF24C0VyF92cuK6wX/FrbKGsf
+ 430YvjmI1v3ApJdIwZDJ3JKRakX0QjZ4nhCPCueM=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 541HrG0r044988
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 1 May 2025 12:53:16 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 1
+ May 2025 12:53:16 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 1 May 2025 12:53:16 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 541HrC46017385;
+ Thu, 1 May 2025 12:53:13 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>, <j-choudhary@ti.com>, 
+ <francesco.dolcini@toradex.com>, <vaishnav.a@ti.com>,
+ <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH] configs: j722s_evm_r5_defconfig: Enable PMIC config
+Date: Thu, 1 May 2025 23:23:08 +0530
+Message-ID: <20250501175308.2653413-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lFVYEWdFHzyeg3YR"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjDMBORfC1bLXFyTEUuKCA7bU53VURO+Jykkb8BRL3d5g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Thu, 01 May 2025 19:24:06 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,268 +80,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In kernel device tre commit 714d54917147: ("arm64: dts: ti: k3-j722s-evm:
+Enable PMIC") adds pmic support.
 
---lFVYEWdFHzyeg3YR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Above commit of kernel get synched in u-boot by sha ab06a533f08e:("Squashed
+'dts/upstream/' changes from 8531b4b4988c..955176a4ff59").
 
-On Wed, Apr 30, 2025 at 07:39:29PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 30 Apr 2025 at 09:21, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Apr 30, 2025 at 08:51:53AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 30 Apr 2025 at 08:29, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Apr 30, 2025 at 07:55:01AM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, 29 Apr 2025 at 11:11, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Mon, Apr 28, 2025 at 10:41:25AM -0400, Raymond Mao wrote:
-> > > > > > > Hi Simon,
-> > > > > > >
-> > > > > > > On Thu, 17 Apr 2025 at 14:16, Simon Glass <sjg@chromium.org> =
-wrote:
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > This series adds a standard way of passing information betw=
-een different
-> > > > > > > > firmware phases. This already exists in U-Boot at a very ba=
-sic level, in
-> > > > > > > > the form of a bloblist containing an spl_handoff structure,=
- but the intent
-> > > > > > > > here is to define something useful across projects.
-> > > > > > > >
-> > > > > > > > The need for this is growing as firmware fragments into mul=
-tiple binaries
-> > > > > > > > each with its own purpose. Without any run-time connection,=
- we must rely
-> > > > > > > > on build-time settings which are brittle and painful to kee=
-p in sync.
-> > > > > > > >
-> > > > > > > > This feature is named 'standard passage' since the name is =
-more unique
-> > > > > > > > than many others that could be chosen, it is a passage in t=
-he sense that
-> > > > > > > > information is flowing from one place to another and it is =
-standard,
-> > > > > > > > because that is what we want to create.
-> > > > > > > >
-> > > > > > > > The implementation is mostly a pointer to a bloblist in a r=
-egister, with
-> > > > > > > > an extra register to point to a devicetree, for more comple=
-x data. This
-> > > > > > > > should cover all cases (small memory footprint as well as c=
-omplex data
-> > > > > > > > flow) and be easy enough to implement on all architectures.
-> > > > > > > >
-> > > > > > > > The emphasis is on enabling open communcation between binar=
-ies, not
-> > > > > > > > enabling passage of secret, undocumented data, although thi=
-s is possible
-> > > > > > > > in a private environment.
-> > > > > > > >
-> > > > > > > > This series is available at u-boot-dm/pass-working
-> > > > > > > >
-> > > > > > >
-> > > > > > > First of all, can you group those patches which are necessary=
- for
-> > > > > > > refactoring the "passage" concept into a smaller series for a=
-n easy
-> > > > > > > review?
-> > > > > > >
-> > > > > > > Actually as I mentioned in our previous discussions, I don't =
-agree to
-> > > > > > > add a OF_BLOBLIST as this is duplicated with "BLOBLIST +
-> > > > > > > BLOBLIST_PASSAGE_MANDATORY (aka PASSAGE_IN in the context of =
-your
-> > > > > > > patch - I am not sure the reason you prefer to rename it - do=
- we have
-> > > > > > > any other passage approaches other than using bloblist? And d=
-o you
-> > > > > > > have any considerations to allow a fallback or not in case pa=
-ssage
-> > > > > > > failures?)"
-> > > > > >
-> > > > > > As preamble, I am actively working to push the changes for
-> > > > > > vexpress_fvp_bloblist to be available in CI and so provide an e=
-asier
-> > > > > > testing path.
-> > > > > >
-> > > > > > At the high level, I don't see what the difference is between "=
-BLOBLIST
-> > > > > > + BLOBLIST_PASSAGE_MANDATORY" and "BLOBLIST + OF_BLOBLIST" or "=
-BLOBLIST
-> > > > > > + whatever v4 of this series ends up showing". Everyone seems w=
-ildly in
-> > > > > > agreement that if the prior stage is supposed to give us inform=
-ation
-> > > > > > then it must have done so.
-> > > > > >
-> > > > > > One of the long running "jokes" in computer science about namin=
-g being
-> > > > > > one of the hardest problems applies here, too.
-> > > > >
-> > > > > I want to use OF_BLOBLIST as it clearly indicates that the device=
-tree
-> > > > > comes from a bloblist. The BLOBLIST_PASSAGE_MANDATORY thing is a
-> > > > > work-around to try to avoid having OF_BLOBLIST.
-> > > >
-> > > > Or:
-> > > > Other people want to use BLOBLIST_PASSAGE_MANDATORY as it clearly
-> > > > indicates that the standard passage will be present and so include =
-the
-> > > > devicetree and any other required logs/blobs/content. The OF_BLOBLI=
-ST
-> > > > thing is a work-around to try and avoid having
-> > > > BLOBLIST_PASSAGE_MANDATORY.
-> > > >
-> > > > It's a naming problem and I don't care as long as we end up with an
-> > > > implementation that's useful. And *that* is where my list of what
-> > > > bloblist needs to have, in the end, comes from.
-> > >
-> > > My approach does the same thing, but allows my x86 boards to work
-> > > without all the confusion. It shows fdt coming from 'standard passage'
-> > > when it is.
-> >
-> > It does not matter. Really. Whatever you're doing with OF_BLOBLIST can
-> > also be done with BLOBLIST_PASSAGE_MANDATORY as it's just a naming
-> > thing. There's nothing confusing here unless you insist on confusing it.
-> > Which gets back to what I was saying before about what changes need to
-> > happen to bloblist.
-> >
-> > > > > > > Secondly I prefer to keep the register convention code as a x=
-ferlist
-> > > > > > > library that can be used for arm arches other than split them=
- into
-> > > > > > > different low level assemblies. In case of any firmware hando=
-ff
-> > > > > > > specification update, we just need to maintain this library.
-> > > > > >
-> > > > > > Yes, if things can be written in a C file, they should be in a =
-C file,
-> > > > > > not assembler.
-> > > > >
-> > > > > In this case I disagree and if you look at the x86 code, this kin=
-d of
-> > > > > approach is just not sensible. Please take a look at the contorti=
-ons
-> > > > > of xferlist_from_boot_arg(). It was written for one architecture =
-only,
-> > > > > yet purports to be a general API. My approach is simpler. Also, if
-> > > > > save_boot_args() is implemented by the board, then standard passa=
-ge
-> > > > > will be broken for that board. It's a weak function!
-> > > >
-> > > > I don't see why this has to be in assembly and not C, no. And it's a
-> > > > weak function because it doesn't yet exist on other architectures a=
-nd
-> > > > everyone hates #if.
-> > >
-> > > We just don't need it, though. If you would like this to work on x86,
-> > > it needs to go.
-> > >
-> > > >
-> > > > > More generally, please decide if you are willing to let me mainta=
-in bloblist.
-> > > >
-> > > > Can you be given substantive feedback? Or is only trivial feedback
-> > > > allowed?
-> > >
-> > > I'm happy to discuss it on a call, but if you insist on
-> > > BLOBLIST_PASSAGE_MANDATORY, then it is going to be tricky. The
-> > > OF_BLOBLIST thing has consumed far too much time. If you want Linaro
-> > > to maintain bloblist, please just say so. I had thought you were OK
-> > > with my taking that on again.
-> >
-> > As I've said numerous times now, BLOBLIST_PASSAGE_MANDATORY and
-> > OF_BLOBLIS are just names. Names are one of the hardest problems in
-> > computer science. As I've also said numerous times now, you need to
-> > show ME that you have a good design. That means you need to implement
-> > register passing rather than BLOBLIST_FIXED. You then also likely need
-> > to untie "Is there a bloblist?" from "Make a bloblist" as that's what
-> > complicates things.
->=20
-> They are not names, actually. The logic is different. Please look
-> through it carefully. Perhaps we can discuss this on a call?
+Now, PMIC DT is available in u-boot for J722S EVM,
+So enable PMIC in defconfig as well.
 
-I don't know how a call would help. They really are just names for the
-same goal. Whatever the symbol is for "board must use standard passage"
-can select OF_BLOBLIST, it does not matter. Especially if you do what I
-asked in the email you link to later.
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+---
+Bootlogs
+https://gist.github.com/uditkumarti/0d4c5577ecbe2f61bfe8690792f3fe57
 
-> As to BLOBLIST_FIXED, I have a path to do that, and convert x86 also.
-> I even have boards in the lab to make sure it all works. I see that
-> you have got the bloblist board into CI as well, so that will make
-> things easier.
+ configs/j722s_evm_r5_defconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Good, lets get rid of BLOBLIST_FIXED as soon as we can. That'll help
-remove some of the overall confusion.
+diff --git a/configs/j722s_evm_r5_defconfig b/configs/j722s_evm_r5_defconfig
+index 40db0da9f62..d34a718a00b 100644
+--- a/configs/j722s_evm_r5_defconfig
++++ b/configs/j722s_evm_r5_defconfig
+@@ -127,3 +127,9 @@ CONFIG_ESM_K3=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_MISC=y
+ CONFIG_SPL_LIB_RATIONAL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_TPS65941=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_TPS65941=y
++CONFIG_SPL_I2C=y
+-- 
+2.34.1
 
-> But that path I'm talking about doesn't run through the xferlist
-
-I cannot understand why:
-https://patchwork.ozlabs.org/project/uboot/patch/20250417121601.v3.10.I56d9=
-d06e5d74724c963eaffbbe1c2aa400b60bb8@changeid/
-is good
-and:
-https://source.denx.de/u-boot/u-boot/-/commit/5103e69344d60eb8c8d2cf804ec00=
-d0ef3975124
-is bad.
-
-And then what you want will enable x86 to be handled, but what we have
-in tree cannot.
-
-> stuff, nor BLOBLIST_PASSAGE_MANDATORY for that matter, so am I not
-> willing to do it before this series is in. I do want to focus my
-> efforts on things which will bear fruit. For whatever reason, this one
-> seems to have generated a lot more heat than light, over a period of
-> 18 months.
->=20
-> Another option you have is to take this series and then the following
-> ones for the migration and *then* decide if you want something
-> tweaked. That would be more likely to result in a successful
-> collaboration.
->=20
-> The reason I keep asking you about just letting me maintain it is that
-> I thought you agreed to this a few months back:
->=20
-> https://lore.kernel.org/u-boot/20250216154801.GZ1233568@bill-the-cat/
->=20
-> Please, consider the option of just sending me a 'yes' and I'll sort
-> all this out.
-
-So are you, or are you not doing what I outlined in what you linked
-above? Because looking briefly, again, at v3, and setting aside the
-unintentional breakage, it's not doing much of what I asked. We're
-finally (good!) adding a way to pass between U-Boot phases on ARM. We're
-also not making use of the existing mechanism for doing so, for unclear
-reasons. So yes, before you make a v4 you should explain what's wrong
-with the method we have today.
-
---=20
-Tom
-
---lFVYEWdFHzyeg3YR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgTm48ACgkQFHw5/5Y0
-tywJfgwAmt9cHXK/6XhawZ/0gqZJvzOw5wVSxAhZ/WvuHAPxpb4uZBBFOvzk8rkz
-0wJ2+qgUfbnN5DzD4w8ofnY59HMaPiAc461yNLoa9YI8M+fe6wm818FS84f0gZ1b
-jkFgGT+rQBuPv6+xDSyHFofBb1hV28zl6QZCFrqqaWtCC7TT4p8oMvIgocZj5bKA
-0IjEiNThHN1CnzH+xuky5IyGU37L2nl7blOXWaj3eMlfxO8BY5a0Tl8shw2wamSD
-3ZWdH6ksqKV5J37AxhuzogeCkmAjKtZy39rvgRAXRmogQuIMGtr4+Rg5tsL2GMFu
-ApPuQqyeZiU88VaRvQnAvPb9vJFfUxcJc4r2pTX1r1XeGd0bVWfvT+CQa5R5hecr
-um3Mw2leRnQArnBp0M8b9tlDj4VMMefJWaEfo8x85W0hfi9FXXDdfpn0OZD4loY5
-7IkzVV/YJbJBIFX9lWeAqHXEiZoQssnmg+w+CeLw4JdCNIdocDk1oiiRBOI+wcxQ
-bPXcoKwU
-=dXmT
------END PGP SIGNATURE-----
-
---lFVYEWdFHzyeg3YR--
