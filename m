@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58693C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD80AC3ABA3
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:03:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 875C980EFB;
-	Thu,  1 May 2025 14:03:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CFDE9820E2;
+	Thu,  1 May 2025 14:03:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6F2180EFB; Thu,  1 May 2025 14:03:04 +0200 (CEST)
+ id 0CE5D80BAD; Thu,  1 May 2025 14:03:08 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 352518056A
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:03:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 825BF8056A
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:03:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 19E80168F;
- Thu,  1 May 2025 05:02:54 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6BBD41CC4;
+ Thu,  1 May 2025 05:02:57 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 586E43F673;
- Thu,  1 May 2025 05:02:58 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2A6463F673;
+ Thu,  1 May 2025 05:03:01 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -34,9 +34,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 1/5] lmb: replace lmb_reserve() and lmb_alloc_addr() API's
-Date: Thu,  1 May 2025 17:32:35 +0530
-Message-Id: <20250501120239.199829-2-sughosh.ganu@linaro.org>
+Subject: [PATCH 2/5] lmb: replace the lmb_alloc() and lmb_alloc_base() API's
+Date: Thu,  1 May 2025 17:32:36 +0530
+Message-Id: <20250501120239.199829-3-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250501120239.199829-1-sughosh.ganu@linaro.org>
 References: <20250501120239.199829-1-sughosh.ganu@linaro.org>
@@ -58,650 +58,453 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There currently are multiple allocation API's in the LMB module. There
-are a couple of API's for allocating memory(lmb_alloc() and
-lmb_alloc_base()), and then there are two for requesting a reservation
-for a particular memory region (lmb_reserve() and
-lmb_alloc_addr()). Introduce a single API lmb_allocate_mem() which
-will cater to all types of allocation requests and replace
-lmb_reserve() and lmb_alloc_addr() with the new API.
-
-Moreover, the lmb_reserve() API is pretty similar to the
-lmb_alloc_addr() API, with the one difference being that the
-lmb_reserve() API allows for reserving any address passed to it --
-the address need not be part of the LMB memory map. The
-lmb_alloc_addr() does check that the address being requested is
-actually part of the LMB memory map.
-
-There is no need to support reserving memory regions which are outside
-the LMB memory map. Remove the lmb_reserve() API functionality and use
-the functionality provided by lmb_alloc_addr() instead. The
-lmb_alloc_addr() will check if the requested address is part of the
-LMB memory map and return an error if not.
+There currently are two API's for requesting memory from the LMB
+module, lmb_alloc() and lmb_alloc_base(). The function which does the
+actual allocation is the same. Use the earlier introduced API
+lmb_allocate_mem() for both types of allocation requests.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- arch/arm/mach-mediatek/tzcfg.c |   8 +-
- arch/powerpc/cpu/mpc85xx/mp.c  |   4 +-
- arch/powerpc/lib/misc.c        |   5 +-
- boot/bootm.c                   |   5 +-
- boot/image-board.c             |   4 +-
- boot/image-fdt.c               |  33 +++++++--
- cmd/booti.c                    |   8 +-
- cmd/bootz.c                    |   8 +-
- cmd/load.c                     |   4 +-
- fs/fs.c                        |   3 +-
- include/lmb.h                  |  65 ++++++++--------
- lib/efi_loader/efi_memory.c    |   2 +-
- lib/lmb.c                      | 131 +++++++++++++++++++--------------
- test/lib/lmb.c                 |  27 +++++--
- 14 files changed, 196 insertions(+), 111 deletions(-)
+ arch/arm/mach-apple/board.c      | 27 ++++++++++++++-----
+ arch/arm/mach-snapdragon/board.c | 13 ++++++++-
+ boot/bootm.c                     |  6 +++--
+ boot/image-board.c               | 45 ++++++++++++++++++--------------
+ boot/image-fdt.c                 | 32 +++++++++++++++++------
+ include/lmb.h                    | 22 +++-------------
+ lib/efi_loader/efi_memory.c      | 14 +++++-----
+ lib/lmb.c                        | 30 ++++++++++-----------
+ test/lib/lmb.c                   | 26 ++++++++++++++++++
+ 9 files changed, 138 insertions(+), 77 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/tzcfg.c b/arch/arm/mach-mediatek/tzcfg.c
-index 71982ba4d20..4dbefd2488d 100644
---- a/arch/arm/mach-mediatek/tzcfg.c
-+++ b/arch/arm/mach-mediatek/tzcfg.c
-@@ -173,6 +173,7 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+index 2644a04a622..f0eab5df1ef 100644
+--- a/arch/arm/mach-apple/board.c
++++ b/arch/arm/mach-apple/board.c
+@@ -772,6 +772,19 @@ u64 get_page_table_size(void)
  
- int arch_misc_init(void)
- {
+ #define KERNEL_COMP_SIZE	SZ_128M
+ 
++static phys_addr_t lmb_alloc(phys_size_t size)
++{
++	int ret;
 +	phys_addr_t addr;
- 	struct arm_smccc_res res;
- 
- 	/*
-@@ -180,11 +181,14 @@ int arch_misc_init(void)
- 	 * there's no need to check the result
- 	 */
- 	arm_smccc_smc(MTK_SIP_GET_BL31_REGION, 0, 0, 0, 0, 0, 0, 0, &res);
--	lmb_reserve(res.a1, res.a2, LMB_NOMAP);
-+	addr = (phys_addr_t)res.a1;
-+	lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, res.a2, LMB_NOMAP);
- 
- 	arm_smccc_smc(MTK_SIP_GET_BL32_REGION, 0, 0, 0, 0, 0, 0, 0, &res);
-+	addr = (phys_addr_t)res.a1;
- 	if (!res.a0 && res.a1 && res.a2)
--		lmb_reserve(res.a1, res.a2, LMB_NOMAP);
-+		lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, res.a2,
-+				 LMB_NOMAP);
- 
- #if IS_ENABLED(CONFIG_CMD_PSTORE)
- 	char cmd[64];
-diff --git a/arch/powerpc/cpu/mpc85xx/mp.c b/arch/powerpc/cpu/mpc85xx/mp.c
-index 8918a401fac..f26583e1d5d 100644
---- a/arch/powerpc/cpu/mpc85xx/mp.c
-+++ b/arch/powerpc/cpu/mpc85xx/mp.c
-@@ -410,9 +410,9 @@ static void plat_mp_up(unsigned long bootpg, unsigned int pagesize)
- 
- void cpu_mp_lmb_reserve(void)
++
++	/* All memory regions allocated with a 2MiB alignment */
++	ret = lmb_allocate_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr, size, LMB_NONE);
++	if (ret)
++		return 0;
++
++	return addr;
++}
++
+ int board_late_init(void)
  {
--	u32 bootpg = determine_mp_bootpg(NULL);
-+	phys_addr_t bootpg = determine_mp_bootpg(NULL);
+ 	u32 status = 0;
+@@ -779,15 +792,15 @@ int board_late_init(void)
+ 	/* somewhat based on the Linux Kernel boot requirements:
+ 	 * align by 2M and maximal FDT size 2M
+ 	 */
+-	status |= env_set_hex("loadaddr", lmb_alloc(SZ_1G, SZ_2M));
+-	status |= env_set_hex("fdt_addr_r", lmb_alloc(SZ_2M, SZ_2M));
+-	status |= env_set_hex("kernel_addr_r", lmb_alloc(SZ_128M, SZ_2M));
+-	status |= env_set_hex("ramdisk_addr_r", lmb_alloc(SZ_1G, SZ_2M));
++	status |= env_set_hex("loadaddr", lmb_alloc(SZ_1G));
++	status |= env_set_hex("fdt_addr_r", lmb_alloc(SZ_2M));
++	status |= env_set_hex("kernel_addr_r", lmb_alloc(SZ_128M));
++	status |= env_set_hex("ramdisk_addr_r", lmb_alloc(SZ_1G));
+ 	status |= env_set_hex("kernel_comp_addr_r",
+-			      lmb_alloc(KERNEL_COMP_SIZE, SZ_2M));
++			      lmb_alloc(KERNEL_COMP_SIZE));
+ 	status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
+-	status |= env_set_hex("scriptaddr", lmb_alloc(SZ_4M, SZ_2M));
+-	status |= env_set_hex("pxefile_addr_r", lmb_alloc(SZ_4M, SZ_2M));
++	status |= env_set_hex("scriptaddr", lmb_alloc(SZ_4M));
++	status |= env_set_hex("pxefile_addr_r", lmb_alloc(SZ_4M));
  
--	lmb_reserve(bootpg, 4096, LMB_NONE);
-+	lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &bootpg, 4096, LMB_NONE);
- }
+ 	if (status)
+ 		log_warning("late_init: Failed to set run time variables\n");
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index deae4d32378..0568426dfe9 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -484,7 +484,18 @@ void __weak qcom_late_init(void)
+ #define FASTBOOT_BUF_SIZE 0
+ #endif
  
- void setup_mp(void)
-diff --git a/arch/powerpc/lib/misc.c b/arch/powerpc/lib/misc.c
-index 7e303419624..fd5546a6af9 100644
---- a/arch/powerpc/lib/misc.c
-+++ b/arch/powerpc/lib/misc.c
-@@ -36,11 +36,12 @@ int arch_misc_init(void)
- 		size = min(size, (ulong)CFG_SYS_LINUX_LOWMEM_MAX_SIZE);
+-#define addr_alloc(size) lmb_alloc(size, SZ_2M)
++static phys_addr_t addr_alloc(phys_size_t size)
++{
++	int ret;
++	phys_addr_t addr;
++
++	/* All memory regions allocated with a 2MiB alignment */
++	ret = lmb_allocate_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr, size, LMB_NONE);
++	if (ret)
++		return 0;
++
++	return addr;
++}
  
- 		if (size < bootm_size) {
--			ulong base = bootmap_base + size;
-+			phys_addr_t base = bootmap_base + size;
- 
- 			printf("WARNING: adjusting available memory from 0x%lx to 0x%llx\n",
- 			       size, (unsigned long long)bootm_size);
--			lmb_reserve(base, bootm_size - size, LMB_NONE);
-+			lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &base,
-+					 bootm_size - size, LMB_NONE);
- 		}
- 
- #ifdef CONFIG_MP
+ /* Stolen from arch/arm/mach-apple/board.c */
+ int board_late_init(void)
 diff --git a/boot/bootm.c b/boot/bootm.c
-index f5cbb10f0d1..b771fa6d965 100644
+index b771fa6d965..a1c67d2003d 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -697,8 +697,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 	}
+@@ -622,9 +622,11 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	if (os.type == IH_TYPE_KERNEL_NOLOAD && os.comp != IH_COMP_NONE) {
+ 		ulong req_size = ALIGN(image_len * 4, SZ_1M);
  
- 	if (CONFIG_IS_ENABLED(LMB))
--		lmb_reserve(images->os.load, (load_end - images->os.load),
--			    LMB_NONE);
-+		lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0,
-+				 (void *)&images->os.load,
-+				 (load_end - images->os.load), LMB_NONE);
- 
- 	return 0;
- }
+-		load = lmb_alloc(req_size, SZ_2M);
+-		if (!load)
++		err = lmb_allocate_mem(LMB_MEM_ALLOC_ANY, SZ_2M, (void *)&load,
++				       req_size, LMB_NONE);
++		if (err)
+ 			return 1;
++
+ 		os.load = load;
+ 		images->ep = load;
+ 		debug("Allocated %lx bytes at %lx for kernel (size %lx) decompression\n",
 diff --git a/boot/image-board.c b/boot/image-board.c
-index 514f8e63f9c..aa93371d9a7 100644
+index aa93371d9a7..bb7fbca0982 100644
 --- a/boot/image-board.c
 +++ b/boot/image-board.c
-@@ -562,7 +562,9 @@ int boot_ramdisk_high(ulong rd_data, ulong rd_len, ulong *initrd_start,
- 			debug("   in-place initrd\n");
- 			*initrd_start = rd_data;
- 			*initrd_end = rd_data + rd_len;
--			lmb_reserve(rd_data, rd_len, LMB_NONE);
-+			lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0,
-+					 (void *)&rd_data,
-+					 rd_len, LMB_NONE);
+@@ -538,6 +538,7 @@ int boot_get_ramdisk(char const *select, struct bootm_headers *images,
+ int boot_ramdisk_high(ulong rd_data, ulong rd_len, ulong *initrd_start,
+ 		      ulong *initrd_end)
+ {
++	int err;
+ 	char	*s;
+ 	phys_addr_t initrd_high;
+ 	int	initrd_copy_to_ram = 1;
+@@ -567,19 +568,20 @@ int boot_ramdisk_high(ulong rd_data, ulong rd_len, ulong *initrd_start,
+ 					 rd_len, LMB_NONE);
  		} else {
  			if (initrd_high)
- 				*initrd_start =
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 8f718ad29f6..6585813de00 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -73,12 +73,13 @@ static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags)
- {
- 	long ret;
+-				*initrd_start =
+-					(ulong)lmb_alloc_base(rd_len,
+-								    0x1000,
+-								    initrd_high,
+-								    LMB_NONE);
++				err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX,
++						       0x1000, &initrd_high,
++						       rd_len, LMB_NONE);
+ 			else
+-				*initrd_start = (ulong)lmb_alloc(rd_len,
+-								 0x1000);
++				err = lmb_allocate_mem(LMB_MEM_ALLOC_ANY,
++						       0x1000, &initrd_high,
++						       rd_len, LMB_NONE);
  
--	ret = lmb_reserve(addr, size, flags);
-+	ret = lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, (void *)&addr, size,
-+			       flags);
- 	if (!ret) {
- 		debug("   reserving fdt memory region: addr=%llx size=%llx flags=%x\n",
- 		      (unsigned long long)addr,
- 		      (unsigned long long)size, flags);
--	} else if (ret != -EEXIST) {
-+	} else if (ret != -EEXIST && ret != -EINVAL) {
- 		puts("ERROR: reserving fdt memory region failed ");
- 		printf("(addr=%llx size=%llx flags=%x)\n",
- 		       (unsigned long long)addr,
-@@ -155,7 +156,7 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
+-			if (*initrd_start == 0) {
++			if (err) {
+ 				puts("ramdisk - allocation error\n");
+ 				goto error;
+ 			}
++
++			*initrd_start = (ulong)initrd_high;
+ 			bootstage_mark(BOOTSTAGE_ID_COPY_RAMDISK);
+ 
+ 			*initrd_end = *initrd_start + rd_len;
+@@ -830,9 +832,10 @@ int boot_get_loadable(struct bootm_headers *images)
   */
- int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
+ int boot_get_cmdline(ulong *cmd_start, ulong *cmd_end)
  {
--	u64	start, size, usable, addr, low, mapsize;
-+	u64	start, size, usable, low, mapsize;
- 	void	*fdt_blob = *of_flat_tree;
- 	void	*of_start = NULL;
- 	char	*fdt_high;
-@@ -163,6 +164,7 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
- 	int	bank;
- 	int	err;
- 	int	disable_relocation = 0;
+-	int barg;
++	int barg, err;
+ 	char *cmdline;
+ 	char *s;
 +	phys_addr_t addr;
  
- 	/* nothing to do */
- 	if (*of_size == 0)
-@@ -184,8 +186,16 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
+ 	/*
+ 	 * Help the compiler detect that this function is only called when
+@@ -842,12 +845,14 @@ int boot_get_cmdline(ulong *cmd_start, ulong *cmd_end)
+ 		return 0;
  
- 		if (desired_addr == ~0UL) {
- 			/* All ones means use fdt in place */
--			of_start = fdt_blob;
--			lmb_reserve(map_to_sysmem(of_start), of_len, LMB_NONE);
-+			addr = map_to_sysmem(fdt_blob);
-+			err = lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
+ 	barg = IF_ENABLED_INT(CONFIG_SYS_BOOT_GET_CMDLINE, CONFIG_SYS_BARGSIZE);
+-	cmdline = (char *)(ulong)lmb_alloc_base(barg, 0xf,
+-				env_get_bootm_mapsize() + env_get_bootm_low(),
+-				LMB_NONE);
+-	if (!cmdline)
++	addr = env_get_bootm_mapsize() + env_get_bootm_low();
++
++	err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX, 0xf, &addr, barg, LMB_NONE);
++	if (err)
+ 		return -1;
+ 
++	cmdline = (char *)(uintptr_t)addr;
++
+ 	s = env_get("bootargs");
+ 	if (!s)
+ 		s = "";
+@@ -876,14 +881,16 @@ int boot_get_cmdline(ulong *cmd_start, ulong *cmd_end)
+  */
+ int boot_get_kbd(struct bd_info **kbd)
+ {
+-	*kbd = (struct bd_info *)(ulong)lmb_alloc_base(sizeof(struct bd_info),
+-							     0xf,
+-							     env_get_bootm_mapsize() +
+-							     env_get_bootm_low(),
+-							     LMB_NONE);
+-	if (!*kbd)
++	int err;
++	phys_addr_t addr;
++
++	addr = env_get_bootm_mapsize() + env_get_bootm_low();
++	err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX, 0xf, &addr,
++			       sizeof(struct bd_info), LMB_NONE);
++	if (err)
+ 		return -1;
+ 
++	*kbd = (struct bd_info *)(uintptr_t)addr;
+ 	**kbd = *gd->bd;
+ 
+ 	debug("## kernel board info at 0x%08lx\n", (ulong)*kbd);
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 6585813de00..b8e1b0f35bb 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -198,15 +198,27 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
+ 			of_start = (void *)(uintptr_t)addr;
+ 			disable_relocation = 1;
+ 		} else if (desired_addr) {
+-			addr = lmb_alloc_base(of_len, 0x1000, desired_addr,
+-					      LMB_NONE);
++			addr = desired_addr;
++			err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX, 0x1000, &addr,
 +					       of_len, LMB_NONE);
++
 +			if (err) {
-+				printf("Failed to reserve memory for fdt at %#llx\n",
-+				       (u64)addr);
++				puts("Failed using fdt_high value for Device Tree");
 +				goto error;
 +			}
 +
-+			of_start = (void *)(uintptr_t)addr;
- 			disable_relocation = 1;
- 		} else if (desired_addr) {
- 			addr = lmb_alloc_base(of_len, 0x1000, desired_addr,
-@@ -682,8 +692,17 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 	of_size = ret;
+ 			of_start = map_sysmem(addr, of_len);
+ 			if (of_start == NULL) {
+ 				puts("Failed using fdt_high value for Device Tree");
+ 				goto error;
+ 			}
+ 		} else {
+-			addr = lmb_alloc(of_len, 0x1000);
++			err = lmb_allocate_mem(LMB_MEM_ALLOC_ANY, 0x1000, &addr,
++					       of_len, LMB_NONE);
++			if (err) {
++				puts("Unable to allocate memory for fdt\n");
++				goto error;
++			}
+ 			of_start = map_sysmem(addr, of_len);
+ 		}
+ 	} else {
+@@ -228,11 +240,15 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
+ 			 * for LMB allocation.
+ 			 */
+ 			usable = min(start + size, low + mapsize);
+-			addr = lmb_alloc_base(of_len, 0x1000, usable, LMB_NONE);
+-			of_start = map_sysmem(addr, of_len);
+-			/* Allocation succeeded, use this block. */
+-			if (of_start != NULL)
+-				break;
++			addr = usable;
++			err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX, 0x1000,
++					       &addr, of_len, LMB_NONE);
++			if (!err) {
++				of_start = map_sysmem(addr, of_len);
++				/* Allocation succeeded, use this block. */
++				if (of_start)
++					break;
++			}
  
- 	/* Create a new LMB reservation */
--	if (CONFIG_IS_ENABLED(LMB) && lmb)
--		lmb_reserve(map_to_sysmem(blob), of_size, LMB_NONE);
-+	if (CONFIG_IS_ENABLED(LMB) && lmb) {
-+		phys_addr_t fdt_addr;
-+
-+		fdt_addr = map_to_sysmem(blob);
-+		ret = lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &fdt_addr,
-+				       of_size, LMB_NONE);
-+		if (ret) {
-+			printf("Failed to reserve memory for the fdt at %#llx\n",
-+			       (u64)fdt_addr);
-+		}
-+	}
- 
- #if defined(CONFIG_ARCH_KEYSTONE)
- 	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP))
-diff --git a/cmd/booti.c b/cmd/booti.c
-index 1a57fe91397..0dd397d85db 100644
---- a/cmd/booti.c
-+++ b/cmd/booti.c
-@@ -87,7 +87,13 @@ static int booti_start(struct bootm_info *bmi)
- 	images->os.start = relocated_addr;
- 	images->os.end = relocated_addr + image_size;
- 
--	lmb_reserve(images->ep, le32_to_cpu(image_size), LMB_NONE);
-+	ret = lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, (void *)&images->ep,
-+			       le32_to_cpu(image_size), LMB_NONE);
-+	if (ret) {
-+		printf("Failed to allocate memory for the image at %#llx\n",
-+		       (unsigned long long)images->ep);
-+		return 1;
-+	}
- 
- 	/*
- 	 * Handle the BOOTM_STATE_FINDOTHER state ourselves as we do not
-diff --git a/cmd/bootz.c b/cmd/bootz.c
-index 99318ff213f..b768047c7a9 100644
---- a/cmd/bootz.c
-+++ b/cmd/bootz.c
-@@ -56,7 +56,13 @@ static int bootz_start(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (ret != 0)
- 		return 1;
- 
--	lmb_reserve(images->ep, zi_end - zi_start, LMB_NONE);
-+	ret = lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, (void *)&images->ep,
-+			       zi_end - zi_start, LMB_NONE);
-+	if (ret) {
-+		printf("Failed to allocate memory for the image at %#llx\n",
-+		       (unsigned long long)images->ep);
-+		return 1;
-+	}
- 
- 	/*
- 	 * Handle the BOOTM_STATE_FINDOTHER state ourselves as we do not
-diff --git a/cmd/load.c b/cmd/load.c
-index 899bb4f598e..3a4d52ef522 100644
---- a/cmd/load.c
-+++ b/cmd/load.c
-@@ -179,7 +179,9 @@ static ulong load_serial(long offset)
- 		    {
- 			void *dst;
- 
--			ret = lmb_reserve(store_addr, binlen, LMB_NONE);
-+			ret = lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0,
-+					       (void *)&store_addr, binlen,
-+					       LMB_NONE);
- 			if (ret) {
- 				printf("\nCannot overwrite reserved area (%08lx..%08lx)\n",
- 					store_addr, store_addr + binlen);
-diff --git a/fs/fs.c b/fs/fs.c
-index 1f36872fb9a..c815bea2394 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -597,7 +597,8 @@ static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
- 
- 	lmb_dump_all();
- 
--	if (!lmb_alloc_addr(addr, read_len, LMB_NONE))
-+	if (!lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, (void *)&addr, read_len,
-+			      LMB_NONE))
- 		return 0;
- 
- 	log_err("** Reading file would overwrite reserved memory **\n");
+ 			/*
+ 			 * Reduce the mapping size in the next bank
 diff --git a/include/lmb.h b/include/lmb.h
-index 606a92cca48..a9722e1910b 100644
+index a9722e1910b..be723d9162a 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -31,6 +31,14 @@
- #define LMB_NOOVERWRITE BIT(2)
- #define LMB_NONOTIFY BIT(3)
- 
-+/**
-+ * enum lmb_mem_type - type of memory allocation request
-+ * @LMB_MEM_ALLOC_ADDR:	request for a particular region of memory
-+ */
-+enum lmb_mem_type {
-+	LMB_MEM_ALLOC_ADDR = 1,
-+};
-+
+@@ -34,9 +34,13 @@
  /**
-  * enum lmb_map_op - memory map operation
+  * enum lmb_mem_type - type of memory allocation request
+  * @LMB_MEM_ALLOC_ADDR:	request for a particular region of memory
++ * @LMB_MEM_ALLOC_ANY:	allocate any available memory region
++ * @LMB_MEM_ALLOC_MAX:	allocate memory below a particular address
   */
-@@ -67,6 +75,33 @@ struct lmb {
- 	bool test;
+ enum lmb_mem_type {
+ 	LMB_MEM_ALLOC_ADDR = 1,
++	LMB_MEM_ALLOC_ANY,
++	LMB_MEM_ALLOC_MAX,
  };
  
-+/**
-+ * lmb_allocate_mem() - Request LMB memory
-+ * @type:		Type of memory allocation request
-+ * @align:		Alignment of the memory region requested(0 for none)
-+ * @addr:		Base address of the allocated memory region
-+ * @size:		Size in bytes of the allocation request
-+ * @flags:		Memory region attributes to be set
-+ *
-+ * Allocate a region of memory where the allocation is based on the parameters
-+ * that have been passed to the function.The first parameter specifies the
-+ * type of allocation that is being requested. The align parameter is used
-+ * to specify if the allocation is to be made with a particular alignment.
-+ * It is 0 if there is no alignment requirement. The addr parameter is used
-+ * to return the base address of the allocated region. Depending on the type
-+ * of allocation request, it might also contain a particular address being
-+ * requested, or the maximum address of the requested allocation. The flags
-+ * parameter is used to specify the memory attributes of the requested region.
-+ *
-+ * Return: 0 on success, -ve value on failure
-+ *
-+ * When the allocation is of type LMB_MEM_ALLOC_ADDR, the return value can
-+ * be -EINVAL if the requested memory region is not part of the LMB memory
-+ * map, and -EEXIST if the requested region is already allocated.
-+ */
-+int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
-+		     phys_size_t size, u32 flags);
-+
  /**
-  * lmb_init() - Initialise the LMB module.
-  *
-@@ -91,19 +126,6 @@ void lmb_add_memory(void);
+@@ -126,26 +130,8 @@ void lmb_add_memory(void);
  
  long lmb_add(phys_addr_t base, phys_size_t size);
  
--/**
-- * lmb_reserve() - Reserve one region with a specific flags bitfield
-- * @base: Base address of the memory region
-- * @size: Size of the memory region
-- * @flags: Flags for the memory region
-- *
-- * Return:
-- * * %0		- Added successfully, or it's already added (only if LMB_NONE)
-- * * %-EEXIST	- The region is already added, and flags != LMB_NONE
-- * * %-1	- Failure
-- */
--long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags);
--
- phys_addr_t lmb_alloc(phys_size_t size, ulong align);
+-phys_addr_t lmb_alloc(phys_size_t size, ulong align);
  phys_size_t lmb_get_free_size(phys_addr_t addr);
  
-@@ -124,21 +146,6 @@ phys_size_t lmb_get_free_size(phys_addr_t addr);
- phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
- 			   uint flags);
- 
 -/**
-- * lmb_alloc_addr() - Allocate specified memory address with specified attributes
-- *
-- * @base: Base Address requested
+- * lmb_alloc_base() - Allocate specified memory region with specified
+- *			    attributes
 - * @size: Size of the region requested
+- * @align: Alignment of the memory region requested
+- * @max_addr: Maximum address of the requested region
 - * @flags: Memory region attributes to be set
 - *
 - * Allocate a region of memory with the attributes specified through the
-- * parameter. The base parameter is used to specify the base address
-- * of the requested region.
+- * parameter. The max_addr parameter is used to specify the maximum address
+- * below which the requested region should be allocated.
 - *
-- * Return: 0 on success -1 on error
+- * Return: Base address on success, 0 on error.
 - */
--int lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags);
+-phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
+-			   uint flags);
 -
  /**
   * lmb_is_reserved_flags() - Test if address is in reserved region with flag
   *			     bits set
-@@ -175,7 +182,7 @@ void lmb_pop(struct lmb *store);
- 
- static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
- {
--	return lmb_alloc_addr(addr, len, LMB_NONE);
-+	return lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, len, LMB_NONE);
- }
- 
- /**
 diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 0abb1f6159a..12a7fd1f3bf 100644
+index 12a7fd1f3bf..73e1eef5011 100644
 --- a/lib/efi_loader/efi_memory.c
 +++ b/lib/efi_loader/efi_memory.c
-@@ -493,7 +493,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 			return EFI_NOT_FOUND;
- 
- 		addr = map_to_sysmem((void *)(uintptr_t)*memory);
--		if (lmb_alloc_addr(addr, len, flags))
-+		if (lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, len, flags))
- 			return EFI_NOT_FOUND;
+@@ -454,6 +454,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 				enum efi_memory_type memory_type,
+ 				efi_uintn_t pages, uint64_t *memory)
+ {
++	int err;
+ 	u64 efi_addr, len;
+ 	uint flags;
+ 	efi_status_t ret;
+@@ -475,17 +476,18 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 	switch (type) {
+ 	case EFI_ALLOCATE_ANY_PAGES:
+ 		/* Any page */
+-		addr = (u64)lmb_alloc_base(len, EFI_PAGE_SIZE,
+-						 LMB_ALLOC_ANYWHERE, flags);
+-		if (!addr)
++		err = lmb_allocate_mem(LMB_MEM_ALLOC_ANY, EFI_PAGE_SIZE,
++				       &addr, len, flags);
++		if (err)
+ 			return EFI_OUT_OF_RESOURCES;
  		break;
- 	default:
+ 	case EFI_ALLOCATE_MAX_ADDRESS:
+ 		/* Max address */
+ 		addr = map_to_sysmem((void *)(uintptr_t)*memory);
+-		addr = (u64)lmb_alloc_base(len, EFI_PAGE_SIZE, addr,
+-						 flags);
+-		if (!addr)
++
++		err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX, EFI_PAGE_SIZE,
++				       &addr, len, flags);
++		if (err)
+ 			return EFI_OUT_OF_RESOURCES;
+ 		break;
+ 	case EFI_ALLOCATE_ADDRESS:
 diff --git a/lib/lmb.c b/lib/lmb.c
-index bb6f232f6bc..c536465a501 100644
+index c536465a501..a21f9c72204 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -488,6 +488,54 @@ void lmb_dump_all(void)
- #endif
- }
- 
-+/**
-+ * lmb_can_reserve_region() - check if the region can be reserved
-+ * @base: base address of region to be reserved
-+ * @size: size of region to be reserved
-+ * @flags: flag of the region to be reserved
-+ *
-+ * Go through all the reserved regions and ensure that the requested
-+ * region does not overlap with any existing regions. An overlap is
-+ * allowed only when the flag of the request region and the existing
-+ * region is LMB_NONE.
-+ *
-+ * Return: true if region can be reserved, false otherwise
-+ */
-+static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
-+				   u32 flags)
-+{
-+	uint i;
-+	struct lmb_region *lmb_reserved = lmb.used_mem.data;
-+
-+	for (i = 0; i < lmb.used_mem.count; i++) {
-+		u32 rgnflags = lmb_reserved[i].flags;
-+		phys_addr_t rgnbase = lmb_reserved[i].base;
-+		phys_size_t rgnsize = lmb_reserved[i].size;
-+
-+		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-+			if (flags != LMB_NONE || flags != rgnflags)
-+				return false;
-+		}
-+	}
-+
-+	return true;
-+}
-+
-+static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
-+{
-+	long ret = 0;
-+	struct alist *lmb_rgn_lst = &lmb.used_mem;
-+
-+	if (!lmb_can_reserve_region(base, size, flags))
-+		return -EEXIST;
-+
-+	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
-+	if (ret)
-+		return ret;
-+
-+	return lmb_map_update_notify(base, size, LMB_MAP_OP_RESERVE, flags);
-+}
-+
- static void lmb_reserve_uboot_region(void)
- {
- 	int bank;
-@@ -557,39 +605,6 @@ static __maybe_unused void lmb_reserve_common_spl(void)
- 	}
- }
- 
--/**
-- * lmb_can_reserve_region() - check if the region can be reserved
-- * @base: base address of region to be reserved
-- * @size: size of region to be reserved
-- * @flags: flag of the region to be reserved
-- *
-- * Go through all the reserved regions and ensure that the requested
-- * region does not overlap with any existing regions. An overlap is
-- * allowed only when the flag of the request region and the existing
-- * region is LMB_NONE.
-- *
-- * Return: true if region can be reserved, false otherwise
-- */
--static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
--				   u32 flags)
--{
--	uint i;
--	struct lmb_region *lmb_reserved = lmb.used_mem.data;
--
--	for (i = 0; i < lmb.used_mem.count; i++) {
--		u32 rgnflags = lmb_reserved[i].flags;
--		phys_addr_t rgnbase = lmb_reserved[i].base;
--		phys_size_t rgnsize = lmb_reserved[i].size;
--
--		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
--			if (flags != LMB_NONE || flags != rgnflags)
--				return false;
--		}
--	}
--
--	return true;
--}
--
- void lmb_add_memory(void)
- {
- 	int i;
-@@ -657,21 +672,6 @@ long lmb_free(phys_addr_t base, phys_size_t size)
+@@ -672,16 +672,18 @@ long lmb_free(phys_addr_t base, phys_size_t size)
  	return lmb_free_flags(base, size, LMB_NONE);
  }
  
--long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
--{
--	long ret = 0;
--	struct alist *lmb_rgn_lst = &lmb.used_mem;
+-static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
+-				   phys_addr_t max_addr, u32 flags)
++static int _lmb_alloc_base(phys_size_t size, ulong align,
++			   phys_addr_t *addr, u32 flags)
+ {
+ 	int ret;
+ 	long i, rgn;
++	phys_addr_t max_addr;
+ 	phys_addr_t base = 0;
+ 	phys_addr_t res_base;
+ 	struct lmb_region *lmb_used = lmb.used_mem.data;
+ 	struct lmb_region *lmb_memory = lmb.available_mem.data;
+ 
++	max_addr = *addr;
+ 	for (i = lmb.available_mem.count - 1; i >= 0; i--) {
+ 		phys_addr_t lmbbase = lmb_memory[i].base;
+ 		phys_size_t lmbsize = lmb_memory[i].size;
+@@ -714,8 +716,8 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
+ 							    flags);
+ 				if (ret)
+ 					return ret;
 -
--	if (!lmb_can_reserve_region(base, size, flags))
--		return -EEXIST;
--
--	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
--	if (ret)
--		return ret;
--
--	return lmb_map_update_notify(base, size, LMB_MAP_OP_RESERVE, flags);
+-				return base;
++				*addr = base;
++				return 0;
+ 			}
+ 
+ 			res_base = lmb_used[rgn].base;
+@@ -728,18 +730,7 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
+ 	log_debug("%s: Failed to allocate 0x%lx bytes below 0x%lx\n",
+ 		  __func__, (ulong)size, (ulong)max_addr);
+ 
+-	return 0;
 -}
 -
- static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
- 				   phys_addr_t max_addr, u32 flags)
- {
-@@ -742,7 +742,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
- 	return _lmb_alloc_base(size, align, max_addr, flags);
+-phys_addr_t lmb_alloc(phys_size_t size, ulong align)
+-{
+-	return _lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE, LMB_NONE);
+-}
+-
+-phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
+-			   uint flags)
+-{
+-	return _lmb_alloc_base(size, align, max_addr, flags);
++	return -1;
  }
  
--int lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
-+static int _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
- {
- 	long rgn;
- 	struct lmb_region *lmb_memory = lmb.available_mem.data;
-@@ -756,14 +756,37 @@ int lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
- 		 */
- 		if (lmb_addrs_overlap(lmb_memory[rgn].base,
- 				      lmb_memory[rgn].size,
--				      base + size - 1, 1)) {
-+				      base + size - 1, 1))
- 			/* ok, reserve the memory */
--			if (!lmb_reserve(base, size, flags))
--				return 0;
--		}
-+			return lmb_reserve(base, size, flags);
-+		else
-+			return -EINVAL;
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
-+		     phys_size_t size, u32 flags)
-+{
-+	int ret = -1;
-+
-+	if (!size)
-+		return 0;
-+
-+	if (!addr)
-+		return -EINVAL;
-+
-+	switch (type) {
-+	case LMB_MEM_ALLOC_ADDR:
-+		ret = _lmb_alloc_addr(*addr, size, flags);
+ static int _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
+@@ -778,6 +769,13 @@ int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
+ 		return -EINVAL;
+ 
+ 	switch (type) {
++	case LMB_MEM_ALLOC_ANY:
++		*addr = LMB_ALLOC_ANYWHERE;
++		ret = _lmb_alloc_base(size, align, addr, flags);
 +		break;
-+	default:
-+		log_debug("%s: Invalid memory allocation type requested %d\n",
-+			  __func__, type);
- 	}
- 
--	return -1;
-+	return ret;
- }
- 
- /* Return number of bytes from a given address that are free */
++	case LMB_MEM_ALLOC_MAX:
++		ret = _lmb_alloc_base(size, align, addr, flags);
++		break;
+ 	case LMB_MEM_ALLOC_ADDR:
+ 		ret = _lmb_alloc_addr(*addr, size, flags);
+ 		break;
 diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index 3bf558f7f4f..f80115570e7 100644
+index f80115570e7..8ce19efc854 100644
 --- a/test/lib/lmb.c
 +++ b/test/lib/lmb.c
-@@ -71,6 +71,19 @@ static int setup_lmb_test(struct unit_test_state *uts, struct lmb *store,
+@@ -82,6 +82,32 @@ static int lmb_reserve(phys_addr_t addr, phys_size_t size, u32 flags)
  	return 0;
  }
  
-+static int lmb_reserve(phys_addr_t addr, phys_size_t size, u32 flags)
++static phys_addr_t lmb_alloc(phys_size_t size, ulong align)
 +{
 +	int err;
++	phys_addr_t addr;
 +
-+	err = lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, size, flags);
++	err = lmb_allocate_mem(LMB_MEM_ALLOC_ANY, align, &addr, size, LMB_NONE);
 +	if (err)
-+		return err;
++		return 0;
 +
-+	return 0;
++	return addr;
 +}
 +
-+#define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
++static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
++				  phys_addr_t max_addr, u32 flags)
++{
++	int err;
++	phys_addr_t addr;
 +
++	addr = max_addr;
++	err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
++	if (err)
++		return 0;
++
++	return addr;
++}
++
+ #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
+ 
  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 			    const phys_size_t ram_size, const phys_addr_t ram0,
- 			    const phys_size_t ram0_size,
-@@ -568,7 +581,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
- 	ut_asserteq(b, 0);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
--	ut_asserteq(b, -1);
-+	ut_asserteq(b, -EEXIST);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
- 	ut_asserteq(b, 0);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x2000, LMB_NONE);
-@@ -578,9 +591,9 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
- 	ut_asserteq(b, 0);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
--	ut_asserteq(b, -1);
-+	ut_asserteq(b, -EEXIST);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
--	ut_asserteq(b, -1);
-+	ut_asserteq(b, -EEXIST);
- 	ret = lmb_free(alloc_addr_a, 0x1000);
- 	ut_asserteq(ret, 0);
- 
-@@ -599,7 +612,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 		   alloc_addr_a + 0x4000, 0x1000, 0, 0);
- 
- 	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NONE);
--	ut_asserteq(c, -1);
-+	ut_asserteq(c, -EEXIST);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, alloc_addr_a, 0x1000,
- 		   alloc_addr_a + 0x4000, 0x1000, 0, 0);
- 
-@@ -646,7 +659,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 		   alloc_addr_a + 0x4000, 0x1000, 0, 0);
- 
- 	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NOOVERWRITE);
--	ut_asserteq(c, -1);
-+	ut_asserteq(c, -EEXIST);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, alloc_addr_a, 0x1000,
- 		   alloc_addr_a + 0x4000, 0x1000, 0, 0);
- 
-@@ -739,11 +752,11 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	/* check that allocating outside memory fails */
- 	if (ram_end != 0) {
- 		ret = lmb_alloc_addr(ram_end, 1, LMB_NONE);
--		ut_asserteq(ret, -1);
-+		ut_asserteq(ret, -EINVAL);
- 	}
- 	if (ram != 0) {
- 		ret = lmb_alloc_addr(ram - 1, 1, LMB_NONE);
--		ut_asserteq(ret, -1);
-+		ut_asserteq(ret, -EINVAL);
- 	}
- 
- 	lmb_pop(&store);
 -- 
 2.34.1
 
