@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A85BAC3ABA3
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E12D9C3ABA3
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:38:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D600E809A5;
-	Thu,  1 May 2025 15:37:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 24B0F81FAB;
+	Thu,  1 May 2025 15:37:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R1Vb2sws";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hh1j6p+i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2702782132; Thu,  1 May 2025 15:37:41 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 3A8DC8214B; Thu,  1 May 2025 15:37:43 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD3D781F7E
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:37:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 672DC820F6
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-8647a81e683so29623439f.1
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:37:38 -0700 (PDT)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-85d9a87660fso108816939f.1
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:37:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746106657; x=1746711457; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746106658; x=1746711458; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NbEs6GRSttf/ncopRq145NigTf8fiGafGgPUjjceeMk=;
- b=R1Vb2swsJmsmnk+xU+BCvc9hwDT/Ji0m1rKPsToIbV8MhfRE12SZGQCbkvk9HASI0o
- ZmAL6qu4Zly9+8dbwyv514rIWxSWM45u0bFZFVd5zXG9+YHWe4yrEXF7LK/JmxExKevZ
- OJ2TUfi2OFMUgST6ZXjq/uM7U3+TjjDcSn558=
+ bh=jthDqotT8zS85ofCux29lkA8ro3rGDvLMr53Q5htYP4=;
+ b=hh1j6p+iiT3Sky8KfdXb+avLqbikUv4omy2fZQAno6+RbgGG0QRsiyS8cJuETIwqRA
+ 64XlT8NaxuJtYdhtlSdliS8M10mtDhQW9kPrXy8dNUYSnYz2GscFS8H9/4eUvC7KHiIx
+ 0+4rNavTU+ZVaVe5mKc2n7GKf5h7YqMGOF5PE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746106657; x=1746711457;
+ d=1e100.net; s=20230601; t=1746106658; x=1746711458;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NbEs6GRSttf/ncopRq145NigTf8fiGafGgPUjjceeMk=;
- b=iFockCZRiHHMcnNvE8OLVuaggzpcjI4UAR+23y43T/uwBM2dow6t+9MKio1ZzIfW+L
- hjDei9CynYlPbWV3zhnjaPFs6fDZuE6nwr1mfub3GSKCOjQS9wk/F4xcSG9915psm71a
- f4LHY/qcqC9ploq7FcHSBuSaRhOnrpoY5fPhc4VOI6ovA7l5LGR1fEhYlPaSAoJkzz0D
- tTY0krdCUQyJNbgGnC9tVT9OhHRYoTiOOXcgsdbjtzeKfVoMiEz7zE1Si2Jjd+qzSsuE
- GxGlf+VdFy2WZJeDRY1wTK8ZyL3DkkQh3o6M4POukPwy5THYGlO/d2krzuXIZjao190q
- hFRg==
-X-Gm-Message-State: AOJu0YwbCED5ZDBfAVZFGkRUJj+mPi/8PUaBrn68yYgnte0ihuLMcaYM
- /+guhoaMaPmbyRzN8ND29Gp4Ora4Kn4pPnuX3n7LG4vqrAcjMus/CCqi6PXeffrK5pN6BODyDOU
+ bh=jthDqotT8zS85ofCux29lkA8ro3rGDvLMr53Q5htYP4=;
+ b=uMkGaEfxpjsSOhmMIPJTU0xibTmqWBQl9AujZ0C8KWq2S+RsGmro4qL+LGb9VgKp/J
+ 8X9nuCqQ7n48BlEiZyIB88S2d2A+ldoj/73iJhiCnBk/U9AylcVNYwaZxLUhb+Irl/Zt
+ ElxOn0MquEvFagCesqE3mVAc808dK8K3ukfioSrIoFynheDz4hSv0AL5QwCwhI7rY1tM
+ DO1/vUZI0bBSeUoL0iNMiBvKq61FoUBhFRXCEFWymWGv/9Z7eimgNnTc1rFl7WgW962I
+ jZLDpQLYWgwpeRjLNb08nblwczAwRFJUZ3AuH2gGkcvL2nPe7+fY96pQ2X9k4uH2CZ0u
+ 25+A==
+X-Gm-Message-State: AOJu0Yx38AgqD7qnml6DIfzV33d61qJh+CZ/Bwtu4++3hRu3iWc5OiJJ
+ 8zXRXLWkE4dzQCecdVIZg9fVgh8YJAhAVFI95pXL3LhyXJKf/w/EntQtbo2rnx/TwwvtC455Usc
  =
-X-Gm-Gg: ASbGncu09qQe0eQFpWcywUEdZbGqzMTamtWPUA4EcX4FnLxczN1/Z4RXK1lebkqbu71
- joNPuM1U6d8hxtrBnu7D6Guj5xgBDHEuxpLGK0AfbY1grKYMbI0MUlcFsToIzHIc0lRvWSdxrT3
- mIVUwdn3V1v9QFRztjm3SjALm17T5KENGNamwDRk0hbRmbhqz4vae8CBWEhYoDoGaYJAAid83FZ
- 9xoKPy85cmE4lah6hvyrYwerHCrNn1B0S9850DOyjw94idw+kG4EY9cvd3b0miC9Yd14P1CVsf3
- j82Xs2e+YZuI19Af4v42e9aofb7ohKN/MTSNRv/6KM8wfLVul5VXdx6zxiAP+G7z2mo6W8fjEH2
- 6qQ==
-X-Google-Smtp-Source: AGHT+IEG8u/fnVaHYc26N/32Bs3aA3GxyrobzR6FaEFycIhti4Bp+NRVi5pbpyiwgKXqKJWXGnHTZg==
-X-Received: by 2002:a05:6602:4809:b0:861:c75a:27a2 with SMTP id
- ca18e2360f4ac-864a33bd3a2mr406763739f.4.1746106656983; 
- Thu, 01 May 2025 06:37:36 -0700 (PDT)
+X-Gm-Gg: ASbGncvuXlYV43fZxl0iD4zLYMP5WsctJ61RCQvIQev+k+c9XSak2Eaz43QAwAi652L
+ O0J7PJlFXjxFHOTZLJXhcma39Uo3rmLiIZpp69uNz1Dq4XywrJ3ffNxdcZmgo1FBkG5Il/nhjWx
+ Vh9cOdwhOZ97KrKPtZ9QUvVLuSNRZs1mSwV+iJ9+pSI8H/wmmF3dlTiD1Nr33rTUkZrfMLO/8b3
+ 06CMYe8eDR4M1iq6J0sUKeAFH7ejCpUTQnjuvbrB3uLzQI+UouwYYjkiDj/a4Qmp2Az+ZKfebT8
+ niLaV33JH+Cs1DM9wsWTLMvvAVLWQqeWIHnxcdztRLBubwZp6DHYWyU9AIWZo0FFD2BhiLvwsy4
+ KRQ==
+X-Google-Smtp-Source: AGHT+IECAIjCetf6OkZQF5/fStCc9x1O/tHW9xHwzjlfKWoaqOxSNLAzjTuZlixwhBmVGJ3ok7+d1Q==
+X-Received: by 2002:a05:6602:728b:b0:861:d8ca:3587 with SMTP id
+ ca18e2360f4ac-86497f69743mr972665339f.4.1746106658624; 
+ Thu, 01 May 2025 06:37:38 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f88303bb9esm165385173.136.2025.05.01.06.37.35
+ 8926c6da1cb9f-4f88303bb9esm165385173.136.2025.05.01.06.37.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 06:37:35 -0700 (PDT)
+ Thu, 01 May 2025 06:37:37 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Nam Cao <namcao@linutronix.de>, Roger Knecht <rknecht@pm.me>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 03/18] fs: boot: Update fs_load_alloc() to use abuf
-Date: Thu,  1 May 2025 07:37:03 -0600
-Message-ID: <20250501133726.2627373-4-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 04/18] fs: boot: Update bootmeth_alloc_other() to use abuf
+Date: Thu,  1 May 2025 07:37:04 -0600
+Message-ID: <20250501133726.2627373-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250501133726.2627373-1-sjg@chromium.org>
 References: <20250501133726.2627373-1-sjg@chromium.org>
@@ -106,192 +108,128 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- cmd/cat.c    | 13 ++++++-------
- cmd/cedit.c  | 18 ++++++++----------
- fs/fs.c      | 11 ++++-------
- include/fs.h | 10 +++++-----
- 4 files changed, 23 insertions(+), 29 deletions(-)
+ boot/bootmeth-uclass.c | 12 ++++--------
+ boot/bootmeth_script.c |  6 ++++--
+ cmd/bootflow.c         |  2 +-
+ include/bootflow.h     |  2 +-
+ include/bootmeth.h     |  5 ++---
+ 5 files changed, 12 insertions(+), 15 deletions(-)
 
-diff --git a/cmd/cat.c b/cmd/cat.c
-index 6828b7b364e..24983cb9ca0 100644
---- a/cmd/cat.c
-+++ b/cmd/cat.c
-@@ -4,6 +4,7 @@
-  * Roger Knecht <rknecht@pm.de>
-  */
- 
-+#include <abuf.h>
- #include <command.h>
- #include <fs.h>
- #include <malloc.h>
-@@ -12,11 +13,10 @@
- static int do_cat(struct cmd_tbl *cmdtp, int flag, int argc,
- 		  char *const argv[])
- {
-+	struct abuf buf;
- 	char *ifname;
- 	char *dev;
- 	char *file;
--	char *buffer;
--	ulong file_size;
- 	int ret;
- 
- 	if (argc < 4)
-@@ -26,8 +26,7 @@ static int do_cat(struct cmd_tbl *cmdtp, int flag, int argc,
- 	dev = argv[2];
- 	file = argv[3];
- 
--	ret = fs_load_alloc(ifname, dev, file, 0, 0, (void **)&buffer,
--			    &file_size);
-+	ret = fs_load_alloc(ifname, dev, file, 0, 0, &buf);
- 
- 	// check file exists
- 	switch (ret) {
-@@ -51,10 +50,10 @@ static int do_cat(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	// print file content
--	buffer[file_size] = '\0';
--	puts(buffer);
-+	((char *)buf.data)[buf.size] = '\0';
-+	puts(buf.data);
- 
--	free(buffer);
-+	abuf_uninit(&buf);
- 
- 	return 0;
- }
-diff --git a/cmd/cedit.c b/cmd/cedit.c
-index f696356419e..b0eca7b4daf 100644
---- a/cmd/cedit.c
-+++ b/cmd/cedit.c
-@@ -34,22 +34,21 @@ static int do_cedit_load(struct cmd_tbl *cmdtp, int flag, int argc,
- {
- 	const char *fname;
- 	struct expo *exp;
-+	struct abuf buf;
- 	oftree tree;
--	ulong size;
--	void *buf;
- 	int ret;
- 
- 	if (argc < 4)
- 		return CMD_RET_USAGE;
- 	fname = argv[3];
- 
--	ret = fs_load_alloc(argv[1], argv[2], argv[3], SZ_1M, 0, &buf, &size);
-+	ret = fs_load_alloc(argv[1], argv[2], argv[3], SZ_1M, 0, &buf);
- 	if (ret) {
- 		printf("File not found\n");
- 		return CMD_RET_FAILURE;
- 	}
- 
--	tree = oftree_from_fdt(buf);
-+	tree = oftree_from_fdt(abuf_uninit_move(&buf, NULL));
- 	if (!oftree_valid(tree)) {
- 		printf("Cannot create oftree\n");
- 		return CMD_RET_FAILURE;
-@@ -125,31 +124,30 @@ static int do_cedit_read_fdt(struct cmd_tbl *cmdtp, int flag, int argc,
- 			     char *const argv[])
- {
- 	const char *fname;
--	void *buf;
-+	struct abuf buf;
- 	oftree tree;
--	ulong size;
- 	int ret;
- 
- 	if (argc < 4)
- 		return CMD_RET_USAGE;
- 	fname = argv[3];
- 
--	ret = fs_load_alloc(argv[1], argv[2], argv[3], SZ_1M, 0, &buf, &size);
-+	ret = fs_load_alloc(argv[1], argv[2], argv[3], SZ_1M, 0, &buf);
- 	if (ret) {
- 		printf("File not found\n");
- 		return CMD_RET_FAILURE;
- 	}
- 
--	tree = oftree_from_fdt(buf);
-+	tree = oftree_from_fdt(buf.data);
- 	if (!oftree_valid(tree)) {
--		free(buf);
-+		abuf_uninit(&buf);
- 		printf("Cannot create oftree\n");
- 		return CMD_RET_FAILURE;
- 	}
- 
- 	ret = cedit_read_settings(cur_exp, tree);
- 	oftree_dispose(tree);
--	free(buf);
-+	abuf_uninit(&buf);
- 	if (ret) {
- 		printf("Failed to read settings: %dE\n", ret);
- 		return CMD_RET_FAILURE;
-diff --git a/fs/fs.c b/fs/fs.c
-index 61161fe5356..63ed6436493 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_CORE
- 
-+#include <abuf.h>
- #include <bootstd.h>
- #include <command.h>
- #include <config.h>
-@@ -1153,11 +1154,9 @@ int fs_read_alloc(const char *fname, ulong size, uint align, struct abuf *buf)
+diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+index 78a3671f96a..02bbe77b563 100644
+--- a/boot/bootmeth-uclass.c
++++ b/boot/bootmeth-uclass.c
+@@ -360,13 +360,11 @@ int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align,
  }
  
- int fs_load_alloc(const char *ifname, const char *dev_part_str,
--		  const char *fname, ulong max_size, ulong align, void **bufp,
--		  ulong *sizep)
-+		  const char *fname, ulong max_size, ulong align,
-+		  struct abuf *buf)
+ int bootmeth_alloc_other(struct bootflow *bflow, const char *fname,
+-			 enum bootflow_img_t type, void **bufp, uint *sizep)
++			 enum bootflow_img_t type, struct abuf *buf)
  {
+ 	struct blk_desc *desc = NULL;
 -	struct abuf buf;
--	size_t bsize;
+ 	char path[200];
  	loff_t size;
+-	size_t bsize;
  	int ret;
  
-@@ -1174,11 +1173,9 @@ int fs_load_alloc(const char *ifname, const char *dev_part_str,
- 	if (fs_set_blk_dev(ifname, dev_part_str, FS_TYPE_ANY))
- 		return log_msg_ret("set", -ENOMEDIUM);
- 
--	ret = fs_read_alloc(fname, size, align, &buf);
-+	ret = fs_read_alloc(fname, size, align, buf);
+ 	snprintf(path, sizeof(path), "%s%s", bflow->subdir, fname);
+@@ -386,16 +384,14 @@ int bootmeth_alloc_other(struct bootflow *bflow, const char *fname,
  	if (ret)
- 		return log_msg_ret("al", ret);
+ 		return log_msg_ret("fs", ret);
+ 
+-	ret = fs_read_alloc(path, size, 0, &buf);
++	ret = fs_read_alloc(path, size, 0, buf);
+ 	if (ret)
+ 		return log_msg_ret("all", ret);
+ 
+-	if (!bootflow_img_add(bflow, bflow->fname, type, abuf_addr(&buf), size))
++	if (!bootflow_img_add(bflow, bflow->fname, type, map_to_sysmem(buf),
++			      size))
+ 		return log_msg_ret("boi", -ENOMEM);
+ 
 -	*bufp = abuf_uninit_move(&buf, &bsize);
 -	*sizep = bsize;
- 
+-
  	return 0;
  }
-diff --git a/include/fs.h b/include/fs.h
-index 86db5e04e80..5cd9114f33b 100644
---- a/include/fs.h
-+++ b/include/fs.h
-@@ -359,15 +359,15 @@ int fs_read_alloc(const char *fname, ulong size, uint align, struct abuf *buf);
-  * @fname: Filename to read
-  * @max_size: Maximum allowed size for the file (use 0 for 1GB)
-  * @align: Alignment to use for memory allocation (0 for default)
-- * @bufp: On success, returns the allocated buffer with the nul-terminated file
-- *	in it
-- * @sizep: On success, returns the size of the file
-+ * @buf: On success, returns the allocated buffer with the nul-terminated file
-+ *	in it. The buffer size is set to the size excluding the terminator. The
-+ *	buffer is inited by this function and must be uninited by the caller
-  * Return: 0 if OK, -ENOMEM if out of memory, -ENOENT if the file does not
-  * exist, -ENOMEDIUM if the device does not exist, -E2BIG if the file is too
-  * large (greater than @max_size), -EIO if read failed
-  */
- int fs_load_alloc(const char *ifname, const char *dev_part_str,
--		  const char *fname, ulong max_size, ulong align, void **bufp,
--		  ulong *sizep);
-+		  const char *fname, ulong max_size, ulong align,
-+		  struct abuf *buf);
  
- #endif /* _FS_H */
+diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+index 020cb8a7aec..b3a51a35e89 100644
+--- a/boot/bootmeth_script.c
++++ b/boot/bootmeth_script.c
+@@ -8,6 +8,7 @@
+ 
+ #define LOG_CATEGORY UCLASS_BOOTSTD
+ 
++#include <abuf.h>
+ #include <blk.h>
+ #include <bootflow.h>
+ #include <bootmeth.h>
+@@ -68,6 +69,7 @@ static int script_read_bootflow_file(struct udevice *bootstd,
+ 	struct blk_desc *desc = NULL;
+ 	const char *const *prefixes;
+ 	const char *prefix;
++	struct abuf buf;
+ 	int ret, i;
+ 
+ 	ret = uclass_first_device_err(UCLASS_BOOTSTD, &bootstd);
+@@ -107,8 +109,8 @@ static int script_read_bootflow_file(struct udevice *bootstd,
+ 	if (ret)
+ 		return log_msg_ret("inf", ret);
+ 
+-	ret = bootmeth_alloc_other(bflow, "boot.bmp", BFI_LOGO,
+-				   &bflow->logo, &bflow->logo_size);
++	ret = bootmeth_alloc_other(bflow, "boot.bmp", BFI_LOGO, &buf);
++	bflow->logo = abuf_uninit_move(&buf, &bflow->logo_size);
+ 	/* ignore error */
+ 
+ 	return 0;
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index e9ac9746104..0163129deba 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -419,7 +419,7 @@ static int do_bootflow_info(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	printf("Logo:      %s\n", bflow->logo ?
+ 	       simple_xtoa((ulong)map_to_sysmem(bflow->logo)) : "(none)");
+ 	if (bflow->logo) {
+-		printf("Logo size: %x (%d bytes)\n", bflow->logo_size,
++		printf("Logo size: %zx (%zd bytes)\n", bflow->logo_size,
+ 		       bflow->logo_size);
+ 	}
+ 	printf("FDT:       %s\n", bflow->fdt_fname);
+diff --git a/include/bootflow.h b/include/bootflow.h
+index 2caeb80b878..d988bc9355b 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -101,7 +101,7 @@ struct bootflow {
+ 	char *subdir;
+ 	char *fname;
+ 	void *logo;
+-	uint logo_size;
++	size_t logo_size;
+ 	char *buf;
+ 	int size;
+ 	int err;
+diff --git a/include/bootmeth.h b/include/bootmeth.h
+index 03301c90580..c32bbbab7e9 100644
+--- a/include/bootmeth.h
++++ b/include/bootmeth.h
+@@ -385,12 +385,11 @@ int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align,
+  * @bflow: Information about file to read
+  * @fname: Filename to read from (within bootflow->subdir)
+  * @type: File type (IH_TYPE_...)
+- * @bufp: Returns a pointer to the allocated buffer
+- * @sizep: Returns the size of the buffer
++ * @buf: Returns the allocated buffer
+  * Return: 0 if OK,  -ENOMEM if out of memory, other -ve on other error
+  */
+ int bootmeth_alloc_other(struct bootflow *bflow, const char *fname,
+-			 enum bootflow_img_t type, void **bufp, uint *sizep);
++			 enum bootflow_img_t type, struct abuf *buf);
+ 
+ /**
+  * bootmeth_common_read_file() - Common handler for reading a file
 -- 
 2.43.0
 
