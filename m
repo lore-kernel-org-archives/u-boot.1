@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB66C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 21:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 112EDC369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 21:12:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 414A0809A5;
-	Thu,  1 May 2025 23:02:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 796C08081A;
+	Thu,  1 May 2025 23:12:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="idw7JmvY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lmbSv9Nq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A2C080F03; Thu,  1 May 2025 23:02:01 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 34117809A5; Thu,  1 May 2025 23:12:32 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59E458070C
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 23:01:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07DE38070C
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 23:12:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72b0626c785so1160437a34.2
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 14:01:59 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2c6ed7efb1dso971046fac.2
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 14:12:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746133317; x=1746738117; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nkdSKnNk4mLEQ87wo/HWrDeo+d9lCijbuhl6EcT7uZU=;
- b=idw7JmvYDJSIv6lAb+rdUQIUUorgfSU7HQKKXtHxt8c+qmswg18XAqMxKoXOmSUHtb
- tEahc4WgI8Tn+KQPp1lfDDN4dwlsDTsfcg9UaIRvzwazL28W8FZJrU1O6dfCryl7gs1r
- l6c79BUmtgWb6/kbDBtk12hIU6ovHq3y8mwDw=
+ d=konsulko.com; s=google; t=1746133949; x=1746738749; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aIiCYXGzAgZQI5ngbKqBloS5Medc3XAf8UiHs2DcbEI=;
+ b=lmbSv9NqmIP7tV3FJ5soge6gIS35dXasWhiGyiKiZKwnDNbcmwVSeir6nBYmDxryrW
+ t2v02SaNoteRHZtoRdEOVDMDcEur43179sU87lw0CYLJRsSJr8vLjRt8g3VjCmpFZvoE
+ zUF2obhlRb9CcVfVB5cSTTOR+wai1Mj0qX3eQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746133317; x=1746738117;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nkdSKnNk4mLEQ87wo/HWrDeo+d9lCijbuhl6EcT7uZU=;
- b=L5UdUepUxuAKgY1fWIrqoU44AKSXqNtq+vk1Lmqg7NSOiHsI7PqsvQnBj91c6zufus
- Rw21soyhXsVQrgf6ruwQgorTp9M0Nx3he8ffpsurMrV7zAPfD65Ei+hXDWTwZyUzbPAD
- rcGOhlvvcRA9Wf9UhKJrG1B9W1OFHqIhVAY2mZOJ0LID7F01pox0w8v8p8/OACkvxKXY
- jVsH+SNDbwsT6gwtnwuNcHu/adJZs+Y0XBRiEsgihfjxtiFUSFmKT6KnaUAbOqEY+Rc7
- 4FOeyouEn1ZFqUohxdab1voqZHD2CQajsT9T905nUAH3rQ22ul68kM+ugRaZl4D+jzqw
- IptA==
-X-Gm-Message-State: AOJu0YzcSh8qPEdsgiHU9ETs0bTBUoXRm4f7rKcqANjRZbfsml67oYEG
- cWmVrUliMrIM/vbxjV5Mo25w3A7lDyf3S1DOyZxyBt9PFHqq3gcwC9KaK8Fus2S1f/IYbrKqJ3U
- =
-X-Gm-Gg: ASbGncs3giVrTZaMtF3X6rYhgrVW5djwKrRerpwPaHa/XwQfk1B6OAVS1/G3g+ue6JZ
- QsfmqZgDYP8UWTaNe3P2IS19IEdLjxOvEzCNj73NuzdYpFGpZQX+6ViLsuR2pUW7fN+heAAP+8m
- QUTRQ6VC8abknCwxTOarFP3ZfKl58MXYH9sOw6mKTNSZkxhR8attw2mW4brO84/Km3IKgR8P9di
- TLZk4RDAdO/b/mJW5NXhAggr96P+c+ZHuZ0D5Itk4qmhoiB2Ogf/CwNEPPyPbZD/0TyBWIWrG+G
- zsot7dbRrXPWMlsaPttzveLR7tIpAXYggmRMTw==
-X-Google-Smtp-Source: AGHT+IEcEjfAXW8fEiQo5+1CtnsnV/VCFrp3r9Avngu4tdHmimvFfs8RY2r+gFS8JkbrleSy0xQ7+g==
-X-Received: by 2002:a05:6830:1d44:b0:72b:aa94:6d26 with SMTP id
- 46e09a7af769-731da1fb784mr181354a34.18.1746133316536; 
- Thu, 01 May 2025 14:01:56 -0700 (PDT)
-Received: from chromium.org ([50.235.115.130])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-731d31cbc76sm253409a34.24.2025.05.01.14.01.55
+ d=1e100.net; s=20230601; t=1746133949; x=1746738749;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aIiCYXGzAgZQI5ngbKqBloS5Medc3XAf8UiHs2DcbEI=;
+ b=hslRUs2XjJWGOF0yr0/eBzC93T9txQXllele4OkvpPZvbOWtcza7vIms7d5KUKw+yf
+ cppQUCcybIsDxtZYLlctD4WZyT+lxoD0+nk7GlzvxgSk5fx63xeaK9UlxgDO8EWF07AG
+ ou+WVCXL+lE2I+FKJNjclh69U8GpQ6AxwIqPsJR9T7GPlA30XEtqJrJ+n91OMa4bGuXf
+ MdK0zznxgsTcvkhTwrzPw6C0D9cWW69YbSKI+Qw4dRols439lYMYJY5W6YGay4Sr4Pjn
+ 25OADA5KkUgF+2I9TObygHU09A1uCuf7+6i+1jwFGb12iGRpq699vv0ljYa2mRrH2WTC
+ ZobQ==
+X-Gm-Message-State: AOJu0Yw+7+ToP0mVHLKE8p7n8BqCIAzTi0Tgib/JEcfH5mqk0e7ebsLS
+ PH4ynQ5UF6HBCZZ1cnFS9flF+AjP/prCpnE9EDIVOgoc6ULvU7Asx+Bi+k8mFHU=
+X-Gm-Gg: ASbGncsj106xIUft4cl4XlHQHrzbhbYZg7SeTOhv/todcGwIEIXqoH3/qKgJTMJrTUO
+ iJ4Cd4NPHCiivjgObizM+pP9RE3XnAYSNkItT9gcVt6kYhEBQ4TFVD0c2T407xXvCQbw6z9TopS
+ asZoNaAUOokA7hp99ggy5hLzBLLCIhEx/dmQXZI9CBCftAEsu/wMV5dNWPLbJqNf5xVJgQA6ccM
+ geMYgmDKEstt+eBBOzruLYxicsJms0+4mQYNJb1c7RDJQpjBqPozxEo6Sa7A0oncZr/hatNJ9WN
+ vBYaq7NGpiFfuLsBgxI/zcEKF8Z+9DJDGCNvGKyDWVZBNNbSdF3rsALwvnhV33PWQVbLKT7J9gA
+ DoA==
+X-Google-Smtp-Source: AGHT+IEFbnkkG2p0EpA0aiDW3qROrQCROGERQY3fZRkEpU4O1Lw4gGhcmV4ByITLluUhstEUIlBTOg==
+X-Received: by 2002:a05:6871:ea14:b0:2c8:5db8:f23a with SMTP id
+ 586e51a60fabf-2dab30bfaf0mr182367fac.20.1746133948609; 
+ Thu, 01 May 2025 14:12:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2daa127bdb3sm316919fac.50.2025.05.01.14.12.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 14:01:55 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Thu, 01 May 2025 14:12:27 -0700 (PDT)
+Date: Thu, 1 May 2025 15:12:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Greg Malysa <greg.malysa@timesys.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -76,12 +78,15 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Robert Marko <robert.marko@sartura.hr>,
  Sam Protsenko <semen.protsenko@linaro.org>,
  William Zhang <william.zhang@broadcom.com>
-Subject: [PATCH] bloblist: Add maintainer
-Date: Thu,  1 May 2025 15:01:42 -0600
-Message-ID: <20250501210145.2011382-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [PATCH] bloblist: Add maintainer
+Message-ID: <20250501211225.GL1261075@bill-the-cat>
+References: <20250501210145.2011382-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="im2y9clTg6Vev6Cm"
+Content-Disposition: inline
+In-Reply-To: <20250501210145.2011382-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,36 +103,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add myself as maintainer of bloblist
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+--im2y9clTg6Vev6Cm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- MAINTAINERS | 9 +++++++++
- 1 file changed, 9 insertions(+)
+On Thu, May 01, 2025 at 03:01:42PM -0600, Simon Glass wrote:
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1d7ef23f476..5005dd5951b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -936,6 +936,15 @@ F:	drivers/block/blkmap.c
- F:	include/blkmap.h
- F:	test/dm/blkmap.c
- 
-+BLOBLIST
-+M:	Simon Glass <sjg@chromium.org>
-+S:	Maintained
-+F:	cmd/bloblist.c
-+F:	common/bloblist.c
-+F:	doc/develop/bloblist.rst
-+F:	include/bloblist.h
-+F:	test/common/bloblist.c
-+
- BOOTSTD
- M:	Simon Glass <sjg@chromium.org>
- S:	Maintained
--- 
-2.43.0
+> Add myself as maintainer of bloblist
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-base-commit: 9b9647c89cbe785fd935f70e16d08cf9812b9fda
-branch: bloba
+With the reminder for clarity that I still have final say over things
+(and that's true for everyone):
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--im2y9clTg6Vev6Cm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgT47kACgkQFHw5/5Y0
+tyy+8Av/T2ysPMsC0dDwKFFLL+N5YvVGba3OWO8siOdW5rMlcfyf8kjgiq6yDIZf
+AOYnjQJNqGJuMaQTtwl0Icu0eG+AAlTyQEKXvgnpz0Uv20pSH0imLuWJOrbxrxbB
+IjOUKvDzDtxOl6kYrg0AHS7WaWzGpe+VK3OXq3uY7gZMSzctLQbCDxbrjM78z1cS
+ukmqgMA4k0d4C4UchXw3SbqjELp0GcyNd4zu7aDKahLbo5CrQZFN/4budn2KDVt3
+4mYygkur236SRxEZd6bnTSm/yTx9wW1MJtjEbf7KMxaEDYsoJ/ylaCyYP/yCXBXa
+wcSnSdVkrUaCgc4GRsj0YYE0rgWPnoV2LBWWMx+EFTkkqta2TCMH8WV5Mrt07oqK
+XAedAoHN+XbA6E8fZWeFk7vdjXi+cJaDz3v7ln9XGWgJZGqMlEQ4IjE6lGUaC+1z
+0x1UOZqGz2GvgFVcn4Q/Gi18qS53GC8pMnUSonBMxyMmIXv1u9RBIgalbLwq0+Vq
+Jq49y9OF
+=n/g1
+-----END PGP SIGNATURE-----
+
+--im2y9clTg6Vev6Cm--
