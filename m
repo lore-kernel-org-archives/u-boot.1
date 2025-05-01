@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F7B8C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D14E0C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:39:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B2158212B;
-	Thu,  1 May 2025 15:37:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE76B8291D;
+	Thu,  1 May 2025 15:37:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W/GoaJf+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RvzKvFP3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88703826AA; Thu,  1 May 2025 15:37:55 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 1C5ED828C2; Thu,  1 May 2025 15:37:57 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E6B48212B
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:37:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0C538059D
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:37:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3d8020ba858so11012745ab.0
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:37:53 -0700 (PDT)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-85ea482e3adso70776339f.0
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:37:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746106671; x=1746711471; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746106673; x=1746711473; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qL9QPlOfhbYufofsm6KSSRw11Y9+dciOc5lRZrmv0Hw=;
- b=W/GoaJf+Wrgd1l8Voxy8Le/HbWHuoILQT5a9ywwqEx1rRuW+V2lRcxskELxEE5tQYg
- nikwGY+YdmJwQzYlw9uNiMWzShUDx1nTyideeYGfxxgWiuQfACv/UZx+sMJJmKK1qAIP
- wrW+PjM8yfB9ayO9sk2KIkfhyGaJs3DmIeSWo=
+ bh=neoJySYzueLyJUux9yf1G7iL+/J4px+z9nSO8nYBqgk=;
+ b=RvzKvFP3NIv9U1IK/QHGjC12essg40CfsIl5c0YakH/nu1H8+cNgwUZsCVKSH5ix3d
+ nUjjRNeO5P9XfvgrsZ8/WVROOQ8mDvt7mlN9tESJ2FcUT7e4EmYgfyo/q6jXrNV5AFFf
+ qL394WAACms70KXx+O22E0jJ/QJHwRsCWw3bo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746106671; x=1746711471;
+ d=1e100.net; s=20230601; t=1746106673; x=1746711473;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qL9QPlOfhbYufofsm6KSSRw11Y9+dciOc5lRZrmv0Hw=;
- b=bQ4Zcomlmujar16wIm3Loa0ucFNpC8gwVLgotn7Mjo6vGM3zP8a0CMtdmsvRlZKGvm
- p8hg/NwbVVTbp7a0+VpkoONXJb+0ldxDnJaht+MFLk/DekW/pFTVktFzW7AVGhQUiS9h
- z9pQP7GB48eKYNtDoAuQSUNWQlT9nPo3WWJajCujW7Mb3Dng1H95MrYERpdi+B3r1dfw
- r9WyrjqMNiUATVbBbv5ijocK6WMRkrTUcutCH1kJ09HFfqVWBmpiZPoZ8XjMi53H0XOx
- K39A6UWWWAUh6rwhA5YJgnFsn1atzaZ37lDiZgnsjXbTxE/LGtnZos8JQM27IxtUhZH3
- vgJg==
-X-Gm-Message-State: AOJu0Yz+oI47SMgaS2laP1BA/l/H/ciTM3XwMOpa+HO0Yl4M3n5PuByH
- gYyv9RsPpx0rBHVGuFXJM3b25U3CMsymh4gpeqOaL7suTkot+D7x1mLO6bS/RhWDVpGTK0cPoeI
+ bh=neoJySYzueLyJUux9yf1G7iL+/J4px+z9nSO8nYBqgk=;
+ b=eTeTPpavVTmHoaEqFbMWKbjtsDkxSDsGv36yIloCDPIEtGOtam2tPz9M/AruiaOvaP
+ eylTx0Q5nden/gVqJ0VDOZR5eDtwbkVuZFk5BTRaIzb504W1ArV3MLdNAzhuRt5wLqgG
+ 8n8oMuZxXAIGwxLS5gAZSVw9LiwEL7/1rUDnCPWzacWchl+08zrHegLyoo/y2uYDasj1
+ knIImmYIH/ILG/WIk5i8HaV7EDd/BvseKidUt4ZJaHUe8tieE9JAkmweBKDG10zr7ZfM
+ ef7v2QmurZrHO8OLLMxoib0Xv5o3sds5KdJIg5u7sm35uwhh90KE6D3Ba6yzOcvph1jE
+ o5TA==
+X-Gm-Message-State: AOJu0Yxk+FF9NepMra3fv+3fpwe6KHhxCk9RNpBeLb74zKzl+AwHcy3n
+ 1ukB3Kk8BPCWqiZQzHx5gjunZzK72itTX2MQlQifpsE1DE6o4ShC0an4Q4vCuLvtG9zWMwGpdIg
  =
-X-Gm-Gg: ASbGncuuuIC5OzcR3UyZWfrC26i22iKkaX5YfSc4JNKftPIfyfu6hpRx2YOdsLr3ohK
- CUG/8dsQWlH18V9t4o5YAjldv/TTUrvUsmP0vRRZUvVUYMArgcbry01p79AdE8BcdNkvowBi6KM
- KwkBpQeBP3qQCWQtt7UsQ1sTSACpJKQfKo/JCcA+m/r7y21VmhRb257fim9NECeqZM3WlOfe8SH
- CGOgrfmM2dq6/A88Q9B2iVJsSv1FyVsVPhwyQ/a0jFBit3HlpGy/7vhlQb2qZ3NrttoCtZeqKfO
- iV4mSoYHsfmaGy75fM624DBmmKFx2PZTe/SzygAYD08fJR4Dh6j0Ty5nzVWrYVDs2hfK9o3jBgK
- U/A==
-X-Google-Smtp-Source: AGHT+IF3nMtpL3m/OgaS5SoVhtr0Hn8zcp7lkZWnLQiY3K8ATimFXVWKwL4+bO2syTRFQ/CQhoFQxQ==
-X-Received: by 2002:a05:6e02:1a8f:b0:3d0:10a6:99aa with SMTP id
- e9e14a558f8ab-3d9701a43e0mr33481235ab.4.1746106671408; 
- Thu, 01 May 2025 06:37:51 -0700 (PDT)
+X-Gm-Gg: ASbGncvOyjUONK/Hb5AxlF3YeQW7SVtcdjOw3LTEbim+psnGdPs7+U+cI/5izjeYywV
+ 62GmhIR8o+CMiZgLfiD4meFO98HBq2ZPNpvaa/nQq13JG7ncuATIV4M0uIgrrIrnYigX/zVD8E4
+ ApHQpo/EXlm7Hc8Bj5H9N0G0lymRGFmW22ORVNyNmUxgbAM8iJO58G52DdCyuj7Bllryo/S9Bu7
+ ClU1nS40HO66AVqsSMVPF+aF+/WoL7vIQ/lQjY9LvNHpSr2ej+nVadxHM2o/xApMuZrBRbsCB3X
+ hqOLHc81xeKi6DMnuUMBPiCMmO0aYksL73x6mZnghRI22SwRvcqirzTXRaYHM1JYERRK+9zdaK2
+ aQA==
+X-Google-Smtp-Source: AGHT+IF768q4R2G9LZehEkOrb9On5jlulOaIkuwQTrREruPR+5EBWGIrgDps8bbyB0H27P/+Vch/VQ==
+X-Received: by 2002:a05:6602:117:b0:858:7b72:ec89 with SMTP id
+ ca18e2360f4ac-864a3d6629bmr259310239f.5.1746106673003; 
+ Thu, 01 May 2025 06:37:53 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f88303bb9esm165385173.136.2025.05.01.06.37.50
+ 8926c6da1cb9f-4f88303bb9esm165385173.136.2025.05.01.06.37.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 06:37:50 -0700 (PDT)
+ Thu, 01 May 2025 06:37:52 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 12/18] sandbox: Use a unique name for each USB controller
-Date: Thu,  1 May 2025 07:37:12 -0600
-Message-ID: <20250501133726.2627373-13-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 13/18] bootstd: Tweak scanning with labels
+Date: Thu,  1 May 2025 07:37:13 -0600
+Message-ID: <20250501133726.2627373-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250501133726.2627373-1-sjg@chromium.org>
 References: <20250501133726.2627373-1-sjg@chromium.org>
@@ -102,140 +95,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a number after the node name so that it is clear which controller is
-being used.
+The current implementation of labels uses the ordering of the media
+devices to start its scan but then uses the ordering of the (child)
+bootdev devices to iterate from then on. This is inconsistent and can
+miss some bootdevs.
+
+Update bootdev_next_label() so that it uses the ordering of the bootdev
+devices to perform its scan. Check for running out of labels as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/dts/test.dts |  4 ++--
- test/boot/bootdev.c       | 12 ++++++------
- test/boot/bootflow.c      |  6 +++---
- test/dm/usb.c             |  4 ++--
- 4 files changed, 13 insertions(+), 13 deletions(-)
+ boot/bootdev-uclass.c | 70 +++++++++++++++++++++++--------------------
+ 1 file changed, 38 insertions(+), 32 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 060c48eaefd..caec8c8fd01 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1495,7 +1495,7 @@
- 	usb_0: usb@0 {
- 		compatible = "sandbox,usb";
- 		status = "disabled";
--		hub {
-+		hub0 {
- 			compatible = "sandbox,usb-hub";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -1509,7 +1509,7 @@
- 	usb_1: usb@1 {
- 		compatible = "sandbox,usb";
- 		iommus = <&iommu>;
--		hub {
-+		hub1 {
- 			compatible = "usb-hub";
- 			usb,device-class = <9>;
- 			#address-cells = <1>;
-diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-index 7ef724f65bb..0ace3d0699c 100644
---- a/test/boot/bootdev.c
-+++ b/test/boot/bootdev.c
-@@ -231,7 +231,7 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	ut_asserteq(6, iter.num_devs);
- 	ut_asserteq_str("mmc1.bootdev", iter.dev_used[0]->name);
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[1]->name);
--	ut_asserteq_str("hub.p1.usb_mass_storage.lun0.bootdev",
-+	ut_asserteq_str("hub1.p1.usb_mass_storage.lun0.bootdev",
- 			iter.dev_used[2]->name);
- 	bootflow_iter_uninit(&iter);
+diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+index 3791ebfcb42..cfb298d5be5 100644
+--- a/boot/bootdev-uclass.c
++++ b/boot/bootdev-uclass.c
+@@ -421,7 +421,7 @@ int bootdev_find_by_label(const char *label, struct udevice **devp,
+ 			  int *method_flagsp)
+ {
+ 	int seq, ret, method_flags = 0;
+-	struct udevice *media;
++	struct udevice *bdev;
+ 	struct uclass *uc;
+ 	enum uclass_id id;
  
-@@ -277,7 +277,7 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
- 	ut_asserteq_str("mmc1.bootdev", iter.dev_used[1]->name);
- 	ut_asserteq_str("mmc0.bootdev", iter.dev_used[2]->name);
--	ut_asserteq_str("hub.p1.usb_mass_storage.lun0.bootdev",
-+	ut_asserteq_str("hub1.p1.usb_mass_storage.lun0.bootdev",
- 			iter.dev_used[3]->name);
- 	bootflow_iter_uninit(&iter);
+@@ -433,10 +433,27 @@ int bootdev_find_by_label(const char *label, struct udevice **devp,
+ 		return log_msg_ret("uc", ret);
+ 	id = ret;
  
-@@ -343,11 +343,11 @@ static int bootdev_test_prio(struct unit_test_state *uts)
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(7, iter.num_devs);
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
--	ut_asserteq_str("hub.p1.usb_mass_storage.lun0.bootdev",
-+	ut_asserteq_str("hub1.p1.usb_mass_storage.lun0.bootdev",
- 			iter.dev_used[3]->name);
+-	/* Iterate through devices in the media uclass (e.g. UCLASS_MMC) */
+-	uclass_id_foreach_dev(id, media, uc) {
+-		struct udevice *bdev, *blk;
+-		int ret;
++	/*
++	 * Iterate through all the bootdevs looking for the first one for the
++	 * correct media uclass (e.g. UCLASS_MMC). We do it this way so that
++	 * iter_incr() can continue iterating through others with the same media
++	 * uclass, thus making sure that every relevant bootdev is used.
++	 *
++	 * If instead we found the first media device of the correct uclass,
++	 * then started with its bootdev, that bootdev may be somewhere in the
++	 * middle of the UCLASS_BOOTDEV ordering, thus we would leave out quite
++	 * a few bootdevs as the iteration continues
++	 */
++	uclass_id_foreach_dev(UCLASS_BOOTDEV, bdev, uc) {
++		struct udevice *media;
++
++		media = dev_get_parent(bdev);
++		if (device_get_uclass_id(media) != id) {
++			log_debug("- skip, media '%s' want id '%s'\n",
++				  dev_get_uclass_name(media),
++				  uclass_get_name(id));
++			continue;
++		}
  
- 	ut_assertok(bootdev_get_sibling_blk(iter.dev_used[3], &blk));
--	ut_asserteq_str("hub.p1.usb_mass_storage.lun0", blk->name);
-+	ut_asserteq_str("hub1.p1.usb_mass_storage.lun0", blk->name);
+ 		/* if there is no seq, match anything */
+ 		if (seq != -1 && dev_seq(media) != seq) {
+@@ -444,33 +461,20 @@ int bootdev_find_by_label(const char *label, struct udevice **devp,
+ 			continue;
+ 		}
  
- 	/* adjust the priority of the first USB bootdev to the highest */
- 	ucp = dev_get_uclass_plat(iter.dev_used[3]);
-@@ -366,7 +366,7 @@ static int bootdev_test_prio(struct unit_test_state *uts)
+-		ret = device_find_first_child_by_uclass(media, UCLASS_BOOTDEV,
+-							&bdev);
+-		if (ret) {
+-			log_debug("- looking via blk, seq=%d, id=%d\n", seq,
+-				  id);
+-			ret = blk_find_device(id, seq, &blk);
+-			if (!ret) {
+-				log_debug("- get from blk %s\n", blk->name);
+-				ret = bootdev_get_from_blk(blk, &bdev);
+-			}
+-		}
+-		if (!ret) {
+-			log_debug("- found %s\n", bdev->name);
+-			*devp = bdev;
+-
+-			/*
+-			 * if no sequence number was provided, we must scan all
+-			 * bootdevs for this media uclass
+-			 */
+-			if (seq == -1)
+-				method_flags |= BOOTFLOW_METHF_SINGLE_UCLASS;
+-			if (method_flagsp)
+-				*method_flagsp = method_flags;
+-			log_debug("method flags %x\n", method_flags);
+-			return 0;
+-		}
+-		log_debug("- no device in %s\n", media->name);
++		log_debug("- found bdev, seq=%d id %s\n", dev_seq(bdev),
++			  uclass_get_name(id));
++		*devp = bdev;
++
++		/*
++		 * if no sequence number was provided, we must scan all
++		 * bootdevs for this media uclass
++		 */
++		if (seq == -1)
++			method_flags |= BOOTFLOW_METHF_SINGLE_UCLASS;
++		if (method_flagsp)
++			*method_flagsp = method_flags;
++		log_debug("method flags %x\n", method_flags);
++		return 0;
+ 	}
  
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(8, iter.num_devs);
--	ut_asserteq_str("hub.p1.usb_mass_storage.lun0.bootdev",
-+	ut_asserteq_str("hub1.p1.usb_mass_storage.lun0.bootdev",
- 			iter.dev_used[0]->name);
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[1]->name);
+ 	return -ENOENT;
+@@ -586,6 +590,8 @@ int bootdev_next_label(struct bootflow_iter *iter, struct udevice **devp,
+ 		const char *label = iter->labels[iter->cur_label];
+ 		int ret;
  
-@@ -612,7 +612,7 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
- 	test_set_skip_delays(true);
- 	ut_assertok(bootdev_hunt_and_find_by_label("usb", &dev, &mflags));
- 	ut_assertnonnull(dev);
--	ut_asserteq_str("hub.p1.usb_mass_storage.lun0.bootdev", dev->name);
-+	ut_asserteq_str("hub1.p1.usb_mass_storage.lun0.bootdev", dev->name);
- 	ut_asserteq(BOOTFLOW_METHF_SINGLE_UCLASS, mflags);
- 	ut_assert_nextlinen("Bus usb@1: scanning bus usb@1");
- 	ut_assert_console_end();
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index f1341312dac..cbb5bcc0cf3 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1307,9 +1307,9 @@ static int bootflow_efi(struct unit_test_state *uts)
- 	ut_assert_nextlinen("---");
- 	ut_assert_nextlinen("  0  extlinux");
- 	ut_assert_nextlinen(
--		"  1  efi          ready   usb_mass_    1  hub.p2.usb_mass_storage.l /EFI/BOOT/BOOTSBOX.EFI");
-+		"  1  efi          ready   usb_mass_    1  hub1.p2.usb_mass_storage. /EFI/BOOT/BOOTSBOX.EFI");
- 	ut_assert_nextlinen(
--		"  2  extlinux     ready   usb_mass_    1  hub.p4.usb_mass_storage.l /extlinux/extlinux.conf");
-+		"  2  extlinux     ready   usb_mass_    1  hub1.p4.usb_mass_storage. /extlinux/extlinux.conf");
- 	ut_assert_nextlinen("---");
- 	ut_assert_skip_to_line("(3 bootflows, 3 valid)");
- 	ut_assert_console_end();
-@@ -1325,7 +1325,7 @@ static int bootflow_efi(struct unit_test_state *uts)
- 
- 	ut_asserteq(1, run_command("bootflow boot", 0));
- 	ut_assert_nextline(
--		"** Booting bootflow 'hub.p2.usb_mass_storage.lun0.bootdev.part_1' with efi");
-+		"** Booting bootflow 'hub1.p2.usb_mass_storage.lun0.bootdev.part_1' with efi");
- 	if (IS_ENABLED(CONFIG_LOGF_FUNC))
- 		ut_assert_skip_to_line("       efi_run_image() Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
- 	else
-diff --git a/test/dm/usb.c b/test/dm/usb.c
-index d89d436d269..66777b5ef00 100644
---- a/test/dm/usb.c
-+++ b/test/dm/usb.c
-@@ -109,12 +109,12 @@ static int dm_test_usb_fdt_node(struct unit_test_state *uts)
- 	state_set_skip_delays(true);
- 	ut_assertok(usb_init());
- 	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 0, &dev));
--	node = ofnode_path("/usb@1/hub/usbstor@1");
-+	node = ofnode_path("/usb@1/hub1/usbstor@1");
- 	ut_asserteq(1, ofnode_equal(node, dev_ofnode(dev)));
- 	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 1, &dev));
- 	ut_asserteq(1, ofnode_equal(ofnode_null(), dev_ofnode(dev)));
- 	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 2, &dev));
--	node = ofnode_path("/usb@1/hub/usbstor@3");
-+	node = ofnode_path("/usb@1/hub1/usbstor@3");
- 	ut_asserteq(1, ofnode_equal(node, dev_ofnode(dev)));
- 	ut_assertok(usb_stop());
- 
++		if (!label)
++			break;
+ 		log_debug("Scanning: %s\n", label);
+ 		ret = bootdev_hunt_and_find_by_label(label, &dev,
+ 						     method_flagsp);
 -- 
 2.43.0
 
