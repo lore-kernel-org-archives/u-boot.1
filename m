@@ -4,109 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A7BC3ABA3
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 05:32:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06AB1C3ABA3
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 05:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32DE28070C;
-	Thu,  1 May 2025 07:32:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 636458070C;
+	Thu,  1 May 2025 07:36:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="K4CQMl8B";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fX1NKCbZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F78D8081A; Thu,  1 May 2025 07:32:55 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6FE4F8070C; Thu,  1 May 2025 03:05:18 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D63D8059D
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 07:32:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F90E8056A
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 03:05:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1746077570; x=1746682370; i=xypron.glpk@gmx.de;
- bh=+gh/dW4FDKaDy5DY6YMjk54TFdVs+9OsLTdONBtISRM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=K4CQMl8B8qYLMpFeNwzWEICje03iJzExOJH1nkYifXQrLe3G1FcGRI9PHrc/hPyi
- mBE4LpbzKIfyolODSiuRX3bpnzI8U8yIlPs3V9eVommXqD8kSQlYnGCDoIluJ5D1k
- bD3/oT+iRGXWdtAPpR/U3jZ2qunbopyAjOkJ/q++ab3gCBiPMSKVbQK4cfB8EsIGX
- TUW5l35YKVukfPzIU488T0kbNw0y4DdklvcpoNRHa14OXF6mvHJHnzMOpWOEVFDbX
- CfG9LnKBBpPAznF7ZITjF1XySrtJtwvqAXNPZJ6K4UKp3zpv3n4zfWgoo2JY9EMO8
- penOH8/xpFxiwbHWbw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.107.6]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MUGe1-1ua2Iz1CPj-00Sq2Z; Thu, 01
- May 2025 07:32:50 +0200
-Message-ID: <cec7bd05-f42f-403f-a666-7006b5e182b7@gmx.de>
-Date: Thu, 1 May 2025 07:32:44 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3d4436ba324so3705105ab.2
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:05:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1746061514; x=1746666314; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4mXzvpxBoe0hJTZFZci+DBKVEXx/PiFiiDGA+OsJDLI=;
+ b=fX1NKCbZ3EotUjZqm0JLSBfpTbVKvNDJuwsNc8HEWHjMAozorksFkSoSvB3bRQo/w0
+ ueWU+AR+w1i8A4ZtMpS5AjBSVdd00EB45kw5VXgD0Fo5bckH7wW6Qu1af2c+u3t2RF4Q
+ qXZLlmwVxNrE432Zj+i24+AIJ3nqD0UwEN7hI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746061514; x=1746666314;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4mXzvpxBoe0hJTZFZci+DBKVEXx/PiFiiDGA+OsJDLI=;
+ b=RX2lyxcejrpfJODaNd/rrbozDJeUBRea+TWkGipKfi8nQMvPR0t2pCUgIU8b0rsIup
+ hoR59vC3WybjNG1LqGdUH9LwiDp9kklHcx97sKRZOi1WxQvw5X45x4x0c68JVZ5q91Dv
+ Soyqx+02y7yywtu3Q1VxD1Wf9jDsQG2/lm4gXGYdPnuNOO+3oQvlsIwrKmcP30DAUpid
+ 0zdOOJ7KipaKCCqQCT3wjGGxDJ9Wa8fD9vX2sTwWhawqLj+Zg7IMKu7Y+KGcpzVXLRHH
+ EBgTibTppWqAbqXEl4zoKL9uH42KKknWFOJmVotWycb7hFCnCr7y+RXvqphqOT57SM2T
+ csfQ==
+X-Gm-Message-State: AOJu0YyAkJebCY16I2lvdR+S4cnWNA5LD48E803t7TN39n3jeyAhd9zr
+ kNvekUm7qWX9bj0NF3UfwqhkJqmxThNQT037Kc5KSiFw1hDro+N/xL5B6DEaK74CqkPFXXT/LkI
+ =
+X-Gm-Gg: ASbGncsSMH9EjMyOSfBKjRrVCmCZtbdkfUQKAKrKBt640kyVd574BeMCFY3/0RUP43a
+ 48+qMhbjdrsM7M2rgyQ2JnEzwXVVBeVaKOYDYZYcn9SoXlSspPy/9e6cYLBexyeaVnggPvFugAc
+ RPIiETRoOVpBj4HQq/42/24k6b3C2W/CrhymuSuRdymj0+16Vhm2BQkXXVTdtA5+gh3Xx2S8Aab
+ KmGeDPy52modCG4ED2VcNGz2mpBXpdk5cvMv1KmMY57JWEgnkP9fFmhncG4KeqFGDfqRsryONwM
+ 5DBU3hahVn0yAeMDt+iiYmbQqGgQwflvW0Gx1bfe/+lYnbWs2vKFU47BDxZbG/inaUGuQXnEzpR
+ z4w==
+X-Google-Smtp-Source: AGHT+IFPmrXMeW9+cuf3yW9byCqlHgsKs/WwOrUEw8MXqrC8BPDhwkMk+ao8hsRB6Sxdwwh05YLQhw==
+X-Received: by 2002:a05:6e02:1689:b0:3d9:2aa3:fe2e with SMTP id
+ e9e14a558f8ab-3d967fb0b20mr51876945ab.10.1746061513606; 
+ Wed, 30 Apr 2025 18:05:13 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3d95f480a99sm10771855ab.68.2025.04.30.18.05.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Apr 2025 18:05:12 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Adrian Alonso <adrian.alonso@nxp.com>,
+ Adriano Cordova <adrianox@gmail.com>, Daniel Palmer <daniel@0x0f.com>,
+ Daniel Schultz <d.schultz@phytec.de>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Hanyuan Zhao <hanyuan-z@qq.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilko Iliev <iliev@ronetix.at>, Jason Liu <jason.hui.liu@nxp.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Oliver Graute <oliver.graute@kococonnector.com>,
+ Otavio Salvador <otavio@ossystems.com.br>,
+ =?UTF-8?q?Pawe=C5=82=20Anikiel?= <pan@semihalf.com>,
+ Peng Fan <peng.fan@nxp.com>, Phil Sutter <phil@nwl.cc>,
+ Ramon Fried <rfried.dev@gmail.com>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@denx.de>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Warren <twarren@nvidia.com>,
+ Tony Dinh <mibodhi@gmail.com>, Viacheslav Bocharov <adeep@lexina.in>,
+ u-boot-amlogic@groups.io
+Subject: [PATCH v2 00/22] Deal with exfat versus byteorder
+Date: Wed, 30 Apr 2025 19:04:25 -0600
+Message-ID: <20250501010456.3930701-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] efi_loader: fix typo initd_sz to initrd_sz
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, trini@konsulko.com,
- o451686892@gmail.com, Adriano Cordova <adriano.cordova@canonical.com>,
- u-boot@lists.denx.de
-References: <20250501011514.2209452-1-adriano.cordova@canonical.com>
- <20250501011514.2209452-3-adriano.cordova@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250501011514.2209452-3-adriano.cordova@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:7BLLbG28VhoE72z6tVZ5dOtIgs9hmAls1pqVlunH2AfIID6IRr1
- gCKIE46wsKlCtNTWGYj1X+tBxfvZxDU3Lfw9jDrFCUcA7ZvJvcZ/e36ByUtMxov/WO2aYCq
- YWpZMrIwFCxBFqpFYDmr4ntTz0mS0RNXSUjM/CKMSLkLoYQuhJcgs5D8ODbT9SwGaR+dwE/
- gZGVj/FXaOxeBUFs5rBTg==
-UI-OutboundReport: notjunk:1;M01:P0:rWBW+O7OXec=;9UqQmGlQSh+L1q2GERRcm28oeWG
- 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
- uAvrEO7h2yteisD2iGRJZk=
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 01 May 2025 07:36:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,41 +117,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/1/25 03:15, Adriano Cordova wrote:
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+Since exfat has its own byteorder functions we need to be careful about
+including the normal U-Boot byteorder headers in code included by exfat.
 
-This is just the same patch as already reviewed by Ilias and me in your=20
-v3 series.
+One chain for include/linux/byteorder/little_endian.h is like this:
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In file included from arch/sandbox/include/asm/byteorder.h:19,
+                 from arch/sandbox/include/asm/byteorder.h:19,
+                 from include/compiler.h:132,
+                 from include/env.h:12,
+                 from include/command.h:13,
+                 from include/net-common.h:7,
+                 from include/net.h:6,
+                 from include/efi.h:23,
+                 from include/blk.h:12,
+                 from include/part.h:9,
+                 from include/fs_internal.h:11,
+                 from fs/exfat/io.c:52:
 
-> ---
->   lib/efi_loader/efi_bootbin.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index 637f2c0d195..db4478ee0bf 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -215,7 +215,7 @@ out:
->    * Return:	status code
->    */
->   static efi_status_t efi_binary_run_dp(void *image, size_t size, void *=
-fdt,
-> -				      void *initrd, size_t initd_sz,
-> +				      void *initrd, size_t initrd_sz,
->   				      struct efi_device_path *dp_dev,
->   				      struct efi_device_path *dp_img)
->   {
-> @@ -235,7 +235,7 @@ static efi_status_t efi_binary_run_dp(void *image, s=
-ize_t size, void *fdt,
->  =20
->   	/* Set initrd if provided */
->   	if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> -		ret =3D efi_initrd_set_from_mem(initrd, initd_sz);
-> +		ret =3D efi_initrd_set_from_mem(initrd, initrd_sz);
->   		if (ret !=3D EFI_SUCCESS)
->   			return ret;
->   	}
+This series tidies things up so that efi.h can include net.h as
+required.
 
+Changes in v2:
+- Add patches for other files exposed by this change
+
+Simon Glass (22):
+  net: Use a forward declaration for cmd_tbl in net-common.h
+  congatec: Include env.h to permit reading the environment
+  dhelectronics: Include env.h to permit reading the environment
+  imx8ulp_evk: Include env.h to permit reading the environment
+  venice: Include env.h to permit reading the environment
+  phytec: Include env.h to permit reading the environment
+  ronetix: Include env.h to permit reading the environment
+  toradex: Include env.h to permit reading the environment
+  advantech: Include env.h in imx8qm_dmsse20_a1
+  tegra: Include env.h to permit reading the environment
+  synology: Include env.h to permit reading the environment
+  amlogic: Include env.h to permit reading the environment
+  freescale: Include env.h to permit reading the environment
+  google: Include env.h to permit reading the environment
+  liebherr: Include env.h to permit reading the environment
+  technexion: Include env.h to permit reading the environment
+  elf: Only use network environment-variables if net enabled
+  net: Include byteorder in net6.h
+  net: Include string.h in net-legacy.h
+  net: Include env.h in pcap.c
+  net: dc2114x: Include env.h to permit reading the environment
+  net: Move env_get_ip() out of the header file
+
+ arch/arm/mach-tegra/dt-setup.c                |  1 +
+ board/Synology/ds414/ds414.c                  |  1 +
+ .../imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c     |  1 +
+ board/amlogic/jethub-j100/jethub-j100.c       |  1 +
+ board/congatec/cgtqmx8/cgtqmx8.c              |  3 +-
+ board/dhelectronics/common/dh_common.c        |  1 +
+ board/freescale/imx8ulp_evk/imx8ulp_evk.c     |  1 +
+ board/freescale/mx7dsabresd/mx7dsabresd.c     |  1 +
+ board/gateworks/venice/venice.c               |  1 +
+ board/google/chameleonv3/board.c              |  2 +
+ board/liebherr/xea/xea.c                      |  1 +
+ .../common/phytec_som_detection_blocks.c      |  1 +
+ board/ronetix/imx8mq-cm/imx8mq_cm.c           |  1 +
+ board/technexion/pico-imx7d/pico-imx7d.c      |  1 +
+ board/toradex/colibri_imx7/colibri_imx7.c     |  1 +
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c   |  2 +-
+ cmd/elf.c                                     | 41 ++++++++++---------
+ drivers/net/dc2114x.c                         |  1 +
+ include/net-common.h                          |  9 ++--
+ include/net-legacy.h                          |  1 +
+ include/net6.h                                |  1 +
+ net/net-common.c                              |  6 +++
+ net/pcap.c                                    |  1 +
+ 23 files changed, 53 insertions(+), 27 deletions(-)
+
+-- 
+2.43.0
+
+base-commit: b5d6220dd2f4612912989f3c2b5a710f2248cb36
+branch: fix-net2
