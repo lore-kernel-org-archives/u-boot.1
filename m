@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D71DC369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 16:47:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91252C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 16:47:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EAFD8081A;
-	Thu,  1 May 2025 18:47:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C4E14820EB;
+	Thu,  1 May 2025 18:47:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="shYyswHp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BWWP+EK9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 320EF81FDE; Thu,  1 May 2025 18:47:27 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id EDB3B820E2; Thu,  1 May 2025 18:47:27 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F11C68070C
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 18:47:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF836809D4
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 18:47:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-2da3b3bb560so784031fac.3
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 09:47:24 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-2cc82edcf49so349773fac.1
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 09:47:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746118043; x=1746722843; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=SMNXUG2hpUiiE5yTmuhRwTi/t4EzNbGMRiJel44R9h4=;
- b=shYyswHpdcti9wSj01I/e/vw6CYZ4eCqpFQsFFuCRB/3N3JyyDLkI5iXk2cnqlN5HH
- 76QOUxU2ogdthvb+n6MuVJ3QC9t/lJqnOCe10a8Ckvb2+Xt0+UFek4HKaDSloTP/ASDL
- VdznVif7xooMaxYTC/V7LSGtaz9NXlkTrYoO8=
+ d=konsulko.com; s=google; t=1746118044; x=1746722844; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=O7QrpBlZC1qtV+TcIJ9NU2lYOOqmkRK6SFzr6byITe0=;
+ b=BWWP+EK9+/leJJ0qW8AsEyhCJhn68a0ME5QhcUFSEDx3oQV2ewkgx97clXcXxKgRx0
+ FRMuxBqXsVyTbuRPHQ6G5+FiIyVTljdzcZ/3qAAO7HQ+82JM/Ng06zgRq+mGn4dLeiFv
+ 9cdExx4nJczhcQ/A6E4r++zbKp5ayzfeQNBk0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746118043; x=1746722843;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SMNXUG2hpUiiE5yTmuhRwTi/t4EzNbGMRiJel44R9h4=;
- b=rBozvQgDZ0/oXWJzB6zZzhFUZ1cppFhoB6u4YiOYYN3M/RogGOLQLXZb9JV8EdCaS7
- tK37DZKEQQuQ7YvNfj0g+PAhIPWlYfha7uXqzx/vncyBdO1w05htRbJKaxTYO2qtmvEu
- at9shYMb7T2OVvjJ7Rl1zPEDatAwcfJ+VvasZaSrjfUr09AR9JJybJrvmxxMtX8qlvN5
- K1IYOeKtUM247J6VKD6PTyUFEg6Mh+O3OZyiJsjepYZPBuJzp1bBnbG1mG/Er/KBgXii
- y3YLDwqdINWybtCPBBeLOZR7vDIScIbI6xFCPmkoFLVOdvr9v26fJw2FbUqr4Bs0Ow2D
- RoYg==
-X-Gm-Message-State: AOJu0Yzy3tpnduz6aOGjcQZgMIXcodCd/i8pslBM4aXbDYbsQmRFsG0V
- 4CDmoOedauBUA5DraN/4mlTDoFpcrdSEM2bSyswI1IfHDpwjMaClYKac+YoQARMNFgl9Eqx4o1y
+ d=1e100.net; s=20230601; t=1746118044; x=1746722844;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=O7QrpBlZC1qtV+TcIJ9NU2lYOOqmkRK6SFzr6byITe0=;
+ b=rrLDtYDEHi3KavEqQInQwBZY5vTTZe0IoRZySLdVbIQAYUOQwY0yNRcZ/qx4w081N/
+ 275287YiGxxk/zmoQ0+kPJNlIKrDkYWQRQ797FnXoarQitbwVH5mAorptQlCp4/mYz23
+ aEOyNVC31cymR3pfaeKzvVKfI3v/t72ajaFoFugrlKZxzWTe8RKlCnXV+njg1K41yWsD
+ yYN14x4xncZZGODJgEUxS098ixk50DOq9geQbx6koa7OzcgBFEW+ndrhXSsFBqJHzClM
+ eqRm0TZcNRUcrK6Fh2FFn9rOc7D5tzostsEhihAqrmc5SA38k1vvX7O/h2f7cUyEaqP6
+ PNhQ==
+X-Gm-Message-State: AOJu0Yz8hec/cJaheHSxe0iy4Edz4ZZEMurufrzihPGBV7B8P5L7tpS5
+ n4vRDtb9xMDGh2U9gSwxzxJNlSkPMdmTEV6yUPGRruWh7HAhtPZzvix8iY4Oy+L+IuYLbsJkgm3
  e
-X-Gm-Gg: ASbGncvxx5NbIK86Cg35YP9i1qi6+HTwmnCg+IKN5ZZYs6lKwnzoGnE7VCJrdoiC88F
- suBgS/xR3w+S6hgUNnPNVKyiWxfC73fGbXUQCedGZeX1ENk5E+Auhih7izBNrIWWqPGdxWl3j6K
- u1RU1bJpeMxkP1OuWtUSR/evdCzp41unaej85wI+iiGyUuZ9BzL2q8VVBvPuSo2sKAR2chd/Cmq
- YPdexe+4N1iSzGGoL80bw2CeW7DJKOmFF8ndsMaL4sZEl0ztQO+DjTUdY/46cwafJ3Tb3CjV0SF
- /CYd2hMvJTkhRuaErA4e89Z/9d4ID+FM8dYC7C6RBeQuJjxtMjjX4CrVeU1Ez9GNBmDw+uLTHep
- fovgp
-X-Google-Smtp-Source: AGHT+IG01mUbykY9jFg7gWr+CeU2+ynXkCVX9OKfJrfRTZcIznzkYN0EqRzXTJ1mgpA4hxbYgBDS1g==
-X-Received: by 2002:a05:6870:1792:b0:2bc:7d6f:fa86 with SMTP id
- 586e51a60fabf-2da934167camr1857433fac.35.1746118043609; 
- Thu, 01 May 2025 09:47:23 -0700 (PDT)
+X-Gm-Gg: ASbGncuUUsLRL3snsaBC47x5CdVeGqfsBbjIPJhGLzvf43h3MJbuPU5CPL9b0fZMwbD
+ Q0Ij2hduJoVfxtn9GTje5/ihRjLGU+9D9aBNVQ3lPPE8N4YxI5zqUu2kytV54I71HdIKU5XfvLR
+ n7h0PS9qhYg/lHN011vfU5f3Kf8JrP2G2N3QJYQgKL5xClw1rS4k3f6HJ/f6eh5i5xBqbOLKRSw
+ ucsR0u2j+xzfCZhMDk/vQsJpjL9axzwk01YQ5SoUo/zBDaDwb1kE2fxpEJmIpVhomFNqNi9tcTu
+ plYJpLy/9n8DqhK9Sh5ZeY0C1WNpURp0qNyhugNLWuk2UvYO+PcQHEAzIJKh5gbeTZ3XSlx3rxm
+ X6czV
+X-Google-Smtp-Source: AGHT+IEk1GqAWrvhqMK6ZZs6H6pfA3pusBzSCsrq3+IIwvcx5gAZ0Suun2w7oEfS403KXf9FpW+Obg==
+X-Received: by 2002:a05:6870:d10b:b0:2d4:d07c:7cb2 with SMTP id
+ 586e51a60fabf-2da8c401d6emr2214218fac.11.1746118044419; 
+ Thu, 01 May 2025 09:47:24 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2daa1207425sm193656fac.39.2025.05.01.09.47.22
+ 586e51a60fabf-2daa1207425sm193656fac.39.2025.05.01.09.47.23
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 09:47:22 -0700 (PDT)
+ Thu, 01 May 2025 09:47:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 1/4] cmd/cat.c: Add missing include
-Date: Thu,  1 May 2025 10:47:18 -0600
-Message-ID: <20250501164721.1494370-1-trini@konsulko.com>
+Subject: [PATCH 2/4] ext4fs.c: Add missing include
+Date: Thu,  1 May 2025 10:47:19 -0600
+Message-ID: <20250501164721.1494370-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250501164721.1494370-1-trini@konsulko.com>
+References: <20250501164721.1494370-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,26 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This file references errno values and so needs to include
-<linux/errno.h>.
+This file references rtc functions and implicitly includes <rtc.h>
+today. Add this explicitly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/cat.c | 1 +
+ fs/ext4/ext4fs.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/cmd/cat.c b/cmd/cat.c
-index 6828b7b364e5..3167cda60327 100644
---- a/cmd/cat.c
-+++ b/cmd/cat.c
-@@ -8,6 +8,7 @@
- #include <fs.h>
+diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
+index 1727da2dc6db..bd058a096142 100644
+--- a/fs/ext4/ext4fs.c
++++ b/fs/ext4/ext4fs.c
+@@ -27,6 +27,7 @@
+ #include <ext4fs.h>
  #include <malloc.h>
- #include <mapmem.h>
-+#include <linux/errno.h>
+ #include <part.h>
++#include <rtc.h>
+ #include <u-boot/uuid.h>
+ #include "ext4_common.h"
  
- static int do_cat(struct cmd_tbl *cmdtp, int flag, int argc,
- 		  char *const argv[])
 -- 
 2.43.0
 
