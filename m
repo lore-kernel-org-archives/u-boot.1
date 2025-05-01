@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F25FC369D9
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 01:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C938C369D9
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 01:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 040DB826AD;
-	Thu,  1 May 2025 03:05:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 93417820EB;
+	Thu,  1 May 2025 03:05:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wd2F0WA8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="laRRzVNQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19A2A8056A; Thu,  1 May 2025 03:05:54 +0200 (CEST)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 25AE5807B1; Thu,  1 May 2025 03:05:57 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87BBD8210F
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 03:05:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3140281F0B
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 03:05:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3d5e43e4725so1358605ab.1
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:05:50 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-8613f456960so15054739f.1
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:05:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746061548; x=1746666348; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746061552; x=1746666352; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bh8WkGqcNYSMg1OhceCTKCkCT6M7wqBYjAYR+O4Jksk=;
- b=Wd2F0WA8Bg/3doDjU52ffOONDNU8hO9YcQiyWeejOY/4eKCFco70fhw1QzjCoJxf84
- q7QsY/AYQAvbkWe7695S/ZfKmYEXEkYkzHzQdQ1hi6A1CH7KsakhgV0SGswSPkYZ1yAX
- QtuRoN3G5UNQcAp5ufYjfoorViBxyR/jvcwZA=
+ bh=qvdGRPWel+QtTHsEQd1b+jomNFqqjZqQGfQknVlnbGU=;
+ b=laRRzVNQ1Wdkq+I1W8Bb3Iw/xAX7kmS+A4iUPsoItasuxeoj4Z1o4NtNszg0RplJEs
+ mhZ7cz4qGnibrhHbZCOqzT00591qORjIYEO8tKQ4xJQk9z93MVqOW2onq4jiaqrwjIKJ
+ Gf6u92YoYs8/JtpEvAki7C1/SK1jhfyV+xx34=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746061548; x=1746666348;
+ d=1e100.net; s=20230601; t=1746061552; x=1746666352;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bh8WkGqcNYSMg1OhceCTKCkCT6M7wqBYjAYR+O4Jksk=;
- b=SbBPzmWxm/TGg+OxYe2Ru7Hml4M/JYPPP+6l74arwCPuXpDpFEV5ryro1/hQpiZUxO
- vcfLugvKsK13RKQux9SuSLKyCx7WTBcxuPFWtxWyx7m+2eh/HqWWfIZU7vWTzTNFNf0G
- RgzFkoEtGSjzbHOZ9PLd2kn6fNxmI11iyDzorGmypdCJZ6Cjc+8pQWvwiDGEfACXsu31
- DMga1Lmx2IbFru/BCv/7G3WPd9YjsXCQdbYY3GCdojgf+3w+j9KPtJjT5jic/rK62iFB
- E9yRQ6X3dD2kSCKvW27pWYk3B5ar3iwtc1E2KAzwrKhRosBRJV3ugB9lsLKovdOmCXbb
- Bssw==
-X-Gm-Message-State: AOJu0Yy1xQ11+tYP4FvZW0/NxXR9ge+rP3fLPvyYVjnnFX5i4t1yyRyG
- JiQEkAMbaZlzaAd+JVQ1eVHqRgbY30+GF/VR9s+7ey9/Z1HxrV6dNAtAxPERFM4eeEGCkKIjDCA
+ bh=qvdGRPWel+QtTHsEQd1b+jomNFqqjZqQGfQknVlnbGU=;
+ b=SjJO28sO1FXW5ahiDiv9zA6vS3ohlzymTqFehNCxnlrBhLV6wFS+93E4kjTiNC7s+f
+ 7YO68fng+QpgxJwqfdBVccMKHwqyi6YWFHKgv7DBK9MaKVY/4mgXY5p2DkUkwqlW+A+k
+ vtNb9qq+HDGXOqi8v8rNDXfelZcozvi0xAn0RMzTHh/RdFPAbFnlh0ivq9rBf2CNDHBw
+ lj96JffKEbe+5nESfl9/0r2yHCbAtvXpVZJ9FEi5ZFy9Uw5H2EvKE7QW4JDbclxh4Vbl
+ USyExCdHIjz1tjitqV9QSZq1zzbI4s5Ph+Qz8Mf5PkfUX3vpEVRsap9CzWgqOCi8D5uY
+ w1bw==
+X-Gm-Message-State: AOJu0YyAey++FN9eoPqxBUSJKfUJUXdo3Y29yQyKGzDO0L6Z5dTJEi6M
+ Vyk16JCJq3zGkkZ7NKePQGrIqI1IR/XcbyJI4hMmK/o1TX3D0nq1Ce+PRj6KYLCsvhTr678xdyQ
  =
-X-Gm-Gg: ASbGncttL0EgqS8pEn3/ab69e7NrZKo++lFxj396n+AIGHKmNd8b8VLZ0uOw4M2RbiO
- NOVJSSorXeazf/+uryoQJec1pXJBmPARUd5PiPCjK20EfkaGXOBQocyJaD9oQAwhaNJ3l0q/zss
- qzbi7TXz9jvJyxrhNfqN9yGA/lc+RRxT7YGSW3SUfhVDo/SMZ96ijb6Cj98BgP5DklKjqbgXZmr
- I9TkI4bydPaVwGgSoPg0tapLU1h/O3x8xnix/d73CU2ZETq43FAFhIxpYkhekJ22OHkIFGMC/gL
- dIgR9eQAqHLOmbFD5WM4NYAy5tw59HC/qpzeDKsiqrVpx60WoNMPByoG5t27S4NCR0vwTASgtT6
- oDxdUVNnN5Aev
-X-Google-Smtp-Source: AGHT+IGOKrzRpJ91AjDAXZ7/Xcw667q4GmpbN21fEwQ9eyBqDvbOt3sfaFtzaIEMmC78QkEK9jQ/ew==
-X-Received: by 2002:a05:6e02:1aaf:b0:3d9:24a7:db0c with SMTP id
- e9e14a558f8ab-3d96f1b20ddmr17130795ab.8.1746061548669; 
- Wed, 30 Apr 2025 18:05:48 -0700 (PDT)
+X-Gm-Gg: ASbGncvBxPQZ4cAA+r02bsxsQpBp30hJUa3EQLNPFf/4LYxSRBq0/Jv5yzvRsXcinax
+ 3qyS62nwET/GZTOAf1ItoK2H1CgKiCszUMQ5IkJaodaVrw2O+0BS2f85Tco/taRy5kHRTbnrxKJ
+ kfn+wUr1fxX3H2fPkFT3kLZ7p5EBsgPwknAAtgMUoV1JWQ2WxYFf2KThjYfXD7uIQnGyKId/8Tw
+ Xtje+2gRV3QBxJfjH7bMv5bnSE8OcBx4nAa2t15PrGBipKERmMXNPCXGDLvOAsRogwqNx6OnZR1
+ B/tPqAAYo/BCf35gna5ycTNrVdJVn0Nu7r+3QgcddJMpbuWn0Pl9zLpT+znoQQ7Gdjse7AH1p3d
+ 0bJg1K3bN5BV8
+X-Google-Smtp-Source: AGHT+IGCjXdqy46jvXTNgCKYVAwn62LMQUnczMgbSBB+3i3Z54vZjG6I2GbbFF4GjpORZd6/VQSv2g==
+X-Received: by 2002:a92:c24e:0:b0:3d8:1f87:9433 with SMTP id
+ e9e14a558f8ab-3d9701fbd11mr7702945ab.11.1746061551759; 
+ Wed, 30 Apr 2025 18:05:51 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d95f480a99sm10771855ab.68.2025.04.30.18.05.46
+ e9e14a558f8ab-3d95f480a99sm10771855ab.68.2025.04.30.18.05.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 18:05:48 -0700 (PDT)
+ Wed, 30 Apr 2025 18:05:50 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Viacheslav Bocharov <adeep@lexina.in>,
- u-boot-amlogic@groups.io
-Subject: [PATCH v2 12/22] amlogic: Include env.h to permit reading the
+ Simon Glass <sjg@chromium.org>, Adrian Alonso <adrian.alonso@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Jason Liu <jason.hui.liu@nxp.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>
+Subject: [PATCH v2 13/22] freescale: Include env.h to permit reading the
  environment
-Date: Wed, 30 Apr 2025 19:04:37 -0600
-Message-ID: <20250501010456.3930701-13-sjg@chromium.org>
+Date: Wed, 30 Apr 2025 19:04:38 -0600
+Message-ID: <20250501010456.3930701-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250501010456.3930701-1-sjg@chromium.org>
 References: <20250501010456.3930701-1-sjg@chromium.org>
@@ -106,21 +108,21 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- board/amlogic/jethub-j100/jethub-j100.c | 1 +
+ board/freescale/mx7dsabresd/mx7dsabresd.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/board/amlogic/jethub-j100/jethub-j100.c b/board/amlogic/jethub-j100/jethub-j100.c
-index b770a1f8c53..9e87fb9f9d7 100644
---- a/board/amlogic/jethub-j100/jethub-j100.c
-+++ b/board/amlogic/jethub-j100/jethub-j100.c
-@@ -5,6 +5,7 @@
+diff --git a/board/freescale/mx7dsabresd/mx7dsabresd.c b/board/freescale/mx7dsabresd/mx7dsabresd.c
+index 3db167c0dad..bef4f901ff7 100644
+--- a/board/freescale/mx7dsabresd/mx7dsabresd.c
++++ b/board/freescale/mx7dsabresd/mx7dsabresd.c
+@@ -3,6 +3,7 @@
+  * Copyright (C) 2015 Freescale Semiconductor, Inc.
   */
  
- #include <dm.h>
 +#include <env.h>
  #include <init.h>
  #include <net.h>
- #include <asm/io.h>
+ #include <asm/arch/clock.h>
 -- 
 2.43.0
 
