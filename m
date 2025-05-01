@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E47F4C3ABA3
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55556C3ABA3
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4238C8059D;
-	Thu,  1 May 2025 14:27:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BCFFC80BAD;
+	Thu,  1 May 2025 14:28:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fw26apQ9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hkHhdPWD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A789C8081A; Thu,  1 May 2025 14:27:22 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 277F880BAD; Thu,  1 May 2025 14:28:56 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3C9A8056A
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:27:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E094C8059D
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:28:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 541CRHUl3611421
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 541CSnpE167136
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 1 May 2025 07:27:17 -0500
+ Thu, 1 May 2025 07:28:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746102437;
- bh=RiK7oEi0zsElFp1OH1W7wrIeHHncX7C5qYXsYQXOMX8=;
+ s=ti-com-17Q1; t=1746102529;
+ bh=ZIRZmWs9Eb+Unw6205tmGBSnWvJkbW9ODRySqDGyouk=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=fw26apQ93/btc2Y4mLmuJqpjEUapR/MmxNPPwkUsEdPtv0hCJovDN0FyM2tneDFjJ
- iH1vmaIs/pT5trdzJMKzIuW88L3b2Mr9UZ9GSfhrvwmqvhMFHBjasWHLY7C6zW7AFm
- PxTPAv67Icdh6sMXr5vD85Xjxbu5VP9mkBBZB+i8=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 541CRHmA030302
+ b=hkHhdPWD+Bdzj5UXQhsKBsNMph1POM3Zq66mwFhqva+aj0IhcMCUGAfDmLt4M9Vw2
+ zhY5ShXHFaQ/rcEql5M64ENAWdvUlfhrcYbZNS7zNxYW2Igo+HyGqryo5LC19yuNM+
+ bwP5YTkQ+p20YAboN9wgW3Ygxeh3zPvwPRx5esl0=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 541CSnxV030780
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 1 May 2025 07:27:17 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 1 May 2025 07:28:49 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 1
- May 2025 07:27:17 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 07:28:48 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 1 May 2025 07:27:17 -0500
+ Frontend Transport; Thu, 1 May 2025 07:28:48 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 541CRHab068941;
- Thu, 1 May 2025 07:27:17 -0500
-Date: Thu, 1 May 2025 07:27:17 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 541CSmlO070235;
+ Thu, 1 May 2025 07:28:48 -0500
+Date: Thu, 1 May 2025 07:28:48 -0500
 From: Nishanth Menon <nm@ti.com>
-To: Udit Kumar <u-kumar1@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <d-gole@ti.com>,
- <n-francis@ti.com>, <vigneshr@ti.com>, <m-chawdhry@ti.com>,
- <ilias.apalodimas@linaro.org>, <c-vankar@ti.com>
-Subject: Re: [PATCH v2] firmware: ti_sci: Add Initialization of dev_info head
- node
-Message-ID: <20250501122717.jxuiwwuo5ziyb7cp@craftsman>
-References: <20250429171440.2524557-1-u-kumar1@ti.com>
+To: Aparna Patra <a-patra@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <afd@ti.com>,
+ <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <bb@ti.com>
+Subject: Re: [PATCH 1/3] arm: mach-k3: am62a: Fixup CPU core, DSS, CAN-FD and
+ Video-codec nodes in fdt
+Message-ID: <20250501122848.jaun54umcun6ijs7@domain>
+References: <20250430104236.2611089-1-a-patra@ti.com>
+ <20250430104236.2611089-2-a-patra@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250429171440.2524557-1-u-kumar1@ti.com>
+In-Reply-To: <20250430104236.2611089-2-a-patra@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,21 +81,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22:44-20250429, Udit Kumar wrote:
-> On K3 devices two drivers ti_sci and ti_sci_dm are supporting firmware
-> functions. At run time one of driver is used.
+On 16:12-20250430, Aparna Patra wrote:
+> AM62A SOC is available in multiple variants:
+> -CPU cores (Cortex-A) AM62Ax1 (1 core),
+>  AM62Ax2 (2 cores), AM62Ax4 (4 cores)
+> -With and without DSS, CAN-FD & Video-codec support
 > 
-> Driver ti_sci already initializing head for dev_list in its probe
-> function, but it was missed in ti_sci_dm driver.
+> Remove the relevant FDT nodes by reading the actual configuration
+> from the SoC registers, with that change it is possible to have a single
+> dts/dtb file handling the different variants at runtime.
 > 
-> So add head list init support for ti_sci_dm driver.
-> While at this, move init of list before usages in both functions.
+> Signed-off-by: Aparna Patra <a-patra@ti.com>
+> ---
+>  arch/arm/mach-k3/am62ax/am62a7_fdt.c          | 41 +++++++++++++++++++
+>  .../arm/mach-k3/include/mach/am62a_hardware.h | 40 ++++++++++++++++++
+>  2 files changed, 81 insertions(+)
 > 
-> Fixes: 5d5a699855a7("firmware: ti_sci: Add support for Resoure Management at R5 SPL stage")
-> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> diff --git a/arch/arm/mach-k3/am62ax/am62a7_fdt.c b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+> index 7f764ab36b..56fd658202 100644
+> --- a/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+> +++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+> @@ -8,8 +8,49 @@
+>  
+>  #include "../common_fdt.h"
+>  
+> +static void fdt_fixup_cores_wdt_nodes_am62a(void *blob, int core_nr)
+> +{
+> +	char node_path[32];
+> +
+> +	if (core_nr < 1)
+> +		return;
+> +
+> +	for (; core_nr < 4; core_nr++) {
+> +		snprintf(node_path, sizeof(node_path), "/cpus/cpu@%d", core_nr);
+> +		fdt_del_node_path(blob, node_path);
+> +		snprintf(node_path, sizeof(node_path), "/cpus/cpu-map/cluster0/core%d", core_nr);
+> +		fdt_del_node_path(blob, node_path);
+> +		snprintf(node_path, sizeof(node_path), "/bus@f0000/watchdog@e0%d0000", core_nr);
+> +		fdt_del_node_path(blob, node_path);
+> +	}
+> +}
+> +
+> +static void fdt_fixup_dss_nodes_am62a(void *blob, bool has_dss)
+> +{
+> +	if (!has_dss) {
+> +		fdt_del_node_path(blob, "/bus@f0000/dss@30200000");
+> +		fdt_del_node_path(blob, "/bus@f0000/pinctrl@f4000/main-dss0-default-pins");
+> +	}
+> +}
+> +
+> +static void fdt_fixup_video_codec_nodes_am62a(void *blob, bool has_video_codec)
+> +{
+> +	if (!has_video_codec)
+> +		fdt_del_node_path(blob, "/bus@f0000/video-codec@30210000");
+> +}
+> +
+> +static void fdt_fixup_canfd_nodes_am62a(void *blob, bool has_canfd)
+> +{
+> +	if (!has_canfd)
+> +		fdt_del_node_path(blob, "/bus@f0000/can@20701000");
+> +}
+> +
+>  int ft_system_setup(void *blob, struct bd_info *bd)
+>  {
+> +	fdt_fixup_cores_wdt_nodes_am62a(blob, k3_get_core_nr());
+> +	fdt_fixup_dss_nodes_am62a(blob, k3_has_dss());
+> +	fdt_fixup_video_codec_nodes_am62a(blob, k3_has_video_codec());
+> +	fdt_fixup_canfd_nodes_am62a(blob, k3_has_canfd());
+>  	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+>  	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+>  
+> diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+> index cd61abe018..ab281129d7 100644
+> --- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
+> +++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+> @@ -19,6 +19,18 @@
+>  #define MCU_CTRL_MMR0_BASE			0x04500000
+>  #define WKUP_CTRL_MMR0_BASE			0x43000000
+>  
+> +#define CTRLMMR_WKUP_JTAG_DEVICE_ID		(WKUP_CTRL_MMR0_BASE + 0x18)
+> +#define JTAG_DEV_CORE_NR_MASK			GENMASK(19, 18)
+> +#define JTAG_DEV_CORE_NR_SHIFT			18
+> +#define JTAG_DEV_CANFD_MASK			BIT(15)
+> +#define JTAG_DEV_CANFD_SHIFT			15
+> +#define JTAG_DEV_VIDEO_CODEC_MASK			BIT(14)
+> +#define JTAG_DEV_VIDEO_CODEC_SHIFT			14
+> +#define JTAG_DEV_DSS_MASK			GENMASK(16, 13)
+> +#define JTAG_DEV_DSS_SHIFT			13
+> +
+> +#define JTAG_DEV_HAS_DSS_VALUE			0xD
+> +
+>  #define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
+>  #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
+>  #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
+> @@ -86,6 +98,34 @@
+>  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x70000001
+>  #endif /* CONFIG_CPU_V7R */
+>  
+> +static inline int k3_get_core_nr(void)
+> +{
+> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
+> +
+> +	return ((dev_id & JTAG_DEV_CORE_NR_MASK) >> JTAG_DEV_CORE_NR_SHIFT) + 1;
+> +}
+> +
+> +static inline int k3_has_dss(void)
+> +{
+> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
+> +
+> +	return (JTAG_DEV_HAS_DSS_VALUE == ((dev_id & JTAG_DEV_DSS_MASK) >> JTAG_DEV_DSS_SHIFT));
+> +}
+> +
+> +static inline int k3_has_video_codec(void)
+> +{
+> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
+> +
+> +	return !((dev_id & JTAG_DEV_VIDEO_CODEC_MASK) >> JTAG_DEV_VIDEO_CODEC_SHIFT);
+> +}
+> +
+> +static inline int k3_has_canfd(void)
+> +{
+> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
+> +
+> +	return (dev_id & JTAG_DEV_CANFD_MASK) >> JTAG_DEV_CANFD_SHIFT;
+> +}
+> +
+>  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+>  
+>  static const u32 put_device_ids[] = {};
+> -- 
+> 2.34.1
+> 
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
+We should do a proper framework for this that scales multiple devices.
+
 
 -- 
 Regards,
