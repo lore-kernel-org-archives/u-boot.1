@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44AD7C369D9
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 01:07:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80506C369D9
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 01:07:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 208B08212B;
-	Thu,  1 May 2025 03:06:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7B31E8210F;
+	Thu,  1 May 2025 03:06:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="digXmvlM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LMTwisxt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24A2B82824; Thu,  1 May 2025 03:05:59 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 56DBB8283E; Thu,  1 May 2025 03:06:04 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A145E8214F
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 03:05:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 079EC826F3
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 03:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3d8fc9dbce4so6069945ab.0
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:05:55 -0700 (PDT)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3d9327d0720so3863905ab.3
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:05:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746061554; x=1746666354; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746061557; x=1746666357; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EUUf0BS1ekd+giQf233eEtokOQmdZ32dhTqrDbPyY7o=;
- b=digXmvlM9lrBARv4SVmcs2/LkGJlH9JWrlRAXkV8VwK3bshkhrHAaPfMBc0/NNGKo0
- /sy34IWYSjuQyiqZ3Npyg1DSPp+twc/7OgbZxAyNwSwlRtaSy1f6qQ5YjfHiZdAXMCrr
- 6R3+yo9/Zul8IIrkSGFBVt8S2IBiSLAbpypq8=
+ bh=tmdO3aFCqIMT7KKCBRXLK0ghhP012dF8KwAkZxZ72Zg=;
+ b=LMTwisxt1ZyHzajxsHYZ8TF+nZ2ZJn6x+6ZfVcUDCa+k0N3t5P0IKQ+8UtENvWYKH6
+ YKBSV/KqcyfpvYPSI2lFEUA2vivxg9Ps5SfHdk0uKMWjw+uSUCAk0hvi+o8C/Bv4rZb8
+ mpB8laew+TiEriqBVzAL5eag8KjoIdekUxwHA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746061554; x=1746666354;
+ d=1e100.net; s=20230601; t=1746061557; x=1746666357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EUUf0BS1ekd+giQf233eEtokOQmdZ32dhTqrDbPyY7o=;
- b=r+nFHiYLExgbOaY635DQ5ESyI9IsykZgRlz9gEZgx4qfsTJNZQoqKOeWC6eq7fK3/U
- 5Asbw34fvPzxq6dK+RI5yZa+fgcmMD/ZG+QHdGjKdVegSz5Baib9oxG/sK/y1mGC4G8p
- mzFo8g4WoS3ZbdUl5e7df/kBIO2wHHNTTUFmKrjN8W5HkQYFQKExKPC2VOJ2Y1W0eWJm
- Po3+S8FcR2UsYaVviCabZE/GNqvsnskK1KzmoEVsxJBYh/qvKZdbhL0MhqmbDUN/p7BX
- K8VWIDPjwynpCq8j98YND0MWlsDwbQzqSWZeWpkd07xBupj74ybNoHbo1jcAlrOpOR7W
- KhXw==
-X-Gm-Message-State: AOJu0Ywf1U4sj+dUJAjGXFDhjqhbSvTZSG0cIrul0HU/z1/WxmELform
- cQgQCKz22mN7qwJ2/ncUV8NjwnXC+jo55O9v09WzME5CfOmZodfQzz8JvTrjVq1a+tzUNarLTtI
+ bh=tmdO3aFCqIMT7KKCBRXLK0ghhP012dF8KwAkZxZ72Zg=;
+ b=nFiqBY2mWA3quOm8sj+0ECvIM49pukb2e3fzHjRJ0rZJaht9m/ws6pT11CJnyyHuZc
+ OszPGFTrkWcYOyHTbX4MhGTnpsjuqSriK03HGsH14RJaYLC6BJCpPFsjt6Gfx8QuJs1R
+ AD9NWIzdf+zKnoXS6mbbwz+8i1cJ0SDSCBSHacR4ONMZyxkvVJz+L+k/0mH3ZUWSOLaq
+ IZEXO0pM0VZN50MxBoRMcwDWNtl8JLIhfGdQTy0hPAVHc1GEyFbZBqcoWUUAq3a/YUmY
+ V/MbLQyMIOQsQRwCoYrMWYHGxuzJ2Ny7OVY94OWl+gR5RPNXViFIazLa9s4DOqGKl21Q
+ dOOA==
+X-Gm-Message-State: AOJu0YxYMij3pWVlyZJGZgM+gG3JnnBao11vDUWGnVlZDzdbTW+3aHIF
+ UIVljrlhtQd4b3A4wLvMVsa+CD5O0fFAqoimx7+08L7CexQ8PZyRtsrK39htfix4c2ov/fH+00A
  =
-X-Gm-Gg: ASbGncsxDAy837sUR4u0yBkl9pDiTtyLRKjdafE6vXs3g1xV/4ULJ1udg6c1hGboien
- y6mATcH8G/R/lilWMyqimVoCk3gE7Z23fVaAmGlQsWAa7g6rTG2igpdosAkaeWlXEivr9b1DZtU
- R0gGyViitX8LzK0aHEHkiuWRJjliFtctPafksPKz/GrgtmXsOCbXCTNNhLvj7rkhbNgTk4Z/AjL
- 1n66nNG1l68JszAIzRr2v8jo1aEMmZsC05nCOgUnLU9VSosjG6adN/e5WEqgrK/3ZwfdffzhKtg
- KZ7qFBughry/NWlFmMeXe+Wk7nxqup0iY6Zkw2PCmfPd9ZialrRK7iqKpP8SPB38hMHzzkbJQNY
- n9A==
-X-Google-Smtp-Source: AGHT+IEOBNYgR8yr6RsPT1jxRgLxXdZ7hV3nITKpOkHTkHtFFMBmeZ550DXRD5Vie+N7spZUNp8W9Q==
-X-Received: by 2002:a05:6e02:3707:b0:3d6:c2ff:eee2 with SMTP id
- e9e14a558f8ab-3d970b5dd79mr8017205ab.6.1746061553921; 
- Wed, 30 Apr 2025 18:05:53 -0700 (PDT)
+X-Gm-Gg: ASbGncuuenIokxdx/0HyrliBya/IePjsLibSNduLXuWkCG5sKAEAWuHEoG9qqQRLOUH
+ GHYoZHhzOo3dk0T3OxhJbFxGH3SowlWeVTsxRSrKuPlHYzHpBJwEuRtvOUAx2AJ4xgczmr5HhtY
+ tSTN7VUbRHy+wi769I0H7Vllg0oI2syjhrPzgR2uV9pf0rf/FJRiZBtcUU68q0/lOE7k/TTsVx/
+ PYaZlKfwqp4fgAeXFVY9sHOKVdj3Iu1si5c2ggUO3atR8NB5ydne7SPVid8Jy88UNE2c6HLWZiv
+ Vo3JhiYlsjc2EbJZOSdtmulxheaMGJhTqvLBWPf9I2LI7njVzpfjuq/NrqpO/26rTNiGBOC8Tyr
+ ZQg==
+X-Google-Smtp-Source: AGHT+IFtdjcoBt5QK5Mxr/tKIwN8/888netRZUYwN4jFr3lziDQCAx6GYcDrD4cM4NOXmdhquCgc2g==
+X-Received: by 2002:a05:6e02:2141:b0:3d9:5d50:e3b1 with SMTP id
+ e9e14a558f8ab-3d96771bc0bmr70789025ab.18.1746061556807; 
+ Wed, 30 Apr 2025 18:05:56 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d95f480a99sm10771855ab.68.2025.04.30.18.05.52
+ e9e14a558f8ab-3d95f480a99sm10771855ab.68.2025.04.30.18.05.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 18:05:53 -0700 (PDT)
+ Wed, 30 Apr 2025 18:05:55 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- =?UTF-8?q?Pawe=C5=82=20Anikiel?= <pan@semihalf.com>
-Subject: [PATCH v2 14/22] google: Include env.h to permit reading the
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>
+Subject: [PATCH v2 15/22] liebherr: Include env.h to permit reading the
  environment
-Date: Wed, 30 Apr 2025 19:04:39 -0600
-Message-ID: <20250501010456.3930701-15-sjg@chromium.org>
+Date: Wed, 30 Apr 2025 19:04:40 -0600
+Message-ID: <20250501010456.3930701-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250501010456.3930701-1-sjg@chromium.org>
 References: <20250501010456.3930701-1-sjg@chromium.org>
@@ -106,22 +105,21 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- board/google/chameleonv3/board.c | 2 ++
- 1 file changed, 2 insertions(+)
+ board/liebherr/xea/xea.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/google/chameleonv3/board.c b/board/google/chameleonv3/board.c
-index 4d3049689d3..d8ffdd25b38 100644
---- a/board/google/chameleonv3/board.c
-+++ b/board/google/chameleonv3/board.c
-@@ -2,6 +2,8 @@
- /*
-  * Copyright 2022 Google LLC
+diff --git a/board/liebherr/xea/xea.c b/board/liebherr/xea/xea.c
+index 1d4f165fd13..9630e7f576b 100644
+--- a/board/liebherr/xea/xea.c
++++ b/board/liebherr/xea/xea.c
+@@ -13,6 +13,7 @@
+  *
   */
-+
+ 
 +#include <env.h>
- #include <net.h>
- #include <errno.h>
- #include "mercury_aa1.h"
+ #include <fdt_support.h>
+ #include <init.h>
+ #include <log.h>
 -- 
 2.43.0
 
