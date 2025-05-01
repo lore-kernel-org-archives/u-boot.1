@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E79B9C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 20:59:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB66C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 21:02:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1ADE81E25;
-	Thu,  1 May 2025 22:59:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 414A0809A5;
+	Thu,  1 May 2025 23:02:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X1eWMlV4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="idw7JmvY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 196E98070C; Thu,  1 May 2025 22:59:14 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 8A2C080F03; Thu,  1 May 2025 23:02:01 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E1E1809D4
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 22:59:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59E458070C
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 23:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72bd5f25ea6so370543a34.1
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 13:59:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-72b0626c785so1160437a34.2
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 14:01:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746133150; x=1746737950; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=YUs3SsWAOrglNIbaO0j5+x39j/qPuCUgII5RAhugdu0=;
- b=X1eWMlV49C/ih19bmANSHTptX3D4oaYwc+scGr9EnDP7dqxGKWMGU1mk2GEQgpy8+N
- A1C4FYu7hhvU8RqoW7oeZhQXCpZTL22sZ2VJ5/pJ7kkSxITO+doklrxZXZgizgYJlY98
- D4CzT7qylumPZzEpJoUuZlMTvFrAmpOdwobBY=
+ d=chromium.org; s=google; t=1746133317; x=1746738117; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nkdSKnNk4mLEQ87wo/HWrDeo+d9lCijbuhl6EcT7uZU=;
+ b=idw7JmvYDJSIv6lAb+rdUQIUUorgfSU7HQKKXtHxt8c+qmswg18XAqMxKoXOmSUHtb
+ tEahc4WgI8Tn+KQPp1lfDDN4dwlsDTsfcg9UaIRvzwazL28W8FZJrU1O6dfCryl7gs1r
+ l6c79BUmtgWb6/kbDBtk12hIU6ovHq3y8mwDw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746133150; x=1746737950;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YUs3SsWAOrglNIbaO0j5+x39j/qPuCUgII5RAhugdu0=;
- b=dYqUsTBllrOAEqwqxwFP1lT8aJmq7eh4e2NiwdHjTQ0XuosLhQUizzL5+3x7ng8fr1
- LiAapSbGFFNRMVqq6Syam4VmNNAOEW6lEniHYLs773h8n3cYWLi+IkPokLD+haOdz2nu
- gqAUb0C1QjCswfJKoS9IqVlN2sM1zPbKUZcKkSQNdUNtycVBhX2VgWPbwQyfj/IPC5/5
- 0f9pbki2+RtscpZLIYLMDXfIa23k6VSNsYG+IWSKQNnBQGg1ISEZ7fjXmFKcba854S39
- qZBaWHNt5JsjZLU/FheLRNRx9HHXQ3T/kDv5M8VnSYgclGPdAao/1dZImr3o1XBZZ2vk
- hOEQ==
-X-Gm-Message-State: AOJu0YwWDolETEBzkEVrHATvakcMLjtnAbIoqRtqXojqQQfpiDslwHQw
- kmd5GxyR2AiQB8eO6YVRCtlJkzisiPbW/7HKuUnUAlcWZD3Z+Vn+J/2pC5YnJgtp0VIH9iNiYz5
- 3
-X-Gm-Gg: ASbGncsbGKNSJfP0kgw5e2B5jK2kzdK5Dc2r8jsi/3pcHEOnlMDn+FF+htUbHsWndZ2
- mvde4ljGXee2OEN9h5YndCRc0vwbSV9MFQHIH4q3ZaU/P3ETaSWc1pjKn3KmdE2zsV7h3+dwfJR
- 2DL4vk5mC8n5PAwHem3L4H6TTiUupvNkcHyCpefJyEu9h78/PIdtz+QgiHppB/B5t+ahmpLWoec
- zdPT8mLkLAz7ZtvErGA1sLqN4CTvixPJRbQpvRz81qddZAo3QnRIQg/1q50KUY1fU86vAyjFl8q
- wDs7knJMHK8t93cOgUrBltapsOXlkje7m5YxWhw0yHWeZ2fyozsZTKgNsQaoeETn/08lNlN7sYC
- R
-X-Google-Smtp-Source: AGHT+IFuAV8XT/qtzpuR1102oVXRQJo7FlNRX0N+pXb2XE8R1Jdcd65lKRIZqL1d9BDt1DM3YmyAbg==
-X-Received: by 2002:a05:6830:730a:b0:731:d1e5:7c5d with SMTP id
- 46e09a7af769-731da17a808mr268748a34.9.1746133150312; 
- Thu, 01 May 2025 13:59:10 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-731d34da29csm256306a34.42.2025.05.01.13.59.09
+ d=1e100.net; s=20230601; t=1746133317; x=1746738117;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nkdSKnNk4mLEQ87wo/HWrDeo+d9lCijbuhl6EcT7uZU=;
+ b=L5UdUepUxuAKgY1fWIrqoU44AKSXqNtq+vk1Lmqg7NSOiHsI7PqsvQnBj91c6zufus
+ Rw21soyhXsVQrgf6ruwQgorTp9M0Nx3he8ffpsurMrV7zAPfD65Ei+hXDWTwZyUzbPAD
+ rcGOhlvvcRA9Wf9UhKJrG1B9W1OFHqIhVAY2mZOJ0LID7F01pox0w8v8p8/OACkvxKXY
+ jVsH+SNDbwsT6gwtnwuNcHu/adJZs+Y0XBRiEsgihfjxtiFUSFmKT6KnaUAbOqEY+Rc7
+ 4FOeyouEn1ZFqUohxdab1voqZHD2CQajsT9T905nUAH3rQ22ul68kM+ugRaZl4D+jzqw
+ IptA==
+X-Gm-Message-State: AOJu0YzcSh8qPEdsgiHU9ETs0bTBUoXRm4f7rKcqANjRZbfsml67oYEG
+ cWmVrUliMrIM/vbxjV5Mo25w3A7lDyf3S1DOyZxyBt9PFHqq3gcwC9KaK8Fus2S1f/IYbrKqJ3U
+ =
+X-Gm-Gg: ASbGncs3giVrTZaMtF3X6rYhgrVW5djwKrRerpwPaHa/XwQfk1B6OAVS1/G3g+ue6JZ
+ QsfmqZgDYP8UWTaNe3P2IS19IEdLjxOvEzCNj73NuzdYpFGpZQX+6ViLsuR2pUW7fN+heAAP+8m
+ QUTRQ6VC8abknCwxTOarFP3ZfKl58MXYH9sOw6mKTNSZkxhR8attw2mW4brO84/Km3IKgR8P9di
+ TLZk4RDAdO/b/mJW5NXhAggr96P+c+ZHuZ0D5Itk4qmhoiB2Ogf/CwNEPPyPbZD/0TyBWIWrG+G
+ zsot7dbRrXPWMlsaPttzveLR7tIpAXYggmRMTw==
+X-Google-Smtp-Source: AGHT+IEcEjfAXW8fEiQo5+1CtnsnV/VCFrp3r9Avngu4tdHmimvFfs8RY2r+gFS8JkbrleSy0xQ7+g==
+X-Received: by 2002:a05:6830:1d44:b0:72b:aa94:6d26 with SMTP id
+ 46e09a7af769-731da1fb784mr181354a34.18.1746133316536; 
+ Thu, 01 May 2025 14:01:56 -0700 (PDT)
+Received: from chromium.org ([50.235.115.130])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-731d31cbc76sm253409a34.24.2025.05.01.14.01.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 13:59:10 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszThj=AEg3AMEQCLaAEnB7jU2OUSx8DWk-rqj2D5L_Aa49Q@mail.gmail.com>
-References: <CAFLszThj=AEg3AMEQCLaAEnB7jU2OUSx8DWk-rqj2D5L_Aa49Q@mail.gmail.com>
-Subject: Re: Please pull u-boot-dm
-Message-Id: <174613314971.2090677.14356696582764281290.b4-ty@konsulko.com>
-Date: Thu, 01 May 2025 14:59:09 -0600
+ Thu, 01 May 2025 14:01:55 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ William Zhang <william.zhang@broadcom.com>
+Subject: [PATCH] bloblist: Add maintainer
+Date: Thu,  1 May 2025 15:01:42 -0600
+Message-ID: <20250501210145.2011382-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,22 +98,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 01 May 2025 06:06:59 -0600, Simon Glass wrote:
+Add myself as maintainer of bloblist
 
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/2a61f40d4a9f7eacce67a80ce79f916996c4196d
-> 
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=75&view=results
-> 
-> 
-> The following changes since commit aa96cda0a58f4d181b81a897b0b9fea3d9729478:
-> 
->   clk: fix crash on clk_set_rate clean rate cache (2025-04-30 07:50:18 -0600)
-> 
-> [...]
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Merged into u-boot/master, thanks!
+ MAINTAINERS | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 1d7ef23f476..5005dd5951b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -936,6 +936,15 @@ F:	drivers/block/blkmap.c
+ F:	include/blkmap.h
+ F:	test/dm/blkmap.c
+ 
++BLOBLIST
++M:	Simon Glass <sjg@chromium.org>
++S:	Maintained
++F:	cmd/bloblist.c
++F:	common/bloblist.c
++F:	doc/develop/bloblist.rst
++F:	include/bloblist.h
++F:	test/common/bloblist.c
++
+ BOOTSTD
+ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
 -- 
-Tom
+2.43.0
 
-
+base-commit: 9b9647c89cbe785fd935f70e16d08cf9812b9fda
+branch: bloba
