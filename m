@@ -4,57 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4722C3ABA3
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 20:54:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D6E1C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 20:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C804C8070C;
-	Thu,  1 May 2025 22:54:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nathaniel.land
+	by phobos.denx.de (Postfix) with ESMTP id 82485809A5;
+	Thu,  1 May 2025 22:59:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nathaniel.land header.i=@nathaniel.land header.b="c+0Gybf/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oPW959Xh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFC278081A; Thu,  1 May 2025 22:54:41 +0200 (CEST)
-Received: from goldencat.email (host212.sub-63-47-114.myvzw.com
- [63.47.114.212])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EA3F280FDE; Thu,  1 May 2025 22:59:12 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6D238059D
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 22:54:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nathaniel.land
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=i@nathaniel.land
+ by phobos.denx.de (Postfix) with ESMTPS id BC3FB8070C
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 22:59:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-72c173211feso369273a34.1
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 13:59:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746133149; x=1746737949; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L87vfB8gKDJGxbK92+R7pvJQUu7jgyQ9HFU+e+sn3lE=;
+ b=oPW959Xh3u5nntzjL6HZKkTMS7J55u1/zW8DcC1zn3PkHP2WmkB7sB9fZ15GpY2BBw
+ qtQdy8hu9aRqUV6KBk9PquV+UUXCWJIBbe2yPwrKZv2pWyRcWfBHp/smGeZsiPoB1vlD
+ eDJmYz3hBNQO7jH0PBgfF+6kFhwujULJ+m4M4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746133149; x=1746737949;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L87vfB8gKDJGxbK92+R7pvJQUu7jgyQ9HFU+e+sn3lE=;
+ b=ud7LTtUU/qkrW8mf4SrWBFslZ4GZrunPEbXbIEwJ5PWwtqKNfB0sXXGreNJmIKb4tA
+ ViELlXJNkD8gtKwywdySuKbRRje8wr36ocVN7moz9QJnWu1NoPt8Lr1iT+xU+EkNAlaQ
+ IFhxKatD095su3YjU+Dg5/kIuMkz8Z6ncZ24CM/zv+w78S2Mm7KSXRpwBVguUUc2LN50
+ YHxz0c5ThPSzo6i9CzY4cVp7hFOZwrycCr/rfyIl1cE2P1N2Ig+RFIw6EfA19cyhxuAK
+ YU00NjCVcpUtyWB/G0xVd3KjisxArPtvCuMrXRLvBtU9+Jaa7pW0GOwYBJI9XoRWOwJB
+ yeKQ==
+X-Gm-Message-State: AOJu0Yxc8jaH84hdus+oqqBidLSW9kvV1ElcliWPqgg0G1n5t39Q03d4
+ jpoNMEF92KbqkSJbVJIx8VXXqt0raDYmaclTMa6zudpkBmci3b0qj7JsVEBIqD4=
+X-Gm-Gg: ASbGnctTa3qwtb4XuiovwNcOEuOoNsvgBVQMuD7cjm7hOVQsq7aGw8RmeSlcDJWWUJU
+ R2DVcc7cKze2U7lS2foCP4kZo8AOvj8ePDgLMWmRdYhvG4qNZ9A9lX23SI1zKOH2bv9kiu10Ie0
+ Ju0CwULvi5CNlqrs8+Ed3XuJ8zfGszPJk6wvlfAgwvNL1EJgp08XIrMi5lWJbtFDmk1r0smAnWT
+ 62tZ1XALuLDwee/PwKJwgPdJgkDfXeDksJtaoAks9eGE52wXVX8W2QRTzNToQKW5d77uUfr4V/5
+ L9V5Lxdrf8Ml05RXENgwvR1cnZDIJDMu7MDRTFFysQWkS3GBxPPISWWuaHm5QfGpu5gxLpS1DPs
+ M
+X-Google-Smtp-Source: AGHT+IHrhmc08Hg5PpHElENmf+Ms8QKRH/fhGQRKHD8zMd0nDJa+yBmxmv9bGNO+Qci1osCOmMCiWw==
+X-Received: by 2002:a05:6830:6115:b0:72b:9de0:891 with SMTP id
+ 46e09a7af769-731da1767c6mr260670a34.13.1746133149526; 
+ Thu, 01 May 2025 13:59:09 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-731d34da29csm256306a34.42.2025.05.01.13.59.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 May 2025 13:59:09 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ =?utf-8?q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>, 
+ Adriano Cordova <adriano.cordova@canonical.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <62949207-e59c-482b-b629-94a0e61c454d@gmx.de>
+References: <62949207-e59c-482b-b629-94a0e61c454d@gmx.de>
+Subject: Re: Pull request efi-2025-07-rc2
+Message-Id: <174613314844.2090677.17191857313630649541.b4-ty@konsulko.com>
+Date: Thu, 01 May 2025 14:59:08 -0600
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nathaniel.land;
- s=dkim; t=1746132875;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YpO8sX/jW8KE5mF4V5bPxFAJtxFM8o59DvoWFsZ314w=;
- b=c+0Gybf/2SbWU2HGBUPO45RXNTzeyI6XKASEbSThL/llOBCr1uKpvICD1ltKdtX0BR9dOD
- JeeYFmPS5xaUN5NcAtvvH8rUbEaSoclJqtn4u7L6I8vEJrxs4AjCIccbijXwpEQWF8h+Um
- mdfz7oZG6dH77AHEkNGegO7h4vuyuoorOVIF/mgZ2ADbSdPx86icWxpxlJujXE+KD3eVBm
- mhdJdYgEFZ8uExxvjb81D7GDVmW3OnUGum7Kg9T23oJk6UJB/9JgyVUUMq9fe5/6z7EVkx
- CxlNjFeLKTFJhTn9FWg4pIrtohNMgBmp8tBKkz9pZ6MFP4cs6yNUAikmgw+7Uw==
-Authentication-Results: goldencat.email;
- auth=pass smtp.mailfrom=i@nathaniel.land
-Date: Thu, 01 May 2025 15:54:34 -0500
-From: Nathaniel Hourt <i@nathaniel.land>
-To: Yao Zi <ziyao@disroot.org>
-Cc: UBML <u-boot@lists.denx.de>
-Subject: Re: Build for RISC-V with LLVM
-In-Reply-To: <aA2z6ImdniJZm7fq@pie.lan>
-References: <aAx9bjXivAAuth-y@pie>
- <EF1C62F4-2780-4DD4-B0FE-355AA66A10C4@getmailspring.com>
- <aA2z6ImdniJZm7fq@pie.lan>
-Message-ID: <cd30d0ef07796710523ac5d55bb67d0e@nathaniel.land>
-X-Sender: i@nathaniel.land
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: /
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,181 +99,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-04-26 23:34, Yao Zi wrote:
-> On Sat, Apr 26, 2025 at 06:25:50PM -0500, Nathaniel wrote:
->> On Apr 26 2025, at 1:30 am, Yao Zi <ziyao@disroot.org> wrote:
->> > On Fri, Apr 25, 2025 at 12:43:08PM -0500, Nathaniel Hourt wrote:
->> > > Hi, all
->> > >
->> > > I am trying to build u-boot and SPL for my Mars board (riscv, variant of the
->> > > starfive visionfive2) following the board-specific docs [1], using
->> > > LLVM/clang as my toolchain with the HOSTCC and CC make options mentioned in
->> > > [2]. I'm building from a RISC-V native chroot using qemu-binfmt so I am not
->> > > using the cross-compile options; thus my make invocation looks like `make
->> > > HOSTCC=clang CC=clang` (for OpenSBI, I just pass 'LLVM=1'). Note that the
->> > > chroot I'm building from does not contain gcc/binutils at all; LLVM is the
->> > > only toolchain present.
->> > >
->> > > The build usually succeeds, so I try to pass the SPL to the MaskROM over
->> > > UART (using the u-boot-spl.bin.normal.out image) and it just hangs. No
->> > > output, no response, and I have to reset the board. If I pass a working SPL
->> >
->> > Have you tried to apply this patch[1]? U-Boot support for JH7110 is
->> > broken at least in v2025.04 release afaik.
->> >
->> > Best regards,
->> > Yao Zi
->> >
->> > [1]: https://lore.kernel.org/all/20250330162421.238483-1-heinrich.schuchardt@canonical.com/
->> > > I downloaded, it logs some output then accepts a main u-boot payload over
->> > > UART, so if I send the main u-boot payload I built (u-boot.itb), I get a
->> > > "Load address misaligned" error as in [3].
->> > >
->> > > I attempted to configure my SPL to log to UART by turning on various logging
->> > > options in `menuconfig`, including the options recently mentioned by
->> > > Heinrich Schuchardt in [4], but I have been unsuccessful in getting any
->> > > output from the SPL I built.
->> > >
->> > > So I am looking for guidance. Is building with LLVM/clang (for riscv)
->> > > supported? I don't know what to try next.
->> > >
->> > > Thanks
->> > > —
->> > > Nathaniel
->> > >
->> > >
->> > > [1]
->> > > https://docs.u-boot.org/en/latest/board/starfive/milk-v_mars.html#milk-v-mars
->> > > [2] https://docs.u-boot.org/en/latest/build/clang.html
->> > > [3] https://pastebin.com/xwEcqEpz
->> > > [4] https://lists.denx.de/pipermail/u-boot/2025-April/586264.html
->> >
->> 
->> I just tried the patch, and also pulled latest master, which has that 
->> patch by now, but it didn't change the SPL's behavior.
->> I have heard that I need to be using v2025.01; however, that fails to 
->> build for me:
->> LD lib/efi_loader/boothart_efi.so
->> ld: error: section type mismatch for .dynamic
->> >>> <internal>:(.dynamic): SHT_DYNAMIC
->> >>> output section .text: SHT_PROGBITS
->> make[2]: *** [scripts/Makefile.lib:539: 
->> lib/efi_loader/boothart_efi.so] Error 1
->> make[1]: *** [scripts/Makefile.build:398: lib/efi_loader] Error 2
->> make: *** [Makefile:1915: lib] Error 2
-> 
-> I guess this series[1] (merged between v2025.01 and v2025.04) plays a
-> role here.
-> 
->> I don't understand that error; I'm guessing it's ELF wizardry thus far 
->> beyond my ken.
->> So master builds but doesn't run (at all? there's no output) and going 
->> off of [1], wouldn't we expect there to be some output from the SPL 
->> when it doesn't work for the known reasons?
->> v2025.01 doesn't build with my LLVM toolchain, and I'm wondering 
->> whether I'm getting actually sane images even when master builds 
->> successfully. I have no idea how to verify that... Does anyone know 
->> how to analyze the SPL image output, or even what format it's in? Or 
->> alternatively, is there a hello world SPL I can build just to test 
->> whether I can produce working binaries at all?
->> Or am I barking up the wrong tree altogether? Ideas welcome. =)
-> 
-> I could verify starfive_visionfive2 images built by Clang are broken on
-> current master branch: seems there's something wrong with Clang when
-> generating default configuration. Have you seen errors like
-> 
-> 	generated_defconfig:33:warning: unexpected data:  # 
-> CONFIG_OF_BOARD_FIXUP is not set
-> 	generated_defconfig:34:warning: unexpected data:  # 
-> CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> 	generated_defconfig:54:warning: unexpected data:  # 
-> CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> 	generated_defconfig:75:warning: unexpected data:  # CONFIG_CMD_BIND is 
-> not set
-> 	generated_defconfig:132:warning: unexpected data:  # CONFIG_RAM_SIFIVE 
-> is not set
-> 	generated_defconfig:150:warning: unexpected data:  # 
-> CONFIG_USB_CDNS3_TI is not set
-> 	generated_defconfig:153:warning: unexpected data:  # CONFIG_WATCHDOG 
-> is not set
-> 	generated_defconfig:154:warning: unexpected data:  # 
-> CONFIG_WATCHDOG_AUTOSTART is not set
-> 
-> when applying the default configuration? Seems Clang adds some extra
-> indentation in the preprocessor's output comparing to GCC, which 
-> Kconfig
-> doesn't allow. This breaks the configuration, making SPL unable to find
-> an appropriate space for stack to use.
-> 
-> With this problem fixed with a dirty patch, I've successfully booted
-> into U-Boot console with binutils LD. There're still some nasty "out of
-> memory" errors from EFI subsystem like
-> 
-> 	U-Boot 2025.04-01423-g8c9218d0e86c-dirty (Apr 27 2025 - 03:55:20 
-> +0000)
-> 
-> 	CPU:   sifive,u74-mc
-> 	Model: StarFive VisionFive 2 v1.3B
-> 	DRAM:  8 GiB
-> 	Core:  159 devices, 29 uclasses, devicetree: board
-> 	WDT:   Not starting watchdog@13070000
-> 	out of memory
-> 	ERROR: Out of memory
-> 	MMC:   mmc@16010000: 0, mmc@16020000: 1
-> 	Loading Environment from SPIFlash... SF: Detected gd25lq128 with page 
-> size 256 Bytes, erase size 4 KiB, total 16 MiB
-> 	*** Warning - bad CRC, using default environment
-> 
-> and images built by LLD are still broken. I'll send a fixing series
-> after figuring all of these issues out.
-> 
-> For now you could try the dirty fix and see whether console shows up,
-> 
-> diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
-> index 079add4d5da..ba30652f01a 100644
-> --- a/scripts/kconfig/Makefile
-> +++ b/scripts/kconfig/Makefile
-> @@ -94,6 +94,7 @@ endif
-> 
->  %_defconfig: $(obj)/conf
->         $(Q)$(CPP) -nostdinc -P -I $(srctree) -undef -x 
-> assembler-with-cpp $(srctree)/arch/$(SRCARCH)/configs/$@ -o 
-> generated_defconfig
-> +       $(Q)sed -i -e 's/^[[:space:]]//' generated_defconfig
->         $(Q)$< $(silent) --defconfig=generated_defconfig $(Kconfig)
-> 
->  # Added for U-Boot (backward compatibility)
-> 
-> (the diff format is likely to be broken as it's copied from output of
-> git diff output, thus cannot be applied directly)
-> 
->> —
->> Nathaniel
->> 
->> [1] 
->> https://lore.kernel.org/all/20250330162421.238483-1-heinrich.schuchardt@canonical.com/
-> 
-> Best regards,
-> Yao Zi
-> 
-> [1]: 
-> https://lore.kernel.org/u-boot/174364559512.1379294.15546160892706099529.b4-ty@konsulko.com/
+On Thu, 01 May 2025 18:16:18 +0200, Heinrich Schuchardt wrote:
 
-I don't recall ever seeing the config warnings, and my config has no 
-lines with leading spaces. I've gone ahead and patched my local clang to 
-eliminate the leading space issue anyways, since that seems the 
-appropriate place to resolve the issue.
+> This pull request fixes the "installing EFI_LOAD_FILE2_PROTOCOL failed"
+> issue.
+> 
 
-I've also applied your second patch [1] to eliminate the gd issue, and I 
-have Heinrich Schuchardt's pllclk patch as well.
+Merged into u-boot/master, thanks!
 
-I do not get any console this way — unfortunately there is still no 
-output from the SPL, but that is likely due to my use of LLD.
+-- 
+Tom
 
-Do you have any further information on the issue of linking with LLD? Is 
-anything more known about this problem yet?
 
-[1] https://lists.denx.de/pipermail/u-boot/2025-April/588038.html
-
-—
-Nathaniel
