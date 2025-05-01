@@ -4,94 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D01C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 15:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBC1C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 16:16:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79D0B8081A;
-	Thu,  1 May 2025 17:47:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 68F9D8081A;
+	Thu,  1 May 2025 18:16:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="WR9KiAp2";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="G08/6np8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 198D5809A5; Thu,  1 May 2025 17:47:02 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id B7BCD8081A; Thu,  1 May 2025 18:16:33 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58FC18070C
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 17:46:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 061A38070C
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 18:16:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adriano.cordova@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 45D083F13F
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:46:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746114416;
- bh=VQcmZOrCZ9xcBkrPpnDsKTMkkXFlrrOkCwYywkF9uYs=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=WR9KiAp2NBzda81Jrc+IgC35uGm4Cj1Ykrz3utFilfwKSHF7PhfWeImmyoyypzcfa
- Vsq6VFxoqJtKdc62WvlF2x7jrOqihHywDjXES77iVWsjhPHxZ2ahUSerMkh0v0FfGh
- KlUpyc3EI0NEXskUHjcJh3Vy7YV/0m/pQFZpE/RKClSBHp6Edka2LXNE1MGLaDi94/
- ixUdFhwoUacmJWdvmol7PVQEW48a87lbXA2scUv1i+THaDzlBMD1LRpK4yP/izSh4+
- Jm/NCALHmNHZGpnu2LXKNRrimdCZElGwN42lKwKEZy7UsrSvhdIJ1dZLySdIiYs5pQ
- zgkgLaXCgnO0Q==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-43cf327e9a2so7754565e9.3
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 08:46:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746114416; x=1746719216;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VQcmZOrCZ9xcBkrPpnDsKTMkkXFlrrOkCwYywkF9uYs=;
- b=bPdYVeD/AN8mMrLHNlynDUQqCobsavG3OT7SDNQ5pK9yKBMzlE+LRYN5CRu22qgT7E
- ifk9LMTrROJR4aTIKEHiQy9869TBxhJllZPQuSHTnhfzR9aTO8iqg+5Y2Yf+JAjJykor
- 30t6TJ3UHw+NZ3m83YzS7h1hZnpNm9zxaGISYrYrJ7NZXkSr5yZQ4EarQIsCRKBomyZB
- gYqZk/WOukQbCew/eJFgXiUsb43iH463uHeVHgDEtLCCtsQ82sbZgL1j5i0FncvUFzi9
- wJmTVz+a1Dd48iQom7VyfSmZ50D3KtK1Zw+X81xOpKymJBjT2W+XvSn69f8D1MRNK2sL
- pV9A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV70viOXGmMF6N+UihBEQJ/YDY/mx1ebns8FYBOnPV8s5dSBb4AijuRFqJYqGkjmzDn7+w/HEs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzNfmvbNgqnrGYzYlYfHm2Mwi3vBqsQFgLcXpJJojCbheQQxYKf
- hTo2/fkszKuJgV2fhyUqacn4A5yygqi+F0CsoIGc19xA5UKRxld2AEzt/FzIpGtUcFBm3f84wwP
- Nz/Z8nRW5kO5zif2fPxrxTJYQ2ytyw5r1DOa5zpxr02DUqX3gjdtJNJjrSCSnTwTADjrFJ/igUz
- DgkyYUsu4t6nrUadHs+v1fz8uNJnEnhjsPcUq12iS+6Q==
-X-Gm-Gg: ASbGncsLNHVEOAlI8ZztnHEL2bM9TGtEbSKKICgPBDqR5+FT//Aom7g2OxWERyNIxzw
- M6xpOXVbPmBNBBgsYxPbHfYO5T25K1W/HmEVXLjB7C8KTU3zNRLa6Xy7U21aB9tYCpGp8
-X-Received: by 2002:a05:600c:1e87:b0:43c:fa24:873e with SMTP id
- 5b1f17b1804b1-441b1f33b69mr68174945e9.13.1746114415753; 
- Thu, 01 May 2025 08:46:55 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH65uDL78DhTcwPNNV1L8XRmXaBMrSVwhkwE4FM6GIwAAqLjcCaA7vESBTBCsCsPCDtjBAsc6dSAJdZDX73PD8=
-X-Received: by 2002:a05:600c:1e87:b0:43c:fa24:873e with SMTP id
- 5b1f17b1804b1-441b1f33b69mr68174735e9.13.1746114415446; Thu, 01 May 2025
- 08:46:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1746116189; x=1746720989; i=xypron.glpk@gmx.de;
+ bh=N9NjBv/CepU5fRblVSFMF8Yx/+QHOdaytBv9MmgM4dM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=G08/6np8rDj0AIlYeXMKgCzxdQQES3jd5aYXNUBpvm8LJO/+ciQBJJsnW6nyDGwl
+ Jx5avr3WXYZ1F7/NmqMcKQDWqqCq8U4mB6jJEK4fbSaEVbhHVQ+Dg2fnMbu0vXDg4
+ 1muqKxBb/Bndk57ljjOFSUG97RQMmd/XaICWHchtn82ByFndKtI/ElonWMZv4v2RE
+ KNGXP8VFzbq+IEJs+6U/gJcC8MJ/t5Vwcbr+7PVV45OiCRDRMNVREjj3nUgIiQOZf
+ WhEn2UNyNSnkfMJOTp72fiFO8pUqoTdLK/WMFCazDpZMGRGR++IgdSzWNcnI0A+mm
+ oSxUmNnY0gnIay/pcQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMXQ5-1uSSfy0Rip-00L6qg; Thu, 01
+ May 2025 18:16:29 +0200
+Message-ID: <62949207-e59c-482b-b629-94a0e61c454d@gmx.de>
+Date: Thu, 1 May 2025 18:16:18 +0200
 MIME-Version: 1.0
-References: <20250501011514.2209452-1-adriano.cordova@canonical.com>
- <20250501011514.2209452-2-adriano.cordova@canonical.com>
- <4bbbb9dd-bbdb-4b57-9eb6-211e483915d5@gmx.de>
-In-Reply-To: <4bbbb9dd-bbdb-4b57-9eb6-211e483915d5@gmx.de>
-From: Adriano Cordova Fedeli <adriano.cordova@canonical.com>
-Date: Thu, 1 May 2025 11:47:35 -0400
-X-Gm-Features: ATxdqUFhH5p0YC4XTS3Zi2MB_i3V8vla_yMi_ByQmFOn5_oDbZjZt160e2K-BZk
-Message-ID: <CAFQa3MJQ=RvqMr0rFrV6y9MY8SMpV4sf_Uo3SnEEWbLzaqiweA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] efi_loader: bootbin: split initrd registration and
- installation
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Adriano Cordova <adrianox@gmail.com>, ilias.apalodimas@linaro.org,
- sjg@chromium.org, 
- trini@konsulko.com, o451686892@gmail.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>,
+ Adriano Cordova <adriano.cordova@canonical.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-2025-07-rc2
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Provags-ID: V03:K1:8ezXPLUfd77sKTLSoXwwZaq/TfVFhwL5ZfmkwSbxivOP3VI0yMH
+ tLRSGQjH3QxyKz1106v1Yx3fL6BmlHVHMol7O6/Bn1MACSMPfSq3QRldVqEnmZpo/S/I02z
+ AgUG4CcU6U/JmBI274DelbLbE++FQfEI9E7FObRMonhPGJ1nlcQoRTxRtXnW+t5+7d3jtnH
+ mYfMDTN4zBwTwIvZzDGfQ==
+UI-OutboundReport: notjunk:1;M01:P0:ZY7W0oA0BkU=;GIqefdiw2xn4pgsV6CTTk7tj1iM
+ 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
+ g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,394 +121,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Dear Tom,
 
-Calling efi_initrd_register to both save the initrd device path and install
-the initrd LF2 protocol complicates error handling. efi_bootmgr also calls
-efi_initrd_register, but many functions are called between that and
-do_bootefi_exec. If any fail, we should uninstall the protocol. The same
-issue exists in efi_bootbin.
+This pull request fixes the "installing EFI_LOAD_FILE2_PROTOCOL failed"=20
+issue.
 
-Delaying efi_initrd_register would require passing the initrd down the call
-chain, e.g. to efi_run_image in efi_bootbin and passing it from
-try_load_entry in efi_bootmgr. I think this should be avoided.
+=2D--
 
-Instead, we can install the protocol in do_bootefi_exec=E2=80=94a shared po=
-int of
-efi_bootmgr and efi_bootbin=E2=80=94and set the initrd device paths early, =
-avoiding
-the need to pass them. efi_initrd_dp could even be set once in
-try_load_entry using BootCurrent, instead of retrieving the initrd each tim=
-e
-the LF2 protocol is used.
+@Anshul,
 
-Best,
-Adriano
+I had to rebase your series because one line which you tried to change=20
+from ..code-block:: to ..prompt:: did not exist. Please, check after the=
+=20
+merge.
 
-On Thu, 1 May 2025 at 03:15, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote=
-:
+=2D--
 
-> On 5/1/25 03:15, Adriano Cordova wrote:
-> > Current support for initrd in EFI booting has two flaws:
-> >
-> > 1. Installs a NULL initrd via LoadFile2 protocol if `efi_binary_run_dp`
-> does
-> >     not provide an initrd. In this case, a LoadFile2 should not be
-> installed
-> >     at all.
-> > 2. Initrd is not properly uninstalled if booting fails at some point
-> between
-> >     initrd installation and the call to `do_bootefi_exec`. This affects
-> both
-> >     booting via `efi_bootbin` and via `efi_bootmgr`.
-> >
-> > This commit splits the process of setting an initrd into two steps:
-> >
-> > First, `efi_initrd_set_from_mem` creates a memory-backed device path fo=
-r
-> the
-> > initrd. (This step is not necessary when using `efi_bootmgr`, and for
-> now is
-> > only used when booting FIT images, but the `bootefi` command could now =
-be
-> > expanded to receive an initrd argument.)
-> >
-> > Second, `efi_initrd_install` creates an initrd handle and installs the
-> > LoadFile2 protocol exposing the initrd. This is needed both when bootin=
-g
-> with
-> > `efi_bootbin` and with `efi_bootmgr`, so it is called in
-> `do_bootefi_exec`,
-> > which is the first common point between the two bootflows.
-> >
-> > Also, as `do_bootefi_exec` is the only place where `efi_initrd_install`
-> is
-> > called, the cleanup function `efi_initrd_uninstall` can be called befor=
-e
-> > exiting `do_bootefi_exec` instead of using the event
-> > `efi_guid_event_group_return_to_efibootmgr`. (This also makes more sens=
-e
-> as
-> > now initrd is also used by `efi_bootbin`.)
-> >
-> > Fixes: 36835a9105c ("efi_loader: binary_run: register an initrd")
-> > Reported-by: Weizhao Ouyang <o451686892@gmail.com>
-> > Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > ---
-> >   include/efi_loader.h             |  8 ++-
-> >   lib/efi_loader/efi_bootbin.c     | 14 +++---
-> >   lib/efi_loader/efi_bootmgr.c     |  7 ---
-> >   lib/efi_loader/efi_helper.c      | 11 +++++
-> >   lib/efi_loader/efi_load_initrd.c | 84 +++++++++++++++++--------------=
--
-> >   5 files changed, 68 insertions(+), 56 deletions(-)
-> >
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index 144b749278a..0a3ca799287 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -597,6 +597,12 @@ efi_status_t efi_env_set_load_options(efi_handle_t
-> handle, const char *env_var,
-> >   void *efi_get_configuration_table(const efi_guid_t *guid);
-> >   /* Install device tree */
-> >   efi_status_t efi_install_fdt(void *fdt);
-> > +/* Install initrd LoadFile2 protocol */
-> > +efi_status_t efi_initrd_install(void);
-> > +/* Uninstall initrd LoadFile2 protocol */
-> > +efi_status_t efi_initrd_uninstall(void);
-> > +/* Set an initrd */
-> > +efi_status_t efi_initrd_set_from_mem(void *initrd, size_t initd_sz);
-> >   /* Execute loaded UEFI image */
-> >   efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)=
-;
-> >   /* Run loaded UEFI image with given fdt */
-> > @@ -667,8 +673,6 @@ efi_status_t efi_http_register(const efi_handle_t
-> handle,
-> >                              struct efi_service_binding_protocol
-> *http_service_binding);
-> >   /* Called by bootefi to make the watchdog available */
-> >   efi_status_t efi_watchdog_register(void);
-> > -efi_status_t efi_initrd_register(struct efi_device_path *dp_initrd);
-> > -efi_status_t efi_initrd_deregister(void);
-> >   /* Called by bootefi to make SMBIOS tables available */
-> >   /**
-> >    * efi_acpi_register() - write out ACPI tables
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.=
-c
-> > index d0f7da309ce..637f2c0d195 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -220,7 +220,6 @@ static efi_status_t efi_binary_run_dp(void *image,
-> size_t size, void *fdt,
-> >                                     struct efi_device_path *dp_img)
-> >   {
-> >       efi_status_t ret;
-> > -     struct efi_device_path *dp_initrd;
-> >
-> >       /* Initialize EFI drivers */
-> >       ret =3D efi_init_obj_list();
-> > @@ -234,13 +233,12 @@ static efi_status_t efi_binary_run_dp(void *image=
-,
-> size_t size, void *fdt,
-> >       if (ret !=3D EFI_SUCCESS)
-> >               return ret;
-> >
-> > -     dp_initrd =3D efi_dp_from_mem(EFI_LOADER_DATA, (uintptr_t)initrd,
-> initd_sz);
-> > -     if (!dp_initrd)
-> > -             return EFI_OUT_OF_RESOURCES;
-> > -
-> > -     ret =3D efi_initrd_register(dp_initrd);
-> > -     if (ret !=3D EFI_SUCCESS)
-> > -             return ret;
-> > +     /* Set initrd if provided */
-> > +     if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> > +             ret =3D efi_initrd_set_from_mem(initrd, initd_sz);
-> > +             if (ret !=3D EFI_SUCCESS)
-> > +                     return ret;
-> > +     }
-> >
-> >       return efi_run_image(image, size, dp_dev, dp_img);
-> >   }
-> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.=
-c
-> > index c0df5cb9acd..19c7e16a25b 100644
-> > --- a/lib/efi_loader/efi_bootmgr.c
-> > +++ b/lib/efi_loader/efi_bootmgr.c
-> > @@ -683,13 +683,6 @@ static efi_status_t try_load_entry(u16 n,
-> efi_handle_t *handle,
-> >       if (ret !=3D EFI_SUCCESS)
-> >               goto error;
-> >
-> > -     /* try to register load file2 for initrd's */
-> > -     if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> > -             ret =3D efi_initrd_register(NULL);
-> > -             if (ret !=3D EFI_SUCCESS)
-> > -                     goto error;
-> > -     }
-> > -
-> >       log_info("Booting: Label: %ls Device path: %pD\n", lo.label,
-> lo.file_path);
-> >
-> >       /* Ignore the optional data in auto-generated boot options */
-> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> > index 3936139ca41..b4c207ea33f 100644
-> > --- a/lib/efi_loader/efi_helper.c
-> > +++ b/lib/efi_loader/efi_helper.c
-> > @@ -658,6 +658,13 @@ efi_status_t do_bootefi_exec(efi_handle_t handle,
-> void *load_options)
-> >               goto out;
-> >       }
-> >
-> > +     /* Create initrd handle and install LoadFile2 protocol */
-> > +     if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> > +             ret =3D efi_initrd_install();
-> > +             if (ret !=3D EFI_SUCCESS)
-> > +                     goto out;
-> > +     }
-> > +
-> >       /* Call our payload! */
-> >       ret =3D EFI_CALL(efi_start_image(handle, &exit_data_size,
-> &exit_data));
-> >       if (ret !=3D EFI_SUCCESS) {
-> > @@ -683,6 +690,10 @@ out:
-> >               }
-> >       }
-> >
-> > +     /* Destroy initrd handle with LoadFile2 protocol */
-> > +     if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD))
-> > +             ret =3D efi_initrd_uninstall();
-> > +
-> >       /* Control is returned to U-Boot, disable EFI watchdog */
-> >       efi_set_watchdog(0);
-> >
-> > diff --git a/lib/efi_loader/efi_load_initrd.c
-> b/lib/efi_loader/efi_load_initrd.c
-> > index b5d58943a80..7210bf16d09 100644
-> > --- a/lib/efi_loader/efi_load_initrd.c
-> > +++ b/lib/efi_loader/efi_load_initrd.c
-> > @@ -74,7 +74,40 @@ static efi_status_t get_initrd_fp(struct
-> efi_device_path **initrd_fp)
-> >   }
-> >
-> >   /**
-> > - * efi_initrd_from_mem() - load initial RAM disk from memory
-> > + * efi_initrd_set_from_mem() - set initial RAM disk from memory
-> > + *
-> > + * Set efi_initrd_dp to a memory mapped device path pointing
-> > + * to @initrd. If @initrd is NULL then efi_initrd_dp gets cleared.
-> > + *
-> > + *
-> > + * @initrd:    address of initrd or NULL if none is provided
-> > + * @initrd_sz: size of initrd
-> > + * Return:     status code
-> > + */
-> > +efi_status_t efi_initrd_set_from_mem(void *initrd, size_t initd_sz)
-> > +{
-> > +     struct efi_device_path *old_initrd_dp;
-> > +
-> > +     old_initrd_dp =3D efi_initrd_dp;
->
-> In efi_initrd_uninstall() we free the device-path and set efi_initrd_dp
-> =3D NULL.
-> It seems you are handling the case of efi_initrd_install() failing here.
->
-> To me this looks a bit convoluted. Calling efi_initrd_register() as in
-> your v3 series would allow handling errors when they occur.
->
-> The static variable efi_initrd_dp should receive some documentation in
-> the code explaining how it is used. This could be in a separate patch.
->
-> I will merge your v3 series as it fixes the case of no initrd.
->
-> We can handle the uninstallation of the LoadFile2 protocol in a patch on
-> top of that.
->
-> Best regards
->
-> Heinrich
->
-> > +
-> > +     if (!initrd) {
-> > +             efi_initrd_dp =3D NULL;
-> > +             goto out;
-> > +     }
-> > +
-> > +     efi_initrd_dp =3D efi_dp_from_mem(EFI_LOADER_DATA,
-> (uintptr_t)initrd, initd_sz);
-> > +     if (!efi_initrd_dp) {
-> > +             efi_initrd_dp =3D old_initrd_dp;
-> > +             return EFI_OUT_OF_RESOURCES;
-> > +     }
-> > +
-> > +out:
-> > +     efi_free_pool(old_initrd_dp);
-> > +     return EFI_SUCCESS;
-> > +}
-> > +
-> > +/**
-> > + * efi_initrd_get_from_mem() - get initial RAM disk from memory
-> >    *
-> >    * This function copies the initrd from the memory mapped device
-> >    * path pointed to by efi_initrd_dp
-> > @@ -84,7 +117,7 @@ static efi_status_t get_initrd_fp(struct
-> efi_device_path **initrd_fp)
-> >    *
-> >    * Return:                  status code
-> >    */
-> > -static efi_status_t efi_initrd_from_mem(efi_uintn_t *buffer_size, void
-> *buffer)
-> > +static efi_status_t efi_initrd_get_from_mem(efi_uintn_t *buffer_size,
-> void *buffer)
-> >   {
-> >       efi_status_t ret =3D EFI_NOT_FOUND;
-> >       efi_uintn_t bs;
-> > @@ -155,7 +188,7 @@ efi_load_file2_initrd(struct efi_load_file_protocol
-> *this,
-> >       }
-> >
-> >       if (efi_initrd_dp)
-> > -             return EFI_EXIT(efi_initrd_from_mem(buffer_size, buffer))=
-;
-> > +             return EFI_EXIT(efi_initrd_get_from_mem(buffer_size,
-> buffer));
-> >
-> >       ret =3D get_initrd_fp(&initrd_fp);
-> >       if (ret !=3D EFI_SUCCESS)
-> > @@ -224,14 +257,14 @@ out:
-> >   }
-> >
-> >   /**
-> > - * efi_initrd_deregister() - delete the handle for loading initial RAM
-> disk
-> > + * efi_initrd_uninstall() - delete the handle for loading initial RAM
-> disk
-> >    *
-> >    * This will delete the handle containing the Linux specific vendor
-> device
-> > - * path and EFI_LOAD_FILE2_PROTOCOL for loading an initrd
-> > + * path and the installed EFI_LOAD_FILE2_PROTOCOL for loading an initr=
-d
-> >    *
-> >    * Return:  status code
-> >    */
-> > -efi_status_t efi_initrd_deregister(void)
-> > +efi_status_t efi_initrd_uninstall(void)
-> >   {
-> >       efi_status_t ret;
-> >
-> > @@ -255,42 +288,22 @@ efi_status_t efi_initrd_deregister(void)
-> >   }
-> >
-> >   /**
-> > - * efi_initrd_return_notify() - return to efibootmgr callback
-> > - *
-> > - * @event:   the event for which this notification function is
-> registered
-> > - * @context: event context
-> > - */
-> > -static void EFIAPI efi_initrd_return_notify(struct efi_event *event,
-> > -                                               void *context)
-> > -{
-> > -     efi_status_t ret;
-> > -
-> > -     EFI_ENTRY("%p, %p", event, context);
-> > -     ret =3D efi_initrd_deregister();
-> > -     EFI_EXIT(ret);
-> > -}
-> > -
-> > -/**
-> > - * efi_initrd_register() - create handle for loading initial RAM disk
-> > + * efi_initrd_install() - create handle for loading initial RAM disk
-> >    *
-> >    * This function creates a new handle and installs a Linux specific
-> vendor
-> >    * device path and an EFI_LOAD_FILE2_PROTOCOL. Linux uses the device
-> path
-> >    * to identify the handle and then calls the LoadFile service of the
-> > - * EFI_LOAD_FILE2_PROTOCOL to read the initial RAM disk. If dp_initrd =
-is
-> > - * not provided, the initrd will be taken from the BootCurrent variabl=
-e
-> > - *
-> > - * @dp_initrd:       optional device path containing an initrd
-> > + * EFI_LOAD_FILE2_PROTOCOL to read the initial RAM disk. If
-> efi_initrd_dp
-> > + * is not set the initrd will be taken from the BootCurrent variable. =
-If
-> > + * an initrd is not found the handle is not created.
-> >    *
-> >    * Return:  status code
-> >    */
-> > -efi_status_t efi_initrd_register(struct efi_device_path *dp_initrd)
-> > +efi_status_t efi_initrd_install(void)
-> >   {
-> >       efi_status_t ret;
-> > -     struct efi_event *event;
-> >
-> > -     if (dp_initrd) {
-> > -             efi_initrd_dp =3D dp_initrd;
-> > -     } else {
-> > +     if (!efi_initrd_dp) {
-> >               /*
-> >               * Allow the user to continue if Boot#### file path is not
-> set for
-> >               * an initrd
-> > @@ -314,12 +327,5 @@ efi_status_t efi_initrd_register(struct
-> efi_device_path *dp_initrd)
-> >               return ret;
-> >       }
-> >
-> > -     ret =3D efi_create_event(EVT_NOTIFY_SIGNAL, TPL_CALLBACK,
-> > -                            efi_initrd_return_notify, NULL,
-> > -                            &efi_guid_event_group_return_to_efibootmgr=
-,
-> > -                            &event);
-> > -     if (ret !=3D EFI_SUCCESS)
-> > -             log_err("Creating event failed\n");
-> > -
-> >       return ret;
-> >   }
->
->
+The following changes since commit aa96cda0a58f4d181b81a897b0b9fea3d972947=
+8:
+
+   clk: fix crash on clk_set_rate clean rate cache (2025-04-30 07:50:18=20
+-0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
+tags/efi-2025-07-rc2
+
+for you to fetch changes up to c0546426724099d94a497ea11ad79862daf37767:
+
+   boot: let BOOTSTAGE_RECORD_COUNT default to 50 (2025-05-01 09:24:56=20
++0200)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/26025
+
+=2D---------------------------------------------------------------
+Pull request efi-2025-07-rc2
+
+Documentation:
+
+* ti: update bash code-block directives to prompt
+* ti: k3: add language for code-block directive
+* correct uthread inline documentation
+
+UEFI:
+
+* correctly handle EFI FIT images without initrd
+* pass kernel load address not entry point for EFI FIT images
+
+Other:
+
+* boot:let BOOTSTAGE_RECORD_COUNT default to 50
+
+=2D---------------------------------------------------------------
+Adriano Cordova (2):
+       efi_loader: bootbin: do not load an initrd if none is provided
+       efi_loader: fix typo initd_sz to initrd_sz
+
+Anshul Dalal (2):
+       doc: ti: update bash code-block directives to prompt
+       doc: ti: k3: add language for code-block directive
+
+Heinrich Schuchardt (2):
+       bootm: pass kernel load address not entry point for IH_OS_EFI
+       boot: let BOOTSTAGE_RECORD_COUNT default to 50
+
+Jerome Forissier (1):
+       uthread: doc: fix inline documentation
+
+  boot/Kconfig                 |  2 +-
+  boot/bootm_os.c              |  4 ++--
+  doc/board/ti/am62ax_sk.rst   | 20 ++++++++++----------
+  doc/board/ti/am62px_sk.rst   | 18 +++++++++---------
+  doc/board/ti/j722s_evm.rst   | 12 ++++++------
+  doc/board/ti/j784s4_evm.rst  | 16 ++++++++--------
+  doc/board/ti/k3.rst          | 10 +++++-----
+  include/efi_loader.h         |  2 ++
+  include/uthread.h            |  9 +++++++--
+  lib/efi_loader/efi_bootbin.c |  9 ++-------
+  lib/efi_loader/efi_helper.c  | 29 +++++++++++++++++++++++++++++
+  11 files changed, 81 insertions(+), 50 deletions(-)
