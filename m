@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 426BAC369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:19:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8DB3C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:37:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE3F681E72;
-	Thu,  1 May 2025 15:19:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 081618070C;
+	Thu,  1 May 2025 15:37:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oDhOtjah";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vnx1zuUD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4144682132; Thu,  1 May 2025 15:19:30 +0200 (CEST)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id B6BAA80BAD; Thu,  1 May 2025 15:37:35 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A32F48081A
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:19:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AF848059D
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-3d940c7ea71so5100275ab.0
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:19:27 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-85e751cffbeso88402639f.0
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:37:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746105566; x=1746710366; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D/oR+INf4tSmOojvhWbP8HGeThVtW8jkLXEGSBI7pxs=;
- b=oDhOtjahH138ASYV8S1TInZOUt04VmoiJkTRKGMNQtk1/pXbzVTlFmYVH2Ym97lTzn
- cpj8PPkDwfiLTKQ/IEfNe7lBuoFStO91hlHIilkg1IAo9mNq4+woPBs95qGbtFpR4o+x
- 87W2ehnpxvSOz1HJqyQ9e/Jn6fCVnaqyI8OiA=
+ d=chromium.org; s=google; t=1746106651; x=1746711451; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TIuBQP084TPo0ax1HZZQPEbIKSqzOZKKITS8u8uU8kE=;
+ b=Vnx1zuUDQMXDs/0iEerXlyZJr1ebhW2YcExu0c8zvjCx1FHbaJTPEt3Z05UmQWjzbz
+ CTniMupXE857i4xrRveiQ7jU6/ecbI1tqI8rtecI0lhVeUstPdH881p4KaYSr4ggOSLu
+ ye3YHpAqRsnf5EwzY0YyLZNODIiYXqD7+gSoE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746105566; x=1746710366;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=D/oR+INf4tSmOojvhWbP8HGeThVtW8jkLXEGSBI7pxs=;
- b=Aj7/XsE9y1hztF70/ChVpc6Wktgk7J991MKJfLpI1RlRtRI63OOjCBRb66nqn8FJDa
- Ws1B8A8mNklRvpW2ffgvmBXCCzp55yGIEeDPMv/Y7PHUyI/2Pu0agsnWgVBO0R8wSbKV
- GCRiPzWL/jLhf4jKVDaEOOzMYYokORGOJyyDbsn+qCNO0S7PEUZGRteuCGkjB88mzPAA
- 4KsZZMPwEUbixvydgsEpO6b07BHvsgdsysPU1Kv/s8WUEKU1Bt+EglYTas52D8IFPpy1
- r+xc2CeArm8599rhnwotKECabZLI+FI+3sjkp6AH0gxiNMs2b29jk7iY3mSAFn+vmAAo
- Fg5A==
-X-Gm-Message-State: AOJu0YydtRGjPcmIg52MX2oi5bYwUZAIw2eAcv6IWk0Tmp3z7Ua7vO3Q
- lp6MI0Ly2usIisD6ny8iR6xMTJWnt+8QJKALv9RjUqUYN/B0kElWXBZd50LUhIv6GAUiT/3Pde8
+ d=1e100.net; s=20230601; t=1746106651; x=1746711451;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TIuBQP084TPo0ax1HZZQPEbIKSqzOZKKITS8u8uU8kE=;
+ b=lfsiAhb6a3CIahypUo6navs3BVEk6/BR/Wd7Hi+2X+cp62NrF8EZc2pUD5xJ13R+8s
+ 1H01J8TlXDTTh94o8iIjiSBbMzqdracDGg0KsMEWohuBaS2wvKZcjZ+d6NYt5on5FKch
+ 19PUJSw20Urt4vdL5Xt6ygLshuXmSoYnPNHD8yVRwWy8s+uKhGuia0d/kEjWBK/NfB3z
+ pWUcBrCwrLGH439zGJSF1TWEHL1rdb8GPQhbPWMsR1Devu7/7fF7Jalhg6vZ29Hbk5gw
+ tSFp0kotlFPATOuM7Gb1Icuxc4qn/pU8+1q5UapyQRJlZlfbxB59UH9tGMpyF6xJBeR5
+ kPTw==
+X-Gm-Message-State: AOJu0YybyqRWJ3JlLIcea1QnTsq/B3h0fA/TAlM1KvfwXrqXcE1svxqT
+ MsuOKIoY6HiZpHs6QGom8dlIAOlA3f2nz+1ebuGY++lJMX7wWqT8UJriFhlTZkHyK/ElFa1hlUY
  =
-X-Gm-Gg: ASbGncsvc0IiBNTzVejMsA3LJ0aHeCgocXKWjgqaSWGWko8RrJrEMfLESm/LhCcQQYR
- aIpoXiRrigcN9uhcEJ8bgIJyX2DdKIYwUglt8IplRn+/LttllyYeDdy4XyjI16rs0oBwCcHhvy0
- 3KtWGDJT6XMqe8op/Vh4n7dtDTvXtTuBlwB8l+XEuIw+AJgng3rMwY/1+J1M5PteDwOq6YfESbR
- ca+vAsyAAkzNJfEeC4miVYPDXeo/tU3qzBuObxUGuL2QdBjuGSCNYGr4Ojypvtd7pQl/qeCWl+A
- sUIsGmnxowHp01GsTUsWKuJDivMf2uuFYR3y2IcLVePNI96lbfZXOG0mIIPFld7m511o9V3ObRi
- ucA==
-X-Google-Smtp-Source: AGHT+IHOt6rJnqgFunQOtx/uMrEnv2FPNaCUAxGDglAazhyNSJRKwpAn5iUHfLPNCeJVjKqKT8TbIQ==
-X-Received: by 2002:a92:ca49:0:b0:3d8:1a41:69a9 with SMTP id
- e9e14a558f8ab-3d967fc2052mr80400205ab.12.1746105565723; 
- Thu, 01 May 2025 06:19:25 -0700 (PDT)
+X-Gm-Gg: ASbGncsPmSKft0A8Rno1YH53aOhcFlLce9CIKJ4mOgcFCHKe+pRcirpapwY9fjO6yf/
+ t/hSflQ1+X7F6uFP6G7UEVD8K6fXXD+4696nWTN8UPl+3UJpicm16+J0yMGjvU9Hv9AjONA1l0W
+ PTr0RyENeoc48ROhKYeVFGc9XrVUPfJ1jMLELL3ptcByGvrle0AVrBtm5ulEMmQjaCG2DNsd+XY
+ easwgFZebF6MQdS9auHSkAsF4VQVyQQQHbozX7A2uHlGRU2Tw+CSy2ih4YDhdZ9ABC4/1mPxsEy
+ V2mgqcdRIGnlLngJyLRbZlIflpIL2Zaq35StWN0Qib2fb6FLUcNopX/LZLeI/k2zepxuDosv9C7
+ GvHuHmSORnTjv
+X-Google-Smtp-Source: AGHT+IEkOjIlYZFSQyuze39UkhE031iBAEQdJv3pUAYOKNWNLXXkdvTlf8fNgq4uRvRWQr4cqq0fpw==
+X-Received: by 2002:a05:6602:381b:b0:864:4a1b:dfc5 with SMTP id
+ ca18e2360f4ac-86498032053mr794154439f.9.1746106651539; 
+ Thu, 01 May 2025 06:37:31 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f882fc9c2esm160328173.93.2025.05.01.06.19.24
+ 8926c6da1cb9f-4f88303bb9esm165385173.136.2025.05.01.06.37.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 06:19:25 -0700 (PDT)
+ Thu, 01 May 2025 06:37:30 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Matthew Garrett <mgarrett@aurora.tech>,
+Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 3/3] booti: Allow using 10x the uncompressed size with booti
-Date: Thu,  1 May 2025 07:18:35 -0600
-Message-ID: <20250501131858.2160756-4-sjg@chromium.org>
+ Rasmus Villemoes <ravi@prevas.dk>, Richard Weinberger <richard@nod.at>,
+ Roger Knecht <rknecht@pm.me>, Stefan Roese <sr@denx.de>,
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 00/18] bootstd: Useability improvements
+Date: Thu,  1 May 2025 07:37:00 -0600
+Message-ID: <20250501133726.2627373-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250501131858.2160756-1-sjg@chromium.org>
-References: <20250501131858.2160756-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,117 +112,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The booti command does not use the CONFIG_SYS_BOOTM_LEN value and
-instead sets a maximum decompression-buffer size of 10x the size of the
-compressed data.
+This series collects together some bootstd improvements:
 
-Add this as an option in bootm_load_os() so that booting without the
-command-line works in the same way as the 'booti' command.
+- Improve iteration when there are a lot of devices
+- Add a test image for Ubuntu (to compliment Fedora)
+- Improve the naming of USB devices and bootdevs
+- Add a new command to set the bootdev order
+- Add a little more debugging
+- Use an abuf when dealing with allocate files
+- A few other minor things in bootstd
 
-Link: https://lore.kernel.org/u-boot/2ad3b1c5-b6e7-47e2-b225-834b821cc5c4@kwiboo.se/
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reported-by: Jonas Karlman <jonas@kwiboo.se>
-Fixes: b13408021d3 ("boot: pxe: Use bootm_...() functions where possible")
----
+Most of these issues were found when adding the new test image and more
+USB devices to sandbox.
 
 Changes in v2:
-- Change the commit subject so it doesn't mention ignoring SYS_BOOTM_LEN
+- Add new patch with a helper for initing and allocating a buffer
+- Update to use abuf_init_size()
+- Update commit message to make it clear this is not actually an image
+- Drop use of LOGR()
+- Rebase on top of recent FS changes
 
- boot/bootm.c    | 13 +++++++++----
- cmd/booti.c     |  1 +
- include/bootm.h |  3 +++
- 3 files changed, 13 insertions(+), 4 deletions(-)
+Simon Glass (18):
+  abuf: Add a helper for initing and allocating a buffer
+  fs: boot: Update fs_read_alloc() to use abuf
+  fs: boot: Update fs_load_alloc() to use abuf
+  fs: boot: Update bootmeth_alloc_other() to use abuf
+  bootstd: Add more debugging to bootmeth_efi
+  bootstd: Add more debugging to bootmeth_extlinux
+  bootstd: Try all bootmeths on the final partition
+  bootstd: Fully complete iteration of a uclass
+  test/py: Split out core of Fedora image into a new function
+  test/py: Add an extlinux file similar to Ubuntu
+  usb: Use more useful names for block devices
+  sandbox: Use a unique name for each USB controller
+  bootstd: Tweak scanning with labels
+  bootstd: Tidy up a nested CONFIG_IS_ENABLED(BOOTSTD)
+  bootstd: Provide a command to select the bootdev order
+  bootstd: Correct the comment for bootmeth_set_order()
+  bootstd: Expand debugging in bootdev_find_in_blk()
+  bootstd: Mention FS state in bootmeth_read_bootflow()
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 7be5ec796fc..dae09060f0f 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -669,8 +669,9 @@ static bool booti_is_supported(struct image_info *os)
- 	return os->arch == IH_ARCH_ARM64 || os->arch == IH_ARCH_RISCV;
- }
- 
--static int bootm_load_os(struct bootm_headers *images, int boot_progress)
-+static int bootm_load_os(struct bootm_info *bmi, int boot_progress)
- {
-+	struct bootm_headers *images = bmi->images;
- 	struct image_info os = images->os;
- 	ulong load = os.load;
- 	ulong load_end;
-@@ -681,6 +682,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 	ulong flush_start = ALIGN_DOWN(load, ARCH_DMA_MINALIGN);
- 	bool no_overlap;
- 	void *load_buf, *image_buf;
-+	ulong decomp_len;
- 	int err;
- 
- 	/*
-@@ -706,11 +708,12 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 
- 	load_buf = map_sysmem(load, 0);
- 	image_buf = map_sysmem(os.image_start, image_len);
-+	decomp_len = bmi->ignore_bootm_len ? image_len * 10 : bootm_len();
- 	err = image_decomp(os.comp, load, os.image_start, os.type,
--			   load_buf, image_buf, image_len, bootm_len(),
-+			   load_buf, image_buf, image_len, decomp_len,
- 			   &load_end);
- 	if (err) {
--		err = handle_decomp_error(os.comp, load_end - load, bootm_len(),
-+		err = handle_decomp_error(os.comp, load_end - load, decomp_len,
- 					  err);
- 		bootstage_error(BOOTSTAGE_ID_DECOMP_IMAGE);
- 		return err;
-@@ -1073,7 +1076,7 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 	if (!ret && (states & BOOTM_STATE_LOADOS)) {
- 		iflag = bootm_disable_interrupts();
- 		board_fixup_os(&images->os);
--		ret = bootm_load_os(images, 0);
-+		ret = bootm_load_os(bmi, 0);
- 		if (ret && ret != BOOTM_ERR_OVERLAP)
- 			goto err;
- 		else if (ret == BOOTM_ERR_OVERLAP)
-@@ -1237,6 +1240,8 @@ int bootz_run(struct bootm_info *bmi)
- 
- int booti_run(struct bootm_info *bmi)
- {
-+	bmi->ignore_bootm_len = true;
-+
- 	return boot_run(bmi, "booti", BOOTM_STATE_START | BOOTM_STATE_FINDOS |
- 			BOOTM_STATE_PRE_LOAD | BOOTM_STATE_FINDOTHER |
- 			BOOTM_STATE_LOADOS);
-diff --git a/cmd/booti.c b/cmd/booti.c
-index 43e79e87201..f4f782da056 100644
---- a/cmd/booti.c
-+++ b/cmd/booti.c
-@@ -118,6 +118,7 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		bmi.conf_fdt = argv[2];
- 	bmi.boot_progress = true;
- 	bmi.cmd_name = "booti";
-+	bmi.ignore_bootm_len = true;
- 	/* do not set up argc and argv[] since nothing uses them */
- 
- 	if (booti_start(&bmi))
-diff --git a/include/bootm.h b/include/bootm.h
-index 82ab8e0e565..97f77bc1ded 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -44,6 +44,8 @@ struct cmd_tbl;
-  * @argc: Number of arguments to the command (excluding the actual command).
-  *	This is 0 if there are no arguments
-  * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
-+ * @ignore_bootm_len: Ignore the value CONFIG_SYS_BOOTM_LEN and use 10x the
-+ *	compressed length as the maximum uncompressed size
-  *
-  * For zboot:
-  * @bzimage_addr: Address of the bzImage to boot, or 0 if the image has already
-@@ -69,6 +71,7 @@ struct bootm_info {
- 	const char *cmd_name;
- 	int argc;
- 	char *const *argv;
-+	bool ignore_bootm_len;
- 
- 	/* zboot items */
- #ifdef CONFIG_X86
+ arch/sandbox/dts/test.dts      |  13 +++-
+ boot/bootdev-uclass.c          | 114 +++++++++++++++++++++++----------
+ boot/bootflow.c                |  37 ++++++-----
+ boot/bootmeth-uclass.c         |  17 ++---
+ boot/bootmeth_efi.c            |   5 +-
+ boot/bootmeth_extlinux.c       |  14 +++-
+ boot/bootmeth_script.c         |   6 +-
+ boot/bootstd-uclass.c          |  18 ++++++
+ boot/cedit.c                   |   3 +-
+ boot/scene.c                   |   3 +-
+ boot/scene_textline.c          |   3 +-
+ cmd/bootdev.c                  |  37 +++++++++++
+ cmd/bootflow.c                 |   2 +-
+ cmd/cat.c                      |  13 ++--
+ cmd/cedit.c                    |  18 +++---
+ doc/usage/cmd/bootdev.rst      |  36 +++++++++++
+ drivers/usb/emul/sandbox_hub.c |   2 +-
+ drivers/usb/host/usb-uclass.c  |  14 +++-
+ fs/fs.c                        |  27 +++-----
+ include/abuf.h                 |  11 ++++
+ include/bootdev.h              |  60 +++++++++--------
+ include/bootflow.h             |   2 +-
+ include/bootmeth.h             |  12 ++--
+ include/bootstd.h              |  10 +++
+ include/fs.h                   |  18 +++---
+ lib/abuf.c                     |   9 +++
+ lib/of_live.c                  |   3 +-
+ test/boot/bootdev.c            |  83 ++++++++++++++++++------
+ test/boot/bootflow.c           |  10 +--
+ test/dm/blk.c                  |   4 +-
+ test/dm/usb.c                  |   8 +--
+ test/lib/abuf.c                |  22 +++++++
+ test/py/tests/test_ut.py       | 111 +++++++++++++++++++++++++-------
+ 33 files changed, 534 insertions(+), 211 deletions(-)
+
 -- 
 2.43.0
 
+base-commit: 37e1b5b09b6ad0a8dd15c580b4f915ea46de8935
+branch: schc2
