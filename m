@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E05F7C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98FD1C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:19:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 214418059D;
-	Thu,  1 May 2025 15:12:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DD42B8070C;
+	Thu,  1 May 2025 15:19:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fkS2Pq74";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e/iJzh2H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 029EE8081A; Thu,  1 May 2025 15:11:59 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 75BD980EFB; Thu,  1 May 2025 15:19:25 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EECEA8056A
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:11:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 141FC8059D
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:19:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ac2af2f15d1so103193266b.1
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:11:56 -0700 (PDT)
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-3d93c060279so3153485ab.3
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:19:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746105116; x=1746709916; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pupPW1s4NfL03rm3WEZJAakLp4sMwKPrLhv3Rj7DtCA=;
- b=fkS2Pq74+rADIrre58x/mWH0tcOaXmMKSSw3FS/m6js6rifmDpDCjNAX4hEwWcYjRa
- vH9DswfOff82su7HBR2y7mcjDMoz1iRZwvkyVFyBGMeJ0FvvwFbiR41oAJkxK8pX9ZwI
- ApDkO/rE3fucE6emWHSbZ4s82sbI3Fpp2dlz4=
+ d=chromium.org; s=google; t=1746105561; x=1746710361; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mSE7Wk5lkdZSApvNx+97szAFXYoWZj7OynPIMnNCiqA=;
+ b=e/iJzh2HL2d615pWSTrSb5UaZ3xqDlnW410gIRt/Fp7q/DcswTQGVvWK5pNzdMjBCN
+ pZ6xwoFM0iE3Cpj36+q11tkG0pJGnTnlJu52GyG3zxbdROuQRhLfuNdxcorTY1dwLmY4
+ pKw4E7Lg0semW2MDkrxAZ97O8vefsvkP3Y+e8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746105116; x=1746709916;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pupPW1s4NfL03rm3WEZJAakLp4sMwKPrLhv3Rj7DtCA=;
- b=nmVFWMxlakoxaf9srwkD0NNA1OZjktQILs9iA0NM3nJtrfaSWHACtvlkxBof+kExaE
- hWi4mW+4uhVtk+R/SmgBIslrrgQV32kSW/5qoYLK+zakoSD44JdEQeI2W8+kzjw7I9dl
- LDZ9tFqYXXxbdbffGRdbRaJTiTQq92jUcQIdNzPlrL+hKMq7PRxBY5P6sKokK3q0Np99
- X1PesVgtC3u1mMh9kR5tWEC+A/4hxtIojyIWbZu+hZWUmmGOOwfNlQQTgKSU01i/+il5
- W6KWW5uW3VLqmvkg+D7C59S2Ji5aWPpWs0NtGmjZkwgT3wXxt6JPNfQG8ElsMNO+k+Tf
- T7DQ==
-X-Gm-Message-State: AOJu0YzNmutnIfFYiyWK3RIhojWdgwE2+X2QS4h5yZQyVGd2jvlICmEk
- l3u9+Cb+aW9iHwrsAzMz1JztWcUQAz4JAM698I3EiRoYhooCwEDIVItQ9KXQ84LZ54Df2R/PjXx
- 6EVllWldoO2xeCALhR2YSYCxyIxGHrUk6nFMT
-X-Gm-Gg: ASbGncvjzTr9nis3FbDywKtw/LGnMOJLdvQ3e0VHhFJE3wPv22k1p9VH4d2sshTwg6K
- jX5YGAi/F+oZI3qygaUwvCGntiZydlZBxkJzgifKK+Xp5LeJM/yYFAh3fFntqfedGOFfYqejLEj
- 6e99/lt/vghiq9MSgEaMaVI5s=
-X-Google-Smtp-Source: AGHT+IHZeOTkCgptcraYRv/n24xuXVduJ82OVLUeFD9SJFLjA+QgYo6KjL77aoKCQ7ivU7fz1T0MTE+Bvj6mfjQlux8=
-X-Received: by 2002:a17:907:72d6:b0:ace:5207:e2ec with SMTP id
- a640c23a62f3a-acedc55240emr720982766b.4.1746105116339; Thu, 01 May 2025
- 06:11:56 -0700 (PDT)
-Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 1 May 2025 06:11:55 -0700
-Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 1 May 2025 06:11:55 -0700
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1746105561; x=1746710361;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mSE7Wk5lkdZSApvNx+97szAFXYoWZj7OynPIMnNCiqA=;
+ b=xDADXGm9QBaJgVFK4X4DUb5DZV+VPqIMjfqxzujVFtgRSs8E+cWdB4h4xTkELAWX6n
+ mZvQJfemZTAOtgBj1ahVir3O/SXdrm3mZVNKFHns56ymKZPMkX60UUeMopKaeecrz13J
+ viOiZnn9bRUf0uSFHUHCvjx0obU1vrkagKfMc3o5HsEsCRwK9goLTe3V7huP8XwZ3DIo
+ 1Hc2zmNpmrHIvGfrEk0dkZj0jC1qZ9BpqriM9IlnDWnFSKyxsMMabaugKxB3cq9lc+eA
+ 7bFC7bWZhdOw4zmnHzd713DPumfkIXx5aHtR0wUPFyqH9mVIcWYE/XVBo7/2pvUnK1e3
+ v/qw==
+X-Gm-Message-State: AOJu0Yzndm7uiYoKgIj1Tryv0xirWkOPA3LHv7iUO5NwQswLqTmA4VSl
+ wrfWy1Nm8s5QLRb9smjX3EFJ58PY3kEs/qEvyyGYHUNFPWz4KXqVqiVMc3b3DVJyx0l49chX/Ig
+ =
+X-Gm-Gg: ASbGnctQQm7GQ8C/5KsgMB5Uiv8NZ+OK/inu+FZagHhuzkdI3JLglWyjM9TJ5Vr5RFI
+ SWgtO+EoF+G2TnYG8n/lwBZTLchzAxwhRACjaMbnLKatkHa/Ivd6Oh/WbRWEWzJSWBLbg8TBu0S
+ uG3w4XGCxHknfQLFO5DL7Xxo1NKymX4NWZD3ceQ8jHwAbtU2rDn5A9EbqJcGWTGtqDG5xB8QMvL
+ AxJbKkRVdvoRYVDBaCp5K4JKAWiNAS7rjfotR6E4SwGWn41RSg4XIZjCn6qd0JBTW+O7sqTQt6q
+ iJJApuIvll8lEdy2V2l6JYg2et8un7JzAkFTCckhUopNQzqzaYfVntynlaLOWJyuH+3xLc97KaO
+ AGVBZcS+uZXoA
+X-Google-Smtp-Source: AGHT+IE9hRuuKo13bRrFomEHcYYs4ZfdCjGNrho3t6pa+N+OlJsN2hB7G1nIy6H3hONbAFr2FfcfTA==
+X-Received: by 2002:a05:6e02:1d9d:b0:3d8:3b31:5046 with SMTP id
+ e9e14a558f8ab-3d9702929a5mr24794515ab.17.1746105561282; 
+ Thu, 01 May 2025 06:19:21 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f882fc9c2esm160328173.93.2025.05.01.06.19.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 May 2025 06:19:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPVz0n2HGJKwP==pnu2KmSi--x1g-jyTjTfnX_2=NBHNsv99QA@mail.gmail.com>
-References: <CAPVz0n2HGJKwP==pnu2KmSi--x1g-jyTjTfnX_2=NBHNsv99QA@mail.gmail.com>
- <20250409155723.431102-1-sjg@chromium.org>
-Date: Thu, 1 May 2025 06:11:55 -0700
-X-Google-Sender-Auth: Ye5c9SwOZHQvjis0PekfjL4kG1Y
-X-Gm-Features: ATxdqUH-ZH9gR6h3ssL36K3FScyTl8pcbIJsQMztl2OBN7JqqDZKtcBCvUkCXMQ
-Message-ID: <CAFLszTi4wxFPnaVwRiRZMCk9SOPu=8Rd7atKTwxdQ=_E_k--_w@mail.gmail.com>
-Subject: Re: [PATCH] boot: Add missing code for bootz_run()
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Eddie James <eajames@linux.ibm.com>,
  Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v2 0/3] booti: Remove the SYS_BOOTM_LEN limit for booti
+Date: Thu,  1 May 2025 07:18:32 -0600
+Message-ID: <20250501131858.2160756-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +98,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D1=80, 9 =D0=BA=D0=B2=D1=96=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 18:57=
- Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> The bootz method is special in that it uses its own implementation of
-> several of the bootm states.
->
-> The existing do_bootz() function calls bootz_run() but first does a few
-> other things. These are missing in the direct call to bootz_run(). I
-> probably missed this because bootz_start() sets up its own
-> struct bootm_info so I assumed it was independent. While the struct
-> itself is independent, changes to the images member (which is a pointer)
-> persist.
->
-> Move the required code into bootz_run()
->
-> This change was manually tested on an rpi2 with postmarketOS added,
-> using standard boot and also the 'bootz' command.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: 47eda7e80ea ("boot: pxe: Use bootm_...() functions where possible"=
-)
-> Reported-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->
+This series restores the original behaviour of extlinux booting linux
+'Image' files, which is to ignore CONFIG_SYS_BOOTM_LEN and instead uses
+a limit of 10x the compressed size.
 
-It is not cleanly applicable to current u-boot/next with your pxe
-changes present, but overall it fixes booting on my devices. Thank
-you.
+It also adds RISC-V support, since it uses a similar format to ARM64.
 
-Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # LG P895
+Future work should integrate the code in 'booti' into main 'bootm'
+logic.
 
-Applied to sjg/master, thanks!
+Changes in v2:
+- Change the commit subject so it doesn't mention ignoring SYS_BOOTM_LEN
+
+Simon Glass (3):
+  boot: Add a function to check if a linux Image is supported
+  bootm: Add RISC-V support in booti_is_supported()
+  booti: Allow using 10x the uncompressed size with booti
+
+ boot/bootm.c    | 31 +++++++++++++++++++++++++------
+ cmd/booti.c     |  1 +
+ include/bootm.h |  3 +++
+ 3 files changed, 29 insertions(+), 6 deletions(-)
+
+-- 
+2.43.0
+
+base-commit: d755a928c802f9807abb5270d80c4b25aefefc1d
+branch: fix-booti2
