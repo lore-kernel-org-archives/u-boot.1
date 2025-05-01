@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 190ACC369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:07:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64423C3ABA3
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F75D809D4;
-	Thu,  1 May 2025 14:07:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCB3980BAD;
+	Thu,  1 May 2025 14:07:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TMOmk5aA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HXIqPPTS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47D47809D4; Thu,  1 May 2025 14:07:29 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 9694E820E2; Thu,  1 May 2025 14:07:36 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 340658081A
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:07:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2BAA82132
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:07:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5f62ef3c383so1561285a12.2
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 05:07:27 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ac3eb3fdd2eso157300166b.0
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 05:07:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746101246; x=1746706046; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746101252; x=1746706052; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zh/ve1g9zA4cswEMhpnnqh4Cfx0qXshzmHa8QkTZ7G4=;
- b=TMOmk5aAGQZVYzc6eJ9gkCkFl+aUkiqWLKLEgoJwQAWmUj3sLPOsGzVuxdgbO/s2jV
- z+i2AdqKLI/esMRRdP924uFrVQj0zCLCMWW2sKnqeQ6TBXCQNheBpNE6nmlOYDFuWCOp
- EkGc6sC1T8n6Q5a251Y40sZnemWiEn7nsJURI=
+ bh=QjyuJJ9yWj3g15Y7bXjpdGJY00mQiCTVfs6jxo2FWhg=;
+ b=HXIqPPTSAspBI1zu1dmx1gFsxasYfcP3oUw5APoDcKfSEfEEcJniST8eh7v4EcQpC8
+ XQ8FNZd1CioVrE4OvZWakNQE1aiTpnQSSv3i1+hZC/Qibm5DI07qxNjQqRuBLe9uJ2cV
+ omMAOiKIrqV7X2hLCuERDpqsG++NHQs+QL2u4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746101246; x=1746706046;
+ d=1e100.net; s=20230601; t=1746101252; x=1746706052;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zh/ve1g9zA4cswEMhpnnqh4Cfx0qXshzmHa8QkTZ7G4=;
- b=s9nyQNeDudJ1bNNajbyhUi4VZAs0d/nipDqthgHuiasDZhZ26ZZy0SseF8OeLMZvjA
- Vk39B9RBo6pdru6bBDC11GlSD9oOd11Mc8GDhQyN0CkNGwwqrf5y9KTMpV4falyUhJDZ
- qxr3F3LzceWSQcNwrCdMBR7jHfFKfHp02mzm3yC0IHJooJx36l8w5fucLh/zWwDgxVF0
- oEzZoMWhTanI6onmoIHBGFrQPD1k1SChQl3tRnkV8EDt6CSgVAQhlnh0oWwfwyj1rRgN
- H10LIAOz+wFKnNL2oRROwdPTbQ8W+Gs61UnIkAlTSyseHcaSCQ/vUMqYp3S9H/6m/DFW
- 2Vog==
-X-Gm-Message-State: AOJu0YxwXsbZtWnnArU7FdbUBCTrJCZyPZtysIbiGx1iUsj0JS16X4Sx
- 6hUNBU68oZ0qTsAF10tazGlyJl/O+tK5E5eRUXfHbgtY2p3tJuvfcf3S5jDl1z/tjiath44vrA+
- w2/d5IbhVMfA2wZZhZD908jYfyqGuZXy5noEh
-X-Gm-Gg: ASbGnct8CpSoi2tjG+SuoFLAtVtk/a85xtfA8852uPdJq9TZaQJMyOoA/Qdsf+PJEy6
- 3CFYagLnsFHbVh23I8zlLV2+gDEP7mso+5EWRD0YIblxgATwmFC3mro8XfbeURkg/HQ/kikaIEG
- sUHGxVhUVdN8FIO1ivqcdjIOg=
-X-Google-Smtp-Source: AGHT+IHPH7lKrv+iqYPdM3NInrHO2aoTCIO8XvOMfyr5KkXGd1PCl8fo7pHaA5akSPHbKZWlI1VmDC40Gdaew0KlaI0=
-X-Received: by 2002:a17:907:3f93:b0:ac8:1798:a796 with SMTP id
- a640c23a62f3a-acee25d9e23mr616533966b.54.1746101246627; Thu, 01 May 2025
- 05:07:26 -0700 (PDT)
+ bh=QjyuJJ9yWj3g15Y7bXjpdGJY00mQiCTVfs6jxo2FWhg=;
+ b=MVAsS5QXimEZgJ7wIkFf2CQzn3mFekff1A/jsCtpkr782MLgzu/GbqRUrWKcelPRh7
+ r62T4wLB1CZ8hjFIqnhPVQAvQTFujmvv2gfWhBf3HtbiVKK87upxQ89R9MU26deyNfC1
+ VKCiWtXxalE0LsPfFmTmCNY88495C1+qu/3JrfP1W4b7HgHvam9Ud3sCVkleVjiCtFgg
+ XMbBdF9bAvdYulEh3GHOZTjfF90s1r08SV3dbbFCXasQ7dw1wnJsKEqEGYl7k2Di0gNY
+ nuASwzlDo3y+i1eBYBl3m+r7mJTNSsGXo8Z3OfYIHWpbZ8NlbF7wVBIPZup9t6ebgOHB
+ +xfQ==
+X-Gm-Message-State: AOJu0YxSsopY6lGV+wkkW0t0CgoJXjjc54xDG6Br4c/R8BXlByrzRivO
+ Rpxd35y+qVgGvQBMsWiJ+3+gKmAWwZSMNM752XdGMMgFX5hk4ggznJ8BbZUHLyblJnkWMY61Y3V
+ hAQbaHf2egj3LkrpQ6qy9LTx5QVL6TgGfuQmr
+X-Gm-Gg: ASbGncuI+NSQAM+wZEf1oQkaQinz1TQ78fn4jFa0DKOg9PDdaf5a9qSWUO2g1Ui15FD
+ C2zIZmMNJDld1fmtb9D31qLeGf84peOEWH8yV1AsnUp+jcT7T2T/hu9/0+jGBtfMMXgIlffhnm6
+ mglXjlmwPpx/sN4cIC3Fzr9Uw=
+X-Google-Smtp-Source: AGHT+IGxS/ciC9n/BQEcaQJSSBQesJAhEBfvoqkg4Dw2xL1tLh5+njxCy7Zusreb/FGRMwx3e4drbSTlI3Av9gow1gA=
+X-Received: by 2002:a17:906:c10b:b0:ac2:dc00:b34d with SMTP id
+ a640c23a62f3a-aceff560249mr199677066b.53.1746101252303; Thu, 01 May 2025
+ 05:07:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319143820.2385092-1-sjg@chromium.org>
- <20250319143820.2385092-2-sjg@chromium.org>
- <20250331174237.GJ93000@bill-the-cat>
- <CAFLszTipRBusG+oxusk5rzGJO1bdorE5uBhpEMfGGpjfH6yywg@mail.gmail.com>
- <20250401165037.GI5495@bill-the-cat>
-In-Reply-To: <20250401165037.GI5495@bill-the-cat>
+References: <20250501010456.3930701-1-sjg@chromium.org>
+ <96025fbf-c636-4726-8534-d95e54ff1017@mailbox.org>
+In-Reply-To: <96025fbf-c636-4726-8534-d95e54ff1017@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 May 2025 06:07:13 -0600
-X-Gm-Features: ATxdqUHYNQAr2uT2KPgPgHEMdHI9gKgEvwF-Nz07gGMboMNZTovMUMoQxt7o_CE
-Message-ID: <CAFLszTigVOTY0p2jYONbdSwU-kr2kZfiM9GE3063H975v_MW+Q@mail.gmail.com>
-Subject: Re: [PATCH 01/17] fs: boot: Update fs_read_alloc() to use abuf
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Baruch Siach <baruch@tkos.co.il>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nam Cao <namcao@linutronix.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 1 May 2025 06:07:15 -0600
+X-Gm-Features: ATxdqUGeFhJZECff-oWkmJsvXmrILMY_TA8_yuDeORPtAmV3SH_UXR1GcAQbFCE
+Message-ID: <CAFLszTgFfcd01rdwH_TM74xwt_Uiy+DGba=6bF=-CH3GPRj+sQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/22] Deal with exfat versus byteorder
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Fabio Estevam <festevam@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,76 +88,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marek,
 
-On Tue, 1 Apr 2025 at 10:50, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 30 Apr 2025 at 20:02, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
-> On Wed, Apr 02, 2025 at 04:46:23AM +1300, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 1 Apr 2025 at 06:42, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Mar 19, 2025 at 03:37:55PM +0100, Simon Glass wrote:
-> > >
-> > > > Using an abuf for this function simplifies returning the size and also
-> > > > makes it easier to free memory afterwards. Update the API and callers.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > >  boot/bootmeth-uclass.c | 19 ++++++++++---------
-> > > >  fs/fs.c                | 25 +++++++++++--------------
-> > > >  include/fs.h           |  8 +++++---
-> > > >  3 files changed, 26 insertions(+), 26 deletions(-)
-> > >
-> > > So we grow platforms by ~200 bytes:
-> > >             sama7g54_curiosity_nandflash: all +204 text +204
-> > >                u-boot: add: 6/0, grow: 2/0 bytes: 204/0 (204)
-> > >                  function                                   old     new   delta
-> > >                  abuf_realloc                                 -      76     +76
-> > >                  abuf_uninit_move                             -      42     +42
-> > >                  memdup                                       -      28     +28
-> > >                  abuf_uninit                                  -      24     +24
-> > >                  fs_read_alloc                               96     106     +10
-> > >                  fs_load_alloc                              114     124     +10
-> > >                  abuf_init                                    -      10     +10
-> > >                  abuf_addr                                    -       4      +4
-> > >
-> > > To move away from standard buffer usage and unwinding to move to
-> > > something homegrown instead. I am not a fan of growing using abuf here.
-> > > When it was introduced in:
-> > >
-> > > commit 67bc59df05331eaac56cd0a00219d1386130aee2
-> > > Author: Simon Glass <sjg@chromium.org>
-> > > Date:   Sat Sep 25 07:03:07 2021 -0600
-> > >
-> > >     Add support for an owned buffer
-> > >
-> > > It sounded like something for some special cases. Not something to be
-> > > used everywhere to be different.
-> >
-> > From what I can tell this is a one-off hit that I believe is worth
-> > taking at some point. However I haven't seen a code-size reduction
-> > yet, so I can understand your reluctance.
+> On 5/1/25 3:04 AM, Simon Glass wrote:
+> > Since exfat has its own byteorder functions we need to be careful about
+> > including the normal U-Boot byteorder headers in code included by exfat.
 >
-> I'm not sure why it's worth taking. I'm not sure that abuf is worth
-> pushing in to every place we allocate a buffer for strings. If someone
-> wants to put in effort to make our handling of strings better/safer/more
-> secure we should look to all of the work Kees Cook (et al) did in the
-> kernel and borrow that, not invent something new and U-Boot specific.
+> ...
+>
+> >    net: Use a forward declaration for cmd_tbl in net-common.h
+> >    congatec: Include env.h to permit reading the environment
+> >    dhelectronics: Include env.h to permit reading the environment
+> >    imx8ulp_evk: Include env.h to permit reading the environment
+> >    venice: Include env.h to permit reading the environment
+> >    phytec: Include env.h to permit reading the environment
+> >    ronetix: Include env.h to permit reading the environment
+> >    toradex: Include env.h to permit reading the environment
+> >    advantech: Include env.h in imx8qm_dmsse20_a1
+> >    tegra: Include env.h to permit reading the environment
+> >    synology: Include env.h to permit reading the environment
+> >    amlogic: Include env.h to permit reading the environment
+> >    freescale: Include env.h to permit reading the environment
+> >    google: Include env.h to permit reading the environment
+> >    liebherr: Include env.h to permit reading the environment
+> >    technexion: Include env.h to permit reading the environment
+> >    elf: Only use network environment-variables if net enabled
+> >    net: Include byteorder in net6.h
+> >    net: Include string.h in net-legacy.h
+> >    net: Include env.h in pcap.c
+> >    net: dc2114x: Include env.h to permit reading the environment
+> >    net: Move env_get_ip() out of the header file
+> >
+> >   arch/arm/mach-tegra/dt-setup.c                |  1 +
+> >   board/Synology/ds414/ds414.c                  |  1 +
+> >   .../imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c     |  1 +
+> >   board/amlogic/jethub-j100/jethub-j100.c       |  1 +
+> >   board/congatec/cgtqmx8/cgtqmx8.c              |  3 +-
+> >   board/dhelectronics/common/dh_common.c        |  1 +
+> >   board/freescale/imx8ulp_evk/imx8ulp_evk.c     |  1 +
+> >   board/freescale/mx7dsabresd/mx7dsabresd.c     |  1 +
+> >   board/gateworks/venice/venice.c               |  1 +
+> >   board/google/chameleonv3/board.c              |  2 +
+> >   board/liebherr/xea/xea.c                      |  1 +
+> >   .../common/phytec_som_detection_blocks.c      |  1 +
+> >   board/ronetix/imx8mq-cm/imx8mq_cm.c           |  1 +
+> >   board/technexion/pico-imx7d/pico-imx7d.c      |  1 +
+> >   board/toradex/colibri_imx7/colibri_imx7.c     |  1 +
+> >   board/toradex/verdin-imx8mm/verdin-imx8mm.c   |  2 +-
+> >   cmd/elf.c                                     | 41 ++++++++++---------
+> >   drivers/net/dc2114x.c                         |  1 +
+> >   include/net-common.h                          |  9 ++--
+> >   include/net-legacy.h                          |  1 +
+> >   include/net6.h                                |  1 +
+> >   net/net-common.c                              |  6 +++
+> >   net/pcap.c                                    |  1 +
+> >   23 files changed, 53 insertions(+), 27 deletions(-)
+> There are no fs changes in this series , what does this series have to
+> do with exfat ?
 
-This isn't about strings; it's about buffers. A buffer which can be
-allocated or not, which can be resized and can be passed around
-without worrying about pointers and sizes and so on. It also allows
-one less parameter to be passed, although of course it is a pointer to
-a struct, so it doesn't always make the code smaller than passing two
-parameters.
-
-I've had another look through this and I believe this is a step
-forward in terms of code safety, if nothing else. I've also found a
-way to reduce the impact on your sample board to 104 bytes. This is
-largely a one-off cost, so move features converting to abuf will
-benefit from this without further code-size impact.
+I found that in some situations, the exfat code includes
+linux/byteorder.h instead of its own local byteorder, which is
+implemented differently. This then causes build errors in the exfat
+code. One way to trigger it is by adding '#include net.h' to
+include/efi.h
 
 Regards,
-Simon
+SImon
