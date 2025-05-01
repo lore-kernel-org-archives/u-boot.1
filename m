@@ -4,74 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64423C3ABA3
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AB2C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 12:19:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCB3980BAD;
-	Thu,  1 May 2025 14:07:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4AD1C8059D;
+	Thu,  1 May 2025 14:19:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HXIqPPTS";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9694E820E2; Thu,  1 May 2025 14:07:36 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2BAA82132
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:07:32 +0200 (CEST)
+ id 722448081A; Thu,  1 May 2025 14:19:03 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id B25CA8056A
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 14:18:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ac3eb3fdd2eso157300166b.0
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 05:07:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746101252; x=1746706052; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QjyuJJ9yWj3g15Y7bXjpdGJY00mQiCTVfs6jxo2FWhg=;
- b=HXIqPPTSAspBI1zu1dmx1gFsxasYfcP3oUw5APoDcKfSEfEEcJniST8eh7v4EcQpC8
- XQ8FNZd1CioVrE4OvZWakNQE1aiTpnQSSv3i1+hZC/Qibm5DI07qxNjQqRuBLe9uJ2cV
- omMAOiKIrqV7X2hLCuERDpqsG++NHQs+QL2u4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746101252; x=1746706052;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QjyuJJ9yWj3g15Y7bXjpdGJY00mQiCTVfs6jxo2FWhg=;
- b=MVAsS5QXimEZgJ7wIkFf2CQzn3mFekff1A/jsCtpkr782MLgzu/GbqRUrWKcelPRh7
- r62T4wLB1CZ8hjFIqnhPVQAvQTFujmvv2gfWhBf3HtbiVKK87upxQ89R9MU26deyNfC1
- VKCiWtXxalE0LsPfFmTmCNY88495C1+qu/3JrfP1W4b7HgHvam9Ud3sCVkleVjiCtFgg
- XMbBdF9bAvdYulEh3GHOZTjfF90s1r08SV3dbbFCXasQ7dw1wnJsKEqEGYl7k2Di0gNY
- nuASwzlDo3y+i1eBYBl3m+r7mJTNSsGXo8Z3OfYIHWpbZ8NlbF7wVBIPZup9t6ebgOHB
- +xfQ==
-X-Gm-Message-State: AOJu0YxSsopY6lGV+wkkW0t0CgoJXjjc54xDG6Br4c/R8BXlByrzRivO
- Rpxd35y+qVgGvQBMsWiJ+3+gKmAWwZSMNM752XdGMMgFX5hk4ggznJ8BbZUHLyblJnkWMY61Y3V
- hAQbaHf2egj3LkrpQ6qy9LTx5QVL6TgGfuQmr
-X-Gm-Gg: ASbGncuI+NSQAM+wZEf1oQkaQinz1TQ78fn4jFa0DKOg9PDdaf5a9qSWUO2g1Ui15FD
- C2zIZmMNJDld1fmtb9D31qLeGf84peOEWH8yV1AsnUp+jcT7T2T/hu9/0+jGBtfMMXgIlffhnm6
- mglXjlmwPpx/sN4cIC3Fzr9Uw=
-X-Google-Smtp-Source: AGHT+IGxS/ciC9n/BQEcaQJSSBQesJAhEBfvoqkg4Dw2xL1tLh5+njxCy7Zusreb/FGRMwx3e4drbSTlI3Av9gow1gA=
-X-Received: by 2002:a17:906:c10b:b0:ac2:dc00:b34d with SMTP id
- a640c23a62f3a-aceff560249mr199677066b.53.1746101252303; Thu, 01 May 2025
- 05:07:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: yM/VpNAZSXmDFqU7EL917Q==
+X-CSE-MsgGUID: ykPOaYFFScm0/ibGdudF4w==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 01 May 2025 21:18:56 +0900
+Received: from [10.226.92.102] (unknown [10.226.92.102])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 36431400262C;
+ Thu,  1 May 2025 21:18:53 +0900 (JST)
+Message-ID: <dca68b98-786c-4e9a-a028-6affad667be0@bp.renesas.com>
+Date: Thu, 1 May 2025 13:18:52 +0100
 MIME-Version: 1.0
-References: <20250501010456.3930701-1-sjg@chromium.org>
- <96025fbf-c636-4726-8534-d95e54ff1017@mailbox.org>
-In-Reply-To: <96025fbf-c636-4726-8534-d95e54ff1017@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 May 2025 06:07:15 -0600
-X-Gm-Features: ATxdqUGeFhJZECff-oWkmJsvXmrILMY_TA8_yuDeORPtAmV3SH_UXR1GcAQbFCE
-Message-ID: <CAFLszTgFfcd01rdwH_TM74xwt_Uiy+DGba=6bF=-CH3GPRj+sQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/22] Deal with exfat versus byteorder
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Fabio Estevam <festevam@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] net: ravb: Fix RX error handling
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20250420163553.158866-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250420163553.158866-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------C2ucu4Xgdemn3mjTfoPLmKjY"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,71 +60,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------C2ucu4Xgdemn3mjTfoPLmKjY
+Content-Type: multipart/mixed; boundary="------------F3042VdiFcguawequdqViHI1";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Message-ID: <dca68b98-786c-4e9a-a028-6affad667be0@bp.renesas.com>
+Subject: Re: [PATCH v2] net: ravb: Fix RX error handling
+References: <20250420163553.158866-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250420163553.158866-1-marek.vasut+renesas@mailbox.org>
 
-On Wed, 30 Apr 2025 at 20:02, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 5/1/25 3:04 AM, Simon Glass wrote:
-> > Since exfat has its own byteorder functions we need to be careful about
-> > including the normal U-Boot byteorder headers in code included by exfat.
->
-> ...
->
-> >    net: Use a forward declaration for cmd_tbl in net-common.h
-> >    congatec: Include env.h to permit reading the environment
-> >    dhelectronics: Include env.h to permit reading the environment
-> >    imx8ulp_evk: Include env.h to permit reading the environment
-> >    venice: Include env.h to permit reading the environment
-> >    phytec: Include env.h to permit reading the environment
-> >    ronetix: Include env.h to permit reading the environment
-> >    toradex: Include env.h to permit reading the environment
-> >    advantech: Include env.h in imx8qm_dmsse20_a1
-> >    tegra: Include env.h to permit reading the environment
-> >    synology: Include env.h to permit reading the environment
-> >    amlogic: Include env.h to permit reading the environment
-> >    freescale: Include env.h to permit reading the environment
-> >    google: Include env.h to permit reading the environment
-> >    liebherr: Include env.h to permit reading the environment
-> >    technexion: Include env.h to permit reading the environment
-> >    elf: Only use network environment-variables if net enabled
-> >    net: Include byteorder in net6.h
-> >    net: Include string.h in net-legacy.h
-> >    net: Include env.h in pcap.c
-> >    net: dc2114x: Include env.h to permit reading the environment
-> >    net: Move env_get_ip() out of the header file
-> >
-> >   arch/arm/mach-tegra/dt-setup.c                |  1 +
-> >   board/Synology/ds414/ds414.c                  |  1 +
-> >   .../imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c     |  1 +
-> >   board/amlogic/jethub-j100/jethub-j100.c       |  1 +
-> >   board/congatec/cgtqmx8/cgtqmx8.c              |  3 +-
-> >   board/dhelectronics/common/dh_common.c        |  1 +
-> >   board/freescale/imx8ulp_evk/imx8ulp_evk.c     |  1 +
-> >   board/freescale/mx7dsabresd/mx7dsabresd.c     |  1 +
-> >   board/gateworks/venice/venice.c               |  1 +
-> >   board/google/chameleonv3/board.c              |  2 +
-> >   board/liebherr/xea/xea.c                      |  1 +
-> >   .../common/phytec_som_detection_blocks.c      |  1 +
-> >   board/ronetix/imx8mq-cm/imx8mq_cm.c           |  1 +
-> >   board/technexion/pico-imx7d/pico-imx7d.c      |  1 +
-> >   board/toradex/colibri_imx7/colibri_imx7.c     |  1 +
-> >   board/toradex/verdin-imx8mm/verdin-imx8mm.c   |  2 +-
-> >   cmd/elf.c                                     | 41 ++++++++++---------
-> >   drivers/net/dc2114x.c                         |  1 +
-> >   include/net-common.h                          |  9 ++--
-> >   include/net-legacy.h                          |  1 +
-> >   include/net6.h                                |  1 +
-> >   net/net-common.c                              |  6 +++
-> >   net/pcap.c                                    |  1 +
-> >   23 files changed, 53 insertions(+), 27 deletions(-)
-> There are no fs changes in this series , what does this series have to
-> do with exfat ?
+--------------F3042VdiFcguawequdqViHI1
+Content-Type: multipart/mixed; boundary="------------kJU34zsry2KJ2KNmTACF1eua"
 
-I found that in some situations, the exfat code includes
-linux/byteorder.h instead of its own local byteorder, which is
-implemented differently. This then causes build errors in the exfat
-code. One way to trigger it is by adding '#include net.h' to
-include/efi.h
+--------------kJU34zsry2KJ2KNmTACF1eua
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-SImon
+On 20/04/2025 17:35, Marek Vasut wrote:
+> Correctly handle RX errors in ravb_recv() by returning 0 instead
+> of -EAGAIN on RX error.
+>=20
+> In case the RAVB driver detects an RX error in ravb_recv(), it must
+> not return the -EAGAIN, but instead must return 0. Both error codes
+> are handled in eth-uclass.c eth_rx() and -EAGAIN is rewritten to 0
+> at the end of eth_rx(), but negative return code from the .recv()
+> callback does not trigger .free_pkt() callback, which would clean
+> up and re-enqueue the descriptor which holds the currently received
+> corrupted packet. The .free_pkt() must be called for this descriptor,
+> otherwise the follow up received data become corrupted too, even if
+> those packets are correctly received. Returning 0 from the .recv()
+> callback assures the corrupted packet is not processed by the network
+> stack, but is skipped instead.
+>=20
+> For TFTP loading, an RX error produces the timeout "T" output and
+> resumes the TFTP loading operation shortly afterward, without any
+> data corruption.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+
+--=20
+Paul Barker
+--------------kJU34zsry2KJ2KNmTACF1eua
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------kJU34zsry2KJ2KNmTACF1eua--
+
+--------------F3042VdiFcguawequdqViHI1--
+
+--------------C2ucu4Xgdemn3mjTfoPLmKjY
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCaBNmrAUDAAAAAAAKCRDbaV4Vf/JGvd3z
+APwNvM1MyeQmVQVuZRiwkGLag4t3BJN2dDhv0Wc+KZP6QQD/eoI3Cu4GBC2EnC5qx2eKOA7tMiwC
+uyWR5sxOluH4LA4=
+=kGAr
+-----END PGP SIGNATURE-----
+
+--------------C2ucu4Xgdemn3mjTfoPLmKjY--
