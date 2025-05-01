@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5681FC3ABA3
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:39:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0CAC3ABA3
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:39:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 037DF81E25;
-	Thu,  1 May 2025 15:38:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AAC18213D;
+	Thu,  1 May 2025 15:38:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oK5Az/h0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SYvuAqhJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69DCD8283E; Thu,  1 May 2025 15:38:03 +0200 (CEST)
+ id D51878283E; Thu,  1 May 2025 15:38:04 +0200 (CEST)
 Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
  [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FEE28213D
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:37:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A8E482724
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:37:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-8644aa73dfcso31899039f.0
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:37:56 -0700 (PDT)
+ ca18e2360f4ac-85b3f92c866so21694439f.3
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746106674; x=1746711474; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746106678; x=1746711478; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c1m6nFEkq2Q6XrKeMXGUt/K2GVPAGK+Sdc7gMjdtGa0=;
- b=oK5Az/h0sOHn6JwAteWk8CTCPGEvjs4ywUJU10iYbJL4gWh2R5YQsEI9mXMxZb4+TC
- 4DHqL9KFzjaKvfXs/fw83wAbfIRdODMQptGogJYq6fEnPERrKXhsbJJZwcvBLgU758y6
- Yh0ZGxXrsVJQ/0gt0OjFRvRI7mWJGIdRo1naQ=
+ bh=w5imal6b+qIPnmMcm8Jm91SNSJ5P1sTBqaMahQuWwiQ=;
+ b=SYvuAqhJrc0JImvbhIPXDsJzKdEylyKUpaopJct+p6bWXrstObCE/5CA522o1sk3WG
+ usn7aNuzNPHT3p7gvuEqvUfygFNuW/QS2QdA+uLbUANosRTqXi6xknbcrXKXmSA1UO5Q
+ Nh6+95jfTOpvJRPBDXIbg405NGJsheTv32Cpc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746106674; x=1746711474;
+ d=1e100.net; s=20230601; t=1746106678; x=1746711478;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c1m6nFEkq2Q6XrKeMXGUt/K2GVPAGK+Sdc7gMjdtGa0=;
- b=n6a83HiqZCXlo3//UFhW5ZFyNu94LkOQt0kSjTB7w728/lZQHtFzf07XcSR4zo4FXe
- oJ29BZiN7m5gn1fllkvAzFYWAPB7uDrZmQuN8ZLd93cMJxys8pl98OhV5JTwq7mDYck7
- +oY8Eu8Wn6rfmZdJZ4MKDjvpjVCz7YiPpbCELQJ6GjNm7DPzbJn+icb2O34prokpurYD
- Jys3KBkZ9ffEi99BNf12xcDPX/xts6udbB7so47STtqbbhhm5H/kTcxFipXi2PoF0PHa
- fDY1f7iq48dMFpQhfg3hZ+YKiB+35acpGQIM/rF4i68zgG2+qoFsQHlMjdrjgmzOSn2g
- htRA==
-X-Gm-Message-State: AOJu0Yx83I+RyofBasTdO79UgwqAdIUeS+kvL0ToemVow/ZmkxgSl95v
- +IxJ8qQJ99zrbvV1cXrbFdRIAr0RyuZvv5j1RkKoQ77TYtDCm9NlUQAMsIM4JEYzkSLZP9vQ4Gs
+ bh=w5imal6b+qIPnmMcm8Jm91SNSJ5P1sTBqaMahQuWwiQ=;
+ b=pZKoFhGf8hUf/ik9sPWLUEd4Yl9f93/QGjUkSa0QMgpQQYVGFydZEdnh9dneyqd9ja
+ HejN9DH1V+D52PZuxp6XhtJpoRZ2mxKGESZiD8h+CPjTcVTEYdYp67AzXqfpgMK1rcxj
+ O003ne3ivkzEFXZjRf0WddtO8jjeQiKBUn23zxMAtK8SrULu/yqim4a9wwCbWv8Ka/po
+ 6hUKO0KJL+D+9ZV+ULQYW9JIhI01Li3RVQ8kEYo8bbjp59JDcgw5pX0eoKQEwjgQP8gb
+ N5GEy1qRSQXa7g6z4NjLdvDN14uMoigoMcPi9MwOueU8CbjbUwfTCzdx+BLH6Gn8lfiv
+ ekCg==
+X-Gm-Message-State: AOJu0YztvMr9sPHTno7UKUVRTkPxkeZO0wabCRF3ppkPzgIkpmlvPiS+
+ uExu8Q/JpYHj9byIPmKtdgtmgX+QsnGAgVHFzZbhAHcRO5qD+4dYsrc5NszC7J0omzQPPPUTLKg
  =
-X-Gm-Gg: ASbGncsd7SK1W62b4Uzmx7TYJPXr1JxdQ83YgF84bSml2y3CE5HAUQryyS/0OSCq1S2
- PY0Bif9SVKMY99uONOs6zcyKjdCsFuki/hzHiWmSkq0Lve1xQp6WYbnPetiME9iFmyryUn49enT
- mCX+CMRC4DglDtxY45OK+sg9ICfIczYaWI7k6fmvgs74OHKcdc0fVe8vvK97z/QdKjUKqw2et/p
- iMVHA2+achVqIcQPWx7B2oYPAWwwppPnRR9AB9GPwCutYAX920aQjMFNz6qWg00m1+4K0o+31Rh
- 5/qI9btyMD5+cm7yBHlOFnZvOnXaVNABjIvgkDotvj+hSl2oTYu4KYVsm3LZqMe11E5Rkdqwiaq
- HEA==
-X-Google-Smtp-Source: AGHT+IFe4VOt/x04GGVmp+lY1DIEMchNisnezwn0sID5gU5OrAIzt6f0HpA65q2VvlCc7sCqtNghAw==
-X-Received: by 2002:a05:6e02:1a86:b0:3ce:4b12:fa17 with SMTP id
- e9e14a558f8ab-3d96f2528b6mr35441315ab.19.1746106674652; 
- Thu, 01 May 2025 06:37:54 -0700 (PDT)
+X-Gm-Gg: ASbGncvkdLDm1V0gy56+bZqerktHyJaZNCqO+tJuw4smReDFmm7la0labXNIeIpu0g0
+ 6LZLmBEORhEDCzZml7coQHOVwGLoGM9tHA/6Fpgs/HWFIX+7Tusr0q+ikJwCiLGt7emA6UW9685
+ cRgzZA58mwmhb3vxgPb+5zZn4avrC63t8D0c6Z+feVe+YtqfsGyZjj4gWeZx68FUTA/jdQrihLb
+ rI3sWWULtBNjXfmPOMecOQryp1AoCugAoQbGi4Mx9WiE8X+z5GGefw5CWuB7Tng3SVjUlQ154EQ
+ 9MZ/E3Heq3PjPkq9zmir9u8OEy/q1uA8UU/6UJzIqeM2IuW6vsCBW/MxG5RPHDk08rB8lya2JLp
+ aECp2CCk36E+r
+X-Google-Smtp-Source: AGHT+IFpcONlTwQJigvrBl1bi4986URk0Hyn1/qTDLZg7t42c+aYol/iFvVtP+inomzvtsC7+iiKyA==
+X-Received: by 2002:a05:6e02:188a:b0:3d8:975:b825 with SMTP id
+ e9e14a558f8ab-3d967fa1b89mr71706585ab.5.1746106677875; 
+ Thu, 01 May 2025 06:37:57 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f88303bb9esm165385173.136.2025.05.01.06.37.53
+ 8926c6da1cb9f-4f88303bb9esm165385173.136.2025.05.01.06.37.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 06:37:53 -0700 (PDT)
+ Thu, 01 May 2025 06:37:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 14/18] bootstd: Tidy up a nested CONFIG_IS_ENABLED(BOOTSTD)
-Date: Thu,  1 May 2025 07:37:14 -0600
-Message-ID: <20250501133726.2627373-15-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 16/18] bootstd: Correct the comment for bootmeth_set_order()
+Date: Thu,  1 May 2025 07:37:16 -0600
+Message-ID: <20250501133726.2627373-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250501133726.2627373-1-sjg@chromium.org>
 References: <20250501133726.2627373-1-sjg@chromium.org>
@@ -95,93 +97,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a nested check for BOOTSTD in the bootdev.h header file.
+The function is used to handle the boot_targets variable so must support
+space-separated items. Update the comment to show this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/bootdev.h | 47 ++++++++++++++++++++---------------------------
- 1 file changed, 20 insertions(+), 27 deletions(-)
+ include/bootmeth.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/bootdev.h b/include/bootdev.h
-index 12c90c4ec1b..9ab95cebc12 100644
---- a/include/bootdev.h
-+++ b/include/bootdev.h
-@@ -368,7 +368,6 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp);
-  */
- int bootdev_setup_for_dev(struct udevice *parent, const char *drv_name);
- 
--#if CONFIG_IS_ENABLED(BOOTSTD)
- /**
-  * bootdev_setup_for_sibling_blk() - Bind a new bootdev device for a blk device
+diff --git a/include/bootmeth.h b/include/bootmeth.h
+index c32bbbab7e9..8f4706c555c 100644
+--- a/include/bootmeth.h
++++ b/include/bootmeth.h
+@@ -301,8 +301,8 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global);
   *
-@@ -383,32 +382,6 @@ int bootdev_setup_for_dev(struct udevice *parent, const char *drv_name);
-  * Return: 0 if OK, -ve on error
-  */
- int bootdev_setup_for_sibling_blk(struct udevice *blk, const char *drv_name);
--#else
--static int bootdev_setup_for_sibling_blk(struct udevice *blk,
--					 const char *drv_name)
--{
--	return 0;
--}
--#endif
--
--/**
-- * bootdev_get_sibling_blk() - Locate the block device for a bootdev
-- *
-- * @dev: bootdev to check
-- * @blkp: returns associated block device
-- * Return: 0 if OK, -EINVAL if @dev is not a bootdev device, other -ve on other
-- *	error
-- */
--int bootdev_get_sibling_blk(struct udevice *dev, struct udevice **blkp);
--
--/**
-- * bootdev_get_from_blk() - Get the bootdev given a block device
-- *
-- * @blk: Block device to check
-- * @bootdebp: Returns the bootdev found, if any
-- * Return 0 if OK, -ve on error
-- */
--int bootdev_get_from_blk(struct udevice *blk, struct udevice **bootdevp);
- 
- /**
-  * bootdev_unbind_dev() - Unbind a bootdev device
-@@ -421,6 +394,7 @@ int bootdev_get_from_blk(struct udevice *blk, struct udevice **bootdevp);
-  * Return: 0 if OK, -ve on error
-  */
- int bootdev_unbind_dev(struct udevice *parent);
-+
- #else
- static inline int bootdev_setup_for_dev(struct udevice *parent,
- 					const char *drv_name)
-@@ -440,4 +414,23 @@ static inline int bootdev_unbind_dev(struct udevice *parent)
- }
- #endif
- 
-+/**
-+ * bootdev_get_sibling_blk() - Locate the block device for a bootdev
-+ *
-+ * @dev: bootdev to check
-+ * @blkp: returns associated block device
-+ * Return: 0 if OK, -EINVAL if @dev is not a bootdev device, other -ve on other
-+ *	error
-+ */
-+int bootdev_get_sibling_blk(struct udevice *dev, struct udevice **blkp);
-+
-+/**
-+ * bootdev_get_from_blk() - Get the bootdev given a block device
-+ *
-+ * @blk: Block device to check
-+ * @bootdebp: Returns the bootdev found, if any
-+ * Return 0 if OK, -ve on error
-+ */
-+int bootdev_get_from_blk(struct udevice *blk, struct udevice **bootdevp);
-+
- #endif
+  * This selects the ordering to use for bootmeths
+  *
+- * @order_str: String containing the ordering. This is a comma-separate list of
+- * bootmeth-device names, e.g. "extlinux,efi". If empty then a default ordering
++ * @order_str: String containing the ordering. This is a space-separate list of
++ * bootmeth-device names, e.g. "extlinux efi". If empty then a default ordering
+  * is used, based on the sequence number of devices (i.e. using aliases)
+  * Return: 0 if OK, -ENODEV if an unknown bootmeth is mentioned, -ENOMEM if
+  * out of memory, -ENOENT if there are no bootmeth devices
 -- 
 2.43.0
 
