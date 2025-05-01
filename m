@@ -4,61 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A513AC369D9
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 02:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA366C3ABA9
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 03:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBBD08081A;
-	Thu,  1 May 2025 04:02:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id CA2988059D;
+	Thu,  1 May 2025 05:21:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gsxu1ABy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WmkUFyp0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40376809A5; Thu,  1 May 2025 04:02:17 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4948D8081A; Thu,  1 May 2025 05:21:58 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22D778070C
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 04:02:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 473648056A
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 05:21:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Zny3m6wvgz9tkJ;
- Thu,  1 May 2025 04:02:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1746064933;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZUYHbqsNQUhwk9ms7yljcpQgr4HDnWdKUaKFmYm7y5o=;
- b=gsxu1AByuilPeaXA5r2z2uxghlawhnZMgxoJUqn6NGjKSjPUtPijr0RYOPm556LKhsofrw
- 6xzRCgc40B+RU96esAS260S/FcO0tIekMkUJDfsfDyUWB5IYLRPtDncrfeKy6JnV18XMgv
- 3+f+BcYezu7dFF85dbsSN3wBbR0ptWnFDHTfmS9MFr/Cl492Tgpa8Auqct1F2cKReUeD5C
- 2Rs+ojM6wR+sltj05TT+v77G0xhJo7mrijUzTIwOFj4aS4nGE1aQlPMKmKrJyVOQXFEj1Q
- Nlls8dEOmPvsrbBuz8yAzw9E4hDM89y7mbv0vlKQNv7NjwhGQRNRU9D32UAsKA==
-Message-ID: <96025fbf-c636-4726-8534-d95e54ff1017@mailbox.org>
-Date: Thu, 1 May 2025 04:02:10 +0200
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5f7ec0e4978so1069743a12.1
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 20:21:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1746069716; x=1746674516; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cEKZpQrKHVDVmAVwKljGm/m7QHR4qeRUupSSfk7vbNY=;
+ b=WmkUFyp0K/fN2ly3tqV373pA5b9ob+ObX8IJbG8GXj9Cqw03S6ApOxXQbNPlUZqysb
+ Gv9Swqi5h9e86KrqxJMH8jB+UvemnM652ejlLrGCIxUakNio//05brMVIG+tkt81uzC/
+ 4ln5UFIxo1kyv5L5e2auciFU1bLnYMK78SYT9dVYAFUbNMUbGvMXRZ80rPa9eDu/YNSK
+ yd8smqJwbMwTb1b6UliWY8iIE/SDOGjJDm+KajN5ZR//u+oiL8jNazt8AfzjC/NWDNhg
+ odtTgzhhUPXrssoaoAdq+PnT7qmtMjcSHwUemNiZ4NxpWmLovLwBZ2mm4GjEEO8oh1Z5
+ MaNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746069716; x=1746674516;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cEKZpQrKHVDVmAVwKljGm/m7QHR4qeRUupSSfk7vbNY=;
+ b=Vico7fTUdp4gKdDDQiIoUx3xS79+nuU7ZzrxXaW24sg1D/S/2ogsTNDy8hmH12Y0aw
+ IKQ7brwWSeX3AMKcaPgCR45SclY/7+KBijaA4KqaBhOxn5ZYdTGRsOscMjAOyAtTe6xj
+ PbG5dKIraPM94ec408NB5Mw37qavo4Q0hAiD/yiZQQ4/N1W7qYpjv6l1dK6xrk7eD7cW
+ R702sxvFDORaMZNFD29XGGOSZFzAE5pguosTBY+iYzE60zwCSJXBkVKu0x/D8Tj2aZlu
+ 99vznfiof9TmqUU2LuCZ7EG4wmB/asJ3lKoVtODSx8rB99VYWoxeQYBvU5bcPu+Ug/I+
+ nmFQ==
+X-Gm-Message-State: AOJu0Yzhsc/HgiUgyPxoQteMjSyAh+Dguxy7ZpnNiCo8EN/DGnWhozHB
+ d9d1rR4WwiK6UtRS+8vJ/kexbxU7BXE+YsmgNOCKU7FhFNF0dVaPQon/SNarPgsjRV9uu1cvN3/
+ 5ykzCU8/ZkbwkTc4HiKYAe/D17kA=
+X-Gm-Gg: ASbGncsQilE7whNq/gyQS0PqijLMrmfXfxk9s10wvZ+79ckzdLfifYe4iX8ecWebT7u
+ 5RugpZZvgEBgK21NqT+ZdhM6pRG3sooI6Uzzj2opiyfuFGsiDkBfBfopC6R/PHPVX7XoW3iZMZp
+ wDxsaIqy1ZEjbZTgzZLua4ung=
+X-Google-Smtp-Source: AGHT+IHEtvYCfvhKIY5WTE/mp4J/Sh72f05ajQYTTzdMIIYy9Ckshn8NWQY5kavmFJTEgbRbM5Axqq1zUMO2mwo97PI=
+X-Received: by 2002:a05:6402:1e90:b0:5f8:504a:88d5 with SMTP id
+ 4fb4d7f45d1cf-5f912498b19mr1403023a12.7.1746069715495; Wed, 30 Apr 2025
+ 20:21:55 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 00/22] Deal with exfat versus byteorder
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
 References: <20250501010456.3930701-1-sjg@chromium.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250501010456.3930701-1-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 3iimth7p49pi3opui1kq3tjipdr74abh
-X-MBO-RS-ID: 6e90bbf3f2a98057319
+ <20250501010456.3930701-12-sjg@chromium.org>
+In-Reply-To: <20250501010456.3930701-12-sjg@chromium.org>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Wed, 30 Apr 2025 20:21:38 -0700
+X-Gm-Features: ATxdqUHXRR93BjwOTqw_P2GD__n_lk8aO71sfYax6GrMpiVz4hUcyzNNnvE3eQk
+Message-ID: <CAJaLiFyXZPrK23O=ZPm2z7p4W05DfG0wniVR9GYYutzpWNP-pQ@mail.gmail.com>
+Subject: Re: [PATCH v2 11/22] synology: Include env.h to permit reading the
+ environment
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, Phil Sutter <phil@nwl.cc>,
+ Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,58 +95,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/1/25 3:04 AM, Simon Glass wrote:
-> Since exfat has its own byteorder functions we need to be careful about
-> including the normal U-Boot byteorder headers in code included by exfat.
+On Wed, Apr 30, 2025 at 6:05=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> This file reads from the environment but does not include the correct
+> header. Update it.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tony Dinh <mibodhi@gmail.com>
 
-...
-
->    net: Use a forward declaration for cmd_tbl in net-common.h
->    congatec: Include env.h to permit reading the environment
->    dhelectronics: Include env.h to permit reading the environment
->    imx8ulp_evk: Include env.h to permit reading the environment
->    venice: Include env.h to permit reading the environment
->    phytec: Include env.h to permit reading the environment
->    ronetix: Include env.h to permit reading the environment
->    toradex: Include env.h to permit reading the environment
->    advantech: Include env.h in imx8qm_dmsse20_a1
->    tegra: Include env.h to permit reading the environment
->    synology: Include env.h to permit reading the environment
->    amlogic: Include env.h to permit reading the environment
->    freescale: Include env.h to permit reading the environment
->    google: Include env.h to permit reading the environment
->    liebherr: Include env.h to permit reading the environment
->    technexion: Include env.h to permit reading the environment
->    elf: Only use network environment-variables if net enabled
->    net: Include byteorder in net6.h
->    net: Include string.h in net-legacy.h
->    net: Include env.h in pcap.c
->    net: dc2114x: Include env.h to permit reading the environment
->    net: Move env_get_ip() out of the header file
-> 
->   arch/arm/mach-tegra/dt-setup.c                |  1 +
->   board/Synology/ds414/ds414.c                  |  1 +
->   .../imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c     |  1 +
->   board/amlogic/jethub-j100/jethub-j100.c       |  1 +
->   board/congatec/cgtqmx8/cgtqmx8.c              |  3 +-
->   board/dhelectronics/common/dh_common.c        |  1 +
->   board/freescale/imx8ulp_evk/imx8ulp_evk.c     |  1 +
->   board/freescale/mx7dsabresd/mx7dsabresd.c     |  1 +
->   board/gateworks/venice/venice.c               |  1 +
->   board/google/chameleonv3/board.c              |  2 +
->   board/liebherr/xea/xea.c                      |  1 +
->   .../common/phytec_som_detection_blocks.c      |  1 +
->   board/ronetix/imx8mq-cm/imx8mq_cm.c           |  1 +
->   board/technexion/pico-imx7d/pico-imx7d.c      |  1 +
->   board/toradex/colibri_imx7/colibri_imx7.c     |  1 +
->   board/toradex/verdin-imx8mm/verdin-imx8mm.c   |  2 +-
->   cmd/elf.c                                     | 41 ++++++++++---------
->   drivers/net/dc2114x.c                         |  1 +
->   include/net-common.h                          |  9 ++--
->   include/net-legacy.h                          |  1 +
->   include/net6.h                                |  1 +
->   net/net-common.c                              |  6 +++
->   net/pcap.c                                    |  1 +
->   23 files changed, 53 insertions(+), 27 deletions(-)
-There are no fs changes in this series , what does this series have to 
-do with exfat ?
+Thanks,
+Tony
+> ---
+>
+> (no changes since v1)
+>
+>  board/Synology/ds414/ds414.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/board/Synology/ds414/ds414.c b/board/Synology/ds414/ds414.c
+> index 1a4cea87e1a..02d6a4a1ea8 100644
+> --- a/board/Synology/ds414/ds414.c
+> +++ b/board/Synology/ds414/ds414.c
+> @@ -4,6 +4,7 @@
+>   * Copyright (C) 2015 Phil Sutter <phil@nwl.cc>
+>   */
+>
+> +#include <env.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+>  #include <asm/global_data.h>
+> --
+> 2.43.0
+>
