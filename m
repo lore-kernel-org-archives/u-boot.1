@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B64C3ABA3
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:19:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 426BAC369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 13:19:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 770478210D;
-	Thu,  1 May 2025 15:19:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE3F681E72;
+	Thu,  1 May 2025 15:19:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QMZSIQfo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oDhOtjah";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3758581F7E; Thu,  1 May 2025 15:19:28 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 4144682132; Thu,  1 May 2025 15:19:30 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 116C080F03
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:19:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A32F48081A
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 15:19:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-3d4436ba324so7981765ab.2
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:19:26 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3d940c7ea71so5100275ab.0
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 06:19:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746105564; x=1746710364; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746105566; x=1746710366; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YNqW8B2J0acepxbmZ3a9weM8IlAJ0kxYnYWGbBfDA74=;
- b=QMZSIQfoB6K1Mm/sGIUJhG4oZ8r7GPehpSnQfxXotHx/T53bgd6LLIoqGK0LpnXGyL
- kP1I9MGCBA1jm6ez804pSjaCc4Ex1EWcoGkncpOIpoqsfk76HPRcucP2NWO2o3JmDEZM
- s4EC8CfD9OMjYUBwWAoBJ7R42+YVMn7fgIuqU=
+ bh=D/oR+INf4tSmOojvhWbP8HGeThVtW8jkLXEGSBI7pxs=;
+ b=oDhOtjahH138ASYV8S1TInZOUt04VmoiJkTRKGMNQtk1/pXbzVTlFmYVH2Ym97lTzn
+ cpj8PPkDwfiLTKQ/IEfNe7lBuoFStO91hlHIilkg1IAo9mNq4+woPBs95qGbtFpR4o+x
+ 87W2ehnpxvSOz1HJqyQ9e/Jn6fCVnaqyI8OiA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746105564; x=1746710364;
+ d=1e100.net; s=20230601; t=1746105566; x=1746710366;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YNqW8B2J0acepxbmZ3a9weM8IlAJ0kxYnYWGbBfDA74=;
- b=R7tln/lp2C02GenexfEaQsT5QEgoTPzaQvkssa8YKk8LIIao9ophZcL9PjeG2uL5YK
- 9iu8+mBn/CSI+LAeXLpd66eM1wlYNK+Ey0M77B2FL7QUvv5z663cQ/XpIZryvw1pv7LE
- 11AxX16DEXjqiCuzvKJDOXeH7GUqPd/g/UX9K1S6BoTRH7Y8e5RSEbHWyl99Y7g1vaK4
- c8SwAVdCx/HPigJqG714qYq4gT2/528Dvu+AfegLgnWC2JiMtyNoGkOS3torjDAwmzpQ
- EE6mieeypJ8MuAywLuK2dooHozBh/+FnRo56o2C574CPYwenUtW+4H4pPMQOc9anSEjZ
- 1pwg==
-X-Gm-Message-State: AOJu0YyH44W6fKdy4+/KMxk5uSZshX29MZij2H+Imb/bweA4MYBM62Eu
- Sz6KRc5zOChTiwLYYyxQ5pQrzG/EXU/LbH9/+VgY256vkotGn+2UdWrtHpPY7wIYxUav8UeSAL4
+ bh=D/oR+INf4tSmOojvhWbP8HGeThVtW8jkLXEGSBI7pxs=;
+ b=Aj7/XsE9y1hztF70/ChVpc6Wktgk7J991MKJfLpI1RlRtRI63OOjCBRb66nqn8FJDa
+ Ws1B8A8mNklRvpW2ffgvmBXCCzp55yGIEeDPMv/Y7PHUyI/2Pu0agsnWgVBO0R8wSbKV
+ GCRiPzWL/jLhf4jKVDaEOOzMYYokORGOJyyDbsn+qCNO0S7PEUZGRteuCGkjB88mzPAA
+ 4KsZZMPwEUbixvydgsEpO6b07BHvsgdsysPU1Kv/s8WUEKU1Bt+EglYTas52D8IFPpy1
+ r+xc2CeArm8599rhnwotKECabZLI+FI+3sjkp6AH0gxiNMs2b29jk7iY3mSAFn+vmAAo
+ Fg5A==
+X-Gm-Message-State: AOJu0YydtRGjPcmIg52MX2oi5bYwUZAIw2eAcv6IWk0Tmp3z7Ua7vO3Q
+ lp6MI0Ly2usIisD6ny8iR6xMTJWnt+8QJKALv9RjUqUYN/B0kElWXBZd50LUhIv6GAUiT/3Pde8
  =
-X-Gm-Gg: ASbGnct6ZXe4rNmvvLrFw5PmOnoTUegNvQH/Z0NC62c+Zgfz+n3+8w40l3Vl5h3eVkc
- 5+AuhoJBy/eH+t7eJ8DUyrmI8ucixIv2Srjz4MjjuTJAaSjDHdCdya6GyNPBpUDxNLrf8DsrXUX
- LDVO+Q2dQqojNfKP/Fjv0154k9TBFxXvhR6zW61X01Q+TNVTvkTZbokALdmrpTUYvBomyDxzi1u
- 1zTa5+2F/73xXgk01kljzS+HI+ih8dkT7DniDA063xdsjrSHEP4Yr3JhkBGeW4iOMw6F9/VwniZ
- L8WGL1pN6cLBVSw+kswLDhzhsjnMPxd+CssZdNOGQXXnCIH+GJ5BQ/C+hCENHlpQQMhtIL7k7WI
- j/g==
-X-Google-Smtp-Source: AGHT+IGiy6p/aKPOEHRhsCQ73xnC6y1q+dI/rNDRpnd+BF6VWII68AspRb1OXGTOx+5TT7tCPnGWzw==
-X-Received: by 2002:a05:6e02:b2b:b0:3d4:3fbf:966e with SMTP id
- e9e14a558f8ab-3d967fffc58mr68052535ab.14.1746105564277; 
- Thu, 01 May 2025 06:19:24 -0700 (PDT)
+X-Gm-Gg: ASbGncsvc0IiBNTzVejMsA3LJ0aHeCgocXKWjgqaSWGWko8RrJrEMfLESm/LhCcQQYR
+ aIpoXiRrigcN9uhcEJ8bgIJyX2DdKIYwUglt8IplRn+/LttllyYeDdy4XyjI16rs0oBwCcHhvy0
+ 3KtWGDJT6XMqe8op/Vh4n7dtDTvXtTuBlwB8l+XEuIw+AJgng3rMwY/1+J1M5PteDwOq6YfESbR
+ ca+vAsyAAkzNJfEeC4miVYPDXeo/tU3qzBuObxUGuL2QdBjuGSCNYGr4Ojypvtd7pQl/qeCWl+A
+ sUIsGmnxowHp01GsTUsWKuJDivMf2uuFYR3y2IcLVePNI96lbfZXOG0mIIPFld7m511o9V3ObRi
+ ucA==
+X-Google-Smtp-Source: AGHT+IHOt6rJnqgFunQOtx/uMrEnv2FPNaCUAxGDglAazhyNSJRKwpAn5iUHfLPNCeJVjKqKT8TbIQ==
+X-Received: by 2002:a92:ca49:0:b0:3d8:1a41:69a9 with SMTP id
+ e9e14a558f8ab-3d967fc2052mr80400205ab.12.1746105565723; 
+ Thu, 01 May 2025 06:19:25 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f882fc9c2esm160328173.93.2025.05.01.06.19.23
+ 8926c6da1cb9f-4f882fc9c2esm160328173.93.2025.05.01.06.19.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 06:19:23 -0700 (PDT)
+ Thu, 01 May 2025 06:19:25 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Simon Glass <sjg@chromium.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Matthew Garrett <mgarrett@aurora.tech>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 2/3] bootm: Add RISC-V support in booti_is_supported()
-Date: Thu,  1 May 2025 07:18:34 -0600
-Message-ID: <20250501131858.2160756-3-sjg@chromium.org>
+Subject: [PATCH v2 3/3] booti: Allow using 10x the uncompressed size with booti
+Date: Thu,  1 May 2025 07:18:35 -0600
+Message-ID: <20250501131858.2160756-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250501131858.2160756-1-sjg@chromium.org>
 References: <20250501131858.2160756-1-sjg@chromium.org>
@@ -98,30 +100,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RISC-V uses a similar linux 'Image' format to ARM64, so add support for
-it in bootm_load_os()
+The booti command does not use the CONFIG_SYS_BOOTM_LEN value and
+instead sets a maximum decompression-buffer size of 10x the size of the
+compressed data.
+
+Add this as an option in bootm_load_os() so that booting without the
+command-line works in the same way as the 'booti' command.
+
+Link: https://lore.kernel.org/u-boot/2ad3b1c5-b6e7-47e2-b225-834b821cc5c4@kwiboo.se/
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reported-by: Jonas Karlman <jonas@kwiboo.se>
+Fixes: b13408021d3 ("boot: pxe: Use bootm_...() functions where possible")
 ---
 
-(no changes since v1)
+Changes in v2:
+- Change the commit subject so it doesn't mention ignoring SYS_BOOTM_LEN
 
- boot/bootm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ boot/bootm.c    | 13 +++++++++----
+ cmd/booti.c     |  1 +
+ include/bootm.h |  3 +++
+ 3 files changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index 2ed78295ead..7be5ec796fc 100644
+index 7be5ec796fc..dae09060f0f 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -666,7 +666,7 @@ static bool booti_is_supported(struct image_info *os)
- 	if (!IS_ENABLED(CONFIG_CMD_BOOTI) || os->os != IH_OS_LINUX)
- 		return false;
- 
--	return os->arch == IH_ARCH_ARM64;
-+	return os->arch == IH_ARCH_ARM64 || os->arch == IH_ARCH_RISCV;
+@@ -669,8 +669,9 @@ static bool booti_is_supported(struct image_info *os)
+ 	return os->arch == IH_ARCH_ARM64 || os->arch == IH_ARCH_RISCV;
  }
  
- static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+-static int bootm_load_os(struct bootm_headers *images, int boot_progress)
++static int bootm_load_os(struct bootm_info *bmi, int boot_progress)
+ {
++	struct bootm_headers *images = bmi->images;
+ 	struct image_info os = images->os;
+ 	ulong load = os.load;
+ 	ulong load_end;
+@@ -681,6 +682,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	ulong flush_start = ALIGN_DOWN(load, ARCH_DMA_MINALIGN);
+ 	bool no_overlap;
+ 	void *load_buf, *image_buf;
++	ulong decomp_len;
+ 	int err;
+ 
+ 	/*
+@@ -706,11 +708,12 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 
+ 	load_buf = map_sysmem(load, 0);
+ 	image_buf = map_sysmem(os.image_start, image_len);
++	decomp_len = bmi->ignore_bootm_len ? image_len * 10 : bootm_len();
+ 	err = image_decomp(os.comp, load, os.image_start, os.type,
+-			   load_buf, image_buf, image_len, bootm_len(),
++			   load_buf, image_buf, image_len, decomp_len,
+ 			   &load_end);
+ 	if (err) {
+-		err = handle_decomp_error(os.comp, load_end - load, bootm_len(),
++		err = handle_decomp_error(os.comp, load_end - load, decomp_len,
+ 					  err);
+ 		bootstage_error(BOOTSTAGE_ID_DECOMP_IMAGE);
+ 		return err;
+@@ -1073,7 +1076,7 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 	if (!ret && (states & BOOTM_STATE_LOADOS)) {
+ 		iflag = bootm_disable_interrupts();
+ 		board_fixup_os(&images->os);
+-		ret = bootm_load_os(images, 0);
++		ret = bootm_load_os(bmi, 0);
+ 		if (ret && ret != BOOTM_ERR_OVERLAP)
+ 			goto err;
+ 		else if (ret == BOOTM_ERR_OVERLAP)
+@@ -1237,6 +1240,8 @@ int bootz_run(struct bootm_info *bmi)
+ 
+ int booti_run(struct bootm_info *bmi)
+ {
++	bmi->ignore_bootm_len = true;
++
+ 	return boot_run(bmi, "booti", BOOTM_STATE_START | BOOTM_STATE_FINDOS |
+ 			BOOTM_STATE_PRE_LOAD | BOOTM_STATE_FINDOTHER |
+ 			BOOTM_STATE_LOADOS);
+diff --git a/cmd/booti.c b/cmd/booti.c
+index 43e79e87201..f4f782da056 100644
+--- a/cmd/booti.c
++++ b/cmd/booti.c
+@@ -118,6 +118,7 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		bmi.conf_fdt = argv[2];
+ 	bmi.boot_progress = true;
+ 	bmi.cmd_name = "booti";
++	bmi.ignore_bootm_len = true;
+ 	/* do not set up argc and argv[] since nothing uses them */
+ 
+ 	if (booti_start(&bmi))
+diff --git a/include/bootm.h b/include/bootm.h
+index 82ab8e0e565..97f77bc1ded 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -44,6 +44,8 @@ struct cmd_tbl;
+  * @argc: Number of arguments to the command (excluding the actual command).
+  *	This is 0 if there are no arguments
+  * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
++ * @ignore_bootm_len: Ignore the value CONFIG_SYS_BOOTM_LEN and use 10x the
++ *	compressed length as the maximum uncompressed size
+  *
+  * For zboot:
+  * @bzimage_addr: Address of the bzImage to boot, or 0 if the image has already
+@@ -69,6 +71,7 @@ struct bootm_info {
+ 	const char *cmd_name;
+ 	int argc;
+ 	char *const *argv;
++	bool ignore_bootm_len;
+ 
+ 	/* zboot items */
+ #ifdef CONFIG_X86
 -- 
 2.43.0
 
