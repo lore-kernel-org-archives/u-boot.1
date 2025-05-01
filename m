@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC128C369DC
-	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 01:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74015C369DC
+	for <u-boot@archiver.kernel.org>; Thu,  1 May 2025 01:07:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EEAF80FDA;
-	Thu,  1 May 2025 03:06:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E71A8212F;
+	Thu,  1 May 2025 03:06:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KJeroA05";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lXnNLxOg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA97380FDA; Thu,  1 May 2025 03:06:06 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 7C084807B1; Thu,  1 May 2025 03:06:09 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70ED08283E
- for <u-boot@lists.denx.de>; Thu,  1 May 2025 03:06:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59143826F3
+ for <u-boot@lists.denx.de>; Thu,  1 May 2025 03:06:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3d965c64d53so1878405ab.1
- for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:06:04 -0700 (PDT)
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-3d817bc6eb0so1542845ab.1
+ for <u-boot@lists.denx.de>; Wed, 30 Apr 2025 18:06:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746061562; x=1746666362; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746061565; x=1746666365; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p2u37CRncHqP46ha1dXdu0D1wYo2iqF6MLQq2+qs2L4=;
- b=KJeroA054O/0F3TI8Hfism2PEZj4d4w9lSsRaLGtsLoBu/ioZN1xW2HYip3y4YYmer
- Opj0HY0n97kDmM5GBIY3GAw7AF1jatxKBsQJcSPU/mJhTG46G+LdffMIiaKx14TTHO6/
- KREkkfD22G/AMw7+DZjhvbjPKbtlyyu9uG5U8=
+ bh=AONkFk15e3mWWkotOK4kZeX9poimPH2DQLiLHek5n5k=;
+ b=lXnNLxOgYWC/KckyxtD3DNtJhiMzNnOEvEPwCF2UHeHlZQcJZ8fS7PQmAbv+qzEeWx
+ n37OxEaBB2mR6YyWm2zOo+DvUSkdeH3owZw6OSajvqm9lj7JKkccutvZ/ooh+qasFvxv
+ mKBRtLV22uZK/mcHZrTX+JUyqd+ksKZ3lFaR0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746061562; x=1746666362;
+ d=1e100.net; s=20230601; t=1746061565; x=1746666365;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p2u37CRncHqP46ha1dXdu0D1wYo2iqF6MLQq2+qs2L4=;
- b=R1eUbs0r+EZsEr8Le1O1Xy8cukSQSRp+RuZQSQTg53S7q2mcDsLn6Pm4c/aVs8bBSf
- gAZR3Rt/gakBM84NdZdfmGP9Qeg5UVW64l3UInsoy6CgzVUeVv0dAT5VQngRdBOboyvA
- YZ77BDZanm4vDyxPzB88/CaRRf+A7MjRfPr41pD1UvPEZjhOrFILAFvtEYiQb0Gl/rT0
- VFHrxS2CyRWhe6pOtsGf4NYIhTjMSYJjO6EwgSRd7zn5aDIiAiVPTwiaPPC1ZlL5wsLq
- j7Jf0iHTrH4SeabHeOHOOO8ufqMQ+SGS4UDEoBHXMBdXqr1dPtMDJn7Ys4GRd0h2xqWb
- 4Y6w==
-X-Gm-Message-State: AOJu0Yxb9iFMBpo6nPGlaeYjDKigspoM7HANC06FGQpMkjE1mpdz5s15
- ydDLO9n3fk1DdaXjOg/9AxEp6wKjPagHhBK5J1Tb9gda+zhFwGTdVuAe8wuI30YJQN5a66N9dVk
+ bh=AONkFk15e3mWWkotOK4kZeX9poimPH2DQLiLHek5n5k=;
+ b=ie/Yg1jt1aAevGLHj1UQTnV5QUlnfnG2bE5OtJXqw88gHYQxd5WK1isJUP56MGGYrv
+ aQGs26TcVo3xlnrTlzUlvOQFvGjjIgHS+LjstCyQw0neWAnWTcsGfjZRyqQSa0ztFCHK
+ rZxqCccSeBYDhUzb4Zxdu+uqEvFtgE+/ja9ZqeP6TKoEg9adyLmt2+Lxmt9XdfvL3GQG
+ MngjTmP8qKUHcZHFdcf172jOeWEpB7YAFzvbDdqcEgvKhM+Y5x8aAea0TUEuI/YAv+4F
+ D3/49Amj0IaJG05HydoIJXs4oedNCLfpkUk5HmlJunoqEK5oJ1gDFndl67uh1PCmUlqc
+ Zp5w==
+X-Gm-Message-State: AOJu0Yy2yAllaX0UPTVwY6wCP/07aBiPSn849ec2kbFjDwoi3ys+3kfi
+ YrkmNEVpSnOxvGAf39jLrDo8dwoZmIyXOWL+G9eI1XJKI9AmxwrNmhVT3k9LVgq+P2L5wmpTEhM
  =
-X-Gm-Gg: ASbGncsjpEjhuokOe18J8LkieZ+BSNB+HRhht5BavCBe49IFc9rMSmoGMGfh/mbdvZM
- qKirHnMKjJqtiFz9BEJV9+xfY86MEZAgwmenc/wPU6/SuDX63IpzfaY2Fa5X/CMAbNKlU9gH46X
- 1LSdX9ESK3qG+QegN/XwcNxIghMXsxSoqSutZ3VrY1KtByLtTriggnsrIvsci41yZfuxvUUsq/m
- VetJxixLCKQ3lYF9tkz4wxugTwP086DJ3wKmmE7JWpvZKApCB8JnblajrTWZc9FvqZYypJlpTJw
- iMzER7Hy9mVYYkP42JYugQp7St3XTl8bnCkzBe9XRAPtJyg6dI94KXrz0uMxXHSEWUfdHYFRh20
- tmg==
-X-Google-Smtp-Source: AGHT+IHM+lLNIDdzdXjkaJJmrZwf4bGP72hEymvV6l2L8ckUsy6pPnD3KxXRJNJ+sIbqK0Y7d21TKA==
-X-Received: by 2002:a05:6e02:3002:b0:3d3:dd32:73d5 with SMTP id
- e9e14a558f8ab-3d9701a4ba8mr8867375ab.4.1746061562663; 
- Wed, 30 Apr 2025 18:06:02 -0700 (PDT)
+X-Gm-Gg: ASbGncuJR0wxY9YDnWY3afMXos7erDqQGFGHav9v/FJ4xyd0OKFRh9ZJXl+2m2YKSiq
+ 3C+0kQYiht4uVTGr5m/Al8YyVrdGtOK64NI13QtqVcAU9FmCMnRx6Iyk+Nj5hHXUuG4IoctASnr
+ v/WWVSIgE0f6ETFQTq/a7EJxYWfGwzjlW7Su+xI//As9NC2n0f09znTn29rZb5poIcW1c5VSwUp
+ w91dMrBUI01e0/kdyVw8NpSM0Y8r0RjeswxfNDYwsXFzFT2wVaBRzt0cfghpjdZ4tBE4AvWO0Sl
+ mMP9+e8Pl0wUCLVZFlUd1Fhi87FQYOdMS1f6z7fmM3wh4C/aF/vp3RmaDlLPGs11CfymF7OYnmY
+ Thg==
+X-Google-Smtp-Source: AGHT+IGZFLgYBzPTOmO9FD0AoZW0r++76NahO6onzwPvyt/msECyUjiL3KoWrZAv24HAVjB3xQBYgw==
+X-Received: by 2002:a05:6e02:b4c:b0:3d6:d145:3006 with SMTP id
+ e9e14a558f8ab-3d96f2529f9mr16398185ab.20.1746061565543; 
+ Wed, 30 Apr 2025 18:06:05 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d95f480a99sm10771855ab.68.2025.04.30.18.06.00
+ e9e14a558f8ab-3d95f480a99sm10771855ab.68.2025.04.30.18.06.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 18:06:01 -0700 (PDT)
+ Wed, 30 Apr 2025 18:06:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Daniel Palmer <daniel@0x0f.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 17/22] elf: Only use network environment-variables if net
- enabled
-Date: Wed, 30 Apr 2025 19:04:42 -0600
-Message-ID: <20250501010456.3930701-18-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>
+Subject: [PATCH v2 18/22] net: Include byteorder in net6.h
+Date: Wed, 30 Apr 2025 19:04:43 -0600
+Message-ID: <20250501010456.3930701-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250501010456.3930701-1-sjg@chromium.org>
 References: <20250501010456.3930701-1-sjg@chromium.org>
@@ -99,77 +96,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If there is no network support it doesn't make sense to try to read
-these variables. Add a condition to handle this.
-
-This is needed so that env_get_ip() is not called when it is no-longer
-a static inline, but included in net/ code.
+This file uses byteorder but does not include the header file. Update
+it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- cmd/elf.c | 41 ++++++++++++++++++++++-------------------
- 1 file changed, 22 insertions(+), 19 deletions(-)
+ include/net6.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/cmd/elf.c b/cmd/elf.c
-index 6b49c613703..c94125dc4a9 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -242,30 +242,33 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		 * The following parameters are only needed if 'bootdev'
- 		 * is an ethernet device, otherwise they are optional.
- 		 */
--		tmp = env_get("ipaddr");
--		if (tmp) {
--			ptr += sprintf(build_buf + ptr, "e=%s", tmp);
--			tmp = env_get("netmask");
-+		if (IS_ENABLED(CONFIG_NET) || IS_ENABLED(CONFIG_NET_LWIP)) {
-+			tmp = env_get("ipaddr");
- 			if (tmp) {
--				u32 mask = env_get_ip("netmask").s_addr;
--				ptr += sprintf(build_buf + ptr,
--					       ":%08x ", ntohl(mask));
--			} else {
--				ptr += sprintf(build_buf + ptr, " ");
-+				ptr += sprintf(build_buf + ptr, "e=%s", tmp);
-+				tmp = env_get("netmask");
-+				if (tmp) {
-+					u32 mask = env_get_ip("netmask").s_addr;
-+
-+					ptr += sprintf(build_buf + ptr,
-+						       ":%08x ", ntohl(mask));
-+				} else {
-+					ptr += sprintf(build_buf + ptr, " ");
-+				}
- 			}
--		}
+diff --git a/include/net6.h b/include/net6.h
+index 1ed989e584a..2709fe9c4dc 100644
+--- a/include/net6.h
++++ b/include/net6.h
+@@ -11,6 +11,7 @@
+ #define __NET6_H__
  
--		tmp = env_get("serverip");
--		if (tmp)
--			ptr += sprintf(build_buf + ptr, "h=%s ", tmp);
-+			tmp = env_get("serverip");
-+			if (tmp)
-+				ptr += sprintf(build_buf + ptr, "h=%s ", tmp);
+ #include <net.h>
++#include <asm/byteorder.h>
+ #include <linux/ctype.h>
+ #include <linux/errno.h>
  
--		tmp = env_get("gatewayip");
--		if (tmp)
--			ptr += sprintf(build_buf + ptr, "g=%s ", tmp);
-+			tmp = env_get("gatewayip");
-+			if (tmp)
-+				ptr += sprintf(build_buf + ptr, "g=%s ", tmp);
- 
--		tmp = env_get("hostname");
--		if (tmp)
--			ptr += sprintf(build_buf + ptr, "tn=%s ", tmp);
-+			tmp = env_get("hostname");
-+			if (tmp)
-+				ptr += sprintf(build_buf + ptr, "tn=%s ", tmp);
-+		}
- 
- 		tmp = env_get("othbootargs");
- 		if (tmp) {
 -- 
 2.43.0
 
