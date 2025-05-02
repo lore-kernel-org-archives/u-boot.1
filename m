@@ -4,164 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4163EC3ABA3
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 09:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3560C3ABA3
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 09:45:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2B4D81E72;
-	Fri,  2 May 2025 11:38:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 648FC81E72;
+	Fri,  2 May 2025 11:45:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="f0MRFuO9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zYs2OilC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B5B480F03; Fri,  2 May 2025 11:38:21 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2070a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::70a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6312A81FDE; Fri,  2 May 2025 11:45:02 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5540281F7E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 11:38:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 40D9A80F03
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 11:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=D.Schultz@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WllEzTwXmumQd2mOiX/xrzaAT46ifU418ZM8dXySha02Uor6a5qf/tq0gfLtBUSEQZD4efpodfiwSk2jrQsYHZq6MWkBzEhBo1qDv0ZbT8tFDcg71hqCDLnTCt4eau7FGk/xu/t/6pAhuD0F0Kk0NHEDerQdU/0GkV6eDRTculSHAcWYFeB24CwfLLjyEIvyrZuPjBHyQJIQwDmdtMexFQL6CCK7vSOXQjT3sxGVfP0j4BweqFQFBogPbigW4go6SBNJokMhgS18NdvWg0rQfDJRlmF0yAsMugnfxzeQOHjiPs9h+fEplBEPYOltlHvZ3rjdFKy6jzEzeByi2hJHMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zLeh6lcUXmhJ+KPNteMgP+IXuCWRl7scZSb6PeRX8mE=;
- b=edztEQ9oRm5L3LfHq0JZlfdimYa5CW+TLFrPQsHvBu96gaOGd34mbiz8Qvnn0QRgMb0eULApXeqNfTRU0BGV3h2NgmCTjk2gmrC/+jTwkEcx7f5lRYuZxfHHz15O231jqivxif94qthOKqSgubgkKClj/EE/P0WfSKrW9w1NM4syHvK9/qj3jD7pWvgmRC2Xl+BfR9hSGUGGY4etNTzaiDN1MiXH07z1cstrD6EdYqbboKhZMfa4DTYjoj37oJYgOXg9lbqp9FTcUB6FybMPrTbrYkCo/l9gJLvVi/hXVHdY+8wzoGdNB/9050lrp/GBV2dka4R9y0S26UpcA8VH7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
- dkim=pass header.d=phytec.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zLeh6lcUXmhJ+KPNteMgP+IXuCWRl7scZSb6PeRX8mE=;
- b=f0MRFuO9iGCM3/8MNWD/qtGwLgzyRIof1wJT0Waq3tIzoc9FSJ5pPkWJGfcBPXEyuj3PR8aVATkJGEVNAcT6YpWQWe2oAXrFTJ67UrYL4GOqitgkVeXECRQULuxfl+XCdnbK9eLIc/4s5jh/FTJpkziO65oQ90ouCDlpiVrRGy1xCzocsFnfwnmzv/b/nl6JZisoh0BO/IS7Ew4YAM+M2DSdZzOlkhzV9LwgA6Olx10v0J5mAMUOD+NFM3MKU3J9AMSss9TXFjbJnVj76T1TLlfzumd44GFOFs7IVAJoqRbvCQalpR0Xr4xHRZ6FB16xLdFIHHW0tvIc+WbZLWBLTg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received: from VI0P195MB2484.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:248::6)
- by PAVP195MB2309.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:2f5::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.22; Fri, 2 May
- 2025 09:38:17 +0000
-Received: from VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
- ([fe80::24f:8371:2871:5981]) by VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
- ([fe80::24f:8371:2871:5981%4]) with mapi id 15.20.8699.019; Fri, 2 May 2025
- 09:38:17 +0000
-Message-ID: <235f58b4-6c3e-49ea-9a16-4eb0582b472b@phytec.de>
-Date: Fri, 2 May 2025 11:38:08 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] arm: mach-k3: am62a: Fixup CPU core, DSS, CAN-FD and
- Video-codec nodes in fdt
-To: Nishanth Menon <nm@ti.com>, Aparna Patra <a-patra@ti.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, afd@ti.com, d-gole@ti.com,
- vigneshr@ti.com, n-francis@ti.com, bb@ti.com
-References: <20250430104236.2611089-1-a-patra@ti.com>
- <20250430104236.2611089-2-a-patra@ti.com>
- <20250501122848.jaun54umcun6ijs7@domain>
-Content-Language: en-US
-From: Daniel Schultz <d.schultz@phytec.de>
-In-Reply-To: <20250501122848.jaun54umcun6ijs7@domain>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MW4PR03CA0072.namprd03.prod.outlook.com
- (2603:10b6:303:b6::17) To VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:800:248::6)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI0P195MB2484:EE_|PAVP195MB2309:EE_
-X-MS-Office365-Filtering-Correlation-Id: c6b076a8-026a-412a-ae74-08dd895d1112
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|366016|376014|1800799024|10070799003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M3pmclRDMWxDMUlCT2s5RDhHanBzV0ZVRFhxMTdoZzc5Mi83SWczZ2txTWt1?=
- =?utf-8?B?NWR2dnZKSjZURjlPaUh1UFExWHNReGN5VnhPU2FydjRhRWdRRlE3VExHYVVN?=
- =?utf-8?B?NFkzVTVjTUI3ak4xZVgycXNhWnVzbDRkREhrMkw1bDhSR2p4anRXbmZmM2hm?=
- =?utf-8?B?Q3dGZHpoVU5nakNET011eXQ2KzR2NTRoZW41SUs0WmNDRStoUVMzMUUrZmtn?=
- =?utf-8?B?RloyNWtSS2RnK3lXYVFFYk1nclBtblQ1VkFNS3BYWGlqUlhYT2wySVRVbTY5?=
- =?utf-8?B?UmVTcG9HaGJtLzZteEgvVDM4VXFJZmdyc3NiK1NnWmVLOGNZRDVMZUMycVls?=
- =?utf-8?B?bnhYbVdscHRIYk00a1ZTZnF6UnMyd294WGZRWTA0Z3I5YWg4emxuUmlybWZW?=
- =?utf-8?B?ZTl4TmhEWit5QkNZSC9qYmN4bkNQOHUxQ2lYM1J3TW5ncTluSEpJZmt6L3pa?=
- =?utf-8?B?a20rTW9VNHl4UVZnY3BLUnpXekdnbWt1YUN0NDc3N0JrR1pZSm81R1pxVVhl?=
- =?utf-8?B?UEdLVGs2dTdEWWRBRDFGV2oyckpuUTlXbGVMUlNzejlUR05sLy9GN0VHcTA3?=
- =?utf-8?B?RElKYldNLzdJR1pSZTVURHVOcFRjNm80WUhkNFhzZzlSdnY5dThlTlAwMmZx?=
- =?utf-8?B?ckVZL3lPanROU0MzSjc0YjhKMTIrMWNyZzBvOG82NlZnQ05zRHJnM0FqaUd2?=
- =?utf-8?B?RnN4OHRLTW9iK0h6R1lydEFBRTArMzMvZUV1L3dCaUhxdGhDK3RxN24wVWU0?=
- =?utf-8?B?bDNZdUMvOGdZc0FPRXA4RC9QV3ZNYkwyaXNPakxBSTlQUml3aWNXNjhab210?=
- =?utf-8?B?Mm5BRHJqT0NYbS9NTUc2bjdKUnZOeWIyc29tNVBvSEJMN3BQaDF1a2c5ZGlF?=
- =?utf-8?B?YkVyV052elQzRmlTeUs0M3M1YlYyQXlLNnZzeVp1a0grYmpLd3cwS3FnYWc0?=
- =?utf-8?B?b1ZTVE5FWndrckJYUlQxRVlrNU5xR3VETDU5TTVuYjJGcWdNL1pYS0hBNzhi?=
- =?utf-8?B?eDVuenFtMXZqaGhmdldPb2xBUmxyaWFPVy8zMG04QXNJTEFaN08rZU9vZUtE?=
- =?utf-8?B?eW05V21zVEVwajlEdEE2VWdPUjhEVDF4azBYWVYxMkdOcjBudnI4MjU2V1dJ?=
- =?utf-8?B?TVdMMHpDaU5FRjNhZ2hOVDRxQWlLalhBVjNwZ3NGWklOK1pWdDVxUXBqNitw?=
- =?utf-8?B?Vk0rTjdTOUYvak5hbFJ1QzVaRjZIem93VmxlQ3d3NHpxODJGdWxwYnF0SUxP?=
- =?utf-8?B?bFdrbHhaTEJtT2QxUWp3d2c5N3ZxaFE5NHFDdW9VaFVwZXlTYnJyTTNPZUdI?=
- =?utf-8?B?MXJLdjVUcGR3Y2FvN3IvWlo3aXVPUXRudWsxZkJTdG9yNHNZdTVXN1B3djQ5?=
- =?utf-8?B?QlJjUUlnWWNzcWVxOE56d2F1Smh0ZzQzWmpMaElYaWZicFpkODllS2xWVmow?=
- =?utf-8?B?NDJvb3pQSzVNZ0hGR1BTRnUxenV2MWNMSXpWQ0lOdHNNRTcxQ092b3ZNbXpp?=
- =?utf-8?B?Vlg5UmFYSWxjaGkvcTR4ZktsSnM2bUVwaExSK0h0aDJMdkkyL25PeDFWZm5o?=
- =?utf-8?B?TjlaMFZTR1JZNVJ1dHhMbzFrVHVPRlBpYi9udHh6QXhZZjl6SHBtdWFuTXJH?=
- =?utf-8?B?UXJMSXJTWnk0UlNnNEVuTDFOUXhod05iNGpOQ2l6cEFpM01OODhoUE8xOHVB?=
- =?utf-8?B?VyswWFNIdGxneHM2T3NNeVpPRk13ekRZTmhGN285RU9kcmhmQWxXUWxYME1J?=
- =?utf-8?B?d0VaT3FodnRyOXZJMVlrbmtRQXFrQXpLdzI5UFBFd1k0dzBjallrTk9aa1R3?=
- =?utf-8?B?QnJIZXZ5RjdDVEdraW9UM2ZHcjhwOVA5Q0hZcGdpR3NrZ3R1Mm94eWFWRDdK?=
- =?utf-8?B?aTFvQkJIc3A2U2pVUEhBVVpvOEJYRDRWdzRBUTdkQjRxOUFFdll2bTlRSkVn?=
- =?utf-8?Q?ZkFq76D9cZM=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI0P195MB2484.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(10070799003); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VGUzNEtzbjJFQ1NlaTIzT1AyOTF2R2tlbkZHYWRJb2pRUzVreXFwa2J5ckUy?=
- =?utf-8?B?UFNiZXlxUE5FYXdKREZ5QVFSQ0l1TjQ3NU1YY2tzUXErMEFIQ2padnZ0OGFV?=
- =?utf-8?B?YW9RcEUwSzQzVWFPOUc0UEVra3B5bEdZRWNNNkRTS3JTbTJ4YllPek1Da2tV?=
- =?utf-8?B?dmtPdDJ5ZzBXWHdFd3dUQVpEblhpWGlTaUswRysrL0htQU1NWFE4bUxIeEh3?=
- =?utf-8?B?S0ZoN3U3ZzdVeVUvcEQrYktEcC90MkwzZFh1WVpydDNCMjFPVmRnT2Y2cXpR?=
- =?utf-8?B?M1pBOWpsSER1elVZRVUxQW1CaHpURVlqS1p0TGdHU1NSQWxLeEduODZPUmxx?=
- =?utf-8?B?TENYZ0UySnVxaXJ0dVlna0hpaHVhcHdwdEhyTEM5Y2N3UXZRUVZiYTI1cHh3?=
- =?utf-8?B?WXltRVUzdHE2RWhFbTJUSldlTGMzeFpVT1FrQ2FqSjdyc2VWRkkvbzZ6dnRO?=
- =?utf-8?B?Z21hRFNyN3hzSElvQ1hJTHJDQlNBWHAxNXZPTkpUQk1VbGw0dWtwTDhCeWdz?=
- =?utf-8?B?cVY3L3k0aTQ5M2Q3YUN3S244KzllSjhRdU85eEZkMm1RZTJCbjAwOHd4eS9q?=
- =?utf-8?B?VXhrNEVrT3BiekExc1liSitMSERWTGh4WHhHZ2RvRDBRWGxSTk5sRmt4TnVj?=
- =?utf-8?B?OUVjL0FVYXM5UWtEb0xINUduc1JnTVZ1QkduRVNjcWZUc1J2Tk16b3lWNFAr?=
- =?utf-8?B?Nkt1NEp5ZHNhdk0wMlZwV2lWWVhINDdwVjZOcGJWZlJwU0plTDhEOGpONXc0?=
- =?utf-8?B?ZEx2Qzk2QnRRUVVlTDBOblRtZmNzL3hacDNHb3BhbXpNMkVPOXJLc2RJYU9s?=
- =?utf-8?B?UDlkT1J2ZVBOeWZzWm1sbXNzcFJFZWk3OGh1dkFTT2ZUQ3ZGeUg0b0NLblBQ?=
- =?utf-8?B?MkFDbWJPeTdmSE9XV1N6VW4rQmNXWXpwQXBqSlpjQyt6SFFDTUEwKzJ2Q2xr?=
- =?utf-8?B?aTVLQXEvT1IvUTBISXFaaHEydCtRY0dQZnZYRGcvNkNNb3lsMFFVZmt5bm5H?=
- =?utf-8?B?UlJTUGNEdnRhV2pYV2JBQWlIaHlWallHZDdlckVOUVlENGdHYU5LSHhBaHNx?=
- =?utf-8?B?VkxaU2E4aHZablFTdnFKVzUvZW1mUS90UEg0T0QwYm1WN2o5dnlsY2RJSmE4?=
- =?utf-8?B?UHJhazd3cFFYOXFwSEJkS0ZqNzhMdlc0NUxXWW93VEtyRDZ3cDF2ajlYQ2l4?=
- =?utf-8?B?d1VhSHdyTE56b0Q3TUVLUlRhWmdEY1JtdFBVWlpQTnVYYjJOaSs3U25wQmFr?=
- =?utf-8?B?bTB2KzVsY0VZc1A0azA3R2VpUFRxR3pTRTFJUXlCRDRVNC9CQ3ZFQVVsYjRk?=
- =?utf-8?B?TGlBcHhxc2xvbmpjcXN6dDBYd1BmV2xETnVPVGd3VCtrWVJSZkx5MXV5Z3N4?=
- =?utf-8?B?cmdDblYwenppazJJRXVMai9Sc1NCY29TMjNleTQyVmptbloyN1pJekcvOTJT?=
- =?utf-8?B?Ny9TcjY0Y0V2RTZOSC9UQUdpeUFmU2NCVkpmb3M0VERYVUxqb0RsTVVUaGtT?=
- =?utf-8?B?MWtoQkk1WlptVUk2VTUrMkRKR1VLUms2V1J3NGtuVXN2SDJrbms5enNSbUgy?=
- =?utf-8?B?MWpQYjRZa2NTQnRkZDhoVEJyd1JINE9pd1A5ZWdwV1JZa1p0aXNnRzdUTHRK?=
- =?utf-8?B?TVFDZExGMGpZTGtsNTlRMko0MU10bVQ1UElTQUVKNzBkdDdIbGYrNHpwUnRo?=
- =?utf-8?B?dEdlbmF6QXRXSnRQaWdsOUVHQXJwTHpJZkNuanl1V3VRWUdpVnp6TStneDhB?=
- =?utf-8?B?d2pkcllrVG9NczZnenJ4NUE0UkZOdDlaejIxTlUvdGF4RTF4K1ErbU1LY1Vj?=
- =?utf-8?B?ZEN4a1VyNCt0M0xiZkRPcXQ0UkVRNlZEVFc3dEZIeFhMdjlxVEN3QW1iUUlt?=
- =?utf-8?B?ZThSZ24wY3ljNUZFbzVUc0lJWGpYdGREU1dkQXJxdEEzQ2tOYjRFUzR4cEdn?=
- =?utf-8?B?Uno2NXcrc2gwUFhwSTUzYThoc2lvU2grUXFPRGk4ZXVLdktvblVIdDlLb0xm?=
- =?utf-8?B?WUZsMHNpTTgwbkZ6bmJpNjdUV3hpa0laaWZsREYvNGNyS1hYZEV4S3FYNEk0?=
- =?utf-8?B?TUdVSjRGYUxhTmxmOU9VN1hYUDNXSlBjRURsUE5BMTQ1SnEzUlVtNDNMWk5j?=
- =?utf-8?B?M24xYmVpZDlkREJ1K3ZCdDRKY01FQ25mWkJENG9maDFlWSsyVWphL0xpRmtU?=
- =?utf-8?Q?w1d1Y0n555FM9i5GJB7eXiu4nvEYzISTvYTvWOxPU7ui?=
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6b076a8-026a-412a-ae74-08dd895d1112
-X-MS-Exchange-CrossTenant-AuthSource: VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2025 09:38:17.1315 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0QoM24sSMjOhPjZ+9FrRIPjt7Y1DEG5nSde3YMJZ4hb5vijkIiBlCqyEQGDJb98513etKfPj1YYAZKFX+jdStg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVP195MB2309
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-441ab63a415so16977885e9.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 02:45:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1746179100; x=1746783900; darn=lists.denx.de;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ru5NOrPnnmnAEljz+vQqM+krA1J0oNM8JI9N10p4xyA=;
+ b=zYs2OilCJpLRZI3F/Y+BWFV+JZZqsi6SsHmBU019WlbNpMiLiuh3ovXidRNU0OKVLP
+ jX/nPG91xfRb7WuuiXJFpQvw5u/w+ovsPOyQpT4Stq9mXfM43btzzaO/Gz57/GV/lQN5
+ EUAlKJGOy8BWri2+U6jEprp6k5HFG1Ce6ks5QsMffVsTWlOP7JpfgRtUJbeF5L51/2na
+ Jp6pf+ETCa2KB8csdg3oYAbUbZbdr2+SRqTTRNTKCDXXTdfcO9TtZM01PiXEwBGUoiU2
+ V0g3bMdEBiU05qOmMFndzDp5Yip7FTVRLf+A5jwgtYbTQ4X3b584JOvdVVvp0l08ZSKG
+ zdrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746179100; x=1746783900;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=ru5NOrPnnmnAEljz+vQqM+krA1J0oNM8JI9N10p4xyA=;
+ b=IKsuxlT2TT9irg5yRIZS9BKrKma7rNLNPzGMJa27sFB3ETMtSeuZImbpvzaesYL2EO
+ App6OIzEdk75KZNVsjMQFko9rs2g2A3BQQb4wzE2KsEKf8RY86fht7OCZqjvJMlPJVGu
+ FdE2PZPxAyMScB6H9PVOBvAnT4yvRCU0/lqszWii3zoloHB0IdduI3pR0V2ORoU4cmkK
+ dTt3Y9qH5xDPY0AY0eZazXPYlQHoeUMxLBeFAeh0WR79na6Tq0nKxE4dzD3rYW1kGt/q
+ x1qqktP0X/CCEHaFlLL9m+nQ5BFyeASyEy0Pblu5I0BLzaSBoNeZd5BUKGWRm+4uWIXg
+ oRZA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUUkPEf6+31tjBUcFF4rVAOJzGWEFSJThn2aP6c6EdHyLNkGw4IzlFjeJChVGf310qQxi6n47c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2DyV5JQThRKcycgpqqK1KEhaPTtX4n5A+skBPER+xDqqmwpNW
+ U0CETzp+Rdr9mY1My6QJYA0yUwWPNVXr92lpiPIjj5UGEFyv2NorPlGyRhtd40A=
+X-Gm-Gg: ASbGncvqr0gwAek8x5NchRcaEO2HOX7TGaG37W5sYBcoVEP9yG+t/APlSGcq9smkjoo
+ +QocPragTvsbxtAHgJjXoL5MjVj/64dWdD0IY27/yZnpXbn6HOVP+a72CuNP0omrLwMR32tWy1n
+ 4uu3A897eLLE9TPYM3mllCbV05uP4jRSM+2DczbRX42sSa66i8NHSRC34iv0/lsVjGrOQUYHiLD
+ MTYsoztBAb4UwhMsXjRD/ri5MwiKas68VXMJYf1Scfjfm3+EFWH7L6pJZw5URHPRyqzBUFUwf/E
+ I2sidjp8nNvlqbii4ZX8HfQNLtrqmD7SaumMqHdE2S0Oq/KBzprmuDJrmu4=
+X-Google-Smtp-Source: AGHT+IFmGQfhcVg5UNa9vJ/obYC3+Po3MMXYXUlIxS7kdj7btcC45FdEk5rT8BRXwT99TeOTUHa5SQ==
+X-Received: by 2002:a05:600c:19c6:b0:43c:efed:733e with SMTP id
+ 5b1f17b1804b1-441bbec269dmr17851285e9.14.1746179099606; 
+ Fri, 02 May 2025 02:44:59 -0700 (PDT)
+Received: from localhost ([46.198.180.244]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-441b2aecedcsm85946595e9.15.2025.05.02.02.44.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 May 2025 02:44:59 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 02 May 2025 12:44:57 +0300
+Message-Id: <D9LKTV9QKJRU.ZTIVOHQA6AUF@linaro.org>
+To: "Heinrich Schuchardt" <heinrich.schuchardt@canonical.com>, "Simon Glass"
+ <sjg@chromium.org>
+Cc: "Tom Rini" <trini@konsulko.com>, "Tuomas Tynkkynen"
+ <tuomas.tynkkynen@iki.fi>, "Patrick Rudolph"
+ <patrick.rudolph@9elements.com>, "Mattijs Korpershoek"
+ <mkorpershoek@kernel.org>, <u-boot@lists.denx.de>
+Subject: Re: [RFC 7/8] efi_loader: create EFI BOOTDEV
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+X-Mailer: aerc 0.20.0
+References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+ <20250421162555.1200687-8-heinrich.schuchardt@canonical.com>
+ <CAFLszTiUL=zOtK3=yu_XpW_x=iKtBCFNqZ65Q+qv=AAPQMjUBw@mail.gmail.com>
+ <785ae15f-62c0-45e3-ae7e-6b56c4a3c3d6@canonical.com>
+In-Reply-To: <785ae15f-62c0-45e3-ae7e-6b56c4a3c3d6@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,156 +105,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
-On 5/1/25 14:28, Nishanth Menon wrote:
-> On 16:12-20250430, Aparna Patra wrote:
->> AM62A SOC is available in multiple variants:
->> -CPU cores (Cortex-A) AM62Ax1 (1 core),
->>   AM62Ax2 (2 cores), AM62Ax4 (4 cores)
->> -With and without DSS, CAN-FD & Video-codec support
+[...]
+
+>>> +static const struct udevice_id efi_bootdev_ids[] =3D {
+>>> +       { .compatible =3D "u-boot,bootdev-efi" },
+>>> +       { }
+>>> +};
+>>> +
+>>> +U_BOOT_DRIVER(efi_bootdev) =3D {
+>>> +       .name           =3D "efi_bootdev",
+>>> +       .id             =3D UCLASS_BOOTDEV,
+>>> +       .ops            =3D &efi_bootdev_ops,
+>>> +       .bind           =3D efi_bootdev_bind,
+>>> +       .of_match       =3D efi_bootdev_ids,
+>>> +};
+>>> +
+>>> +/**
+>>> + * efi_bootdev_hunt() - find devices used by EFI boot manager
+>>> + *
+>>> + * Invoke all hunters that have not been invoked by now.
+>>> + * This should only be the network hunter.
+>>> + *
+>>> + * @info:      info structure describing this hunter
+>>> + * @show:      true to show information from the hunter
+>>> + *
+>>> + * Return:     0 if device found, -EINVAL otherwise
+>>> + */
+>>> +static int efi_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>>> +{
+>>> +       return bootdev_hunt(NULL, 0);
 >>
->> Remove the relevant FDT nodes by reading the actual configuration
->> from the SoC registers, with that change it is possible to have a single
->> dts/dtb file handling the different variants at runtime.
->>
->> Signed-off-by: Aparna Patra <a-patra@ti.com>
->> ---
->>   arch/arm/mach-k3/am62ax/am62a7_fdt.c          | 41 +++++++++++++++++++
->>   .../arm/mach-k3/include/mach/am62a_hardware.h | 40 ++++++++++++++++++
->>   2 files changed, 81 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/am62ax/am62a7_fdt.c b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
->> index 7f764ab36b..56fd658202 100644
->> --- a/arch/arm/mach-k3/am62ax/am62a7_fdt.c
->> +++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
->> @@ -8,8 +8,49 @@
->>   
->>   #include "../common_fdt.h"
->>   
->> +static void fdt_fixup_cores_wdt_nodes_am62a(void *blob, int core_nr)
->> +{
->> +	char node_path[32];
->> +
->> +	if (core_nr < 1)
->> +		return;
->> +
->> +	for (; core_nr < 4; core_nr++) {
->> +		snprintf(node_path, sizeof(node_path), "/cpus/cpu@%d", core_nr);
->> +		fdt_del_node_path(blob, node_path);
->> +		snprintf(node_path, sizeof(node_path), "/cpus/cpu-map/cluster0/core%d", core_nr);
->> +		fdt_del_node_path(blob, node_path);
->> +		snprintf(node_path, sizeof(node_path), "/bus@f0000/watchdog@e0%d0000", core_nr);
->> +		fdt_del_node_path(blob, node_path);
->> +	}
->> +}
->> +
->> +static void fdt_fixup_dss_nodes_am62a(void *blob, bool has_dss)
->> +{
->> +	if (!has_dss) {
->> +		fdt_del_node_path(blob, "/bus@f0000/dss@30200000");
->> +		fdt_del_node_path(blob, "/bus@f0000/pinctrl@f4000/main-dss0-default-pins");
->> +	}
->> +}
->> +
->> +static void fdt_fixup_video_codec_nodes_am62a(void *blob, bool has_video_codec)
->> +{
->> +	if (!has_video_codec)
->> +		fdt_del_node_path(blob, "/bus@f0000/video-codec@30210000");
->> +}
->> +
->> +static void fdt_fixup_canfd_nodes_am62a(void *blob, bool has_canfd)
->> +{
->> +	if (!has_canfd)
->> +		fdt_del_node_path(blob, "/bus@f0000/can@20701000");
->> +}
->> +
->>   int ft_system_setup(void *blob, struct bd_info *bd)
->>   {
->> +	fdt_fixup_cores_wdt_nodes_am62a(blob, k3_get_core_nr());
->> +	fdt_fixup_dss_nodes_am62a(blob, k3_has_dss());
->> +	fdt_fixup_video_codec_nodes_am62a(blob, k3_has_video_codec());
->> +	fdt_fixup_canfd_nodes_am62a(blob, k3_has_canfd());
->>   	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
->>   	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
->>   
->> diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h b/arch/arm/mach-k3/include/mach/am62a_hardware.h
->> index cd61abe018..ab281129d7 100644
->> --- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
->> +++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
->> @@ -19,6 +19,18 @@
->>   #define MCU_CTRL_MMR0_BASE			0x04500000
->>   #define WKUP_CTRL_MMR0_BASE			0x43000000
->>   
->> +#define CTRLMMR_WKUP_JTAG_DEVICE_ID		(WKUP_CTRL_MMR0_BASE + 0x18)
->> +#define JTAG_DEV_CORE_NR_MASK			GENMASK(19, 18)
->> +#define JTAG_DEV_CORE_NR_SHIFT			18
->> +#define JTAG_DEV_CANFD_MASK			BIT(15)
->> +#define JTAG_DEV_CANFD_SHIFT			15
->> +#define JTAG_DEV_VIDEO_CODEC_MASK			BIT(14)
->> +#define JTAG_DEV_VIDEO_CODEC_SHIFT			14
->> +#define JTAG_DEV_DSS_MASK			GENMASK(16, 13)
->> +#define JTAG_DEV_DSS_SHIFT			13
->> +
->> +#define JTAG_DEV_HAS_DSS_VALUE			0xD
->> +
->>   #define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
->>   #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
->>   #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
->> @@ -86,6 +98,34 @@
->>   #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x70000001
->>   #endif /* CONFIG_CPU_V7R */
->>   
->> +static inline int k3_get_core_nr(void)
->> +{
->> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->> +
->> +	return ((dev_id & JTAG_DEV_CORE_NR_MASK) >> JTAG_DEV_CORE_NR_SHIFT) + 1;
->> +}
->> +
-
-I can see these three following components are optional but I don't see 
-any silicon devices without them. The AM62A processor data sheet only 
-lists devices with different A53 and C7 options.
-
-BTW: C7x fixup is missing in this series ;)
-
->> +static inline int k3_has_dss(void)
->> +{
->> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->> +
->> +	return (JTAG_DEV_HAS_DSS_VALUE == ((dev_id & JTAG_DEV_DSS_MASK) >> JTAG_DEV_DSS_SHIFT));
->> +}
->> +
->> +static inline int k3_has_video_codec(void)
->> +{
->> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->> +
->> +	return !((dev_id & JTAG_DEV_VIDEO_CODEC_MASK) >> JTAG_DEV_VIDEO_CODEC_SHIFT);
->> +}
->> +
->> +static inline int k3_has_canfd(void)
->> +{
->> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->> +
->> +	return (dev_id & JTAG_DEV_CANFD_MASK) >> JTAG_DEV_CANFD_SHIFT;
->> +}
->> +
->>   #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->>   
->>   static const u32 put_device_ids[] = {};
->> -- 
->> 2.34.1
->>
-> We should do a proper framework for this that scales multiple devices.
-
-I agree, this should be reworked afterwards and moved into a framework. 
-We have literally the same logic for AM62 and AM62Ax. I also have 
-temperature fixup patches for the AM64 which are identical again. Would 
-be nice to move most of this logic into a common part.
-
-Thanks for sending those patches!
-
-- Daniel
-
+>> This recursive calling of hunting is very strange. Since bootmgr seems
+>> to need all the hunting to be done, you could move this line to
+>> somewhere in bootmgr.
 >
+> Thank you Simon for reviewing.
 >
+> I added patch 5/8 to avoid infinite recursion.
+>
+> Maybe we should move this to efi_init_obj_list() because in the
+> eficonfig and and efidebug command we also assume that all boot devices
+> have been hunted down. If a device has not been probed you cannot create
+> a boot option for it.
+
+I don't think teaching the EFI subsystem internals of a Kconfig option is t=
+he right thing to do.
+What happens if someone compiles without that? Can't we have a generic func=
+tion somewhere that does
+that? And then we can decide when to call it, efi_init_obj_list() of the co=
+mmands themselves
+explicitly.
+
+Thanks
+/Ilias
+>
+>>
+>>> +}
+>>> +
+>>> +BOOTDEV_HUNTER(efi_bootdev_hunt) =3D {
+>>> +       .prio           =3D BOOTDEVP_6_EFI,
+>>> +       .uclass         =3D UCLASS_EFI_BOOT_MGR,
+>>> +       .hunt           =3D efi_bootdev_hunt,
+>>> +       .drv            =3D DM_DRIVER_REF(efi_bootdev),
+>>> +};
+>>> +
+>>> +static int efi_bootdev_create(void)
+>>> +{
+>>> +       int ret;
+>>> +       struct udevice *dev_mgr;
+>>> +       struct udevice *dev;
+>>> +
+>>> +       ret =3D device_bind_driver(gd->dm_root, "efimgr",
+>>> +                                "efimgr", &dev_mgr);
+>>> +       if (ret)
+>>> +               return ret;
+>>> +
+>>> +       ret =3D device_bind_driver(dev_mgr, "efi_bootdev",
+>>> +                                "efimgr.bootdev", &dev);
+>>> +       return ret;
+>>> +}
+>>> +
+>>> +EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_R, efi_bootdev_create);
+>>> +
+>>> +U_BOOT_DRIVER(efimgr) =3D {
+>>> +       .name           =3D "efimgr",
+>>> +       .id             =3D UCLASS_EFI_BOOT_MGR,
+>>> +};
+>>> +
+>>> +UCLASS_DRIVER(efimgr) =3D {
+>>> +       .id             =3D UCLASS_EFI_BOOT_MGR,
+>>> +       .name           =3D "efimgr",
+>>> +};
+>>> --
+>>> 2.48.1
+>>>
+>>
+>> I am not seeing any tests in this series. At least we should update
+>> the bootflow_efi() test or add something similar.
+>
+> I have not looked into the tests because I first wanted to have feedback
+> if the general direction is ok.
+>
+> Unfortunately most bootstd tests are checking console output line by
+> line instead of functional tests which makes them fail now.
+>
+> The bootstd tests should better have been written in a way that would
+> allow running them on real boards without making assumptions about the
+> board.
+>
+> Best regards
+>
+> Heinrich
+
