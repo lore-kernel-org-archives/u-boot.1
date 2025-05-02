@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1019BC3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:48:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23194C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:48:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE01182836;
-	Fri,  2 May 2025 16:47:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A09D826AD;
+	Fri,  2 May 2025 16:47:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ic4jU58X";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ebeW77NE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3079482757; Fri,  2 May 2025 16:47:37 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 1208182905; Fri,  2 May 2025 16:47:39 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A69C8283E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFD1E826AD
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-85b4170f1f5so72745039f.3
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:34 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-85e1b1f08a5so62924639f.2
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197253; x=1746802053; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197254; x=1746802054; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kkdzb3Mwfu+gkmik8YXrQxZwG+bK5y5YFdicmxmbkds=;
- b=ic4jU58XvWtqG5lOF+GSmRyfnecsIkUZeTEb4mhltmheVcC+K+uys2KXC4+Bn0acHu
- jRB1ifhyo9HqC50zkdyW6fTq4odmZCf2M3fi7a5Yoikp/sAeyS6+0ho+9nQcBaadR5L6
- OaqjtxoD9bbCLP9GULMqjiBZUKIZJ3QlgBDmE=
+ bh=Ui2WrdkUmuGWBD25Q3cYHTbc0OII+p23M2rp8gJ447U=;
+ b=ebeW77NEJiZ8gPrRceFBJhQ9U/qNjnA2/QSkR3O0iSggZk9CsUZFsb5tH6tmEWhlNA
+ tnSkRyB7vsSmbFQBdoHbga/tJcCFfPOIghbTZtgLaxhDcnXka24XKyS8tySbDNbTSb8a
+ VT/8KF5t3a8566v0bm5OUDl6mRrAI6xTF+Nz0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197253; x=1746802053;
+ d=1e100.net; s=20230601; t=1746197254; x=1746802054;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kkdzb3Mwfu+gkmik8YXrQxZwG+bK5y5YFdicmxmbkds=;
- b=MXU1t+CVDQOlNKXVUqjGSytU8nQVE5X/zgBMEyKkL5oC9bA6XlOn6tLzTcs1bUcN5e
- zzG+0VQhXqbqAxJlyua6bgzWRptlSt7JhuupDeJBtmGCUKsjzr1UitMaNt0m6kZz1kg4
- UWq14okdUsYLoUPZR735D808GJW95gvgwQ2usLEiv56C02zAWGeLt+Jpj/rgICWd+9oi
- 2jk//D3KoWHI6biXz1rReEbHIlHtEh8oX7Z2Cs3FV17aVKyfmxOFR+mGp05qoPbzoPli
- xI74v0pJWzggDem+0/D9xrP+wcGrMDkvLup9t+WVSnDux7ixWxsy50SHdE5c3BztmtIx
- Qq7Q==
-X-Gm-Message-State: AOJu0YytU3ZAYKfUOwOz6XTCbNchEdjBYOs1F4V7NvcV7Az+aEJVVplx
- i7eHGloRQCEG15B7yKDyHIJldbdWJ22ViEj4RTCp9DDq4Cu06It6aCmiVARYfSf/Z4TNBIwja74
+ bh=Ui2WrdkUmuGWBD25Q3cYHTbc0OII+p23M2rp8gJ447U=;
+ b=FF/nYBs1XQwjFQZjDT7LSvPA6aiA0mUX/7xs8sKmVeMwbR1lROWFkOCRkXaKgYfbqU
+ fTJWEYNuR5nRKnXas2AsgZTZt4GyOsxPoAHh9+ds0uFw4VfzEs5rS3ALLBkyHnCNPwc6
+ +mMSq6mse5cqIc9cv0FnPEIJEBWAuWiq5za+n9IwfHPIwYfgt9lK7XEr+08gAsJxL6/t
+ BzytQ/CLU2TLQ0xTP8JUSh6SB3NgdFQ6dkhu/R823HB+Us/LCuj/l1LPRquUEiYdS7zD
+ gZ5taH6kwriieHyW55lDeqtAuuW25v3BDvCmfpKGzRkbu7cNek9xOB1Eeb/S4+mXBfbI
+ wZ9A==
+X-Gm-Message-State: AOJu0YzuxcARQjLkq9u6nridTQ2PAr+yjfsfTWytMifF52ZiWzD0aiKP
+ nzS9DjWeLQSOiFu9JupIcv7YywuXjwd1I4lXWIcP2Reo4y2EATxN/JSBT6dtu5h2xs5zYlilyL4
  =
-X-Gm-Gg: ASbGncuth0fDmAZ68H/laAofd28D7LeX/5+O3c2aTHpm6fhqtiJldmueHdAT6ynmG8J
- Aw+GLVT6qzjPKYLjDDyGXrmGhlrUUfgs3WVeI9yebhWim7N3vBSDJA2sTnAU3mtRYka1xxbbCLC
- jE7zQrh/zMx60xdxVx5G7gW8LAR8yBdBY2cVXsXrbzyMTEX+h125DBMVh3H+Oq3TRp8MdJ8bur3
- ASz3nDouU2KQ9D5tjO+vDGId5NFwJddp/ZeBbosM0jD6OX2CMbTntGeIvC+W2xFjOypo2WvnIvC
- 1Kt5EYmMCVGIfaMNoG7n2zctdVRAAkBAQ3Xrt/KrboMdzV8kQzel1YN4u2FGJ2+BQs7ggHMvwCH
- eeg==
-X-Google-Smtp-Source: AGHT+IFzZXvEYIaJvznbOvKsVVrAx13H41sx85eNLe37Mi/SIXYnSx9S2TUnnD8IDAzsqz2Vdr86Rg==
-X-Received: by 2002:a05:6602:3787:b0:85d:b054:6eb9 with SMTP id
- ca18e2360f4ac-866b428f116mr373968339f.14.1746197252801; 
- Fri, 02 May 2025 07:47:32 -0700 (PDT)
+X-Gm-Gg: ASbGncvjQvCJPdbfJbEnW3uRt9g/kICyDUlOtd3PP4r+0qVSJmdrZz7SkqB7DF4OKzt
+ dzVbXsFLBqLBdNx7iaHjml1NgKbATjR/fu+tCBnoDHCd52SFHzvxj1tlYeGZmqyUfoMnSCvXI/G
+ cd+XtE+sSd8pHnVg854QLb8A6561s69S+HEiABYBGTHw7KvFvkAKV95zBFdNnsAsOdTsa071VXM
+ 2IRyRwtcvFJ/3PHYL8iqGGqaJ8nltzPKt+Oqh76bB2h/9WevZ4FE5wB1/TMBaJ+UegrqM7BEX28
+ 1ZQinWmFB8Yxws35dAuNCtcbiZZvN1N696CX9hPpT9Lj9m3PrUXfFxOa7Z2jW9dcPVs45uHVTRm
+ Qdw==
+X-Google-Smtp-Source: AGHT+IFIFFHh7ic3BJwuZA0Bh4NHG1GNmLm8ubOloyy3eXwyYEIYv62kw/PVfbaREFWjZIxBw/roSw==
+X-Received: by 2002:a05:6602:4818:b0:864:552f:eb26 with SMTP id
+ ca18e2360f4ac-8669f96715amr400218239f.1.1746197254420; 
+ Fri, 02 May 2025 07:47:34 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.31
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:47:31 -0700 (PDT)
+ Fri, 02 May 2025 07:47:33 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 05/60] abuf: Add a function to copy a buffer
-Date: Fri,  2 May 2025 08:46:03 -0600
-Message-ID: <20250502144718.313633-6-sjg@chromium.org>
+Subject: [PATCH v2 06/60] abuf: Add a way to printf() into a buffer
+Date: Fri,  2 May 2025 08:46:04 -0600
+Message-ID: <20250502144718.313633-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
 References: <20250502144718.313633-1-sjg@chromium.org>
@@ -95,88 +95,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is useful to be able to copy an abuf, to allow changes while
-preserving the original. Add a function for this.
+It is useful to format a string into a buffer, with the sizing handled
+automatically. Add a function for this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/abuf.h  | 11 +++++++++++
- lib/abuf.c      | 14 ++++++++++++++
- test/lib/abuf.c | 23 +++++++++++++++++++++++
- 3 files changed, 48 insertions(+)
+ include/abuf.h  | 21 ++++++++++++++++
+ lib/abuf.c      | 35 +++++++++++++++++++++++++++
+ test/lib/abuf.c | 64 +++++++++++++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 118 insertions(+), 2 deletions(-)
 
 diff --git a/include/abuf.h b/include/abuf.h
-index 749bb188b0c..bbb3c51f334 100644
+index bbb3c51f334..7872e9c9b27 100644
 --- a/include/abuf.h
 +++ b/include/abuf.h
-@@ -111,6 +111,17 @@ bool abuf_realloc(struct abuf *abuf, size_t new_size);
+@@ -122,6 +122,27 @@ bool abuf_realloc_inc(struct abuf *abuf, size_t inc);
   */
- bool abuf_realloc_inc(struct abuf *abuf, size_t inc);
+ bool abuf_copy(const struct abuf *old, struct abuf *new);
  
 +/**
-+ * abuf_copy() - Make a copy of an abuf
++ * abuf_printf() - Format a string and place it in an abuf
 + *
-+ * Creates an allocated copy of @old in @new
++ * @buf: The buffer to place the result into
++ * @fmt: The format string to use
++ * @...: Arguments for the format string
++ * Return: the number of characters writtenwhich would be
++ * generated for the given input, excluding the trailing null,
++ * as per ISO C99.
 + *
-+ * @old: abuf to copy
-+ * @new: new abuf to hold the copy (inited by this function)
-+ * Return: true if OK, false if out of memory
++ * The abuf is expanded as necessary to fit the formated string
++ *
++ * See the vsprintf() documentation for format string extensions over C99.
++ *
++ * Returns: number of characters written (excluding trailing nul) on success,
++ * -E2BIG if the size exceeds 4K, -ENOMEM if out of memory, -EFAULT if there is
++ * an internal bug in the vsnprintf() implementation
 + */
-+bool abuf_copy(const struct abuf *old, struct abuf *new);
++int abuf_printf(struct abuf *buf, const char *fmt, ...)
++		__attribute__ ((format (__printf__, 2, 3)));
 +
  /**
   * abuf_uninit_move() - Return the allocated contents and uninit the abuf
   *
 diff --git a/lib/abuf.c b/lib/abuf.c
-index 3cbe320fb08..28c748acb9f 100644
+index 28c748acb9f..3a2fd1782e9 100644
 --- a/lib/abuf.c
 +++ b/lib/abuf.c
-@@ -128,6 +128,20 @@ bool abuf_init_size(struct abuf *buf, size_t size)
+@@ -10,8 +10,11 @@
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <string.h>
++#include <vsprintf.h>
+ #endif
+ 
++#include <errno.h>
++#include <stdarg.h>
+ #include <abuf.h>
+ 
+ void abuf_set(struct abuf *abuf, void *data, size_t size)
+@@ -142,6 +145,38 @@ bool abuf_copy(const struct abuf *old, struct abuf *copy)
  	return true;
  }
  
-+bool abuf_copy(const struct abuf *old, struct abuf *copy)
++int abuf_printf(struct abuf *buf, const char *fmt, ...)
 +{
-+	char *data;
++	int maxlen = buf->size;
++	va_list args;
++	int len;
 +
-+	data = malloc(old->size);
-+	if (!data)
-+		return false;
-+	memcpy(data, old->data, old->size);
-+	abuf_init_set(copy, data, old->size);
-+	copy->alloced = true;
++	va_start(args, fmt);
++	len = vsnprintf(buf->data, buf->size, fmt, args);
++	va_end(args);
 +
-+	return true;
++	/* add the terminator */
++	len++;
++
++	if (len > 4096)
++		return -E2BIG;
++	if (len > maxlen) {
++		/* make more space and try again */
++		maxlen = len;
++		if (!abuf_realloc(buf, maxlen))
++			return -ENOMEM;
++		va_start(args, fmt);
++		len = vsnprintf(buf->data, maxlen, fmt, args);
++		va_end(args);
++
++		/* check there isn't anything strange going on */
++		if (len > maxlen)
++			return -EFAULT;
++	}
++
++	return len;
 +}
 +
  void abuf_init_const(struct abuf *abuf, const void *data, size_t size)
  {
  	/* for now there is no flag indicating that the abuf data is constant */
 diff --git a/test/lib/abuf.c b/test/lib/abuf.c
-index 916577ee3ea..c19012d2954 100644
+index c19012d2954..def491ac7a8 100644
 --- a/test/lib/abuf.c
 +++ b/test/lib/abuf.c
-@@ -420,6 +420,29 @@ static int lib_test_abuf_init(struct unit_test_state *uts)
- }
- LIB_TEST(lib_test_abuf_init, 0);
+@@ -455,12 +455,72 @@ static int lib_test_abuf_init_size(struct unit_test_state *uts)
+ 	ut_assertnonnull(buf.data);
+ 	ut_asserteq(TEST_DATA_LEN, buf.size);
+ 	ut_asserteq(true, buf.alloced);
+-	abuf_uninit(&buf);
  
-+/* Test abuf_copy() */
-+static int lib_test_abuf_copy(struct unit_test_state *uts)
+ 	/* Check for memory leaks */
+ 	ut_assertok(ut_check_delta(start));
+ 
+-	return 0;
++	abuf_uninit(&buf);
+ 	return 0;
+ }
+ LIB_TEST(lib_test_abuf_init_size, 0);
++
++/* Test abuf_printf() */
++static int lib_test_abuf_printf(struct unit_test_state *uts)
 +{
-+	struct abuf buf, copy;
++	struct abuf buf, fmt;
 +	ulong start;
++	char *ptr;
 +
 +	start = ut_check_free();
 +
-+	abuf_init_set(&buf, test_data, TEST_DATA_LEN);
-+	ut_assert(abuf_copy(&buf, &copy));
-+	ut_asserteq(buf.size, copy.size);
-+	ut_assert(buf.data != copy.data);
-+	ut_assert(copy.alloced);
-+	abuf_uninit(&copy);
++	/* start with a fresh buffer */
++	abuf_init(&buf);
++
++	/* check handling of out-of-memory condition */
++	malloc_enable_testing(0);
++	ut_asserteq(-ENOMEM, abuf_printf(&buf, "%s", ""));
++	malloc_enable_testing(1);
++
++	ut_asserteq(0, abuf_printf(&buf, "%s", ""));
++	ut_asserteq(1, buf.size);
++	ut_asserteq(true, buf.alloced);
++	ut_asserteq_str("", buf.data);
++
++	/* check expanding it, initially failing */
++	ut_asserteq(-ENOMEM, abuf_printf(&buf, "%s", "testing"));
++	malloc_disable_testing();
++
++	ut_asserteq(7, abuf_printf(&buf, "%s", "testing"));
++	ut_asserteq(8, buf.size);
++	ut_asserteq_str("testing", buf.data);
++
++	ut_asserteq(11, abuf_printf(&buf, "testing %d", 123));
++	ut_asserteq(12, buf.size);
++	ut_asserteq_str("testing 123", buf.data);
++
++	/* make it smaller; buffer should not shrink */
++	ut_asserteq(9, abuf_printf(&buf, "test %d", 456));
++	ut_asserteq(12, buf.size);
++	ut_asserteq_str("test 456", buf.data);
++
++	/* test the maximum size */
++	abuf_init(&fmt);
++	ut_assert(abuf_realloc(&fmt, 4100));
++	memset(fmt.data, 'x', 4100);
++	ptr = fmt.data;
++	ptr[4096] = '\0';
++
++	/* we are allowed up to 4K including the terminator */
++	ut_asserteq(-E2BIG, abuf_printf(&buf, "%s", ptr));
++	ptr[4095] = '\0';
++	ut_asserteq(4095, abuf_printf(&buf, "%s", ptr));
++
++	abuf_uninit(&fmt);
 +	abuf_uninit(&buf);
 +
 +	/* Check for memory leaks */
@@ -184,11 +273,7 @@ index 916577ee3ea..c19012d2954 100644
 +
 +	return 0;
 +}
-+LIB_TEST(lib_test_abuf_copy, 0);
-+
- /* Test abuf_init_size() */
- static int lib_test_abuf_init_size(struct unit_test_state *uts)
- {
++LIB_TEST(lib_test_abuf_printf, 0);
 -- 
 2.43.0
 
