@@ -4,108 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52486C3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 17:33:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755A5C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 19:30:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87375820E1;
-	Fri,  2 May 2025 19:33:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6CBB8820E1;
+	Fri,  2 May 2025 21:30:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tRa58FEI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JDB5x31Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF620820E2; Fri,  2 May 2025 19:33:43 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 60041820E2; Fri,  2 May 2025 21:30:28 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A26B981FAB
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 19:33:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C25781F7E
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 21:30:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1746207215; x=1746812015; i=xypron.glpk@gmx.de;
- bh=UHHvswxRkIw8s8xSApt4EJTMhpzKhoIRO4hRCYQMHu4=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=tRa58FEIpIvKOPP70IdKqoAGqY1emZWfdWaUoXoP7tem86HE4t+t9ZFbAZiA5v+3
- RsGXZocVDC4SykEpGhPJe3bn503onoS+tbYworWgmbcvgeHKtY+cv+3mHdhvI7JBo
- +MV6bqvEX+QuOuYfZfoNVN49Ie7gZneul7rlpdXOQwo1NarazIEYnetSCPwr50UUi
- PzMrhUXyhIJE0EB6rYdz86pbui6D4ppk+SlZSuFq54XedKmGGP2HDmDRlNNCUdfEe
- rABbZux6Ib53lApFWQSofMqSua6/O7nA1798QLzpIwZMHA9DeFu5KMKqc1DJFTcM8
- ahEyK9nh6dGZDwJYbw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.111.64]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mqs0R-1uoPsM2I65-00pCIZ; Fri, 02
- May 2025 19:33:35 +0200
-Message-ID: <a0971d75-fb68-476a-9d65-025584231859@gmx.de>
-Date: Fri, 2 May 2025 19:33:34 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-72ec926e828so732070a34.0
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 12:30:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746214224; x=1746819024; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KMnKdHXSKhI4VdfUUh8biuOQjPKiN84b8+6eEZJJ8C0=;
+ b=JDB5x31YGC86uwWBQKsH0/y4UV05sm2dOIsQtzoOWoIy7gkgUAl3tMcqtAbOQ3LqsR
+ YOXExA06xNbufo3+zO5iFD0Ol81ePWTKpoNB6ERdJPe90zo8MK95diJc348nY8iLTNZc
+ so2NjyDUyVvTNfrkPYWaIwqQRtAy1yzF4A90I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746214224; x=1746819024;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KMnKdHXSKhI4VdfUUh8biuOQjPKiN84b8+6eEZJJ8C0=;
+ b=f1OoQDEWyfHX6UNmHKazwjyFr3HjETdPuBfWx14+NfgpWA2kqZJk/x/x9UuGeGMvPp
+ ppCVScqIPcQrls45KxurEzednm+GbnXU5ltAk9jxiq4VeDOL6bKkEH8MdlFR7uloIOBK
+ VSroNXJtBDqjukodboMijx0rWUWPomuzD5PXqy13Lj4xYnbOLh9v+eKwFwuvo/NLsThF
+ 4Ntlt+O3XUinF57Y3mQ1o7y6p+YqwaGAppXVzMVsfGoQaolHXqFAQx0zonD/8IG/t9KJ
+ nXxbRwHCPtcmNT4xaC7x56Sv38z+n+Ho0Zu2He9cCrfzxV0tHNoHH9ojbWs6b6KWNo1t
+ QI7Q==
+X-Gm-Message-State: AOJu0YxBDDoIYV3JQWWXuvj5jj3jmDPjkZfyN/6X5EZzYT+nn2f+IpIh
+ rr5srSfF1dSDJVdjpY4ZlJGAUrJhVfLzjSdIejyeLI57pVUTYB5U+n3JoHyUWrs=
+X-Gm-Gg: ASbGnctD1bITmRwri4BKlqi4IiKefBqDsIJmPGgOikQ77qluwZZ7WWZnpBmqXs9J01v
+ OCeSks4vzJXGaQSQTY/EW4QZiXQtopoGgq/3J0dL+YXR6XcpbpSoNY3qoEigutVZeITZyLBB9fH
+ DUeuM9/2YRU78XyJlVnyfPhAJdJH5OsMvYqGDMr9pjV0p/GGQBIDNmQFp5RFuofl+OegcyDEGKl
+ apor/QSlYkqQULiSAkcm9i46weyN0DHKdRllcRXfneog6Rg3+3tBlIvXsc/s5q6lgbE0/6+/mCW
+ L0osT77rDOGrU6Zbvf3cS4miHOQUlQcRB57DhrWwNA0acl4V2sI08GXddegGaZSGqaaApAVmS2X
+ vwQ==
+X-Google-Smtp-Source: AGHT+IG5/67OiJqh6RkmOqmoXGWA/lPSJwzhJvw2kOrHGCj/lDqUe2JOzNrIiC92NXontwl/S5jWvw==
+X-Received: by 2002:a05:6871:341e:b0:2d5:2955:aa6c with SMTP id
+ 586e51a60fabf-2dab330f1eemr1907583fac.31.1746214224128; 
+ Fri, 02 May 2025 12:30:24 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2daa0f8512asm750865fac.24.2025.05.02.12.30.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 May 2025 12:30:23 -0700 (PDT)
+Date: Fri, 2 May 2025 13:30:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
+Message-ID: <20250502193020.GZ1261075@bill-the-cat>
+References: <20250502025026.4140184-1-sjg@chromium.org>
+ <20250502143359.GS1261075@bill-the-cat>
+ <CAFLszTha1wWDCpi=HR4sE-rKjoPQp+Twvyrsb-fCcF=vPW4d8Q@mail.gmail.com>
+ <20250502150641.GW1261075@bill-the-cat>
+ <18d5e7ee-a63d-4895-abbc-4df7737dccff@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: bugfix CAAM error on startup
-To: "Baehring, Olaf" <Olaf.Baehring@draeger.com>
-Cc: Gaurav Jain <gaurav.jain@nxp.com>, Marek Vasut <marex@denx.de>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <BE1P281MB229278535DE4B55BD7240B14E18D2@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <BE1P281MB229278535DE4B55BD7240B14E18D2@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:2XCYXXgVamQUvjhjTzraUMwhQecg70enoISIQGp+na47QUNkmvg
- KJkmaO58FEkCsF/78vLQRhvjE9WJPCO4G+7J1BQi9ypzo+VpFMd6gUWuda0DAOpdwtzjzsG
- deqxw7ZggLDuRBVwgZSu/aRcBVQOaM0hoOsW6aqLqHiOGwcsofDS+m98xoIA/L5XDBJBjWk
- ttMX+C8QKIYVIL+uK9/Jw==
-UI-OutboundReport: notjunk:1;M01:P0:3gvcsMbxETA=;wpjTLydq/f5iDJMZUZcLpEVSdD5
- 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
- g==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YOwAMPoOBB+xw2It"
+Content-Disposition: inline
+In-Reply-To: <18d5e7ee-a63d-4895-abbc-4df7737dccff@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,166 +99,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Olaf,
 
-The mail arrived without any subject line in the email header.
-There was only a subject line in the message body.
-The patch cannot be processed by the tooling of the U-Boot project=20
-without a proper subject line.
+--YOwAMPoOBB+xw2It
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Please, resend your patch with a subject header line,
-e.g. using `git email`.
+On Fri, May 02, 2025 at 07:19:18PM +0200, Heinrich Schuchardt wrote:
+> On 5/2/25 17:06, Tom Rini wrote:
+> > On Fri, May 02, 2025 at 08:49:12AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >=20
+> > > On Fri, 2 May 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
+> > > >=20
+> > > > On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
+> > > >=20
+> > > > > During a recent discussion with Heinrich we discussed why the hoo=
+ks are
+> > > > > kept in a separate repo.
+> > > > >=20
+> > > > > The amount of code is small, a tenth of the size of the recently =
+added
+> > > > > lwip, just by way of example. Testing is a critical part of U-Boo=
+t and
+> > > > > one of the things that distinguishes it from firmware projects th=
+at have
+> > > > > not kept up in this area. By having the tests somewhere else, we =
+are
+> > > > > signalling that it is unusual, or difficult, or optional.
+> > > > >=20
+> > > > > The hooks mechanism also needs something of an update to take acc=
+ount of
+> > > > > real boards in 2025. That will be much easier to undertake if the=
+ code
+> > > > > that test/py talks to is in the same repo.
+> > > > >=20
+> > > > > This series brings the hook files in as first-class citizens of U=
+-Boot.
+> > > > >=20
+> > > > > If we do go ahead with this, I will send a different series which=
+ has
+> > > > > separate commits (with correct author) in the u-boot-test-hooks r=
+epo.
+> > > >=20
+> > > > I think bringing more projects directly in to the repository is a b=
+ad
+> > > > idea. Your example of lwip isn't applicable because it's a read-only
+> > > > subtree that's maintained outside of the project (same as the dts
+> > > > subtree). But sure, lets "Say Yes". That said, we still need to:
+> > > > - Remove needless examples from the tree.
+> > > > - Not include personal labs directly in the tree.
+> > > >=20
+> > > > That last one is why I really think this is a bad idea. The point of
+> > > > having the hooks standalone is so that any given lab can easily add
+> > > > support for their lab and manage it, without worrying about disclos=
+ing
+> > > > internal layout. There's going to be hard coded default passwords t=
+here.
+>=20
+> Secrets MUST NEVER reside in git repos.
+>=20
+> I can't imagine that such irresponsible habits would be practiced by any
+> accountable developer.
 
-Best regards
+I agree it shouldn't be done. And just this week was the most recent
+time I've seen a company do that internally, because it's internal and
+was just a temporary thing. We helped them stop needing to do that, but
+assuming it never happens is a bad idea.
 
-Heinrich
+> Please, have a look at
+>=20
+> https://docs.github.com/en/actions/security-for-github-actions/security-g=
+uides/using-secrets-in-github-actions
+> https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/07_pass-bui=
+ld-secrets.html
+>=20
+> to see how to do it properly.
+>=20
+> The same is true for a private lab:
+> Use environment variables that are coming from outside the repository.
+>=20
+> > > > There's going to be repository secrets there. That kind of informat=
+ion
+> > > > really should not be in a public repository. Integrating the hooks =
+with
+> > > > mainline will make lab management harder, not easier. The point of =
+the
+> > > > existing labs in u-boot-test-hooks is to provide samples.
+> > > >=20
+> > > > I think this is all why no, we should not go down this path.
+> > >=20
+> > > Is it worth discussing this, or is your mind made up? I have some
+> > > thoughts on the last one.
+> >=20
+> > I think it's a terrible idea that I already said:
+> > > But sure, lets "Say Yes".
+> >=20
+> > But please do spend time explaining your thoughts and perhaps others
+> > will also agree with you and I'll feel less bad taking this in?
+> >=20
+>=20
+> Currently when changing a test hook I have to go through these steps:
+>=20
+> * fork u-boot-test-hooks
+> * push a commit to my fork
+> * update both .gitlab-ci.yaml and .azure-pipelines.yaml
+> * commit the change code.denx.de
+> * create a merge request for github.com/u-boot/u-boot
+>=20
+> If the test hooks were in the same repo as main U-Boot, I could save two
+> steps.
 
-On 5/2/25 11:02, Baehring, Olaf wrote:
-> Internal
->=20
-> Subject: [PATCH] bugfix CAAM error on startup
-> MIME-Version: 1.0
-> Content-Type: text/plain; charset=3DUTF-8
-> Content-Transfer-Encoding: 8bit
->=20
-> In rare cases U-Boot returns an error message when intantiating the RNG
-> of the CAAM device:
-> "SEC0:  RNG4 SH0 instantiation failed with error 0xffffffff"
-> This  means, that even when the CAAM device reports a finished
-> descriptor, none is found in the output ring.
-> This might be caused by a missing cache invalidation before
-> reading the memory of the output ring
-> This patch moves the cache invalidation of the output ring from start of
-> the job to immediately after the notification from hardware where the
-> output ring will be read.
->=20
-> Signed-off-by: Baehring, Olaf <olaf.baehring@draeger.com>
-> ---
->=20
->   drivers/crypto/fsl/jr.c | 30 +++++++++++++++++-------------
->   drivers/crypto/fsl/jr.h |  4 ----
->   2 files changed, 17 insertions(+), 17 deletions(-)
->=20
-> diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
-> index 8f7a821ebf3..edf678d363e 100644
-> --- a/drivers/crypto/fsl/jr.c
-> +++ b/drivers/crypto/fsl/jr.c
-> @@ -217,13 +217,6 @@ static int jr_enqueue(uint32_t *desc_addr,
->=20
->          jr->head =3D (head + 1) & (jr->size - 1);
->=20
-> -       /* Invalidate output ring */
-> -       start =3D (unsigned long)jr->output_ring &
-> -                                       ~(ARCH_DMA_MINALIGN - 1);
-> -       end =3D ALIGN((unsigned long)jr->output_ring + jr->op_size,
-> -                   ARCH_DMA_MINALIGN);
-> -       invalidate_dcache_range(start, end);
-> -
->          sec_out32(&regs->irja, 1);
->=20
->          return 0;
-> @@ -243,6 +236,7 @@ static int jr_dequeue(int sec_idx, struct caam_regs =
-*caam)
->   #else
->          uint32_t *addr;
->   #endif
-> +       unsigned long start, end;
->=20
->          while (sec_in32(&regs->orsf) && CIRC_CNT(jr->head, jr->tail,
->                                                   jr->size)) {
-> @@ -250,6 +244,14 @@ static int jr_dequeue(int sec_idx, struct caam_regs=
- *caam)
->                  found =3D 0;
->=20
->                  caam_dma_addr_t op_desc;
-> +
-> +               /* Invalidate output ring */
-> +               start =3D (unsigned long)jr->output_ring &
-> +                                               ~(ARCH_DMA_MINALIGN - 1)=
-;
-> +               end =3D ALIGN((unsigned long)jr->output_ring
-> +                                       + jr->op_size, ARCH_DMA_MINALIGN=
-);
-> +               invalidate_dcache_range(start, end);
-> +
->          #ifdef CONFIG_CAAM_64BIT
->                  /* Read the 64 bit Descriptor address from Output Ring.
->                   * The 32 bit hign and low part of the address will
-> @@ -283,28 +285,31 @@ static int jr_dequeue(int sec_idx, struct caam_reg=
-s *caam)
->                  }
->=20
->                  /* Error condition if match not found */
-> -               if (!found)
-> +               if (!found) {
-> +                       int slots_full =3D sec_in32(&regs->orsf);
-> +
-> +                       jr->tail =3D (jr->tail + slots_full) & (jr->size=
- - 1);
-> +                       sec_out32(&regs->orjr, slots_full);
->                          return -1;
-> +               }
->=20
->                  jr->info[idx].op_done =3D 1;
->                  callback =3D (void *)jr->info[idx].callback;
->                  arg =3D jr->info[idx].arg;
->=20
->                  /* When the job on tail idx gets done, increment
-> -                * tail till the point where job completed out of oredr =
-has
-> +                * tail till the point where job completed out of order =
-has
->                   * been taken into account
->                   */
->                  if (idx =3D=3D tail)
->                          do {
-> +                               jr->info[tail].op_done =3D 0;
->                                  tail =3D (tail + 1) & (jr->size - 1);
->                          } while (jr->info[tail].op_done);
->=20
->                  jr->tail =3D tail;
-> -               jr->read_idx =3D (jr->read_idx + 1) & (jr->size - 1);
->=20
->                  sec_out32(&regs->orjr, 1);
-> -               jr->info[idx].op_done =3D 0;
-> -
->                  callback(status, arg);
->          }
->=20
-> @@ -378,7 +383,6 @@ static int jr_sw_cleanup(uint8_t sec_idx, struct caa=
-m_regs *caam)
->=20
->          jr->head =3D 0;
->          jr->tail =3D 0;
-> -       jr->read_idx =3D 0;
->          jr->write_idx =3D 0;
->          memset(jr->info, 0, sizeof(jr->info));
->          memset(jr->input_ring, 0, jr->size * sizeof(caam_dma_addr_t));
-> diff --git a/drivers/crypto/fsl/jr.h b/drivers/crypto/fsl/jr.h
-> index b136cd8d05a..8d5ca03e501 100644
-> --- a/drivers/crypto/fsl/jr.h
-> +++ b/drivers/crypto/fsl/jr.h
-> @@ -83,10 +83,6 @@ struct jobring {
->           * in-order job completion
->           */
->          int tail;
-> -       /* Read index of the output ring. It may not match with tail in =
-case
-> -        * of out of order completetion
-> -        */
-> -       int read_idx;
->          /* Write index to input ring. Would be always equal to head */
->          int write_idx;
->          /* Size of the rings. */
-> --
-> 2.34.1
->=20
-> ---
-> This communication contains confidential information. If you are not the=
- intended recipient please return this email to the sender and delete it f=
-rom your records.
->=20
-> Diese Nachricht enthaelt vertrauliche Informationen. Sollten Sie nicht d=
-er beabsichtigte Empfaenger dieser E-mail sein, senden Sie bitte diese an =
-den Absender zurueck und loeschen Sie die E-mail aus Ihrem System.
+Yes, that's true, the steps for updating our CI are a little bit longer.
+I would be happy to make u-boot-test-hooks more widely writable (so it
+would instead be pushing to a branch for step 1+2). But I'm also
+concerned with external labs (which is both the origin of these scripts,
+and where they're also used).
 
+Today, I have both a "konsulko" branch of u-boot-test-hooks, internally.
+That has subdirectories for both "sage" and "lootbox" (the two lab
+hosts), and in turn py and bin subdirectories for each. There's no value
+in publishing these changes as there's nothing unique about the
+platforms there, which aren't already in the mainline u-boot-test-hooks.
+
+How should I manage these changes moving forward?
+
+--=20
+Tom
+
+--YOwAMPoOBB+xw2It
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgVHT8ACgkQFHw5/5Y0
+tyw4rQwAq7teBd/bzxHG+yhu5vNtJQLUc2tFIrRSSSXeaqsvLilFZFPRdhaJeusO
+EJS/HfmxtqcwCa5AhCUsb4d9twvcqGKQ8YbEhA9uSUxI7Fd6jfqEAMpA+pZvoMsq
+uamCGZapsjiqrL1/zwUpDHyylogYxGV3ZtqD0zXxBBdxCyjbCeUimygZHXjOpMMn
+P8kVFKwNa+7aB4kFMfg/ndokZZOWQ+KtJsrvy0NA7TLIZ8/fYcqBTGFOB+yHEIsX
+E64eE9zza9resSkCvbqoqKVIafpXTsE8qY1ffLI49TX1KlG2aenSEj04NcudTq9Z
+nqTADI5ktnUQFbduaAb1KD1MhkAl4BCCgqM+d7/pTIj7dKQSxDqx0MfyEla2skk8
+UVFnokZVnei2Xo++0BKrgbtVje8+f9WQzrx0j+AlcBERnULInSLaZGdFVNfSMOOf
+X7Hp1awf3L6rBlVqZIY/0WjiFpmb9C05iqoqNZfiiFNAvMZdTMjcZwtc3OrLM2nD
+Ygpi+zam
+=J6Hi
+-----END PGP SIGNATURE-----
+
+--YOwAMPoOBB+xw2It--
