@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9407CC3ABA3
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 07:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A50C3ABA3
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 07:23:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16BAE81F7E;
-	Fri,  2 May 2025 09:00:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD78B81F7E;
+	Fri,  2 May 2025 09:23:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="obIo6yij";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N/MkhUTG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42FCD81FDE; Fri,  2 May 2025 09:00:18 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 8CFFD8070C; Fri,  2 May 2025 09:23:03 +0200 (CEST)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 739FD8070C
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 09:00:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55F2F820E2
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 09:22:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ac6e8cf9132so313594266b.2
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 00:00:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-4c300c82ca8so709309137.2
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 00:22:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746169214; x=1746774014; darn=lists.denx.de;
- h=in-reply-to:references:cc:to:from:subject:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AuvnZqPEOSBBa+TwHON8T7Cu1u6PVOe0yLYGMEkF0Ag=;
- b=obIo6yijjcLc+/pZJ/+/5dbrqbpZCJtMxeAql9QCIKxHa3ao1kk5Qe6u5HxcSLamMH
- 75cZJ7pU9r23Ytq0nd/hMW6+V4bAdnDAxs4lk6dSL28M5qKseGLXGqwsbEphGPKioTge
- CLpNmseoBevr+XRV1xNP2eReZnJjsQCPL33p8uAoiOc4Pf1OpVvDESpUH2taeppMM+P8
- OcrGklZhs57IoFUZZQjTp3t7gVMOVAJ+wOPgQYyTd/JlArEF8dukVbvwS1LnH+nRPjgJ
- KMd4eeUeUsob+bP2516Wx+ooirmnnDN0milG/zTuOhBTE74e34CGqkp9+BLQi+ijJ70S
- ayvw==
+ d=linaro.org; s=google; t=1746170576; x=1746775376; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Cp7+hN0MPxGY/gAeSPMSoNeE2Z4oYCRxg89OjRwSalY=;
+ b=N/MkhUTGjhR1sDNKKFRNjOhEz9TUkBmAygdqs6joEVCGEu0FVZgaZO17vHYytMKfIY
+ fDaPtAfpWOVkOU9C4CB52nJfZOvlw9A8A34baOv2MzK94qLKR/MczCckDgLZtQ2B73Kk
+ UIL9/iGY6uTU0y+Uk/W+uqnjthim2cZrT4trvXlxs23UwD+rFy2pl6BvCugfwTTrmBXu
+ 5s7X1yslkCr+UWNfwsUMerwQhttGMH0SbmaRWWdWdLmfMY+aK/Jq/wVNmSZDPu4TOVpF
+ dEtg7YFfeP8md7zF79+lPK20NudesFM5nqqvaosUlvDXRZP8msbQXS+dZs7ZrUhvtGBV
+ Uy/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746169214; x=1746774014;
- h=in-reply-to:references:cc:to:from:subject:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=AuvnZqPEOSBBa+TwHON8T7Cu1u6PVOe0yLYGMEkF0Ag=;
- b=ecqVLHsluTDp0pEVSGIv6dWkIpJDbo348QF9ErgXgkDxm2c0OvIbTMQV1X5fgxh7AS
- arEIJStY8ITJme14cqG+F/XeAJPJBgh1SsP2vSc+tGQXPqOQokjpGVZkfCJhfVkIdxXs
- ZFS03rcTvXy+P2Fvy2WlaxSp6CtqFSCNY7OHYCXXs6op2GJKPizFqoAOz7iWcFEuDKq/
- kGL4EZ8cSwXd9W/BoSpcaW5rI2SZ+A02fsM+w/ZWpTL+zfMhJW94ugFdSKvIMW17c8Ac
- IxBO/EuEIy2eo7EXRwtnjgNzT4rz1X7bXkToNDn+300h5IqGKu8ByuuWSMcQpaBlpMw7
- mWlw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXh2hodaUwjYBTWsrV5fkesTuexySAm+/AQllm872co9fJ3UW6TN8Hz2CbWexzzgAI7BoOlEG4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzC8O9MjQ3rH3xNAK9Rzt/ERoJ/mZG9ub+/Qi0qtGU8OoMd59bk
- nXwbp0+OzWg1X53B6LdPQzBTShtIFqD7FzrFyaJQ3GggQHNwGpc72iND/HRQ75A=
-X-Gm-Gg: ASbGnctGgjrtP1HMZ5O+rz8y73dC0MeFg1qnd2JZSkS/Mg2CaBmyln3h4w7Ib86xQM7
- n4KbsKpsKgYrrjwG6tW2wfT4PaUJaIUcVOyAAwGEpoyLd8tndYhAZkgcoeWNxcte0qI6MgWfdzc
- NgVhpTU8CfCgNawU49K291bPlrdK/fmxr70GO9Ya9v4dPFhIumEmMU9knA0xr12znNZRiMKkyzo
- ArGOM5aHehMOabYD9Hmw7Npt1P6st8rMRz0Bqkj8DL/CM6iyTQMA191ilYBUQqFdMthMzIY6ep6
- JmiSx6BRb8GezYLa0JNJajvAq0v75p+nZOwNqUPhiNCrcKac
-X-Google-Smtp-Source: AGHT+IFYQ8f/TD0Yr0RwtDVANb0y/QnFfasgIOobHKKsjuGgwn7UP4a3gwCDzRuqaLqIgs/KMtJuSw==
-X-Received: by 2002:a17:907:6e87:b0:ac7:f348:b8bc with SMTP id
- a640c23a62f3a-ad17b8a6210mr143601466b.61.1746169214559; 
- Fri, 02 May 2025 00:00:14 -0700 (PDT)
-Received: from localhost ([46.198.180.244]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5fa77bf44a4sm749705a12.75.2025.05.02.00.00.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 May 2025 00:00:14 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 02 May 2025 10:00:11 +0300
-Message-Id: <D9LHBPRHR4U5.2NRVG9UU0X9LV@linaro.org>
-Subject: Re: [PATCH 4/5] lmb: use a single function to free up memory
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "Sughosh Ganu" <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
-Cc: "Tom Rini" <trini@konsulko.com>, "Casey Connolly"
- <casey.connolly@linaro.org>, "Neil Armstrong" <neil.armstrong@linaro.org>,
- "Mark Kettenis" <kettenis@openbsd.org>, "Weijie Gao"
- <weijie.gao@mediatek.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
- "Simon Glass" <sjg@chromium.org>
-X-Mailer: aerc 0.20.0
+ d=1e100.net; s=20230601; t=1746170576; x=1746775376;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Cp7+hN0MPxGY/gAeSPMSoNeE2Z4oYCRxg89OjRwSalY=;
+ b=QEoDd8MKof6NqNDwM05ut5eaNbqmsPhGHIC9dfXIZvx8+WmrVVaomazfLvcXwuRnuJ
+ Bvnw0IuhfOVJM6Oyc+fxvhg/S42rA9keuT7qeO6CtyGIJA/+NEmI6yXqaoHYIm8SUOv2
+ zhkq/VB96yX73oxjeP3yDBdBPr6tEbSjAqo83x9C2rx3KuLpBqf0geuVKTfBSF4DL085
+ ouRmu/M/aJFbT3st1ww0zYRxN9fxusS79p2c/OWnExHSl0XJRUpTvoFuUrgj04RQ0Z4k
+ jpC1WbHxnL5AB6q3d9gTcU2wq8zYKsr8VRAw35tEs4+fIWYug+kmAeHr1xjr8l+RJgTH
+ 5MKw==
+X-Gm-Message-State: AOJu0YxK8ctsLMeifoGlHq1Ho1F53uKTEgsIcgabqtRHhDlZcYuOWAPw
+ za0APl/rUY9KVjFOyOmfg/rbI0s6Sd6ayC59JszEfgWDInquXFaIMfva/Jlj3C1aybPHWdqhhLC
+ MMR/BGQs3x0rkFZxsGiushQfKkqCcUEkYdQuHPw==
+X-Gm-Gg: ASbGncuYhU9h6cAeQ1A4EM4gfAmoiLVVd7an9D/cEQKDKkpYTLs2aPCS4Q8KoI8U9CM
+ 7vQPa79Ojkcl54crN2+2sAqzvd+KEi+ikOqgS50MZl0/yHwUTWhO6mUbw+RmNUwmGvflRWPXUfX
+ zXp+QJj6329RO9AnSNXnTNIA==
+X-Google-Smtp-Source: AGHT+IF1bAMb91mxBoDjnehsqVhgmc0grhWT7Y8/ahNxQ0B2W5CEIwasADylcRAHrkF44uR0Iax/9/MUq45NSbjCbLs=
+X-Received: by 2002:a05:6102:149a:b0:4c3:43e:5227 with SMTP id
+ ada2fe7eead31-4dafb51b280mr1345586137.9.1746170576217; Fri, 02 May 2025
+ 00:22:56 -0700 (PDT)
+MIME-Version: 1.0
 References: <20250501120239.199829-1-sughosh.ganu@linaro.org>
  <20250501120239.199829-5-sughosh.ganu@linaro.org>
-In-Reply-To: <20250501120239.199829-5-sughosh.ganu@linaro.org>
+ <D9LHBPRHR4U5.2NRVG9UU0X9LV@linaro.org>
+In-Reply-To: <D9LHBPRHR4U5.2NRVG9UU0X9LV@linaro.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 2 May 2025 12:52:44 +0530
+X-Gm-Features: ATxdqUEjJAKlAAJ2iaXrbi3hbsf3cAFp0I9RkTkozQi698Z7U3bnAG5AE4Ijvxc
+Message-ID: <CADg8p97XUcGD=qbGZequo-_2C6eKi=S7KcCWPhGOzqABSk6+RQ@mail.gmail.com>
+Subject: Re: [PATCH 4/5] lmb: use a single function to free up memory
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,36 +95,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu May 1, 2025 at 3:02 PM EEST, Sughosh Ganu wrote:
-> There is no need to have two separate API's for freeing up memory. Use
-> a single API lmb_free() to achieve this.
+On Fri, 2 May 2025 at 12:30, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
+> On Thu May 1, 2025 at 3:02 PM EEST, Sughosh Ganu wrote:
+> > There is no need to have two separate API's for freeing up memory. Use
+> > a single API lmb_free() to achieve this.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+>
+> [...]
+>
+> > -long lmb_free(phys_addr_t base, phys_size_t size);
+> > +long lmb_free(phys_addr_t base, phys_size_t size, u32 flags);
+>
+> Since you are changing this, why does it have to remain a long? It can just be an int
 
-[...]
-
-> -long lmb_free(phys_addr_t base, phys_size_t size);
-> +long lmb_free(phys_addr_t base, phys_size_t size, u32 flags);
-
-Since you are changing this, why does it have to remain a long? It can just=
- be an int
+Sure, I will change it.
 
 >
->  void lmb_dump_all(void);
->  void lmb_dump_all_force(void);
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 73e1eef5011..fd6aee21d36 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -508,7 +508,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_typ=
-e type,
+> >
+> >  void lmb_dump_all(void);
+> >  void lmb_dump_all_force(void);
+> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > index 73e1eef5011..fd6aee21d36 100644
+> > --- a/lib/efi_loader/efi_memory.c
+> > +++ b/lib/efi_loader/efi_memory.c
+> > @@ -508,7 +508,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+>
+> [...]
+>
+> This will lead to a small size increase.
+> Can you check the size before/after this patchset since you are removing a bunch of funtions anyway?
 
-[...]
+I did run the size check script from Tom, and while there is an
+increase in size (~300 odd bytes), this patch is not contributing to
+the increase.
 
-This will lead to a small size increase.
-Can you check the size before/after this patchset since you are removing a =
-bunch of funtions anyway?
+-sughosh
 
-Thanks
-/Ilias
+>
+> Thanks
+> /Ilias
