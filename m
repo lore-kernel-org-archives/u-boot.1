@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71499C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:55:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA5F7C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:56:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DB0D82CAE;
-	Fri,  2 May 2025 16:49:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF56082BAB;
+	Fri,  2 May 2025 16:49:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ibZpyhln";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IvIHokXt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7E5682CC9; Fri,  2 May 2025 16:49:27 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 9475582BDA; Fri,  2 May 2025 16:49:28 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A22D82CB5
+ by phobos.denx.de (Postfix) with ESMTPS id CF27082CBC
  for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:49:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-85dac9729c3so218648139f.2
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5f5bef591d6so4087864a12.1
  for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:49:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197363; x=1746802163; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SGurDDfv02MOI+s2IQxHOCZo7zBcgZNNQyZQrOeo5ZY=;
- b=ibZpyhlnhzfBTyN0iNJKbVvVhLv/7u1oj/qog5O6wXsbo8tcPraaHgKL0QfK7heScI
- mMyH3VOlHa/W9rzYn/WFL0tEhKvi0UYlw9Q+ZQ7GN70jiXuQifLGKXtx2LUrqN0U7sxz
- fhE5ZMtte/Cx+wOM44BdXdJ+RMXE9zVKytfWg=
+ d=chromium.org; s=google; t=1746197365; x=1746802165; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2E0oBNYfqr+ikEFFk4YZUnSRjLG2CUA9B+MeNyBcxek=;
+ b=IvIHokXtDjyEFUqe8AjroR/HQqQy2EAPL3ets7CYlOaoE1BheejN1rWbGTtDAthwB0
+ Vy1qrMGEeacDpA0YGhKeqXcbjP2PkUJbC8MaQuYdjw5N/DFuCHZyEoFv3b60KrjAoUBK
+ achf0e7O8Onr9HpdGQsHXKtKDq05Dg505mGJE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197363; x=1746802163;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SGurDDfv02MOI+s2IQxHOCZo7zBcgZNNQyZQrOeo5ZY=;
- b=CiyOglIk4vkUc0Jz29tZZf4EjOJTrR3YDVqUKRuxwgvAmMCAuk70dEDJpC/u221MGx
- 8d/14w8aPabe0r5DR/HaaIOX7LPJl421d86nSQxvGOvOwcnd5eVKfVzv8CdlZ4nIp84H
- 9+GaBE4bHPneHfgDXOfrY5Ge7IOEdKi0kHMES0TylK3YKzrCqEPIXXrLqQbOKNhWOtQ7
- hhsB7I0dFPAnzLQmrfLjerc/YttAuJ962S3pcaMbGioKOeNc5Rrn18KsXXJLT4sKy4hI
- 50iNvo2qaznbsMX5VqcwyOFbnGGAM0/MgAYs9iM+6JsEn3hMaslbxADz6k45ZDqd7yXZ
- sRWQ==
-X-Gm-Message-State: AOJu0YzDDwpPRnVLETOkPJ1cCNF+k05+UDlSkwXb9oqXWM1x7tJcBxa4
- Fj/E9eEQWRMRUahc6Z4rzB6XJijjy2zt6/p07sXnvH5NSokI/HiTKs1qH0K/IQZcXsho00+5zxg
- =
-X-Gm-Gg: ASbGncucupYBBANz7iHDJIeAtC5N00OqexWY08d055FASuzrugqAkizpI2HFL3K8K8j
- LkRVpDEGx8J5wTIWAJcOaZxDsIVyfvgNV8zV4E8LGX9nIBO/jDPWW6MjTKmstbygHSo8lQ7rs/g
- 2XPj999D/3EeRLmOG/ds4c9nXouxZBhLT8oRViAaJQZ4EDqyTFR7gWOujZqje1ErOH0huKN9lLm
- 55oRI4mgwkzQCQ/nmD4Gpr2+Zc+YZhzT32XQOBXTn0ac4KhKbKSQOpSP2EFAH8IllxYiLP2rfGw
- f3GpKiLPelqQ2JlEeHR4RHX37C+z/8R2JBchWnJ2MlRYPe24IUSInl+De/qIDM8iNFO5j51Sgju
- KFg==
-X-Google-Smtp-Source: AGHT+IExVqROh2up57raPdZCda9hhHfqerWOBdB6WZPppbG6si896f525LlqQIvqUj6mJwJxZXwIYw==
-X-Received: by 2002:a05:6602:3f08:b0:864:488e:a581 with SMTP id
- ca18e2360f4ac-866b2d7bd95mr440628639f.4.1746197363347; 
- Fri, 02 May 2025 07:49:23 -0700 (PDT)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.49.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:49:22 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 60/60] expo: Drop the special theme code for bootflow_menu
-Date: Fri,  2 May 2025 08:46:58 -0600
-Message-ID: <20250502144718.313633-61-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
-References: <20250502144718.313633-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1746197365; x=1746802165;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2E0oBNYfqr+ikEFFk4YZUnSRjLG2CUA9B+MeNyBcxek=;
+ b=i1cx3Mx4kt6iaCVicVsoAujMny8g1DLxXLAo8ILCBJnMGHnN50+y/aogay+d751Oj4
+ HWVw+JRoKuciJlDHei7UsxqcK6RqskNhSgAd7Tcac6QROuCuZvzcKBtnzcCHxekcsZqQ
+ 7ei0Auo2BSd1tWwQ65ph2wwQf7bzztxhzcNyW90baMUUd0U4zZ2JoqcIZk1LTSJopdz9
+ Rl52ObF1pZnPw3MfRds2jMGvCVIc8kTlqvCxncgeoUQgLXmH4xDb/eXQNK7lQAzby7Yi
+ 5ZgJIDvIZfQpYXpMDBXOA9c/7kljIh4l6ldcpvMaFNUJnxLPOK12Ad3svjrrWLnAfewH
+ geFA==
+X-Gm-Message-State: AOJu0Yxtyf9bmNHkoyp2pMLcq3EnT6C1EhPoTIjo1yTj7GhSS4zHx8lv
+ rtiKfOafELOCq2PvuuolVRSKxo+NpIjQU1RFjK/dctkrGpfcm2u3YDr1xUwPE7e/d85gS+ZiNb7
+ ifGtnf2SACxORVnx5Moj1xLq9X6WUxT8lAnBttIy8M7T+POE=
+X-Gm-Gg: ASbGncv27Pwt7t8r1dYQAlUNwwcNpwPryhVvkMIDQcTnu6QycC/aNyMk5jF8SA/f0Hi
+ zVZTAYv7vpslktPw5Nkhnjg6UU3cPOMqwFptbtOdZggiSvbL0aA5QvtUO39d/X1nuw5MwqRmRqn
+ cV+ypzche1W71xg83mPqRj080=
+X-Google-Smtp-Source: AGHT+IFgCuQqRnS2T7fB3Q9Q18lFPUcxthTzqL++3llKSy0qmeZ2Cfp4E6kRCfsU9AH7qJGKYOEcu65RD2YSWf87UrU=
+X-Received: by 2002:a17:907:8b88:b0:ace:cbe0:2d67 with SMTP id
+ a640c23a62f3a-ad17b867329mr276516066b.55.1746197365297; Fri, 02 May 2025
+ 07:49:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250502025026.4140184-1-sjg@chromium.org>
+ <20250502143359.GS1261075@bill-the-cat>
+In-Reply-To: <20250502143359.GS1261075@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 2 May 2025 08:49:12 -0600
+X-Gm-Features: ATxdqUH0PAA1iZNz4XR-e92F98BAzm2meLLubs6F4UuISsxHmbifHrQIVtLCU9g
+Message-ID: <CAFLszTha1wWDCpi=HR4sE-rKjoPQp+Twvyrsb-fCcF=vPW4d8Q@mail.gmail.com>
+Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,104 +87,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The expo now has all that is needed to apply a suitable theme, so drop
-this unnecessary code. Any further tweaks can be added to the generic
-expo code.
+Hi Tom,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Fri, 2 May 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
+>
+> > During a recent discussion with Heinrich we discussed why the hooks are
+> > kept in a separate repo.
+> >
+> > The amount of code is small, a tenth of the size of the recently added
+> > lwip, just by way of example. Testing is a critical part of U-Boot and
+> > one of the things that distinguishes it from firmware projects that have
+> > not kept up in this area. By having the tests somewhere else, we are
+> > signalling that it is unusual, or difficult, or optional.
+> >
+> > The hooks mechanism also needs something of an update to take account of
+> > real boards in 2025. That will be much easier to undertake if the code
+> > that test/py talks to is in the same repo.
+> >
+> > This series brings the hook files in as first-class citizens of U-Boot.
+> >
+> > If we do go ahead with this, I will send a different series which has
+> > separate commits (with correct author) in the u-boot-test-hooks repo.
+>
+> I think bringing more projects directly in to the repository is a bad
+> idea. Your example of lwip isn't applicable because it's a read-only
+> subtree that's maintained outside of the project (same as the dts
+> subtree). But sure, lets "Say Yes". That said, we still need to:
+> - Remove needless examples from the tree.
+> - Not include personal labs directly in the tree.
+>
+> That last one is why I really think this is a bad idea. The point of
+> having the hooks standalone is so that any given lab can easily add
+> support for their lab and manage it, without worrying about disclosing
+> internal layout. There's going to be hard coded default passwords there.
+> There's going to be repository secrets there. That kind of information
+> really should not be in a public repository. Integrating the hooks with
+> mainline will make lab management harder, not easier. The point of the
+> existing labs in u-boot-test-hooks is to provide samples.
+>
+> I think this is all why no, we should not go down this path.
 
-(no changes since v1)
+Is it worth discussing this, or is your mind made up? I have some
+thoughts on the last one.
 
- boot/bootflow_menu.c | 43 -------------------------------------------
- test/boot/bootflow.c |  6 +++---
- 2 files changed, 3 insertions(+), 46 deletions(-)
-
-diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 43f074f19f5..4a442e16850 100644
---- a/boot/bootflow_menu.c
-+++ b/boot/bootflow_menu.c
-@@ -215,43 +215,6 @@ int bootflow_menu_add_all(struct expo *exp)
- 	return 0;
- }
- 
--int bootflow_menu_apply_theme(struct expo *exp, ofnode node)
--{
--	struct menu_priv *priv = exp->priv;
--	struct scene *scn;
--	u32 font_size;
--	int ret;
--
--	log_debug("Applying theme %s\n", ofnode_get_name(node));
--	scn = expo_lookup_scene_id(exp, MAIN);
--	if (!scn)
--		return log_msg_ret("scn", -ENOENT);
--
--	/* Avoid error-checking optional items */
--	if (!ofnode_read_u32(node, "font-size", &font_size)) {
--		int i;
--
--		log_debug("font size %d\n", font_size);
--		scene_txt_set_font(scn, OBJ_PROMPT1A, NULL, font_size);
--		scene_txt_set_font(scn, OBJ_POINTER, NULL, font_size);
--		for (i = 0; i < priv->num_bootflows; i++) {
--			ret = scene_txt_set_font(scn, ITEM_DESC + i, NULL,
--						 font_size);
--			if (ret)
--				return log_msg_ret("des", ret);
--			scene_txt_set_font(scn, ITEM_KEY + i, NULL, font_size);
--			scene_txt_set_font(scn, ITEM_LABEL + i, NULL,
--					   font_size);
--		}
--	}
--
--	ret = scene_arrange(scn);
--	if (ret)
--		return log_msg_ret("arr", ret);
--
--	return 0;
--}
--
- int bootflow_menu_setup(struct bootstd_priv *std, bool text_mode,
- 			struct expo **expp)
- {
-@@ -263,12 +226,6 @@ int bootflow_menu_setup(struct bootstd_priv *std, bool text_mode,
- 	if (ret)
- 		return log_msg_ret("bmn", ret);
- 
--	if (ofnode_valid(std->theme)) {
--		ret = bootflow_menu_apply_theme(exp, std->theme);
--		if (ret)
--			return log_msg_ret("thm", ret);
--	}
--
- 	/* For now we only support a video console */
- 	ret = uclass_first_device_err(UCLASS_VIDEO, &dev);
- 	if (ret)
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 06fd2dbb20a..670e73c265b 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -884,7 +884,7 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
- 	ut_assertok(bootflow_menu_add_all(exp));
- 	node = ofnode_path("/bootstd/theme");
- 	ut_assert(ofnode_valid(node));
--	ut_assertok(bootflow_menu_apply_theme(exp, node));
-+	ut_assertok(expo_apply_theme(exp, node));
- 
- 	scn = expo_lookup_scene_id(exp, MAIN);
- 	ut_assertnonnull(scn);
-@@ -895,8 +895,8 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
- 	 *
- 	 * Check both menu items, since there are two bootflows
- 	 */
--	ut_assertok(check_font(uts, scn, OBJ_PROMPT1A, font_size));
--	ut_assertok(check_font(uts, scn, OBJ_POINTER, font_size));
-+	for (i = OBJ_PROMPT1A; i <= OBJ_AUTOBOOT; i++)
-+		ut_assertok(check_font(uts, scn, i, font_size));
- 	for (i = 0; i < 2; i++) {
- 		ut_assertok(check_font(uts, scn, ITEM_DESC + i, font_size));
- 		ut_assertok(check_font(uts, scn, ITEM_KEY + i, font_size));
--- 
-2.43.0
-
+Regards,
+SImon
