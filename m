@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA161C3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 15:09:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEE0C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 15:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3428C82C49;
-	Fri,  2 May 2025 17:09:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C0C881F66;
+	Fri,  2 May 2025 17:55:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gss37+e9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BwqPZ4uD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C408F82C79; Fri,  2 May 2025 17:09:14 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E9D682B97
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 17:09:12 +0200 (CEST)
+ id A61E181F7E; Fri,  2 May 2025 17:55:15 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DF6C3812BC
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 17:55:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-2d4cefac09dso1237100fac.1
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 08:09:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746198551; x=1746803351; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eRktYARFEgIMdOaizn1gEF2ow7emShvozYRe51oNWYs=;
- b=Gss37+e9G0avUODcfLrlB0jeKeZBLjDVOMEZxasdVzydfvLRQHdzl6OxYgJOqcHJK1
- iaGxuR7S9M8jCK4sBdaCSdCcjea8CffcJXQXwgRg3MuYxSUkxa45j8CsK2MPc//xbY1s
- klfEwFRPn+ImStlqME1aeYODOkWKfyqmx83TE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746198551; x=1746803351;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eRktYARFEgIMdOaizn1gEF2ow7emShvozYRe51oNWYs=;
- b=U9tl3//kJ3N4rybQVQ2kLdGthmEkt/nnXNVuLPGZun3b2tYTfeQES7GF4JfQWGJ8P2
- s+oAVUfoK0VDfFw2gKZDRDfSyH8npw3Jz7EkAV1j0uFdFLZ6/J2d/FdRBG0ILunltCW+
- /rq7+tyWCVX+eym1IQqQ6qVTioY7dzfWAzwuQ4L51hMsOSonDdEJ+nKLmYXonYYfIffr
- G96UusJqonxgrr5WjoN4D9amFSuSv7hxto1re4a3XpVkFRNoXV0tFelZugAgxop5Cm/M
- qin4WjjH3+knha51jNkrm4hjWFD4M96haAT4VO1TPER5QwSnaijAD2X/Xj5fAavrGfBN
- p+IQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsG6OJDQFXzhG37lDw0/BlTGS7kLfCVw3NVSpNpXkluoz5eUEwKm8c0APgjVBdONrLeFbs/Oc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/V7TOz52hNPBFEU7I6MlqvZ0hcsci7pji9VFDkIz68ip9iXIp
- 6lbQd/PgIEloGJQkR1HF93eQNQN9YQWrXhmypSPf6XaFdy/jGkwSRni0yTzHFAfldYceytw77GO
- i
-X-Gm-Gg: ASbGncu3lkedS2OtWnapCjTDOtNyMaeDXAoVmvsyWDtASkGGreBqX1eM7uKGIvSvP81
- 8DoCaOdHvw8K5VvDy80okPq+m8/chiTxkeknb2OlK0iNuikN/YqiFLl971Ycowkir8PBdSF5WmP
- DsLyLsPbsJFQlb57yVMsBMKLOpCrUMZt+VCLQFEPAN+tHjFxoswOU9dIxkEMk4aZeKj97Q5P3EX
- P3QNaiHBkbIuwKou3dZHgdVnf4ykxGAyqaMw+QOycR34+dEnsRwWZHzPCctN11Y4jjBprUZGuid
- 8Bu179H1GIqibMdHbK9YnEkiAqxys+DAJRpIO09YHm+u67hRNNcmT6lHmep2tJhBNzpwiCQe64t
- Lcw==
-X-Google-Smtp-Source: AGHT+IHJHCuia+GVeMAziB4P8SpwnwL1ncdSo/n6QBWyL641Q/gqaGqqZ/o98fXEoMDdlko7n2PeFQ==
-X-Received: by 2002:a05:6870:1c9:b0:2d6:665b:17 with SMTP id
- 586e51a60fabf-2dab3338bdemr1633580fac.27.1746198550756; 
- Fri, 02 May 2025 08:09:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2daa0e50b39sm635840fac.2.2025.05.02.08.09.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 08:09:10 -0700 (PDT)
-Date: Fri, 2 May 2025 09:09:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Walter Schweizer <swwa@users.sourceforge.net>, u-boot@lists.denx.de
-Subject: Re: Convert DS109 in U-Boot to DM_SERIAL
-Message-ID: <20250502150908.GY1261075@bill-the-cat>
-References: <20250501230530.GN1261075@bill-the-cat>
- <CAJaLiFw-TQtgw8_ru9G2MtDwUTz=+_S6ykmBmwW0T5NGxgwxgg@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 542FtBkK3897909
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 2 May 2025 10:55:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746201311;
+ bh=lL4/bZUERwiDqCGUksIlctZWg6nnI+8MmOLM59Usjxo=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=BwqPZ4uDeREpXXqaGL9fNNrE7qDVp7Jzg61ThREjGAfTb4shRGSiS87yl+6O4jciQ
+ 5Rmljek8TBR00Duloj7Z9DrusAgTyjamBGDCMGbaU0VxryCW8DbzPDMXyO5qEONOE4
+ vuUcBVDdx+CM+V5yQeHx5OXXQxEpFB31o9Bn37zw=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 542FtAlr012042
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 2 May 2025 10:55:10 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 2
+ May 2025 10:55:09 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 2 May 2025 10:55:09 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 542Ft9LR119230;
+ Fri, 2 May 2025 10:55:09 -0500
+Date: Fri, 2 May 2025 10:55:09 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Daniel Schultz <d.schultz@phytec.de>
+CC: <trini@konsulko.com>, <d-gole@ti.com>, <vibhore@ti.com>, <kamlesh@ti.com>, 
+ <nm@ti.com>, <n-francis@ti.com>, <afd@ti.com>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>
+Subject: Re: [PATCH] arm: dts: k3-am62a-*-binman: Update ti-dm blob
+Message-ID: <20250502155509.z57ec4dhcdsy6fsz@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250502143414.2841260-1-d.schultz@phytec.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aDm0wJSPjXe5y8WD"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <CAJaLiFw-TQtgw8_ru9G2MtDwUTz=+_S6ykmBmwW0T5NGxgwxgg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20250502143414.2841260-1-d.schultz@phytec.de>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,49 +81,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On May  2, 2025 thus sayeth Daniel Schultz:
+> With [1], TI changed the Device Manager for the AM62Ax to an EdgeAI
+> based firmware. Update all binman device-tree files to match the
+> latest firmware name.
+> 
+> 1: https://git.ti.com/cgit/arago-project/meta-ti/commit/?h=scarthgap&id=430bab80d46ed921e4d4dc8ecaad8a4903b514c3
+> 
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+> ---
+>  arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 2 +-
+>  arch/arm/dts/k3-am62a-sk-binman.dtsi          | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+> index 325702ed6e0..aa4caaeae33 100644
+> --- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+> +++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+> @@ -167,7 +167,7 @@
+>  	ti-dm {
+>  		filename = "ti-dm.bin";
+>  		blob-ext {
+> -			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+> +			filename = "ti-dm/am62axx/dm_edgeai_mcu1_0_release_strip.out";
+>  			optional;
+>  		};
+>  	};
+> diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+> index 2a8c260387b..dc6e8523172 100644
+> --- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
+> +++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+> @@ -151,7 +151,7 @@
+>  	ti-dm {
+>  		filename = "ti-dm.bin";
+>  		blob-ext {
+> -			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+> +			filename = "ti-dm/am62axx/dm_edgeai_mcu1_0_release_strip.out";
 
---aDm0wJSPjXe5y8WD
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I've had to ask around internally to what's actually being changed in 
+this different firmware blob. I think there are probably more changes 
+that need to happen before we can make this switch unfortunately
 
-On Thu, May 01, 2025 at 08:26:39PM -0700, Tony Dinh wrote:
-> Hi Tom,
->=20
-> On Thu, May 1, 2025 at 4:05=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > Hey,
-> >
-> > Do you have time to look in to converting the ds109 platform in U-Boot
-> > to using DM_SERIAL? The code for triggering a reset via special serial
-> > commands is the harder part of the conversion (and I don't think it's
-> > likely that hard). Thanks!
->=20
-> Let's wait a few days to hear from Walter. If not, even though I don't
-> have this Kirkwood board but can give it a try to keep it maintained.
-
-Thanks!
-
---=20
-Tom
-
---aDm0wJSPjXe5y8WD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU4BQACgkQFHw5/5Y0
-tyw1iwv+NhYPMf/Hk3E8X/UaxZDOpnu5e36WmP8T/GqHs8E43Flx+1ALR3OhiZ+h
-sgBTNUbq+oJNNgu9o9kbGW1PkdIIqSBgeZ8bE2cJt/0WeDWg8acCUriPkekmROkd
-FEp5aS32xLNFCKu34WLwrbapW3+JoQupTx9iSCcNj0Lr38VHBfcN8qk0ahHdg1Pz
-K2dW2kekCXS0RCBU/6a+UxBS9I5qwg8NQwDuc1QN+L1dGrZ3BsRId8ExqkTQ6ggU
-NkPpyFQnGgKwKfbMlFhb93wAiS6uIqlfi5EZ57AiLlxfOHQSJaZZmfMFCHSGvFHg
-Up0hQ8hpN6xrrgGtSO7uRJke6kac3mNuDoD4TNDGrkN1tqE8Zi5cntLQUo6PkWZq
-AOaPHpCNXZmZ5i62UNQNsOm3aq9hhyeC30XUizCBwYs8OaZ2st1UOU/MeXSIp1xR
-smGBHgkpRzTPulj4XZKvpkHm0RLpNZ1kFoHmSBUVhPlN8w7biBVsb3+HfrgKflaF
-i+FlZLzR
-=rcsE
------END PGP SIGNATURE-----
-
---aDm0wJSPjXe5y8WD--
+~Bryan
