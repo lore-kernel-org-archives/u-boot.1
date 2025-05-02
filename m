@@ -4,103 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1665C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 16:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32760C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 16:26:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 426D6820EB;
-	Fri,  2 May 2025 18:16:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 851B4820EB;
+	Fri,  2 May 2025 18:26:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IWVu6PYv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oHYhhsb4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BB6A82102; Fri,  2 May 2025 18:16:17 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 46A2A820F6; Fri,  2 May 2025 18:26:17 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A919820E2
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 18:16:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DA37820E2
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 18:26:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8BDA63FCB1
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:16:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746202573;
- bh=j/c5AkVBPS0STNwt0a49TzZtXpy4WrSXGKYHbdVrJ/U=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=IWVu6PYvKpROtrZDecNlfVRhtLGeryby1fuQ/lUz+RfjnkyT2IvBimM0kcphDcNBV
- AwybUyHJg8fpt0loa7s23ocFynkH6phT3Nm/6ZXXPRkHOJ4XuRPAIG8fpn8SMRhccS
- bZef3BL0fxgexzXIoIOv0fCAbprfzOoBgl3dfMrY9/h+nxnf10XLFzH//xq6APFmGI
- e93HYsU/f19XBUSlNPRIe7e2xI4m3WifjNDrUxFN8Hhu/9TuHaaAkk+cqbva5J8jqI
- J6y7wsh/DCJ9ZmEFcZUDA7XI1wjG3Q7py+NbeT6bjzcXhZVFXr8fpQbv0lylzMLkFy
- oUstxnN6Nw5aQ==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43cfda30a3cso9657195e9.3
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 09:16:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-606668f8d51so1368984eaf.0
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 09:26:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746203174; x=1746807974; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Etn1SskDsy+lNOkxOtYL5wb8lePbyJj/AbFPF92Ck1g=;
+ b=oHYhhsb4/y6ThTK+Th0QesEhFTMhdSz1jY/oTLyvKaUsDYsEmH+vdjOV3dRDPz4p2v
+ 6Q+pTI4l2TVmPAVsB1EE4i4zYWIGTRerX5O1+2Dlmx7y4358g9uaQUsdB6hZeDGDgWAS
+ kG7n6lZ7fh9BLgqVe2+YUBYLqSj7y1S4l8P1c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746202573; x=1746807373;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j/c5AkVBPS0STNwt0a49TzZtXpy4WrSXGKYHbdVrJ/U=;
- b=nsN59UYbcz6aKJqw85WrQzgfCpSrmFSwMSIYDKkQgPu03Iq+nWVu5A7BDdXEtMcrSm
- 7TJcZlldlZObXmaI4Aw3Zk8w77hORGhEWV/jd3uq3J5HYzEOoxA342M/54L7wpeaBU/g
- sYfJMezVFSwgu6iSkmmgvhh9KdScka2ROn0rOxNgZKGzO9CZLHCkZxqhSHCm7ugj4CTL
- WvzFxby0IXm1InhJK7gxilcRvDO8IlezE5Yn4uQUKGU8THUOfPEIHB3taDoAbPbLFKIb
- p+xa0DJr3Dok2hSaciJBk0Tbha7jRTERmRlAsmW/vIl90aLbdmnLKL6741f681XtLHVV
- L6aA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXWXYXaAzRQwmo15kWf6joYH6uW6TTqEwjwmMogy+MhSWkk0pbVvxSS/xIiwFUPuay+9V13BpI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwOcsgJaop4Ic9Xc7FH8ZhvBljjuvWGsjP7cM/c6kK9MqiE/din
- y9UfJyqjTgpIvx3YdoXnTMQC1t/4tFiPHJXbhvaQ5Nt+21athsR1IQHwsNGli04QMAbn+lylTCE
- I/yO48sh8zJ0dJkA/FgwEMn4orEv+OOqxS+GgwYxu/gsrkXRLlxcmmH+VCwF81Oz1nAk=
-X-Gm-Gg: ASbGncvolBnsVQZBnvHz8vZkKZWPXUn8aqGDXISMUCowMbYv6gPWE3VuJVP5c1K5dfk
- gIIvEPOb57eCGIFB/KKHtk/xiL1YTu542/AzYUfPxWxJVDosFvr8GzWL2hyc2Jf2CjsxEy49qVZ
- 9uqW80PvBPAxndsA8OOwXQSauE5BHtUO4QOsCt8tDN8/UVa1gdzCcR0L8dSTsdxktyiAyBB+tZK
- iL52vhcU+8LTEMzEavk6xo4wFOYFYBU38aifLWNfi0oxrzSDBKKjAE/4DOJBLi1MQMX3GGs13qJ
- bFl5VEyznVxeV+UgCd6fJN/uwhY+YXL1GUIvalYsTAyyOuWbdyLijcsxlEa7wG0ZySK8V4g9uu8
- =
-X-Received: by 2002:a05:600c:6748:b0:43c:fabf:9146 with SMTP id
- 5b1f17b1804b1-441bbec4095mr37244395e9.17.1746202573228; 
- Fri, 02 May 2025 09:16:13 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHWlWLHvqQ7zAC/QdYxW35dDz4Q65uuN5qCADiWaGDNuSIp0rOHqhibOy8Pj5NwhUzzaTIwFg==
-X-Received: by 2002:a05:600c:6748:b0:43c:fabf:9146 with SMTP id
- 5b1f17b1804b1-441bbec4095mr37243935e9.17.1746202572897; 
- Fri, 02 May 2025 09:16:12 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:3644:2de:dbee:fb2f:9ba3?
- ([2a02:3035:6e0:3644:2de:dbee:fb2f:9ba3])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-441b89d1358sm48917435e9.10.2025.05.02.09.16.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 May 2025 09:16:12 -0700 (PDT)
-Message-ID: <27c7a370-ad40-4935-8b2a-f27468a01467@canonical.com>
-Date: Fri, 2 May 2025 18:16:11 +0200
+ d=1e100.net; s=20230601; t=1746203174; x=1746807974;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Etn1SskDsy+lNOkxOtYL5wb8lePbyJj/AbFPF92Ck1g=;
+ b=O+VUHDRy5uNzMesUHCTRNg89ssXq72rE+AqzJBDGtC8/PdWKjGF70z9hRJM2mF0INd
+ Ml+0MAARV6/S5UCPrrID+aOTRJZa5gmmsVZBS5/9x8Pwd32NZvEKcXhEh3/8fUWysuUs
+ Xw4zc0lH+19TV6qz30eYgF05JDWXlRACoO8iXzIlwTDLzW1P95sdHXwAZOxMbn1imUsc
+ WtqBF0XTtywLeEFTMcnp6Nvtmkn+3ChpuCn5wRE79dQ/r93rMYrUsfDeRgochDmxnH5G
+ C0T5r7kQihjkSjCaufCddNfUAQ0ASgbXgUzkUyoLEfJMB2BJXQG1nEkFTmUt092u9ZOK
+ FrrQ==
+X-Gm-Message-State: AOJu0YwRYp9RgHvF0ziergW3EgiYrJ1fDTWEN7EpTJbVGwHo48KIy7um
+ j3DGYUwy2gHq6eorGfLKdXiO2I7okSEMENJ7XBkIm44VNWbdsrIj/wNObEBul5c=
+X-Gm-Gg: ASbGnctih72l38Dv255ivvhnq7c/u10CD2+Vor4OI12p6IGz6FjyqiVA1myA8VRBcoi
+ uYfxHGA1368h22/fUFn0RhvD+I2Mtuga5cPrstPYPSUWMiIUqqKpYn1dWnNrmjDwpsNSmapLXKl
+ oNEJnDKhEmfSN8KFGodgGmbyvCGlhdSr8xOOh3wtD8aOGeSnAdT5ol0XiPAXlWCHsu1fBir5Ivx
+ +dG+zSCvISYLCGk5V1zPP8KQ25wuDXRDB8Nb8ADnOMPzqJfjmoVJxxUelTuehW3d4M9H4K3KxdG
+ U4pRlXvG0RfriubMnyVkFOupLQyIBIhyjZdF3Nyq6TsE8clceWAgSndXcYg1Pi7s2DzlK2Uw+XE
+ 7IbLewYpcTek=
+X-Google-Smtp-Source: AGHT+IHp8Yq26Nknamh4jW9RcaqQsa7SFRjm4auyEKFAA0SvltVysZ0NKXFdJAWF+Jma+PySKL5h5A==
+X-Received: by 2002:a4a:c899:0:b0:607:de46:fa94 with SMTP id
+ 006d021491bc7-607e2043168mr3687215eaf.4.1746203173775; 
+ Fri, 02 May 2025 09:26:13 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-607e7ecff54sm597977eaf.22.2025.05.02.09.26.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 May 2025 09:26:13 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+In-Reply-To: <20250411-livetree-fixup-v2-0-1236823377bb@linaro.org>
+References: <20250411-livetree-fixup-v2-0-1236823377bb@linaro.org>
+Subject: Re: [PATCH v2 0/8] Qualcomm: cleanup OF_LIVE fixup and fix RB1/2
+Message-Id: <174620317246.1348341.13335565510376078911.b4-ty@konsulko.com>
+Date: Fri, 02 May 2025 10:26:12 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 3/8] boot: make BOOTMETH_EFILOADER default=n
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
- <20250421162555.1200687-4-heinrich.schuchardt@canonical.com>
- <CAFLszTjcCXDnjOjpD88tGcvSz1AOAouyHKsynzCC3tngDqzOvQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTjcCXDnjOjpD88tGcvSz1AOAouyHKsynzCC3tngDqzOvQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,48 +100,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/2/25 16:49, Simon Glass wrote:
-> Hi Heinrich,
+On Fri, 11 Apr 2025 14:47:37 +0200, Caleb Connolly wrote:
+
+> Introduce a new event to signal that the live tree has been built,
+> allowing boards to perform fixups on the tree before devices are bound.
+> Crucially this allows for devices to be enabled or disabled, but also
+> allows for properties that are parsed during the bind stage to be
+> modified (such as dr_mode for dwc3).
 > 
-> On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> The boot method is deprecated as the EFI boot manager covers this
->> functionality.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   boot/Kconfig | 1 -
->>   1 file changed, 1 deletion(-)
->>
->> diff --git a/boot/Kconfig b/boot/Kconfig
->> index 71ddb37f6bb..b973d9eb0a7 100644
->> --- a/boot/Kconfig
->> +++ b/boot/Kconfig
->> @@ -595,7 +595,6 @@ config BOOTMETH_EFILOADER
->>          bool "Bootdev support for EFI boot"
->>          depends on EFI_BINARY_EXEC
->>          imply CMD_TFTPBOOT if CMD_NET
->> -       default y
->>          help
->>            This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
->>            launching EFI\BOOT\BOOT<ARCH>.EFI if not boot option matches.
->> --
->> 2.48.1
->>
+> With this in place, mach-snapdragon is switched over to use the event
+> and some hacky U-Boot specific DT overrides (which had to be undone
+> prior to booting an image) are removed in favour of fixing up the
+> livetree (which is not passed on to further boot stages).
 > 
-> As mentioned on the other patch, we need to keep this enabled and it
-> isn't obsolete.
-> 
-> Regards,
-> Simon
+> [...]
 
-Please, read the UEFI specification especially chapter 3 "Boot Manager".
+Applied to u-boot/master, thanks!
 
-* The functionality is fully covered by the boot manager.
-* The current implementation of the method does not comply with the UEFI 
-specification. Especially if run before the boot manager.
+[1/8] event: signal when livetree has been built
+      commit: 993a9db918af451c68851522c8770e582b717629
+[2/8] mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT fixups
+      commit: 5a1dfb27f9170d35a475ea8be46b5d7c037ee837
+[3/8] mach-snapdragon: of_fixup: skip disabled USB nodes
+      commit: 0ec337d03410a4a0b7402ae72968470cf63f0c55
+[4/8] mach-snapdragon: of_fixup: remove confusing log message
+      commit: a6cc4ef343dc39c17fd5b833d983aff2f26c94b7
+[5/8] mach-snapdragon: of_fixup: update comment
+      commit: 9bc7eef9bf58c4c1d453cba81060dc61375f5354
+[6/8] mach-snapdragon: of_fixup: set dr_mode for RB1/2 boards
+      commit: 3b983cf48e70ecb6aadca788d0d91a021340c802
+[7/8] clk/qcom: qcm2290: show clock name in set_rate()
+      commit: 229fd3f9a8d4dbaad7c9a2e9c1b62d14d0753b0b
+[8/8] pinctrl: qcom: qcm2290: fix off by 1 in pin_count
+      commit: 2803a466a96153ab01c5789321e48397b6bae9c7
+-- 
+Tom
 
-Best regards
 
-Heinrich
