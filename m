@@ -4,51 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C957C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 20:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39FA9C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 20:12:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAF07820E1;
-	Fri,  2 May 2025 22:06:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=novatechautomation.com
+	by phobos.denx.de (Postfix) with ESMTP id 96153820EB;
+	Fri,  2 May 2025 22:12:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=novatechautomation.com header.i=@novatechautomation.com header.b="GoFc89kK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s+1rlhCi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7965820E2; Fri,  2 May 2025 20:38:47 +0200 (CEST)
-Received: from gw2.cammew.com (gw2.cammew.com [64.182.209.149])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7059B8212F; Fri,  2 May 2025 22:12:34 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E7B781F7E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 20:38:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=novatechautomation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=eric.schikschneit@novatechautomation.com
-Received: from eric-Desktop.novatech-llc.local (unknown [38.62.160.128])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by gw2.cammew.com (Postfix) with ESMTPSA id 5197FEDCC5;
- Fri,  2 May 2025 14:38:43 -0400 (EDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 gw2.cammew.com 5197FEDCC5
+ by phobos.denx.de (Postfix) with ESMTPS id F393581F7E
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 22:12:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3feb0db95e6so1633759b6e.1
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 13:12:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=novatechautomation.com; s=relay; t=1746211123;
- bh=a2mlZ9uW7g0040S1V3NtN/N22KAjDRbfVoZHB24QL/E=;
- h=From:To:Cc:Subject:Date:From;
- b=GoFc89kKHneC8YEgqtTl//8BeEs5Ji+2lzI+rzS4F2bv1OI1D89yXedbC1mT51kOe
- F6IKSvRekJBQ1okMdXIs2Py19saYlp1r3gQeeyq0yYw/FbNusO4dl4sDQQ9L3IAYqJ
- 4R+AYdbpEVz9ugIoLWUX5KCTcgXolDn0aRsJ6zwk=
-From: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+ d=konsulko.com; s=google; t=1746216751; x=1746821551; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+zTE0+warmJ69cPZNd3zgaLwawH5oWaubOdAcheYuVo=;
+ b=s+1rlhCi4S1sqs9sPSpvzfgo/tdUpdAh0xYJUFH5I+AQpW/sFcEr0wBZzeIntfIaio
+ uKmVqaMG9Bno4xYd6+gcPEkfbkDwpbVaJKLAql7GE3h//PtlY7bOMDegsEP4JhX11hx5
+ cndJDx142RgrhHItEhmKlUl23HBO1Y7HjsFoU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746216751; x=1746821551;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+zTE0+warmJ69cPZNd3zgaLwawH5oWaubOdAcheYuVo=;
+ b=boEO+RyILiHUM6YCK8Fkjgmy9319PmW4gaFyo7WvVdXQayjKpY6QmDuoSVO0+ADhyJ
+ 7JmgBK4XWGTxqW80LMTpG7icVTTrzkY3E1e9QC5nydkGJCx2fuwxsKxWfuQfku0W9yDB
+ BAYcnmfBEkZSJTQmGziznghFJQwi/UZZqhWqZiCXKtUpw+nafzYc00VXcRrsVX6MIkjB
+ JaXjfM2OTNT75gi+APB8KsYGTv02xAYWLIWx0S7jBHFN6XBqiju4X5IeIVH582Y9BfE5
+ yNABEqnwORKTA2/tP3bKo2wfLXDnExJqz3JReuVcM7OkeQCngxfRHXpeUhnXp/o/yxHg
+ jAWw==
+X-Gm-Message-State: AOJu0Ywhh54SKC+hJlUGlvN7s9K1u2Yp+2Z5sJGhv8ygYeCmUEWhjk5h
+ 2osEes40rED/o5LSNTjpeoS0o1py8tgUgb3aegCvkY9Qg1oONmb1ZDOoNWJ1U0D/IV8E0R5s8KQ
+ c
+X-Gm-Gg: ASbGncuOn1E4XNM+JK8UwM73GkXeoJ8aJmYuj20KkqugXfqX3NrPzI1CFbNHZ7GJZts
+ ooV9Xm18e1MQOANGVUW3JheCbv5XcWWfNfV/1AgD1+NBErmbayMhxj9oGqeUajw7c1IUIHZTzfS
+ ozXEnmMc1c98rJ/7KOlwhUN3kDMrFFlXYSBMCoSsxATE13PjHJV6xNhI+4bsDqy/ZvXaULv0OrK
+ UC2bkz9ioRI5R+2lMOnAFLEtwljBqavEEkMe2Yov4QChLTL7I1f4R/rR9W7Jln0VymEfv2Grm0/
+ GiGIeVXkHVG0m4Q3Ez08N0XHnouvxqAEs8nJEOw/vpjk/DkZneA15Vf4arVuvRn08rE0YX5TFHS
+ S+W8h
+X-Google-Smtp-Source: AGHT+IG9M1M+khNkt2ZtBX4az1vSbVgE50/Ak4TmX8KkTXMvmAHq/wEX8T+qwQWaw89ICkaKFHCodg==
+X-Received: by 2002:a05:6808:3a12:b0:401:e949:6374 with SMTP id
+ 5614622812f47-403413937f5mr2569685b6e.16.1746216750702; 
+ Fri, 02 May 2025 13:12:30 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-607fb1117e4sm27786eaf.3.2025.05.02.13.12.29
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 May 2025 13:12:30 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Subject: [PATCH] [RFC]: dtc: Add Kconfig option to pad device tree blob
-Date: Fri,  2 May 2025 13:38:26 -0500
-Message-Id: <20250502183826.859174-1-eric.schikschneit@novatechautomation.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [PATCH 0/2] Almost complete DM_SERIAL migration
+Date: Fri,  2 May 2025 14:07:38 -0600
+Message-ID: <20250502201226.1369013-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 02 May 2025 22:06:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,172 +91,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This will allow arch(s) that use device tree blobs to pad the end of the
-device tree so they can be modified by board files at run time. This will
-help prevent errors such as FDT_ERR_NOSPACE from occuring.
+In a private thread, Simon asked about what's needed to get PowerPC
+migrated to DM_SERIAL. I went and took a look, and to complete the
+entire DM_SERIAL migration (excluding SPL/TPL) we're actually nearly
+there. This series first migrates PowerPC (and some NXP Layerscape
+boards that share history more clearly with PowerPC parts), with the
+biggest change being to make sure we still use the correct legacy
+drivers in SPL/TPL (where SPL is extremely constrained). With that out
+of the way, I looked at what was left. With two exceptions, it's
+platforms which can be trivially enabled for conversion, and so we do
+that.
 
-Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
----
- arch/Kconfig                 | 11 +++++++++++
- arch/arc/dts/Makefile        |  6 +++++-
- arch/arm/dts/Makefile        |  4 ++++
- arch/m68k/dts/Makefile       |  6 +++++-
- arch/microblaze/dts/Makefile |  6 +++++-
- arch/nios2/dts/Makefile      |  6 +++++-
- arch/powerpc/dts/Makefile    |  4 ++++
- arch/riscv/dts/Makefile      |  6 +++++-
- arch/sandbox/dts/Makefile    |  6 +++++-
- arch/x86/dts/Makefile        |  8 +++++++-
- 10 files changed, 56 insertions(+), 7 deletions(-)
+What remains to be converted are:
+- Xtensa:
+https://lore.kernel.org/u-boot/20250501230349.GM1261075@bill-the-cat/
+- The DS109 platform which has a special reset done over UART:
+https://lore.kernel.org/u-boot/20250501230530.GN1261075@bill-the-cat/
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index ea33d07c086..a85f751d1e6 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -63,6 +63,17 @@ config SYS_CACHELINE_SIZE
- 	default 64 if RISCV
- 	default 32 if MIPS
- 
-+config SYS_DTC_PAD
-+	bool "Enable DTC padding"
-+	help
-+	  This will allow the final device tree of your specified arch to
-+	  have pad space at the end. This enables the ability for the device
-+	  tree to be modified in place by board files.
-+
-+config SYS_DTC_PAD_BYTES
-+	int "Size in bytes to pad device tree blob"
-+	default 4096 if SYS_DTC_PAD
-+
- config LINKER_LIST_ALIGN
- 	int
- 	default 32 if SANDBOX
-diff --git a/arch/arc/dts/Makefile b/arch/arc/dts/Makefile
-index fe6ad7b849a..fee5d7baae6 100644
---- a/arch/arc/dts/Makefile
-+++ b/arch/arc/dts/Makefile
-@@ -11,4 +11,8 @@ dtb-$(CONFIG_TARGET_IOT_DEVKIT) +=  iot_devkit.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+       DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 82f5c374f10..8c6bd53172f 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1213,5 +1213,9 @@ include $(srctree)/scripts/Makefile.dts
- # Add any required device tree compiler flags here
- DTC_FLAGS += -a 0x8
- 
-+ifdef CONFIG_SYS_DTC_PAD
-+       DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-+
- DTC_FLAGS_imx8mp-dhcom-som-overlay-rev100 += -Wno-avoid_default_addr_size -Wno-reg_format
- DTC_FLAGS_imx8mp-dhcom-pdk3-overlay-rev100 += -Wno-avoid_default_addr_size -Wno-reg_format
-diff --git a/arch/m68k/dts/Makefile b/arch/m68k/dts/Makefile
-index 8b354b9c570..2fda1f5081e 100644
---- a/arch/m68k/dts/Makefile
-+++ b/arch/m68k/dts/Makefile
-@@ -21,4 +21,8 @@ dtb-$(CONFIG_TARGET_STMARK2) += stmark2.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+       DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makefile
-index 9be902d3bb1..d0b6c185e7e 100644
---- a/arch/microblaze/dts/Makefile
-+++ b/arch/microblaze/dts/Makefile
-@@ -5,4 +5,8 @@ dtb-y += $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+       DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-diff --git a/arch/nios2/dts/Makefile b/arch/nios2/dts/Makefile
-index d77db9762a1..aefbb7815ec 100644
---- a/arch/nios2/dts/Makefile
-+++ b/arch/nios2/dts/Makefile
-@@ -5,4 +5,8 @@ dtb-y += $(CONFIG_DEFAULT_DEVICE_TREE:"%"=%).dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+       DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
-index 766b0c05951..c39e04c9544 100644
---- a/arch/powerpc/dts/Makefile
-+++ b/arch/powerpc/dts/Makefile
-@@ -37,3 +37,7 @@ include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
- DTC_FLAGS +=
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+    DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index cf1872f3fdc..fd4ed512aaa 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -19,4 +19,8 @@ dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += ast2700-ibex.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+       DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-diff --git a/arch/sandbox/dts/Makefile b/arch/sandbox/dts/Makefile
-index 1c9fb4a4566..1911b25700f 100644
---- a/arch/sandbox/dts/Makefile
-+++ b/arch/sandbox/dts/Makefile
-@@ -11,4 +11,8 @@ dtb-$(CONFIG_CMD_EXTENSION) += overlay0.dtbo overlay1.dtbo
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+       DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-diff --git a/arch/x86/dts/Makefile b/arch/x86/dts/Makefile
-index 9a46726e026..6da4364116e 100644
---- a/arch/x86/dts/Makefile
-+++ b/arch/x86/dts/Makefile
-@@ -24,4 +24,10 @@ dtb-y += bayleybay.dtb \
- 
- include $(srctree)/scripts/Makefile.dts
- 
--DTC_FLAGS += -R 4 -p $(if $(CONFIG_EFI_APP),0x8000,0x1000)
-+DTC_FLAGS += -R 4
-+
-+ifdef CONFIG_SYS_DTC_PAD
-+	DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+else
-+	DTC_FLAGS += -p $(if $(CONFIG_EFI_APP),0x8000,0x1000)
-+endif
+I believe both of these should be rather clear conversions by someone
+with the time to do so.
+
 -- 
-2.34.1
+Tom
 
