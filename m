@@ -4,82 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45893C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:34:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC726C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:34:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FBA4820EB;
-	Fri,  2 May 2025 16:34:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F0DAA82114;
+	Fri,  2 May 2025 16:34:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bM/1USZA";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Y/s4eXgf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3757C8210D; Fri,  2 May 2025 16:34:06 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2C1B582145; Fri,  2 May 2025 16:34:37 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20722.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::722])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3A9981F7E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:34:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A30FD81F7E
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:34:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-603f54a6cb5so1311758eaf.0
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:34:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746196442; x=1746801242; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sTRZniJmucAVSfbv7DidE3JOWvHy5BYzkARpmsxYJuo=;
- b=bM/1USZAbGI/OCu6sliQpNFZISWSFITxEh2A0QGEGLItlxlYcnbXilhBQEjz5k/Q17
- 28/Xx95ljhCyGDCnDKesKLxP14UaGy7hoCf/nwOXZLVWTrTG/UH5KjHvvHiz1nT0lLKd
- 4UADd+ZljxwYCpLDYJ+vuN4OkDbWTTc4uJ8xs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746196442; x=1746801242;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sTRZniJmucAVSfbv7DidE3JOWvHy5BYzkARpmsxYJuo=;
- b=vVPAu08ygAoh5JQJVF1uxAZvr0oOVq5zPPt8FmrzOTosaaH6qHq7lhllXNUw66RWUZ
- pE+BcKZ/nc0uPSR2YpdMm85Kh53zZ/NNAk+ig48XHw/zU81RHQTOH4PphhRHWxLtR3T6
- HbsnvHcH6+OMHvfWmmOeEcUfz1Hv1SuO2f+4D/+R5ieybDGfl6z+t8gkFnq93nfT8uCN
- vS07owXGlJLe9UXfCNJD9uFA0t8ej7PRGWvj4aOvGUdu/tl9QvYOjMC9ZmPhPbh2GQZF
- /+eoitbFoku7qJMUWQpfc1YB0V7KEnshM/ncPxwDjFiKiYLQoa1unbTWa2Lz9FGjRvYw
- k8UQ==
-X-Gm-Message-State: AOJu0YzyLa9xCRzHLiLNvzpqeaWjCRpouAUbIJFN1RICnS0SXbRbo253
- GImGwoHGnV79bf6HM2hHCtC5GfZDOfNnyhSX/d9zegR52BvykCTPI+UP32dcMOQ=
-X-Gm-Gg: ASbGncszwKED1JnT+nUSmBjLzGhdUe4a3mFdXS5nubUI7WvhMwV0P4XCH1HwKnGb1V/
- oQ0kLwtFPDX2ImjY5bTaQLPl5apmf+FdQVXeWnVasuHosRZbRy4yyfcgSQCaawizr2HtJDiGPme
- TFWyXqNS5xevFmfCKFewYKDeiM0oCZ3zVnHMPXq1j6TTGkcCuYofEWtZLaWNq8334dQHnM7wAHy
- ROl7DS5hxzHD05u4PzyhJVyNQGTy2HclfUXi3PwSa/6H5etq7JOgN6+Yg+iCdg7WSxh4KEAnMbR
- qW2/s4/LMhsHGIVhxJB/kLIFlm7btSHhW7T+uGiDZ31MVrb0W8/wdmMA5M4pf3lFQqN5z6UqKHH
- ge/CWaJu3eqXO
-X-Google-Smtp-Source: AGHT+IEv8mKE8wzlj9tO3teqQJrOykodpBv9QirsoskXUcWiDvgsucn522k1r1/l0cxkVfyffBIxmA==
-X-Received: by 2002:a05:6820:a0b:b0:606:8579:4c5e with SMTP id
- 006d021491bc7-607ee6c3646mr1615610eaf.1.1746196442217; 
- Fri, 02 May 2025 07:34:02 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7fb7786sm526475eaf.30.2025.05.02.07.34.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:34:01 -0700 (PDT)
-Date: Fri, 2 May 2025 08:33:59 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
-Message-ID: <20250502143359.GS1261075@bill-the-cat>
-References: <20250502025026.4140184-1-sjg@chromium.org>
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MJ6ks8RCmtc01MIOUA4QbPtLQAi7plIMt+bGBkamOGGkQr0HQHyOaxAIzgeQH4SXtkCDYVZ3pl6X9pNmdoXE8Yt730mIr2+rfOolkTyjY/D+Jb2gYxF0/CGuAWNesJvz2dwBWaihzpji0QJCOS+iiULQeeRDK9ehleeDYimEsLNauq/pdDJwC48zQWn//9PQuH9hSGKmplAKk1vr7C146JZcNKe9iBGsJdBeRVSgj2gsPETxR0BsSKrorjfne3CZI4MpcYk+7Lvi1QFmWLGLHqjJ3C2hSl8BZNXYJQcAbmCOim5aoOIguf6JAC6Wms6gKixHaTYAONGgEY8xabYV4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rWp04PBAp6MCVtu7trhanc8vfuFHrMiRicnXHBXntS8=;
+ b=SgS04bm8fXULxTmabYd2+AyoTgmzkqBxP1Pz5Yph/Oa0rfyc8rswq+06Hp6S6mhPSwIxIUw7t42qLCwerGx9ne5nO3+DOJq5IQYElHWsuXOA1/IGO+1QqgON+zANzakQPnrxoVMpPiuYE00RXz7UvZEueChtSqxoMFTFHKRnKlTG5iM3oOkaXsy5IPR7yNnhnuY00bv3xyV2MBNiI12pdB4qG3YCScyf6YXUXm8cIQRVr5Bb9YBQNuwV0sOjAVHnuP4M0V/D9DP0XFznOnMIK+cglX0Lb+HwuXRHDuFmLQg31hFnB6FDT0KwTyndQsmW1Tk47c01Ka3jFEH+nKHSjQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rWp04PBAp6MCVtu7trhanc8vfuFHrMiRicnXHBXntS8=;
+ b=Y/s4eXgfQZvUeOxU0gXb7ru4ST3v70WSf01QQENBur1k0apXV4MiZ4+Kns7HYJ0zZmNg8t6a7rQnUE1Jx4kun8OC053QPPObfYUu6s6LU+OGLdliV4IPMqIiPt1EX/lhYQ54a6f5CbYId4qNBjltOGFytuX90yr/0G0vt+HWljiCY3uOfF4bx0Nnfyi84wrsjbuynwe5kVbNtqk790um6kW7PPW+abUYfh8iPw2G2dhH1DzmSUFSHznnBCcxCmvKoFK/M23kV6dQ3Kyw4nz5Ise0bOUG5Y43VJLfs5GWJyMk35GlfwhZDjwPEQ+8+1SGXIdFVpBqCqjIbAGbuOzJNw==
+Received: from DUZPR01CA0324.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4ba::29) by PA2P195MB2534.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:102:403::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.21; Fri, 2 May
+ 2025 14:34:29 +0000
+Received: from DB5PEPF00014B95.eurprd02.prod.outlook.com
+ (2603:10a6:10:4ba:cafe::de) by DUZPR01CA0324.outlook.office365.com
+ (2603:10a6:10:4ba::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.42 via Frontend Transport; Fri,
+ 2 May 2025 14:34:37 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ DB5PEPF00014B95.mail.protection.outlook.com (10.167.8.233) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8699.20 via Frontend Transport; Fri, 2 May 2025 14:34:29 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Fri, 2 May
+ 2025 16:34:28 +0200
+Received: from ls-radium.phytec (172.25.39.17) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Fri, 2 May
+ 2025 16:34:26 +0200
+From: Daniel Schultz <d.schultz@phytec.de>
+To: <trini@konsulko.com>, <d-gole@ti.com>, <bb@ti.com>, <vibhore@ti.com>,
+ <kamlesh@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <afd@ti.com>,
+ <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>, Daniel Schultz <d.schultz@phytec.de>
+Subject: [PATCH] arm: dts: k3-am62a-*-binman: Update ti-dm blob
+Date: Fri, 2 May 2025 07:34:14 -0700
+Message-ID: <20250502143414.2841260-1-d.schultz@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FT53m9yphj0ywH95"
-Content-Disposition: inline
-In-Reply-To: <20250502025026.4140184-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.39.17]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B95:EE_|PA2P195MB2534:EE_
+X-MS-Office365-Filtering-Correlation-Id: d94b9d0b-ca37-43e6-f982-08dd8986726c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|1800799024|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?lBQjrZZS3/OzspaY8oFPuDtUVZFbpVqH90nPHS1qNuBz8aonYVXwE044JSXL?=
+ =?us-ascii?Q?5d6czk3mpzAIekuP+QoRx5WUQdvPG++eAdP2zE7WpANu8aYK1ebWFGbBnNaq?=
+ =?us-ascii?Q?ddYOabBn+twlN3o4KHEanNR8w2r/2FEQy+y5WqdoQVfAtlNfx+FEFNT1Fqtz?=
+ =?us-ascii?Q?d3bz+7ZNO7Xksm5QFGAHr+lLFkjCy5mCeSLAfxiWrX52Gj9eH+HUzEnMaecp?=
+ =?us-ascii?Q?iTue8fC/zOcc/Sx5w2fFaFtsOTf/ao1UFlTpu0aodnq7+YXEj1N2j0iCafIm?=
+ =?us-ascii?Q?JFMW/beUZVcQLZrbn4i250U8ttNeM5RnQDmd5ibhMwRepKj2xfh9hC1Lk5JK?=
+ =?us-ascii?Q?YRI56Syr7sTAhBv72qXv05H5ewCSzmq4wI9H/fC+AQk/GjHhZRPOn4hmttQl?=
+ =?us-ascii?Q?vTYsc3Z91BldSzNpbtN0V4slTOEuasyraywgtSdEB7TJ/2UoMCw7fYQ8e78H?=
+ =?us-ascii?Q?xf3F8Y9BG7PbAXCNesjrUCXO6GFN0QL7ykLtXj860YF4lB6vGWG/Q/21zrrg?=
+ =?us-ascii?Q?+8FQuYdEFZsXONmegAws6RN5j7rxE1NmAhTbClVrBFkVcvyiyoiQEVuhdTXx?=
+ =?us-ascii?Q?6Zv2/UmLtOXr80l4kxMaYbS1RnVkHWbZQnOK2qnod7aBFd2ot6606DRftdQk?=
+ =?us-ascii?Q?PFKA4oI3zJVfmdAJ4IN792Vd1EDxeDZW2Aagk3Vn2+dop7Jiv9ALQoj5ECvL?=
+ =?us-ascii?Q?fbuqq0t+/9zXymS5tB4qnmwJFIBsKoNvRsYFe0JX6u04DBd8QpXbLQF/I3BL?=
+ =?us-ascii?Q?H7zGRxmQSH/ASU23jD+aXvMWSU38jKfIKCqVEZm8ewxkcoalsJaqePvbtzBR?=
+ =?us-ascii?Q?UWqLTVgobT5WkV0gsxcUZvNY774GPX4J0lCKQH8kKQEe8Ptt4KNxKP3US65X?=
+ =?us-ascii?Q?tFQbV/rexMxsPk70JxzbTi4EwGCmr/25KHpHfDJNYXD3h4DXZzkHihyoscjQ?=
+ =?us-ascii?Q?Y72KjtVfdFqKn9meitkE8mqEM+YIAzgI5ALYOWDc+O+AtxizvWpLNiDKG+m7?=
+ =?us-ascii?Q?zYGORujqpBdXbM7yHot4c7WaRKu9XjFYbVLvAK9s8bf7SPObfD7U2R9vBbzp?=
+ =?us-ascii?Q?IRoAvuRJykEfqIIWtVOZih7QRdbLD1ckC3PzYGJLtfRHRqXD0brPDl7FO3e+?=
+ =?us-ascii?Q?L13bI5yHfjJ1i8hV0Xs1u1T5PG0q1u223JlmRCw6yls9kgCQzkd1bvgmRvwO?=
+ =?us-ascii?Q?TTOv2F42Qs6ppR3daO6AbAwiKv4U/ROBqFo7I3Srw7gzXosqAdiqKGRBv5Yr?=
+ =?us-ascii?Q?1mknrGq6gC9kLi3fXlPw+Eo2OovT71BJfoZRvRqEsvfdIrMiN9oXTtlIE9LF?=
+ =?us-ascii?Q?8G2SLzxSQRlO2ThtI0vR/5RyJeoXskngwro2LGveYu8RR57/OCpFEJPs5mOd?=
+ =?us-ascii?Q?GvlZlsClQtIRnbQbtN5LFs0Y9/cDMoXmORftowCEqYvcAvZyQf9pEJQLCCzn?=
+ =?us-ascii?Q?9uZd5nUKjX/apz5oX8luGt1DoDS9YH5eH+NEhkKnRPPdqzwPFBHv56ZqGefF?=
+ =?us-ascii?Q?rlX7Z08r4rrJ1XAwlf0VGEm7Zs1ZYxlsORCa?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2025 14:34:29.4156 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d94b9d0b-ca37-43e6-f982-08dd8986726c
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B95.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2P195MB2534
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,69 +149,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+With [1], TI changed the Device Manager for the AM62Ax to an EdgeAI
+based firmware. Update all binman device-tree files to match the
+latest firmware name.
 
---FT53m9yphj0ywH95
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+1: https://git.ti.com/cgit/arago-project/meta-ti/commit/?h=scarthgap&id=430bab80d46ed921e4d4dc8ecaad8a4903b514c3
 
-On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
+Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+---
+ arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 2 +-
+ arch/arm/dts/k3-am62a-sk-binman.dtsi          | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-> During a recent discussion with Heinrich we discussed why the hooks are
-> kept in a separate repo.
->=20
-> The amount of code is small, a tenth of the size of the recently added
-> lwip, just by way of example. Testing is a critical part of U-Boot and
-> one of the things that distinguishes it from firmware projects that have
-> not kept up in this area. By having the tests somewhere else, we are
-> signalling that it is unusual, or difficult, or optional.
->=20
-> The hooks mechanism also needs something of an update to take account of
-> real boards in 2025. That will be much easier to undertake if the code
-> that test/py talks to is in the same repo.
->=20
-> This series brings the hook files in as first-class citizens of U-Boot.
->=20
-> If we do go ahead with this, I will send a different series which has
-> separate commits (with correct author) in the u-boot-test-hooks repo.
+diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+index 325702ed6e0..aa4caaeae33 100644
+--- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
++++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+@@ -167,7 +167,7 @@
+ 	ti-dm {
+ 		filename = "ti-dm.bin";
+ 		blob-ext {
+-			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
++			filename = "ti-dm/am62axx/dm_edgeai_mcu1_0_release_strip.out";
+ 			optional;
+ 		};
+ 	};
+diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+index 2a8c260387b..dc6e8523172 100644
+--- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
++++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+@@ -151,7 +151,7 @@
+ 	ti-dm {
+ 		filename = "ti-dm.bin";
+ 		blob-ext {
+-			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
++			filename = "ti-dm/am62axx/dm_edgeai_mcu1_0_release_strip.out";
+ 			optional;
+ 		};
+ 	};
+-- 
+2.25.1
 
-I think bringing more projects directly in to the repository is a bad
-idea. Your example of lwip isn't applicable because it's a read-only
-subtree that's maintained outside of the project (same as the dts
-subtree). But sure, lets "Say Yes". That said, we still need to:
-- Remove needless examples from the tree.
-- Not include personal labs directly in the tree.
-
-That last one is why I really think this is a bad idea. The point of
-having the hooks standalone is so that any given lab can easily add
-support for their lab and manage it, without worrying about disclosing
-internal layout. There's going to be hard coded default passwords there.
-There's going to be repository secrets there. That kind of information
-really should not be in a public repository. Integrating the hooks with
-mainline will make lab management harder, not easier. The point of the
-existing labs in u-boot-test-hooks is to provide samples.
-
-I think this is all why no, we should not go down this path.
-
---=20
-Tom
-
---FT53m9yphj0ywH95
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU19MACgkQFHw5/5Y0
-tyy0qAv+NGuZ77g+7MEakqNQjsWU76ChnlgsWQPOnzhZwDJ5v4abmX+3crfKKEdi
-yDXp87/NPY8HuGO4p61yewHdOHoF33qxUA6Pj8Xj/WciAEO0DnjZ4y7QjMUdeZwt
-4QJH35MsPMPFDXfbB6YBs7T1/3nk1+NFqVIUdHPiA3ImT0/sTNHWSOGIERPs+6ym
-aEvgFzeIKYpBNgVlHnzTRTammgZoh2x8Ul0jx5cPFVduU9odtkAJTd+1dNZ76HDa
-eK60OITy2gRNU4EKsVlW6Ga31+3tc4TPOhFpdAObjXLoU3N/BFIZhL4DzX4dqm8O
-wwMEgK+r67z7/8L1hwsSej7LviSjBz2hgHthTSDLJBnGa/a76STuy/Gp67b9Wp2q
-1fb8xXbamW3GKCtNRjCY0zPyW9IP6DhYdMzAjHKh7rc1cwXxSs6QX0wsVt5Dcmvc
-y+kR9ZsSL4RMWhko2gDfdLLXeBcvDDHLk7+g6vlqLO4dADXE/LzCwiXgIWR53XUz
-znva6ul5
-=Mali
------END PGP SIGNATURE-----
-
---FT53m9yphj0ywH95--
