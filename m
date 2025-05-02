@@ -4,105 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4743EC3ABA3
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 06:51:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBD5FC3ABA3
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 06:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1F5E8070C;
-	Fri,  2 May 2025 08:51:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45B128070C;
+	Fri,  2 May 2025 08:55:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R2XkHUGA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ysWbhbXZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C18180FDE; Fri,  2 May 2025 08:51:49 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 6CACD812BC; Fri,  2 May 2025 08:55:08 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 157D98059D
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 08:51:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91EE08059D
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 08:55:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-39149bccb69so1190572f8f.2
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 23:51:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-acec5b99052so271386066b.1
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 23:55:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746168706; x=1746773506; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Jvqo3sXWziR8Flkh0fsHX/laX/gCDKF6x4XRvzgY4Q4=;
- b=R2XkHUGAt7OVjgJ/wLiaXP5ELjlG2UbD2x4sDkazu0HmKmItuiP5NjsB8aMr/KG5yx
- u8VLLoELwEIpzWLcPhLbxcOBDJZGVkbaLZnCbf+v0ls/CDhLpfLqwbug3xo15QXHmtX6
- 3gcYFpUS6CJPs9u+S7PbRDXYZFuxy+97xRwprRrxlhFQGfvX9vZd8HMH2CziQ5ntNWYa
- jbvmSpAUBL2X8Z6MPdoRCr//2VW4KcG8bQfI8ocIQNf6xe4TeKiI4mKzToIV7QMcFrbv
- gi0R+bMyOOsZm8xvhIAqWAkQOBWK0SldJkLAdY7NO0rRfCmPcfCb5wdCfKEtjzR0mot/
- ZhhQ==
+ d=linaro.org; s=google; t=1746168904; x=1746773704; darn=lists.denx.de;
+ h=in-reply-to:references:cc:to:from:subject:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0nQUyYZwz5VA740zUPAHjltE3fXCfp3Mua5uvYw+RJs=;
+ b=ysWbhbXZDYZMhwunY7eTJ2Rh6BS9NIzMHoMr0/Zq/0VzbtCMylnjla/vXsKDoDV+NH
+ aluPWjLrNHruSLNF4LRgUE3yCbPRLdGc6McJEg0odzv309IGLbcHHyI/mfk6ZfxRo8nh
+ JEaD6/TgGH+lt18KopYOgho0gAPiXSkoFp3Rh6h7H2w0LkKWR2kjBXhqpT39OTNXMDFX
+ eN5LZ8Qrf1QGZRPohjyok9DhI0EwR1GZ5FlSa+MK0p6W72aInF40aJdhjUePhnuLTn79
+ K867X4BBpUJVBZrYhALajphUQFWvcMKJiKWA5YSGvbYcMZ45yb+H4wAI3ZW4VAIAg/3q
+ WDFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746168706; x=1746773506;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Jvqo3sXWziR8Flkh0fsHX/laX/gCDKF6x4XRvzgY4Q4=;
- b=hCi5hhhesWBZbbuHM9UW3HcTrwHrchOb0IRFgQynhjajhjDQNSk9StZ+xE1wQl5gec
- qT2kCCJOThPMMKQ+IcUJUTxrvfRgM9cCJZ599Wd8fpQryi2ymLX9CozXTBW5unKR+QRx
- Nt0bgdAGYeCgcJI2i6YHf7QwkdDfw1KWAKEx9pH1BRHD3kwU7AKHlKpNLUghnSR5+1Qn
- QJtZyahP83Mfu4g8iFFh3Y6TyePxYKb9NxlVYOVXzKwi8M6ha8F3n1iMawJvRU3YfhvO
- FBZ4tSxf53icuEGZxmtalI7hCfgMffPIh+QkNaFu84dtisSZ7wQosj5QcuTBpNipl05C
- V22Q==
+ d=1e100.net; s=20230601; t=1746168904; x=1746773704;
+ h=in-reply-to:references:cc:to:from:subject:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=0nQUyYZwz5VA740zUPAHjltE3fXCfp3Mua5uvYw+RJs=;
+ b=rPG/A7EtH1m7B9xMKhLsiBU1yk/eEFJKBTb6nTUH80TUfgHpRL9MYKCMfD86VPPC0d
+ A2fTCJRpI68+P4vhkNGBlpK9TONjQGik/vGUH/49MEeR/iZnVgc5eugc61OcqFey1Qzq
+ rcll5mgEgsoDUBi35L1Hszz2q0bruiebI77Ki9Csd6mLAQ/Io/Wv4xAUAvXfkJZH/4/6
+ YtWjsoKKiLZ28dxcqpQA2RQf5MtnuQ4o+V9wex+EK7ba6nDyH/HgD9M9NPCmNijUvgYq
+ EA0OJCgrIkjAzm24jVLmuomr0y1P1oQo2zqGQDaNqD7UR6Ousd6RYgHe8lEkJCQ4qbsp
+ 7z6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUn+WGFkVSLR/W748ikDgc5nB6Zf5aUk6Mvc6jEIQNA9HwMJqSIk22Orhc7L1kpzampKstGkKg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFzS2fV5LJIkQAtY3+FO+0AQD65bVqeHsQv4SBoR0+UfU/GJjD
- oeJhFxphrvkdzNuD93zAXzhDfYBcrUhmovMMbXB1RN5wgQunTxpld2tTDbVTQp8=
-X-Gm-Gg: ASbGnct2CT+QVEOKQyBuwhXAMeMrMqjaKDcHh0HCcQnCW9NrD7rJNFzvh7IhEX6iJoW
- CzaC9sY8VxWL/wDRIEgxB/3g9sptbmWWjcbyDMxnmmd/R1VcSJZuctc4AMA+wzgoNVzqobXYGpu
- RvwM8/LOUoD1CA8wuQ8yUuRK7qnaBszXmqdSyo16PZ8XbDTqrffOud3BzMzugMd/v5uZuFeH+yE
- CW/OxpTUHhYmbVhEOP1TotF9S0K6agurYRLR5376obfMz02YCYvA0/CbqAXOcr+3r6B0wSkdqQC
- 8SiFTkml02pS5pnFaLWHGnJi+Q0lxl/iC2pWst0FjdoHpIi78KYybe5bA+wVTQ==
-X-Google-Smtp-Source: AGHT+IH3ERCJL7wsWYOR2zV3do8JLHVQP0huSgFpIItt+jX/OPTNJ7j7EhbAsoynDbXnGbVFiuueZw==
-X-Received: by 2002:a05:6000:2908:b0:3a0:88d5:7fca with SMTP id
- ffacd0b85a97d-3a099ad29fbmr995361f8f.12.1746168706470; 
- Thu, 01 May 2025 23:51:46 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a099ae0c3dsm1301109f8f.12.2025.05.01.23.51.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 23:51:46 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 02 May 2025 08:51:45 +0200
-Subject: [PATCH] net: mdio: mux-meson-gxl: set reversed bit when using
- internal phy
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250502-u-boot-topic-mdio-mux-gxl-bit28-v1-1-399f6c3db154@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAIBrFGgC/x3NQQqDMBBG4avIrPtDmmAJvUrpwpjRDlRHkigB8
- e4NXX6b907KnIQzPbuTEh+SRdeG+62j8TOsM0NiM1lje9Mbix1BtaDoJiOWKIplr5jrF0GK9Rg
- e0bgweXbeUatsiSep/8PrfV0/MwMTYXEAAAA=
-X-Change-ID: 20250502-u-boot-topic-mdio-mux-gxl-bit28-a6d03bf8e383
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Da Xue <da@libre.computer>, Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1880;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=zTJoWKUCYaJ+JTk9qHMoBRiWtUADaEfro8L/suVST7w=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBoFGuBqWdAidMyi9YN1ynArFf8CC9iinwrPABLfZZ9
- oMQ/k7mJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaBRrgQAKCRB33NvayMhJ0WxCEA
- DDAGNEX+sUkBB6OkOPhXnss0LPhuWHbYz2/ZgRwuvPPbFgjB690cBu93nRpy0u450Iziqut6KBUv/V
- 1aVThyoJaLpNWahJv83D+gyCud4f9s8nR830Wd/bhj9yac0EuZz/kXiSKfoQNY3zWjB5V2Z3ZNCDQ6
- JKSOGxkXtuo8foo2afV1xtaam2fJBuQfcCrJzVOxG0Rtg9/eqf5eC+BlQDF9cA1+n4a4ZJmWgc19YZ
- 6rIk5j3zoE8DGuK9JU+Lu8RQdl7IVKXICSoCzwOW4ELp8UZ6cU7VK8toHW/6PHffVIleJbcmzN+/jz
- ItXvoREyJhqwAPHQlRFeHa/1NvQ4822cGAgvaqX1/4X5kQuMJKTIYkRA3hjrMn5tq5IhSpN4FhLeDq
- DPQhtiW9N2qKCRv+Dzf+SdwNDoQAlsNMfjfSaOvecOLuRmy+eTUsoPUblxv3RVZ+/OJIDmHyYKY9sz
- zcnu5vfMfRIrIpIbwNMv9z7kCx4xiiHwiHw7WzyIJ5s6el0R450ZI0OZgcdegGyoni4Vyc9sFWo5T6
- EwknbB+ZKW4ke65yHG+RplqcIoJrEBJdVz2c3oFWoEgYI2UWCQhXzcou/37LoEBoZOK4aZEmMUdwAM
- QcBPQnNCtaLmCUfF5iSrs7+uviipHlueR89ePpOudaKXVLKmycx/j8ZGpPrQ==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+ AJvYcCU0VkzLbG0qep2LTncgaCiOsysFuDCJk7du4/bftnMZVaJUjrVOZ7wSaXz0QDsq3+EtJhcCI0Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YwwpFWmrpjnagPBmQwDzfILEOoOWuo+ezhDKQ063aQCaGGwUYE0
+ QqKvjZvC6VXBCavBcFCxTuMJ9yxafMTbZOWxuik24QzzbzmIwhwu77rqLsTKibQ=
+X-Gm-Gg: ASbGncvlH74WlkuTrUwXLD06/kj4Qg4UYAk/BTkUtXiOJ/qnUj/12Uf1pNaQLEzt3GA
+ tzrGu2XOAjb6eWJtIiOsjaD+2ZR9+usNr6AJlmffYewPqkVjqxCYOf+70ycS1UZUlmRyYgqDDph
+ HQwZYiUo5QWMOcF/4RTXzWTaQ12yA81JciXCnFavnVAAVv+eKHWimFDRhIJYAFqlF2fasF8sO5P
+ KF5NTnAiPaPjuK5FQFtvbo07OHPPe1icoJ8q/QHPhEv/meIXMiCckPXhDPXsp0kW1U7N9y6r8Ip
+ kZdrgRS1GJrQcUncCuUlgwEvk5lC3qke2VY9uqFr7J+wGmaj
+X-Google-Smtp-Source: AGHT+IGqhuJ9ZkYEXtgRsTvVPBZ+PxYcc4wlAZYUehTiWsfufEiqo2QnsPLgcdk1dgdEAW+mxkzyUA==
+X-Received: by 2002:a17:907:6eaa:b0:ac2:cdcb:6a85 with SMTP id
+ a640c23a62f3a-ad17ad81d42mr172820166b.22.1746168904081; 
+ Thu, 01 May 2025 23:55:04 -0700 (PDT)
+Received: from localhost ([46.198.180.244]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad189508afdsm746166b.140.2025.05.01.23.55.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 May 2025 23:55:03 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 02 May 2025 09:55:02 +0300
+Message-Id: <D9LH7RFN7GRM.ELSYN1G3Z1CX@linaro.org>
+Subject: Re: [PATCH 3/5] lmb: staticise lmb_add_memory()
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+To: "Sughosh Ganu" <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
+Cc: "Tom Rini" <trini@konsulko.com>, "Casey Connolly"
+ <casey.connolly@linaro.org>, "Neil Armstrong" <neil.armstrong@linaro.org>,
+ "Mark Kettenis" <kettenis@openbsd.org>, "Weijie Gao"
+ <weijie.gao@mediatek.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Simon Glass" <sjg@chromium.org>
+X-Mailer: aerc 0.20.0
+References: <20250501120239.199829-1-sughosh.ganu@linaro.org>
+ <20250501120239.199829-4-sughosh.ganu@linaro.org>
+In-Reply-To: <20250501120239.199829-4-sughosh.ganu@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,53 +103,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This bit is necessary to receive packets from the internal PHY.
-Without this bit set, no activity occurs on the interface.
+On Thu May 1, 2025 at 3:02 PM EEST, Sughosh Ganu wrote:
+> lmb_add_memory() is only called from the lmb module. Mark the function
+> as static.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+>  include/lmb.h | 8 --------
+>  lib/lmb.c     | 2 +-
+>  2 files changed, 1 insertion(+), 9 deletions(-)
+>
+> diff --git a/include/lmb.h b/include/lmb.h
+> index be723d9162a..73df4e07248 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -120,14 +120,6 @@ int lmb_allocate_mem(enum lmb_mem_type type, u64 ali=
+gn, phys_addr_t *addr,
+>   */
+>  int lmb_init(void);
+>
+> -/**
+> - * lmb_add_memory() - Add memory range for LMB allocations.
+> - *
+> - * Add the entire available memory range to the pool of memory that
+> - * can be used by the LMB module for allocations.
+> - */
+> -void lmb_add_memory(void);
+> -
+>  long lmb_add(phys_addr_t base, phys_size_t size);
+>
+>  phys_size_t lmb_get_free_size(phys_addr_t addr);
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index a21f9c72204..55aca306a90 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -605,7 +605,7 @@ static __maybe_unused void lmb_reserve_common_spl(voi=
+d)
+>  	}
+>  }
+>
+> -void lmb_add_memory(void)
+> +static void lmb_add_memory(void)
+>  {
+>  	int i;
+>  	phys_addr_t bank_end;
 
-Normally u-boot sets this bit, but if u-boot is compiled without
-net support, the interface will be up but without any activity.
-
-The vendor SDK sets this bit along with the PHY_ID bits.
-
-Ported from the Linux change at [1] from Da Xu merged in
-commit [2].
-
-[1] https://lore.kernel.org/all/20250425192009.1439508-1-da@libre.computer/
-[2] b23285e93bef ("net: mdio: mux-meson-gxl: set reversed bit when using internal phy")
-
-Suggested-by: Da Xue <da@libre.computer>
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/net/mdio_mux_meson_gxl.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/net/mdio_mux_meson_gxl.c b/drivers/net/mdio_mux_meson_gxl.c
-index 8ef3ae598b77fabf7b992900141d309708428b13..31898ed437e4857dd7027d311ab496be3e448d16 100644
---- a/drivers/net/mdio_mux_meson_gxl.c
-+++ b/drivers/net/mdio_mux_meson_gxl.c
-@@ -19,6 +19,7 @@
- #define  REG2_LEDACT		GENMASK(23, 22)
- #define  REG2_LEDLINK		GENMASK(25, 24)
- #define  REG2_DIV4SEL		BIT(27)
-+#define  REG2_REVERSED		BIT(28)
- #define  REG2_ADCBYPASS		BIT(30)
- #define  REG2_CLKINSEL		BIT(31)
- #define ETH_REG3		0x4
-@@ -66,7 +67,7 @@ static int meson_gxl_enable_internal_mdio(struct mdio_mux_meson_gxl_priv *priv)
- 	 * The only constraint is that it must match the one in
- 	 * drivers/net/phy/meson-gxl.c to properly match the PHY.
- 	 */
--	writel(FIELD_PREP(REG2_PHYID, EPHY_GXL_ID),
-+	writel(REG2_REVERSED | FIELD_PREP(REG2_PHYID, EPHY_GXL_ID),
- 	       priv->regs + ETH_REG2);
- 
- 	/* Enable the internal phy */
-
----
-base-commit: 98a898e58499c78245e4fe36ee404b1b1208e32b
-change-id: 20250502-u-boot-topic-mdio-mux-gxl-bit28-a6d03bf8e383
-
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
