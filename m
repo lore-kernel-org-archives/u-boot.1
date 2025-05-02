@@ -4,91 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA1BC3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 15:02:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A42CC3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 15:02:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C97A082D2E;
-	Fri,  2 May 2025 17:01:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 156DF82D39;
+	Fri,  2 May 2025 17:01:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=aicorn.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t9C+ngyh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 874038210D; Fri,  2 May 2025 16:32:50 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7243A82C30; Fri,  2 May 2025 17:00:27 +0200 (CEST)
+Received: from FR6P281CU001.outbound.protection.outlook.com
+ (mail-germanywestcentralazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20c::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD1BA81F7E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:32:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEB13828A2
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 17:00:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=aicorn.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43cfe574976so12645175e9.1
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:32:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746196367; x=1746801167; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1lTNvbI69NWEv+zBblsHU5TaVvbo9fD/TTzhGK93VRw=;
- b=t9C+ngyhjV1kYS/ddA+4wyXQWbDwj5bynrEFORz0kEo648KUbx3tcCThx8WKTGqh/y
- yPpRf48szlYVK4WHhfYegrcJMomWZKnCIGoC77KGLt1FNup77zffjNjvIiX411K7Fidp
- UEUwMZwCpy0WLiF7sUIHS2DjZgFhTWOXaKT7xSrtPaMpOOT8OrBMY/1WLiitkT0WJziQ
- xgydDqB4V24bWnvPKobSKgkn558NcaedreUaA/3fyGP5g3QoggvpSqmDLlTC3s9BUvjW
- LEkv8mBJzAqER6HmKFzXJCEJEzPtnKncI6JZsMLOosQ9eInE6saM1hcAZdH+qsJf+VPv
- R+bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746196367; x=1746801167;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1lTNvbI69NWEv+zBblsHU5TaVvbo9fD/TTzhGK93VRw=;
- b=vKJMAgu4MRFhVb65DjUIcdt3/eaBlBDMY4mJhbuTKkrN6wguG18Lb75ASSpanhX2ll
- EW2RMD6BnY3nyq2iCGA+czZOgHFQRnqikfX867TcVbfsfyFmT0PK/MTiU3CC+KX4atIw
- 6thQmzMcdUADl0Dcbi2raD+wvwRHwLKyqFbj0oY2N5KVHMG830NqP0dnr2wQDHzt30pY
- lMDuPKiWBm9Zi9rifk8eiSj0XqZjtzfHGNMEJ4wB/Evcjvc8ZlgTH9QyNVL98scmosw7
- ea6+A/H6yMBtvSuhzuptQXGHHE6EOA7jLVv9c6IVpgaSEZ3u2oMUY9dqrqB/MWGimmHg
- aYNw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVu0U33uvw3ECA9mHLcy9QN2rBh39IDHuaOkYs6Z9/uL4uA9QTFnXk0gv0Sy8QOey1nQGG4K6g=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMvFoRKN1wFmqiBfuKmkc3Bi6bvwTDfmS5iHOuCNCm76by6WNQ
- U4Zxg3bf2Kzh3gXJLWkTADyttFMMhrCZXn9XMmYlMt91yx0FLoIdy1bY++SKVnY=
-X-Gm-Gg: ASbGncs3x/m3w4APkTyZ7HgZa6+js9JKAGsiuL94FSK9R+/te4IIGxuyodeEDIR4qCw
- tGNoTykcD0ug16r2AcaYUearReuJO87J/mELYFzAjuZ8b6ab4aeQkbYP83ZguWzBHyXuwHKZDZn
- oKoSPQSh8DMplzmF+kQwE8ocEEkJIyO7/Fr7SqRr4LkDCcDGtXGhLpUNTW4HMjisR3EGDu1rfWs
- pM2WqZWMxfrJq/fAD8wO40czWdo4fWpRYa5qc8FF3JWl/uPqXS1OXc32HF4lkH6RbKh6niqkqOk
- eSnMpWBKYdjHSdnIWFzpAKt9XL8vub6g2O8wRoVrp13+1fz0AYOoQUFfxBW1QUgw72fRdp4=
-X-Google-Smtp-Source: AGHT+IEg2HKalHo7y2DPMIaubACl/kGnBweTDYq2MgOGhOupsea3/Ppsl3IgYesRKpwObLoGi0LBOw==
-X-Received: by 2002:a05:600c:1914:b0:43b:c0fa:f9dd with SMTP id
- 5b1f17b1804b1-441bbf33f76mr22583535e9.25.1746196367248; 
- Fri, 02 May 2025 07:32:47 -0700 (PDT)
-Received: from [192.168.1.47] (i5E863B79.versanet.de. [94.134.59.121])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-441b8e97c53sm44582275e9.9.2025.05.02.07.32.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 May 2025 07:32:45 -0700 (PDT)
-Message-ID: <45555006-5086-4017-ac88-cfb86c062322@linaro.org>
-Date: Fri, 2 May 2025 16:32:44 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/4] Qualcomm: expand capsule update support
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
- <aBSjZ7ospvGxJrbD@sumit-X1> <3a56b0bb-9446-42f2-9b85-ae65de295499@linaro.org>
- <aBS8d8sffQitinZW@sumit-X1>
+ spf=pass smtp.mailfrom=Moritz.Krautwald@aicorn.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZnmZduPvPhCQshCMGZm7tWuvCMKga2XIlfLnr02j6mESOu33JD0lwfw+o3++/vYwS7jRTZlVBczoRJV77LdMLLWdrLZ8hRF504P337pUYf3B43uoWSJM8e3wWMMdmVD8EJ5plyjRRtJOO5JCqEVUH9onyfvFGBz2N0J+sF4NQZJ+aP/DyZz3HMdzSgy066bhYZAW0B1NInfiSCkcwCL4z2KugM4unDkmExHjAuizW1tlgmWFuVjmXgKeA/PReCbjQNkVXJtLslrDX++XWtvSf09krZqiCe8AhyOgmfTeWDdFpJD1sxAw+px2LIKqe+Yq51CPk0sPrm1zTNA0zIYD8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+VZSQ+9eksfteurqTnTV9DurtigPYITjxsvlpDhmgKk=;
+ b=BczvFgtVbIZuA4D9cZ9Z854iqQ5WKWqnUgtNg+0cu9MoG/cikD65eZ39NGeNEeFtKi2/V6bzxCYafBbGm0nkUch4GXKlLR7ncrTVpVSyCEVQd6fXV/iw3gY62BP6hXoImIzLJM2zWgdcWXCR7LNuGm8/R74vnv6NpR6OnrHdhEO9EDjOhqC/3AUsgzTEIdV8OVDoSUxbBWirkDZSW7MYDW1CS86i100Osa6a6fXWoMxJAsMF/bg5Iqy80s+XM5Nxd0Z3WczuC4UrewpIsEL15ZlGicJCosZV1+rc1b3HUcicQT8LSIdtyxelceP+qN709gd0tSBE5ORd7a6KAdxFkA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=aicorn.de; dmarc=pass action=none header.from=aicorn.de;
+ dkim=pass header.d=aicorn.de; arc=none
+Received: from BE1PPF10E049C92.DEUP281.PROD.OUTLOOK.COM (2603:10a6:b18::60f)
+ by FR2P281MB1430.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:89::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.23; Fri, 2 May
+ 2025 15:00:22 +0000
+Received: from BE1PPF10E049C92.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::3d02:9402:3ab:9408]) by BE1PPF10E049C92.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::3d02:9402:3ab:9408%4]) with mapi id 15.20.8699.024; Fri, 2 May 2025
+ 15:00:22 +0000
+From: "Moritz  Krautwald" <Moritz.Krautwald@aicorn.de>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: raspberrypi cm4 usb not working
+Thread-Topic: raspberrypi cm4 usb not working
+Thread-Index: AQHbu3LtRgAD/4KFkke7LalU+nzrLA==
+Date: Fri, 2 May 2025 15:00:22 +0000
+Message-ID: <0ae3e9bd-cbc7-4a33-8a1c-926dca3aef3f@aicorn.de>
+Accept-Language: en-US
 Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <aBS8d8sffQitinZW@sumit-X1>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=aicorn.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BE1PPF10E049C92:EE_|FR2P281MB1430:EE_
+x-ms-office365-filtering-correlation-id: e594ebd8-11b1-4773-48ec-08dd898a0fd9
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?b013MEVzcVZLcHdvRTIxZi82NDQ2dHNFRUx4MnpSeHkzTUp2Q2dEU3Z1THoz?=
+ =?utf-8?B?UjZNdHVLZElIdXR2bnZLOUZmaGlCT0xBY0VmUExETmR2NmJCSTdZRFdpZkpG?=
+ =?utf-8?B?QVVleDZ1K25YN3VyNmpjS3h2VHUyenQ4WllqUTFla0o3RjFiTmdhc3puWkEx?=
+ =?utf-8?B?RHZVN2EwTHBLbDdnYVNCczJuYWNUbHRYcmJwR04xYTVjWlRjSmNZTGhQMm9o?=
+ =?utf-8?B?aTI4RmxiL1hkbGxVNGxBbkRqWmdnVHBmSEVNVFVTa2NxVVNySEFJTFpsamZj?=
+ =?utf-8?B?STFOY2U1eVVHN2pRUFU2UE1lWGdPWXhYZjM4eFpER2JxMU8xYnVKUzR2U2Er?=
+ =?utf-8?B?RjY0VHNtVGJGN3E5Yi9zNkdUK1VScG9XcFpRYklNZE0xY2ZhdW9SaFpQNVhD?=
+ =?utf-8?B?QlpmbjVtZGJHU1V4bDMyUDR4dnk5UjFLK1ZLb21McjlqTVdDWmlJeUtQMnBN?=
+ =?utf-8?B?ZktpKzBoU2VNUjk3bFV4a1VESWFwdGE4R2E1cVNwVThOMGtNZWdidXBwVWNY?=
+ =?utf-8?B?VHREZEY5ekZDS296QUs4MWYyekR6dTc5S05WZjFOcExTMlIva2FLQkt3a1Ey?=
+ =?utf-8?B?SEtOdW9CREgvcFB2WUx5R1VnbDlCNkRwRnI4YjFVQk44TXZsbnFQMjRPRGtp?=
+ =?utf-8?B?RWRJRGRxMVArWmRMRTlacVdveWowakhLa0pOM0I0TENjaGlmNUN4Mk5DS1RQ?=
+ =?utf-8?B?OVRYdkhnazhpYUpzLzh5V2NPMWhYeWU2Ynk1Nm9IUjhsNWJvZkhJZGsrbEUw?=
+ =?utf-8?B?d01FTUsxLzJkdk9xclVPTnJuRjBoWTZXVnZNMXRuSmFVS1NpNyt6dmxSN0px?=
+ =?utf-8?B?Q1d6RGVBZnFoblBCSUhOc1FrMkMyTEMvSmtKR01tYmR4Y2tUaWFLQlZLNnNW?=
+ =?utf-8?B?TWpUeGo0eklZME5RZlpLeVUrNVZldnFQUSsxRkRsWHBwVi9KL25FYTUzME8x?=
+ =?utf-8?B?M0RqbHAraEhDY0lxa0k5cmZ6bis5N3JxQk0vRW10ZXZBSUtNN0UyUkdqZzVH?=
+ =?utf-8?B?cE1ERy9HWWVqS0dkQ2VLYXZXTytFVmxyVHRjdTBQV0ZLR3pkQmdYZVFXRjNE?=
+ =?utf-8?B?OWlJTnl2T1lFWFB3RnhoZ0QzaEx2TXhXVFBBUEtMY3pEY09aYTdWVVRLL2Jh?=
+ =?utf-8?B?S2tzUGRSeEVJak9hcmZudm5VdGVBSGdoc0V2Nm9UTGlQVktCYjlmVTk0WUN6?=
+ =?utf-8?B?dnFpVDhQRk9LQTZpbWE3WXNlL3NhOXRzdGVDMkhqQklUbnZjVENYWG1ZN2pU?=
+ =?utf-8?B?VWJMbDZ2RTJxYVpFbyt4VkNqeEEwaUlreEJEWGx6dU8zaUQweEhzNUhhcUVm?=
+ =?utf-8?B?M2NPT05NWUdrN0ZCaitHdWgrcEo5eE1UK1EzdnpyRFkvYmxvYTJwRDJ0a0VR?=
+ =?utf-8?B?bWtvQUprUUdnbjQ4SExqNjlYd09qTllyZGhjUTRoQzBEdm1tRmRLTGpvZ040?=
+ =?utf-8?B?elR2bGpyWXRsdFpxTnJQUmFnRjJGWnFnUEVLQ3QvRUVPT2ZHR1kwNkpWSk9p?=
+ =?utf-8?B?SmxQYzdqNHF1SEdBNFpEMEQrcEJPQW90anFvTUM4blZBUGtDU2RlMlc0T0Iy?=
+ =?utf-8?B?TVpPaSt3VTJJWmhoVTJLcEdVZ3B5ejFXUWhhZi83cHJ0K3ZjRFYwQ3ppYkZQ?=
+ =?utf-8?B?bm1tb0dBb21nYlppTGZnTzJISHdaaHlCbmpWcjFUL0kxeWpsN294NWQwSDFj?=
+ =?utf-8?B?Z2xDYVladnppLzltT2xmQTdFRCs5Y3ZBVDBMUDdMWFh5UlZ1MVNKOXN3dUNR?=
+ =?utf-8?B?djN6aFplN3Z5dUZCSktzSTA0YjF6bmU2MGdqMnpKL25vcktVQ01kalJSdFR2?=
+ =?utf-8?B?U3BFV0lLODVrekQvbGFYZEVkdmF2cEthTXh2MUhTNXFUWEo4TkFQVTlVRGFp?=
+ =?utf-8?B?c2I0OEErMFRFVmdPV2dJK2FSeWVqNlhBbU4xT1M5N1Q1bmlieFJrb21TMEhn?=
+ =?utf-8?Q?pT3CtpvGji8=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BE1PPF10E049C92.DEUP281.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?cml5VFo1SzBVTkhSSFhjRlZTeFJDOTd1NUgyb05XcXkrM0FOVm9NREVLVWVD?=
+ =?utf-8?B?WjRCUlErbGEyQW00d1ZzVHVnVVpIZ284cU9RZ2c5bFhhL20rMnA0Q1dyL3do?=
+ =?utf-8?B?U3d5cFZ2MFJmRG1OQlB6THNHbHNKTS91cURqOTAydHQyZVRwL1NBZmxOQXUr?=
+ =?utf-8?B?ZzRLclo2bUsvU1lvOWVoM1pvaFFGSHVVVXR0d2pUNVd6UEFtOXZyMGkwZks0?=
+ =?utf-8?B?R3p1bWZ2cmRLTXRGVjhMcyt5TTZBeit2SW1KOGY3R0RLRkxqajFNWUEvMzR5?=
+ =?utf-8?B?UE5NbXM0SXNrZTBLK2J4ZWdJdmxnclBWdzJoQmQyNnVsVEVLeS9LTjV4VnV1?=
+ =?utf-8?B?WFlwY0xSdk5mdXI4S1VYL3c4Q3FFQkRlUmYrUGxkck54dENoK1VYcHFCeHNW?=
+ =?utf-8?B?ZERCZGdTT2FtaklLZWtPZFhxcXRXQkdueXBkVzNoeXc5bE94ajg3M29zc1pB?=
+ =?utf-8?B?ZmlBMUkrd0ZjNGZDM2Vyem16S1diWXpkTVR2NlZZM1JYSW9vd3VzMDF2MGxG?=
+ =?utf-8?B?NzFXRU52TUVlaTh5NFo3anVqcXlsSHZPcmdQd0N0UHlQK2dIZHN5OW1aVXF4?=
+ =?utf-8?B?QWtsRUxIdkNGdHZBa0VDTTNjR3pPaGpMUlVzdG4yNlVSM1hiZ2xHRkVWa0lN?=
+ =?utf-8?B?K3BUajZmc3FBVkR1MUxHazJxK3RRRTFYZzNwVytHb0xFWURzZ2FXbWV1WS80?=
+ =?utf-8?B?dFU2OXRnRVNCOFcyQ2Y2QW1neVh3TFFRTlJqTys0QWdrc21IN3ZCR0R5Q3g1?=
+ =?utf-8?B?SUc2bzAzMGhxaVZqaHNIOWt1eE1wNHc5eHZWL0toZjAvU3QwaVVVVFZnRUF4?=
+ =?utf-8?B?MUx5cGtKTWluckFzNjRxQ1FBY20rQTJSMHFkaDhKbXZxbmZqblJDQWlibGF6?=
+ =?utf-8?B?T1J4VWw1elg0cktkSXdWOFFla0Nkem51L0NjY3I4YWhUNFVKcFVXZFFmZVgx?=
+ =?utf-8?B?alhlV2xmcFRIbTB6VUswajNDRytzZEY0UDBXQTlSTmZKbVRsNUlIY3ZlZGh4?=
+ =?utf-8?B?cW54Y0doWFpObnZGdXdFN2c2bzVNdlNlOFpVNVVIY2dLeWV5Q3pNR2xsNGpu?=
+ =?utf-8?B?US80M2FmVWRMYjlrSVJWSURvVHk5Q0lZT1pQa243N0d3QVRmejBqSWo1VUUv?=
+ =?utf-8?B?Zk5aY0IwZkJuK0JWdjV5V3hnelZxeW51QXlDdVVCcFZyN05PbmlacHRmejZm?=
+ =?utf-8?B?WURQRTlENkRDVXJMOTczKzFWemxhT0lXdnZpSzN1SGwydDViRUtWeTd1Zjkx?=
+ =?utf-8?B?TkFWSjhoQlpjd2g2bWNMenk4OEcrS1huVkliMVJoQ09kK2xNRkhwc3pkRTln?=
+ =?utf-8?B?Z3RvRWpaaGRycEs3eUFEbmhiQjNQTFFZQ2NHa3VVTzlWM3JXOHhpMk4xZ2k4?=
+ =?utf-8?B?aWlKVEhWeG1DUHNtdTNoNjZOeXBSeWFvM1VhclQvMjZIQ2RkYzZjdlZVby9C?=
+ =?utf-8?B?UnJkUXFHeVFMUDREeG93cEx6OHBudWFOeXdZNGVUZU81anBZMVhpWlpnWnJi?=
+ =?utf-8?B?eGdEdFQ1WHp1ZVRUUDluc2pVbVhPSzgyRFU2d3l3c054TkR3a0piMHZkeTNs?=
+ =?utf-8?B?Wm1KLzdDNkdzVzFYaU1qUUN2S01xVWRXTE5BVS9JbGVQSlY3N0wyeVRUM3Zy?=
+ =?utf-8?B?eCt5ZFUrVmZ6VzZiOVNwWlpadllnMkI0UHJrV0VRQ00vTEdPQnZsUmpoWXhi?=
+ =?utf-8?B?U1J0NjFVenl6bDBiV2RTTUpOUVhFNkpvVGlUd0tBL01zZktTazk1SXZwdVZv?=
+ =?utf-8?B?UWNVMG10dWVkRjNlNHZzU012ZWZCaXpqZWxHMTJTaktzdlpZdnhZbVhNSnFa?=
+ =?utf-8?B?bzF2Q0dHOFV4K3hDcFF3cm4yVEZIRlg3bVZjTjN2L2wvak8rR2tXRk0yVTRp?=
+ =?utf-8?B?K2xnWmZDZU0xeC81UDdCVW93MFFpQUpHekV3MFhYbkQyQllKa0dsczNTV0tq?=
+ =?utf-8?B?TWlqSVUzUTlxTm5uUmlTR2hnQy91NDRiRzZFb2RvMHJmREhYTDRQT3hwZVZK?=
+ =?utf-8?B?ZEJuN2JOdEtuMWQ2VncyNFo5dDFBaFVXVmFnOTFSQ2gxMzIxQU8wYVp3UlM2?=
+ =?utf-8?B?OWxidlBobXpmak1MdFU2SVhPblFKaE5xZlFtUkxFZmpOVUEvb09GVEtRNFQ5?=
+ =?utf-8?Q?8Tlvm9S/t82hCDh9XE60BLVi/?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8A80CA9342F3344BBCC3E07347875CFE@DEUP281.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: aicorn.de
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BE1PPF10E049C92.DEUP281.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: e594ebd8-11b1-4773-48ec-08dd898a0fd9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 May 2025 15:00:22.0669 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fded19fe-d179-458a-8c7c-bcc85f52a259
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: FtExo83x1pHw3QKZUh09vUz+qstI3XP0X5sVf3H0fqhEBFc6pSbqTdbEnAUQC740rZTHsnNwDmc2p/yjt/+oP9rWMc/gkxZ+u1KQFO3hDHw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FR2P281MB1430
 X-Mailman-Approved-At: Fri, 02 May 2025 17:01:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,130 +166,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 5/2/25 14:37, Sumit Garg wrote:
-> On Fri, May 02, 2025 at 02:16:53PM +0200, Casey Connolly wrote:
->> Hi Sumit,
->>
->> On 5/2/25 12:50, Sumit Garg wrote:
->>> Hi Casey
->>>
->>> On Fri, Apr 11, 2025 at 05:03:33PM +0200, Caleb Connolly wrote:
->>>> The initial capsule update support only worked on the RB3 Gen 2 and made
->>>> a lot of assumptions specific to that board.
->>>>
->>>> Implement the logic necessary to update U-Boot no matter where it was
->>>> flashed to, independent of any particular board.
->>>>
->>>> First, we keep track of how U-Boot was loaded, specifically if we had a
->>>> valid external FDT (even if we didn't use it) this indicates that we
->>>> were booted via the Android bootloader, in this case the target for
->>>> capsule updates is the boot partition. Otherwise, we target the uefi
->>>> partition (if it exists) or the xbl partition. We handle A/B support for
->>>> all 3 (currently we always flash to the currently active partition with
->>>> a minor exception for the uefi partition).
->>>
->>> Does this means say if we are booting from "A" partition then the update
->>> gets applied to "A" partition only? IOW, we don't support dual bank
->>> updates as of now?
->>
->> Yes exactly, to have A/B working we would need the following:
->>
->> * Implement all the fiddly GPT stuff (the vendor bits but also swapping the
->> partition type GUIDs between A/B partitions)
->> * Change MMC/UFS boot block/LUN
->> * Support flashing all other bootloader partitions via capsule update
->>
->> And really some tooling to produce said capsule update files containing all
->> the bootloader related images.
-> 
-> Thanks for the info, those can sure be next steps.
-> 
->>
->>>
->>>>
->>>> We introduce two new fw_name strings to differentiate the GUIDs based on
->>>> the target partition, this means one board can support multiple boot
->>>> methods with capsule update support for all of them (typically this
->>>> would be chainloading OR flashing U-Boot to XBL).
->>>>
->>>> Lastly, the call to scsi_scan() in dfu_scsi.c is removed. Since
->>>> scsi_scan() unbinds all scsi devices it breaks device handles maintained
->>>> in the EFI layer for the duration of the capsule update process and
->>>> causes the EFI filesystem access to delete the capsule file after the
->>>> update to fail.
->>>>
->>>> Boards should instead be responsible for calling scsi_scan() before
->>>> initiating DFU.
->>>
->>> Thanks for working on EFI firmware capsule updates feature. I think
->>> currently we are missing any documentation from this patch-set. IOW, how
->>> one can test updating U-Boot via EFI firmware capsules? I suppose we are
->>> using here dynamic GUID generation while creating update capsules,
->>> right?
->>
->> Yes, we're using dynamic GUIDs. I have written a small tool and brief docs
->> here for creating an LVFS cabinet which can be used with FWUPD
->>
->> https://github.com/kcxt/mkcab
-> 
-> Thanks for working on that tooling. However, it would be better for
-> U-Boot documentation to instead use standard tooling like:
-> 
-> $ fwupdtool build-cabinet ARCHIVE FIRMWARE METAINFO
-> 
-> where we can provide an example meta info xml file in the docs for Qcom
-> platforms.
-
-oh lol, you mean this exact thing already exists! grrr>
->>
->> I'll write something in doc/board/qualcomm to explain things too (excluding
->> the LVFS bits).
-> 
-> Thanks.
-> 
-> -Sumit
-> 
->>
->> Kind regards,
->> Casey (she/they)>
->>> -Sumit
->>>
->>>>
->>>> ---
->>>> Changes in v2:
->>>> - Restrict the partition hunt to either UFS storage or the first MMC
->>>>     device so that we never accidentally write to some external storage
->>>>     (like an sdcard) during a capsule update.
->>>> - Fix typo
->>>> - Link to v1: https://lore.kernel.org/r/20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org
->>>>
->>>> ---
->>>> Caleb Connolly (4):
->>>>         mach-snapdragon: track boot source
->>>>         mach-snapdragon: CapsuleUpdate: support all boot methods
->>>>         dfu: scsi: don't call scsi_scan()
->>>>         qcom_defconfig: enable capsule update support
->>>>
->>>>    arch/arm/mach-snapdragon/board.c          |  26 +++
->>>>    arch/arm/mach-snapdragon/capsule_update.c | 274 ++++++++++++++++++++++++------
->>>>    arch/arm/mach-snapdragon/qcom-priv.h      |  14 ++
->>>>    configs/qcm6490_defconfig                 |   6 -
->>>>    configs/qcom_defconfig                    |   3 +
->>>>    drivers/dfu/dfu_scsi.c                    |   5 -
->>>>    6 files changed, 266 insertions(+), 62 deletions(-)
->>>> ---
->>>> base-commit: 885d68280c29b8011731b6a7cdac32b8d9a4e6fd
->>>> change-id: 20250326-b4-qcom-capsule-update-improvements-16ff7bc2d1d2
->>>>
->>>> Caleb Connolly <caleb.connolly@linaro.org>
->>>>
->>
->> -- 
->> Casey (she/they)
->>
-
--- 
-Casey (she/they)
-
+SSBhbSBidWlsZGluZyBhIGN1c3RvbSB5b2N0byBpbWFnZSBmb3IgdGhlIHJhc3BiZXJyeSBwaSBj
+b21wdXRlIG1vZHVsZSANCjQuIEkgYW0gdXNpbmcgbWV0YS1yYXNwYmVycnkgc2NhcnRoZ2FwIGJy
+YW5jaCB1c2luZyB0aGUgcmFzcGJlcnJ5cGk0IA0KbWFjaGluZSAoMzItYml0IHZlcnNpb24pLiAo
+VS1Cb290IDIwMjQuMDEpDQpJbiB0aGUgL2Jvb3QvY29uZmlnLnR4dCBJIGFkZGVkOg0KIyBFbmFi
+bGUgVVNCIHBlcmlwaGVyYWwgbW9kZQ0KZHRvdmVybGF5PWR3YzIsZHJfbW9kZT1wZXJpcGhlcmFs
+DQp3aGljaCBzaG91bGQgYmUgdGhlIHJpZ2h0IG1vZGUgaWYgSSB1bmRlcnN0YW5kIGNvcnJlY3Rs
+eS4NCg0KT24gc3RhcnR1cCB0aGUgZm9sbG93aW5nIGlzIGxvZ2dlZDoNCg0KUENJZSBCUkNNOiBs
+aW5rIHVwLCA1LjAgR2JwcyB4MSAoU1NDKQ0KUENJOiBGYWlsZWQgYXV0b2NvbmZpZyBiYXIgMTAN
+CnN0YXJ0aW5nIFVTQi4uLg0KQnVzIHhoY2lfcGNpOiBkbV9wY2lfYnVzX3RvX3BoeXM6IGludmFs
+aWQgcGh5c2ljYWwgYWRkcmVzcw0KeGhjaS1wY2kgaW5pdCBjYW5ub3QgbWFwIFBDSSBtZW0gYmFy
+DQpwcm9iZSBmYWlsZWQsIGVycm9yIC01DQpObyB3b3JraW5nIGNvbnRyb2xsZXJzIGZvdW5kDQoN
+CkkgaGF2ZSBubyBpZGVhIG9uIHdoYXQgY291bGQgYmUgdGhlIHByb2JsZW0gYW5kIGhvdyB0byBm
+aXggdGhpcy4gDQpVbHRpbWF0ZWx5IEkgd2FudCB0byB1c2UgdGhlIFUtQm9vdCB1bXMgZmVhdHVy
+ZSB0byBleHBvc2UgYSBibG9jayBkZXZpY2UgDQp2aWEgdGhlIHVzYiBwb3J0IHRvIGFub3RoZXIg
+Y29tcHV0ZXIuIEkgaGF2ZSBzZWFyY2hlZCB0aGUgbWFpbGluZyBsaXN0IA0KYW5kIG90aGVyIHJl
+c291cmNlcyBvbmxpbmUgYnV0IG9ubHkgZm91bmQgdGhlIGZvbGxvd2luZyB1bmFuc3dlcmVkIA0K
+c3RhY2tvdmVyZmxvdyBwb3N0OiANCmh0dHBzOi8vc3RhY2tvdmVyZmxvdy5jb20vcXVlc3Rpb25z
+Lzc4ODQzNTk5L3VzYi1ub3Qtd29ya2luZy1pbi11LWJvb3Qtb24tcmFzcGJlcnJ5LXBpLTRiLXdp
+dGgtY3VzdG9tLXlvY3RvLWltYWdlDQoNCkFueSBoZWxwIHdvdWxkIGJlIHJlYWxseSBhcHByZWNp
+YXRlZCwNCg0KU2luY2VyZWx5DQpNb3JpdHogS3JhdXR3YWxkDQotLSANCmh0dHBzOi8vd3d3LmFp
+Y29ybi5kZQ0KDQrDlnN0bGljaGUgUmhlaW5icsO8Y2tlbnN0ci4gNTAgfCBCSyAxNDgsIDc2MTg3
+IEthcmxzcnVoZSAoUG9zdGFuc2NocmlmdCkNCg0KYWljb3JuIEdtYkg6IEdlc2Now6RmdHNmw7xo
+cmVyOiBEci4tSW5nLiBUaGlsbyBPbGl2ZXIgUmljaHRlciwgU2FtdWVsIA0KV2VueiwgQ2hyaXN0
+aWFuIEdydW5kOyBTaXR6IGRlciBHZXNlbGxzY2hhZnQ6IFNpZW1lbnNhbGxlZSA3NSwgNzYxODcg
+DQpLYXJsc3J1aGUsIERldXRzY2hsYW5kOyBSZWdpc3RlcmdlcmljaHQ6IE1hbm5oZWltLCBIUkIg
+NzQzMTINCg0K
