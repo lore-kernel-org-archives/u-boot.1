@@ -4,83 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6BD7C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5DCC3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:47:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27FAB82102;
-	Fri,  2 May 2025 16:40:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 787278214A;
+	Fri,  2 May 2025 16:47:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zv+5/SBa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GFahiVFB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D3E48210A; Fri,  2 May 2025 16:40:38 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 84E4681F7E; Fri,  2 May 2025 16:47:28 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F0D381F7E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:40:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D84581F7E
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-603f54a6cb5so1316757eaf.0
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:40:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-86135ac9542so80291839f.1
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746196835; x=1746801635; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2Fq/ZIMBo+1VnqCfucMVqxQpN7C/+U+lQBfW3mcWyz8=;
- b=Zv+5/SBa+rJtprpMUmIgKFunZ4JAcywtgHTDjLTtVRVltjVAPmTTa+8GfcFucVLdkd
- 0mi5YjCmom/wr2IFYaDk+K8kyYW4HJ9U+79Arqh+D6NcfZaM44hTenYbUJLgBGdH0nkW
- uP5CG/psA9egIrd/Pv+FWkNFduuDXefDYIVKw=
+ d=chromium.org; s=google; t=1746197244; x=1746802044; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VlKAqLKbhSLofMkd0cjqvVK7c2EnDZMyTKEyrbjnBxw=;
+ b=GFahiVFBq/xB3k0rxhgZaxifQs/dZg7lab9um/Kc5FEfVVvOsIounldQRNQ8rxAUes
+ Sdn8eSwNa4St3+Yioe7iLDS4ldfghx9WvHL0mgYkIj8079+FNpQdk4KA/MjbVYPwIoOh
+ wjBM/jy9jPciVoVwuQNl0Bg45oRHKjHdvv1RU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746196835; x=1746801635;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2Fq/ZIMBo+1VnqCfucMVqxQpN7C/+U+lQBfW3mcWyz8=;
- b=OlTBu7cYQ0ZPgAyUzhaz6gwegvQKHJolWVd29/tiIrXWddB/HMPbW7RB9zfdbo0t3z
- FNfvGa3c8WKcrAa5uQyLY+YFJkJjaVUwXX8vGcf8yLXoM2FnQw8QbvM4JAe5xELnZQwg
- xpvT+L0o6pw355MVDclFqhP4gy377RziZpKYQADJOGoljWjjM0As3JsoONDscAnB+PbB
- lRbVxUHyALcB0Vhyz4Wn41qI707/87IcAVBE63l9pNNqw1x+Pm1+6PBGh9K9d6VWrPhe
- 3ij+H40DrxsNuyoDfNFD5mWcTSyXwBkX9P48S1pV/f/BemzZqEPkE+lsXOYVm35dGe26
- 17Ww==
-X-Gm-Message-State: AOJu0YwQ4GE5MlzBxikmEuKsdS1oG97CjiCCEKWLhm617G4vfZHyM4x1
- 3b5iZCp/75ijqjwULH+6zH5jkv0o/fNnAx09XsYMIx//mS9bhTXXoLAQLoOzWAs=
-X-Gm-Gg: ASbGnctEeUg2tDYgt1tZ2huAhUCriAPeo+l8bTT4nRFpBkxemoy/qLwZXJiOjlbQR51
- pVxKX+m9qNierGIVk87VIwcviR8PSp9wD+YwSYgLePYZieeFUqj8OtcuBMW6+k5JzaD0ak11DPb
- dnWHjNE/x7mYOxQBUyR1Wu7X6wqbAQeCkanzqSu25wHHW1pILKUZOe9v78pZMI+MViUfG+zXBC9
- EY7OUI7gxNMfybuBX44Bi4dCVWWAB86rt0GTThisD6LbiDjDosbr3gfsDJTpKIEWM5AGQDQEkJh
- AucHQEGcPNdwCBxdQctLEic7S8ct2PBRtYlfn8DSzhpSwzGuIqS40JKI7x+j/axV4EnqOyItFDm
- 8tg==
-X-Google-Smtp-Source: AGHT+IHZO6Qpd8LQmrJ4ge5Mxa6sUyDEU+4ZPo8SlOlaZ8SkW9oPzEe5kiHVNpsr3/ytH0Pk4wGmYw==
-X-Received: by 2002:a05:6820:811a:b0:606:85ad:881 with SMTP id
- 006d021491bc7-607ee5132dfmr1501308eaf.0.1746196834806; 
- Fri, 02 May 2025 07:40:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7719bfesm539294eaf.0.2025.05.02.07.40.33
+ d=1e100.net; s=20230601; t=1746197244; x=1746802044;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VlKAqLKbhSLofMkd0cjqvVK7c2EnDZMyTKEyrbjnBxw=;
+ b=e6EoUMmRWB7lEvQtA5S50uA47pDR1b/VvL3nlKwnMciY6HoZ4e97aimi7Y+oIj/MKX
+ 4gZUrPAWT95uACm8qrn2mwt0Zju0akkEpB3tNxFnveMsRI2pmljGH5PyOP40yrCUNZaW
+ hQw1g5t1pHyQDoCYlka5AIXpXALkhC68Pe7Bm+MLUl9v5uKkVqS3S9qf66V74He8c0QK
+ G2Sw0cgoxTUpVj8gwGbxA12e8UbvY9JWFPbMGmE/HsGY4+l5p+BoGfo6VIk0jyvRzhKq
+ dDt7kBOTbo+q5zQf+bCv3xsgTMUMfY8+eH2SBqWcSifO2/PLs1Uz8fn80pO7cLCqGuvX
+ t6lw==
+X-Gm-Message-State: AOJu0Yzaf8tgeWvwhE/j86iZuuvbkaI9Hg+nkYOqzrgqCAAsBfvABfzV
+ 4UPeX+C6+hg0TepIpZeS6RFDXWG4KEJR9i//uesB8RGavBQWc+7I8lIQ58xcV2bAuWFgJ9I1jBY
+ =
+X-Gm-Gg: ASbGnct8WvqFKSxY2hlWw599687YqEmTv9U1uPUHGZ2WioziKQPPB2A8P/AwaVeF2Lf
+ xrTYnpvuZ5yjYEswK8kkfRKExQ1GYm/FGKx9GI6el5i1OJSToaACQmFHcfDMxwo5M6TUMmOGsd9
+ VKdS1aRnvhktL5CPIvOFdpz3bUC96cOTCkrdC92n34W//dq9YlQJaKAKJkyp560BFf54Udf5wZl
+ /B2fP2nqurwvwnrXGXGlmeqDgxfALTau2/rQEFd0BJoLY64M4fFXJ+XBep/w+07Cbt7L4YzQULP
+ HdaqiQtkFMYZ2A0IkDWA0k+9UtyBxy56JIxFo+XQaPE8O+ANHTzmuhuOwj6iec4xSAzWHTiLsel
+ Muw==
+X-Google-Smtp-Source: AGHT+IGppvvMJxxcN+UEtEQe9jmOEidSNMeFJkQ60ROzVMVFZT7Z0EjjWOAFoWOumxB1Bqc+ywMt/A==
+X-Received: by 2002:a05:6602:6b85:b0:867:8bb:4d8 with SMTP id
+ ca18e2360f4ac-86708bb0680mr24952739f.0.1746197243822; 
+ Fri, 02 May 2025 07:47:23 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:40:33 -0700 (PDT)
-Date: Fri, 2 May 2025 08:40:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Bruno Leite <brunosampaioleite@gmail.com>
-Cc: u-boot@lists.denx.de, ravi@prevas.dk, probinson@gmail.com,
- Matthias Brugger <mbrugger@suse.com>, clast@prevas.dk,
- Bruno Leite <brule@prevas.dk>, Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH 0/2] Add rpi5 specific defconfig
-Message-ID: <20250502144031.GT1261075@bill-the-cat>
-References: <20250502113556.134731-1-brunosampaioleite@gmail.com>
+ Fri, 02 May 2025 07:47:23 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Moritz Fischer <moritzf@google.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 00/60] expo: Various features and improvements
+Date: Fri,  2 May 2025 08:45:58 -0600
+Message-ID: <20250502144718.313633-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="j9RgRiHllrbPP0SX"
-Content-Disposition: inline
-In-Reply-To: <20250502113556.134731-1-brunosampaioleite@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,49 +110,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series collects together some new features for expo to make it more
+useful for boot menus:
 
---j9RgRiHllrbPP0SX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+- measurement and display of multi-line text objects
+- internal alignment for objects (e.g. centred text)
+- editable strings in text fields
+- new 'box' object to draw a rectangle
+- highlighting of menu items, rather than just relying on a pointer
 
-On Fri, May 02, 2025 at 01:34:33PM +0200, Bruno Leite wrote:
+Expo's boot menu is restructured so that it is possible to iterate
+through various bootdevs and update the menu as new ones are found. This
+is more in keeping with how bootstd works.
 
-> From: Bruno Leite <brule@prevas.dk>
->=20
->=20
-> Currently rpi5 uses a generic rpi_arm64_defconfig file that builds rpi4
-> devicetree. Add a defconfig that is specific to the rpi5 building the
-> now available upstream dts for that board. The defconfig makes use of
-> defconfig including that is now available and only changes the DTS
-> related config.
->=20
-> It is also necessary to add a more specific u-boot.dtsi to rpi5, since
-> due to the ARCH_BCM283X config it will try to build the
-> bcm283x-u-boot.dtsi and break.
+A new textedit object is added, intended to provide a simple text
+editor. Future work will complete this.
 
-My question is, can we not adjust rpi_arm64_defconfig to be generic
-enough and not have a problem on Pi 5 due to the default device tree?
+With this series the boot menu has a better layout and appearance.
 
---=20
-Tom
+Changes in v2:
+- Add new patch to pass in the video device for cedit_prepare()
+- Add new patch to test rendering a lineedit
+- Add new patch to test editing a lineedit
+- Handle the case of an initially empty string
+- Only check the text objects used by the bootmenu, for now
 
---j9RgRiHllrbPP0SX
-Content-Type: application/pgp-signature; name="signature.asc"
+Simon Glass (60):
+  sandbox: Provide an option to skip flattree tests
+  sandbox: Provide an option to continue on failure
+  video: Make white-on-black a video-device property
+  sandbox: Select white-on-black
+  abuf: Add a function to copy a buffer
+  abuf: Add a way to printf() into a buffer
+  video: Add a test for font measurement
+  video: Begin support for measuring multiple lines of text
+  video: truetype: Fill in the measured line
+  video: truetype: Support newlines in the measured string
+  video: truetype: Support a limit on the width of a line
+  video: Add a way to write a partial string to the console
+  console: Support a format string for stderr output
+  test: video: Export the video-checking functions
+  video: Allow console output to be silenced
+  video: Add a function to draw a rectangle
+  expo: Add CLI context to the expo
+  expo: Add a function to poll for input
+  expo: Destroy the cedit expo when done
+  vidconsole: Avoid kerning against an unrelated character
+  expo: Create a rendering test for cedit
+  expo: Move cedit-state fields into expo
+  expo: Test some cedit actions
+  expo: Pass in the video device for cedit_prepare()
+  expo: Test rendering a lineedit
+  expo: Provide access to the current menu item
+  expo: Adjust how menu items are highlighted
+  expo: Test editing a lineedit
+  expo: Split bootflow_menu_run() into two pieces
+  expo: Split bootflow_menu_new() into two pieces
+  expo: Allow adding a single bootflow to a menu
+  expo: Rename scene_dim to scene_obj_bbox
+  expo: Rename x and y in struct scene_obj_bbox
+  expo: Use an abuf to hold strings
+  expo: Separate dimensions from the bounding box
+  expo: Make bounding-box calculation more flexible
+  expo: Support setting the size and bounds of an object
+  expo: Line up all menu objects
+  expo: Create a struct for generic text attributes
+  expo: Move text-rendering into its own function
+  expo: Tidy up scene_txt_render()
+  expo: Allow strings to be editable
+  expo: Check the screen contents after rendering
+  expo: Support rendering multiple lines of text
+  expo: Support white-on-black in the theme
+  expo: Implement a box
+  expo: Support object alignment
+  expo: Begin implementation of a text editor
+  expo: Use a simpler name for USB media
+  expo: Drop the gap between groups of menu items
+  expo: Add forward declarations to scene_internal.h
+  expo: Support highlighting menu items
+  expo: Adjust expo_poll() to avoid looping forever
+  expo: Drop the render from expo_poll()
+  expo: Provide a way to position things relative to display
+  expo: Improve the visual appearance of the menu
+  expo: Update bootflow_menu_poll() to return a sequence ID
+  expo: Split setting up the menu from adding items
+  expo: Set up menu fully in bootflow_menu_start()
+  expo: Drop the special theme code for bootflow_menu
 
------BEGIN PGP SIGNATURE-----
+ arch/sandbox/cpu/start.c          |  19 ++
+ arch/sandbox/dts/test.dts         |   1 +
+ arch/sandbox/include/asm/state.h  |   2 +
+ boot/Makefile                     |   2 +-
+ boot/bootflow_internal.h          |  11 +-
+ boot/bootflow_menu.c              | 382 +++++++++++++-----------
+ boot/cedit.c                      | 160 +++++-----
+ boot/expo.c                       |  74 ++++-
+ boot/scene.c                      | 478 ++++++++++++++++++++++++------
+ boot/scene_internal.h             |  71 ++++-
+ boot/scene_menu.c                 | 166 ++++++++---
+ boot/scene_textedit.c             |  61 ++++
+ boot/scene_textline.c             |  44 +--
+ cmd/bootflow.c                    |  43 ++-
+ cmd/cedit.c                       |   2 +
+ common/console.c                  |  18 ++
+ doc/develop/expo.rst              |  34 +++
+ drivers/video/console_truetype.c  |  90 +++++-
+ drivers/video/vidconsole-uclass.c |  36 ++-
+ drivers/video/video-uclass.c      |  52 +++-
+ include/abuf.h                    |  32 ++
+ include/bootflow.h                |  77 ++++-
+ include/cedit.h                   |  17 +-
+ include/console.h                 |  15 +
+ include/expo.h                    | 293 ++++++++++++++++--
+ include/test/test.h               |  24 ++
+ include/test/ut.h                 |  57 ++--
+ include/test/video.h              |  45 +++
+ include/video.h                   |  31 +-
+ include/video_console.h           |  83 +++++-
+ lib/abuf.c                        |  49 +++
+ test/boot/bootflow.c              |   9 +-
+ test/boot/cedit.c                 | 217 +++++++++++++-
+ test/boot/expo.c                  | 214 ++++++++++---
+ test/dm/video.c                   | 352 +++++++++++++++-------
+ test/lib/abuf.c                   |  87 +++++-
+ test/test-main.c                  |   5 +-
+ 37 files changed, 2669 insertions(+), 684 deletions(-)
+ create mode 100644 boot/scene_textedit.c
+ create mode 100644 include/test/video.h
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU2V8ACgkQFHw5/5Y0
-tyzgYAv/WBYa/O0jQeyEqlHiUFU2VC/WGOjK1PBuvtWjTerc2yqe+J5St15nxcLI
-6n4UDmEmZjHUD9TAr3+JcIcccGkUBtc+bUEIuQbgkXXv8GP+24RsDNWYGy8pVOiy
-374JG2K6KlYKXIvXxIXHKXzjNCI73zJ5L2NWp/XLqaADwQ6ijv8Kr5XDv3My22tB
-OdHTLnO+mN4EFRfcwOwz8xCADhB4iQVtmxyaQhW0fu4BS8BwnomRDrIvgvyXr2vL
-xpVUkfK2Vd2fMbNQs6+eVekfwFG5KgYMG4hm6GfwxHFd+Z1n2/VDQU/bmHdbA4q2
-o2IRpRuch7K7HAyVPmt4+etDiMnXe6rWKfCud6/z6J6ibYf7hfFlqff07EbJWt1s
-h+PEcp0EpCIEKuHPHli79ucWPgF+alW6RNkWIZkuqfB0GjeGP3Fx75naU7WWuYjH
-ZX+St7kdE5Ud02K2Lc7Xq+7km/eMk1bZPs43it8yYNHDGAshJoWSrK4dZOvwFs+n
-XLlqj//x
-=wH/s
------END PGP SIGNATURE-----
+-- 
+2.43.0
 
---j9RgRiHllrbPP0SX--
+base-commit: d3446ef55a2a2ae72e6d227ed054af599a397b82
+branch: schd2
