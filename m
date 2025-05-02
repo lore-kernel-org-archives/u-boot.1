@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 026A3C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:55:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71499C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:55:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56EFA82C49;
-	Fri,  2 May 2025 16:49:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9DB0D82CAE;
+	Fri,  2 May 2025 16:49:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EY9fN2P3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ibZpyhln";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B665F82CBB; Fri,  2 May 2025 16:49:25 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id C7E5682CC9; Fri,  2 May 2025 16:49:27 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C2C382BDA
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:49:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A22D82CB5
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:49:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-8616b7ad03bso48167439f.0
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:49:23 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-85dac9729c3so218648139f.2
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:49:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197361; x=1746802161; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197363; x=1746802163; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Rh1DBasZ0cboSsIBTx/Ln6a3NYScJctaZ8CPv8EDUBQ=;
- b=EY9fN2P3+/XhsHdn9k0ZQ7se8VwSRnbdG7UaZZjbR/8TpfTcK7X6rRNuTBBLOkYbDU
- aK7DKEbh6d3s7DBk/Buzx2LcSCitWTZww2hzUAa+qIsbg/0zZS2pCmE6d1mTo5HEuo3w
- MLY9KjEf8j6iZpq06nogGe/+Smnpr78A3LUO4=
+ bh=SGurDDfv02MOI+s2IQxHOCZo7zBcgZNNQyZQrOeo5ZY=;
+ b=ibZpyhlnhzfBTyN0iNJKbVvVhLv/7u1oj/qog5O6wXsbo8tcPraaHgKL0QfK7heScI
+ mMyH3VOlHa/W9rzYn/WFL0tEhKvi0UYlw9Q+ZQ7GN70jiXuQifLGKXtx2LUrqN0U7sxz
+ fhE5ZMtte/Cx+wOM44BdXdJ+RMXE9zVKytfWg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197361; x=1746802161;
+ d=1e100.net; s=20230601; t=1746197363; x=1746802163;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Rh1DBasZ0cboSsIBTx/Ln6a3NYScJctaZ8CPv8EDUBQ=;
- b=BD4Jz5XPDDV+TkiNXz8TkV0m0xx98asJuXxHR3WCrTHEzaSG7LGtiEKh/7ZWZCI8fL
- QLpp6yazTyAM1uKQjwbxacDyHjmJ8Q7kDiJAOoKSD+un1KbwMf0X5JB63Bl6N9E1t/Oq
- 2Lz9+sdqm/JJj0pJhDZWiGyh1g9EgUuWVncwVJgtADhy1VP92p6M0WaKisYeHPxjjkbx
- pxA+v3y7dngHFp7xmsg3JMAES8FlYtIX6CivhdJBw1T8T6vqk6/Oi4A1fjDzvKhOBdnm
- Miy3PXGJiXGSOTWj1N/i1WES8PlN4bjLb4tFgTso3MIhhKlfOgwrzawUVNf7c3C1O2w7
- /Obw==
-X-Gm-Message-State: AOJu0YygjwrovpATqnlzwt3Vu6mOcOcr9cUHsFS1y8ICTFrGxIH6JGmt
- /3pEhaFQ0O/sL4VUJyZVuqkaXEG79DTQzONkI9wid0q2rOD2FqhS7V8WiQztcjW7oTh4ON4FsqI
+ bh=SGurDDfv02MOI+s2IQxHOCZo7zBcgZNNQyZQrOeo5ZY=;
+ b=CiyOglIk4vkUc0Jz29tZZf4EjOJTrR3YDVqUKRuxwgvAmMCAuk70dEDJpC/u221MGx
+ 8d/14w8aPabe0r5DR/HaaIOX7LPJl421d86nSQxvGOvOwcnd5eVKfVzv8CdlZ4nIp84H
+ 9+GaBE4bHPneHfgDXOfrY5Ge7IOEdKi0kHMES0TylK3YKzrCqEPIXXrLqQbOKNhWOtQ7
+ hhsB7I0dFPAnzLQmrfLjerc/YttAuJ962S3pcaMbGioKOeNc5Rrn18KsXXJLT4sKy4hI
+ 50iNvo2qaznbsMX5VqcwyOFbnGGAM0/MgAYs9iM+6JsEn3hMaslbxADz6k45ZDqd7yXZ
+ sRWQ==
+X-Gm-Message-State: AOJu0YzDDwpPRnVLETOkPJ1cCNF+k05+UDlSkwXb9oqXWM1x7tJcBxa4
+ Fj/E9eEQWRMRUahc6Z4rzB6XJijjy2zt6/p07sXnvH5NSokI/HiTKs1qH0K/IQZcXsho00+5zxg
  =
-X-Gm-Gg: ASbGnctZQlReWgZjWIsHap+rtI0WTcBzcMIj5G+6IaEJ21c5rRGo4r7cLCD/hvdb8SX
- hJCqT5OzdAbf1YlYtpl4mpkALPs30rLBYUwJV6IiD+olD+siB8n7tv3hUmAS78LSv1l6AZ1AkGT
- KCzdqbyYN9OiYV8sMbG37/3ADW3xUmA5GamwB9JyZeGPA0jHhNbDRVRmLjnqDkeklAWRDavoX8T
- C2lC2leUpudtC+NJgiPfRWfzd0F+ckh6DoqqDhTlw+pdJqF5fpwzHlIV8E6DRuSrb6rKOXWvwas
- k1RrS0zM2/7LtzXzAxrELjU34FNvfQ1iYq6Zi+NVWC84kejnAhf9yNau70m0lmTfTmUz7REFFEf
- Ldw==
-X-Google-Smtp-Source: AGHT+IGqgVAYHPQ7zGy3DukIsXlrOGgJAyVLJCrPyzD50HmWvW+7qJ+waXAGalvUBEcjNKPtHhGr8A==
-X-Received: by 2002:a05:6602:401b:b0:864:68b0:60b3 with SMTP id
- ca18e2360f4ac-866b42504e4mr441794339f.12.1746197361464; 
- Fri, 02 May 2025 07:49:21 -0700 (PDT)
+X-Gm-Gg: ASbGncucupYBBANz7iHDJIeAtC5N00OqexWY08d055FASuzrugqAkizpI2HFL3K8K8j
+ LkRVpDEGx8J5wTIWAJcOaZxDsIVyfvgNV8zV4E8LGX9nIBO/jDPWW6MjTKmstbygHSo8lQ7rs/g
+ 2XPj999D/3EeRLmOG/ds4c9nXouxZBhLT8oRViAaJQZ4EDqyTFR7gWOujZqje1ErOH0huKN9lLm
+ 55oRI4mgwkzQCQ/nmD4Gpr2+Zc+YZhzT32XQOBXTn0ac4KhKbKSQOpSP2EFAH8IllxYiLP2rfGw
+ f3GpKiLPelqQ2JlEeHR4RHX37C+z/8R2JBchWnJ2MlRYPe24IUSInl+De/qIDM8iNFO5j51Sgju
+ KFg==
+X-Google-Smtp-Source: AGHT+IExVqROh2up57raPdZCda9hhHfqerWOBdB6WZPppbG6si896f525LlqQIvqUj6mJwJxZXwIYw==
+X-Received: by 2002:a05:6602:3f08:b0:864:488e:a581 with SMTP id
+ ca18e2360f4ac-866b2d7bd95mr440628639f.4.1746197363347; 
+ Fri, 02 May 2025 07:49:23 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.49.20
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.49.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:49:20 -0700 (PDT)
+ Fri, 02 May 2025 07:49:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 59/60] expo: Set up menu fully in bootflow_menu_start()
-Date: Fri,  2 May 2025 08:46:57 -0600
-Message-ID: <20250502144718.313633-60-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 60/60] expo: Drop the special theme code for bootflow_menu
+Date: Fri,  2 May 2025 08:46:58 -0600
+Message-ID: <20250502144718.313633-61-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
 References: <20250502144718.313633-1-sjg@chromium.org>
@@ -95,62 +96,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Apply the theme, calculate dimensions, highlight the menu and arrange
-the scene correctly, so that everything is ready to go when the expo
-is rendered.
+The expo now has all that is needed to apply a suitable theme, so drop
+this unnecessary code. Any further tweaks can be added to the generic
+expo code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootflow_menu.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ boot/bootflow_menu.c | 43 -------------------------------------------
+ test/boot/bootflow.c |  6 +++---
+ 2 files changed, 3 insertions(+), 46 deletions(-)
 
 diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 56a34ac8ed5..43f074f19f5 100644
+index 43f074f19f5..4a442e16850 100644
 --- a/boot/bootflow_menu.c
 +++ b/boot/bootflow_menu.c
-@@ -212,10 +212,6 @@ int bootflow_menu_add_all(struct expo *exp)
- 			return log_msg_ret("bao", ret);
- 	}
+@@ -215,43 +215,6 @@ int bootflow_menu_add_all(struct expo *exp)
+ 	return 0;
+ }
  
+-int bootflow_menu_apply_theme(struct expo *exp, ofnode node)
+-{
+-	struct menu_priv *priv = exp->priv;
+-	struct scene *scn;
+-	u32 font_size;
+-	int ret;
+-
+-	log_debug("Applying theme %s\n", ofnode_get_name(node));
+-	scn = expo_lookup_scene_id(exp, MAIN);
+-	if (!scn)
+-		return log_msg_ret("scn", -ENOENT);
+-
+-	/* Avoid error-checking optional items */
+-	if (!ofnode_read_u32(node, "font-size", &font_size)) {
+-		int i;
+-
+-		log_debug("font size %d\n", font_size);
+-		scene_txt_set_font(scn, OBJ_PROMPT1A, NULL, font_size);
+-		scene_txt_set_font(scn, OBJ_POINTER, NULL, font_size);
+-		for (i = 0; i < priv->num_bootflows; i++) {
+-			ret = scene_txt_set_font(scn, ITEM_DESC + i, NULL,
+-						 font_size);
+-			if (ret)
+-				return log_msg_ret("des", ret);
+-			scene_txt_set_font(scn, ITEM_KEY + i, NULL, font_size);
+-			scene_txt_set_font(scn, ITEM_LABEL + i, NULL,
+-					   font_size);
+-		}
+-	}
+-
 -	ret = scene_arrange(scn);
 -	if (ret)
 -		return log_msg_ret("arr", ret);
 -
- 	return 0;
- }
- 
-@@ -296,7 +292,9 @@ int bootflow_menu_setup(struct bootstd_priv *std, bool text_mode,
- int bootflow_menu_start(struct bootstd_priv *std, bool text_mode,
+-	return 0;
+-}
+-
+ int bootflow_menu_setup(struct bootstd_priv *std, bool text_mode,
  			struct expo **expp)
  {
-+	struct scene *scn;
- 	struct expo *exp;
-+	uint scene_id;
- 	int ret;
- 
- 	ret = bootflow_menu_setup(std, text_mode, &exp);
-@@ -317,6 +315,18 @@ int bootflow_menu_start(struct bootstd_priv *std, bool text_mode,
+@@ -263,12 +226,6 @@ int bootflow_menu_setup(struct bootstd_priv *std, bool text_mode,
  	if (ret)
- 		return log_msg_ret("bmd", ret);
+ 		return log_msg_ret("bmn", ret);
  
-+	ret = expo_first_scene_id(exp);
-+	if (ret < 0)
-+		return log_msg_ret("scn", ret);
-+	scene_id = ret;
-+	scn = expo_lookup_scene_id(exp, scene_id);
-+
-+	scene_set_highlight_id(scn, OBJ_MENU);
-+
-+	ret = scene_arrange(scn);
-+	if (ret)
-+		return log_msg_ret("arr", ret);
-+
- 	*expp = exp;
+-	if (ofnode_valid(std->theme)) {
+-		ret = bootflow_menu_apply_theme(exp, std->theme);
+-		if (ret)
+-			return log_msg_ret("thm", ret);
+-	}
+-
+ 	/* For now we only support a video console */
+ 	ret = uclass_first_device_err(UCLASS_VIDEO, &dev);
+ 	if (ret)
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 06fd2dbb20a..670e73c265b 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -884,7 +884,7 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
+ 	ut_assertok(bootflow_menu_add_all(exp));
+ 	node = ofnode_path("/bootstd/theme");
+ 	ut_assert(ofnode_valid(node));
+-	ut_assertok(bootflow_menu_apply_theme(exp, node));
++	ut_assertok(expo_apply_theme(exp, node));
  
- 	return 0;
+ 	scn = expo_lookup_scene_id(exp, MAIN);
+ 	ut_assertnonnull(scn);
+@@ -895,8 +895,8 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
+ 	 *
+ 	 * Check both menu items, since there are two bootflows
+ 	 */
+-	ut_assertok(check_font(uts, scn, OBJ_PROMPT1A, font_size));
+-	ut_assertok(check_font(uts, scn, OBJ_POINTER, font_size));
++	for (i = OBJ_PROMPT1A; i <= OBJ_AUTOBOOT; i++)
++		ut_assertok(check_font(uts, scn, i, font_size));
+ 	for (i = 0; i < 2; i++) {
+ 		ut_assertok(check_font(uts, scn, ITEM_DESC + i, font_size));
+ 		ut_assertok(check_font(uts, scn, ITEM_KEY + i, font_size));
 -- 
 2.43.0
 
