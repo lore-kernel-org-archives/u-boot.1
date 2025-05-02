@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 720B1C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D554FC3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95C08829C7;
-	Fri,  2 May 2025 16:48:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DECBD82A39;
+	Fri,  2 May 2025 16:48:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hf/CSejp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SF9sjttl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 392EA82A5E; Fri,  2 May 2025 16:48:01 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id B4AED82A36; Fri,  2 May 2025 16:48:02 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DE3982A4D
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 639AA8212F
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:48:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-86135ae2a29so210839939f.2
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:58 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-8616b7ad03bso48039639f.0
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:48:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197276; x=1746802076; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197278; x=1746802078; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bG9PWWqpyhQacAzZtnDnRaMMSR0uXhg140TZZOZls2A=;
- b=Hf/CSejpkcywyqvx5U7p1QSiwZSVXPT70+Q1u4s/1NE2dbniaPC9mAJBr+Z+2lnKtb
- qCH4hZTF0bYIYVrsp8VmE2x5/I7dbtdJic+67ia7Ofl7JeOsTlme6o2Dpy6aSwpcljsF
- OLSwft2yGwv3klYWRokH+DUyo1+pse7FnxpTU=
+ bh=r9yO72i7rk5cmwLDU43oCZ18mKhehgJ2CJSJdW9TLGE=;
+ b=SF9sjttlxKYNXXvGuURy+SMRirj7ahWbPnWOXY70SPwDwoatXQJa7aUxE7bhsf39FB
+ KJ1FqJ2KxTovfMRp130gwVSU5MMQTBymMSpQS1cHVLMXCrUNhNKtPTTIE+GiIi/4aRkA
+ JHXockDjGugr0JSo0xfWNOXhrza2MYpKtjnWo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197276; x=1746802076;
+ d=1e100.net; s=20230601; t=1746197278; x=1746802078;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bG9PWWqpyhQacAzZtnDnRaMMSR0uXhg140TZZOZls2A=;
- b=Ll8ibxuFkN4i7VNs20bkT4sPvKuWnL7UfmUf5vVWQncKl5AqqOPKK5AMXIWNIP/i9F
- mMunTvIPJ4P6+XV/ZiIYcBGtgDAnNWcQNwboWO9rcmz27kyBz8C1H9P+Y8teNwyj521b
- IF6GdRT/j0ZOTFUJM9ZSBufgzr7P0L3Z4n0RFs5+0as4pz+FQ48mfv9TM5OhT72T5I0M
- KGWXhGjfcnQfouc6KjLk67dqD+MTNryctgV2m3m5TO9yQihz5E9FmlHVq2lOX55fyocg
- bjHvyaMqbL5p4YXEl7oYgaocQxq6Rwa9epK/5LEE9JT9ietWYYjF1a6ZPtcK3AuVp9EB
- bHGg==
-X-Gm-Message-State: AOJu0YwjJmjl8s+nUvVb01pJn+Lz3to4uQfu1Blh6rQSxr0smlA5V/fV
- O7uaL8Y6stsO6aK/6702+9DMbBrdiPPGwLr3Sq5ST4vFjHa/L48m3hxuimJI+jNR0jgbg5zv6Ww
+ bh=r9yO72i7rk5cmwLDU43oCZ18mKhehgJ2CJSJdW9TLGE=;
+ b=OFNccIbbDXt/G78XdSmJLDmE3adDyb3FSHGn4ZvXrCJEoEZiZkWhVvZWr9ih9hjEY4
+ WYSxtIaVMvL+ZpJ+DM6MXRXV3hqi6gYuWfAAlCNqQ8Rv432WnX7Ngnw3BJSmYcFc60jO
+ Kmz8QS16DWb6Ye3bGnIfpB+UDp6EExrx8rslUAQN1Ntej7uZY4nx/KVY3HaVbHZzsn34
+ XJwTvDrfuuJkzqtPMCehtHydKYPEqCTD+cq724R7t5S5YkkNg3Wfl1z8WbxX8ECEOItu
+ sIOkS4wVEK0gD3zeqHOdQUNTJ5Iqk70ArRAxJEhSf3OHkcvdwd52H8+YE5+YI++7/yFt
+ vwsA==
+X-Gm-Message-State: AOJu0YwpypCNDxBNqBMeVix1njMMUGETTaTn1j6xi2VpwzwaJA+gSR7A
+ 06M69s46Zxk4tffM24W0pAA1nu+e152RvY2ap3fHOJTRkhwRIWZicpLce2kuiTK/0t9dxdy4HLQ
  =
-X-Gm-Gg: ASbGncuMEUOFKWbZHWDZZbXj1C0BWB05zk9HieD0NkCFasIAY9Y5XpbA6rblkeBb4RU
- MQ+DE0Ji/0i3gKKy7+sF0b5XdNZkfUpx6feQ4lymS/bzjgs4o8gPOOI2vGLlniNTbKy5LhUmbY1
- aNltMMNfYuE6+qga64wM8dOX6GVUnIypy++L0h+nIAok4boLbUldLWBvW9/Ds+PdlVrlgI7Jc7T
- HQkQgktIN1CxVbHOtLIRvP45ZglcvSDxoxC50NG1e+QLzIuL5hBjWS5LTFfafwPeQBa95t040Db
- 34rZm23I4kk7bgcgR/CKXNa3DkwgbtVNRcpTBsBfGRoKB9R0azYJQwYAvoIgbrybcLcmRa9YraI
- 1Rg==
-X-Google-Smtp-Source: AGHT+IFxDXbi4w+YwV4R0jAUkfl0fdxNFkyxpz0fc/wm9sqtpkxmxZ0A+Mo/fINJecEfSqNk13ytaw==
-X-Received: by 2002:a05:6602:3990:b0:862:ec81:ad2e with SMTP id
- ca18e2360f4ac-8669f988db3mr470595739f.3.1746197276237; 
- Fri, 02 May 2025 07:47:56 -0700 (PDT)
+X-Gm-Gg: ASbGncvf6cGvIUHOJi1soUo3Z3pIWWUcIeQTcWT1wC2w7novNGcRaOvhz8MZLbbqC01
+ n5Paiv85eunK2BP2FsyAa2+9DQ7RfF+hxTyB8MawN0t1y1dvcX5mT7Kyg2/LG1X9rMvF4iTXjY9
+ dBCViXfdMSMRWB41R09xlbhWCCxHdM/BIXwaBYZQnBgVPqdoaMeaQmdG54wnwT8c97hYV0XqHD0
+ 0hFy79meR5hZz4Kq1NcpkcfBBrUad8/jLlO1O71BzUS1o3ewbLMt2FgvQ5TXLLus0zOTodaEy/l
+ xAaj+e+giICtrTmueRqReSkx3sohZpIAF7KOSV2BVD5q7WeHrod6YAQIjJ86kEnILZYabA3brAa
+ Nag==
+X-Google-Smtp-Source: AGHT+IHn64GtcgxqSzZqe/F7+UvcuNkU35CTJ99LQ0ivrtJrkUZdF57YyirKShM9Sa+jLKfNprO2IQ==
+X-Received: by 2002:a05:6602:3e90:b0:85b:435d:2fcd with SMTP id
+ ca18e2360f4ac-8669fac56e8mr427412339f.8.1746197278209; 
+ Fri, 02 May 2025 07:47:58 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.54
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:47:55 -0700 (PDT)
+ Fri, 02 May 2025 07:47:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 17/60] expo: Add CLI context to the expo
-Date: Fri,  2 May 2025 08:46:15 -0600
-Message-ID: <20250502144718.313633-18-sjg@chromium.org>
+Subject: [PATCH v2 18/60] expo: Add a function to poll for input
+Date: Fri,  2 May 2025 08:46:16 -0600
+Message-ID: <20250502144718.313633-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
 References: <20250502144718.313633-1-sjg@chromium.org>
@@ -96,132 +100,255 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An expo generally needs to keep track of the keyboard state while it is
-running, so move the context into struct expo
+Both bootflow_menu and cedit use similar logic to poll an expo. Move
+this into the expo library so the code can be shared.
+
+Update bootflow_menu_run() to return -EPIPE when the user quits without
+choosing anything, since -EAGAIN is ambiguous and elsewhere means that
+there is no input yet.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootflow_menu.c | 9 +++------
- boot/cedit.c         | 8 +++-----
- boot/expo.c          | 1 +
- include/expo.h       | 2 ++
- 4 files changed, 9 insertions(+), 11 deletions(-)
+ boot/bootflow_menu.c | 41 ++++-------------------------------------
+ boot/cedit.c         | 35 +++--------------------------------
+ boot/expo.c          | 44 ++++++++++++++++++++++++++++++++++++++++++++
+ cmd/bootflow.c       |  2 +-
+ include/bootflow.h   |  2 +-
+ include/expo.h       | 13 +++++++++++++
+ 6 files changed, 66 insertions(+), 71 deletions(-)
 
 diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 9d0dc352f97..43125e15832 100644
+index 43125e15832..268c93ae8e3 100644
 --- a/boot/bootflow_menu.c
 +++ b/boot/bootflow_menu.c
-@@ -178,7 +178,6 @@ int bootflow_menu_apply_theme(struct expo *exp, ofnode node)
- int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
- 		      struct bootflow **bflowp)
- {
--	struct cli_ch_state s_cch, *cch = &s_cch;
- 	struct bootflow *sel_bflow;
- 	struct udevice *dev;
- 	struct expo *exp;
-@@ -186,8 +185,6 @@ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
- 	bool done;
- 	int ret;
+@@ -216,39 +216,8 @@ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
+ 	done = false;
+ 	do {
+ 		struct expo_action act;
+-		int ichar, key;
  
--	cli_ch_init(cch);
+-		ret = expo_render(exp);
+-		if (ret)
+-			break;
 -
- 	sel_bflow = NULL;
- 	*bflowp = NULL;
- 
-@@ -225,16 +222,16 @@ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
- 		if (ret)
- 			break;
- 
--		ichar = cli_ch_process(cch, 0);
-+		ichar = cli_ch_process(&exp->cch, 0);
- 		if (!ichar) {
- 			while (!ichar && !tstc()) {
- 				schedule();
- 				mdelay(2);
--				ichar = cli_ch_process(cch, -ETIMEDOUT);
-+				ichar = cli_ch_process(&exp->cch, -ETIMEDOUT);
+-		ichar = cli_ch_process(&exp->cch, 0);
+-		if (!ichar) {
+-			while (!ichar && !tstc()) {
+-				schedule();
+-				mdelay(2);
+-				ichar = cli_ch_process(&exp->cch, -ETIMEDOUT);
+-			}
+-			if (!ichar) {
+-				ichar = getchar();
+-				ichar = cli_ch_process(&exp->cch, ichar);
+-			}
+-		}
+-
+-		key = 0;
+-		if (ichar) {
+-			key = bootmenu_conv_key(ichar);
+-			if (key == BKEY_NONE)
+-				key = ichar;
+-		}
+-		if (!key)
+-			continue;
+-
+-		ret = expo_send_key(exp, key);
+-		if (ret)
+-			break;
+-
+-		ret = expo_action_get(exp, &act);
++		ret = expo_poll(exp, &act);
+ 		if (!ret) {
+ 			switch (act.type) {
+ 			case EXPOACT_SELECT:
+@@ -256,17 +225,15 @@ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
+ 				done = true;
+ 				break;
+ 			case EXPOACT_QUIT:
+-				done = true;
+-				break;
++				return -EPIPE;
+ 			default:
+ 				break;
  			}
- 			if (!ichar) {
- 				ichar = getchar();
--				ichar = cli_ch_process(cch, ichar);
-+				ichar = cli_ch_process(&exp->cch, ichar);
- 			}
++		} else if (ret != -EPIPE && ret != -EAGAIN) {
++			return log_msg_ret("bmr", ret);
  		}
+ 	} while (!done);
  
+-	if (ret)
+-		return log_msg_ret("end", ret);
+-
+ 	if (sel_id) {
+ 		struct bootflow *bflow;
+ 		int i;
 diff --git a/boot/cedit.c b/boot/cedit.c
-index 4e80875828b..ed499f11140 100644
+index ed499f11140..b7b9cc510e0 100644
 --- a/boot/cedit.c
 +++ b/boot/cedit.c
-@@ -151,14 +151,12 @@ int cedit_prepare(struct expo *exp, struct video_priv **vid_privp,
+@@ -166,39 +166,8 @@ int cedit_run(struct expo *exp)
+ 	save = false;
+ 	do {
+ 		struct expo_action act;
+-		int ichar, key;
  
- int cedit_run(struct expo *exp)
- {
--	struct cli_ch_state s_cch, *cch = &s_cch;
- 	struct video_priv *vid_priv;
- 	uint scene_id;
- 	struct scene *scn;
- 	bool done, save;
- 	int ret;
- 
--	cli_ch_init(cch);
- 	ret = cedit_prepare(exp, &vid_priv, &scn);
- 	if (ret < 0)
- 		return log_msg_ret("prep", ret);
-@@ -174,16 +172,16 @@ int cedit_run(struct expo *exp)
- 		if (ret)
- 			break;
- 
--		ichar = cli_ch_process(cch, 0);
-+		ichar = cli_ch_process(&exp->cch, 0);
- 		if (!ichar) {
- 			while (!ichar && !tstc()) {
- 				schedule();
- 				mdelay(2);
--				ichar = cli_ch_process(cch, -ETIMEDOUT);
-+				ichar = cli_ch_process(&exp->cch, -ETIMEDOUT);
+-		ret = expo_render(exp);
+-		if (ret)
+-			break;
+-
+-		ichar = cli_ch_process(&exp->cch, 0);
+-		if (!ichar) {
+-			while (!ichar && !tstc()) {
+-				schedule();
+-				mdelay(2);
+-				ichar = cli_ch_process(&exp->cch, -ETIMEDOUT);
+-			}
+-			if (!ichar) {
+-				ichar = getchar();
+-				ichar = cli_ch_process(&exp->cch, ichar);
+-			}
+-		}
+-
+-		key = 0;
+-		if (ichar) {
+-			key = bootmenu_conv_key(ichar);
+-			if (key == BKEY_NONE || key >= BKEY_FIRST_EXTRA)
+-				key = ichar;
+-		}
+-		if (!key)
+-			continue;
+-
+-		ret = expo_send_key(exp, key);
+-		if (ret)
+-			break;
+-
+-		ret = expo_action_get(exp, &act);
++		ret = expo_poll(exp, &act);
+ 		if (!ret) {
+ 			switch (act.type) {
+ 			case EXPOACT_POINT_OBJ:
+@@ -233,6 +202,8 @@ int cedit_run(struct expo *exp)
+ 			default:
+ 				break;
  			}
- 			if (!ichar) {
- 				ichar = getchar();
--				ichar = cli_ch_process(cch, ichar);
-+				ichar = cli_ch_process(&exp->cch, ichar);
- 			}
++		} else if (ret != -EAGAIN) {
++			return log_msg_ret("cep", ret);
  		}
+ 	} while (!done);
  
 diff --git a/boot/expo.c b/boot/expo.c
-index 8ce645e5a8f..9c042f16fe7 100644
+index 9c042f16fe7..301bbfa5f9a 100644
 --- a/boot/expo.c
 +++ b/boot/expo.c
-@@ -30,6 +30,7 @@ int expo_new(const char *name, void *priv, struct expo **expp)
- 	INIT_LIST_HEAD(&exp->scene_head);
- 	INIT_LIST_HEAD(&exp->str_head);
- 	exp->next_id = EXPOID_BASE_ID;
-+	cli_ch_init(&exp->cch);
+@@ -10,8 +10,12 @@
  
- 	*expp = exp;
+ #include <dm.h>
+ #include <expo.h>
++#include <log.h>
+ #include <malloc.h>
++#include <menu.h>
+ #include <video.h>
++#include <watchdog.h>
++#include <linux/delay.h>
+ #include "scene_internal.h"
  
+ int expo_new(const char *name, void *priv, struct expo **expp)
+@@ -286,3 +290,43 @@ int expo_iter_scene_objs(struct expo *exp, expo_scene_obj_iterator iter,
+ 
+ 	return 0;
+ }
++
++int expo_poll(struct expo *exp, struct expo_action *act)
++{
++	int ichar, key, ret;
++
++	ret = expo_render(exp);
++	if (ret)
++		return log_msg_ret("ere", ret);
++
++	ichar = cli_ch_process(&exp->cch, 0);
++	if (!ichar) {
++		while (!ichar && !tstc()) {
++			schedule();
++			mdelay(2);
++			ichar = cli_ch_process(&exp->cch, -ETIMEDOUT);
++		}
++		if (!ichar) {
++			ichar = getchar();
++			ichar = cli_ch_process(&exp->cch, ichar);
++		}
++	}
++
++	key = 0;
++	if (ichar) {
++		key = bootmenu_conv_key(ichar);
++		if (key == BKEY_NONE || key >= BKEY_FIRST_EXTRA)
++			key = ichar;
++	}
++	if (!key)
++		return -EAGAIN;
++
++	ret = expo_send_key(exp, key);
++	if (ret)
++		return log_msg_ret("epk", ret);
++	ret = expo_action_get(exp, act);
++	if (ret)
++		return log_msg_ret("eag", ret);
++
++	return 0;
++}
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index 0163129deba..6189ab7fa40 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -110,7 +110,7 @@ __maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
+ 
+ 	ret = bootflow_menu_run(std, text_mode, &bflow);
+ 	if (ret) {
+-		if (ret == -EAGAIN) {
++		if (ret == -EPIPE) {
+ 			printf("Nothing chosen\n");
+ 			std->cur_bootflow = NULL;
+ 		} else {
+diff --git a/include/bootflow.h b/include/bootflow.h
+index d988bc9355b..ef1d1a75ded 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -509,7 +509,7 @@ int bootflow_menu_apply_theme(struct expo *exp, ofnode node);
+  * @std: Bootstd information
+  * @text_mode: Uses a text-based menu suitable for a serial port
+  * @bflowp: Returns chosen bootflow (set to NULL if nothing is chosen)
+- * @return 0 if an option was chosen, -EAGAIN if nothing was chosen, -ve on
++ * @return 0 if an option was chosen, -EPIPE if nothing was chosen, -ve on
+  * error
+  */
+ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
 diff --git a/include/expo.h b/include/expo.h
-index 3c383d2e2ee..b3b9c0b8872 100644
+index b3b9c0b8872..63452bbdd6a 100644
 --- a/include/expo.h
 +++ b/include/expo.h
-@@ -108,6 +108,7 @@ struct expo_theme {
-  * @theme: Information about fonts styles, etc.
-  * @scene_head: List of scenes
-  * @str_head: list of strings
-+ * @cch: Keyboard context for input
+@@ -772,4 +772,17 @@ int expo_build(ofnode root, struct expo **expp);
   */
- struct expo {
- 	char *name;
-@@ -122,6 +123,7 @@ struct expo {
- 	struct expo_theme theme;
- 	struct list_head scene_head;
- 	struct list_head str_head;
-+	struct cli_ch_state cch;
- };
+ int cb_expo_build(struct expo **expp);
  
- /**
++/**
++ * expo_poll() - render an expo and see if the user takes an action
++ *
++ * Thsi calls expo_render() and then checks for a keypress. If there is one, it
++ * is processed and the resulting action returned, if any
++ *
++ * @exp: Expo to poll
++ * @act: Returns action on success
++ * Return: 0 if an action was obtained, -EAGAIN if not, other error if something
++ *	went wrong
++ */
++int expo_poll(struct expo *exp, struct expo_action *act);
++
+ #endif /*__EXPO_H */
 -- 
 2.43.0
 
