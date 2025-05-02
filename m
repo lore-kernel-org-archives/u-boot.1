@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC059C3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45893C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:34:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C6E2820E1;
-	Fri,  2 May 2025 16:10:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9FBA4820EB;
+	Fri,  2 May 2025 16:34:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VD+gn4lc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bM/1USZA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B80BE81F7E; Fri,  2 May 2025 16:10:30 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 3757C8210D; Fri,  2 May 2025 16:34:06 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EFA4820EB
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:10:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3A9981F7E
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:34:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-72c1425fbfcso1482321a34.3
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:10:28 -0700 (PDT)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-603f54a6cb5so1311758eaf.0
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:34:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746195027; x=1746799827; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746196442; x=1746801242; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cK0xfMykforlbf7nTEGdm2wXkZF/Pbw+pfjUwZCEsLE=;
- b=VD+gn4lcucKgHRaHxyzEhCwXMem0ys5fm4s2xDhio4sI8irRjghA6Z2kgIm36iZXpG
- Gp6J9i6g1IvkqyUHKy0b+JEFDhn67A6E6VOnpu+qqOf47vig0kVLH43+1aF8D9X9jTM+
- +JzUsQiJz9ex9+D/v6aP0dSeI8rJu8jnsnNbw=
+ bh=sTRZniJmucAVSfbv7DidE3JOWvHy5BYzkARpmsxYJuo=;
+ b=bM/1USZAbGI/OCu6sliQpNFZISWSFITxEh2A0QGEGLItlxlYcnbXilhBQEjz5k/Q17
+ 28/Xx95ljhCyGDCnDKesKLxP14UaGy7hoCf/nwOXZLVWTrTG/UH5KjHvvHiz1nT0lLKd
+ 4UADd+ZljxwYCpLDYJ+vuN4OkDbWTTc4uJ8xs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746195027; x=1746799827;
+ d=1e100.net; s=20230601; t=1746196442; x=1746801242;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cK0xfMykforlbf7nTEGdm2wXkZF/Pbw+pfjUwZCEsLE=;
- b=G5TSZ1yROM4hR9xcCtfMz8/GmLcMNLKwjY5OnahhElu26MvTsALT7peiR3rW+ApAIH
- /xj2Ca27Y/apkquUIOJGnQbWEX2g34YjPI4ZHB2TeyNy6XOgFpImp5v3gnl4PDiGwnCg
- abwJwGrqBRS1ubLeJOk1vTXdKdnOm9ljpZxibWkNpOl1PNBorkKiQwE/NKdjyg3ElZh2
- sYZQAQcIob9p0yRRMZTkKwwoXidJksma4Z3PcNF4VjEwEc2DdDGKcmfgSCzIsH/o5GRK
- ZBuZgDd8T16jAqVb+TKLj3BAADnnDyxJssv/EZQe9v5ewf/WTNSacxcQiHP7nM0G4kMP
- IPNQ==
-X-Gm-Message-State: AOJu0YxFn1oMl7sKgHjCb8jBmzWQmhIdzr8xRJzMiFVJyAwTwTdzLDYS
- 7slRYhWg9/2jGCw+w/fiCKkxYvIEqWnFnTWUCpqgOmDV632+Y3cZrGYvmn/RoRg=
-X-Gm-Gg: ASbGncuRwD2Ln8R5L3BJjhp6RCT4zjcJzuC5zqZA3vZ4wzY+OPOYwn41pzYIW6JHO8G
- hoaiuRIqkHBNUqNKscYl4bTuu09OertJJhmXMV+ovFT+KkEC+Dg3W8daWsmvexxLyU8ERovE1Lq
- QQy2NaNjrBTu5Z0CB4kWsK4zF4qOkhmdhp13HWDKNmnQSdHnVHj8cd85QUOCCTxU5Jsnd5jUh0a
- 7vWWkUSngXopeijamOM1HxuCB+c1GvCtHsvF5fU8qPKycYpt57iaRlhK3dzHgqH0nGu/RRga2li
- J503/zryp98G4a9Hz4tMdZ/gjq1lJzqtgBHHXhnqF1FVnrt0wggjxaCka+qwyk01exbSjd58gCY
- 7soMB3DLT9ugf
-X-Google-Smtp-Source: AGHT+IG7XL0Pbv3Ic3xwkw0iU4K1GSKFFWW4zgahKkNtPgaaSE2MjtBEL4GrJCfcGIOF7f5mM9GqUA==
-X-Received: by 2002:a05:6830:2a14:b0:72a:18a6:d431 with SMTP id
- 46e09a7af769-731da17a7damr1669528a34.14.1746195026885; 
- Fri, 02 May 2025 07:10:26 -0700 (PDT)
+ bh=sTRZniJmucAVSfbv7DidE3JOWvHy5BYzkARpmsxYJuo=;
+ b=vVPAu08ygAoh5JQJVF1uxAZvr0oOVq5zPPt8FmrzOTosaaH6qHq7lhllXNUw66RWUZ
+ pE+BcKZ/nc0uPSR2YpdMm85Kh53zZ/NNAk+ig48XHw/zU81RHQTOH4PphhRHWxLtR3T6
+ HbsnvHcH6+OMHvfWmmOeEcUfz1Hv1SuO2f+4D/+R5ieybDGfl6z+t8gkFnq93nfT8uCN
+ vS07owXGlJLe9UXfCNJD9uFA0t8ej7PRGWvj4aOvGUdu/tl9QvYOjMC9ZmPhPbh2GQZF
+ /+eoitbFoku7qJMUWQpfc1YB0V7KEnshM/ncPxwDjFiKiYLQoa1unbTWa2Lz9FGjRvYw
+ k8UQ==
+X-Gm-Message-State: AOJu0YzyLa9xCRzHLiLNvzpqeaWjCRpouAUbIJFN1RICnS0SXbRbo253
+ GImGwoHGnV79bf6HM2hHCtC5GfZDOfNnyhSX/d9zegR52BvykCTPI+UP32dcMOQ=
+X-Gm-Gg: ASbGncszwKED1JnT+nUSmBjLzGhdUe4a3mFdXS5nubUI7WvhMwV0P4XCH1HwKnGb1V/
+ oQ0kLwtFPDX2ImjY5bTaQLPl5apmf+FdQVXeWnVasuHosRZbRy4yyfcgSQCaawizr2HtJDiGPme
+ TFWyXqNS5xevFmfCKFewYKDeiM0oCZ3zVnHMPXq1j6TTGkcCuYofEWtZLaWNq8334dQHnM7wAHy
+ ROl7DS5hxzHD05u4PzyhJVyNQGTy2HclfUXi3PwSa/6H5etq7JOgN6+Yg+iCdg7WSxh4KEAnMbR
+ qW2/s4/LMhsHGIVhxJB/kLIFlm7btSHhW7T+uGiDZ31MVrb0W8/wdmMA5M4pf3lFQqN5z6UqKHH
+ ge/CWaJu3eqXO
+X-Google-Smtp-Source: AGHT+IEv8mKE8wzlj9tO3teqQJrOykodpBv9QirsoskXUcWiDvgsucn522k1r1/l0cxkVfyffBIxmA==
+X-Received: by 2002:a05:6820:a0b:b0:606:8579:4c5e with SMTP id
+ 006d021491bc7-607ee6c3646mr1615610eaf.1.1746196442217; 
+ Fri, 02 May 2025 07:34:02 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-731d31c71aasm484899a34.20.2025.05.02.07.10.26
+ 006d021491bc7-607e7fb7786sm526475eaf.30.2025.05.02.07.34.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:10:26 -0700 (PDT)
-Date: Fri, 2 May 2025 08:10:24 -0600
+ Fri, 02 May 2025 07:34:01 -0700 (PDT)
+Date: Fri, 2 May 2025 08:33:59 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Re: [PATCH] CI: Update the CI lab
-Message-ID: <20250502141024.GR1261075@bill-the-cat>
-References: <20250501012530.3954999-1-sjg@chromium.org>
- <20250501140354.GC1261075@bill-the-cat>
- <CAFLszTgKbsE0N1AEkwydiQQLMrMRNDtivQWVKmDsESYqZE-4VA@mail.gmail.com>
- <20250501153015.GG1261075@bill-the-cat>
- <CAFLszTjvaGLARFCGVODsbRL8h+dLg9Pk1SCV3RcrsC1SrvmTqw@mail.gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
+Message-ID: <20250502143359.GS1261075@bill-the-cat>
+References: <20250502025026.4140184-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ugCc3rdmwKJAipoW"
+ protocol="application/pgp-signature"; boundary="FT53m9yphj0ywH95"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjvaGLARFCGVODsbRL8h+dLg9Pk1SCV3RcrsC1SrvmTqw@mail.gmail.com>
+In-Reply-To: <20250502025026.4140184-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,98 +97,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ugCc3rdmwKJAipoW
+--FT53m9yphj0ywH95
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 02, 2025 at 06:51:31AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 1 May 2025 at 09:30, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, May 01, 2025 at 09:03:15AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Thu, 1 May 2025 at 08:03, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Apr 30, 2025 at 07:25:24PM -0600, Simon Glass wrote:
-> > > >
-> > > > > Update the boards in the lab to match the current situation:
-> > > > >
-> > > > > - bbb and pin64 are working again
-> > > >
-> > > > And were never disabled in mainline (since iirc I never saw them not
-> > > > working).
-> > >
-> > > OK good.
-> > >
-> > > >
-> > > > > - samus and c4 are still broken, with no end in sight
-> > > >
-> > > > Good to comment out.
-> > > >
-> > > > > - new boards for colibrimx8, rockpro64, rock3a/5b, rpi5, zybo
-> > > >
-> > > > Except the imx8 board doesn't work in CI in mainline and had it's o=
-wn
-> > > > long discussion that petered out.
-> > >
-> > > It has been fine for me.
-> > >
-> > > https://sjg.u-boot.org/u-boot/u-boot/-/jobs/49094
-> > >
-> > > >
-> > > > Please v2 where you drop the line about bbb/pine64, and don't add
-> > > > colibrimx8 until you or someone else are ready to work on the under=
-lying
-> > > > issues this exposed. Thanks.
-> > >
-> > > Do you know what issues?
-> >
-> > Yes, can you please look at the thread from your initial patches?
->=20
-> I see[1], but I'm still not sure what you are referring to. Is this a
-> board which is broken with your tree, or is there some issue just with
-> the lab?
+On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
 
-I guess you forgot the related buildman changes which is where I
-explained that:
-- If there's blob problems, someone needs to go and look harder at the
-  imx8/9 binman support.
-- Looks like most of the imx families aren't using CONFIG_BUILD_TARGET
-  and that needs to be fixed.
-
-> Also I was wondering why Nvidia board was not in the list and then
-> found this patch which is marked 'changes requested', but I don't see
-> any reason:
+> During a recent discussion with Heinrich we discussed why the hooks are
+> kept in a separate repo.
 >=20
-> https://patchwork.ozlabs.org/project/uboot/patch/20241217210920.2050997-1=
--sjg@chromium.org/
+> The amount of code is small, a tenth of the size of the recently added
+> lwip, just by way of example. Testing is a critical part of U-Boot and
+> one of the things that distinguishes it from firmware projects that have
+> not kept up in this area. By having the tests somewhere else, we are
+> signalling that it is unusual, or difficult, or optional.
 >=20
-> I marked it 'new' again.
+> The hooks mechanism also needs something of an update to take account of
+> real boards in 2025. That will be much easier to undertake if the code
+> that test/py talks to is in the same repo.
+>=20
+> This series brings the hook files in as first-class citizens of U-Boot.
+>=20
+> If we do go ahead with this, I will send a different series which has
+> separate commits (with correct author) in the u-boot-test-hooks repo.
 
-Doesn't apply.
+I think bringing more projects directly in to the repository is a bad
+idea. Your example of lwip isn't applicable because it's a read-only
+subtree that's maintained outside of the project (same as the dts
+subtree). But sure, lets "Say Yes". That said, we still need to:
+- Remove needless examples from the tree.
+- Not include personal labs directly in the tree.
+
+That last one is why I really think this is a bad idea. The point of
+having the hooks standalone is so that any given lab can easily add
+support for their lab and manage it, without worrying about disclosing
+internal layout. There's going to be hard coded default passwords there.
+There's going to be repository secrets there. That kind of information
+really should not be in a public repository. Integrating the hooks with
+mainline will make lab management harder, not easier. The point of the
+existing labs in u-boot-test-hooks is to provide samples.
+
+I think this is all why no, we should not go down this path.
 
 --=20
 Tom
 
---ugCc3rdmwKJAipoW
+--FT53m9yphj0ywH95
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU0lAACgkQFHw5/5Y0
-tyz0bgv+MxtyaJvF9iJC2y1Ou1Wgun3t+AuX6Airbo+CXcT+Na4MJZw2hlQI3JQp
-HyuAx+Ng+UrxtbwF6iFPCUT6lZ9GI6fq49DcMUQz5kdBZWLeVnir+q2CRMQcpXlh
-rFwmnUAYHx/g+RrSiPPi9v8TRmxtmiah+/Q3BFBYmvAEL0DsjaiTLyV6nwCwXxt7
-zQ+qxBZNV8tLtSr0jlcPVqmy88M+Oi2ad45QqETzrg95Ccmc7UuydFnKzi0RVxYV
-y8djGKALTuwi7pHMOxnyPvA9TXqFv+5txFo4bEtUMEXDx0gUf14HGvOVMiTRUDqS
-qpqjRW2qnTx/6eICJJEk1KBZuoybOTgsV/w6lmiUcukQo12NgzgzBkHvEq6q7y7c
-esEB7VBVUljhveP8ctBiuez8W3eS7Fqip1flJD4N/bt2B46npvu1jCAupTurtxI5
-VCwYNnYIKtBgjwZgyDlpc7rL6TsJQeD7k16PeLyNOP08cb+EoSPgVoGKGoRuIv15
-eAK+u4vu
-=HDB6
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU19MACgkQFHw5/5Y0
+tyy0qAv+NGuZ77g+7MEakqNQjsWU76ChnlgsWQPOnzhZwDJ5v4abmX+3crfKKEdi
+yDXp87/NPY8HuGO4p61yewHdOHoF33qxUA6Pj8Xj/WciAEO0DnjZ4y7QjMUdeZwt
+4QJH35MsPMPFDXfbB6YBs7T1/3nk1+NFqVIUdHPiA3ImT0/sTNHWSOGIERPs+6ym
+aEvgFzeIKYpBNgVlHnzTRTammgZoh2x8Ul0jx5cPFVduU9odtkAJTd+1dNZ76HDa
+eK60OITy2gRNU4EKsVlW6Ga31+3tc4TPOhFpdAObjXLoU3N/BFIZhL4DzX4dqm8O
+wwMEgK+r67z7/8L1hwsSej7LviSjBz2hgHthTSDLJBnGa/a76STuy/Gp67b9Wp2q
+1fb8xXbamW3GKCtNRjCY0zPyW9IP6DhYdMzAjHKh7rc1cwXxSs6QX0wsVt5Dcmvc
+y+kR9ZsSL4RMWhko2gDfdLLXeBcvDDHLk7+g6vlqLO4dADXE/LzCwiXgIWR53XUz
+znva6ul5
+=Mali
 -----END PGP SIGNATURE-----
 
---ugCc3rdmwKJAipoW--
+--FT53m9yphj0ywH95--
