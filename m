@@ -4,111 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 713C8C3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 19:43:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F371C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 19:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFF17820E1;
-	Fri,  2 May 2025 21:43:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 93F97820E1;
+	Fri,  2 May 2025 21:59:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fgl01gH6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KyfTAkok";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15635820F6; Fri,  2 May 2025 21:43:01 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 28EEA82102; Fri,  2 May 2025 21:59:26 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 962D881FAB
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 21:42:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F016481FAB
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 21:59:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1746214977; x=1746819777; i=xypron.glpk@gmx.de;
- bh=8Nr8YISEVqd6d+mXeLs0E8s2eU8x3LzczJ9QurqbtFI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=fgl01gH6HrqP6EnrDPtP4WwqjoxyJptm9t4Mjhn9uBeBa+Hd1KyvUZmcCx3IRIza
- dVBc3ULiT9DEEuwgDUQrLXqTbWf0l0CGIq+OP+VgIHnN2QXoHX7zskBU7vfvpidqN
- 4/09i4kEGvSzLJuZcPFantHBR/0JESniNuN5lw/NJEljkGfHqxEsn6ruClpu0ZY5Q
- 4o9a1DKP6DdehkjWpxzRHadJcR87yFJzGu37AJkZYYwhk3sBahRcQosZa/IT4abDH
- DIZWvA/6nQ3PncOjG42sSPD6EO/NHz1gXfb0nJ+SRsyRk80MlUPptmwPQ3mOJmXds
- xFry+m5a2FlgP+n1Pw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.111.64]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mk0Ne-1uvFTF1hOq-00is38; Fri, 02
- May 2025 21:42:57 +0200
-Message-ID: <45357aad-96d3-4c84-b6be-36cf4bb9dfff@gmx.de>
-Date: Fri, 2 May 2025 21:42:56 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-601a8b6c133so1858122eaf.1
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 12:59:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746215962; x=1746820762; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=s5r0SuKLMgtzanYDgo6nkcAMp5PqltZWqz6QF4EVDJM=;
+ b=KyfTAkokWvN3V8DBIq8J5bBI65h6Mc0t3KA9I4VrZEvvA+muH2EaQPwHKkJ2RML8Ea
+ jGbehgEgTgWzAt+7pBqwZUdxYufahPu6M2P/1mK+an4eWeD7tQxdOEBgNaoot53M7D9e
+ n0qtrfTqcrG1rvJAzsaotkkYY4T330q1bGpGQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746215962; x=1746820762;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s5r0SuKLMgtzanYDgo6nkcAMp5PqltZWqz6QF4EVDJM=;
+ b=BAMYuHlrHN75QsxjLqAzG+JoUOiD8X/ixGOfQEkNr4U4eJKidVJy2rWiCh3xlgSgVk
+ L72F4Gx7vK0ZLSYi/Kv2RdKfQxDVRzV0F5Az/6jL8PRBeKw32PJN+49v8XiCxAyaE2d0
+ 0RBqdRumI6oaFxEkQeHjycU58hMSPo2aD0l7YiK/6g7rFhnvktjJzpAs7Syx0mNXMqFo
+ 7y1fxZfMzMbUa3ERGBNdFS06F7YVdltVuzl6LazDrMGWUcYjZl6xwQWrfVNzJiluAoGS
+ ejBHkjc/DVuJZj0+CWzDUL6YLaYQ6NbjiiaegKAB2xfLJDggD0pOegluKaDw1RqvxKxY
+ csSg==
+X-Gm-Message-State: AOJu0Yz5yPTPz9GUA0C66oFxcHFgehxiTlJNfD6ydKsWJgZjBYM8oQSu
+ vf0ZpRkv19ftzDfarMMPLHPESOpFhb3Hx+Yikly7eULfLONH1bExO2jmdf9OAkY=
+X-Gm-Gg: ASbGncsE+1XX9mzDJNLor2jZwFHuO+rdYRKny86Ic9J0uDgUJTzbZfXiseeuQYfSzyU
+ LzxQ/Y5Un2I4bikhPeygHNFc5m3cNX2gJU8ftyZgYCur8QmMWwB/CDj72VHV/u8QLZnKQOfMRrC
+ QAtaGwCaBqNVeA7l2g9nsbnoVWc6do0g1VUfUJtKSJEricn6I3QGGR1/1UxSqufzTGoWCyN3Xy9
+ 1NE41DXhyBrJ7Vsf6D/9sXKBJm22BYFG6bJhOGA74T2jiJ20Av/C/GAbRLGGu/qCTk/nIec7h5y
+ uCZwRzZC/R9cgeveFv0vbNzuStQjRj23/Z03LNPTjIYFq0R8my+kJFrJPRNTu5S8yyv92zOySSY
+ s4A==
+X-Google-Smtp-Source: AGHT+IFDATUbkGmyMtL6YksAslNXtI0UGAcfRUhrYXxqJnELMmMqL/t2tWs0CbZc8XDq56YSIKZavg==
+X-Received: by 2002:a05:6870:a797:b0:2c1:2262:7941 with SMTP id
+ 586e51a60fabf-2daafbd69demr2276896fac.16.1746215962693; 
+ Fri, 02 May 2025 12:59:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2daa0ed89aasm748765fac.17.2025.05.02.12.59.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 May 2025 12:59:21 -0700 (PDT)
+Date: Fri, 2 May 2025 13:59:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 00/13] video: Enhancements related to truetype and console
+Message-ID: <20250502195919.GA1368027@bill-the-cat>
+References: <20250401172948.1236000-1-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-References: <20250502025026.4140184-1-sjg@chromium.org>
- <20250502143359.GS1261075@bill-the-cat>
- <CAFLszTha1wWDCpi=HR4sE-rKjoPQp+Twvyrsb-fCcF=vPW4d8Q@mail.gmail.com>
- <20250502150641.GW1261075@bill-the-cat>
- <18d5e7ee-a63d-4895-abbc-4df7737dccff@gmx.de>
- <20250502193020.GZ1261075@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250502193020.GZ1261075@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:yQL6FkZt0PRvBiNa86Dymb3hlDwgjgXNJEH31T6lxd9thDQI9TD
- cHSOjVH280pTD5RlxptXDS856M2mT54pIF3/nrHy81XNUo4yQodSgskNF7Dncji5fWFFiWt
- SK61H5jKp/5hyEJBmgUFVrvRXCn6oqWS95jIc0JS/Bv1p3jqqgNSMBZ3T/rIs6oB+utkYuy
- iTen5pasqzPZuONdBuZCw==
-UI-OutboundReport: notjunk:1;M01:P0:GILp8wGzyuY=;gBy55EHFFYUue3VoQoiPw7A0twy
- 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
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zv2MsCGFOYG/8MHg"
+Content-Disposition: inline
+In-Reply-To: <20250401172948.1236000-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,138 +109,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/2/25 21:30, Tom Rini wrote:
-> On Fri, May 02, 2025 at 07:19:18PM +0200, Heinrich Schuchardt wrote:
->> On 5/2/25 17:06, Tom Rini wrote:
->>> On Fri, May 02, 2025 at 08:49:12AM -0600, Simon Glass wrote:
->>>> Hi Tom,
->>>>
->>>> On Fri, 2 May 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
->>>>>
->>>>> On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
->>>>>
->>>>>> During a recent discussion with Heinrich we discussed why the hooks=
- are
->>>>>> kept in a separate repo.
->>>>>>
->>>>>> The amount of code is small, a tenth of the size of the recently ad=
-ded
->>>>>> lwip, just by way of example. Testing is a critical part of U-Boot =
-and
->>>>>> one of the things that distinguishes it from firmware projects that=
- have
->>>>>> not kept up in this area. By having the tests somewhere else, we ar=
-e
->>>>>> signalling that it is unusual, or difficult, or optional.
->>>>>>
->>>>>> The hooks mechanism also needs something of an update to take accou=
-nt of
->>>>>> real boards in 2025. That will be much easier to undertake if the c=
-ode
->>>>>> that test/py talks to is in the same repo.
->>>>>>
->>>>>> This series brings the hook files in as first-class citizens of U-B=
-oot.
->>>>>>
->>>>>> If we do go ahead with this, I will send a different series which h=
-as
->>>>>> separate commits (with correct author) in the u-boot-test-hooks rep=
-o.
->>>>>
->>>>> I think bringing more projects directly in to the repository is a ba=
-d
->>>>> idea. Your example of lwip isn't applicable because it's a read-only
->>>>> subtree that's maintained outside of the project (same as the dts
->>>>> subtree). But sure, lets "Say Yes". That said, we still need to:
->>>>> - Remove needless examples from the tree.
->>>>> - Not include personal labs directly in the tree.
->>>>>
->>>>> That last one is why I really think this is a bad idea. The point of
->>>>> having the hooks standalone is so that any given lab can easily add
->>>>> support for their lab and manage it, without worrying about disclosi=
-ng
->>>>> internal layout. There's going to be hard coded default passwords th=
-ere.
->>
->> Secrets MUST NEVER reside in git repos.
->>
->> I can't imagine that such irresponsible habits would be practiced by an=
-y
->> accountable developer.
+
+--zv2MsCGFOYG/8MHg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Apr 02, 2025 at 06:29:31AM +1300, Simon Glass wrote:
+
+> This series includes some precursor patches needed for forthcoming expo
+> enhancements.
 >=20
-> I agree it shouldn't be done. And just this week was the most recent
-> time I've seen a company do that internally, because it's internal and
-> was just a temporary thing. We helped them stop needing to do that, but
-> assuming it never happens is a bad idea.
->=20
->> Please, have a look at
->>
->> https://docs.github.com/en/actions/security-for-github-actions/security=
--guides/using-secrets-in-github-actions
->> https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/07_pass-b=
-uild-secrets.html
->>
->> to see how to do it properly.
->>
->> The same is true for a private lab:
->> Use environment variables that are coming from outside the repository.
->>
->>>>> There's going to be repository secrets there. That kind of informati=
-on
->>>>> really should not be in a public repository. Integrating the hooks w=
-ith
->>>>> mainline will make lab management harder, not easier. The point of t=
-he
->>>>> existing labs in u-boot-test-hooks is to provide samples.
->>>>>
->>>>> I think this is all why no, we should not go down this path.
->>>>
->>>> Is it worth discussing this, or is your mind made up? I have some
->>>> thoughts on the last one.
->>>
->>> I think it's a terrible idea that I already said:
->>>> But sure, lets "Say Yes".
->>>
->>> But please do spend time explaining your thoughts and perhaps others
->>> will also agree with you and I'll feel less bad taking this in?
->>>
->>
->> Currently when changing a test hook I have to go through these steps:
->>
->> * fork u-boot-test-hooks
->> * push a commit to my fork
->> * update both .gitlab-ci.yaml and .azure-pipelines.yaml
->> * commit the change code.denx.de
->> * create a merge request for github.com/u-boot/u-boot
->>
->> If the test hooks were in the same repo as main U-Boot, I could save tw=
-o
->> steps.
->=20
-> Yes, that's true, the steps for updating our CI are a little bit longer.
-> I would be happy to make u-boot-test-hooks more widely writable (so it
-> would instead be pushing to a branch for step 1+2). But I'm also
-> concerned with external labs (which is both the origin of these scripts,
-> and where they're also used).
->=20
-> Today, I have both a "konsulko" branch of u-boot-test-hooks, internally.
-> That has subdirectories for both "sage" and "lootbox" (the two lab
-> hosts), and in turn py and bin subdirectories for each. There's no value
-> in publishing these changes as there's nothing unique about the
-> platforms there, which aren't already in the mainline u-boot-test-hooks.
->=20
-> How should I manage these changes moving forward?
+> - truetype support for multiple lines
+> - make white-on-black a runtime option
+> - support drawing a rectangle
 
-You could create two branches based on origin/master u-boot:
+For the series, applied to u-boot/master, thanks!
 
-One for maintaining your test lab specific u-boot-test changes and one=20
-for your private u-boot code changes.
+--=20
+Tom
 
-Check out the lab specific u-boot-test branch for steering the tests of=20
-the u-boot code branch.
+--zv2MsCGFOYG/8MHg
+Content-Type: application/pgp-signature; name="signature.asc"
 
-As said don't put the secrets into any of your branches.
+-----BEGIN PGP SIGNATURE-----
 
-Best regards
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgVJA0ACgkQFHw5/5Y0
+tyzNGQv+NXuCX7TrUJHsofx1VnuRgKE8c5HorKuFZfjEh20S+u4Y9nym2WiAyVFK
+pMkyLMtxoLRDNqnKS6wJWzzYd80nDOuSBWoHyhakoinTOBGUde9iO9trsztRw4x1
+It7r7EtWxyMwSbcfS8r+IA2QptyAnJI3ItXEVS+fRepjClBoI89N7yhuLKqmD+aN
+0YqOlO27YOjzNEzEMnmAgI0AOc2IxcLCNc0Nkz7Y7cr+ub9auIlUxilMuL1IdEVj
++WUcTiuxgYrPjF7sekVPdEJ8hT4Ro5pvWQGa3qxzKn8vsYlMJ2GqDju5eyejMfTf
+rNL9UCh0fnLCh9WHBKSde5UJhWtahb8UHSqTUDFuMxz+Po+I2qVJUsaLrZnGNpUX
+ZR1nNSSbC/kO8r7bTRT39yt017EwssXREvkzdlGd0/gzmR9jGdv1f2RXg0e18UIf
+oYDNEIwBz2FW5rarn86YqPLB5AibSH08WGlnbYcd4y6VwIUeUER97KAz6V3rhd8r
+pIregm6U
+=T1sh
+-----END PGP SIGNATURE-----
 
-Heinrich
+--zv2MsCGFOYG/8MHg--
