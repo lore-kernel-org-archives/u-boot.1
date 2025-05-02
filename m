@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF8EC3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 13:23:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FD2C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 13:29:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CA5C81E72;
-	Fri,  2 May 2025 15:23:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3B62E820E2;
+	Fri,  2 May 2025 15:29:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dz1G6jeR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AX5Yas0e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2DE481F7E; Fri,  2 May 2025 15:23:20 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 596FD820EB; Fri,  2 May 2025 15:29:26 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47CAE810EB
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 15:23:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D31BB810EB
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 15:29:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-acb615228a4so580870066b.0
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 06:23:18 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-7081165a238so14937327b3.1
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 06:29:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746192198; x=1746796998; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1746192562; x=1746797362; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NYysJKGrsExjEAVAVamFZ7fcVO7ddXvXEXLP7A7a9b4=;
- b=Dz1G6jeR7j4Hp94ID5LDnnIjN/+2Z6/rWlZJ+Ap021onuQSSlb4lMY7w5cgsGUmgAL
- M/YRxlWnEp48NJWBLe4yRUD5tS4ni6Ja2qGUYT+iGGIFr/naMzeylWL+Kpviug2u6oOo
- x5VoAFFlIpEOBfIA+IYtrmGWr1VyWuFfZxEoA=
+ bh=Q3bYVaIrwRa4S2cu3A8UxtDrEiEjKrdKz+fi7kdKTi0=;
+ b=AX5Yas0eRnJOFL7SO0QtpKzLaaGCZBxQTLzemopqnO+O4b7mj/hiWENLZbMX2gljBt
+ Mh6gt7NgmcZoxEaYlafNfiFs1lLBZ50AUZ71hH5NQ8QoWAv6UNVpu6vtk7Dul/wC+Qqe
+ Js9ED5Duy4rH0rFLdPRwdHDKebQbCG0W0L6HN3ZBKbaS7eVwyreDYch9XeLYw9NYiixI
+ isC3m0ZR5d0WhOq8kLNq/OGbp86hrdiN8+nUDDhnPH05uoEkm3mvHpC7DYsL+fAJaxOq
+ ThXJiBXg4SflljqKk/2u7lkLfwxNXp7OciZKKpR808HScmwBUBU7lwgRhIqGJwZaPJDn
+ Kdbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746192198; x=1746796998;
+ d=1e100.net; s=20230601; t=1746192562; x=1746797362;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NYysJKGrsExjEAVAVamFZ7fcVO7ddXvXEXLP7A7a9b4=;
- b=eQferykQtaJrukxhp3bQGeXLnwLNL9KXb1zqYQxSwZThGlYdnPRF4LWSjOgsCGOLb8
- Epwr3qxFLiZJTZXHmBKPjkljWK5XPRXBiC57c1T0NXiD8pCghYxZ77wesqAk/2N2oDZO
- 1rFpZ51vlFfTlBRuYPde5zD4+WCi1aqad3XCVnRJbfcda9rq9+kALzuUCymaIhA0KvvW
- QJSTJ8s3w7XsJfejHKWp2V9Upglk0Hy0AyMUmj14dkoE0JpoPYPXNklbZyTglEzbF+Xj
- b5D/fpBWRuH02Szmk+u3qSEp6PR90Mfiz01av3AMx0b+Tt8Pdx6MCzOdqSh/DVHrhfc8
- XVaw==
+ bh=Q3bYVaIrwRa4S2cu3A8UxtDrEiEjKrdKz+fi7kdKTi0=;
+ b=dMfUbNfHvdvsA+/1utuDoMN7hdjVr8NN2ESqZXfk452UCLgs8nHcf43O9tBpwlthxk
+ 7ttdo0DjlNg/0Ci/ZsMcMgUg04Yp3kZ5Q4VJlNebupKF50cCBHdkyzxVc4tVmRrzDTY6
+ 86wra3sU4iPK/2D4fErTXpaoX+wvh96fSJ+WyQmzPjmQcJCm3zO2I/zm9xfzbXI3GTab
+ zVvCSmY2NpbRhdphRUdP32YWdzrjEKaUkszUwDv/SQFQPbBWWK3aRHPFeRgRV/PZnOwk
+ Iye/+akdGlEkBKgN03EKJiLiMYWC38lOOcIjEJaWadVMmlhA15J42Mzj9V9V7X4ozqcZ
+ o7yA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgPEVqiDx7jCWjm/pCsDjc5Cy/DOvwbC8QqzXG4ZONsDsPJ7Mn4hetq/3oPAaRKehoSkv2pbI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyvCw1oop3LwZu+cYffSSLqLScOAWt/oSIbLqKLlEJ8VYYrlxX5
- dYoQvr66QNu8gOKR+AvIe2XgZ6os/yF73t9BTmHE0YWqNZzpCEnp4vB144+j2Z9aKUK+2+uRfWx
- GmzSxyLo0otCqvHtVLFhaNFuVfKmycB6wbZlb
-X-Gm-Gg: ASbGncvinjTX/vjKiY9ty+ZfGtGnaRoQkYZ9iPfxvpiq9mpROUNdBpcAMC6lrAjPb4f
- /Nvxec9Wrtc2ykZBC4t1fctdrukKdSJ26FDj/osQ5Fw0kO+obOH2KEKWJnK4h82swMqMJczGUSH
- 42Hi4fV6QA8tWyYQk6/FUkIIw=
-X-Google-Smtp-Source: AGHT+IG8ZCaZ2B0mX6YHmiV9HZAnINOp9JcFgrnOjT6g2+YcFAnbkTeLSbgn0xh8/F9FaUg09KL1fO3KLxJdMfZybik=
-X-Received: by 2002:a17:907:7216:b0:ad0:11b3:ac90 with SMTP id
- a640c23a62f3a-ad17af8e7c7mr306629066b.30.1746192197640; Fri, 02 May 2025
- 06:23:17 -0700 (PDT)
+ AJvYcCWlOblGVCBTOrXtSyzkFnTrCb3AhNO/qb4f/JXjNVn2FtwmadXKtQYuYD3Tnp2mVZbb8HbaXno=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0bcxnwSS3rSZ2D24m1TIqmhDNu0sPp6+bO3ffJXIIJqPRLxI/
+ WRohCQPs/1c2wnsKl7CGrwfBzKm5s8ZSwi+M1UYRs8WXrkRmOnFEHYoJwfG0uqjOAUMe/qRM9LL
+ YESrB/6BobozDHO/PFVGmRNe9n+7LcXoswgWQZQ==
+X-Gm-Gg: ASbGncvRkSFs8i15woqlCDI45pgIZjiGCODiLoXce+4xjeG4hLhtV1B5P48jCktD6bD
+ OkzD7PyXtVa4a2x5fiEGBQa8g3L2jv64Xm2uzo//hWrHOM73R9H9YSRwcul9Rj6eUp0Zc0WsXuC
+ RIdmxCM1mxNzODiwXmHxI8Mjg=
+X-Google-Smtp-Source: AGHT+IGa+TsD8YV9ssW64Pp/7IP5GGd6xv+er9RoRu5P2VOIBFObhWUdXuiolB5PnAGdvJnjiCFpwPQALIsWgTbucO4=
+X-Received: by 2002:a05:690c:4989:b0:700:a988:59dc with SMTP id
+ 00721157ae682-708cee12fd7mr45592207b3.31.1746192562633; Fri, 02 May 2025
+ 06:29:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
  <20250421162555.1200687-3-heinrich.schuchardt@canonical.com>
  <CAFLszTgn3kXFrbsfbQCpJ0pHmgAvF2Df_V7_tTZ732k3Q4UVew@mail.gmail.com>
  <2c28be83-aab4-455a-9ced-602b7c6b1354@canonical.com>
  <D9LKH17KOI3W.1X2BUOB3TJWX1@linaro.org>
-In-Reply-To: <D9LKH17KOI3W.1X2BUOB3TJWX1@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 2 May 2025 07:23:06 -0600
-X-Gm-Features: ATxdqUFlR9-tawl08Dnbg5g18_-m7AHmQx-zjm8xiez06jg2dAnrKM9HU7kpL58
-Message-ID: <CAFLszTi32wXAnzeL3uP2kS18vx38rbPgnpcySyrn2+Sf-AM7JA@mail.gmail.com>
+ <CAFLszTi32wXAnzeL3uP2kS18vx38rbPgnpcySyrn2+Sf-AM7JA@mail.gmail.com>
+In-Reply-To: <CAFLszTi32wXAnzeL3uP2kS18vx38rbPgnpcySyrn2+Sf-AM7JA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 2 May 2025 16:28:46 +0300
+X-Gm-Features: ATxdqUFCn_RkOUhUpR3MLNc6dIcrqLtlOh0yHKzRnSZxm8IBWr8yo744wh1AWbA
+Message-ID: <CAC_iWjLLvW4Wd-0-zXeHs4_ucUjKDAUxKYDAe5-nj6QoRCxS9A@mail.gmail.com>
 Subject: Re: [RFC 2/8] boot: BOOTMETH_DISTRO should select BOOTMETH_EFI_BOOTMGR
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>
 Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, 
@@ -94,63 +99,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Fri, 2 May 2025 at 03:28, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Fri, 2 May 2025 at 16:23, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Heinrich
+> Hi,
 >
-> On Wed Apr 23, 2025 at 3:53 PM EEST, Heinrich Schuchardt wrote:
-> > On 23.04.25 14:28, Simon Glass wrote:
-> >> Hi Heinrich,
-> >>
-> >> On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
-> >> <heinrich.schuchardt@canonical.com> wrote:
-> >>>
-> >>> Distros expect the EFI boot manager to run. It falls back to launching
-> >>> EFI\BOOT\BOOT<ARCH>.EFI from the ESP.
-> >>>
-> >>> BOOTMETH_EFILOADER is obsolete.
-> >>>
-> >>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>> ---
-> >>>   boot/Kconfig | 5 ++++-
-> >>>   1 file changed, 4 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/boot/Kconfig b/boot/Kconfig
-> >>> index fb37d912bc9..71ddb37f6bb 100644
-> >>> --- a/boot/Kconfig
-> >>> +++ b/boot/Kconfig
-> >>> @@ -597,6 +597,9 @@ config BOOTMETH_EFILOADER
-> >>>          imply CMD_TFTPBOOT if CMD_NET
-> >>>          default y
-> >>>          help
-> >>> +         This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
-> >>> +         launching EFI\BOOT\BOOT<ARCH>.EFI if not boot option matches.
-> >>> +
-> >>
-> >> I don't agree with marking this as obsolete and your commit message
-> >> doesn't explain why it should be.
+> On Fri, 2 May 2025 at 03:28, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > This method was written in a way that per se violates the UEFI
-> > specification as it does not set up required UEFI variables.
+> > Hi Heinrich
 > >
-> > You must never run this before the boot manager as booting
-> > EFI/BOOT/BOOT<ARCH>.EFI if there is a boot option violates the UEFI
-> > specification-
+> > On Wed Apr 23, 2025 at 3:53 PM EEST, Heinrich Schuchardt wrote:
+> > > On 23.04.25 14:28, Simon Glass wrote:
+> > >> Hi Heinrich,
+> > >>
+> > >> On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
+> > >> <heinrich.schuchardt@canonical.com> wrote:
+> > >>>
+> > >>> Distros expect the EFI boot manager to run. It falls back to launching
+> > >>> EFI\BOOT\BOOT<ARCH>.EFI from the ESP.
+> > >>>
+> > >>> BOOTMETH_EFILOADER is obsolete.
+> > >>>
+> > >>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > >>> ---
+> > >>>   boot/Kconfig | 5 ++++-
+> > >>>   1 file changed, 4 insertions(+), 1 deletion(-)
+> > >>>
+> > >>> diff --git a/boot/Kconfig b/boot/Kconfig
+> > >>> index fb37d912bc9..71ddb37f6bb 100644
+> > >>> --- a/boot/Kconfig
+> > >>> +++ b/boot/Kconfig
+> > >>> @@ -597,6 +597,9 @@ config BOOTMETH_EFILOADER
+> > >>>          imply CMD_TFTPBOOT if CMD_NET
+> > >>>          default y
+> > >>>          help
+> > >>> +         This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
+> > >>> +         launching EFI\BOOT\BOOT<ARCH>.EFI if not boot option matches.
+> > >>> +
+> > >>
+> > >> I don't agree with marking this as obsolete and your commit message
+> > >> doesn't explain why it should be.
+> > >
+> > > This method was written in a way that per se violates the UEFI
+> > > specification as it does not set up required UEFI variables.
+> > >
+> > > You must never run this before the boot manager as booting
+> > > EFI/BOOT/BOOT<ARCH>.EFI if there is a boot option violates the UEFI
+> > > specification-
+> > >
+> > > The boot manager covers the functionality of this bootmeth.
+> > >
+> > > We should delete this method.
 > >
-> > The boot manager covers the functionality of this bootmeth.
-> >
-> > We should delete this method.
+> > +1. Do you plan to propose a patch to remove it and only leave the bootmanager?
+> > Or you prefer marking it as obsolete for a while?
 >
-> +1. Do you plan to propose a patch to remove it and only leave the bootmanager?
-> Or you prefer marking it as obsolete for a while?
+> No, neither.
+>
+> The work-around that Heinrich and I discussed was to insert bootmgr
+> later in the bootdev sequence, not to disable this bootmeth.
 
-No, neither.
+Can you explain why you want to keep this bootmethod? Both Heinrich
+and I explained why the bootmanager is the appropriate one for EFI.
+Do you have any use cases in mind that isn't covered by the manager
+and you need this?
 
-The work-around that Heinrich and I discussed was to insert bootmgr
-later in the bootdev sequence, not to disable this bootmeth.
-
-Regards,
-Simon
+Thanks
+/Ilias
+>
+> Regards,
+> Simon
