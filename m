@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E98CC3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC059C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D262A8210F;
-	Fri,  2 May 2025 16:06:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C6E2820E1;
+	Fri,  2 May 2025 16:10:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NC48BCRa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VD+gn4lc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4967882114; Fri,  2 May 2025 16:06:56 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id B80BE81F7E; Fri,  2 May 2025 16:10:30 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E21BF81F7E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:06:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EFA4820EB
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:10:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3feaedb531dso492159b6e.3
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:06:53 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-72c1425fbfcso1482321a34.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:10:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746194812; x=1746799612; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746195027; x=1746799827; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GIWUbDLoJz0Ep6iqwG5msipTHJpffhhF9/5XtZsYv/M=;
- b=NC48BCRahxBzFgjj2sNOF7kxtRoM15ior/Vv/zc+xGTcR3bBhW7nuopSJ0Dh8fDDYf
- 7eKdebetoGF1yBsGqyxB0Fk5UXrffbxXSXrgysz9IzH9ZyC6QYMTjAGG6nIXT/4Zfod8
- sLQIMXV1C0eYy6LGdYegYLkHWMhuu4ldUnRpg=
+ bh=cK0xfMykforlbf7nTEGdm2wXkZF/Pbw+pfjUwZCEsLE=;
+ b=VD+gn4lcucKgHRaHxyzEhCwXMem0ys5fm4s2xDhio4sI8irRjghA6Z2kgIm36iZXpG
+ Gp6J9i6g1IvkqyUHKy0b+JEFDhn67A6E6VOnpu+qqOf47vig0kVLH43+1aF8D9X9jTM+
+ +JzUsQiJz9ex9+D/v6aP0dSeI8rJu8jnsnNbw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746194812; x=1746799612;
+ d=1e100.net; s=20230601; t=1746195027; x=1746799827;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GIWUbDLoJz0Ep6iqwG5msipTHJpffhhF9/5XtZsYv/M=;
- b=m5KTF/pDqJSE+VwIdlR0SHR2vcVo2CxUKQmKMcEI6Hfs3Kp10fj9c7PAqS6XzD57y6
- YW/ElNWxfCu3KC8pN9KS+9F9usNOOSbeRqWYY1aYXDm5tVQSOFoHqDu7idd+NoIE/sJy
- sQ1ZzGtcxtuPz9e/RW3jlQUc6+wBu7SkNZW9NJjK5wQ8RpRlyOA7Dx8iEmcY6kxF2LNz
- uR9/h9rBpeDAkItvTjnlvsJYEar41IMHkZOjmorTpjq0Am/DK3epaYw4IZu6DsaxOBLh
- XysmQPBwdE/OuT5TACzECxBn11Hw9HQxFbvOi12rJjUb5LU6+HJ0rmINH47BAvleYz5x
- /cmw==
-X-Gm-Message-State: AOJu0YwVnG3+R+7+B4ZO96XLsa+X6R/5qwZmTGioJqMGFCto5e5KuLlL
- 01CujvyFYHsfPk6FehGs5jnPn/LgBfFBNXf1bs/mP7+AiZ+uhOeT0aqmBQ5P2aI=
-X-Gm-Gg: ASbGncs/3guLMmN7ijmauN4kXAWE+GUVG6n3xy0XhE76XbCbrc961Y5Q5w+7YUsMfr4
- bf2KxAdnW1P/ZvMO03JCBXrD6hgX7B/IUEF6yagFPrWTHgQlalMYug/0BVXQWR4/vqZwoHPfros
- JWjtUQ4lnu2urAEhOiUzxeCRqdVGJVTtaQn8eysew6Kkei7cWv3KzqQoahZPyXdhWL2kMQCMw/B
- x/OnnRkJP05lugme/vgIS0OIZjY2Dmy0slVTFrzdot1/fN0/GDvFY7uk1VnW5zc8c5LJxBX8E91
- g8BZDKcqGxeANINzYu8o2Tis7YCtcG/IguoDH7J0CTgR5p/sIqMj63TDj2bjWEPg0cyZA6GLYHK
- W5g==
-X-Google-Smtp-Source: AGHT+IFGyWhIq3M3YRdvT4+yNyq6XJqxhgC1Ne84Cbl2bqnawaOcSC62F+diZXz8tkGQs0CrI33cKg==
-X-Received: by 2002:a05:6808:6801:b0:3f7:4b65:582f with SMTP id
- 5614622812f47-403413c1bdamr1952453b6e.17.1746194812608; 
- Fri, 02 May 2025 07:06:52 -0700 (PDT)
+ bh=cK0xfMykforlbf7nTEGdm2wXkZF/Pbw+pfjUwZCEsLE=;
+ b=G5TSZ1yROM4hR9xcCtfMz8/GmLcMNLKwjY5OnahhElu26MvTsALT7peiR3rW+ApAIH
+ /xj2Ca27Y/apkquUIOJGnQbWEX2g34YjPI4ZHB2TeyNy6XOgFpImp5v3gnl4PDiGwnCg
+ abwJwGrqBRS1ubLeJOk1vTXdKdnOm9ljpZxibWkNpOl1PNBorkKiQwE/NKdjyg3ElZh2
+ sYZQAQcIob9p0yRRMZTkKwwoXidJksma4Z3PcNF4VjEwEc2DdDGKcmfgSCzIsH/o5GRK
+ ZBuZgDd8T16jAqVb+TKLj3BAADnnDyxJssv/EZQe9v5ewf/WTNSacxcQiHP7nM0G4kMP
+ IPNQ==
+X-Gm-Message-State: AOJu0YxFn1oMl7sKgHjCb8jBmzWQmhIdzr8xRJzMiFVJyAwTwTdzLDYS
+ 7slRYhWg9/2jGCw+w/fiCKkxYvIEqWnFnTWUCpqgOmDV632+Y3cZrGYvmn/RoRg=
+X-Gm-Gg: ASbGncuRwD2Ln8R5L3BJjhp6RCT4zjcJzuC5zqZA3vZ4wzY+OPOYwn41pzYIW6JHO8G
+ hoaiuRIqkHBNUqNKscYl4bTuu09OertJJhmXMV+ovFT+KkEC+Dg3W8daWsmvexxLyU8ERovE1Lq
+ QQy2NaNjrBTu5Z0CB4kWsK4zF4qOkhmdhp13HWDKNmnQSdHnVHj8cd85QUOCCTxU5Jsnd5jUh0a
+ 7vWWkUSngXopeijamOM1HxuCB+c1GvCtHsvF5fU8qPKycYpt57iaRlhK3dzHgqH0nGu/RRga2li
+ J503/zryp98G4a9Hz4tMdZ/gjq1lJzqtgBHHXhnqF1FVnrt0wggjxaCka+qwyk01exbSjd58gCY
+ 7soMB3DLT9ugf
+X-Google-Smtp-Source: AGHT+IG7XL0Pbv3Ic3xwkw0iU4K1GSKFFWW4zgahKkNtPgaaSE2MjtBEL4GrJCfcGIOF7f5mM9GqUA==
+X-Received: by 2002:a05:6830:2a14:b0:72a:18a6:d431 with SMTP id
+ 46e09a7af769-731da17a7damr1669528a34.14.1746195026885; 
+ Fri, 02 May 2025 07:10:26 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40349a8f7cbsm184301b6e.50.2025.05.02.07.06.50
+ 46e09a7af769-731d31c71aasm484899a34.20.2025.05.02.07.10.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:06:51 -0700 (PDT)
-Date: Fri, 2 May 2025 08:06:49 -0600
+ Fri, 02 May 2025 07:10:26 -0700 (PDT)
+Date: Fri, 2 May 2025 08:10:24 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Oliver Graute <oliver.graute@kococonnector.com>
-Subject: Re: [PATCH v2 02/22] congatec: Include env.h to permit reading the
- environment
-Message-ID: <20250502140649.GQ1261075@bill-the-cat>
-References: <20250501010456.3930701-1-sjg@chromium.org>
- <20250501010456.3930701-3-sjg@chromium.org>
- <20250501140617.GD1261075@bill-the-cat>
- <CAFLszTirfZExTrcmNWZrjbaz0Av5VCCq6q1iLwoxCdG2KrmDVA@mail.gmail.com>
- <20250501153316.GH1261075@bill-the-cat>
- <CAFLszThcmQYqXO8rqiYKS-1TdyXcTbfTuaOTa3W8vWMTzKn-YQ@mail.gmail.com>
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Re: [PATCH] CI: Update the CI lab
+Message-ID: <20250502141024.GR1261075@bill-the-cat>
+References: <20250501012530.3954999-1-sjg@chromium.org>
+ <20250501140354.GC1261075@bill-the-cat>
+ <CAFLszTgKbsE0N1AEkwydiQQLMrMRNDtivQWVKmDsESYqZE-4VA@mail.gmail.com>
+ <20250501153015.GG1261075@bill-the-cat>
+ <CAFLszTjvaGLARFCGVODsbRL8h+dLg9Pk1SCV3RcrsC1SrvmTqw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+n5YMjGlIrM9AeGC"
+ protocol="application/pgp-signature"; boundary="ugCc3rdmwKJAipoW"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThcmQYqXO8rqiYKS-1TdyXcTbfTuaOTa3W8vWMTzKn-YQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjvaGLARFCGVODsbRL8h+dLg9Pk1SCV3RcrsC1SrvmTqw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,69 +101,98 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+n5YMjGlIrM9AeGC
+--ugCc3rdmwKJAipoW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 02, 2025 at 07:11:56AM -0600, Simon Glass wrote:
+On Fri, May 02, 2025 at 06:51:31AM -0600, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 1 May 2025 at 09:33, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 1 May 2025 at 09:30, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, May 01, 2025 at 09:04:45AM -0600, Simon Glass wrote:
+> > On Thu, May 01, 2025 at 09:03:15AM -0600, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Thu, 1 May 2025 at 08:06, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, 1 May 2025 at 08:03, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Wed, Apr 30, 2025 at 07:04:27PM -0600, Simon Glass wrote:
-> > > > > This file reads from the environment but does not include the cor=
-rect
-> > > > > header. Update it.
+> > > > On Wed, Apr 30, 2025 at 07:25:24PM -0600, Simon Glass wrote:
+> > > >
+> > > > > Update the boards in the lab to match the current situation:
 > > > > >
-> > > > > Drop the unnecessary config.h while we are here.
+> > > > > - bbb and pin64 are working again
 > > > >
-> > > > Are you sure about that? It was explicitly added in commit
-> > > > ab61cc7d98f6 ("board: congatec: Remove <common.h> and add needed
-> > > > includes") probably because of CFG_SYS_... usage.
+> > > > And were never disabled in mainline (since iirc I never saw them not
+> > > > working).
 > > >
-> > > Well I assumed it wouldn't build if it had it, but perhaps that is
-> > > incorrect? I understood that CFG_ things had to be values and you
-> > > couldn't #idef them?
+> > > OK good.
+> > >
+> > > >
+> > > > > - samus and c4 are still broken, with no end in sight
+> > > >
+> > > > Good to comment out.
+> > > >
+> > > > > - new boards for colibrimx8, rockpro64, rock3a/5b, rpi5, zybo
+> > > >
+> > > > Except the imx8 board doesn't work in CI in mainline and had it's o=
+wn
+> > > > long discussion that petered out.
+> > >
+> > > It has been fine for me.
+> > >
+> > > https://sjg.u-boot.org/u-boot/u-boot/-/jobs/49094
+> > >
+> > > >
+> > > > Please v2 where you drop the line about bbb/pine64, and don't add
+> > > > colibrimx8 until you or someone else are ready to work on the under=
+lying
+> > > > issues this exposed. Thanks.
+> > >
+> > > Do you know what issues?
 > >
-> > The cases where in that series I added config.h were for good reason,
-> > either failure to build or tricky size change reasons. All were
-> > intentional. An audit-and-remove of config.h would be it's own series as
-> > yes, there's perhaps not the need now as whatever complex chain was
-> > unwound.
+> > Yes, can you please look at the thread from your initial patches?
 >=20
-> Oh dear, OK. I'll respin the series.
->=20
-> Hmm but I see you have sent a series that does some similar tweak[1].
-> What was the goal there?
+> I see[1], but I'm still not sure what you are referring to. Is this a
+> board which is broken with your tree, or is there some issue just with
+> the lab?
 
-I fixed your problem. Please don't bother re-spinning this series, it's
-not clear what problems it's solving correctly.
+I guess you forgot the related buildman changes which is where I
+explained that:
+- If there's blob problems, someone needs to go and look harder at the
+  imx8/9 binman support.
+- Looks like most of the imx families aren't using CONFIG_BUILD_TARGET
+  and that needs to be fixed.
+
+> Also I was wondering why Nvidia board was not in the list and then
+> found this patch which is marked 'changes requested', but I don't see
+> any reason:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/20241217210920.2050997-1=
+-sjg@chromium.org/
+>=20
+> I marked it 'new' again.
+
+Doesn't apply.
 
 --=20
 Tom
 
---+n5YMjGlIrM9AeGC
+--ugCc3rdmwKJAipoW
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU0XUACgkQFHw5/5Y0
-tyzjQgwAqOTBoq3h06IZyHy+x5EwYWeSqJSX2SXOkjcqqrCl2TpHmqLiq5ONQ8yJ
-k5vMp2GuezpKQkiZa5IoDQ6P5MKY9ZK/uZqW/UYPHBkuGDTln91Fz5pQCW+DqufL
-buPZ/g8bedRPAD0kenFOBs0fBw5S4i6xueN2NEEFqrS3OJM0fMd0q96pge5hWagH
-9PShZD7O9dM+dRDT+7xZ2JRusv3YM9qX9anO6X/iVH9p3v6frrcBiUfNKG+xMKMg
-RCRE7eKEoAnIGnZn3BcfRe+rRgMiuMtFyAlqOcDlHHiO9g320eewUd/svdue5rqo
-c3PjxOD24XkxZFRBAAL5l2V6IUPOLfz7nPedINjXvJzOlTuW93zeBLOMwK75Qx/T
-B9QzjxOqw5fw4qK05rzR1n+mH/nxRIxv6CoIanTZMOP0UoGmMsMbDxUzkmh9kXIb
-a3F1I+GLRgFAqRiuV25cc2XfJ/w2zLxyIn+9D8StSxnCaYFTyWZRJ03ArugXBHmq
-HoztSpT/
-=zYlC
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU0lAACgkQFHw5/5Y0
+tyz0bgv+MxtyaJvF9iJC2y1Ou1Wgun3t+AuX6Airbo+CXcT+Na4MJZw2hlQI3JQp
+HyuAx+Ng+UrxtbwF6iFPCUT6lZ9GI6fq49DcMUQz5kdBZWLeVnir+q2CRMQcpXlh
+rFwmnUAYHx/g+RrSiPPi9v8TRmxtmiah+/Q3BFBYmvAEL0DsjaiTLyV6nwCwXxt7
+zQ+qxBZNV8tLtSr0jlcPVqmy88M+Oi2ad45QqETzrg95Ccmc7UuydFnKzi0RVxYV
+y8djGKALTuwi7pHMOxnyPvA9TXqFv+5txFo4bEtUMEXDx0gUf14HGvOVMiTRUDqS
+qpqjRW2qnTx/6eICJJEk1KBZuoybOTgsV/w6lmiUcukQo12NgzgzBkHvEq6q7y7c
+esEB7VBVUljhveP8ctBiuez8W3eS7Fqip1flJD4N/bt2B46npvu1jCAupTurtxI5
+VCwYNnYIKtBgjwZgyDlpc7rL6TsJQeD7k16PeLyNOP08cb+EoSPgVoGKGoRuIv15
+eAK+u4vu
+=HDB6
 -----END PGP SIGNATURE-----
 
---+n5YMjGlIrM9AeGC--
+--ugCc3rdmwKJAipoW--
