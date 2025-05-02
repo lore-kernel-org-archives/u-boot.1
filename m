@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD28C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 16:09:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1665C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 16:16:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BC38820EB;
-	Fri,  2 May 2025 18:09:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 426D6820EB;
+	Fri,  2 May 2025 18:16:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="a49oUNah";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IWVu6PYv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADDA5820F6; Fri,  2 May 2025 18:09:02 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 2BB6A82102; Fri,  2 May 2025 18:16:17 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 880E4820E2
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 18:09:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A919820E2
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 18:16:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,74 +31,74 @@ Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C85083F682
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:08:59 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8BDA63FCB1
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:16:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746202139;
- bh=WoA9AbX4BDLQY1ilhI9o/aDPJHSfdxhAw26s3nhMpO0=;
+ s=20210705; t=1746202573;
+ bh=j/c5AkVBPS0STNwt0a49TzZtXpy4WrSXGKYHbdVrJ/U=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=a49oUNahQUeyv7Pkx8bADnHFlXLSfRAcjywBEdlKZxtzOxFqjeU1n3rTnsfndI0rl
- 2twezkFkmRr41zAHpRoDK/N2KIEUYKUrSvMEcdxoEkNpOEwu1aaosDP7PSelSmkOss
- UGjTnLzDF4ibf55MrG3RgUz8wzUGQHqnuL4PFL+EYUQkMV76ilNJSLznTsLyUhTaZT
- ixEjAkzLBTM+dtqLSS9iFbqd3zfNkSnG7KsFeCUWNzJ6D3dNTtnLKsR5uymS3ywLMj
- tUhcWIJPCDb7KmsEMVQ1e+7J4Kx8J3bXlsDh+NUlqSA11enI1Pmcd4fRCqcWBR1SYh
- xpyl1NcvYJX7g==
+ b=IWVu6PYvKpROtrZDecNlfVRhtLGeryby1fuQ/lUz+RfjnkyT2IvBimM0kcphDcNBV
+ AwybUyHJg8fpt0loa7s23ocFynkH6phT3Nm/6ZXXPRkHOJ4XuRPAIG8fpn8SMRhccS
+ bZef3BL0fxgexzXIoIOv0fCAbprfzOoBgl3dfMrY9/h+nxnf10XLFzH//xq6APFmGI
+ e93HYsU/f19XBUSlNPRIe7e2xI4m3WifjNDrUxFN8Hhu/9TuHaaAkk+cqbva5J8jqI
+ J6y7wsh/DCJ9ZmEFcZUDA7XI1wjG3Q7py+NbeT6bjzcXhZVFXr8fpQbv0lylzMLkFy
+ oUstxnN6Nw5aQ==
 Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43f251dc364so12235385e9.2
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 09:08:59 -0700 (PDT)
+ 5b1f17b1804b1-43cfda30a3cso9657195e9.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 09:16:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746202139; x=1746806939;
+ d=1e100.net; s=20230601; t=1746202573; x=1746807373;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WoA9AbX4BDLQY1ilhI9o/aDPJHSfdxhAw26s3nhMpO0=;
- b=VOXf7XPT+5xSojgw5ZStBqIAvtizbgVuWYVkChjFvBy78T6ajm+r7LMsaJl5wvow/G
- U04SMGnb7SxjRYXK7hVZySctCPzbMuAhnGHMP7KzG+ppJNcu3GJCvKHcO8dttugiB3im
- fxkH+aowLtadLaeH2bV9IM4IJVlhazBCNDJ4bdf4F99BRzpWrBf1P9Ubb9/Ze7+JaPnc
- mWPvGKYsDBnhMeaG4zP/7eLAeM50BH9kraJkJtvNUs4vhCROKpNzpGptzKBDf7k8aVBX
- cSe4OmmeB+ftI+1oRTD7fRDrl3Wv/eHzTeZZJNNlju444MyZ58BZc5kU0zZ32n7IkRaA
- aHmA==
+ bh=j/c5AkVBPS0STNwt0a49TzZtXpy4WrSXGKYHbdVrJ/U=;
+ b=nsN59UYbcz6aKJqw85WrQzgfCpSrmFSwMSIYDKkQgPu03Iq+nWVu5A7BDdXEtMcrSm
+ 7TJcZlldlZObXmaI4Aw3Zk8w77hORGhEWV/jd3uq3J5HYzEOoxA342M/54L7wpeaBU/g
+ sYfJMezVFSwgu6iSkmmgvhh9KdScka2ROn0rOxNgZKGzO9CZLHCkZxqhSHCm7ugj4CTL
+ WvzFxby0IXm1InhJK7gxilcRvDO8IlezE5Yn4uQUKGU8THUOfPEIHB3taDoAbPbLFKIb
+ p+xa0DJr3Dok2hSaciJBk0Tbha7jRTERmRlAsmW/vIl90aLbdmnLKL6741f681XtLHVV
+ L6aA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZH5Ds9pJFSMU7QlB99DU4ATN6Feu70AM9Ew5WVCOxuaf6rA1Vq0sFidvFIybRbIWyEhX5Svw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwEf+EqUFlJdfkDRGgcUyl3FJ8AwtLoZRXxmp4DJdov0mbcAglU
- gkU44GpEDbQhaLQMV4VqL0QR6FIav6CQx1ImLmYdYuY0iVDEnCxr9zSOEVR+Dq5tEOzwBXXRz6S
- +6iQGxCroXtVhlGzMI0FIW7BTjCMrxSfCAVSkL1TbZXxALx59NIKvDocn35Lv7Lxy4Gs=
-X-Gm-Gg: ASbGnctHzWMnbIqNU5rdd2eJqbmPk9rGBdCoMG1KXRsNsHfHL9a30N3+YsyaygWyD3I
- FEX0FMW1ulJT0RqvyZnABXUkt/1zTY1yrISgJEYFDqd8qXfSBNnvGHp5THDJSFS82IvFD3dhutT
- 9NBLES4NHb824lPny+6+8PyDXEPeoxcOXFTfvHFqlVl51Ww3i5CLUx9mLyrMn35q0ka48S4RaYk
- 9o7+o8hDLS6FkhRdiq25sTCSBbzy/aA7LtISBZHpYbLKNLSjnsge/ZNVIKIwXEX+/L6uEbbUsbz
- El654c4QQJYEbdx0ZiXx57P6TIyhA1D+4BW+Fr9EbkGVWlFu3wKbJXP5lFBniAixgUgtj/3q8W8
+ AJvYcCXWXYXaAzRQwmo15kWf6joYH6uW6TTqEwjwmMogy+MhSWkk0pbVvxSS/xIiwFUPuay+9V13BpI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOcsgJaop4Ic9Xc7FH8ZhvBljjuvWGsjP7cM/c6kK9MqiE/din
+ y9UfJyqjTgpIvx3YdoXnTMQC1t/4tFiPHJXbhvaQ5Nt+21athsR1IQHwsNGli04QMAbn+lylTCE
+ I/yO48sh8zJ0dJkA/FgwEMn4orEv+OOqxS+GgwYxu/gsrkXRLlxcmmH+VCwF81Oz1nAk=
+X-Gm-Gg: ASbGncvolBnsVQZBnvHz8vZkKZWPXUn8aqGDXISMUCowMbYv6gPWE3VuJVP5c1K5dfk
+ gIIvEPOb57eCGIFB/KKHtk/xiL1YTu542/AzYUfPxWxJVDosFvr8GzWL2hyc2Jf2CjsxEy49qVZ
+ 9uqW80PvBPAxndsA8OOwXQSauE5BHtUO4QOsCt8tDN8/UVa1gdzCcR0L8dSTsdxktyiAyBB+tZK
+ iL52vhcU+8LTEMzEavk6xo4wFOYFYBU38aifLWNfi0oxrzSDBKKjAE/4DOJBLi1MQMX3GGs13qJ
+ bFl5VEyznVxeV+UgCd6fJN/uwhY+YXL1GUIvalYsTAyyOuWbdyLijcsxlEa7wG0ZySK8V4g9uu8
  =
-X-Received: by 2002:a05:600c:8711:b0:43c:eeee:b713 with SMTP id
- 5b1f17b1804b1-441bbf2cc8dmr25067655e9.20.1746202139125; 
- Fri, 02 May 2025 09:08:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGWTr9nUZt/CoVrKDOMKoMgG5rl2qGX0eqSbRyD7CShNR8p0NzXcne2gSLhqyXS3a2qvTVn6Q==
-X-Received: by 2002:a05:600c:8711:b0:43c:eeee:b713 with SMTP id
- 5b1f17b1804b1-441bbf2cc8dmr25067175e9.20.1746202138628; 
- Fri, 02 May 2025 09:08:58 -0700 (PDT)
+X-Received: by 2002:a05:600c:6748:b0:43c:fabf:9146 with SMTP id
+ 5b1f17b1804b1-441bbec4095mr37244395e9.17.1746202573228; 
+ Fri, 02 May 2025 09:16:13 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHWlWLHvqQ7zAC/QdYxW35dDz4Q65uuN5qCADiWaGDNuSIp0rOHqhibOy8Pj5NwhUzzaTIwFg==
+X-Received: by 2002:a05:600c:6748:b0:43c:fabf:9146 with SMTP id
+ 5b1f17b1804b1-441bbec4095mr37243935e9.17.1746202572897; 
+ Fri, 02 May 2025 09:16:12 -0700 (PDT)
 Received: from ?IPV6:2a02:3035:6e0:3644:2de:dbee:fb2f:9ba3?
  ([2a02:3035:6e0:3644:2de:dbee:fb2f:9ba3])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-441b2ad784asm93785515e9.7.2025.05.02.09.08.57
+ 5b1f17b1804b1-441b89d1358sm48917435e9.10.2025.05.02.09.16.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 May 2025 09:08:58 -0700 (PDT)
-Message-ID: <279d1706-d140-409e-a74a-4f1d9eaef311@canonical.com>
-Date: Fri, 2 May 2025 18:08:56 +0200
+ Fri, 02 May 2025 09:16:12 -0700 (PDT)
+Message-ID: <27c7a370-ad40-4935-8b2a-f27468a01467@canonical.com>
+Date: Fri, 2 May 2025 18:16:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 1/8] boot: EFI boot manager does not depend on BootOrder
+Subject: Re: [RFC 3/8] boot: make BOOTMETH_EFILOADER default=n
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
 References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
- <20250421162555.1200687-2-heinrich.schuchardt@canonical.com>
- <CAFLszTiVuNqAzQ=hi5_Uq6Jo2EUJkDtE6_gDaU=LY8hAXiL8ww@mail.gmail.com>
+ <20250421162555.1200687-4-heinrich.schuchardt@canonical.com>
+ <CAFLszTjcCXDnjOjpD88tGcvSz1AOAouyHKsynzCC3tngDqzOvQ@mail.gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTiVuNqAzQ=hi5_Uq6Jo2EUJkDtE6_gDaU=LY8hAXiL8ww@mail.gmail.com>
+In-Reply-To: <CAFLszTjcCXDnjOjpD88tGcvSz1AOAouyHKsynzCC3tngDqzOvQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -123,70 +123,41 @@ On 5/2/25 16:49, Simon Glass wrote:
 > On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
 > <heinrich.schuchardt@canonical.com> wrote:
 >>
->> The EFI boot manager bootmeth does not require variable BootOrder to be
->> preexisting. It creates this variable.
+>> The boot method is deprecated as the EFI boot manager covers this
+>> functionality.
 >>
 >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >> ---
->>   boot/bootmeth_efi_mgr.c | 21 +++------------------
->>   1 file changed, 3 insertions(+), 18 deletions(-)
+>>   boot/Kconfig | 1 -
+>>   1 file changed, 1 deletion(-)
 >>
->> diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
->> index 42b8863815e..1669cbed5bd 100644
->> --- a/boot/bootmeth_efi_mgr.c
->> +++ b/boot/bootmeth_efi_mgr.c
->> @@ -47,30 +47,15 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
->>
->>   static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
->>   {
->> -       struct efi_mgr_priv *priv = dev_get_priv(dev);
->> -       efi_status_t ret;
->> -       efi_uintn_t size;
->> -       u16 *bootorder;
->> -
->> -       if (priv->fake_dev) {
->> -               bflow->state = BOOTFLOWST_READY;
->> -               return 0;
->> -       }
->> +       int ret
->>
->>          ret = efi_init_obj_list();
->>          if (ret)
->>                  return log_msg_ret("init", ret);
->>
->> -       /* Enable this method if the "BootOrder" UEFI exists. */
->> -       bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
->> -                               &size);
->> -       if (bootorder) {
->> -               free(bootorder);
->> -               bflow->state = BOOTFLOWST_READY;
->> -               return 0;
->> -       }
->> +       bflow->state = BOOTFLOWST_READY;
->>
->> -       return -EINVAL;
->> +       return 0;
->>   }
->>
->>   static int efi_mgr_read_file(struct udevice *dev, struct bootflow *bflow,
+>> diff --git a/boot/Kconfig b/boot/Kconfig
+>> index 71ddb37f6bb..b973d9eb0a7 100644
+>> --- a/boot/Kconfig
+>> +++ b/boot/Kconfig
+>> @@ -595,7 +595,6 @@ config BOOTMETH_EFILOADER
+>>          bool "Bootdev support for EFI boot"
+>>          depends on EFI_BINARY_EXEC
+>>          imply CMD_TFTPBOOT if CMD_NET
+>> -       default y
+>>          help
+>>            This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
+>>            launching EFI\BOOT\BOOT<ARCH>.EFI if not boot option matches.
 >> --
 >> 2.48.1
 >>
 > 
-> How do we know if the board is using EFI bootmgr? My understanding was
-> that this was a way to find out?
+> As mentioned on the other patch, we need to keep this enabled and it
+> isn't obsolete.
+> 
+> Regards,
+> Simon
 
-The boot manager must always run.
+Please, read the UEFI specification especially chapter 3 "Boot Manager".
 
-The check for the BootOrder variable introduced in commit f2bfa0cb1794 
-is a bug.
-
-The boot manager handles in sequence:
-
-* Try to boot as indicated by BootNext.
-* Try to boot as indicated by BootOrder.
-* Try to boot default path for available media.
-   This will add Boot#### entries and update BootOrder.
+* The functionality is fully covered by the boot manager.
+* The current implementation of the method does not comply with the UEFI 
+specification. Especially if run before the boot manager.
 
 Best regards
 
