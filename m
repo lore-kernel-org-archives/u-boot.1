@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06EFDC3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:50:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D33F2C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:50:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A501782153;
-	Fri,  2 May 2025 16:48:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC64B82AD2;
+	Fri,  2 May 2025 16:48:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LbkeNkzC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WoL80qRT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 811ED82AB1; Fri,  2 May 2025 16:48:12 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 29E2682A8B; Fri,  2 May 2025 16:48:14 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A73082153
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:48:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D31A782AAE
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:48:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-85b3f92c8dfso71300739f.2
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:48:10 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-8616987c261so73134739f.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:48:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197288; x=1746802088; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197290; x=1746802090; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M0nmbiHU3nMfsNSfEW2oQbJEVuKTOtakQM/W9gY5ONs=;
- b=LbkeNkzCikCp64Nkb10ObA828vcJjXQaq9xUZ1f1VF8yPWwoyDXDn86u0fHPvyU0O4
- harY/cS/11v+3l0fW3Upg1Nq+IsqrkPNU+QDrvpi2ycn498VZ5a0idKHOUFh9gt9NraC
- 5mLOBrahbKqZgq/WdFFNhetwmFusF12FY1/Uo=
+ bh=/Y76B+umZQi7pP3JUhlKgT5j8+3rOfSSgzZbv6gXYzw=;
+ b=WoL80qRTXAbyBspfknR95fRmh5foS/ZqweRQGr8AaSr2e7oPBGe2lYIUZQcNbfaCf2
+ 4neTmR4aVy6BEa5sQXy0Iw8gIbqkm/QSZLna1G+P6xefeVIqRbsNh7LrhGVz5V+weUfp
+ 6Q+ipCbGvcBZQzAwK/3SxhWEiu1aPwRW3yTpk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197288; x=1746802088;
+ d=1e100.net; s=20230601; t=1746197290; x=1746802090;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M0nmbiHU3nMfsNSfEW2oQbJEVuKTOtakQM/W9gY5ONs=;
- b=iUUhPVneaFtPRiQaSf89xpMARA9BV6RC31zzIwNLukUynx37W9b90znBUX2bA5cpXG
- CjYh9mOB5HKW3Al+e0THyQpfsOnPV9Ppk4eMYNqWL1K8oFleDrFWGap7qs5fSl/bu5sp
- CYwi3WUog9i4I1axSBVeeq7SOu1kuH8M9T4gK9PrZQNGus279tQTQT+svcmI6sNwYE+q
- l6D+zCQi2u+iJ2mW3XpvZUrO/Ek3Qg/klWmq5rDfNMm0KVTt6dUFmeqybGOpd4ueH7Ky
- /wLkGxnofhjRVqpK9WujRSU0XV6oK96YU/gb/a4ot1uXNfZx/+9/2002bSmkRZ+ISg/B
- lP5w==
-X-Gm-Message-State: AOJu0YyYibxP+1WkU+OPxEMBvsoI4uanz0VmJashgcRJQM/jZXSS7lxl
- whw9yCKFi25ruao9AL7pC6OktCGB2scRQB4Mr3fBodInqJG1GplHkFEDUHZNaJEXjXjGAUWGawg
+ bh=/Y76B+umZQi7pP3JUhlKgT5j8+3rOfSSgzZbv6gXYzw=;
+ b=vhB70/SXOYTTQRPqDJhZzUikq3vzHkYCb/2g/6OPuBsXyOIagDlC3wID2Oj9c1SYuL
+ b4ptUL7/N5SSlkn0vvjlARAUyfrpCE25LCcypPo/YgxpTz7hks6C1aJTHiL82nPa0If/
+ KXAyg3vZVvc5rIQQuDDLeWpVNHBjUkiNt6EpXYHe5zZo/I2lpUcnwhcdKjNZwm1jeA5W
+ Y2ACDMQkdf/4qNzZwVcgwXhtmhwludoYO+1xGwv7uS9AOePHqoRT0ofMqRr9kITh178Q
+ jjIV3LtgqpiRBS6LrNhH+c62ZNdLIoR+U0FlK/NBrI4h1G+qWccjPy8Tt5DiNhFAUZz2
+ us7w==
+X-Gm-Message-State: AOJu0YxqRhf0Ysj+CmiESsrEyME7f+jGUYAgvL4TwIoCoy09pImM0BbC
+ okV6zPchCMZ1+TMRfXCR6Bp/ypRWbQRcVvBMIab1YvzeIJGLS3PelfLgxBCj2ST9JoRspkq+T0k
  =
-X-Gm-Gg: ASbGncutcK+lc1VbELGMO5ErWnH/q/LLfUGAKDZBcke8kd8ZmawkH9jxMcYOhHCymLZ
- 9fGayPuSM3kR27nMvQylXu5C3UlACe6rRE1CiMjafFw4DxqZHXCVW80tUKvGpTIbULSme7Xp9vM
- vS/YPpcGGpFLrANy99XQWH24+3Gr2gAylomzTnIPoXwnUh6fKGbeD/Li904JoiqYgkJ0jBDn9SO
- fDLAfXpTbT6VWUaAV/YwpNsNpycD2wXBSJRwOSrtBAnFWDWfqp4sGEiJ0A1EQJGJO8O3RkoufTX
- zIMLhq2gKMuuqemNoWFCuvQ+h6C2IYZ0wpUteWQ/NcCvSXgAtcK9E0VQrSc1O1LZDtLfmArMKdh
- Lew==
-X-Google-Smtp-Source: AGHT+IGe4/A1Iyp1ikZ8JOsz/PHlf+2EztYZ8+NsGaV8ZTR7RhoOVCkZj4r3tF1se6+C9RC32Xc5eA==
-X-Received: by 2002:a05:6602:4899:b0:864:4a66:f4df with SMTP id
- ca18e2360f4ac-8669f9b5d70mr474313839f.6.1746197288376; 
- Fri, 02 May 2025 07:48:08 -0700 (PDT)
+X-Gm-Gg: ASbGnctxpEcxgF886H6tMsKe5WEv1MNp5ePCdGn96fVKsjbliRbGjRpkCgt/3UY2m/Z
+ 6u4ZDQ7nQZAM2WI3z5I69MAmmep6qwT5bvrsvDWQDl+57BHsdLgozHO+x0NMH6zK6FRVACn3RQr
+ yNQhY+T2xmx+Rih1dcnt11+rdxH1sso0hqjn3G+b4+2MhtTDOyskpnBEoeJbqMkmjhPQH0FuqW7
+ W4rgle2M4xnV+kqIaacGvDm+CQLMkzuzTqOPOVZUp6qRDfismFjE4DPvQ25nIQ28jsFd9swMfDq
+ 9VwYuZr7E03iUW/ul8heQPMYejMDh2qFNxaNNNoi6l0WpzM37de/c2wINfSiTHr+qDnJu8AHQPW
+ Hlw==
+X-Google-Smtp-Source: AGHT+IGaXP1nG1EF6OtzWshOJhS64ge3PNlHz52dj99fpoMQMcVkPYzkpiqmtFbx2Lyzl8dhuJQ/GQ==
+X-Received: by 2002:a05:6602:b83:b0:861:d71f:33e3 with SMTP id
+ ca18e2360f4ac-8669f9adb5cmr431684239f.5.1746197290017; 
+ Fri, 02 May 2025 07:48:10 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.48.07
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.48.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:48:07 -0700 (PDT)
+ Fri, 02 May 2025 07:48:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 24/60] expo: Pass in the video device for cedit_prepare()
-Date: Fri,  2 May 2025 08:46:22 -0600
-Message-ID: <20250502144718.313633-25-sjg@chromium.org>
+Subject: [PATCH v2 25/60] expo: Test rendering a lineedit
+Date: Fri,  2 May 2025 08:46:23 -0600
+Message-ID: <20250502144718.313633-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
 References: <20250502144718.313633-1-sjg@chromium.org>
@@ -97,163 +96,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present this function locates it own video device. Pass it in to
-provide more flexibility.
+Check the rendering output when adding characters to a line-edit object.
+
+Add a separate test to check behaviour when starting with existing text
+in the lineedit. The cursor should start at the end.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-
 ---
 
 Changes in v2:
-- Add new patch to pass in the video device for cedit_prepare()
+- Add new patch to test rendering a lineedit
 
- boot/cedit.c      | 18 ++++++++++--------
- include/cedit.h   |  4 ++--
- test/boot/cedit.c | 20 ++++++++++++++++----
- 3 files changed, 28 insertions(+), 14 deletions(-)
+ test/boot/cedit.c | 113 ++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 110 insertions(+), 3 deletions(-)
 
-diff --git a/boot/cedit.c b/boot/cedit.c
-index f1a9ee7ce20..eac851b395a 100644
---- a/boot/cedit.c
-+++ b/boot/cedit.c
-@@ -100,19 +100,16 @@ int cedit_arange(struct expo *exp, struct video_priv *vpriv, uint scene_id)
- 	return 0;
- }
- 
--int cedit_prepare(struct expo *exp, struct video_priv **vid_privp,
-+int cedit_prepare(struct expo *exp, struct udevice *vid_dev,
- 		  struct scene **scnp)
- {
-+	struct udevice *dev = vid_dev;
- 	struct video_priv *vid_priv;
--	struct udevice *dev;
- 	struct scene *scn;
- 	uint scene_id;
- 	int ret;
- 
- 	/* For now we only support a video console */
--	ret = uclass_first_device_err(UCLASS_VIDEO, &dev);
--	if (ret)
--		return log_msg_ret("vid", ret);
- 	ret = expo_set_display(exp, dev);
- 	if (ret)
- 		return log_msg_ret("dis", ret);
-@@ -143,7 +140,6 @@ int cedit_prepare(struct expo *exp, struct video_priv **vid_privp,
- 	if (ret)
- 		return log_msg_ret("dim", ret);
- 
--	*vid_privp = vid_priv;
- 	*scnp = scn;
- 
- 	return scene_id;
-@@ -193,11 +189,17 @@ int cedit_do_action(struct expo *exp, struct scene *scn,
- int cedit_run(struct expo *exp)
- {
- 	struct video_priv *vid_priv;
--	uint scene_id;
-+	struct udevice *dev;
- 	struct scene *scn;
-+	uint scene_id;
- 	int ret;
- 
--	ret = cedit_prepare(exp, &vid_priv, &scn);
-+	ret = uclass_first_device_err(UCLASS_VIDEO, &dev);
-+	if (ret)
-+		return log_msg_ret("vid", ret);
-+	vid_priv = dev_get_uclass_priv(dev);
-+
-+	ret = cedit_prepare(exp, dev, &scn);
- 	if (ret < 0)
- 		return log_msg_ret("prep", ret);
- 	scene_id = ret;
-diff --git a/include/cedit.h b/include/cedit.h
-index a9305ceebcb..319a61aecb8 100644
---- a/include/cedit.h
-+++ b/include/cedit.h
-@@ -56,11 +56,11 @@ int cedit_run(struct expo *exp);
-  * This ensures that all menus have a selected item.
-  *
-  * @exp: Expo to use
-- * @vid_privp: Set to private data for the video device
-+ * @dev: Video device to use
-  * @scnp: Set to the first scene
-  * Return: scene ID of first scene if OK, -ve on error
-  */
--int cedit_prepare(struct expo *exp, struct video_priv **vid_privp,
-+int cedit_prepare(struct expo *exp, struct udevice *vid_dev,
- 		  struct scene **scnp);
- 
- /**
 diff --git a/test/boot/cedit.c b/test/boot/cedit.c
-index 5b3e9b586a6..746f60067fd 100644
+index 746f60067fd..97ca63b3082 100644
 --- a/test/boot/cedit.c
 +++ b/test/boot/cedit.c
-@@ -63,6 +63,7 @@ static int cedit_fdt(struct unit_test_state *uts)
- 	struct video_priv *vid_priv;
- 	extern struct expo *cur_exp;
+@@ -234,21 +234,28 @@ static int cedit_cmos(struct unit_test_state *uts)
+ }
+ BOOTSTD_TEST(cedit_cmos, UTF_CONSOLE);
+ 
+-/* Check the cedit displays correctely */
++/* Check the cedit displays correctly */
+ static int cedit_render(struct unit_test_state *uts)
+ {
  	struct scene_obj_menu *menu;
-+	struct udevice *dev;
- 	ulong addr = 0x1000;
- 	struct ofprop prop;
- 	struct scene *scn;
-@@ -72,9 +73,12 @@ static int cedit_fdt(struct unit_test_state *uts)
- 	void *fdt;
- 	int i;
- 
-+	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
-+	vid_priv = dev_get_uclass_priv(dev);
-+
- 	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
- 
--	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
-+	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, dev, &scn));
- 
- 	/* get a menu to fiddle with */
- 	menu = scene_obj_find(scn, ID_CPU_SPEED, SCENEOBJT_MENU);
-@@ -134,12 +138,16 @@ static int cedit_env(struct unit_test_state *uts)
  	struct video_priv *vid_priv;
  	extern struct expo *cur_exp;
- 	struct scene_obj_menu *menu;
-+	struct udevice *dev;
++	struct expo_action evt;
+ 	struct expo_action act;
+-	struct udevice *dev;
++	struct udevice *dev, *con;
++	struct stdio_dev *sdev;
  	struct scene *scn;
- 	char *str;
+ 	struct expo *exp;
++	int i;
  
  	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
- 
--	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
-+	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
-+	vid_priv = dev_get_uclass_priv(dev);
-+
-+	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, dev, &scn));
- 
- 	/* get a menu to fiddle with */
- 	menu = scene_obj_find(scn, ID_CPU_SPEED, SCENEOBJT_MENU);
-@@ -189,11 +197,14 @@ static int cedit_cmos(struct unit_test_state *uts)
- 	struct scene_obj_menu *menu, *menu2;
- 	struct video_priv *vid_priv;
- 	extern struct expo *cur_exp;
-+	struct udevice *dev;
- 	struct scene *scn;
- 
- 	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
- 
--	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
-+	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
-+	vid_priv = dev_get_uclass_priv(dev);
-+	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, dev, &scn));
- 
- 	/* get the menus to fiddle with */
- 	menu = scene_obj_find(scn, ID_CPU_SPEED, SCENEOBJT_MENU);
-@@ -238,7 +249,8 @@ static int cedit_render(struct unit_test_state *uts)
  
  	exp = cur_exp;
- 	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
--	ut_asserteq(ID_SCENE1, cedit_prepare(exp, &vid_priv, &scn));
+-	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
++	sdev = stdio_get_by_name("vidconsole");
++	ut_assertnonnull(sdev);
++	con = sdev->priv;
++
++	dev = dev_get_parent(con);
+ 	vid_priv = dev_get_uclass_priv(dev);
+ 	ut_asserteq(ID_SCENE1, cedit_prepare(exp, dev, &scn));
+ 
+@@ -295,9 +302,109 @@ static int cedit_render(struct unit_test_state *uts)
+ 	ut_assertok(expo_render(exp));
+ 	ut_asserteq(4986, video_compress_fb(uts, dev, false));
+ 
++	/* move to the line-edit field */
++	act.type = EXPOACT_POINT_OBJ;
++	act.select.id = ID_MACHINE_NAME;
++	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(4872, video_compress_fb(uts, dev, false));
++
++	/* open it */
++	act.type = EXPOACT_OPEN;
++	act.select.id = ID_MACHINE_NAME;
++	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(4841, video_compress_fb(uts, dev, false));
++
++	/*
++	 * Send some keypresses. Note that the console must be enabled so that
++	 * the characters actually reach the putc_xy() in console_truetype,
++	 * since in scene_textline_send_key(), the lineedit restores the
++	 * vidconsole state, outputs the character and then saves the state
++	 * again. If the character is never output, then the state won't be
++	 * updated and the lineedit will be inconsistent.
++	 */
++	ut_unsilence_console(uts);
++	for (i = 'a'; i < 'd'; i++)
++		ut_assertok(scene_send_key(scn, i, &evt));
++	ut_silence_console(uts);
++	ut_assertok(cedit_arange(exp, vid_priv, scn->id));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(5009, video_compress_fb(uts, dev, false));
++
+ 	expo_destroy(exp);
+ 	cur_exp = NULL;
+ 
+ 	return 0;
+ }
+ BOOTSTD_TEST(cedit_render, UTF_DM | UTF_SCAN_FDT);
++
++/* Check the cedit displays lineedits correctly */
++static int cedit_render_lineedit(struct unit_test_state *uts)
++{
++	struct scene_obj_textline *tline;
++	struct video_priv *vid_priv;
++	extern struct expo *cur_exp;
++	struct expo_action evt;
++	struct expo_action act;
++	struct udevice *dev, *con;
++	struct stdio_dev *sdev;
++	struct scene *scn;
++	struct expo *exp;
++	char *str;
++	int i;
++
++	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
++
++	exp = cur_exp;
++	sdev = stdio_get_by_name("vidconsole");
++	ut_assertnonnull(sdev);
++	con = sdev->priv;
++
++	dev = dev_get_parent(con);
 +	vid_priv = dev_get_uclass_priv(dev);
 +	ut_asserteq(ID_SCENE1, cedit_prepare(exp, dev, &scn));
- 
- 	menu = scene_obj_find(scn, ID_POWER_LOSS, SCENEOBJT_MENU);
- 	ut_assertnonnull(menu);
++
++	/* set up an initial value for the textline */
++	tline = scene_obj_find(scn, ID_MACHINE_NAME, SCENEOBJT_TEXTLINE);
++	ut_assertnonnull(tline);
++	str = abuf_data(&tline->buf);
++	strcpy(str, "my-machine");
++	ut_asserteq(20, tline->pos);
++
++	ut_assertok(expo_render(exp));
++	ut_asserteq(5336, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
++
++	/* move to the line-edit field */
++	act.type = EXPOACT_POINT_OBJ;
++	act.select.id = ID_MACHINE_NAME;
++	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(5363, video_compress_fb(uts, dev, false));
++
++	/* open it */
++	act.type = EXPOACT_OPEN;
++	act.select.id = ID_MACHINE_NAME;
++	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
++	// ut_asserteq(0, tline->pos);
++	ut_assertok(expo_render(exp));
++	ut_asserteq(5283, video_compress_fb(uts, dev, false));
++
++	/* delete some characters */
++	ut_unsilence_console(uts);
++	for (i = 0; i < 3; i++)
++		ut_assertok(scene_send_key(scn, '\b', &evt));
++	ut_silence_console(uts);
++	ut_asserteq_str("my-mach", str);
++
++	ut_assertok(cedit_arange(exp, vid_priv, scn->id));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(5170, video_compress_fb(uts, dev, false));
++
++	expo_destroy(exp);
++	cur_exp = NULL;
++
++	return 0;
++}
++BOOTSTD_TEST(cedit_render_lineedit, UTF_DM | UTF_SCAN_FDT);
 -- 
 2.43.0
 
