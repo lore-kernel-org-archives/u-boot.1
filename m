@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4003EC369DC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 02:50:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 501D1C369DC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 02:50:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65A5B8070C;
-	Fri,  2 May 2025 04:50:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC3288209C;
+	Fri,  2 May 2025 04:50:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fkVO5sX9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d1G/KrNZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4EA38070C; Fri,  2 May 2025 04:50:41 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 2011A8209C; Fri,  2 May 2025 04:50:46 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC87B801BE
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 04:50:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49B4B801BE
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 04:50:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3d4436ba324so13443825ab.2
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 19:50:38 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-861525e9b0aso144190939f.3
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 19:50:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746154237; x=1746759037; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=sjQNdwLQR8UyFabS+/JYOybE2yleqn14m9qcPrsFeEk=;
- b=fkVO5sX9t4xltBXQbc8toNn+VngP1sZ7bHsUWd1yOvLYDTu6jGb2gSFVaDdfB+vllh
- BrSM5xCzBf0vXfNc5uG9U5FebKswGackbi4tMQDuBoYDmPer7yRdm4weuHjQi5G7mS9V
- 2ebZZueQO045zxo74+54IMW0BDyA+KQsuvm3M=
+ d=chromium.org; s=google; t=1746154241; x=1746759041; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Vamrkx58a+x/Q6uLRaUb43ZQIsys23JPGTgK3iJ5S3I=;
+ b=d1G/KrNZ+U6ivnXuGGMJk7cVqURrgV+/AZQ+cfWWOT+SUD7yE8cO6uXbkVpo+fx1Cc
+ zTnNCEia7EgvoEz7l6UshmZti0sm5a9wR51nk09x9Ih9SigTh1mnov1YFZzZDgdnJjlB
+ GMahgYXYhuSCwzdu4+juXz9oWkpIfHsk1RLXM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746154237; x=1746759037;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sjQNdwLQR8UyFabS+/JYOybE2yleqn14m9qcPrsFeEk=;
- b=lFYoy4L0VwxO53Mt7ur6RM1XElY1MLJUGYfsrobaSK2khYJb6BmxL+kjk0CIXTRgrb
- 1q2uviC5L4Cv+qGqY/0eVBvrO5oMYx5m22YwQnd6yWboFXtw9FRJRjkk/HANEnv545an
- IgJyhjT2JffRjDWq27EYFBKWziceMbal15WPfsIxE/vFOwwFTbSWE8z4dwscst4t/FEt
- qlSqdzwphTitCyvW7ih1pHAfSqz+4dPPy2gnf0Qc5UX0Q60nZqO+DWptHlo4jUrqfTIb
- +e/MQ/1jkDjAHmTOVgzfvzadFPTmol2Tv4+NZyzqErAD7PBLMdIsmFxgQdRGKdXFIL59
- ulrw==
-X-Gm-Message-State: AOJu0YxtasygaQKZ2c90MB31XWGRhlfyj/4nnDXMVeNzRd7XWE8s2Nh8
- h9QWB/el1ntNKWy9tmXh+z8mmQue7NSEHLpPOsOzynBhS64NnlLdBZ6bTQYTXGOe26P2KCFl3aU
+ d=1e100.net; s=20230601; t=1746154241; x=1746759041;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Vamrkx58a+x/Q6uLRaUb43ZQIsys23JPGTgK3iJ5S3I=;
+ b=mtb4IHFcVUU2gus3p8OTzPvbAwZlFVCxJ1c8ZN2Rd/7z2HNRhQUa0xGnPJ88dPUl+J
+ ny2F4JIudZ4Ck/o0x1we18tPpCrdhLNu9OfARULuggJzmv4Yd3XBS1kYuLoE0lMEDnay
+ WGXOh3YZVhKx/LdOJs8DrX+tNujdWUmtRToljNlzErKtvu5bVSlm+v3/2b3XkBOfhJfr
+ O0DVe1iOgeGFc3PbV9Cj+vvyBp7ZhspHj1CqevkwowLvjm/41fnyBYjtVO46ejQbZtWK
+ AbkiM40s8ZosZ43T4igqmjkKYKnBbcwvOvKa4SRuudXL+ZY9y4ZlPmUgckKXy+qbfMiH
+ ftqA==
+X-Gm-Message-State: AOJu0YwZLymBSnEoKjmvdXezO9ETmq2meCQaAvxlR3OxY+Jioe5flkTU
+ i0RQOzZSKWqk4sd2NJfyxlfLYvb6fF8EXtlmhdE+xNo4Ey0N6y6wHPk8yHrWVcuCp0/+vt1L6YA
  =
-X-Gm-Gg: ASbGncvVuzcJDTe7TAxvxohmWr6AaLI/o+XAvUzBPqqGLqriVBIiEqx6+nt+OeSLI8b
- 7fFaj9f7HHC2pnlqrthupLX+GWH8DnqKf0W1tXkSIPCT7Jldsw9lvbUbN+91GQObo5MgTwseFqB
- JFj9E/P+HazRj6tHQEEd63TL+q0I+hq40PtVrWuacRISUiFg0tU85MvDguFC538MU4leNp44eRU
- ckfVOt/MbaEu8GKmIVSft92GHde/6035ENERBZx9NyXo+6P+JxpLZui7YMqdLZMqI3c0Ir+Ca5C
- YC0y2hWYqgvbizxvitLB/lxS6O8jgza26Tb0uxfN7XqxyhOTSgPyy+SLJg20pXbhFPoJnjyIgdx
- Ltw==
-X-Google-Smtp-Source: AGHT+IG/XuhkDfTvDrPDUnNFlqP638R5pQuU++zCJXEay1dwC+vVHrGiaBC7O/j4B5hc28O3Z5QUPg==
-X-Received: by 2002:a05:6e02:2307:b0:3d9:2aa3:fe2e with SMTP id
- e9e14a558f8ab-3d97c184cbemr13739455ab.10.1746154237030; 
- Thu, 01 May 2025 19:50:37 -0700 (PDT)
+X-Gm-Gg: ASbGncvZptmwFUcuaoXek6F5FTOWl1VwbvGSGVm/H+agPE/dW8/vgES9EjS1Yr4ELeJ
+ 5hnphs+uDGpYRbJGaB5jyB5FiQz86dGcyEZI6Zsvs33AdLFuite9WyQ3f0Vy9seREQ8XaaVda5R
+ Do7p55HntH9cIbNqyfaBwBohlBVK6xvmIkTpEk5OX3nJll6MpSGkTFdSBm5hz4H0O5MZhBbEjIk
+ gPfW90FHby0pKE4o7pg4pKWyis16axR2REHDRd2feVABpVDVF5FBHR6no8T5/EBtmNOI9fPVQDs
+ Rfk5zqls4sIqJrZ4CvodIZMlKGbO1y8LtATfJ+Cwv5EDuFcbBNmFLAlAxpduJeiYH/x054wJPCk
+ LVg==
+X-Google-Smtp-Source: AGHT+IGk+TOQfxZNaO3DoUvMuYNFsclGEw1uiTn9JKh/KjhtwDBpWau7FD9+YS4dv4SASRBrnUvPhw==
+X-Received: by 2002:a05:6602:3718:b0:864:677e:ddae with SMTP id
+ ca18e2360f4ac-8669f9ac967mr235860739f.6.1746154241263; 
+ Thu, 01 May 2025 19:50:41 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f88a918039sm166627173.55.2025.05.01.19.50.35
+ 8926c6da1cb9f-4f88a918039sm166627173.55.2025.05.01.19.50.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 19:50:36 -0700 (PDT)
+ Thu, 01 May 2025 19:50:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 0/3] RFC: test: Bring in the test hooks
-Date: Thu,  1 May 2025 20:50:16 -0600
-Message-ID: <20250502025026.4140184-1-sjg@chromium.org>
+Subject: [PATCH 2/3] doc: Tidy up the hooks documentation
+Date: Thu,  1 May 2025 20:50:18 -0600
+Message-ID: <20250502025026.4140184-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250502025026.4140184-1-sjg@chromium.org>
+References: <20250502025026.4140184-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,428 +95,296 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During a recent discussion with Heinrich we discussed why the hooks are
-kept in a separate repo.
+Now that these files are within the repo, link the documentation to the
+normal U-Boot documentation. Update directory paths and convert it to
+rST format.
 
-The amount of code is small, a tenth of the size of the recently added
-lwip, just by way of example. Testing is a critical part of U-Boot and
-one of the things that distinguishes it from firmware projects that have
-not kept up in this area. By having the tests somewhere else, we are
-signalling that it is unusual, or difficult, or optional.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-The hooks mechanism also needs something of an update to take account of
-real boards in 2025. That will be much easier to undertake if the code
-that test/py talks to is in the same repo.
+ doc/develop/index.rst                         |  1 +
+ doc/develop/py_testing.rst                    | 22 +++---
+ .../README.md => doc/develop/test_hooks.rst   | 72 +++++++++++--------
+ 3 files changed, 54 insertions(+), 41 deletions(-)
+ rename test/hooks/README.md => doc/develop/test_hooks.rst (87%)
 
-This series brings the hook files in as first-class citizens of U-Boot.
-
-If we do go ahead with this, I will send a different series which has
-separate commits (with correct author) in the u-boot-test-hooks repo.
-
-
-Simon Glass (3):
-  test: Bring in the test hooks
-  doc: Tidy up the hooks documentation
-  CI: Update to use the hooks in the U-Boot repo
-
- .azure-pipelines.yml                          |  15 +-
- .gitlab-ci.yml                                |  16 +-
- doc/develop/index.rst                         |   1 +
- doc/develop/py_testing.rst                    |  22 +-
- doc/develop/test_hooks.rst                    | 306 ++++++++++++++++++
- test/hooks/bin/OLI01/conf.mx6qsabrelite_na    |  26 ++
- .../conf.integratorcp_cm926ejs_qemu           |  27 ++
- test/hooks/bin/bill-the-cat/conf.qemu_mips_na |  28 ++
- .../bill-the-cat/conf.vexpress_ca15_tc2_qemu  |  27 ++
- .../bin/common-config.cros-servo-dut-control  |  69 ++++
- test/hooks/bin/common.labgrid-trini           |  35 ++
- test/hooks/bin/console.fvp                    |  28 ++
- test/hooks/bin/console.labgrid-sjg            |  42 +++
- test/hooks/bin/console.labgrid-trini          |  24 ++
- test/hooks/bin/console.picocom                |  42 +++
- test/hooks/bin/console.qemu                   |  35 ++
- test/hooks/bin/download.imx_usb               |  23 ++
- test/hooks/bin/download.l4t-exec-uboot        |  25 ++
- test/hooks/bin/download.tegra-uboot-flasher   |  24 ++
- test/hooks/bin/ellesmere/common-labgrid-sjg   |  46 +++
- test/hooks/bin/ellesmere/conf.all             |  24 ++
- .../hooks/bin/ellesmere/conf.evb-ast2500_qemu |  11 +
- test/hooks/bin/ellesmere/conf.qemu-riscv32_na |   1 +
- .../bin/ellesmere/conf.qemu-riscv32_spl_na    |   1 +
- test/hooks/bin/ellesmere/conf.qemu-riscv64_na |   1 +
- test/hooks/bin/ellesmere/conf.qemu-x86_64_na  |   1 +
- test/hooks/bin/ellesmere/conf.qemu-x86_na     |   1 +
- test/hooks/bin/ellesmere/conf.qemu_arm64_na   |   1 +
- .../bin/ellesmere/conf.qemu_arm64_spl_na      |   1 +
- test/hooks/bin/ellesmere/conf.qemu_arm_na     |   1 +
- test/hooks/bin/ellesmere/conf.qemu_arm_spl_na |   1 +
- test/hooks/bin/flash.em100                    |  30 ++
- test/hooks/bin/flash.fiptool                  |  22 ++
- test/hooks/bin/flash.flashair                 |  45 +++
- test/hooks/bin/flash.labgrid-trini.sd-mux     |  31 ++
- test/hooks/bin/flash.none                     |  21 ++
- test/hooks/bin/flash.qemu_gen_padded_image    |  15 +
- test/hooks/bin/flash.recovery_l4t             |  44 +++
- test/hooks/bin/flash.sdwire_common_mount      |  80 +++++
- .../bin/flash.sdwire_digital-loggers_raw      |  41 +++
- test/hooks/bin/flash.sdwire_poweroff_mount    |  32 ++
- test/hooks/bin/flash.sdwire_poweroff_raw      |  42 +++
- test/hooks/bin/flash.sdwire_relay_mount       |  34 ++
- test/hooks/bin/flashair.rpi                   |  47 +++
- test/hooks/bin/flashair.ti-omap               |  26 ++
- test/hooks/bin/getrole.labgrid-sjg            |  34 ++
- .../kea/conf.Linksprite_pcDuino3_sjg-pcduino3 |  33 ++
- .../bin/kea/conf.chromebook_link_sjg-link     |  30 ++
- .../bin/kea/conf.chromebook_samus_sjg-samus   |  30 ++
- test/hooks/bin/kea/conf.jetson-tk1_sjg-tk1    |  38 +++
- .../bin/kea/conf.minnowmax_sjg-minnowmax      |  33 ++
- .../hooks/bin/kea/conf.orangepi_pc_sjg-opi_pc |  35 ++
- test/hooks/bin/kea/conf.rock2_sjg-rock2       |  33 ++
- test/hooks/bin/kea/conf.rpi_3_32b_sjg-rpi_3b  |  34 ++
- test/hooks/bin/kea/conf.rpi_3_sjg-rpi_3b      |  34 ++
- .../bin/kea/conf.zynq_zybo_sjg-zynq_zybo      |  44 +++
- .../conf.am62x_beagleplay_a53_na              |  30 ++
- .../konsulko-labgrid/conf.am64x_evm_a53_na    |  30 ++
- .../bin/konsulko-labgrid/conf.rpi_4_32b_na    |   1 +
- test/hooks/bin/konsulko-labgrid/conf.rpi_4_na |   1 +
- .../bin/konsulko-labgrid/conf.rpi_arm64_na    |  25 ++
- test/hooks/bin/poweroff.digital-loggers       |  22 ++
- test/hooks/bin/poweroff.manual                |  21 ++
- test/hooks/bin/poweroff.none                  |  22 ++
- test/hooks/bin/poweroff.phidgets              |  37 +++
- test/hooks/bin/poweroff.pm342                 |  21 ++
- test/hooks/bin/poweroff.ykush                 |  23 ++
- test/hooks/bin/poweron.digital-loggers        |  22 ++
- test/hooks/bin/poweron.manual                 |  21 ++
- test/hooks/bin/poweron.none                   |  22 ++
- test/hooks/bin/poweron.phidgets               |  32 ++
- test/hooks/bin/poweron.pm342                  |  24 ++
- test/hooks/bin/poweron.ykush                  |  23 ++
- test/hooks/bin/push-flashair.py               | 118 +++++++
- test/hooks/bin/qemu.swtpm                     |  23 ++
- test/hooks/bin/recovery.manual                |  23 ++
- test/hooks/bin/recovery.phidgets              |  29 ++
- test/hooks/bin/recovery.pm342                 |  26 ++
- test/hooks/bin/recovery.relay                 |  39 +++
- test/hooks/bin/recovery.usbrelay              |  32 ++
- test/hooks/bin/release.labgrid-sjg            |  22 ++
- test/hooks/bin/release.none                   |  22 ++
- test/hooks/bin/reset.cros_servo               |  23 ++
- test/hooks/bin/reset.digital-loggers          |  25 ++
- test/hooks/bin/reset.labgrid-trini            |  24 ++
- test/hooks/bin/reset.none                     |  30 ++
- test/hooks/bin/reset.pm342                    |  21 ++
- test/hooks/bin/reset.recovery_download        |  36 +++
- test/hooks/bin/reset.usbrelay                 |  26 ++
- test/hooks/bin/reset.ykush                    |  25 ++
- test/hooks/bin/swarren-lx1/conf.jetson-tk1_na |  36 +++
- test/hooks/bin/swarren-lx1/conf.p2371-2180_na |  57 ++++
- .../bin/swarren-lx1/conf.p2771-0000-500_na    |  32 ++
- test/hooks/bin/travis-ci/conf.M5208EVBE_qemu  |  27 ++
- test/hooks/bin/travis-ci/conf.coreboot_qemu   |  28 ++
- .../hooks/bin/travis-ci/conf.evb-ast2500_qemu |  11 +
- .../hooks/bin/travis-ci/conf.evb-ast2600_qemu |  13 +
- .../travis-ci/conf.integratorcp_cm926ejs_qemu |  27 ++
- test/hooks/bin/travis-ci/conf.malta64_qemu    |  30 ++
- test/hooks/bin/travis-ci/conf.malta64el_qemu  |  31 ++
- test/hooks/bin/travis-ci/conf.malta_qemu      |  30 ++
- test/hooks/bin/travis-ci/conf.maltael_qemu    |  31 ++
- test/hooks/bin/travis-ci/conf.qemu-ae3xx_na   |  27 ++
- .../hooks/bin/travis-ci/conf.qemu-arm-sbsa_na |  27 ++
- test/hooks/bin/travis-ci/conf.qemu-ax25_na    |  27 ++
- .../bin/travis-ci/conf.qemu-loongarch64_na    |  12 +
- test/hooks/bin/travis-ci/conf.qemu-ppce500_na |  27 ++
- test/hooks/bin/travis-ci/conf.qemu-riscv32_na |  11 +
- .../bin/travis-ci/conf.qemu-riscv32_spl_na    |  11 +
- test/hooks/bin/travis-ci/conf.qemu-riscv64_na |  11 +
- .../bin/travis-ci/conf.qemu-riscv64_spl_na    |  11 +
- test/hooks/bin/travis-ci/conf.qemu-x86_64_na  |  27 ++
- test/hooks/bin/travis-ci/conf.qemu-x86_na     |  27 ++
- .../bin/travis-ci/conf.qemu-xtensa-dc233c_na  |  12 +
- test/hooks/bin/travis-ci/conf.qemu_arm64_na   |  30 ++
- .../bin/travis-ci/conf.qemu_arm64_spl_na      |  32 ++
- .../bin/travis-ci/conf.qemu_arm64_tpl_na      |  29 ++
- test/hooks/bin/travis-ci/conf.qemu_arm64be_na |  13 +
- test/hooks/bin/travis-ci/conf.qemu_arm_na     |  30 ++
- test/hooks/bin/travis-ci/conf.qemu_arm_spl_na |  31 ++
- test/hooks/bin/travis-ci/conf.qemu_mips64_na  |  28 ++
- .../hooks/bin/travis-ci/conf.qemu_mips64el_na |  28 ++
- test/hooks/bin/travis-ci/conf.qemu_mips_na    |  28 ++
- test/hooks/bin/travis-ci/conf.qemu_mipsel_na  |  28 ++
- .../bin/travis-ci/conf.r2dplus_i82557c_qemu   |  27 ++
- .../bin/travis-ci/conf.r2dplus_pcnet_qemu     |  27 ++
- .../bin/travis-ci/conf.r2dplus_rtl8139_qemu   |  27 ++
- .../bin/travis-ci/conf.r2dplus_tulip_qemu     |  27 ++
- .../conf.sifive_unleashed_sdcard_qemu         |  11 +
- .../conf.sifive_unleashed_spi-nor_qemu        |  11 +
- .../bin/travis-ci/conf.vexpress_ca15_tc2_qemu |  27 ++
- .../bin/travis-ci/conf.vexpress_ca9x4_qemu    |  27 ++
- .../travis-ci/conf.vexpress_fvp_bloblist_na   |   1 +
- test/hooks/bin/travis-ci/conf.vexpress_fvp_na |  29 ++
- .../travis-ci/conf.xilinx_versal_virt_qemu    |  27 ++
- .../bin/travis-ci/conf.xilinx_zynq_virt_qemu  |  27 ++
- test/hooks/bin/travis-ci/conf.xtfpga_qemu     |  27 ++
- test/hooks/bin/travis-ci/conf.zynq_zc702_qemu |  27 ++
- test/hooks/bin/u-boot-test-common             |  36 +++
- test/hooks/bin/u-boot-test-console            |  25 ++
- test/hooks/bin/u-boot-test-flash              |  25 ++
- test/hooks/bin/u-boot-test-getrole            |  38 +++
- test/hooks/bin/u-boot-test-power-off          |  25 ++
- test/hooks/bin/u-boot-test-power-on           |  25 ++
- test/hooks/bin/u-boot-test-release            |  26 ++
- test/hooks/bin/u-boot-test-reset              |  25 ++
- test/hooks/bin/wait_raw_device                |  34 ++
- test/hooks/bin/writer.imx_raw                 |  39 +++
- test/hooks/bin/writer.labgrid-trini.rpi       |  46 +++
- test/hooks/bin/writer.labgrid-trini.ti-k3     |  35 ++
- test/hooks/bin/writer.rk3288_raw              |  40 +++
- test/hooks/bin/writer.rpi_mount               |  43 +++
- test/hooks/bin/writer.sunxi_raw               |  36 +++
- test/hooks/bin/writer.ti-k3_mount             |  36 +++
- test/hooks/bin/writer.ti-omap_mount           |  29 ++
- test/hooks/bin/writer.zynq_mount              |  36 +++
- test/hooks/contrib/src/.gitignore             |   1 +
- test/hooks/contrib/src/README.txt             |  13 +
- test/hooks/contrib/src/build.sh               |   7 +
- test/hooks/contrib/src/phidgets-relay.c       |  81 +++++
- .../contrib/udev/swarren-lx1/99-ubtest.rules  |  89 +++++
- .../OLI01/u_boot_boardenv_mx6qsabrelite_na.py |  39 +++
- .../konsulko-labgrid/u_boot_boardenv_rpi_4.py |   1 +
- .../u_boot_boardenv_rpi_arm64.py              |  84 +++++
- .../u_boot_boardenv_jetson_tk1_na.py          | 110 +++++++
- .../u_boot_boardenv_p2371_2180_na.py          | 110 +++++++
- .../u_boot_boardenv_p2771_0000_500_na.py      |  73 +++++
- test/hooks/py/travis-ci/travis_tftp.py        |  31 ++
- .../u_boot_boardenv_M5208EVBE_qemu.py         |   6 +
- .../u_boot_boardenv_evb_ast2500_qemu.py       |   5 +
- .../u_boot_boardenv_evb_ast2600_qemu.py       |   4 +
- .../travis-ci/u_boot_boardenv_malta64_qemu.py |   5 +
- .../u_boot_boardenv_malta64el_qemu.py         |   5 +
- .../travis-ci/u_boot_boardenv_malta_qemu.py   |   5 +
- .../travis-ci/u_boot_boardenv_maltael_qemu.py |   5 +
- .../u_boot_boardenv_qemu_ae3xx_na.py          |   6 +
- .../u_boot_boardenv_qemu_arm64_na.py          |  12 +
- .../u_boot_boardenv_qemu_arm64be_na.py        |  10 +
- .../travis-ci/u_boot_boardenv_qemu_arm_na.py  |  12 +
- .../travis-ci/u_boot_boardenv_qemu_ax25_na.py |   6 +
- .../u_boot_boardenv_qemu_loongarch64_na.py    |  11 +
- .../u_boot_boardenv_qemu_riscv32_na.py        |  10 +
- .../u_boot_boardenv_qemu_riscv32_spl_na.py    |  10 +
- .../u_boot_boardenv_qemu_riscv64_na.py        |  10 +
- .../u_boot_boardenv_qemu_riscv64_spl_na.py    |  10 +
- .../u_boot_boardenv_qemu_x86_64_na.py         |  12 +
- .../travis-ci/u_boot_boardenv_qemu_x86_na.py  |  12 +
- .../u_boot_boardenv_qemu_xtensa_dc233c_na.py  |   6 +
- .../u_boot_boardenv_r2dplus_i82557c_qemu.py   |   6 +
- .../u_boot_boardenv_r2dplus_pcnet_qemu.py     |   6 +
- .../u_boot_boardenv_r2dplus_rtl8139_qemu.py   |   6 +
- .../u_boot_boardenv_r2dplus_tulip_qemu.py     |   6 +
- ...t_boardenv_sifive_unleashed_sdcard_qemu.py |  10 +
- ..._boardenv_sifive_unleashed_spi_nor_qemu.py |  10 +
- .../u_boot_boardenv_vexpress_ca15_tc2_qemu.py |  10 +
- .../u_boot_boardenv_vexpress_ca9x4_qemu.py    |  10 +
- ...u_boot_boardenv_xilinx_versal_virt_qemu.py |   1 +
- .../u_boot_boardenv_xilinx_zynq_virt_qemu.py  |   3 +
- .../u_boot_boardenv_zynq_zc702_qemu.py        |   3 +
- 199 files changed, 5340 insertions(+), 27 deletions(-)
- create mode 100644 doc/develop/test_hooks.rst
- create mode 100644 test/hooks/bin/OLI01/conf.mx6qsabrelite_na
- create mode 100644 test/hooks/bin/bill-the-cat/conf.integratorcp_cm926ejs_qemu
- create mode 100644 test/hooks/bin/bill-the-cat/conf.qemu_mips_na
- create mode 100644 test/hooks/bin/bill-the-cat/conf.vexpress_ca15_tc2_qemu
- create mode 100755 test/hooks/bin/common-config.cros-servo-dut-control
- create mode 100644 test/hooks/bin/common.labgrid-trini
- create mode 100644 test/hooks/bin/console.fvp
- create mode 100644 test/hooks/bin/console.labgrid-sjg
- create mode 100755 test/hooks/bin/console.labgrid-trini
- create mode 100644 test/hooks/bin/console.picocom
- create mode 100644 test/hooks/bin/console.qemu
- create mode 100644 test/hooks/bin/download.imx_usb
- create mode 100644 test/hooks/bin/download.l4t-exec-uboot
- create mode 100755 test/hooks/bin/download.tegra-uboot-flasher
- create mode 100755 test/hooks/bin/ellesmere/common-labgrid-sjg
- create mode 100644 test/hooks/bin/ellesmere/conf.all
- create mode 100644 test/hooks/bin/ellesmere/conf.evb-ast2500_qemu
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu-riscv32_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu-riscv32_spl_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu-riscv64_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu-x86_64_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu-x86_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu_arm64_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu_arm64_spl_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu_arm_na
- create mode 120000 test/hooks/bin/ellesmere/conf.qemu_arm_spl_na
- create mode 100644 test/hooks/bin/flash.em100
- create mode 100644 test/hooks/bin/flash.fiptool
- create mode 100644 test/hooks/bin/flash.flashair
- create mode 100644 test/hooks/bin/flash.labgrid-trini.sd-mux
- create mode 100644 test/hooks/bin/flash.none
- create mode 100755 test/hooks/bin/flash.qemu_gen_padded_image
- create mode 100644 test/hooks/bin/flash.recovery_l4t
- create mode 100644 test/hooks/bin/flash.sdwire_common_mount
- create mode 100644 test/hooks/bin/flash.sdwire_digital-loggers_raw
- create mode 100644 test/hooks/bin/flash.sdwire_poweroff_mount
- create mode 100644 test/hooks/bin/flash.sdwire_poweroff_raw
- create mode 100644 test/hooks/bin/flash.sdwire_relay_mount
- create mode 100644 test/hooks/bin/flashair.rpi
- create mode 100644 test/hooks/bin/flashair.ti-omap
- create mode 100755 test/hooks/bin/getrole.labgrid-sjg
- create mode 100644 test/hooks/bin/kea/conf.Linksprite_pcDuino3_sjg-pcduino3
- create mode 100644 test/hooks/bin/kea/conf.chromebook_link_sjg-link
- create mode 100644 test/hooks/bin/kea/conf.chromebook_samus_sjg-samus
- create mode 100644 test/hooks/bin/kea/conf.jetson-tk1_sjg-tk1
- create mode 100644 test/hooks/bin/kea/conf.minnowmax_sjg-minnowmax
- create mode 100644 test/hooks/bin/kea/conf.orangepi_pc_sjg-opi_pc
- create mode 100644 test/hooks/bin/kea/conf.rock2_sjg-rock2
- create mode 100644 test/hooks/bin/kea/conf.rpi_3_32b_sjg-rpi_3b
- create mode 100644 test/hooks/bin/kea/conf.rpi_3_sjg-rpi_3b
- create mode 100644 test/hooks/bin/kea/conf.zynq_zybo_sjg-zynq_zybo
- create mode 100644 test/hooks/bin/konsulko-labgrid/conf.am62x_beagleplay_a53_na
- create mode 100644 test/hooks/bin/konsulko-labgrid/conf.am64x_evm_a53_na
- create mode 120000 test/hooks/bin/konsulko-labgrid/conf.rpi_4_32b_na
- create mode 120000 test/hooks/bin/konsulko-labgrid/conf.rpi_4_na
- create mode 100644 test/hooks/bin/konsulko-labgrid/conf.rpi_arm64_na
- create mode 100644 test/hooks/bin/poweroff.digital-loggers
- create mode 100644 test/hooks/bin/poweroff.manual
- create mode 100755 test/hooks/bin/poweroff.none
- create mode 100644 test/hooks/bin/poweroff.phidgets
- create mode 100644 test/hooks/bin/poweroff.pm342
- create mode 100644 test/hooks/bin/poweroff.ykush
- create mode 100644 test/hooks/bin/poweron.digital-loggers
- create mode 100644 test/hooks/bin/poweron.manual
- create mode 100755 test/hooks/bin/poweron.none
- create mode 100644 test/hooks/bin/poweron.phidgets
- create mode 100644 test/hooks/bin/poweron.pm342
- create mode 100644 test/hooks/bin/poweron.ykush
- create mode 100755 test/hooks/bin/push-flashair.py
- create mode 100755 test/hooks/bin/qemu.swtpm
- create mode 100644 test/hooks/bin/recovery.manual
- create mode 100644 test/hooks/bin/recovery.phidgets
- create mode 100644 test/hooks/bin/recovery.pm342
- create mode 100755 test/hooks/bin/recovery.relay
- create mode 100755 test/hooks/bin/recovery.usbrelay
- create mode 100644 test/hooks/bin/release.labgrid-sjg
- create mode 100644 test/hooks/bin/release.none
- create mode 100644 test/hooks/bin/reset.cros_servo
- create mode 100644 test/hooks/bin/reset.digital-loggers
- create mode 100755 test/hooks/bin/reset.labgrid-trini
- create mode 100644 test/hooks/bin/reset.none
- create mode 100644 test/hooks/bin/reset.pm342
- create mode 100644 test/hooks/bin/reset.recovery_download
- create mode 100644 test/hooks/bin/reset.usbrelay
- create mode 100644 test/hooks/bin/reset.ykush
- create mode 100644 test/hooks/bin/swarren-lx1/conf.jetson-tk1_na
- create mode 100644 test/hooks/bin/swarren-lx1/conf.p2371-2180_na
- create mode 100644 test/hooks/bin/swarren-lx1/conf.p2771-0000-500_na
- create mode 100644 test/hooks/bin/travis-ci/conf.M5208EVBE_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.coreboot_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.evb-ast2500_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.evb-ast2600_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.integratorcp_cm926ejs_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.malta64_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.malta64el_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.malta_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.maltael_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-ae3xx_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-arm-sbsa_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-ax25_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-loongarch64_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-ppce500_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-riscv32_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-riscv32_spl_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-riscv64_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-riscv64_spl_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-x86_64_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-x86_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu-xtensa-dc233c_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_arm64_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_arm64_spl_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_arm64_tpl_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_arm64be_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_arm_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_arm_spl_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_mips64_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_mips64el_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_mips_na
- create mode 100644 test/hooks/bin/travis-ci/conf.qemu_mipsel_na
- create mode 100644 test/hooks/bin/travis-ci/conf.r2dplus_i82557c_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.r2dplus_pcnet_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.r2dplus_rtl8139_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.r2dplus_tulip_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.sifive_unleashed_sdcard_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.sifive_unleashed_spi-nor_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.vexpress_ca15_tc2_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.vexpress_ca9x4_qemu
- create mode 120000 test/hooks/bin/travis-ci/conf.vexpress_fvp_bloblist_na
- create mode 100644 test/hooks/bin/travis-ci/conf.vexpress_fvp_na
- create mode 100644 test/hooks/bin/travis-ci/conf.xilinx_versal_virt_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.xilinx_zynq_virt_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.xtfpga_qemu
- create mode 100644 test/hooks/bin/travis-ci/conf.zynq_zc702_qemu
- create mode 100755 test/hooks/bin/u-boot-test-common
- create mode 100755 test/hooks/bin/u-boot-test-console
- create mode 100755 test/hooks/bin/u-boot-test-flash
- create mode 100755 test/hooks/bin/u-boot-test-getrole
- create mode 100755 test/hooks/bin/u-boot-test-power-off
- create mode 100755 test/hooks/bin/u-boot-test-power-on
- create mode 100755 test/hooks/bin/u-boot-test-release
- create mode 100755 test/hooks/bin/u-boot-test-reset
- create mode 100644 test/hooks/bin/wait_raw_device
- create mode 100755 test/hooks/bin/writer.imx_raw
- create mode 100644 test/hooks/bin/writer.labgrid-trini.rpi
- create mode 100644 test/hooks/bin/writer.labgrid-trini.ti-k3
- create mode 100755 test/hooks/bin/writer.rk3288_raw
- create mode 100755 test/hooks/bin/writer.rpi_mount
- create mode 100755 test/hooks/bin/writer.sunxi_raw
- create mode 100755 test/hooks/bin/writer.ti-k3_mount
- create mode 100755 test/hooks/bin/writer.ti-omap_mount
- create mode 100755 test/hooks/bin/writer.zynq_mount
- create mode 100644 test/hooks/contrib/src/.gitignore
- create mode 100644 test/hooks/contrib/src/README.txt
- create mode 100755 test/hooks/contrib/src/build.sh
- create mode 100644 test/hooks/contrib/src/phidgets-relay.c
- create mode 100644 test/hooks/contrib/udev/swarren-lx1/99-ubtest.rules
- create mode 100644 test/hooks/py/OLI01/u_boot_boardenv_mx6qsabrelite_na.py
- create mode 120000 test/hooks/py/konsulko-labgrid/u_boot_boardenv_rpi_4.py
- create mode 100644 test/hooks/py/konsulko-labgrid/u_boot_boardenv_rpi_arm64.py
- create mode 100644 test/hooks/py/swarren-lx1/u_boot_boardenv_jetson_tk1_na.py
- create mode 100644 test/hooks/py/swarren-lx1/u_boot_boardenv_p2371_2180_na.py
- create mode 100644 test/hooks/py/swarren-lx1/u_boot_boardenv_p2771_0000_500_na.py
- create mode 100644 test/hooks/py/travis-ci/travis_tftp.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_M5208EVBE_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_evb_ast2500_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_evb_ast2600_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_malta64_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_malta64el_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_malta_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_maltael_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_ae3xx_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_arm64be_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_arm_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_ax25_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_loongarch64_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_riscv32_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_riscv32_spl_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_riscv64_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_riscv64_spl_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_x86_64_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_x86_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_qemu_xtensa_dc233c_na.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_r2dplus_i82557c_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_r2dplus_pcnet_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_r2dplus_rtl8139_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_r2dplus_tulip_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_sifive_unleashed_sdcard_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_sifive_unleashed_spi_nor_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_vexpress_ca15_tc2_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_vexpress_ca9x4_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_xilinx_versal_virt_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
- create mode 100644 test/hooks/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index d9f2a838207..ffbb3aeb466 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -85,6 +85,7 @@ Testing
+    tests_writing
+    tests_sandbox
+    binman_tests
++   test_hooks
+ 
+ Refactoring
+ -----------
+diff --git a/doc/develop/py_testing.rst b/doc/develop/py_testing.rst
+index fb153a277fc..c65de27369b 100644
+--- a/doc/develop/py_testing.rst
++++ b/doc/develop/py_testing.rst
+@@ -314,6 +314,8 @@ via `$PATH`. These scripts implement certain actions on behalf of the test
+ suite. This keeps the test suite simple and isolated from system variances
+ unrelated to U-Boot features.
+ 
++For more details see :doc:`test_hooks`.
++
+ Hook scripts
+ ~~~~~~~~~~~~
+ 
+@@ -404,9 +406,9 @@ saving wear on the flash chip(s).
+ Examples
+ ''''''''
+ 
+-https://source.denx.de/u-boot/u-boot-test-hooks contains some working example hook
++The directory `test/hooks` contains some working example hook
+ scripts, and may be useful as a reference when implementing hook scripts for
+-your platform. These scripts are not considered part of U-Boot itself.
++your platform. These scripts are considered part of U-Boot itself.
+ 
+ Board-type-specific configuration
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@@ -469,16 +471,16 @@ instances of:
+ Complete invocation example
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+-Assuming that you have installed the hook scripts into $HOME/ubtest/bin, and
+-any required environment configuration Python modules into $HOME/ubtest/py,
+-then you would likely invoke the test script as follows:
++Assuming that you have installed U-Boot `$UBOOT`, any new hooks into
++`$UBOOT/test/hooks/bin` and any new configuration Python modules into
++`$UBOOT/test/hooks/py`, then you would likely invoke the test script as follows:
+ 
+ If U-Boot has already been built:
+ 
+ .. code-block:: bash
+ 
+-    PATH=$HOME/ubtest/bin:$PATH \
+-    PYTHONPATH=${HOME}/ubtest/py/${HOSTNAME}:${PYTHONPATH} \
++    PATH=$UBOOT/test/hooks/bin:$PATH \
++    PYTHONPATH=$UBOOT/test/hooks/py/${HOSTNAME}:${PYTHONPATH} \
+     ./test/py/test.py --bd seaboard
+ 
+ If you want the test script to compile U-Boot for you too, then you likely
+@@ -488,7 +490,7 @@ follows:
+ .. code-block:: bash
+ 
+     CROSS_COMPILE=arm-none-eabi- \
+-    PATH=$HOME/ubtest/bin:$PATH \
++    PATH=$UBOOT/test/hooks/bin:$PATH \
+     PYTHONPATH=${HOME}/ubtest/py/${HOSTNAME}:${PYTHONPATH} \
+     ./test/py/test.py --bd seaboard --build
+ 
+@@ -496,8 +498,8 @@ or, using buildman to handle it:
+ 
+ .. code-block:: bash
+ 
+-    PATH=$HOME/ubtest/bin:$PATH \
+-    PYTHONPATH=${HOME}/ubtest/py/${HOSTNAME}:${PYTHONPATH} \
++    PATH=$UBOOT/test/hooks/bin:$PATH \
++    PYTHONPATH=$UBOOT/test/hooks/py/${HOSTNAME}:${PYTHONPATH} \
+     ./test/py/test.py --bd seaboard --build --buildman
+ 
+ Writing tests
+diff --git a/test/hooks/README.md b/doc/develop/test_hooks.rst
+similarity index 87%
+rename from test/hooks/README.md
+rename to doc/develop/test_hooks.rst
+index ecf8a46c4a5..c86b45b38b9 100644
+--- a/test/hooks/README.md
++++ b/doc/develop/test_hooks.rst
+@@ -1,17 +1,20 @@
+-# Introduction
++Hardware testing
++================
+ 
+-This repository contains working example support ("hook") scripts for U-Boot's
++The ``test/hooks`` directory contains support ("hook") scripts for U-Boot's
+ built-in test framework. That framework is located in the `test/py/` directory
+ in the U-Boot source tree.
+ 
+ You may use these examples as a reference when creating your own hook scripts,
+-or even derive your own scripts directly from the files in this repository.
++or even derive your own scripts directly from the files in ``test/hooks``.
+ 
+-# Contributing
++Contributing
++------------
+ 
+-See [Contributing.md](Contributing.md).
++Please send a patch to the U-Boot as per :doc:`process`
+ 
+-# Flashing Philosophy
++Flashing Philosophy
++-------------------
+ 
+ U-Boot may be installed onto a target device either by:
+ 
+@@ -22,14 +25,15 @@ U-Boot may be installed onto a target device either by:
+   download needs to happen every time the target board is reset, since the
+   desired binary is not permanently stored on the system.
+ 
+-The example scripts in this repository take the second approach. This approach
++The example scripts in ``test/hooks`` take the second approach. This approach
+ avoids modifying the device's flash memory for each U-Boot binary to be tested,
+ which should increase longevity of the device. This does mean that the
+ implementation of the `test/py/` hook scripts is slightly inconsistent with
+ their naming; `u-boot-test-flash` does nothing whereas `u-boot-test-reset`
+ downloads U-Boot into RAM rather than only performing a simple system reset.
+ 
+-# USB Port Paths
++USB Port Paths
++--------------
+ 
+ When multiple USB devices of the same type are attached to the same system, some
+ mechanism for differentiating between them is required, in order for software to
+@@ -52,7 +56,7 @@ numbers form the balance of the USB port path.
+ Linux uses the format `${bus}-${port}.${port}.${port}...` to represent the USB
+ port path.
+ 
+-For example:
++For example::
+ 
+     +--------------+
+     | PC           |
+@@ -78,7 +82,7 @@ experimentation using tools such as `picocom` or `mount` and `ls`.
+ 
+ Once a device node has been identified, use udevadm to query all known
+ information about the device, then find an entry with `SUBSYSTEMS=="usb"` and a
+-`KERNELS` value in the format of a USB port path:
++`KERNELS` value in the format of a USB port path::
+ 
+     $ udevadm info -a /dev/ttyUSB2
+     ...
+@@ -109,7 +113,7 @@ information about the device, then find an entry with `SUBSYSTEMS=="usb"` and a
+ 
+ Here, the USB port path is "`3-6`".
+ 
+-or:
++or::
+ 
+     $ udevadm info -a /dev/bus/usb/003/086
+     ....
+@@ -120,9 +124,10 @@ or:
+ 
+ Here, the USB port path is "`3-10.4`".
+ 
+-# udev Rules
++udev Rules
++----------
+ 
+-See the `udev/` directory in this repository.
++See the `test/hooks/udev/` directory.
+ 
+ Testing should be performed as a non-root user. This requires that the relevant
+ device nodes have non-default permissions. udev rules may be used to achieve
+@@ -145,9 +150,10 @@ path.
+ 
+ The example udev rules demonstrate both of these types of rules.
+ 
+-# Scripts and Binaries
++Scripts and Binaries
++--------------------
+ 
+-See the `bin/` directory in this repository.
++See the `test/hooks/bin/` directory.
+ 
+ Scripts exist to power on, power off, flash, and reset Tegra boards, and access
+ their serial console. The U-Boot test framework expects these scripts to exist
+@@ -175,10 +181,11 @@ more than include a board-specific configuration file, and then include another
+ file specific to implementation the desired action.
+ 
+ Board configuration files are located in
+-`bin/${hostname}/conf.${board_type}_${board_identity}`. These files are
+-segregated by hostname so that the repository can be used directly across
++`test/hooks/bin/${hostname}/conf.${board_type}_${board_identity}`. These files
++are segregated by hostname so that the repository can be used directly across
+ multiple different test machines, without the need for host-specific branches or
+-post-checkout configuration.
++post-checkout configuration. Your scripts can also exist outside the U-Boot
++repo if that is helpful.
+ 
+ The board configuration file defines which mechanism is used for each possible
+ action, and any parameters associated with it. For example, downloading U-Boot
+@@ -187,8 +194,8 @@ T124 or earlier, or L4T's `exec-uboot.sh` for boards containing T210 or newer.
+ These scripts. In each case, the directory name where the tool is installed must
+ be defined.
+ 
+-Each action is implemented in a script fragment directly in the `bin/` directory,
+-with filename `${action_type}.${implementation_name}`.
++Each action is implemented in a script fragment directly in the`test/hooks/bin/`
++directory, with filename `${action_type}.${implementation_name}`.
+ 
+ If using these scripts directly for testing Tegra devices, it is likely that
+ you will not need to create new `download.*` implementations, but will need to
+@@ -199,7 +206,8 @@ scripts must be replicated once per board instance, or their actions somehow
+ serialized, since they copy files into their own directories when executing, and
+ hence parallel execution would cause incorrect operation.
+ 
+-## Labgrid Integration
++Labgrid Integration
++-------------------
+ 
+ Labgrid is a python library for embedded-board-control. It includes a client
+ program which is used to integrate with the U-Boot pytests.
+@@ -208,9 +216,9 @@ Since Labgrid has all the information necessary to build and boot on a lab,
+ there is no per-board configuration required. The various flash.xxx and
+ recovery.xxx scripts are not used. To set it up, one implementation is:
+ 
+-- In your bin/$hostname directory, create an executable file
++- In the test/hooks/bin/$hostname directory, create an executable file
+   `common-labgrid-sjg` and set your crossbar and environment information, for
+-  example:
++  example::
+ 
+       # Hostname and port for the gRPC coordinator
+       export LG_COORDINATOR=kea:20408
+@@ -219,7 +227,7 @@ recovery.xxx scripts are not used. To set it up, one implementation is:
+       export LG_ENV="/path/to/kea_env.cfg"
+ 
+       # Location of the U-Boot test hooks
+-      export UB_TEST_HOOKS=/path/to/u-boot-test-hooks
++      export UB_TEST_HOOKS=/path/to/u-boot/test/hooks
+ 
+       # Make sure only one buildman can run at a time, since it uses all CPUs
+       export BUILDMAN_PROCESS_LIMIT=1
+@@ -258,10 +266,11 @@ variables must be set as per your lab:
+ - `LG_ENV` must point at the labgrid yaml file that describes your lab.
+ 
+ In order for a given platform to be tested, it must be acquired before starting
+-tests and then released once complete. See the bin/konsulko-labgrid directory
+-for example boards using this method.
++tests and then released once complete. See the `test/hooks/bin/konsulko-labgrid`
++directory for example boards using this method.
+ 
+-## Dependencies
++Dependencies
++------------
+ 
+ The example scripts depend on various external tools, the installation location
+ of which must be specified in the board configuration files:
+@@ -280,9 +289,10 @@ of which must be specified in the board configuration files:
+ U-Boot's test framework also requires a `dfu-util` that supports the -p
+ command-line option. Most distros provide this nowadays.
+ 
+-# Python Modules
++Python Modules
++--------------
+ 
+-See the `py/` directory in this repository.
++See the `test/hooks/py/` directory.
+ 
+ A Python module exists for each board and defines numerous parameters used by
+ the U-Boot test framework. The framework expects to simply import these modules
+@@ -292,5 +302,5 @@ These modules are again located in a separate directory for each host, so that
+ the repository may be shared across hosts.
+ 
+ For complete details re: the required content of these Python modules, please
+-see `test/py/README.md` in the U-boot source tree, and also the comments in some
+-individual test files in `test/py/tests/test_*.py`.
++see :doc:`py_testing` and also the comments in some individual test files in
++`test/py/tests/test_*.py`.
 -- 
 2.43.0
 
-base-commit: 9b9647c89cbe785fd935f70e16d08cf9812b9fda
-branch: tes
