@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA5F7C3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:56:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7988C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:56:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF56082BAB;
-	Fri,  2 May 2025 16:49:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 374EB82AB9;
+	Fri,  2 May 2025 16:49:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IvIHokXt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cy8yrp9x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9475582BDA; Fri,  2 May 2025 16:49:28 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 6D24D82AB9; Fri,  2 May 2025 16:49:54 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF27082CBC
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:49:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEFA582CBB
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5f5bef591d6so4087864a12.1
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:49:25 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ac28e66c0e1so228060066b.0
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:49:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197365; x=1746802165; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197391; x=1746802191; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2E0oBNYfqr+ikEFFk4YZUnSRjLG2CUA9B+MeNyBcxek=;
- b=IvIHokXtDjyEFUqe8AjroR/HQqQy2EAPL3ets7CYlOaoE1BheejN1rWbGTtDAthwB0
- Vy1qrMGEeacDpA0YGhKeqXcbjP2PkUJbC8MaQuYdjw5N/DFuCHZyEoFv3b60KrjAoUBK
- achf0e7O8Onr9HpdGQsHXKtKDq05Dg505mGJE=
+ bh=2LKqrVmupKygB+eJyIOmcORb9yIaOQ+SZofdDH8hX4Q=;
+ b=Cy8yrp9xe82+ngjdhmC5My73/KuunnimJINaCp3pVsXPsAbY2iUL8fEM9ltxjgsBUY
+ hwgPwMrfWFV8ewwPI67mqUslrUHi5MiFKMe+0SyMya1r1A//1ZLfI20iH92uxScni5um
+ DtpWIvt8gj5y1IqDdacCVsBv3cZGKGWhp4a3E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197365; x=1746802165;
+ d=1e100.net; s=20230601; t=1746197391; x=1746802191;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2E0oBNYfqr+ikEFFk4YZUnSRjLG2CUA9B+MeNyBcxek=;
- b=i1cx3Mx4kt6iaCVicVsoAujMny8g1DLxXLAo8ILCBJnMGHnN50+y/aogay+d751Oj4
- HWVw+JRoKuciJlDHei7UsxqcK6RqskNhSgAd7Tcac6QROuCuZvzcKBtnzcCHxekcsZqQ
- 7ei0Auo2BSd1tWwQ65ph2wwQf7bzztxhzcNyW90baMUUd0U4zZ2JoqcIZk1LTSJopdz9
- Rl52ObF1pZnPw3MfRds2jMGvCVIc8kTlqvCxncgeoUQgLXmH4xDb/eXQNK7lQAzby7Yi
- 5ZgJIDvIZfQpYXpMDBXOA9c/7kljIh4l6ldcpvMaFNUJnxLPOK12Ad3svjrrWLnAfewH
- geFA==
-X-Gm-Message-State: AOJu0Yxtyf9bmNHkoyp2pMLcq3EnT6C1EhPoTIjo1yTj7GhSS4zHx8lv
- rtiKfOafELOCq2PvuuolVRSKxo+NpIjQU1RFjK/dctkrGpfcm2u3YDr1xUwPE7e/d85gS+ZiNb7
- ifGtnf2SACxORVnx5Moj1xLq9X6WUxT8lAnBttIy8M7T+POE=
-X-Gm-Gg: ASbGncv27Pwt7t8r1dYQAlUNwwcNpwPryhVvkMIDQcTnu6QycC/aNyMk5jF8SA/f0Hi
- zVZTAYv7vpslktPw5Nkhnjg6UU3cPOMqwFptbtOdZggiSvbL0aA5QvtUO39d/X1nuw5MwqRmRqn
- cV+ypzche1W71xg83mPqRj080=
-X-Google-Smtp-Source: AGHT+IFgCuQqRnS2T7fB3Q9Q18lFPUcxthTzqL++3llKSy0qmeZ2Cfp4E6kRCfsU9AH7qJGKYOEcu65RD2YSWf87UrU=
-X-Received: by 2002:a17:907:8b88:b0:ace:cbe0:2d67 with SMTP id
- a640c23a62f3a-ad17b867329mr276516066b.55.1746197365297; Fri, 02 May 2025
- 07:49:25 -0700 (PDT)
+ bh=2LKqrVmupKygB+eJyIOmcORb9yIaOQ+SZofdDH8hX4Q=;
+ b=HF1aLP/DWJeALLhuQGP7RUqZb1yMfBsQak/EISZQlHRQxytmU2x53GcZqRA5Y1AuGj
+ D3Gx61ymZyJrhZq2SkZ0UsV9xvP2XaKI8nSNngvnojuKQsjVAFPZPsw60WQedKBq6Wha
+ x9aZQED7z4yKk70GnSHqnn3lTgODzvWrwNmXvV2rHhRMeBrzXjZGYQ5b4+/huBqNSPfb
+ IZc6fAMneDl9IB0a8IcKDFpR/hDLMmy7+6iVgi4sRddJj/yBW54XLJ/3NntKX+z2j724
+ G+kIeAVLNZn4KeCQBkWiVaUtf+lQSG2AMkfvCJbtFWXzmQDG2xI8mprz/16BMT7bHWas
+ kyOg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWxrjDzkqYy6tNGDXWFDBgSqjOBnWe+pcUAAFX8oRTBKVfWS6xZcbBr26nstQa/m5j2OU06OxQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YziKsxxEsl0l665NrJP+uWrHf8FrUtghmUZw5pA8yUKRfilIPar
+ H4ucbxQopRNyZ/tFb//OoKrqf4hrTF2Ogz0ostwgR/eVIRIcV/o2pBOxYvzdfptm7a3n62xyOE6
+ vnmgb6Y/Lc56HyzJWX5/ohj4gfzM4WMvrdqGX
+X-Gm-Gg: ASbGncsTutaalkv0DwHJksi9kPAwYK1aUaeBwTj7a8Wi3ntHp3HQDAQd5mC79Qh7EnY
+ MAg4I8P5gvsJwppAoXfMkVEuVUzSlCzIIiUTmnfPFb305vC3L3zdPLe2+KMbfDNf7GwQ7VasaQh
+ QAdSFtL+fdf3HFIXuklIf1wYIBhBBNoX5tZA==
+X-Google-Smtp-Source: AGHT+IEkNPwcCEDnIKZ31ypeBqzYDfg7I72+j1LD3iVjuh4v8XGYBcoMziRpASINyxrbHbmtrp3F0cTBCAGUBMWF7hc=
+X-Received: by 2002:a17:906:478a:b0:ac3:8537:904e with SMTP id
+ a640c23a62f3a-ad17af78ffbmr308006366b.49.1746197391327; Fri, 02 May 2025
+ 07:49:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250502025026.4140184-1-sjg@chromium.org>
- <20250502143359.GS1261075@bill-the-cat>
-In-Reply-To: <20250502143359.GS1261075@bill-the-cat>
+References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+ <20250421162555.1200687-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250421162555.1200687-2-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 2 May 2025 08:49:12 -0600
-X-Gm-Features: ATxdqUH0PAA1iZNz4XR-e92F98BAzm2meLLubs6F4UuISsxHmbifHrQIVtLCU9g
-Message-ID: <CAFLszTha1wWDCpi=HR4sE-rKjoPQp+Twvyrsb-fCcF=vPW4d8Q@mail.gmail.com>
-Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Fri, 2 May 2025 08:49:39 -0600
+X-Gm-Features: ATxdqUEIn8_5ubJIewoVb8xyde3v71eXoHXCGuKRiuchskkdSieBVAsZ-GHThh0
+Message-ID: <CAFLszTiVuNqAzQ=hi5_Uq6Jo2EUJkDtE6_gDaU=LY8hAXiL8ww@mail.gmail.com>
+Subject: Re: [RFC 1/8] boot: EFI boot manager does not depend on BootOrder
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,50 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Fri, 2 May 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
+> The EFI boot manager bootmeth does not require variable BootOrder to be
+> preexisting. It creates this variable.
 >
-> > During a recent discussion with Heinrich we discussed why the hooks are
-> > kept in a separate repo.
-> >
-> > The amount of code is small, a tenth of the size of the recently added
-> > lwip, just by way of example. Testing is a critical part of U-Boot and
-> > one of the things that distinguishes it from firmware projects that have
-> > not kept up in this area. By having the tests somewhere else, we are
-> > signalling that it is unusual, or difficult, or optional.
-> >
-> > The hooks mechanism also needs something of an update to take account of
-> > real boards in 2025. That will be much easier to undertake if the code
-> > that test/py talks to is in the same repo.
-> >
-> > This series brings the hook files in as first-class citizens of U-Boot.
-> >
-> > If we do go ahead with this, I will send a different series which has
-> > separate commits (with correct author) in the u-boot-test-hooks repo.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  boot/bootmeth_efi_mgr.c | 21 +++------------------
+>  1 file changed, 3 insertions(+), 18 deletions(-)
 >
-> I think bringing more projects directly in to the repository is a bad
-> idea. Your example of lwip isn't applicable because it's a read-only
-> subtree that's maintained outside of the project (same as the dts
-> subtree). But sure, lets "Say Yes". That said, we still need to:
-> - Remove needless examples from the tree.
-> - Not include personal labs directly in the tree.
+> diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+> index 42b8863815e..1669cbed5bd 100644
+> --- a/boot/bootmeth_efi_mgr.c
+> +++ b/boot/bootmeth_efi_mgr.c
+> @@ -47,30 +47,15 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
 >
-> That last one is why I really think this is a bad idea. The point of
-> having the hooks standalone is so that any given lab can easily add
-> support for their lab and manage it, without worrying about disclosing
-> internal layout. There's going to be hard coded default passwords there.
-> There's going to be repository secrets there. That kind of information
-> really should not be in a public repository. Integrating the hooks with
-> mainline will make lab management harder, not easier. The point of the
-> existing labs in u-boot-test-hooks is to provide samples.
+>  static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+>  {
+> -       struct efi_mgr_priv *priv = dev_get_priv(dev);
+> -       efi_status_t ret;
+> -       efi_uintn_t size;
+> -       u16 *bootorder;
+> -
+> -       if (priv->fake_dev) {
+> -               bflow->state = BOOTFLOWST_READY;
+> -               return 0;
+> -       }
+> +       int ret
 >
-> I think this is all why no, we should not go down this path.
+>         ret = efi_init_obj_list();
+>         if (ret)
+>                 return log_msg_ret("init", ret);
+>
+> -       /* Enable this method if the "BootOrder" UEFI exists. */
+> -       bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
+> -                               &size);
+> -       if (bootorder) {
+> -               free(bootorder);
+> -               bflow->state = BOOTFLOWST_READY;
+> -               return 0;
+> -       }
+> +       bflow->state = BOOTFLOWST_READY;
+>
+> -       return -EINVAL;
+> +       return 0;
+>  }
+>
+>  static int efi_mgr_read_file(struct udevice *dev, struct bootflow *bflow,
+> --
+> 2.48.1
+>
 
-Is it worth discussing this, or is your mind made up? I have some
-thoughts on the last one.
+How do we know if the board is using EFI bootmgr? My understanding was
+that this was a way to find out?
 
 Regards,
-SImon
+Simon
