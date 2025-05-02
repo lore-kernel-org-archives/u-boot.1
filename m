@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B357DC3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:47:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2843FC3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1311F8219D;
-	Fri,  2 May 2025 16:47:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 598F08288D;
+	Fri,  2 May 2025 16:47:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IlrGTjOk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fVn5ttmY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 623A38219D; Fri,  2 May 2025 16:47:32 +0200 (CEST)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id D7AC88272A; Fri,  2 May 2025 16:47:33 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF8A081F7E
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DDEE82153
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-85dac9728cdso61589839f.0
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:29 -0700 (PDT)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-864a071b44bso67732739f.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197248; x=1746802048; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197250; x=1746802050; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wsvAlCH6+sr9/fE/TrstzsDyYMoLnyFjZwyR/A67l64=;
- b=IlrGTjOkKuu14c5eKTkQKQhCoLFLJH+Tm8sDqvSvtDOb3mR72IFlN704xdYU0DbAAv
- EvUmnHC9e87pXguSr/BqDPtGZMj+pCzE6QUJjksi+/wWNoVMIAAUw9GURv0Ai/82tSeB
- TH4qadjte7yHK5X6RTer7CLlfnkOmwucWgQbw=
+ bh=OsWB8RY0e5JeAGcCDhsJbvWTC8g5QSt+plnK7FH53Iw=;
+ b=fVn5ttmYFhBmfojxNeBe79msBoDkOvgZmNRr5c5xfw1CGOi1RsRnJW/aNPHHh9AmxI
+ y7ZrOwCuHJqcQr8zpImiq7ds12UNU88ED+gkPhRIAQ9Z76svnOvS98QWrbCJgHpIk+iG
+ k3xV7zpoT8bxfGUQ433sPGwP9D3ICOsZHo+3o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197248; x=1746802048;
+ d=1e100.net; s=20230601; t=1746197250; x=1746802050;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wsvAlCH6+sr9/fE/TrstzsDyYMoLnyFjZwyR/A67l64=;
- b=TGRp6isj0yYONpPg5rpbuJ/InPiC7FFOOlPX2CoI7uhI7EtySJkU+VHwG171m4Qtvu
- r7KuEkG0aHJxhAXuJjp76HGP0C6CrWr3fxszP5PzjaeWaVUS/RPNEh7+gy6P03hqyqxs
- wQHJ2jIuoqBUxaA68NR0+NcfBqILlN3YXCXsCzL40c4y+DXfTjKA/0wbDnGb4s1ypjwI
- e+oZeFTyVGOLX1+VsTnWBBWD3MZ60w/sFj2loRglvBPHY+GQFPC04be5wyvCIg6nNmCf
- KADg3WzutnSnS/gEKzFSRa11TVw/1QhdIVDAP7ybUTCLjQecBsJBEheMownePt/r+8PR
- kvEQ==
-X-Gm-Message-State: AOJu0YyEqT8yXQDiT68cZS1LLJXzBYZQB+Zs+yIDMYA+jCN7b/I59QH2
- ML/MoHta2Amc+8KY3oSIfmn/ML2xVueKAYPz1tPZ4FsUwnMVBfVGReOboL/yNh4tQJLDfbo9USc
+ bh=OsWB8RY0e5JeAGcCDhsJbvWTC8g5QSt+plnK7FH53Iw=;
+ b=Q4Lc8dVebUwSXspECVSWHjMPRTSnFB39et4p0DSeyoqxa/SU4nV03I6XbydI3qdkvx
+ ZqndgfvAe42zbdqYRb0+hs95C/OuO8COWh3lajiIl3UrQa8vTmWk4p3Zi9gXR3VY0Qpj
+ Y8qV/elRgaf276/N1Huh/kbxyExfuEdH/sDga3ab3zz7RYfe+oBG5GMu5v2nK0VBdTUy
+ PrAu/b42ycBQl97dRC7yPjrWQFyXc9RSuhxmYE4yrGeIkv5ykoa5UCDIDYSYH0+W4Utl
+ hFhw2zoGRboyJwpJLjxMEng4bLR+yfqYB4+N0xsYdSpWEwabYRVRAzgW4sy66RR4ze9o
+ E11Q==
+X-Gm-Message-State: AOJu0YzzLGows6qrJ3xzLSZFqwE0TkxiRepn1JpgS59LkkwVT9FftbUh
+ gOVfLrtDN3Qlx8RrnWCVbugdYU/Hw4zt4Kxv5vlZtdBEsPVn8wpzwHcMJdCOpuC1tfiEYOQ0Y10
  =
-X-Gm-Gg: ASbGncvhyDYdWp7e5nRIfJGZKcSZulPOvbLz7zbgw7sTXKo1e80OENmTB3sQkexkjvR
- NkljpVVIUAzaAGfgKdXuwkYxYq/MBMXcXn2TY7z/Y30uCkZ67AbcTgo+OhfArPkOouppdME/XkV
- cy4ZReKyd9Bk+2BTzoy7FpxPoBRXRUXS+ltLrhGSiwpsreHvnngk9I6kFOe3HRnfybyOuWjYcxU
- fGdpalkFI6jfJxVy7YDl1Odt0Um9Bc8at3t8tAD/vXqE5TzS3r60OjHvbhUuiKSmEAXU3hs8qpX
- na/EZm1F66pxqxFTIjHXRJGqM1sqozh2rA6TFoqYbWvn8QehWMeOw4UtdTVgrlVp3w6fEn4r2oi
- T1/3Wht513iHc
-X-Google-Smtp-Source: AGHT+IErYdCy28YFWliaireWNqz3jaTk4vHVwk9HMevvpexQy5c5n1Su4s3h/NxixHZGil4oIJJd5Q==
-X-Received: by 2002:a05:6602:2748:b0:855:5e3a:e56b with SMTP id
- ca18e2360f4ac-866b466c79cmr449012839f.12.1746197248129; 
- Fri, 02 May 2025 07:47:28 -0700 (PDT)
+X-Gm-Gg: ASbGnct7/YdNvwAAMrHjjDA2hzfH3o5zLjR0wuzQHOJdjnfSHQjjxfImNEsAvnhj1XL
+ aTbwIHEv7+zrujmh++IzZtALNgHa8w3RG4haqq4mHF6AJWAj7aHNKxf4k5q95JGADtlRCZNqrJf
+ 68FkQj6xNtUTLo9TCgSSsK8OaWZLj/kvYJ20AxdIDoCa6FcZ+0hXpOsNTH1pMQweI2Hg4ByWQRp
+ JTftPIsAmx7FBN27y7Wn0y9RgCpWX4uPJ8viWydp6RgphWzWntsUUjGkJKsg0zWWbj8GfidRXle
+ fZNY3CwcFK6GFZKT8dFOfu4BysTt6xLxYiJdeDgPhmw4qwPVFWSpOmKQOJOuHIuZL9nXP/3pthJ
+ BSg==
+X-Google-Smtp-Source: AGHT+IFeejdV4mpsg0quQjDYaRChGodavq5Rtc/jLcgvvZ4IyMTXGSH/QwxZTE5zAHvBQIGbv0+gvA==
+X-Received: by 2002:a05:6602:3817:b0:85b:b82f:965b with SMTP id
+ ca18e2360f4ac-866b42992damr427752239f.12.1746197249767; 
+ Fri, 02 May 2025 07:47:29 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.26
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:47:26 -0700 (PDT)
+ Fri, 02 May 2025 07:47:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 02/60] sandbox: Provide an option to continue on failure
-Date: Fri,  2 May 2025 08:46:00 -0600
-Message-ID: <20250502144718.313633-3-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 03/60] video: Make white-on-black a video-device property
+Date: Fri,  2 May 2025 08:46:01 -0600
+Message-ID: <20250502144718.313633-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
 References: <20250502144718.313633-1-sjg@chromium.org>
@@ -96,301 +98,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Normally the first failed assertion causes the test to stop. Provide a
-flag to allow the test to continue, as a means to discover other
-problems later in the test.
+The CONFIG_WHITE_ON_BLACK setting is hard-coded at build-time. It is
+useful to be able to control this when showing menus.
 
-Note that the utility of this depends on the test, since some tests will
-be broken if any step fails. But this can be useful when there are lots
-of test adjustments to make.
+Create a property to hold this information, using the CONFIG as the
+initial value.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/cpu/start.c         | 10 ++++++
- arch/sandbox/include/asm/state.h |  1 +
- include/test/test.h              | 13 ++++++++
- include/test/ut.h                | 57 +++++++++++++++++++++-----------
- test/test-main.c                 |  1 +
- 5 files changed, 63 insertions(+), 19 deletions(-)
+ boot/expo.c                  |  2 +-
+ boot/scene.c                 |  8 ++++----
+ drivers/video/video-uclass.c | 16 +++++++++++++++-
+ include/video.h              | 12 ++++++++++++
+ 4 files changed, 32 insertions(+), 6 deletions(-)
 
-diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
-index d3bb8ff429e..ae004a69c98 100644
---- a/arch/sandbox/cpu/start.c
-+++ b/arch/sandbox/cpu/start.c
-@@ -468,6 +468,16 @@ static int sandbox_cmdline_cb_noflat(struct sandbox_state *state,
+diff --git a/boot/expo.c b/boot/expo.c
+index 786f665f53c..8ce645e5a8f 100644
+--- a/boot/expo.c
++++ b/boot/expo.c
+@@ -194,7 +194,7 @@ int expo_render(struct expo *exp)
+ 	u32 colour;
+ 	int ret;
+ 
+-	back = CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK) ? VID_BLACK : VID_WHITE;
++	back = vid_priv->white_on_black ? VID_BLACK : VID_WHITE;
+ 	colour = video_index_to_colour(vid_priv, back);
+ 	ret = video_fill(dev, colour);
+ 	if (ret)
+diff --git a/boot/scene.c b/boot/scene.c
+index 9034aeeecf2..3af34369fe8 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -329,8 +329,9 @@ static void scene_render_background(struct scene_obj *obj, bool box_only)
+ 	enum colour_idx fore, back;
+ 	uint inset = theme->menu_inset;
+ 
++	vid_priv = dev_get_uclass_priv(dev);
+ 	/* draw a background for the object */
+-	if (CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK)) {
++	if (vid_priv->white_on_black) {
+ 		fore = VID_DARK_GREY;
+ 		back = VID_WHITE;
+ 	} else {
+@@ -343,7 +344,6 @@ static void scene_render_background(struct scene_obj *obj, bool box_only)
+ 		return;
+ 
+ 	vidconsole_push_colour(cons, fore, back, &old);
+-	vid_priv = dev_get_uclass_priv(dev);
+ 	video_fill_part(dev, label_bbox.x0 - inset, label_bbox.y0 - inset,
+ 			label_bbox.x1 + inset, label_bbox.y1 + inset,
+ 			vid_priv->colour_fg);
+@@ -407,7 +407,8 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
+ 			struct vidconsole_colour old;
+ 			enum colour_idx fore, back;
+ 
+-			if (CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK)) {
++			vid_priv = dev_get_uclass_priv(dev);
++			if (vid_priv->white_on_black) {
+ 				fore = VID_BLACK;
+ 				back = VID_WHITE;
+ 			} else {
+@@ -415,7 +416,6 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
+ 				back = VID_BLACK;
+ 			}
+ 
+-			vid_priv = dev_get_uclass_priv(dev);
+ 			if (obj->flags & SCENEOF_POINT) {
+ 				vidconsole_push_colour(cons, fore, back, &old);
+ 				video_fill_part(dev, x - theme->menu_inset, y,
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index 1e385f12f8e..db40744c196 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -343,7 +343,7 @@ void video_set_default_colors(struct udevice *dev, bool invert)
+ 	struct video_priv *priv = dev_get_uclass_priv(dev);
+ 	int fore, back;
+ 
+-	if (CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK)) {
++	if (priv->white_on_black) {
+ 		/* White is used when switching to bold, use light gray here */
+ 		fore = VID_LIGHT_GRAY;
+ 		back = VID_BLACK;
+@@ -580,6 +580,18 @@ static void video_idle(struct cyclic_info *cyc)
+ 	video_sync_all();
  }
- SANDBOX_CMDLINE_OPT_SHORT(noflat, 'F', 0, "Don't run second set of DM tests");
  
-+static int sandbox_cmdline_cb_soft_fail(struct sandbox_state *state,
-+					const char *arg)
++void video_set_white_on_black(struct udevice *dev, bool white_on_black)
 +{
-+	state->soft_fail = true;
++	struct video_priv *priv = dev_get_uclass_priv(dev);
 +
-+	return 0;
++	if (priv->white_on_black != white_on_black) {
++		priv->white_on_black = white_on_black;
++		video_set_default_colors(dev, false);
++
++		video_clear(dev);
++	}
 +}
-+SANDBOX_CMDLINE_OPT_SHORT(soft_fail, 'f', 0,
-+			  "continue test execution even after it fails");
 +
- void state_show(struct sandbox_state *state)
+ /* Set up the display ready for use */
+ static int video_post_probe(struct udevice *dev)
  {
- 	char **p;
-diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
-index b0dfc87f1f9..926761db180 100644
---- a/arch/sandbox/include/asm/state.h
-+++ b/arch/sandbox/include/asm/state.h
-@@ -103,6 +103,7 @@ struct sandbox_state {
- 	bool upl;			/* Enable Universal Payload (UPL) */
- 	bool native;			/* Adjust to reflect host arch */
- 	bool no_flattree_tests;		/* Don't run second set of DM tests */
-+	bool soft_fail;			/* Continue on failure */
+@@ -622,6 +634,8 @@ static int video_post_probe(struct udevice *dev)
+ 	if (IS_ENABLED(CONFIG_VIDEO_COPY) && plat->copy_base)
+ 		priv->copy_fb = map_sysmem(plat->copy_base, plat->size);
  
- 	/* Pointer to information for each SPI bus/cs */
- 	struct sandbox_spi_info spi[CONFIG_SANDBOX_SPI_MAX_BUS]
-diff --git a/include/test/test.h b/include/test/test.h
-index cadf39a0c9d..51609e799b7 100644
---- a/include/test/test.h
-+++ b/include/test/test.h
-@@ -51,6 +51,7 @@ struct ut_stats {
-  * @runs_per_test: Number of times to run each test (typically 1)
-  * @force_run: true to run tests marked with the UTF_MANUAL flag
-  * @old_bloblist: stores the old gd->bloblist pointer
-+ * @soft_fail: continue execution of the test even after it fails
-  * @expect_str: Temporary string used to hold expected string value
-  * @actual_str: Temporary string used to hold actual string value
++	priv->white_on_black = CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK);
++
+ 	/* Set up colors  */
+ 	video_set_default_colors(dev, false);
+ 
+diff --git a/include/video.h b/include/video.h
+index 2fe2f73a865..0ec6b1ca289 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -100,6 +100,7 @@ enum video_format {
+  * @fg_col_idx:	Foreground color code (bit 3 = bold, bit 0-2 = color)
+  * @bg_col_idx:	Background color code (bit 3 = bold, bit 0-2 = color)
+  * @last_sync:	Monotonic time of last video sync
++ * @white_on_black: Use a black background
   */
-@@ -76,6 +77,7 @@ struct unit_test_state {
- 	int runs_per_test;
- 	bool force_run;
- 	void *old_bloblist;
-+	bool soft_fail;
- 	char expect_str[512];
- 	char actual_str[512];
+ struct video_priv {
+ 	/* Things set up by the driver: */
+@@ -131,6 +132,7 @@ struct video_priv {
+ 	u8 fg_col_idx;
+ 	u8 bg_col_idx;
+ 	ulong last_sync;
++	bool white_on_black;
  };
-@@ -299,4 +301,15 @@ static inline bool test_flattree_test_enabled(void)
- #endif
- }
  
-+static inline bool test_soft_fail(void)
-+{
-+#ifdef CONFIG_SANDBOX
-+	struct sandbox_state *state = state_get_current();
-+
-+	return state->soft_fail;
-+#else
-+	return false;
-+#endif
-+}
-+
- #endif /* __TEST_TEST_H */
-diff --git a/include/test/ut.h b/include/test/ut.h
-index be5502e03a1..6731b43dba9 100644
---- a/include/test/ut.h
-+++ b/include/test/ut.h
-@@ -147,7 +147,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 									\
- 	if (!(cond)) {							\
- 		ut_fail(uts, __FILE__, __LINE__, __func__, #cond);	\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -159,7 +160,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 	if (!(cond)) {							\
- 		ut_failf(uts, __FILE__, __LINE__, __func__, #cond,	\
- 			 fmt, ##args);					\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -174,7 +176,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 			 #expr1 " == " #expr2,				\
- 			 "Expected %#x (%d), got %#x (%d)",		\
- 			 _val1, _val1, _val2, _val2);			\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -192,7 +195,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 			 (unsigned long long)_val1,			\
- 			 (unsigned long long)_val2,			\
- 			 (unsigned long long)_val2);			\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -206,7 +210,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 #expr1 " = " #expr2,				\
- 			 "Expected \"%s\", got \"%s\"", _val1, _val2);	\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -225,7 +230,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 			 #expr1 " = " #expr2,				\
- 			 "Expected \"%.*s\", got \"%.*s\"",		\
- 			 _len, _val1, _len, _val2);			\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -245,7 +251,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 			 #expr1 " = " #expr2,				\
- 			 "Expected \"%s\", got \"%s\"",			\
- 			 __buf1, __buf2);				\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -259,7 +266,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 #expr1 " = " #expr2,				\
- 			 "Expected %p, got %p", _val1, _val2);		\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -274,7 +282,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 #expr1 " = " #expr2,				\
- 			 "Expected %lx, got %lx", _val1, _val2);	\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -288,7 +297,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 #expr " != NULL",				\
- 			 "Expected NULL, got %p", _val);		\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -302,7 +312,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 #expr " = NULL",				\
- 			 "Expected non-null, got NULL");		\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -317,7 +328,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 			 #expr " = NULL",				\
- 			 "Expected pointer, got error %ld",		\
- 			 PTR_ERR(_val));				\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -333,7 +345,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 "console", "\nExpected '%s',\n     got '%s'",	\
- 			 uts->expect_str, uts->actual_str);		\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -346,7 +359,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 "console", "\nExpected '%s',\n     got '%s'",	\
- 			 uts->expect_str, uts->actual_str);		\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -358,7 +372,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 	if (ut_check_skipline(uts)) {					\
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 "console", "\nExpected a line, got end");	\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -371,7 +386,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 "console", "\nExpected '%s',\n     got to '%s'", \
- 			 uts->expect_str, uts->actual_str);		\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -384,7 +400,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 "console", "\nExpected '%s',\n     got to '%s'", \
- 			 uts->expect_str, uts->actual_str);		\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -397,7 +414,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 		ut_failf(uts, __FILE__, __LINE__, __func__,		\
- 			 "console", "Expected no more output, got '%s'",\
- 			 uts->actual_str);				\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-@@ -411,7 +429,8 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 			 "console",					\
- 			"Expected dump of length %x bytes, got '%s'",	\
- 			 total_bytes, uts->actual_str);			\
--		return CMD_RET_FAILURE;					\
-+		if (!uts->soft_fail)					\
-+			return CMD_RET_FAILURE;				\
- 	}								\
- 	__ret;								\
- })
-diff --git a/test/test-main.c b/test/test-main.c
-index aa3eb5a3d8e..8515a77fe42 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -77,6 +77,7 @@ void ut_set_state(struct unit_test_state *uts)
- void ut_init_state(struct unit_test_state *uts)
- {
- 	memset(uts, '\0', sizeof(*uts));
-+	uts->soft_fail = test_soft_fail();
- }
+ /**
+@@ -346,6 +348,16 @@ void video_set_flush_dcache(struct udevice *dev, bool flush);
+  */
+ void video_set_default_colors(struct udevice *dev, bool invert);
  
- void ut_uninit_state(struct unit_test_state *uts)
++/**
++ * video_set_white_on_black() - Change the setting for white-on-black
++ *
++ * This does nothing if the setting is already the same.
++ *
++ * @dev: video device
++ * @white_on_black: true to use white-on-black, false for black-on-white
++ */
++void video_set_white_on_black(struct udevice *dev, bool white_on_black);
++
+ /**
+  * video_default_font_height() - Get the default font height
+  *
 -- 
 2.43.0
 
