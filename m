@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A50C3ABA3
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 07:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54839C3ABA9
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 07:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD78B81F7E;
-	Fri,  2 May 2025 09:23:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E59480F03;
+	Fri,  2 May 2025 09:29:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N/MkhUTG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u7ETI/Rg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CFFD8070C; Fri,  2 May 2025 09:23:03 +0200 (CEST)
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
- [IPv6:2607:f8b0:4864:20::e29])
+ id DA211812BC; Fri,  2 May 2025 09:29:30 +0200 (CEST)
+Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
+ [IPv6:2607:f8b0:4864:20::a36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55F2F820E2
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 09:22:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97AB88070C
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 09:29:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-4c300c82ca8so709309137.2
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 00:22:57 -0700 (PDT)
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-5240a432462so1127467e0c.1
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 00:29:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746170576; x=1746775376; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1746170967; x=1746775767; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Cp7+hN0MPxGY/gAeSPMSoNeE2Z4oYCRxg89OjRwSalY=;
- b=N/MkhUTGjhR1sDNKKFRNjOhEz9TUkBmAygdqs6joEVCGEu0FVZgaZO17vHYytMKfIY
- fDaPtAfpWOVkOU9C4CB52nJfZOvlw9A8A34baOv2MzK94qLKR/MczCckDgLZtQ2B73Kk
- UIL9/iGY6uTU0y+Uk/W+uqnjthim2cZrT4trvXlxs23UwD+rFy2pl6BvCugfwTTrmBXu
- 5s7X1yslkCr+UWNfwsUMerwQhttGMH0SbmaRWWdWdLmfMY+aK/Jq/wVNmSZDPu4TOVpF
- dEtg7YFfeP8md7zF79+lPK20NudesFM5nqqvaosUlvDXRZP8msbQXS+dZs7ZrUhvtGBV
- Uy/A==
+ bh=enQo569jLuwEfp2N7VoYq3vBqEfn1OzyGnSTI36x7C0=;
+ b=u7ETI/RgwUj9+Cz+y9V3fiGkEaR93U7o3JHupZUHzqdXlfgvHEdzv8LjItEOUcT5Pc
+ JNGNd20IizuYA9BuC0lLU1io8Ugi9fqUi0UzVvECgVo0wOkCkA3MGdSQJRMGWAljfITc
+ 2haOLW3RTLXOBbtw8rUmU8v39DyDCfKhseozLsLusCImu4hiJEeXD/hyLznNcnF0XwEQ
+ bN0EtWiKa+INq8hYEdRJ4G+TPAbMkN4EKQLleg1i+AQ54cQfJCnyM+kkRQL+dBxxZwNf
+ MhmFPkQM3gC0UX2bbVSeiyGlE4eGuJdPaShJmgkQNnuCjmZHmyXhgX1dNvHf5k6SJTyw
+ 6yWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746170576; x=1746775376;
+ d=1e100.net; s=20230601; t=1746170967; x=1746775767;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Cp7+hN0MPxGY/gAeSPMSoNeE2Z4oYCRxg89OjRwSalY=;
- b=QEoDd8MKof6NqNDwM05ut5eaNbqmsPhGHIC9dfXIZvx8+WmrVVaomazfLvcXwuRnuJ
- Bvnw0IuhfOVJM6Oyc+fxvhg/S42rA9keuT7qeO6CtyGIJA/+NEmI6yXqaoHYIm8SUOv2
- zhkq/VB96yX73oxjeP3yDBdBPr6tEbSjAqo83x9C2rx3KuLpBqf0geuVKTfBSF4DL085
- ouRmu/M/aJFbT3st1ww0zYRxN9fxusS79p2c/OWnExHSl0XJRUpTvoFuUrgj04RQ0Z4k
- jpC1WbHxnL5AB6q3d9gTcU2wq8zYKsr8VRAw35tEs4+fIWYug+kmAeHr1xjr8l+RJgTH
- 5MKw==
-X-Gm-Message-State: AOJu0YxK8ctsLMeifoGlHq1Ho1F53uKTEgsIcgabqtRHhDlZcYuOWAPw
- za0APl/rUY9KVjFOyOmfg/rbI0s6Sd6ayC59JszEfgWDInquXFaIMfva/Jlj3C1aybPHWdqhhLC
- MMR/BGQs3x0rkFZxsGiushQfKkqCcUEkYdQuHPw==
-X-Gm-Gg: ASbGncuYhU9h6cAeQ1A4EM4gfAmoiLVVd7an9D/cEQKDKkpYTLs2aPCS4Q8KoI8U9CM
- 7vQPa79Ojkcl54crN2+2sAqzvd+KEi+ikOqgS50MZl0/yHwUTWhO6mUbw+RmNUwmGvflRWPXUfX
- zXp+QJj6329RO9AnSNXnTNIA==
-X-Google-Smtp-Source: AGHT+IF1bAMb91mxBoDjnehsqVhgmc0grhWT7Y8/ahNxQ0B2W5CEIwasADylcRAHrkF44uR0Iax/9/MUq45NSbjCbLs=
-X-Received: by 2002:a05:6102:149a:b0:4c3:43e:5227 with SMTP id
- ada2fe7eead31-4dafb51b280mr1345586137.9.1746170576217; Fri, 02 May 2025
- 00:22:56 -0700 (PDT)
+ bh=enQo569jLuwEfp2N7VoYq3vBqEfn1OzyGnSTI36x7C0=;
+ b=P2o6xclH3MHiyD/VMX8WvEOZjPSnOqW4tpPNIX+RDsCR6xQOuGNs6lY1QfQq8W6Dgh
+ 8NVfu9phrjD4cCCVbAbF62Rl48U71P0q7cborwe6RFxda70xB+46CXzr3LgNC9qLoA3T
+ XdZo5YJQpY5si/dk4Lv9iSNIKjmbCEqxcgwiwtgWczusbJSNZ1Nh17R2KkVhSxZ+4G9G
+ ggvddBpaQYy6bHzy46FC1ZHLUi5pEnDAO+SCRHvdXK8jAI1TcZK4W1JoP1RlBTokS4VK
+ jcZEbw6Uv/XFZZTCLUv81QJg/cN5UgwZ7cmc1AIdOeuWW7HJUZ44zCY+zqWiJeY42oYS
+ k+UQ==
+X-Gm-Message-State: AOJu0YziEH7bKcocX3e7cXbdzfAs/rZDVdF1zp7AG9QuacpKKKmBqSY3
+ tSyBb5kZccTcJ1SbntE670PDs8tZi601eYQUCoEbc9rDtDP8rg531fFKtnclQ5iUy2R2C5Gs36E
+ 826nref6OxT1pow+8XwgwDWHMvfqhK8KG97sYsw==
+X-Gm-Gg: ASbGncuRbibJW/abaHxHPyKWQurKajmWkfYy9ujDavple1KDi/Uk6bgkW+lSuf8z3Wq
+ MGaKiRrEA6a+p82BrJCIJfUqeEmeDBHS8JGspVxL53bsloI5MnYSdmplG+rvesglnrxUjUb+wpw
+ sQyDuKdYWXEfMrcfrAj3ooPQ==
+X-Google-Smtp-Source: AGHT+IGklnIZufQihaw36EqjAse1iq2JnBJsrm6lT6gapLQnkRjjqw5xf+lkT55IOZL22NjP0A0Fg8Zvb/eaUWqIGmg=
+X-Received: by 2002:a05:6122:1907:b0:52a:654e:bd98 with SMTP id
+ 71dfb90a1353d-52adea1c00bmr4157265e0c.0.1746170967382; Fri, 02 May 2025
+ 00:29:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250501120239.199829-1-sughosh.ganu@linaro.org>
- <20250501120239.199829-5-sughosh.ganu@linaro.org>
- <D9LHBPRHR4U5.2NRVG9UU0X9LV@linaro.org>
-In-Reply-To: <D9LHBPRHR4U5.2NRVG9UU0X9LV@linaro.org>
+ <20250501120239.199829-2-sughosh.ganu@linaro.org>
+ <D9LH4NBVTI6Y.3CQ2ICBEYXZT3@linaro.org>
+In-Reply-To: <D9LH4NBVTI6Y.3CQ2ICBEYXZT3@linaro.org>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 2 May 2025 12:52:44 +0530
-X-Gm-Features: ATxdqUEjJAKlAAJ2iaXrbi3hbsf3cAFp0I9RkTkozQi698Z7U3bnAG5AE4Ijvxc
-Message-ID: <CADg8p97XUcGD=qbGZequo-_2C6eKi=S7KcCWPhGOzqABSk6+RQ@mail.gmail.com>
-Subject: Re: [PATCH 4/5] lmb: use a single function to free up memory
+Date: Fri, 2 May 2025 12:59:16 +0530
+X-Gm-Features: ATxdqUGwt3-vFwjwMVKRu8oPnxenoqVEaHZ5lwEcO2iuuFeXM8sTrVxaPZAyDdk
+Message-ID: <CADg8p96dT1+umwWWqeO95xcZTjvw3pNU7PsGnsnS-n5sHysg+Q@mail.gmail.com>
+Subject: Re: [PATCH 1/5] lmb: replace lmb_reserve() and lmb_alloc_addr() API's
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Casey Connolly <casey.connolly@linaro.org>,
@@ -95,46 +95,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2 May 2025 at 12:30, Ilias Apalodimas
+On Fri, 2 May 2025 at 12:21, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> On Thu May 1, 2025 at 3:02 PM EEST, Sughosh Ganu wrote:
-> > There is no need to have two separate API's for freeing up memory. Use
-> > a single API lmb_free() to achieve this.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
+> Hi Sughosh,
+>
+> Thanks for cleaning this
 >
 > [...]
 >
-> > -long lmb_free(phys_addr_t base, phys_size_t size);
-> > +long lmb_free(phys_addr_t base, phys_size_t size, u32 flags);
+> > + * @flags:           Memory region attributes to be set
+> > + *
+> > + * Allocate a region of memory where the allocation is based on the parameters
+> > + * that have been passed to the function.The first parameter specifies the
+> > + * type of allocation that is being requested. The align parameter is used
+> > + * to specify if the allocation is to be made with a particular alignment.
+> > + * It is 0 if there is no alignment requirement. The addr parameter is used
 >
-> Since you are changing this, why does it have to remain a long? It can just be an int
+> Use 0 for no alignment requirements
 
-Sure, I will change it.
+Okay. Will change.
 
 >
-> >
-> >  void lmb_dump_all(void);
-> >  void lmb_dump_all_force(void);
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index 73e1eef5011..fd6aee21d36 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -508,7 +508,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+> > + * to return the base address of the allocated region. Depending on the type
+> > + * of allocation request, it might also contain a particular address being
+> > + * requested, or the maximum address of the requested allocation. The flags
+> > + * parameter is used to specify the memory attributes of the requested region.
+> > + *
+> > + * Return: 0 on success, -ve value on failure
+> > + *
+> > + * When the allocation is of type LMB_MEM_ALLOC_ADDR, the return value can
+> > + * be -EINVAL if the requested memory region is not part of the LMB memory
+> > + * map, and -EEXIST if the requested region is already allocated.
+> > + */
+> > +int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
+> > +                  phys_size_t size, u32 flags);
+> > +
 >
 > [...]
 >
-> This will lead to a small size increase.
-> Can you check the size before/after this patchset since you are removing a bunch of funtions anyway?
+> > +}
+> > +
+> > +int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
+> > +                  phys_size_t size, u32 flags)
+> > +{
+> > +     int ret = -1;
+> > +
+> > +     if (!size)
+> > +             return 0;
+>
+> Shouldn't this be an error as well?
 
-I did run the size check script from Tom, and while there is an
-increase in size (~300 odd bytes), this patch is not contributing to
-the increase.
+So I had this return an -EINVAL in my original set of changes.
+However, I hit a corner case issue with my testing where a tftp
+transfer of a payload which happens to be a multiple of the tftp block
+size, and that results in the final receive loop having a length of 0.
+Jerome confirmed that this is indeed a valid scenario with tftp. So
+this can be an issue with any kind of loop based reservation requests,
+where the final iteration of the loop might present a size of 0.
+Moreover, I checked the implementation of other allocation functions
+(including efi_allocate_pages()), and they do not return an error if
+the size passed to the function is 0. Hence this behaviour.
 
 -sughosh
 
+>
+> > +
+> > +     if (!addr)
+> > +             return -EINVAL;
+> > +
+> > +     switch (type) {
+> > +     case LMB_MEM_ALLOC_ADDR:
+> > +             ret = _lmb_alloc_addr(*addr, size, flags);
+> > +             break;
+> > +     default:
+> > +             log_debug("%s: Invalid memory allocation type requested %d\n",
+> > +                       __func__, type);
+> >       }
+> >
+> > -     return -1;
+> > +     return ret;
+> >  }
+> >
+> >  /* Return number of bytes from a given address that are free */
+> > diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+> > index 3bf558f7f4f..f80115570e7 100644
+> > --- a/test/lib/lmb.c
+> > +++ b/test/lib/lmb.c
+> > @@ -71,6 +71,19 @@ static int setup_lmb_test(struct unit_test_state *uts, struct lmb *store,
+> >       return 0;
+> >  }
+> >
+>
+> [...]
 >
 > Thanks
 > /Ilias
