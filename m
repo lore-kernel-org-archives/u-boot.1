@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBD5FC3ABA3
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 06:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9407CC3ABA3
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 07:00:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45B128070C;
-	Fri,  2 May 2025 08:55:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16BAE81F7E;
+	Fri,  2 May 2025 09:00:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ysWbhbXZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="obIo6yij";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CACD812BC; Fri,  2 May 2025 08:55:08 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 42FCD81FDE; Fri,  2 May 2025 09:00:18 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91EE08059D
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 08:55:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 739FD8070C
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 09:00:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-acec5b99052so271386066b.1
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 23:55:04 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ac6e8cf9132so313594266b.2
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 00:00:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746168904; x=1746773704; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1746169214; x=1746774014; darn=lists.denx.de;
  h=in-reply-to:references:cc:to:from:subject:message-id:date
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0nQUyYZwz5VA740zUPAHjltE3fXCfp3Mua5uvYw+RJs=;
- b=ysWbhbXZDYZMhwunY7eTJ2Rh6BS9NIzMHoMr0/Zq/0VzbtCMylnjla/vXsKDoDV+NH
- aluPWjLrNHruSLNF4LRgUE3yCbPRLdGc6McJEg0odzv309IGLbcHHyI/mfk6ZfxRo8nh
- JEaD6/TgGH+lt18KopYOgho0gAPiXSkoFp3Rh6h7H2w0LkKWR2kjBXhqpT39OTNXMDFX
- eN5LZ8Qrf1QGZRPohjyok9DhI0EwR1GZ5FlSa+MK0p6W72aInF40aJdhjUePhnuLTn79
- K867X4BBpUJVBZrYhALajphUQFWvcMKJiKWA5YSGvbYcMZ45yb+H4wAI3ZW4VAIAg/3q
- WDFw==
+ bh=AuvnZqPEOSBBa+TwHON8T7Cu1u6PVOe0yLYGMEkF0Ag=;
+ b=obIo6yijjcLc+/pZJ/+/5dbrqbpZCJtMxeAql9QCIKxHa3ao1kk5Qe6u5HxcSLamMH
+ 75cZJ7pU9r23Ytq0nd/hMW6+V4bAdnDAxs4lk6dSL28M5qKseGLXGqwsbEphGPKioTge
+ CLpNmseoBevr+XRV1xNP2eReZnJjsQCPL33p8uAoiOc4Pf1OpVvDESpUH2taeppMM+P8
+ OcrGklZhs57IoFUZZQjTp3t7gVMOVAJ+wOPgQYyTd/JlArEF8dukVbvwS1LnH+nRPjgJ
+ KMd4eeUeUsob+bP2516Wx+ooirmnnDN0milG/zTuOhBTE74e34CGqkp9+BLQi+ijJ70S
+ ayvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746168904; x=1746773704;
+ d=1e100.net; s=20230601; t=1746169214; x=1746774014;
  h=in-reply-to:references:cc:to:from:subject:message-id:date
  :content-transfer-encoding:mime-version:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=0nQUyYZwz5VA740zUPAHjltE3fXCfp3Mua5uvYw+RJs=;
- b=rPG/A7EtH1m7B9xMKhLsiBU1yk/eEFJKBTb6nTUH80TUfgHpRL9MYKCMfD86VPPC0d
- A2fTCJRpI68+P4vhkNGBlpK9TONjQGik/vGUH/49MEeR/iZnVgc5eugc61OcqFey1Qzq
- rcll5mgEgsoDUBi35L1Hszz2q0bruiebI77Ki9Csd6mLAQ/Io/Wv4xAUAvXfkJZH/4/6
- YtWjsoKKiLZ28dxcqpQA2RQf5MtnuQ4o+V9wex+EK7ba6nDyH/HgD9M9NPCmNijUvgYq
- EA0OJCgrIkjAzm24jVLmuomr0y1P1oQo2zqGQDaNqD7UR6Ousd6RYgHe8lEkJCQ4qbsp
- 7z6w==
+ bh=AuvnZqPEOSBBa+TwHON8T7Cu1u6PVOe0yLYGMEkF0Ag=;
+ b=ecqVLHsluTDp0pEVSGIv6dWkIpJDbo348QF9ErgXgkDxm2c0OvIbTMQV1X5fgxh7AS
+ arEIJStY8ITJme14cqG+F/XeAJPJBgh1SsP2vSc+tGQXPqOQokjpGVZkfCJhfVkIdxXs
+ ZFS03rcTvXy+P2Fvy2WlaxSp6CtqFSCNY7OHYCXXs6op2GJKPizFqoAOz7iWcFEuDKq/
+ kGL4EZ8cSwXd9W/BoSpcaW5rI2SZ+A02fsM+w/ZWpTL+zfMhJW94ugFdSKvIMW17c8Ac
+ IxBO/EuEIy2eo7EXRwtnjgNzT4rz1X7bXkToNDn+300h5IqGKu8ByuuWSMcQpaBlpMw7
+ mWlw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0VkzLbG0qep2LTncgaCiOsysFuDCJk7du4/bftnMZVaJUjrVOZ7wSaXz0QDsq3+EtJhcCI0Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YwwpFWmrpjnagPBmQwDzfILEOoOWuo+ezhDKQ063aQCaGGwUYE0
- QqKvjZvC6VXBCavBcFCxTuMJ9yxafMTbZOWxuik24QzzbzmIwhwu77rqLsTKibQ=
-X-Gm-Gg: ASbGncvlH74WlkuTrUwXLD06/kj4Qg4UYAk/BTkUtXiOJ/qnUj/12Uf1pNaQLEzt3GA
- tzrGu2XOAjb6eWJtIiOsjaD+2ZR9+usNr6AJlmffYewPqkVjqxCYOf+70ycS1UZUlmRyYgqDDph
- HQwZYiUo5QWMOcF/4RTXzWTaQ12yA81JciXCnFavnVAAVv+eKHWimFDRhIJYAFqlF2fasF8sO5P
- KF5NTnAiPaPjuK5FQFtvbo07OHPPe1icoJ8q/QHPhEv/meIXMiCckPXhDPXsp0kW1U7N9y6r8Ip
- kZdrgRS1GJrQcUncCuUlgwEvk5lC3qke2VY9uqFr7J+wGmaj
-X-Google-Smtp-Source: AGHT+IGqhuJ9ZkYEXtgRsTvVPBZ+PxYcc4wlAZYUehTiWsfufEiqo2QnsPLgcdk1dgdEAW+mxkzyUA==
-X-Received: by 2002:a17:907:6eaa:b0:ac2:cdcb:6a85 with SMTP id
- a640c23a62f3a-ad17ad81d42mr172820166b.22.1746168904081; 
- Thu, 01 May 2025 23:55:04 -0700 (PDT)
+ AJvYcCXh2hodaUwjYBTWsrV5fkesTuexySAm+/AQllm872co9fJ3UW6TN8Hz2CbWexzzgAI7BoOlEG4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzC8O9MjQ3rH3xNAK9Rzt/ERoJ/mZG9ub+/Qi0qtGU8OoMd59bk
+ nXwbp0+OzWg1X53B6LdPQzBTShtIFqD7FzrFyaJQ3GggQHNwGpc72iND/HRQ75A=
+X-Gm-Gg: ASbGnctGgjrtP1HMZ5O+rz8y73dC0MeFg1qnd2JZSkS/Mg2CaBmyln3h4w7Ib86xQM7
+ n4KbsKpsKgYrrjwG6tW2wfT4PaUJaIUcVOyAAwGEpoyLd8tndYhAZkgcoeWNxcte0qI6MgWfdzc
+ NgVhpTU8CfCgNawU49K291bPlrdK/fmxr70GO9Ya9v4dPFhIumEmMU9knA0xr12znNZRiMKkyzo
+ ArGOM5aHehMOabYD9Hmw7Npt1P6st8rMRz0Bqkj8DL/CM6iyTQMA191ilYBUQqFdMthMzIY6ep6
+ JmiSx6BRb8GezYLa0JNJajvAq0v75p+nZOwNqUPhiNCrcKac
+X-Google-Smtp-Source: AGHT+IFYQ8f/TD0Yr0RwtDVANb0y/QnFfasgIOobHKKsjuGgwn7UP4a3gwCDzRuqaLqIgs/KMtJuSw==
+X-Received: by 2002:a17:907:6e87:b0:ac7:f348:b8bc with SMTP id
+ a640c23a62f3a-ad17b8a6210mr143601466b.61.1746169214559; 
+ Fri, 02 May 2025 00:00:14 -0700 (PDT)
 Received: from localhost ([46.198.180.244]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad189508afdsm746166b.140.2025.05.01.23.55.02
+ 4fb4d7f45d1cf-5fa77bf44a4sm749705a12.75.2025.05.02.00.00.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 May 2025 23:55:03 -0700 (PDT)
+ Fri, 02 May 2025 00:00:14 -0700 (PDT)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 02 May 2025 09:55:02 +0300
-Message-Id: <D9LH7RFN7GRM.ELSYN1G3Z1CX@linaro.org>
-Subject: Re: [PATCH 3/5] lmb: staticise lmb_add_memory()
+Date: Fri, 02 May 2025 10:00:11 +0300
+Message-Id: <D9LHBPRHR4U5.2NRVG9UU0X9LV@linaro.org>
+Subject: Re: [PATCH 4/5] lmb: use a single function to free up memory
 From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
 To: "Sughosh Ganu" <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
 Cc: "Tom Rini" <trini@konsulko.com>, "Casey Connolly"
@@ -85,8 +85,8 @@ Cc: "Tom Rini" <trini@konsulko.com>, "Casey Connolly"
  "Simon Glass" <sjg@chromium.org>
 X-Mailer: aerc 0.20.0
 References: <20250501120239.199829-1-sughosh.ganu@linaro.org>
- <20250501120239.199829-4-sughosh.ganu@linaro.org>
-In-Reply-To: <20250501120239.199829-4-sughosh.ganu@linaro.org>
+ <20250501120239.199829-5-sughosh.ganu@linaro.org>
+In-Reply-To: <20250501120239.199829-5-sughosh.ganu@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,49 +104,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On Thu May 1, 2025 at 3:02 PM EEST, Sughosh Ganu wrote:
-> lmb_add_memory() is only called from the lmb module. Mark the function
-> as static.
+> There is no need to have two separate API's for freeing up memory. Use
+> a single API lmb_free() to achieve this.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  include/lmb.h | 8 --------
->  lib/lmb.c     | 2 +-
->  2 files changed, 1 insertion(+), 9 deletions(-)
->
-> diff --git a/include/lmb.h b/include/lmb.h
-> index be723d9162a..73df4e07248 100644
-> --- a/include/lmb.h
-> +++ b/include/lmb.h
-> @@ -120,14 +120,6 @@ int lmb_allocate_mem(enum lmb_mem_type type, u64 ali=
-gn, phys_addr_t *addr,
->   */
->  int lmb_init(void);
->
-> -/**
-> - * lmb_add_memory() - Add memory range for LMB allocations.
-> - *
-> - * Add the entire available memory range to the pool of memory that
-> - * can be used by the LMB module for allocations.
-> - */
-> -void lmb_add_memory(void);
-> -
->  long lmb_add(phys_addr_t base, phys_size_t size);
->
->  phys_size_t lmb_get_free_size(phys_addr_t addr);
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index a21f9c72204..55aca306a90 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -605,7 +605,7 @@ static __maybe_unused void lmb_reserve_common_spl(voi=
-d)
->  	}
->  }
->
-> -void lmb_add_memory(void)
-> +static void lmb_add_memory(void)
->  {
->  	int i;
->  	phys_addr_t bank_end;
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+[...]
 
+> -long lmb_free(phys_addr_t base, phys_size_t size);
+> +long lmb_free(phys_addr_t base, phys_size_t size, u32 flags);
+
+Since you are changing this, why does it have to remain a long? It can just=
+ be an int
+
+>
+>  void lmb_dump_all(void);
+>  void lmb_dump_all_force(void);
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 73e1eef5011..fd6aee21d36 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -508,7 +508,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_typ=
+e type,
+
+[...]
+
+This will lead to a small size increase.
+Can you check the size before/after this patchset since you are removing a =
+bunch of funtions anyway?
+
+Thanks
+/Ilias
