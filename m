@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0484BC3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06E1C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:55:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 776E982CA4;
-	Fri,  2 May 2025 16:49:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C54FE82C65;
+	Fri,  2 May 2025 16:49:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iaxGnLzO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Muq9z8tm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A24F082CA2; Fri,  2 May 2025 16:49:17 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id C6AEE82BAB; Fri,  2 May 2025 16:49:21 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F26182BDA
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:49:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8869682BAB
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:49:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-85b3f92c8f8so250874839f.1
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:49:15 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-85e46f5c50fso209647839f.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:49:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197353; x=1746802153; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197358; x=1746802158; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PiTfeZJ1812Nhn4FP8wmq7xoUHpJx+ZapmCx0llOFwg=;
- b=iaxGnLzOlEnr1ruxvPDhIrKsbAnhYwm/mPvRkEBmfUaQKKS+Gxwi8dhkXSvM/Bb8Lq
- DzG5dyA6FtEY9ay4UclAYZVc5YedlJ5mJGdsDNqHQi2LUz7WW9rx7ykDP1/Im9VoBpyL
- 49eDgcq2eKayniJACtQmJOq+YTdBxqCVV9yc8=
+ bh=T6v6fToY/SIFscjMOTNH+2aEDNyOADZCVTlt2VNeP3I=;
+ b=Muq9z8tmPMT3p6mdYsm+a/iQsYBKBzkgGugUiuAXsvDAIc2Uhqg7TmfhlvykP039Le
+ OSwMiKOJNKoXk881Zht8V7rBKza9Gk63JeiYBCZs7f5oJWKLa5H4Z5WzrQHEBodbya8Z
+ 3zsbCAK4DZVeAYlFfQNiiBbSr2Rik6D9LpHD8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197353; x=1746802153;
+ d=1e100.net; s=20230601; t=1746197358; x=1746802158;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PiTfeZJ1812Nhn4FP8wmq7xoUHpJx+ZapmCx0llOFwg=;
- b=vEhFfRSe1GpX24sbYkOSxmGXq0I42u7Ymb6epr9DcLfPH45q3CQp4up7aC27CA2svA
- zIIG7d3a0DU2bJGwZCdl7N95/I1tvRqNh5lJK98otdVi0CryT0PVj/UmvkjEUkrJWJeq
- kPz8vb2jVdO3rM/gVkArxGoGQefe+J5aS/list0+D7FHwXZyIlo/Ejra1VO5XZP8rNSQ
- SrBcsS964SDHFqqbqDHEGb59gWGgT0wqEfP0MFogg8fZZhJjiZmcQ2wWEhmbR18I9Spq
- px0BMOMd58pWU7gcx3W5Hmc1MICC/lzg2X0+fihFMGCz6P84gs6ilGBWv+MiR9NG5o7F
- G+qg==
-X-Gm-Message-State: AOJu0YzpcudUikFgPmVYO15VQ5jydNdRxrgc9BTQ+PGH5yaiDG+eQU+k
- VMzSqGWCV4bSUAlKOUpBai3fr+wZiYcVONKmyq44BYebYBqIgt0FkYMdich+N+6VvJNGZDJiAwE
+ bh=T6v6fToY/SIFscjMOTNH+2aEDNyOADZCVTlt2VNeP3I=;
+ b=kVspOHXClsV8aOIjmjs27dSEDHEH9FDYwCTCbH8eX68t8UBKpISeWVMwSpio7Nq+UU
+ R9DY8/MgrymBt5wour3vMbYywg94TkxzhPORbQDiN3+/zqouzS7zmx4a34TeemzJfKRq
+ zTiKhR6eScXWA/0gBeMnaVQtUoUEnmPOfvyR04clT+Te4sLUix88MUade8n2nvJFJovK
+ Ulsz+SuZXax3lmms/Cpo+vtVednnLjQYbaGbxgTYbggSS6Hk0pJL7LBSRSPb6YllgseK
+ H7wEd/TckUFS8rzIwGtX4l7FOyyS6FOl1CXGXar2q686/RUtWOhPsmcoe4vIHdA2I660
+ PKLA==
+X-Gm-Message-State: AOJu0Yyo39TZ7hrg3VvhV/FmfObrwdqXZtNPufjQRWA8o/opdFdnp6CT
+ Iq+lXVPtM8FSREu1vgHLH6UIRF6icp2mlcJjtNRLZvx6UteP2C6zPiMR3WuvO06wRPUaPrgYuZc
  =
-X-Gm-Gg: ASbGncvBl5M/mXJcRx2fitDwg7ldfELMngF78Zl6F6nVEIclfLeoPbCrS7nN55dl5He
- QKx5FiOu9V1wLR5NjoPVh7DTlfPZdXLzR0hZwLtEGvjVu6pb04WkVGVh//CJuEo0pLfWgEvVk6G
- kItk0SpN+rth5qIg6v54D2UxJLBhF5zO6rj6dx62WEgM1hc+IY+t2B5WVJSsqy+FngcKnPnWzrW
- OF/SwMeMJsFvNNSScXHgEBaRRX00apj2IbLzFrl3xixrJEyz1vRLe5trwu0c96KIPKNjm0oVUZx
- MmzwTYF+5714t2fgedhe8BJPv8A9cI0xOGBwh0eVH9nK+6RA8qqdXf/zeQOlqQzFtsczrOHPkXz
- ovA==
-X-Google-Smtp-Source: AGHT+IEFT3ZgdZ2S1nykgKiDqV8OvF7TCnRH0NgMGxYxfOC2KJDxnZ/WxFWqGdWGRo5D1YTaAiov1Q==
-X-Received: by 2002:a05:6602:418c:b0:861:6f48:4a68 with SMTP id
- ca18e2360f4ac-8669fb07ed4mr416612739f.3.1746197353340; 
- Fri, 02 May 2025 07:49:13 -0700 (PDT)
+X-Gm-Gg: ASbGncv2LhbLUkOmUjyd0xbQ3/7Ms8WS/5IvbqyMJYRX05CVV/jsuxpjivTkiU76fMI
+ ZeCOsze3WLYH2ZAqc/hRXyGntrXCXxF1raq5a0gzTa+ruPniJny03bmZq2I443xSFBYklXQxGz7
+ iZ2ombAq5hKVl0s7GMZrwrHdTXuQ/kh7j0juQTS1lyTqpzN2WTP1oWNdZoVtSBFq9BymZU5ZZ6P
+ gdl68xvOCUYfaKO1lswgjhYqDctm55cH7ErY2XiNCOo6WjUKqRhWnOfBof+OdVVhq5ptBJw3LeD
+ 7osqgv/PunRjS6oUfapHiXxbBwxcmjbryK4Us5CSdM7cZOU0ytMqWUye9+bScBLZj5RDzEb9KCF
+ sRdfWLL6+zl9i
+X-Google-Smtp-Source: AGHT+IH+RPHkv3vfbXk45FNjHWFcUGHXOdYStZQ+cfyXiaeyTgvROs5LIODOAMc6j/ZZFkaEyju24g==
+X-Received: by 2002:a05:6602:6cc1:b0:85b:3c49:8811 with SMTP id
+ ca18e2360f4ac-8669f9bb649mr523734639f.4.1746197357765; 
+ Fri, 02 May 2025 07:49:17 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.49.12
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.49.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:49:12 -0700 (PDT)
+ Fri, 02 May 2025 07:49:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 56/60] expo: Improve the visual appearance of the menu
-Date: Fri,  2 May 2025 08:46:54 -0600
-Message-ID: <20250502144718.313633-57-sjg@chromium.org>
+Subject: [PATCH v2 57/60] expo: Update bootflow_menu_poll() to return a
+ sequence ID
+Date: Fri,  2 May 2025 08:46:55 -0600
+Message-ID: <20250502144718.313633-58-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
 References: <20250502144718.313633-1-sjg@chromium.org>
@@ -96,162 +99,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The menu is currently quite basic. Make use of some recently added
-features in expo, to:
+Rather than returning a bootflow, return the index of the bootflow. This
+will allow callers to do their own translation to bootflows or some
+other data structure.
 
-- Show proper prompts
-- Highlight the current item
-- Centre text
-- Use multi-line text instead of two independent lines
-- Put a box around the items
+Also return a special code when the user tries to move the pointer, so
+that the caller can cancel the boot-menu timeout, if this is in use.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Only check the text objects used by the bootmenu, for now
+(no changes since v1)
 
- boot/bootflow_internal.h | 11 +++++++--
- boot/bootflow_menu.c     | 49 ++++++++++++++++++++++++++++++++++++----
- test/boot/bootflow.c     |  2 +-
- 3 files changed, 54 insertions(+), 8 deletions(-)
+ boot/bootflow_menu.c | 32 +++++++++++++-------------------
+ cmd/bootflow.c       | 16 ++++++++++------
+ include/bootflow.h   |  8 ++++----
+ 3 files changed, 27 insertions(+), 29 deletions(-)
 
-diff --git a/boot/bootflow_internal.h b/boot/bootflow_internal.h
-index 38cf02a55b5..4cdb6966a7b 100644
---- a/boot/bootflow_internal.h
-+++ b/boot/bootflow_internal.h
-@@ -14,7 +14,10 @@ enum {
- 	START,
- 
- 	/* strings */
--	STR_PROMPT,
-+	STR_PROMPT1A,
-+	STR_PROMPT1B,
-+	STR_PROMPT2,
-+	STR_AUTOBOOT,
- 	STR_MENU_TITLE,
- 	STR_POINTER,
- 
-@@ -23,10 +26,14 @@ enum {
- 
- 	/* objects */
- 	OBJ_U_BOOT_LOGO,
-+	OBJ_BOX,
- 	OBJ_MENU,
--	OBJ_PROMPT,
-+	OBJ_PROMPT1A,
-+	OBJ_PROMPT1B,
-+	OBJ_PROMPT2,
- 	OBJ_MENU_TITLE,
- 	OBJ_POINTER,
-+	OBJ_AUTOBOOT,
- 
- 	/* strings for menu items */
- 	STR_LABEL = 100,
 diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 6e2d83406f2..fb90e51e920 100644
+index fb90e51e920..6bca17142ad 100644
 --- a/boot/bootflow_menu.c
 +++ b/boot/bootflow_menu.c
-@@ -38,6 +38,7 @@ int bootflow_menu_new(struct expo **expp)
- 	struct menu_priv *priv;
- 	struct scene *scn;
- 	struct expo *exp;
-+	bool use_font;
- 	void *logo;
- 	int ret;
+@@ -301,34 +301,28 @@ int bootflow_menu_start(struct bootstd_priv *std, bool text_mode,
+ 	return 0;
+ }
  
-@@ -53,27 +54,65 @@ int bootflow_menu_new(struct expo **expp)
- 	if (ret < 0)
- 		return log_msg_ret("scn", ret);
+-int bootflow_menu_poll(struct expo *exp, struct bootflow **bflowp)
++int bootflow_menu_poll(struct expo *exp, int *seqp)
+ {
+ 	struct bootflow *sel_bflow;
+ 	struct expo_action act;
+-	int ret;
++	struct scene *scn;
++	int item, ret;
  
--	ret |= scene_txt_str(scn, "prompt", OBJ_PROMPT, STR_PROMPT,
--			     "UP and DOWN to choose, ENTER to select", NULL);
-+	ret = scene_box(scn, "box", OBJ_BOX, 2, NULL);
-+	if (ret < 0)
-+		return log_msg_ret("bmb", ret);
-+	ret |= scene_obj_set_bbox(scn, OBJ_BOX, 30, 90, 1366 - 30, 720);
+ 	sel_bflow = NULL;
+-	*bflowp = NULL;
++
++	scn = expo_lookup_scene_id(exp, exp->scene_id);
++
++	item = scene_menu_get_cur_item(scn, OBJ_MENU);
++	*seqp = item > 0 ? item - ITEM : -1;
  
- 	ret = scene_menu(scn, "main", OBJ_MENU, &menu);
- 	ret |= scene_obj_set_pos(scn, OBJ_MENU, MARGIN_LEFT, 100);
- 	ret |= scene_txt_str(scn, "title", OBJ_MENU_TITLE, STR_MENU_TITLE,
- 			     "U-Boot - Boot Menu", NULL);
--	ret |= scene_menu_set_title(scn, OBJ_MENU, OBJ_PROMPT);
-+	ret |= scene_obj_set_bbox(scn, OBJ_MENU_TITLE, 0, 32,
-+				  SCENEOB_DISPLAY_MAX, 30);
-+	ret |= scene_obj_set_halign(scn, OBJ_MENU_TITLE, SCENEOA_CENTRE);
+ 	ret = expo_poll(exp, &act);
+ 	if (ret)
+ 		return log_msg_ret("bmp", ret);
  
- 	logo = video_get_u_boot_logo();
- 	if (logo) {
- 		ret |= scene_img(scn, "ulogo", OBJ_U_BOOT_LOGO, logo, NULL);
--		ret |= scene_obj_set_pos(scn, OBJ_U_BOOT_LOGO, -4, 4);
-+		ret |= scene_obj_set_pos(scn, OBJ_U_BOOT_LOGO, 1165, 100);
+ 	switch (act.type) {
+-	case EXPOACT_SELECT: {
+-		struct bootflow *bflow;
+-		int i;
+-
+-		for (ret = bootflow_first_glob(&bflow), i = 0; !ret && i < 36;
+-		     ret = bootflow_next_glob(&bflow), i++) {
+-			if (i == act.select.id - ITEM) {
+-				*bflowp = bflow;
+-				// printf("found %p\n", bflow);
+-				return 0;
+-			}
+-		}
++	case EXPOACT_SELECT:
++		*seqp = act.select.id - ITEM;
+ 		break;
+-	}
+ 	case EXPOACT_POINT_ITEM: {
+ 		struct scene *scn = expo_lookup_scene_id(exp, MAIN);
+ 
+@@ -337,13 +331,13 @@ int bootflow_menu_poll(struct expo *exp, struct bootflow **bflowp)
+ 		ret = scene_menu_select_item(scn, OBJ_MENU, act.select.id);
+ 		if (ret)
+ 			return log_msg_ret("bmp", ret);
+-		break;
++		return -ERESTART;
+ 	}
+ 	case EXPOACT_QUIT:
+ 		return -EPIPE;
+ 	default:
+-		break;
++		return -EAGAIN;
  	}
  
-+	ret |= scene_txt_str(scn, "prompt1a", OBJ_PROMPT1A, STR_PROMPT1A,
-+	     "Use the \x18 and \x19 keys to select which entry is highlighted.",
-+	     NULL);
-+	ret |= scene_txt_str(scn, "prompt1b", OBJ_PROMPT1B, STR_PROMPT1B,
-+	     "Use the UP and DOWN keys to select which entry is highlighted.",
-+	     NULL);
-+	ret |= scene_txt_str(scn, "prompt2", OBJ_PROMPT2, STR_PROMPT2,
-+	     "Press enter to boot the selected OS, 'e' to edit the commands "
-+	     "before booting or 'c' for a command-line. ESC to return to "
-+	     "previous menu", NULL);
-+	ret |= scene_txt_str(scn, "autoboot", OBJ_AUTOBOOT, STR_AUTOBOOT,
-+	     "The highlighted entry will be executed automatically in %ds.",
-+	     NULL);
-+	ret |= scene_obj_set_bbox(scn, OBJ_PROMPT1A, 0, 590,
-+				  SCENEOB_DISPLAY_MAX, 30);
-+	ret |= scene_obj_set_bbox(scn, OBJ_PROMPT1B, 0, 620,
-+				  SCENEOB_DISPLAY_MAX, 30);
-+	ret |= scene_obj_set_bbox(scn, OBJ_PROMPT2, 100, 650,
-+				  1366 - 100, 700);
-+	ret |= scene_obj_set_bbox(scn, OBJ_AUTOBOOT, 0, 720,
-+				  SCENEOB_DISPLAY_MAX, 750);
-+	ret |= scene_obj_set_halign(scn, OBJ_PROMPT1A, SCENEOA_CENTRE);
-+	ret |= scene_obj_set_halign(scn, OBJ_PROMPT1B, SCENEOA_CENTRE);
-+	ret |= scene_obj_set_halign(scn, OBJ_PROMPT2, SCENEOA_CENTRE);
-+	ret |= scene_obj_set_valign(scn, OBJ_PROMPT2, SCENEOA_CENTRE);
-+	ret |= scene_obj_set_halign(scn, OBJ_AUTOBOOT, SCENEOA_CENTRE);
-+
-+	use_font = IS_ENABLED(CONFIG_CONSOLE_TRUETYPE);
-+	scene_obj_set_hide(scn, OBJ_PROMPT1A, use_font);
-+	scene_obj_set_hide(scn, OBJ_PROMPT1B, !use_font);
-+	scene_obj_set_hide(scn, OBJ_AUTOBOOT, use_font);
-+
- 	ret |= scene_txt_str(scn, "cur_item", OBJ_POINTER, STR_POINTER, ">",
- 			     NULL);
- 	ret |= scene_menu_set_pointer(scn, OBJ_MENU, OBJ_POINTER);
- 	if (ret < 0)
- 		return log_msg_ret("new", -EINVAL);
+-	return -EAGAIN;
++	return 0;
+ }
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index dda5742db73..6ffb1bd33e1 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -109,18 +109,21 @@ __maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
+ {
+ 	struct expo *exp;
+ 	struct bootflow *bflow;
+-	int ret;
++	int ret, seq;
  
-+	exp->show_highlight = true;
-+
- 	*expp = exp;
+ 	ret = bootflow_menu_start(std, text_mode, &exp);
+ 	if (ret)
+ 		return log_msg_ret("bhs", ret);
  
- 	return 0;
-@@ -198,7 +237,7 @@ int bootflow_menu_apply_theme(struct expo *exp, ofnode node)
- 		int i;
++	ret = -ERESTART;
+ 	do {
+-		ret = expo_render(exp);
+-		if (ret)
+-			return log_msg_ret("bhr", ret);
+-		ret = bootflow_menu_poll(exp, &bflow);
+-	} while (ret == -EAGAIN);
++		if (ret == -ERESTART) {
++			ret = expo_render(exp);
++			if (ret)
++				return log_msg_ret("bhr", ret);
++		}
++		ret = bootflow_menu_poll(exp, &seq);
++	} while (ret == -EAGAIN || ret == -ERESTART);
  
- 		log_debug("font size %d\n", font_size);
--		scene_txt_set_font(scn, OBJ_PROMPT, NULL, font_size);
-+		scene_txt_set_font(scn, OBJ_PROMPT1A, NULL, font_size);
- 		scene_txt_set_font(scn, OBJ_POINTER, NULL, font_size);
- 		for (i = 0; i < priv->num_bootflows; i++) {
- 			ret = scene_txt_set_font(scn, ITEM_DESC + i, NULL,
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 72fb0644ee8..06fd2dbb20a 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -895,7 +895,7 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
- 	 *
- 	 * Check both menu items, since there are two bootflows
- 	 */
--	ut_assertok(check_font(uts, scn, OBJ_PROMPT, font_size));
-+	ut_assertok(check_font(uts, scn, OBJ_PROMPT1A, font_size));
- 	ut_assertok(check_font(uts, scn, OBJ_POINTER, font_size));
- 	for (i = 0; i < 2; i++) {
- 		ut_assertok(check_font(uts, scn, ITEM_DESC + i, font_size));
+ 	if (ret == -EPIPE) {
+ 		printf("Nothing chosen\n");
+@@ -128,6 +131,7 @@ __maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
+ 	} else if (ret) {
+ 		printf("Menu failed (err=%d)\n", ret);
+ 	} else {
++		bflow = alist_getw(&std->bootflows, seq, struct bootflow);
+ 		printf("Selected: %s\n", bflow->os_name ? bflow->os_name :
+ 		       bflow->name);
+ 		std->cur_bootflow = bflow;
+diff --git a/include/bootflow.h b/include/bootflow.h
+index aa46cec4979..8362cbe2e69 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -671,10 +671,10 @@ int bootflow_menu_start(struct bootstd_priv *std, bool text_mode,
+  * bootflow_menu_poll() - Poll a menu for user action
+  *
+  * @exp: Expo to poll
+- * @bflowp: Returns chosen bootflow (set to NULL if nothing is chosen)
+- * Return 0 if a bootflow was chosen, -EAGAIN if nothing is chosen yet, -EPIPE
+- *	if the user quit
++ * @seqp: Returns the bootflow chosen or currently pointed to (numbered from 0)
++ * Return: 0 if a bootflow was chosen, -EAGAIN if nothing is chosen yet, -EPIPE
++ *	if the user quit, -ERESTART if the expo needs refreshing
+  */
+-int bootflow_menu_poll(struct expo *exp, struct bootflow **bflowp);
++int bootflow_menu_poll(struct expo *exp, int *seqp);
+ 
+ #endif
 -- 
 2.43.0
 
