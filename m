@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 501D1C369DC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 02:50:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6794C3ABA9
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 02:51:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC3288209C;
-	Fri,  2 May 2025 04:50:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0114A812BC;
+	Fri,  2 May 2025 04:50:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d1G/KrNZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hXe70IvE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2011A8209C; Fri,  2 May 2025 04:50:46 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 8D0F98212F; Fri,  2 May 2025 04:50:48 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49B4B801BE
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 04:50:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C000F82075
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 04:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-861525e9b0aso144190939f.3
- for <u-boot@lists.denx.de>; Thu, 01 May 2025 19:50:43 -0700 (PDT)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3d93f4fe5baso5362755ab.2
+ for <u-boot@lists.denx.de>; Thu, 01 May 2025 19:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746154241; x=1746759041; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746154243; x=1746759043; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vamrkx58a+x/Q6uLRaUb43ZQIsys23JPGTgK3iJ5S3I=;
- b=d1G/KrNZ+U6ivnXuGGMJk7cVqURrgV+/AZQ+cfWWOT+SUD7yE8cO6uXbkVpo+fx1Cc
- zTnNCEia7EgvoEz7l6UshmZti0sm5a9wR51nk09x9Ih9SigTh1mnov1YFZzZDgdnJjlB
- GMahgYXYhuSCwzdu4+juXz9oWkpIfHsk1RLXM=
+ bh=L0vSLvv06KMoH+vCyzF0zetmh73dYF6XHgbnEK07J/c=;
+ b=hXe70IvEvExi8dyNPQpJuOhEn+41vqlxYS4+ulGDKCs0u8IPJ22G3bmaubW5OoUR5V
+ j4XRsX1AqV9kyq5sWS5Qjsi5B0MYsu0uiifmNhtQrC2EtdibySq+wP6UkD7Ls5UUctPz
+ H9yI9eN2+QRAvpgd7NgsBxxBEkm3L3SyJZfDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746154241; x=1746759041;
+ d=1e100.net; s=20230601; t=1746154243; x=1746759043;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vamrkx58a+x/Q6uLRaUb43ZQIsys23JPGTgK3iJ5S3I=;
- b=mtb4IHFcVUU2gus3p8OTzPvbAwZlFVCxJ1c8ZN2Rd/7z2HNRhQUa0xGnPJ88dPUl+J
- ny2F4JIudZ4Ck/o0x1we18tPpCrdhLNu9OfARULuggJzmv4Yd3XBS1kYuLoE0lMEDnay
- WGXOh3YZVhKx/LdOJs8DrX+tNujdWUmtRToljNlzErKtvu5bVSlm+v3/2b3XkBOfhJfr
- O0DVe1iOgeGFc3PbV9Cj+vvyBp7ZhspHj1CqevkwowLvjm/41fnyBYjtVO46ejQbZtWK
- AbkiM40s8ZosZ43T4igqmjkKYKnBbcwvOvKa4SRuudXL+ZY9y4ZlPmUgckKXy+qbfMiH
- ftqA==
-X-Gm-Message-State: AOJu0YwZLymBSnEoKjmvdXezO9ETmq2meCQaAvxlR3OxY+Jioe5flkTU
- i0RQOzZSKWqk4sd2NJfyxlfLYvb6fF8EXtlmhdE+xNo4Ey0N6y6wHPk8yHrWVcuCp0/+vt1L6YA
+ bh=L0vSLvv06KMoH+vCyzF0zetmh73dYF6XHgbnEK07J/c=;
+ b=B7ekm0rVRF6PcEwq3l1h52JK/ckGAD4u/DlEoHxQWLYDNUKjScSYbTl0jB1l8rCpQk
+ Q90S1fGlbV6imMPXDZc/pi4uQmyCVKL9Vygq8/sDatgKy4sjJGbJNTJFV4FJs6sFHtvw
+ 9oUMBpfiVXmgdHGOVChVJ8f8t0rB0gq3qZL+82nyyDQo2NEZaDwB7c5HDQ2JLYmT6OAn
+ Jis6vbhW1jRjy4EEAHGQ02H1JU159vT+hBvnaqiRgnL5ag4RxKzGkbiHFD7DVwv5MzZa
+ 9T+PxIUbMY0Im8t2kbAosEJk02d6Wa1Vm+VjHAqmvY4HoKdq4iy/x0P0vvTHSqaaYysH
+ 798w==
+X-Gm-Message-State: AOJu0Yxi61XghWAaZFonExsi0Ee9VOJ/9YXIFBuZ4MQyRWB8vXMXlt+p
+ 6cYtkLunRWk6wPZELIb3MYhm1+icdcnMdyiJn/jmmu8TBPrLJgrVQO3zOgItP3FjMOvGxIDqycc
  =
-X-Gm-Gg: ASbGncvZptmwFUcuaoXek6F5FTOWl1VwbvGSGVm/H+agPE/dW8/vgES9EjS1Yr4ELeJ
- 5hnphs+uDGpYRbJGaB5jyB5FiQz86dGcyEZI6Zsvs33AdLFuite9WyQ3f0Vy9seREQ8XaaVda5R
- Do7p55HntH9cIbNqyfaBwBohlBVK6xvmIkTpEk5OX3nJll6MpSGkTFdSBm5hz4H0O5MZhBbEjIk
- gPfW90FHby0pKE4o7pg4pKWyis16axR2REHDRd2feVABpVDVF5FBHR6no8T5/EBtmNOI9fPVQDs
- Rfk5zqls4sIqJrZ4CvodIZMlKGbO1y8LtATfJ+Cwv5EDuFcbBNmFLAlAxpduJeiYH/x054wJPCk
- LVg==
-X-Google-Smtp-Source: AGHT+IGk+TOQfxZNaO3DoUvMuYNFsclGEw1uiTn9JKh/KjhtwDBpWau7FD9+YS4dv4SASRBrnUvPhw==
-X-Received: by 2002:a05:6602:3718:b0:864:677e:ddae with SMTP id
- ca18e2360f4ac-8669f9ac967mr235860739f.6.1746154241263; 
- Thu, 01 May 2025 19:50:41 -0700 (PDT)
+X-Gm-Gg: ASbGncvJRX2tfPFFlxncnuPSSOMhIHwjZ43hkhS7ySpOpcpTo00lLVlQTlbf7or3mex
+ x4ZX7DTPo+7p806uDR0YBzOiFyzNQq8smxrpsYzGlYqGyXS6EQ7xO7XJ8XVfUWIuUybFiKsVmdM
+ 0UcC5nsjPSN+kIMk5w6+oLU8fBJdk6tt4yDQAjTv5I0JvrNXMqHuS4lGkaKhLY+VjmecbgpRDhZ
+ OYiPI8lVxQD0RzFwyB1h4MjD6hYgOZUzSvH3U0Kj1PrYDi3hd8WDtZeNuzv1iSXvtVTyXjeaEuN
+ xfOwsiayK9g9vzR2ZHY6aMrT2zZzBkrnec5W3St9obAM7YO7lVOb/8jvU9PH6DoGOvEWJJ1RbpL
+ 6Ng==
+X-Google-Smtp-Source: AGHT+IG4wRcL8YWZQsGUpKSOW0AwQd4Lt56wf88wN58aQ1AQNs9oPhCMSkWR2utLlr6jTfrNXxWOdg==
+X-Received: by 2002:a05:6e02:2787:b0:3d5:8937:f419 with SMTP id
+ e9e14a558f8ab-3d97c1ad91cmr13494085ab.13.1746154243017; 
+ Thu, 01 May 2025 19:50:43 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f88a918039sm166627173.55.2025.05.01.19.50.39
+ 8926c6da1cb9f-4f88a918039sm166627173.55.2025.05.01.19.50.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 19:50:39 -0700 (PDT)
+ Thu, 01 May 2025 19:50:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/3] doc: Tidy up the hooks documentation
-Date: Thu,  1 May 2025 20:50:18 -0600
-Message-ID: <20250502025026.4140184-3-sjg@chromium.org>
+Subject: [PATCH 3/3] CI: Update to use the hooks in the U-Boot repo
+Date: Thu,  1 May 2025 20:50:19 -0600
+Message-ID: <20250502025026.4140184-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502025026.4140184-1-sjg@chromium.org>
 References: <20250502025026.4140184-1-sjg@chromium.org>
@@ -95,296 +95,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that these files are within the repo, link the documentation to the
-normal U-Boot documentation. Update directory paths and convert it to
-rST format.
+Now that the hooks are present, make use of them directly rather than
+cloning the separate repo.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- doc/develop/index.rst                         |  1 +
- doc/develop/py_testing.rst                    | 22 +++---
- .../README.md => doc/develop/test_hooks.rst   | 72 +++++++++++--------
- 3 files changed, 54 insertions(+), 41 deletions(-)
- rename test/hooks/README.md => doc/develop/test_hooks.rst (87%)
+ .azure-pipelines.yml | 15 +++++++--------
+ .gitlab-ci.yml       | 16 +++++++---------
+ 2 files changed, 14 insertions(+), 17 deletions(-)
 
-diff --git a/doc/develop/index.rst b/doc/develop/index.rst
-index d9f2a838207..ffbb3aeb466 100644
---- a/doc/develop/index.rst
-+++ b/doc/develop/index.rst
-@@ -85,6 +85,7 @@ Testing
-    tests_writing
-    tests_sandbox
-    binman_tests
-+   test_hooks
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index a00ee67f297..bf50727ea55 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -251,13 +251,12 @@ stages:
+           # the below corresponds to .gitlab-ci.yml "before_script"
+           cd \${WORK_DIR}
+           git config --global --add safe.directory \${WORK_DIR}
+-          git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
+           # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
+           # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
+-          ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
+-          ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+-          ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
+-          ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
++          ln -s conf.qemu_arm64_na test/hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
++          ln -s u_boot_boardenv_qemu_arm64_na.py test/hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
++          ln -s travis-ci test/hooks/bin/\`hostname\`
++          ln -s travis-ci test/hooks/py/\`hostname\`
+           if [[ "\${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
+               wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+               export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
+@@ -307,12 +306,12 @@ stages:
+               /opt/coreboot/cbfstool \${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom remove -n fallback/payload;
+               /opt/coreboot/cbfstool \${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom add-flat-binary -f \${UBOOT_TRAVIS_BUILD_DIR}/u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000;
+           fi
+-          export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
+-          export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci
++          export PATH=/opt/qemu/bin:test/hooks/bin:\${PATH}
++          export PYTHONPATH=test/hooks/py/travis-ci
+           # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \$var" if not
+           ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_EXTRA} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=\$(System.DefaultWorkingDirectory)/results.xml
+           # the below corresponds to .gitlab-ci.yml "after_script"
+-          rm -rf /tmp/uboot-test-hooks /tmp/venv
++          rm -rf /tmp/venv
+           EOF
+       - task: CopyFiles@2
+         displayName: 'Copy test.sh for later usage'
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 9f69895efd8..ba9ca5fb9e0 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -30,15 +30,13 @@ stages:
+   rules:
+     - when: always
+   before_script:
+-    # Clone uboot-test-hooks
+     - git config --global --add safe.directory "${CI_PROJECT_DIR}"
+-    - git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
+     # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
+     # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
+-    - ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
+-    - ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+-    - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
+-    - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
++    - ln -s conf.qemu_arm64_na test/hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
++    - ln -s u_boot_boardenv_qemu_arm64_na.py test/hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
++    - ln -s travis-ci test/hooks/bin/`hostname`
++    - ln -s travis-ci test/hooks/py/`hostname`
+     - if [[ "${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
+         wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+         export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
+@@ -60,7 +58,7 @@ stages:
  
- Refactoring
- -----------
-diff --git a/doc/develop/py_testing.rst b/doc/develop/py_testing.rst
-index fb153a277fc..c65de27369b 100644
---- a/doc/develop/py_testing.rst
-+++ b/doc/develop/py_testing.rst
-@@ -314,6 +314,8 @@ via `$PATH`. These scripts implement certain actions on behalf of the test
- suite. This keeps the test suite simple and isolated from system variances
- unrelated to U-Boot features.
- 
-+For more details see :doc:`test_hooks`.
-+
- Hook scripts
- ~~~~~~~~~~~~
- 
-@@ -404,9 +406,9 @@ saving wear on the flash chip(s).
- Examples
- ''''''''
- 
--https://source.denx.de/u-boot/u-boot-test-hooks contains some working example hook
-+The directory `test/hooks` contains some working example hook
- scripts, and may be useful as a reference when implementing hook scripts for
--your platform. These scripts are not considered part of U-Boot itself.
-+your platform. These scripts are considered part of U-Boot itself.
- 
- Board-type-specific configuration
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@@ -469,16 +471,16 @@ instances of:
- Complete invocation example
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
--Assuming that you have installed the hook scripts into $HOME/ubtest/bin, and
--any required environment configuration Python modules into $HOME/ubtest/py,
--then you would likely invoke the test script as follows:
-+Assuming that you have installed U-Boot `$UBOOT`, any new hooks into
-+`$UBOOT/test/hooks/bin` and any new configuration Python modules into
-+`$UBOOT/test/hooks/py`, then you would likely invoke the test script as follows:
- 
- If U-Boot has already been built:
- 
- .. code-block:: bash
- 
--    PATH=$HOME/ubtest/bin:$PATH \
--    PYTHONPATH=${HOME}/ubtest/py/${HOSTNAME}:${PYTHONPATH} \
-+    PATH=$UBOOT/test/hooks/bin:$PATH \
-+    PYTHONPATH=$UBOOT/test/hooks/py/${HOSTNAME}:${PYTHONPATH} \
-     ./test/py/test.py --bd seaboard
- 
- If you want the test script to compile U-Boot for you too, then you likely
-@@ -488,7 +490,7 @@ follows:
- .. code-block:: bash
- 
-     CROSS_COMPILE=arm-none-eabi- \
--    PATH=$HOME/ubtest/bin:$PATH \
-+    PATH=$UBOOT/test/hooks/bin:$PATH \
-     PYTHONPATH=${HOME}/ubtest/py/${HOSTNAME}:${PYTHONPATH} \
-     ./test/py/test.py --bd seaboard --build
- 
-@@ -496,8 +498,8 @@ or, using buildman to handle it:
- 
- .. code-block:: bash
- 
--    PATH=$HOME/ubtest/bin:$PATH \
--    PYTHONPATH=${HOME}/ubtest/py/${HOSTNAME}:${PYTHONPATH} \
-+    PATH=$UBOOT/test/hooks/bin:$PATH \
-+    PYTHONPATH=$UBOOT/test/hooks/py/${HOSTNAME}:${PYTHONPATH} \
-     ./test/py/test.py --bd seaboard --build --buildman
- 
- Writing tests
-diff --git a/test/hooks/README.md b/doc/develop/test_hooks.rst
-similarity index 87%
-rename from test/hooks/README.md
-rename to doc/develop/test_hooks.rst
-index ecf8a46c4a5..c86b45b38b9 100644
---- a/test/hooks/README.md
-+++ b/doc/develop/test_hooks.rst
-@@ -1,17 +1,20 @@
--# Introduction
-+Hardware testing
-+================
- 
--This repository contains working example support ("hook") scripts for U-Boot's
-+The ``test/hooks`` directory contains support ("hook") scripts for U-Boot's
- built-in test framework. That framework is located in the `test/py/` directory
- in the U-Boot source tree.
- 
- You may use these examples as a reference when creating your own hook scripts,
--or even derive your own scripts directly from the files in this repository.
-+or even derive your own scripts directly from the files in ``test/hooks``.
- 
--# Contributing
-+Contributing
-+------------
- 
--See [Contributing.md](Contributing.md).
-+Please send a patch to the U-Boot as per :doc:`process`
- 
--# Flashing Philosophy
-+Flashing Philosophy
-+-------------------
- 
- U-Boot may be installed onto a target device either by:
- 
-@@ -22,14 +25,15 @@ U-Boot may be installed onto a target device either by:
-   download needs to happen every time the target board is reset, since the
-   desired binary is not permanently stored on the system.
- 
--The example scripts in this repository take the second approach. This approach
-+The example scripts in ``test/hooks`` take the second approach. This approach
- avoids modifying the device's flash memory for each U-Boot binary to be tested,
- which should increase longevity of the device. This does mean that the
- implementation of the `test/py/` hook scripts is slightly inconsistent with
- their naming; `u-boot-test-flash` does nothing whereas `u-boot-test-reset`
- downloads U-Boot into RAM rather than only performing a simple system reset.
- 
--# USB Port Paths
-+USB Port Paths
-+--------------
- 
- When multiple USB devices of the same type are attached to the same system, some
- mechanism for differentiating between them is required, in order for software to
-@@ -52,7 +56,7 @@ numbers form the balance of the USB port path.
- Linux uses the format `${bus}-${port}.${port}.${port}...` to represent the USB
- port path.
- 
--For example:
-+For example::
- 
-     +--------------+
-     | PC           |
-@@ -78,7 +82,7 @@ experimentation using tools such as `picocom` or `mount` and `ls`.
- 
- Once a device node has been identified, use udevadm to query all known
- information about the device, then find an entry with `SUBSYSTEMS=="usb"` and a
--`KERNELS` value in the format of a USB port path:
-+`KERNELS` value in the format of a USB port path::
- 
-     $ udevadm info -a /dev/ttyUSB2
-     ...
-@@ -109,7 +113,7 @@ information about the device, then find an entry with `SUBSYSTEMS=="usb"` and a
- 
- Here, the USB port path is "`3-6`".
- 
--or:
-+or::
- 
-     $ udevadm info -a /dev/bus/usb/003/086
-     ....
-@@ -120,9 +124,10 @@ or:
- 
- Here, the USB port path is "`3-10.4`".
- 
--# udev Rules
-+udev Rules
-+----------
- 
--See the `udev/` directory in this repository.
-+See the `test/hooks/udev/` directory.
- 
- Testing should be performed as a non-root user. This requires that the relevant
- device nodes have non-default permissions. udev rules may be used to achieve
-@@ -145,9 +150,10 @@ path.
- 
- The example udev rules demonstrate both of these types of rules.
- 
--# Scripts and Binaries
-+Scripts and Binaries
-+--------------------
- 
--See the `bin/` directory in this repository.
-+See the `test/hooks/bin/` directory.
- 
- Scripts exist to power on, power off, flash, and reset Tegra boards, and access
- their serial console. The U-Boot test framework expects these scripts to exist
-@@ -175,10 +181,11 @@ more than include a board-specific configuration file, and then include another
- file specific to implementation the desired action.
- 
- Board configuration files are located in
--`bin/${hostname}/conf.${board_type}_${board_identity}`. These files are
--segregated by hostname so that the repository can be used directly across
-+`test/hooks/bin/${hostname}/conf.${board_type}_${board_identity}`. These files
-+are segregated by hostname so that the repository can be used directly across
- multiple different test machines, without the need for host-specific branches or
--post-checkout configuration.
-+post-checkout configuration. Your scripts can also exist outside the U-Boot
-+repo if that is helpful.
- 
- The board configuration file defines which mechanism is used for each possible
- action, and any parameters associated with it. For example, downloading U-Boot
-@@ -187,8 +194,8 @@ T124 or earlier, or L4T's `exec-uboot.sh` for boards containing T210 or newer.
- These scripts. In each case, the directory name where the tool is installed must
- be defined.
- 
--Each action is implemented in a script fragment directly in the `bin/` directory,
--with filename `${action_type}.${implementation_name}`.
-+Each action is implemented in a script fragment directly in the`test/hooks/bin/`
-+directory, with filename `${action_type}.${implementation_name}`.
- 
- If using these scripts directly for testing Tegra devices, it is likely that
- you will not need to create new `download.*` implementations, but will need to
-@@ -199,7 +206,8 @@ scripts must be replicated once per board instance, or their actions somehow
- serialized, since they copy files into their own directories when executing, and
- hence parallel execution would cause incorrect operation.
- 
--## Labgrid Integration
-+Labgrid Integration
-+-------------------
- 
- Labgrid is a python library for embedded-board-control. It includes a client
- program which is used to integrate with the U-Boot pytests.
-@@ -208,9 +216,9 @@ Since Labgrid has all the information necessary to build and boot on a lab,
- there is no per-board configuration required. The various flash.xxx and
- recovery.xxx scripts are not used. To set it up, one implementation is:
- 
--- In your bin/$hostname directory, create an executable file
-+- In the test/hooks/bin/$hostname directory, create an executable file
-   `common-labgrid-sjg` and set your crossbar and environment information, for
--  example:
-+  example::
- 
-       # Hostname and port for the gRPC coordinator
-       export LG_COORDINATOR=kea:20408
-@@ -219,7 +227,7 @@ recovery.xxx scripts are not used. To set it up, one implementation is:
-       export LG_ENV="/path/to/kea_env.cfg"
- 
-       # Location of the U-Boot test hooks
--      export UB_TEST_HOOKS=/path/to/u-boot-test-hooks
-+      export UB_TEST_HOOKS=/path/to/u-boot/test/hooks
- 
-       # Make sure only one buildman can run at a time, since it uses all CPUs
-       export BUILDMAN_PROCESS_LIMIT=1
-@@ -258,10 +266,11 @@ variables must be set as per your lab:
- - `LG_ENV` must point at the labgrid yaml file that describes your lab.
- 
- In order for a given platform to be tested, it must be acquired before starting
--tests and then released once complete. See the bin/konsulko-labgrid directory
--for example boards using this method.
-+tests and then released once complete. See the `test/hooks/bin/konsulko-labgrid`
-+directory for example boards using this method.
- 
--## Dependencies
-+Dependencies
-+------------
- 
- The example scripts depend on various external tools, the installation location
- of which must be specified in the board configuration files:
-@@ -280,9 +289,10 @@ of which must be specified in the board configuration files:
- U-Boot's test framework also requires a `dfu-util` that supports the -p
- command-line option. Most distros provide this nowadays.
- 
--# Python Modules
-+Python Modules
-+--------------
- 
--See the `py/` directory in this repository.
-+See the `test/hooks/py/` directory.
- 
- A Python module exists for each board and defines numerous parameters used by
- the U-Boot test framework. The framework expects to simply import these modules
-@@ -292,5 +302,5 @@ These modules are again located in a separate directory for each host, so that
- the repository may be shared across hosts.
- 
- For complete details re: the required content of these Python modules, please
--see `test/py/README.md` in the U-boot source tree, and also the comments in some
--individual test files in `test/py/tests/test_*.py`.
-+see :doc:`py_testing` and also the comments in some individual test files in
-+`test/py/tests/test_*.py`.
+   after_script:
+     - cp -v /tmp/${TEST_PY_BD}/*.{html,css,xml} .
+-    - rm -rf /tmp/uboot-test-hooks /tmp/venv
++    - rm -rf /tmp/venv
+   script:
+     # If we've been asked to use clang only do one configuration.
+     - export UBOOT_TRAVIS_BUILD_DIR=/tmp/${TEST_PY_BD}
+@@ -93,8 +91,8 @@ stages:
+         /opt/coreboot/cbfstool ${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom add-flat-binary -f ${UBOOT_TRAVIS_BUILD_DIR}/u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000;
+       fi
+     # "${var:+"-k $var"}" expands to "" if $var is empty, "-k $var" if not
+-    - export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:${PATH};
+-      export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci;
++    - export PATH=/opt/qemu/bin:test/hooks/bin:${PATH};
++      export PYTHONPATH=test/hooks/py/travis-ci;
+       ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID} ${TEST_PY_EXTRA}
+         ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
+         --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
 -- 
 2.43.0
 
