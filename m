@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95F8AC3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 12:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E57C3ABA3
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 13:12:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD8B7812BC;
-	Fri,  2 May 2025 14:51:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40C6E812BC;
+	Fri,  2 May 2025 15:12:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oNbax70d";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fYtN5/72";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3F7E81E72; Fri,  2 May 2025 14:51:45 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 4116F81E72; Fri,  2 May 2025 15:12:11 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FB24801BE
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 14:51:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7DEB801BE
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 15:12:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5e5c7d6b96fso3620796a12.3
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 05:51:43 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5e8be1bdb7bso2906600a12.0
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 06:12:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746190303; x=1746795103; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746191528; x=1746796328; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qzHRaxjjaX2q2C2Re+BaC+W7U9iJCISqKVxfzPYTNBE=;
- b=oNbax70dEmqkMb9lLgY1WA5osO03RZ+G4FNd44ugg3DZJ/Unu4OuhHoP0YPhuTlEem
- nDAhdVJFUIrIQdjVlTcwfgGDdpWknpUeXCzPYaJVyvPY3P48b9xDiR0orBoWudllc8vl
- z2nvh9rAhJ3PE5sCdea4ELiECtudm2iZ1Kv/U=
+ bh=N/tA4DcY8MFREvYVjAtAxPjfT37qyiCx/CumSja3Wxo=;
+ b=fYtN5/72AS4Jy8kbYGIVcyZpfML5urFVt5KNyu51qLG4cgfRvTwQiRh1f/GpHRAcov
+ tDSpPzmnxVsWIT+fMVhjQLdOrlKYtHGF9LpoCURQaBEAHCNp3HbtzzlDfie0QnB2u7yM
+ MEaH75xSNsGMOmwtt/aw7RYyajsbq5roswYDA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746190303; x=1746795103;
+ d=1e100.net; s=20230601; t=1746191528; x=1746796328;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qzHRaxjjaX2q2C2Re+BaC+W7U9iJCISqKVxfzPYTNBE=;
- b=hQ0dTU295dH4qZ0IIrHqlFK7G0JR1hAgEVwltGYmwahuRVj7aJeikRhoUjQbEoMd4A
- YIYlRXaZM58VJvOOcQCTqJyh6TYWrce8p6/iKabCuw/vetYg30DizkYmHkER3kvmri7W
- dtefFhdTC+11D1oMgT9yausoGSakrjdlYX/ClUk0kBh0suS52JH9/XPDLjZxVYVsRfOE
- 5IUihQxHPzZMYIZ1QsQdE337byuyanrxEydjetSYfk8py96HLEz/J/X7iOXX2ciY7ME3
- YYdd2gM+Va/JA1lPhdOsiJbiFdaHJjfKS9SKPZN06ELaImgYC/eD2SX3UfiS8cIb+TPq
- +2vg==
-X-Gm-Message-State: AOJu0YyOof7GvAGOlLuZ1oAAXpEw7iE1lQfVdYDLY/spnNYpvV9irUQq
- ZuDYQcd7OiquzshtkhvspM0ymoFKLYXs607tjHvQ0uCSRTYT9CvJNgiGpsvbmlYRjqGELTTxnS8
- ItFD3SVZTLox73v6BwPiQGZBHJ9/kIK4fp9J6
-X-Gm-Gg: ASbGncvGABJuRufyE0036BhMxGjOqCHSUEJv7ljj8J0xXg45ipQq2liAvTNS+uk1X2u
- nHw9JJMnex2iQH+LQ4Cgo9styZPAucwDTMsI4/uITZCLCG7vHFgY3y5czNCkKq+qu6FFgR3EKSO
- KMN89Qh5HB8a/tlqtMfH/K9+s=
-X-Google-Smtp-Source: AGHT+IEtnXyJEB5mizn9M/tEeBIAfKJ6f6wRLVpVtSRIz5o78l8DnWlvpbUnU1hOvE/bSUH6Mo/rrd8u4O2vSvUbj/M=
-X-Received: by 2002:a17:907:3da1:b0:acb:7105:61a5 with SMTP id
- a640c23a62f3a-ad17adf2607mr305104166b.32.1746190302586; Fri, 02 May 2025
- 05:51:42 -0700 (PDT)
+ bh=N/tA4DcY8MFREvYVjAtAxPjfT37qyiCx/CumSja3Wxo=;
+ b=tne2Q+3F8W54XS5I2h7kJdCMOmfeRU5LwRNxCOv+pdLTiCB5IQBC+KsX7ubx3gi6R4
+ vjC0MNwDJHEVPMELRYSILkjJrkn/rj2bms5i2oXR3o0pA+JqMCB/T757sPfpIxNtpuE9
+ PM2KJZzzVS9TLmlIDbTlbMBgB8sJC3mxByv3396nJjHCfxHQbvqud3Gf3ga81sDYW1EO
+ Q3EBz4/eHJW15yHxBKXJisWV2YaUj7dA9SwxeekKvnf98Lj+uqy2IlRpWINijPxomfUr
+ h8FuwDzoTYJN9G5NX86Cu8slxPoRFdE1EEhFITPiXkGyF6NkqD6cLLUzTKcj1u71rrYm
+ nSEg==
+X-Gm-Message-State: AOJu0YzWUcuLUxLAMZBaLdRX+m/CI8ji6+gOuwHSIggfYgpCksbQQWyi
+ 4OHQGk/sowenWMWJAy23+GtujO9Rg6tSBz5wuXsSJX6tJQQ2c9ZsIumrVj4MqZtwhpCspsZ30ik
+ MKe8oay2ykPvP85/qNh7HcpzyKO8K5TKshVsj
+X-Gm-Gg: ASbGnctLBsHjfu17lwoSbtJIpzCwWK3PLIqVj2d7OieQeAYeBf5Sd0W7gwd9ypHR2Ct
+ P0TBOFjSbWo9SQ9Ur7m56CN7BiDzCBxc5Ri230pieiS7EgT2TQI1DAf1AI0HGXyAtIXgqryCwKS
+ knoHVY7iM+H3Z7abkPwSg8ulw=
+X-Google-Smtp-Source: AGHT+IFIWTv08oYvEPw765oJJgWHB9S7HIruzCiOucySiwShArYUT1bOKskExzMBzrvpkYHThmwLWGXOISQ1Uexa0gk=
+X-Received: by 2002:a05:6402:50c8:b0:5f8:b48a:a2d with SMTP id
+ 4fb4d7f45d1cf-5fa78018af5mr2503657a12.10.1746191528257; Fri, 02 May 2025
+ 06:12:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250501012530.3954999-1-sjg@chromium.org>
- <20250501140354.GC1261075@bill-the-cat>
- <CAFLszTgKbsE0N1AEkwydiQQLMrMRNDtivQWVKmDsESYqZE-4VA@mail.gmail.com>
- <20250501153015.GG1261075@bill-the-cat>
-In-Reply-To: <20250501153015.GG1261075@bill-the-cat>
+References: <20250501010456.3930701-1-sjg@chromium.org>
+ <20250501010456.3930701-3-sjg@chromium.org>
+ <20250501140617.GD1261075@bill-the-cat>
+ <CAFLszTirfZExTrcmNWZrjbaz0Av5VCCq6q1iLwoxCdG2KrmDVA@mail.gmail.com>
+ <20250501153316.GH1261075@bill-the-cat>
+In-Reply-To: <20250501153316.GH1261075@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 2 May 2025 06:51:31 -0600
-X-Gm-Features: ATxdqUHaIuhLCrIIqtVMNj-VmaaQxulEuB3YU6j3v6xaP3Qgm3gCJV30L09VDCg
-Message-ID: <CAFLszTjvaGLARFCGVODsbRL8h+dLg9Pk1SCV3RcrsC1SrvmTqw@mail.gmail.com>
-Subject: Re: [PATCH] CI: Update the CI lab
+Date: Fri, 2 May 2025 07:11:56 -0600
+X-Gm-Features: ATxdqUFFQrYEQ5oJMaGtHfvKXCa_Y6JIpVabNwsxeD_PFx3NGu2RbnRkmyJRmx4
+Message-ID: <CAFLszThcmQYqXO8rqiYKS-1TdyXcTbfTuaOTa3W8vWMTzKn-YQ@mail.gmail.com>
+Subject: Re: [PATCH v2 02/22] congatec: Include env.h to permit reading the
+ environment
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Oliver Graute <oliver.graute@kococonnector.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,60 +95,39 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 1 May 2025 at 09:30, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 1 May 2025 at 09:33, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, May 01, 2025 at 09:03:15AM -0600, Simon Glass wrote:
+> On Thu, May 01, 2025 at 09:04:45AM -0600, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Thu, 1 May 2025 at 08:03, Tom Rini <trini@konsulko.com> wrote:
+> > On Thu, 1 May 2025 at 08:06, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Wed, Apr 30, 2025 at 07:25:24PM -0600, Simon Glass wrote:
-> > >
-> > > > Update the boards in the lab to match the current situation:
+> > > On Wed, Apr 30, 2025 at 07:04:27PM -0600, Simon Glass wrote:
+> > > > This file reads from the environment but does not include the correct
+> > > > header. Update it.
 > > > >
-> > > > - bbb and pin64 are working again
+> > > > Drop the unnecessary config.h while we are here.
 > > >
-> > > And were never disabled in mainline (since iirc I never saw them not
-> > > working).
+> > > Are you sure about that? It was explicitly added in commit
+> > > ab61cc7d98f6 ("board: congatec: Remove <common.h> and add needed
+> > > includes") probably because of CFG_SYS_... usage.
 > >
-> > OK good.
-> >
-> > >
-> > > > - samus and c4 are still broken, with no end in sight
-> > >
-> > > Good to comment out.
-> > >
-> > > > - new boards for colibrimx8, rockpro64, rock3a/5b, rpi5, zybo
-> > >
-> > > Except the imx8 board doesn't work in CI in mainline and had it's own
-> > > long discussion that petered out.
-> >
-> > It has been fine for me.
-> >
-> > https://sjg.u-boot.org/u-boot/u-boot/-/jobs/49094
-> >
-> > >
-> > > Please v2 where you drop the line about bbb/pine64, and don't add
-> > > colibrimx8 until you or someone else are ready to work on the underlying
-> > > issues this exposed. Thanks.
-> >
-> > Do you know what issues?
+> > Well I assumed it wouldn't build if it had it, but perhaps that is
+> > incorrect? I understood that CFG_ things had to be values and you
+> > couldn't #idef them?
 >
-> Yes, can you please look at the thread from your initial patches?
+> The cases where in that series I added config.h were for good reason,
+> either failure to build or tricky size change reasons. All were
+> intentional. An audit-and-remove of config.h would be it's own series as
+> yes, there's perhaps not the need now as whatever complex chain was
+> unwound.
 
-I see[1], but I'm still not sure what you are referring to. Is this a
-board which is broken with your tree, or is there some issue just with
-the lab?
+Oh dear, OK. I'll respin the series.
 
-Also I was wondering why Nvidia board was not in the list and then
-found this patch which is marked 'changes requested', but I don't see
-any reason:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20241217210920.2050997-1-sjg@chromium.org/
-
-I marked it 'new' again.
+Hmm but I see you have sent a series that does some similar tweak[1].
+What was the goal there?
 
 Regards,
 Simon
 
-[1] https://lore.kernel.org/u-boot/20241217134417.4064239-1-sjg@chromium.org/
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=455004
