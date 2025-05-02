@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D71AC3ABAC
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF769C3ABAC
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:49:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61D01828BC;
-	Fri,  2 May 2025 16:47:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B414782977;
+	Fri,  2 May 2025 16:47:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L0d9/p/3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n4qYxeAx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6638982977; Fri,  2 May 2025 16:47:52 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id EBCF5829C7; Fri,  2 May 2025 16:47:54 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B32E829F6
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 410A082948
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:47:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-864a071b44bso67747139f.3
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:50 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-86135ac9542so80318639f.1
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:47:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746197268; x=1746802068; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746197270; x=1746802070; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QcBCcvRzIsSB+59lJQn/uQ2gmD2WffFKx8H7Ksbre50=;
- b=L0d9/p/33kajX+Ic1opB4blSB4vG2ttec+wY8GLcZZOTIDAuSbmv6SHuPulgyYbgqx
- F8mxY11qQjrKCKNlnUSeBc1tloNcH0FfSJBYseKGbYSG/Uxws1R3KHOeBkKqwov1FzLs
- VIYNH58X2OdTvjVTnuP08CHh/9vJynVWePMmI=
+ bh=9TcrAnOF2NXT+KeDN0mh6/StRNXy9ZPivHXDMLD/f9E=;
+ b=n4qYxeAxT1BTvd/yk/Eaqqf9GfuI15G1XRBxQi77eKaYRLBCD/9duzoyH+5OlqMxKn
+ Pgted2C2Z84/Eniw600864CDmeK7LggJfR5Pl+Zbg+bPgy63VcXgWjYiBEip6HjUx6hh
+ D5pI1bemZl+tUYBrAcBXpC5zlI12lPMZgiKRs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746197268; x=1746802068;
+ d=1e100.net; s=20230601; t=1746197270; x=1746802070;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QcBCcvRzIsSB+59lJQn/uQ2gmD2WffFKx8H7Ksbre50=;
- b=Fv5n7JrteIBJRss73zte8dkGZ9EKyhZ3cnpFYuMAkJ83mprh7+wP9tdsCUcMXE0e1d
- bqmFNInBAzPFDfnQAXvkTKP/MrcFoXyx53iHvksgxNHNSBRdsU3Pg9kAPyOXmq/vt/zu
- CbMJGDGp6C7P8dxf2UpYJiFnJOUKavSnAE1zcA51rUW9n7DaKalU6VRUkKJ4GUvCks5f
- KiX6sawZosl5Y5yj1PXsgtHEKJhFlEDxxPAmzEkUkmOqHhfP3rjZPz59smME96QRrUt4
- 5K5V7/cG2qHmeSfoiy0V9x8YUccWVp11lGied+UiQFqR/61MafBXkc8rAqgY9APOAahd
- +vmg==
-X-Gm-Message-State: AOJu0YzADZaqPZmtDfcUTMGAfHRYwvHZ0DFLwwkiLbXzfLk4LZ6SY8I6
- gKVic8RkeEEShOPiPe3OX8M053QXoSy0iJAbf1Gw5Ix19fDLyEUc6fO3H7/Ya9FJPYrEwD3s5HQ
+ bh=9TcrAnOF2NXT+KeDN0mh6/StRNXy9ZPivHXDMLD/f9E=;
+ b=i4a13iErvEgqF6AXx2hkFMWKgwV2BH7ptT0GkzEaI4otA8X+acaOZFC7a3QKVTo20/
+ QGt5pF/SOywac457DEd0xq/UzrkDL55uLXnzkKD4LidZU6WZhyK+9lB9R+rsImOTcJy7
+ 21t27qaTqe2b5YQZCSyQvRE9sglwIxYxbxNmJ9MG8e+Fu6zfiTlIhTVuIJT8ryllBGZl
+ FGrc+zJD6I0hQRX6b1xnX4OG/Fne42v8tpMqeNmxuNWkQYO4phr07iRRml+PTdOo8yK/
+ h9w0CXyW6pD3i9p1i/XA8XLTEZfwuvYb2T+Wf5Yqbwws3qSuSiWC9JJtltYP4yAY2saO
+ WMvA==
+X-Gm-Message-State: AOJu0Yx2xvp+qNEMS/zuu+cC/I1f4b55GZx2wPWhJ6gmWZF2O2Ui7RSf
+ rJLMyHLoc0E2G2OMLaXkCDoODmaKoNdvJvFI6ENBomHz+GlueFxYpwNt1noP9bORrjjhRO9XKZs
  =
-X-Gm-Gg: ASbGncsVgzaEu6IYs0/ZLlgAaKhnK3QaoMOnfrQbKLAfCyhaP95UrDKnXwB7Nfo3rVe
- LuNpjRt4ep8rZ3GnyaIzdzijDfxT5JeSioAl1oEBr2jsQTXLoCwMVvECUra2IHI1JEelemeDblx
- H/qWLkJGJjVvAbFWH1OGAnASZ1SyhusO02thy5kOEjUVtZ41gNtJshX7c97UHvbr629/WFS14Aa
- JB2+WqFENj7m2UoZsDXjAMucKzO3ZKcbJXGLVf97BN/wHMW4qTdIt39hWNEfSSHwMxsvl3mGXkd
- cJT6OJNseu7nmWz+oI5mBgXUEx3qBLL7sr18tl0W0ZDiDCUU1Yjprs8LaTPbqFb1Xgoj9PbM/sO
- k4A==
-X-Google-Smtp-Source: AGHT+IGVGpnA1Cfz7S0fQOsFyDJDD6n9Fc8SgmKuRaOamJ6W9Kd8Bq0GXDxG9P8riXUdvSqyUsw0UA==
-X-Received: by 2002:a05:6602:4c86:b0:85b:6118:db67 with SMTP id
- ca18e2360f4ac-8669f97ef9fmr409554639f.2.1746197268364; 
- Fri, 02 May 2025 07:47:48 -0700 (PDT)
+X-Gm-Gg: ASbGncuSyqcFiLMHjULEFsZPEpYgfDg3Z/rElzLvZe383dFkwwZUy7k3LCCU9MEX28h
+ 427H+BCKoPSyLvma5SQ3muiqdLS7IODBZBQ6DMPMgUamafB77Wt7yTO/YFIgIUqFrgmRjy3sWPc
+ IH/qncd4UyfcoVhtp8koZM4hwhESQFNvPkJK9mYGS1IgeaEtwrPoKuSJrD3sbIWzlkZhnOTcj8S
+ Xm1h1S+opQ+ba4hYxfaYWqjhH2Tc7VVv2CCl1dHAwzcgH98cPfi63K3hfkL9Qv0K0cKHOyJ6Ehg
+ 4gP/X8Tq7fKcumcd5YgxBCzrpCsMBJ0xKIOfWXpk8XSP149eEZz3Q/9nG2LvkujrUgOKpSiSvA4
+ /2LT3OBQ2yZUT
+X-Google-Smtp-Source: AGHT+IGcEhFBputyGlUYiHGkWxd0YXddO+nCLKV2CRoPLkUQBQo9cThCGv6ffkQgivtvHsXAS5OXXA==
+X-Received: by 2002:a05:6602:2bf2:b0:85e:16e9:5e8d with SMTP id
+ ca18e2360f4ac-864a3dde2fcmr711877939f.7.1746197269905; 
+ Fri, 02 May 2025 07:47:49 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.46
+ ca18e2360f4ac-864aa2bb423sm57011739f.4.2025.05.02.07.47.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 07:47:47 -0700 (PDT)
+ Fri, 02 May 2025 07:47:49 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 13/60] console: Support a format string for stderr output
-Date: Fri,  2 May 2025 08:46:11 -0600
-Message-ID: <20250502144718.313633-14-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 14/60] test: video: Export the video-checking functions
+Date: Fri,  2 May 2025 08:46:12 -0600
+Message-ID: <20250502144718.313633-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250502144718.313633-1-sjg@chromium.org>
 References: <20250502144718.313633-1-sjg@chromium.org>
@@ -98,73 +96,466 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a console_printf_select_stderr() function so that it is not
-necessary for the caller to process the format string.
+We want to check the display contents in expo tests, so move the two
+needed functions to a new header file.
+
+Rename them to have a video_ prefix.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/console.c  | 18 ++++++++++++++++++
- include/console.h | 15 +++++++++++++++
- 2 files changed, 33 insertions(+)
+ include/test/video.h |  45 +++++++++++
+ test/dm/video.c      | 179 ++++++++++++++++++-------------------------
+ 2 files changed, 121 insertions(+), 103 deletions(-)
+ create mode 100644 include/test/video.h
 
-diff --git a/common/console.c b/common/console.c
-index 3362a32a7a0..c6dfed6e201 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -359,6 +359,24 @@ void console_puts_select_stderr(bool serial_only, const char *s)
- 		console_puts_select(stderr, serial_only, s);
+diff --git a/include/test/video.h b/include/test/video.h
+new file mode 100644
+index 00000000000..000fd708c86
+--- /dev/null
++++ b/include/test/video.h
+@@ -0,0 +1,45 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2013 Google, Inc.
++ */
++
++#ifndef __TEST_VIDEO_H
++#define __TEST_VIDEO_H
++
++#include <stdbool.h>
++
++struct udevice;
++struct unit_test_state;
++
++/**
++ * video_compress_fb() - Compress the frame buffer and return its size
++ *
++ * We want to write tests which perform operations on the video console and
++ * check that the frame buffer ends up with the correct contents. But it is
++ * painful to store 'known good' images for comparison with the frame
++ * buffer. As an alternative, we can compress the frame buffer and check the
++ * size of the compressed data. This provides a pretty good level of
++ * certainty and the resulting tests need only check a single value.
++ *
++ * @uts:	Test state
++ * @dev:	Video device
++ * @use_copy:	Use copy frame buffer if available
++ * Return: compressed size of the frame buffer, or -ve on error
++ */
++int video_compress_fb(struct unit_test_state *uts, struct udevice *dev,
++		      bool use_copy);
++
++/**
++ * check_copy_frame_buffer() - Compare main frame buffer to copy
++ *
++ * If the copy frame buffer is enabled, this compares it to the main
++ * frame buffer. Normally they should have the same contents after a
++ * sync.
++ *
++ * @uts:	Test state
++ * @dev:	Video device
++ * Return: 0, or -ve on error
++ */
++int video_check_copy_fb(struct unit_test_state *uts, struct udevice *dev);
++
++#endif
+diff --git a/test/dm/video.c b/test/dm/video.c
+index a9b2482631f..737ab915f41 100644
+--- a/test/dm/video.c
++++ b/test/dm/video.c
+@@ -19,6 +19,7 @@
+ #include <dm/uclass-internal.h>
+ #include <test/test.h>
+ #include <test/ut.h>
++#include <test/video.h>
+ 
+ /*
+  * These tests use the standard sandbox frame buffer, the resolution of which
+@@ -44,24 +45,8 @@ static int dm_test_video_base(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_video_base, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ 
+-/**
+- * compress_frame_buffer() - Compress the frame buffer and return its size
+- *
+- * We want to write tests which perform operations on the video console and
+- * check that the frame buffer ends up with the correct contents. But it is
+- * painful to store 'known good' images for comparison with the frame
+- * buffer. As an alternative, we can compress the frame buffer and check the
+- * size of the compressed data. This provides a pretty good level of
+- * certainty and the resulting tests need only check a single value.
+- *
+- * @uts:	Test state
+- * @dev:	Video device
+- * @use_copy:	Use copy frame buffer if available
+- * Return: compressed size of the frame buffer, or -ve on error
+- */
+-static int compress_frame_buffer(struct unit_test_state *uts,
+-				 struct udevice *dev,
+-				 bool use_copy)
++int video_compress_fb(struct unit_test_state *uts, struct udevice *dev,
++		      bool use_copy)
+ {
+ 	struct video_priv *priv = dev_get_uclass_priv(dev);
+ 	uint destlen;
+@@ -86,19 +71,7 @@ static int compress_frame_buffer(struct unit_test_state *uts,
+ 	return destlen;
  }
  
-+int console_printf_select_stderr(bool serial_only, const char *fmt, ...)
-+{
-+	char buf[CONFIG_SYS_PBSIZE];
-+	va_list args;
-+	int ret;
-+
-+	va_start(args, fmt);
-+
-+	/* For this to work, buf must be larger than anything we ever want to
-+	 * print.
-+	 */
-+	ret = vscnprintf(buf, sizeof(buf), fmt, args);
-+	va_end(args);
-+	console_puts_select_stderr(serial_only, buf);
-+
-+	return ret;
-+}
-+
- static void console_puts(int file, const char *s)
+-/**
+- * check_copy_frame_buffer() - Compare main frame buffer to copy
+- *
+- * If the copy frame buffer is enabled, this compares it to the main
+- * frame buffer. Normally they should have the same contents after a
+- * sync.
+- *
+- * @uts:	Test state
+- * @dev:	Video device
+- * Return: 0, or -ve on error
+- */
+-static int check_copy_frame_buffer(struct unit_test_state *uts,
+-				   struct udevice *dev)
++int video_check_copy_fb(struct unit_test_state *uts, struct udevice *dev)
  {
- 	int i;
-diff --git a/include/console.h b/include/console.h
-index 57fdb0834c1..8d0d7bb8a4c 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -169,6 +169,21 @@ int console_announce_r(void);
-  */
- void console_puts_select_stderr(bool serial_only, const char *s);
+ 	struct video_priv *priv = dev_get_uclass_priv(dev);
  
-+/**
-+ * console_printf_select_stderr() - Output a formatted string to selected devs
-+ *
-+ * This writes to stderr only. It is useful for outputting errors. Note that it
-+ * uses its own buffer, separate from the print buffer, to allow printing
-+ * messages within console/stdio code
-+ *
-+ * @serial_only: true to output only to serial, false to output to everything
-+ *	else
-+ * @fmt: Printf format string, followed by format arguments
-+ * Return: number of characters written
-+ */
-+int console_printf_select_stderr(bool serial_only, const char *fmt, ...)
-+		__attribute__ ((format (__printf__, 2, 3)));
-+
- /**
-  * console_clear() - Clear the console
-  *
+@@ -174,31 +147,31 @@ static int dm_test_video_text(struct unit_test_state *uts)
+ 	ut_assertok(video_get_nologo(uts, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	ut_assertok(vidconsole_select_font(con, "8x16", 0));
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_putc_xy(con, 0, 0, 'a');
+-	ut_asserteq(79, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(79, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	vidconsole_putc_xy(con, 0, 0, ' ');
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+-	ut_asserteq(273, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(273, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	vidconsole_set_row(con, 0, WHITE);
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+-	ut_asserteq(273, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(273, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -216,31 +189,31 @@ static int dm_test_video_text_12x22(struct unit_test_state *uts)
+ 	ut_assertok(video_get_nologo(uts, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	ut_assertok(vidconsole_select_font(con, "12x22", 0));
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_putc_xy(con, 0, 0, 'a');
+-	ut_asserteq(89, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(89, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	vidconsole_putc_xy(con, 0, 0, ' ');
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+-	ut_asserteq(363, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(363, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	vidconsole_set_row(con, 0, WHITE);
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+-	ut_asserteq(363, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(363, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -257,8 +230,8 @@ static int dm_test_video_chars(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	ut_assertok(vidconsole_select_font(con, "8x16", 0));
+ 	vidconsole_put_string(con, test_string);
+-	ut_asserteq(466, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(466, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -279,24 +252,24 @@ static int dm_test_video_ansi(struct unit_test_state *uts)
+ 	/* reference clear: */
+ 	video_clear(con->parent);
+ 	video_sync(con->parent, false);
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	/* test clear escape sequence: [2J */
+ 	vidconsole_put_string(con, "A\tB\tC"ANSI_ESC"[2J");
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	/* test set-cursor: [%d;%df */
+ 	vidconsole_put_string(con, "abc"ANSI_ESC"[2;2fab"ANSI_ESC"[4;4fcd");
+-	ut_asserteq(143, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(143, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	/* test colors (30-37 fg color, 40-47 bg color) */
+ 	vidconsole_put_string(con, ANSI_ESC"[30;41mfoo"); /* black on red */
+ 	vidconsole_put_string(con, ANSI_ESC"[33;44mbar"); /* yellow on blue */
+-	ut_asserteq(272, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(272, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -328,28 +301,28 @@ static int check_vidconsole_output(struct unit_test_state *uts, int rot,
+ 	ut_assertok(video_get_nologo(uts, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	ut_assertok(vidconsole_select_font(con, "8x16", 0));
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	/* Check display wrap */
+ 	for (i = 0; i < 120; i++)
+ 		vidconsole_put_char(con, 'A' + i % 50);
+-	ut_asserteq(wrap_size, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(wrap_size, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	/* Check display scrolling */
+ 	for (i = 0; i < SCROLL_LINES; i++) {
+ 		vidconsole_put_char(con, 'A' + i % 50);
+ 		vidconsole_put_char(con, '\n');
+ 	}
+-	ut_asserteq(scroll_size, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(scroll_size, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	/* If we scroll enough, the screen becomes blank again */
+ 	for (i = 0; i < SCROLL_LINES; i++)
+ 		vidconsole_put_char(con, '\n');
+-	ut_asserteq(46, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(46, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -423,8 +396,8 @@ static int dm_test_video_bmp(struct unit_test_state *uts)
+ 	ut_assertok(read_file(uts, "tools/logos/denx.bmp", &addr));
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+-	ut_asserteq(1368, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(1368, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -443,8 +416,8 @@ static int dm_test_video_bmp8(struct unit_test_state *uts)
+ 	ut_assertok(read_file(uts, "tools/logos/denx.bmp", &addr));
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+-	ut_asserteq(1247, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(1247, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -467,8 +440,8 @@ static int dm_test_video_bmp16(struct unit_test_state *uts)
+ 			   &src_len));
+ 
+ 	ut_assertok(video_bmp_display(dev, dst, 0, 0, false));
+-	ut_asserteq(3700, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(3700, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -491,8 +464,8 @@ static int dm_test_video_bmp24(struct unit_test_state *uts)
+ 			   &src_len));
+ 
+ 	ut_assertok(video_bmp_display(dev, dst, 0, 0, false));
+-	ut_asserteq(3656, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(3656, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -515,8 +488,8 @@ static int dm_test_video_bmp24_32(struct unit_test_state *uts)
+ 			   &src_len));
+ 
+ 	ut_assertok(video_bmp_display(dev, dst, 0, 0, false));
+-	ut_asserteq(6827, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(6827, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -534,8 +507,8 @@ static int dm_test_video_bmp32(struct unit_test_state *uts)
+ 	ut_assertok(read_file(uts, "tools/logos/denx.bmp", &addr));
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+-	ut_asserteq(2024, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(2024, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -551,8 +524,8 @@ static int dm_test_video_bmp_comp(struct unit_test_state *uts)
+ 	ut_assertok(read_file(uts, "tools/logos/denx-comp.bmp", &addr));
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+-	ut_asserteq(1368, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(1368, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -571,8 +544,8 @@ static int dm_test_video_comp_bmp32(struct unit_test_state *uts)
+ 	ut_assertok(read_file(uts, "tools/logos/denx.bmp", &addr));
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+-	ut_asserteq(2024, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(2024, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -591,8 +564,8 @@ static int dm_test_video_comp_bmp8(struct unit_test_state *uts)
+ 	ut_assertok(read_file(uts, "tools/logos/denx.bmp", &addr));
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+-	ut_asserteq(1247, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(1247, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -608,8 +581,8 @@ static int dm_test_video_truetype(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_put_string(con, test_string);
+ 	vidconsole_put_stringn(con, test_string, 30);
+-	ut_asserteq(13184, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(13184, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -630,8 +603,8 @@ static int dm_test_video_truetype_scroll(struct unit_test_state *uts)
+ 	ut_assertok(video_get_nologo(uts, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_put_string(con, test_string);
+-	ut_asserteq(34287, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(34287, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -652,8 +625,8 @@ static int dm_test_video_truetype_bs(struct unit_test_state *uts)
+ 	ut_assertok(video_get_nologo(uts, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_put_string(con, test_string);
+-	ut_asserteq(29471, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(29471, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -691,8 +664,8 @@ static int dm_test_video_copy(struct unit_test_state *uts)
+ 	vidconsole_put_string(con, test_string);
+ 	vidconsole_put_string(con, test_string);
+ 
+-	ut_asserteq(6678, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(6678, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	/*
+ 	 * Secretly clear the hardware frame buffer, but in a different
+@@ -716,8 +689,8 @@ static int dm_test_video_copy(struct unit_test_state *uts)
+ 	vidconsole_put_string(con, test_string);
+ 	vidconsole_put_string(con, test_string);
+ 	video_sync(dev, true);
+-	ut_asserteq(7589, compress_frame_buffer(uts, dev, false));
+-	ut_asserteq(7704, compress_frame_buffer(uts, dev, true));
++	ut_asserteq(7589, video_compress_fb(uts, dev, false));
++	ut_asserteq(7704, video_compress_fb(uts, dev, true));
+ 
+ 	return 0;
+ }
+@@ -772,8 +745,8 @@ static int dm_test_video_damage(struct unit_test_state *uts)
+ 	ut_asserteq(0, priv->damage.xend);
+ 	ut_asserteq(0, priv->damage.yend);
+ 
+-	ut_asserteq(7339, compress_frame_buffer(uts, dev, false));
+-	ut_assertok(check_copy_frame_buffer(uts, dev));
++	ut_asserteq(7339, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
+ 
+ 	return 0;
+ }
 -- 
 2.43.0
 
