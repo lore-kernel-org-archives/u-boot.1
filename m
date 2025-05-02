@@ -4,83 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 738B5C3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 13:42:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E98CC3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 14:06:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3463810EB;
-	Fri,  2 May 2025 15:42:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D262A8210F;
+	Fri,  2 May 2025 16:06:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="trf8c9l6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NC48BCRa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B644A820EB; Fri,  2 May 2025 15:42:28 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 4967882114; Fri,  2 May 2025 16:06:56 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6DCB80F03
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 15:42:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E21BF81F7E
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 16:06:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e733a6ff491so1925882276.2
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 06:42:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3feaedb531dso492159b6e.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 07:06:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746193344; x=1746798144; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=T6QPQMdxAKVzJ6aREwaKWgvOLjbl+MUjTlQnv5Qp/Fs=;
- b=trf8c9l6cRbmYpo0pfFmkRQq0TQiUwkGaGEHB1LPc/aqDerKmLqZCte0NyJETP0SPO
- YdKbXEeTUBisUlrogsDQUfv3ktLlmLUdAyG8F7gk0I8g/L3aPvr7R+hRfvZKRjVGOVgu
- PY3WUdcvJHBMKjjgtHRspjpTVsJg7h9kj9s0otHBUNqR3njlOFyaG99ZCJIfBPasXXm9
- 0Q98s6oIW1055pr/VakpgkjuSuh4vqbaHUSsiU4D/BZMVVIhJCIE6rjDLpJM4UWnZDQu
- 08m7mgDwcPV3KL2SVleI/QaeEJjTzxZme0Dz3uf8BrgpTpVTZz9YD4E8ptdxndWS30lN
- cSqA==
+ d=konsulko.com; s=google; t=1746194812; x=1746799612; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GIWUbDLoJz0Ep6iqwG5msipTHJpffhhF9/5XtZsYv/M=;
+ b=NC48BCRahxBzFgjj2sNOF7kxtRoM15ior/Vv/zc+xGTcR3bBhW7nuopSJ0Dh8fDDYf
+ 7eKdebetoGF1yBsGqyxB0Fk5UXrffbxXSXrgysz9IzH9ZyC6QYMTjAGG6nIXT/4Zfod8
+ sLQIMXV1C0eYy6LGdYegYLkHWMhuu4ldUnRpg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746193344; x=1746798144;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=T6QPQMdxAKVzJ6aREwaKWgvOLjbl+MUjTlQnv5Qp/Fs=;
- b=WW7OuSweDfSSfGrM3YLOM1w33Xe5IszDBdeECKfpV48yLTSf2Rvc3IoeCJ+H+B6s55
- Znh/Cj68TeyXaOPJ2I9iuiC55GjwueHVvE9emLiHOtxvVVUB54jvtWWl9hZRWC8bBIb+
- vAlDt1leGBqrSBbJvn/fuyKoK/YwZxEzC9p4FWAXtlU1BEAg8dEfJBnfxuH/rOrM2ip/
- kFiHGhZfj73LpDk9xQI0O3Az7kf5XvNaCH+FNs6BcXAJzNENVBbfbeZnm77aDhDXH4JT
- rf2VUfkrc8bd1ttFowIecf22cDqgu+YEC6vVV13lv3/0cMnSsAItp8uiGlUpFB7gRy8R
- Mo/g==
-X-Gm-Message-State: AOJu0YwZ31qIcnEgbXFcc8v/g04a3+mGmf3X0BCJbrS37OMP4Q6RTGNI
- 3wUxEBrWE7kSaFbK2YkAyk07YjGsnDuKQpFwB7tfwLi39AV3SAlxEepOaNMa1pKTJHhTHyvDc/1
- 7SDcF0SCJwXOELN4qJ770qJAU21+l8fT0rE9M0g==
-X-Gm-Gg: ASbGncvfHGznklgTRH9f/Pn5XjnHu5VAf1iL5lnfofZMc3UdgDHFguqHBHSi6ZpNj2I
- B6+opL8QtwknkY7eW2tRpp/z/nrUb+bfF5wvPcjQs7kBtq3VyvYiug11Q+Z6nxlVa7HkduWUAnT
- GViHlcVb936J+7GIS2OYBrk3k=
-X-Google-Smtp-Source: AGHT+IFglGU6QGNTydRBnd0I95OCiGnzt7kg+r7/+WRm4MmsJi2EF7jWFptQtYm2iXWEQuob2jLT9vdY9sPi9e3FpD8=
-X-Received: by 2002:a05:6902:274a:b0:e75:607f:5fd2 with SMTP id
- 3f1490d57ef6-e756565e319mr4055406276.48.1746193344620; Fri, 02 May 2025
- 06:42:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746194812; x=1746799612;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GIWUbDLoJz0Ep6iqwG5msipTHJpffhhF9/5XtZsYv/M=;
+ b=m5KTF/pDqJSE+VwIdlR0SHR2vcVo2CxUKQmKMcEI6Hfs3Kp10fj9c7PAqS6XzD57y6
+ YW/ElNWxfCu3KC8pN9KS+9F9usNOOSbeRqWYY1aYXDm5tVQSOFoHqDu7idd+NoIE/sJy
+ sQ1ZzGtcxtuPz9e/RW3jlQUc6+wBu7SkNZW9NJjK5wQ8RpRlyOA7Dx8iEmcY6kxF2LNz
+ uR9/h9rBpeDAkItvTjnlvsJYEar41IMHkZOjmorTpjq0Am/DK3epaYw4IZu6DsaxOBLh
+ XysmQPBwdE/OuT5TACzECxBn11Hw9HQxFbvOi12rJjUb5LU6+HJ0rmINH47BAvleYz5x
+ /cmw==
+X-Gm-Message-State: AOJu0YwVnG3+R+7+B4ZO96XLsa+X6R/5qwZmTGioJqMGFCto5e5KuLlL
+ 01CujvyFYHsfPk6FehGs5jnPn/LgBfFBNXf1bs/mP7+AiZ+uhOeT0aqmBQ5P2aI=
+X-Gm-Gg: ASbGncs/3guLMmN7ijmauN4kXAWE+GUVG6n3xy0XhE76XbCbrc961Y5Q5w+7YUsMfr4
+ bf2KxAdnW1P/ZvMO03JCBXrD6hgX7B/IUEF6yagFPrWTHgQlalMYug/0BVXQWR4/vqZwoHPfros
+ JWjtUQ4lnu2urAEhOiUzxeCRqdVGJVTtaQn8eysew6Kkei7cWv3KzqQoahZPyXdhWL2kMQCMw/B
+ x/OnnRkJP05lugme/vgIS0OIZjY2Dmy0slVTFrzdot1/fN0/GDvFY7uk1VnW5zc8c5LJxBX8E91
+ g8BZDKcqGxeANINzYu8o2Tis7YCtcG/IguoDH7J0CTgR5p/sIqMj63TDj2bjWEPg0cyZA6GLYHK
+ W5g==
+X-Google-Smtp-Source: AGHT+IFGyWhIq3M3YRdvT4+yNyq6XJqxhgC1Ne84Cbl2bqnawaOcSC62F+diZXz8tkGQs0CrI33cKg==
+X-Received: by 2002:a05:6808:6801:b0:3f7:4b65:582f with SMTP id
+ 5614622812f47-403413c1bdamr1952453b6e.17.1746194812608; 
+ Fri, 02 May 2025 07:06:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40349a8f7cbsm184301b6e.50.2025.05.02.07.06.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 May 2025 07:06:51 -0700 (PDT)
+Date: Fri, 2 May 2025 08:06:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Oliver Graute <oliver.graute@kococonnector.com>
+Subject: Re: [PATCH v2 02/22] congatec: Include env.h to permit reading the
+ environment
+Message-ID: <20250502140649.GQ1261075@bill-the-cat>
+References: <20250501010456.3930701-1-sjg@chromium.org>
+ <20250501010456.3930701-3-sjg@chromium.org>
+ <20250501140617.GD1261075@bill-the-cat>
+ <CAFLszTirfZExTrcmNWZrjbaz0Av5VCCq6q1iLwoxCdG2KrmDVA@mail.gmail.com>
+ <20250501153316.GH1261075@bill-the-cat>
+ <CAFLszThcmQYqXO8rqiYKS-1TdyXcTbfTuaOTa3W8vWMTzKn-YQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250501120239.199829-1-sughosh.ganu@linaro.org>
- <20250501120239.199829-3-sughosh.ganu@linaro.org>
- <D9LI7HGHRKRX.3NLD3DXDAG4@linaro.org>
- <CADg8p97qR=p4fZ+Gy8D5zqCHyNh_aSPJS6k9k-OCuWJHnttTwA@mail.gmail.com>
-In-Reply-To: <CADg8p97qR=p4fZ+Gy8D5zqCHyNh_aSPJS6k9k-OCuWJHnttTwA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 2 May 2025 16:41:47 +0300
-X-Gm-Features: ATxdqUE5Y7ygdDOqHqXbwCDGmzUpA8KR1wWiLANNYirhAtDWnXEh9CgkLnic1Bg
-Message-ID: <CAC_iWj+8ujQXrNC2YC56coL_EfeXx_9hPRT2NhwKgXrjP5_ppw@mail.gmail.com>
-Subject: Re: [PATCH 2/5] lmb: replace the lmb_alloc() and lmb_alloc_base()
- API's
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+n5YMjGlIrM9AeGC"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThcmQYqXO8rqiYKS-1TdyXcTbfTuaOTa3W8vWMTzKn-YQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,56 +104,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh
 
-[...]
+--+n5YMjGlIrM9AeGC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> > > -                                     (ulong)lmb_alloc_base(rd_len,
-> > > -                                                                 0x1000,
-> > > -                                                                 initrd_high,
-> > > -                                                                 LMB_NONE);
-> > > +                             err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX,
-> > > +                                                    0x1000, &initrd_high,
-> > > +                                                    rd_len, LMB_NONE);
-> > >                       else
-> > > -                             *initrd_start = (ulong)lmb_alloc(rd_len,
-> > > -                                                              0x1000);
-> > > +                             err = lmb_allocate_mem(LMB_MEM_ALLOC_ANY,
-> > > +                                                    0x1000, &initrd_high,
-> > > +                                                    rd_len, LMB_NONE);
+On Fri, May 02, 2025 at 07:11:56AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 1 May 2025 at 09:33, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > You are now calling the same function, put LMB_MEM_ALLOC_ANY/LMB_MEM_ALLOC_MAX in a variable instead
-> > and make the if smaller
->
-> Will do.
->
+> > On Thu, May 01, 2025 at 09:04:45AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 1 May 2025 at 08:06, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Apr 30, 2025 at 07:04:27PM -0600, Simon Glass wrote:
+> > > > > This file reads from the environment but does not include the cor=
+rect
+> > > > > header. Update it.
+> > > > >
+> > > > > Drop the unnecessary config.h while we are here.
+> > > >
+> > > > Are you sure about that? It was explicitly added in commit
+> > > > ab61cc7d98f6 ("board: congatec: Remove <common.h> and add needed
+> > > > includes") probably because of CFG_SYS_... usage.
+> > >
+> > > Well I assumed it wouldn't build if it had it, but perhaps that is
+> > > incorrect? I understood that CFG_ things had to be values and you
+> > > couldn't #idef them?
 > >
-> > [...]
-> >
-> > > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> > > index 6585813de00..b8e1b0f35bb 100644
-> > > --- a/boot/image-fdt.c
-> > > +++ b/boot/image-fdt.c
-> > > @@ -198,15 +198,27 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
-> > >                       of_start = (void *)(uintptr_t)addr;
-> > >                       disable_relocation = 1;
-> > >               } else if (desired_addr) {
-> > > -                     addr = lmb_alloc_base(of_len, 0x1000, desired_addr,
-> > > -                                           LMB_NONE);
-> > > +                     addr = desired_addr;
-> > > +                     err = lmb_allocate_mem(LMB_MEM_ALLOC_MAX, 0x1000, &addr,
-> >
-> > Is this LMB_MEM_ALLOC_MAX or LMB_MEM_ALLOC_ADDR?
->
-> This is a case for LMB_MEM_ALLOC_MAX as the desired_addr variable that
-> is read as fdt_high has a valid value. So the allocated address should
-> be below desired_addr.
+> > The cases where in that series I added config.h were for good reason,
+> > either failure to build or tricky size change reasons. All were
+> > intentional. An audit-and-remove of config.h would be it's own series as
+> > yes, there's perhaps not the need now as whatever complex chain was
+> > unwound.
+>=20
+> Oh dear, OK. I'll respin the series.
+>=20
+> Hmm but I see you have sent a series that does some similar tweak[1].
+> What was the goal there?
 
-Ah you are right, I misread lmb_alloc_base() for lmb_alloc_addr().
-But in that case, can you rename 'desired_addr' as well to something
-that makes more sense -- e.g high_addr or something like that.
+I fixed your problem. Please don't bother re-spinning this series, it's
+not clear what problems it's solving correctly.
 
-[...]
+--=20
+Tom
 
-Thanks
-/Ilias
+--+n5YMjGlIrM9AeGC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgU0XUACgkQFHw5/5Y0
+tyzjQgwAqOTBoq3h06IZyHy+x5EwYWeSqJSX2SXOkjcqqrCl2TpHmqLiq5ONQ8yJ
+k5vMp2GuezpKQkiZa5IoDQ6P5MKY9ZK/uZqW/UYPHBkuGDTln91Fz5pQCW+DqufL
+buPZ/g8bedRPAD0kenFOBs0fBw5S4i6xueN2NEEFqrS3OJM0fMd0q96pge5hWagH
+9PShZD7O9dM+dRDT+7xZ2JRusv3YM9qX9anO6X/iVH9p3v6frrcBiUfNKG+xMKMg
+RCRE7eKEoAnIGnZn3BcfRe+rRgMiuMtFyAlqOcDlHHiO9g320eewUd/svdue5rqo
+c3PjxOD24XkxZFRBAAL5l2V6IUPOLfz7nPedINjXvJzOlTuW93zeBLOMwK75Qx/T
+B9QzjxOqw5fw4qK05rzR1n+mH/nxRIxv6CoIanTZMOP0UoGmMsMbDxUzkmh9kXIb
+a3F1I+GLRgFAqRiuV25cc2XfJ/w2zLxyIn+9D8StSxnCaYFTyWZRJ03ArugXBHmq
+HoztSpT/
+=zYlC
+-----END PGP SIGNATURE-----
+
+--+n5YMjGlIrM9AeGC--
