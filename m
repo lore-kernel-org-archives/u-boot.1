@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 436BBC3ABAA
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 10:59:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98044C3ABAA
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 10:59:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 599B181FDE;
-	Fri,  2 May 2025 12:59:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F694820E2;
+	Fri,  2 May 2025 12:59:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nktY4WeD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GF50Kgh1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACEB28209C; Fri,  2 May 2025 12:59:19 +0200 (CEST)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id 9CF0D820E2; Fri,  2 May 2025 12:59:24 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 955E380F03
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 12:59:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 821EB820F6
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 12:59:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-476977848c4so26577451cf.1
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 03:59:17 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-476b4c9faa2so30226291cf.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 03:59:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746183556; x=1746788356; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1746183561; x=1746788361; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mwkb1oB4Y/y+HTF8yhpRuoRB8UHT2i5gQzfC1JNVKB0=;
- b=nktY4WeDPuFJATRvtfBsSHv9o3aIZU4L5AprEYr++eEBa50slpgb4u8ToszSnFgur8
- 5BOj/fELmWbyIpjaQkKUb1uPf+qFMsthWwXAEXE/F/KQJ0XtxmVE8ztC1gfAhm3qxX1C
- tBU5JOJ4Dwz1qK/hHEbqXyhD2+ajjTiy7LhB4Fp+EGY4a91IS5orqoGry9ifD3Q+slrG
- Bu9T+4pe1j8E05X/pECVNrzcOKJk8HeZG7zlkqpznShQzHAe0iGz9tVRfP2Pc2yUkKDC
- sny6Ek/KbQ/0wHBLVOTa1GArVtXveW+E7vOM4DqTcoi/8QkbOFtYzogACnEAhZYTaJUa
- LP3g==
+ bh=7uwxURKf7ARI46v+XsfpOEfgda6BbWRbD0631AL8cEs=;
+ b=GF50Kgh1YayVNI07GgZWRWMgX0PCFVD7JH6Yh+4sG7OOn0mrhp2dwypZ6unohQiZ8H
+ olCqNifJMsv4Y/CuTfRTzQTH0CD1tIwyDow1NltZjNQhQzWXlKgE07frg0x7i27WhuLa
+ Lp6F/6q9EjA93Ofd/ZCU6+v02WKyEFnKTVH/caO7IZk5nj7YyIShZWWXG2BMP3SCKpo5
+ Z+AAkzg7u57gXWQPHS55gkZ4mSI9yJNX8wG2NP5hlXDJKFCEnEbyVNs7V+sBRgSyZSTp
+ Drj2RW2Csi5sEqreb9W2yRf223F8ekGrKKG337omi4YFIj3/1lLusfuzxT8qnfdFh26p
+ axFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746183556; x=1746788356;
+ d=1e100.net; s=20230601; t=1746183561; x=1746788361;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Mwkb1oB4Y/y+HTF8yhpRuoRB8UHT2i5gQzfC1JNVKB0=;
- b=axCXvbGPKTtKTY41HbACBKkdcvnW9oKPvTay/OXutB062DPpbInIHLgZUr5X12+c+C
- qvYgUcEtWz90HbvHHcNyXMnES7GbuVBBAxm7eclClNDuviZsUVpo7MSoM0Q91dfutnMF
- gYU4VBp97plNGCCIEORYFne1XlDO3ULcEZ5NIduE7Ip9fgEB9NDddPht5NnHIDB9ND54
- hiWTTxcOTJ1NCui7HjyosW1SzkYJ0vblEhHTPDVvsZBgktfs8vfBVQqCpQlBlwmDwU8A
- FJmls+JJhKaom8Ep292zfcGMiHUYysEcKD4Fpx9qAtXM/Q7wyikHlT9pxUX45WhCpk9q
- akhw==
-X-Gm-Message-State: AOJu0YwQjDGZjzuaLWBAhVmIHyD9r/3nAPvKpFpZO1f8QSpylXU+7EmV
- JkQO1T6W/CSR+i+HJj5deUC6E43Kv5ZYQed+JkzAEsGXVVADRZXA9YFnzw==
-X-Gm-Gg: ASbGncvfszO5LrbkwP7RaPzVp1tPWdjJH+KC2C+gk9lxfTYSwyquM33oVPaajY4JO9h
- wF9vQaLeWpBzohopL7WEhY/MTWuu/aHrqkq3QnZLldk19RfJ+arXe+Z2EpT3I9KXQixFLQSI8va
- kGwfRjMaKfr0CEqQpxNIIfWeIOXrT+seZniHlIBqwuV2dz4tySIn2F5Pp3VshywZkSVYUpLUHny
- TXChTySbGwIn8Gc84ZuTZaF+XvItywvcTjBZly81FCoEN2+h/CXPWUXhloQDkXEgAR9jf8RgCXA
- xu0bKhKHgK41Kf1mdsaioIXJv0hENzr0kfAbwxLngvfCVjQY44/xPiZs4iAOl5mEVn2iOoozNQk
- LckwIIO89n+e0q98=
-X-Google-Smtp-Source: AGHT+IFA90wDj8ZfPP/qHmJvpZyjXkWzhGHNJ1p0IU8cD4Mf5vIz9KpYjpl9qQK9v2Jw45NKV9kxtQ==
-X-Received: by 2002:a05:622a:114b:b0:48a:f7d7:f9f8 with SMTP id
- d75a77b69052e-48c31353b69mr41916151cf.14.1746183556112; 
- Fri, 02 May 2025 03:59:16 -0700 (PDT)
+ bh=7uwxURKf7ARI46v+XsfpOEfgda6BbWRbD0631AL8cEs=;
+ b=afovjNLaYPPGYvQPdob6f/uwQ+QqblhrT3SdsfkyycVGNDeLKx9HuEWRLZBMXsLwzG
+ ZgZ//oj3VDL6kpDDwTujcgOBWK21ItuGMdmzWFcXChs/G22lmvwXBZdaiZHaN+9eSdb/
+ SLAf6o+OFZZZwknZrSvVEOG0pGFJrVCTGlZ67QA7xuQOjsKyGeOQ/TTOQ5ZqhmZC0FuL
+ ERPY1gnNzYTG3GHuGFR/Ma0etcNThFEKVkgpRK6iShaSTlsr3re4jBqz6GxusLZk0AnK
+ +CoSiGmFp66ivrD4ovZaqVOhhfO4wnbx6Rln0s8eZHe1q7hs3wiozI8EhIKho4Dkko5M
+ Nl7w==
+X-Gm-Message-State: AOJu0Yzl23A1XI8Wh0IVrWUTxwN7D2MTL+kQ9Uyp7IT+pjRBeiX0f3pP
+ zIMMPQSJTnSotmMOr4GXw+RMiyvlnEJRTJeW/8X6HZgHjFYyKb53UZQuOg==
+X-Gm-Gg: ASbGnct1Uw9vubUrp+zS+J30YL4mX/tT54d44lpWhrxpSmKc3n+LRjB5VsGvRdUmmxd
+ bmbWZ7KbfvyoVKC5WZqXJ6yreDa+T57Q7N40MLfbeS71o9pW50+ZzAjaI7JpraRkr/eWwl6GSrs
+ PpNVn+enCgfi61O1SWOxQ2C6wmvEP2uhQBTec6wECOdwFUrB51MCX5O/3EdgqIhTsehWIO2miD7
+ VALRVb9c54Ehijlf9xtOa0VFbdr/FN8o/hL1t/mSjyp3whr34S1j1R5PrOumEoGGH1z/iDI8hbN
+ yMxlHIChr65f0ltmSMRFhfZ0IbDums1e7tadynpsZqvgfXUesAu8PBfVAca3k9ANDX21hfOETRE
+ 39KCho950lRW/Kek=
+X-Google-Smtp-Source: AGHT+IHSQytymjYGFp2XhF919OaVVJNAJctYgaLpYVYWsmeWqWfqGzF9ny+r7wMRrA65IpKmmsqE9Q==
+X-Received: by 2002:a05:622a:5190:b0:476:afd2:5b5d with SMTP id
+ d75a77b69052e-48c311621f3mr43717601cf.4.1746183560753; 
+ Fri, 02 May 2025 03:59:20 -0700 (PDT)
 Received: from aford-System-Version.. (c-75-72-162-184.hsd1.mn.comcast.net.
  [75.72.162.184]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-48b966dc21asm16754901cf.32.2025.05.02.03.59.15
+ d75a77b69052e-48b966dc21asm16754901cf.32.2025.05.02.03.59.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 May 2025 03:59:15 -0700 (PDT)
+ Fri, 02 May 2025 03:59:20 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: festevam@gmail.com, aford@beaconembedded.com,
  Adam Ford <aford173@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH 2/3] arm64: imx: imx8mn-beacon: Enable BOOTAUX
-Date: Fri,  2 May 2025 05:58:47 -0500
-Message-ID: <20250502105859.978427-2-aford173@gmail.com>
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/3] arm64: imx: imx8mp-beacon: Enable BOOTAUX
+Date: Fri,  2 May 2025 05:58:48 -0500
+Message-ID: <20250502105859.978427-3-aford173@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250502105859.978427-1-aford173@gmail.com>
 References: <20250502105859.978427-1-aford173@gmail.com>
@@ -101,21 +101,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to run binaries targeting the Cortex-M7,
-BOOTAUX is required.
+In order to run binaries targeting the Cortex-M7, BOOTAUX is
+required.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 
-diff --git a/configs/imx8mn_beacon_defconfig b/configs/imx8mn_beacon_defconfig
-index c605567d9a6..115288aa27f 100644
---- a/configs/imx8mn_beacon_defconfig
-+++ b/configs/imx8mn_beacon_defconfig
-@@ -29,6 +29,7 @@ CONFIG_SPL=y
+diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
+index 288626c1511..9f6fabc894f 100644
+--- a/configs/imx8mp_beacon_defconfig
++++ b/configs/imx8mp_beacon_defconfig
+@@ -33,6 +33,7 @@ CONFIG_ARMV8_SET_SMPEN=y
+ CONFIG_ARMV8_EA_EL3_FIRST=y
  CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
- CONFIG_SYS_MEMTEST_START=0x40000000
- CONFIG_SYS_MEMTEST_END=0x44000000
+ CONFIG_PCI=y
 +CONFIG_IMX_BOOTAUX=y
- CONFIG_REMAKE_ELF=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
  CONFIG_FIT=y
  CONFIG_FIT_EXTERNAL_OFFSET=0x3000
 -- 
