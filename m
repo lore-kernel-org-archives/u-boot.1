@@ -4,108 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98215C3ABA3
-	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 04:18:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7639AC3ABA3
+	for <u-boot@archiver.kernel.org>; Fri,  2 May 2025 04:42:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D81868059D;
-	Fri,  2 May 2025 06:18:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id CB11D8059D;
+	Fri,  2 May 2025 06:42:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JCJNo+4I";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="wPcxB5qI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1921B80F03; Fri,  2 May 2025 06:18:39 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id F0CD88070C; Fri,  2 May 2025 06:42:41 +0200 (CEST)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9281C803CC
- for <u-boot@lists.denx.de>; Fri,  2 May 2025 06:18:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8B63803CC
+ for <u-boot@lists.denx.de>; Fri,  2 May 2025 06:42:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1746159515; x=1746764315; i=xypron.glpk@gmx.de;
- bh=THOnZpDkc8hLd7gxbBT5H/m6SIGmYHkLqiYQez3i0C0=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=JCJNo+4I/bwWHpWvbaFO9+f5S8l7Wsl68WOl3VFApeCoulEyZCBh1ZrWy8gDPk2A
- PXU8nnRMTI1FpJLPFdpndCKkduWEZtZ947OpcfCgAwZSlfobNJpwD/PF9KOtuBdBy
- VCJTT6gpi08G7k1yCZqRC3fifJjQnAem3bULjaf4HtEsbRC1IK2Pm8bhmUrpRtlGV
- Jy7dSitHAaG8ZsMvlNwxBtBwpldFzvzVCi8bBR2s2qVGSzhWgkoT3IzF6pEKGL/+W
- pMSgYMve8UMa941hvN2yhLCXgMToye28fdO2QK7K3dkWeE14qKT8c+iMH49f00I+d
- Zx6/QFSP5N5zdeJKkw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.105.83]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MEV3I-1uHuj23DPG-00Dg1z; Fri, 02
- May 2025 06:18:35 +0200
-Date: Fri, 02 May 2025 06:18:33 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 3/3] CI: Update to use the hooks in the U-Boot repo
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250502025026.4140184-4-sjg@chromium.org>
-References: <20250502025026.4140184-1-sjg@chromium.org>
- <20250502025026.4140184-4-sjg@chromium.org>
-Message-ID: <B46E93DD-0DAE-4296-B28C-4AB518778DA0@gmx.de>
-MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GGQNiCgpP25i9g6rB9hHtt/DnqjztWd2Bze86e6mVDFRAva0Kqf/ACXnyX8yyYB3cwd4oVidh3zf6vMnnO3T6VclKtO3LcqIU98gHn2Ie4eaJK8B9z24CPFJWh9LosoFQJRE6/o1XwJFfXSFzjEylsUP6Pw/YuvzoHTLROXTvBvFdwnzBQ+3Ik7IKluQC6XEaN17J/oVqtIdWUrZHZWeE8lu/MGNCP7wkahBjAo7nYouQRfJtckPrTlwnjGwxzCzNY/XBKhzxBf2I+5kMgv1pmBUfAngLz3kQTZJVdWG3+T4mdFkT+OejrYjyU5rXDkXmXPo5vl84tqv1Dwnsn/Fcg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7GTNiRe/CGdtovEnpVUsLnhD9U8FYHsJuPbzdaz82KE=;
+ b=UfVNDO7BarwnTL3CKbfZgZmIO40j6AYRSyH4XQdo7YK2+faINAryAqby6nH1z25kBqjaJCxG2TQmw6j3BblRsUGtDtv5PQpzDQdCeYow8N56ma+X+NiJuKx7oMZfWIxxVVc3tocR+9XQskADiX8v/+mEbbws+W6Yj6sCKZq++oUuxmiA/3oCSSDNKsvd4Ye/l/pWk1FL2m2Q2IZL0pMfxtPyyryRdm7tB+UgpjfWN5dB/43cnQJ1rHSiKAsiirXs35fDzqlkJzLbfvfPgzTnUYJbM/509c28/Dru6M0pnMdPNdsrAaB1ghkQnkM7g8A1gG8CwSrrU2mc+Fez4tvSpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7GTNiRe/CGdtovEnpVUsLnhD9U8FYHsJuPbzdaz82KE=;
+ b=wPcxB5qIgbNOlKpz2GFSxHizd1cep5p8W5lm3W5ZZgb2me7zilBseXoHxism8OzW71DX8piYBbtAdFb63kglhtp3p7RaGboA33VGcKdPOXO2c8whCaNUP4pJa304bTudsj6AnokeW9nz/hopIVXfOj3ybnoBBw32l5HkB+9JA+TVoccDK3dInK2DG4tYv/RFjEBjN0LGbKoZCn7JXLa10ysG78WRyjTxUqMRsxImuKFzRxzyH8aHA5CDcoTVXvY4A60bI3YYrFVYLODQrmlCU9CIYgdW57ufxf23L6mwr0A4LnJ9KOwKB1l6treFZI9m0xVsImSSTMJbnZWP4XgslA==
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by LV3PR03MB7562.namprd03.prod.outlook.com (2603:10b6:408:28f::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.24; Fri, 2 May
+ 2025 04:42:36 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5%5]) with mapi id 15.20.8699.012; Fri, 2 May 2025
+ 04:42:35 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+To: "Meng, Tingting" <tingting.meng@altera.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Marek Vasut <marex@denx.de>, "Hea, Kok Kiang" <kok.kiang.hea@altera.com>, 
+ "Maniyam, Dinesh" <dinesh.maniyam@altera.com>, "Ng, Boon Khai"
+ <boon.khai.ng@altera.com>, "Yuslaimi, Alif Zakuan"
+ <alif.zakuan.yuslaimi@altera.com>, "Rosdi, Danish Ahmad"
+ <danish.ahmad.rosdi@altera.com>, "Zamri, Muhammad Hazim Izzat"
+ <muhammad.hazim.izzat.zamri@altera.com>, "Lim, Jit Loon"
+ <jit.loon.lim@altera.com>
+Subject: RE: [PATCH v1 1/1] arm: socfpga: agilex5: Coverity issue cleanup in
+ jtag_usercode check
+Thread-Topic: [PATCH v1 1/1] arm: socfpga: agilex5: Coverity issue cleanup in
+ jtag_usercode check
+Thread-Index: AQHbuOzldF+8Ny8E7kaJld6+olj/0rO+x1xA
+Date: Fri, 2 May 2025 04:42:35 +0000
+Message-ID: <LV8PR03MB813733540201F25428F9CAB9A78D2@LV8PR03MB8137.namprd03.prod.outlook.com>
+References: <20250429095542.10925-1-tingting.meng@altera.com>
+In-Reply-To: <20250429095542.10925-1-tingting.meng@altera.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|LV3PR03MB7562:EE_
+x-ms-office365-filtering-correlation-id: f79bb75e-f9de-4f70-509b-08dd8933c2a6
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|38070700018|7053199007; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?TRUMPVlW5a9yjOCVcLW09b9XLnF+y1MAbWb8YkfLTWZD8oQ7q6PqWTa8naxm?=
+ =?us-ascii?Q?n100aBkCa3fc7EcyROIDJv80MWymf5o50MH+KJgAajJdVJSKUHot3kjYkNPR?=
+ =?us-ascii?Q?h+nrxotv75k75D+C2pQ5qg5x56i4FX8LrB6QnfVK3GYfuMNuy0l3BhAfSJk2?=
+ =?us-ascii?Q?b4LyVwoWndp7iTFxCXj6e5gR3lTAmv1zAApXorHBfP97AVDoCzRWnnBMK6ED?=
+ =?us-ascii?Q?GtBOGkMZSsN11MtE60BxrwaE5LsS+y65c2y+bPy+bpyLy24nJVkYLa8tc3as?=
+ =?us-ascii?Q?s1dALPOCRHfTyNq0OHHQC5ylPTTXxnl34zIruzQufac27a0pDeTC2V2UiCqE?=
+ =?us-ascii?Q?O9S1+gQCO26eWLYw8a6O7po0JTtwp7rsIRtJ4gSfI6KqkfQeNR8qzDGGPTQA?=
+ =?us-ascii?Q?9RFPccpOOv77zvGLlXSJyLYiErO+1OvTUe7HQUimR6oq72YqfpGaZDWUTFZB?=
+ =?us-ascii?Q?Xp04hX0pW8Ypm9fTa5qIDp3J+pYiR5gAlK913PSGldXhhMs0GI3qVTtxRxkL?=
+ =?us-ascii?Q?Sq+ZZC6h5vvjN68OD9OxITBHnBsQO8SZrcoQ7wm9VH0N7dK8GEi8uDHF8/bL?=
+ =?us-ascii?Q?9SC2N5zLZjoS4JeFd2APwl14dj3bHhsWoEPoFgKcQtjYq6X9/2p+MbNLcfQi?=
+ =?us-ascii?Q?+2mxVmKr/LuDd6DAtqsWaRznPw5YTOsEYpectBg6B8DlL8E+yJTmJufoDNJA?=
+ =?us-ascii?Q?ioD4t2IyF2e2IwsDKOAk0CYSWljeJNVhjtEXaiV6vj4euLxbs1t0/XFcZyL2?=
+ =?us-ascii?Q?f5o0HhitksLsOl+lV2n8rm8a58x7mEm3lQ1CwHOp4ONqDPCi1uKDlzyz1uFm?=
+ =?us-ascii?Q?d2XMuecgG9cOe6vhi7+rSmEc0Pl4rqB3OXfj8ujp+HKywU5xK9Hcu49trwGS?=
+ =?us-ascii?Q?rl2XqxcVc0v6iucaFXBy8AK8fHdnDOwmCRtd7lQYlj0SOSs4UbUFYJp59Ce6?=
+ =?us-ascii?Q?WJJNctu7GrVFlGfuaFbpMjkqXdk/jw1EJDIMHZXEHdp1M0fqTqOI7PUL1ZH/?=
+ =?us-ascii?Q?sgVSqiELmA3sKHwUZMTTJuSmI9z4P8DF0xDJoR0nXGGKu/KZWO/9/ye8ebkM?=
+ =?us-ascii?Q?GCUoCHLi7WGdhMyUkshY39c+br7hrFTATzYg9iAohRpSTt5BA3C9zwHuhShp?=
+ =?us-ascii?Q?/CELCHQ/EuWQxxycU4mPxxK2KXRLeLDDDxM3OSso3MZ9W+wxhANbP/+gsNPb?=
+ =?us-ascii?Q?mb5YEo/+QQ8lFdgFyrQqRJ3ayctlWHj3//v+46yZ2fUEwNkdzc76/ZVNzOsA?=
+ =?us-ascii?Q?ASDXFIiCRfoShDVOQCVhA4CM7XhqP+EZlfUzwbXumvQpCbqDf3lvGf7bEOOA?=
+ =?us-ascii?Q?QNwV5jYlJXvrChg/sI9vnr2PzDE9HOTJdBmTXK+O0VLxJuSH7c7EnX37q3rV?=
+ =?us-ascii?Q?0IZoc43jKGRQO9CriW6uYJRbl+HZ9DemhwI3DgQkkWsAxzwHf0zQ9UEq6nCA?=
+ =?us-ascii?Q?Pyz2nuRr2WjxXSWnyYR/fzxhE9wL5h6Ei480BmUdvvarDb5nvyVO4IbPgOXr?=
+ =?us-ascii?Q?4ReV7RLBmZfdR/Q=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700018)(7053199007); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?ZXguRU6F9DeFPsD3CHfLFbf8uqbYcGEPbNCBYwGfwBbBERVXPZqTdqlLFipo?=
+ =?us-ascii?Q?lzD0IJjT/aOoSdD9qAg3lPrOlqnJ54V3qOMkGaT7qaowd5fCMGX091Pr+55w?=
+ =?us-ascii?Q?N6Nd1zUj9YgZ6G8h0qhAnB5BucwS/ggmgdvMvb/HxO5Ynyv6VxQVUFJiQo3K?=
+ =?us-ascii?Q?0SCQj65kdyl44qmVxIjWcHRtXFY0NqcJVlek2bwYkntzOUnAIa2hvN2dUm5K?=
+ =?us-ascii?Q?52YI0FizpAIqBJGP2HkHgAUmMwX0yYRl3+mGrcwsAG3mpOZjoZPy00gDxBzp?=
+ =?us-ascii?Q?U5BtCIB/UMH5doc8HnWUXjBhS2FBzPG/fLgxE04bDceibO0rW0lP6ufJ/7E+?=
+ =?us-ascii?Q?wUHfQ30/wlj27M1dzgBnVnE+RPViPjsqXsNAhvOng8OIVLyki+yPkpaHyT84?=
+ =?us-ascii?Q?VS4jN+xTzdjPTKvZD/VJy2tUg2CC4s/1XwgH9VqLdtKJ52F5PbdhIxY8s3VY?=
+ =?us-ascii?Q?dGx/HvPfL9dlHCjOMnhjBk9Y4RIZzwQD1pDSfnY/poKXHihWVwtABX7kvTaP?=
+ =?us-ascii?Q?RKZG0wTL4o9oCgu4awIqqYNiEfdg58SNu7/AW7f4doLHa1fgdDKDfXP1XoN8?=
+ =?us-ascii?Q?2JWwGF6K/7B238rjaI+pmX/BgW9/MGj241mFlk/cCqSe3fJS0ZmW5yte9OYG?=
+ =?us-ascii?Q?brBbWyabTWYoWG5/bkFWMwgg343UuddeVVkj/GJq3f77uloS0HTt3QEE1G9K?=
+ =?us-ascii?Q?ZuNQ/ZKb/0M0MotJFfz7CWMww9QjutHzJyt4+cUfbHb/d/0oLYU2WQR0qnRw?=
+ =?us-ascii?Q?gBOfWAYGX+lMIMi6qnvqM09xW8M5Si3Y8DXcIrFIi3MkE2dHcFns+wu+SBCp?=
+ =?us-ascii?Q?FI6ZvGHW7h9gbREUh/HL0OmJCO9wh2zk3dvSb170db8KIZlB+G9/sDrcyhtN?=
+ =?us-ascii?Q?kkVKriyIiFxIL/PARwannRJusvPBrq+qlZKTS3vO8Z+QAWNCRxqu0cbBPN8h?=
+ =?us-ascii?Q?TciBI+Qp2pYbv5cEQxEgKi0Cy+wo2969fe2B/U/lG0Qu4EZqXJWaXAXqUrzm?=
+ =?us-ascii?Q?RDPDnuws+xThR8KkKDlZb8x9PUmfau9YVFkbs9Q77w58TFZQNk95ycAbi2hy?=
+ =?us-ascii?Q?VLvzMbkc4YVH591NfvnHOqeqeGLaj6tsIikE7T63gRvBMwAZwilkYccdd9rD?=
+ =?us-ascii?Q?hx1dgU/JNJKQ1fvWcs6Hpwi7XoLJ6xvcSUnv24LwY0kgAoDvG6BaJq6UC+OT?=
+ =?us-ascii?Q?2D8Hwf/1uYWRPC7wYhx8NbirszMnL0cg08TW0B/YJhpxBHU+6eDV60iDBbDI?=
+ =?us-ascii?Q?mYs9ESk9v0/0IwTyyrwpkblCE7/U4SWUqxXsexNsJlMrrG/YEW2zan52RRh3?=
+ =?us-ascii?Q?I/ASKxXZ+pudfkwTOAURW1dh4fssLnU8ham+OL6uRBJvgg5Wskce+Mmw2ZFw?=
+ =?us-ascii?Q?NrPp/YOPPtQzVbPS0CA/kTomkJlzgLtc3mjFJMdMCXU9Y1UEmOopY0bPCbSo?=
+ =?us-ascii?Q?kJk63nMNABCegLhmoIU1SNkQMuESOLgga31vnuvhK89kaNV+IaVwbkt9+kQm?=
+ =?us-ascii?Q?/gF57YDFUl5wdfUIYDDpcRy8UbdWC2CRtYe5xemTmdyOeEO6SzrPIK9wGIQ2?=
+ =?us-ascii?Q?C8VHMOMhZnF6U9u7PPmhnHYYmxHIKUNuRMwxEM5t?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:70G3hp2HEH3Vo+P9I0sWD3iWZvzu0EOTfDCGadBwcT/olTz88wM
- UpoQdv4TjUIgflUbzu9+ClrnaAnphVKPM8QjSfuhB5BxCB/EjPhaGjW8VyoSZKNVuWHKWa+
- 1wrrPLeBxQuO2kq6mCfgaNGgwUN0HsnYiRntx3LqFPi7hX2gRQQ8ytRMYTjmEv+e5PD/49W
- 9c4HbRmpoZDSupfukG47Q==
-UI-OutboundReport: notjunk:1;M01:P0:Idu/AIbESag=;rQIrM5UM5hVOyWK5YHosGqgHT48
- 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
- TAac=
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f79bb75e-f9de-4f70-509b-08dd8933c2a6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 May 2025 04:42:35.8299 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: rR5f4eip/sv/8Q6NZFUERP5Iv3Z4H7TnZkdJY+mIQzH+ihtHUVK3at9J3uGvKIzS1ysubZLQbwknBY8chwv59vsj7R462qXJOYh8xGVHytA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7562
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,136 +171,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 2=2E Mai 2025 04:50:19 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
->Now that the hooks are present, make use of them directly rather than
->cloning the separate repo=2E
->
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
-
-Using the same git repo makes testing changes in the test hooks much easie=
-r=2E
-
-Acked-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
 
 
->---
->
-> =2Eazure-pipelines=2Eyml | 15 +++++++--------
-> =2Egitlab-ci=2Eyml       | 16 +++++++---------
-> 2 files changed, 14 insertions(+), 17 deletions(-)
->
->diff --git a/=2Eazure-pipelines=2Eyml b/=2Eazure-pipelines=2Eyml
->index a00ee67f297=2E=2Ebf50727ea55 100644
->--- a/=2Eazure-pipelines=2Eyml
->+++ b/=2Eazure-pipelines=2Eyml
->@@ -251,13 +251,12 @@ stages:
->           # the below corresponds to =2Egitlab-ci=2Eyml "before_script"
->           cd \${WORK_DIR}
->           git config --global --add safe=2Edirectory \${WORK_DIR}
->-          git clone --depth=3D1 https://source=2Edenx=2Ede/u-boot/u-boot=
--test-hooks /tmp/uboot-test-hooks
->           # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with=
- NET_LWIP enabled=2E
->           # The test config and the boardenv file from qemu_arm64 can be=
- re-used so create symlinks
->-          ln -s conf=2Eqemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci=
-/conf=2Eqemu_arm64_lwip_na
->-          ln -s u_boot_boardenv_qemu_arm64_na=2Epy /tmp/uboot-test-hooks=
-/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na=2Epy
->-          ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
->-          ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
->+          ln -s conf=2Eqemu_arm64_na test/hooks/bin/travis-ci/conf=2Eqem=
-u_arm64_lwip_na
->+          ln -s u_boot_boardenv_qemu_arm64_na=2Epy test/hooks/py/travis-=
-ci/u_boot_boardenv_qemu_arm64_lwip_na=2Epy
->+          ln -s travis-ci test/hooks/bin/\`hostname\`
->+          ln -s travis-ci test/hooks/py/\`hostname\`
->           if [[ "\${TEST_PY_BD}" =3D=3D "qemu-riscv32_spl" ]]; then
->               wget -O - https://github=2Ecom/riscv-software-src/opensbi/=
-releases/download/v1=2E3=2E1/opensbi-1=2E3=2E1-rv-bin=2Etar=2Exz | tar -C /=
-tmp -xJ;
->               export OPENSBI=3D/tmp/opensbi-1=2E3=2E1-rv-bin/share/opens=
-bi/ilp32/generic/firmware/fw_dynamic=2Ebin;
->@@ -307,12 +306,12 @@ stages:
->               /opt/coreboot/cbfstool \${UBOOT_TRAVIS_BUILD_DIR}/coreboot=
-=2Erom remove -n fallback/payload;
->               /opt/coreboot/cbfstool \${UBOOT_TRAVIS_BUILD_DIR}/coreboot=
-=2Erom add-flat-binary -f \${UBOOT_TRAVIS_BUILD_DIR}/u-boot=2Ebin -n fallba=
-ck/payload -c LZMA -l 0x1110000 -e 0x1110000;
->           fi
->-          export PATH=3D/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
->-          export PYTHONPATH=3D/tmp/uboot-test-hooks/py/travis-ci
->+          export PATH=3D/opt/qemu/bin:test/hooks/bin:\${PATH}
->+          export PYTHONPATH=3Dtest/hooks/py/travis-ci
->           # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \=
-$var" if not
->           =2E/test/py/test=2Epy -ra -o cache_dir=3D"\$UBOOT_TRAVIS_BUILD=
-_DIR"/=2Epytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_EXTRA} =
-\${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAV=
-IS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=3D\$(Syste=
-m=2EDefaultWorkingDirectory)/results=2Exml
->           # the below corresponds to =2Egitlab-ci=2Eyml "after_script"
->-          rm -rf /tmp/uboot-test-hooks /tmp/venv
->+          rm -rf /tmp/venv
->           EOF
->       - task: CopyFiles@2
->         displayName: 'Copy test=2Esh for later usage'
->diff --git a/=2Egitlab-ci=2Eyml b/=2Egitlab-ci=2Eyml
->index 9f69895efd8=2E=2Eba9ca5fb9e0 100644
->--- a/=2Egitlab-ci=2Eyml
->+++ b/=2Egitlab-ci=2Eyml
->@@ -30,15 +30,13 @@ stages:
->   rules:
->     - when: always
->   before_script:
->-    # Clone uboot-test-hooks
->     - git config --global --add safe=2Edirectory "${CI_PROJECT_DIR}"
->-    - git clone --depth=3D1 https://source=2Edenx=2Ede/u-boot/u-boot-tes=
-t-hooks /tmp/uboot-test-hooks
->     # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_L=
-WIP enabled=2E
->     # The test config and the boardenv file from qemu_arm64 can be re-us=
-ed so create symlinks
->-    - ln -s conf=2Eqemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/con=
-f=2Eqemu_arm64_lwip_na
->-    - ln -s u_boot_boardenv_qemu_arm64_na=2Epy /tmp/uboot-test-hooks/py/=
-travis-ci/u_boot_boardenv_qemu_arm64_lwip_na=2Epy
->-    - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
->-    - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
->+    - ln -s conf=2Eqemu_arm64_na test/hooks/bin/travis-ci/conf=2Eqemu_ar=
-m64_lwip_na
->+    - ln -s u_boot_boardenv_qemu_arm64_na=2Epy test/hooks/py/travis-ci/u=
-_boot_boardenv_qemu_arm64_lwip_na=2Epy
->+    - ln -s travis-ci test/hooks/bin/`hostname`
->+    - ln -s travis-ci test/hooks/py/`hostname`
->     - if [[ "${TEST_PY_BD}" =3D=3D "qemu-riscv32_spl" ]]; then
->         wget -O - https://github=2Ecom/riscv-software-src/opensbi/releas=
-es/download/v1=2E3=2E1/opensbi-1=2E3=2E1-rv-bin=2Etar=2Exz | tar -C /tmp -x=
-J;
->         export OPENSBI=3D/tmp/opensbi-1=2E3=2E1-rv-bin/share/opensbi/ilp=
-32/generic/firmware/fw_dynamic=2Ebin;
->@@ -60,7 +58,7 @@ stages:
+> -----Original Message-----
+> From: Meng, Tingting <tingting.meng@altera.com>
+> Sent: Tuesday, April 29, 2025 5:56 PM
+> To: u-boot@lists.denx.de
+> Cc: Marek Vasut <marex@denx.de>; Chee, Tien Fong
+> <tien.fong.chee@altera.com>; Meng, Tingting <tingting.meng@altera.com>;
+> Hea, Kok Kiang <kok.kiang.hea@altera.com>; Maniyam, Dinesh
+> <dinesh.maniyam@altera.com>; Ng, Boon Khai <boon.khai.ng@altera.com>;
+> Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; Rosdi, Danish
+> Ahmad <danish.ahmad.rosdi@altera.com>; Zamri, Muhammad Hazim Izzat
+> <muhammad.hazim.izzat.zamri@altera.com>; Lim, Jit Loon
+> <jit.loon.lim@altera.com>
+> Subject: [PATCH v1 1/1] arm: socfpga: agilex5: Coverity issue cleanup in
+> jtag_usercode check
 >=20
->   after_script:
->     - cp -v /tmp/${TEST_PY_BD}/*=2E{html,css,xml} =2E
->-    - rm -rf /tmp/uboot-test-hooks /tmp/venv
->+    - rm -rf /tmp/venv
->   script:
->     # If we've been asked to use clang only do one configuration=2E
->     - export UBOOT_TRAVIS_BUILD_DIR=3D/tmp/${TEST_PY_BD}
->@@ -93,8 +91,8 @@ stages:
->         /opt/coreboot/cbfstool ${UBOOT_TRAVIS_BUILD_DIR}/coreboot=2Erom =
-add-flat-binary -f ${UBOOT_TRAVIS_BUILD_DIR}/u-boot=2Ebin -n fallback/paylo=
-ad -c LZMA -l 0x1110000 -e 0x1110000;
->       fi
->     # "${var:+"-k $var"}" expands to "" if $var is empty, "-k $var" if n=
-ot
->-    - export PATH=3D/opt/qemu/bin:/tmp/uboot-test-hooks/bin:${PATH};
->-      export PYTHONPATH=3D/tmp/uboot-test-hooks/py/travis-ci;
->+    - export PATH=3D/opt/qemu/bin:test/hooks/bin:${PATH};
->+      export PYTHONPATH=3Dtest/hooks/py/travis-ci;
->       =2E/test/py/test=2Epy -ra --bd ${TEST_PY_BD} ${TEST_PY_ID} ${TEST_=
-PY_EXTRA}
->         ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
->         --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
+> From: Tingting Meng <tingting.meng@altera.com>
+>=20
+> A redundant comparison (jtag_usercode >=3D 0) was removed from the
+> condition checking jtag_usercode. Since jtag_usercode is an unsigned inte=
+ger,
+> the check for non-negativity was always true. The code was simplified to
+> resolve the Coverity warning.
+>=20
+> Signed-off-by: Tingting Meng <tingting.meng@altera.com>
+> ---
+>  arch/arm/mach-socfpga/board.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/arch/arm/mach-socfpga/board.c b/arch/arm/mach-
+> socfpga/board.c index 8506d510413..8bec7c6dccd 100644
+> --- a/arch/arm/mach-socfpga/board.c
+> +++ b/arch/arm/mach-socfpga/board.c
+> @@ -133,7 +133,7 @@ u8 socfpga_get_board_id(void)
+>=20
+>  	if (jtag_usercode =3D=3D DEFAULT_JTAG_USERCODE) {
+>  		debug("JTAG Usercode is not set. Default Board ID to 0\n");
+> -	} else if (jtag_usercode >=3D 0 && jtag_usercode <=3D 255) {
+> +	} else if (jtag_usercode <=3D 255) {
+>  		board_id =3D jtag_usercode;
+>  		debug("Valid JTAG Usercode. Set Board ID to %u\n",
+> board_id);
+>  	} else {
+> --
+> 2.25.1
+
+Reviewed-by: Tien Fong Chee <tien.fong.chee@intel.com>
+
+Best regards,
+Tien Fong
 
