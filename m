@@ -4,72 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FF2C3ABAA
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 02:11:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E34C369D9
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 07:04:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACBA8820EB;
-	Sat,  3 May 2025 04:11:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9123481E72;
+	Sat,  3 May 2025 09:04:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XeT4lGHv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hYdFyWMQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90F658210D; Sat,  3 May 2025 04:11:31 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 15BA881F66; Sat,  3 May 2025 09:04:30 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48AF7820E1
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 04:11:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59AEC812BC
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 09:04:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5f624291db6so4022784a12.3
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 19:11:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746238289; x=1746843089; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3WvQNoGdwMvZ2ZI6ybC43rxuxM1lPNoILj/iX1Q4Ki0=;
- b=XeT4lGHva4wMwFM9mN6DPlGx9hxNHcyrdGZ0Jw8kfYkCNE6hTKBc1pvXxq5g6Nv3ui
- 5jerPfYAcOe5t2XHrLb1iNvHPI/HDvqv87j9jP7JcnSqpGU0X9GIA71hb1nGd89hH8rb
- NlmGJMw6fn93kSc6xID5qjkDzMyDbbb6U3wdY=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A79D93F1ED
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 07:04:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1746255865;
+ bh=usmwebb9DiWDMNklD4bZhjnwyWt+J032NEcJhNy2JjQ=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=hYdFyWMQs2l2lrXvuQlqjEXkmzb+xdzvvN86HcphAu5J6R8jaaBMagJmLlNk02iUf
+ 3rl8sfu1Zme/SNAsiUZCjCvEzcd/NE8GFQ5i5i3+nrpri6qWRcAZpzieQfu3b2q3ke
+ gXfUHk79czZLJKnHztTNFRM3UuxXhSsDM8UpBjYPKuJyia1TTQvBzlKZLajUfRjtHJ
+ 9VEvR8kPqgevLZRyWQmeR/8yNAldumBtm4vC3NtH+OQYxlIucu3V9raDUvSzN3C5iW
+ WNMynzndEgk4UsS985CbqBpM5iXeghpoG1AwYZ77tR0b1p7XqGzSRw+qQuUSDtuIiw
+ EtRQpCAwATybQ==
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-225ab228a37so22130435ad.2
+ for <u-boot@lists.denx.de>; Sat, 03 May 2025 00:04:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746238289; x=1746843089;
+ d=1e100.net; s=20230601; t=1746255864; x=1746860664;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3WvQNoGdwMvZ2ZI6ybC43rxuxM1lPNoILj/iX1Q4Ki0=;
- b=vzeLwT2xbql865iGmuJYhVAJjbisfmaMhIwlkMRQuSNc3T4nNYT21uChp20vpfnyhf
- 8SWJ0VyJjR3s2bFB9GFBFH/ia55hcQUGjaJaMZpMBwLvDPUwbSgUqHhhEpJGEJgRyZSj
- yAJbv1rk5MdYKOb+TEvuBWKC9r85wQXb2qo9JE/vmKLtsQLhY3YknssjOqp5ORtJDfHX
- 7oKBAIK69mQ69h1kbft51gN9UX5xLh6Ha5uGV3jPjG5YMrxwTPGPjT+a+e7SvG/byY2F
- jAljjehOuXvx9afrRfGq/M0C0buloUQ9AmqZmdlja1FBaLlvBIp24K5J7nB558JivJGE
- YA8w==
-X-Gm-Message-State: AOJu0YxrpGHxScJnrWz3WiTFkA4SOXxfotZ+cwnCAeORFbvUdUqZ/aZ0
- 4lwasvpdk6HOMnWZ9hH3LRUAk0qa8rysx5xSSxkr2zPbPnD4Ep5LpPSbDuZsDR4/Ogs4MsHVoA8
- GeiLzyTTrOxYDlMy/oHWXzzCRUf3IqS/SsSFn
-X-Gm-Gg: ASbGncuUIaT24lTJSYGwJQovypL1yNLXmyIyoPMgUhyoN6XxqkRi07hMpask1HVykn4
- JHEDG41lpXbFZr3+AlU49jV79wBhPfR6XA7L+VqpT5cbysan9oQtDjzi1h+JbwowyjbA1U89HNU
- Oi3PhNdglIDi9/kSLNrY7V114=
-X-Google-Smtp-Source: AGHT+IFmluCDVNBqEFzukWPtn7mIgHSI5yB38tabrYshOHvsgPQ7gcGaFbhqT5FvQ/R091MOJme/mBHfeG7/zy0VHT8=
-X-Received: by 2002:a05:6402:42c5:b0:5f6:23d2:e6f7 with SMTP id
- 4fb4d7f45d1cf-5fa78985ddfmr4083200a12.32.1746238288752; Fri, 02 May 2025
- 19:11:28 -0700 (PDT)
+ bh=usmwebb9DiWDMNklD4bZhjnwyWt+J032NEcJhNy2JjQ=;
+ b=XaVSBVPea1Xs3CRSw33+evZsu+O3ZHUVh30MA34rXAADO5t2As9CCrDMnVMH+6sNWc
+ GhGi39nFv0YB3WkhXpVeFSJkeZJ7Zk70JvBNjlTpSk/oUuBEnysUe9HHRNZbxtomek3B
+ pZPztFRGibV3G8t/ZYNO48CmO8+dWzt6jTjyQtH+GlB7o7llxk48F0lnnfQUrnC9KxO4
+ swVtwRrp1w89uBis0bW3ab8cDqROd7nRcU6AVVdIxf9iw1DdCOP4mAfXEfBZwdmAc6ie
+ nl9A8/SnCWMcZ2Olkd5iMZG9QX2+Tmwq5AhZ3LQDvISLe9IEg0Amp6UjHAt9VwDc06kS
+ b22Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWhNzsKpJAGwmffp9nByH9USy3uZQ3F8viyOML5I0HYXYvxgQTAmHb18Flo5XzkPxSgjIJ+Yhs=@lists.denx.de
+X-Gm-Message-State: AOJu0YylWmxrzn5nfdMvBr0/nBrmyxlrX5NkOBggLcbaG3spxzkfIw2O
+ HiOXFsrxY42W81o8fjIQNr7Kvvv7HI5FXuoFc5hHnFAMcS9mBKYqD5bAzr4jcNbCQGDv4dKiR7R
+ XaRP3ExjchTt1I0bPRIMAoI8i46SMRC1SinBWM1dKgAaqkebFlic7/cRxxOrcLdANWodk4HhDn8
+ o6d4kM0WESGv7Gmcjxg0gBBIgyc03bpnyPZUkgonSbeA==
+X-Gm-Gg: ASbGnctBUtqiD+qsuiEmD/ZIqm4Acuta7PUiJVJbWwjsGouvLc25DtD7JHWmpRQk0Gp
+ JABmRTkqdphjYKpb/y104nNZurwXJdsFklNN+nfR4eT8iaDTEbwvtufWdLS7TidcZB6hh
+X-Received: by 2002:a17:903:234c:b0:22e:17ac:9dd8 with SMTP id
+ d9443c01a7336-22e18bfa9eemr28625075ad.29.1746255863767; 
+ Sat, 03 May 2025 00:04:23 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGMhQrBviiJtk9UbSbHmxFgWYiQTSOSMoSapbHu0zTaoIz0ycxCDwCjm0kMz/HFINJoQhnyaaCwrBiFXtMu5m4=
+X-Received: by 2002:a17:903:234c:b0:22e:17ac:9dd8 with SMTP id
+ d9443c01a7336-22e18bfa9eemr28624795ad.29.1746255863247; Sat, 03 May 2025
+ 00:04:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszTjmTK3n=nqmBMp3_9gONZBm3VctKkqguq3Pb3K3or8Pnw@mail.gmail.com>
- <20250502222120.GB1261075@bill-the-cat>
-In-Reply-To: <20250502222120.GB1261075@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 2 May 2025 20:11:17 -0600
-X-Gm-Features: ATxdqUGCdIckXZJymKYt10rPBabrGLuRYiOVOoozS07scP6wcAO6XNeicHIzW-U
-Message-ID: <CAFLszTgxkTLWZUw23ntowwA+MYCMy6t+0swjw_fTT3y-PgPpxA@mail.gmail.com>
-Subject: Re: Please pull u-boot-dm
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+ <20250421162555.1200687-2-heinrich.schuchardt@canonical.com>
+ <CAFLszTiVuNqAzQ=hi5_Uq6Jo2EUJkDtE6_gDaU=LY8hAXiL8ww@mail.gmail.com>
+ <279d1706-d140-409e-a74a-4f1d9eaef311@canonical.com>
+ <CAFLszTg1Z7PArfxUUiyoNDsBj1N7Q23dn_xwhAJQ3pGikR0hzw@mail.gmail.com>
+In-Reply-To: <CAFLszTg1Z7PArfxUUiyoNDsBj1N7Q23dn_xwhAJQ3pGikR0hzw@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Sat, 3 May 2025 09:04:11 +0200
+X-Gm-Features: ATxdqUGChJApT6sN9fDJpIA6DMYcBh-KQzRcx38YJVf_ZiR4pkp8jN6V0BhFsLQ
+Message-ID: <CAM=mAOmqSN7XOQonsOA6Q79T0MZRKpv3eObDCFMa_v4_3QzE6g@mail.gmail.com>
+Subject: Re: [RFC 1/8] boot: EFI boot manager does not depend on BootOrder
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,50 +110,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Simon Glass <sjg@chromium.org> schrieb am Sa., 3. Mai 2025, 04:10:
 
-On Fri, 2 May 2025 at 16:21, Tom Rini <trini@konsulko.com> wrote:
+> Hi Heinrich,
 >
-> On Fri, May 02, 2025 at 03:40:32PM -0600, Simon Glass wrote:
+> On Fri, 2 May 2025 at 10:09, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > On 5/2/25 16:49, Simon Glass wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
+> > > <heinrich.schuchardt@canonical.com> wrote:
+> > >>
+> > >> The EFI boot manager bootmeth does not require variable BootOrder to
+> be
+> > >> preexisting. It creates this variable.
+> > >>
+> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com
+> >
+> > >> ---
+> > >>   boot/bootmeth_efi_mgr.c | 21 +++------------------
+> > >>   1 file changed, 3 insertions(+), 18 deletions(-)
+> > >>
+> > >> diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+> > >> index 42b8863815e..1669cbed5bd 100644
+> > >> --- a/boot/bootmeth_efi_mgr.c
+> > >> +++ b/boot/bootmeth_efi_mgr.c
+> > >> @@ -47,30 +47,15 @@ static int efi_mgr_check(struct udevice *dev,
+> struct bootflow_iter *iter)
+> > >>
+> > >>   static int efi_mgr_read_bootflow(struct udevice *dev, struct
+> bootflow *bflow)
+> > >>   {
+> > >> -       struct efi_mgr_priv *priv = dev_get_priv(dev);
+> > >> -       efi_status_t ret;
+> > >> -       efi_uintn_t size;
+> > >> -       u16 *bootorder;
+> > >> -
+> > >> -       if (priv->fake_dev) {
+> > >> -               bflow->state = BOOTFLOWST_READY;
+> > >> -               return 0;
+> > >> -       }
+> > >> +       int ret
+> > >>
+> > >>          ret = efi_init_obj_list();
+> > >>          if (ret)
+> > >>                  return log_msg_ret("init", ret);
+> > >>
+> > >> -       /* Enable this method if the "BootOrder" UEFI exists. */
+> > >> -       bootorder = efi_get_var(u"BootOrder",
+> &efi_global_variable_guid,
+> > >> -                               &size);
+> > >> -       if (bootorder) {
+> > >> -               free(bootorder);
+> > >> -               bflow->state = BOOTFLOWST_READY;
+> > >> -               return 0;
+> > >> -       }
+> > >> +       bflow->state = BOOTFLOWST_READY;
+> > >>
+> > >> -       return -EINVAL;
+> > >> +       return 0;
+> > >>   }
+> > >>
+> > >>   static int efi_mgr_read_file(struct udevice *dev, struct bootflow
+> *bflow,
+> > >> --
+> > >> 2.48.1
+> > >>
+> > >
+> > > How do we know if the board is using EFI bootmgr? My understanding was
+> > > that this was a way to find out?
+> >
+> > The boot manager must always run.
 >
-> > Hi Tom,
-> >
-> > https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/26056
-> > https://dev.azure.com/simon0972/u-boot/_build/results?buildId=77&view=results
-> >
-> >
-> > The following changes since commit 6cc812f8cc55c132458c7da5b9fb7666315cbe8c:
-> >
-> >   Merge patch series "video: Enhancements related to truetype and
-> > console" (2025-05-02 13:57:26 -0600)
-> >
-> > are available in the Git repository at:
-> >
-> >   git://git.denx.de/u-boot-dm.git tags/dm-pull-2may25
-> >
-> > for you to fetch changes up to d31d3a2949873b6217036650a449c1a1f74e6244:
-> >
-> >   patman: Drop the old status code (2025-05-02 14:54:39 -0600)
-> >
-> > ----------------------------------------------------------------
-> > patman improved to prepare for new features
-> >
-> > - Create a separate module for the 'send' function
-> > - Move to asyncio for patchwork comms
-> >
-> > ----------------------------------------------------------------
-> > Simon Glass (30):
+> Are you sure that is true? It seems false to me, e.g.
 >
-> You posted these three days ago, which is very quick for
-> non-security/regression fixes, and didn't post v2 where you rebased to
-> master and should have reworded:
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/5a4f8a1f339ce4de2eca812bc19cca1e2ad6b9ea
-> as the commit message and the change no longer match up.
+> - if we are booting FEL on suxi, it must not run.
+> - none of the boards in my lab use it
+> - the Ubuntu 24.04 test in my lab doesn't use it
 >
-> And this is the same standard I hold everyone else to as well.
+> So how can we say that it must always run?
+>
 
-Oh well, I'll hold off for a bit. I'm itching to send the actual
-feature, so I might do that while we wait.
+If a boot method that is earlier in the sequence boots the boot manager
+will not be reached. But the existence of BootOrder or any other EFI
+variable shall not decide if the boot manager runs or not.
 
-Regards,
-Simon
+
+> >
+> > The check for the BootOrder variable introduced in commit f2bfa0cb1794
+> > is a bug.
+> >
+> > The boot manager handles in sequence:
+> >
+> > * Try to boot as indicated by BootNext.
+> > * Try to boot as indicated by BootOrder.
+> > * Try to boot default path for available media.
+> >    This will add Boot#### entries and update BootOrder.
+>
+> Regards,
+> Simon
+>
