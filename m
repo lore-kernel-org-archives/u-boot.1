@@ -4,96 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B9CC369D9
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 07:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD813C369D9
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 08:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7F7581F66;
-	Sat,  3 May 2025 09:16:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B949812BC;
+	Sat,  3 May 2025 10:37:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="un0afpPZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iWJ5yRQZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E06C820E1; Sat,  3 May 2025 09:16:06 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AB72381F0D; Sat,  3 May 2025 10:37:22 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26577812BC
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 09:16:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A212F810EB
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 10:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D83423F2B6
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 07:16:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746256562;
- bh=+kXB3IA7A6pUJaUguMQMChKJrmeY2yAPiqwMiNrey2w=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=un0afpPZR/bct8XteqQrATfHzvpqkfHhYHI+fdfSTlq+WEC7BYUK20llQ+vNgVsoq
- xcmcz5K2xkQ6AcT+3f8U6st11wRlQdRbzd1WkSRHS0WXY5MQZhMEskLp678ffGSBRZ
- dD7E4nVTFCzFj+1oMN+p22LjiRrGdFdJ8EP/YseDovW9W5FcD0umfiw2KNitQXLjBL
- bFFu4aeiCnD06TfF78ipSdBhGHfMSp0TJy3Yw6TD0EB63Lw1eXFhhTaPlVCEokgYVG
- VC7PytMATCI76Sq9PqidqLhwxxPvtU2o7a7kNVdo8qgxP6Ei+rbew0zARQ+H/LeHQo
- /oU5utsbiOy8g==
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-309f0d465bdso4325056a91.3
- for <u-boot@lists.denx.de>; Sat, 03 May 2025 00:16:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5c7d6b96fso5009992a12.3
+ for <u-boot@lists.denx.de>; Sat, 03 May 2025 01:37:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1746261440; x=1746866240; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uCdhwnCpsBriWaR9FA4Ma4axmASjb7CyH/xtYAq09Es=;
+ b=iWJ5yRQZn7wSXGjdnj3uskTXaymXW97OU6o8w4DBdtIP2BDpaaJttZ7qOAPO5PEPm3
+ fyL/FH0EbAkcpP6L5eOVEWxdULaNRVqwiAJ7BUCKlcjr2pLPEEQYDobhwrm0a5Al72DS
+ Ep533vuwfFPzDizBvya2gwz8lI0JhnyNGGbtUo1gczMofmf+yKWaQueihqTSidvDN1XL
+ OVMKlkKx50uxoMsXLwBpbIuveqK6NtktpdJQXoosg/0oWjGP/huNnqQEbyLmP6/7VUlK
+ x1De2KV6MQ66FRug1RULM3FXsTVSNRBtsfTbpKwA/IW4HFdi9468mXwLxZ2AIDYGj6E+
+ YS2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746256561; x=1746861361;
+ d=1e100.net; s=20230601; t=1746261440; x=1746866240;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+kXB3IA7A6pUJaUguMQMChKJrmeY2yAPiqwMiNrey2w=;
- b=bmpnY2YMqXRkyZ3CgeTtBBlDAxqD+ofbtxkgsXeuuZcy2Tqyu9Kq2FFswQSQdnzSkC
- gSI80hH/Tx4AiB/67eNVn5AE/4Bc5+TmZVJJ7+UVhj+3n9m/3GkBkMbgho04pn5rgMM1
- eQXkIBmA8Ls6Gnx81OHIhnG3fqCzkh8N19GV0ezdFOL2nH9O6gIKgtT+CBC04cOGSV0k
- K6w0ctUFZwTF/IaK8RZadFdCJ3BB3Nad3p+uzUXo4XE4Fzm9yb8RE//m+sodbs8oSGj8
- hqzwhnuJH7W3iVdheZmW5h8Jv8F7GBGD2DMdh7R/hnFW/1Dqp7+FKxHrR0O0Xdj0Hv6c
- Ok+g==
+ bh=uCdhwnCpsBriWaR9FA4Ma4axmASjb7CyH/xtYAq09Es=;
+ b=cEWnuTS2sCLiIlTquKp/tIZ9ymMhX9cOu+sZgMIolsSOLwhrtNfiSeAYlkPxhXfFBf
+ Xu2sGcKxLMK4gYLQjkj5jjMCx5xbTbCiG9OKDkdBB3Ye7G4/s7j4lFft3PbukCf4dP8Q
+ w5sr8i/hhR1Xm57tQ5xpG9Ir48Wmd1avXGcmnfz4YauEbEqxMGb7wApfqAxoQunLqk7F
+ VjWTAx9I4cP1FoYA8w5lxKwaFdkZSWCpyZP+vMObY3ddjSOha9DJnm7EBl4ZtwIB5BH6
+ j52QOjtE+lUk7l31dIsWg90fnpsQZjCUm/84Ut825Nkfej8gO2KoeafZizC9W34598kj
+ ab9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9eskfne+d7V+yvV69+AD6plrbHrlzAsgUMb84/0RsGABG70XOI5fE1QkfyJdjBkwEZJwyC5s=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHCMlpwy1CxpXxTiqr66lMf3feAzK66gDPWixsq6JSmyUDP1LU
- 5AnRSGamIHXDb4S9+3J6G/a1mRFL0dX6khEzNfgRh+8SkvbmhDiino5sszvvQZFwi5c9dTXDqwB
- GFr+Zi8p8QRJk9A6OQ+MDAfUSiInNa5DeIawe/4baCt9Sjepw48ReM8/e0NTt+GvEb26cXlfYyF
- v9iTMcsSyoGv9NIuOqJNXrmBTFVBZwf9BhDNCFsLhTQg==
-X-Gm-Gg: ASbGnctPyOb6MYKrOJXcJsMFOQhCT0VfYTRo3zI18mpCBrJtDtmdek5SPeukiKDrGNH
- 80YAYh0RcdvfiwNevABewx02wLnM3LZbuGHEfd+IRxc/ef9/xnFSSwu8lfHGqWHCQB7aq
-X-Received: by 2002:a17:90b:3c0b:b0:2ff:58e1:2bb1 with SMTP id
- 98e67ed59e1d1-30a61a6f700mr230137a91.32.1746256561148; 
- Sat, 03 May 2025 00:16:01 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEnhAK8DHfMjSSOGF3vzOZKgo/wjOJYs1vBcQWB/Dh1fMnNt3YuhSNIXABot7MWKZFnPJL66Kgrc7AFemKdbGU=
-X-Received: by 2002:a17:90b:3c0b:b0:2ff:58e1:2bb1 with SMTP id
- 98e67ed59e1d1-30a61a6f700mr230118a91.32.1746256560745; Sat, 03 May 2025
- 00:16:00 -0700 (PDT)
+ AJvYcCWsmQrZA+ysxo2mNoJd0etH4xjz/laeFCZBNcH2foUwOZ7/hlkv/GNh3sEnB5iCUGair/Kuoi0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxSDYz0LhCPLALvXQkBcglqssSKfHs9OzFf1OHSK+0Z1Gtt3XED
+ WGXQ4hrU573bs1VBPKbdrBtqQM/+XSfrZ1+51qQUFb5Z5Nn0wYCc/OJ7OFgMKhwcGjcH/GV+6RJ
+ F6gHcRxAWW1PUunN6qFDmOmEwsS0=
+X-Gm-Gg: ASbGnctn/6p6zWE0+xb0Te5jgC3lD8/9LGTEFHXzaiF74VvbotqW4iQUyKue4+mAfxi
+ ZLea3f/vqiacE8CsLNhOiB1VRvbXCccqLikIHwLOeAvlExPm3wJTICCuoyhv5R8qZe+SHntXdmE
+ vQJe0gMr5nD9UrWZJzbuxGO06hh52z1eufNduJXQRoCk5VWusl+fDkTM4=
+X-Google-Smtp-Source: AGHT+IENy/EFJ4uSCjia3mDw5hPCHyVYoeN+qsstbKmwMT8wXBNrAGow79Plz36aL/Tn+6H0v9CyF6FaWMiGoOlNn4U=
+X-Received: by 2002:a05:6402:2709:b0:5f1:e466:660 with SMTP id
+ 4fb4d7f45d1cf-5fab056d2a8mr359046a12.5.1746261439808; Sat, 03 May 2025
+ 01:37:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
- <20250421162555.1200687-4-heinrich.schuchardt@canonical.com>
- <CAFLszTjcCXDnjOjpD88tGcvSz1AOAouyHKsynzCC3tngDqzOvQ@mail.gmail.com>
- <27c7a370-ad40-4935-8b2a-f27468a01467@canonical.com>
- <CAFLszTh3db5HwBfD9rg=YGY0n2DKE2vfBL0UG5x1_5DoJcj5WQ@mail.gmail.com>
-In-Reply-To: <CAFLszTh3db5HwBfD9rg=YGY0n2DKE2vfBL0UG5x1_5DoJcj5WQ@mail.gmail.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Sat, 3 May 2025 09:15:49 +0200
-X-Gm-Features: ATxdqUEdqesReRYkGiR0xjbUf9NMG7kEftLqGaV8kDszMk8hh1OD_07UdEtFAWo
-Message-ID: <CAM=mAOk8BOz9O517614qOLCin-KjmQHXuwAkSSRUewmLG65Vdw@mail.gmail.com>
-Subject: Re: [RFC 3/8] boot: make BOOTMETH_EFILOADER default=n
+References: <20250502144718.313633-1-sjg@chromium.org>
+ <20250502150035.GU1261075@bill-the-cat>
+ <CAFLszTiic_fp=etd+t8OCiEy8=yWdrwEAp8XNChFecbpXVJ=aQ@mail.gmail.com>
+In-Reply-To: <CAFLszTiic_fp=etd+t8OCiEy8=yWdrwEAp8XNChFecbpXVJ=aQ@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sat, 3 May 2025 09:37:08 +0100
+X-Gm-Features: ATxdqUHSnZ1M0ldBy7X6iObEOtPUH6mxeywxvwF-zggEMzYgXYNJBcnlxDfbTtU
+Message-ID: <CALeDE9N3d+paBv3gp=JnBt5E02XAs0cZjT701h3Yf7fxkWopOQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/60] expo: Various features and improvements
 To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Moritz Fischer <moritzf@google.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>,
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,87 +109,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon Glass <sjg@chromium.org> schrieb am Sa., 3. Mai 2025, 04:10:
+Hi Simon,
 
-> Hi Heinrich,
->
-> On Fri, 2 May 2025 at 10:16, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > On 5/2/25 16:49, Simon Glass wrote:
-> > > Hi Heinrich,
+> > > This series collects together some new features for expo to make it more
+> > > useful for boot menus:
 > > >
-> > > On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
-> > > <heinrich.schuchardt@canonical.com> wrote:
-> > >>
-> > >> The boot method is deprecated as the EFI boot manager covers this
-> > >> functionality.
-> > >>
-> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com
-> >
-> > >> ---
-> > >>   boot/Kconfig | 1 -
-> > >>   1 file changed, 1 deletion(-)
-> > >>
-> > >> diff --git a/boot/Kconfig b/boot/Kconfig
-> > >> index 71ddb37f6bb..b973d9eb0a7 100644
-> > >> --- a/boot/Kconfig
-> > >> +++ b/boot/Kconfig
-> > >> @@ -595,7 +595,6 @@ config BOOTMETH_EFILOADER
-> > >>          bool "Bootdev support for EFI boot"
-> > >>          depends on EFI_BINARY_EXEC
-> > >>          imply CMD_TFTPBOOT if CMD_NET
-> > >> -       default y
-> > >>          help
-> > >>            This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care
-> of
-> > >>            launching EFI\BOOT\BOOT<ARCH>.EFI if not boot option
-> matches.
-> > >> --
-> > >> 2.48.1
-> > >>
+> > > - measurement and display of multi-line text objects
+> > > - internal alignment for objects (e.g. centred text)
+> > > - editable strings in text fields
+> > > - new 'box' object to draw a rectangle
+> > > - highlighting of menu items, rather than just relying on a pointer
+
+Each of the 5 sections above should be a separate patch set. A patch
+set should be on a single topic, as soon as you feel you need to add
+the term "collects together" you should be splitting it up.
+
+> > > Expo's boot menu is restructured so that it is possible to iterate
+> > > through various bootdevs and update the menu as new ones are found. This
+> > > is more in keeping with how bootstd works.
 > > >
-> > > As mentioned on the other patch, we need to keep this enabled and it
-> > > isn't obsolete.
+> > > A new textedit object is added, intended to provide a simple text
+> > > editor. Future work will complete this.
 > > >
-> > > Regards,
-> > > Simon
+> > > With this series the boot menu has a better layout and appearance.
+> > >
+> > > Changes in v2:
+> > > - Add new patch to pass in the video device for cedit_prepare()
+> > > - Add new patch to test rendering a lineedit
+> > > - Add new patch to test editing a lineedit
+> > > - Handle the case of an initially empty string
+> > > - Only check the text objects used by the bootmenu, for now
 > >
-> > Please, read the UEFI specification especially chapter 3 "Boot Manager".
+> > ... include the 13 part series you asked me if could go in now,
+> > yesterday?
 > >
-> > * The functionality is fully covered by the boot manager.
-> > * The current implementation of the method does not comply with the UEFI
-> > specification. Especially if run before the boot manager.
+> > > Simon Glass (60):
+> >
+> > 60 is far too much for anyone to provide meaningful review.
 >
-> We're going to have to go through this together sometime as it seems
-> like chicken & egg to me. We don't want Boot Manager first because it
-> is slow and stuffs up FEL on sunxi etc., we don't want it last because
-> then it has to wait for networking, we don't know whether bootmgr is
-> being used or not, so we just have to put it in the middle, but then
-> we don't know whether it will succeed, at which point we have to go
-> back and try the whole boot again..?
->
+> This is expo and no one commented on the previous series, so I'm not
+> expecting much feedback. But once people start using it, things will
+> come up.
 
-Sure there can be a situation where none of the boot methods will succeed.
-E.g. if there are no boot media. This has been the case before the series
-and won't be different with the series.
+Well a series of 6 patches just goes straight into the trash because I
+don't even know where to try and begin to test it.
 
-But if we reach the boot manager after trying FEL, extlinux, script and
-none of these booted retrying these would not make any sense as they would
-fail again.
-
-The boot manager already comprises booting via EFI/BOOT/BOOT<ARCH>.EFI. And
-this must not be tried before booting according to BootNext and BootOrder.
-So we can safely delete that non-compliant bootmeth_efi.
-
-Best regards
-
-Heinrich
-
-
-
-
-
-> Regards,
-> Simon
->
+Peter
