@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E7CC369C2
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 16:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E22ABC3ABAA
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 16:32:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAA308272A;
-	Sat,  3 May 2025 18:31:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 25DAC82893;
+	Sat,  3 May 2025 18:31:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cxwKcaw3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Onqcqfu5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB4A482937; Sat,  3 May 2025 18:31:36 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id F33038290A; Sat,  3 May 2025 18:31:38 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDCFE82836
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 18:31:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A20682905
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 18:31:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72bceb93f2fso2480909a34.0
- for <u-boot@lists.denx.de>; Sat, 03 May 2025 09:31:34 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3f94b7bd964so2433047b6e.1
+ for <u-boot@lists.denx.de>; Sat, 03 May 2025 09:31:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746289893; x=1746894693; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746289895; x=1746894695; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vKfdsr/2E45Ldv00EXNLuHcgXJjcheyfNwQvW53Nh2g=;
- b=cxwKcaw3gAnzOF3UfTszkI3woJK2pKuCL3huVEw0KmEZG3ifg5Hm9TPXA1idAi1V0u
- zvKxXLzq9FwbnTCAcmu/ZX3T6XPlowAH5GyewU3v8hKlPkb73RTi2gFLeSFNSZzDEL3l
- eq8dXe54iSGyqwmD2vzRMy2fPO+waHRcxv3A4=
+ bh=DTyHf4usH1sApJXl4hdbeckYVhHxkAYU3/22ye6Io44=;
+ b=Onqcqfu5d4VMJYMNn8h3k43d48BtY0WgKv7jdL7/M5JAJmxfBo/vg/f6V+dzfxu1ma
+ o3mONUZ9uxI9g1a+dobYK/kThozOIngZLdwcPwjDDc0n7IbHmzOv3nZ8d3whPXZ2f8U2
+ VZ2I80/ZwwaBKW9KVxosqzEi/+WMHy2Xo5d2U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746289893; x=1746894693;
+ d=1e100.net; s=20230601; t=1746289895; x=1746894695;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vKfdsr/2E45Ldv00EXNLuHcgXJjcheyfNwQvW53Nh2g=;
- b=tCTZqwZhkdW/ixjDEkH1R68dARkui53+MoXUcmTxN4wFK1kB8hqpvi7/LCbAUANNdt
- MhBKK0tAKWHih/a0a4yKBSobWpjQiu4+xoCT3v90KYZHHF9GWD8thv2qMZ3C4xVPy9vv
- lJEGZJ63nlDwzHO0LYA0hLxoLwFVP+qVHuk0r1mNGGjWufU84aChmd//hg7HiI83SPb9
- x+y3IMzCrCak1HFHxli0skSIMSMZvMsSv8fdkvT64IvdpT9Xf4DSYGAteKu7wuN55U6A
- XKAP/ekV9ocpJIDqWOcaIEBq4CF5E4K2/r2WDBR3EzfqKbQshM8PtsrobJWRERL0wE1M
- Wlxw==
-X-Gm-Message-State: AOJu0YygwTngurXmlhD0p9AYNHU1cwjpQnP3Vopgo+o1fMgBtPEHMskc
- SZ3rH6ExdN+EMlZne7R+K7kO+m/VBCvfAdVnDFRSGYlVmo0QQSYO3RumtaZ62nA=
-X-Gm-Gg: ASbGnctwmOdxM6DgGuMlKa9S7s7vU9GFc6eShXAKBuqejpai8NiJvMqkfdQwz0VyWBX
- zfSNl5bRG9c84AzeQyTjNHbwRzAu1uvl+dIdAJ4ol2NJnQLWMjaKoS7pSqk+n1IINOzbc8XbWu2
- HQ/FLD+7TJDxWfNT6dfv7huvgejfl0bJYJA0ANGyj2kFvzCk8ZrhjILK11Lg795cpyVg+9IWkxw
- Ww8SkkHznuDkjlCC2vNLDWTcXKklu30ywpB17SLqtGClz024xXEL4x8k2oTH7ZXgsuEeyW9dvm1
- dFtiqndOH8K5zixtJmciDLc0FLplXtHFAnI36t5HQIKG3GhNtfEDX3ifMH6KEQgkXLSzO6H2mPC
- 5
-X-Google-Smtp-Source: AGHT+IGiQ9rKTMKlTWYgHB5OylaCvnGGqoNdYgbRKouPLWeZJ/3YIHaFFwQk2sjAxleTzCmTvP56DA==
-X-Received: by 2002:a05:6808:f0a:b0:3fe:b27d:2681 with SMTP id
- 5614622812f47-40336019653mr5981963b6e.6.1746289893530; 
- Sat, 03 May 2025 09:31:33 -0700 (PDT)
+ bh=DTyHf4usH1sApJXl4hdbeckYVhHxkAYU3/22ye6Io44=;
+ b=aYqf05aLjMHsRTyTEBhE6h5TAK6VZcmFMakfqNwCGYFX3LXI647lNluEDw1lYkleEh
+ Hix+EodyHTp0oS5vPvLdyneGbR2jjfc0UE2/aNghCeqCRkZ/Iba9+Dt0rNrLBqrxIv8/
+ ijP4Pp22WjMbYWs+Ryj9YoZDdN8K9zNS3kRwPVc27+dF9C1RWlABmhuqWzz17EGGUiz1
+ uhqM+xNBxMiEfnpnTdBwjHR5m7A/x/oGkBlHYu9nkkHLwYWNXjWxW0wHtDLYxN0kCdxH
+ GZIdajXHi1AOGpQ20CjRadeZDtkIKbayTG1WnPXEeyAIi6PiY+xsLH780DwQffCHPXNo
+ /5JA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU8uoetqO6HvSqDdxv2HoQUhtUduBd0OqTT7FhhLbhSDeRVT1j4jZ0B4ij63ueZESkupTkl4m4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0YI8elCKJxzYDUU32ViK0phohHhE70rZlM6Sw6FFuMbO4/SXx
+ je3pZkzisGcExTeXYJ6swCr/hL3Gv+F/CVpTp9OaiXD/g6FXjtvE/6Dp/GQpf7U=
+X-Gm-Gg: ASbGncsB1O4FPnnNHL2dct8g/GAY+ejjKABptGZBJbKYXKZMgrHb20evl85xuUj0fHf
+ 2bHb87UrTOE770Bd1GOAGyH35qLwWnYdxHY1m3GSbvKMkyubAcD2mUrPMNh/93fe2y0SKQI6A4o
+ DhGbJdg7Jvaq48W4qW7gWiP+wpgEVtZgGa+78DjGTjGAWv8xO2VPoKfPAgt+3SREz7gTaXUF1Wm
+ B2H+stpTm2T/S4i5Iv7huLGnJkMfGiRMNd2VSn/csOmIcF5EP7tBI/Mx7eoV5QOL7r3B9+hGsjq
+ sBOAlwMDLZ8h3QjqUTQaq0WLGEHgwLbUlGvvwZIlZ5T9hSWPNjb66ZFr3+M6nH/YKuxHfnOBYYX
+ k
+X-Google-Smtp-Source: AGHT+IF00QVXW6Y4p11j2ul53i8yEv+YEFJB40alS2dZWae80/rUTNZfNJmcS//AoyPoMxu4wSfAEw==
+X-Received: by 2002:a05:6808:80ae:b0:403:3973:23d7 with SMTP id
+ 5614622812f47-4035a55cf08mr822612b6e.11.1746289894987; 
+ Sat, 03 May 2025 09:31:34 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7db25f5sm970991eaf.17.2025.05.03.09.31.32
+ 006d021491bc7-607e7db25f5sm970991eaf.17.2025.05.03.09.31.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 May 2025 09:31:32 -0700 (PDT)
+ Sat, 03 May 2025 09:31:34 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250425225403.861034-1-afd@ti.com>
-References: <20250425225403.861034-1-afd@ti.com>
-Subject: Re: [PATCH] arm: dts: k3: binman: Fix DM firmware selection
-Message-Id: <174628989206.1571566.16568662878783123246.b4-ty@konsulko.com>
-Date: Sat, 03 May 2025 10:31:32 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>
+Cc: Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>, Andrew Davis <afd@ti.com>, 
+ u-boot@lists.denx.de
+In-Reply-To: <20250425173120.141503-1-nm@ti.com>
+References: <20250425173120.141503-1-nm@ti.com>
+Subject: Re: [PATCH 0/9] board: beagle: beagley-ai: Cleanups and stdboot
+Message-Id: <174628989369.1571566.5670970325344450292.b4-ty@konsulko.com>
+Date: Sat, 03 May 2025 10:31:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,21 +101,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Apr 2025 17:54:03 -0500, Andrew Davis wrote:
+On Fri, 25 Apr 2025 12:31:10 -0500, Nishanth Menon wrote:
 
-> Just like TF-A and OP-TEE, the documentation states a custom path for DM
-> can be provided at build time by setting TI_DM. This should then set
-> ti-dm-path which updates ti-dm node filenames in binman.
+> Spin 3 of the series.
+> Just happened to get a BeagleY-AI at desk and happened to test master
+> branch (7dd49a9264a6 drivers: scsi: Add 'erase' support), noticed a few
+> issues which were rather easy to solve.. so, here we go:
 > 
-> Two issues prevent this from functioning for most K3 boards. One is when
-> then DM firmware name is inside a blob-ext node instead of a ti-dm node.
+> Current series is based off:
+> master 9d3f1ebaf875 ("tools/make_pip: Use venv when invoking pip")
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] arm: dts: k3: binman: Fix DM firmware selection
-      commit: c492a55fe40cb9d86b0e99c160e21e5f8f4edcdc
+[1/9] board: beagle: beagley-ai: Add pattern match for MAINTAINERS
+      commit: ef4d9621376ef9e2048fc935b7cc7c8aa70b4b06
+[2/9] arch: arm: dts: k3-am67a-beagley-ai-u-boot: Mark main_gpio1 as bootph-all
+      commit: 6f478ce788e9137ede4b085330d35ff91b919285
+[3/9] beagle: beagley-ai: env: Set up the boot devices and boot methods
+      commit: d096ff98c88143d58e32e017a607f54b61c22cac
+[4/9] beagle: beagley-ai: env: Setup scripts for LED control
+      commit: b522c3031e34b72c416a83fb542adb954f754f3d
+[5/9] beagle: beagley-ai: env: Enable DFU env options
+      commit: ca24877039074c4585ed87d58b2e7edc15217d80
+[6/9] configs: am67a_beagley_ai*: Use saveddefconfig
+      commit: 4786f89c1222fe52cc1d0d594588f1e2d488fdd8
+[7/9] configs:am67a_beagley_ai*: Drop un-necessary config options
+      commit: 208ac0681edba07601af30815ed50052a6286f06
+[8/9] configs: am67a_beagley_ai_a53: Enable additional features
+      commit: f8924c373bf88beb366fb1807def93714a9d5508
+[9/9] doc: beagle: Add BeagleY-AI documentation
+      commit: 9f5f9965960fa3019c27609bc1baedfd0ab4bfe6
 -- 
 Tom
 
