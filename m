@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B82C369C2
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 16:31:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E7CC369C2
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 16:31:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B4438291D;
-	Sat,  3 May 2025 18:31:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DAA308272A;
+	Sat,  3 May 2025 18:31:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hb2ephaJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cxwKcaw3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A4E882845; Sat,  3 May 2025 18:31:35 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id EB4A482937; Sat,  3 May 2025 18:31:36 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23F27822D7
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 18:31:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDCFE82836
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 18:31:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3f7f7b70aebso2272018b6e.2
- for <u-boot@lists.denx.de>; Sat, 03 May 2025 09:31:33 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-72bceb93f2fso2480909a34.0
+ for <u-boot@lists.denx.de>; Sat, 03 May 2025 09:31:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746289892; x=1746894692; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746289893; x=1746894693; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6r1zybKfxkB00S0Qko3nbqf0zI0MuLgbEg6OWtbttSM=;
- b=Hb2ephaJwwlyNj0FSiXj9WfMuRd+6m6rw7CbQHE2Bh9IRkMl9iH+w3Hw0P+KhF57UF
- +QjJkg42bkYeg2QaJTL6Pp6BFWn2EQKiBhZInfg/J9otHYXuVQQ7FH7DTxAIeI1CY38q
- NR8SBgS8r6F6gQtWWaTsa/dDayzujyFFFsrD4=
+ bh=vKfdsr/2E45Ldv00EXNLuHcgXJjcheyfNwQvW53Nh2g=;
+ b=cxwKcaw3gAnzOF3UfTszkI3woJK2pKuCL3huVEw0KmEZG3ifg5Hm9TPXA1idAi1V0u
+ zvKxXLzq9FwbnTCAcmu/ZX3T6XPlowAH5GyewU3v8hKlPkb73RTi2gFLeSFNSZzDEL3l
+ eq8dXe54iSGyqwmD2vzRMy2fPO+waHRcxv3A4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746289892; x=1746894692;
+ d=1e100.net; s=20230601; t=1746289893; x=1746894693;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6r1zybKfxkB00S0Qko3nbqf0zI0MuLgbEg6OWtbttSM=;
- b=TmaYCB7HRqJGNPdfEEylTI1LU3HOQPRUaGgzGOy8QLQr2thY5+HWj1JIzLLm8eVPfg
- yg46nwCPrAsosIV83F24VCK2kvmiEqVTv+LKttykUBuc6eDchR8hWW9fztSWb1uZwDQV
- QjWQ9s72WezjrWV21Fldc58MeuGev3pGrMN+ysVIiXg4eh2SFRTnmX+zqbVUA16XmYca
- +O2sdU3olrhEG4mhJjj3qgP9so1JiyvQ0w/RX2+cHNGbweNklDESuhfXegKftakDvIjQ
- Mg8lCnoJ6cZfqZTvR0jW9FsBsBJQiE41aPVgud0P5cc406na65eUJ5Rf/0uAvvYmkL1k
- MHUg==
-X-Gm-Message-State: AOJu0Yx/YSPZwaIjMFEoe7IS8qj/E+Ujxb0xPoHbIcuRqdw5pipmQJPj
- sMiRwxW2LrXizyXDzHO2nuZ+OGe2GZFMT2wI99arTIpfvlJLc5qBnY/o+uMMf2UoPPNKA4b2kWX
- H
-X-Gm-Gg: ASbGnct04aoq1vzc3FnlT33p+FEe33QXw5c6oAEsYOf2zk7ORhxY0u4stS85ONIg7bs
- t5sm8IK3jbRrfkhT2z1U0yNVTFQLyG4xmEfnW/T2MymSeUxNetuXkZyF0nfLuxrT57E42QrzJdF
- aQQGnScXaJ8ITs4TBSBOdOzpl9lnnmKl0TC2uRufKcfqSS/YbgjdduG724W8PIijPSLSRT3tnwd
- 8PhNkM4JE9BMQ154mDfkdygfgO5VF2fI50CN0TvqAnghlVdswG8aoBgxKh6d0uzoOf8aTuq/hus
- BetRSO/JrDDEN+vgCIrgPCaBl0ZWePEptBWdvD61YhZ1PaxCODv76sKMxpH/al0K2N+JEEo8yDS
- S
-X-Google-Smtp-Source: AGHT+IF3L0oNzafOxkQozPu5iMJK975kPhJ3O1QPdCCJEwUmArCv58dZ8GTDcRiJ/hTNHoP8vdp1Qw==
-X-Received: by 2002:a05:6808:3092:b0:401:f362:4bb2 with SMTP id
- 5614622812f47-4035a5db11fmr700823b6e.35.1746289891937; 
- Sat, 03 May 2025 09:31:31 -0700 (PDT)
+ bh=vKfdsr/2E45Ldv00EXNLuHcgXJjcheyfNwQvW53Nh2g=;
+ b=tCTZqwZhkdW/ixjDEkH1R68dARkui53+MoXUcmTxN4wFK1kB8hqpvi7/LCbAUANNdt
+ MhBKK0tAKWHih/a0a4yKBSobWpjQiu4+xoCT3v90KYZHHF9GWD8thv2qMZ3C4xVPy9vv
+ lJEGZJ63nlDwzHO0LYA0hLxoLwFVP+qVHuk0r1mNGGjWufU84aChmd//hg7HiI83SPb9
+ x+y3IMzCrCak1HFHxli0skSIMSMZvMsSv8fdkvT64IvdpT9Xf4DSYGAteKu7wuN55U6A
+ XKAP/ekV9ocpJIDqWOcaIEBq4CF5E4K2/r2WDBR3EzfqKbQshM8PtsrobJWRERL0wE1M
+ Wlxw==
+X-Gm-Message-State: AOJu0YygwTngurXmlhD0p9AYNHU1cwjpQnP3Vopgo+o1fMgBtPEHMskc
+ SZ3rH6ExdN+EMlZne7R+K7kO+m/VBCvfAdVnDFRSGYlVmo0QQSYO3RumtaZ62nA=
+X-Gm-Gg: ASbGnctwmOdxM6DgGuMlKa9S7s7vU9GFc6eShXAKBuqejpai8NiJvMqkfdQwz0VyWBX
+ zfSNl5bRG9c84AzeQyTjNHbwRzAu1uvl+dIdAJ4ol2NJnQLWMjaKoS7pSqk+n1IINOzbc8XbWu2
+ HQ/FLD+7TJDxWfNT6dfv7huvgejfl0bJYJA0ANGyj2kFvzCk8ZrhjILK11Lg795cpyVg+9IWkxw
+ Ww8SkkHznuDkjlCC2vNLDWTcXKklu30ywpB17SLqtGClz024xXEL4x8k2oTH7ZXgsuEeyW9dvm1
+ dFtiqndOH8K5zixtJmciDLc0FLplXtHFAnI36t5HQIKG3GhNtfEDX3ifMH6KEQgkXLSzO6H2mPC
+ 5
+X-Google-Smtp-Source: AGHT+IGiQ9rKTMKlTWYgHB5OylaCvnGGqoNdYgbRKouPLWeZJ/3YIHaFFwQk2sjAxleTzCmTvP56DA==
+X-Received: by 2002:a05:6808:f0a:b0:3fe:b27d:2681 with SMTP id
+ 5614622812f47-40336019653mr5981963b6e.6.1746289893530; 
+ Sat, 03 May 2025 09:31:33 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7db25f5sm970991eaf.17.2025.05.03.09.31.30
+ 006d021491bc7-607e7db25f5sm970991eaf.17.2025.05.03.09.31.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 May 2025 09:31:31 -0700 (PDT)
+ Sat, 03 May 2025 09:31:32 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250425-effective-memory-v1-1-8531fbfe81cd@ti.com>
-References: <20250425-effective-memory-v1-1-8531fbfe81cd@ti.com>
-Subject: Re: [PATCH] arm: mach-k3: use CFG_MAX_MEM_SIZE
-Message-Id: <174628989073.1571566.6447721991332485841.b4-ty@konsulko.com>
-Date: Sat, 03 May 2025 10:31:30 -0600
+In-Reply-To: <20250425225403.861034-1-afd@ti.com>
+References: <20250425225403.861034-1-afd@ti.com>
+Subject: Re: [PATCH] arm: dts: k3: binman: Fix DM firmware selection
+Message-Id: <174628989206.1571566.16568662878783123246.b4-ty@konsulko.com>
+Date: Sat, 03 May 2025 10:31:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,18 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Apr 2025 12:02:06 -0500, Bryan Brattlof wrote:
+On Fri, 25 Apr 2025 17:54:03 -0500, Andrew Davis wrote:
 
-> Rather than hard coding the maximum memory size, lets just define the
-> CFG_MAX_MEM_SIZE so get_effective_memsize() will return the correct
-> value without modification.
+> Just like TF-A and OP-TEE, the documentation states a custom path for DM
+> can be provided at build time by setting TI_DM. This should then set
+> ti-dm-path which updates ti-dm node filenames in binman.
 > 
+> Two issues prevent this from functioning for most K3 boards. One is when
+> then DM firmware name is inside a blob-ext node instead of a ti-dm node.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] arm: mach-k3: use CFG_MAX_MEM_SIZE
-      commit: 78c0f7e3eb0dc96df163cd5ec51de80a28fb31e7
+[1/1] arm: dts: k3: binman: Fix DM firmware selection
+      commit: c492a55fe40cb9d86b0e99c160e21e5f8f4edcdc
 -- 
 Tom
 
