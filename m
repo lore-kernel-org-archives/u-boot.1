@@ -4,70 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E03C3ABAA
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 02:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDFF7C3ABAA
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 02:11:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CD8882836;
-	Sat,  3 May 2025 04:10:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 603F48214F;
+	Sat,  3 May 2025 04:10:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XSaBL1TK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CT/faEFI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01E22826AD; Sat,  3 May 2025 04:10:50 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id B96FF81F66; Sat,  3 May 2025 04:10:52 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE3168214F
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 04:10:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B717A826AD
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 04:10:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-acb415dd8faso392937766b.2
- for <u-boot@lists.denx.de>; Fri, 02 May 2025 19:10:47 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac2dfdf3c38so481789166b.3
+ for <u-boot@lists.denx.de>; Fri, 02 May 2025 19:10:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746238247; x=1746843047; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746238250; x=1746843050; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LWLaxifDj3Z7ALTIcoH2VeetPGKrRTdSPrHC7/WbweQ=;
- b=XSaBL1TKnp9npoETIZr2f6pkPNGWhs9m6aaf8TX3YFHSZonXSDvHdWuDx/DN6tXjob
- JbGNzbf1WvOID2+07cFrwJWbLwid10jgEyRYYe6bXq0Fxf8URrVL1kbUHePWpAJxsK0J
- pIBBKwZ1UTfo/wZIYBtObCK1Wz4RcFIWkicRE=
+ bh=APTf0K546Ty/LFwUOVmi1q47h2j9cK0d0dsD6dCrrr4=;
+ b=CT/faEFInIJVBFRAhkWmrwQFNFi7J1OMQshmB2MTI88ayReBLN+yF38RaL5M7l16E6
+ y0n6CeuM27RTvPvT4cPqogBgTPEFvpb2xQajdzlmpWD0EBC/wjWLHo4rE3VARB0rIGmW
+ JLeWjda6CFvdOdZoTb3OAAxgjHti0/zO7wEMA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746238247; x=1746843047;
+ d=1e100.net; s=20230601; t=1746238250; x=1746843050;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LWLaxifDj3Z7ALTIcoH2VeetPGKrRTdSPrHC7/WbweQ=;
- b=PaOylaIZX75KVgsu6UxwtmP85M7hCpZQWfzPAB3Ki220Q50m/DJ6FMjcNrfMWzISv8
- PBhk1m9Rf89PQ9LmTCIQUeWUwvN2jaM7wZ/wtOmcZ/zRIfetGRayzK913wBshVPujezB
- LdPJVmor8PBjueb/xl0v2EXvA/87chuLRUjKV4iI/5JA3fD9n2Uw2JSW+YiT7ttSvGnT
- MrbGszPoJNj9KtAXNLKSPHJfNDLnPWTb13AEB2ZP8P3lTc/lttEcgy+6s61ldDCQ6Ase
- BEDxNzycfm3NA6m4zdzJzxiER+Dajp0ZgopZijLjHpbmZ2PX9twPEDgQZg4/wlFdnqUd
- J12w==
-X-Gm-Message-State: AOJu0YxGx3hSCDDK428CBETFog0rzz8ZdlgZFIzfCuMayid/MOEhjhX+
- nnwEot005Kqt88JwU7285Fhy/5usGBWotyQkTeoUYbPbsh7MdJvHT3S+hPBMgR9M3xKl4xZ7126
- BYizcf9o+59qeEzVEr0kwAabu2ZApBSBZa7DU
-X-Gm-Gg: ASbGncsyHYcM/rZEKTSKczuXMIdnbbDX1K7DUoY8fF9KQFIKt1/cS0PxmnOWUGBTdgJ
- v4/T10XJd3XPhkklsuVhSPYDp3bIa/jrRds3oeumqZqFz4I7pfce0Rw+MiCW2bAJ8Cp17rInhTn
- AJ8o6pqFBR8NQvr3BtESywXo4=
-X-Google-Smtp-Source: AGHT+IEG+LeW0C1oD7ELHEJ0VhxY8AiUgNePumnBnjxcgAIC4mjWmqak/4ofUj3ufSKvKMjPBuRjfFJEMbCcLNZa/II=
-X-Received: by 2002:a17:907:86a9:b0:ac7:e815:6e12 with SMTP id
- a640c23a62f3a-ad17addbe0amr421416066b.33.1746238247195; Fri, 02 May 2025
- 19:10:47 -0700 (PDT)
+ bh=APTf0K546Ty/LFwUOVmi1q47h2j9cK0d0dsD6dCrrr4=;
+ b=TgK474hNLnm5r+BAa9yBF29S5rqlmHn/lZ02AhFIsLJpzSxBbIgZgQFTShNXmw/LIP
+ KP5lJAgfssK9hNcbuNLrbxZVzFHEpGkasP4KHNmmE5vjCBbxiJe0YuKbitKdp3KAKiGt
+ kDy2HJaA5tmZ3OVWf8uzfv284+pHYJWjwQ7CVYtIIC0ZwIl5LWOSde4sIAEzRXdn+xSs
+ fX+n8zCIdReZ5rs/x5CA+OdoQeOBv/Cp6WaMOiPzpYyTE8zCkIv4c8Nsq153qfHp7XDY
+ PgV03Q8+W6Q3gsKeCyr5B3/EE7l79COtvGfivh7Ux7YGErlZfWkypTmbAWtkYwmLPxqQ
+ ClcQ==
+X-Gm-Message-State: AOJu0YyGnBz5PWWg4cHKj9DskiuOT6b/q7MZ9FZ2YR8mT8yLhtyBR2YB
+ PVXriq9rqTg02DlNzFVjfaBxa4tKLU5i12T+bEEfm4ZYzI3LToLwjMpkK98DsN+5MfsX+F+OTQz
+ q9GwqYPYssBelikLM0VNSOLPo+cpJOaxGTiwv
+X-Gm-Gg: ASbGncu7WU79DIDVUuvv9ZxVihRLMoHwBWHAv23PwknVW/J4fWmIWdfzqK6qudQ84/+
+ H9cp2ROVrbOrY555kI5nrd4BqJm3JSMUz8dOA8e35RDmT0Co8jWyu1xZHTGEChzbk7SJDkCi8Mn
+ S/0D5VV/V1+DB5+M/LQRuQn/I=
+X-Google-Smtp-Source: AGHT+IHlv4I82txF1N4a+xVGBJAHPq0yvYttS+pY2TmD6WjYwEX0BMLJs7V9i45ewg/4X5Z6fuHYtmOBJTfocgJVrLk=
+X-Received: by 2002:a17:907:971a:b0:ace:3a27:9414 with SMTP id
+ a640c23a62f3a-ad17aefb21cmr473228966b.44.1746238250252; Fri, 02 May 2025
+ 19:10:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250502183826.859174-1-eric.schikschneit@novatechautomation.com>
-In-Reply-To: <20250502183826.859174-1-eric.schikschneit@novatechautomation.com>
+References: <20250502144718.313633-1-sjg@chromium.org>
+ <20250502150035.GU1261075@bill-the-cat>
+In-Reply-To: <20250502150035.GU1261075@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 2 May 2025 20:10:33 -0600
-X-Gm-Features: ATxdqUEqWp-knMPE-dZvuD30Bw6vDBbUNI_6Y9YIyJ9zEENKCmQIEyjywLNtyUo
-Message-ID: <CAFLszTiPKbz20+=Du4L7fq442dO2QUh+wV7qH3z5FZy0mNZNmg@mail.gmail.com>
-Subject: Re: [PATCH] [RFC]: dtc: Add Kconfig option to pad device tree blob
-To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Cc: u-boot@lists.denx.de
+Date: Fri, 2 May 2025 20:10:37 -0600
+X-Gm-Features: ATxdqUH-5-Y-rtEqGqmDYoHG_xWlmkXObxCAZhw9EWyVpOIEo2TMfrgsVKL5L6k
+Message-ID: <CAFLszTiic_fp=etd+t8OCiEy8=yWdrwEAp8XNChFecbpXVJ=aQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/60] expo: Various features and improvements
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Moritz Fischer <moritzf@google.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,33 +104,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eric,
+Hi Tom,
 
-On Fri, 2 May 2025 at 14:06, Eric Schikschneit
-<eric.schikschneit@novatechautomation.com> wrote:
+On Fri, 2 May 2025 at 09:00, Tom Rini <trini@konsulko.com> wrote:
 >
-> This will allow arch(s) that use device tree blobs to pad the end of the
-> device tree so they can be modified by board files at run time. This will
-> help prevent errors such as FDT_ERR_NOSPACE from occuring.
+> On Fri, May 02, 2025 at 08:45:58AM -0600, Simon Glass wrote:
 >
-> Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-> ---
->  arch/Kconfig                 | 11 +++++++++++
->  arch/arc/dts/Makefile        |  6 +++++-
->  arch/arm/dts/Makefile        |  4 ++++
->  arch/m68k/dts/Makefile       |  6 +++++-
->  arch/microblaze/dts/Makefile |  6 +++++-
->  arch/nios2/dts/Makefile      |  6 +++++-
->  arch/powerpc/dts/Makefile    |  4 ++++
->  arch/riscv/dts/Makefile      |  6 +++++-
->  arch/sandbox/dts/Makefile    |  6 +++++-
->  arch/x86/dts/Makefile        |  8 +++++++-
->  10 files changed, 56 insertions(+), 7 deletions(-)
+> > This series collects together some new features for expo to make it more
+> > useful for boot menus:
+> >
+> > - measurement and display of multi-line text objects
+> > - internal alignment for objects (e.g. centred text)
+> > - editable strings in text fields
+> > - new 'box' object to draw a rectangle
+> > - highlighting of menu items, rather than just relying on a pointer
+> >
+> > Expo's boot menu is restructured so that it is possible to iterate
+> > through various bootdevs and update the menu as new ones are found. This
+> > is more in keeping with how bootstd works.
+> >
+> > A new textedit object is added, intended to provide a simple text
+> > editor. Future work will complete this.
+> >
+> > With this series the boot menu has a better layout and appearance.
+> >
+> > Changes in v2:
+> > - Add new patch to pass in the video device for cedit_prepare()
+> > - Add new patch to test rendering a lineedit
+> > - Add new patch to test editing a lineedit
+> > - Handle the case of an initially empty string
+> > - Only check the text objects used by the bootmenu, for now
 >
+> ... include the 13 part series you asked me if could go in now,
+> yesterday?
+>
+> > Simon Glass (60):
+>
+> 60 is far too much for anyone to provide meaningful review.
 
-This is not a board-specific feature. You could try this:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20241206131113.2865416-3-sjg@chromium.org/
+This is expo and no one commented on the previous series, so I'm not
+expecting much feedback. But once people start using it, things will
+come up.
 
 Regards,
 Simon
