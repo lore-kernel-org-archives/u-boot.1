@@ -4,94 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD813C369D9
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 08:37:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CB7C3ABAD
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 08:58:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B949812BC;
-	Sat,  3 May 2025 10:37:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B45281F0D;
+	Sat,  3 May 2025 10:58:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iWJ5yRQZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A6YkzAQz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB72381F0D; Sat,  3 May 2025 10:37:22 +0200 (CEST)
+ id 7CBEB820E1; Sat,  3 May 2025 10:58:27 +0200 (CEST)
 Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
  [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A212F810EB
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 10:37:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 107C2810EB
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 10:58:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
 Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5e5c7d6b96fso5009992a12.3
- for <u-boot@lists.denx.de>; Sat, 03 May 2025 01:37:20 -0700 (PDT)
+ 4fb4d7f45d1cf-5f62ef3c383so5086933a12.2
+ for <u-boot@lists.denx.de>; Sat, 03 May 2025 01:58:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746261440; x=1746866240; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1746262704; x=1746867504; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uCdhwnCpsBriWaR9FA4Ma4axmASjb7CyH/xtYAq09Es=;
- b=iWJ5yRQZn7wSXGjdnj3uskTXaymXW97OU6o8w4DBdtIP2BDpaaJttZ7qOAPO5PEPm3
- fyL/FH0EbAkcpP6L5eOVEWxdULaNRVqwiAJ7BUCKlcjr2pLPEEQYDobhwrm0a5Al72DS
- Ep533vuwfFPzDizBvya2gwz8lI0JhnyNGGbtUo1gczMofmf+yKWaQueihqTSidvDN1XL
- OVMKlkKx50uxoMsXLwBpbIuveqK6NtktpdJQXoosg/0oWjGP/huNnqQEbyLmP6/7VUlK
- x1De2KV6MQ66FRug1RULM3FXsTVSNRBtsfTbpKwA/IW4HFdi9468mXwLxZ2AIDYGj6E+
- YS2w==
+ bh=fyL+T1EWvlmpcLqTcoKM5Il2U9p6V91/ZbdB+221NxQ=;
+ b=A6YkzAQzXv5u0Fl2+VT9t2cEORCBqvAGCSq3z6r9he45aWpgcqbcR1mS5Ej9ixaal2
+ jw9YT0V+ip2ZmkyWCQXgfg3rU9IiBbzuo2uqtBowua0ZzFzty0LEAoUxe60xwtmeRQ8l
+ RO636Z2my0dloUPu6GHfTUajOw4WFHHWYG3LBzxgYUtdbULdF47vcaUBLFOcbnmRqvaf
+ n+2Qw7c52/MIteIXc+18KcD3Zx8iwtnQfuUFAOlYUJPtn0nErT3zMRw5L3eOVDPIQ/mB
+ uYrrIkarPbUkaEAteDl11MVYQl2EiiXb4sDL0OlAB+0DnTphvhA9zGMaLFN+ALskbSpr
+ d4Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746261440; x=1746866240;
+ d=1e100.net; s=20230601; t=1746262704; x=1746867504;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uCdhwnCpsBriWaR9FA4Ma4axmASjb7CyH/xtYAq09Es=;
- b=cEWnuTS2sCLiIlTquKp/tIZ9ymMhX9cOu+sZgMIolsSOLwhrtNfiSeAYlkPxhXfFBf
- Xu2sGcKxLMK4gYLQjkj5jjMCx5xbTbCiG9OKDkdBB3Ye7G4/s7j4lFft3PbukCf4dP8Q
- w5sr8i/hhR1Xm57tQ5xpG9Ir48Wmd1avXGcmnfz4YauEbEqxMGb7wApfqAxoQunLqk7F
- VjWTAx9I4cP1FoYA8w5lxKwaFdkZSWCpyZP+vMObY3ddjSOha9DJnm7EBl4ZtwIB5BH6
- j52QOjtE+lUk7l31dIsWg90fnpsQZjCUm/84Ut825Nkfej8gO2KoeafZizC9W34598kj
- ab9Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsmQrZA+ysxo2mNoJd0etH4xjz/laeFCZBNcH2foUwOZ7/hlkv/GNh3sEnB5iCUGair/Kuoi0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSDYz0LhCPLALvXQkBcglqssSKfHs9OzFf1OHSK+0Z1Gtt3XED
- WGXQ4hrU573bs1VBPKbdrBtqQM/+XSfrZ1+51qQUFb5Z5Nn0wYCc/OJ7OFgMKhwcGjcH/GV+6RJ
- F6gHcRxAWW1PUunN6qFDmOmEwsS0=
-X-Gm-Gg: ASbGnctn/6p6zWE0+xb0Te5jgC3lD8/9LGTEFHXzaiF74VvbotqW4iQUyKue4+mAfxi
- ZLea3f/vqiacE8CsLNhOiB1VRvbXCccqLikIHwLOeAvlExPm3wJTICCuoyhv5R8qZe+SHntXdmE
- vQJe0gMr5nD9UrWZJzbuxGO06hh52z1eufNduJXQRoCk5VWusl+fDkTM4=
-X-Google-Smtp-Source: AGHT+IENy/EFJ4uSCjia3mDw5hPCHyVYoeN+qsstbKmwMT8wXBNrAGow79Plz36aL/Tn+6H0v9CyF6FaWMiGoOlNn4U=
-X-Received: by 2002:a05:6402:2709:b0:5f1:e466:660 with SMTP id
- 4fb4d7f45d1cf-5fab056d2a8mr359046a12.5.1746261439808; Sat, 03 May 2025
- 01:37:19 -0700 (PDT)
+ bh=fyL+T1EWvlmpcLqTcoKM5Il2U9p6V91/ZbdB+221NxQ=;
+ b=srRUe9Z7Yto4aqSWJINjw0ddn+R6HfsHsflcY3NYVYSpKOmEHKns4j2xDGaxvKv+JH
+ A8sB4npmPSLOqdiID3rfKYGRDo424ZNMMCppPilCJvlH+x77rYukZvfqDhFQmtaoeKVD
+ BueMfELF7Ct7yZ0jPVCgpvrYoMHI7KpGtaVeTb48fto81aVdADH+VJmlxVzHhq/39m09
+ wCXuc/3biHrpjOX87e44nU4TvFitGnz4T5gp5GZaAEtKcEtq8Pk1fi5YKQ0rDadenvkS
+ WcWjeEbqoWFLpWY8MLJDkCzwXL4lNWZManbC3aq8NQ9JQMiITJ2i9j56EoxwaJzPeZ9G
+ l02A==
+X-Gm-Message-State: AOJu0YzU1Iouyj86LVBy8/bu2wPkGe7VDTnhD2aZVQG1sKvadaSqSaIq
+ gAZ4q7B9j1qp72YEa3o8LG6nROWIcRytUNGI004ZmOPccuctWSeTri1M5k54naLcU4E7HtMPkMK
+ EZ8dtIlX0LWGX7wIqEzEt2sEy1qjvfYLY
+X-Gm-Gg: ASbGncsiLdsRQUMcL4ghnx+6KsmYEqFFE+Ln/YsnMSI2Fd/AI5N2I0lxIcI29/IByl0
+ cqRRFIwOHd1fSpQ+FrwnwV7CwLRYFc3V5lAkGt98FTC880PVo3qoI4eGDJNnHRNip2NmnwPf0a7
+ klQIpDS/mjvKA96MET0C7QQQvpGzMG16AHtmDgMAaC9OooIt55wRQsEAo=
+X-Google-Smtp-Source: AGHT+IHl473tBzmwM4hmdbRICn4mnMg/JULZDdgRfXWswR9ZDhs2MCENDN0LN2HhUi/1z0GG6qn21CV1bU88ykBQVWc=
+X-Received: by 2002:a05:6402:354a:b0:5e7:8501:8c86 with SMTP id
+ 4fb4d7f45d1cf-5fab05c18b2mr363396a12.22.1746262704172; Sat, 03 May 2025
+ 01:58:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250502144718.313633-1-sjg@chromium.org>
- <20250502150035.GU1261075@bill-the-cat>
- <CAFLszTiic_fp=etd+t8OCiEy8=yWdrwEAp8XNChFecbpXVJ=aQ@mail.gmail.com>
-In-Reply-To: <CAFLszTiic_fp=etd+t8OCiEy8=yWdrwEAp8XNChFecbpXVJ=aQ@mail.gmail.com>
+References: <0ae3e9bd-cbc7-4a33-8a1c-926dca3aef3f@aicorn.de>
+In-Reply-To: <0ae3e9bd-cbc7-4a33-8a1c-926dca3aef3f@aicorn.de>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sat, 3 May 2025 09:37:08 +0100
-X-Gm-Features: ATxdqUHSnZ1M0ldBy7X6iObEOtPUH6mxeywxvwF-zggEMzYgXYNJBcnlxDfbTtU
-Message-ID: <CALeDE9N3d+paBv3gp=JnBt5E02XAs0cZjT701h3Yf7fxkWopOQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/60] expo: Various features and improvements
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Alexander Graf <agraf@csgraf.de>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Moritz Fischer <moritzf@google.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Sat, 3 May 2025 09:58:13 +0100
+X-Gm-Features: ATxdqUFP-2hSwmiEvdGFR60Uh4aL-k-mME15Dya_q6VVkwPfxn6J5dhbqHQHFwk
+Message-ID: <CALeDE9P6Yf5K67yQdGTHaim_Ya5zmQamcK3rSboT+dpb+bZBjg@mail.gmail.com>
+Subject: Re: raspberrypi cm4 usb not working
+To: Moritz Krautwald <Moritz.Krautwald@aicorn.de>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,49 +89,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Moritz,
 
-> > > This series collects together some new features for expo to make it more
-> > > useful for boot menus:
-> > >
-> > > - measurement and display of multi-line text objects
-> > > - internal alignment for objects (e.g. centred text)
-> > > - editable strings in text fields
-> > > - new 'box' object to draw a rectangle
-> > > - highlighting of menu items, rather than just relying on a pointer
+> I am building a custom yocto image for the raspberry pi compute module
+> 4. I am using meta-raspberry scarthgap branch using the raspberrypi4
 
-Each of the 5 sections above should be a separate patch set. A patch
-set should be on a single topic, as soon as you feel you need to add
-the term "collects together" you should be splitting it up.
+Can you provide a link to what ever that branch is?
 
-> > > Expo's boot menu is restructured so that it is possible to iterate
-> > > through various bootdevs and update the menu as new ones are found. This
-> > > is more in keeping with how bootstd works.
-> > >
-> > > A new textedit object is added, intended to provide a simple text
-> > > editor. Future work will complete this.
-> > >
-> > > With this series the boot menu has a better layout and appearance.
-> > >
-> > > Changes in v2:
-> > > - Add new patch to pass in the video device for cedit_prepare()
-> > > - Add new patch to test rendering a lineedit
-> > > - Add new patch to test editing a lineedit
-> > > - Handle the case of an initially empty string
-> > > - Only check the text objects used by the bootmenu, for now
-> >
-> > ... include the 13 part series you asked me if could go in now,
-> > yesterday?
-> >
-> > > Simon Glass (60):
-> >
-> > 60 is far too much for anyone to provide meaningful review.
+> machine (32-bit version). (U-Boot 2024.01)
+
+That release is quite old, can you test the latest 2025.04 release or
+even 2025.07-rc1 to see if that fixes things, I am pretty sure there's
+been quite a few fixes to that in the last year+.
+
+> In the /boot/config.txt I added:
+> # Enable USB peripheral mode
+> dtoverlay=dwc2,dr_mode=peripheral
+> which should be the right mode if I understand correctly.
 >
-> This is expo and no one commented on the previous series, so I'm not
-> expecting much feedback. But once people start using it, things will
-> come up.
+> On startup the following is logged:
+>
+> PCIe BRCM: link up, 5.0 Gbps x1 (SSC)
+> PCI: Failed autoconfig bar 10
+> starting USB...
+> Bus xhci_pci: dm_pci_bus_to_phys: invalid physical address
+> xhci-pci init cannot map PCI mem bar
+> probe failed, error -5
+> No working controllers found
 
-Well a series of 6 patches just goes straight into the trash because I
-don't even know where to try and begin to test it.
+So the USB2 controller on the CM4 isn't PCI based so those errors are
+likely spurious.
+
+> I have no idea on what could be the problem and how to fix this.
+> Ultimately I want to use the U-Boot ums feature to expose a block device
+> via the usb port to another computer. I have searched the mailing list
+> and other resources online but only found the following unanswered
+> stackoverflow post:
+> https://stackoverflow.com/questions/78843599/usb-not-working-in-u-boot-on-raspberry-pi-4b-with-custom-yocto-image
+
+So if I understand your description correctly you want to be able to
+emulate the RPi usbboot process described here?
+
+TBH as one of the RPi maintainers here I've never even considered this
+so have definitely not tested it in any form nor do I remember anyone
+mentioning it.
+
+Taking a quick look without digging out a CM3/CM4 device I think
+you're going to need to enable USB_GADGET_DWC2_OTG and associated
+configs, I am not sure if the meta you reference above does any of
+that for the configs etc.
 
 Peter
+
+[1] https://github.com/raspberrypi/usbboot
