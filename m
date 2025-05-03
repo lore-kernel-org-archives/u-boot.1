@@ -4,39 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A997C369D9
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 12:30:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77499C369D9
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 13:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B62A82102;
-	Sat,  3 May 2025 14:30:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 6E60681F7B;
+	Sat,  3 May 2025 15:32:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Zjom7uzm";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6212E8210D; Sat,  3 May 2025 14:30:12 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 291188210D; Sat,  3 May 2025 15:32:04 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7324881F7B
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 14:30:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 099CC80F9C
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 15:32:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from hay.lan. (unknown
- [IPv6:2605:59c0:20f3:a400:6ecf:39ff:fe00:8375])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 62B07B4C26FB;
- Sat,  3 May 2025 14:30:08 +0200 (CEST)
-From: E Shattow <e@freeshell.de>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
-Cc: E Shattow <e@freeshell.de>,
-	u-boot@lists.denx.de
-Subject: [PATCH] riscv: dts: jh7110: override syscrg assigned clock rates with
- defaults
-Date: Sat,  3 May 2025 05:29:44 -0700
-Message-ID: <20250503122952.973129-1-e@freeshell.de>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (dynamic-046-114-111-064.46.114.pool.telefonica.de
+ [46.114.111.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 1C59A3F77E; 
+ Sat,  3 May 2025 13:32:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1746279120;
+ bh=j8ACPudaXkQvp0t2O7njYzWuFA00r7zC7EeMtAx0c3s=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Zjom7uzmOJpXr3DvQB0QWpn0n+ODmlRiaEh5Fk757UvLloMiHCH9icS1wRP0Zz73I
+ MUvGrVVikxaHHHV65pTxVKv2ZBXb5ypriUWgIkjEez9/6ZesyKDY0yutCAMCVJTq0X
+ qSSlJrkGL75vECSJ/HVnmA5SPvTMiz5/d5/7szBTreP7AFFwOPeqQQumzWzmFD2e8b
+ DQLWi24GCkPQLnuyCRyMqCoh+Rbj2iXiCIHOg+gx3qlFaERpEI3MAP1XGt17CiYTka
+ 1xd52wOrESD6MuQHgxRacIUQSZIKGMv67htP1+1Gzy8aJC1lTp0j64QBrIaGplL6eG
+ VyhuwOKsASYaw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/2] test: run tests on boards with LWIP_NET
+Date: Sat,  3 May 2025 15:31:53 +0200
+Message-ID: <20250503133155.55412-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -55,29 +74,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-JH7110 drivers are missing support for CPU frequency scaling, so override
-upstream device-tree to use default clock rates for syscrg. This override
-duplicates a portion of jh7110-common-u-boot.dtsi file planned for removal.
+Some python tests require CONFIG_NET though they should run if either
+of CONFIG_NET or CONFIG_NET_LWIP is available.
 
-Signed-off-by: E Shattow <e@freeshell.de>
----
- arch/riscv/dts/jh7110-u-boot.dtsi | 1 +
- 1 file changed, 1 insertion(+)
+Change the pytest.mark.buildconfigspec to allow specifying multiple
+alternative config options.
 
-diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi b/arch/riscv/dts/jh7110-u-boot.dtsi
-index a9e318c4a31..13adbb6922c 100644
---- a/arch/riscv/dts/jh7110-u-boot.dtsi
-+++ b/arch/riscv/dts/jh7110-u-boot.dtsi
-@@ -108,6 +108,7 @@
- 
- &syscrg {
- 	bootph-pre-ram;
-+	assigned-clock-rates = <0>; /* cpufreq not implemented, use defaults */
- };
- 
- &stgcrg {
+Update the tests that rely on CONFIG_NET=y.
 
-base-commit: 6cc812f8cc55c132458c7da5b9fb7666315cbe8c
+Heinrich Schuchardt (2):
+  test: allow multiple config options in buildconfigspec
+  test: allow testing with NET_LWIP=y
+
+ doc/develop/py_testing.rst       | 24 ++++++++++++++++++++++++
+ test/py/conftest.py              | 10 +++++++---
+ test/py/tests/test_efi_loader.py |  2 +-
+ test/py/tests/test_fpga.py       |  4 ++--
+ test/py/tests/test_net.py        |  2 +-
+ 5 files changed, 35 insertions(+), 7 deletions(-)
+
 -- 
-2.49.0
+2.43.0
 
