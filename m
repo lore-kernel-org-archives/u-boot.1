@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0905C369C2
-	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 21:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 494D2C369C2
+	for <u-boot@archiver.kernel.org>; Sat,  3 May 2025 21:26:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6A1E82935;
-	Sat,  3 May 2025 23:26:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 332FE8283E;
+	Sat,  3 May 2025 23:26:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R5OduLx4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cDz1Nnh0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA3E780EE5; Sat,  3 May 2025 23:26:42 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id EF68F82836; Sat,  3 May 2025 23:26:45 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B64E18219D
- for <u-boot@lists.denx.de>; Sat,  3 May 2025 23:26:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E42F882937
+ for <u-boot@lists.denx.de>; Sat,  3 May 2025 23:26:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5efe8d9eb12so5072968a12.1
- for <u-boot@lists.denx.de>; Sat, 03 May 2025 14:26:40 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5bc066283so4704439a12.0
+ for <u-boot@lists.denx.de>; Sat, 03 May 2025 14:26:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746307600; x=1746912400; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746307603; x=1746912403; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=69QXLQ0TxCbHi+bGHTCRt5Ss9S5Fc001I8yOseqUpSk=;
- b=R5OduLx4fJNJ0cxrukr3zF3/Ic2/YX7qAFMb8GzBDn6cIO6sZZNstMd9jiuY6M2ul5
- f5fIT/I+oM7rWgDsauOSq6IJV9U8fedmmHWK8UTuCap+AuMlsCpa4WJ2GJexmUJYbee2
- uBtTzx8N/VTr5n46ULHfrfD4i3TqXd7akrlzQ=
+ bh=u0Fnpi/TAvCA9ET+nqdTXQkYJb0pgeOgrtSSSvbWtV4=;
+ b=cDz1Nnh0lf/x5YvweF0Mo0TX2oE3VTxidw67UqkXd06Q2+dCo5DmrR2lGx6bxPs1a/
+ XjNeTpDtpiI/D2pDRBtyGruNNVAMuqf8leluAQBkn03uAlFsAf5tT4+/2/1H6n2OTCSo
+ PQFiYD2GgkuHVnwpy4BpjF1q5DOH2Gs+j4330=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746307600; x=1746912400;
+ d=1e100.net; s=20230601; t=1746307603; x=1746912403;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=69QXLQ0TxCbHi+bGHTCRt5Ss9S5Fc001I8yOseqUpSk=;
- b=cMO+EDd0y0VK5seTQI8H0jF7xd27TeAgWl+KMlALPK+q5CTEqWRaXaTtzJx+BhP/Bv
- oROdmu7mcwjH5SVhBR8h2S7louR+Ch+uNl6yxK46n8VzxMD/rQAk40k2hGeEwFzD+8Np
- zKAuD31xxl/gcEWtDmRz4RngY2qSzyOMriHS1a4mYOxRj5UDNG5h63papLGl1dE+sze7
- sAuqx6oBba5Yd7VVPVaisEBXHgruPZ5ICTHcolERAx0y+baByUHtgqPF2J1d5z6TqSdJ
- iePqIYhpePPcFIBaA5ZGSBzR+8rXQCesAYBcKC63qtFU9D+NFamnF4i9rEbQ35ysIQ0r
- E5Pg==
+ bh=u0Fnpi/TAvCA9ET+nqdTXQkYJb0pgeOgrtSSSvbWtV4=;
+ b=u3ySOryJbfDle2YPni6dPkiaQZDVKJ7dNfRecE1vGQBlr+MzvoS1Ue/nPBUqtfH5nF
+ KX31lN+v0YX41vk9UVV6cW0D21HmjBjDjTFotN6dFbBGwhy/Z9cfTz5h1ap5KodvoIu5
+ gg8mvs4cdo/aESQWGeRuQMU8uQlIUOC7/RnB7xpaxa420je+h9Ii3AwCeaxesj/NGLNy
+ rcmutp9KIgcXHvLJvnBPOMprXAknBoDRPUHdc7TvnEGlShj3S+MFWfRF25OieRXzzOIJ
+ Y8XibHogC9hGt+FdgLLo5Nq9hl6LPY2Hr43BlHWQ7c+RO/xpJxz8FMA9VGkpmHI76Xdy
+ a/gA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdKK0dzHe7wVAdQ5GZDyJ8bNkf/lq3WusNsOjt4BuU7zrbWCLPFWJWvkhHcArUGtym7UaBPUo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yybc3NQXUjvtBy+VdkB7GIEqALqvmN6jFidZsbgFjuqSIDPRrwT
- b8cU2d4rE+ImWKJgWY0nC4sx/JO54sOfg1ZUl9E8bi6WFaSsinPtI50pSKE9UPxyvAkhDDT6IZh
- XitFiBAr/H3bnzhbp6h5Q9ekSYGeTr1JPz1qMIIcnA+0c5CULWg==
-X-Gm-Gg: ASbGnctXwwOV9x+OeQJ6uBJpnBxvRFGvooyaQyKtqMTJfdLwmZSG7yAbXpWqUQdL6VN
- 7o6xdK0NRxXYJ08tXfPtNcnBe5PHQ44UV79EQjF7kGJ7vJpvRI9XwBjLM+Bb1zwRgyQez0/vV4G
- DHzwR37yp04XeuTjcJOWC+Hu4cVOz1gyaJcCnMKz7M0QkkI1l8yUgZOOI=
-X-Google-Smtp-Source: AGHT+IHUMFeDnX1YT8+Hg9Ts6WIWs1KYKGKXufwwsc7XEfBSPtm/7r+yYEJWqr85VmwmmQCmzxD4GS7ET87L6R44gUI=
-X-Received: by 2002:a05:6402:4406:b0:5f6:23b1:ab4b with SMTP id
- 4fb4d7f45d1cf-5fab05dff85mr1873048a12.30.1746307600174; Sat, 03 May 2025
- 14:26:40 -0700 (PDT)
+ AJvYcCVNviw1gcTpzj5k5ipqBHSoH5rhlPcofBDo5hK2LivnEV+PnK45TT7zpWaBal0NgaJZBwOl6XA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOB3QkQoefHMF3xzESvFgf4tFB0s0mQrbNVRhcZH9Zk/C3+ZJ2
+ t6pzesqmcKW25CEGUnvrSYAC0SrEQAPFiZQcXohUwYkwt0w7k0dZnAnPN9nmLuv8AIf10ypPAFt
+ zIBOKjKvysHh57mznspS8fVtH8cmbuxJWZzH+
+X-Gm-Gg: ASbGncu2XO1FxSj734PcwTYsXPRVbFSlzmsBcmJiNFeXPiAN21v5zCIN8tY4a/clJzi
+ k39/VfI/0EEkh/hn9kEjwew5xndfeQ/bsBR3wTDQElhk30swN4oDMSiAyGKKGlmZSNkjafGbJPk
+ KhsxUCckADxtPFJstA6XW5w/7z5CKtswMP5bPePUAdpt/s/Frr9BrII6U=
+X-Google-Smtp-Source: AGHT+IGWnphaPN4lXjPsRxt6zBlTYCchcDiJkvnnk90gtsFqGljzqpVDYjKFUB8L7idNZAhCXVRKw5PNUaSvr7TycAo=
+X-Received: by 2002:a05:6402:13c9:b0:5f6:23b1:ab43 with SMTP id
+ 4fb4d7f45d1cf-5fab04bbf9bmr1592091a12.0.1746307603345; Sat, 03 May 2025
+ 14:26:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250503101424.48236-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250503101424.48236-1-heinrich.schuchardt@canonical.com>
+References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+ <20250421162555.1200687-4-heinrich.schuchardt@canonical.com>
+ <CAFLszTjcCXDnjOjpD88tGcvSz1AOAouyHKsynzCC3tngDqzOvQ@mail.gmail.com>
+ <27c7a370-ad40-4935-8b2a-f27468a01467@canonical.com>
+ <CAFLszTh3db5HwBfD9rg=YGY0n2DKE2vfBL0UG5x1_5DoJcj5WQ@mail.gmail.com>
+ <CAM=mAOk8BOz9O517614qOLCin-KjmQHXuwAkSSRUewmLG65Vdw@mail.gmail.com>
+In-Reply-To: <CAM=mAOk8BOz9O517614qOLCin-KjmQHXuwAkSSRUewmLG65Vdw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 3 May 2025 15:26:22 -0600
-X-Gm-Features: ATxdqUGTprzDI42RX1OYydT8eJyd-wm24rbdqskzAGw3UDFo_XY-_3vPpyU5O7Q
-Message-ID: <CAFLszTjCx7dhKCAokHhQPKu4BVm8ArodrRfw0mTKTQmcS5gFTw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] doc: describe u-boot-test-release
+Date: Sat, 3 May 2025 15:26:27 -0600
+X-Gm-Features: ATxdqUGczs69l83bNiwi4uHHN21X36v5H4DDp36U44pesu_ckMKURjuHviK6GOo
+Message-ID: <CAFLszTiamZFOyWoiSJO4vdEUSucwh3bcVrk2fzX4X9m+e8V86w@mail.gmail.com>
+Subject: Re: [RFC 3/8] boot: make BOOTMETH_EFILOADER default=n
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,15 +96,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 3 May 2025 at 04:14, Heinrich Schuchardt
+Hi Heinrich,
+
+On Sat, 3 May 2025 at 01:16, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The scripts u-boot-test-release is called at the end of testing.
-> Describe it.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  doc/develop/py_testing.rst | 7 +++++++
->  1 file changed, 7 insertions(+)
+>
+> Simon Glass <sjg@chromium.org> schrieb am Sa., 3. Mai 2025, 04:10:
+>>
+>> Hi Heinrich,
+>>
+>> On Fri, 2 May 2025 at 10:16, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>> >
+>> > On 5/2/25 16:49, Simon Glass wrote:
+>> > > Hi Heinrich,
+>> > >
+>> > > On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
+>> > > <heinrich.schuchardt@canonical.com> wrote:
+>> > >>
+>> > >> The boot method is deprecated as the EFI boot manager covers this
+>> > >> functionality.
+>> > >>
+>> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> > >> ---
+>> > >>   boot/Kconfig | 1 -
+>> > >>   1 file changed, 1 deletion(-)
+>> > >>
+>> > >> diff --git a/boot/Kconfig b/boot/Kconfig
+>> > >> index 71ddb37f6bb..b973d9eb0a7 100644
+>> > >> --- a/boot/Kconfig
+>> > >> +++ b/boot/Kconfig
+>> > >> @@ -595,7 +595,6 @@ config BOOTMETH_EFILOADER
+>> > >>          bool "Bootdev support for EFI boot"
+>> > >>          depends on EFI_BINARY_EXEC
+>> > >>          imply CMD_TFTPBOOT if CMD_NET
+>> > >> -       default y
+>> > >>          help
+>> > >>            This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
+>> > >>            launching EFI\BOOT\BOOT<ARCH>.EFI if not boot option matches.
+>> > >> --
+>> > >> 2.48.1
+>> > >>
+>> > >
+>> > > As mentioned on the other patch, we need to keep this enabled and it
+>> > > isn't obsolete.
+>> > >
+>> > > Regards,
+>> > > Simon
+>> >
+>> > Please, read the UEFI specification especially chapter 3 "Boot Manager".
+>> >
+>> > * The functionality is fully covered by the boot manager.
+>> > * The current implementation of the method does not comply with the UEFI
+>> > specification. Especially if run before the boot manager.
+>>
+>> We're going to have to go through this together sometime as it seems
+>> like chicken & egg to me. We don't want Boot Manager first because it
+>> is slow and stuffs up FEL on sunxi etc., we don't want it last because
+>> then it has to wait for networking, we don't know whether bootmgr is
+>> being used or not, so we just have to put it in the middle, but then
+>> we don't know whether it will succeed, at which point we have to go
+>> back and try the whole boot again..?
+>
+>
+> Sure there can be a situation where none of the boot methods will succeed. E.g. if there are no boot media. This has been the case before the series and won't be different with the series.
+>
+> But if we reach the boot manager after trying FEL, extlinux, script and none of these booted retrying these would not make any sense as they would fail again.
+>
+> The boot manager already comprises booting via EFI/BOOT/BOOT<ARCH>.EFI. And this must not be tried before booting according to BootNext and BootOrder. So we can safely delete that non-compliant bootmeth_efi.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+OK let's discuss this and see what we can figure out. Perhaps we could
+come up with an env var which controls this, or similar.
+
+Regards,
+SImon
