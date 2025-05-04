@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53961C3ABAC
-	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1305C3ABAC
+	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 489B582B26;
-	Sun,  4 May 2025 15:24:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8CAEC82AFC;
+	Sun,  4 May 2025 15:24:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZFHNIS4i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lNCxXYUW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B48FD82B19; Sun,  4 May 2025 15:24:47 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 03C6482B33; Sun,  4 May 2025 15:24:49 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD72082AF4
- for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60B9482163
+ for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac29fd22163so599096666b.3
- for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:44 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5cded3e2eso1426072a12.0
+ for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746365084; x=1746969884; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746365085; x=1746969885; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6y3z8uW6k6n3Rbtq2uDOOOKVANZEDtQQ+rn8UaTPaco=;
- b=ZFHNIS4iRQWGrhbmpHoVUNWePNAsRufQrLJXJA7MsDn7T9PUYwQ+AN+OyHR1N2JmFJ
- UVX/z56wty2rJozJX6CQCpHJhlsymtgXWfFnmFlfpZFoaIyZeGu8ORNzan2A33WwP+zH
- aAVrxO6tSM0QozROGP4CSKYyh/4a2W4o6/h+M=
+ bh=VZALDu6xTNpAiTVGp4XmHpOBYU5gNCCgz3/RHld3038=;
+ b=lNCxXYUW7TSkdRr6Gi0nSn2Y7o3pxLcsMkSQoRF9xIPFluzafM6BWvjdVFD0jrefJx
+ KiLGTxR21S7tZIavfMLyNCThopcWxLRpP5BsIBZvBAMCkU+UQUvJYu0UIrY76vyQhxi/
+ 27EHJfx9j8xp0O7nyPMq3oodGJa7ftTA2K0Bg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746365084; x=1746969884;
+ d=1e100.net; s=20230601; t=1746365085; x=1746969885;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6y3z8uW6k6n3Rbtq2uDOOOKVANZEDtQQ+rn8UaTPaco=;
- b=uOTGNPdjaICnsANQbjnoEuNoKAvbAsoazuS2sPEu47uj428i+QgkdrG5ctWFaKXdwa
- q8yz3qXYvs2vSXq3t/qSnGbmHMwLRpy+2JtfJVBnM7RhTnArQk1V5rtfm7wkLVk41lQq
- TVoa4Z+UYGrpfq3SuArmLlb9kwkBHXy0LUHKTZxVvY8zexqNRZhBrJNdS7XF2FBMSTaA
- xGvxduPIPdmzHeSRvXFSdOuv+Pir2SHXsDW+AoUzKCfQHCZy7+lF1g0mDVC+Y+wEsqjU
- s1D7cTqzPdvvChKGunXlCv9oif1k6matkiP3Z/8/wXqc0pDCk8MdXOZnrjsI3F2ScHft
- bt8w==
-X-Gm-Message-State: AOJu0Yw43jnvtUXYRoOTVg1QmgedtcMMec673I5mg/04wpXG+0cMNZ5t
- Eao4vBA+XMGZnXb7MsagIMQZtatlEYaoigvtOuB5eM9+WEHuzJV/Rf8oSYCerOacSm9DKCCdz82
- XtwtmqKU=
-X-Gm-Gg: ASbGncs7avuKE3Qrws1y/ZjWn5Ndi0bFPRS12ApyXsnOZh2Msc8PHDFFFKOHSaBMXUd
- MD1sgQFkLNZFm4VxWfE+9TosNZHsrXb/SUgTVOZQr5UNN13dFqTUWV+c4kacRtvNcSg89ngu915
- vFgWjaPTKS7dwmL5bIAF0s2M7HGq+okfNeil1xkvAqStC1osGdATTkOztPTudVn0rCGQKeUVwA6
- Eow7J4LDrP2EkeyQCDqoWUJn7AvPE8Y/PJzqPzUvWP7Deuu+xEFTdv+74G1YSZCUudj21fwagCH
- LXXA7aClSkP8iDQxNDJUJVOC6ntaBZAP1F835T9b2Sw09vA=
-X-Google-Smtp-Source: AGHT+IE2+XvWB8oR8RY9XgYv7OlSSh99tGtFoK3wwC6Tu3LN6iibOPhq17PXum9EgBP1iLDgWhH3ig==
-X-Received: by 2002:a17:907:c285:b0:acb:9769:364c with SMTP id
- a640c23a62f3a-ad1a4958855mr252360666b.21.1746365083709; 
- Sun, 04 May 2025 06:24:43 -0700 (PDT)
+ bh=VZALDu6xTNpAiTVGp4XmHpOBYU5gNCCgz3/RHld3038=;
+ b=ASHAjyMreZMozWVCr7hqnk0qHp3/Xr/vPxG60lHGoJ5NnEML6Ub0qTpvdKb8+UIZYU
+ z1A0KhQiX0sGjKsYBglY4UDfz92U5QyxXAPXp7blabmfXeXug2SIw7xTibB4XnT4ifUk
+ JDiAGwqFymLl5dFOUPQxmpCgpGL4xWf2NnTLBcS3QvakXp1mwoEnW/C8hjUelfzF5XF4
+ jXxVDnnFOOlTRAwFHs9kbaR2LNhN7Ia1mv4yN0XCko2gL3qTASeMnGrBw7pn12hC7Pzj
+ V1HnY0ggizSfbz36IvUHd45X3Fi7wsasuMu34sCnYvKBDylOnXvQQVuTeAsSHQ/ExCrX
+ 1hIw==
+X-Gm-Message-State: AOJu0Yxqgqvu6ss+mixkkW+hg2CrpDJYT2mqZFXARh3kXWFBqkcxR9Ui
+ dkPadIk4UCPoZ27pBCn4NGe7Fs5HtN586opBUxuoI/FLdHmq4Me5rlmG1gymGtFI32uK1jlAS/P
+ VZuK9CpE=
+X-Gm-Gg: ASbGncvRZJ5LvzLbmnvz9S3kftmLAgKiZD3Tq7GchVbH/D5XCPGsgRrUPxZtiqk8+mu
+ zb8ZduuGnVc5v4PdP/D6M8kHeNG9+q5mUCEcHQHDcVB+nYrCoXcKfGIcc2hhj7STPFbf63D7TGV
+ qxLt2K3QCg9NJP3TVqVy783ZJbusdCHhBo98H5msFoEACkgmabBo3bZyF6WN0dfOcyJ2+/+9Kzw
+ iYAvv26MTq4VVWdkcphsTHmaFMH6HXe+SAz/tl+77GTJMlFoEj6NHCE1K8EfBWZEBBmxXbl7gF5
+ Wa/UI43SYxWICnH8ndMKf5bnae62SYwxPBL7MZ6b7WYgv+0=
+X-Google-Smtp-Source: AGHT+IGmqjEHHaTRNeXPZ1f31dMOYmj5rFaIAGWh+5RbYTiJCmv4oi8pu99Z8vB/+traUmgu6kCkIw==
+X-Received: by 2002:a17:907:2d1f:b0:ad1:8169:da0b with SMTP id
+ a640c23a62f3a-ad19069aee4mr460937666b.31.1746365085322; 
+ Sun, 04 May 2025 06:24:45 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.42
+ a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 May 2025 06:24:43 -0700 (PDT)
+ Sun, 04 May 2025 06:24:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Douglas Anderson <dianders@chromium.org>,
  Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 23/30] patman: Simplify test_find_new_responses()
-Date: Sun,  4 May 2025 15:23:39 +0200
-Message-ID: <20250504132356.2317305-24-sjg@chromium.org>
+Subject: [PATCH v2 24/30] patman: Show patches in yellow
+Date: Sun,  4 May 2025 15:23:40 +0200
+Message-ID: <20250504132356.2317305-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250504132356.2317305-1-sjg@chromium.org>
 References: <20250504132356.2317305-1-sjg@chromium.org>
@@ -94,74 +94,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This test uses the find_new_responses() function which combines
-accessing patchwork and processing the results.
+When comments are shown below patches it can be hard to see the patch
+subject. Use yellow instead of blue, since it stands out better.
 
-Since the test is aimed at testing processing, adjust it to call
-process_reviews() instead.
+Pass the colour object into show_responses() rather than creating a new
+one, since that is tidier.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/patman/func_test.py | 28 ++++++++++++----------------
- 1 file changed, 12 insertions(+), 16 deletions(-)
+ tools/patman/func_test.py |  8 ++++----
+ tools/patman/status.py    | 15 ++++++++-------
+ 2 files changed, 12 insertions(+), 11 deletions(-)
 
 diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index 9c5e7d7dd51..3f7573a41a8 100644
+index 3f7573a41a8..47fbbe0cc3f 100644
 --- a/tools/patman/func_test.py
 +++ b/tools/patman/func_test.py
-@@ -998,37 +998,33 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-         self.commits = [commit1, commit2]
-         self.patches = [patch1, patch2]
-         count = 2
--        new_rtag_list = [None] * count
--        review_list = [None, None]
+@@ -1043,7 +1043,7 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+                                      pwork)
+         lines = iter(terminal.get_print_test_lines())
+         col = terminal.Color()
+-        self.assertEqual(terminal.PrintLine('  1 Subject 1', col.BLUE),
++        self.assertEqual(terminal.PrintLine('  1 Subject 1', col.YELLOW),
+                          next(lines))
+         self.assertEqual(
+             terminal.PrintLine('    Reviewed-by: ', col.GREEN, newline=False,
+@@ -1052,7 +1052,7 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+         self.assertEqual(terminal.PrintLine(self.joe, col.WHITE, bright=False),
+                          next(lines))
  
-         # Check that the tags are picked up on the first patch
--        pwork = patchwork.Patchwork.for_testing(self._fake_patchwork2)
--        status.find_new_responses(new_rtag_list, review_list, 0, commit1,
--                                  patch1, pwork)
--        self.assertEqual(new_rtag_list[0], {'Reviewed-by': {self.joe}})
-+        new_rtags, _ = status.process_reviews(patch1.content, patch1.comments,
-+                                              commit1.rtags)
-+        self.assertEqual(new_rtags, {'Reviewed-by': {self.joe}})
+-        self.assertEqual(terminal.PrintLine('  2 Subject 2', col.BLUE),
++        self.assertEqual(terminal.PrintLine('  2 Subject 2', col.YELLOW),
+                          next(lines))
+         self.assertEqual(
+             terminal.PrintLine('    Reviewed-by: ', col.GREEN, newline=False,
+@@ -1359,7 +1359,7 @@ Reviewed-by: %s
+                                      pwork)
+         lines = iter(terminal.get_print_test_lines())
+         col = terminal.Color()
+-        self.assertEqual(terminal.PrintLine('  1 Subject 1', col.BLUE),
++        self.assertEqual(terminal.PrintLine('  1 Subject 1', col.YELLOW),
+                          next(lines))
+         self.assertEqual(
+             terminal.PrintLine('  + Reviewed-by: ', col.GREEN, newline=False),
+@@ -1380,7 +1380,7 @@ Reviewed-by: %s
+             '    Here is my comment above the above...', None), next(lines))
+         self.assertEqual(terminal.PrintLine('', None), next(lines))
  
-         # Now the second patch
--        status.find_new_responses(new_rtag_list, review_list, 1, commit2,
--                                  patch2, pwork)
--        self.assertEqual(new_rtag_list[1], {
-+        new_rtags, _ = status.process_reviews(patch2.content, patch2.comments,
-+                                              commit2.rtags)
-+        self.assertEqual(new_rtags, {
-             'Reviewed-by': {self.mary, self.fred},
-             'Tested-by': {self.leb}})
+-        self.assertEqual(terminal.PrintLine('  2 Subject 2', col.BLUE),
++        self.assertEqual(terminal.PrintLine('  2 Subject 2', col.YELLOW),
+                          next(lines))
+         self.assertEqual(
+             terminal.PrintLine('  + Reviewed-by: ', col.GREEN, newline=False),
+diff --git a/tools/patman/status.py b/tools/patman/status.py
+index 5c75d7b10c6..c114a432bf3 100644
+--- a/tools/patman/status.py
++++ b/tools/patman/status.py
+@@ -203,10 +203,11 @@ def find_new_responses(new_rtag_list, review_list, seq, cmt, patch, pwork):
+     new_rtag_list[seq] = new_rtags
+     review_list[seq] = reviews
  
-         # Now add some tags to the commit, which means they should not appear as
-         # 'new' tags when scanning comments
--        new_rtag_list = [None] * count
-         commit1.rtags = {'Reviewed-by': {self.joe}}
--        status.find_new_responses(new_rtag_list, review_list, 0, commit1,
--                                  patch1, pwork)
--        self.assertEqual(new_rtag_list[0], {})
-+        new_rtags, _ = status.process_reviews(patch1.content, patch1.comments,
-+                                              commit1.rtags)
-+        self.assertEqual(new_rtags, {})
+-def show_responses(rtags, indent, is_new):
++def show_responses(col, rtags, indent, is_new):
+     """Show rtags collected
  
-         # For the second commit, add Ed and Fred, so only Mary should be left
-         commit2.rtags = {
-             'Tested-by': {self.leb},
-             'Reviewed-by': {self.fred}}
--        status.find_new_responses(new_rtag_list, review_list, 1, commit2,
--                                  patch2, pwork)
--        self.assertEqual(new_rtag_list[1], {'Reviewed-by': {self.mary}})
-+        new_rtags, _ = status.process_reviews(patch2.content, patch2.comments,
-+                                              commit2.rtags)
-+        self.assertEqual(new_rtags, {'Reviewed-by': {self.mary}})
+     Args:
++        col (terminal.Colour): Colour object to use
+         rtags (dict): review tags to show
+             key: Response tag (e.g. 'Reviewed-by')
+             value: Set of people who gave that response, each a name/email string
+@@ -216,14 +217,14 @@ def show_responses(rtags, indent, is_new):
+     Returns:
+         int: Number of review tags displayed
+     """
+-    col = terminal.Color()
+     count = 0
+     for tag in sorted(rtags.keys()):
+         people = rtags[tag]
+         for who in sorted(people):
+             terminal.tprint(indent + '%s %s: ' % ('+' if is_new else ' ', tag),
+-                           newline=False, colour=col.GREEN, bright=is_new)
+-            terminal.tprint(who, colour=col.WHITE, bright=is_new)
++                           newline=False, colour=col.GREEN, bright=is_new,
++                           col=col)
++            terminal.tprint(who, colour=col.WHITE, bright=is_new, col=col)
+             count += 1
+     return count
  
-         # Check that the output patches expectations:
-         #   1 Subject 1
+@@ -357,14 +358,14 @@ def do_show_status(series, patch_for_commit, show_comments, new_rtag_list,
+         if not patch:
+             continue
+         terminal.tprint('%3d %s' % (patch.seq, patch.subject[:50]),
+-                       colour=col.BLUE)
++                       colour=col.YELLOW, col=col)
+         cmt = series.commits[seq]
+         base_rtags = cmt.rtags
+         new_rtags = new_rtag_list[seq]
+ 
+         indent = ' ' * 2
+-        show_responses(base_rtags, indent, False)
+-        num_to_add += show_responses(new_rtags, indent, True)
++        show_responses(col, base_rtags, indent, False)
++        num_to_add += show_responses(col, new_rtags, indent, True)
+         if show_comments:
+             for review in review_list[seq]:
+                 terminal.tprint('Review: %s' % review.meta, colour=col.RED)
 -- 
 2.43.0
 
