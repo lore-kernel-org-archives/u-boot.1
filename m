@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CD1FC3ABAC
-	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:25:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 777E2C3ABAC
+	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:25:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD2582A46;
-	Sun,  4 May 2025 15:24:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F87682A64;
+	Sun,  4 May 2025 15:24:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GUc4Tq7X";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XA8SUIP/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E318782A8B; Sun,  4 May 2025 15:24:23 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 68F2682A27; Sun,  4 May 2025 15:24:26 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA64F82A27
- for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45D3082A2F
+ for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ac3b12e8518so609588566b.0
- for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:21 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ac3eb3fdd2eso657701466b.0
+ for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746365060; x=1746969860; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746365062; x=1746969862; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4pnsMOYd0SvjozLZMGs6BO2b5x4GMxcVsGYoUZ9eQK4=;
- b=GUc4Tq7XrmPxVLMQnb6d7G+jWjaRqA2bgtJd3eklLYsHlMsXzNGXemZpqtbGPbSt0b
- zghwLMGPmEkI3lSV2EyBkAQiUDTjlleYVyz6p4Gy3jY83HOmCUJ8q0TGpa5LnqAor8d0
- CPU5uktQs2LdUqDzn5jl7ekWh2qL2MFRqlq1k=
+ bh=k0TtLxjT7eXo3CfTcgCu90/P/o04AzUd7exTz6Y0Gao=;
+ b=XA8SUIP/4fCPszf047xuMI1nbqUY80W4BoomjGrn5udLQXNWn/Z+RqvenKN2XWonq8
+ g9AoPoLgUdVDpavLqkt4ct/kbepIedSr7kmbkkiwV/Bu9i0HeFURfboBJD+sP/z10F/v
+ t+ni2sdUtERJON7rb+LdalJqzuxT2vZpSzIwk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746365060; x=1746969860;
+ d=1e100.net; s=20230601; t=1746365062; x=1746969862;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4pnsMOYd0SvjozLZMGs6BO2b5x4GMxcVsGYoUZ9eQK4=;
- b=I9jojgS0E+1ISayMtSoBJbU6JeJoZNT3atl0OIqq1klPa1vHVdbcMDrWuGKKnRNl7q
- xwmPvW5KlqZC6K6Hm9B/dqFP81ynmTQ/bVxbo6A7wMny+OwcpUxAwLIRpNAx/KvRanMZ
- bGG5fRJW33/Zip5lM7VH6NOJCaFZXTeRIDDzH0ytRDBeMvaqDpDxUO5RlGuIb/Z47BY2
- QxQDj4wn7b77bimP5+7pa/sYNv/pfJYDgZh9XKsHe+IcRgG46VqJ1gTgUbgeCtKfsDWK
- z8hE4GZWqRbpTVzOrsZUIAjc6k3PY+YbP3InAmqQ61+NIZROo2iMUyktGQLpQfTYOCkZ
- DM6Q==
-X-Gm-Message-State: AOJu0YyqtMKvONn2ePVs0NoXcv6ZyZvM1YqPrWvHuz4tdERXDUxITdhz
- Xo/7kCiwfeSWl6WdZV2NT+4+8uKQPj/phofn+EeMd9QLjLS0p274q0rbQP8rRlPf3gLyJOqazHE
- iAJKRsBU=
-X-Gm-Gg: ASbGncvD9PTeXZSbzFDLkQFtO696hag7NYW3qm5e5rEeX5Hq/Zv7UOQojrfPCCwmBjs
- gE3BHbmRKXm7a5f/Ge6EbbEoYAddx3u+dE/7JYii3MWw4zRrpnt+V/SPNIrTceR0wuq6b7mmk+c
- 9Cgls+dIDnJsbPlxfgQVb+CMDv3q/E+cB7j11YLBz/JYL1pYWZ9RkYSnccuoxbaZHsqdiPG1w7A
- B6FA6RzZusZQNubUYNwBAwnQDYZPNxSqq+7l6tF9gikh8XJqC58zN7TXWiEwcK9htyNhzcg785Z
- qm+3KMsYWvZHOjmckizOmNTbWLHrt6ZD1IeD
-X-Google-Smtp-Source: AGHT+IH4HfTY+RO2a2zxcVWchuKSy7I+nC7RLaloud/3ecsb93rnIHzgXfWxqmuujDQz82ygA/uSUQ==
-X-Received: by 2002:a17:907:3d90:b0:ace:c2ab:a729 with SMTP id
- a640c23a62f3a-ad1a4ac116cmr346372266b.42.1746365060536; 
- Sun, 04 May 2025 06:24:20 -0700 (PDT)
+ bh=k0TtLxjT7eXo3CfTcgCu90/P/o04AzUd7exTz6Y0Gao=;
+ b=ARr5qZMKAivwX0uw/PaNTyrnjewhFTEnzj4psH/MqmSS6JB+bCIIXB4yef4Qj+UDy6
+ ES+l0iFRu8uhbpccIuDWtkaR4vWcoChO1uYQbYmYxfnB0yN7TQCojs3cM3ghkyoyl72L
+ Du98ZcnbSgQFosTHdpd0Gzo0he+YHYplN4CtFwdyZ4JnVsQtf/NV4+iViDq5bCZnHKAH
+ GEx0qIeyqsqlwkI6G87aDil4UyZXGZa9h8e5c4BJoPLMZk29xT7gIrdnv8bdYH3CnZbE
+ 3P5OoOHeOyx/jXoL0v/9YXiqXZAYTHzusbA1DzJ04QQ2Oz3i8CxSAz1xBPZqp2QdlY+1
+ wfGw==
+X-Gm-Message-State: AOJu0YzBZsepV8+0kMQyiFL0JxrZ4OAreom7oUBFvv14tS6ISDBGU9rh
+ b41VE8b728MtKDuHR+TFT3DYiXtf3NgF7iyL+A1jEtNOlmEzMXNSU4jmwUPOH9JJ9RI4DifirUp
+ cJrcFISA=
+X-Gm-Gg: ASbGncsZ8MZ7VIMBLi32TIDHWjlE6ZDkTcgBI7wraH8RwSeXisPzq+V+sOcHOQUjRSd
+ VE6LoeFJhFFE4MGRtyikxRwMtfso4t7OeQbEqR9X3e7LPH0hctKFgDA4pt36FI+SLWGkickSjHJ
+ N1boOpFDB4dp3vdaol9O+9BJGj7qQ5/92XW9re4iQERD7ofN/YndDPfR9Ogc4ZX6Bbg1j/xpxL8
+ twD4HonYFoZVX9p+2NEghL7xb6P98qMPKd0ioBSIMd8JPUQbzs21siaSDorE+UI1JwKYn9c2TzY
+ JBuUBMIr1kaInYRkYGIXZryND7NgXgsdjhOTU7MMzKcPeF0=
+X-Google-Smtp-Source: AGHT+IHmmbr6gQ2OHMDB/US0TZVc3XyCcCrCM8/Li5D79COhA17cDpE843qT/PgHrEJkG5trivC4eQ==
+X-Received: by 2002:a17:907:869e:b0:ace:f2b7:c9ff with SMTP id
+ a640c23a62f3a-ad17b832810mr1015541466b.48.1746365062330; 
+ Sun, 04 May 2025 06:24:22 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.19
+ a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 May 2025 06:24:19 -0700 (PDT)
+ Sun, 04 May 2025 06:24:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Douglas Anderson <dianders@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 10/30] patman: Correct a stray quote
-Date: Sun,  4 May 2025 15:23:26 +0200
-Message-ID: <20250504132356.2317305-11-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 11/30] patman: Rename test_basic() in test_checkpatch
+Date: Sun,  4 May 2025 15:23:27 +0200
+Message-ID: <20250504132356.2317305-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250504132356.2317305-1-sjg@chromium.org>
 References: <20250504132356.2317305-1-sjg@chromium.org>
@@ -94,30 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A quote character was added a few years ago, but was not intended. Drop
-it.
+This currently has the same name as a test in func_test.py so it isn't
+possible to select one or the other with 'patman test test_basic': both
+are executed.
+
+Rename this one to avoid confusion.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/patman/func_test.py | 2 +-
+ tools/patman/test_checkpatch.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index a31c950051b..161b5ad4288 100644
---- a/tools/patman/func_test.py
-+++ b/tools/patman/func_test.py
-@@ -152,7 +152,7 @@ class TestFunctional(unittest.TestCase):
-             Commit-changes: 2
-             - Changes only for this commit
+diff --git a/tools/patman/test_checkpatch.py b/tools/patman/test_checkpatch.py
+index 3bf16febbf6..4e8d163184e 100644
+--- a/tools/patman/test_checkpatch.py
++++ b/tools/patman/test_checkpatch.py
+@@ -137,7 +137,7 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
+ class TestPatch(unittest.TestCase):
+     """Test the u_boot_line() function in checkpatch.pl"""
  
--'            Cover-changes: 4
-+            Cover-changes: 4
-             - Some notes for the cover letter
+-    def test_basic(self):
++    def test_filter(self):
+         """Test basic filter operation"""
+         data='''
  
-             Cover-letter:
 -- 
 2.43.0
 
