@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD0FC369DC
-	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:28:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B071C369DC
+	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 17:05:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52EDA82B18;
-	Sun,  4 May 2025 15:24:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 659468294C;
+	Sun,  4 May 2025 19:05:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EFRXEPcO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rhYPqIxo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7CD582B37; Sun,  4 May 2025 15:24:58 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 2449682982; Sun,  4 May 2025 19:05:43 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9329E82B48
- for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDA298293C
+ for <u-boot@lists.denx.de>; Sun,  4 May 2025 19:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ac2a81e41e3so657235166b.1
- for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:56 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2c7f876b320so3549016fac.1
+ for <u-boot@lists.denx.de>; Sun, 04 May 2025 10:05:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746365095; x=1746969895; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1746378339; x=1746983139; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=unasRzU1PAFqrO2SGLhjJjASoOJ+gCiK10lRXBh+kiU=;
- b=EFRXEPcOBDjhEU4JUanrdAWfdIS1HHT/qbvbUvBEJi0jwHt1WE9EZRH6yskykW6DR/
- b+3DI3oLKCkA452BJBqYdPUsOt1dcbKZHZfnkhvMMdG+BRTIus9pxes/e6IbWwaWtb91
- xCPHpk65tJ4Wu0LblBom8fAQTJu8UKfuA43hY=
+ bh=1EFs99ZTxDvx9Dm1fS27vKG7tzGxW5dme+Eo8ukCI3Y=;
+ b=rhYPqIxooQWSGTaYo2HxNYIv/1z+xAFrcMTPCmdu2WPziDllqsaYUmYhNkCf/YqtVe
+ bQ1JTHRqChJCyA/8Zg0buLBQ6SC/9s6E5yYOB9Tw3+13d/nNEoIfBcmqtdzfvFbKBYN2
+ hv19ZIszh8U3+zh8/pRxgHn5SrUHuWBmQeELU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746365095; x=1746969895;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1746378339; x=1746983139;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=unasRzU1PAFqrO2SGLhjJjASoOJ+gCiK10lRXBh+kiU=;
- b=bx1DI7KoWFX7AaOtmKMVbKjmVk41KASFHsiIlAB7l/pwvAX2oefkMER7Zirx8XeLyo
- iWwl48n/GNp87D0FPNlA1CbdYmXg8jiFRhf5ZsrzdPqwXES4ug1JQlMSBRXh+A4i4wNr
- UoLGokq68UozKVioNIJg9ivNceBibjl96yobBg8eT8MflUEo8sA3KIauRQbT9C5uC3us
- p5aql8Kja9N51xNW/OyPzHJOR9N2kc9JHm5EbIjFjW3HQ5pLayHeMEfXLIa/s6c+aNyV
- 5GnjkVZMCTit3+OXlGOkcHuQkPdJXx0UTUpdItcrowRaZ+EEJ81P/+BYVexiziXWtNbF
- 2QyA==
-X-Gm-Message-State: AOJu0Yy0Ty0RD1iNUXddp75gxHfN4UYl4+xh1Kc3KkJLUlwHnl8DB+YI
- Zy5qupYZ762RAkZ1oUIBiuF2oE8SvKpRPyhJf+WSpvLkTKsJY/aysHvwGXyT43fu+mNIROz+wmy
- GBdGcsno=
-X-Gm-Gg: ASbGncukRIqQ+z/6Cn+NGthti8czsfF3LfQXoAuM8+mVsarb+N7cS+KlvHvxcJLmR2Y
- yeQvD++hDNHifiL6JvaDGFvk1fx2LySMg7+pWBjF/UqR8M9H304BrlZSaMyszGNwHnKl629X3fo
- 7JP3H1VC01/R2aeYnqddQfTzwIC2cRvmJOfZ/zGW5elug5PTQz1QKeOw/FsvJL05FYMrlOpzAbU
- Rpe1q+DFSwl7K2Qq2qaj7NiuOg8zMUtTouf5P9+0Hcp8IVZu0IIQlVyTDNRK4wBK8JcVVRLPd+b
- PwZBDyg0BC4S2OuyYLSZmECqlHaAumMGMDeo
-X-Google-Smtp-Source: AGHT+IEoG0CODc1T1HH/bLl5rKaqXbkLU7TPzlzimRDk2q+G47/qC5Hk5LMxJ/1Vfu9tzu+U3zcalQ==
-X-Received: by 2002:a17:907:7f25:b0:ac8:1cf7:7aa7 with SMTP id
- a640c23a62f3a-ad1906550famr479300166b.15.1746365095144; 
- Sun, 04 May 2025 06:24:55 -0700 (PDT)
-Received: from chromium.org ([213.157.19.135])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.54
+ bh=1EFs99ZTxDvx9Dm1fS27vKG7tzGxW5dme+Eo8ukCI3Y=;
+ b=jy49hap6SC0lKBnPlslFq7t1DCtHUle2MEEx76hyRNnVZo8ngfF2J5XYAOXN7v1l5K
+ +CNkXKAza1Qqae7l2HFehU1uafzW+Q3qVGZ+9MKOyIxTdPvEwd0BGqZvZins91HZxm5n
+ Tmk0mq0D+RqWEvk9SnbOdWkEK/fUdbgnk69KtQs9btW19Jvo0T+aE4xW8nfRa/fFv8TT
+ 9qUbzF1CgUDMto9mM3LU2Jrd7i6FQC8cT1PIc8KoApgYE2I1HoVXTmJz3LCNHxcFViM0
+ XiS0ljkCSsJ1RFEdkmlNB1xZzuh534dEWEQ9iwIjjWqAzBqA1gDXl3jvrtsoPMnWUGi9
+ FayA==
+X-Gm-Message-State: AOJu0Yx8ziMIWNNb5kNTR6K9VdCuM5mGULVO8W5og7A159cDnejQYd8E
+ UnMqFr9kG6EktSWNdUugVjNUbmu9hrs1ByJyiE6I7oYWrqR4Hwf4wlK+Z3xJQ10h5xB0+aryeVA
+ ObaU=
+X-Gm-Gg: ASbGncsr4lHzX7g+Vz4UAN5HwIbwn074gSzCFWft8rlz2lXtvqQEeBb5wbixfc7Hmqo
+ h4rk/W2kIuOXy8nEcuzn8cHybnEF83TIaHRolQX3BIemuLztLA6Uz+6XdodZhliOcss2paz3cXv
+ eqpr1/iSScvbtQRm755NBz5/rNigFLuNa3xDCa3izTzBKUHYRRQDXtmDlmjnnm7oCd2XYtWKAmY
+ 955CbtjyxKH3NxaA84Gb7TkGFMnSlKlevBQp/DXkeUo6/Mhv8x2STp1eFoUUyf9Dr74TgCwxNkL
+ 4ZC//zFnCAkcmhmxi874K1OskPZOms+QMTojWQXIw3TFPiLlmKKxbUiDU5Nzc5PpUegbpmNZU1r
+ J
+X-Google-Smtp-Source: AGHT+IE56DzZ5ihzdIBGGzfnb8tBS2g7VKH8mdaCez00+McGkFRPhS6MJQbI0l3miacOpjGr7WAGhQ==
+X-Received: by 2002:a05:6871:73a1:b0:2d7:3885:7885 with SMTP id
+ 586e51a60fabf-2dae868cbf1mr2581312fac.37.1746378339671; 
+ Sun, 04 May 2025 10:05:39 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2daa0f6d9aesm1593536fac.21.2025.05.04.10.05.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 May 2025 06:24:54 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 30/30] patman: Drop the old status code
-Date: Sun,  4 May 2025 15:23:46 +0200
-Message-ID: <20250504132356.2317305-31-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250504132356.2317305-1-sjg@chromium.org>
-References: <20250504132356.2317305-1-sjg@chromium.org>
+ Sun, 04 May 2025 10:05:38 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250504023007.3864911-1-festevam@gmail.com>
+References: <20250504023007.3864911-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250503
+Message-Id: <174637833817.1732961.10737208160011837477.b4-ty@konsulko.com>
+Date: Sun, 04 May 2025 11:05:38 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,167 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have the new asyncio implementation, drop the unused
-ThreadPoolExecutor code.
+On Sat, 03 May 2025 23:30:07 -0300, Fabio Estevam wrote:
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> Please pull from u-boot-imx/master, thanks.
+> 
+> The following changes since commit 0c8a89d252c3db3401ffa572ee2e4dfcb94e2c3b:
+> 
+>   Merge patch series "k3-j784s4*: Enable ESMs and related PMIC" (2025-05-02 15:32:45 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-(no changes since v1)
+Merged into u-boot/master, thanks!
 
- tools/patman/status.py | 125 -----------------------------------------
- 1 file changed, 125 deletions(-)
-
-diff --git a/tools/patman/status.py b/tools/patman/status.py
-index dfc0f29faa4..74d05624226 100644
---- a/tools/patman/status.py
-+++ b/tools/patman/status.py
-@@ -22,19 +22,6 @@ from patman import patchstream
- from patman import patchwork
- 
- 
--def to_int(vals):
--    """Convert a list of strings into integers, using 0 if not an integer
--
--    Args:
--        vals (list): List of strings
--
--    Returns:
--        list: List of integers, one for each input string
--    """
--    out = [int(val) if val.isdigit() else 0 for val in vals]
--    return out
--
--
- def process_reviews(content, comment_data, base_rtags):
-     """Process and return review data
- 
-@@ -133,74 +120,6 @@ def compare_with_series(series, patches):
- 
-     return patch_for_commit, commit_for_patch, warnings
- 
--def collect_patches(series_id, pwork):
--    """Collect patch information about a series from patchwork
--
--    Uses the Patchwork REST API to collect information provided by patchwork
--    about the status of each patch.
--
--    Args:
--        series_id (str): Patch series ID number
--        pwork (Patchwork): Patchwork object to use for reading
--
--    Returns:
--        list of Patch: List of patches sorted by sequence number
--
--    Raises:
--        ValueError: if the URL could not be read or the web page does not follow
--            the expected structure
--    """
--    data = pwork.request('series/%s/' % series_id)
--
--    # Get all the rows, which are patches
--    patch_dict = data['patches']
--    count = len(patch_dict)
--
--    patches = []
--
--    # Work through each row (patch) one at a time, collecting the information
--    warn_count = 0
--    for pw_patch in patch_dict:
--        patch = patchwork.Patch(pw_patch['id'])
--        patch.parse_subject(pw_patch['name'])
--        patches.append(patch)
--    if warn_count > 1:
--        tout.warning('   (total of %d warnings)' % warn_count)
--
--    # Sort patches by patch number
--    patches = sorted(patches, key=lambda x: x.seq)
--    return patches
--
--def find_new_responses(new_rtag_list, review_list, seq, cmt, patch, pwork):
--    """Find new rtags collected by patchwork that we don't know about
--
--    This is designed to be run in parallel, once for each commit/patch
--
--    Args:
--        new_rtag_list (list): New rtags are written to new_rtag_list[seq]
--            list, each a dict:
--                key: Response tag (e.g. 'Reviewed-by')
--                value: Set of people who gave that response, each a name/email
--                    string
--        review_list (list): New reviews are written to review_list[seq]
--            list, each a
--                List of reviews for the patch, each a Review
--        seq (int): Position in new_rtag_list to update
--        cmt (Commit): Commit object for this commit
--        patch (Patch): Corresponding Patch object for this patch
--        pwork (Patchwork): Patchwork object to use for reading
--    """
--    if not patch:
--        return
--
--    # Get the content for the patch email itself as well as all comments
--    data = pwork.request('patches/%s/' % patch.id)
--    comment_data = pwork.request('patches/%s/comments/' % patch.id)
--
--    new_rtags, reviews = process_reviews(data['content'], comment_data,
--                                         cmt.rtags)
--    new_rtag_list[seq] = new_rtags
--    review_list[seq] = reviews
- 
- def show_responses(col, rtags, indent, is_new):
-     """Show rtags collected
-@@ -292,50 +211,6 @@ def create_branch(series, new_rtag_list, branch, dest_branch, overwrite,
-             [parent.target])
-     return num_added
- 
--def _check_status(series, series_id, pwork):
--    """Check the status of a series on Patchwork
--
--    This finds review tags and comments for a series in Patchwork, displaying
--    them to show what is new compared to the local series.
--
--    Args:
--        series (Series): Series object for the existing branch
--        series_id (str): Patch series ID number
--        pwork (Patchwork): Patchwork object to use for reading
--
--    Return:
--        tuple:
--            list of Patch: List of patches sorted by sequence number
--            dict: Patches for commit
--                key: Commit number (0...n-1)
--                value: Patch object for that commit
--            list of dict: review tags:
--                key: Response tag (e.g. 'Reviewed-by')
--                value: Set of people who gave that response, each a name/email
--                    string
--            list for each patch, each a:
--                list of Review objects for the patch
--    """
--    patches = collect_patches(series_id, pwork)
--    count = len(series.commits)
--    new_rtag_list = [None] * count
--    review_list = [None] * count
--
--    patch_for_commit, _, warnings = compare_with_series(series, patches)
--    for warn in warnings:
--        tout.warning(warn)
--
--    patch_list = [patch_for_commit.get(c) for c in range(len(series.commits))]
--
--    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
--        futures = executor.map(
--            find_new_responses, repeat(new_rtag_list), repeat(review_list),
--            range(count), series.commits, patch_list, repeat(pwork))
--    for fresponse in futures:
--        if fresponse:
--            raise fresponse.exception()
--    return patches, patch_for_commit, new_rtag_list, review_list
--
- 
- def check_patch_count(num_commits, num_patches):
-     """Check the number of commits and patches agree
 -- 
-2.43.0
+Tom
+
 
