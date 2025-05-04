@@ -4,88 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97203C369DC
-	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0C3C369DC
+	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:24:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E25E8828B3;
-	Sun,  4 May 2025 15:24:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 302F78295C;
+	Sun,  4 May 2025 15:24:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MR89aTfy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e+8jJx1W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F03DC82937; Sun,  4 May 2025 15:24:04 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 6204482952; Sun,  4 May 2025 15:24:06 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D57B882163
- for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52773828F8
+ for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ac28e66c0e1so381474766b.0
- for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:02 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ac6ed4ab410so576459066b.1
+ for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746365041; x=1746969841; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ABUNqviAn9KdxTipv+ulSV9bMj3WLnNck2lCK4UsYTI=;
- b=MR89aTfyvCGtngQHZo4wk7l7jzdDigW4D3+INAOlSPRTrwUgI0RCCanMw7+abc24bh
- 0Kz8esZBlZ4IQGuT5uW8/w5mytrT1XtVveGTEMGeEBLbHoACIsvp9dyYn6gq9hlseDaA
- zVXCZMa3JfK62Q3af7KqCmpSUwmS0BIsdq7RU=
+ d=chromium.org; s=google; t=1746365043; x=1746969843; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ysnArQ/YjWmpsaJcT85dfr9bv7ppzWVEboJyvH7a7JY=;
+ b=e+8jJx1WaEolN36NsrA8mf/h2njTaawP+S1+6bfe+P3Pg4BNdZpp44kDmQUstozA0j
+ RtMvnvFlTJ6GPh2qolqn9PamAzAcVEgfvf9CIMEz/j7mJPn3wmYOwjVBjetUSXI184w9
+ +wDZudD0pIQwA1LjN8tQ4FViiAcdQxjVboQA4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746365041; x=1746969841;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ABUNqviAn9KdxTipv+ulSV9bMj3WLnNck2lCK4UsYTI=;
- b=V3yD7hQ9TZvcvzS2Qn3QjbRVGhN54Wq8OY1ogSHQDmaKTewfe+558uI8mYDawDssSv
- J2TFn78VM4mA0ZZuH8IeRXOpve5yN/bagX/3p77oP7kDH8lZwGP8gSFMSVVLmJ5nbYGi
- b+dd3SYf7hgJf1Dh/eOwLMzcVx40QZ9Amv9B7GB1gHfLectwyPenBSj8PlsERXm6ol6c
- vmyo8SdgHGpdL0fywCqHgau1l5Rdh96U42nqfu1LJhzEiW2IBmKRmvIUl/FSOjcHeBJI
- wUFJtBLNwakbioIufjz9hZGR0Rt7cMfGJZX4Q8TcHR4qAVRjd/3FXvKVuQ5+KHA6f4xQ
- oUZQ==
-X-Gm-Message-State: AOJu0YxHAKupwbiQiAEEXXK7+WqyD6iB4RtRvwocEaTsAXmZSBiz575K
- k7Wbbp7DlZhivel5IWMbiTaahbT1UdJ2QrX0M7f8tkf3CfrW2XTt/PXC10LDxA8OCG9wq70r1gt
- 5i8uKuIo=
-X-Gm-Gg: ASbGncsXL7kfmLB2dGoBZEcxOzWD9QreELU0paZwXF2ACtNVpZ+zBKQbSFrEKZKYq3E
- vAy+/L9JyF24nuMbo+aNQxXKvs9W5dSG2i3fpiahMffUSL/q+C4wYSCXuYkGB6Ng9zTplQN8nDX
- fqwFh7jPd3fi+XRG4PwBj6vmMruz14XBrwE4FhC/JUDeth4kFhbIIFCqyOpgyMRUbx5oDDo9M87
- tqPUaTsN/f4O5IDF1IWv+2iDbuEbphRd6dz3eF8SNoW24WixRl2VToUmP/yb4jmlKGAuhYNfVGP
- vnOSClbIpxA8ymsWT/yIApa1WbGJ5saDGowJyTlLLjeAzhs=
-X-Google-Smtp-Source: AGHT+IG4u0w0MfLODzOzO3vrRSZCp2BMxyaCfbo2WUIbF7CK9oJM79BtatqRvd5U3lY8VR9CmTKrFw==
-X-Received: by 2002:a17:906:7314:b0:ad1:7858:a769 with SMTP id
- a640c23a62f3a-ad1a49af3ccmr342477066b.26.1746365041306; 
- Sun, 04 May 2025 06:24:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746365043; x=1746969843;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ysnArQ/YjWmpsaJcT85dfr9bv7ppzWVEboJyvH7a7JY=;
+ b=UwCEi2kMTSxcvrzICAUJR9/cHtj2vA1N49YEXZ62yujWOSnAd4UVXkxPpvAyrF39uz
+ 0pbLLxyKYKvCkWlB8Slld3ZH1beItPm2BrAhZA60nQFOL0wusXuxQCxVppFFxiBJuyS1
+ gsR+EaCgiKOvERX4Dfw8iZSPApD0me61V+NPl9pM4VWioh7BM1S/nyTvS9NSAlkK2EXE
+ +N2P7Qkh8cECaEby479IwBtFg8WvAe9PkulY4cN2nTudBekEJ1aPDstbDriHuzvX+7nF
+ fiGbq3VWTGYpxDy6PxIPPf14j12Ercd1qmoIliFG1JAONjMFsnahfDZgV3O/ZuCSrXDG
+ U8Gg==
+X-Gm-Message-State: AOJu0YzqW5i9AviZ03BugMJViQdk886DS1GnyeEWwC0/QGK/cXFzJc/1
+ qguJPA2CyHmoQK/MUex9e+Pg5rzXd/PIz1rME4mwkGMqbuAeGtWlmJo0l6666aZm0qKsMQHQzI5
+ UTLpHTn0=
+X-Gm-Gg: ASbGncsZAQGOiZKG7RHv0CkZDNYnu36IjI7sP5ygRXmU3dwo8/EofgiIBkIZYIbgiZM
+ qWH3He/S8xBq1jMxaNSyrWJswXW67WbjYdrULf1YN95U1eLcqnPjCo6Ev6/a5bmP6/BnK4QY1sV
+ R+0ZNZ8lcnO43NCFBs6ThDg2cF8O+BI3dFF6KVQT23PTBApHutul6jS/mVDvM1SN0m2E0d04hgX
+ a9k6WD7RikHM5tldRYI/Zzq8EOUYF2Nd8FAeBeW+TwVQLrPuFUD7KRPdCESu0RbSOL2zHTib4hE
+ paQhJcLPdfIf+pPkie8YB31oQ/zcw1J+dW90
+X-Google-Smtp-Source: AGHT+IFsyDch20tLyz8bStxkFK1n7XLDzsZ3FPblkeCGzr25xk99Ztrk7KzNQ24pA/QpWhaB2M6X1w==
+X-Received: by 2002:a17:907:c80f:b0:aca:a539:be04 with SMTP id
+ a640c23a62f3a-ad1a4896b68mr360915166b.4.1746365043242; 
+ Sun, 04 May 2025 06:24:03 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.00
+ a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 May 2025 06:24:00 -0700 (PDT)
+ Sun, 04 May 2025 06:24:01 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alexander Kochetkov <al.kochet@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Douglas Anderson <dianders@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Leonard Anderweit <l.anderweit@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neha Malcom Francis <n-francis@ti.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Sean Anderson <seanga2@gmail.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 00/30] patman: Move to asyncio and other updates
-Date: Sun,  4 May 2025 15:23:16 +0200
-Message-ID: <20250504132356.2317305-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 01/30] patman: Move all non-test logic into control module
+Date: Sun,  4 May 2025 15:23:17 +0200
+Message-ID: <20250504132356.2317305-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250504132356.2317305-1-sjg@chromium.org>
+References: <20250504132356.2317305-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,89 +94,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series moves patman to use asyncio instead of ThreadPoolExecutor
-since it makes it easier to handle requests sent from different parts
-of the code.
+It is easier for tests if the top-level control logic is all in one
+module. Create a new do_patman() function to handle this. Move the
+existing code into it.
 
-It also includes some updates to bring patman in line with the other
-major Python tools (buildman and binman).
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-With this series, we have a better basis to add support for syncing more
-data from a patchwork server.
+(no changes since v1)
 
-After this, the next step it to add a new 'patman series' subcommand, to
-track and manage series workflow.
+ tools/patman/__main__.py | 49 ++----------------------------------
+ tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 54 insertions(+), 49 deletions(-)
 
-Changes in v2:
-- Rework commit message since this only updates requirements.txt now
-
-Simon Glass (30):
-  patman: Move all non-test logic into control module
-  patman: Move capture_sys_output() into terminal and rename
-  binman: Correct a typo in the toolpath comment
-  u_boot_pylib: Allow control of capturing
-  u_boot_pylib: Improve ANSI-colour output with backgrounds
-  u_boot_pylib: Add a pager
-  u_boot_pylib: Avoid concurrent execution of only one test
-  u_boot_pylib: Allow disabling colour output
-  tools: Plumb in capture control
-  patman: Correct a stray quote
-  patman: Rename test_basic() in test_checkpatch
-  patman: Tidy up the start-up code
-  patman: Support extra test features
-  patman: Move code for sending into its own module
-  patman: Add aiohttp to requirements
-  patman: Create a module for handling patchwork
-  patman: Move Patch and Review to patchwork module
-  patman: Add reading of series and patch status
-  patman: Rename check_patchwork_status()
-  patman: Split up check_and_show_status()
-  patman: Split out the processing of find_new_responses()
-  patman: Adjust how the fake request() function is provided
-  patman: Simplify test_find_new_responses()
-  patman: Show patches in yellow
-  patman: Add more information to Patch
-  patman: Use defaultdict directly
-  patman: Switch over to asyncio
-  patman: Provide an option to run in single-threaded mode
-  patman: Use a pager when outputting status
-  patman: Drop the old status code
-
- doc/develop/binman_tests.rst    |   6 +-
- tools/binman/bintool_test.py    |  20 +-
- tools/binman/cbfs_util_test.py  |  15 +-
- tools/binman/elf_test.py        |   3 +-
- tools/binman/fip_util_test.py   |  11 +-
- tools/binman/ftest.py           | 106 ++++----
- tools/binman/image_test.py      |   4 +-
- tools/binman/main.py            |   4 +-
- tools/buildman/func_test.py     |  10 +-
- tools/buildman/main.py          |   2 +-
- tools/buildman/test.py          |   6 +-
- tools/dtoc/main.py              |   5 +-
- tools/dtoc/test_dtoc.py         |  11 +-
- tools/dtoc/test_fdt.py          |   2 +-
- tools/dtoc/test_src_scan.py     |  25 +-
- tools/patman/__main__.py        |  61 +----
- tools/patman/cmdline.py         |   8 +
- tools/patman/control.py         | 223 +++++----------
- tools/patman/func_test.py       | 143 +++++-----
- tools/patman/patchwork.py       | 425 +++++++++++++++++++++++++++++
- tools/patman/pyproject.toml     |   2 +-
- tools/patman/requirements.txt   |   1 +
- tools/patman/send.py            | 179 ++++++++++++
- tools/patman/status.py          | 463 ++++++++++++--------------------
- tools/patman/test_checkpatch.py |   2 +-
- tools/u_boot_pylib/__main__.py  |   2 +-
- tools/u_boot_pylib/terminal.py  | 105 ++++++--
- tools/u_boot_pylib/test_util.py |  29 +-
- tools/u_boot_pylib/tout.py      |   5 +-
- 29 files changed, 1166 insertions(+), 712 deletions(-)
- create mode 100644 tools/patman/patchwork.py
- create mode 100644 tools/patman/send.py
-
+diff --git a/tools/patman/__main__.py b/tools/patman/__main__.py
+index 36f1c08507c..0d08a53cbab 100755
+--- a/tools/patman/__main__.py
++++ b/tools/patman/__main__.py
+@@ -6,15 +6,8 @@
+ 
+ """See README for more information"""
+ 
+-try:
+-    from importlib import resources
+-except ImportError:
+-    # for Python 3.6
+-    import importlib_resources as resources
+ import os
+-import re
+ import sys
+-import traceback
+ 
+ # Allow 'from patman import xxx to work'
+ # pylint: disable=C0413
+@@ -24,9 +17,7 @@ sys.path.append(os.path.join(our_path, '..'))
+ # Our modules
+ from patman import cmdline
+ from patman import control
+-from u_boot_pylib import terminal
+ from u_boot_pylib import test_util
+-from u_boot_pylib import tools
+ 
+ 
+ def run_patman():
+@@ -54,44 +45,8 @@ def run_patman():
+         sys.exit(0 if result.wasSuccessful() else 1)
+ 
+     # Process commits, produce patches files, check them, email them
+-    elif args.cmd == 'send':
+-        # Called from git with a patch filename as argument
+-        # Printout a list of additional CC recipients for this patch
+-        if args.cc_cmd:
+-            re_line = re.compile(r'(\S*) (.*)')
+-            with open(args.cc_cmd, 'r', encoding='utf-8') as inf:
+-                for line in inf.readlines():
+-                    match = re_line.match(line)
+-                    if match and match.group(1) == args.patchfiles[0]:
+-                        for cca in match.group(2).split('\0'):
+-                            cca = cca.strip()
+-                            if cca:
+-                                print(cca)
+-
+-        elif args.full_help:
+-            with resources.path('patman', 'README.rst') as readme:
+-                tools.print_full_help(str(readme))
+-        else:
+-            # If we are not processing tags, no need to warning about bad ones
+-            if not args.process_tags:
+-                args.ignore_bad_tags = True
+-            control.send(args)
+-
+-    # Check status of patches in patchwork
+-    elif args.cmd == 'status':
+-        ret_code = 0
+-        try:
+-            control.patchwork_status(args.branch, args.count, args.start, args.end,
+-                                     args.dest_branch, args.force,
+-                                     args.show_comments, args.patchwork_url)
+-        except Exception as exc:
+-            terminal.tprint(f'patman: {type(exc).__name__}: {exc}',
+-                            colour=terminal.Color.RED)
+-            if args.debug:
+-                print()
+-                traceback.print_exc()
+-            ret_code = 1
+-        sys.exit(ret_code)
++    else:
++        control.do_patman(args)
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/tools/patman/control.py b/tools/patman/control.py
+index b8a45912058..990e07f8766 100644
+--- a/tools/patman/control.py
++++ b/tools/patman/control.py
+@@ -9,12 +9,21 @@ the features of patman.
+ """
+ 
+ import os
++import re
+ import sys
++import traceback
++
++try:
++    from importlib import resources
++except ImportError:
++    # for Python 3.6
++    import importlib_resources as resources
+ 
+-from patman import checkpatch
+-from patman import patchstream
+ from u_boot_pylib import gitutil
+ from u_boot_pylib import terminal
++from u_boot_pylib import tools
++from patman import checkpatch
++from patman import patchstream
+ 
+ 
+ def setup():
+@@ -245,3 +254,44 @@ def patchwork_status(branch, count, start, end, dest_branch, force,
+     from patman import status
+     status.check_patchwork_status(series, found[0], branch, dest_branch, force,
+                                   show_comments, url)
++
++
++def do_patman(args):
++    if args.cmd == 'send':
++        # Called from git with a patch filename as argument
++        # Printout a list of additional CC recipients for this patch
++        if args.cc_cmd:
++            re_line = re.compile(r'(\S*) (.*)')
++            with open(args.cc_cmd, 'r', encoding='utf-8') as inf:
++                for line in inf.readlines():
++                    match = re_line.match(line)
++                    if match and match.group(1) == args.patchfiles[0]:
++                        for cca in match.group(2).split('\0'):
++                            cca = cca.strip()
++                            if cca:
++                                print(cca)
++
++        elif args.full_help:
++            with resources.path('patman', 'README.rst') as readme:
++                tools.print_full_help(str(readme))
++        else:
++            # If we are not processing tags, no need to warning about bad ones
++            if not args.process_tags:
++                args.ignore_bad_tags = True
++            send(args)
++
++    # Check status of patches in patchwork
++    elif args.cmd == 'status':
++        ret_code = 0
++        try:
++            patchwork_status(args.branch, args.count, args.start, args.end,
++                             args.dest_branch, args.force, args.show_comments,
++                             args.patchwork_url)
++        except Exception as exc:
++            terminal.tprint(f'patman: {type(exc).__name__}: {exc}',
++                            colour=terminal.Color.RED)
++            if args.debug:
++                print()
++                traceback.print_exc()
++            ret_code = 1
++        sys.exit(ret_code)
 -- 
 2.43.0
 
-base-commit: 0c8a89d252c3db3401ffa572ee2e4dfcb94e2c3b
-branch: pata2-us
