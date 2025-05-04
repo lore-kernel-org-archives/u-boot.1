@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF17C369DC
-	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:24:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96ACFC3ABAC
+	for <u-boot@archiver.kernel.org>; Sun,  4 May 2025 13:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C28A82A33;
-	Sun,  4 May 2025 15:24:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2CDB829C3;
+	Sun,  4 May 2025 15:24:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="meQseQbj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VRiqQyNy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC25E829A1; Sun,  4 May 2025 15:24:15 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id E72B482A3B; Sun,  4 May 2025 15:24:17 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC10F828F8
- for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02303828F8
+ for <u-boot@lists.denx.de>; Sun,  4 May 2025 15:24:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5e8be1bdb7bso5077561a12.0
- for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:13 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ac2ab99e16eso745420366b.0
+ for <u-boot@lists.denx.de>; Sun, 04 May 2025 06:24:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746365052; x=1746969852; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746365055; x=1746969855; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PMUxDioyQj7gVBoXbO2Q7Dj04pX6GBYdPHkwAloK8p4=;
- b=meQseQbj58rUGis177QEHhXCNt6DTYvL3QSz4VL3EV7epDNbRDqO0Kc+li5MQCOWaK
- SaObtRZ3AeJH8WT0T185PWKhhn1bVYtOmQe6pZpDXPQ05dL6JDMqg+rd87tDl/xQhrCY
- SXMIDk20BnIM7oGSMIHQvwYBz2GS3er2bOjiE=
+ bh=qInn2EnFnAs4Yl3qtXhifOFzZ8ENiXmW89qsgsIkOkw=;
+ b=VRiqQyNy8LlDlHTw+9goyupw4zvS02sHxaQN03jzf9BfyjfMDT6KQ47BPZIlHoew7k
+ +2nCqpSAlGiLkcYKpeXyfLQlw0JDT+1s7Ij7yKpn8uA4keJAaQ4gCGK7W5JuT4nCFwu6
+ UINz7tIrRQ19Fmka+UmNqZnPkfrXGuHYKECVo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746365052; x=1746969852;
+ d=1e100.net; s=20230601; t=1746365055; x=1746969855;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PMUxDioyQj7gVBoXbO2Q7Dj04pX6GBYdPHkwAloK8p4=;
- b=q2/ITUTszH7u6TOw09Ol7p8oa62k95/jvl0vTx6EGyoPDjl+AlMHYwTTfi9sbNv8UR
- MnNUjqx6gvFCNh7aK0HY5lyGfLg4CZNQfeQ2CxSH46D5MT+pskNRY3xSjaPlRaHEWRyW
- ACV8MtaRU1nX59WentRZBXOGCByBCBtxagOokcUDwpBWDQNkJsHn6PTuNvwNIKl2x4mW
- riTRYLmcNwaNK94jwTnZM8F8Tsy5a8VwvaiUJljoKLVM1OLsmkVhFZYZOoj/V1SgVE2w
- J+vlDjTdDokrx5b60vx+ZUePbgt/xAcx/Ik7RGYfhdtfuX58PXiXkfkZDB6QYbb2Srra
- /4Vw==
-X-Gm-Message-State: AOJu0YyS3jnvjarzYrtIxSJvY8Kkx1I1CCfLWqIuv9nc98bhiyW4PTy8
- aan23W6aE+rH014E04xeiFvv+QKxZjG48upzTB6tkNHUR/Dj4dmpr6mJ0hAVlHLRlu2Jtee84TD
- RXrslOOA=
-X-Gm-Gg: ASbGncvJJEcsUJr//aLHCnF2TC4US2gJv9G7u+EJQ3oaUeRSGFqasl1wTQ+D7TN4/nH
- gVY8qmw9KW7GIH80ih+5UwRR5pAkoo1XTOL+hoQUPaZ7z0OH/h3nQcQ4NNjkZyX3TO62msA3JUz
- lso0fbUNlj3vUEJRRevriGwJ269RZ0TF48MD7CAit+dWiQIv9udJpDR8WqasyymCmbybjj1rr6m
- E8Nb4sTPbBiACTZUrt2D+AikYqA3MWjJ7vygt/hhtv2I/g6li156P4eOXB9dbsKV+8BPiRobYj7
- 4/BLT786Jti52aWhDEPGJqtW2l+mzr3iuclKhaTShj0W54w=
-X-Google-Smtp-Source: AGHT+IH8MoVTs7E5R7VdnbObp9/l7WJqAUeXz8qaT3hECu8aYA1fU/d0cxsNSprnn36D2LCUszN0pw==
-X-Received: by 2002:a17:907:2dab:b0:ac7:95b5:f5d1 with SMTP id
- a640c23a62f3a-ad19083700dmr478943166b.42.1746365052600; 
- Sun, 04 May 2025 06:24:12 -0700 (PDT)
+ bh=qInn2EnFnAs4Yl3qtXhifOFzZ8ENiXmW89qsgsIkOkw=;
+ b=MDSrnLVEjGcStlxW4KsqNw2PBTkhntXJ85Z5d7hQUTeeKK5Pn25Zc592pBqNNjqY6a
+ zZWWvH27/qHfSXMUIkStJG/j6/MbwFpIuEVBFjJYFjFkQDJePqm0K4Y3Dj7tEnaxVb2x
+ ouVMT0WNVwqhOUME8Albjj6lfyXLX1yS33OhKSe4fMQSny8WDuHFo1bxrAhjFo84q7CA
+ +mchDo4pnvJrd2p5tqDfPQZD5lMaIOISwCshWC9kR0PI+lIiwQwEMtHJZlnxjVvicM/P
+ w7AAf9Be5aG/sCZbYmvp4utglkUdZK1M8erADzheBdj451+vB81bQ9JGaUpbRJ5OHJpo
+ Ey7A==
+X-Gm-Message-State: AOJu0YxZJm61103xK3JXFTghUb5iv2ikmpftFA6HXqT77/pOvk6z6nbD
+ RhCloWSusbJcZHFp9lR/oBy2Q/lxcML2Omg9r0inqBqCTr2qSpflUw+3sSZjeESywiLYV6XQPt2
+ cwtFd3FU=
+X-Gm-Gg: ASbGncsdHaMDcpXbBAByPccKgRka/Xteo8SqZ1Z6BvJzw2oYiYoOWS1ruUqjlGwNcU6
+ 53nCWmEj+gyjlyYyJDNurKNtWt+GvIZMDgELLRpBtKK5WOgF62qBNTyrqrvW8b1yHqH9BaWtima
+ LCwTEPUBDm3IvPk+fSicl/+BiiEPsDxSphMkks/rbzBPCDRaBHkELRaVhD9MeYTblGxBYIuD8MS
+ pVYx4u/xL36lMwztnziY5gUn+eCW4JRql/PaOjlN+sSXQg0Z7caz7w+qX8B76TqBxE0OeD07Rud
+ wexIa5Ev47OGzNdxcqDZIh619qMzZN8PDh8sbyEqmRx2jrQ=
+X-Google-Smtp-Source: AGHT+IFBu0CWN7sYSJLe1P8dw0NJ/5jLzI8tw6oQmORsXRGbDG/IOzPtiuj21N4Ahc/AzvoRDesdmQ==
+X-Received: by 2002:a17:907:3da0:b0:acb:b966:3a7c with SMTP id
+ a640c23a62f3a-ad1a4aa5dedmr322348066b.47.1746365054816; 
+ Sun, 04 May 2025 06:24:14 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.11
+ a640c23a62f3a-ad1891f508asm328655666b.85.2025.05.04.06.24.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 May 2025 06:24:11 -0700 (PDT)
+ Sun, 04 May 2025 06:24:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 06/30] u_boot_pylib: Add a pager
-Date: Sun,  4 May 2025 15:23:22 +0200
-Message-ID: <20250504132356.2317305-7-sjg@chromium.org>
+Subject: [PATCH v2 07/30] u_boot_pylib: Avoid concurrent execution of only one
+ test
+Date: Sun,  4 May 2025 15:23:23 +0200
+Message-ID: <20250504132356.2317305-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250504132356.2317305-1-sjg@chromium.org>
 References: <20250504132356.2317305-1-sjg@chromium.org>
@@ -94,80 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is useful to have a pager when outputting a lot of text. Add support
-for this in the terminal library, making use of a context manager.
-
-Also add a function to indicate whether the output device is a terminal
-or not, while we are here, to avoid duplicating this code.
+There is no point in spinning up multiple processes if there is only one
+test to execute. Add a check for this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/u_boot_pylib/terminal.py | 37 +++++++++++++++++++++++++++++++++-
- 1 file changed, 36 insertions(+), 1 deletion(-)
+ tools/u_boot_pylib/test_util.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/u_boot_pylib/terminal.py b/tools/u_boot_pylib/terminal.py
-index 6bd790acc3f..69c183e85e5 100644
---- a/tools/u_boot_pylib/terminal.py
-+++ b/tools/u_boot_pylib/terminal.py
-@@ -12,6 +12,7 @@ from io import StringIO
- import os
- import re
- import shutil
-+import subprocess
- import sys
+diff --git a/tools/u_boot_pylib/test_util.py b/tools/u_boot_pylib/test_util.py
+index d46c3df5094..fc441a78dc1 100644
+--- a/tools/u_boot_pylib/test_util.py
++++ b/tools/u_boot_pylib/test_util.py
+@@ -191,7 +191,7 @@ def run_test_suites(toolname, debug, verbosity, test_preserve_dirs, processes,
+         resultclass=FullTextTestResult,
+     )
  
- # Selection of when we want our output to be colored
-@@ -211,8 +212,16 @@ def echo_print_test_lines():
-         if line.newline:
-             print()
+-    if use_concurrent and processes != 1:
++    if use_concurrent and processes != 1 and not test_name:
+         suite = ConcurrentTestSuite(suite,
+                 fork_for_tests(processes or multiprocessing.cpu_count()))
  
-+def have_terminal():
-+    """Check if we have an interactive terminal or not
- 
--class Color(object):
-+    Returns:
-+        bool: true if an interactive terminal is attached
-+    """
-+    return os.isatty(sys.stdout.fileno())
-+
-+
-+class Color():
-     """Conditionally wraps text in ANSI color escape sequences."""
-     BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
-     BOLD = -1
-@@ -309,3 +318,29 @@ def capture():
-         if not USE_CAPTURE:
-             sys.stdout.write(capture_out.getvalue())
-             sys.stderr.write(capture_err.getvalue())
-+
-+
-+@contextmanager
-+def pager():
-+    """Simple pager for outputting lots of text
-+
-+    Usage:
-+        with terminal.pager():
-+            print(...)
-+    """
-+    proc = None
-+    old_stdout = None
-+    try:
-+        less = os.getenv('PAGER')
-+        if not CAPTURING and less != 'none' and have_terminal():
-+            if not less:
-+                less = 'less -R --quit-if-one-screen'
-+            proc = subprocess.Popen(less, stdin=subprocess.PIPE, text=True,
-+                                    shell=True)
-+            old_stdout = sys.stdout
-+            sys.stdout = proc.stdin
-+        yield
-+    finally:
-+        if proc:
-+            sys.stdout = old_stdout
-+            proc.communicate()
 -- 
 2.43.0
 
