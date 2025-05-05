@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9090C3ABB6
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 23:36:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CEB1C3ABB6
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 23:36:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0296782A65;
-	Tue,  6 May 2025 01:35:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47F228211F;
+	Tue,  6 May 2025 01:35:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IVLhJu+x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t8vs1FCd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D138F82A2F; Tue,  6 May 2025 01:35:34 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id D383F829D4; Tue,  6 May 2025 01:35:36 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB75780079
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 01:35:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A76D58294C
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 01:35:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2db2f23f174so376902fac.2
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 16:35:32 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-401c43671ecso2470429b6e.0
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 16:35:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746488131; x=1747092931; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746488132; x=1747092932; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z20rDULBWdPylzWNYe0aNxK7JbjNYoaYQ65mjSzRe3E=;
- b=IVLhJu+x88njsNUepLwfKGB5IhWWrw0JDcWNCrkBBVc5R5+USaLip1V4sy+owOptJc
- HoMiHwXZezjC0zieN3cw/IP6TP0F9DCrFQVQweL/paaBlS1Nk1XbbJtfAOZLVs21zNeT
- wrGEkMWlCVmQ7DzZvyBMfxKUQ3yybQIYhja6M=
+ bh=bKUehVCk76+I3gymxAKHREqRWNDqkY1BhoYz14tvEtk=;
+ b=t8vs1FCd5u+yHMOeg8JXExJCDGejRf4b88Uc+IBNjE4i76IqhqyagvsitT16CfnNLg
+ UQDov8JWsOlsBb1ooEc6wH8AolvY/kF6WdGd20tRW8G9y55saVhEnwSMNyZNUyYYIVOt
+ nnBg5mP7tapgsCEbF1l+ayJO1hs4EQASHTVwg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746488131; x=1747092931;
+ d=1e100.net; s=20230601; t=1746488132; x=1747092932;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z20rDULBWdPylzWNYe0aNxK7JbjNYoaYQ65mjSzRe3E=;
- b=FgG+bZQpcbDgp5Ud5qv9qOIVylRk9bamjXOacyMMZ0MzEH8ZgmcufC8RGDv9ifSLWI
- m5zo1+97B7qCgdD+oNI0JNcFcS0zaXFl8hHxj60veLMSCVS1wlYkKEfe1J+H6rfmXZpc
- 8lP3Huip4sgcGBhpDnoaG0X3mzWUgCSonerk9XKai1VBffyUNnxGlSc2+2EbAnpd9a/t
- xgHW/jr8hwMohyLsPw0BrB6LUmTQs+OK2CH5Xl8p8lE2HspX7KmKsyLiN+qdAjoRA33i
- fFfAXWrWWOtEhxRrYUB9SdLtfAEnc2VUyn0cLO+IiAi5Vqm8iZR54mAv7NMqLMx4j0ot
- F+uA==
-X-Gm-Message-State: AOJu0YxL3+B6qY9uqPLsaFoE81r1FIUn1GUeEY4P53+rWi7ZIH45vzsI
- SeTPZZ/b7aJsGbmk14gpNMI/MMpCpneq1z/gMQNIJefL6aWKZ2U5wJ25UK8/9yQ=
-X-Gm-Gg: ASbGncu+kp02J55h6jYMMt90l4Mk8r6DVYXbW0cqDfjGtfqhYmH1+ngSP7amMrn7Cgi
- uMr10q9A3x8zg/By5L/ofnRr8PVmQZ0HIdMuBD1ozGWXFCZjdP+Tu6elPYZZ00EoxGjgHI+L4S1
- pqb//tFCEA+hK9b1YPK1jODJCxBsFuQnERtriouNfyO2y+++XUmpVGR8Y6tCBv79slATlUFN2k1
- x5CsXmQSCPsVh7F8B2MO6U4QH1a7bJXmk8mtpBq4MnOBRXKfDHrxHDEIokVt3D9OVQhLS2fpd2F
- DlJfPfJvLPzmcauqfHjMaPhAAMTP1iaAt222gVMeidjgdWKz8mLEcBvf3kRg3urfjAnRPFn3ro+
- D
-X-Google-Smtp-Source: AGHT+IEZ0Nj1j2za/Ai4Vfk8VXp02TGICaZoMq0SVrz96wwrPjlPjCtyiDML/oCoM9Ghlur/QCpLSw==
-X-Received: by 2002:a05:6870:b01f:b0:297:24ad:402f with SMTP id
- 586e51a60fabf-2db3cd86c27mr416758fac.12.1746488131432; 
- Mon, 05 May 2025 16:35:31 -0700 (PDT)
+ bh=bKUehVCk76+I3gymxAKHREqRWNDqkY1BhoYz14tvEtk=;
+ b=F1m/n2yXcK3iMNLMdpY77IzQASKSMKbGZyKTjT/a9yka7zOXJg6CK1kRqT8Nrsztoa
+ 7H1DXyYbrjFnRvq7586rlIKcO+vDEysLrfGidA8/NngGwftMQtsrous1a2+oaUMojwK4
+ Eopg/omT02oSj8nucdikyC6iI0WIQmqEKVu2BYb8M2TyS7jEuT5qM7acJokEklW1YspI
+ /fiExoWG1/ABpQHdM5YKS2SsvE1p/MicknI+du5UrrO4KnArae7i14fNoxc3h/2V+SdG
+ Wfuhh3e/xw6NgnFFuVVJQY3/O7qMzc+WXaD+33KOcB0he0riNSR3lUoMCNz5GvnUOFO1
+ J6Yw==
+X-Gm-Message-State: AOJu0Yx3TH8db/ctx9ntWwUI86jkv6s6kpnsG+lzC1yGpzneozrf4F38
+ GhxK0f14iJPaD8SkQ75F7nXtVuUwaAC7FEQvEAoldW6e6sbLLpe0MtvKpHCiSTKwqa8ydUKGyvQ
+ 3
+X-Gm-Gg: ASbGncvhNOlz5b2p59w6xAREhk8fi1ZCP4sh06X+A3l4dDTgy6HxtsfRGCKOYS1W+Oh
+ YKBHthcHH6vMMyxAXXh0ThuSgG+YmSQHGUJcXhSbev1umPQIBH4B1dJ5pvlLrpSbQToxDkRZOq9
+ n3jGDFSyeP3AZHGgrs3Q+6YoFgXVbW2TzXqxAPUno1khF2JsEHe60+oSz5CXjbkwXnuosdA8J/G
+ +t6aRsO5/Th/Ly/588C+EyRP2P08MRj6i8iQxCvMGwc3o+kilUwS9ikwEXjv+wyRq+APlWtTH7Y
+ Rb3x2ulASQe3wI8gskxhOCkpo2i2DjJ20AgfjIPUfVK03ydv3m11yZIRCnTLba+rrTiy9p+47Jp
+ j
+X-Google-Smtp-Source: AGHT+IEXldEAcr8nvuf935PkRXzmnfiDUOOeiQbjT39aok+DpOLPbTLt31xSpeaXliQUlO+X5TGp9A==
+X-Received: by 2002:a05:6808:2192:b0:3f4:e3e:10c5 with SMTP id
+ 5614622812f47-403686f2ac9mr885591b6e.0.1746488132319; 
+ Mon, 05 May 2025 16:35:32 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7fe85a4sm1913408eaf.39.2025.05.05.16.35.30
+ 006d021491bc7-607e7fe85a4sm1913408eaf.39.2025.05.05.16.35.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 16:35:30 -0700 (PDT)
+ Mon, 05 May 2025 16:35:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Anton Blanchard <antonb@tenstorrent.com>, Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Christian Marangi <ansuelsmth@gmail.com>, Andrew Davis <afd@ti.com>, 
- Nishanth Menon <nm@ti.com>, Yao Zi <ziyao@disroot.org>
-Cc: u-boot@lists.denx.de, Nathaniel Hourt <I@nathaniel.land>
-In-Reply-To: <20250427145011.17331-1-ziyao@disroot.org>
-References: <20250427145011.17331-1-ziyao@disroot.org>
-Subject: Re: (subset) [PATCH 0/2] Clang compatibility improvements for RISC-V
-Message-Id: <174648813003.69658.8243788100199933751.b4-ty@konsulko.com>
-Date: Mon, 05 May 2025 17:35:30 -0600
+To: U-Boot mailing list <u-boot@lists.denx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20250429120232.3874362-1-jerome.forissier@linaro.org>
+References: <20250429120232.3874362-1-jerome.forissier@linaro.org>
+Subject: Re: [PATCH] cmd: spawn: reject 0 as an invalid job ID
+Message-Id: <174648813155.69658.12453402397052680586.b4-ty@konsulko.com>
+Date: Mon, 05 May 2025 17:35:31 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,23 +97,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 27 Apr 2025 14:50:09 +0000, Yao Zi wrote:
+On Tue, 29 Apr 2025 14:02:18 +0200, Jerome Forissier wrote:
 
-> Originally reported by Nathaniel Hourt[1], U-Boot fails to boot on
-> JH7110 platforms (starfive_visionfive2_defconfig) when building with
-> Clang.
+> Job IDs are positive integers greater than 1. 0 is not a valid job ID,
+> therefore fix the comparison in do_wait().
 > 
-> This series fixes configuration generation with Clang's preprocessor and
-> add an alternative codepath for RISC-V to access gd to workaround
-> misoptimization of Clang, which is sufficient for building images for
-> JH7110 boards.
+> Fixes Coverity defects:
+> 
+> *** CID 550296:  Control flow issues  (NO_EFFECT)
+> /cmd/spawn.c: 172 in do_wait()
+> 166                     for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
+> 167                             if (job[i])
+> 168                                     ret = wait_job(i);
+> 169             } else {
+> 170                     for (i = 1; i < argc; i++) {
+> 171                             id = dectoul(argv[i], NULL);
+> >>>     CID 550296:  Control flow issues  (NO_EFFECT)
+> >>>     This less-than-zero comparison of an unsigned value is never true.
+> "id < 0UL".
+> 172                             if (id < 0 || id >
+> CONFIG_CMD_SPAWN_NUM_JOBS)
+> 173                                     return CMD_RET_USAGE;
+> 174                             idx = (int)id - 1;
+> 175                             ret = wait_job(idx);
+> 176                     }
+> 177             }
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/2] Makefile: Strip leading spaces when preprocessing generated_defconfig
-      commit: 252cd205300c1b9945079c0ae1fe5980ef9dfa56
+[1/1] cmd: spawn: reject 0 as an invalid job ID
+      commit: 0352eab7d373664c1c01b23154025b83ec0eadca
 -- 
 Tom
 
