@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A11F9C3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F82C3ABB0
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:46:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7535F82A56;
-	Mon,  5 May 2025 17:44:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD90B82AB2;
+	Mon,  5 May 2025 17:44:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gcuX2aKc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PezQC2kn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F012C82A56; Mon,  5 May 2025 17:44:18 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 7BA6482153; Mon,  5 May 2025 17:44:20 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D818A829CD
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:44:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86512829E4
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:44:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5f3f04b5dbcso6960889a12.1
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:44:16 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5efe8d9ebdfso529684a12.3
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:44:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746459854; x=1747064654; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746459856; x=1747064656; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FEqOBn4iaho8zMImhusdoDhAOCwEZnAfRGBvVZ7rQ1Y=;
- b=gcuX2aKcuSqcaM61Mwx+XlzDqU707Eo0Q05Q5yk0xEVIDwI8Z7N9J6F+fg1IzlMO1t
- KJDQGolNJGq77+kQvUp75YFl95Sgm7ssZSAoEIUaFTMH0KMvTBLHYmcbqK09h0rWxBUv
- eaklN6t/1eghbUhSlseCI1l/aKI1gCGWHCA7c=
+ bh=0tjJBCLNxO1wfvCX5eYldMUU1dQjYuLWBULp1d1tc/I=;
+ b=PezQC2kna8c9yrXDSzjVRxfxrTQp49bao+E4eN8ow6yGLU1s6OwiO0sxIMicpjWGCI
+ qrM69GWFyGayXI9BzYlA4EoUv8lL+gsXKmUHFMRv1V2/hqlof4ArN0LAg6fSs5Euajy0
+ flT6CihlHn95D2NCDHWVpxmGxV3PJ0kT8PAdw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746459854; x=1747064654;
+ d=1e100.net; s=20230601; t=1746459856; x=1747064656;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FEqOBn4iaho8zMImhusdoDhAOCwEZnAfRGBvVZ7rQ1Y=;
- b=JB0Z5h2OoDPU3SJkRtTc+Mr2rbtq+DZH9aD2N5zBOLqZ2+CNoLcP2EXWjzSPdfLaU2
- TqU1e2Axtg4dAb32PyZXblosrYBiIP7SjjyxQ9J0WaPmWkdZwnsSefZ9ccAy1S/W+kkw
- Fkr5fPzVIry+oEfge+U0uagyayTWB29mkOz3C46jkOst094K+GAjmz9fL2vwYz4AMJ75
- SpUEDPq/crqn8TXYmZCn8LhYPYPsL5WRxjcV+hxA2fjmnGnjRdC9z76237iIjScIIe1c
- 6f0L7u31vEfM8xmuzngxtwWULojfAzNluRlzO3/9NclIjDplXY+Tog/tbSwyGCNrOLV2
- by3w==
-X-Gm-Message-State: AOJu0YyBtOVfRLhFIkIPm1xuYtXn8DUkq4+9Uz2RN5m7ub+3rwHXiIpI
- JRqPFy1CwNi1aSA3GJvdPA3MGMuM+K/yzQ86zLWHBIE/JDViOiua/hH/z/q2bJlCxVmF2i4/LMA
- kRQz9mKE=
-X-Gm-Gg: ASbGncvsDkxWl/0e+JsGfhLx2wiMlbwCvzpE2ChvsPh7xWtKvilvNvxMUYhIKLJEyS5
- 23GXAM3W+XE+jXXgN4jHNVqpiekPjwabPq4U2gu6iUhAGQW/wIuaKdlKxtSXtZoWWQ9o9I1L7Yb
- OzeIt2+TtNyHglNEStTyBhCxMPVbRgtJ4jmv/FhoJepa/gmIu5zMLoUa8WA7mlcS1mBXQoMsEPT
- jWKcgqcqtgFfAxvreuPjT1i5mZJNITYYUjGY/LbC62dDPLL8WbXB1OUeVXPSPhKRAyMbEsMOjcw
- oIm8V9BYQOHr2MO6u7QM4QPMonLxwpo9EB/h
-X-Google-Smtp-Source: AGHT+IHbSuD5EqhQAesNZwjE7dDH+ou5+awpnaBCcFIsjE6Dip2uTQuPY1oCHAZuTa7IFdR9I4a1WA==
-X-Received: by 2002:a05:6402:42c8:b0:5f4:b0ab:9df4 with SMTP id
- 4fb4d7f45d1cf-5faa7f8e7femr8024116a12.19.1746459854615; 
- Mon, 05 May 2025 08:44:14 -0700 (PDT)
+ bh=0tjJBCLNxO1wfvCX5eYldMUU1dQjYuLWBULp1d1tc/I=;
+ b=sLIoG7fMX27jmaKg6ox9T6erxR+8T/dZdorQkMAxhZn6KeloZtx8scxVrKk0Uvl/0E
+ FK1VWTInkUWrw+erpyYc3Et9E7P/BfJIjZoCHIOHm7l9IffHXp/Jx8OxpMbn6fdJdgy5
+ rmiTxHbKEyuvgkYxnbM4KOIm1QiKqOWbkZ4p77xE5TyramYOWuac9wPewJ+DrI7aXP/W
+ /hcachz0nNmGE9/KR3j7zObCc3vJrAM9PbpuIQRDR8+j5v+2Lb5FvCjtZEIqWzenOEOB
+ lh3VmeIEh40ydyyx95iUEoPsR7k/dJCyDOrSR3z/OXs4qMusErkgY2PuTetPHHKfBhnS
+ XdRw==
+X-Gm-Message-State: AOJu0YzPWCra67KK0QDeO1W8aKItM1N2YX4eqtSG9Z44wmTqLYN+ZVBa
+ Z3JEIW2JQIC0XAPwYR/H+aFN/pn6EulNW0TTWVCqkVQ+ug37/pDhecaX4TDKfr+Ltt2ZIdTTrLA
+ Mdu2nKr0=
+X-Gm-Gg: ASbGncu+Q1bQbz6N3+sAxqj7OE/Trst1qHS//OpPD8xizxQmvI5eKEeC1RGt7pPNxNP
+ d0Ip3Y4Ys/3cQ933nlDXLhrcuiwSkBIs8ABtFf9CY5mqzMNPyOLPsbaYnnOZ3tos3J5WNRtiWrR
+ 4yC+33SyXIkZUIbj7u7mdCWBPJQ+pmy29cRZ+nu6hrYBrb+1nxIZiUel5gj9tCSZ87pQj6dpiV5
+ 6qsAhn41ueo2Ir1O2CtEmMiHdaHqq+XMqQfmJEfN0JOACJG78edIqxGc4Vivi68gXsKyUd8AdSB
+ GV5LBklfpyBMOKr0V1uZQuEqXY7CdhHIvhRg
+X-Google-Smtp-Source: AGHT+IHb/gsFS3BDdof/zSCtWkpMBmN6g1TKMXJBJMTqRLYylrx0C/GvU7jvHYmqExAHGdEGHJba9Q==
+X-Received: by 2002:a50:858b:0:b0:5f8:624d:42cb with SMTP id
+ 4fb4d7f45d1cf-5fab05c23a3mr5574513a12.23.1746459856096; 
+ Mon, 05 May 2025 08:44:16 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5fa778188acsm5561762a12.35.2025.05.05.08.44.13
+ 4fb4d7f45d1cf-5fa778188acsm5561762a12.35.2025.05.05.08.44.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 08:44:13 -0700 (PDT)
+ Mon, 05 May 2025 08:44:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 15/19] expo: Allow the menu pointer to be wider
-Date: Mon,  5 May 2025 17:42:53 +0200
-Message-ID: <20250505154308.2911248-16-sjg@chromium.org>
+Subject: [PATCH 16/19] expo: Drop space from object name in test
+Date: Mon,  5 May 2025 17:42:54 +0200
+Message-ID: <20250505154308.2911248-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250505154308.2911248-1-sjg@chromium.org>
 References: <20250505154308.2911248-1-sjg@chromium.org>
@@ -94,86 +94,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than hard-coding the distance between the labels and the key,
-measure the width of the pointer to determine the space needed.
-
-Tweak a few tests according. It isn't possible to get the same result
-when the font-size differs.
+Two of the objects have a space in their name. Change it to a hyphen to
+match the other objects.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene_menu.c | 17 ++++++++++++++---
- test/boot/expo.c  |  4 ++--
- 2 files changed, 16 insertions(+), 5 deletions(-)
+ test/boot/expo.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/boot/scene_menu.c b/boot/scene_menu.c
-index 094489e2a40..b33e0a7d3b4 100644
---- a/boot/scene_menu.c
-+++ b/boot/scene_menu.c
-@@ -222,7 +222,7 @@ int scene_menu_arrange(struct scene *scn, struct expo_arrange_info *arr,
- 		       struct scene_obj_menu *menu)
- {
- 	const bool open = menu->obj.flags & SCENEOF_OPEN;
--	struct scene_obj_dims dims[SCENEBB_count];
-+	struct scene_obj_dims dims[SCENEBB_count], pointer_dims;
- 	struct expo *exp = scn->expo;
- 	const bool stack = exp->popup;
- 	const struct expo_theme *theme = &exp->theme;
-@@ -231,6 +231,7 @@ int scene_menu_arrange(struct scene *scn, struct expo_arrange_info *arr,
- 	int startx, x, y;
- 	int ret;
- 
-+	memset(&pointer_dims, '\0', sizeof(pointer_dims));
- 	menu->obj.dims.x = 0;
- 	menu->obj.dims.y = 0;
- 
-@@ -256,6 +257,16 @@ int scene_menu_arrange(struct scene *scn, struct expo_arrange_info *arr,
- 			y += ret * 2;
- 	}
- 
-+	if (menu->pointer_id) {
-+		const struct scene_obj *obj;
-+
-+		obj = scene_obj_find(scn, menu->pointer_id, SCENEOBJT_NONE);
-+		if (!obj)
-+			return log_msg_ret("obj", -ENOENT);
-+
-+		pointer_dims = obj->dims;
-+	}
-+
- 	/*
- 	 * Currently everything is hard-coded to particular columns so this
- 	 * won't work on small displays and looks strange if the font size is
-@@ -295,9 +306,9 @@ int scene_menu_arrange(struct scene *scn, struct expo_arrange_info *arr,
- 		x += 200;
- 
- 		/* space for the pointer */
--		if (menu->pointer_id) {
-+		if (pointer_dims.x) {
- 			menu->pointer_xofs = x - startx;
--			x += 30;
-+			x += 12 + pointer_dims.x + 9;
- 		}
- 
- 		if (item->key_id) {
 diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 0289350df9c..b05e57b4f5a 100644
+index b05e57b4f5a..517fb09d767 100644
 --- a/test/boot/expo.c
 +++ b/test/boot/expo.c
-@@ -424,10 +424,10 @@ static int expo_object_menu(struct unit_test_state *uts)
- 	ut_asserteq(menu->obj.bbox.x0 + 200, ptr->obj.bbox.x0);
- 	ut_asserteq(menu->obj.bbox.y0 + 32, ptr->obj.bbox.y0);
- 
--	ut_asserteq(menu->obj.bbox.x0 + 230, key1->obj.bbox.x0);
-+	ut_asserteq(menu->obj.bbox.x0 + 229, key1->obj.bbox.x0);
- 	ut_asserteq(menu->obj.bbox.y0 + 32, key1->obj.bbox.y0);
- 
--	ut_asserteq(menu->obj.bbox.x0 + 280, desc1->obj.bbox.x0);
-+	ut_asserteq(menu->obj.bbox.x0 + 279, desc1->obj.bbox.x0);
- 	ut_asserteq(menu->obj.bbox.y0 + 32, desc1->obj.bbox.y0);
- 
- 	ut_asserteq(-4, prev1->obj.bbox.x0);
+@@ -523,7 +523,7 @@ static int expo_render_image(struct unit_test_state *uts)
+ 	id = scene_txt_str(scn, "label1", ITEM1_LABEL, STR_ITEM1_LABEL, "Play",
+ 			   NULL);
+ 	ut_assert(id > 0);
+-	id = scene_txt_str(scn, "item1 txt", ITEM1_DESC, STR_ITEM1_DESC,
++	id = scene_txt_str(scn, "item1-txt", ITEM1_DESC, STR_ITEM1_DESC,
+ 			   "Lord Melchett", NULL);
+ 	ut_assert(id > 0);
+ 	id = scene_txt_str(scn, "item1-key", ITEM1_KEY, STR_ITEM1_KEY, "1",
+@@ -548,7 +548,7 @@ static int expo_render_image(struct unit_test_state *uts)
+ 	id = scene_txt_str(scn, "label2", ITEM2_LABEL, STR_ITEM2_LABEL, "Now",
+ 			   NULL);
+ 	ut_assert(id > 0);
+-	id = scene_txt_str(scn, "item2 txt", ITEM2_DESC, STR_ITEM2_DESC,
++	id = scene_txt_str(scn, "item2-txt", ITEM2_DESC, STR_ITEM2_DESC,
+ 			   "Lord Percy", NULL);
+ 	ut_assert(id > 0);
+ 	id = scene_txt_str(scn, "item2-key", ITEM2_KEY, STR_ITEM2_KEY, "2",
 -- 
 2.43.0
 
