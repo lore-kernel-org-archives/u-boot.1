@@ -4,92 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D7CC3ABB0
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 12:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2FEC3ABB6
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 12:37:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F6EF81F7E;
-	Mon,  5 May 2025 14:37:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EB1D18213D;
+	Mon,  5 May 2025 14:37:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yuYc/div";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cPbnem2B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD99F820E1; Mon,  5 May 2025 14:37:27 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id E55C581F7B; Mon,  5 May 2025 10:40:54 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF7CF80BAE
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 14:37:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7587C80BAE
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 10:40:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-acb415dd8faso653518166b.2
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 05:37:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=brunosampaioleite@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-54e98f73850so4613966e87.1
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 01:40:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746448645; x=1747053445; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=o5y85UUEzpfWuGZ6hMocNV7YC40HW9BYp2NQJ3xPLj8=;
- b=yuYc/div7XRxzoBrLHS6CuRW6e0uoenQxofEqOqzrUhm4cL19q1GO83mDNqPaN135V
- OnaZPSQ/MQ4nKElRmMTkt1q+eaT/spMPkVpLaw3rpqU/ysMBN95btRU4ekVAcAmzPsDL
- egMX1wKzNr4lTNnNjbc4ROFzQ3AlIfS5cXQafc3/xlmsAwNq9kn2/hPhQinzwt5xR28c
- k+kAPuW2vT7P2ZyHRn9d8g3oqgiNl5ck8ezy+XZ68YaT4HlV0LR0478uw07o+VbY0iEh
- +CX5EmrPwcEYnheI6S555NkTdAXqQHpporqj0a+Wpk2RUdaAyWUvs28tojiK8v3siht8
- RLIQ==
+ d=gmail.com; s=20230601; t=1746434452; x=1747039252; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xIrcZ8zeTUZ+h7AGVLuKxAogcONmEZuqFZTkIVVi8JU=;
+ b=cPbnem2BRNfThoW3tscnKXuQaDxG+t+2AQ9bEvJI2gP5s/vKeKn9HYZjfhL0gXrBI9
+ fsj851SPwr9gVWCscoF5ipsl6RKjJ91JkYDCo4YznUh94Iujk2HYWVPvZER+M9ZaWbEh
+ fV8tOJsu8NjC4pC1e8R+I593uV94btl9Fbhbc+YzqBAK7f00fKrrnK3aEwXtvPvPLsrc
+ lUhEWw1UruqH1Ls+LPKU0ys7qK62KKWcDPxY5fPwC8B00jp9YM9IqUeHff6qbnQ1ZXk1
+ J0d3rQkTVUi/OVEr92a0rh3FNk35UcCSNxUqwcrLZ9bFlSldAHvbaWx4nAcnTQ72kiFV
+ FOpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746448645; x=1747053445;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=o5y85UUEzpfWuGZ6hMocNV7YC40HW9BYp2NQJ3xPLj8=;
- b=ZqKVzmQepzihhn8L/J8/wGT7UZHptvPHTnxV1O+9IdWDFi1n8TPj23Taay5Clzr7XQ
- aC8lllGNwz3OqRSXM0MqIhRdIqYAqdPMym0AYNlZFrbs1zOH2Ar1wE9WP/nlkyveke1A
- MYaNB1a8m8Bgk4QHhtfgtrpsO8/iKYDEYY4R+3kp3gh7wWknMIg9ixA11R3RSlld4BOa
- Tb+ZOFoBkw5F5G8LFjWBOacwWVzzh7R4l0PouIa0IGG5RCZ9vqJNyOljGK3A6stDRyqT
- +u63CqJo8Pop2glj7m6+HtvUEb5IF5VqRKl+BelTWmrVwva5nctRtV7IrICxEkQj8Erq
- 9JOg==
+ d=1e100.net; s=20230601; t=1746434452; x=1747039252;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xIrcZ8zeTUZ+h7AGVLuKxAogcONmEZuqFZTkIVVi8JU=;
+ b=sg0og3rZRzmBVvBU64pgJY0Xg+B/zSfnR0SKMR4vfPxmdpXvpJvjaVFuqAmU3K0pTZ
+ 5ggHb6Hrqadu5GP8O44hgS8qXhb5aPd+ivLv8kmxPjNN4wmL6+zgZTrQOeN5S1QLBpQK
+ wkCpBUj4DQLgkb8hbySi78Cb02/E/l0m/ap0WktBEO2FXs9JP3k7LMc7AEfRuaESGTnr
+ 2yubqVP97VeEW1Cs+wER3VKNaG2aG7cG9YO5izk/WqbY9J76M0awE0xiLf/JroDIgbQ5
+ V4cyErxn0pf2kk6x05GsnH0ptS9TOWBgWjC60XDq+2liT2LPZNopSP/qAVdCrPARFizG
+ pZtg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXu1z7azlZ5bMks+j8JWkI4YRreCFctF0D4f11zfznKL1LMa70kZSgu9z2AhQAR8EcYjUbhFcY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2O/Mi/64hQtjxo3q/R0CLpU1cFuFVKIB711DrKpmznASzxlTj
- w3b6JK735F7F407Ma0+hM1racGoHQCyUykxfmMc3bLMwVDNX4WWnAwJYJf3gob4=
-X-Gm-Gg: ASbGncvbJWhB/r4XM3w6ypNVdDBRezkq+Yltatbs1tUrRHPtc9XFmB/9JdmBhmRZLNL
- ywUX+A24GqhrMSNCgqaMgGeV+agnTjp9NggTr+rwzS8Qkfd6vGz9pLVTHt5DRzyEdMYSFRpzjgd
- 4cVkvKlcAlOa24ysTxPfLPKnDn/aaBpK1P5r0SIgVFfW+EOEshkXDxuENfcoXA9d/xlrsm/WK1w
- t87NJB8Clv4l+SITGCf6MB36u4r6VF4UXOAfvwD19MDnXhGTq1FSAHZCc+VH4qXdBSKRngjDtt3
- sbIXY24x/o60XQIKERaWQJY0NZDpNhBykpwqtN92/IAu/6Aan3D3jR9Hg7cvC2eA+/AMUoPnilX
- JVCy39g1x6ECT9/7tIcRB
-X-Google-Smtp-Source: AGHT+IG5T7yPcHcZTHq9Zv5rkjKbaapWCucmtnz85xzkTKZAobr2VTgnz9LLqJhF4hc4iTmPzmZXtg==
-X-Received: by 2002:a17:906:6a29:b0:acb:1908:6873 with SMTP id
- a640c23a62f3a-ad1a4b1acecmr666442666b.48.1746448644994; 
- Mon, 05 May 2025 05:37:24 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:b8df:70b2:49d6:1b94?
- ([2a01:e0a:3cb:7bb0:b8df:70b2:49d6:1b94])
+ AJvYcCWtdAUBcRC4knsW1n3mXhU/Rk/Gwdp0H6Sm6qBwFe7CDd9ODIMS3664yXeo877+TPMuTvctw6g=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyf1oT15GYSiq5JFLJOtzUdUIECkTaz1lcye24hx25jC+YNAcwJ
+ c7VEh/qqfk4DT8q0YxKwuVOEDt6aG1nYcSIpf8FoJmI6mBqjV0mS
+X-Gm-Gg: ASbGncutyeJJiG1rPfXy0xQVefshINdpZBzjgt/jZYXQjvq327d9qCYc7Tx8o3oBcj7
+ ELyzUzMi1dKK/+z2yf1xct1rt0rn0b5NrHTmpoPNqHIUIo9ZJ+R6hZYRz1OjPowlu/sVzLdZnL2
+ ocarOGFoDcoXf4BwbgKLK3Z9CGoJahglezHcCp01mRJpLWx2oAXPH65z28xZxNUT2duQe2DWBlk
+ Ephe3Dc1Y/Of6P4Weyid6XKh8igJGGQla+Cz/PKhmGVl4SN1KlxmSdhnCxd0hvmyfY1KzEXfM7J
+ hn/7ARYXFy9Iu/LQnzvTVUOVNv92hyd/w9UVsUPXRGPPsYJTihi3jrQQgcfii8HGzFC/CN3XLA=
+ =
+X-Google-Smtp-Source: AGHT+IFtCBKgDa9jfup7r6YCzbq7OppUG+6jZhZPtYBXZH7GwpM0qdZ6wOErXcqaNpPMN+5NlpkPsQ==
+X-Received: by 2002:a05:6512:39cf:b0:549:43f8:824 with SMTP id
+ 2adb3069b0e04-54fa141d476mr1313101e87.26.1746434451467; 
+ Mon, 05 May 2025 01:40:51 -0700 (PDT)
+Received: from brule-Precision-3590.prevas.se ([81.216.59.226])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1891a311bsm493625166b.54.2025.05.05.05.37.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 May 2025 05:37:24 -0700 (PDT)
-Message-ID: <397fc31f-a182-4218-9752-9bbd161223fc@linaro.org>
-Date: Mon, 5 May 2025 14:37:24 +0200
+ 2adb3069b0e04-54ea938dbc6sm1670436e87.0.2025.05.05.01.40.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 May 2025 01:40:50 -0700 (PDT)
+From: Bruno Leite <brunosampaioleite@gmail.com>
+To: trini@konsulko.com
+Cc: brule@prevas.dk, brunosampaioleite@gmail.com, clast@prevas.dk,
+ mbrugger@suse.com, pbrobinson@gmail.com, probinson@gmail.com,
+ ravi@prevas.dk, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] Add rpi5 specific defconfig
+Date: Mon,  5 May 2025 10:40:49 +0200
+Message-ID: <20250505084049.1767884-1-brunosampaioleite@gmail.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20250502144031.GT1261075@bill-the-cat>
+References: <20250502144031.GT1261075@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 17/22] elf: Only use network environment-variables if
- net enabled
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Daniel Palmer <daniel@0x0f.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20250501010456.3930701-1-sjg@chromium.org>
- <20250501010456.3930701-18-sjg@chromium.org>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250501010456.3930701-18-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 05 May 2025 14:37:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,26 +102,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 5/1/25 03:04, Simon Glass wrote:
-> If there is no network support it doesn't make sense to try to read
-> these variables. Add a condition to handle this.
+> > From: Bruno Leite <brule@prevas.dk>
+> > 
+> > 
+> > Currently rpi5 uses a generic rpi_arm64_defconfig file that builds rpi4
+> > devicetree. Add a defconfig that is specific to the rpi5 building the
+> > now available upstream dts for that board. The defconfig makes use of
+> > defconfig including that is now available and only changes the DTS
+> > related config.
+> > 
+> > It is also necessary to add a more specific u-boot.dtsi to rpi5, since
+> > due to the ARCH_BCM283X config it will try to build the
+> > bcm283x-u-boot.dtsi and break.
 > 
-> This is needed so that env_get_ip() is not called when it is no-longer
-> a static inline, but included in net/ code.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v1)
-> 
->  cmd/elf.c | 41 ++++++++++++++++++++++-------------------
->  1 file changed, 22 insertions(+), 19 deletions(-)
-[...]
+> My question is, can we not adjust rpi_arm64_defconfig to be generic
+> enough and not have a problem on Pi 5 due to the default device tree?
 
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
+I'm not sure I quite understand the question, but in order to not build
+bcm283x-u-boot.dtsi we would either need to:
 
-Thanks,
--- 
-Jerome
+1-) not set ARCH_BCM283X for rpi5
+2-) provide a higher in hierarchy u-boot.dtsi file
+
+The first one would require a rework of ARCH_BCM283X into some closer to
+the machine config, but that would probably cause some duplication of
+files and configs, as rpi5 shares lots of things from that ARCH with
+other rpi machines. Maybe make bcm283x-u-boot.dtsi more machine-specific,
+probably by duplicating the file to all the machines that need it (I think)?
+
+The second option is what I proposed here. Maybe I'm missing some third option?
+
+I believe it would be possible to make rpi_arm64_defconfig more generic by
+removing configs such as DEVICE_TREE and ARCH_BCM283X from there, causing it
+to be a "include-only file" of sorts that no machine should actually build and
+boot, but that would not solve any of the issues that the rpi5 has, as it would
+still need a defconfig of it's own defining both and the u-boot.dtsi in order to
+not build bcm283x-u-boot.dtsi
+
+------------
+
+Regards,
+Bruno
