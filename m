@@ -4,63 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3572C3ABB6
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 20:19:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA51C3ABB6
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 20:20:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37A248210D;
-	Mon,  5 May 2025 22:19:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 913218210D;
+	Mon,  5 May 2025 22:20:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Hi2Es/a4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l6XCCN1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 197D58214A; Mon,  5 May 2025 22:19:28 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8244F82163; Mon,  5 May 2025 22:20:18 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7FB88210A
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 22:19:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58AB68210A
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 22:20:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 55bef74e-29ee-11f0-a9b7-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 55bef74e-29ee-11f0-a9b7-00505699b430;
- Mon, 05 May 2025 22:20:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=LHXaQkQNdQFiHZKRnFF6CBqSydDeqbTD5qYT5neiA2Y=;
- b=Hi2Es/a4zuJDcbMIijJM4y3MMq/+YM4nEKGvWX0vt+IbLL2TURSqAggXIO6sxnzczocWxFXZ4uuBn
- +YnJVr0jqlX93JYChKB36pxozGvhoY/H9e3HNVzNZW1eGNONAlZH+Av0KLTCcsXqPxgIcfppftc96f
- llMn12E7+B/j4l7XdYJVfUTkbACtHZ0WDrp58V1LviNGp+vGFn7nWeQZh4wuJ9zT8xJXHMTVc3+H/N
- zrYsKQ8mIxgRcqifTvBFHz7rbCNZHkd5/6TyzA9V6qwBYXQXyuaolcOkCCAZPwWorFboVeDaVaNviu
- ZRPOZZF55keDH9x9eebFbrjWpmjG0iw==
-X-KPN-MID: 33|f0UFvFXPemRseLAu3e5vxFDQqDUmv45gIc+8Cad7uiRqZcKzZjn8Tx6I3ddOEZn
- Z9crlhUfWGhFkxUUqgr0q7NfJ62FP5Ev48FibKUCNjPQ=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|Xf+SL8vIJ9FCwsNhMrZiQnn1vhElvNGkDOv96vY0LbVyN/AutRQ/Enk6ChomR+f
- PDkmETVFvHlN3F07NCZ7sRg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 3cd40906-29ee-11f0-99f8-00505699772e;
- Mon, 05 May 2025 22:19:25 +0200 (CEST)
-Date: Mon, 05 May 2025 22:19:24 +0200
-Message-Id: <87zffq95f7.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Tom Rini <trini@konsulko.com>
-Cc: ravi@prevas.dk, brunosampaioleite@gmail.com, u-boot@lists.denx.de,
- probinson@gmail.com, mbrugger@suse.com, clast@prevas.dk,
- brule@prevas.dk, pbrobinson@gmail.com
-In-Reply-To: <20250505134843.GK1261075@bill-the-cat> (message from Tom Rini on
- Mon, 5 May 2025 07:48:43 -0600)
-Subject: Re: [PATCH 0/2] Add rpi5 specific defconfig
-References: <20250502113556.134731-1-brunosampaioleite@gmail.com>
- <20250502144031.GT1261075@bill-the-cat> <87frhj5r32.fsf@prevas.dk>
- <20250505134843.GK1261075@bill-the-cat>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-60638c07cabso2622968eaf.3
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 13:20:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746476415; x=1747081215; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CU38Ee5Gr0o4EJW1sdL4gIrWWugvvnl6tNodY4zaCO0=;
+ b=l6XCCN1yKr5uhH94l5rLuVLN2VtUVUwr0huNwtF5w0MVeZbFJZ7gNeWEpLbwF2/o0x
+ RmoqQ8aetiqgndU7ZhDGbCsAPVl2Mb9aTqmB7xWElepeyuUiI3ugaN1K/xfFY8dKi4vl
+ gFtN0jj6t4aqa8t8m9m0ySQn2qHjMnbJc8UmA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746476415; x=1747081215;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CU38Ee5Gr0o4EJW1sdL4gIrWWugvvnl6tNodY4zaCO0=;
+ b=ixdfC31CUJB7NBlBJ9mxx3L71IUEBUIk7BHF+H7cVSniihUY+5o7Si+DrTdOv0hUcj
+ EOo9VKokWBf4hYXxkvYNwf4R+Vap5yDBeTlXNQYwIbdkZCFLCcoeJrgZg1Wr8Z2ELhVi
+ KD5liMNhMqBxRaa1iTSS++EveztLcTpoO2xN9Tar+6RhTD8K7BQapbeAs7yS27BIoROQ
+ xhjDx3pnfcZ/tKfZPXec53r4WinCeC4YSLog3BmzbjoV370uPY631Fd65DIbQCg+vIAS
+ zNKWF29jKMKrtQ4U0KWuuneeBpijqkU2++YBOAf+LZOzpzlcn5suSRWiDZs/rouC5VBK
+ MP8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVW6pArCDMtXO1+qO0wTGeO7nAIQXoLuloCR/LKmxzvTvOOTKiDKADyU215aD6D2JI6acWMOS4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxataNt5mC+qB4bPeDBhOPkALjWRwzWEXgUBnamhG5PZ/J93Zz0
+ iBBMW9FjH+3yuSFLzo26wEcBtJ/2h/gQbFsdi4Ux0l7hSBnjdjH3OuaAWBalKq0=
+X-Gm-Gg: ASbGnctItYQXdS/8XzHIGU1y9Hsn03gHuvzIRGas8Nr/F0ZaORUVTswuLHsqyJe3H6H
+ 1hzIyFiceyoUBiqYVxDwgKHdEYPipGe9tIrLuLFP4/43W0jlSQDmocYF93qU6YALPFF0lXdw/MJ
+ etbNg+N887tKoHxx5oSPmFFUB5HY3jyQyTHpn6OkEKIuifC/ebHrEAddfD5XxHlgMZpwxb852oZ
+ uTlJfFHoVkvn0Ot+Xuidm7FbyPiji+wlddNRRqEZiMOiN2xBciw3s4PRAHmHDxZi4ggd+FXi+4i
+ xaIMupnNDCaL4VopfXpwnHksrw8i4m3ngDqLn7x6u3OtoxedJmcGaoTzOGN86dl1g3NfGimoIzU
+ NKA==
+X-Google-Smtp-Source: AGHT+IFBDkBvvx85Y3ddEm7SFa30P8/tjK4Q5+uwtsBSnrQrdXi9cX7/mprPfBXznL9QHtzY/6gNTw==
+X-Received: by 2002:a05:6870:f21a:b0:29d:c85f:bc8c with SMTP id
+ 586e51a60fabf-2dab3400f1fmr8831523fac.36.1746476415124; 
+ Mon, 05 May 2025 13:20:15 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-731d34d8c28sm1692279a34.43.2025.05.05.13.20.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 May 2025 13:20:14 -0700 (PDT)
+Date: Mon, 5 May 2025 14:20:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Bryan Brattlof <bb@ti.com>
+Cc: Wadim Egorov <w.egorov@phytec.de>, Nishanth Menon <nm@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Garrett Giordano <ggiordano@phytec.com>, Apurva Nandan <a-nandan@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] arm: dts: k3: require mandatory firmware in binman
+Message-ID: <20250505202012.GA51730@bill-the-cat>
+References: <20250429-non-optional-v1-1-b4cad3bc7789@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="sQ1YjgBm4qxM875B"
+Content-Disposition: inline
+In-Reply-To: <20250429-non-optional-v1-1-b4cad3bc7789@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,58 +101,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Mon, 5 May 2025 07:48:43 -0600
-> From: Tom Rini <trini@konsulko.com>
-> 
-> On Mon, May 05, 2025 at 11:45:05AM +0200, Rasmus Villemoes wrote:
-> > On Fri, May 02 2025, Tom Rini <trini@konsulko.com> wrote:
-> > 
-> > > On Fri, May 02, 2025 at 01:34:33PM +0200, Bruno Leite wrote:
-> > >
-> > >> From: Bruno Leite <brule@prevas.dk>
-> > >> 
-> > >> 
-> > >> Currently rpi5 uses a generic rpi_arm64_defconfig file that builds rpi4
-> > >> devicetree. Add a defconfig that is specific to the rpi5 building the
-> > >> now available upstream dts for that board. The defconfig makes use of
-> > >> defconfig including that is now available and only changes the DTS
-> > >> related config.
-> > >> 
-> > >> It is also necessary to add a more specific u-boot.dtsi to rpi5, since
-> > >> due to the ARCH_BCM283X config it will try to build the
-> > >> bcm283x-u-boot.dtsi and break.
-> > >
-> > > My question is, can we not adjust rpi_arm64_defconfig to be generic
-> > > enough and not have a problem on Pi 5 due to the default device tree?
-> > 
-> > Not really.
-> > 
-> > What we want is to have CONFIG_DEFAULT_DEVICE_TREE to point at the
-> > rpi5's .dts file, because we really want to build that and not some
-> > "random" dts file that doesn't have anything to do with the hardware. I
-> > know that kinda works for the setups where the .dtb built in U-Boot is
-> > not used for anything, but in our case, we really do want to use the
-> > .dtb from the U-Boot build - we inject various U-Boot specific stuff via
-> > the EXTRA_DTSI mechanism, e.g. public key for kernel verification.
-> > 
-> > And due to CONFIG_SYS_SOC being bcm283x, and bcm283x-u-boot.dtsi
-> > referencing nodes that simply don't exist when building
-> > bcm2712-rpi-5-b.dts, the build breaks.
-> > 
-> > Perhaps the real problem is CONFIG_SYS_SOC being bcm283x for rpi5? I
-> > don't really know why rpi4 is both bcm2711 and bcm2835 and what the
-> > difference is, but rpi5 only seems to include a bcm2712.dtsi which does
-> > not include further dtsi files.
-> > 
-> > If rpi5 has nothing to do with bcm283x, then perhaps a better approach
-> > is to ensure that CONFIG_SYS_SOC is bcm2712 when building for
-> > rpi5. Something like adding a CONFIG_TARGET_RPI_5 choice and adding a
-> > 'default "bcm2712" if TARGET_RPI_5' ?
-> 
-> OK, so I guess my next question is, is rpi_arm64 useful enough in the
-> end for Pi 3 and Pi 4? I would have expected that it doesn't matter what
-> tree we build in to U-Boot as we would be using the one passed to us by
-> the prior stage firmware, and then update that at run-time as needed.
 
-Works well enough for us on OpenBSD.  And it would be nice if
-rpi_arm64 would work for the Pi 5 as well.
+--sQ1YjgBm4qxM875B
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Apr 29, 2025 at 03:01:56PM -0500, Bryan Brattlof wrote:
+
+> TI's Foundational Security (TIFS), Device Management (DM) and Device
+> Management and Security Control (DMSC) firmware are required for a
+> successful boot. Remove the 'optional' flag so binman will emit an error
+> if these firmware components are not found
+>=20
+> Signed-off-by: Bryan Brattlof <bb@ti.com>
+
+Can you please rebase this to master? Thanks.
+
+--=20
+Tom
+
+--sQ1YjgBm4qxM875B
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZHXwACgkQFHw5/5Y0
+tyy2OQv/QZe5jgWJGOktJ+cR693njnEqeFEZBtRndojjLKNu40Xch3sYusADTy4C
++REClXm7ZXe1bteEWaigtYxsiiBmbgsHgPt5Ge9E2gvv9MHoJfnifHq6UZg/rsrA
+O3P4+5WHtS4jSeMqPInZsYH+rdjxLrGvuvAOhKNgn6AJAnL7tbJlr2PDKmLYN0bm
+awBroEfLhQXQtM+bMEnwiDf8rnBxqtmscT9DnmfNPZ1Msd3e5zZrlkAmTm8PwVi4
+NCMKpX0KPNawPh1LQRpMbr23vP/aJyvn3B81LPJQyepm4+qd2GptqghgjcldQMem
+4JgPyVVr8hDo6oNqFmlpPV2g8epPOyq5d4H5PVGUbrEpXrIFsMgoBJCQvazH6g3Z
+InhzFypNRBRH7qIQbA0eyqVYdz8gkS4DaH8wnT43MTHFDf8HQSJpk/iKE+7H3utv
+yRXkwXyiTipS9Y8NzIja1ewMROC3n3TNjj6t/+wET127Cp2jPthHr/UmUb7X7hwJ
+UWE5Sdhy
+=4BOB
+-----END PGP SIGNATURE-----
+
+--sQ1YjgBm4qxM875B--
