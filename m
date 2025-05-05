@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B3DC3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 19:55:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A6AC3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 20:08:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D75C982161;
-	Mon,  5 May 2025 21:55:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF6048210A;
+	Mon,  5 May 2025 22:07:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WU2fGaQs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YSFlvvyT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B5FD82163; Mon,  5 May 2025 21:55:00 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 26334820EB; Mon,  5 May 2025 22:07:58 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DFF88215B
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 21:54:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D67EB8210A
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 22:07:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72ec926e828so1343168a34.0
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 12:54:57 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2c2ada8264aso4030812fac.2
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 13:07:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746474897; x=1747079697; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746475674; x=1747080474; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6nBclmiOcBQ6rB+M28AU7+b/+CJG4PChRTkl0cAwvD4=;
- b=WU2fGaQsqAZkbudSWRweN5t7TfZqbpNrqkkYRlKm6L1JIVpeiUnsuydl44AL8HYC7Q
- p+Z7S05M/3OJbsPVfI2cN4MUX6VCtn4/Mo3g77C21XkrO4AxFx4l1B8fVBEYzet6D/Ul
- wBys39kE5F2LtYTfnnoaaen2NK7U5vkdnHqzQ=
+ bh=1tCcuyD5oUtVRbP5wOIs51M049uqd8PFzGjDTGlcJwI=;
+ b=YSFlvvyTRjKAdT0xUjr3dVoqFG/JcHd5FXue4flnB2OiAxG4cL0aIL6C/zJPSoYoKm
+ dE/gaXAY2Siys2ciW4VwNw9SBUoDs65kH6UbH6vxxzDIvO+BqGFwQ3FDKVEDr9S3Wwfa
+ WPlMmChJvMqfJQwGi4YwPZk1Qc+QFjFWwyFh4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746474897; x=1747079697;
+ d=1e100.net; s=20230601; t=1746475674; x=1747080474;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6nBclmiOcBQ6rB+M28AU7+b/+CJG4PChRTkl0cAwvD4=;
- b=YA45E733HRsb0zQbWJXmt/9gQk0NuqZL0+9MTXqP+2eaJqsTmAuIx/jO/7uDWHG7kL
- fUOupW0s01lXve8cMQxH1FaRnjNibO8uBdTgTP5ommah4sW2osJCAMFeWfXS0/QlInOd
- 2DkwfgFFamwjnwLNhDg1O6E1GOnsGngCvqfRLbURQMpOE2VWimQFyJg+eBpaXWgI2wNV
- vlK8ES/HlMjf2RMhsVZK9peU/e74uoBErFkVJfmNWlMPVrV33HT1U+U0UoVCPH0VKs3p
- gYOANp9BvCRlUO4nlx+vBxc05uYcWf6I7CKabjURibJn/EWWlKyl8rnK1ZcmZb8aMUKA
- qwAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXQtah7kAAuCunOMWriRk5Y3pfc1+xj4ZREJf47HJYNU42vaSU72FsPgKFqg3mJBmNQ5kHDpo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx+0NuCpBw37cIvJLdPUs2qFVhGkSloUHr050byyzcoR7lm7dWZ
- eiT80HRIDz3PPaTTyqko/9bmT7ThrRVPtCpWXB1bIUz7sIHs9y7AXdUa/y2f488=
-X-Gm-Gg: ASbGncvyvjIX74iPrTGdyAUUj6k840JXtdEjzwS/zxVOppgWnjADQ+dODgP2Eu4PggH
- 8gH8E9DCt3s1GNfsB2fme94nnNM5mbOVgw2x9XpWVLfKmxycJzwUw+pMp/IfV4DVh9MbzjZqJ6w
- udg6F9Xm3yrZECNhMx1gPHo+iCbQi3J2nAAo4l3BBl/c4DMQHAZvnPeQLHB/17XEbh6l9aexI0/
- 7gEkf+qg3JoALEEo+fVZzJe4S8uMmomP+s8YvqEtbMb6tPz/b2AvLJTFIizEkJufPP5C+ZSbnpn
- g91btMGKRVmQpdfB4LZxa5CIpqRzB+hXs19ojrn6DWY1ytAS6K2G5zd/8vkPxoL58Ti1c3TNPBu
- NcKweaWmcR0Uq
-X-Google-Smtp-Source: AGHT+IHU+Z/VAK4wt3bxMkj3hf7TV1YI0UrakhTAO9drNbuXlfRmsZGVwFUWLnWO9AAc77CvWhfefA==
-X-Received: by 2002:a05:6870:d6a5:b0:2c2:2e8e:2030 with SMTP id
- 586e51a60fabf-2dae83838fbmr5332512fac.23.1746474896700; 
- Mon, 05 May 2025 12:54:56 -0700 (PDT)
+ bh=1tCcuyD5oUtVRbP5wOIs51M049uqd8PFzGjDTGlcJwI=;
+ b=rWwEXBM/n1fHmOp5MjsyawQ6woXhTMXw5RxQE7ZFLtEaNdLHuBYRg3H5DNel+BqQ9J
+ 8PfAMTShuD5X4cRAPlDnWq+uJTgP8/OcnW9kojkdYmzeLygkBUApL7vZEhJ6JpuJIeKY
+ wCi5Fr3indyjF8A0+Mn+4bB66PcFXTLtWFK7lNx5Id/MkBXO0hbj3E0XjQ2tWITPAqiz
+ 5j8PKL3xm4Fcp5KgLq+u+whhHHo8e/TOYfIYpmkaVy7Te1LwU3z545TRHElAyXFjK39X
+ YRq1OmGNSX/oVVN3lD+brY/ayqT8fQBXF4eNU4yvLZMNMI+hZus8Otv4ZonFOZd9Pans
+ P0PA==
+X-Gm-Message-State: AOJu0Yz51y7qql9QZxMH9yq1uZmut5kBg8Y/w6jQd/miHTAIES2HWY4B
+ MbZGTknESyHNaJwOqYXibUB8sbw2Nq/egQYpmc+pHtnreKmhkABtge+hqNKurBsVge+RlE+T7RP
+ KN+A=
+X-Gm-Gg: ASbGnct4DRK1ojTBjz5hjdEKOuhDWRTcPQ7RTP4CUNpSFq1aGgyC6mRKCbc3iuNfIIO
+ ItxefagfBbm34ZqoyY60kwN6ZDxLyAM4HqSBw5uTm1kFxlmlwonjnEhck+8XdH2XFzCmFVh8GUi
+ vH49SBed83vWB+bZ6CwnyXP7cil8nQ39uhq2QzQdWHXZ6Cq5PqwCLmMATecuT0337Lq8foElBlx
+ c1hPH3jkYYIbTMYkD19QuJfmC7lwIhRWTFMiyTf2GPnoQttKC9oz1uiaa1NNXheu9izOT61aMzg
+ l+Ef4isQeSJ1q5dycTH/tlZpMPSwg774OxiREznsJBRiMsRLZ+jtX/ne8kgZGPCK9TEwL7yjZt3
+ OIw==
+X-Google-Smtp-Source: AGHT+IFBV7L8oiHcGFDQK3SWswSPaVTaSxrLhckt0NzjzJRv2lQCpymScCm9u8nMJyTGZ1TAD+VaCg==
+X-Received: by 2002:a05:6871:1c5:b0:2c2:561c:47e3 with SMTP id
+ 586e51a60fabf-2dae835f3d4mr4008680fac.21.1746475674599; 
+ Mon, 05 May 2025 13:07:54 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2daa0edb233sm2153400fac.16.2025.05.05.12.54.55
+ 586e51a60fabf-2daa0e59e30sm2211748fac.3.2025.05.05.13.07.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 12:54:55 -0700 (PDT)
-Date: Mon, 5 May 2025 13:54:52 -0600
+ Mon, 05 May 2025 13:07:54 -0700 (PDT)
+Date: Mon, 5 May 2025 14:07:52 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [RFC 1/8] boot: EFI boot manager does not depend on BootOrder
-Message-ID: <20250505195452.GK5430@bill-the-cat>
-References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
- <20250421162555.1200687-2-heinrich.schuchardt@canonical.com>
- <CAFLszTiVuNqAzQ=hi5_Uq6Jo2EUJkDtE6_gDaU=LY8hAXiL8ww@mail.gmail.com>
- <279d1706-d140-409e-a74a-4f1d9eaef311@canonical.com>
- <875xieanhm.fsf@bloch.sibelius.xs4all.nl>
- <CAM=mAOnFrM_wa5SSWYWROoY+839L87A0cSx8-X=Hr=cHB9y3Tw@mail.gmail.com>
+To: Johannes Krottmayer <johannes@krotti42.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: ARM - Linking issue with binutils 2.44 (dangerous relocation:
+ unsupported relocation)
+Message-ID: <20250505200752.GL5430@bill-the-cat>
+References: <640da044-55d0-4491-afea-3e9d9dc0179e@krotti42.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NNwqhJrfDPa0+PJd"
+ protocol="application/pgp-signature"; boundary="pDUt71D98b0QcsLi"
 Content-Disposition: inline
-In-Reply-To: <CAM=mAOnFrM_wa5SSWYWROoY+839L87A0cSx8-X=Hr=cHB9y3Tw@mail.gmail.com>
+In-Reply-To: <640da044-55d0-4491-afea-3e9d9dc0179e@krotti42.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,163 +98,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---NNwqhJrfDPa0+PJd
+--pDUt71D98b0QcsLi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 05, 2025 at 09:51:52PM +0200, Heinrich Schuchardt wrote:
-> Mark Kettenis <mark.kettenis@xs4all.nl> schrieb am Mo., 5. Mai 2025, 21:0=
-3:
+On Sun, May 04, 2025 at 03:12:07PM +0000, Johannes Krottmayer wrote:
+> Hello U-Boot list members!
 >=20
-> > > Date: Fri, 2 May 2025 18:08:56 +0200
-> > > From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > >
-> > > On 5/2/25 16:49, Simon Glass wrote:
-> > > > Hi Heinrich,
-> > > >
-> > > > On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
-> > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > >>
-> > > >> The EFI boot manager bootmeth does not require variable BootOrder =
-to
-> > be
-> > > >> preexisting. It creates this variable.
-> > > >>
-> > > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.=
-com
-> > >
-> > > >> ---
-> > > >>   boot/bootmeth_efi_mgr.c | 21 +++------------------
-> > > >>   1 file changed, 3 insertions(+), 18 deletions(-)
-> > > >>
-> > > >> diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> > > >> index 42b8863815e..1669cbed5bd 100644
-> > > >> --- a/boot/bootmeth_efi_mgr.c
-> > > >> +++ b/boot/bootmeth_efi_mgr.c
-> > > >> @@ -47,30 +47,15 @@ static int efi_mgr_check(struct udevice *dev,
-> > struct bootflow_iter *iter)
-> > > >>
-> > > >>   static int efi_mgr_read_bootflow(struct udevice *dev, struct
-> > bootflow *bflow)
-> > > >>   {
-> > > >> -       struct efi_mgr_priv *priv =3D dev_get_priv(dev);
-> > > >> -       efi_status_t ret;
-> > > >> -       efi_uintn_t size;
-> > > >> -       u16 *bootorder;
-> > > >> -
-> > > >> -       if (priv->fake_dev) {
-> > > >> -               bflow->state =3D BOOTFLOWST_READY;
-> > > >> -               return 0;
-> > > >> -       }
-> > > >> +       int ret
-> > > >>
-> > > >>          ret =3D efi_init_obj_list();
-> > > >>          if (ret)
-> > > >>                  return log_msg_ret("init", ret);
-> > > >>
-> > > >> -       /* Enable this method if the "BootOrder" UEFI exists. */
-> > > >> -       bootorder =3D efi_get_var(u"BootOrder",
-> > &efi_global_variable_guid,
-> > > >> -                               &size);
-> > > >> -       if (bootorder) {
-> > > >> -               free(bootorder);
-> > > >> -               bflow->state =3D BOOTFLOWST_READY;
-> > > >> -               return 0;
-> > > >> -       }
-> > > >> +       bflow->state =3D BOOTFLOWST_READY;
-> > > >>
-> > > >> -       return -EINVAL;
-> > > >> +       return 0;
-> > > >>   }
-> > > >>
-> > > >>   static int efi_mgr_read_file(struct udevice *dev, struct bootflow
-> > *bflow,
-> > > >> --
-> > > >> 2.48.1
-> > > >>
-> > > >
-> > > > How do we know if the board is using EFI bootmgr? My understanding =
-was
-> > > > that this was a way to find out?
-> > >
-> > > The boot manager must always run.
-> > >
-> > > The check for the BootOrder variable introduced in commit f2bfa0cb1794
-> > > is a bug.
-> >
-> > Well, at the time the boot manager did not attempt to boot the default
-> > path.  So there was no point in running the boot manager code unless
-> > BootOrder (or BootNext) was set.  And of course before that commit the
-> > boot manager didn't run at all on non-sandbox builds that had the
-> > standard boot stuff enebaled.
-> >
-> > Anyway, I believe the thinking behind that commit is still sound.  As
-> > I explained earlier, I think that...
-> >
-> > > The boot manager handles in sequence:
-> > >
-> > > * Try to boot as indicated by BootNext.
-> > > * Try to boot as indicated by BootOrder.
-> > > * Try to boot default path for available media.
-> > >    This will add Boot#### entries and update BootOrder.
-> >
-> > ...doing this all in a monolithic sequence isn't the best way to
-> > handle EFI boot in the u-boot ecosystem.
-> >
-> > Your series moves the boot manager further down the list because the
-> > third step in the sequence has to happen late.  But as a result
-> > BootNext and BootOrder processing will also happen late.  So what
-> > happens if you have a board with two OS installations:
-> >
-> > 1. A generic Linux distro that boots via EFI.
-> >
-> > 2. Something like Armbian that provides an extlinux.conf file.
-> >
-> > Currently such a system will probably boot OS #1.  But after your
-> >
+> There exist an issue with the newly GNU binutils version 2.44 when
+> trying to build U-Boot at link time.
 >=20
-> This did not happen with distoboot. So migration from distroboot to
-> standard boot results in a change that you want to avoid.
+> Error output:
+> $ make stm32h743-eval_defconfig
+> $ make
+> [...]
+>    LD      u-boot
+> arm-none-eabi-ld.bfd: warning: -z norelro ignored
+> arm-none-eabi-ld.bfd: arch/arm/cpu/armv7m/start.o(c_runtime_cpu_setup):=
+=20
+> Unknown destination type (ARM/Thumb) in arch/arm/lib/crt0.o
+> arch/arm/lib/crt0.o: in function `_main':
+> /home/jk/Projects/U-Boot/src/arch/arm/lib/crt0.S:170:(.text+0x44):=20
+> dangerous relocation: unsupported relocation
+> make[1]: *** [/home/jk/Projects/U-Boot/src/Makefile:1824: u-boot] Error 1
+> make[1]: Leaving directory '/home/jk/Projects/U-Boot/build'
+> make: *** [Makefile:177: sub-make] Error 2
+> $
 >=20
-> changes it will probably boot OS #2.  And if OS #1 sets BootOrder or
-> > BootNext that will not change anything.
-> >
-> > So I think we need a solution where BootNext and BootOrder processing
-> > happens early, like we do now.
-> >
+> I have tried to fixed it with success. Simply added the assembler
+> directive ".type c_runtime_cpu_setup, %function" after
+> ".globl c_runtime_cpu_setup". under the path:
 >=20
-> As of today BootNext does not invoke the boot manager.
+> arch/arm/cpu/armv7m/start.S
 >=20
-> If BootOrder is set the boot manager may fail because not all devices are
-> detected as "hunters" have not been running. E.g. nvme scan and usb start
-> are only invoked after the EFI boot manager.
+> The binutils patch with cause this building error is explained
+> at least in the following commit in the binutils git repo:
+> 31ed3a9d691493486f6e32357d89a55229dbdc0a
 >=20
-> I originally suggested to probe all boot devices before the boot manager
-> runs, but users complained that this slows down their non-EFI boot flows.
-> This is why I now move it after all boot methods but PXE.
+> Extract from the log:
+>=20
+> "This patch emits an error instead, and warns in some other
+> cases, to encourage users to add the missing  '.type foo,%function'=20
+> directive."
+>=20
+> But I don't know if this only exist on ARMv7-M.
 
-Can we not see what BootOrder is and then ensure it's been "hunted" ?
+Thanks for the report. Would you mind submitting a patch to at least fix
+that case? It'll help in the future with other reports.
 
 --=20
 Tom
 
---NNwqhJrfDPa0+PJd
+--pDUt71D98b0QcsLi
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZF4cACgkQFHw5/5Y0
-tyxdvAv9ENajoHQkETiqgH4YEbP8gTFQYxG6tnDX1GNHMUoSIrHkJiZHJpXETnve
-T4FEQ+AuQuqHnd3V9PtoSMpfpBEIA8stkRQhXh3XZl+94DdZtGxiXTpwSKiT+4Mp
-h0rBLZbFRPj6FWYN+E4dNo9SQ9RUtjdgKMbcbVx5JC98qmWXfoiAYzxJoEG+qF7v
-sECmuKVEjMxYES/T7D7aXmOO+bE1E/M4wLw9p3O4cwBR550Mx3C71PpDjaY1EcsS
-SwSmiDxnlR//i/pmsQ44d6FMfiduOS9CEpbcjByC4DYuMP4vyIV3cCr73w/3b4rb
-yjE4RzM37nkaFK0egYW4HSIxWODeOtOnRjFtXjilGAPOM7SeeQz32//kkr8KU2Ei
-SeZxI+ivipVhJqj0gOOXBXnhy9mdnKi5EX6/r0cT97DqKgRPHSY0FRlVikIbVZOr
-QubRfzIXpIVu9QghltT1uVGO+LEZIZVlHrgfZntV9HP1V1YGQE1nciZlu14bOm5W
-D3cXPk2v
-=VtCd
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZGo4ACgkQFHw5/5Y0
+tyzvngwAkk8lHDYkDAIZiaztrFteiZpI9I8D01kLnmayjMaPMrjn6MsHYgfqEKWH
+0OA7Z0K083ntN0jasdgjd0osI9NmFfTquEWmjclFIrDppw2PZNVzIa9H+duuqqBo
+BG58es1uTFk5CWrCB8couzqvm0+eX7CCwsSn77qrDJJuWFhmtp72IHGQsQElTrJ1
+rZqWjU5ocPZMVTiLrhPaxKylQGw+zwByPB5DeNukbeV8AGICLhVS8UEnMRj2HVFY
+Kxo+JobTNq/QkFaHVg7fxjqDGmGsqUJxgQjvNr1sF62riA/TYbRvCnhGkxG52OGi
+uy4intTAHPtXVCiks2Lyni/AQeYBrSFhSB3ywUnti4TxhqEwgRMlxh2vYIswWXqY
+BR45kiM++lLaJtd72HyxJY1FljpMO6jj2Ii0r1a/AVfQ7LN6ipCMnmK5dJWskUB6
+Jl+vRzuI4G07mz/B+vk4ICh0+e0MZwkVxjjK9et7iUOxeFcIAVJyORK+QGcEs56Q
+PXy354wh
+=5foI
 -----END PGP SIGNATURE-----
 
---NNwqhJrfDPa0+PJd--
+--pDUt71D98b0QcsLi--
