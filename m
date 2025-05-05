@@ -4,48 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C4DBC3ABB0
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 14:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2773C3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:03:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA1FE82A64;
-	Mon,  5 May 2025 16:47:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 2F7A1829A1;
+	Mon,  5 May 2025 17:03:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="jhBZeeq6";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9ECA829E4; Mon,  5 May 2025 16:47:35 +0200 (CEST)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42a9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E51E0828C2; Mon,  5 May 2025 17:03:47 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA867829E4
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 16:47:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D8CB8212B
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:03:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Zrks02pwDzfJD;
- Mon,  5 May 2025 16:47:32 +0200 (CEST)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Zrkrz3DSfz4FN; Mon,  5 May 2025 16:47:31 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 05 May 2025 16:47:19 +0200
-Subject: [PATCH v3 2/2] rockchip: rk3288: do not generate u-boot.rom
- anymore
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7220064b2c=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 545B3IAF025904;
+ Mon, 5 May 2025 17:03:30 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=ugb5uRV94xfPzNQN0O3spC
+ W+mqbGb6cg7ZzoBcsgpD8=; b=jhBZeeq63POVYB4U6wkzPlZlXof5J9ui8vc7X0
+ O8f6A4ZmUf0bpMPvOaafcCSWA21iM0epnzlgY3/1XwHNrEvPypjuTt/79l3HLvw3
+ AOA3Gq2ceSVS3ZYg91FAoPrREZSNvUSwfRKFTJOOYVTYGnINc1p8U/kpqPXqZ+fg
+ AEXjFf1ZQlc1m74BaWxqNDjHmDUTW1aLR1eFkDdX+prd/i+SaFoH4knWy2NTcS5d
+ 7V/LOj3YvsxaUumHF8RxQthMLzpYyzzYL1akaKRNQi562PveVaDxabSk6tpoMWDM
+ HBBix6eAyOxZG/guu6xWJMk/LTOhjkOaINKk89olQPv0F0aQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dvq3w6qs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 05 May 2025 17:03:30 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9E9DC40048;
+ Mon,  5 May 2025 17:02:37 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F279FB33BD1;
+ Mon,  5 May 2025 17:01:24 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 5 May
+ 2025 17:01:24 +0200
+Message-ID: <d348e7e7-5969-40d9-93ef-ca7f318ebadd@foss.st.com>
+Date: Mon, 5 May 2025 17:01:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250505-has_rom-u-boot-rockchip-spi-bin-v3-2-75f23b3bd8d3@cherry.de>
-References: <20250505-has_rom-u-boot-rockchip-spi-bin-v3-0-75f23b3bd8d3@cherry.de>
-In-Reply-To: <20250505-has_rom-u-boot-rockchip-spi-bin-v3-0-75f23b3bd8d3@cherry.de>
-To: Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [PULL] Pull request for u-boot master / v2025.07 =
+ u-boot-stm32-20250505
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Pascal Zimmermann <pzimmermann@dh-electronics.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Christophe Roullier
+ <christophe.roullier@st.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
+ <vincent.stehle@arm.com>, <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-05_06,2025-05-05_01,2025-02-21_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,141 +90,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Tom
 
-This was only used on RK3288 Chromebooks and the EVB.
+Please pull the STM32 related patches for u-boot/master, v2025.07 = u-boot-stm32-20250505
 
-If it follows the same pattern as for RK3399 Chromebooks where their
-maintainer (Simon) agreed[1] to removal of u-boot.rom on the basis that
-the generic u-boot-rockchip-spi.bin is now enough, let's do the same for
-RK3288 and remove the last Rockchip users of u-boot.rom (and HAS_ROM
-symbol).
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/26081
 
-At the same time, remove HAS_ROM symbol from the RK3288 Chromebooks and
-EVB configs since they were used only for that.
+The following changes since commit 9dbe8d889546efd6c1a3470092588b9b6820158f:
 
-SYS_SPI_U_BOOT_OFFS offset in rockchip-u-boot.dtsi for the u-boot-img
-node of simple-bin-spi binman image matches the one used in u-boot.rom
-except for the EVB.
-The EVB doesn't have ROCKCHIP_SPI_IMAGE symbol enabled, so HAS_ROM had
-no effect anyway. Even if it had, this would not have been enough
-considering that SPL_SPI_LOAD symbol is not set, so U-Boot proper could
-not be loaded from SPI even if SPL/TPL does.
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2025-05-04 13:44:01 -0600)
 
-Make sure u-boot-rockchip-spi.bin has the same size of u-boot.rom for
-Chromebooks as that seems to be important.
+are available in the Git repository at:
 
-[1] https://lore.kernel.org/u-boot/CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com/
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20250505
 
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-Tested-by: Simon Glass <sjg@chromium.org>  # chromebook-kevin
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- arch/arm/dts/rk3288-u-boot.dtsi        | 24 ------------------------
- arch/arm/dts/rk3288-veyron-u-boot.dtsi |  8 ++++++++
- arch/arm/mach-rockchip/rk3288/Kconfig  |  5 -----
- 3 files changed, 8 insertions(+), 29 deletions(-)
+for you to fetch changes up to 9b74f86b683ef7ef86e19a0ab63d6a7346baf42a:
 
-diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
-index 2205caabc51ec4535bef3ab950d7ff5b421d8016..bb0078588fe819118eb0592e002e1708da7ce806 100644
---- a/arch/arm/dts/rk3288-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-u-boot.dtsi
-@@ -46,30 +46,6 @@
- 	};
- };
- 
--#if defined(CONFIG_ROCKCHIP_SPI_IMAGE) && defined(CONFIG_HAS_ROM)
--&binman {
--	rom {
--		filename = "u-boot.rom";
--		size = <0x400000>;
--		pad-byte = <0xff>;
--
--		mkimage {
--			args = "-n rk3288 -T rkspi";
--			u-boot-spl {
--			};
--		};
--		u-boot-img {
--			offset = <0x20000>;
--		};
--		u-boot {
--			offset = <0x300000>;
--		};
--		fdtmap {
--		};
--	};
--};
--#endif
--
- &bus_intmem {
- 	ddr_sram: ddr-sram@1000 {
- 		compatible = "rockchip,rk3288-ddr-sram";
-diff --git a/arch/arm/dts/rk3288-veyron-u-boot.dtsi b/arch/arm/dts/rk3288-veyron-u-boot.dtsi
-index 4f9c59c67573118dba716e46f21f9b5e303b0c28..89093e2311c758b78454710043aea7006533e5bd 100644
---- a/arch/arm/dts/rk3288-veyron-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-veyron-u-boot.dtsi
-@@ -11,6 +11,14 @@
- 	};
- };
- 
-+#if defined(CONFIG_ROCKCHIP_SPI_IMAGE)
-+&binman {
-+	simple-bin-spi {
-+		size = <0x400000>;
-+	};
-+};
-+#endif
-+
- &dmc {
- 	logic-supply = <&vdd_logic>;
- 	rockchip,odt-disable-freq = <333000000>;
-diff --git a/arch/arm/mach-rockchip/rk3288/Kconfig b/arch/arm/mach-rockchip/rk3288/Kconfig
-index e563bf455e6803809c7d7612bb3aa85372034292..128ee362f8a8af69861030df7b63cf0e5a368956 100644
---- a/arch/arm/mach-rockchip/rk3288/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3288/Kconfig
-@@ -5,7 +5,6 @@ choice
- 
- config TARGET_CHROMEBOOK_JERRY
- 	bool "Google/Rockchip Veyron-Jerry Chromebook"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -16,7 +15,6 @@ config TARGET_CHROMEBOOK_JERRY
- 
- config TARGET_CHROMEBIT_MICKEY
- 	bool "Google/Rockchip Veyron-Mickey Chromebit"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -28,7 +26,6 @@ config TARGET_CHROMEBIT_MICKEY
- 
- config TARGET_CHROMEBOOK_MINNIE
- 	bool "Google/Rockchip Veyron-Minnie Chromebook"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -41,7 +38,6 @@ config TARGET_CHROMEBOOK_MINNIE
- 
- config TARGET_CHROMEBOOK_SPEEDY
- 	bool "Google/Rockchip Veyron-Speedy Chromebook"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -54,7 +50,6 @@ config TARGET_CHROMEBOOK_SPEEDY
- 
- config TARGET_EVB_RK3288
- 	bool "Evb-RK3288"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select TPL
- 	help
+  configs: stm32746-eval: Fix console cmdline (2025-05-05 15:51:47 +0200)
 
--- 
-2.49.0
+----------------------------------------------------------------
+- STM32 MCUs:
+   - Fix console cmdline
+   - Add support NT35510 panel controller on stm32f769i-disco board
+- Fix dfu alt buffer clearing
+- Enable scan and start for AB schema on STM32MP15 DHSOM
+- Add stm32mp2 support for dwc_eth_qos
 
+----------------------------------------------------------------
+Christophe Roullier (1):
+      net: dwc_eth_qos: add support of stm32mp2 platform
+
+Dario Binacchi (4):
+      ARM: dts: stm32: add bootph-all for dsi node in stm32f769-disco-u-boot
+      ARM: dts: add stm32f769-disco-mb1166-reva09
+      video: support FRIDA FRD400B25025-A-CTK
+      configs: stm32f769-disco: support FRD400B25025-A-CTK display
+
+Pascal Zimmermann (2):
+      config_distro_bootcmd: make possible to substitute 'part list' in distro_bootcmd
+      ARM: stm32: env: Enable scan and start for AB schema on STM32MP15 DHSOM
+
+Patrice Chotard (6):
+      configs: stm32f769-disco_spl: Fix console cmdline
+      configs: stm32f746-disco_spl: Fix console cmdline
+      configs: stm32f769-disco: Fix console cmdline
+      configs: stm32f729-discovery: Fix console cmdline
+      configs: stm32746-eval_spl: Fix console cmdline
+      configs: stm32746-eval: Fix console cmdline
+
+Vincent Stehlé (1):
+      board: st: common: fix dfu alt buffer clearing
+
+ arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi |    6 +
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi               |    1 +
+ board/st/common/stm32mp_dfu.c                          |    2 +-
+ configs/stm32746g-eval_defconfig                       |    2 +-
+ configs/stm32746g-eval_spl_defconfig                   |    2 +-
+ configs/stm32f429-discovery_defconfig                  |    2 +-
+ configs/stm32f746-disco_defconfig                      |    2 +-
+ configs/stm32f746-disco_spl_defconfig                  |    2 +-
+ configs/stm32f769-disco_defconfig                      |    1 +
+ configs/stm32f769-disco_spl_defconfig                  |    3 +-
+ configs/stm32mp15_dhsom.config                         |    3 +
+ drivers/net/dwc_eth_qos.c                              |    4 +
+ drivers/net/dwc_eth_qos.h                              |    1 +
+ drivers/net/dwc_eth_qos_stm32.c                        |   11 ++
+ drivers/video/Kconfig                                  |    7 +
+ drivers/video/Makefile                                 |    1 +
+ drivers/video/novatek-nt35510.c                        | 1253 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ include/config_distro_bootcmd.h                        |    7 +-
+ include/configs/stm32mp15_dh_dhsom.h                   |   33 +++++
+ 19 files changed, 1335 insertions(+), 8 deletions(-)
+ create mode 100644 arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi
+ create mode 100644 drivers/video/novatek-nt35510.c
