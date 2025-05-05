@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CEB1C3ABB6
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 23:36:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB518C3ABBF
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 23:36:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47F228211F;
-	Tue,  6 May 2025 01:35:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91FC9829D4;
+	Tue,  6 May 2025 01:35:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t8vs1FCd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F5tj6ZNE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D383F829D4; Tue,  6 May 2025 01:35:36 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id E8822829D4; Tue,  6 May 2025 01:35:37 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A76D58294C
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 01:35:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D655680079
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 01:35:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-401c43671ecso2470429b6e.0
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 16:35:33 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3feaedb4085so2984459b6e.0
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 16:35:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746488132; x=1747092932; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746488133; x=1747092933; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bKUehVCk76+I3gymxAKHREqRWNDqkY1BhoYz14tvEtk=;
- b=t8vs1FCd5u+yHMOeg8JXExJCDGejRf4b88Uc+IBNjE4i76IqhqyagvsitT16CfnNLg
- UQDov8JWsOlsBb1ooEc6wH8AolvY/kF6WdGd20tRW8G9y55saVhEnwSMNyZNUyYYIVOt
- nnBg5mP7tapgsCEbF1l+ayJO1hs4EQASHTVwg=
+ bh=ZmLCDLH+7mcMZo/lRt4+Lyt3XvpaC12sgHU1RuWhyWM=;
+ b=F5tj6ZNEzdZg/6mVogMLfCYMyUl1fVKQNPnpsJcuvPOG0Ex/mlEqUCKuwWAeFAEOjg
+ hKMSuH740fOq8AoqsTsnSgkGEIv6DzKP/Iiw3cEto0OYAhen8qUHFkCwY8CGLG5DGJU5
+ +lsGYynl2a+v+JstI7h4NB/qCTfiqzYVL21Qw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746488132; x=1747092932;
+ d=1e100.net; s=20230601; t=1746488133; x=1747092933;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bKUehVCk76+I3gymxAKHREqRWNDqkY1BhoYz14tvEtk=;
- b=F1m/n2yXcK3iMNLMdpY77IzQASKSMKbGZyKTjT/a9yka7zOXJg6CK1kRqT8Nrsztoa
- 7H1DXyYbrjFnRvq7586rlIKcO+vDEysLrfGidA8/NngGwftMQtsrous1a2+oaUMojwK4
- Eopg/omT02oSj8nucdikyC6iI0WIQmqEKVu2BYb8M2TyS7jEuT5qM7acJokEklW1YspI
- /fiExoWG1/ABpQHdM5YKS2SsvE1p/MicknI+du5UrrO4KnArae7i14fNoxc3h/2V+SdG
- Wfuhh3e/xw6NgnFFuVVJQY3/O7qMzc+WXaD+33KOcB0he0riNSR3lUoMCNz5GvnUOFO1
- J6Yw==
-X-Gm-Message-State: AOJu0Yx3TH8db/ctx9ntWwUI86jkv6s6kpnsG+lzC1yGpzneozrf4F38
- GhxK0f14iJPaD8SkQ75F7nXtVuUwaAC7FEQvEAoldW6e6sbLLpe0MtvKpHCiSTKwqa8ydUKGyvQ
- 3
-X-Gm-Gg: ASbGncvhNOlz5b2p59w6xAREhk8fi1ZCP4sh06X+A3l4dDTgy6HxtsfRGCKOYS1W+Oh
- YKBHthcHH6vMMyxAXXh0ThuSgG+YmSQHGUJcXhSbev1umPQIBH4B1dJ5pvlLrpSbQToxDkRZOq9
- n3jGDFSyeP3AZHGgrs3Q+6YoFgXVbW2TzXqxAPUno1khF2JsEHe60+oSz5CXjbkwXnuosdA8J/G
- +t6aRsO5/Th/Ly/588C+EyRP2P08MRj6i8iQxCvMGwc3o+kilUwS9ikwEXjv+wyRq+APlWtTH7Y
- Rb3x2ulASQe3wI8gskxhOCkpo2i2DjJ20AgfjIPUfVK03ydv3m11yZIRCnTLba+rrTiy9p+47Jp
- j
-X-Google-Smtp-Source: AGHT+IEXldEAcr8nvuf935PkRXzmnfiDUOOeiQbjT39aok+DpOLPbTLt31xSpeaXliQUlO+X5TGp9A==
-X-Received: by 2002:a05:6808:2192:b0:3f4:e3e:10c5 with SMTP id
- 5614622812f47-403686f2ac9mr885591b6e.0.1746488132319; 
- Mon, 05 May 2025 16:35:32 -0700 (PDT)
+ bh=ZmLCDLH+7mcMZo/lRt4+Lyt3XvpaC12sgHU1RuWhyWM=;
+ b=g98pI10Po3I6RSavmqyX6bUJwnHcJA+/K0gRuYV/vmmzXs2L9hB5K7C87SAIQ8tAXV
+ WGouE9sP7QzPuyUTw1hbVphi2PNWs0WUEJPFjlMcAIKCMz10nnXl+t0OIzC9BDYQ8Clc
+ q7VaP92U+Y4AKGIpvnbn2xAUnvney+DSecobHKme9JiweOny6249i/zkWLcIHf40m499
+ RmfMjk/US+U2HNsL2RMIk8aMjsY7li6wDGpL47JA/9jSnQPw3rVtbww9KBfuXHmBzPLM
+ q9t9Asr0ny0zZL5H+gSnzzHdSS78GSRXZ8/tNJuVX1kR88k1yS8KqC8EsCrfR2PoHZXS
+ 0pQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUtaeQZQnju2/VoZhg8na8/OpgbLFTZ0S5Nq/66bh81jeTCWpjnMG5iSGUpkAIPbUtXf0/GpMc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpN1HP0MfLcXxB0H2vB72/A2kDrScGWwIxaTKG/eKhNVSH4j0z
+ PsdMTeiTcW7ZSENv5DylgsoOAU1zHtpMlYhgtE+Mn3yoT8YBuOTrE631DkmR6zo=
+X-Gm-Gg: ASbGncv2TNWinQEUpkJynpXK9ckLVkSSyvDyunPKttO1wWefMMvQW4pTaezdZ0bT4mq
+ gq9mnoqOzxFK2eQXEJECUL6EgVIQmwSQApyBfmNgwKRpoqSwa271Tb+0BM9yfuZ1tSPkZVmHVF1
+ nwaAYYmV6WdVga15LicNJsXCsa1/HIh7427iM/zdLjChawQV2nIrMe3uk2mN6t1yVphh3eC/crY
+ 1bOliH7ElCDvPEi5hrS0znaMc6Mu12Nx0xgmF0BfB19IDfuaQf9kmeMTdWe0S8MEhbjaR7VG2yf
+ oxPymId05ToYDz2KwQzdqfdCspr0UTzjYcMBfaIDBxkLiFgjgUt5KcUpWZhwEDpHmkvR3ANKAnT
+ T
+X-Google-Smtp-Source: AGHT+IFQUJ8YhisXsdNl5EtPkJioHW2Se39uOjYAvkCcITgSbcPnZtHGg2InKAknilBxO/d0+a2OVw==
+X-Received: by 2002:a05:6808:17a2:b0:401:e61b:5f76 with SMTP id
+ 5614622812f47-403698b6dd0mr425155b6e.33.1746488133684; 
+ Mon, 05 May 2025 16:35:33 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7fe85a4sm1913408eaf.39.2025.05.05.16.35.31
+ 006d021491bc7-607e7fe85a4sm1913408eaf.39.2025.05.05.16.35.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 16:35:31 -0700 (PDT)
+ Mon, 05 May 2025 16:35:33 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot mailing list <u-boot@lists.denx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-In-Reply-To: <20250429120232.3874362-1-jerome.forissier@linaro.org>
-References: <20250429120232.3874362-1-jerome.forissier@linaro.org>
-Subject: Re: [PATCH] cmd: spawn: reject 0 as an invalid job ID
-Message-Id: <174648813155.69658.12453402397052680586.b4-ty@konsulko.com>
-Date: Mon, 05 May 2025 17:35:31 -0600
+To: w.egorov@phytec.de, u-boot@lists.denx.de, 
+ Daniel Schultz <d.schultz@phytec.de>
+Cc: mkorpershoek@kernel.org, anshuld@ti.com, upstream@lists.phytec.de
+In-Reply-To: <20250429120818.3365069-1-d.schultz@phytec.de>
+References: <20250429120818.3365069-1-d.schultz@phytec.de>
+Subject: Re: [PATCH] configs: phycore_am62x_a53_defconfig: Remove
+ CONFIG_SYS_BOOTM_LEN
+Message-Id: <174648813249.69658.14084767046473031103.b4-ty@konsulko.com>
+Date: Mon, 05 May 2025 17:35:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,38 +99,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Apr 2025 14:02:18 +0200, Jerome Forissier wrote:
+On Tue, 29 Apr 2025 05:08:18 -0700, Daniel Schultz wrote:
 
-> Job IDs are positive integers greater than 1. 0 is not a valid job ID,
-> therefore fix the comparison in do_wait().
+> This config was defined with the default value of 8 MiB. However,
+> the default value is different when CONFIG_ARM64 is enabled and
+> should be 64 MiB.
 > 
-> Fixes Coverity defects:
-> 
-> *** CID 550296:  Control flow issues  (NO_EFFECT)
-> /cmd/spawn.c: 172 in do_wait()
-> 166                     for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
-> 167                             if (job[i])
-> 168                                     ret = wait_job(i);
-> 169             } else {
-> 170                     for (i = 1; i < argc; i++) {
-> 171                             id = dectoul(argv[i], NULL);
-> >>>     CID 550296:  Control flow issues  (NO_EFFECT)
-> >>>     This less-than-zero comparison of an unsigned value is never true.
-> "id < 0UL".
-> 172                             if (id < 0 || id >
-> CONFIG_CMD_SPAWN_NUM_JOBS)
-> 173                                     return CMD_RET_USAGE;
-> 174                             idx = (int)id - 1;
-> 175                             ret = wait_job(idx);
-> 176                     }
-> 177             }
+> Remove this config from the A53 defconfig and use the correct
+> default config.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] cmd: spawn: reject 0 as an invalid job ID
-      commit: 0352eab7d373664c1c01b23154025b83ec0eadca
+[1/1] configs: phycore_am62x_a53_defconfig: Remove CONFIG_SYS_BOOTM_LEN
+      commit: 1750ba44d573b9e7de3b2b24205cc80ba5872292
 -- 
 Tom
 
