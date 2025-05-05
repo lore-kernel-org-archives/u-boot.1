@@ -4,82 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82D9BC3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 14:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B462C3ABB8
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 14:46:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1318682977;
-	Mon,  5 May 2025 16:44:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AEE6782977;
+	Mon,  5 May 2025 16:46:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WcXOcv5Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AJ5Br6R9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2E8A82991; Mon,  5 May 2025 16:44:33 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id E6B06829A1; Mon,  5 May 2025 16:46:30 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7583E8212B
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 16:44:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B32E38212B
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 16:46:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-401e77e5443so2804302b6e.3
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 07:44:31 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-72c40235c34so1237184a34.3
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 07:46:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746456270; x=1747061070; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746456387; x=1747061187; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S/TttMcPyDNLe+REumHGkvKZ+DzFaDfzT8RppQ38TNs=;
- b=WcXOcv5YAyzTQ9rMLEsWyijcI352CXzcmuRubEaUpvhs1OHxwza0L4VkonH7AUFIIq
- l9ZP/fvf5YsDeqXgfXkiOwaRtIpyGyXjSNtHMf1y2iDhm7/mChjOzo0CfdXgCgnkk2TZ
- g8R0nbDZeIk2iu1GHqXxfa4Q9bpABfJJYLMeY=
+ bh=wSzDY539U7Sb9oL5gAf9nZ3Rd5fPYJJe2KHorZ1ZF5c=;
+ b=AJ5Br6R9AT6jDmtpliXDHlJ2DM+5jWtgP9TuTTZEkcuJmnGKR1XQY0HjWPIKFldOrq
+ KAa2U7i5+f9F0Y2tA40h0Sd5KdPW2fyz4h2/rTmErCwzK6d6dS4+K1q+6SyHxYuHDgAv
+ gPU7S+qLzP5cQFQnIpv1scvAzl8LdvRjNcgPg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746456270; x=1747061070;
+ d=1e100.net; s=20230601; t=1746456387; x=1747061187;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S/TttMcPyDNLe+REumHGkvKZ+DzFaDfzT8RppQ38TNs=;
- b=KWAulsN+Fm8QwsQSf9I7BPgdnDV7t9wTPyM3+IX0+gsEI4//+idrvgDmDcWuPSI2br
- p7XQKuqFY79ZugsKMmmmLSqiXH1tpt4KiFZtOM4CZc3d5utY/z5rfsWD7kD95gHv/aMk
- lz+2VPmWE8vIHKulse99u39lEx28DbI0owhgzQHmcR7jipJ/fB0JD+Z5sD692aGKaNVO
- VO7/dqzzMq/FG4fia5qkUyyjPifRB9EPm9kbute5KkU0mS6vs6wudtrdfOM9L9VNuubJ
- oIIXq/y1TvUZCCejljybBO3q9pJk+/ujGZZlB7zsHFe8fbmlXkgfN84qhRN8MsdKEEdV
- qwEg==
+ bh=wSzDY539U7Sb9oL5gAf9nZ3Rd5fPYJJe2KHorZ1ZF5c=;
+ b=Gov73PUDFEnYru4WD5CRBvVmfPeEQ/15o0a9pa6F30NPCjlqbX1PwhmnhYvqCG3n9G
+ 6eCcVyZphn7gZrPHKyRojNXcy65p87VlbwiWvAuRDps9W2v30IBKun/faHGvmxFg8+Fc
+ 7W6MGH68l+659gc740FB8MKBOu7VO38K7G07woLXO2/7xTgdv2XtPsLWHP+XTr0j0E2k
+ wAazoQ/tfldkJ0fUD7qbfPuQRYmmOXXGF8CjWPJct3axvE9uva8gzFuZgdpsmkBJcDws
+ inScOGWHAQufgfbpfeACJOn6gicIjcS1Lx4jW0IMVo8MLxdVNwg8wxpV91WmJ97iXi+W
+ 12xQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXyLtkM5M82Uzbe3Hk53hHbbUK8aCWcasaLQ9I3Fvzu3kHMCInnmYhLl4hrV/ymVyBQ1YY8m/g=@lists.denx.de
-X-Gm-Message-State: AOJu0YydoWVbYpwDPUX67100giy3etZjAP+/uOqOsd+6gX/aL2ODMYG/
- 3Awn0aIa77ACDZCEaHj4nSJtuAz5sNhkPqOpLJ0ZbkxloEWJgKRm/dKVLloR/vc=
-X-Gm-Gg: ASbGncslVJs1NdTcKP+62z8s0Iy65ZT1PFwQuXUiJXvDP5xMhlXY/B/W35Y7qvK4N+8
- GDgfIq72QRVufppNwty6gzh1+C0D+DAvE5tomC8SOgiStXs+W30cW9tFI8JKT3jpu5SzW8+cDKW
- iQKeiyt9cn0mVvE/d+5iUk6q1PhgWIUKMeiZdePJH8XSBa784lF5bPXDp6na8a7CZfGdZSDeEkv
- rV0CPpmj0reQT2ulOb7BbdyxNxhSyLEKPb34wVGtz6tNHqPKdCMO+ISNI1j2CY2K3Tk5SKv+Sq2
- AzbgVBZPEQV+IZ5X67YeJLpwa1KSv+U6n4nTtisWeUVEDUc9y4MyXDoffMV/4OUT0lNS4XTedro
- tWQ==
-X-Google-Smtp-Source: AGHT+IE6uop2Vhiwk9XOsDdivNbCW2t78PQvNhKJ+9OeUeoTzNIVo9OAMsioV1BZeY9Ts8CZa92iPQ==
-X-Received: by 2002:a05:6808:251a:b0:3fe:f41d:465e with SMTP id
- 5614622812f47-4035a5daa20mr4650204b6e.37.1746456270226; 
- Mon, 05 May 2025 07:44:30 -0700 (PDT)
+ AJvYcCWv7PUC3Iaa9xfuhlc9oVR1PHuCjEJdZr1mdHJpgI/kJep+I6PokEtVxy5Re57Z9By4cvfwLsU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzrN9aYyGP5HAOPmfBUE0MNBapQh7uT5I4zC+itU8rQ8a8uORbm
+ 5ftyKMAnTy1iAKB8lWRqLXPQohPLJrtPQe2Fj+TURTXYNmUz3gyKcuwRJmIdz9w=
+X-Gm-Gg: ASbGncsNEGzRd5PJrmU1BM0HFp3RVNv+EmE0sah8ZG3X43uhpiUPOZBhuXlv8P+UEoB
+ xpUG0iotropoenAqMqaZZhCa389AmDv0LQOHrZNKpbutj9Q/G40Q+9F7/8zsYBGwRys0p84YOTp
+ RmO7QMApttbYNvLL4fUi1AhtSoxDR/gbK0bNX2HLPqhFBfR9CJbBWeDIR6wpfcbUxNb7w36xKoi
+ WtstOvRxS0QHHgzY/+U4s0VlsGo+A+iZsgJR3K+085vvnmiR0wJBeziMtB8NlU9D38qPw4MclJB
+ sVWbQAJJRG6p9r27hkHuDH77j8+0CfsLkusSiebL4sU09LoOIpyExcJU71IsGJn3pcIR2lU7Z/+
+ JEw==
+X-Google-Smtp-Source: AGHT+IG39bovhmvm+MMijSHTe9WLjTqmO0GismawdSL04b+qBtowrHcKNiy++RkMK3EMdkOf8O95Zw==
+X-Received: by 2002:a05:6830:2a8c:b0:727:345d:3b72 with SMTP id
+ 46e09a7af769-731eadb676cmr5589262a34.16.1746456387488; 
+ Mon, 05 May 2025 07:46:27 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4033dc61752sm1843850b6e.40.2025.05.05.07.44.29
+ 46e09a7af769-731d31a2366sm1495605a34.3.2025.05.05.07.46.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 07:44:29 -0700 (PDT)
-Date: Mon, 5 May 2025 08:44:27 -0600
+ Mon, 05 May 2025 07:46:26 -0700 (PDT)
+Date: Mon, 5 May 2025 08:46:24 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] Dockerfile: use lz4 instead of lz4-tools
-Message-ID: <20250505144427.GB5430@bill-the-cat>
-References: <20250505144314.299359-1-heinrich.schuchardt@canonical.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: "marex@denx.de" <marex@denx.de>, "sjg@chromium.org" <sjg@chromium.org>,
+ "brian.ruley@gehealthcare.com" <brian.ruley@gehealthcare.com>,
+ "ravi@prevas.dk" <ravi@prevas.dk>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "paul.henrys_ext@softathome.com" <paul.henrys_ext@softathome.com>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ Leonard Anderweit <l.anderweit@phytec.de>
+Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
+Message-ID: <20250505144624.GC5430@bill-the-cat>
+References: <CAOMZO5B7cxEftN0TeTF--pKXqOmbmaFLc9mEPO4=8odrLBeypQ@mail.gmail.com>
+ <f71762e5-ba15-43ec-91a3-dbdc8f8e1437@denx.de>
+ <CAFLszTj69OUZj9ZBcmnsiLLvxCB+Y-rJYEW_Ep8V6WFtvXP2Nw@mail.gmail.com>
+ <5bec35cc-99b9-468e-bc01-1de5dc39825c@denx.de>
+ <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
+ <CAOMZO5ARze74UsOqUbMLfsyjfFcpBQ38hgqTZnrP4ZkqNOZiTQ@mail.gmail.com>
+ <0261fb66f34d30c6fc3ea1995bf23d4a055dfb6b.camel@phytec.de>
+ <CAOMZO5BtELcioQPygHGx6rsRmFvxeStn-PFf3B22BeXkgUbepw@mail.gmail.com>
+ <20250331183118.GL93000@bill-the-cat>
+ <CAOMZO5ARjb5g4q6xATR8snQ8OJQnQBWfPQsUqUFEX=62=F3-pw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uHMuNu/fUs3tVzl2"
+ protocol="application/pgp-signature"; boundary="rOu8pe1F/qmnpvfz"
 Content-Disposition: inline
-In-Reply-To: <20250505144314.299359-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAOMZO5ARjb5g4q6xATR8snQ8OJQnQBWfPQsUqUFEX=62=F3-pw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,41 +113,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uHMuNu/fUs3tVzl2
-Content-Type: text/plain; charset=us-ascii
+--rOu8pe1F/qmnpvfz
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 05, 2025 at 04:43:14PM +0200, Heinrich Schuchardt wrote:
+On Mon, May 05, 2025 at 09:28:19AM -0300, Fabio Estevam wrote:
 
-> Since Ubuntu Jammy lz4-tools is only a virtual package which pulls in
-> lz4 as dependency.
+> Hi Marek and Tom,
 >=20
-> Update documentation too.
+> On Mon, Mar 31, 2025 at 3:31=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
 >=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > And make similar changes to .azure-pipelines.yml as well please.
+>=20
+> I made another attempt and still get CI errors when applying this
+> patch. zstd is not found in CI:
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+The Dockerfile needs to install zstd then it seems. You can't install it
+like binman is trying to do, in CI at least, because there's no apt
+archive cache (it's not included in the container, as a normal best
+practice).
 
 --=20
 Tom
 
---uHMuNu/fUs3tVzl2
+--rOu8pe1F/qmnpvfz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgYzssACgkQFHw5/5Y0
-tyxHZAv/YUBJ0uh6Aa16qDFVmykXz+0RwA9afuA7puMvrvWg+R4NdbN6SZAPMIcO
-vNQPu/gmcu4CkDif0fLb995Jce4S/cZzO4+8FEaVorUvt4B2B29zNOj3JZ4PqidJ
-zal3+jWtZlZkjHLgPQLqRr0kol55EeTrTyPqRHAihOdJ/UT7eEzXeIPNTmmqpgap
-DCjA0QPkmgLQ+WwaWOEBTZXnOfdby5sHNhXiV91SRz64HPYAmlkgQTsmh+g1weAV
-uFj68fQijUwoNF6N+vYnYvqofbdUpc8374YyJJ0W4CVAVCc/ojNio22MNa2Tevkf
-zP6TFIzPsOg7ZedUvp6NQmd4DYnrIv6UwM1iP/zfM+fBb7qvxK3obBZKHp86qs+U
-yzxdiGkk8zZ2IlF8t+ZuvgMi1ynKmo6XSw5XX7xNGVSbHy82iJGMPL9b4fQUBZ8Z
-QoKrUmna6cx9tJxlx4iTDT+I7RWCNqAyTTF2NY8pdaLxUv3HX2dRHzZtXPFEU9l/
-G/NJzE/q
-=CAvy
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgYz0AACgkQFHw5/5Y0
+tyxPjAv9G7Scg+9qJ9pfZwzntfg6e/E51u89MWB8S6sEFyvKZHy7PjvUY682wEtk
+55gtzJaNs8hYSee7VKGcd3sOatYrvvMs9weQOA0/n4W9C5CdOza3YA3T6115aMwn
+mwwKKyMqnVBgJ7xZX7+cFH8TBejcJncOE8jcrgCbUNThK94fJVw0LgAI72NC5/+c
+Ojrbxo/znh9vRym3KR1GOK+rFt60ExkcnT8Nd4ZetVIVZpUnsu7vt+KYvmyWboCc
+/27xCUt40qwhV3j1jo0PQ2oQkYmzxMRfi6Kf7w/2j7R7wBr7ZEfIb7IsxHvcjfHu
+0vfhsa9cd/hEulPVNpwW15ggxEMyl5o/zfoa950CysetDnDHUJ4eMv+EKa/mljKO
+FX1fv8JR0AFsyIobD4re4K752DAG/dCDe8oTr4cfbql9boJpLJfXjfbMwFxO8BBp
+oGA4CsnfD8/MCNeZgGqfrRm1G/JB67eE077QgfraYKhHLvtOkJhndk60eGT8FZV/
+EVFGn9P/
+=hM/L
 -----END PGP SIGNATURE-----
 
---uHMuNu/fUs3tVzl2--
+--rOu8pe1F/qmnpvfz--
