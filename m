@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28AD0C3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2DB3C3ABB0
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:24:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B926820E1;
-	Mon,  5 May 2025 15:19:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32E47820E1;
+	Mon,  5 May 2025 15:24:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zxi3zuuh";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dsMKLNWS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4F198212B; Mon,  5 May 2025 15:19:37 +0200 (CEST)
+ id D5AB682163; Mon,  5 May 2025 15:24:08 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D95FA82076
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:19:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE68182076
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:24:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7220064b2c=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5459XTd0006903;
- Mon, 5 May 2025 15:19:32 +0200
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 545B3Isg025904;
+ Mon, 5 May 2025 15:24:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- GG4zxWneL3W9iw1o51hpBXiQLtYQN88mBoDptYc9Lu0=; b=zxi3zuuh603KAP9m
- 8yffAK1XWoXXGZ1nBywZ7BerjTUoonZ1+0q02KyTs4+xqNB8GRoegIrAfZ+yzAH0
- 6Jw6E74PZrxZFmY9QzeHPBFY5CQG/I9byqTK6Ou4S6/63xuxQ8VW/p3mU2NY1XtZ
- 1XGvGO3vlNhPakB+2PkWBNj7ttTXLeneFP6PdIPtHJgT/EPv21y8pJu9wIkfX8Wr
- GQ51Aw1xhiT6FM5n77zPVJzU5Qe9j53Jwwtg9OJa7CNiMT/SOmchRSM7OvC8vLf9
- ZZ+OZ0hEDj9YXLtzgG3L3UF26HwJpENhm2igrF8TNcvHB0o25pwGqnMgZLzbQpGf
- 3MgScg==
+ Bxpw1VgEUXeambTs2xGc1ntSyqrk9uW1mwxVbS1++RI=; b=dsMKLNWS2mdyO37d
+ oJQ7ZbVYi+xqf69VlT/bONsYEQeBETPRwBA09WwPLl9xxDMdzzdJQeOC3gQBpM1d
+ /+kFyWNYdcw5krBxIrWelB3cb8w14yrrbUMB3lhm2JKpAbaTHDJNBPC+0sQGKOZm
+ vzX43Nsww3zxnTC87534u8nXoZc79n/YbGRhgY5QttA+7s9xqL0X2Spi2baSuwWI
+ PKtY4hyMeaAelXAUl9o1AAUA+7mWH8pJts3Nfaod+cZjArd13AP+ZDV8Ci5TxUKI
+ 2/mO21E46oNgDzI6j2fCsAlnXK7CjwtU8MxRZCA/v68rcoLIpJ4bovAUfd/XMs/l
+ WdU5cg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dvq3vtjx-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dvq3vu39-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 05 May 2025 15:19:31 +0200 (MEST)
+ Mon, 05 May 2025 15:24:03 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1CE2A40052;
- Mon,  5 May 2025 15:18:37 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DEAD440049;
+ Mon,  5 May 2025 15:22:46 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2A13BB1B97D;
- Mon,  5 May 2025 15:17:52 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CC60AB38459;
+ Mon,  5 May 2025 15:21:54 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 5 May
- 2025 15:17:51 +0200
-Message-ID: <a5323a97-cf20-4d15-9b3c-f5d87b84c8fe@foss.st.com>
-Date: Mon, 5 May 2025 15:17:51 +0200
+ 2025 15:21:54 +0200
+Message-ID: <5492ba6f-4e81-4964-ad45-e3cbc7176e34@foss.st.com>
+Date: Mon, 5 May 2025 15:21:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] configs: stm32f769-disco: support
- FRD400B25025-A-CTK display
+Subject: Re: [PATCH v2 2/6] ARM: dts: stm32: rename mmc_vcard to vcc-3v3 on
+ stm32f769-disco
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  <u-boot@lists.denx.de>
 CC: <linux-amarula@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Vikas Manocha <vikas.manocha@st.com>,
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20250401070125.3705126-1-dario.binacchi@amarulasolutions.com>
- <20250401070125.3705126-7-dario.binacchi@amarulasolutions.com>
+ <20250401070125.3705126-3-dario.binacchi@amarulasolutions.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250401070125.3705126-7-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20250401070125.3705126-3-dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -97,18 +96,15 @@ X-Virus-Status: Clean
 
 
 On 4/1/25 09:00, Dario Binacchi wrote:
-> Support FRIDA FRD400B25025-A-CTK display on stm32f769-disco board.
+> [backport from Linux commit f1317928fa03203929665af61e6d9ac0e29ea84d]
 > 
-> As reported in the section 8.3 (i. e. Board revision history) of document
-> UM2033 (i. e. Discovery kit with STM32F769NI MCU) these are the changes
-> related to the board revision addressed by the patch:
-> - Board MB1166 revision A-09:
-> - LCD FRIDA FRD397B25009-D-CTK replaced by FRIDA FRD400B25025-A-CTK
+> In the schematics of document UM2033, the power supply for the micro SD
+> card is the same 3v3 voltage that is used to power other devices on the
+> board. By generalizing the name of the voltage regulator, it can be
+> referenced by other nodes in the device tree without creating
+> misunderstandings.
 > 
-> This means that the MB1166-A09 is using an NT35510 panel controller,
-> unlike the previous versions which use an OTM8009A controller.
-> Therefore, let's add support for NT35510 panel handling to the
-> stm32f769-disco board configurations.
+> This patch is preparatory for future developments.
 > 
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
@@ -116,53 +112,43 @@ On 4/1/25 09:00, Dario Binacchi wrote:
 > ---
 > 
 > Changes in v2:
-> - Replace board with configs in the commit title
 > - Add Reviewed-by tag of Patrice Chotard
 > 
->  configs/stm32f769-disco_defconfig     | 2 ++
->  configs/stm32f769-disco_spl_defconfig | 2 ++
->  2 files changed, 4 insertions(+)
+>  arch/arm/dts/stm32f769-disco.dts | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
-> index 5be221afd2fa..e50d62e93bd6 100644
-> --- a/configs/stm32f769-disco_defconfig
-> +++ b/configs/stm32f769-disco_defconfig
-> @@ -52,12 +52,14 @@ CONFIG_DW_ALTDESCRIPTOR=y
->  CONFIG_MII=y
->  # CONFIG_PINCTRL_FULL is not set
->  CONFIG_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_FIXED=y
->  CONFIG_SPI=y
->  CONFIG_DM_SPI=y
->  CONFIG_STM32_QSPI=y
->  CONFIG_VIDEO=y
->  CONFIG_VIDEO_LOGO=y
->  CONFIG_BACKLIGHT_GPIO=y
-> +CONFIG_VIDEO_LCD_NOVATEK_NT35510=y
->  CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
->  CONFIG_VIDEO_STM32=y
->  CONFIG_VIDEO_STM32_DSI=y
-> diff --git a/configs/stm32f769-disco_spl_defconfig b/configs/stm32f769-disco_spl_defconfig
-> index 7d4bda440685..6229ee5089f5 100644
-> --- a/configs/stm32f769-disco_spl_defconfig
-> +++ b/configs/stm32f769-disco_spl_defconfig
-> @@ -75,6 +75,7 @@ CONFIG_MII=y
->  # CONFIG_PINCTRL_FULL is not set
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_FIXED=y
->  CONFIG_SPL_RAM=y
->  CONFIG_SPECIFY_CONSOLE_INDEX=y
->  CONFIG_SPI=y
-> @@ -84,6 +85,7 @@ CONFIG_SPL_TIMER=y
->  CONFIG_VIDEO=y
->  CONFIG_VIDEO_LOGO=y
->  CONFIG_BACKLIGHT_GPIO=y
-> +CONFIG_VIDEO_LCD_NOVATEK_NT35510=y
->  CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
->  CONFIG_VIDEO_STM32=y
->  CONFIG_VIDEO_STM32_DSI=y
-Applied to u-boot-stm32/master
+> diff --git a/arch/arm/dts/stm32f769-disco.dts b/arch/arm/dts/stm32f769-disco.dts
+> index ad1b442055e1..b4e240a8e3eb 100644
+> --- a/arch/arm/dts/stm32f769-disco.dts
+> +++ b/arch/arm/dts/stm32f769-disco.dts
+> @@ -56,9 +56,9 @@
+>  		clock-names = "main_clk";
+>  	};
+>  
+> -	mmc_vcard: mmc_vcard {
+> +	vcc_3v3: vcc-3v3 {
+>  		compatible = "regulator-fixed";
+> -		regulator-name = "mmc_vcard";
+> +		regulator-name = "vcc_3v3";
+>  		regulator-min-microvolt = <3300000>;
+>  		regulator-max-microvolt = <3300000>;
+>  	};
+> @@ -96,7 +96,7 @@
+>  
+>  &sdio2 {
+>  	status = "okay";
+> -	vmmc-supply = <&mmc_vcard>;
+> +	vmmc-supply = <&vcc_3v3>;
+>  	cd-gpios = <&gpioi 15 GPIO_ACTIVE_LOW>;
+>  	broken-cd;
+>  	pinctrl-names = "default", "opendrain";
+
+Hi Dario
+
+For information, stm32f769-disco.dts update 
+has been dropped due to OF_UPSTREAM now available on stm32 platforms.
+
+Both dropped files will be bring back during nect kernel -> U-Boot DT synchronisation.
 
 Thanks
 Patrice
