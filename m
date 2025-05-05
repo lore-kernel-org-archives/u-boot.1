@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C2CAC3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:35:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06C1C3ABB0
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:37:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDFEB81FAB;
-	Mon,  5 May 2025 17:35:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6619081F66;
+	Mon,  5 May 2025 17:37:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oDkk/vDW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z1C4fyQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A38DD820E8; Mon,  5 May 2025 17:35:16 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 1D86B81FAB; Mon,  5 May 2025 17:37:50 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66671801BE
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:35:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB353801BE
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:37:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-acb5ec407b1so802050366b.1
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:35:13 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5f6214f189bso8655699a12.2
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:37:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746459313; x=1747064113; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746459467; x=1747064267; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WkTXJQXUXq9XAQD+nGjK/mUDZb6r3hjGgp+gY3ANU5U=;
- b=oDkk/vDWhKhKQMQe0q1irQffQSKbID4M4zU2YBGTPuOT7o3fQ7+/96rUHO2oaRcozD
- fIyFda7gRL9TJf/S+SqBgVosvtgVcgULlRdKEcPiiCpDmbe3xUpXGtb2+VVONJZtK/0V
- Ot/XOGemATs+1XMqsIqU2ytjbrLeg+ZPKoc5E=
+ bh=ET4J9gPBjIZ85iu+3BjLQA9TOkWMOC3ugJmGUQl5xS8=;
+ b=Z1C4fyQjRL0SHldcK6RI/n/3g9nJLTYTlOwR6qnge1GoaK6mVF6iLc0mHdxHrDa9Tr
+ KwWGk4U1dgEtA5IzmFpk+I5eYfqquBFlNtejzH3ynceBcdc18C0UeDpalOwuRzDla46r
+ 05Dal/EC5Y4AiOBZDhD4xDoBqHMFV7faMe4lY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746459313; x=1747064113;
+ d=1e100.net; s=20230601; t=1746459467; x=1747064267;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WkTXJQXUXq9XAQD+nGjK/mUDZb6r3hjGgp+gY3ANU5U=;
- b=iZ9LuZ60fPXzV+3nf9b5Y8YihUX/M9lKaCvwJ2JNpBiJI4454UxSAEW7aF7hpe4FhC
- K5UZk3hj9IDzmjNBWUsZ+M2lQ/0PDUBJbMYh1XZaKQq1WuCYJOHWFTLkuYvGBeIrIqf+
- bD7u/E0PCSLbkNbcJk/UROOkyIyIi5h/WVf3UF86xnwelAPAq+L8wpJ5pH3TYI0cmqTV
- WmtCHej3EdVNnEvqvD75ulW8ZfeAsQafoFutdvKhOkPhbZvocFilAoyTIhhSfL/vffl4
- XSv4VodQDg+L2DGSD/XiBUAmkZQeyNDNcUTB3qPY/QVfhmaXdcEDxlihWFPwq4+M+pEQ
- zfTg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXcF3r/pzQSW59L4o7IeVkqmGWEkjLUwZu83aUZfAz64RhGvsX2vPDNYtx4esa405SgEzRikQc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4VJqTR6OQnR7WxTTRyeGwDdvabwU7Pfft7KGb7aEN/y60Hz7q
- HwQYsMafTxM5vPa6gIbuXN7q1jTiB0MdibRGhVPOFOAOiQhuzcHnZc3bMRYLY6EWTLJBdJgnKCo
- oeZ6juXx4dxqyKRkf0/J/SOvQSlYe/1FGH5Dz
-X-Gm-Gg: ASbGncsACWdxpLEY0RW6oSQayPTDkT3xbpItDvYKLWC9hYMif0LOX5h3WfKcXirk3YX
- qVBQYhUxwNFAi4qxemFy4mnJ57jk7bOW+R80NYkhhQSiDsRpzpCOWwgq9QODSb/hDoK2AnGc/kw
- lE79UUQFZqO+ogyNNKP3RHuho=
-X-Google-Smtp-Source: AGHT+IENDgLtpUApN5ngR0TgrdA/dA9bpaZ9QRs7/PGyw4iNAF9XgvOfswzTSxXkKJdRcLBiqvqlPMMOOyJKjW+P5TA=
-X-Received: by 2002:a17:906:2c44:b0:ad1:d063:f326 with SMTP id
- a640c23a62f3a-ad1d063f37emr72546366b.29.1746459312710; Mon, 05 May 2025
- 08:35:12 -0700 (PDT)
+ bh=ET4J9gPBjIZ85iu+3BjLQA9TOkWMOC3ugJmGUQl5xS8=;
+ b=rvXUG9fGTgHpCiMWsIaz03F15ZRHYOj40DnhnDJpcFfCqj3AOg7ZOURkAPrqE6zqeF
+ 5XgrTW9sn8Bv68lFas/dLbWjPEmfaqGs8XoUxeOC58ZYOzN9s4v1nL3w8UpQ+gbI4Fvd
+ mUAkLQPbvYUaxrmFjjFT8WIBACZizpZQylDhiRQg/oZ5WU6ARNfxAYG4k0tVWHtQgESY
+ xhitIxagJYd3sGiHOcVlBVCxt8EnVDBA0cktRiXIFujZTMzVZ9FfN3/NvujukeShL18S
+ DIP9Gu/b+YTbOKd2KY8rJwzD/SLEqxR6o23QJLRiwQL5KuDemL8XCXMBg6pe5JtKJsL4
+ sDhQ==
+X-Gm-Message-State: AOJu0YxSWPjGt+hPGgcw8AnDH08u51hxKEnskGAA+G1Y4N1NsDvY0LDr
+ F3rbPDT1+sayL45k8ovyMJwGLZj+tGKNEZLQJ9MvfHwHNxCYhYmRL7Y37KK2g3+/4J9200kz98r
+ pVe4n5x9OVvwCV+ejcIkz4ABSaP+xgQbPrOjF
+X-Gm-Gg: ASbGncsZmoFhvgKNVL/5nW6KBHuElJgVisWnDP4YklsYiGMxeQ5I+0vH+Uc09w82kC2
+ T0FC+REzVxZ++2GEdopkfGbIFh4ZtRvwZ/WML+LWZnFpaRUkVupSWhQmx119VcnvOJ6vnDESCIE
+ zsMjW9c80Sb1MDmMsf7C4Bwh8=
+X-Google-Smtp-Source: AGHT+IHiHbp2JvxRz5dEtoJt+EeqIFTadOg9A53SMBLP4kIzTsOKJDbdPYHtVxcy/B3GCAmbt00ciRoDg27wDsgvsYQ=
+X-Received: by 2002:a05:6402:3584:b0:5f8:504a:88c9 with SMTP id
+ 4fb4d7f45d1cf-5fa77fe6c0dmr12200000a12.7.1746459467273; Mon, 05 May 2025
+ 08:37:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250502025026.4140184-1-sjg@chromium.org>
- <0e3e24ac-a4a2-4b44-8c13-d47a655ce7ee@linaro.org>
- <CAFLszThha_WkVyCVxwm1dqvbFaiyxw+khuuyfZKgnoVkHJk-eA@mail.gmail.com>
- <20250505134542.GH1261075@bill-the-cat>
-In-Reply-To: <20250505134542.GH1261075@bill-the-cat>
+References: <20250501133726.2627373-1-sjg@chromium.org>
+ <20250501133726.2627373-16-sjg@chromium.org>
+ <5403d72f-65b3-47f8-912e-d1b64e111f00@cherry.de>
+In-Reply-To: <5403d72f-65b3-47f8-912e-d1b64e111f00@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 5 May 2025 17:34:58 +0200
-X-Gm-Features: ATxdqUERwqSNeaSz7o-Oj5uD0Nyz0nVGawhduCzqojMouP4FaDFQrBoioaqW-t8
-Message-ID: <CAFLszTjeyMUE4aLnzUdRwWPgUVnPtNj+F1FBsYJuO2CqOTe_EA@mail.gmail.com>
-Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
-To: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Mon, 5 May 2025 17:37:33 +0200
+X-Gm-Features: ATxdqUEWC-D2pcmjULfWJqwNubfqKeLxe8CJWhqQKuVTG5h38y2sk0nu8Q4zsKc
+Message-ID: <CAFLszTh1Sm9ymBDRLqwncaSHyRVYiabsQvd-hUrzLwo2iOvUnQ@mail.gmail.com>
+Subject: Re: [PATCH v2 15/18] bootstd: Provide a command to select the bootdev
+ order
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julius Lehmann <lehmanju@devpi.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,76 +94,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Quentin,
 
-On Mon, May 5, 2025, 15:45 Tom Rini <trini@konsulko.com> wrote:
+On Mon, 5 May 2025 at 10:34, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> On Mon, May 05, 2025 at 02:58:06PM +0200, Simon Glass wrote:
-> > Hi Neil,
-> >
-> > On Mon, 5 May 2025 at 09:06, <neil.armstrong@linaro.org> wrote:
-> > >
-> > > Hi,
-> > >
-> > > On 02/05/2025 04:50, Simon Glass wrote:
-> > > > During a recent discussion with Heinrich we discussed why the hooks are
-> > > > kept in a separate repo.
-> > > >
-> > > > The amount of code is small, a tenth of the size of the recently added
-> > > > lwip, just by way of example. Testing is a critical part of U-Boot and
-> > > > one of the things that distinguishes it from firmware projects that have
-> > > > not kept up in this area. By having the tests somewhere else, we are
-> > > > signalling that it is unusual, or difficult, or optional.
-> > > >
-> > > > The hooks mechanism also needs something of an update to take account of
-> > > > real boards in 2025. That will be much easier to undertake if the code
-> > > > that test/py talks to is in the same repo.
-> > > >
-> > > > This series brings the hook files in as first-class citizens of U-Boot.
-> > >
-> > > So this will definitely remove the ability to have test hooks out of the
-> > > U-boot tree ?
-> >
-> > No, not at all. I think Tom had the same thought, but I'm not sure where it
-> > is coming from. You can of course put the hooks wherever you like, since
-> > you have to specify the path for them anyway.
-> >
-> > >This is a major regression, and I do not want my test hooks
-> > > to be in the main u-boot tree for plenty of reasons, the main reasons is
-> > > that I need flexibility to handle my lab boards and I can't wait multiple
-> > > weeks to have the hooks fixed in the main tree.
-> > >
-> > > This could be enhanced, but I agree with Tom, it's a bad idea to merge
-> > > them in the main tree.
-> >
-> > Are there any other reasons, beside the misunderstanding here?
+> Hi Simon,
 >
-> I don't think there's a misunderstanding here. If I follow what you're
-> saying, you want the hooks to primarily exist in the main source tree.
-> Yes, of course someone could maintain them out of tree instead. But
-> that's adding pain to that set of users.
+> On 5/1/25 3:37 PM, Simon Glass wrote:
+> [...]
+> > diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
+> > index 9bee73ead58..294865feb64 100644
+> > --- a/boot/bootstd-uclass.c
+> > +++ b/boot/bootstd-uclass.c
+> > @@ -6,6 +6,8 @@
+> >    * Written by Simon Glass <sjg@chromium.org>
+> >    */
+> >
+> > +#define LOG_CATEGORY UCLASS_BOOTSTD
+> > +
+> >   #include <alist.h>
+> >   #include <blk.h>
+> >   #include <bootdev.h>
+> > @@ -132,6 +134,22 @@ const char *const *const bootstd_get_bootdev_order(struct udevice *dev,
+> >       return std->bootdev_order;
+> >   }
+> >
+> > +void bootstd_set_bootdev_order(struct udevice *dev, const char **order_str)
+> > +{
+> > +     struct bootstd_priv *std = dev_get_priv(dev);
+> > +     const char **name;
+> > +
+> > +     free(std->bootdev_order);  /* leak; convert to use alist */
+> > +
+>
+> leak? and aren't you using alist already?
 
-People maintain them out-of-tree today. They can simply keep doing so.
-I am not sure what you are getting at here.
-
-> And I'm not sure what the
-> benefit is to anyone else to move them in-tree. We're making the project
-> CI path a tiny bit easier (but for what is also a small case) at the
-> expense of all of the other cases.
-
-Did you see Heinrich's email?
+Not for this, yet.
 
 >
-> If we must save two steps in the case of testing new changes for CI, we
-> could add the u-boot-test-hooks repository as another git subtree. This
-> would make it easy to test new CI changes at the expense of making it
-> more costly (a git subtree resync) when we want to update the hooks
-> repository.
+> [...]
+>
+> > diff --git a/doc/usage/cmd/bootdev.rst b/doc/usage/cmd/bootdev.rst
+> > index 98a0f43c580..abede194cba 100644
+> > --- a/doc/usage/cmd/bootdev.rst
+> > +++ b/doc/usage/cmd/bootdev.rst
+> > @@ -13,6 +13,7 @@ Synopsis
+> >
+> >       bootdev list [-p]        - list all available bootdevs (-p to probe)
+> >       bootdev hunt [-l|<spec>] - use hunt drivers to find bootdevs
+> > +    bootdev order [clear] | [<spec> ...]  - view or update bootdev order
+> >       bootdev select <bm>      - select a bootdev by name
+> >       bootdev info [-p]        - show information about a bootdev
+> >
+> > @@ -78,6 +79,27 @@ To run hunters, specify the name of the hunter to run, e.g. "mmc". If no
+> >   name is provided, all hunters are run.
+> >
+> >
+> > +bootdev order
+> > +~~~~~~~~~~~~~
+> > +
+> > +This allows the bootdev order to be examined or set. With no argument the
+> > +current ordering is shown, one item per line.
+> > +
+> > +The argument can either be 'clear' or a space-separated list of labels. Each
+> > +label can be the name of a bootdev (e.g. "mmc1.bootdev"), a bootdev sequence
+> > +number ("3") or a media uclass ("mmc") with an optional sequence number (mmc2).
+> > +
+> > +Use `bootdev order clear` to clear any ordering and use the default.
+> > +
+> > +By default, the ordering is defined by the `boot_targets` environment variable
+> > +or, failing that, the bootstd node in the devicetree ("bootdev-order" property).
+> > +If no ordering is provided, then a default one is used.
+> > +
+>
+> Not sure what's the benefit if we can simply set the environment variable?
 
-I don't see how a subtree would help though. It's not as if some other
-project is using it, upstream of U-Boot.
+The environment variable is there to maintain backwards compatibility
+with the distro scripts. It now seems that we are unlikely to ever
+drop those, but you never know.
 
-- Simon
+>
+> FWIW, it's what we do in
+> board/theobroma-systems/common/common.c:setup_boottargets()
+>
+> One of the benefits I see is dumping the order if that variable isn't
+> set (and also not in the DT), but shouldn't that be information we
+> should be getting from `bootdev list` instead?
 
-> --
-> Tom
+In general, the ordering is not known until a scan is completed, since
+scanning can invoke hunters to find other bootdevs not visible prior.
+
+>
+> The point I'm trying to make is do we need yet another way to set the
+> bootdev order? Printing the order would be welcomed I guess but that
+> could be as simple as printing boot_targets environment variable, the DT
+> property or whatever the default is if both are missing.
+
+As above, the boot_targets var is for backwards compatibility. The DT
+property is fixed and cannot be changed at runtime. So I believe we do
+need this command.
+
+>
+> If we are to keep the clear command, I would use a flag instead of an
+> argument to be consistent with the other bootdev commands, e.g.
+> something like `bootdev order -c`.
+
+Yes that sounds better, thanks.
+
+>
+> > +Note that this command does not check that the ordering is valid. In fact the
+> > +meaning of the ordering depends on what the bootflow iterator discovers when it
+> > +is used. Invalid entries will result in no bootdevs being found for that entry,
+> > +so they are effectively skipped.
+> > +
+> >   bootdev select
+> >   ~~~~~~~~~~~~~~
+> >
+> > @@ -171,6 +193,20 @@ This shows using one of the available hunters, then listing them::
+> >                   Capacity: 0.0 MB = 0.0 GB (1 x 512)
+> >       =>
+> >
+> > +This shows viewing and changing the ordering::
+> > +
+> > +    => bootdev order
+> > +    mmc2
+> > +    mmc1
+> > +    => bootdev order 'mmc usb'
+> > +    => bootdev order
+> > +    mmc
+> > +    usb
+> > +    => bootdev order clear
+> > +    => bootdev order
+> > +    No ordering
+>
+> Shouldn't we be provided with a default one?
+
+See above. I suppose we could implement scanning for bootdevs, but
+that would need to be a separate change.
+
+Regards,
+Simon
