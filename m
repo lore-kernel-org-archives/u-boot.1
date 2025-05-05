@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D200AC3ABB6
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 12:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A23B4C3ABB6
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 12:37:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44CC382162;
+	by phobos.denx.de (Postfix) with ESMTP id 8F13A822D7;
 	Mon,  5 May 2025 14:37:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="abkMPVC4";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jK5AwN6D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4A978210D; Mon,  5 May 2025 11:17:15 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id 0C76581F7E; Mon,  5 May 2025 11:17:16 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8681180F03
+ by phobos.denx.de (Postfix) with ESMTPS id C478681F7B
  for <u-boot@lists.denx.de>; Mon,  5 May 2025 11:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id DC68FA4C761;
- Mon,  5 May 2025 09:11:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 32D0BC4AF09;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4E8BF5C5716;
+ Mon,  5 May 2025 09:14:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1E914C4CEE9;
  Mon,  5 May 2025 09:17:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1746436632;
- bh=zu00UeExt5X/b8C62DB94nfSqxX+nJUbvFnBFEWWrRA=;
+ bh=dzJdcqv4opFQ8trN4IUFEyte27tcTzwoWxoYmMFiUyg=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=abkMPVC4OJGpFgF3pR6qMM98qgstyTdxkttvMRhvXOzRuBRzL4M6cbAp413e7Bdw7
- UbGphfm8nzo346LJhGj0FY4Dbh3OR5Bykyf5wDX2apW3JdWhzOU7SpMV2PkLPQoAC1
- v4JYHAdnTlNwAgHY7g+VDNeQ6cbIblWhY7lyILpDBRcR2gH+dYqFQTldGw+mUkbc+N
- qK+QIQY/JkRtEZbilIbGrh05SOru86cMR7Fe09q+NGzNQDtPEM3Z+rek+kOXQOPEbY
- 13848Zg8qGmKk6tgF+BNoE4JHPWyKjmO0A6K3GJiNHN/u3INtTV4xAmBJ9a27Ehgf0
- jRoEA/BTL2U0w==
+ b=jK5AwN6D5wtjJKXBFEqeaEVQd/oTB/iTbHv0luiK9QF6pPgNl6L9HdU6YicovCpGH
+ fd2lojxWg7rRj8PSAqoXcafRge+ix4B44FfPWMA0MDSP182iBoqpZWgkEBOecsdBe6
+ usQknFZiq39BOHG4b8K4qGIOpNJwgKNWx/pPdS28WvB0PtBKr+M3olCqRe93br60gS
+ W2vyhGCDMry+3aHUS6ehd2ouMRFT5euBVPmqnl/oK2Lj9g5RdU4MpYyPSfOAreBCCo
+ 5T3NyxLSVMAvDQFn9sks9inCkWtHmnrLWG38XonN/YhFkqAj12igzeOhCwVJJmc2P9
+ ZRhalrWHXQzAA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 273A3C3ABBB;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 0F3C4C3ABB9;
  Mon,  5 May 2025 09:17:12 +0000 (UTC)
 From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
-Date: Mon, 05 May 2025 17:17:11 +0800
-Subject: [PATCH v2 3/5] fdt_support: Add support for extra var for bootargs
+Date: Mon, 05 May 2025 17:17:09 +0800
+Subject: [PATCH v2 1/5] boot/image-android: Workaround kernel/ramdisk
+ invalid addr
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250505-android-boot-v2-3-92dcb5bf59c8@gmail.com>
+Message-Id: <20250505-android-boot-v2-1-92dcb5bf59c8@gmail.com>
 References: <20250505-android-boot-v2-0-92dcb5bf59c8@gmail.com>
 In-Reply-To: <20250505-android-boot-v2-0-92dcb5bf59c8@gmail.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -63,11 +63,11 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  George Chan <gchan9527@gmail.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1746436629; l=2151;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1746436629; l=2647;
  i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
- bh=DmXSjUEMzw7M2QHDPDGOk6gusoHWBs/ShF98ZWSfjjs=;
- b=7+a3a5BpZG7zWMUq7y3SKH31kmjwbt2Rn59DVewbDpXMUkbToHuRX/NaoCGc2BFAwUueQVpHB
- bsf+755lnYtAa+shcBS7NdabkmWHkxsFof1XcH9rDJudtnobp8ZYlWc
+ bh=lmUmTUGjljElFNbEGZ9af438B+iFG8fkldhMEy6QFK8=;
+ b=SBEnYXUD7e1LWlJA4p/D2Jc9DeiQQJlDgusY7KHzuMtcvL3CHUkC84bbfoLvoGefrvhkKDpUm
+ jVfB0xyxxnYC5Anw6N6aheOPHgpdGXIOl9PqkXFZlq7CAZ7ZTm/XExG
 X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
  pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
 X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
@@ -93,68 +93,67 @@ X-Virus-Status: Clean
 
 From: George Chan <gchan9527@gmail.com>
 
-Introduce a new env var 'legacy_os_boot_param' to hold legacy OS
-dependent boot param.
+Some androidboot image have invalid kernel/ramdisk load addr,
+force to ignore those value and use loadaddr instead.
 
+Suggested-by: Casey Connolly <casey.connolly@linaro.org>
 Signed-off-by: George Chan <gchan9527@gmail.com>
 ---
- boot/Kconfig       |  9 +++++++++
- boot/fdt_support.c | 20 +++++++++++++++++++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
+ boot/Kconfig         | 6 ++++++
+ boot/image-android.c | 9 ++++++---
+ 2 files changed, 12 insertions(+), 3 deletions(-)
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 4bdac384181..80bb2eb7e77 100644
+index fb37d912bc9..4bdac384181 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -17,6 +17,15 @@ config ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
- 	help
- 	  This ignore kernel/ramdisk load addr specified in androidboot header.
+@@ -11,6 +11,12 @@ config ANDROID_BOOT_IMAGE
+ 	  This enables support for booting images which use the Android
+ 	  image format header.
  
-+config SUPPORT_LEGACY_OS_BOOTPARAM
-+	bool "Extra var to append bootargs"
++config ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
++	bool "Android Boot Image ignore addr"
 +	default n
 +	help
-+	  This introduce env_var 'legacy_os_boot_param' to hold extra OS
-+	  dependent kernel boot param, and append to fdt bootargs when bootm
-+	  execute. The value is supposed to obtain from env file at compile time.
-+	  Board dependent callback will override it completely.
++	  This ignore kernel/ramdisk load addr specified in androidboot header.
 +
  config TIMESTAMP
  	bool "Show image date and time when displaying image information"
  	default y if CMD_DATE
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 92f2f534ee0..cc4d808eaf1 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -322,9 +322,27 @@ int fdt_kaslrseed(void *fdt, bool overwrite)
-  * board_fdt_chosen_bootargs - boards may override this function to use
-  *                             alternative kernel command line arguments
-  */
-+#define COMMAND_LINE_SIZE 1024
-+static char bootargs[COMMAND_LINE_SIZE] = { 0 };
- __weak const char *board_fdt_chosen_bootargs(const struct fdt_property *fdt_ba)
- {
--	return env_get("bootargs");
-+	if (IS_ENABLED(CONFIG_SUPPORT_LEGACY_OS_BOOTPARAM)) {
-+		int j;
-+		snprintf(bootargs, COMMAND_LINE_SIZE - 2, "%s %s",
-+			env_get("bootargs"),
-+	                env_get("legacy_os_boot_param"));
-+
-+		/* remove all carriage return */
-+		for (j = 0; j < COMMAND_LINE_SIZE; j++) {
-+			if (bootargs[j] == '\0')
-+				break;
-+
-+			if ((bootargs[j] == '\n') || (bootargs[j] == '\r'))
-+				bootargs[j] = ' ';
-+		}
-+		return bootargs;
-+        } else
-+		return env_get("bootargs");
- }
- 
- int fdt_chosen(void *fdt)
+diff --git a/boot/image-android.c b/boot/image-android.c
+index 1746b018900..7b8eb6a4f64 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -268,7 +268,8 @@ static ulong android_image_get_kernel_addr(struct andr_image_data *img_data,
+ 	 *
+ 	 * Otherwise, we will return the actual value set by the user.
+ 	 */
+-	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR) {
++	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR ||
++		IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR)) {
+ 		if (comp == IH_COMP_NONE)
+ 			return img_data->kernel_ptr;
+ 		return env_get_ulong("kernel_addr_r", 16, 0);
+@@ -464,7 +465,8 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 	 */
+ 	if (img_data.header_version > 2) {
+ 		/* Ramdisk can't be used in-place, copy it to ramdisk_addr_r */
+-		if (img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
++		if (img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR ||
++			(IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR))) {
+ 			ramdisk_ptr = env_get_ulong("ramdisk_addr_r", 16, 0);
+ 			if (!ramdisk_ptr) {
+ 				printf("Invalid ramdisk_addr_r to copy ramdisk into\n");
+@@ -488,7 +490,8 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 	} else {
+ 		/* Ramdisk can be used in-place, use current ptr */
+ 		if (img_data.ramdisk_addr == 0 ||
+-		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
++		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR ||
++			(IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR))) {
+ 			*rd_data = img_data.ramdisk_ptr;
+ 		} else {
+ 			ramdisk_ptr = img_data.ramdisk_addr;
 
 -- 
 2.43.0
