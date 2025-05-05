@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57571C3ABB0
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:45:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDF92C3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9279582A7B;
-	Mon,  5 May 2025 17:44:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DB26582A4B;
+	Mon,  5 May 2025 17:44:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QqGy605A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wcs1wlPd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8CA7828A2; Mon,  5 May 2025 17:44:12 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 9395A801BE; Mon,  5 May 2025 17:44:15 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0A648295C
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:44:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89D05829E4
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:44:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5e5bc066283so6794116a12.0
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:44:10 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-acae7e7587dso738217166b.2
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:44:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746459850; x=1747064650; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746459851; x=1747064651; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g5sqKu8JZLcJFOYv87QuQnDaTnMjUYcmOlUomk49gjg=;
- b=QqGy605AK1+W/A8bpjQZI3PnnPxf31eahjecriLC+hcTHBj8ozWts4Tb65mI4eSWiI
- LJLvfIcdxNCyJMcjHKQT5cbxWVlJcNCblVaXyskwBg+7ejUC2irvHKFlzZ2Vc+Hu375N
- 6PVaRRUpBjvKrmamYbpMTGR/UQbZ+F12noogg=
+ bh=p1RTL01aHDDoz3SgpMIG+Tz12nuE2+cW2sPImc+kdFA=;
+ b=Wcs1wlPdWKBnzqRhrYIk/lLO5F6TPSmmAa1KRuaAr8TVCjIcHdD+2RF/8Im3DExYeM
+ YLNvDFOlySH0kHSj8TsISCSFMZGA78da7T7Q+5wlb+hWYaVQA0W+8y3Iqbc3+3p9e0xY
+ 2ykmUW388SECk6B+tErwN87nCfmJ8nRMP//rE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746459850; x=1747064650;
+ d=1e100.net; s=20230601; t=1746459851; x=1747064651;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g5sqKu8JZLcJFOYv87QuQnDaTnMjUYcmOlUomk49gjg=;
- b=Mlf+tPDrt9d6WKClOppjVYEgWpyPklKfbCTx9Z8J7YxBPys4iGhmpJYAdvKjnCyH4o
- TfAcArEEu4+sbH5I3TMVS4t/BN7dDjN5gPTSyo7p5Y3RyP1YvNHqgGT9EGMFOH70xhl3
- vp7Ehy1yB0j/PBejGFyCwxepsSdh7D5iBy2zqCxMITk9ZMX5gxsa9QZuzeWLwzT90KJS
- 9KJ0Srn6DbJvHuhmp2PcfyH6C0ffPqvnG75be/dfAzvAIqV/rIoV7Y6WwvsxfkL+n7eu
- 8s4Zxrq4PsAAIky8JGLFhkrJV8zLqbVHcSaZ+Khc96n9iwN+uZOQli4/pvg+rVBSFYpY
- 6efA==
-X-Gm-Message-State: AOJu0YwKBApwojzeyISPOV44GWPH/2eKLC+tRIuH3/6YMDjzhjXKlcGj
- S8IKnSgdarVlTE7JUGCUcx9Uai9gzrir7ZxqbKqqme6krGQEwAzZKu07nhcn34UExLwnhCg5Kej
- OqSt2Z1Q=
-X-Gm-Gg: ASbGncugIY02ueRpEHerfzEuljki41IWj+OajP5flEBfcMIX4EhQHCmHZ6VyPcLex+Y
- 4WQlJSbvPMdCDxENsV/Wux6+F+mFTy013QGhfnCW2/4vAvE+oK0m1Ii6tpRvrm11BJDHpjkgBv/
- G4fTPgDYb+bTnucqetFqMmk73J+fXtp4Mu+4EFCca/oL5S4fruTPvLGGzAunLRW8sKX5RLuWwY/
- VqGuMV6kdMm+4aq+GX6vs2ZaIzDussmIwJO61x7Qajmnc+pldTU9/+ix3a+M1/VbQ4p3ZTva9Ue
- 0JUpsuITkaEAU9TReH/4BigC7c69vjI4V+Yd
-X-Google-Smtp-Source: AGHT+IHCJcdG1Uf9gz/v8vMC2MLzQbx+uTKcukT1e3sunZRE1nP/eWioaKbNOL+TveOwYl+VQIh7rw==
-X-Received: by 2002:a05:6402:847:b0:5fa:82c9:7a50 with SMTP id
- 4fb4d7f45d1cf-5fab05c26b6mr5817615a12.21.1746459849921; 
- Mon, 05 May 2025 08:44:09 -0700 (PDT)
+ bh=p1RTL01aHDDoz3SgpMIG+Tz12nuE2+cW2sPImc+kdFA=;
+ b=uaOLdo3EzwrhOJ/FyrTPk6EDG0/+RHvuoeQBiXb3chWBPXqgrrsvVd//EMYaaT+4HD
+ iUkaTk/MTOQKP11nY8aea7UbPZ38icQpiJSvUM1GmhsmvPTj7swcrDf0qBjc36FexCrr
+ pgULNWZxQk+/NmkIJ5PlyqVsu/MUuJOeLB0/VjEoMRm3hDeV/wijcvfBDKXbUY4jrCXn
+ h0PoPlelTjSBVNYI2XKsopkJ+iesKG6OtxlkzFMJfBi23MyVu1HoL4J1PUhkMZSwfdXj
+ sS+G63VnEjRQsqAY85QBu5q5l5U8asH2n16FVdsOdt0ob8xNNb0HneISUgPqAW6gTmVY
+ 33ew==
+X-Gm-Message-State: AOJu0YxCvoeAwxfe26bBaHl0GnPtVJ6JRcXBGLuqyiL0iENOCDEszKaP
+ 2HFoqQh24NRLGuYoHqbguVuaOndRdDEdAGRAMGRn5nn7oiDrvGa5Tmab9PKMCOzZOrwE1rUWBcA
+ OLTIoV3w=
+X-Gm-Gg: ASbGncsmyyyaAkq8hS9KuCPGgw9gwMAPB9f5W2jbFG5AbQlkCDxqBIbCWymhEONsunl
+ G22+CJ/4dpGrjTee0zgcf0jFT9soOWar9fir97d5thdshRtWrfSfqGU7fnjjZvBS+yXIAx7j4k3
+ I72hGx3yJPMzWKnczI0lnRI06vmw2s7cHUo4HotZe42PTWJ2LNboaYp7R2cQwebDoKbRRb8i//E
+ 3Qz4iu3S9ZLzloTUx0eFAMoh0bmpQpw0oTGUNzVCAwgfwqQR5xkMLi0EHXWn/3xjcGPSJx9HkVI
+ eCJq0TmnAD+USyWwQ9sX6mgeioMxy//eGW7pdUQ5v8wt29E=
+X-Google-Smtp-Source: AGHT+IHbtl3CxZe+LKBhNuporm+H/nY8Lglo2vy/6u68YyZM0zYfSwJMxd6KTcgH2I08HD1ubmY+dQ==
+X-Received: by 2002:a17:906:9c94:b0:aca:cb18:9ad0 with SMTP id
+ a640c23a62f3a-ad1a4a8dabbmr687401066b.45.1746459851444; 
+ Mon, 05 May 2025 08:44:11 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5fa778188acsm5561762a12.35.2025.05.05.08.44.08
+ 4fb4d7f45d1cf-5fa778188acsm5561762a12.35.2025.05.05.08.44.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 08:44:08 -0700 (PDT)
+ Mon, 05 May 2025 08:44:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 12/19] expo: Check dimensions before arranging a scene
-Date: Mon,  5 May 2025 17:42:50 +0200
-Message-ID: <20250505154308.2911248-13-sjg@chromium.org>
+Subject: [PATCH 13/19] expo: Simplify scene_textline dimension calculation
+Date: Mon,  5 May 2025 17:42:51 +0200
+Message-ID: <20250505154308.2911248-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250505154308.2911248-1-sjg@chromium.org>
 References: <20250505154308.2911248-1-sjg@chromium.org>
@@ -94,93 +94,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is possible that positions, styling or even text have changed since
-the scene was initially arranged, so recalculate the dimensions of all
-objects before arranging the scene.
+The goal here is to obtain the dimensions of the edit field, which does
+not change.
+
+Since scene_arrange() now handles setting the bounding-box size based on
+the dimensions there is no need to do it here.
+
+Adjust the code to simply set up the dimensions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c     | 39 +++++++++++++++++++++++++++++++--------
- test/boot/expo.c |  1 -
- 2 files changed, 31 insertions(+), 9 deletions(-)
+ boot/scene_textline.c | 13 +++----------
+ 1 file changed, 3 insertions(+), 10 deletions(-)
 
-diff --git a/boot/scene.c b/boot/scene.c
-index 9c1eae3d52b..0d8599f955c 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -737,6 +737,31 @@ int scene_calc_arrange(struct scene *scn, struct expo_arrange_info *arr)
- 	return 0;
- }
+diff --git a/boot/scene_textline.c b/boot/scene_textline.c
+index 7bc35a997dc..07711d147c3 100644
+--- a/boot/scene_textline.c
++++ b/boot/scene_textline.c
+@@ -61,8 +61,7 @@ void scene_textline_calc_bbox(struct scene_obj_textline *tline,
  
-+/**
-+ * scene_set_default_bbox() - Set a default for each object's size
-+ *
-+ * If there is not already a size, use the dims property to set one
-+ */
-+static int scene_set_default_bbox(struct scene *scn)
-+{
-+	struct scene_obj *obj;
-+
-+	list_for_each_entry(obj, &scn->obj_head, sibling) {
-+		switch (obj->type) {
-+		case SCENEOBJT_IMAGE:
-+		case SCENEOBJT_TEXT:
-+			if (!(obj->flags & SCENEOF_SIZE_VALID)) {
-+				scene_obj_set_size(scn, obj->id, obj->dims.x,
-+						   obj->dims.y);
-+			}
-+		default:
-+			break;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- int scene_arrange(struct scene *scn)
+ int scene_textline_calc_dims(struct scene_obj_textline *tline)
  {
- 	struct expo_arrange_info arr;
-@@ -753,6 +778,12 @@ int scene_arrange(struct scene *scn)
- 		ysize = priv->ysize;
+-	struct scene_obj *obj = &tline->obj;
+-	struct scene *scn = obj->scene;
++	struct scene *scn = tline->obj.scene;
+ 	struct vidconsole_bbox bbox;
+ 	struct scene_obj_txt *txt;
+ 	int ret;
+@@ -77,16 +76,10 @@ int scene_textline_calc_dims(struct scene_obj_textline *tline)
+ 		return log_msg_ret("nom", ret);
+ 
+ 	if (bbox.valid) {
++		struct scene_obj *obj = &txt->obj;
++
+ 		obj->dims.x = bbox.x1 - bbox.x0;
+ 		obj->dims.y = bbox.y1 - bbox.y0;
+-		if (!(obj->flags & SCENEOF_SIZE_VALID)) {
+-			obj->bbox.x1 = obj->bbox.x0 + obj->dims.x;
+-			obj->bbox.y1 = obj->bbox.y0 + obj->dims.y;
+-			obj->flags |= SCENEOF_SIZE_VALID;
+-		}
+-		scene_obj_set_size(scn, tline->edit_id,
+-				   obj->bbox.x1 - obj->bbox.x0,
+-				   obj->bbox.y1 - obj->bbox.y0);
  	}
  
-+	ret = scene_calc_dims(scn);
-+	if (ret)
-+		return log_msg_ret("scd", ret);
-+	ret = scene_set_default_bbox(scn);
-+	if (ret)
-+		return log_msg_ret("sce", ret);
- 	ret = scene_calc_arrange(scn, &arr);
- 	if (ret < 0)
- 		return log_msg_ret("arr", ret);
-@@ -1032,14 +1063,6 @@ int scene_calc_dims(struct scene *scn)
- 						return log_msg_ret("get", ret);
- 					obj->dims.x = width;
- 					obj->dims.y = ret;
--					if (!(obj->flags & SCENEOF_SIZE_VALID)) {
--						obj->bbox.x1 = obj->bbox.x0 +
--							width;
--						obj->bbox.y1 = obj->bbox.y0 +
--							ret;
--						obj->flags |=
--							SCENEOF_SIZE_VALID;
--					}
- 				}
- 				break;
- 			}
-diff --git a/test/boot/expo.c b/test/boot/expo.c
-index bf18199caab..0289350df9c 100644
---- a/test/boot/expo.c
-+++ b/test/boot/expo.c
-@@ -588,7 +588,6 @@ static int expo_render_image(struct unit_test_state *uts)
- 	/* render without a scene */
- 	ut_asserteq(-ECHILD, expo_render(exp));
- 
--	ut_assertok(expo_calc_dims(exp));
- 	ut_assertok(scene_arrange(scn));
- 
- 	/* check dimensions of text */
+ 	return 0;
 -- 
 2.43.0
 
