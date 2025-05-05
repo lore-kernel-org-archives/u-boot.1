@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F71C3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E0F5C3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:38:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4931782A2F;
-	Mon,  5 May 2025 15:38:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 9783A828D0;
+	Mon,  5 May 2025 15:38:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oITBWOnT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rJ5ncJF9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A56DE82A1C; Mon,  5 May 2025 15:38:16 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 38BDE8212B; Mon,  5 May 2025 15:38:44 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B184D82935
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:38:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC2DB82A25
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:38:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7220064b2c=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54598I9j027265;
- Mon, 5 May 2025 15:38:12 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- Fg0+vlYONJR05ceiyZ6qRLG2Z70aR26ls/9uaHPu8q0=; b=oITBWOnThV/r7bQy
- VT9zuJI97qvJ7bJ7Abw/wG3RJSeoGKlLOI8mjW93N8QHMOT6LLRrxx01tjqzRkTA
- XACHUThxFXxaXTpWRglcSFMaKue1tuRO5YclwULn54Q2XLorlQDE/u8TL/ipFyeT
- VFHWq2LYjFf5lOkbiHz+3CLS2mR9ZMBLa6AHKyls79bFC8n9qCbdfLJmIaGi/9Xw
- vVc2Ly6HAr+EppP4f2RmjJw/nvANRv4LmmaVdWv/ka1QBPo646Oo5dFqphg/3apC
- uQVuTlz1qFnA05qlEkFTr3M47kMNa11xF1hpe1Q1yQ00l/rG+pp/8zUrnAgWnLrB
- lns/vA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dx3m4kqu-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 05 May 2025 15:38:12 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CBFD840073;
- Mon,  5 May 2025 15:37:26 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 10C88B3DD47;
- Mon,  5 May 2025 15:35:12 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 5 May
- 2025 15:35:10 +0200
-Message-ID: <5896b5be-f745-407f-b115-ebb25c2122f6@foss.st.com>
-Date: Mon, 5 May 2025 15:35:08 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-72bd5f25ea6so1042565a34.1
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 06:38:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746452320; x=1747057120; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8elGrtCz0q8OGJIYzrG4x1cEHgx2Fv7+3wWTzjzb/98=;
+ b=rJ5ncJF9MBzQbqFSz01bv4K4k31T4kI9L6YfXN96EX9OsAEPPRThcjCu41T2x3MG9C
+ 2Uyd1y4fqO9B3qzaAVRNsYGtELsz/w1mVfhYXH5x91sb3m9nfy5mn5cwawn9t1+HOjDO
+ NAKKAKsBT3iJ7544B4APTTsY/Jyy2oaOhEZWA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746452320; x=1747057120;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8elGrtCz0q8OGJIYzrG4x1cEHgx2Fv7+3wWTzjzb/98=;
+ b=vFxeeSp27YoZyHjVOj8rqQYY+zicQhrJm6821vsdqSKl9NDb7BhwxNLpW6guLT+eRx
+ l44dv55uAuiK4meWgmARSJIbCfLrtRkhfVdrNACAd1KkJEAyRNs9ElXNpHJdSaW4fk//
+ 0kgsYBQs8XGJDZ3cHEZacSUo+WTrsI9/73A35CP9Te10n2rWVwSOSriF+fWZooGhuhrm
+ ER7c+KwSj/01jI0VhghBIuMoSgytbYjDG1OurwlpBdHhWwZnYPOToF5xiRlalvjOYl+I
+ bja8YD4omh7NgKug9AKZwbAtgIaWWXbI1Lx+tk2vRb+w0PUJgjBv3xvc/+ENlcV8md6s
+ qBCw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVESnsPENbhyq4iDyrFeYVx+H+4ws66tFGbfEeP9C4Y10AsdmwxVlFnRxgLLHOSPyOx/Zcm7Mg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYbUDJZfBxu8I+Hjxi2c+OvSg0PjSEidvfTEDOz/MYm8Z1J+Ic
+ xSq1rt/7q1LzqiQ+RKZhfztyvab0U2OfGS0yveD+HvDHLhVxMyhliMyh8VZQRZo=
+X-Gm-Gg: ASbGncsHcXBkjwIX69zIhMsQMleiBinH7RwskkPEBTN5UN+9ZJktaq0a0jWQa3wt1YA
+ KgIzS+MKcEsnRI49X/EBMQN6FgNeHznm0l0u+XFuBjM6PNcx95Ks2Wl6P40nx+h4RajeFZpLCdB
+ rMC6uZ/5vIElM/a+jDC3uJ/9Jjm/AGnK07FiXmf62znaqRjfiHModO1o2yILLTVzmid9ycFReUW
+ LrvZRPzSABih3DGtGAb5BOXh11qQ91b3AtYlnrUKkalnXa61nxCkALzstf+TeW2qS+f4YPCkE1N
+ f/nGXE7yuzW4FVQM4AZbfrao2DMgBq3kJDqssBmSIMvWUZp+7ORs/ct9AX0N4U0AQjcJVTP3IvA
+ ZzA==
+X-Google-Smtp-Source: AGHT+IGYBkmxFjYE0rGr42QpYBQhl5ldzHkbTGrqhc2+y890Hu4UEJ7+j1JxBZ1uk4C9U6+TpU/ojA==
+X-Received: by 2002:a05:6830:470c:b0:72b:a3f3:deb6 with SMTP id
+ 46e09a7af769-731ead6592bmr4310749a34.4.1746452320629; 
+ Mon, 05 May 2025 06:38:40 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2daa126a466sm1959188fac.46.2025.05.05.06.38.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 May 2025 06:38:40 -0700 (PDT)
+Date: Mon, 5 May 2025 07:38:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Max Filippov <jcmvbkbc@gmail.com>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
+Subject: Re: Convert xtfpga U-Boot platform to DM_SERIAL
+Message-ID: <20250505133838.GG1261075@bill-the-cat>
+References: <20250501230349.GM1261075@bill-the-cat>
+ <aBg7QQlJiV8FftqG@octofox.metropolis>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] configs: stm32f729-discovery: Fix console cmdline
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>,
- Kamil Lulko <kamil.lulko@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250401135132.395518-1-patrice.chotard@foss.st.com>
- <20250401135132.395518-5-patrice.chotard@foss.st.com>
- <48b97d99-6e7d-4761-9aa4-e0df4b5fb364@foss.st.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <48b97d99-6e7d-4761-9aa4-e0df4b5fb364@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-05_06,2025-05-05_01,2025-02-21_01
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XfTw3ghimvAeFoHa"
+Content-Disposition: inline
+In-Reply-To: <aBg7QQlJiV8FftqG@octofox.metropolis>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,41 +99,98 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--XfTw3ghimvAeFoHa
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 4/22/25 09:51, Patrick DELAUNAY wrote:
-> Hi,
-> 
-> On 4/1/25 15:51, Patrice Chotard wrote:
->> The Linux cmdline encoded in the defconfig is wrong, the
->> STM32 USART driver registers as ttySTM0 not ttyS0.
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>
->>   configs/stm32f429-discovery_defconfig | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/configs/stm32f429-discovery_defconfig b/configs/stm32f429-discovery_defconfig
->> index 59416cb7e43..36e57edbb4d 100644
->> --- a/configs/stm32f429-discovery_defconfig
->> +++ b/configs/stm32f429-discovery_defconfig
->> @@ -15,7 +15,7 @@ CONFIG_ENV_ADDR=0x8040000
->>   CONFIG_ENV_VARS_UBOOT_CONFIG=y
->>   CONFIG_BOOTDELAY=3
->>   CONFIG_USE_BOOTARGS=y
->> -CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->> +CONFIG_BOOTARGS="console=ttySTM0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->>   CONFIG_SYS_PBSIZE=1050
->>   # CONFIG_DISPLAY_CPUINFO is not set
->>   # CONFIG_DISPLAY_BOARDINFO is not set
-> 
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> 
-> Thanks
-> Patrick
-> 
-Applied to u-boot-stm32/master
+On Sun, May 04, 2025 at 09:14:57PM -0700, Max Filippov wrote:
 
-Thanks
-Patrice
+> Hi Tom,
+>=20
+> On Thu, May 01, 2025 at 05:03:49PM -0600, Tom Rini wrote:
+> > Does anyone have time and knowledge to convert the xtfpga platform to
+> > using DM_SERIAL in U-Boot? It wasn't just a trivial enable
+> > CONFIG_DM_SERIAL and have success so I didn't look harder than that yet.
+>=20
+> I was able to build working u-Boot for the kc705 xtfpga variant with the
+> change below. I can submit a proper patch If it looks correct:
+> --8<--
+> From f0b6e632da8b72f0437a39dc1769b740fef04cf6 Mon Sep 17 00:00:00 2001
+> From: Max Filippov <jcmvbkbc@gmail.com>
+> Date: Sun, 4 May 2025 18:40:44 -0700
+> Subject: [PATCH] WIP: xtensa: enable DM_SERIAL
+>=20
+> Signed-off-by: Max Filippov <jcmvbkbc@gmail.com>
+> ---
+>  arch/Kconfig             | 1 +
+>  configs/xtfpga_defconfig | 7 ++++---
+>  2 files changed, 5 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index 9bb3fe22402f..8d469a395f8c 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -361,6 +361,7 @@ config X86
+>  config XTENSA
+>  	bool "Xtensa architecture"
+>  	select CREATE_ARCH_SYMLINK
+> +	select DM_SERIAL
+>  	select HAVE_PRIVATE_LIBGCC
+>  	select SUPPORT_LITTLE_ENDIAN
+>  	select SUPPORT_OF_CONTROL
+> diff --git a/configs/xtfpga_defconfig b/configs/xtfpga_defconfig
+> index b96dc10d85be..68656949660a 100644
+> --- a/configs/xtfpga_defconfig
+> +++ b/configs/xtfpga_defconfig
+> @@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=3D0x40000
+>  CONFIG_SYS_MALLOC_F_LEN=3D0x400
+>  CONFIG_ENV_SIZE=3D0x20000
+>  CONFIG_ENV_SECT_SIZE=3D0x20000
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"kc705"
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+>  CONFIG_SYS_LOAD_ADDR=3D0x02000000
+>  CONFIG_ENV_ADDR=3D0xF7FE0000
+> @@ -28,6 +29,8 @@ CONFIG_CMD_SAVES=3Dy
+>  CONFIG_CMD_DHCP=3Dy
+>  CONFIG_CMD_PING=3Dy
+>  CONFIG_CMD_DIAG=3Dy
+> +CONFIG_OF_CONTROL=3Dy
+> +CONFIG_OF_EMBED=3Dy
+>  CONFIG_ENV_IS_IN_FLASH=3Dy
+>  CONFIG_USE_BOOTFILE=3Dy
+>  CONFIG_BOOTFILE=3D"uImage"
+> @@ -46,7 +49,5 @@ CONFIG_SYS_FLASH_CFI=3Dy
+>  CONFIG_SYS_MAX_FLASH_SECT=3D1027
+>  CONFIG_PHYLIB=3Dy
+>  CONFIG_ETHOC=3Dy
+> -CONFIG_SYS_NS16550_SERIAL=3Dy
+> -CONFIG_SYS_NS16550_REG_SIZE=3D-4
+> +CONFIG_SYS_NS16550=3Dy
+>  CONFIG_SYSRESET=3Dy
+> -CONFIG_OF_LIBFDT=3Dy
+
+Looks about right to me, thanks!
+
+--=20
+Tom
+
+--XfTw3ghimvAeFoHa
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgYv1oACgkQFHw5/5Y0
+tyy8KQv/dsPgRTzD8X7NKb8Jnvc91PHu52r0xvvf2ZD77CQz24M8t0UZqphw3Pf6
+dZFoar6Z5KxNEWs5tCyw+BTFhlxB+/f+PiwaghR3QFMmsmA5hVMFFiatjUPh5S5L
+E7q+v82l/fzwX0Fg/1FQtcJosRmY8VD2Zz/tViJjn1nD3TSTKxcO0kiCzUY4s+6i
+7BpLo7YACLccddsjiUsJIO0s6Vv+HQ5NRT73IsYqPs0YzFsllvHrzSCQWbiMQqFc
+1wFrKu8fb/wWpBU9HZZeK4DxeDCwsjueiTOehK+9sw8LowCNQhxAUrtMAjKzscYp
++cNu74S3N3atR5ry5rGhA3a7GoEmgazDqEHScOyrdcrOUkzZ+nQqO41H+5Npf9qf
+f7ye1nWy/DaN1Hfu/d+31WQADnB7Eyzx7Xq2sN6Wpynnnzz/InQN8zxv06Xpwvfz
+xFK3y74xzttBfTGNQHkEO9JKT6IVh162oxFOs/rxDcC4g7yv4Kvlej/VAXEQBVCN
+h0zRBhmg
+=Vlau
+-----END PGP SIGNATURE-----
+
+--XfTw3ghimvAeFoHa--
