@@ -4,86 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10AA4C3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:50:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89289C3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:53:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95CFF82991;
-	Mon,  5 May 2025 15:50:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 210B08212B;
+	Mon,  5 May 2025 15:53:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="geaV/Egb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sH++qWGk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92F7E8212B; Mon,  5 May 2025 15:50:36 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id D6E4782161; Mon,  5 May 2025 15:53:05 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1113C82958
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:50:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B6C6801BE
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3fbaa18b810so1053399b6e.2
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 06:50:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cf680d351so27938855e9.0
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 06:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746453033; x=1747057833; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XOiwWwzCrLzvp/lbIQvsxbUfTEa1yajTIt8MVhz+hk8=;
- b=geaV/EgbXCDZ45n37TRn6TKoVBiIrZtJtJcqy+TUqnh61GU/oKoaPBq6A6OfXomTfy
- e5R6wdvNfxIYN/AriEQ3/9w1BZ9Xhv7eqMzlGInEtUbNS8McYLpLfsXDIjl265ncxahA
- BrBOVAeRlzQno1sryYgcp2idHkxgOinZ/HvO8=
+ d=linaro.org; s=google; t=1746453183; x=1747057983; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GeRLDSpqrkQfexUXPq/BUa7c5pcomdC44kCDlM6uGPY=;
+ b=sH++qWGkKeLScF7Vx4L02MNIqJmFeYLeAnOayHleZfbdImt6DXTaF6FG0ffFhmtbBq
+ ccKPBvGygpNs1vlxqpbxaL5iyX3V8S51BaBN0Ei8akmkXJGPwfd1PRysVHKbeoQRysrR
+ HzyM5POR25xkz5cvXO3RIZMtjt2VuLCZeknGoiJiUk6eTyqUSB+q96rL+YrGrJgxIKHK
+ ufwz651HTh0jZjvlPb+tVn/vgyRbOFtHsjjS8HPs5tLw2wKZoe1z2B3tFTYMcSmxFShs
+ 9UVlUYmBdhjPL0IPRzD+rTHKUKCQHdpzCn3mvSiiEPVpCLdPPLcPzFPHKy/j1fTiL/x2
+ hDoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746453033; x=1747057833;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XOiwWwzCrLzvp/lbIQvsxbUfTEa1yajTIt8MVhz+hk8=;
- b=uOKjomkCONLMu8Bwe9L48t94RRasUx7Wo7Kfno02Z5apEBqa5XuWh146yVujcmKBUm
- zA/9/NljuhamEga0Ts0VYta1W2Vk3vG7ikLyRMv5R+Gu3S8lM4ZomyL9CkPm0Z2FjzD4
- 11AZJUHoQ9aOqicewigVvMmwjgXdx58jXIr9vNUaJOPWOolLNbBSdfgUGyuYGnGLn0rJ
- w5FGmwxs0qZakzk61DrnbzpGE0CvUkMeCgyfgrUP0zRd/OGqaINMSey9VuYUmTm/93LP
- R9Aax59aFKCrC1HzILXP1Uo38/JNRXxFFNgmpOyU8BbI7sw15VvWfmBRb5btc1QybQBx
- xixA==
-X-Gm-Message-State: AOJu0YyatWHDoSngfYci6tJ4TNYYRDtqsEI+2bKeDJsaHMUKbKymbVum
- vcNInGjEV9ftf2pNKAHlvzkMoiXR0izaOnKxG8W0mwiw4kXQAxhTatArov4eRv2+8NoIwGvBr8k
- gVQ0=
-X-Gm-Gg: ASbGnctKUBzNJIj6GskrtImfbKbTSxhnD2EMpS0W5LR8rh4cl9GCcFVDlZ5XkNCNJPC
- IDwvgBs5xqNJzmxg1LWylZDRyWryV4ANN2dr2yDUPA+A5/NGmS5r6qOVcQ5YXFsyoyykKWd4L6V
- ue4tFgHol4657kDdihnv1NAEP/UxQMVhsYkBQ6MZgI0XagLqWHcsi58j58+//DnNxEZoNDgX89u
- 2HC8vXXAt8hwXWHLHxG82EAiwuW8dNE8tOKghjVeZ64Ia83GeLups7PaqorxRe+WTmuzAbhbT14
- GIjukxNpy5S05V58tzaclRiKL5yjMyWAT05ZR+Jsmye2C2V4RUdr0vTHZWK5tHqeV3ydHKYZd9y
- ZoA==
-X-Google-Smtp-Source: AGHT+IHTY6FwvjEk2QKJgCKJV4At5gjqrkEjIkNMpveHKWWZdQvo3s6QudhImAmubRyp8mjWUw3KOQ==
-X-Received: by 2002:a05:6808:1824:b0:401:e921:906c with SMTP id
- 5614622812f47-4035a54605dmr4522006b6e.8.1746453032775; 
- Mon, 05 May 2025 06:50:32 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4033dc66fe2sm1877844b6e.36.2025.05.05.06.50.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 06:50:31 -0700 (PDT)
-Date: Mon, 5 May 2025 07:50:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH 2/2] global: Convert almost all remaining non-DM_SERIAL
- users
-Message-ID: <20250505135030.GL1261075@bill-the-cat>
-References: <20250502201226.1369013-1-trini@konsulko.com>
- <20250502201226.1369013-3-trini@konsulko.com>
- <CAJaLiFy-fRjCr+bWbL8VmTjbqno6LZRB764=7mA81qz+OGOXmw@mail.gmail.com>
- <CAJaLiFyksNRAfY-Drh+hWO_XW6Zn4n=ZQo7LdNAkeRAt9RT8_w@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1746453183; x=1747057983;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GeRLDSpqrkQfexUXPq/BUa7c5pcomdC44kCDlM6uGPY=;
+ b=VmIRHGLrrJ0kUySWmLiI9O8uncZmedfnbjfskmYnZUgnRLQz4tSlC79z84SfbyMjBK
+ Z0FWuMMi8/QvlX4rdZUNdmGDOZ7oidR8/R/kAsFaoiCwhVCBpRjV41kng9+EJjaxFnL8
+ AyH+ZDGX/+avHBIIUiyUODFeSYghEkYFMzhdTeJ/h1GT98C58Srq78h8WHVt6IHUMazu
+ R+t4Kgx8CpCGED3p4jZZ3O2Mk5b0Fn7Pc+ia25dSpIzqYzfI6MEff2L9gXI2zqR2RB0m
+ 415VgapMhnrWr5PIcXi3/M5Ts7aBBttIiw8rda9QNQRTbuzMo/AsOXYNmsJFHou46B0X
+ y/qA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUmoV6Ss+jdhu2xCmuLxq4xd4YC8y6unI125AorlXS48amE8TyO6gk2AHZvgDu+RR5rSp35ufg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJ3gL8DWVlQGvWFd1fOYy4gqqfNLk36mieoVBo6MS3P4M3hmbL
+ Fbv8Wai9RqA+KhH3MH0l+NH7ymlKwdW3kZ/8oVRbOcrnLLZj4mXuXfYMCH0dtLY=
+X-Gm-Gg: ASbGncsefC1nXZp/007Y3bAkTbKo2amygPYhjImWivOXmaMH4/byKwoi+diKj7PjACg
+ vK8K2YVLOS50XH90GQaq1O21ETuweuGdTIGQ+5+QTknh8Tpweh5S7JYebzayOPe0Xwc8VV76fiZ
+ WsQPcVzBLy4vhC0/Z9Oktx6kVjGO4UKlQiFO8g9NQB+s02gaDeUGekwFwPS4gNY18w2tsaPwYeP
+ +XnBq97pskrM9+tKkJQJg0OEpg2LmD7rmgoyytw0CiY0iSd9nrnlG3vKubJtF47rnLbcRcbiJPv
+ OvE4BySv8utSA+2kgBdocUcPwRE+kaSH7bak3RaOeaeHAM5WDcbi7rL831DwaWBLfO4ffKKhfzJ
+ zwLNL0GdmOA0Cs/44IV0RD9l8CAcj
+X-Google-Smtp-Source: AGHT+IHvop42Po9rbgQyuxAnw+MVmHojCza2iIwdrViuxT6Lm6QrcUlbNHqGFazTE69/bnCfHxQSQA==
+X-Received: by 2002:a05:600c:1c8f:b0:439:4c1e:d810 with SMTP id
+ 5b1f17b1804b1-441bb856814mr90538485e9.9.1746453182943; 
+ Mon, 05 May 2025 06:53:02 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:7c51:fa5:e32d:b024?
+ ([2a01:e0a:3cb:7bb0:7c51:fa5:e32d:b024])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-441ad870ae0sm123789105e9.2.2025.05.05.06.53.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 May 2025 06:53:02 -0700 (PDT)
+Message-ID: <acc2176c-a150-454c-ad46-c118c97f12ad@linaro.org>
+Date: Mon, 5 May 2025 15:53:01 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZlleV/f3e2EpAQ8X"
-Content-Disposition: inline
-In-Reply-To: <CAJaLiFyksNRAfY-Drh+hWO_XW6Zn4n=ZQo7LdNAkeRAt9RT8_w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] test: allow multiple config options in buildconfigspec
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Peter Robinson <pbrobinson@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+References: <20250503133155.55412-1-heinrich.schuchardt@canonical.com>
+ <20250503133155.55412-2-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250503133155.55412-2-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,102 +108,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZlleV/f3e2EpAQ8X
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 04, 2025 at 03:42:24PM -0700, Tony Dinh wrote:
-> On Sun, May 4, 2025 at 3:37=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wrot=
-e:
-> >
-> > Hi Tom,
-> >
-> > On Fri, May 2, 2025 at 1:12=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> > >
-> > > This converts almost all of the remaining non-DM_SERIAL users to enab=
-le
-> > > DM_SERIAL. These are platforms where there have long been other SoC
-> > > boards that have switched and so it's been a matter of inertia keeping
-> > > these from being converted. Do so now.
-> > >
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> >
-> > The Kirkwood boards (not sure about the others) also need to have
-> > CONFIG_SYS_NS16550 enabled after we removed CONFIG_SYS_NS16550_SERIAL
-> > and CONFIG_SYS_NS16550_REG_SIZE.
-> >
-> > Here was the patch:
-> > https://lists.denx.de/pipermail/u-boot/2023-January/507221.html
-> >
-> > [PATCH] arm: kirkwood: Use CONFIG_SYS_NS16550 with DM_SERIAL for Kirkwo=
-od boards
-> >     arm: kirkwood: Use CONFIG_SYS_NS16550 with DM_SERIAL for Kirkwood b=
-oards
-> >     CONFIG_SYS_NS16550 is required when DM_SERIAL is enabled for
-> > Kirkwood boards.
-> >
-> > diff --git a/arch/arm/mach-kirkwood/Kconfig b/arch/arm/mach-kirkwood/Kc=
-onfig
-> > index 45cc9326368..b19ed2c6b3e 100644
-> > --- a/arch/arm/mach-kirkwood/Kconfig
-> > +++ b/arch/arm/mach-kirkwood/Kconfig
-> > @@ -15,6 +15,7 @@ config SHEEVA_88SV131
-> >  config KIRKWOOD_COMMON
-> >         bool
-> >         select DM_SERIAL
-> > +       select SYS_NS16550
-> >
-> >  config HAS_CUSTOM_SYS_INIT_SP_ADDR
-> >          bool "Use a custom location for the initial stack pointer addr=
-ess"
-> >
-> > So we need to either add SYS_NS16550 to each of these defconfigs
-> > below, or select KIRKWOOD_COMMON for each of these boards in
-> > arch/arm/mach-kirkwood/Kconfig:
-> >
-> > SBx81LIFKW_defconfig
-> > SBx81LIFXCAT_defconfig
-> > d2net_v2_defconfig
-> > dns325_defconfig
-> > guruplug_defconfig
-> > ib62x0_defconfig
-> > inetspace_v2_defconfig
-> > nas220_defconfig
-> > net2big_v2_defconfig
-> > netspace_lite_v2_defconfig
-> > netspace_max_v2_defconfig
-> > netspace_mini_v2_defconfig
-> > netspace_v2_defconfig
+On 5/3/25 15:31, Heinrich Schuchardt wrote:
+> In some cases we have alternative configuration options that supply the
+> same functionality, e.g CONFIG_NET and CONFIG_NET_LWIP.
+> 
+> Allow to specify all of them as arguments for buildconfigspec() and execute
+> the text if any of these is fulfilled, e.g.
+> 
+>     @pytest.mark.buildconfigspec('net', 'net_lwip')
+> 
+> Update the documentation.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  doc/develop/py_testing.rst | 24 ++++++++++++++++++++++++
+>  test/py/conftest.py        | 10 +++++++---
+>  2 files changed, 31 insertions(+), 3 deletions(-)
+[...]
 
-Ah OK, thanks. Can you please prepare a patch to select KIRKWOOD_COMMON
-for these?
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-[snip]=20
-> BTW, I will submit a separate patch for the DS109.
-
-OK, great.
-
---=20
-Tom
-
---ZlleV/f3e2EpAQ8X
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgYwiYACgkQFHw5/5Y0
-tyzjmwv+O0KC4GZaWadq/ovyUlnvImCUVySZfCSge+FcqL3E8ZErc7aVQN1kbvbJ
-ECMNKaTLou2GZUbmhiGXAcNQ7+QSsdf4z3TV6Zc4OLc9wolT3x3osPjIbefTHxgf
-iHQ6nhqV+a9hw0U4qCGChEPv3nWPe0p94Z2wwtbOqlVZ9L0WEVrHfpbLWja94GTj
-vWUAD2iV+qY81MEdG0dqy1VTmP+RsVfdocMCwWWJH6cXIwSOD8Ja9jcEVx0VphFH
-FsJVIlyYX4stS4WZFEnb5PcRGGaJ2JQiX2fHhrETyg7BQc2/jxxTuCVDUD7/7XDC
-ud3sasaz8YlDOeTNfp//ZU1ZPjZYN/RPMlRxsWm6SqDrCo+c+HiJcv1FWyMMjrJd
-LJHQrqWuS73CsR/jNmZXySHFXTjUygNd5s6ski6i5cGP8K/1qmSi0XUfchHyMjD9
-4QA87m9lpEHhcV6GaMAguE1wMoIFnaP2yW0Cv2SIYABCu4kJY0LyMtyUYcZbBKTv
-Vc6LeSBX
-=Hj0o
------END PGP SIGNATURE-----
-
---ZlleV/f3e2EpAQ8X--
+Thanks,
+-- 
+Jerome
