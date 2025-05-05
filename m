@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2892BC3ABB0
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:37:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67AF6C3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 13:38:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FF668214A;
-	Mon,  5 May 2025 15:37:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED8F88294C;
+	Mon,  5 May 2025 15:38:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="4gb8wetB";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JznrvIkO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 492E68219D; Mon,  5 May 2025 15:37:52 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 3E57382935; Mon,  5 May 2025 15:38:04 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BA8F820E1
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:37:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43B78820F6
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 15:38:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7220064b2c=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5459LpfI027658;
- Mon, 5 May 2025 15:37:49 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 545D2kM9025433;
+ Mon, 5 May 2025 15:38:00 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- BAc658lP0DD1aUh6EnyZDuLOgwjJWgEsZfkFjvIsXyk=; b=4gb8wetBM3HPkJ75
- u7e7gB9uw/Es9F555ObAWm1cbHeuIESW+dW+r6uvGMfDoq1Gl0K7Rai2UknIZQx0
- SANbZ90BjUafkkK0zW/pP8HBDoiB4H4kSKbEYdvLjDZh8qfM0AG+3jFxnBbmKokc
- Wod13+b9C5dHA3eRO3jYa3tEGY3BJbUQbvk5G4Ty1sha92ydBdLj0Mz1NLBFsIcF
- kflynJXcD4sDpYEU9Z9MT0Bt6Ua5fU4QBlQTpDU5Kdh2COFjmLsby9HOM0znWn5D
- hw7H54HbxfPft39T5TnfNdZJOKYJ5fD+Z877dZYrHIQNixbDL13zYvMt561r+oKJ
- 2BcB1g==
+ VXT2EAcC9Ah/4oUhmFNMHx95coXfX4nkCBPR0BLWDBU=; b=JznrvIkOlinE9NSN
+ ZjN7Q5/fcCyl5Ywmbu/Zxl8MiFtaTwTibpZoBJu5p/2QOy+ebcSSGMOkNW0D+QHg
+ u9H5T24fhwe7+Ewx0Wh211AJMB+wmHAB6StVmRtqwXVTAtIbjgB1PuFiGivdu93+
+ 8WIN6EnhjUI/WexIFgYJeeUa/RN4PQYg3r5I5I0l7jcQfPx6EMIAZ1Z44F/ywqhP
+ dmZ5TXHF7NG6nQ5OOcSz2V9uIq2bSwmUPFzIr0y9fsm5eU5e0K8zmE177F3Xo+GK
+ eMJxDOGjMeh9fK0DkkOnfnh8OrJi2fcf0rBQVZXV++0UeguXkrd3aqmcOQjPtxv1
+ 5wK7IA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dx3m4kpd-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dbekpj9e-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 05 May 2025 15:37:49 +0200 (MEST)
+ Mon, 05 May 2025 15:38:00 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A77314005A;
- Mon,  5 May 2025 15:37:10 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 90FF140044;
+ Mon,  5 May 2025 15:37:17 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8C558B1F531;
- Mon,  5 May 2025 15:34:39 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CCCFEB2FDC2;
+ Mon,  5 May 2025 15:34:54 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 5 May
- 2025 15:34:39 +0200
-Message-ID: <2438972e-e77e-4c56-a1c6-891f90862e67@foss.st.com>
-Date: Mon, 5 May 2025 15:34:38 +0200
+ 2025 15:34:53 +0200
+Message-ID: <cabf1c23-b6ab-4b1a-9b31-574a77f402c2@foss.st.com>
+Date: Mon, 5 May 2025 15:34:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] configs: stm32f769-disco_spl: Fix console cmdline
+Subject: Re: [PATCH 2/6] configs: stm32f746-disco_spl: Fix console cmdline
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
 References: <20250401135132.395518-1-patrice.chotard@foss.st.com>
- <20250401135132.395518-2-patrice.chotard@foss.st.com>
- <a272b1de-feb2-4cd7-983b-4ad36532c026@foss.st.com>
+ <20250401135132.395518-3-patrice.chotard@foss.st.com>
+ <f774b808-f867-443b-a6b9-3f38b69d03a3@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <a272b1de-feb2-4cd7-983b-4ad36532c026@foss.st.com>
+In-Reply-To: <f774b808-f867-443b-a6b9-3f38b69d03a3@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.48.87.62]
@@ -103,20 +103,20 @@ On 4/22/25 09:50, Patrick DELAUNAY wrote:
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   configs/stm32f769-disco_spl_defconfig | 2 +-
+>>   configs/stm32f746-disco_spl_defconfig | 2 +-
 >>   1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> diff --git a/configs/stm32f769-disco_spl_defconfig b/configs/stm32f769-disco_spl_defconfig
->> index 6a3cdd4a0e4..8a20c6af8f8 100644
->> --- a/configs/stm32f769-disco_spl_defconfig
->> +++ b/configs/stm32f769-disco_spl_defconfig
+>> diff --git a/configs/stm32f746-disco_spl_defconfig b/configs/stm32f746-disco_spl_defconfig
+>> index 8a8f506959b..f1761e50ad9 100644
+>> --- a/configs/stm32f746-disco_spl_defconfig
+>> +++ b/configs/stm32f746-disco_spl_defconfig
 >> @@ -27,7 +27,7 @@ CONFIG_AUTOBOOT_KEYED=y
 >>   CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
 >>   CONFIG_AUTOBOOT_STOP_STR=" "
 >>   CONFIG_USE_BOOTARGS=y
 >> -CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
 >> +CONFIG_BOOTARGS="console=ttySTM0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->>   CONFIG_DEFAULT_FDT_FILE="stm32f769-disco"
+>>   CONFIG_DEFAULT_FDT_FILE="stm32f746-disco"
 >>   CONFIG_SYS_PBSIZE=1050
 >>   # CONFIG_DISPLAY_CPUINFO is not set
 > 
