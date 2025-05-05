@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D419BC3ABBC
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 18:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD1FAC3ABBC
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 18:23:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35FD082161;
-	Mon,  5 May 2025 20:18:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 29F3482161;
+	Mon,  5 May 2025 20:23:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MV9UetXj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QzcsstAT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9EBF826AD; Mon,  5 May 2025 20:18:52 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 173B682163; Mon,  5 May 2025 20:23:54 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33E8D8215B
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 20:18:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02FC28215B
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 20:23:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-6060200710bso2180376eaf.3
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 11:18:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5499c5d9691so5643570e87.2
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 11:23:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746469129; x=1747073929; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3ASYBVK+qO86bFsw7L06TJezPH7kBdGdZn5xhnF+0Ao=;
- b=MV9UetXjyxxAiIfFiWKsdqyCvsb4uVLyM+K+skaGUcITf+ca/sZMVG3sxh3QZsWnxB
- Y+LzZ9bUQNLgcwOZ2G8ztSHGY5E7AejoFfTJkPlOpFYH+XBGv8guqPH/Ueatymw5ruoz
- eHqTE5MMbXyn2TxZKOGsYyLMu3uDKpEcdHmG8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746469129; x=1747073929;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1746469431; x=1747074231; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3ASYBVK+qO86bFsw7L06TJezPH7kBdGdZn5xhnF+0Ao=;
- b=CX0CFX3R0eR/EWk8UqUfp52ZxGqsjs/KCAK+mdfGax077I+LSET9N3rrBURh1ZjIt7
- ezqUhO20XP4dlN87N2MsvI/Tx2AW/iQVwUgOJrp/+Zkj6y04bnvypmNdqs1h/t/Pe/mW
- kLmmvFdV8XCJkXGwiN96G0Q85C47tnxGTONqv0RlYWSrROgsvX3Y7tCuFV0sgvP77Ygq
- iXiWJNQocjQLGpDQ9qdCfz9R3XQFg44A5c3z/LBr9rgoNCP43YA2whNVnfStM/bvBUGK
- wJO6mXuoupTPvZHV+k4dTPdk+ciwYbpuLSUmuI94k0y2lIANaNeGBSAGgX3yxsmmDK0Z
- iRUw==
+ bh=5jMfhK5C30vWySAsYeZjG/13dGTP9GAxBz6zBP+6j20=;
+ b=QzcsstATTDvkAtpjLg2elVmWGgsC5spHp/kbLFSkpIum/S7/kWznQHnLthehWjdl/V
+ 6ybXWsBBH68baLGL793MkSJk1Ta6crMM0MjF5s1BH8r6KuP13Od4BbriZl0ZTbJtY0qz
+ oxxrLrwdEUZRgSTQXupizTuDs/5M9bFvGWXt2gSzpKJwAgk2avzflupHfN+ZyY6In8+L
+ Vp3i3M9hc9JkiM1eKx0as8ZmazHP0dx8LhuBW5SeEAO8Mnj4BIiSBT8ngLiqDh26IzCF
+ uRtXJT8nVblL5+kE5MdtBRIbcEkGJXsZ3KQ/VSYCX1rg3vjNeL/RB5xI6BBbO/OmR1L3
+ IRJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746469431; x=1747074231;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5jMfhK5C30vWySAsYeZjG/13dGTP9GAxBz6zBP+6j20=;
+ b=TrhDSxV4WKEfwdhYH2KnZbAvS0FAFlOfX88Og2WhDuuxsn19kkNdc6CI2ykiamJ3hG
+ iQiZYnn1KOUjJgjlk2/G8Ff9Jn37Ww8a/pKgLJpwI7UiILAVlP7EocbT/WhuXYKVMA+Q
+ tqGDhlzbVAh8H116dX5XNrauNRP+iLJe+usb81O4r11Po2X8cX0ckUCGfjBZOU48Y2Oe
+ rq6CKCgpBL7q4JbdbUiqWvcxeN1XvXXgoGnLy+STw1CMRBCjDrVgZlLPFO86P3zfjs0G
+ o+w4r5vKSQKnqFODMCzaygFy8eKsPE52PGaEHN6Q+x2qSNhOb3k4qy7oOvgV3Vntee1+
+ IGrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyk/X+ZSH377RVWaFSsrdMTqyuGVdBu01lerlkILLRNfjiDlxWPhuuZrU/raQBGKaWEDiiK9A=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiEKLkEUckV8WUJtEV2GHE4mB6APnasyfLCVQfh1bcxmLyu8b0
- PzkIiKfujcHZ5LmnO6OTTY34J4JWkK2PRH6WPadrUwZm9nUMQSHW9IuxL2FFFu0=
-X-Gm-Gg: ASbGncvOe9ePlJNXlV+IrQHTnYczGA+jPiV1g0+KJDYIn2PWLmJEs5tkq3Orv9743u1
- uNUm5Bb6wcPT8Q4LJtja7m2O9b73vcINrmV2gzdhjwxgkd64ULbAaAfQjhl6vMnHSX4P9amRLpL
- j02Q1abV4nj+2J+JXeCyYQVCCsbiRwhxubsDAErXXK7liWk0usxmPRMjmFXJjCrPF0LXyVoEEOA
- v+Qa49Fj0AcEt2E/pIHoCqP7tq4utjqSipa+sUezMFsMAwHEvY/0JCsdoVrI5XtW9oICU1/68l2
- YOFwTfUY/NCLoNPpvTKVJSZ6ko8iL9zqnIYHByylgxKu8cPFsN5oNyKjyMt2w0pZwqbYS6uleDB
- 02g==
-X-Google-Smtp-Source: AGHT+IGFM1SeOZaQg5/45ZvaSa4AH2d+EVhehJ+sdXJcRpwRbg3NiBjEvFwTCu0/avau58fPgTRjoA==
-X-Received: by 2002:a05:6820:208:b0:606:894b:fd23 with SMTP id
- 006d021491bc7-608002d2d3bmr5532805eaf.4.1746469128858; 
- Mon, 05 May 2025 11:18:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7d8b7b4sm1762429eaf.15.2025.05.05.11.18.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 11:18:48 -0700 (PDT)
-Date: Mon, 5 May 2025 12:18:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
-Message-ID: <20250505181846.GJ5430@bill-the-cat>
-References: <20250502025026.4140184-1-sjg@chromium.org>
- <20250502143359.GS1261075@bill-the-cat>
- <CAFLszTha1wWDCpi=HR4sE-rKjoPQp+Twvyrsb-fCcF=vPW4d8Q@mail.gmail.com>
- <20250502150641.GW1261075@bill-the-cat>
- <18d5e7ee-a63d-4895-abbc-4df7737dccff@gmx.de>
- <20250502193020.GZ1261075@bill-the-cat>
- <45357aad-96d3-4c84-b6be-36cf4bb9dfff@gmx.de>
- <20250502200451.GA1261075@bill-the-cat>
- <CAFLszThgJQvA57g8LH0JH6Bq8wk=hnQUnchaUD0SB6v+0JTezg@mail.gmail.com>
+ AJvYcCW9+4bzH1WP3NUcWk1bCZm8tJtXj3MCerUmnt2xuYZq5k1LX/489sCw9GgjIp4yK2JWGgDgSeE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzW2q5J6PyMmDr7XqqY0PVpyDA1nWqW/5uMdaBKZAEPL5VpAlT+
+ M1+hr6rj1fuS0YBStd/nzsbLnMMl9Nzbhp4geJ5DqNfTw8j7L1Cp5MKG6e2HUbCobzJ4cDMCVKT
+ zo0gTBl6YcENwWKuSjSiq6mzcOgw=
+X-Gm-Gg: ASbGnctrz3wEiSjgEK5uDcKC9e6WtO8hZsvuo1CNwj1XcjTyFY3BjwZlK+DYQea2jV8
+ 1/U1j9CVfgOklmN+wx/PyhykgQh4WY+W4SohQHwJWuz30vtCN1KVdXw21O2hI6Fuh1MtQLCE/RD
+ q00GLHdEUUSarl9vTBZNsWiAyGqogdu2uCtxcT4xNbAhGVmqXZ+TynTg==
+X-Google-Smtp-Source: AGHT+IEXzOvSOeFjXj7UTP5lqK7Grk1o291z/+g8VJw6f5T1M88x2XiJP3ZRww96611QTpPzyxlrCY8QnEOEg5/FyN8=
+X-Received: by 2002:a05:6512:e9b:b0:54a:cc73:1460 with SMTP id
+ 2adb3069b0e04-54f9efb7114mr2235041e87.1.1746469430869; Mon, 05 May 2025
+ 11:23:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wzCFW21hxHcsXb1g"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThgJQvA57g8LH0JH6Bq8wk=hnQUnchaUD0SB6v+0JTezg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250418210430.27458-1-dullfire@yahoo.com>
+ <20250418210430.27458-3-dullfire@yahoo.com>
+ <CAOMZO5Bfq23ocQXd5pvsHzD+dnRexW=PFunf27dwtmz2o_ov-w@mail.gmail.com>
+ <865d511a-c571-4f12-8f5b-a3182f2b67d1@yahoo.com>
+In-Reply-To: <865d511a-c571-4f12-8f5b-a3182f2b67d1@yahoo.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 5 May 2025 15:23:39 -0300
+X-Gm-Features: ATxdqUHtmqLcy9xaLp_70Tqx2TGb2Tjq1bqL-BqYX0C4HDc6zxt8AzSE_TqZpLQ
+Message-ID: <CAOMZO5Cg9W7kfUPUbRhMX1TSfwd6G9KSQBYXyqdkAgp1aR2--A@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/3] spi: fspi: Add imxrt1170 device data
+To: Dullfire <dullfire@yahoo.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Jesse Taube <mr.bossman075@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ William Zhang <william.zhang@broadcom.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Haibo Chen <haibo.chen@nxp.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,217 +104,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonathan,
 
---wzCFW21hxHcsXb1g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, May 5, 2025 at 6:57=E2=80=AFAM Dullfire <dullfire@yahoo.com> wrote:
 
-On Sat, May 03, 2025 at 08:29:13AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 2 May 2025 at 14:04, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, May 02, 2025 at 09:42:56PM +0200, Heinrich Schuchardt wrote:
-> > > On 5/2/25 21:30, Tom Rini wrote:
-> > > > On Fri, May 02, 2025 at 07:19:18PM +0200, Heinrich Schuchardt wrote:
-> > > > > On 5/2/25 17:06, Tom Rini wrote:
-> > > > > > On Fri, May 02, 2025 at 08:49:12AM -0600, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 2 May 2025 at 08:34, Tom Rini <trini@konsulko.com> wr=
-ote:
-> > > > > > > >
-> > > > > > > > On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > During a recent discussion with Heinrich we discussed why=
- the hooks are
-> > > > > > > > > kept in a separate repo.
-> > > > > > > > >
-> > > > > > > > > The amount of code is small, a tenth of the size of the r=
-ecently added
-> > > > > > > > > lwip, just by way of example. Testing is a critical part =
-of U-Boot and
-> > > > > > > > > one of the things that distinguishes it from firmware pro=
-jects that have
-> > > > > > > > > not kept up in this area. By having the tests somewhere e=
-lse, we are
-> > > > > > > > > signalling that it is unusual, or difficult, or optional.
-> > > > > > > > >
-> > > > > > > > > The hooks mechanism also needs something of an update to =
-take account of
-> > > > > > > > > real boards in 2025. That will be much easier to undertak=
-e if the code
-> > > > > > > > > that test/py talks to is in the same repo.
-> > > > > > > > >
-> > > > > > > > > This series brings the hook files in as first-class citiz=
-ens of U-Boot.
-> > > > > > > > >
-> > > > > > > > > If we do go ahead with this, I will send a different seri=
-es which has
-> > > > > > > > > separate commits (with correct author) in the u-boot-test=
--hooks repo.
-> > > > > > > >
-> > > > > > > > I think bringing more projects directly in to the repositor=
-y is a bad
-> > > > > > > > idea. Your example of lwip isn't applicable because it's a =
-read-only
-> > > > > > > > subtree that's maintained outside of the project (same as t=
-he dts
-> > > > > > > > subtree). But sure, lets "Say Yes". That said, we still nee=
-d to:
-> > > > > > > > - Remove needless examples from the tree.
-> > > > > > > > - Not include personal labs directly in the tree.
-> > > > > > > >
-> > > > > > > > That last one is why I really think this is a bad idea. The=
- point of
-> > > > > > > > having the hooks standalone is so that any given lab can ea=
-sily add
-> > > > > > > > support for their lab and manage it, without worrying about=
- disclosing
-> > > > > > > > internal layout. There's going to be hard coded default pas=
-swords there.
-> > > > >
-> > > > > Secrets MUST NEVER reside in git repos.
-> > > > >
-> > > > > I can't imagine that such irresponsible habits would be practiced=
- by any
-> > > > > accountable developer.
-> > > >
-> > > > I agree it shouldn't be done. And just this week was the most recent
-> > > > time I've seen a company do that internally, because it's internal =
-and
-> > > > was just a temporary thing. We helped them stop needing to do that,=
- but
-> > > > assuming it never happens is a bad idea.
-> > > >
-> > > > > Please, have a look at
-> > > > >
-> > > > > https://docs.github.com/en/actions/security-for-github-actions/se=
-curity-guides/using-secrets-in-github-actions
-> > > > > https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/07_=
-pass-build-secrets.html
-> > > > >
-> > > > > to see how to do it properly.
-> > > > >
-> > > > > The same is true for a private lab:
-> > > > > Use environment variables that are coming from outside the reposi=
-tory.
-> > > > >
-> > > > > > > > There's going to be repository secrets there. That kind of =
-information
-> > > > > > > > really should not be in a public repository. Integrating th=
-e hooks with
-> > > > > > > > mainline will make lab management harder, not easier. The p=
-oint of the
-> > > > > > > > existing labs in u-boot-test-hooks is to provide samples.
-> > > > > > > >
-> > > > > > > > I think this is all why no, we should not go down this path.
-> > > > > > >
-> > > > > > > Is it worth discussing this, or is your mind made up? I have =
-some
-> > > > > > > thoughts on the last one.
-> > > > > >
-> > > > > > I think it's a terrible idea that I already said:
-> > > > > > > But sure, lets "Say Yes".
-> > > > > >
-> > > > > > But please do spend time explaining your thoughts and perhaps o=
-thers
-> > > > > > will also agree with you and I'll feel less bad taking this in?
->=20
-> Well firstly, we should bring in the whole git history so I don't
-> believe these patches should be applied as is. I did push a branch[1]
-> but can send the commands if it helps.
+> Sure.
+> Should the dt-bindings include update be part of the driver changes, or t=
+he devicetree commit?
 
-I don't see how that's relevant here, but OK.
-
-> > > > > Currently when changing a test hook I have to go through these st=
-eps:
-> > > > >
-> > > > > * fork u-boot-test-hooks
-> > > > > * push a commit to my fork
-> > > > > * update both .gitlab-ci.yaml and .azure-pipelines.yaml
-> > > > > * commit the change code.denx.de
-> > > > > * create a merge request for github.com/u-boot/u-boot
-> > > > >
-> > > > > If the test hooks were in the same repo as main U-Boot, I could s=
-ave two
-> > > > > steps.
-> > > >
-> > > > Yes, that's true, the steps for updating our CI are a little bit lo=
-nger.
-> > > > I would be happy to make u-boot-test-hooks more widely writable (so=
- it
-> > > > would instead be pushing to a branch for step 1+2). But I'm also
-> > > > concerned with external labs (which is both the origin of these scr=
-ipts,
-> > > > and where they're also used).
-> > > >
-> > > > Today, I have both a "konsulko" branch of u-boot-test-hooks, intern=
-ally.
-> > > > That has subdirectories for both "sage" and "lootbox" (the two lab
-> > > > hosts), and in turn py and bin subdirectories for each. There's no =
-value
-> > > > in publishing these changes as there's nothing unique about the
-> > > > platforms there, which aren't already in the mainline u-boot-test-h=
-ooks.
-> > > >
-> > > > How should I manage these changes moving forward?
-> > >
-> > > You could create two branches based on origin/master u-boot:
-> > >
-> > > One for maintaining your test lab specific u-boot-test changes and on=
-e for
-> > > your private u-boot code changes.
-> > >
-> > > Check out the lab specific u-boot-test branch for steering the tests =
-of the
-> > > u-boot code branch.
-> >
-> > So now for a lab you need to maintain a branch of U-Boot itself, and
-> > then to test you need to merge your lab support in? And then if there's
-> > problems work back what git hash you tested on, if reporting either
-> > problems, or as part of the "wouldn't it be nice to collect results
-> > idea" work backwards from there? And bisecting problems then becomes a
-> > real nightmare since each step requires a merge.
->=20
-> If you have your own hook scripts, they don't have to be in the U-Boot
-> tree. That is entirely up to you. In my case I would want them in the
-> tree, but in your case you can put them somewhere else.  You can even
-
-But we shouldn't have more "ellesmere" stuff in the tree. That's a
-problem. No ones lab should directly be in upstream. We should be
-documenting and providing examples for others to use. Perhaps that
-fundamental confusion is why you're suggesting this path?
-
-> put them inside the U-Boot directory but without adding them to git,
-> if that helps. But we set up the 'PATH' variable to where things are.
-> If we need to change things to make this easier for people, we can.
-> I'm really not seeing any nightmares here at all.
-
-I don't see how PATH is relevant here either. That won't pick up any of
-the configuration files. Might just be able to get away with two
-directories in PYTHONPATH instead of one.
-
---=20
-Tom
-
---wzCFW21hxHcsXb1g
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZAQYACgkQFHw5/5Y0
-tyzkzAv3bKNyqQRFcvOjK1QYJ0nB/M4IMyp4v44qDg7b0nrUiB2FLTb/E/ESKDpk
-9yCV5KIY9xCYDEzWkU6TUEB037ndc6JgAJROcdXLxho3d2paYDFwPlL9RqN2CSQh
-8TfC27GsMGLpYaHdVYCJG/XrcaPN3F5pQsQ4kgD78u3I/RTjpnuIf1rPOCFRDucb
-r6vALPLq4B73GZ2RR7xM0v46HClU3b6FNSb43eGmYY07EidDOL+1O6jfyyH8MkpC
-f6bTe6oCsuPJpJ/uYkjrfqyC72bJrRcrSVPcVDA/kNdplb04gzUXSOYBLxudouDU
-5EFEgjYoj1Djb8UPu6nUY5ZAE6eoMRKZC7YIW99AdCHUHKV3u6jdlq3sKZ7CAl0S
-dW20SWizZvxlRtXfK3ezNhkQ2Fc4dvCsvTkODgxXC+H5ZdspYJ5hYRH/eLrfpfx5
-+QhyhmpTZS3cM+D6/hrj6ro+62KUf1vz8gvxfEUiOOyqFjwz7HzN4gw0O+Tqm4Dz
-0yi6xNI=
-=wexn
------END PGP SIGNATURE-----
-
---wzCFW21hxHcsXb1g--
+It should be part of the devicetree patch.
