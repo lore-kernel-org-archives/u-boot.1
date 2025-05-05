@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C78B8C3ABB6
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 23:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9DD0C3ABBF
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 23:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5A3A82998;
-	Tue,  6 May 2025 01:35:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 25068820E8;
+	Tue,  6 May 2025 01:35:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RcpIWItN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bxr31fcj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFE0A82A4B; Tue,  6 May 2025 01:35:38 +0200 (CEST)
+ id 9051782998; Tue,  6 May 2025 01:35:39 +0200 (CEST)
 Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
  [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 590318295C
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 01:35:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67D348294C
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 01:35:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-606477d77easo3000822eaf.1
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 16:35:36 -0700 (PDT)
+ 006d021491bc7-603f54a6cb5so2996659eaf.0
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 16:35:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746488135; x=1747092935; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746488136; x=1747092936; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8hEVzN1HHgLknsnGwluHBW8righj45nMFAZ84aa3eNw=;
- b=RcpIWItNqD6dXMWfxJE5C5QIxUGVfHkgMGnMTUMpUgQR+ChERNiwf5ef5gbiwUm38h
- VnnkEfKajhq1lC56OnPXbG0EXJoRzLiliR6Gj1rnKhbsc69h4peC9IjJd/2DMFoUYhC+
- yNVhve/6mEqrJYsJ6X23gMaqbgEPBMJngDaaM=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Y2eUgO/6Y1Q4tziXN7NeWR9iQq5JPSCgw8dbz8ZKx/c=;
+ b=bxr31fcj1E1cfuBdYuh6SXWMe2LRSDx3XN3p5g+gZYO+PJ0Oyn1FYDa9sVmhEoHXIm
+ J3vvvOj593WNELaU38u9tb776Wh90s0OXOSxWBtVR4RJcOIoi97EB5T0AZKhrDx73aJL
+ tZLxv1tmxyKSJ1zYfjOgMJCL0x3RjtxgJSsOY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746488135; x=1747092935;
+ d=1e100.net; s=20230601; t=1746488136; x=1747092936;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8hEVzN1HHgLknsnGwluHBW8righj45nMFAZ84aa3eNw=;
- b=hbLb7/B5VWFGYHyzdVbyLJWEknZLYXq/fYg7p/llKANliburbn02MLIiTdEYj50cSj
- N7W8cV91ne+3HCmqOZ88MohsHqigPouQH24vO+jGB2iigvux640XCydC85801o57xQcU
- Hf8Sb6K0V+C4gMqAHNGm36aZ4sWU3IQ9d4luaFEaKnp84vyyeJuGlOTJB55tYhQrRwEY
- D6IVOGVFVDV7JzJHmjjsebC8vOuy3l3QN7xxPz37ezbn7/S6sGPMIMfUbVnCDkXc4Mlz
- AfuI7dSvKlB7cnZU9e1sz2WdO8WVmnSkKBzojObbNLmSeCgUqGcTh+WzcK2OaI6pCLik
- ODhQ==
-X-Gm-Message-State: AOJu0YzP4ittVdIgsKJmWkBVthgx6SxVQA7DeRQl11Q5UwqGUJrorB3w
- R0Pwrnd+Cr2SvBdFLNae+BbgIu6x/QyaHc2iA9BtgnyEyjlMmAT6vEV563RIezA=
-X-Gm-Gg: ASbGncuqB708xHRcQ63kUKrv9mpCV8dLsbjPzO882kgVHEbJHLCyq/RXNR5Fx5d9OT/
- iwGhNEccEmezYuPTOXAZB/XAKAIAh6jJlZrGY1nLf3DrIPa4sj+8NIne9lxdU6XIkMIsBj92/hx
- 9pAMrgydq9w/FWystASNhEOg0HA8d+yVYb4WDJQmBLl/lwV1lQ+RP7E+jQp3mpdfmwvxnyfXcxZ
- FGr1CuzNvi+9Hgdiss/xZwdimkLht3pf/5L81UbGMok62zQ6PEeGnaLCoayaJ31gjoR0XkS4LS7
- cEwLHPtYtEWMwGC5e0ZN84dTNDYroSRv6eCRsRN9YAdVYuBrwVncmtpY9pCoH1xm/ERChcPaBgr
- I
-X-Google-Smtp-Source: AGHT+IFM8zuaSpDLyTJcyrmBMVKZ1jtkHBuLxy7Qkq5Fz5ge2ThnU2urrAIC6GOuYVvKgSATgEvmRw==
-X-Received: by 2002:a4a:a544:0:b0:604:ac85:abe2 with SMTP id
- 006d021491bc7-6081d9f3c0fmr905139eaf.3.1746488135133; 
- Mon, 05 May 2025 16:35:35 -0700 (PDT)
+ bh=Y2eUgO/6Y1Q4tziXN7NeWR9iQq5JPSCgw8dbz8ZKx/c=;
+ b=qvxFXJu2lR1ykVoLi4oqwh09RJYsZs4c+1q3ARaeigzw16jE+A5Vm7mIPnAq38/57H
+ l0GLhDV7EEYrkf9FqUKovzIVz1vKvw5dD3sKrKL4I30QtvBB/4a3gv/OUAq/cnmEDHtA
+ 4hTCYkNhy6xIMiSsP0E88/MPZzrg7CVCs2PiJKFo4E8na06Wgfs79ppdOS5s8IVfo7LQ
+ Q9pdUlmmKd8NAqpdhhxV3YaTCKhmuAdtGb4cccHZLdsFwhUKA3+An4Qs+a6apCzzOVoW
+ PTr4k0wv4VX+Hrj84AHzpfsBDxXxaWROjSL7P7RZHT8MvaxigumbJUn9pQPEqX/ZX02T
+ 8d+w==
+X-Gm-Message-State: AOJu0YxPTD83GpCDR/Uik0Wl9m6pTuTpalH6ifq96Z0sxmyvTbuFZGxL
+ 1GPGxZowUrOCoyWpko7hC4LfazXUcKAgbddl1Z6Xrhq0ODPejUScpE/2hIbRWM6Hu9stFgUgIlz
+ J
+X-Gm-Gg: ASbGncsMPpHukZtxk2FBAeRRj9APaaz47DddiwSMcLGBqVb6NpkkUxCizSwgniCruGn
+ 0BBq+C7k+cxBbdQeeE5K90MlS0IExhgOahdT8xvw120BfRkTpucCJrrcWvOraSYciTXYnrdtoYc
+ dNb+om0eY2tUiACoFJUuUmKJjZ7cV+V3xiIovxhKOKtmY8S5dYqm6HW0GyDyh1bbF014TzHtQ+M
+ xxpjMep5QDpAZ7fWU9hhDdeO/cEEurYWrUBoHmJL1D8q+eU52P6WPEJ6lNMJkyf+AWawdr4vE2S
+ o/BvTxGQpqF9XM9vOP3MPV3QYJevnJnh/XglSc8M0ODFbH4ZhX5LTKJ2e9L+Fh09eMmqiaLM5wI
+ d
+X-Google-Smtp-Source: AGHT+IFA6r7qygCGNziK7I0s9HpoBWDpZ7HjaPfDK/KQZ0VOLbUUmg/kMz8JrdsAD+w6gTbKMuYnDQ==
+X-Received: by 2002:a05:6820:8cb:b0:606:361b:52ad with SMTP id
+ 006d021491bc7-607ee7f20c1mr8986797eaf.3.1746488136242; 
+ Mon, 05 May 2025 16:35:36 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-607e7fe85a4sm1913408eaf.39.2025.05.05.16.35.33
+ 006d021491bc7-607e7fe85a4sm1913408eaf.39.2025.05.05.16.35.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 16:35:34 -0700 (PDT)
+ Mon, 05 May 2025 16:35:35 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Udit Kumar <u-kumar1@ti.com>
-Cc: nm@ti.com, d-gole@ti.com, n-francis@ti.com, vigneshr@ti.com, 
- m-chawdhry@ti.com, ilias.apalodimas@linaro.org, c-vankar@ti.com
-In-Reply-To: <20250429171440.2524557-1-u-kumar1@ti.com>
-References: <20250429171440.2524557-1-u-kumar1@ti.com>
-Subject: Re: [PATCH v2] firmware: ti_sci: Add Initialization of dev_info
- head node
-Message-Id: <174648813382.69658.11353457032435322704.b4-ty@konsulko.com>
-Date: Mon, 05 May 2025 17:35:33 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+In-Reply-To: <20250430164559.27095-1-marex@denx.de>
+References: <20250430164559.27095-1-marex@denx.de>
+Subject: Re: [PATCH 1/2] fs: exfat: Use strncpy() and bail on too long
+ filenames
+Message-Id: <174648813526.69658.5088493510482972231.b4-ty@konsulko.com>
+Date: Mon, 05 May 2025 17:35:35 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,23 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Apr 2025 22:44:40 +0530, Udit Kumar wrote:
+On Wed, 30 Apr 2025 18:45:51 +0200, Marek Vasut wrote:
 
-> On K3 devices two drivers ti_sci and ti_sci_dm are supporting firmware
-> functions. At run time one of driver is used.
+> In case the filename is too long, longer than PATH_MAX - 1, it
+> would overflow dirs->dirname array. Add missing check and also
+> use strncpy() to prevent the overflow in any case.
 > 
-> Driver ti_sci already initializing head for dev_list in its probe
-> function, but it was missed in ti_sci_dm driver.
+> Fixes CID 550305:  Security best practices violations  (STRING_OVERFLOW)
 > 
-> So add head list init support for ti_sci_dm driver.
-> While at this, move init of list before usages in both functions.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] firmware: ti_sci: Add Initialization of dev_info head node
-      commit: 1c26f91a224b7ce222314b38c068acd1833599f4
+[1/2] fs: exfat: Use strncpy() and bail on too long filenames
+      commit: 4ba2fe14f2cecf7b614220e8e19c1fcdda92b748
+[2/2] fs: exfat: Inhibit unused exfat_humanize_bytes() and exfat_print_info()
+      commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
 -- 
 Tom
 
