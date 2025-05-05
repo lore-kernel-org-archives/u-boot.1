@@ -4,118 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ECC3C369C2
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 07:26:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD56C3ABB0
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 08:34:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5D6B81F66;
-	Mon,  5 May 2025 09:26:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D591A81F7B;
+	Mon,  5 May 2025 10:34:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KlfgMJBa";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="OVgtgktm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D59D681F7E; Mon,  5 May 2025 09:26:12 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DEC5381F7E; Mon,  5 May 2025 10:34:40 +0200 (CEST)
+Received: from AS8PR03CU001.outbound.protection.outlook.com
+ (mail-westeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 717068091A
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 09:26:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 927EC80BAE
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 10:34:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43cf3192f3bso38722435e9.1
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 00:26:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746429970; x=1747034770; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=GIIcTVroQWMd2HLgkXndFFfRm6dNkx/BSen0019CTwI=;
- b=KlfgMJBaFwSUpjGYiLLMjJcIiyrygOOZ/qO4jjMUHlJLh1QsfL9mqqfb4Gom1m8OJz
- BgWKy1G1iP4LqbVwWKsIZqrpV/GdSj+y3LofuMzvRT/IbEXE8suJbESarBJ3lsJIwRN4
- HopbapAh42eyOlOzTALmlx1y6fvbEGL7OkMHV/NdbVqtHkWTuZanT2I0KPEmeP6LnNhv
- ez52RcIjSFKjp0X4Eaamy6bw5Tio50MB0W5zdeXW4GczHGfKsXmF0AYvNJxqG7ztEp2B
- HQdauzG1edlz88GpRnnvcaD/av8YwqriPjnHLEePJbklJGmQvoHFk8LZjnHL4EXfiJ+J
- VJ7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746429970; x=1747034770;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=GIIcTVroQWMd2HLgkXndFFfRm6dNkx/BSen0019CTwI=;
- b=bhvhLZ0gTi2IyFUd4rjm7mQnOylUUVX/Vw14pj1uBSkJRJf2urTNG7atVYQOSstuQt
- mzxj+P7bXjKfiChJd7kgnE+ZaKcx9kSukFUeE6Suw7Jx2ofujcqqt6YudEQN4SZ6gr3E
- kN9EMPohTSlVBXXW6zfCw5qRuwuDtHXh/tewoQj2yufNpa0dT9+KZcSAQFTrNYA1a4XC
- fvV+b+hf3teorVnXTe2DS3cal+z3otz++n8Ds0vp9OFb1nBqvyYzW+HD4NUEtfZvONt5
- GoecW6VFnxpX5YjZ6TupdgfhRqSzSfvmvrlVRxyCUGby/hjiuU0CcqRCo94Xu2NdaH05
- FQLQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUjVy4LN9rGMEUyuhxHZSmrsvTGlzglBW6OxhlDQuoFYY3/kSDGtR8Vc7e0+WOCVY9jemk8Hm8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8XlFYbexHL3JUcZWStsqXn/r5+Ry1Fc6cUmASerEKEZIgNzw/
- 7p167FnbAirqC5itAG6xFW79IzprRJTs4+d9DDAXRSanNr+D7yAF0jlJAkE+8Bc=
-X-Gm-Gg: ASbGncsyeiEvfACGVR3J0uLd/aVhPLR2WO/FrL9sw6gnFO8hGFWe/aCuaDosrbl+hn2
- eOlr1RhqVML4EDt5fjIYh3BKMQFGyyXk2OTU12EsJ8sgLVxGoLlx5WrYiq7CoQJCbYKCMOA9SOW
- RsPqwtuFpts9nLNBSzeN8JRL4jCGpU0J2fPJBRk4vBjYaVFI2WEnn8HWrR5pUh0zE89ouUESm/F
- dwUHw6D2s86WbZEcK9sTgBa2U7YVQAZUeXCjUf1ffurbdzkYpU3lyGXGAp1QbBwnW7UkQlGXMKn
- uq/qdXCDYIDiAMmqqNCvMlmCNHSk6YIpLyDuwl8WJfubHTA3fGI7daYr6eLhZggNbepBNJd2ulV
- KHbfWk3i0Rv8eI75JoA==
-X-Google-Smtp-Source: AGHT+IHx9R5lCas8kJqaka5JL8NTo65cNXLtnW7w5rELRU3k/z6ucmd+pPg4AJqbEwPXvHP93jJbQw==
-X-Received: by 2002:a05:600c:3554:b0:43d:aed:f7de with SMTP id
- 5b1f17b1804b1-441c492371cmr38560945e9.21.1746429969865; 
- Mon, 05 May 2025 00:26:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:88d3:1ad7:3ae1:56e3?
- ([2a01:e0a:3d9:2080:88d3:1ad7:3ae1:56e3])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-441b2ad762fsm170611835e9.5.2025.05.05.00.26.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 May 2025 00:26:09 -0700 (PDT)
-Message-ID: <0469bb8b-042d-4c6f-974d-6d1879262e91@linaro.org>
-Date: Mon, 5 May 2025 09:26:09 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=akmUWFoIZK0TSTjxjqzVZb3cjm9n7D9SEhXOML3pPjkgwIxPczLR1oOY9XJFymj2PSYQjo3NqN/nOnWWQaKYzBNEudS8O5R/mKK/zYlJsZpS5xOXK9682Caz7fjXu4h+eb56i7qCz84ldSoUpDarTFgCp/PUbTBxQvfi67IUgXo6jUDXCiPi/H5QYZuKV/LoETEMFsXNkbNLaVukyRF0dQCz4gC05AvhzEN1xta1Rc74WbagaofM8q4k6rbD2CiQc7M8c9slwhHI/7z2L8/oJLsWBOb/5V9UiPOr2FPUII54lAbCGKeylVHW/VyFIxkr0w4KkYNoIYX713f98FxxbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Nn/CNFfv6PIYNELB3qYEUAgq/bHZ4ucHvW2qoCJ4v2A=;
+ b=Dp6grGq0UsPthxI+/JV2V9lMSnsm+LkNzTNarD1/lxnoQAg7rf8fZFCZlUcgQ3G6ythmVL82md6fZo4zUtGuQirMRUeWRUZwPg7AHtj+0KE9RJLkMqrjW+Z9UD1DOL7XFBTtGLCwkYnaBt3RpIZn7t6GLTUg9gIoQalMuKn5sIQvJLRJubS161QSUiDTe9jebE8QsOpfydUnU/vpm+MaE1v/TheS6hcNfKXO4xzb+Gi5VL2h1ZWTT0Q4qmxdtn6B0gULN9rsN2kDNGPvuv+Xc8MrikMgy+Y1+pBlcvwlEWZV4KAXEYkD//4LHih71KzAkhb9T5hGfMKOVf1hHZxJpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Nn/CNFfv6PIYNELB3qYEUAgq/bHZ4ucHvW2qoCJ4v2A=;
+ b=OVgtgktmfYpcTz8w35xpjbi7mz0sP5DInE3fFLWd3GOVpp+E/e4EhX9gMayXO7QlBwlDMoc/y6LveXmWJrcLsk1O9iE5EGI06/uz5aIUzJXYYaLYhIzKGFGEs1WZCTwxtaVbZrPMfaELdGjeKnhI920vSynJpqmpbc96BZ6swe8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DU4PR04MB10337.eurprd04.prod.outlook.com (2603:10a6:10:562::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.26; Mon, 5 May
+ 2025 08:34:36 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8699.022; Mon, 5 May 2025
+ 08:34:36 +0000
+Message-ID: <5403d72f-65b3-47f8-912e-d1b64e111f00@cherry.de>
+Date: Mon, 5 May 2025 10:34:34 +0200
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH] mach-snapdragon: Update fdtfile logic to work for RB1 and
- RB2
-To: u-boot-qcom@groups.io, Sumit Garg <sumit.garg@kernel.org>,
- u-boot@lists.denx.de
-Cc: trini@konsulko.com, casey.connolly@linaro.org,
- loic.minier@oss.qualcomm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20250423051132.292329-1-sumit.garg@kernel.org>
- <183C90A92BBF63A5.32718@groups.io>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <183C90A92BBF63A5.32718@groups.io>
+Subject: Re: [PATCH v2 15/18] bootstd: Provide a command to select the bootdev
+ order
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20250501133726.2627373-1-sjg@chromium.org>
+ <20250501133726.2627373-16-sjg@chromium.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250501133726.2627373-16-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0332.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ea::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU4PR04MB10337:EE_
+X-MS-Office365-Filtering-Correlation-Id: 13153358-e6ab-4582-9ba1-08dd8bafaad9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UTBFRFRkZnBZZW1UeXB4WjZqTThEdDVqQ2JMaC9FOUJSdkcyVUJGYWVseHRS?=
+ =?utf-8?B?Uk5mbnVOa1BtSk1peVpCYjloUDNmS3pvbjI0eUZQK25ib2dCQ1hwaDE1bXk2?=
+ =?utf-8?B?Q2V0SER0ZjA0KzhQNGRRUnl1M054Sk5VTi9rN1pnTStGSllQTExHcFpweC80?=
+ =?utf-8?B?R2FVQk5KRXpTeFliOWx3RnFpRkN5cXdNN241UitEMitERUJXaWVzNVVBWnA1?=
+ =?utf-8?B?OTkyYTNzUUMrNUI1TVdjQnBUWEc5Z1l3NUJTeFdnZlQ1czVDeTd0OHIrVFY4?=
+ =?utf-8?B?K3VncVE5SUR0OS9VNU1kbjI2UkkySnh0QWp2TDdHZzNQSkFxNE8xbmpraFpQ?=
+ =?utf-8?B?K0VTTEM2VTZkQU56UmdUTzZNWjBvRTkyVS9GT253OXdSNzhFaHhJT3BvTFJ4?=
+ =?utf-8?B?bzBRRVg1aFA0Vm43Vnh3cFAyeWNCVjVpOUhRWndYdjRENEZ4RTl2dWZSTnEv?=
+ =?utf-8?B?alVBRmRvQ21OY3ZWNklBWGVMQ0liVlM1MlpEVTkzc0hXdnNtTnBlWUVlTXdE?=
+ =?utf-8?B?WXpPTDVrVjRCeks2Zk8rMnA0WDlrdDdUTmpRMEFVaENuRkx4bm0yTGd5Wk81?=
+ =?utf-8?B?bGk2ckRpYkZuRlNQN3JEak5uZXJwU1ZZQnZ5T0gwLzd4NzExbVhoUWtZY2lW?=
+ =?utf-8?B?NFM4QUlyME9ROUh3ekdxOGRucWZoNTNpbGMrMGJ5U1lxTEhkSUpqRmZGdlp3?=
+ =?utf-8?B?NDhwdG1sMER1RUNFZTVBS3VGNXJFd2hBTzdKTnNZKzUzTURQYUpNTDlXKzVi?=
+ =?utf-8?B?eFZBSlh5MDJHWWcyZ3cxc1Eyc2FJN1dIeHExbUdYNDJwMWVrUXdxKytoM1li?=
+ =?utf-8?B?LzV5RllIaWduSmRUdmYwcjkwZkI1b2NsQzlQRFdWdHZtZmRqVGxvZ3hZV1lH?=
+ =?utf-8?B?RGJqOW81aXUxc3QwRTAySElCOW43QmJhNXREQ3Z2aDErUk1ta0JyWmZiWnMw?=
+ =?utf-8?B?Z0ptRzFyNGpkTHNRMkozZysxYUtRblhKZ1hyOFBQVkZmVjd0Rlg0amlwbDU5?=
+ =?utf-8?B?ZlRwQVZiN1VVUWdWRGg1VUtxR3BySXhxUXVyb29Ob29KVnUvYjJGc3h3WGRa?=
+ =?utf-8?B?UU80d01YWnlzdU1LZ09SU1FpTWlsbG41U1FKWGpvNzJMMStlaVRhbnpnUXVo?=
+ =?utf-8?B?bVRGc1NaV0xqV20wZk5NZHRyR3ZLWkdjT010MExReEhZWGRLT0g0R0tYTnV4?=
+ =?utf-8?B?OGhiWE5LOHE5dkFDNFNjUTRqRVozL0RLd25XWUFxVFRmd0kwVWx0SEsrOTBh?=
+ =?utf-8?B?d1k0Vk9iamVBVTQ1Zkc1b1ZaUVlqbHlSQ2ZhQWhabXdOK3dzeE56SERLQXFq?=
+ =?utf-8?B?L2pnb1pZSS9sRW5OVG9vZnR0VTBtSm0vWE0wRjlHaGpVdW1PMW93LzY5dUN5?=
+ =?utf-8?B?cUVOb0lEcERRRFhzT1VDUnB2SmY1Z1BFSTZnL01MSUhXNnQxcm96Mm0raXVK?=
+ =?utf-8?B?QUdNNXlTQk83dUl5QzNrczVmRUcxcUl0UGRNNmVmY2JoNWQzNjRybDNsL3RQ?=
+ =?utf-8?B?aU96czBuSkxwYW1EU1J3dytHWFdOejF4QU5Ia0Y4dzJheVJENE51UUFTYU9I?=
+ =?utf-8?B?OU94YnVWVTExM1VmRDAwV3kxNDM2aE1xWm5nNXdDWm5vbngzUWNQODUvWHFm?=
+ =?utf-8?B?UzgydTdhK2ErcHIwSFNXSTFqVURlOGxXSDNndS9aRElBZEpWV1g2c040TW4r?=
+ =?utf-8?B?d1ZsQmtUKzErZnlEZmx6L3gzaU5PNmJON0kyb29GTWM1VCtQa2lldjVndE4z?=
+ =?utf-8?B?UGdDdlI3ZHpkL1pmTzhUWk5ZM3d5SDlyY3ZNVVZvZm5lOExHTjh0ZmN3UlIw?=
+ =?utf-8?B?amMzVlRyeXh0bWcyZVI4ekt0K0wzaTkwcityVUdVenYrRGxiQVA5ZStGNzBT?=
+ =?utf-8?B?UWprTXpGTmRtcU1LT1M3Yk05M2lBYVA5R3NKVkVqdkdXSmFHTHdPTDNmWDBs?=
+ =?utf-8?Q?DaY0/YhD+oQ=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RlZlc3owQUNrL29uWXV2a0tUdlJUYkQ1ZXcrc0dKTElEK3pvQ1hoelN6ZWEy?=
+ =?utf-8?B?M2c0Q1ZCdDZQSzFCTG5KZnYrTVRBZHFWMnZIcUFKa1V2L1RXK2ErcXhlQjF0?=
+ =?utf-8?B?ejJiWGxQM2VmS1lOTkpIUHI3aGRyU0tIY3E3RVdlaVczcDh1Mm9vUEY2Q2xB?=
+ =?utf-8?B?YWxwY3R6bjltZk1JQVpwTG5yQkhnNkZhbERvSlFhZE8waktYVGhIT2hWQ3Jh?=
+ =?utf-8?B?MndFMHNXeEJUT3psZ0tvVE5HNEdwWGUwb29RK3Z5V1htT3ZCRmh0TldJNGZP?=
+ =?utf-8?B?NUk0dFdKVFhUM1R2L0NEUjFFTnpLeHRMM1pob1hLYWpTVm1sTkZuL0dDSFFn?=
+ =?utf-8?B?WmVVRXQ2UkQwS0hzVUppdGYyb3dudlJ1SnhNcHV3QTRlTGt4V3hIZjlhSE94?=
+ =?utf-8?B?dzJlMFRSeExjeXdUSXd3SzNkRVByYUtEYytndkJsUkpFTzNjQ3JETFRXaWlQ?=
+ =?utf-8?B?bXBNemREbmNTendzd1UzMm0zY24zTTlXZzQ0WUc4eW9mcnFHd3Y5R2kxWWto?=
+ =?utf-8?B?TDd2T2YwNnhtZVVCcmEyS2gyclVnYjVVaXA1T2owTTJsaG1jSlQzN2FSN1V0?=
+ =?utf-8?B?Sitrb1JWUUg2LzNTOGZ5OU02RzZsdTFiZDM2SmpRWmt3YnBHekNoYWdWSndo?=
+ =?utf-8?B?aUZJRlRDQjZrRnRlc0t3L1FQMTZoQkRqVE1MQ1IzK0M3VlZpbGQxRzQ1SVRE?=
+ =?utf-8?B?RGlYOWdkVlFJYlBsM3Jmdm0zTElrTkpjYVlPMVplTkp1bmlkSkNqZXJUWURj?=
+ =?utf-8?B?SjhZdEsrY3V5Sk9oczJObVlCQURQMTlLYXF3ODVJVWxyRGNsZmFPL05GbXFn?=
+ =?utf-8?B?eXdmRzRQd1NLdjJKbkdQUStyckhNdDEyQmJFSGc1aC96VC9MSHBxamxCaFNs?=
+ =?utf-8?B?SFdvM0JIcG53OStGeDFTOXRlZkJsMTJoNUcxeE0rOVE3c3ZkQk93aExNNFVP?=
+ =?utf-8?B?QXJKREU0NGdwVHR2V015TzBXdUdjbVUzbWQwdFByTGl5aFZEZFhRVWgzZzhS?=
+ =?utf-8?B?V2tmUGc1SHZOS1JzUUxzV3A1Z2E2ZW5UWFJPOUVQb3lWWENrc0Y5cU52UFZt?=
+ =?utf-8?B?MjdQTVcvT0VicXFRa3M4SUYyZ3JlZUE5bHd4Q3VqR3UrUkNMOFhtUFNzK0h2?=
+ =?utf-8?B?b056dzNyZEhpTUlwK2dHc25tcjBnYW4yVUNobkVrSEZTRFNQK1lwNUJUNWdr?=
+ =?utf-8?B?VGdFZzluWUN0QSt4TmpqYUdWa0tNa0FRanE3WWI1emVUSDJlSG5TSExnNFZL?=
+ =?utf-8?B?d08vSTZGUTViNms1SWhFSHJqa3h6QlppWHp1SnI3cCsrb05WcGw3eU41YlB5?=
+ =?utf-8?B?dE9nK3k2TklLdy8yNDNncHRUU1lQL3loQWpvbVp6blRFUlg3cE9TamNtQ01n?=
+ =?utf-8?B?WUVyeHQwdURQNnRENnpXME1rUWU3YTdsaWhlanhMOTBUSFhrU1lBUUpDQVli?=
+ =?utf-8?B?M1BRbXAxYW9YNElwRCtxbUExK0VRVGU2S3FsTlhwNXplQmlycEgzTGVqR2Mw?=
+ =?utf-8?B?KzJtRFdndUtSaUtKT2MrVkJvWWR4QUtnTHBMSjVSZlpTbHlRaGJiVHRwNTRa?=
+ =?utf-8?B?ampSR3hZcGZaM3c3NWk4QU0zenYzL0VYYUlDc2dUNWlGU3JKQXVLeWdDck1Y?=
+ =?utf-8?B?ZVZ4c2hOZUEyRXhGblQyWU5jRDNIbit5QjNVdlZpSEc4Z0RVQ0dUeUVKL0lW?=
+ =?utf-8?B?OSt1VXAwL1F2aHU5a2szKzhUNnd1NGszUkxrN2UxTU1jZEZidVBHbDFMRmFL?=
+ =?utf-8?B?WlR5eFYwVll3T2JqVXc2K3hLN0cyTzJ3cVduK2N0dCtLUXByVmtFbUttbERk?=
+ =?utf-8?B?dU1PdHRZdXdrNWJQTmNGODlhSUFZZm9ZQ0FHN1FmOXdaVEFpbGpXUGxGZTkr?=
+ =?utf-8?B?bEVXM3FEQnFhZXFGV0QwRkt5Z3M1MVJJNlJQRXNxMmgzQ0Y2QndBWHdxalor?=
+ =?utf-8?B?N2lxN2U1TW1YQTBJakZRZ1hqcU0zTnJsVmE2SUlxUTNXcXFQczJGRHFLMnVo?=
+ =?utf-8?B?QmRqWlljV3lnYjZmOVVsTXJZMFRtU2d4QnpROTNLRGlpM3lVVzFLZ0hzajZT?=
+ =?utf-8?B?djRKT09iTzVQUHE0Z1RTTVJZLzRhZnM5ajR1aG9GV01XQXNrR2U4cnQzWndL?=
+ =?utf-8?B?VjNpK1JzSHIvQWtDWnpxYlJBdHFGVGV3dVR2QUNUWGZncktxc29BS05vMzJo?=
+ =?utf-8?B?dnc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13153358-e6ab-4582-9ba1-08dd8bafaad9
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2025 08:34:36.0696 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: x/dxMqpaHPB99C+4hTDodw0JKq6zNZDx81mjWWPVMlitBM94WOIYz2zCx5ukD8FBEQSCsnFZ/KLX7OE7AprX9s+yOEpTVe75RCZMggJqQ2o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10337
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,86 +176,121 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05/05/2025 09:23, Neil Armstrong via groups.io wrote:
-> Hi,
-> 
-> On 23/04/2025 07:11, Sumit Garg wrote:
->> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>
->> RB1 and RB2 have three root compatibles where the last one can't be used
->> to decode fdtfile name (qcm* vs qrb*). So rather just rely on the first
->> compatible to retrieve the SoC name.
-> 
-> OK, so "soc" would be qcm2290 instead of qrb2210, what's the problem since
-> you have "board" with "qrb2210-rb1" ?
-> 
-> What is the difference between qcm2290 & qrb2210 that affects U-boot ?
-> 
-> Same for qrb4210 vs sm4250.
-> 
-> If you have a custom board code, you can still match on the root compatible.
+Hi Simon,
 
-Forget my comment, it affects the fdtfile construction....
+On 5/1/25 3:37 PM, Simon Glass wrote:
+[...]
+> diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
+> index 9bee73ead58..294865feb64 100644
+> --- a/boot/bootstd-uclass.c
+> +++ b/boot/bootstd-uclass.c
+> @@ -6,6 +6,8 @@
+>    * Written by Simon Glass <sjg@chromium.org>
+>    */
+>   
+> +#define LOG_CATEGORY UCLASS_BOOTSTD
+> +
+>   #include <alist.h>
+>   #include <blk.h>
+>   #include <bootdev.h>
+> @@ -132,6 +134,22 @@ const char *const *const bootstd_get_bootdev_order(struct udevice *dev,
+>   	return std->bootdev_order;
+>   }
+>   
+> +void bootstd_set_bootdev_order(struct udevice *dev, const char **order_str)
+> +{
+> +	struct bootstd_priv *std = dev_get_priv(dev);
+> +	const char **name;
+> +
+> +	free(std->bootdev_order);  /* leak; convert to use alist */
+> +
 
-> 
-> Neil
-> 
->>
->> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->> ---
->>   arch/arm/mach-snapdragon/board.c | 12 ++++++++++--
->>   1 file changed, 10 insertions(+), 2 deletions(-)
->>
->> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
->> index deae4d32378..dc8220e89b4 100644
->> --- a/arch/arm/mach-snapdragon/board.c
->> +++ b/arch/arm/mach-snapdragon/board.c
->> @@ -437,16 +437,24 @@ static void configure_env(void)
->>       /* The Qualcomm reference boards (RBx, HDK, etc)  */
->>       if (!strncmp("qcom", buf, strlen("qcom"))) {
->> +        char *soc;
->> +
->>           /*
->>            * They all have the first compatible as "qcom,<soc>-<board>"
->>            * (e.g. "qcom,qrb5165-rb5"). We extract just the part after
->>            * the dash.
->>            */
->> -        if (!strsep(&tmp, "-")) {
->> +        if (!strsep(&tmp, ",")) {
->> +            log_warning("compatible '%s' has no ','\n", buf);
->> +            return;
->> +        }
->> +        soc = strsep(&tmp, "-");
->> +        if (!soc) {
->>               log_warning("compatible '%s' has no '-'\n", buf);
->>               return;
->>           }
->> -        /* tmp is now "rb5" */
->> +
->> +        env_set("soc", soc);
+leak? and aren't you using alist already?
 
-OK, so you should move the other env_set("soc", ...) code in the other else branch
-to avoid having a double env_set("soc", ...)
+[...]
 
->>           env_set("board", tmp);
->>       } else {
->>           if (!strsep(&tmp, ",")) {
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Groups.io Links: You receive all messages sent to this group.
-> View/Reply Online (#1677): https://groups.io/g/u-boot-qcom/message/1677
-> Mute This Topic: https://groups.io/mt/112410772/900740
-> Group Owner: u-boot-qcom+owner@groups.io
-> Unsubscribe: https://groups.io/g/u-boot-qcom/leave/13197875/900740/1403832380/xyzzy [neil.armstrong@linaro.org]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-> 
+> diff --git a/doc/usage/cmd/bootdev.rst b/doc/usage/cmd/bootdev.rst
+> index 98a0f43c580..abede194cba 100644
+> --- a/doc/usage/cmd/bootdev.rst
+> +++ b/doc/usage/cmd/bootdev.rst
+> @@ -13,6 +13,7 @@ Synopsis
+>   
+>       bootdev list [-p]        - list all available bootdevs (-p to probe)
+>       bootdev hunt [-l|<spec>] - use hunt drivers to find bootdevs
+> +    bootdev order [clear] | [<spec> ...]  - view or update bootdev order
+>       bootdev select <bm>      - select a bootdev by name
+>       bootdev info [-p]        - show information about a bootdev
+>   
+> @@ -78,6 +79,27 @@ To run hunters, specify the name of the hunter to run, e.g. "mmc". If no
+>   name is provided, all hunters are run.
+>   
+>   
+> +bootdev order
+> +~~~~~~~~~~~~~
+> +
+> +This allows the bootdev order to be examined or set. With no argument the
+> +current ordering is shown, one item per line.
+> +
+> +The argument can either be 'clear' or a space-separated list of labels. Each
+> +label can be the name of a bootdev (e.g. "mmc1.bootdev"), a bootdev sequence
+> +number ("3") or a media uclass ("mmc") with an optional sequence number (mmc2).
+> +
+> +Use `bootdev order clear` to clear any ordering and use the default.
+> +
+> +By default, the ordering is defined by the `boot_targets` environment variable
+> +or, failing that, the bootstd node in the devicetree ("bootdev-order" property).
+> +If no ordering is provided, then a default one is used.
+> +
 
+Not sure what's the benefit if we can simply set the environment variable?
+
+FWIW, it's what we do in 
+board/theobroma-systems/common/common.c:setup_boottargets()
+
+One of the benefits I see is dumping the order if that variable isn't 
+set (and also not in the DT), but shouldn't that be information we 
+should be getting from `bootdev list` instead?
+
+The point I'm trying to make is do we need yet another way to set the 
+bootdev order? Printing the order would be welcomed I guess but that 
+could be as simple as printing boot_targets environment variable, the DT 
+property or whatever the default is if both are missing.
+
+If we are to keep the clear command, I would use a flag instead of an 
+argument to be consistent with the other bootdev commands, e.g. 
+something like `bootdev order -c`.
+
+> +Note that this command does not check that the ordering is valid. In fact the
+> +meaning of the ordering depends on what the bootflow iterator discovers when it
+> +is used. Invalid entries will result in no bootdevs being found for that entry,
+> +so they are effectively skipped.
+> +
+>   bootdev select
+>   ~~~~~~~~~~~~~~
+>   
+> @@ -171,6 +193,20 @@ This shows using one of the available hunters, then listing them::
+>                   Capacity: 0.0 MB = 0.0 GB (1 x 512)
+>       =>
+>   
+> +This shows viewing and changing the ordering::
+> +
+> +    => bootdev order
+> +    mmc2
+> +    mmc1
+> +    => bootdev order 'mmc usb'
+> +    => bootdev order
+> +    mmc
+> +    usb
+> +    => bootdev order clear
+> +    => bootdev order
+> +    No ordering
+
+Shouldn't we be provided with a default one?
+
+Cheers,
+Quentin
