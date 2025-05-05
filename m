@@ -4,54 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE95DC3ABB0
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 12:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 427F9C3ABB0
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 12:44:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53DAD81F7B;
-	Mon,  5 May 2025 14:43:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id AD43F82161;
+	Mon,  5 May 2025 14:44:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="C3qBXPqq";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="UJr0xOQ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2E5F82076; Mon,  5 May 2025 14:43:49 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CDFCD82162; Mon,  5 May 2025 14:44:43 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 532F180F03
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 14:43:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id BC04580F03
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 14:44:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id EF0354A4E1;
- Mon,  5 May 2025 12:43:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0761EC4CEED;
- Mon,  5 May 2025 12:43:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746449025;
- bh=aXCxB9wZ6MmzS4IfZTgGoTNa3hrF4ntA/Gu2ZommeKc=;
- h=From:To:Cc:Subject:Date:From;
- b=C3qBXPqqvRXcvRLGIEY/uIuH650ODZsy8NIkvEjcflFNYdfrx+VrnDvKhYxFI1WTo
- ERBvabvdvREpPJai1vgmwH6xkhy3S3zEMQVz4JGqawQ08oX2TmbjyA8Dlqw2XHVf9I
- +nXvpZPvrPCRYu8u1TBcVQ0HuHrn+Mbk7bJs0p27TWT2tOdaafLF9e+db8cegFRtO5
- 2APjqBVZI8fyvZVPzbD1IeltBdy2JtGX3W/FFYGxupWf+2jFDbgYe6bEzYFW3DN7iK
- azAfhT+bfRinFiyPeeVOyYinsMMkqDVAiWK20Jce+CaUCp2MhgieN+Nu8KXskzPzcF
- UXDiqpmugzOUg==
-From: Sumit Garg <sumit.garg@kernel.org>
-To: casey.connolly@linaro.org,
-	neil.armstrong@linaro.org
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com,
- loic.minier@oss.qualcomm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH v2] mach-snapdragon: Update fdtfile logic to work for RB1 and
- RB2
-Date: Mon,  5 May 2025 18:13:33 +0530
-Message-ID: <20250505124333.12344-1-sumit.garg@kernel.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7220064b2c=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5459Xafo017302;
+ Mon, 5 May 2025 14:44:29 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ VmuhwRRZ9eb9yaErv/uSoNIdUM/rhH5VXIHJm7N3AiA=; b=UJr0xOQ4gzI2nuy9
+ qbJQAhbVg1i5mzSvjt1ApYcaUsNN23lFI5G8LGCYZ6YxALOg8y7om9ClFk7Y2R8u
+ Bb2oTSN8hjNdXFvFcg7xTKC75BREwYNiOup9eL3JahMi2G++6BxS5m9dAt5uQpNL
+ HndoekEZ/JsQSk5KNIqt53B890c2kMkY2dJWL8G/7/ksvnQN/4smQbWLcIfn+HJy
+ cy0VCUOHXL43mnH+3wJA0jPA5/r8FdNGCeoYkkZiWo7vbAWB9ryDYGTI+unVNkmQ
+ cYUxRcGnykgxxbXsPFbKl/ZxKA/l4tqUOkHEPlISsuLd0D4cjA34g6F7K5t6B5m/
+ mdpmSQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dbenpqpc-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 05 May 2025 14:44:29 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0A1BD40086;
+ Mon,  5 May 2025 14:43:20 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0A1A5ABCCCE;
+ Mon,  5 May 2025 14:43:14 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 5 May
+ 2025 14:43:13 +0200
+Message-ID: <6021e6eb-5758-4930-a544-e5ffbe2d319c@foss.st.com>
+Date: Mon, 5 May 2025 14:43:12 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RESEND PATCH 2/2] ARM: stm32: env: Enable scan and start for AB
+ schema on STM32MP15 DHSOM
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+To: Pascal Zimmermann <pzimmermann@dh-electronics.com>, <u-boot@lists.denx.de>
+CC: Marek Vasut <marex@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
+ <20250327143843.19358-3-pzimmermann@dh-electronics.com>
+ <fa360159-299f-4083-bcef-96df4915d0c3@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <fa360159-299f-4083-bcef-96df4915d0c3@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-05_05,2025-05-05_01,2025-02-21_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,120 +94,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-RB1 and RB2 have three root compatibles where the last one can't be used
-to decode fdtfile name (qcm* vs qrb*). So rather just rely on the first
-compatible to retrieve the SoC name.
 
-Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
----
- arch/arm/mach-snapdragon/board.c | 63 ++++++++++++++++++--------------
- 1 file changed, 36 insertions(+), 27 deletions(-)
+On 4/11/25 09:24, Patrice CHOTARD wrote:
+> 
+> 
+> On 3/27/25 15:38, Pascal Zimmermann wrote:
+>> For the STM32MP15 DHSOM, change the default environment so an AB schema
+>> on a device can be detected.
+>>
+>> For this the define "SCAN_DEV_FOR_BOOT_PARTS" is overwritten and
+>> appended.
+>>
+>> The detection works by looking for the partitions with specific lables.
+>> The name of those partitions are in the variables and its defaults:
+>> * dh_ab_partname_primary=rootfs-a
+>> * dh_ab_partname_secondary=rootfs-b
+>>
+>> To prevent being hanging at bootcmd, enable "CONFIG_BOOT_RETRY" and
+>> "CONFIG_RESET_TO_RETRY", but the timer will only be activated, if the AB
+>> partitions are detected.
+>>
+>> Signed-off-by: Pascal Zimmermann <pzimmermann@dh-electronics.com>
+>> ---
+>> Cc: Marek Vasut <marex@denx.de>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>  configs/stm32mp15_dhsom.config       |  3 +++
+>>  include/configs/stm32mp15_dh_dhsom.h | 33 ++++++++++++++++++++++++++++
+>>  2 files changed, 36 insertions(+)
+>>
+>> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+>> index 7e5b5aa67ef..c84116482f6 100644
+>> --- a/configs/stm32mp15_dhsom.config
+>> +++ b/configs/stm32mp15_dhsom.config
+>> @@ -10,6 +10,9 @@ CONFIG_BOARD_EARLY_INIT_F=y
+>>  CONFIG_BOARD_SIZE_LIMIT=1441792
+>>  CONFIG_BOOTCOUNT_BOOTLIMIT=3
+>>  CONFIG_BOOTDELAY=1
+>> +CONFIG_BOOTRETRY=y
+>> +CONFIG_RESET_TO_RETRY=y
+>> +CONFIG_BOOT_RETRY_TIME=-1
+>>  CONFIG_CMD_ADC=y
+>>  CONFIG_CMD_REMOTEPROC=y
+>>  CONFIG_CMD_STBOARD=y
+>> diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
+>> index c004a8cec82..267e3446779 100644
+>> --- a/include/configs/stm32mp15_dh_dhsom.h
+>> +++ b/include/configs/stm32mp15_dh_dhsom.h
+>> @@ -17,7 +17,40 @@
+>>  			" 0x800000\0"
+>>  #endif
+>>  
+>> +/* Add the search for AB partitons */
+>> +#define SCAN_DEV_FOR_BOOT_PARTS						\
+>> +	"run dh_check_if_ab; "						\
+>> +	"if test -z \"${devplist}\"; "					\
+>> +		"then "							\
+>> +		"part list ${devtype} ${devnum} -bootable devplist; "	\
+>> +	"fi; "
+>> +
+>>  #define STM32MP_BOARD_EXTRA_ENV						\
+>> +	"altbootcmd= "							\
+>> +	"setenv dh_ab_get_partnames "					\
+>> +		"'setenv dh_ab_partnames ${dh_ab_partname_secondary} "	\
+>> +			"${dh_ab_partname_primary}' && "		\
+>> +		"run bootcmd\0"						\
+>> +	"dh_check_if_ab= " /* Sets devplist if AB partitions*/		\
+>> +		"echo test for AB on ${devtype} ${devnum} && "		\
+>> +		"run dh_ab_get_partnames && "				\
+>> +		"setenv devplist && "					\
+>> +		"for partname in ${dh_ab_partnames}; do "		\
+>> +			"setenv partnum && "				\
+>> +			"if part number ${devtype} ${devnum} ${partname} partnum; "\
+>> +				"then "					\
+>> +				"setenv devplist \"${devplist} ${partnum}\" && "\
+>> +				"setenv bootretry 60 ;"			\
+>> +			"fi; "						\
+>> +		"done ; "						\
+>> +		"if test -n \"${devplist}\"; "				\
+>> +			"then echo AB partitions found! ; "		\
+>> +		"fi\0"							\
+>> +	"dh_ab_get_partnames= " /* Sets dh_ab_partnames */		\
+>> +		"setenv dh_ab_partnames ${dh_ab_partname_primary} "	\
+>> +			"${dh_ab_partname_secondary}\0"			\
+>> +	"dh_ab_partname_primary=rootfs-a\0" /* Names of AB partitions */\
+>> +	"dh_ab_partname_secondary=rootfs-b\0"				\
+>>  	"dh_preboot="							\
+>>  		"run dh_testbench_backward_compat\0"			\
+>>  	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
+> 
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Changes in v2:
-- Avoid redundant env_set() for SoC name.
+Applied to u-boot-stm32/master
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index a3b39e3b4b3..5f241bafc85 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -417,52 +417,39 @@ static void configure_env(void)
- 		return;
- 	}
- 
--	/* The last compatible is always the SoC compatible */
--	ret = ofnode_read_string_index(root, "compatible", compat_count - 1, &last_compat);
--	if (ret < 0) {
--		log_warning("Can't read second compatible\n");
--		return;
--	}
--
--	/* Copy the second compat (e.g. "qcom,sdm845") into buf */
--	strlcpy(buf, last_compat, sizeof(buf) - 1);
--	tmp = buf;
--
--	/* strsep() is destructive, it replaces the comma with a \0 */
--	if (!strsep(&tmp, ",")) {
--		log_warning("second compatible '%s' has no ','\n", buf);
--		return;
--	}
--
--	/* tmp now points to just the "sdm845" part of the string */
--	env_set("soc", tmp);
--
--	/* Now figure out the "board" part from the first compatible */
--	memset(buf, 0, sizeof(buf));
- 	strlcpy(buf, first_compat, sizeof(buf) - 1);
- 	tmp = buf;
- 
- 	/* The Qualcomm reference boards (RBx, HDK, etc)  */
- 	if (!strncmp("qcom", buf, strlen("qcom"))) {
-+		char *soc;
-+
- 		/*
- 		 * They all have the first compatible as "qcom,<soc>-<board>"
- 		 * (e.g. "qcom,qrb5165-rb5"). We extract just the part after
- 		 * the dash.
- 		 */
--		if (!strsep(&tmp, "-")) {
-+		if (!strsep(&tmp, ",")) {
-+			log_warning("compatible '%s' has no ','\n", buf);
-+			return;
-+		}
-+		soc = strsep(&tmp, "-");
-+		if (!soc) {
- 			log_warning("compatible '%s' has no '-'\n", buf);
- 			return;
- 		}
--		/* tmp is now "rb5" */
-+
-+		env_set("soc", soc);
- 		env_set("board", tmp);
- 	} else {
- 		if (!strsep(&tmp, ",")) {
- 			log_warning("compatible '%s' has no ','\n", buf);
- 			return;
- 		}
--		/* for thundercomm we just want the bit after the comma (e.g. "db845c"),
--		 * for all other boards we replace the comma with a '-' and take both
--		 * (e.g. "oneplus-enchilada")
-+		/*
-+		 * For thundercomm we just want the bit after the comma
-+		 * (e.g. "db845c"), for all other boards we replace the comma
-+		 * with a '-' and take both (e.g. "oneplus-enchilada")
- 		 */
- 		if (!strncmp("thundercomm", buf, strlen("thundercomm"))) {
- 			env_set("board", tmp);
-@@ -470,6 +457,28 @@ static void configure_env(void)
- 			*(tmp - 1) = '-';
- 			env_set("board", buf);
- 		}
-+
-+		/* The last compatible is always the SoC compatible */
-+		ret = ofnode_read_string_index(root, "compatible",
-+					       compat_count - 1, &last_compat);
-+		if (ret < 0) {
-+			log_warning("Can't read second compatible\n");
-+			return;
-+		}
-+
-+		/* Copy the last compat (e.g. "qcom,sdm845") into buf */
-+		memset(buf, 0, sizeof(buf));
-+		strlcpy(buf, last_compat, sizeof(buf) - 1);
-+		tmp = buf;
-+
-+		/* strsep() is destructive, it replaces the comma with a \0 */
-+		if (!strsep(&tmp, ",")) {
-+			log_warning("second compatible '%s' has no ','\n", buf);
-+			return;
-+		}
-+
-+		/* tmp now points to just the "sdm845" part of the string */
-+		env_set("soc", tmp);
- 	}
- 
- 	/* Now build the full path name */
--- 
-2.43.0
+Thanks
+Patrice
 
+> 
+> Thanks
+> Patrice
