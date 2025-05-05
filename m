@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A09C3ABB6
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 21:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FC4CC3ABB6
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 21:28:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97C92820E8;
-	Mon,  5 May 2025 23:27:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1263820E8;
+	Mon,  5 May 2025 23:28:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AtYijGgg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W7X2utaJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49197820EB; Mon,  5 May 2025 23:27:07 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 00C76820EB; Mon,  5 May 2025 23:28:23 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB3FE80050
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 23:27:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2CCE80050
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 23:28:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-606440d92eeso2422551eaf.2
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 14:27:04 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72ec926e828so1363547a34.0
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 14:28:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746480423; x=1747085223; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746480499; x=1747085299; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=89Chc8MQQIgoSj1irhn3908g59FNILNluJ95hufyasM=;
- b=AtYijGggv96JEiJdTk0fSo2wLOTGoVXWLglERuaOh3UiwDYGNFeVDDVtyM9YHz1ckO
- o+cC7LXzlpensuGUEojZKIqw09wVZqbii23vBz50tBln2qc4Z5nT+uAE9/2hITOQ3uP0
- 8rDiabkadgEBMr5vverEYiNSUB1hCbeaLMslQ=
+ bh=Wl+G6jEZQ7CmetayKnvlMcXWa9AK04KUZ8PDfRIlbjY=;
+ b=W7X2utaJDOw5F/HfHqTWOfnQCSmmThV9vflmhJt2es2jC7TVj2VbkofFraVPiRUPZS
+ 4voD3mA5bwULx2w9+WoMAdUJxP4r+2f6WKtLHxxFqcNVgkAVIN7ac8pd2QAkNzOSl0IS
+ u3TvYZVbZlJPrKO2WJ0o0z5vwKfPRMmh9CsEY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746480423; x=1747085223;
+ d=1e100.net; s=20230601; t=1746480499; x=1747085299;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=89Chc8MQQIgoSj1irhn3908g59FNILNluJ95hufyasM=;
- b=ZFPi6P67qwTj+A/WbJq28cfpP1iv62h4Ucr81zh9koib5htPDnCkf9y+JGgX5BvIYl
- gLF0CbJVpIz8bMmzc9QuHUtUk7ZqT2FkVAdAh5O4CauIjdPM8emth8TQ2T2XsrbD6B8A
- nbAXx/d9fkpPnHX9FPNveLSDoKKd44tw91payTxnQXpMs9bDoIycOXJ79r/Am/TwF5LG
- E6Yxq4aqXa7jEn0lcTU15txSP5uGNduCS9ajl89iTTBcL3qLELOWqMTqPRkZRQTdQfJE
- 5B7D+1o9LTPeGBExmBnWuM6pBz0MTIN7TJEoNyUic7hWbKdbBlX/hzUT70elx+TzMxy2
- 4TVw==
-X-Gm-Message-State: AOJu0YzlBfMno0yeTi7RLgebsbYvPz1yhhAXOVD47aQb2Wh7Q60Fd/Yb
- vUiBkeFpkA1Y2KAiwIe5wSAwpm2FBrcOWp6ag8Fj+GnS9lQWbYg3Id3Cgbqf/Wg=
-X-Gm-Gg: ASbGnctylJXjmT7R1/qI83c71p1UctotYd+Slox3qjQpwrzVllL740tv3ufZzOYopnO
- 3X8nYUGji7+LOzyIr8H76VxSBl8E0PxJd4qPXGo5CGNvQuLiQbYC1nBQkkbwtqPuojYrRtoYoDP
- iwEbH+0bG2yVYsCbXOySzwQo05Wpb6thVdO55TsQaDIahc+BAuRTFxroMYtOvSq3QhiG0HnLG9o
- 2rJqHHWUcpFb+ZI+csaJU8NA4+7tvVRaZXgPK0OZjF+zm4XFOPpVNSZDM/rh4sTpagj6p7z7dtN
- x+xhSV0WVw7uEEVKRpPcS+pmsdAVphIoLz9Tp1ZuN2+IofmJxSSdCfr9ZJ/lWaGvfz9h1yqmiL0
- TLw==
-X-Google-Smtp-Source: AGHT+IHtgeukYwr7QzYqbpGUeQAboGt6vvCt8/++Eh6yWig1kC3A3N/mV83/BYTWZ12bRFDPQOFEGg==
-X-Received: by 2002:a05:6870:7196:b0:2d4:ce45:698d with SMTP id
- 586e51a60fabf-2dae82c04c8mr5116940fac.4.1746480423458; 
- Mon, 05 May 2025 14:27:03 -0700 (PDT)
+ bh=Wl+G6jEZQ7CmetayKnvlMcXWa9AK04KUZ8PDfRIlbjY=;
+ b=m+Wsp8mHqGJx4glz8457LPpoKHMpJPnekpxvsb0cQ+sL3yp+l+e1az28BGUPPayBXw
+ CncCO0HUvuOsipRJqyg6AtJxlP/O00TOoL+uGI7g0NNyLyIcoyKpyJU9lj4ejl/CYSXD
+ AEL9PFeO6fYmIcd1rTosNltxUq+e9HfhvObB6UMH9mOAuAEZP9yWvNT/NnEvsnzMK0JT
+ Co4qbW1oSOH97Okqjg/Ylz03WJm6OTj9lyGPCGq0FXtnEhdZcdWYo6jTNmpceG9h/84Z
+ C0iEvXnYAbbiQNnGUlzN5tFcYc0GAlX1IS1ub3v7SvKp0EyA1ZjJGkmBLDTtd8feNLp4
+ cKjQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVc46LozSjCOQR6i9Y+z4uq+IHbvd8ZJrGKZanHJHJAwJEgRhXBUVvrOp3N29b2zLDev0OJ7D0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+EXjXsaeokWH91X5LgUqT2BE1RB7eorVmF/UfB7sy3YQbznkh
+ uwwhATeXFrGImm9OFdBU5CE4iRHGktn0xB5puFS43MrvIlgN6slc+nOhGRTHxOY=
+X-Gm-Gg: ASbGncuja6oP9grvm3uXxEdWL7uDLN/0p09sykskF0PvkRIAqZFEd1+JMRNKzGZMwg6
+ YV+kDclYJS8RGi1BsO7JNnVGlx47WtJgtvb+iZtM9Aix96ykfujTShO/DiCOs0me6YhCDjjhL2W
+ sNNbw7aOcz3FNkeySrvSxtW0YT4XNwohJmD1SSVeza5Ez4X+slMgpRI9jUz1HN/ic1wsdqiT+ZR
+ vAz2Ot8/WrbJ86QUFwUmo19P/J6g/rRhsOzwAACE9n5ujKGwx1WRio/1+dfxsn7ufmJamfEb8wj
+ cFxqImjkYwkwv4yWesPiu1C36SpAGOyIy5uAR9VJ/nMkwpXen72vnTY1SH9vQyZR0DA/J01tf5F
+ xuw==
+X-Google-Smtp-Source: AGHT+IG4RePttt7gt6Nv78fVaZMMlel9xL/RESyCWXRU8llLMz92sYFIIFSPCUJJyqUWM9GGnNxwZg==
+X-Received: by 2002:a05:6830:6282:b0:731:cb3d:67e4 with SMTP id
+ 46e09a7af769-731eae448b9mr7856020a34.21.1746480499378; 
+ Mon, 05 May 2025 14:28:19 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2daa0ee1978sm2257837fac.15.2025.05.05.14.27.01
+ 46e09a7af769-731d31cb7e1sm1713864a34.27.2025.05.05.14.28.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 14:27:02 -0700 (PDT)
-Date: Mon, 5 May 2025 15:27:00 -0600
+ Mon, 05 May 2025 14:28:18 -0700 (PDT)
+Date: Mon, 5 May 2025 15:28:16 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Javier Tia <javier.tia@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] test: Add setuptools to test requirements.txt
-Message-ID: <20250505212700.GO5430@bill-the-cat>
-References: <20250505205052.347616-1-javier.tia@linaro.org>
- <20250505210817.GN5430@bill-the-cat>
- <10b358df-35fc-4d7a-802f-f38bbc9220ac@app.fastmail.com>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: ravi@prevas.dk, brunosampaioleite@gmail.com, u-boot@lists.denx.de,
+ probinson@gmail.com, mbrugger@suse.com, clast@prevas.dk,
+ brule@prevas.dk, pbrobinson@gmail.com
+Subject: Re: [PATCH 0/2] Add rpi5 specific defconfig
+Message-ID: <20250505212816.GP5430@bill-the-cat>
+References: <20250502113556.134731-1-brunosampaioleite@gmail.com>
+ <20250502144031.GT1261075@bill-the-cat> <87frhj5r32.fsf@prevas.dk>
+ <20250505134843.GK1261075@bill-the-cat>
+ <87zffq95f7.fsf@bloch.sibelius.xs4all.nl>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hr3tWhZABM54YEeC"
+ protocol="application/pgp-signature"; boundary="laa0f/CUZtYAwCnf"
 Content-Disposition: inline
-In-Reply-To: <10b358df-35fc-4d7a-802f-f38bbc9220ac@app.fastmail.com>
+In-Reply-To: <87zffq95f7.fsf@bloch.sibelius.xs4all.nl>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,77 +103,99 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hr3tWhZABM54YEeC
-Content-Type: text/plain; charset=utf-8
+--laa0f/CUZtYAwCnf
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 05, 2025 at 03:14:13PM -0600, Javier Tia wrote:
-> Hi Tom,
+On Mon, May 05, 2025 at 10:19:24PM +0200, Mark Kettenis wrote:
+> > Date: Mon, 5 May 2025 07:48:43 -0600
+> > From: Tom Rini <trini@konsulko.com>
+> >=20
+> > On Mon, May 05, 2025 at 11:45:05AM +0200, Rasmus Villemoes wrote:
+> > > On Fri, May 02 2025, Tom Rini <trini@konsulko.com> wrote:
+> > >=20
+> > > > On Fri, May 02, 2025 at 01:34:33PM +0200, Bruno Leite wrote:
+> > > >
+> > > >> From: Bruno Leite <brule@prevas.dk>
+> > > >>=20
+> > > >>=20
+> > > >> Currently rpi5 uses a generic rpi_arm64_defconfig file that builds=
+ rpi4
+> > > >> devicetree. Add a defconfig that is specific to the rpi5 building =
+the
+> > > >> now available upstream dts for that board. The defconfig makes use=
+ of
+> > > >> defconfig including that is now available and only changes the DTS
+> > > >> related config.
+> > > >>=20
+> > > >> It is also necessary to add a more specific u-boot.dtsi to rpi5, s=
+ince
+> > > >> due to the ARCH_BCM283X config it will try to build the
+> > > >> bcm283x-u-boot.dtsi and break.
+> > > >
+> > > > My question is, can we not adjust rpi_arm64_defconfig to be generic
+> > > > enough and not have a problem on Pi 5 due to the default device tre=
+e?
+> > >=20
+> > > Not really.
+> > >=20
+> > > What we want is to have CONFIG_DEFAULT_DEVICE_TREE to point at the
+> > > rpi5's .dts file, because we really want to build that and not some
+> > > "random" dts file that doesn't have anything to do with the hardware.=
+ I
+> > > know that kinda works for the setups where the .dtb built in U-Boot is
+> > > not used for anything, but in our case, we really do want to use the
+> > > .dtb from the U-Boot build - we inject various U-Boot specific stuff =
+via
+> > > the EXTRA_DTSI mechanism, e.g. public key for kernel verification.
+> > >=20
+> > > And due to CONFIG_SYS_SOC being bcm283x, and bcm283x-u-boot.dtsi
+> > > referencing nodes that simply don't exist when building
+> > > bcm2712-rpi-5-b.dts, the build breaks.
+> > >=20
+> > > Perhaps the real problem is CONFIG_SYS_SOC being bcm283x for rpi5? I
+> > > don't really know why rpi4 is both bcm2711 and bcm2835 and what the
+> > > difference is, but rpi5 only seems to include a bcm2712.dtsi which do=
+es
+> > > not include further dtsi files.
+> > >=20
+> > > If rpi5 has nothing to do with bcm283x, then perhaps a better approach
+> > > is to ensure that CONFIG_SYS_SOC is bcm2712 when building for
+> > > rpi5. Something like adding a CONFIG_TARGET_RPI_5 choice and adding a
+> > > 'default "bcm2712" if TARGET_RPI_5' ?
+> >=20
+> > OK, so I guess my next question is, is rpi_arm64 useful enough in the
+> > end for Pi 3 and Pi 4? I would have expected that it doesn't matter what
+> > tree we build in to U-Boot as we would be using the one passed to us by
+> > the prior stage firmware, and then update that at run-time as needed.
 >=20
-> On Mon, May 5, 2025, at 3:08 PM, Tom Rini wrote:
-> > On Mon, May 05, 2025 at 02:50:51PM -0600, Javier Tia wrote:
-> >
-> >> It solves the following error:
-> >>=20
-> >> =E2=9D=AF ./test/py/test.py --bd sandbox --build
-> >> +make O=3D/u-boot/build-sandbox -s sandbox_defconfig
-> >> +make O=3D/u-boot/build-sandbox -s -j32
-> >> Traceback (most recent call last):
-> >>   File "/u-boot/build-sandbox/../scripts/dtc/pylibfdt/setup.py", line =
-23, in <module>
-> >>     from setuptools import setup, Extension
-> >> ModuleNotFoundError: No module named 'setuptools
-> >>=20
-> >> Signed-off-by: Javier Tia <javier.tia@linaro.org>
-> >> ---
-> >>  test/py/requirements.txt | 1 +
-> >>  1 file changed, 1 insertion(+)
-> >
-> > This is the wrong place. You can't build U-Boot without
-> > python3-setuptools being available, so it's part of the implicit or
-> > explicit dependencies in doc/build/gcc.rst. I believe for Ubuntu/etc
-> > it's implicit but should likely be explicit.
->=20
-> What about the use case where you just want to run the U-Boot CI tests?
+> Works well enough for us on OpenBSD.  And it would be nice if
+> rpi_arm64 would work for the Pi 5 as well.
 
-You still have to have built U-Boot.
-
-> I found this problem just following the documentation at https://docs.u-b=
-oot.org/en/latest/develop/py_testing.html.
->=20
-> $ cd /path/to/u-boot
-> $ python3 -m venv venv
-> $ . ./venv/bin/activate
-> $ pip install -r test/py/requirements.txt
-> $ make mrproper
-> $ ./test/py/test.py --bd sandbox --build
-
-Right, and the failure comes from not being able to build U-Boot. Part
-of commit 859621b47f9e ("python: Recreate test/py and tools/buildman
-requirements.txt files") was to remove the parts of
-test/py/requirements.txt that are not from the test/py suite, as it had
-become the location for any python module required, not the test suite.
+But that gets back to my first question. Can we correct the code such
+that we do whatever is required at run time, as the previous stage will
+have assembled and passed a correct device tree already?
 
 --=20
 Tom
 
---hr3tWhZABM54YEeC
+--laa0f/CUZtYAwCnf
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZLRkACgkQFHw5/5Y0
-tyzofQwAj7m2T+6lj4w94cyP7EAHdRCE9MYqlLdnJ4jv9W+AySO/n5BFrX5zYeR3
-y62McpV1vz8jzkM1ajIoAB0iV0KPinrBMnX+mC4+6gHZgS6QV4oJzed6R6EN7D0y
-fEfaxO1wcxzFa6wBd6Xjm+0qBrH8EX8l+volL/1fu0y0lLejjS2zM5/7ScPybKpD
-14VyFXoxHQlVIbmYZBCYodVe38Sna/NwoAxyRME6jfpulT60GDrQmjAx146AdNa9
-hd2hqEUmsjHYgHDyrgCVic6+g6gvr5THC2dRgC7SBDHObq8s0XoENqfcKrnKCfIy
-EczVwiYLHF63i4pduMtD0WmgReoKqtXW8I991A4B4g8CNxn37mZ18N5cCQGOMYcj
-rkcb2CL90P819nRf664bLyC6RDMqvuqJC4ksTbfKE7FjtiCRj/pVoXDCB7v8t4VT
-VvoYiirgDPU0YDhPyBt1ecH7zysVcscTWI4Ellr4C/FOyaasGqpx9IMLI+3MPzNa
-l6+V3cLl
-=7dx5
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZLXAACgkQFHw5/5Y0
+tyx04wwAqUxdU8SzLM2Sjmpvs/OwQGusFA2rk7JKGglopj8ZAONBkwyAJjVaNDMH
+Ro5BJejU5+dqYb5cddsClzFq08VJ8O2ev3h/PSZYceV+tbCFdUIeVWER2alznFms
+VUM2ZF46/MoaSEhm4cLKbBxnB8pMTIEU4Nd6Pa/QBldnj3nnu4Pjhf7OR7CXPTY4
+mC/mUGaJswhtkqVXOaejTlfaxmTOn6fqVU4tmfUrsSS2+5tcyCeavz7+77Ln8Azx
+Ct8tNnLrs4SWVLS9Q2OKt3y0UZ5I9IRnVz+XfjEhyiXwF12sa3JIyKxI5km38PIb
+WErQamdcmZgL4/X4HLlmZiXUtXow4kQz0+Ztyvh1c2Zao5PLhRAM4Bk8rC3dN+ym
+gkyFwmBN2g510TAomDdKN2yDygm+hekuAWIiB0imOuI0T2uaVSAQ2E7jfxN8wzuM
+p1YC9CFgLsaUAMce8+YOgu5LbWLAAV+QCZYzRnaX6pFejJVkFK40dBmEPe4IBQgB
++CGDLhfJ
+=sX/7
 -----END PGP SIGNATURE-----
 
---hr3tWhZABM54YEeC--
+--laa0f/CUZtYAwCnf--
