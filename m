@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A6AC3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 20:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35858C3ABB6
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 20:11:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF6048210A;
-	Mon,  5 May 2025 22:07:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 95DB58210A;
+	Mon,  5 May 2025 22:11:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YSFlvvyT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lpPloENO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26334820EB; Mon,  5 May 2025 22:07:58 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 6234B82163; Mon,  5 May 2025 22:11:12 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D67EB8210A
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 22:07:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3594820EB
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 22:11:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2c2ada8264aso4030812fac.2
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 13:07:55 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7311a8bb581so3761748a34.0
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 13:11:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746475674; x=1747080474; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746475868; x=1747080668; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1tCcuyD5oUtVRbP5wOIs51M049uqd8PFzGjDTGlcJwI=;
- b=YSFlvvyTRjKAdT0xUjr3dVoqFG/JcHd5FXue4flnB2OiAxG4cL0aIL6C/zJPSoYoKm
- dE/gaXAY2Siys2ciW4VwNw9SBUoDs65kH6UbH6vxxzDIvO+BqGFwQ3FDKVEDr9S3Wwfa
- WPlMmChJvMqfJQwGi4YwPZk1Qc+QFjFWwyFh4=
+ bh=fNQQ9sCVpu+9x6epp1aO92RdDrLYP77Mh8A9hEDfyZA=;
+ b=lpPloENOJ/3axfKYl3y9f+Ewql/EhU+D4gHEfV6AcBr+0T3+g5JUjOWhVFr/h2Q0U7
+ cpermSk0g6PDg2u71cei6Rjc17g4J/phBFL63RiX+6tob/txkCdZKosYrDsgb+9/q2xZ
+ 0AxeFzUkh+ZwfjtTLgR3U8TbfJGbBHxDlNqdk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746475674; x=1747080474;
+ d=1e100.net; s=20230601; t=1746475868; x=1747080668;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1tCcuyD5oUtVRbP5wOIs51M049uqd8PFzGjDTGlcJwI=;
- b=rWwEXBM/n1fHmOp5MjsyawQ6woXhTMXw5RxQE7ZFLtEaNdLHuBYRg3H5DNel+BqQ9J
- 8PfAMTShuD5X4cRAPlDnWq+uJTgP8/OcnW9kojkdYmzeLygkBUApL7vZEhJ6JpuJIeKY
- wCi5Fr3indyjF8A0+Mn+4bB66PcFXTLtWFK7lNx5Id/MkBXO0hbj3E0XjQ2tWITPAqiz
- 5j8PKL3xm4Fcp5KgLq+u+whhHHo8e/TOYfIYpmkaVy7Te1LwU3z545TRHElAyXFjK39X
- YRq1OmGNSX/oVVN3lD+brY/ayqT8fQBXF4eNU4yvLZMNMI+hZus8Otv4ZonFOZd9Pans
- P0PA==
-X-Gm-Message-State: AOJu0Yz51y7qql9QZxMH9yq1uZmut5kBg8Y/w6jQd/miHTAIES2HWY4B
- MbZGTknESyHNaJwOqYXibUB8sbw2Nq/egQYpmc+pHtnreKmhkABtge+hqNKurBsVge+RlE+T7RP
- KN+A=
-X-Gm-Gg: ASbGnct4DRK1ojTBjz5hjdEKOuhDWRTcPQ7RTP4CUNpSFq1aGgyC6mRKCbc3iuNfIIO
- ItxefagfBbm34ZqoyY60kwN6ZDxLyAM4HqSBw5uTm1kFxlmlwonjnEhck+8XdH2XFzCmFVh8GUi
- vH49SBed83vWB+bZ6CwnyXP7cil8nQ39uhq2QzQdWHXZ6Cq5PqwCLmMATecuT0337Lq8foElBlx
- c1hPH3jkYYIbTMYkD19QuJfmC7lwIhRWTFMiyTf2GPnoQttKC9oz1uiaa1NNXheu9izOT61aMzg
- l+Ef4isQeSJ1q5dycTH/tlZpMPSwg774OxiREznsJBRiMsRLZ+jtX/ne8kgZGPCK9TEwL7yjZt3
- OIw==
-X-Google-Smtp-Source: AGHT+IFBV7L8oiHcGFDQK3SWswSPaVTaSxrLhckt0NzjzJRv2lQCpymScCm9u8nMJyTGZ1TAD+VaCg==
-X-Received: by 2002:a05:6871:1c5:b0:2c2:561c:47e3 with SMTP id
- 586e51a60fabf-2dae835f3d4mr4008680fac.21.1746475674599; 
- Mon, 05 May 2025 13:07:54 -0700 (PDT)
+ bh=fNQQ9sCVpu+9x6epp1aO92RdDrLYP77Mh8A9hEDfyZA=;
+ b=Y6vF+LJSw3R+eEDnTWV5IPWuOs1IalblPheeT0qELeogyJYe19iVwf7Wyo7+MKVM4V
+ EUfO+tUMEYJUewL5wXcE0CupDaDHnd3j8xt1dOIbi91WRaiadGJqpvnnNAsq/wp2nxuX
+ V82IhG85h9PIjUGI/LwopM7UpEBfM9YizExC4sPzqXmxCtCsfbYPT5KKsE/Dn3VAM3hK
+ 9t4Tu3ldpWit2/1xt11qKUBiRFjEEwiPZ289GadXaoUy3w5z2sNB5ekhf+ylvq2FVM87
+ PdP8zgRdeWR9vu7ExZ2rnrzD37HN59gVnQVMuhLV0UDpcJqxjsMDIrg9n96FgBWNulgF
+ oQjg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUhveEjmAhQ51RpXcwe/3jFDt62yo3ANIj5bJlgPwPyhsQGsrmEIdVZNgM+MK9vxaEj46bVwvY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxzs8oTlO8YYfBQLqBDCNnNS2llLxDjPqJe5mF68VdE+QZzjKtZ
+ nRJDOoo6r6aJvBCP1z1bJ+BJYDiDAf56artNufq9Vtedqjl7x9Qk/rnWr9m79fkLPgQ4+A4ZbOk
+ mhRo=
+X-Gm-Gg: ASbGnctbVUEKv7VVOBGxWh6EGJrGTep4rz6artKjtDvHqUP816OpSr49bTeAeYK0Ho/
+ CIMFBVLQpYL0dLP4OmpQkBurb5dtISG+dM7rZuv5wPQxrkhPj0w3kM7K4MV/TLlSZWD//zP52ws
+ bK8bXHAx7VOE3xUiKbYjOQzYk9ZEbEemhz5zoNmk8vlBP189VydRLPLrJgvfA9nLIzwDinQPJmA
+ rww4yacglFNVuE/rCVz5+bBcgbEzGsiivuRCJeMX/qtp/vmZ77NJYNnLnleyxFFAv2TG2dkgP+j
+ a9YnIKcPe5bpQzSc7yY+oRsVqb938neTzV7zViqGEtBdXt8QqeeVkWT5P/12HkiGtrrzHY0gCbG
+ 8ndgLMuVJd5iT
+X-Google-Smtp-Source: AGHT+IE6kUxhNKQbXw1XIuB6t6DQzRIWKBpZ/pfBB7awHngnvKSfnwZxDaH2SMl22EdyHDBEJPC+gQ==
+X-Received: by 2002:a05:6830:6115:b0:72c:10db:f210 with SMTP id
+ 46e09a7af769-731eadc5cdfmr6204635a34.13.1746475868583; 
+ Mon, 05 May 2025 13:11:08 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2daa0e59e30sm2211748fac.3.2025.05.05.13.07.53
+ 46e09a7af769-731d31a282dsm1702102a34.12.2025.05.05.13.11.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 13:07:54 -0700 (PDT)
-Date: Mon, 5 May 2025 14:07:52 -0600
+ Mon, 05 May 2025 13:11:07 -0700 (PDT)
+Date: Mon, 5 May 2025 14:11:06 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Johannes Krottmayer <johannes@krotti42.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: ARM - Linking issue with binutils 2.44 (dangerous relocation:
- unsupported relocation)
-Message-ID: <20250505200752.GL5430@bill-the-cat>
-References: <640da044-55d0-4491-afea-3e9d9dc0179e@krotti42.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/1] Dockerfile: use QEMU 10.0.0
+Message-ID: <20250505201106.GA50062@bill-the-cat>
+References: <20250428054036.17234-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pDUt71D98b0QcsLi"
+ protocol="application/pgp-signature"; boundary="XgfT3WHJAgs8PC4c"
 Content-Disposition: inline
-In-Reply-To: <640da044-55d0-4491-afea-3e9d9dc0179e@krotti42.com>
+In-Reply-To: <20250428054036.17234-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,74 +99,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---pDUt71D98b0QcsLi
+--XgfT3WHJAgs8PC4c
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 04, 2025 at 03:12:07PM +0000, Johannes Krottmayer wrote:
-> Hello U-Boot list members!
->=20
-> There exist an issue with the newly GNU binutils version 2.44 when
-> trying to build U-Boot at link time.
->=20
-> Error output:
-> $ make stm32h743-eval_defconfig
-> $ make
-> [...]
->    LD      u-boot
-> arm-none-eabi-ld.bfd: warning: -z norelro ignored
-> arm-none-eabi-ld.bfd: arch/arm/cpu/armv7m/start.o(c_runtime_cpu_setup):=
-=20
-> Unknown destination type (ARM/Thumb) in arch/arm/lib/crt0.o
-> arch/arm/lib/crt0.o: in function `_main':
-> /home/jk/Projects/U-Boot/src/arch/arm/lib/crt0.S:170:(.text+0x44):=20
-> dangerous relocation: unsupported relocation
-> make[1]: *** [/home/jk/Projects/U-Boot/src/Makefile:1824: u-boot] Error 1
-> make[1]: Leaving directory '/home/jk/Projects/U-Boot/build'
-> make: *** [Makefile:177: sub-make] Error 2
-> $
->=20
-> I have tried to fixed it with success. Simply added the assembler
-> directive ".type c_runtime_cpu_setup, %function" after
-> ".globl c_runtime_cpu_setup". under the path:
->=20
-> arch/arm/cpu/armv7m/start.S
->=20
-> The binutils patch with cause this building error is explained
-> at least in the following commit in the binutils git repo:
-> 31ed3a9d691493486f6e32357d89a55229dbdc0a
->=20
-> Extract from the log:
->=20
-> "This patch emits an error instead, and warns in some other
-> cases, to encourage users to add the missing  '.type foo,%function'=20
-> directive."
->=20
-> But I don't know if this only exist on ARMv7-M.
+On Mon, Apr 28, 2025 at 07:40:36AM +0200, Heinrich Schuchardt wrote:
 
-Thanks for the report. Would you mind submitting a patch to at least fix
-that case? It'll help in the future with other reports.
+> The RISC-V emulation has develop quite a bit since 8.2.0.
+> Let's update the QEMU version.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+But please note that it's blocked on:
+https://gitlab.com/qemu-project/qemu/-/issues/2944
+https://gitlab.com/qemu-project/qemu/-/issues/2945
 
 --=20
 Tom
 
---pDUt71D98b0QcsLi
+--XgfT3WHJAgs8PC4c
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZGo4ACgkQFHw5/5Y0
-tyzvngwAkk8lHDYkDAIZiaztrFteiZpI9I8D01kLnmayjMaPMrjn6MsHYgfqEKWH
-0OA7Z0K083ntN0jasdgjd0osI9NmFfTquEWmjclFIrDppw2PZNVzIa9H+duuqqBo
-BG58es1uTFk5CWrCB8couzqvm0+eX7CCwsSn77qrDJJuWFhmtp72IHGQsQElTrJ1
-rZqWjU5ocPZMVTiLrhPaxKylQGw+zwByPB5DeNukbeV8AGICLhVS8UEnMRj2HVFY
-Kxo+JobTNq/QkFaHVg7fxjqDGmGsqUJxgQjvNr1sF62riA/TYbRvCnhGkxG52OGi
-uy4intTAHPtXVCiks2Lyni/AQeYBrSFhSB3ywUnti4TxhqEwgRMlxh2vYIswWXqY
-BR45kiM++lLaJtd72HyxJY1FljpMO6jj2Ii0r1a/AVfQ7LN6ipCMnmK5dJWskUB6
-Jl+vRzuI4G07mz/B+vk4ICh0+e0MZwkVxjjK9et7iUOxeFcIAVJyORK+QGcEs56Q
-PXy354wh
-=5foI
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgZG1oACgkQFHw5/5Y0
+tyzR3wwAhK/5rr/i+8zmQ+sTq3yv+tfu5JL4csDhLQFflxPed9ejBqxdphjFfy9J
+jaVz4qb/pjFLP8k3rn6TFt7P3ssnmyKCFq++tHsTAdaDUV8aBC9t2O0bKZJVLRf5
+nhz1SMkU5RtN1Y2yVX7ANX3FLxUOaQCE6pIaAv+D75mDNzGjPQt1dvKAcS4/ODIq
+ztnN4NZA7VQsnq0sCPxKEgaJY72zjd/GsWKGAOx7cazwvfG4hx1Z7KvGYQTbW/Uk
+GO3TKW6qq0IcbAxLsfTqjEvTiL9ap5v3cLL/KYJkxlxMRA8X3ahN/Rf+gxhqDRwc
+MlAoH0EAHbSvtihXaL6areB5X9Npegg596k8wAx9tqp41+jQk31viZlGSqV3PtE/
++DW3jPap8eiNbHkXlsue6Iy+uIqpwvpR3vEYtCpLIa/zviMijvpWdoWOi+NYJJeY
+Zvw6P2DZ7/4kb1O/95XIkRw28cQZzpe/v1dl2wStsr7+pHWmo05PmhYdgAk/dr3Q
+l/GGtj8f
+=C2Ti
 -----END PGP SIGNATURE-----
 
---pDUt71D98b0QcsLi--
+--XgfT3WHJAgs8PC4c--
