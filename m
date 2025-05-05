@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 300D0C369DC
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 01:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6401C3ABC3
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 04:15:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3010080F03;
-	Mon,  5 May 2025 03:42:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=chewies.net
+	by phobos.denx.de (Postfix) with ESMTP id AF2C780BAE;
+	Mon,  5 May 2025 06:15:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=chewies-net.20230601.gappssmtp.com header.i=@chewies-net.20230601.gappssmtp.com header.b="RtTwzhJc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jeyK5NEo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81A0F80EE5; Mon,  5 May 2025 00:34:36 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 6C97C80F03; Mon,  5 May 2025 06:15:23 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69AB480ADF
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 00:34:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26452805D7
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 06:15:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=chewies.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=raz@chewies.net
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5f7ec0e4978so2092404a12.1
- for <u-boot@lists.denx.de>; Sun, 04 May 2025 15:34:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-306b6ae4fb2so3088503a91.3
+ for <u-boot@lists.denx.de>; Sun, 04 May 2025 21:15:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chewies-net.20230601.gappssmtp.com; s=20230601; t=1746398072; x=1747002872;
- darn=lists.denx.de; 
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=MeSq/vxrxonH9tLqPxNlJB0rPeY/8kH3taEkTAOMzwA=;
- b=RtTwzhJcxdSH3IZOVFAN8qmoUYeZYWzquPMa5jeB0YEERyAhVVhg5UwjIKImAIFwYL
- igxJ6x95BUN2Jz/x8nndhHtqiSQZZ+4svF3sprQBg9B2Sz8JQ20iY5bvA/4nANItCjUZ
- 8UmbQT0t2VC0FkmburqSP5Su6D/M1oFlo11dsEue4L6Zhcqdbi02FdAZ9ZVcp/8ZcdzJ
- PsTvJI3CnfdU651HmKtIROuiH/zuqc+Oxi/10T7VSLnWV8g7VSFBUbcPb8ptgpKUvIf8
- tI+WNYAJYFKtTe63/I/g97BeQefFW3fUcKnIB0WJkzDI3274+ihW14oqO+W6VCv/ywfU
- So9g==
+ d=gmail.com; s=20230601; t=1746418519; x=1747023319; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vLkTQ04GVMllEfVF0f5ym3HfEKjRllnv+JByhJKNeSI=;
+ b=jeyK5NEokVU63WCUXcKmh4TPyKMqjxFlxQ8EqkqGXKJwHNWZ7fhT1vAL0gDZmuoeD3
+ jFIRYRO1SU9s5S8h4WfvmysE0A2pifEu9hOqR4Lz+KK69kk9cGAsRXzSEPUYcWSIJdwC
+ 0ewOmcn77MgLFlbKUYefbHFhC6/lBIhkD3EKJ8XFJWU2EHu6uW/c/08wnBvC91jpWqht
+ m0vYiipsukMfRVTCfM/yqkmb7cwOsZYaYW1HaSL06FkM4CJPPF6oRk2NOFrkD9x+mRRj
+ WjLzAkFNuauCVrv/V/mLkcESR0vZnL16lFULRVrbcIttue2wYFMsnJMGXjW39Y78etDa
+ Df0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746398072; x=1747002872;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MeSq/vxrxonH9tLqPxNlJB0rPeY/8kH3taEkTAOMzwA=;
- b=uovTuVIZqfZy0InFtfgL06eKJpn8e3JZluDKfIEAF8nwZRGrnX85P6UCWaJ5MyZpkv
- z9r0sIAPu151zbyXLUmDR2WXj45ziqzB9eZxe4rSlVe4qQuTBiFsd7ikeAjSZZPzz03V
- AuAxIXk71devRltvUF6pwlNRG9umgqiGHg1SURgoZO/gulkwXyyJ3JkT9HV6bS2ssyCq
- oXFV8mwnHRjq3Rn/khxfwGvYLA0FrGy3jiQO2W8gf6WMpQEcVYhcCEku/wOHnUCmaOkC
- NhTSf+PSPuyfh5hSbyrFl4ti5I09Cg96C9ln1RnJ2E2OlSTl5gzlSkgczrS03xLqK3zu
- pUPw==
-X-Gm-Message-State: AOJu0Yx8efwXnLiEqGtWQNrPq8bqTsaQjfgXfegQ2o+aecWim+HDSyBl
- Jd0JfNxw7nbuYcVadmVyk+DAlnQhBsv1KjMZgFnKPqoRLNai1cw+V0N6swuk5j5nHPkMxT9IZY2
- uP5ChDBUazqyguD8UqTgRaTrVS4mtbvuU1r6dzAO3I8CxUjNCXw==
-X-Gm-Gg: ASbGncuE4YY0SqtkAHfgrfo+puj7M/e8alU1SJsoIOXuNUECRM3iUkJ1fuoFYEG0kEs
- XjxWpdttEjIZpLGyumJpbl4W6Eq/qSQ+t+3BSdg0UH8B/QyWVS40T5mFg2xN6prrDOicSh2VI7c
- jUgTVZuR5pt1mZBrNJLlBgC77slEI44g==
-X-Google-Smtp-Source: AGHT+IFkPW206yYEquymk9Aeqgbpx/tgUn04+HHS8xHLZf7Es/8xTei5eJ2Xo1qM/4oQHa3y4Ny0+YJKW/w9dS2jHgI=
-X-Received: by 2002:a17:907:72cd:b0:abf:749f:f719 with SMTP id
- a640c23a62f3a-ad1905cf9c2mr611923766b.7.1746398071920; Sun, 04 May 2025
- 15:34:31 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746418519; x=1747023319;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vLkTQ04GVMllEfVF0f5ym3HfEKjRllnv+JByhJKNeSI=;
+ b=qA3orPcR8VsY+V4wy2E7HWNEli8EZe3q8nGHvQdhyv980lI/88H/bM9aQZeJNV24ao
+ QM5KGYhu0/LmGoiVjuQBeSQHpbXUrB4xG8qzk7iLvfY4F63bYUGoqx7ZNdWXx2BLDRBj
+ TX32eZ05YxlPIBNYPNL2y/HRHcNDnb2LTD4HC7CLIjFfQ5LU6WkIWV+zukGOrQtWB/h0
+ LgyBchG2Uj+/muCajabIMbjLNfwpfdjLTbqjYpAH/TpNXKKHG2Vp1Hsg+K679pwwx5Nq
+ UK7d75cLOh4CYFFtj0KCWwEPjy0Y3j9+YMa6+q7+bFYBT1knSsyLvHJTHO/O2OEcJSj+
+ FREw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWfWkFr0hReHzcGqDwtlYCElRyxn/laUX72cdaLhNEJSGmu60oE/hktUygFP1zTv6Oa4hVHRcc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwwjVed1xh3LJ0PbjBWK3OTPZOfTENoJmgOoXx590IgO46RF7+e
+ HI0FezN8yqsJt9QOIGf67zaOYKH3IwxV/L/Hw651wijcDVNcXcpp
+X-Gm-Gg: ASbGncu69NZOE9HAjoaFPMmHYiyjlLKPKSopsa3JdktHRkCaoWTH2K0q51qlNMgD/wK
+ bqSz0fo4L4lFyasF6mKjjsI04S1T7DIOHB/6AJ1FQXPqUWIQbYblEX1LcEy8GbFysPK6Z/RIB8r
+ nTi09z/732/ab5JgwTXpzDFyun1cvkwF1faRQdexw2+KeTzKIxyt999/JBSKispH93+iheTMG0m
+ llsHGsoG51xS7mFxs4Q8k6Qe+08SN0vxUaSTK1T9otnelX7OGuEwhqhikb/vd+eXI772RRBP4XJ
+ Zy9sgK+zQwQGXfeCDrjG1kdMs7M5dZA7Q/bvkHStg8hb5qEMxqak
+X-Google-Smtp-Source: AGHT+IESGg6PgzW4rpb9cOoiGFvNp38eYT6ORNI8AFc6CE2Z6xBwt/EebO6Gtv9wpgsK+Oou8bxNrg==
+X-Received: by 2002:a17:90a:e706:b0:306:b78a:e22d with SMTP id
+ 98e67ed59e1d1-30a619a1979mr8695016a91.20.1746418519420; 
+ Sun, 04 May 2025 21:15:19 -0700 (PDT)
+Received: from octofox.metropolis ([2601:646:a200:bbd0:92b8:6516:7b20:95ab])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-30a348266ccsm10438503a91.42.2025.05.04.21.15.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 04 May 2025 21:15:19 -0700 (PDT)
+Date: Sun, 4 May 2025 21:14:57 -0700
+From: Max Filippov <jcmvbkbc@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
+Subject: Re: Convert xtfpga U-Boot platform to DM_SERIAL
+Message-ID: <aBg7QQlJiV8FftqG@octofox.metropolis>
+References: <20250501230349.GM1261075@bill-the-cat>
 MIME-Version: 1.0
-From: Wayne Schroeder <raz@chewies.net>
-Date: Sun, 4 May 2025 17:34:20 -0500
-X-Gm-Features: ATxdqUHw6fl0nPqiOIV3wAmLKOuHNPtlw6Vnk1mRMJyL4Dzil1st7d2pEIRb_y0
-Message-ID: <CAEUiLubXaPGZsE6y_X6mBTD1ZK-2w82fbRD5z8+MKvDZtZKOtA@mail.gmail.com>
-Subject: Odroid n2+ usb broken on reboot
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Mon, 05 May 2025 03:42:23 +0200
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250501230349.GM1261075@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,32 +97,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello.  I am not sure if this is a bug, or even related to u-boot, but I am
-reporting it here because it was easiest to resolve via a u-boot change.
+Hi Tom,
 
-I am using u-boot-2025.04 (source) with a mainline linux from Arch Linux
-Arm.
-Linux alarm 6.14.4-1-aarch64-ARCH #1 SMP PREEMPT_DYNAMIC Sat Apr 26
-13:02:01 MDT 2025 aarch64 GNU/Linux
+On Thu, May 01, 2025 at 05:03:49PM -0600, Tom Rini wrote:
+> Does anyone have time and knowledge to convert the xtfpga platform to
+> using DM_SERIAL in U-Boot? It wasn't just a trivial enable
+> CONFIG_DM_SERIAL and have success so I didn't look harder than that yet.
 
-On my odroid-n2+, the USB ports work on the first boot after power.  If I
-run shutdown -r now, or hit ctl-alt-del and otherwise reboot the system,
-the usb ports do not function at the next or subsequent boot up.
+I was able to build working u-Boot for the kc705 xtfpga variant with the
+change below. I can submit a proper patch If it looks correct:
+--8<--
+From f0b6e632da8b72f0437a39dc1769b740fef04cf6 Mon Sep 17 00:00:00 2001
+From: Max Filippov <jcmvbkbc@gmail.com>
+Date: Sun, 4 May 2025 18:40:44 -0700
+Subject: [PATCH] WIP: xtensa: enable DM_SERIAL
 
-My apologies if this is not applicable to u-boot because it is a linux
-issue--I am not sure what the source of the issue is, but adjusting the
-u-boot .config after make odroid-n2_defconfig resolved the issue entirely.
+Signed-off-by: Max Filippov <jcmvbkbc@gmail.com>
+---
+ arch/Kconfig             | 1 +
+ configs/xtfpga_defconfig | 7 ++++---
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-I am booting via extlinux/extlinux.conf and have adjusted my
-CONFIG_BOOTCOMMAND before build to execute a usb reset prior to the
-existing run distro_bootcmd.
-
-CONFIG_BOOTCOMMAND="usb reset; run distro_bootcmd"
-
-This has allowed me to reboot the system and successfully have access to
-the USB devices such as my keyboard, mouse, and root file system on USB3
-SSD.
-
-Thanks!
-
-Wayne
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 9bb3fe22402f..8d469a395f8c 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -361,6 +361,7 @@ config X86
+ config XTENSA
+ 	bool "Xtensa architecture"
+ 	select CREATE_ARCH_SYMLINK
++	select DM_SERIAL
+ 	select HAVE_PRIVATE_LIBGCC
+ 	select SUPPORT_LITTLE_ENDIAN
+ 	select SUPPORT_OF_CONTROL
+diff --git a/configs/xtfpga_defconfig b/configs/xtfpga_defconfig
+index b96dc10d85be..68656949660a 100644
+--- a/configs/xtfpga_defconfig
++++ b/configs/xtfpga_defconfig
+@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
+ CONFIG_SYS_MALLOC_F_LEN=0x400
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_SECT_SIZE=0x20000
++CONFIG_DEFAULT_DEVICE_TREE="kc705"
+ CONFIG_SYS_MONITOR_LEN=262144
+ CONFIG_SYS_LOAD_ADDR=0x02000000
+ CONFIG_ENV_ADDR=0xF7FE0000
+@@ -28,6 +29,8 @@ CONFIG_CMD_SAVES=y
+ CONFIG_CMD_DHCP=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_DIAG=y
++CONFIG_OF_CONTROL=y
++CONFIG_OF_EMBED=y
+ CONFIG_ENV_IS_IN_FLASH=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+@@ -46,7 +49,5 @@ CONFIG_SYS_FLASH_CFI=y
+ CONFIG_SYS_MAX_FLASH_SECT=1027
+ CONFIG_PHYLIB=y
+ CONFIG_ETHOC=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SYS_NS16550_REG_SIZE=-4
++CONFIG_SYS_NS16550=y
+ CONFIG_SYSRESET=y
+-CONFIG_OF_LIBFDT=y
+-- 
+Thanks.
+-- Max
