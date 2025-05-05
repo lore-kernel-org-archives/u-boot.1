@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E283C3ABB0
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F965C3ABB0
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 15:44:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35E35829C7;
+	by phobos.denx.de (Postfix) with ESMTP id 84182829E7;
 	Mon,  5 May 2025 17:44:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fZiEgK5X";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="epvY5+6B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 638728295C; Mon,  5 May 2025 17:44:05 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 6C2C88283E; Mon,  5 May 2025 17:44:05 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A1E28283E
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:43:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8F0482958
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:44:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5e6f4b3ebe5so7996418a12.0
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:43:58 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5f4b7211badso6695123a12.2
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:44:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746459837; x=1747064637; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746459842; x=1747064642; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DTahqJwhWR7omeM/u8eIeaCzmHxXZvju1oln8+g3qjo=;
- b=fZiEgK5X/CRZirH2dLYSAkW5bQZtGAWQ56Y+5ZXGhIZW9VJitzeH8Yd02ylD9HCOqo
- o3hV0RvfUg8JrCnYB8/bXEeJqSdqlLKyuVY5Snqh3WFlMkB6gX/1NGml38+MKqKdov8m
- xQEM3HfLSNgjHfRaRL0yAunxVuP1iy3YsTdWw=
+ bh=3Cdc9OYfdBNX5boOldjLEaXKmv3EbQSsxxryjVdd548=;
+ b=epvY5+6BzdQMYilkcDLYXFqtkVIv4u98oqgVv5v5rRaLBtt4xWXvjplu9/BzS7b3HE
+ YwqQ1pwuhJI+aoVHqxkQrntfaAqv8CYh+DzLDZc1RicRRDHDIJ3R2kGFW6GvDgYtHvPS
+ d456deFQ2XXkaUsJrZsNRh+Bv8tBfIHcAOzhg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746459837; x=1747064637;
+ d=1e100.net; s=20230601; t=1746459842; x=1747064642;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DTahqJwhWR7omeM/u8eIeaCzmHxXZvju1oln8+g3qjo=;
- b=jb2ngaY0xQb2h70RsCMMpSm1RKcY4VnaLRXKrhU/lomH7ofeb1ps5B1liCWdJZIwyk
- UbvGWJzPhBPmSyeuMNizr3KreHJoVBDZz7Jfakp8Ng9FVJv5uptS97ReMVCDBNlZHbdw
- 8w1ytKZ3mAr1GVYgWlZgQwEZBG4nMTRkKgZ4uVeLJaaU9Ykew1rZF2BCe3LZSDfFXYX1
- 8Fypzm8yfPtWhUwlwzGdReFFpk23I8bJdaw1BN/nFclC7vB0SIcvOqn0zJA+KL4fIHIP
- o3YHTHXVIkkPqPa000mR+7BV/q2OsR4VeRtXjvUaiDMAlQliUDC4dfmJ5goT+3p9RP1U
- I+dg==
-X-Gm-Message-State: AOJu0YxQXWNwY1ZDgMu1jqYMph/EqKogfM1t1Q98xjr+iDNXiwmJ8IT5
- 1N8oubYfAyPYpkgZn1EDS1eW5YWhIbqcG78HKEF/yhNsuG6a2btZZ9mjuCYpu+BJdRsf7xtQmWH
- xYKFRy6Q=
-X-Gm-Gg: ASbGnctE6zmsFoV9jbPVHjogDkmWf/vJHUgPuC9maWEbowWSYV6FUJTGjbsTrJ3CLiC
- 9i1sx4NY4FXWhZrMPxb1bZ1N8RFa6aR6Vftl0go+AkhARWcRbLM/pvxQFUA0DM6Wbll3u/54WPk
- w3P7VSJMNZLbQ4tyjhRRrNk+1p6bbtXXFcdilyKoY/I+71Z07bDGvGI5rkHM+Sm7uUrk75qbKfb
- CoFkCzfx7v0UbLqjx35Ze/jY4RfePZ6DYOVS55o/COFQXwt/JZ8LhrEf/sLINIMMBgEYfXUMps1
- VhEYQr3+RplmJlmFynhl3KIFFv9+TjRleFhP
-X-Google-Smtp-Source: AGHT+IGsAAyFc9TdwuPCEhwpeQomSuxZjR7kQ8JksAhlMJj664zdQtrxOcXXLMUoHuvNEJq//PFt0g==
-X-Received: by 2002:a05:6402:1d51:b0:5f4:9017:c6a1 with SMTP id
- 4fb4d7f45d1cf-5fab05c2703mr6658368a12.25.1746459836702; 
- Mon, 05 May 2025 08:43:56 -0700 (PDT)
+ bh=3Cdc9OYfdBNX5boOldjLEaXKmv3EbQSsxxryjVdd548=;
+ b=WJrsNaQCdjmQ79M6SFjsF14HDkufbB69DanjUGn7Mv0XGJkezFuEYUe/aCaUGJl7hM
+ ynt1O0DOnC4GXuVenNXHAhyTY/nPh4ADwRxOvNccMEbeZOIkNLgV1RGTwEPhtAZJ5jCz
+ PGyIq3SRCRGw4NtjzxONiWYjcyl1bVCAEcqcQjCcatrrNvm9IFQxdI1NyfYoRdnyx+/L
+ Bqa2QtB/oEeyNOem+dhUMH0zAEqoP6AMZxY0RWyssOvDtU74o1KXV6TtF4g+qR3x9Phn
+ F0viCAp4HMxm0RvVW16rkaT9EQyTyWfFt6ymD27ryWxN7kTyglzDgTrAwk/iY8f/ZHPY
+ 8mHg==
+X-Gm-Message-State: AOJu0YzX6LBIWZazB3Hn0r6mYg9iUx0kSLZ+j+hw9wV84v5Ew1Eag8GU
+ rP7Jm2AOC+3YmvwNJvwj1tAWGt5mtsslEJDJqCKq7fkc5s4f34V9wDwRd/vu2p4ONuWZqeeZn7S
+ S77/TrNc=
+X-Gm-Gg: ASbGncu6xKLfhV79+yUUgF4qWc32Sy2sCf4zju7KdqztncrXIdLVYllhPFLRfxO9zj9
+ FaBnBJ1qzyi5LwWDnE5OtTR/vvpD2jLAYTM4XdF6FnVNB+NYeWmWjjlY2AhpNtCYHpR4wVGmewG
+ 9/pBcV4pb35r7zKtNIMZhz6POIVvtpvqa0HpcFVKneliT23Cy/dHVSZVrcOLMZot3NbooOZrbxt
+ pTG2E42cSqYy86sIXSVrsLHARHkfIjvVIF/5lrdEe3KPJVvVAX8zcjGjWNl7gEcF06K/bY6FG4i
+ v20mfWLS/Plq0DCYsQ5ogSD04kRHgpaxx58q
+X-Google-Smtp-Source: AGHT+IHEW7R/r7HLb/aSUO54DmDFBm58X4SIJdXYtSIUDXkf/1h8n2/oHf32OvdG1iWT0azZpjoGpA==
+X-Received: by 2002:a50:c905:0:b0:5fa:82c9:7a5c with SMTP id
+ 4fb4d7f45d1cf-5faa8025c2bmr6856452a12.30.1746459841865; 
+ Mon, 05 May 2025 08:44:01 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5fa778188acsm5561762a12.35.2025.05.05.08.43.55
+ 4fb4d7f45d1cf-5fa778188acsm5561762a12.35.2025.05.05.08.44.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 08:43:55 -0700 (PDT)
+ Mon, 05 May 2025 08:44:00 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/19] expo: Avoid arranging the scene willy nilly
-Date: Mon,  5 May 2025 17:42:42 +0200
-Message-ID: <20250505154308.2911248-5-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 07/19] expo: Add extra checks for rendering
+Date: Mon,  5 May 2025 17:42:45 +0200
+Message-ID: <20250505154308.2911248-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250505154308.2911248-1-sjg@chromium.org>
 References: <20250505154308.2911248-1-sjg@chromium.org>
@@ -94,94 +94,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Moving from one scene to another should not result in the scene being
-re-arranged. Drop this, so that tests can have more control of when
-scenes are arranged.
+Check the framebuffer immediately after the first render, to make sure
+it doesn't change when the scene is arranged a second time.
 
-Also drop the scene_arrange() call when applying a theme, for the same
-reason.
-
-Add the now-required scene_arrange() to cedit and bootmenu
+Check that the logic around menu-item highlight is correct.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/cedit.c   | 3 +++
- boot/expo.c    | 4 ----
- boot/scene.c   | 5 -----
- cmd/bootflow.c | 3 +++
- 4 files changed, 6 insertions(+), 9 deletions(-)
+ test/boot/expo.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/boot/cedit.c b/boot/cedit.c
-index 56dc7c6af15..b7c2d37e3a2 100644
---- a/boot/cedit.c
-+++ b/boot/cedit.c
-@@ -98,6 +98,9 @@ int cedit_arange(struct expo *exp, struct video_priv *vpriv, uint scene_id)
- 			break;
- 		}
- 	}
-+	ret = scene_arrange(scn);
-+	if (ret)
-+		return log_msg_ret("cac", ret);
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index 824ef023c1c..135e177cbbd 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -671,17 +671,35 @@ static int expo_render_image(struct unit_test_state *uts)
+ 	/* reset back to normal */
+ 	scene_obj_set_bbox(scn, OBJ_MENU, 50, 400, 50 + 160, 400 + 160);
  
- 	return 0;
- }
-diff --git a/boot/expo.c b/boot/expo.c
-index 3e79cbca04b..d09cc1861da 100644
---- a/boot/expo.c
-+++ b/boot/expo.c
-@@ -185,14 +185,10 @@ struct scene *expo_lookup_scene_id(struct expo *exp, uint scene_id)
- int expo_set_scene_id(struct expo *exp, uint scene_id)
- {
- 	struct scene *scn;
--	int ret;
++	/* make sure the preview for the first item is not shown */
++	obj = scene_obj_find(scn, ITEM1_PREVIEW, SCENEOBJT_NONE);
++	ut_assertnonnull(obj);
++	ut_assert(obj->flags & SCENEOF_HIDE);
++
+ 	/* render it */
+ 	expo_set_scene_id(exp, SCENE1);
+ 	ut_assertok(expo_render(exp));
++	ut_asserteq(18786, video_compress_fb(uts, dev, false));
  
- 	scn = expo_lookup_scene_id(exp, scene_id);
- 	if (!scn)
- 		return log_msg_ret("id", -ENOENT);
--	ret = scene_arrange(scn);
--	if (ret)
--		return log_msg_ret("arr", ret);
+ 	ut_asserteq(0, scn->highlight_id);
+ 	ut_assertok(scene_arrange(scn));
+ 	ut_asserteq(0, scn->highlight_id);
++	ut_assertok(expo_render(exp));
++	ut_asserteq(20433, video_compress_fb(uts, dev, false));
++
++	ut_assertok(scene_arrange(scn));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(20433, video_compress_fb(uts, dev, false));
  
- 	exp->scene_id = scene_id;
+ 	scene_set_highlight_id(scn, OBJ_MENU);
++	ut_asserteq(OBJ_MENU, scn->highlight_id);
++	ut_assertok(scene_menu_select_item(scn, OBJ_MENU, ITEM1));
+ 	ut_assertok(scene_arrange(scn));
+ 	ut_asserteq(OBJ_MENU, scn->highlight_id);
++
++	/* make sure the preview for the first item is now shown */
++	ut_assert(!(obj->flags & SCENEOF_HIDE));
++
+ 	ut_assertok(expo_render(exp));
+ 	ut_asserteq(20433, video_compress_fb(uts, dev, false));
  
-diff --git a/boot/scene.c b/boot/scene.c
-index fa8f540bfb0..2ca82236300 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -1062,7 +1062,6 @@ int scene_calc_dims(struct scene *scn, bool do_menus)
- int scene_apply_theme(struct scene *scn, struct expo_theme *theme)
- {
- 	struct scene_obj *obj;
--	int ret;
- 
- 	/* Avoid error-checking optional items */
- 	scene_txt_set_font(scn, scn->title_id, NULL, theme->font_size);
-@@ -1086,10 +1085,6 @@ int scene_apply_theme(struct scene *scn, struct expo_theme *theme)
- 		}
- 	}
- 
--	ret = scene_arrange(scn);
--	if (ret)
--		return log_msg_ret("arr", ret);
--
- 	return 0;
- }
- 
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index 6ffb1bd33e1..9d449f430c9 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -118,6 +118,9 @@ __maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
- 	ret = -ERESTART;
- 	do {
- 		if (ret == -ERESTART) {
-+			ret = expo_arrange(exp);
-+			if (ret)
-+				return log_msg_ret("bha", ret);
- 			ret = expo_render(exp);
- 			if (ret)
- 				return log_msg_ret("bhr", ret);
 -- 
 2.43.0
 
