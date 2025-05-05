@@ -4,82 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8FC3C3ABB6
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 20:51:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B27B5C3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 20:55:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4C6282102;
-	Mon,  5 May 2025 22:51:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 25EAA82102;
+	Mon,  5 May 2025 22:55:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TeeZx5tt";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kNK4ZQp5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 378448210A; Mon,  5 May 2025 22:50:59 +0200 (CEST)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDB26820EB
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 22:50:56 +0200 (CEST)
+ id 843688210A; Mon,  5 May 2025 22:55:05 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F1AF6820EB
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 22:55:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-875b8e006f8so1200920241.0
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 13:50:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746478255; x=1747083055; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Z73howeQrKBvG7ZEYKpkbXgsZzXVtK2CKotA19tpsOI=;
- b=TeeZx5tt/8uQECPCFie0IuvLHB2iTDzJYsQuQU3mTAoW8PKGpJ5K4bgPJ2BYePh2Ma
- S2Z+8dhk6p8ZAcsdcJ8PekZIMbuX6kFE//OEHeCqBgateS+PANjZhOL2D5gMhMbtQHKm
- FYMRgw37spOBrneA+CvfgDjZWQdeWbekDgCFE/4F1L8JYYPGwMOATuP0DNmyYN21bV/j
- nY0i18zWhgxMpTZHu+cN2k95lrOKzr4floK2cfXM84Im4DRDEu4FXDWln8kMj1O8Du1F
- sCBFa2Mi6hQGvb3AFYzzWgQlFygtSt2oeSIVYWW+auiVvrFZSEkNNCJpz7lArAGv2gw7
- CfDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746478255; x=1747083055;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z73howeQrKBvG7ZEYKpkbXgsZzXVtK2CKotA19tpsOI=;
- b=lEmeKJX6BTybYlsrVq6r8A92JfEL1o8+s88dTOqfN5LsBdEeekiFVMR1iA13uxWZAk
- 3WL76zKyO/gV6X6gTX0NSm9q0UDm/lvde93pGTJ1/vP6pnBP7Fthx6KZZW1W7Ju9jMjw
- uL6gmuvV7NX0B8VSzYOIuVFWNuZmqIJhQsYKU+km7QEWGmzXnw8ak9wGn5+xvK2b7rRq
- qaiQ1ALYt+lE0Ybnsgtpa0pJHdblQES6/TAj1FNkVESsc4+IBSPTkeTwD+wEYKlpJd8o
- 3gmfLGpLiLV8ftz8cAEd7nCkZxfYRzAbrjbVL8axK7iymSEhB40Rg4CfXaN5MTsHOc+j
- kRAQ==
-X-Gm-Message-State: AOJu0YyUqE9wKBRYuD6h5e5vnTa4jyDfTetQbKBkV+rWaY/inbBKbxRB
- ovsT7sHmu+heJNEEqYiAJL63Jd+9eQY4J1ZiA7Ox25Zt9GE9pRk1Yl9S4w1V1vr6JieG8dgBAzI
- H
-X-Gm-Gg: ASbGncsdyhMyAL+rs8Hwz5JU7nP4xpIQ1cQ1qsaNO0QhRV5bdPwtHJBHp87nQADStNJ
- GwNkwfuo2CQe7sYI+D8zwVu0j6se6Wyt4Mgl64x7jJ4WostRLFxhoxQS1RvCrNofk30EpAyWPnB
- EXKvEMldBmhBIGGH7YP1ae+Y6odQyk8VyBTmMfECPb+GtoDR28KZbH8eN7goTGSNk2Vuo+B8tzK
- kKulqNI5/EpbaBYLFJkY9Y8AnijiO8WaVjv1K5ynJaA5YiTcT7AbHiFXXl80AYRFY2kuqypqX58
- zt3eAlRA83DzngtGC+o8rvcfm1Ot9ubVbjey0R/tKA4sLHGBo+4VvDbEeJkOryKJR5WgUuE=
-X-Google-Smtp-Source: AGHT+IHaz/uuSz0CfIrvE6YrZ8sECz7SJZVjMbsTBflADuFaxGp6eJbsCFjDi/HoAVtKcmdsb7iKnQ==
-X-Received: by 2002:a05:6102:f83:b0:4c1:8c7d:44ce with SMTP id
- ada2fe7eead31-4dafb4a9f18mr7872200137.1.1746478255532; 
- Mon, 05 May 2025 13:50:55 -0700 (PDT)
-Received: from jetm-rog-crosshair-hero-x870e.. ([190.171.102.101])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-52ae41ef652sm1671423e0c.43.2025.05.05.13.50.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 May 2025 13:50:55 -0700 (PDT)
-From: Javier Tia <javier.tia@linaro.org>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH] test: Add setuptools to test requirements.txt
-Date: Mon,  5 May 2025 14:50:51 -0600
-Message-ID: <20250505205052.347616-1-javier.tia@linaro.org>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 545Kt0oG872270
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 5 May 2025 15:55:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746478500;
+ bh=qO6d/cyuHoeucg1hI9vP0sdwGNy6XUt2EWp0XsHyF+c=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=kNK4ZQp55C1KSGYva2VfmSbNZLcYOxjIWEWKEuiJSfnPP0yxg43GdYAVFggCJpRA+
+ DQfPyS2inbuYYKW/4uq1xy9JApqCWTmpssi4DXnGymm62ueGFelZH2Hcj5FLIeIV+O
+ rk4J0Om0CywV+7xdqPI/IIYvJlCKYfOF25BiTumA=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 545Ksxpx054731
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 5 May 2025 15:55:00 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 5
+ May 2025 15:54:59 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 5 May 2025 15:54:59 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 545KsxcE016768;
+ Mon, 5 May 2025 15:54:59 -0500
+Message-ID: <534da8dc-f7bf-4ef3-b94d-3254a38b26a4@ti.com>
+Date: Mon, 5 May 2025 15:54:58 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: k3-am62a-*-binman: Update ti-dm blob
+To: Bryan Brattlof <bb@ti.com>, Daniel Schultz <d.schultz@phytec.de>
+CC: <trini@konsulko.com>, <d-gole@ti.com>, <vibhore@ti.com>, <kamlesh@ti.com>, 
+ <nm@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>
+References: <20250502143414.2841260-1-d.schultz@phytec.de>
+ <20250502155509.z57ec4dhcdsy6fsz@bryanbrattlof.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250502155509.z57ec4dhcdsy6fsz@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,30 +83,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It solves the following error:
+On 5/2/25 10:55 AM, Bryan Brattlof wrote:
+> On May  2, 2025 thus sayeth Daniel Schultz:
+>> With [1], TI changed the Device Manager for the AM62Ax to an EdgeAI
+>> based firmware. Update all binman device-tree files to match the
 
-❯ ./test/py/test.py --bd sandbox --build
-+make O=/u-boot/build-sandbox -s sandbox_defconfig
-+make O=/u-boot/build-sandbox -s -j32
-Traceback (most recent call last):
-  File "/u-boot/build-sandbox/../scripts/dtc/pylibfdt/setup.py", line 23, in <module>
-    from setuptools import setup, Extension
-ModuleNotFoundError: No module named 'setuptools
+It wasn't changed, this is a new firmware that does new things,
+the other firmware still exists.
 
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
----
- test/py/requirements.txt | 1 +
- 1 file changed, 1 insertion(+)
+>> latest firmware name.
+>>
+>> 1: https://git.ti.com/cgit/arago-project/meta-ti/commit/?h=scarthgap&id=430bab80d46ed921e4d4dc8ecaad8a4903b514c3
+>>
+>> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+>> ---
+>>   arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 2 +-
+>>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 2 +-
+>>   2 files changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+>> index 325702ed6e0..aa4caaeae33 100644
+>> --- a/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+>> +++ b/arch/arm/dts/k3-am62a-phycore-som-binman.dtsi
+>> @@ -167,7 +167,7 @@
+>>   	ti-dm {
+>>   		filename = "ti-dm.bin";
+>>   		blob-ext {
+>> -			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+>> +			filename = "ti-dm/am62axx/dm_edgeai_mcu1_0_release_strip.out";
+>>   			optional;
+>>   		};
+>>   	};
+>> diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+>> index 2a8c260387b..dc6e8523172 100644
+>> --- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
+>> +++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
+>> @@ -151,7 +151,7 @@
+>>   	ti-dm {
+>>   		filename = "ti-dm.bin";
+>>   		blob-ext {
+>> -			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+>> +			filename = "ti-dm/am62axx/dm_edgeai_mcu1_0_release_strip.out";
+> 
+> I've had to ask around internally to what's actually being changed in
+> this different firmware blob. I think there are probably more changes
+> that need to happen before we can make this switch unfortunately
+> 
 
-diff --git a/test/py/requirements.txt b/test/py/requirements.txt
-index 804a427b351..5be94a44912 100644
---- a/test/py/requirements.txt
-+++ b/test/py/requirements.txt
-@@ -3,3 +3,4 @@ pycryptodomex==3.21.0
- pytest==6.2.5
- pytest-xdist==2.5.0
- FATtools==1.0.42
-+setuptools==80.3.1
--- 
-2.49.0
+That's right, this new EdgeAI firmware doesn't play nice with upstream Linux or
+U-boot. It uses several carveouts in DDR which are not announced in its resource table
+nor elf linker sections. To use it without it trashing your memory space you would
+need these added[0]. There are also modification only in our vendor kernel that
+are needed to make the rest of the EdgeAI stack functional.
 
+So this firmware shouldn't be the default in upstream Linux/U-Boot yet*. If your
+kernel is a downstream of our vendor kernel you can select this alternative
+firmware at U-Boot build command line with `TI_DM=ti-dm/am62axx/dm_edgeai..`.
+
+I say "yet" above as we would like it to be the default in the future, the
+AM62A device is made specifically for AI tasks that the firmware helps enable.
+But there is still some cleanup to do in that firmware to solve the above
+issues first.
+
+Andrew
+
+[0] https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/tree/arch/arm64/boot/dts/ti/k3-am62a7-sk-edgeai.dtso?h=ti-linux-6.12.y-cicd
+
+> ~Bryan
