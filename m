@@ -4,95 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7839C3ABAA
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 16:13:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7827C3ABAA
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 16:13:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EB8C8213D;
-	Mon,  5 May 2025 18:13:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A1BC4826AD;
+	Mon,  5 May 2025 18:13:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K8i2XuSh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE3EB820E8; Mon,  5 May 2025 17:29:55 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0DFC5820E8; Mon,  5 May 2025 17:34:36 +0200 (CEST)
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42af])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45CF2801BE
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:29:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93DFC801BE
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 17:34:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-391342fc0b5so2708549f8f.3
- for <u-boot@lists.denx.de>; Mon, 05 May 2025 08:29:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746458993; x=1747063793; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NfGyAZ5OQlxCZlUzb7bIjSLy50+Auef0P7pWjpjt+K0=;
- b=K8i2XuShGOdRJuHJJY8iHMpVbacxEQigl/9tPBJ02t8/2USc8eBB+Yr4dyFl1f5obL
- +krb4Oswye6sNFNhLMnSecIaIOUqP6nuJqxN+eZFJDgIv4IpCXLCt65cqEQlHk8hxqLi
- 0gBGcN1vQ3ibIg7HAzPeirLafcaEZTHDzHxuYbRgp1e1JA/KfOiXdN1BV/ZDrJrWGxnw
- ssviGRuAe4GCqlY7VkvdUJmmkp55EERp7gvQUsh3jQAcJUs+/viku5PkG4SBHN2DHTn7
- 0cGCFREVpxD0ZtZmXulsEa4yoZZmpw2gtJw60BHU+UUqtuKjP92GVAVdOzN/bjYfQ9ia
- A2Tw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746458993; x=1747063793;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NfGyAZ5OQlxCZlUzb7bIjSLy50+Auef0P7pWjpjt+K0=;
- b=miAb0oIJpmlq1VviFKTK88JPU930q5Relf5NLL/H8nV3NoQwHnzMvB/yT1fZ3AkjFX
- 4Lqn033+lQk8SjW7PPdowO26r0sEWNTN8nlir/Mu2j+SB3s73ppl0N9uosaJOd5pdxzJ
- Jqe6EELW0okmEKSN4nDM0jAx1DULfo8lBC9xRTPjzItCwc0BR1dZm+q0VUNkikIcUU8x
- KJzdDQ3txN16o8hyCo4Fsypxcd6JAAIYANDPsaB5Vl9X4zYKAoU4+abeNCCY8pMeICC6
- qtVyNh3rr6oi14tmvkP15yX84FUEXBw5B/qQjah1bPFoB9PcydCRJ7B0AbD/5fnZWEhj
- L+wQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUngO+uFRZ2t3tJmWm1jCDN1oJss0vodXgDwaxbWVTFZDoWbJa17Y5j8tvnyomIKnX5Zzgr5+s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRrhx7M5rVuRQXcpGuJd1ZHPL3/s+W31qEETy/9Kf/mN3mBcn3
- MG7gwZtR8BdlR7RABAJ6xnCmObNXqlNRvt3Ur23L4PK7+IYmauXh7ukvt7irW6Y=
-X-Gm-Gg: ASbGnctUbt95XSIyNcPsBbL+zJcE60ocXgbgQH5DpX8gVjDIB+ceUhmLxIi0vkNwAFk
- KIOeS9A0NTubN7/mWlU9UFkXtRRUj3X/eh7z2BSdSQobWurAs7kUUDMtsyP8nQatIMG/uk0rgIR
- d6/yrsy5wH/dWPuL+cAPlJqbkXt8kvLJQt15mdtvTjC/soXJiDIy9YwhU89aZSVPFsymMFM9LO5
- 74v8rYXDjNr3xdZru5zDIK/2pKSc8z4T9lAfkbU2gKIMzC1ZuLpfxDK8/EaN6qSV8w7+LqNerTs
- loS3SlEUS0aU1QZj2VWkLoxZ38wJXnVqTd2YswqbHynDCOwYocWg+EbjRGmTWnTTdfjlZ2qIOjv
- 54xy2
-X-Google-Smtp-Source: AGHT+IHT41/seJY2OnoMnIPNJgtoTtr7ii6OyECOWhBiqjy95R2hqTtU7FKhERzQ9ujB4P3umlwdcQ==
-X-Received: by 2002:a05:6000:2586:b0:39e:db6a:4744 with SMTP id
- ffacd0b85a97d-3a09fd84aacmr5366471f8f.32.1746458992684; 
- Mon, 05 May 2025 08:29:52 -0700 (PDT)
-Received: from [192.168.1.47] (60-60-142-46.pool.kielnet.net. [46.142.60.60])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a099ae7a35sm10526033f8f.43.2025.05.05.08.29.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 May 2025 08:29:51 -0700 (PDT)
-Message-ID: <d2dd5f57-ca21-4fe7-9001-0526cfa101e9@linaro.org>
-Date: Mon, 5 May 2025 17:29:50 +0200
+ spf=pass smtp.mailfrom=foss+dt@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZrlvF14k0zWJt;
+ Mon,  5 May 2025 17:34:33 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4ZrlvD0tHpzRhC; Mon,  5 May 2025 17:34:31 +0200 (CEST)
+From: Quentin Schulz <foss+dt@0leil.net>
+Date: Mon, 05 May 2025 17:34:22 +0200
+Subject: [PATCH v2] Add 'bootsource' /chosen property
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] sysreset: Implement PSCI based reset to EDL mode
- for QCOM SoCs
-To: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
- ilias.apalodimas@linaro.org, seashell11234455@gmail.com, clamor95@gmail.com,
- ycliang@andestech.com, me@samcday.com, robert.marko@sartura.hr,
- sjg@chromium.org, marek.vasut+renesas@mailbox.org, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20250430085428.1090801-1-quic_varada@quicinc.com>
- <20250430085428.1090801-2-quic_varada@quicinc.com>
- <9e06d089-3fd9-4161-988b-14273a2aba0e@linaro.org>
- <20250505052614.ttvitp53rnjamahc@hu-varada-blr.qualcomm.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250505052614.ttvitp53rnjamahc@hu-varada-blr.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250505-bootsource-v2-1-5a315d9bff26@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAH3aGGgC/23MQQ7CIBCF4as0sxZDJ6WKK+9huqAwCJtihkpsG
+ u4udu3yf8n7dsjEkTLcuh2YSswxLS3w1IENZnmSiK41oEQlUSoxp7Tm9GZL4jo4j0qRptFCO7y
+ YfPwc2GNqHWJeE2+HXfrf+pcpveiFVn6YzaiNxcvdBmLezo5gqrV+ASoNhuukAAAA
+X-Change-ID: 20250205-bootsource-84df255e9e6c
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>, 
+ Heiko Stuebner <heiko@sntech.de>, Simon Glass <sjg@chromium.org>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Daniel Golle <daniel@makrotopia.org>, devicetree-spec@vger.kernel.org, 
+ u-boot@lists.denx.de
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-Mailman-Approved-At: Mon, 05 May 2025 18:13:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,47 +65,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
+Bootloaders typically can be loaded from different storage media, such
+as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
+such as USB (via proprietary protocols loading directly into SRAM, or
+fastboot, DFU, etc..), JTAG, ...
 
-On 5/5/25 07:26, Varadarajan Narayanan wrote:
-> On Fri, May 02, 2025 at 02:32:52PM +0200, Casey Connolly wrote:
->> Hi Varadarajan,
->>
->> You have almost entirely ignored my feedback on the previous revision.
-> 
-> Sorry. Since you had said "For now I'm fine with this new
-> sysreset-qcom.c driver", in [1], I assumed you were ok with just
-> addressing the technical issues alone. Will add a new op to sysreset_ops
-> and post a new version.
+This information is usually reported by the SoC-ROM via some proprietary
+mechanism (some specific address in registers/DRAM for example).
 
-Ah right, yeah my wording was not super clear there, my apologies. I'm 
-ok with the new driver but it should only handle the edl case, the 
-existing psci driver should be used for everything else (hence why it's 
-necessary to iterate over all sysreset devices first passing in the 
-arguments so the new sysreset-qcom driver would be able to do it's thing 
-before the generic psci driver.
+It would be useful to know which medium was used to load the first stage
+of the bootloader. SoC-ROM shall be ignored and not reported in this
+property.
 
-Thanks and regards,>
-> Thanks
-> Varada
-> 
-> 1 - https://lore.kernel.org/u-boot/1e0e9a72-40a8-4ce3-a390-edef1d6a03d8@linaro.org/
-> 
->> If there's some technical disagreement or you don't understand my feedback
->> then please let me know (in private if you prefer).
->>
->> This approach is fundamentally wrong, full of layering violations and
->> totally unsustainable (imagine if every vendor started polluting core code
->> with their custom stuff).
->>
->> These abstractions need to be improved to add this feature properly and
->> there's no getting around it.
->>
->> Kind regards,
->> Casey (she/they)
->>
-> [ . . . ]
+This can allow client programs to detect which medium to write to when
+updating the boot program, or detect if fallback mechanisms to
+unexpected medium were used to reach the client program's execution.
 
+In cases where a boot program is split into multiple stages (like
+U-Boot), it only represents the device that was used to load the very
+first stage (in case of U-Boot, VPL/TPL/SPL whichever is executed first)
+and not any of the later stages (in case of U-Boot, TPL/SPL/proper) or
+any client program. They may match, but they may not and this property
+is meant to only represent the device used for loading the very first
+stage.
+
+I have a board running U-Boot which currently has 9 boot scenarios
+(eMMC/SD/SPI-NOR for the first stage, eMMC/SD/SPI-NOR for the next
+stages; not counting USB loading yet, which would make it a few more). I
+cannot force the BootROM of this board to select a specific device aside
+from erasing the other media.
+The only way to identify which device was used for the first stage is to
+parse U-Boot first stage console output or add some custom logic for my
+board. To validate that a new version of the bootloader works, including
+the fallback mechanisms, I need to make sure the BootROM loads the first
+stage from the expected device otherwise I may have false positives.
+This would be useful for automated testing.
+
+I could also very well see this being used to identify where the first
+stage of the boot program is stored (which may differ from where the
+later stages are! that's the case for U-Boot proper for example!) to be
+able to update it from a client program.
+
+Note that Barebox has been using this property for a while already, with
+this very content[1].
+
+This is chosen as a string so that it matches other properties in
+/chosen (e.g. stdout-path) as well as allows for extending it, in case
+one needs to provide additional information (e.g. HW boot partition for
+eMMC, a specific disk on an AHCI controller, a specific USB device on
+a USB bus, etc.).
+
+[1] https://lore.kernel.org/u-boot/0066fcc2-3431-48be-8dc2-00ea7e2550c2@pengutronix.de/
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Note that this property is already set by Barebox and I'm planning on
+adding it to U-Boot as well, specifically for Rockchip SoCs.
+
+I have some doubts about the wording, especially in the case of
+hypervisors or chained boot programs. I'm not entirely sure what would
+make the most sense to put in the property for those scenario.
+---
+Changes in v2:
+- added usecases, non-usecases and increased verbosity of the definition
+  of the property name as requested by Simon,
+- Link to v1: https://lore.kernel.org/r/20250205-bootsource-v1-1-95f4ba69ac27@cherry.de
+---
+ source/chapter3-devicenodes.rst | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
+index 8080321d6e60d6b1e86c81af86c6850246a0223b..98cab42c105d9a390f74a6f80fb2bba61d5bb919 100644
+--- a/source/chapter3-devicenodes.rst
++++ b/source/chapter3-devicenodes.rst
+@@ -456,6 +456,23 @@ time. It shall be a child of the root node.
+                                                        the client program. The value could
+                                                        potentially be a null string if no boot
+                                                        arguments are required.
++   ``bootsource``          O     ``<string>``          A string that specifies the full path to the
++                                                       node representing the device the BootROM used
++                                                       to load the initial boot program.
++                                                       If the initial boot program is split into
++                                                       multiple stages, this represents the storage
++                                                       medium or device (e.g. used by fastboot) from
++                                                       which the very first stage was loaded by the
++                                                       BootROM.
++                                                       It may differ from the device from which later
++                                                       stages of the boot program or client program
++                                                       are loaded from, as this property isn't meant
++                                                       to represent those devices.
++                                                       A later stage of the boot program, or the
++                                                       client program, may use this information to
++                                                       favor the device in this property over others
++                                                       for loading later stages, or know the storage
++                                                       medium to flash an update to.
+    ``stdout-path``         O     ``<string>``          A string that specifies the full path to the
+                                                        node representing the device to be used for
+                                                        boot console output. If the character ":" is
+
+---
+base-commit: 5688e1c0b961d2ca5a32e3b624a9f4a9b433184f
+change-id: 20250205-bootsource-84df255e9e6c
+
+Best regards,
 -- 
-Casey (she/they)
+Quentin Schulz <quentin.schulz@cherry.de>
 
