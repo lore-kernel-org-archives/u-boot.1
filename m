@@ -4,58 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB165C369C2
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 06:49:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49B8DC369C2
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 06:49:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FF338209F;
-	Mon,  5 May 2025 08:49:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D19F48091A;
+	Mon,  5 May 2025 08:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1746427775;
-	bh=M2BPF5yZngjcHb6asWc0u5uUrQu7uf/bBzjgQ1tXnGM=;
+	s=phobos-20191101; t=1746427791;
+	bh=esUMX8pcryOyQRukA8i6LgrFs++JaXyTuUrYkRGFAeQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=W9XwXy0neZryzOiUsq5leIrLlcE1n1myihrLY76MRy4SczzDMHNNLmDnyeGQQBtU3
-	 hZqRCyv+dN0j4PpRokwAQug7oRGLRMleUv1idrzMa8INCMi9THGtLA2Bqi7MLz8/TH
-	 slhHYDnktCarZAk5cyOmJ0RqkXiAeniov4n4kmGTU8FrN0tu9dber5vP4ZIuEDbUWj
-	 gUmvhGTpRzN1JbvjXWamVVd+lE7W//msgON2ACRqdDdx1+LH816Ywcnxg0kZPWuhZ+
-	 d67rTba3Y3YeoY1tDUl9iusFNdYl11SPJ2hlkZvPnJ26bpG6eITA6VoIt5ZSJDEOdz
-	 YnJBZYw1wLcZQ==
+	b=go4QwmYVVU8VAg/k56UeWDNrXb6we2aEW2TTSUDahZL46Uk5rQ9qtGINrSgL7yg/5
+	 AsZWozw7DwSuJ5Ak9yZATOt4Dij1wD1TWmz4o+mFZVZr+C4HtWhA/nYsS2R78uEx7J
+	 niuNN3l+t3WmqPNpvNP1DK5JFiOtn+ZhRNLKG/DeVKoQjboa8FIzC92Dc4VvofIvQz
+	 LPKJXYmB6soIKc6lU9ct+qZZVetBBk56D79rpJVPttWPcSB6ymt6ZPRh7L5uQOWpTL
+	 /Ce4V17JBpIcm6Cq10bdx3WglcbQdiyxTKTN+xSCNonvUDCSSBe9DZXnfZulaCoL3L
+	 OHIoJgLverGjg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65F5A820E1; Mon,  5 May 2025 08:49:34 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 026A880BAE; Mon,  5 May 2025 08:49:51 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 821BE805D7
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 08:49:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AD88805D7
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 08:49:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4ZrXFQ2ws3z9t9n;
- Mon,  5 May 2025 08:49:30 +0200 (CEST)
-Message-ID: <416e16a8-e54d-4e9c-bfb7-f9408e6c50ff@denx.de>
-Date: Mon, 5 May 2025 08:49:29 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4ZrXFk64Lgz9tR0;
+ Mon,  5 May 2025 08:49:46 +0200 (CEST)
+Message-ID: <99a32527-57c8-41e4-b1da-214bb72e5d3f@denx.de>
+Date: Mon, 5 May 2025 08:49:46 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 5/6] ARM: dts: sam9x60: Add watchdog DT node
+Subject: Re: [PATCH v4 6/6] ARM: dts: at91: sam9x60-curiosity: Enable watchdog
+ node
 To: Zixun LI <admin@hifiphile.com>, Eugen Hristev <eugen.hristev@linaro.org>, 
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
- <20250428-wdt-v4-5-bb7d1c7c051a@hifiphile.com>
+ <20250428-wdt-v4-6-bb7d1c7c051a@hifiphile.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250428-wdt-v4-5-bb7d1c7c051a@hifiphile.com>
+In-Reply-To: <20250428-wdt-v4-6-bb7d1c7c051a@hifiphile.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4ZrXFQ2ws3z9t9n
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,7 +71,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28.04.25 11:16, Zixun LI wrote:
-> Add the watchdog timer node for the sam9x60 SoC's.
+> Enable watchdog node on SAM9X60-Curiosity board.
+> 
+> A default timeout of 16s is added which is the maximum supported value,
+> also matching Linux driver's behavior.
 > 
 > Signed-off-by: Zixun LI <admin@hifiphile.com>
 
@@ -83,28 +84,34 @@ Thanks,
 Stefan
 
 > ---
->   arch/arm/dts/sam9x60.dtsi | 8 ++++++++
->   1 file changed, 8 insertions(+)
+>   arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi | 4 ++++
+>   arch/arm/dts/at91-sam9x60_curiosity.dts         | 4 ++++
+>   2 files changed, 8 insertions(+)
 > 
-> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
-> index 7631dfaa07fc1e7c605c70840da1196c1daeb638..79449042c24f90686613f0082f40d4f2c13f122f 100644
-> --- a/arch/arm/dts/sam9x60.dtsi
-> +++ b/arch/arm/dts/sam9x60.dtsi
-> @@ -311,6 +311,14 @@
->   				clocks = <&slow_rc_osc>, <&slow_xtal>;
->   				#clock-cells = <1>;
->   			};
+> diff --git a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
+> index dd4623311c9df6004c1715d406d3873bbcc254b5..9144387861eca5ab14b756063b89866d280d7dea 100644
+> --- a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
+> +++ b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
+> @@ -95,3 +95,7 @@
+>   &slow_xtal {
+>   	bootph-all;
+>   };
 > +
-> +			watchdog: watchdog@ffffff80 {
-> +				compatible = "microchip,sam9x60-wdt";
-> +				reg = <0xffffff80 0x24>;
-> +				interrupts = <1 IRQ_TYPE_LEVEL_HIGH 7>;
-> +				clocks = <&clk32 0>;
-> +				status = "disabled";
-> +			};
->   		};
->   	};
->   
+> +&watchdog {
+> +	timeout-sec = <16>;
+> +};
+> diff --git a/arch/arm/dts/at91-sam9x60_curiosity.dts b/arch/arm/dts/at91-sam9x60_curiosity.dts
+> index 1c7f0fa6a49004943e5a4ac6637db5e806cc92f3..f165fdadb9e4abd08f9166e7cbec0507616c9939 100644
+> --- a/arch/arm/dts/at91-sam9x60_curiosity.dts
+> +++ b/arch/arm/dts/at91-sam9x60_curiosity.dts
+> @@ -336,3 +336,7 @@
+>   &usb2 {
+>   	status = "okay";
+>   };
+> +
+> +&watchdog {
+> +	status = "okay";
+> +};
 > 
 
 Viele Grüße,
