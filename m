@@ -4,56 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49B8DC369C2
-	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 06:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C85C369C2
+	for <u-boot@archiver.kernel.org>; Mon,  5 May 2025 07:07:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D19F48091A;
-	Mon,  5 May 2025 08:49:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id F2EF180BAE;
+	Mon,  5 May 2025 09:07:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1746427791;
-	bh=esUMX8pcryOyQRukA8i6LgrFs++JaXyTuUrYkRGFAeQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=go4QwmYVVU8VAg/k56UeWDNrXb6we2aEW2TTSUDahZL46Uk5rQ9qtGINrSgL7yg/5
-	 AsZWozw7DwSuJ5Ak9yZATOt4Dij1wD1TWmz4o+mFZVZr+C4HtWhA/nYsS2R78uEx7J
-	 niuNN3l+t3WmqPNpvNP1DK5JFiOtn+ZhRNLKG/DeVKoQjboa8FIzC92Dc4VvofIvQz
-	 LPKJXYmB6soIKc6lU9ct+qZZVetBBk56D79rpJVPttWPcSB6ymt6ZPRh7L5uQOWpTL
-	 /Ce4V17JBpIcm6Cq10bdx3WglcbQdiyxTKTN+xSCNonvUDCSSBe9DZXnfZulaCoL3L
-	 OHIoJgLverGjg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 026A880BAE; Mon,  5 May 2025 08:49:51 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AD88805D7
- for <u-boot@lists.denx.de>; Mon,  5 May 2025 08:49:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iNvS1uPe";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4647280F03; Mon,  5 May 2025 09:07:31 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4ZrXFk64Lgz9tR0;
- Mon,  5 May 2025 08:49:46 +0200 (CEST)
-Message-ID: <99a32527-57c8-41e4-b1da-214bb72e5d3f@denx.de>
-Date: Mon, 5 May 2025 08:49:46 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 2C7678091A
+ for <u-boot@lists.denx.de>; Mon,  5 May 2025 09:07:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-39c0dfba946so3121307f8f.3
+ for <u-boot@lists.denx.de>; Mon, 05 May 2025 00:07:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1746428848; x=1747033648; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=BAcvdE2xY/zpD3KTmU7HwvxmS2gSLmyMDAFLT80zCwA=;
+ b=iNvS1uPeZEJpYvqQ8Fr6e0u0Q9djgLtM7O7kiFMAba7vSr1mxkNJ6Aro5UsQ/m8U8H
+ R5a3+ka9FWHPAgmIFDp+ATG/+wxXbBV2qW7X0Et0yOVqvk+gJxHAAmHuIPDiIy4q1wRu
+ CxBsVb71QffVtK1+ArmIKCs1+lGJhMUA30EctYT9VgS8mpT0HaSh4DCchpribiZ1ErRs
+ GjdGkgWPzOFr6mV4FEPcxe2pj/+UnRHF2VhHrezatQ3CDYPhcTiz5LaP65zXw1reJib4
+ QkMvdueH5WWd64pycYaKEcWACutxLmLR6ubvA+0kCAiAi1VsHrvgI4/wXQwHSkum0uNe
+ rcGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746428848; x=1747033648;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=BAcvdE2xY/zpD3KTmU7HwvxmS2gSLmyMDAFLT80zCwA=;
+ b=SEbwcUQvIj262+QlF2uGqEU1KP8BXR382SzRJ+OwPNYaxmcqbH3vwhS16C3M8rb/h+
+ 1SVeLuYNRbQTA1pwOFIm79u5HwXDJy6HRjrTpOQQ+atkcqGzd4WQe89ybfKIm6BAKJXZ
+ uu/u7RH4MgIDSl/ge8LD6fDaGz9na1s53pyoJl4icdbNu/JTJnIglahsP24GAKIclxk5
+ Ajj16zEEJFy5BtATt380DuUtJGZp4oygqDxtVKmSGcBSzkCreB2zvb109Q3pEeiEm9l1
+ JdHG2+qmPZ34ZMrFkde7Tuj1ZaOeo294Fg/sumaCC5umv/g+XorPMKrNokI9vvqqSZf1
+ wmzg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQHWxfbII3dCtTgiO0DckOC08WMrCYFg/Hd9B5syRgmg3gLywwrB6RpOuEL324LbseMNezXb0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwmGApg2XcbRGviLIt1xrWxxf1iLYRBF5o4G41XIXcEMz7YDSJU
+ nEgARja6dn128t/PTQKHXJSlMQ5jpIQGsAjLPwVkISHUAcRxtbDEDeBBuv7M6g4=
+X-Gm-Gg: ASbGncv67pcAzIBNpPx1HKWMaDoYkIlTEUkFIAYcTynLl21mDlPVYbXhIOlf8jO9QiL
+ +9YwrqvCqPRu+jB2v78F6ZIGPn6lBeWWoGaKkhr2gY+Jc5V2TGi5ZWv6IjbmAKvzZdK18ES6g/2
+ TNyr5ediVUgxI1rzy+bAiNEDt1MDPW7bDgNWFCrbOtWyIaeaCAc4iJJR87MFOapOvol1343Z03y
+ cBxDBnQCxSYOUfXX+Jk4LrkxvGohwISDNtpaO1ulmaRDMhjmwoAzlp/6TL5Ll+VvjhWdDShlQtD
+ bQ2JicV3YKT/VId5KK5ESkXp8s4kVdkXII+MSm+EEap4AW1Im4s/jGRyX8y8xtSGnNf0ZXEc4kr
+ rw+iwvON1zW2h57x5lv+oPU8JjmbX
+X-Google-Smtp-Source: AGHT+IHydklTwgvkH9q6GqOTfYh+FoH8zbjEJ/ifB4D6ubYun8TosSrDO7fZcpMAINEvL9rzwviU+w==
+X-Received: by 2002:a05:6000:400e:b0:39a:ca04:3dff with SMTP id
+ ffacd0b85a97d-3a09fdbb907mr4641524f8f.40.1746428848634; 
+ Mon, 05 May 2025 00:07:28 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:88d3:1ad7:3ae1:56e3?
+ ([2a01:e0a:3d9:2080:88d3:1ad7:3ae1:56e3])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a099b16f00sm9251942f8f.84.2025.05.05.00.07.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 May 2025 00:07:28 -0700 (PDT)
+Message-ID: <f073dad7-337e-499a-8cb5-9dae0842de17@linaro.org>
+Date: Mon, 5 May 2025 09:07:28 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 6/6] ARM: dts: at91: sam9x60-curiosity: Enable watchdog
- node
-To: Zixun LI <admin@hifiphile.com>, Eugen Hristev <eugen.hristev@linaro.org>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
- <20250428-wdt-v4-6-bb7d1c7c051a@hifiphile.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250428-wdt-v4-6-bb7d1c7c051a@hifiphile.com>
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: Odroid n2+ usb broken on reboot
+To: Wayne Schroeder <raz@chewies.net>, u-boot@lists.denx.de
+References: <CAEUiLubXaPGZsE6y_X6mBTD1ZK-2w82fbRD5z8+MKvDZtZKOtA@mail.gmail.com>
+Content-Language: en-US, fr
+Cc: "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>,
+ "linux-amlogic@lists.infradead.org" <linux-amlogic@lists.infradead.org>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <CAEUiLubXaPGZsE6y_X6mBTD1ZK-2w82fbRD5z8+MKvDZtZKOtA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,60 +124,53 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.04.25 11:16, Zixun LI wrote:
-> Enable watchdog node on SAM9X60-Curiosity board.
+Hi,
+
++CC u-boot-amlogic@groups.io
++CC linux-amlogic@lists.infradead.org
+
+On 05/05/2025 00:34, Wayne Schroeder wrote:
+> Hello.  I am not sure if this is a bug, or even related to u-boot, but I am
+> reporting it here because it was easiest to resolve via a u-boot change.
 > 
-> A default timeout of 16s is added which is the maximum supported value,
-> also matching Linux driver's behavior.
+> I am using u-boot-2025.04 (source) with a mainline linux from Arch Linux
+> Arm.
+> Linux alarm 6.14.4-1-aarch64-ARCH #1 SMP PREEMPT_DYNAMIC Sat Apr 26
+> 13:02:01 MDT 2025 aarch64 GNU/Linux
 > 
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
+> On my odroid-n2+, the USB ports work on the first boot after power.  If I
+> run shutdown -r now, or hit ctl-alt-del and otherwise reboot the system,
+> the usb ports do not function at the next or subsequent boot up.
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+I think it's a very long term issue, USB lacks a proper reset at probe on
+warm reset, does USB still work from U-Boot after the reboot ?
 
-Thanks,
-Stefan
-
-> ---
->   arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi | 4 ++++
->   arch/arm/dts/at91-sam9x60_curiosity.dts         | 4 ++++
->   2 files changed, 8 insertions(+)
 > 
-> diff --git a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-> index dd4623311c9df6004c1715d406d3873bbcc254b5..9144387861eca5ab14b756063b89866d280d7dea 100644
-> --- a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-> +++ b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-> @@ -95,3 +95,7 @@
->   &slow_xtal {
->   	bootph-all;
->   };
-> +
-> +&watchdog {
-> +	timeout-sec = <16>;
-> +};
-> diff --git a/arch/arm/dts/at91-sam9x60_curiosity.dts b/arch/arm/dts/at91-sam9x60_curiosity.dts
-> index 1c7f0fa6a49004943e5a4ac6637db5e806cc92f3..f165fdadb9e4abd08f9166e7cbec0507616c9939 100644
-> --- a/arch/arm/dts/at91-sam9x60_curiosity.dts
-> +++ b/arch/arm/dts/at91-sam9x60_curiosity.dts
-> @@ -336,3 +336,7 @@
->   &usb2 {
->   	status = "okay";
->   };
-> +
-> +&watchdog {
-> +	status = "okay";
-> +};
+> My apologies if this is not applicable to u-boot because it is a linux
+> issue--I am not sure what the source of the issue is, but adjusting the
+> u-boot .config after make odroid-n2_defconfig resolved the issue entirely.
 > 
+> I am booting via extlinux/extlinux.conf and have adjusted my
+> CONFIG_BOOTCOMMAND before build to execute a usb reset prior to the
+> existing run distro_bootcmd.
+> 
+> CONFIG_BOOTCOMMAND="usb reset; run distro_bootcmd"
 
-Viele Grüße,
-Stefan Roese
+I'm pretty sure there's driver callbacks we should implement to do the
+same here, I need to check.
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+> 
+> This has allowed me to reboot the system and successfully have access to
+> the USB devices such as my keyboard, mouse, and root file system on USB3
+> SSD.
+> 
+> Thanks!
+> 
+> Wayne
 
