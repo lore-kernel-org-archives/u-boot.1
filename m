@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 870B5C3ABBF
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 10:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF36DC3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 10:42:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D5E6828BC;
-	Tue,  6 May 2025 12:42:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 640FD82757;
+	Tue,  6 May 2025 12:42:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WMDLegUu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VC/Vo0Id";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09B2A8294C; Tue,  6 May 2025 12:42:32 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 4F0848283E; Tue,  6 May 2025 12:42:38 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB58E82757
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 12:42:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2C6C800C1
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 12:42:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 546AgPrE1210051
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 546AgUr3501747
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 6 May 2025 05:42:25 -0500
+ Tue, 6 May 2025 05:42:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746528145;
- bh=/OmGUl4w0hC2NxWBLlDsatfz0SRgSj+ZNfUXnJl/5Ec=;
+ s=ti-com-17Q1; t=1746528150;
+ bh=JWrSOCCnNBajDK4id/tZ0ZkxYAVI4bW5Q/+P67ZJxck=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=WMDLegUuczsjl2lzmc3ktYSy65ylvY+/o/6DgEXbySG6TfPdPvGrrx2vbBdlrCFNs
- fvyXkVS7gVfftPtWy9Tztb1zHNvbf2421phiGutzW87y3jie0TTfdw2FApD1tOY7FJ
- N0oLhH3Wch958PYAwlaPofXsPiHcLEhUx8x9VJ3E=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 546AgPQN018622
+ b=VC/Vo0IdgvmahH3Ih9JAzBiz12eGHwtzUuzeJsHdi6cxzxAOfbHrNI6kjwKSJeHNj
+ aXCtmja2t+y2Eb3Ps6lbqAgnjpIuJ92UNFZEOPIRe6yo8VcAWnPZTHh2OEUyTq99EW
+ zhVCDqWStUlJl4h2SAi6ckNsilLLXd3kmOgn/7VE=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 546AgUD6018645
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 6 May 2025 05:42:25 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 6 May 2025 05:42:30 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- May 2025 05:42:24 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 05:42:30 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 May 2025 05:42:24 -0500
+ Frontend Transport; Tue, 6 May 2025 05:42:30 -0500
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 546Ag2uW103095;
- Tue, 6 May 2025 05:42:19 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 546Ag2uX103095;
+ Tue, 6 May 2025 05:42:25 -0500
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>, <afd@ti.com>
 CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
@@ -57,10 +57,10 @@ CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
  <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
  <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
  <d-gole@ti.com>, <b-padhi@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v2 3/7] arm: dts: k3-binman: Add template for packing HSM
- firmware
-Date: Tue, 6 May 2025 16:11:58 +0530
-Message-ID: <20250506104202.16741-4-b-padhi@ti.com>
+Subject: [PATCH v2 4/7] arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM firmware
+ inside tispl.bin
+Date: Tue, 6 May 2025 16:11:59 +0530
+Message-ID: <20250506104202.16741-5-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250506104202.16741-1-b-padhi@ti.com>
 References: <20250506104202.16741-1-b-padhi@ti.com>
@@ -84,44 +84,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The HSM M4 core needs to be booted at R5 SPL stage so that it can be
-used for further Authentication and security services. Therefore, the
-firmware for the HSM core needs to be packed in tispl.bin fit image so
-that it can be used by R5 SPL to boot the HSM core.
-
-Add a template for packing the HSM firmware in tispl.bin.
+Pack the HSM firmware in tispl.bin fit image so that it can be unloaded
+and used by R5 SPL to boot the HSM core. By default, point to the
+firmware for HS-SE device type. This needs to be changed to point to
+appropriate firmware when using a different device type.
 
 Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 ---
 v2: Changelog:
-1. Got rid of 'load' and 'entry' properties. Rely on U-Boot to set it.
+None to this patch.
 
 Link to v1:
-https://lore.kernel.org/all/20250422095430.363792-3-b-padhi@ti.com/
+https://lore.kernel.org/all/20250422095430.363792-4-b-padhi@ti.com/
 
- arch/arm/dts/k3-binman.dtsi | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/arm/dts/k3-j721s2-binman.dtsi | 12 ++++++++++++
+ arch/arm/dts/k3-j784s4-binman.dtsi | 14 ++++++++++++++
+ 2 files changed, 26 insertions(+)
 
-diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 5163161b94d..1c65ac44626 100644
---- a/arch/arm/dts/k3-binman.dtsi
-+++ b/arch/arm/dts/k3-binman.dtsi
-@@ -297,6 +297,15 @@
+diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
+index 73af184d27e..9c8b29f53bb 100644
+--- a/arch/arm/dts/k3-j721s2-binman.dtsi
++++ b/arch/arm/dts/k3-j721s2-binman.dtsi
+@@ -273,6 +273,14 @@
+ 
  					};
  				};
- 
 +#ifdef CONFIG_K3_HSM_FW
 +				hsm {
-+					description = "HSM binary";
-+					type = "standalone";
-+					compression = "none";
-+					os = "hsm";
++					hsm: blob-ext {
++						filename = "ti-hsm/hsm-demo-firmware-j721s2-hs.bin";
++					};
 +				};
 +#endif
 +
  				dm {
- 					description = "DM binary";
- 					type = "firmware";
+ 					ti-secure {
+ 						content = <&dm>;
+@@ -306,7 +314,11 @@
+ 				conf-0 {
+ 					description = "k3-j721s2-common-proc-board";
+ 					firmware = "atf";
++#ifdef CONFIG_K3_HSM_FW
++					loadables = "hsm", "tee", "dm", "spl";
++#else
+ 					loadables = "tee", "dm", "spl";
++#endif
+ 					fdt = "fdt-0";
+ 				};
+ 			};
+diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
+index cb1fbc65923..7c8e580a8a3 100644
+--- a/arch/arm/dts/k3-j784s4-binman.dtsi
++++ b/arch/arm/dts/k3-j784s4-binman.dtsi
+@@ -159,6 +159,16 @@
+ 
+ 		fit {
+ 			images {
++
++#ifdef CONFIG_K3_HSM_FW
++				hsm {
++					hsm: blob-ext {
++						filename = "ti-hsm/hsm-demo-firmware-j784s4-hs.bin";
++					};
++				};
++
++#endif
++
+ 				dm {
+ 					ti-secure {
+ 						content = <&dm>;
+@@ -194,7 +204,11 @@
+ 				conf-0 {
+ 					description = BOARD_DESCRIPTION;
+ 					firmware = "atf";
++#ifdef CONFIG_K3_HSM_FW
++					loadables = "hsm", "tee", "dm", "spl";
++#else
+ 					loadables = "tee", "dm", "spl";
++#endif
+ 					fdt = "fdt-0";
+ 				};
+ 			};
 -- 
 2.34.1
 
