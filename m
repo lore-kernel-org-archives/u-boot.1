@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61169C3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 12:03:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88242C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 12:03:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E0C820F6;
-	Tue,  6 May 2025 14:03:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20E1B820F6;
+	Tue,  6 May 2025 14:03:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="InCmOanh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NmIMWQo3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E90538210D; Tue,  6 May 2025 14:03:13 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 03026820F6; Tue,  6 May 2025 14:03:42 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15C6F80C83
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 14:03:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DF5E80C83
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 14:03:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5f3f04b5dbcso8475138a12.1
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 05:03:11 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e63162a0so8467700a12.3
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 05:03:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746532990; x=1747137790; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1746533017; x=1747137817; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xLJ4nl1xi4btl9kSJuheYf6h+CUoZYeBX4u6OGNxOVM=;
- b=InCmOanhavxyXQvQb1U1u1RQpyGkB39Oc1eJu9oOQLA0NuS6LSuJhighFbeGrM8EXS
- DdFFkJlEldk1rklunqvEXmAnqZ9uszgdLW3FolkmytQWzw1cElsc/qZpTqmtAlbTT3yD
- RpbXwAUNocpLeDkSPZ2lRHfPhJI3LSqmGkA3nspDlYPEFD7uYKPwRwUIJMKNGq1xBiDp
- 8RC8ftQU7Cz0AY68JQs5XYX/5f6rZ6JjYZn2+PRzpNjfoGKTLpEl1gMZx7oJJFwxKqJC
- KNYHL6k+eSMuIRW+dMZBbW0CT6Li2jp7Nbo2dM7Rf6ewKJ+J9Ls50H+XxDbRxC8ugKeV
- Y1Sw==
+ bh=D+rHNxK2dSz1oBKZa5NV4U32krQld7iLHKHXKe3LEjI=;
+ b=NmIMWQo3ysUiaQqdPsdxwV+eMC8WF040umgbABR8PsHKv7o2+JUpvK0kpD9x41iC3W
+ vyt9HYPD7M1ks20fITkqzEt4G53YQfXavq90LXwJt0TTvvWDSzsaBKeZ8trKB6XQY5PK
+ fXfmh4bUsbgfMfuM8AFWzHiy3QGyhX3z5B15YPIa4Ea7+U15pW4cNzqS9uHGhdtsKKsC
+ U3r3TfcTp5xw8ndnC9F1IkMGjcvYqyV6rnzFC1XDj7EgasACWD5EwQLHmz63aSh9N8Ew
+ 8cFt9X4xvc5d8w2Ri49c5xSYNCJKcbVg50Pdz/y9mQQntTKrpxFl8+AfjY1obHRGjhRW
+ h77w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746532990; x=1747137790;
+ d=1e100.net; s=20230601; t=1746533017; x=1747137817;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xLJ4nl1xi4btl9kSJuheYf6h+CUoZYeBX4u6OGNxOVM=;
- b=Vd/aTyzQWDe8m1Fz4HNBWB9NkPvtKlzG6VuB0ohiPDadM4fVumvbpTWZOz3Kmzqa4t
- m22WkUZ3dz2Oh+3yOC0EVa4SL1trX2nu32DfNXRZkggN9IBsjSqkITOsOxTcih3Uu64i
- WM9St5gT7dBftjemsfkWqT/qm9wrDvLMS7DjEW3aAdcWLZrkM0J9sPOfzYkl2CRHxz7q
- b8HvEKkoWSB1bGIbWpANhkXWk0sxLzAgpNMfgFqjhsduOsnJv/vpp+dum81tNt0K9ubF
- Bupahb5RCTtsXqOxXdnTQLU1ckObjL4hcrHyRfichoTZoc8G24OIXFfP8SHgK8UtrYb6
- TMcA==
+ bh=D+rHNxK2dSz1oBKZa5NV4U32krQld7iLHKHXKe3LEjI=;
+ b=NiGmhh7jzpk9Wr4nk3v5Kqu7HS2GQO2tw6P8UAQMyp+7/g11CmxMB+bPWsDQ8Bd5hb
+ FHi33vChowJY7woTqk/9YXpFW0UG2bK9S0ZT3nZqIEbPxhHtKbOe34G63FHVOce/EGs1
+ ULMIBait1f7CR8GQkmwXbZtYjr/Oig/Td7eySwdb28mD64jVTeLhECNz+VATf6Xxjghz
+ hpkUnbOr35MNSsLO0usluKRFiaLb2RUoZUbhJS9GgPqXPINNWIvnoLqntUD7kQcwpwvl
+ fSxdqeKP7C5jwKmCY5mPVIwnQClbNoXpAXFvJIuMvyxOLgASYBxsFGyoq0KT8BnEK/oy
+ 64ww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkociI8Z/qN62x6qck1kD+5VfwJtBVvwt1NEgDZiFbm8i1qsi88eMLKcBjLTAJ/TepDtV6Wu0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZoubSoCYMal/m/Ts9TDjjehJ4DfCyemnEyjPP4DBuIuFtxe0e
- 183kQmiT5cWSHGmk2d1jvNdd47bhAQLj/QnoOLb/ClfwwR1DsuOn7tJgQgB+WbZ7TB4/RX+tGiw
- wnAz3Dy06jc3UT02YbtnIOFbfcA0=
-X-Gm-Gg: ASbGnctnv/umLJMQNrded8XYzU8ozu5IDdfljvM/P1FAoDHihbpSAwqzPmbZPhLCWkE
- Hq3VJj02PrlbjR3+7QNRYJ0fFXEhu50bI3R9zwE5G3r4ePvmDmVRVSW3hKrH9WDRgOR4QKyqtex
- ilF+614EDF5llEqghel7BEY1NsX6IWkX9vmJDoLnOGAvwtUzuwm6uT1CM=
-X-Google-Smtp-Source: AGHT+IEHX0t4eSFXB354NAiuxIOrxr1yG3s7EDLjJ2o9rXtq004YDk7LHssr8be5+eZvcuxUAKBYtISdjufO95lKXh8=
-X-Received: by 2002:a05:6402:3485:b0:5f7:eaf0:8849 with SMTP id
- 4fb4d7f45d1cf-5fb700a1305mr2372454a12.16.1746532989723; Tue, 06 May 2025
- 05:03:09 -0700 (PDT)
+ AJvYcCXgsW1kHh3q/5VDcZ2j8rsBrnBVlVINGqPVaKKWKPdcbcv+NQNJRRTTO3uqtK8JfSu65/2jlks=@lists.denx.de
+X-Gm-Message-State: AOJu0YyW9fSZAKwJUfndIHjSCgTlFfYdMDE7b0fxpokt80XrOQzwKINr
+ r6ZtAYquJR1HHMVrx5uHb7Drkq8ybGwamE+do6ueGaXAw/mP24/A0ocLpY1YvDaYqOLeJHsLk6B
+ R+CY3c31bJGrDvoB1a1Or4cK9wjA=
+X-Gm-Gg: ASbGncsnSylrDlEnEufjoG1A3eJDSOVEF/6DKKfYHcriQObkIUdXsi2hRSa9TWpGVfK
+ xte6VHDTLkpPzcTTF799YFjFcMaNubeE7tEgK05Wmmck6Xrdbs+Yzkav3vewoAOowVe2thCbnVY
+ vVpdPFIhc/SH8OBmJqqGS27ckbeB+lfvkockINCfr1lPgS5oIXXUKThx/p4VjJ/BRH7A==
+X-Google-Smtp-Source: AGHT+IHNJaH0zW97hRGQF+pcmiNRmu8p6XY20aS0e+aoem7OmylCH/YhbO8IBAf7UgSSLThp4s52HXqG08OwxT0x2DQ=
+X-Received: by 2002:a05:6402:d08:b0:5ee:497:89fc with SMTP id
+ 4fb4d7f45d1cf-5fa7891aae1mr14695805a12.33.1746533017400; Tue, 06 May 2025
+ 05:03:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250505-has_rom-u-boot-rockchip-spi-bin-v3-0-75f23b3bd8d3@cherry.de>
- <20250505-has_rom-u-boot-rockchip-spi-bin-v3-1-75f23b3bd8d3@cherry.de>
-In-Reply-To: <20250505-has_rom-u-boot-rockchip-spi-bin-v3-1-75f23b3bd8d3@cherry.de>
+ <20250505-has_rom-u-boot-rockchip-spi-bin-v3-2-75f23b3bd8d3@cherry.de>
+In-Reply-To: <20250505-has_rom-u-boot-rockchip-spi-bin-v3-2-75f23b3bd8d3@cherry.de>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 6 May 2025 13:02:58 +0100
-X-Gm-Features: ATxdqUHftfM9meGjkwwKLVHzjzxw45fmrjvHJJ38BrLTdHqSstpzT29U5yOTJIk
-Message-ID: <CALeDE9NZD8r2hNmhJzgmB8wwMhq17KwvJy1Y9rrdo08gdttd9A@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] rockchip: rk3399: do not generate u-boot.rom
+Date: Tue, 6 May 2025 13:03:24 +0100
+X-Gm-Features: ATxdqUE6itQ7L6JpBCktZ2F73NJWP-1soMivzJP_g9Gf8LSwevKdCi07qxMPHYE
+Message-ID: <CALeDE9NEbG55xWJOUWg6=kDSXk_9LHcvuDaUiFvfB5fDbxtD4Q@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] rockchip: rk3288: do not generate u-boot.rom
  anymore
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
@@ -100,12 +100,24 @@ On Mon, 5 May 2025 at 15:47, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> This was only used on RK3399 Gru Chromebooks and their maintainer
-> (Simon) agreed[1] to its removal on the basis that the generic
-> u-boot-rockchip-spi.bin is now enough, so let's do that.
+> This was only used on RK3288 Chromebooks and the EVB.
 >
-> At the same time, remove HAS_ROM symbol from the Gru Chromebooks config
-> since they were used only for that.
+> If it follows the same pattern as for RK3399 Chromebooks where their
+> maintainer (Simon) agreed[1] to removal of u-boot.rom on the basis that
+> the generic u-boot-rockchip-spi.bin is now enough, let's do the same for
+> RK3288 and remove the last Rockchip users of u-boot.rom (and HAS_ROM
+> symbol).
+>
+> At the same time, remove HAS_ROM symbol from the RK3288 Chromebooks and
+> EVB configs since they were used only for that.
+>
+> SYS_SPI_U_BOOT_OFFS offset in rockchip-u-boot.dtsi for the u-boot-img
+> node of simple-bin-spi binman image matches the one used in u-boot.rom
+> except for the EVB.
+> The EVB doesn't have ROCKCHIP_SPI_IMAGE symbol enabled, so HAS_ROM had
+> no effect anyway. Even if it had, this would not have been enough
+> considering that SPL_SPI_LOAD symbol is not set, so U-Boot proper could
+> not be loaded from SPI even if SPL/TPL does.
 >
 > Make sure u-boot-rockchip-spi.bin has the same size of u-boot.rom for
 > Chromebooks as that seems to be important.
@@ -114,67 +126,37 @@ On Mon, 5 May 2025 at 15:47, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 > Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > Tested-by: Simon Glass <sjg@chromium.org>  # chromebook-kevin
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > ---
->  arch/arm/dts/rk3399-gru-u-boot.dtsi   |  4 +++-
->  arch/arm/dts/rk3399-u-boot.dtsi       | 35 -----------------------------------
->  arch/arm/mach-rockchip/rk3399/Kconfig |  2 --
->  3 files changed, 3 insertions(+), 38 deletions(-)
+>  arch/arm/dts/rk3288-u-boot.dtsi        | 24 ------------------------
+>  arch/arm/dts/rk3288-veyron-u-boot.dtsi |  8 ++++++++
+>  arch/arm/mach-rockchip/rk3288/Kconfig  |  5 -----
+>  3 files changed, 8 insertions(+), 29 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3399-gru-u-boot.dtsi b/arch/arm/dts/rk3399-gru-u-boot.dtsi
-> index 5517176aa4a0bcc11aa292e76be7c4d894a034f7..dfc7be4c621e712cc665e889b9c54d192924827a 100644
-> --- a/arch/arm/dts/rk3399-gru-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-gru-u-boot.dtsi
-> @@ -15,11 +15,13 @@
->         };
->  };
->
-> +#if defined(CONFIG_ROCKCHIP_SPI_IMAGE)
->  &binman {
-> -       rom {
-> +       simple-bin-spi {
->                 size = <0x800000>;
->         };
->  };
-> +#endif
->
->  &cros_ec {
->         ec-interrupt = <&gpio0 RK_PA1 GPIO_ACTIVE_LOW>;
-> diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-> index 70f35b6c197a8bedf2fc09ec66d2aac8e615aa75..587eef9504eccc7a1ea365b5f8aed24756692dcb 100644
-> --- a/arch/arm/dts/rk3399-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-u-boot.dtsi
-> @@ -29,41 +29,6 @@
+> diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
+> index 2205caabc51ec4535bef3ab950d7ff5b421d8016..bb0078588fe819118eb0592e002e1708da7ce806 100644
+> --- a/arch/arm/dts/rk3288-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3288-u-boot.dtsi
+> @@ -46,30 +46,6 @@
 >         };
 >  };
 >
 > -#if defined(CONFIG_ROCKCHIP_SPI_IMAGE) && defined(CONFIG_HAS_ROM)
 > -&binman {
-> -       multiple-images;
 > -       rom {
 > -               filename = "u-boot.rom";
 > -               size = <0x400000>;
 > -               pad-byte = <0xff>;
 > -
 > -               mkimage {
-> -                       args = "-n rk3399 -T rkspi";
-> -                       multiple-data-files;
-> -#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> -                       rockchip-tpl {
-> -                       };
-> -#elif defined(CONFIG_TPL)
-> -                       u-boot-tpl {
-> -                       };
-> -#endif
+> -                       args = "-n rk3288 -T rkspi";
 > -                       u-boot-spl {
 > -                       };
 > -               };
-> -               fit {
-> -                       type = "blob";
-> -                       filename = "u-boot.itb";
-> -                       offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+> -               u-boot-img {
+> -                       offset = <0x20000>;
 > -               };
 > -               u-boot {
 > -                       offset = <0x300000>;
@@ -183,31 +165,74 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -               };
 > -       };
 > -};
-> -#endif /* CONFIG_ROCKCHIP_SPI_IMAGE && CONFIG_HAS_ROM */
+> -#endif
 > -
->  &cru {
->         bootph-all;
+>  &bus_intmem {
+>         ddr_sram: ddr-sram@1000 {
+>                 compatible = "rockchip,rk3288-ddr-sram";
+> diff --git a/arch/arm/dts/rk3288-veyron-u-boot.dtsi b/arch/arm/dts/rk3288-veyron-u-boot.dtsi
+> index 4f9c59c67573118dba716e46f21f9b5e303b0c28..89093e2311c758b78454710043aea7006533e5bd 100644
+> --- a/arch/arm/dts/rk3288-veyron-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3288-veyron-u-boot.dtsi
+> @@ -11,6 +11,14 @@
+>         };
 >  };
-> diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
-> index b2430207ee9d0130b5a0c303a41a7375c7db26fa..5c21b08a5ae226ad545f8492f21ac16fb2fda98d 100644
-> --- a/arch/arm/mach-rockchip/rk3399/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3399/Kconfig
+>
+> +#if defined(CONFIG_ROCKCHIP_SPI_IMAGE)
+> +&binman {
+> +       simple-bin-spi {
+> +               size = <0x400000>;
+> +       };
+> +};
+> +#endif
+> +
+>  &dmc {
+>         logic-supply = <&vdd_logic>;
+>         rockchip,odt-disable-freq = <333000000>;
+> diff --git a/arch/arm/mach-rockchip/rk3288/Kconfig b/arch/arm/mach-rockchip/rk3288/Kconfig
+> index e563bf455e6803809c7d7612bb3aa85372034292..128ee362f8a8af69861030df7b63cf0e5a368956 100644
+> --- a/arch/arm/mach-rockchip/rk3288/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3288/Kconfig
 > @@ -5,7 +5,6 @@ choice
 >
->  config TARGET_CHROMEBOOK_BOB
->         bool "Asus Flip C101PA Chromebook (RK3399)"
+>  config TARGET_CHROMEBOOK_JERRY
+>         bool "Google/Rockchip Veyron-Jerry Chromebook"
 > -       select HAS_ROM
+>         select BOARD_LATE_INIT
 >         select ROCKCHIP_SPI_IMAGE
 >         help
->           Bob is a small RK3299-based device similar in apperance to Minnie.
-> @@ -16,7 +15,6 @@ config TARGET_CHROMEBOOK_BOB
+> @@ -16,7 +15,6 @@ config TARGET_CHROMEBOOK_JERRY
 >
->  config TARGET_CHROMEBOOK_KEVIN
->         bool "Samsung Chromebook Plus (RK3399)"
+>  config TARGET_CHROMEBIT_MICKEY
+>         bool "Google/Rockchip Veyron-Mickey Chromebit"
 > -       select HAS_ROM
+>         select BOARD_LATE_INIT
 >         select ROCKCHIP_SPI_IMAGE
 >         help
->           Kevin is a RK3399-based convertible chromebook. It has two USB 3.0
+> @@ -28,7 +26,6 @@ config TARGET_CHROMEBIT_MICKEY
+>
+>  config TARGET_CHROMEBOOK_MINNIE
+>         bool "Google/Rockchip Veyron-Minnie Chromebook"
+> -       select HAS_ROM
+>         select BOARD_LATE_INIT
+>         select ROCKCHIP_SPI_IMAGE
+>         help
+> @@ -41,7 +38,6 @@ config TARGET_CHROMEBOOK_MINNIE
+>
+>  config TARGET_CHROMEBOOK_SPEEDY
+>         bool "Google/Rockchip Veyron-Speedy Chromebook"
+> -       select HAS_ROM
+>         select BOARD_LATE_INIT
+>         select ROCKCHIP_SPI_IMAGE
+>         help
+> @@ -54,7 +50,6 @@ config TARGET_CHROMEBOOK_SPEEDY
+>
+>  config TARGET_EVB_RK3288
+>         bool "Evb-RK3288"
+> -       select HAS_ROM
+>         select BOARD_LATE_INIT
+>         select TPL
+>         help
 >
 > --
 > 2.49.0
