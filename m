@@ -4,74 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE1AC3ABBE
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 17:18:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06B7AC3ABBC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 17:20:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3E69820EB;
-	Tue,  6 May 2025 19:18:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6EBDE820EB;
+	Tue,  6 May 2025 19:20:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cPheiSnC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oXxbwqla";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB350820F6; Tue,  6 May 2025 19:18:14 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96AB780BAE
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 19:18:11 +0200 (CEST)
+ id E30638210D; Tue,  6 May 2025 19:20:04 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B210380BAE
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 19:20:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 546HI51H560449
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 6 May 2025 12:18:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746551885;
- bh=v+lUFrkx+VZY8mOJ5Ieu+Ks9MfaHo9mbAiMnkgVNwD4=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=cPheiSnCUzkR/Ly6wutZtFwd4xH/yaUbvsc+BXrGCPpFjStDFLDHZcGGZb19FJhGQ
- 79KV9Nl9V5oeAIxE18gOty238VSrX5vzBA2G54AuCwJqpQ7z5YfHf4E401Ddob5c4S
- fYaART+byE4CP7CH7Wql4lMno+OoiqWj/bg1oQS0=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 546HI5BY027968
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 6 May 2025 12:18:05 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- May 2025 12:18:04 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 May 2025 12:18:04 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 546HHvne119816;
- Tue, 6 May 2025 12:17:58 -0500
-Message-ID: <40b2ddc2-fe5b-4515-8772-2a2f9f35b5d7@ti.com>
-Date: Tue, 6 May 2025 22:47:57 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-72c0b4a038fso3770084a34.0
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 10:20:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746552001; x=1747156801; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qYf7bKEQfjop+NLuxG064qam8Lb8rwLofXa0UFlA+QM=;
+ b=oXxbwqlaN8qOUHsMCQsmVS0Y0E824E6vcb+oX5y9TbZroihmVHLvP6vDlwSr5lnH3Y
+ qJhQITuY68eOsPDuPXbefOPY+Xzl3qufyBKBN2GY65JZIna2lEmacQd5fXWVsH+uGspF
+ qwKsO1iMb6L/vL+4/vCMyG/pF7oM7udhp80aw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746552001; x=1747156801;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qYf7bKEQfjop+NLuxG064qam8Lb8rwLofXa0UFlA+QM=;
+ b=EmgakAXestqrCmW/+1Lz2d4UC6TvY4KWLkGpPzwjc0HJa7fJuClN41cHf5DFabh+QS
+ V/PWmDuUtgULgUHuiO3IHXWsJjkhdX4bJIZQIidUMhg1SywkJslad240zFXD0oJ5yGpG
+ 5KuYhqLyBEfU8ap+5YoTNWG3zT6NKxC4WGUSYDZaEygufl0uf+SqzmrHoi70gccXbeNC
+ 8EOBvdQN+Cjk0vwOvuFoZHsEF6WTGNOc4jRDSCTOgYlwtlmJQ35OyywrHSqW0uGj22vK
+ 3q/3uBXYxcU1+EfxojhVGyfmcYIP2aquVGKySt9I1YMZpjktfv6Z2+MsofZQiUvbkRI6
+ JdPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUvfkPby5kaOjZqNT+9giNBLtJf/PlZDhSNSQ8uVZwBXJsH2g2jgDG6+ac+KS/zl5tMyOhpk6A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwrtcN1XQ3Q+MkGYwEGGuKfEpp24U0eRphyJaA1ymFcZOHDRFea
+ dDYPI6saWH8sGffJ08qwoXgGT9nUnAVTh1/wc0+grZmIUSgTJ4XAgiGr4Fp+KdiYLX7VpeDsr7N
+ C
+X-Gm-Gg: ASbGncsGXoVFzpRWvAsEfYIj5CXlaylAV3s3ZthOZPVsTnNqn3j3C1wGgx1WL2ogpDN
+ wGAhgaz6FyZ4F4srlhi8iVZ+ArkdzdkyclnOO2O7C2meg9AHTdXOy+CSttMe4CNE4Z5hygiGzo5
+ Z8YsNbC4g11ldffIjIL1yHvgzXBm/nzEcwv8dKr33AvkZ/GvFwPN5E89ccPDgjW11Y5OqsZ+33u
+ q3nl0cEu+vorOAjshRlzPmK+f3sEE0OCYNAplaacZnOhpgBavkJmumY0SJaY0IEyCFDyqbaVQBU
+ GzJReZ5YEc2V0Tr4n5g8wWErnHdt0uj0n+eMAdWOg9SYM3bqMkmC7bFtFqAnK983YlRZViocy/Q
+ u1A==
+X-Google-Smtp-Source: AGHT+IGIAULUTWNQWaPvKXIfHsspEKdXeDnKvnwa9UhnW4MYFFdc9wwuFZN2T1cN6TDLweZqniojGA==
+X-Received: by 2002:a05:6871:781:b0:29d:c85f:bc8c with SMTP id
+ 586e51a60fabf-2db5c126f92mr48366fac.36.1746551991088; 
+ Tue, 06 May 2025 10:19:51 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2daa0ed6203sm2758773fac.12.2025.05.06.10.19.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 May 2025 10:19:50 -0700 (PDT)
+Date: Tue, 6 May 2025 11:19:47 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Andrew Davis <afd@ti.com>, Beleswar Prasad Padhi <b-padhi@ti.com>,
+ sjg@chromium.org, xypron.glpk@gmx.de, cfsworks@gmail.com, nm@ti.com,
+ hnagalla@ti.com, n-francis@ti.com, jm@ti.com, m-chawdhry@ti.com,
+ kamlesh@ti.com, bb@ti.com, j-humphreys@ti.com, s-k6@ti.com,
+ j-choudhary@ti.com, d-gole@ti.com, u-boot@lists.denx.de
 Subject: Re: [PATCH v2 0/7] Add support to boot TI K3 HSM M4 core
-To: Andrew Davis <afd@ti.com>, Beleswar Prasad Padhi <b-padhi@ti.com>,
- <trini@konsulko.com>
-CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
- <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
- <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
- <d-gole@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>
+Message-ID: <20250506171947.GD5430@bill-the-cat>
 References: <20250506104202.16741-1-b-padhi@ti.com>
  <41a042ec-d2ec-48ee-be15-a6f88895e977@ti.com>
  <b643bfa3-5607-4d9e-95bd-cfab9d7a6ca5@ti.com>
  <3ffaf965-503f-4c08-b914-3d4014cdf72a@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <3ffaf965-503f-4c08-b914-3d4014cdf72a@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+ <40b2ddc2-fe5b-4515-8772-2a2f9f35b5d7@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="c6qIwJBikeIW++KN"
+Content-Disposition: inline
+In-Reply-To: <40b2ddc2-fe5b-4515-8772-2a2f9f35b5d7@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,111 +107,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 5/6/2025 8:38 PM, Andrew Davis wrote:
-> On 5/6/25 9:51 AM, Beleswar Prasad Padhi wrote:
->> Hi Andrew,
->>
->> On 5/6/2025 4:38 PM, Andrew Davis wrote:
->>> On 5/6/25 5:41 AM, Beleswar Padhi wrote:
->>>> Some TI K3 SoCs like J721S2, and J784S4 have a HSM (High Security
->>>> Module) M4F core in the Wakeup Voltage Domain which could be used to
->>>> run secure services like Authentication. Boot flow for HSM M4 core is
->>>> different than the general purpose M4F cores, and is as below:
->>>>
->>>
->>> The below flow looks exactly like the general purpose M4F cores..
->>> Why is the HSM core treated differently and this loader not made into
->>> a normal remote proc driver?
->>
->>
->> Not exactly, HSM core is treated differently because of following 
->> exceptions:
->> 1. Device operations for HSM core (like reset/reset release) are not 
->> handled by DM. TIFS handles that with proc_boot_ctrl TI-SCI calls.
->
-> This could be added to the commit message then.
->
->> 2. The HSM firmware is not an ELF image. So we can't use rproc elf 
->> loader with it. Manual memcpy has to be done.
->>
->
-> Why is the HSM firmware not an ELF image?
+--c6qIwJBikeIW++KN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, May 06, 2025 at 10:47:57PM +0530, Kumar, Udit wrote:
+>=20
+> On 5/6/2025 8:38 PM, Andrew Davis wrote:
+> > On 5/6/25 9:51 AM, Beleswar Prasad Padhi wrote:
+> > > Hi Andrew,
+> > >=20
+> > > On 5/6/2025 4:38 PM, Andrew Davis wrote:
+> > > > On 5/6/25 5:41 AM, Beleswar Padhi wrote:
+> > > > > Some TI K3 SoCs like J721S2, and J784S4 have a HSM (High Security
+> > > > > Module) M4F core in the Wakeup Voltage Domain which could be used=
+ to
+> > > > > run secure services like Authentication. Boot flow for HSM M4 cor=
+e is
+> > > > > different than the general purpose M4F cores, and is as below:
+> > > > >=20
+> > > >=20
+> > > > The below flow looks exactly like the general purpose M4F cores..
+> > > > Why is the HSM core treated differently and this loader not made in=
+to
+> > > > a normal remote proc driver?
+> > >=20
+> > >=20
+> > > Not exactly, HSM core is treated differently because of following
+> > > exceptions:
+> > > 1. Device operations for HSM core (like reset/reset release) are not
+> > > handled by DM. TIFS handles that with proc_boot_ctrl TI-SCI calls.
+> >=20
+> > This could be added to the commit message then.
+> >=20
+> > > 2. The HSM firmware is not an ELF image. So we can't use rproc elf
+> > > loader with it. Manual memcpy has to be done.
+> > >=20
+> >=20
+> > Why is the HSM firmware not an ELF image?
+>=20
+>=20
+> HSM firmwares are loaded by TIFS (in non-GP) flow, and TIFS does not have
+> elf parser.
 
-HSM firmwares are loaded by TIFS (in non-GP) flow, and TIFS does not 
-have elf parser.
+And to be clear, why is that? Since it's preventing the use other
+existing workflows...
 
+--=20
+Tom
 
+--c6qIwJBikeIW++KN
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
->> All of that can still be accounted in the existing M4 rproc driver, 
->> but it will be a lot of if-else checks, which I don't prefer. Let me 
->> know if you prefer that way.
->>
->
-> I'm not a fan of if-else checks either, just trying to get an idea
-> of how many would really be needed. Judging from the below commit
-> I'd agree keeping it here would be the cleaner option for now.
->
-> Andrew
->
->> Patch having HSM support in M4 remoteproc driver:
->> https://gist.github.com/3V3RYONE/a15a5c6933bbc83278da9860c25ec21c
->>
->>>
->>> Andrew
->>>
->>>> 1. Request control of HSM M4F remote processor.
->>>> 2. Assert Reset on the HSM M4F remote processor.
->>>> 3. Request Secure Entity to Authenticate and Load HSM firmware into
->>>>     core's internal SRAM memory region. For GP device, load the 
->>>> firmware
->>>>     manually into core's SRAM region.
->>>> 4. Deassert Reset on the HSM M4F remote processor.
->>>> 5. Release control of HSM M4F remote processor.
->>>>
->>>> This series adds support to boot HSM M4 core from R5 SPL stage. The 
->>>> HSM
->>>> firmware is packed inside the tispl.bin fit image. The firmware is
->>>> unpacked into a temporary DDR address which is then used to load HSM
->>>> core. The configs to boot HSM M4 core are disabled by default.
->>>>
->>>> v2: Changelog:
->>>> [Andrew]:
->>>>   1. Added support in SPL to load FIT images with no 'load' property.
->>>>   2. Removed 'default = n' in CONFIG option.
->>>>   3. Used __maybe_unused to decrease preprocessing.
->>>>   4. Better error messages with error code.
->>>> [Udit]:
->>>>   1. Added 'HSM' entries in enum at the last.
->>>>   2. Added error condition in if-elseif-else ladder.
->>>>   3. Hang System boot when HSM failed to boot properly.
->>>>
->>>> Link to v1:
->>>> https://lore.kernel.org/all/20250422095430.363792-1-b-padhi@ti.com/
->>>>
->>>> Test logs after enabling HSM boot configs:
->>>> https://gist.github.com/3V3RYONE/ad33683652c8c49e4fedab49f0493e79
->>>>
->>>> Beleswar Padhi (7):
->>>>    arm: mach-k3: Add config option for booting HSM core
->>>>    spl: Use FIT data address as fallback when 'load' property is 
->>>> absent
->>>>    arm: dts: k3-binman: Add template for packing HSM firmware
->>>>    arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM firmware inside
->>>>      tispl.bin
->>>>    arm: mach-k3: Use FIT image data addr as fallback if 'load' prop is
->>>>      missing
->>>>    arm: mach-k3: Explicitly identify TIFSSTUB images when discarding
->>>>      buffers
->>>>    arm: mach-k3: r5: common: Add support to boot HSM M4 core
->>>>
->>>>   arch/arm/dts/k3-binman.dtsi        |   9 +++
->>>>   arch/arm/dts/k3-j721s2-binman.dtsi |  12 ++++
->>>>   arch/arm/dts/k3-j784s4-binman.dtsi |  14 ++++
->>>>   arch/arm/mach-k3/Kconfig           |   7 ++
->>>>   arch/arm/mach-k3/r5/common.c       | 111 
->>>> +++++++++++++++++++++++++++--
->>>>   common/spl/spl_fit.c               |  16 ++++-
->>>>   6 files changed, 164 insertions(+), 5 deletions(-)
->>>>
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgaRK8ACgkQFHw5/5Y0
+tyzYDwv/WI5oXTKpKg9PZNT3gg4XkJFMgheOp+ZMlxtfyD+8Rfo61PCltxJOIrLG
+7tU2UQYf2SFAZnjkk5qfawMlNv3Vu3hxPk54hdkBI+fuE8KA9jvy2XAWA+eoAnEV
+KdILZdoCRBkj04McnLfyk+/eJ+H2VwZWRnLSeXHuY9UIBcg5v3pw9Kq+19cczSKZ
+5lT7AzYR5edTnPzWvq/z3XJJZd0nMq5t/+xvTci6qQdJWpaUsyq6L/R/QghKzm5m
+bn7dR1C1iRY2UBzi3wC8bG1qnMJ8QBzJqCHn1SDC2InLZWmQys/omxjR7SPYMt3t
+EECkStFT1TnKmWnD73GfR11NUUOviEXVcTJMu4CqZcAjWj1jbuEuGtck9DMTxqmp
+2VrKc0eyI71B7xjqX1CjbCpNbiKBqEfb/DgIUKKq8eCk/o1B0td4HNu20nbgZ59H
+1YqPClw81XY5fdnIKGlg9+X1Ex365W0/Tj6UqCsmEgJppu0jRlcSdFBlIC5zoE4S
+/JIMUDvr
+=pWeo
+-----END PGP SIGNATURE-----
+
+--c6qIwJBikeIW++KN--
