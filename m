@@ -4,71 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEC2C3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 07:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D09C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 07:18:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 266A7800C1;
-	Tue,  6 May 2025 09:15:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id D49FC8007D;
+	Tue,  6 May 2025 09:18:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="Vix/5f8Z";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="aKbyD5CP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3673881F66; Tue,  6 May 2025 09:15:14 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id EF69C800C1; Tue,  6 May 2025 09:18:50 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAD7B80050
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 09:15:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id B24EF80050
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 09:18:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: d62c534e2a4911f0813e4fe1310efc19-20250506
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=1iCzQ4niPGklZISh3mGDz7XEv+84d4Bxyt2SF38VEus=; 
- b=Vix/5f8ZvHncuugBCyh5i+qzxBTrK2UJfxi7nqm7t5pda8KvVrDEBIgUOhFPkgeqijn3C+80rQe32pJ2v3hVCNFPMNlpk6LrKv6eV5hZrVWHi1QGyfdtV3ANnTWOSSAAmBQUOzhW/uawU4LuiNNThuYfrhLfc6Lo0rTil/bzpQQ=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.2.1, REQID:bbbbaa94-7daf-4129-b888-7e68980b05bc, IP:0,
- UR
- L:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-25
-X-CID-META: VersionHash:0ef645f, CLOUDID:ab2c6607-829c-41bc-b3dd-83387f72f90e,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:ni
- l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
- :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: d62c534e2a4911f0813e4fe1310efc19-20250506
-Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 547999337; Tue, 06 May 2025 15:15:06 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Tue, 6 May 2025 15:15:04 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Tue, 6 May 2025 15:15:04 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Joe
- Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH] env: mtd: fix usability with NAND flashes
-Date: Tue, 6 May 2025 15:15:01 +0800
-Message-ID: <20250506071501.28253-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
+ by mail11.truemail.it (Postfix) with ESMTPA id B315A1F8F8;
+ Tue,  6 May 2025 09:18:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1746515927;
+ bh=away2QK/P1zCDPLI37GYdYhO9YNov7pV7ZAHK5iRQhQ=; h=From:To:Subject;
+ b=aKbyD5CPK9/GYwxKAlGiH0oP2CpknUorJQskM2RCi0LrAUSsHL8Y3zTF+sMOPCnnj
+ /lDzqKxEJUxPcFwgRcbTb4NJ1naP9afdQLihdWDrlAMRAChSSW967/FjEhMnpN7jsQ
+ MtSfFLN2TvTNy5j2QgxOVd8VY5bM7EhzHFc61bHu+9YdvKAB1A0MJnyH+ehSaf3Uhl
+ o9llpJLoQ3oJpI+/eMUzd60vK4ir71c0Yp46Thftar2bPFgLyUOjjZrq0Q6AIHVbSz
+ 2B+IfiOAGOzFB/7GQM8sghZXSaksTr6YWiWEXt7YPrtXeMHgD25cvL8lkht+WTm6FR
+ iTEtig1MqW3BQ==
+Date: Tue, 6 May 2025 09:18:43 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] configs: verdin-am62: Drop unused or redundant config
+ options
+Message-ID: <20250506071843.GA11423@francesco-nb>
+References: <20250506070907.1267279-1-ghidoliemanuele@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250506070907.1267279-1-ghidoliemanuele@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,53 +68,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-1. As this is for MTD-based devices, the Kconfig dependency should be MTD
-   instead of only spi-nor flashes
-2. Initialize saved_buf to avoid crash on free()
-3. Remaining size shoule be set correctly to write_size
+On Tue, May 06, 2025 at 09:08:59AM +0200, Emanuele Ghidoli wrote:
+> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+> 
+> Several Kconfig options are enabled but unused or unnecessary for our
+> use case. These include features such as SPL FAT support, YMODEM, and
+> USB keyboard. Some R5-specific configurations are not used at all,
+> as U-Boot proper is not executed on that core.
+> 
+> Cleaning them up helps reduce build size and simplifies maintenance.
+> 
+> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Fixes: 03fb08d4aef (env: Introduce support for MTD)
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
- env/Kconfig | 2 +-
- env/mtd.c   | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/env/Kconfig b/env/Kconfig
-index 1e876c6fa85..ce869a24d46 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -404,7 +404,7 @@ config ENV_IS_IN_SPI_FLASH
- 
- config ENV_IS_IN_MTD
- 	bool "Environment is in MTD flash"
--	depends on !CHAIN_OF_TRUST && (SPI_FLASH || DM_SPI_FLASH)
-+	depends on !CHAIN_OF_TRUST && MTD
- 	default y if ARCH_AIROHA
- 	help
- 	  Define this if you have a MTD Flash memory device which you
-diff --git a/env/mtd.c b/env/mtd.c
-index 721faebd8f2..d7ec30e183a 100644
---- a/env/mtd.c
-+++ b/env/mtd.c
-@@ -32,7 +32,7 @@ static int setup_mtd_device(struct mtd_info **mtd_env)
- 
- static int env_mtd_save(void)
- {
--	char *saved_buf, *write_buf, *tmp;
-+	char *saved_buf = NULL, *write_buf, *tmp;
- 	struct erase_info ei = { };
- 	struct mtd_info *mtd_env;
- 	u32 sect_size, sect_num;
-@@ -105,7 +105,7 @@ static int env_mtd_save(void)
- 	}
- 
- 	offset = CONFIG_ENV_OFFSET;
--	remaining = sect_size;
-+	remaining = write_size;
- 	tmp = write_buf;
- 
- 	puts("Writing to MTD...");
--- 
-2.34.1
+Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
