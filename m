@@ -4,77 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73B07C3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 12:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090A8C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 12:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3B9C820EB;
-	Tue,  6 May 2025 14:32:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A6B58219D;
+	Tue,  6 May 2025 14:32:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="H2efmXAc";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="SIkq49Zx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF2EA8210D; Tue,  6 May 2025 10:06:20 +0200 (CEST)
-Received: from mail-m82216.xmail.ntesmail.com (mail-m82216.xmail.ntesmail.com
- [156.224.82.216])
+ id 088B282161; Tue,  6 May 2025 10:14:49 +0200 (CEST)
+Received: from mail-m15578.qiye.163.com (mail-m15578.qiye.163.com
+ [101.71.155.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEE9782076
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 10:06:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F029D80F03
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 10:14:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 1417b087f;
- Tue, 6 May 2025 16:06:06 +0800 (GMT+08:00)
-Message-ID: <eafc1363-2c4d-4956-848f-d432332070ed@rock-chips.com>
-Date: Tue, 6 May 2025 16:06:05 +0800
+ spf=pass smtp.mailfrom=chaoyi.chen@rock-chips.com
+Received: from [127.0.0.1] (gy-adaptive-ssl-proxy-4-entmail-virt151.gy.ntes
+ [58.22.7.114]) by smtp.qiye.163.com (Hmail) with ESMTP id 1417fcc6a;
+ Tue, 6 May 2025 16:14:34 +0800 (GMT+08:00)
+Message-ID: <f4ca05fd-1cef-4210-b961-08fdc9d51142@rock-chips.com>
+Date: Tue, 6 May 2025 16:14:31 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: io-domain: Enable by default for all supported
- SoCs
-To: Chen-Yu Tsai <wens@kernel.org>, u-boot@lists.denx.de
-Cc: Chen-Yu Tsai <wens@csie.org>, Akash Gajjar <gajjar04akash@gmail.com>,
- Alexandre Vicenzi <linux@alxd.me>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andy Yan <andy.yan@rock-chips.com>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
- FUKAUMI Naoki <naoki@radxa.com>, Heiko Stuebner <heiko@sntech.de>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
- Klaus Goger <klaus.goger@cherry.de>, Levin Du <djw@t-chip.com.cn>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, Nick Xie <nick@khadas.com>,
- Paul Kocialkowski <paulk@sys-base.io>, Peter Robinson
- <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>, Shantur Rathore <i@shantur.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Suniel Mahesh <sunil@amarulasolutions.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>, Tom Rini <trini@konsulko.com>,
- Wan Yee Lau <wan.yee.lau@intel.com>, Xiaobo Tian <peterwillcn@gmail.com>
-References: <20250204172319.3361870-1-wens@kernel.org>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250204172319.3361870-1-wens@kernel.org>
+Subject: Re: [PATCH v4 06/12] video: rockchip: Add VOP2 support
+To: Dang Huynh <danct12@riseup.net>, Anatolij Gustschin <agust@denx.de>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Ondrej Jirman <megi@xff.cz>,
+ Dragan Simic <dsimic@manjaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Piotr Zalewski <pZ010001011111@proton.me>,
+ Andy Yan <andy.yan@rock-chips.com>
+References: <20250505-vop2-pt2-v4-0-3b7c3ab1a617@riseup.net>
+ <20250505-vop2-pt2-v4-6-3b7c3ab1a617@riseup.net>
+From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+In-Reply-To: <20250505-vop2-pt2-v4-6-3b7c3ab1a617@riseup.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaTUIZVktMQx5OH08ZSEpMGlYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lIQktDVUpLS1
- VKQlkG
-X-HM-Tid: 0a96a4a175a103afkunm1417b087f
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhpCT1YZGB8eS0JNThlKSUJWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a96a4a936d703abkunm1417fcc6a
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NQw6SSo5PzIMNxcuAgwrMykc
- SzMaC0tVSlVKTE9NTkpDTExLTklKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpDQkpDNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PTo6Vio6STIDMxdRLxcWCSIM
+ GQEwCw5VSlVKTE9NTkpCSUNKSE5MVTMWGhIXVRgTGhQCElUYEx4VOwkUGBBWGBMSCwhVGBQWRVlX
+ WRILWUFZTkNVSUlVTFVKSk9ZV1kIAVlBSExCTkI3Bg++
 DKIM-Signature: a=rsa-sha256;
- b=H2efmXAcSPvhbUTx+qnhzGKEI4mRx0xocdviRKk0g+p6l0o9KLSxXHefiKKPb7LmMU4GDv9b19DsFZ3tNWD4ULTjZygGDdCVr31NZc7hbD48Z5L+JpMTQcnjgroe7f7POANc0zIiaQ/DAR9UokOANxZEcCSS1+YiRbqIdSx2TJY=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=zBQdMNfegu4ZtN8cF6ON9mr97iwgD2nN0SZwxCs2Eww=;
+ b=SIkq49Zxw03/7JCnkco2wl5/OGPNOcmIoYIpf5lU4VpGTM+zvrM6iCk2dosebBmshdA6+6OKmvHKM/tHK98U7GU3TPG9yndE0/5QeAFwnRNtxat6Bj8DluNJ1D6+zkfIHomfLdX3eUask71Pi+GmbwKb0ZJs58E9viSTeHFnNtY=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=YwiCFCjprAVciVTsx7H8Tg+KCNgHEa18O9jLcSlgxuE=;
  h=date:mime-version:subject:message-id:from;
 X-Mailman-Approved-At: Tue, 06 May 2025 14:32:15 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -93,442 +80,1199 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dang,
 
-On 2025/2/5 01:23, Chen-Yu Tsai wrote:
-> From: Chen-Yu Tsai <wens@csie.org>
+On 2025/5/6 0:58, Dang Huynh wrote:
+> VOP2 (Video Output Processor v2) is a display controller on Rockchip
+> SoCs. It can be found on RK3566/8 and RK3588.
 >
-> The IO domain driver controls the I/O voltage for various pins,
-> MMC included.
+> This commit currently only supports RK3566/8.
 >
-> Enable it by default for all supported Rockchip SoCs.
->
-> Signed-off-by: Chen-Yu Tsai <wens@csie.org>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-
-Thanks,
-- Kever
+> Signed-off-by: Dang Huynh <danct12@riseup.net>
 > ---
+>   arch/arm/include/asm/arch-rockchip/vop_rk3568.h | 280 +++++++++++++
+>   drivers/video/rockchip/Makefile                 |   3 +-
+>   drivers/video/rockchip/rk3568_vop.c             | 260 ++++++++++++
+>   drivers/video/rockchip/rk_vop2.c                | 517 ++++++++++++++++++++++++
+>   drivers/video/rockchip/rk_vop2.h                |  76 ++++
+>   5 files changed, 1135 insertions(+), 1 deletion(-)
 >
->   configs/chromebook_bob_defconfig             | 1 -
->   configs/chromebook_kevin_defconfig           | 1 -
->   configs/eaidk-610-rk3399_defconfig           | 1 -
->   configs/ficus-rk3399_defconfig               | 1 -
->   configs/firefly-rk3399_defconfig             | 1 -
->   configs/khadas-edge-captain-rk3399_defconfig | 1 -
->   configs/khadas-edge-rk3399_defconfig         | 1 -
->   configs/khadas-edge-v-rk3399_defconfig       | 1 -
->   configs/leez-rk3399_defconfig                | 1 -
->   configs/nanopc-t4-rk3399_defconfig           | 1 -
->   configs/nanopi-m4-2gb-rk3399_defconfig       | 1 -
->   configs/nanopi-m4-rk3399_defconfig           | 1 -
->   configs/nanopi-m4b-rk3399_defconfig          | 1 -
->   configs/nanopi-neo4-rk3399_defconfig         | 1 -
->   configs/nanopi-r4s-rk3399_defconfig          | 1 -
->   configs/orangepi-rk3399_defconfig            | 1 -
->   configs/pinebook-pro-rk3399_defconfig        | 1 -
->   configs/pinephone-pro-rk3399_defconfig       | 1 -
->   configs/puma-rk3399_defconfig                | 1 -
->   configs/ringneck-px30_defconfig              | 1 -
->   configs/roc-pc-mezzanine-rk3399_defconfig    | 1 -
->   configs/roc-pc-rk3399_defconfig              | 1 -
->   configs/rock-4c-plus-rk3399_defconfig        | 1 -
->   configs/rock-4se-rk3399_defconfig            | 1 -
->   configs/rock-pi-4-rk3399_defconfig           | 1 -
->   configs/rock-pi-4c-rk3399_defconfig          | 1 -
->   configs/rock-pi-n10-rk3399pro_defconfig      | 1 -
->   configs/rock-pi-s-rk3308_defconfig           | 1 -
->   configs/rock-s0-rk3308_defconfig             | 1 -
->   configs/rock960-rk3399_defconfig             | 1 -
->   configs/rockpro64-rk3399_defconfig           | 1 -
->   drivers/misc/Kconfig                         | 6 +++++-
->   32 files changed, 5 insertions(+), 32 deletions(-)
->
-> diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-> index 1b018ef4d7c8..7b45095fc041 100644
-> --- a/configs/chromebook_bob_defconfig
-> +++ b/configs/chromebook_bob_defconfig
-> @@ -57,7 +57,6 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_I2C_MUX=y
->   CONFIG_CROS_EC_KEYB=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_CROS_EC=y
->   CONFIG_CROS_EC_SPI=y
->   CONFIG_PWRSEQ=y
-> diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-> index 1ee0c0e6c9d8..cecd89cded45 100644
-> --- a/configs/chromebook_kevin_defconfig
-> +++ b/configs/chromebook_kevin_defconfig
-> @@ -58,7 +58,6 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_I2C_MUX=y
->   CONFIG_CROS_EC_KEYB=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_CROS_EC=y
->   CONFIG_CROS_EC_SPI=y
->   CONFIG_PWRSEQ=y
-> diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
-> index 8f9a76157f16..45a2d9016830 100644
-> --- a/configs/eaidk-610-rk3399_defconfig
-> +++ b/configs/eaidk-610-rk3399_defconfig
-> @@ -31,7 +31,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
-> index b32ca726b6cf..3a72156d3894 100644
-> --- a/configs/ficus-rk3399_defconfig
-> +++ b/configs/ficus-rk3399_defconfig
-> @@ -37,7 +37,6 @@ CONFIG_SCSI_AHCI=y
->   CONFIG_AHCI_PCI=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-> index 3871627318b6..be8cde094466 100644
-> --- a/configs/firefly-rk3399_defconfig
-> +++ b/configs/firefly-rk3399_defconfig
-> @@ -34,7 +34,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/khadas-edge-captain-rk3399_defconfig b/configs/khadas-edge-captain-rk3399_defconfig
-> index 89611a0535ed..ce425eb9b20c 100644
-> --- a/configs/khadas-edge-captain-rk3399_defconfig
-> +++ b/configs/khadas-edge-captain-rk3399_defconfig
-> @@ -45,7 +45,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   # CONFIG_USB_FUNCTION_FASTBOOT is not set
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/khadas-edge-rk3399_defconfig b/configs/khadas-edge-rk3399_defconfig
-> index 3816f4327a61..10a20d749ba5 100644
-> --- a/configs/khadas-edge-rk3399_defconfig
-> +++ b/configs/khadas-edge-rk3399_defconfig
-> @@ -43,7 +43,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   # CONFIG_USB_FUNCTION_FASTBOOT is not set
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/khadas-edge-v-rk3399_defconfig b/configs/khadas-edge-v-rk3399_defconfig
-> index 35e209425729..d3345c12fe25 100644
-> --- a/configs/khadas-edge-v-rk3399_defconfig
-> +++ b/configs/khadas-edge-v-rk3399_defconfig
-> @@ -45,7 +45,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   # CONFIG_USB_FUNCTION_FASTBOOT is not set
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
-> index 57b097377fab..f12f39857e00 100644
-> --- a/configs/leez-rk3399_defconfig
-> +++ b/configs/leez-rk3399_defconfig
-> @@ -31,7 +31,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
-> index 26c12c510785..40844753ccd8 100644
-> --- a/configs/nanopc-t4-rk3399_defconfig
-> +++ b/configs/nanopc-t4-rk3399_defconfig
-> @@ -34,7 +34,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
-> index d24b7bc6d174..31b0e83cdea6 100644
-> --- a/configs/nanopi-m4-2gb-rk3399_defconfig
-> +++ b/configs/nanopi-m4-2gb-rk3399_defconfig
-> @@ -38,7 +38,6 @@ CONFIG_SCSI_AHCI=y
->   CONFIG_AHCI_PCI=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
-> index da3e44af8418..1a9b770c1692 100644
-> --- a/configs/nanopi-m4-rk3399_defconfig
-> +++ b/configs/nanopi-m4-rk3399_defconfig
-> @@ -37,7 +37,6 @@ CONFIG_SCSI_AHCI=y
->   CONFIG_AHCI_PCI=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
-> index 247056ab58b4..d3a8b5bb6d1f 100644
-> --- a/configs/nanopi-m4b-rk3399_defconfig
-> +++ b/configs/nanopi-m4b-rk3399_defconfig
-> @@ -37,7 +37,6 @@ CONFIG_SCSI_AHCI=y
->   CONFIG_AHCI_PCI=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
-> index 305877d20796..1e422befdf8e 100644
-> --- a/configs/nanopi-neo4-rk3399_defconfig
-> +++ b/configs/nanopi-neo4-rk3399_defconfig
-> @@ -32,7 +32,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
-> index a6dafe3d9eb5..04642bca7cbd 100644
-> --- a/configs/nanopi-r4s-rk3399_defconfig
-> +++ b/configs/nanopi-r4s-rk3399_defconfig
-> @@ -32,7 +32,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
-> index fdf3d6989393..d5091ee8a0c5 100644
-> --- a/configs/orangepi-rk3399_defconfig
-> +++ b/configs/orangepi-rk3399_defconfig
-> @@ -32,7 +32,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-> index dfa927ccb170..676d1e718945 100644
-> --- a/configs/pinebook-pro-rk3399_defconfig
-> +++ b/configs/pinebook-pro-rk3399_defconfig
-> @@ -51,7 +51,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_IO_VOLTAGE=y
->   CONFIG_SPL_MMC_IO_VOLTAGE=y
->   CONFIG_MMC_UHS_SUPPORT=y
-> diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-> index 5e16749ba7d4..85833c654b8f 100644
-> --- a/configs/pinephone-pro-rk3399_defconfig
-> +++ b/configs/pinephone-pro-rk3399_defconfig
-> @@ -47,7 +47,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-> index 7a180b141303..95ed6eea953d 100644
-> --- a/configs/puma-rk3399_defconfig
-> +++ b/configs/puma-rk3399_defconfig
-> @@ -64,7 +64,6 @@ CONFIG_GPIO_HOG=y
->   CONFIG_SPL_GPIO_HOG=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
-> index 324581b4082e..93caaf68e2d7 100644
-> --- a/configs/ringneck-px30_defconfig
-> +++ b/configs/ringneck-px30_defconfig
-> @@ -81,7 +81,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MISC=y
->   CONFIG_ROCKCHIP_OTP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
-> diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
-> index 3ab5fd69c62a..9c063ce82d34 100644
-> --- a/configs/roc-pc-mezzanine-rk3399_defconfig
-> +++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-> @@ -45,7 +45,6 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-> index 0ef867487787..68c4267d2426 100644
-> --- a/configs/roc-pc-rk3399_defconfig
-> +++ b/configs/roc-pc-rk3399_defconfig
-> @@ -43,7 +43,6 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-> index 0c73a212ea1f..2f1ea314302f 100644
-> --- a/configs/rock-4c-plus-rk3399_defconfig
-> +++ b/configs/rock-4c-plus-rk3399_defconfig
-> @@ -49,7 +49,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-> index 3ae19692155a..7387130ecc18 100644
-> --- a/configs/rock-4se-rk3399_defconfig
-> +++ b/configs/rock-4se-rk3399_defconfig
-> @@ -53,7 +53,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-> index f3a5c2c45f35..97a7db3730df 100644
-> --- a/configs/rock-pi-4-rk3399_defconfig
-> +++ b/configs/rock-pi-4-rk3399_defconfig
-> @@ -54,7 +54,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-> index 9bda50c8c77f..7da7ee4bce16 100644
-> --- a/configs/rock-pi-4c-rk3399_defconfig
-> +++ b/configs/rock-pi-4c-rk3399_defconfig
-> @@ -54,7 +54,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
-> index a9c6d8a907a9..a38670d95d0e 100644
-> --- a/configs/rock-pi-n10-rk3399pro_defconfig
-> +++ b/configs/rock-pi-n10-rk3399pro_defconfig
-> @@ -35,7 +35,6 @@ CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-> index 4b08af309b1b..907b999b274d 100644
-> --- a/configs/rock-pi-s-rk3308_defconfig
-> +++ b/configs/rock-pi-s-rk3308_defconfig
-> @@ -40,7 +40,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
-> diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
-> index 0a46e7bb1871..a762734231a0 100644
-> --- a/configs/rock-s0-rk3308_defconfig
-> +++ b/configs/rock-s0-rk3308_defconfig
-> @@ -40,7 +40,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
-> diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-> index aebfa73459ca..607aa61ba172 100644
-> --- a/configs/rock960-rk3399_defconfig
-> +++ b/configs/rock960-rk3399_defconfig
-> @@ -41,7 +41,6 @@ CONFIG_SYS_MMC_ENV_DEV=1
->   # CONFIG_USB_FUNCTION_FASTBOOT is not set
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-> index 75322073285c..1b887cd9f3ea 100644
-> --- a/configs/rockpro64-rk3399_defconfig
-> +++ b/configs/rockpro64-rk3399_defconfig
-> @@ -49,7 +49,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_LED=y
->   CONFIG_LED_GPIO=y
-> -CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> index da84b35e8043..9f8bef5068c8 100644
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -104,7 +104,11 @@ config ROCKCHIP_OTP
->   config ROCKCHIP_IODOMAIN
->   	bool "Rockchip IO-domain driver support"
->   	depends on DM_REGULATOR && ARCH_ROCKCHIP
-> -	default y if ROCKCHIP_RK3328 || ROCKCHIP_RK3568
-> +	default y if ROCKCHIP_PX30
-> +	default y if ROCKCHIP_RK3308
-> +	default y if ROCKCHIP_RK3328
-> +	default y if ROCKCHIP_RK3399
-> +	default y if ROCKCHIP_RK3568
->   	help
->   	  Enable support for IO-domains in Rockchip SoCs. It is necessary
->   	  for the IO-domain setting of the SoC to match the voltage supplied
+> diff --git a/arch/arm/include/asm/arch-rockchip/vop_rk3568.h b/arch/arm/include/asm/arch-rockchip/vop_rk3568.h
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1474ddbe5df4de10f9655aa53182cf5a2ba30c1e
+> --- /dev/null
+> +++ b/arch/arm/include/asm/arch-rockchip/vop_rk3568.h
+> @@ -0,0 +1,280 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Copyright (c) 2024 Dang Huynh <danct12@riseup.net>
+> + *
+> + * Based on vop_rk3288.h:
+> + *   Copyright (c) 2015 Google, Inc
+> + *   Copyright 2014 Rockchip Inc.
+> + */
+> +
+> +#ifndef _ASM_ARCH_VOP_RK3568_H
+> +#define _ASM_ARCH_VOP_RK3568_H
+> +
+> +struct rk3568_vop_sysctrl {
+> +	u32 reg_cfg_done;
+> +	u32 version_info;
+> +	u32 autogating_ctrl;
+> +	u32 win_reg_cfg_done;
+> +	u32 axi_ctrl0;
+> +	u32 axi_hurry_ctrl0;
+> +	u32 axi_hurry_ctrl1;
+> +	u32 axi_outstanding_ctrl0;
+> +	u32 axi_outstanding_ctrl1;
+> +	u32 axi_lut_ctrl;
+> +	u32 dsp_en;
+> +	u32 dsp_ctrl;
+> +	u32 dsp_pol;
+> +	u32 pwr_ctrl;
+> +	u32 var_freq_ctrl;
+> +	u32 mmu_raddr_range;
+> +	u32 wb_ctrl0;
+> +	u32 wb_xspd;
+> +	u32 wb_yrgb_mst;
+> +	u32 wb_cbr_mst;
+> +	u32 otp_win;
+> +	u32 otp_mirr_ctrl;
+> +	u32 lut_port_sel;
+> +	u32 pwr_stable_ctrl;
+> +	u32 status0;
+> +	u32 status1;
+> +	u32 status2;
+> +	u32 status3;
+> +	u32 line_flag0;
+> +	u32 line_flag1;
+> +	u32 line_flag2;
+> +	u32 line_flag3;
+> +	u32 sys0_intr_en;
+> +	u32 sys0_intr_clr;
+> +	u32 sys0_intr_status;
+> +	u32 sys0_intr_status_raw;
+> +	u32 sys1_intr_en;
+> +	u32 sys1_intr_clr;
+> +	u32 sys1_intr_status;
+> +	u32 sys1_intr_status_raw;
+> +	u32 port0_intr_en;
+> +	u32 port0_intr_clr;
+> +	u32 port0_intr_status;
+> +	u32 port0_intr_status_raw;
+> +	u32 port1_intr_en;
+> +	u32 port1_intr_clr;
+> +	u32 port1_intr_status;
+> +	u32 port1_intr_status_raw;
+> +	u32 port2_intr_en;
+> +	u32 port2_intr_clr;
+> +	u32 port2_intr_status;
+> +	u32 port2_intr_status_raw;
+> +	u32 port3_intr_en;
+> +	u32 port3_intr_clr;
+> +	u32 port3_intr_status;
+> +	u32 port3_intr_status_raw;
+> +};
+> +
+> +check_member(rk3568_vop_sysctrl, port3_intr_status_raw, 0x00DC);
+> +
+> +struct rk3568_vop_overlay {
+> +	u32 overlay_ctrl;
+> +	u32 layer_sel;
+> +	u32 port_sel;
+> +};
+> +
+> +check_member(rk3568_vop_overlay, port_sel, 0x0008);
+> +
+> +struct rk3568_vop_post {
+> +	u32 dsp_ctrl;
+> +	u32 mipi_ctrl;
+> +	u32 color_ctrl;
+> +	u32 reserved2;
+> +	u32 lut_reserved[4];
+> +	u32 reserved[3];
+> +	u32 dsp_bg;
+> +	u32 prescan_htimings;
+> +	u32 dsp_hact_info;
+> +	u32 dsp_vact_info;
+> +	u32 scl_factor_yrgb;
+> +	u32 scl_ctrl;
+> +	u32 dsp_vact_info_f1;
+> +	u32 dsp_htotal_hs_end;
+> +	u32 dsp_hact_st_end;
+> +	u32 dsp_vtotal_vs_end;
+> +	u32 dsp_vact_st_end;
+> +	u32 dsp_vs_st_end_f1;
+> +	u32 dsp_vact_st_end_f1;
+> +};
+> +
+> +check_member(rk3568_vop_post, dsp_vact_st_end_f1, 0x005C);
+> +
+> +struct rk3568_vop_cluster {
+> +	u32 win0_ctrl0;
+> +	u32 win0_ctrl1;
+> +	u32 win0_ctrl2;
+> +	u32 reserved0;
+> +	u32 win0_mst_yrgb;
+> +	u32 win0_mst_cbcr;
+> +	u32 win0_vir;
+> +	u32 reserved1;
+> +	u32 win0_act_info;
+> +	u32 win0_dsp_info;
+> +	u32 win0_dsp_st;
+> +	u32 win0_dsp_bg;
+> +	u32 win0_scl_factor_yrgb;
+> +	u32 reserved2;
+> +	u32 win0_scl_offset;
+> +	u32 win0_transformed_offset;
+> +	u32 reserved3[4];
+> +	u32 win0_afbcd_output_ctrl;
+> +	u32 win0_afbcd_mode;
+> +	u32 win0_afbcd_hdr_ptr;
+> +	u32 win0_afbcd_vir_width;
+> +	u32 win0_afbcd_size;
+> +	u32 win0_afbcd_pic_offset;
+> +	u32 win0_afbcd_dis_offset;
+> +	u32 win0_afbcd_ctrl;
+> +};
+> +
+> +check_member(rk3568_vop_cluster, win0_afbcd_ctrl, 0x006C);
+> +
+> +struct rk3568_vop_esmart {
+> +	u32 esmart_ctrl0;
+> +	u32 esmart_ctrl1;
+> +	u32 reserved0[2];
+> +	u32 esmart_region0_mst_ctl;
+> +	u32 esmart_region0_mst_yrgb;
+> +	u32 esmart_region0_mst_cbcr;
+> +	u32 esmart_region0_vir;
+> +	u32 esmart_region0_act_info;
+> +	u32 esmart_region0_dsp_info;
+> +	u32 esmart_region0_dsp_offset;
+> +	u32 reserved1[1];
+> +	u32 esmart_region0_scl_ctrl;
+> +	u32 esmart_region0_scl_factor_yrgb;
+> +	u32 esmart_region0_scl_factor_cbcr;
+> +	u32 esmart_region0_scl_offset;
+> +};
+> +
+> +check_member(rk3568_vop_esmart, esmart_region0_scl_offset, 0x003C);
+> +
+> +enum rockchip_fb_data_format_t {
+> +	ARGB8888 = 0,
+> +	RGB888 = 1,
+> +	RGB565 = 2,
+> +};
+> +
+> +enum vop_modes {
+> +	VOP_MODE_EDP = 0,
+> +	VOP_MODE_MIPI,
+> +	VOP_MODE_HDMI,
+> +	VOP_MODE_LVDS,
+> +	VOP_MODE_DP,
+> +};
+> +
+> +/* OFFSETS */
+> +#define VOP2_SYSREG_OFFSET 0x0
+> +#define VOP2_OVERLAY_OFFSET 0x0600
+> +#define VOP2_POST_OFFSET(n) 0x0c00 + ((n) * 0x100)
+> +#define VOP2_CLUSTER_OFFSET(n) 0x1000 + ((n) * 0x200)
+> +#define VOP2_ESMART_OFFSET(n) 0x1800 + ((n) * 0x200)
+> +
+> +/* System Registers */
+> +/* REG_CFG_DONE */
+> +#define M_GLOBAL_REGDONE (1 << 15)
+> +#define M_LOAD_GLOBAL(x) (1 << ((x) & 3))
+> +
+> +#define V_GLOBAL_REGDONE(x) (((x) & 1) << 15)
+> +#define V_LOAD_GLOBAL(x, y) (((y) & 1) << ((x) & 3))
+> +
+> +/* VERSION_INFO */
+> +#define M_FPGA_VERSION  (0xffff << 16)
+> +#define M_RTL_VERSION (0xffff)
+> +
+> +/* AUTO_GATING_CTRL */
+> +#define M_AUTO_GATING (1 << 31)
+> +#define V_AUTO_GATING(x) (((x) & 1) << 31)
+> +
+> +/* DSP_INFACE_POL */
+> +#define M_DSP_INFACE_REGDONE (1 << 28)
+> +#define V_DSP_INFACE_REGDONE(x) (((x) & 1) << 28)
+> +
+> +/* OTP_WIN_EN */
+> +#define M_OTP_WIN (1 << 0)
+> +#define V_OTP_WIN(x) (((x) & 1) << 0)
+> +
+> +/* Overlay */
+> +/* OVERLAY_CTRL */
+> +#define M_LAYER_SEL_REGDONE_SEL (3 << 30)
+> +#define M_LAYER_SEL_REGDONE_EN (1 << 28)
+> +#define M_VP_OVERLAY_MODE(vp) (1 << ((vp) & 3))
+> +
+> +#define V_LAYER_SEL_REGDONE_SEL(x) (((x) & 3) << 30)
+> +#define V_LAYER_SEL_REGDONE_EN(x) (((x) & 1) << 28)
+> +#define V_VP_OVERLAY_MODE(x, vp) (((x) & 1) << ((vp) & 3))
+> +
+> +/* LAYER_SEL */
+> +#define V_LAYER_SEL(x, port) (((port) & 7) << 4 * ((x) & 7))
+> +
+> +/* PORT_SEL */
+> +#define V_ESMART_SEL_PORT(x, vp) (((vp) & 3) << (24 + (2 * ((x) & 3))))
+> +#define V_CLUSTER_SEL_PORT(x, vp) (((vp) & 3) << (16 + (2 * ((x) & 3))))
+> +#define V_PORT_MUX(x, vp) (((x) & 0xf) << 4 * ((vp) & 3))
+> +
+> +/* Post processing */
+> +/* DSP_CTRL */
+> +#define M_POST_STANDBY (1 << 31)
+> +#define M_POST_FP_STANDBY (1 << 30)
+> +#define M_POST_BLACK (1 << 27)
+> +#define M_POST_OUT_ZERO (1 << 26)
+> +#define M_POST_LB_MODE (1 << 23)
+> +#define M_PRE_DITHER_DOWN (1 << 16)
+> +#define M_DSP_OUT_MODE (0xf)
+> +
+> +#define V_POST_STANDBY(x) (((x) & 1) << 31)
+> +#define V_POST_FP_STANDBY(x) (((x) & 1) << 30)
+> +#define V_POST_BLACK(x) (((x) & 1) << 27)
+> +#define V_POST_OUT_ZERO(x) (((x) & 1) << 26)
+> +#define V_POST_LB_MODE(x) (((x) & 1) << 23)
+> +#define V_PRE_DITHER_DOWN(x) (((x) & 1) << 16)
+> +#define V_DSP_OUT_MODE(x) ((x) & 0xf)
+> +
+> +/* COLOR_CTRL */
+> +#define M_POST_COLORBAR_MODE (1 << 1)
+> +#define M_POST_COLORBAR_EN (1 << 0)
+> +
+> +#define V_POST_COLORBAR_MODE(x) (((x) & 1) << 1)
+> +#define V_POST_COLORBAR_EN(x) (((x) & 1) << 0)
+> +
+> +/* DSP_BG */
+> +#define M_DSP_BG_RED     (0x3f << 20)
+> +#define M_DSP_BG_GREEN   (0x3f << 10)
+> +#define M_DSP_BG_BLUE    (0x3f << 0)
+> +
+> +#define V_DSP_BG_RED(x)     (((x) & 0x3f) << 20)
+> +#define V_DSP_BG_GREEN(x)   (((x) & 0x3f) << 10)
+> +#define V_DSP_BG_BLUE(x)    (((x) & 0x3f) << 0)
+> +
+> +/* ESMART */
+> +#define M_ESMART_REGION0_MST_EN (1 << 0)
+> +#define V_ESMART_REGION0_DATA_FMT(x)        (((x) & 0x16) << 1)
+> +
+> +/* VOP2_ESMART_REGION0_VIR */
+> +#define V_ARGB888_VIRWIDTH(x)	(((x) & 0xffff) << 0)
+> +#define V_RGB888_VIRWIDTH(x)	((((((x) * 3) >> 2) + ((x) % 3)) & 0xffff) << 0)
+> +#define V_RGB565_VIRWIDTH(x)	((((x) / 2) & 0xffff) << 0)
+> +#define YUV_VIRWIDTH(x)		((((x) / 4) & 0xffff) << 0)
+> +
+> +#define V_ACT_HEIGHT(x)         (((x) & 0x1fff) << 16)
+> +#define V_ACT_WIDTH(x)          ((x) & 0x1fff)
+> +#define V_DSP_HEIGHT(x)         (((x) & 0x1fff) << 16)
+> +#define V_DSP_WIDTH(x)          ((x) & 0x1fff)
+> +#define V_DSP_YST(x)         (((x) & 0x1fff) << 16)
+> +#define V_DSP_XST(x)          ((x) & 0x1fff)
+> +
+> +#define V_HSYNC(x)		(((x) & 0x1fff) << 0)   /* hsync pulse width */
+> +#define V_HORPRD(x)		(((x) & 0x1fff) << 16)   /* horizontal period */
+> +#define V_VSYNC(x)		(((x) & 0x1fff) << 0)
+> +#define V_VERPRD(x)		(((x) & 0x1fff) << 16)
+> +
+> +#define V_HEAP(x)		(((x) & 0x1fff) << 0)/* horizontal active end */
+> +#define V_HASP(x)		(((x) & 0x1fff) << 16)/* horizontal active start */
+> +#define V_VAEP(x)		(((x) & 0x1fff) << 0)
+> +#define V_VASP(x)		(((x) & 0x1fff) << 16)
+> +
+> +#endif
+> diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
+> index f55beceebf118bbfc6f85b9edf7f64eaa13ffe62..2f89a979a2848733be5a6d05817ad76ce3ad3a34 100644
+> --- a/drivers/video/rockchip/Makefile
+> +++ b/drivers/video/rockchip/Makefile
+> @@ -4,10 +4,11 @@
+>   # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+>   
+>   ifdef CONFIG_VIDEO_ROCKCHIP
+> -obj-y += rk_vop.o
+> +obj-y += rk_vop.o rk_vop2.o
+>   obj-$(CONFIG_ROCKCHIP_RK3288) += rk3288_vop.o
+>   obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328_vop.o
+>   obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399_vop.o
+> +obj-$(CONFIG_ROCKCHIP_RK3568) += rk3568_vop.o
+>   obj-$(CONFIG_DISPLAY_ROCKCHIP_EDP) += rk_edp.o
+>   obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
+>   obj-hdmi-$(CONFIG_ROCKCHIP_RK3288) += rk3288_hdmi.o
+> diff --git a/drivers/video/rockchip/rk3568_vop.c b/drivers/video/rockchip/rk3568_vop.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1ffa33b882e5b05dd7515745a77974efd4525760
+> --- /dev/null
+> +++ b/drivers/video/rockchip/rk3568_vop.c
+> @@ -0,0 +1,260 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) 2024 Dang Huynh <danct12@riseup.net>
+> + *
+> + * Based on rk3399_vop.c:
+> + *   Copyright (c) 2017 Theobroma Systems Design und Consulting GmbH
+> + *   Copyright (c) 2015 Google, Inc
+> + *   Copyright 2014 Rockchip Inc.
+> + */
+> +
+> +#include <clk.h>
+> +#include <display.h>
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <regmap.h>
+> +#include <video.h>
+> +#include <asm/arch-rockchip/hardware.h>
+> +#include <asm/global_data.h>
+> +#include <linux/bitfield.h>
+> +#include "rk_vop2.h"
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +#define M_MIPI1_INFACE_MUX (3 << 21)
+> +#define M_LVDS_INFACE_MUX (3 << 18)
+> +#define M_MIPI_INFACE_MUX (3 << 16)
+> +#define M_EDP_INFACE_MUX (3 << 14)
+> +#define M_HDMI_INFACE_MUX (3 << 10)
+> +#define M_RGB_INFACE_MUX (3 << 8)
+> +
+> +#define V_MIPI1_INFACE_MUX(x) (((x) & 3) << 21)
+> +#define V_LVDS_INFACE_MUX(x) (((x) & 3) << 18)
+> +#define V_MIPI_INFACE_MUX(x) (((x) & 3) << 16)
+> +#define V_EDP_INFACE_MUX(x) (((x) & 3) << 14)
+> +#define V_HDMI_INFACE_MUX(x) (((x) & 3) << 10)
+> +#define V_RGB_INFACE_MUX(x) (((x) & 3) << 8)
+> +
+> +#define M_MIPI_POL (0xf << 16)
+> +#define M_EDP_POL (0xf << 12)
+> +#define M_HDMI_POL (0xf << 4)
+> +#define M_RGB_LVDS_POL (0xf << 0)
+> +
+> +#define V_MIPI_POL(x) (((x) & 0xf) << 16)
+> +#define V_EDP_POL(x) (((x) & 0xf) << 12)
+> +#define V_HDMI_POL(x) (((x) & 0xf) << 4)
+> +#define V_RGB_LVDS_POL(x) (((x) & 0xf) << 0)
+> +
+> +#define M_MIPI1_OUT_EN (1 << 20)
+> +#define M_BT656_OUT_EN (1 << 7)
+> +#define M_BT1120_OUT_EN (1 << 6)
+> +#define M_LVDS_OUT_EN (1 << 5)
+> +#define M_MIPI_OUT_EN (1 << 4)
+> +#define M_EDP_OUT_EN (1 << 3)
+> +#define M_HDMI_OUT_EN (1 << 1)
+> +#define M_RGB_OUT_EN (1 << 0)
+> +
+> +#define M_ALL_OUT_EN (M_MIPI1_OUT_EN | M_BT656_OUT_EN | M_BT1120_OUT_EN | M_LVDS_OUT_EN | \
+> +			M_MIPI_OUT_EN | M_EDP_OUT_EN | M_HDMI_OUT_EN | M_RGB_OUT_EN)
+> +
+> +#define V_MIPI1_OUT_EN(x) (((x) & 1) << 20)
+> +#define V_BT656_OUT_EN(x) (((x) & 1) << 7)
+> +#define V_BT1120_OUT_EN(x) (((x) & 1) << 6)
+> +#define V_LVDS_OUT_EN(x) (((x) & 1) << 5)
+> +#define V_MIPI_OUT_EN(x) (((x) & 1) << 4)
+> +#define V_EDP_OUT_EN(x) (((x) & 1) << 3)
+> +#define V_HDMI_OUT_EN(x) (((x) & 1) << 1)
+> +#define V_RGB_OUT_EN(x) (((x) & 1) << 0)
+> +
+> +static void rk3568_enable_output(struct udevice *dev,
+> +				 enum vop_modes mode, u32 port)
+> +{
+> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +	struct rk3568_vop_sysctrl *sysctrl = priv->regs + VOP2_SYSREG_OFFSET;
+> +	u32 reg;
+> +
+> +	switch (mode) {
+> +	case VOP_MODE_EDP:
+> +		reg |= M_EDP_OUT_EN | V_EDP_INFACE_MUX(port);
+> +		break;
+> +
+> +	case VOP_MODE_HDMI:
+> +		reg |= M_HDMI_OUT_EN | V_HDMI_INFACE_MUX(port);
+> +		break;
+> +
+> +	case VOP_MODE_MIPI:
+> +		reg |= M_MIPI_OUT_EN | V_MIPI_INFACE_MUX(port);
+> +		break;
+> +
+> +	case VOP_MODE_LVDS:
+> +		reg |= M_LVDS_OUT_EN | V_LVDS_INFACE_MUX(port);
+> +		break;
+> +
+> +	default:
+> +		debug("%s: unsupported output mode %x\n", __func__, mode);
+> +		return;
+> +	}
+> +
+> +	debug("%s: vop output 0x%08x\n", __func__, reg);
+> +	writel(reg, &sysctrl->dsp_en);
+> +}
+> +
+> +static void rk3568_set_pin_polarity(struct udevice *dev,
+> +				    enum vop_modes mode, u32 polarity)
+> +{
+> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +	struct rk3568_vop_sysctrl *sysctrl = priv->regs + VOP2_SYSREG_OFFSET;
+> +	u32 reg;
+> +
+> +	reg = M_DSP_INFACE_REGDONE;
+> +
+> +	switch (mode) {
+> +	case VOP_MODE_EDP:
+> +		reg |= V_EDP_POL(polarity);
+> +		break;
+> +
+> +	case VOP_MODE_HDMI:
+> +		reg |= V_HDMI_POL(polarity);
+> +		break;
+> +
+> +	case VOP_MODE_MIPI:
+> +		reg |= V_MIPI_POL(polarity);
+> +		break;
+> +
+> +	/* RGB and LVDS shares the same polarity */
+> +	case VOP_MODE_LVDS:
+> +		reg |= V_RGB_LVDS_POL(polarity);
+> +		break;
+> +
+> +	default:
+> +		debug("%s: unsupported output mode %x\n", __func__, mode);
+> +		return;
+> +	}
+> +
+> +	debug("%s: vop polarity 0x%08x\n", __func__, reg);
+> +	writel(reg, &sysctrl->dsp_pol);
+> +}
+> +
+> +static int rkvop2_initialize(struct udevice *dev)
+> +{
+> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +	struct rk3568_vop_sysctrl *sysctrl = priv->regs + VOP2_SYSREG_OFFSET;
+> +
+> +	/* Enable OTP function */
+> +	clrsetbits_le32(&sysctrl->otp_win, M_OTP_WIN, V_OTP_WIN(1));
+> +
+> +	writel(M_GLOBAL_REGDONE, &sysctrl->reg_cfg_done);
+> +
+> +	/* Disable auto gating */
+> +	clrsetbits_le32(&sysctrl->autogating_ctrl, M_AUTO_GATING, V_AUTO_GATING(0));
+> +
+> +	return 0;
+> +}
+> +
+> +/*
+> + * FIXME: Booting into Linux with a window plane enabled causes VOP IOMMU
+> + * to fail.
+> + *
+> + * This can be removed when there's a better way to handle MMU under Linux.
+> + */
+> +static int rk3568_vop_remove(struct udevice *dev)
+> +{
+> +	if (CONFIG_IS_ENABLED(VIDEO_REMOVE)) {
+> +		struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +		struct rk3568_vop_sysctrl *sysctrl = priv->regs + VOP2_SYSREG_OFFSET;
+> +		struct rk3568_vop_esmart *esmart = priv->regs + VOP2_ESMART_OFFSET(priv->layer - 4);
+> +
+> +		debug("Removing VOP2 driver (vp=%d, layer=%d)\n", priv->vp, priv->layer);
+> +
+> +		/* RK356X appears to only make use of (E)SMARTs */
+> +		writel(0, &esmart->esmart_region0_mst_ctl);
+> +
+> +		/* On RK3568, we don't need to shift the bit by 16. */
+> +		writel(M_GLOBAL_REGDONE | M_LOAD_GLOBAL(priv->vp),
+> +		       &sysctrl->reg_cfg_done);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int rk3568_vop_probe(struct udevice *dev)
+> +{
+> +	int ret;
+> +
+> +	/* Before relocation we don't need to do anything */
+> +	if (!(gd->flags & GD_FLG_RELOC))
+> +		return 0;
+> +
+> +	ret = rkvop2_initialize(dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return rk_vop2_probe(dev);
+> +}
+> +
+> +/*
+> + * RK3566 datasheet omits the VP2, even though it exist in the hardware
+> + * so let's not use it.
+> + */
+> +struct rkvop2_platdata rk3566_platdata = {
+> +	.delay = 20,
+> +	.bg_dly = {42, 40, -1},
+> +	/* SMART0, ESMART0 */
+> +	.vp_lyr = {3, 2, -1},
+> +	.layers = {ROCKCHIP_VOP2_CLUSTER0, ROCKCHIP_VOP2_RESERVED,
+> +		   ROCKCHIP_VOP2_ESMART0, ROCKCHIP_VOP2_SMART0,
+> +		   ROCKCHIP_VOP2_RESERVED, ROCKCHIP_VOP2_RESERVED,
+> +		   ROCKCHIP_VOP2_RESERVED, ROCKCHIP_VOP2_RESERVED},
+> +};
+> +
+> +struct rkvop2_platdata rk3568_platdata = {
+> +	.delay = 20,
+> +	.bg_dly = {42, 40, 40},
+> +	/* SMART0, SMART1, ESMART1 */
+> +	.vp_lyr = {3, 7, 6},
+> +	.layers = {ROCKCHIP_VOP2_CLUSTER0, ROCKCHIP_VOP2_CLUSTER1,
+> +		   ROCKCHIP_VOP2_ESMART0, ROCKCHIP_VOP2_SMART0,
+> +		   ROCKCHIP_VOP2_RESERVED, ROCKCHIP_VOP2_RESERVED,
+> +		   ROCKCHIP_VOP2_ESMART1, ROCKCHIP_VOP2_SMART1},
+> +};
+> +
+> +struct rkvop2_driverdata rk3566_driverdata = {
+> +	.features = VOP_FEATURE_OUTPUT_10BIT,
+> +	.set_pin_polarity = rk3568_set_pin_polarity,
+> +	.enable_output = rk3568_enable_output,
+> +	.platdata = &rk3566_platdata,
+> +};
+> +
+> +struct rkvop2_driverdata rk3568_driverdata = {
+> +	.features = VOP_FEATURE_OUTPUT_10BIT,
+> +	.set_pin_polarity = rk3568_set_pin_polarity,
+> +	.enable_output = rk3568_enable_output,
+> +	.platdata = &rk3568_platdata,
+> +};
+> +
+> +static const struct udevice_id rk3568_vop_ids[] = {
+> +	{ .compatible = "rockchip,rk3566-vop",
+> +	  .data = (ulong)&rk3566_driverdata },
+> +	{ .compatible = "rockchip,rk3568-vop",
+> +	  .data = (ulong)&rk3568_driverdata },
+> +	{ }
+> +};
+> +
+> +static const struct video_ops rk3568_vop_ops = {
+> +};
+> +
+> +U_BOOT_DRIVER(rk3568_vop) = {
+> +	.name	= "rk3568_vop",
+> +	.id	= UCLASS_VIDEO,
+> +	.of_match = rk3568_vop_ids,
+> +	.ops	= &rk3568_vop_ops,
+> +	.bind	= rk_vop2_bind,
+> +	.probe	= rk3568_vop_probe,
+> +	.remove = rk3568_vop_remove,
+> +	.priv_auto = sizeof(struct rk_vop2_priv),
+> +#if CONFIG_IS_ENABLED(VIDEO_REMOVE)
+> +	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
+> +#else
+> +	.flags = DM_FLAG_PRE_RELOC,
+> +#endif
+> +};
+> diff --git a/drivers/video/rockchip/rk_vop2.c b/drivers/video/rockchip/rk_vop2.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..d38afb51b2375822ba42d1cd84ada8ed5cd9e7dc
+> --- /dev/null
+> +++ b/drivers/video/rockchip/rk_vop2.c
+> @@ -0,0 +1,517 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) 2024 Dang Huynh <danct12@riseup.net>
+> + *
+> + * Based on rk_vop.c:
+> + *   Copyright (c) 2015 Google, Inc
+> + *   Copyright 2014 Rockchip Inc.
+> + */
+> +
+> +#include <clk.h>
+> +#include <display.h>
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <edid.h>
+> +#include <log.h>
+> +#include <regmap.h>
+> +#include <reset.h>
+> +#include <syscon.h>
+> +#include <video.h>
+> +#include <asm/global_data.h>
+> +#include <asm/gpio.h>
+> +#include <asm/io.h>
+> +#include <asm/arch-rockchip/clock.h>
+> +#include <asm/arch-rockchip/vop_rk3568.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/uclass-internal.h>
+> +#include <efi.h>
+> +#include <efi_loader.h>
+> +#include <linux/bitops.h>
+> +#include <linux/err.h>
+> +#include <power/regulator.h>
+> +
+> +#include "rk_vop2.h"
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +enum vop_pol {
+> +	HSYNC_POSITIVE = 0,
+> +	VSYNC_POSITIVE = 1,
+> +	DEN_NEGATIVE   = 2,
+> +	DCLK_INVERT    = 3
+> +};
+> +
+> +static void rkvop2_cfg_regdone(struct rk3568_vop_sysctrl *sysctrl, int port)
+> +{
+> +	u32 reg;
+> +
+> +	reg = M_GLOBAL_REGDONE;
+> +
+> +	/*
+> +	 * For RK3588, changes will only take effect when the same bit is
+> +	 * leftshifted by 16.
+> +	 */
+> +	reg |= M_LOAD_GLOBAL(port) | M_LOAD_GLOBAL(port) << 16;
+> +
+> +	writel(reg, &sysctrl->reg_cfg_done);
+> +}
+> +
+> +static int rkvop2_enable(struct udevice *dev, ulong fbbase,
+> +			 int fb_bits_per_pixel, const struct display_timing *edid,
+> +			 int port, int win_id, struct rkvop2_platdata *platdata)
+> +{
+> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +	struct rk3568_vop_overlay *overlay = priv->regs + VOP2_OVERLAY_OFFSET;
+> +	struct rk3568_vop_esmart *esmart;
+> +	bool is_cluster = false;
+> +	u8 layer;
+> +	u32 reg;
+> +	u32 rgb_mode;
+> +	u32 hactive = edid->hactive.typ;
+> +	u32 vactive = edid->vactive.typ;
+> +
+> +	switch (platdata->layers[win_id]) {
+
+Since win_id may take "-1" as invalid value, please check the validity 
+of win_id.
+
+
+> +	case ROCKCHIP_VOP2_CLUSTER0:
+> +	case ROCKCHIP_VOP2_CLUSTER1:
+> +	case ROCKCHIP_VOP2_CLUSTER2:
+> +	case ROCKCHIP_VOP2_CLUSTER3:
+> +		is_cluster = true;
+> +		break;
+> +	default:
+> +		break;
+> +	}
+> +
+> +	layer = platdata->layers[win_id];
+> +
+> +	debug("(%s, %s): win_id = %d - layer = %d - cluster: %d\n",
+> +	      dev_read_name(dev),  __func__, win_id, layer, is_cluster);
+> +
+> +	/* TODO: Support VOP2 CLUSTER */
+> +	if (is_cluster) {
+> +		dev_err(dev, "win_id is a cluster, not supported.\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	esmart = priv->regs + VOP2_ESMART_OFFSET(layer - 4);
+> +
+> +	debug("(%s, %s): esmart addr: 0x%p\n", dev_read_name(dev), __func__, esmart);
+> +
+> +	writel(V_ACT_WIDTH(hactive - 1) | V_ACT_HEIGHT(vactive - 1),
+> +	       &esmart->esmart_region0_act_info);
+> +
+> +	/* Set offset to 0,0 */
+> +	writel(0, &esmart->esmart_region0_dsp_offset);
+> +
+> +	writel(V_DSP_WIDTH(hactive - 1) |
+> +			V_DSP_HEIGHT(vactive - 1),
+> +			&esmart->esmart_region0_dsp_info);
+> +
+> +	switch (fb_bits_per_pixel) {
+> +	case 16:
+> +		rgb_mode = RGB565;
+> +		writel(V_RGB565_VIRWIDTH(hactive), &esmart->esmart_region0_vir);
+> +		break;
+> +	case 24:
+> +		rgb_mode = RGB888;
+> +		writel(V_RGB888_VIRWIDTH(hactive), &esmart->esmart_region0_vir);
+> +		break;
+> +	case 32:
+> +	default:
+> +		rgb_mode = ARGB8888;
+> +		writel(V_ARGB888_VIRWIDTH(hactive), &esmart->esmart_region0_vir);
+> +		break;
+> +	}
+> +
+> +	writel(fbbase, &esmart->esmart_region0_mst_yrgb);
+> +
+> +	writel(V_ESMART_REGION0_DATA_FMT(rgb_mode) | M_ESMART_REGION0_MST_EN,
+> +	       &esmart->esmart_region0_mst_ctl);
+> +
+> +	/* Set esmart to the destination video port */
+> +	reg = V_ESMART_SEL_PORT(layer - 4, port);
+> +
+> +	/*
+> +	 * VOP2 requires every port mux to be configured.
+> +	 *
+> +	 * As U-Boot only supports singledisplay, we'll set all
+> +	 * unused ports to set layer to 8 (disabled).
+> +	 */
+> +	for (int i = 0; i < 4; i++) {
+> +		if (i != port)
+> +			reg |= V_PORT_MUX(8, i);
+> +	}
+> +
+> +	writel(reg, &overlay->port_sel);
+> +
+> +	/* Set layer 0 to win_id */
+> +	writel(V_LAYER_SEL(0, win_id), &overlay->layer_sel);
+> +
+> +	reg = readl(&overlay->overlay_ctrl) | M_LAYER_SEL_REGDONE_EN;
+> +	writel(reg, &overlay->overlay_ctrl);
+> +
+> +	priv->layer = layer;
+> +
+> +	return 0;
+> +}
+> +
+> +static void rkvop2_set_pin_polarity(struct udevice *dev,
+> +				    enum vop_modes mode, u32 polarity)
+> +{
+> +	struct rkvop2_driverdata *ops =
+> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
+> +
+> +	if (ops->set_pin_polarity)
+> +		ops->set_pin_polarity(dev, mode, polarity);
+> +}
+> +
+> +static void rkvop2_enable_output(struct udevice *dev, enum vop_modes mode, u32 port)
+> +{
+> +	struct rkvop2_driverdata *ops =
+> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
+> +
+> +	if (ops->enable_output)
+> +		ops->enable_output(dev, mode, port);
+> +}
+> +
+> +static void rkvop2_mode_set(struct udevice *dev,
+> +			    const struct display_timing *edid,
+> +		enum vop_modes mode, int port,
+> +		struct rkvop2_platdata *platdata)
+> +{
+> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +	struct rk3568_vop_sysctrl *sysctrl = priv->regs + VOP2_SYSREG_OFFSET;
+> +	struct rk3568_vop_post *post = priv->regs + VOP2_POST_OFFSET(port);
+> +	struct rkvop2_driverdata *data =
+> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
+> +
+> +	debug("(%s, %s): port addr: 0x%p\n", dev_read_name(dev), __func__, post);
+> +
+> +	u32 hactive = edid->hactive.typ;
+> +	u32 vactive = edid->vactive.typ;
+> +	u32 hsync_len = edid->hsync_len.typ;
+> +	u32 hback_porch = edid->hback_porch.typ;
+> +	u32 vsync_len = edid->vsync_len.typ;
+> +	u32 vback_porch = edid->vback_porch.typ;
+> +	u32 hfront_porch = edid->hfront_porch.typ;
+> +	u32 vfront_porch = edid->vfront_porch.typ;
+> +	int mode_flags;
+> +	u32 pin_polarity;
+> +	u32 reg;
+> +
+> +	pin_polarity = BIT(DCLK_INVERT);
+> +	if (edid->flags & DISPLAY_FLAGS_HSYNC_HIGH)
+> +		pin_polarity |= BIT(HSYNC_POSITIVE);
+> +	if (edid->flags & DISPLAY_FLAGS_VSYNC_HIGH)
+> +		pin_polarity |= BIT(VSYNC_POSITIVE);
+> +
+> +	rkvop2_enable_output(dev, mode, port);
+> +	rkvop2_set_pin_polarity(dev, mode, pin_polarity);
+> +
+> +	mode_flags = 0;  /* RGB888 */
+> +	if ((data->features & VOP_FEATURE_OUTPUT_10BIT) &&
+> +	    mode == VOP_MODE_HDMI)
+> +		mode_flags = 15;  /* RGBaaa */
+> +
+> +	reg = V_DSP_OUT_MODE(mode_flags);
+> +
+> +	debug("(%s, %s): bg_dly: %d\n",
+> +	      dev_read_name(dev), __func__, platdata->bg_dly[port]);
+> +
+> +	if (platdata->bg_dly[port] < 0) {
+> +		dev_err(dev, "bg_dly is zero for vp%d\n", port);
+> +		return;
+> +	}
+> +
+> +	writel(((platdata->bg_dly[port] + (hactive >> 1) - 1) << 16) | hsync_len,
+> +	       &post->prescan_htimings);
+> +
+> +	writel(V_HSYNC(hsync_len) |
+> +			V_HORPRD(hsync_len + hback_porch + hactive + hfront_porch),
+> +			&post->dsp_htotal_hs_end);
+> +
+> +	writel(V_HEAP(hsync_len + hback_porch + hactive) |
+> +			V_HASP(hsync_len + hback_porch),
+> +			&post->dsp_hact_st_end);
+> +
+> +	writel(V_VAEP(vsync_len + vback_porch + vactive) |
+> +			V_VASP(vsync_len + vback_porch),
+> +			&post->dsp_vact_st_end);
+> +
+> +	writel(V_VSYNC(vsync_len) |
+> +			V_VERPRD(vsync_len + vback_porch + vactive + vfront_porch),
+> +			&post->dsp_vtotal_vs_end);
+> +
+> +	writel(V_HEAP(hsync_len + hback_porch + hactive) |
+> +			V_HASP(hsync_len + hback_porch),
+> +			&post->dsp_hact_info);
+> +
+> +	writel(V_VAEP(vsync_len + vback_porch + vactive) |
+> +			V_VASP(vsync_len + vback_porch),
+> +			&post->dsp_vact_info);
+> +
+> +	/* No scaling */
+> +	writel(0x10001000, &post->scl_factor_yrgb);
+> +
+> +	writel(reg, &post->dsp_ctrl);
+> +
+> +	rkvop2_cfg_regdone(sysctrl, port);
+> +}
+> +
+> +/**
+> + * rk_display_init() - Try to enable the given display device
+> + *
+> + * This function performs many steps:
+> + * - Finds the display device being referenced by @ep_node
+> + * - Puts the VOP's ID into its uclass platform data
+> + * - Probes the device to set it up
+> + * - Reads the timing information (from EDID or panel)
+> + * - Sets up the VOP clocks, etc. for the selected pixel clock and display mode
+> + * - Enables the display (the display device handles this and will do different
+> + *     things depending on the display type)
+> + * - Tells the uclass about the display resolution so that the console will
+> + *     appear correctly
+> + *
+> + * @dev:	VOP device that we want to connect to the display
+> + * @fbbase:	Frame buffer address
+> + * @vp_node:	Device tree node to process
+> + * Return: 0 if OK, -ve if something went wrong
+> + */
+> +static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+> +{
+> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
+> +	struct rkvop2_driverdata *drvdata =
+> +		(struct rkvop2_driverdata *)dev_get_driver_data(dev);
+> +	struct rkvop2_platdata *platdata =
+> +		(struct rkvop2_platdata *)drvdata->platdata;
+> +	ofnode ep_node;
+> +	int vop_id, port_id, win_id;
+> +	struct display_timing timing;
+> +	struct udevice *disp;
+> +	int ret;
+> +	u32 remote_phandle;
+> +	struct display_plat *disp_uc_plat;
+> +	enum video_log2_bpp l2bpp;
+> +	ofnode remote;
+> +	const char *compat;
+> +	char dclk_name[9];
+> +	struct clk dclk;
+> +
+> +	debug("%s(%s, 0x%lx, %s)\n", __func__,
+> +	      dev_read_name(dev), fbbase, ofnode_get_name(vp_node));
+> +
+> +	port_id = ofnode_read_u32_default(vp_node, "reg", -1);
+> +	if (port_id < 0) {
+> +		debug("%s(%s): no video port id\n", __func__, dev_read_name(dev));
+> +		return port_id;
+> +	}
+> +
+> +	ep_node = ofnode_first_subnode(vp_node);
+> +	if (!ofnode_valid(ep_node)) {
+> +		debug("%s(%s): no valid subnode\n", __func__, dev_read_name(dev));
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = ofnode_read_u32(ep_node, "remote-endpoint", &remote_phandle);
+> +	if (ret) {
+> +		debug("%s(%s): no remote-endpoint\n", __func__, dev_read_name(dev));
+> +		return ret;
+> +	}
+> +
+> +	remote = ofnode_get_by_phandle(remote_phandle);
+> +	if (!ofnode_valid(remote))
+> +		return -EINVAL;
+> +
+> +	remote = ofnode_get_parent(remote);
+> +	if (!ofnode_valid(remote))
+> +		return -EINVAL;
+> +
+> +	/*
+> +	 * The remote-endpoint references into a subnode of the encoder
+> +	 * (i.e. HDMI, MIPI, etc.) with the DTS looking something like
+> +	 * the following:
+> +	 *
+> +	 * hdmi: hdmi@fe0a0000 {
+> +	 *   ports {
+> +	 *     hdmi_in: port {
+> +	 *       hdmi_in_vp0: endpoint { ... };
+> +	 *     }
+> +	 *   }
+> +	 * }
+> +	 *
+> +	 * This isn't any different from how VOP1 works, so we'll adapt
+> +	 * the same method of finding the display from the original code
+> +	 * (find the enclosing device of "UCLASS_DISPLAY")
+> +	 *
+> +	 * We also look for UCLASS_VIDEO_BRIDGE so we can use the existing
+> +	 * DW MIPI DSI driver for Rockchip.
+> +	 */
+> +	while (ofnode_valid(remote)) {
+> +		remote = ofnode_get_parent(remote);
+> +		if (!ofnode_valid(remote)) {
+> +			debug("%s(%s): no UCLASS_DISPLAY for remote-endpoint\n",
+> +			      __func__, dev_read_name(dev));
+> +			return -EINVAL;
+> +		}
+> +
+> +		uclass_find_device_by_ofnode(UCLASS_DISPLAY, remote, &disp);
+> +		if (disp)
+> +			break;
+> +	};
+> +	compat = ofnode_get_property(remote, "compatible", NULL);
+> +	if (!compat) {
+> +		debug("%s(%s): Failed to find compatible property\n",
+> +		      __func__, dev_read_name(dev));
+> +		return -EINVAL;
+> +	}
+> +	if (strstr(compat, "edp")) {
+> +		vop_id = VOP_MODE_EDP;
+> +	} else if (strstr(compat, "mipi")) {
+> +		vop_id = VOP_MODE_MIPI;
+> +	} else if (strstr(compat, "hdmi")) {
+> +		vop_id = VOP_MODE_HDMI;
+> +	} else if (strstr(compat, "rk3588-dp")) {
+> +		vop_id = VOP_MODE_DP;
+> +	} else if (strstr(compat, "lvds")) {
+> +		vop_id = VOP_MODE_LVDS;
+> +	} else {
+> +		debug("%s(%s): Failed to find vop mode for %s\n",
+> +		      __func__, dev_read_name(dev), compat);
+> +		return -EINVAL;
+> +	}
+> +	debug("vop_id=%d - port=%d\n", vop_id, port_id);
+> +
+> +	/* Get the video port clock and enable it */
+> +	snprintf(dclk_name, sizeof(dclk_name), "dclk_vp%d", port_id);
+> +	ret = clk_get_by_name(dev, dclk_name, &dclk);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	disp_uc_plat = dev_get_uclass_plat(disp);
+> +	debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
+> +	if (display_in_use(disp)) {
+> +		debug("   - device in use\n");
+> +		return -EBUSY;
+> +	}
+> +
+> +	disp_uc_plat->source_id = vop_id;
+> +	disp_uc_plat->src_dev = dev;
+> +
+> +	ret = device_probe(disp);
+> +	if (ret) {
+> +		debug("%s: device '%s' display won't probe (ret=%d)\n",
+> +		      __func__, dev->name, ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = display_read_timing(disp, &timing);
+> +	if (ret) {
+> +		debug("%s: Failed to read timings\n", __func__);
+> +		return ret;
+> +	}
+> +
+> +	/* Set clock rate on video port to display timings */
+> +	ret = clk_set_rate(&dclk, timing.pixelclock.typ);
+> +	if (ret < 0) {
+> +		dev_err(dev, "Failed to set clock rate: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	debug("%s(%s): %s clkrate %lu\n", __func__, dev_read_name(dev),
+> +	      dclk_name, clk_get_rate(&dclk));
+> +
+> +	/* Set bitwidth for vop display according to vop mode */
+> +	switch (vop_id) {
+> +	case VOP_MODE_EDP:
+> +	case VOP_MODE_MIPI:
+> +	case VOP_MODE_HDMI:
+> +	case VOP_MODE_DP:
+> +	case VOP_MODE_LVDS:
+> +		l2bpp = VIDEO_BPP32;
+> +		break;
+> +	default:
+> +		l2bpp = VIDEO_BPP16;
+> +	}
+> +
+> +	/*
+> +	 * We'll use the default platform-specific win_id from Linux
+> +	 * so that Linux can take over U-Boot plane when Linux reconfigures
+> +	 * VOP2.
+> +	 */
+> +	win_id = platdata->vp_lyr[port_id];
+> +	if (win_id < 0) {
+> +		dev_err(dev, "win_id is null, don't setup\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = rkvop2_enable(dev, fbbase, 1 << l2bpp, &timing, port_id, win_id, platdata);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	rkvop2_mode_set(dev, &timing, vop_id, port_id, platdata);
+> +
+> +	ret = display_enable(disp, 1 << l2bpp, &timing);
+> +	if (ret)
+> +		return ret;
+> +
+> +	uc_priv->xsize = timing.hactive.typ;
+> +	uc_priv->ysize = timing.vactive.typ;
+> +	uc_priv->bpix = l2bpp;
+> +
+> +	priv->vp = port_id;
+> +
+> +	debug("fb=%lx, size=%d %d\n", fbbase,
+> +	      uc_priv->xsize, uc_priv->ysize);
+> +
+> +	return 0;
+> +}
+> +
+> +int rk_vop2_probe(struct udevice *dev)
+> +{
+> +	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
+> +	struct rk_vop2_priv *priv = dev_get_priv(dev);
+> +	int ret = 0;
+> +	ofnode port, node;
+> +
+> +	/* Before relocation we don't need to do anything */
+> +	if (!(gd->flags & GD_FLG_RELOC))
+> +		return 0;
+> +
+> +	if (IS_ENABLED(CONFIG_EFI_LOADER)) {
+> +		debug("Adding to EFI map %d @ %lx\n", plat->size, plat->base);
+> +		efi_add_memory_map(plat->base, plat->size, EFI_RESERVED_MEMORY_TYPE);
+> +	}
+> +
+> +	priv->regs = dev_read_addr_ptr(dev);
+> +
+> +	/* Try all the ports until we find one that works. */
+> +	port = dev_read_subnode(dev, "ports");
+> +	if (!ofnode_valid(port)) {
+> +		debug("%s(%s): 'port' subnode not found\n",
+> +		      __func__, dev_read_name(dev));
+> +		return -EINVAL;
+> +	}
+> +
+> +	for (node = ofnode_first_subnode(port);
+> +			ofnode_valid(node);
+> +			node = dev_read_next_subnode(node)) {
+> +		ret = rk_display_init(dev, plat->base, node);
+> +		if (ret)
+> +			debug("Device failed: ret=%d\n", ret);
+> +		if (!ret)
+> +			break;
+> +	}
+> +	video_set_flush_dcache(dev, true);
+> +
+> +	return ret;
+> +}
+> +
+> +int rk_vop2_bind(struct udevice *dev)
+> +{
+> +	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
+> +
+> +	plat->size = 4 * (CONFIG_VIDEO_ROCKCHIP_MAX_XRES *
+> +			CONFIG_VIDEO_ROCKCHIP_MAX_YRES);
+> +
+> +	return 0;
+> +}
+> diff --git a/drivers/video/rockchip/rk_vop2.h b/drivers/video/rockchip/rk_vop2.h
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..5d6680700148843d5d6e9a53dcf16a2479305471
+> --- /dev/null
+> +++ b/drivers/video/rockchip/rk_vop2.h
+> @@ -0,0 +1,76 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Copyright (c) 2017 Theobroma Systems Design und Consulting GmbH
+> + */
+> +
+> +#ifndef __RK_VOP2_H__
+> +#define __RK_VOP2_H__
+> +
+> +#include <asm/arch-rockchip/vop_rk3568.h>
+> +
+> +struct rk_vop2_priv {
+> +	void *grf;
+> +	void *regs;
+> +	int vp;
+> +	int layer;
+> +};
+> +
+> +enum vop2_features {
+> +	VOP_FEATURE_OUTPUT_10BIT = (1 << 0),
+> +};
+> +
+> +enum vop2_layer {
+> +	ROCKCHIP_VOP2_CLUSTER0 = 0,
+> +	ROCKCHIP_VOP2_CLUSTER1,
+> +	ROCKCHIP_VOP2_CLUSTER2,
+> +	ROCKCHIP_VOP2_CLUSTER3,
+> +	ROCKCHIP_VOP2_ESMART0,
+> +	ROCKCHIP_VOP2_ESMART1,
+> +	ROCKCHIP_VOP2_ESMART2,
+> +	ROCKCHIP_VOP2_ESMART3,
+> +	ROCKCHIP_VOP2_SMART0 = 6,
+> +	ROCKCHIP_VOP2_SMART1,
+> +	ROCKCHIP_VOP2_RESERVED = -1,
+> +};
+> +
+> +struct rkvop2_platdata {
+> +	const u8 delay;
+> +	const s8 bg_dly[4]; /* VOP2 supports up to 4 video ports (0-3) */
+> +	const s8 vp_lyr[4];
+> +	const s8 layers[8];
+> +};
+> +
+> +struct rkvop2_driverdata {
+> +	/* configuration */
+> +	u32 features;
+> +	void (*platdata);
+> +	/* block-specific setters/getters */
+> +	void (*enable_output)(struct udevice *dev, enum vop_modes mode, u32 port);
+> +	void (*set_pin_polarity)(struct udevice *dev, enum vop_modes mode, u32 port);
+> +};
+> +
+> +/**
+> + * rk_vop2_probe() - common probe implementation
+> + *
+> + * Performs the rk_display_init on each port-subnode until finding a
+> + * working port (or returning an error if none of the ports could be
+> + * successfully initialised).
+> + *
+> + * @dev:	device
+> + * Return: 0 if OK, -ve if something went wrong
+> + */
+> +int rk_vop2_probe(struct udevice *dev);
+> +
+> +/**
+> + * rk_vop2_bind() - common bind implementation
+> + *
+> + * Sets the plat->size field to the amount of memory to be reserved for
+> + * the framebuffer: this is always
+> + *     (32 BPP) x VIDEO_ROCKCHIP_MAX_XRES x VIDEO_ROCKCHIP_MAX_YRES
+> + *
+> + * @dev:	device
+> + * Return: 0 (always OK)
+> + */
+> +int rk_vop2_bind(struct udevice *dev);
+> +
+> +#endif
