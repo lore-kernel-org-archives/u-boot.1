@@ -4,70 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646BAC3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 11:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E69C3ABBF
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 11:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6A3982163;
-	Tue,  6 May 2025 13:08:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F9D8820F6;
+	Tue,  6 May 2025 13:13:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rZ9Z8isW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PWmwoqYK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0F118219D; Tue,  6 May 2025 13:08:28 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E44EE81F66
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 13:08:25 +0200 (CEST)
+ id BA64282163; Tue,  6 May 2025 13:13:30 +0200 (CEST)
+Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
+ [IPv6:2607:f8b0:4864:20::e34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 16D0681F66
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 13:13:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 546B8KLg1036472
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 6 May 2025 06:08:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746529700;
- bh=b5tvpBW+hhksLzIg1GWXY0lVThVIkGU+G0e3Xg3hxFk=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=rZ9Z8isWF9fxtk9llz0iBuQ+gDFHGElFYfV6Qzbx41ttA4RCwRYuq82lfcBritjTq
- kRQe09SG42P2u/Yq8Ft5A72xMCk2Y/u2XYBvZuTeL49XT+ihB13gOpNvZl7WtxyP7e
- 03x17RTWK08B5WONk/YyLLTbsXT3FGwVarEML9UY=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 546B8K0n056883
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 6 May 2025 06:08:20 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- May 2025 06:08:19 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 May 2025 06:08:19 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 546B8IbL130115;
- Tue, 6 May 2025 06:08:18 -0500
-Message-ID: <41a042ec-d2ec-48ee-be15-a6f88895e977@ti.com>
-Date: Tue, 6 May 2025 06:08:18 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-4c321929641so1544794137.2
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 04:13:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1746530007; x=1747134807; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=l+GlXLw85mhF+oRDMm0BOK4//Deurj0OYoRJNacgkvk=;
+ b=PWmwoqYKjqmYUnVlPQcuyUqK9QSSXBDHX1bgswQadj7V1pX0/hq1G3MmF+96f73ccV
+ GDMOaCEVRglI6aaqzHmp78eCirtFezYaKSWW69OreWdp6+dsBa/D6s9EN3JlX85rrsW2
+ svQKRteR803miebIimGWow2V6LeQXATXCYzFIg+hJ+1zlyR8vyDOhxRkvVboDWGcqTxo
+ CY9bOc5ZH6Cl4zqyM7LKgW6bfq2zHhRvVNDyYcwWdY52zUdY0zdSsmWOqeWthBlwXof1
+ X9dxj5vX7OCR4ziuUXdXL/7GXuITHGKiJ5H0IgCeXBVF0LY5vlxDUhdfMFGgC706m65a
+ W8Cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746530007; x=1747134807;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l+GlXLw85mhF+oRDMm0BOK4//Deurj0OYoRJNacgkvk=;
+ b=SQ9ysWrdbPulowx5f2l1llP9e1sHBX87elzBce3Ab/vwdNlFDbP4M1b8uvg1pajQS5
+ EKGUNSR+hIUbKfRkeTGcm7zOR/xqLRIvOdb8a5ElH1SDLtBe5QzALjiLkJSD75jpX9iV
+ /vmraCvlbNtGv3ssJkdPk5Ia8Sv5kV0xPWfgNUhPWF4iLebocLr/PTNa4FkxcNsAXLh8
+ bohHuAxd98WmPkgd3zI1p4xFbYjQrVMhAcj8PQpz0SHvNiZX4be3w4VilZPuYXfSr4CI
+ /Id9vqMfUfiM0dFSgKYpEJHst2GwlBd3zb0Fq1mUwbjKnZstnnxJw70YCfWF9febfs04
+ +TFw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUrR/28UkQ77XCNuAzWNF+pA60QNfSaJtO1eQBCbTRZTQJBRumCCaGHY9Ol9jZitnuXm+zfivA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy59w+xwn1WotzIe/OZQMiXfkxCukn2Saq+UCO7M9PKbI8E6BmP
+ 5tK12aBGaLOoGsVKcf8KSrCvFhirT2nCcLg92MSVCMilLFeMs2UmoL2tfmsahF4GHWT/GibydHo
+ iF/IXsr2//TXZ6b7Wz2K80vKX0nLbR745c4T8JTwPIwIWt2y2+VU=
+X-Gm-Gg: ASbGncse5krHvh34HxaRuVONA0ufoSaMX2XnWnKkD/flIQu71oLq9tIMx9qiamEl2wp
+ OoqeVHrUxZCEFDZOo7/blGB3Bh+RNJrrKOHhH1g5IKRTEQ4g07YspDnbbXgGvtuZWtbhU4OSnin
+ mdaRYkxpt2C13bFN7tYjoKcWk=
+X-Google-Smtp-Source: AGHT+IHfgvvgeIb8gXeS7Bv+Tj7qCw89jpHdX0Bo9DrPPHudNjCvikBpNqj5bqDrwcaoDYT081HejsewfM2hrAjHuH0=
+X-Received: by 2002:a05:6102:5787:b0:4c1:b0ad:a0bd with SMTP id
+ ada2fe7eead31-4dafb6e7810mr10266420137.23.1746530006918; Tue, 06 May 2025
+ 04:13:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] Add support to boot TI K3 HSM M4 core
-To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
-CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
- <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
- <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
- <d-gole@ti.com>, <u-boot@lists.denx.de>
-References: <20250506104202.16741-1-b-padhi@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250506104202.16741-1-b-padhi@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250506092401.646595-1-sughosh.ganu@linaro.org>
+ <7c05f66b-1047-400a-816f-db0de0951def@canonical.com>
+ <CADg8p94crfzYzhR+jFFFRR=Xp6wY3cADXSQmKxXvVgvn9GHBkA@mail.gmail.com>
+ <CAM=mAO=8gP3J9Kt5ox-Gpd43s8ozZ+t42O4dBNnYV32hMS_pMg@mail.gmail.com>
+In-Reply-To: <CAM=mAO=8gP3J9Kt5ox-Gpd43s8ozZ+t42O4dBNnYV32hMS_pMg@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 6 May 2025 16:43:15 +0530
+X-Gm-Features: ATxdqUG_XNsg2Jdmgx2yGfLh2aSwuXA3irIUcgL23CdzKwz1gUoFYoXFEDZ1IKs
+Message-ID: <CADg8p95i1NB89V_iKwiyFZuaiBSvpArJhR4_Dj65CnvoRB-hig@mail.gmail.com>
+Subject: Re: [PATCH] riscv: set the width of the physical address/size data
+ type based on arch
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,66 +98,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/6/25 5:41 AM, Beleswar Padhi wrote:
-> Some TI K3 SoCs like J721S2, and J784S4 have a HSM (High Security
-> Module) M4F core in the Wakeup Voltage Domain which could be used to
-> run secure services like Authentication. Boot flow for HSM M4 core is
-> different than the general purpose M4F cores, and is as below:
-> 
+On Tue, 6 May 2025 at 16:35, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+>
+>
+> Sughosh Ganu <sughosh.ganu@linaro.org> schrieb am Di., 6. Mai 2025, 12:50:
+>>
+>> On Tue, 6 May 2025 at 15:19, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>> >
+>> > On 5/6/25 11:24, Sughosh Ganu wrote:
+>> > > U-Boot has support for both the 32-bit and 64-bit RiscV platforms. Set
+>> > > the width of the phys_{addr,size}_t data types based on the register
+>> > > size of the architecture.
+>> > >
+>> > > Currently, even the 32-bit RiscV platforms have a 64-bit
+>> > > phys_{addr,size}_t data types. This causes issues on the 32-bit
+>> > > platforms, where the upper 32-bits of the variables of these types
+>> > > can have junk data, and that can cause all kinds of side-effects.
+>> >
+>> > How could it be that the upper 32-bit have junk data?
+>> >
+>> > When we convert from a shorter variable the compiler should fill the
+>> > upper bits with zero.
+>>
+>> That does not seem to be happening. The efi_fit test fails on the
+>> qemu-riscv32 platform, when attempting to boot the OS from the FIT
+>> image.
+>>
+>> These are the values of the base address that I see in the
+>> _lmb_alloc_addr() function.
+>>
+>> _lmb_alloc_addr: 755, rgn => -1, base => 0x1a1c0e00802000bc, size => 0x50b1
+>
+>
+> As you are running on QEMU you should be able to track down where the value is actually assigned with gdb. This could for instance be a buffer overrun.
+>
+> If we don't correct the root cause, it will hit us again.
 
-The below flow looks exactly like the general purpose M4F cores..
-Why is the HSM core treated differently and this loader not made into
-a normal remote proc driver?
+How will we hit this issue if the phys_addr_t is set to a 32-bit
+value? So, this can be investigated as to why the compiler does not
+set the upper 32-bits to 0. But given your earlier comment on the fact
+that LPAE is not being used, the change proposed by this patch should
+work? What issue do you see with a 32-bit address space.
 
-Andrew
+-sughosh
 
-> 1. Request control of HSM M4F remote processor.
-> 2. Assert Reset on the HSM M4F remote processor.
-> 3. Request Secure Entity to Authenticate and Load HSM firmware into
->     core's internal SRAM memory region. For GP device, load the firmware
->     manually into core's SRAM region.
-> 4. Deassert Reset on the HSM M4F remote processor.
-> 5. Release control of HSM M4F remote processor.
-> 
-> This series adds support to boot HSM M4 core from R5 SPL stage. The HSM
-> firmware is packed inside the tispl.bin fit image. The firmware is
-> unpacked into a temporary DDR address which is then used to load HSM
-> core. The configs to boot HSM M4 core are disabled by default.
-> 
-> v2: Changelog:
-> [Andrew]:
->   1. Added support in SPL to load FIT images with no 'load' property.
->   2. Removed 'default = n' in CONFIG option.
->   3. Used __maybe_unused to decrease preprocessing.
->   4. Better error messages with error code.
-> [Udit]:
->   1. Added 'HSM' entries in enum at the last.
->   2. Added error condition in if-elseif-else ladder.
->   3. Hang System boot when HSM failed to boot properly.
-> 
-> Link to v1:
-> https://lore.kernel.org/all/20250422095430.363792-1-b-padhi@ti.com/
-> 
-> Test logs after enabling HSM boot configs:
-> https://gist.github.com/3V3RYONE/ad33683652c8c49e4fedab49f0493e79
-> 
-> Beleswar Padhi (7):
->    arm: mach-k3: Add config option for booting HSM core
->    spl: Use FIT data address as fallback when 'load' property is absent
->    arm: dts: k3-binman: Add template for packing HSM firmware
->    arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM firmware inside
->      tispl.bin
->    arm: mach-k3: Use FIT image data addr as fallback if 'load' prop is
->      missing
->    arm: mach-k3: Explicitly identify TIFSSTUB images when discarding
->      buffers
->    arm: mach-k3: r5: common: Add support to boot HSM M4 core
-> 
->   arch/arm/dts/k3-binman.dtsi        |   9 +++
->   arch/arm/dts/k3-j721s2-binman.dtsi |  12 ++++
->   arch/arm/dts/k3-j784s4-binman.dtsi |  14 ++++
->   arch/arm/mach-k3/Kconfig           |   7 ++
->   arch/arm/mach-k3/r5/common.c       | 111 +++++++++++++++++++++++++++--
->   common/spl/spl_fit.c               |  16 ++++-
->   6 files changed, 164 insertions(+), 5 deletions(-)
-> 
+>
+> Best regards
+>
+> Heinrich
+>
+>>
+>> The actual value that gets passed is 0x802000bc. The upper 32-bits do
+>> not get zeroed out. Which causes the _lmb_alloc_addr() to return an
+>> error. You can check my branch [1], where I have put a temporary
+>> commit to print the values that cause the issue.
+>>
+>> -sughosh
+>>
+>> [1] - https://source.denx.de/u-boot/contributors/sng/u-boot/-/commits/lmb_apis_cleanup_bisectable_v2
+>>
+>> >
+>> > >
+>> > > This was discovered on the qemu Riscv 32-bit platform  when the return
+>> > > value of an LMB API was checked, and some LMB allocation that ought
+>> > > not to have failed, was failing. The upper 32-bits of the address
+>> > > variable contained garbage, resulting in failures.
+>> > >
+>> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+>> > > ---
+>> > >
+>> > > Note:
+>> > > Although the LMB API cleanup series depends on this patch, I am
+>> > > sending it separately so that it gets noticed by the RiscV
+>> > > maintainers. Sometimes a patch may not get the required attention when
+>> > > sent as part of another seemingly unrelated series.
+>> > >
+>> > >
+>> > >   arch/riscv/include/asm/types.h | 9 +++++++--
+>> > >   1 file changed, 7 insertions(+), 2 deletions(-)
+>> > >
+>> > > diff --git a/arch/riscv/include/asm/types.h b/arch/riscv/include/asm/types.h
+>> > > index 49f7a5d6b3a..45d806c83eb 100644
+>> > > --- a/arch/riscv/include/asm/types.h
+>> > > +++ b/arch/riscv/include/asm/types.h
+>> > > @@ -35,8 +35,13 @@ typedef u64 dma_addr_t;
+>> > >   typedef u32 dma_addr_t;
+>> > >   #endif
+>> > >
+>> > > -typedef unsigned long long phys_addr_t;
+>> > > -typedef unsigned long long phys_size_t;
+>> > > +#ifdef CONFIG_PHYS_64BIT
+>> > > +typedef u64 phys_addr_t;
+>> > > +typedef u64 phys_size_t;
+>> > > +#else
+>> > > +typedef u32 phys_addr_t;
+>> > > +typedef u32 phys_size_t;
+>> >
+>> > This matches what has been done for ARM.
+>> >
+>> > 86c915628d58 ("riscv: Change phys_addr_t and phys_size_t to 64-bit")
+>> > changed the definition to 64bit phys addr_t to support the 34bit
+>> > physical addresses (similar to LPAE on arm32).
+>> >
+>> > I don't think that we need 34bit support currently. But I would prefer
+>> > if we could find the root cause why the upper 32bit gets messed up as
+>> > this might point to a generic problem.
+>> >
+>> > Best regards
+>> >
+>> > Heinrich
+>> >
+>> > > +#endif
+>> > >
+>> > >   #endif /* __KERNEL__ */
+>> > >
+>> >
