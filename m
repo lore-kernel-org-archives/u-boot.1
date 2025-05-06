@@ -4,104 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61883C3ABBC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 16:10:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA189C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 16:10:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F02B828F8;
-	Tue,  6 May 2025 18:10:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A66AF8219D;
+	Tue,  6 May 2025 18:10:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S+35Ln0g";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DZG3LNri";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1DA78210D; Tue,  6 May 2025 18:10:20 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id D973582998; Tue,  6 May 2025 18:10:22 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A6CA820F6
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 18:10:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6C13822D7
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 18:10:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-441d1ed82faso6235525e9.0
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 09:10:15 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-39c1ee0fd43so6122261f8f.0
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 09:10:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746547814; x=1747152614; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fKlXVlCpdS4zU4d5kGur5+0G98FjLU9O5r1xLBLWaCo=;
- b=S+35Ln0gmKz3FZMJwjxaAG/Bd3elnDJ2lyHQa3yZfLS9pyR/2TuVpQCi6lV3q4WxK4
- Z41p03F2VTBGtqe0ry8Ejfftc1H18RhlVRypP+gbQkxoHEodYk9xXDDcbL9QDGbFY2V0
- PXO8DSo+HoDZSf1wTdcj15FL8hh15RbKRb7Kh/g2Pv/5VXhlTbtM7P3zkJxN9jfQS18F
- kS+uf+IpbXZHZ21GDcY8fEzxbsg3uydjvBe6L1zM15nmpF2xZaye2UvbyTk9D+hGbHhz
- /Ui3P7hST9ZxwNqnT6fvSVl2XZDaNajDNFs6RWY3UnGyHJ5AxSV6JysoYq2/gttB0quJ
- LEXw==
+ d=linaro.org; s=google; t=1746547816; x=1747152616; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=vghMrZJGET8uzFQGRt6atFm9U3VvwEwrffjvJwdC4bY=;
+ b=DZG3LNriiYCeabEGprcLMpTCNAbmrvaDRKJN9FYbM517KwyAouVqQxpS7kyjcQtZz+
+ 34OXd1ZPtmgQQe0gPHuxWrf6VoDGly8UOB2KKitjz/g0BNBR9T4MawzMHpAh3O2QGygu
+ 7hp0QBDDL3FynksYDh95geOPwHmiKX/XQ6Q5XSpfOnrCx+nGHque2JKEL8Kk/Y/7PL2t
+ 38llXLvrAfYcnormoQUGAf5XvEhUaOBQNzCU0QUQmruGoBQDM54yo1GeWbWwSZMx1Ob+
+ s1M39jmFWA5WzEzIqpLNpdgkSlG5UuPK5QuOFZ3amC6kkD31te9u7DzgkaTf9qIKGukG
+ o0ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746547814; x=1747152614;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fKlXVlCpdS4zU4d5kGur5+0G98FjLU9O5r1xLBLWaCo=;
- b=Ou5oN/VAuqCi2mZ/O8eN8KNVTmIXnCGeR+5F0UH6Uim6qVieSiznT/Fut+vBdHXYh/
- aw8jUjEU7/q0IVzQrSulp8ptMv9Qn0RjyluL1kJ3CB9H6+r0cQGRIYvo3EK+bgCvhzfG
- 2muDJX5xy+E7BynRzOfAmekoD/Bry8UMvpoOfIvOz2IERcWeHevHwbHXls5OITch2d6M
- 7PIcSs+2ASwM+JLeWdd8uRXG7Bq1wtpHmu7VoGDd7N1RcIzto3XK3kUFFBk/6hbCeILz
- TS2C11p+tO2BjoB9/lpDt5BVKTfS3Rm/Qxu/XEgmj9ltzM8xwwa1plclPfSu6KQd2Rz0
- FDIA==
-X-Gm-Message-State: AOJu0YzR5J/El55NBfr8WheLCgr1objg+zxv+KEYivRKAWZvNPPa4N8v
- w0rp1whg7YR5SC9g5wRiu6cAxh0tREirqCAZwfF75U8x2dL8OxyXLh+NtOyGe0mt0VL58dCkFgr
- P
-X-Gm-Gg: ASbGncuHZSxpD1yTUHS3J+766ZdEZUZ19+CKKn7PFNXTeyrtmDYoc8j6G5kv0H0nS/S
- xONUtRZmbqOOPODn/4mfWPUXommo+/NyuUmvLoMhrWyk0RSXvu2CVNH9ZplINtiVYZAHNKgncG9
- 5djWkuOnDxfJRFvKnqiAWM9PT4nrO2C279KkVavwQonxexmXw6/LX/MloJ110JMfklRwpnlNmwl
- 1K6tWXPm5yFU9Vbu48imaUwfqxod0ahdcsa7HISbRzKwH8SKxHP72vNOg/f40+/wauUm3e8dLFR
- NQ5GPFMZz0wx1kCIZ3QbvYpvQQhTA1sPaaRuaAaMA7VcFcZobm6WWA8twFTP5w==
-X-Google-Smtp-Source: AGHT+IFMxyIIbmsVWlSlWA5JM0gxL4n9eG9+gvFkj1iOC41pxJrIcM6KFLP13qDEDUjtArIqCBbzyA==
-X-Received: by 2002:a05:6000:1883:b0:3a0:88e1:5e18 with SMTP id
- ffacd0b85a97d-3a0b4a0506dmr45438f8f.1.1746547813844; 
- Tue, 06 May 2025 09:10:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746547816; x=1747152616;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vghMrZJGET8uzFQGRt6atFm9U3VvwEwrffjvJwdC4bY=;
+ b=cYE4e8DNdlBr/rMVKPGI7sSC67a5VtlfPTq97ku2Q8EmMW7xoIUGvUcSZY571d5L/v
+ EdwbyuKaWMprBhSoiUE8G5fGX1cftuDr8WiWyRpI1XuyEupxXRKmrRP+rCZoU3J/YvCg
+ 99S7yZrYI2XIrXTNwMlt76WXNIOx4BhhMs/bYdzWFwtYBDW0dkydUeQCUb+N6WFD1WGi
+ nJEJPxTapLlC+F62oPfOamBcj33ZOsg0YOCudU6FWssueXlP9cunkpvz+BPhaaClt1z6
+ L2T25/CM7y8C5u3ot96YaUPfhnl1n1Eb2Dmhh8LH2k5TP1iwqPvRzKkVV8ANOSi3GrSQ
+ SdEQ==
+X-Gm-Message-State: AOJu0YyoNk6D9muuj6muozNXyYb24Tpcenb/FEqQ+tdBGHCTnN1Jv0Ak
+ YbTMCkpkMmHR4bNysL31I5VxlsYqtoi20tjAeyVJP+4LivDiiZcQZGFlRHuj6V8=
+X-Gm-Gg: ASbGncsB5ifbTrhru4VE0lpnI4uozyNEIxQqs4kj4TPNCP4gzMo5EKeD3yWPE+mtoZe
+ b6jQNDDXy+pwniqpJ4KA9ZDuX35uLLyqnpZ8wzMZp4IPg8FBVTcFK4OgtZXkFLpWbo81Cw1IX62
+ CF2e3JOABUhaDV7KcV9bVjir897LsQP366Fy0RzoZkjM4OTFzNt7CcpvTvqAvUPj9HKpyLBujDQ
+ EYKPgYuMNUxVtPCodm3jHnld5M/BtMSzdrDem6zXuX+fWm9BIFkuRkjsVJdQ0/a6UjUz7YwLkY3
+ l/bL2tyAiI2yyPwJ7Ow2llbnCBLrlpc0IUY+wyPZBDHTFg4D3K4XO5Zezx+2pQ==
+X-Google-Smtp-Source: AGHT+IHdL+vy3ksJJFT+GEQxTCjDWl3KrEqzkFv2noqma4W9HIedWc2eS6wThkOEhdojqIUU5aL5eg==
+X-Received: by 2002:a05:6000:310d:b0:39c:e0e:bb46 with SMTP id
+ ffacd0b85a97d-3a0b4a060f0mr30196f8f.4.1746547816170; 
+ Tue, 06 May 2025 09:10:16 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a0b0dffaa1sm2103960f8f.31.2025.05.06.09.10.12
+ ffacd0b85a97d-3a0b0dffaa1sm2103960f8f.31.2025.05.06.09.10.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 09:10:12 -0700 (PDT)
+ Tue, 06 May 2025 09:10:15 -0700 (PDT)
 From: neil.armstrong@linaro.org
-Subject: [PATCH RFT v3 0/3] fastboot: add support for generic block
- flashing
-Date: Tue, 06 May 2025 18:10:06 +0200
-Message-Id: <20250506-topic-fastboot-blk-v3-0-d94be5829f46@linaro.org>
+Date: Tue, 06 May 2025 18:10:09 +0200
+Subject: [PATCH RFT v3 3/3] fastboot: integrate block flashing back-end
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAF40GmgC/22NwQ6CMBBEf8Xs2TVlLSiePPkBxpvhAKWFjYQlb
- UM0hH+3IR49vpnMmwWC9WwDXHYLeDtzYBkTHPc7MH09dha5TQykKFdanTHKxAZdHWIjErEZXmh
- ym2nT5iWRhjScvHX83qRPuN8eUKWw5xDFf7ajmbbq5yz/OWdChaY4FY6yVmfaXQceay8H8R1U6
- 7p+After0+6AAAA
-X-Change-ID: 20250408-topic-fastboot-blk-c5e14cd59224
+Message-Id: <20250506-topic-fastboot-blk-v3-3-d94be5829f46@linaro.org>
+References: <20250506-topic-fastboot-blk-v3-0-d94be5829f46@linaro.org>
+In-Reply-To: <20250506-topic-fastboot-blk-v3-0-d94be5829f46@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>, 
  Dmitrii Merkurev <dimorinny@google.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2020;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6809;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=KLK76K8YFdV3RfinJ23LsM+vFOE+DLKODTKB4dtLlAM=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBoGjRiZ3Ad1nvTxtw+46h84D4qsygk9Nb3qXfWbR5S
- xYtT0AOJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaBo0YgAKCRB33NvayMhJ0U5qD/
- 9IE0p+1zef3ZeG5uFcHZWJ5DgkwxlT1uEg8WXuDSbhQ/zJwCY/xkGrv/vUyebX2kteDfqKi6BWUwNd
- n9N5YnYpY6xXLCF8CV2bVkMMMatjAXaoju44IMYzGps5i0FZkTTKSScKp49GlmGBBEzxxijpKhqQyT
- zwQVxAI6LoMCqiZmtB70JLEnURPctSch3VqgcABpCBfMRlTbqGjYbne4chHxUkZxTtWnfoZJB7Db8G
- sKrcHk3wUn9h54QmZtVI/4/Faq7XF2awNcYtNL7SaGjrWOCx3sCZqb78HWWE72ZA0c9Nl1VLzGuZJE
- vRTRy9CaZrqYU73r9aT5AXwnrOVIsORAat0KgYbKSC6bH0pqU1IqXmfl8AGhR/FbLPYhqkLjGHrnRa
- TAhCor6EtcajjnbF0K7jEwES5o5PjDUJlwUUS9r+nX1mX5C4O+vZDDBJK9DHg1B5zwrX5Up5Kgay2e
- eO2uyEFQYSgTiu0O5Rr2z1IISzB4SlHGMmMh41c65va0MGLooXihxDs/i29JwlF/kx+g8T1bqWfd1u
- aEPYak1GbWkOHISNJhHJp96i048YcbX1yIW6Elg1I9Is2wDzrDDWntkCghEKAwskYoN+HHXcGdBoLA
- r6jrNgbsLM2HWRD9AuUpcrq7pDjUaA04Kf85pZXzPQO59QXcJnOWeoeD4/gg==
+ bh=zGJrKdXkNJR8l9GpIB0ZjvxL62DS9PORGV3xh9A2bCM=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBoGjRjPo/a+OunyUxAJLTJWMrJZzCGZQlIqSk7TOXJ
+ Nj8FsuuJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaBo0YwAKCRB33NvayMhJ0d+YEA
+ DBzIph8NAJo0/fA1VcIdGnUKditG7mOXNxPYtzDECJDD3T8IuIiVCODX/66w0uvI1bqMJprjdaAOdY
+ qwAKI9dfEKb/DZRZf9DwqmKER1rRkt61p0/Hg4tKIisWZvCKgROTtPDZdp3dAF2z0ocJsP3mTP1KgG
+ T5HYzxZRI+Mqf6VjD+RORjgn3m6wd0//ZpvYm4KgVNRBv1smTJu4MTahwh3PYA+k7YD8aGi/y3b7Vt
+ WKcb51UsZpZOc+j1dPfI4TqVDvRFvSlzNpAb5hrizKqlmxbbh9sjioVSX0cJixo2XJ+CxFCN3CEVgn
+ kp9EYA6QSxvGj7qbzrq/c5VekcbmJTKD+uEf4jDyG56xuENLn9RR5Y1PXNhKtXgAmXErgPxIXRoCkv
+ IDVwSKTj//1znqpdn3+hULPNSlnRMg54kPuLVyuA3CN1RqtkgEGLK/1+X6ouBnukyMZCQtMPDfJSl3
+ KUvvqnsZPjsi9PPnGRBnnZ3eXHUbcLuV/0YYWX56Ks0EqRxpOTvp4E/2Ir7oFiQXcXJoSIj68szm9o
+ A8sKFkhxle6AYhk2i+41uh5kquzgv+zUfD3/WfK3i1B4o/Bjog7y5g3Y0QptrEesgG4jC+hhJfN16z
+ NRVHq+RuOhYqYeb21ZUvkJUKWd5ulCTAmU+N0/gW4KTUwxnv3kIF1PMKfL+w==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -120,56 +115,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This serie permits using any block device as target
-for fastboot by moving the generic block logic into
-a common set of helpers and also use them as generic
-backend.
+From: Dmitrii Merkurev <dimorinny@google.com>
 
-The erase logic has been extended to support software
-erase since only 2 block drivers exposes the erase
-operation.
+1. Get partition info/size
+2. Erase partition
+3. Flash partition
+4. BCB
 
-Tests are welcome to make sure this series doesn't
-introduce any regressions on the emmc backend.
-
+Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Changes in v3:
-- Move Kconfig/Makefile changes over the 2 patches
-- Relicence to GPL2 with Dmitrii approval
-- Move soft erase in a separate function
-- Update help text of Kconfig BLOCK entries
-- Add warning at init if MMC was selected with BLOCK backend
-- Link to v2: https://lore.kernel.org/r/20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org
+ drivers/fastboot/Kconfig      | 24 ++++++++++++++++++++++++
+ drivers/fastboot/Makefile     |  1 +
+ drivers/fastboot/fb_command.c |  8 ++++++++
+ drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
+ drivers/fastboot/fb_getvar.c  |  8 +++++++-
+ 5 files changed, 58 insertions(+), 5 deletions(-)
 
-Changes in v2:
-- Dropped applied virtio erase patch
-- Reorganize patches, introducing helpers first, using them in mmc afterwards
-- Added soft-erase logic
-- Added move helpers to handle the partitions erase & flash from emmc
-- Fixed const var on last patch
-- Link to v1: https://lore.kernel.org/all/20240306185921.1854109-1-dimorinny@google.com/
+diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+index 33825ee408fbd9aff26cd390a140421c7c98ecc3..68967abb751ed512f157bc32bfafc863943a2265 100644
+--- a/drivers/fastboot/Kconfig
++++ b/drivers/fastboot/Kconfig
+@@ -119,6 +119,10 @@ config FASTBOOT_FLASH_NAND
+ 	bool "FASTBOOT on NAND"
+ 	depends on MTD_RAW_NAND && CMD_MTDPARTS
+ 
++config FASTBOOT_FLASH_BLOCK
++	bool "FASTBOOT on block device"
++	depends on BLK
++
+ endchoice
+ 
+ config FASTBOOT_FLASH_MMC_DEV
+@@ -193,6 +197,26 @@ config FASTBOOT_MMC_USER_NAME
+ 	  defined here.
+ 	  The default target name for erasing EMMC_USER is "mmc0".
+ 
++config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
++	string "Define FASTBOOT block interface name"
++	depends on FASTBOOT_FLASH_BLOCK
++	help
++	  The fastboot "flash" and "erase" commands support operations
++	  on any Block device, this should specify the block device name
++	  like virtio, scsi, etc...
++	  The mmc block device type can be used but most of the features
++	  available in the FASTBOOT_MMC will be missing.
++	  Consider using FASTBOOT_MMC on a MMC block device until all
++	  features are migrated.
++
++config FASTBOOT_FLASH_BLOCK_DEVICE_ID
++	int "Define FASTBOOT block device identifier"
++	depends on FASTBOOT_FLASH_BLOCK
++	help
++	  The fastboot "flash" and "erase" commands support operations
++	  on any Block device, this should specify the block device
++	  identifier on the system, as a number.
++
+ config FASTBOOT_GPT_NAME
+ 	string "Target name for updating GPT"
+ 	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
+diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
+index c2214c968ab357371f5d3d27ecc9c1a3e9404e89..91e98763e8eab84ccd9b8e5354ff1419f61ef372 100644
+--- a/drivers/fastboot/Makefile
++++ b/drivers/fastboot/Makefile
+@@ -3,6 +3,7 @@
+ obj-y += fb_common.o
+ obj-y += fb_getvar.o
+ obj-y += fb_command.o
++obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
+ # MMC reuses block implementation
+ obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
+ obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
+diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+index 2cdbac50ac4a0ce501753e95c1918ffa5d11158d..e6aee13e01618ee6567bf00527d3df327ae06f1c 100644
+--- a/drivers/fastboot/fb_command.c
++++ b/drivers/fastboot/fb_command.c
+@@ -8,6 +8,7 @@
+ #include <env.h>
+ #include <fastboot.h>
+ #include <fastboot-internal.h>
++#include <fb_block.h>
+ #include <fb_mmc.h>
+ #include <fb_nand.h>
+ #include <part.h>
+@@ -337,6 +338,10 @@ void fastboot_data_complete(char *response)
+  */
+ static void __maybe_unused flash(char *cmd_parameter, char *response)
+ {
++	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
++		fastboot_block_flash_write(cmd_parameter, fastboot_buf_addr,
++					   image_size, response);
++
+ 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+ 		fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr,
+ 					 image_size, response);
+@@ -357,6 +362,9 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
+  */
+ static void __maybe_unused erase(char *cmd_parameter, char *response)
+ {
++	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
++		fastboot_block_erase(cmd_parameter, response);
++
+ 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+ 		fastboot_mmc_erase(cmd_parameter, response);
+ 
+diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+index 68f92c4b887c8442cc212b8613fb70c7251cdcdf..dac5528f80908bf5b1224284c9ecd492394e4f0e 100644
+--- a/drivers/fastboot/fb_common.c
++++ b/drivers/fastboot/fb_common.c
+@@ -97,16 +97,24 @@ int __weak fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
+ 		[FASTBOOT_REBOOT_REASON_FASTBOOTD] = "boot-fastboot",
+ 		[FASTBOOT_REBOOT_REASON_RECOVERY] = "boot-recovery"
+ 	};
+-	const int mmc_dev = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
+-					       CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
+ 
+-	if (!IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
++	int device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
++					CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
++	if (device == -1) {
++		device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
++					    CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
++	}
++	const char *bcb_iface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
++						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
++						   "mmc");
++
++	if (device == -1)
+ 		return -EINVAL;
+ 
+ 	if (reason >= FASTBOOT_REBOOT_REASONS_COUNT)
+ 		return -EINVAL;
+ 
+-	ret = bcb_find_partition_and_load("mmc", mmc_dev, "misc");
++	ret = bcb_find_partition_and_load(bcb_iface, device, "misc");
+ 	if (ret)
+ 		goto out;
+ 
+@@ -226,8 +234,14 @@ void fastboot_set_progress_callback(void (*progress)(const char *msg))
+  */
+ void fastboot_init(void *buf_addr, u32 buf_size)
+ {
++#if IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK)
++	if (!strcmp(CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME, "mmc"))
++		printf("Warning: the fastboot block backend features are limited, consider using the MMC backend\n");
++#endif
++
+ 	fastboot_buf_addr = buf_addr ? buf_addr :
+ 				       (void *)CONFIG_FASTBOOT_BUF_ADDR;
+ 	fastboot_buf_size = buf_size ? buf_size : CONFIG_FASTBOOT_BUF_SIZE;
+ 	fastboot_set_progress_callback(NULL);
++
+ }
+diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+index 9c2ce65a4e5bce0da6b18aa1b2818f7db556c528..f083b21c797dc7e55315f2cba017a4372483fa92 100644
+--- a/drivers/fastboot/fb_getvar.c
++++ b/drivers/fastboot/fb_getvar.c
+@@ -7,6 +7,7 @@
+ #include <fastboot.h>
+ #include <fastboot-internal.h>
+ #include <fb_mmc.h>
++#include <fb_block.h>
+ #include <fb_nand.h>
+ #include <fs.h>
+ #include <part.h>
+@@ -114,7 +115,12 @@ static int getvar_get_part_info(const char *part_name, char *response,
+ 	struct disk_partition disk_part;
+ 	struct part_info *part_info;
+ 
+-	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
++	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK)) {
++		r = fastboot_block_get_part_info(part_name, &dev_desc, &disk_part,
++						 response);
++		if (r >= 0 && size)
++			*size = disk_part.size * disk_part.blksz;
++	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
+ 		r = fastboot_mmc_get_part_info(part_name, &dev_desc, &disk_part,
+ 					       response);
+ 		if (r >= 0 && size)
 
----
-Dmitrii Merkurev (3):
-      fastboot: blk: introduce fastboot block flashing support
-      fastboot: blk: switch emmc to use the block helpers
-      fastboot: integrate block flashing back-end
-
- drivers/fastboot/Kconfig      |  28 +++-
- drivers/fastboot/Makefile     |   4 +-
- drivers/fastboot/fb_block.c   | 323 ++++++++++++++++++++++++++++++++++++++++++
- drivers/fastboot/fb_command.c |   8 ++
- drivers/fastboot/fb_common.c  |  22 ++-
- drivers/fastboot/fb_getvar.c  |   8 +-
- drivers/fastboot/fb_mmc.c     | 210 ++-------------------------
- include/fb_block.h            | 105 ++++++++++++++
- 8 files changed, 502 insertions(+), 206 deletions(-)
----
-base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
-change-id: 20250408-topic-fastboot-blk-c5e14cd59224
-
-Best regards,
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.34.1
 
