@@ -4,88 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F92C3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 09:33:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 675FAC3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 09:49:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94DB280BAE;
-	Tue,  6 May 2025 11:33:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DABAF80BAE;
+	Tue,  6 May 2025 11:49:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Izi1Ztzj";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GjUFMb/L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB09882076; Tue,  6 May 2025 11:33:02 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EDE4782161; Tue,  6 May 2025 11:49:38 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C386800D7
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 11:33:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C99A3800D7
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 11:49:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-30ddad694c1so57565451fa.2
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 02:33:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746523979; x=1747128779; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VvBupOc1kt9G4LF+ltgz0jSle1WPVBBvBQUc8QkHm2Q=;
- b=Izi1ZtzjNSvWXbSixZEPHMAK/A6wxVpDFTrZrnN+UVlxnVqvzts8euPtXm3/xE4Ktz
- 1rss7GlnYRplit6LgO2nJk1KJ1DaFjIKAG4Mz2xY1yFCoghyl5JttK/1UN6PQsodKZGF
- JLYTg1A4K5b0VvokYNz23TC7V5VIsZW5j/IX2dmFwWBEixcvwBS9/mrDJ2WUMJPusn6E
- JR9e+KMuqcOl+8bJflKqinVe3hrnOIxdhNFhoUo+TWEEv/fkI+Nqnn3PiXr9gmn/SEKv
- nabpZj/O46mCyN6K18pXAwRmH3cbItIXLHsyWo8rG4l+I16tJf2kfYHoFp6wV36TUo9x
- hBDA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 919A33F206
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 09:49:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1746524975;
+ bh=n5Ya788iIhJy4GHx4oN8Dqm5RWaFQmthBpPw2fy7tTg=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=GjUFMb/LDjMZp8v0wjY/WMolEqbwTRpRztejrHoinbSqyqKC/uuJC5Wnpe01sd33c
+ L21oGvJ26iMxcM/dtdo9e2nk+CFmM/DGYPagu85b8YB+3vexGucyxUEF0l5CSKOE9J
+ mQZb0aeEZi2uRAzixQhDViuAMBFQW7nCzYEsObgbCRfqW4WB80stMAnF7+5cvxcF7p
+ M5og46LSrZ0bz3aLpOCEiEu7BWy0C0ww8U6C4MFkwXpZaW56Vhp2vJwLL8tt90AU1I
+ laoorDaTs0q/AR8zMiY6FJ/ad4MZucTlG+Dksjjzy2qvmBL49VWzHUL3YilSKy52+L
+ N5My6EwaNTPuQ==
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-5f620c5f8e4so4104169a12.1
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 02:49:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746523979; x=1747128779;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VvBupOc1kt9G4LF+ltgz0jSle1WPVBBvBQUc8QkHm2Q=;
- b=XI74GkVOFP5oYUaZwAUVEkasZemhT0V/Bmxhc3AVAmvYz4Oz77yXZq4fuTzMpuIVPt
- 8oq1bqh6k0Oaz1k96zW4qOter52a+fkhmXqs0xhpF8ytG6SO3DnGAKp4PIF5hI9Zyepj
- nzteCghKepONrML16wco7T/8+DdMwI4Dr9s6vRH3cvwmfe5Bop2Lct5GmgdrQSQStGT0
- PQ6wCF/uIWFqzPVPnDdDABvtoLHHeVk2LX8loebVgCMItrhF/aHCyuEMicnhFq20rykm
- Hy5tL4ob6NKb/BmiGtodemz1RK4sPa+n9Ho0pTj+yBm4S0/iiop0gFBgVEyFav2Wl75x
- +cKQ==
+ d=1e100.net; s=20230601; t=1746524975; x=1747129775;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=n5Ya788iIhJy4GHx4oN8Dqm5RWaFQmthBpPw2fy7tTg=;
+ b=ciMJ2HEiwG/L9j570ViWDY2y83J0Eixoj6bWPrYy/CaX2o5O+wjndNKSMkAcixgYYR
+ fAYRES86ACOqTpZokF2icLlhN9bod+ciJjG73lckbYIavaZab0LTAo0kvt63nL/anjRu
+ mGlskB3mC+tXh9s3PLX7ikL9Jr8Z88xyWdVcW38OfZWDOKzyKr/1EvoNDh8EXgRgYwi4
+ 91B/C1Gc91SfJDOsnCmew0qwYdnamsV4hdq5Q/opEzmAT5SR4rYa1ot+hJf6HayG2jEg
+ JlNKgu8pz7ymLx+W+CbCVhjIsJIiSTTBXDWpxPa2Kc6DD5vZFr0laqtZcoyzLtfr73Ei
+ 12jQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCViQF184Ku+hCkUeYzlToEUuBlmDqJJvpkzzGhyvlVXll0epFAn9iePiOqt6LomambzowIcFYw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6Hnj1C4mKob55vSbh71+zqR5d7rxmf3ne25bNMq4EW0t3XXoo
- rwUQbCvuZs59NeW66Mh0baTeH0lW5uS2aCMVbILAjri/muYysXkJy7sqzqIjSyR4sX+7GnUvEBw
- uxV1YGwR/l+He8BlSWyAUcMU8nEY=
-X-Gm-Gg: ASbGncv0+adWf3+QCVVxqbqivAACZg+stbwagRN+huQo+lc/BAj3cwpvlejt0RMHfq8
- RPuMpPXQzMipT6KIf3PjkdzJZWYnW3qYpJPT3xsBFBj/bY6c86Ht3o2NAFy1BycShCnAuzvp3nK
- T5MSNstIoQVMx/5pRVbPwQkhM=
-X-Google-Smtp-Source: AGHT+IF0EAtj5IQ3itf62sgimz6wksN8MBUxEpBpzHMlNbhs6811Kpz5Ub9PjpE23azzcklVFOASurbqTiPuHMhtZGI=
-X-Received: by 2002:a2e:b88c:0:b0:30b:cc6a:ffd9 with SMTP id
- 38308e7fff4ca-3233ebe4f14mr37692671fa.0.1746523979061; Tue, 06 May 2025
- 02:32:59 -0700 (PDT)
+ AJvYcCVyBe22eL6ueIpmqpM5kJcExtQ07Kp2pnRFHRjwqRzCu6yJ4nWjMVLtx1ae9zqe3V+/lkN1Wgg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTXqP8iZSVqiwwTx45cujZSbSa2Ai4rRxeNBWM2v0f3wKbhW89
+ HtCCPos6ALJkggbfQdajTK6We6YJLZ5v47BIMEBywhSYgq/SoC07MVPKvnoqrgAUMWihwNMjKhK
+ SCuy1fxpuIG2ISRCdWRtgZT34RX1FUl7iya2vpT9rEJEHOoMm30UwSipjg8wEa8DX9DD7wWfrQB
+ 8=
+X-Gm-Gg: ASbGncs+URhnL8KJMsG+/NinGF3R6qcd/SmStzlE6VG0lHWaojMpozWK3aIGlJzy9LO
+ r1KISsxFYofIG5UkoOxiMbN5tC/3rz8clrNBg9lxtbVeO2XdBDXF4F4xhCQ+rtZdS3RTNjufGF4
+ eR2aAg9kJqnu40aZwSljndoi2x/t3IEKPUB61NGHpfBphmZHw4MFFlfDSn2xx3sAZUasBLx68Pu
+ YqtkaXeVDHJXAZXl2iyA16ra9JXs5wtF1k+EQB9rtbFAJtptirr+8xATdZjjeGWmnNc1Wzky4lb
+ OKE8ExZUPkk1fQOhRHqFZDYNBPoNBrpD
+X-Received: by 2002:a05:6402:5021:b0:5f3:26bb:8858 with SMTP id
+ 4fb4d7f45d1cf-5fab05e092dmr7785481a12.34.1746524975183; 
+ Tue, 06 May 2025 02:49:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHLt5OpQQZ2MpvhydvjWSKtMWZKdwca0lGN2tpWLvSBRTKFKvM0dnkL+v72zy3pB/qT7ZH+BQ==
+X-Received: by 2002:a05:6402:5021:b0:5f3:26bb:8858 with SMTP id
+ 4fb4d7f45d1cf-5fab05e092dmr7785468a12.34.1746524974836; 
+ Tue, 06 May 2025 02:49:34 -0700 (PDT)
+Received: from [172.20.6.239] ([213.157.19.135])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5fa777c8afbsm7507063a12.28.2025.05.06.02.49.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 May 2025 02:49:33 -0700 (PDT)
+Message-ID: <7c05f66b-1047-400a-816f-db0de0951def@canonical.com>
+Date: Tue, 6 May 2025 11:49:31 +0200
 MIME-Version: 1.0
-References: <20250428095945.1432389-1-heiko.thiery@gmail.com>
- <D9I6S5PD32TJ.3AGU7UM3EUOF6@kernel.org>
- <20250428142316.geminnotbfmbkpxs@skbuf>
- <PAXPR04MB85100048CC9987A31C4B578A88802@PAXPR04MB8510.eurprd04.prod.outlook.com>
-In-Reply-To: <PAXPR04MB85100048CC9987A31C4B578A88802@PAXPR04MB8510.eurprd04.prod.outlook.com>
-From: Heiko Thiery <heiko.thiery@gmail.com>
-Date: Tue, 6 May 2025 11:32:47 +0200
-X-Gm-Features: ATxdqUG3pkUq_onytF58gC4Q81QfKcFYv-9z-no_xq5yE-fa6zKsub5PH0yGpho
-Message-ID: <CAEyMn7b3DXKY7QETfxd0Lsi-3HwXL1E8QpD1SdyHnq0s3A5x1g@mail.gmail.com>
-Subject: Re: [PATCH] net: fsl_enetc: fix imdio register calculation
-To: Alice Guo <alice.guo@nxp.com>, Marek Vasut <marex@denx.de>
-Cc: Vladimir Oltean <vladimir.oltean@nxp.com>,
- Michael Walle <mwalle@kernel.org>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Ye Li <ye.li@nxp.com>, "tharvey@gateworks.com" <tharvey@gateworks.com>,
- =?UTF-8?Q?Thomas_Sch=C3=A4fer?= <thomas.schaefer@kontron.com>, 
- Wei Fang <wei.fang@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] riscv: set the width of the physical address/size data
+ type based on arch
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+References: <20250506092401.646595-1-sughosh.ganu@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250506092401.646595-1-sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,109 +114,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice, Hi Marek,
+On 5/6/25 11:24, Sughosh Ganu wrote:
+> U-Boot has support for both the 32-bit and 64-bit RiscV platforms. Set
+> the width of the phys_{addr,size}_t data types based on the register
+> size of the architecture.
+> 
+> Currently, even the 32-bit RiscV platforms have a 64-bit
+> phys_{addr,size}_t data types. This causes issues on the 32-bit
+> platforms, where the upper 32-bits of the variables of these types
+> can have junk data, and that can cause all kinds of side-effects.
 
+How could it be that the upper 32-bit have junk data?
 
+When we convert from a shorter variable the compiler should fill the 
+upper bits with zero.
 
-Am Di., 29. Apr. 2025 um 03:19 Uhr schrieb Wei Fang <wei.fang@nxp.com>:
+> 
+> This was discovered on the qemu Riscv 32-bit platform  when the return
+> value of an LMB API was checked, and some LMB allocation that ought
+> not to have failed, was failing. The upper 32-bits of the address
+> variable contained garbage, resulting in failures.
+> 
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+> 
+> Note:
+> Although the LMB API cleanup series depends on this patch, I am
+> sending it separately so that it gets noticed by the RiscV
+> maintainers. Sometimes a patch may not get the required attention when
+> sent as part of another seemingly unrelated series.
+> 
+> 
+>   arch/riscv/include/asm/types.h | 9 +++++++--
+>   1 file changed, 7 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/riscv/include/asm/types.h b/arch/riscv/include/asm/types.h
+> index 49f7a5d6b3a..45d806c83eb 100644
+> --- a/arch/riscv/include/asm/types.h
+> +++ b/arch/riscv/include/asm/types.h
+> @@ -35,8 +35,13 @@ typedef u64 dma_addr_t;
+>   typedef u32 dma_addr_t;
+>   #endif
+>   
+> -typedef unsigned long long phys_addr_t;
+> -typedef unsigned long long phys_size_t;
+> +#ifdef CONFIG_PHYS_64BIT
+> +typedef u64 phys_addr_t;
+> +typedef u64 phys_size_t;
+> +#else
+> +typedef u32 phys_addr_t;
+> +typedef u32 phys_size_t;
 
-> > > > With commit cc4e8af2c552, fsl_enetc register accessors have been
-> > > > split to
-> > >
-> > > With 'commit cc4e8af2c552 ("net: fsl_enetc: Split register accessors")'
-> > >
-> > > > handle different register offsets on different SoCs. However, for
-> > > > internal MDIO register calculation, only ENETC_PM_IMDIO_BASE was
-> > > > fixed without adding the SoC specific MAC register offset.
-> > > >
-> > > > As a result, the network support for the Kontron SMARC-sAL28 and
-> > > > probably other boards based on the LS1028A CPU is broken.
-> > > >
-> > > > Add the SoC specific MAC register offset to calculation of
-> > > > imdio.priv to fix this.
-> > > >
-> > > > Fixes: cc4e8af2c552 ("net: fsl_enetc: Split register accessors")
-> > > > Signed-off-by: Thomas Schaefer <thomas.schaefer@kontron.com>
-> > > > Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
-> > >
-> > > With the nitpick above:
-> > >
-> > > Reviewed-by: Michael Walle <mwalle@kernel.org>
-> > >
-> > > > ---
-> > > >
-> > > > But the question that now arises is, does this code path work on the
-> > > > imx SoCs as well. Now the imx specific offset 0x5000 is added here
-> > > > and was not used before.
-> > >
-> > > Maybe the imx9 doesn't use the internal MDIO controller or the board
-> > > which was this tested on doesn't use the PCS?
-> > >
-> > > -michael
-> >
-> > The imx specific offset 0x5000 should be correct.
-> >
-> > In downstream, the ENETC_PM_IMDIO_BASE macro is used in common code, but
-> > defined twice - there is a conditional include of either fsl_enetc.h, or
-> fsl_enetc4.h,
-> > depending on whether CONFIG_ARCH_IMX9 is defined. Thus,
-> > ENETC_PM_IMDIO_BASE is replaced either with 0x8030 or 0x5030 in
-> > downstream.
-> >
-> https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/fsl_enetc
-> .
-> > c#L25
-> >
-> https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/fsl_enetc
-> .
-> > h#L76
-> >
-> https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/fsl_enetc
-> > 4.h#L126
-> >
-> > I guess Marek fell into the pitfall when upstreaming.
-> >
-> > > > Can someone please test this on an imx9 and confirm?
-> > > >
-> > > >  drivers/net/fsl_enetc.c | 4 +++-
-> > > >  1 file changed, 3 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c index
-> > > > 52fa820f51..97cccda451 100644
-> > > > --- a/drivers/net/fsl_enetc.c
-> > > > +++ b/drivers/net/fsl_enetc.c
-> > > > @@ -473,13 +473,15 @@ static int enetc_init_sxgmii(struct udevice
-> > > > *dev)
-> > > >  /* Apply protocol specific configuration to MAC, serdes as needed
-> > > > */  static void enetc_start_pcs(struct udevice *dev)  {
-> > > > + struct enetc_data *data = (struct enetc_data
-> > > > +*)dev_get_driver_data(dev);
-> > > >   struct enetc_priv *priv = dev_get_priv(dev);
-> > > >
-> > > >   /* register internal MDIO for debug purposes */
-> > > >   if (enetc_read_pcapr_mdio(dev)) {
-> > > >           priv->imdio.read = enetc_mdio_read;
-> > > >           priv->imdio.write = enetc_mdio_write;
-> > > > -         priv->imdio.priv = priv->port_regs + ENETC_PM_IMDIO_BASE;
-> > > > +         priv->imdio.priv = priv->port_regs + data->reg_offset_mac +
-> > > > +                            ENETC_PM_IMDIO_BASE;
-> > > >           strlcpy(priv->imdio.name, dev->name, MDIO_NAME_LEN);
-> > > >           if (!miiphy_get_dev_by_name(priv->imdio.name))
-> > > >                   mdio_register(&priv->imdio);
-> > >
-> >
-> > Reviewed-by: Vladimir Oltean <vladimir.oltean@nxp.com>
-> > Tested-by: Vladimir Oltean <vladimir.oltean@nxp.com> # LS1028A
-> >
-> > +Fang Wei to confirm/test for i.MX95.
->
-> Hi Alice,
->
-> Can you help check this patch on i.MX95?
->
+This matches what has been done for ARM.
 
-Friendly reminder, are you able to confirm that?
+86c915628d58 ("riscv: Change phys_addr_t and phys_size_t to 64-bit") 
+changed the definition to 64bit phys addr_t to support the 34bit 
+physical addresses (similar to LPAE on arm32).
 
+I don't think that we need 34bit support currently. But I would prefer 
+if we could find the root cause why the upper 32bit gets messed up as 
+this might point to a generic problem.
 
-BR,
-Heiko
+Best regards
+
+Heinrich
+
+> +#endif
+>   
+>   #endif /* __KERNEL__ */
+>   
+
