@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56C99C3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 16:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5960C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 16:49:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A576F82153;
-	Tue,  6 May 2025 18:44:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 577D082153;
+	Tue,  6 May 2025 18:49:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q7u959CA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FO/gogTH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8796582163; Tue,  6 May 2025 18:44:42 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id E55AC82162; Tue,  6 May 2025 18:49:36 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65F9781FAB
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 18:44:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C96EF81FAB
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 18:49:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3f8df49e75fso1384756b6e.1
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 09:44:40 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-72c09f8369cso1940183a34.3
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 09:49:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746549879; x=1747154679; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746550173; x=1747154973; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uw85h3nU7Qh5diujtbhxpICa+yD3uQUaJKGeLQHwncI=;
- b=Q7u959CAcHxl70pjzTn7Y5V1wUZykxBeVr35VhfrEvvVmzJPBvkZDkQh/3qM688f5A
- 8mUK8DMTVHzkp/MkOZxwxnWU9T4LsJzOuAoSx6AcUk3sUTh7+a64XaK7NkKru9DmHXC+
- dZy0wcr9/XaTsYCMdMWUhdPPcU0RRDThZFk8Y=
+ bh=wqGfO+Ssd5tnIPu21HHjKNCVKaUPNeFh+Fhd7yYuCZ8=;
+ b=FO/gogTH+yLhfx2pniK6JBZ2EwU5THz8hmzrv7SiHDJ6ED0Kiz6rWvwLmtuBnM5Dcv
+ Ik9WwBeiHgxdPzLgHU3Hu3qkk4OXzFn7rQHUmmiu7BhonfoAlaYauwtoiif6f/TiX5tW
+ 1TdMlDVwh1XIPd74G9goifkgicrejDDfxIw5g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746549879; x=1747154679;
+ d=1e100.net; s=20230601; t=1746550173; x=1747154973;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uw85h3nU7Qh5diujtbhxpICa+yD3uQUaJKGeLQHwncI=;
- b=M0WNINDioohXdCbPeR3yEXyOeGNbZBKFo2IdCNttkbAmoOZq1SoO19FPygL5dfsvMt
- ZpxSQvUhvfjUFLLZEXPrWZgNCOcpGWgURslGB7HU0idQ73zER711JDt2cI0Zcf+o0g1p
- 4DSU6rhYvfHF1MvKAMfZHyGPTK0vrkzlk15WGyCPR1HtHxJq/PPGr7n31TpzDqQONWLb
- KvsI+0C2Xu8vTsGYS61YPPIdFezCc8gMEzBpaN7nNXC6MPQ6thJUVM72uYr5M7ohGwBR
- Z89pLj3DXyTiizclVaw31CriLhL4h1VoUFeVdwwyHv3Ywjr3iA+5qN+gFUzbuilAOZxw
- v45Q==
-X-Gm-Message-State: AOJu0YyWFzDp0zgA6BQ9IOuKIWBVm/m7g/8ZfajEyqK2mW5O8WuV0LgW
- cQt5az1pGM9oo//+QFhTGZqgOm8HljGtdwnZhgMCw5ACQwjIBUy2F51HBBFBzHfTub/PNA4pbXO
- d
-X-Gm-Gg: ASbGncvD/SCtZdmn89o/qzaxH81pvwYfjDPeJD2B3uXB6cWiuRMdMoRioMI0CY6fuBK
- IG1vQrEXUA0WyEVvLJcEoF2uRXF/Jtxe1vS4xMCNRwY2qfmqB0jCLB3qlpW1yNKC3i/Yppssnmo
- ch09aVmtH+SExm+KQ0TkNHbiR25G6Vzohdx1m7ofeDMVRH/FW6IeSBkaBC6isDpdu2MeVGw/uWI
- rBCsGr02xwlsBSUfp9cKWF5lhLUj0tXTLbAI0MGMWRddJaszgECRPU1W26aUq4EvJQH71D5XCUm
- 8VJJt0MaVCqNTc15uW2s08D1NN639z9N5I7Z2Paq7HYPck3xgja94B79QketVciLdWDo160GH0b
- X6g==
-X-Google-Smtp-Source: AGHT+IEWoXXPsgZM6En/sAEwhJYhBUEbs/Mx72LVsvJRJqMh1/QLYeOwUFRFlo2wL6OEklT7r2AM5A==
-X-Received: by 2002:a05:6808:3848:b0:401:e933:5de2 with SMTP id
- 5614622812f47-4036f08983fmr12163b6e.18.1746549879001; 
- Tue, 06 May 2025 09:44:39 -0700 (PDT)
+ bh=wqGfO+Ssd5tnIPu21HHjKNCVKaUPNeFh+Fhd7yYuCZ8=;
+ b=e8TqD92n1g/dKqEfcuwvXWlby7c2QqELXEbgI/kSx1aMxUpeXQzcFjwXpWe0P7/E6A
+ YHJF9EpT12rNGFVfaJtA9LLvCn8J8RmxJ65dBkzLr59n16GaxfbqJrY2TQzjqZZNsrv4
+ KWS6oXgLOxW6mmP8Mu6D+qSoG62kR6krPTuGsvEfeyTMs20/KTQoY1Y71Y5GC5sSzzDV
+ ky34oFB+ti+D/vZtGwiwAwfQMrOrysqZgX1diwa5lOyI0hJdvxt+QFPTD2yY908PnmQF
+ W03RHyiCHxcqga+xlBuL9b6zNLgkwdlnlKyt3H+KLyG2D0DKQXZGT/PLHO6ngds+Teta
+ NzvA==
+X-Gm-Message-State: AOJu0YzzfYl8chCmZy1dQKljlgQkkVRkKZEiR/EE1AfsFMsy+6Pp/qyu
+ wf6C8GcaWiRH/o7LlXz4gjzdqjvQbkLQisyyKv/6Mf/QZBEqUDdl96+eXpABLHKlMEKJH81Tu6P
+ Y
+X-Gm-Gg: ASbGnctoiMfGsy9XN5gToWa45Yd3jSrWLuuOYXPVWZKp324CaiRiVo620UhH6FKOc4T
+ RqgBiNdlqB9hNJ2ElSoXAQAJTz8zM91++WeMbE1Ywz8a5+w+pGmhGt7dffrhQkZ/bSgMRflL0tI
+ 75HAGAQgJfP1v4calbrK7yqjFb+CvT6H9Y7AUiR3TV5vmJSJW8na2Qqk3d0zhJqejc8egx6LN3U
+ +Pi+veLVyF07MtpPwQNpC2N4YmJQ+kBidvGHXhh82ruP/09jWxM4wRjL1ZCr8SXGe0QTmyEV2TY
+ EusefMIK6grTTtDCGE2qeOaKDm+eE5EFf9j/SvzB19DUcacdqTk0OCtrMOW8uvXWUszKecZBPVZ
+ GYQ==
+X-Google-Smtp-Source: AGHT+IEldTDqypFVG7DgQPmALaIye75My/1aopU2Xc1MRs28UpdPcmCsPdDzIosNxSMlysZybLm4uw==
+X-Received: by 2002:a05:6870:f21a:b0:2d8:957a:5178 with SMTP id
+ 586e51a60fabf-2db3cdf5603mr2063973fac.21.1746550173557; 
+ Tue, 06 May 2025 09:49:33 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4033d9c21e4sm2600459b6e.17.2025.05.06.09.44.38
+ 586e51a60fabf-2daa0f8bcfasm2785352fac.28.2025.05.06.09.49.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 09:44:38 -0700 (PDT)
-Date: Tue, 6 May 2025 10:44:36 -0600
+ Tue, 06 May 2025 09:49:33 -0700 (PDT)
+Date: Tue, 6 May 2025 10:49:31 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Rasmus Villemoes <ravi@prevas.dk>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 00/11] regex patches
-Message-ID: <20250506164436.GZ5430@bill-the-cat>
+Subject: Re: [PATCH 01/11] cmd: test: add support for =~ operator
+Message-ID: <20250506164931.GA5430@bill-the-cat>
 References: <20250506141035.385756-1-ravi@prevas.dk>
+ <20250506141035.385756-2-ravi@prevas.dk>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kq1UbswogjGjutHT"
+ protocol="application/pgp-signature"; boundary="rg5GAL2BgdyM24OT"
 Content-Disposition: inline
-In-Reply-To: <20250506141035.385756-1-ravi@prevas.dk>
+In-Reply-To: <20250506141035.385756-2-ravi@prevas.dk>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,47 +98,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kq1UbswogjGjutHT
+--rg5GAL2BgdyM24OT
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 06, 2025 at 04:10:24PM +0200, Rasmus Villemoes wrote:
+On Tue, May 06, 2025 at 04:10:25PM +0200, Rasmus Villemoes wrote:
 
-> This started as a rather simple patch, 1/11, adding the ability to
-> more conveniently do regex matching in shell.
+> Currently, the only way to make use of regex matching in the shell is
+> by using "setexpr [g]sub" command. That's rather awkward for asking
+> whether a string matches a regex. At the very least, it requires
+> providing setexpr with a dummy target variable, but also, the return
+> value of setexpr doesn't say whether any substitutions were done, so
+> one would have to do some roundabout thing like
 >=20
-> But with that, it became very easy to see what the slre library can
-> and especially what it cannot do, and that way I found both outright
-> bugs and a "wow, doesn't it support that syntax" gotcha. I couldn't
-> find any tests ('git grep slre -- test/' was empty), so I added a
-> small test suite and tweaked slre.c.
+>   env set dummy "${string_to_test}"
+>   setexpr sub dummy '<some regex>' ''
+>   if test "${dummy}" !=3D "${string_to_test}" ; then ...
+>=20
+> When CONFIG_REGEX is set, teach the test command a new operator, =3D~,
+> which will allow one to more naturally write
+>=20
+>   if test "${string_to_test}" =3D~ '<some regex>' ; then ...
+>=20
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-I will say I worry there might be users depending on the bugs you've
-fixed here, but I don't think that's a reason to not fix the bugs. We
-can if needed deal with bug compatibility some opt-in way if required in
-the future. And yes, this is a note to anyone in the future that has hit
-upon the problem.
+We should also mention here (and then in docs) that this the same as the
+=3D~ operator in bash, which I only learned about now as part of answering
+my own question of "Are people going to expect =3D~ to do something
+else?".
+
+With that,
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---kq1UbswogjGjutHT
+--rg5GAL2BgdyM24OT
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgaPGsACgkQFHw5/5Y0
-tywjiAv/UfhGFXjP8Xi53rzBdj242gByJiZNZzKCLPTXbyD/RsKhpdaiINeBKvpC
-UCBBozhoCT4mNwSJAql0WB58sG1nVBeWXzyrMJMCxbJ0IsuLn0cp4TeeSNCmCP/o
-gv19+2dRBgbwtkCwPkIgrgZ30+OmhN1bjhi641v+JZKQPzmq2THJDX74MBjBdfof
-NtKBkLuSfUSNaLMF5z3oGdPKfpjEb5Wxx+WA/PWxiPgdUCZcHo2l+WxJydOAwWw+
-apGz0Y4xGAhv7M4QxjoUOSPzWNj9iZVuqfNTcVh6/GJaXXdOY35mVAWGdX7jHh9/
-aQ718dyfNwMpkm0enRUD6tReQlTOVm67dAphQtjepCD7EBtX7aCZwUZc7y+rDjJu
-Iypd2WfVLTBMglOhj7Gu+QlsNr54HO5ABXS99D1JCj7xnHol2DG3ddGkncFzmBkv
-MoozlbVj/LYCECSGjZkQHSPWcMePfdcV7HFLVS6YoAVVIlTGMFJyuAr9oiwyEnLI
-6JoE1B+K
-=H75e
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgaPZsACgkQFHw5/5Y0
+tyzjUQv9H/pFJMtVjNWhVhthqsCYwS/TbLugIEahcQlTOxhNgV8AYeBmqfC8XeL2
+M+rgRUQMgaUPZ14kWmj9EyyJdOeJovUpNFCTgyixQp+sYTY6n5niHCb7vN4S0NQK
+oyr9MfwseDjW47YsaP4fwWClxeAgz+wYurvS2YaYL4EvWDcmis9NdvzBtpaGJUJk
+DcNv45Vw2dT1bnu/8Y0JgFldIAjmFfJVMrPibUxyJq5AARrI5RLyMhOSpYQpdRxM
+MuvfOz86nxzPP+cY/ZJGIB7qFHKV3XydeJbK6ntUJTAaesHqEpZ3eHDtuUpMEleS
+dRgO8t4PkE1MegWpLhnF4P/lguIqkUq6+H9sCvCek3hiSgcMxvpr1ljJXllcNnR6
+cJJdVSIb8D3+rp9mUIYCpoPSWShOxP4D//J5wKf6Er6X9sIgPyTUeLbaaZ0ORwFS
+ns205hYqqBvUVq2NQdNbQa931xuFgT/YKbjhxEqgmO6bC3V+lbyr3FUM3LP9xgVQ
+VG+el7YN
+=Vl2k
 -----END PGP SIGNATURE-----
 
---kq1UbswogjGjutHT--
+--rg5GAL2BgdyM24OT--
