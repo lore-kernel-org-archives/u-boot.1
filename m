@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7DDFC3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 07:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89366C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 07:55:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B038A82935;
-	Tue,  6 May 2025 09:55:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3F05826B2;
+	Tue,  6 May 2025 09:55:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gvsYcybq";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="hkc/rkfm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3802E8291D; Tue,  6 May 2025 09:55:42 +0200 (CEST)
-Received: from mail-m60135.netease.com (mail-m60135.netease.com
- [210.79.60.135])
+ id B6D4B828C2; Tue,  6 May 2025 09:55:50 +0200 (CEST)
+Received: from mail-m49218.qiye.163.com (mail-m49218.qiye.163.com
+ [45.254.49.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D48F800C1
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 09:55:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28BEA800C1
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 09:55:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 14172c027;
- Tue, 6 May 2025 15:55:34 +0800 (GMT+08:00)
-Message-ID: <f939821a-438e-403f-aba0-81ecb444539a@rock-chips.com>
-Date: Tue, 6 May 2025 15:55:34 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 14172c05d;
+ Tue, 6 May 2025 15:55:43 +0800 (GMT+08:00)
+Message-ID: <f301b865-468d-4aa9-aaef-47bffe68cdaa@rock-chips.com>
+Date: Tue, 6 May 2025 15:55:42 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/13] pinctrl: rockchip: constify rockchip_pin_ctrl
- for RK3128
+Subject: Re: [PATCH v2 06/13] pinctrl: rockchip: constify rockchip_pin_ctrl
+ for RK3188
 To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>,
  u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
 References: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
- <20250131-rockchip-pinctrl-const-v2-5-59bf93968ce7@cherry.de>
+ <20250131-rockchip-pinctrl-const-v2-6-59bf93968ce7@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250131-rockchip-pinctrl-const-v2-5-59bf93968ce7@cherry.de>
+In-Reply-To: <20250131-rockchip-pinctrl-const-v2-6-59bf93968ce7@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCTRlOVh4fTE8fHkoaQhlKT1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTxpPVktJGBlOGBpMQhlJH1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
-X-HM-Tid: 0a96a497d05503afkunm14172c027
+X-HM-Tid: 0a96a497f19303afkunm14172c05d
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PQw6Thw4KTJLThcVAwk6ASIW
- KikaCQ1VSlVKTE9NTkpDSkhNTU1PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PE06NBw4QjICDRc*Ew1OCB0#
+ PDNPFBZVSlVKTE9NTkpDSk9OSUtOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
  EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlLTkM3Bg++
 DKIM-Signature: a=rsa-sha256;
- b=gvsYcybqVD7EY3Lc/7LtXYWHwucc8Y9viIGWKyeEbuxJcNFnQCvEJeJP176hNhZVJJLhCfZBDUMWQxqHT5SalGNGHvCt1nV+B8cYWHH3GSz+BleIe5PLfZVrB2X8wDjuXyRSU/DxoDPYy4GDc/HxnpbBYtD1IndKsifiP4M0GwE=;
+ b=hkc/rkfm+g0kSEiWBbmE41fD+VWqi2DwL6MtOrg6WOa7/lk1NFdhOatjtJJjscjD3jppmLh2YHjlLxbhxBPLYScsjzLqR3LVBUXS21UwuWh6M0EF8/mY5jiVjl/Biu6Y1qlY5xsPaHkhbeOAkz1KAoUjlpjPHM5EbLu6S1VEodw=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=HpbQ22P82E+mZU7y6g1WBiU+1+t0mXRFr8pcr/Umbls=;
+ bh=w7sx9pWlCJeiq7JHiByiHcPzYwbB61vNsA5Tg5T4Ee4=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,20 +90,20 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   drivers/pinctrl/rockchip/pinctrl-rk3128.c | 2 +-
+>   drivers/pinctrl/rockchip/pinctrl-rk3188.c | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3128.c b/drivers/pinctrl/rockchip/pinctrl-rk3128.c
-> index d00fc3da8b234667a86d0afea10e47b700cb1e00..9f9c358694ac615f78011b196c22e1b597771c97 100644
-> --- a/drivers/pinctrl/rockchip/pinctrl-rk3128.c
-> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3128.c
-> @@ -171,7 +171,7 @@ static struct rockchip_pin_bank rk3128_pin_banks[] = {
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3188.c b/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+> index 83db51f66ae43c713a3f80a5442d1f8467a918e9..3a93db5622d70b85dafeea54e064d6df3551f35d 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+> @@ -105,7 +105,7 @@ static struct rockchip_pin_bank rk3188_pin_banks[] = {
 >   	PIN_BANK(3, 32, "gpio3"),
 >   };
 >   
-> -static struct rockchip_pin_ctrl rk3128_pin_ctrl = {
-> +static const struct rockchip_pin_ctrl rk3128_pin_ctrl = {
->   	.pin_banks		= rk3128_pin_banks,
->   	.nr_banks		= ARRAY_SIZE(rk3128_pin_banks),
->   	.grf_mux_offset		= 0xa8,
+> -static struct rockchip_pin_ctrl rk3188_pin_ctrl = {
+> +static const struct rockchip_pin_ctrl rk3188_pin_ctrl = {
+>   	.pin_banks		= rk3188_pin_banks,
+>   	.nr_banks		= ARRAY_SIZE(rk3188_pin_banks),
+>   	.grf_mux_offset		= 0x60,
 >
