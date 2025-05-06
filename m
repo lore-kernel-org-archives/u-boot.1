@@ -4,144 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F0C9C3ABBF
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 14:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B487C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 14:16:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C40B82AA4;
-	Tue,  6 May 2025 16:15:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A3B082A8C;
+	Tue,  6 May 2025 16:15:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Kq3GgSn7";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="RTYijONr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1453482AA4; Tue,  6 May 2025 16:15:30 +0200 (CEST)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on20621.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2607::621])
+ id BC8C782A0D; Tue,  6 May 2025 16:15:31 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20605.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::605])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD08182A4D
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 16:15:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B68B482A36
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 16:15:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NvNmprTUvIg/hEakCrQv9TThiZH7XCFjQ9j0q/9cSaIGHjwh6QAwtQ3cFEUj48pS8iYQ2LjQsYMIygMQtuzZPcJz1DaKg83pXFHqZcE9A23Y7/NE4xJiJOZKWP9kHLSJTsOXmVjDcSk0h63ZjTgiGEZsdZ8ra5PuZrzdzVOoYSPIFJGalNQtP9fwmTF+1mAIwhnZZ9dCXYxZ50qjCRRqYHxo1ti+mmoFG5ItXrHguHbcnJB/Hdch4wuun/UQAdVeAagpULx0OlKWjMZqW1tLBHiHCdqjHr6KcGz7+hVMFunrA9xkPCQBWmudh+iZjlFSJmYLqi0I0AdbSjBARQ1Uuw==
+ b=APAfRE4rOASZ+hedKM4bIc/vooh7pagzuasJqYAWq5gpOJGUO7Yss8DDg4mG++IApMskbiU9plYewBaHetTa18zG35kMdM7U1vX/qj62rbKBrCSy/jsOP56WO1oGSWhkepnKi5QXOtZoQgwl6sjtHNaG/BAdCub7N96ho9CcIhx53k+X3OrcWMqKDEO/amnzTZd5ZEYBvRbfDTE9NABw6WijtgVtmt2TFAyBbaTdcLnMsIP9nTwqdhdaMwPQdupYzDZMOhMFuFg41jROsaLqruCl/51VM1T3uvtSlLjhNSjyauKfK5XDCAUkDG/qwBYvbRB3iZYRCWZ69rTl2xeKxg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zIrsET06Dap8CBcRszHCoeUBi+Ti0qTPBJq8rGtLx8c=;
- b=CBFWkMWjkQctMY+sUxXD1iS/qMHxh/s+GTiwS+bnwLGIyn95aCLGn9UDla/O1RR6xVjVLceAa2/b0C5JmGxl+fkuUKfNavTAr6rdn8LvukSJoMlraLB/tz/lXyutU4fJ95jmBfujarofnN0QTWPGE2iqdts+XcNEr+7/EUuuOpNLuZpwbzOMB+OktYA5zufBKG0Yqe5PaaKw9lhF0SiXJE8bLY0V+bHn5jEcw4hAqRsqlTVhcU5pB5DufreSOswJ2O/vfL1o4JLAbpME4sTRZKQQ9vf6zILtGoog9zs2ZEcJRWcTtastbujU58OwYV07oPZt9OblOug2m7PGEl4OMw==
+ bh=jcGrWRYop98t90e2Q86OpjOmUk1zIs+Qn7j5QjhVP8I=;
+ b=ToPoC9XCmAxgE/8ROCKFHXLZg4e79Ra8KBs/NzJdeRAdizx/4lHGJxhf5JNJDvrtfbv1tXoeOBHt7BU3PlpXB/+RKXkbkr1TkIBainsVcXgBm9xlzMnl6R07ofiOow82vtoZv1td3ygcP4h3nTojSTc4OHU+E8483hiHGqsHses1UVmK1IC2GQtKnkROEKuA+BJolV6lZFyx4Sp2KP46iFQu61zSRv9bO9PHYF6sdZpV+yp7EPp8ofFDVvazmM9aWVWxrUfJYoZWhPVJeDGtuB6ksBznnONjQfa7zmdFOW4ImBgHip0iDUnx0f71GwxuK6gKOfpU12N+DSPuJ3qN0Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zIrsET06Dap8CBcRszHCoeUBi+Ti0qTPBJq8rGtLx8c=;
- b=Kq3GgSn7np38TM0MFjZgLTClqK31SnzAqbMSU/0NTJuYAqmMhNGeea+Ep4lfhuHEASMFDgTNDv8Tf+oL5VXiq49uJ6wJWlTWlJZMt8K1vdUXNAJS+751kFaGOF/SDTGtsDYdO7Q/Rv+CnSAtM5Ao3WnluGH7RvsU8O4Shg3/6EI=
+ bh=jcGrWRYop98t90e2Q86OpjOmUk1zIs+Qn7j5QjhVP8I=;
+ b=RTYijONrA6lPpSbL2TTRrNXBgFpbjhfudKlGFZCcXtYKNynrAYnBxDtPDgGQ00H4S7qhzo825OcXS9or9ADBR6BKf9qlY938BlhQfsG3n++ujWKANpFLc3EDhdWC4VrPaJKMU4cJpaXl9VG+0ylBZPVZPlAYODbLg4km4IJ0UDo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB8248.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4ca::21)
  by DU0PR10MB7237.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:44b::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.22; Tue, 6 May
- 2025 14:15:26 +0000
+ 2025 14:15:27 +0000
 Received: from DB9PR10MB8248.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::bb5b:4bac:5471:b769]) by DB9PR10MB8248.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::bb5b:4bac:5471:b769%4]) with mapi id 15.20.8699.026; Tue, 6 May 2025
- 14:15:26 +0000
+ 14:15:27 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
 	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH 07/11] slre: refactor is_any_but()
-Date: Tue,  6 May 2025 16:10:31 +0200
-Message-ID: <20250506141035.385756-8-ravi@prevas.dk>
+Subject: [PATCH 08/11] slre: fix matching of escape sequence used inside
+ character class
+Date: Tue,  6 May 2025 16:10:32 +0200
+Message-ID: <20250506141035.385756-9-ravi@prevas.dk>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250506141035.385756-1-ravi@prevas.dk>
 References: <20250506141035.385756-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0096.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::31) To DB9PR10MB8248.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: MM0P280CA0048.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::30) To DB9PR10MB8248.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:10:4ca::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB8248:EE_|DU0PR10MB7237:EE_
-X-MS-Office365-Filtering-Correlation-Id: ad8bbf20-a60d-4cc2-5cc9-08dd8ca87285
+X-MS-Office365-Filtering-Correlation-Id: 3b637e4e-75cb-46a8-bbdf-08dd8ca87355
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|376014|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zdnVpWS+tFScQf0q84xY4orsFoDM1o21IeVdaXBUERdUXbvoRrRUfuvDSCFg?=
- =?us-ascii?Q?tkNzHa+hpKqcGEKNQO7C55jRksQg3AIdCXNkXwLSv6yt5UZoAB9jx4GsxkNx?=
- =?us-ascii?Q?PnTs4oqNv+eGhmvjCh7w4pR5/Ml9Tkkm6tMneEMc3wXwdqIpub8o04Nry3e4?=
- =?us-ascii?Q?JJaL9RKJI6rW7wda/oxS1sozFqQptjpN8n+mnyFjn5OQCgiV+GZBepW0GbIe?=
- =?us-ascii?Q?95TdiCrR6BcJiQ2S+15gfODvIZdbOyTd/vkuZgXV/x57a7eqUubScUdTGOL3?=
- =?us-ascii?Q?Gg/Asr4x0UcYlh0Uijfa2i/yug16aC60wyJJ4r8FtwMBo64ZCF62QEVfqBws?=
- =?us-ascii?Q?0yQuF2yWxiq3CwQAn7eVWJQwaive4jQvSd9P97OTiVdEWZg15GIDNlA+ZtNG?=
- =?us-ascii?Q?RBHm6UxB3J/n/ZGhOwVnNn61iaT5SRDG61B76a1b623k8mGZ9LVYg/e/Osuw?=
- =?us-ascii?Q?aX98sRG0B1sm5lyP+xoEyJxF/hxOtS8NoRDqRHz6KGJDAMVnwxL7mrNotDRe?=
- =?us-ascii?Q?6N1JHGNjg7plQ93zKRAMPZcA5tgrHO5e1sG0MtO+2WL0gh4s2ruaWXgwpRPX?=
- =?us-ascii?Q?WmQhCUrfmHNzJN6PYlvw3Qy7WHAKtRkqNJPUAsZe5Ys2cQkEXZ2SYAdaKCm4?=
- =?us-ascii?Q?ikJskCZ+4/YeGEyyImXtQj81xPdrUFHe8Lqlgz8Hv71wYnMPib4DXrkVuEB7?=
- =?us-ascii?Q?6JktISufpChLQYvnjvceUv3TMT1BzwFWnK5DoOBWUecDJ5/RQXOmb/6HJ5OZ?=
- =?us-ascii?Q?S+boAPWTY7CW5wRK8cclc9zx0jNsRkjFrp/WLoiqwHKuYTROUjXKaq9BfSUf?=
- =?us-ascii?Q?gDmI61HDScvM6a6RodU5S0p3JMHnN+JbQN0bp5PYvhKkca+TMEPoMqjUvvxI?=
- =?us-ascii?Q?6TftLXA9rHC5d3RC1lFVvqozA3uQRdAyKryKZ8naYNYk1xC4lmDUXxXaAN9S?=
- =?us-ascii?Q?Mtb5drORLUd5kQuSQ8gE9P9OqVQUw7gQIVW20SR5pOPOUnDbKAvT+yUccBCP?=
- =?us-ascii?Q?BVsYPuAzD5CkO4FEbe4Y+l4mL0fX5gCu4wLRXPioYxbzScQP7R1oT1cX7AU0?=
- =?us-ascii?Q?dBxkl5040rrlRLgowAaM//Omuna/a2R+FjimbNpoCMfNtmV5az+AU8136Dpi?=
- =?us-ascii?Q?qaR4MkNujhvhtrl7y2pGgzIQhQIX9EJGjN+yTp4bSSBLdcSojtGvcY88CSnO?=
- =?us-ascii?Q?Zv1ln/MvX0z84bbYlvUz8GHWyst604H5kjhjUAltNiUbTrLWF5xftYS1W6PB?=
- =?us-ascii?Q?LLT68Tb8QBFrx2mrLx1FwdtAAGB82C93Bfe5gBa5md+pzktwXoY/KVS+ZhrF?=
- =?us-ascii?Q?Oz8fCH4XicJmSgoIJcTBz5/Qag6PS/jcW7dXgzu2d4eufxx87LC2wTVHexRP?=
- =?us-ascii?Q?haWhzxtCw7eGEupwCOAIgWcswZVVSbnEO0yKNO5Q1dkVsEjNNwK+6xBM+/Hg?=
- =?us-ascii?Q?Pg1MchSzH6HqoI+zyzjXkyV0QzCBMUTo31oUg2uSJb/f6CAoR8FQGQ=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BpL+eAEBurLXdpybRjasS1edzcamZYEL9BqnxwLDIjGBoexkt/1LCEuoSQYm?=
+ =?us-ascii?Q?QYnjFj/fbhR2UPU9VNA2cq6lo3qceFZ77PfvwXJjbkyxbztu9HRbLmWTE6QC?=
+ =?us-ascii?Q?U0yLqH4UPtsnL7WwWz3uALx893ta9a4I7lVCMSaTEZovwSPKxFe/PVFw7puS?=
+ =?us-ascii?Q?8vfDIiTWzAoPhGFtzN7JFSq9YKrL9hpmJ+UAYiSvKE4IybBguD85wmTp1OUT?=
+ =?us-ascii?Q?ohzqaGLx2HRmR3wItiKKFm1vjmtN3IAMvgZ4boJZILIkKZ8yEW+9bTt+P+St?=
+ =?us-ascii?Q?dXjoeQuOJ66pe3Jop3ToEoRKMI2ZdF8x3WT1oWHwDKTpIPsiqPfGU3jo67pY?=
+ =?us-ascii?Q?OlOoe+ND863Mpvky5hMBwlRWfrMoFK170vRlvILTGKiWjJojf6MkX6mB3rOQ?=
+ =?us-ascii?Q?0KAONdBJIVs5XyAyHdJFoXWW2lU9LLyVd6s8EpoJPnQfsjNrnaRAola7GyG+?=
+ =?us-ascii?Q?bjMTcH5Qo/SPW9zpeaTC6/7olvKcULdnE1rexR1hkDyWR7P+khV6oTRGT+6w?=
+ =?us-ascii?Q?xRSI1T7A5CiiLGACxu4E23/kvYUn9WID4DgplWZGqelU0vrWOQ6G3udc1E+T?=
+ =?us-ascii?Q?VDShP6ZYO1E8/7+dtpNDPq7Q0P5sBrTqmhLIL+9uoxxqBNpBcaFMFqwkpuRs?=
+ =?us-ascii?Q?6gUpeDh8FDFfrjpIyYDzaTyFAU9Cg7GVzhz9el42rtZM9Ph3Qyyd17jQPQCg?=
+ =?us-ascii?Q?ewpNFi8k6dEJCE/En9z34RgpbCQl5628QJqn68mUpMGIaOf7UHlR3p+3MAmR?=
+ =?us-ascii?Q?TlVLAwiRGyg3KFgLqGwNkSCAJwtL1cH8PPgyYz0Nj9Bm0tgRYjbgKPTsLdDf?=
+ =?us-ascii?Q?XnbzwdqsNZH1ZX88Jz77Ye7eJdhxHCgZbtE4k0zu8Zv7rhg/r7bua/zfpz8W?=
+ =?us-ascii?Q?P3lPXtr3Y94BQVC2qOPqs1GdieyV36rJjpSzRtAHm3UmaHRh+YMMranwXr+p?=
+ =?us-ascii?Q?Cg4yTBDG2tn98a2QYXykLQX0rUy8FOdYMFRId+Z1mTVvKc2dpcIsaDszzbi2?=
+ =?us-ascii?Q?aaD5t4EIhTcvrM4Ock4gUEquKG3X23C2HI/CQD525Kdbb/G8bw20u3A7kHiE?=
+ =?us-ascii?Q?3vz+ewg/p5Zw57NSGV9DThaa3Z1te95QWmqC4O6BluQpQMa4V2OFiESXnSF6?=
+ =?us-ascii?Q?T26K8Hfh/N/V+N8jjJ4zPmrmCcb0ff/fWvwoED78bCKrkSErn8tdpgO2fF8c?=
+ =?us-ascii?Q?2mVlkBkAFx3nZBiIsUFHM62g/xV7j+4HL9XTECInM8bnPJQGmBovjLf3DqeV?=
+ =?us-ascii?Q?GPXtTLWwlpVeGfEJIDuK8nzdP3Fj6XR8yzEtVH8jZ8kjkIP5HgBFOdXNNemA?=
+ =?us-ascii?Q?5Ebs1W1htyU9d/VMK559trpJ9V7iAuZMqhiISG3Y/jjGHTl/dRLSUGnclpzy?=
+ =?us-ascii?Q?Q9l2uE22Q85q+yyCfwt1HhT0DsWRimUEFxeTjpOzJxot54NLQBDxmtYRd2K8?=
+ =?us-ascii?Q?7Hh9wtqh730st0W4EoCrf0Wo05kASBwP4GQz7Sji2Epla7vt9+cVCA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB8248.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MmT1t8Z0CCiObvAXZ0LCE8adu+dNPC89V80ZRdQFqGyCfMz8LsjT+lyMRmbr?=
- =?us-ascii?Q?CflglVuPL+7W02IzX9oFqVlIZzNEPNlPZ1ic9KGha6cxG6r6QdX1sGckJWhb?=
- =?us-ascii?Q?ZMXblSAfmSxTHohyDvTkq3vHYSG8AvNqdd6APm11T62/o1wFnRyujlj78iIT?=
- =?us-ascii?Q?6bupf+3x4a+140Zsax8On+9zPNabuJ5kCbR+T8pYgQqN1c5GxYTSPtt0X+Q8?=
- =?us-ascii?Q?ptCsz6cvgHUjsqF8QOFgVkxmGeswRa/FWk3EoFF5k6JK4RcY8hDw59bdMeix?=
- =?us-ascii?Q?UlqaPQYVka8faDywBRC+dm7oIoBMcxjW+/ZaDmEbo92BRPcStSm1eLVuwFu7?=
- =?us-ascii?Q?B9qIZeUVSvITkBYlDbQzOETx/lbPkFhveO/nUMhkq/CBJQjDkvsYyu+lzEV1?=
- =?us-ascii?Q?3QBCg7MtKm6sc93SGAOY3j2F2diWCT9zuW3ZO2RHJNxx8TLib5UHrFoys+/R?=
- =?us-ascii?Q?WnndABswr1XPAzKx+sbXeSnUKnETR/zBq/DRPPcvfZzmx3D0DfjKY6skp3LX?=
- =?us-ascii?Q?rtLczF3uIZIljrsTQBIz3rSSuio6gTKpJuQZSaIU7XB7/26V09/jgILBT/Ql?=
- =?us-ascii?Q?ARvmbq+AW2HGWt2ocFQL15+Rwba5Y/ofpOJr/idQdo1SxcW85RH6zICulh2I?=
- =?us-ascii?Q?BJQyLPtLtBlUyU+va16zve3sPaBO0YwlzcP+iuLu+p+ngxG17ilolvFJa8I/?=
- =?us-ascii?Q?EYA4+Gz8u4K355iTKJVP8I6EGcYeZgASTHwbN1OnJn2AcXlYD0qkuvi92SbV?=
- =?us-ascii?Q?Kv3BkDV9u8WgxMx7KupsSsaIgh9llXtcZLGVRYuc7N9r84zlyncC8tGTAUQi?=
- =?us-ascii?Q?ds1B8Fj2KM+RyA4gpiDOfehOxr8TjLOGtic2JSCMYRSuCidBnQenC8t11e0Q?=
- =?us-ascii?Q?YRRD3fF2tgjvUWImCUlCmjhtLg9JK83QEXaRO5dmMKaRB+DDmAXuMmrEagKJ?=
- =?us-ascii?Q?QwobFO+9ci+GR2vyXN3P3qwsErK98GxE3kSIh9z3eWGMr82En6WS34YM/+Pk?=
- =?us-ascii?Q?6iRZ5/9cUcY/jEsy227DSn68Lny5xjXOl06niv8sFfXswopN1GsVIdIRPtVx?=
- =?us-ascii?Q?dBnhvxXR823nPuShazGuB4IYBjKgxTqlkXWkW324jZ81hQuPUgvdZNaYPQiv?=
- =?us-ascii?Q?703Z+TP8eEYytyztfz8+Jd3A2/Qu5vItBCGO9JlV4X6u6b/mccaM92/WuGke?=
- =?us-ascii?Q?uYRcYi42YNpXae7gU6WRFXasbCdFkPxNfGS3Qdjoq+xHPkfNg51ynBUM3mLv?=
- =?us-ascii?Q?BXFXRAD6fyHTRLMhoouq7EPCbksfe9eeOuquCDtSKZwzzoWrI00lJkbp/fIn?=
- =?us-ascii?Q?IsAEkpYutN+AebvIqZ1tJyLv+y5lRWu/wzvlSd7rRb4DEBVLTuCAW66G9Gop?=
- =?us-ascii?Q?6yUf0Rk+WjNkEG20b8HATYC3Gi72HPq0mi7Aj7OKPX8nCcIT6UhjhS43fNq6?=
- =?us-ascii?Q?a2E8LCQWKqJSWjKtWUEouraeP4ZutYqbbz3RMunofXoZA772E/7FsM0jq9LM?=
- =?us-ascii?Q?YIt8SVi7iKth+f5FxKsCa3hxU14p/DWEYttTVG2ypc/LDPzbgokPYXTNRRuk?=
- =?us-ascii?Q?V0k8IoN3y0jtQZy+pUPWdOE+X5mDl/YuQutXJtEsRHnW29nhsgwWx6tL1W3p?=
- =?us-ascii?Q?FQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Lg18oMj75G+Cd2bO90q1fb0qfhtGO/dswqnsHHXHmPOHiSi4q8j1FA43xTyT?=
+ =?us-ascii?Q?8RbBPRX0Nf/aim+OTWJt9QkWuVZkYqco07UXlGOP1WLLT5D0K8cFG5sd4uqo?=
+ =?us-ascii?Q?jGG42wGKHLam3lM8VvhxnNikn340I3g3Cqkmw1JXgzBhX6iJeCnYzE5vEBxp?=
+ =?us-ascii?Q?sdd/ahBzqlF2TsIK2sOLSrlWlnlTdHImnOFAxPLUEWJD4Hc0ys50lJmxdr2A?=
+ =?us-ascii?Q?JGFXSz3AtcgGHnffPrM6HEQC652lUFhKh9lRoKDMhxYCRme0vU2ZjmSGQBLC?=
+ =?us-ascii?Q?1HOg5eARz0qvoepDrsYNj+INMtrhCditpacz2PVX5lOpTEcROvLU+QOl0iWC?=
+ =?us-ascii?Q?aIFXGRa3CJ2EUUxON9vrVTgLMd+H4nuEwdHhdf0AHskJyD6BhvvrIUb9mEWv?=
+ =?us-ascii?Q?B8rDKyBx5AZj42P8nlW/dJkKHzxBjAhjq6O6ZN9XN/lzkM97+x8RCz7kwmUJ?=
+ =?us-ascii?Q?ck9ddYbLC9MGjAv+j6ImD+4+CIE9dhMWlSMT8vWf6rZwb90Z4zC3ANrKBqE3?=
+ =?us-ascii?Q?J6URsV4ymjJus385720nu31XRwfBxkzfje7oCKqNMlA+GNGbh516cwhCN/6Y?=
+ =?us-ascii?Q?chv4g/mWDp9kSf/U8ZEooYjsINTtc1zLgCOubNu23KW3UrjrpsHCJ7h30TVf?=
+ =?us-ascii?Q?hDLYAg49JU9Qvxtck70HSkHrvizEaOyQXOyLelBlIw/LgCTqyGTwtKYgSP9M?=
+ =?us-ascii?Q?V1/WPdJekkWgF5RY8QCa9Mz7VFHPQjMQGWFrPlndTr29/9AxcfRFI/t6ot5X?=
+ =?us-ascii?Q?KHKjZ8S2ybFXmWPE0VZjHOZ1mjDtUc12eKS4BIDX0yaX71/+rVMZObqQv5rS?=
+ =?us-ascii?Q?EtYZoF9t8/wWtnBHBjLL1U9nBI4oU6W0Lkttm4dKGPHzn5v6NzAmyLV6kwnZ?=
+ =?us-ascii?Q?ZSwSasy/vUvue2x5MQDKqFZPDaaUsqQBoexVJGV/wNYW9KNR3Fg0nb9e6nY3?=
+ =?us-ascii?Q?H9SvfaLPYkykBbPtesiuz43RJ6S1y4mItrArFEtQUrEygEy94FYdsyyIbCsL?=
+ =?us-ascii?Q?v1PI4/CUSa75oYvy7f4Z58ERDocvApe9OGD0QkME4PAYw9YmngJb0qtWbfc9?=
+ =?us-ascii?Q?kHR7Z8xsCxdr+h/WFIybpB8HB0GSzA+pLSwCPRWEqEqUd2mLHhXuTCyk67fc?=
+ =?us-ascii?Q?Bca9aRsha6V+8aQGO3LeBdoiw0tPBugQLYQurUjXCd77Q2xiouOVscHdCVwz?=
+ =?us-ascii?Q?oPjK6kYlx2hu9DILdAGUqk3X5bSxNwTadSuIGFHfn1kc543L0eK9KLqs2UtS?=
+ =?us-ascii?Q?hCe0YywcvXB+4v+CpwItPgvEzSJB0mum/6en4PCfT5VHE9I5FcEHS3NdlKps?=
+ =?us-ascii?Q?P2lQbAyoAaGmCW3cMec8Xxwz+WGMKdE4MBzVshkfFmBIlBEvvudrx0KN5C9t?=
+ =?us-ascii?Q?GfAR0p2Do3AmvCBqITsJ/0a0VBKNfvJXq50gQfX/YABJ4dHf0z4FeWu3wspd?=
+ =?us-ascii?Q?07AoxH6zzvxwf97qz9r8yccB8FVAH93qXt/sjISdh9E3mDRriNRJNryK7pqf?=
+ =?us-ascii?Q?Pxfw8iRstwiBQ3UiW3e18cq9VMGx1rFlKuu/HpgQrEmuIlrgew5z4Z8Vhw52?=
+ =?us-ascii?Q?TB+6uJj41kKhEHjRV1lA5klBF4MQMGAF2ifeIen1lpSMkSLprHhEuMLXmUo8?=
+ =?us-ascii?Q?4w=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad8bbf20-a60d-4cc2-5cc9-08dd8ca87285
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b637e4e-75cb-46a8-bbdf-08dd8ca87355
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB8248.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2025 14:15:26.1375 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2025 14:15:27.5665 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /mS8RRTUrwVuPEj6upIFt2e1JrD3C+c3/ZevBemwH1fDxbsDeZghQs5YPA0YYI4Nsa3/t6Nsir5o/PS8fiSYweYPJCLDugtDjGfYKLrtaXk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: g5f9JCdENaT2i9O9bQgcqfQMkt3l5ZrGdUeAnrWIKBc8T0vqbzVpu+xD1+l6/2FMXJEU7D82rV1T4Z4PS2sw25oj0BCnMj3/HmJOMrgUOmU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB7237
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -159,40 +160,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As preparation for fixing the handling of backslash-escapes used
-inside a character class, refactor is_any_but() to be defined in terms
-of is_any_of() so we don't have to repeat the same logic in two places.
+At the compile stage, the anyof() function clearly intends to handle escape
+sequences like \d (for digits) inside square brackets, since the logic
+emits a 0 byte followed by the code representing the character
+class (NONSPACE, SPACE or DIGIT).
+
+However, this is not handled in the corresponding match helper
+is_any_of(); it just naively loops over all the bytes in the ->data
+array emitted by anyof() and compares those directly to the current
+character. For example, this means that the string "\x11" (containing
+the single character with value 17) is matched by the regex "[#%\d]",
+because DIGIT happens to be 17.
+
+Fix that by recognizing a zero byte as indicating something special
+and act accordingly. In order not to repeat the "increment *ofs and
+return 1" in all places, put those two lines after a new match: label.
 
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- lib/slre.c | 15 ++++++---------
- 1 file changed, 6 insertions(+), 9 deletions(-)
+ lib/slre.c | 28 ++++++++++++++++++++++++----
+ 1 file changed, 24 insertions(+), 4 deletions(-)
 
 diff --git a/lib/slre.c b/lib/slre.c
-index 4f455400d3a..5cb0d3ec7fa 100644
+index 5cb0d3ec7fa..87dfde720e9 100644
 --- a/lib/slre.c
 +++ b/lib/slre.c
-@@ -484,17 +484,14 @@ is_any_of(const unsigned char *p, int len, const char *s, int *ofs)
- static int
- is_any_but(const unsigned char *p, int len, const char *s, int *ofs)
- {
--	int	i, ch;
--
--	ch = s[*ofs];
-+	int	dummy = *ofs;
+@@ -472,13 +472,33 @@ is_any_of(const unsigned char *p, int len, const char *s, int *ofs)
  
--	for (i = 0; i < len; i++) {
--		if (p[i] == ch)
--			return 0;
-+	if (is_any_of(p, len, s, &dummy)) {
-+		return 0;
-+	} else {
-+		(*ofs)++;
-+		return 1;
- 	}
--
--	(*ofs)++;
--	return 1;
+ 	ch = s[*ofs];
+ 
+-	for (i = 0; i < len; i++)
+-		if (p[i] == ch) {
+-			(*ofs)++;
+-			return 1;
++	for (i = 0; i < len; i++) {
++		if (p[i] == '\0') {
++			switch (p[++i]) {
++			case NONSPACE:
++				if (!isspace(ch))
++					goto match;
++				break;
++			case SPACE:
++				if (isspace(ch))
++					goto match;
++				break;
++			case DIGIT:
++				if (isdigit(ch))
++					goto match;
++				break;
++			}
++			continue;
+ 		}
++		if (p[i] == ch)
++			goto match;
++	}
+ 
+ 	return 0;
++
++match:
++	(*ofs)++;
++	return 1;
  }
  
  static int
