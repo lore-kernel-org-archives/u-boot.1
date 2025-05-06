@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D06E5C3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 07:37:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470EFC3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 07:40:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D23F8007D;
-	Tue,  6 May 2025 09:37:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C2012800C1;
+	Tue,  6 May 2025 09:40:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K4xBrvnR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GWYhHxJa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8235E8007D; Tue,  6 May 2025 09:37:17 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id C293B82076; Tue,  6 May 2025 09:40:07 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72A7280050
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 09:37:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CB548007D
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 09:40:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43ce70f9afbso45806955e9.0
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 00:37:13 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43d2d952eb1so29138835e9.1
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 00:40:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746517033; x=1747121833; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1746517205; x=1747122005; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=ktrTru5xy6+KUzETCWfEuByZdKIga+HUqMfI3VXzBiY=;
- b=K4xBrvnRB40m+q7Kk1+XSWj1JQH1iyPDGelO5pdI9yCQpgcBFAsTRq73YH7RYDihjE
- eCFfIOsVq1SnffLWjY0AW9auPB6EDx+rvo5K5pf8Mo7zj2peBI8KE1XTWajB1jM6+iXe
- 5gmKFkNTK769P0GP3laH9gdgLOtLrnwy82E1plYFG8DGSnZB7Pld0ja9v6spwfcsgltW
- lXn5/oc6jMhrRdbPxKxHSrpJYxrKwqRP7uVzn/6EVIzm0RyJthyfM9gncwUzn9eFS+uq
- 6rpXppegGZPUSCqgZgpsK5e8ktOsLwToPKqMO5pNYWeCrPLZIzEn+iKAmruYeBk11f8M
- WCHw==
+ :reply-to; bh=xP+jscrO7V/tITyiBkislRMvRREDQt0szXFIu/X7x7U=;
+ b=GWYhHxJaj+2WcGK5sFom+EoInvQF5fFllDFSRAqJtkubskqetQn5B9K2bCI0BqHiOA
+ LU4vLMQoMm/rwIzqSSJBwNC4HL7G3JWb0nBmK83H9vOTNlmiQ8vuBd6Oodl6F19rPL+G
+ mc0vj6kRXc+9YL87OC0mWGIH1uczZtPN+mBMe4jV5IYHLrdkrwgdahV/RNyB3wz6+vtz
+ bjdOWmlBbwF75g+y1NJjYkQgOjhwwDtWlq9IrsUqkMcknqP5+DOAVgplzEQe8bZHnGZA
+ nz09gB8OizVhChsu+okCwVFGtSCQF4nZMXfRd00NqTMvkiXCQnOwh0ssp78OILVBnGTF
+ 1Sug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746517033; x=1747121833;
+ d=1e100.net; s=20230601; t=1746517205; x=1747122005;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=ktrTru5xy6+KUzETCWfEuByZdKIga+HUqMfI3VXzBiY=;
- b=eTL/4Lgdzii8wGXifwXJGYZ9n8wAd2ey7Nj/VHFbaQa54KdNyJyqaBPgAHM0GrcR9K
- vjdJt3WMCI+gwNXLdOnJTDTdOzN071qs/eg3wk+pIkSQmkb4plgktQbvcBdzolTTp9lN
- EWsGULALjKq/VHBRY14IW63wrh4Y7HnFTu498lt/NkFDF8OpXvDG0401XJaYUJoq0uI7
- Uzw1WDx0+1iL8F8qOc2JzhQ44XOLp8LBVpZ6aDKANWzVaJndU5JID9E9Il+YkgDVu9F0
- regqt84SiRjUZnacu+HfxHfY5KYvOexCmzjkg2J+M0Y45YRWGExLw/KrxBOHxSKKFkPg
- 2UEA==
+ bh=xP+jscrO7V/tITyiBkislRMvRREDQt0szXFIu/X7x7U=;
+ b=arf4YJI2phd2BHdrVexkGp6+IaLxXuVhlYiHwCjmT1vqjQqKei5hmXe5g20QCW0CVS
+ dYJsLCoVFbbFnuAVODEN2DmWY9HsC/wfhBCUgvvGeb1oiKymZ6GOkCu1yEQrttHxQ/GQ
+ YMh7OxAVQH5bspqba0YjvxI1s4WySGNx8lvw3Q4DczfeJmCeL68G3rVFClynqMQe7+7y
+ Zg/cqli/CkFWK3xnecVuQXO6rASaJDAHDQ9lcyqhgPW8s+FH1wrVZFImhtvy9Pj17sUd
+ VQiLmHX0yb28ETFG1ijCznU0/7Bakvqw/VEgBE/HAjE7HmQk+MoJYDiunsHd3s3w3lJx
+ FlEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBKObXjzbW07CZXq3UfVfvYuaYT8ONjRb1V/gsztKI6mXaKWXjmSTtb5YJldOFC/c5FGlmQ0M=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGwRUxoP8yfLRqbHHprxQS6ABW/A6n8XRBz8vfGnzfKiFa8/Xp
- SaS/gwpfpuBXNt68ITPxrAOV3MlIcDgkRMJlXj/qtqVkUfIuSfnH+xD8r+d5n5w=
-X-Gm-Gg: ASbGncvrmUDBlW3r1M2I92/13UwYD67m72P4IAu7yLHurOi6b9VmFSQ/bJIQS9jEDOd
- f4EYt7R1ciQKd2yH01FUR2yqDCQ23dZPPLRW8u3GBDfB+SlmnWD4tYcUGrmpmqjEfGvFe+hTv7P
- ulwxCfzOrAAUSuz3PrAfccEf6R4V0z1+enk+RuRG5BALbBvKQK4laNVXRsZCG8iUUcIN0X5xWCl
- 71aNFFOkyFXKrEUalipw1eHtozP0lLb3cvvm6cYexEuH04Bl8WWBe3Ic0ncAUvQ5mWIFxAlJ7YL
- FVICaW4UtflU9TJYDdYx8+XoMb1i1G2/xdUuY0PcF3QYBhYMNSGULK6qKrQKs4C3jMng4jhYCDM
- FRae6mroca1X8w2gyuQ==
-X-Google-Smtp-Source: AGHT+IFnCSaQpDi4ENX+r+NTqKj8iLpi8exHBdHGqNJnw5s5RZQ/qXJuebX6D0CSqEFEuCPe5cRshg==
-X-Received: by 2002:a05:600c:1d8d:b0:440:66a4:8d1a with SMTP id
- 5b1f17b1804b1-441c48aa302mr87717155e9.7.1746517032809; 
- Tue, 06 May 2025 00:37:12 -0700 (PDT)
+ AJvYcCWuxhRREFA8/SCHS2HhDHfuMoX9CMKCkhkep0e/9K6xgSv+HXiqnWtWtB26nkHx0YxUsBnyilk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4gCqGA8KKoaKNeehBFfXLR/zATEXs7lkjzxqtsTaGRGaDZqXe
+ K/uiX+X3p8WFj6AZqMrD73Q/ZmF72hApPEj6IgQBD6tomoSwN6bV50nyAI76FKA=
+X-Gm-Gg: ASbGnctB+jMR90Y+d46VE1pUgRGZoCOqhk6ZIocBfmt0v26xUAPW3ZioZiy95daem2b
+ Hj++IXnWTFmdKRw0i17+ZF/uKLjdybPqR+4IYocJqomJtsAmpr5cCJH3Aa8Tgo/J/N85wKpHq5A
+ rOJ9DfWD22nTogzU2vhE6tkioqbioKx1aHFhKRuqx4k7WwAAPfkHuUfp4sl8dmoupausOpXZgCz
+ sLvDa/81khxXRtIz9hokyXjKx/PCBpA4gUSzo2LSWKr4UuzWadhfRlDNZZVR5fGqvQHpKwswtoZ
+ 2oeEAS4wB/P5oWPCy6gW6gOa73vvFWRn6rpjpOY7np3UgfzFDsvaJmaSeefJUkngQwKfR53pxpb
+ DMiog/uA6RqpBawtlgw==
+X-Google-Smtp-Source: AGHT+IFXUA43vyNDhST7ezUSiIs+bLkAzsB87ggeRdEWyfOcKiUCwau+x9AMsfmezuxVZnzlqy+GxA==
+X-Received: by 2002:a05:600c:3ba2:b0:43b:c5a3:2e1a with SMTP id
+ 5b1f17b1804b1-441d0fbd2demr17167805e9.2.1746517205049; 
+ Tue, 06 May 2025 00:40:05 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:127a:7a9e:6ba7:152f?
  ([2a01:e0a:3d9:2080:127a:7a9e:6ba7:152f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a099ae3bc0sm12937087f8f.35.2025.05.06.00.37.11
+ 5b1f17b1804b1-441b8a286b9sm158003495e9.28.2025.05.06.00.40.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 May 2025 00:37:12 -0700 (PDT)
-Message-ID: <ba8d0f85-ba68-4610-9ec9-030af9bb6aa8@linaro.org>
-Date: Tue, 6 May 2025 09:37:11 +0200
+ Tue, 06 May 2025 00:40:04 -0700 (PDT)
+Message-ID: <729bf495-7b72-4fbf-8ed0-4a439d3c3caa@linaro.org>
+Date: Tue, 6 May 2025 09:40:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 2/4] scsi: Implement get_blk() function
+Subject: Re: [PATCH v2 3/4] env: Add support for storing env variables in SCSI
+ devices
 To: Varadarajan Narayanan <quic_varada@quicinc.com>,
  casey.connolly@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
  joe.hershberger@ni.com, michael@amarulasolutions.com,
@@ -90,7 +91,7 @@ To: Varadarajan Narayanan <quic_varada@quicinc.com>,
  ilias.apalodimas@linaro.org, mkorpershoek@kernel.org, u-boot-qcom@groups.io,
  u-boot@lists.denx.de
 References: <20250506072415.1970069-1-quic_varada@quicinc.com>
- <20250506072415.1970069-3-quic_varada@quicinc.com>
+ <20250506072415.1970069-4-quic_varada@quicinc.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -117,7 +118,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250506072415.1970069-3-quic_varada@quicinc.com>
+In-Reply-To: <20250506072415.1970069-4-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -138,91 +139,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 06/05/2025 09:24, Varadarajan Narayanan wrote:
-> Add a function to obtain the block device for SCSI.
+> Allow SCSI to be able to store environment variables.
 > 
 > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 > ---
->   drivers/scsi/scsi-uclass.c | 30 ++++++++++++++++++++++++++++++
->   include/scsi.h             | 11 +++++++++++
->   2 files changed, 41 insertions(+)
+>   env/Kconfig            |  15 +++++-
+>   env/Makefile           |   1 +
+>   env/env.c              |   3 ++
+>   env/scsi.c             | 115 +++++++++++++++++++++++++++++++++++++++++
+>   include/env_internal.h |   1 +
+>   5 files changed, 134 insertions(+), 1 deletion(-)
+>   create mode 100644 env/scsi.c
 > 
-> diff --git a/drivers/scsi/scsi-uclass.c b/drivers/scsi/scsi-uclass.c
-> index 1ee8236c05c..aa037c8e353 100644
-> --- a/drivers/scsi/scsi-uclass.c
-> +++ b/drivers/scsi/scsi-uclass.c
-> @@ -10,7 +10,9 @@
+> diff --git a/env/Kconfig b/env/Kconfig
+> index 9f5ec44601e..9496975f212 100644
+> --- a/env/Kconfig
+> +++ b/env/Kconfig
+> @@ -74,7 +74,7 @@ config ENV_IS_DEFAULT
+>   		     !ENV_IS_IN_MMC && !ENV_IS_IN_NAND && \
+>   		     !ENV_IS_IN_NVRAM && !ENV_IS_IN_ONENAND && \
+>   		     !ENV_IS_IN_REMOTE && !ENV_IS_IN_SPI_FLASH && \
+> -		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD
+> +		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD && !ENV_IS_IN_SCSI
+>   	select ENV_IS_NOWHERE
 >   
->   #define LOG_CATEGORY UCLASS_SCSI
+>   config ENV_IS_NOWHERE
+> @@ -297,6 +297,13 @@ config ENV_IS_IN_NAND
+>   	  Currently, CONFIG_ENV_OFFSET_REDUND is not supported when
+>   	  using CONFIG_ENV_OFFSET_OOB.
 >   
-> +#include <blk.h>
->   #include <dm.h>
-> +#include <part.h>
->   #include <scsi.h>
+> +config ENV_IS_IN_SCSI
+> +	bool "Environment in an SCSI device"
+> +	depends on SCSI
+> +	help
+> +	  Define this if you have an SCSI device which you want to use for the
+> +	  environment.
+> +
+>   config ENV_RANGE
+>   	hex "Length of the region in which the environment can be written"
+>   	depends on ENV_IS_IN_NAND
+> @@ -731,6 +738,12 @@ config ENV_MMC_USE_DT
+>   	  The 2 defines CONFIG_ENV_OFFSET, CONFIG_ENV_OFFSET_REDUND
+>   	  are not used as fallback.
 >   
->   int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
-> @@ -23,6 +25,34 @@ int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
->   	return ops->exec(dev, pccb);
->   }
->   
-> +int scsi_get_blk(const char *uuid,
+> +config SCSI_ENV_PART
 
-Here the parameter is uuid
+This should be SCSI_ENV_PART_UUID
 
-> +		 struct blk_desc **blk_desc_ptr,
-> +		 struct disk_partition *part_info_ptr)
-> +{
-> +	static int is_scsi_scanned;
-> +	struct blk_desc *blk;
-> +	int i, ret;
+> +	string "SCSI partition UUID for saving environment"
+> +	depends on ENV_IS_IN_SCSI
+> +	help
+> +	  UUID of the SCSI partition that you want to store the environment in.
 > +
-> +	if (!is_scsi_scanned) {
-> +		scsi_scan(false /* no verbose */);
-> +		is_scsi_scanned = 1;
-> +	}
-> +
-> +	for (i = 0; i < blk_find_max_devnum(UCLASS_SCSI) + 1; i++) {
-> +		ret = blk_get_desc(UCLASS_SCSI, i, &blk);
-> +		if (ret)
-> +			continue;
-> +
-> +		ret = part_get_info_by_uuid(blk, uuid, part_info_ptr);
-> +		if (ret > 0) {
-> +			*blk_desc_ptr = blk;
-> +			return 0;
-> +		}
-> +	}
-> +
-> +	return -1;
-> +}
-> +
->   int scsi_bus_reset(struct udevice *dev)
->   {
->   	struct scsi_ops *ops = scsi_get_ops(dev);
-> diff --git a/include/scsi.h b/include/scsi.h
-> index ab53b47b58f..d6b6e6b665f 100644
-> --- a/include/scsi.h
-> +++ b/include/scsi.h
-> @@ -351,6 +351,17 @@ int scsi_scan(bool verbose);
->    */
->   int scsi_scan_dev(struct udevice *dev, bool verbose);
+>   config USE_DEFAULT_ENV_FILE
+>   	bool "Create default environment from file"
+
+<snip>
+
+> +};
+> diff --git a/include/env_internal.h b/include/env_internal.h
+> index ee939ba4293..75b46d0bcb0 100644
+> --- a/include/env_internal.h
+> +++ b/include/env_internal.h
+> @@ -115,6 +115,7 @@ enum env_location {
+>   	ENVL_SPI_FLASH,
+>   	ENVL_MTD,
+>   	ENVL_UBI,
+> +	ENVL_SCSI,
+>   	ENVL_NOWHERE,
 >   
-> +/**
-> + * scsi_get_blk() - Provides SCSI partition information.
-> + *
-> + * @partition_name: Partition name for fetching its info
-> + * @blk_desc_ptr:   Provides the blk descriptor
-> + * @part_info_ptr:  Provides partition info
-> + */
-> +int scsi_get_blk(const char *partition_name,
-> +		 struct blk_desc **blk_desc_ptr,
-> +		 struct disk_partition *part_info_ptr);
+>   	ENVL_COUNT,
 
-And here it's still partition_name, and the name should be scsi_get_blk_by_uuid in this case.
+Wider question, what is specific to scsi here ? it could work with any block device.
 
 Neil
-
-> +
->   #define SCSI_IDENTIFY					0xC0  /* not used */
->   
->   /* Hardware errors  */
-
