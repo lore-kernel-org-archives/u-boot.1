@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9A6C3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 13:24:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E11C3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 13:24:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C59B682163;
-	Tue,  6 May 2025 15:24:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1977882A46;
+	Tue,  6 May 2025 15:24:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H6sZZsGo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kc32FhDk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B96082A0D; Tue,  6 May 2025 15:24:38 +0200 (CEST)
+ id D2A2882A39; Tue,  6 May 2025 15:24:40 +0200 (CEST)
 Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
  [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D57FC82A36
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 15:24:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6C7C82998
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 15:24:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5fab81d6677so2533025a12.1
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 06:24:35 -0700 (PDT)
+ 4fb4d7f45d1cf-5fb7717b02dso1712034a12.2
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 06:24:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746537875; x=1747142675; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746537878; x=1747142678; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sv4g4gpwGgQL4p1iZEcIke/DSAXcDmpYnMm1hb2aADA=;
- b=H6sZZsGoEUlrAY5MfLSbSTY8NdNUqpm8xj3hCHfQjAX0g7lm0cVNMpMP4lVUkvC/AY
- u0K5bj0G27PKpr3n0V6nKzGTkAo16G46RmpGBEgAeZOtXXecoOhS+GJZi2TNMfEOYOWH
- hpdNiPPSRQap5EY4nvqrkeXOkleafZ240RXjU=
+ bh=GeBNcAZA0YctoaXSTdZD1UM5NNpl3dblYINu+FtWKaU=;
+ b=kc32FhDk6n87qB3x38HAAojE7iq5QGG6cd4r3ZxCpD9i1gl8DG8QysnuxQvbOef+YZ
+ wHLP1T92QssiDy13ZfT7LkBYt6ARp6vvWG0Zge9RP2ghdg26Xj44EtOoSuPH1sim+I00
+ w5ZApk3F3zEn8ukbJDTGOZteGXhehbh9BdhgA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746537875; x=1747142675;
+ d=1e100.net; s=20230601; t=1746537878; x=1747142678;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sv4g4gpwGgQL4p1iZEcIke/DSAXcDmpYnMm1hb2aADA=;
- b=i2Xi5SNFD8SEkpVQJv/Ina5Zbzl1i+GXK1AJdsx+/Z2QDK3Vu0gjfQMKKaoBc2DjIy
- f3Pauky/OcpLqsAmMNVGKQqUj6a8E8K2rmgqFHNB/0Z1xu28t7XBmlSS2jkQwmHaZ7Xx
- jqX/B35R9NMTgvRiD3eLYgcv8NM6swiXnPTQqClRh2M3c2uf1jm065C+OAupfP7ZV2Wy
- bylQyWXNJ1HfC2Jk2wP0mmvHgQvEYvsdpOuS7nZJpi8elVyxfH3VURmkbk4rzT5LJ9wr
- pLVpOeqjfWJcaeqyepU4W8p1SeH+eu79004JAY8iWbyyZOZ0KXrSya7vdWtJ8pIDWaau
- vsPA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVSo/SOEvcteL55+XbwzYW3NptPJDqEQSxS5nmNP9rekHhU8AU7KsVeuolriiW3tNQWR3EDeq0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWGeC3KbVxPu7KKKW4PGXyhKx0SIiEy+PpX//7hE8iXQ61mAL/
- G17b2/AcfZYsS08JxVOOB2SJ24FHQwHGlnc/M3jgSXQ9jg3nNWdTR3z/av1gYxTb2Q/FldOps4q
- Ln80cOs+GFWlkSKUfttB/1oFuFiH8u3SuBUUF
-X-Gm-Gg: ASbGnctEMAnCviLJwMainwTpNaQd1TJP0O5BuiT002kfe6l0DR27CTJGbfdZ00JCFJh
- 68Fc1H+36bKiGXCLBDsBESh22ddum2lHTcpNON9MjBfB6FUEc3jZTuk/ujMzEfD6M6nweZU4RSC
- TT83SmbEwTljwAF3UvEzZrdA+ffnJFSmjGrw==
-X-Google-Smtp-Source: AGHT+IHWnSD4nSXYr6bnSuvnc1ASBSUN6LpO3pGjElX/+kf9XbKKVi9aVxT2excAOpzJDFAS7gD6pewLu2gKr0jFUJs=
-X-Received: by 2002:a05:6402:2801:b0:5fa:a42f:70ee with SMTP id
- 4fb4d7f45d1cf-5fab04bbe66mr8754701a12.0.1746537875291; Tue, 06 May 2025
- 06:24:35 -0700 (PDT)
+ bh=GeBNcAZA0YctoaXSTdZD1UM5NNpl3dblYINu+FtWKaU=;
+ b=NGtDNBwLphk5tp81sci6yjVtY4cpsNXFdnOYzxRh4uzIMws4M6xt5U9d5nuUbMCIrx
+ DPjbRwfnc+XcqZOkYI9sqAAiF8tLAJ3Jb8QAhn7S1LL9YKhXmWEzEQrgcN2KZGYzyZjC
+ ddXt6JFB//JIez4YMZldeAYh8orp4TnYWoPY/AQUZX6tOV7RzeAMjhHxvxJIvDxwyI9j
+ QeIEx2qqzA1sYe6lmEVQ5VaKgpMnQ6JLRAGxgB64kax17bKLvsw3C6wJCmz8I0ykqvn4
+ W8SX2pm/mltEuv4YrWVEK/h6c0r5Hu7texEZLa8NXpcPHN6ddKvke8hUa1um69cGHnIp
+ 681Q==
+X-Gm-Message-State: AOJu0YwjrllAonCNcUaubEV2iZ/LaqfdQ499AiapjxXYWpgZXjchqw1V
+ 3lydhBHH9MWi/pHSh/AQH6aP+tUj8g4Dun1f4gXjIqzDdsnl4aBnoDGjMkCzMdF/W6wnavxmbD2
+ /V9f3SzT1fRVGv8PrFPpPdC1rUG9eP3M2w8NWv4DBELXEImjR62BcebRjXw==
+X-Gm-Gg: ASbGncvkSdHa6eeP3KjgmedaObhKfRdtGhE7BZ2J1f0c1Ra3jbxCkPJ7s8lhHPlE49z
+ yQnvIx9iKHKCbyUqTYPkZ1to4TaD0ZnHgsue97oRC0uGpEURkUQQhKvh00XERb50VfiqAqy7ZIJ
+ +FJW/eYdJBPNxh114ArsNyqpE=
+X-Google-Smtp-Source: AGHT+IHRsOrqOm6BRNgJyR3qv81bylUhv1KsmmGNvP2b3uwhNP7gMFjn2y4nNgpCYRSzxwnOJrapHuEsg4CLKuTm1jo=
+X-Received: by 2002:a05:6402:1ed0:b0:5fa:abfa:63e4 with SMTP id
+ 4fb4d7f45d1cf-5fb70b5ef02mr2398875a12.21.1746537878337; Tue, 06 May 2025
+ 06:24:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250501133726.2627373-1-sjg@chromium.org>
- <20250501133726.2627373-16-sjg@chromium.org>
- <5403d72f-65b3-47f8-912e-d1b64e111f00@cherry.de>
- <CAFLszTh1Sm9ymBDRLqwncaSHyRVYiabsQvd-hUrzLwo2iOvUnQ@mail.gmail.com>
- <20250505164143.GG5430@bill-the-cat>
-In-Reply-To: <20250505164143.GG5430@bill-the-cat>
+References: <20250501131858.2160756-1-sjg@chromium.org>
+ <20250505181421.GI5430@bill-the-cat>
+In-Reply-To: <20250505181421.GI5430@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 May 2025 15:24:18 +0200
-X-Gm-Features: ATxdqUGcgukAaFAjr-lvRuYur2JQjG6_a8MNDtV960pJHfwwm9LKh-wUQ2Hg1Qs
-Message-ID: <CAFLszTiu41PxU6i5NstS3mZLD6C8AGaS8EUwe=9gLfO7T5waOg@mail.gmail.com>
-Subject: Re: [PATCH v2 15/18] bootstd: Provide a command to select the bootdev
- order
+Date: Tue, 6 May 2025 15:24:21 +0200
+X-Gm-Features: ATxdqUGTs0WJOeTcJUDG6kdt_yG8DJdwUFaxi9Ime4cTRVFzzzk2UplhooJCRZ8
+Message-ID: <CAFLszTgp0Y-yJVwE_ZBKKOXrqra6nRZqE-phPgQhA9Et99qcDg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] booti: Remove the SYS_BOOTM_LEN limit for booti
 To: Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Eddie James <eajames@linux.ibm.com>, 
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,104 +94,46 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 5 May 2025 at 18:41, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 5 May 2025 at 20:14, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, May 05, 2025 at 05:37:33PM +0200, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Mon, 5 May 2025 at 10:34, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On 5/1/25 3:37 PM, Simon Glass wrote:
-> > > [...]
-> > > > diff --git a/boot/bootstd-uclass.c b/boot/bootstd-uclass.c
-> > > > index 9bee73ead58..294865feb64 100644
-> > > > --- a/boot/bootstd-uclass.c
-> > > > +++ b/boot/bootstd-uclass.c
-> > > > @@ -6,6 +6,8 @@
-> > > >    * Written by Simon Glass <sjg@chromium.org>
-> > > >    */
-> > > >
-> > > > +#define LOG_CATEGORY UCLASS_BOOTSTD
-> > > > +
-> > > >   #include <alist.h>
-> > > >   #include <blk.h>
-> > > >   #include <bootdev.h>
-> > > > @@ -132,6 +134,22 @@ const char *const *const bootstd_get_bootdev_order(struct udevice *dev,
-> > > >       return std->bootdev_order;
-> > > >   }
-> > > >
-> > > > +void bootstd_set_bootdev_order(struct udevice *dev, const char **order_str)
-> > > > +{
-> > > > +     struct bootstd_priv *std = dev_get_priv(dev);
-> > > > +     const char **name;
-> > > > +
-> > > > +     free(std->bootdev_order);  /* leak; convert to use alist */
-> > > > +
-> > >
-> > > leak? and aren't you using alist already?
-> >
-> > Not for this, yet.
-> >
-> > >
-> > > [...]
-> > >
-> > > > diff --git a/doc/usage/cmd/bootdev.rst b/doc/usage/cmd/bootdev.rst
-> > > > index 98a0f43c580..abede194cba 100644
-> > > > --- a/doc/usage/cmd/bootdev.rst
-> > > > +++ b/doc/usage/cmd/bootdev.rst
-> > > > @@ -13,6 +13,7 @@ Synopsis
-> > > >
-> > > >       bootdev list [-p]        - list all available bootdevs (-p to probe)
-> > > >       bootdev hunt [-l|<spec>] - use hunt drivers to find bootdevs
-> > > > +    bootdev order [clear] | [<spec> ...]  - view or update bootdev order
-> > > >       bootdev select <bm>      - select a bootdev by name
-> > > >       bootdev info [-p]        - show information about a bootdev
-> > > >
-> > > > @@ -78,6 +79,27 @@ To run hunters, specify the name of the hunter to run, e.g. "mmc". If no
-> > > >   name is provided, all hunters are run.
-> > > >
-> > > >
-> > > > +bootdev order
-> > > > +~~~~~~~~~~~~~
-> > > > +
-> > > > +This allows the bootdev order to be examined or set. With no argument the
-> > > > +current ordering is shown, one item per line.
-> > > > +
-> > > > +The argument can either be 'clear' or a space-separated list of labels. Each
-> > > > +label can be the name of a bootdev (e.g. "mmc1.bootdev"), a bootdev sequence
-> > > > +number ("3") or a media uclass ("mmc") with an optional sequence number (mmc2).
-> > > > +
-> > > > +Use `bootdev order clear` to clear any ordering and use the default.
-> > > > +
-> > > > +By default, the ordering is defined by the `boot_targets` environment variable
-> > > > +or, failing that, the bootstd node in the devicetree ("bootdev-order" property).
-> > > > +If no ordering is provided, then a default one is used.
-> > > > +
-> > >
-> > > Not sure what's the benefit if we can simply set the environment variable?
-> >
-> > The environment variable is there to maintain backwards compatibility
-> > with the distro scripts. It now seems that we are unlikely to ever
-> > drop those, but you never know.
+> On Thu, May 01, 2025 at 07:18:32AM -0600, Simon Glass wrote:
 >
-> Repeating myself from some other discussion before, it's not just "distro
-> scripts", managing things with the environment is an intentional
-> feature, not a backwards compatible legacy thing. Solutions to "boot
-> this device" that do not have some support for using the environment to
-> modify things as needed are unlikely to be flexible enough for all use
-> cases.
+> > This series restores the original behaviour of extlinux booting linux
+> > 'Image' files, which is to ignore CONFIG_SYS_BOOTM_LEN and instead uses
+> > a limit of 10x the compressed size.
+> >
+> > It also adds RISC-V support, since it uses a similar format to ARM64.
+> >
+> > Future work should integrate the code in 'booti' into main 'bootm'
+> > logic.
+>
+> I don't like "in the future we'll remove duplicated code".
 
-For bootstd I would rather define something designed for that purpose,
-than use a boot_targets environment variable. If we are relying on an
-environment variable to have a particular value, then erasing the
-environment might stop the board from booting. The idea with bootstd
-is that it should always be able to boot.
+Small series, fixes a problem, can be made larger but then it isn't a bug-fix.
 
-But in any case, we have this variable today. Removing it would
-require some discussion and thought and is not likely in the
-foreseeable future.
+> I also don't
+> like not seeing that what we really need to do, in all cases (not just
+> booti) handle decompression like we do for FIT images, and ask LMB to
+> give us a space to use.
+
+See bootm_load_os() which does already do this.
+
+> A problem is that CONFIG_SYS_BOOTM_LEN was never
+> intended to be the limit on *decompression* as it's the limit on what
+> we're loading to memory from disk. That's what getting me unhappy with
+> this part of the series.
+
+From what I can tell, that was introduced 11 years ago by this commit:
+
+081cc197472 (HEAD) bootm: Export bootm_decomp_image()
+
+I suppose the idea is that BOOTM is supposed to be a limit on the
+image being loaded, so it is compressed, then the limit needs to apply
+to the size of the uncompressed image, to maintain parity. Otherwise
+there would be no limit at all, since it is pretty easy to devise an
+100-byte image which expands to fill all available memory.
+
+Using 10x the uncompressed size doesn't fill me with the joys of spring, TBH.
 
 Regards,
 Simon
