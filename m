@@ -4,72 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F2EC3ABAC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 15:09:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E82C3ABBC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 15:31:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6366082153;
-	Tue,  6 May 2025 17:09:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9E36B8210D;
+	Tue,  6 May 2025 17:31:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QK1TT5uz";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="XcxzBgfn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC8EB82162; Tue,  6 May 2025 17:09:08 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7286820F6
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 17:09:05 +0200 (CEST)
+ id 8F8F58210D; Tue,  6 May 2025 17:31:52 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 59C4A820EB
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 17:31:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 546F90DS1110771
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 6 May 2025 10:09:00 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746544140;
- bh=zX5nACG72u7X5x7UME66VtrcMhoUmpP/QKBIwLrS1NA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=QK1TT5uzzjNwHHQxQAaSHp8l7SHQdUz15Ljm7Lq49YsXu0+iT4INGVqOp91GgunEw
- pXMJ0QJH8y8sb74312fIPO9jstP5wazWgAiaQrKjBJaQAvAtpgFOFz1FJ1+cmZeG+/
- /5rYVnmqz1744ps+872srsXsJEttsgVtGAkSa2qQ=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 546F903h076660
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 6 May 2025 10:09:00 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- May 2025 10:08:59 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 May 2025 10:08:59 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 546F8xhh106115;
- Tue, 6 May 2025 10:08:59 -0500
-Message-ID: <3ffaf965-503f-4c08-b914-3d4014cdf72a@ti.com>
-Date: Tue, 6 May 2025 10:08:58 -0500
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e7311e66a8eso5293953276.2
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 08:31:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1746545507; x=1747150307; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mJMPsb2rLLUH78FYmkLHx0OZF9/neV4ybQepfBOmSAU=;
+ b=XcxzBgfnzo3oq58yf6/HV5CKtIgN6oJH+fXKqynaP5Y7ro8GnLpVhGrYLFt/KaZrl5
+ wX2zoVOTNU7D8Uo5g+tAgc5zzDhAkqtowznSvg3700WoJSkMdpcbmqld4t/8H/kMmbaq
+ rdBnrhRC3GWD19LUExwBNb8GkclKD7MiPRQ5dnBsHdoE75sAnt5VdBAWpDiZcnmWgklB
+ 8KyLfXqXTBSQEA42h56nXlljj6BcYlcLryemlCTceNpwwrCJTFGajkY9TWnnadF65VFE
+ Fte90FYgvTynp9joOkbEAZhFC8fbzkgcMnJeFsM+3jSk9Xzp7RtysS+7n00RnYAHAZZ3
+ Khvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746545507; x=1747150307;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mJMPsb2rLLUH78FYmkLHx0OZF9/neV4ybQepfBOmSAU=;
+ b=qzjEQBM5hBXmfJRrd8apDG3VNfrMzRhrQeYl2MZIzYCxmE6a8UEZOBz03izzGgKEkw
+ QijdnOaZPzVrJ1/TPLvI/DgVegWmw3ofGOg87Fmfbl4nteccDoOtA4HhZMORxtbQwZeA
+ E2P1+hh8S0wddrl1IKMMSp7IJIL4F1QF/UFwnYlbhILQVs+PCxExWSHOapFeki8EHZXN
+ +25QN2O4omCTbgQtMk4ZTrRwF3kRMDdBlBUh1OyaO8eTVoOh79vYiI4AnDOif/KW5bJS
+ kfeET9l+yiCU1+yrUI1fowpI81bXZq9yt7vzI8TznroYjYuMRZ5n65Y6bYWR+2suoiOb
+ n+6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXPqOFd1X/6RClAnut0yAgPjDPCi2YLq/0ndmb2ZK4/N3pixI5NBILMAGczfFFKXu3SFdLDuYc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwEWC60CiVLs68YHwrCRusnhmxlnFy0fn81z2KnqM7KkeU/jT6v
+ bl3ewnSwwYlE9Qg/qExOYfB+hNCLmCDjndy94A2lt3El4bdPTvee6oJwyH/PDZ28UfZ5WyMTMWg
+ SbIcSpMDYXBtKYWaav64blAIEb6NDOtSQ0uhcxw==
+X-Gm-Gg: ASbGncvV3vPoBUm03iasMS27eQxq6AyZrw6X70H875kDze4d2RpuDFkMyGyphn6pP85
+ 50kpThEEtiX91/XlB1edtqn+FKgsupD6cK9MFWEXzos3Uf9YWIRgJzbaLN2dYKEMI1/TbnwpzxK
+ tgIfOUPgc5D64HwKMfq7ZDNg==
+X-Google-Smtp-Source: AGHT+IGmtPmwQg5i4k6J674pqSCPyOh4IybostEoS281YaLSQ/1Z1YL7ZRDNh82120pVL7b7l/HEC7CXURuOL4aZD3w=
+X-Received: by 2002:a05:690c:6a02:b0:6fb:277f:f022 with SMTP id
+ 00721157ae682-708eaee7098mr157526587b3.15.1746545506843; Tue, 06 May 2025
+ 08:31:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] Add support to boot TI K3 HSM M4 core
-To: Beleswar Prasad Padhi <b-padhi@ti.com>, <trini@konsulko.com>
-CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
- <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
- <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
- <d-gole@ti.com>, <u-boot@lists.denx.de>
-References: <20250506104202.16741-1-b-padhi@ti.com>
- <41a042ec-d2ec-48ee-be15-a6f88895e977@ti.com>
- <b643bfa3-5607-4d9e-95bd-cfab9d7a6ca5@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <b643bfa3-5607-4d9e-95bd-cfab9d7a6ca5@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250428095945.1432389-1-heiko.thiery@gmail.com>
+ <D9I6S5PD32TJ.3AGU7UM3EUOF6@kernel.org>
+ <20250428142316.geminnotbfmbkpxs@skbuf>
+ <PAXPR04MB85100048CC9987A31C4B578A88802@PAXPR04MB8510.eurprd04.prod.outlook.com>
+ <CAEyMn7b3DXKY7QETfxd0Lsi-3HwXL1E8QpD1SdyHnq0s3A5x1g@mail.gmail.com>
+In-Reply-To: <CAEyMn7b3DXKY7QETfxd0Lsi-3HwXL1E8QpD1SdyHnq0s3A5x1g@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 6 May 2025 08:31:35 -0700
+X-Gm-Features: ATxdqUEETlSMeXX6nLLClTpXBjK10PiFzjdD3vZMyVtmHuBBCh_0p23Zovs8Zzo
+Message-ID: <CAJ+vNU3wan-_EKX7oC04sa2Oc726D9OjquoCDtby+t_SwN9XGw@mail.gmail.com>
+Subject: Re: [PATCH] net: fsl_enetc: fix imdio register calculation
+To: Heiko Thiery <heiko.thiery@gmail.com>
+Cc: Alice Guo <alice.guo@nxp.com>, Marek Vasut <marex@denx.de>, 
+ Vladimir Oltean <vladimir.oltean@nxp.com>, Michael Walle <mwalle@kernel.org>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Ye Li <ye.li@nxp.com>, 
+ =?UTF-8?Q?Thomas_Sch=C3=A4fer?= <thomas.schaefer@kontron.com>, 
+ Wei Fang <wei.fang@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,94 +104,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/6/25 9:51 AM, Beleswar Prasad Padhi wrote:
-> Hi Andrew,
-> 
-> On 5/6/2025 4:38 PM, Andrew Davis wrote:
->> On 5/6/25 5:41 AM, Beleswar Padhi wrote:
->>> Some TI K3 SoCs like J721S2, and J784S4 have a HSM (High Security
->>> Module) M4F core in the Wakeup Voltage Domain which could be used to
->>> run secure services like Authentication. Boot flow for HSM M4 core is
->>> different than the general purpose M4F cores, and is as below:
->>>
+On Tue, May 6, 2025 at 2:33=E2=80=AFAM Heiko Thiery <heiko.thiery@gmail.com=
+> wrote:
+>
+> Hi Alice, Hi Marek,
+>
+>
+>
+> Am Di., 29. Apr. 2025 um 03:19 Uhr schrieb Wei Fang <wei.fang@nxp.com>:
 >>
->> The below flow looks exactly like the general purpose M4F cores..
->> Why is the HSM core treated differently and this loader not made into
->> a normal remote proc driver?
-> 
-> 
-> Not exactly, HSM core is treated differently because of following exceptions:
-> 1. Device operations for HSM core (like reset/reset release) are not handled by DM. TIFS handles that with proc_boot_ctrl TI-SCI calls.
-
-This could be added to the commit message then.
-
-> 2. The HSM firmware is not an ELF image. So we can't use rproc elf loader with it. Manual memcpy has to be done.
-> 
-
-Why is the HSM firmware not an ELF image?
-
-> All of that can still be accounted in the existing M4 rproc driver, but it will be a lot of if-else checks, which I don't prefer. Let me know if you prefer that way.
-> 
-
-I'm not a fan of if-else checks either, just trying to get an idea
-of how many would really be needed. Judging from the below commit
-I'd agree keeping it here would be the cleaner option for now.
-
-Andrew
-
-> Patch having HSM support in M4 remoteproc driver:
-> https://gist.github.com/3V3RYONE/a15a5c6933bbc83278da9860c25ec21c
-> 
+>> > > > With commit cc4e8af2c552, fsl_enetc register accessors have been
+>> > > > split to
+>> > >
+>> > > With 'commit cc4e8af2c552 ("net: fsl_enetc: Split register accessors=
+")'
+>> > >
+>> > > > handle different register offsets on different SoCs. However, for
+>> > > > internal MDIO register calculation, only ENETC_PM_IMDIO_BASE was
+>> > > > fixed without adding the SoC specific MAC register offset.
+>> > > >
+>> > > > As a result, the network support for the Kontron SMARC-sAL28 and
+>> > > > probably other boards based on the LS1028A CPU is broken.
+>> > > >
+>> > > > Add the SoC specific MAC register offset to calculation of
+>> > > > imdio.priv to fix this.
+>> > > >
+>> > > > Fixes: cc4e8af2c552 ("net: fsl_enetc: Split register accessors")
+>> > > > Signed-off-by: Thomas Schaefer <thomas.schaefer@kontron.com>
+>> > > > Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+>> > >
+>> > > With the nitpick above:
+>> > >
+>> > > Reviewed-by: Michael Walle <mwalle@kernel.org>
+>> > >
+>> > > > ---
+>> > > >
+>> > > > But the question that now arises is, does this code path work on t=
+he
+>> > > > imx SoCs as well. Now the imx specific offset 0x5000 is added here
+>> > > > and was not used before.
+>> > >
+>> > > Maybe the imx9 doesn't use the internal MDIO controller or the board
+>> > > which was this tested on doesn't use the PCS?
+>> > >
+>> > > -michael
+>> >
+>> > The imx specific offset 0x5000 should be correct.
+>> >
+>> > In downstream, the ENETC_PM_IMDIO_BASE macro is used in common code, b=
+ut
+>> > defined twice - there is a conditional include of either fsl_enetc.h, =
+or fsl_enetc4.h,
+>> > depending on whether CONFIG_ARCH_IMX9 is defined. Thus,
+>> > ENETC_PM_IMDIO_BASE is replaced either with 0x8030 or 0x5030 in
+>> > downstream.
+>> > https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/f=
+sl_enetc.
+>> > c#L25
+>> > https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/f=
+sl_enetc.
+>> > h#L76
+>> > https://github.com/nxp-qoriq/u-boot/blob/lf-6.12.3-1.0.0/drivers/net/f=
+sl_enetc
+>> > 4.h#L126
+>> >
+>> > I guess Marek fell into the pitfall when upstreaming.
+>> >
+>> > > > Can someone please test this on an imx9 and confirm?
+>> > > >
+>> > > >  drivers/net/fsl_enetc.c | 4 +++-
+>> > > >  1 file changed, 3 insertions(+), 1 deletion(-)
+>> > > >
+>> > > > diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c ind=
+ex
+>> > > > 52fa820f51..97cccda451 100644
+>> > > > --- a/drivers/net/fsl_enetc.c
+>> > > > +++ b/drivers/net/fsl_enetc.c
+>> > > > @@ -473,13 +473,15 @@ static int enetc_init_sxgmii(struct udevice
+>> > > > *dev)
+>> > > >  /* Apply protocol specific configuration to MAC, serdes as needed
+>> > > > */  static void enetc_start_pcs(struct udevice *dev)  {
+>> > > > + struct enetc_data *data =3D (struct enetc_data
+>> > > > +*)dev_get_driver_data(dev);
+>> > > >   struct enetc_priv *priv =3D dev_get_priv(dev);
+>> > > >
+>> > > >   /* register internal MDIO for debug purposes */
+>> > > >   if (enetc_read_pcapr_mdio(dev)) {
+>> > > >           priv->imdio.read =3D enetc_mdio_read;
+>> > > >           priv->imdio.write =3D enetc_mdio_write;
+>> > > > -         priv->imdio.priv =3D priv->port_regs + ENETC_PM_IMDIO_BA=
+SE;
+>> > > > +         priv->imdio.priv =3D priv->port_regs + data->reg_offset_=
+mac +
+>> > > > +                            ENETC_PM_IMDIO_BASE;
+>> > > >           strlcpy(priv->imdio.name, dev->name, MDIO_NAME_LEN);
+>> > > >           if (!miiphy_get_dev_by_name(priv->imdio.name))
+>> > > >                   mdio_register(&priv->imdio);
+>> > >
+>> >
+>> > Reviewed-by: Vladimir Oltean <vladimir.oltean@nxp.com>
+>> > Tested-by: Vladimir Oltean <vladimir.oltean@nxp.com> # LS1028A
+>> >
+>> > +Fang Wei to confirm/test for i.MX95.
 >>
->> Andrew
+>> Hi Alice,
 >>
->>> 1. Request control of HSM M4F remote processor.
->>> 2. Assert Reset on the HSM M4F remote processor.
->>> 3. Request Secure Entity to Authenticate and Load HSM firmware into
->>>     core's internal SRAM memory region. For GP device, load the firmware
->>>     manually into core's SRAM region.
->>> 4. Deassert Reset on the HSM M4F remote processor.
->>> 5. Release control of HSM M4F remote processor.
->>>
->>> This series adds support to boot HSM M4 core from R5 SPL stage. The HSM
->>> firmware is packed inside the tispl.bin fit image. The firmware is
->>> unpacked into a temporary DDR address which is then used to load HSM
->>> core. The configs to boot HSM M4 core are disabled by default.
->>>
->>> v2: Changelog:
->>> [Andrew]:
->>>   1. Added support in SPL to load FIT images with no 'load' property.
->>>   2. Removed 'default = n' in CONFIG option.
->>>   3. Used __maybe_unused to decrease preprocessing.
->>>   4. Better error messages with error code.
->>> [Udit]:
->>>   1. Added 'HSM' entries in enum at the last.
->>>   2. Added error condition in if-elseif-else ladder.
->>>   3. Hang System boot when HSM failed to boot properly.
->>>
->>> Link to v1:
->>> https://lore.kernel.org/all/20250422095430.363792-1-b-padhi@ti.com/
->>>
->>> Test logs after enabling HSM boot configs:
->>> https://gist.github.com/3V3RYONE/ad33683652c8c49e4fedab49f0493e79
->>>
->>> Beleswar Padhi (7):
->>>    arm: mach-k3: Add config option for booting HSM core
->>>    spl: Use FIT data address as fallback when 'load' property is absent
->>>    arm: dts: k3-binman: Add template for packing HSM firmware
->>>    arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM firmware inside
->>>      tispl.bin
->>>    arm: mach-k3: Use FIT image data addr as fallback if 'load' prop is
->>>      missing
->>>    arm: mach-k3: Explicitly identify TIFSSTUB images when discarding
->>>      buffers
->>>    arm: mach-k3: r5: common: Add support to boot HSM M4 core
->>>
->>>   arch/arm/dts/k3-binman.dtsi        |   9 +++
->>>   arch/arm/dts/k3-j721s2-binman.dtsi |  12 ++++
->>>   arch/arm/dts/k3-j784s4-binman.dtsi |  14 ++++
->>>   arch/arm/mach-k3/Kconfig           |   7 ++
->>>   arch/arm/mach-k3/r5/common.c       | 111 +++++++++++++++++++++++++++--
->>>   common/spl/spl_fit.c               |  16 ++++-
->>>   6 files changed, 164 insertions(+), 5 deletions(-)
->>>
+>> Can you help check this patch on i.MX95?
+>
+>
+> Friendly reminder, are you able to confirm that?
+>
+>
+> BR,
+> Heiko
+
+Hi Heiko,
+
+I was able to test this on top of master with an imx95_19x19_evk -
+enetc (1gb) interface works before and after the patch. Was there
+something more specific that needs testing?
+
+Tested-by: Tim Harvey <tharvey@gateworks.com> # imx95_19x19_evk
+
+Best Regards,
+
+Tim
