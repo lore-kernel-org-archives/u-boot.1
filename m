@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50264C3ABBF
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 13:24:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A736DC3ABAC
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 13:24:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5E878219D;
-	Tue,  6 May 2025 15:24:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37B948212F;
+	Tue,  6 May 2025 15:24:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e4RghYNo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yji3loDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C3E5820F6; Tue,  6 May 2025 15:24:17 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 03AE282935; Tue,  6 May 2025 15:24:29 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0710E82905
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 15:24:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF322820F6
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 15:24:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5eb92df4fcbso10911557a12.0
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 06:24:13 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e22e6ed2so8892945a12.3
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 06:24:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746537852; x=1747142652; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746537866; x=1747142666; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LGEMS2m4N0lVSozlUW4BxXtDYakHllV61QnreyNAgT4=;
- b=e4RghYNoNmSYOWGfMvWhyUPcSu7D+VL66B5JxK6uVtHXOAUJZOC8WFARtj9nxndUEk
- yAK3i12IizR7oDBX8zt2sZ2Ux5p47aYXDD29u+xyWS3iXfLw27EuGWLYdtBZz9rJHtkv
- mWSKU3odvOkybFzAHd2tdNb1qskxanOoVUPK0=
+ bh=0uqpEVEZTWqbDvPjfg5iGUSKtkaGS4M6Jy3PPqqRq2A=;
+ b=Yji3loDssKWnACtN5bb8McgodcZVSTu9ezih7uOlKRQ1q/CJf6+WORfGlaXDhXOrUe
+ wZWlWobAtoqoKUMi62JqQ1+KObpfcw0D2rqiObkWMbN+SL266MgG1xEmYQVTrXs7sRCD
+ c01CzTZo/fsRzMjCEwX7rjLxuc/wsWmJODNgU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746537852; x=1747142652;
+ d=1e100.net; s=20230601; t=1746537866; x=1747142666;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LGEMS2m4N0lVSozlUW4BxXtDYakHllV61QnreyNAgT4=;
- b=dcPDKZn/mqfIO7IORgWmG+EKJV75CbLR/qrDeeg5s8xiEmq6jaIYVfeOmqVnnnMKIN
- +gwoO286xDvrejxXfE7JKi51PM1l1mKueZ1rYtgUzaQvHHGIx12pfBqXJvJDNN2zxmPX
- 0qNc1omaImsGLUkiCQ+66FW0zyhdMn5/T99Cm5+W3MQUC9/6ShFYccNbOYAxKKdGj1a1
- QgnMBgK8FVdzWNWS+F1FY73pIePbxoJRLgG5+KhXbMvbawR4rsnsrU6h8i75h28RyaiZ
- jgX/p36eM0Ub+3KxsTavspPSaXhXrKq3967Y2lNGyqUBd7xD3K3Sm5GEivY+EhnVoYOy
- ZSdw==
+ bh=0uqpEVEZTWqbDvPjfg5iGUSKtkaGS4M6Jy3PPqqRq2A=;
+ b=s1s70PwWv2auOPIW58QV54Qi/McJ84WGmh0sHwb6K74MgObI3ulR5Kr/w/EAeiJx9P
+ 1Ao0m2j9T6doXCttGZokbLOtc8ln6aOuAg7iDejddT1s7vFBqBeh5j1MQYXenpQCcLM2
+ t4oFzDT5FJvWIbjm0QIgVZMDAHOq+jFtEp5JxXrqqnSwr+wNq7a2IN92wBbkPW0hEydy
+ RM4bh8XG90DX+1Ov918pLCIDb2ouQqxhHVD7aAFl6Q8ZnvVe+PtULR19jbRAia6ELSb7
+ GZkvzOHT/3H4u3UHslNApI/xPvqmuEc8AX3kU4T8+ztymKmuy76deCK7jrJ5ajWFqilb
+ OshQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/WnTj/9jH1I0xKk9/3zC+7cu3E9DbGtrJ3huGc843oo1W4EuqWT0G3l8dUVnYqLOomFPEFKg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzuZZWxqyNaae3CTnhI9vjnqz4S8I23EE9FblVlHt7puPR7ipyn
- mDr1oA+pZSh7XZXNULHAgOnRVnFGA1AQnKX0Pvh6+u1quiY5S8w2sYgXQK6xYr0TwEMNjbBK8pk
- U4ZGVZWieJsSsfSS9xlqUS6h84wayc+CaerjV+2jmdTa2RKJM8adu7YiCfg==
-X-Gm-Gg: ASbGncu2sH2wKphJJleNFcxOvbpdZvy1fOc3/qoNySpEjNtZvMVbQ6J7aw6zz31mAlZ
- nRJBaKhRGXLMgve3Sgts/2zbVhOyqAzo8InYsggdpMHlN1i2jU8KQVKr/po9QbpnI3tQ3vkRy2R
- kKXDdPRmRKHodlXjGM+Oe7PbE=
-X-Google-Smtp-Source: AGHT+IGETTM8DMw4JP5hKoik28nhzBMn9XhkxrKPl5R46vXg+MR0/eObcQAiHowaW+AVjqkCAtpapBm7vhpEHJErh2c=
-X-Received: by 2002:a17:906:dc90:b0:ace:cb59:6c47 with SMTP id
- a640c23a62f3a-ad1d34c01e7mr318301266b.25.1746537852250; Tue, 06 May 2025
- 06:24:12 -0700 (PDT)
+ AJvYcCWG6YTkcMhPvtcATjArceCE9gpf9GIF7OWGkZYXcY5ynwzZPyZbZeeu3dS0l12XvkaGYJE8mss=@lists.denx.de
+X-Gm-Message-State: AOJu0Yydujg71uJy/RghLeOiq/xuVz8EkLz4EQH/5136/qUL4eFnMc5z
+ Wrx3rs++xz4ApWRdahAkTETYQ/aymHZbpM/2mw6ynU/SneUwtyRdCnhoXLdiIehyR7L9USnI6sh
+ M33pXaBIEDbptjcQzufZ2BX9Ai08n/c1g7Asu
+X-Gm-Gg: ASbGncuQDlvEyoPIVSx7XLD1vVpf3279yHI69qtuI6NyFdh5LSiaeRBDOMByzWx0Clm
+ JyqZL/Tjiq93c7KBjfSVtSO+TOsJilvXpt5dHmLegxtkFTCXLFDHnY6/EFPTZRzuDR3QGioCKSc
+ WpF2I64yAJkGW60ZZJ1BKridM=
+X-Google-Smtp-Source: AGHT+IEwDUts+dUjOZkyOV3hdghWPvh20T7V5iaXE5YQbUHaMMudCNpapMNxuTXmG3bSI7bJHkpjLJxzjd2gGbZ7i/E=
+X-Received: by 2002:a05:6402:13d1:b0:5e6:616f:42e4 with SMTP id
+ 4fb4d7f45d1cf-5fab05c1587mr10680976a12.27.1746537866061; Tue, 06 May 2025
+ 06:24:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250502025026.4140184-1-sjg@chromium.org>
- <20250502143359.GS1261075@bill-the-cat>
- <CAFLszTha1wWDCpi=HR4sE-rKjoPQp+Twvyrsb-fCcF=vPW4d8Q@mail.gmail.com>
- <20250502150641.GW1261075@bill-the-cat>
- <18d5e7ee-a63d-4895-abbc-4df7737dccff@gmx.de>
- <20250502193020.GZ1261075@bill-the-cat>
- <45357aad-96d3-4c84-b6be-36cf4bb9dfff@gmx.de>
- <20250502200451.GA1261075@bill-the-cat>
- <CAFLszThgJQvA57g8LH0JH6Bq8wk=hnQUnchaUD0SB6v+0JTezg@mail.gmail.com>
- <20250505181846.GJ5430@bill-the-cat>
-In-Reply-To: <20250505181846.GJ5430@bill-the-cat>
+References: <20250421162555.1200687-1-heinrich.schuchardt@canonical.com>
+ <20250421162555.1200687-2-heinrich.schuchardt@canonical.com>
+ <CAFLszTiVuNqAzQ=hi5_Uq6Jo2EUJkDtE6_gDaU=LY8hAXiL8ww@mail.gmail.com>
+ <279d1706-d140-409e-a74a-4f1d9eaef311@canonical.com>
+ <875xieanhm.fsf@bloch.sibelius.xs4all.nl>
+ <CAM=mAOnFrM_wa5SSWYWROoY+839L87A0cSx8-X=Hr=cHB9y3Tw@mail.gmail.com>
+ <20250505195452.GK5430@bill-the-cat>
+ <CAM=mAOkXoXZm8Bag3SN0DYD0NG_UeYub_vkhnF6X5ODurbrttw@mail.gmail.com>
+ <20250505221024.GR5430@bill-the-cat>
+ <c0c51cdb-107b-4ebb-abae-8494d9fc63ae@canonical.com>
+ <20250505234319.GT5430@bill-the-cat> <87v7qe82av.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87v7qe82av.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 May 2025 15:23:59 +0200
-X-Gm-Features: ATxdqUH6wD3ZJb1FnIVCW4jbMq8k5B8qhpppWiRytKNLnskCVeec4kH2U6EDdtc
-Message-ID: <CAFLszThgq8afbSL8zHqP6nCoB+F5wU6M0MbAoYRsJh8iMi8orA@mail.gmail.com>
-Subject: Re: [PATCH 0/3] RFC: test: Bring in the test hooks
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 6 May 2025 15:24:11 +0200
+X-Gm-Features: ATxdqUECX1bCmPaCspIRqy0b3n-kLA_HTs7_gxvUSqnOt3WCjX-z32bgf-zr8qI
+Message-ID: <CAFLszTii6g==uWg_igauL0m6h2t2EfZTqoKnnQ+fgAVvvwPAsw@mail.gmail.com>
+Subject: Re: [RFC 1/8] boot: EFI boot manager does not depend on BootOrder
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Tom Rini <trini@konsulko.com>, heinrich.schuchardt@canonical.com, 
+ ilias.apalodimas@linaro.org, tuomas.tynkkynen@iki.fi, 
+ patrick.rudolph@9elements.com, mkorpershoek@kernel.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,168 +99,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Mark, Tom,
 
-On Mon, 5 May 2025 at 20:18, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 6 May 2025 at 12:24, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >
-> On Sat, May 03, 2025 at 08:29:13AM -0600, Simon Glass wrote:
-> > Hi Tom,
+> > Date: Mon, 5 May 2025 17:43:19 -0600
+> > From: Tom Rini <trini@konsulko.com>
 > >
-> > On Fri, 2 May 2025 at 14:04, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, May 02, 2025 at 09:42:56PM +0200, Heinrich Schuchardt wrote:
-> > > > On 5/2/25 21:30, Tom Rini wrote:
-> > > > > On Fri, May 02, 2025 at 07:19:18PM +0200, Heinrich Schuchardt wrote:
-> > > > > > On 5/2/25 17:06, Tom Rini wrote:
-> > > > > > > On Fri, May 02, 2025 at 08:49:12AM -0600, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Fri, 2 May 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Thu, May 01, 2025 at 08:50:16PM -0600, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > During a recent discussion with Heinrich we discussed why the hooks are
-> > > > > > > > > > kept in a separate repo.
-> > > > > > > > > >
-> > > > > > > > > > The amount of code is small, a tenth of the size of the recently added
-> > > > > > > > > > lwip, just by way of example. Testing is a critical part of U-Boot and
-> > > > > > > > > > one of the things that distinguishes it from firmware projects that have
-> > > > > > > > > > not kept up in this area. By having the tests somewhere else, we are
-> > > > > > > > > > signalling that it is unusual, or difficult, or optional.
-> > > > > > > > > >
-> > > > > > > > > > The hooks mechanism also needs something of an update to take account of
-> > > > > > > > > > real boards in 2025. That will be much easier to undertake if the code
-> > > > > > > > > > that test/py talks to is in the same repo.
-> > > > > > > > > >
-> > > > > > > > > > This series brings the hook files in as first-class citizens of U-Boot.
-> > > > > > > > > >
-> > > > > > > > > > If we do go ahead with this, I will send a different series which has
-> > > > > > > > > > separate commits (with correct author) in the u-boot-test-hooks repo.
-> > > > > > > > >
-> > > > > > > > > I think bringing more projects directly in to the repository is a bad
-> > > > > > > > > idea. Your example of lwip isn't applicable because it's a read-only
-> > > > > > > > > subtree that's maintained outside of the project (same as the dts
-> > > > > > > > > subtree). But sure, lets "Say Yes". That said, we still need to:
-> > > > > > > > > - Remove needless examples from the tree.
-> > > > > > > > > - Not include personal labs directly in the tree.
-> > > > > > > > >
-> > > > > > > > > That last one is why I really think this is a bad idea. The point of
-> > > > > > > > > having the hooks standalone is so that any given lab can easily add
-> > > > > > > > > support for their lab and manage it, without worrying about disclosing
-> > > > > > > > > internal layout. There's going to be hard coded default passwords there.
-> > > > > >
-> > > > > > Secrets MUST NEVER reside in git repos.
-> > > > > >
-> > > > > > I can't imagine that such irresponsible habits would be practiced by any
-> > > > > > accountable developer.
+> > On Tue, May 06, 2025 at 01:18:16AM +0200, Heinrich Schuchardt wrote:
+> > > On 5/6/25 00:10, Tom Rini wrote:
+> > > > On Tue, May 06, 2025 at 12:07:20AM +0200, Heinrich Schuchardt wrote:
+> > > > > Tom Rini <trini@konsulko.com> schrieb am Mo., 5. Mai 2025, 21:54:
 > > > > >
-> > > > > I agree it shouldn't be done. And just this week was the most recent
-> > > > > time I've seen a company do that internally, because it's internal and
-> > > > > was just a temporary thing. We helped them stop needing to do that, but
-> > > > > assuming it never happens is a bad idea.
-> > > > >
-> > > > > > Please, have a look at
-> > > > > >
-> > > > > > https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions
-> > > > > > https://tsi-ccdoc.readthedocs.io/en/master/ResOps/2019/gitlab/07_pass-build-secrets.html
-> > > > > >
-> > > > > > to see how to do it properly.
-> > > > > >
-> > > > > > The same is true for a private lab:
-> > > > > > Use environment variables that are coming from outside the repository.
-> > > > > >
-> > > > > > > > > There's going to be repository secrets there. That kind of information
-> > > > > > > > > really should not be in a public repository. Integrating the hooks with
-> > > > > > > > > mainline will make lab management harder, not easier. The point of the
-> > > > > > > > > existing labs in u-boot-test-hooks is to provide samples.
-> > > > > > > > >
-> > > > > > > > > I think this is all why no, we should not go down this path.
-> > > > > > > >
-> > > > > > > > Is it worth discussing this, or is your mind made up? I have some
-> > > > > > > > thoughts on the last one.
+> > > > > > On Mon, May 05, 2025 at 09:51:52PM +0200, Heinrich Schuchardt wrote:
+> > > > > > > Mark Kettenis <mark.kettenis@xs4all.nl> schrieb am Mo., 5. Mai 2025,
+> > > > > > 21:03:
 > > > > > > >
-> > > > > > > I think it's a terrible idea that I already said:
-> > > > > > > > But sure, lets "Say Yes".
+> > > > > > > > > Date: Fri, 2 May 2025 18:08:56 +0200
+> > > > > > > > > From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > > > > > > >
+> > > > > > > > > On 5/2/25 16:49, Simon Glass wrote:
+> > > > > > > > > > Hi Heinrich,
+> > > > > > > > > >
+> > > > > > > > > > On Mon, 21 Apr 2025 at 10:26, Heinrich Schuchardt
+> > > > > > > > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > The EFI boot manager bootmeth does not require variable BootOrder
+> > > > > > to
+> > > > > > > > be
+> > > > > > > > > > > preexisting. It creates this variable.
+> > > > > > > > > > >
+> > > > > > > > > > > Signed-off-by: Heinrich Schuchardt <
+> > > > > > heinrich.schuchardt@canonical.com
+> > > > > > > > >
+> > > > > > > > > > > ---
+> > > > > > > > > > >    boot/bootmeth_efi_mgr.c | 21 +++------------------
+> > > > > > > > > > >    1 file changed, 3 insertions(+), 18 deletions(-)
+> > > > > > > > > > >
+> > > > > > > > > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+> > > > > > > > > > > index 42b8863815e..1669cbed5bd 100644
+> > > > > > > > > > > --- a/boot/bootmeth_efi_mgr.c
+> > > > > > > > > > > +++ b/boot/bootmeth_efi_mgr.c
+> > > > > > > > > > > @@ -47,30 +47,15 @@ static int efi_mgr_check(struct udevice *dev,
+> > > > > > > > struct bootflow_iter *iter)
+> > > > > > > > > > >
+> > > > > > > > > > >    static int efi_mgr_read_bootflow(struct udevice *dev, struct
+> > > > > > > > bootflow *bflow)
+> > > > > > > > > > >    {
+> > > > > > > > > > > -       struct efi_mgr_priv *priv = dev_get_priv(dev);
+> > > > > > > > > > > -       efi_status_t ret;
+> > > > > > > > > > > -       efi_uintn_t size;
+> > > > > > > > > > > -       u16 *bootorder;
+> > > > > > > > > > > -
+> > > > > > > > > > > -       if (priv->fake_dev) {
+> > > > > > > > > > > -               bflow->state = BOOTFLOWST_READY;
+> > > > > > > > > > > -               return 0;
+> > > > > > > > > > > -       }
+> > > > > > > > > > > +       int ret
+> > > > > > > > > > >
+> > > > > > > > > > >           ret = efi_init_obj_list();
+> > > > > > > > > > >           if (ret)
+> > > > > > > > > > >                   return log_msg_ret("init", ret);
+> > > > > > > > > > >
+> > > > > > > > > > > -       /* Enable this method if the "BootOrder" UEFI exists. */
+> > > > > > > > > > > -       bootorder = efi_get_var(u"BootOrder",
+> > > > > > > > &efi_global_variable_guid,
+> > > > > > > > > > > -                               &size);
+> > > > > > > > > > > -       if (bootorder) {
+> > > > > > > > > > > -               free(bootorder);
+> > > > > > > > > > > -               bflow->state = BOOTFLOWST_READY;
+> > > > > > > > > > > -               return 0;
+> > > > > > > > > > > -       }
+> > > > > > > > > > > +       bflow->state = BOOTFLOWST_READY;
+> > > > > > > > > > >
+> > > > > > > > > > > -       return -EINVAL;
+> > > > > > > > > > > +       return 0;
+> > > > > > > > > > >    }
+> > > > > > > > > > >
+> > > > > > > > > > >    static int efi_mgr_read_file(struct udevice *dev, struct
+> > > > > > bootflow
+> > > > > > > > *bflow,
+> > > > > > > > > > > --
+> > > > > > > > > > > 2.48.1
+> > > > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > How do we know if the board is using EFI bootmgr? My understanding
+> > > > > > was
+> > > > > > > > > > that this was a way to find out?
+> > > > > > > > >
+> > > > > > > > > The boot manager must always run.
+> > > > > > > > >
+> > > > > > > > > The check for the BootOrder variable introduced in commit
+> > > > > > f2bfa0cb1794
+> > > > > > > > > is a bug.
+> > > > > > > >
+> > > > > > > > Well, at the time the boot manager did not attempt to boot the default
+> > > > > > > > path.  So there was no point in running the boot manager code unless
+> > > > > > > > BootOrder (or BootNext) was set.  And of course before that commit the
+> > > > > > > > boot manager didn't run at all on non-sandbox builds that had the
+> > > > > > > > standard boot stuff enebaled.
+> > > > > > > >
+> > > > > > > > Anyway, I believe the thinking behind that commit is still sound.  As
+> > > > > > > > I explained earlier, I think that...
+> > > > > > > >
+> > > > > > > > > The boot manager handles in sequence:
+> > > > > > > > >
+> > > > > > > > > * Try to boot as indicated by BootNext.
+> > > > > > > > > * Try to boot as indicated by BootOrder.
+> > > > > > > > > * Try to boot default path for available media.
+> > > > > > > > >     This will add Boot#### entries and update BootOrder.
+> > > > > > > >
+> > > > > > > > ...doing this all in a monolithic sequence isn't the best way to
+> > > > > > > > handle EFI boot in the u-boot ecosystem.
+> > > > > > > >
+> > > > > > > > Your series moves the boot manager further down the list because the
+> > > > > > > > third step in the sequence has to happen late.  But as a result
+> > > > > > > > BootNext and BootOrder processing will also happen late.  So what
+> > > > > > > > happens if you have a board with two OS installations:
+> > > > > > > >
+> > > > > > > > 1. A generic Linux distro that boots via EFI.
+> > > > > > > >
+> > > > > > > > 2. Something like Armbian that provides an extlinux.conf file.
+> > > > > > > >
+> > > > > > > > Currently such a system will probably boot OS #1.  But after your
+> > > > > > > >
 > > > > > > >
-> > > > > > > But please do spend time explaining your thoughts and perhaps others
-> > > > > > > will also agree with you and I'll feel less bad taking this in?
-> >
-> > Well firstly, we should bring in the whole git history so I don't
-> > believe these patches should be applied as is. I did push a branch[1]
-> > but can send the commands if it helps.
->
-> I don't see how that's relevant here, but OK.
->
-> > > > > > Currently when changing a test hook I have to go through these steps:
+> > > > > > > This did not happen with distoboot. So migration from distroboot to
+> > > > > > > standard boot results in a change that you want to avoid.
+> > > > > > >
+> > > > > > > changes it will probably boot OS #2.  And if OS #1 sets BootOrder or
+> > > > > > > > BootNext that will not change anything.
+> > > > > > > >
+> > > > > > > > So I think we need a solution where BootNext and BootOrder processing
+> > > > > > > > happens early, like we do now.
+> > > > > > > >
+> > > > > > >
+> > > > > > > As of today BootNext does not invoke the boot manager.
+> > > > > > >
+> > > > > > > If BootOrder is set the boot manager may fail because not all devices are
+> > > > > > > detected as "hunters" have not been running. E.g. nvme scan and usb start
+> > > > > > > are only invoked after the EFI boot manager.
+> > > > > > >
+> > > > > > > I originally suggested to probe all boot devices before the boot manager
+> > > > > > > runs, but users complained that this slows down their non-EFI boot flows.
+> > > > > > > This is why I now move it after all boot methods but PXE.
 > > > > > >
-> > > > > > * fork u-boot-test-hooks
-> > > > > > * push a commit to my fork
-> > > > > > * update both .gitlab-ci.yaml and .azure-pipelines.yaml
-> > > > > > * commit the change code.denx.de
-> > > > > > * create a merge request for github.com/u-boot/u-boot
+> > > > > > Can we not see what BootOrder is and then ensure it's been "hunted" ?
 > > > > > >
-> > > > > > If the test hooks were in the same repo as main U-Boot, I could save two
-> > > > > > steps.
+> > > > > > --
+> > > > > > Tom
+> > > > > >
 > > > > >
-> > > > > Yes, that's true, the steps for updating our CI are a little bit longer.
-> > > > > I would be happy to make u-boot-test-hooks more widely writable (so it
-> > > > > would instead be pushing to a branch for step 1+2). But I'm also
-> > > > > concerned with external labs (which is both the origin of these scripts,
-> > > > > and where they're also used).
+> > > > > A load option may only contain the partition GUID and the file path. In
+> > > > > this case you wouldn't be able to tell whether it is for an NVMe drive, or
+> > > > > a USB stick.
 > > > > >
-> > > > > Today, I have both a "konsulko" branch of u-boot-test-hooks, internally.
-> > > > > That has subdirectories for both "sage" and "lootbox" (the two lab
-> > > > > hosts), and in turn py and bin subdirectories for each. There's no value
-> > > > > in publishing these changes as there's nothing unique about the
-> > > > > platforms there, which aren't already in the mainline u-boot-test-hooks.
-> > > > >
-> > > > > How should I manage these changes moving forward?
+> > > > > As numbering of devices cannot be expected to be stable, it is preferable
+> > > > > to use this short form of device paths for load options.
 > > > >
-> > > > You could create two branches based on origin/master u-boot:
+> > > > Ah, OK. So could we check and if not found print a human understandable
+> > > > error message, and continue on? I want to figure out some path that does
+> > > > not change the pre-bootstd behavior.
 > > > >
-> > > > One for maintaining your test lab specific u-boot-test changes and one for
-> > > > your private u-boot code changes.
-> > > >
-> > > > Check out the lab specific u-boot-test branch for steering the tests of the
-> > > > u-boot code branch.
 > > >
-> > > So now for a lab you need to maintain a branch of U-Boot itself, and
-> > > then to test you need to merge your lab support in? And then if there's
-> > > problems work back what git hash you tested on, if reporting either
-> > > problems, or as part of the "wouldn't it be nice to collect results
-> > > idea" work backwards from there? And bisecting problems then becomes a
-> > > real nightmare since each step requires a merge.
+> > > In distroboot scan_dev_for_efi is invoked for every boot device and each
+> > > time calls the boot manager. As usb start is only called in usb_boot this
+> > > will result in behavior that is as non-compliant with the UEFI
+> > > specification.
+> > >
+> > > We should reach a behavior that complies with the UEFI specification.
+> > > Not changing former distro boot behavior is not a valid option.
 > >
-> > If you have your own hook scripts, they don't have to be in the U-Boot
-> > tree. That is entirely up to you. In my case I would want them in the
-> > tree, but in your case you can put them somewhere else.  You can even
->
-> But we shouldn't have more "ellesmere" stuff in the tree. That's a
-> problem. No ones lab should directly be in upstream. We should be
-> documenting and providing examples for others to use. Perhaps that
-> fundamental confusion is why you're suggesting this path?
+> > Can we also not figure out some way to boot promptly? I was thinking
+> > something along the lines of if we know BootOrder (or similar), we try
+> > it. If we don't find it, we try again a bit later on when we can run all
+> > the hunting that might be slow. If the only option is slow-but-compliant
+> > I feel like a lot of use cases will opt out of using EFI boot instead.
 
-I don't see why ellesmere shouldn't be in there. It is a lab used for
-U-Boot and therefore part of the project, as I see it. If we end up
-with lots of labs from people then we can worry about that problem
-then. Today, we have the opposite problem: not enough labs.
+BTW this is what I have been proposing for a year or so. But my
+understanding was that you were happy enough with Heinrich's
+workaround for now.
 
 >
-> > put them inside the U-Boot directory but without adding them to git,
-> > if that helps. But we set up the 'PATH' variable to where things are.
-> > If we need to change things to make this easier for people, we can.
-> > I'm really not seeing any nightmares here at all.
+> I think that is possible.  But it will require tighter integration
+> integration between the EFI loader and the standard boot device
+> hunting code such that devices are probed as we walk to options
+> specified by the BootOrder.
 >
-> I don't see how PATH is relevant here either. That won't pick up any of
-> the configuration files. Might just be able to get away with two
-> directories in PYTHONPATH instead of one.
+> A complication here is that a Boot#### option doesn't necessearily
+> have the device encoded into the boot option.  An option can reference
+> just the GUID of a partition and many OS installers create such
+> options.  So if we see such an option we do need to probe devices
+> until we find the right partition.
 
-PATH is enough to run a hook script. Yes you need PYTHONPATH as well
-if you have stuff in those files. Nothing changes.
+Right. It might be feasible to just use bootstd to produce partitions
+one by one, e.g. by calling iter_incr(), then looking at what was
+received and seeing if it matches the first bootorder var, booting if
+so. That might be enough for a first pass?
 
-But Neil's comment was 'So this will definitely remove the ability to
-have test hooks out of the U-boot tree ?', not 'Do I still have to set
-my PYTHONPATH / PATH' to where my tree is ?'.
+Somewhat related, it would be nice if bootmgr could move to using expo
+and show its menu while it is still scanning things.
+
+>
+> Another complication is that currently the
+> efi_bootmgr_update_media_device_boot_option() function will append
+> Boot#### options it creates to the BootOrder variable.
+>
+> This is used to implement the following requirement in the spec:
+>
+>   The boot manager must also support booting from a short-form device
+>   path that starts with the first element being a File Path Media
+>   Device Path (File Path Media Device Path ). When the boot manager
+>   attempts to boot a short-form File Path Media Device Path, it will
+>   enumerate all removable media devices, followed by all fixed media
+>   devices, creating boot options for each device.
+>
+> However, a the spec also says that:
+>
+>   These new boot options must not be saved to non volatile storage,
+>   and may not be added to BootOrder.
+>
+> But we we do add those options to BootOrder and we I believe we will
+> save those new Boot#### options as well.
 
 Regards,
 Simon
