@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14D80C3ABBF
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 11:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB075C3ABBF
+	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 11:44:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 587FE8219D;
-	Tue,  6 May 2025 13:20:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F7C6820F6;
+	Tue,  6 May 2025 13:44:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oOsGEVWc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y1XRnYUq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3303828F8; Tue,  6 May 2025 13:20:52 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id F27D78210D; Tue,  6 May 2025 13:44:17 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2D43820F6
- for <u-boot@lists.denx.de>; Tue,  6 May 2025 13:20:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B064B80C83
+ for <u-boot@lists.denx.de>; Tue,  6 May 2025 13:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac289147833so1023070966b.2
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 04:20:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43cef035a3bso34804385e9.1
+ for <u-boot@lists.denx.de>; Tue, 06 May 2025 04:44:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746530450; x=1747135250; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Tjg8F3b0d6w/5G9fS3Uy7B1yn+qrARfFwhWzidfsFqQ=;
- b=oOsGEVWcIAjLIw40WM/UTkMkvSKolSWcIx8Uky/IXv+R9uE8rGhtWb5g/NTxfAYPjg
- IE2ddi0FKyg57SfhCirqUEe4aFEM0le7XILcmN9m+JwFZBP2N1Ld6RVCt48pwLinGSaF
- OvLIQJaQrMK4sTrkQ/vr6J1L6Uo1LlGDgAEYOAvgUAFSpvdnqFXr+8KesZhEZg1FAiMt
- KztjoVjQpNCxb2GZViVJSGMnLM0EyUrmQU09rgeNp2XRYlfbyYD2V5Ys22+w5+UK8I45
- dy5s6HgMiCbKa0Fxm8/COdU4IDNPPy3SqQMzV2TCpBcSXusf5E3JXZoUBcFyY+n+Ivm8
- lsdw==
+ d=gmail.com; s=20230601; t=1746531855; x=1747136655; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=njsK8es+byAkVSrpH/SshWUYOxN83OEWJ+D1Fb2Qe5Q=;
+ b=Y1XRnYUqEqhSKIyJhrkIlOgqwjJRHBr0E0xVB36HrEzvRshH6Av5P8ps5Q/3x5CV05
+ 63xJDN4LWtigM8YRE34iHRAO5j3asb9DQTcDLU7LD8AHGOMWaEmeVAa2+Hmvk4noNlK/
+ 9eLCzJU9dY4gVo/YhvHgDPqTftaib6cRykzCSe5quX1UnpasVWDQDu5If2hSDq9V7hQB
+ N+JEOS7/nqwtADhz4CL9kTkKAQB7YSGhuiw+qaMZYQA0UKBIu+pHcJgAkCmdLcVi2haa
+ XLDnhi4uUG2raoemVse+P67Xl3Me8NxQ+oxkG/J8oBpN+IMhSzwjt0bUFMMKMXjbFQYK
+ JkDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746530450; x=1747135250;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Tjg8F3b0d6w/5G9fS3Uy7B1yn+qrARfFwhWzidfsFqQ=;
- b=xRprcbslml0kFqVyQu2NjsDsCCM3pnBx6+7pMMIiUtfbTYwjzT1+wqvRry2eyw64V7
- KI5XQZ1KrM3tRQB/XPmPPyclR1qRcSmEBtd8nBOBnVvdBGhzw81Bt48E4XZXh2exsrDG
- 8Fp9+FV6/ZJCU9LX+ZbTMLHwiOt+6s93xNfd6GnIJKDvjcHaohsbmmaEL3zWQrQA0OtJ
- owJV0GynFc/8P6D4HPV2YYnmbTfxqvSwYelcXHcPjfzMpS+6CglYPI8J0QWW0rU9oEJI
- uFFaFKdTCGFkUrlbNxoXSYnhi2sxfmFN5UwVH6QxKoLYgNPmt9xEpggNZuaE20Ysxl1I
- XIjQ==
-X-Gm-Message-State: AOJu0YxLoF84l2fFHZzHolprbHKriV8a/y9IQs+aNPgve8C/fGjSG8kT
- hs8B5lPlOmaC0MH/JpOIIl+vr/hSkUwO6qCafx3JpdrbjmmqEQFbXtbUghMsBiM=
-X-Gm-Gg: ASbGnct1+aSkwvH6A2NMUfDihwIEFPAzzaZf3HZiJG/xS5zr+1vCl7P1lB0MTecPwVX
- 5TA9z/g49RiK3IVi7M7eRasPO4kUlraWcMZXB5BI3OuH/6m57xX0i5fZYQfV7251ZlqOgboKSp3
- glJCTwkVIGff0ZSfZSY4sKxe7tGUgmkOO7EGFWpX664gFlEy8N+cn3V3KgG64AboBJN0g8GzCKS
- 1fGIZ3MvaQhqF9vfJoOZBxDyXZ2mWB+swh6tHJ/nknoPmp/LNQkpS1tv38OdLy9gACX58eYzVc9
- ctSEm4ZFPyDzWQaQwkD+6KIlYpDVnyIVr1toCw1RZ/qIVPHK
-X-Google-Smtp-Source: AGHT+IF2l4AJwlZTbLq0nTeFZxVsmzy1TSvxsCFQYVAHwTYiS24cwMuXTDYtWtfwpj4ZgH5H2OkeDA==
-X-Received: by 2002:a17:907:7f8b:b0:ad1:8d47:f5a1 with SMTP id
- a640c23a62f3a-ad1d327b0c8mr298101966b.0.1746530450209; 
- Tue, 06 May 2025 04:20:50 -0700 (PDT)
-Received: from [192.168.0.32] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad1894c031dsm676294566b.116.2025.05.06.04.20.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 May 2025 04:20:49 -0700 (PDT)
-Message-ID: <1be04cd1-5de6-4cc4-96cf-9c90b9a76df1@linaro.org>
-Date: Tue, 6 May 2025 14:20:49 +0300
+ d=1e100.net; s=20230601; t=1746531855; x=1747136655;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=njsK8es+byAkVSrpH/SshWUYOxN83OEWJ+D1Fb2Qe5Q=;
+ b=GBvofRFveMlag7t9dqagrzbfEO+Pc28CzWBj7hHVg0r3FKIb9+bqQP2tjMw3lHzWGW
+ chNqR59lLzKTK/IbKQ2qgqyVAey2CzfH7TCWcT7W9Pt4tYiowwz7pAdyBeiI9jsqxHEI
+ jxJpJ4TtFYl9iNcqE+yn8/L4pg+qn8FUrKl+REmOVl8OgdrEk2eLt10AH/kwF3ExDn4j
+ lNvAkO7SqgYvaRCG05F3nwFCRIJ8OPfKllF8hKA9YX6IYGAUANaowG1KdOuDFvmymxHX
+ m/9UPoiwBBZ2kQA7GXBkCP6VJTIeIrTSfE5CrEQNtYsDbCKWn5TqxVomC1/M5q0q1qVM
+ /REQ==
+X-Gm-Message-State: AOJu0Yx0sxcW4UtrxLfTuz6fXxZt+UxBc/s59b6flAYRKbg589hpcs/m
+ /50e+pi1MvZ7WWd2PdlI6VHtNVPpN5OiTGIFd5CmO0TlQKLCLuzo
+X-Gm-Gg: ASbGncuLpTk5rfQeC2faN2BelI/PT/TQsmMZu5LdVMbvjV3tDar6fBCfk/WIEDIaevd
+ wN3DwFfvb0e00n/RN2EcN71S4nAxw4eg7JNv9HkZgqCwcYYuzfkugulzBynpzzrEihfw1EP6d2U
+ o4INgRKNH/fV1ZX/b9GcNhD7SpJxz0NvtXyXmgvTbZqyvD+BmRRnNuqpIQ+fyN0syNk7M81lSwW
+ lZXCktLigFcTpdJqto2fI0WcdIIUVmxuQfNjlsO/LHsFeVW4wMW2PbYn1Eso7Q7b3HEjuklb981
+ oAIWvEapqDEBqah0xHeEtlvF1HloBCMHBIk5GI0wMoMIpVj9NNi0x5aeiVPZxAm6hSDDYgkhtm/
+ KcFBC7fU=
+X-Google-Smtp-Source: AGHT+IGh2j6LvJCRSAFe8Aub0q+34rVXXLg5aQc3SdQKlyi1s0Dlq4mookXR8TFj0Fv8mF2rDbAYlQ==
+X-Received: by 2002:a05:600c:8519:b0:43c:fe15:41dd with SMTP id
+ 5b1f17b1804b1-441c48b0248mr96076865e9.6.1746531854743; 
+ Tue, 06 May 2025 04:44:14 -0700 (PDT)
+Received: from Ansuel-XPS. (host-87-21-27-29.retail.telecomitalia.it.
+ [87.21.27.29]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-441b8a31576sm166412325e9.37.2025.05.06.04.44.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 May 2025 04:44:14 -0700 (PDT)
+Message-ID: <6819f60e.050a0220.2e9b7e.67d0@mx.google.com>
+X-Google-Original-Message-ID: <aBn2C0o7s5lABZdt@Ansuel-XPS.>
+Date: Tue, 6 May 2025 13:44:11 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Weijie Gao <weijie.gao@mediatek.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] env: mtd: fix usability with NAND flashes
+References: <20250506071501.28253-1-weijie.gao@mediatek.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/6] watchdog: at91sam9_wdt driver enhancement
-To: Zixun LI <admin@hifiphile.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Stefan Roese <sr@denx.de>
-References: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250506071501.28253-1-weijie.gao@mediatek.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,88 +99,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Zixun,
+On Tue, May 06, 2025 at 03:15:01PM +0800, Weijie Gao wrote:
+> 1. As this is for MTD-based devices, the Kconfig dependency should be MTD
+>    instead of only spi-nor flashes
+> 2. Initialize saved_buf to avoid crash on free()
+> 3. Remaining size shoule be set correctly to write_size
+> 
+> Fixes: 03fb08d4aef (env: Introduce support for MTD)
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 
-On 4/28/25 12:16, Zixun LI wrote:
-> This patch series includes some code refactor and adds new device support
-> for at91sam9_wdt driver.
-> 
-> Instead of add a new driver like Linux kernel, at91sam9_wdt driver is
-> extended as new watchdog variant is similar to existing one, especially
-> for the function subset used by u-boot.
-> 
-> 1. Remove typedef struct and rename variables for readability.
-> 
-> 2. Add SAMA5D4 compatible, it has the same watchdog as SAM9260 except a
-> new lockout feature is added. Currently this feature is unimplemented.
-> 
-> 3. SAM9X60, SAM9X7 and SAMA7 series have a new watchdog variant, some
-> bitfields bof MR register shifted their position, a new register is added
-> for timer value.
-> 
-> 4. Add DT node to SAM9X60-Currently board
-> 
-> It has been tested on SAM9X60-Currently board:
-> - Start & stop
-> - Set timeout from DT node
-> - Reset kick in with a while(1) loop
-> 
-> Changes in v4:
-> - Move 'timeout-sec' to at91-sam9x60-curiosity-u-boot.dtsi
-> 
-> Changes in v3:
-> - Merge relevant commits into one
-> - Match DT node with Linux
-> - Move default timeout from board dts to sam9x60.dtsi
-> 
-> Changes in v2:
-> - Fix SPL build
-> 
-> Zixun LI (7):
->   arm: at91: wdt: Remove unused at91_wdt struct
->   arm: at91: wdt: Rename regval in priv data to mr
->   watchdog: at91sam9_wdt: Rename priv to wdt
->   arm: at91: wdt: Add SAM9X60 register definition
->   watchdog: at91sam9_wdt: Add SAM9X60 support
->   ARM: dts: sam9x60: Add watchdog DT node.
->   ARM: dts: at91: sam9x60-curiosity: Enable watchdog node
-> 
->  arch/arm/dts/at91-sam9x60_curiosity.dts    |  5 ++
->  arch/arm/dts/sam9x60.dtsi                  |  7 +++
->  arch/arm/mach-at91/include/mach/at91_wdt.h | 25 ++++++----
->  drivers/watchdog/at91sam9_wdt.c            | 55 +++++++++++++++-------
->  4 files changed, 68 insertions(+), 24 deletions(-)
-> 
-> --
-> 2.49.0
-> 
+Reviewed-by: Christian Marangi <ansuelsmth@gmail.com>
+
 > ---
-> Zixun LI (6):
->       arm: at91: wdt: Remove at91_wdt struct
->       arm: at91: wdt: Rename regval in priv data to mr
->       watchdog: at91sam9_wdt: Rename priv to wdt
->       watchdog: at91sam9_wdt: Add SAM9X60 support
->       ARM: dts: sam9x60: Add watchdog DT node
->       ARM: dts: at91: sam9x60-curiosity: Enable watchdog node
+>  env/Kconfig | 2 +-
+>  env/mtd.c   | 4 ++--
+>  2 files changed, 3 insertions(+), 3 deletions(-)
 > 
->  arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi |  4 ++
->  arch/arm/dts/at91-sam9x60_curiosity.dts         |  4 ++
->  arch/arm/dts/sam9x60.dtsi                       |  8 ++++
->  arch/arm/mach-at91/include/mach/at91_wdt.h      | 25 +++++++----
->  arch/arm/mach-at91/spl.c                        |  4 +-
->  drivers/watchdog/at91sam9_wdt.c                 | 55 ++++++++++++++++++-------
->  6 files changed, 73 insertions(+), 27 deletions(-)
-> ---
-> base-commit: 10f48365112b164bee6564033ab682747efcb483
-> change-id: 20250417-wdt-da6560c1b258
+> diff --git a/env/Kconfig b/env/Kconfig
+> index 1e876c6fa85..ce869a24d46 100644
+> --- a/env/Kconfig
+> +++ b/env/Kconfig
+> @@ -404,7 +404,7 @@ config ENV_IS_IN_SPI_FLASH
+>  
+>  config ENV_IS_IN_MTD
+>  	bool "Environment is in MTD flash"
+> -	depends on !CHAIN_OF_TRUST && (SPI_FLASH || DM_SPI_FLASH)
+> +	depends on !CHAIN_OF_TRUST && MTD
+>  	default y if ARCH_AIROHA
+>  	help
+>  	  Define this if you have a MTD Flash memory device which you
+> diff --git a/env/mtd.c b/env/mtd.c
+> index 721faebd8f2..d7ec30e183a 100644
+> --- a/env/mtd.c
+> +++ b/env/mtd.c
+> @@ -32,7 +32,7 @@ static int setup_mtd_device(struct mtd_info **mtd_env)
+>  
+>  static int env_mtd_save(void)
+>  {
+> -	char *saved_buf, *write_buf, *tmp;
+> +	char *saved_buf = NULL, *write_buf, *tmp;
+>  	struct erase_info ei = { };
+>  	struct mtd_info *mtd_env;
+>  	u32 sect_size, sect_num;
+> @@ -105,7 +105,7 @@ static int env_mtd_save(void)
+>  	}
+>  
+>  	offset = CONFIG_ENV_OFFSET;
+> -	remaining = sect_size;
+> +	remaining = write_size;
+>  	tmp = write_buf;
+>  
+>  	puts("Writing to MTD...");
+> -- 
+> 2.34.1
 > 
-> Best regards,
 
-Since you sent the patches apparently there were some changes in the
-tree, and now smartweb_defconfig fails.
-Could you please check and maybe resend ?
-I was ready to apply these but hit this issue.
-
-Thanks,
-Eugen
-
+-- 
+	Ansuel
