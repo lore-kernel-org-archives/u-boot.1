@@ -4,63 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65CEAC3ABC5
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 08:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25EE9C3ABBF
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 09:30:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8A7B82102;
-	Wed,  7 May 2025 10:49:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DC9081F32;
+	Wed,  7 May 2025 11:30:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aprNXuTO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WHy7IhwQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3BD28215B; Wed,  7 May 2025 10:49:00 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id EA2F1820EB; Wed,  7 May 2025 11:30:53 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37117820EB
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 10:48:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B9028007D
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 11:30:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5AF46435E8;
- Wed,  7 May 2025 08:48:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28659C4CEE7;
- Wed,  7 May 2025 08:48:52 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id A3F105C4786;
+ Wed,  7 May 2025 09:28:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46929C4CEE7;
+ Wed,  7 May 2025 09:30:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746607736;
- bh=m/9uOqUe0HBH1XUHv0dI7McfJ2JIOzsLDg3EJSOqk64=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=aprNXuTO3Zo4GqdseYaqzFHXSQmEpNtbGOZmzrQl1PSPML6DzYRiC5b1rOf4lEh6m
- jQ0DIWk5V9lUGEF9wwzoziYKrbNoCw21uZ0UfxrjJMxqkr6AGHJ1Yj922uRmNQsoWm
- OYBJj72VRfqy/DNVBJESCLFJ6FrYO31ttLMb2dXJ881+GJft7bqd8eC+HFAEuzA95X
- 5zg4jgXHAKhE5zAPCt59yZXR5psaLV8+X57mfeVBcGrhBt6S5b2yddY6GDYDaePAh3
- gSDYXyJ9UeWoXeHfwr3Vfb2AIsml6cDdkCtlKEqY7Dg7A0o6XYgCZKOg592iXqcJue
- i/RcUv7G874jg==
-Date: Wed, 7 May 2025 14:18:49 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Subject: Re: [PATCH v2 0/4] Qualcomm: expand capsule update support
-Message-ID: <aBsecVSdsyzgIQFZ@sumit-X1>
-References: <20250411-b4-qcom-capsule-update-improvements-v2-0-27f6b2fcc4a9@linaro.org>
- <aBm2gwHIbcRwTd_F@sumit-X1>
- <7939ced4-c3e5-44cf-8888-6e03d8ec37b4@linaro.org>
- <aBoCZxATwB8IF_Q6@sumit-X1>
- <CAC_iWjKTNAJB5ra7GKjOwpVcOubmLqAxjo8mHt0-D-y0LiErbw@mail.gmail.com>
+ s=k20201202; t=1746610249;
+ bh=gFJVv4d6wamhKOXHdvEq/tug0eEg54v8A880hGk9faw=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=WHy7IhwQ0qOa/WBs+peNGRQ3oiwe/fcEQkc2N9Dy+m6Ylm0J7AU3Yqj9QZ27w6yod
+ kegzsTwuOgZ7GGBlgADvU1HxibetYGMSVLV/zheptpYH9mf6DMurgwAJgnv8psyqfB
+ f4DNXLMuBT1oJBIlHrzb05rtmOeVXSrteALG74hhkZTZnMbse4HtpYlq3vuWRRsqGc
+ p/56qHPItIRDt7pqJJD+FSYwdPhwf9WTu7zNMaZ5E/w1O3LDMRPpycL0vqpNRbI5nv
+ O74cSY4rnifMpBYlNs0Xst5Ke8t3ZxKwLzUbyRAufRj4xbVEtEdXTRTopKrsVU9N8i
+ tWl1zTDGMS09Q==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>, gchan9527@gmail.com, Tom
+ Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Casey Connolly
+ <casey.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>, Rayagonda
+ Kokatanur <rayagonda.kokatanur@broadcom.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v2 1/5] boot/image-android: Workaround kernel/ramdisk
+ invalid addr
+In-Reply-To: <6ab73e3b-b9e6-464f-b717-1c52248caac0@linaro.org>
+References: <20250505-android-boot-v2-0-92dcb5bf59c8@gmail.com>
+ <20250505-android-boot-v2-1-92dcb5bf59c8@gmail.com>
+ <6ab73e3b-b9e6-464f-b717-1c52248caac0@linaro.org>
+Date: Wed, 07 May 2025 11:30:47 +0200
+Message-ID: <87selgahtk.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAC_iWjKTNAJB5ra7GKjOwpVcOubmLqAxjo8mHt0-D-y0LiErbw@mail.gmail.com>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,200 +73,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Neil,
 
-Thanks for your response.
+On lun., mai 05, 2025 at 14:22, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 
-On Tue, May 06, 2025 at 04:26:03PM +0300, Ilias Apalodimas wrote:
-> Hi Sumit
-> 
-> On Tue, 6 May 2025 at 15:37, Sumit Garg <sumit.garg@kernel.org> wrote:
-> >
-> > + Heinrich
-> >
-> > On Tue, May 06, 2025 at 01:33:33PM +0200, Casey Connolly wrote:
-> > >
-> > >
-> > > On 5/6/25 09:13, Sumit Garg wrote:
-> > > > Hi Casey,
-> > > >
-> > > > On Fri, Apr 11, 2025 at 05:03:33PM +0200, Caleb Connolly wrote:
-> > > > > The initial capsule update support only worked on the RB3 Gen 2 and made
-> > > > > a lot of assumptions specific to that board.
-> > > > >
-> > > > > Implement the logic necessary to update U-Boot no matter where it was
-> > > > > flashed to, independent of any particular board.
-> > > > >
-> > > > > First, we keep track of how U-Boot was loaded, specifically if we had a
-> > > > > valid external FDT (even if we didn't use it) this indicates that we
-> > > > > were booted via the Android bootloader, in this case the target for
-> > > > > capsule updates is the boot partition. Otherwise, we target the uefi
-> > > > > partition (if it exists) or the xbl partition. We handle A/B support for
-> > > > > all 3 (currently we always flash to the currently active partition with
-> > > > > a minor exception for the uefi partition).
-> > > > >
-> > > > > We introduce two new fw_name strings to differentiate the GUIDs based on
-> > > > > the target partition, this means one board can support multiple boot
-> > > > > methods with capsule update support for all of them (typically this
-> > > > > would be chainloading OR flashing U-Boot to XBL).
-> > > > >
-> > > > > Lastly, the call to scsi_scan() in dfu_scsi.c is removed. Since
-> > > > > scsi_scan() unbinds all scsi devices it breaks device handles maintained
-> > > > > in the EFI layer for the duration of the capsule update process and
-> > > > > causes the EFI filesystem access to delete the capsule file after the
-> > > > > update to fail.
-> > > > >
-> > > > > Boards should instead be responsible for calling scsi_scan() before
-> > > > > initiating DFU.
-> > > >
-> > > > I gave this patch-set a try on RB1, but somehow the firmware capsule
-> > > > update didn't worked for me. I was able to install the firmware capsule
-> > > > update using the "fwupdtool" from the OS but U-Boot can't consume it
-> > > > from disk upon a reboot as follows:
-> > > >
-> > > > Update capsule is present in EFI system partition as:
-> > > >
-> > > > => ls mmc 0:47 EFI/UpdateCapsule/
-> > > >              ./
-> > > >              ../
-> > > >    1794156   fwupd-77f90b51-588c-5ef0-aab9-046aeb2ac8c5.cap
-> > > >
-> > > > 1 file(s), 2 dir(s)
-> > > >
-> > > > However, it can't be picked via a manual/automatic capsule update
-> > > > process in U-Boot:
-> > > >
-> > > > => efidebug capsule disk-update
-> > > > =>
-> > > >
-> > > > Is there a known issue? After enabling debug logs, I see the capsule
-> > > > update invocation bails out from here [1].
-> > >
-> > > Yes, this is a known issue. I was able to work around it by running
-> > > `eficonfig` and creating an entry pointing to the same partition,
-> >
-> 
-> It's not an issue. It what the EFI spec describes for capsule updates
-> on disk [0].
-> That one says
-> "The directory \EFI\UpdateCapsule is checked for capsules only within
-> the EFI system partition on the device specified in the active boot
-> option determine by reference to BootNext variable or BootOrder
-> variable processing"
-> So tl;dr your active boot options needs to point to the same ESP as
-> you active boot option.
-> eficonfig scans and stores default boot options when it runs, so I
-> guess that's what made it work for you.
+> On 05/05/2025 11:17, George Chan via B4 Relay wrote:
+>> From: George Chan <gchan9527@gmail.com>
+>> 
+>> Some androidboot image have invalid kernel/ramdisk load addr,
+>> force to ignore those value and use loadaddr instead.
+>> 
+>> Suggested-by: Casey Connolly <casey.connolly@linaro.org>
+>> Signed-off-by: George Chan <gchan9527@gmail.com>
+>> ---
+>>   boot/Kconfig         | 6 ++++++
+>>   boot/image-android.c | 9 ++++++---
+>>   2 files changed, 12 insertions(+), 3 deletions(-)
+>> 
+>> diff --git a/boot/Kconfig b/boot/Kconfig
+>> index fb37d912bc9..4bdac384181 100644
+>> --- a/boot/Kconfig
+>> +++ b/boot/Kconfig
+>> @@ -11,6 +11,12 @@ config ANDROID_BOOT_IMAGE
+>>   	  This enables support for booting images which use the Android
+>>   	  image format header.
+>>   
+>> +config ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>> +	bool "Android Boot Image ignore addr"
+>> +	default n
+>> +	help
+>> +	  This ignore kernel/ramdisk load addr specified in androidboot header.
+>> +
+>>   config TIMESTAMP
+>>   	bool "Show image date and time when displaying image information"
+>>   	default y if CMD_DATE
+>> diff --git a/boot/image-android.c b/boot/image-android.c
+>> index 1746b018900..7b8eb6a4f64 100644
+>> --- a/boot/image-android.c
+>> +++ b/boot/image-android.c
+>> @@ -268,7 +268,8 @@ static ulong android_image_get_kernel_addr(struct andr_image_data *img_data,
+>>   	 *
+>>   	 * Otherwise, we will return the actual value set by the user.
+>>   	 */
+>> -	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR) {
+>> +	if (img_data->kernel_addr  == ANDROID_IMAGE_DEFAULT_KERNEL_ADDR ||
+>> +		IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR)) {
+>>   		if (comp == IH_COMP_NONE)
+>>   			return img_data->kernel_ptr;
+>>   		return env_get_ulong("kernel_addr_r", 16, 0);
+>> @@ -464,7 +465,8 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+>>   	 */
+>>   	if (img_data.header_version > 2) {
+>>   		/* Ramdisk can't be used in-place, copy it to ramdisk_addr_r */
+>> -		if (img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
+>> +		if (img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR ||
+>> +			(IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR))) {
+>>   			ramdisk_ptr = env_get_ulong("ramdisk_addr_r", 16, 0);
+>>   			if (!ramdisk_ptr) {
+>>   				printf("Invalid ramdisk_addr_r to copy ramdisk into\n");
+>> @@ -488,7 +490,8 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+>>   	} else {
+>>   		/* Ramdisk can be used in-place, use current ptr */
+>>   		if (img_data.ramdisk_addr == 0 ||
+>> -		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
+>> +		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR ||
+>> +			(IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR))) {
+>>   			*rd_data = img_data.ramdisk_ptr;
+>>   		} else {
+>>   			ramdisk_ptr = img_data.ramdisk_addr;
+>> 
+>
+> I like this and should be the default except rare cases, exposing the whole memory
+> to image loading sound really dangerous..
+>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>
+> @Mattijs would this still work on Amlogic board if we set loadaddr to the address
+> curently used in the boot images ?
 
-Agree, however this patch-set doesn't enable EFI runtime variable
-services and hence CONFIG_EFI_IGNORE_OSINDICATIONS=y is set. Hence the
-BootNext or BootOrder variables can't get configured by the OS
-(fwupdtool). That's probably why Casey used `eficonfig` to set up new
-boot entry pointing at ESP or the approach you mentioned below is
-additionally needed for capsule update to work with this patch-set.
+TLDR, yes, it would still work on Amlogic if we:
+- Set CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR=y
+- setenv kernel_addr_r  0x11080000
+- setenv ramdisk_addr_r 0x11000000
 
-Casey,
+Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-It is something we should put under documenation for capsule update
-support until we enable runtime EFI variables support.
+I've experimented a bit with an old boot.img.
+Some details below
 
-> 
-> > Can you share exactly what entry works for you via "eficonfig"?
-> >
-> > > then the
-> > > EFI framework knows what you "boot device" is, since there is no default.
-> >
-> > I can see the "boot device" listed as part of BootOrder as follows:
-> >
-> > => efidebug boot order
-> >  1: Boot0000: mmc 0
-> >
-> > => efidebug boot dump
-> > Boot0000:
-> > attributes: A-- (0x00000001)
-> >   label: mmc 0
-> >   file_path: /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,6d00000000000000)/eMMC(0)/eMMC(0)
-> >   data:
-> >     00000000: 4e ac 08 81 11 9f 59 4d 85 0e e2 1a 52 2c 59 b2  N.....YM....R,Y.
-> >
-> > So I am unsure why the EFI framework is unable to see that although I
-> > can see code under API: find_boot_device() in "lib/efi_loader/efi_capsule.c"
-> > looking for active device under BootOrder.
-> >
-> > Ilias, Heinrich,
-> >
-> > Do you have any clue here what may be going wrong here?
-> 
-> I assume the partition you store the capsule is an ESP -- IOW can you
-> write and preserve EFI variables?
+NOTE: newer boot.img have different addresses, see:
+https://android-review.googlesource.com/c/device/amlogic/yukawa/+/3290364
+Before sending a patch for this, make sure to use the latest
+ramdisk_addr_r variable
 
-Yeah the EFI variable storage based on ESP file is enabled by this
-patch-set.
+This is the original boot.img I have:
 
-> 
-> Do you have EFI_CAPSULE_ON_DISK_EARLY enabled?
+$ unpack_bootimg --format info --boot_img boot.img
+boot magic: ANDROID!
+kernel_size: 19022293
+kernel load address: 0x11080000
+ramdisk size: 1751539
+ramdisk load address: 0x11000000
+second bootloader size: 0
+second bootloader load address: 0x00000000
+kernel tags load address: 0x10000100
+page size: 2048
+os version: 13.0.0
+os patch level: 2023-05
+boot image header version: 2
+product name: 
+command line args: no_console_suspend console=ttyAML0,115200 earlycon printk.devkmsg=on androidboot.boot_devices=soc/ffe07000.mmc init=/init firmware_class.path=/vendor/firmware androidboot.hardware=yukawa androidboot.selinux=permissive
+additional command line args: 
+recovery dtbo size: 0
+recovery dtbo offset: 0x0000000000000000
+boot header size: 1660
+dtb size: 295778
+dtb address: 0x0000000011f00000
 
-I am just directly testing this patch-set on RB1 and using fwupdtool on
-the OS side to install capsules. So, EFI_CAPSULE_ON_DISK_EARLY isn't
-enabled.
+I can unpack/repack it to change "kernel load address" and "ramdisk load
+address" with:
 
-> My guess is that the disk isn't scanned yet and the capsule update
-> doesn't start.
+$ unpack_bootimg --boot_img boot.img --out out --format=mkbootimg | tee mkbootimg_args
+# edit mkbootimg_args to change both --kernel_offset and
+--ramdisk_offset to 0x0
+$ sh -c "mkbootimg $(cat mkbootimg_args) --output boot_repacked.img"
 
-I can see the disk being scanned however as I mentioned above the ESP
-boot entry is missing since the runtime variables support isn't present.
+$ unpack_bootimg --format info --boot_img boot_repacked.img | grep 'load address'
+kernel load address: 0x00000000
+ramdisk load address: 0x00000000
 
-> There are some problems currently with scanned devices that Heinrich
-> was looking at [1]
-> 
-> You can try
-> - efidebug capsule update <capsule address> after you load the capsule
-> manually. That will at least perform the update and you can move on
-> with reviewing the patch as the current issue is orthogonal
-> 
-> or
-> 
-> - efidebug boot add -b 1001 cap mmc 1:1 EFI/UpdateCapsule && efidebug
-> boot next 1001
-> - setenv -e -nv -bs -rt -v OsIndications =0x0000000000000004 (if you
-> dont have OS INDICATIONS)
-> - efidebug capsule disk-update
+Reflashing the boot partition with:
+$ fastboot flash boot boot_repacked.img
 
-Thanks for this suggestion, now I am able to get the capsule update to
-work by manually adding a boot next entry as per following diff:
+Without modification, this does not boot, as expected:
 
-diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
-index dbf6f4e7260..87703b5a643 100644
---- a/board/qualcomm/default.env
-+++ b/board/qualcomm/default.env
-@@ -3,7 +3,9 @@ stdout=serial,vidconsole
- stderr=serial,vidconsole
- preboot=scsi scan; usb start
- fastboot=fastboot -l $fastboot_addr_r usb 0
--do_boot=bootefi bootmgr
-+cap_update=efidebug boot add -b 1001 cap mmc 0:47 EFI/UpdateCapsule && efidebug boot next 1001 && efidebug capsule disk-update
-+cap_cleanup=efidebug boot rm 1001 && efidebug boot next 0000
-+do_boot=run cap_update; run cap_cleanup; bootefi bootmgr
- bootmenu_0=Boot first available device=run do_boot
- bootmenu_1=Enable fastboot mode=run fastboot
- bootmenu_2=Reset device=reset
+U-Boot 2025.07-rc1-g8ea79fc630ac (May 07 2025 - 09:30:45 +0200) khadas-vim3
 
-Since this diff requires specifying ESP partition specific to RB1, we
-can't merge something like this upstream. So I am just hoping if the
-generic EFI framework is able to auto discover the ESP partition for
-capsule updates similar to how ESP is dicovered during boot in case the
-EFI runtime variables and OsIndications aren't supported.
+Model: Khadas VIM3
+SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+DRAM:  2 GiB (total 3.8 GiB)
+Core:  407 devices, 36 uclasses, devicetree: separate
+MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+Loading Environment from MMC... MMC Device -1 not found
+*** Warning - No MMC card found, using default environment
 
--Sumit
+In:    usbkbd,serial
+Out:   vidconsole,serial
+Err:   vidconsole,serial
+Net:   eth0: ethernet@ff3f0000
 
-> 
-> >
-> > -Sumit
-> 
-> [0] https://uefi.org/specs/UEFI/2.11/08_Services_Runtime_Services.html#delivery-of-capsules-via-file-on-mass-storage-device
-> [1] https://lore.kernel.org/u-boot/20250421162555.1200687-1-heinrich.schuchardt@canonical.com/
-> 
-> Thanks
-> /Ilias
-> 
-> 
+Hit any key to stop autoboot:  0
+Card did not respond to voltage select! : -110
+fs uses incompatible features: 00020000, ignoring
+** Booting bootflow 'mmc@ffe07000.bootdev.whole' with android
+avb_slot_verify.c:428: ERROR: boot: Hash of data does not match digest in descriptor.
+## Booting Android Image at 0x01080000 ...
+Kernel load addr 0x01080000 size 18577 KiB
+Kernel command line: no_console_suspend console=ttyAML0,115200 earlycon printk.devkmsg=on androidboot.boot_devices=soc/ffe07000.mmc init=/init firmware_class.path=/vendor/firmware androidboot.hardware=yukawa androidboot.selinux=permissive
+RAM disk load addr 0x022a5000 size 1711 KiB
+Working FDT set to 2486baf
+   Uncompressing Kernel Image to 1080000
+lz4 compressed: uncompress error -71
+Must RESET board to recover
+Resetting the board...
+bl31 reboot reason: 0xd
+bl31 reboot reason: 0x0
+system cmd  1.
+
+With the environment variables updated, it boots fine:
+U-Boot 2025.07-rc1-g31837b1f1d1d (May 07 2025 - 11:25:40 +0200) khadas-vim3
+
+Model: Khadas VIM3
+SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+DRAM:  2 GiB (total 3.8 GiB)
+Core:  407 devices, 36 uclasses, devicetree: separate
+MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+Loading Environment from MMC... MMC Device -1 not found
+*** Warning - No MMC card found, using default environment
+
+In:    usbkbd,serial
+Out:   vidconsole,serial
+Err:   vidconsole,serial
+Net:   eth0: ethernet@ff3f0000
+
+Hit any key to stop autoboot:  0
+=> setenv kernel_addr_r  0x11080000
+=> setenv ramdisk_addr_r 0x11000000
+=> run bootcmd
+Card did not respond to voltage select! : -110
+fs uses incompatible features: 00020000, ignoring
+** Booting bootflow 'mmc@ffe07000.bootdev.whole' with android
+avb_slot_verify.c:428: ERROR: boot: Hash of data does not match digest in descriptor.
+## Booting Android Image at 0x01080000 ...
+Kernel load addr 0x11080000 size 18577 KiB
+Kernel command line: no_console_suspend console=ttyAML0,115200 earlycon printk.devkmsg=on androidboot.boot_devices=soc/ffe07000.mmc init=/init firmware_class.path=/vendor/firmware androidboot.hardware=yukawa androidboot.selinux=permissive
+RAM disk load addr 0x022a5000 size 1711 KiB
+Working FDT set to 2486baf
+   Uncompressing Kernel Image to 11080000
+   Loading Ramdisk to 7fe54000, end 7ffff9f3 ... OK
+   Loading Device Tree to 000000007fe3e000, end 000000007fe537b2 ... OK
+Working FDT set to 7fe3e000
+
+Thanks,
+Mattijs
+
+>
+> Neil
+>
+>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
