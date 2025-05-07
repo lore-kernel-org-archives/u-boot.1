@@ -4,89 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A5EC3ABC0
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 17:42:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 950B8C3ABBF
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 18:06:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 081038209C;
-	Wed,  7 May 2025 19:42:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B6EAC8209C;
+	Wed,  7 May 2025 20:06:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g08V3h2B";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ynWYnJCY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4590D820EB; Wed,  7 May 2025 19:42:50 +0200 (CEST)
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 110A881FAB
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 19:42:48 +0200 (CEST)
+ id A2613820EB; Wed,  7 May 2025 20:06:27 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C75C81FAB
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 20:06:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-4c4eeb36d12so815054137.0
- for <u-boot@lists.denx.de>; Wed, 07 May 2025 10:42:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746639767; x=1747244567; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AifWgfAedRyf4E+5phh0WWdJsjXP8zAeamw7E48gY0Q=;
- b=g08V3h2BlxfUN14TjQaTlnRtXHF7fEFmVx5CrSHAevlh6L+o2vR9UD7eOnC0iRYTyZ
- fv2r/OYUEkKOmz0D/OpyI0gzi1/u6BoM+L17N7+RceYp/1jBXSgBM8TWsUp1dS/5Aosm
- vXLjZRxsvvFTb5DDxA1jRvSF6G/OAuVldxJ4Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746639767; x=1747244567;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AifWgfAedRyf4E+5phh0WWdJsjXP8zAeamw7E48gY0Q=;
- b=Jid/6bLEfGTS1vORsqlxoflSt2A0QViLswkD1ymTrkJOTw1YGdcJQNMY+O9A0F1tYx
- TLmUGftG+z5xl2lpH+SU5yZXiPm9bwCaL4oMUTnNXwNa9WyYcQf4U9J891WywpwijJ7i
- Bhqq4d7e/+ykCPpZlg8awWzNHFQJmclmP70PijChTTEN9EU1IosL3LatOHLNz1nAqnjI
- 072zQcilB5OejTHHmcAfOSgAEEek0vpc9YPqFq5wHkrPzNVNF+fCC7OmWG/knxUbY/Cp
- X4j+HUYhWzGmsZ7XlPUDmyTGUQTbb83YNK4P9Iz9rMor6XALPdJea5UwHx0c5p5SWmlw
- neqA==
-X-Gm-Message-State: AOJu0YzJ8sUgd/IadDkggKugN4Tnd0rwFsc8+b7WQdBzBNBjWx39TpZ2
- MLuRkeBIWzP2ZBwxPiPXyfTyxKAq/+KVABKVkPJA+ypjMbCM9mR1SdatA1UREAK/zvkkn2HP6vs
- 0
-X-Gm-Gg: ASbGnctlVt3wEYZKcoJ0A8MKcqOSbY1ofyvNvifphQG6o37FMKG3cIUCN2fW6wIMeG4
- hT06It8Nc6EB+XNbZvoe3UQrusgHlBBKtqfDTQ73Pp2JYxUVfmuC0x/u19g1pDJXslWKi4jU+3Q
- fMpQjgGU9wFEty5sAdy7Hs7BIxcpB/3HLlbDrfsN2PmmWcnKsxMW9X/zU9HFdQykQD0gRNmfc43
- DCOZnf8VsJZJ9Epg7mZatXRnfGWd3bRB7EyhF31qsqZap6vPxzn/S7Bw60IQkjnh3wIPGM8sGJF
- Dd3iRBjWsb44JFVeaNACP2DCfnshDAkoBMEgpk+m3l87loksWoXWy5HRZVGMF20LV0a1hIEZ1nG
- nHg==
-X-Google-Smtp-Source: AGHT+IHgbDIWZFNt5L01b8m0mS7hxbsfJnwfngIPLetruMTpvDLuIrTCGYeQci/zZvbt5K2WkJVV5w==
-X-Received: by 2002:a05:6808:3012:b0:3ec:bf55:e33f with SMTP id
- 5614622812f47-4037799ca87mr260096b6e.9.1746639756747; 
- Wed, 07 May 2025 10:42:36 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4036f323a49sm649175b6e.3.2025.05.07.10.42.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 May 2025 10:42:35 -0700 (PDT)
-Date: Wed, 7 May 2025 11:42:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Michael Walle <mwalle@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut <marex@denx.de>,
- Benedikt Spranger <b.spranger@linutronix.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- John Ogness <john.ogness@linutronix.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH V3] tiny-printf: Handle formatting of %p with an extra
- Kconfig
-Message-ID: <20250507174233.GA491506@bill-the-cat>
-References: <20250430103548.4162289-1-cniedermaier@dh-electronics.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 547I6MTp880236
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 7 May 2025 13:06:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746641182;
+ bh=cEy4Kd0T7zkyxrswHipXtT2Mj9Yu9ZN5S27uGbF59Gc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ynWYnJCY4kOGRYAcJdxeOaUa4aMfYE7Nn7kkhF5Y8YP/BU5uRDYbbz1D+H9hv1Lv5
+ PsyBWAtiBrUinbdD9CMqj9/u3WNBjPgZVP429hfl5fO1wG2ohC6ebaYqiT5JWLoA+l
+ jRWsyATNc2YeOQi1jGW3qBy5DSjhPYhD7VjXV0UM=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 547I6LhS115098
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 7 May 2025 13:06:21 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
+ May 2025 13:06:20 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 7 May 2025 13:06:20 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 547I6Jlw086077;
+ Wed, 7 May 2025 13:06:19 -0500
+Message-ID: <3741d859-2048-4b32-9c1e-f551ec62d377@ti.com>
+Date: Wed, 7 May 2025 13:06:19 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SjiLQrzCELktegJZ"
-Content-Disposition: inline
-In-Reply-To: <20250430103548.4162289-1-cniedermaier@dh-electronics.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/9] spl: Kconfig: allow K3 devices to use falcon mode
+To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <b-liu@ti.com>
+References: <20250428141235.1734014-1-anshuld@ti.com>
+ <20250428141235.1734014-2-anshuld@ti.com>
+ <b3cc74a0-3903-4970-89b3-eceb973a791c@ti.com>
+ <D9PM26J8COAY.1ACTT0I6VHQJH@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <D9PM26J8COAY.1ACTT0I6VHQJH@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,104 +84,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/6/25 10:33 PM, Anshul Dalal wrote:
+> On Tue May 6, 2025 at 8:03 PM IST, Andrew Davis wrote:
+>> On 4/28/25 9:12 AM, Anshul Dalal wrote:
+>>> Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b4437bc
+>>> ("ti_armv7_common: Disable Falcon Mode on HS devices") for older 32-bit
+>>> HS devices and can be enabled on K3 devices.
+>>>
+>>> For secure boot, the kernel with x509 headers can be packaged in a fit
+>>
+>> "can be", this is the issue. Security is not just allowing methods that
+>> are security checked, but forcing the use of such methods. Setting
+>> OS_BOOT opens up several paths that look for non-FIT images. These
+>> images do not enforce authentication like FIT does. This means one can
+>> bypass secure boot when OS_BOOT is enabled by simply placing a non-FIT
+>> boot image on the boot media.
+>>
+> 
+> As per spl_load_image_ext_os, the SPL first tries to load the file set
+> in falcon_args_file env variable but since it's not set in our case. And
+> the only way to set them is by rebuilding u-boot as uEnv.txt is not
+> supported at SPL stage.
+> 
+> This means the SPL only loads CONFIG_SPL_FS_LOAD_ARGS_NAME and
+> CONFIG_SPL_FS_LOAD_KERNEL_NAME which are set as the DTB and fitImage
 
---SjiLQrzCELktegJZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+What is stopping me from replacing the content of the file "fitImage"
+with a normal kernel image? When loading that image the file type
+will be detected as a normal kernel image and all FIT logic bypassed,
+including authentication, breaking our secure chain of trust.
 
-On Wed, Apr 30, 2025 at 12:35:48PM +0200, Christoph Niedermaier wrote:
+Andrew
 
-> The formatting with %pa / %pap behaves like %x, which results in an
-> incorrect value being output. To improve this, a new fine-tuning
-> Kconfig SPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
-> has been added. If it is enabled, the output of %pa / %pap should
-> be correct, and if it is disabled, the pointer formatting is
-> completely unsupported. In addition to indicate unsupported formatting,
-> '?' will be output. This allows enabling pointer formatting only
-> when needed. For SPL_NET and NET_LWIP it is selected by default.
-> Then it also supports the formatting with %pm, %pM and %pI4.
->=20
-> In summery this level of %p support for tiny printf is possible now:
->=20
-> 1) The standard tiny printf won't have support for pointer formatting.
->    So it doesn't print misleading values for %pa, instead '?' will be
->    output:
->    %p   =3D> ?
->    %pa  =3D> ?a
->    %pap =3D> ?ap
->=20
-> 2) If SPL_USE_TINY_PRINTF_POINTER_SUPPORT is enabled or DEBUG is defined
->    tiny printf supports formatting %p and %pa / %pap.
->=20
-> 3) If SPL_NET or NET_LWIP is enabled the support of pointers is extended
->    for %pm, %pM and %pI4.
->=20
-> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> ---
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Michael Walle <mwalle@kernel.org>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Benedikt Spranger <b.spranger@linutronix.de>
-> Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> Cc: John Ogness <john.ogness@linutronix.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> V2: - Rebase on current master
->     - Extend commit message
->     - Restrict use to SPL
->     - Rename Kconfig to SPL_USE_TINY_PRINTF_POINTER_SUPPORT
->     - Replace _DEBUG with defined(DEBUG)
->     - Output '?' if %pm, %pM and %pI4 isn't available
->     - Add break on case '%'
-> V3: - Add missing output '?' for the default case
-> ---
->  Kconfig            |  1 +
->  common/spl/Kconfig |  1 +
->  lib/Kconfig        |  8 +++++++
->  lib/tiny-printf.c  | 52 +++++++++++++++++++++++-----------------------
->  4 files changed, 36 insertions(+), 26 deletions(-)
->=20
-> diff --git a/Kconfig b/Kconfig
-> index 51358633762..b8eec3fc931 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -774,6 +774,7 @@ config NET
-> =20
->  config NET_LWIP
->  	bool "Use lwIP for networking stack"
-> +	select SPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF
->  	imply NETDEVICES
->  	help
->  	  Include networking support based on the lwIP (lightweight IP)
-
-Sorry I missed this bug until now. This (and the subsequent parts of the
-patch referencing lwIP) aren't right. There's no SPL_NET_LWIP support
-(and not planned at this point), so what this does is grow platforms
-like xilinx_zynq_virt which use lwIP in U-Boot and tiny printf in SPL,
-but shouldn't since there's no SPL_NET_LWIP.
-
---=20
-Tom
-
---SjiLQrzCELktegJZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgbm4UACgkQFHw5/5Y0
-tyxKCQv/Ul24mHRKT4QOpn0sBKF7Eu0gH7H3p2Kk/9Pm2uGMu4Ol1eM/UjRIiRtD
-5hhR9G4mMjB3up5265lGmG11742tMOecGebMsPKpJ7/wGLRkMzzdJDxiGuEpr/Rs
-Y1fZpP6W6t9hJTClyZMoi/bht5tpbV9Q/8Qfjd55bZ0UKAN42R+qoIKBPbzzckDH
-tGHc8+FhW03FwdkEX9WkO0S3uj1qeU6X0vKhKlMTnEC/9QKc+KTq2lW3GTTn//vY
-wgO9HaVrHoag94Km6WirRKhfCV5HNa2dBuNeiJ6hjaGi1Yrkx9Xbq+3KBkV67+pi
-K+qs3TBQHwEMS0/ys4QLiTMEbwCskJ7D09H5o0ljmXuGM33bqVVrAgLyuMWjOddy
-gSxtQJsNp+HhC2+7nDPTJ3OI63ah+NRyqP6SihXVNWRqTcDjXjqJVCDI2TtYyvaY
-CyG4X8WXBtG2LHd4rQMDaVew05b+E0XnlAhaS4tbYvZBAZbIQeBbQAWqXSGf6k+l
-H5pYCrmR
-=3vVp
------END PGP SIGNATURE-----
-
---SjiLQrzCELktegJZ--
+> respectively. Following that, authentication is enforced during FIT
+> loading by the call to board_fit_image_post_process in load_simple_fit.
+> 
+> So even if the fitImage was modified, boot would fail without valid
+> signatures on HS-SE devices.
+> 
+> - Anshul
+> 
+>>> container (fitImage) signed with TIFS keys for authentication.
+>>>
+>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>>> ---
+>>>    common/spl/Kconfig | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+>>> index c08045f9c8d..68e900e9b91 100644
+>>> --- a/common/spl/Kconfig
+>>> +++ b/common/spl/Kconfig
+>>> @@ -1165,7 +1165,7 @@ config SPL_ONENAND_SUPPORT
+>>>    
+>>>    config SPL_OS_BOOT
+>>>    	bool "Activate Falcon Mode"
+>>> -	depends on !TI_SECURE_DEVICE
+>>> +	depends on !TI_SECURE_DEVICE || ARCH_K3
+>>>    	help
+>>>    	  Enable booting directly to an OS from SPL.
+>>>    	  for more info read doc/README.falcon
+> 
