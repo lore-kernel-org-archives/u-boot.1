@@ -4,74 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCD7C3ABBF
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 15:23:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9EFCC3ABBF
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 15:23:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FA6D81FAB;
-	Wed,  7 May 2025 17:23:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 71EEC8211F;
+	Wed,  7 May 2025 17:23:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pi3y3QoB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PHZkRtOj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 080598214B; Wed,  7 May 2025 17:23:29 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B26B48059D
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 17:23:25 +0200 (CEST)
+ id 7C2338212F; Wed,  7 May 2025 17:23:30 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D129820EB
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 17:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 547FNIQ6850384
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 7 May 2025 10:23:18 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746631399;
- bh=NOu2wT6cPm6sbtbiGCH2v46n6QGmSyfb4HPuyWGB8Tc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pi3y3QoBPcGsR7Qc8DWnr20bhA6oOBcI1XN4bW1c42IqifOfaeh7oTQkw23BCMvxW
- c6dePiIRSlAMDbwATyMG1xt5YVf0VkMYcOyBwsmh8+2s3RUWO7hKybT4mOGkF4dWbz
- FWQB0UmIvRVg68wNnc7Ci+np3rg5Ezz9bTZCB41A=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 547FNITT061237
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 7 May 2025 10:23:18 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
- May 2025 10:23:18 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 7 May 2025 10:23:17 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 547FNHGX097688;
- Wed, 7 May 2025 10:23:17 -0500
-Message-ID: <2fb353e4-b119-40d8-9eb2-717ec2422eaa@ti.com>
-Date: Wed, 7 May 2025 10:23:17 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-72ecc0eeb8bso1896220a34.0
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 08:23:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746631407; x=1747236207; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rxOr+CGgPZdRgFpWoSj91aYoOnMnbV1GHAQ2DYNP4yI=;
+ b=PHZkRtOj/bqzaJTn8hp3iuaXhE4Nz970n0+38rHlK/01z2E4EudyaV5EK8he0SdRpY
+ hIFDG8wsbXd1f0CbPWtXgEFTTDl5Z3wmtTLuprdpjMkEvG5/j2RnRhEs5gVkCLFtuUI3
+ iMTfBJuOqwQR+2F58QpP6o2lyYu68o1KQN1H4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746631407; x=1747236207;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rxOr+CGgPZdRgFpWoSj91aYoOnMnbV1GHAQ2DYNP4yI=;
+ b=RF9IcK/fs5CkDmdV1f/VjcKVp5zTcppnQrdrLRuPTzplnWXuhU5pXPXmP1m/UI23nT
+ 8kINViUnMpTSkEcdxiwTC31vnzx9uIGJHx/sltQGBACnXgvLLutoqVfabKu6ntcOd0/U
+ 3X0LwH5i5n/62mX11vK+kBLa5yTGrJV96LHCJbTkruCyJeJGsZuc0W5MVBWfN6kG7rMU
+ 9wTraE5v1301FRqRudZgNQ60sgm14eDTPTqbt9etLXU+p1WiDJSgcSBqqktEuw3BB7yU
+ AOEfQ9FVv+a6oCH+RP1tVQ9cPQfss5XduoLFaLhMOx0W1Nf4u9XeTssTfJgMYu6S3MDu
+ Q5vg==
+X-Gm-Message-State: AOJu0YwzKiSytDMOyvuBwvfmaejNYTHEXRYE0e2HSTeMDc4UwwsqKnWz
+ kSpd2XYEQtRMEOhus6Pugz+/5kjKTxINUZ4HMLmJ9LZfDy0aYJPQeR96RhFkLl0=
+X-Gm-Gg: ASbGncuQNBGSVbLnBt0DXR0Uz5QDNDjXTI2pZVbcD+MbsUWNcSYawJj6d9CTZpsCktN
+ VX9s7PHQWjudUaPc6EysWDFhPbaAeV3nn4qKVTimObqs2SCkUQrJCfsmy5HcgrcSjbKnbfcdF7b
+ 7qr7JbfExEKLd6/kHI7cUFZu2s7pG4gwBqxuudqfR2g0mYH4psHtTOA8ITlPJ4aoetNaQR2vQt2
+ JFmxwmW9L0+TcR2M75o27t6h1ne2F8Pa267/JDRQrbeXtkuoy2rq2Z1tdN4XNEMRu5TsFLkzT8D
+ DvRfDgc3sI7GWETHiMvvE6polZPkV4f9i4t9b/L2WsJpj/iGE9D+pJd04bGjZxUgHqg1zbj84gN
+ ldQ==
+X-Google-Smtp-Source: AGHT+IGjBJwLAHm9+RGS8uJUDu/0AU8wjKlEFyGwjr53k0XTUouxcOIeJksEpuLCJzcIbfabsugjXA==
+X-Received: by 2002:a05:6830:3787:b0:72b:992b:e41 with SMTP id
+ 46e09a7af769-73210b26dc0mr2615894a34.23.1746631406860; 
+ Wed, 07 May 2025 08:23:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-732109dfaebsm578922a34.13.2025.05.07.08.23.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 May 2025 08:23:26 -0700 (PDT)
+Date: Wed, 7 May 2025 09:23:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <simon.glass@canonical.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH v2 1/3] Bring in linux/limits.h
+Message-ID: <20250507152323.GJ5430@bill-the-cat>
+References: <20250418105919.1645824-1-sjg@chromium.org>
+ <20250418133943.GK5495@bill-the-cat>
+ <CAFLszTgaqCyK5t+5XqbW6SZ-vC1PCUv4h+YPqt0Zem1yXEn4AQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/7] arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM
- firmware inside tispl.bin
-To: Beleswar Prasad Padhi <b-padhi@ti.com>, Anshul Dalal <anshuld@ti.com>,
- <trini@konsulko.com>
-CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
- <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
- <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
- <d-gole@ti.com>, <u-boot@lists.denx.de>
-References: <20250506104202.16741-1-b-padhi@ti.com>
- <20250506104202.16741-5-b-padhi@ti.com> <D9PTUSDYSWS0.J9VVKD57OPPM@ti.com>
- <218f2201-6094-4a93-aae6-e919cbeeda56@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <218f2201-6094-4a93-aae6-e919cbeeda56@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="v1l1MhEPtr5UvTbR"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgaqCyK5t+5XqbW6SZ-vC1PCUv4h+YPqt0Zem1yXEn4AQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,107 +101,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/7/25 9:56 AM, Beleswar Prasad Padhi wrote:
-> 
-> On 5/7/2025 3:09 PM, Anshul Dalal wrote:
->> On Tue May 6, 2025 at 4:11 PM IST, Beleswar Padhi wrote:
->>> Pack the HSM firmware in tispl.bin fit image so that it can be unloaded
->>> and used by R5 SPL to boot the HSM core. By default, point to the
->>> firmware for HS-SE device type. This needs to be changed to point to
->>> appropriate firmware when using a different device type.
->>>
->>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->>> ---
->>> v2: Changelog:
->>> None to this patch.
->>>
->>> Link to v1:
->>> https://lore.kernel.org/all/20250422095430.363792-4-b-padhi@ti.com/
->>>
->>>   arch/arm/dts/k3-j721s2-binman.dtsi | 12 ++++++++++++
->>>   arch/arm/dts/k3-j784s4-binman.dtsi | 14 ++++++++++++++
->>>   2 files changed, 26 insertions(+)
->>>
->>> diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
->>> index 73af184d27e..9c8b29f53bb 100644
->>> --- a/arch/arm/dts/k3-j721s2-binman.dtsi
->>> +++ b/arch/arm/dts/k3-j721s2-binman.dtsi
->>> @@ -273,6 +273,14 @@
->>>                       };
->>>                   };
->>> +#ifdef CONFIG_K3_HSM_FW
->>> +                hsm {
->>> +                    hsm: blob-ext {
->>> +                        filename = "ti-hsm/hsm-demo-firmware-j721s2-hs.bin";
->>> +                    };
->>> +                };
->>> +#endif
->>> +
->> Why do we have the hsm binaries pre-signed? Having a common binary like
->> the DM with signing using ti-secure might be a better option.
-> 
-> 
-> Andrew can correct me if I am wrong,
-> HSM is meant to run secure software stack and services like Authentication etc. It is a +1 to TIFS. To establish ROT, we need the HSM binary to be encrypted, and authenticated by TIFS first before it can do stuff by itself. DM is not a secure entity, so signing the image doesn't make sense for me.
-> 
 
-I think Anshul is not suggesting that the HSM binary be unencrypted/unauthenticated.
-Rather that the encrypting/signing be done here in binman like we do with TF-A/OP-TEE.
-(which both are part trusted images to be loaded by TIFS).
+--v1l1MhEPtr5UvTbR
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-To that suggestion I agree, the customer will be doing the signing of this binary, right?
-If so then since all other customer signing is done as part of binman, it makes sense
-to also sign HSM firmware here too.
+On Wed, May 07, 2025 at 10:47:13AM +0200, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 18 Apr 2025 at 15:39, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Apr 18, 2025 at 04:59:13AM -0600, Simon Glass wrote:
+> >
+> > > From: Simon Glass <simon.glass@canonical.com>
+> > >
+> > > Add part of this file from Linux v6.14 so we can include it from the
+> > > linux/overflow.h file. Drop the relevant section from kernel.h
+> > >
+> > > The top of the file is omitted since it defines things used in mbedos
+> > > and we get an error on SIZE_MAX.
+> > >
+> > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> > > ---
+> > > Error is:
+> > >
+> > >   In file included from include/limits.h:6,
+> > >                  from lib/mbedtls/external/mbedtls/library/constant_t=
+ime.c:14:
+> > >   include/linux/limits.h:7:35: error: missing binary operator before =
+token "0"
+> > >     7 | #define SIZE_MAX        (~(size_t)0)
+> > >       |                                   ^
+> > >   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:65:6:=
+ note: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
+> > >    65 | #if (SIZE_MAX > 0xffffffffffffffffULL)
+> > >       |      ^~~~~~~~
+> > >   include/linux/limits.h:7:35: error: missing binary operator before =
+token "0"
+> > >     7 | #define SIZE_MAX        (~(size_t)0)
+> > >       |                                   ^
+> > >   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:71:8:=
+ note: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
+> > >    71 | #elif (SIZE_MAX > 0xffffffff) || defined(MBEDTLS_HAVE_INT64)
+> > >       |        ^~~~~~~~
+> > >   make[3]: *** [scripts/Makefile.build:256: lib/mbedtls/external/mbed=
+tls/library/constant_time.o] Error 1
+> > >   make[2]: *** [scripts/Makefile.build:398: lib/mbedtls] Error 2
+> > >
+> > > Changes in v2:
+> > > - Add new patch to bring in linux/limits.h
+> > >
+> > >  include/limits.h       |  2 ++
+> > >  include/linux/kernel.h | 12 ------------
+> > >  include/linux/limits.h | 21 +++++++++++++++++++++
+> > >  3 files changed, 23 insertions(+), 12 deletions(-)
+> > >  create mode 100644 include/linux/limits.h
+> >
+> > Ugh. I think we need to:
+> > - Fix lib/string.c (and Fixes commit 7c7361b98d6e ("lib: implement
+> >   strnstr()")) to not bring in <limits.h> as that should be limited to
+> >   mbedtls usage.
+> > - Not bring <linux/limits.h> to <limits.h> to start with at least (we
+> >   can worry about handling wrappers around overflow protection there
+> >   separately).
+>=20
+> There are quite a few places which need the limits. If I remove the
+> dups from kernel.h then some things don't compile, at least not
+> without including linux/limits,h in limits,h (which it seems to me we
+> should do).
 
-Andrew
+So, looking at things more to understand the problem, mbedTLS uses
+constants for types (reasonable choice) and the Linux kernel uses types
+and casts (also reasonable choice), and these can't be mixed and
+matched, that's what results in the error you see. So, I'll re-evaluate
+your v2, that might be the best compromise.
 
->>
->> Regards,
->>
->>>                   dm {
->>>                       ti-secure {
->>>                           content = <&dm>;
->>> @@ -306,7 +314,11 @@
->>>                   conf-0 {
->>>                       description = "k3-j721s2-common-proc-board";
->>>                       firmware = "atf";
->>> +#ifdef CONFIG_K3_HSM_FW
->>> +                    loadables = "hsm", "tee", "dm", "spl";
->>> +#else
->>>                       loadables = "tee", "dm", "spl";
->>> +#endif
->>>                       fdt = "fdt-0";
->>>                   };
->>>               };
->>> diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
->>> index cb1fbc65923..7c8e580a8a3 100644
->>> --- a/arch/arm/dts/k3-j784s4-binman.dtsi
->>> +++ b/arch/arm/dts/k3-j784s4-binman.dtsi
->>> @@ -159,6 +159,16 @@
->>>           fit {
->>>               images {
->>> +
->>> +#ifdef CONFIG_K3_HSM_FW
->>> +                hsm {
->>> +                    hsm: blob-ext {
->>> +                        filename = "ti-hsm/hsm-demo-firmware-j784s4-hs.bin";
->>> +                    };
->>> +                };
->>> +
->>> +#endif
->>> +
->>>                   dm {
->>>                       ti-secure {
->>>                           content = <&dm>;
->>> @@ -194,7 +204,11 @@
->>>                   conf-0 {
->>>                       description = BOARD_DESCRIPTION;
->>>                       firmware = "atf";
->>> +#ifdef CONFIG_K3_HSM_FW
->>> +                    loadables = "hsm", "tee", "dm", "spl";
->>> +#else
->>>                       loadables = "tee", "dm", "spl";
->>> +#endif
->>>                       fdt = "fdt-0";
->>>                   };
->>>               };
+--=20
+Tom
+
+--v1l1MhEPtr5UvTbR
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgbeucACgkQFHw5/5Y0
+tyxjFAv9GCrrqblTBNaCvTixX2IkxKrzdkVS9TU7SzzlQijG4rymIfZj9FBqEsXj
+iy4Jmrs36Dpcej2WXiCCF6nQUYnNKnEHzE9jEvDcFurqpdTDXSkbJZ6DO/KvV1oz
+EzG4l56K69cF69i83Uc7txLu6kEx5GOhpZmRf2E7GMN+94Mhf6FPyZ7bDST/VnUn
+MFnQtbQIGI5wqLuTMNmuxifK88YiCD5EPlDi3kAQSZhPZ94FJAAO+C1IaIgH7DCM
+RKtytIuHIYfmPWyGKh76W29ndA0Dw3ALc4wft4GUJpRtfTjPG6EQNJT/Ue9129rS
+NU1CBbz4/F57NFECfGvS20Uj+LIM/a2uZCdMtHmcyG1CbOvbYnkX6UFt2+oYyBke
+ba1q1Hrlro7PIJxmd1E7eHUi5Vg1e2Oj4yE6PqakRXTL1FfcVrnq1GNO/hd+ezY1
+7LhqOQdgogjSSt2riEO5GddoLYf68FlJZ84fha/Uyhv6osGQ0Q1DAlvP22fvQhSy
+0lzmAQzT
+=tzaD
+-----END PGP SIGNATURE-----
+
+--v1l1MhEPtr5UvTbR--
