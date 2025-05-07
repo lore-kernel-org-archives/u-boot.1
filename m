@@ -4,82 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA29BC3ABBC
-	for <u-boot@archiver.kernel.org>; Tue,  6 May 2025 22:03:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04701C3ABBE
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 00:53:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DEA98283E;
-	Wed,  7 May 2025 00:03:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A5F981FAB;
+	Wed,  7 May 2025 02:53:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kFLRStyC";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 180588211F; Wed,  7 May 2025 00:03:04 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7CDB8210D
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 00:03:01 +0200 (CEST)
+ id 850DB8210D; Wed,  7 May 2025 02:53:52 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id C1E7B81F66
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 02:53:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-73044329768so4598914a34.3
- for <u-boot@lists.denx.de>; Tue, 06 May 2025 15:03:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746568980; x=1747173780; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=knihDzJnwyGvaE9TirQYbMtLPzo8q12wRDgFxO60O+U=;
- b=kFLRStyCKT/gfm5w+ke+JVVzM0UbxQR8TnaN+yi5WGMsdC81hnzzyKqxIXsWTe50If
- L4LtYrgzizVcljSh3oN4roP0313nnxnzBqBkiFwLTchMo6vOUkxMivxkTCAYQPEgfzL8
- s8PMrd52dJka29meycVAm0IEb1c8ZAWLVXrPg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746568980; x=1747173780;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=knihDzJnwyGvaE9TirQYbMtLPzo8q12wRDgFxO60O+U=;
- b=N3xcH7PTc6Eeu+Q45871mxjjJwMrO91ncKkkgNf30jX5nE8THx1H2aNalHirsR8R0o
- bPzjd01Bwb+u1rBe8mjNh0ooWrDkdViGBbXOmEhbDDpXZcfOGs9F5n+9gH3mPgyEEgNj
- wbzlvrHn9V3o/wjr8QIUi9CkV+ESbhZfD+kB4EWmDBbb/FHpNEMPvqaZKKVLlDFQYzii
- 8IjPOA88X0lZ4UHuQd6mLRZqnJTCTvE7XsGSYUAFktlUVKc/gXEeX3LfmpR2N2uIdTI5
- oAQnuox20IXFxmep06UzCqHhb79iGWC4s9BZcPfTkggtxtthjSQw+w8jMHls7hzqzhNF
- MwUA==
-X-Gm-Message-State: AOJu0YwKEnHVPaICEaxUA4hciVc3YvQz1vYv7zs8UG96DAQ47FP3JXfX
- +1bP1PMkazIcBq3m9/legN+E3a7sbJwExu0L48q21AWEqRfWCTHsQZFUZ9hxmmNlJ1Im6pqUuYI
- f
-X-Gm-Gg: ASbGncu3gGEfsLLWrAIBRchIw/lZLjRxk3wu+PxhvGXt2w/3B2WGByTIOMJGO6maEki
- IhvaMBSEC3ppD0CbojPuPb7vRdLqzZuKAc6tRAVXrfg/XeCpgAPebK69DM8fe3GgT07Id+aLICM
- Bo7qn0070PMjCqEUFGlAQziW2l4lDLTV6ZsZZbBPbew9Z22WhwbV43hK2GIqUdyBTwZ/7F+lV2c
- O+5IoP+TirUyh4jryxqrZ2W6nrDbTYcl0zBgzre/8MV7JjL2JkIUHbA/yMDwJOllFb57fcggHxL
- +d+ZYpVgMaNIALkL27siaEZhRTsVJFgAG2K9/4TdBuMbM7uuYZZdO/t/lwsGuCYs9PhKpnFKSK8
- w
-X-Google-Smtp-Source: AGHT+IFcqDakz54KbdTMQ0/ZPqhyJ8+L+bZsJ4Ld6nVTBt0bMRu0hN+6/Yz5pv54yAvMq5XAV4GVTQ==
-X-Received: by 2002:a05:6830:25c1:b0:72b:98f8:5c96 with SMTP id
- 46e09a7af769-73210a8fa44mr685837a34.8.1746568980542; 
- Tue, 06 May 2025 15:03:00 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73210a1b343sm143796a34.39.2025.05.06.15.02.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 May 2025 15:02:59 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250423144913.3918472-1-trini@konsulko.com>
-References: <20250423144913.3918472-1-trini@konsulko.com>
-Subject: Re: [PATCH] bootstd: Rework BLK dependency
-Message-Id: <174656897969.280764.342058269499949898.b4-ty@konsulko.com>
-Date: Tue, 06 May 2025 16:02:59 -0600
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E2AE22F;
+ Tue,  6 May 2025 17:53:38 -0700 (PDT)
+Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
+ [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EA00C3F673;
+ Tue,  6 May 2025 17:53:47 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+	u-boot@lists.denx.de
+Cc: Sunil Mohan Adapa <sunil@medhas.org>,
+ Arnaud Ferraris <arnaud.ferraris@collabora.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>
+Subject: [PATCH 0/2] sunxi: A64: enable AXP driver support
+Date: Wed,  7 May 2025 01:53:23 +0100
+Message-ID: <20250507005325.15612-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +55,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Apr 2025 08:49:13 -0600, Tom Rini wrote:
+Hi,
 
-> The bootstd code itself does not have any dependency on BLK in order to
-> build. However, in order to minimize size growth of non-migrated
-> platforms, change this from being "default y" to "default y if BLK".
-> This will make it easier to begin migration of platforms which do not
-> have any BLK-class device but do want to use bootstd.
-> 
-> 
-> [...]
+this series enables the build of the AXP driver in U-Boot proper for all
+boards using the Allwinner A64 SoC. So far some static PMIC rail setup
+was done by TF-A, but this was rather static (enabling too many) and
+increases the code size of the rather limited BL31 build.
 
-Applied to u-boot/master, thanks!
+Do this for the A64 only first, since this uses RSB consistently, while
+the H6 boards are undergoing a transition to use I2C.
 
-[1/1] bootstd: Rework BLK dependency
-      commit: 3b6760ddeb4ef940226921017cd9088c89784b01
+Please have a look and test!
+
+Cheers,
+Andre
+
+Andre Przywara (2):
+  sunxi: A64: enable DRIVEVBUS support for respective boards
+  sunxi: A64: enable AXP drivers
+
+ arch/arm/Kconfig                     | 1 +
+ arch/arm/mach-sunxi/Kconfig          | 3 +++
+ configs/a64-olinuxino-emmc_defconfig | 1 +
+ configs/a64-olinuxino_defconfig      | 1 +
+ configs/amarula_a64_relic_defconfig  | 1 +
+ configs/bananapi_m64_defconfig       | 1 +
+ configs/orangepi_win_defconfig       | 1 +
+ configs/pinetab_defconfig            | 1 +
+ 8 files changed, 10 insertions(+)
+
 -- 
-Tom
-
+2.46.3
 
