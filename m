@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE6EC3ABC5
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 08:37:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DB60C3ABC5
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 08:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FDC48288D;
-	Wed,  7 May 2025 10:36:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 550D382958;
+	Wed,  7 May 2025 10:36:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="PBP2ZSWx";
+	dkim=pass (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="ey6VG/Bt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1F11820EB; Wed,  7 May 2025 10:36:45 +0200 (CEST)
-Received: from sonic303-20.consmr.mail.ne1.yahoo.com
- (sonic303-20.consmr.mail.ne1.yahoo.com [66.163.188.146])
+ id C2ADE82952; Wed,  7 May 2025 10:36:48 +0200 (CEST)
+Received: from sonic313-10.consmr.mail.ne1.yahoo.com
+ (sonic313-10.consmr.mail.ne1.yahoo.com [66.163.185.33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC84982163
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 10:36:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F8A1820EB
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 10:36:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dullfire@yahoo.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1746607002; bh=u6ueqGNA0ShymbhpoFqIU+HtjrjTmRCZ+FebsSluGaQ=;
+ t=1746607005; bh=PGNBMY9VcpMvQ75fEzj3ZrYN6PPSqTLvXXhfQoPOfos=;
  h=From:To:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=PBP2ZSWxTEQqjRLAWu9esTTkrZJFUiqi5TNxwivtmyAoVdNEoEOirA+HmPF08oSCCrmxErR4eID78uqzR2hVikOJRG7wbZUcDpvyJave72TZYuvkl+aYfiDc/MqYB1IAslqRufmU1TMmzdhTfQG/Avg7nl8OmtEhxMy2BTU0iJFMh4RbIP6tD9tKE1coess9OLKG9jQPBI1NsBBWtDzvqh/wf6AKl4aXChlbYGqJid5l97XC5+IROt1AqVgCfsuLSIK0ddIQ+xUzOlXDmYnWQvg9xXz4NzmxuM6DnlKsCa/t9NHHsMpop/3OLGtEXoG/AnMGp1tbNRZsVL1BnFxs5A==
+ b=ey6VG/Btijxu+vJ9W91Ms6ztxXamXV+L/+C3xD4Hk3scziIv0afu3BNIeFA95DOE18LpWj48szRNf5/cSNYvP7Ci/U9/vKUJ3lJztUKh/RV94Bs9v77XQME8Xx1k5d+vqS2MoiVnDqiG7/vqFX82j/Ll+KY6NQQGxTb4HqLtK1D6kVA2+O99+EB+5/MYAHWMnpVoiuhQiwy3njQ0CbcW5dGr4DLd1Fw6qjzl/0ACmZp6/IFyIIg5omx8vJfro6GAJEoV9n4vuuacDgYbMrfK8dEgE//ZTRaDb5JK5L6GTNldRxvDvIrdJ2MUkA4V93ExVA3kHWxETid2mDh6PiRt1g==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1746607002; bh=HtJ3idT4qbfkWqS0e98StU180b/AzICJ8M8iSUQW3dT=;
+ t=1746607005; bh=FlJkRzD/OV3wRg+IhoHj79uNHysB6zqe7Qn6cfk2ax1=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=TwQ6Gy/+Nl1daYUB6WFpflTN9N4zTBP3iTKOij8RMEYTONmCDyGnGhormbFXn8DrgZoe6mFkP5znzEDnj6WI09+ZQF/sdFMqe3VhMWK6ZGNOyCYAdKp7vfKPlgGSYFMw5zqbGGr75ni7K4jUYihmiwcS9PwX1SpY8BR47hzESqJIxN6qUHGIHkxKnjrrsDTzYsQJwFL/RUp9nmdMjcDBj06RtvUtjZsmJiwuKpbCbKs6Kw4xS2mnbBdzxxo+59vtAzmme8tLhlRalw5Fa1JKMwyHNUxaJeuxmfgSF6MhjYDJQ3GFl6y6xlIaFGNBCxyxDVrd8ISIMo0/GmHMVee+AA==
-X-YMail-OSG: 7KT7f0EVM1ndfAlsBybCRrzaYs84irbJr.2X6uvHuO0zjg6MwEH.8T20onCAOql
- c2MJ4FtJGQyt7pdcsOm0Y44vPviQwIeNyCPFyYCMEVcdakZBc8sPNw44V_DXoV60fosPj8aAlfmR
- juEncd9xGPAGnW1.S7B2SaxLApK2RIa.Vh9ECAKri6IzBGOKWsLDP6nSzE_KQ9aoM7n7PSGTCun2
- 89oSSE3xo4oJfJe6a3BuFzDdfZsSJVg7i2cLuW4h0dUS9cTv7B0b9UZ88LFJ5rCUEJNAj3m57C0l
- ievSXk45dCklPhqAZVWq0hY3ywZbVx8IaCtIIiqAtB2cKbTgKs15kxqt5lILeyBb2Qu2n0XChz0N
- 3HL9NNhg_AhK3nLF3QcEXtipemAqHNbIZOpI58HQXcIFtkeInaNyrRwl.jGAhjU6ChnqGftkyYKZ
- mcEmIdOqbkgJQxwtbOR82z8_X1spGfKW01JQ2yWND9jjKQgQSBMKC3Zg3RuBTP0l9pCeVua4zRvQ
- ayfYmnUSvI4zw2Bnpx1IiauK2Vta7DZ_A3A3BzZhSjcF86arCttmQfSyv7EUoA3FtoM29M0FrQnA
- cwBIPwrXRji8z0WplHwvT8HBvLcK.1oe0r0FaTnPxf7gBnjhXwRGNkkxt7s1bvfQ8v6f7lI2y11_
- ebmbnAuYBOp.4aiUQ_U97eCYCsGAahYDq_tz9RTUjJMhL9iZbJIProcnjdVDUikCMT34rXk7_jdj
- 0VmAlkNpxwl1V1lvZFMiSYPY5cQHZekDqwSB8gLn9gME4uWLCu2qLlMyc6ADNM.JxBMaxKSWsmjH
- RIJYElKflpHOVaeOwDtk6SzbmhbR0idlz5kN3hE2drXaYhXx6qGhJXy7JLzLZpAL.Hwv8UD4h1CI
- WsS19filfcoengDpRvQ1iqsg4tzbFJBZk8iHr2OfQURhdnlDaTgHN0lW33JJrpRwHi0BjqNIk57F
- 7weKGzKOP.y8ff5qjlw.WulRjQc7sMzFvh1HZte18BaXTlF9dJxkIkmGyNdR16bc9eYklEphvhOw
- QkXiQnpFctsf4dpqIGXJfEsRJjMoUcqKmK5ZIT1KfsTfFkYfx3f7eqiy3HjhylAP6S8TnfbKnGdY
- B1Dx_kW.HKi.1UwrcXt3mi1N1XYHaABiGk0jYDsqtEo1RReTYzatqMkBx7n4UlUOwE1A_YvxJPaG
- c_vrWpndvoKKsgOMEk9bu3tVKP77EF6uX_3xZVBSOvffiZyBDdz6gDfmN42obzy0Javr0SLnnv6k
- dAeUSk4eoDZSh2RYHWHneojdyhNgLCiT4qdaDgNIWioBoVsS0iBG.3BlyfchBJ1R88FUHdjXYbzq
- Uo6JhmvLfd9Bvl.stFJ3L.4TdZ0sqweMI_my9Lg00ovhIjlBjNq5tEgN81_xWJ.s0qFRy.5EpMJh
- BWus6.aVYvQiVplweja5NxZESNPizzx0nMl5gYxtdpArEdMk.c_F0UMElTsXtpIHQvlk3Gdn3rSp
- .ujW6DC1fDExYVaAnp5VCKjCm4bfoyq4J8IFeriFiwC6h6rCGf.R2GzPiu20FMgJMxM2GmbYh.tL
- .K.pQssXFxM6k1DQYFM0ix_8oX6t2NyIFlOQWkT94GG3YBXdy.xrWNC6YeEetOmbluMfvfWxkNWa
- u7CWLHMyQPG7h5iVdTKOfHBcPR3DO_09UV7_mG0nYPOH_MgzhQF2vEMn8uVYosukIu4iq_Flsiin
- PRd8hWWvqX_ueBP.vDtFl.APqZZytAaidczNVxjeLaZTSmSBY7lcxpZAI1MnEuR27XbIqcUNhICf
- DCLC7v3W0htB5QgE_ztissJ.8ky1PtXeYFmM27XjyXJ4wCOTm9wsxecU6EKwikqtIS2WlijCMaS3
- LdS5PjC9CldB2eDmf9JbMHvLgceLhkD7d2gKQGsedcEGDuDq9MrOevAw.xI0kdbMvEeVHQS269Lz
- 1GgLCJBXM8p_ctGE9p0qVuBTuHiUGVHwM7jHbGU893md66I.jTxvCjFFVT2SqF4JHQz77fYJPE6Q
- Z6XZSWc5H_TmpTassfOc0pCwQNbZz3L5zIy5XxNRxz2UJuwTlRPmgq.7E0o5nBgqNFVNPa1d9f9.
- ut.16FL3L9POdXiqTH9DK5_cc3CoqM3qHsZ_NoKqlr7o_2QbLBGS6yAYpMvWJl29XTXZcHYymsdB
- pjCjeBWNmOCk2oggeDl4bU4H.gbxzx48CHETqR.gwBBcV0Q_MEJT_e53Bod0GAtsD_OtCKXnwBO_
- f8XzCJ9BsNNpxB.KQa8DEznlus2PSpTA5wGUSMhJr_h3x9QG0D.SBjMLkOYgjQF4-
+ b=n/HkdhPMM1HBSBMo7Ejkx7x8Orqa9Eu0vZqjm5fJlmYWZ39t1qIb6EdEgQwQsSH/dbIhRDa+WfY56J7E/SlY7xU/cMjUnGMklRo9sH0qoKE2SuzcVjbafhqxCq7XIkeY6ghBXYPLqOkWP4ZRzTgAfhx2+1TW2VL5o+f8Dq7m0H5rg5bqYM6+/+2oMycTlznyc+hDugCWwLXQGnomKMx7tfiZIoQ3uNhPCZEhhddQr9+dy/5pqr343o+vM64QheV3wn9vgOusF2NJJgzABwWx5IcdpsBo0KVNmVoF26Fzm3SeCSIIPGghqamwwXChRoBNsbD6ifeBvSyxVuLuBir5fw==
+X-YMail-OSG: Nm.N8hQVM1nekFhTzyDB5r3ik7MSlqcXUWDS5N4CU8hZKYznN8wweevGzHB7mee
+ 4gf35Uk.oBrD.aBQlKjjLujRMwF2sZHpr0aYVs0Jextx9gdl0GCjpKOvP8G1bzkr17JrZnTr7eT4
+ MmP_z25m5XYvNeGgek0gFHxQ1ddddSK1CY54QRXX4CRwP.Irn.XFNtYObiDh1cEQ5_hRGt6kYmSg
+ Pk.873OnQH0tJIygNjbJ7zTkpRuBays4WyQ2rZYtRiWedTlg1va_OTsl63c6LI8obOzBhqUO6764
+ t3E4tsnw7muzY4W8.58WuEBbK7d5IjF4ZSVVPl8QWhhZKYoYGbN82T3zs9tQcJoXXgPCzPO3_CdQ
+ ZUBhggqxXtyMY9R64_Kg7B2n6gF0kus1hlMEnzKXqsKIgJY46UWGs5sWGFgTiDn_OHKtsmUzmZq8
+ rLYvJLp6uG5Lq85XOvwqdYg8xpY.g6olm3qH85aZ3Qj2xcQdwChM8FN5WV.1icX6hDFPpDfJX1aV
+ LeVUSn6Yxwm6yEhK.KIQXMgHOd6rh4lNwol7_ASVlhiuhlKyvzQfi2E2ET_ZyDIVVcbS7r1V9MOb
+ AhfcjYgb0xTFt3405S2O1AGswyJJLw7ZF.MLwbkNLLO4rA6vtrVtheMB9cFnwkSOHAynIuDTB2jj
+ nTiSfL_qP1_tofhPSoSS2euXqCJQVjTkoyF9A8jlEJGM5S9Or4wqO7xzdhIJb1m_5OCTrJ9uRh7b
+ vVPRB3WMFzLTZD5vksFSuF9G4QzQ5pQTwIg.6QZAwDclZKOD.IiKol.gZjhewZhpUVVv3.acz2u1
+ W3xopc98zaei_HqiLqpCC1Ws8JOTHb_TSIKWejzeghMe0g6qFzgIUaFpN2LSylvg3NoucL4Nz.p3
+ THsAnaRZlOSfK36hhyPSfpe8Tc4VMOF55ebaOwx1BZ8eYI.A0REt01HLJ1TceOPRbgK05AIY5TL2
+ sluT5YqRY7VIMhtsxFxmHTowIldgYOqHPU0rqx5ci5nuwP_DL7bBVKAoiqcNpvA33sjPMeW6ueeX
+ aD5Tp3na6KJ3uBXbGUZ4tEvZIwXSy.LR.UZfsbnMjhFKbj1.f8XEg_Sy7BUd9gBpuqKiVciJUlao
+ j.6re4zKOW8nNIn_zChvnpd7KdX0TP6FB7N71z.PreoWkvJC6nyYG6QsSLGBMfLXUU9w0.pdGAOW
+ 6qqhlWUHnSHrFfiNRgu5CMyG6swOjPYCvEvBh25FMNM6rPynxvQHEb6.326lIUdcvHwq3j_D7NHx
+ I9NpN0_jveLyrfzzd3_tt2mRQM6koW1AV3tOnWcsulJd318Cr5LwA4LmybiV5nmfjm_6qsiNImsw
+ AqysNvlZ6n9biFR7w5cXZU8B0f.8URGudOOds1eKQ5RnmPezc6S5fp_asNdIMCLfyylbVV._Hw59
+ b9bRpmn_rqXCCfmcc8UtORZJiPC9i6tCGSnimB.BskkNW1J15qLjB5Sf.yamK8RIhcdF.tbOQ3nw
+ h.s8D1LRUZWKrR.abIXK1PWth7X4SvjJVauClEk7ASeJWxhsmxbomlhY5vdTnM2augWVNPHn4bhM
+ JlN0bvBo1GVNWpyLox6QZktfInbKoaBfrftnm2XvvicTSqI6VCM5owkyUlXfumqQ8mevYE_vIihT
+ etRaQ79syjDqGJUpYjJbG6zwQ.VryJ3LFCxyJ4t2_yoaxtn6RG9Uptu.qLxHHZXNauFWzT1Ke7pj
+ 81knNaK3gwZwqRUMbTjr_K6vUQC.Qzi8_hCIRW2KDs1tao_uHpPpncUPBNgXCrRxTVdq6SwmYQ1R
+ HZzmc7l2aVzgNuBLX6Pnrnv8FYlIdLVH5bG3vCZU6qhMi9r5dA5rg1kUQrt8RHpEqjWlqGSIgMre
+ hC.L8Mgb3LpPXRo5BjlggXT6k.7wT_tUfr10hHDIzdRgmhcQdSmWmeSkMuSYeP6UVNXR0CYdj_se
+ OnDaGbMkuLekYT2qDTGtmdU9o96E5dQDH26kB7x89WI9NqN0BVw4B9Yj2qljJvhGfkY.UR2GoFiw
+ 4RN5.sYChnrPozMzxPdVuwKl7Xi8XJJ5CJBAHOt89wDr2d5CtMJC._S2XlydEMty0zw91D9bMqYQ
+ 7sYz8aWg0S5iXQsNBdGogwSzs5Mz30C1cCF5eplGyniTrz3.GEIdMw55LHRmbzAZOH5hRDXd9tc1
+ 1oRVDIBJIVMPbBqJehwKY0L1q.ZpM5L0JusUDrIhQbdPzHqNHjos4xRC0h4A4hUldTGild9FMBIf
+ sPSN7yHsG52J66YjnWhzahg.9bYLHTk_RSS4WFKpcp_sBo0P3jgmqEo1gNVACMXQ-
 X-Sonic-MF: <dullfire@yahoo.com>
-X-Sonic-ID: 417dfd06-9062-4a83-83de-3f20935f0830
+X-Sonic-ID: f17715bb-19c0-4d76-a779-c6150ce28534
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic303.consmr.mail.ne1.yahoo.com with HTTP; Wed, 7 May 2025 08:36:42 +0000
-Received: by hermes--production-ne1-9495dc4d7-27szc (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 53889d222af5dc96bcf893d45fa94f3a; 
- Wed, 07 May 2025 08:36:37 +0000 (UTC)
+ sonic313.consmr.mail.ne1.yahoo.com with HTTP; Wed, 7 May 2025 08:36:45 +0000
+Received: by hermes--production-ne1-9495dc4d7-ksk6c (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 657af18a778aaf15ff4eb5122835a91d; 
+ Wed, 07 May 2025 08:36:39 +0000 (UTC)
 From: Jonathan Currier <dullfire@yahoo.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
@@ -83,10 +83,10 @@ To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Mark Brown <broonie@kernel.org>, u-boot@lists.denx.de
-Subject: [RFC PATCH v2 4/5] spi: fspi: dev_dbg() call assumes fdt_addr_t
- always a long long
-Date: Wed,  7 May 2025 03:36:23 -0500
-Message-ID: <20250507083625.6195-5-dullfire@yahoo.com>
+Subject: [RFC PATCH v2 5/5] configs: imxrt1170-evk_defconfig: include FlexSPI
+ driver and flash chip support
+Date: Wed,  7 May 2025 03:36:24 -0500
+Message-ID: <20250507083625.6195-6-dullfire@yahoo.com>
 X-Mailer: git-send-email 2.45.3
 In-Reply-To: <20250507083625.6195-1-dullfire@yahoo.com>
 References: <20250507083625.6195-1-dullfire@yahoo.com>
@@ -108,28 +108,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 32-bit systems, e.g. i.mxrt-1170 fdt_addr_t may only be 32-bit.
-Cast to a "long long" for garbage avoidance.
-
 Signed-off-by: Jonathan Currier <dullfire@yahoo.com>
 ---
- drivers/spi/nxp_fspi.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ configs/imxrt1170-evk_defconfig | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/drivers/spi/nxp_fspi.c b/drivers/spi/nxp_fspi.c
-index 95ad7fcff7f..6d97b8eefc9 100644
---- a/drivers/spi/nxp_fspi.c
-+++ b/drivers/spi/nxp_fspi.c
-@@ -1048,7 +1048,8 @@ static int nxp_fspi_of_to_plat(struct udevice *bus)
- 	}
- #endif
- 
--	dev_dbg(bus, "iobase=<0x%llx>, ahb_addr=<0x%llx>\n", iobase, ahb_addr);
-+	dev_dbg(bus, "iobase=<0x%llx>, ahb_addr=<0x%llx>\n",
-+			(long long)iobase, (long long)ahb_addr);
- 
- 	return 0;
- }
+diff --git a/configs/imxrt1170-evk_defconfig b/configs/imxrt1170-evk_defconfig
+index 32107fa9d52..a57c35bf686 100644
+--- a/configs/imxrt1170-evk_defconfig
++++ b/configs/imxrt1170-evk_defconfig
+@@ -37,6 +37,8 @@ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
+ # CONFIG_BOOTM_PLAN9 is not set
+ # CONFIG_BOOTM_RTEMS is not set
+ # CONFIG_BOOTM_VXWORKS is not set
++CONFIG_CMD_MTD=y
++CONFIG_CMD_SPI=y
+ # CONFIG_CMD_MII is not set
+ # CONFIG_SPL_DOS_PARTITION is not set
+ # CONFIG_ISO_PARTITION is not set
+@@ -58,6 +60,15 @@ CONFIG_CLK_IMXRT1170=y
+ CONFIG_MXC_GPIO=y
+ # CONFIG_INPUT is not set
+ CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_BLOCK=y
++CONFIG_CFI_FLASH=y
++CONFIG_FLASH_CFI_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_ISSI=y
++CONFIG_SPI_FLASH_MTD=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMXRT=y
+@@ -65,6 +76,10 @@ CONFIG_RAM=y
+ CONFIG_SPL_RAM=y
+ CONFIG_IMXRT_SDRAM=y
+ CONFIG_FSL_LPUART=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_SPI_DIRMAP=y
++CONFIG_NXP_FSPI=y
+ CONFIG_TIMER=y
+ CONFIG_SPL_TIMER=y
+ CONFIG_IMX_GPT_TIMER=y
 -- 
 2.45.3
 
