@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48345C3ABC0
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 22:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58569C3ABC0
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 22:11:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF9BA82991;
-	Thu,  8 May 2025 00:11:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6AE63829A1;
+	Thu,  8 May 2025 00:11:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UAfhF2Rz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uSZ7Hyrh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D87828B3; Thu,  8 May 2025 00:11:24 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 9B3C2828B3; Thu,  8 May 2025 00:11:24 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38FEC822D7
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 00:11:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E2E38272A
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 00:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-2c12b7af278so334297fac.0
- for <u-boot@lists.denx.de>; Wed, 07 May 2025 15:11:21 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3feaedb39e9so156792b6e.1
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 15:11:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746655880; x=1747260680; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746655881; x=1747260681; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RdTCsdFfy5oS/446IwxaRlgg4jpAGUgz2RZ2Eiln4vg=;
- b=UAfhF2RzhbpQZ/YAVPp9drGettw6ow2+/+7TBE24YPtMZjttoJNQxRCFdofMn0Qig6
- Ja0wEShcG8Wp2BpJFVdVLzOXctihcNG5Q2ecDstX2LQk1Q1XaERcRqMn2Us2A7Es+i9n
- qaZYii1EFCAFSd7CN7FZF8jIv3LteRhm7rX4c=
+ bh=DzeTlZy8PG+n9Eb14y+UFBtuAh4RrneKz2LrQrHsrOE=;
+ b=uSZ7HyrhCgS6YB58Mw5fkhWdjIhmr8e892cnQ9SGLPobKgSukwvCXvhASF7hXxS/iO
+ ++uGjBx9luvvidtRZrLOwaJavVyvSZqT7QzKGdScfScih5GR7n1leG4Nt9RtAGrtzxxW
+ Pm2sosci+bGutS95EpAKDzAv9hN95B4T63sgs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746655880; x=1747260680;
+ d=1e100.net; s=20230601; t=1746655881; x=1747260681;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RdTCsdFfy5oS/446IwxaRlgg4jpAGUgz2RZ2Eiln4vg=;
- b=OeCdt48VQ1Kv5EnvxvXLfn97m9gSVx6Lnq/x/h5xgG1/JUPG0sfRG5EvXcwgK0nF/3
- qR3KnxocP9a5xGKjSkom7gvCmpwkLgu5OCrgcW/5cvPypX4CsR40CxzI0unPVWcFe5YU
- s2C1YnRjVgT1ApLEbDXOcXZGJkZ519gjV1M+m6e3ej1wJfbjvqq7R6BRRSOhf603T2TH
- GQRfhYHzyu3/NF8Q6NAzgsxCkRg1pnJtiq4qQGEzfR7hh+028g5/c2vNmy8uwWT1RICQ
- xVDCpf0/MkvzN3U/NokfRAtoGX8DqtvDQCDFo5OGZGCX4KAYF0Uqyj1X+5IKsXEpRJaF
- 8F2A==
-X-Gm-Message-State: AOJu0YygpE/xJ319x9pRiJtQQDHdsrPS8qDI6ilGq6IDSJggusxXgoCG
- YdrMnEqf62rPvuagYb0XGLJm2y1XZIT84e55YKe0JOFESImqQ2zYOE/0nAxgs5yZCVMURljF32d
- 5
-X-Gm-Gg: ASbGncv+Xow3U9vd0pMBmFwu/8Ou//w26zyBGvrLC0Ep/5/DMjDFvOeJFjureUM6aaJ
- TnVpsNO/I4HRp3fSvG2Ojc91rX4cp27v9qQrLa54Sr/8T308iO70/ubolgEYrk1G9LYGg+oJZ3u
- FwrDqfQUwyQCq+RIB2IwiHHoU0hVgOkFxqCrDvSmfQVsuZREgXQR+haduvYDaouOMcIWCh/NQLZ
- GUAxuhLLlLs01aRoZhrJHhgwqdlrzXBb0K+G0jTzT4g9ufV85JNea5fWjwgeVJQnxj4eGNuY5bQ
- jaF+257a5z11J8wF+6EZ6ie8JYD6WpkHMtpU+cHRgtO5hnY6nHN0g4WvkvgJYp5dA87Y3QJPKQi
- p4a3V
-X-Google-Smtp-Source: AGHT+IGTm4PpT2cVaAX4O8y8qNtUUCQYz7tXKMNqOyEzUjAlTwadP/l3G4Iy7QuJROIAdfCT2dw4mw==
-X-Received: by 2002:a05:6870:80d0:b0:2d5:97d0:c03c with SMTP id
- 586e51a60fabf-2db80a1121fmr831633fac.18.1746655879834; 
- Wed, 07 May 2025 15:11:19 -0700 (PDT)
+ bh=DzeTlZy8PG+n9Eb14y+UFBtuAh4RrneKz2LrQrHsrOE=;
+ b=p3FB/cu896cLq+luzYeDCWi/DacDPXXITfLXX+6+L/wTi9wf2cnl+ExGDHfoF+ggie
+ wuuTzGxyFC7dY0ZeHP+pxhlLuv8O3v6/hifqV2jAtR3rbB75Z22kgWaiYqyzQ2a0LupJ
+ bf602Hq7uQqMEYroczCMxiFuXZzyLrHWGVKEouxUp7Jj++DQrWHnz5G3/P0MFxQ229dO
+ EaGC4tIN+7D1siLdI+iRBILdzHSWzLen+wtUK+ZSNB43P6gZOMoPRRpCVTPMMI69scjS
+ tY7iaxAAFqOkrJJY6jCDX5anbmEDp5zVB9iiT5ShdnOaxYhlvwwrHhPzIMoRik1nlumk
+ WMZg==
+X-Gm-Message-State: AOJu0YzOHrNxlh/PQyVOmAoFYwuao5SFIkQueGK6Pp6pE1OAmOShwWCl
+ IhWJDfF2iFST/4D482/cfGbhWC9DGgNnRjKnrMnAc0LDtSOhazibqqkY1S0Vh7z/wPYc1k4g9yp
+ N
+X-Gm-Gg: ASbGnctAGQ1S5nqO/+amxtUdmNJNpFz32VqcBcFIEC9bVq8CoM6QiOGb8OrcJattiaB
+ yoip3MJHhaXu6hdrmntm8Du/Rwu+XmLlDWYQ5VrYTuTVyCZQBpzc0hrb/1HZrj71Cp4Da/pDDpw
+ vI9S83EQ38VW8FoTfY3VgWflFiLfMdRnzK6CRwkp8dgDBrkBd+RGU045BB5MTztQYiBmmK2swBe
+ yj7Ql+N49DWHdxDJ/op+2c4NOFNpibhiSfn9JfebygV7Wc9WBd25WKFd9NuODx48hXFrDPwEJgc
+ CXXZ0lfqednHpMqnMZKNIFQAJFBK8sVYuUi9VOIX7vlZ+o3ry3OV65bop4sCkQ7oleaM+VVuOXw
+ 9abQT
+X-Google-Smtp-Source: AGHT+IG5J2F5Qi3+nnqNUqIrTrSngokTUYMwbMspm1piBBJabVZEwBlXliQkt+jMQX+lUC9Y9rfYDw==
+X-Received: by 2002:a05:6870:1585:b0:2c6:72d3:fc93 with SMTP id
+ 586e51a60fabf-2db5be13542mr2933439fac.12.1746655880776; 
+ Wed, 07 May 2025 15:11:20 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2db5cbf16f1sm967181fac.20.2025.05.07.15.11.18
+ 586e51a60fabf-2db5cbf16f1sm967181fac.20.2025.05.07.15.11.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 May 2025 15:11:19 -0700 (PDT)
+ Wed, 07 May 2025 15:11:20 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 3/4] doc: pytest: Document the test_net_boot test
-Date: Wed,  7 May 2025 16:08:19 -0600
-Message-ID: <20250507221112.518041-4-trini@konsulko.com>
+Subject: [PATCH v2 4/4] test: test_net_boot: Add more comments
+Date: Wed,  7 May 2025 16:08:20 -0600
+Message-ID: <20250507221112.518041-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250507221112.518041-1-trini@konsulko.com>
 References: <20250225205003.2640910-1-trini@konsulko.com>
@@ -97,251 +97,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the test_net_boot.py test to the generated documentation. While most
-of this was already commented correctly for inclusion the biggest
-problem was examples of code without a code-block notation. This in turn
-broke parsing. Add the missing notations. We also must have the comment
-prior to any import lines or it will not be seen as a comment on the
-overall file and thus not included.
+Some of the functions were missing pydoc comments. Add them so they will
+be included in the documentation.
 
+Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Simon Glass <sjg@chromium.org>
 ---
- doc/develop/pytest/index.rst         |   1 +
- doc/develop/pytest/test_net_boot.rst |   8 ++
- test/py/tests/test_net_boot.py       | 163 +++++++++++++++------------
- 3 files changed, 98 insertions(+), 74 deletions(-)
- create mode 100644 doc/develop/pytest/test_net_boot.rst
+ test/py/tests/test_net_boot.py | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/doc/develop/pytest/index.rst b/doc/develop/pytest/index.rst
-index ca45e157d3be..36083882584f 100644
---- a/doc/develop/pytest/index.rst
-+++ b/doc/develop/pytest/index.rst
-@@ -18,3 +18,4 @@ Individual tests
-    :maxdepth: 1
- 
-    test_000_version
-+   test_net_boot
-diff --git a/doc/develop/pytest/test_net_boot.rst b/doc/develop/pytest/test_net_boot.rst
-new file mode 100644
-index 000000000000..369bd3b809cf
---- /dev/null
-+++ b/doc/develop/pytest/test_net_boot.rst
-@@ -0,0 +1,8 @@
-+test_net_boot
-+=============
-+
-+.. automodule:: test_net_boot
-+   :synopsis:
-+   :member-order: bysource
-+   :members:
-+   :undoc-members:
 diff --git a/test/py/tests/test_net_boot.py b/test/py/tests/test_net_boot.py
-index abf6dfbaf5e4..6585f0574c01 100644
+index 6585f0574c01..72086a74637d 100644
 --- a/test/py/tests/test_net_boot.py
 +++ b/test/py/tests/test_net_boot.py
-@@ -1,11 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0
- # (C) Copyright 2023, Advanced Micro Devices, Inc.
+@@ -133,11 +133,21 @@ import test_net
+ import re
  
--import pytest
--import utils
--import test_net
--import re
--
- """
- Note: This test relies on boardenv_* containing configuration values to define
- which the network environment available for testing. Without this, this test
-@@ -13,77 +8,88 @@ will be automatically skipped.
- 
- For example:
- 
--# Details regarding a boot image file that may be read from a TFTP server. This
--# variable may be omitted or set to None if TFTP boot testing is not possible
--# or desired.
--env__net_tftp_bootable_file = {
--    'fn': 'image.ub',
--    'addr': 0x10000000,
--    'size': 5058624,
--    'crc32': 'c2244b26',
--    'pattern': 'Linux',
--    'config': 'config@2',
--    'timeout': 50000,
--    'check_type': 'boot_error',
--    'check_pattern': 'ERROR',
--}
--
--# False or omitted if a TFTP boot test should be tested.
--# If TFTP boot testing is not possible or desired, set this variable to True.
--# For example: If FIT image is not proper to boot
--env__tftp_boot_test_skip = False
--
--# Here is the example of FIT image configurations:
--configurations {
--    default = "config@1";
--    config@1 {
--        description = "Boot Linux kernel with config@1";
--        kernel = "kernel@0";
--        fdt = "fdt@0";
--        ramdisk = "ramdisk@0";
--        hash@1 {
--            algo = "sha1";
--        };
--    };
--    config@2 {
--        description = "Boot Linux kernel with config@2";
--        kernel = "kernel@1";
--        fdt = "fdt@1";
--        ramdisk = "ramdisk@1";
--        hash@1 {
--            algo = "sha1";
--        };
--    };
--};
--
--# Details regarding a file that may be read from a TFTP server. This variable
--# may be omitted or set to None if PXE testing is not possible or desired.
--env__net_pxe_bootable_file = {
--    'fn': 'default',
--    'addr': 0x10000000,
--    'size': 74,
--    'timeout': 50000,
--    'pattern': 'Linux',
--    'valid_label': '1',
--    'invalid_label': '2',
--    'exp_str_invalid': 'Skipping install for failure retrieving',
--    'local_label': '3',
--    'exp_str_local': 'missing environment variable: localcmd',
--    'empty_label': '4',
--    'exp_str_empty': 'No kernel given, skipping boot',
--    'check_type': 'boot_error',
--    'check_pattern': 'ERROR',
--}
--
--# False if a PXE boot test should be tested.
--# If PXE boot testing is not possible or desired, set this variable to True.
--# For example: If pxe configuration file is not proper to boot
--env__pxe_boot_test_skip = False
--
--# Here is the example of pxe configuration file ordered based on the execution
--# flow:
-+.. code-block:: python
-+
-+   # Details regarding a boot image file that may be read from a TFTP server. This
-+   # variable may be omitted or set to None if TFTP boot testing is not possible
-+   # or desired.
-+   env__net_tftp_bootable_file = {
-+       'fn': 'image.ub',
-+       'addr': 0x10000000,
-+       'size': 5058624,
-+       'crc32': 'c2244b26',
-+       'pattern': 'Linux',
-+       'config': 'config@2',
-+       'timeout': 50000,
-+       'check_type': 'boot_error',
-+       'check_pattern': 'ERROR',
-+   }
-+
-+   # False or omitted if a TFTP boot test should be tested.
-+   # If TFTP boot testing is not possible or desired, set this variable to True.
-+   # For example: If FIT image is not proper to boot
-+   env__tftp_boot_test_skip = False
-+
-+
-+Here is the example of FIT image configurations:
-+
-+.. code-block:: devicetree
-+
-+   configurations {
-+       default = "config@1";
-+       config@1 {
-+           description = "Boot Linux kernel with config@1";
-+           kernel = "kernel@0";
-+           fdt = "fdt@0";
-+           ramdisk = "ramdisk@0";
-+           hash@1 {
-+               algo = "sha1";
-+           };
-+       };
-+       config@2 {
-+           description = "Boot Linux kernel with config@2";
-+           kernel = "kernel@1";
-+           fdt = "fdt@1";
-+           ramdisk = "ramdisk@1";
-+           hash@1 {
-+               algo = "sha1";
-+           };
-+       };
-+   };
-+
-+.. code-block:: python
-+
-+   # Details regarding a file that may be read from a TFTP server. This variable
-+   # may be omitted or set to None if PXE testing is not possible or desired.
-+   env__net_pxe_bootable_file = {
-+       'fn': 'default',
-+       'addr': 0x10000000,
-+       'size': 74,
-+       'timeout': 50000,
-+       'pattern': 'Linux',
-+       'valid_label': '1',
-+       'invalid_label': '2',
-+       'exp_str_invalid': 'Skipping install for failure retrieving',
-+       'local_label': '3',
-+       'exp_str_local': 'missing environment variable: localcmd',
-+       'empty_label': '4',
-+       'exp_str_empty': 'No kernel given, skipping boot',
-+       'check_type': 'boot_error',
-+       'check_pattern': 'ERROR',
-+   }
-+
-+   # False if a PXE boot test should be tested.
-+   # If PXE boot testing is not possible or desired, set this variable to True.
-+   # For example: If pxe configuration file is not proper to boot
-+   env__pxe_boot_test_skip = False
-+
-+Here is the example of pxe configuration file ordered based on the execution
-+flow:
-+
- 1) /tftpboot/pxelinux.cfg/default-arm-zynqmp
- 
-+.. code-block::
-+
-     menu include pxelinux.cfg/default-arm
-     timeout 50
- 
-@@ -91,6 +97,8 @@ env__pxe_boot_test_skip = False
- 
- 2) /tftpboot/pxelinux.cfg/default-arm
- 
-+.. code-block::
-+
-     menu title Linux boot selections
-     menu include pxelinux.cfg/default
- 
-@@ -110,6 +118,8 @@ env__pxe_boot_test_skip = False
- 
- 3) /tftpboot/pxelinux.cfg/default
- 
-+.. code-block::
-+
-     label Linux
-         menu label Boot kernel
-         kernel Image
-@@ -117,6 +127,11 @@ env__pxe_boot_test_skip = False
-         initrd rootfs.cpio.gz.u-boot
- """
- 
-+import pytest
-+import utils
-+import test_net
-+import re
-+
  def setup_networking(ubman):
++    """Setup networking
++
++    Making use of the test_net test, first try and configure networking via
++    DHCP. If this fails, fall back to static configuration.
++    """
      test_net.test_net_dhcp(ubman)
      if not test_net.net_set_up:
+         test_net.test_net_setup_static(ubman)
+ 
+ def setup_tftpboot_boot(ubman):
++    """Setup for the tftpboot 'boot' test
++
++    We check that a file to use has been configured. If it has, we download it
++    and ensure it has the expected crc32 value.
++    """
+     f = ubman.config.env.get('env__net_tftp_bootable_file', None)
+     if not f:
+         pytest.skip('No TFTP bootable file to read')
+@@ -213,6 +223,10 @@ def test_net_tftpboot_boot(ubman):
+             ubman.cleanup_spawn()
+ 
+ def setup_pxe_boot(ubman):
++    """Setup for the PXE 'boot' test
++
++    Make sure that the file to load via PXE boot has been configured.
++    """
+     f = ubman.config.env.get('env__net_pxe_bootable_file', None)
+     if not f:
+         pytest.skip('No PXE bootable file to read')
 -- 
 2.43.0
 
