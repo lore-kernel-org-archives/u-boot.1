@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB7F2C3ABC0
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 15:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB8CC3ABBF
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 15:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22098820EB;
-	Wed,  7 May 2025 17:24:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 23FA381F32;
+	Wed,  7 May 2025 17:32:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K9MR9rK0";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=arnaud.patard@collabora.com header.b="cH4h7x+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B364A8211F; Wed,  7 May 2025 17:24:49 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C97DA820EB; Wed,  7 May 2025 17:32:05 +0200 (CEST)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
+ [136.143.188.112])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBADE8059D
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 17:24:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 428D48059D
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 17:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-400fa6b3012so693835b6e.1
- for <u-boot@lists.denx.de>; Wed, 07 May 2025 08:24:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746631485; x=1747236285; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ooymJopPBzCkcxdA7czfVEA4JGNGPf5290R4WL4XgPQ=;
- b=K9MR9rK019Rd0MRHZlXdEkUdyre3RUUTgG9N6i/LTDDtB6EIT6fhivIyh3nvgEPKUg
- 1/GKeu4sTctgfOYe1Ekl1tyTptS8nq9JDLtbcuOMVTpiA2NHSmB6Q1a3awzFj73GNRPP
- nG66lt8WSiuDu0iB7jUUdsJUsDlPOUvc7FTTw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746631485; x=1747236285;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ooymJopPBzCkcxdA7czfVEA4JGNGPf5290R4WL4XgPQ=;
- b=aYBIXha4ul+HCISMEkU3hKMxF0Z+lgPCYu9gQxzGvoX5WXACjjbRuCOBdud9j1+5Xz
- ZFH4DXJ8aAlWh9nASIywf3dK8LYLDKP96lZofG/X4lN8FOJIcYfNbOxhjbJ4zunsWzFA
- ydZoVVPOeYyLFlLdrTS+PnxLxq6EXX2FyKHZc/Pc8GcDkQvPnpWuio53HDYDYLMPcaRx
- UbXifRx/eIFbuPpZcIEcRRBQCb7W7APrV6MxCCenbd1pHFprxlZo1wFv9EcVKu0wGQPG
- TAVMe5K+Toa7RyCJ5xJs8HH3EFuU2Tvy3RGatwbrwN5PmE7bkrtnqL6+mjmKWK2t8ZdY
- Fu6Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV2UUiWsS1yG2NTF5ftWzOXPWkoj0LH5N600AIdHycGvaCpgy0zHYltlD2mRNMeByTS9x9ilyU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTipqK6EovcPcEYBDlhiZQ/QXZRZKLHyp/jwX2uVQKxhwn9nbJ
- 6IsCCpX/bNjMlEQOWI7eDsQdPcBlcUzdocxE+ysRe9pQftVgNSwSnEPyAQMcM8Y=
-X-Gm-Gg: ASbGnctSEriJtdOF7lU5YqJPWvbvKvdASEwl6nMYh7RwZLq+kNPbA2doO8GEUntHxNB
- VlY2yDVU/nmEYNIKSfyNiUpUbusm7Wdh4cfChXrrgZmNB4Vs9WfVI7hYI9fQWq9fjUnth8Bznf6
- xkGqYJs9hdDlj7f0Yd1zZXBdfuK0U4VAA6i6Bfg+jm9IKzK1/YbbzQvvYbnxryQHMoYGrBUlf3a
- tkk7bgGczpvDz9CxWzfD7OSv8TrJ7Ea62JktAifDYfNfkdodQ8opmmZbUf7Zb+LqzEUWZHxrJkF
- Wj2qK7kyLxte9GhgZo8mH1l/O7rr8495q9yodcPdrd42mYezwVgvAgDmxuG53aczisrGmM26zUp
- i
-X-Google-Smtp-Source: AGHT+IHOpCTYxV29gslfVh4vFA9cLYnG6N5x4euhRYAZ/sSjZR2znSRywb1kx/hc61wXJOwYQAFVIw==
-X-Received: by 2002:a05:6808:3c46:b0:403:284b:2a58 with SMTP id
- 5614622812f47-4036f34fde2mr1993722b6e.6.1746631485079; 
- Wed, 07 May 2025 08:24:45 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4036f340be5sm567442b6e.23.2025.05.07.08.24.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 May 2025 08:24:44 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: ggiordano@phytec.com, w.egorov@phytec.de, u-boot@lists.denx.de, 
- joe.hershberger@ni.com, Daniel Schultz <d.schultz@phytec.de>
-Cc: bb@ti.com, nmorrisson@phytec.com, upstream@lists.phytec.de
-In-Reply-To: <20250428144904.1058574-1-d.schultz@phytec.de>
-References: <20250428144904.1058574-1-d.schultz@phytec.de>
-Subject: Re: [PATCH 1/3] include: env: phytec: k3_net: Remove
- net_apply_extensions
-Message-Id: <174663148371.479629.18304486876009168786.b4-ty@konsulko.com>
-Date: Wed, 07 May 2025 09:24:43 -0600
+ spf=pass smtp.mailfrom=arnaud.patard@collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1746631918; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=dhA1sJJRsCsTG2Zf3stYB0AdNQfz2yZffNaK1ZqpuqgoZAhI1RBMM3plwCqH9dwMvLS6b7+97ICiSFGoYKfUBCsLmMObgUAsxUnuqxBOmhIWL2Nn8/k0GakuBOJ3kVHPa0QJWuQ3j1vugC6X8FXJO9+k5Zr5Yd3niOHgSepjJgA=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1746631918;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=+60gl/wLUA/xd7sRumyXhytpPH60KylZCADJccoWd6w=; 
+ b=fP8pffIxlMVAM/wg2L0UCApri+r/yyRwNw9KwDNLqvthh0AwC3mXl03MUrEfA/p2EVitfo9rz8mpvsj9837D1wr9IYXcPizW2JMSuncy3m/JDn+HeoDroqplR0obu1mEO+462YOeT4XdmoscatYcJGsp3m4uHt+L8bizqOBatJE=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=arnaud.patard@collabora.com;
+ dmarc=pass header.from=<arnaud.patard@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1746631918; 
+ s=zohomail; d=collabora.com; i=arnaud.patard@collabora.com;
+ h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
+ bh=+60gl/wLUA/xd7sRumyXhytpPH60KylZCADJccoWd6w=;
+ b=cH4h7x+2Yr8aQsz1/VvTfptfDAH/Cd6G44gKmokiXj9F70cLXFRvPkUbUBHI5FqD
+ biy3aaI7k6v1CiDNPVHM0nYO5xD9iWCYmFVmUvYjZywz5AxLgp32/dHsMfYlsUrnTNa
+ V+aIPbl6tLwPl50COB+5YIQrZ3L4/W5j9d7saFJY=
+Received: by mx.zohomail.com with SMTPS id 1746631915450945.4381253762693;
+ Wed, 7 May 2025 08:31:55 -0700 (PDT)
+Message-ID: <f7d10c18af03f3879a765f190614dbb17d4b300a.camel@collabora.com>
+Subject: Re: [PATCH 0/7] rockchip: Add boot from USB OTG port
+From: Arnaud Patard <arnaud.patard@collabora.com>
+To: Kever Yang <kever.yang@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, jonas@kwiboo.se, 
+ quentin.schulz@cherry.de, jagan@amarulasolutions.com, dsimic@manjaro.org, 
+ pbrobinson@gmail.com, liujianfeng1994@gmail.com, macromorgan@hotmail.com, 
+ michal.simek@amd.com
+Date: Wed, 07 May 2025 17:31:50 +0200
+In-Reply-To: <40162793-5cf1-4e29-8621-b5863e8cdeae@rock-chips.com>
+References: <20250211053340.92919-1-naoki@radxa.com>
+ <40162793-5cf1-4e29-8621-b5863e8cdeae@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4-2 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,22 +81,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 28 Apr 2025 07:49:02 -0700, Daniel Schultz wrote:
+Hi,
 
-> Extensions are now handled by the board-code. Remove this non-existing
-> function to proper boot from network.
-> 
-> 
+On Tue, 2025-05-06 at 15:53 +0800, Kever Yang wrote:
+> Hi Naoki,
+>=20
+> On 2025/2/11 13:33, FUKAUMI Naoki wrote:
+> > This patch series adds the ability to boot from the USB OTG port to
+> > the RK3588, RK3568, RK3566, RK3399, RK3328, and RK3308.
+> >=20
+> > Use rkflashtool[1] or rkusbboot[2]
+>=20
+> Does these two tool have the same functionality? I don't know the
+> second=20
+> one :(
+>=20
+> And I know there is another tool named rkdeveloptool from rockchip.
+>=20
+> > =C2=A0 to download TPL and SPL from
+> > MASKROM mode, and dfu-util to download U-Boot from DFU mode.
+>=20
+> What's the main target for this patchset, boot from usb with ramboot=20
+> support and without any eMMC/SD/SPI driver?
+>=20
 
-Applied to u-boot/master, thanks!
+I can't talk for Naoki, but my use case is to test easily u-boot on my
+rockchip platforms without having to flash u-boot or to have some
+storage.
 
-[1/3] include: env: phytec: k3_net: Remove net_apply_extensions
-      commit: e75070a8f46f9e154f1ede8132ff3b8c7cfad604
-[2/3] include: env: phytec: k3_net: Use get_cmd
-      commit: ad2ae4d2b250e25e305ddad9b9337abb4d796137
-[3/3] board: phytec: phycore_am62ax: Update Environment
-      commit: fd446b0c84478b4673b41a1440cd9116fdd41d92
--- 
-Tom
+> I would prefer to keep using one tool instead of two or more tools,
+> so I=20
+> don't think
+>=20
+> enable DFU in SPL is a good idea, using rockusb in SPL is better
+> here.
 
+To test u-boot, I'd like to use snagflash/snagboot as it's not rockchip
+specific. So, this means adding support for maskrom (which I've already
+written) and rockusb protocols to it. With DFU in SPL support in u-
+boot, this would mean nothing to do as the support for DFU is already
+in snagboot/snagflash.
+
+Arnaud
 
