@@ -4,72 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9BEBC3ABBF
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 14:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62891C3ABC3
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 15:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39C7381F32;
-	Wed,  7 May 2025 16:56:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E012181F32;
+	Wed,  7 May 2025 17:03:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yF2niX6f";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="edbd5qHk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A16820EB; Wed,  7 May 2025 16:56:53 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 478428059D
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 16:56:50 +0200 (CEST)
+ id 5F9AA8212F; Wed,  7 May 2025 17:03:06 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 513858059D
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 17:03:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 547Euin81403365
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 7 May 2025 09:56:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746629804;
- bh=slMy3vwIToiQjq6wnGcfmntgc7EWQQknctyuOh2H43E=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=yF2niX6fw2UNrMjQ72Ns82XOgFv3rG/vMjNI/GfyIBhlQkMx7h49l524RXngoln1A
- DmCdNFEEFsJc8vfuXhoobdsnDmzpt2kQEiLhy+A809ybKafOW+Q1+7ugiloW4rU4hi
- UflTitdCgu635Nd9FzNPCK9wBM/IAwMnI8q4+9Rc=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 547EuiIk013887
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 7 May 2025 09:56:44 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
- May 2025 09:56:43 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 7 May 2025 09:56:43 -0500
-Received: from [10.249.140.90] ([10.249.140.90])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 547Eua3m061987;
- Wed, 7 May 2025 09:56:37 -0500
-Message-ID: <218f2201-6094-4a93-aae6-e919cbeeda56@ti.com>
-Date: Wed, 7 May 2025 20:26:36 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1746630179; x=1747234979; i=xypron.glpk@gmx.de;
+ bh=yS3dfJ5/9uy/lZj4TTpd9kFxeuWeteB1FvCoWvGPIds=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=edbd5qHk5PzF2z1qfdZzvEPPIHKVkrf/oiXwvXT7yOSwF7bIPnTIgGL8kDjtOszz
+ kZ8ozaP2SVDtaQGebPkij2mlMP+OtQWpHXrzzanKVpC67gWaEaOy2cnT4WYZ4okLl
+ 1PtzUpZjYXsc0h/6chACSr+CV8uDWP+Cv5AfX3k+CDlmYLhAG0Rqr2Yz/ItmZrRbo
+ qFXtdYLyMMJ28F7cWjFH3z9BjluF0ULhEFUc2cKu8PS3UlnutKEvlFv/sMR1Gp9vc
+ atavMXC7H9CJBwGi0dZy8wxHhjgj+xipcc2Ott64uETad+aqn7WBu8paCaguUimy8
+ I3EWlhOKS1LO+CMFFg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([213.157.19.150]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MsYux-1v0Wvg0JQp-00vzZG; Wed, 07
+ May 2025 17:02:59 +0200
+Date: Wed, 07 May 2025 17:02:56 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
+CC: ilias.apalodimas@linaro.org, sjg@chromium.org, trini@konsulko.com,
+ o451686892@gmail.com, Adriano Cordova <adriano.cordova@canonical.com>
+Subject: Re: [PATCH 1/3] efi_loader: initrddump: use efi_uintn_t in printx
+User-Agent: Thunderbird for Android
+In-Reply-To: <20250507144619.3288456-2-adriano.cordova@canonical.com>
+References: <20250507144619.3288456-1-adriano.cordova@canonical.com>
+ <20250507144619.3288456-2-adriano.cordova@canonical.com>
+Message-ID: <700D243C-61F5-415C-8506-8DB58F23E04B@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/7] arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM
- firmware inside tispl.bin
-To: Anshul Dalal <anshuld@ti.com>, <trini@konsulko.com>, <afd@ti.com>
-CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
- <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
- <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
- <d-gole@ti.com>, <u-boot@lists.denx.de>
-References: <20250506104202.16741-1-b-padhi@ti.com>
- <20250506104202.16741-5-b-padhi@ti.com> <D9PTUSDYSWS0.J9VVKD57OPPM@ti.com>
-Content-Language: en-US
-From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <D9PTUSDYSWS0.J9VVKD57OPPM@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:SqLg0WPGaUkSwy+T2qF7wH/9FXhWHCyZ30aE+4nT+0cqzraGbJ/
+ lLAKeUihnAZVQqpv4oyPNWDaYuExLcaPUwJk54vf6aSfUtdYJ+tj2ZW/IMbO+BUMEWUUZTW
+ tswJg23fZcGdcsK2OyXYyfuQUGXdd2DdwVopIGtNPE09Ev6RhvCZe0fbY6/Abx6QhVnWsWA
+ GPJD5Nn431bM4tJezxMoQ==
+UI-OutboundReport: notjunk:1;M01:P0:MVmp+noFoIs=;drm+tVef7uoWHFnhsSKnbXUbqQo
+ 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
+ 0oJojByi3oR/Q=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,101 +122,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 5/7/2025 3:09 PM, Anshul Dalal wrote:
-> On Tue May 6, 2025 at 4:11 PM IST, Beleswar Padhi wrote:
->> Pack the HSM firmware in tispl.bin fit image so that it can be unloaded
->> and used by R5 SPL to boot the HSM core. By default, point to the
->> firmware for HS-SE device type. This needs to be changed to point to
->> appropriate firmware when using a different device type.
->>
->> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->> ---
->> v2: Changelog:
->> None to this patch.
->>
->> Link to v1:
->> https://lore.kernel.org/all/20250422095430.363792-4-b-padhi@ti.com/
->>
->>   arch/arm/dts/k3-j721s2-binman.dtsi | 12 ++++++++++++
->>   arch/arm/dts/k3-j784s4-binman.dtsi | 14 ++++++++++++++
->>   2 files changed, 26 insertions(+)
->>
->> diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
->> index 73af184d27e..9c8b29f53bb 100644
->> --- a/arch/arm/dts/k3-j721s2-binman.dtsi
->> +++ b/arch/arm/dts/k3-j721s2-binman.dtsi
->> @@ -273,6 +273,14 @@
->>   
->>   					};
->>   				};
->> +#ifdef CONFIG_K3_HSM_FW
->> +				hsm {
->> +					hsm: blob-ext {
->> +						filename = "ti-hsm/hsm-demo-firmware-j721s2-hs.bin";
->> +					};
->> +				};
->> +#endif
->> +
-> Why do we have the hsm binaries pre-signed? Having a common binary like
-> the DM with signing using ti-secure might be a better option.
-
-
-Andrew can correct me if I am wrong,
-HSM is meant to run secure software stack and services like 
-Authentication etc. It is a +1 to TIFS. To establish ROT, we need the 
-HSM binary to be encrypted, and authenticated by TIFS first before it 
-can do stuff by itself. DM is not a secure entity, so signing the image 
-doesn't make sense for me.
-
+Am 7=2E Mai 2025 16:46:17 MESZ schrieb Adriano Cordova <adrianox@gmail=2Eco=
+m>:
+>Use efi_uintn_t so that it also works in 32-bits=2E
 >
-> Regards,
+>Signed-off-by: Adriano Cordova <adriano=2Ecordova@canonical=2Ecom>
+>---
+> lib/efi_loader/initrddump=2Ec | 4 ++--
+> 1 file changed, 2 insertions(+), 2 deletions(-)
 >
->>   				dm {
->>   					ti-secure {
->>   						content = <&dm>;
->> @@ -306,7 +314,11 @@
->>   				conf-0 {
->>   					description = "k3-j721s2-common-proc-board";
->>   					firmware = "atf";
->> +#ifdef CONFIG_K3_HSM_FW
->> +					loadables = "hsm", "tee", "dm", "spl";
->> +#else
->>   					loadables = "tee", "dm", "spl";
->> +#endif
->>   					fdt = "fdt-0";
->>   				};
->>   			};
->> diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
->> index cb1fbc65923..7c8e580a8a3 100644
->> --- a/arch/arm/dts/k3-j784s4-binman.dtsi
->> +++ b/arch/arm/dts/k3-j784s4-binman.dtsi
->> @@ -159,6 +159,16 @@
->>   
->>   		fit {
->>   			images {
->> +
->> +#ifdef CONFIG_K3_HSM_FW
->> +				hsm {
->> +					hsm: blob-ext {
->> +						filename = "ti-hsm/hsm-demo-firmware-j784s4-hs.bin";
->> +					};
->> +				};
->> +
->> +#endif
->> +
->>   				dm {
->>   					ti-secure {
->>   						content = <&dm>;
->> @@ -194,7 +204,11 @@
->>   				conf-0 {
->>   					description = BOARD_DESCRIPTION;
->>   					firmware = "atf";
->> +#ifdef CONFIG_K3_HSM_FW
->> +					loadables = "hsm", "tee", "dm", "spl";
->> +#else
->>   					loadables = "tee", "dm", "spl";
->> +#endif
->>   					fdt = "fdt-0";
->>   				};
->>   			};
+>diff --git a/lib/efi_loader/initrddump=2Ec b/lib/efi_loader/initrddump=2E=
+c
+>index 615119043d1=2E=2E8d08f7c5cd5 100644
+>--- a/lib/efi_loader/initrddump=2Ec
+>+++ b/lib/efi_loader/initrddump=2Ec
+>@@ -99,7 +99,7 @@ static void error(u16 *string)
+>  * @val:	value to print;
+>  * @prec:	minimum number of digits to print
+>  */
+>-static void printx(u64 val, u32 prec)
+>+static void printx(efi_uintn_t val, u32 prec)
+> {
+> 	int i;
+> 	u16 c;
+>@@ -342,7 +342,7 @@ static efi_status_t do_load(void)
+> 		return EFI_LOAD_ERROR;
+> 	}
+> 	print(u"crc32: 0x");
+>-	printx(crc32, 8);
+>+	printx((efi_uintn_t)crc32, 8);
+
+Why wouldn't the code work for u64 which is defined as unsigned long long?=
+ That type must be supported by all EFI architectures=2E
+
+Best regards=20
+
+Heinrich
+
+
+> 	print(u"\r\n");
+>=20
+> 	return EFI_SUCCESS;
+
