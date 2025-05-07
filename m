@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A77BC3ABC0
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 14:10:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FF60C3ABC0
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 14:45:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5062E81F32;
-	Wed,  7 May 2025 16:10:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=chewies.net
+	by phobos.denx.de (Postfix) with ESMTP id 406CD81F32;
+	Wed,  7 May 2025 16:45:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=chewies-net.20230601.gappssmtp.com header.i=@chewies-net.20230601.gappssmtp.com header.b="Ux+7+Vxj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NygcxD/L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FFFE8212F; Wed,  7 May 2025 15:04:08 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 3E83082153; Wed,  7 May 2025 16:45:38 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1EA48004F
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 15:04:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C31B8059D
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 16:45:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=chewies.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=raz@chewies.net
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ac2a81e41e3so1282022066b.1
- for <u-boot@lists.denx.de>; Wed, 07 May 2025 06:04:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-7fd581c2bf4so5965840a12.3
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 07:45:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chewies-net.20230601.gappssmtp.com; s=20230601; t=1746623045; x=1747227845;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=p4+LmSgXiLryF/j8oR/d0abK66q0D8JYbtiWsJTdvXQ=;
- b=Ux+7+VxjmSdS/se3JCm6yJnJKIvWn3dLtoV5yetxqZRYRD/dQcUI3oZRyc3nVpfVSY
- s9ay11ovYkrXhUPeJfcR29tocI4oVlTid6rcGlvjtDX0aslMhfCK2C+nf7r5Qqqq6ym+
- ELGdOfMzBUndDNkBAP28O8+4WjDw/hfFDOLw6YqFW+h3S+uv+qoYDHf88PWrfNZJGCVq
- bPQsypPaBBa8BKcKMHUMbDR/d5DlwQdwEuAYXzo02EllTVpGj4I3DjBHyKhj9mXxJsI/
- tSiSXFODH9EqNtB21HGF/HRmId82a1W/SBSRUHSYpRdY6+zvINptByuUB2xiFYxhbiPW
- aTeA==
+ d=gmail.com; s=20230601; t=1746629134; x=1747233934; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eMSzGU8S9RGI8y2e8JyCqhaC7gjUwPadKwLb3nt9BgE=;
+ b=NygcxD/LOC3sHFucdnpsEgB/xIBEvPfxPCvGdJ9JpWufthwh8S18489aXCeEVycCtc
+ /Dxyik1yCxQAQiIGxLWF3Gs+AZrIc7ckXJ2hTvCl3KyYVQhBBu8mgfjFqNuxc/uer1AI
+ hgqeD57l6dpkLyfeq9XuzGCvhgGSc03PE4P7dKTwEKxNWyXt7UqyvpxDrphBOnF868qJ
+ iibb6Ob+kf6ZRtTM7N9JVLIqybaJP3yV4m0muTkbypu+e/SI7RwuLCb+yxA00ro2AhsA
+ VWQFUpwU9DIErHCKlxdZ56Ahalt5jyrGHBOhdU0UNqHoAxQWamDr2qdgXavTKb9F7hDK
+ xaQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746623045; x=1747227845;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=p4+LmSgXiLryF/j8oR/d0abK66q0D8JYbtiWsJTdvXQ=;
- b=XPaU0vqE5jh19Vf5KAn4oioJjLnLKniWI5n5nYb7MsOh4evMvPBVEqHPo6MMc52xDT
- LHLUb9PTa9PGOPEhZqSZ7c8xM8XTRfq9KlZYr7TbEzTAJeptdsu/TiR7QL+AhVo9WToS
- JopGt72ky3a9M0AAB+9v2PL5ERSiS5+ur+beFn5rmPfD3jj52gvbg8AMOpdMvg5uME8n
- X5V4VnLSijNQs0iTqvPpNdSZyD+pbKyY6WU+5aDRRBsTlOl0plpuWk8j/Z/Cdjw0H3Eu
- rttYQC/8NXQmHrgp6ZmPhA/L1ebmjHk4RmKz9lDkah/qGc590d0BRMEjIwmUEcklb0/g
- 5AtQ==
-X-Gm-Message-State: AOJu0YxdQiIso9Z+31vMp1ua1fv0v9RRAIsM+xrxOd/z/gCRFBufUpia
- pPNOzLH2Pik7vi2F5q9vSfQLHY8eovnSPQJd3kMS9nV9eXIPXh0Qjvqxu6U1fSMK2+YZuPH1JS/
- T27MQBWIv2yrGlUnBJ43pSA/ASBmEfVTpsSFN
-X-Gm-Gg: ASbGncvjTiLg+LUPghEldsO/6FqjgpdqLVkV0jQIwVsamUso3wmZ2ZsGyvclA1k8f2P
- sPgsGNbl7QKrSlNrp9ACMpqaPEjO+bXXV+mO4BJEGNY1yCKFd5TnaTZ8DgxXVO34ainfz/r6waD
- p4e5IDvaROWPuK/Yo10bs=
-X-Google-Smtp-Source: AGHT+IFzajSvRmyDEs5hHY4lL+t8+2vMhkjYGb7OU5fT3ekq5YUVOD2BAWbTh9IUJt7dgx74MkVuHg/PnkykKXwE4ik=
-X-Received: by 2002:a17:907:9709:b0:aca:c4a6:cd90 with SMTP id
- a640c23a62f3a-ad1e8bc315cmr333347866b.5.1746623045257; Wed, 07 May 2025
- 06:04:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746629134; x=1747233934;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eMSzGU8S9RGI8y2e8JyCqhaC7gjUwPadKwLb3nt9BgE=;
+ b=OdAOQYY672i0kMT1HyY2s2+VD2Rnrkd7sX4z9iruBI8ZCEKvsx2aySBpL3oO0DLYDA
+ 7rxeYW7WElNZSWFKwNNbQcT/XmzRAtEEmfB1TSCklwhSMqhhldexLwioZip3eHWUyKwI
+ 5RGo1mUz519F5UbB4NNg1YJG8RB+H9diO0r9UkpFhqV4OzdGE99U495jcGdXgbDDYF0P
+ nGkvVgYbygtOV5/8prJiawx9d/JLN/1b3u8IUKqoG+2DRfcS7RcrCo/cQMH43ivin2mU
+ 6VqAIXcdfo9mCupoBC2uV/21anCH+MKqMkMSBAAHR2G8nC8SnnYXhR4nVmNzibewTKWA
+ CgbQ==
+X-Gm-Message-State: AOJu0Yx7Lj4mb5wPk5Q/vFQeEvKeu5gcCrbMfeYz/S2iYzgPrpqsSdtP
+ Pi4KZbfPN8yxyAvB1w9z/cYOW6+von5wbS+gMWxuhvgPEGYow4Zp0x3uIsfRUIs=
+X-Gm-Gg: ASbGnculu24MbkPpHI+GGRC8Jf/5ZQC2IEJJpsmO5qtPuI9Cu/By8e2BHFkF26wNxb9
+ p82rKWOzmf4nhDsnbQ1FNSGW+xhdN5mr2CNmuY6aUavpQAOEtoYkh6zcy62iGbVId7LO6oaEQrP
+ PGOumGVuArK1OrBLkiRfACY5NLjoPGZhN6C27LsiWuGSjqT2LmtnyFT6reEZwg7SVX5Vk1sdYqO
+ 1pS8/FJxAmDlcIFR+yywdxG6RpfgbT4HSeWbzPkNqlGaRkWEJa3IjgA2PNJ7rgAQr/USQoRlvMI
+ 8PhrsNPJCAdGhrxIWmFAINscvOtW5qwV1ZoZaRjerR84xX0f2w==
+X-Google-Smtp-Source: AGHT+IF1Oxqm7eDFSXlNEsls5uDTKedwn4fVUXtR6a4co09H3FAzq18MBPegmR+4i7tcaPYhjZt4uw==
+X-Received: by 2002:a05:6a21:e95:b0:1f5:5b2a:f641 with SMTP id
+ adf61e73a8af0-2148d024847mr5602601637.28.1746629134296; 
+ Wed, 07 May 2025 07:45:34 -0700 (PDT)
+Received: from adriano.. ([190.215.87.40]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-74058d7a30esm11710235b3a.13.2025.05.07.07.45.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 May 2025 07:45:33 -0700 (PDT)
+From: Adriano Cordova <adrianox@gmail.com>
+X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
+To: u-boot@lists.denx.de
+Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ trini@konsulko.com, o451686892@gmail.com,
+ Adriano Cordova <adriano.cordova@canonical.com>
+Subject: [PATCH 0/3] efi_loader: test EFI booting FIT images with initrd and
+ dtb
+Date: Wed,  7 May 2025 10:46:16 -0400
+Message-ID: <20250507144619.3288456-1-adriano.cordova@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <CAEUiLubXaPGZsE6y_X6mBTD1ZK-2w82fbRD5z8+MKvDZtZKOtA@mail.gmail.com>
- <f073dad7-337e-499a-8cb5-9dae0842de17@linaro.org>
- <CAEUiLuYBVyLm4HgJG88r1J8RcUu38uEVPbV5c+-ArqjU4aUOAA@mail.gmail.com>
- <3783aef0-a7a0-489f-add0-21e1fc2bfad1@linaro.org>
-In-Reply-To: <3783aef0-a7a0-489f-add0-21e1fc2bfad1@linaro.org>
-From: Wayne Schroeder <raz@chewies.net>
-Date: Wed, 7 May 2025 08:03:52 -0500
-X-Gm-Features: ATxdqUGrMJl_qwtuZFp4N1ILboK2S9KpJF6PNjsTlAh7u7oPIil0F6b7Kp5_KIE
-Message-ID: <CAEUiLubVazb4rgfBd-r-5AtyfBVaMFmy89OO_UZB97FM43if7w@mail.gmail.com>
-Subject: Re: Odroid n2+ usb broken on reboot
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, 
- "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>, 
- "linux-amlogic@lists.infradead.org" <linux-amlogic@lists.infradead.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 07 May 2025 16:10:00 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,36 +96,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It's hard for me to quantify if usb works in u-boot as I'm not loading
-off of any usb storage devices.  It certainly never lets me use the
-keyboard to abort auto boot, and never has.  On reboot, to reliably
-get it to work, I have to do a usb reset and sleep some amount of time
-before doing distro boot.  I picked 10 seconds.  If you would like for
-me to do some scripted boot command additions before my extlinux to
-gather data, I can.
+Test booting a FIT image with an EFI kernel and either a dtb
+or an initrd. For this, some changes to dtbdump and initrddump
+are needed. test_efi_fit creates a test image as follows:
 
-Right now, what I have done is make a reboot hook in linux to touch a
-file on the boot partition that my bootcommand fatrms and if it was
-present, it resets usb and sleeps 10 seconds, so it's reliable to
-reboot remotely like that.  Let me know how else I can gather any
-data.
+- helloworld.efi as first "kernel" binary
+- dtbdump.efi as second "kernel" binary
+- initrddump.efi as third "kernel" binary
+- a file of known CRC32 as "initrd"
+- a device-tree with a known string
+- configurations for each of the "kernel" binaries.
 
-On Wed, May 7, 2025 at 7:01=E2=80=AFAM <neil.armstrong@linaro.org> wrote:
->
-> On 05/05/2025 15:12, Wayne Schroeder wrote:
-> > If I add the usb reset command, it works reliably at reboot, but it
-> > does not work on a fresh power-up with that change.
->
-> OK this means there's a dangling resource, Does USB always work within
-> U-Boot or it breaks U-Boot and Linux in those cases ?
->
-> >
-> >
-> > On Mon, May 5, 2025 at 2:07=E2=80=AFAM <neil.armstrong@linaro.org> wrot=
-e:
-> >
-> >> I think it's a very long term issue, USB lacks a proper reset at probe=
- on
-> >> warm reset, does USB still work from U-Boot after the reboot ?
-> >>
->
+Then during the test run, each "kernel" binary is run. For helloworld.efi expect
+'Hello, world'. For initrddump.efi, use the load command to check CRC32
+of the initrd. For dtbdump.efi, use the dump command to check for the
+presence of a known string in the device-tree.
+
+Adriano Cordova (3):
+  efi_loader: initrddump: use efi_uintn_t in printx
+  efi_loader: fix dtbdump output color and format
+  test/py/test_efi_fit: test fdt and initrd
+
+ lib/efi_loader/dtbdump.c      |  86 ++++++++++++++++---
+ lib/efi_loader/initrddump.c   |   4 +-
+ test/py/tests/test_efi_fit.py | 156 +++++++++++++++++++++++++++-------
+ 3 files changed, 200 insertions(+), 46 deletions(-)
+
+-- 
+2.48.1
+
