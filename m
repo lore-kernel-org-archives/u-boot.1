@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CA2C3ABB6
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 07:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0677C3ABC0
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 07:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5DDE820EB;
-	Wed,  7 May 2025 09:49:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3042A81F66;
+	Wed,  7 May 2025 09:50:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dWZx+Zz6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PCjSAxHz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 031678210D; Wed,  7 May 2025 09:49:43 +0200 (CEST)
-Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
- [IPv6:2607:f8b0:4864:20::929])
+ id 643878007D; Wed,  7 May 2025 09:49:58 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66CA18007D
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 09:49:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F2988211F
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 09:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-878440ee153so222698241.1
- for <u-boot@lists.denx.de>; Wed, 07 May 2025 00:49:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ac2af2f15d1so904994766b.1
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 00:49:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746604179; x=1747208979; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Zg8izujCJX6n4ZSsWtPsm+MbiII4lDcZjLmu+2x60iI=;
- b=dWZx+Zz6R3Vgig8ifumaDpaPJu33Z3oKXhB2kYhuNDWowSJGLiVgo1tOuz6a3DSiY6
- uBWOPMBTr7MvHFOylXhYa2OdGzgOuMBP3LRP+az/Cu5DF9kNgkC9XoUfAq5pLvd1v2/Z
- VRNVARmJxHm/oEsmhV/b58MUeIdC/a/cVDC4Yd3OzvWoeyhXNQx1/mDxnswN4gHPIgd7
- Yf65VJQhBjSSAM4c5qAPf+DogZkOEDLjWu0fiXql9eLjfyHJlQnmtXp/5GYf6YeNpb8g
- uUvPeE46usPmpFf50hkCcjEFU1F8Kd3CJ4DaT3dtnYFJDzLUpDJtWcCMJvWHwtX4yme2
- GTnA==
+ d=linaro.org; s=google; t=1746604196; x=1747208996; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:cc:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=yMnPgmtQPdOlR1bsY25tDqIACgfE+etSaZwgRMfR8n4=;
+ b=PCjSAxHz7eWJ/dOpZdY6GqiQRvJcp2d1QFXab34mTMkcX+zUTiXetUjfoINLR8dTei
+ y9mdwn57zJ0CoONNK9TKSZe416VQs3sihenfJNCYF4YSWE4ltVhZglvPjTcuK2jnX9WY
+ U1/8tGwCmCFKcd+sYK7fBYKB0XnuW7M123MQKIa2u3B+fWQNCNaL8istjNHFDZr/XPsx
+ Lswvc7pt1WlXbXojRQYpGXYvq1A/w44Y8BZvZ7dltfR/0ELXCdgsRxjcR5X4DDmkoCY0
+ taqvVERp/VvEwgccZD65wRWmJDi75jooWcMukj2ryaSZa9CQkxPc/O6FghNr8dQbs7NB
+ F53A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746604179; x=1747208979;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Zg8izujCJX6n4ZSsWtPsm+MbiII4lDcZjLmu+2x60iI=;
- b=dHONjizm7qadZ4+6GquhkcWr0fmeubNuYVG4cpPf71wI20XSJ/31qCQGkX97HX1SfG
- 2YC4he9IJX49NHJx7f4FkDbGj0g87NM5AmJMcOlg2Xi2rrOdq/2AvpF2rTZxo0j9DgWf
- y9fw48x7LbUvrXjqpNAGAlkH/+Fb396kBDfAin33+FsXKLcOA6/6x7YM6Yusvci7YvHy
- n5z0RAs9c0kcuSyPurx/VEMMiPb4G2xqUt8AGh9Qcr4+rBv7Gs9hDqT79njDTZYEgyQr
- ZnCeij4KPouXH7LK3UqpSiCvHAUGBcl92fWwvrXK5Ix/Vd31SAamS44ZnHW6sqsTQcrt
- 8g/g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU8+9CxzVoXMLSMaf8z8H59zy1l/HAlbqcFmvWH6COdqqejvCNIogWVNqAbgIBbVXdgQsumlGY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+HQ/yQH2UI2hp/X1wr01Tn1NAa5VKN+E3CjtHgSIREkOJWqPb
- UJ5P+gXZ7CIEzed8OObTBvHP5YlQ/IyUC6qcMkdElV3rHfNW3B1GE5csu7N5xxMzYyVOphmE33B
- BF/hUgBK/OPwhfAjvJdMBfprbeYCFU+WSksyexw==
-X-Gm-Gg: ASbGnctXMprwX+sm6y7+LzQBvLCaFAOvqGM7CY9oFgMgi6JEPsF4UrDbsdzqB6hNmQj
- 7uYga0ykjQdUBDMrJgbMLqNbLHAEPkuXeGS4OZRucXFcA4kCP7YEJLTNFQtJ8c22ydrfA7ObSwI
- UzNoREoPbO1YiRgVSIytuHpLQ=
-X-Google-Smtp-Source: AGHT+IGUF9CZRLge/NWGNyKNQa3ZubpHO5llNyQSQs7M0cxsgISkLErANyYrkRrsLvzBuL+0w+F4IUNBxhwSyUk3c+c=
-X-Received: by 2002:a05:6102:5794:b0:4af:fca2:1b7 with SMTP id
- ada2fe7eead31-4dc737fed90mr1655702137.14.1746604179140; Wed, 07 May 2025
- 00:49:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746604196; x=1747208996;
+ h=content-transfer-encoding:in-reply-to:cc:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yMnPgmtQPdOlR1bsY25tDqIACgfE+etSaZwgRMfR8n4=;
+ b=haiaobFdXY4jrq49EX707fScAyqx6/wgmRFU6bgp8DEjWpZEfnbO96ct6Wgvu/LYZP
+ Iahizcp0Plq69cbXd0JIEhsk4bvpAJM7hmGQy0soEQLikCnpraNbXrFeD6MAKvAfVJ6I
+ fOlJ7oSUE2kHQRifU+UtGHPrB2v7E0QCt544/XXQZdw/mBUDrXjvWl1sJbxDrKMUdb0P
+ MXk/ujuoxqSIR2NrmdAgaTI6N2drysoC6fpXWQ0hD/MfIOcoM59W+59wRYtkHw6wUkJh
+ 3ToG+nFtBPDjA4GGSKlzqecL/u/jLp1FLs/Es2MMx2UvUupJ+yobtkASSELs/T4/SDoI
+ 4Zcw==
+X-Gm-Message-State: AOJu0YwrD7GioxdWSXmVtAOAgLgeKSR93LJcMIk7X78dd7xHczMlu/S3
+ J05ibTDE1RIU0Xuop80sGkes60nGclmG9wP+EFjIC+MVh/qoMxotKLSpNBEZg/1ex7XszXAzJwK
+ c
+X-Gm-Gg: ASbGnctWUdPM5IaIPupIqyL0x/WCvChU2eSSYuvoNd4mypJCFr1djbro1IwnwVbR26W
+ 4rIfLjz4VGafU7KYk9NbbWj9I4sEc1WUOl4aK3DCbfZHzIJxnCbWscgzUS+f6iEBmlXE2br2+MC
+ RSqDwnydrBZHrrWYAKiARSiyHjbyZ40rmc7KYqnx/AAzd3+3sLKSPmUr1VOAOHw86+tM5aX+nDC
+ nSx+2dwGT3EZcigXhykdmUpjOsofLTfYB5MHvAyNvnTqAoMgk/n3BCyJqVp6A/ckwP5yYeRrI4/
+ 1SLkaiY/D3x1z26QMXtvJMAcepRjy55XCMDwcOMW3sNjV9ZV
+X-Google-Smtp-Source: AGHT+IEJpCMJeeHGi/mgwOjcOhagvo+CHV+RuSxraxaOqsG5FhbMttq98+ifCMwIBZkt+z5lG/BBsQ==
+X-Received: by 2002:a17:907:94cb:b0:ace:c59c:1b00 with SMTP id
+ a640c23a62f3a-ad1e8b9c96emr154596066b.5.1746604195961; 
+ Wed, 07 May 2025 00:49:55 -0700 (PDT)
+Received: from [192.168.0.32] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad1894c01f2sm847885366b.119.2025.05.07.00.49.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 07 May 2025 00:49:55 -0700 (PDT)
+Message-ID: <31db15a2-045f-4c21-b487-ee36e670f12b@linaro.org>
+Date: Wed, 7 May 2025 10:49:55 +0300
 MIME-Version: 1.0
-References: <20250506092401.646595-1-sughosh.ganu@linaro.org>
- <7c05f66b-1047-400a-816f-db0de0951def@canonical.com>
- <CADg8p94crfzYzhR+jFFFRR=Xp6wY3cADXSQmKxXvVgvn9GHBkA@mail.gmail.com>
- <CAM=mAO=8gP3J9Kt5ox-Gpd43s8ozZ+t42O4dBNnYV32hMS_pMg@mail.gmail.com>
-In-Reply-To: <CAM=mAO=8gP3J9Kt5ox-Gpd43s8ozZ+t42O4dBNnYV32hMS_pMg@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 7 May 2025 13:19:28 +0530
-X-Gm-Features: ATxdqUGCA6IneOnLmyNEQMSCXYkN44nNCjZGP7yMjIh3zi5gEZfa31Jedywn9pQ
-Message-ID: <CADg8p9547kkDg=N990eGqfOF+4e+vG1MRda-faKw7bXOn-2g+w@mail.gmail.com>
-Subject: Re: [PATCH] riscv: set the width of the physical address/size data
- type based on arch
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/6] watchdog: at91sam9_wdt driver enhancement
+To: Zixun LI <admin@hifiphile.com>
+References: <20250428-wdt-v4-0-bb7d1c7c051a@hifiphile.com>
+ <1be04cd1-5de6-4cc4-96cf-9c90b9a76df1@linaro.org>
+ <CA+GyqeacBi3+ekgqgbq-D1W-1FY=gwMO9zQjk8SFmiSF3P=-6g@mail.gmail.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+Cc: open list <u-boot@lists.denx.de>
+In-Reply-To: <CA+GyqeacBi3+ekgqgbq-D1W-1FY=gwMO9zQjk8SFmiSF3P=-6g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,132 +101,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 6 May 2025 at 16:35, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
->
->
-> Sughosh Ganu <sughosh.ganu@linaro.org> schrieb am Di., 6. Mai 2025, 12:50:
->>
->> On Tue, 6 May 2025 at 15:19, Heinrich Schuchardt
->> <heinrich.schuchardt@canonical.com> wrote:
->> >
->> > On 5/6/25 11:24, Sughosh Ganu wrote:
->> > > U-Boot has support for both the 32-bit and 64-bit RiscV platforms. Set
->> > > the width of the phys_{addr,size}_t data types based on the register
->> > > size of the architecture.
->> > >
->> > > Currently, even the 32-bit RiscV platforms have a 64-bit
->> > > phys_{addr,size}_t data types. This causes issues on the 32-bit
->> > > platforms, where the upper 32-bits of the variables of these types
->> > > can have junk data, and that can cause all kinds of side-effects.
->> >
->> > How could it be that the upper 32-bit have junk data?
->> >
->> > When we convert from a shorter variable the compiler should fill the
->> > upper bits with zero.
->>
->> That does not seem to be happening. The efi_fit test fails on the
->> qemu-riscv32 platform, when attempting to boot the OS from the FIT
->> image.
->>
->> These are the values of the base address that I see in the
->> _lmb_alloc_addr() function.
->>
->> _lmb_alloc_addr: 755, rgn => -1, base => 0x1a1c0e00802000bc, size => 0x50b1
->
->
-> As you are running on QEMU you should be able to track down where the value is actually assigned with gdb. This could for instance be a buffer overrun.
 
-I was able to hook up gdb and re-create the issue. What I observe is
-that when the lmb_allocate_mem() function is called, the base address
-parameter, which is 64-bits, shows a value with the upper 32-bits not
-zeroed out. So, this looks like a compiler issue, where the upper
-32-bits are not being zeroed out. Fwiw, this shows up with the
-compiler being used in the CI environment, as well as the one that I
-am using.
 
-/toolchains/riscv32-linux/bin/riscv32-linux-gcc --version
-riscv32-linux-gcc (GCC) 13.2.0
-
-/toolchains/riscv32-linux/bin/riscv32-linux-ld --version
-GNU ld (GNU Binutils) 2.41
-
-Given that LPAE is not being used on riscv32 platforms in U-Boot, I
-think this patch should be considered. Thanks.
-
--sughosh
-
->
-> If we don't correct the root cause, it will hit us again.
->
-> Best regards
->
-> Heinrich
->
+On 5/6/25 16:02, Zixun LI wrote:
+> Hi Eugen,
+> 
+> On Tue, May 6, 2025 at 1:20 PM Eugen Hristev <eugen.hristev@linaro.org> wrote:
 >>
->> The actual value that gets passed is 0x802000bc. The upper 32-bits do
->> not get zeroed out. Which causes the _lmb_alloc_addr() to return an
->> error. You can check my branch [1], where I have put a temporary
->> commit to print the values that cause the issue.
+>> Since you sent the patches apparently there were some changes in the
+>> tree, and now smartweb_defconfig fails.
+>> Could you please check and maybe resend ?
+>> I was ready to apply these but hit this issue.
 >>
->> -sughosh
+>> Thanks,
+>> Eugen
 >>
->> [1] - https://source.denx.de/u-boot/contributors/sng/u-boot/-/commits/lmb_apis_cleanup_bisectable_v2
->>
->> >
->> > >
->> > > This was discovered on the qemu Riscv 32-bit platform  when the return
->> > > value of an LMB API was checked, and some LMB allocation that ought
->> > > not to have failed, was failing. The upper 32-bits of the address
->> > > variable contained garbage, resulting in failures.
->> > >
->> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->> > > ---
->> > >
->> > > Note:
->> > > Although the LMB API cleanup series depends on this patch, I am
->> > > sending it separately so that it gets noticed by the RiscV
->> > > maintainers. Sometimes a patch may not get the required attention when
->> > > sent as part of another seemingly unrelated series.
->> > >
->> > >
->> > >   arch/riscv/include/asm/types.h | 9 +++++++--
->> > >   1 file changed, 7 insertions(+), 2 deletions(-)
->> > >
->> > > diff --git a/arch/riscv/include/asm/types.h b/arch/riscv/include/asm/types.h
->> > > index 49f7a5d6b3a..45d806c83eb 100644
->> > > --- a/arch/riscv/include/asm/types.h
->> > > +++ b/arch/riscv/include/asm/types.h
->> > > @@ -35,8 +35,13 @@ typedef u64 dma_addr_t;
->> > >   typedef u32 dma_addr_t;
->> > >   #endif
->> > >
->> > > -typedef unsigned long long phys_addr_t;
->> > > -typedef unsigned long long phys_size_t;
->> > > +#ifdef CONFIG_PHYS_64BIT
->> > > +typedef u64 phys_addr_t;
->> > > +typedef u64 phys_size_t;
->> > > +#else
->> > > +typedef u32 phys_addr_t;
->> > > +typedef u32 phys_size_t;
->> >
->> > This matches what has been done for ARM.
->> >
->> > 86c915628d58 ("riscv: Change phys_addr_t and phys_size_t to 64-bit")
->> > changed the definition to 64bit phys addr_t to support the 34bit
->> > physical addresses (similar to LPAE on arm32).
->> >
->> > I don't think that we need 34bit support currently. But I would prefer
->> > if we could find the root cause why the upper 32bit gets messed up as
->> > this might point to a generic problem.
->> >
->> > Best regards
->> >
->> > Heinrich
->> >
->> > > +#endif
->> > >
->> > >   #endif /* __KERNEL__ */
->> > >
->> >
+> 
+> Should I rebase it to any branch ? I've pulled the master 4d3b5c6 but
+> haven't met the compile issue with smartweb_defconfig.
+> 
+> Regards,
+> Zixun
+
+I apologize, it was a mistake on my side. It works fine
+
+Applied to u-boot-at91/next , thanks !
+
+Eugen
