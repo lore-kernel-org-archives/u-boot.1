@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98728C3ABC0
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 08:36:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC804C3ABC0
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 08:36:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E580482102;
-	Wed,  7 May 2025 10:36:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 33D3F8212F;
+	Wed,  7 May 2025 10:36:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="svud/+ra";
+	dkim=pass (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="oXRfKfd3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0019E8210D; Wed,  7 May 2025 10:36:33 +0200 (CEST)
-Received: from sonic309-20.consmr.mail.ne1.yahoo.com
- (sonic309-20.consmr.mail.ne1.yahoo.com [66.163.184.146])
+ id 1B638820EB; Wed,  7 May 2025 10:36:34 +0200 (CEST)
+Received: from sonic304-20.consmr.mail.ne1.yahoo.com
+ (sonic304-20.consmr.mail.ne1.yahoo.com [66.163.191.146])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5987820EB
+ by phobos.denx.de (Postfix) with ESMTPS id 32BC68007D
  for <u-boot@lists.denx.de>; Wed,  7 May 2025 10:36:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dullfire@yahoo.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1746606990; bh=Zdn1mX4OEjOo16xuX4rB4A/nio6xz0Ooy7yUje55eb8=;
- h=From:To:Subject:Date:References:From:Subject:Reply-To;
- b=svud/+rariZaTKNGTlS75HD3+gURUZtrDFsPgJ54txawilAVcITAqLiDpRFx6ldH5sBkY9ZRpJyMNKM/shgid+aNc4vjmiPQGTaAEcuGMofvEeTqQDicem23Rrd5AHLupJGN6HbDXjXh6EnkNoYyPaYTfOYFjG4vhZAAe+vNMJG8WJE8aSGbVSADc2m7CVTZee0nhhknBn4sFGZP3FvvaO2OGaowPI8HzkHe2AK6VBRU7ONUxotM/uOMDDOCe6q+V6JVagRXQ+/20CttiO+RcREVSuH/nOObRti5xE8q5ti8WizW5xo/YtRvbQp6l5VhQN2QcBgd1FQ/PVLeW54wQQ==
+ t=1746606989; bh=0L7TAsm08/TPiFsRpdlDfEkBeiQ9HteE+inSkTpBayY=;
+ h=From:To:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
+ b=oXRfKfd3hgbmGKbOD8f/Ga62M7PFjh7HlDX+3pzfimQZs2UfDl2X4JotE1/Dc2vsVgeSXhjVgm5m84QNJrnrgOYG9bGcSjpMWm7iA3sCx4yWI4y8O3clzyZ93r6bNfDAwCzUI7DCFxKx+6kuVexc2ER8+4MxB1BCO0ao8veefPF81ddzS17Vc6RtlOQedWbXu16shS2Xu/gW2m2fajWBOf0tmWc8Ee2FNf9HvpGOMYRJB3qJ+JDwvJhf49WALg77HNAuzmnMNwTT/LbWa2ny+EVnG9MlQ9Vvl4T+Bx7791n0gQbyTDvhy+CSis8vd9OnMOqPqo7E7sSlrNSMkDAGmg==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1746606990; bh=2+gZ+2UXGdmMx+xKtIxryuCBuDLDkSl6/a0oCqobIwZ=;
+ t=1746606989; bh=ctYMI7yyZ9hVE53dMeaeAbUuhYdEekVG0/+UuTe+tHB=;
  h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=H0Jw0IjV7X4BSCMpyNEOMNA/t6mEz3Led2pnVMYxQY6VBeF45B9NDpB5Q/NFU6UFBeaKIXgtpDeLSH6sIXpvtdzHvqcYGAVrvmK8N00v7ZKD3RCDDU4S4xqHi5XYrcnlXw967bIBCZWOTNsnPXR4aljzMhNKOIGEPdFJ3+M4OltYxvFAN3ndwNX8TGaXTpR1KHfUTZVSm7+i+E6kMIeQXj592zps3qfuGYeFcdoQkO7PHl3ulRFjxbppoPo0Ndm4h4+LzLngZJdUyxVhGU6R3vAImyQ9oTqjtu6mz/WgSBLDHkkwUI2RHPuDRRCcUcDAfJnT+lq62ENuefYOlYNAWQ==
-X-YMail-OSG: UhW8.3QVM1kvrkYaNkuiCs6BhSev_OryAa5mQu4whWpLwCgo8HmtXEx06_b_f3F
- HHAskCvhnCLFEpTZlC9JeHEVhoGHKNLLVCvIMemXoeAI.oOGmqHD8539VdNfZxylEi.mHimdSj8b
- vEbpOffDf1n3PkmZfJUv4n8uoDfaCDCaeHDtx2c8awARD5l_ththZL2Gf5mJa003JaSPErd0XKA3
- OYFftiQEbponL3p1OBxUqTYcoVIiw5ksbJ87QDS6c6Lc3L7sfnlOwoVrs6X9U4u3vbB8ypPfdq85
- IFvqvxRAAAvYSnrqyhgsEy4qzF0hvzLWruLVgDnquJ0wpzR39X7zBzI.udW.x6b7bxOM6Oa8nhiQ
- 2KEawF3b06RvnAJJcy7MjP4hPc2Lyrr2DkkH6HGhHGlxvdzdIvSZxO1__NSZ8wS4oFIYxoJSPVYT
- FvyktRmzEhm9yX65sZ40_uc.PSFx07NrxE.fuT7HRmlncSsykawg8q1XUZ1ulfldZL6Y8VhQeaOv
- g4Nt9Lt6ogJJLqqPaUBcJAjnO2Ku4zvwbi6G2dogg1t.Xx.YhqEgIx8oZaqI04QVNh3OjEHrxLr5
- UH1JKMbiw3Zrj.AoR76WvSy6OROW2wEUXHSRv2TfB8oAx1Luaxq1Iz9vxHoeWeJmyBosaf4THt_2
- l2q_zSNzKruJ.nlL9JgC3oLP277zXNpn71rJesWpIPxEIiK2unfDkGnOu1PjXNKqlf6R2iDPAWn3
- uyWpeSaAi9u04IgBRLhYseXvmkCz0vrRc3JGICj66rSrNzTVsiTukDX81tngqD9lKE3.FD6uBtx8
- QWSMidgw7NgniGpjMxW2Q2cqDpyu9C_46lbfSZzZT8VINTRXgqRq2LqU2FoYQEyVgu.ntMDKmeRI
- A52bXKd2aMJPRHR_2v2oASLnXZEdUw3lnnstxWHi468ytxlZ5SrmiqcB4rNk4VaBs2hHheC9t5nu
- jY7_YZt2sXjxRCpEYGRn8mJn.XRuKYbn8H7bznTJhlg_Z3ugu_O79SFoulH3I5h3CoueO_koEkJC
- _9xfZaZaRrrNXLb4v9pO1SFNoDd1I5KRKjaCWVdVLE30gpTUCX5_D1E4vPOfdFy1z0AK9Xe70asF
- QROobu_YO_nd5N99S_U1chzd_XLO_s6K7cefLNzcuSCgGVnOBA_25xOtXF2J9GvDncD0zYE3lTOg
- PI8yEn9zOVd0UL16aTcVzJ.XwCey8mYslDUkR2IHEQdYu53tsoqQWodqDphEaj2bIFF1sIoUoc7Y
- LELmiQ9Col1XMDRdfumP1buVEwGlXb3gFWy82D4Oti9eYacKzdFwalRrNLW7BoyJnNBBJhgu_9GO
- WefHXFxLJ5Vv_21gXhPOfhmOBoMlWbRgtbvJ76pINfO5SvbzO1WaqOE5STfMkNbutta2p6D1WuDR
- EtolEnORTU_z4HPjPZXez7zWmUtqO5eQzLizbpagD5xLgfsTMdErYKMv34nEvdm8A4UVyrez5aZN
- qbTQOfqFImxEl6dJoAeOLgarlHgLKEGYJ5Q3pRuyD5C_dSnvTtLTDEvniD2WTtUfsiCB5QRC2Ovo
- TnX9wMrzSsMaT9FSO_QISQLcxglB4bb3FbbOCB6sG1Y79.uCVYpqMCMUVh65w5xO66eK.m6qJb0h
- iGozYzyvSdQjZZued6ax_gOzhkuEt0jh1eAaq8GkPyGjgnwS0xRtrrrx.6dFbzSLMdqoVxQiGOg3
- w9H.T_b_cXTfNm7.nMMxIJI_HtTecNByW0NSOFzs4ZmjJ1qaCxBlfX5cpn4W90lpaT50BImEP8nQ
- nrxDZe_Rlv_vF0wG5YBeWShkhLo.t3Yb_vNJKuLcTaZwL5.mjzy3Tn3eCEa.7p1s57PHQIahLzyv
- CPu5G6AXw2hRG9et62mJuHrbeKF8Zc5147v9Uv_ae57MsheR03gf6nr1eEhur6C5dke8v.cq8pP3
- jGH265oN12suf9rhobeM_ejeFgqrlM9uzlRarxizh3P6_g9vls65OQrrIpPX9leXa8IygtfVRwvL
- Km2DQh2894Mg0HH8aq81x4DiZM3aOj.JsOay37Xka1ib48j4cMQJVJSbNoffLkq5Jpa08rLGxOJl
- RsZPA1g.SxK5.6fMc71sKaw4yToX_Bz44vF9rF5UwTN.eZR4lUi8rnza9zOpihlN02CY4ldBVrF6
- nxJMct8lHVCehP12wqonUy3pGTi2Inb3hvwXyddJFd0AMqcRjb0zv_kh.nepkQNCQFmyfWdHdzum
- 5zK5F12jB4NDTbQWAQ9rcNVQXwXjJk5.JRCPhbkh3PND.hZpMYEvX
+ b=i0Av4m9+4EOx+oVGas5yvYbkEWScS6DpkExb/pa9ORhyg9dqAXfr3h1+T8WRUYYqzQahcMd7LgbH4Lu6X7BklCUbBQIDDjkb7urjgDdk+2EXI/6CPwWA40zRLzX5YX39Hjp78aVKS0tkyr/dEL5pjS3NRKWx4NqhuMEF7ocIuIc2PjSuZF5Moq+MdA9tNm3aEq21CxON5ZWbTk6EEz58fAZ9vqa93mqI9v74s1nHnPLA+salEhUmZA3K1s1f11wzJPeAQpPVVl8vQJqAmPQhYpM21GpIVhJ4BXO0E3m8bj0oSOxO+UWDikJTHi9oa+cpb+mFJaUJSOcb8PgZ1KPHWA==
+X-YMail-OSG: uDJxAfAVM1n.5sQ.Kl5db.PODEGSRB6T0b3N8xG4VF0qk.56ByS2RZosGdN.q5a
+ K5t6J2mrGxKMCNvIOEgoiY5kMcJXmkVceGyeojEAPZdxDYa45xEb6gavhHzTxTDHeIWjONG7hbLn
+ 0O8ExbT6He19COdKKbh183KBAMB5zxLvNOFzSUpLiM9zhMUg4zcbQTfHolYgw3sTUBX53nj.PF4T
+ bYZtjvP3hW4coXqXFPVuJD75rymjwPLtelriEttS7Yj5F_W..lClr3cunQzSTBAwpwt5pZaa6KOS
+ wu5rn4bkeVW6B6VyaB_s7XzjlcGwraZRUwuY.rnUhnyfyCAlTIr5MMg950TtXC_0ZS4VfkCyafzJ
+ AYxyegIXjuW.QAs.9BgHhS3o3jhPXCjHaWOgSt2bIQA0iaDFEmiH63d5pkCBGXgQsJNCVUW2DxX8
+ RII6yA9TzA3LD0ME1yaV0fm7.THT6G5yBXoH55UtsBqz77bSIoKgWcSjKG7RUGxsDva88tVOH5ts
+ VCgThmTR5_YYAtWvxTzF4k4F0LAr2su115BKDUCn7WA_4PQqzmaArcZ7HY7nxyKexDgJ3IBboF.g
+ 67OWBx2P9mBqAsRzr9IXhyxFqLvxbtlS5RDZ6.0yRqookkL6yErWmt_5K8HAslJX4bLDo4BfCpM9
+ tkT62re9UH6Bmnv2tPKnTuO0z36TU5M2o3t_SfI4hHO8.sTCGfmF9m3XIosbT.RJPYPilo1eMSsT
+ agtgfNRk5A5kMgz2SoJBzSFeEBMYs_ioOG7.nxXSzH9mBieWtroGuWnm2IiAEU6LzCS5tHFKF1iz
+ KN_LrGhiZUCrdg5z20REFkSAxv20KqemdJIH2hBulRaX.Gy2X4N6HFfaLNtEzzJvIq0UXbp2u9Xx
+ BOO5P21cgYhEsqGN9BhPGlhowHnnBcLjSmCnauUHbHu.KdLkQLWZJCK9DtI8k_T_NKxknD49kZJr
+ EnE2VKjKzwpXgPygEjlIb.xToUVTU7SxmplJoeZjV0zBjlfssz5nH7mgKiYpqi5V1.dhpoNgMcnY
+ 57GC2.6K5keMNjBTupF0Le6DQgnDriILL2IU2.gVHE6L1KhsMbNRJr49V4AwJj2Ee_zykxAvwN4z
+ tF9Tjzd1tkxDEAIUyyAlnD_CgxPAlOpRRXcJpQp34nfMSqAL4JLKWJoIZIYyUsZUn82ManNXXEiz
+ 4nPvAzfnL3JqxTyYxdgPTOgSPXX4s6lXaM238tb.2Z2O0F6G02YmVlHuLjp7fzQKHJgIVG8xCA2I
+ Ty0bH85waRLh4j9r2sAPrEgYQ6qIVqcMPdme7TJ7f9q6ULRqBNyBdLPsH3npp45.XZgPwo4tnU0f
+ Yp1QNQUrGZTY7fEtXAnXinRibmLxV2HwcxfcK3AfGk4neAydKGiiSMkazdmJvQPZjGN75ta1DbgT
+ or5eZQyuvbXaPN8QKgAUn8a._CTTx_BXwyC7Ai_s_23anH_tgN8TBbKjgPvmI809jFvQU4AEd_wa
+ uwIoEn1yu.ADVBrxW.s.kkx6h2eigbqr9A52JLim1RhwXdIHeG3ibhTV5IRlUU88Cse4ihG5DsvJ
+ 37gj.efpyXAnIfWMOhNLcsDfuCdbewzjVTrWyXI8gH2xXBXoPh7UhZFrUDHPbPnh6XMbhIUs.Vmm
+ GTZYbAFMIeoxasiMXgfXqJiRdQf0kwtv7VqiZo6K663hJaNdv2CD5QCkDXZRgZrWWJzgPmoKV8B0
+ 7EocpVQ7e23bMX426yLLm7M7zncxMIb8yEwgddpWZn3WLeWdkvW_c_iWJe6pLm46mLd4tlTgJshq
+ A7An_ohAu.2mMPjstFMHKLyT5zHjBOTzEgRzMRa63iWxfG1.2fUBFuKW7BPukIvzumyuQM8vjrk8
+ w3.6BBJKc7vA3_jt0LpTyijU_6DHHmgUfgRRXU.Lp0xHlK.K40ZGLYMEtWxpdfOja_NahUT.C7sp
+ Hosam3T0YKjwYi4JRi6JjV3Zk_IpxFzCIhLOd.g1sghiAJJrYcZyH1LB0OvO6h5p58uhf.REotKF
+ UgLPGKHbat2bysXbx2d.A2tYkvDhY7PkvpQg72hHX89XmD4RzAeTkMnqvxxhnubR5bXp9tSMEheq
+ eDEh61Bc.VU0iuk_npPS67wIjzL0m01ehZtISraP6v053FptElXzWXI8oa6ooJcW8dHAlT4bA5KU
+ HbxNf18r3GJzlKg3iuspZ.hcQVcO_2OQvgu1.8eWaUZaDVYI5HUW73sXpCUWtslKM2dilP8LGbsq
+ kTkBHBZdRq28WSGWT09J4oetnHAazJx_t2ccw4rwAuYG.2MEg7oAa3tdgCbcy1VVVRO4wzzGbmfW
+ 8
 X-Sonic-MF: <dullfire@yahoo.com>
-X-Sonic-ID: 4400d674-35de-4f1a-8698-ef7f72e1db30
+X-Sonic-ID: f75723f2-9b4a-4e7c-8c05-faede1b7bf4d
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic309.consmr.mail.ne1.yahoo.com with HTTP; Wed, 7 May 2025 08:36:30 +0000
-Received: by hermes--production-ne1-9495dc4d7-c2sv8 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID fa7744874fa6f02606686856459b1003; 
- Wed, 07 May 2025 08:36:26 +0000 (UTC)
+ sonic304.consmr.mail.ne1.yahoo.com with HTTP; Wed, 7 May 2025 08:36:29 +0000
+Received: by hermes--production-ne1-9495dc4d7-psbrp (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 052842e87b67683b25acc59308c8ae93; 
+ Wed, 07 May 2025 08:36:27 +0000 (UTC)
 From: Jonathan Currier <dullfire@yahoo.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
@@ -83,13 +84,15 @@ To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Mark Brown <broonie@kernel.org>, u-boot@lists.denx.de
-Subject: [RFC PATCH v2 0/5] Add FlexSPI support for i.MX RT1170
-Date: Wed,  7 May 2025 03:36:19 -0500
-Message-ID: <20250507083625.6195-1-dullfire@yahoo.com>
+Subject: [RFC PATCH v2 1/5] spi: fspi: involve lut_num for struct
+ nxp_fspi_devtype_data
+Date: Wed,  7 May 2025 03:36:20 -0500
+Message-ID: <20250507083625.6195-2-dullfire@yahoo.com>
 X-Mailer: git-send-email 2.45.3
+In-Reply-To: <20250507083625.6195-1-dullfire@yahoo.com>
+References: <20250507083625.6195-1-dullfire@yahoo.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-References: <20250507083625.6195-1-dullfire.ref@yahoo.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,41 +109,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The nxp_fspi driver is missing some per-device quirks that are needed
-for imxrt1170 support.
+The flexspi on different SoCs may have different number of LUTs.
+So involve lut_num in nxp_fspi_devtype_data to make distinguish.
+This patch prepare for the adding of imx8ulp.
 
-Fortunately, linux (where the driver originated) has since added support
-for these qirks.
+Fixes: ef89fd56bdfc ("arm64: dts: imx8ulp: add flexspi node")
+Cc: stable@kernel.org
+Signed-off-by: Haibo Chen <haibo.chen@nxp.com>
+Reviewed-by: Frank Li <Frank.Li@nxp.com>
+Link: https://patch.msgid.link/20240905094338.1986871-3-haibo.chen@nxp.com
+Signed-off-by: Mark Brown <broonie@kernel.org>
 
-This series cherry-picks the linux commit, then adds the imxrt1170
-usage of the quirks.
+(Picked from linux 190b7e2efb1ed8435fc7431d9c7a2447d05d5066)
 
-I believe Jesse Taube is also working on this problem for the
-i.mxrt1050, however the patches I saw were quite a bit different, thus
-this RFC.
+Signed-off-by: Jonathan Currier <dullfire@yahoo.com>
+---
+ drivers/spi/nxp_fspi.c | 42 +++++++++++++++++++++++-------------------
+ 1 file changed, 23 insertions(+), 19 deletions(-)
 
-
-Changes in v2:
-- Rebased to latest master
-- Seperated devicetree and binds to their own patch
-- Included imxrt1170-evk_defconfig changes missing in v1
-
-Jonathan Currier (5):
-  spi: fspi: involve lut_num for struct nxp_fspi_devtype_data
-  spi: fspi: Add imxrt1170 device data
-  ARM: dts: imx: Add flexspi (fspi) to imxrt1170 and it's evk.
-  spi: fspi: dev_dbg() call assumes fdt_addr_t always a long long
-  configs: imxrt1170-evk_defconfig: include FlexSPI driver and flash
-    chip support
-
- arch/arm/dts/imxrt1170-evk.dts              | 28 +++++++++++
- arch/arm/dts/imxrt1170.dtsi                 | 13 +++++
- configs/imxrt1170-evk_defconfig             | 15 ++++++
- drivers/clk/imx/clk-imxrt1170.c             |  9 ++++
- drivers/spi/nxp_fspi.c                      | 55 +++++++++++++--------
- include/dt-bindings/clock/imxrt1170-clock.h |  4 +-
- 6 files changed, 103 insertions(+), 21 deletions(-)
-
+diff --git a/drivers/spi/nxp_fspi.c b/drivers/spi/nxp_fspi.c
+index 7489c896f9d..3d0f659ecb2 100644
+--- a/drivers/spi/nxp_fspi.c
++++ b/drivers/spi/nxp_fspi.c
+@@ -52,13 +52,6 @@
+ #include <linux/bug.h>
+ #include <linux/err.h>
+ 
+-/*
+- * The driver only uses one single LUT entry, that is updated on
+- * each call of exec_op(). Index 0 is preset at boot with a basic
+- * read operation, so let's use the last entry (31).
+- */
+-#define	SEQID_LUT			31
+-
+ /* Registers used by the driver */
+ #define FSPI_MCR0			0x00
+ #define FSPI_MCR0_AHB_TIMEOUT(x)	((x) << 24)
+@@ -242,9 +235,6 @@
+ #define FSPI_TFDR			0x180
+ 
+ #define FSPI_LUT_BASE			0x200
+-#define FSPI_LUT_OFFSET			(SEQID_LUT * 4 * 4)
+-#define FSPI_LUT_REG(idx) \
+-	(FSPI_LUT_BASE + FSPI_LUT_OFFSET + (idx) * 4)
+ 
+ /* register map end */
+ 
+@@ -316,6 +306,7 @@ struct nxp_fspi_devtype_data {
+ 	unsigned int txfifo;
+ 	unsigned int ahb_buf_size;
+ 	unsigned int quirks;
++	unsigned int lut_num;
+ 	bool little_endian;
+ };
+ 
+@@ -324,6 +315,7 @@ static struct nxp_fspi_devtype_data lx2160a_data = {
+ 	.txfifo = SZ_1K,        /* (128 * 64 bits)  */
+ 	.ahb_buf_size = SZ_2K,  /* (256 * 64 bits)  */
+ 	.quirks = 0,
++	.lut_num = 32,
+ 	.little_endian = true,  /* little-endian    */
+ };
+ 
+@@ -332,6 +324,7 @@ static struct nxp_fspi_devtype_data imx8mm_data = {
+ 	.txfifo = SZ_1K,        /* (128 * 64 bits)  */
+ 	.ahb_buf_size = SZ_2K,  /* (256 * 64 bits)  */
+ 	.quirks = 0,
++	.lut_num = 32,
+ 	.little_endian = true,  /* little-endian    */
+ };
+ 
+@@ -486,6 +479,8 @@ static void nxp_fspi_prepare_lut(struct nxp_fspi *f,
+ 	void __iomem *base = f->iobase;
+ 	u32 lutval[4] = {};
+ 	int lutidx = 1, i;
++	u32 lut_offset = (f->devtype_data->lut_num - 1) * 4 * 4;
++	u32 target_lut_reg;
+ 
+ 	/* cmd */
+ 	lutval[0] |= LUT_DEF(0, LUT_CMD, LUT_PAD(op->cmd.buswidth),
+@@ -530,8 +525,10 @@ static void nxp_fspi_prepare_lut(struct nxp_fspi *f,
+ 	fspi_writel(f, FSPI_LCKER_UNLOCK, f->iobase + FSPI_LCKCR);
+ 
+ 	/* fill LUT */
+-	for (i = 0; i < ARRAY_SIZE(lutval); i++)
+-		fspi_writel(f, lutval[i], base + FSPI_LUT_REG(i));
++	for (i = 0; i < ARRAY_SIZE(lutval); i++) {
++		target_lut_reg = FSPI_LUT_BASE + lut_offset + i * 4;
++		fspi_writel(f, lutval[i], base + target_lut_reg);
++	}
+ 
+ 	dev_dbg(f->dev, "CMD[%x] lutval[0:%x \t 1:%x \t 2:%x \t 3:%x], size: 0x%08x\n",
+ 		op->cmd.opcode, lutval[0], lutval[1], lutval[2], lutval[3], op->data.nbytes);
+@@ -731,7 +728,7 @@ static int nxp_fspi_do_op(struct nxp_fspi *f, const struct spi_mem_op *op)
+ 	void __iomem *base = f->iobase;
+ 	int seqnum = 0;
+ 	int err = 0;
+-	u32 reg;
++	u32 reg, seqid_lut;
+ 
+ 	reg = fspi_readl(f, base + FSPI_IPRXFCR);
+ 	/* invalid RXFIFO first */
+@@ -745,8 +742,9 @@ static int nxp_fspi_do_op(struct nxp_fspi *f, const struct spi_mem_op *op)
+ 	 * the LUT at each exec_op() call. And also specify the DATA
+ 	 * length, since it's has not been specified in the LUT.
+ 	 */
++	seqid_lut = f->devtype_data->lut_num - 1;
+ 	fspi_writel(f, op->data.nbytes |
+-		 (SEQID_LUT << FSPI_IPCR1_SEQID_SHIFT) |
++		 (seqid_lut << FSPI_IPCR1_SEQID_SHIFT) |
+ 		 (seqnum << FSPI_IPCR1_SEQNUM_SHIFT),
+ 		 base + FSPI_IPCR1);
+ 
+@@ -862,7 +860,7 @@ static int nxp_fspi_default_setup(struct nxp_fspi *f)
+ {
+ 	void __iomem *base = f->iobase;
+ 	int ret, i;
+-	u32 reg;
++	u32 reg, seqid_lut;
+ 
+ #if CONFIG_IS_ENABLED(CLK)
+ 	/* the default frequency, we will change it later if necessary. */
+@@ -933,11 +931,17 @@ static int nxp_fspi_default_setup(struct nxp_fspi *f)
+ 	fspi_writel(f, reg, base + FSPI_FLSHB1CR1);
+ 	fspi_writel(f, reg, base + FSPI_FLSHB2CR1);
+ 
++	/*
++	 * The driver only uses one single LUT entry, that is updated on
++	 * each call of exec_op(). Index 0 is preset at boot with a basic
++	 * read operation, so let's use the last entry.
++	 */
++	seqid_lut = f->devtype_data->lut_num - 1;
+ 	/* AHB Read - Set lut sequence ID for all CS. */
+-	fspi_writel(f, SEQID_LUT, base + FSPI_FLSHA1CR2);
+-	fspi_writel(f, SEQID_LUT, base + FSPI_FLSHA2CR2);
+-	fspi_writel(f, SEQID_LUT, base + FSPI_FLSHB1CR2);
+-	fspi_writel(f, SEQID_LUT, base + FSPI_FLSHB2CR2);
++	fspi_writel(f, seqid_lut, base + FSPI_FLSHA1CR2);
++	fspi_writel(f, seqid_lut, base + FSPI_FLSHA2CR2);
++	fspi_writel(f, seqid_lut, base + FSPI_FLSHB1CR2);
++	fspi_writel(f, seqid_lut, base + FSPI_FLSHB2CR2);
+ 
+ 	return 0;
+ }
 -- 
 2.45.3
 
