@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01960C3ABC0
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 14:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 982A5C3ABBF
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 14:46:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB42D8291D;
-	Wed,  7 May 2025 16:45:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26B8482958;
+	Wed,  7 May 2025 16:45:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IRB44KwJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RW923aqZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 183C18288D; Wed,  7 May 2025 16:45:42 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 1E7BF8294C; Wed,  7 May 2025 16:45:44 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8013D82162
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 16:45:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2EAB8269F
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 16:45:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-b03bc416962so4928219a12.0
- for <u-boot@lists.denx.de>; Wed, 07 May 2025 07:45:39 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-736c3e7b390so7893839b3a.2
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 07:45:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746629138; x=1747233938; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1746629140; x=1747233940; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GUWA0dOPP2t1LaF6HB2aEND6HWdmGoMCy1tHhTUpEt0=;
- b=IRB44KwJzLIqgvy4sIHcWMI+XJFc2JeTWAEHAf0zMAd3Ytgyx/v2WULDxEz+UwoQUA
- GXFycKZVfmRLVoF1r1kMqIF9xh4E0y2FrdzVwCJFGHlDaFzjkY2Xhb12zeZDE131lax1
- DY/7r7lKPWIXreSY+SMDz7Ci/4Se67krseaqepoIDmDd0UsGPnvRkQ9JsFSJujiXS0f6
- 6mHaQ29pAFJtIfT4fLb79PLYSpd27UHPKHNyB+HFyqqrNmTwaBhKEyxdMyXz80jTWD1t
- H5X+YGkAq5mkV9ZpPLk2vpRBHZUx+FD1EZihug5JO0BRtCnxGM3OcvM9rIawId07XL7k
- TLtw==
+ bh=5suRMPKLtm2JxMF1fBKHNRlVzibeqq5ITEGVsziCqac=;
+ b=RW923aqZ++NXmRaSJSv/cZk0bR4Z8XbtH1e+LpQ48VRdBrMqOUXbdhQ/7K+aND0b0y
+ xgoJHxkPayP/mK4HH62+u/EKnAUlZ4rpLbZ5/Hmu2gW1r+Z9BjNzEfuCSFkkcb3GCZJv
+ QKJOYKHO0JL0BqN00AGXfabbVYjN5aVzOE1W0gUCFjwJAy8rrhEuLjclV7Jd9TZCGGOr
+ Y4jCieaRnyjmgf8/pPSRf+ZhmLr1cEhiwXRpaepXyudSq9FT6b/W2lFtwMLG7b+jCXRu
+ TjqAr9UZ2ChOR6ADV/7jGoQEO8Y3yHkPZCs1okGXmDdbxhszeZFlsgMYiQRDnBA+iSGn
+ F0Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746629138; x=1747233938;
+ d=1e100.net; s=20230601; t=1746629140; x=1747233940;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GUWA0dOPP2t1LaF6HB2aEND6HWdmGoMCy1tHhTUpEt0=;
- b=MhR6jflGGHdG5+p5Z+U64EwASa8XSfJBLq4jhrvA02BRth6miAq/9UjASZYcwOJzb7
- 9mCPGGO38wuRo/s7cKILL6s65wIuYKeFON7mruNfl5tW3IaESuHdojouVlg4urXdeoM/
- GV30HxE3MCrsXlJ8cuxMjQNc9HyVMtsc576k60TOwg8gbJdZwC23A8phkZRhh+o+78Ke
- MfT23Dad3KwSUKezMeVE+EuPyq+kN1TXNhlwITEuf7/0dN/CRiciLsOXJWb4+b9XUCb8
- v9iOIU4ymtImLu4Yvk9vH+M0zz+cMdbmns5pPV23Flszw5Lw7RqwIIBx4fuBaCJe04pF
- PnQA==
-X-Gm-Message-State: AOJu0YyBNhQbuieD8ZDRjBZCV/q0HvPE2SOtt4vETR3wAI7Hs3TYliPX
- wvpFnW5Vyr1HUcYAOxENoSL3KX6mn5lFfnUyB+iIS1z592Oxuar4vFtmRiPy6R8=
-X-Gm-Gg: ASbGncsXbs+CMvW0jkHWqdPHG8cw00FIWjyvlOht2x4l1Glm7jhTnwtBSOexaifmnja
- crxqcKFTAe35V/yhxfOT9tflnI1+QlfmRK749sxzA80e+y4ZJDfqvGuYa2pphsQxl3eX1VaBfvj
- coNKFgf01BrodqvbyZp/sG8hTsBa1ldZamGN9pgVLBCtyyAwUyGYfZutaPbLT1uOFD1PkQmebR4
- qXe2BCYhfK2jHxOc8uo2uVKbpyj8+MrfzTrNS2jZYZ2y1WEkDNbk5g21ZpLwIK70kXEbPmi9vJm
- OGARJI6UKjL2N3IaaH/+daWPVD6ZOLMhRZG6Hoeu7kzMVmtaArJGsOE+asyZ
-X-Google-Smtp-Source: AGHT+IG9DCcuG5QH4mUNqTsYtyzGQ7Lx04WnHVVWV8R7cgtovBLoAZ9JcPcr4JGilDPkkfjnSLsutA==
-X-Received: by 2002:a05:6a21:329d:b0:206:a9fe:a4c with SMTP id
- adf61e73a8af0-2148cd2f0b2mr5205942637.28.1746629137929; 
- Wed, 07 May 2025 07:45:37 -0700 (PDT)
+ bh=5suRMPKLtm2JxMF1fBKHNRlVzibeqq5ITEGVsziCqac=;
+ b=lfPx4Mvu7Xbj903uBSeFKHxweERoGzoErepMEkOi77bMD4POeG0bW3n5ngEutFzh5O
+ oOCF4NjmqHpPE65DyXOHpOZRPVIkiqcdUe6Zof38QgfU7f1yy0YQT3xMsOEEyEajuEBR
+ O/Cza54UeONWt5VUqv6fYZKaLh9ZlZq1GR9TwqmbavxVgpM33CLM3IVGfqJVlOfoMrQk
+ JMHtaKWRTq0DNHZw3K+8mcp7zFJ7Wa1m2eWTxP4EeMmpfpxrrvC1NsmaY5eeDAIEgrqH
+ Race3NpLIZHExcd3hXc4S+6TO9UDoU8ufRiaiyVUK/A4P+aKpJ0lxIX0qq0hICBLp9j1
+ ntPA==
+X-Gm-Message-State: AOJu0YxvzTISO7SKYWRL72hQ/dHePfKIjUeSx9T4lqaK7Zvfw6S+MFSz
+ 7lc5GsKwtJEzjXYl4jZ4AcYWuBNhHnAsNadjMsntIAoKwaP72XqZ1XB34BJQzfM=
+X-Gm-Gg: ASbGncsZf5BMx3r5yU1xhMlMvT2c21eifvUDErgkB3i2/CPy/FKb9mbSMgwMKrGOjb3
+ GI3TAkUdjju5xIEyEHdS12fakA95rkmQUySa9PraDRLOniKV3WLjtNsI4VdINOSLPCfG8/PgxxK
+ pwuI8pUUeXGstIDfPPAvrVae1sogIoFgdYO6jGcCAkm2y4dhC0+Liw6dVsSE4UxP2Nu2crg7OfH
+ UNaz1+5nQDpDeBUhmudNw20ftREctLcvY5HSeJsbX9azU6xwfVjtb+HO3QmOmOT3vOD/afeRFI7
+ ttblutRjf3+if9Gayd9VKxtG7dVoT8Km9XN+N8i4EtXu8FN2ZosyqqwPgMGO
+X-Google-Smtp-Source: AGHT+IGZyjoufxI6uzN9QJKVYBjgzgEbvGCEnN6XxRBDdJczZHFhZHsDIDQ9Ztuu5z96ttixdXe1cQ==
+X-Received: by 2002:a05:6a00:8f0c:b0:736:34a2:8a23 with SMTP id
+ d2e1a72fcca58-7409cfb0be4mr4335585b3a.15.1746629139833; 
+ Wed, 07 May 2025 07:45:39 -0700 (PDT)
 Received: from adriano.. ([190.215.87.40]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74058d7a30esm11710235b3a.13.2025.05.07.07.45.36
+ d2e1a72fcca58-74058d7a30esm11710235b3a.13.2025.05.07.07.45.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 May 2025 07:45:37 -0700 (PDT)
+ Wed, 07 May 2025 07:45:39 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  trini@konsulko.com, o451686892@gmail.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 2/3] efi_loader: fix dtbdump output color and format
-Date: Wed,  7 May 2025 10:46:18 -0400
-Message-ID: <20250507144619.3288456-3-adriano.cordova@canonical.com>
+Subject: [PATCH 3/3] test/py/test_efi_fit: test fdt and initrd
+Date: Wed,  7 May 2025 10:46:19 -0400
+Message-ID: <20250507144619.3288456-4-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250507144619.3288456-1-adriano.cordova@canonical.com>
 References: <20250507144619.3288456-1-adriano.cordova@canonical.com>
@@ -98,190 +98,305 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Imitate in dtbdump what initrddump does for color,
-newlines and input handling. The output parsing in
-the CI is strict and with the current output the CI
-is not recongnizing the prompt '=>'.
-
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- lib/efi_loader/dtbdump.c | 86 ++++++++++++++++++++++++++++++++++------
- 1 file changed, 74 insertions(+), 12 deletions(-)
+ test/py/tests/test_efi_fit.py | 156 +++++++++++++++++++++++++++-------
+ 1 file changed, 124 insertions(+), 32 deletions(-)
 
-diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
-index a3d59a2fd3b..1e72404ecc1 100644
---- a/lib/efi_loader/dtbdump.c
-+++ b/lib/efi_loader/dtbdump.c
-@@ -29,6 +29,18 @@ static struct efi_system_table *systable;
- static const efi_guid_t efi_dt_fixup_protocol_guid = EFI_DT_FIXUP_PROTOCOL_GUID;
- static const efi_guid_t efi_file_info_guid = EFI_FILE_INFO_GUID;
- static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
-+static bool nocolor;
-+
-+/**
-+ * color() - set foreground color
-+ *
-+ * @color:	foreground color
-+ */
-+static void color(u8 color)
-+{
-+	if (!nocolor)
-+		cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
-+}
+diff --git a/test/py/tests/test_efi_fit.py b/test/py/tests/test_efi_fit.py
+index 5f352e7efff..63ee8e6cef2 100644
+--- a/test/py/tests/test_efi_fit.py
++++ b/test/py/tests/test_efi_fit.py
+@@ -66,9 +66,29 @@ ITS_DATA = '''
+     #address-cells = <1>;
  
- /**
-  * print() - print string
-@@ -87,6 +99,17 @@ static void printx(unsigned char val)
- 	print_hex_digit(val & 0xf);
- }
+     images {
+-        efi {
++        helloworld {
+             description = "Test EFI";
+-            data = /incbin/("%(efi-bin)s");
++            data = /incbin/("%(hello-bin)s");
++            type = "%(kernel-type)s";
++            arch = "%(sys-arch)s";
++            os = "efi";
++            compression = "%(efi-comp)s";
++            load = <0x0>;
++            entry = <0x0>;
++        };
++        dtbdump {
++            description = "Test EFI fdtdump";
++            data = /incbin/("%(dtbdump-bin)s");
++            type = "%(kernel-type)s";
++            arch = "%(sys-arch)s";
++            os = "efi";
++            compression = "%(efi-comp)s";
++            load = <0x0>;
++            entry = <0x0>;
++        };
++        initrddump {
++            description = "Test EFI initrddump";
++            data = /incbin/("%(initrddump-bin)s");
+             type = "%(kernel-type)s";
+             arch = "%(sys-arch)s";
+             os = "efi";
+@@ -83,18 +103,33 @@ ITS_DATA = '''
+             arch = "%(sys-arch)s";
+             compression = "%(fdt-comp)s";
+         };
++        initrd {
++            description = "Initial RAM Disk";
++            data = /incbin/("%(initrd-fs)s");
++            type = "ramdisk";
++            compression = "%(initrd-comp)s";
++            os = "efi";
++        };
+     };
  
-+/**
-+ * cls() - clear screen
-+ */
-+static void cls(void)
-+{
-+	if (nocolor)
-+		print(u"\r\n");
-+	else
-+		cout->clear_screen(cout);
-+}
+     configurations {
+         default = "config-efi-fdt";
 +
- /**
-  * error() - print error string
-  *
-@@ -94,9 +117,17 @@ static void printx(unsigned char val)
-  */
- static void error(u16 *string)
- {
--	cout->set_attribute(cout, EFI_LIGHTRED | EFI_BACKGROUND_BLACK);
-+	color(EFI_LIGHTRED);
- 	print(string);
--	cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
-+	color(EFI_LIGHTBLUE);
-+}
++        config-efi {
++            description = "EFI FIT w/o FDT";
++            kernel = "helloworld";
++        };
 +
-+/**
-+ * efi_drain_input() - drain console input
-+ */
-+static void efi_drain_input(void)
-+{
-+	cin->reset(cin, true);
- }
+         config-efi-fdt {
+             description = "EFI FIT w/ FDT";
+-            kernel = "efi";
++            kernel = "dtbdump";
+             fdt = "fdt";
+         };
+-        config-efi-nofdt {
+-            description = "EFI FIT w/o FDT";
+-            kernel = "efi";
++
++        config-efi-initrd {
++            description = "EFI FIT w/ initrd";
++            kernel = "initrddump";
++            ramdisk = "initrd";
+         };
+     };
+ };
+@@ -108,7 +143,7 @@ FDT_DATA = '''
+     #address-cells = <1>;
+     #size-cells = <1>;
  
- /**
-@@ -116,8 +147,6 @@ static efi_status_t efi_input_yn(void)
- 	efi_uintn_t index;
- 	efi_status_t ret;
+-    model = "%(sys-arch)s %(fdt_type)s EFI FIT Boot Test";
++    model = "%(sys-arch)s %(fdt_type)s EFI FIT FDT Boot Test";
+     compatible = "%(sys-arch)s";
  
--	/* Drain the console input */
--	ret = cin->reset(cin, true);
- 	for (;;) {
- 		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
- 		if (ret != EFI_SUCCESS)
-@@ -158,8 +187,6 @@ static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
- 	u16 outbuf[2] = u" ";
- 	efi_status_t ret;
+     reset@0 {
+@@ -120,6 +155,7 @@ FDT_DATA = '''
  
--	/* Drain the console input */
--	ret = cin->reset(cin, true);
- 	*buffer = 0;
- 	for (;;) {
- 		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-@@ -262,6 +289,9 @@ static u16 *skip_whitespace(u16 *pos)
-  */
- static bool starts_with(u16 *string, u16 *keyword)
- {
-+	if (!string || !keyword)
-+		return false;
-+
- 	for (; *keyword; ++string, ++keyword) {
- 		if (*string != *keyword)
- 			return false;
-@@ -737,6 +767,7 @@ static efi_status_t do_dump(void)
- 				error(u"Missing end node\r\n");
- 				return EFI_LOAD_ERROR;
- 			}
-+			print(u"\r\n");
- 			return EFI_SUCCESS;
- 		default:
- 			error(u"Invalid device tree token\r\n");
-@@ -748,6 +779,30 @@ static efi_status_t do_dump(void)
- 	return EFI_LOAD_ERROR;
- }
+ @pytest.mark.buildconfigspec('bootm_efi')
+ @pytest.mark.buildconfigspec('BOOTEFI_HELLO_COMPILE')
++@pytest.mark.buildconfigspec('EFI_LOAD_FILE2_INITRD')
+ @pytest.mark.buildconfigspec('fit')
+ @pytest.mark.notbuildconfigspec('generate_acpi_table')
+ @pytest.mark.requiredtool('dtc')
+@@ -137,8 +173,10 @@ def test_efi_fit_launch(ubman):
+     The following test cases are currently defined and enabled:
+      - Launch uncompressed FIT EFI & internal FDT
+      - Launch uncompressed FIT EFI & FIT FDT
++     - Launch uncompressed FIT EFI & internal FDT & FIT initrd
+      - Launch compressed FIT EFI & internal FDT
+      - Launch compressed FIT EFI & FIT FDT
++     - Launch compressed FIT EFI & internal FDT & FIT initrd
+     """
  
-+/**
-+ * get_load_options() - get load options
-+ *
-+ * Return:	load options or NULL
-+ */
-+static u16 *get_load_options(void)
-+{
-+	efi_status_t ret;
-+	struct efi_loaded_image *loaded_image;
-+
-+	ret = bs->open_protocol(handle, &loaded_image_guid,
-+				(void **)&loaded_image, NULL, NULL,
-+				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Loaded image protocol not found\r\n");
-+		return NULL;
-+	}
-+
-+	if (!loaded_image->load_options_size || !loaded_image->load_options)
-+		return NULL;
-+
-+	return loaded_image->load_options;
-+}
-+
- /**
-  * efi_main() - entry point of the EFI application.
-  *
-@@ -758,24 +813,31 @@ static efi_status_t do_dump(void)
- efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
- 			     struct efi_system_table *systab)
- {
-+	u16 *load_options;
-+
- 	handle = image_handle;
- 	systable = systab;
- 	cerr = systable->std_err;
- 	cout = systable->con_out;
- 	cin = systable->con_in;
- 	bs = systable->boottime;
-+	load_options = get_load_options();
-+
-+	if (starts_with(load_options, u"nocolor"))
-+		nocolor = true;
+     def net_pre_commands():
+@@ -210,7 +248,7 @@ def test_efi_fit_launch(ubman):
  
--	cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
--	cout->clear_screen(cout);
--	cout->set_attribute(cout, EFI_WHITE | EFI_BACKGROUND_BLACK);
-+	color(EFI_LIGHTBLUE);
-+	cls();
-+	color(EFI_WHITE);
- 	print(u"DTB Dump\r\n========\r\n\r\n");
--	cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
-+	color(EFI_LIGHTBLUE);
+         return os.path.join(ubman.config.build_dir, file_name)
  
- 	for (;;) {
- 		u16 command[BUFFER_SIZE];
- 		u16 *pos;
- 		efi_uintn_t ret;
+-    def make_efi(fname, comp):
++    def make_efi(fname, efi_file, comp):
+         """Create an UEFI binary.
  
-+		efi_drain_input();
- 		print(u"=> ");
- 		ret = efi_input(command, sizeof(command));
- 		if (ret == EFI_ABORTED)
-@@ -793,7 +855,7 @@ efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
- 			do_help();
- 	}
+         This simply copies lib/efi_loader/helloworld.efi into U-Boot
+@@ -218,6 +256,7 @@ def test_efi_fit_launch(ubman):
  
--	cout->set_attribute(cout, EFI_LIGHTGRAY | EFI_BACKGROUND_BLACK);
--	cout->clear_screen(cout);
-+	color(EFI_LIGHTGRAY);
-+	cls();
- 	return EFI_SUCCESS;
- }
+         Args:
+             fname -- The target file name within U-Boot build dir.
++            efi_file -- The source .efi application
+             comp -- Flag to enable gzip compression.
+         Return:
+             The path of the created file.
+@@ -225,7 +264,7 @@ def test_efi_fit_launch(ubman):
+ 
+         bin_path = make_fpath(fname)
+         utils.run_and_log(ubman,
+-                          ['cp', make_fpath('lib/efi_loader/helloworld.efi'),
++                          ['cp', make_fpath(f'lib/efi_loader/{efi_file}'),
+                            bin_path])
+         if comp:
+             utils.run_and_log(ubman, ['gzip', '-f', bin_path])
+@@ -264,6 +303,27 @@ def test_efi_fit_launch(ubman):
+             dtb += '.gz'
+         return dtb
+ 
++    def make_initrd(comp):
++        """Create a sample initrd.
++
++        Creates an initrd.
++
++        Args:
++            comp -- Flag to enable gzip compression.
++        Return:
++            The path of the created file.
++        """
++
++        # Generate a test initrd file.
++        initrd = make_fpath('test-efi-initrd')
++        with open(initrd, 'w', encoding='ascii') as file:
++            file.write('test-efi-initrd')
++
++        if comp:
++            utils.run_and_log(ubman, ['gzip', '-f', initrd])
++            initrd += '.gz'
++        return initrd
++
+     def make_fit(comp):
+         """Create a sample FIT image.
+ 
+@@ -275,22 +335,35 @@ def test_efi_fit_launch(ubman):
+         """
+ 
+         # Generate resources referenced by ITS.
++        hello_bin = os.path.basename(make_efi('test-efi-helloworld.efi', 'helloworld.efi', comp))
++        dtbdump_bin = os.path.basename(make_efi('test-efi-dtbdump.efi', 'dtbdump.efi', comp))
++        initrddump_bin = os.path.basename(make_efi('test-efi-initrddump.efi', 'initrddump.efi', comp))
++        fdt_bin = os.path.basename(make_dtb('user', comp))
++        initrd_fs = make_initrd(comp)
++        initrd_fs = os.path.basename(initrd_fs)
++        compression = 'gzip' if comp else 'none'
++        kernel_type = 'kernel' if comp else 'kernel_noload'
++
+         its_params = {
+             'sys-arch': sys_arch,
+-            'efi-bin': os.path.basename(make_efi('test-efi-fit-helloworld.efi', comp)),
+-            'kernel-type': 'kernel' if comp else 'kernel_noload',
+-            'efi-comp': 'gzip' if comp else 'none',
+-            'fdt-bin': os.path.basename(make_dtb('user', comp)),
+-            'fdt-comp': 'gzip' if comp else 'none',
++            'hello-bin': hello_bin,
++            'dtbdump-bin': dtbdump_bin,
++            'initrddump-bin': initrddump_bin,
++            'kernel-type': kernel_type,
++            'efi-comp': compression,
++            'fdt-bin': fdt_bin,
++            'fdt-comp': compression,
++            'initrd-fs': initrd_fs,
++            'initrd-comp': compression,
+         }
+ 
+         # Generate a test ITS file.
+-        its_path = make_fpath('test-efi-fit-helloworld.its')
++        its_path = make_fpath('test-efi-fit.its')
+         with open(its_path, 'w', encoding='ascii') as file:
+             file.write(ITS_DATA % its_params)
+ 
+         # Build the test ITS.
+-        fit_path = make_fpath('test-efi-fit-helloworld.fit')
++        fit_path = make_fpath('test-efi-fit.fit')
+         utils.run_and_log(
+             ubman, [make_fpath('tools/mkimage'), '-f', its_path, fit_path])
+         return fit_path
+@@ -357,7 +430,7 @@ def test_efi_fit_launch(ubman):
+ 
+         return addr
+ 
+-    def launch_efi(enable_fdt, enable_comp):
++    def launch_efi(enable_fdt, enable_initrd, enable_comp):
+         """Launch U-Boot's helloworld.efi binary from a FIT image.
+ 
+         An external image file can be downloaded from TFTP, when related
+@@ -372,19 +445,20 @@ def test_efi_fit_launch(ubman):
+         from the host filesystem.
+ 
+         Once the load address is available on U-Boot console, the 'bootm'
+-        command is executed for either 'config-efi-fdt' or 'config-efi-nofdt'
+-        FIT configuration, depending on the value of the 'enable_fdt' function
+-        argument.
++        command is executed for either 'config-efi', 'config-efi-fdt' or
++        'config-efi-initrd' FIT configuration, depending on the value of the
++        'enable_fdt' and 'enable_initrd' function arguments.
+ 
+         Eventually the 'Hello, world' message is expected in the U-Boot console.
+ 
+         Args:
+             enable_fdt -- Flag to enable using the FDT blob inside FIT image.
++            enable_initrd -- Flag to enable using an initrd inside FIT image.
+             enable_comp -- Flag to enable GZIP compression on EFI and FDT
+                            generated content.
+         """
+ 
+-        with ubman.log.section('FDT=%s;COMP=%s' % (enable_fdt, enable_comp)):
++        with ubman.log.section('FDT=%s;INITRD=%s;COMP=%s' % (enable_fdt, enable_initrd, enable_comp)):
+             if is_sandbox:
+                 fit = {
+                     'dn': ubman.config.build_dir,
+@@ -420,14 +494,28 @@ def test_efi_fit_launch(ubman):
+             addr = load_fit_from_host(fit) if is_sandbox else load_fit_from_tftp(fit)
+ 
+             # Select boot configuration.
+-            fit_config = 'config-efi-fdt' if enable_fdt else 'config-efi-nofdt'
++            fit_config = 'config-efi'
++            fit_config = fit_config + '-fdt' if enable_fdt else fit_config
++            fit_config = fit_config + '-initrd' if enable_initrd else fit_config
+ 
+             # Try booting.
++            ubman.run_command('setenv bootargs nocolor')
+             output = ubman.run_command('bootm %x#%s' % (addr, fit_config))
++            assert '## Application failed' not in output
+             if enable_fdt:
+                 assert 'Booting using the fdt blob' in output
+-            assert 'Hello, world' in output
+-            assert '## Application failed' not in output
++                assert 'DTB Dump' in output
++            if enable_initrd:
++                assert 'Loading ramdisk' in output
++                assert 'INITRD Dump' in output
++            if enable_fdt:
++                response = ubman.run_command(cmd = 'dump', wait_for_echo=False)
++                assert 'EFI FIT FDT Boot Test' in response
++            if enable_initrd:
++                response = ubman.run_command('load', wait_for_echo=False)
++                assert f"crc32: 0x0c77b025" in response
++            if not enable_fdt and not enable_initrd:
++                    assert 'Hello, world' in output
+             ubman.restart_uboot()
+ 
+     # Array slice removes leading/trailing quotes.
+@@ -449,16 +537,20 @@ def test_efi_fit_launch(ubman):
+             ubman.config.dtb = control_dtb
+ 
+         # Run tests
+-        # - fdt OFF, gzip OFF
+-        launch_efi(False, False)
+-        # - fdt ON, gzip OFF
+-        launch_efi(True, False)
++        # - fdt OFF, initrd OFF, gzip OFF
++        launch_efi(False, False, False)
++        # - fdt ON, initrd OFF, gzip OFF
++        launch_efi(True, False, False)
++        # - fdt OFF, initrd ON, gzip OFF
++        launch_efi(False, True, False)
+ 
+         if is_sandbox:
+-            # - fdt OFF, gzip ON
+-            launch_efi(False, True)
+-            # - fdt ON, gzip ON
+-            launch_efi(True, True)
++            # - fdt OFF, initrd OFF, gzip ON
++            launch_efi(False, False, True)
++            # - fdt ON, initrd OFF, gzip ON
++            launch_efi(True, False, True)
++            # - fdt OFF, initrd ON, gzip ON
++            launch_efi(False, True, True)
+ 
+     finally:
+         if is_sandbox:
 -- 
 2.48.1
 
