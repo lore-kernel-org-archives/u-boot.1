@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7615AC3ABC3
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 15:24:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB7F2C3ABC0
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 15:24:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C974E81F32;
-	Wed,  7 May 2025 17:24:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22098820EB;
+	Wed,  7 May 2025 17:24:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GqLEx+jV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K9MR9rK0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EDE381FAB; Wed,  7 May 2025 17:24:28 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id B364A8211F; Wed,  7 May 2025 17:24:49 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BF428059D
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 17:24:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBADE8059D
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 17:24:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2da73155e91so26567fac.0
- for <u-boot@lists.denx.de>; Wed, 07 May 2025 08:24:26 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-400fa6b3012so693835b6e.1
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 08:24:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746631465; x=1747236265; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=om/4he0PzbIVd3JFnkO4G1zqCFHyfK1JDANCbr5nsZs=;
- b=GqLEx+jVbTyW9N1GoI8GMdXovJHLrlhazhj8DJl74dTov4wrwtRKkm3C57pNu5eHwY
- owt7Te+y8/CJwZqhJoCfCxChZbPoBHifULz0nPMfraKcrSQ/7WPQcgnHuSFHH9g1Qby1
- FB9GvSie3GadJRJ2oio2H0ocg5nWRg34zBA4o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746631465; x=1747236265;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1746631485; x=1747236285; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=om/4he0PzbIVd3JFnkO4G1zqCFHyfK1JDANCbr5nsZs=;
- b=WqYzTxmUsIoyy5E9KIYjDLrdjkCalSXznP+Ozrmo0evI0mFqIAQ9ihKXk90U7UxWGi
- WnKQJA/Q1AuEuA/e9SvIZUH/Yu4UB4JC66CRKNlQjE5OSTUtCT6MgrVvzAZQgnDPliVy
- apAmJk6vQ6/fqPzjjj14baezrUKzeSdY8PyF6jjFVZQmHiZOyAT9K45p+EFD0iSAlUxI
- dwVV4/jDp9eMULD6T+rN7rOjfxTNe0xox3oPlNYuKDkD9Xh7cDU53151OX/KpPzcA+tE
- bS1hE5p1QrB9B+ZC6EEWHICKNBAZct9KNz4mey+Go4nFkwaVrGfzr2syWUAncQxPdr6G
- g5PA==
-X-Gm-Message-State: AOJu0Yx8jl+1GKw0EykNwsEgMU4XtRBycIaYkQHrzTJZixcOQ4IjyJM7
- Pf+2BoAH5n6igZXflvPhxLjYw2tojGwN/vhfLToB5EJHTNGyZYb1cd1zWJPrlGs=
-X-Gm-Gg: ASbGncs6LWy3/Xj5gF1iTXRQ1sSLmJFrwoUuKscJMIg6JbKaQsb1zeroMGLEz8mk7Ls
- LAYB5X/IXHfQtC6K/OwwJHSUgVciFTzhM7/lU7HmcW0zWLAacyxTUIugnBo+ar/36O0MECsPQSL
- 9VYtw792FK+Zk8iQ806cEcIHi3B3GTUC6urVdEWFshDFPHnO99/Cyh5xbigawFlV8bxTazjYwb5
- 4qFAYXehkjxOQY+RlsvhkbxunH/60+c8UJAOix6lcahBlJvV2QxBOHVnasHH0jEbNgaisVUHlni
- Aw4DTvZBDGSza5mfQz+13pkkHeu/cqcKD/HTOZfIz5e1NcKeEngapjMvo2ItZNrYiKCpumewtKV
- cox/xVmd46OCe
-X-Google-Smtp-Source: AGHT+IHC74/LyY+2X2eBkREMN2nf356Ggv1mc5acwauxWAa3ma+YcDi6nAYN2OmxLjwBL/X4s8vhlA==
-X-Received: by 2002:a05:6870:b01f:b0:2d4:d07c:7cb2 with SMTP id
- 586e51a60fabf-2db5be1352cmr1736600fac.11.1746631464870; 
- Wed, 07 May 2025 08:24:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ bh=ooymJopPBzCkcxdA7czfVEA4JGNGPf5290R4WL4XgPQ=;
+ b=K9MR9rK019Rd0MRHZlXdEkUdyre3RUUTgG9N6i/LTDDtB6EIT6fhivIyh3nvgEPKUg
+ 1/GKeu4sTctgfOYe1Ekl1tyTptS8nq9JDLtbcuOMVTpiA2NHSmB6Q1a3awzFj73GNRPP
+ nG66lt8WSiuDu0iB7jUUdsJUsDlPOUvc7FTTw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746631485; x=1747236285;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ooymJopPBzCkcxdA7czfVEA4JGNGPf5290R4WL4XgPQ=;
+ b=aYBIXha4ul+HCISMEkU3hKMxF0Z+lgPCYu9gQxzGvoX5WXACjjbRuCOBdud9j1+5Xz
+ ZFH4DXJ8aAlWh9nASIywf3dK8LYLDKP96lZofG/X4lN8FOJIcYfNbOxhjbJ4zunsWzFA
+ ydZoVVPOeYyLFlLdrTS+PnxLxq6EXX2FyKHZc/Pc8GcDkQvPnpWuio53HDYDYLMPcaRx
+ UbXifRx/eIFbuPpZcIEcRRBQCb7W7APrV6MxCCenbd1pHFprxlZo1wFv9EcVKu0wGQPG
+ TAVMe5K+Toa7RyCJ5xJs8HH3EFuU2Tvy3RGatwbrwN5PmE7bkrtnqL6+mjmKWK2t8ZdY
+ Fu6Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV2UUiWsS1yG2NTF5ftWzOXPWkoj0LH5N600AIdHycGvaCpgy0zHYltlD2mRNMeByTS9x9ilyU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTipqK6EovcPcEYBDlhiZQ/QXZRZKLHyp/jwX2uVQKxhwn9nbJ
+ 6IsCCpX/bNjMlEQOWI7eDsQdPcBlcUzdocxE+ysRe9pQftVgNSwSnEPyAQMcM8Y=
+X-Gm-Gg: ASbGnctSEriJtdOF7lU5YqJPWvbvKvdASEwl6nMYh7RwZLq+kNPbA2doO8GEUntHxNB
+ VlY2yDVU/nmEYNIKSfyNiUpUbusm7Wdh4cfChXrrgZmNB4Vs9WfVI7hYI9fQWq9fjUnth8Bznf6
+ xkGqYJs9hdDlj7f0Yd1zZXBdfuK0U4VAA6i6Bfg+jm9IKzK1/YbbzQvvYbnxryQHMoYGrBUlf3a
+ tkk7bgGczpvDz9CxWzfD7OSv8TrJ7Ea62JktAifDYfNfkdodQ8opmmZbUf7Zb+LqzEUWZHxrJkF
+ Wj2qK7kyLxte9GhgZo8mH1l/O7rr8495q9yodcPdrd42mYezwVgvAgDmxuG53aczisrGmM26zUp
+ i
+X-Google-Smtp-Source: AGHT+IHOpCTYxV29gslfVh4vFA9cLYnG6N5x4euhRYAZ/sSjZR2znSRywb1kx/hc61wXJOwYQAFVIw==
+X-Received: by 2002:a05:6808:3c46:b0:403:284b:2a58 with SMTP id
+ 5614622812f47-4036f34fde2mr1993722b6e.6.1746631485079; 
+ Wed, 07 May 2025 08:24:45 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2db5d0e53d2sm668680fac.46.2025.05.07.08.24.23
+ 5614622812f47-4036f340be5sm567442b6e.23.2025.05.07.08.24.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 May 2025 08:24:24 -0700 (PDT)
-Date: Wed, 7 May 2025 09:24:22 -0600
+ Wed, 07 May 2025 08:24:44 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de, ggiordano@phytec.com,
- d.schultz@phytec.de, n-francis@ti.com, nmorrisson@phytec.com
-Subject: Re: [PATCH 1/7] board: phytec: phycore_am62x: Update environment for
- fitboot
-Message-ID: <20250507152422.GA479524@bill-the-cat>
-References: <20250428134531.2884940-1-w.egorov@phytec.de>
+To: ggiordano@phytec.com, w.egorov@phytec.de, u-boot@lists.denx.de, 
+ joe.hershberger@ni.com, Daniel Schultz <d.schultz@phytec.de>
+Cc: bb@ti.com, nmorrisson@phytec.com, upstream@lists.phytec.de
+In-Reply-To: <20250428144904.1058574-1-d.schultz@phytec.de>
+References: <20250428144904.1058574-1-d.schultz@phytec.de>
+Subject: Re: [PATCH 1/3] include: env: phytec: k3_net: Remove
+ net_apply_extensions
+Message-Id: <174663148371.479629.18304486876009168786.b4-ty@konsulko.com>
+Date: Wed, 07 May 2025 09:24:43 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K5OlmHTLDVo9+L0l"
-Content-Disposition: inline
-In-Reply-To: <20250428134531.2884940-1-w.egorov@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,45 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 28 Apr 2025 07:49:02 -0700, Daniel Schultz wrote:
 
---K5OlmHTLDVo9+L0l
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Extensions are now handled by the board-code. Remove this non-existing
+> function to proper boot from network.
+> 
+> 
 
-On Mon, Apr 28, 2025 at 03:45:25PM +0200, Wadim Egorov wrote:
+Applied to u-boot/master, thanks!
 
-> From: Nathan Morrisson <nmorrisson@phytec.com>
->=20
-> Add fit_addr_r to the environment to allow us to boot from a FIT image.
->=20
-> Signed-off-by: Nathan Morrisson <nmorrisson@phytec.com>
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  board/phytec/phycore_am62x/phycore_am62x.env | 1 +
->  1 file changed, 1 insertion(+)
-
-Please rebase on top of current master, this does not compile, thanks.
-
---=20
+[1/3] include: env: phytec: k3_net: Remove net_apply_extensions
+      commit: e75070a8f46f9e154f1ede8132ff3b8c7cfad604
+[2/3] include: env: phytec: k3_net: Use get_cmd
+      commit: ad2ae4d2b250e25e305ddad9b9337abb4d796137
+[3/3] board: phytec: phycore_am62ax: Update Environment
+      commit: fd446b0c84478b4673b41a1440cd9116fdd41d92
+-- 
 Tom
 
---K5OlmHTLDVo9+L0l
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgbeyYACgkQFHw5/5Y0
-tyzzAQv9ER7KYn03ndcbTHDz3cXbn7tabBdwsd/odyaAtyCKWE8kAZk2Evt7U8Qi
-XwmQUi8eU44QQpaIoSi1fqe5psofE0eJ6oOQuvQDW2hytGkFIJqkJWxCG+yx95cS
-gYbekNXm+WGx74r34oyAIlUIMHgzELQC+ef7nY+6TRV+mBfUC245zgR23p+kKZmB
-rFZPlOSEeIc5QrQSMIKcN2eeGmVOb2gtZKtemBiRu2LMY+oviOHadoQf0bWSL3OH
-jTe91KFYHSqMtOa0kaRzZvpZUs7/AFwcUTj0JKnSBgoJvtWAnknHxNAbXrbQybRO
-6pnBRzdIJIbE0nwkZZ305u8yayPxXongir6jAnveqQeXgCwzpCdVIi7nF2BTne5D
-o3W5ze8TRke94rzKx1x7NiUyoKcwDXYEIfemMyjgOEvza8YmlZPyFWsCsyj3RtLw
-fGp33tmzHBVjyoJHsbKWrBVQsIR8aKhssBk+2Rd0sMyqA6RWCW7rhNckT9j/wfQA
-cUP/BCi1
-=S7fI
------END PGP SIGNATURE-----
-
---K5OlmHTLDVo9+L0l--
