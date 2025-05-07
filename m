@@ -4,94 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DB60C3ABC5
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 08:37:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 121E6C3ABC0
+	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 08:47:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 550D382958;
-	Wed,  7 May 2025 10:36:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=yahoo.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EF3882102;
+	Wed,  7 May 2025 10:47:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="ey6VG/Bt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kgXttV2r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2ADE82952; Wed,  7 May 2025 10:36:48 +0200 (CEST)
-Received: from sonic313-10.consmr.mail.ne1.yahoo.com
- (sonic313-10.consmr.mail.ne1.yahoo.com [66.163.185.33])
+ id 9E3D38212F; Wed,  7 May 2025 10:47:27 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F8A1820EB
- for <u-boot@lists.denx.de>; Wed,  7 May 2025 10:36:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9911C820EB
+ for <u-boot@lists.denx.de>; Wed,  7 May 2025 10:47:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dullfire@yahoo.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1746607005; bh=PGNBMY9VcpMvQ75fEzj3ZrYN6PPSqTLvXXhfQoPOfos=;
- h=From:To:Subject:Date:In-Reply-To:References:From:Subject:Reply-To;
- b=ey6VG/Btijxu+vJ9W91Ms6ztxXamXV+L/+C3xD4Hk3scziIv0afu3BNIeFA95DOE18LpWj48szRNf5/cSNYvP7Ci/U9/vKUJ3lJztUKh/RV94Bs9v77XQME8Xx1k5d+vqS2MoiVnDqiG7/vqFX82j/Ll+KY6NQQGxTb4HqLtK1D6kVA2+O99+EB+5/MYAHWMnpVoiuhQiwy3njQ0CbcW5dGr4DLd1Fw6qjzl/0ACmZp6/IFyIIg5omx8vJfro6GAJEoV9n4vuuacDgYbMrfK8dEgE//ZTRaDb5JK5L6GTNldRxvDvIrdJ2MUkA4V93ExVA3kHWxETid2mDh6PiRt1g==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1746607005; bh=FlJkRzD/OV3wRg+IhoHj79uNHysB6zqe7Qn6cfk2ax1=;
- h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=n/HkdhPMM1HBSBMo7Ejkx7x8Orqa9Eu0vZqjm5fJlmYWZ39t1qIb6EdEgQwQsSH/dbIhRDa+WfY56J7E/SlY7xU/cMjUnGMklRo9sH0qoKE2SuzcVjbafhqxCq7XIkeY6ghBXYPLqOkWP4ZRzTgAfhx2+1TW2VL5o+f8Dq7m0H5rg5bqYM6+/+2oMycTlznyc+hDugCWwLXQGnomKMx7tfiZIoQ3uNhPCZEhhddQr9+dy/5pqr343o+vM64QheV3wn9vgOusF2NJJgzABwWx5IcdpsBo0KVNmVoF26Fzm3SeCSIIPGghqamwwXChRoBNsbD6ifeBvSyxVuLuBir5fw==
-X-YMail-OSG: Nm.N8hQVM1nekFhTzyDB5r3ik7MSlqcXUWDS5N4CU8hZKYznN8wweevGzHB7mee
- 4gf35Uk.oBrD.aBQlKjjLujRMwF2sZHpr0aYVs0Jextx9gdl0GCjpKOvP8G1bzkr17JrZnTr7eT4
- MmP_z25m5XYvNeGgek0gFHxQ1ddddSK1CY54QRXX4CRwP.Irn.XFNtYObiDh1cEQ5_hRGt6kYmSg
- Pk.873OnQH0tJIygNjbJ7zTkpRuBays4WyQ2rZYtRiWedTlg1va_OTsl63c6LI8obOzBhqUO6764
- t3E4tsnw7muzY4W8.58WuEBbK7d5IjF4ZSVVPl8QWhhZKYoYGbN82T3zs9tQcJoXXgPCzPO3_CdQ
- ZUBhggqxXtyMY9R64_Kg7B2n6gF0kus1hlMEnzKXqsKIgJY46UWGs5sWGFgTiDn_OHKtsmUzmZq8
- rLYvJLp6uG5Lq85XOvwqdYg8xpY.g6olm3qH85aZ3Qj2xcQdwChM8FN5WV.1icX6hDFPpDfJX1aV
- LeVUSn6Yxwm6yEhK.KIQXMgHOd6rh4lNwol7_ASVlhiuhlKyvzQfi2E2ET_ZyDIVVcbS7r1V9MOb
- AhfcjYgb0xTFt3405S2O1AGswyJJLw7ZF.MLwbkNLLO4rA6vtrVtheMB9cFnwkSOHAynIuDTB2jj
- nTiSfL_qP1_tofhPSoSS2euXqCJQVjTkoyF9A8jlEJGM5S9Or4wqO7xzdhIJb1m_5OCTrJ9uRh7b
- vVPRB3WMFzLTZD5vksFSuF9G4QzQ5pQTwIg.6QZAwDclZKOD.IiKol.gZjhewZhpUVVv3.acz2u1
- W3xopc98zaei_HqiLqpCC1Ws8JOTHb_TSIKWejzeghMe0g6qFzgIUaFpN2LSylvg3NoucL4Nz.p3
- THsAnaRZlOSfK36hhyPSfpe8Tc4VMOF55ebaOwx1BZ8eYI.A0REt01HLJ1TceOPRbgK05AIY5TL2
- sluT5YqRY7VIMhtsxFxmHTowIldgYOqHPU0rqx5ci5nuwP_DL7bBVKAoiqcNpvA33sjPMeW6ueeX
- aD5Tp3na6KJ3uBXbGUZ4tEvZIwXSy.LR.UZfsbnMjhFKbj1.f8XEg_Sy7BUd9gBpuqKiVciJUlao
- j.6re4zKOW8nNIn_zChvnpd7KdX0TP6FB7N71z.PreoWkvJC6nyYG6QsSLGBMfLXUU9w0.pdGAOW
- 6qqhlWUHnSHrFfiNRgu5CMyG6swOjPYCvEvBh25FMNM6rPynxvQHEb6.326lIUdcvHwq3j_D7NHx
- I9NpN0_jveLyrfzzd3_tt2mRQM6koW1AV3tOnWcsulJd318Cr5LwA4LmybiV5nmfjm_6qsiNImsw
- AqysNvlZ6n9biFR7w5cXZU8B0f.8URGudOOds1eKQ5RnmPezc6S5fp_asNdIMCLfyylbVV._Hw59
- b9bRpmn_rqXCCfmcc8UtORZJiPC9i6tCGSnimB.BskkNW1J15qLjB5Sf.yamK8RIhcdF.tbOQ3nw
- h.s8D1LRUZWKrR.abIXK1PWth7X4SvjJVauClEk7ASeJWxhsmxbomlhY5vdTnM2augWVNPHn4bhM
- JlN0bvBo1GVNWpyLox6QZktfInbKoaBfrftnm2XvvicTSqI6VCM5owkyUlXfumqQ8mevYE_vIihT
- etRaQ79syjDqGJUpYjJbG6zwQ.VryJ3LFCxyJ4t2_yoaxtn6RG9Uptu.qLxHHZXNauFWzT1Ke7pj
- 81knNaK3gwZwqRUMbTjr_K6vUQC.Qzi8_hCIRW2KDs1tao_uHpPpncUPBNgXCrRxTVdq6SwmYQ1R
- HZzmc7l2aVzgNuBLX6Pnrnv8FYlIdLVH5bG3vCZU6qhMi9r5dA5rg1kUQrt8RHpEqjWlqGSIgMre
- hC.L8Mgb3LpPXRo5BjlggXT6k.7wT_tUfr10hHDIzdRgmhcQdSmWmeSkMuSYeP6UVNXR0CYdj_se
- OnDaGbMkuLekYT2qDTGtmdU9o96E5dQDH26kB7x89WI9NqN0BVw4B9Yj2qljJvhGfkY.UR2GoFiw
- 4RN5.sYChnrPozMzxPdVuwKl7Xi8XJJ5CJBAHOt89wDr2d5CtMJC._S2XlydEMty0zw91D9bMqYQ
- 7sYz8aWg0S5iXQsNBdGogwSzs5Mz30C1cCF5eplGyniTrz3.GEIdMw55LHRmbzAZOH5hRDXd9tc1
- 1oRVDIBJIVMPbBqJehwKY0L1q.ZpM5L0JusUDrIhQbdPzHqNHjos4xRC0h4A4hUldTGild9FMBIf
- sPSN7yHsG52J66YjnWhzahg.9bYLHTk_RSS4WFKpcp_sBo0P3jgmqEo1gNVACMXQ-
-X-Sonic-MF: <dullfire@yahoo.com>
-X-Sonic-ID: f17715bb-19c0-4d76-a779-c6150ce28534
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic313.consmr.mail.ne1.yahoo.com with HTTP; Wed, 7 May 2025 08:36:45 +0000
-Received: by hermes--production-ne1-9495dc4d7-ksk6c (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 657af18a778aaf15ff4eb5122835a91d; 
- Wed, 07 May 2025 08:36:39 +0000 (UTC)
-From: Jonathan Currier <dullfire@yahoo.com>
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Jesse Taube <Mr.Bossman075@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marex@denx.de>, Frank Li <Frank.Li@nxp.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Mark Brown <broonie@kernel.org>, u-boot@lists.denx.de
-Subject: [RFC PATCH v2 5/5] configs: imxrt1170-evk_defconfig: include FlexSPI
- driver and flash chip support
-Date: Wed,  7 May 2025 03:36:24 -0500
-Message-ID: <20250507083625.6195-6-dullfire@yahoo.com>
-X-Mailer: git-send-email 2.45.3
-In-Reply-To: <20250507083625.6195-1-dullfire@yahoo.com>
-References: <20250507083625.6195-1-dullfire@yahoo.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5faaddb09feso7649378a12.2
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 01:47:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1746607645; x=1747212445; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NVxvENUpxoVu7pN5sgoMxjxO5re5eNGoglkacqYB1o8=;
+ b=kgXttV2rb35+4qlHUOHNCZcQx8C7e9sqZz0J00j1BvmEThbJVAqefLTarL9E/gbdvG
+ nLNf2FM1YYSsk47F3v4yLDrAgvAtZoKsvhNvU0Y4zWEmLCMQKQdFwV3wq/7jfs4yUP36
+ qzSiOjgRlpwZd1tK+CVPkBSRDWknXe1JOKL3U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746607645; x=1747212445;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NVxvENUpxoVu7pN5sgoMxjxO5re5eNGoglkacqYB1o8=;
+ b=IeoqEFCkTGlFRBFK8xhzjb1b/pJY3CeYq/gMv7An8hZC8ST4j7PcBCHL9MgoCvUYjy
+ DqaLwN1OfTFQZWVlPVmB1cGA6AfSv4fRBOTy7rH8ufZlR5nm0n5x8VnWHb2ikprS2XTu
+ kV9OBDOPwtLfJ0DInQ+fzMdaz3TVpbE2P+3SiUnVAfS9dHk76Knf5ATmoDvz00PZea1D
+ U1VzubXUU7HCHvxAe7S1S9L/BZGDgv0KBq2Pn2D3EFXcsTPuLYfgXaV4nmJDOjeJrF0m
+ iyy1wuZsKOR/ByV049J6tfHwyadk7KuO3OTyXmnBZUNUurOc9XKFJrYa7H1DiMQIb2p6
+ us3Q==
+X-Gm-Message-State: AOJu0YzPuMkMijMMzop/0mpHWLJdyPTIM1fHXHZS6DY6wOSBgVq5xRgE
+ 9wy4TSldj7iS34zYmU9Bk/3FS6Cj7T54HXCASwd3BNjSyLdbWhRG5Tfs3EeqDTYWQJR0NmZnNp0
+ JPA+zLmvNvEjoZNSQg97shLnEnb7Ske5YMgSs
+X-Gm-Gg: ASbGncv2N+ymadbHddwlkE4WWMq8SGiD4cqDok8fv3ohNLgzPNqj5HptMprCUwxlbRv
+ gsUK0ZwUt1sW/MWxxtHyot/1PSm/tM2YFQ4Vf/QOyrY+yulRZj56VPOvOrW8E9vY0yH40f3QEtO
+ IAphd04fYj8/IsKH+A8xTIKII=
+X-Google-Smtp-Source: AGHT+IEAmW00YKpRBDHkhTIvCd+/qUztWd3jUodNTxRFPOERFDSiVmnvGri8aQ8lLao05ov4oLTpyVhcv07Mi6iodMs=
+X-Received: by 2002:a05:6402:440b:b0:5ec:fb3d:f51f with SMTP id
+ 4fb4d7f45d1cf-5fbe9de29bdmr2590882a12.10.1746607644865; Wed, 07 May 2025
+ 01:47:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250418105919.1645824-1-sjg@chromium.org>
+ <20250418133943.GK5495@bill-the-cat>
+In-Reply-To: <20250418133943.GK5495@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 7 May 2025 10:47:13 +0200
+X-Gm-Features: ATxdqUFdw7v5KtLCiEJv2Qz9AfcNOecBq-qtH_eSr-e3QKvYWG3SKicsbU5Bp8U
+Message-ID: <CAFLszTgaqCyK5t+5XqbW6SZ-vC1PCUv4h+YPqt0Zem1yXEn4AQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] Bring in linux/limits.h
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <simon.glass@canonical.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Raymond Mao <raymond.mao@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,51 +92,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Jonathan Currier <dullfire@yahoo.com>
----
- configs/imxrt1170-evk_defconfig | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+Hi Tom,
 
-diff --git a/configs/imxrt1170-evk_defconfig b/configs/imxrt1170-evk_defconfig
-index 32107fa9d52..a57c35bf686 100644
---- a/configs/imxrt1170-evk_defconfig
-+++ b/configs/imxrt1170-evk_defconfig
-@@ -37,6 +37,8 @@ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
- # CONFIG_BOOTM_PLAN9 is not set
- # CONFIG_BOOTM_RTEMS is not set
- # CONFIG_BOOTM_VXWORKS is not set
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_SPI=y
- # CONFIG_CMD_MII is not set
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_ISO_PARTITION is not set
-@@ -58,6 +60,15 @@ CONFIG_CLK_IMXRT1170=y
- CONFIG_MXC_GPIO=y
- # CONFIG_INPUT is not set
- CONFIG_FSL_USDHC=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_BLOCK=y
-+CONFIG_CFI_FLASH=y
-+CONFIG_FLASH_CFI_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_MTD=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_IMXRT=y
-@@ -65,6 +76,10 @@ CONFIG_RAM=y
- CONFIG_SPL_RAM=y
- CONFIG_IMXRT_SDRAM=y
- CONFIG_FSL_LPUART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_SPI_DIRMAP=y
-+CONFIG_NXP_FSPI=y
- CONFIG_TIMER=y
- CONFIG_SPL_TIMER=y
- CONFIG_IMX_GPT_TIMER=y
--- 
-2.45.3
+On Fri, 18 Apr 2025 at 15:39, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Apr 18, 2025 at 04:59:13AM -0600, Simon Glass wrote:
+>
+> > From: Simon Glass <simon.glass@canonical.com>
+> >
+> > Add part of this file from Linux v6.14 so we can include it from the
+> > linux/overflow.h file. Drop the relevant section from kernel.h
+> >
+> > The top of the file is omitted since it defines things used in mbedos
+> > and we get an error on SIZE_MAX.
+> >
+> > Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> > ---
+> > Error is:
+> >
+> >   In file included from include/limits.h:6,
+> >                  from lib/mbedtls/external/mbedtls/library/constant_tim=
+e.c:14:
+> >   include/linux/limits.h:7:35: error: missing binary operator before to=
+ken "0"
+> >     7 | #define SIZE_MAX        (~(size_t)0)
+> >       |                                   ^
+> >   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:65:6: n=
+ote: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
+> >    65 | #if (SIZE_MAX > 0xffffffffffffffffULL)
+> >       |      ^~~~~~~~
+> >   include/linux/limits.h:7:35: error: missing binary operator before to=
+ken "0"
+> >     7 | #define SIZE_MAX        (~(size_t)0)
+> >       |                                   ^
+> >   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:71:8: n=
+ote: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
+> >    71 | #elif (SIZE_MAX > 0xffffffff) || defined(MBEDTLS_HAVE_INT64)
+> >       |        ^~~~~~~~
+> >   make[3]: *** [scripts/Makefile.build:256: lib/mbedtls/external/mbedtl=
+s/library/constant_time.o] Error 1
+> >   make[2]: *** [scripts/Makefile.build:398: lib/mbedtls] Error 2
+> >
+> > Changes in v2:
+> > - Add new patch to bring in linux/limits.h
+> >
+> >  include/limits.h       |  2 ++
+> >  include/linux/kernel.h | 12 ------------
+> >  include/linux/limits.h | 21 +++++++++++++++++++++
+> >  3 files changed, 23 insertions(+), 12 deletions(-)
+> >  create mode 100644 include/linux/limits.h
+>
+> Ugh. I think we need to:
+> - Fix lib/string.c (and Fixes commit 7c7361b98d6e ("lib: implement
+>   strnstr()")) to not bring in <limits.h> as that should be limited to
+>   mbedtls usage.
+> - Not bring <linux/limits.h> to <limits.h> to start with at least (we
+>   can worry about handling wrappers around overflow protection there
+>   separately).
 
+There are quite a few places which need the limits. If I remove the
+dups from kernel.h then some things don't compile, at least not
+without including linux/limits,h in limits,h (which it seems to me we
+should do).
+
+So is this something you would like to take over, or do we need Linaro
+do fix up mbedtls, or...?
+
+Regards,
+Simon
