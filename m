@@ -4,59 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46AC9C3ABC3
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 03:10:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E17FFC3ABC3
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 03:12:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7598820EB;
-	Thu,  8 May 2025 05:10:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B4E1820EB;
+	Thu,  8 May 2025 05:12:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="S9kVIbJE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KPCD92jn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 101B08210D; Thu,  8 May 2025 05:10:36 +0200 (CEST)
-Received: from mail-m49235.qiye.163.com (mail-m49235.qiye.163.com
- [45.254.49.235])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D32A981FAB
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 05:10:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ id 460978210D; Thu,  8 May 2025 05:12:37 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8510781FAB
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 05:12:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 1452200d0;
- Thu, 8 May 2025 11:10:28 +0800 (GMT+08:00)
-Message-ID: <06f9b9bd-9439-47c2-9408-071a14b8c72e@rock-chips.com>
-Date: Thu, 8 May 2025 11:10:27 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5483CWiM1717187
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 7 May 2025 22:12:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746673952;
+ bh=h8hSZfgURx05LVrSgqI2UKL2uU9PGDzpcWEhSp28jv8=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=KPCD92jnElBKkYiJJQJFH1QC/T6JJYvYKnk56bTU+XEX2m2MfGSF+MFWC08OS7rwr
+ 4FPcLHS9NldRUoYJ1VnPOMOca63cpzzNlOY/PDio4t4B93+IMUxa1G+hWrf/BXHofJ
+ 3oTJq/3leQJ2Cnpg0wuh2r2M59UF9+5AF0wrmnrQ=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5483CW1p010975
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 7 May 2025 22:12:32 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
+ May 2025 22:12:31 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 7 May 2025 22:12:32 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5483CVOx023685;
+ Wed, 7 May 2025 22:12:31 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] board: rockchip: Add LCKFB TaishanPi RK3566 Board
-To: Jiehui He <jiehui.he@foxmail.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, trini@konsulko.com, chenjh@rock-chips.com,
- jonas@kwiboo.se
-References: <tencent_93CD49DECE6851B4BCA7C46427864CB0340A@qq.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <tencent_93CD49DECE6851B4BCA7C46427864CB0340A@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZH0IdVh5KSEgZS0wZQh9OHVYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-X-HM-Tid: 0a96addf84a903afkunm1452200d0
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MhQ6SCo6HjIBNwg8MCg5Az5P
- TzdPCSlVSlVKTE9NTUxIQ0hLSU9LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU1KQ0I3Bg++
-DKIM-Signature: a=rsa-sha256;
- b=S9kVIbJEnOxRqamlUwYU34aNtimfGZvqwUsbyshKFraF0rgpwIdHUCRGL5a52yXD0FOIza8K8j1ZMObtgI2CGqhqG39etiLleOFFsgAma5svQm1PaktKKqD6dBVb3xJUsuykIP4xsE4R0JFawsRIhBea3gtiJdIBFroaNTJYlN0=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=7sgF2Co+UOukPqhNL72TGelq9uV2IqSrxx62Uwpga9U=;
- h=date:mime-version:subject:message-id:from;
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 8 May 2025 08:42:09 +0530
+Message-ID: <D9QG8DY630MX.1OV8MBZIM4R8S@ti.com>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <b-liu@ti.com>
+Subject: Re: [PATCH v6 1/9] spl: Kconfig: allow K3 devices to use falcon mode
+From: Anshul Dalal <anshuld@ti.com>
+To: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250428141235.1734014-1-anshuld@ti.com>
+ <20250428141235.1734014-2-anshuld@ti.com>
+ <b3cc74a0-3903-4970-89b3-eceb973a791c@ti.com>
+ <D9PM26J8COAY.1ACTT0I6VHQJH@ti.com>
+ <3741d859-2048-4b32-9c1e-f551ec62d377@ti.com>
+In-Reply-To: <3741d859-2048-4b32-9c1e-f551ec62d377@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,170 +84,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed May 7, 2025 at 11:36 PM IST, Andrew Davis wrote:
+> On 5/6/25 10:33 PM, Anshul Dalal wrote:
+>> On Tue May 6, 2025 at 8:03 PM IST, Andrew Davis wrote:
+>>> On 4/28/25 9:12 AM, Anshul Dalal wrote:
+>>>> Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b4437bc
+>>>> ("ti_armv7_common: Disable Falcon Mode on HS devices") for older 32-bi=
+t
+>>>> HS devices and can be enabled on K3 devices.
+>>>>
+>>>> For secure boot, the kernel with x509 headers can be packaged in a fit
+>>>
+>>> "can be", this is the issue. Security is not just allowing methods that
+>>> are security checked, but forcing the use of such methods. Setting
+>>> OS_BOOT opens up several paths that look for non-FIT images. These
+>>> images do not enforce authentication like FIT does. This means one can
+>>> bypass secure boot when OS_BOOT is enabled by simply placing a non-FIT
+>>> boot image on the boot media.
+>>>
+>>=20
+>> As per spl_load_image_ext_os, the SPL first tries to load the file set
+>> in falcon_args_file env variable but since it's not set in our case. And
+>> the only way to set them is by rebuilding u-boot as uEnv.txt is not
+>> supported at SPL stage.
+>>=20
+>> This means the SPL only loads CONFIG_SPL_FS_LOAD_ARGS_NAME and
+>> CONFIG_SPL_FS_LOAD_KERNEL_NAME which are set as the DTB and fitImage
+>
+> What is stopping me from replacing the content of the file "fitImage"
+> with a normal kernel image? When loading that image the file type
+> will be detected as a normal kernel image and all FIT logic bypassed,
+> including authentication, breaking our secure chain of trust.
+>
+> Andrew
 
-On 2025/4/15 15:36, Jiehui He wrote:
-> The LCKFB TaishanPi is a single-board computer based on the RK3566 SoC.
->
-> Specification:
-> - 1/2 Gib RAM
-> - Optinal EMMC
-> - SD-Card
-> - HDMI / MIPI CSI / MIPI DSI
-> - USB 2.0 Host (Type-A)
-> - USB 2.0 Host / OTG (Type-C)
-> - No Ethernet
->
-> This patch adds U-Boot support for the LCKFB TaishanPi RK3566 board, including:
-> - U-Boot device tree
-> - Default defconfig
-> - Board documentation
-> - MAINTAINERS entry
->
-> Changes in v2:
-> - Removed unused configs from `lckfb-tspi-rk3566_defconfig`
-> - Reordered TaishanPi entry in `doc/board/rockchip/rockchip.rst` alphabetically
->
-> Link to v1:
-> https://lore.kernel.org/u-boot/tencent_95ED0C0545D87B6A8C4B62EC045D53AD2406@qq.com/
->
-> Signed-off-by: Jiehui He <jiehui.he@foxmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+That would require booti_setup to be executed in spl_parse_image_header,
+which is not possible on the R5 SPL since the required config symbol
+CMD_BOOTI is only available for ARM64 platforms.
 
-Thanks,
-- Kever
-> ---
->   arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi | 11 +++
->   board/rockchip/evb_rk3568/MAINTAINERS      |  6 ++
->   configs/lckfb-tspi-rk3566_defconfig        | 78 ++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst            |  1 +
->   4 files changed, 96 insertions(+)
->   create mode 100644 arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
->   create mode 100644 configs/lckfb-tspi-rk3566_defconfig
+In the worst case we end up loading a 32-bit zImage which wouldn't
+boot on the Cortex-A cores anyway and would additionally require
+enabling CMD_BOOTZ (currently disabled) at build time.
+
+Regards,
+Anshul
+
 >
-> diff --git a/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi b/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..0c8e7018f13
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +&rgb_led_r {
-> +	default-state = "off";
-> +};
-> +
-> +&rgb_led_b {
-> +	default-state = "off";
-> +};
-> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-> index b2780401a39..6cf568ad150 100644
-> --- a/board/rockchip/evb_rk3568/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
-> @@ -89,3 +89,9 @@ M:	Maxim Moskalets <maximmosk4@gmail.com>
->   S:	Maintained
->   F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
->   F:	configs/rock-3c-rk3566_defconfig
-> +
-> +LCKFB-TaishanPi
-> +M:	Jiehui He <jiehui.he@foxmail.com>
-> +S:	Maintained
-> +F:	configs/lckfb-tspi-rk3566_defconfig
-> +F:	arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
-> diff --git a/configs/lckfb-tspi-rk3566_defconfig b/configs/lckfb-tspi-rk3566_defconfig
-> new file mode 100644
-> index 00000000000..bc54be5ca53
-> --- /dev/null
-> +++ b/configs/lckfb-tspi-rk3566_defconfig
-> @@ -0,0 +1,78 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-lckfb-tspi"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-lckfb-tspi.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_DM_PMIC_FAN53555=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_PSCI=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_XHCI_GENERIC=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 1407080f1f4..abffbf36f40 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -101,6 +101,7 @@ List of mainline supported Rockchip boards:
->        - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
->        - FriendlyElec NanoPi R3S (nanopi-r3s-rk3566)
->        - Hardkernel ODROID-M1S (odroid-m1s-rk3566)
-> +     - LCKFB TaishanPi (lckfb-tspi-rk3566)
->        - Pine64 PineTab2 (pinetab2-rk3566)
->        - Pine64 Quartz64-A Board (quartz64-a-rk3566)
->        - Pine64 Quartz64-B Board (quartz64-b-rk3566)
+>> respectively. Following that, authentication is enforced during FIT
+>> loading by the call to board_fit_image_post_process in load_simple_fit.
+>>=20
+>> So even if the fitImage was modified, boot would fail without valid
+>> signatures on HS-SE devices.
+>>=20
+>> - Anshul
+>>=20
+>>>> container (fitImage) signed with TIFS keys for authentication.
+>>>>
+>>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>>>> ---
+>>>>    common/spl/Kconfig | 2 +-
+>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+>>>> index c08045f9c8d..68e900e9b91 100644
+>>>> --- a/common/spl/Kconfig
+>>>> +++ b/common/spl/Kconfig
+>>>> @@ -1165,7 +1165,7 @@ config SPL_ONENAND_SUPPORT
+>>>>   =20
+>>>>    config SPL_OS_BOOT
+>>>>    	bool "Activate Falcon Mode"
+>>>> -	depends on !TI_SECURE_DEVICE
+>>>> +	depends on !TI_SECURE_DEVICE || ARCH_K3
+>>>>    	help
+>>>>    	  Enable booting directly to an OS from SPL.
+>>>>    	  for more info read doc/README.falcon
+>>=20
+
