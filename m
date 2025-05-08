@@ -4,71 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2414C3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 12:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D68C3ABC0
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 12:49:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED645822D7;
-	Thu,  8 May 2025 14:10:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2EF7C822D7;
+	Thu,  8 May 2025 14:49:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G4uI82G1";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bFkhoea6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D03F28283E; Thu,  8 May 2025 14:10:48 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EC0282153
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 14:10:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 548CAe4L1083490
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 8 May 2025 07:10:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1746706240;
- bh=Np/epCeL3huNT5hvrR9ldKYLNUkhNPznVpNkquag+T4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=G4uI82G1LQo3tvUNOFEMGI+H/XibNa+Z8skHnVajZzaCjLdATsg0SvsF1MlFYeokU
- djVLYsfCg8DGtuhGrbRHKL0hs1uXVALNKr5gO0N8W98EZuaZHjrKJFwgNqnTDmuS2Z
- pR1ygiNa7kfYDzXJLpeXKELVDjraWuXCZ9Aju/sA=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 548CAeAJ077541
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 8 May 2025 07:10:40 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 8
- May 2025 07:10:40 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 8 May 2025 07:10:40 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 548CAdNt002803;
- Thu, 8 May 2025 07:10:40 -0500
+ id F24A2828B3; Thu,  8 May 2025 13:20:12 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 80F3482153
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 13:20:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5484Wgme009260
+ for <u-boot@lists.denx.de>; Thu, 8 May 2025 11:20:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=LB2fdGS99vH
+ m7hAfUtK0ZqhKO2ioy8o4vdqy/e/GWM4=; b=bFkhoea6qeK+bz1smtqYRL3R6A6
+ K6kyM3lrAKrs/AtA6H1iYo8DB7470CRhEp9tUmbAbOMoVck3Z5/BF0eCXpfb/03h
+ zAFutGUa2iVL+OjJ6Ewx5m2SDP+tc7Q6ORcUzoUNOdBaN3wflMYFXhjZwo/o8Ws1
+ iOW4pRMWcgkZCigXBf8l3SVIzc+ce92GRJX5vZc2LDb2KpVFJx08ahJ+jfAk01Zu
+ MCW8clcBqLBTGGMqZuwXQLYjZTQOrI6riB7IW0lFfrJ8nw3iF/TeB9lT7/w5rnAu
+ KCsuK6Dsa4bvPpUSDFJLs4SllMEk/XK2oZlWjzL3TwGHcNUDJbKIj9LZEAA==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46gnp593y8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 11:20:09 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-22e68e50f80so7082945ad.1
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 04:20:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746703208; x=1747308008;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LB2fdGS99vHm7hAfUtK0ZqhKO2ioy8o4vdqy/e/GWM4=;
+ b=aYKss6qTV3dqYCG6ouDekQ5ZBzPejxc7fcod75pDYOXjplPLJxC44Ls8XPxjexic/1
+ CnKG99BmicP1k1k0DWnEuN2jzr1HDFMFmgm5VN2Q2qSAWxeszMASkktoBZ/ZZpm7nRJD
+ Q5PwdqpWYQy4NlIYU2XBywzaWaVUEgWyS9PUy93QiAN4CCwJNhTTONCKJwbrqPI3ExN7
+ nsD4BCukGbS7LT5UriC8P9Tkky+KJ8epFvkmkX2DVwBAbNB9lzM9DODN9x/HomlZ+IbG
+ 4J4xsM4AmfZGzb9k9IdgkNPK2oyGlLJNUFaEUGu6Sbf4TNg05/kSmXkvE/j/4ZNaB1q/
+ Yxig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWW6ZwVjH9viOuqI1JsKoP9qp9weeC4noMUW5cyLB0ncUluvTt4IRDajkHThvxZ0xxMoUW86Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YzWmwzOYAaDRufnMWoFgJPgSzQeXdII1FI+F4+tbhcWDDY7eGqi
+ tX0iie/ygdbt9f/bTaWvzA/U/ZJT2sq6ufSppDBpj5V5WSaAbOYepoDC9zSr1FgRJSO4IVtmegM
+ qgYXplkMlXwzZQu6jdzj/oBRvbDjLoGUWraCogwC0lvC4NAB92fPc
+X-Gm-Gg: ASbGncu0ySBwAA0d5kAPCqGiPbap8SavBoWLWW52CT1dmPosTrtedK9nLhjzOqRMdMo
+ et9zaT/l1cBmqMzyoCkuuy6rarctI7MDn3gDXw/cPtwJwfthbodNHT0Lw2DwLbzxrPH9uo48Txb
+ 2tfFroU1xGCt105rSzIckP34E8NmeSoWnVmc1pU63azKoneyC2mwl/cpDlpNLZJGnsGoixnyLMm
+ fKUnDyaXUq0cgVBRi3bxduVnpHsM+8Ri8GCsB0vfTjn5LCKLiw3lwyfJo3qLHB+1z72VZ/5F06C
+ oBYQGjWg9kYbq6GFnEIKEKrucjqufo9RH8VsBNbF1itXekp9wgps8U3BUSOxxf0fNznN4uha5dk
+ DR3v20kuRZkRYQc4qXY9PTd17CFHPdRRzjBC+r78g
+X-Received: by 2002:a17:903:2446:b0:22e:40d7:3718 with SMTP id
+ d9443c01a7336-22e8bfe87ecmr47339665ad.47.1746703207868; 
+ Thu, 08 May 2025 04:20:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE2jP+A/dVpksfeKvMAIA9CQWfFKIhwHXBytw+CyTvYQd9UszyTcg7kimxepUr6Vb7ril3xRg==
+X-Received: by 2002:a17:903:2446:b0:22e:40d7:3718 with SMTP id
+ d9443c01a7336-22e8bfe87ecmr47339235ad.47.1746703207495; 
+ Thu, 08 May 2025 04:20:07 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22e6c3b6513sm27779765ad.220.2025.05.08.04.20.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 May 2025 04:20:06 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com,
+ balaji.selvanathan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
+ me@samcday.com, sjg@chromium.org, quic_varada@quicinc.com,
+ sughosh.ganu@linaro.org, lehmanju@devpi.de, bhupesh.linux@gmail.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: [PATCH v1 1/6] dt-bindings: power: rpmpd: Add QCS8300 Power Domain
+ Indexes
+Date: Thu,  8 May 2025 16:49:47 +0530
+Message-Id: <20250508111952.2304578-2-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250508111952.2304578-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20250508111952.2304578-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 8 May 2025 17:40:18 +0530
-Message-ID: <D9QROEXZH6QD.3FBXQDNA35TUI@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>, <afd@ti.com>
-CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
- <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
- <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
- <d-gole@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 7/7] arm: mach-k3: r5: common: Add support to boot
- HSM M4 core
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-References: <20250506104202.16741-1-b-padhi@ti.com>
- <20250506104202.16741-8-b-padhi@ti.com>
-In-Reply-To: <20250506104202.16741-8-b-padhi@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=Lu2Symdc c=1 sm=1 tr=0 ts=681c9369 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8 a=Lm_5SJ9J54UdPhV11WkA:9
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-GUID: ZfFDItDOhOius2pOT0f38dXBBNQqjndM
+X-Proofpoint-ORIG-GUID: ZfFDItDOhOius2pOT0f38dXBBNQqjndM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTA4MDA5NCBTYWx0ZWRfX02LtKb1og+D5
+ qI70vMYFtZ5n2/RUxlX4cCcw343gBaytbBr9z9DpYvisG3Yfd/61KhZLk5VHXhxWF3qfQ4qJGJe
+ QHcD/72MW+usKbWvB8k3QTSl8uR719U7KRT+NmMZmXc6QP1MF3S3ObpUUydkAWfvzd9wz4uJ+sl
+ p00fuENXB7EUqh/BkDQaWqZUlmhCUvvXoAuQDkmUnQ+S5sZRX1MhAOtXpmithHRLPVLOtIhLL2J
+ 8W8VRdm+45qkVyglFSO9SxCd+j3arnimQx8i+fp7aIpuGhdNK4LImvZ8k7s6i/S+l4z7BszgXsy
+ Rq8aTZiO65DbRSiTRMeCO/qNFtG0aRpJdVrcsWKTKyJcsFf9i4IbG82ngMWWiyThKZ35wK4tA5Q
+ e6rNUqcqY1O18/fJJZ3I3ZuItFJZOJDCYMQAld7udRrdRjIAPqHGUH/SvvYyZJdXJsYkyRii
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-08_03,2025-05-07_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 bulkscore=0 mlxlogscore=991
+ priorityscore=1501 suspectscore=0 clxscore=1011 adultscore=0 malwarescore=0
+ spamscore=0 impostorscore=0 mlxscore=0 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2504070000 definitions=main-2505080094
+X-Mailman-Approved-At: Thu, 08 May 2025 14:49:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,186 +137,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue May 6, 2025 at 4:12 PM IST, Beleswar Padhi wrote:
-> The tispl.bin fit image is packed with the HSM firmware image. Populate
-> the "os" info of the image so that it can be detected and used to load
-> the HSM core. Further, invoke the load and boot of HSM core at R5 SPL
-> stage. Boot flow for HSM M4 core is as below:
->
-> 1. Request control of HSM M4F remote processor.
-> 2. Assert Reset on the HSM M4F remote processor.
-> 3. For HS devices, Request Secure Entity to Authenticate and Load HSM
->    firmware into core's internal SRAM memory region. For GP devices,
->    load the unsigned firmware manually.
-> 4. Deassert Reset on the HSM M4F remote processor.
-> 5. Release control of HSM M4F remote processor.
->
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
-> v2: Changelog:
-> 1. Hang system boot if HSM firmware failed to boot.
-> 2. __maybe_unused to decrease preprocessor usage.
-> 3. Better error messages with return code.
-> 4. Added Error case in if-elseif-else ladder.
->
-> Note:
-> #define PROC_ID_HSM_M4F seems to have extra tab in the diff/patch.
-> But when patch gets applied in file, all of them have consistent
-> tabs.
->
-> Link to v1:
-> https://lore.kernel.org/all/18e01808-499d-4690-995a-45ac5fd727d9@ti.com
->
->  arch/arm/mach-k3/r5/common.c | 84 +++++++++++++++++++++++++++++++++++-
->  1 file changed, 83 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-> index 81fc67a0023..1aa3869cec2 100644
-> --- a/arch/arm/mach-k3/r5/common.c
-> +++ b/arch/arm/mach-k3/r5/common.c
-> @@ -15,9 +15,14 @@
->  #include <spl.h>
->  #include <remoteproc.h>
->  #include <elf.h>
-> +#include <cpu_func.h>
-> =20
->  #include "../common.h"
-> =20
-> +#define PROC_BOOT_CTRL_RESET_FLAG_HSM_M4	0x00000001
-> +#define HSM_SRAM0_0_ADDR			0x43C00000
-> +#define PROC_ID_HSM_M4F				0x00000080
-> +
->  #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
->  enum {
->  	IMAGE_ID_ATF,
-> @@ -27,6 +32,7 @@ enum {
->  	IMAGE_ID_TIFSSTUB_HS,
->  	IMAGE_ID_TIFSSTUB_FS,
->  	IMAGE_ID_T,
-> +	IMAGE_ID_HSM,
->  	IMAGE_AMT,
->  };
-> =20
-> @@ -39,6 +45,7 @@ static const char *image_os_match[IMAGE_AMT] =3D {
->  	"tifsstub-hs",
->  	"tifsstub-fs",
->  	"tifsstub-gp",
-> +	"hsm",
->  };
->  #endif
-> =20
-> @@ -136,6 +143,73 @@ void release_resources_for_core_shutdown(void)
->  	}
->  }
-> =20
-> +static int __maybe_unused boot_hsm_core(void)
-> +{
-> +	struct ti_sci_handle *ti_sci =3D get_ti_sci_handle();
-> +	struct ti_sci_proc_ops *proc_ops =3D &ti_sci->ops.proc_ops;
-> +	u64 hsm_image_addr;
-> +	u32 hsm_image_size;
-> +	int device_type, ret;
-> +
-> +	hsm_image_addr =3D (u64)fit_image_info[IMAGE_ID_HSM].load;
-> +	hsm_image_size =3D (u32)fit_image_info[IMAGE_ID_HSM].image_len;
-> +
-> +	/* Request Control of Remote Processor */
-> +	ret =3D proc_ops->proc_request(ti_sci, PROC_ID_HSM_M4F);
-> +	if (ret) {
-> +		printf("Unable to request HSM processor control: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	/* Put the remote processor into reset */
-> +	ret =3D proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F,
-> +					   PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
-> +	if (ret) {
-> +		printf("Unable to Halt HSM core: %d\n", ret);
-> +		goto release_proc_ctrl;
-> +	}
-> +
-> +	/*
-> +	 * Load the HSM firmware into core's internal memory.
-> +	 *
-> +	 * In case of HS device types, request secure entity to authenticate an=
-d
-> +	 * load the HSM firmware into the core memory.
-> +	 * In case of GP device types, copy the HSM firmware into the core
-> +	 * memory manually.
-> +	 */
-> +	device_type =3D get_device_type();
-> +	if (device_type =3D=3D K3_DEVICE_TYPE_HS_SE ||
-> +	    device_type =3D=3D K3_DEVICE_TYPE_HS_FS) {
-> +		ret =3D proc_ops->proc_auth_boot_image(ti_sci, &hsm_image_addr,
-> +						     &hsm_image_size);
-> +		if (ret) {
-> +			printf("Unable to Authenticate and Boot HSM image; ret =3D %d\n",
-> +			       ret);
-> +			goto release_proc_ctrl;
-> +		}
-> +	} else if (device_type =3D=3D K3_DEVICE_TYPE_GP) {
-> +		debug("Loading HSM GP binary into SRAM0_0\n");
-> +		memcpy((void *)HSM_SRAM0_0_ADDR, (void *)(u32)hsm_image_addr,
-> +		       hsm_image_size);
-> +		flush_dcache_range(HSM_SRAM0_0_ADDR,
-> +				   HSM_SRAM0_0_ADDR + hsm_image_size);
-> +	} else {
-> +		printf("Invalid Device Type\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	/* Release the reset from the remote processor*/
-> +	ret =3D proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_HSM_M4F, 0,
-> +					   PROC_BOOT_CTRL_RESET_FLAG_HSM_M4);
-> +	if (ret)
-> +		printf("Unable to Run HSM core: %d\n", ret);
-> +
-> +release_proc_ctrl:
-> +	/* Release Control of Remote Processor */
-> +	proc_ops->proc_release(ti_sci, PROC_ID_HSM_M4F);
-> +	return ret;
-> +}
-> +
->  void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->  {
->  	typedef void __noreturn (*image_entry_noargs_t)(void);
-> @@ -157,6 +231,14 @@ void __noreturn jump_to_image_no_args(struct spl_ima=
-ge_info *spl_image)
->  				     &loadaddr);
->  	}
-> =20
-> +#if IS_ENABLED(CONFIG_K3_HSM_FW)
-> +	ret =3D boot_hsm_core();
-> +	if (ret)
-> +		panic("HSM core failed to boot, %d\n", ret);
-> +	else
-> +		printf("Successfully booted HSM core\n");
-> +#endif
-> +
->  	/*
->  	 * It is assumed that remoteproc device 1 is the corresponding
->  	 * Cortex-A core which runs ATF. Make sure DT reflects the same.
-> @@ -388,7 +470,7 @@ void board_fit_image_post_process(const void *fit, in=
-t node, void **p_image,
->  	 * Only DM and the DTBs are being authenticated here,
->  	 * rest will be authenticated when A72 cluster is up
->  	 */
-> -	if ((i !=3D IMAGE_ID_ATF) && (i !=3D IMAGE_ID_OPTEE)) {
-> +	if (i !=3D IMAGE_ID_ATF && i !=3D IMAGE_ID_OPTEE && i !=3D IMAGE_ID_HSM=
-) {
->  		ti_secure_image_check_binary(p_image, p_size);
->  		ti_secure_image_post_process(p_image, p_size);
->  	} else {
+Added QCS8300 Power Domain Indexes in dt-bindings/power/qcom-rpmhpd.h
 
-A minor nit but this and the following else block can be refactored as:
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+ .../include/dt-bindings/power/qcom-rpmpd.h    | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-ti_secure_image_check_binary(p_image, p_size);
-if (i !=3D IMAGE_ID_ATF && i !=3D IMAGE_ID_OPTEE && i !=3D IMAGE_ID_HSM) {
-	ti_secure_image_post_process(p_image, p_size);
-}
-
-Regards,
-Anshul
-
-
+diff --git a/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h b/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h
+index df599bf4622..50291f918c2 100644
+--- a/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h
++++ b/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h
+@@ -4,6 +4,25 @@
+ #ifndef _DT_BINDINGS_POWER_QCOM_RPMPD_H
+ #define _DT_BINDINGS_POWER_QCOM_RPMPD_H
+ 
++/* QCS8300 Power Domain Indexes */
++#define QCS8300_CX	0
++#define QCS8300_CX_AO	1
++#define QCS8300_DDR	2
++#define QCS8300_EBI	3
++#define QCS8300_GFX	4
++#define QCS8300_LCX	5
++#define QCS8300_LMX	6
++#define QCS8300_MMCX	7
++#define QCS8300_MMCX_AO	8
++#define QCS8300_MSS	9
++#define QCS8300_MX	10
++#define QCS8300_MX_AO	11
++#define QCS8300_MXC	12
++#define QCS8300_MXC_AO	13
++#define QCS8300_NSP0	14
++#define QCS8300_NSP1	15
++#define QCS8300_XO	16
++
+ /* SA8775P Power Domain Indexes */
+ #define SA8775P_CX	0
+ #define SA8775P_CX_AO	1
+-- 
+2.34.1
 
