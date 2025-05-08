@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D970C3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 15:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48978C3ABBE
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 15:29:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DDE982905;
-	Thu,  8 May 2025 17:27:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id ACD0382905;
+	Thu,  8 May 2025 17:29:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GdUpmTz5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ox+VVbZh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 115E682928; Thu,  8 May 2025 17:27:17 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAEE5828BC
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 17:27:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=konsulko.com
+ id 8DC9582928; Thu,  8 May 2025 17:29:02 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1379E828BC
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 17:28:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72b0626c785so968660a34.2
- for <u-boot@lists.denx.de>; Thu, 08 May 2025 08:27:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746718033; x=1747322833; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PBBCiycTeOJjCYqJ9PogWfcLPGPY7eRY//ozNPXG5sA=;
- b=GdUpmTz5cFrmS1ajLoMCSBZUE/kvB+Hk1yuyD7e6iyI/gxhdPcetmT0p7R0CIC6X76
- JqaOPwRRgnOM6qgENgWp6FrFeZImKjK0iQk0pmBHO+DXBFPfqDx8IiWTp0/k1lO87z+5
- USaQrNg+GDmXBqAoE0zBX2o2+Zncc1MAt/Auc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746718033; x=1747322833;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PBBCiycTeOJjCYqJ9PogWfcLPGPY7eRY//ozNPXG5sA=;
- b=vv55Q1kJIGHptpSetLVZhKmbAUce+04G5UJCqFYa7mgSEgBkCjMH4+3FUwuagATipV
- rw8b3UShGvIwgRl/bGLK3IE5pGjQ9gBfu5EtDN8pUansXeiGAWMrAQ1Qiy+l3LitSPfc
- gtINml3a6UdP2nokCJT6GMNpI/efxB5+nisiLx1z3eNvrVKaiAJ9yPbF4UEvExjz/Hrh
- rlu1AYXKFfymc7FDLbBc627NLfG0v/2tnxTgeU7fz4ypH3hDASzBk/NE6ZFMXY2/fwth
- qJht78Pwvtcy6rF/wE/Y+X/Hb20VM1rIHw6O0Wyap/WbEWmehjbIUVIRmqa/AeU0atGn
- pw3A==
-X-Gm-Message-State: AOJu0YxHatZn2Z1Wncxqe2UK+KYarf1QSSbQMMMa7i472p+dSKZRHSOW
- r0q0fgX1EEocOlDrb2JH95fPxW+TYhz0M74I8zgkbRlv/1PQHceAvPj/Oj+Y6I8=
-X-Gm-Gg: ASbGncsfyeaRcuIEcjY0smlg0NFFgxHaupSm1h3k0s/VpT8C30tftSPIM/OLIG28MvR
- 8VDrtf4mC272BaWS2Qp6x3oGik1pJeWtryb2iJFprK+b1xo4c4oZI3CY9zdAgM5zVFXquae1Uhf
- O7bwDQ6SUfpQ+zBExuCzjJnHKBOeFIlIfCmHtt6SRZxhJrwARBXc3/nddT8JJs3BMJ7FRWEKnoB
- zSABnEkdnD5CZZgkUTNkQul2P4hQrO3VIfbFzofrzWLkfS1uL/+85oCpcJPOTgtXvJLG2EU0e4I
- rU67I3V+m8b85nFqtD2VT3EZk+vF5vUSx/I+uajNw1i/wM6jWgYr1b13Jm4y6v8OMUHgk2r4yQJ
- ZDw==
-X-Google-Smtp-Source: AGHT+IE1kJNDhJ4l/U/384v5qhmZmZainkhjqUwd1fjoifp19UnMemT9QOtD61938NQVobqK5kk/Cw==
-X-Received: by 2002:a05:6830:661c:b0:72b:9bac:c044 with SMTP id
- 46e09a7af769-7322680b043mr125260a34.0.1746718033491; 
- Thu, 08 May 2025 08:27:13 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-732264b0ad2sm45129a34.26.2025.05.08.08.27.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 May 2025 08:27:12 -0700 (PDT)
-Date: Thu, 8 May 2025 09:27:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de,
- jagan@amarulasolutions.com, vigneshr@ti.com,
- tudor.ambarus@linaro.org, joe.hershberger@ni.com, sjg@chromium.org,
- d.schultz@phytec.de
-Subject: Re: [PATCH 2/2] mtd: bootdev: Add Kconfig option for defining script
- parameters
-Message-ID: <20250508152710.GA603748@bill-the-cat>
-References: <20250508131641.2561876-1-w.egorov@phytec.de>
- <20250508131641.2561876-3-w.egorov@phytec.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 548FSsX11912393
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 8 May 2025 10:28:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1746718134;
+ bh=2paBuh7hJ+XYVK31QIBvebkl/PRbm4590TvHEx+gxk8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ox+VVbZhVKt5tMII3KMcTJDwM2ya9g08SP9mPBgseBxV+AEeH0verEdUPpdRMUXu2
+ yj9qVvrTYp6bx0ywoXx6IkjH8iQzzLTR9TZuo/ghk09S3nbEwSKBjL3qaajy/oynTR
+ 3ZENj12nJJm2XXiq1hM8pSuR92A3mAdE8JuUIWkg=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 548FSseM072065
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 8 May 2025 10:28:54 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 8
+ May 2025 10:28:53 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 8 May 2025 10:28:53 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 548FSqwg109744;
+ Thu, 8 May 2025 10:28:53 -0500
+Message-ID: <949dceec-a4f2-4420-9b34-caf3f54f49b6@ti.com>
+Date: Thu, 8 May 2025 10:28:52 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bnStMSMykRMUe4MJ"
-Content-Disposition: inline
-In-Reply-To: <20250508131641.2561876-3-w.egorov@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/7] arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM
+ firmware inside tispl.bin
+To: Beleswar Prasad Padhi <b-padhi@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ <trini@konsulko.com>
+CC: <sjg@chromium.org>, <xypron.glpk@gmx.de>, <cfsworks@gmail.com>,
+ <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
+ <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
+ <j-humphreys@ti.com>, <s-k6@ti.com>, <j-choudhary@ti.com>,
+ <d-gole@ti.com>, <u-boot@lists.denx.de>
+References: <20250506104202.16741-1-b-padhi@ti.com>
+ <20250506104202.16741-5-b-padhi@ti.com> <D9PTUSDYSWS0.J9VVKD57OPPM@ti.com>
+ <218f2201-6094-4a93-aae6-e919cbeeda56@ti.com>
+ <2fb353e4-b119-40d8-9eb2-717ec2422eaa@ti.com>
+ <D9QRG0VOG7FQ.3G9WFJ8ZYUBDZ@ti.com>
+ <2f00f1d7-b64f-4419-a9ee-71fa57aa310f@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <2f00f1d7-b64f-4419-a9ee-71fa57aa310f@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,100 +91,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/8/25 10:03 AM, Beleswar Prasad Padhi wrote:
+> 
+> On 5/8/2025 5:29 PM, Anshul Dalal wrote:
+>> On Wed May 7, 2025 at 8:53 PM IST, Andrew Davis wrote:
+>>> On 5/7/25 9:56 AM, Beleswar Prasad Padhi wrote:
+>>>> On 5/7/2025 3:09 PM, Anshul Dalal wrote:
+>>>>> On Tue May 6, 2025 at 4:11 PM IST, Beleswar Padhi wrote:
+>>>>>> Pack the HSM firmware in tispl.bin fit image so that it can be unloaded
+>>>>>> and used by R5 SPL to boot the HSM core. By default, point to the
+>>>>>> firmware for HS-SE device type. This needs to be changed to point to
+>>>>>> appropriate firmware when using a different device type.
+>>>>>>
+>>>>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>>>>>> ---
+>>>>>> v2: Changelog:
+>>>>>> None to this patch.
+>>>>>>
+>>>>>> Link to v1:
+>>>>>> https://lore.kernel.org/all/20250422095430.363792-4-b-padhi@ti.com/
+>>>>>>
+>>>>>>    arch/arm/dts/k3-j721s2-binman.dtsi | 12 ++++++++++++
+>>>>>>    arch/arm/dts/k3-j784s4-binman.dtsi | 14 ++++++++++++++
+>>>>>>    2 files changed, 26 insertions(+)
+>>>>>>
+>>>>>> diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
+>>>>>> index 73af184d27e..9c8b29f53bb 100644
+>>>>>> --- a/arch/arm/dts/k3-j721s2-binman.dtsi
+>>>>>> +++ b/arch/arm/dts/k3-j721s2-binman.dtsi
+>>>>>> @@ -273,6 +273,14 @@
+>>>>>>                        };
+>>>>>>                    };
+>>>>>> +#ifdef CONFIG_K3_HSM_FW
+>>>>>> +                hsm {
+>>>>>> +                    hsm: blob-ext {
+>>>>>> +                        filename = "ti-hsm/hsm-demo-firmware-j721s2-hs.bin";
+>>>>>> +                    };
+>>>>>> +                };
+>>>>>> +#endif
+>>>>>> +
+>>>>> Why do we have the hsm binaries pre-signed? Having a common binary like
+>>>>> the DM with signing using ti-secure might be a better option.
+>>>>
+>>>> Andrew can correct me if I am wrong,
+>>>> HSM is meant to run secure software stack and services like Authentication etc. It is a +1 to TIFS. To establish ROT, we need the HSM binary to be encrypted, and authenticated by TIFS first before it can do stuff by itself. DM is not a secure entity, so signing the image doesn't make sense for me.
+>>>>
+>>> I think Anshul is not suggesting that the HSM binary be unencrypted/unauthenticated.
+>>> Rather that the encrypting/signing be done here in binman like we do with TF-A/OP-TEE.
+>>> (which both are part trusted images to be loaded by TIFS).
+>>>
+>>> To that suggestion I agree, the customer will be doing the signing of this binary, right?
+>>> If so then since all other customer signing is done as part of binman, it makes sense
+>>> to also sign HSM firmware here too.
+>>>
+>>> Andrew
+>> Yeah, that is what I was going for. With that change it could be
+>> possible to also have a single binary for all platforms (gp, hs, hs-fs)
+>> in ti-linux-firmware?
+>>
+>> Also, why are we not adding an unsigned variant of the hsm binary in
+>> tispl.bin_unsigned?
+> 
+> 
+> What's the use case for that? I think we established that HSM won't be used unsigned. So it will just bloat the FIT and never be used.
+> 
 
---bnStMSMykRMUe4MJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We ship an unsigned HSM firmware for GP devices[0], and in patch [7/7] of this
+series you add support for loading that unsigned HSM firmware. Seems odd to
+then not ever package it here in binman and claim we will never use it?
 
-On Thu, May 08, 2025 at 03:16:41PM +0200, Wadim Egorov wrote:
-> Introduce USE_SPI_FLASH_SCRIPT Kconfig option to enable setting default
-> environment values for loading boot scripts from SPI flash. When enabled,
-> SPI_FLASH_SCRIPT_OFFSET and SPI_FLASH_SCRIPT_SIZE define the default
-> script_offset_f and script_size_f variables.
->=20
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  drivers/mtd/spi/Kconfig | 26 ++++++++++++++++++++++++++
->  include/env_default.h   |  4 ++++
->  2 files changed, 30 insertions(+)
->=20
-> diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
-> index ca60a425ba3..fc154ec89d7 100644
-> --- a/drivers/mtd/spi/Kconfig
-> +++ b/drivers/mtd/spi/Kconfig
-> @@ -89,6 +89,32 @@ config BOOTDEV_SPI_FLASH
-> =20
->  	  If unsure, say N
-> =20
-> +config USE_SPI_FLASH_SCRIPT
-> +	bool "Enable default SPI flash script parameters"
-> +	depends on BOOTDEV_SPI_FLASH
-> +	help
-> +	  Enable this option to provide default values for SPI flash script loa=
-ding.
-> +	  These values will be assigned to the 'script_offset_f' and 'script_si=
-ze_f'
-> +	  environment variables at boot time if not already defined in the envi=
-ronment.
-> +
-> +	  If unsure, say N.
-> +
-> +config SPI_FLASH_SCRIPT_OFFSET
-> +	hex "Offset for SPI flash script (script_offset_f)"
-> +	depends on USE_SPI_FLASH_SCRIPT
-> +	help
-> +	  This option sets the default value for the 'script_offset_f' environm=
-ent
-> +	  variable. It specifies the offset (in bytes) in SPI flash from which
-> +	  the boot script should be loaded.
-> +
-> +config SPI_FLASH_SCRIPT_SIZE
-> +	hex "Size of SPI flash script (script_size_f)"
-> +	depends on USE_SPI_FLASH_SCRIPT
-> +	help
-> +	  This option sets the default value for the 'script_size_f' environment
-> +	  variable. It specifies the number of bytes to read from SPI flash to
-> +	  load the boot script.
-> +
->  config SPI_FLASH_SFDP_SUPPORT
->  	bool "SFDP table parsing support for SPI NOR flashes"
->  	depends on !SPI_FLASH_BAR
-> diff --git a/include/env_default.h b/include/env_default.h
-> index c72cf123004..9f2f222519d 100644
-> --- a/include/env_default.h
-> +++ b/include/env_default.h
-> @@ -127,6 +127,10 @@ const char default_environment[] =3D {
->  #ifdef CONFIG_BOOTSCRIPT_DHCP
->  	"boot_script_dhcp=3D"	CONFIG_BOOTSCRIPT_DHCP	"\0"
->  #endif
-> +#ifdef USE_SPI_FLASH_SCRIPT
-> +	"script_offset_f=3D"	__stringify(CONFIG_SPI_FLASH_SCRIPT_OFFSET)"\0"
-> +	"script_size_f=3D"	__stringify(CONFIG_SPI_FLASH_SCRIPT_SIZE)"\0"
-> +#endif
+Andrew
 
-This should be CONFIG_... yes? Did that just get missed in uplifting
-this from, I assume, an internal tree?
-
---=20
-Tom
-
---bnStMSMykRMUe4MJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgczUoACgkQFHw5/5Y0
-tyx5Agv/YS+3/NepO9tLj5JNYx8fCKfI4Vl+GaHDcvlfpb7EN1SWHi+npsmaENUU
-er9UBA3Vkz+9Gf4+gxrTkXIyz4o6EES/s/3ZYfoDuM5joWjvjf/u/fozj/EAHJqv
-WpblX8T7G1+Oh8yL6Uj81kLvhsLfKbEY+UEivU5+/1mkTa68hySDbJHF5RPBUSp3
-l0NAVX7LmOcs+EuPaEiNKkGb3RAGDJe5fZbC7biRpAy8LIRe9Hixcx4Ypuilba9J
-r7Fs1yLIsC7J6IY8vUtvw2jFLoS1dLEYBZ1d8lPoVY69+b7g6OZ1nL8LNiIPMsU6
-8+WuXGuIMqarJvYsSITLsd7+2jJW2fepXhWxQ0FP28oiyVOjPr6adNNVSX3y0r3E
-WTvLzbKhdSF7TJdtXxnG3CLDkSo+VfQYQsss14GkrUeQG6g8jbq5nE/sjPMrJEqX
-hMF3LNvznntF9AkicWIyGtGxpeo5RiwmTpTvAk8C87BKGvPwvWoU4MDPvijDgj3V
-g6Ki86IC
-=4cCE
------END PGP SIGNATURE-----
-
---bnStMSMykRMUe4MJ--
+[0] https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/tree/ti-hsm?h=ti-linux-firmware
