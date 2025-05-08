@@ -4,56 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7596C3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 21:25:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F86DC3ABBE
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 21:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E228C8269F;
-	Thu,  8 May 2025 23:24:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=krotti42.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D71D8297E;
+	Thu,  8 May 2025 23:42:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=krotti42.com header.i=@krotti42.com header.b="BvB2wQoU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MeUjwgs6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48E0282AF4; Thu,  8 May 2025 23:24:49 +0200 (CEST)
-Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
- [109.224.244.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 995E88269F; Thu,  8 May 2025 23:42:28 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56078829E4
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 23:24:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AA008269F
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 23:42:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=krotti42.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=johannes@krotti42.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=krotti42.com;
- s=protonmail; t=1746739486; x=1746998686;
- bh=pBJZ32yxyZEIhYOvmfNMElhw/l2wtBUUbZnx08cweN0=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=BvB2wQoUbFP1UdUETZKx/NHUCpCx19LsJdjOwchzWApyfT6JOFXJAx6j+CNOC61If
- mEHeBCyS5Nf2m9KrVf24AEOJoftuy/I0EQH04hqJFb9KyDP/rNXqq2TTsVOItK6kF+
- tStI6dZHb2eY/QWJnhYJw/I+DyqlUd+UCgV2yMGVjlQ2eM98/6EilefIgr4UUm9+r3
- 2/wxlgZbJPySF7wCIqkLO+9TqGC7DpoitCAbVkHaI0nZn7sjsMtcspmkUIroFvbBXF
- 0vA8erPvnr+q6jIQNR3cceBzd0ClVhNCAiuVrZIrrv3Nm4+HXo6cWOWqUQHyAxc6Ad
- RO0QqezStVpKQ==
-Date: Thu, 08 May 2025 21:24:41 +0000
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72ecc30903cso840199a34.0
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 14:42:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746740545; x=1747345345; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HsWoopB6GHw9RRMcMYrdKhuCRiaTsP8SsHuK306WSOQ=;
+ b=MeUjwgs6CQbPsI8AQK+YE7OoYCNZ7/wfptVNhaDQUy0lHF8oqwYy/yInGR193A9SRQ
+ i9FKRAf013P0gE9aS+JUpf9SENeDMW26/9vWCrmbEamQx2gIdI8zsnG9ZJPAFS6+TFdh
+ ZQ/RbEHLBWmo55/cEaZZ7Grr1aOk+ePnjgUOA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746740545; x=1747345345;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HsWoopB6GHw9RRMcMYrdKhuCRiaTsP8SsHuK306WSOQ=;
+ b=p3+xIWhwI6YjSCYnCeT8WRCdqHYLd3Ib0b9Wq2rLQxhppr80UBvlr1IzE7TDk6lDsm
+ Q5wl9gTGBbWeRXM9HDX3+pADxXk1dPM2binJOVJm3h0czvXH/GJd0ftglJcmTlAt66uU
+ 5wHHNo5WxjPstUubHsdSZD8xrxjWH2SSoYC24YLx5mil/LSOda7VmDg+9UbD8vMzrf00
+ ZxoDZHzYX1COi4WIYsOxn9wCrYkUW8MW1CPeSf5GlAVavsz9JQ4+K0iU8QDnDwlRxjW1
+ +ZtqAzgZ3tfNIT3dn0kP+zVjit0ZxW70V/sgKiWQ1LXUbI5efUVREjhAsv4mYdvMvAuW
+ Updw==
+X-Gm-Message-State: AOJu0YzVzqO9Ywk6KWpTSQUhGYmhrYOGemwMDwiezajamipuzNXMyocG
+ dADtPAKWEZeZ2IGQ9GrZ71Fz9nsrfDVrjrjRAE8N1VFgUIfvuKc0mb5nuYqBlSJFWjlaqGpW+c7
+ p
+X-Gm-Gg: ASbGncsI401Gpiv7CsrQsZz5NOMSaX4+rVSVdv+CcVA8dLprrs6CP6n4DhPo8b6G3bl
+ LXB9KAJaEAiLFxIhSU5wHC3tXybSfQ2tywkGzvEQC7fWKN5xtAzCOmU4YPyI5iy9cZ4M7V6RRoG
+ YrNqOBB0gZLaV4V7GH2UOt8dy+W9xYpKvD8AxlIi3OPkQNpsOGjQXTQyQ9HgoGMztv47IHxXPUO
+ otanwYO51cBQa3SmfOC/pEYtclLaZqJQALqjTGVoU+R11cn6lL/XgYZ4XXhV1OOW4aopYxz+ZkW
+ IkMOQnIb5nCveD03uRdK+YKOyCYpUAjWmYnZQSukbBOJrj+EqeFCpGVTkP54VYjpwrF8+3HpPX5
+ TJie7
+X-Google-Smtp-Source: AGHT+IEcI2zfmoNwGCtFe/yeau+q6G+sn4FKymWPPP7ILXKw+mfe9CKf+jtWm2m1hmhpXVlMlzCLug==
+X-Received: by 2002:a05:6830:650e:b0:72b:8fd3:e2dc with SMTP id
+ 46e09a7af769-73226aaed96mr1262403a34.21.1746740545158; 
+ Thu, 08 May 2025 14:42:25 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-732264d439esm266167a34.30.2025.05.08.14.42.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 May 2025 14:42:24 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-From: Johannes Krottmayer <johannes@krotti42.com>
-Cc: Johannes Krottmayer <johannes@krotti42.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Subject: [PATCH 10/10] dts: upstream: arm: st: stm32h7-pinctrl: change pins
- for USART1
-Message-ID: <20250508212058.640483-11-johannes@krotti42.com>
-In-Reply-To: <611b339e-a9fe-4cc1-b2fc-617d844a86ac@krotti42.com>
-References: <611b339e-a9fe-4cc1-b2fc-617d844a86ac@krotti42.com>
-Feedback-ID: 88021767:user:proton
-X-Pm-Message-ID: 24566338b79a14d63a0c515445071cec9b41f2d4
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 0/3] doc: Document remaining test_b* tests
+Date: Thu,  8 May 2025 15:34:42 -0600
+Message-ID: <20250508214222.643020-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250507232500.527782-1-trini@konsulko.com>
+References: <20250507232500.527782-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,38 +96,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The pins for USART1 have must be changed to other values, to
-support the STM32H747 discovery board.
+Hey all,
 
-Signed-off-by: Johannes Krottmayer <johannes@krotti42.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
----
- dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+This short series is a follow-up to my last series. It could have been
+longer, but I think this is a good point to get some feedback on a few
+points.
 
-diff --git a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi b/dts/upstream/sr=
-c/arm/st/stm32h7-pinctrl.dtsi
-index 7f1d234e102..7d7c87aa2fe 100644
---- a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-+++ b/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-@@ -213,13 +213,13 @@
-=20
- =09usart1_pins: usart1-0 {
- =09=09pins1 {
--=09=09=09pinmux =3D <STM32_PINMUX('B', 14, AF4)>; /* USART1_TX */
-+=09=09=09pinmux =3D <STM32_PINMUX('A', 9, AF7)>; /* USART1_TX */
- =09=09=09bias-disable;
- =09=09=09drive-push-pull;
- =09=09=09slew-rate =3D <0>;
- =09=09};
- =09=09pins2 {
--=09=09=09pinmux =3D <STM32_PINMUX('B', 15, AF4)>; /* USART1_RX */
-+=09=09=09pinmux =3D <STM32_PINMUX('A', 10, AF7)>; /* USART1_RX */
- =09=09=09bias-disable;
- =09=09};
- =09};
---=20
-2.39.5
+As background, something I wondered about and the answer seems to be No
+is, can we automatically take things like:
+@pytest.mark.buildconfigspec('cmd_button')
+and get some nice output? Since we can't that limits the value,
+possibly, of generating some documentation.
 
+First, as this series shows, is there value in documenting tests which
+do not require additional configuration? We have some tests with no
+comments and some that are fully commented, but at the end of the day
+when trying to run these tests, pytest will already say helpful things
+like not being supported on a given platform, or not run because
+something isn't enabled in the build. Spelling that out in generated
+documentation would require duplication of work.
+
+Second, is there value in documenting arguments? Especially ones like
+"ubman" that are just required and always present?
+
+Third, should we document internal functions too, or just the tests? I
+would be inclined to say no unless they're expected to be re-used. The
+test_net functions to bring up the networking are an example that of
+reuse that should be documented for example.
+
+-- 
+Tom
 
