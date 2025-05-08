@@ -4,57 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0159C3ABC0
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 03:14:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D251FC3ABC0
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 03:43:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68C0A820EB;
-	Thu,  8 May 2025 05:14:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39AC98210D;
+	Thu,  8 May 2025 05:43:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="UpPv/cQW";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="E6WicNE9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12D1B8211F; Thu,  8 May 2025 05:14:57 +0200 (CEST)
-Received: from mail-m15599.qiye.163.com (mail-m15599.qiye.163.com
- [101.71.155.99])
+ id 10D468211F; Thu,  8 May 2025 05:43:14 +0200 (CEST)
+Received: from mail-m10199.netease.com (mail-m10199.netease.com
+ [154.81.10.199])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 105CD81FAB
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 05:14:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A13D581FAB
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 05:43:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 14523fdea;
- Thu, 8 May 2025 11:14:49 +0800 (GMT+08:00)
-Message-ID: <2cc81794-bcff-4954-b1f9-540a72f7cb24@rock-chips.com>
-Date: Thu, 8 May 2025 11:14:48 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 14534fcc7;
+ Thu, 8 May 2025 11:43:05 +0800 (GMT+08:00)
+Message-ID: <a67949b4-227c-49e1-92d8-ef18f8bd0b42@rock-chips.com>
+Date: Thu, 8 May 2025 11:43:01 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] board: rockchip: add Xunlong Orange Pi 5 Max
-To: Ilya Katsnelson <me@0upti.me>, u-boot@lists.denx.de
-Cc: jonas@kwiboo.se
-References: <20250423-add-opi5-max-v4-1-6ca8dfddb1f0@0upti.me>
+Subject: Re: [PATCH 0/7] rockchip: Add boot from USB OTG port
+To: Arnaud Patard <arnaud.patard@collabora.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, jonas@kwiboo.se,
+ quentin.schulz@cherry.de, jagan@amarulasolutions.com, dsimic@manjaro.org,
+ pbrobinson@gmail.com, liujianfeng1994@gmail.com, macromorgan@hotmail.com,
+ michal.simek@amd.com
+References: <20250211053340.92919-1-naoki@radxa.com>
+ <40162793-5cf1-4e29-8621-b5863e8cdeae@rock-chips.com>
+ <f7d10c18af03f3879a765f190614dbb17d4b300a.camel@collabora.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250423-add-opi5-max-v4-1-6ca8dfddb1f0@0upti.me>
+In-Reply-To: <f7d10c18af03f3879a765f190614dbb17d4b300a.camel@collabora.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHx5PVh1LGEhJGksdTB9JGVYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-X-HM-Tid: 0a96ade37fde03afkunm14523fdea
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHx8dVhpIGEtKTkpKHUhMGFYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lIQktDVUpLS1
+ VKQlkG
+X-HM-Tid: 0a96adfd5d9203afkunm14534fcc7
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Oio6ERw5PDJWCQhLTxQ5DTEV
- QxEwCzJVSlVKTE9NTUxPS0JLQktCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUxPS0o3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Phg6Cio4CjIMTggUNT8dHgkz
+ CVEKCUpVSlVKTE9NTUxOTENNQkpPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhPT0I3Bg++
 DKIM-Signature: a=rsa-sha256;
- b=UpPv/cQWHxJCa6fAeY4hr0cBZsQgwE6HdPW5NqLtIDM/6Mi9Wyhlaa/WDy3gtsZlI8zcSDzq9+nat/g9vT8WRT/u6NaVm9w6VsN6n6TwIUviwjvHZnjvVXDOcuzdjwmHU+7kRCHWAPxQ7Gw1/s0o0/pha1Rikq2q/Z7ZX1iMIJo=;
+ b=E6WicNE9ZU7/Ky/GdQzZJgiTiUxNqe8frxDVz1oHLoc4HshZirN9nGgUouApYY9IqiVvHaAUcImrpaW0ycYgI9AqFrSszva/ij68hjZMpuGDtz9Is9vXZ69YhcxhCb51cRgZtPsm5ociTKaXrEhJIrsc8g+5+dJWqCepzDQ6J+k=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=LgeEh7ZX+ZnxD/CRlJElyAeo95OKOzuGb7pEuYHcnec=;
+ bh=gYhz5zaVoQTehVLw+snfQm+krKCdR3lcvWiZe6oSCXI=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,204 +78,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Arnaud,
 
-On 2025/4/23 23:36, Ilya Katsnelson wrote:
-> The 5 Max is another board in the Orange Pi 5 family.
+On 2025/5/7 23:31, Arnaud Patard wrote:
+> Hi,
 >
-> It's overall similar to the 5 Plus, but in a smaller form factor,
-> which leads to some I/O being reshuffled, but nothing relevant
-> to u-boot.
->
-> So, just reuse the config for the 5 Plus and adjust the DT names.
->
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-> Signed-off-by: Ilya Katsnelson <me@0upti.me>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> On Tue, 2025-05-06 at 15:53 +0800, Kever Yang wrote:
+>> Hi Naoki,
+>>
+>> On 2025/2/11 13:33, FUKAUMI Naoki wrote:
+>>> This patch series adds the ability to boot from the USB OTG port to
+>>> the RK3588, RK3568, RK3566, RK3399, RK3328, and RK3308.
+>>>
+>>> Use rkflashtool[1] or rkusbboot[2]
+>> Does these two tool have the same functionality? I don't know the
+>> second
+>> one :(
+>>
+>> And I know there is another tool named rkdeveloptool from rockchip.
+>>
+>>>    to download TPL and SPL from
+>>> MASKROM mode, and dfu-util to download U-Boot from DFU mode.
+>> What's the main target for this patchset, boot from usb with ramboot
+>> support and without any eMMC/SD/SPI driver?
+>>
+> I can't talk for Naoki, but my use case is to test easily u-boot on my
+> rockchip platforms without having to flash u-boot or to have some
+> storage.
 
-Thanks,
+Yes, I agree the usb boot+RAM boot can help u-boot developers.
+
+But this function can be done directly in BootRom mode with rockusb 
+protocol;
+
+or add support for it in U-Boot Proper gadget(rockusb or DFU).
+
+>
+>> I would prefer to keep using one tool instead of two or more tools,
+>> so I
+>> don't think
+>>
+>> enable DFU in SPL is a good idea, using rockusb in SPL is better
+>> here.
+> To test u-boot, I'd like to use snagflash/snagboot as it's not rockchip
+> specific.
+
+Two more tools other than rkdeveloptool/rkflashtool/rkusbtool/rockusb :(
+
+
+>   So, this means adding support for maskrom (which I've already
+> written) and rockusb protocols to it. With DFU in SPL support in u-
+> boot, this would mean nothing to do as the support for DFU is already
+> in snagboot/snagflash.
+
+I understand your requirement, but you didn't say why you need SPL DFU.
+
+There are two modes for usb download in rockchip platform:
+
+- Maskrom mode (in bootRom), may have speed limit due to bootRom driver 
+setting,
+
+     for download bootloader including U-Boot which size is not big;
+
+- Loader mode(in U-Boot), all the speed including CPU, eMMC has promote 
+to performance mode,
+
+     for download all the big size image including system and userdata.
+
+Of cause we can add any function to the SPL, and it's simple because it 
+already in U-Boot,
+
+but do we really need it for all the user and product?
+
+We should keep the SPL simple and fast, and get into U-Boot proper 
+quickly with full function.
+
+
+Thank,
 - Kever
-> ---
-> The 5 Max is another board in the Orange Pi 5 family.
 >
-> It's overall similar to the 5 Plus, but in a smaller form factor,
-> which leads to some I/O being reshuffled, but nothing relevant
-> to u-boot.
+> Arnaud
 >
-> So, just reuse the config for the 5 Plus and adjust the DT names.
-> ---
-> Changes in v4:
-> - fixed MAINTAINERS ordering
-> - Link to v3: https://lore.kernel.org/r/20250414-add-opi5-max-v3-1-50dc6808a115@0upti.me/
 >
-> Changes in v3:
-> - fixed silly copy/paste error
-> - Link to v2: https://lore.kernel.org/r/20250412-add-opi5-max-v2-1-585197588511@0upti.me
->
-> Changes in v2:
-> - fixed pinctrl definition for the flash
-> - added docs and MAINTAINERS entries
-> - fixed signoff line to use my real name
-> - Link to v1: https://lore.kernel.org/r/20250405-add-opi5-max-v1-1-e02686fc03b6@0upti.me
-> ---
->   arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi | 20 ++++++
->   board/rockchip/evb_rk3588/MAINTAINERS          |  6 ++
->   configs/orangepi-5-max-rk3588_defconfig        | 89 ++++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst                |  1 +
->   4 files changed, 116 insertions(+)
->
-> diff --git a/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..afd33dd3248a92a721c2f5a6789f395a5b577ae5
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-> @@ -0,0 +1,20 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588-u-boot.dtsi"
-> +
-> +&fspim2_pins {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> +
-> +&sfc {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
-> +};
-> diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-> index a858ab163f362f4fc0dd578830fe84b20d9ca429..1232f05a387ca54c38cc54f88a510da95a12047d 100644
-> --- a/board/rockchip/evb_rk3588/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3588/MAINTAINERS
-> @@ -36,6 +36,12 @@ F:	configs/orangepi-5-rk3588s_defconfig
->   F:	arch/arm/dts/rk3588s-orangepi-5.dts
->   F:	arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi
->   
-> +ORANGEPI-5-MAX-RK3588
-> +M:	Ilya Katsnelson <me@0upti.me>
-> +S:	Maintained
-> +F:	configs/orangepi-5-max-rk3588_defconfig
-> +F:	arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-> +
->   ORANGEPI-5-PLUS-RK3588
->   M:	Jonas Karlman <jonas@kwiboo.se>
->   S:	Maintained
-> diff --git a/configs/orangepi-5-max-rk3588_defconfig b/configs/orangepi-5-max-rk3588_defconfig
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..a655dfe2d64168b2d6a3b400abd4c03d9d4bc402
-> --- /dev/null
-> +++ b/configs/orangepi-5-max-rk3588_defconfig
-> @@ -0,0 +1,89 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-max"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_EVB_RK3588=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_SF_DEFAULT_BUS=5
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-max.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_DWC_AHCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_XMC=y
-> +CONFIG_PHYLIB=y
-> +CONFIG_RTL8169=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 1407080f1f4fd226b80e34689a34c88f3c37150a..00d9587e9880937125f7ace229740f10f2c959c4 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -149,6 +149,7 @@ List of mainline supported Rockchip boards:
->        - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
->        - Turing Machines RK1 (turing-rk1-rk3588)
->        - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
-> +     - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
->        - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
->        - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
->        - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
->
-> ---
-> base-commit: f892a7f397a66d8d09f418d1e0e06dfb48bac27d
-> change-id: 20250423-add-opi5-max-f5696a7c42cf
->
-> Best regards,
