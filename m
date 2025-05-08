@@ -4,88 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7191EC3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 15:35:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC3B6C3ABC0
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 15:49:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8177828BC;
-	Thu,  8 May 2025 17:35:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F0802828A2;
+	Thu,  8 May 2025 17:49:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C6B6Yjd2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GORiLOS2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F581828A2; Thu,  8 May 2025 17:35:11 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 81E94828BC; Thu,  8 May 2025 17:49:14 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E2C982977
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 17:35:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 796E8822D7
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 17:49:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72b0626c785so975657a34.2
- for <u-boot@lists.denx.de>; Thu, 08 May 2025 08:35:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43edecbfb46so8961275e9.0
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 08:49:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746718506; x=1747323306; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=I9OKMAVTQxVTbvp2Y2Yp6dXVi3AA4igNQSIiK3CJGFI=;
- b=C6B6Yjd2Cxai4LfQaq/U+RHudyr7oZ5DiYE3Nsn2yeHd+PEmzMB5PHj12HZ/2pC3vk
- Uof1yriiRJcOJbuaimZCfs3a67spUq2Ys7PEnC/5xmX5iQmAc1/Q3Eg1Im0Zhx0Z+cKn
- befFjXMhANsAg3qKFKKU7k4hEM5yZ9h08EThA=
+ d=linaro.org; s=google; t=1746719352; x=1747324152; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=wuPpFsF8oelPREeH19XbSFdMzU8lMtsYkFob+5FNK2E=;
+ b=GORiLOS2FniqyKn0hMAv9Jl11d00mxkVGFvUb3RM8BgdjEccTK0ML/QilziSpO+8+S
+ q2PsYpR00IUJCQpnxNBe+Am+ZTSkIutbbxsmbqAsJmvPMGk1Vy5XVwk5d3InUuWUNFip
+ SY4mBm8rILTba5OAXmQ0TnKWbp8jJ17cTJcpArPwI73P0Mm53rHOXOmoYbpRaPiKZnN/
+ H8mC7BIvGJ9EsMnptzVtZ+JN8Lkc/vk6S85nzNCzegpOTTrpll1wdTQ6PeKBJQmGeZhD
+ YrzcouzLNa9kdTdBH2mFsCuScjQeXH2C8w9yLqJykB+z5YYGWhBRzs9WfZ1+ukQJLJis
+ 7/Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746718506; x=1747323306;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=I9OKMAVTQxVTbvp2Y2Yp6dXVi3AA4igNQSIiK3CJGFI=;
- b=iAm33EfR2R9bHaIUvdj3SBacc5kEHGSAqzf9SLI2rjfgez56nXjCS51vBdWFsAa5ju
- TgpNRXsw5qpZJMZ1QMs98LNXCg7XXAEUaXMD/JY6t4zcO0Gz4gxyVuI36wYXd5I3Jh/O
- PUsQEx8bJXnPwLECWLbKAllssPjC/OMEpdB3vAyLhW7U6B/Tb7SEojWccu7u0irWqoCv
- HQspz/S3kicH/2M4bsJKhrtufmNGo+yac67UhcKiVgoNVfGjJ8M2gA7vJHgjzey8Gtnj
- 5sDX+RZKKeCrQuPsjRsXmRZwCIRAz1+ruDptzYiRmsqi/A/oCk5W+qY5gy64VEsTOxq8
- 55Yw==
-X-Gm-Message-State: AOJu0YzE9DctLYBMYMkmPuQuH93NeYcrXo8DKs/YaaZj5YUIYDekVf27
- 5omRmH6y1swsOYOlGEmId4D4HpkR7zrgdVjs9/5G0kXrO5y9qBedR0OM+Hi7scs=
-X-Gm-Gg: ASbGnct0NfEa1sJ2BTY/4tpko6fidjkzTTX5/y/YExZ1s6xo5+NBYkNa0HXAnoqF+6G
- 8DxRN2HZwOxEixjMLbHRUIXFGxKscpTxQoAEqWDLlKIKl+PGx01AYGXOupTIEnEE+DyPNmuGEo5
- BO1xFXsGHU5wFFmlVE1gp1Gmmenwbc1CcoidC+fHHSx45VHvCgRL5md9Gorl8jayjhU7r2wlbrn
- KZBOEKL3D+qsnSnOZci0l5MjFcnNgw7/mnQxMi4FtZQMfPSY9CL0bu1ZR/WjQrT+4l0cuGmRo/4
- FqNEYdQ2ClHxIHPmEDqdeJ4tN2GgqNDZUJRNUxMevJnMzbkqvmEE+xe8D+IO86CBDTmO2x4cRR6
- kXQ==
-X-Google-Smtp-Source: AGHT+IFgJi/XS/y37hxStVvWwfuzWsUTl3y6P8W2stagNGUjoheNrrFt0VIByLyj4iyqoLgn8EAnBw==
-X-Received: by 2002:a05:6830:d81:b0:72b:992b:e50 with SMTP id
- 46e09a7af769-73226acf3b0mr79610a34.21.1746718506125; 
- Thu, 08 May 2025 08:35:06 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7322647ef6dsm52373a34.1.2025.05.08.08.35.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 May 2025 08:35:05 -0700 (PDT)
-Date: Thu, 8 May 2025 09:35:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de,
- jagan@amarulasolutions.com, vigneshr@ti.com,
- tudor.ambarus@linaro.org, joe.hershberger@ni.com, sjg@chromium.org,
- d.schultz@phytec.de
-Subject: Re: [PATCH 2/2] mtd: bootdev: Add Kconfig option for defining script
- parameters
-Message-ID: <20250508153503.GB603748@bill-the-cat>
-References: <20250508131641.2561876-1-w.egorov@phytec.de>
- <20250508131641.2561876-3-w.egorov@phytec.de>
- <20250508152710.GA603748@bill-the-cat>
- <19faf506-47bf-4c13-837b-5ea286861685@phytec.de>
+ d=1e100.net; s=20230601; t=1746719352; x=1747324152;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=wuPpFsF8oelPREeH19XbSFdMzU8lMtsYkFob+5FNK2E=;
+ b=hCgibLWd8LYrfgbinQDLGaPcYwsLk6m7KsSfCdUCYGpU6J0ikEN97EFewTd5dyu6R+
+ 74Phx7qADPyKEJ6CQrBOC9z0qChGtLKbnp3+/z/T1804kqlHSL4V+hVHu4/nA8i9O4RF
+ nl+UFHifPAi700OQsFY5i4mLqVvOLK3TMdRq1EFgvaDHMXSv+bfxxsKtb/fUsn9WsYrx
+ 01RSErTyjMvWw8nM7LTzKKa2/YpoQAMIf50D3/xwlqTyhKkwAbJOFbtJmJnZgLzpGm4c
+ q6yaUM9NaGFs2TZQrw8+TON7rL7ygCBE4yTgy1qdPhjWB8obUk2+1z1RMVMStfzZjToW
+ lxfA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSjUOJdulI2/HBq7WnDVDfiC3a326QQioBA6BDaiTUr6zvNFkEqncaKOlV6PaX6uWOgNqX2h8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFyKhumm50EuyyaPeCVL4UJnAkGUudPlK8lbI2MqzqZF1oID1L
+ VrkPMGMHI6/48OksdB4nEHnNlWgf1MKRKAhIKkP6mcmZh0o8PR0N+wNjcR0qoTU=
+X-Gm-Gg: ASbGncsUF9AhinU49NYmjDArkZMSFg88XVg5NEo2/l3cLYrGcIpxeIFTF+NPUe0PEHb
+ x7oPfDK5/RETshOgTYq+8jv8pBGpOo2qjBp/MuvFQkDsIgu9s85TV8jDrusX06qHjMyTJvHM+ie
+ 7v0Yvl+WpMGnaPKkCEKmF01xp9FNuiwJrDmEwJ8ANrSslqbWXjSiMQVmuCfq/ETqaJ+DmzldCKZ
+ NFZVcUZtn50OGBTax2LCvGOucr6J6VcAsT0nnQEbuuuGLivJ7EewcS6sKQHzzLlHiaeKeckt1Q/
+ cDLnqNumR4/evrwSex3HsfbXoaUxa8cHYrrkaoWqc+f5n9+S+ZIH6SkWBayLWGHzY6c/D1ehFYx
+ Ok3H36q94J/zY
+X-Google-Smtp-Source: AGHT+IG+91ADPSckxnyX/Gp9qm+Ip/kdhTywunyZsUJpqCMru6B7h0hOFp7A3FIzDIHzanmTtRKHlw==
+X-Received: by 2002:a05:600c:1c03:b0:43c:f85d:1245 with SMTP id
+ 5b1f17b1804b1-441d44c7c41mr75353305e9.17.1746719351946; 
+ Thu, 08 May 2025 08:49:11 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:e17:1e6:6220:c42f?
+ ([2a01:e0a:3d9:2080:e17:1e6:6220:c42f])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-442d1719aa4sm31696785e9.32.2025.05.08.08.49.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 May 2025 08:49:11 -0700 (PDT)
+Message-ID: <ac8bff41-e3fb-44c4-9ff6-93b9a6e61072@linaro.org>
+Date: Thu, 8 May 2025 17:49:09 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EWYJ23xgIsp+frPu"
-Content-Disposition: inline
-In-Reply-To: <19faf506-47bf-4c13-837b-5ea286861685@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH v1 1/1] gpio: msm_gpio: return correct value for gpio read
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ casey.connolly@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250508113646.1462518-1-aswin.murugan@oss.qualcomm.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250508113646.1462518-1-aswin.murugan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,119 +124,35 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 08/05/2025 13:36, Aswin Murugan wrote:
+> In the current implementation, the GPIO read operation considers
+> both the input and outbut bits (bits 0 and 1). It should only consider
+> the state of input bit, i.e bit 0. To address this, mask input bit
+> alone and read it.
+> 
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> ---
+>   drivers/gpio/msm_gpio.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+> index 6783fc756f4..7de332c66ae 100644
+> --- a/drivers/gpio/msm_gpio.c
+> +++ b/drivers/gpio/msm_gpio.c
+> @@ -202,7 +202,7 @@ static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
+>   	if (qcom_is_special_pin(priv->pin_data, gpio))
+>   		return msm_gpio_get_value_special(priv, gpio);
+>   
+> -	return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) >> GPIO_IN);
+> +	return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) & BIT(GPIO_IN));
+>   }
+>   
+>   static int msm_gpio_get_function_special(struct msm_gpio_bank *priv,
 
---EWYJ23xgIsp+frPu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, May 08, 2025 at 06:31:52PM +0300, Wadim Egorov wrote:
-> Am 08.05.25 um 18:27 schrieb Tom Rini:
-> > On Thu, May 08, 2025 at 03:16:41PM +0200, Wadim Egorov wrote:
-> > > Introduce USE_SPI_FLASH_SCRIPT Kconfig option to enable setting defau=
-lt
-> > > environment values for loading boot scripts from SPI flash. When enab=
-led,
-> > > SPI_FLASH_SCRIPT_OFFSET and SPI_FLASH_SCRIPT_SIZE define the default
-> > > script_offset_f and script_size_f variables.
-> > >=20
-> > > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> > > ---
-> > >   drivers/mtd/spi/Kconfig | 26 ++++++++++++++++++++++++++
-> > >   include/env_default.h   |  4 ++++
-> > >   2 files changed, 30 insertions(+)
-> > >=20
-> > > diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
-> > > index ca60a425ba3..fc154ec89d7 100644
-> > > --- a/drivers/mtd/spi/Kconfig
-> > > +++ b/drivers/mtd/spi/Kconfig
-> > > @@ -89,6 +89,32 @@ config BOOTDEV_SPI_FLASH
-> > >   	  If unsure, say N
-> > > +config USE_SPI_FLASH_SCRIPT
-> > > +	bool "Enable default SPI flash script parameters"
-> > > +	depends on BOOTDEV_SPI_FLASH
-> > > +	help
-> > > +	  Enable this option to provide default values for SPI flash script=
- loading.
-> > > +	  These values will be assigned to the 'script_offset_f' and 'scrip=
-t_size_f'
-> > > +	  environment variables at boot time if not already defined in the =
-environment.
-> > > +
-> > > +	  If unsure, say N.
-> > > +
-> > > +config SPI_FLASH_SCRIPT_OFFSET
-> > > +	hex "Offset for SPI flash script (script_offset_f)"
-> > > +	depends on USE_SPI_FLASH_SCRIPT
-> > > +	help
-> > > +	  This option sets the default value for the 'script_offset_f' envi=
-ronment
-> > > +	  variable. It specifies the offset (in bytes) in SPI flash from wh=
-ich
-> > > +	  the boot script should be loaded.
-> > > +
-> > > +config SPI_FLASH_SCRIPT_SIZE
-> > > +	hex "Size of SPI flash script (script_size_f)"
-> > > +	depends on USE_SPI_FLASH_SCRIPT
-> > > +	help
-> > > +	  This option sets the default value for the 'script_size_f' enviro=
-nment
-> > > +	  variable. It specifies the number of bytes to read from SPI flash=
- to
-> > > +	  load the boot script.
-> > > +
-> > >   config SPI_FLASH_SFDP_SUPPORT
-> > >   	bool "SFDP table parsing support for SPI NOR flashes"
-> > >   	depends on !SPI_FLASH_BAR
-> > > diff --git a/include/env_default.h b/include/env_default.h
-> > > index c72cf123004..9f2f222519d 100644
-> > > --- a/include/env_default.h
-> > > +++ b/include/env_default.h
-> > > @@ -127,6 +127,10 @@ const char default_environment[] =3D {
-> > >   #ifdef CONFIG_BOOTSCRIPT_DHCP
-> > >   	"boot_script_dhcp=3D"	CONFIG_BOOTSCRIPT_DHCP	"\0"
-> > >   #endif
-> > > +#ifdef USE_SPI_FLASH_SCRIPT
-> > > +	"script_offset_f=3D"	__stringify(CONFIG_SPI_FLASH_SCRIPT_OFFSET)"\0"
-> > > +	"script_size_f=3D"	__stringify(CONFIG_SPI_FLASH_SCRIPT_SIZE)"\0"
-> > > +#endif
-> >=20
-> > This should be CONFIG_... yes? Did that just get missed in uplifting
-> > this from, I assume, an internal tree?
-> >=20
->=20
-> I will double check, test and resend a v2.
->=20
-> But is the general idea for defaulting standard boot environment variables
-> in env_default.h okay?
-
-That I am still thinking on. But I did want to be sure you're testing
-the whole path out elsewhere and this was just a typo :)
-
---=20
-Tom
-
---EWYJ23xgIsp+frPu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgczycACgkQFHw5/5Y0
-tyyymgwAsuOZQ0KYtMwZFWM86hnVd0UXpcK8OYuO06PfG4tB/MYyZOgK1QUZS5QT
-oQ8+WUCv3EZCZIhfcs7IuvoECq4mfWv748N1fbOxGvZZdFMINKwKenblxoWs5U3o
-tWJqxMOZQ0Ob/VkRBkNQKE6valy8lmwTVd4LYxUHYWLn2XlbROFX4HUE1HsRerXo
-BMWeh5EZzlobljpzlsRtMohnNfUAqMysMqX3uIp5K0NH3FEwzTzATr91MGNhP53R
-RPZQmZxoN6d/GCeBQfeE1PuFoibnLK7Zpeb5nLhUKXRv/BelkRdCo7cdEJSSVv/z
-DU6oUK13IS0gbgOYwx7G57zNf1HQ1btIfm6PxdMY94fmO0jIwJsAoOuL5g0LJwq2
-2jMlQxWlQ0ZIzxnvIOVB+6LNraFMzF/NFR/4yn2MmvOrUlL6jBu6noMlC/Rt01cN
-KRnmt8k0F6C44G5hC4hXf8414g+LMFzIdyg8kdLV6oBoO1nu4VH5icNde1uXGq1s
-NVVBpTi7
-=5AF2
------END PGP SIGNATURE-----
-
---EWYJ23xgIsp+frPu--
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
