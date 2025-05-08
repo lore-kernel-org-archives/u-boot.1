@@ -4,55 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2736C3ABC6
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 16:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7C5C3ABC0
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 16:21:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD491828A2;
-	Thu,  8 May 2025 18:19:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=lexina.in
+	by phobos.denx.de (Postfix) with ESMTP id 58968828A2;
+	Thu,  8 May 2025 18:21:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=lexina.in header.i=@lexina.in header.b="Q2OCt9Zh";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="JGumOdy5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A419828BC; Thu,  8 May 2025 18:19:17 +0200 (CEST)
-Received: from mx.adeep.su (mx.adeep.su [185.250.0.168])
+ id A3865828BC; Thu,  8 May 2025 18:21:56 +0200 (CEST)
+Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
+ [91.218.175.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C795E822D7
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 18:19:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=lexina.in
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=adeep@lexina.in
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 38E671A07C8; Thu,  8 May 2025 19:18:59 +0300 (MSK)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lexina.in; s=dkim;
- t=1746721149; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=Pj02wZoYyvks9dwufqjVpolSrUoYci36iRZm5QsYDyI=;
- b=Q2OCt9Zhdddpp4pAde2ov6Py049aLOmXs+X1LKpE+KunFKHkJyMDKlhiFNCwhE5N5HoPJa
- iUgD4jcrE1hb23Y0mtUUFXKDjN29rEisah7VvD+/SBp5ymhEUqG/FXuxMwHD2ghSbDCHXL
- koyBOXVBpVO68xW6kmPlWbQOo9OyPnzIKfN4RtdXsiziJb3pdd0SLqAnIQ4nn4IJmemDCw
- X0zaaN3hv/IggchSSdvKlhQxeFnQrJkp71Ud90CABeNkC+Me+lsUQzw6lRpzOq/95RRgS2
- hjmZDeiRURyCy4UFIMfayN8IQQEeUfRakmeQM/W/5/4vjm/I/rCtxCyi1wy09g==
-Message-ID: <4e993fa2-b882-4f76-a3f6-4f8beb8821df@lexina.in>
-Date: Thu, 8 May 2025 19:18:54 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/22] amlogic: Include env.h to permit reading the
- environment
-To: u-boot-amlogic@groups.io, sjg@chromium.org,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>
-References: <20250501010456.3930701-1-sjg@chromium.org>
- <20250501010456.3930701-13-sjg@chromium.org>
-Content-Language: ru
-From: Viacheslav <adeep@lexina.in>
-In-Reply-To: <20250501010456.3930701-13-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+ by phobos.denx.de (Postfix) with ESMTPS id 8625C822D7
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 18:21:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=postmarketos.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+Mime-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1746721313;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HF3qtxM4GkzT4fveHtK2OKQDWeTf7B0vIqVn8VNER5A=;
+ b=JGumOdy5Jtv+kWoz7HuxgXYP8LmUdY8CCioAcz7CKXSlPEem1Ium//58jz77RwsZoaesS6
+ T6Mo8tTiK0MVH/Hnalc7XrrXJyi33p8nHK3fDO4foDRahyi+KUYPNxjpAosfe0qUQnusTR
+ D/m6AXdmMHUcGIfAvun52sDsD9yLeghFWm/jo/g3CFHphwJy6U7ClmGJ6tfa9xrouKGnBX
+ bz+n3A95mvzcyhg235MNh38dfWs4ypRLe53WNyT0uboi0+z6fMmBDkmzA92AiNrgDt4vXt
+ B2tU2UbvI3Gu4aNRVfk5RC4rMF+f88OAnAzgKm3ukx8cbmdkyinYfRAPbfl/tA==
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 08 May 2025 16:21:20 +0000
+Message-Id: <D9QX0MRWSYW6.3ELRB73BS6PRT@postmarketos.org>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: "Ferass El Hafidi" <funderscore@postmarketos.org>
+Cc: <u-boot@lists.denx.de>, "u-boot-amlogic@groups.io"
+ <u-boot-amlogic@groups.io>, "linux-amlogic@lists.infradead.org"
+ <linux-amlogic@lists.infradead.org>
+To: "Wayne Schroeder" <raz@chewies.net>, "Neil Armstrong"
+ <neil.armstrong@linaro.org>
+Subject: Re: Odroid n2+ usb broken on reboot
+References: <CAEUiLubXaPGZsE6y_X6mBTD1ZK-2w82fbRD5z8+MKvDZtZKOtA@mail.gmail.com>
+ <f073dad7-337e-499a-8cb5-9dae0842de17@linaro.org>
+ <CAEUiLuYBVyLm4HgJG88r1J8RcUu38uEVPbV5c+-ArqjU4aUOAA@mail.gmail.com>
+ <3783aef0-a7a0-489f-add0-21e1fc2bfad1@linaro.org>
+ <CAEUiLubVazb4rgfBd-r-5AtyfBVaMFmy89OO_UZB97FM43if7w@mail.gmail.com>
+In-Reply-To: <CAEUiLubVazb4rgfBd-r-5AtyfBVaMFmy89OO_UZB97FM43if7w@mail.gmail.com>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,31 +75,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed May 7, 2025 at 1:03 PM UTC, Wayne Schroeder wrote:
+> It's hard for me to quantify if usb works in u-boot as I'm not loading
+> off of any usb storage devices.  It certainly never lets me use the
+> keyboard to abort auto boot, and never has.  On reboot, to reliably
 
-
-01/05/2025 04.04, Simon Glass via groups.io wrote:
-> This file reads from the environment but does not include the correct
-> header. Update it.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v1)
-> 
->   board/amlogic/jethub-j100/jethub-j100.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/board/amlogic/jethub-j100/jethub-j100.c b/board/amlogic/jethub-j100/jethub-j100.c
-> index b770a1f8c53..9e87fb9f9d7 100644
-> --- a/board/amlogic/jethub-j100/jethub-j100.c
-> +++ b/board/amlogic/jethub-j100/jethub-j100.c
-> @@ -5,6 +5,7 @@
->    */
->   
->   #include <dm.h>
-> +#include <env.h>
->   #include <init.h>
->   #include <net.h>
->   #include <asm/io.h>
-
-Reviewed-by: Viacheslav Bocharov <adeep@lexina.in>
+You can send bytes via UART to abort boot, if you happen to have a UART
+adapter around.
