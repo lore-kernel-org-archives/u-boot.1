@@ -4,60 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 911BEC3ABC0
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 02:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67491C3ABC3
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 02:44:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E21AD8269F;
-	Thu,  8 May 2025 04:27:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C19AA820EB;
+	Thu,  8 May 2025 04:44:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="bBiuBNMM";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="U7V8p10Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1214828BC; Thu,  8 May 2025 04:27:25 +0200 (CEST)
-Received: from mail-m15571.qiye.163.com (mail-m15571.qiye.163.com
- [101.71.155.71])
+ id 4BEA98211F; Thu,  8 May 2025 04:44:33 +0200 (CEST)
+Received: from mail-m3288.qiye.163.com (mail-m3288.qiye.163.com
+ [220.197.32.88])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04BB681FAB
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 04:27:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF48B81FAB
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 04:44:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.223] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 145060b1e;
- Thu, 8 May 2025 10:27:18 +0800 (GMT+08:00)
-Message-ID: <771c1ab8-85bd-4527-be80-7501157dc2da@rock-chips.com>
-Date: Thu, 8 May 2025 10:27:18 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 14511c21e;
+ Thu, 8 May 2025 10:44:24 +0800 (GMT+08:00)
+Message-ID: <cbc27e24-5322-4742-bf70-d8ff83c66862@rock-chips.com>
+Date: Thu, 8 May 2025 10:44:23 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] board: rockchip: Add ArmSoM Sige5
+Subject: Re: [PATCH v2 1/4] rockchip: Move TEXT_BASE to 8 MiB offset from
+ start of DRAM
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Heiko Stuebner <heiko@sntech.de>,
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, u-boot@lists.denx.de
-References: <20250422211216.3727559-1-jonas@kwiboo.se>
- <20250422211216.3727559-5-jonas@kwiboo.se>
+Cc: Arnaud Patard <arnaud.patard@collabora.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
+ u-boot@lists.denx.de
+References: <20250405153832.1427549-1-jonas@kwiboo.se>
+ <20250405153832.1427549-2-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250422211216.3727559-5-jonas@kwiboo.se>
+In-Reply-To: <20250405153832.1427549-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhofGFZITUxLSkwdHh4dTx1WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh5OQ1ZDS0gZTx0aT09KSk9WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a96adb7fde203afkunm145060b1e
+X-HM-Tid: 0a96adc7a45c03afkunm14511c21e
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mgg6GAw5AjIDLwgMLDoPLyoT
- DyMKC0lVSlVKTE9NTUxKSUhCQ0tLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSktDNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nio6Ehw6EjIMNwgMSgIeNQg9
+ GUIwCRlVSlVKTE9NTUxJSU1OT0tJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPS0pPNwY+
 DKIM-Signature: a=rsa-sha256;
- b=bBiuBNMMerVIV6e3YwO6vNTMYH7wWOqXdhylrdwfsvjuICF0g5kiYFOSwXZP9WGlH3Ug2C+A1dG27Fex98/QdTYrisgjq451T3pNleNmQ5cafrlJS/kcsSOjWfCnK3uuXaDL41EvPIb+xtLgOTMb2qzOrbB9EZuAQnTDTDpGw98=;
+ b=U7V8p10Z6qlI+ZYlRtbiMvSpRujxlmY1R+7qsSMY+saFoU1asKDU9s+2Syqiv2U6e3yLoQAbHDjcL2DlUAIQIFLVTX2YJi+kS2Mj7SVwCPkr/yxFw740iVYlPtG2u9dMNid/eyj2LkzE6RWpMEcZ6wTeCNfLQhrG4zu9oCzrB5Y=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=TE+kaoqGm1mdP8S/0TEBeqOnS5M/J1H5SqQpPbL4DCI=;
+ bh=IRMSvBt4+R8px7nkuS4B1POi3R18VjDUPOhKMIpH/o8=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,133 +78,86 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/4/23 05:12, Jonas Karlman wrote:
-> ArmSoM-Sige5 adopts the second-generation 8nm high-performance AIOT
-> platform Rockchip RK3576, with a 6 TOPS computing power NPU and support
-> for up to 16GB of large memory. It supports 4K video encoding and
-> decoding, offers rich interfaces including dual gigabit Ethernet ports,
-> WiFi 6 & BT5, and various video outputs.
+On 2025/4/5 23:38, Jonas Karlman wrote:
+> Drop SoC specific TEXT_BASE and use a common TEXT_BASE for all SoCs.
 >
-> Features tested on a ArmSoM Sige5 v1.1:
-> - SD-card boot
-> - eMMC boot
-> - Ethernet
+> Move the common TEXT_BASE to 8 MiB offset from start of DRAM to help
+> support RAM boot from maskrom introduced in next patch.
+>
+> RAM boot from maskrom mode will expect the FIT payload to be located at
+> 2 MiB offset from start or DRAM.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Tested-by: Arnaud Patard <arnaud.patard@collabora.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi | 18 ++++++++
->   arch/arm/mach-rockchip/rk3576/MAINTAINERS    |  6 +++
->   configs/sige5-rk3576_defconfig               | 48 ++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst              |  1 +
->   4 files changed, 73 insertions(+)
->   create mode 100644 arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
->   create mode 100644 configs/sige5-rk3576_defconfig
+> v2: Collect t-b tag
+> ---
+>   arch/arm/mach-rockchip/Kconfig        | 6 +++---
+>   arch/arm/mach-rockchip/rk3308/Kconfig | 3 ---
+>   arch/arm/mach-rockchip/rk3568/Kconfig | 3 ---
+>   arch/arm/mach-rockchip/rk3588/Kconfig | 3 ---
+>   4 files changed, 3 insertions(+), 12 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi b/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..7e0530d85d16
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
-> @@ -0,0 +1,18 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3576-u-boot.dtsi"
-> +
-> +/ {
-> +	aliases {
-> +		mmc0 = &sdhci;
-> +		mmc1 = &sdmmc;
-> +	};
-> +};
-> +
-> +&red_led {
-> +	default-state = "on";
-> +};
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-> index b5190c818468..94ef74d429f9 100644
-> --- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-> +++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-> @@ -3,3 +3,9 @@ M:	Jonas Karlman <jonas@kwiboo.se>
->   S:	Maintained
->   F:	arch/arm/dts/rk3576-generic*
->   F:	configs/generic-rk3576_defconfig
-> +
-> +SIGE5-RK3576
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3576-armsom-sige5*
-> +F:	configs/sige5-rk3576_defconfig
-> diff --git a/configs/sige5-rk3576_defconfig b/configs/sige5-rk3576_defconfig
-> new file mode 100644
-> index 000000000000..a5b2bcbe5b6c
-> --- /dev/null
-> +++ b/configs/sige5-rk3576_defconfig
-> @@ -0,0 +1,48 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-armsom-sige5"
-> +CONFIG_ROCKCHIP_RK3576=y
-> +CONFIG_SYS_LOAD_ADDR=0x40c00800
-> +CONFIG_DEBUG_UART_BASE=0x2AD40000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-armsom-sige5.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MISC=y
-> +CONFIG_CMD_MMC=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_RNG=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET_PSCI=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 69c8fbf3b948..8dd5b44dd2d8 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -133,6 +133,7 @@ List of mainline supported Rockchip boards:
->        - Radxa ROCK 3B (rock-3b-rk3568)
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index 33a9f7a4dd4b..c9d8f9105083 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -667,9 +667,9 @@ config TPL_SYS_MALLOC_F_LEN
+>   	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
 >   
->   * rk3576
-> +     - ArmSoM Sige5 (sige5-rk3576)
->        - Firefly ROC-RK3576-PC (roc-pc-rk3576)
->        - Generic RK3576 (generic-rk3576)
+>   config TEXT_BASE
+> -	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
+> -	default 0x40200000 if SPL_TEXT_BASE = 0x40000000
+> -	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
+> +	default 0x60800000 if SPL_TEXT_BASE = 0x60000000
+> +	default 0x40800000 if SPL_TEXT_BASE = 0x40000000
+> +	default 0x00800000 if SPL_TEXT_BASE = 0x00000000
 >   
+>   config SPL_TEXT_BASE
+>   	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
+> diff --git a/arch/arm/mach-rockchip/rk3308/Kconfig b/arch/arm/mach-rockchip/rk3308/Kconfig
+> index 06572d545f6e..b8d25c525424 100644
+> --- a/arch/arm/mach-rockchip/rk3308/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3308/Kconfig
+> @@ -17,9 +17,6 @@ config ROCKCHIP_STIMER_BASE
+>   config SYS_SOC
+>   	default "rk3308"
+>   
+> -config TEXT_BASE
+> -	default 0x00600000
+> -
+>   source "board/rockchip/evb_rk3308/Kconfig"
+>   source "board/firefly/firefly-rk3308/Kconfig"
+>   
+> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+> index c589fd586993..a271782fac5c 100644
+> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+> @@ -71,9 +71,6 @@ config ROCKCHIP_STIMER_BASE
+>   config SYS_SOC
+>   	default "rk3568"
+>   
+> -config TEXT_BASE
+> -	default 0x00a00000
+> -
+>   source "board/rockchip/evb_rk3568/Kconfig"
+>   source "board/anbernic/rgxx3_rk3566/Kconfig"
+>   source "board/hardkernel/odroid_m1/Kconfig"
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+> index efd192068ad1..1c6a85d07394 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -420,9 +420,6 @@ config ROCKCHIP_STIMER_BASE
+>   config SYS_SOC
+>   	default "rk3588"
+>   
+> -config TEXT_BASE
+> -	default 0x00a00000
+> -
+>   source "board/armsom/sige7-rk3588/Kconfig"
+>   source "board/coolpi/genbook_cm5_rk3588/Kconfig"
+>   source "board/edgeble/neural-compute-module-6/Kconfig"
