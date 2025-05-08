@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC204C3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 07:31:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE46C3ABBE
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 07:31:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0BF982A5E;
-	Thu,  8 May 2025 09:29:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23D8E82A56;
+	Thu,  8 May 2025 09:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NzxsDkq0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XSdapWop";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B23482A8C; Thu,  8 May 2025 09:29:42 +0200 (CEST)
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
- [IPv6:2a00:1450:4864:20::444])
+ id 5D4F782A71; Thu,  8 May 2025 09:29:44 +0200 (CEST)
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [IPv6:2a00:1450:4864:20::442])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CF5F82A39
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 09:29:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C636B82A65
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 09:29:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x444.google.com with SMTP id
- ffacd0b85a97d-3a0b646eff7so543339f8f.2
- for <u-boot@lists.denx.de>; Thu, 08 May 2025 00:29:39 -0700 (PDT)
+Received: by mail-wr1-x442.google.com with SMTP id
+ ffacd0b85a97d-39ac8e7688aso513477f8f.2
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 00:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746689378; x=1747294178; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746689380; x=1747294180; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yfDdQruzpHD/PdqDcrQaMTKnCfU5lEBPmEgTUWhbaRc=;
- b=NzxsDkq0a39/apC8hwZIx7K1SaeWhijWDcMnl457s4uFDV9y0hPlhgYvGg6pvRH2Ps
- bBlJ2FrltMsZy3BOa3lMpfMl6aOe3pDnWMKG8nrS98+itflGtuC1sflwg8k83LGhW9g4
- wy3v9ZV7yW1fP34CCAqeKTUKWbZ+0cIx4gNCk=
+ bh=aOa0wyA7U9/FgzDS8DRRlwNCO6W61HeqvRM7Kw5Xg94=;
+ b=XSdapWopmerkcx3IZE9kiLP/PdZPBO+9/OQnq7DAKx1N8ELy/hD9cQ/4NACfg5M4hF
+ 3Pkn/D/1sFkuhx0nQ0FSiWIL02tdQ0vqF2oQGV3qsEE29tBTP94EdI5xOq13e+J9gmY6
+ f/nGfMRHn64Z00qBDpgWLj6wMG1SwgW/NPvcA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746689378; x=1747294178;
+ d=1e100.net; s=20230601; t=1746689380; x=1747294180;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yfDdQruzpHD/PdqDcrQaMTKnCfU5lEBPmEgTUWhbaRc=;
- b=nIWnPLCO6a8VVLDf/e8SvjwDi5KeMW6FvSyl4vGKEm8SlNZbKdQNfq12QnDpprTfYt
- gLNA2r01bC/fhTPhy5xb5Drb4qIkdaxw4XXXhknqZZ7Etk+XDNtrVV6d1KvAmzsVoYWj
- 8b+aAH2oipyEP99YAVDFzMdQMCKMcgaWBnx8ewMEESvF6YRbQJcqWK+B3NXNObOjRnRt
- 64Qc8cSKCnk0uWuWsWoCHf/gL/hZFQvQB/KCS36iqNGJkp6UUpsOSbdLiE/FUqnPjMkc
- Mcyb9cnthtlvhMZjOidK4BKYrtqpEOy9Ik2lf7JPnBMrZThLqeEKGtXdTm3I9+I+1xKT
- /EEw==
-X-Gm-Message-State: AOJu0YwwS4KoEfJ+vCZE4HxTouy85uWdUN45pU4r1KvKdARsAROBfM5H
- 3/1jKLe/fSCAM/AAheHhkAzzduX/ErONmgCuUhLaQ2/me/pv3AsoP7soTpGqY1tWd986wAdFUtM
- uWn1k8lz1AA8x
-X-Gm-Gg: ASbGnctfquzJsrby8JHe2JfbJI6LwGO9M5X9Ordv2/fXEwBiMt1aT6gCrvG4kvs+Ulm
- mqlLxD/NDDRqPzLH8kl3tC3a4q/6YYxHmY7DNbZOL+azfMUzIPSFl92naPH439RtUMGZbe3EQZk
- K5evck7m/ddHwARIDCEQSa71LKq2LEMBZe6j90jNV8jL/wBgmhEh2PCu3ds1kwzXMhfCTadc1Pc
- 3VNe4CHKP3hBoo0MfZO6qGg1ElYftix2cHbCiwMh8qgkrG9oQPkF4J7ctcB1/tgY9nBRWX0g4vH
- yiM5pyRA40wWoEswYLg5Hyp5upB7GgfQcUYNbA==
-X-Google-Smtp-Source: AGHT+IEQ2UKGwtNsD4bdVwimfidKXk2hGq8mzonVhdzQfw7qr9UYi1+uovKE3XgjAuPSqnVPmw+tsg==
-X-Received: by 2002:a5d:64c9:0:b0:3a0:831c:e7e5 with SMTP id
- ffacd0b85a97d-3a0b4a188c7mr4631139f8f.20.1746689378191; 
- Thu, 08 May 2025 00:29:38 -0700 (PDT)
+ bh=aOa0wyA7U9/FgzDS8DRRlwNCO6W61HeqvRM7Kw5Xg94=;
+ b=FdstJCYvq7D1g3TQCrHPvPW+m1h1dlT/ilJCZqm+ZNzSS/GprnMR9uyUZnRLTSLFh7
+ payHv4Qcn475FLymQR/Vpuub4gLdJMlz8cXWMZLs4BdlHhXjq+6lAqW8zfT6xac3U8uj
+ kX2wilXCTYlUVAB95z1uygSttZXyjIgYWmAroU25Q+f86iLGUsOgPc9G7faD/DlKSQnb
+ Uki4TklwiFXgWztpDJEsVIQiSgxI8PtlNJlJkX851XK/MnV9WZaNqqq3VIlpP7Xxh3eA
+ NJyRJt3abPmIElGBihF8SAECtJ2FYHKdB5ElYX5Aar2cduDJ4N9vUwF8/nqyzxUfNS61
+ ATbw==
+X-Gm-Message-State: AOJu0YzUgk/aetIBYMTRCbZj9yp1FI44MraqCtMD1mTZr87A1+i+Gr9U
+ p+5+JILYh/NL1/LNZtBuNEizDgwgSmcD+r3wwudTDtBJaaTgtdDr9T9nQ0zZORZpm6v10yiwgaR
+ E1R4dwZZjLo/a
+X-Gm-Gg: ASbGncuDjS3354fUqFKSsGYC1r/8pQPxDeiKN5rpgHWpOrc4GujxUEKey8lVI1fR+5y
+ K4qNMmmOtR8Gqq1d0+RFp0L7piDbRWyTUxqaD/uCqJ6cRCi2fdhiPLnFmSrBD6fzl/AbJsJJ1J5
+ 1uiqKeeZJMzossU4JH9u0B+hvVDqMs6v7g2DUySKOPNBOhICzI6Gy7kCAtre9F6A2dglJMVWdpY
+ ANR4Yu6vA18eswyyL3WngAK+yHtSqGlRx6hX8uPRMOgxByOGpkXEQZ/27/P1rxw5BWCKOnQ6aOI
+ JGSDvGloHzfRD8l0dVRCygSxs0DBYLewNMNFAA==
+X-Google-Smtp-Source: AGHT+IHqx8QilrvlKe75tA6ZnEqg1lQ5PpxtcNGwX+O+vRAj7CjZzTedNHrv9a6u3sE99NBbQHQglA==
+X-Received: by 2002:a05:6000:430d:b0:3a0:b8b0:4418 with SMTP id
+ ffacd0b85a97d-3a0b8b045f4mr2451247f8f.50.1746689379734; 
+ Thu, 08 May 2025 00:29:39 -0700 (PDT)
 Received: from chromium.org ([213.157.19.150])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a0bd6999bfsm774375f8f.46.2025.05.08.00.29.37
+ ffacd0b85a97d-3a0bd6999bfsm774375f8f.46.2025.05.08.00.29.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 May 2025 00:29:37 -0700 (PDT)
+ Thu, 08 May 2025 00:29:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+Cc: Simon Glass <sjg@chromium.org>, Brandon Maier <brandon.maier@collins.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 13/20] patman: Correct some pylint and asyncio issues
-Date: Thu,  8 May 2025 09:28:37 +0200
-Message-ID: <20250508072907.207175-14-sjg@chromium.org>
+Subject: [PATCH 14/20] patman: Split parser creation from parsing
+Date: Thu,  8 May 2025 09:28:38 +0200
+Message-ID: <20250508072907.207175-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250508072907.207175-1-sjg@chromium.org>
 References: <20250508072907.207175-1-sjg@chromium.org>
@@ -94,158 +94,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct some pylint warnings in this file. Make use of the existing
-asyncio event loop, instead of creating a new one, since this also
-destroys it afterwards, making it unavailable for tests which want to
-share an event loop. Use tools.write_file() to avoid a warning about
-encoding.
+Tests may want to parse their own arguments. Refactor the parser code to
+support this and allow settings to receive arguments as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/func_test.py | 51 ++++++++++++++++++++-------------------
- 1 file changed, 26 insertions(+), 25 deletions(-)
+ tools/patman/cmdline.py       | 32 +++++++++++++++++++++++++-------
+ tools/patman/settings.py      | 28 ++++++++++++++++++----------
+ tools/patman/test_settings.py |  2 +-
+ 3 files changed, 44 insertions(+), 18 deletions(-)
 
-diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index d055a7e5952..9f3ab50fa4e 100644
---- a/tools/patman/func_test.py
-+++ b/tools/patman/func_test.py
-@@ -16,6 +16,11 @@ import sys
- import tempfile
- import unittest
- 
-+import pygit2
-+
-+from u_boot_pylib import gitutil
-+from u_boot_pylib import terminal
-+from u_boot_pylib import tools
- 
- from patman.commit import Commit
- from patman import control
-@@ -24,12 +29,6 @@ from patman.patchstream import PatchStream
- from patman import patchwork
- from patman import send
- from patman.series import Series
--from patman import settings
--from u_boot_pylib import gitutil
--from u_boot_pylib import terminal
--from u_boot_pylib import tools
--
--import pygit2
- from patman import status
- 
+diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
+index cf32716b8e0..e5ac4fb1684 100644
+--- a/tools/patman/cmdline.py
++++ b/tools/patman/cmdline.py
+@@ -20,13 +20,11 @@ from patman import settings
  PATMAN_DIR = pathlib.Path(__file__).parent
-@@ -278,7 +277,7 @@ class TestFunctional(unittest.TestCase):
-         self.assertEqual('', next(itr))
-         self.assertIn('Send a total of %d patches' % count, next(itr))
-         prev = next(itr)
--        for i, commit in enumerate(series.commits):
-+        for i in range(len(series.commits)):
-             self.assertEqual('   %s' % args[i], prev)
-             while True:
-                 prev = next(itr)
-@@ -389,7 +388,8 @@ Changes in v2:
-     def test_base_commit(self):
-         """Test adding a base commit with no cover letter"""
-         orig_text = self._get_text('test01.txt')
--        pos = orig_text.index('commit 5ab48490f03051875ab13d288a4bf32b507d76fd')
-+        pos = orig_text.index(
-+            'commit 5ab48490f03051875ab13d288a4bf32b507d76fd')
-         text = orig_text[:pos]
-         series = patchstream.get_metadata_for_test(text)
-         series.base_commit = Commit('1a44532')
-@@ -582,7 +582,7 @@ complicated as possible''')
-             # Check that it can detect a different branch
-             self.assertEqual(3, gitutil.count_commits_to_branch('second'))
-             with terminal.capture() as _:
--                series, cover_fname, patch_files = send.prepare_patches(
-+                _, cover_fname, patch_files = send.prepare_patches(
-                     col, branch='second', count=-1, start=0, end=0,
-                     ignore_binary=False, signoff=True)
-             self.assertIsNotNone(cover_fname)
-@@ -629,14 +629,13 @@ complicated as possible''')
-             tools.run('git', 'branch', '--set-upstream-to=upstream')
+ HAS_TESTS = os.path.exists(PATMAN_DIR / "func_test.py")
  
-             # Setup patman configuration.
--            with open('.patman', 'w', buffering=1) as f:
--                f.write('[settings]\n'
--                        'get_maintainer_script: dummy-script.sh\n'
--                        'check_patch: False\n'
--                        'add_maintainers: True\n')
--            with open('dummy-script.sh', 'w', buffering=1) as f:
--                f.write('#!/usr/bin/env python\n'
--                        'print("hello@there.com")\n')
-+            tools.write_file('.patman', '[settings]\n'
-+                             'get_maintainer_script: dummy-script.sh\n'
-+                             'check_patch: False\n'
-+                             'add_maintainers: True\n', binary=False)
-+            tools.write_file('dummy-script.sh',
-+                             '#!/usr/bin/env python\n'
-+                             'print("hello@there.com")\n', binary=False)
-             os.chmod('dummy-script.sh', 0x555)
-             tools.run('git', 'add', '.')
-             tools.run('git', 'commit', '-m', 'new commit')
-@@ -669,7 +668,7 @@ Tested-by: %s
- Serie-version: 2
- '''
-         with self.assertRaises(ValueError) as exc:
--            pstrm = PatchStream.process_text(text)
-+            PatchStream.process_text(text)
-         self.assertEqual("Line 3: Invalid tag = 'Serie-version: 2'",
-                          str(exc.exception))
+-def parse_args():
+-    """Parse command line arguments from sys.argv[]
++def setup_parser():
++    """Set up command-line parser
  
-@@ -747,9 +746,9 @@ index c072e54..942244f 100644
- --- a/lib/fdtdec.c
- +++ b/lib/fdtdec.c
- @@ -1200,7 +1200,8 @@ int fdtdec_setup_mem_size_base(void)
-- 	}
-+ \t}
+     Returns:
+-        tuple containing:
+-            options: command line options
+-            args: command lin arguments
++        argparse.Parser object
+     """
+     epilog = '''Create patches from commits in a branch, check them and email
+         them as specified by tags you place in the commits. Use -n to do a dry
+@@ -132,14 +130,34 @@ def parse_args():
+                         help='Force overwriting an existing branch')
+     status.add_argument('-T', '--single-thread', action='store_true',
+                         help='Disable multithreading when reading patchwork')
++    return parser
++
++
++def parse_args(argv=None, config_fname=None, parser=None):
++    """Parse command line arguments from sys.argv[]
++
++    Args:
++        argv (str or None): Arguments to process, or None to use sys.argv[1:]
++        config_fname (str): Config file to read, or None for default, or False
++            for an empty config
++
++    Returns:
++        tuple containing:
++            options: command line options
++            args: command lin arguments
++    """
++    if not parser:
++        parser = setup_parser()
  
-- 	gd->ram_size = (phys_size_t)(res.end - res.start + 1);
-+ \tgd->ram_size = (phys_size_t)(res.end - res.start + 1);
- -	debug("%s: Initial DRAM size %llx\n", __func__, (u64)gd->ram_size);
- +	debug("%s: Initial DRAM size %llx\n", __func__,
- +	      (unsigned long long)gd->ram_size);
-@@ -807,7 +806,8 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-         """Test Patchwork patches not matching the series"""
-         pwork = patchwork.Patchwork.for_testing(self._fake_patchwork)
-         with terminal.capture() as (_, err):
--            patches = asyncio.run(status.check_status(1234, pwork))
-+            loop = asyncio.get_event_loop()
-+            patches = loop.run_until_complete(status.check_status(1234, pwork))
-             status.check_patch_count(0, len(patches))
-         self.assertIn('Warning: Patchwork reports 1 patches, series has 0',
-                       err.getvalue())
-@@ -815,7 +815,8 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-     def test_status_read_patch(self):
-         """Test handling a single patch in Patchwork"""
-         pwork = patchwork.Patchwork.for_testing(self._fake_patchwork)
--        patches = asyncio.run(status.check_status(1234, pwork))
-+        loop = asyncio.get_event_loop()
-+        patches = loop.run_until_complete(status.check_status(1234, pwork))
-         self.assertEqual(1, len(patches))
-         patch = patches[0]
-         self.assertEqual('1', patch.id)
-@@ -1015,7 +1016,6 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-         # things behaves as expected
-         self.commits = [commit1, commit2]
-         self.patches = [patch1, patch2]
--        count = 2
+     # Parse options twice: first to get the project and second to handle
+     # defaults properly (which depends on project)
+     # Use parse_known_args() in case 'cmd' is omitted
+-    argv = sys.argv[1:]
++    if not argv:
++        argv = sys.argv[1:]
++
+     args, rest = parser.parse_known_args(argv)
+     if hasattr(args, 'project'):
+-        settings.Setup(parser, args.project)
++        settings.Setup(parser, args.project, argv, config_fname)
+         args, rest = parser.parse_known_args(argv)
  
-         # Check that the tags are picked up on the first patch
-         new_rtags, _ = status.process_reviews(patch1.content, patch1.comments,
-@@ -1280,8 +1280,9 @@ line8
-               'And another comment'],
-              ['> File: file.c',
-               '> Line: 153 / 143: def check_patch(fname, show_types=False):',
--              '>  and more code', '> +Addition here', '> +Another addition here',
--              '>  codey', '>  more codey', 'and another thing in same file'],
-+              '>  and more code', '> +Addition here',
-+              '> +Another addition here', '>  codey', '>  more codey',
-+              'and another thing in same file'],
-              ['> File: file.c', '> Line: 253 / 243',
-               '>  with no function context', 'one more thing'],
-              ['> File: tools/patman/main.py', '> +line of code',
+     # If we have a command, it is safe to parse all arguments
+diff --git a/tools/patman/settings.py b/tools/patman/settings.py
+index d66b22be1df..7a0866cd370 100644
+--- a/tools/patman/settings.py
++++ b/tools/patman/settings.py
+@@ -226,7 +226,7 @@ nxp = Zhikang Zhang <zhikang.zhang@nxp.com>
+     f.close()
+ 
+ 
+-def _UpdateDefaults(main_parser, config):
++def _UpdateDefaults(main_parser, config, argv):
+     """Update the given OptionParser defaults based on config.
+ 
+     We'll walk through all of the settings from all parsers.
+@@ -242,6 +242,7 @@ def _UpdateDefaults(main_parser, config):
+             updated.
+         config: An instance of _ProjectConfigParser that we will query
+             for settings.
++        argv (list of str or None): Arguments to parse
+     """
+     # Find all the parsers and subparsers
+     parsers = [main_parser]
+@@ -252,6 +253,7 @@ def _UpdateDefaults(main_parser, config):
+     # Collect the defaults from each parser
+     defaults = {}
+     parser_defaults = []
++    argv = list(argv)
+     for parser in parsers:
+         pdefs = parser.parse_known_args()[0]
+         parser_defaults.append(pdefs)
+@@ -273,9 +275,11 @@ def _UpdateDefaults(main_parser, config):
+ 
+     # Set all the defaults and manually propagate them to subparsers
+     main_parser.set_defaults(**defaults)
++    assert len(parsers) == len(parser_defaults)
+     for parser, pdefs in zip(parsers, parser_defaults):
+         parser.set_defaults(**{k: v for k, v in defaults.items()
+                                if k in pdefs})
++    return defaults
+ 
+ 
+ def _ReadAliasFile(fname):
+@@ -334,7 +338,7 @@ def GetItems(config, section):
+         return []
+ 
+ 
+-def Setup(parser, project_name, config_fname=None):
++def Setup(parser, project_name, argv, config_fname=None):
+     """Set up the settings module by reading config files.
+ 
+     Unless `config_fname` is specified, a `.patman` config file local
+@@ -347,8 +351,9 @@ def Setup(parser, project_name, config_fname=None):
+         parser:         The parser to update.
+         project_name:   Name of project that we're working on; we'll look
+             for sections named "project_section" as well.
+-        config_fname:   Config filename to read.  An error is raised if it
+-            does not exist.
++        config_fname:   Config filename to read, or None for default, or False
++            for an empty config.  An error is raised if it does not exist.
++        argv (list of str or None): Arguments to parse, or None for default
+     """
+     # First read the git alias file if available
+     _ReadAliasFile('doc/git-mailrc')
+@@ -357,12 +362,15 @@ def Setup(parser, project_name, config_fname=None):
+     if config_fname and not os.path.exists(config_fname):
+         raise Exception(f'provided {config_fname} does not exist')
+ 
+-    if not config_fname:
++    if config_fname is None:
+         config_fname = '%s/.patman' % os.getenv('HOME')
+-    has_config = os.path.exists(config_fname)
+-
+     git_local_config_fname = os.path.join(gitutil.get_top_level(), '.patman')
+-    has_git_local_config = os.path.exists(git_local_config_fname)
++
++    has_config = False
++    has_git_local_config = False
++    if config_fname is not False:
++        has_config = os.path.exists(config_fname)
++        has_git_local_config = os.path.exists(git_local_config_fname)
+ 
+     # Read the git local config last, so that its values override
+     # those of the global config, if any.
+@@ -371,7 +379,7 @@ def Setup(parser, project_name, config_fname=None):
+     if has_git_local_config:
+         config.read(git_local_config_fname)
+ 
+-    if not (has_config or has_git_local_config):
++    if config_fname is not False and not (has_config or has_git_local_config):
+         print("No config file found.\nCreating ~/.patman...\n")
+         CreatePatmanConfigFile(config_fname)
+ 
+@@ -382,7 +390,7 @@ def Setup(parser, project_name, config_fname=None):
+     for name, value in GetItems(config, 'bounces'):
+         bounces.add(value)
+ 
+-    _UpdateDefaults(parser, config)
++    return _UpdateDefaults(parser, config, argv)
+ 
+ 
+ # These are the aliases we understand, indexed by alias. Each member is a list.
+diff --git a/tools/patman/test_settings.py b/tools/patman/test_settings.py
+index 06b7cbc3ab6..c117836de31 100644
+--- a/tools/patman/test_settings.py
++++ b/tools/patman/test_settings.py
+@@ -49,7 +49,7 @@ def test_git_local_config():
+                                   dest='check_patch', default=True)
+ 
+                 # Test "global" config is used.
+-                settings.Setup(parser, 'unknown', global_config.name)
++                settings.Setup(parser, 'unknown', None, global_config.name)
+                 args, _ = parser.parse_known_args([])
+                 assert args.project == 'u-boot'
+                 send_args, _ = send.parse_known_args([])
 -- 
 2.43.0
 
