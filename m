@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA56C3ABC0
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 07:30:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2F5C3ABC0
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 07:30:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7A33829D4;
+	by phobos.denx.de (Postfix) with ESMTP id F0E4B82A3B;
 	Thu,  8 May 2025 09:29:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iH2mn1Kw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WZPXLn+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB51B8059D; Thu,  8 May 2025 09:29:35 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 130488059D; Thu,  8 May 2025 09:29:36 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04A6C829D4
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 09:29:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AB4282A4B
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 09:29:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a108684f90so25805f8f.1
- for <u-boot@lists.denx.de>; Thu, 08 May 2025 00:29:32 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-39ee57c0b8cso702472f8f.0
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 00:29:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746689370; x=1747294170; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746689373; x=1747294173; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=or8ybXeDfxJd0iFICpiDx3YhfUlFmztzXJN3tK6wbcc=;
- b=iH2mn1Kwotj2p7nMe+DOOsSfTJU45by+YL41FAsSCtewev4XsqaTvHtR1jHNxvuHw/
- M5qo5sBQg9MGeIjziEp+bVoKLdz+mWut91IJtvRjd0dB38+u63NGkwnp6KAfvrbFBHU8
- HkxeFri/vQuXFtnQXvWODhJgg3jluJ4EydAvM=
+ bh=ON0OavZR7uXfEwN9WAbv5b7X35fwutu3th3roUEjuEA=;
+ b=WZPXLn+VMCLcXklD/jG2trF3T/53Wltx7zFenK8BpgJCm5rq+vpFgZQhqGNznvBovk
+ lD4nJJzIzc7NljQBO6fgOq6vcyl9ZzEiCS/yYCWC34xgIYpqZz5w0a1dRNDN+eHROGhi
+ LD+NG/R/FwOxuHuORwuAb2CUSM1q/0DjIAKaA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746689370; x=1747294170;
+ d=1e100.net; s=20230601; t=1746689373; x=1747294173;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=or8ybXeDfxJd0iFICpiDx3YhfUlFmztzXJN3tK6wbcc=;
- b=iU53oNkxuZ12aof+U4szIFVi4pM1IJ4WRKSKznqQ6MWJBlbZAEda5uh5eVOPlJ+6Px
- Y49Z3EoggPjJ6X8kL9buYcpM9zvUmTHq0ZJf8G+/8CjTp22pbZfjN1BRLGd/VBdWQtLp
- ZRzVpZY2V/DP2MqosodCbej0RoUOoV+CadxdND1FT7et3h9Xop4z8ObySdV68JMGqPVx
- NBsp5gvR4Jv2+E47iZCAKaXnKti2FmEJwC4sfNxkLQIPVY7qzyclSmAyqTzMy/XPn8vz
- GBpwxTyd+Vxjh3IDsatYlfS9QL54A4RlxEg4DtV5K7bx5DK/wOtPjm87uc3d/ORtDk5f
- aivw==
-X-Gm-Message-State: AOJu0Yzdl22eyuy4qLq3p9ZRm45kXdqqpdv0Fxi/eXfo7p9CwLLdfbKw
- knL6Mp8gzzy/ADUQhNudloaSpUT/b0jUtUJkNvzSpMqSt4jsK37hjFdm6zYhREFPcjFQ68YZsTp
- s5Cmdr2t1TA==
-X-Gm-Gg: ASbGncvrBQcrjwidHJsYy6YMQULawAYFUUILyzEg4jAQPL1E1CO4ENl8Kia46N5JoYA
- zbvmvUrMu972il665sdlfTsSZNhQTcptCRzCKZFAVdV1tjiaYGZ5M1lsfKsDD/gZs4MY1zIfHCS
- TklYZcV4jaWvy/xkJRl/CUZImMlWHZeUvORVIHYjhUZWpWwQ4nEa0ofl34BuvDqe/ansOjmYOUb
- 9DMO7zQn+bB2kairnqCzhUaXHFe9olUFGnkRqKXDVqFt6hCjlbVz6dCAsZmC513hZ6DGHXGsQAf
- d748YjiXXz27O5RpLryoTml28EhPDwpXBURUDw==
-X-Google-Smtp-Source: AGHT+IHEqbp6d0juBiSmZp/4/FpjBw+xkzFNzx01anDy51vb9zxL6nUHqFH3LUGLzVJ1aLN1bZfCxA==
-X-Received: by 2002:adf:a442:0:b0:39c:c64e:cf58 with SMTP id
- ffacd0b85a97d-3a0ba1052damr1182745f8f.55.1746689370581; 
- Thu, 08 May 2025 00:29:30 -0700 (PDT)
+ bh=ON0OavZR7uXfEwN9WAbv5b7X35fwutu3th3roUEjuEA=;
+ b=N1m/MJSUE+dchpDhkbI/Gu7HfzGRNGsXZ4r2WuMttcOFzeS7GVDH2R0fo+dcqxBTmf
+ bQCUOsTLrafg2zM9aeUDx+RhXAebXA8TbVa1uKHKnAlNs4Ajfzb44yel4lGrSXLrp0OF
+ r3146Bj3tbe5ptijVWTZkESUlqFkYaxPu81TAwQGeD5W39M8P89TfC/NFJi+tfwfq3ii
+ AqNkSAMgzH3K4tfpyeIbeTYdHh1aR8aHQcMFfYQVrOqUOcmEnLQVqZFNhaaSkVsFXCoq
+ npxCCsaD5O+grb0VAALs4QzRBmTRdYLl/T3IzWG3K6CRbXviAg1Y37GbQQhMk29SCg/Y
+ L6Tg==
+X-Gm-Message-State: AOJu0YzNPbbEZ/rnzrApJiDpqgHEzCpG7yvLDPHaJo7JwYa2PB2hbdzT
+ dAIPKM+LP5WRPBtRZWG32KyFgj+FvVnHhMSQ1yilOwy0yAYGi8+Vut6i5w/uXK08voM3AgV7PXs
+ kofjmnPdJrQ==
+X-Gm-Gg: ASbGncsLe7KukfghQuy4W6feP0a0cYS/QI/Ji14Kh7Te1MqRlq28jDj/JYZfAiooygH
+ 7l5YWhI3fH26DRYMvBO2Kjl7MEB4CE4YGJpECDk9Nx+Yzs7Em1fAPcXYYhxG/Ly2x0MRLY45N4m
+ MNWPqB3MFiUt+pZbNDcMJwbxDhXL0iGdQmqvaKod8NluY/h9757I0sX9knJsefVKJWEfTWowEOZ
+ ZAiDuvtFExMcRperq46XcypNrUphWRMQjxMRxImBhY/JZP52Sp5vcZe8Y9LHxMo8R2YnsGeWWGT
+ EYbMFWTE6ikCT+i1W2vnwjm8MwjWtHuC3KmEUw==
+X-Google-Smtp-Source: AGHT+IEeRSU9EfOd1fR/MeUNxExA6hkdca/unjp50oPAJKJ9cubtaHdzOeBpP4SrexgzjG87KI9Ofg==
+X-Received: by 2002:a05:6000:430e:b0:3a0:a463:1480 with SMTP id
+ ffacd0b85a97d-3a0ba0eef36mr1553550f8f.46.1746689372699; 
+ Thu, 08 May 2025 00:29:32 -0700 (PDT)
 Received: from chromium.org ([213.157.19.150])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a0bd6999bfsm774375f8f.46.2025.05.08.00.29.29
+ ffacd0b85a97d-3a0bd6999bfsm774375f8f.46.2025.05.08.00.29.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 May 2025 00:29:29 -0700 (PDT)
+ Thu, 08 May 2025 00:29:32 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/20] patman: Use .git as the git directory
-Date: Thu,  8 May 2025 09:28:33 +0200
-Message-ID: <20250508072907.207175-10-sjg@chromium.org>
+Subject: [PATCH 10/20] patman: Use variables for series ID and title
+Date: Thu,  8 May 2025 09:28:34 +0200
+Message-ID: <20250508072907.207175-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250508072907.207175-1-sjg@chromium.org>
 References: <20250508072907.207175-1-sjg@chromium.org>
@@ -94,84 +94,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In tests, the 'git' directory is a subdirectory of the temporary
-directory. Rename it to '.git' so that git will automatically find it
-when git operations are done in the temporary directory. Set up the
-config before the first git operation, so that this works correctly.
+Rather than hard-coding these values in the sample patches, use
+variables so that we can refer to these in tests.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/func_test.py | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ tools/patman/func_test.py | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index 624f388966e..5ddefc3a9b1 100644
+index 5ddefc3a9b1..9c7d5d8c381 100644
 --- a/tools/patman/func_test.py
 +++ b/tools/patman/func_test.py
-@@ -78,7 +78,7 @@ class TestFunctional(unittest.TestCase):
+@@ -59,6 +59,10 @@ class TestFunctional(unittest.TestCase):
+     verbosity = False
+     preserve_outdirs = False
  
-     def setUp(self):
-         self.tmpdir = tempfile.mkdtemp(prefix='patman.')
--        self.gitdir = os.path.join(self.tmpdir, 'git')
-+        self.gitdir = os.path.join(self.tmpdir, '.git')
-         self.repo = None
++    # Fake patchwork info for testing
++    SERIES_ID_SECOND_V1 = 456
++    TITLE_SECOND = 'Series for my board'
++
+     @classmethod
+     def setup_test_args(cls, preserve_indir=False, preserve_outdirs=False,
+                         toolpath=None, verbosity=None, no_capture=False):
+@@ -508,16 +512,17 @@ a very nice colour.
+ Purple and purple
+ Even more purple
+ Could not be any more purple''')
+-        self.make_commit_with_file('serial: Add a serial driver', '''
++        self.make_commit_with_file('serial: Add a serial driver', f'''
+ Here is the serial driver
+ for my chip.
  
-     def tearDown(self):
-@@ -416,7 +416,7 @@ Changes in v2:
-             fname (str): Filename of file to create
-             text (str): Text to put into the file
-         """
--        path = os.path.join(self.gitdir, fname)
-+        path = os.path.join(self.tmpdir, fname)
-         tools.write_file(path, text, binary=False)
-         index = self.repo.index
-         index.add(fname)
-@@ -550,7 +550,7 @@ complicated as possible''')
-         control.setup()
-         orig_dir = os.getcwd()
-         try:
--            os.chdir(self.gitdir)
-+            os.chdir(self.tmpdir)
- 
-             # Check that it can detect the current branch
-             self.assertEqual(2, gitutil.count_commits_to_branch(None))
-@@ -602,7 +602,7 @@ complicated as possible''')
-     def test_custom_get_maintainer_script(self):
-         """Validate that a custom get_maintainer script gets used."""
-         self.make_git_tree()
--        with directory_excursion(self.gitdir):
-+        with directory_excursion(self.tmpdir):
-             # Setup git.
-             os.environ['GIT_CONFIG_GLOBAL'] = '/dev/null'
-             os.environ['GIT_CONFIG_SYSTEM'] = '/dev/null'
-@@ -610,8 +610,6 @@ complicated as possible''')
-             tools.run('git', 'config', 'user.email', 'dumdum@dummy.com')
-             tools.run('git', 'branch', 'upstream')
-             tools.run('git', 'branch', '--set-upstream-to=upstream')
--            tools.run('git', 'add', '.')
--            tools.run('git', 'commit', '-m', 'new commit')
- 
-             # Setup patman configuration.
-             with open('.patman', 'w', buffering=1) as f:
-@@ -623,6 +621,8 @@ complicated as possible''')
-                 f.write('#!/usr/bin/env python\n'
-                         'print("hello@there.com")\n')
-             os.chmod('dummy-script.sh', 0x555)
-+            tools.run('git', 'add', '.')
-+            tools.run('git', 'commit', '-m', 'new commit')
- 
-             # Finally, do the test
-             with terminal.capture():
-@@ -1108,7 +1108,7 @@ diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-         branch = 'first'
-         dest_branch = 'first2'
-         count = 2
--        gitdir = os.path.join(self.gitdir, '.git')
-+        gitdir = self.gitdir
- 
-         # Set up the test git tree. We use branch 'first' which has two commits
-         # in it
+ Cover-letter:
+-Series for my board
++{self.TITLE_SECOND}
+ This series implements support
+ for my glorious board.
+ END
+-Series-links: 183237
++Series-to: u-boot
++Series-links: {self.SERIES_ID_SECOND_V1}
+ ''', 'serial.c', '''The code for the
+ serial driver is here''')
+         self.make_commit_with_file('bootm: Make it boot', '''
 -- 
 2.43.0
 
