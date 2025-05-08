@@ -4,50 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CDFC3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 21:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47E15C3ABBE
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 21:23:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72E7E8269F;
-	Thu,  8 May 2025 23:23:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C482182977;
+	Thu,  8 May 2025 23:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=krotti42.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=krotti42.com header.i=@krotti42.com header.b="DRrGEqcW";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=krotti42.com header.i=@krotti42.com header.b="NjcgnRGA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 086CF8283E; Thu,  8 May 2025 23:23:33 +0200 (CEST)
-Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
+ id D3C278297E; Thu,  8 May 2025 23:23:55 +0200 (CEST)
+Received: from mail-4317.protonmail.ch (mail-4317.protonmail.ch [185.70.43.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEDDB82162
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 23:23:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 145B082952
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 23:23:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=krotti42.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=johannes@krotti42.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=krotti42.com;
- s=protonmail; t=1746739409; x=1746998609;
- bh=H7+Vijz6XjPh84FcIBqYDsB0Fga+WiLmKMY1BlEJFEM=;
+ s=protonmail; t=1746739432; x=1746998632;
+ bh=gTO8Up7rlrzS/NlZvZ8620TmChKP+eJMNInAHApsGdc=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=DRrGEqcWWqmHUzuoty8DlHnOuZtoWFHigTyfaXVdS9TndU39w8UVk16iXe4S6sEed
- mxN6EG1JJSbyQcffq+pZ9jbIpEKlRnJlefcgiHQdjeMbWG3jRh2AkgtfA1+0c8ucnU
- XIKrAiWy1VHRgneEl3aa9wfXOBEk1WOgJGB/2aG2KPD7F7r2kOs7+3Ii+aUDVTSZbl
- /v+/qvebX/V2GLF8MJIUyI6GD1lcncT2ji+zv6JBnswdtNhRLn0ta7tUlpHUKdAwww
- NsvfWDGE5XzAZ0qjsVfTiDaZJBU9bVgvGQenGlyM5yecQZx3xBNaj/CWg36Jl4f+jq
- aIGfWeqHiteJQ==
-Date: Thu, 08 May 2025 21:23:24 +0000
-To: u-boot@lists.denx.de, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
+ b=NjcgnRGAlO916Yopr7bY+172IYeh/x95kAmSXVbCRFxS54aa1XrmIRXuLNJCrZZG8
+ fM/9CnwYb99GExS/u0v62KYD3XT6q6R5ucEuRGWj4Zyf4s8WnDIeNjkiH7vvgiMzY3
+ rxv12OjVlgnVQxn+0WfoNInpr1muBcgtQOUFR6oqXEVHufXkj09qanF+aWXRgIG8S+
+ 1NuHqj62kFF8AzifQGsIQrqnq6y2gH5AdelyRxgva+1/Ric1vaiNyBEhZRDnujP/cy
+ f0Zc7JjYluJA04ezP7E+8jLTBOi7GKj/te05ZmT5rN3rkcClLWcj0Xxl9x2BTUHReJ
+ KHOjdRZmFxMkQ==
+Date: Thu, 08 May 2025 21:23:46 +0000
+To: u-boot@lists.denx.de
 From: Johannes Krottmayer <johannes@krotti42.com>
-Cc: Johannes Krottmayer <johannes@krotti42.com>
-Subject: [PATCH 00/10] add STM32H747 discovery board
-Message-ID: <20250508212058.640483-1-johannes@krotti42.com>
+Cc: Johannes Krottmayer <johannes@krotti42.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 01/10] arm: mach-stm32: stm32h7: add initial lowlevel early
+ function
+Message-ID: <20250508212058.640483-2-johannes@krotti42.com>
 In-Reply-To: <611b339e-a9fe-4cc1-b2fc-617d844a86ac@krotti42.com>
 References: <611b339e-a9fe-4cc1-b2fc-617d844a86ac@krotti42.com>
 Feedback-ID: 88021767:user:proton
-X-Pm-Message-ID: 5404a0cbedbd57190a3f18ceb1e8a21169b98d4b
+X-Pm-Message-ID: 1eff0b9179569a08bfbe00563f481606f8f7e400
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -67,46 +69,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These patch series adds support for the STM32H747 discovery
-board from STMicroelectronics.
+Add new assembly function 'arch_very_early_init'
 
-Johannes Krottmayer (10):
-  arm: mach-stm32: stm32h7: add initial lowlevel early function
-  arm: mach-stm32: stm32h7: add initial Makefile
-  arm: mach-stm32: stm32h7: add STM32H747-DISCO board
-  arm: mach-stm32: add stm32h7 subdirectory
-  board: st: add STM32H747 discovery board
-  configs: add STM32H747 discovery board
-  include: configs: add STM32H747 discovery board
-  arm: dts: add STM32H747 discovery board
-  dts: upstream: arm: st: add STM32H747 discovery board
-  dts: upstream: arm: st: stm32h7-pinctrl: change pins for USART1
+This functions setups the power supply for STM32H7 SoC's to
+direct SMPS mode, which is required for some boards like
+the STM32H747I-DISCO in the default configuration.
 
- arch/arm/dts/stm32h747i-disco-u-boot.dtsi    | 101 ++++++++++++++++
- arch/arm/mach-stm32/Makefile                 |   2 +
- arch/arm/mach-stm32/stm32h7/Kconfig          |   5 +
- arch/arm/mach-stm32/stm32h7/Makefile         |   6 +
- arch/arm/mach-stm32/stm32h7/lowlevel.S       |  45 ++++++++
- board/st/stm32h747-disco/Kconfig             |  15 +++
- board/st/stm32h747-disco/MAINTAINERS         |   8 ++
- board/st/stm32h747-disco/Makefile            |  10 ++
- board/st/stm32h747-disco/stm32h747-disco.c   |  43 +++++++
- configs/stm32h747-disco_defconfig            |  35 ++++++
- dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi |   4 +-
- dts/upstream/src/arm/st/stm32h747i-disco.dts | 115 +++++++++++++++++++
- include/configs/stm32h747-disco.h            |  37 ++++++
- 13 files changed, 424 insertions(+), 2 deletions(-)
- create mode 100644 arch/arm/dts/stm32h747i-disco-u-boot.dtsi
- create mode 100644 arch/arm/mach-stm32/stm32h7/Makefile
+If this isn't done in an early stage it cause a deadlock and
+also the SoC is running in a limited mode according to the
+TRM from the SoC.
+
+Signed-off-by: Johannes Krottmayer <johannes@krotti42.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+ arch/arm/mach-stm32/stm32h7/lowlevel.S | 45 ++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
  create mode 100644 arch/arm/mach-stm32/stm32h7/lowlevel.S
- create mode 100644 board/st/stm32h747-disco/Kconfig
- create mode 100644 board/st/stm32h747-disco/MAINTAINERS
- create mode 100644 board/st/stm32h747-disco/Makefile
- create mode 100644 board/st/stm32h747-disco/stm32h747-disco.c
- create mode 100644 configs/stm32h747-disco_defconfig
- create mode 100644 dts/upstream/src/arm/st/stm32h747i-disco.dts
- create mode 100644 include/configs/stm32h747-disco.h
 
+diff --git a/arch/arm/mach-stm32/stm32h7/lowlevel.S b/arch/arm/mach-stm32/s=
+tm32h7/lowlevel.S
+new file mode 100644
+index 00000000000..97f4e383e3b
+--- /dev/null
++++ b/arch/arm/mach-stm32/stm32h7/lowlevel.S
+@@ -0,0 +1,45 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2025, Johannes Krottmayer <johannes@krotti42.com>
++ */
++
++#include <linux/linkage.h>
++
++/*
++ * STM32H7 PWR registers
++ */
++#define PWR_CR3=09=09=090x5802480C
++#define PWR_CR3_LDOEN=09=091
++
++#define PWR_CSR1=09=09=090x58024804
++#define PWR_CSR1_ACTVOSRDY=0913
++
++ENTRY(arch_very_early_init)
++=09/*
++=09 * Setup power supply for STM32H7 to direct SMPS mode.
++=09 * This is the default configuration from some boards
++=09 * like the SMT32H747i-DISCO.
++=09 *
++=09 * If these steps will not be done, this cause a deadlock.
++=09 */
++=09ldr r6, =3DPWR_CR3
++=09/* Disable LDO */
++=09movs r0, #1
++=09lsl r1, r0, #PWR_CR3_LDOEN
++=09mvn r2, r1
++=09ldr r3, [r6]
++=09and r3, r2
++=09str r3, [r6]
++=09lsl r1, r0, #PWR_CSR1_ACTVOSRDY
++
++=09/* Loop until ACTVOSRDY is valid */
++1:
++=09ldr r6, =3DPWR_CSR1
++=09ldr r3, [r6]
++=09and r3, r1
++=09cmp r3, r1
++=09bne 1b
++
++=09/* Jump back to C runtime setup */
++=09bx lr
++ENDPROC(arch_very_early_init)
 --=20
 2.39.5
 
