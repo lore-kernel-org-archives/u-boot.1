@@ -4,58 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64BA2C3ABC0
-	for <u-boot@archiver.kernel.org>; Wed,  7 May 2025 23:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26571C3ABBF
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 00:07:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3EE482153;
-	Thu,  8 May 2025 01:36:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=krotti42.com
+	by phobos.denx.de (Postfix) with ESMTP id 57E5F82153;
+	Thu,  8 May 2025 02:07:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=krotti42.com header.i=@krotti42.com header.b="Qj1uirY5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AiBpbUhp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1440082162; Thu,  8 May 2025 01:36:32 +0200 (CEST)
-Received: from mail-4317.protonmail.ch (mail-4317.protonmail.ch [185.70.43.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8444A82162; Thu,  8 May 2025 02:07:21 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59C118212F
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 01:36:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D11B820EB
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 02:07:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=krotti42.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=johannes@krotti42.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=krotti42.com;
- s=protonmail; t=1746660988; x=1746920188;
- bh=8jEF/AgIGOrkP5GREd+jF70Gv8PYjrALk5m2CGfWsWs=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=Qj1uirY5tlCScNhSqv9lx22GMEh+7FsS3pvCsDHVBuK/kZ4hnyQc4WNNTnEJidvrA
- AYQCdXRJ6fhqpOhwC47dGSil8SoYjnKlB3LKJtyTJyGbRS++KeV7QuA0ncTQGdtmc2
- HB8oRk/qbPxQc379JmN3L/BXHo2ad2gZ46OVTxutRKFSnXh1WeFKX8NXI3Em1q38G0
- HAeG3EwV2by9h6Yw6qU/LUZrOjNiNLCG238uuYzNA88FtnBV/QH5DNonSCwzvpzYlN
- hjA/RE7+TWbifrlErPMqOJvAmKwtVSI2/swaHtwNG9edQhYC6GJuhltcAvoO1CxPes
- 0Gs7b6Jz2uVzQ==
-Date: Wed, 07 May 2025 23:36:23 +0000
-To: Tom Rini <trini@konsulko.com>
-From: Johannes Krottmayer <johannes@krotti42.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] arm: cpu: armv7m: add required .type name,
- %function directive
-Message-ID: <3897e0c4-c71a-4604-811b-e58998d446ab@krotti42.com>
-In-Reply-To: <20250507225123.GR5430@bill-the-cat>
-References: <20250507060739.326096-1-johannes@krotti42.com>
- <20250507060739.326096-2-johannes@krotti42.com>
- <20250507165533.GO5430@bill-the-cat>
- <6d3af68a-15a7-4dd4-8095-ee2ac6037c0e@krotti42.com>
- <a138ecb5-680e-4272-8211-dbb354745247@krotti42.com>
- <20250507225123.GR5430@bill-the-cat>
-Feedback-ID: 88021767:user:proton
-X-Pm-Message-ID: 863cfee2d43c8d9e5c2f40ee1d51686ea8ceda0c
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-401e77e5443so284525b6e.3
+ for <u-boot@lists.denx.de>; Wed, 07 May 2025 17:07:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1746662838; x=1747267638; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BXy0AaPwrmt00v8ITSbg8etzFEKEmHbiU7huc17M4mY=;
+ b=AiBpbUhpDWbubXkoyIj/TQx26iBxsNiG0y5iuVlqGGabZRQIEWIArnbDmkiyaHJD7V
+ BRzSV1KYJCwD32ITqCliKK1c3wIvEEQX5u1QqHQNAFmihZLokurwUGb0nyOku03NQ40l
+ evdRTDIkdZjXscns4PSvdP/HBRn+TTjYuMEYhbshD4VOkeI9cR4vXhUTwWXKTNqT5DGh
+ 2LjTt5OlV4MdzZ4QY5/miBStyJ1UVkht7h3JzEkp0ONs4N+wL+RWY7fUkplVHsBms9HG
+ vXN3KEShtCRAK/1HKBmO7cGpc9VEECIFhvDfA4qV10pTzJnjQ4s/t0zPHBkK11jJcKnf
+ ci8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746662838; x=1747267638;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BXy0AaPwrmt00v8ITSbg8etzFEKEmHbiU7huc17M4mY=;
+ b=jcoyz0hA8+KzLtYwIidfuaJ36x3B2v/kimQzSs19a94JLoXSqtdX8cZAyxGOnanfQi
+ w3pbI/ahQ66DRZTTUixH0PZsM30X+piXhqV1bePOMEssB/UEjXvz167lqNAIxUieGpbS
+ hjRF0VwkviX71aOqbPAzRKmwR3S/dzlstS9xqal8DSL0V2PnvLscb4LO8JjjN8NBpKcK
+ nyE/uJBhZ0WvtZoAJBKbgyMqwsEXJtKZMh3PwmXRRnvMBcrzMoK+bCWEl7aIU4NyvlwG
+ h18xXWgjztChAn2IdhZjPHvdOJBM6OYjFptLxO+M8P9uOT0yi01b9Vfn9eLTO+iVqx0w
+ Hd/g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQPEYZBM5o/rws4s8fu0GkTRBXcCR7LtPfdD8TpR4vDN+nVq7Xbcw177Nf+nKXP8vtNrCWMls=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkLyqLRwyjOz8qcrt0miE0zBaEuKbAhX2kDUFdjbqiBAAOD0eU
+ T2m+sMfOkig9Kv1kgvPTi6FEIyyuwMZhg8Q5w++wR00TdrqQQNfb
+X-Gm-Gg: ASbGnct5ND0StKZ5rlk6S9O6bSK51YUBWCU+lhc09zND3jleR8TF4vBid2nw+9K8SF1
+ 8IhqBid8kZkw8bv+MzH9j8ORqOzRCvJm9gmjjq8EHUnY8zAFn8DI6+JMd3sFrXpBK6UB+LHJ5AC
+ l9ezDgAHq03XbMSxt6ba0cE8m00aJBGNWRsERP24a4TzE5xPetlBCdG1pixNtuyBQ7AGVtXfL4P
+ x4Y4uDo9tQtpsIW4U2k55Cyy9IBV4ni6+Y+z4V9NX6s2h2RtIyLmUOZSpzLrhNQfZQ3EvnEaGX0
+ OxpbInpjRId25glLA+3m4c+zBhbMXljQCOrpfQNo4GjmBHKAoiTUnZg=
+X-Google-Smtp-Source: AGHT+IGLMmEHd0RIsR+b96H2NjNzq41x2vkgGQdW7m6sIwyqs+H7CWRt89APOe/D6CLSE2Wnb520AQ==
+X-Received: by 2002:a05:6808:300e:b0:3f8:150b:f55a with SMTP id
+ 5614622812f47-40377f2a3ebmr878179b6e.20.1746662837668; 
+ Wed, 07 May 2025 17:07:17 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:428e:8da1:c20e:1705])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4036f3abc95sm861971b6e.42.2025.05.07.17.07.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 May 2025 17:07:17 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: eugen.hristev@linaro.org
+Cc: nicolas.ferre@microchip.com, trini@konsulko.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] board: sama5d27_wlsom1_ek: Get RAM size and base from
+ devicetree
+Date: Wed,  7 May 2025 21:07:10 -0300
+Message-Id: <20250508000710.1196995-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,63 +97,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom!
+From: Fabio Estevam <festevam@denx.de>
 
-On 5/8/25 00:51, Tom Rini wrote:
-> On Wed, May 07, 2025 at 07:07:03PM +0000, Johannes Krottmayer wrote:
->> Hi Tom!
->>
->> Okay, STT_FUNC is an alternative spelling for %function, didn't
->> know that before. So my question is deprecated.
->>
->> Sorry, for wasting your time.
->>
->> BTW, I will add the required macros and also try to add the VFP
->> support. But I think it's better in two different patches. First
->> patch with the ENTRY/ENDPROC macros and later with the VFP patch.
->=20
-> Ah, thanks. I too didn't know about STT_FUNC until now. So I think that
-> means all we really need then is to use ENTRY/ENDPROC on that function?
->=20
+Instead of using defines for the RAM size and base address, retrieve these
+information from the devicetree.
 
-I have added the required macros, also for the 'reset' function.
-There were also the .globl and .type directive used.
+This aligns with the sama5d27_som1_ek board in commit 73c1589f025d9
+("board: sama5d27_som1_ek: Get dram size and base from device tree").
 
-Additional I added some comments, if they are not needed I can
-remove them.
+While at it, remove a spurious '/* SPL */' comment.
 
-Also have changed in 'c_runtime_cpu_setup' the code 'mov pc, lr'
-to 'bx lr', because I think for newer programmers this is sometimes
-misleading. Also for me at the beginning on ARM in the past.
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c | 11 +++++++----
+ include/configs/sama5d27_wlsom1_ek.h                |  6 ------
+ 2 files changed, 7 insertions(+), 10 deletions(-)
 
-Here is the full code for start.S, which I have modified:
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
-  * (C) Copyright 2015
-  * Kamil Lulko, <kamil.lulko@gmail.com>
-  */
-
-#include <linux/linkage.h>
-#include <asm/assembler.h>
-
-/*
-  * Startup code (reset vector)
-  */
-ENTRY(reset)
-=09W(b)=09_main=09@ Jump to _main (C runtime crt0.S)
-ENDPROC(reset)
-
-/*
-  * Setup CPU for C runtime
-  */
-ENTRY(c_runtime_cpu_setup)
-=09bx lr=09=09=09@ Jump back to caller
-ENDPROC(c_runtime_cpu_setup)
-
-If this is okay for you, I will release a patch v2 for it. if not,
-(coding style, ...) then please tell me that.
-
-Kind regards,
-
-Johannes
+diff --git a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+index 04de1257eca0..897fab58ebae 100644
+--- a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
++++ b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+@@ -65,7 +65,7 @@ int board_early_init_f(void)
+ int board_init(void)
+ {
+ 	/* address of boot parameters */
+-	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
++	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
+ 
+ 	rgb_leds_init();
+ 
+@@ -82,11 +82,14 @@ int misc_init_r(void)
+ }
+ #endif
+ 
++int dram_init_banksize(void)
++{
++	return fdtdec_setup_memory_banksize();
++}
++
+ int dram_init(void)
+ {
+-	gd->ram_size = get_ram_size((void *)CFG_SYS_SDRAM_BASE,
+-				    CFG_SYS_SDRAM_SIZE);
+-	return 0;
++	return fdtdec_setup_mem_size_base();
+ }
+ 
+ /* SPL */
+diff --git a/include/configs/sama5d27_wlsom1_ek.h b/include/configs/sama5d27_wlsom1_ek.h
+index 1979cb366e54..b54e3d5c7108 100644
+--- a/include/configs/sama5d27_wlsom1_ek.h
++++ b/include/configs/sama5d27_wlsom1_ek.h
+@@ -15,10 +15,4 @@
+ #undef CFG_SYS_AT91_MAIN_CLOCK
+ #define CFG_SYS_AT91_MAIN_CLOCK      24000000 /* from 24 MHz crystal */
+ 
+-/* SDRAM */
+-#define CFG_SYS_SDRAM_BASE		0x20000000
+-#define CFG_SYS_SDRAM_SIZE		0x10000000
+-
+-/* SPL */
+-
+ #endif
+-- 
+2.34.1
 
