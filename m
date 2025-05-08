@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42AE0C3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 07:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14AC2C3ABC0
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 07:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEDFE8210D;
-	Thu,  8 May 2025 09:29:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D4E48291D;
+	Thu,  8 May 2025 09:29:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iMGLCdnr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iC70sEP4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 051F8828A2; Thu,  8 May 2025 09:29:17 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 41DD38291D; Thu,  8 May 2025 09:29:18 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AC628059D
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 09:29:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 416FF8211F
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 09:29:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43cebe06e9eso4525875e9.3
- for <u-boot@lists.denx.de>; Thu, 08 May 2025 00:29:14 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43cf05f0c3eso3830535e9.0
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 00:29:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746689353; x=1747294153; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+eSEhOZS3sskzKcwC/FFot4kWQXfuMxxVep86P0gGns=;
- b=iMGLCdnrlL7NmTxT0nSKVeVJW1pfKHVD5RzPmCmGQ0gZjzqrkhhyh2NGYC4iOv7S9O
- qlOPumD9HHCTZtGH0E0eH9xECHieIGi/WMpauklYRMMq4FSpGbm/HQAboPLtpoT9vhAr
- 9eMgbHiOOcw5EjujV56O2naUHgKsfvYLVOatM=
+ d=chromium.org; s=google; t=1746689355; x=1747294155; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=beFDnk4IYbbgcTy6igjGSo+Su7P65FiGvFnA46bepLI=;
+ b=iC70sEP4oayHiz+Es5t3m1OPzohVUAFEuff4gVMVtzGc4Si8ohZzhHW8SwbGWXJy9h
+ KDrrd0a2vb7CPH7uHq7vImiI9Ezol2L+WJq4ZJr7k1XYgYgGSrVznEC1b+5EQa+ug6XG
+ jdxk8T1IuVpo5SnO1stQq12sWyAdVLWANI5+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746689353; x=1747294153;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+eSEhOZS3sskzKcwC/FFot4kWQXfuMxxVep86P0gGns=;
- b=CfqmyYFR9WsfKtCKUaHwVKC1iBByqu8/SbomlfEIcHWSnujuXVFlY+o77Si3V5IX7/
- X4bGNSZuXGVgp8RuS42miyM/g+Ehugsyk2Jc/Y8Q20EEHAwbniNcC611rE2UXBMJ6Ok3
- 0+KgGqLz9QcWNAr0AV5g3ZQQ/25aWA8723HqkUxivIAq/MrH7KbMy22hG2Kvi+mZ5VOb
- GL5iux05DEe2fNKuk5hq4aANu7vkB29RX+rmiKXxu5wXKbwpiuxGdhWcc+uB0B+XLUnb
- hqldM/ErGNf7ylP7nZgTbhuteO87WRdAw0Tho8ZcbQMXQoBS9gpcYliMhcrbJhCNBvKF
- 7GpQ==
-X-Gm-Message-State: AOJu0YwH+UPc8bXQTs8CzlNpNt4zk9K7rK3/IbqJIffuYXjWp6m0ADJI
- 0hNdBDHXGvu2bRz0cMAz4Eg7N78thRp3YU4zQkO6VSrCGIXgZSIWHLiFsSiUNE2CSlalK2aDRi2
- qfCrLLQvtXA==
-X-Gm-Gg: ASbGnctgLkFH283mFA88hE0/vzrrVj9j2A+lLPskuJgkALI7+nYF3TxF0CjsYevVHgi
- K61Kzvw8aDUyh+i/vprCCU6yDMQBt/H0gRY/nUJyMOAsBXCzrJBMNBPru/NL7X1RO6jIU1UTb0D
- kilstqpIyk6dpkZJ7CbvU8Eh6lvUkOkKw1oOkR1qnCfBLgs6TRa3zI4O+fC5wD/2KaSZirRIUCz
- mr9AqI61H9R5eib2WBnMFgXyPUsndkVqTlibUJejvFxeGKOt7o/ushQxjJgF6oT6SdO9LmINNfA
- FsFTlTj0SE/M/Ng2dAv0AADOvluXS3F4aVat1R+IbqPPFESv
-X-Google-Smtp-Source: AGHT+IEl2O4UmmXBZrVcJ7Mu7pV17YTNakuaQM9jyZV2RSbImNycmpszjRj6QYl0WxTzlF8xNIt0Wg==
-X-Received: by 2002:a5d:5988:0:b0:39e:e557:7d9 with SMTP id
- ffacd0b85a97d-3a0b49e9fa9mr4196465f8f.5.1746689353435; 
- Thu, 08 May 2025 00:29:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746689355; x=1747294155;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=beFDnk4IYbbgcTy6igjGSo+Su7P65FiGvFnA46bepLI=;
+ b=QPmNxxWObHPQc/CnNOA+iaSp+d5WKQUQEzXVj528B1H6t9v0d1HYagj1sI/3U+mZky
+ 6a34MIPJYvud/MvOYd0TZHjxB3owuO7bgA9spAxgCnYZVg++jyNtpmAalzkZkhOZy84s
+ k3Xl+AbP/6KHacDHdmE4SWAjota2bZ4iR1IthOa0kKHLnCK20p3aPwR2n47SKxFEyF1J
+ 4Miop70R/PteQD/ckwSGNxO4wdaeLGprgoJDw92rlT7WNfVTccAzMcJ6lLkByME+cATT
+ EB7KQp+xJqFSh6b6xNGwAjFDoM1oepJiFRVQruUqp6vwklmmc1k9i/43+o68r1PAyDwe
+ G1lQ==
+X-Gm-Message-State: AOJu0Yxo7DdJy9AqQ6lry/VVYik9r6HAoE8YMf+bzUMhgDeS86Z1FWOS
+ TVAJyej/Q1GhaP9AjcF9pSeHJd8heD0bhgImnRCqsRSQi30rlo72IjN9/nfw80R0JbfK9uJku9M
+ 4aOp6y2cFqQ==
+X-Gm-Gg: ASbGncvRk5YDCHCTB5ub6Oe4SXdbHc3SMkmFYMxbfpldy7LeNTn0yzoCUwnbpZZ7Pf6
+ nMz4+gZl3u1aH3j/CaLK9BwND/c4ZjAJ/JPnz1xWTpHS4sfTTOpHoMI0rtSXTFuec9rrrArTw21
+ BIo2Lr1J1sLd3c/TPsSYm3sO6cnsSCouGCtNVBamqJ5i/l6Lf69gYWxago6kwMU6arGBvYqp9/J
+ wHsu57ldXDtQCZqYa8GqJjLsLPJX3QLrhfDK0X600g2km4GRIFS9Yox8/SJYwPzKgpKg4P+RvV5
+ cRZEZkn3kVuwn8oxZAjg4BWPRATEbKxztAdESw==
+X-Google-Smtp-Source: AGHT+IGUFWdBHPTF5f6O4B0aUw6+63n+fQaNDHGDk1jLkNf8lFtYkLttRRWAgFsXP5q188swNMguzg==
+X-Received: by 2002:a05:600c:8218:b0:43d:97ea:2f4 with SMTP id
+ 5b1f17b1804b1-442d02ed37bmr21612815e9.12.1746689355250; 
+ Thu, 08 May 2025 00:29:15 -0700 (PDT)
 Received: from chromium.org ([213.157.19.150])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a0bd6999bfsm774375f8f.46.2025.05.08.00.29.12
+ ffacd0b85a97d-3a0bd6999bfsm774375f8f.46.2025.05.08.00.29.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 May 2025 00:29:12 -0700 (PDT)
+ Thu, 08 May 2025 00:29:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Brandon Maier <brandon.maier@collins.com>,
- Brian Norris <computersforpeace@gmail.com>,
- Douglas Anderson <dianders@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 00/20] patman: Minor improvements to prepare for series
- handling
-Date: Thu,  8 May 2025 09:28:24 +0200
-Message-ID: <20250508072907.207175-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/20] u_boot_pylib: Tidy up quoting of cc and to
+Date: Thu,  8 May 2025 09:28:25 +0200
+Message-ID: <20250508072907.207175-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250508072907.207175-1-sjg@chromium.org>
+References: <20250508072907.207175-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,53 +94,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series includes a number of internal improvements to patman:
-- Tidy-up of parsing
-- Adjust how tests create the git tree
-- Support for creating patches in a different git directory
-- Faster determination of the upstream branch
-- Ability to collect the body of a commit message as a series of lines
+The current approach to calling 'git send-email' puts double quotes
+around each email address to ensure that it will pass the shell
+correctly. This is a bit cumbersome and requires using a shell to sort
+it all out.
 
+Drop the quotes and use command.run() instead, to simplify things. This
+will also make it possible to (later) set the current directory.
 
-Simon Glass (20):
-  u_boot_pylib: Tidy up quoting of cc and to
-  u_boot_pylib: Provide directories to gitutil functions
-  u_boot_pylib: Speed up determining the upstream branch
-  patman: Add all files to __init__.py
-  patman: Allow setting the current directory when sending
-  patman: Allow setting a git directory when sending
-  patman: Correct use of str in code
-  patman: Use itr instead of lines for iterator
-  patman: Use .git as the git directory
-  patman: Use variables for series ID and title
-  patman: Clean up creation of the git tree
-  patman: Use git to set up the test config
-  patman: Correct some pylint and asyncio issues
-  patman: Split parser creation from parsing
-  patman: Add tests for help
-  patman: Split subparsers into their own functions
-  patman: Move arguments for sent into the correct parser
-  patman: Move -H out of the send command
-  patman: Tidy up function comments in the series module
-  patman: Support collecting all lines in the commit message
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
- tools/patman/__init__.py      |   9 +-
- tools/patman/checkpatch.py    |  12 +-
- tools/patman/cmdline.py       | 230 ++++++++++++++++++----------
- tools/patman/control.py       |  14 +-
- tools/patman/func_test.py     | 278 ++++++++++++++++++++--------------
- tools/patman/patchstream.py   |  44 ++++--
- tools/patman/requirements.txt |   2 +-
- tools/patman/send.py          |  45 +++---
- tools/patman/series.py        |  47 +++---
- tools/patman/settings.py      |  28 ++--
- tools/patman/test_settings.py |   2 +-
- tools/u_boot_pylib/command.py |   5 +-
- tools/u_boot_pylib/gitutil.py | 102 +++++++++----
- 13 files changed, 521 insertions(+), 297 deletions(-)
+ tools/patman/func_test.py     |  2 +-
+ tools/u_boot_pylib/gitutil.py | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
+diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
+index 3a34302fc57..7f9175ea44f 100644
+--- a/tools/patman/func_test.py
++++ b/tools/patman/func_test.py
+@@ -292,7 +292,7 @@ class TestFunctional(unittest.TestCase):
+         self.assertEqual('      Cc:  %s' % mel, next(lines))
+         self.assertEqual('      Cc:  %s' % rick, next(lines))
+         expected = ('Git command: git send-email --annotate '
+-                    '--in-reply-to="%s" --to "u-boot@lists.denx.de" '
++                    '--in-reply-to="%s" --to u-boot@lists.denx.de '
+                     '--cc "%s" --cc-cmd "%s send --cc-cmd %s" %s %s'
+                     % (in_reply_to, stefan, sys.argv[0], cc_file, cover_fname,
+                        ' '.join(args)))
+diff --git a/tools/u_boot_pylib/gitutil.py b/tools/u_boot_pylib/gitutil.py
+index 7d3a0b68c53..e5a466c8cc6 100644
+--- a/tools/u_boot_pylib/gitutil.py
++++ b/tools/u_boot_pylib/gitutil.py
+@@ -396,7 +396,6 @@ def build_email_list(in_list, alias, tag=None, warn_on_error=True):
+     >>> build_email_list(['john', 'mary'], alias, 'Cc')
+     ['Cc j.bloggs@napier.co.nz', 'Cc Mary Poppins <m.poppins@cloud.net>']
+     """
+-    quote = '"' if tag and tag[0] == '-' else ''
+     raw = []
+     for item in in_list:
+         raw += lookup_email(item, alias, warn_on_error=warn_on_error)
+@@ -405,7 +404,7 @@ def build_email_list(in_list, alias, tag=None, warn_on_error=True):
+         if item not in result:
+             result.append(item)
+     if tag:
+-        return [f'{tag} {quote}{email}{quote}' for email in result]
++        return [x for email in result for x in (tag, email)]
+     return result
+ 
+ 
+@@ -524,13 +523,14 @@ send --cc-cmd cc-fname" cover p1 p2'
+ 
+     cmd += to
+     cmd += cc
+-    cmd += ['--cc-cmd', f'"{sys.argv[0]} send --cc-cmd {cc_fname}"']
++    cmd += ['--cc-cmd', f'{sys.argv[0]} send --cc-cmd {cc_fname}']
+     if cover_fname:
+         cmd.append(cover_fname)
+     cmd += args
+-    cmdstr = ' '.join(cmd)
+     if not dry_run:
+-        os.system(cmdstr)
++        command.run(*cmd, capture=False, capture_stderr=False)
++    cmdstr = ' '.join([f'"{x}"' if ' ' in x and not '"' in x else x
++                       for x in cmd])
+     return cmdstr
+ 
+ 
 -- 
 2.43.0
 
-base-commit: a15813efc66b624cede0f3c6107ca77abbffe1f2
-branch: patc
