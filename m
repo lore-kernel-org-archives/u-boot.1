@@ -4,137 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F241C3ABC0
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 13:17:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FF81C3ABC0
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 13:18:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 612C882977;
-	Thu,  8 May 2025 15:16:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2640482905;
+	Thu,  8 May 2025 15:18:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="H6RKAfJT";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="evdB3q/c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CA5482AB1; Thu,  8 May 2025 15:16:55 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20717.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::717])
+ id DBB8D82977; Thu,  8 May 2025 15:18:55 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::701])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73FEB82977
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 15:16:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E461C828BC
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 15:18:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JOtlAXRWRLXLBwIJUpdbT7nG0wSPvUPtEMhJZJw69qFPDA+R4aiNgMcgCzh9Qi3LUARlO2ssYU6buhXo9ulPo800F0xn2SEEVHCRzsL2/nhg9ZrorfvH4GylOtVyWjIOoGDP4UR5iCtPRcZefUYNxN6W/Wa6nMWRRkOOLI0vmGMw9ad6DOjXP3ZDcfai4TKeGd++dwoPCLrse7oIMhTvb8++G/+HcRABQVOsiugF/LxGr1PNI5CvqtJwkL8Q8ZdI07+h2Is6EQeR5n/01Pa+IlDUkq05KVA15Fvnx2mbpDczxO+hcsGtqC3KnfxknPmnvcjCcHwXQOnjRVc679aHWg==
+ b=eStJkJx0gEiSPEcVS4qpkN77DRL3Y79DN4cakNXU2WDC2iUcw7nhLuCTU0Tz4kmCCbWTB+s5wXycAM0KT8QZ3Nn28XG1nn/agk6I5G+F67z85r2v99c++PVb3fCmHsscblA26KZkZIedbYUpzZpJpGQXJoFW8nmHFbcbwQtjyEltLYgWztk8QM9r293BbFabERdkGS8vgitzsUkRfna5Qhc4ciX5nVy9l8O0oYBdxlzjXoPIq0t2u7E9kwB0r02DQjP2E+SRtrc0zZmM7L8CXD3l+73yV27YG3y6pPbEZSDhhXbdl4THKazwIp3BguADOwKe1SqXxW0AKyaQegrCRA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XqjnaTEEA2Kr/9GP9z+yagrpX26QdQm2tjhmtwAyghE=;
- b=y4KKkl37RDNp3JWzdQL83nEmOb82Z3MTYEH+RsswJOik5BoclAp1qUCY/1a3rk29A/ncScjNEsfY6+8biXqgpG60B67RwjuBNIOaZVK6jVgin1crcx42730ox0Ac8grU7FAt01686EuAa4dC/fbkXNj1SO7CcXG9GcjODAIjtGaE5emSJGqiV92OJ80L87K3vBW5gPhczND4Z7N/7h+5+SBFhjST+Ga91UvSLoUkQVE2/AQYgmGXu0lcreTbKRFJybjQi5qQadyy/uAo1Qouw2QLBJlT4yhMSy45QT0md88Nj411DlO8KWA/nvWzbDPdX1jiJ0v4XJLYsOgFlGZ9CQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+ bh=JRROX4T4BBM4qJwTr/JnzNMr1rj1rdHm5FI+ffWK988=;
+ b=IpQFZKZF/BErRkuED1OZOWQ12wFPK86aOalR7uC5ff3SB86HUN+zhP/HJqvD3wVy/1GRtYh7wXaztM/bGbTXMU5SR2xGBDywApY03C/VcXk6L517L0rF6QaW6/N7VYUGP63R6a5iqz7EWw5E6chQFquta517zkdzrk2rShEuezo2CgOWvPqQSGnuyy3T70EvKP70UcITYWSJm/hzgplzVrUjzw7nifG2kqYqWq9z0B9+jY8rkBtkH/WG8KbD2op499iZzpKR2U4cpmkpbHHyw3n5j8gMz4qipxncmfUaIj/M1yClOzHyESVPQQLTGiRU4HhJzCkgS9HJZsp31mtGNQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XqjnaTEEA2Kr/9GP9z+yagrpX26QdQm2tjhmtwAyghE=;
- b=H6RKAfJT8bAiHstCqxnjI/Vy2vQ83d+RB28w+S1q7rkEABP+mcK2bBDx/3m26CfgVT60c1tshRpkZYj/dRWTXkW1IPg0e3EPIOHfKlMFA1lzmAlEu4SH93b60zlNJJy1wBsD8ksgfxKNmSka4O57mcxxBOefv++hLHQ1Q8KzfrTGHlnPyXQCZFZ/sbcViKTOH2NTmOa8CCD69bbX9vt7f4ZFtfMHsc/x6+cjKcER7RMERG4PhPV2wzvdDD8/UUhcJueFbSazZaGLDpPCiJ1AZpDhkwflbmXf0BUITliCUr/yd1CyuW08ptw9kZnEhGO5xeB5cKWB/shPCkHVBSVBiA==
-Received: from AS4P189CA0004.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5d7::7)
- by GVXP195MB2031.EURP195.PROD.OUTLOOK.COM (2603:10a6:150::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8699.26; Thu, 8 May 2025 13:16:49 +0000
-Received: from AM2PEPF0001C70E.eurprd05.prod.outlook.com
- (2603:10a6:20b:5d7:cafe::d5) by AS4P189CA0004.outlook.office365.com
- (2603:10a6:20b:5d7::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8722.23 via Frontend Transport; Thu,
- 8 May 2025 13:16:49 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AM2PEPF0001C70E.mail.protection.outlook.com (10.167.16.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8722.18 via Frontend Transport; Thu, 8 May 2025 13:16:49 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Thu, 8 May
- 2025 15:16:48 +0200
-Received: from phytec.de (172.25.0.51) by Florix.phytec.de (172.25.0.13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Thu, 8 May
- 2025 15:16:48 +0200
+ bh=JRROX4T4BBM4qJwTr/JnzNMr1rj1rdHm5FI+ffWK988=;
+ b=evdB3q/c/IhnnwgP67HdfJgC+lZVPF8VpWpFI+xrD//aNAa9eCbfcKm060yaqYd+WZMcJI95XWpNs6GFKWAQEhsgpyHTsVkL6vB8BmSF7QnR3FM1EE48LdPXnI5CjvgJV5OhMxm59QFa6D3uU7oPtlMVa+2FJ2FKV9tkSwyGzpjVJmk0CECRTAI+68ddVvmXzd877QhmVu5LKfTbAjGK+bBczZqq02d+a6yZCACVX2MmkoEfPqzG94/HOzmDah2M5ehm+khiluOqGKCEvl/sXpZDUgL3b5uS5c/Q+W3KDQSJh8ewxqJLSTRO8A9ZBzvvnCMWiSWFIwaGAmQpOszKvg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by AS4P195MB1986.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:586::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.21; Thu, 8 May
+ 2025 13:18:52 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a%4]) with mapi id 15.20.8722.020; Thu, 8 May 2025
+ 13:18:52 +0000
+Message-ID: <c58248b7-9624-4c18-9aab-8852f94cd447@phytec.de>
+Date: Thu, 8 May 2025 16:18:50 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [Upstream] [PATCH 0/2] *** boot: Add Kconfig options for
+ script-based boot parameters ***
 From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-CC: <trini@konsulko.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <tudor.ambarus@linaro.org>, <joe.hershberger@ni.com>, <sjg@chromium.org>,
- <d.schultz@phytec.de>
-Subject: [PATCH 2/2] mtd: bootdev: Add Kconfig option for defining script
- parameters
-Date: Thu, 8 May 2025 15:16:41 +0200
-Message-ID: <20250508131641.2561876-3-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250508131641.2561876-1-w.egorov@phytec.de>
+To: u-boot@lists.denx.de, upstream@lists.phytec.de
+Cc: trini@konsulko.com, jagan@amarulasolutions.com, vigneshr@ti.com,
+ tudor.ambarus@linaro.org, joe.hershberger@ni.com, sjg@chromium.org
 References: <20250508131641.2561876-1-w.egorov@phytec.de>
+Content-Language: en-US
+In-Reply-To: <20250508131641.2561876-1-w.egorov@phytec.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0902CA0046.eurprd09.prod.outlook.com
+ (2603:10a6:802:1::35) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.51]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70E:EE_|GVXP195MB2031:EE_
-X-MS-Office365-Filtering-Correlation-Id: fb02896c-4f0a-468a-318d-08dd8e329775
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AS4P195MB1986:EE_
+X-MS-Office365-Filtering-Correlation-Id: f1f6f584-81a6-4fb1-50a9-08dd8e32e049
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?FsEP5vQH+KL9VvmUhoMuYmvx85Itq0LOBTYYUE/ZdII09YzMS+aBgfbHR+4H?=
- =?us-ascii?Q?F5icyXrPCtkaGSDg2iWhiLbeq4/hA7+mEZR5gmrk7IVeVnmsQdkLZN/+1A1m?=
- =?us-ascii?Q?ibuIvaKS7nNT6VN6XD7Kop1xDKEC4UzQyM5AeHc5O4KzO3+dOOMOSGHMISCp?=
- =?us-ascii?Q?iud0uNn9xTn0WCCN+5J5TzRHUBQBeH5IPMcVbCeQuHOEaa3rMbqKAC33ySIq?=
- =?us-ascii?Q?pUVBK4Do8WkazA+mqdhGZJ6iuFfqO2YZ6AurfPc+dMoa8oqZZERABTZY/lYK?=
- =?us-ascii?Q?UPOPICsTFqS45oVqZ6Ay4pwH2Sr/6aPXgqADu3OqUrCfuVewi5Ho0P18Sl8T?=
- =?us-ascii?Q?ieUyiq4GSZF2oZJhfpfhsgxLKkR/HaV/J7S6n36WqLHeCyjNbTYhRsbYffGK?=
- =?us-ascii?Q?j3G5XF516vyuv0RDM5F+jikssWGYPKTRrDWkygpTjB6WF4ukIFwL6ADyMOdp?=
- =?us-ascii?Q?KtBtw/JoQ9KJSFn9tAsxUc2CIHG2T69tOh9glJfcs08TN7HsjrIVK7TOETUk?=
- =?us-ascii?Q?dOip6FQ4VAL8Yj6PnGF5LDiayA3HJoEukCHijMcyndPGlodhHR9G0Fc7vcye?=
- =?us-ascii?Q?igdSOphjXxBP4aQ/AxjHAZ2Av8B0PNGisQIzDJilgKIXUYYZnala9MF0LsX/?=
- =?us-ascii?Q?k6za6LhrQCEWGKsJfgOrELf0xErIp5M3Y2eYGbYNpvsixjJZAJCE5c2jnve2?=
- =?us-ascii?Q?asCvtiCnGDdG11l815oRfwjrW3JibwK39lsSUVXHrOjkkL1yDp/7UWvDw6Ef?=
- =?us-ascii?Q?LV5HEiMMRdG9cuvAmEzYPPkszYDKBHa/TFGGqglvDYhUcqMGyx66L0YbY8cz?=
- =?us-ascii?Q?UgMYGABhI4z0GBwIThhbBVBgo/YSpkT2j2Q5EKNyCcDqFh4giIcvxAFcYyqZ?=
- =?us-ascii?Q?TY+Oq7RMFdB92ESbNQw8piilrwg3AwXjiMVNNGTTGqFBvKTr4OykmhTksxDt?=
- =?us-ascii?Q?/EtQevTByYviw5CZ83z0qPTP+PY9khAKMjVp2FjVlU0iFVa4m9z0EMgY2GbQ?=
- =?us-ascii?Q?2/wuclpp3D9fypb3UtZwzqrlOl2LCMuikMIq0ItTYgGWtonrIhX9fpeFUQXa?=
- =?us-ascii?Q?FU3eb8cnshQnPSpgccoIhVSeI6qmka5G1Aw5xGJ/M+dErYcjTfctJxgEV3Lu?=
- =?us-ascii?Q?yHa2s7DfqX1AVnD7AMfn2H8YrfYA3+wR4ZcSEjkNvx9Q3+ghbp5dmJeG4KG0?=
- =?us-ascii?Q?Msmi3Uo6sLWXt1vhJCFIQ3Ops9UelUa+MqsdLMkJsbXbuSvU3osVpa3IbvCw?=
- =?us-ascii?Q?omR9g5a4FsWLo2eG144KXGi8Hq8GlG0pnQyROpAuHr2vI0Zm0riE/lIFk3IY?=
- =?us-ascii?Q?DVg/P1YJNFnGhqMCD9IV8GEA9cFVj7pt4aLV8WfgQS7H7VrHTXo4IyIBS+In?=
- =?us-ascii?Q?WAwJEsxn+6bXb/Ml1+DnzrYCRy34T0xRtUFHOas9k84H9HnE7xtlywXFyBcr?=
- =?us-ascii?Q?uwJfBdbOVd4BN3o+85NCNF1X71nTyHPKlrv8nV16diQRZagtrGAhpNxM3bjk?=
- =?us-ascii?Q?MMdlQi2GYkw0NXKfoe+fHrd+/fsDpVmjjySv?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1102; 
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QW82ZmZVdURvYlJFNmtHVXRxK0FVUWIzaTY0VGxWYk1IRkFjTlN0clZvYnc4?=
+ =?utf-8?B?bHhSazQrSWVxelNQa1ljbnpRVFByOXhYaFlLTjlKYVp0VjlvSlRncXY5Zkgy?=
+ =?utf-8?B?Rm5ZV0RQa1dGYVJmQm9Lak96WW9yU09ONER5b2ZDOTljY2MvYmc4VzV6L0g3?=
+ =?utf-8?B?aTlKOGRBSkJUQzBIR3grTHBTWlFFY004QytrSWZUYkxiV2VlbmQ4K3NMZ00v?=
+ =?utf-8?B?enZRTmpsbmFaV3ZvT0FvdnR3UnRqK3YvSXFJQzNTdUJnMTlwdVVHdEZpbnk1?=
+ =?utf-8?B?QldGK2NUOERBNVpZV2hhako3WGVDYThHaUI3Zm5JUCt5QmpENENpVUlOT0pK?=
+ =?utf-8?B?RStLTTNkQWhZd2RhYUFpQnhJZmNlQnBlbVRZL1ZTWG55cWZaRmdRTkJlQVh0?=
+ =?utf-8?B?ZGRuY2hiOXgvUUd3MWFPbkFkR0M2M09UUXZtOGNsRHA1eTZQV2gwM0h5eU9w?=
+ =?utf-8?B?dTdxb2lRTGdhQ24yWnFibXJPdmhEZDhoR3lZN2MzekpMajF0NlVQUVRINFh4?=
+ =?utf-8?B?SlZydVpHbU5QdGRQQ1dKMUxIRkExbmVWQ0NMaEpyU1BCRHJ2dU56bXBHTmlZ?=
+ =?utf-8?B?UGdxUmFrZWFOa242L2ZRczBCYy93NEFNU1hzVEEvekFpYXl2NlNGWFFyUW9Q?=
+ =?utf-8?B?Y1VvYXgrZ3gzbklPcDZNcVBZdFJJYjQrWEJ4SVdqTkxtUXBiOW1RdUNKN0hk?=
+ =?utf-8?B?UHlLTDNVb2R5VHdYRGZVZWx0RC9PeVQyZVV0Sjl6RGZROFZPdVM3a3J6Q3hr?=
+ =?utf-8?B?VlppenlKYzhscncxWWpNUXloMnZZSHpXcTUrR203clNjMFdjZE1xZFhXY2hH?=
+ =?utf-8?B?NG5sUDBSOUJJazhuUXljdWcxRW5iUWJVSjJyUlJzb3Y5dWpvNlRmaUwwc2ZZ?=
+ =?utf-8?B?cmFSakIvQTJTRCs4YlByUnJxRGcxL0lGc2pXaEZlUTVTTUZ3elcrcXEyZTgv?=
+ =?utf-8?B?VU5tVW43aTNmMHFXTVFoYk5VSDNpRnFBNjRYWlY3RTVLbTY1OU9xajhOZjZV?=
+ =?utf-8?B?akZ4VW0ybisraGpLdUdRdnFLSEljOG1uRGVWeVVMbkorWFNGS2NtK1ZUR0kz?=
+ =?utf-8?B?bGpnLzdSNnlReUNkZCtsYTVBQ25UUkNoVnE2ZDVjNjhYdzh1bGUrc1liazJU?=
+ =?utf-8?B?Kzg4NkZkeXpYWVEvRjVmM1hRWlJ3MVAzU0pmaUplbXRaTzBKbUpGZURxZ2Rm?=
+ =?utf-8?B?YUE4ZHQ2QWlHRU1ONFJ5OHlac05qcTl0Z1R1LzlQWDRocUFRamdYbHVRTFNm?=
+ =?utf-8?B?QkhiR0hGM2dMRkpSUGVOWUhuMnJLSHREdXh4TnZtSmxDNEp1dGxYalh1cC9L?=
+ =?utf-8?B?S1pJNzJQb1htTWl1WVNKYlpZSkhOV2hYWXUyNTJmOGdHbkpQV2s0anVncGlq?=
+ =?utf-8?B?dTdXSHRpczJiSUFXMTgxOTg5WXQ3dWFpQ3ZBZWRERk1yTFFkekdGdldkdWlB?=
+ =?utf-8?B?Q2dXWHJzUFJLbmxrbFIwTnExenhYSXRTQndLZDlHY2JaT3IybS8zem1VK2JK?=
+ =?utf-8?B?OU1EcmdIeWQ1QndnWlBwM2RINzNMSG5rMW4zWXZVTnZYUFp3SUo5T0R3dGZr?=
+ =?utf-8?B?OWFpZW95bHNhaHFMS1pzWTVrOElWT2MzenpjNmJPS0pzcURseDlSaVE2ZXhv?=
+ =?utf-8?B?Zkc4ckZZQ3Nwb0lwUllTbUtzS0JldWlOU0dISVd4NUFzWnY0MDhqWUpDa2to?=
+ =?utf-8?B?Wm1WVHRpNWJWL3RQR05sRk1keU0rcFZRMWNrSGQ4RjdEM3dEbVBad0RXQ3Bz?=
+ =?utf-8?B?WTlFL1dab2xYaGtHS2dmQ1hLT3hFa3N5dWxPS1VsRUs5M0JNZkd6dXZmc3VO?=
+ =?utf-8?B?WHYrNFJsT1ZFSjJIeFJYV3M4dGVTOVowOHBSWkE3NDRNV0lTMW82UU5PUE5B?=
+ =?utf-8?B?MFRWQklSNEhQOGtKZHRoSHNsZUY2Qm5LNVJGRjRzTWhqL3c9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QVRNUnpraXBLU09sdzdjczhVSVIzcGlXZkJrTG95YzNCTFVtaGRtek5uVnQy?=
+ =?utf-8?B?OTZwQzZybGYySUt6Q0oyZjcxN0c2MnFEMFRuemUxNEFOWlNWZzVsalFxdXZ3?=
+ =?utf-8?B?QjAxSTNCMmY5MFhoWm9oQXhiNk5HQUROWHducEhtbVREcDVJR05jVEUvKytt?=
+ =?utf-8?B?dGpNR01QbzZHdk5hL1BoRW43eHdSdUNNdGo1RmI3MHNxZTFsWFFWNm9TU1Zh?=
+ =?utf-8?B?YzZJNDU1U2VzSHZ3bnl3amhjRlFYdFV5MU9TQVlGYjRHOGxVVi85N0dwRTBQ?=
+ =?utf-8?B?ZWVCMllqem00QWdibkkzOVpZUmJhcVNNblF0Mk4xOU9QaXlhd056cXRXeC9m?=
+ =?utf-8?B?ajFiclBBSEZXZ1d2QjhhMFhNQWRubUt1MHkxdElqdUxKblpsdlZiV3d3Z09M?=
+ =?utf-8?B?Z0ErZ1h4ek5ha0RwYWZuWkU3SGtpQllaNUJVVU1IdmYwUlNFc21LUHU3MHpR?=
+ =?utf-8?B?TzRBQzFZbG5ZUk52Q04vTHRZclhHdjB3Y2Q1WGNzYjFydzVpNjlkYXltVWVq?=
+ =?utf-8?B?NWhTejFuWVVWWDZZSVUvZmt2TGZiVVhydDB2alF4S1BDWVlPRHcyM0VETVVL?=
+ =?utf-8?B?QXVBb245MFdvM0tlMlo4NiszeXJqcWJwT1FuNkZuYWc5VDV5dUFTRnMyZFIy?=
+ =?utf-8?B?VGkyMElFc3pYZy95eDVMN1gxSEVsSFF4MG5jWG1GdDcvQ2pMYkY5WUQ2YXE5?=
+ =?utf-8?B?WU1UVFpJN216dThUQW0xK1l5UkVEOFJJYlZLcEdDc1VUMytiRWJibFk2RDIr?=
+ =?utf-8?B?N0Zsck9xdytxbzhZRWp1YVRPVzVjbzZPd0QwMmlRVCtqa0lRbnQ0ZG8vdXhu?=
+ =?utf-8?B?eWFFNXpkSTV0RFkxVTgxdElXa3doTXd3cUtSV1FxeGc4bkVKNFdWVHJqdllG?=
+ =?utf-8?B?TVdOMG1zNlBUaTZtUUxITUEzYXNtRWdZZFBDbHNXRlpRU0p1YldJWGtXM2lM?=
+ =?utf-8?B?Mk9NWlB2a3M2SU5BYmlXclZQYmU0cC9sL203eGxXQzFNcUV0Rm1VWERQZEJ3?=
+ =?utf-8?B?bEk1d1VqdW9EL000RmZwN25oUjB4aCtYdWpYRHAyOUJBTFpPaVg2bWtIanhM?=
+ =?utf-8?B?b1FTTHMyMlozUTVlL1Bub0FpbjVsZms1MllRVlVLSStYSkoydkRHWGVhaUdl?=
+ =?utf-8?B?VEZJSG0zbUtiNEJ4aEl2UmZmQVVXT01YNXdPNlltSlF1Q1k0M2xPdEt2bFZq?=
+ =?utf-8?B?ZFI4NDNGeENROXl5YjFPdFVTbnVmVFBBYnMrYkE5KzR3UHUzU3JwRGZ2bXJO?=
+ =?utf-8?B?SUhtOHZDSmtWOUc2cFczN1pQaFVwdTlZT0U5dWhRZW1USTBtdzhlckFTcEV3?=
+ =?utf-8?B?RFExM0E2bm1pU3ptQ3BZVEJ1dGZyaFpZRXdBeER2R0k5VkNjcGxYOUljVG4x?=
+ =?utf-8?B?UDI3RnZOVDJLTVdrR21NS3g1NDhjNWNORkZBd29hRGNmYUM4OC9hc3l1SDFn?=
+ =?utf-8?B?c3l6bFpBeVUycUxtcUxRZzYwampoWDJTQjIwOFQ3bE1hWldHT3NDYWJ0cmhW?=
+ =?utf-8?B?S0huWXJ2Yk9Bc2ZuSzg4NVNtR01ma2tlSlBvQ01FMDk0MmpObHpVQnlwZ09Z?=
+ =?utf-8?B?SStTeHFHQ2ZzdHV3UmQzRWZEc3pUVS9Wby9zTnMyM1JFdzFERWhpK0Y0eUth?=
+ =?utf-8?B?MS9iM3ZYOUZYMEMyMlpmME1sd3pCMnFQT0x1NlhqUS9tMkRmbml1VzdLWTdD?=
+ =?utf-8?B?Y1NnM015RXVPb3FWWHUvekJ1NXFDZ0dQallvbFpYbzNsUW5lME1vWGNURG52?=
+ =?utf-8?B?aW1reEpha2RIa2hhcU9GN1NKL1Rabmx3WGRRQTBaT2F1OVc5WHNzNmxMSFF4?=
+ =?utf-8?B?dlI0Myt3QysvUnRRTWh1TjB6ZzFjanFQemlNaUJBYkp6SEZPVmx0M1QxL29i?=
+ =?utf-8?B?RjlNck5EZ0FkT0lGV1VhWWJlS0Vpd21iY2NUWGdZSmw5SzJaRG9qS2JPaVE2?=
+ =?utf-8?B?YSsyajdyakQ1L28rNjUzRzVYdklvWnkxYnFGUU41ckFYUkV0VWtoT3UwMnBk?=
+ =?utf-8?B?MG1ER3JTSGt6VTJJbkZ2QTFPTUpmVktwVUkxVnp3RGhMS2FIaE1qOG0yQVAx?=
+ =?utf-8?B?bmtzaEk0R0Y1OU9BdUQrN09IbXhnSUZidFpVbXNPOFNzUFlLY3p2ZnpmYU9P?=
+ =?utf-8?Q?FNxzxikZKTpCPIu99GO+m3WbQ?=
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2025 13:16:49.6534 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fb02896c-4f0a-468a-318d-08dd8e329775
+X-MS-Exchange-CrossTenant-Network-Message-Id: f1f6f584-81a6-4fb1-50a9-08dd8e32e049
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2025 13:18:52.0393 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM2PEPF0001C70E.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXP195MB2031
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rOeGa8KHwJvu0I8W/ycaHZeN5eYejrc1CXz8RKR3FvYofGX87zPVkLZiCaWk0MwR0YqZ4/1TroR2uJdoGNePHQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4P195MB1986
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,69 +174,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce USE_SPI_FLASH_SCRIPT Kconfig option to enable setting default
-environment values for loading boot scripts from SPI flash. When enabled,
-SPI_FLASH_SCRIPT_OFFSET and SPI_FLASH_SCRIPT_SIZE define the default
-script_offset_f and script_size_f variables.
+Am 08.05.25 um 16:16 schrieb Wadim Egorov:
+> This series introduces new Kconfig options to configure default environment
+> variables used in script-based boot scenarios. Specifically, it allows
+> setting the following standard boot environment variables:
+> 
+> - boot_script_dhcp via BOOTSCRIPT_DHCP
+> - script_offset_f and script_size_f via USE_SPI_FLASH_SCRIPT and
+>    related options
+> 
+> These changes make it possible to define standard boot environment variables
+> directly via Kconfig, allowing higher-level build systems like Yocto to set
+> them at build time. This avoids the need for post-build environment patches
+> or runtime overrides, improving reproducibility and simplifying integration
+> in automated firmware build workflows.
+> 
+> Wadim Egorov (2):
+>    boot: Add BOOTSCRIPT_DHCP Kconfig option for boot_script_dhcp env
+>    mtd: bootdev: Add Kconfig option for defining script parameters
+> 
+>   boot/Kconfig            | 18 ++++++++++++++++++
+>   drivers/mtd/spi/Kconfig | 26 ++++++++++++++++++++++++++
+>   include/env_default.h   |  7 +++++++
+>   3 files changed, 51 insertions(+)
+> 
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
- drivers/mtd/spi/Kconfig | 26 ++++++++++++++++++++++++++
- include/env_default.h   |  4 ++++
- 2 files changed, 30 insertions(+)
-
-diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
-index ca60a425ba3..fc154ec89d7 100644
---- a/drivers/mtd/spi/Kconfig
-+++ b/drivers/mtd/spi/Kconfig
-@@ -89,6 +89,32 @@ config BOOTDEV_SPI_FLASH
- 
- 	  If unsure, say N
- 
-+config USE_SPI_FLASH_SCRIPT
-+	bool "Enable default SPI flash script parameters"
-+	depends on BOOTDEV_SPI_FLASH
-+	help
-+	  Enable this option to provide default values for SPI flash script loading.
-+	  These values will be assigned to the 'script_offset_f' and 'script_size_f'
-+	  environment variables at boot time if not already defined in the environment.
-+
-+	  If unsure, say N.
-+
-+config SPI_FLASH_SCRIPT_OFFSET
-+	hex "Offset for SPI flash script (script_offset_f)"
-+	depends on USE_SPI_FLASH_SCRIPT
-+	help
-+	  This option sets the default value for the 'script_offset_f' environment
-+	  variable. It specifies the offset (in bytes) in SPI flash from which
-+	  the boot script should be loaded.
-+
-+config SPI_FLASH_SCRIPT_SIZE
-+	hex "Size of SPI flash script (script_size_f)"
-+	depends on USE_SPI_FLASH_SCRIPT
-+	help
-+	  This option sets the default value for the 'script_size_f' environment
-+	  variable. It specifies the number of bytes to read from SPI flash to
-+	  load the boot script.
-+
- config SPI_FLASH_SFDP_SUPPORT
- 	bool "SFDP table parsing support for SPI NOR flashes"
- 	depends on !SPI_FLASH_BAR
-diff --git a/include/env_default.h b/include/env_default.h
-index c72cf123004..9f2f222519d 100644
---- a/include/env_default.h
-+++ b/include/env_default.h
-@@ -127,6 +127,10 @@ const char default_environment[] = {
- #ifdef CONFIG_BOOTSCRIPT_DHCP
- 	"boot_script_dhcp="	CONFIG_BOOTSCRIPT_DHCP	"\0"
- #endif
-+#ifdef USE_SPI_FLASH_SCRIPT
-+	"script_offset_f="	__stringify(CONFIG_SPI_FLASH_SCRIPT_OFFSET)"\0"
-+	"script_size_f="	__stringify(CONFIG_SPI_FLASH_SCRIPT_SIZE)"\0"
-+#endif
- #ifdef CONFIG_EXTRA_ENV_TEXT
- 	/* This is created in the Makefile */
- 	CONFIG_EXTRA_ENV_TEXT
--- 
-2.34.1
-
+Sorry for sending this twice, first time included a mailing list which 
+should not be in the CC list.
