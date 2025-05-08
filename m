@@ -4,47 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF341C3ABBE
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 12:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09695C3ABBE
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 13:03:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AE7682905;
-	Thu,  8 May 2025 14:50:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id 6E92B82153;
+	Thu,  8 May 2025 15:03:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="YfKo9vCe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XfgqxiCZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DF9E8283E; Thu,  8 May 2025 14:08:03 +0200 (CEST)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.38])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A4B4A82162; Thu,  8 May 2025 15:03:17 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7805482153
- for <u-boot@lists.denx.de>; Thu,  8 May 2025 14:08:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id 3D3E68212F
+ for <u-boot@lists.denx.de>; Thu,  8 May 2025 15:03:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding; 
- bh=X/QKKRbxeB8RAiWkq5On9yW5uoFRWCrVLFQTeAda/qI=;
- b=YfKo9vCeNW38DCa6jhMgLK4sgiryH7YsiXfOzRNqmvb2Wzx/ocUwCAG3mA6C+k3dtxJlDJGLhgJ3bH53Nx9jIfpfb702ulInDix0XYHgYvP3mGwUOqwhjYdnzqZwycO5v4ekDw7JxYTv0vpftiyfAn8ZMnZRHn4nOT19Gzzy7wMeiTN97aXmhSiwUXjvNoiRsxBnDrsvSnkyo4NCYmpRc39Vjlk8baIXaYdSFqXaJ21ZcPV7UkylisPEJI
- MxR5T84fIUX/MyaWlhX9V4kB7hw8mcngCppoFcT8BWbWiLDd2HtPqv8GlP6osbJ8RkJ5M+6PqZZRwJVHuhW5qRud+N9w==
-Received: from TkB (188-24-195-180.rdsnet.ro [188.24.195.180])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Thu, 8 May 2025 12:07:56 +0000
-From: Marius Dinu <m95d+git@psihoexpert.ro>
-To: u-boot@lists.denx.de
-Cc: Marius Dinu <m95d+git@psihoexpert.ro>
-Subject: [PATCH] EXT4: add CRC16 dependency
-Date: Thu,  8 May 2025 12:05:19 +0000
-Message-ID: <20250508120518.1489-2-m95d+git@psihoexpert.ro>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-326b9930730so5128961fa.0
+ for <u-boot@lists.denx.de>; Thu, 08 May 2025 06:03:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1746709394; x=1747314194; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eKCxdPjC+V8alINHfeEn11ONLU+VA0V+gXzXXBsWv4U=;
+ b=XfgqxiCZ5/CWJ4f9+QK+qn6mXLGx9s9qP+D0+hWLgZwlU6H4PHTeDteKBwp3nev8Hk
+ IpXH5PSvQ9HmnkkzcHealljwRxIOWzuGKCJOxRGVB0FKy/klBZ2W8/y3uMRL4/b1kpZm
+ CLsExLpqETff9zFcMaBaLoQmgFgF3MAUY2a9AzruwLdRwK3rLo8Qiu8+UfmOlb1t0Fq4
+ IS8Xf4mRV4nJzHdWwpBhqxboGFvjtVw8IO7Ru2seGNS7vNZNmJFakatBThLTGC+HXyzO
+ fRDvisvuuwQCKx3gQX9rqIFgPsUdMETvGPu241LbKtV+VIz6VDJfjHtqnM1wWkS0tiGf
+ wM0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746709394; x=1747314194;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eKCxdPjC+V8alINHfeEn11ONLU+VA0V+gXzXXBsWv4U=;
+ b=vTBPaGBsEcUXQ5eguVRnH6DxUmVmDCXb8Kv1UGLejApnBBbJ8MOrRvZIUg2d2Us17L
+ Av2uH/AAgjudBUM73jc131AaTVp/dWbvyRU3S2+cx/bhmoal06thb9kvZrC+bXKYoBtq
+ /I8cD2bMV8keO0gUzI7nUH/9wyv6M422FL/AbeLaoe1rQVmApEYtaR10L2+vREoVAk/n
+ GMXppF7dcXe9d75M8kTSYuodEkpffry/KIzju43YOLEiAATZ/agXzBFwJI39bGwa0CaY
+ PQghQzOztcjxchz4v0WEFEs9BZwUgVL/Vp0KoR9ycWtCLm4iwnU7fTItRbxW20GrIsV9
+ nvog==
+X-Gm-Message-State: AOJu0YzvWnGR25NE1dEFseBEHRNNfoeMaMD+4a4A6eyx7YsEeGN1ERVu
+ hlPce3lo6nr8dz7RGL/cHf3jqSasbETZLsJVYq9rdtTyEZoBr7FUVbs9N2dXUcAMbp7MwnTzrBE
+ SOs894ZxjQf8k9R9CfrRFsiTX3xB+rDUf
+X-Gm-Gg: ASbGncte6njHqJmQjJlapBR3nIpJ9dgCMKo6n7m3fLLWU7SVpJtt3mG9iaEUh5FIp1h
+ 3dcjiEiBI1Wm3UYxPRxi+K0aMPPYIgsowPSURNRxweUldyyJvaGD21wk3ZeLcU08wxqZ6N2jh45
+ 7pA7Li63XMMrqn9is9HmbQITnw40HOTdyUZjD6ujzahbxPgO88+Hv7nfmZlsg9k356
+X-Google-Smtp-Source: AGHT+IFQYOs75n8w0qkaBkQTs69nLVJ3/0vd72rq7tm/6FZwAeyFO7hgzYegd6Lt1N3/GysVzYdveHVd9Yzg+HpTq+o=
+X-Received: by 2002:a05:651c:1476:b0:30d:6a15:6a69 with SMTP id
+ 38308e7fff4ca-326ad19bde1mr29374641fa.20.1746709394216; Thu, 08 May 2025
+ 06:03:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 08 May 2025 14:50:08 +0200
+References: <20250505213733.4114398-1-tharvey@gateworks.com>
+In-Reply-To: <20250505213733.4114398-1-tharvey@gateworks.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 8 May 2025 10:03:02 -0300
+X-Gm-Features: ATxdqUHkyk8qJ45geoM_PZ5c2HWRwGNF0wzR_83cDjU5XNNl40o-djvmGm8Oji0
+Message-ID: <CAOMZO5CFOe=LQTPMhh1Uy2Fr6ha3cCKGcfAT5=MFbdQA6+iZYw@mail.gmail.com>
+Subject: Re: [PATCH] imx95_evk: enable PCI early
+To: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,30 +92,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CRC16 is used in ext4_common.c. Build fails without it.
+Hi Tim,
 
-PS:
-This is my first patch sent to a mailing list.
-If there is anything wrong with it (email format, whitespace, etc.)
-please let me know.
+On Mon, May 5, 2025 at 6:37=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
+rote:
+>
+> Enable PCI early as the NETC device is an PCI ECAM device.
+>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 
-Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
----
- fs/ext4/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/fs/ext4/Kconfig b/fs/ext4/Kconfig
-index 1a913d2b6d2..8ddaebebd48 100644
---- a/fs/ext4/Kconfig
-+++ b/fs/ext4/Kconfig
-@@ -1,5 +1,6 @@
- config FS_EXT4
- 	bool "Enable ext4 filesystem support"
-+	select CRC16
- 	help
- 	  This provides support for reading images from the ext4 filesystem.
- 	  ext4 is a widely used general-purpose filesystem for Linux.
--- 
-2.49.0
-
-
+This path looks good, but I don't see it at
+https://lore.kernel.org/u-boot/ nor in patchwork.
