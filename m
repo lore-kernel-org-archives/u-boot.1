@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3AF1C3ABC5
-	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 23:24:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93640C3ABBE
+	for <u-boot@archiver.kernel.org>; Thu,  8 May 2025 23:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F6C98283E;
-	Fri,  9 May 2025 01:24:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCE0E8269F;
+	Fri,  9 May 2025 01:38:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98B68828BC; Fri,  9 May 2025 01:24:28 +0200 (CEST)
+ id 58B478283E; Fri,  9 May 2025 01:38:34 +0200 (CEST)
 Received: from smtpbgsg1.qq.com (smtpbgsg1.qq.com [54.254.200.92])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98C018269F
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 01:24:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6294D806D8
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 01:38:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: zesmtpip3t1746746611tac2f06de
-X-QQ-Originating-IP: R898cUrjIWn88keca4olHn1CKTOmv5GC3zL1sTQlaNo=
+X-QQ-mid: zesmtpip4t1746747493t1dff9b9a
+X-QQ-Originating-IP: Y+zDUJZ0NLPI1GZ8Xc8YAmwwWpOkX85WYowDiBoIhxo=
 Received: from [IPV6:240f:10b:7440:1:a1e5:ffb0 ( [localhost])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 09 May 2025 07:23:26 +0800 (CST)
+ id ; Fri, 09 May 2025 07:38:07 +0800 (CST)
 X-QQ-SSF: 0001000000000000000000000000000
-X-QQ-GoodBg: 2
-X-BIZMAIL-ID: 10782299689739338221
-Message-ID: <C119E01C6AE7689F+c4d7884d-d5a1-4e0f-919c-ae505e48d1db@radxa.com>
-Date: Fri, 9 May 2025 08:23:25 +0900
+X-QQ-GoodBg: 1
+X-BIZMAIL-ID: 14983227706439958645
+Message-ID: <0CABE58EF9324D3C+977e581c-dcd7-4b33-982a-179a22c2b46f@radxa.com>
+Date: Fri, 9 May 2025 08:38:06 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] rockchip: Add support for RAM boot from maskrom
- mode
-To: Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: Arnaud Patard <arnaud.patard@collabora.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20250405153832.1427549-1-jonas@kwiboo.se>
- <20250405153832.1427549-3-jonas@kwiboo.se>
- <5da254a9-b86d-4ce7-a14e-5a8226c47890@rock-chips.com>
+Subject: Re: [PATCH 0/7] rockchip: Add boot from USB OTG port
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Arnaud Patard <arnaud.patard@collabora.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, jonas@kwiboo.se,
+ quentin.schulz@cherry.de, jagan@amarulasolutions.com, dsimic@manjaro.org,
+ pbrobinson@gmail.com, liujianfeng1994@gmail.com, macromorgan@hotmail.com,
+ michal.simek@amd.com
+References: <20250211053340.92919-1-naoki@radxa.com>
+ <40162793-5cf1-4e29-8621-b5863e8cdeae@rock-chips.com>
+ <f7d10c18af03f3879a765f190614dbb17d4b300a.camel@collabora.com>
+ <a67949b4-227c-49e1-92d8-ef18f8bd0b42@rock-chips.com>
 Content-Language: en-US
 From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <5da254a9-b86d-4ce7-a14e-5a8226c47890@rock-chips.com>
+In-Reply-To: <a67949b4-227c-49e1-92d8-ef18f8bd0b42@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: zesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: MB5+LsFw85NoSH87gJCqOdcZasGB4kjQVuFrQgiFY9L1CvGQC8PowHT5
- 9IHLxBEVZsVjDypkSCM2NBwBkl84tNnKYpmY1a+Q7xABJTVJie4llwu1BMgTULL4+1p3ofI
- JZbrJfrV9BzIm5oG/DunBPf297F+4r1FDQaJt6mVP5mXgihrWpqJA0f7KqkY0CIZwWFUXO+
- aQX2KZQGKGRcuEHbNTIQmnub9LPZCv0YltiTTsXXH9ZyhX+3j+u+wkMtJjwoo7KxYg8ZBow
- YPWIuB6+kuwuEeAepQfqqEbxTTJNeQ/SMzsQFGHI5xaEeJKSTRxl3Ju8kFiJH11ygSI2tzQ
- 9EmKlCSEVB/7R1H3Q02heGHIAKazY4Ur2nAOiK+4caYwqHIMRTHnYOkwiJAkCvqQMWyVK2L
- eXAM4ksnkymzObJQL33nwXHHvo459QNJ3XW2CDrTygJDy1ROuSbIQRQts9vjPDTxKDntoIh
- fAtOLkr2abK7nq//DUzwxG+2jmmh967GJ7etOcjW6XxZ4fGMxtZcp5O2Um9LAlnFIn67zwV
- 9TWf/CkLbY/21QbudqxBJybalZEwrAvI3PA4wRrBN0wO1PABBRHl66EEJQbRyMrGZ4mfb/Q
- CmFAZtCCJyTOG/1K5cq10721CFE/YsIDbI7rctquEfMbMDXTeoWXrSPZpgB49zxgV96b9Fr
- qIdn8nWNhbOmm4aBs31Vvv3NudAvIZL9RFmxGSzdgMtvRR6Pno4rwQndho1JK3HcAeDSMIU
- rddFQLDqZ2t/G+ZpcWx20KUkUwESRgG2zAEa64CEB5vynriveo1nVOGfdcrB3dNFIMPWVkR
- 6O+tXaSOqq/o9e3S3oqTmpwe2Ayeb+v6WGOLVTYVSmbEBN8cifymhjTn3HydZoFW0wGuVpj
- /xoFvUjwQTrf4olGBS0U//b/lQA2DEwfMox8w3N64AB1wKlT/HHaUUIIs7OlEQiK9oI3vMA
- 6jv2TecG/wWxrWvzrDwZVHTsqhEef371vwD301EJC7q25APKuutMrE+XK
-X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+X-QQ-XMAILINFO: OfaQ+Y0DiXSP+C2g3Oet4errOKwpL7GNx412WzCTjgqm16uyO6kjc+5E
+ vBEC/tzoRvwUfyyzUuLqO88SAPZ3g04i6ffSApZN482j/SYHp7sh1/qe4UGQuL1fT4ZEHdP
+ ZRBayPNm83ujZR8W+Ti0osrn4wHqYtB3FgBGInMYamnnIv2eMVZNwDQkbIuDBuIzItYSw9X
+ gEaqVZwVLaFmkEHOWKTYp2NOzvGXX0jlyB+alfROkHa499mltavEIDxHjiDHg27MranmEp7
+ nyeNkq0Ze73aKGvmAPPfvbeQppqOfDMFvrhftkkpXHlXTLUz4SDhSKdbzP2gZ/GXWpX7HH8
+ YaQsXscvzwb9PZlWJVMzI5xPAcQcMPTCusudb+3lN43Z/ueYnmWcD0lei1FkaDbtQV2+uPr
+ hdJRt+Do/FxFsSAqyJCnoftDJ1Q8NtVrrOSG8CSSnecLmSo8gEOepL8F+01pXxNKjEHpefm
+ V1r480kxgZOuS1DfKQZ61oiAqS33ONGZ4Crudpmf4LTw7eec49Z4ILFZtZEMthm6Fe9x+Tb
+ MlJBVUfl9blbxtOlL+BjXY+KAh8gpkhz6d/eGjEqr4SwTIZVedptvioShNGJVxNGDdi7ztt
+ nam85bStqtaJBysM2DMji6841QYuNoea2LfTWM5yQJNldxlvkqVp90U9ubrVZNW2t0NM8en
+ TcxiMEc6wFp3jyn5dabHduv6AzZHTNfm+xYBVpFRCqQC04JqHgX/tk2LkvuZhfXu/kcojRO
+ pmESEqo/+xWM2s4ss0z44WbkY6lR+evwUpwzxj3Q541kUPeh4TN+QsM6w3NEFx8bnPyijSr
+ FAOF4Q1OZJ6yl5wT4DNd4SO8QYXlP/fONhnUVPmsMGBVLMaXUqljWfhvJ+fNNqYoKPomP3C
+ nimdpvPIOuEPtHOknSma9tgfAvZY1MMFIfOFYpjetTQ2Zn2dt5mxGYkoLg+RaW8vhqtnmjI
+ DEP+ZcsLkueBqoq+pZ5yEuafLdVZ1GDJA7SzUZdKalMjftREH2NJrhkV08cmesrkmYGZ48R
+ U+I4E6w7wG2yNr/bjT
+X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
 X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,39 +87,84 @@ X-Virus-Status: Clean
 
 Hi Kever Yang,
 
-On 5/8/25 12:06, Kever Yang wrote:
-> Hi Jonas,
+On 5/8/25 12:43, Kever Yang wrote:
+> Hi Arnaud,
 > 
-> 
->      Thanks for your patch, and the ramboot with usb download do help 
-> bootloader developers.
-> 
-> On 2025/4/5 23:38, Jonas Karlman wrote:
->> The BootROM in Rockchip SoCs will enter maskrom mode when boot firmware
->> cannot be found in nand/spi/mmc storage.
+> On 2025/5/7 23:31, Arnaud Patard wrote:
+>> Hi,
 >>
->> In maskrom mode the USB OTG port can accept one of two custom commands.
->>
->> Initially a 0x471 command to load TPL into SRAM. After TPL has been
->> executed and it has returned back-to-BROM, a 0x472 command to load SPL
->> into start of DRAM.
->>
->> Add two binman images that can be used to RAM boot from maskrom mode:
->> - u-boot-rockchip-usb471.bin that contains TPL to init DRAM.
->> - u-boot-rockchip-usb472.bin that contains SPL and the normal FIT
->>    payload with i.e. U-Boot proper, TF-A and FDT.
+>> On Tue, 2025-05-06 at 15:53 +0800, Kever Yang wrote:
+>>> Hi Naoki,
+>>>
+>>> On 2025/2/11 13:33, FUKAUMI Naoki wrote:
+>>>> This patch series adds the ability to boot from the USB OTG port to
+>>>> the RK3588, RK3568, RK3566, RK3399, RK3328, and RK3308.
+>>>>
+>>>> Use rkflashtool[1] or rkusbboot[2]
+>>> Does these two tool have the same functionality? I don't know the
+>>> second
+>>> one :(
+>>>
+>>> And I know there is another tool named rkdeveloptool from rockchip.
+>>>
+>>>>    to download TPL and SPL from
+>>>> MASKROM mode, and dfu-util to download U-Boot from DFU mode.
+>>> What's the main target for this patchset, boot from usb with ramboot
+>>> support and without any eMMC/SD/SPI driver?
+>>>
+>> I can't talk for Naoki, but my use case is to test easily u-boot on my
+>> rockchip platforms without having to flash u-boot or to have some
+>> storage.
 > 
-> This makes things quite complicated, needs so many new binaries and 
-> tools which
+> Yes, I agree the usb boot+RAM boot can help u-boot developers.
 > 
-> lead to confuse to users.
+> But this function can be done directly in BootRom mode with rockusb 
+> protocol;
 > 
-> Let's make it simple for RAM boot with usb download so that user can use 
-> it easily:
-> 
-> use rkdeveloptool to download the loader and boot from RAM, and that's all.
+> or add support for it in U-Boot Proper gadget(rockusb or DFU).
 
-It requires boot_merger which is not included in U-Boot, right?
+Does this mean I should use rockusb or DFU on U-Boot to test the new U-Boot?
+
+>>> I would prefer to keep using one tool instead of two or more tools,
+>>> so I
+>>> don't think
+>>>
+>>> enable DFU in SPL is a good idea, using rockusb in SPL is better
+>>> here.
+>> To test u-boot, I'd like to use snagflash/snagboot as it's not rockchip
+>> specific.
+> 
+> Two more tools other than rkdeveloptool/rkflashtool/rkusbtool/rockusb :(
+> 
+> 
+>>   So, this means adding support for maskrom (which I've already
+>> written) and rockusb protocols to it. With DFU in SPL support in u-
+>> boot, this would mean nothing to do as the support for DFU is already
+>> in snagboot/snagflash.
+> 
+> I understand your requirement, but you didn't say why you need SPL DFU.
+> 
+> There are two modes for usb download in rockchip platform:
+> 
+> - Maskrom mode (in bootRom), may have speed limit due to bootRom driver 
+> setting,
+> 
+>      for download bootloader including U-Boot which size is not big;
+> 
+> - Loader mode(in U-Boot), all the speed including CPU, eMMC has promote 
+> to performance mode,
+> 
+>      for download all the big size image including system and userdata.
+> 
+> Of cause we can add any function to the SPL, and it's simple because it 
+> already in U-Boot,
+> 
+> but do we really need it for all the user and product?
+> 
+> We should keep the SPL simple and fast, and get into U-Boot proper 
+> quickly with full function.
+
+I agree that SPL should be simple and require fewer tools.
 
 Best regards,
 
@@ -125,160 +172,11 @@ Best regards,
 FUKAUMI Naoki
 Radxa Computer (Shenzhen) Co., Ltd.
 
-> Thanks,
+> Thank,
 > - Kever
->> These images can be used with rkbin tools/boot_merger to create a loader
->> image to be used with rkdeveloptool or rockusb tools, e.g.:
 >>
->>    Create loader image:
->>      $ ../rkbin/tools/boot_merger ./RK3588MINIALL.ini
+>> Arnaud
 >>
->>    Boot from maskrom:
->>      $ rkdeveloptool db u-boot-rockchip-rk3588-loader.bin
->>     or
->>      $ rockusb download-boot u-boot-rockchip-rk3588-loader.bin
 >>
->> Or directly with tools such as rkflashtool or rkusbboot:
->>
->>    $ rkflashtool l < u-boot-rockchip-usb471.bin
->>    $ rkflashtool L < u-boot-rockchip-usb472.bin
->>   or
->>    $ rkusbboot u-boot-rockchip-usb471.bin u-boot-rockchip-usb472.bin
->>
->> Signed-off-by: Jonas Karlman<jonas@kwiboo.se>
->> Tested-by: Arnaud Patard<arnaud.patard@collabora.com>
->> ---
->> v2: Use fit_template instead of common_part
->> v2: Collect t-b tag
->> ---
->>   arch/arm/dts/rockchip-u-boot.dtsi       | 33 +++++++++++++++++++++++++
->>   arch/arm/mach-rockchip/Kconfig          |  8 ++++++
->>   arch/arm/mach-rockchip/spl-boot-order.c | 15 ++++++++---
->>   boot/Kconfig                            |  3 +++
->>   4 files changed, 56 insertions(+), 3 deletions(-)
->>
->> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
->> index 0dfd45bb9bed..dafae297d0cf 100644
->> --- a/arch/arm/dts/rockchip-u-boot.dtsi
->> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
->> @@ -231,5 +231,38 @@
->>   		};
->>   	};
->>   #endif /* CONFIG_ROCKCHIP_SPI_IMAGE */
->> +
->> +#ifdef CONFIG_ROCKCHIP_MASKROM_IMAGE
->> +	simple-bin-usb471 {
->> +		filename = "u-boot-rockchip-usb471.bin";
->> +
->> +#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
->> +		rockchip-tpl {
->> +		};
->> +#elif defined(CONFIG_TPL)
->> +		u-boot-tpl {
->> +			no-write-symbols;
->> +		};
->> +#endif
->> +	};
->> +
->> +	simple-bin-usb472 {
->> +		filename = "u-boot-rockchip-usb472.bin";
->> +		pad-byte = <0x00>;
->> +
->> +		u-boot-spl {
->> +			no-write-symbols;
->> +		};
->> +
->> +#ifdef HAS_FIT
->> +		fit {
->> +			insert-template = <&fit_template>;
->> +#else
->> +		u-boot-img {
->> +#endif
->> +			offset = <(CONFIG_SPL_LOAD_FIT_ADDRESS - CFG_SYS_SDRAM_BASE)>;
->> +		};
->> +	};
->> +#endif /* CONFIG_ROCKCHIP_MASKROM_IMAGE */
->>   };
->>   #endif /* CONFIG_SPL */
->> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
->> index c9d8f9105083..e817bf46e565 100644
->> --- a/arch/arm/mach-rockchip/Kconfig
->> +++ b/arch/arm/mach-rockchip/Kconfig
->> @@ -607,6 +607,14 @@ config ROCKCHIP_SPI_IMAGE
->>   	  option to produce a SPI-flash image containing U-Boot. The image
->>   	  is built by binman. U-Boot sits near the start of the image.
->>   
->> +config ROCKCHIP_MASKROM_IMAGE
->> +	bool "Build a maskrom mode image for Rockchip"
->> +	depends on TPL || ROCKCHIP_EXTERNAL_TPL
->> +	select SPL_RAM_DEVICE
->> +	help
->> +	  Rockchip SoCs support maskrom mode boot over USB. Enable this
->> +	  option to produce maskrom mode boot images containing U-Boot.
->> +
->>   config LNX_KRNL_IMG_TEXT_OFFSET_BASE
->>   	default TEXT_BASE
->>   
->> diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
->> index 3dce9b30898d..20cbee8c9ff4 100644
->> --- a/arch/arm/mach-rockchip/spl-boot-order.c
->> +++ b/arch/arm/mach-rockchip/spl-boot-order.c
->> @@ -8,7 +8,9 @@
->>   #include <log.h>
->>   #include <mmc.h>
->>   #include <spl.h>
->> +#include <asm/arch-rockchip/bootrom.h>
->>   #include <asm/global_data.h>
->> +#include <asm/io.h>
->>   #include <dm/uclass-internal.h>
->>   
->>   #if CONFIG_IS_ENABLED(OF_LIBFDT)
->> @@ -98,15 +100,22 @@ __weak const char *board_spl_was_booted_from(void)
->>   
->>   void board_boot_order(u32 *spl_boot_list)
->>   {
->> +	int idx = 0;
->> +
->> +	/* Add RAM boot for maskrom mode boot over USB */
->> +	if (BROM_BOOTSOURCE_ID_ADDR && CONFIG_IS_ENABLED(RAM_DEVICE) &&
->> +	    readl(BROM_BOOTSOURCE_ID_ADDR) == BROM_BOOTSOURCE_USB) {
->> +		spl_boot_list[idx++] = BOOT_DEVICE_RAM;
->> +	}
->> +
->>   	/* In case of no fdt (or only plat), use spl_boot_device() */
->>   	if (!CONFIG_IS_ENABLED(OF_CONTROL) || CONFIG_IS_ENABLED(OF_PLATDATA)) {
->> -		spl_boot_list[0] = spl_boot_device();
->> +		spl_boot_list[idx++] = spl_boot_device();
->>   		return;
->>   	}
->>   
->>   	const void *blob = gd->fdt_blob;
->>   	int chosen_node = fdt_path_offset(blob, "/chosen");
->> -	int idx = 0;
->>   	int elem;
->>   	int boot_device;
->>   	int node;
->> @@ -115,7 +124,7 @@ void board_boot_order(u32 *spl_boot_list)
->>   	if (chosen_node < 0) {
->>   		debug("%s: /chosen not found, using spl_boot_device()\n",
->>   		      __func__);
->> -		spl_boot_list[0] = spl_boot_device();
->> +		spl_boot_list[idx++] = spl_boot_device();
->>   		return;
->>   	}
->>   
->> diff --git a/boot/Kconfig b/boot/Kconfig
->> index f101200ba7a5..abfc9eaf325f 100644
->> --- a/boot/Kconfig
->> +++ b/boot/Kconfig
->> @@ -246,6 +246,9 @@ config SPL_LOAD_FIT_ADDRESS
->>   	hex "load address of fit image"
->>   	depends on SPL_LOAD_FIT
->>   	default 0x44000000 if ARCH_IMX8M
->> +	default 0x60080000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x60000000
->> +	default 0x40200000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x40000000
->> +	default 0x00200000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x00000000
->>   	default 0x0
->>   	help
->>   	  Specify the load address of the fit image that will be loaded
+> 
 
