@@ -4,91 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32625C3ABC3
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 07:04:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16546C3ABBC
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 07:09:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF391829A1;
-	Fri,  9 May 2025 09:04:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 826E98211F;
+	Fri,  9 May 2025 09:08:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ApOVJrxF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bNIo6T5w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23E0182A4D; Fri,  9 May 2025 09:04:19 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 756508288D; Fri,  9 May 2025 09:08:58 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC4FD829A1
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 09:04:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 207AD8210D
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 09:08:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-309d2e8c20cso2315645a91.0
- for <u-boot@lists.denx.de>; Fri, 09 May 2025 00:04:16 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5f62d3ed994so3229802a12.2
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 00:08:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746774255; x=1747379055; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1746774535; x=1747379335; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VksTAc8MfNtj+Zo80Tsk7dVzZ22M2QTVt0cXDy/zQAg=;
- b=ApOVJrxFVtj0TJtQFXpymMD7O4Cn/Xctw4aRlH8mHg03/vlcTHgJXOlBKUiOjsysiF
- UKaGDdSLH+qbtsyO3/HFADF9BTPKM1Kgkae6bJ97BPE2Qjo04ZXQx41MCKrvLoKUXONt
- Rs6K5Lx8pRU2qjkZzT0OZGRJpJpnZqKuOoTvyO4AWGDISezEJiMLg8SFvbhsBp5X4HpI
- Pe8+ZFDqrgwVEsrS1T1Smq55f/+ayydcg0IW+U5TfXMhx6VUL30KKDs2AcyTCOjaQplr
- jRN3/vdA7C2XrYixY7qz5mJ0DKL5upDez2H9VdNgAk95jh4wcDHyBT9gy67gxdbSczut
- NyGQ==
+ bh=rDOVTvBY2hQzl4x0xlAS9VP7sT+X5C+A8PuttaCFmyA=;
+ b=bNIo6T5wWCvvDJy4BgMI6+p8qnWJPGiMcYyTrPV20m0k8lKzqPouR4zLHeu5wBHLaX
+ /qXB5zVA2Q0LKyvb0TpLvi5+jvxTjQIKJHCbZGex4N9IExAhUBTfpu/Hm3+StmqfPG6p
+ 2z+FiVpk74zG71jr9NGb0IFCrTLfXfDOak97MfzDLedzutUshLLFvW3NqOPemGmKhmET
+ ItZF4YvP2FxUkGwrNZkH1STMkG16furtQpT/dumzZIuTHGWSi0TSKGjk0YtPmGSbU+Pl
+ SMD12vSf6TVZKEBRCkz/QLe65Jh+v712WenHHX8TSXLLEjLqGeouU0a+IuGSCKKSGceX
+ nEkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746774255; x=1747379055;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1746774535; x=1747379335;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VksTAc8MfNtj+Zo80Tsk7dVzZ22M2QTVt0cXDy/zQAg=;
- b=Px6Kik28fjjSNGL/sngBLApr1NXPtxYA5omtO91hOmwIGrxaJzRuoYfmA0mPXSEZ9+
- dN118j583GuDkbQN/x6kwfd7Yn1C/RvHz1zRM+07g1JGC7w7xPcxnJMT9xGvxF7JtW/p
- XUHcCS5AbhN01MEEWBWtGffsEctRCrtXsvLBZqGZ0rcY33uHyQHQBoiPABiQIxd2EPSH
- 8Ow/JrVXaFtQ7YCgyrUd/vmKIMKnqqp2aGDfH3UHzvAgen00jNOa7+k7s9tz6OjZ/p/o
- QgPVZt9Q8d7mX/mxF5bOB3DZIDfTa72P+drK5oIOy5S5TFqmf2uhOYrlZPO8MRA+YKE2
- dGnA==
+ bh=rDOVTvBY2hQzl4x0xlAS9VP7sT+X5C+A8PuttaCFmyA=;
+ b=uGPhzspqSTLEiYSa7nYfXi0YUv5b4AcpjiGH8b3MMivcbJKQndBIS/H1ijZ4ySAuM9
+ SwJvVa1CRu2UmXHnT8dz17SLik2V3sWjmEo4kWre9lDDg5FShp2ed23HFn6tVzecuRjx
+ fA6mluQeGBbvhjlGpjj/wSTLFpdCu/vmxcg2VTeJZYdnxovU5BaxZY1dHcqOJuKI2FKl
+ VSqOn6dLhvnYJ+EF07rPwTuHxytZp+zTlNR/jRoK9kiQApE37qIRObN88njTmpCoslTF
+ KWXZidfbMMudy7R5TEwcheGvp8UViOcIex5t7M40nsXcwWvfur0ewwHF3iKKJIw7Ix18
+ 61Xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU42ieW4u033/3T5YUEi6fmMbdW9kbaF4LZLG2Y208WgdI5WL5K/OwMEtIonEqjlpLYQbEVTA4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwW6qhVoVJ5cVgB2mI80Myb1m/1fUduMJiZ2/dpoXJB/Wa8jiTQ
- xF1rc8DbhZgYq72LwNYoW28/8VS5IT9jojbUbSkB3WhRhk14Fj4c
-X-Gm-Gg: ASbGncvxg5CCoYVtOcphtXvUuoz8EgxeDGV+M6f7JHDk9BcgTLolFFL50usTxhlATBH
- Hr2Ad336Fi/a6K+xb0FBANq7ZpMgt77TTy6Deu4e/bVi4c7cEdT4MvCZl9wKQYIk6u8HFMFsSWC
- m2N7PUSqj3nmGDQDm0ceRN7g5wFgF78x5zAC/ks/qmDtvqVzRfCc/9cKbsIpxKSZZqv3DHd0HpZ
- zba0WROtx8ms9M8vVoBmxbIZnlhLwENnHIQzeijO47EaYanZoBiDPuhSjfsakeUEMrfKDJIrUmD
- 6jed6AuBa8S8shUZz77h4s4cvURH0KUgTKiWszuvmi/CNa3vjY6MV6O4c8doFh4=
-X-Google-Smtp-Source: AGHT+IGYOoQXT9TsOq5YEK1vhXpUdE1ezLVSnzq5QPWWManGeJD5veYDMeg1Sgf8GpZHVc8FJmr5rg==
-X-Received: by 2002:a17:90b:2701:b0:2ff:6f8a:3a13 with SMTP id
- 98e67ed59e1d1-30c3d6290d6mr3853219a91.25.1746774255375; 
- Fri, 09 May 2025 00:04:15 -0700 (PDT)
-Received: from localhost.localdomain ([45.112.0.38])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30c39dc8aeasm1173932a91.2.2025.05.09.00.04.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 00:04:14 -0700 (PDT)
-From: Anand Moon <linux.amoon@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Beniamino Galvani <b.galvani@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de (open list),
- u-boot-amlogic@groups.io (open list:P200)
-Cc: Anand Moon <linux.amoon@gmail.com>,
-	Wayne Schroeder <raz@chewies.net>
-Subject: [RFC v1 7/7] usb: onboard-hub: Add conditional compilation for I2C
- initialization
-Date: Fri,  9 May 2025 12:32:12 +0530
-Message-ID: <20250509070258.5077-8-linux.amoon@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250509070258.5077-1-linux.amoon@gmail.com>
-References: <20250509070258.5077-1-linux.amoon@gmail.com>
+ AJvYcCXXZUE1fJGbZyUeHAmQZYSZTAmirxRcTTlNZjtIykBbpgGmi28TYhufm3bIwh5R79HsP3NJ80o=@lists.denx.de
+X-Gm-Message-State: AOJu0YztwqPtBFu22MV+A2cwT59c3tZU/wNI3zon5ApFasG/OU2/2vY3
+ epYm1kGI6hnyEqKX9r/FCnltTTnN+t8Wui8dWy0VllwAYDHWOtnsDpsan+OWTiBUbG+D/SwMrLF
+ L+/Q3DF+v1LOyQPgIQrlvq8Awc5A=
+X-Gm-Gg: ASbGncvyjFBvJ/5adgHsAS8viRVXQv2vBSBC/2NrGkF2y/++tUxuaXZVVPJP4RmU6v3
+ S3ZAavUcMlryvqpYbpFQdMHfTTKho52cyVy+AigmG2lvVgVs/VwcuHRtUMla2q/tJNMMfWbvW3T
+ xHoYfoJa2qHHuZgfPOeoA=
+X-Google-Smtp-Source: AGHT+IFy6xSeENnr6GpZhNdMlhkEbAuN+UZ4rG9yxOM+Fw1GvytEt7cTK20FJVRt02pTE3RFKoZFSKkTIULzJWvTRRc=
+X-Received: by 2002:a17:907:688a:b0:ad2:2417:12d9 with SMTP id
+ a640c23a62f3a-ad2241716a5mr51158766b.39.1746774535293; Fri, 09 May 2025
+ 00:08:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAEUiLubXaPGZsE6y_X6mBTD1ZK-2w82fbRD5z8+MKvDZtZKOtA@mail.gmail.com>
+ <f073dad7-337e-499a-8cb5-9dae0842de17@linaro.org>
+ <CAEUiLuYBVyLm4HgJG88r1J8RcUu38uEVPbV5c+-ArqjU4aUOAA@mail.gmail.com>
+ <3783aef0-a7a0-489f-add0-21e1fc2bfad1@linaro.org>
+ <CAEUiLubVazb4rgfBd-r-5AtyfBVaMFmy89OO_UZB97FM43if7w@mail.gmail.com>
+ <D9QX0MRWSYW6.3ELRB73BS6PRT@postmarketos.org>
+ <CAEUiLuYW61Vz4zAie2K9cnXXQxxRj150Nc-fJMQCh9NwXZQmzQ@mail.gmail.com>
+In-Reply-To: <CAEUiLuYW61Vz4zAie2K9cnXXQxxRj150Nc-fJMQCh9NwXZQmzQ@mail.gmail.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Fri, 9 May 2025 12:38:38 +0530
+X-Gm-Features: AX0GCFvlAIyHMSqomrT8B9EkBmrGtOImqqnXVMTyKPDTZq4Vn-h2XNtU_Hhsenk
+Message-ID: <CANAwSgRkqAj5Q4LMO-CKBSoMgO-+zd6JpbVs+eWY3kPgmj9bug@mail.gmail.com>
+Subject: Re: Odroid n2+ usb broken on reboot
+To: Wayne Schroeder <raz@chewies.net>
+Cc: Ferass El Hafidi <funderscore@postmarketos.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de, 
+ "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>, 
+ "linux-amlogic@lists.infradead.org" <linux-amlogic@lists.infradead.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,57 +102,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add conditional compilation for the usb5744_i2c_init() function based
-on the CONFIG_DM_I2C configuration, to avoid compilation failure.
+Hi Wayne,
 
-  CC      net/net-common.o
-  AR      net/built-in.o
-  LDS     u-boot.lds
-  LD      u-boot
-aarch64-linux-gnu-ld.bfd: common/usb_onboard_hub.o: in function `usb5744_i2c_init':
-/home/amoon/mainline/u-boot/amlogic/u-boot-maineline/common/usb_onboard_hub.c:74:(.text.usb5744_i2c_init+0xfc): undefined reference to `i2c_get_chip'
-aarch64-linux-gnu-ld.bfd: /home/amoon/mainline/u-boot/amlogic/u-boot-maineline/common/usb_onboard_hub.c:89:(.text.usb5744_i2c_init+0x1a0): undefined reference to `dm_i2c_write'
-aarch64-linux-gnu-ld.bfd: /home/amoon/mainline/u-boot/amlogic/u-boot-maineline/common/usb_onboard_hub.c:96:(.text.usb5744_i2c_init+0x1c8): undefined reference to `dm_i2c_write'
-aarch64-linux-gnu-ld.bfd: /home/amoon/mainline/u-boot/amlogic/u-boot-maineline/common/usb_onboard_hub.c:104:(.text.usb5744_i2c_init+0x1f0): undefined reference to `dm_i2c_write'
-Segmentation fault (core dumped)
-make: *** [Makefile:1824: u-boot] Error 139
-make: *** Deleting file 'u-boot'
+On Fri, 9 May 2025 at 01:25, Wayne Schroeder <raz@chewies.net> wrote:
+>
+> I actually already have a working solution that I documented in my
+> github repo (dubschro/odroid-n2).  All I do is set BOOTCOMMAND to
+> check/delete a flag file on my boot partition and if it is found, then
+> reset usb and sleep for 10 seconds.  I then have a systemd shutdown
+> script only on reboot to touch that file.
+>
+> CONFIG_BOOTCOMMAND=3D"fatrm mmc 0:1 reboot && echo Resetting USB on
+> reboot... && usb reset && sleep 10; run distro_bootcmd"
+>
+> It is a hack, but... the system reliably reboots remotely now, and
+> that's the important part for now.
+>
+> Wayne
+>
+> On Thu, May 8, 2025 at 11:22=E2=80=AFAM Ferass El Hafidi
+> <funderscore@postmarketos.org> wrote:
+> >
+> > On Wed May 7, 2025 at 1:03 PM UTC, Wayne Schroeder wrote:
+> > > It's hard for me to quantify if usb works in u-boot as I'm not loadin=
+g
+> > > off of any usb storage devices.  It certainly never lets me use the
+> > > keyboard to abort auto boot, and never has.  On reboot, to reliably
+> >
+> > You can send bytes via UART to abort boot, if you happen to have a UART
+> > adapter around.
+>
+Can you test this series to see if this resolves the issue?
 
-Signed-off-by: Anand Moon <linux.amoon@gmail.com>
----
- common/usb_onboard_hub.c | 4 ++++
- 1 file changed, 4 insertions(+)
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D456088
 
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 1242513c631..92e3f3a92c9 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -30,6 +30,7 @@ struct onboard_hub_data {
- 	int (*init)(struct udevice *dev);
- };
- 
-+#if CONFIG_IS_ENABLED(DM_I2C)
- static int usb5744_i2c_init(struct udevice *dev)
- {
- 	/*
-@@ -109,6 +110,7 @@ static int usb5744_i2c_init(struct udevice *dev)
- 
- 	return 0;
- }
-+#endif
- 
- int usb_onboard_hub_reset(struct udevice *dev)
- {
-@@ -222,7 +224,9 @@ static const struct onboard_hub_data usb2514_data = {
- };
- 
- static const struct onboard_hub_data usb5744_data = {
-+#if CONFIG_IS_ENABLED(DM_I2C)
- 	.init = usb5744_i2c_init,
-+#endif
- 	.power_on_delay_us = 1000,
- 	.reset_us = 5,
- };
--- 
-2.49.0
+Thanks
+-Anand
 
+> _______________________________________________
+> linux-amlogic mailing list
+> linux-amlogic@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/linux-amlogic
