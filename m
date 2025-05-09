@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D78C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 22:50:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C925C3ABBC
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 22:50:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FB9882A1C;
-	Sat, 10 May 2025 00:50:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B303282A59;
+	Sat, 10 May 2025 00:50:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qfjBfcOu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PAK4pB+N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0FFB82952; Sat, 10 May 2025 00:49:57 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 8713B82A4D; Sat, 10 May 2025 00:50:03 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97E8F8211F
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 00:49:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DD2082162
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 00:49:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-403407e998eso1888811b6e.0
- for <u-boot@lists.denx.de>; Fri, 09 May 2025 15:49:55 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2d060c62b61so2710059fac.0
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 15:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746830994; x=1747435794; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1746830996; x=1747435796; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V0EHMsRlIiqQ1XgDS4oE00Y5e27J0Bt/og3WwwF4+2A=;
- b=qfjBfcOuPFyD2AMRLzSnEotok3UBuJHboZlwaeDRDZNJ009KtLwhj5gtRVWxmN0BCn
- bjRqIyaSxHbpqfY6TnkGsZK5UmU6NABMpmRLm8kfSxWn+f7yiI2c0h1NUxIi8JWOQ1C8
- vnWuBLqZY1lBM93Wh5J7Gpx/ce0tAqVWL7C8E=
+ bh=A4R1686NSoyqEZLFz43rZk44qjg3tcxURmRW6hT1TYU=;
+ b=PAK4pB+NJWX3q9W4MnWPAGtK/+3vtDlDW5AcDZUlmYegnEF/ATbqo00cVPq91exElI
+ mhM4EcmpOwIKXVNSp+879Iy3PRRDQlqEOoY5Ub/mkrTOY4NmtFqsujLBlCfBw86kPuhw
+ 8Gi+jSuD3Ubynh0Tb3i3PsxWS/7e3tu0GtaUc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746830994; x=1747435794;
+ d=1e100.net; s=20230601; t=1746830996; x=1747435796;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V0EHMsRlIiqQ1XgDS4oE00Y5e27J0Bt/og3WwwF4+2A=;
- b=vjGhwjrkn/9ZK9EIUre4TPMe4A5bvv+HlLTxqWxKPAl7ScoL+C7B11Fb/wEifyRHsn
- 7z4N/tgVA9zCmm+kUoPcO+W3JjYdC3iYL1Vv6aOg3EdtWVsVyjGV55MiBOl9HNAn0K3I
- +BCjs7WPbY7Not3qKAIFytMjxdvLhKdKU+tgsFzbJ4NvVwf0z4H8CWyeHJhMRvepFtd7
- nH6t6sq445S028M4etrT20PKcJnlhH3+7M5/RiFs4Faz4wmUyLUFHKGvmUUp1UiYXEhy
- aGrWavMdYjKZ7e9INt+lLE/QnV9DW/akRKhn659tNqXQ4vQptiTwZV2g/Q6Sb78BMDk9
- 30lg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUMLusyAN5c81y5qOg58P/ZpXmAbW2UDMXvKbFZlvo2CTj26rtCOjnb0WMALgfXRtTuDCjhyiE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMNRrMCJvbjrbpVp1CdQsmhxYmPvM9SMKPFcvBoXn65pA/AU1C
- R3VYzhGEwZMZRNSLZ303+b5lBqs9xX7VPfOxWopbi+ajA20u+zjv9vz7sNoUlbY=
-X-Gm-Gg: ASbGncuIsl5yfUgcNaYETI0cXmjA4jhuDLQFLAAfEjj9I9ze+IgW0BWx3KkhkD93FFO
- k1E1GexaVj9qnuQJQ+HpHnTmMh0TA54a3AnGodW6a/F6Vs+7LKJZqOjUwllCtrND7qBX+mBOesb
- 68xuPPr7wYYl82fhZFpPYmG/WjVRmSOuakVQaHE2UhdEPnqjxCezOt9DPK+F87od0Ft9ojSzYCa
- TSwC+b3Lb7ncmR6nvl+LQTg7rjGHMRv/cOud/t1ECh8kWEMaVo3tzgRUs4DkrEqxcC624qdR/c5
- fETup4w/IlKw3ndZK4njKBTfBxu22wMqvswmunGPh3wGCvfOjzAOH7OhRPpqf0dqzQIj7WA6ESe
- NfuVV18jGgfY=
-X-Google-Smtp-Source: AGHT+IHn35mNHQ+Fg3GDsA6O7MpPjJr4Od1t4EHBqccGXSapaQ8p2f4IQ6eX4lq4k0cWESSYpDGFMg==
-X-Received: by 2002:a05:6871:780d:b0:289:2126:6826 with SMTP id
- 586e51a60fabf-2dba44e250amr3349878fac.30.1746830994395; 
- Fri, 09 May 2025 15:49:54 -0700 (PDT)
+ bh=A4R1686NSoyqEZLFz43rZk44qjg3tcxURmRW6hT1TYU=;
+ b=Q4hKN90mpuH+80zXBBwhJS4g1AqVTK1sNxSD9R4JRdyhuOaPeLayADQKyChuE5fy0Y
+ /oyABCuXgVn5Ijnki1czMevd1C7dAtBtWpvJycgL9G9xKW5ZZSQpQqPqw1gxd8w5RRA1
+ HRhsXcYPhzN2SnqY5KcQZNdYUAk2yyqQHs/LssHaely4gx3LAmjD3r0OQjCR6tnxK1K4
+ zBd77Unh4MJk9qlVj0wCRdpdsXZIyy3nyM96NqXnHmVS8OxkQ2AoC9uYrnz7PJmZram2
+ 1E43HINzT8QRje1iI5jQn40iggZDte9E9zVBG9PXhepj2JtHX73wqC1WfNN1aE8ONLmE
+ dCkQ==
+X-Gm-Message-State: AOJu0YzxAd0hAXUBetz+jl2ejGXG7vhm2pQxi4+hoI99rtXTyHcja/8D
+ 00xDwkSHbahACHF2RbDiM3+3YtFXjko1j8E45TWSkiCFFjiUaSkkVal5tXtQu8w=
+X-Gm-Gg: ASbGncvt1Od1Js4FMn24fxU7kutCRpI8xGeFO7Py3Z5h64r6LaSNzo7zx9fuJE9hYX6
+ clhZiORWTjy4jo4W0sRFfkWt/75UGZPF5BSR7RTTkhPIZbq6JywCPuIsZK0BXW1k5/kFpnv5NAK
+ w55pOrfqNC2X2GYqT8jFDHMqGc6KzEexWEOGzQdzDFFO5X2GP7Uq3lRCry4eC8Ei9vO6xu2rp2q
+ Ltpo8ED3u7xk9WE1mLnjKd3FkWPkkT4jj4/lKkBH59rKyO2EPJPpeEjwkx8B2mL+fX3knmPYLqI
+ CV1SM1pE/VVmoMJpesTqxPvTOH/N5AQpGO09FtYk6cvd4HdXCsiLIcqqQ58vr6GViEfKPrqFWhb
+ UOljUCiLCR2w=
+X-Google-Smtp-Source: AGHT+IGUQuU6KLoqQx+AwCxONU75R8hnm0GJznAvOpemeF0TWUl/AUJkReQGQTbyDdStjdfL4xgiag==
+X-Received: by 2002:a05:6870:a48b:b0:2d5:ba2d:80df with SMTP id
+ 586e51a60fabf-2dba41f6cc0mr3072611fac.8.1746830995844; 
+ Fri, 09 May 2025 15:49:55 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2dba0b82571sm801403fac.49.2025.05.09.15.49.53
+ 586e51a60fabf-2dba0b82571sm801403fac.49.2025.05.09.15.49.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 15:49:53 -0700 (PDT)
+ Fri, 09 May 2025 15:49:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-In-Reply-To: <20250505144314.299359-1-heinrich.schuchardt@canonical.com>
-References: <20250505144314.299359-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] Dockerfile: use lz4 instead of lz4-tools
-Message-Id: <174683099317.770062.11505804857228184406.b4-ty@konsulko.com>
-Date: Fri, 09 May 2025 16:49:53 -0600
+To: Neha Malcom Francis <n-francis@ti.com>, 
+ Prashant Shivhare <p-shivhare@ti.com>, Andrew Davis <afd@ti.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250505174601.273860-1-afd@ti.com>
+References: <20250505174601.273860-1-afd@ti.com>
+Subject: Re: [PATCH] board: ti: sec-cfg.yaml: Fix OTP write_host_id order
+Message-Id: <174683099449.770062.3673976053763164001.b4-ty@konsulko.com>
+Date: Fri, 09 May 2025 16:49:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,19 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 05 May 2025 16:43:14 +0200, Heinrich Schuchardt wrote:
+On Mon, 05 May 2025 12:46:01 -0500, Andrew Davis wrote:
 
-> Since Ubuntu Jammy lz4-tools is only a virtual package which pulls in
-> lz4 as dependency.
+> The write_host_id is the last element here and order does matter. This
+> may have gone unnoticed before as by default all elements are 0, but
+> if this is updated to a different host, it will not work. Update
+> the order so write_host_id is the last element in all current secure
+> board configs.
 > 
-> Update documentation too.
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] Dockerfile: use lz4 instead of lz4-tools
-      commit: 285d265f7dcf7b5a8984d7015b07b2e86de91420
+[1/1] board: ti: sec-cfg.yaml: Fix OTP write_host_id order
+      commit: feb55165233623648cb0a74953735b00ec6e322e
 -- 
 Tom
 
