@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB34C3ABC3
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 15:43:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 172FAC3ABBC
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 15:43:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26E3882998;
-	Fri,  9 May 2025 17:43:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 705D682162;
+	Fri,  9 May 2025 17:43:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nK07iWY5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TCi0ZRBy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A583682998; Fri,  9 May 2025 17:43:09 +0200 (CEST)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
+ id 9700282A0D; Fri,  9 May 2025 17:43:11 +0200 (CEST)
+Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
+ [IPv6:2607:f8b0:4864:20::92b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7850D8283E
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 17:43:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E54E82991
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 17:43:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-87843c435f3so578321241.3
- for <u-boot@lists.denx.de>; Fri, 09 May 2025 08:43:07 -0700 (PDT)
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-878af63c5b3so1144837241.1
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 08:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746805386; x=1747410186; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1746805388; x=1747410188; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kyvf6xwaNLz3m1y6y+DMqpIRfyzJb48AB9/BOCqx2sw=;
- b=nK07iWY5MjBgu+6ZEvFdLCTtGDYeABYNGnrZjGGBZNvmNAbnOxLDjnmUhWElj9UvGF
- FJXGoaOPe08FqZjCUnMZiQrMbDMsQGQPYRMgUHQlgU5LAp+f5pFWRo0HIX9rTFA+Ref6
- ullYVdRw0Q6m4WkjA07ojF3G2tC83RXS0WGZrereug/552sDLduzyVRgmiF1ZB8nhM2X
- K+7FopXjpFIZ23qSDXJj+9PHtvKitYqun0Ity6VDhZ/HQANm0dwzsitKp0F1UpCPER8x
- QN52RkZmbEEjiA0aUZBzT6WF2/19Py3UnVmcO0PFNs+16iSkoJD6bGKc8H7I9f1LwzPc
- zdBQ==
+ bh=89HzNYESpvFwcSdwgJ5iSSZfjITzazGD4XWXF6cIH+o=;
+ b=TCi0ZRByRjC8VoQAO+2vs2N5Ibq1mVuMDhuxgY+fKS8pOU2mx0hirpXbaSa5W3VoOe
+ smXi9WXxhuQ169JAFpTbN8yeism3pd/FZvAHvkykWOciioyEityfZy3BYMlPCphdSKSd
+ Eow2RceghEV71PhC067ad04LM6kxPiUYSSoTgTwT1sFjoodT6WEjPnSuHSPsdcH2hpPb
+ 7baYsjAlNFqKBps7wywWpIr2Q7sOqi8mBWU7QMK1D2fgvGhJ5dqMfoCY25yYQqtQMh/f
+ sVT5zQS4XbCt6/Z7XXbbAEOIGz7kkdxM/C9bWiTujoO4eii3F6FlTwFGrfZMn83btVkX
+ EfwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746805386; x=1747410186;
+ d=1e100.net; s=20230601; t=1746805388; x=1747410188;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kyvf6xwaNLz3m1y6y+DMqpIRfyzJb48AB9/BOCqx2sw=;
- b=LVcqcHBPK1Oi8wTfv6sEzHd1Ngb0z015IVbLS3puLHOEXgQZ3Qdf5mwTTs4BmrYKur
- iVTQUluVPmRow0YqxnrfeE0CWfys/Hs3RueXSTSuScfKjhQ4NGdh1eTHZNL3+xzj5ATM
- 9cXdHemh5oK07KMDC9+PlVKhlx52oMi2Bf3APXPcIiDtaCeMEy19N63GZaY0eyjSrTz6
- yoyM9JJuMYf8HopODg5HubKqgqr/uovn4FrvAvkLBn0b3bhi+2HAhrrPelA1A4RPwMRT
- Z5mBu6mzBB5hRm/W/+qyARyDjsLPMJ0D+Euv+RNSS/z3DPNCRRrOkhgeYtZz8RsoJio4
- 0sMw==
-X-Gm-Message-State: AOJu0YyExy8NGjpoCoVm45cvmwIkrjEAdCUGWGK4MyYl6NAAsrTnwLQ+
- p/TjEmPJV1nk9fymJGluDfWIPL5fSpecaKMWAAOBTxOVecxM8qegEjajzMru
-X-Gm-Gg: ASbGnctSTTgQZvfAkc9eWYlRTaj5+T6GkEytGfvTyEVZ2ihaa980qAyhZuQvaqUDTtZ
- rUTJaRG3+yhg00niO9bX6dm1BZ+DL0jI50MB4YhlhJqbQRanHZRvL7xyWMLI49IbVPaaUAP4TcF
- 3S5cT43WK0yqJMorpxa4pjLNpfRBIHZAqoxnizifFRDIFbf61m2P5LeLnjIOJ8I98q3t5F1BvwY
- 9oMtw1FFgVPGXUR7bmSrSOoUVtDegkCfuzyADXsUK1lMSsWfcInkcJbC5Kt0MzXVY07VKrIJpBf
- S4MBfWlvJuwuF0NUaFA27DCwqTBCY5C+gyNs1tzn4bY/CzqEWgAb
-X-Google-Smtp-Source: AGHT+IGYw3Kboi3XH46h60q1d/RUhjweAu6TmSz2qKVFbzqDFRrheiBFyspvFd13DYGsU7RgoI1qGQ==
-X-Received: by 2002:a67:e704:0:b0:4de:b205:dd55 with SMTP id
- ada2fe7eead31-4deed3d2fb7mr3187081137.18.1746805386263; 
- Fri, 09 May 2025 08:43:06 -0700 (PDT)
+ bh=89HzNYESpvFwcSdwgJ5iSSZfjITzazGD4XWXF6cIH+o=;
+ b=itKvbadJhSC728wF36seMpoDpQq6P+XC8CsECl/cGaYg0rVeLYkXINg7HI5N7/dkeU
+ XGDEKLGEUDulgZDbSKqoo9K7Bx9agfH0Ztk7Zvt5cVLHh6qlLVgHMAITSyRxgvAthK24
+ P3plurqRRXJcjwFPloxnwQb/UEyVOUdXUUzfDWBbk2nF7oymoabgIPiTSTMTOakH10zp
+ 8UduGrUVbnqfhoj1cMQ2AmfSVthfNossmfRI1EHmgoBU91duUY8FVizEaYOI2hHAvM2u
+ Eod0hIPLPrqY/BMhz0p8oNFuGsu5GBsS07HGHvFfbbUys4rSwPuJhhdHB1GdyTV3GMqQ
+ CEew==
+X-Gm-Message-State: AOJu0YyfqX/zleozfCq4FZnGq2Lsi2b7aTfTw7T7SNjnB8ap6SgjUtpU
+ cUaI7bd4VCWb35Q/3s8MjeCkAC0ByHYjHeOov4hkRzilE3KSsc/vEDyBn1bn
+X-Gm-Gg: ASbGnctewUzp0zgc/Bg4ouV5EGCc/TONM1k5SVn76T5el33tcwhLaC4xJLSpkpZRbHs
+ GD/XjUaLc56RyjSTX82DoJQpS3dceWHmljRuHKQF9Y+vueLZPdOKqmMGbaEFS9xZ502kLdgsh6n
+ 5DC5I8EtVKrJK/h+ws/5lNBuJEMSA7u6yHlRbjHkfNfzNEmfdr6wPpwKzHpU7S+hKFzXOn/TajK
+ vYFjeb0q44fp5WqQmvs+ZsYSZkvCIJ/cbVytBo5eIl5rDhQha+cJXPfzUW1NZoSw3K+K1wVVXrm
+ ipADcUrWDU1QaCUGbOmyKlclP48PjWljyzBhDSKmSlaRk7Sh9C6u
+X-Google-Smtp-Source: AGHT+IHnNjBFCusoq5SHHFjFr1b1ZMVzYsRvxasLsmkspyA3wED2PLvV1fqXw6ckZAt2F/6XQxLx+A==
+X-Received: by 2002:a05:6102:5e97:b0:4cb:5e02:7538 with SMTP id
+ ada2fe7eead31-4deed3e8a2amr4175644137.22.1746805388231; 
+ Fri, 09 May 2025 08:43:08 -0700 (PDT)
 Received: from adriano.. ([2800:300:6f54:8180:9366:b0c8:336a:d2c7])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-4deb203c1d4sm1303285137.28.2025.05.09.08.43.04
+ ada2fe7eead31-4deb203c1d4sm1303285137.28.2025.05.09.08.43.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 08:43:05 -0700 (PDT)
+ Fri, 09 May 2025 08:43:07 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 1/3] CI testing: add http server to CI tests
-Date: Fri,  9 May 2025 11:43:50 -0400
-Message-ID: <20250509154352.3483523-2-adriano.cordova@canonical.com>
+Subject: [PATCH 2/3] cmd/Kconfig: enable wget on qemu
+Date: Fri,  9 May 2025 11:43:51 -0400
+Message-ID: <20250509154352.3483523-3-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250509154352.3483523-1-adriano.cordova@canonical.com>
 References: <20250509154352.3483523-1-adriano.cordova@canonical.com>
@@ -98,101 +98,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an http server to CI tests so that HTTP booting and
-loading can be tested.
+select CMD_WGET for ARCH_QEMU. This way HTTP can be tested
+on the qemu platforms in CI.
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- .azure-pipelines.yml | 14 +++++++++++++-
- .gitlab-ci.yml       | 14 +++++++++++++-
- test/py/conftest.py  |  5 +++++
- 3 files changed, 31 insertions(+), 2 deletions(-)
+ cmd/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 5e1938b0526..ba31727aec1 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -316,9 +316,21 @@ stages:
-           fi
-           export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
-           export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci
-+          python3 -m http.server 80 --directory "\${UBOOT_TRAVIS_BUILD_DIR}" > /dev/null 2>&1 &
-+          HTTP_PID=\$!
-+          sleep 1  # Give the server a moment to start
-+          if ps -p \${HTTP_PID} > /dev/null; then
-+            export HTTP_PID
-+            export HTTP_SERVER="--httpserver localhost:80"
-+          else
-+            unset HTTP_PID
-+          fi
-           # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \$var" if not
--          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_EXTRA} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=\$(System.DefaultWorkingDirectory)/results.xml
-+          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_EXTRA} \${HTTP_SERVER} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=\$(System.DefaultWorkingDirectory)/results.xml
-           # the below corresponds to .gitlab-ci.yml "after_script"
-+          if [[ -n "\${HTTP_PID}" ]]; then
-+            kill \${HTTP_PID};
-+          fi
-           rm -rf /tmp/uboot-test-hooks /tmp/venv
-           EOF
-       - task: CopyFiles@2
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 6f11331514b..aeb54262883 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -106,10 +106,22 @@ stages:
-     # "${var:+"-k $var"}" expands to "" if $var is empty, "-k $var" if not
-     - export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:${PATH};
-       export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci;
--      ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID} ${TEST_PY_EXTRA}
-+      python3 -m http.server 80 --directory "${UBOOT_TRAVIS_BUILD_DIR}" > /dev/null 2>&1 &
-+      HTTP_PID=$!
-+      sleep 1  # Give the server a moment to start
-+      if ps -p ${HTTP_PID} > /dev/null; then
-+        export HTTP_PID
-+        export HTTP_SERVER="--httpserver localhost:80"
-+      else
-+        unset HTTP_PID
-+      fi
-+      ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID} ${TEST_PY_EXTRA} ${HTTP_SERVER}
-         ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
-         --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
-         --junitxml=/tmp/${TEST_PY_BD}/results.xml
-+      if [[ -n "${HTTP_PID}" ]]; then
-+        kill ${HTTP_PID};
-+      fi
-   artifacts:
-     when: always
-     paths:
-diff --git a/test/py/conftest.py b/test/py/conftest.py
-index 5aea85647af..fbf67acecc3 100644
---- a/test/py/conftest.py
-+++ b/test/py/conftest.py
-@@ -89,6 +89,8 @@ def pytest_addoption(parser):
-     parser.addoption('--gdbserver', default=None,
-         help='Run sandbox under gdbserver. The argument is the channel '+
-         'over which gdbserver should communicate, e.g. localhost:1234')
-+    parser.addoption('--httpserver', default=None,
-+        help='Address of http server, e.g. localhost:80')
-     parser.addoption('--role', help='U-Boot board role (for Labgrid-sjg)')
-     parser.addoption('--use-running-system', default=False, action='store_true',
-         help="Assume that U-Boot is ready and don't wait for a prompt")
-@@ -267,6 +269,8 @@ def pytest_configure(config):
-         persistent_data_dir = build_dir + '/persistent-data'
-     mkdir_p(persistent_data_dir)
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index f21d27cb27f..fa353c6fcac 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2153,7 +2153,7 @@ config CMD_TFTPBOOT
  
-+    httpserver = config.getoption('httpserver')
-+
-     gdbserver = config.getoption('gdbserver')
-     if gdbserver and not board_type.startswith('sandbox'):
-         raise Exception('--gdbserver only supported with sandbox targets')
-@@ -330,6 +334,7 @@ def pytest_configure(config):
-     ubconfig.board_type_extra = board_type_extra
-     ubconfig.board_identity = board_identity
-     ubconfig.gdbserver = gdbserver
-+    ubconfig.httpserver = httpserver
-     ubconfig.use_running_system = config.getoption('use_running_system')
-     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
-     ubconfig.connection_ok = True
+ config CMD_WGET
+ 	bool "wget"
+-	default y if SANDBOX
++	default y if SANDBOX || ARCH_QEMU
+ 	select WGET
+ 	help
+ 	  wget is a simple command to download kernel, or other files,
 -- 
 2.48.1
 
