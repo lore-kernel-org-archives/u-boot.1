@@ -4,95 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6537C3ABBC
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 21:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A6DC3ABBC
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 22:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF0D582162;
-	Fri,  9 May 2025 23:33:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2379182958;
+	Sat, 10 May 2025 00:49:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ez8+Kslw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F6N8iSe8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DA7B8269F; Fri,  9 May 2025 23:24:35 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id BCC4B82952; Sat, 10 May 2025 00:49:51 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C17A68211F
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 23:24:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4ECF8211F
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 00:49:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ad239f23e8fso13339366b.3
- for <u-boot@lists.denx.de>; Fri, 09 May 2025 14:24:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-60638c07cabso1493014eaf.3
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 15:49:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746825872; x=1747430672; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xZvmAB7/Wh1bw5qHcNY0N40vp8J1AENj0zvIrmWlMPc=;
- b=Ez8+Kslwror1WJZYxN5OkEhh+y24b0zAd8L4dQp8jJPJGQ9kI1rgism8YWTaEkEVva
- Y5D8saOkbww/63zD9sMLk68EjQr6xxjiKkmUA0V2TJXgdYloB0r3L6y0OKEqAgDqPRvg
- hAkpfhbN3KQ/oRgAyAXdk01LEe3KztbmGMuuQkmdjvNWUVDIJ7vTFVPj6ueZBD9Fov09
- lsJ9udwKLb4DZSLAhXBIJmDDR5LPyTGZ0a0TAcKFu3iwxrDknXjZgo+El5TkMSlBz5Ol
- bzcICua9Y+dhYbKcJVzaIxn+Ls9b/EJme+H0zIbueECwXBC8O2/586em1G7y/zAl97r4
- qE1g==
+ d=konsulko.com; s=google; t=1746830988; x=1747435788; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1eW3SecXqOV1VhLv9ChaAv39sxcDpEqguj5wUuuFa9M=;
+ b=F6N8iSe86j8wS790jVFY2JIov7fhLQZ5ydGDUkcIDLZxd0WxXAt+lssRYRdCyJJPCP
+ YOjvbpPqCWpWxF1lnpdyoZDCbZhhxXstwsSXGh1DRpAJq9ZE77GA4JIcLDruFAlH6XP3
+ lZ8OlWNefEPQqULUVsiOcAFiQ1tjg5EtpJUSQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746825872; x=1747430672;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xZvmAB7/Wh1bw5qHcNY0N40vp8J1AENj0zvIrmWlMPc=;
- b=KrSK55dNbdYjDjzUIGd7KFU1a4aYBxT6dGexr0nNtXMCDH7Pv5f78S7mLQcJBncB5G
- oFbGDIBFHGk/9VkRiWPhOY7jqqyWQ3Wh3PKd3w/vuuAYkOTq5ULBEaHh1GELiK9Kfpai
- AAg+xHVlIt10g9AqwpUY7hK516Gshl3TVmYKYLXiJ+ZRRP98A9sKtxLqE0WLM3rrPBaG
- u5b83XdT8a4i4iTVY2RlvNlp75be3mP3FNG7pO57rSpb7hJ75BzypCdtbAWyjZozTvIK
- 8biifMAAHGJx3JolioY4jlL6x/D3NKeZYHNw8Sx3DrhAkgzi8HNw/jdMycwM91Yiw6cC
- Or8A==
+ d=1e100.net; s=20230601; t=1746830988; x=1747435788;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1eW3SecXqOV1VhLv9ChaAv39sxcDpEqguj5wUuuFa9M=;
+ b=RGXRIIwF5j2CeDe+/g3WMnrUVbXhz7uE3KvlFKoBObXK2XiBNCQFIgeeDMomBV6Wrw
+ oRzUb7d+x8zpphyUgZG7sq76aXxXM30Xvmdw8mhhk6Hmjsrb78k1E4jtU+0XJGJKaiZJ
+ HSAkjq7ddtzjORsnm0nWWFLENcGWbqqOF6aN19mJj4GwZ3Rtuk9F9gtEeYWozOEwK/em
+ 1dN8S+YMTh1A2bIZKJjTeSc17dFsCxF85ADbn2Nj0lwycNTtfHuiwhdMFIH/xrt6gmpH
+ hXMmtUFUxcX02yEfaqe3oc5+Mmw0ZQFesSa5U95ULbTVXw+vE4Ns8OngefNNxJbqlQn/
+ agjw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTIg3jiV33KKBG9v3yirxQku2QcgcM0r0K8u5rrfSPl93jVg03BqDp8o9TJ1FjxOM8UHlyZgc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsoyWdToJALydC9tNs+Dy1302QU2REKz8PmS9Fj2Vqd+dNCBIz
- eV64k/D/augtbYbbSJQprT3q966rUFlyXfWekk6CbVzFbn2wyLjkQFq0lf9KOfg=
-X-Gm-Gg: ASbGncuawu5JWGHA0MKQ29UeHEDaVxnynZEgSWGxdmIiMrR9WWkE+Vb8t5vQFje7a1R
- f/M/VcOuUdRLLnrmuKEZn6u2uwuXXCzSMbpVHMcvqze8hc2cqpGLhdZB2cXtBdrXKDCVkCpbUrM
- CUUjHYsGz0RGI31ZT76K2iBNTNV+yzfiExcNhP7GSxJwrrFhPt5TkdtbBIwRjMbHMmoxJiuRgcu
- d3cVuHYnUvg3ny9L2RuGRA6cev2/9JEMVrnUYG3UqcHP5jYC91GQIhAOvRurgSCEJEgIQgPVHrf
- xO5Cplp52IRc547KvmVqCC/THVmXJIYQsUw303CEuC2MMfX2/j4xhhFeAouLKjhn9fPdupFNENl
- Vyq/VCUDtPEVlthD49ARSPcgTtQth5xlc2CEzAId048zIo7c0bFhYIyRcmLkx+HSp5mon0sstXl
- Jgg/R/XyQR6S6mqAVqVi5ZILpJsGvO6X6MDRB0nhdKpWc7IRw=
-X-Google-Smtp-Source: AGHT+IF+ZomGiQKk2VGwSmUL0/8AsPCsEd8xR4nyh46DMbPcVxhNgLHBXd2TYwIMLwmnm6A2KKgN3A==
-X-Received: by 2002:a17:907:84c:b0:ad1:8f1f:6961 with SMTP id
- a640c23a62f3a-ad2191405e9mr433314466b.43.1746825872100; 
- Fri, 09 May 2025 14:24:32 -0700 (PDT)
-Received: from ?IPV6:2001:1c00:3b8a:ea00:8f63:e334:c9f0:f1e4?
- (2001-1c00-3b8a-ea00-8f63-e334-c9f0-f1e4.cable.dynamic.v6.ziggo.nl.
- [2001:1c00:3b8a:ea00:8f63:e334:c9f0:f1e4])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219376451sm206788866b.77.2025.05.09.14.24.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 May 2025 14:24:31 -0700 (PDT)
-Message-ID: <e6fdd5e8-daef-4e35-8a76-8823d99456f2@linaro.org>
-Date: Fri, 9 May 2025 23:24:29 +0200
+ AJvYcCVnPf2MLIfNfyZRs5TFMAHP0ebnopuReevFvNzAb487fuA1SG2nXnlEKWD+tnp8kLLQoLau3oo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwD4MiMHlBt6F2LZCMuviUJfPe+AnTYuBLuwXz7Zf/hEwoNSO4F
+ mw1VPQe6P8+THvEjLLWVCGBsjT5n+PTCy78cFO3fV3S8QKEVqEcUBwhJRcbD6HXFJYKXrgkTOgE
+ 8
+X-Gm-Gg: ASbGncu8CXGuFtJ7Sk12GEXnt24IEbWyA/GX6I4RHsNWSNZLJKE0JlMnsVubRwBPlBb
+ 41meDFyp9gCAV1CDFc6qLMVl6ktsj813jwBf1kfcgo06kEpAz0Dat00PNpXLE8CGgQnaASrDHk7
+ cY6wPcKdy18iFpH1kW01KfV6aceUwJfrVQYNtzKUKvFwTw/bSlJkYKjCazBvSBquvRq+zlibphp
+ q6QJ5KGAffibWhVQTz9M5f8NedWC6N/8OGdDeXjf/CVYtvOuuYDyhwsb16S/RZ/xpOvmMJuFvDr
+ B3/GfMAmBmsl3VB3gcOBc6cQVxbnHBmhcW5IhE0sN6p6U1CHvB5YSXFdbsOjYs/wt8oe11TTtwo
+ 6ffYTK/YdBJbjYd4+7WN5YA==
+X-Google-Smtp-Source: AGHT+IEY+4LKcZz5o4DL2l7VzaKEU/xKFHuEK3ltrpXApjTUhhqkuYUgTcCBv57nHQzjDGLOt1jTdg==
+X-Received: by 2002:a05:6870:548c:b0:2cc:3586:294f with SMTP id
+ 586e51a60fabf-2dba4280684mr3392183fac.9.1746830988187; 
+ Fri, 09 May 2025 15:49:48 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2dba0b82571sm801403fac.49.2025.05.09.15.49.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 May 2025 15:49:47 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ Nikunj Kela <nikunj.kela@sima.ai>
+Cc: boon.khai.ng@intel.com, tien.fong.chee@intel.com, u-boot@lists.denx.de
+In-Reply-To: <20250222060734.1367838-1-nikunj.kela@sima.ai>
+References: <20250222060734.1367838-1-nikunj.kela@sima.ai>
+Subject: Re: [PATCH] net: dwc: xgmac: Allow DMA buffers above 4GB
+Message-Id: <174683098657.770062.10589776327587862071.b4-ty@konsulko.com>
+Date: Fri, 09 May 2025 16:49:46 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] button: qcom-pmic: allow to specify code in devicetree
-To: Alexey Minnekhanov <alexeymin@minlexx.ru>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Alexey Minnekhanov <alexeymin@postmarketos.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20250424014811.3809818-1-alexeymin@minlexx.ru>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250424014811.3809818-1-alexeymin@minlexx.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Fri, 09 May 2025 23:33:32 +0200
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,65 +99,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 21 Feb 2025 22:07:34 -0800, Nikunj Kela wrote:
 
+> Currently, Synopsis xgmac driver only works if DMA region is under 4GB.
+> This change enables the DMA buffers allocations above 4GB memory
+> regions.
+> 
+> 
 
-On 4/24/25 03:48, Alexey Minnekhanov wrote:
-> From: Alexey Minnekhanov <alexeymin@postmarketos.org>
-> 
-> Most device vendors put "Volume Down" button onto PMIC RESIN.
-> But Sony is special: see
-> dts/upstream/src/arm64/qcom/sdm630-sony-xperia-nile.dtsi or [1].
-> They put "Volume Down" on PMIC GPIO 7 where others usually put
-> "Volume Up", and KEY_VOLUMEUP is inside &pon_resin.
-> 
-> Currently if you boot U-Boot on such Sony device, you end up
-> with 2 "Volume Down" buttons, and no "Volume Up", which makes
-> navigating menu problematic.
-> 
-> Support reading devicetree "linux,code" property and override
-> statically defined button code & label based on that.
-> 
-> [1] https://elixir.bootlin.com/linux/v6.15-rc3/source/arch/
-> arm64/boot/dts/qcom/sdm630-sony-xperia-nile.dtsi#L263
-> 
-> Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
-> Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Applied to u-boot/master, thanks!
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-Thanks!
-
-> ---
->   drivers/button/button-qcom-pmic.c | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
-> 
-> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
-> index e3bb9bd758a..85addfe32a2 100644
-> --- a/drivers/button/button-qcom-pmic.c
-> +++ b/drivers/button/button-qcom-pmic.c
-> @@ -143,6 +143,21 @@ static int qcom_pwrkey_probe(struct udevice *dev)
->   
->   	priv->base = base;
->   
-> +	ret = dev_read_u32(dev, "linux,code", &priv->code);
-> +	if (ret == 0) {
-> +		/* convert key, if read OK */
-> +		switch (priv->code) {
-> +		case KEY_VOLUMEDOWN:
-> +			priv->code = KEY_DOWN;
-> +			uc_plat->label = "Volume Down";
-> +			break;
-> +		case KEY_VOLUMEUP:
-> +			priv->code = KEY_UP;
-> +			uc_plat->label = "Volume Up";
-> +			break;
-> +		}
-> +	}
-> +
->   	/* Do a sanity check */
->   	ret = pmic_reg_read(priv->pmic, priv->base + REG_TYPE);
->   	if (ret != 0x1 && ret != 0xb) {
-
+[1/1] net: dwc: xgmac: Allow DMA buffers above 4GB
+      commit: fff21d27a9d5d3d75bb63652156c24a5e240df48
 -- 
-Casey (she/they)
+Tom
+
 
