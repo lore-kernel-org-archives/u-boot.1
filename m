@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 234EBC3ABBC
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 19:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 447D5C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 19:03:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 813A98211F;
-	Fri,  9 May 2025 21:03:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2BC18211F;
+	Fri,  9 May 2025 21:03:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="Yo6isv7P";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="pKHd8THA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 165C682162; Fri,  9 May 2025 21:03:01 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de
- [IPv6:2a01:4f8:c0c:92be::1])
- by phobos.denx.de (Postfix) with ESMTP id CDC438004F
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 21:02:58 +0200 (CEST)
+ id A7E0282162; Fri,  9 May 2025 21:03:35 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+ by phobos.denx.de (Postfix) with ESMTP id 54FAB8004F
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 21:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
  s=dhelectronicscom; t=1746817341;
- bh=yusLqMfr2twTGL8AUd3GN0as2gXbxmC6OU7y0x0Qmwk=;
- h=From:To:CC:Subject:Date:From;
- b=Yo6isv7Pl25ifo/Cp+rP70OnAUd9J+vYAad4WZo2NrwLatAdXSdeUcgV3a5qciSLP
- H0Ln1NqJVHwGHOo0bapgHKFsqEY7U6pgsdNkBoDCxh51f5feYKEvYw7MzpnRx2/uoW
- XxvISJgsROnOoIj/VgGAmB3hKT4hWbPQfzNbUeJ2id3qmodHSOW40zUF4K9dE4aW2y
- OnItfBwmXDe0piPrlrKbMaTK9pLfy3vZMhkj4T5dNTfXDoOKmet9leE+E2EV1uAVPj
- ozLD3VYaJf73TgGssnJqr4LtBsCtZEomXVxbs4jtVMX4025uT1HkWgysgJtIjx632k
- /k9xVGA6WFfkQ==
+ bh=+1lKeNh08DWJ6Lpe3vC62mJrHRw0TtrdRlQ/HmcR+Xg=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References:From;
+ b=pKHd8THA549nGg+TlXl8bkXAQ6WaT1MkJZBjdnkkzDeg8CQVkyFRvyFgw52ERykSw
+ WF8WcsOMSdlUozV0LQ7jHpoTy4LiC3tRoY2nskKU8hVsGR8CyvIlH4JCTGT0PRDfFK
+ T65++37PQwZAkpXMdTRw3bOTeE3Q8OFGbAnoK2KCAaACq7CM7GvXebtc2/lSWM14PW
+ irH0IQPon9bPvykqWdWlz+T5JVKjkbphp9sA4Ulu5FQ25lXULlqQcHNwJhmejCeY3H
+ ZVIpxkAMy7xAQt0Ep4pucLk9mRPgiphQfsDEGQOYI+S1i5RMrIssHhm2UhM3UiHfSC
+ lyuWEjeAnCkFg==
 From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 To: <u-boot@lists.denx.de>
 CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Andy Shevchenko
@@ -45,11 +44,13 @@ CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Andy Shevchenko
  Delaunay <patrick.delaunay@foss.st.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Venkatesh
  Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH V3 0/3] cmd: env: select: Add output for available environment
- targets
-Date: Fri, 9 May 2025 21:00:40 +0200
-Message-ID: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
+Subject: [PATCH V3 1/3] cmd: nvedit: Convert the parsing of arguments to
+ getopt()
+Date: Fri, 9 May 2025 21:00:41 +0200
+Message-ID: <20250509190043.28641-2-cniedermaier@dh-electronics.com>
 X-klartext: yes
+In-Reply-To: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
+References: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -69,30 +70,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the "-l" parameter to the "env select" command to print the available
-environment targets, convert all argument parsing in the file nvedit.c to
-getopt() and check that with unit tests.
-
-The first patch converts the parsing of arguments to getopt() for all env
-commands. The second one adds unit tests for checking the env command.
-These were used to check the env commands before and after the conversion.
-The third patch adds the actual new parameter "-l" for the "env select"
-command.
-
-Christoph Niedermaier (3):
-  cmd: nvedit: Convert the parsing of arguments to getopt()
-  test: cmd: nvedit: Add basic unit tests
-  cmd: env: select: Add output for available environment targets
-
- cmd/nvedit.c      | 353 +++++++++----------
- env/Kconfig       |   1 +
- env/env.c         |  16 +
- include/env.h     |   7 +
- test/cmd/Makefile |   1 +
- test/cmd/nvedit.c | 844 ++++++++++++++++++++++++++++++++++++++++++++++
- test/cmd_ut.c     |   2 +
- 7 files changed, 1051 insertions(+), 173 deletions(-)
- create mode 100644 test/cmd/nvedit.c
+The entire parsing of the arguments is done manually. Improve this
+by converting all parsing of arguments to getopt().
 
 Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 ---
@@ -109,6 +88,542 @@ Cc: Rasmus Villemoes <ravi@prevas.dk>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+V3: - Add this patch to the series
+---
+ cmd/nvedit.c | 335 +++++++++++++++++++++++++--------------------------
+ env/Kconfig  |   1 +
+ 2 files changed, 164 insertions(+), 172 deletions(-)
+
+diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+index 1f259801293..e5e89b51e0a 100644
+--- a/cmd/nvedit.c
++++ b/cmd/nvedit.c
+@@ -41,6 +41,7 @@
+ #include <linux/stddef.h>
+ #include <asm/byteorder.h>
+ #include <asm/io.h>
++#include <getopt.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -92,19 +93,26 @@ static int do_env_print(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	int i;
+ 	int rcode = 0;
+ 	int env_flag = H_HIDE_DOT;
++	struct getopt_state gs;
++	int opt;
+ 
++	getopt_init_state(&gs);
++	while ((opt = getopt(&gs, argc, argv, "ea")) > 0) {
++		switch (opt) {
++		case 'e':
+ #if defined(CONFIG_CMD_NVEDIT_EFI)
+-	if (argc > 1 && argv[1][0] == '-' && argv[1][1] == 'e')
+-		return do_env_print_efi(cmdtp, flag, --argc, ++argv);
++			return do_env_print_efi(cmdtp, flag, argc - gs.index, &argv[gs.index]);
+ #endif
+-
+-	if (argc > 1 && argv[1][0] == '-' && argv[1][1] == 'a') {
+-		argc--;
+-		argv++;
+-		env_flag &= ~H_HIDE_DOT;
++			break;
++		case 'a':
++			env_flag &= ~H_HIDE_DOT;
++			break;
++		default:
++			return CMD_RET_USAGE;
++		}
+ 	}
+ 
+-	if (argc == 1) {
++	if (gs.index == argc) {
+ 		/* print all env vars */
+ 		rcode = env_print(NULL, env_flag);
+ 		if (!rcode)
+@@ -116,7 +124,7 @@ static int do_env_print(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	/* print selected env vars */
+ 	env_flag &= ~H_HIDE_DOT;
+-	for (i = 1; i < argc; ++i) {
++	for (i = gs.index; i < argc; ++i) {
+ 		int rc = env_print(argv[i], env_flag);
+ 		if (!rc) {
+ 			printf("## Error: \"%s\" not defined\n", argv[i]);
+@@ -133,6 +141,8 @@ static int do_env_grep(struct cmd_tbl *cmdtp, int flag,
+ {
+ 	char *res = NULL;
+ 	int len, grep_how, grep_what;
++	struct getopt_state gs;
++	int opt;
+ 
+ 	if (argc < 2)
+ 		return CMD_RET_USAGE;
+@@ -140,36 +150,31 @@ static int do_env_grep(struct cmd_tbl *cmdtp, int flag,
+ 	grep_how  = H_MATCH_SUBSTR;	/* default: substring search	*/
+ 	grep_what = H_MATCH_BOTH;	/* default: grep names and values */
+ 
+-	while (--argc > 0 && **++argv == '-') {
+-		char *arg = *argv;
+-		while (*++arg) {
+-			switch (*arg) {
++	getopt_init_state(&gs);
++	while ((opt = getopt(&gs, argc, argv, "envb")) > 0) {
++		switch (opt) {
+ #ifdef CONFIG_REGEX
+-			case 'e':		/* use regex matching */
+-				grep_how  = H_MATCH_REGEX;
+-				break;
++		case 'e':		/* use regex matching */
++			grep_how  = H_MATCH_REGEX;
++			break;
+ #endif
+-			case 'n':		/* grep for name */
+-				grep_what = H_MATCH_KEY;
+-				break;
+-			case 'v':		/* grep for value */
+-				grep_what = H_MATCH_DATA;
+-				break;
+-			case 'b':		/* grep for both */
+-				grep_what = H_MATCH_BOTH;
+-				break;
+-			case '-':
+-				goto DONE;
+-			default:
+-				return CMD_RET_USAGE;
+-			}
++		case 'n':		/* grep for name */
++			grep_what = H_MATCH_KEY;
++			break;
++		case 'v':		/* grep for value */
++			grep_what = H_MATCH_DATA;
++			break;
++		case 'b':		/* grep for both */
++			grep_what = H_MATCH_BOTH;
++			break;
++		default:
++			return CMD_RET_USAGE;
+ 		}
+ 	}
+ 
+-DONE:
+ 	len = hexport_r(&env_htab, '\n',
+ 			flag | grep_what | grep_how,
+-			&res, 0, argc, argv);
++			&res, 0, argc - gs.index, &argv[gs.index]);
+ 
+ 	if (len > 0) {
+ 		puts(res);
+@@ -510,37 +515,34 @@ static int do_env_default(struct cmd_tbl *cmdtp, int flag,
+ 			  int argc, char *const argv[])
+ {
+ 	int all = 0, env_flag = H_INTERACTIVE;
+-
+-	debug("Initial value for argc=%d\n", argc);
+-	while (--argc > 0 && **++argv == '-') {
+-		char *arg = *argv;
+-
+-		while (*++arg) {
+-			switch (*arg) {
+-			case 'a':		/* default all */
+-				all = 1;
+-				break;
+-			case 'f':		/* force */
+-				env_flag |= H_FORCE;
+-				break;
+-			case 'k':
+-				env_flag |= H_NOCLEAR;
+-				break;
+-			default:
+-				return cmd_usage(cmdtp);
+-			}
++	struct getopt_state gs;
++	int opt;
++
++	getopt_init_state(&gs);
++	while ((opt = getopt(&gs, argc, argv, "afk")) > 0) {
++		switch (opt) {
++		case 'a':		/* default all */
++			all = 1;
++			break;
++		case 'f':		/* force */
++			env_flag |= H_FORCE;
++			break;
++		case 'k':
++			env_flag |= H_NOCLEAR;
++			break;
++		default:
++			return cmd_usage(cmdtp);
+ 		}
+ 	}
+-	debug("Final value for argc=%d\n", argc);
+-	if (all && (argc == 0)) {
++	if (all && (argc == gs.index)) {
+ 		/* Reset the whole environment */
+ 		env_set_default("## Resetting to default environment\n",
+ 				env_flag);
+ 		return 0;
+ 	}
+-	if (!all && (argc > 0)) {
++	if (!all && (argc > gs.index)) {
+ 		/* Reset individual variables */
+-		env_set_default_vars(argc, argv, env_flag);
++		env_set_default_vars(argc - gs.index, &argv[gs.index], env_flag);
+ 		return 0;
+ 	}
+ 
+@@ -552,32 +554,26 @@ static int do_env_delete(struct cmd_tbl *cmdtp, int flag,
+ {
+ 	int env_flag = H_INTERACTIVE;
+ 	int ret = 0;
++	struct getopt_state gs;
++	int opt;
++	int i;
+ 
+-	debug("Initial value for argc=%d\n", argc);
+-	while (argc > 1 && **(argv + 1) == '-') {
+-		char *arg = *++argv;
+-
+-		--argc;
+-		while (*++arg) {
+-			switch (*arg) {
+-			case 'f':		/* force */
+-				env_flag |= H_FORCE;
+-				break;
+-			default:
+-				return CMD_RET_USAGE;
+-			}
++	getopt_init_state(&gs);
++	while ((opt = getopt(&gs, argc, argv, "f")) > 0) {
++		switch (opt) {
++		case 'f':		/* force */
++			env_flag |= H_FORCE;
++			break;
++		default:
++			return CMD_RET_USAGE;
+ 		}
+ 	}
+-	debug("Final value for argc=%d\n", argc);
+ 
+ 	env_inc_id();
+ 
+-	while (--argc > 0) {
+-		char *name = *++argv;
+-
+-		if (hdelete_r(name, &env_htab, env_flag))
++	for (i = gs.index; i < argc; i++)
++		if (hdelete_r(argv[i], &env_htab, env_flag))
+ 			ret = 1;
+-	}
+ 
+ 	return ret;
+ }
+@@ -633,64 +629,58 @@ static int do_env_export(struct cmd_tbl *cmdtp, int flag,
+ {
+ 	char	buf[32];
+ 	ulong	addr;
+-	char	*ptr, *cmd, *res;
++	char	*ptr, *res;
+ 	size_t	size = 0;
+ 	ssize_t	len;
+ 	env_t	*envp;
+ 	char	sep = '\n';
+ 	int	chk = 0;
+ 	int	fmt = 0;
+-
+-	cmd = *argv;
+-
+-	while (--argc > 0 && **++argv == '-') {
+-		char *arg = *argv;
+-		while (*++arg) {
+-			switch (*arg) {
+-			case 'b':		/* raw binary format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\0';
+-				break;
+-			case 'c':		/* external checksum format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\0';
+-				chk = 1;
+-				break;
+-			case 's':		/* size given */
+-				if (--argc <= 0)
+-					return cmd_usage(cmdtp);
+-				size = hextoul(*++argv, NULL);
+-				goto NXTARG;
+-			case 't':		/* text format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\n';
+-				break;
+-			default:
+-				return CMD_RET_USAGE;
+-			}
++	struct getopt_state gs;
++	int opt;
++
++	getopt_init_state(&gs);
++	while ((opt = getopt(&gs, argc, argv, "bcs:t")) > 0) {
++		switch (opt) {
++		case 'b':		/* raw binary format */
++			if (fmt++)
++				goto sep_err;
++			sep = '\0';
++			break;
++		case 'c':		/* external checksum format */
++			if (fmt++)
++				goto sep_err;
++			sep = '\0';
++			chk = 1;
++			break;
++		case 's':		/* size given */
++			size = hextoul(gs.arg, NULL);
++			break;
++		case 't':		/* text format */
++			if (fmt++)
++				goto sep_err;
++			sep = '\n';
++			break;
++		default:
++			return CMD_RET_USAGE;
+ 		}
+-NXTARG:		;
+ 	}
+ 
+-	if (argc < 1)
++	if (argc == gs.index)
+ 		return CMD_RET_USAGE;
+ 
+-	addr = hextoul(argv[0], NULL);
++	addr = hextoul(argv[gs.index], NULL);
+ 	ptr = map_sysmem(addr, size);
+ 
++	gs.index++;
++
+ 	if (size)
+ 		memset(ptr, '\0', size);
+ 
+-	argc--;
+-	argv++;
+-
+ 	if (sep) {		/* export as text file */
+ 		len = hexport_r(&env_htab, sep,
+ 				H_MATCH_KEY | H_MATCH_IDENT,
+-				&ptr, size, argc, argv);
++				&ptr, size, argc - gs.index, &argv[gs.index]);
+ 		if (len < 0) {
+ 			pr_err("## Error: Cannot export environment: errno = %d\n",
+ 			       errno);
+@@ -711,7 +701,7 @@ NXTARG:		;
+ 
+ 	len = hexport_r(&env_htab, '\0',
+ 			H_MATCH_KEY | H_MATCH_IDENT,
+-			&res, ENV_SIZE, argc, argv);
++			&res, ENV_SIZE, argc - gs.index, &argv[gs.index]);
+ 	if (len < 0) {
+ 		pr_err("## Error: Cannot export environment: errno = %d\n",
+ 		       errno);
+@@ -731,7 +721,7 @@ NXTARG:		;
+ 
+ sep_err:
+ 	printf("## Error: %s: only one of \"-b\", \"-c\" or \"-t\" allowed\n",
+-	       cmd);
++	       argv[0]);
+ 	return 1;
+ }
+ #endif
+@@ -765,7 +755,7 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 			 int argc, char *const argv[])
+ {
+ 	ulong	addr;
+-	char	*cmd, *ptr;
++	char	*ptr;
+ 	char	sep = '\n';
+ 	int	chk = 0;
+ 	int	fmt = 0;
+@@ -773,42 +763,40 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 	int	crlf_is_lf = 0;
+ 	int	wl = 0;
+ 	size_t	size;
+-
+-	cmd = *argv;
+-
+-	while (--argc > 0 && **++argv == '-') {
+-		char *arg = *argv;
+-		while (*++arg) {
+-			switch (*arg) {
+-			case 'b':		/* raw binary format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\0';
+-				break;
+-			case 'c':		/* external checksum format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\0';
+-				chk = 1;
+-				break;
+-			case 't':		/* text format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\n';
+-				break;
+-			case 'r':		/* handle CRLF like LF */
+-				crlf_is_lf = 1;
+-				break;
+-			case 'd':
+-				del = 1;
+-				break;
+-			default:
+-				return CMD_RET_USAGE;
+-			}
++	struct getopt_state gs;
++	int opt;
++
++	getopt_init_state(&gs);
++	while ((opt = getopt(&gs, argc, argv, "bctrd")) > 0) {
++		switch (opt) {
++		case 'b':		/* raw binary format */
++			if (fmt++)
++				goto sep_err;
++			sep = '\0';
++			break;
++		case 'c':		/* external checksum format */
++			if (fmt++)
++				goto sep_err;
++			sep = '\0';
++			chk = 1;
++			break;
++		case 't':		/* text format */
++			if (fmt++)
++				goto sep_err;
++			sep = '\n';
++			break;
++		case 'r':		/* handle CRLF like LF */
++			crlf_is_lf = 1;
++			break;
++		case 'd':
++			del = 1;
++			break;
++		default:
++			return CMD_RET_USAGE;
+ 		}
+ 	}
+ 
+-	if (argc < 1)
++	if (argc == gs.index)
+ 		return CMD_RET_USAGE;
+ 
+ 	if (!fmt)
+@@ -817,11 +805,13 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 	if (sep != '\n' && crlf_is_lf )
+ 		crlf_is_lf = 0;
+ 
+-	addr = hextoul(argv[0], NULL);
++	addr = hextoul(argv[gs.index], NULL);
+ 	ptr = map_sysmem(addr, 0);
+ 
+-	if (argc >= 2 && strcmp(argv[1], "-")) {
+-		size = hextoul(argv[1], NULL);
++	gs.index++;
++
++	if (argc - gs.index >= 1 && strcmp(argv[gs.index], "-")) {
++		size = hextoul(argv[gs.index], NULL);
+ 	} else if (chk) {
+ 		puts("## Error: external checksum format must pass size\n");
+ 		return CMD_RET_FAILURE;
+@@ -844,7 +834,7 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 		printf("## Info: input data size = %zu = 0x%zX\n", size, size);
+ 	}
+ 
+-	if (argc > 2)
++	if (argc - gs.index > 1)
+ 		wl = 1;
+ 
+ 	if (chk) {
+@@ -866,8 +856,10 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 		ptr = (char *)ep->data;
+ 	}
+ 
++	gs.index++;
++
+ 	if (!himport_r(&env_htab, ptr, size, sep, del ? 0 : H_NOCLEAR,
+-		       crlf_is_lf, wl ? argc - 2 : 0, wl ? &argv[2] : NULL)) {
++		       crlf_is_lf, wl ? argc - gs.index : 0, wl ? &argv[gs.index] : NULL)) {
+ 		pr_err("## Error: Environment import failed: errno = %d\n",
+ 		       errno);
+ 		return 1;
+@@ -878,7 +870,7 @@ static int do_env_import(struct cmd_tbl *cmdtp, int flag,
+ 
+ sep_err:
+ 	printf("## %s: only one of \"-b\", \"-c\" or \"-t\" allowed\n",
+-		cmd);
++		argv[0]);
+ 	return 1;
+ }
+ #endif
+@@ -971,6 +963,8 @@ static int do_env_info(struct cmd_tbl *cmdtp, int flag,
+ 	int eval_flags = 0;
+ 	int eval_results = 0;
+ 	bool quiet = false;
++	struct getopt_state gs;
++	int opt;
+ #if defined(CONFIG_CMD_SAVEENV) && !IS_ENABLED(CONFIG_ENV_IS_DEFAULT)
+ 	enum env_location loc;
+ #endif
+@@ -980,23 +974,20 @@ static int do_env_info(struct cmd_tbl *cmdtp, int flag,
+ 		return print_env_info();
+ 
+ 	/* process options */
+-	while (--argc > 0 && **++argv == '-') {
+-		char *arg = *argv;
+-
+-		while (*++arg) {
+-			switch (*arg) {
+-			case 'd':
+-				eval_flags |= ENV_INFO_IS_DEFAULT;
+-				break;
+-			case 'p':
+-				eval_flags |= ENV_INFO_IS_PERSISTED;
+-				break;
+-			case 'q':
+-				quiet = true;
+-				break;
+-			default:
+-				return CMD_RET_USAGE;
+-			}
++	getopt_init_state(&gs);
++	while ((opt = getopt(&gs, argc, argv, "dpq")) > 0) {
++		switch (opt) {
++		case 'd':
++			eval_flags |= ENV_INFO_IS_DEFAULT;
++			break;
++		case 'p':
++			eval_flags |= ENV_INFO_IS_PERSISTED;
++			break;
++		case 'q':
++			quiet = true;
++			break;
++		default:
++			return CMD_RET_USAGE;
+ 		}
+ 	}
+ 
+diff --git a/env/Kconfig b/env/Kconfig
+index 9f5ec44601e..9b6cce62999 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -2,6 +2,7 @@ menu "Environment"
+ 
+ config ENV_SUPPORT
+ 	def_bool y
++	select GETOPT
+ 
+ config ENV_SOURCE_FILE
+ 	string "Environment file to use"
 -- 
 2.30.2
 
