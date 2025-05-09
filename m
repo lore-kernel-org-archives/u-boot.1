@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89788C3ABC3
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 06:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E62C3ABC3
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 06:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8E2A8211F;
-	Fri,  9 May 2025 08:39:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 458008211F;
+	Fri,  9 May 2025 08:42:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Oe+IRwt2";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gZutwqkZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A610B8212F; Fri,  9 May 2025 08:39:15 +0200 (CEST)
+ id 34E3C8211F; Fri,  9 May 2025 08:42:12 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1A928210D
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 08:39:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09A688210D
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 08:42:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,26 +30,25 @@ Received: from LT2ubnt.. (unknown [213.157.19.135])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7CF8B3FB95; 
- Fri,  9 May 2025 06:39:12 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 977AC3FB95; 
+ Fri,  9 May 2025 06:42:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1746772753;
- bh=CDo6w/3D4kjn+mWOrlAeEThVR4BMUSW/fPT2moOHwSA=;
+ s=20210705; t=1746772929;
+ bh=iNn6KkYTk2nxDvqvgu5aDB1EtVYvSVfTFWhEdzwz3fI=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=Oe+IRwt29HaQaruxBsTPxVrBqYLToZ78/fnyoBMJ7fQ2X4RtzLPmprZo+/fYNSz0v
- 5a+uY3aYfoDjCvMuOxrtz5e/sOSccT1G470JvnwHcQT7QuT3eIWkL41kPJrYEdEa8q
- zYDDoXpgovNCyiyA/ph7idyJBN6p0jSuXHJl3FqH45EoT1aDvpITGiT90TMaLMHOJ+
- QaDFRLVD41m8DiNd5AXb1gX3Vbcpjqx7/iBN+s4DBXc03EpR3o6WUNFT9F/3w6YSH+
- gDfVjvgnHEKitRmmw+AQQiJGrRkx18JjoGlqceGrzI9AagU/qO5cqJ7CcTKb9eU/P3
- 3O2CjhDdL4Y7Q==
+ b=gZutwqkZrCT1x4i0yzewUf1VEVi36CVPvHU/sSlxU7u1Zd+v5I+MUeu4a/DXdgZ0g
+ K2SconSCJppa786HxZGvBdRC6gai3QmraAZSriGSv3Q6QL0OZo6oAjU7kGpy2u6BtG
+ 9OvJ3PPOPhNv1rUFuPLNeDITv1D7O6VNRG75esniE/aQTjRk771siB59qLTz05q2Tw
+ LXP/i4P4+f2K8LbeogzfXaSQHBijEUJxXhIa9NbwhEGZBvniNMoN598hNpq7M5bYbl
+ rqaYujgph8CpGMCPV7MYSHqqcRXvC5aWvZN4bfXuumPIbTyum6E7W3jpxQWrWutUfK
+ n23hjRe7AQpfg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+To: Sean Anderson <sean.anderson@seco.com>
+Cc: Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: correct link to QEMU
-Date: Fri,  9 May 2025 08:39:04 +0200
-Message-ID: <20250509063904.28923-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] doc: RISC-V supports semihosting
+Date: Fri,  9 May 2025 08:42:07 +0200
+Message-ID: <20250509064207.29154-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,25 +68,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/hhttps:/https:/
+Mention that RISC-V supports semihosting.
+Update the link to ARM's semihosting documentation
+
+Update SPDX identifier to current format.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- doc/develop/bootstd/qfw.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+v2:
+	correct the link to ARM's semihosting documentation
+---
+ doc/usage/semihosting.rst | 21 ++++++++++++---------
+ 1 file changed, 12 insertions(+), 9 deletions(-)
 
-diff --git a/doc/develop/bootstd/qfw.rst b/doc/develop/bootstd/qfw.rst
-index 70086ad1817..fdc3ff71619 100644
---- a/doc/develop/bootstd/qfw.rst
-+++ b/doc/develop/bootstd/qfw.rst
-@@ -3,7 +3,7 @@
- QFW Bootmeth
- ============
+diff --git a/doc/usage/semihosting.rst b/doc/usage/semihosting.rst
+index 9303a6364d5..dfd6c58222a 100644
+--- a/doc/usage/semihosting.rst
++++ b/doc/usage/semihosting.rst
+@@ -1,14 +1,17 @@
+-.. SPDX-License-Identifier: GPL-2.0+
++.. SPDX-License-Identifier: GPL-2.0-or-later
+ .. Copyright 2014 Broadcom Corporation.
  
--`QEMU <hhttps://www.qemu.org/>`_ is a system emulator which is able to boot
-+`QEMU <https://www.qemu.org/>`_ is a system emulator which is able to boot
- Operating Systems. QEMU provides specific support for booting an OS image
- provided on the QEMU command line.
+ Semihosting
+ ===========
+ 
+-Semihosting is ARM's way of having a real or virtual target communicate
+-with a host or host debugger for basic operations such as file I/O,
+-console I/O, etc. Please see `Arm's semihosting documentation
+-<https://developer.arm.com/documentation/100863/latest/>`_ for more
+-information.
++Semihosting is a technique to let a real or virtual target communicate with a
++host or host debugger for basic operations such as file I/O, console I/O, etc.
++Originally introduced by ARM it has also been adopted for RISC-V. Please, see
++`Arm's semihosting documentation
++<https://developer.arm.com/documentation/dui0471/g/Semihosting>`_ and
++`RISC-V Semihosting
++<https://drive.google.com/file/d/1qu74D4_EmjGmc03qzfQ7Pf4g6m0fOtcD/view>`_
++for more information.
+ 
+ Platform Support
+ ----------------
+@@ -40,7 +43,7 @@ Foundation and Base fastmodel simulators.
+ QEMU
+ ^^^^
+ 
+-Another ARM emulator which supports semihosting is `QEMU
++Another emulator which supports semihosting is `QEMU
+ <https://www.qemu.org/>`_. To enable semihosting, enable
+ ``CONFIG_SERIAL_PROBE_ALL`` when configuring U-Boot, and use
+ ``-semihosting`` when invoking QEMU. Adding ``-nographic`` can also be
+@@ -53,8 +56,8 @@ running QEMU, refer to the :doc:`board documentation
+ OpenOCD
+ ^^^^^^^
+ 
+-Any ARM platform can use semihosting with an attached debugger. One such
+-debugger with good support for a variety of boards and JTAG adapters is
++Any ARM or RISC-V platform can use semihosting with an attached debugger. One
++such debugger with good support for a variety of boards and JTAG adapters is
+ `OpenOCD <https://openocd.org/>`_. Semihosting is not enabled by default,
+ so you will need to enable it::
  
 -- 
 2.48.1
