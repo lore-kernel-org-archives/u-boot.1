@@ -4,63 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D9E5C3ABBC
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 14:22:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 205F8C3ABC3
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 14:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A22E88283E;
-	Fri,  9 May 2025 16:22:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4857382905;
+	Fri,  9 May 2025 16:37:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CGtAUKUW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cHfs/AkC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74EB782905; Fri,  9 May 2025 16:22:42 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3A82C82935; Fri,  9 May 2025 16:37:26 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A32482162
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 16:22:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 125FC8283E
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 16:37:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 36260A4C2AA;
- Fri,  9 May 2025 14:22:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 853A5C4CEE4;
- Fri,  9 May 2025 14:22:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1746800558;
- bh=he0Ux7IFEJobquxahNB4/eDtwDUplgSXbO/6CgWjG3U=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=CGtAUKUWW2rjfvK+d1KUve8xEs4BuN5UuzW7b4oC+mwdzTzIIEmPvQxf/C416LCyt
- ZM5R0r47IXDZXc37sM+MQjqtBOT1w/xsGoOuxQ1QcYUtG6ljcQMmV+PG+p1ycO6J9v
- /m2Cz2acR7PVPPhWZix7UVgl8Y4MFSA9mmDM17UE2C56DRpjTP6kB9Wd8GD2Xi221w
- WDLGgJU2nIOHe+pr+yDRbHFp7Vv+uPcyJTgQS9feJVGo2YgKcfgllTX/ssErKKQbxt
- w6S3mgid0HvXQal6qK41uMQje8Ao1LeEVtMNqWn2spJWOHvUSsSh43VclfJJQiW4UR
- JYJuXghWdvCdA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: george chan <gchan9527@gmail.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>, Tom
- Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Casey Connolly
- <casey.connolly@linaro.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Rayagonda Kokatanur
- <rayagonda.kokatanur@broadcom.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Subject: Re: [PATCH v2 1/5] boot/image-android: Workaround kernel/ramdisk
- invalid addr
-In-Reply-To: <CADgMGSuhEK6xdrhnGEDnx-dtoNSneMABEr3-26a4u0s4eXgvYw@mail.gmail.com>
-References: <20250505-android-boot-v2-0-92dcb5bf59c8@gmail.com>
- <20250505-android-boot-v2-1-92dcb5bf59c8@gmail.com>
- <87zffoamlv.fsf@kernel.org>
- <CADgMGSuhEK6xdrhnGEDnx-dtoNSneMABEr3-26a4u0s4eXgvYw@mail.gmail.com>
-Date: Fri, 09 May 2025 16:22:36 +0200
-Message-ID: <87zffln9sj.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72fffa03ac6so1694165a34.3
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 07:37:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1746801443; x=1747406243; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yltqQ/My5bbfv28EME8VbYCmrujCJostKkItlacnT5g=;
+ b=cHfs/AkCht36i19/FmAVwMvXCcVXp6QSb0dhakfteoLMp/mziWZ2JYVZk78hFUidW5
+ 2Qd7uAT+lAx29MR5xOGDjIbAQ/QZd3SuxZiU+3gj/KCkoBujIrhcblHG6qgXQNrPZOx3
+ h6CYAnDYAVrAzYyinhLXc6eK2I+kx4gQ6NVk8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746801443; x=1747406243;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yltqQ/My5bbfv28EME8VbYCmrujCJostKkItlacnT5g=;
+ b=eXYL5+AJmyw8e26NTAPfjs9hDMw1CyuPUBK+uJSW9Wel6ZUTX1169rDK0zWxQrsI2I
+ ii8lsP/C3rVleIbI5MD7LXh9fqCpB9PqZMSU6BcGjF4Eh5Q0vaeywFuyH5kAO6cRcXAM
+ /h7HeHI/FhrU+gHIYWAUXmhCnIvvyiXaGPgMXTel/38jwQKi5hX8y+peauul7A/gMqyt
+ g0933uiPE+OLqKdQvRxdcHkN/jlDszXRyR8UJUVikP3611lXnoLCgdNduF/RJI5L0rkd
+ rUu2a9jjPpZUsFFFTX8rhqw3A/hPgRze6dWwsC7O61027oqIY7sOhwl2ulbm2h41CVZw
+ +CRg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaSw8+31N5U6tDbd9PfIlyV8yMAu8V/IE9OzpOLLPXkS3XjOrcHfuyXVoHH7tRrXxyQjFWjOc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxIO5+isweZdLBkJQoR7EG7S9tXlf5hf0CO/JYnXrV0F5C6xfqQ
+ tNcizV74DxxuJwOEWp5/kYsEDYkwo2rT2+PKcA+x3KM0K8S2E4dj7KML5sa2Zvo=
+X-Gm-Gg: ASbGnctf+JRF8nAGi3AfLK/xoz3+jH/gq4ZhRnAbD8aDMAV6T/yOY5t7W/sg1hJrR15
+ ba9hDJ9WoGZ2YIrIG6eDUm8DcZ0gHAVKFQ+VaysXmg0N3wOW+gVR+RNTyLvLx7DlzkTmkXkP2Dq
+ TkaCGinLkhy4ceXoIX4hTVxDxdVNtiA1O9RQU4VrkFJVMMExws9kDIlQ7pP7SC5yDWwzoHKbtLZ
+ QF4o23NdaeTGZA4zcDH1vsuaLmEWlRPPwL3LnuPCA70+3MOEJjWkUtsyYqHjfUjPXFGisrkG6qk
+ Omy+imSmjXVW0eCJ5OE8z9nM5PR8coDJs8XBo629DUCd90A9ecjeL7MUFCWLh9d1xgejvaIBcea
+ /vw==
+X-Google-Smtp-Source: AGHT+IH1eeqyp/7reK+E45SDJW2l83mBm3PuZOICwdPfM0GDwBcdPW2Enel9Nn6YaDhpgRoAPB3/jA==
+X-Received: by 2002:a05:6830:6017:b0:72c:320b:fc8c with SMTP id
+ 46e09a7af769-73226ab0a0dmr3259208a34.21.1746801442772; 
+ Fri, 09 May 2025 07:37:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-732265cd9a9sm548681a34.53.2025.05.09.07.37.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 May 2025 07:37:21 -0700 (PDT)
+Date: Fri, 9 May 2025 08:37:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH v1 1/1] x86: cpu: Describe board final hooks in the header
+Message-ID: <20250509143719.GG603748@bill-the-cat>
+References: <20241018155557.2184819-1-andriy.shevchenko@linux.intel.com>
+ <CAFLszTgmcg+EdhDjiuSgtYR1kwgsTwEBvhC+LZNqB9ypx8ev7w@mail.gmail.com>
+ <aB36rz9tajyRZEzh@smile.fi.intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6CrN1aG+sIJ77bqI"
+Content-Disposition: inline
+In-Reply-To: <aB36rz9tajyRZEzh@smile.fi.intel.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,182 +100,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi George,
 
-On jeu., mai 08, 2025 at 12:22, george chan <gchan9527@gmail.com> wrote:
+--6CrN1aG+sIJ77bqI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi Mattijs,
->
-> Thx for feedback.
->
-> =E5=9C=A8 2025=E5=B9=B45=E6=9C=887=E6=97=A5=E9=80=B1=E4=B8=89 15:47=EF=BC=
-=8CMattijs Korpershoek <mkorpershoek@kernel.org> =E5=AF=AB=E9=81=93=EF=BC=9A
->
->> Hi George,
->>
->> Thank you for the patch.
->> I really prefer this solution to the one proposed in v1.
->>
->> I have tested this on Khadas VIM3 board (using
->> khadas-vim3_android_defconfig)
->>
->> I have a couple of small remarks below.
->>
->> On lun., mai 05, 2025 at 17:17, George Chan via B4 Relay <
->> devnull+gchan9527.gmail.com@kernel.org> wrote:
->>
->> > From: George Chan <gchan9527@gmail.com>
->> >
->> > Some androidboot image have invalid kernel/ramdisk load addr,
->> > force to ignore those value and use loadaddr instead.
->>
->> Can we please elaborate a bit more in the commit message?
->> We have not explained/justified why repacking a boot image with proper
->> kernel ramdisk/load addr is not possible.
->>
->> Is the following an acceptable justification for you?
->> """
->> Since it's not always possible to change the load addr by repacking
->> the boot.img (due to AVB signature mismatch/<or_another_justification>),
->> we need a way to use kernel_addr_r and ramdisk_addr_r.
->> """
->>
->> Feel free to reformulate the above.
->>
->
-> Thx. let me sum up as below 2 reasons.
->
-> 1. there is a concern on exposing the whole memory to image loading is
-> dangerous
->
-> 2. Since it's not always possible to change the load addr by repacking
-> the boot.img (mainly due to AVB signature mismatch),
-> we need a way to use kernel_addr_r and ramdisk_addr_r.
+On Fri, May 09, 2025 at 03:53:03PM +0300, Andy Shevchenko wrote:
+> On Sat, Oct 19, 2024 at 05:51:00AM -0600, Simon Glass wrote:
+> > On Fri, 18 Oct 2024 at 09:56, Andy Shevchenko
+> > <andriy.shevchenko@linux.intel.com> wrote:
+> > >
+> > > The new two declarations board_final_init() and board_final_cleanup()
+> > > need a description. Add it here.
+> > >
+> > > Suggested-by: Simon Glass <sjg@chromium.org>
+> > > Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> > > ---
+> > >  arch/x86/include/asm/cpu.h | 13 +++++++++++++
+> > >  1 file changed, 13 insertions(+)
+> > >
+> >=20
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+>=20
+> What's the status of this?
 
-That's good summary. Please include it in the commit message for v3.
+I haven't heard from Bin in a while, so I guess I should go and pickup
+the outstanding patches. Thanks for the reminder.
 
->
->
->> >
->> > Suggested-by: Casey Connolly <casey.connolly@linaro.org>
->> > Signed-off-by: George Chan <gchan9527@gmail.com>
->> > ---
->> >  boot/Kconfig         | 6 ++++++
->> >  boot/image-android.c | 9 ++++++---
->> >  2 files changed, 12 insertions(+), 3 deletions(-)
->> >
->> > diff --git a/boot/Kconfig b/boot/Kconfig
->> > index fb37d912bc9..4bdac384181 100644
->> > --- a/boot/Kconfig
->> > +++ b/boot/Kconfig
->> > @@ -11,6 +11,12 @@ config ANDROID_BOOT_IMAGE
->> >         This enables support for booting images which use the Android
->> >         image format header.
->> >
->> > +config ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
->> > +     bool "Android Boot Image ignore addr"
->> > +     default n
->> > +     help
->> > +       This ignore kernel/ramdisk load addr specified in androidboot
->> header.
->>
->> Please add a bit more context here, checkpatch.pl reports issues:
->> $ ./scripts/checkpatch.pl --u-boot --git master..HEAD
->>
->> WARNING: please write a paragraph that describes the config symbol fully
->> #27: FILE: boot/Kconfig:14:
->> +config ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
->>
->
-> same as above.
->
->>
->> > +
->> >  config TIMESTAMP
->> >       bool "Show image date and time when displaying image information"
->> >       default y if CMD_DATE
->> > diff --git a/boot/image-android.c b/boot/image-android.c
->> > index 1746b018900..7b8eb6a4f64 100644
->> > --- a/boot/image-android.c
->> > +++ b/boot/image-android.c
->> > @@ -268,7 +268,8 @@ static ulong android_image_get_kernel_addr(struct
->> andr_image_data *img_data,
->> >        *
->> >        * Otherwise, we will return the actual value set by the user.
->> >        */
->> > -     if (img_data->kernel_addr  =3D=3D ANDROID_IMAGE_DEFAULT_KERNEL_A=
-DDR) {
->> > +     if (img_data->kernel_addr  =3D=3D ANDROID_IMAGE_DEFAULT_KERNEL_A=
-DDR ||
->> > +             IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR)) {
->>
->> Please fix indentation, should be:
->>
->> +       if (img_data->kernel_addr  =3D=3D ANDROID_IMAGE_DEFAULT_KERNEL_A=
-DDR ||
->> +           IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR)) {
->>
->> (checkpatch.pl reports this)
->>
->
-> ack.
->
->
->> >               if (comp =3D=3D IH_COMP_NONE)
->> >                       return img_data->kernel_ptr;
->> >               return env_get_ulong("kernel_addr_r", 16, 0);
->> > @@ -464,7 +465,8 @@ int android_image_get_ramdisk(const void *hdr, con=
-st
->> void *vendor_boot_img,
->> >        */
->> >       if (img_data.header_version > 2) {
->> >               /* Ramdisk can't be used in-place, copy it to
->> ramdisk_addr_r */
->> > -             if (img_data.ramdisk_addr =3D=3D
->> ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
->> > +             if (img_data.ramdisk_addr =3D=3D
->> ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR ||
->> > +
->>  (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR))) {
->>
->> Same here. Also, can we please drop the leading parenthesis (IS_ENABLED(
->> -> IS_ENABLED( to be consistent with the previous code change?
->>
->
-> ack.
->
->
->> >                       ramdisk_ptr =3D env_get_ulong("ramdisk_addr_r", =
-16,
->> 0);
->> >                       if (!ramdisk_ptr) {
->> >                               printf("Invalid ramdisk_addr_r to copy
->> ramdisk into\n");
->> > @@ -488,7 +490,8 @@ int android_image_get_ramdisk(const void *hdr, con=
-st
->> void *vendor_boot_img,
->> >       } else {
->> >               /* Ramdisk can be used in-place, use current ptr */
->> >               if (img_data.ramdisk_addr =3D=3D 0 ||
->> > -                 img_data.ramdisk_addr =3D=3D
->> ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
->> > +                 img_data.ramdisk_addr =3D=3D
->> ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR ||
->> > +
->>  (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR))) {
->>
->> Same here. Also, can we please drop the leading parenthesis (IS_ENABLED(
->> -> IS_ENABLED( to be consistent with the previous code change?
->>
->
-> ack.
->
-> l planed to release v3 later around end of next week and contain only pat=
-ch
-> #1 #2 and #5 to ease maintainer processing. please feel free to comment on
-> any idea, i will include into next version.
->
-> regards,
-> George
->
->>
+--=20
+Tom
+
+--6CrN1aG+sIJ77bqI
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgeExsACgkQFHw5/5Y0
+tyw3ggv/SonM429AIy7e9HUyq7/8daa8LFX3aSLUnqUX1Cz1lgWbysny34Po/s7f
+vvBqA8DIGfP/2/TVAyIA/UAEdoWiNIa0T5xn41UYrWeO5A44Fw+k+QUK5nsgBvii
+Nq4acbx0jq4JCxZ/8/pmJZRy9e9Z2lSdoX3WHhVxbmUHTkRp7VdaW0klIjwwfnx1
+wG4Y05TDHtM5cy0XXsqgzUqBHUAZAmQXCBs/jQyTrw2IVH2tPUSX+4o/b4SQ+N8U
+MJ8ADSrGG+9Yq6v2GEt6eukCcW6hZPQ4htSFK77vInEhjCWU+QUg1jHuIUMDJ76v
+elgJlPo/UuZYTONICHvxft9CEUXoiwknp5CJ0ejnT51u//OGpw5sId+stdrsVNAy
+dAzDaLZDdNzAo2+6M8QVW3boiVprnkGtiIHZmuYFPBpE0W72aR2uJc2kg4eCFQNS
+0C+QKbBwwrIMS/NFADFab/LdBccLCsH3YRK3pWxczIHWSj8REegVe2j2dojPf/fo
+5oTQkAON
+=pTVJ
+-----END PGP SIGNATURE-----
+
+--6CrN1aG+sIJ77bqI--
