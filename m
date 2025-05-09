@@ -4,56 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 051A4C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 19:04:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A5CC3ABBC
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 20:52:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C7928211F;
-	Fri,  9 May 2025 21:04:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id A631F8211F;
+	Fri,  9 May 2025 22:52:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="pND4FFCE";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZYFOAQFk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCF3E82162; Fri,  9 May 2025 21:04:42 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
- by phobos.denx.de (Postfix) with ESMTP id BC7878004F
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 21:04:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ id 39BE082162; Fri,  9 May 2025 22:35:47 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DD1938210D
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 22:35:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1746817342;
- bh=D/CG2bEhv80vDfz+XLe2EruX2Vvwp7UQomIG+ReKHoY=;
- h=From:To:CC:Subject:Date:In-Reply-To:References:From;
- b=pND4FFCEombreYBnv2A4Do/D4hEhF4VEe2X185GZQdMrDp+HVuRlRo2DDCQbXA03B
- uaY9yy4n3xyuduBV+ue+Go0AoTN+1vhRbbKMeRd1vUAQk8w5+w73gjxqD/vBq9jF6L
- KynCMmqTl+oWwW1ppXDXkF1P8pYGy54cfO7SSsaZmIFChSULmJcVWV6lBPMouiahd9
- yI8aYDxIDli8XCoCrvJYAsW+rVUmw+Jci8HfKfa3SkKAcEGc8NWvlwawPzQM0vSHua
- 5Ec8c+KIDMevGqD8qx4PJR3AL4SOStgPzYiNZ/ddwopczE6yszzCoKVrpHXGQxnSpM
- nlVuedPJbkcHA==
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-To: <u-boot@lists.denx.de>
-CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Andy Shevchenko
- <andriy.shevchenko@linux.intel.com>, Christian Marangi
- <ansuelsmth@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Venkatesh
- Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH V3 3/3] cmd: env: select: Add output for available environment
- targets
-Date: Fri, 9 May 2025 21:00:43 +0200
-Message-ID: <20250509190043.28641-4-cniedermaier@dh-electronics.com>
-X-klartext: yes
-In-Reply-To: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
-References: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=charan6.ram3@gmail.com
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-30c3a038acfso1937663a91.3
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 13:35:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1746822942; x=1747427742; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=pBPP3E69XcuMxXNTT/6xL2RtZUfzt/XdqvsKCJC5yWE=;
+ b=ZYFOAQFkyxCAIOmIts1V4w5ImGODvvgZyuY8npOW33HAn/mxZLfId7Ngg3u1PABZtZ
+ Y2ajd6dMULKUtPZE0ScE9tj85MDSF0TaTLdUbvRP8KoNFep/8S9hZVgq7p9UyVMxcX06
+ WQS51NVW2EuVVnRxQB7qguRztM+Jn5RB9IbJbxRzJvsD3YRiy6/jLxIUWifynBrYQO+C
+ ham/2qqt/fuRcC/iP1CgT6x6A3WFhYzEegx6OE/iIiuMXXTRDOco7tYU+9VCjDfkrPCV
+ N0uN4/JMFFy62gZ4X1SiGmxzq49RPT4d/JpljZuUJFIUsooV59X7j4yf2UVDtIXH5V5o
+ UJJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746822942; x=1747427742;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pBPP3E69XcuMxXNTT/6xL2RtZUfzt/XdqvsKCJC5yWE=;
+ b=d8KWNHODTuWZEe+LgDuh+i3n6+4iId7C7fe3Im39dCcMq+LZK9N7TPKat7OpM0x92k
+ YLvFRRHiB9h5Ve3SA15E39uYfdAGuAMqrbQcTiLima82sWlBW1gFKhz69SOXoQQDNDHa
+ KuxGI/MmGacet5blFY7Qkd6XihCZtuoQvUiTOJNLq8wVxh17fTJfbAhzSxbzWU/PwYce
+ 0PeDOamm/Quya68XUYWD0NJlm77iRiKHgOrbr2duDm+TA0JTFJioXu4ye1I9Q9Dgl25h
+ CtLS6Lc2w8MmXDc9ivOuG3Av4xXu+NujtViBKwMSW12+6lMqQNfbb5z75l05z+d7aoOP
+ x3TA==
+X-Gm-Message-State: AOJu0Yz3Bd5M5HdUsgd4YEYaz29dyghuj/sgOii32TUuMDrbRIg+7apP
+ mwlQycmgf6kWaYZ/649eBYbxS5sfEkX35l3DMjWaCdfYEas1CcJLuPupj03ziKsvXoaj6gHr0nf
+ Kt/MKbHs3pJoakQNAd+4HcYhmPemJaPBE
+X-Gm-Gg: ASbGncv+MbggZumQh/NaplTOb0sPSWpbCHGygBK/t0YkXcdgWT/FSIFhRtU7OaAoWdX
+ bLdTBO3RZPZdnPinHkzpbfuj8iP9cuijdAbG4wPZotjUaIIwqUThxoXjyAL6QwTQbUrHh7kb4Bb
+ nqj64ceBT4vyDIT8IWFQks3W/IungtB07Zzr67LfF+io4=
+X-Google-Smtp-Source: AGHT+IFviBqAQMjSJ1ACQVkhvUNa5ZA1tnkTKC6b4RVLBKp4xFgREepeU+Qc2UbEvEUec9kivmykMXnpN+xAD1sMs3c=
+X-Received: by 2002:a17:90b:380f:b0:2ff:64a0:4a58 with SMTP id
+ 98e67ed59e1d1-30c3d628b6emr6446678a91.22.1746822942360; Fri, 09 May 2025
+ 13:35:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+From: charan <charan6.ram3@gmail.com>
+Date: Sat, 10 May 2025 02:05:30 +0530
+X-Gm-Features: ATxdqUFvGmymVeGQZpOVRlFHkAr_crDB1fYcDpESzh74ixrAh5NsjtTytEtVg3g
+Message-ID: <CANvmrwH8WUnTvpTTVtJ26OhwmpsdSai6RcgGEmXWLffSno7-4Q@mail.gmail.com>
+Subject: USB 3.1 - DWC3 Discussion
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Fri, 09 May 2025 22:52:38 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,120 +87,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add parameter "-l" for printing available environment targets. The
-active target is marked with an asterisk. This is done by adding
-the function env_select_print_list().
+Hi All
 
-If "env select" is called without a target parameter the result is
-"Select Environment on <NULL>: driver not found". Replace this not
-so useful output by showing the env usage message instead.
+I am new to U-Boot and I am trying to enable USB 3.1 (DWC3) for my board.
 
-Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
----
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Rasmus Villemoes <ravi@prevas.dk>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
-V2: - Showing available environment targets by parameter "-l"
-    - Showing env usage message if env select is called without a target
-V3: - Convert the parsing of arguments to getopt()
----
- cmd/nvedit.c  | 18 +++++++++++++++++-
- env/env.c     | 16 ++++++++++++++++
- include/env.h |  7 +++++++
- 3 files changed, 40 insertions(+), 1 deletion(-)
+However, when I am going through the U-Boot source code, there seems to be
+significant duplicate of code between folders, *drivers/usb/host/ *and
+*/drivers/usb/dwc3/,
+*for example
+a) /drivers/usb/dwc3/core.c and /drivers/usb/host/xhci-dwc3.c
 
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index e5e89b51e0a..10fd93d4a45 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -504,6 +504,22 @@ static int do_env_load(struct cmd_tbl *cmdtp, int flag, int argc,
- static int do_env_select(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
- {
-+	struct getopt_state gs;
-+	int opt;
-+
-+	if (!argv[1])
-+		return CMD_RET_USAGE;
-+
-+	getopt_init_state(&gs);
-+	while ((opt = getopt(&gs, argc, argv, "l")) > 0) {
-+		switch (opt) {
-+		case 'l': /* list */
-+			return env_select_print_list() ? 1 : 0;
-+		default:
-+			return CMD_RET_USAGE;
-+		}
-+	}
-+
- 	return env_select(argv[1]) ? 1 : 0;
- }
- #endif
-@@ -1180,7 +1196,7 @@ U_BOOT_LONGHELP(env,
- 	"env load - load environment\n"
- #endif
- #if defined(CONFIG_CMD_NVEDIT_SELECT)
--	"env select [target] - select environment target\n"
-+	"env select [-l] [target] - list/select environment target(s)\n"
- #endif
- #if defined(CONFIG_CMD_NVEDIT_EFI)
- 	"env set -e [-nv][-bs][-rt][-at][-a][-i addr:size][-v] name [arg ...]\n"
-diff --git a/env/env.c b/env/env.c
-index dbaeedc3c3b..f94976d4271 100644
---- a/env/env.c
-+++ b/env/env.c
-@@ -350,6 +350,22 @@ int env_init(void)
- 	return ret;
- }
- 
-+int env_select_print_list(void)
-+{
-+	struct env_driver *drv;
-+	int prio;
-+
-+	printf("Available Environment targets:\n");
-+	for (prio = 0; (drv = env_driver_lookup(ENVOP_INIT, prio)); prio++) {
-+		if (gd->env_load_prio == prio)
-+			printf("* ");
-+		else
-+			printf("  ");
-+		printf("%s\n", drv->name);
-+	}
-+	return 0;
-+}
-+
- int env_select(const char *name)
- {
- 	struct env_driver *drv;
-diff --git a/include/env.h b/include/env.h
-index 01c3eeae7e2..4553c7bc109 100644
---- a/include/env.h
-+++ b/include/env.h
-@@ -286,6 +286,13 @@ int env_save(void);
-  */
- int env_erase(void);
- 
-+/**
-+ * env_select_print_list() - Print available environment targets
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int env_select_print_list(void);
-+
- /**
-  * env_select() - Select the environment storage
-  *
--- 
-2.30.2
+Why do we have duplicate code and which folder files should I configure for
+my DWC3 controller?
 
+Thanks
+Ram
