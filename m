@@ -4,88 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B11C3ABC3
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 16:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98C4EC3ABC3
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 16:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA3638295C;
-	Fri,  9 May 2025 18:48:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=wolfssl.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E4CF82977;
+	Fri,  9 May 2025 18:48:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ditigal.xyz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=wolfssl-com.20230601.gappssmtp.com header.i=@wolfssl-com.20230601.gappssmtp.com header.b="e0NQiGHR";
+	dkim=pass (1024-bit key; unprotected) header.d=ditigal.xyz header.i=@ditigal.xyz header.b="KvbJ7VYv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9C0882998; Fri,  9 May 2025 17:43:54 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0BFAF82935; Fri,  9 May 2025 16:41:10 +0200 (CEST)
+Received: from mail.ditigal.xyz (ditigal.xyz [IPv6:2a01:4f8:1c1b:6a1c::])
+ (using TLSv1.3 with cipher TLS_CHACHA20_POLY1305_SHA256 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D232282162
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 17:43:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E65F8283E
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 16:41:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=wolfssl.com
+ dmarc=pass (p=reject dis=none) header.from=ditigal.xyz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=david@wolfssl.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-309d2e8c20cso2895889a91.0
- for <u-boot@lists.denx.de>; Fri, 09 May 2025 08:43:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=wolfssl-com.20230601.gappssmtp.com; s=20230601; t=1746805430; x=1747410230;
- darn=lists.denx.de; 
- h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=5w5SgmdvSXf92X0zfYUpNdEtW4FD1B55QtJ3Xr68Vc8=;
- b=e0NQiGHRekK16KfbAJXKk9B7dbuvrhaTdgnJmGIG83I+Ww+uvtOGSy0T5SGsuYFtLc
- qIaTJ5iYmHn675RaZRbYXLy1NiOYAn9KPu6LUuZf00Y7jWV2KS4RbOWJlkAo7yuEpmBc
- zao2Zgp5GJ0tFGskf9Ka57BTYDSxLwNKb9cTJHO06eFulnQwXruVQ8wCUfhLEeJ7q+le
- lbmDo9doFm30/X9SPH8RVfEafR/yQZel47ibYLK8B3DM05y4/6onrocNNCN4PlYqRlcu
- jktIhUUh4TFQ2vgR0Z3UiodtF1F2qdVa3yc5NzVpCIPeYRhFvulIosOnf2NogoI7xo1v
- Famg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746805430; x=1747410230;
- h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5w5SgmdvSXf92X0zfYUpNdEtW4FD1B55QtJ3Xr68Vc8=;
- b=kEdeIyUxSRHf56h+Q/Nra1N2XUSNWo8TnnJVaIuEKTFjyeQ2RFt0nzuCr2KHZotEyO
- q9EzSTXfRACiDEpuAKipM84dDdw3cVnaOEkNXZRMPlsoDPWexZBdOFwt/Kmne0tX/HG5
- DGy5cjHy18F3ldwT04XGGud/MqXJd7qNFbxubyLFyQQ2VcoUa+kqnzPtpiBNqPTMDwQ/
- vs/xwIDOjbEZ8YuSrSFZKJgRq8fjkoYcFmgPMlAleTTleDu1ZYkVrktyxphEzFr3QOFO
- iqVmEUoc3K4hxmq+k0nPfck1KTn9FGK48pEprrG5TJh9mpYdSEfu02rtyzvKLBGGreHz
- 8nng==
-X-Gm-Message-State: AOJu0YxbPqckVt7FUhOovior87yoEMUbzffQlr/taI/um/LjSCumSV1s
- NorkmNL+dHr9XrVA12tfUYqs1qnNbWubLwJPB9apbIq4Vq1tXpH5MVTGNYPVSzM=
-X-Gm-Gg: ASbGncuv4y1FG93bEVM4AkCx7fk5WTPhMA5u0Y586k0ZkNKe5Xh4A30Agyf04B3Qjdc
- 519H/lSrPYQeW75d95kfIgRrNH+YaL6McU0yjINY9S/2NfwcdVUfbjI9MADSD4/7ofFUiPW5b98
- G6ZpESb59KtEDw7dMZHVGcpnJJddiv18vgwjVMvJuYvoyNjI9JzGbauKjnyfiq1h3wGGJ+0xMBF
- CDyfunfDe2r6I+fwM7Ya6k1m780Q9i0nO4QRI2VgYeMcAxduwDwDI0zBjc7iNGgqu5udjH/7i0N
- 9MZBvI/CPqV4rx/V4fA5AqayWI12Rl6M9kLv+R5pDUBChYmDfN/Ay5DlMj8PGcIF
-X-Google-Smtp-Source: AGHT+IEetzMOvqKJMm2FkODbdd+CepWHznpCPn3zmzo9ziURwlUPpIcxx4nOGaOrDIeZU/Ob/L1mQw==
-X-Received: by 2002:a17:90b:2fc8:b0:2fe:b907:562f with SMTP id
- 98e67ed59e1d1-30c3cff2ba0mr7685770a91.14.1746805430164; 
- Fri, 09 May 2025 08:43:50 -0700 (PDT)
-Received: from smtpclient.apple ([2607:fb91:1d06:4b8:c020:f716:cc15:ac11])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30ad4d2f1dasm4286201a91.17.2025.05.09.08.43.48
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 09 May 2025 08:43:49 -0700 (PDT)
-From: David Garske <david@wolfssl.com>
-Message-Id: <AB2FA403-CBB0-44F6-AC75-4A70B3E9242B@wolfssl.com>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.500.181.1.5\))
-Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
-Date: Fri, 9 May 2025 08:43:37 -0700
-In-Reply-To: <D9RMK91R8Q2I.3BA39TM77AYZA@linaro.org>
-Cc: u-boot@lists.denx.de, Todd Ouska <todd@wolfssl.com>,
- Larry Stefonic <larry@wolfssl.com>, Wolfram Kusterer <wolfram@wolfssl.com>,
- Aidan Garske <aidan@wolfssl.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <145501C2-B034-44EC-A16D-4F1A150347FB@wolfssl.com>
- <D9RMK91R8Q2I.3BA39TM77AYZA@linaro.org>
-X-Mailer: Apple Mail (2.3826.500.181.1.5)
-X-Mailman-Approved-At: Fri, 09 May 2025 18:48:29 +0200
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ spf=pass smtp.mailfrom=rutherther@ditigal.xyz
+Received: by cerebrum (OpenSMTPD) with ESMTPSA id 4ade6a7a
+ (TLSv1.3:TLS_CHACHA20_POLY1305_SHA256:256:NO); 
+ Fri, 9 May 2025 14:41:07 +0000 (UTC)
+From: Rutherther <rutherther@ditigal.xyz>
+To: u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>,
+	Rutherther <rutherther@ditigal.xyz>
+Subject: [PATCH] phy: zynqmp: Fix sgmii clk ctrl GTR lane bit shift
+Date: Fri,  9 May 2025 16:40:53 +0200
+Message-ID: <20250509144053.17647-1-rutherther@ditigal.xyz>
+X-Mailer: git-send-email 2.49.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ditigal.xyz;
+ i=@ditigal.xyz; q=dns/txt; s=20240917; t=1746801667; h=from : to : cc
+ : subject : date : message-id : mime-version :
+ content-transfer-encoding : from;
+ bh=FXye0HePfRnVjyQLM3RLp8eEi2SbtSevBjY23G4ANGw=;
+ b=KvbJ7VYvXERYfSkdZvHxhYAnoq1rrvLuTJDD54pg7hB2KgaTLLeGPd3GYby6/0PIIB4wW
+ Qzecgd8BDL2w5lLYjy+A47uodWXWZSPo/RTfIyFFTCEve+wF1cfpgRVUWCgZtRDg6xAw90A
+ GauW3nyW/vL3DBeceuAJ/zfhVcZ6uV4=
+X-Mailman-Approved-At: Fri, 09 May 2025 18:48:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,96 +63,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+The bitshift in GEM_CLK_CTRL register is five bits, not two. There are
+four bits for each GEM, and one bit reserved in between.
 
-Thank you for the quick reply. I am happy that you will consider wolfTPM =
-as a submodule. We have 100=E2=80=99s of commercial customers and it is =
-very actively maintained. In fact we will continue to provide direct =
-maintenance for any u-boot issues that come up using wolfTPM. Also =
-we=E2=80=99ve done safety critical DO-178 certification on wolfTPM.
+This bug has caused that using more than one GEM is impossible,
+additionally corrupting the GEM0's configuration, leaving GEM0
+unusable as well (ie. if GEM0 and GEM1 are used, GEM1 configuration is
+going to write to GEM0's registers wrong value, leaving GEM0 unusable)
+---
+ drivers/phy/phy-zynqmp.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-1) U-Boot subsystem maintainers. Can you point me to that list of =
-maintainers?
-2) Size: I haven=E2=80=99t run any size comparisons but I expect to be =
-inline with existing code. I will make sure we run some comparisons.
-3) Releases: Yes we have stable releases done each quarter. I am about =
-to do a release v3.9.0 next week that includes the U-boot support, so I =
-will update the submodule to use the tagged release when it=E2=80=99s =
-ready.
-4) CVE: Yes we track and create CVE=E2=80=99s if we find issues or any =
-are reported. We typically have a fix posted within 36 hours of a =
-report. Vulnerabilities are published in the release notes and for our =
-premium support customers they get early notification.
-5) Patch Size: I will work on reducing the changes and splitting them =
-into logical commits.
-
-Enjoy your time away. I=E2=80=99ll have updates to share soon.
-
-Thanks,
-David Garske
-Software Engineer, wolfSSL
-+1 (530) 409-2990
-https://www.wolfssl.com <https://www.wolfssl.com/>
-https://github.com/wolfssl
-
-> On May 9, 2025, at 5:22=E2=80=AFAM, Ilias Apalodimas =
-<ilias.apalodimas@linaro.org> wrote:
->=20
-> Hi David
->=20
->> Hi Denx,
->>=20
->> We at wolfSSL have developed a port for wolfTPM in U-Boot. The patch =
-allows using the current built-in TPM 2.0 support or switching to =
-wolfTPM via CONFIG_TPM_WOLF=3Dy. It also supports TPM 2.0 firmware =
-update for the Infineon SLB9672 and SLB9673.
->>=20
->> I think there is probably some more cleanup and testing needed, but I =
-wanted to submit this to start the discussion and see your thoughts.
->=20
-> It's easier if you CC the appropriate maintainers for each subsystem =
-next
-> time!
->=20
->>=20
->> The wolfTPM library is GPLv2 and added as a submodule. If the license =
-or submodule is an issue let=E2=80=99s discuss! I=E2=80=99m positive we =
-can resolve anything.
->=20
-> We recently added a few external libraries. mbedTLS and lwIP. Both of =
-these
-> are pulled as subtrees, so I'd like to stick to that.
->=20
-> I briefly went through the patch and I don't disagree in pulling an
-> external library as long as it's reasonably stable and will continue
-> to be maintained. A few questions since I am not familiar with wolfTPM
->=20
-> - Have you made any size comparisons wrt to the final binary size?
-> - Does wolfTPM have stable releases that we can use?
-> - Is there a CVE policy ?
->=20
-> The current patch is quite big and I honestly don't have time to go
-> through all of it in detail. I'll be away next week, but I can give =
-some
-> general feedback in ~10days. The easiest thing to do is try to split =
-it
-> a reasonable amount of patches -- and only include the bare minimum of =
-what's
-> required to work.
->=20
-> Thanks
-> /Ilias
->=20
->>=20
->> Attached is the patch based on latest master 3b6760ddeb4 to review.
->>=20
->> =EF=BF=BC
->>=20
->> Thanks,
->> David Garske
->> Software Engineer, wolfSSL
->> +1 (530) 409-2990
->> https://www.wolfssl.com <https://www.wolfssl.com/>
->> https://github.com/wolfssl
->=20
-
+diff --git a/drivers/phy/phy-zynqmp.c b/drivers/phy/phy-zynqmp.c
+index 7049e740d56..9649e660220 100644
+--- a/drivers/phy/phy-zynqmp.c
++++ b/drivers/phy/phy-zynqmp.c
+@@ -138,6 +138,7 @@
+ #define PROT_BUS_WIDTH_40		0x2
+ #define PROT_BUS_WIDTH_MASK		0x3
+ #define PROT_BUS_WIDTH_SHIFT		2
++#define GEM_CLK_CTRL_WIDTH_SHIFT	5
+ 
+ /* Number of GT lanes */
+ #define NUM_LANES			4
+@@ -400,6 +401,7 @@ static void xpsgtr_phy_init_sgmii(struct xpsgtr_phy *gtr_phy)
+ {
+ 	struct xpsgtr_dev *gtr_dev = gtr_phy->dev;
+ 	u32 shift = gtr_phy->lane * PROT_BUS_WIDTH_SHIFT;
++	u32 clk_ctrl_shift = gtr_phy->lane * GEM_CLK_CTRL_WIDTH_SHIFT;
+ 
+ 	/* Set SGMII protocol TX and RX bus width to 10 bits. */
+ 	xpsgtr_clr_set(gtr_dev, TX_PROT_BUS_WIDTH, PROT_BUS_WIDTH_MASK << shift,
+@@ -417,9 +419,9 @@ static void xpsgtr_phy_init_sgmii(struct xpsgtr_phy *gtr_phy)
+ 	 */
+ 	/* GEM I/O Clock Control */
+ 	clrsetbits_le32(ZYNQMP_IOU_SLCR_BASEADDR + IOU_SLCR_GEM_CLK_CTRL,
+-			0xf << shift,
++			0xf << clk_ctrl_shift,
+ 			(GEM_CTRL_GEM_SGMII_MODE | GEM_CTRL_GEM_REF_SRC_SEL) <<
+-			shift);
++			clk_ctrl_shift);
+ 
+ 	/* Setup signal detect */
+ 	clrsetbits_le32(ZYNQMP_IOU_SLCR_BASEADDR + IOU_SLCR_GEM_CTRL,
+--
+2.49.0
