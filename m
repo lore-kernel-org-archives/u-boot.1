@@ -4,90 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08931C3ABBC
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 16:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02BFBC3ABC9
+	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 17:39:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67C3182A2F;
-	Fri,  9 May 2025 18:48:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=chewies.net
+	by phobos.denx.de (Postfix) with ESMTP id 2E98982162;
+	Fri,  9 May 2025 19:39:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=chewies-net.20230601.gappssmtp.com header.i=@chewies-net.20230601.gappssmtp.com header.b="H0an6OZQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BwN8QTlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45C7F82998; Fri,  9 May 2025 17:01:33 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 355D28283E; Fri,  9 May 2025 19:39:01 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC40582162
- for <u-boot@lists.denx.de>; Fri,  9 May 2025 17:01:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AB3E8211F
+ for <u-boot@lists.denx.de>; Fri,  9 May 2025 19:38:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=chewies.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=raz@chewies.net
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5fbf007ea38so3648033a12.3
- for <u-boot@lists.denx.de>; Fri, 09 May 2025 08:01:30 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3fe83c8cbdbso838830b6e.3
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 10:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chewies-net.20230601.gappssmtp.com; s=20230601; t=1746802890; x=1747407690;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wBgL3ZL550pwHUyGu0636IzKUM8jYg6oWWIjwlwmye0=;
- b=H0an6OZQCAul+YhJAeqWprAHHuPTsmO/FM4YiH0Wr8gdw0YvYGMtuyLiUnmdcpntVz
- ApXQ/yLJWqnSiJp/WfGPu9fXBxEh8UhRl3FaEAlokujs1IIp4ZkmqF9wJ/bgfWGKVazn
- t6CZ3e0ojgH8bFNgfppwMBKAX+y6kZfEvY4hycAhAfBeRsDIrhmEwo/zp7sTO94jnSdu
- N7S8q+W5Dm60CS8//PjmoqPn31cvoAplZKeIjpQC9n6F9bLTUS6tpnbSzAJVwFiy9uLD
- V1xiC4kCxMhVT2WSQtD3Hyl7FwyWnKc56UhRkQ1YnPlEwYaFfwAcrt3lIzPGh5PqpSik
- H+mQ==
+ d=konsulko.com; s=google; t=1746812338; x=1747417138; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CFgPEYBfaQqWgtD0suLGiIwMiTH3yo5E9Io8rCObw3A=;
+ b=BwN8QTlwerTUwr6/L+o3OBWT80L8tVc6MupE2uLSPyfV965A3nasqW9a4amRUYMPwd
+ GZYRTCv70SoEsNzIMpBFkBsmsKGIRy1QJXKhcMuYC0SVmw19yX9xa3Jti9Rew4wDxx6G
+ N6WbQfu+fg/m/9QBJSEtOVJNWh+mdz83ArvhU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746802890; x=1747407690;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wBgL3ZL550pwHUyGu0636IzKUM8jYg6oWWIjwlwmye0=;
- b=aqIXKNJWmrqeNlB7G01mTO4FvE7nYcN3xkUSCPWJNBu3uTOckZxjgZhMsEpApKac7r
- 9Zxj8klV19cThAmGXzNSQ823L8CbaRRaZmhDmbe6hWCcYz0H+Rkre13zZ74HTxvMu4ST
- kyvlbM5ym4w6GFqM8F3x0FqQACIJUrSdsrHvHawU6b/pfhbc0e27DA+NurEjHHA3bdup
- QfPTpJIhK62ZJ2cviA731iT4BeYZbLubBFfrAHOS9AHy5tbVwPPrKRZTKS4SlFH8n19y
- rIbtfdHlN5Lleek/XQRkVH3vBoxd9xbFGDRkIii7v1jP8QiAtrzTrybRnsJOjWD1aKkl
- JO4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdXutGsRgIsa67ARpyglpOkMm07xXPWhquTBmYS1s1yP60V2NfSv12kKNlud5TFm0Wz4cApkQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy98/cYH7A8/CiRVJ8m1I/9gPkvad9veN9tZg6/hG/73ltYLOl1
- /9dG8oXr3ABUWG+4e5JNCRxfZn0XBuO3tHpTIZ36qzaX7x5V4ZH2FJeXDzFXFSj5xzOWd83UXIf
- yp4o1zCCbPZt9AoCfjy9OUHRZyvu0kfBhbpwl
-X-Gm-Gg: ASbGnctrcwivjJWdw2imqmo8Uc+BWW8zaSAuIuLbURgQnuFr6ZpTO97RTKhXE0W04IW
- kjC5hMciJqjcU6Xgr0XmkxgIQfLc8y+Q41l/1xaBG4UC1wlQlnSCqwdB8mnj7kPuSxCrAcyUSMI
- RYiO71uURIthYIDyRcwAPy
-X-Google-Smtp-Source: AGHT+IFf+nVAgdwIKvhp6FKx94q2YT6+sEg9xhUFkBICZbH6CrypO4w3U2C9D+gFHigfCbHoi7dvxkUDtWZbD7xfAIc=
-X-Received: by 2002:a17:907:a2cd:b0:ace:caff:675a with SMTP id
- a640c23a62f3a-ad218e47c9bmr306712966b.10.1746802889091; Fri, 09 May 2025
- 08:01:29 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746812338; x=1747417138;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CFgPEYBfaQqWgtD0suLGiIwMiTH3yo5E9Io8rCObw3A=;
+ b=LW+8zIKjnpBu+0gbXujtKlab0qK52xbPi1Yf6Ssn12pO/JwFHiYRXyJaoC/JLDXQTP
+ k1Rf71O9Rl7aHnkBEoOjJYVt6JdRDSaXtEQdzR+TtL5U+b9UyOkCloubfgC8JBnO4QYU
+ 9xlVewZR5vDbCO1wD7dxAJzjSInECzW2LVBXYVZBGY8zogBMRxqZ5Fw98LKXwNcR/dO3
+ Ws0OVW5sLf1IYVO6XRFghhRr2TJEZAimmC37sQBfIQhXu+UmHT3ytimeXwDW3OJOEM4w
+ DTITSJDcMIQv9Pgxbo3ZKY6lNnr0kejLg9GAISXHqMxLFV6Wkm0Ibm9EQI36Tye6zDN4
+ ItgQ==
+X-Gm-Message-State: AOJu0YxCfDs3UyjgJ2Twzwp4C7hctIkb0kUP4HrS3L+P6O0L90Zd99Il
+ TS15+8A9spjYzDXyXhk8OLj3Tl9Qmb42LTsGPNlu28TLBElIsq6fZkzhiO/eiZY=
+X-Gm-Gg: ASbGnctT8Dvrx1fhVwdeYomhj5AYCb1XJszB2j8ifXTXn5WamQZZurWVZ2Ctk2iGBcj
+ BBmbiMwIr2ESKF16eSYG6CsrcdclVYhTTZ/5S9rmlFNAE0oL0gFr3OhrpP/OPbJl417JCDds/j8
+ SQsTrzO/8cg0SG3YY8DU6Uw+UQFzIeczoe2hbo2bbiF4XGbUGwRT191N7rhrUdclse49y86g2ud
+ 5Cgzovnxc1IiVcGM2LhxGJrXEGXGl5lONF3ovoBy3n7YoLGqVP+HLpmD6bYfBYAEZFhCJrTKONu
+ MGBlYh0pUTx26eIOqVXNcn1Xh94jjd9fDT179b/ZQAT5aYjOzacKjKon2nNJh9LEQhS6RbFjGIn
+ uZGUCLMot023K
+X-Google-Smtp-Source: AGHT+IEutkepIHpF5ktNREq6oCOuzfKy6Y0C2d45qUc4o5gMysTWV55im6QPljy0WiKVqTTYTHxXvQ==
+X-Received: by 2002:a05:6808:2209:b0:3f9:8b5b:294c with SMTP id
+ 5614622812f47-4037fe8e569mr2899235b6e.31.1746812337725; 
+ Fri, 09 May 2025 10:38:57 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-403802bd4adsm530695b6e.7.2025.05.09.10.38.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 May 2025 10:38:56 -0700 (PDT)
+Date: Fri, 9 May 2025 11:38:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ sjg@chromium.org, Adriano Cordova <adriano.cordova@canonical.com>
+Subject: Re: [PATCH 0/3] test/py: enable HTTP testing
+Message-ID: <20250509173854.GJ603748@bill-the-cat>
+References: <20250509154352.3483523-1-adriano.cordova@canonical.com>
 MIME-Version: 1.0
-References: <CAEUiLubXaPGZsE6y_X6mBTD1ZK-2w82fbRD5z8+MKvDZtZKOtA@mail.gmail.com>
- <f073dad7-337e-499a-8cb5-9dae0842de17@linaro.org>
- <CAEUiLuYBVyLm4HgJG88r1J8RcUu38uEVPbV5c+-ArqjU4aUOAA@mail.gmail.com>
- <3783aef0-a7a0-489f-add0-21e1fc2bfad1@linaro.org>
- <CAEUiLubVazb4rgfBd-r-5AtyfBVaMFmy89OO_UZB97FM43if7w@mail.gmail.com>
- <D9QX0MRWSYW6.3ELRB73BS6PRT@postmarketos.org>
- <CAEUiLuYW61Vz4zAie2K9cnXXQxxRj150Nc-fJMQCh9NwXZQmzQ@mail.gmail.com>
- <CANAwSgRkqAj5Q4LMO-CKBSoMgO-+zd6JpbVs+eWY3kPgmj9bug@mail.gmail.com>
-In-Reply-To: <CANAwSgRkqAj5Q4LMO-CKBSoMgO-+zd6JpbVs+eWY3kPgmj9bug@mail.gmail.com>
-From: Wayne Schroeder <raz@chewies.net>
-Date: Fri, 9 May 2025 10:01:17 -0500
-X-Gm-Features: ATxdqUE_PmhZ54jFeg6jIYai2y3B-gBv2fkdfTsqYASmYzXd9Nfo6C7yAcR2Cw4
-Message-ID: <CAEUiLubakMjzhi2sUTQx1S4ciTjkL6ysx465i1t-T5zKUQdUvw@mail.gmail.com>
-Subject: Re: Odroid n2+ usb broken on reboot
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: Ferass El Hafidi <funderscore@postmarketos.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de, 
- "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>, 
- "linux-amlogic@lists.infradead.org" <linux-amlogic@lists.infradead.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 09 May 2025 18:48:46 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3GqNxdmuh1U4rZsd"
+Content-Disposition: inline
+In-Reply-To: <20250509154352.3483523-1-adriano.cordova@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,51 +96,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Yes.  Will report back how it works on the n2+.
 
+--3GqNxdmuh1U4rZsd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 9, 2025 at 2:08=E2=80=AFAM Anand Moon <linux.amoon@gmail.com> w=
-rote:
->
-> Hi Wayne,
->
-> On Fri, 9 May 2025 at 01:25, Wayne Schroeder <raz@chewies.net> wrote:
-> >
-> > I actually already have a working solution that I documented in my
-> > github repo (dubschro/odroid-n2).  All I do is set BOOTCOMMAND to
-> > check/delete a flag file on my boot partition and if it is found, then
-> > reset usb and sleep for 10 seconds.  I then have a systemd shutdown
-> > script only on reboot to touch that file.
-> >
-> > CONFIG_BOOTCOMMAND=3D"fatrm mmc 0:1 reboot && echo Resetting USB on
-> > reboot... && usb reset && sleep 10; run distro_bootcmd"
-> >
-> > It is a hack, but... the system reliably reboots remotely now, and
-> > that's the important part for now.
-> >
-> > Wayne
-> >
-> > On Thu, May 8, 2025 at 11:22=E2=80=AFAM Ferass El Hafidi
-> > <funderscore@postmarketos.org> wrote:
-> > >
-> > > On Wed May 7, 2025 at 1:03 PM UTC, Wayne Schroeder wrote:
-> > > > It's hard for me to quantify if usb works in u-boot as I'm not load=
-ing
-> > > > off of any usb storage devices.  It certainly never lets me use the
-> > > > keyboard to abort auto boot, and never has.  On reboot, to reliably
-> > >
-> > > You can send bytes via UART to abort boot, if you happen to have a UA=
-RT
-> > > adapter around.
-> >
-> Can you test this series to see if this resolves the issue?
->
-> https://patchwork.ozlabs.org/project/uboot/list/?series=3D456088
->
-> Thanks
-> -Anand
->
-> > _______________________________________________
-> > linux-amlogic mailing list
-> > linux-amlogic@lists.infradead.org
-> > http://lists.infradead.org/mailman/listinfo/linux-amlogic
+On Fri, May 09, 2025 at 11:43:49AM -0400, Adriano Cordova wrote:
+
+> Enable HTTP server in CI to support HTTP tests in pytest
+>=20
+> QEMU does not emulate an HTTP server, unlike other services like DHCP or =
+TFTP.
+> To enable HTTP  tests during CI runs, start a simple Python HTTP server
+> on port 80. This allows tests that require HTTP access to run.
+>=20
+> The pytest framework is informed of the server's presence setting --https=
+erver
+> to a non-empty value, and pytest enables HTTP test cases. The actual stri=
+ng
+> value passed on --httpserver (e.g., "localhost:80") does not affect behav=
+ior,
+> it is only checked for non-emptiness. In the future, if the `wget` comman=
+d in
+> U-Boot adds support for specifying ports, the value of --httpserver may b=
+ecome
+> meaningful and can be updated accordingly.
+
+I'm not 100% sure on this part. I've been doing this locally with the
+python http server running on the dhcp server. This should also just
+work in CI, and not need further argument passing?
+
+--=20
+Tom
+
+--3GqNxdmuh1U4rZsd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgePaoACgkQFHw5/5Y0
+tyxyugwAi5Bi9uQmgmYm+vet06GzyJJ+qRBRBNCtUmhOJ/Kcl4akngCtrTIxN4FM
+dRjG5dP/QJEuiK6J+roH9StIO3uon1Z3Cnio6B+nw5MhEgLBw14b4mp8DwRIxCO4
+NVvmEs/NRFE+/855NEASZFvDLt+x70FqcMyqC1iTwrHlUz0ve32pymv8OHicCdj8
+QVC6QpF7tvQ58/wBO2WVVau+BGmBgiutYy3t9omgbA58JS1UlGn23TSx37I2n/oO
+TP68iwHX9a9DFb429ogZRqiTDUZ4HyAupQNalXSWZXOICxMrKkiWUQxVzNBIdHBd
+4jNsinP8U1bbAUK5g9Uh+ikhT/VuFY8AwOd5im7vh1SFbTbWI1cyA7yi0K+HnD6b
+TgL3ouId2H28yF/qgZWBJlLKi00Wj3xUMCoVqCxk4SV7yX+c1ekyRSJYxJoWzu4h
+BemiH6JNgDDILNazQjerxa9Gjss316D8w/fcwkHXsLBEuDpiO4qO4M6gzRNrWt1J
+WBP8X/c/
+=2F0t
+-----END PGP SIGNATURE-----
+
+--3GqNxdmuh1U4rZsd--
