@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A2DFC3ABC9
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:45:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E73C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:45:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FF3C82A4D;
-	Sat, 10 May 2025 15:44:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3762382BBF;
+	Sat, 10 May 2025 15:44:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FggZ1erk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g++6fXj7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 832618295C; Sat, 10 May 2025 15:44:00 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 5443382BAA; Sat, 10 May 2025 15:44:05 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97E7782B97
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC62382BBF
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ad243b49ef1so25712366b.0
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:58 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ad220f139adso276246666b.1
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884637; x=1747489437; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884641; x=1747489441; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+sEIV3pc/3kgMkt4HtCjpor2NMO8iEUeULduRqYupkE=;
- b=FggZ1erkDuJseiq3cQg1O2wQAEAR9hei2VThX98FBVCrLXMqS9RaijHRFGU43BNelY
- kIHMJYI42xw9lqqpcFrHumTHHfHMl06UQ0RVq4zOoZQub2bnFjI4C4dtrXw7hcj+sZfy
- eVz/aJZ4VuY+wH5RlbXCn+oAABQWUKmciESlk=
+ bh=BK5uRwtYouIiQMHYOBhTduLGFJrzo5DSGPgNC9CRQR8=;
+ b=g++6fXj7toXbgj2+AzI0xT7/7v9UX3ZXXFtDz0hE0AZLfMbLWyEi6U8tcSjvkg2+uB
+ +WdwZ6H1cGYKjHU9Jtg9FEUPBiPaPwy1lXFggPbK4x2kPyQgjg/23ec9vD+h+nLHm735
+ fpQ4+Nc4GtdXY+ObBUoBtkZZ0iosuJCBSc274=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884637; x=1747489437;
+ d=1e100.net; s=20230601; t=1746884641; x=1747489441;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+sEIV3pc/3kgMkt4HtCjpor2NMO8iEUeULduRqYupkE=;
- b=egvEMfFoCI/ol1dIXSRxdC+YpsKmHCOlP7g439nbuFrNuQ/HkqalzX/omxiFyggw0H
- HWeQI4RMCQHh5s/WpA5f8D9EsHIDs1aFcYm0dhTfqKrnhfFC8ij1rb4ioTwDcnZ0Kw96
- oPYWX5n6CH9cMa1uuaseLIVUU/6fQiiZoHqc12GZbbZ7reXw2ozAj1iMpjP5U164yAYG
- BEUqh1fP2L5lu1bZu5dRKI9Slj2a64dbk1OYWEwubAPxoT6YifpyF/ggTjMr3uqtwP6Y
- TNdbblXf4DgJ/a9ShdTj3vR3spmPtSliA/va7g1G/g4NMqDZf4/5TerGcXDr0JUCJLzz
- rRkw==
-X-Gm-Message-State: AOJu0YzHqFpe2ajUW8/kh7sDRkCzSjXnm1eqgBewQ9a4obQUgtntNK9Q
- GLrqEEZTTDDKsrNzY/ISQTcCrTe/THSsTdIlauetrg5kc82baI/iowKQa0nKV1xJ6qHdPTinghC
- 2ovDV039ugg==
-X-Gm-Gg: ASbGncsyslo/cqso97CQ8ak32AF/QQ/hfPmua41XrkhqmcpvB5R3C7/G+cly1tmWI2y
- pmU/col22Jf46ycIiQEiXf4HZJp2aOiPeq9xfJcN9MlsRrS9FX5F1FTZJvOvQ32ZdPoMw1l1+iP
- f63+5Iqfw1oDC1XMPAZ3bv0tDCkFyhE3XdE3A0/nJmWpJNbYmV43CbpANdNCmjMqFEJBQifkBD+
- kwDmU8ECHzWO1jPW5k9ts2AnrR57mY603suI7oeKlrXIcTpfGv4vPCjNAS7zPG/ZdhXbAPY+dAE
- JjESBipKOg19osTFYIEXNcBqYfTyeDhgLnkXDBpJk5xlzXW31Errr++OE14aSrkxs3bV
-X-Google-Smtp-Source: AGHT+IEhA80B8SVOHeDut925Itr7Ex7HiPOaZzjvFAGYSVKtjSU98ND7XXXSVnRzRmZKO1foEoJAig==
-X-Received: by 2002:a17:907:3f97:b0:ad2:2b35:8fa5 with SMTP id
- a640c23a62f3a-ad22b359412mr484946766b.28.1746884637178; 
- Sat, 10 May 2025 06:43:57 -0700 (PDT)
+ bh=BK5uRwtYouIiQMHYOBhTduLGFJrzo5DSGPgNC9CRQR8=;
+ b=aU59tsNHu2iRDidiY3uLUL8r7qFP3x4pepocJ5E17z+nq3rIqt9CwJigNg2++DNx/M
+ 28p00PDaw1481hhL4XswVHg6XYtt6pm4dSv2HXetkyK9ZRVMC866dOXqr2LnauWJYFnZ
+ 0rTqiUH+yufRrXYesHZuQd46oRYYqDuy8RKPahgynwXxicl2yO1ltjk7eXoGEci0sQmS
+ 2oyLFvQZ7GnDngx2p+/exCwpIfUXxpSU5Lzbo9XkfXQNtkrMc28jLQhjYJnQgtQWZV8Q
+ uLYb/+1GU/B2xZH/5NLFZxct4IeY4lmeFnqnqvbNbwxLxfBY4sRSwuOAVnfMQNWz53Ai
+ rtnQ==
+X-Gm-Message-State: AOJu0Yys5BCHUWmKCZRHmA+C1jPlssBERdwcZhOjEZSAaxa4LCWi/zqg
+ TUTK/pNL+XHZ8ODDWlb8n0Ha5gdBNxMh6bHq0ieWH+welXwqxw4Ah+x/CS1WMTNEAzigSBsFKXH
+ NAQaMrd5Pzw==
+X-Gm-Gg: ASbGncuu4DE4ez7NsrcHxDRf2JJJS+VQEveJPFYAOOfLdpV/gD3/hThKlJONI1+C6ER
+ 6zpdK7vh6Z+0m4qsHFEYvHxUTHA0eLhGe7HSVW+Q4+ucsWNwE1eI6Si8pLFIKvVBBpDK8vxxcw/
+ HKyBvSdKGPpBI/VsZ/b1xKVd8oBlUv8+N8lG7Q9fsWaboSqAZnjSLGMK/xNeOSRPmraP+z1utV/
+ asLgh8U8mRlhCXTIgAJTtfEw3MidFpETWB9h1uDcFnyCHS29tFZmc58flI6FD61YrZ9mXPAPx//
+ J7c0V1D/IXZivgI8nGcH6SACI+9feK+zC436AMZCvXQrY3Q7mC/gpsjbaJdmfLN4GgHo
+X-Google-Smtp-Source: AGHT+IHooDqFYZmcAHHqj9F3AIjRAyUodSKw2RZ9lL/HxyB9fcOVBWDfrd3Bb9vI351jrDlu5ueg3w==
+X-Received: by 2002:a17:906:ee87:b0:ad1:8e6a:5945 with SMTP id
+ a640c23a62f3a-ad21911576cmr667849766b.36.1746884641038; 
+ Sat, 10 May 2025 06:44:01 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.55
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:43:56 -0700 (PDT)
+ Sat, 10 May 2025 06:44:00 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -76,12 +76,11 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH v4 12/22] passage: arm: Add the arch-specific standard passage
- impl
-Date: Sat, 10 May 2025 15:42:10 +0200
-Message-ID: <20250510154214.v4.12.Ie42090adf599e2b0ceb782298be5278b493f6beb@changeid>
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>
+Subject: [PATCH v4 13/22] vexpress_fvp: Update to use the new Kconfig options
+Date: Sat, 10 May 2025 15:42:11 +0200
+Message-ID: <20250510134253.1581164-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -103,90 +102,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add implementations for 32- and 64-bit ARM.
+We need to enable CONFIG_BLOBLIST_PASSAGE sand CONFIG_PASSAGE_IN so that
+U-Boot is built with support for accepting an incoming standard passage.
+
+Update the defconfig accordingly.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+Changes in v4:
+- Add new patch to update vexpress_fvp to use the new Kconfig options
 
-Changes in v3:
-- Update registers to match the Firmware Handoff protocol
+ configs/vexpress_fvp_bloblist_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Changes in v2:
-- Add new patch with the arm-specific standard passage implementation
-
- arch/arm/cpu/armv7/cpu.c | 18 ++++++++++++++++++
- arch/arm/cpu/armv8/cpu.c | 19 +++++++++++++++++++
- 2 files changed, 37 insertions(+)
-
-diff --git a/arch/arm/cpu/armv7/cpu.c b/arch/arm/cpu/armv7/cpu.c
-index 8082f369ed6..f1b07c414de 100644
---- a/arch/arm/cpu/armv7/cpu.c
-+++ b/arch/arm/cpu/armv7/cpu.c
-@@ -17,6 +17,7 @@
- #include <command.h>
- #include <cpu_func.h>
- #include <irq_func.h>
-+#include <passage.h>
- #include <asm/system.h>
- #include <asm/cache.h>
- #include <asm/armv7.h>
-@@ -87,3 +88,20 @@ void allow_unaligned(void)
- {
- 	v7_arch_cp15_allow_unaligned();
- }
-+
-+void __noreturn arch_passage_entry(ulong entry_addr, ulong bloblist, ulong fdt)
-+{
-+	typedef void __noreturn (*passage_entry_t)(ulong zero1, ulong mach,
-+						   ulong fdt, ulong bloblist);
-+	passage_entry_t entry = (passage_entry_t)entry_addr;
-+
-+	/*
-+	 * Register   Contents
-+	 * r0         0
-+	 * r1         010fb10b (indicates standard passage v1)
-+	 * r2         Address of devicetree
-+	 * r3         Address of bloblist
-+	 * lr         Return address
-+	 */
-+	entry(0, passage_mach_version(), fdt, bloblist);
-+}
-diff --git a/arch/arm/cpu/armv8/cpu.c b/arch/arm/cpu/armv8/cpu.c
-index 82ecf02f4b0..275aa2501f1 100644
---- a/arch/arm/cpu/armv8/cpu.c
-+++ b/arch/arm/cpu/armv8/cpu.c
-@@ -13,6 +13,7 @@
- #include <command.h>
- #include <cpu_func.h>
- #include <irq_func.h>
-+#include <passage.h>
- #include <asm/cache.h>
- #include <asm/system.h>
- #include <asm/secure.h>
-@@ -99,3 +100,21 @@ void allow_unaligned(void)
- {
- 	set_sctlr(get_sctlr() & ~CR_A);
- }
-+
-+void __noreturn arch_passage_entry(ulong entry_addr, ulong bloblist, ulong fdt)
-+{
-+	typedef void __noreturn (*passage_entry_t)(ulong fdt, ulong abi,
-+						   ulong zero1, ulong bloblist,
-+						   ulong zero2);
-+	passage_entry_t entry = (passage_entry_t)entry_addr;
-+
-+	/*
-+	 * Register   Contents
-+	 * x0         Address of devicetree
-+	 * x1         00000001_4a0fb10b (indicates standard passage v1)
-+	 * x2         0
-+	 * x3         Address of bloblist
-+	 * x30        Return address
-+	 */
-+	entry(fdt, passage_mach_version(), 0, bloblist, 0);
-+}
+diff --git a/configs/vexpress_fvp_bloblist_defconfig b/configs/vexpress_fvp_bloblist_defconfig
+index 4d52b96202b..fd5f91bc039 100644
+--- a/configs/vexpress_fvp_bloblist_defconfig
++++ b/configs/vexpress_fvp_bloblist_defconfig
+@@ -3,3 +3,5 @@
+ CONFIG_BLOBLIST=y
+ CONFIG_BLOBLIST_PASSAGE_MANDATORY=y
+ CONFIG_BLOBLIST_SIZE_RELOC=0x10000
++CONFIG_BLOBLIST_PASSAGE=y
++CONFIG_PASSAGE_IN=y
 -- 
 2.43.0
 
