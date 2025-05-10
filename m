@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FBDEC3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64AD8C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54B0982AE2;
-	Sat, 10 May 2025 15:43:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E70182977;
+	Sat, 10 May 2025 15:43:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Lln53nlt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C0u2rIkd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5E0F82893; Sat, 10 May 2025 15:43:43 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 6394382977; Sat, 10 May 2025 15:43:46 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1B3C82B33
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6618082B46
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ace94273f0dso580473266b.3
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:41 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5fbf534f8dbso4451266a12.3
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884620; x=1747489420; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884623; x=1747489423; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=60OaQc3vtPxx/+o0EDS7vHOq5TOmQHdMZzviUKeEmtE=;
- b=Lln53nltxvYhTIYQio68GoD10gYNsRcWhissKLtyOsg6U/8L3ImMAyXQEQV2OGeCpa
- hPno24otnnZ1LuJ0WcFlbP7GL+e4ggIsDmXSdEOwbCgZtvj6XKYRStXBgXMyADTHazlD
- GbwFbPBZeTDKLY5+qh2pC1FqaOuAu73+7MJe4=
+ bh=q2qqVaHbsGHQjffHo5INfbmWwQCXB5n1vA4IFmaeOcc=;
+ b=C0u2rIkdI7IS//gfP5cctNgo4lEzvtIYAEer3cj2JnHn8lB+8uWpUrYZGZXu/qPqFB
+ wWhB6098w/a25nudy4pu/ehsEhUTCCLEjSf1uwXAo4fhXWaoOWoIuK0SHsUg7nSo1mg2
+ hWSVhSyqqT10VQtzd98lDRxKCyLOIj5X6aCE8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884620; x=1747489420;
+ d=1e100.net; s=20230601; t=1746884623; x=1747489423;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=60OaQc3vtPxx/+o0EDS7vHOq5TOmQHdMZzviUKeEmtE=;
- b=rsOZcGqAJ8pFOMFVqg5U0KA/WGtg14VGTzIFic/zFL+qk5LGZH/4KeJrf9aXpuQv9y
- g7D0bHXXyKVBo7++BqJb9B2I/pYDbumjFHgTJfwYhkmNkFgOnV//z2jt6wWQZO3EOgT5
- hS0fZnyaubvtayM75JyMNri/uroCIZDyC379WwjdRNz5+DMDGK1jCv+JQ4aB4w3naY/3
- WCnsD99whDwoNCk8tcWnYSYIrgymYSiZzsQ8xRJlTRJ0S3Nj1bPhSEFhhmsG5jJDiu3r
- Xgz+y6AUTje6lYyxVPUfxtwz61ahKxO5xra6dkdYv+s36JF26U6mGadWy9PEY/6T5i73
- R1fQ==
-X-Gm-Message-State: AOJu0Yx8fnnC0ygzmOJ9OjDSa/waukjisIxqNhXikl+ffmDgWwC6ySrD
- cJq94L2VYbiLmwQE9myUq+X9eHMHBo9Fze2TBgmmrZUffUOoY9FPvugVjNo+8AKnoVAyKm4fWM3
- DSLBbBrrkjA==
-X-Gm-Gg: ASbGncvQWCaIM5rBGVVTJnOaYH1nFvfUOeu6lmwYXeBVaqUfmcS1xWVjR2LKZBZS+rh
- QfiBvcJVu3BZ1J/yTN2jLGUXAV4bLtTkICwqEBPdOJP9Qb42m95+R86KXOYvZWQFmuWLJQHcwbA
- Z8UljDyAlSEo6sAGODtSwiguAWvfGOMSRk1RMhb1OdoFXwFQNbx12gOFNbQf4ETH7HJ5DDIqrE2
- GBtuuY0vCofAiTAm/gwG7PTsLUHLDqo4ZimQ8BxJWEYDBo18OHG+eJOr01EKaqNyhzNF/pmSR/s
- x83U97S2IDnJIw896LeLD5I2sQk/NaYO9A5p0ffiAWIM7MUgGgHyyBqFXHjAJvYnyBFr
-X-Google-Smtp-Source: AGHT+IHv98l6ZHlNJ2xfdPDwBHNkBl34AympaKRn/XvzJdGXOAKnDjh5zowkny/fDktpzoude/8mqg==
-X-Received: by 2002:a17:907:c80c:b0:ad1:d396:130 with SMTP id
- a640c23a62f3a-ad218f23b9bmr564680066b.24.1746884620427; 
- Sat, 10 May 2025 06:43:40 -0700 (PDT)
+ bh=q2qqVaHbsGHQjffHo5INfbmWwQCXB5n1vA4IFmaeOcc=;
+ b=GlXL4rs4+vlDNav8SgsCAZ4uz3ATaDfuyI9ZOfLBgZ3ESHBxbAiJEJ862lW+19CPXd
+ 1ZSK3wAHOC1AFsU4nXFHgLKUtEBvpEcQ7kozNTGVydy8vA9905vsovArWQVqxZf8MoJo
+ TYG6QlVUcq6QIX/bZE8rW+F06t3y21qI8DJryunqJfreAbtXBWFVPcLnlr80xx3RWBgm
+ YcZuEUhDIW9LY/KLOE/efc/MuhTv9PrHkeDz2wBuvzgLP0olTdxEymWp0Q/avfRVwSXk
+ /4r9slt5ApzIxoZe4hktcl4qM9TqjpwsfdNG+J6v8e4auYeXlvUYaM4JzbWTHAisjmne
+ 4a3w==
+X-Gm-Message-State: AOJu0Yy+6I4q0ADA8hb6WFenP0n0kUIVBr1XasG5DCxSvamo3YMZHQzE
+ k0nZ86xq7Mzd1p7ATZtok8cGDqNZdH9DrigiwQR8zj32B9hbdZC37LvL9OVgUcoAjEyt/BDxEOB
+ hvd7QptnJSg==
+X-Gm-Gg: ASbGncvajZQ7R6HIWyjeFPsVi9FnORM/j86CtTpH/NXEb4af+qj4KJ+KbT5oy7GtyMc
+ 7UInHrMspFSY+6uv8icWIwlnGTAkLq1Zi5kyzI6lOSmq/QY8njDGAo41206Wv4a7n8/F/Moc7Tl
+ Ab8/qfBg/WivcwVKYi2IKlgWbtb3nSrUU1QLY6G1nMh46kJn6770gxIEAFDBGG4JozObj8pPF3a
+ 2ot/BrQQbYFS5/ppwy6kZCUQCnOVPPaBcQetAn2fRQvBNz8RU2HCGlY4sQJVpDMAvK/D4+AOUoo
+ 4q88RC2Lzffw7LAJIMpNK1rg04roJowlXbAxDbXdxkdXW7H8iR+Rb0KaCxVx1gH890dJ
+X-Google-Smtp-Source: AGHT+IH2OZyy+01YKp5Si6RjJQQmBa5Bmj5HL88+qjuKo278naToteWInK2w0dKcvo+362MVyPADHg==
+X-Received: by 2002:a17:907:d8d:b0:ace:c2ab:a728 with SMTP id
+ a640c23a62f3a-ad218e577a3mr651922166b.9.1746884623155; 
+ Sat, 10 May 2025 06:43:43 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.36
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:43:39 -0700 (PDT)
+ Sat, 10 May 2025 06:43:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -77,17 +77,16 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthias Brugger <mbrugger@suse.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH v4 06/22] fdt: Redo devicetree setup
-Date: Sat, 10 May 2025 15:42:04 +0200
-Message-ID: <20250510134253.1581164-5-sjg@chromium.org>
+ Ravi Minnikanti <rminnikanti@marvell.com>
+Subject: [PATCH v4 07/22] fdt: Support reading FDT from standard passage
+Date: Sat, 10 May 2025 15:42:05 +0200
+Message-ID: <20250510134253.1581164-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -109,99 +108,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing logic for handling receiving a devicetree from a previous
-phase is quite complicated. Simplify it in preparation for introducing
-standard passage.
-
-Add a Kconfig called OF_PASSAGE which indicates that the devicetree
-must come from standard passage.
+Add an option to receive the FDT using standard passage from a previous
+phase. Rename the FDT source to 'passage' to match the old terminology,
+which was only partially added.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v4:
-- Drop now-unused label
+(no changes since v1)
 
-Changes in v3:
-- Add new patch to redo how a devicetree is set up
+ env/common.c     |  2 +-
+ include/fdtdec.h |  4 ++--
+ lib/fdtdec.c     | 16 ++++++++++++----
+ 3 files changed, 15 insertions(+), 7 deletions(-)
 
- dts/Kconfig  |  8 ++++++++
- lib/fdtdec.c | 35 ++++++-----------------------------
- 2 files changed, 14 insertions(+), 29 deletions(-)
-
-diff --git a/dts/Kconfig b/dts/Kconfig
-index c544f948a15..57101bddabb 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -159,6 +159,14 @@ config OF_EMBED
- 	  and development only and is not recommended for production devices.
- 	  Boards in the mainline U-Boot tree should not use it.
+diff --git a/env/common.c b/env/common.c
+index 86122582bc1..272a86b4dfc 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -375,7 +375,7 @@ static int env_update_fdt_addr_from_bloblist(void)
+ 	 * fdt_addr is by default used by booti, bootm and bootefi,
+ 	 * thus set it to point to the fdt embedded in a bloblist if it exists.
+ 	 */
+-	if (!CONFIG_IS_ENABLED(BLOBLIST) || gd->fdt_src != FDTSRC_BLOBLIST)
++	if (!CONFIG_IS_ENABLED(BLOBLIST) || gd->fdt_src != FDTSRC_PASSAGE)
+ 		return 0;
  
-+config OF_PASSAGE
-+	bool "DTB is provided by a standard passage, in a bloblist"
-+	help
-+	  Select this to read the devicetree using the standard passage
-+	  mechanism, i.e. from a previous phase in bloblist using arch-specific
-+	  register conventions. If enabled, the previous phase must provide
-+	  the devicetree, or U-Boot will not function correctly.
-+
- endchoice
+ 	return env_set_hex("fdt_addr", (uintptr_t)map_to_sysmem(gd->fdt_blob));
+diff --git a/include/fdtdec.h b/include/fdtdec.h
+index d9fcd037ed2..7f7e13cb904 100644
+--- a/include/fdtdec.h
++++ b/include/fdtdec.h
+@@ -72,7 +72,7 @@ struct bd_info;
+  *	U-Boot is packaged as an ELF file, e.g. for debugging purposes
+  * @FDTSRC_ENV: Provided by the fdtcontroladdr environment variable. This should
+  *	be used for debugging/development only
+- * @FDTSRC_BLOBLIST: Provided by a bloblist from an earlier phase
++ * @FDTSRC_PASSAGE: Provided by a bloblist from an earlier phase
+  */
+ enum fdt_source_t {
+ 	FDTSRC_SEPARATE,
+@@ -80,7 +80,7 @@ enum fdt_source_t {
+ 	FDTSRC_BOARD,
+ 	FDTSRC_EMBED,
+ 	FDTSRC_ENV,
+-	FDTSRC_BLOBLIST,
++	FDTSRC_PASSAGE,
+ };
  
- config OF_INITIAL_DTB_READONLY
+ /*
 diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index c38738b48c7..8559616873b 100644
+index 8559616873b..178b1b1247d 100644
 --- a/lib/fdtdec.c
 +++ b/lib/fdtdec.c
-@@ -1689,35 +1689,13 @@ void fdtdec_setup_embed(void)
+@@ -19,6 +19,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <net.h>
++#include <passage.h>
+ #include <spl.h>
+ #include <env.h>
+ #include <errno.h>
+@@ -90,7 +91,7 @@ static const char *const fdt_src_name[] = {
+ 	[FDTSRC_BOARD] = "board",
+ 	[FDTSRC_EMBED] = "embed",
+ 	[FDTSRC_ENV] = "env",
+-	[FDTSRC_BLOBLIST] = "bloblist",
++	[FDTSRC_PASSAGE] = "passage",
+ };
  
- int fdtdec_setup(void)
+ extern u8 __dtb_dt_begin[];	/* embedded device tree blob */
+@@ -1691,9 +1692,16 @@ int fdtdec_setup(void)
  {
--	int ret = -ENOENT;
--
--	/*
--	 * If allowing a bloblist, check that first. There was discussion about
--	 * adding an OF_BLOBLIST Kconfig, but this was rejected.
--	 *
--	 * The necessary test is whether the previous phase passed a bloblist,
--	 * not whether this phase creates one.
--	 */
--	if (CONFIG_IS_ENABLED(BLOBLIST) &&
--	    (xpl_prev_phase() != PHASE_TPL ||
--	     IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
--		ret = bloblist_maybe_init();
--		if (!ret) {
--			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
--			if (gd->fdt_blob) {
--				gd->fdt_src = FDTSRC_BLOBLIST;
--				log_debug("Devicetree is in bloblist at %p\n",
--					  gd->fdt_blob);
--				goto setup_fdt;
--			} else {
--				log_debug("No FDT found in bloblist\n");
--				ret = -ENOENT;
--			}
--		}
--	}
-+	int ret;
+ 	int ret;
  
--	/* Otherwise, the devicetree is typically appended to U-Boot */
--	if (ret) {
-+	if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
-+		printf("Previous phase failed to provide standard passage\n");
-+		return -ENOENT;
-+	} else {
-+		/* The devicetree is typically appended to U-Boot */
+-	if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
+-		printf("Previous phase failed to provide standard passage\n");
+-		return -ENOENT;
++	/* The devicetree is typically appended to U-Boot */
++	if (CONFIG_IS_ENABLED(OF_PASSAGE)) {
++		if (!passage_valid()) {
++			printf("Previous phase failed to provide standard passage\n");
++			bloblist_show_list();
++			return -ENOENT;
++		}
++		gd->fdt_blob = map_sysmem(gd_passage_dtb(), 0);
++		gd->fdt_src = FDTSRC_PASSAGE;
++		log_debug("Devicetree is in bloblist at %p\n", gd->fdt_blob);
+ 	} else {
+ 		/* The devicetree is typically appended to U-Boot */
  		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
- 			gd->fdt_blob = fdt_find_separate();
- 			gd->fdt_src = FDTSRC_SEPARATE;
-@@ -1752,7 +1730,6 @@ int fdtdec_setup(void)
- 		}
- 	}
- 
--setup_fdt:
- 	if (CONFIG_IS_ENABLED(MULTI_DTB_FIT))
- 		setup_multi_dtb_fit();
- 
 -- 
 2.43.0
 
