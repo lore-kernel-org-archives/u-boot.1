@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2DAC3ABCB
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89202C3ABC3
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:26:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E00782AB9;
-	Sat, 10 May 2025 13:25:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3A4C82A46;
+	Sat, 10 May 2025 13:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SWVLntLf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X+pZZi60";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D19D82952; Sat, 10 May 2025 13:25:50 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id E746982ACF; Sat, 10 May 2025 13:25:52 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF1BF82AC1
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:25:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17E2682952
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:25:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ad241baf856so20452266b.0
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:25:47 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5faaddb09feso5577494a12.2
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:25:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746876347; x=1747481147; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746876350; x=1747481150; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/Pjzx6WQoETC/3ThRaAMy71lchjX9sTbhTtcGykc9UU=;
- b=SWVLntLfZlnMknDMFmXEaFQgiBoKHo8ElrPkEj67TiMv8M+acJVVxoP2uHrUAT/FFE
- DMHkbVinrAHpTZqtrmX/PrVXzSBbbYuj4dJLkseWFAnBTLnJPM2tGL21b5YvR49t9M4Z
- hVvzV0kz/wLa5cxNxkJZG/dHS/VS9sG+mU1HA=
+ bh=jCISCpSnuzZ8kYXPg0YCNQz1TsanOdvTZmHkYBdYiiU=;
+ b=X+pZZi60ZJSal30rU8cQhQKUGv7Xnx4ZnaTzhtf9XEAYvsmZh4EYavJmZ+el36mHFK
+ ziLzFKtk1UuCMmAHd5EU0fRxAvIj2/Hc727hrOEt4AogvLL8uA26408WTbgo04oIHbgE
+ r/zLt3jnRuub2O0H8uZRWcGHpmvgcmMakywgw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746876347; x=1747481147;
+ d=1e100.net; s=20230601; t=1746876350; x=1747481150;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/Pjzx6WQoETC/3ThRaAMy71lchjX9sTbhTtcGykc9UU=;
- b=vp+aVnTaGEX3jONpUOW437SFMlb8Ty3AmxmkHjOsT4eCH9GQBps6K1W2/GqCwQ9QHB
- LfDVDDxXaVa9voZlfjwRlCim3xZw3aEGJKacCWaa1InW5HlOtGWEEJa7yVtAg+SrQkGV
- 5gK5Yi1yUaaamjovd7qHkOu0sUEloGggMKeVtTViPzIO86eOk49Mt/98Fel/RtBP+I4D
- yWakWLFewZN5PpbHNWYc7bp1BpvWxSaROUB35zqEqDI/F3IwgyrFVJ59QeuVjTm48mHh
- aKDkirUc8snCUJf1s29IH1onEHCCRJ7Em+AzgtLYOpRcXtTFTWimwmgtVrhJiLa+UcbP
- QUNw==
-X-Gm-Message-State: AOJu0YwYVzCSCvEcNEDYErZpJTKzrFBSP1efFoDpaHPDIiRuIFKEgT+F
- RLIRlKcSSOxj+e73LXJpV/3tRNINch2pBT9ovuijixzsrKP+0+Q1IfxUDeOvh5UYy2hCpdMYvEQ
- 6u9qlZma/hskQB44vWybe/iNqy9/H7ORDtRVHC5wOeTeAhGD5Xq0busHReA==
-X-Gm-Gg: ASbGncufXFHVOf2uAnosgcikkg0JtPSv3f5RNiY/k53z8vUVEf6WEdvu/C9Fj7fVXBA
- yaTYZLtJcy82DYiNDMlBzxjod6ivoViwHb4wm2Sk7kppjfOLMCmRY4PweU27UWf78GELG2lY8Pt
- 53jNC3gos/3U5F0At4Fbt2WFRNf38utibLhQ==
-X-Google-Smtp-Source: AGHT+IFLTJq49pknHhvCmBIkDWp1KyXHBDpKojoEb4xii1juzvh4Oc7a98IqK2szbj9cBhueAsdySsAXzZih0pNPwks=
-X-Received: by 2002:a17:907:3dab:b0:ace:d50f:8ee3 with SMTP id
- a640c23a62f3a-ad1fcc9885fmr951564366b.19.1746876347187; Sat, 10 May 2025
- 04:25:47 -0700 (PDT)
+ bh=jCISCpSnuzZ8kYXPg0YCNQz1TsanOdvTZmHkYBdYiiU=;
+ b=j7SrvJGe3xlQGS/wpm0L3sargTUq04r83BsTV88ctBZpDOQh7GNXuYw2ZnFMlnu3pB
+ U4Btg5KjEGFjk9+VcrglFQhoBxAEwoSKbsyImBtoPKwApuIU30sp8o6KHtCyDG63VCS9
+ CrinDrEYC41jkoZrgWMM7+exQ1dhiDfQg4RJ5ZpnwgZxECoNpBqhctpp/k3q6T/6j6Ha
+ 1UNHeIF7hJWT/Vfoi1Mw26TEEUEj+zInDjqZS/oS66XzrD+jHAzG7jAguMOXCJGhBend
+ 0nwluuC6d2VOi5qDZ3oBB+Ot5DJvNC1ecm5LwR2OKH4qPqOUVDHRz7dtX2a/+yrhiVFm
+ o3sw==
+X-Gm-Message-State: AOJu0Ywx8b295SS3K4N5hZ1jMXcwPsC1gi6buCe1ZVLY8D6W2ABbSrN7
+ iOA2D+230ipBqO4iv3BlzbbOMqLhV+DLpCOcjdvzGlSzZ9mila1nGs11dyYTja37Hv9jHg3Navg
+ 8WFFaxNOscZF6d/nNjV/rhbmrhvTdiqwjQaNLkbx/h/tvp4HS0eMG+Z8LXw==
+X-Gm-Gg: ASbGncsmuO6Loetovo/cVwm3mNf+6VOuepECDB+hh4wqR4xCPslaO0VHqGFV63IoU5y
+ I/3IW33Rqt04yuBOGjRZlALrhUMv1x1qpapU00fcvhhu5a4JbnNoFoWWxgl6dKBKXOXdYUqRfsz
+ MMqulQKd3QKLKpd4oGbegbUZB+OoNsTUP5HQ==
+X-Google-Smtp-Source: AGHT+IGfbx8Dzsvoe2wi5ssTVPevlf1HnBa1+dDQ4fQ8/L1zdHoq8z2kcOHoCBsqvmml9Lho2RZFTmCtqq/uyrtkMyo=
+X-Received: by 2002:a05:6402:2355:b0:5fa:964f:b8b3 with SMTP id
+ 4fb4d7f45d1cf-5fca07ed5f4mr5804633a12.25.1746876350298; Sat, 10 May 2025
+ 04:25:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250225205003.2640910-1-trini@konsulko.com>
- <20250507221112.518041-1-trini@konsulko.com>
- <20250507221112.518041-5-trini@konsulko.com>
-In-Reply-To: <20250507221112.518041-5-trini@konsulko.com>
+References: <20250507221112.518041-1-trini@konsulko.com>
+ <20250507232500.527782-1-trini@konsulko.com>
+ <20250507232500.527782-2-trini@konsulko.com>
+In-Reply-To: <20250507232500.527782-2-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 10 May 2025 13:25:30 +0200
-X-Gm-Features: AX0GCFsZXLIev-WnM1yFeIElM4QMC4mAAsK6mMK86-TZz5PgcITmNVhwAIXb-Wc
-Message-ID: <CAFLszTjJQYW6YHSxPxgRFRm9TdSm3na393nKjXdcoAaTWb+nbQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] test: test_net_boot: Add more comments
+Date: Sat, 10 May 2025 13:25:32 +0200
+X-Gm-Features: AX0GCFtnpAUDSny9qinekTTTAKaiOYwdtLrRyy-C41vzrWpXnNmm_qW-VjfXXRE
+Message-ID: <CAFLszTiy1P=1AJm=jXua_EcYXqpM-pGt5Jb1QNwRwwAyrDj6Nw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] doc: pytest: Document the test_net test
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -87,19 +87,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 8 May 2025 at 00:11, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 8 May 2025 at 01:25, Tom Rini <trini@konsulko.com> wrote:
 >
-> Some of the functions were missing pydoc comments. Add them so they will
-> be included in the documentation.
+> Add this test to the documentation. While the diff appears large at
+> first, the only changes within the test are to move the imports to
+> follow the pydoc comment and then to code-block and indent the example
+> configuration.
 >
-> Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  test/py/tests/test_net_boot.py | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->
+>  doc/develop/pytest/index.rst    |   1 +
+>  doc/develop/pytest/test_net.rst |   8 ++
+>  test/py/tests/test_net.py       | 152 ++++++++++++++++----------------
+>  3 files changed, 86 insertions(+), 75 deletions(-)
+>  create mode 100644 doc/develop/pytest/test_net.rst
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
