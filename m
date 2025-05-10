@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABB1C3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 541A4C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:45:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF49682BAB;
-	Sat, 10 May 2025 15:44:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 21E9382C03;
+	Sat, 10 May 2025 15:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dPf6zWz8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AxG7nyPe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ADE882952; Sat, 10 May 2025 15:44:11 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id D9A5682BF6; Sat, 10 May 2025 15:44:13 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B372482BAA
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5FF682952
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5fca2805ca4so2773145a12.1
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:08 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ac2bb7ca40bso488526866b.3
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884647; x=1747489447; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884650; x=1747489450; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qO3uBvV7hQKQSqiN6Y6UuQVwEJB4sAZf6rz+JCe1Mw8=;
- b=dPf6zWz8i0TQvakWZiEoMvniC75dbBwUBsHmQ/Ct5sFxJWrlTpagzxa+zFOBCYNUry
- PkzHjwPPXxNH5GOvrQ+N6PjYtKhxINiaCreW3/N6IEfRaWtgs3IQ1525xi3eYrIhSqdo
- PXaavnr8pIex6Vkmngm+ASGmlVqzXNdj6FjY8=
+ bh=ES4QmobaG14rz2zRxqruy/iELVFYmfSLAOGeXraSXDM=;
+ b=AxG7nyPeT+0MW4TDBAhapU+tso1rwdwcGrkDNf9CWkq16ZhFO8xTc+eBz+xsiHGd4G
+ PIFyI78g5GwOVrCYcC8nDuFrLDFY1bopsnAaUH11satkA9P0pi7xILtjSHDmTN2nDk12
+ rtAR8xHHsQwMSfzHV/O82esaoP7uyZ8s9ltsA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884647; x=1747489447;
+ d=1e100.net; s=20230601; t=1746884650; x=1747489450;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qO3uBvV7hQKQSqiN6Y6UuQVwEJB4sAZf6rz+JCe1Mw8=;
- b=pqpSMZUc718yHuZO7uszfSxi7hOyQQPfy8qXsB6fwpqMDX+apv3ZFpM2+HAtksPmX/
- d5f/4AKV6PE+AYe0dhgF1idXDqofRbLkBCcIfT+r0yzS94lrtQ0QWrmZeVdWysUenItV
- gS3judKXzKhypfCzBiDwiTO7F7Q/bIJoGeJG+7Drw+kQdBM5O8ccmS6QGP55yAG5c89C
- 3zj8PEy4uQNuW0H8rTD0bFI8hJH2YI30GuLcmEJjghNlZ1NdvcU617lXnj20Tbq39ddb
- 6Nswm46dpnUfWbfdhOHwpdoQ0yVsbukwt9HL1C6HKbJnqbKGOfJ6tw9y63ox7wfmQ++u
- mEgA==
-X-Gm-Message-State: AOJu0YymVoCIFgsyZxXu24Ko0/47mOztmfnLujjrF5b/RBdnX4aTxkmW
- OUgZ6/b0IadfPSBHCPIHyHp+J0f6rDKIx1TCDU6YMBMRz+V3lMHsuDfU5H2u0yoGqhtS5l+qKk+
- F3AIVwLhJsw==
-X-Gm-Gg: ASbGncs+I4Xy+Jly7PuzgpFgzC0jqnS2mRFZ9LquP4H1VRCcSU2pMGAvzpsJA5CAz65
- JmkC73zJn+H2ps0C8Wxp7sImZF6rbAWHH6w3LkU/OCQKyYDgigKvyzCg+HAGxyHgXmF9LzU3GOA
- jJiL2bq5CNHpl46N2bxzVTk0YXv2A8xhvALsRpfR4XnGIuDjSBzTqu0C7mWCyl1r06nR22WLk7l
- xPEC/bhePR7l0BHKm4rL9g3xDAv9Ow2qeSOSzMWwt6BAi1CO5VudbiJTV0aWAmANSOmQYgp0xHj
- cfvxMc+1OkUyB0L253lNnV6KXaoLzI6GZdWEhH18YVT+08VHU5MFUzz+J03ac/fwSIVy
-X-Google-Smtp-Source: AGHT+IGDlei4zzhJaRcHyxOFsBFVuNURBz8bIQ+mYTzLuhYLpMIqmzWutwgly5yXW+Y66s3Zle8kmQ==
-X-Received: by 2002:a17:906:5954:b0:ace:d95f:6582 with SMTP id
- a640c23a62f3a-ad2192d4b2cmr500955566b.53.1746884647411; 
- Sat, 10 May 2025 06:44:07 -0700 (PDT)
+ bh=ES4QmobaG14rz2zRxqruy/iELVFYmfSLAOGeXraSXDM=;
+ b=IQuMjd1FdCrnGkL17YyjnPP3QRQsFXhnUC3kRZ9aCS1CHSRXTTH6miiCAVj/YNJq6B
+ xaTG7J6txcbg8ZR4atnyyzxiJK1qGXayvatEqjYpuqM4ekuzKg+dg9NCjD5Fgz1D9N2o
+ 9ud9UnTG100z5+lFG3byzTSwnbshUNZ4Hs8gBbfikqSkSSMRbI5sE5HBzIK2tz3ctfJJ
+ u/Xj2t91e1iQ3gkmqTvBvjrlpRt6mpcXaYqO9m59eJ2tklqjEQcjQaI/280PJV29r70g
+ k+R5wUQiTC+0dBTdeI1t2RENp8RghYuYjhAsYvxLs+zvSb03jkyPwRZA/hWL/Lp4N+DI
+ Y1sw==
+X-Gm-Message-State: AOJu0YzzPiNqzyfWbuuVlmts6F1a29XlM0UsP8bMKxYGDPoqGvlJbw1W
+ S9ZGQU5RCLh29GWwOvqH8zRhk1OXFEfqZ0z13VfpXIIu/SGTTyNkDqP6KH8/hQW+mdPZfIlFwnc
+ jp7Z6RHd0rQ==
+X-Gm-Gg: ASbGncuZvf00fXfUGDrfyfgTpjAE2UGfl0u7aHede39ajDWiuGEzGo2DWoCzCFf0vM9
+ sU6SX6kLiq+hgslOPgF+7jImjldJgA/IBsaV5SNTlhbfwS39VX9lVkAnBXpYTwuvDsmRETz1Rxp
+ b4xctGFUwUHzktJJGp0xwq+gCL7xx5hMh43Q4ciXTGglqWMxNdQzmyuzZRPfyrwc2UlDN35Elxq
+ stlZtkHN/rS1dMmWpM2JUxNiofGByAtZNy+kysx42R/0lnTTHww/8MBUUzlNr3LOPSLyzp7gn5G
+ 9A99wfl9Wi6sW8lfr3pU44HKFWMPe77WoMIc0dlOMc8hUEgp+hnewF9u+AR5e6jcwdZsxS6AE6w
+ BxnA=
+X-Google-Smtp-Source: AGHT+IELn6suMO/Mq6ThvGMUntSmq7L5U0XSo6Ko+7DSBPqH1rb963PlFYps9HzIJarlVor/Fz7TWw==
+X-Received: by 2002:a17:907:8687:b0:ad2:3efc:dd80 with SMTP id
+ a640c23a62f3a-ad23efce3a7mr148643166b.7.1746884650331; 
+ Sat, 10 May 2025 06:44:10 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.05
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:44:06 -0700 (PDT)
+ Sat, 10 May 2025 06:44:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -76,13 +77,18 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
+ Levi Yun <yeoreum.yun@arm.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, qemu-devel@nongnu.org
-Subject: [PATCH v4 15/22] arm: qemu: Add a 64-bit SPL build
-Date: Sat, 10 May 2025 15:42:13 +0200
-Message-ID: <20250510134253.1581164-10-sjg@chromium.org>
+ Sam Edwards <cfsworks@gmail.com>, Stefan Roese <sr@denx.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH v4 16/22] xferlist: Drop old xferlist code
+Date: Sat, 10 May 2025 15:42:14 +0200
+Message-ID: <20250510134253.1581164-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -104,714 +110,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an 64-bit SPL build for qemu so we can test the standard passage
-feature.
+This is not needed now, as the startup protocol is handled in
+arch-specific code early in boot.
 
-Include a binman definition so that SPL and U-Boot are in the same image.
-This requires adding a proper devicetree file for qemu_arm. It is only
-used for the SPL build.
-
-Avoid using the QEMU devicetree in U-Boot proper, so we can obtain it
-from standard passage.
-
-For now this just boots and hangs in SPL as there is no bloblist.
+Drop BLOBLIST_PASSAGE_MANDATORY as well, as OF_BLOBLIST is enough to
+cover this. With standard passage the devicetree is accessed before the
+bloblist is inited.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Add a build for aarch64 as well
+ arch/arm/lib/Makefile                   |  1 -
+ arch/arm/lib/xferlist.c                 | 23 ---------------
+ arch/arm/lib/xferlist.h                 | 19 -------------
+ common/Kconfig                          | 11 -------
+ common/bloblist.c                       | 38 -------------------------
+ configs/vexpress_fvp_bloblist_defconfig |  2 +-
+ doc/board/armltd/vexpress64.rst         |  2 +-
+ include/bloblist.h                      | 26 ++---------------
+ 8 files changed, 4 insertions(+), 118 deletions(-)
+ delete mode 100644 arch/arm/lib/xferlist.c
+ delete mode 100644 arch/arm/lib/xferlist.h
 
- arch/arm/dts/qemu-arm64-u-boot.dtsi  |  29 ++
- arch/arm/dts/qemu-arm64.dts          | 387 ++++++++++++++++++++++++++-
- arch/arm/mach-qemu/Kconfig           |  10 +-
- board/emulation/qemu-arm/Kconfig     |   5 +-
- board/emulation/qemu-arm/MAINTAINERS |   1 +
- configs/qemu_arm64_spl_defconfig     |  90 +++++++
- doc/board/emulation/qemu-arm.rst     |  41 ++-
- scripts/build-qemu.sh                |   6 +-
- 8 files changed, 563 insertions(+), 6 deletions(-)
- create mode 100644 arch/arm/dts/qemu-arm64-u-boot.dtsi
- create mode 100644 configs/qemu_arm64_spl_defconfig
-
-diff --git a/arch/arm/dts/qemu-arm64-u-boot.dtsi b/arch/arm/dts/qemu-arm64-u-boot.dtsi
-new file mode 100644
-index 00000000000..31847e9518e
---- /dev/null
-+++ b/arch/arm/dts/qemu-arm64-u-boot.dtsi
-@@ -0,0 +1,29 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR MIT
-+/*
-+ * Sample device tree for qemu_arm
-+
-+ * Copyright 2021 Google LLC
-+ */
-+
-+/ {
-+	binman {
-+		u-boot-spl {
-+			size = <0x10000>;
-+		};
-+
-+		u-boot {
-+		};
-+	};
-+
-+	pl011@9000000 {
-+		bootph,pre-ram;
-+	};
-+
-+	pl031@9010000 {
-+		bootph,pre-ram;
-+	};
-+
-+	pl061@9030000 {
-+		bootph,pre-ram;
-+	};
-+};
-diff --git a/arch/arm/dts/qemu-arm64.dts b/arch/arm/dts/qemu-arm64.dts
-index 95fcf53ed74..62e29cb01fb 100644
---- a/arch/arm/dts/qemu-arm64.dts
-+++ b/arch/arm/dts/qemu-arm64.dts
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+ OR MIT
- /*
-- * Empty device tree for qemu_arm64
-+ * Device tree for qemu_arm64
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index ade42d0ca43..31497394580 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -86,7 +86,6 @@ obj-y	+= psci-dt.o
  
-  * Copyright 2021 Google LLC
-  */
-@@ -13,3 +13,388 @@
+ obj-$(CONFIG_DEBUG_LL)	+= debug.o
  
- / {
- };
-+
-+#ifdef CONFIG_TARGET_QEMU_ARM_64BIT_SPL
-+
-+/ {
-+	interrupt-parent = <0x00008002>;
-+	model = "linux,dummy-virt";
-+	#size-cells = <0x00000002>;
-+	#address-cells = <0x00000002>;
-+	compatible = "linux,dummy-virt";
-+	psci {
-+		migrate = <0xc4000005>;
-+		cpu_on = <0xc4000003>;
-+		cpu_off = <0x84000002>;
-+		cpu_suspend = <0xc4000001>;
-+		method = "hvc";
-+		compatible = "arm,psci-1.0", "arm,psci-0.2", "arm,psci";
-+	};
-+	memory@40000000 {
-+		reg = <0x00000000 0x40000000 0x00000000 0x08000000>;
-+		device_type = "memory";
-+	};
-+	platform-bus@c000000 {
-+		interrupt-parent = <0x00008002>;
-+		ranges = <0x00000000 0x00000000 0x0c000000 0x02000000>;
-+		#address-cells = <0x00000001>;
-+		#size-cells = <0x00000001>;
-+		compatible = "qemu,platform", "simple-bus";
-+	};
-+	fw-cfg@9020000 {
-+		dma-coherent;
-+		reg = <0x00000000 0x09020000 0x00000000 0x00000018>;
-+		compatible = "qemu,fw-cfg-mmio";
-+	};
-+	virtio_mmio@a000000 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000010 0x00000001>;
-+		reg = <0x00000000 0x0a000000 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a000200 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000011 0x00000001>;
-+		reg = <0x00000000 0x0a000200 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a000400 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000012 0x00000001>;
-+		reg = <0x00000000 0x0a000400 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a000600 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000013 0x00000001>;
-+		reg = <0x00000000 0x0a000600 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a000800 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000014 0x00000001>;
-+		reg = <0x00000000 0x0a000800 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a000a00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000015 0x00000001>;
-+		reg = <0x00000000 0x0a000a00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a000c00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000016 0x00000001>;
-+		reg = <0x00000000 0x0a000c00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a000e00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000017 0x00000001>;
-+		reg = <0x00000000 0x0a000e00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001000 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000018 0x00000001>;
-+		reg = <0x00000000 0x0a001000 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001200 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000019 0x00000001>;
-+		reg = <0x00000000 0x0a001200 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001400 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000001a 0x00000001>;
-+		reg = <0x00000000 0x0a001400 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001600 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000001b 0x00000001>;
-+		reg = <0x00000000 0x0a001600 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001800 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000001c 0x00000001>;
-+		reg = <0x00000000 0x0a001800 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001a00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000001d 0x00000001>;
-+		reg = <0x00000000 0x0a001a00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001c00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000001e 0x00000001>;
-+		reg = <0x00000000 0x0a001c00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a001e00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000001f 0x00000001>;
-+		reg = <0x00000000 0x0a001e00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002000 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000020 0x00000001>;
-+		reg = <0x00000000 0x0a002000 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002200 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000021 0x00000001>;
-+		reg = <0x00000000 0x0a002200 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002400 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000022 0x00000001>;
-+		reg = <0x00000000 0x0a002400 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002600 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000023 0x00000001>;
-+		reg = <0x00000000 0x0a002600 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002800 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000024 0x00000001>;
-+		reg = <0x00000000 0x0a002800 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002a00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000025 0x00000001>;
-+		reg = <0x00000000 0x0a002a00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002c00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000026 0x00000001>;
-+		reg = <0x00000000 0x0a002c00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a002e00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000027 0x00000001>;
-+		reg = <0x00000000 0x0a002e00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003000 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000028 0x00000001>;
-+		reg = <0x00000000 0x0a003000 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003200 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x00000029 0x00000001>;
-+		reg = <0x00000000 0x0a003200 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003400 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000002a 0x00000001>;
-+		reg = <0x00000000 0x0a003400 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003600 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000002b 0x00000001>;
-+		reg = <0x00000000 0x0a003600 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003800 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000002c 0x00000001>;
-+		reg = <0x00000000 0x0a003800 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003a00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000002d 0x00000001>;
-+		reg = <0x00000000 0x0a003a00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003c00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000002e 0x00000001>;
-+		reg = <0x00000000 0x0a003c00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	virtio_mmio@a003e00 {
-+		dma-coherent;
-+		interrupts = <0x00000000 0x0000002f 0x00000001>;
-+		reg = <0x00000000 0x0a003e00 0x00000000 0x00000200>;
-+		compatible = "virtio,mmio";
-+	};
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+		poweroff {
-+			gpios = <0x00008004 0x00000003 0x00000000>;
-+			linux,code = <0x00000074>;
-+			label = "GPIO Key Poweroff";
-+		};
-+	};
-+	pl061@9030000 {
-+		phandle = <0x00008004>;
-+		clock-names = "apb_pclk";
-+		clocks = <0x00008000>;
-+		interrupts = <0x00000000 0x00000007 0x00000004>;
-+		gpio-controller;
-+		#gpio-cells = <0x00000002>;
-+		compatible = "arm,pl061", "arm,primecell";
-+		reg = <0x00000000 0x09030000 0x00000000 0x00001000>;
-+	};
-+	pcie@10000000 {
-+		interrupt-map-mask = <0x00001800 0x00000000 0x00000000 0x00000007>;
-+		interrupt-map = <0x00000000 0x00000000 0x00000000 0x00000001
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000003 0x00000004 0x00000000 0x00000000
-+			0x00000000 0x00000002 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000004 0x00000004
-+			0x00000000 0x00000000 0x00000000 0x00000003
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000005 0x00000004 0x00000000 0x00000000
-+			0x00000000 0x00000004 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000006 0x00000004
-+			0x00000800 0x00000000 0x00000000 0x00000001
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000004 0x00000004 0x00000800 0x00000000
-+			0x00000000 0x00000002 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000005 0x00000004
-+			0x00000800 0x00000000 0x00000000 0x00000003
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000006 0x00000004 0x00000800 0x00000000
-+			0x00000000 0x00000004 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000003 0x00000004
-+			0x00001000 0x00000000 0x00000000 0x00000001
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000005 0x00000004 0x00001000 0x00000000
-+			0x00000000 0x00000002 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000006 0x00000004
-+			0x00001000 0x00000000 0x00000000 0x00000003
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000003 0x00000004 0x00001000 0x00000000
-+			0x00000000 0x00000004 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000004 0x00000004
-+			0x00001800 0x00000000 0x00000000 0x00000001
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000006 0x00000004 0x00001800 0x00000000
-+			0x00000000 0x00000002 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000003 0x00000004
-+			0x00001800 0x00000000 0x00000000 0x00000003
-+			0x00008002 0x00000000 0x00000000 0x00000000
-+			0x00000004 0x00000004 0x00001800 0x00000000
-+			0x00000000 0x00000004 0x00008002 0x00000000
-+			0x00000000 0x00000000 0x00000005 0x00000004>;
-+		#interrupt-cells = <0x00000001>;
-+		ranges = <0x01000000 0x00000000
-+			0x00000000 0x00000000 0x3eff0000 0x00000000
-+			0x00010000 0x02000000 0x00000000 0x10000000
-+			0x00000000 0x10000000 0x00000000 0x2eff0000
-+			0x03000000 0x00000080 0x00000000 0x00000080
-+			0x00000000 0x00000080 0x00000000>;
-+		reg = <0x00000040 0x10000000 0x00000000 0x10000000>;
-+		msi-map = <0x00000000 0x00008003 0x00000000 0x00010000>;
-+		dma-coherent;
-+		bus-range = <0x00000000 0x000000ff>;
-+		linux,pci-domain = <0x00000000>;
-+		#size-cells = <0x00000002>;
-+		#address-cells = <0x00000003>;
-+		device_type = "pci";
-+		compatible = "pci-host-ecam-generic";
-+	};
-+	pl031@9010000 {
-+		clock-names = "apb_pclk";
-+		clocks = <0x00008000>;
-+		interrupts = <0x00000000 0x00000002 0x00000004>;
-+		reg = <0x00000000 0x09010000 0x00000000 0x00001000>;
-+		compatible = "arm,pl031", "arm,primecell";
-+	};
-+	pl011@9000000 {
-+		clock-names = "uartclk", "apb_pclk";
-+		clocks = <0x00008000 0x00008000>;
-+		interrupts = <0x00000000 0x00000001 0x00000004>;
-+		reg = <0x00000000 0x09000000 0x00000000 0x00001000>;
-+		compatible = "arm,pl011", "arm,primecell";
-+	};
-+	pmu {
-+		interrupts = <0x00000001 0x00000007 0x00000104>;
-+		compatible = "arm,armv8-pmuv3";
-+	};
-+	intc@8000000 {
-+		phandle = <0x00008002>;
-+		reg = <0x00000000 0x08000000 0x00000000 0x00010000
-+			0x00000000 0x08010000 0x00000000 0x00010000>;
-+		compatible = "arm,cortex-a15-gic";
-+		ranges;
-+		#size-cells = <0x00000002>;
-+		#address-cells = <0x00000002>;
-+		interrupt-controller;
-+		#interrupt-cells = <0x00000003>;
-+		v2m@8020000 {
-+			phandle = <0x00008003>;
-+			reg = <0x00000000 0x08020000 0x00000000 0x00001000>;
-+			msi-controller;
-+			compatible = "arm,gic-v2m-frame";
-+		};
-+	};
-+	flash@0 {
-+		bank-width = <0x00000004>;
-+		reg = <0x00000000 0x00000000 0x00000000 0x04000000
-+			0x00000000 0x04000000 0x00000000 0x04000000>;
-+		compatible = "cfi-flash";
-+	};
-+	cpus {
-+		#size-cells = <0x00000000>;
-+		#address-cells = <0x00000001>;
-+		cpu-map {
-+			socket0 {
-+				cluster0 {
-+					core0 {
-+						cpu = <0x00008001>;
-+					};
-+				};
-+			};
-+		};
-+		cpu@0 {
-+			phandle = <0x00008001>;
-+			reg = <0x00000000>;
-+			compatible = "arm,cortex-a57";
-+			device_type = "cpu";
-+		};
-+	};
-+	timer {
-+		interrupts = <0x00000001 0x0000000d 0x00000104 0x00000001
-+			0x0000000e 0x00000104 0x00000001 0x0000000b
-+			0x00000104 0x00000001 0x0000000a 0x00000104>;
-+		always-on;
-+		compatible = "arm,armv8-timer", "arm,armv7-timer";
-+	};
-+	apb-pclk {
-+		phandle = <0x00008000>;
-+		clock-output-names = "clk24mhz";
-+		clock-frequency = <0x016e3600>;
-+		#clock-cells = <0x00000000>;
-+		compatible = "fixed-clock";
-+	};
-+	chosen {
-+		stdout-path = "/pl011@9000000";
-+		rng-seed = <0x5c62d159 0x4f1ac320 0x51089618 0xfa6e4367
-+				0x5cb012b5 0xfe4e6a54 0x8c970c5d 0xeb9bec3c>;
-+		kaslr-seed = <0x358a89d6 0x32217e8d>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/mach-qemu/Kconfig b/arch/arm/mach-qemu/Kconfig
-index 292c5f65c8e..1aea7205da4 100644
---- a/arch/arm/mach-qemu/Kconfig
-+++ b/arch/arm/mach-qemu/Kconfig
-@@ -36,9 +36,17 @@ config TARGET_QEMU_ARM_SBSA
- 	select ENABLE_ARM_SOC_BOOT0_HOOK
- 	select MISC_INIT_R
+-obj-$(CONFIG_BLOBLIST)  += xferlist.o
+ obj-$(CONFIG_GENERATE_ACPI_TABLE) += acpi_table.o
  
-+config TARGET_QEMU_ARM_64BIT_SPL
-+	bool "ARMv8, 64bit with SPL"
-+	select ARM64
-+	select BOARD_LATE_INIT
-+	select SPL
-+	select BINMAN
-+
- endchoice
+ # For EABI conformant tool chains, provide eabi_compat()
+diff --git a/arch/arm/lib/xferlist.c b/arch/arm/lib/xferlist.c
+deleted file mode 100644
+index 6425936d354..00000000000
+--- a/arch/arm/lib/xferlist.c
++++ /dev/null
+@@ -1,23 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright (C) 2023 Linaro Limited
+- * Author: Raymond Mao <raymond.mao@linaro.org>
+- */
+-#include <linux/types.h>
+-#include <errno.h>
+-#include <bloblist.h>
+-#include "xferlist.h"
+-
+-int xferlist_from_boot_arg(ulong *addr)
+-{
+-	int ret;
+-
+-	ret = bloblist_check_reg_conv(saved_args[0], saved_args[2],
+-				      saved_args[1], saved_args[3]);
+-	if (ret)
+-		return ret;
+-
+-	*addr = bloblist_get_base();
+-
+-	return 0;
+-}
+diff --git a/arch/arm/lib/xferlist.h b/arch/arm/lib/xferlist.h
+deleted file mode 100644
+index 60d79c1a8eb..00000000000
+--- a/arch/arm/lib/xferlist.h
++++ /dev/null
+@@ -1,19 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
+-/*
+- * Copyright (C) 2023 Linaro Limited
+- * Author: Raymond Mao <raymond.mao@linaro.org>
+- */
+-
+-#ifndef _XFERLIST_H_
+-#define _XFERLIST_H_
+-
+-/*
+- * Boot parameters saved from start.S
+- * saved_args[0]: FDT base address
+- * saved_args[1]: Bloblist signature
+- * saved_args[2]: must be 0
+- * saved_args[3]: Bloblist base address
+- */
+-extern unsigned long saved_args[];
+-
+-#endif /* _XFERLIST_H_ */
+diff --git a/common/Kconfig b/common/Kconfig
+index 1f908790139..773ea3c9e7f 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1079,16 +1079,6 @@ config BLOBLIST_ALLOC
+ 	  specify a fixed address on systems where this is unknown or can
+ 	  change at runtime.
  
--if TARGET_QEMU_ARM_32BIT || TARGET_QEMU_ARM_64BIT || TARGET_QEMU_ARM_32BIT_SPL
-+if TARGET_QEMU_ARM_32BIT || TARGET_QEMU_ARM_64BIT || \
-+	TARGET_QEMU_ARM_32BIT_SPL || TARGET_QEMU_ARM_64BIT_SPL
+-config BLOBLIST_PASSAGE_MANDATORY
+-	bool "Use bloblist in-place mandatorily"
+-	help
+-	  By default U-Boot will use a bloblist in the incoming standard passage.
+-	  This option controls whether U-Boot tries to load a static bloblist or
+-	  allocate one if a valid incoming bloblist does not exist.
+-	  Select this option to mark incoming standard passage as mandatory and
+-	  U-Boot will report an error when a valid incoming bloblist does not
+-	  exist.
+-
+ config BLOBLIST_PASSAGE
+ 	bool "Obtain bloblist from standard passage information"
+ 	help
+@@ -1111,7 +1101,6 @@ config BLOBLIST_ADDR
  
- config SYS_BOARD
- 	default "qemu-arm"
-diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
-index 2a8f052c0da..d35caa16d8f 100644
---- a/board/emulation/qemu-arm/Kconfig
-+++ b/board/emulation/qemu-arm/Kconfig
-@@ -31,7 +31,7 @@ config BOARD_SPECIFIC_OPTIONS
+ config BLOBLIST_SIZE
+ 	hex "Size of bloblist"
+-	default 0x0 if BLOBLIST_PASSAGE_MANDATORY
+ 	default 0x400
+ 	help
+ 	  Sets the size of the bloblist in bytes. This must include all
+diff --git a/common/bloblist.c b/common/bloblist.c
+index c7322b96bcb..d0e92acfee5 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -503,14 +503,6 @@ int bloblist_reloc(void *to, uint to_size)
+ 	return 0;
+ }
  
- endif
+-/*
+- * Weak default function for getting bloblist from boot args.
+- */
+-int __weak xferlist_from_boot_arg(ulong __always_unused *addr)
+-{
+-	return -ENOENT;
+-}
+-
+ int bloblist_init(void)
+ {
+ 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+@@ -587,33 +579,3 @@ int bloblist_maybe_init(void)
  
--if TARGET_QEMU_ARM_32BIT_SPL
-+if TARGET_QEMU_ARM_32BIT_SPL || TARGET_QEMU_ARM_64BIT_SPL
+ 	return 0;
+ }
+-
+-int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig, ulong xlist)
+-{
+-	u64 version = BLOBLIST_REGCONV_VER;
+-	ulong sigval;
+-	int ret;
+-
+-	if ((IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_SPL_BUILD)) ||
+-			(IS_ENABLED(CONFIG_SPL_64BIT) && IS_ENABLED(CONFIG_SPL_BUILD))) {
+-		sigval = ((BLOBLIST_MAGIC & ((1ULL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
+-			 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64));
+-	} else {
+-		sigval = ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
+-			 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_32));
+-	}
+-
+-	if (rzero || rsig != sigval)
+-		return -EIO;
+-
+-	ret = bloblist_check(xlist, 0);
+-	if (ret)
+-		return ret;
+-
+-	if (rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
+-		gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
+-		return -EIO;
+-	}
+-
+-	return 0;
+-}
+diff --git a/configs/vexpress_fvp_bloblist_defconfig b/configs/vexpress_fvp_bloblist_defconfig
+index fd5f91bc039..6cc329e503d 100644
+--- a/configs/vexpress_fvp_bloblist_defconfig
++++ b/configs/vexpress_fvp_bloblist_defconfig
+@@ -1,7 +1,7 @@
+ #include <configs/vexpress_fvp_defconfig>
  
- config SPL_TEXT_BASE
- 	default 0x00000000
-@@ -39,6 +39,9 @@ config SPL_TEXT_BASE
- config TEXT_BASE
- 	default 0x00010000
+ CONFIG_BLOBLIST=y
+-CONFIG_BLOBLIST_PASSAGE_MANDATORY=y
++CONFIG_OF_PASSAGE=y
+ CONFIG_BLOBLIST_SIZE_RELOC=0x10000
+ CONFIG_BLOBLIST_PASSAGE=y
+ CONFIG_PASSAGE_IN=y
+diff --git a/doc/board/armltd/vexpress64.rst b/doc/board/armltd/vexpress64.rst
+index 109337d7fe3..ebf1ec77c7a 100644
+--- a/doc/board/armltd/vexpress64.rst
++++ b/doc/board/armltd/vexpress64.rst
+@@ -103,7 +103,7 @@ bloblist, or utilizing a standard passage-provided bloblist with automatic size
+ detection.
  
-+config SPL_MAX_SIZE
-+	default 0x00010000
-+
- endif
+ By default, ``vexpress_fvp_bloblist_defconfig`` uses the standard passage method mandatorily
+-(CONFIG_BLOBLIST_PASSAGE_MANDATORY) because TF-A provides a Transfer List in non-secure
++(CONFIG_OF_PASSAGE) because TF-A provides a Transfer List in non-secure
+ memory that U-Boot can utilise. This Bloblist, which is referred to as a Transfer List in
+ TF-A, contains all necessary data for the handoff process, including DT and ACPI
+ tables.
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f32faf78560..6ea864bf896 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -467,8 +467,8 @@ int bloblist_reloc(void *to, uint to_size);
+  * If CONFIG_BLOBLIST_ALLOC is selected, it allocates memory for a bloblist of
+  * size CONFIG_BLOBLIST_SIZE.
+  *
+- * If CONFIG_BLOBLIST_PASSAGE_MANDATORY is selected, bloblist in the incoming
+- * standard passage is mandatorily required.
++ * If CONFIG_OF_BLOBLIST is selected, a bloblist is required in the incoming
++ * standard passage.
+  *
+  * Sets GD_FLG_BLOBLIST_READY in global_data flags on success
+  *
+@@ -492,26 +492,4 @@ static inline int bloblist_maybe_init(void)
+ }
+ #endif /* BLOBLIST */
  
- source "board/emulation/common/Kconfig"
-diff --git a/board/emulation/qemu-arm/MAINTAINERS b/board/emulation/qemu-arm/MAINTAINERS
-index 54682d6c0af..bb3168d47a7 100644
---- a/board/emulation/qemu-arm/MAINTAINERS
-+++ b/board/emulation/qemu-arm/MAINTAINERS
-@@ -8,6 +8,7 @@ F:	include/configs/qemu-sbsa.h
- F:	configs/qemu_arm_defconfig
- F:	configs/qemu_arm64_acpi_defconfig
- F:	configs/qemu_arm64_defconfig
-+F:	configs/qemu_arm64_spl_defconfig
- F:	configs/qemu-arm-sbsa_defconfig
- 
- QEMU ARM 'VIRT' BOARD
-diff --git a/configs/qemu_arm64_spl_defconfig b/configs/qemu_arm64_spl_defconfig
-new file mode 100644
-index 00000000000..a9ed47c8d3b
---- /dev/null
-+++ b/configs/qemu_arm64_spl_defconfig
-@@ -0,0 +1,90 @@
-+CONFIG_ARM=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_QEMU=y
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_BLOBLIST_SIZE_RELOC=0x2000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x40200000
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_SECT_SIZE=0x40000
-+CONFIG_DEFAULT_DEVICE_TREE="qemu-arm64"
-+CONFIG_TARGET_QEMU_ARM_64BIT_SPL=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x9000
-+CONFIG_SYS_LOAD_ADDR=0x40200000
-+CONFIG_DEBUG_UART_BASE=0x9000000
-+CONFIG_DEBUG_UART_CLOCK=0
-+CONFIG_ARMV8_CRYPTO=y
-+CONFIG_ENV_ADDR=0x4000000
-+CONFIG_QEMU_MANUAL_DTB=y
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_EFI_HTTP_BOOT=y
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_FIT_BEST_MATCH=y
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_USE_PREBOOT=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_PCI_INIT_R=y
-+CONFIG_BLOBLIST=y
-+CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
-+CONFIG_SPL_NO_BSS_LIMIT=y
-+# CONFIG_SPL_SEPARATE_BSS is not set
-+CONFIG_CMD_SMBIOS=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_BOOTEFI_SELFTEST=y
-+CONFIG_CMD_NVEDIT_EFI=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_EFIDEBUG=y
-+CONFIG_CMD_TPM=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_BOARD=y
-+CONFIG_ENV_IS_IN_FLASH=y
-+CONFIG_SPL_DM=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DFU_TFTP=y
-+CONFIG_DFU_MTD=y
-+CONFIG_DFU_RAM=y
-+# CONFIG_MMC is not set
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_CFI_FLASH=y
-+CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_FLASH_CFI_MTD=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SYS_MAX_FLASH_SECT=256
-+CONFIG_SYS_MAX_FLASH_BANKS=2
-+CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
-+CONFIG_E1000=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_ECAM_GENERIC=y
-+CONFIG_SCSI=y
-+CONFIG_DEBUG_UART_PL011=y
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
-+CONFIG_SYSRESET=y
-+CONFIG_SPL_SYSRESET=y
-+CONFIG_SYSRESET_CMD_POWEROFF=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_TPM2_MMIO=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_PCI=y
-+CONFIG_SEMIHOSTING=y
-+CONFIG_MBEDTLS_LIB=y
-+CONFIG_TPM=y
-+CONFIG_TPM_PCR_ALLOCATE=y
-+CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
-diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu-arm.rst
-index a8a1ba0e0f9..b03cb882c86 100644
---- a/doc/board/emulation/qemu-arm.rst
-+++ b/doc/board/emulation/qemu-arm.rst
-@@ -43,6 +43,11 @@ Set the CROSS_COMPILE environment variable as usual, and run:
-     make qemu_arm_spl_defconfig
-     make
- 
-+- for AArch64 with SPL::
-+
-+    make qemu_arm64_spl_defconfig
-+    make
-+
- Running U-Boot
- --------------
- The minimal QEMU command line to get U-Boot up and running is:
-@@ -59,6 +64,10 @@ The minimal QEMU command line to get U-Boot up and running is:
- 
-     qemu-system-arm -machine virt -nographic -bios image.bin
- 
-+- For AArch64 with SPL::
-+
-+    qemu-system-aarch64 -machine virt -nographic -cpu cortex-a57 -bios image.bin
-+
- Note that for some odd reason qemu-system-aarch64 needs to be explicitly
- told to use a 64-bit CPU or it will boot in 32-bit mode. The -nographic argument
- ensures that output appears on the terminal. Use Ctrl-A X to quit.
-@@ -215,11 +224,39 @@ devicetree is passed via standard passage::
-     $ ./scripts/build-qemu.sh -a arm  -rsxw
-     Running qemu-system-arm  -machine virt -accel tcg -display none -serial mon:stdio
- 
--    U-Boot SPL 2025.04-01115-g0b14f5ab2aa1 (Apr 17 2025 - 09:39:51 -0600)
-+    U-Boot SPL 2025.04-01115-g0b14f5ab2aa1 (Apr 17 2025 - 06:39:51 -0600)
-+    Trying to boot from QEMU
-+
-+
-+    U-Boot 2025.04-01115-g0b14f5ab2aa1 (Apr 17 2025 - 06:39:51 -0600)
-+
-+    DRAM:  128 MiB
-+    using memory 0x466aa000-0x476ea000 for malloc()
-+    Core:  48 devices, 12 uclasses, devicetree: passage
-+    Flash: 64 MiB
-+    Loading Environment from Flash... *** Warning - bad CRC, using default environment
-+
-+    In:    serial,usbkbd
-+    Out:   serial,vidconsole
-+    Err:   serial,vidconsole
-+    No USB controllers found
-+    Net:   No ethernet found.
-+
-+    starting USB...
-+    No USB controllers found
-+    Hit any key to stop autoboot:  0
-+    =>
-+
-+The aarch64 build is similar::
-+
-+    $ ./scripts/build-qemu.sh -a arm  -rsxw
-+    Running qemu-system-arm  -machine virt -accel tcg -display none -serial mon:stdio
-+
-+    U-Boot SPL 2025.04-01115-g38a16f456571 (Apr 17 2025 - 06:43:50 -0600)
-     Trying to boot from QEMU
- 
- 
--    U-Boot 2025.04-01115-g0b14f5ab2aa1 (Apr 17 2025 - 09:39:51 -0600)
-+    U-Boot 2025.04-01115-g38a16f456571 (Apr 17 2025 - 06:43:50 -0600)
- 
-     DRAM:  128 MiB
-     using memory 0x466aa000-0x476ea000 for malloc()
-diff --git a/scripts/build-qemu.sh b/scripts/build-qemu.sh
-index 678116d1cc7..c23e50e91a6 100755
---- a/scripts/build-qemu.sh
-+++ b/scripts/build-qemu.sh
-@@ -178,7 +178,11 @@ arm)
- 	extra+=" -machine virt -accel tcg"
- 	suffix="arm"
- 	if [[ "${bitness}" == "64" ]]; then
--		BOARD="qemu_arm64"
-+		if [ -n "${xpl}" ]; then
-+			BOARD="qemu_arm64_spl"
-+		else
-+			BOARD="qemu_arm64"
-+		fi
- 		qemu=qemu-system-aarch64
- 		extra+=" -cpu cortex-a57"
- 		suffix="arm64"
+-/**
+- * bloblist_check_reg_conv() - Check whether the bloblist is compliant to
+- *			       the register conventions according to the
+- *			       Firmware Handoff spec.
+- *
+- * @rfdt:  Register that holds the FDT base address.
+- * @rzero: Register that must be zero.
+- * @rsig:  Register that holds signature and register conventions version.
+- * @xlist: Register that holds the transfer list.
+- * Return: 0 if OK, -EIO if the bloblist is not compliant to the register
+- *	   conventions.
+- */
+-int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig, ulong xlist);
+-
+-/**
+- * xferlist_from_boot_arg() - Get bloblist from the boot args.
+- *
+- * @addr: Address of the bloblist
+- * Return: 0 if OK, else on error
+- */
+-int xferlist_from_boot_arg(ulong *addr);
+-
+ #endif /* __BLOBLIST_H */
 -- 
 2.43.0
 
