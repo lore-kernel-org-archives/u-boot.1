@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33EA5C3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3884CC3ABCB
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 396F3829CD;
-	Sat, 10 May 2025 13:06:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 816F682A0D;
+	Sat, 10 May 2025 13:06:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LGP9kBP0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xb5pAwIB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D033682A55; Sat, 10 May 2025 13:06:09 +0200 (CEST)
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
+ id 51A6E82AA3; Sat, 10 May 2025 13:06:12 +0200 (CEST)
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
+ [IPv6:2a00:1450:4864:20::642])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A313782A8D
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:06:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AA9282977
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:06:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x544.google.com with SMTP id
- 4fb4d7f45d1cf-5fca2805ca4so2612069a12.1
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:06:06 -0700 (PDT)
+Received: by mail-ej1-x642.google.com with SMTP id
+ a640c23a62f3a-ad1b94382b8so403251866b.0
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:06:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746875166; x=1747479966; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746875168; x=1747479968; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RRbvIzIOvkrlsm839FXuc5CRDTBnpHOTQfJt/FUL79k=;
- b=LGP9kBP0V2ayF5RiH+x7G4q66XpCOnfuqXgozSmvpPq9Pm+Um994vYygXrLv0CLr1S
- U546BV6vNJdyzy15BdcwZl/wih1puIG7kFvUP6qA8lpF0atzQZ2LXk+BZZGQb+sbYNBC
- iqlHdesU6gGFcH1gAx/YRUQi2OhWHB87YDyv8=
+ bh=JADCIgySAc7j1iSViJJxBedmJls05yEJ/k7EXER0tpw=;
+ b=Xb5pAwIBR8Pk1POoAEhkmKIW3aslkQwwzkeq3cl7C0ALVUd+BNlEg/gxF1MGv2feG+
+ RzMCa7IHoXZjJYG92uspnedSh2n3ubdjnDKgd05X7bk7b2a1Rdkn3Qg0rDLCzPz0/eSg
+ Jji8h192CZ0MRYxGcr3shQD2ph/xlmuDs4i6k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746875166; x=1747479966;
+ d=1e100.net; s=20230601; t=1746875168; x=1747479968;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RRbvIzIOvkrlsm839FXuc5CRDTBnpHOTQfJt/FUL79k=;
- b=kBNPLH8gHJDfVh4R+3AFclad+98OxjvuSvfrodcCmMO55F++BBkBHkhvDKM7OU/KWj
- qLm18taDckVui3jFCPBLeP/39tqyAMbjImoajkwQu04Qb42LNrqHU+FnPmzCtSUWttDA
- rlUB+rGYhgtDcUHc6qZe+zrKo+eDq5ZttzSdNY64JchS6yxqQMkMzEIW6YLYDdaIHj76
- zDcGEaLw9PXlXhpBvXoH3QsBiv5IS6HAoyuHXbUbuA4KlN2vPEiCo/zmBS4XxtGd7JlQ
- JovjTqVGYn4bRT2XUgDpQSHQl8A0RzVQKzdxqG66pUgpazNjEAss3l5J5gnk3eywRiTT
- /hng==
-X-Gm-Message-State: AOJu0YxphOoP3Warn6GnOFgLX6h1JRa9MfgVfPCU7kZswT3XgeFiedrS
- 5zhN+7S6nYoKmnLicsOBILvnm3EE/I8UPSZ5vg1v4XwVy+iwBlnb6Bpvkg0L5aTUHMeUYaMYQxR
- wvCP8Eb/JlNgM
-X-Gm-Gg: ASbGnctRb2OhWbnjLPnoGf4nKqffLev18mRVYTXduhjZtbYD6vOD7q9r4xRNFlYZObO
- cl4LtnbVkN2g0xl4uV76aWbPs1bTfHCI4qRsuZ6Xdq4Wln1Ng9+mSJlh6yeUc/qh0vT2GYU0RwH
- PHN4r8vcOR4WgsgAxAjK2YGyaIv2FWeZtHwSRknMTiqrdXd8olRQLCejrO0qrFRkEvVJhj0rGKJ
- suo4nMz1uVydEvzSSV9vPZjNCOcIPC2uLZxieyVQQE4gxnEojE58SCK8lR1cEkizTbsUmb+GZYw
- QGAj/gpGe8tPaff/c22QE/PrHyZchntd7IQTs4n+vDV25so=
-X-Google-Smtp-Source: AGHT+IHoPJbBf0pd9l2QimgpNIolQZhboz1UntcLPdO7Ng9zdGSyhz7Vwj7UnjTeLI+dQwMMHc044A==
-X-Received: by 2002:a17:907:3dac:b0:aca:d6fd:39a with SMTP id
- a640c23a62f3a-ad2192d4a88mr663416066b.51.1746875165134; 
- Sat, 10 May 2025 04:06:05 -0700 (PDT)
+ bh=JADCIgySAc7j1iSViJJxBedmJls05yEJ/k7EXER0tpw=;
+ b=Mv+Hpdg/isSYv25nmynfffeHs9KrWKVhs3XiP6I8q2ME1swnvg+ZRnFb5oXDFIQiMb
+ jY8O4/y5nlHgbKxTTHJ27LW9lf3i0yP1StqBPqdeIf9zrAROIcShobukp2Fi4zz9AQ2f
+ st0Ud6k+pMxladLJ5GGunABCdC6eiC27uGlHEgh0A+/rBcMB9KNloTNI1byUCQ/3YOIa
+ ulnsiRfcNJuBUfyOGj01VGDAo6KCKw3uFIjv84e76hVTVD7w9r+u2e7jIjKFgdnjYGyj
+ Vyxfh9Bjp7RLO6k/HFM5SxUasmsiQ4CJ0caLCUjVEGvk6Pzk2MHIey35ezEmcxwNN9ZH
+ rsbg==
+X-Gm-Message-State: AOJu0YyTxMlcjqmy8ARlCdJqrQYUimcbgqBQ/ZHMSV9/20MyZ8MedCp3
+ 1LvArZuRoDzDfafizp0q+omVZ/cY9clmAC63KwsA9fTvK8PLT0eMyxmMqawjGDW5W0WJxUddUKW
+ 8zNhCs3D0D4N3
+X-Gm-Gg: ASbGncsNrcXmB4kdnlyJYWJidikm+6uu2ovcThYT9tYVrYX8xD20C7qT2/2IPhiR56Z
+ zxhG0Dm2doCjcz7UvyTSSp4glRU6H29nbVrx5+cQ4IQ2CJKOAOy3SMN9U9IA4TTyTMdDuRr5ZjQ
+ y+w+uAgdVG/rEHbOHUHRxlx+JLIMOYQarseo94hT4erh7k5zXAKhYvejfOTN7dFLBRzmX8KanYw
+ mA7XQ5Q4cv+PkKfdzVfHESkSLFJLoa6zkjZhkhW3h1QSC+tiKusOOefKCPnDIeyqAYvSsoXZwOi
+ f5fjCKNOQXDPqCiGXPZRcNT7LWVFWzH5J8kb+gdZ6zKbYEA=
+X-Google-Smtp-Source: AGHT+IGOAtG+tPPOewwvz2ARPmkKly1uOBfnGS07/KFG3hvJTcyKg7fF7z+vxlxc1mYC0t/djb5B1g==
+X-Received: by 2002:a17:907:a286:b0:ac7:16ee:9112 with SMTP id
+ a640c23a62f3a-ad2187b49dcmr558226666b.0.1746875167120; 
+ Sat, 10 May 2025 04:06:07 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad2192c8b8asm300148866b.5.2025.05.10.04.06.03
+ a640c23a62f3a-ad2192c8b8asm300148866b.5.2025.05.10.04.06.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 04:06:03 -0700 (PDT)
+ Sat, 10 May 2025 04:06:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 10/25] patman: Add a helper for managing cseries
-Date: Sat, 10 May 2025 13:05:03 +0200
-Message-ID: <20250510110535.1453745-11-sjg@chromium.org>
+Subject: [PATCH 11/25] patman: Add a Cseries class
+Date: Sat, 10 May 2025 13:05:04 +0200
+Message-ID: <20250510110535.1453745-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510110535.1453745-1-sjg@chromium.org>
 References: <20250510110535.1453745-1-sjg@chromium.org>
@@ -94,1564 +94,1201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a module which includes helper functions for dealing with Cseries
-objects.
+This is the main class for dealing with series, across branches and the
+database.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/__init__.py    |    6 +-
- tools/patman/cser_helper.py | 1524 +++++++++++++++++++++++++++++++++++
- 2 files changed, 1527 insertions(+), 3 deletions(-)
- create mode 100644 tools/patman/cser_helper.py
+ tools/patman/__init__.py |    2 +-
+ tools/patman/cseries.py  | 1165 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 1166 insertions(+), 1 deletion(-)
+ create mode 100644 tools/patman/cseries.py
 
 diff --git a/tools/patman/__init__.py b/tools/patman/__init__.py
-index b6db0cc9511..83ac4eabf80 100644
+index 83ac4eabf80..c83fc1234ea 100644
 --- a/tools/patman/__init__.py
 +++ b/tools/patman/__init__.py
-@@ -1,9 +1,9 @@
+@@ -1,7 +1,7 @@
  # SPDX-License-Identifier: GPL-2.0+
  
  __all__ = [
--    'checkpatch', 'cmdline', 'commit', 'control',
--    'database', 'func_test',
--    'get_maintainer', '__main__', 'patchstream', 'patchwork', 'project',
-+    'checkpatch', 'cmdline', 'commit', 'control', 'cser_helper',
-+    'database', 'func_test', 'get_maintainer', '__main__', 'patchstream',
-+    'patchwork', 'project',
+-    'checkpatch', 'cmdline', 'commit', 'control', 'cser_helper',
++    'checkpatch', 'cmdline', 'commit', 'control', 'cser_helper', 'cseries',
+     'database', 'func_test', 'get_maintainer', '__main__', 'patchstream',
+     'patchwork', 'project',
      'send', 'series', 'settings', 'setup', 'status', 'test_checkpatch',
-     'test_common', 'test_settings'
- ]
-diff --git a/tools/patman/cser_helper.py b/tools/patman/cser_helper.py
+diff --git a/tools/patman/cseries.py b/tools/patman/cseries.py
 new file mode 100644
-index 00000000000..2841fcd9c20
+index 00000000000..bcbc4963cea
 --- /dev/null
-+++ b/tools/patman/cser_helper.py
-@@ -0,0 +1,1524 @@
++++ b/tools/patman/cseries.py
+@@ -0,0 +1,1165 @@
 +# SPDX-License-Identifier: GPL-2.0+
 +#
-+# Copyright 2025 Simon Glass <sjg@chromium.org>
++# Copyright 2025 Google LLC
 +#
-+"""Helper functions for handling the 'series' subcommand
++"""Handles the 'series' subcommand
 +"""
 +
 +import asyncio
-+from collections import OrderedDict, defaultdict, namedtuple
-+from datetime import datetime
-+import hashlib
-+import os
-+import re
-+import sys
-+import time
-+from types import SimpleNamespace
++from collections import OrderedDict, defaultdict
 +
-+import aiohttp
 +import pygit2
-+from pygit2.enums import CheckoutStrategy
 +
++from u_boot_pylib import cros_subprocess
 +from u_boot_pylib import gitutil
 +from u_boot_pylib import terminal
 +from u_boot_pylib import tout
 +
 +from patman import patchstream
-+from patman.database import Database, Pcommit, SerVer
-+from patman import patchwork
-+from patman.series import Series
++from patman import cser_helper
++from patman.cser_helper import AUTOLINK, oid
++from patman import send
 +from patman import status
 +
 +
-+# Tag to use for Change IDs
-+CHANGE_ID_TAG = 'Change-Id'
-+
-+# Length of hash to display
-+HASH_LEN = 10
-+
-+# Shorter version of some states, to save horizontal space
-+SHORTEN_STATE = {
-+    'handled-elsewhere': 'elsewhere',
-+    'awaiting-upstream': 'awaiting',
-+    'not-applicable': 'n/a',
-+    'changes-requested': 'changes',
-+}
-+
-+# Summary info returned from Cseries.link_auto_all()
-+AUTOLINK = namedtuple('autolink', 'name,version,link,desc,result')
-+
-+
-+def oid(oid_val):
-+    """Convert a hash string into a shortened hash
-+
-+    The number of hex digits git uses for showing hashes depends on the size of
-+    the repo. For the purposes of showing hashes to the user in lists, we use a
-+    fixed value for now
-+
-+    Args:
-+        str or Pygit2.oid: Hash value to shorten
-+
-+    Return:
-+        str: Shortened hash
-+    """
-+    return str(oid_val)[:HASH_LEN]
-+
-+
-+def split_name_version(in_name):
-+    """Split a branch name into its series name and its version
-+
-+    For example:
-+        'series' returns ('series', 1)
-+        'series3' returns ('series', 3)
-+    Args:
-+        in_name (str): Name to parse
-+
-+    Return:
-+        tuple:
-+            str: series name
-+            int: series version, or None if there is none in in_name
-+    """
-+    m_ver = re.match(r'([^0-9]*)(\d*)', in_name)
-+    version = None
-+    if m_ver:
-+        name = m_ver.group(1)
-+        if m_ver.group(2):
-+            version = int(m_ver.group(2))
-+    else:
-+        name = in_name
-+    return name, version
-+
-+
-+class CseriesHelper:
-+    """Helper functions for Cseries
++class Cseries(cser_helper.CseriesHelper):
++    """Database with information about series
 +
 +    This class handles database read/write as well as operations in a git
 +    directory to update series information.
 +    """
 +    def __init__(self, topdir=None, colour=terminal.COLOR_IF_TERMINAL):
-+        """Set up a new CseriesHelper
++        """Set up a new Cseries
 +
 +        Args:
 +            topdir (str): Top-level directory of the repo
 +            colour (terminal.enum): Whether to enable ANSI colour or not
-+
-+        Properties:
-+            gitdir (str): Git directory (typically topdir + '/.git')
-+            db (Database): Database handler
-+            col (terminal.Colour): Colour object
-+            _fake_time (float): Holds the current fake time for tests, in
-+                seconds
-+            _fake_sleep (func): Function provided by a test; called to fake a
-+                'time.sleep()' call and take whatever action it wants to take.
-+                The only argument is the (Float) time to sleep for; it returns
-+                nothing
-+            loop (asyncio event loop): Loop used for Patchwork operations
 +        """
-+        self.topdir = topdir
-+        self.gitdir = None
-+        self.db = None
-+        self.col = terminal.Color(colour)
-+        self._fake_time = None
-+        self._fake_sleep = None
-+        self.fake_now = None
-+        self.loop = asyncio.get_event_loop()
++        super().__init__(topdir, colour)
 +
-+    def open_database(self):
-+        """Open the database ready for use"""
-+        if not self.topdir:
-+            self.topdir = gitutil.get_top_level()
-+            if not self.topdir:
-+                raise ValueError('No git repo detected in current directory')
-+        self.gitdir = os.path.join(self.topdir, '.git')
-+        fname = f'{self.topdir}/.patman.db'
-+
-+        # For the first instance, start it up with the expected schema
-+        self.db, is_new = Database.get_instance(fname)
-+        if is_new:
-+            self.db.start()
-+        else:
-+            # If a previous test has already checked the schema, just open it
-+            self.db.open_it()
-+
-+    def close_database(self):
-+        """Close the database"""
-+        if self.db:
-+            self.db.close()
-+
-+    def commit(self):
-+        """Commit changes to the database"""
-+        self.db.commit()
-+
-+    def rollback(self):
-+        """Roll back changes to the database"""
-+        self.db.rollback()
-+
-+    def set_fake_time(self, fake_sleep):
-+        """Setup the fake timer
-+
-+        Args:
-+            fake_sleep (func(float)): Function to call to fake a sleep
-+        """
-+        self._fake_time = 0
-+        self._fake_sleep = fake_sleep
-+
-+    def inc_fake_time(self, inc_s):
-+        """Increment the fake time
-+
-+        Args:
-+            inc_s (float): Amount to increment the fake time by
-+        """
-+        self._fake_time += inc_s
-+
-+    def get_time(self):
-+        """Get the current time, fake or real
-+
-+        This function should always be used to read the time so that faking the
-+        time works correctly in tests.
-+
-+        Return:
-+            float: Fake time, if time is being faked, else real time
-+        """
-+        if self._fake_time is not None:
-+            return self._fake_time
-+        return time.monotonic()
-+
-+    def sleep(self, time_s):
-+        """Sleep for a while
-+
-+        This function should always be used to sleep so that faking the time
-+        works correctly in tests.
-+
-+        Args:
-+            time_s (float): Amount of seconds to sleep for
-+        """
-+        print(f'Sleeping for {time_s} seconds')
-+        if self._fake_time is not None:
-+            self._fake_sleep(time_s)
-+        else:
-+            time.sleep(time_s)
-+
-+    def get_now(self):
-+        """Get the time now
-+
-+        This function should always be used to read the datetime, so that
-+        faking the time works correctly in tests
-+
-+        Return:
-+            DateTime object
-+        """
-+        if self.fake_now:
-+            return self.fake_now
-+        return datetime.now()
-+
-+    def get_ser_ver_list(self):
-+        """Get a list of patchwork entries from the database
-+
-+        Return:
-+            list of SER_VER
-+        """
-+        return self.db.ser_ver_get_list()
-+
-+    def get_ser_ver_dict(self):
-+        """Get a dict of patchwork entries from the database
-+
-+        Return: dict contain all records:
-+            key (int): ser_ver id
-+            value (SER_VER): Information about one ser_ver record
-+        """
-+        svlist = self.get_ser_ver_list()
-+        svdict = {}
-+        for sver in svlist:
-+            svdict[sver.idnum] = sver
-+        return svdict
-+
-+    def get_upstream_dict(self):
-+        """Get a list of upstream entries from the database
-+
-+        Return:
-+            OrderedDict:
-+                key (str): upstream name
-+                value (str): url
-+        """
-+        return self.db.upstream_get_dict()
-+
-+    def get_pcommit_dict(self, find_svid=None):
-+        """Get a dict of pcommits entries from the database
-+
-+        Args:
-+            find_svid (int): If not None, finds the records associated with a
-+                particular series and version
-+
-+        Return:
-+            OrderedDict:
-+                key (int): record ID if find_svid is None, else seq
-+                value (PCOMMIT): record data
-+        """
-+        pcdict = OrderedDict()
-+        for rec in self.db.pcommit_get_list(find_svid):
-+            if find_svid is not None:
-+                pcdict[rec.seq] = rec
-+            else:
-+                pcdict[rec.idnum] = rec
-+        return pcdict
-+
-+    def _get_series_info(self, idnum):
-+        """Get information for a series from the database
-+
-+        Args:
-+            idnum (int): Series ID to look up
-+
-+        Return: tuple:
-+            str: Series name
-+            str: Series description
-+
-+        Raises:
-+            ValueError: Series is not found
-+        """
-+        return self.db.series_get_info(idnum)
-+
-+    def prep_series(self, name, end=None):
-+        """Prepare to work with a series
-+
-+        Args:
-+            name (str): Branch name with version appended, e.g. 'fix2'
-+            end (str or None): Commit to end at, e.g. 'my_branch~16'. Only
-+                commits up to that are processed. None to process commits up to
-+                the upstream branch
-+
-+        Return: tuple:
-+            str: Series name, e.g. 'fix'
-+            Series: Collected series information, including name
-+            int: Version number, e.g. 2
-+            str: Message to show
-+        """
-+        ser, version = self._parse_series_and_version(name, None)
-+        if not name:
-+            name = self._get_branch_name(ser.name, version)
-+
-+        # First check we have a branch with this name
-+        if not gitutil.check_branch(name, git_dir=self.gitdir):
-+            raise ValueError(f"No branch named '{name}'")
-+
-+        count = gitutil.count_commits_to_branch(name, self.gitdir, end)
-+        if not count:
-+            raise ValueError('Cannot detect branch automatically: '
-+                             'Perhaps use -U <upstream-commit> ?')
-+
-+        series = patchstream.get_metadata(name, 0, count, git_dir=self.gitdir)
-+        self._copy_db_fields_to(series, ser)
-+        msg = None
-+        if end:
-+            repo = pygit2.init_repository(self.gitdir)
-+            target = repo.revparse_single(end)
-+            first_line = target.message.splitlines()[0]
-+            msg = f'Ending before {oid(target.id)} {first_line}'
-+
-+        return name, series, version, msg
-+
-+    def _copy_db_fields_to(self, series, in_series):
-+        """Copy over fields used by Cseries from one series to another
-+
-+        This copes desc, idnum and name
-+
-+        Args:
-+            series (Series): Series to copy to
-+            in_series (Series): Series to copy from
-+        """
-+        series.desc = in_series.desc
-+        series.idnum = in_series.idnum
-+        series.name = in_series.name
-+
-+    def _handle_mark(self, branch_name, in_series, version, mark,
-+                     allow_unmarked, force_version, dry_run):
-+        """Handle marking a series, checking for unmarked commits, etc.
++    def add(self, branch_name, desc=None, mark=False, allow_unmarked=False,
++            end=None, force_version=False, dry_run=False):
++        """Add a series (or new version of a series) to the database
 +
 +        Args:
 +            branch_name (str): Name of branch to sync, or None for current one
-+            in_series (Series): Series object
-+            version (int): branch version, e.g. 2 for 'mychange2'
-+            mark (bool): True to mark each commit with a change ID
++            desc (str): Description to use, or None to use the series subject
++            mark (str): True to mark each commit with a change ID
 +            allow_unmarked (str): True to not require each commit to be marked
++            end (str): Add only commits up to but exclu
 +            force_version (bool): True if ignore a Series-version tag that
 +                doesn't match its branch name
 +            dry_run (bool): True to do a dry run
-+
-+        Returns:
-+            Series: New series object, if the series was marked;
-+                copy_db_fields_to() is used to copy fields over
-+
-+        Raises:
-+            ValueError: Series being unmarked when it should be marked, etc.
 +        """
-+        series = in_series
-+        if 'version' in series and int(series.version) != version:
-+            msg = (f"Series name '{branch_name}' suggests version {version} "
-+                   f"but Series-version tag indicates {series.version}")
-+            if not force_version:
-+                raise ValueError(msg + ' (see --force-version)')
++        name, ser, version, msg = self.prep_series(branch_name, end)
++        tout.info(f"Adding series '{ser.name}' v{version}: mark {mark} "
++                  f'allow_unmarked {allow_unmarked}')
++        if msg:
++            tout.info(msg)
++        if desc is None:
++            if not ser.cover:
++                raise ValueError(f"Branch '{name}' has no cover letter - "
++                                 'please provide description')
++            desc = ser['cover'][0]
 +
-+            tout.warning(msg)
-+            tout.warning(f'Updating Series-version tag to version {version}')
-+            self.update_series(branch_name, series, int(series.version),
-+                                new_name=None, dry_run=dry_run,
-+                                add_vers=version)
++        ser = self._handle_mark(name, ser, version, mark, allow_unmarked,
++                                force_version, dry_run)
++        link = ser.get_link_for_version(version)
 +
-+            # Collect the commits again, as the hashes have changed
-+            series = patchstream.get_metadata(branch_name, 0,
-+                                              len(series.commits),
-+                                              git_dir=self.gitdir)
-+            self._copy_db_fields_to(series, in_series)
++        msg = 'Added'
++        added = False
++        series_id = self.db.series_find_by_name(ser.name)
++        if not series_id:
++            series_id = self.db.series_add(ser.name, desc)
++            added = True
++            msg += f" series '{ser.name}'"
 +
-+        if mark:
-+            add_oid = self._mark_series(branch_name, series, dry_run=dry_run)
++        if version not in self._get_version_list(series_id):
++            svid = self.db.ser_ver_add(series_id, version, link)
++            msg += f" v{version}"
++            if not added:
++                msg += f" to existing series '{ser.name}'"
++            added = True
 +
-+            # Collect the commits again, as the hashes have changed
-+            series = patchstream.get_metadata(add_oid, 0, len(series.commits),
-+                                              git_dir=self.gitdir)
-+            self._copy_db_fields_to(series, in_series)
++            self._add_series_commits(ser, svid)
++            count = len(ser.commits)
++            msg += f" ({count} commit{'s' if count > 1 else ''})"
++        if not added:
++            tout.info(f"Series '{ser.name}' v{version} already exists")
++            msg = None
++        elif not dry_run:
++            self.commit()
++        else:
++            self.rollback()
++            series_id = None
++        ser.desc = desc
++        ser.idnum = series_id
 +
-+        bad_count = 0
-+        for commit in series.commits:
-+            if not commit.change_id:
-+                bad_count += 1
-+        if bad_count and not allow_unmarked:
-+            raise ValueError(
-+                f'{bad_count} commit(s) are unmarked; please use -m or -M')
++        if msg:
++            tout.info(msg)
++        if dry_run:
++            tout.info('Dry run completed')
 +
-+        return series
-+
-+    def _add_series_commits(self, series, svid):
-+        """Add a commits from a series into the database
++    def decrement(self, series, dry_run=False):
++        """Decrement a series to the previous version and delete the branch
 +
 +        Args:
-+            series (Series): Series containing commits to add
-+            svid (int): ser_ver-table ID to use for each commit
++            series (str): Name of series to use, or None to use current branch
++            dry_run (bool): True to do a dry run
 +        """
-+        to_add = [Pcommit(None, seq, commit.subject, None, commit.change_id,
-+                          None, None, None)
-+                  for seq, commit in enumerate(series.commits)]
++        ser = self._parse_series(series)
++        if not ser.idnum:
++            raise ValueError(f"Series '{ser.name}' not found in database")
 +
-+        self.db.pcommit_add_list(svid, to_add)
++        max_vers = self._series_max_version(ser.idnum)
++        if max_vers < 2:
++            raise ValueError(f"Series '{ser.name}' only has one version")
 +
-+    def get_series_by_name(self, name, include_archived=False):
-+        """Get a Series object from the database by name
++        tout.info(f"Removing series '{ser.name}' v{max_vers}")
++
++        new_max = max_vers - 1
++
++        repo = pygit2.init_repository(self.gitdir)
++        if not dry_run:
++            name = self._get_branch_name(ser.name, new_max)
++            branch = repo.lookup_branch(name)
++            try:
++                repo.checkout(branch)
++            except pygit2.errors.GitError:
++                tout.warning(f"Failed to checkout branch {name}")
++                raise
++
++            del_name = f'{ser.name}{max_vers}'
++            del_branch = repo.lookup_branch(del_name)
++            branch_oid = del_branch.peel(pygit2.enums.ObjectType.COMMIT).oid
++            del_branch.delete()
++            print(f"Deleted branch '{del_name}' {oid(branch_oid)}")
++
++        self.db.ser_ver_remove(ser.idnum, max_vers)
++        if not dry_run:
++            self.commit()
++        else:
++            self.rollback()
++
++    def increment(self, series_name, dry_run=False):
++        """Increment a series to the next version and create a new branch
 +
 +        Args:
-+            name (str): Name of series to get
-+            include_archived (bool): True to search in archives series
-+
-+        Return:
-+            Series: Object containing series info, or None if none
++            series_name (str): Name of series to use, or None to use current
++                branch
++            dry_run (bool): True to do a dry run
 +        """
-+        idnum = self.db.series_find_by_name(name, include_archived)
-+        if not idnum:
-+            return None
-+        name, desc = self.db.series_get_info(idnum)
++        ser = self._parse_series(series_name)
++        if not ser.idnum:
++            raise ValueError(f"Series '{ser.name}' not found in database")
 +
-+        return Series.from_fields(idnum, name, desc)
++        max_vers = self._series_max_version(ser.idnum)
 +
-+    def _get_branch_name(self, name, version):
-+        """Get the branch name for a particular version
++        branch_name = self._get_branch_name(ser.name, max_vers)
++        on_branch = gitutil.get_branch(self.gitdir) == branch_name
++        svid = self.get_series_svid(ser.idnum, max_vers)
++        pwc = self.get_pcommit_dict(svid)
++        count = len(pwc.values())
++        series = patchstream.get_metadata(branch_name, 0, count,
++                                          git_dir=self.gitdir)
++        tout.info(f"Increment '{ser.name}' v{max_vers}: {count} patches")
 +
-+        Args:
-+            name (str): Base name of branch
-+            version (int): Version number to use
-+        """
-+        return name + (f'{version}' if version > 1 else '')
++        # Create a new branch
++        vers = max_vers + 1
++        new_name = self._join_name_version(ser.name, vers)
 +
-+    def _ensure_version(self, ser, version):
-+        """Ensure that a version exists in a series
++        self.update_series(branch_name, series, max_vers, new_name, dry_run,
++                            add_vers=vers, switch=on_branch)
 +
-+        Args:
-+            ser (Series): Series information, with idnum and name used here
-+            version (int): Version to check
++        old_svid = self.get_series_svid(ser.idnum, max_vers)
++        pcd = self.get_pcommit_dict(old_svid)
 +
-+        Returns:
-+            list of int: List of versions
-+        """
-+        versions = self._get_version_list(ser.idnum)
-+        if version not in versions:
-+            raise ValueError(
-+                f"Series '{ser.name}' does not have a version {version}")
-+        return versions
++        svid = self.db.ser_ver_add(ser.idnum, vers)
++        self.db.pcommit_add_list(svid, pcd.values())
++        if not dry_run:
++            self.commit()
++        else:
++            self.rollback()
 +
-+    def _set_link(self, ser_id, name, version, link, update_commit,
-+                  dry_run=False):
++        # repo.head.set_target(amended)
++        tout.info(f'Added new branch {new_name}')
++        if dry_run:
++            tout.info('Dry run completed')
++
++    def link_set(self, series_name, version, link, update_commit):
 +        """Add / update a series-links link for a series
 +
 +        Args:
-+            ser_id (int): Series ID number
-+            name (str): Series name (used to find the branch)
-+            version (int): Version number (used to update the database)
++            series_name (str): Name of series to use, or None to use current
++                branch
++            version (int): Version number, or None to detect from name
 +            link (str): Patchwork link-string for the series
 +            update_commit (bool): True to update the current commit with the
 +                link
-+            dry_run (bool): True to do a dry run
-+
-+        Return:
-+            bool: True if the database was update, False if the ser_id or
-+                version was not found
 +        """
-+        if update_commit:
-+            branch_name = self._get_branch_name(name, version)
-+            _, ser, max_vers, _ = self.prep_series(branch_name)
-+            self.update_series(branch_name, ser, max_vers, add_vers=version,
-+                                dry_run=dry_run, add_link=link)
-+        if link is None:
-+            link = ''
-+        updated = 1 if self.db.ser_ver_set_link(ser_id, version, link) else 0
-+        if dry_run:
-+            self.rollback()
-+        else:
-+            self.commit()
++        ser, version = self._parse_series_and_version(series_name, version)
++        self._ensure_version(ser, version)
 +
-+        return updated
++        self._set_link(ser.idnum, ser.name, version, link, update_commit)
++        self.commit()
++        tout.info(f"Setting link for series '{ser.name}' v{version} to {link}")
 +
-+    def _get_autolink_dict(self, sdict, link_all_versions):
-+        """Get a dict of ser_vers to fetch, along with their patchwork links
-+
-+        Note that this returns items that already have links, as well as those
-+        without links
++    def link_get(self, series, version):
++        """Get the patchwork link for a version of a series
 +
 +        Args:
-+            sdict:
-+                key: series ID
-+                value: Series with idnum, name and desc filled out
++            series (str): Name of series to use, or None to use current branch
++            version (int): Version number or None for current
++
++        Return:
++            str: Patchwork link as a string, e.g. '12325'
++        """
++        ser, version = self._parse_series_and_version(series, version)
++        self._ensure_version(ser, version)
++        return self.db.ser_ver_get_link(ser.idnum, version)
++
++    def link_search(self, pwork, series, version):
++        """Search patch for the link for a series
++
++        Returns either the single match, or None, in which case the second part
++        of the tuple is filled in
++
++        Args:
++            pwork (Patchwork): Patchwork object to use
++            series (str): Series name to search for, or None for current series
++                that is checked out
++            version (int): Version to search for, or None for current version
++                detected from branch name
++
++        Returns:
++            tuple:
++                int: ID of the series found, or None
++                list of possible matches, or None, each a dict:
++                    'id': series ID
++                    'name': series name
++                str: series name
++                int: series version
++                str: series description
++        """
++        _, ser, version, _, _, _, _, _ = self._get_patches(series, version)
++
++        if not ser.desc:
++            raise ValueError(f"Series '{ser.name}' has an empty description")
++
++        pws, options = self.loop.run_until_complete(pwork.find_series(
++            ser, version))
++        return pws, options, ser.name, version, ser.desc
++
++    def link_auto(self, pwork, series, version, update_commit, wait_s=0):
++        """Automatically find a series link by looking in patchwork
++
++        Args:
++            pwork (Patchwork): Patchwork object to use
++            series (str): Series name to search for, or None for current series
++                that is checked out
++            version (int): Version to search for, or None for current version
++                detected from branch name
++            update_commit (bool): True to update the current commit with the
++                link
++            wait_s (int): Number of seconds to wait for the autolink to succeed
++        """
++        start = self.get_time()
++        stop = start + wait_s
++        sleep_time = 5
++        while True:
++            pws, options, name, version, desc = self.link_search(
++                pwork, series, version)
++            if pws:
++                if wait_s:
++                    tout.info('Link completed after '
++                              f'{self.get_time() - start} seconds')
++                break
++
++            print(f"Possible matches for '{name}' v{version} desc '{desc}':")
++            print('  Link  Version  Description')
++            for opt in options:
++                print(f"{opt['id']:6}  {opt['version']:7}  {opt['name']}")
++            if not wait_s or self.get_time() > stop:
++                delay = f' after {wait_s} seconds' if wait_s else ''
++                raise ValueError(f"Cannot find series '{desc}{delay}'")
++
++            self.sleep(sleep_time)
++
++        self.link_set(name, version, pws, update_commit)
++
++    def link_auto_all(self, pwork, update_commit, link_all_versions,
++                      replace_existing, dry_run, show_summary=True):
++        """Automatically find a series link by looking in patchwork
++
++        Args:
++            pwork (Patchwork): Patchwork object to use
++            update_commit (bool): True to update the current commit with the
++                link
 +            link_all_versions (bool): True to sync all versions of a series,
 +                False to sync only the latest version
-+
-+        Return: tuple:
-+            dict:
-+                key (int): svid
-+                value (tuple):
-+                   int: series ID
-+                   str: series name
-+                   int: series version
-+                   str: patchwork link for the series, or None if none
-+                   desc: cover-letter name / series description
-+        """
-+        svdict = self.get_ser_ver_dict()
-+        to_fetch = {}
-+
-+        if link_all_versions:
-+            for svinfo in self.get_ser_ver_list():
-+                ser = sdict[svinfo.series_id]
-+
-+                pwc = self.get_pcommit_dict(svinfo.idnum)
-+                count = len(pwc)
-+                branch = self._join_name_version(ser.name, svinfo.version)
-+                series = patchstream.get_metadata(branch, 0, count,
-+                                                  git_dir=self.gitdir)
-+                self._copy_db_fields_to(series, ser)
-+
-+                to_fetch[svinfo.idnum] = (svinfo.series_id, series.name,
-+                                          svinfo.version, svinfo.link, series)
-+        else:
-+            # Find the maximum version for each series
-+            max_vers = self._series_all_max_versions()
-+
-+            # Get a list of links to fetch
-+            for svid, ser_id, version in max_vers:
-+                svinfo = svdict[svid]
-+                ser = sdict[ser_id]
-+
-+                pwc = self.get_pcommit_dict(svid)
-+                count = len(pwc)
-+                branch = self._join_name_version(ser.name, version)
-+                series = patchstream.get_metadata(branch, 0, count,
-+                                                  git_dir=self.gitdir)
-+                self._copy_db_fields_to(series, ser)
-+
-+                to_fetch[svid] = (ser_id, series.name, version, svinfo.link,
-+                                  series)
-+        return to_fetch
-+
-+    def _get_version_list(self, idnum):
-+        """Get a list of the versions available for a series
-+
-+        Args:
-+            idnum (int): ID of series to look up
++            replace_existing (bool): True to sync a series even if it already
++                has a link
++            dry_run (bool): True to do a dry run
++            show_summary (bool): True to show a summary of how things went
 +
 +        Return:
-+            str: List of versions
++            OrderedDict of summary info:
++                key (int): ser_ver ID
++                value (AUTOLINK): result of autolinking on this ser_ver
 +        """
-+        if idnum is None:
-+            raise ValueError('Unknown series idnum')
-+        return self.db.series_get_version_list(idnum)
++        sdict = self.db.series_get_dict_by_id()
++        all_ser_vers = self._get_autolink_dict(sdict, link_all_versions)
 +
-+    def _join_name_version(self, in_name, version):
-+        """Convert a series name plus a version into a branch name
++        # Get rid of things without a description
++        valid = {}
++        state = {}
++        no_desc = 0
++        not_found = 0
++        updated = 0
++        failed = 0
++        already = 0
++        for svid, (ser_id, name, version, link, desc) in all_ser_vers.items():
++            if link and not replace_existing:
++                state[svid] = f'already:{link}'
++                already += 1
++            elif desc:
++                valid[svid] = ser_id, version, link, desc
++            else:
++                no_desc += 1
++                state[svid] = 'missing description'
 +
-+        For example:
-+            ('series', 1) returns 'series'
-+            ('series', 3) returns 'series3'
++        results, requests = self.loop.run_until_complete(
++            pwork.find_series_list(valid))
 +
-+        Args:
-+            in_name (str): Series name
-+            version (int): Version number
++        for svid, ser_id, link, _ in results:
++            if link:
++                version = all_ser_vers[svid][2]
++                if self._set_link(ser_id, sdict[ser_id].name, version,
++                                  link, update_commit, dry_run=dry_run):
++                    updated += 1
++                    state[svid] = f'linked:{link}'
++                else:
++                    failed += 1
++                    state[svid] = 'failed'
++            else:
++                not_found += 1
++                state[svid] = 'not found'
 +
-+        Return:
-+            str: associated branch name
-+        """
-+        if version == 1:
-+            return in_name
-+        return f'{in_name}{version}'
++        # Create a summary sorted by name and version
++        summary = OrderedDict()
++        for svid in sorted(all_ser_vers, key=lambda k: all_ser_vers[k][1:2]):
++            _, name, version, link, ser = all_ser_vers[svid]
++            summary[svid] = AUTOLINK(name, version, link, ser.desc,
++                                     state[svid])
 +
-+    def _parse_series(self, name, include_archived=False):
-+        """Parse the name of a series, or detect it from the current branch
++        if show_summary:
++            msg = f'{updated} series linked'
++            if already:
++                msg += f', {already} already linked'
++            if not_found:
++                msg += f', {not_found} not found'
++            if no_desc:
++                msg += f', {no_desc} missing description'
++            if failed:
++                msg += f', {failed} updated failed'
++            tout.info(msg + f' ({requests} requests)')
 +
-+        Args:
-+            name (str or None): name of series
-+            include_archived (bool): True to search in archives series
-+
-+        Return:
-+            Series: New object with the name set; idnum is also set if the
-+                series exists in the database
-+        """
-+        if not name:
-+            name = gitutil.get_branch(self.gitdir)
-+        name, _ = split_name_version(name)
-+        ser = self.get_series_by_name(name, include_archived)
-+        if not ser:
-+            ser = Series()
-+            ser.name = name
-+        return ser
-+
-+    def _parse_series_and_version(self, in_name, in_version):
-+        """Parse name and version of a series, or detect from current branch
-+
-+        Figures out the name from in_name, or if that is None, from the current
-+            branch.
-+
-+        Uses the version in_version, or if that is None, uses the int at the
-+        end of the name (e.g. 'series' is version 1, 'series4' is version 4)
-+
-+        Args:
-+            in_name (str or None): name of series
-+            in_version (str or None): version of series
-+
-+        Return:
-+            tuple:
-+                Series: New object with the name set; idnum is also set if the
-+                    series exists in the database
-+                int: Series version-number detected from the name
-+                    (e.g. 'fred' is version 1, 'fred2' is version 2)
-+        """
-+        name = in_name
-+        if not name:
-+            name = gitutil.get_branch(self.gitdir)
-+            if not name:
-+                raise ValueError('No branch detected: please use -s <series>')
-+        name, version = split_name_version(name)
-+        if not name:
-+            raise ValueError(f"Series name '{in_name}' cannot be a number, "
-+                             f"use '<name><version>'")
-+        if in_version:
-+            if version and version != in_version:
-+                tout.warning(
-+                    f"Version mismatch: -V has {in_version} but branch name "
-+                    f'indicates {version}')
-+            version = in_version
-+        if not version:
-+            version = 1
-+        if version > 99:
-+            raise ValueError(f"Version {version} exceeds 99")
-+        ser = self.get_series_by_name(name)
-+        if not ser:
-+            ser = Series()
-+            ser.name = name
-+        return ser, version
-+
-+    def _series_get_version_stats(self, idnum, vers):
-+        """Get the stats for a series
-+
-+        Args:
-+            idnum (int): ID number of series to process
-+            vers (int): Version number to process
-+
-+        Return:
-+            tuple:
-+                str: Status string, '<accepted>/<count>'
-+                OrderedDict:
-+                    key (int): record ID if find_svid is None, else seq
-+                    value (PCOMMIT): record data
-+        """
-+        svid, link = self._get_series_svid_link(idnum, vers)
-+        pwc = self.get_pcommit_dict(svid)
-+        count = len(pwc.values())
-+        if link:
-+            accepted = 0
-+            for pcm in pwc.values():
-+                accepted += pcm.state == 'accepted'
-+        else:
-+            accepted = '-'
-+        return f'{accepted}/{count}', pwc
-+
-+    def get_series_svid(self, series_id, version):
-+        """Get the patchwork ID of a series version
-+
-+        Args:
-+            series_id (int): id of the series to look up
-+            version (int): version number to look up
-+
-+        Return:
-+            str: link found
-+
-+        Raises:
-+            ValueError: No matching series found
-+        """
-+        return self._get_series_svid_link(series_id, version)[0]
-+
-+    def _get_series_svid_link(self, series_id, version):
-+        """Get the patchwork ID of a series version
-+
-+        Args:
-+            series_id (int): series ID to look up
-+            version (int): version number to look up
-+
-+        Return:
-+            tuple:
-+                int: record id
-+                str: link
-+        """
-+        recs = self.get_ser_ver(series_id, version)
-+        return recs.idnum, recs.link
-+
-+    def get_ser_ver(self, series_id, version):
-+        """Get the patchwork details for a series version
-+
-+        Args:
-+            series_id (int): series ID to look up
-+            version (int): version number to look up
-+
-+        Return:
-+            SER_VER: Requested information
-+
-+        Raises:
-+            ValueError: There is no matching idnum/version
-+        """
-+        return self.db.ser_ver_get_for_series(series_id, version)
-+
-+    def _prepare_process(self, name, count, new_name=None, quiet=False):
-+        """Get ready to process all commits in a branch
-+
-+        Args:
-+            name (str): Name of the branch to process
-+            count (int): Number of commits
-+            new_name (str or None): New name, if a new branch is to be created
-+            quiet (bool): True to avoid output (used for testing)
-+
-+        Return: tuple:
-+            pygit2.repo: Repo to use
-+            pygit2.oid: Upstream commit, onto which commits should be added
-+            Pygit2.branch: Original branch, for later use
-+            str: (Possibly new) name of branch to process
-+            list of Commit: commits to process, in order
-+            pygit2.Reference: Original head before processing started
-+        """
-+        upstream_guess = gitutil.get_upstream(self.gitdir, name)[0]
-+
-+        tout.debug(f"_process_series name '{name}' new_name '{new_name}' "
-+                   f"upstream_guess '{upstream_guess}'")
-+        dirty = gitutil.check_dirty(self.gitdir, self.topdir)
-+        if dirty:
-+            raise ValueError(
-+                f"Modified files exist: use 'git status' to check: "
-+                f'{dirty[:5]}')
-+        repo = pygit2.init_repository(self.gitdir)
-+
-+        commit = None
-+        upstream_name = None
-+        if upstream_guess:
-+            try:
-+                upstream = repo.lookup_reference(upstream_guess)
-+                upstream_name = upstream.name
-+                commit = upstream.peel(pygit2.enums.ObjectType.COMMIT)
-+            except KeyError:
-+                pass
-+            except pygit2.repository.InvalidSpecError as exc:
-+                print(f"Error '{exc}'")
-+        if not upstream_name:
-+            upstream_name = f'{name}~{count}'
-+            commit = repo.revparse_single(upstream_name)
-+
-+        branch = repo.lookup_branch(name)
-+        if not quiet:
-+            tout.info(
-+                f'Checking out upstream commit {upstream_name}: '
-+                f'{oid(commit.oid)}')
-+
-+        old_head = repo.head
-+        if old_head.shorthand == name:
-+            old_head = None
-+        else:
-+            old_head = repo.head
-+
-+        if new_name:
-+            name = new_name
-+        repo.set_head(commit.oid)
-+
-+        commits = []
-+        cmt = repo.get(branch.target)
-+        for _ in range(count):
-+            commits.append(cmt)
-+            cmt = cmt.parents[0]
-+
-+        return (repo, repo.head, branch, name, commit, list(reversed(commits)),
-+                old_head)
-+
-+    def _pick_commit(self, repo, cmt):
-+        """Apply a commit to the source tree, without committing it
-+
-+        _prepare_process() must be called before starting to pick commits
-+
-+        This function must be called before _finish_commit()
-+
-+        Note that this uses a cherry-pick method, creating a new tree_id each
-+        time, so can make source-code changes
-+
-+        Args:
-+            repo (pygit2.repo): Repo to use
-+            cmt (Commit): Commit to apply
-+
-+        Return: tuple:
-+            tree_id (pygit2.oid): Oid of index with source-changes applied
-+            commit (pygit2.oid): Old commit being cherry-picked
-+        """
-+        tout.detail(f"- adding {oid(cmt.hash)} {cmt}")
-+        repo.cherrypick(cmt.hash)
-+        if repo.index.conflicts:
-+            raise ValueError('Conflicts detected')
-+
-+        tree_id = repo.index.write_tree()
-+        cherry = repo.get(cmt.hash)
-+        tout.detail(f"cherry {oid(cherry.oid)}")
-+        return tree_id, cherry
-+
-+    def _finish_commit(self, repo, tree_id, commit, cur, msg=None):
-+        """Complete a commit
-+
-+        This must be called after _pick_commit().
-+
-+        Args:
-+            repo (pygit2.repo): Repo to use
-+            tree_id (pygit2.oid): Oid of index with source-changes applied; if
-+                None then the existing commit.tree_id is used
-+            commit (pygit2.oid): Old commit being cherry-picked
-+            cur (pygit2.reference): Reference to parent to use for the commit
-+            msg (str): Commit subject and message; None to use commit.message
-+        """
-+        if msg is None:
-+            msg = commit.message
-+        if not tree_id:
-+            tree_id = commit.tree_id
-+        repo.create_commit('HEAD', commit.author, commit.committer,
-+                           msg, tree_id, [cur.target])
-+        return repo.head
-+
-+    def _finish_process(self, repo, branch, name, cur, old_head, new_name=None,
-+                        switch=False, dry_run=False, quiet=False):
-+        """Finish processing commits
-+
-+        Args:
-+            repo (pygit2.repo): Repo to use
-+            branch (pygit2.branch): Branch returned by _prepare_process()
-+            name (str): Name of the branch to process
-+            new_name (str or None): New name, if a new branch is being created
-+            switch (bool): True to switch to the new branch after processing;
-+                otherwise HEAD remains at the original branch, as amended
-+            dry_run (bool): True to do a dry run, restoring the original tree
-+                afterwards
-+            quiet (bool): True to avoid output (used for testing)
-+
-+        Return:
-+            pygit2.reference: Final commit after everything is completed
-+        """
-+        repo.state_cleanup()
-+
-+        # Update the branch
-+        target = repo.revparse_single('HEAD')
-+        if not quiet:
-+            tout.info(f'Updating branch {name} from {oid(branch.target)} to '
-+                      f'{str(target.oid)[:HASH_LEN]}')
++            tout.info('')
++            tout.info(f"{'Name':15}  Version  {'Description':40}  Result")
++            border = f"{'-' * 15}  -------  {'-' * 40}  {'-' * 15}"
++            tout.info(border)
++            for name, version, link, desc, state in summary.values():
++                bright = True
++                if state.startswith('already'):
++                    col = self.col.GREEN
++                    bright = False
++                elif state.startswith('linked'):
++                    col = self.col.MAGENTA
++                else:
++                    col = self.col.RED
++                col_state = self.col.build(col, state, bright)
++                tout.info(f"{name:16.16} {version:7}  {desc or '':40.40}  "
++                          f'{col_state}')
++            tout.info(border)
 +        if dry_run:
-+            if new_name:
-+                repo.head.set_target(branch.target)
-+            else:
-+                branch_oid = branch.peel(pygit2.enums.ObjectType.COMMIT).oid
-+                repo.head.set_target(branch_oid)
-+            repo.head.set_target(branch.target)
-+            repo.set_head(branch.name)
-+        else:
-+            if new_name:
-+                new_branch = repo.branches.create(new_name, target)
-+                if branch.upstream:
-+                    new_branch.upstream = branch.upstream
-+                branch = new_branch
-+            else:
-+                branch.set_target(cur.target)
-+            repo.set_head(branch.name)
-+        if old_head:
-+            if not switch:
-+                repo.set_head(old_head.name)
-+        return target
++            tout.info('Dry run completed')
 +
-+    def make_change_id(self, commit):
-+        """Make a Change ID for a commit
++        return summary
 +
-+        This is similar to the gerrit script:
-+        git var GIT_COMMITTER_IDENT ; echo "$refhash" ; cat "README"; }
-+            | git hash-object --stdin)
++    def series_list(self):
++        """List all series
 +
-+        Args:
-+            commit (pygit2.commit): Commit to process
-+
-+        Return:
-+            Change ID in hex format
++        Lines all series along with their description, number of patches
++        accepted and  the available versions
 +        """
-+        sig = commit.committer
-+        val = hashlib.sha1()
-+        to_hash = f'{sig.name} <{sig.email}> {sig.time} {sig.offset}'
-+        val.update(to_hash.encode('utf-8'))
-+        val.update(str(commit.tree_id).encode('utf-8'))
-+        val.update(commit.message.encode('utf-8'))
-+        return val.hexdigest()
++        sdict = self.db.series_get_dict()
++        print(f"{'Name':15}  {'Description':40}  Accepted  Versions")
++        border = f"{'-' * 15}  {'-' * 40}  --------  {'-' * 15}"
++        print(border)
++        for name in sorted(sdict):
++            ser = sdict[name]
++            versions = self._get_version_list(ser.idnum)
++            stat = self._series_get_version_stats(
++                ser.idnum, self._series_max_version(ser.idnum))[0]
 +
-+    def _filter_commits(self, name, series, seq_to_drop):
-+        """Filter commits to drop one
++            vlist = ' '.join([str(ver) for ver in sorted(versions)])
 +
-+        This function rebases the current branch, dropping a single commit,
-+        thus changing the resulting code in the tree.
++            print(f'{name:16.16} {ser.desc:41.41} {stat.rjust(8)}  {vlist}')
++        print(border)
 +
-+        Args:
-+            name (str): Name of the branch to process
-+            series (Series): Series object
-+            seq_to_drop (int): Commit sequence to drop; commits are numbered
-+                from 0, which is the one after the upstream branch, to
-+                count - 1
-+        """
-+        count = len(series.commits)
-+        (repo, cur, branch, name, commit, _, _) = self._prepare_process(
-+            name, count, quiet=True)
-+        repo.checkout_tree(commit, strategy=CheckoutStrategy.FORCE |
-+                           CheckoutStrategy.RECREATE_MISSING)
-+        repo.set_head(commit.oid)
-+        for seq, cmt in enumerate(series.commits):
-+            if seq != seq_to_drop:
-+                tree_id, cherry = self._pick_commit(repo, cmt)
-+                cur = self._finish_commit(repo, tree_id, cherry, cur)
-+        self._finish_process(repo, branch, name, cur, None, quiet=True)
-+
-+    def process_series(self, name, series, new_name=None, switch=False,
-+                       dry_run=False):
-+        """Rewrite a series commit messages, leaving code alone
-+
-+        This uses a 'vals' namespace to pass things to the controlling
-+        function.
-+
-+        Each time _process_series() yields, it sets up:
-+            commit (Commit): The pygit2 commit that is being processed
-+            msg (str): Commit message, which can be modified
-+            info (str): Initially empty; the controlling function can add a
-+                short message here which will be shown to the user
-+            final (bool): True if this is the last commit to apply
-+            seq (int): Current sequence number in the commits to apply (0,,n-1)
-+
-+            It also sets git HEAD at the commit before this commit being
-+            processed
-+
-+        The function can change msg and info, e.g. to add or remove tags from
-+        the commit.
-+
-+        Args:
-+            name (str): Name of the branch to process
-+            series (Series): Series object
-+            new_name (str or None): New name, if a new branch is to be created
-+            switch (bool): True to switch to the new branch after processing;
-+                otherwise HEAD remains at the original branch, as amended
-+            dry_run (bool): True to do a dry run, restoring the original tree
-+                afterwards
-+
-+        Return:
-+            pygit.oid: oid of the new branch
-+        """
-+        count = len(series.commits)
-+        repo, cur, branch, name, _, commits, old_head = self._prepare_process(
-+            name, count, new_name)
-+        vals = SimpleNamespace()
-+        vals.final = False
-+        tout.info(f"Processing {count} commits from branch '{name}'")
-+
-+        # Record the message lines
-+        lines = []
-+        for seq, cmt in enumerate(series.commits):
-+            commit = commits[seq]
-+            vals.commit = commit
-+            vals.msg = commit.message
-+            vals.info = ''
-+            vals.final = seq == len(series.commits) - 1
-+            vals.seq = seq
-+            yield vals
-+
-+            cur = self._finish_commit(repo, None, commit, cur, vals.msg)
-+            lines.append([vals.info.strip(),
-+                          f'{oid(cmt.hash)} as {oid(cur.target)} {cmt}'])
-+
-+        max_len = max(len(info) for info, rest in lines) + 1
-+        for info, rest in lines:
-+            if info:
-+                info += ':'
-+            tout.info(f'- {info.ljust(max_len)} {rest}')
-+        target = self._finish_process(repo, branch, name, cur, old_head,
-+                                      new_name, switch, dry_run)
-+        vals.oid = target.oid
-+
-+    def _mark_series(self, name, series, dry_run=False):
-+        """Mark a series with Change-Id tags
-+
-+        Args:
-+            name (str): Name of the series to mark
-+            series (Series): Series object
-+            dry_run (bool): True to do a dry run, restoring the original tree
-+                afterwards
-+
-+        Return:
-+            pygit.oid: oid of the new branch
-+        """
-+        vals = None
-+        for vals in self.process_series(name, series, dry_run=dry_run):
-+            if CHANGE_ID_TAG not in vals.msg:
-+                change_id = self.make_change_id(vals.commit)
-+                vals.msg = vals.msg + f'\n{CHANGE_ID_TAG}: {change_id}'
-+                tout.detail("   - adding mark")
-+                vals.info = 'marked'
-+            else:
-+                vals.info = 'has mark'
-+
-+        return vals.oid
-+
-+    def update_series(self, branch_name, series, max_vers, new_name=None,
-+                       dry_run=False, add_vers=None, add_link=None,
-+                       add_rtags=None, switch=False):
-+        """Rewrite a series to update the Series-version/Series-links lines
-+
-+        This updates the series in git; it does not update the database
-+
-+        Args:
-+            branch_name (str): Name of the branch to process
-+            series (Series): Series object
-+            max_vers (int): Version number of the series being updated
-+            new_name (str or None): New name, if a new branch is to be created
-+            dry_run (bool): True to do a dry run, restoring the original tree
-+                afterwards
-+            add_vers (int or None): Version number to add to the series, if any
-+            add_link (str or None): Link to add to the series, if any
-+            add_rtags (list of dict): List of review tags to add, one item for
-+                    each commit, each a dict:
-+                key: Response tag (e.g. 'Reviewed-by')
-+                value: Set of people who gave that response, each a name/email
-+                    string
-+            switch (bool): True to switch to the new branch after processing;
-+                otherwise HEAD remains at the original branch, as amended
-+
-+        Return:
-+            pygit.oid: oid of the new branch
-+        """
-+        def _do_version():
-+            if add_vers:
-+                if add_vers == 1:
-+                    vals.info += f'rm v{add_vers} '
-+                else:
-+                    vals.info += f'add v{add_vers} '
-+                    out.append(f'Series-version: {add_vers}')
-+
-+        def _do_links(new_links):
-+            if add_link:
-+                if 'add' not in vals.info:
-+                    vals.info += 'add '
-+                vals.info += f"links '{new_links}' "
-+            else:
-+                vals.info += f"upd links '{new_links}' "
-+            out.append(f'Series-links: {new_links}')
-+
-+        added_version = False
-+        added_link = False
-+        for vals in self.process_series(branch_name, series, new_name, switch,
-+                                         dry_run):
-+            out = []
-+            for line in vals.msg.splitlines():
-+                m_ver = re.match('Series-version:(.*)', line)
-+                m_links = re.match('Series-links:(.*)', line)
-+                if m_ver and add_vers:
-+                    if ('version' in series and
-+                            int(series.version) != max_vers):
-+                        tout.warning(
-+                            f'Branch {branch_name}: Series-version tag '
-+                            f'{series.version} does not match expected '
-+                            f'version {max_vers}')
-+                    _do_version()
-+                    added_version = True
-+                elif m_links:
-+                    links = series.get_links(m_links.group(1), max_vers)
-+                    if add_link:
-+                        links[max_vers] = add_link
-+                    _do_links(series.build_links(links))
-+                    added_link = True
-+                else:
-+                    out.append(line)
-+            if vals.final:
-+                if not added_version and add_vers and add_vers > 1:
-+                    _do_version()
-+                if not added_link and add_link:
-+                    _do_links(f'{max_vers}:{add_link}')
-+
-+            vals.msg = '\n'.join(out) + '\n'
-+            if add_rtags and add_rtags[vals.seq]:
-+                lines = []
-+                for tag, people in add_rtags[vals.seq].items():
-+                    for who in people:
-+                        lines.append(f'{tag}: {who}')
-+                vals.msg = patchstream.insert_tags(vals.msg.rstrip(),
-+                                                   sorted(lines))
-+                vals.info += (f'added {len(lines)} '
-+                              f"tag{'' if len(lines) == 1 else 's'}")
-+
-+    def _build_col(self, state, prefix='', base_str=None):
-+        """Build a patch-state string with colour
-+
-+        Args:
-+            state (str): State to colourise (also indicates the colour to use)
-+            prefix (str): Prefix string to also colourise
-+            base_str (str or None): String to show instead of state, or None to
-+                show state
-+
-+        Return:
-+            str: String with ANSI colour characters
-+        """
-+        bright = True
-+        if state == 'accepted':
-+            col = self.col.GREEN
-+        elif state == 'awaiting-upstream':
-+            bright = False
-+            col = self.col.GREEN
-+        elif state in ['changes-requested']:
-+            col = self.col.CYAN
-+        elif state in ['rejected', 'deferred', 'not-applicable', 'superseded',
-+                       'handled-elsewhere']:
-+            col = self.col.RED
-+        elif not state:
-+            state = 'unknown'
-+            col = self.col.MAGENTA
-+        else:
-+            # under-review, rfc, needs-review-ack
-+            col = self.col.WHITE
-+        out = base_str or SHORTEN_STATE.get(state, state)
-+        pad = ' ' * (10 - len(out))
-+        col_state = self.col.build(col, prefix + out, bright)
-+        return col_state, pad
-+
-+    def _get_patches(self, series, version):
-+        """Get a Series object containing the patches in a series
++    def list_patches(self, series, version, show_commit=False,
++                     show_patch=False):
++        """List patches in a series
 +
 +        Args:
 +            series (str): Name of series to use, or None to use current branch
 +            version (int): Version number, or None to detect from name
-+
-+        Return: tuple:
-+            str: Name of branch, e.g. 'mary2'
-+            Series: Series object containing the commits and idnum, desc, name
-+            int: Version number of series, e.g. 2
-+            OrderedDict:
-+                key (int): record ID if find_svid is None, else seq
-+                value (PCOMMIT): record data
-+            str: series name (for this version)
-+            str: patchwork link
-+            str: cover_id
-+            int: cover_num_comments
-+        """
-+        ser, version = self._parse_series_and_version(series, version)
-+        if not ser.idnum:
-+            raise ValueError(f"Unknown series '{series}'")
-+        self._ensure_version(ser, version)
-+        svinfo = self.get_ser_ver(ser.idnum, version)
-+        pwc = self.get_pcommit_dict(svinfo.idnum)
-+
-+        count = len(pwc)
-+        branch = self._join_name_version(ser.name, version)
-+        series = patchstream.get_metadata(branch, 0, count,
-+                                          git_dir=self.gitdir)
-+        self._copy_db_fields_to(series, ser)
-+
-+        return (branch, series, version, pwc, svinfo.name, svinfo.link,
-+                svinfo.cover_id, svinfo.cover_num_comments)
-+
-+    def _list_patches(self, branch, pwc, series, desc, cover_id, num_comments,
-+                      show_commit, show_patch, list_patches, state_totals):
-+        """List patches along with optional status info
-+
-+        Args:
-+            branch (str): Branch name        if self.show_progress
-+            pwc (dict): pcommit records:
-+                key (int): seq
-+                value (PCOMMIT): Record from database
-+            series (Series): Series to show, or None to just use the database
-+            desc (str): Series title
-+            cover_id (int): Cover-letter ID
-+            num_comments (int): The number of comments on the cover letter
 +            show_commit (bool): True to show the commit and diffstate
 +            show_patch (bool): True to show the patch
-+            list_patches (bool): True to list all patches for each series,
-+                False to just show the series summary on a single line
-+            state_totals (dict): Holds totals for each state across all patches
-+                key (str): state name
-+                value (int): Number of patches in that state
++        """
++        branch, series, version, pwc, name, _, cover_id, num_comments = (
++            self._get_patches(series, version))
++        with terminal.pager():
++            state_totals = defaultdict(int)
++            self._list_patches(branch, pwc, series, name, cover_id,
++                               num_comments, show_commit, show_patch, True,
++                               state_totals)
++
++    def mark(self, in_name, allow_marked=False, dry_run=False):
++        """Add Change-Id tags to a series
++
++        Args:
++            in_name (str): Name of the series to unmark
++            allow_marked (bool): Allow commits to be (already) marked
++            dry_run (bool): True to do a dry run, restoring the original tree
++                afterwards
 +
 +        Return:
-+            bool: True if OK, False if any commit subjects don't match their
-+                patchwork subjects
++            pygit.oid: oid of the new branch
 +        """
-+        lines = []
-+        states = defaultdict(int)
-+        count = len(pwc)
-+        ok = True
-+        for seq, item in enumerate(pwc.values()):
-+            if series:
-+                cmt = series.commits[seq]
-+                if cmt.subject != item.subject:
-+                    ok = False
++        name, ser, _, _ = self.prep_series(in_name)
++        tout.info(f"Marking series '{name}': allow_marked {allow_marked}")
 +
-+            col_state, pad = self._build_col(item.state)
-+            patch_id = item.patch_id if item.patch_id else ''
-+            if item.num_comments:
-+                comments = str(item.num_comments)
-+            elif item.num_comments is None:
-+                comments = '-'
++        if not allow_marked:
++            bad = []
++            for cmt in ser.commits:
++                if cmt.change_id:
++                    bad.append(cmt)
++            if bad:
++                print(f'{len(bad)} commit(s) already have marks')
++                for cmt in bad:
++                    print(f' - {oid(cmt.hash)} {cmt.subject}')
++                raise ValueError(
++                    f'Marked commits {len(bad)}/{len(ser.commits)}')
++        new_oid = self._mark_series(in_name, ser, dry_run=dry_run)
++
++        if dry_run:
++            tout.info('Dry run completed')
++        return new_oid
++
++    def unmark(self, name, allow_unmarked=False, dry_run=False):
++        """Remove Change-Id tags from a series
++
++        Args:
++            name (str): Name of the series to unmark
++            allow_unmarked (bool): Allow commits to be (already) unmarked
++            dry_run (bool): True to do a dry run, restoring the original tree
++                afterwards
++
++        Return:
++            pygit.oid: oid of the new branch
++        """
++        name, ser, _, _ = self.prep_series(name)
++        tout.info(
++            f"Unmarking series '{name}': allow_unmarked {allow_unmarked}")
++
++        if not allow_unmarked:
++            bad = []
++            for cmt in ser.commits:
++                if not cmt.change_id:
++                    bad.append(cmt)
++            if bad:
++                print(f'{len(bad)} commit(s) are missing marks')
++                for cmt in bad:
++                    print(f' - {oid(cmt.hash)} {cmt.subject}')
++                raise ValueError(
++                    f'Unmarked commits {len(bad)}/{len(ser.commits)}')
++        vals = None
++        for vals in self.process_series(name, ser, dry_run=dry_run):
++            if cser_helper.CHANGE_ID_TAG in vals.msg:
++                lines = vals.msg.splitlines()
++                updated = [line for line in lines
++                           if not line.startswith(cser_helper.CHANGE_ID_TAG)]
++                vals.msg = '\n'.join(updated)
++
++                tout.detail("   - removing mark")
++                vals.info = 'unmarked'
 +            else:
-+                comments = ''
++                vals.info = 'no mark'
 +
-+            if show_commit or show_patch:
-+                subject = self.col.build(self.col.BLACK, item.subject,
-+                                         bright=False, back=self.col.YELLOW)
-+            else:
-+                subject = item.subject
++        if dry_run:
++            tout.info('Dry run completed')
++        return vals.oid
 +
-+            line = (f'{seq:3} {col_state}{pad} {comments.rjust(3)} '
-+                    f'{patch_id:7} {oid(cmt.hash)} {subject}')
-+            lines.append(line)
-+            states[item.state] += 1
-+        out = ''
-+        for state, freq in states.items():
-+            out += ' ' + self._build_col(state, f'{freq}:')[0]
-+            state_totals[state] += freq
-+        name = ''
-+        if not list_patches:
-+            name = desc or series.desc
-+            name = self.col.build(self.col.YELLOW, name[:41].ljust(41))
-+            if not ok:
-+                out = '*' + out[1:]
-+            print(f"{branch:16} {name} {len(pwc):5} {out}")
-+            return ok
-+        print(f"Branch '{branch}' (total {len(pwc)}):{out}{name}")
-+
-+        print(self.col.build(
-+            self.col.MAGENTA,
-+            f"Seq State      Com PatchId {'Commit'.ljust(HASH_LEN)} Subject"))
-+
-+        comments = '' if num_comments is None else str(num_comments)
-+        if desc or comments or cover_id:
-+            cov = 'Cov' if cover_id else ''
-+            print(self.col.build(
-+                self.col.WHITE,
-+                f"{cov:14} {comments.rjust(3)} {cover_id or '':7}            "
-+                f'{desc or series.desc}',
-+                bright=False))
-+        for seq in range(count):
-+            line = lines[seq]
-+            print(line)
-+            if show_commit or show_patch:
-+                print()
-+                cmt = series.commits[seq] if series else ''
-+                msg = gitutil.show_commit(
-+                    cmt.hash, show_commit, True, show_patch,
-+                    colour=self.col.enabled(), git_dir=self.gitdir)
-+                sys.stdout.write(msg)
-+                if seq != count - 1:
-+                    print()
-+                    print()
-+
-+        return ok
-+
-+    def _find_matched_commit(self, commits, pcm):
-+        """Find a commit in a list of possible matches
-+
-+        Args:
-+            commits (dict of Commit): Possible matches
-+                key (int): sequence number of patch (from 0)
-+                value (Commit): Commit object
-+            pcm (PCOMMIT): Patch to check
-+
-+        Return:
-+            int: Sequence number of matching commit, or None if not found
-+        """
-+        for seq, cmt in commits.items():
-+            tout.debug(f"- match subject: '{cmt.subject}'")
-+            if pcm.subject == cmt.subject:
-+                return seq
-+        return None
-+
-+    def _find_matched_patch(self, patches, cmt):
-+        """Find a patch in a list of possible matches
-+
-+        Args:
-+            patches: dict of ossible matches
-+                key (int): sequence number of patch
-+                value (PCOMMIT): patch
-+            cmt (Commit): Commit to check
-+
-+        Return:
-+            int: Sequence number of matching patch, or None if not found
-+        """
-+        for seq, pcm in patches.items():
-+            tout.debug(f"- match subject: '{pcm.subject}'")
-+            if cmt.subject == pcm.subject:
-+                return seq
-+        return None
-+
-+    def _sync_one(self, svid, series_name, version, show_comments,
-+                  show_cover_comments, gather_tags, cover, patches, dry_run):
-+        """Sync one series to the database
-+
-+        Args:
-+            svid (int): Ser/ver ID
-+            cover (dict or None): Cover letter from patchwork, with keys:
-+                id (int): Cover-letter ID in patchwork
-+                num_comments (int): Number of comments
-+                name (str): Cover-letter name
-+            patches (list of Patch): Patches in the series
-+        """
-+        pwc = self.get_pcommit_dict(svid)
-+        if gather_tags:
-+            count = len(pwc)
-+            branch = self._join_name_version(series_name, version)
-+            series = patchstream.get_metadata(branch, 0, count,
-+                                              git_dir=self.gitdir)
-+
-+            _, new_rtag_list = status.do_show_status(
-+                series, cover, patches, show_comments, show_cover_comments,
-+                self.col, warnings_on_stderr=False)
-+            self.update_series(branch, series, version, None, dry_run,
-+                                add_rtags=new_rtag_list)
-+
-+        updated = 0
-+        for seq, item in enumerate(pwc.values()):
-+            if seq >= len(patches):
-+                continue
-+            patch = patches[seq]
-+            if patch.id:
-+                if self.db.pcommit_update(
-+                    Pcommit(item.idnum, seq, None, None, None, patch.state,
-+                            patch.id, len(patch.comments))):
-+                    updated += 1
-+        if cover:
-+            info = SerVer(svid, None, None, None, cover.id,
-+                           cover.num_comments, cover.name, None)
-+        else:
-+            info = SerVer(svid, None, None, None, None, None, patches[0].name,
-+                           None)
-+        self.db.ser_ver_set_info(info)
-+
-+        return updated, 1 if cover else 0
-+
-+    async def _gather(self, pwork, link, show_cover_comments):
-+        """Sync the series status from patchwork
-+
-+        Creates a new client sesion and calls _sync()
++    def open(self, pwork, name, version):
++        """Open the patchwork page for a series
 +
 +        Args:
 +            pwork (Patchwork): Patchwork object to use
-+            link (str): Patchwork link for the series
-+            show_cover_comments (bool): True to show the comments on the cover
-+                letter
-+
-+        Return: tuple:
-+            COVER object, or None if none or not read_cover_comments
-+            list of PATCH objects
++            name (str): Name of series to open
++            version (str): Version number to open
 +        """
-+        async with aiohttp.ClientSession() as client:
-+            return await pwork.series_get_state(client, link, True,
-+                                                show_cover_comments)
++        ser, version = self._parse_series_and_version(name, version)
++        link = self.link_get(ser.name, version)
++        pwork.url = 'https://patchwork.ozlabs.org'
++        url = self.loop.run_until_complete(pwork.get_series_url(link))
++        print(f'Opening {url}')
 +
-+    def _get_fetch_dict(self, sync_all_versions):
-+        """Get a dict of ser_vers to fetch, along with their patchwork links
++        # With Firefox, GTK produces lots of warnings, so suppress them
++        # Gtk-Message: 06:48:20.692: Failed to load module "xapp-gtk3-module"
++        # Gtk-Message: 06:48:20.692: Not loading module "atk-bridge": The
++        # functionality is provided by GTK natively. Please try to not load it.
++        # Gtk-Message: 06:48:20.692: Failed to load module "appmenu-gtk-module"
++        # Gtk-Message: 06:48:20.692: Failed to load module "appmenu-gtk-module"
++        # [262145, Main Thread] WARNING: GTK+ module /snap/firefox/5987/
++        #  gnome-platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so
++        #  cannot be loaded.
++        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
++        #  process #  is not supported.: 'glib warning', file /build/firefox/
++        #  parts/firefox/build/toolkit/xre/nsSigHandlers.cpp:201
++        #
++        # (firefox_firefox:262145): Gtk-WARNING **: 06:48:20.728: GTK+ module
++        #  /snap/firefox/5987/gnome-platform/usr/lib/gtk-2.0/modules/
++        #  libcanberra-gtk-module.so cannot be loaded.
++        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
++        #  process is not supported.
++        # Gtk-Message: 06:48:20.728: Failed to load module
++        #  "canberra-gtk-module"
++        # [262145, Main Thread] WARNING: GTK+ module /snap/firefox/5987/
++        #  gnome-platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so
++        #  cannot be loaded.
++        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
++        #  process is not supported.: 'glib warning', file /build/firefox/
++        #  parts/firefox/build/toolkit/xre/nsSigHandlers.cpp:201
++        #
++        # (firefox_firefox:262145): Gtk-WARNING **: 06:48:20.729: GTK+ module
++        #   /snap/firefox/5987/gnome-platform/usr/lib/gtk-2.0/modules/
++        #   libcanberra-gtk-module.so cannot be loaded.
++        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
++        #  process is not supported.
++        # Gtk-Message: 06:48:20.729: Failed to load module
++        #  "canberra-gtk-module"
++        # ATTENTION: default value of option mesa_glthread overridden by
++        # environment.
++        cros_subprocess.Popen(['xdg-open', url])
 +
-+        Args:
-+            sync_all_versions (bool): True to sync all versions of a series,
-+                False to sync only the latest version
-+
-+        Return: tuple:
-+            dict: things to fetch
-+                key (int): svid
-+                value (str): patchwork link for the series
-+            int: number of series which are missing a link
-+        """
-+        missing = 0
-+        svdict = self.get_ser_ver_dict()
-+        sdict = self.db.series_get_dict_by_id()
-+        to_fetch = {}
-+
-+        if sync_all_versions:
-+            for svinfo in self.get_ser_ver_list():
-+                ser_ver = svdict[svinfo.idnum]
-+                if svinfo.link:
-+                    to_fetch[svinfo.idnum] = patchwork.STATE_REQ(
-+                        svinfo.link, svinfo.series_id,
-+                        sdict[svinfo.series_id].name, svinfo.version, False,
-+                        False)
-+                else:
-+                    missing += 1
-+        else:
-+            # Find the maximum version for each series
-+            max_vers = self._series_all_max_versions()
-+
-+            # Get a list of links to fetch
-+            for svid, series_id, version in max_vers:
-+                ser_ver = svdict[svid]
-+                if series_id not in sdict:
-+                    # skip archived item
-+                    continue
-+                if ser_ver.link:
-+                    to_fetch[svid] = patchwork.STATE_REQ(
-+                        ser_ver.link, series_id, sdict[series_id].name,
-+                        version, False, False)
-+                else:
-+                    missing += 1
-+
-+        # order by series name, version
-+        ordered = OrderedDict()
-+        for svid in sorted(
-+                to_fetch,
-+                key=lambda k: (to_fetch[k].series_name, to_fetch[k].version)):
-+            sync = to_fetch[svid]
-+            ordered[svid] = sync
-+
-+        return ordered, missing
-+
-+    async def _sync_all(self, client, pwork, to_fetch):
-+        """Sync all series status from patchwork
-+
-+        Args:
-+            pwork (Patchwork): Patchwork object to use
-+            sync_all_versions (bool): True to sync all versions of a series,
-+                False to sync only the latest version
-+            gather_tags (bool): True to gather review/test tags
-+
-+        Return: list of tuple:
-+            COVER object, or None if none or not read_cover_comments
-+            list of PATCH objects
-+        """
-+        with pwork.collect_stats() as stats:
-+            tasks = [pwork.series_get_state(client, sync.link, True, True)
-+                     for sync in to_fetch.values() if sync.link]
-+            result = await asyncio.gather(*tasks)
-+        return result, stats.request_count
-+
-+    async def _do_series_sync_all(self, pwork, to_fetch):
-+        async with aiohttp.ClientSession() as client:
-+            return await self._sync_all(client, pwork, to_fetch)
-+
-+    def _progress_one(self, ser, show_all_versions, list_patches,
-+                      state_totals):
++    def progress(self, series, show_all_versions, list_patches):
 +        """Show progress information for all versions in a series
-+
-+        Args:
-+            ser (Series): Series to use
-+            show_all_versions (bool): True to show all versions of a series,
-+                False to show only the final version
-+            list_patches (bool): True to list all patches for each series,
-+                False to just show the series summary on a single line
-+            state_totals (dict): Holds totals for each state across all patches
-+                key (str): state name
-+                value (int): Number of patches in that state
-+
-+        Return: tuple
-+            int: Number of series shown
-+            int: Number of patches shown
-+            int: Number of version which need a 'scan'
-+        """
-+        max_vers = self._series_max_version(ser.idnum)
-+        name, desc = self._get_series_info(ser.idnum)
-+        coloured = self.col.build(self.col.BLACK, desc, bright=False,
-+                                  back=self.col.YELLOW)
-+        versions = self._get_version_list(ser.idnum)
-+        vstr = list(map(str, versions))
-+
-+        if list_patches:
-+            print(f"{name}: {coloured} (versions: {' '.join(vstr)})")
-+        add_blank_line = False
-+        total_series = 0
-+        total_patches = 0
-+        need_scan = 0
-+        for ver in versions:
-+            if not show_all_versions and ver != max_vers:
-+                continue
-+            if add_blank_line:
-+                print()
-+            _, pwc = self._series_get_version_stats(ser.idnum, ver)
-+            count = len(pwc)
-+            branch = self._join_name_version(ser.name, ver)
-+            series = patchstream.get_metadata(branch, 0, count,
-+                                              git_dir=self.gitdir)
-+            svinfo = self.get_ser_ver(ser.idnum, ver)
-+            self._copy_db_fields_to(series, ser)
-+
-+            ok = self._list_patches(
-+                branch, pwc, series, svinfo.name, svinfo.cover_id,
-+                svinfo.cover_num_comments, False, False, list_patches,
-+                state_totals)
-+            if not ok:
-+                need_scan += 1
-+            add_blank_line = list_patches
-+            total_series += 1
-+            total_patches += count
-+        return total_series, total_patches, need_scan
-+
-+    def _summary_one(self, ser):
-+        """Show summary information for the latest version in a series
 +
 +        Args:
 +            series (str): Name of series to use, or None to show progress for
 +                all series
++            show_all_versions (bool): True to show all versions of a series,
++                False to show only the final version
++            list_patches (bool): True to list all patches for each series,
++                False to just show the series summary on a single line
 +        """
-+        max_vers = self._series_max_version(ser.idnum)
-+        name, desc = self._get_series_info(ser.idnum)
-+        stats, pwc = self._series_get_version_stats(ser.idnum, max_vers)
-+        states = {x.state for x in pwc.values()}
-+        state = 'accepted'
-+        for val in ['awaiting-upstream', 'changes-requested', 'rejected',
-+                    'deferred', 'not-applicable', 'superseded',
-+                    'handled-elsewhere']:
-+            if val in states:
-+                state = val
-+        state_str, pad = self._build_col(state, base_str=name)
-+        print(f"{state_str}{pad}  {stats.rjust(6)}  {desc}")
++        with terminal.pager():
++            state_totals = defaultdict(int)
++            if series is not None:
++                _, _, need_scan = self._progress_one(
++                    self._parse_series(series), show_all_versions,
++                    list_patches, state_totals)
++                if need_scan:
++                    tout.warning(
++                        'Inconsistent commit-subject: Please use '
++                        "'patman series -s <branch> scan' to resolve this")
++                return
 +
-+    def _series_max_version(self, idnum):
-+        """Find the latest version of a series
++            total_patches = 0
++            total_series = 0
++            sdict = self.db.series_get_dict()
++            border = None
++            total_need_scan = 0
++            if not list_patches:
++                print(self.col.build(
++                    self.col.MAGENTA,
++                    f"{'Name':16} {'Description':41} Count  {'Status'}"))
++                border = f"{'-' * 15}  {'-' * 40}  -----  {'-' * 15}"
++                print(border)
++            for name in sorted(sdict):
++                ser = sdict[name]
++                num_series, num_patches, need_scan = self._progress_one(
++                    ser, show_all_versions, list_patches, state_totals)
++                total_need_scan += need_scan
++                if list_patches:
++                    print()
++                total_series += num_series
++                total_patches += num_patches
++            if not list_patches:
++                print(border)
++                total = f'{total_series} series'
++                out = ''
++                for state, freq in state_totals.items():
++                    out += ' ' + self._build_col(state, f'{freq}:')[0]
++                if total_need_scan:
++                    out = '*' + out[1:]
++
++                print(f"{total:15}  {'':40}  {total_patches:5} {out}")
++                if total_need_scan:
++                    tout.info(
++                        f'Series marked * ({total_need_scan}) have commit '
++                        'subjects which mismatch their patches and need to be '
++                        'scanned')
++
++    def project_set(self, pwork, name, quiet=False):
++        """Set the name of the project
 +
 +        Args:
-+            idnum (int): Series ID to look up
++            pwork (Patchwork): Patchwork object to use
++            name (str): Name of the project to use in patchwork
++            quiet (bool): True to skip writing the message
++        """
++        res = self.loop.run_until_complete(pwork.get_projects())
++        proj_id = None
++        link_name = None
++        for proj in res:
++            if proj['name'] == name:
++                proj_id = proj['id']
++                link_name = proj['link_name']
++        if not proj_id:
++            raise ValueError(f"Unknown project name '{name}'")
++        self.db.settings_update(name, proj_id, link_name)
++        self.commit()
++        if not quiet:
++            tout.info(f"Project '{name}' patchwork-ID {proj_id} "
++                      f'link-name {link_name}')
++
++    def project_get(self):
++        """Get the details of the project
++
++        Returns:
++            tuple or None if there are no settings:
++                name (str): Project name, e.g. 'U-Boot'
++                proj_id (int): Patchworks project ID for this project
++                link_name (str): Patchwork's link-name for the project
++        """
++        return self.db.settings_get()
++
++    def remove(self, name, dry_run=False):
++        """Remove a series from the database
++
++        Args:
++            name (str): Name of series to remove, or None to use current one
++            dry_run (bool): True to do a dry run
++        """
++        ser = self._parse_series(name)
++        name = ser.name
++        if not ser.idnum:
++            raise ValueError(f"No such series '{name}'")
++
++        self.db.ser_ver_remove(ser.idnum, None)
++        if not dry_run:
++            self.commit()
++        else:
++            self.rollback()
++
++        self.commit()
++        tout.info(f"Removed series '{name}'")
++        if dry_run:
++            tout.info('Dry run completed')
++
++    def rename(self, series, name, dry_run=False):
++        """Rename a series
++
++        Renames a series and changes the name of any branches which match
++        versions present in the database
++
++        Args:
++            series (str): Name of series to use, or None to use current branch
++            name (str): new name to use (must not include version number)
++            dry_run (bool): True to do a dry run
++        """
++        old_ser, _ = self._parse_series_and_version(series, None)
++        if not old_ser.idnum:
++            raise ValueError(f"Series '{old_ser.name}' not found in database")
++        if old_ser.name != series:
++            raise ValueError(f"Invalid series name '{series}': "
++                             'did you use the branch name?')
++        chk, _ = cser_helper.split_name_version(name)
++        if chk != name:
++            raise ValueError(
++                f"Invalid series name '{name}': did you use the branch name?")
++        if chk == old_ser.name:
++            raise ValueError(
++                f"Cannot rename series '{old_ser.name}' to itself")
++        if self.get_series_by_name(name):
++            raise ValueError(f"Cannot rename: series '{name}' already exists")
++
++        versions = self._get_version_list(old_ser.idnum)
++        missing = []
++        exists = []
++        todo = {}
++        for ver in versions:
++            ok = True
++            old_branch = self._get_branch_name(old_ser.name, ver)
++            if not gitutil.check_branch(old_branch, self.gitdir):
++                missing.append(old_branch)
++                ok = False
++
++            branch = self._get_branch_name(name, ver)
++            if gitutil.check_branch(branch, self.gitdir):
++                exists.append(branch)
++                ok = False
++
++            if ok:
++                todo[ver] = [old_branch, branch]
++
++        if missing or exists:
++            msg = 'Cannot rename'
++            if missing:
++                msg += f": branches missing: {', '.join(missing)}"
++            if exists:
++                msg += f": branches exist: {', '.join(exists)}"
++            raise ValueError(msg)
++
++        for old_branch, branch in todo.values():
++            tout.info(f"Renaming branch '{old_branch}' to '{branch}'")
++            if not dry_run:
++                gitutil.rename_branch(old_branch, branch, self.gitdir)
++
++        # Change the series name; nothing needs to change in ser_ver
++        self.db.series_set_name(old_ser.idnum, name)
++
++        if not dry_run:
++            self.commit()
++        else:
++            self.rollback()
++
++        tout.info(f"Renamed series '{series}' to '{name}'")
++        if dry_run:
++            tout.info('Dry run completed')
++
++    def scan(self, branch_name, mark=False, allow_unmarked=False, end=None,
++             dry_run=False):
++        """Scan a branch and make updates to the database if it has changed
++
++        Args:
++            branch_name (str): Name of branch to sync, or None for current one
++            mark (str): True to mark each commit with a change ID
++            allow_unmarked (str): True to not require each commit to be marked
++            end (str): Add only commits up to but exclu
++            dry_run (bool): True to do a dry run
++        """
++        def _show_item(oper, seq, subject):
++            col = None
++            if oper == '+':
++                col = self.col.GREEN
++            elif oper == '-':
++                col = self.col.RED
++            out = self.col.build(col, subject) if col else subject
++            tout.info(f'{oper} {seq:3} {out}')
++
++        name, ser, version, msg = self.prep_series(branch_name, end)
++        svid = self.get_ser_ver(ser.idnum, version).idnum
++        pcdict = self.get_pcommit_dict(svid)
++
++        tout.info(
++            f"Syncing series '{name}' v{version}: mark {mark} "
++            f'allow_unmarked {allow_unmarked}')
++        if msg:
++            tout.info(msg)
++
++        ser = self._handle_mark(name, ser, version, mark, allow_unmarked,
++                                False, dry_run)
++
++        # First check for new patches that are not in the database
++        to_add = dict(enumerate(ser.commits))
++        for pcm in pcdict.values():
++            tout.debug(f'pcm {pcm.subject}')
++            i = self._find_matched_commit(to_add, pcm)
++            if i is not None:
++                del to_add[i]
++
++        # Now check for patches in the database that are not in the branch
++        to_remove = dict(enumerate(pcdict.values()))
++        for cmt in ser.commits:
++            tout.debug(f'cmt {cmt.subject}')
++            i = self._find_matched_patch(to_remove, cmt)
++            if i is not None:
++                del to_remove[i]
++
++        for seq, cmt in enumerate(ser.commits):
++            if seq in to_remove:
++                _show_item('-', seq, to_remove[seq].subject)
++                del to_remove[seq]
++            if seq in to_add:
++                _show_item('+', seq, to_add[seq].subject)
++                del to_add[seq]
++            else:
++                _show_item(' ', seq, cmt.subject)
++        seq = len(ser.commits)
++        for cmt in to_add.items():
++            _show_item('+', seq, cmt.subject)
++            seq += 1
++        for seq, pcm in to_remove.items():
++            _show_item('+', seq, pcm.subject)
++
++        self.db.pcommit_delete(svid)
++        self._add_series_commits(ser, svid)
++        if not dry_run:
++            self.commit()
++        else:
++            self.rollback()
++            tout.info('Dry run completed')
++
++    def send(self, pwork, name, autolink, autolink_wait, args):
++        """Send out a series
++
++        Args:
++            pwork (Patchwork): Patchwork object to use
++            name (str): Series name to search for, or None for current series
++                that is checked out
++            autolink (bool): True to auto-link the series after sending
++            args (argparse.Namespace): 'send' arguments provided
++            autolink_wait (int): Number of seconds to wait for the autolink to
++                succeed
++        """
++        ser, version = self._parse_series_and_version(name, None)
++        if not ser.idnum:
++            raise ValueError(f"Series '{ser.name}' not found in database")
++
++        args.branch = self._get_branch_name(ser.name, version)
++        likely_sent = send.send(args, git_dir=self.gitdir, cwd=self.topdir)
++
++        if likely_sent and autolink:
++            print(f'Autolinking with Patchwork ({autolink_wait} seconds)')
++            self.link_auto(pwork, name, version, True, wait_s=autolink_wait)
++
++    def archive(self, series):
++        """Archive a series
++
++        Args:
++            series (str): Name of series to use, or None to use current branch
++        """
++        ser = self._parse_series(series, include_archived=True)
++        if not ser.idnum:
++            raise ValueError(f"Series '{ser.name}' not found in database")
++
++        svlist = self.db.ser_ver_get_for_series(ser.idnum)
++
++        # Figure out the tags we will create
++        tag_info = {}
++        now = self.get_now()
++        now_str = now.strftime('%d%b%y').lower()
++        for svi in svlist:
++            name = self._get_branch_name(ser.name, svi.version)
++            if not gitutil.check_branch(name, git_dir=self.gitdir):
++                raise ValueError(f"No branch named '{name}'")
++            tag_info[svi.version] = [svi.idnum, name, f'{name}-{now_str}']
++
++        # Create the tags
++        repo = pygit2.init_repository(self.gitdir)
++        for _, (idnum, name, tag_name) in tag_info.items():
++            commit = repo.revparse_single(name)
++            repo.create_tag(tag_name, commit.hex,
++                            pygit2.enums.ObjectType.COMMIT,
++                            commit.author, commit.message)
++
++        # Update the database
++        for idnum, name, tag_name in tag_info.values():
++            self.db.ser_ver_set_archive_tag(idnum, tag_name)
++
++        # Delete the branches
++        for idnum, name, tag_name in tag_info.values():
++            # Detach HEAD from the branch if pointing to this branch
++            commit = repo.revparse_single(name)
++            if repo.head.target == commit.oid:
++                repo.set_head(commit.oid)
++
++            repo.branches.delete(name)
++
++        self.db.series_set_archived(ser.idnum, True)
++        self.commit()
++
++    def unarchive(self, series):
++        """Unarchive a series
++
++        Args:
++            series (str): Name of series to use, or None to use current branch
++        """
++        ser = self._parse_series(series, include_archived=True)
++        if not ser.idnum:
++            raise ValueError(f"Series '{ser.name}' not found in database")
++        self.db.series_set_archived(ser.idnum, False)
++
++        svlist = self.db.ser_ver_get_for_series(ser.idnum)
++
++        # Collect the tags
++        repo = pygit2.init_repository(self.gitdir)
++        tag_info = {}
++        for svi in svlist:
++            name = self._get_branch_name(ser.name, svi.version)
++            target = repo.revparse_single(svi.archive_tag)
++            tag_info[svi.idnum] = name, svi.archive_tag, target
++
++        # Make sure the branches don't exist
++        for name, tag_name, tag in tag_info.values():
++            if name in repo.branches:
++                raise ValueError(
++                    f"Cannot restore branch '{name}': already exists")
++
++        # Recreate the branches
++        for name, tag_name, tag in tag_info.values():
++            target = repo.get(tag.target)
++            repo.branches.create(name, target)
++
++        # Delete the tags
++        for name, tag_name, tag in tag_info.values():
++            repo.references.delete(f'refs/tags/{tag_name}')
++
++        # Update the database
++        for idnum, (name, tag_name, tag) in tag_info.items():
++            self.db.ser_ver_set_archive_tag(idnum, None)
++
++        self.commit()
++
++    def status(self, pwork, series, version, show_comments,
++               show_cover_comments=False):
++        """Show the series status from patchwork
++
++        Args:
++            pwork (Patchwork): Patchwork object to use
++            series (str): Name of series to use, or None to use current branch
++            version (int): Version number, or None to detect from name
++            show_comments (bool): Show all comments on each patch
++            show_cover_comments (bool): Show all comments on the cover letter
++        """
++        branch, series, version, _, _, link, _, _ = self._get_patches(
++            series, version)
++        if not link:
++            raise ValueError(
++                f"Series '{series.name}' v{version} has no patchwork link: "
++                f"Try 'patman series -s {branch} autolink'")
++        status.check_and_show_status(
++            series, link, branch, None, False, show_comments,
++            show_cover_comments, pwork, self.gitdir)
++
++    def summary(self, series):
++        """Show summary information for all series
++
++        Args:
++            series (str): Name of series to use
++        """
++        print(f"{'Name':17}  Status  Description")
++        print(f"{'-' * 17}  {'-' * 6}  {'-' * 30}")
++        if series is not None:
++            self._summary_one(self._parse_series(series))
++            return
++
++        sdict = self.db.series_get_dict()
++        for ser in sdict.values():
++            self._summary_one(ser)
++
++    def gather(self, pwork, series, version, show_comments,
++               show_cover_comments, gather_tags, dry_run=False):
++        """Gather any new tags from Patchwork, optionally showing comments
++
++        Args:
++            pwork (Patchwork): Patchwork object to use
++            series (str): Name of series to use, or None to use current branch
++            version (int): Version number, or None to detect from name
++            show_comments (bool): True to show the comments on each patch
++            show_cover_comments (bool): True to show the comments on the cover
++                letter
++            gather_tags (bool): True to gather review/test tags
++            dry_run (bool): True to do a dry run (database is not updated)
++        """
++        ser, version = self._parse_series_and_version(series, version)
++        self._ensure_version(ser, version)
++        svid, link = self._get_series_svid_link(ser.idnum, version)
++        if not link:
++            raise ValueError(
++                "No patchwork link is available: use 'patman series autolink'")
++        tout.info(
++            f"Updating series '{ser.name}' version {version} "
++            f"from link '{link}'")
++
++        loop = asyncio.get_event_loop()
++        with pwork.collect_stats() as stats:
++            cover, patches = loop.run_until_complete(self._gather(
++                pwork, link, show_cover_comments))
++
++        with terminal.pager():
++            updated, updated_cover = self._sync_one(
++                svid, ser.name, version, show_comments, show_cover_comments,
++                gather_tags, cover, patches, dry_run)
++            tout.info(f"{updated} patch{'es' if updated != 1 else ''}"
++                      f"{' and cover letter' if updated_cover else ''} "
++                      f'updated ({stats.request_count} requests)')
++
++            if not dry_run:
++                self.commit()
++            else:
++                self.rollback()
++                tout.info('Dry run completed')
++
++    def gather_all(self, pwork, show_comments, show_cover_comments,
++                   sync_all_versions, gather_tags, dry_run=False):
++        to_fetch, missing = self._get_fetch_dict(sync_all_versions)
++
++        loop = asyncio.get_event_loop()
++        result, requests = loop.run_until_complete(self._do_series_sync_all(
++                pwork, to_fetch))
++
++        with terminal.pager():
++            tot_updated = 0
++            tot_cover = 0
++            add_newline = False
++            for (svid, sync), (cover, patches) in zip(to_fetch.items(),
++                                                      result):
++                if add_newline:
++                    tout.info('')
++                tout.info(f"Syncing '{sync.series_name}' v{sync.version}")
++                updated, updated_cover = self._sync_one(
++                    svid, sync.series_name, sync.version, show_comments,
++                    show_cover_comments, gather_tags, cover, patches, dry_run)
++                tot_updated += updated
++                tot_cover += updated_cover
++                add_newline = gather_tags
++
++            tout.info('')
++            tout.info(
++                f"{tot_updated} patch{'es' if tot_updated != 1 else ''} and "
++                f"{tot_cover} cover letter{'s' if tot_cover != 1 else ''} "
++                f'updated, {missing} missing '
++                f"link{'s' if missing != 1 else ''} ({requests} requests)")
++            if not dry_run:
++                self.commit()
++            else:
++                self.rollback()
++                tout.info('Dry run completed')
++
++    def upstream_add(self, name, url):
++        """Add a new upstream tree
++
++        Args:
++            name (str): Name of the tree
++            url (str): URL for the tree
++        """
++        self.db.upstream_add(name, url)
++        self.commit()
++
++    def upstream_list(self):
++        """List the upstream repos
++
++        Shows a list of the repos, obtained from the database
++        """
++        udict = self.get_upstream_dict()
++
++        for name, items in udict.items():
++            url, is_default = items
++            default = 'default' if is_default else ''
++            print(f'{name:15.15} {default:8} {url}')
++
++    def upstream_set_default(self, name):
++        """Set the default upstream target
++
++        Args:
++            name (str): Name of the upstream remote to set as default, or None
++                for none
++        """
++        self.db.upstream_set_default(name)
++        self.commit()
++
++    def upstream_get_default(self):
++        """Get the default upstream target
 +
 +        Return:
-+            int: maximum version
++            str: Name of the upstream remote to set as default, or None if none
 +        """
-+        return self.db.series_get_max_version(idnum)
++        return self.db.upstream_get_default()
 +
-+    def _series_all_max_versions(self):
-+        """Find the latest version of all series
++    def upstream_delete(self, name):
++        """Delete an upstream target
 +
-+        Return: list of:
-+            int: ser_ver ID
-+            int: series ID
-+            int: Maximum version
++        Args:
++            name (str): Name of the upstream remote to delete
 +        """
-+        return self.db.series_get_all_max_versions()
++        self.db.upstream_delete(name)
++        self.commit()
++
++    def version_remove(self, name, version, dry_run=False):
++        """Remove a version of a series from the database
++
++        Args:
++            name (str): Name of series to remove, or None to use current one
++            version (int): Version number to remove
++            dry_run (bool): True to do a dry run
++        """
++        ser, version = self._parse_series_and_version(name, version)
++        name = ser.name
++
++        versions = self._ensure_version(ser, version)
++
++        if versions == [version]:
++            raise ValueError(
++                f"Series '{ser.name}' only has one version: remove the series")
++
++        self.db.ser_ver_remove(ser.idnum, version)
++        if not dry_run:
++            self.commit()
++        else:
++            self.rollback()
++
++        tout.info(f"Removed version {version} from series '{name}'")
++        if dry_run:
++            tout.info('Dry run completed')
++
++    def version_change(self, name, version, new_version, dry_run=False):
++        """Change a version of a series to be a different version
++
++        Args:
++            name (str): Name of series to remove, or None to use current one
++            version (int): Version number to change
++            new_version (int): New version
++            dry_run (bool): True to do a dry run
++        """
++        ser, version = self._parse_series_and_version(name, version)
++        name = ser.name
++
++        versions = self._ensure_version(ser, version)
++        vstr = list(map(str, versions))
++        if version not in versions:
++            raise ValueError(
++                f"Series '{ser.name}' does not have v{version}: "
++                f"{' '.join(vstr)}")
++
++        if not new_version:
++            raise ValueError('Please provide a new version number')
++
++        if new_version in versions:
++            raise ValueError(
++                f"Series '{ser.name}' already has a v{new_version}: "
++                f"{' '.join(vstr)}")
++
++        new_name = self._join_name_version(ser.name, new_version)
++
++        svid = self.get_series_svid(ser.idnum, version)
++        pwc = self.get_pcommit_dict(svid)
++        count = len(pwc.values())
++        series = patchstream.get_metadata(name, 0, count, git_dir=self.gitdir)
++
++        self.update_series(name, series, version, new_name, dry_run,
++                            add_vers=new_version, switch=True)
++        self.db.ser_ver_set_version(svid, new_version)
++
++        if not dry_run:
++            self.commit()
++        else:
++            self.rollback()
++
++        tout.info(f"Changed version {version} in series '{ser.name}' "
++                  f"to {new_version} named '{new_name}'")
++        if dry_run:
++            tout.info('Dry run completed')
 -- 
 2.43.0
 
