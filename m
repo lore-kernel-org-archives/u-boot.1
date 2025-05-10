@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0431C3ABC9
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 266FBC3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:07:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C51D82AC4;
-	Sat, 10 May 2025 15:07:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6485182B32;
+	Sat, 10 May 2025 15:07:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QdC3FzWW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HaqrCv47";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6227582AC4; Sat, 10 May 2025 15:07:08 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 3E6D282B0E; Sat, 10 May 2025 15:07:10 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8393682A8B
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:07:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6825382A8B
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:07:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5fcf1dc8737so746437a12.1
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:07:06 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-acbb85ce788so443891166b.3
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:07:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746882425; x=1747487225; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746882427; x=1747487227; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=legQcD1RKrqh50YrtbpE3RosKq7jOWXC9T42QgkD93Q=;
- b=QdC3FzWWb+eqZc7f2VlCKdVUD6LoekXhzLwKx1krP5Nzxugh5ygy/9MrBJ2di/hmiY
- 6Yv0nWNX4BsjbWVDgGsPUcXQJuoD7j5JPFs7ca3IRLiqZIMNNGSR8xYkkjCZu4duxfQ5
- 0twNDf+quOlE7YsOxqM0be6mQsrIHkb+/adMk=
+ bh=p98sJwUg6KPiNLYQwnrsoXxpXFFi6EY29JQ6uEU3nHw=;
+ b=HaqrCv47tASbV0tf5IkjYG7IuVJExnBJK7MoAsFaQe5ofChtEbk/X2HEvCFsjIn/0Z
+ aI88Oc/8JyhaSCJ8wKNor6TQOfd1M5Bt8spwNpDxQs9GUXkpq5LQD8QWn0JFRE/F0XXI
+ jIEyACUzGU89uFkn2D/EPbmRH3dKx/rLns8aI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746882425; x=1747487225;
+ d=1e100.net; s=20230601; t=1746882427; x=1747487227;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=legQcD1RKrqh50YrtbpE3RosKq7jOWXC9T42QgkD93Q=;
- b=T0ArOJQaha2utfIaBTT3xXw/v26Z66WghtZOLZaureU4rZAA9CAwHHGJp889uWf6ou
- HKMJe2Yaz28Q4D9raAT2Zh+Yo0R1/tNL54IHbSZbe6feGtXp8s0UKnle7lMq2ejAQziP
- xy9AOrGheNR6VAbTMDZgf3gTzvIWwOH9sijOzPh9AfasH8Z4rKkD7w6GDhfTQGPrtB1x
- MzRtnHrB5L99qxqY+a9lYtEu5tHR/CFmmNP1B13W6jFfDw5IwjWlLReiRXG6dsZG5ZKD
- D0PABAZ0HlHAFo3EdzSxDBKJSdC5Z3+JedK0bAt3jEJ003I2zhgXIWQRZLGGEdJls7fM
- LiwQ==
-X-Gm-Message-State: AOJu0YyUnCiiR2XEeNUGiIhrqpFh+0NbXisEAP4ogu8OWXI1r37Zt9cC
- GflXsBzLQ54H5yPmMRZ6Zk9lPuPNHv2Cjn5kDyoSIEGWH/dIuG74kCl8Hs50cTYIwt+l7Z6bMOG
- 9qStYZ1R0Ag==
-X-Gm-Gg: ASbGncuio1nrMtKvwsG8pOZfHIoYH9OhZND4JG9ph6tKixKHL12zMvPakxA+TEPXOk0
- zvMX8fKTXV2OcK0R1+YOY80CT/n6aTW163x9vNPT3Md0LFB+bakouvmLOjPH1M1f/w4hL+hnPye
- G2o3lrUBjQ9C0uRr/Od2sq7MzwJzK8UTZBcN3RwUsMZk/dsEZ9KxhQQERD3Vyev13ZenBPimf/N
- pYuDfOJIu7p3RmEoCwwkEJOwYNn+J6qM9MhU9GlfHSFTO8/yJCFWjirjryibxnx5za0hB6gQlA5
- q+3+Z+qLY/tRS4r5246hvvLsuLEpOjlRPbyvasJwKjXrH0s=
-X-Google-Smtp-Source: AGHT+IGNfHg7lRRWNPLIK2PO6dq0Rs7rMEcO+0Nq38tjpK2T+NFThQUjlBXZ9tewF3mxs6FWeO0smA==
-X-Received: by 2002:a17:907:6a13:b0:acf:15d:2385 with SMTP id
- a640c23a62f3a-ad218f4872cmr672045966b.16.1746882425018; 
- Sat, 10 May 2025 06:07:05 -0700 (PDT)
+ bh=p98sJwUg6KPiNLYQwnrsoXxpXFFi6EY29JQ6uEU3nHw=;
+ b=mloNmtIyfUmoQu9M5+Tziz8xk+VDz3zXvTaMLjgoBxdiMt1LohxrB0OGH5DQP/eEvh
+ oyswRlEEgVCSxkE6Dn64es1y6FNv3rPv/3i1wmi7SXDpo/YgYznzQpUHaS/SFZxWb1dv
+ WZ2O+8mkLg9ZNTdExOjZBnMYYv4BM9700/3pabYyaNdoArh5gXFLmymnxFVk4kCg1u+h
+ otVbDSMU0OPLxWLPneMs0Mw2EtH84zplEHAuUWwRn78t+t+60r5kYR1j+lJh6+T+81M0
+ uaRxNOS3agRHTIDopAznLt+fxJnhKFbcf04GbLKBhpHQZvgVoqDdy/1S9NYmyrdDuQ6A
+ D6PQ==
+X-Gm-Message-State: AOJu0YzSTsYPJuUZCopeFywrXWn8LZrKIm5S5GQcmqCI+fsG2ol68uE6
+ dMnhl5pjcztyC1VQh9k1qivDFTKo9FmjgrxBlm5sr6eosUspdrRGd5DZC6CWWDXVn/WRgu1sAG9
+ 0x2c3iCkWhQ==
+X-Gm-Gg: ASbGncsIb/Y7Z16IXbQQRyIjf4MzD8f+X9igpncWXKmAgpvMa1tB09o1AbQCLrYvzhK
+ wY52gFqrBtRWFY3ZIPpGT4UBp7BLfeMUn5c6LN9wLt1rdKReSq7urCEQvQAIWgcC4uiQTbk0KLl
+ d0o7TRIQ/fddIFdYr6qfMoT1y6L4m5atYo0vb5w6ZPsC/W2ZY0prKFam2gPAJf+KTA+9Kh3MTgN
+ ToWGDgMpNIOpFUZFCPIhwz2irt+3TgRcFUwUoHpQTGOvlR9cg7peOF86xgmLqFVI1/4ZQaNihOW
+ si/Nf7Y6FdUDuakgi2XfLisOeSgrpExrzkUzpa4de5l3fiA=
+X-Google-Smtp-Source: AGHT+IH79nqqdYBEliV7JHqzLcb8dkl3XPdLE6UaMtZaWAR4Soq7H3PdSYW5dmr+VWRoAw/yR5xH9Q==
+X-Received: by 2002:a17:906:4796:b0:acb:bbc4:3344 with SMTP id
+ a640c23a62f3a-ad218f10673mr675153666b.22.1746882426963; 
+ Sat, 10 May 2025 06:07:06 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad24085b44fsm52272966b.149.2025.05.10.06.07.03
+ a640c23a62f3a-ad24085b44fsm52272966b.149.2025.05.10.06.07.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:07:03 -0700 (PDT)
+ Sat, 10 May 2025 06:07:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
@@ -73,9 +73,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Richard Weinberger <richard@nod.at>, Tom Rini <trini@konsulko.com>,
  Uma Shankar <uma.shankar@samsung.com>,
  =?UTF-8?q?=C5=81ukasz=20Majewski?= <l.majewski@samsung.com>
-Subject: [PATCH v3 05/10] ext4: Check for overflow of block count
-Date: Sat, 10 May 2025 15:06:11 +0200
-Message-ID: <20250510130642.1575114-6-sjg@chromium.org>
+Subject: [PATCH v3 06/10] ext4: Bail out of no_blk_pergdt() if there are no
+ blocks
+Date: Sat, 10 May 2025 15:06:12 +0200
+Message-ID: <20250510130642.1575114-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510130642.1575114-1-sjg@chromium.org>
 References: <20250510130642.1575114-1-sjg@chromium.org>
@@ -97,39 +98,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An overflow could cause too little memory to be allocated, thus
-potentially causing undefined behaviour. Add a check for overflow.
+If the size is too small, return an error, since no_blk_pergdt is
+assumed to be non-zero in the following code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- fs/ext4/ext4_write.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ fs/ext4/ext4_write.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index 86420d1c9d7..ae26354fbb2 100644
+index ae26354fbb2..f9d5eccb2ca 100644
 --- a/fs/ext4/ext4_write.c
 +++ b/fs/ext4/ext4_write.c
-@@ -25,6 +25,7 @@
- #include <malloc.h>
- #include <memalign.h>
- #include <part.h>
-+#include <linux/overflow.h>
- #include <linux/stat.h>
- #include <div64.h>
- #include "ext4_common.h"
-@@ -111,7 +112,8 @@ int ext4fs_get_bgdtable(void)
- 	size_t alloc_size;
- 	int gdsize_total;
- 
--	alloc_size = fs->no_blkgrp * fs->gdsize;
-+	if (check_mul_overflow(fs->no_blkgrp, fs->gdsize, &alloc_size))
-+		return -1;
+@@ -116,6 +116,8 @@ int ext4fs_get_bgdtable(void)
+ 		return -1;
  	gdsize_total = ROUND(alloc_size, fs->blksz);
  	fs->no_blk_pergdt = gdsize_total / fs->blksz;
++	if (!fs->no_blk_pergdt)
++		return -1;
  
+ 	/* allocate memory for gdtable */
+ 	fs->gdtable = zalloc(gdsize_total);
 -- 
 2.43.0
 
