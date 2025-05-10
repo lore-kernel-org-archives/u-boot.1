@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A10C3ABC9
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 15:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60E61C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 15:31:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1DC082952;
-	Sat, 10 May 2025 17:11:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A4F238295C;
+	Sat, 10 May 2025 17:31:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eXHWtn+o";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="JHdgQHjJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4DFD8295C; Sat, 10 May 2025 17:11:58 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0714A82A33; Sat, 10 May 2025 17:31:49 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C939F82935
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 17:11:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68E5182952
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 17:31:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72bd5f25ea6so859313a34.1
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 08:11:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746889915; x=1747494715; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hvAyK/18AVEXrqXCMj3WY5yt6BhmoFLpss9WKdqDZU0=;
- b=eXHWtn+ooe0ZayExBDMPqzqoXcM4aeSPBqgZH2weMmNjcE+vPluXhdcn0w5FE7avfr
- XqWNk7EN97OJXuX91iM3Vb0pdzVgnkPsYAcJxmWhPeS+/3Wl6kWcN+DXOCbpzvvPPw9j
- rvQ5Bbr6fabEb0SSojUjnZN8PEGUDfm4oGtaE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746889915; x=1747494715;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hvAyK/18AVEXrqXCMj3WY5yt6BhmoFLpss9WKdqDZU0=;
- b=pVuMw4Qc3oehOsVf1qHJ1KV3YCT1UK21bi191VFmvmcI6FCUUa/DyZL5V8RlxjzgAO
- pnLDAgVSrQSOOjmXv4F//sWIdWbWx/SCjvVnvoomD4DMY4LkpIA5XH+SFtf7PvbBBU9Y
- 6LQgArLE9hNdjSxXMIs5Sv/232+CbRCakCSMGgMHIac8Txo5I+ICJYJZYpphd/SVhhVO
- wWuvbflMyWS3kUl1bDTDfO6mt30xDIXmD0J8cm47K17TNERhybr/0GnhTeJpBvv4eyAa
- vdLl19w7u0iotid4KpmsfKrJZh9fhQwY5rqFbwZ79qvqmVToCp/ZR9snGe6UHiQWP4uq
- vevg==
-X-Gm-Message-State: AOJu0YwBN0JkI7O5Hf/K/YHP8VZrRZl9mQpOmA65PY6sC+k4Z/nndT+X
- +qW8H2AvklGEvHvU1L5HJ+DGUcqcZ32o+UB7TfSREtzJ9UJJ6XRz77ShvjOMCUk=
-X-Gm-Gg: ASbGnct2OwPErLi7sPfWhCrYv1AKioyjyA6Db7nD726wmqiUn0u8YXLc08FFTZ3UJYe
- aoc5Espmx3GuFZQfu+lZVrJjMQ2rXf95LWGxXoFr6ki6Xji2L6zZe+8pQ9LqfVHvwZ6qmTeWB5h
- m03TMKf8Grbf4xiW+KijNVuZGyAGnygP2iv8+T2iJDzGUDcWOVofsoBIQezR+V+FEhZPhMC6WIh
- 8O4vj7LOBpviO3kcfLDOi3w3s+YGdaDqCI9ZCBikQIQrUQ4t+KF/t1beD37zjmzoFs0JT4uhhrG
- w+8CX7jXidx+MN5oitt20OxdvIve0wS63oaFNyhErvbbI31L6uWxFJnypIsFDONRkx+Ppqhfbgi
- 7QDMqOU/DDkbK
-X-Google-Smtp-Source: AGHT+IGLpa4zRVXlYVirV2Xike7TB86GFem5De+d0pcxCsOt1DYitIWzJnIy4UEwd+NHHIzgupK6/Q==
-X-Received: by 2002:a05:6830:648b:b0:72b:9b1f:2e1d with SMTP id
- 46e09a7af769-732269c8ce0mr5405273a34.2.1746889915514; 
- Sat, 10 May 2025 08:11:55 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-732264b0036sm945007a34.15.2025.05.10.08.11.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 08:11:54 -0700 (PDT)
-Date: Sat, 10 May 2025 09:11:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 3/4] doc: pytest: Document the test_net_boot test
-Message-ID: <20250510151152.GM603748@bill-the-cat>
-References: <20250225205003.2640910-1-trini@konsulko.com>
- <20250507221112.518041-1-trini@konsulko.com>
- <20250507221112.518041-4-trini@konsulko.com>
- <CAFLszTh+5AT2pmKwY38+16+Ujdooa9e+1BB=oH3P9z-1PN7hAg@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=c8d5=X3=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1746891105;
+ bh=IawsK8F03mTMamO9ChZM2BfRlGKnL9eLXaIbt0SrjY0=;
+ b=JHdgQHjJ+UqPPBEBAmWv4ntJH61SMBbP+igbRDYkFZZppiAWHqsfIxQMuWrbjggv7HUB1EPHD
+ 14FQSpNuR+OKDDkg1KNcpueByBMhp+biYZQkjX8hrdV90m9z253WSeL4tR0V9h/oZWFcJDOoMZW
+ ql2H6F+FA8RSVU/Lw3+lDaD/ckRU7QOrKbhfB4qKDovAmhUygPjfutJfSJmwMoYlNZNMVjXycIH
+ 9XG3RX1jrxF1IIBMKAU9sVDddDV4wy5BHRlPz87l4OqBVt1Eq/XqSiZe1rjNDIOsSwgPbzlW4wd
+ 7f7fDCMuMDu3sSqP0Eb3C/vXxAcgtO3zZClkeFK92tMw==
+X-Forward-Email-ID: 681f715d5b0e4d7e6a25ad5b
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <3ae0c43b-8b6f-43c3-89d3-5773bef5ed23@kwiboo.se>
+Date: Sat, 10 May 2025 17:31:35 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mw7ktvtCk+IvqiNK"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTh+5AT2pmKwY38+16+Ujdooa9e+1BB=oH3P9z-1PN7hAg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 06/22] fdt: Redo devicetree setup
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bill Mills <bill.mills@linaro.org>,
+ Andrew Phelps <andrew.phelps@canonical.com>,
+ =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Evgeny Bachinin
+ <EABachinin@salutedevices.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ =?UTF-8?Q?Marek_Moj=C3=ADk?= <marek.mojik@nic.cz>,
+ Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ This contributor prefers not to receive mails <noreply@example.com>
+References: <20250510134253.1581164-1-sjg@chromium.org>
+ <20250510134253.1581164-5-sjg@chromium.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250510134253.1581164-5-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,60 +90,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---mw7ktvtCk+IvqiNK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025-05-10 15:42, Simon Glass wrote:
+> The existing logic for handling receiving a devicetree from a previous
+> phase is quite complicated. Simplify it in preparation for introducing
+> standard passage.
+> 
+> Add a Kconfig called OF_PASSAGE which indicates that the devicetree
+> must come from standard passage.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v4:
+> - Drop now-unused label
+> 
+> Changes in v3:
+> - Add new patch to redo how a devicetree is set up
+> 
+>  dts/Kconfig  |  8 ++++++++
+>  lib/fdtdec.c | 35 ++++++-----------------------------
+>  2 files changed, 14 insertions(+), 29 deletions(-)
+> 
+> diff --git a/dts/Kconfig b/dts/Kconfig
+> index c544f948a15..57101bddabb 100644
+> --- a/dts/Kconfig
+> +++ b/dts/Kconfig
+> @@ -159,6 +159,14 @@ config OF_EMBED
+>  	  and development only and is not recommended for production devices.
+>  	  Boards in the mainline U-Boot tree should not use it.
+>  
+> +config OF_PASSAGE
+> +	bool "DTB is provided by a standard passage, in a bloblist"
+> +	help
+> +	  Select this to read the devicetree using the standard passage
+> +	  mechanism, i.e. from a previous phase in bloblist using arch-specific
+> +	  register conventions. If enabled, the previous phase must provide
+> +	  the devicetree, or U-Boot will not function correctly.
+> +
+>  endchoice
+>  
+>  config OF_INITIAL_DTB_READONLY
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index c38738b48c7..8559616873b 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1689,35 +1689,13 @@ void fdtdec_setup_embed(void)
+>  
+>  int fdtdec_setup(void)
+>  {
+> -	int ret = -ENOENT;
+> -
+> -	/*
+> -	 * If allowing a bloblist, check that first. There was discussion about
+> -	 * adding an OF_BLOBLIST Kconfig, but this was rejected.
+> -	 *
+> -	 * The necessary test is whether the previous phase passed a bloblist,
+> -	 * not whether this phase creates one.
+> -	 */
+> -	if (CONFIG_IS_ENABLED(BLOBLIST) &&
+> -	    (xpl_prev_phase() != PHASE_TPL ||
+> -	     IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+> -		ret = bloblist_maybe_init();
+> -		if (!ret) {
+> -			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+> -			if (gd->fdt_blob) {
+> -				gd->fdt_src = FDTSRC_BLOBLIST;
+> -				log_debug("Devicetree is in bloblist at %p\n",
+> -					  gd->fdt_blob);
+> -				goto setup_fdt;
+> -			} else {
+> -				log_debug("No FDT found in bloblist\n");
+> -				ret = -ENOENT;
+> -			}
+> -		}
+> -	}
+> +	int ret;
+>  
+> -	/* Otherwise, the devicetree is typically appended to U-Boot */
+> -	if (ret) {
+> +	if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
 
-On Sat, May 10, 2025 at 01:25:27PM +0200, Simon Glass wrote:
-> On Thu, 8 May 2025 at 00:11, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > Add the test_net_boot.py test to the generated documentation. While most
-> > of this was already commented correctly for inclusion the biggest
-> > problem was examples of code without a code-block notation. This in turn
-> > broke parsing. Add the missing notations. We also must have the comment
-> > prior to any import lines or it will not be seen as a comment on the
-> > overall file and thus not included.
-> >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > ---
-> >  doc/develop/pytest/index.rst         |   1 +
-> >  doc/develop/pytest/test_net_boot.rst |   8 ++
-> >  test/py/tests/test_net_boot.py       | 163 +++++++++++++++------------
-> >  3 files changed, 98 insertions(+), 74 deletions(-)
-> >  create mode 100644 doc/develop/pytest/test_net_boot.rst
-> >
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> Can we add some default binaries to the tree, or somewhere else?
+This looks wrong, should possible be OF_PASSAGE ?
 
-No, I don't think that's a good idea. It needs to be something that will
-actually boot on the hardware in question.
+Also looks like there is more patches in need of a correction to use
+OF_PASSAGE instead of OF_BLOBLIST in commit message and/or patch content
+in this series.
 
---=20
-Tom
+Regards,
+Jonas
 
---mw7ktvtCk+IvqiNK
-Content-Type: application/pgp-signature; name="signature.asc"
+> +		printf("Previous phase failed to provide standard passage\n");
+> +		return -ENOENT;
+> +	} else {
+> +		/* The devicetree is typically appended to U-Boot */
+>  		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
+>  			gd->fdt_blob = fdt_find_separate();
+>  			gd->fdt_src = FDTSRC_SEPARATE;
+> @@ -1752,7 +1730,6 @@ int fdtdec_setup(void)
+>  		}
+>  	}
+>  
+> -setup_fdt:
+>  	if (CONFIG_IS_ENABLED(MULTI_DTB_FIT))
+>  		setup_multi_dtb_fit();
+>  
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgfbLgACgkQFHw5/5Y0
-tyyapwv/dTamjtIWSxtgnV0fNqgdZRgVxj3+7lc4JiS8VDgIgClAAE+ExN/3NaEv
-irLW4C+AbWDxmhbnvx/gZpPrT/+tvVFNsdCQ7VrxifOPfGaf+q0PsUMrj7ieuGn3
-xKxIZKRJu9z+A1yHnQZ9eQX96NP99OwuC6UgF13G2OSOcNe0fP0d3CAaxOgzJChZ
-3aOK1riJq+8ILKR/g3iTKaE0XGVkxe7ksjQHzZxYbUMthp29x2BJw8vsFZ+f+sQb
-gyV7L2MirVXhwuQoQRg0qcdnsT/ZEg8xoMEgeWFS6z3mBvBm+1OnXGBp3QvLkBN/
-yf07cye9pSVgjmI5Mh0i521+kh+qMxSMckxCtc042Gb+7k18l1MlJtD+sqU22T5D
-kU+eIjq8O5PHuLS0VAKJIhh4bsztmBJ31KTN8Y/V9OdmQaM4moUgE8PPM4e7OmfS
-d12m1BEtnnCa54WJS7Ls7OJJjw/doAOWjHp00KQZiBJEr5gz01k0dqV4lwRHjQWi
-XPkOfLCZ
-=Clf+
------END PGP SIGNATURE-----
-
---mw7ktvtCk+IvqiNK--
