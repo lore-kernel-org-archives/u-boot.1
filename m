@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D9E5C3ABC9
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23012C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:44:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B24DA82AF4;
-	Sat, 10 May 2025 15:43:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0925A82A65;
+	Sat, 10 May 2025 15:43:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MNjWko+A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IPLdaKtf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1BD282A65; Sat, 10 May 2025 15:43:37 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 2046F82B18; Sat, 10 May 2025 15:43:40 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C5F682AA8
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4FE182A65
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5fbc736f0c7so4442800a12.2
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:35 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ad228552355so224537966b.3
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884614; x=1747489414; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884616; x=1747489416; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E7MV62SqOOGwTNIEtbEz+BpMbjl52mtemsEd0H+q5no=;
- b=MNjWko+APqdESiKVlwKjaQVygZ8byaumQkSEfTT+XhCXwINIrhBElvEewXp5TYyzPI
- DU/9xd/0nOaYURU5KRJJqxuUdKPsaginP/WlKT5Ll+Nz6nxO7LsQ3a+ipxwXhS+w04+K
- RGXdXxvd1YeyZA4z19Hj4SOUqtDlksL+rcAQE=
+ bh=nFTimsxL2qn9sgreJYiEBH+yN/K3dCcwqLCKCQiZSFU=;
+ b=IPLdaKtfjFeuVHVU67Fp70DDX2/hWi3uTwZgOf0EmdxEE+OZYCfzTYKUUAfk7iuqyX
+ W4veZGnccaBE2fqbcHWU+RcM5niVs2RAM8RspV4lEeYpOvXM3Rs/eWFJcwgKKTyftGHN
+ pF/5dVsO439Tkou3TouDttEtecVUyPlii45ag=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884614; x=1747489414;
+ d=1e100.net; s=20230601; t=1746884616; x=1747489416;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E7MV62SqOOGwTNIEtbEz+BpMbjl52mtemsEd0H+q5no=;
- b=opFlBx48GH6VaTkSDIwxEiXIdXQMrRtH4iFSLeGO7eIlHguZwIzbhe0seErxxxluwN
- V52w1BTFnbU7M48Ag8ijMzx63aIDwNPna0fQwyNvNhT8c2Cgnux19g5FE+zPMGonBP7I
- bMdLJNn725iOsrtTzmtZE92q53HI15BA7iQtk6ekV/zdbH2kIsSg9X8XnzTxWdjXiyIG
- VudcjvzSzcTqmdxyDpczVzzB/h6K/NylyJXKa20tcy+UbnqDeqgiNEj9EqsvRe1/7Vzx
- K5s7R2H+qUONFwqY8psaMVZuXaCgj36w4WiYVSLe51v6x5NsGjtAph51E7r5scAI5n8H
- atcg==
-X-Gm-Message-State: AOJu0Yw/sqBe7R+Z241FE8HJBH1LHa4tJHEjTzeAgVJdktA2rp+ebQzs
- UxzUy71nyQ35kseh6ijNjvOr0odfa5/fdvgmta3cqIsRBrqwP2gRyt8j+pbLTahI89eA3WNvZ2C
- ZsPJ8dsrIew==
-X-Gm-Gg: ASbGnct6kIYYnKbjT/mvNdBjKouoy4tXQn9YD8dh48uKaEAWTVdg3yWItY56Fu18HMf
- ATEuKza1j+58HiDfQ0lLfD+WP9NOzEgPZHUUsX5SelZ5j6OVtJXbd2YiVgA+F4jKpEuNHNw9gkz
- Ej14PJL0DmVh2bmCbPqsMGSdDH9tXAfpxHam5embuAl4wEeM5ohbEw+e9LiPDpHRiSOK09LsyIX
- EFKN2CGCAlqkybZ/kHPcEV7DUvQkObgLoDMgunm6RMiHia4xcANiEN5vG6rizpVetV+3NbZtt5I
- ZOI7I5G6ICuAwsWGzPq43V3rqSd4wRcLso71WrZeV5iZkxKYGwixkqzEmB8nLy+tmNFD
-X-Google-Smtp-Source: AGHT+IEyrHnbggFh68DhVMLC8NrSBJFyXReVwh79ilvnLP22sa2eB7P7Q7VLvn2AQPC6QjcLTFgzBA==
-X-Received: by 2002:a17:907:6a13:b0:acb:6746:8769 with SMTP id
- a640c23a62f3a-ad218f48713mr714532866b.18.1746884613736; 
- Sat, 10 May 2025 06:43:33 -0700 (PDT)
+ bh=nFTimsxL2qn9sgreJYiEBH+yN/K3dCcwqLCKCQiZSFU=;
+ b=AuYM+RMfsBNSpXdq3iLdiyJPnI0AefIYSkYCf8M59e56YLmPfZ6VEnQ+Hx0vkrCfnd
+ 0wThiXGtvZdj7mauPzpwLi5GuB69/H40LYIhFON+LwxHctMyD/Ivd3sM2869C5octUT5
+ g2dqrC5dRbUcB/sSgz7OpMIN2ZmTVWoWBz7PTayiRIpmwMI1FrQfbY/v22GmUisBboJU
+ iBGPeCqVOP2ZSAM+xpTLVBq04M2C2i268G2TJtrqElha395qJQ7+9nHFjLJWhWGMfrvY
+ NIDfoVZ4hquwovISNByeZX/hzdzLxvF30DRhZ06ahnrAxheBEmcJbz8AdJl7yHPlVdb9
+ e1TA==
+X-Gm-Message-State: AOJu0Yxw6+7iTMqqwM8BPwog4EJRjRHxCdtoM3X3MHAzQuMX8YbTDWsI
+ B8lfn6MgA9NVM8N2j5x7q8SMsj8ep717wWp/y6WLaoTij/49L8KyftVBhHSp6jX15sC0xCu2CkF
+ SdUCnKb4oAg==
+X-Gm-Gg: ASbGnctN17A1lt6XJHvJCfr+Ehucg6HUqOojAQ6lYNiIcdDIsvB72zzxovSnXvWg+9v
+ xOVsDe+wBdMb+axf1QzNfXez9+wCoGBt0ekcZLkhUp0wz70NAREty9kuDcIKseEsPZ3qTruugjz
+ Npb9nSZbJBBvhTgly3AbC26fWulVhjyPEqnuYlky1QBRVOuCo9d+WOnRxMsOQd8wiMwMgI6gknl
+ fG5htmC10UyU5yELKg6ugS82070Jru4L0F4lI0da3b/CtlhiOoMkVuLbFyEZUbRbwBUUoULENiV
+ HyOC+QebR7nFQ6NtIC7i/rWwDNRpkFPjuUy7uNk1zwCTL1y83+Vbe86xk4uL4moPWdYc
+X-Google-Smtp-Source: AGHT+IFAFXJB5eJApJRBQgzBxyn5lEyqRLv0GsFV5Iew7JgHr9hRPNtPDv0QNJ4v1QvJlEpGnkqLdg==
+X-Received: by 2002:a17:907:940f:b0:ace:dbfc:30be with SMTP id
+ a640c23a62f3a-ad218e535b1mr651996166b.7.1746884616358; 
+ Sat, 10 May 2025 06:43:36 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.31
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:43:32 -0700 (PDT)
+ Sat, 10 May 2025 06:43:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -76,23 +76,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Fabio Estevam <festevam@gmail.com>, Leo <ycliang@andestech.com>,
- Lukasz Majewski <lukma@denx.de>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Kocialkowski <paulk@sys-base.io>,
- Quentin Schulz <quentin.schulz@cherry.de>, Rick Chen <rick@andestech.com>,
- Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@nabladev.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>
-Subject: [PATCH v4 04/22] spl: Rename jump_to_image_no_args()
-Date: Sat, 10 May 2025 15:42:02 +0200
-Message-ID: <20250510154214.v4.4.Ieb1fd7a5478ba1dfe3a58666ed586e83b0641590@changeid>
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
+Subject: [PATCH v4 05/22] passage: Support an incoming passage
+Date: Sat, 10 May 2025 15:42:03 +0200
+Message-ID: <20250510134253.1581164-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -114,278 +108,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is about to become a misnomer since with standard passage we need to
-pass arguments to U-Boot. Rename the function.
-
-Also rename the local variable to 'jumper' to avoid a conflict.
+Plumb in the ability for U-Boot proper to accept an incoming standard
+passage from a previous phase, such as SPL or TF-A. This allows data to
+be passed from binary to binary when firmware is booting.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v3)
+
+Changes in v3:
+- Add passage_valid() to decide if stdpass was provided
+- Make the global_data fields present only when needed
+- Move arch_passage_entry() into this patch
+- Move passage.h into this patch
 
 Changes in v2:
-- Split the jump_to_image_no_args() change into its own patch
+- Rebase to master
+- Rework global_data for new stdpass convention
 
- arch/arm/mach-imx/imx8ulp/soc.c             |  2 +-
- arch/arm/mach-imx/spl.c                     |  2 +-
- arch/arm/mach-omap2/boot-common.c           |  2 +-
- arch/arm/mach-tegra/spl.c                   |  2 +-
- arch/mips/lib/spl.c                         |  2 +-
- arch/riscv/lib/spl.c                        |  2 +-
- arch/sandbox/cpu/spl.c                      |  4 ++--
- arch/x86/lib/spl.c                          |  2 +-
- arch/x86/lib/tpl.c                          |  2 +-
- board/freescale/common/fsl_chain_of_trust.c |  2 +-
- board/renesas/common/rcar64-spl.c           |  2 +-
- common/spl/spl.c                            | 16 ++++++++--------
- drivers/usb/gadget/f_sdp.c                  |  2 +-
- include/spl.h                               |  2 +-
- 14 files changed, 22 insertions(+), 22 deletions(-)
+ Makefile                          |  2 +-
+ common/Kconfig                    | 31 ++++++++++++++++++
+ common/board_f.c                  | 13 +++++---
+ include/asm-generic/global_data.h | 37 +++++++++++++++++++++
+ include/passage.h                 | 53 +++++++++++++++++++++++++++++++
+ lib/asm-offsets.c                 |  8 +++++
+ scripts/Makefile.xpl              |  2 +-
+ 7 files changed, 139 insertions(+), 7 deletions(-)
+ create mode 100644 include/passage.h
 
-diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/soc.c
-index b5dc45296d1..2b042300103 100644
---- a/arch/arm/mach-imx/imx8ulp/soc.c
-+++ b/arch/arm/mach-imx/imx8ulp/soc.c
-@@ -806,7 +806,7 @@ int imx8ulp_dm_post_init(void)
- EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_F, imx8ulp_dm_post_init);
+diff --git a/Makefile b/Makefile
+index 15c7e633b87..cb3b39157e5 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1396,7 +1396,7 @@ endif
  
- #if defined(CONFIG_XPL_BUILD)
--__weak void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+__weak void __noreturn jump_to_image(struct spl_image_info *spl_image)
+ binman_dtb := $(shell echo $(CONFIG_BINMAN_DTB))
+ ifeq ($(strip $(binman_dtb)),)
+-ifeq ($(CONFIG_OF_EMBED),y)
++ifneq ($(CONFIG_OF_EMBED)$(CONFIG_OF_PASSAGE),)
+ binman_dtb = ./dts/dt.dtb
+ else
+ binman_dtb = ./u-boot.dtb
+diff --git a/common/Kconfig b/common/Kconfig
+index be517b80eb5..c6a8fa54363 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1089,6 +1089,14 @@ config BLOBLIST_PASSAGE_MANDATORY
+ 	  U-Boot will report an error when a valid incoming bloblist does not
+ 	  exist.
+ 
++config BLOBLIST_PASSAGE
++	bool "Obtain bloblist from standard passage information"
++	help
++	  Rather than allocating the bloblist, get it from the standard
++	  passage provided by an earlier phase, e.g. SPL. The bloblist address
++	  and size are used as is, except that the bloblist is of course
++	  relocated when U-Boot relocates.
++
+ endchoice
+ 
+ config BLOBLIST_ADDR
+@@ -1148,6 +1156,13 @@ config SPL_BLOBLIST_ALLOC
+ 	  specify a fixed address on systems where this is unknown or can
+ 	  change at runtime.
+ 
++config SPL_BLOBLIST_PASSAGE
++	bool "Obtain bloblist from standard passage information"
++	help
++	  Rather than allocating the bloblist, get it from the standard
++	  passage provided by an earlier phase, e.g. TPL. The bloblist address
++	  and size are used as is within SPL, then passed on to U-Boot.
++
+ endchoice
+ 
+ endif # SPL_BLOBLIST
+@@ -1212,6 +1227,22 @@ endif # VPL_BLOBLIST
+ 
+ endmenu
+ 
++config PASSAGE_IN
++	bool "Support the standard-passage protocol (in)"
++	help
++	  This enables a standard protocol for entering U-Boot, providing
++	  parameters in a bloblist with a devicetree. It allows the various
++	  firmware phases to communicate state and settings to following
++	  phases.
++
++config SPL_PASSAGE_IN
++	bool "Support the standard-passage protocol in SPL (in)"
++	help
++	  This enables a standard protocol for entering SPL, providing
++	  parameters in a bloblist and a devicetree. It allows the various
++	  firmware phases to communicate state and settings to following
++	  phases.
++
+ source "common/spl/Kconfig"
+ 
+ config IMAGE_SIGN_INFO
+diff --git a/common/board_f.c b/common/board_f.c
+index bff465d9cb2..e9ffa2d7fed 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -700,11 +700,14 @@ static int reloc_bootstage(void)
+ static int reloc_bloblist(void)
  {
- 	debug("image entry point: 0x%lx\n", spl_image->entry_point);
- 
-diff --git a/arch/arm/mach-imx/spl.c b/arch/arm/mach-imx/spl.c
-index bc291dcd129..518d9cb1262 100644
---- a/arch/arm/mach-imx/spl.c
-+++ b/arch/arm/mach-imx/spl.c
-@@ -276,7 +276,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-  * +------------+ + CSF_PAD_SIZE
-  */
- 
--__weak void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+__weak void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	typedef void __noreturn (*image_entry_noargs_t)(void);
- 	uint32_t offset;
-diff --git a/arch/arm/mach-omap2/boot-common.c b/arch/arm/mach-omap2/boot-common.c
-index ddd7eeaf052..95b44c8b1e5 100644
---- a/arch/arm/mach-omap2/boot-common.c
-+++ b/arch/arm/mach-omap2/boot-common.c
-@@ -291,7 +291,7 @@ void spl_soc_init(void)
- 		spl_boot_ipu();
- }
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	typedef void __noreturn (*image_entry_noargs_t)(u32 *);
- 	image_entry_noargs_t image_entry =
-diff --git a/arch/arm/mach-tegra/spl.c b/arch/arm/mach-tegra/spl.c
-index 5df0eb28c96..b3a039217c2 100644
---- a/arch/arm/mach-tegra/spl.c
-+++ b/arch/arm/mach-tegra/spl.c
-@@ -43,7 +43,7 @@ u32 spl_boot_device(void)
- 	return BOOT_DEVICE_RAM;
- }
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	debug("image entry point: 0x%lX\n", spl_image->entry_point);
- 
-diff --git a/arch/mips/lib/spl.c b/arch/mips/lib/spl.c
-index b4087546dd1..4949b17bd59 100644
---- a/arch/mips/lib/spl.c
-+++ b/arch/mips/lib/spl.c
-@@ -7,7 +7,7 @@
- #include <log.h>
- #include <spl.h>
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	typedef void __noreturn (*image_entry_noargs_t)(void);
- 	image_entry_noargs_t image_entry =
-diff --git a/arch/riscv/lib/spl.c b/arch/riscv/lib/spl.c
-index 9a7a4f6ac8d..38a5ab27dd8 100644
---- a/arch/riscv/lib/spl.c
-+++ b/arch/riscv/lib/spl.c
-@@ -36,7 +36,7 @@ __weak void board_init_f(ulong dummy)
- 		panic("spl_board_init_f() failed: %d\n", ret);
- }
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	typedef void __noreturn (*image_entry_riscv_t)(ulong hart, void *dtb);
- 	void *fdt_blob;
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index ecc03785463..514da305404 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -74,7 +74,7 @@ static int spl_board_load_file(struct spl_image_info *spl_image,
+ #ifdef CONFIG_BLOBLIST
+-	/*
+-	 * Relocate only if we are supposed to send it
+-	 */
+-	if ((gd->flags & GD_FLG_SKIP_RELOC) &&
+-	    CONFIG_BLOBLIST_SIZE == CONFIG_BLOBLIST_SIZE_RELOC) {
++	int size = bloblist_get_size();
++	int new_size = CONFIG_BLOBLIST_SIZE_RELOC;
++
++	if (!new_size)
++		new_size = size;
++
++	/* Relocate only if we are supposed to send it */
++	if ((gd->flags & GD_FLG_SKIP_RELOC) && size == new_size) {
+ 		debug("Not relocating bloblist\n");
+ 		return 0;
  	}
- 
- 	/*
--	 * Set up spl_image to boot from jump_to_image_no_args(). Allocate this
-+	 * Set up spl_image to boot from jump_to_image(). Allocate this
- 	 * outsdide the RAM buffer (i.e. don't use strdup()).
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index 506ee51cdb0..464b9c3eee1 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -219,6 +219,35 @@ struct global_data {
  	 */
- 	spl_image->arg = os_malloc(strlen(fname) + 1);
-@@ -159,7 +159,7 @@ void spl_board_init(void)
- 	}
- }
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	switch (spl_image->flags) {
- 	case SPL_SANDBOXF_ARG_IS_FNAME: {
-diff --git a/arch/x86/lib/spl.c b/arch/x86/lib/spl.c
-index 6a6cad310bc..01ff034d665 100644
---- a/arch/x86/lib/spl.c
-+++ b/arch/x86/lib/spl.c
-@@ -277,7 +277,7 @@ int spl_spi_load_image(void)
- }
- 
- #ifdef CONFIG_X86_RUN_64BIT
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	int ret;
- 
-diff --git a/arch/x86/lib/tpl.c b/arch/x86/lib/tpl.c
-index f7df7e03621..06c9e4d02c1 100644
---- a/arch/x86/lib/tpl.c
-+++ b/arch/x86/lib/tpl.c
-@@ -101,7 +101,7 @@ int spl_spi_load_image(void)
- 	return -EPERM;
- }
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	debug("Jumping to %s at %lx\n", xpl_name(xpl_next_phase()),
- 	      (ulong)spl_image->entry_point);
-diff --git a/board/freescale/common/fsl_chain_of_trust.c b/board/freescale/common/fsl_chain_of_trust.c
-index 194a0907e72..3d44357caf7 100644
---- a/board/freescale/common/fsl_chain_of_trust.c
-+++ b/board/freescale/common/fsl_chain_of_trust.c
-@@ -134,7 +134,7 @@ void spl_validate_uboot(uint32_t hdr_addr, uintptr_t img_addr)
- /* Override weak funtion defined in SPL framework to enable validation
-  * of main u-boot image before jumping to u-boot image.
-  */
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	typedef void __noreturn (*image_entry_noargs_t)(void);
- 	uint32_t hdr_addr;
-diff --git a/board/renesas/common/rcar64-spl.c b/board/renesas/common/rcar64-spl.c
-index 76f2bde924e..d8f05d2ffbe 100644
---- a/board/renesas/common/rcar64-spl.c
-+++ b/board/renesas/common/rcar64-spl.c
-@@ -6,7 +6,7 @@
- #include <image.h>
- #include <spl.h>
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	debug("image entry point: 0x%lx\n", spl_image->entry_point);
- 	if (spl_image->os == IH_OS_ARM_TRUSTED_FIRMWARE) {
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index abbca9acde0..f14c68c46a5 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -391,7 +391,7 @@ int spl_load(struct spl_image_info *spl_image,
- }
+ 	long precon_buf_idx;
+ #endif
++#if CONFIG_IS_ENABLED(PASSAGE_IN)
++	/**
++	 * @passage_mach: Incoming machine information from standard passage
++	 *
++	 * Provides a value which indicates whether passage is used, e.g.
++	 * PASSAGE_ABI_MACH
++	 */
++	ulong passage_mach;
++	/**
++	 * @passage_bloblist: Incoming bloblist from standard passage
++	 *
++	 * Provides the address of the bloblist passed in by the previous stage
++	 * or phase. If this is zero, there is none.
++	 */
++	ulong passage_bloblist;
++
++	/**
++	 * @passage_dtb: Incoming control devicetree within standard passage
++	 *
++	 * Provides the address (typically within the bloblist) where the
++	 * control DTB is stored. If this is zero, there is none.
++	 *
++	 * Note: This must be set to the correct value if the control DTB exists
++	 * since SPL may use this and ignore the bloblist, e.g. if bloblist
++	 * support is not enabled for code-size reasons. If this value is not
++	 * valid, any devicetree passed in the passage_bloblist is ignored.
++	 */
++	ulong passage_dtb;
++#endif
+ #ifdef CONFIG_DM
+ 	/**
+ 	 * @dm_root: root instance for Driver Model
+@@ -581,6 +610,14 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
+ #define gd_video_size()		0
  #endif
  
--__weak void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+__weak void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
- 	typedef void __noreturn (*image_entry_noargs_t)(void);
++#if CONFIG_IS_ENABLED(PASSAGE_IN)
++#define gd_passage_bloblist()	gd->passage_bloblist
++#define gd_passage_dtb()	gd->passage_dtb
++#else
++#define gd_passage_bloblist()	0
++#define gd_passage_dtb()	0
++#endif
++
+ /**
+  * enum gd_flags - global data flags
+  *
+diff --git a/include/passage.h b/include/passage.h
+new file mode 100644
+index 00000000000..b71796f5eaf
+--- /dev/null
++++ b/include/passage.h
+@@ -0,0 +1,53 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Standard passage implementation
++ *
++ * Copyright 2022 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#ifndef __PASSAGE_H
++#define __PASSAGE_H
++
++#include <stdbool.h>
++#include <asm/global_data.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++enum {
++	PASSAGE_ABI_MACH	= 0x4a0fb10bul,
++	PASSAGE_ABI_VERSION	= 1ul,
++};
++
++static inline ulong passage_mach_version(void)
++{
++#if BITS_PER_LONG == 64
++	return PASSAGE_ABI_MACH | (ulong)PASSAGE_ABI_VERSION << 32;
++#else
++	return (PASSAGE_ABI_MACH & 0xffffff) | (PASSAGE_ABI_VERSION << 24);
++#endif
++}
++
++/**
++ * passage_valid() - See if standard passage was provided by the previous phase
++ *
++ * Return: true if standard passage was provided, else false
++ */
++static inline bool passage_valid(void)
++{
++#if CONFIG_IS_ENABLED(BLOBLIST_PASSAGE)
++	return gd->passage_mach == passage_mach_version();
++#else
++	return false;
++#endif
++}
++
++/* arch_passage_entry() - Jump to the next phase, using standard passage
++ *
++ * @entry_addr: Address to jump to
++ * @bloblist: Bloblist address to pass
++ * @fdt: FDT to pass
++ */
++void __noreturn arch_passage_entry(ulong entry_addr, ulong bloblist, ulong fdt);
++
++#endif
+diff --git a/lib/asm-offsets.c b/lib/asm-offsets.c
+index b6bbcbf76ca..23ee9aab47e 100644
+--- a/lib/asm-offsets.c
++++ b/lib/asm-offsets.c
+@@ -48,5 +48,13 @@ int main(void)
+ 	DEFINE(GD_ENV_ADDR, offsetof(struct global_data, env_addr));
+ #endif
  
-@@ -688,7 +688,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		BOOT_DEVICE_NONE,
- 		BOOT_DEVICE_NONE,
- 	};
--	spl_jump_to_image_t jump_to_image = &jump_to_image_no_args;
-+	spl_jump_to_image_t jumper = &jump_to_image;
- 	struct spl_image_info spl_image;
- 	int ret, os;
- 
-@@ -782,20 +782,20 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 	} else if (CONFIG_IS_ENABLED(ATF) && os == IH_OS_ARM_TRUSTED_FIRMWARE) {
- 		debug("Jumping to U-Boot via ARM Trusted Firmware\n");
- 		spl_fixup_fdt(spl_image_fdt_addr(&spl_image));
--		jump_to_image = &spl_invoke_atf;
-+		jumper = &spl_invoke_atf;
- 	} else if (CONFIG_IS_ENABLED(OPTEE_IMAGE) && os == IH_OS_TEE) {
- 		debug("Jumping to U-Boot via OP-TEE\n");
- 		spl_board_prepare_for_optee(spl_image_fdt_addr(&spl_image));
--		jump_to_image = &jump_to_image_optee;
-+		jumper = &jump_to_image_optee;
- 	} else if (CONFIG_IS_ENABLED(OPENSBI) && os == IH_OS_OPENSBI) {
- 		debug("Jumping to U-Boot via RISC-V OpenSBI\n");
--		jump_to_image = &spl_invoke_opensbi;
-+		jumper = &spl_invoke_opensbi;
- 	} else if (CONFIG_IS_ENABLED(OS_BOOT) && os == IH_OS_LINUX) {
- 		debug("Jumping to Linux\n");
- 		if (IS_ENABLED(CONFIG_SPL_OS_BOOT))
- 			spl_fixup_fdt((void *)SPL_PAYLOAD_ARGS_ADDR);
- 		spl_board_prepare_for_linux();
--		jump_to_image = &jump_to_image_linux;
-+		jumper = &jump_to_image_linux;
- 	} else {
- 		debug("Unsupported OS image.. Jumping nevertheless..\n");
- 	}
-@@ -847,7 +847,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 	if (CONFIG_IS_ENABLED(RELOC_LOADER)) {
- 		int ret;
- 
--		ret = spl_reloc_jump(&spl_image, jump_to_image);
-+		ret = spl_reloc_jump(&spl_image, jumper);
- 		if (ret) {
- 			if (xpl_phase() == PHASE_VPL)
- 				printf("jump failed %d\n", ret);
-@@ -855,7 +855,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		}
- 	}
- 
--	jump_to_image(&spl_image);
-+	jumper(&spl_image);
++#if CONFIG_IS_ENABLED(PASSAGE_IN)
++	DEFINE(GD_PASSAGE_MACH, offsetof(struct global_data, passage_mach));
++	DEFINE(GD_PASSAGE_BLOBLIST,
++	       offsetof(struct global_data, passage_bloblist));
++	DEFINE(GD_PASSAGE_DTB,
++	       offsetof(struct global_data, passage_dtb));
++#endif
++
+ 	return 0;
  }
- 
- /*
-diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-index 36934b1bcf7..647001d8dd0 100644
---- a/drivers/usb/gadget/f_sdp.c
-+++ b/drivers/usb/gadget/f_sdp.c
-@@ -863,7 +863,7 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 			struct spl_boot_device bootdev = {};
- 			spl_parse_image_header(&spl_image, &bootdev, header);
- 			spl_board_prepare_for_boot();
--			jump_to_image_no_args(&spl_image);
-+			jump_to_image(&spl_image);
- #else
- 			/* In U-Boot, allow jumps to scripts */
- 			cmd_source_script(sdp_func->jmp_address, NULL, NULL);
-diff --git a/include/spl.h b/include/spl.h
-index 850c64d4b19..7c10c7f792e 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -865,7 +865,7 @@ int spl_load_image_fat_os(struct spl_image_info *spl_image,
- 			  struct spl_boot_device *bootdev,
- 			  struct blk_desc *block_dev, int partition);
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image);
-+void __noreturn jump_to_image(struct spl_image_info *spl_image);
- 
- /* SPL EXT image functions */
- int spl_load_image_ext(struct spl_image_info *spl_image,
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index 43f27874f9f..b25866e9676 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -322,7 +322,7 @@ endif
+ #   - we have either OF_SEPARATE or OF_HOSTFILE
+ build_dtb :=
+ ifneq ($(CONFIG_$(PHASE_)OF_REAL),)
+-ifneq ($(CONFIG_OF_SEPARATE)$(CONFIG_SANDBOX),)
++ifneq ($(CONFIG_OF_SEPARATE)$(CONFIG_OF_PASSAGE),$(CONFIG_SANDBOX),)
+ build_dtb := y
+ endif
+ endif
 -- 
 2.43.0
 
