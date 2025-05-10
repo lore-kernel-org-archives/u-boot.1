@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 093BFC3ABC9
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9523C3ABC3
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:44:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED83C82B44;
-	Sat, 10 May 2025 15:43:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72BC682B32;
+	Sat, 10 May 2025 15:43:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c7GqXG+o";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VYyTQMzd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 968AD82B32; Sat, 10 May 2025 15:43:49 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id E771082B95; Sat, 10 May 2025 15:43:52 +0200 (CEST)
+Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com
+ [IPv6:2a00:1450:4864:20::644])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A439382AA8
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC63E82893
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5f3f04b5dbcso4799764a12.1
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:47 -0700 (PDT)
+Received: by mail-ej1-x644.google.com with SMTP id
+ a640c23a62f3a-acb5ec407b1so542971366b.1
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884626; x=1747489426; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884629; x=1747489429; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jtVEWTaEhcdi26ANWFOalN9+UtwW0THDh9KdOFc58CA=;
- b=c7GqXG+ow/+d4HPVJJL7FHRkFy5B5NY+fZw/V4NuIknGY0/ItKkcpRlpDRHUXD1Ipk
- 7MtBh0ITIndV1Fsz5rsXQ8r9xT8yYEymldpbd/erWv5kKRYeGpbHcoe3hksWZ1Lb3N4x
- +xMJerc50x+HLk2yIR5fZbifzZp809/dd46Bg=
+ bh=36occY8E+n/hqjaEAyyVh2DeubLNieRPSwZilYpgU3o=;
+ b=VYyTQMzdUiMPA98yrHFBirso6QGbHdILuawIaQHWG4d7+8QdZhvokAKh9DUaz0heGm
+ T+4jaAbch84hI2fpNoq7lD67gMnoIXYk7OcN1OJ/L1ioH7VURp6sYm+E+JUpFtR8aItf
+ 5N5xBN1ety7E5G+bXVpornAePDmq0LdQQbWjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884626; x=1747489426;
+ d=1e100.net; s=20230601; t=1746884629; x=1747489429;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jtVEWTaEhcdi26ANWFOalN9+UtwW0THDh9KdOFc58CA=;
- b=YQqOAF/269t/E52y5KgVHwn9H+8wopW3O4OwSiblnBb/kvySzwvIrMhkcF+7yGaF1P
- 3doSRd3t6CCT1Dm7laL8OXFy9lfheVpnJMUwka/ZH7jkm495rNVDVMy+Gwga3s9s6G/Y
- j+qOP3SZsM37YZRyqSeN781EtTvi6ct2F2RBaQa3HLkY71Z0jP1IsY3ioLDk2LZwo6z8
- j8gO3b50KPSqk/LqA9EMt+RDkeuzuipFCBBoLNE4yWyuAubUlNuaZBpIuYrHbVJcFZNm
- 3QldqlOTtDJZayDN0QClZMg6gQCp6R5gk4zAqNPuu23MkI80ylq4YTzM/OQwSnE2gEj8
- X42w==
-X-Gm-Message-State: AOJu0YxBQ1NVZGocnjJJwwv6rtsl4Ln4mosHfhVy5P7jM6rVhq81ZkHE
- FMBb/33keEyjcz63R8OnEvS4JSCdBNUnnUiq5dTTNQk9IUmyNQnPVdUmJv+WZwDYlf6LcQ8eZH+
- 1MWZwwCKnjQ==
-X-Gm-Gg: ASbGncsgSbZsPxk+SRQH+zv04bFiOVm93XeBjs1ZRsZH3tkfIT3cEHrSTggUKAp1x2y
- WyMdvuFGU0krW1CpFRaeBUPNevep8IddcU0GBPjIG6aVvu0CiODZRjS0fFHM9VK5OzXEwMQnxI/
- +pNYbwgZyTEQBnD9Bp+CE8zrv468MYm0I1BvYLb1zH6cYdKq66PuvGkRPXV3H3qpcUFjjwuMpgT
- Hcc4oM8bwGmiCulggEA+xkMUbmJr+YJQCWTjYftrBIMSUPtkbwwY/FG6ZL3DSvjr+ieh+pCnTNv
- Q5rI4OIOcL63UD6+4nUtZz08wHIkpYdQq4OIJUoOMhiRdcPqckbGatSn3wMFEQFxt85Y
-X-Google-Smtp-Source: AGHT+IHuHmGnnvjhdOoAvvHwUXce8jFfDUVZdHxO4TPGXvJUR17f0bPih21ZZqOR3ftK8T5bO9ALQQ==
-X-Received: by 2002:a17:906:c4d:b0:ad2:2146:3b64 with SMTP id
- a640c23a62f3a-ad22146451cmr427725666b.39.1746884625914; 
- Sat, 10 May 2025 06:43:45 -0700 (PDT)
+ bh=36occY8E+n/hqjaEAyyVh2DeubLNieRPSwZilYpgU3o=;
+ b=t/NbHKcyjRzQJX+vzwH6krVsSCS+tuAX57W8hbnxn3UF6eZ5ID7Ph4MonSPaBP4+yJ
+ R8V3q9U2JTfPu5cwsrIng9ohcPIXzkoc5WyJtfNMv3plVi0mLjIXw5sWOnkAutJsij9M
+ +z/kSsNBzUpLWhD7Ujyi4gJmt41xZYG6tCRHLPOKwirBnk1OPsZOPR0foQYJamLNNunZ
+ 1ai0L3XSHMFbKnNC0Kwe0o0BPY48V1icuuKnUg1EZ0pozZ28x1obtfwuuLmnR2KTJIZq
+ VhAgqO1YKz9npQnFEvAWkBT4AojIIISHg9AE6LMDvb7K/UVeOrLTCAXWLb48fQIgaPhF
+ +vGA==
+X-Gm-Message-State: AOJu0YzX2tYNtBJZfrxFvQQIlU8zGWcCRKbQnSaER8U+COtVK7rr75aZ
+ fqMGXmTxVJvhKLtDhzALqlE2wFmgqUVZN8lg7t5vHRyEPpeiMEdBdEUVYlNNSm320rRX30t9lPw
+ VcxURYmCYLSxa
+X-Gm-Gg: ASbGnctmeJsU7KJiJIQTEza5IeUUJ0cIte1S7uirXHddyMRL+NNBeQ2avaFTa3bdu6j
+ kdImLs28izO0z0o26uVB5j9F3rGXss29R44gF5aNZ1kSs4xK4d9lXblBvaAhfreYNpbh9ATBjEn
+ up0pZ4SwchBjttdBh40aa+ZPEmnC2yAO3DVZvOI6PL7C4VmydIr91hH4JHBLaQD3/cYtDfm5oF0
+ xcGwc0SPqFz9yOEonyP5iY+xeaOOQbNRub5NxR0M8QT36xXDe8S9Bg9kBbS6yt7W0ApmAJ7lq/f
+ zPBIrpyGMtUVaCZ90Gj2Eg92eBssFvf60VuzESLNP0ZlqlgKTBpCkzpB9VXDiUmI63yD
+X-Google-Smtp-Source: AGHT+IE5KYxRupZLYrB6p/8UG3E2l881KC/sYgf+B84gtJps4d2rwZ7OrS9p4S0fUSnyR2H8KI+cZg==
+X-Received: by 2002:a17:906:494e:b0:ad2:1a64:79c5 with SMTP id
+ a640c23a62f3a-ad21a647a4cmr512681166b.7.1746884628579; 
+ Sat, 10 May 2025 06:43:48 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.44
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:43:45 -0700 (PDT)
+ Sat, 10 May 2025 06:43:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -76,14 +76,13 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v4 08/22] bloblist: Adjust how the bloblist is received from
- passage
-Date: Sat, 10 May 2025 15:42:06 +0200
-Message-ID: <20250510134253.1581164-7-sjg@chromium.org>
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Xu Zhang <423756212@qq.com>
+Subject: [PATCH v4 09/22] passage: arm: Accept a passage from the previous
+ phase
+Date: Sat, 10 May 2025 15:42:07 +0200
+Message-ID: <20250510154214.v4.9.I56d9d06e5d74724c963eaffbbe1c2aa400b60bb8@changeid>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -105,124 +104,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With standard passage we can read the bloblist from global_data. Update
-the implementation to handle this, thus simplifying the code somewhat.
+Accept a bloblist and control devicetree from a previous phase in
+registers 0 to 3, as documented in the Firmware Handoff
+specification[1].
 
-Shrink the log_msg_ret() string back down to a more normal size.
+Note that there is currently a weak function called save_boot_params()
+which happens to save the same registers as are needed for this
+protocol. But it seems better to implement this feature as a first-class
+citizen, if for no other reason than that many boards have their own
+version of save_boot_params() which may not happen to save the required
+registers. A weak function is not a good basis for an API.
 
-Note that if OF_BLOBLIST is enabled, this code should never be reached
-unless there is a valid bloblist, since the devicetree is processed
-first.
+[1] https://firmwarehandoff.github.io/firmware_handoff/main/index.html
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
+While some efforts were made to encourage Intel to adopt this
+specification, this has not yet been successful. However I do intend to
+use my proposed x86 handoff in U-Boot, once this series is in.
 
-(no changes since v3)
+Changes in v4:
+- Update commit message to indicate this can only be for ARM at present
+- Update commit message to mention why save_boot_params() is not used
 
 Changes in v3:
-- Add new patch to adjust how the bloblist is received from stdpass
+- Add support for aarch64 also
+- Update registers to match the Firmware Handoff protocol
 
- common/bloblist.c | 70 ++++++++++++++++++++---------------------------
- 1 file changed, 30 insertions(+), 40 deletions(-)
+Changes in v2:
+- Use three registers instead of two for the entry
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 6e4f020d7c4..c7322b96bcb 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -11,6 +11,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <mapmem.h>
-+#include <passage.h>
- #include <spl.h>
- #include <tables_csum.h>
- #include <asm/global_data.h>
-@@ -513,47 +514,37 @@ int __weak xferlist_from_boot_arg(ulong __always_unused *addr)
- int bloblist_init(void)
- {
- 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
--	int ret = 0;
--	ulong addr = 0, size;
+ arch/arm/cpu/armv7/start.S | 10 +++++++++-
+ arch/arm/cpu/armv8/start.S | 12 ++++++++++++
+ arch/arm/lib/crt0.S        |  6 ++++++
+ arch/arm/lib/crt0_64.S     |  6 ++++++
+ 4 files changed, 33 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
+index 959251957de..81cb20987ad 100644
+--- a/arch/arm/cpu/armv7/start.S
++++ b/arch/arm/cpu/armv7/start.S
+@@ -40,6 +40,14 @@ reset:
+ 	/* Allow the board to save important registers */
+ 	b	save_boot_params
+ save_boot_params_ret:
++#if CONFIG_IS_ENABLED(PASSAGE_IN)
++	# Keep passage information in case it is provided
++	cmp	r0, #0
++	moveq	r6, r1		/* mach */
++	moveq	r7, r2		/* dtb */
++	moveq	r8, r3		/* bloblist */
++	movne	r6, #0
++#endif
+ #ifdef CONFIG_POSITION_INDEPENDENT
+ 	/*
+ 	 * Fix .rela.dyn relocations. This allows U-Boot to loaded to and
+@@ -123,7 +131,7 @@ switch_to_hypervisor_ret:
+ 	bl	cpu_init_crit
+ #endif
+ #endif
 -
--	/* Check if a valid transfer list passed in */
--	if (!xferlist_from_boot_arg(&addr)) {
--		size = bloblist_get_total_size();
--	} else {
--		/*
--		 * If U-Boot is not in the first phase, an existing bloblist must
--		 * be at a fixed address.
--		 */
--		bool from_addr = fixed && !xpl_is_first_phase();
--
--		/*
--		 * If Firmware Handoff is mandatory but no transfer list is
--		 * observed, report it as an error.
--		 */
--		if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
--			return -ENOENT;
--
--		ret = -ENOENT;
--
--		if (xpl_prev_phase() == PHASE_TPL &&
--		    !IS_ENABLED(CONFIG_TPL_BLOBLIST))
--			from_addr = false;
--		if (fixed)
--			addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
--					      CONFIG_BLOBLIST_ADDR);
--		size = CONFIG_BLOBLIST_SIZE;
--
--		if (from_addr)
--			ret = bloblist_check(addr, size);
--
--		if (ret)
--			log_warning("Bloblist at %lx not found (err=%d)\n",
-+	int ret = -ENOENT;
-+	ulong addr, size;
-+	bool expected;
++	# Note: r6-r8 are available to _main in case standard passage is used
+ 	bl	_main
+ 
+ /*------------------------------------------------------------------------------*/
+diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
+index 829a620faeb..75d2fd1e271 100644
+--- a/arch/arm/cpu/armv8/start.S
++++ b/arch/arm/cpu/armv8/start.S
+@@ -57,6 +57,18 @@ reset:
+ 	b	save_boot_params
+ .globl	save_boot_params_ret
+ save_boot_params_ret:
++#if CONFIG_IS_ENABLED(PASSAGE_IN)
++	# Keep passage information in case it is provided
++	cmp	x2, #0
++	bne	no_passage
++	mov	x19, x1		/* mach */
++	mov	x20, x0		/* dtb */
++	mov	x21, x3		/* bloblist */
++	b	passage_done
++no_passage:
++	mov	x19, #0
++passage_done:
++#endif
+ 
+ #if CONFIG_POSITION_INDEPENDENT && !defined(CONFIG_XPL_BUILD)
+ 	/* Verify that we're 4K aligned.  */
+diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
+index a50dde60e8b..ab758ca900f 100644
+--- a/arch/arm/lib/crt0.S
++++ b/arch/arm/lib/crt0.S
+@@ -113,6 +113,12 @@ ENTRY(_main)
+ 	mov	r9, r0
+ 	bl	board_init_f_init_reserve
+ 
++#if CONFIG_IS_ENABLED(PASSAGE_IN)
++	str	r6, [r9, #GD_PASSAGE_MACH]
++	str	r7, [r9, #GD_PASSAGE_DTB]
++	str	r8, [r9, #GD_PASSAGE_BLOBLIST]
++#endif
 +
-+	/**
-+	 * We don't expect to find an existing bloblist in the first phase of
-+	 * U-Boot that runs. The only way to receive the address of an allocated
-+	 * bloblist from a previous stage is with standard passage, so without
-+	 * that, the bloblist must be at a fixed address.
-+	 */
-+	expected = (fixed && !xpl_is_first_phase()) || passage_valid();
-+	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-+		expected = false;
-+	if (fixed)
-+		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-+				      CONFIG_BLOBLIST_ADDR);
-+	size = CONFIG_BLOBLIST_SIZE;
-+	if (expected) {
-+		if (passage_valid()) {
-+			addr = gd_passage_bloblist();
-+			size = 0;
-+		}
-+		ret = bloblist_check(addr, size);
-+		if (ret) {
-+			log_warning("Expected bloblist at %lx not found (err=%d)\n",
- 				    addr, ret);
--		else
--			/* Get the real size */
-+		} else {
-+			/* Get the real size, if it is not what we expected */
- 			size = gd->bloblist->total_size;
-+		}
- 	}
--
- 	if (ret) {
- 		/*
- 		 * If we don't have a bloblist from a fixed address, or the one
-@@ -567,8 +558,7 @@ int bloblist_init(void)
- 				return log_msg_ret("alloc", -ENOMEM);
- 			addr = map_to_sysmem(ptr);
- 		} else if (!fixed) {
--			return log_msg_ret("BLOBLIST_FIXED is not enabled",
--					   ret);
-+			return log_msg_ret("!fixed", ret);
- 		}
- 		log_debug("Creating new bloblist size %lx at %lx\n", size,
- 			  addr);
+ #if defined(CONFIG_DEBUG_UART) && CONFIG_IS_ENABLED(SERIAL)
+ 	bl	debug_uart_init
+ #endif
+diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
+index 30950ddaf9b..498fe849f50 100644
+--- a/arch/arm/lib/crt0_64.S
++++ b/arch/arm/lib/crt0_64.S
+@@ -94,6 +94,12 @@ ENTRY(_main)
+ 	bl	debug_uart_init
+ #endif
+ 
++#if CONFIG_IS_ENABLED(PASSAGE_IN)
++	str	x19, [x18, #GD_PASSAGE_MACH]
++	str	x20, [x18, #GD_PASSAGE_DTB]
++	str	x21, [x18, #GD_PASSAGE_BLOBLIST]
++#endif
++
+ 	mov	x0, #0
+ 	bl	board_init_f
+ 
 -- 
 2.43.0
 
