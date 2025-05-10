@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24FBEC3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A2DFC3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:45:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21CC182BB5;
-	Sat, 10 May 2025 15:43:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FF3C82A4D;
+	Sat, 10 May 2025 15:44:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DW17DOWa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FggZ1erk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A58682BA7; Sat, 10 May 2025 15:43:58 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 832618295C; Sat, 10 May 2025 15:44:00 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E9BA82BB5
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97E7782B97
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:43:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ace94273f0dso580493866b.3
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:55 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ad243b49ef1so25712366b.0
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:43:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884635; x=1747489435; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884637; x=1747489437; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d/jTjC+N5XyMfxWaReAzXMGn+BB2Jzb4CKHRKW0EUas=;
- b=DW17DOWaO+wGG4p6mKd+7GapynMUMNkVtN3s2XxtatEh6HF2j4Wx/9kshC93lCWlFx
- QI26sCQCroG4crkh5fzMz7hjNc9JAhLyuWvU8rclmQ1NGsoCfmLVLIuSPDbNvG5LS02e
- juB0X8FgdGd1qbDObKeeqYvIMywznMW9hpH+A=
+ bh=+sEIV3pc/3kgMkt4HtCjpor2NMO8iEUeULduRqYupkE=;
+ b=FggZ1erkDuJseiq3cQg1O2wQAEAR9hei2VThX98FBVCrLXMqS9RaijHRFGU43BNelY
+ kIHMJYI42xw9lqqpcFrHumTHHfHMl06UQ0RVq4zOoZQub2bnFjI4C4dtrXw7hcj+sZfy
+ eVz/aJZ4VuY+wH5RlbXCn+oAABQWUKmciESlk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884635; x=1747489435;
+ d=1e100.net; s=20230601; t=1746884637; x=1747489437;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d/jTjC+N5XyMfxWaReAzXMGn+BB2Jzb4CKHRKW0EUas=;
- b=UHF7POOt7YYNUpkwjjfC6OoBXaqZ8VGu4G65pz40mKLVfumTVj2U+Z/+5GxnW5w8Y1
- VFq5B5m4wOKNHzsxt3BlW8vnZIQ/1eJK00c8s+RM417txpX20T/mHSJnspNXUfD/RwCp
- ggPfQo000GJfl4PtSqp1/39uJ8LlCTchGTUunaMqHi+6ylcrxbi/IK8B7Rtzr2R0cvzS
- EW3wxwiv0sARIjGWlWigutVj9v6yed0WXmZWtyAodTyJOhVRHB9wIj289qRw5v63dNA3
- FaeQmeOhinLbmf/2fiFRf8bXc+B9QueOjM+v/QB/z8pBYErgkabHQa29oE1cVaIEr50k
- ei6Q==
-X-Gm-Message-State: AOJu0YyNTW8V2/UbJQuI0tDFn9YMe82ylWtd+80N7CeCtMGLUboJ2ghg
- iMbky8kL6nEOLbzPTvzqAGPtl+WDWAldYRAnHeRlWWwF1zzSjTeySUe+1MBJiXtfka9Nnvc3SMT
- iB19i3UcYoA==
-X-Gm-Gg: ASbGncvvNu7AiSSRgDObBmcQgFATeA2ZAUVrGFg8J+RFuHVAksAQGusgNQFc8fQ56f0
- 43ri23u77u1lBtv8nqHR356jAZ755bKwpIT0TVoU3VYutJNRon2oa/UWMU3ZNFe7dbvE764Vnh5
- fV4vi5YfnTF2K+pnXvSzo/K7+4aweAaeK6iIjsAE0O8QKnkhZUrHjQzw3cv0foknbe5t8KnOSzx
- 5WeDshYSMv64OE/Z2UV5aehpOx7FvzWApfWiLQEjmYlBXZFOtWcKKfavfC5gBe/S2EKs3Gzgxxi
- 1h4AIaq7cWkPD9YQtmM9TlOx1uZJOFQIR4EebeCUVE0Fwfh1vu9Pb7D2ZRkMnTMZYwHj
-X-Google-Smtp-Source: AGHT+IFs1PR/TNXys3oFtSSaYw8nT2lZrg47HgVPNKrjF39YZ7rTLDdmVaaHe3HIcl1XP7uV3VurJQ==
-X-Received: by 2002:a17:906:794c:b0:ac7:b8d0:86c0 with SMTP id
- a640c23a62f3a-ad218e88df2mr695249066b.9.1746884634606; 
- Sat, 10 May 2025 06:43:54 -0700 (PDT)
+ bh=+sEIV3pc/3kgMkt4HtCjpor2NMO8iEUeULduRqYupkE=;
+ b=egvEMfFoCI/ol1dIXSRxdC+YpsKmHCOlP7g439nbuFrNuQ/HkqalzX/omxiFyggw0H
+ HWeQI4RMCQHh5s/WpA5f8D9EsHIDs1aFcYm0dhTfqKrnhfFC8ij1rb4ioTwDcnZ0Kw96
+ oPYWX5n6CH9cMa1uuaseLIVUU/6fQiiZoHqc12GZbbZ7reXw2ozAj1iMpjP5U164yAYG
+ BEUqh1fP2L5lu1bZu5dRKI9Slj2a64dbk1OYWEwubAPxoT6YifpyF/ggTjMr3uqtwP6Y
+ TNdbblXf4DgJ/a9ShdTj3vR3spmPtSliA/va7g1G/g4NMqDZf4/5TerGcXDr0JUCJLzz
+ rRkw==
+X-Gm-Message-State: AOJu0YzHqFpe2ajUW8/kh7sDRkCzSjXnm1eqgBewQ9a4obQUgtntNK9Q
+ GLrqEEZTTDDKsrNzY/ISQTcCrTe/THSsTdIlauetrg5kc82baI/iowKQa0nKV1xJ6qHdPTinghC
+ 2ovDV039ugg==
+X-Gm-Gg: ASbGncsyslo/cqso97CQ8ak32AF/QQ/hfPmua41XrkhqmcpvB5R3C7/G+cly1tmWI2y
+ pmU/col22Jf46ycIiQEiXf4HZJp2aOiPeq9xfJcN9MlsRrS9FX5F1FTZJvOvQ32ZdPoMw1l1+iP
+ f63+5Iqfw1oDC1XMPAZ3bv0tDCkFyhE3XdE3A0/nJmWpJNbYmV43CbpANdNCmjMqFEJBQifkBD+
+ kwDmU8ECHzWO1jPW5k9ts2AnrR57mY603suI7oeKlrXIcTpfGv4vPCjNAS7zPG/ZdhXbAPY+dAE
+ JjESBipKOg19osTFYIEXNcBqYfTyeDhgLnkXDBpJk5xlzXW31Errr++OE14aSrkxs3bV
+X-Google-Smtp-Source: AGHT+IEhA80B8SVOHeDut925Itr7Ex7HiPOaZzjvFAGYSVKtjSU98ND7XXXSVnRzRmZKO1foEoJAig==
+X-Received: by 2002:a17:907:3f97:b0:ad2:2b35:8fa5 with SMTP id
+ a640c23a62f3a-ad22b359412mr484946766b.28.1746884637178; 
+ Sat, 10 May 2025 06:43:57 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.51
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.43.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:43:53 -0700 (PDT)
+ Sat, 10 May 2025 06:43:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -76,11 +76,12 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 11/22] passage: spl: Support passing the passage to U-Boot
-Date: Sat, 10 May 2025 15:42:09 +0200
-Message-ID: <20250510154214.v4.11.Ifb43052c7d1729d6d1503a74e89abb69ee99cbf3@changeid>
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH v4 12/22] passage: arm: Add the arch-specific standard passage
+ impl
+Date: Sat, 10 May 2025 15:42:10 +0200
+Message-ID: <20250510154214.v4.12.Ie42090adf599e2b0ceb782298be5278b493f6beb@changeid>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -102,67 +103,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create a new arch-specific way of creating a standard passage for the
-next phase.
+Add implementations for 32- and 64-bit ARM.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v4:
-- Fix 'to' typo
+(no changes since v3)
+
+Changes in v3:
+- Update registers to match the Firmware Handoff protocol
 
 Changes in v2:
-- Make the stdpass calling standard arch-specific
+- Add new patch with the arm-specific standard passage implementation
 
- common/spl/spl.c | 26 +++++++++++++++++++++-----
- 1 file changed, 21 insertions(+), 5 deletions(-)
+ arch/arm/cpu/armv7/cpu.c | 18 ++++++++++++++++++
+ arch/arm/cpu/armv8/cpu.c | 19 +++++++++++++++++++
+ 2 files changed, 37 insertions(+)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 6e38f118f48..b705fd5514a 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -22,6 +22,7 @@
- #include <malloc.h>
- #include <mapmem.h>
- #include <nand.h>
+diff --git a/arch/arm/cpu/armv7/cpu.c b/arch/arm/cpu/armv7/cpu.c
+index 8082f369ed6..f1b07c414de 100644
+--- a/arch/arm/cpu/armv7/cpu.c
++++ b/arch/arm/cpu/armv7/cpu.c
+@@ -17,6 +17,7 @@
+ #include <command.h>
+ #include <cpu_func.h>
+ #include <irq_func.h>
 +#include <passage.h>
- #include <serial.h>
- #include <spl.h>
- #include <spl_load.h>
-@@ -398,13 +399,28 @@ int spl_load(struct spl_image_info *spl_image,
- 
- __weak void __noreturn jump_to_image(struct spl_image_info *spl_image)
+ #include <asm/system.h>
+ #include <asm/cache.h>
+ #include <asm/armv7.h>
+@@ -87,3 +88,20 @@ void allow_unaligned(void)
  {
--	typedef void __noreturn (*image_entry_noargs_t)(void);
--
--	image_entry_noargs_t image_entry =
--		(image_entry_noargs_t)spl_image->entry_point;
-+	ulong bloblist = 0;
- 
- 	debug("image entry point: 0x%lx\n", spl_image->entry_point);
--	image_entry();
-+
-+	if (CONFIG_IS_ENABLED(PASSAGE_OUT)) {
-+		const void *fdt;
-+
-+		bloblist = bloblist_get_base();
-+		fdt = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-+
-+		log_debug("passage: sending bloblist %lx dtb %lx\n",
-+			  bloblist, (ulong)map_to_sysmem(fdt));
-+		arch_passage_entry(spl_image->entry_point,
-+				   map_to_sysmem(gd_bloblist()),
-+				   map_to_sysmem(fdt));
-+	} else {
-+		typedef void __noreturn (*image_entry_noargs_t)(void);
-+
-+		image_entry_noargs_t image_entry =
-+			(image_entry_noargs_t)spl_image->entry_point;
-+		image_entry();
-+	}
+ 	v7_arch_cp15_allow_unaligned();
  }
- 
- #if CONFIG_IS_ENABLED(HANDOFF)
++
++void __noreturn arch_passage_entry(ulong entry_addr, ulong bloblist, ulong fdt)
++{
++	typedef void __noreturn (*passage_entry_t)(ulong zero1, ulong mach,
++						   ulong fdt, ulong bloblist);
++	passage_entry_t entry = (passage_entry_t)entry_addr;
++
++	/*
++	 * Register   Contents
++	 * r0         0
++	 * r1         010fb10b (indicates standard passage v1)
++	 * r2         Address of devicetree
++	 * r3         Address of bloblist
++	 * lr         Return address
++	 */
++	entry(0, passage_mach_version(), fdt, bloblist);
++}
+diff --git a/arch/arm/cpu/armv8/cpu.c b/arch/arm/cpu/armv8/cpu.c
+index 82ecf02f4b0..275aa2501f1 100644
+--- a/arch/arm/cpu/armv8/cpu.c
++++ b/arch/arm/cpu/armv8/cpu.c
+@@ -13,6 +13,7 @@
+ #include <command.h>
+ #include <cpu_func.h>
+ #include <irq_func.h>
++#include <passage.h>
+ #include <asm/cache.h>
+ #include <asm/system.h>
+ #include <asm/secure.h>
+@@ -99,3 +100,21 @@ void allow_unaligned(void)
+ {
+ 	set_sctlr(get_sctlr() & ~CR_A);
+ }
++
++void __noreturn arch_passage_entry(ulong entry_addr, ulong bloblist, ulong fdt)
++{
++	typedef void __noreturn (*passage_entry_t)(ulong fdt, ulong abi,
++						   ulong zero1, ulong bloblist,
++						   ulong zero2);
++	passage_entry_t entry = (passage_entry_t)entry_addr;
++
++	/*
++	 * Register   Contents
++	 * x0         Address of devicetree
++	 * x1         00000001_4a0fb10b (indicates standard passage v1)
++	 * x2         0
++	 * x3         Address of bloblist
++	 * x30        Return address
++	 */
++	entry(fdt, passage_mach_version(), 0, bloblist, 0);
++}
 -- 
 2.43.0
 
