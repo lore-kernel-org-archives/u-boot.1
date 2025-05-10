@@ -4,82 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C925C3ABBC
-	for <u-boot@archiver.kernel.org>; Fri,  9 May 2025 22:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FC41C3ABC3
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 06:53:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B303282A59;
-	Sat, 10 May 2025 00:50:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A17798210D;
+	Sat, 10 May 2025 08:53:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PAK4pB+N";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1746860006;
+	bh=NEh//dowW1jPWMv1h+gaF6OZx0be15GKB1n3eRXb/cg=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=UXarom89WebWWo0mfvW8RwFA9HVj3QDVvcvU+nQVyIAD7hruNk8L1BrdYjOVk29B9
+	 HUnJLOZldP+Plq2K4Z2rXpCuNN4C+TfAtVOMiYLch3ziEkX0vhEIKgYUBeDwPLYiot
+	 rF5KJnE1cBXbyeHqT3pMY9YQ750J7B4/053D5kp8FN2gNN18iU/6sXmuvhhj84kxSY
+	 M8U2ob3HZtpMgossvZ8sYhmVF3zCMYLSPGpMxnmbkkzt2F0/W2JdtRKt4KR7+OIZbg
+	 mAEgKs2/J1Kxne5Y+MrQ9ecSZtvIx4TndbF435s4ZAsxWvkhgip7xsWLQw6M0djMOE
+	 YGa5grNXw7izw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8713B82A4D; Sat, 10 May 2025 00:50:03 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EDCEB8211F; Sat, 10 May 2025 08:53:24 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DD2082162
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 00:49:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B7C980EE5
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 08:53:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2d060c62b61so2710059fac.0
- for <u-boot@lists.denx.de>; Fri, 09 May 2025 15:49:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1746830996; x=1747435796; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=A4R1686NSoyqEZLFz43rZk44qjg3tcxURmRW6hT1TYU=;
- b=PAK4pB+NJWX3q9W4MnWPAGtK/+3vtDlDW5AcDZUlmYegnEF/ATbqo00cVPq91exElI
- mhM4EcmpOwIKXVNSp+879Iy3PRRDQlqEOoY5Ub/mkrTOY4NmtFqsujLBlCfBw86kPuhw
- 8Gi+jSuD3Ubynh0Tb3i3PsxWS/7e3tu0GtaUc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746830996; x=1747435796;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=A4R1686NSoyqEZLFz43rZk44qjg3tcxURmRW6hT1TYU=;
- b=Q4hKN90mpuH+80zXBBwhJS4g1AqVTK1sNxSD9R4JRdyhuOaPeLayADQKyChuE5fy0Y
- /oyABCuXgVn5Ijnki1czMevd1C7dAtBtWpvJycgL9G9xKW5ZZSQpQqPqw1gxd8w5RRA1
- HRhsXcYPhzN2SnqY5KcQZNdYUAk2yyqQHs/LssHaely4gx3LAmjD3r0OQjCR6tnxK1K4
- zBd77Unh4MJk9qlVj0wCRdpdsXZIyy3nyM96NqXnHmVS8OxkQ2AoC9uYrnz7PJmZram2
- 1E43HINzT8QRje1iI5jQn40iggZDte9E9zVBG9PXhepj2JtHX73wqC1WfNN1aE8ONLmE
- dCkQ==
-X-Gm-Message-State: AOJu0YzxAd0hAXUBetz+jl2ejGXG7vhm2pQxi4+hoI99rtXTyHcja/8D
- 00xDwkSHbahACHF2RbDiM3+3YtFXjko1j8E45TWSkiCFFjiUaSkkVal5tXtQu8w=
-X-Gm-Gg: ASbGncvt1Od1Js4FMn24fxU7kutCRpI8xGeFO7Py3Z5h64r6LaSNzo7zx9fuJE9hYX6
- clhZiORWTjy4jo4W0sRFfkWt/75UGZPF5BSR7RTTkhPIZbq6JywCPuIsZK0BXW1k5/kFpnv5NAK
- w55pOrfqNC2X2GYqT8jFDHMqGc6KzEexWEOGzQdzDFFO5X2GP7Uq3lRCry4eC8Ei9vO6xu2rp2q
- Ltpo8ED3u7xk9WE1mLnjKd3FkWPkkT4jj4/lKkBH59rKyO2EPJPpeEjwkx8B2mL+fX3knmPYLqI
- CV1SM1pE/VVmoMJpesTqxPvTOH/N5AQpGO09FtYk6cvd4HdXCsiLIcqqQ58vr6GViEfKPrqFWhb
- UOljUCiLCR2w=
-X-Google-Smtp-Source: AGHT+IGUQuU6KLoqQx+AwCxONU75R8hnm0GJznAvOpemeF0TWUl/AUJkReQGQTbyDdStjdfL4xgiag==
-X-Received: by 2002:a05:6870:a48b:b0:2d5:ba2d:80df with SMTP id
- 586e51a60fabf-2dba41f6cc0mr3072611fac.8.1746830995844; 
- Fri, 09 May 2025 15:49:55 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2dba0b82571sm801403fac.49.2025.05.09.15.49.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 15:49:55 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>, 
- Prashant Shivhare <p-shivhare@ti.com>, Andrew Davis <afd@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250505174601.273860-1-afd@ti.com>
-References: <20250505174601.273860-1-afd@ti.com>
-Subject: Re: [PATCH] board: ti: sec-cfg.yaml: Fix OTP write_host_id order
-Message-Id: <174683099449.770062.3673976053763164001.b4-ty@konsulko.com>
-Date: Fri, 09 May 2025 16:49:54 -0600
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="G30QAzlP"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1D69E1048C2EC; 
+ Sat, 10 May 2025 08:53:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1746860001; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=NEh//dowW1jPWMv1h+gaF6OZx0be15GKB1n3eRXb/cg=;
+ b=G30QAzlPLKWz5TC5VBsnsbxUHymNdaao+nTiZL3jVB6LCBD7XVsSmzGuT0OLECY+SBXkc2
+ kaiGbi8OTUmrupE7G9y77UYFDojnsAiaBgr9MH4l16LQ817cnrCnZFF4RC+iAyNJYi/ABk
+ /Oj3ZTUKL+wQ5CqtY3jpB/kOjtnyvc8V/3GDNVBHxmT31yc69+lrfRJHJo602M5JxqjJIU
+ RAX44rGJf5RSD4aeK7U6bTARr03z4S8aHTc6b4aFOzBc/f3/ctv/KKZdUK6ELZnJhIoViJ
+ oDDgDmY8DunreVQPpsaehDjJFGS4ytbitp9PlQ31MJTjIyprLRpN9mp3XGHt8Q==
+From: Lukasz Majewski <lukma@denx.de>
+To: Tom Rini <trini@konsulko.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Marek Vasut <marex@denx.de>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Lukasz Majewski <lukma@denx.de>
+Subject: [PATCH] ARM: stm32mp: Correct sign extension for memory address in
+ dram_bank_mmu_setup()
+Date: Sat, 10 May 2025 08:52:56 +0200
+Message-Id: <20250510065256.267546-1-lukma@denx.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +78,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 05 May 2025 12:46:01 -0500, Andrew Davis wrote:
+On a system based on stm32mp157c, with 1GiB SDRAM (starting from
+0xC0000000) and CONFIG_PHYS_64BIT enabled (so the phys_addr_t becomes
+'unsigned long long') the mainline u-boot hangs.
 
-> The write_host_id is the last element here and order does matter. This
-> may have gone unnoticed before as by default all elements are 0, but
-> if this is updated to a different host, it will not work. Update
-> the order so write_host_id is the last element in all current secure
-> board configs.
-> 
-> 
-> [...]
+It is caused by marking for this memory region the TLB entry as invalid
+in the dram_bank_mmu_setup().
 
-Applied to u-boot/master, thanks!
+To be more specific the condition of 'addr >= gd->ram_top' is met
+in this case.
 
-[1/1] board: ti: sec-cfg.yaml: Fix OTP write_host_id order
-      commit: feb55165233623648cb0a74953735b00ec6e322e
+The reason for it is that the 'addr' variable in that function has sign
+extension from 'int' typed i automatic variable:
+addr = i << MMU_SECTION_SHIFT;
+
+For example i = 0xc01 causes addr = 0xffffffffc0000000 as int typed i
+variable (with MSB bit set) is sign extended to unsigned long long addr.
+
+The proposed fix is to change i type from 'int' to 'unsigned int', so the
+sign extension will not take place and addr = 0xc0000000, which is smaller
+than gd->ram_top = 0x100000000.
+
+This change shall be safe as i shall not be negative as it represents the
+SDRAM areas (in granularity of 1MiB areas).
+
+Fixes: 25fb58e88aba ("ARM: stm32mp: Fix dram_bank_mmu_setup() for LMB located above ram_top")
+
+Signed-off-by: Lukasz Majewski <lukma@denx.de>
+---
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+index d5eaf6711b6..0ed5eda47d0 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+@@ -51,7 +51,7 @@ u32 get_bootauth(void)
+ void dram_bank_mmu_setup(int bank)
+ {
+ 	struct bd_info *bd = gd->bd;
+-	int	i;
++	unsigned int i;
+ 	phys_addr_t start;
+ 	phys_addr_t addr;
+ 	phys_size_t size;
 -- 
-Tom
-
+2.39.5
 
