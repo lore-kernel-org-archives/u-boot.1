@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D47C3ABCB
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9D13C3ABCB
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3561382B54;
-	Sat, 10 May 2025 13:27:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 310A78295C;
+	Sat, 10 May 2025 13:36:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VGE5FJdO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nlIQ/3iZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9670782B63; Sat, 10 May 2025 13:27:56 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 0DD8582977; Sat, 10 May 2025 13:36:34 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A686682B39
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:27:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F013B82952
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:36:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5fbf29d0ff1so4524365a12.0
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:27:54 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ad1b94382b8so406844466b.0
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:36:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746876474; x=1747481274; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bg+Ei7nthq7PuS+fUGu4b2mwvXUYZQ9x+4nVekaWwVw=;
- b=VGE5FJdOWQEzzMVEZvOxe9i7pYpgn+pUb8+7xS7NzcgDiLHy6IxPA4RHTzfO48a3mw
- wYRhOH9PuwcGk/EQLSp8mfyveJY8dMjpcMUKYHfu4oKfo8iIMxpQ/UVfOuFCehMDiA7/
- caos/+ojod3mhmuYeonDAFJQ8DpT0dN6XG+Tw=
+ d=chromium.org; s=google; t=1746876990; x=1747481790; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZUsokmnpgtnrR7Vzl7VHS+BU2WsM9NaBvqMUGcNyX+M=;
+ b=nlIQ/3iZGRthV9fXsAx6eIRAzBUxgd4jZbdL7MhMdN1/CY7bJSQklRW1ju4mJ0GjVs
+ EPkBv72tCWPnFHrlC1nUp+tNBErUOqns9w3FVYbiUk7HZfj7bfhNl1MW6PDGxb8NRSCr
+ 1xcBs0ZO6po5tKetjewP9hng+HKppvClyc46I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746876474; x=1747481274;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bg+Ei7nthq7PuS+fUGu4b2mwvXUYZQ9x+4nVekaWwVw=;
- b=XU3en1Fx5dIOPsyM+KNEe3A6dgkOk4L9+/SJ6QX7KbGCmaHWmCBtuP3puU3PB8ydY5
- vFGmE3hIWcNB9eguruZ5ZL7IIzU3GS1yFIx46804A3hzEDz771lSPg26w9+AcMSieYFQ
- kJvYcUtMDuO8HjcmPWt3/GAiDCEpETFO89l5bqG50uOhPU8Fdoe7OByGY52SLcSXiHmh
- bWH/NVkuRS1JrKzCrJfzhPdh52CbrSXqHZWrN8PSyu7Hx8XeURs+EedbYzhRJe1Uh3We
- FAA3i/bDLbhWWOEE0e9SgQYRPnq+uGgJ/rSLLh8UzkKLwJgW7XpzXMPwpqXvB/qpqf3Y
- kaZQ==
-X-Gm-Message-State: AOJu0Yw6FMT/G31kQpqJGYji0wfFx/SZXAc35NxJODkoa5HHoQOXTASW
- +knsNcKIr1zwLtj1Fm+59JQM1JfmTu68rLYKD2LhpLk5ANNKZtllf9oOLAE/oKvTciQ/xhxdcWV
- TJCiTbMgnAKaI+DEK6b95fF0D0+YgLJINYnaeApq3duQsxuB4rmxjSRCTSg==
-X-Gm-Gg: ASbGnct3BBpJwTISuTzHS7zu7A2c78Ku6qtYvjwTygvYygP9vNOds2sjlzTPMBEOviE
- LBeXSHqzBkoDnhKW/qRFK6sP1kqzORuDm9UuhSAFZ80jLga+vgsTTkEXZRTCIcIngzchFBeeqNR
- CDqcyOV0yRNW5EvSfCTAx/k0T5KT3FSDR6pA==
-X-Google-Smtp-Source: AGHT+IHUUoeNatrp87/B9yKK7biCHg8H8Fv7cJZhVKHRnBnOsxyWzOBCDkUKvbRsy1xGIOdLhE0W+BmCa5YCuG1PGIU=
-X-Received: by 2002:a05:6402:26c1:b0:5ec:cbf8:ab28 with SMTP id
- 4fb4d7f45d1cf-5fca07eda6dmr5576821a12.22.1746876474037; Sat, 10 May 2025
- 04:27:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250418105919.1645824-1-sjg@chromium.org>
- <20250418133943.GK5495@bill-the-cat>
- <CAFLszTgaqCyK5t+5XqbW6SZ-vC1PCUv4h+YPqt0Zem1yXEn4AQ@mail.gmail.com>
- <20250507152323.GJ5430@bill-the-cat> <20250507154710.GK5430@bill-the-cat>
-In-Reply-To: <20250507154710.GK5430@bill-the-cat>
+ d=1e100.net; s=20230601; t=1746876990; x=1747481790;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZUsokmnpgtnrR7Vzl7VHS+BU2WsM9NaBvqMUGcNyX+M=;
+ b=esJMdSWiBh/LIRW38/6RWPLKCqbQYQ6e/tipVBDvTx2swZIaLdbBAcUU28QBIxH+ix
+ cMI/3/BTioqsIL3KVx3sW+5fON80zCMI0WHWUsbHOLGNiwknFQXuJDG4iU+kAGbHYJZo
+ LdbQLgzY+nSFaDJYkghxed9xvk48m/n+VQkmlxn9zHZhzQH+0CRxrLvzPHNH4h6WRrtE
+ 5ol8zTw4ZNiVMiI2A12zBOHHFQH+W2O7FEyVCKPyiqZy0X3D3U8u2HZjCbuGQ1NHPuNU
+ ATa0uuiFqkjlsMLSZXHH4JQv6uaGTiMBWcs3Dh4sGUaIkEP6PrM399dG6efcrj7wM0nr
+ fBcw==
+X-Gm-Message-State: AOJu0YyN9TMk81PqHh02w8le+d6fBIwph2U3fUF3QzlEwxbwX5Fs4a6Z
+ 7ktS+Azl2uU7WfWOs3hwBt7POjo1rS3sxT+K24UFIpE2x+OnFlwGis811J6KF72GYmgElWAW5wg
+ 7IH7LBz8USg==
+X-Gm-Gg: ASbGncvn7L3Sr3KWyl3ql1eecu0KeOEyfDhkM4zcUkp6XalNgwgmAOxe7eavOOJM5/A
+ LRF3/QZG22kwm8cTkJDlGIveBXFgZoYtSocXjh1HBvWvw+6OD2vPxE2xwKFphel1/xBlRIgnJaY
+ qfwbyaNMcZ9FUYtAwgf9gqjFWmQtTyi//d8R1rGbABAPaozjjQ0YwhVCVWuCX8RCfmzEypc2NIy
+ M1XYYqFbNU6TtjNH4NeODaqz86w1uj8/LFilEnLY0t/nse1IGa/Dv+vJQRbscHSUBsC8ODx5OwK
+ dVswtbd0WAPkgbqwTZyOGIm0lNPeBes+EpxxDrdu4/WtYDQ=
+X-Google-Smtp-Source: AGHT+IHOrqvoV1EBKgXtbqTdTVUZyhaEZVudsj8jtuiaKYga3UIgNhoOtsFXz/eOryI2wqPukZ6BYw==
+X-Received: by 2002:a17:907:d16:b0:ad2:3616:8c37 with SMTP id
+ a640c23a62f3a-ad236169015mr249013666b.30.1746876990410; 
+ Sat, 10 May 2025 04:36:30 -0700 (PDT)
+Received: from chromium.org ([213.157.19.135])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad2197bd2a8sm303350266b.145.2025.05.10.04.36.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 10 May 2025 04:36:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 10 May 2025 13:27:36 +0200
-X-Gm-Features: AX0GCFuKP9D0go1EFeod-8Mm6_qtCl-Wqk7gq-FftGI3B-lG52GfEVQcjUyErdw
-Message-ID: <CAFLszTjXdfatQZDBhE3FrusJY7q_p7sR96TbTtLin7ute_q+9g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] Bring in linux/limits.h
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <simon.glass@canonical.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Raymond Mao <raymond.mao@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH] efi_loader: Disable ANSI output for tests
+Date: Sat, 10 May 2025 13:36:24 +0200
+Message-ID: <20250510113627.1476467-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,90 +94,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+We don't want ANSI characters written in tests since it is a pain to
+check the output with ut_assert_nextline() et al.
 
-On Wed, 7 May 2025 at 17:47, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, May 07, 2025 at 09:23:23AM -0600, Tom Rini wrote:
-> > On Wed, May 07, 2025 at 10:47:13AM +0200, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 18 Apr 2025 at 15:39, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Apr 18, 2025 at 04:59:13AM -0600, Simon Glass wrote:
-> > > >
-> > > > > From: Simon Glass <simon.glass@canonical.com>
-> > > > >
-> > > > > Add part of this file from Linux v6.14 so we can include it from =
-the
-> > > > > linux/overflow.h file. Drop the relevant section from kernel.h
-> > > > >
-> > > > > The top of the file is omitted since it defines things used in mb=
-edos
-> > > > > and we get an error on SIZE_MAX.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
-> > > > > ---
-> > > > > Error is:
-> > > > >
-> > > > >   In file included from include/limits.h:6,
-> > > > >                  from lib/mbedtls/external/mbedtls/library/consta=
-nt_time.c:14:
-> > > > >   include/linux/limits.h:7:35: error: missing binary operator bef=
-ore token "0"
-> > > > >     7 | #define SIZE_MAX        (~(size_t)0)
-> > > > >       |                                   ^
-> > > > >   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:6=
-5:6: note: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
-> > > > >    65 | #if (SIZE_MAX > 0xffffffffffffffffULL)
-> > > > >       |      ^~~~~~~~
-> > > > >   include/linux/limits.h:7:35: error: missing binary operator bef=
-ore token "0"
-> > > > >     7 | #define SIZE_MAX        (~(size_t)0)
-> > > > >       |                                   ^
-> > > > >   lib/mbedtls/external/mbedtls/library/constant_time_internal.h:7=
-1:8: note: in expansion of macro =E2=80=98SIZE_MAX=E2=80=99
-> > > > >    71 | #elif (SIZE_MAX > 0xffffffff) || defined(MBEDTLS_HAVE_INT=
-64)
-> > > > >       |        ^~~~~~~~
-> > > > >   make[3]: *** [scripts/Makefile.build:256: lib/mbedtls/external/=
-mbedtls/library/constant_time.o] Error 1
-> > > > >   make[2]: *** [scripts/Makefile.build:398: lib/mbedtls] Error 2
-> > > > >
-> > > > > Changes in v2:
-> > > > > - Add new patch to bring in linux/limits.h
-> > > > >
-> > > > >  include/limits.h       |  2 ++
-> > > > >  include/linux/kernel.h | 12 ------------
-> > > > >  include/linux/limits.h | 21 +++++++++++++++++++++
-> > > > >  3 files changed, 23 insertions(+), 12 deletions(-)
-> > > > >  create mode 100644 include/linux/limits.h
-> > > >
-> > > > Ugh. I think we need to:
-> > > > - Fix lib/string.c (and Fixes commit 7c7361b98d6e ("lib: implement
-> > > >   strnstr()")) to not bring in <limits.h> as that should be limited=
- to
-> > > >   mbedtls usage.
-> > > > - Not bring <linux/limits.h> to <limits.h> to start with at least (=
-we
-> > > >   can worry about handling wrappers around overflow protection ther=
-e
-> > > >   separately).
-> > >
-> > > There are quite a few places which need the limits. If I remove the
-> > > dups from kernel.h then some things don't compile, at least not
-> > > without including linux/limits,h in limits,h (which it seems to me we
-> > > should do).
-> >
-> > So, looking at things more to understand the problem, mbedTLS uses
-> > constants for types (reasonable choice) and the Linux kernel uses types
-> > and casts (also reasonable choice), and these can't be mixed and
-> > matched, that's what results in the error you see. So, I'll re-evaluate
-> > your v2, that might be the best compromise.
->
-> Yeah, for v3 you need to address the comments on 3/3 still.
+Provide a way to tests to request that ANSI characters not be sent.
 
-Yes...I'll split it up a bit so it is easier to review.
+Add a proper function comment while we are here, to encourage others.
 
-Regards,
-Simon
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ include/efi_loader.h         | 21 ++++++++++++++++++++-
+ lib/efi_loader/efi_console.c | 26 +++++++++++++++++---------
+ 2 files changed, 37 insertions(+), 10 deletions(-)
+
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 25a809c3d53..b699479f346 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -532,8 +532,27 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
+ efi_status_t efi_bootmgr_run(void *fdt);
+ /* search the boot option index in BootOrder */
+ bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target, u32 *index);
+-/* Set up console modes */
++
++/**
++ * efi_setup_console_size() - update the mode table.
++ *
++ * By default the only mode available is 80x25. If the console has at least 50
++ * lines, enable mode 80x50. If we can query the console size and it is neither
++ * 80x25 nor 80x50, set it as an additional mode.
++ */
+ void efi_setup_console_size(void);
++
++/**
++ * efi_console_set_ansi() - Set whether ANSI characters should be emitted
++ *
++ * These characters mess up tests which use ut_assert_nextline(). Call this
++ * function to tell efi_loader not to emit these characters when starting up the
++ * terminal
++ *
++ * @allow_ansi: Allow emitting ANSI characters
++ */
++void efi_console_set_ansi(bool allow_ansi);
++
+ /* Set up load options from environment variable */
+ efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
+ 				      u16 **load_options);
+diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+index 9d9f786a6db..28687d678c3 100644
+--- a/lib/efi_loader/efi_console.c
++++ b/lib/efi_loader/efi_console.c
+@@ -30,6 +30,17 @@ struct cout_mode {
+ 
+ __maybe_unused static struct efi_object uart_obj;
+ 
++/*
++ * suppress emission of ANSI codes for use by unit tests. Leave it as 0 for the
++ * default behaviour
++ */
++static bool no_ansi;
++
++void efi_console_set_ansi(bool allow_ansi)
++{
++	no_ansi = !allow_ansi;
++}
++
+ static struct cout_mode efi_cout_modes[] = {
+ 	/* EFI Mode 0 is 80x25 and always present */
+ 	{
+@@ -348,13 +359,6 @@ static int __maybe_unused query_vidconsole(int *rows, int *cols)
+ 	return 0;
+ }
+ 
+-/**
+- * efi_setup_console_size() - update the mode table.
+- *
+- * By default the only mode available is 80x25. If the console has at least 50
+- * lines, enable mode 80x50. If we can query the console size and it is neither
+- * 80x25 nor 80x50, set it as an additional mode.
+- */
+ void efi_setup_console_size(void)
+ {
+ 	int rows = 25, cols = 80;
+@@ -362,8 +366,12 @@ void efi_setup_console_size(void)
+ 
+ 	if (IS_ENABLED(CONFIG_VIDEO))
+ 		ret = query_vidconsole(&rows, &cols);
+-	if (ret)
+-		ret = query_console_serial(&rows, &cols);
++	if (ret) {
++		if (no_ansi)
++			ret = 0;
++		else
++			ret = query_console_serial(&rows, &cols);
++	}
+ 	if (ret)
+ 		return;
+ 
+-- 
+2.43.0
+
+base-commit: c5a631df96de7421d10ee03dceed1b79db213026
+branch: ansi
