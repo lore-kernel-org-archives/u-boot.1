@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFED8C3ABCB
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 882D6C3ABCB
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:26:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1511282AB1;
-	Sat, 10 May 2025 13:26:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5930082B31;
+	Sat, 10 May 2025 13:26:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="npUz2P4a";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z3qzDTME";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52C3F82AFD; Sat, 10 May 2025 13:25:58 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 8A64082AF4; Sat, 10 May 2025 13:26:04 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F0A18295C
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:25:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CE7F82952
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:26:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5fc9c49c8adso2341255a12.3
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:25:56 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ad238c68b35so103670166b.1
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:26:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746876356; x=1747481156; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746876362; x=1747481162; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lyFqzx+bRw40VsgcqLRhAiiFxpTBEVWdRqV/pUJX66c=;
- b=npUz2P4arc9iFCYq8SKe4Gl4nv0vEuXDcpx1iqAMpADiTdL8a4vZO2jLOIwt+p1WUr
- 2LkaGSLXg3BnbmKfgsuYjwGnhD08WjH/KjGp1dYOcje9NJL6wAKPzbIzr0piD+v6Uu0f
- ioGnXOAlDgYhHLyjzGnm6SHOKWYZENLIsAtEw=
+ bh=yDVhSGSC3+4geynwr5r0jH7uMzoE1eZdfBz6semzQuk=;
+ b=Z3qzDTMEwVJL95aexo71nFCFbsoyOJoeU2CVUupdxkBwCxrhYDL0Cc5IGEEKydz+qi
+ bDhIzHsVc1gkD49xR9GYvubCGzJzCPvGMl7sBvHmNeOXiD+ziA/t/XG5uFpeS0qhjT/Q
+ jVTI4QbA5jsJP3FgeuSzP2tLXBpYxNFg4E+9A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746876356; x=1747481156;
+ d=1e100.net; s=20230601; t=1746876362; x=1747481162;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lyFqzx+bRw40VsgcqLRhAiiFxpTBEVWdRqV/pUJX66c=;
- b=NetD5kId8Q+DlnsZ5FmE9pj1WN+H2afLZ8d/3iht/8mg0ocWOQN5mDdobIKtUuANcr
- 4JCUm1yvKumAYDoVEe8KYMGI5ZdRFg1qxoj02x8ZFSTwchduyTRvAwERDrIQgYjQ2pat
- nuMOKHTe0nWmx3V4soQ+oyqyZMy1OPGTX3mRDyypGjO1jSgwrHl2ZqynUN5jLjNk03AP
- u6CKWerlIh9XFB1bPSq61pZf3yH2/R/Lot7oPqVCxp4bmoRvs2V8l2Y0TP9+376vb2GL
- bl9qsuNQl0cnU1Xro2Vd/BwtsXSP9jsVTfDtF20bHiTBYjIqso9dOfOvfRSfqLvS0zHC
- FVoA==
-X-Gm-Message-State: AOJu0YyhUM+/OQFa02BhyjiTIt0f5apeCmmAvr2nL+DdygC74pxVDa1K
- X5FBd2cprL9DhZPr9iYFoQGb19zHtBJx27b9YOjt1d5CzjmmftzP72lG3cqOJ/CB/TYrF2CznyE
- D4qCs+i8+E9JpMtEci4IQdorsU2m/R72nQZPd
-X-Gm-Gg: ASbGncuIkt1ckLb/oHfA/bCZDxUAFxe/9gv5SZzTOaq5q6AuH2w7nEr1Bj2MgmrOFZR
- wh1tzPrgDlQw/qPcBn+a48VZDYJORyLHkb3oZ2QPEFvURGKKyCs2bcVWE8J7LVYSfozcKO7XNh3
- P/9RjwYKU/vn+YOwFBHmE/7OpZu/nm4li/iyf7mxMAI+BW
-X-Google-Smtp-Source: AGHT+IG9DnE/86Kqy88LrzSK/H0rC4a5w9ZMSMCuqOwL6o2fdVZe2GL0w8tsAfgz57gAFoudosEBMpKTOIKfS8bKfgc=
-X-Received: by 2002:a05:6402:2684:b0:5d0:bf5e:eb8 with SMTP id
- 4fb4d7f45d1cf-5fca07ee2b1mr5022249a12.23.1746876355919; Sat, 10 May 2025
- 04:25:55 -0700 (PDT)
+ bh=yDVhSGSC3+4geynwr5r0jH7uMzoE1eZdfBz6semzQuk=;
+ b=QnMUwPHJRA95cwDnKfjV2VTyqeWosEYWz1+iYyowh6Sro/wqvLVL58rCQWtm+lTees
+ yIPV1NIjtapNePp5ymjWR28vxDBIBePxJD4PjusmxnLRP6fi4538ybM0D2Cye2aGxdnu
+ ypn2MdyTi5jBEjyN62Lx0YsktAeVEQl8Qufy1p7ro6yCC8i0VFVEm5rZJO56XUTpnbRo
+ uDSUgp6QgZc2r0xJ9nejsi4sFkJQoU5WhBwakUs75gj8VfDvp+RNQMzlZiwIYiP0lP17
+ 0KiJV1DgUAaLeZaSPLK8R/4WUl//AU2ciR91FNHV9H+I7QXSkVc8pFkIfGc6kDUstcYK
+ EKuA==
+X-Gm-Message-State: AOJu0Yx1ASgZlrqOKu0ZgRd5d9KuT8ekjG3XkFanN//FTHNO6NCwkfiE
+ 5uG8itL5PPj96ecgzTHgoYAufJkuBg/BuO/SFpvYrbVYcGrWuqnOcOhr8myl2xCZD0HBalGBLUw
+ NI2KjY5P3uN4Xyb1fDpKr/UtfPPrITgYw45qyiiOCf+j5Qaa8SqXUGIyEkA==
+X-Gm-Gg: ASbGnctm+833S6pep3DNYZulplnxGfhhjts9MraAnVvPyBWP21ObT32gsg2RApl3CWN
+ IyI2UeYUiyeZAMHuWHZolwRVAMQzJDBvOSdCvdUP1EBU4KN30QlGcWU0SkxOZTBSwfznSVtKaq4
+ 8L14PMTkvCkAPRfSlcZOJHUWiAnATgXzq83Q==
+X-Google-Smtp-Source: AGHT+IHcR8gWUzu3zZTkhmcduPd9jWfjtfh9Isi6vJXMl9CfJTrVSyAZXWAYp9nNKTwm1J3uirPESrHJrl5qIh7kbAY=
+X-Received: by 2002:a17:907:a647:b0:ad2:15c9:9c73 with SMTP id
+ a640c23a62f3a-ad218f7e47bmr556369566b.34.1746876362109; Sat, 10 May 2025
+ 04:26:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250507221112.518041-1-trini@konsulko.com>
  <20250507232500.527782-1-trini@konsulko.com>
- <20250507232500.527782-3-trini@konsulko.com>
-In-Reply-To: <20250507232500.527782-3-trini@konsulko.com>
+ <20250507232500.527782-4-trini@konsulko.com>
+In-Reply-To: <20250507232500.527782-4-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 10 May 2025 13:25:34 +0200
-X-Gm-Features: AX0GCFuCoHFePE-XJNzRy5I8IGrGI_fpZOGKafwL91EUl1P9npXfuinIs4kZfbI
-Message-ID: <CAFLszThB-kTo6wQ5-PJd5E06912OOzXZgPMXze59sJpWKOSNTQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] doc: pytest: Document the test_bootstage test
+Date: Sat, 10 May 2025 13:25:36 +0200
+X-Gm-Features: AX0GCFuYQpsOq7DIrQCdEG5KTj9_OJvwSHgaSUb8kFKflLBMMkZPc8YL2t1s3cg
+Message-ID: <CAFLszTj8BZFkXYBjJe7VjMz0bTHMXFcgRjoFymyh_WR0L526ow@mail.gmail.com>
+Subject: Re: [PATCH 3/3] doc: pytest: Document the test_efi_loader test
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,20 +90,28 @@ X-Virus-Status: Clean
 
 On Thu, 8 May 2025 at 01:25, Tom Rini <trini@konsulko.com> wrote:
 >
-> Add this test to the documentation. We need to move the import to follow
-> the main comment so that it renders correctly, and add a code-block
-> annotation to the example and indent it correctly. Next, neither of the
-> functions had comments themselves, so document them now.
+> Add this test to the documentation. We need to add a code-block
+> annotation to the example and indent it correctly. We also need to
+> document the do_test_efi_helloworld_net function and that in turn means
+> changing the documentation to test_efi_helloworld_net_http and
+> test_efi_helloworld_net_tftp to reflect what is and isn't done in those
+> functions themselves now.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
+> I honestly wasn't sure if this merits a fixes tag for commit
+> d2056e2ed03f ("test/py: test_efi_loader: add HTTP (wget) test for the
+> EFI loader") or not.
+>
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  doc/develop/pytest/index.rst          |  1 +
->  doc/develop/pytest/test_bootstage.rst |  8 ++++++
->  test/py/tests/test_bootstage.py       | 35 +++++++++++++++++++++------
->  3 files changed, 37 insertions(+), 7 deletions(-)
->  create mode 100644 doc/develop/pytest/test_bootstage.rst
+>  doc/develop/pytest/index.rst           |  1 +
+>  doc/develop/pytest/test_efi_loader.rst |  8 +++
+>  test/py/tests/test_efi_loader.py       | 87 ++++++++++++++------------
+>  3 files changed, 55 insertions(+), 41 deletions(-)
+>  create mode 100644 doc/develop/pytest/test_efi_loader.rst
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
