@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B05F2C3ABC9
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E285C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:46:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26EB682AF4;
+	by phobos.denx.de (Postfix) with ESMTP id 725E582C44;
 	Sat, 10 May 2025 15:44:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L8AVP13S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e/FxcStN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26FCB82A65; Sat, 10 May 2025 15:44:27 +0200 (CEST)
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
- [IPv6:2a00:1450:4864:20::643])
+ id CF13F82BE4; Sat, 10 May 2025 15:44:27 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE3C482C49
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2E7D82952
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x643.google.com with SMTP id
- a640c23a62f3a-ad2414a412dso37957466b.0
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:23 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5fbeadf2275so5202177a12.2
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884663; x=1747489463; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884665; x=1747489465; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4RF2eDewpl/09a256E4Bk9Wwjw0W+kNIU5rcoFrvWk4=;
- b=L8AVP13SUtp5pCNFZOVt8iy41qRrBtDCnJXeHPWiwZb/UqPqaNdC6mtJ8c2FEAZRRY
- DE5NsB5L39tWz7J1CXxuPpHWjDmiGcbTH6pffpqsnTGZjVVrbyA2kwkcXqSqnhglaJ4S
- OMm83usecdSb/vzIgkYOXo4Lalx+w0tPSb3R8=
+ bh=p7SJa4F/NLBaFwvLjZnXnH94oB1nZ4P86cVzLM6Z++Y=;
+ b=e/FxcStNm79u1qrFIYbwDl2xCosgxTKlEkfK+hYfhg8Ca8lEQGN5GizhqdIc2N6SqM
+ vQfc5yPNey9/QlV2yQL+v58647pZ/s1IG2LcXe+q1ZhGh9y3NXJl2O8hgMbaOCXNsK0B
+ 9t5C37d44mAa3O6ONN1Vi3u93t9mp0/hKvnU0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884663; x=1747489463;
+ d=1e100.net; s=20230601; t=1746884665; x=1747489465;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4RF2eDewpl/09a256E4Bk9Wwjw0W+kNIU5rcoFrvWk4=;
- b=gU+bipY3o2ZVsovEtmnN8swRuR7jFIjGv70iW5/21A9Iykq09mFM/AdwX3MErSUVgW
- zrUr9nzkiPLenYvZ1jxAusEaTicg+LGz67Pz9B7hH0gooFAuMpyTca9OUyrIjStT5KCG
- bpjcqypIL7ULduLReFaCBugE6xKFouzi4Q2ANZVW08HhAAcoegLlCG+6pAEV5u0gOdkV
- i3dkngHPYu9fhu0UzdbjXqgcQtVXKqJNKBZfoZBnTcg2NfipocJP6DHKiUq0aXKznQPO
- D8EIKjXDV3dviOUg0AOLxjmXmpr0YzJp2k9Tke8jk9AQvMf89+AooysOd9yTeqnhYjBj
- 1kwQ==
-X-Gm-Message-State: AOJu0YxLqwdgT6HzRWYk+7SKCdmIrk905qMZ57m5QBC0lNpNPR+yZar9
- 43oBOq2iaiZaNjtXHCr0JotxTqHtZv+k8WHuFGTdVZlRCCB4TEh3aQVbH+WNL9/yAVFnbNARFg/
- QUo0StQ9IVms8
-X-Gm-Gg: ASbGnct709CrU64bn7/qBSn4ClnSmtk1WBOHE+GSqOcSTqEWtMAPmG9QSs0DIIAds5c
- i54skHkYTZfAQWyHo0O4P+FlofR7x1hy4nv4/F2+lLz1J4EDT+/9/C/BoP7N8kwWqe9ytWGSy3z
- Bp6hipAGvgEh4TBbKZqLsiAAEkZRl7dmt2TiVDI2CrPzdIJuEfYGPz6i4NCFbfqVC0Mz2YBWHCN
- hVl70aiJ23Enhw/mn90fDW6Ajf1GMuT0T0Z3OXoVilue4vjoebU79XYNelsr+1OqhXrj8YVTjZx
- VVqucMTu/EGG1DTp9nJA7eI+y3UWUpeuaTuNy9QSvcUP1ud0rXPAHS2JLGRXwzsYCcq1rQg1Vq7
- 0Rdk=
-X-Google-Smtp-Source: AGHT+IE3mWYznkPCEEFqEec6J2Az1yWz2wTev+f1jFMepaD48+fmj1EJ8m8b7hXImEovae+c7xivUw==
-X-Received: by 2002:a17:906:6a88:b0:ad2:1d12:fd68 with SMTP id
- a640c23a62f3a-ad21d1301c2mr471644266b.48.1746884662676; 
- Sat, 10 May 2025 06:44:22 -0700 (PDT)
+ bh=p7SJa4F/NLBaFwvLjZnXnH94oB1nZ4P86cVzLM6Z++Y=;
+ b=BnbFleWx9NxaVXc/0+rJdewfRSAsWCakqn+vyn8vKTm8w0RHoPDFZ+/I7ksQM99z9O
+ XSwzny4kiaxAz5RY4VSP/kc//3lsas03a3AVfpYZqj1s338JsTqPM8igDOWY5tnavSbr
+ Ic7xrTFtgU5uPnO2D5v+yMJutXHp99LYRSezQukLOLrvT8DO2icNvw18WP3eV65PkePA
+ 3gIO6GkeRtIe96uYH7hViur7dr1WEkhIuob6j424R0Uva84VP5rKgGq5Ajqygk8G6pcv
+ i1xKHTjqSJZDtFeD6crVCvcoaQ/S5dhwWDVsdq4aeURO+hag2lNgaB6rZUJWhDZgxrmz
+ IjgQ==
+X-Gm-Message-State: AOJu0YwqSK/jyP8AJRB8yIMYn8NxVk7IXDK9GD9MKYXwkp9kBxZO00DT
+ 2VSwRJEU5WBQLP8jD4tjqMqO/P6VelUbZhypqsPhjYw8zLk/qG86x3lm24omwWrQTUbIsM6G060
+ AkyeYaGHbSQ==
+X-Gm-Gg: ASbGncu+pCxAMNkQV/1QZnsD3HGrE0SzIFsC7y9+gbuoM+81lyC9IIC0q+fAArVgo7F
+ UODJjwGCgRR3XjOaQlJpzgNHRdWL7RTT3MKlCFDvy3AOKS8XRhdSWAhppDD7OdSzppDHjJV3X9W
+ PYp9uhNm8nqupnILx4F3A04IvULh9mPWjp2Jch/yKKd9YtczvQbhy7bfPoD/NEysSmiu7nPYAsb
+ FWp+Y9zKgHvWH9q/czEfWyUFdrVXW8Afk6m5tMTDbWXuZFXQGoUPVWANZWUWka9X9TV+bPgBwvT
+ tXdKtt+9Kp76sIKKwBirXalZc8t7r9Y3QLLY+RjcAA/sBoRmN1xFiwSa1JCvDOdnIfoj
+X-Google-Smtp-Source: AGHT+IF04xQPhFSgnWcnaECFoAlrjFoLv/RypqoVmbWS/B0BGPvc4B1VrNnlWLK6gCSAq53320k6jg==
+X-Received: by 2002:a17:906:7955:b0:acb:5c83:251 with SMTP id
+ a640c23a62f3a-ad2191789acmr670674266b.53.1746884664881; 
+ Sat, 10 May 2025 06:44:24 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.21
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:44:22 -0700 (PDT)
+ Sat, 10 May 2025 06:44:24 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -77,14 +76,16 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>
-Subject: [PATCH v4 21/22] passage: Add checks for pre-existing blobs
-Date: Sat, 10 May 2025 15:42:19 +0200
-Message-ID: <20250510134253.1581164-15-sjg@chromium.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH v4 22/22] CI: Add tests for gitlab and azure
+Date: Sat, 10 May 2025 15:42:20 +0200
+Message-ID: <20250510154214.v4.22.I321f53b875ffb594a569796509e64830b9f3fe09@changeid>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,427 +103,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add checks / documentation for blobs which are already in the list. This
-brings U-Boot up to the standard required by the standard-passage
-documentation.
+Add tests that check that SPL can generate a standard passage on ARM and
+that U-Boot proper can accept it successfully.
+
+- Finish the commit message
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- board/sandbox/stdpass_check.c   |  70 ++++++++-
- include/stdpass/tpm2_eventlog.h |  42 +++++
- include/stdpass/vboot_ctx.h     | 267 ++++++++++++++++++++++++++++++++
- 3 files changed, 378 insertions(+), 1 deletion(-)
- create mode 100644 include/stdpass/tpm2_eventlog.h
- create mode 100644 include/stdpass/vboot_ctx.h
+Changes in v3:
+- Add test for aarch64
+- Add tests for azure
 
-diff --git a/board/sandbox/stdpass_check.c b/board/sandbox/stdpass_check.c
-index d04f41137c1..bd2cb16c628 100644
---- a/board/sandbox/stdpass_check.c
-+++ b/board/sandbox/stdpass_check.c
-@@ -27,10 +27,78 @@ void check_struct_name(void)
- 	/* __maybe_unused struct struct_name check; */
- }
+ .azure-pipelines.yml |  6 ++++++
+ .gitlab-ci.yml       | 12 ++++++++++++
+ 2 files changed, 18 insertions(+)
+
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 5e1938b0526..4378ba4ec9d 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -459,6 +459,12 @@ stages:
+         qemu_arm_sbsa_ref:
+           TEST_PY_BD: "qemu-arm-sbsa"
+           TEST_PY_TEST_SPEC: "not sleep"
++        qemu_arm_spl:
++          TEST_PY_BD: "qemu_arm_spl"
++          TEST_PY_TEST_SPEC: "test_passage"
++        qemu_arm64_spl:
++          TEST_PY_BD: "qemu_arm64_spl"
++          TEST_PY_TEST_SPEC: "test_passage"
+         qemu_m68k:
+           TEST_PY_BD: "M5208EVBE"
+           TEST_PY_ID: "--id qemu"
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 6f11331514b..bd8ec7555a8 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -394,6 +394,18 @@ qemu_arm_sbsa test.py:
+     TEST_PY_TEST_SPEC: "not sleep"
+   <<: *buildman_and_testpy_dfn
  
-+/* BLOBLISTT_CONTROL_DTB */
-+void check_control_dtb(void)
-+{
-+	/*
-+	 * Defined by devicetree specification
-+	 * https://github.com/devicetree-org/devicetree-specification/releases/tag/v0.3
-+	 */
-+};
++qemu_arm spl_test.py:
++  variables:
++    TEST_PY_BD: "qemu_arm_spl"
++    TEST_PY_TEST_SPEC: "test_passage"
++  <<: *buildman_and_testpy_dfn
 +
-+/* BLOBLISTT_ACPI_GNVS */
-+#include <intel_gnvs.h>
-+void check_acpi_gnvs(void)
-+{
-+	__maybe_unused struct acpi_global_nvs check;
-+}
++qemu_arm64 spl_test.py:
++  variables:
++    TEST_PY_BD: "qemu_arm64_spl"
++    TEST_PY_TEST_SPEC: "test_passage"
++  <<: *buildman_and_testpy_dfn
 +
-+/* BLOBLISTT_INTEL_VBT */
-+void check_intel_vbt(void)
-+{
-+	/*
-+	 * Pre-existing Intel blob, defined by source code
-+	 *
-+	 * https://github.com/freedesktop/xorg-intel-gpu-tools/blob/master/tools/intel_vbt_defs.h
-+	 * https://github.com/freedesktop/xorg-intel-gpu-tools/blob/master/tools/intel_vbt_decode.c
-+	 */
-+}
-+
-+/* BLOBLISTT_TPM2_TCG_LOG */
-+#include <stdpass/tpm2_eventlog.h>
-+void check_tpm2_tcg_log(void)
-+{
-+	/* Struct for each record */
-+	__maybe_unused struct tpm2_eventlog_context check;
-+}
-+
-+/* BLOBLISTT_TCPA_LOG */
-+#include <acpi/acpi_table.h>
-+void check_tcpa_log(void)
-+{
-+	__maybe_unused struct acpi_tcpa check;
-+};
-+
-+/* BLOBLISTT_ACPI_TABLES */
-+void check_acpi_tables(void)
-+{
-+	/*
-+	 * Defined by UEFI Advanced Configuration and Power Interface (ACPI)
-+	 * Specification, Version 6.3, January 2019
-+	 * https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf
-+	 */
-+}
-+
-+/* BLOBLISTT_SMBIOS_TABLES */
-+void check_smbios_tables(void)
-+{
-+	/*
-+	 * Defined by System Management BIOS (SMBIOS) Reference Specification
-+	 * v3.5.0
-+	 * https://www.dmtf.org/standards/smbios
-+	 */
-+}
-+
-+/* BLOBLISTT_VBOOT_CTX */
-+#include <stdpass/vboot_ctx.h>
-+void check_vboot_ctx(void)
-+{
-+	__maybe_unused struct vb2_shared_data check;
-+}
-+
- /* BLOBLISTT_U_BOOT_SPL_HANDOFF */
- #include <handoff.h>
- void check_spl_handoff(void)
- {
- 	__maybe_unused struct spl_handoff check;
- };
--
-diff --git a/include/stdpass/tpm2_eventlog.h b/include/stdpass/tpm2_eventlog.h
-new file mode 100644
-index 00000000000..6b258609149
---- /dev/null
-+++ b/include/stdpass/tpm2_eventlog.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: BSD-3-Clause */
-+
-+/* taken from https://github.com/tpm2-software/tpm2-tss/blob/master/include/tss2/tss2_tpm2_types.h */
-+#define TPM2_MAX_PCRS           32
-+
-+/* Hash algorithm sizes */
-+#define TPM2_SHA_DIGEST_SIZE     20
-+#define TPM2_SHA1_DIGEST_SIZE    20
-+#define TPM2_SHA256_DIGEST_SIZE  32
-+#define TPM2_SHA384_DIGEST_SIZE  48
-+#define TPM2_SHA512_DIGEST_SIZE  64
-+#define TPM2_SM3_256_DIGEST_SIZE 32
-+
-+/* taken from https://github.com/tpm2-software/tpm2-tools/blob/master/lib/tpm2_eventlog.h#L14 */
-+
-+typedef bool (*digest2_callback)(void const *digest, size_t size, void *data);
-+typedef bool (*event2_callback)(void const *event_hdr, size_t size, void *data);
-+typedef bool (*event2data_callback)(void const *event, u32 type, void *data,
-+				    u32 eventlog_version);
-+typedef bool (*specid_callback)(void const *event, void *data);
-+typedef bool (*log_event_callback)(void const *event_hdr, size_t size,
-+				   void *data);
-+
-+struct tpm2_eventlog_context {
-+	void *data;
-+	specid_callback specid_cb;
-+	log_event_callback log_eventhdr_cb;
-+	event2_callback event2hdr_cb;
-+	digest2_callback digest2_cb;
-+	event2data_callback event2_cb;
-+	u32 sha1_used;
-+	u32 sha256_used;
-+	u32 sha384_used;
-+	u32 sha512_used;
-+	u32 sm3_256_used;
-+	u8 sha1_pcrs[TPM2_MAX_PCRS][TPM2_SHA1_DIGEST_SIZE];
-+	u8 sha256_pcrs[TPM2_MAX_PCRS][TPM2_SHA256_DIGEST_SIZE];
-+	u8 sha384_pcrs[TPM2_MAX_PCRS][TPM2_SHA384_DIGEST_SIZE];
-+	u8 sha512_pcrs[TPM2_MAX_PCRS][TPM2_SHA512_DIGEST_SIZE];
-+	u8 sm3_256_pcrs[TPM2_MAX_PCRS][TPM2_SM3_256_DIGEST_SIZE];
-+	u32 eventlog_version;
-+};
-diff --git a/include/stdpass/vboot_ctx.h b/include/stdpass/vboot_ctx.h
-new file mode 100644
-index 00000000000..ff74e8ba709
---- /dev/null
-+++ b/include/stdpass/vboot_ctx.h
-@@ -0,0 +1,267 @@
-+/* SPDX-License-Identifier: BSD-3-Clause */
-+
-+/*
-+ * Taken from https://chromium.googlesource.com/chromiumos/platform/vboot
-+ *
-+ * Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
-+ * Use of this source code is governed by a BSD-style license that can be
-+ * found in the LICENSE file.
-+ */
-+
-+/*
-+ * Size of non-volatile data used by vboot.
-+ *
-+ * If you only support non-volatile data format V1, then use VB2_NVDATA_SIZE.
-+ * If you support V2, use VB2_NVDATA_SIZE_V2 and set context flag
-+ * VB2_CONTEXT_NVDATA_V2.
-+ */
-+#define VB2_NVDATA_SIZE 16
-+#define VB2_NVDATA_SIZE_V2 64
-+
-+/* Size of secure data spaces used by vboot */
-+#define VB2_SECDATA_FIRMWARE_SIZE 10
-+#define VB2_SECDATA_KERNEL_SIZE_V02 13
-+#define VB2_SECDATA_KERNEL_SIZE_V10 40
-+#define VB2_SECDATA_KERNEL_MIN_SIZE 13
-+#define VB2_SECDATA_KERNEL_MAX_SIZE 64
-+#define VB2_SECDATA_FWMP_MIN_SIZE 40
-+#define VB2_SECDATA_FWMP_MAX_SIZE 64
-+
-+/* Helper for aligning fields in vb2_context. */
-+#define VB2_PAD_STRUCT3(size, align, count) \
-+	u8 _pad##count[align - (((size - 1) % align) + 1)]
-+#define VB2_PAD_STRUCT2(size, align, count) VB2_PAD_STRUCT3(size, align, count)
-+#define VB2_PAD_STRUCT(size, align) VB2_PAD_STRUCT2(size, align, __COUNTER__)
-+
-+/* MAX_SIZE should not be changed without bumping up DATA_VERSION_MAJOR. */
-+#define VB2_CONTEXT_MAX_SIZE 384
-+
-+/*
-+ * Context for firmware verification.  Pass this to all vboot APIs.
-+ *
-+ * Context is stored as part of vb2_shared_data, initialized with vb2api_init().
-+ * Subsequent retrieval of the context object should be done by calling
-+ * vb2api_reinit(), e.g. if switching firmware applications.
-+ *
-+ * The context struct can be seen as the "publicly accessible" portion of
-+ * vb2_shared_data, and thus does not require its own magic and version fields.
-+ */
-+struct vb2_context {
-+	/**********************************************************************
-+	 * Fields caller must initialize before calling any API functions.
-+	 */
-+
-+	/*
-+	 * Flags; see vb2_context_flags.  Some flags may only be set by caller
-+	 * prior to calling vboot functions.
-+	 */
-+	u64 flags;
-+
-+	/*
-+	 * Non-volatile data.  Caller must fill this from some non-volatile
-+	 * location before calling vb2api_fw_phase1.  If the
-+	 * VB2_CONTEXT_NVDATA_CHANGED flag is set when a vb2api function
-+	 * returns, caller must save the data back to the non-volatile location
-+	 * and then clear the flag.
-+	 */
-+	u8 nvdata[VB2_NVDATA_SIZE_V2];
-+	VB2_PAD_STRUCT(VB2_NVDATA_SIZE_V2, 8);
-+
-+	/*
-+	 * Secure data for firmware verification stage.  Caller must fill this
-+	 * from some secure non-volatile location before calling
-+	 * vb2api_fw_phase1.  If the VB2_CONTEXT_SECDATA_FIRMWARE_CHANGED flag
-+	 * is set when a function returns, caller must save the data back to the
-+	 * secure non-volatile location and then clear the flag.
-+	 */
-+	u8 secdata_firmware[VB2_SECDATA_FIRMWARE_SIZE];
-+	VB2_PAD_STRUCT(VB2_SECDATA_FIRMWARE_SIZE, 8);
-+
-+	/**********************************************************************
-+	 * Fields caller must initialize before calling vb2api_kernel_phase1().
-+	 */
-+
-+	/*
-+	 * Secure data for kernel verification stage.  Caller must fill this
-+	 * from some secure non-volatile location before calling
-+	 * vb2api_kernel_phase1.  If the VB2_CONTEXT_SECDATA_KERNEL_CHANGED
-+	 * flag is set when a function returns, caller must save the data back
-+	 * to the secure non-volatile location and then clear the flag.
-+	 */
-+	u8 secdata_kernel[VB2_SECDATA_KERNEL_MAX_SIZE];
-+	VB2_PAD_STRUCT(VB2_SECDATA_KERNEL_MAX_SIZE, 8);
-+
-+	/*
-+	 * Firmware management parameters (FWMP) secure data.  Caller must fill
-+	 * this from some secure non-volatile location before calling
-+	 * vb2api_kernel_phase1.  Since FWMP is a variable-size space, caller
-+	 * should initially fill in VB2_SECDATA_FWMP_MIN_SIZE bytes, and call
-+	 * vb2_secdata_fwmp_check() to see whether more should be read.  If the
-+	 * VB2_CONTEXT_SECDATA_FWMP_CHANGED flag is set when a function
-+	 * returns, caller must save the data back to the secure non-volatile
-+	 * location and then clear the flag.
-+	 */
-+	u8 secdata_fwmp[VB2_SECDATA_FWMP_MAX_SIZE];
-+	VB2_PAD_STRUCT(VB2_SECDATA_FWMP_MAX_SIZE, 8);
-+
-+	/*
-+	 * Context pointer for use by caller.  Verified boot never looks at
-+	 * this.  Put context here if you need it for APIs that verified boot
-+	 * may call (vb2ex_...() functions).
-+	 */
-+	void *non_vboot_context;
-+};
-+
-+/*
-+ * Data shared between vboot API calls.  Stored at the start of the work
-+ * buffer.
-+ */
-+struct vb2_shared_data {
-+	/* Magic number for struct (VB2_SHARED_DATA_MAGIC) */
-+	u32 magic;
-+
-+	/* Version of this structure */
-+	u16 struct_version_major;
-+	u16 struct_version_minor;
-+
-+	/* Public fields are stored in the context object */
-+	struct vb2_context ctx;
-+
-+	/* Padding for adding future vb2_context fields */
-+	u8 padding[VB2_CONTEXT_MAX_SIZE - sizeof(struct vb2_context)];
-+
-+	/* Work buffer length in bytes. */
-+	u32 workbuf_size;
-+
-+	/*
-+	 * Amount of work buffer used so far.  Verified boot sub-calls use
-+	 * this to know where the unused work area starts.
-+	 */
-+	u32 workbuf_used;
-+
-+	/* Flags; see enum vb2_shared_data_flags */
-+	u32 flags;
-+
-+	/*
-+	 * Reason we are in recovery mode this boot (enum vb2_nv_recovery), or
-+	 * 0 if we aren't.
-+	 */
-+	u32 recovery_reason;
-+
-+	/* Firmware slot used last boot (0=A, 1=B) */
-+	u32 last_fw_slot;
-+
-+	/* Result of last boot (enum vb2_fw_result) */
-+	u32 last_fw_result;
-+
-+	/* Firmware slot used this boot */
-+	u32 fw_slot;
-+
-+	/*
-+	 * Version for this slot (top 16 bits = key, lower 16 bits = firmware).
-+	 *
-+	 * TODO: Make this a union to allow getting/setting those versions
-+	 * separately?
-+	 */
-+	u32 fw_version;
-+
-+	/* Version from secdata_firmware (must be <= fw_version to boot). */
-+	u32 fw_version_secdata;
-+
-+	/*
-+	 * Status flags for this boot; see enum vb2_shared_data_status.  Status
-+	 * is "what we've done"; flags above are "decisions we've made".
-+	 */
-+	u32 status;
-+
-+	/* Offset from start of this struct to GBB header */
-+	u32 gbb_offset;
-+
-+	/**********************************************************************
-+	 * Data from kernel verification stage.
-+	 *
-+	 * TODO: shouldn't be part of the main struct, since that needlessly
-+	 * uses more memory during firmware verification.
-+	 */
-+
-+	/*
-+	 * Version for the current kernel (top 16 bits = key, lower 16 bits =
-+	 * kernel preamble).
-+	 *
-+	 * TODO: Make this a union to allow getting/setting those versions
-+	 * separately?
-+	 */
-+	u32 kernel_version;
-+
-+	/* Version from secdata_kernel (must be <= kernel_version to boot) */
-+	u32 kernel_version_secdata;
-+
-+	/**********************************************************************
-+	 * Temporary variables used during firmware verification.  These don't
-+	 * really need to persist through to the OS, but there's nowhere else
-+	 * we can put them.
-+	 */
-+
-+	/* Offset of preamble from start of vblock */
-+	u32 vblock_preamble_offset;
-+
-+	/*
-+	 * Offset and size of packed data key in work buffer.  Size is 0 if
-+	 * data key is not stored in the work buffer.
-+	 */
-+	u32 data_key_offset;
-+	u32 data_key_size;
-+
-+	/*
-+	 * Offset and size of firmware preamble in work buffer.  Size is 0 if
-+	 * preamble is not stored in the work buffer.
-+	 */
-+	u32 preamble_offset;
-+	u32 preamble_size;
-+
-+	/*
-+	 * Offset and size of hash context in work buffer.  Size is 0 if
-+	 * hash context is not stored in the work buffer.
-+	 */
-+	u32 hash_offset;
-+	u32 hash_size;
-+
-+	/*
-+	 * Current tag we're hashing
-+	 *
-+	 * For new structs, this is the offset of the vb2_signature struct
-+	 * in the work buffer.
-+	 *
-+	 * TODO: rename to hash_sig_offset when vboot1 structs are deprecated.
-+	 */
-+	u32 hash_tag;
-+
-+	/* Amount of data we still expect to hash */
-+	u32 hash_remaining_size;
-+
-+	/**********************************************************************
-+	 * Temporary variables used during kernel verification.  These don't
-+	 * really need to persist through to the OS, but there's nowhere else
-+	 * we can put them.
-+	 *
-+	 * TODO: make a union with the firmware verification temp variables,
-+	 * or make both of them workbuf-allocated sub-structs, so that we can
-+	 * overlap them so kernel variables don't bloat firmware verification
-+	 * stage memory requirements.
-+	 */
-+
-+	/*
-+	 * Formerly a pointer to vboot1 shared data header ("VBSD").  Caller
-+	 * may now export a copy of VBSD via vb2api_export_vbsd().
-+	 * TODO: Remove this field and bump struct_version_major.
-+	 */
-+	uintptr_t reserved0;
-+
-+	/*
-+	 * Offset and size of packed kernel key in work buffer.  Size is 0 if
-+	 * subkey is not stored in the work buffer.  Note that kernel key may
-+	 * be inside the firmware preamble.
-+	 */
-+	u32 kernel_key_offset;
-+	u32 kernel_key_size;
-+} __packed;
+ qemu_m68k test.py:
+   variables:
+     TEST_PY_BD: "M5208EVBE"
 -- 
 2.43.0
 
