@@ -4,61 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23008C3ABCB
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 12:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9D7C3ABCB
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 12:50:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F7AC82952;
-	Sat, 10 May 2025 14:00:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id EBCBA8283E;
+	Sat, 10 May 2025 14:50:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sima.ai
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="TrZus91O";
+	dkim=pass (2048-bit key; unprotected) header.d=sima.ai header.i=@sima.ai header.b="r5LFowgF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 250F58295C; Sat, 10 May 2025 14:00:11 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A1B5B8211F; Sat, 10 May 2025 06:12:09 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BDB28283E
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 14:00:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D00380EE5
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:12:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=sima.ai
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 9246b8eb-2d96-11f0-b8e9-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 9246b8eb-2d96-11f0-b8e9-005056999439;
- Sat, 10 May 2025 14:01:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=fsVMe1LZLZ2hU/4xTeYLgu0U1vFZ9fDEPvmOF2A44SQ=;
- b=TrZus91OhaDq9HIRwFQN9IQ//zAAbxKe36xJKIgiFI1dHHJDNgT5wyw2p8yLke3eqQsfdvODwiyRx
- 3FmXAGnbsiHyt6LgQYhI+wS0kCAI5gOVHVK2bveyWSOsQ44yBMGEwzoWmpO7VEbQrtoMeWGcU1mLWY
- 46dtdqa6RnLtAoOwVExCJU8N1fvKNWxUhKF2PjdwglA2dtyhao8GciUzXMqpPZCi8fdqUqTWxVeeX5
- DyqXVcsrs0u/NlC+wgF//HmPyuSQgfiu6u9cWfrQkFkolMZrl+Spo5nJBl4sRu1JZTboeWQ7Tlk7N1
- 7J2VuzFZob0MGaPhH6kp/OxIYCpvTrg==
-X-KPN-MID: 33|yTx013Eq7QWbCGNS4iWyxJxca4/s4WGBLsBjZTBxjWNoHbBXAwBv7TAx5nqa8uq
- YNE8n7oeZWuiY9jAqrKOWzXOfPzE/wvIpH6nd+dU/CY8=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|QTG8jsnwRMxuQtEUMFg4wjW4Cl2OHI7ntDoRoZLHa3KvVmaV013g/1Vw/DegHF2
- 05/gxTN4L+o+z7fb2JW0wdg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 50e51e87-2d96-11f0-9a00-00505699772e;
- Sat, 10 May 2025 14:00:08 +0200 (CEST)
-Date: Sat, 10 May 2025 14:00:07 +0200
-Message-Id: <87cycg8ym0.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, sjg@chromium.org,
- ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
- sughosh.ganu@linaro.org, trini@konsulko.com, vincent.stehle@arm.com
-In-Reply-To: <20250510113627.1476467-1-sjg@chromium.org> (message from Simon
- Glass on Sat, 10 May 2025 13:36:24 +0200)
-Subject: Re: [PATCH] efi_loader: Disable ANSI output for tests
-References: <20250510113627.1476467-1-sjg@chromium.org>
+ spf=pass smtp.mailfrom=nikunj.kela@sima.ai
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-737685eda9aso299207b3a.3
+ for <u-boot@lists.denx.de>; Fri, 09 May 2025 21:12:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sima.ai; s=google; t=1746850325; x=1747455125; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=96NyuEFezasbHrhHfQhRPOuv9SzJydnsX6mpauiLxck=;
+ b=r5LFowgFSilGzQhydw3X0VhlKz8v/GlDt93fa1YuRgg0XjfZrc01U3d5YVe5kQPQHk
+ kQ8wCh89YfRyw81kGOA/HeK14DMQX+rECebCRgUNQ+yF4FeyFq98cpx6FOyuspX5V/es
+ DuWUDpzuOwW0XsBT8U3Pj6+s0XrvX+Xz9tKAqA5+ckuoxEJZm/5++44azltmRrsxnRY3
+ 1dbWZkFKZ1P7UP3Cn7QX0FOYUoknfzseVJ91Sre0yerQtkDIOfRnGVKQoCRY8oCmQ9Jb
+ RhV2sAT/IbEmApI9ANDxgvEeBm5OV/kcgjFo6i5omwKPfArUacAmlIRP/VUjNcD0nHza
+ fhzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746850325; x=1747455125;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=96NyuEFezasbHrhHfQhRPOuv9SzJydnsX6mpauiLxck=;
+ b=ZZB213By5mTHARMGStC2ZJw/z12q50CpMtc8wRURaE6bgj9iPXcOiJ0m+oEPwRlLe+
+ MW7L6w5HZUJwKGWFQKkZd7QHdyUaBfqunzLsW07QQgUwoj9onrzrf8N/ccrQHH7vcuJV
+ FVRvnEoPytRPJEby7NnRupMKAGtq5J9ObYRdLwj5MKNNs6aZyeAYSteMQcMc+Xd3waoO
+ RMXWkR9zOZpA8TXVV+pqcKWei2pjvddPWP8yz5D2gOhOPlt8buQGFXuTDAa4YlP1/M7b
+ o4WTs78KXN6OHZwqetbh5sPn8fiy/t62chnAZ36LkoQd299N4vR+wgC36qQXCV1ipshu
+ 1nhg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5UGZg1782s7StD5Zr+NR7DnIig6hgqIvvc8HFT2vKGFB5i3KkPjPAzCoEkMOuow15Hz9HHTA=@lists.denx.de
+X-Gm-Message-State: AOJu0YysuF7IJ4a7zp/e0oNhzIGQebe1SKo50cwJY5E7S0H1qNPzSfiw
+ 4+NFdV5puFECKZr8h9MzSvx5bGyJt6EAIbHno7/xAtqFSRMhOH7sgX4cRCIPyUA=
+X-Gm-Gg: ASbGncsHYSPEEr4NLPRQPoxhMsr2JdzmxtndNussAcii7e6uJn5oFa4yHavV1XKRl9B
+ 69+rpT3t9y8nusl3YPuCK9bm9qq9Ki6R9gsKr9Xhj1dCHDxYqEAzkLt9d1JgBuXut8mB5gkclyK
+ Y6J5JlW8PXDtVAZ3Jl9GRoGgPCXtn6nbed8V1Iwulwu2AEhrx0SDVd5eioGGFCuEzvg4RPd7K02
+ lsnyoFz3KLrMryE8iVMpgxAt6zCOaPcH5VlY/ar2BNOiuaouB/pcSuqJZ7blsM2deaovIh0kUMk
+ OOqgfLly7f/H8ZEILjh15iMOYT+/D43UkqhBUw+vqSJbsDJlQG4zQnLt5F9qk5hFgec9jg==
+X-Google-Smtp-Source: AGHT+IFhSNNb3AHqnv+uRMgLP2RBiM++2bjOIfUmLwwseYfpjBrxDt0RYHj6QnNDGRrR5yHrbByTgw==
+X-Received: by 2002:a05:6a00:3688:b0:73e:2b50:426 with SMTP id
+ d2e1a72fcca58-7423bfba21dmr2948885b3a.4.1746850325017; 
+ Fri, 09 May 2025 21:12:05 -0700 (PDT)
+Received: from nikunj-kela-u22.eng.sima.ai ([205.234.21.7])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-742377278cesm2612464b3a.50.2025.05.09.21.12.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 May 2025 21:12:04 -0700 (PDT)
+From: Nikunj Kela <nikunj.kela@sima.ai>
+To: joe.hershberger@ni.com,
+	rfried.dev@gmail.com,
+	trini@konsulko.com
+Cc: tien.fong.chee@intel.com, boon.khai.ng@intel.com, u-boot@lists.denx.de,
+ Nikunj Kela <nikunj.kela@sima.ai>
+Subject: [PATCH] net: xgmac: Augment mdio read/write with cl-45 format support
+Date: Fri,  9 May 2025 21:12:00 -0700
+Message-Id: <20250510041200.2552981-1-nikunj.kela@sima.ai>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 10 May 2025 14:50:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,115 +99,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Sat, 10 May 2025 13:36:24 +0200
+Currently, clause-22 format is supported. This change adds
+support for clause-45 format.
 
-Hi Simon,
+Signed-off-by: Nikunj Kela <nikunj.kela@sima.ai>
+---
+ drivers/net/dwc_eth_xgmac.c | 67 +++++++++++++++++++++++++++----------
+ 1 file changed, 49 insertions(+), 18 deletions(-)
 
-> We don't want ANSI characters written in tests since it is a pain to
-> check the output with ut_assert_nextline() et al.
-
-You probably shouldn't use the term "ANSI characters" here when you
-really mean "ANSI escape sequences".
+diff --git a/drivers/net/dwc_eth_xgmac.c b/drivers/net/dwc_eth_xgmac.c
+index 03959ea95a5..68c69b7b3df 100644
+--- a/drivers/net/dwc_eth_xgmac.c
++++ b/drivers/net/dwc_eth_xgmac.c
+@@ -147,6 +147,7 @@ static int xgmac_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 	u32 val;
+ 	u32 hw_addr;
+ 	int ret;
++	u32 c45 = 1;
  
-> Provide a way to tests to request that ANSI characters not be sent.
-> 
-> Add a proper function comment while we are here, to encourage others.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  include/efi_loader.h         | 21 ++++++++++++++++++++-
->  lib/efi_loader/efi_console.c | 26 +++++++++++++++++---------
->  2 files changed, 37 insertions(+), 10 deletions(-)
-> 
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 25a809c3d53..b699479f346 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -532,8 +532,27 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
->  efi_status_t efi_bootmgr_run(void *fdt);
->  /* search the boot option index in BootOrder */
->  bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target, u32 *index);
-> -/* Set up console modes */
-> +
-> +/**
-> + * efi_setup_console_size() - update the mode table.
-> + *
-> + * By default the only mode available is 80x25. If the console has at least 50
-> + * lines, enable mode 80x50. If we can query the console size and it is neither
-> + * 80x25 nor 80x50, set it as an additional mode.
-> + */
->  void efi_setup_console_size(void);
-> +
-> +/**
-> + * efi_console_set_ansi() - Set whether ANSI characters should be emitted
-> + *
-> + * These characters mess up tests which use ut_assert_nextline(). Call this
-> + * function to tell efi_loader not to emit these characters when starting up the
-> + * terminal
-> + *
-> + * @allow_ansi: Allow emitting ANSI characters
-> + */
-> +void efi_console_set_ansi(bool allow_ansi);
-> +
->  /* Set up load options from environment variable */
->  efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
->  				      u16 **load_options);
-> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
-> index 9d9f786a6db..28687d678c3 100644
-> --- a/lib/efi_loader/efi_console.c
-> +++ b/lib/efi_loader/efi_console.c
-> @@ -30,6 +30,17 @@ struct cout_mode {
->  
->  __maybe_unused static struct efi_object uart_obj;
->  
-> +/*
-> + * suppress emission of ANSI codes for use by unit tests. Leave it as 0 for the
-> + * default behaviour
-> + */
-> +static bool no_ansi;
-> +
-> +void efi_console_set_ansi(bool allow_ansi)
-> +{
-> +	no_ansi = !allow_ansi;
-> +}
-> +
->  static struct cout_mode efi_cout_modes[] = {
->  	/* EFI Mode 0 is 80x25 and always present */
->  	{
-> @@ -348,13 +359,6 @@ static int __maybe_unused query_vidconsole(int *rows, int *cols)
->  	return 0;
->  }
->  
-> -/**
-> - * efi_setup_console_size() - update the mode table.
-> - *
-> - * By default the only mode available is 80x25. If the console has at least 50
-> - * lines, enable mode 80x50. If we can query the console size and it is neither
-> - * 80x25 nor 80x50, set it as an additional mode.
-> - */
->  void efi_setup_console_size(void)
->  {
->  	int rows = 25, cols = 80;
-> @@ -362,8 +366,12 @@ void efi_setup_console_size(void)
->  
->  	if (IS_ENABLED(CONFIG_VIDEO))
->  		ret = query_vidconsole(&rows, &cols);
-> -	if (ret)
-> -		ret = query_console_serial(&rows, &cols);
-> +	if (ret) {
-> +		if (no_ansi)
-> +			ret = 0;
-> +		else
-> +			ret = query_console_serial(&rows, &cols);
-> +	}
->  	if (ret)
->  		return;
->  
-> -- 
-> 2.43.0
-> 
-> base-commit: c5a631df96de7421d10ee03dceed1b79db213026
-> branch: ansi
-> 
+ 	debug("%s(dev=%p, addr=0x%x, reg=%d):\n", __func__, xgmac->dev, mdio_addr,
+ 	      mdio_reg);
+@@ -159,19 +160,34 @@ static int xgmac_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 		return ret;
+ 	}
+ 
+-	/* Set clause 22 format */
+-	val = BIT(mdio_addr);
+-	writel(val, &xgmac->mac_regs->mdio_clause_22_port);
++	if (mdio_devad == MDIO_DEVAD_NONE) {
++		/* Set clause 22 format */
++		c45 = 0;
++		val = BIT(mdio_addr);
++		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
++	} else {
++		val = readl(&xgmac->mac_regs->mdio_clause_22_port);
++		val &= ~BIT(mdio_addr);
++		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
++	}
+ 
+-	hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+-		   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
++	if (c45) {
++		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
++			   (mdio_reg & 0xffff);
++		hw_addr |= mdio_devad << XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
++	} else {
++		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
++			   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
++	}
+ 
+ 	val = xgmac->config->config_mac_mdio <<
+ 	      XGMAC_MAC_MDIO_ADDRESS_CR_SHIFT;
+ 
+-	val |= XGMAC_MAC_MDIO_ADDRESS_SADDR |
+-	       XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_READ |
+-	       XGMAC_MAC_MDIO_ADDRESS_SBUSY;
++	if (!c45)
++		val |= XGMAC_MAC_MDIO_ADDRESS_SADDR;
++
++	val |= XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_READ |
++		XGMAC_MAC_MDIO_ADDRESS_SBUSY;
+ 
+ 	ret = xgmac_mdio_wait_idle(xgmac);
+ 	if (ret) {
+@@ -207,6 +223,7 @@ static int xgmac_mdio_write(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 	u32 val;
+ 	u32 hw_addr;
+ 	int ret;
++	u32 c45 = 1;
+ 
+ 	debug("%s(dev=%p, addr=0x%x, reg=%d, val=0x%x):\n", __func__, xgmac->dev,
+ 	      mdio_addr, mdio_reg, mdio_val);
+@@ -219,21 +236,35 @@ static int xgmac_mdio_write(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+ 		return ret;
+ 	}
+ 
+-	/* Set clause 22 format */
+-	val = BIT(mdio_addr);
+-	writel(val, &xgmac->mac_regs->mdio_clause_22_port);
+-
+-	hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
+-		   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
++	if (mdio_devad == MDIO_DEVAD_NONE) {
++		c45 = 0;
++		/* Set clause 22 format */
++		val = BIT(mdio_addr);
++		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
++	} else {
++		val = readl(&xgmac->mac_regs->mdio_clause_22_port);
++		val &= ~BIT(mdio_addr);
++		writel(val, &xgmac->mac_regs->mdio_clause_22_port);
++	}
+ 
+-	hw_addr |= (mdio_reg >> XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) <<
+-		    XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
++	if (c45) {
++		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
++			   (mdio_reg & 0xffff);
++		hw_addr |= mdio_devad << XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
++	} else {
++		hw_addr = (mdio_addr << XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) |
++			   (mdio_reg & XGMAC_MAC_MDIO_REG_ADDR_C22P_MASK);
++		hw_addr |= (mdio_reg >> XGMAC_MAC_MDIO_ADDRESS_PA_SHIFT) <<
++			    XGMAC_MAC_MDIO_ADDRESS_DA_SHIFT;
++	}
+ 
+ 	val = (xgmac->config->config_mac_mdio <<
+ 	       XGMAC_MAC_MDIO_ADDRESS_CR_SHIFT);
+ 
+-	val |= XGMAC_MAC_MDIO_ADDRESS_SADDR |
+-		mdio_val | XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_WRITE |
++	if (!c45)
++		val |= XGMAC_MAC_MDIO_ADDRESS_SADDR;
++
++	val |=	mdio_val | XGMAC_MDIO_SINGLE_CMD_ADDR_CMD_WRITE |
+ 		XGMAC_MAC_MDIO_ADDRESS_SBUSY;
+ 
+ 	ret = xgmac_mdio_wait_idle(xgmac);
+-- 
+2.34.1
+
