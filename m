@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8644CC3ABCB
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:25:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2DAC3ABCB
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:25:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37CB382A1C;
-	Sat, 10 May 2025 13:25:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E00782AB9;
+	Sat, 10 May 2025 13:25:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kB5Qzst8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SWVLntLf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D26F82A1C; Sat, 10 May 2025 13:25:44 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 4D19D82952; Sat, 10 May 2025 13:25:50 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EAD48295C
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:25:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF1BF82AC1
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:25:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5fbc736f0c7so4346920a12.2
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:25:42 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ad241baf856so20452266b.0
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:25:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746876342; x=1747481142; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746876347; x=1747481147; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oQQucchflNQCZdACjDAw+jkUU6ai0fp0HKVU8vqNMCk=;
- b=kB5Qzst8+lkgvg3OuS2Aj0ZC+owiYS30HvaK0IeKBFTcdkbSiMBNPlfNpFDjRf8dHX
- AEI0WR5MKxESvXPqcdvoLQItY+67L1c5Js5TBljsR97o2jw/70grrmUVNzgrJ7xMAmsD
- FAy/aZr7uXZVM/2QmnTSZEFK6arTafNnk/3r4=
+ bh=/Pjzx6WQoETC/3ThRaAMy71lchjX9sTbhTtcGykc9UU=;
+ b=SWVLntLfZlnMknDMFmXEaFQgiBoKHo8ElrPkEj67TiMv8M+acJVVxoP2uHrUAT/FFE
+ DMHkbVinrAHpTZqtrmX/PrVXzSBbbYuj4dJLkseWFAnBTLnJPM2tGL21b5YvR49t9M4Z
+ hVvzV0kz/wLa5cxNxkJZG/dHS/VS9sG+mU1HA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746876342; x=1747481142;
+ d=1e100.net; s=20230601; t=1746876347; x=1747481147;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oQQucchflNQCZdACjDAw+jkUU6ai0fp0HKVU8vqNMCk=;
- b=JR6SGIbpYTd3O0gGkyAoYSOtwFxZDFROAe8wzfCDVVPQ+GUycqEcwkGDP+3+OOSauv
- rgE69C6ZL51cv1EnRFEtPCt0hpdi82hEuRbwE+DY41aIrlV+u0RVrmNlhMmUq7Sk3OF4
- OGyM0Cy9GvpxJ46PfOoV/3ptapJfh+G/VvTJkvVDBt6HdoR7mm7yGWblTSxoJb1JpcHP
- fwke6o0M3yFrHkon9G1imdmjh5UpcMfp8yowytWSpZhSgPbHn0IJMbb6K8KaWActCp8e
- yr5uvjbN22S+Nsc0QHo6M2uerPcwf1Cu4k81jtf8IHwSgTlZBjHo/Lxn+MyBXHjyFtLa
- l3og==
-X-Gm-Message-State: AOJu0YxpU5JJcWBTVH3LfAAIQodgRlTznLTD4g+1+rTB1GIWsdT0iWmm
- mYfqgleXgqmtqwyJ1Aao3GODZ8kvqNponA2Oe/MJ5+FspgcLZZSPGJ/EhEAWnaT5S2XSo9sYndN
- hgekEFT2XtMmksJ7xG+iaYPN+E91doxDas3LT
-X-Gm-Gg: ASbGncuQC4EOmc66ujoLfeP6OYGG1k3P3zyEsdcO/gXxLCSpmsjNLW/ACc0BmQ0CQYI
- 9R7B4s7x8BL8TgJnw2k5b/bma7+mrZAVZtuDo0cQbBecbMsqztaUW5M/m0rX5FLSGk7v5cl0ZPU
- Z1IqB4LEBEe63MeRRb2/PX5QuJL0Bv6a/7DEj0igrdUKiu
-X-Google-Smtp-Source: AGHT+IHgdgN3n4r1OpeBOxiRoP+WMH4T8BDgfTm9g8r3+iGWNX1qAV6qCPcTXdX44bGR0mtosJYlt6cPr/jwy6OSoOk=
-X-Received: by 2002:a05:6402:2711:b0:5fd:1a42:17b0 with SMTP id
- 4fb4d7f45d1cf-5fd1a421bc4mr203142a12.9.1746876341736; Sat, 10 May 2025
- 04:25:41 -0700 (PDT)
+ bh=/Pjzx6WQoETC/3ThRaAMy71lchjX9sTbhTtcGykc9UU=;
+ b=vp+aVnTaGEX3jONpUOW437SFMlb8Ty3AmxmkHjOsT4eCH9GQBps6K1W2/GqCwQ9QHB
+ LfDVDDxXaVa9voZlfjwRlCim3xZw3aEGJKacCWaa1InW5HlOtGWEEJa7yVtAg+SrQkGV
+ 5gK5Yi1yUaaamjovd7qHkOu0sUEloGggMKeVtTViPzIO86eOk49Mt/98Fel/RtBP+I4D
+ yWakWLFewZN5PpbHNWYc7bp1BpvWxSaROUB35zqEqDI/F3IwgyrFVJ59QeuVjTm48mHh
+ aKDkirUc8snCUJf1s29IH1onEHCCRJ7Em+AzgtLYOpRcXtTFTWimwmgtVrhJiLa+UcbP
+ QUNw==
+X-Gm-Message-State: AOJu0YwYVzCSCvEcNEDYErZpJTKzrFBSP1efFoDpaHPDIiRuIFKEgT+F
+ RLIRlKcSSOxj+e73LXJpV/3tRNINch2pBT9ovuijixzsrKP+0+Q1IfxUDeOvh5UYy2hCpdMYvEQ
+ 6u9qlZma/hskQB44vWybe/iNqy9/H7ORDtRVHC5wOeTeAhGD5Xq0busHReA==
+X-Gm-Gg: ASbGncufXFHVOf2uAnosgcikkg0JtPSv3f5RNiY/k53z8vUVEf6WEdvu/C9Fj7fVXBA
+ yaTYZLtJcy82DYiNDMlBzxjod6ivoViwHb4wm2Sk7kppjfOLMCmRY4PweU27UWf78GELG2lY8Pt
+ 53jNC3gos/3U5F0At4Fbt2WFRNf38utibLhQ==
+X-Google-Smtp-Source: AGHT+IFLTJq49pknHhvCmBIkDWp1KyXHBDpKojoEb4xii1juzvh4Oc7a98IqK2szbj9cBhueAsdySsAXzZih0pNPwks=
+X-Received: by 2002:a17:907:3dab:b0:ace:d50f:8ee3 with SMTP id
+ a640c23a62f3a-ad1fcc9885fmr951564366b.19.1746876347187; Sat, 10 May 2025
+ 04:25:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250225205003.2640910-1-trini@konsulko.com>
  <20250507221112.518041-1-trini@konsulko.com>
- <20250507221112.518041-4-trini@konsulko.com>
-In-Reply-To: <20250507221112.518041-4-trini@konsulko.com>
+ <20250507221112.518041-5-trini@konsulko.com>
+In-Reply-To: <20250507221112.518041-5-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 10 May 2025 13:25:27 +0200
-X-Gm-Features: AX0GCFsNleiseVXzLXNDKImtSgv0Q-A9u9SJyuqJBJibivyX39CP0n0qZEbAMQw
-Message-ID: <CAFLszTh+5AT2pmKwY38+16+Ujdooa9e+1BB=oH3P9z-1PN7hAg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] doc: pytest: Document the test_net_boot test
+Date: Sat, 10 May 2025 13:25:30 +0200
+X-Gm-Features: AX0GCFsZXLIev-WnM1yFeIElM4QMC4mAAsK6mMK86-TZz5PgcITmNVhwAIXb-Wc
+Message-ID: <CAFLszTjJQYW6YHSxPxgRFRm9TdSm3na393nKjXdcoAaTWb+nbQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] test: test_net_boot: Add more comments
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -89,28 +89,17 @@ X-Virus-Status: Clean
 
 On Thu, 8 May 2025 at 00:11, Tom Rini <trini@konsulko.com> wrote:
 >
-> Add the test_net_boot.py test to the generated documentation. While most
-> of this was already commented correctly for inclusion the biggest
-> problem was examples of code without a code-block notation. This in turn
-> broke parsing. Add the missing notations. We also must have the comment
-> prior to any import lines or it will not be seen as a comment on the
-> overall file and thus not included.
+> Some of the functions were missing pydoc comments. Add them so they will
+> be included in the documentation.
 >
+> Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  doc/develop/pytest/index.rst         |   1 +
->  doc/develop/pytest/test_net_boot.rst |   8 ++
->  test/py/tests/test_net_boot.py       | 163 +++++++++++++++------------
->  3 files changed, 98 insertions(+), 74 deletions(-)
->  create mode 100644 doc/develop/pytest/test_net_boot.rst
+>  test/py/tests/test_net_boot.py | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Can we add some default binaries to the tree, or somewhere else?
-
-Regards,
-Simon
