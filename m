@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07129C3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D7AC3ABC3
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:06:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 599F382952;
-	Sat, 10 May 2025 13:05:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A52318295C;
+	Sat, 10 May 2025 13:05:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fbKP8mKX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OgTZNqk5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D18D68294C; Sat, 10 May 2025 13:05:53 +0200 (CEST)
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
+ id 6997C80ADF; Sat, 10 May 2025 13:05:55 +0200 (CEST)
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com
+ [IPv6:2a00:1450:4864:20::542])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1B8C8070C
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:05:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64E4580ADF
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:05:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x544.google.com with SMTP id
- 4fb4d7f45d1cf-5f6fb95f431so7527004a12.0
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:05:51 -0700 (PDT)
+Received: by mail-ed1-x542.google.com with SMTP id
+ 4fb4d7f45d1cf-5f7ec0e4978so5270944a12.1
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:05:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746875151; x=1747479951; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746875152; x=1747479952; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xYHfupbEoiKIRS46PM9eetRsLbw9FaYweXBH4QkR0OE=;
- b=fbKP8mKX7Ov5DJWPMwTizI7Et0lDj8y6qhCRrohenWdKVf6OWYEmwhaD37CShsYmpj
- ndAR4k/4M0Y3ryJ2a9uuiyoacalyoAraYUazcIEm1TaC5VTJPU0V7qthej7gNXyWYpjp
- eXnGvZ0mJgeY7KRP9rAV8fFxOOR6nZ3OcZ/w0=
+ bh=2qkeP6L4iSgqhbOuoUYwlnWE70+xaXaXGQwTReesnf0=;
+ b=OgTZNqk5YlVmjUZF84X0t45F0wXRn0Qlc3Fja+VQ7BQ707SRpLLefzI++K4p5c8/OY
+ LtSv6Dgmaq+543zXpSOj2RCuaV0CeXIRR+EEFcNlPlS5o9b7ZVDoS7fxABz/MhyFrfYo
+ MLtj6+KulNYcu+27CbohV43QPT+YHbvUQMBgQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746875151; x=1747479951;
+ d=1e100.net; s=20230601; t=1746875152; x=1747479952;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xYHfupbEoiKIRS46PM9eetRsLbw9FaYweXBH4QkR0OE=;
- b=pedBMcuU9VY2X3jGbTtOY8JcTCQBmqDdMampPJ5r6XJpfpwFq3Liv+KC9GzgUgeinP
- 5qq8EUcqJcHkKWg+4CTerhLOtJvXMHSh2sEw74ZLbhQ0fWmfilgzxuTLMot73+vu9IL6
- z169FiwVjXIqdYZYM3yXKsPgtZsJ8mnYro39xopDe06dRxUsOn9OsMdZFqE4N4I0iYmn
- iBjPKnjg0PYpTTuKsWGbMiO9F2XnxZ4cJ1hOHlCzHB+/NF2OukqzG14MbZed5I7xagoD
- 08adJUJcQTyz1g5GwNSWdBDiYpsS1Yuzd8B0b4eH2G8RHv9/CuX1HtBcV9IOxQJC4UCI
- x8zA==
-X-Gm-Message-State: AOJu0Yx1RSnrczioysk0VXiiWYdEfpdQQ3BuD0CguggllQFpWMrfblls
- VjniaB7qDjSZlBcR8iht5KodXZl1Zvqg2TrbDpl89bxYTbIZJspyEff7vK4NicQo1Cg+AmOB2Ph
- BwNjQ28XUxACI
-X-Gm-Gg: ASbGncvR5kMZJjSgu+1Y7y0rVVXcIWBg8fvMvZmJ0vduA14BRBLCPZNno0uMzpxdZlN
- Enyt2YeZCMPZt3WDg8R5vOUgc9kD/uveFg3QkHLfWdGsFFR4L1B6fFDM9fBTowZ/EIDhMnGN25R
- Ieb9rl2+2yLSz5COp1HwNHGArhj6Cg80Z0fZe+Osi6fpXZ5R+bKCMoGOKKboMrWW45vVS6yA+dH
- yn3NSz1XztiQpkmgJmd1lZ/jXXzYtc1GsWspnNDDlMGOvtAkof6tn9Y0PybNjxaFzyHZrTPTj2A
- 72IJF8AUPYo1TTar4WmVwHbRK8Fd4zrzulvALgfamlmZDYwvvpYaHURqKA==
-X-Google-Smtp-Source: AGHT+IHeHinytcPfHeh5OXBS4kiF86QPkiLo7trQaTONH+rIETnFSRsx3zOcoVr1yLik5vrCuEFY0g==
-X-Received: by 2002:a17:906:c14b:b0:ad1:8e6f:3ad8 with SMTP id
- a640c23a62f3a-ad21b1d92e3mr634288966b.14.1746875150736; 
- Sat, 10 May 2025 04:05:50 -0700 (PDT)
+ bh=2qkeP6L4iSgqhbOuoUYwlnWE70+xaXaXGQwTReesnf0=;
+ b=GqbytIf9et8A4hG6v6I38wPk5VOde4xHbgZneYl5SvbVPEaEwWN4NfrmYmmwkfFBCB
+ RxKwkUZI8AqzIUwI1ZZ/UCdev/Wtx4EA/VYThb3XZWGPsJGFbXE2WcRDRWPWrzPt3Q4L
+ hUESSeRtmSc/+6WbeKN6ZRZCM8gChElLMoESpUddoq2yrdyH4CoaoQYSlEX9COX9Fnds
+ O9WfsnjBzqqxxyHNTFQ3CVAbDVCtnvqQ3Wrxl4hi2mLxad4Ra9KUeMQ1NTkCj39hO9FE
+ oA5fWic9P5ogwDfpzRJ4JZ46uDLblfeYFXZ6tn/5PYV9lTxliGy1VaQMtjZhJtuCQUwq
+ iexQ==
+X-Gm-Message-State: AOJu0YzLALhylJZcZLDEmaIpXs3OqrRJLEbBgB7IMaormbsO9HEJnpio
+ 5rOiu9sYRb4j79NSlah9oh0qbTnAkNtvpujZGEHx8K52Gnb6J3pfiaTt+y+un9xN9/fIaGek67f
+ EkEwLorY75aeV
+X-Gm-Gg: ASbGncvtDxhWZ4rRwYxGQw3jo8d7H6Yh9jIKzBDYIa/hVcd7p5zXnr23vl+vXcyq28Y
+ nLo1Lpa32c466Ct9NHCEnUZ66qQ/lB+GWfVO3Lrxf/nIc5CkTN455owZfdbKfDmQXTjJRsrfZfc
+ PFT5P07JWH79174Ru7AXIfKipMZI2xL0bRWbpjuVpA1oWLZkoMjvt3u3+95MvwtJwXnPGpF0/Qv
+ Lw6fAIahku+KSeO8nSaHNi8Y73NEjDMMwykB5fU9bBh0qW08K5BkWDKD0OGepsVDnGScrzaZpsq
+ 1y8A92xBK7f1hiqGe92aGoPR6k3yjUrCpmqLETQLoN2lzUw=
+X-Google-Smtp-Source: AGHT+IE+05RA+lDS28eVPbQcZhKS9i7Xvtz2tcjZcupPqMrbtUvUc2iEsakou57Pf2SGxR5ACKbLpg==
+X-Received: by 2002:a17:906:c155:b0:ace:cdfc:40aa with SMTP id
+ a640c23a62f3a-ad218f0f1e1mr634836966b.19.1746875152311; 
+ Sat, 10 May 2025 04:05:52 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad2192c8b8asm300148866b.5.2025.05.10.04.05.50
+ a640c23a62f3a-ad2192c8b8asm300148866b.5.2025.05.10.04.05.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 04:05:50 -0700 (PDT)
+ Sat, 10 May 2025 04:05:51 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 01/25] u_boot_pylib: Correct pylint warnings in gitutil
-Date: Sat, 10 May 2025 13:04:54 +0200
-Message-ID: <20250510110535.1453745-2-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Brandon Maier <brandon.maier@collins.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 02/25] patman: Deal with git safe-directory warning
+Date: Sat, 10 May 2025 13:04:55 +0200
+Message-ID: <20250510110535.1453745-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510110535.1453745-1-sjg@chromium.org>
 References: <20250510110535.1453745-1-sjg@chromium.org>
@@ -94,79 +94,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct various pylint warnings in this file.
+When running tests where the .git directory is not owned by the current
+user, various warnings are produced and the tests fail. This happens in
+CI.
 
-The remaining ones are three functions with too many arguments (R0913
-and R0918) and use of global (W0603).
+For patman itself, modify the gitutil.get_top_level() function to return
+None in this case. Ensure that the warning is not shown, since it creates
+about 1000 lines of output.
+
+For checkpatch, the same warning is produced even though --no-tree is
+given. Suppress that as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/u_boot_pylib/gitutil.py | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
+ tools/patman/checkpatch.py     |  7 ++++---
+ tools/patman/cmdline.py        |  8 ++++++--
+ tools/patman/get_maintainer.py | 13 ++++++++-----
+ tools/patman/project.py        |  3 ++-
+ tools/patman/settings.py       |  3 ++-
+ tools/u_boot_pylib/gitutil.py  | 11 ++++++++---
+ 6 files changed, 30 insertions(+), 15 deletions(-)
 
+diff --git a/tools/patman/checkpatch.py b/tools/patman/checkpatch.py
+index 5df06b1095a..f9204a907ef 100644
+--- a/tools/patman/checkpatch.py
++++ b/tools/patman/checkpatch.py
+@@ -22,7 +22,7 @@ RE_NOTE = re.compile(r'NOTE: (.*)')
+ 
+ 
+ def find_check_patch():
+-    top_level = gitutil.get_top_level()
++    top_level = gitutil.get_top_level() or ''
+     try_list = [
+         os.getcwd(),
+         os.path.join(os.getcwd(), '..', '..'),
+@@ -219,8 +219,9 @@ def check_patch(fname, verbose=False, show_types=False, use_tree=False,
+         args.append('--no-tree')
+     if show_types:
+         args.append('--show-types')
+-    output = command.output(*args, os.path.join(cwd or '', fname),
+-                            raise_on_error=False)
++    output = command.output(
++        *args, os.path.join(cwd or '', fname), raise_on_error=False,
++        capture_stderr=not use_tree)
+ 
+     return check_patch_parse(output, verbose)
+ 
+diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
+index 0ae92f88c4b..108fa52d820 100644
+--- a/tools/patman/cmdline.py
++++ b/tools/patman/cmdline.py
+@@ -44,11 +44,15 @@ def add_send_args(par):
+         '-m', '--no-maintainers', action='store_false',
+         dest='add_maintainers', default=True,
+         help="Don't cc the file maintainers automatically")
++    default_arg = None
++    top_level = gitutil.get_top_level()
++    if top_level:
++        default_arg = os.path.join(top_level, 'scripts',
++                                   'get_maintainer.pl') + ' --norolestats'
+     par.add_argument(
+         '--get-maintainer-script', dest='get_maintainer_script', type=str,
+         action='store',
+-        default=os.path.join(gitutil.get_top_level(), 'scripts',
+-                             'get_maintainer.pl') + ' --norolestats',
++        default=default_arg,
+         help='File name of the get_maintainer.pl (or compatible) script.')
+     par.add_argument(
+         '-r', '--in-reply-to', type=str, action='store',
+diff --git a/tools/patman/get_maintainer.py b/tools/patman/get_maintainer.py
+index 200ee96551d..1c8fa726573 100644
+--- a/tools/patman/get_maintainer.py
++++ b/tools/patman/get_maintainer.py
+@@ -21,7 +21,7 @@ def find_get_maintainer(script_file_name):
+     if get_maintainer:
+         return get_maintainer
+ 
+-    git_relative_script = os.path.join(gitutil.get_top_level(),
++    git_relative_script = os.path.join(gitutil.get_top_level() or '',
+                                        script_file_name)
+     if os.path.exists(git_relative_script):
+         return git_relative_script
+@@ -46,11 +46,14 @@ def get_maintainer(script_file_name, fname, verbose=False):
+     """
+     # Expand `script_file_name` into a file name and its arguments, if
+     # any.
+-    cmd_args = shlex.split(script_file_name)
+-    file_name = cmd_args[0]
+-    arguments = cmd_args[1:]
++    get_maintainer = None
++    arguments = None
++    if script_file_name:
++        cmd_args = shlex.split(script_file_name)
++        file_name = cmd_args[0]
++        arguments = cmd_args[1:]
+ 
+-    get_maintainer = find_get_maintainer(file_name)
++        get_maintainer = find_get_maintainer(file_name)
+     if not get_maintainer:
+         if verbose:
+             print("WARNING: Couldn't find get_maintainer.pl")
+diff --git a/tools/patman/project.py b/tools/patman/project.py
+index d6143a67066..e633401e9d6 100644
+--- a/tools/patman/project.py
++++ b/tools/patman/project.py
+@@ -18,7 +18,8 @@ def detect_project():
+     """
+     top_level = gitutil.get_top_level()
+ 
+-    if os.path.exists(os.path.join(top_level, "include", "u-boot")):
++    if (not top_level or
++            os.path.exists(os.path.join(top_level, "include", "u-boot"))):
+         return "u-boot"
+     elif os.path.exists(os.path.join(top_level, "kernel")):
+         return "linux"
+diff --git a/tools/patman/settings.py b/tools/patman/settings.py
+index 7a0866cd370..def932db43a 100644
+--- a/tools/patman/settings.py
++++ b/tools/patman/settings.py
+@@ -364,7 +364,8 @@ def Setup(parser, project_name, argv, config_fname=None):
+ 
+     if config_fname is None:
+         config_fname = '%s/.patman' % os.getenv('HOME')
+-    git_local_config_fname = os.path.join(gitutil.get_top_level(), '.patman')
++    git_local_config_fname = os.path.join(gitutil.get_top_level() or '',
++                                          '.patman')
+ 
+     has_config = False
+     has_git_local_config = False
 diff --git a/tools/u_boot_pylib/gitutil.py b/tools/u_boot_pylib/gitutil.py
-index 3c52cce232c..cfcfeffe2f4 100644
+index cfcfeffe2f4..7d001d03bed 100644
 --- a/tools/u_boot_pylib/gitutil.py
 +++ b/tools/u_boot_pylib/gitutil.py
-@@ -2,6 +2,8 @@
- # Copyright (c) 2011 The Chromium OS Authors.
- #
- 
-+"""Basic utilities for running the git command-line tool from Python"""
-+
- import os
- import sys
- 
-@@ -22,6 +24,8 @@ def log_cmd(commit_range, git_dir=None, oneline=False, reverse=False,
-         oneline (bool): True to use --oneline, else False
-         reverse (bool): True to reverse the log (--reverse)
-         count (int or None): Number of commits to list, or None for no limit
-+        decorate (bool): True to use --decorate
-+
-     Return:
-         List containing command and arguments to run
-     """
-@@ -518,9 +522,8 @@ send --cc-cmd cc-fname" cover p1 p2'
-     """
-     to = build_email_list(series.get('to'), alias, '--to', warn_on_error)
-     if not to:
--        git_config_to = command.output('git', 'config', 'sendemail.to',
--                                       raise_on_error=False)
--        if not git_config_to:
-+        if not command.output('git', 'config', 'sendemail.to',
-+                              raise_on_error=False):
-             print("No recipient.\n"
-                   "Please add something like this to a commit\n"
-                   "Series-to: Fred Bloggs <f.blogs@napier.co.nz>\n"
-@@ -549,9 +552,8 @@ send --cc-cmd cc-fname" cover p1 p2'
-     cmd += args
-     if not dry_run:
-         command.run(*cmd, capture=False, capture_stderr=False, cwd=cwd)
--    cmdstr = ' '.join([f'"{x}"' if ' ' in x and not '"' in x else x
--                       for x in cmd])
--    return cmdstr
-+    return' '.join([f'"{x}"' if ' ' in x and '"' not in x else x
-+                    for x in cmd])
- 
- 
- def lookup_email(lookup_name, alias, warn_on_error=True, level=0):
-@@ -720,6 +722,7 @@ def get_hash(spec, git_dir=None):
- 
-     Args:
-         spec (str): Git commit to show, e.g. 'my-branch~12'
-+        git_dir (str): Path to git repository (None to use default)
+@@ -644,7 +644,7 @@ def get_top_level():
+     """Return name of top-level directory for this git repo.
  
      Returns:
-         str: Hash of commit
-@@ -762,6 +765,7 @@ def check_dirty(git_dir=None, work_tree=None):
+-        str: Full path to git top-level directory
++        str: Full path to git top-level directory, or None if not found
  
-     Args:
-         git_dir (str): Path to git repository (None to use default)
-+        work_tree (str): Git worktree to use, or None if none
+     This test makes sure that we are running tests in the right subdir
  
-     Return:
-         str: List of dirty filenames and state
+@@ -652,7 +652,12 @@ def get_top_level():
+             os.path.join(get_top_level(), 'tools', 'patman')
+     True
+     """
+-    return command.output_one_line('git', 'rev-parse', '--show-toplevel')
++    result = command.run_one(
++        'git', 'rev-parse', '--show-toplevel', oneline=True, capture=True,
++        capture_stderr=True, raise_on_error=False)
++    if result.return_code:
++        return None
++    return result.stdout.strip()
+ 
+ 
+ def get_alias_file():
+@@ -670,7 +675,7 @@ def get_alias_file():
+     if os.path.isabs(fname):
+         return fname
+ 
+-    return os.path.join(get_top_level(), fname)
++    return os.path.join(get_top_level() or '', fname)
+ 
+ 
+ def get_default_user_name():
 -- 
 2.43.0
 
