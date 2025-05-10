@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B44CFC3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69620C3ABCB
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 300D182A1C;
+	by phobos.denx.de (Postfix) with ESMTP id 765C082A7B;
 	Sat, 10 May 2025 13:06:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PPiHY7Wp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AloarmQ8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B1D3828BC; Sat, 10 May 2025 13:06:03 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id E8A9882A65; Sat, 10 May 2025 13:06:04 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 600878294C
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:06:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 862B482A0D
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:06:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ace94273f0dso563916966b.3
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:06:01 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ad216a5a59cso259112566b.3
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:06:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746875160; x=1747479960; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746875161; x=1747479961; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cgy72n0BJXmHZ3gkhsm31Ze6nMm3+RFvk82N+sgts8Q=;
- b=PPiHY7WpGOPtm0f6uknvnR+V/2fQHOwGc+pxk0HZBCr1epgxRiEO3gFgzxKMjmbZHu
- 0z1S93bZSu8ym60TrQOayLjiqjYUqhocHI4mtQYFXmMF9NqnW+ouQh+U1/C884JlnPpW
- IhVFhTwb063843th2XbQfc6w/KcKLb3Vc9StM=
+ bh=zfP2D9V5JBRpHUWnPzc/M1LrYzz5KZEUEHtEF+UTxZM=;
+ b=AloarmQ85sc2r/3oHHLNK2cVNS4dBgDB66s6hwUTuF3Ddo9B01cHMy6qSWMv3Y0+RO
+ EKvMPwdo4jiyxG/3tkv48i/iMbohnNeaXrJShGy8N8opTdpC9/jFvfCnhK00xo0bA26R
+ 08JqE6KBy+g3Ohe/ICSa66hDyUrJynJsHVqHo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746875160; x=1747479960;
+ d=1e100.net; s=20230601; t=1746875161; x=1747479961;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cgy72n0BJXmHZ3gkhsm31Ze6nMm3+RFvk82N+sgts8Q=;
- b=w3/ck4AjCa6LeZbEDUxo6Q5eCOHIMoGS9rU7me0YdwthCDMqThbBOrQl3r685C413f
- lsAEGMSBvSKj9PrQ9rF0aYfQcuUGDW2tULULjDN0ylUVaXPATV4OElPCEA6INYE3Vs56
- ZO72d+IFpIbPeogu1PPzDAhyoCJfiErGDzKkcPFU8t5RgHtG99hCCTkg9kQN3oLuKoYg
- 7vvfbvWSU9x/ZzUzIHiuKJtRrKQtxJtoPQKLe+90GhV2VoYeSU2X5+uuQ4xxpGwGXV1i
- ZizXuJLBVjrIJHhm8jWUEmpMOl5GTmjNLKUkgujQY1e/xqg1RqKhzduUmgZ7Yw/nC/j/
- C+uQ==
-X-Gm-Message-State: AOJu0YzQyxwxrp+UWJl9YXfUDPJbIN7Zw4wn7pXS65sXcAnUIZf1CPUg
- 8sI/N7RG3u89EYySLtjI+LYubvdy6Un3N/M/Qk3vKBQ1kItd2FItiwrY4Ex3GAxFAuizAvFL+m4
- OmXIDmRB6sw==
-X-Gm-Gg: ASbGncv1MpvatzTkB5mXT3ye8pfdB+ljqHND+ffeoMSvwBVmBh20NA0eZuXy6xbsD2F
- 5NZhSFm1d7H8qf93WZCHCQVn4LEXIP/zmmnDi6QO84dF5dKb0HB0vqyqkpQgtBE7FlEvMOXcOid
- D5xInygnn0/XXmHiQymRVFNC1NesXZ4xcJBdeesd/ow2CXE/cGfVTsPphdNiUeYsicWoqwE7Km0
- sHIV8wRVf5yFTzHlIqHBcox2CKCxDRbxWaetouMAjA1ifOY2Dihpw+1oEHEIv3cNVu/xbiXbPu2
- fNTkVmfjYCuuDLbhSXPMRdY+HKTbrgFDmsD/OJ+eAPUQyK4=
-X-Google-Smtp-Source: AGHT+IF8VwAZTEf9OhCHFR568vIdTYpP0PZiXedHZb2knv6Wq62HV5I9m3XlldyN+KRws2AFO9fNrw==
-X-Received: by 2002:a17:906:6a06:b0:ace:3a72:25e8 with SMTP id
- a640c23a62f3a-ad219288a2bmr676714466b.51.1746875160148; 
- Sat, 10 May 2025 04:06:00 -0700 (PDT)
+ bh=zfP2D9V5JBRpHUWnPzc/M1LrYzz5KZEUEHtEF+UTxZM=;
+ b=nMMBO1bcEpf6l9hpL3o0hQlPn93t+0zQwZ4ckNRP92xLdg1f5JuU/COkcANoQKgHBS
+ KAejPoUV99fZI80iTXk3Julwng2dvz9LMyIlIjhTaCDqt7v0e+UpsAsA3w4VDl6Qri97
+ 7lR5MHJTaZV/MR2yowPFdnONxnHAOBnBvADWVnrkEkhz9IeICx6omMErZknKJTQkCref
+ VBpIawbplf1TB0B7PhXtiXzKKse4dYX8xvR9CT+eNUPsbjONyVNHukHyevd6pWj8JxXE
+ +MHyARDXrS/ZxhmT/0gKSa1rdtpQY+tRfmHE9u0d0kQziuJOe81pIeYVHe+LO4QSMiqs
+ F8ug==
+X-Gm-Message-State: AOJu0YzbIettXqIPWox90UfZbbjejsPpKyZ3oP1eIknzGj2flzZDZdoJ
+ MBlyyJSBzCV4mZh9Iv3wZGgalnbpgh2BO6uXq1XpPnspBXnMP7BL+S19CjdVnbCgw4yRwT+iVDH
+ k3YkUXv1Wgw==
+X-Gm-Gg: ASbGncuU1V9RIWPxQXPoABosA946ruZcgfLxnNdkR/v0ZuRXRD8jI956Z1PHd2Qjt7i
+ k63a8VU6yBrhIsYF1QUiwkaXMwtpEI+n+iZu1E7VRORUpFDZfkSjbJx9fCdGNw0YZLrIONn+r1L
+ yvgc2zUXKTCbD48imB6lY7XcJivw0IZ4p1Wa2L0PpofN/LKA+Yq6HQuz5MP5385GlN17XiuttBB
+ yp3Qub3hXKDbJgYNbu01yskoNbOkU8J7ufo/gTBo28ynjpHZzytVngYlVVYJ+2EvhTPWeSRn0o5
+ z8WChurbX3Wqfn3TRADtVl68UBJK8cDpFDydJFvcj/ZddOI=
+X-Google-Smtp-Source: AGHT+IGpek9pTHLOjDSlWZdBKNt2WFf42w5eDG+E9SdRvi8o06yUJNfERzI0hx5rjPXsu2qm9E8HCw==
+X-Received: by 2002:a17:907:986:b0:ad1:f895:fd50 with SMTP id
+ a640c23a62f3a-ad2192b83cdmr691852466b.54.1746875161514; 
+ Sat, 10 May 2025 04:06:01 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad2192c8b8asm300148866b.5.2025.05.10.04.05.59
+ a640c23a62f3a-ad2192c8b8asm300148866b.5.2025.05.10.04.06.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 04:05:59 -0700 (PDT)
+ Sat, 10 May 2025 04:06:00 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 07/25] patman: Add a fourth series for testing
-Date: Sat, 10 May 2025 13:05:00 +0200
-Message-ID: <20250510110535.1453745-8-sjg@chromium.org>
+Subject: [PATCH 08/25] patman: Avoid touching the system or local config
+Date: Sat, 10 May 2025 13:05:01 +0200
+Message-ID: <20250510110535.1453745-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510110535.1453745-1-sjg@chromium.org>
 References: <20250510110535.1453745-1-sjg@chromium.org>
@@ -94,74 +94,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create one more series to use for testing. This one has four separate
-patches.
+Set the git variables to ensure that any local gitconfig is not used or
+affected by the tests.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/test_common.py | 31 ++++++++++++++++++++++++++++++-
- 1 file changed, 30 insertions(+), 1 deletion(-)
+ tools/patman/test_common.py | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/tools/patman/test_common.py b/tools/patman/test_common.py
-index fda62472320..bc27b2d3cef 100644
+index bc27b2d3cef..7da995dda22 100644
 --- a/tools/patman/test_common.py
 +++ b/tools/patman/test_common.py
-@@ -100,10 +100,11 @@ class TestCommon:
-     def make_git_tree(self):
-         """Make a simple git tree suitable for testing
- 
--        It has three branches:
-+        It has four branches:
-             'base' has two commits: PCI, main
-             'first' has base as upstream and two more commits: I2C, SPI
-             'second' has base as upstream and three more: video, serial, bootm
-+            'third4' has second as upstream and four more: usb, main, test, lib
- 
+@@ -109,6 +109,9 @@ class TestCommon:
          Returns:
              pygit2.Repository: repository
-@@ -203,6 +204,29 @@ command to make the code as
- complicated as possible''')
-         second_target = repo.revparse_single('HEAD')
- 
-+        self.make_commit_with_file('usb: Try out the new DMA feature', '''
-+This is just a fix that
-+ensures that DMA is enabled
-+''', 'usb-uclass.c', '''Here is the USB
-+implementation and as you can see it
-+it very nice''')
-+        self.make_commit_with_file('main: Change to the main program', '''
-+Here we adjust the main
-+program just a little bit
-+''', 'main.c', '''This is the text of the main program''')
-+        self.make_commit_with_file('test: Check that everything works', '''
-+This checks that all the
-+various things we've been
-+adding actually work.
-+''', 'test.c', '''Here is the test code and it seems OK''')
-+        self.make_commit_with_file('lib: Sort out the extra library', '''
-+The extra library is currently
-+broken. Fix it so that we can
-+use it in various place.
-+''', 'lib.c', '''Some library code is here
-+and a little more''')
-+        third_target = repo.revparse_single('HEAD')
+         """
++        os.environ['GIT_CONFIG_GLOBAL'] = '/dev/null'
++        os.environ['GIT_CONFIG_SYSTEM'] = '/dev/null'
 +
-         repo.branches.local.create('first', first_target)
-         repo.config.set_multivar('branch.first.remote', '', '.')
-         repo.config.set_multivar('branch.first.merge', '', 'refs/heads/base')
-@@ -213,6 +237,11 @@ complicated as possible''')
- 
-         repo.branches.local.create('base', base_target)
- 
-+        repo.branches.local.create('third4', third_target)
-+        repo.config.set_multivar('branch.third4.remote', '', '.')
-+        repo.config.set_multivar('branch.third4.merge', '',
-+                                 'refs/heads/second')
-+
-         target = repo.lookup_reference('refs/heads/first')
-         repo.checkout(target, strategy=pygit2.GIT_CHECKOUT_FORCE)
-         target = repo.revparse_single('HEAD')
+         repo = pygit2.init_repository(self.gitdir)
+         self.repo = repo
+         new_tree = repo.TreeBuilder().write()
 -- 
 2.43.0
 
