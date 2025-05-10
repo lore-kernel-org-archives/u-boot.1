@@ -4,64 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FC41C3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 06:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF459C3ABCB
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 11:05:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A17798210D;
-	Sat, 10 May 2025 08:53:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0B5198091A;
+	Sat, 10 May 2025 13:05:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1746860006;
-	bh=NEh//dowW1jPWMv1h+gaF6OZx0be15GKB1n3eRXb/cg=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=UXarom89WebWWo0mfvW8RwFA9HVj3QDVvcvU+nQVyIAD7hruNk8L1BrdYjOVk29B9
-	 HUnJLOZldP+Plq2K4Z2rXpCuNN4C+TfAtVOMiYLch3ziEkX0vhEIKgYUBeDwPLYiot
-	 rF5KJnE1cBXbyeHqT3pMY9YQ750J7B4/053D5kp8FN2gNN18iU/6sXmuvhhj84kxSY
-	 M8U2ob3HZtpMgossvZ8sYhmVF3zCMYLSPGpMxnmbkkzt2F0/W2JdtRKt4KR7+OIZbg
-	 mAEgKs2/J1Kxne5Y+MrQ9ecSZtvIx4TndbF435s4ZAsxWvkhgip7xsWLQw6M0djMOE
-	 YGa5grNXw7izw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EDCEB8211F; Sat, 10 May 2025 08:53:24 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B7C980EE5
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 08:53:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="G30QAzlP"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1D69E1048C2EC; 
- Sat, 10 May 2025 08:53:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1746860001; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=NEh//dowW1jPWMv1h+gaF6OZx0be15GKB1n3eRXb/cg=;
- b=G30QAzlPLKWz5TC5VBsnsbxUHymNdaao+nTiZL3jVB6LCBD7XVsSmzGuT0OLECY+SBXkc2
- kaiGbi8OTUmrupE7G9y77UYFDojnsAiaBgr9MH4l16LQ817cnrCnZFF4RC+iAyNJYi/ABk
- /Oj3ZTUKL+wQ5CqtY3jpB/kOjtnyvc8V/3GDNVBHxmT31yc69+lrfRJHJo602M5JxqjJIU
- RAX44rGJf5RSD4aeK7U6bTARr03z4S8aHTc6b4aFOzBc/f3/ctv/KKZdUK6ELZnJhIoViJ
- oDDgDmY8DunreVQPpsaehDjJFGS4ytbitp9PlQ31MJTjIyprLRpN9mp3XGHt8Q==
-From: Lukasz Majewski <lukma@denx.de>
-To: Tom Rini <trini@konsulko.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Marek Vasut <marex@denx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH] ARM: stm32mp: Correct sign extension for memory address in
- dram_bank_mmu_setup()
-Date: Sat, 10 May 2025 08:52:56 +0200
-Message-Id: <20250510065256.267546-1-lukma@denx.de>
-X-Mailer: git-send-email 2.39.5
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MkY1/iw8";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E52AF80ADF; Sat, 10 May 2025 13:05:46 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 89F158070C
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 13:05:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ad21a5466f6so316761266b.1
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 04:05:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1746875143; x=1747479943; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EUmKCj83adLPYHEZrBy79SYdCPVnWIpHyeWPacek48o=;
+ b=MkY1/iw8Wv3fpuXXZtTn138Oz9/FsaYzl565SDCwymhIEteuRrU50v6VtW/DWdJT/M
+ 06/TVebEGsOj3mEYMIpkDUBgAWl45MtpqbkYgsVh8FzHBDVcCKWVS0v9cwYWzlPQaaEB
+ kaDo/JGoPY6mUp6t5xJJ2PgLGXJUNjEPt2Zm0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746875143; x=1747479943;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EUmKCj83adLPYHEZrBy79SYdCPVnWIpHyeWPacek48o=;
+ b=ODgjVGzubFr+ahUDYgp2YcAqUYkFaBEE6kHtjCChJYfLn/JxHiRT6tN70ziT1xKs+k
+ KiAw4/ZQVMZ3pzy9VcvDAKUrfasr/jydOlsuoHlClk2XXba3bK1HXwwYm2imo398xVZr
+ 8er+RoJapf8VHb9ju7FQI9gOpJf1wdJaEsb69JRCL6tOGb0pWw17fLkRpNEJV0G+4/w3
+ OSyVw/uVBPP8+z3HPuzAB9A3QqWiC9lyCgiHLbfCXC8/HRe8ZfxFGThnNqZXracXmCvK
+ wGq8QT3F/JRFTR+zl83Nyz2sp2ukYvVr/FsXsL4PWRkPU2Zk+XnaaalX16v7LBDDQwOc
+ e7oA==
+X-Gm-Message-State: AOJu0YyPdgOta2ZGFC/4cxa0towDJlyExsSwq2vYjhlQKbjfryzNgzFU
+ X8Hi8D42ksT4X2OCuZLyZfzJUpQhCYk1j8rrCQkndGvTEqvryk65ToUCu2xiioiCbeNN4JtoGXC
+ msIIUtcNJ+g==
+X-Gm-Gg: ASbGnctdvX5wPVKX+myP447+csHf1ib+bBuM8UJM6ueqRVyuC/8YGkp21tp6W1bV3Ii
+ IQQAC2GnuuTseKC3U/aY3vtEH4xYSaSZfSPTUslfCNLYdNnAfCIcSMNVkO5Dfq1VYA1CX5LPfJC
+ y3lI/Yuo8oWdLzvWPvKe2wnwFR3yapRCIOXhOYVrMGE8FkBlBVglNaDkbhIUkKBTn7CThPg4eQ7
+ v4++Sh5ue5gYA0SxJJjMosgfMfDKRPV9LByVqDTrQa558usFb7gB4RTfwkb3T4FD/o2BSslxEbl
+ 2mbkmEgXu8MieQycrV55liCRMBMfl6qJAyMov0LMOmBLimI=
+X-Google-Smtp-Source: AGHT+IGWmcKbaPpnmR1pLfGVI0bEFTdCUUnf8m3tr5HWEY6HWSYOu8wwamqZsHBTa8aUX9UG1O+NfA==
+X-Received: by 2002:a17:906:6205:b0:acb:37ae:619c with SMTP id
+ a640c23a62f3a-ad21b21d279mr536654366b.15.1746875143404; 
+ Sat, 10 May 2025 04:05:43 -0700 (PDT)
+Received: from chromium.org ([213.157.19.135])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad2192c8b8asm300148866b.5.2025.05.10.04.05.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 10 May 2025 04:05:42 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Brandon Maier <brandon.maier@collins.com>,
+ Douglas Anderson <dianders@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 00/25] patman: Support beter management of series
+Date: Sat, 10 May 2025 13:04:53 +0200
+Message-ID: <20250510110535.1453745-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,50 +92,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On a system based on stm32mp157c, with 1GiB SDRAM (starting from
-0xC0000000) and CONFIG_PHYS_64BIT enabled (so the phys_addr_t becomes
-'unsigned long long') the mainline u-boot hangs.
+Patman provides good facilities for preparing and sending out series. It
+also has a way to collect review/test tags from Patchwork in preparation
+for sending the next series. But so far it lacks series management.
 
-It is caused by marking for this memory region the TLB entry as invalid
-in the dram_bank_mmu_setup().
+This series provides a few new subcommands, mainly 'series', which:
 
-To be more specific the condition of 'addr >= gd->ram_top' is met
-in this case.
+- maintains a local database of series
+- sendings series and gathers tags and feedback from Patchwork
+- provides an overall view of upstreaming progress
+- allows tracking of multiple versions of a series
 
-The reason for it is that the 'addr' variable in that function has sign
-extension from 'int' typed i automatic variable:
-addr = i << MMU_SECTION_SHIFT;
 
-For example i = 0xc01 causes addr = 0xffffffffc0000000 as int typed i
-variable (with MSB bit set) is sign extended to unsigned long long addr.
+Simon Glass (25):
+  u_boot_pylib: Correct pylint warnings in gitutil
+  patman: Deal with git safe-directory warning
+  u_boot_pylib: Add more functions to gitutil
+  patman: Use python3 with /usr/bin/env
+  patman: Add a test for collecting a PATCH prefix
+  patman: Move common test code into a new module
+  patman: Add a fourth series for testing
+  patman: Avoid touching the system or local config
+  patman: Add a simple database implementation
+  patman: Add a helper for managing cseries
+  patman: Add a Cseries class
+  patman: Update status command support cover-letter info
+  patman: Enhance patchwork interface to support Cseries
+  patman: Enhance implementation of file-based defaults
+  patman: Use -c to show patch comments
+  patman: Support returning the parsers to use
+  patman: Introduce basic database support in Series
+  patman: Improve Series support for patchwork links
+  patman: Implement the patchwork subcommand
+  patman: Support aliases for commands and subcommands
+  patman: Update send function to return whether it sent
+  patman: Implement the series subcommand
+  patman: Implement the upstream subcommand
+  patman: Add tests for Cseries
+  patman: Add basic documentation for new features
 
-The proposed fix is to change i type from 'int' to 'unsigned int', so the
-sign extension will not take place and addr = 0xc0000000, which is smaller
-than gd->ram_top = 0x100000000.
+ doc/develop/pics/patman.jpg    |  Bin 0 -> 97131 bytes
+ tools/patman/__init__.py       |    8 +-
+ tools/patman/__main__.py       |    6 +-
+ tools/patman/checkpatch.py     |    7 +-
+ tools/patman/cmdline.py        |  311 ++-
+ tools/patman/control.py        |  203 +-
+ tools/patman/cser_helper.py    | 1524 +++++++++++++
+ tools/patman/cseries.py        | 1165 ++++++++++
+ tools/patman/database.py       |  823 +++++++
+ tools/patman/func_test.py      |  239 +--
+ tools/patman/get_maintainer.py |   13 +-
+ tools/patman/patchwork.py      |  439 +++-
+ tools/patman/patman.rst        |  283 ++-
+ tools/patman/project.py        |    3 +-
+ tools/patman/send.py           |   11 +-
+ tools/patman/series.py         |   70 +
+ tools/patman/settings.py       |   53 +-
+ tools/patman/status.py         |   71 +-
+ tools/patman/test_common.py    |  254 +++
+ tools/patman/test_cseries.py   | 3684 ++++++++++++++++++++++++++++++++
+ tools/u_boot_pylib/gitutil.py  |  123 +-
+ 21 files changed, 9006 insertions(+), 284 deletions(-)
+ create mode 100644 doc/develop/pics/patman.jpg
+ create mode 100644 tools/patman/cser_helper.py
+ create mode 100644 tools/patman/cseries.py
+ create mode 100644 tools/patman/database.py
+ create mode 100644 tools/patman/test_common.py
+ create mode 100644 tools/patman/test_cseries.py
 
-This change shall be safe as i shall not be negative as it represents the
-SDRAM areas (in granularity of 1MiB areas).
-
-Fixes: 25fb58e88aba ("ARM: stm32mp: Fix dram_bank_mmu_setup() for LMB located above ram_top")
-
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
----
- arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-index d5eaf6711b6..0ed5eda47d0 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-@@ -51,7 +51,7 @@ u32 get_bootauth(void)
- void dram_bank_mmu_setup(int bank)
- {
- 	struct bd_info *bd = gd->bd;
--	int	i;
-+	unsigned int i;
- 	phys_addr_t start;
- 	phys_addr_t addr;
- 	phys_size_t size;
 -- 
-2.39.5
+2.43.0
 
+base-commit: dd1b960e8de7c06add7983ce123f808fcf4dd1fc
+branch: patd
