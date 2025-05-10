@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F70C3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:46:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AADE8C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:46:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B642B82C65;
-	Sat, 10 May 2025 15:44:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AC3E82AE2;
+	Sat, 10 May 2025 15:44:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EABQ+2P6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EbAzz8eX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48F7882C57; Sat, 10 May 2025 15:44:29 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 4764C82BAA; Sat, 10 May 2025 15:44:34 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 532E082A65
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6674482A65
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-54d6f93316dso3740320e87.2
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:27 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5faaddb09feso5746294a12.2
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884666; x=1747489466; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884671; x=1747489471; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S44Fi0nM7BWEfTXV8u2lLj0ZATmP5sMzZBga4rh6gNk=;
- b=EABQ+2P6HcyzVPCwedHvh43AXDUzWVZ28cgyFMp1cWHpr2NKQNmOnkO0T9JB6eiWiJ
- Typd8hQJfw3Xu7DzI0tm/2b8ylR7FywOwsbbkxSPK+d+ytmQxAhTTWSH1O19CNlp8/q3
- eysMK3k6No/0uHhaFbbPRv/baPkIlAGyf9l+Y=
+ bh=j3D1JCy/juyHWYjCK9W4k5k4G33D5QNBccasuh3gDOs=;
+ b=EbAzz8eXH9nZI4DMdvCEtCq00E9Htp3E9X+JocPwter+MRHegIks0iVsJTtkv7GtAX
+ Umshza3r1CCQnKEVCPULo4XhPf4F0BpXdVOTK2+txptZU74VqCZNtpLEXEvEa4dXNEDX
+ VyDr+vUglVH69TSzumJ++45jkipNQ7WiFZLNY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884666; x=1747489466;
+ d=1e100.net; s=20230601; t=1746884671; x=1747489471;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=S44Fi0nM7BWEfTXV8u2lLj0ZATmP5sMzZBga4rh6gNk=;
- b=YDkZ70e1vu/Ygw8CpcfUr2pBe6Zs4Sp693GM/8auaYo/Cpe+Yvi4tAYe/mYla8vngp
- FyJDnc1u05aNjpYZzdPoqpao1KP7jZTHfnK0xm/F1Uo0hyZ4U2rdwt39pszLvFjTX7qs
- bayOQizaLTv5pLshpuV4BwgQ+f3SkCyvvXyFjaggKXkiu7BEfbhenTxT3WD+DvukBAHy
- 1KiaWTC2s2KE2mlISF8Fxq35beeDg4jnZGk/uBlrgfhi2NXZ84tTy/wDTmfrb+uzZA6n
- fnCp6S+B7jWsBrWtQj2RAO8728ZF0d8F+KjBk6CTPZN0psKr7w0Btboc9Cpbc7GRIel/
- pSeA==
-X-Gm-Message-State: AOJu0YyZVaOdVr2VDqz3K4moQ1AZVQyeMJz/DUaqk2WMQ2m0OiG9Zrjr
- uvmCwGYmjZpTnQ+k1JYXnYMnCfaiLUtcmgnoXYdL/TKndbo3VviCHHlxZgiSJmJjETr6MXUQLHP
- Zt6O1bwLEaw==
-X-Gm-Gg: ASbGncuIUp213/jzKXCXtfwmLP3thMaP887FinOlFX86zJ7ixY4bsj4NWWwTRJtuJBw
- fzyFhk7EvCeeBTGyaTtN24iTASYAX5f6xkswtXU55KI7bxXvUVTA07vY3VaULvVyPHFFI2hF8Wb
- 5zXbCPjx1H175tgkNgSnKNeT2ODsWZO2gUhVsO0pHUA/BaQNG+lizV20zDXdiO3Y/m6+o3t9EDW
- NRU69zw0I5f6O6oGCIXRpRDCqWn1dxjiionj3NG0MSNGxEhIqQa51IYWHZJL242Q3axP1lUNnot
- pGLuswsN0+tDi1BPKO58fnHj0a2la+5HrT6HRLB5MdJKLZhZvgu9CyVaJn9w1rMpDVBd
-X-Google-Smtp-Source: AGHT+IHEI6QIsPs11G0Wjs56WIFUiIZFYjWExC34Dg8STlyCHTz2fxsaNO2Rla5pPJtiQITThZKSXA==
+ bh=j3D1JCy/juyHWYjCK9W4k5k4G33D5QNBccasuh3gDOs=;
+ b=qfHNdF08z/X5SEHXPdeGKzzSKMzfGMnAenxyGk/whrf+ySnYZrx3RIHHRPqdStFqGf
+ nzdPcrHPRb+R88Mi8LfyzMLNLoKQux5NVy78243fH5yxc3mcPgaZn+5SbJvlAAaVpeeP
+ F8jeq/r/I07D2LPpC65HB5WqQJggGbJ4x554Q9HviZpGUsfsfXxRXa6Rsf13HccnsDSy
+ 8MeXYzXbyrpKAwlvpUzlPMgvA9DZ4DWh5LG/P8kQZ0yskaadrIz+dkqMFQS/+q3Sp2Zf
+ GJyimuQAVO3R2+VCKyC9sl1fKgK8FuUeEP2VT2NDOGioTenN39UGTkjQmVToOAbVV5RK
+ 7iVg==
+X-Gm-Message-State: AOJu0YwK9NFRCNGtlSddHb4bKyfca+6nyRs/IoDeabGsDG2EBoXFgFmP
+ 6HYrRPbSwf4mJp0tP2qFB+3ikrWLDvjDrKGOJt4xbx5KRs+7SU3uSicU7WscxbZvXCNUMC4TPSE
+ V29GNlIy8VQ==
+X-Gm-Gg: ASbGncuIQ+QIrK1MlFG8utc50AxSHbv0Qdwuiza1GSK7rlM9ru7iG3210mm79AjxuOY
+ HCfm73dwwuf9S3OK0iXCdl6E860cCH8PYt8A3WbKjueuW8D3ZYMHuCTU9fCs0DT3lN9048iNGdL
+ 9jaGl1iu83wo7nrQI5QSmvYkFtnOIubdRLISaBi8APjz+l8tYcKUiT4DCFdvZgfMxvBawCJfhRU
+ vfo1+up7zFkMf1FBwdpITy+rwyYCTiYEEkwr9HkrGR0Z6tDhZf3X1sHt1/J6WVJ7k7/ud0HOsOE
+ 0qABcE+BuMPvrfhCg416zB6MSQ4tbqFH6WxaWVwNjVl6ifn+aZ2XtoU7Kz2HEwayhwEpkvtfB/G
+ aiJc=
+X-Google-Smtp-Source: AGHT+IHf5lwNwWGlEwXbPLtEVOsjD2ajdm8r98u8QJ6P0JXt/o9xkBGMytOO9KdEFpdMbUFmx3FKew==
 X-Received: by 2002:a17:907:9810:b0:ad2:4144:2329 with SMTP id
- a640c23a62f3a-ad2414424e5mr98361766b.7.1746884655595; 
- Sat, 10 May 2025 06:44:15 -0700 (PDT)
+ a640c23a62f3a-ad2414424e5mr98393566b.7.1746884660593; 
+ Sat, 10 May 2025 06:44:20 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.13
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:44:15 -0700 (PDT)
+ Sat, 10 May 2025 06:44:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -77,10 +78,9 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mario Six <mario.six@gdsys.cc>
-Subject: [PATCH v4 18/22] sandbox: Add a way of checking structs for standard
- passage
-Date: Sat, 10 May 2025 15:42:16 +0200
-Message-ID: <20250510134253.1581164-13-sjg@chromium.org>
+Subject: [PATCH v4 20/22] passage: Add docs for spl_handoff
+Date: Sat, 10 May 2025 15:42:18 +0200
+Message-ID: <20250510134253.1581164-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -102,46 +102,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a file which can be used to check that structs used in standard
-passage do compile. No other validation is done at present, but could be
-considered later.
+This tag already exists in U-Boot. Add documentation, following the
+format set out.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- board/sandbox/Makefile        |  3 ++-
- board/sandbox/stdpass_check.c | 34 ++++++++++++++++++++++++++++++++++
- include/stdpass/README        |  4 ++++
- 3 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 board/sandbox/stdpass_check.c
- create mode 100644 include/stdpass/README
+ board/sandbox/stdpass_check.c | 15 ++++++++-------
+ include/handoff.h             | 10 +++++++---
+ 2 files changed, 15 insertions(+), 10 deletions(-)
 
-diff --git a/board/sandbox/Makefile b/board/sandbox/Makefile
-index 411b53c2b8d..d9b56adbbb8 100644
---- a/board/sandbox/Makefile
-+++ b/board/sandbox/Makefile
-@@ -2,4 +2,5 @@
- #
- # Copyright (c) 2011 The Chromium OS Authors.
- 
--obj-y	:= sandbox.o
-+obj-y	+= sandbox.o
-+obj-y	+= stdpass_check.o
 diff --git a/board/sandbox/stdpass_check.c b/board/sandbox/stdpass_check.c
-new file mode 100644
-index 00000000000..c8ddb635f57
---- /dev/null
+index 2244a90c3ba..d04f41137c1 100644
+--- a/board/sandbox/stdpass_check.c
 +++ b/board/sandbox/stdpass_check.c
-@@ -0,0 +1,34 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * This file compiles all the struct definitions for standard passage, to ensure
-+ * there are no errors
-+ *
-+ * Copyright 2021 Google LLC
-+ */
+@@ -6,13 +6,6 @@
+  * Copyright 2021 Google LLC
+  */
+ 
+-/* BLOBLISTT_U_BOOT_SPL_HANDOFF */
+-#include <handoff.h>
+-void check_spl_handoff(void)
+-{
+-	__maybe_unused struct spl_handoff check;
+-};
+-
+ /*
+  * See also doc/develop/std_passage.rst
+  *
+@@ -33,3 +26,11 @@ void check_struct_name(void)
+ {
+ 	/* __maybe_unused struct struct_name check; */
+ }
 +
 +/* BLOBLISTT_U_BOOT_SPL_HANDOFF */
 +#include <handoff.h>
@@ -150,35 +144,42 @@ index 00000000000..c8ddb635f57
 +	__maybe_unused struct spl_handoff check;
 +};
 +
-+/*
-+ * See also doc/develop/std_passage.rst
-+ *
-+ * Instructions:
-+ *
-+ * 1. Add your header file to U-Boot, or to include/stdpass if it is not used in
-+ * U-Boot
-+ *
-+ * 2. Add a function below to include the header and use the struct
-+ *
-+ * Template follows, see above for example
-+ */
+diff --git a/include/handoff.h b/include/handoff.h
+index c0ae7b19a75..c7e6e4746bf 100644
+--- a/include/handoff.h
++++ b/include/handoff.h
+@@ -8,18 +8,24 @@
+ #ifndef __HANDOFF_H
+ #define __HANDOFF_H
+ 
++#include <linux/types.h>
 +
-+/* BLOBLISTT_tag here */
-+/* #include <stdpass/yourfile.h> if not used in U-Boot*/
-+void check_struct_name(void)
-+{
-+	/* __maybe_unused struct struct_name check; */
-+}
-diff --git a/include/stdpass/README b/include/stdpass/README
-new file mode 100644
-index 00000000000..a972121f40c
---- /dev/null
-+++ b/include/stdpass/README
-@@ -0,0 +1,4 @@
-+This directory contains standard passage structures
-+
-+See doc/develop/std_passage.rst for instructions
-+
+ #if CONFIG_IS_ENABLED(HANDOFF)
+ 
+-#include <linux/types.h>
+ #include <asm/handoff.h>
++#endif
+ 
+ /**
+  * struct spl_handoff - information passed from SPL to U-Boot proper
+  *
++ * bloblist_tag: BLOBLISTT_U_BOOT_SPL_HANDOFF
++ *
+  * @ram_size: Value to use for gd->ram_size
+  */
+ struct spl_handoff {
++#if CONFIG_IS_ENABLED(HANDOFF)
+ 	struct arch_spl_handoff arch;
++#endif
+ 	u64 ram_size;
+ 	struct {
+ 		u64 start;
+@@ -44,5 +50,3 @@ void handoff_load_dram_banks(struct spl_handoff *ho);
+ int handoff_arch_save(struct spl_handoff *ho);
+ 
+ #endif
+-
+-#endif
 -- 
 2.43.0
 
