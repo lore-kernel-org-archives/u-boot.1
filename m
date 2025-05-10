@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5925C3ABC3
-	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:45:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B05F2C3ABC9
+	for <u-boot@archiver.kernel.org>; Sat, 10 May 2025 13:46:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA3A582BD6;
-	Sat, 10 May 2025 15:44:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26EB682AF4;
+	Sat, 10 May 2025 15:44:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ecol9rPM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L8AVP13S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC4B582C2F; Sat, 10 May 2025 15:44:22 +0200 (CEST)
-Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com
- [IPv6:2a00:1450:4864:20::644])
+ id 26FCB82A65; Sat, 10 May 2025 15:44:27 +0200 (CEST)
+Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
+ [IPv6:2a00:1450:4864:20::643])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 388A082952
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE3C482C49
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 15:44:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x644.google.com with SMTP id
- a640c23a62f3a-ad21c5d9db2so307952466b.3
- for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:20 -0700 (PDT)
+Received: by mail-ej1-x643.google.com with SMTP id
+ a640c23a62f3a-ad2414a412dso37957466b.0
+ for <u-boot@lists.denx.de>; Sat, 10 May 2025 06:44:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746884659; x=1747489459; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746884663; x=1747489463; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FledNIehwSRz6rOMauD8TMowenKPLm4V61DLvXZizDc=;
- b=Ecol9rPMnTbVwB3baCnPHazw+Z4V/dDOE6m/8kh5cnZpjYydufQKyf4APLunUdOSDI
- MdotXgqb+AfXd7yqGCoHeA5DtjaE2TfdCRoL5I7JLiqDzw4mfrybrLgphh+Y946ae08J
- vznE7F66ZiC3sz8Ais3CwP1LwkdF7PqZ8tgRA=
+ bh=4RF2eDewpl/09a256E4Bk9Wwjw0W+kNIU5rcoFrvWk4=;
+ b=L8AVP13SUtp5pCNFZOVt8iy41qRrBtDCnJXeHPWiwZb/UqPqaNdC6mtJ8c2FEAZRRY
+ DE5NsB5L39tWz7J1CXxuPpHWjDmiGcbTH6pffpqsnTGZjVVrbyA2kwkcXqSqnhglaJ4S
+ OMm83usecdSb/vzIgkYOXo4Lalx+w0tPSb3R8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746884659; x=1747489459;
+ d=1e100.net; s=20230601; t=1746884663; x=1747489463;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FledNIehwSRz6rOMauD8TMowenKPLm4V61DLvXZizDc=;
- b=b2j3Q0sh80K8GkvQNQ41bIChgdGRzDw3lhjAHvKTvWMDhhp5EsmAFfiK7S3VOiuzow
- IIM5EDnJhGgNmyVkq5fPDPm/0jscEtGi+WgAVJbzMbYkEohpzGJv5FiLNJW2Amf7dpEr
- NxfLUC43XxJAPk37TcqRwxhMtUm4d9kkRsDZ57GSbTn3j5SzVVW9Aq6CqBgM2AItKx9d
- FXKr4Naspj937DLD0vLST0XHPw1MS0VTYLPwlXcX14O5dcuo25ZnrteOsH/+8gggApc6
- Hxq8i9CAJLHWzrjJEW7A6mUHkBdHTOR4PRGtQRrIK1iKMmeMBehtkNZDJO+XoSyJhdX5
- eymQ==
-X-Gm-Message-State: AOJu0YzCw0Mfb2C5DKzw8QDdqGpPI4XfdefSSNrg8a8TVE8tPYyDrAt8
- YliZJ0OmXJ3gZwQ1amPbrrcAjLvriUOni1BohQcZhrcE78UX+8llWUkvJmhXqap2jmoAFUaj45I
- FUlOzT5q+A2FS
-X-Gm-Gg: ASbGnctACnQO5pD97A/aSiaXSDveeyJN9zC36w0MnXZruoXjC8rioLgQfRa35pqt5/R
- 5adASx1CSeIA+NNFRlhfXCevMA2zYb7Pj1L4KzddI1exKkECr3QftkT00a2vivYaLzqySfMjzKr
- qRy6wf9g2/XDHKz40TBJggV/sz40FxZb/mzCZctwZN8CONvn05izYdBIWOfcdFEM6CdjA24MS2E
- LUQn5s1w/jSEpVEL27not33xHcPTxDSRuuprQ9ffWsGrp+W8b0COQj4hQWkbn65fkDSm3hu8r5c
- Src8V+X7yDy7I+r7bGBJT0t6ok4R2EjhWJVWN6GHDsEi9okqwisgI8uMUzzCCsJ0f9dL
-X-Google-Smtp-Source: AGHT+IHzZhvD8YPhVm7YyVnPkN3AQ6S36gGcRUlDLyPiM6AHetcwalza7KHFpaBkLHEQagcVdlo2QQ==
-X-Received: by 2002:a17:907:a313:b0:ad2:3fd9:961f with SMTP id
- a640c23a62f3a-ad23fd99de8mr113934766b.30.1746884658464; 
- Sat, 10 May 2025 06:44:18 -0700 (PDT)
+ bh=4RF2eDewpl/09a256E4Bk9Wwjw0W+kNIU5rcoFrvWk4=;
+ b=gU+bipY3o2ZVsovEtmnN8swRuR7jFIjGv70iW5/21A9Iykq09mFM/AdwX3MErSUVgW
+ zrUr9nzkiPLenYvZ1jxAusEaTicg+LGz67Pz9B7hH0gooFAuMpyTca9OUyrIjStT5KCG
+ bpjcqypIL7ULduLReFaCBugE6xKFouzi4Q2ANZVW08HhAAcoegLlCG+6pAEV5u0gOdkV
+ i3dkngHPYu9fhu0UzdbjXqgcQtVXKqJNKBZfoZBnTcg2NfipocJP6DHKiUq0aXKznQPO
+ D8EIKjXDV3dviOUg0AOLxjmXmpr0YzJp2k9Tke8jk9AQvMf89+AooysOd9yTeqnhYjBj
+ 1kwQ==
+X-Gm-Message-State: AOJu0YxLqwdgT6HzRWYk+7SKCdmIrk905qMZ57m5QBC0lNpNPR+yZar9
+ 43oBOq2iaiZaNjtXHCr0JotxTqHtZv+k8WHuFGTdVZlRCCB4TEh3aQVbH+WNL9/yAVFnbNARFg/
+ QUo0StQ9IVms8
+X-Gm-Gg: ASbGnct709CrU64bn7/qBSn4ClnSmtk1WBOHE+GSqOcSTqEWtMAPmG9QSs0DIIAds5c
+ i54skHkYTZfAQWyHo0O4P+FlofR7x1hy4nv4/F2+lLz1J4EDT+/9/C/BoP7N8kwWqe9ytWGSy3z
+ Bp6hipAGvgEh4TBbKZqLsiAAEkZRl7dmt2TiVDI2CrPzdIJuEfYGPz6i4NCFbfqVC0Mz2YBWHCN
+ hVl70aiJ23Enhw/mn90fDW6Ajf1GMuT0T0Z3OXoVilue4vjoebU79XYNelsr+1OqhXrj8YVTjZx
+ VVqucMTu/EGG1DTp9nJA7eI+y3UWUpeuaTuNy9QSvcUP1ud0rXPAHS2JLGRXwzsYCcq1rQg1Vq7
+ 0Rdk=
+X-Google-Smtp-Source: AGHT+IE3mWYznkPCEEFqEec6J2Az1yWz2wTev+f1jFMepaD48+fmj1EJ8m8b7hXImEovae+c7xivUw==
+X-Received: by 2002:a17:906:6a88:b0:ad2:1d12:fd68 with SMTP id
+ a640c23a62f3a-ad21d1301c2mr471644266b.48.1746884662676; 
+ Sat, 10 May 2025 06:44:22 -0700 (PDT)
 Received: from chromium.org (82-132-222-17.dab.02.net. [82.132.222.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.16
+ a640c23a62f3a-ad219747028sm319763866b.106.2025.05.10.06.44.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 May 2025 06:44:17 -0700 (PDT)
+ Sat, 10 May 2025 06:44:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -76,18 +77,10 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alexander Dahl <ada@thorsis.com>, Greg Malysa <malysagreg@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>, Mario Six <mario.six@gdsys.cc>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Subject: [PATCH v4 19/22] passage: Add documentation
-Date: Sat, 10 May 2025 15:42:17 +0200
-Message-ID: <20250510154214.v4.19.I91d5b9ae45e8d1081b1e165620ad1946bd69af00@changeid>
+ Mario Six <mario.six@gdsys.cc>
+Subject: [PATCH v4 21/22] passage: Add checks for pre-existing blobs
+Date: Sat, 10 May 2025 15:42:19 +0200
+Message-ID: <20250510134253.1581164-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250510134253.1581164-1-sjg@chromium.org>
 References: <20250510134253.1581164-1-sjg@chromium.org>
@@ -109,482 +102,427 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation about standard passage and update the maintainers.
+Add checks / documentation for blobs which are already in the list. This
+brings U-Boot up to the standard required by the standard-passage
+documentation.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Fix 'that' typo
-- Update docs for the various code changes
+ board/sandbox/stdpass_check.c   |  70 ++++++++-
+ include/stdpass/tpm2_eventlog.h |  42 +++++
+ include/stdpass/vboot_ctx.h     | 267 ++++++++++++++++++++++++++++++++
+ 3 files changed, 378 insertions(+), 1 deletion(-)
+ create mode 100644 include/stdpass/tpm2_eventlog.h
+ create mode 100644 include/stdpass/vboot_ctx.h
 
-Changes in v2:
-- Add comments about how to pass standard passage to EFI
-- Add comments about passing a bloblist to Linux
-- Add detailed arch-specific information
-- Fix 'it' typo
-
- MAINTAINERS                   |  10 +
- board/sandbox/stdpass_check.c |   3 +-
- doc/develop/bloblist.rst      |   4 +-
- doc/develop/index.rst         |   1 +
- doc/develop/std_passage.rst   | 384 ++++++++++++++++++++++++++++++++++
- 5 files changed, 399 insertions(+), 3 deletions(-)
- create mode 100644 doc/develop/std_passage.rst
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d62dd35a385..6e4cc8fd310 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1681,6 +1681,16 @@ F:	common/stackprot.c
- F:	cmd/stackprot_test.c
- F:	test/py/tests/test_stackprotector.py
- 
-+STANDARD PASSAGE
-+M:	Simon Glass <sjg@chromium.org>
-+F:	board/sandbox/stdpass_check.c
-+F:	cmd/bloblist.c
-+F:	common/bloblist.c
-+F:	doc/develop/std_passage.rst
-+F:	include/bloblist.h
-+F:	include/stdpass/
-+F:	test/bloblist.c
-+
- TARGET_BCMNS3
- M:	Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
- S:	Maintained
 diff --git a/board/sandbox/stdpass_check.c b/board/sandbox/stdpass_check.c
-index c8ddb635f57..2244a90c3ba 100644
+index d04f41137c1..bd2cb16c628 100644
 --- a/board/sandbox/stdpass_check.c
 +++ b/board/sandbox/stdpass_check.c
-@@ -21,7 +21,8 @@ void check_spl_handoff(void)
-  * 1. Add your header file to U-Boot, or to include/stdpass if it is not used in
-  * U-Boot
-  *
-- * 2. Add a function below to include the header and use the struct
-+ * 2. Add a function below to include the header and use the struct. Please put
-+ * your function in order of tag ID (see bloblist.h)
-  *
-  * Template follows, see above for example
-  */
-diff --git a/doc/develop/bloblist.rst b/doc/develop/bloblist.rst
-index 28431039adc..5888bfd6610 100644
---- a/doc/develop/bloblist.rst
-+++ b/doc/develop/bloblist.rst
-@@ -1,7 +1,7 @@
- .. SPDX-License-Identifier: GPL-2.0+
+@@ -27,10 +27,78 @@ void check_struct_name(void)
+ 	/* __maybe_unused struct struct_name check; */
+ }
  
--Blob Lists - bloblist
--=====================
-+Bloblist
-+========
- 
- Introduction
- ------------
-diff --git a/doc/develop/index.rst b/doc/develop/index.rst
-index c907f8c9c2c..f4cafcc6603 100644
---- a/doc/develop/index.rst
-+++ b/doc/develop/index.rst
-@@ -53,6 +53,7 @@ Implementation
-    smbios
-    spl
-    falcon
-+   std_passage
-    uefi/index
-    vbe
-    version
-diff --git a/doc/develop/std_passage.rst b/doc/develop/std_passage.rst
++/* BLOBLISTT_CONTROL_DTB */
++void check_control_dtb(void)
++{
++	/*
++	 * Defined by devicetree specification
++	 * https://github.com/devicetree-org/devicetree-specification/releases/tag/v0.3
++	 */
++};
++
++/* BLOBLISTT_ACPI_GNVS */
++#include <intel_gnvs.h>
++void check_acpi_gnvs(void)
++{
++	__maybe_unused struct acpi_global_nvs check;
++}
++
++/* BLOBLISTT_INTEL_VBT */
++void check_intel_vbt(void)
++{
++	/*
++	 * Pre-existing Intel blob, defined by source code
++	 *
++	 * https://github.com/freedesktop/xorg-intel-gpu-tools/blob/master/tools/intel_vbt_defs.h
++	 * https://github.com/freedesktop/xorg-intel-gpu-tools/blob/master/tools/intel_vbt_decode.c
++	 */
++}
++
++/* BLOBLISTT_TPM2_TCG_LOG */
++#include <stdpass/tpm2_eventlog.h>
++void check_tpm2_tcg_log(void)
++{
++	/* Struct for each record */
++	__maybe_unused struct tpm2_eventlog_context check;
++}
++
++/* BLOBLISTT_TCPA_LOG */
++#include <acpi/acpi_table.h>
++void check_tcpa_log(void)
++{
++	__maybe_unused struct acpi_tcpa check;
++};
++
++/* BLOBLISTT_ACPI_TABLES */
++void check_acpi_tables(void)
++{
++	/*
++	 * Defined by UEFI Advanced Configuration and Power Interface (ACPI)
++	 * Specification, Version 6.3, January 2019
++	 * https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf
++	 */
++}
++
++/* BLOBLISTT_SMBIOS_TABLES */
++void check_smbios_tables(void)
++{
++	/*
++	 * Defined by System Management BIOS (SMBIOS) Reference Specification
++	 * v3.5.0
++	 * https://www.dmtf.org/standards/smbios
++	 */
++}
++
++/* BLOBLISTT_VBOOT_CTX */
++#include <stdpass/vboot_ctx.h>
++void check_vboot_ctx(void)
++{
++	__maybe_unused struct vb2_shared_data check;
++}
++
+ /* BLOBLISTT_U_BOOT_SPL_HANDOFF */
+ #include <handoff.h>
+ void check_spl_handoff(void)
+ {
+ 	__maybe_unused struct spl_handoff check;
+ };
+-
+diff --git a/include/stdpass/tpm2_eventlog.h b/include/stdpass/tpm2_eventlog.h
 new file mode 100644
-index 00000000000..cd3e5e065a3
+index 00000000000..6b258609149
 --- /dev/null
-+++ b/doc/develop/std_passage.rst
-@@ -0,0 +1,384 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Standard Passage
-+================
-+
-+Introduction
-+------------
-+
-+It is sometimes necessary for SPL to communicate information to U-Boot proper,
-+such as the RAM size. This can sometimes be handled by adding the value to a
-+Kconfig which both SPL and U-Boot proper can use. But this does not work for
-+values which are detected at runtime.
-+
-+In some cases other firmware binaries are used alongside U-Boot and these may
-+need to pass information to U-Boot or receive information from it. In this case
-+there is no shared build system and it is clumsy so have to specify matching
-+build options across projects.
-+
-+U-Boot provides a standard way of passing information between different phases
-+(TPL, SPL, U-Boot). This is called `standard passage` since it creates a
-+standard passage through which any sort of information can flow.
-+
-+
-+How it works
-+------------
-+
-+The standard passage is very simple. It is really just a way of sending a
-+bloblist between programs, either at a fixed address, or using registers to
-+indicate the location.
-+
-+A :doc:`bloblist` is a simple, contiguous data structure containing a number of
-+blobs. Each blob has a tag to indicate what it contains. It is designed for
-+simple information, like a small C struct. For more complex data, a devicetree
-+is preferred since it has bindings and is extensible.
-+
-+The bloblist is typically set up initially by one of the early phases of U-Boot,
-+such as TPL. It starts either at a fixed address or is allocated in memory using
-+malloc(). After that, TPL passes the location of the bloblist to SPL (using
-+machine register in an architecture-specific way) and SPL passes it to U-Boot
-+proper. It is possible to add new blobs to the bloblist at each phase. U-Boot
-+proper relocates the bloblist so can expand it if desired.
-+
-+
-+Use by other projects
-+---------------------
-+
-+The standard passage is also intended to be used by other firmware projects,
-+particularly if they interface with U-Boot. It allows that project's firmware
-+binaries to pass information to U-Boot (if they run before U-Boot) or receive
-+information from U-Boot (if they run afterwards).
-+
-+These projects can copy and modify the bloblist code provided they have a
-+compatible license (GPLv2 or later).
-+
-+
-+Allocating tags
-+---------------
-+
-+Tags are defined in the `bloblist.h` header file. For the moment, the U-Boot
-+tree is the upstream repository for tags.
-+
-+Tags may be allocated in the following areas:
-+
-+BLOBLISTT_AREA_FIRMWARE_TOP
-+    A small area for tags of considerable relevance to multiple projects
-+
-+BLOBLISTT_AREA_FIRMWARE
-+    A larger area for tags likely to be relevant to multiple projects either now
-+    or in the future
-+
-+BLOBLISTT_PRIVATE_AREA
-+    Used for private flags. Do not send patches with these. They are for local
-+    or temporary use. Standard firmware binaries which see these tags in the
-+    bloblist typically refuse to boot.
-+
-+To add a new tag for your project, send a patch to the U-Boot project with:
-+
-+  - your new tag, using the next available number in the area your choose
-+  - a header file in include/stdpass/ containing your struct definition if your
-+    struct is not actually used in U-Boot
-+  - a line of code in `board/sandbox/stdpass_check.c` to use the struct (see
-+    that file for instructions)
-+
-+The struct definition does not need to match the code style or types names used
-+in the other project. For example, your project might use a type like
-+__UNSIGNED_INT32 which in U-Boot would be written as u32. Types should be sized
-+so that the struct is the same on 32- and 64-bit machines. Avoid using __packed
-+if possible. Instead try to order members so that it is not necessary.
-+
-+Conflicts are resolved before applying patches to mainline, so your actual tag
-+value may change when the patch is applied. Once your patch is accepted your tag
-+is allocated for all time.
-+
-+Devicetree
-+----------
-+
-+Devicetree has a special place in the standard passage. One of the bloblist tags
-+is BLOBLISTT_CONTROL_FDT which indicates that the blob contains a devicetree
-+intended to control U-Boot (or other binaries). This devicetree provides
-+hardware information and configuration in a generic way using standard bindings,
-+so that it is available for any project to use. The bindings are compatible with
-+operating systems (including Linux) so there is no need to remove them before
-+calling the OS.
-+
-+In cases where a binary wants to access the devicetree but does not want to
-+implement the bloblist feature, the offset of the devicetree within the
-+bloblist is provided. This avoids the need to implement bloblists just to
-+access the devicetree. This is a convenience feature intended for use in
-+degenerate cases.
-+
-+However U-Boot itself does not permit accepting a devicetree through standard
-+passage unless it is part of a valid bloblist. It is easy to turn on the
-+bloblist feature in U-Boot, so such a variation would only serve to confuse
-+things and encourage degeneration in other projects.
-+
-+
-+Standard passage API
-+--------------------
-+
-+The protocol for passing a bloblist through the standard passage from one
-+binary to another is architecture-specific, meaning it works differently on
-+32-/64-bit ARM and x86, for example, if only because of the different register
-+naming.
-+
-+The bloblist is mandatory. If there is no information to pass, the bloblist must
-+still be provided. Following firmware stages may add blobs to the bloblist,
-+making use of the existing space.
-+
-+The minimum bloblist size is 256 bytes, but 4KB is recommended.
-+
-+Two registers are used to pass the bloblist and devicetree pointers. Others may
-+be used depending on the architecture. The protocol chosen for each architecture
-+should be compatible with the Linux protocol, with a way of determining whether
-+standard passage is used. This is done not because Linux might start using
-+standard passage, but to avoid reinventing the wheel.
-+
-+For 32-bit ARM:
-+
-+  =========  ==============================================
-+  Register   Contents
-+  =========  ==============================================
-+  r0         0
-+  r1         0x010fb10b (indicates standard passage v1)
-+  r2         Address of devicetree
-+  r3         Address of bloblist
-+  lr         Return address
-+  =========  ==============================================
-+
-+For 64-bit ARM:
-+
-+  =========  ===================================================
-+  Register   Contents
-+  =========  ===================================================
-+  x0         Address of devicetree
-+  x1         00000001_4a0fb10b (indicates standard passage v1)
-+  x2         0
-+  x3         Address of bloblist
-+  x30        Return address
-+  =========  ===================================================
-+
-+Registers for x86 will be added also, at some point.
-+
-+The devicetree is provided as an address but is normally included within the
-+bloblist, meaning that searching for the BLOBLISTT_CONTROL_DTB blob with the
-+bloblist produces the same result as the devicetree address passed here. Having
-+everything in a bloblist makes it easier to manage memory, since it is all in
-+one contiguous block.
-+
-+
-+Usage guidelines
-+----------------
-+
-+As mentioned above, blobs should contain small, simple blocks of information,
-+typically represented by a C structure. Using it for large or complex structures
-+is only permitted if these are defined by a standard byte-accurate form.
-+Examples include devicetree, ACPI tables, SMBIOS tables and the like.
-+There are also a lot of pre-existing firmware binaries which are quite complex
-+but qualify because it is not possible to convert them to devicetree now. Apart
-+from those exceptions, keep it simple!
-+
-+For complex data structures, devicetree can be used. The libfdt library has an
-+overhead of around 5-10KB which is small enough that most firmware binaries can
-+easily incorporate it. For those that must run in very constrained environments,
-+like U-Boot TPL, a simple blob can be used instead, as explained in the
-+preceding paragraph.
-+
-+Devicetree bindings must be defined so that the format of the data is well
-+understood. This is done through the `dt-schema`_ project, although this process
-+is still in its infancy.
-+
-+
-+EFI
-+---
-+
-+When using EFI a different calling convention is used. For example, with 64-bit
-+ARM we have:
-+
-+  =========  ===================================================
-+  Register   Contents
-+  =========  ===================================================
-+  x0         handle
-+  x1         system table
-+  x30        Return address
-+  =========  ===================================================
-+
-+It is not possible to pass the bloblist in a register in this case. Instead, a
-+config table can be used. The GUID for a bloblist is
-+4effe9da-7728-11ec-8df6-136969a780ff
-+
-+
-+Linux and bloblists
-+-------------------
-+
-+It is possible to effectively pass a bloblist to Linux, or other Operating
-+Systems. However it is not expected that Linux would actually implement the
-+bloblist data structure. How does this work?
-+
-+The bloblist sits in memory with some things in it, including a devicetree,
-+perhaps an SMBIOS table and a TPM log. But when U-Boot calls Linux it puts the
-+address/size of those individual things in the devicetree. They don't move and
-+are still contiguous in memory, but the bloblist around them is forgotten. Linux
-+doesn't know that the three separate things it is picking up are actually part
-+of a bloblist structure, since it doesn't care about that. Even a console log
-+can work the same way. There is no need to teach Linux about bloblist when it
-+already has a perfectly good means to accept these items (via devicetree).
-+
-+ACPI can operate in a similar way. The ACPI tables can point to things that
-+happen to be in a bloblist, but without any knowledge of that needed in Linux,
-+grub, etc. In fact the ACPI tables themselves may well be in a bloblist, as they
-+are in U-Boot.
-+
-+
-+Private firmware
-+----------------
-+
-+Standard passage is intended to operate with open-source firmware. It may be
-+that closed-source firmware may use standard passage, or happen to work with it.
-+If so, that is a happy coincidence, but the focus here is on open-source
-+firmware.
-+
-+
-+Updates
-+-------
-+
-+Updates and patches to this documentation are welcome. Please submit them to
-+the U-Boot project in the normal way.
-+
-+
-+Design notes
-+------------
-+
-+This section describes some of the reasons behind the design decisions implied
-+by this feature.
-+
-+Why devicetree?
-+~~~~~~~~~~~~~~~
-+
-+Firmware is getting large and complicated, with a concomitant need for more
-+complex communication between binaries. We don't want to use C structs to pass
-+around complex data, nor invent new binary formats for everything that comes up.
-+The devicetree provides a useful format and is already widely used in firmware.
-+It supports bindings and provides validation to check for compliance, by virtue
-+of the Linux project and `dt-schema`_. It is easily extensible, being basically
-+an efficient, hierarchical, ordered dictionary.
-+
-+Some examples of how complex and annoying binary formats can become are SMBIOS
-+tables and Intel's Video BIOS tables. The world does not need another binary
-+format.
-+
-+
-+Why not *just* devicetree?
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Some early firmware binaries run in very little memory and only need to pass a
-+few values on to later phases. Devicetree is too heavy-weight for these cases.
-+For example, it is generally not possible for TPL to access a devicetree, which
-+is one of the motivations for the of-platdata feature.
-+
-+
-+Why not protobuf, YAML, JSON?
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+They are not as efficient and either use a lot more code or require parsing
-+before use. Devicetree happens to be a nice compromise.
-+
-+
-+Why not something else?
-+~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Possibly. Please propose it.
-+
-+
-+Why not UUIDs?
-+~~~~~~~~~~~~~~
-+
-+Why use a simple integer tag instead of an 'industry-standard' UUID? Many
-+reasons:
-+
-+- Code should be as readable as possible. GUIDs require something like::
-+
-+    EFI_GUID(0x6dadf1d1, 0xd4cc, 0x4910, \
-+        0xbb, 0x6e, 0x82, 0xb1, 0xfd, 0x80, 0xff, 0x3d)
-+
-+  which is much harder to read than::
-+
-+    enum {
-+        BLOBLISTT_SPL_HANDOFF = 123,
-+    };
-+
-+- UUIDs are more like a hash than a sequence number. Git uses them, although a
-+  short form of the hash is commonly shown. Why use a hash to identify
-+  something when we only have a small number of items?
-+
-+- We don't need to worry about collisions in open source software. We can have
-+  a shared repo and allocate sequence numbers from there. UUIDs come from the
-+  idea that everyone is working independently so people need to be able to
-+  allocate their own numbers and be sure that they will not conflict. This is
-+  needed in the PC BIOS industry where there is little shared source /
-+  cooperation. It is not helpful with open source.
-+
-+- UUIDs come across as just obfuscation. Does anyone know what these values
-+  mean? How would we look them up? Who owns which one? Is there a central
-+  registry?::
-+
-+    EFI_GUID(0x721acf02, 0x4d77, 0x4c2a, 0xb3, 0xdc, 0x27, 0x0b, 0x7b, 0xa9, 0xe4, 0xb0)
-+    EFI_GUID(0xa034147d, 0x690c, 0x4154, 0x8d, 0xe6, 0xc0, 0x44, 0x64, 0x1d, 0xe9, 0x42)
-+    EFI_GUID(0xbbcff46c, 0xc8d3, 0x4113, 0x89, 0x85, 0xb9, 0xd4, 0xf3, 0xb3, 0xf6, 0x4e)
-+    EFI_GUID(0x69a79759, 0x1373, 0x4367, 0xa6, 0xc4, 0xc7, 0xf5, 0x9e, 0xfd, 0x98, 0x6e)
-+    EFI_GUID(0xd038747c, 0xd00c, 0x4980, 0xb3, 0x19, 0x49, 0x01, 0x99, 0xa4, 0x7d, 0x55)
-+    EFI_GUID(0x9c7c3aa7, 0x5332, 0x4917, 0x82, 0xb9, 0x56, 0xa5, 0xf3, 0xe6, 0x2a, 0x07)
-+
-+- It is overkill to use 16 bytes for a unique identifier in a shared project.
-+  It is about 10^38. Modern SoCs cannot keep that in a register and there is no
-+  C int type to represent it on most common hardware today! Having to check that
-+  adds time and code to no benefit. In early boot, space and time are
-+  particularly precious.
-+
-+
-+Why contiguous?
-+~~~~~~~~~~~~~~~
-+
-+It is easier to allocate a single block of data than to allocate lots of little
-+blocks. It is easy to relocate if needed (a simple copy of a block of memory).
-+It can be expanded by relocating it. If we absolutely need to create a linked
-+list then pointers to external data can be added to a blob.
-+
-+
-+Why bloblist?
-+~~~~~~~~~~~~~
-+
-+Bloblist is a simple format with an integer tag. It avoids UUIDs and meets the
-+requirements above. Some tweaks may be desirable to the format, but that can be
-+worked out in code review.
-+
-+
-+Why pass the devicetree address?
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+In cases where a binary wants to access the devicetree but does not want to
-+implement the bloblist feature, the address of the devicetree within the
-+bloblist is provided. This avoids the need to implement bloblists just to
-+access the devicetree. This is a convenience feature intended for use in
-+degenerate cases. It also allows access to the devicetree before the bloblist
-+has been parsed.
-+
-+
-+Why use registers to pass values between binaries?
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+It seems like the obvious solution. We could use a shared memory region with
-+shared configuration between projects, but that is error prone and difficult to
-+keep in sync.
-+
-+
-+Firmware Handoff Specification
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+For ARM, the `Firmware Handoff Specification
-+<https://firmwarehandoff.github.io/firmware_handoff/main/index.html>`_
-+has been created. See the
-+`repo <https://github.com/FirmwareHandoff/firmware_handoff>`_ also.
-+
-+
-+.. _`dt-schema`: https://github.com/devicetree-org/dt-schema
++++ b/include/stdpass/tpm2_eventlog.h
+@@ -0,0 +1,42 @@
++/* SPDX-License-Identifier: BSD-3-Clause */
++
++/* taken from https://github.com/tpm2-software/tpm2-tss/blob/master/include/tss2/tss2_tpm2_types.h */
++#define TPM2_MAX_PCRS           32
++
++/* Hash algorithm sizes */
++#define TPM2_SHA_DIGEST_SIZE     20
++#define TPM2_SHA1_DIGEST_SIZE    20
++#define TPM2_SHA256_DIGEST_SIZE  32
++#define TPM2_SHA384_DIGEST_SIZE  48
++#define TPM2_SHA512_DIGEST_SIZE  64
++#define TPM2_SM3_256_DIGEST_SIZE 32
++
++/* taken from https://github.com/tpm2-software/tpm2-tools/blob/master/lib/tpm2_eventlog.h#L14 */
++
++typedef bool (*digest2_callback)(void const *digest, size_t size, void *data);
++typedef bool (*event2_callback)(void const *event_hdr, size_t size, void *data);
++typedef bool (*event2data_callback)(void const *event, u32 type, void *data,
++				    u32 eventlog_version);
++typedef bool (*specid_callback)(void const *event, void *data);
++typedef bool (*log_event_callback)(void const *event_hdr, size_t size,
++				   void *data);
++
++struct tpm2_eventlog_context {
++	void *data;
++	specid_callback specid_cb;
++	log_event_callback log_eventhdr_cb;
++	event2_callback event2hdr_cb;
++	digest2_callback digest2_cb;
++	event2data_callback event2_cb;
++	u32 sha1_used;
++	u32 sha256_used;
++	u32 sha384_used;
++	u32 sha512_used;
++	u32 sm3_256_used;
++	u8 sha1_pcrs[TPM2_MAX_PCRS][TPM2_SHA1_DIGEST_SIZE];
++	u8 sha256_pcrs[TPM2_MAX_PCRS][TPM2_SHA256_DIGEST_SIZE];
++	u8 sha384_pcrs[TPM2_MAX_PCRS][TPM2_SHA384_DIGEST_SIZE];
++	u8 sha512_pcrs[TPM2_MAX_PCRS][TPM2_SHA512_DIGEST_SIZE];
++	u8 sm3_256_pcrs[TPM2_MAX_PCRS][TPM2_SM3_256_DIGEST_SIZE];
++	u32 eventlog_version;
++};
+diff --git a/include/stdpass/vboot_ctx.h b/include/stdpass/vboot_ctx.h
+new file mode 100644
+index 00000000000..ff74e8ba709
+--- /dev/null
++++ b/include/stdpass/vboot_ctx.h
+@@ -0,0 +1,267 @@
++/* SPDX-License-Identifier: BSD-3-Clause */
++
++/*
++ * Taken from https://chromium.googlesource.com/chromiumos/platform/vboot
++ *
++ * Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
++ * Use of this source code is governed by a BSD-style license that can be
++ * found in the LICENSE file.
++ */
++
++/*
++ * Size of non-volatile data used by vboot.
++ *
++ * If you only support non-volatile data format V1, then use VB2_NVDATA_SIZE.
++ * If you support V2, use VB2_NVDATA_SIZE_V2 and set context flag
++ * VB2_CONTEXT_NVDATA_V2.
++ */
++#define VB2_NVDATA_SIZE 16
++#define VB2_NVDATA_SIZE_V2 64
++
++/* Size of secure data spaces used by vboot */
++#define VB2_SECDATA_FIRMWARE_SIZE 10
++#define VB2_SECDATA_KERNEL_SIZE_V02 13
++#define VB2_SECDATA_KERNEL_SIZE_V10 40
++#define VB2_SECDATA_KERNEL_MIN_SIZE 13
++#define VB2_SECDATA_KERNEL_MAX_SIZE 64
++#define VB2_SECDATA_FWMP_MIN_SIZE 40
++#define VB2_SECDATA_FWMP_MAX_SIZE 64
++
++/* Helper for aligning fields in vb2_context. */
++#define VB2_PAD_STRUCT3(size, align, count) \
++	u8 _pad##count[align - (((size - 1) % align) + 1)]
++#define VB2_PAD_STRUCT2(size, align, count) VB2_PAD_STRUCT3(size, align, count)
++#define VB2_PAD_STRUCT(size, align) VB2_PAD_STRUCT2(size, align, __COUNTER__)
++
++/* MAX_SIZE should not be changed without bumping up DATA_VERSION_MAJOR. */
++#define VB2_CONTEXT_MAX_SIZE 384
++
++/*
++ * Context for firmware verification.  Pass this to all vboot APIs.
++ *
++ * Context is stored as part of vb2_shared_data, initialized with vb2api_init().
++ * Subsequent retrieval of the context object should be done by calling
++ * vb2api_reinit(), e.g. if switching firmware applications.
++ *
++ * The context struct can be seen as the "publicly accessible" portion of
++ * vb2_shared_data, and thus does not require its own magic and version fields.
++ */
++struct vb2_context {
++	/**********************************************************************
++	 * Fields caller must initialize before calling any API functions.
++	 */
++
++	/*
++	 * Flags; see vb2_context_flags.  Some flags may only be set by caller
++	 * prior to calling vboot functions.
++	 */
++	u64 flags;
++
++	/*
++	 * Non-volatile data.  Caller must fill this from some non-volatile
++	 * location before calling vb2api_fw_phase1.  If the
++	 * VB2_CONTEXT_NVDATA_CHANGED flag is set when a vb2api function
++	 * returns, caller must save the data back to the non-volatile location
++	 * and then clear the flag.
++	 */
++	u8 nvdata[VB2_NVDATA_SIZE_V2];
++	VB2_PAD_STRUCT(VB2_NVDATA_SIZE_V2, 8);
++
++	/*
++	 * Secure data for firmware verification stage.  Caller must fill this
++	 * from some secure non-volatile location before calling
++	 * vb2api_fw_phase1.  If the VB2_CONTEXT_SECDATA_FIRMWARE_CHANGED flag
++	 * is set when a function returns, caller must save the data back to the
++	 * secure non-volatile location and then clear the flag.
++	 */
++	u8 secdata_firmware[VB2_SECDATA_FIRMWARE_SIZE];
++	VB2_PAD_STRUCT(VB2_SECDATA_FIRMWARE_SIZE, 8);
++
++	/**********************************************************************
++	 * Fields caller must initialize before calling vb2api_kernel_phase1().
++	 */
++
++	/*
++	 * Secure data for kernel verification stage.  Caller must fill this
++	 * from some secure non-volatile location before calling
++	 * vb2api_kernel_phase1.  If the VB2_CONTEXT_SECDATA_KERNEL_CHANGED
++	 * flag is set when a function returns, caller must save the data back
++	 * to the secure non-volatile location and then clear the flag.
++	 */
++	u8 secdata_kernel[VB2_SECDATA_KERNEL_MAX_SIZE];
++	VB2_PAD_STRUCT(VB2_SECDATA_KERNEL_MAX_SIZE, 8);
++
++	/*
++	 * Firmware management parameters (FWMP) secure data.  Caller must fill
++	 * this from some secure non-volatile location before calling
++	 * vb2api_kernel_phase1.  Since FWMP is a variable-size space, caller
++	 * should initially fill in VB2_SECDATA_FWMP_MIN_SIZE bytes, and call
++	 * vb2_secdata_fwmp_check() to see whether more should be read.  If the
++	 * VB2_CONTEXT_SECDATA_FWMP_CHANGED flag is set when a function
++	 * returns, caller must save the data back to the secure non-volatile
++	 * location and then clear the flag.
++	 */
++	u8 secdata_fwmp[VB2_SECDATA_FWMP_MAX_SIZE];
++	VB2_PAD_STRUCT(VB2_SECDATA_FWMP_MAX_SIZE, 8);
++
++	/*
++	 * Context pointer for use by caller.  Verified boot never looks at
++	 * this.  Put context here if you need it for APIs that verified boot
++	 * may call (vb2ex_...() functions).
++	 */
++	void *non_vboot_context;
++};
++
++/*
++ * Data shared between vboot API calls.  Stored at the start of the work
++ * buffer.
++ */
++struct vb2_shared_data {
++	/* Magic number for struct (VB2_SHARED_DATA_MAGIC) */
++	u32 magic;
++
++	/* Version of this structure */
++	u16 struct_version_major;
++	u16 struct_version_minor;
++
++	/* Public fields are stored in the context object */
++	struct vb2_context ctx;
++
++	/* Padding for adding future vb2_context fields */
++	u8 padding[VB2_CONTEXT_MAX_SIZE - sizeof(struct vb2_context)];
++
++	/* Work buffer length in bytes. */
++	u32 workbuf_size;
++
++	/*
++	 * Amount of work buffer used so far.  Verified boot sub-calls use
++	 * this to know where the unused work area starts.
++	 */
++	u32 workbuf_used;
++
++	/* Flags; see enum vb2_shared_data_flags */
++	u32 flags;
++
++	/*
++	 * Reason we are in recovery mode this boot (enum vb2_nv_recovery), or
++	 * 0 if we aren't.
++	 */
++	u32 recovery_reason;
++
++	/* Firmware slot used last boot (0=A, 1=B) */
++	u32 last_fw_slot;
++
++	/* Result of last boot (enum vb2_fw_result) */
++	u32 last_fw_result;
++
++	/* Firmware slot used this boot */
++	u32 fw_slot;
++
++	/*
++	 * Version for this slot (top 16 bits = key, lower 16 bits = firmware).
++	 *
++	 * TODO: Make this a union to allow getting/setting those versions
++	 * separately?
++	 */
++	u32 fw_version;
++
++	/* Version from secdata_firmware (must be <= fw_version to boot). */
++	u32 fw_version_secdata;
++
++	/*
++	 * Status flags for this boot; see enum vb2_shared_data_status.  Status
++	 * is "what we've done"; flags above are "decisions we've made".
++	 */
++	u32 status;
++
++	/* Offset from start of this struct to GBB header */
++	u32 gbb_offset;
++
++	/**********************************************************************
++	 * Data from kernel verification stage.
++	 *
++	 * TODO: shouldn't be part of the main struct, since that needlessly
++	 * uses more memory during firmware verification.
++	 */
++
++	/*
++	 * Version for the current kernel (top 16 bits = key, lower 16 bits =
++	 * kernel preamble).
++	 *
++	 * TODO: Make this a union to allow getting/setting those versions
++	 * separately?
++	 */
++	u32 kernel_version;
++
++	/* Version from secdata_kernel (must be <= kernel_version to boot) */
++	u32 kernel_version_secdata;
++
++	/**********************************************************************
++	 * Temporary variables used during firmware verification.  These don't
++	 * really need to persist through to the OS, but there's nowhere else
++	 * we can put them.
++	 */
++
++	/* Offset of preamble from start of vblock */
++	u32 vblock_preamble_offset;
++
++	/*
++	 * Offset and size of packed data key in work buffer.  Size is 0 if
++	 * data key is not stored in the work buffer.
++	 */
++	u32 data_key_offset;
++	u32 data_key_size;
++
++	/*
++	 * Offset and size of firmware preamble in work buffer.  Size is 0 if
++	 * preamble is not stored in the work buffer.
++	 */
++	u32 preamble_offset;
++	u32 preamble_size;
++
++	/*
++	 * Offset and size of hash context in work buffer.  Size is 0 if
++	 * hash context is not stored in the work buffer.
++	 */
++	u32 hash_offset;
++	u32 hash_size;
++
++	/*
++	 * Current tag we're hashing
++	 *
++	 * For new structs, this is the offset of the vb2_signature struct
++	 * in the work buffer.
++	 *
++	 * TODO: rename to hash_sig_offset when vboot1 structs are deprecated.
++	 */
++	u32 hash_tag;
++
++	/* Amount of data we still expect to hash */
++	u32 hash_remaining_size;
++
++	/**********************************************************************
++	 * Temporary variables used during kernel verification.  These don't
++	 * really need to persist through to the OS, but there's nowhere else
++	 * we can put them.
++	 *
++	 * TODO: make a union with the firmware verification temp variables,
++	 * or make both of them workbuf-allocated sub-structs, so that we can
++	 * overlap them so kernel variables don't bloat firmware verification
++	 * stage memory requirements.
++	 */
++
++	/*
++	 * Formerly a pointer to vboot1 shared data header ("VBSD").  Caller
++	 * may now export a copy of VBSD via vb2api_export_vbsd().
++	 * TODO: Remove this field and bump struct_version_major.
++	 */
++	uintptr_t reserved0;
++
++	/*
++	 * Offset and size of packed kernel key in work buffer.  Size is 0 if
++	 * subkey is not stored in the work buffer.  Note that kernel key may
++	 * be inside the firmware preamble.
++	 */
++	u32 kernel_key_offset;
++	u32 kernel_key_size;
++} __packed;
 -- 
 2.43.0
 
