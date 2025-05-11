@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8DC7C3ABCB
-	for <u-boot@archiver.kernel.org>; Sun, 11 May 2025 14:18:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 620C9C3ABCB
+	for <u-boot@archiver.kernel.org>; Sun, 11 May 2025 14:18:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C6F582A0A;
-	Sun, 11 May 2025 16:18:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81FB882A33;
+	Sun, 11 May 2025 16:18:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Icm3Tckf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lo2T7BKO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF5FF828BC; Sun, 11 May 2025 16:18:38 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 9F79A82A2F; Sun, 11 May 2025 16:18:40 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C26C782977
- for <u-boot@lists.denx.de>; Sun, 11 May 2025 16:18:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA3318295C
+ for <u-boot@lists.denx.de>; Sun, 11 May 2025 16:18:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ad24b7e0331so83458566b.0
- for <u-boot@lists.denx.de>; Sun, 11 May 2025 07:18:36 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5fbed53b421so5547648a12.0
+ for <u-boot@lists.denx.de>; Sun, 11 May 2025 07:18:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746973116; x=1747577916; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1746973117; x=1747577917; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IkHn3qzuKgEknpnCcwfWQMORiuWUSxqk9HAYlcvI74s=;
- b=Icm3TckfWlD2hrS6kbfAGfDZ8AWB8DgRdIi/kJZyPEo8HanTB7W0Vh7/RoyTA5w2bz
- 7vthZf7BAh+B1EBQYSVpM3kBOuluupuvIQx+S5XPqm3rCJGkQMDsLPMdlN36JDka2JZ0
- wpotWtHr+3QCp+E9kkuqq9XJ9VBHrUmcVdlWk=
+ bh=1PdRj9qsUYcWvgYzJf0Ln8PSZpRpNtKjl9uwVimepmQ=;
+ b=lo2T7BKOBKlbHzxH1ueAAsW1oezmnwCh6/eKFFuqIFbekJfhHxNJYq+zUjf2dQAZ9D
+ Psux9KS56+pRb7ZVBQcd5YvdFsJAY8YnDW8yr6xeMC6AjMiHON9T0+peZiILlOFpEPSz
+ /W59r9JMtLBYK4Imnkht8ewEXnW3M2cKXwNv0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746973116; x=1747577916;
+ d=1e100.net; s=20230601; t=1746973117; x=1747577917;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IkHn3qzuKgEknpnCcwfWQMORiuWUSxqk9HAYlcvI74s=;
- b=jUW93PxWch98f7UzZXu+FJjPiy02bSJZjyMHoeFI0ClK40i0t8f1NkZENzBu9v6/AD
- HguGINmbuN6F2xyK3yjJvFkqewLhNnu+qYfi+NFC1zZoaWp0MzHL5XpefqVd5QJ/QWWP
- +IcX4jF45sTo9UKN1e6hRNq4HKqSYTpAB4nujMNZvGjyW1JTbNy4mPYTxkVnEsZBLuwh
- aa4pFLWl/kF60dpnvFIHhVfdqijbyVCV2LUJZNpGVTPfHaGONdBKGZoTuZD6+Qcc7PFq
- YxVUBj9F0lE2GkJdVgK3uBLq4TiFVaxNQRao0X1s9n3VTcBsY3JraUXDtPdBTdpwodyQ
- DyLw==
-X-Gm-Message-State: AOJu0YzqWHg6xbN9VSY0dWYFRFEy3ZEbIKA9VNtws6kbKuP7au/RriME
- 5VAjSPCbXQp0oiRR6Oo+k+AdVa7fHUon9rkXcE28YP35PxUCW+apXpF5BzQW5CMa8kvWTkSFKP/
- g3lB/YKZMog==
-X-Gm-Gg: ASbGncu3jQbtTscSEM/OBM48tdnYaJjcZWLoISnzGMVLQEqWh9yk4xv3c0Qgvy/cc4V
- yoEB5gLmEjU6qZ7HM4auFnOKTTSwZFSY6TE0+0z+QjcXwVzD/U/zVz2lvYyrTb5ehG5BhwRdKfQ
- G4IqNSvV4wffJK5l0aCIYLuW23ubPMyFA9EWE05sBKn/mqP+edd1NhpVJmf3ClflFC+rHoDdvEv
- vsi7fZXEjhZdsUWC31RLeowwnNF9fqoq452vQMtaK+k53bCipwB/nZN+ffcMY9fL9ypPZfQFm4s
- 7M53kwDuK6xTqv0uftbW5+ONrnibXnD4O81JX6/sOsfIAGA=
-X-Google-Smtp-Source: AGHT+IGE8cbAsQbM2I0Cy3G+Mr/N5G8rvcxLTfwKyG9QNSKNhpHWQXzQ/SkjUrt0DQQqSB5TLnDtHw==
-X-Received: by 2002:a17:907:60ca:b0:ad2:4fb6:3b93 with SMTP id
- a640c23a62f3a-ad24fb63e30mr171774566b.28.1746973115732; 
- Sun, 11 May 2025 07:18:35 -0700 (PDT)
+ bh=1PdRj9qsUYcWvgYzJf0Ln8PSZpRpNtKjl9uwVimepmQ=;
+ b=LaR/B32+gyf30q7UV+ZRQSVqMHpcfgk7bADVXER4pWquM0UCfnnCn4fiWnUuClkEgG
+ dMlkPcLY+bSVtMlxqj9B5A63TisR1A3R4ND/wNWQNOoAhgtGzd5FluQv1iy0FoH0DtBj
+ Agc02uKmkUv2C+5kklxnWoWnU7R42jyaTAik14ftCCoIATwxHTMWoCguB81o1OfMpW0D
+ sRdx/fl/Ed9TLDvAUhnGjet2z/VEm6sL5cm/eBnUYol7Z3TOQ3KzkYTpbtylAbdBiuTp
+ iWf8fbWINYaOGMP/TvxAadcYMTM9f7k8E3qC8W83Tg50p54fQUjOeupRYWba17pajCz2
+ uSBQ==
+X-Gm-Message-State: AOJu0YzXDAK0zlhM/nT/Zu7/95j4x8DW5khYAK9pukjnXrkuND3RwNzn
+ 4JtCmSs2eJjwu0lUST3o+mxTpwMannwaqScqFPpSkQFWLetQ2H5Vg2yGXnw5z4O1ByPvj4fQ6y2
+ jxkQA6qJ0RQ==
+X-Gm-Gg: ASbGnctMd3SCafAi7jfWLT6Rsk3GYNgTtrJhKWusGza3hl7kEEmSSI2HBW8/nLFmQH4
+ qMNs8A2WFSgDe3x9E6ePn1weSBw6pB+9xJk1QM3wZTeKvQxV+9lMXM7HPMm4ivcAsyAoG2uXYI8
+ /HL9xNQmZ8MR74hhyVBN9RZQsyD6UIxax+QLAYL7ndbGQko6x6TGeSYtXOFdb3OzAcE6pQUMWT1
+ NH+WHO5c+nWiN5yBmDQEaBfWw3b9yP1uAlWK1g35B+tRDEHk2otJmECI9PYXzI5kIFFpLjW4UME
+ GfStsuYzccNEll+MhJunaN+5alOiTkTpu3J2LqcGxMhQO9U=
+X-Google-Smtp-Source: AGHT+IFqzIaTrgxTcr8t0E3abRHsw9VTprBz6MwYr/wjysHZQJlkvWEJ+zMxLqujlqzcYfP88cxpkw==
+X-Received: by 2002:a17:907:c243:b0:ad2:5198:d711 with SMTP id
+ a640c23a62f3a-ad25198d88amr117814566b.10.1746973117270; 
+ Sun, 11 May 2025 07:18:37 -0700 (PDT)
 Received: from chromium.org ([213.157.19.135])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad21985858asm477789266b.176.2025.05.11.07.18.34
+ a640c23a62f3a-ad21985858asm477789266b.176.2025.05.11.07.18.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 May 2025 07:18:34 -0700 (PDT)
+ Sun, 11 May 2025 07:18:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marex@denx.de>, Richard Weinberger <richard@nod.at>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/6] test: Update fs_helper to support passing in the image
-Date: Sun, 11 May 2025 16:18:16 +0200
-Message-ID: <20250511141828.2367318-2-sjg@chromium.org>
+Subject: [PATCH 2/6] scripts: Rename build-efi.py to drop the file extension
+Date: Sun, 11 May 2025 16:18:17 +0200
+Message-ID: <20250511141828.2367318-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250511141828.2367318-1-sjg@chromium.org>
 References: <20250511141828.2367318-1-sjg@chromium.org>
@@ -95,72 +101,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is useful for other scripts, so add a parameter to specify
-the image name, if desired.
+The .py extension isn't very useful. Drop it and update the shebang to
+specify Python 3
 
-Also add a flag to quieten the output of some of the tools, since in
-many cases we only want to see warnings / errors.
+Update the docs for this and also drop the old reference to 2021 images.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/py/tests/fs_helper.py | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ MAINTAINERS                         | 2 +-
+ doc/develop/uefi/u-boot_on_efi.rst  | 7 +++----
+ scripts/{build-efi.py => build-efi} | 2 +-
+ 3 files changed, 5 insertions(+), 6 deletions(-)
+ rename scripts/{build-efi.py => build-efi} (99%)
 
-diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index b8a22b22806..d124f03a7dc 100644
---- a/test/py/tests/fs_helper.py
-+++ b/test/py/tests/fs_helper.py
-@@ -8,8 +8,10 @@
- import re
- import os
- from subprocess import call, check_call, check_output, CalledProcessError
-+from subprocess import DEVNULL
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 1d7ef23f476..939c46ef23a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1074,7 +1074,7 @@ F:	doc/develop/uefi/u-boot_on_efi.rst
+ F:	drivers/block/efi-media-uclass.c
+ F:	drivers/block/sb_efi_media.c
+ F:	lib/efi/
+-F:	scripts/build-efi.py
++F:	scripts/build-efi
+ F:	test/dm/efi_media.c
  
--def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
-+def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
-+          fs_img=None, quiet=False):
-     """Create a file system volume
+ EFI LOGGING
+diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
+index b1d5faa3463..e9f8e9c297c 100644
+--- a/doc/develop/uefi/u-boot_on_efi.rst
++++ b/doc/develop/uefi/u-boot_on_efi.rst
+@@ -97,9 +97,8 @@ that EFI does not support booting a 64-bit application from a 32-bit
+ EFI (or vice versa). Also it will often fail to print an error message if
+ you get this wrong.
  
-     Args:
-@@ -19,12 +21,15 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
-         prefix (str): Prefix string of volume's file name
-         src_dir (str): Root directory to use, or None for none
-         size_gran (int): Size granularity of file system image in bytes
-+        fs_img (str or None): Filename for image, or None to invent one
-+        quiet (bool): Suppress non-error output
+-You may find the script `scripts/build-efi.py` helpful for building and testing
+-U-Boot on UEFI on QEMU. It also includes links to UEFI binaries dating from
+-2021.
++You may find the script `scripts/build-efi` helpful for building and testing
++U-Boot on UEFI on QEMU.
  
-     Raises:
-         CalledProcessError: if any error occurs when creating the filesystem
-     """
--    fs_img = f'{prefix}.{fs_type}.img'
--    fs_img = os.path.join(config.persistent_data_dir, fs_img)
-+    if not fs_img:
-+        leaf = f'{prefix}.{fs_type}.img'
-+        fs_img = os.path.join(config.persistent_data_dir, leaf)
+ See `Example run`_ for an example run.
  
-     if fs_type == 'fat12':
-         mkfs_opt = '-F 12'
-@@ -58,14 +63,17 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
-         check_call(f'rm -f {fs_img}', shell=True)
-         check_call(f'truncate -s $(( {size_gran} * {count} )) {fs_img}',
-                    shell=True)
--        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True)
-+        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
-+                   stdout=DEVNULL if quiet else None)
-         if fs_type == 'ext4':
-             sb_content = check_output(f'tune2fs -l {fs_img}',
-                                       shell=True).decode()
-             if 'metadata_csum' in sb_content:
-                 check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
-         elif fs_lnxtype == 'vfat' and src_dir:
--            check_call(f'mcopy -i {fs_img} -vsmpQ {src_dir}/* ::/', shell=True)
-+            flags = f"-smpQ{'' if quiet else 'v'}"
-+            check_call(f'mcopy -i {fs_img} {flags} {src_dir}/* ::/',
-+                       shell=True)
-         elif fs_lnxtype == 'exfat' and src_dir:
-             check_call(f'fattools cp {src_dir}/* {fs_img}', shell=True)
-         return fs_img
+@@ -202,7 +201,7 @@ Example run
+ 
+ This shows running with serial enabled (see `include/configs/efi-x86_app.h`)::
+ 
+-   $ scripts/build-efi.py -wsPr
++   $ scripts/build-efi -wsPr
+    Packaging efi-x86_app32
+    Running qemu-system-i386
+ 
+diff --git a/scripts/build-efi.py b/scripts/build-efi
+similarity index 99%
+rename from scripts/build-efi.py
+rename to scripts/build-efi
+index d2587a51376..e71028baa6d 100755
+--- a/scripts/build-efi.py
++++ b/scripts/build-efi
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # SPDX-License-Identifier: GPL-2.0+
+ """
+ Script to build an EFI thing suitable for booting with QEMU, possibly running
 -- 
 2.43.0
 
