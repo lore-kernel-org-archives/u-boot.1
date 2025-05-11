@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBC8C3ABC9
-	for <u-boot@archiver.kernel.org>; Sun, 11 May 2025 01:11:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3AFC3ABC9
+	for <u-boot@archiver.kernel.org>; Sun, 11 May 2025 01:11:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDD2B82977;
-	Sun, 11 May 2025 03:10:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 461C78295C;
+	Sun, 11 May 2025 03:10:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 011E082A39; Sun, 11 May 2025 03:10:22 +0200 (CEST)
+ id 26C1E82A3B; Sun, 11 May 2025 03:10:23 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BC08382A0A
- for <u-boot@lists.denx.de>; Sun, 11 May 2025 03:10:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3BCD48091A
+ for <u-boot@lists.denx.de>; Sun, 11 May 2025 03:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3C4B826AC;
- Sat, 10 May 2025 18:10:08 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B12CB1516;
+ Sat, 10 May 2025 18:10:09 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 077D13F58B;
- Sat, 10 May 2025 18:10:17 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 759853F58B;
+ Sat, 10 May 2025 18:10:19 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: u-boot@lists.denx.de
 Cc: Jagan Teki <jagan@amarulasolutions.com>,
@@ -34,10 +34,9 @@ Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Philippe Simons <simons.philippe@gmail.com>,
  Sumit Garg <sumit.garg@kernel.org>, linux-sunxi@lists.linux.dev,
  Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>
-Subject: [PATCH v2 5/6] arm64: dts: allwinner: a100: add Liontron H-A133L
- board support
-Date: Sun, 11 May 2025 02:10:02 +0100
-Message-ID: <20250511011003.15654-6-andre.przywara@arm.com>
+Subject: [PATCH v2 6/6] sunxi: add support for Liontron H-A133L board
+Date: Sun, 11 May 2025 02:10:03 +0100
+Message-ID: <20250511011003.15654-7-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.3
 In-Reply-To: <20250511011003.15654-1-andre.przywara@arm.com>
 References: <20250511011003.15654-1-andre.przywara@arm.com>
@@ -59,255 +58,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The H-A133L board is an industrial development board made by Liontron.
-It contains a number of dedicated JST connectors, to connect external
-peripherals. It features:
+The Liontron H-A133L is an industrial development board based on the
+Allwinner A133 SoC. It uses LPDDR4 DRAM, eMMC, and an AXP707 PMIC.
 
-- Allwinner A133 SoC (4 * Arm Cortex-A53 cores at up to 1.6 GHz)
-- 1 GiB, 2 GiB or 4 GiB of LPDDR4 DRAM
-- between 16 and 128 GiB eMMC flash
-- AXP707 PMIC (compatible to AXP803)
-- 100 Mbit/s RJ45 Ethernet socket, using an JLSemi JL1101 PHY
-- XR829 WIFI+Bluetooth chip
-- 2 * USB 2.0 USB-A ports, plus three sets of USB pins on connectors
-  (connected via a USB hub connected to USB1 on the SoC)
-- microSD card slot
-- 3.5mm A/V port
-- 12V power supply
-- connectors for an LVDS or MIPI-DSI panel
-
-Add the devicetree describing the board's peripherals and their
-connections.
-
-Despite being a devboard, the manufacturer does not publish a schematic
-(I asked), so the PMIC rail assignments were bases on BSP dumps,
-educated guesses and some experimentation. Dropping the always-on
-property from any of the rails carrying it will make the board hang as
-soon as the kernel turns off unused regulators.
+Add a defconfig with the required DRAM settings.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- .../sun50i-a133-liontron-h-a133l.dts          | 211 ++++++++++++++++++
- 1 file changed, 211 insertions(+)
- create mode 100644 dts/upstream/src/arm64/allwinner/sun50i-a133-liontron-h-a133l.dts
+ configs/liontron-h-a133l_defconfig | 37 ++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+ create mode 100644 configs/liontron-h-a133l_defconfig
 
-diff --git a/dts/upstream/src/arm64/allwinner/sun50i-a133-liontron-h-a133l.dts b/dts/upstream/src/arm64/allwinner/sun50i-a133-liontron-h-a133l.dts
+diff --git a/configs/liontron-h-a133l_defconfig b/configs/liontron-h-a133l_defconfig
 new file mode 100644
-index 00000000000..e71779578d3
+index 00000000000..4b769768e5f
 --- /dev/null
-+++ b/dts/upstream/src/arm64/allwinner/sun50i-a133-liontron-h-a133l.dts
-@@ -0,0 +1,211 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2025 Arm Ltd.
-+ */
-+
-+/dts-v1/;
-+
-+#include "sun50i-a100.dtsi"
-+#include "sun50i-a100-cpu-opp.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+
-+/{
-+	model = "Liontron H-A133L";
-+	compatible = "liontron,h-a133l", "allwinner,sun50i-a100";
-+
-+	aliases {
-+		serial0 = &uart0;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led {
-+			function = LED_FUNCTION_POWER;
-+			color = <LED_COLOR_ID_BLUE>;
-+			gpios = <&pio 7 16 GPIO_ACTIVE_LOW>; /* PH16 */
-+		};
-+	};
-+
-+	reg_vcc5v: vcc5v {
-+		/* board wide 5V supply from a 12V->5V regulator */
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc-5v";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-always-on;
-+	};
-+
-+	reg_usb1_vbus: regulator-usb1-vbus {
-+		compatible = "regulator-fixed";
-+		regulator-name = "usb1-vbus";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		vin-supply = <&reg_vcc5v>;
-+		enable-active-high;
-+		gpio = <&r_pio 0 8 GPIO_ACTIVE_HIGH>; /* PL8 */
-+	};
-+};
-+
-+&cpu0 {
-+	cpu-supply = <&reg_dcdc2>;
-+};
-+
-+&ehci0 {
-+	status = "okay";
-+};
-+
-+&ehci1 {
-+	status = "okay";
-+};
-+
-+&mmc0 {
-+	vmmc-supply = <&reg_dcdc1>;
-+	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
-+	bus-width = <4>;
-+	status = "okay";
-+};
-+
-+&mmc2 {
-+	vmmc-supply = <&reg_dcdc1>;
-+	vqmmc-supply = <&reg_eldo1>;
-+	cap-mmc-hw-reset;
-+	non-removable;
-+	bus-width = <8>;
-+	mmc-ddr-1_8v;
-+	mmc-hs200-1_8v;
-+	status = "okay";
-+};
-+
-+&ohci0 {
-+	status = "okay";
-+};
-+
-+&ohci1 {
-+	status = "okay";
-+};
-+
-+&pio {
-+	vcc-pb-supply = <&reg_dcdc1>;
-+	vcc-pc-supply = <&reg_eldo1>;
-+	vcc-pf-supply = <&reg_dcdc1>;
-+	vcc-ph-supply = <&reg_dcdc1>;
-+};
-+
-+&r_i2c0 {
-+	status = "okay";
-+
-+	axp803: pmic@34 {
-+		compatible = "x-powers,axp803";
-+		reg = <0x34>;
-+		interrupt-parent = <&r_intc>;
-+		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
-+	};
-+};
-+
-+#include "axp803.dtsi"
-+
-+&ac_power_supply {
-+	status = "okay";
-+};
-+
-+&reg_aldo1 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <1800000>;
-+	regulator-max-microvolt = <1800000>;
-+	regulator-name = "vcc-codec-avcc";
-+};
-+
-+&reg_aldo2 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <1800000>;
-+	regulator-max-microvolt = <1800000>;
-+	regulator-name = "vcc-dram-1";
-+};
-+
-+&reg_aldo3 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <3300000>;
-+	regulator-max-microvolt = <3300000>;
-+	regulator-name = "vcc-usb-pl";
-+};
-+
-+&reg_dcdc1 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <3300000>;
-+	regulator-max-microvolt = <3300000>;
-+	regulator-name = "vcc-io-usb-pd-emmc";
-+};
-+
-+&reg_dcdc2 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <810000>;
-+	regulator-max-microvolt = <1200000>;
-+	regulator-name = "vdd-cpux";
-+};
-+
-+&reg_dcdc3 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <900000>;
-+	regulator-max-microvolt = <900000>;
-+	regulator-name = "vdd-usb-cpus";
-+};
-+
-+&reg_dcdc4 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <950000>;
-+	regulator-max-microvolt = <950000>;
-+	regulator-name = "vdd-sys";
-+};
-+
-+&reg_dcdc5 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <1100000>;
-+	regulator-max-microvolt = <1100000>;
-+	regulator-name = "vcc-dram";
-+};
-+
-+/* DCDC6 unused */
-+/* DLDO3 unused */
-+/* DLDO4 unused */
-+
-+&reg_eldo1 {
-+	regulator-min-microvolt = <1800000>;
-+	regulator-max-microvolt = <1800000>;
-+	regulator-name = "vcc-pc-emmc";
-+};
-+
-+/* ELDO2 unused */
-+/* ELDO3 unused */
-+
-+&reg_fldo1 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <900000>;
-+	regulator-max-microvolt = <900000>;
-+	regulator-name = "vdd-cpus-usb";
-+};
-+
-+/* reg_drivevbus unused */
-+/* dc1sw unused */
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0_pb_pins>;
-+	status = "okay";
-+};
-+
-+&usb_otg {
-+	dr_mode = "host";       /* USB A type receptable, always powered */
-+	status = "okay";
-+};
-+
-+&usbphy {
-+	status = "okay";
-+	usb1_vbus-supply = <&reg_usb1_vbus>;
-+};
++++ b/configs/liontron-h-a133l_defconfig
+@@ -0,0 +1,37 @@
++CONFIG_ARM=y
++CONFIG_ARCH_SUNXI=y
++CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-a133-liontron-h-a133l"
++CONFIG_SPL=y
++CONFIG_DRAM_SUNXI_DX_ODT=0x7070707
++CONFIG_DRAM_SUNXI_DX_DRI=0xd0d0d0d
++CONFIG_DRAM_SUNXI_CA_DRI=0xe0e
++CONFIG_DRAM_SUNXI_PARA0=0xd0a050c
++CONFIG_DRAM_SUNXI_MR11=0x4
++CONFIG_DRAM_SUNXI_MR12=0x72
++CONFIG_DRAM_SUNXI_MR13=0x0
++CONFIG_DRAM_SUNXI_MR14=0x7
++CONFIG_DRAM_SUNXI_TPR1=0x26
++CONFIG_DRAM_SUNXI_TPR2=0x6060606
++CONFIG_DRAM_SUNXI_TPR3=0x84040404
++CONFIG_DRAM_SUNXI_TPR6=0x48000000
++CONFIG_DRAM_SUNXI_TPR10=0x273333
++CONFIG_DRAM_SUNXI_TPR11=0x231d151c
++CONFIG_DRAM_SUNXI_TPR12=0x1212110e
++CONFIG_DRAM_SUNXI_TPR13=0x7521
++CONFIG_DRAM_SUNXI_TPR14=0x2023211f
++CONFIG_MACH_SUN50I_A133=y
++CONFIG_DRAM_CLK=792
++CONFIG_MMC_SUNXI_SLOT_EXTRA=2
++CONFIG_SUNXI_DRAM_A133_LPDDR4=y
++CONFIG_R_I2C_ENABLE=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_I2C=y
++CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_SYS_I2C_MVTWSI=y
++CONFIG_SYS_I2C_SLAVE=0x7f
++CONFIG_SYS_I2C_SPEED=400000
++CONFIG_AXP803_POWER=y
++CONFIG_AXP_DCDC5_VOLT=1100
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_OHCI_HCD=y
 -- 
 2.46.3
 
