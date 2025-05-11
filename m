@@ -4,75 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20FA9C3ABC3
-	for <u-boot@archiver.kernel.org>; Sun, 11 May 2025 14:18:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0A1C3ABC3
+	for <u-boot@archiver.kernel.org>; Sun, 11 May 2025 14:18:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9516480C83;
-	Sun, 11 May 2025 16:18:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E66C882998;
+	Sun, 11 May 2025 16:18:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nv11CN4c";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="miy3cz6E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DFFC8091A; Sun, 11 May 2025 16:18:17 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 1C750829A0; Sun, 11 May 2025 16:18:37 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC5A3828BC
- for <u-boot@lists.denx.de>; Sun, 11 May 2025 16:18:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38BB3828BC
+ for <u-boot@lists.denx.de>; Sun, 11 May 2025 16:18:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5fd1f7f8b25so1165579a12.0
- for <u-boot@lists.denx.de>; Sun, 11 May 2025 07:18:15 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5fca2805ca4so3603713a12.1
+ for <u-boot@lists.denx.de>; Sun, 11 May 2025 07:18:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1746973095; x=1747577895; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JE+exIMcCmjeHoR1M9+HfTAlvvja1ny1/TW2Mrm9uK4=;
- b=nv11CN4cvSGeEg09xmKNiWYcF4I4/GIc6ha2d3ozse05yf58cDuSgR/zwLQhv0hzUK
- xpADMrCLgeZTXAMAxRKEDA6szfrrYjkEzV3h9ryVWdrESYDbb+TJmfLeO3YcSocgi4Q5
- ucCgKjdr60tWSBwDJsiF09rn/L7iWRrWzsmeg=
+ d=chromium.org; s=google; t=1746973114; x=1747577914; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xxgSGQ3ime/XgLJNo/31CdvWhGYaEzvFtEQjkNjjKkY=;
+ b=miy3cz6EVvaAIbNSrKH73GHqeUGlWuWmKnzcGOjUX3vjiLt8fl9MC3umCbhvG621Ek
+ Xi9CcrwhSxhPv1bFuwrcBINqL0SI8zeqUGsGxufM+645Dr3/CxLikfBM2rxVZ7mRvIy3
+ XwnOoU6zBaRq7wqMn36eimJWvkytWp6ELGwyk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746973095; x=1747577895;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1746973114; x=1747577914;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JE+exIMcCmjeHoR1M9+HfTAlvvja1ny1/TW2Mrm9uK4=;
- b=hRlEbl5FLblE6Tbz8/cAgFku0Ccr46tDPv6ccIPxzXs/H4uv3KsYCet2ZmXG0K6+nD
- w0pe6sLB1+hokHI1heMEFWVUy2k+FF6JzqgEgmzyAlM18+4piHnBVj1zF5YrYZIp8GKB
- mtRnTfB0VfBO9/Lx1bg7E/DcQygFva8NMGlaoUoik4rnEJfzxpWLJcESXkFpbxuzp612
- zK+4TGV5MDh64bf75bP8Og/cfRdAgSUlWgYiedIQj6ZW+nyDWLX6JUCQPJ2+sfYvoQU5
- yklrhyjIyC/BKl87kqMW5RStz3YSm8/xcpTmWMIkkZPv5q0E9TlaCmX9bBpj3bZ4tWGZ
- wlFQ==
-X-Gm-Message-State: AOJu0Yw0SruV1Dsg4lokITg2h/ftB4A2hv5+2LCAtfxfQfQRIL0RppBi
- XI/YWxdMx01rU/5jgncuDWhUPnHPGJT3R2h1gV04pv13iPRzGOxxK6gUWPpS0Sd448fBbI54N3T
- npHB/1sWvGlaVBPiwTYjHGx8Oqj7HNwhzjtqo8QSGNaK65XolezkbbyK6/g==
-X-Gm-Gg: ASbGncsZpYtHa+Plgus8qi9fSkjC8JaWEt2Uupkh4TYsDEcsPFYW8EIkgTzAhItyab4
- 7XhRLd+q08zfnQjTkZyiiwv/6iHHKM/pCnnw+Hpf2K3OzSL5pFnYuuY70z7Qff+0S5XKeLnhfbK
- CLSP3kbuCF0exy3tIlQEtbqrQlBAkEeaEdTg==
-X-Google-Smtp-Source: AGHT+IHNiZCxpIpnlPfpw2YNL2Uve+eU6V18YSFDz7dIE7YgxPq/lRgDhYsWFCsGnJ2NZdKyGcmwoQ0FpJ17zO5VBOg=
-X-Received: by 2002:a17:907:9484:b0:ad2:5657:3161 with SMTP id
- a640c23a62f3a-ad256573523mr33887166b.59.1746973095074; Sun, 11 May 2025
- 07:18:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250508183034.3439777-1-adriano.cordova@canonical.com>
- <20250508183034.3439777-3-adriano.cordova@canonical.com>
-In-Reply-To: <20250508183034.3439777-3-adriano.cordova@canonical.com>
+ bh=xxgSGQ3ime/XgLJNo/31CdvWhGYaEzvFtEQjkNjjKkY=;
+ b=PPlndjzMElwtGPRTIS2RrUuG6j9tYSVbkj78eGWXcuWUBfv32ZoHyqW/BWDFxwYFD3
+ 3xyLgU8iYsAZvukUjvgGHj2/0UicnyZZuhOB9VRGCsD4pN4z0B1KueTSokkChD0PpDc3
+ G8Mi2nir1uzWqCquwXgb2Xr9rmzuiKKytqcqFF8jv75ragJvswLEJHQhv+JLsa/bjvWh
+ eKMUTKV3eNQ27CK1ro1BkkfoqId8x3eaWBXdlVx+6VZOl/kI+tn60w/VYwnbGO2HhekT
+ Q+WNsCmofaJrOOqI1EUala/n1GJNQmWg30tTK9GwTdQZakxD0vLan/RS6gJmbAagg0TE
+ xdnQ==
+X-Gm-Message-State: AOJu0YzvwCNF6aQOf8u+yy1uZmPrWma5tOwNzjo/tuNX8ELEuuI71mce
+ 95rlS6txwdOaJxX/YzR4o3qGsWmE7XdwmpXeLeSBoHx3PDD4mq1SCP0HRk8PlOUoNTVVj++yraz
+ lzaE6zrxAWQ==
+X-Gm-Gg: ASbGnctS86GNU5PcEv9rjrk3JYNzbkcD97u+tzeN7YtUMDYHCIy+by/ywkDZLYQZrKI
+ Q8JeLX/3bhaxvEbPdvuaTQJof3uMf3mVY+Xzlf6chglgLwGNIiloScM8JTUZPlYX3DDVICt8kZw
+ Z0qDJnDQewaTM5UNkcrNxi97vS613Cuw2oYs435pY8cb//IQTepFA6jXkPu8LFCm07dByY52hBf
+ VmSezFs4cKaQdVt9Vo5TQEa6OEuCvz0rP7qhFeJa839Xjw9pxIBdTcUoJ1GbHyrKtTAYJLWiXkW
+ g/OPpkKRmCoSpjYD7DgyzPJLPoxM+QZZxU5NUvKRZuo0iMk=
+X-Google-Smtp-Source: AGHT+IFMoADGxc0L43FOSIA9rM+m+o6k05iONulxflbkTznv8sngWXxVJngY4U8B9RL4ibPbIrbg/Q==
+X-Received: by 2002:a17:907:c243:b0:ad2:5198:d711 with SMTP id
+ a640c23a62f3a-ad25198d88amr117802966b.10.1746973113698; 
+ Sun, 11 May 2025 07:18:33 -0700 (PDT)
+Received: from chromium.org ([213.157.19.135])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad21985858asm477789266b.176.2025.05.11.07.18.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 11 May 2025 07:18:33 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 11 May 2025 16:18:03 +0200
-X-Gm-Features: AX0GCFvSk_luM3kV5FIopI7DjQtA3tTZRivRIVdNJA2JHDlkd_ICrd7Z9fERd5g
-Message-ID: <CAFLszTgGRAbVq13TtAHHJ4U-E1QZLZmLkGbEpyuRCS-TEFrNPQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] efi_loader: fix dtbdump output color and format
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
- trini@konsulko.com, o451686892@gmail.com, 
- Adriano Cordova <adriano.cordova@canonical.com>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Richard Weinberger <richard@nod.at>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/6] script: Improve the QEMU scripts to Python
+Date: Sun, 11 May 2025 16:18:15 +0200
+Message-ID: <20250511141828.2367318-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,124 +104,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adriano,
+This series updates the two QEMU scripts available in U-Boot:
 
-On Thu, 8 May 2025 at 20:29, Adriano Cordova <adrianox@gmail.com> wrote:
->
-> Imitate in dtbdump what initrddump does for color,
-> newlines and input handling. The output parsing in
-> the CI is strict and with the current output the CI
-> is not recongnizing the prompt '=>'.
+- Converts build-qemu to Python
+- Converts build-efi to avoid sudo (unless SCT is used)
+- Introduces a proper settings file shared between both scripts
 
-It would be useful to mention 'ANSI' in the subject, since I'm
-assuming it is ANSI colour codes which are being written to the output
-here?
+It also includes a few documentation updates.
 
->
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->
-> (no changes since v1)
->
->  lib/efi_loader/dtbdump.c | 86 ++++++++++++++++++++++++++++++++++------
->  1 file changed, 74 insertions(+), 12 deletions(-)
->
-> diff --git a/lib/efi_loader/dtbdump.c b/lib/efi_loader/dtbdump.c
-> index a3d59a2fd3b..1e72404ecc1 100644
-> --- a/lib/efi_loader/dtbdump.c
-> +++ b/lib/efi_loader/dtbdump.c
-> @@ -29,6 +29,18 @@ static struct efi_system_table *systable;
->  static const efi_guid_t efi_dt_fixup_protocol_guid = EFI_DT_FIXUP_PROTOCOL_GUID;
->  static const efi_guid_t efi_file_info_guid = EFI_FILE_INFO_GUID;
->  static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
-> +static bool nocolor;
-> +
-> +/**
-> + * color() - set foreground color
-> + *
-> + * @color:     foreground color
-> + */
-> +static void color(u8 color)
-> +{
-> +       if (!nocolor)
-> +               cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
-> +}
+The next step is to get these scripts running in CI.
 
-Rather than duplicating this code, could it go in a shared file? Could
-be a follow-up patch.
 
->
->  /**
->   * print() - print string
-> @@ -87,6 +99,17 @@ static void printx(unsigned char val)
->         print_hex_digit(val & 0xf);
->  }
->
-> +/**
-> + * cls() - clear screen
-> + */
-> +static void cls(void)
-> +{
-> +       if (nocolor)
-> +               print(u"\r\n");
-> +       else
-> +               cout->clear_screen(cout);
-> +}
-> +
->  /**
->   * error() - print error string
->   *
-> @@ -94,9 +117,17 @@ static void printx(unsigned char val)
->   */
->  static void error(u16 *string)
->  {
-> -       cout->set_attribute(cout, EFI_LIGHTRED | EFI_BACKGROUND_BLACK);
-> +       color(EFI_LIGHTRED);
->         print(string);
-> -       cout->set_attribute(cout, EFI_LIGHTBLUE | EFI_BACKGROUND_BLACK);
-> +       color(EFI_LIGHTBLUE);
-> +}
-> +
-> +/**
-> + * efi_drain_input() - drain console input
-> + */
-> +static void efi_drain_input(void)
-> +{
-> +       cin->reset(cin, true);
->  }
->
->  /**
-> @@ -116,8 +147,6 @@ static efi_status_t efi_input_yn(void)
->         efi_uintn_t index;
->         efi_status_t ret;
->
-> -       /* Drain the console input */
-> -       ret = cin->reset(cin, true);
->         for (;;) {
->                 ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
->                 if (ret != EFI_SUCCESS)
-> @@ -158,8 +187,6 @@ static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
->         u16 outbuf[2] = u" ";
->         efi_status_t ret;
->
-> -       /* Drain the console input */
-> -       ret = cin->reset(cin, true);
->         *buffer = 0;
->         for (;;) {
->                 ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-> @@ -262,6 +289,9 @@ static u16 *skip_whitespace(u16 *pos)
->   */
+Simon Glass (6):
+  test: Update fs_helper to support passing in the image
+  scripts: Rename build-efi.py to drop the file extension
+  scripts: Convert the build-efi script to avoid sudo
+  scripts: Create a common settings file for QEMU scripts
+  u_boot_pylib: Support a fatal level in tout
+  scripts: Convert the build-qemu script to Python
 
-Please update the function comment to indicate its behaviour when NULL is passed
+ MAINTAINERS                         |   5 +-
+ doc/board/emulation/script.rst      |  78 +++++-
+ doc/develop/uefi/u-boot_on_efi.rst  |   7 +-
+ scripts/{build-efi.py => build-efi} | 159 ++---------
+ scripts/build-qemu                  | 414 ++++++++++++++++++++++++++++
+ scripts/build-qemu.sh               | 211 --------------
+ scripts/build_helper.py             | 126 +++++++++
+ test/py/tests/fs_helper.py          |  18 +-
+ tools/binman/control.py             |   6 +-
+ tools/u_boot_pylib/tout.py          |  22 +-
+ 10 files changed, 660 insertions(+), 386 deletions(-)
+ rename scripts/{build-efi.py => build-efi} (52%)
+ create mode 100755 scripts/build-qemu
+ delete mode 100755 scripts/build-qemu.sh
+ create mode 100644 scripts/build_helper.py
 
->  static bool starts_with(u16 *string, u16 *keyword)
->  {
-> +       if (!string || !keyword)
-> +               return false;
-> +
+-- 
+2.43.0
 
-[..]
-
-Regards,
-Simon
+base-commit: c5a631df96de7421d10ee03dceed1b79db213026
+branch: script
