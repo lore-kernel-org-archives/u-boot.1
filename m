@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD53AC3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 16:29:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6094C3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 16:39:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D716980C83;
-	Mon, 12 May 2025 18:29:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D21080C83;
+	Mon, 12 May 2025 18:39:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sFG5u163";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DMlU2Eaf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A5DB826AA; Mon, 12 May 2025 18:29:17 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id D07FC826AA; Mon, 12 May 2025 18:39:41 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5676280584
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 18:29:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A942880584
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 18:39:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-72c14235af3so2981947a34.3
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 09:29:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=jcmvbkbc@gmail.com
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-af51596da56so3844528a12.0
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 09:39:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747067354; x=1747672154; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oo+OGsJxe1vxkWIBnWapYXToGo0Bjixp6Z9bJuZdTRo=;
- b=sFG5u163mTXjKISMiCr+m3UZ8QUqK5yr/lPuDVG7kvpuDLl9umJMQFiNZ/zdsQBkox
- q7L2uxy8NaEaseEr/SxxYQC1ks5/hBZB6gR0x4thZ1mo+zTnVOLfXToJqiWFZqCpV824
- 8IAgDKGJXVSJIEfpZRB/G1iUMsbRCJdaPEUo8=
+ d=gmail.com; s=20230601; t=1747067978; x=1747672778; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QYgeAKCqEAIVkIpqiiV8ddnlAk1/jE+TzsTox3rorWg=;
+ b=DMlU2Eaf1mmnDKI3yiDXaBj9uZgY1XfpSZ0zleE1bFKotM8WsFw2R7/s59wU2iVf5n
+ k3gCeCzUQcq7y5i/fRkBqNFhhuJxVN2DQOs8gAYD6qySZr5s2q/GDspXk/dhcIt/Qoo6
+ r25d4XMnPD0MHMpirtCJ3GaGFJxbhlIU2jZo2A2yJG+CeOEQenJgsAIHT2t2J5cb3p5U
+ FguPip4fSCxdDzBgf1Nn5zviKF7K8V17mE7reW/K1Ugh9KYh5QAI0Nw5IYoJwZpyTR34
+ JHsU+4V7s5kwh3M8ss0Gfnb6/m1ZXnSiA7X6dZ40YwhFtL0LUssPq+o3O8iNIZiN/syC
+ Z8eA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747067354; x=1747672154;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oo+OGsJxe1vxkWIBnWapYXToGo0Bjixp6Z9bJuZdTRo=;
- b=D9zODjF5yBI4SV1Mit1QbwlppB4GXZj3wwTCwf6NBCX1xf9/gHfPqnM88sPbBYiraq
- 2Rtu0Zfkq7w2qr1ZzZFOoAbCjPembbPubng334HTJxHNojywTRA8gWdVzDGxYBS2w+75
- lvFtYdYtOhk8QwVP+n9bBr6Gr9g98a21Ps1Z4OmbnZQfVioCdoOiIpNY8bmhz5q+aNs2
- 317LQNkvkqceQHzyp1e7dqW9XY+21jD2drEep21qinE/Nm9hjk+BNM4thWs9GN+JCCkE
- zWQBvrLEpigCwZfxnM3ZMQmLNguXOad/I/LfGnF/oKkRTU0mULNMiIeSZZb3ReV7saFU
- VrSA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIBsk4JWaF5RGDM0QZkA+GXbeHHBKF+9mypaKBEOuA2N2nxBIK1oVuR8NVTxUnFcnkbaUV9Cg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+RwTEpJJhbva1ATuMCTqPV3pcbZQyhhbhqBEcUjAy0xzn0r/z
- bngIbTusqRa45El3y/cKePIQCMIAc2VVqfc7P4rtpxkTJuUcngYsxOWtdKtImgU=
-X-Gm-Gg: ASbGncs8YsWcmZBH+Q0W8+wg/7fsJzGTY0wPnIsfwXgx4vkWvMtt2xZ+WHG3fR0IrPf
- Z+oXFReZLRuO0pU9ZiuUGAAhmF5XXuhmCYaXq3bw9gU1duwjFTv6RZkm02BN/f2Nvzv20YeG6GG
- JVwSsdKEFRo1zWpKW8Ua7Cq4rrRxF7mzHkuLzPHxtcszw/jN+7YQnT58I10CdmQgcsOwjXv0Uz+
- wYe5VWZ4iNicqRlAMQpEJUK/L5suLSiFY6uf/PgAZVsxOhJrJsdIyTqbJ3+rVpCEDVtPMD6x6k6
- lpAiigrhZpwLbB9gS7LnLZqeFmmRrNOCdrYiwjeNBggRnfmsQVh7dn0qN2+CZr82C2SKZeqU5Lm
- QBtkGJnj6190m9tg4lbm8JQ==
-X-Google-Smtp-Source: AGHT+IFaN0JdNX6dzOUfg0+9aEFNrs9bEfxUlHbyp+Ix5drkPUM5Yx96nXld9TGhO1MoSVyfRenJOA==
-X-Received: by 2002:a05:6830:398d:b0:727:24c6:87e7 with SMTP id
- 46e09a7af769-73226afb4ebmr8264048a34.19.1747067353845; 
- Mon, 12 May 2025 09:29:13 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-732265ce4c4sm1589444a34.48.2025.05.12.09.29.12
+ d=1e100.net; s=20230601; t=1747067978; x=1747672778;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QYgeAKCqEAIVkIpqiiV8ddnlAk1/jE+TzsTox3rorWg=;
+ b=NC+6zjMgN0tg//uAx0v0ho93RbkaCoPa+NlMnAmSVrZPlzeak36xpe4f3ZoHrGDEKh
+ Zw3qORkONmTCBCQmHZlosxgYT6FjfgondGOY/YGhDcEtboYAOvam+3bxVQfpO6IFg0nV
+ muCCYvqR5uFSa3Mh8r8oIeXcjnFPwEDYTN76LBNv7/yz/DXnkGwsjk5Dcgw28hP4Y8df
+ i0KqaHJGN7h48AP1T+z0fzt6gjkLMV2zigyorMTRvlqxS4Ljnk/PGjyG0azMd308CxMw
+ xF/IWnAg64hAIHN1lBgGTVArI1Ik9VEsof5+3LuhuFwND69stQK1F89DHBQYPMH5+6vo
+ uiCA==
+X-Gm-Message-State: AOJu0YxZXP6VGMg5uEBFtI7KQUI5tDngaeea1jHKb4wkOhIYovkQ53C5
+ X0xdAou/HA9lfPxuMuje3NV8TvNIl+v5sA1taQdnMCAQhXryOz/3wEiXvg==
+X-Gm-Gg: ASbGncuozHUpnxCXRxgUYc0USbG8V2vfYB/od2v5J6t1pfV22Wq5wSwON3Qk3tKV4u7
+ nI5Kr94DzmYnk5ieOaWTb3k/Uu8YJkMMQelFWu0UXlDx3qbhvNsrbnLfcTo5rFV6RnxPgC2wkn9
+ v2yJhAvo6bOVjisgoMZ/BM+j6GFKB4EIbZM/z+uNJUhmusqjbipggVqmqHuBBMztZc53vNkOxyt
+ aE8ep9vm4jx6RM8COrJSr4XzOHroe4rxDiQE5pD58xp0QFOqLy7W8UiohOXG2HXNzEOtE9+wB/b
+ hINNSwBdIqLVQHmzDNrmDCS+rbG6aUlffL5GGPhhp4fC/tMmMegco2xuVdkirLpFJ0b+/KrC/J4
+ 2WvzyA055mQUi4H5PhG46WPu29UTf9y8=
+X-Google-Smtp-Source: AGHT+IFTnpxLIB2FmcZ01ZT9AASKauy0oC7oYPH2ExuC1BT1oQ3vyoP+czcBmK/dRshwgSW5Fn4SpQ==
+X-Received: by 2002:a17:903:2f88:b0:21f:988d:5758 with SMTP id
+ d9443c01a7336-22fc8d98a75mr250211285ad.35.1747067978036; 
+ Mon, 12 May 2025 09:39:38 -0700 (PDT)
+Received: from octofox.hsd1.ca.comcast.net
+ (c-73-63-239-93.hsd1.ca.comcast.net. [73.63.239.93])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22fc829f195sm65145285ad.209.2025.05.12.09.39.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 May 2025 09:29:13 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Dang Huynh <danct12@riseup.net>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250510153203.569240-1-jonas@kwiboo.se>
-References: <20250510153203.569240-1-jonas@kwiboo.se>
-Subject: Re: [PATCH v2] clk: Fix clk_set_parent() regression
-Message-Id: <174706735295.2273249.15226273765649833496.b4-ty@konsulko.com>
-Date: Mon, 12 May 2025 10:29:12 -0600
+ Mon, 12 May 2025 09:39:37 -0700 (PDT)
+From: Max Filippov <jcmvbkbc@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH] xtensa: xtfpga: enable DM_SERIAL
+Date: Mon, 12 May 2025 09:39:31 -0700
+Message-Id: <20250512163931.4184305-1-jcmvbkbc@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,22 +96,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 10 May 2025 15:32:01 +0000, Jonas Karlman wrote:
+Enable DM_SERIAL for the xtensa architecture and update xtfpga_defconfig
 
-> The commit ac30d90f3367 ("clk: Ensure the parent clocks are enabled
-> while reparenting") add a call to clk_enable() for the parent clock.
-> 
-> For clock drivers that do not implement the enable() ops, like most
-> Rockchip clock drivers, this now cause the set_parent() ops to never
-> be called when CLK_CCF=n (default for Rockchip).
-> 
-> [...]
+Signed-off-by: Max Filippov <jcmvbkbc@gmail.com>
+---
+ arch/Kconfig             | 1 +
+ configs/xtfpga_defconfig | 6 +++---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-Applied to u-boot/master, thanks!
-
-[1/1] clk: Fix clk_set_parent() regression
-      commit: 128d997a8772cc174f38d529d8b25f90b3aa8ad8
+diff --git a/arch/Kconfig b/arch/Kconfig
+index ea33d07c086b..38284d22020b 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -361,6 +361,7 @@ config X86
+ config XTENSA
+ 	bool "Xtensa architecture"
+ 	select CREATE_ARCH_SYMLINK
++	select DM_SERIAL
+ 	select SUPPORT_LITTLE_ENDIAN
+ 	select SUPPORT_OF_CONTROL
+ 
+diff --git a/configs/xtfpga_defconfig b/configs/xtfpga_defconfig
+index b96dc10d85be..8303c9398da2 100644
+--- a/configs/xtfpga_defconfig
++++ b/configs/xtfpga_defconfig
+@@ -4,6 +4,7 @@ CONFIG_SYS_MALLOC_LEN=0x40000
+ CONFIG_SYS_MALLOC_F_LEN=0x400
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_SECT_SIZE=0x20000
++CONFIG_DEFAULT_DEVICE_TREE="kc705"
+ CONFIG_SYS_MONITOR_LEN=262144
+ CONFIG_SYS_LOAD_ADDR=0x02000000
+ CONFIG_ENV_ADDR=0xF7FE0000
+@@ -28,6 +29,7 @@ CONFIG_CMD_SAVES=y
+ CONFIG_CMD_DHCP=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_DIAG=y
++CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_FLASH=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+@@ -46,7 +48,5 @@ CONFIG_SYS_FLASH_CFI=y
+ CONFIG_SYS_MAX_FLASH_SECT=1027
+ CONFIG_PHYLIB=y
+ CONFIG_ETHOC=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SYS_NS16550_REG_SIZE=-4
++CONFIG_SYS_NS16550=y
+ CONFIG_SYSRESET=y
+-CONFIG_OF_LIBFDT=y
 -- 
-Tom
-
+2.39.5
 
