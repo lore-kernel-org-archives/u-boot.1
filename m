@@ -4,54 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FADCC3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 15:12:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3BC4C3ABC3
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 15:22:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45FCC80C83;
-	Mon, 12 May 2025 17:12:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=epochal.quest
+	by phobos.denx.de (Postfix) with ESMTP id C1B5C80C83;
+	Mon, 12 May 2025 17:22:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=epochal.quest header.i=@epochal.quest header.b="F1v1ZMK3";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="IXg9VZyz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB40C81DD6; Mon, 12 May 2025 17:12:42 +0200 (CEST)
-Received: from thales.epochal.quest (thales.epochal.quest [51.222.15.28])
+ id 478E081DD6; Mon, 12 May 2025 17:22:23 +0200 (CEST)
+Received: from mx2.securetransport.de (mx2.securetransport.de
+ [IPv6:2a03:4000:13:6c7::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1502805D7
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 17:12:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DA14805D7
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 17:22:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=epochal.quest
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masterr3c0rd@epochal.quest
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=epochal.quest;
- s=default; t=1747062759;
- bh=QuLJIuAQnXAdeilq2O8Kju7ulUQVs2l2UzjpfDomQCg=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=F1v1ZMK3O9J2OID5oiYW2O1Gd6ANC517BZRfaLJJQhCNwlvOrc0uF/9dqzxkuvIFX
- ltC/ZBG6bqQYZ1Gxlhd0shGEiviTCQh6ZpABVq1tUmF8b+318yEK9rNiRZqEfym2IV
- Ap1va4i1X5D95Yf39G/+2GREGqBozrfUKPuK9rRArjcs3y9vYuEOaIGYs03fegAUSH
- 44O+Sffa3qvx5s9t6eT8yX0m9qLsQPa/MiDeMVM68G4bUyH9aYPrghxs5syJN8Qi1e
- rGTFHrBc4mFKFm7BZh/4LAfHGw8M1Xq6SJ1yFJDdzLwUckboVF/Hmtn70MpIGe1cFT
- hLC2sHbghWJcw==
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1747062916;
+ bh=Krj+tr1cYGmKKkfGHI/aggYbMav+VevjOnIFM1s8X8g=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=IXg9VZyzW36uPXNSR1dPWoL6OjznA6wRb2FSYUn7fszbKfNHJPDM0LC4OvGh97mAa
+ +NkQ1581weeI2fBf8wDgLnpBb/miiCb0Y0mKqlf7Z8ohghbDx+ylDjwzbfIiYxNjH0
+ KBPV+WPHeiFxH1i7xCBAkYODRTwbpVhw+CSkF5YqFHv2ipO0hZR0UppPu4mYaJUn0t
+ iNBCPTgLKXyngS0169ZFnuIQiv+u2ruT9p43531Z90W7AAsvOk6GJo7YaqksJwuYIR
+ XYNYZX9dFPQWrIWCbbv8KP13etVcA216SwNY/yVzjaorDvcwEPedj/68sZnTvFbZ5t
+ J18aqNlJLbEZA==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Christian Marangi
+ <ansuelsmth@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, "Patrick
+ Delaunay" <patrick.delaunay@foss.st.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
+Subject: RE: [PATCH V3 0/3] cmd: env: select: Add output for available
+ environment targets
+Thread-Topic: [PATCH V3 0/3] cmd: env: select: Add output for available
+ environment targets
+Thread-Index: AQHbwRTicAaSbjFs1ESxcWoUNFnGWrPOfcGAgAAp0/D//+cyAIAAi7sQ
+Date: Mon, 12 May 2025 15:15:06 +0000
+Message-ID: <bd2e8c8f75a74a509653351208abf4d8@dh-electronics.com>
+References: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
+ <aCGlPXMozNUty7R-@smile.fi.intel.com>
+ <10712670b2bf422dbda67be449b0107a@dh-electronics.com>
+ <aCGzhJPzGuL2i-mt@smile.fi.intel.com>
+In-Reply-To: <aCGzhJPzGuL2i-mt@smile.fi.intel.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Date: Mon, 12 May 2025 12:12:36 -0300
-From: Cody Eksal <masterr3c0rd@epochal.quest>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Philippe
- Simons <simons.philippe@gmail.com>, Sumit Garg <sumit.garg@kernel.org>,
- linux-sunxi@lists.linux.dev, Tom Rini <trini@konsulko.com>, Jernej Skrabec
- <jernej.skrabec@gmail.com>
-Subject: Re: [PATCH v2 1/6] sunxi: A133: add DRAM init code
-In-Reply-To: <20250511011003.15654-2-andre.przywara@arm.com>
-References: <20250511011003.15654-1-andre.przywara@arm.com>
- <20250511011003.15654-2-andre.przywara@arm.com>
-Message-ID: <20165cde26bb95b5f79d01d37f1f4af2@epochal.quest>
-X-Sender: masterr3c0rd@epochal.quest
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,38 +83,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025/05/10 10:09 pm, Andre Przywara wrote:
-> From: Cody Eksal <masterr3c0rd@epochal.quest>
-> 
-> This adds preliminary support for the DRAM controller in the Allwinner
-> A100/A133 SoCs.
-> This is work in progress, and has rough edges, but works on at least
-> three different boards. It contains support for DDR4 and LPDDR4.
-> 
-> [Andre: formatting fixes, adapt to mainline, drop unused parameters,
-> 	remove struct struct sunxi_mctl_com_reg, hardcode MR registers,
-> 	switch to mctl_check_pattern(), remove simple DRAM check]
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Sent: Monday, May 12, 2025 10:38 AM
+> On Mon, May 12, 2025 at 08:22:19AM +0000, Christoph Niedermaier wrote:
+>> From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+>> Sent: Monday, May 12, 2025 9:38 AM
+>>> On Fri, May 09, 2025 at 09:00:40PM +0200, Christoph Niedermaier wrote:
+>>>> Add the "-l" parameter to the "env select" command to print the availa=
+ble
+>>>> environment targets, convert all argument parsing in the file nvedit.c=
+ to
+>>>> getopt() and check that with unit tests.
+>>>>
+>>>> The first patch converts the parsing of arguments to getopt() for all =
+env
+>>>> commands. The second one adds unit tests for checking the env command.
+>>>> These were used to check the env commands before and after the convers=
+ion.
+>>>> The third patch adds the actual new parameter "-l" for the "env select=
+"
+>>>> command.
+>>>
+>>> What is the binary size increase with this change, please?
+>>
+>> I don't know exactly which binary size I should look at?
+>> I have looked at the object file of nvedit.c:
+>>
+>> I built it with the config dh_imx6_defconfig.
+>>
+>> Before my patches:
+>> $ ls -la cmd/nvedit.o
+>> -rw-r--r-- 1 developer developer 57644 May 12 10:03 cmd/nvedit.o
+>>
+>> After my patches:
+>> $ ls -la cmd/nvedit.o
+>> -rw-r--r-- 1 developer developer 59292 May 12 10:06 cmd/nvedit.o
+>>
+>> So the increase is 1648 Bytes (+2.86%).
+>=20
+> U-Boot binary. And better to use bloat-o-meter script for that, it shows =
+the
+> breakdown in more precise terms.
 
-Thank you Andre for cleaning up my patches. Life has a nasty way of
-getting in the way when it's least convenient.
+With bloat-o-meter it looks like this (before and after my patches):
 
-Signed-off-by: Cody Eksal <masterr3c0rd@epochal.quest>
+./bloat-o-meter -p arm-linux-gnueabihf- u-boot_before u-boot_after
+add/remove: 5/1 grow/shrink: 4/2 up/down: 1152/-652 (500)
+Function                                     old     new   delta
+bdinfo_print_all                               -     404    +404
+__getopt.constprop                             -     292    +292
+substitute                                     -     156    +156
+print_eth                                      -     124    +124
+print_bi_dram                                  -      72     +72
+do_env_default                               116     152     +36
+do_env_import                                424     456     +32
+do_env_print                                 740     764     +24
+do_env_delete                                 92     104     +12
+do_env_export                                336     328      -8
+substitute.lto_priv                          156       -    -156
+do_bdinfo                                    580      92    -488
+Total: Before=3D501681, After=3D502181, chg +0.10%
 
-- Cody
 
-> ---
->  .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |    4 +
->  arch/arm/include/asm/arch-sunxi/dram.h        |    2 +
->  .../include/asm/arch-sunxi/dram_sun50i_a133.h |  230 ++++
->  arch/arm/mach-sunxi/Kconfig                   |  104 +-
->  arch/arm/mach-sunxi/Makefile                  |    2 +
->  arch/arm/mach-sunxi/dram_sun50i_a133.c        | 1204 +++++++++++++++++
->  arch/arm/mach-sunxi/dram_timings/Makefile     |    2 +
->  arch/arm/mach-sunxi/dram_timings/a133_ddr4.c  |   80 ++
->  .../arm/mach-sunxi/dram_timings/a133_lpddr4.c |  102 ++
->  9 files changed, 1722 insertions(+), 8 deletions(-)
->  create mode 100644 arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
->  create mode 100644 arch/arm/mach-sunxi/dram_sun50i_a133.c
->  create mode 100644 arch/arm/mach-sunxi/dram_timings/a133_ddr4.c
->  create mode 100644 arch/arm/mach-sunxi/dram_timings/a133_lpddr4.c
-> 
+Regards
+Christoph
