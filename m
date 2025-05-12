@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8293BC3ABC3
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 14:07:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21457C3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 14:19:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8024C81DD6;
-	Mon, 12 May 2025 16:07:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EE41828BC;
+	Mon, 12 May 2025 16:19:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="stQrUtd2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mip1Fs1a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55ED182162; Mon, 12 May 2025 16:07:29 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id F12EA805D7; Mon, 12 May 2025 16:19:41 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1005800C1
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 16:07:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF26805D7
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 16:19:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7c5b8d13f73so578416585a.0
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 07:07:26 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2d060c62b61so4536814fac.0
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 07:19:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747058845; x=1747663645; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747059578; x=1747664378; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AGd8+9Iq5VSDlh+QUziWF05POUtDYXwcR/pnWd9uuUY=;
- b=stQrUtd2GC/XFhyM1zQWBEC9/M/Yo8zl35wDA1fJhs6tKu49ABHgBgZNSKlqGUnNus
- xAPk76qaPkzi29mXGz2MYp3mlsGlCVkwbOpqAkzJJzLjzw5BnEfTKRV4yHQ1lmCF0ivq
- OUu9GWP3W7IrpISeoUzBo8Dq4SABp6TA80K3I=
+ bh=EGo5ojqT2H/50ZyRpWik93iE6RYOOAI3qMyPJjp7qNQ=;
+ b=Mip1Fs1aiWM8qddVSihxAleLYUBGO+NMEf1fyTX8i/WlPpCwa/gXujP+0tXFUJM0Mx
+ 26to2NbVkCTbjKoJxKWkzR4Voe9ffHsqVYX/np+6JFFNIT6uJQd6EmglIz++IfZfxfuU
+ qdNgEQc1RalmsK2ZBbni9T0gW48JXZnoP5iyc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747058845; x=1747663645;
+ d=1e100.net; s=20230601; t=1747059578; x=1747664378;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AGd8+9Iq5VSDlh+QUziWF05POUtDYXwcR/pnWd9uuUY=;
- b=MFLboJ0rzPvRy0ZvG730Dr3uAIGKAnGyQFuEA3oD+t9XNPc67gNOcy4WowvBvOnRNr
- ZOkqJbG0tbc60H+kdb9SDmYe/Mne6r1mq8JRnqrVTDK3JgbQcAWhy1EwTKOTd47quSSZ
- 7NIjMAPOe9bjB+upXzo5YOmCo6hzj9fLaDK/u4qXCNMDoiR/Q92o6+iBHGfWT38bHDIc
- Zd30nTIHYKXDxJPO01s1CYhU75Wh5HdR9gvtMCPwAxGORmnRkZRLKFdeVWm8h/yN5aYq
- w0OVJwDmUlk2A8ERE3KsAe8B7rTZLDfXzW/N4D09yKZoR56Vox7+mJypDq01IiYp1UQm
- nnAA==
-X-Gm-Message-State: AOJu0YxLh6OpeiCwv68OI9csciJ/EDv2sf1Y+OqHtKdgctmc5X7TIFOV
- ty9xcBD2l0kEeLBxFSj5XkdOk7dE+FUzrIvtq9/+F1e08BxOdrRnZvZo7THQejeGatOKUEigk0f
- 2FkY=
-X-Gm-Gg: ASbGncvaC8U7mDQsbQP/eJyp6TrYKvyo4ffWeuCe20AFLvus0DURm3+BpR1bm3Wnsrk
- X1AuBmrMyfFMC9CFIID62+gMmUWcYs2JvvhRf6jEwGo36lnRetqG37f6ssWtBLWcaj0s2xFpGM2
- q7xsm1Jn8JRtKm3meLslMg2Cbx8q4ESK8kEx1OxRiQShrgHkBNX9D09bXboNKbN4o1NKE7uyAUi
- SyGM7x2KUIywfqpx7qiabgDH4fMxNiUrooi19NfFJSy8V2WeNNfWXRZC6AdxZTChRTnW8Gf3unS
- jmQKgipnKziKLy8pzEaT93wSmMmCIbf9gbi34KhEEe7Gvf3YKFn7pJSRh/H0s41TT/JNIk4SXlE
- Sp9s7v/zwsoYI
-X-Google-Smtp-Source: AGHT+IEtDkkxpKpzAG6AtbcYULdyNPA7+jrEkd6moVjiLNbkHYmb3pXYJN+5nAqrh6tEtpJInDgEaA==
-X-Received: by 2002:a05:6870:a783:b0:296:a67c:d239 with SMTP id
- 586e51a60fabf-2dba42af8bbmr7605088fac.12.1747058832861; 
- Mon, 12 May 2025 07:07:12 -0700 (PDT)
+ bh=EGo5ojqT2H/50ZyRpWik93iE6RYOOAI3qMyPJjp7qNQ=;
+ b=swhyeRNBtWBU4p+J1B2ExcgiIqmkjvZtf2Z6U153bhDeoLTsngkgLhHPBHs92Gen8R
+ bA+WcoFwOYLPvTuqj/tRMABrcNggjB77nfkYIkKR3yuzPP/Lb2zGhMtLtGrcoBOBpHAn
+ wU7lAKoijotVnOGZ6ehSHDXy7Kj5cPa/E60gOaDHX7KbZbGNrl5nJ7fHhXSApbtquvHI
+ tQgyMCa6C/H2X17OefMFo5Z/yVaxwq6PP1Uz58mokHRWHX5HnqNnEdW7lnR06hJ4E6/P
+ wtG9EtaavX+OBbi8Hgn1MqtMhTT19uoCJ7gs72On7NlvhNNzmt1Pdw5REMdJm9Q1P5+S
+ EwOg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUz7JxerUxovwu6U9JNNbKuHUMO/Lda2hbT8Htoo1/qIuz1XfayUfbAmtO/59kYD3GUmwF+VI0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsRlbEaYFGLDrAvqqgFP2KgRv7zS9FwROSw+ocKGiube0siZeQ
+ v1IvmrEksR28WEZCDBxu01uS629t/Vj+3QRUCN5YDphN9TT6MNEwF2ZasXfn/2A=
+X-Gm-Gg: ASbGncvYQxTA0FmamnVvt6Qd09jo4/SQubkT5sOmT40dLdk7gEH645oiO1CwvybMTos
+ x8i53iB32xeRro0+RZgfYQZfOKnKjw9aTfS8ahIb+haWY5JeiCZDNOKqSXOdgWEM4aGvnC+fx3w
+ uyODwwVYAh3mYqRHuJN/LWaV1sFvzb0r0UfmiU8IZAXLRH+eTqPVC/6tcguV4z3mAUbCWsopG7E
+ TPg8/X44WW0wIxyX2h+xrnoB8JfDxHL/KaQRyO3Qzu14FDB1fhgM3Bf1q9KlqnoTzR6otIF0fjZ
+ jAaDd25uBbKGYY2RdgrUZm7gA5ww8l1Z7eHvYkSLKWMmkElr4BIxUsx+pxP/yUH/E07IUqF31WQ
+ hybnkHzwF02bW
+X-Google-Smtp-Source: AGHT+IG3HsXbfILG4x/vPbdMPHeWtrV6NSs/m06SN/pdQYKVUu32fWAGycnpXFpvGO/W5QmF3WiHcw==
+X-Received: by 2002:a05:6870:238c:b0:2d4:c19a:94e5 with SMTP id
+ 586e51a60fabf-2dba454accbmr7373882fac.39.1747059578102; 
+ Mon, 12 May 2025 07:19:38 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60842b0972csm1625237eaf.26.2025.05.12.07.07.11
+ 586e51a60fabf-2dba0b7a1d5sm1819101fac.42.2025.05.12.07.19.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 May 2025 07:07:11 -0700 (PDT)
-Date: Mon, 12 May 2025 08:07:09 -0600
+ Mon, 12 May 2025 07:19:37 -0700 (PDT)
+Date: Mon, 12 May 2025 08:19:34 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 2/4] doc: pytest: Framework for documenting tests and
- document test_000_version
-Message-ID: <20250512140709.GO603748@bill-the-cat>
-References: <20250225205003.2640910-1-trini@konsulko.com>
- <20250507221112.518041-1-trini@konsulko.com>
- <20250507221112.518041-3-trini@konsulko.com>
- <383cc638-2db5-470f-8585-13274a338c6f@cherry.de>
+To: "Baehring, Olaf" <Olaf.Baehring@draeger.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Gaurav Jain <gaurav.jain@nxp.com>, Marek Vasut <marex@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [External] Re: arm:, imx:, caam: [PATCH] bugfix CAAM error on
+ startup
+Message-ID: <20250512141934.GP603748@bill-the-cat>
+References: <BE1P281MB229278535DE4B55BD7240B14E18D2@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
+ <a0971d75-fb68-476a-9d65-025584231859@gmx.de>
+ <BE1P281MB22929674BBA49DDCF59D404CE18AA@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
+ <20250509150126.GI603748@bill-the-cat>
+ <BE1P281MB22924D99EB000FDBDF295A85E197A@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nrk1BVR6KZ/T852O"
+ protocol="application/pgp-signature"; boundary="Rsmn1HG2LHj0lOJP"
 Content-Disposition: inline
-In-Reply-To: <383cc638-2db5-470f-8585-13274a338c6f@cherry.de>
+In-Reply-To: <BE1P281MB22924D99EB000FDBDF295A85E197A@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,152 +106,98 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---nrk1BVR6KZ/T852O
-Content-Type: text/plain; charset=us-ascii
+--Rsmn1HG2LHj0lOJP
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 12, 2025 at 11:12:50AM +0200, Quentin Schulz wrote:
+On Mon, May 12, 2025 at 05:39:30AM +0000, Baehring, Olaf wrote:
+
+> Internal
+>=20
 > Hi Tom,
 >=20
-> On 5/8/25 12:08 AM, Tom Rini wrote:
-> > In order to easily document pytests, we need to include the autodoc
-> > extension. We also need to make sure that for building the docs, CI
-> > includes pytest and that we have PYTHONPATH configured such that it will
-> > find all of the tests and related files. Finally, we need to have our
-> > comments in the test file by in proper pydoc format in order to be
-> > included in the output.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> sorry,  this has been added by our mail system. Next time I will post fro=
+m my home PC.
+> Of course, as this code is open source, this fix should also be published=
+ to the open source community.
+> So, let my confirm this.
+
+Thanks for clarifying!
+
+>=20
+> Best regards,
+> Olaf
+>=20
+>=20
+> -----Original Message-----
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Friday, May 9, 2025 5:01 PM
+> To: Baehring, Olaf <Olaf.Baehring@draeger.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>; Gaurav Jain <gaurav.jain@nx=
+p.com>; Marek Vasut <marex@denx.de>; Peng Fan <peng.fan@nxp.com>; Simon Gla=
+ss <sjg@chromium.org>; u-boot@lists.denx.de
+> Subject: [External] Re: arm:, imx:, caam: [PATCH] bugfix CAAM error on st=
+artup
+>=20
+> On Fri, May 09, 2025 at 09:40:44AM +0000, Baehring, Olaf wrote:
+>=20
+> > Internal
+> >
+> > In rare cases U-Boot returns an error message when intantiating the
+> > RNG of the CAAM device:
+> > =E2=80=9CSEC0:  RNG4 SH0 instantiation failed with error 0xffffffff=E2=
+=80=9D
+> > This  means, that even when the CAAM device reports a finished
+> > descriptor, none is found in the output ring.
+> > This might be caused by a missing cache invalidation before reading
+> > the memory of the output ring This patch moves the cache invalidation
+> > of the output ring from start of the job to immediately after the
+> > notification from hardware where the output ring will be read.
+> >
+> > Signed-off-by: Baehring, Olaf <olaf.baehring@draeger.com>
 > > ---
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Cc: Simon Glass <sjg@chromium.org>
+> >
+> >  drivers/crypto/fsl/jr.c | 30 +++++++++++++++++-------------
+> > drivers/crypto/fsl/jr.h |  4 ----
+> >  2 files changed, 17 insertions(+), 17 deletions(-)
+>=20
+> You're starting the email by saying "Internal" and then there's:
+> [snip]
 > > ---
-> >   .azure-pipelines.yml                    |  2 +-
-> >   .gitlab-ci.yml                          |  2 +-
-> >   Makefile                                |  3 ++-
-> >   doc/conf.py                             |  2 +-
-> >   doc/develop/pytest/index.rst            |  8 ++++++++
-> >   doc/develop/pytest/test_000_version.rst |  8 ++++++++
-> >   test/py/tests/test_000_version.py       | 10 ++++++----
-> >   7 files changed, 27 insertions(+), 8 deletions(-)
-> >   create mode 100644 doc/develop/pytest/test_000_version.rst
-> >=20
-> > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > index 5e1938b05262..9c136513bb9e 100644
-> > --- a/.azure-pipelines.yml
-> > +++ b/.azure-pipelines.yml
-> > @@ -92,7 +92,7 @@ stages:
-> >             set -e
-> >             python3 -m venv /tmp/venvhtml
-> >             . /tmp/venvhtml/bin/activate
-> > -          pip install -r doc/sphinx/requirements.txt
-> > +          pip install -r doc/sphinx/requirements.txt pytest
+> > This communication contains confidential information. If you are not th=
+e intended recipient please return this email to the sender and delete it f=
+rom your records.
+> >
+> > Diese Nachricht enthaelt vertrauliche Informationen. Sollten Sie nicht =
+der beabsichtigte Empfaenger dieser E-mail sein, senden Sie bitte diese an =
+den Absender zurueck und loeschen Sie die E-mail aus Ihrem System.
 >=20
-> Shouldn't we force a specific version of pytest like we would if it were
-> part of doc/sphinx/requirements.txt?
-
-It's a good question. I don't know and I didn't want to drag the whole
-of test/py/requirements.txt here nor have to worry about the pin in 2
-places. I am hoping that for documentation needs this will be OK.
-
+> So please confirm if you are intending to publish this fix to the open so=
+urce community, or not. Thanks.
 >=20
-> >             make htmldocs KDOC_WERROR=3D1
-> >             make infodocs
-> > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > index 6f11331514b8..7aadd5d8b735 100644
-> > --- a/.gitlab-ci.yml
-> > +++ b/.gitlab-ci.yml
-> > @@ -164,7 +164,7 @@ docs:
-> >     script:
-> >       - python3 -m venv /tmp/venvhtml
-> >       - . /tmp/venvhtml/bin/activate
-> > -    - pip install -r doc/sphinx/requirements.txt
-> > +    - pip install -r doc/sphinx/requirements.txt pytest
-> >       - make htmldocs KDOC_WERROR=3D1
-> >       - make infodocs
-> > diff --git a/Makefile b/Makefile
-> > index 15c7e633b874..bd136a48982a 100644
-> > --- a/Makefile
-> > +++ b/Makefile
-> > @@ -2448,7 +2448,8 @@ DOC_TARGETS :=3D xmldocs latexdocs pdfdocs htmldo=
-cs epubdocs cleandocs \
-> >   	       linkcheckdocs dochelp refcheckdocs texinfodocs infodocs
-> >   PHONY +=3D $(DOC_TARGETS)
-> >   $(DOC_TARGETS): scripts_basic FORCE
-> > -	$(Q)$(MAKE) $(build)=3Ddoc $@
-> > +	$(Q)PYTHONPATH=3D$(srctree)/test/py/tests:$(srctree)/test/py \
-> > +	$(MAKE) $(build)=3Ddoc $@
-> >   PHONY +=3D checkstack ubootrelease ubootversion
-> > diff --git a/doc/conf.py b/doc/conf.py
-> > index 3cb9b2bb65e5..84d028feda83 100644
-> > --- a/doc/conf.py
-> > +++ b/doc/conf.py
-> > @@ -48,7 +48,7 @@ extensions =3D ['kerneldoc', 'rstFlatTable', 'kernel_=
-include',
-> >                 'kfigure', 'sphinx.ext.ifconfig', # 'automarkup',
-> >                 'maintainers_include', 'sphinx.ext.autosectionlabel',
-> >                 'kernel_abi', 'kernel_feat', 'sphinx-prompt',
-> > -              'sphinx_reredirects' ]
-> > +              'sphinx_reredirects', 'sphinx.ext.autodoc' ]
-> >   #
-> >   # cdomain is badly broken in Sphinx 3+.  Leaving it out generates *mo=
-st*
-> > diff --git a/doc/develop/pytest/index.rst b/doc/develop/pytest/index.rst
-> > index 435d84fc619f..ca45e157d3be 100644
-> > --- a/doc/develop/pytest/index.rst
-> > +++ b/doc/develop/pytest/index.rst
-> > @@ -10,3 +10,11 @@ General
-> >      :maxdepth: 1
-> >      usage
-> > +
-> > +Individual tests
-> > +----------------
-> > +
-> > +.. toctree::
-> > +   :maxdepth: 1
-> > +
-> > +   test_000_version
->=20
-> Can I recommend using a glob here to avoid having to constantly modify the
-> index.rst whenever a new file needs to be added to it?
->=20
-> .. toctree::
->    :maxdepth: 1
->    :glob:
->=20
->    test_*
->=20
-> for example, c.f. https://www.sphinx-doc.org/en/master/usage/restructured=
-text/directives.html#directive-option-toctree-glob
-
-Oh neat. Yes, that should be done instead. I wasn't expecting Heinrich
-to pick it all up so quick, do you want to post a patch or should I do
-it and Suggested-by you? Thanks!
-
->=20
-> Cheers,
-> Quentin
+> --
+> Tom
 
 --=20
 Tom
 
---nrk1BVR6KZ/T852O
+--Rsmn1HG2LHj0lOJP
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgiAIoACgkQFHw5/5Y0
-tyyZlQv/S7+04Uds4bCpCShB27t9KyyQsG2uE+GcyRoSvzozQj/hDtoWGrlbn1ta
-FRLNrWKMqxYb/004wXuus3TSTAKeSed7HVCkDYgHBYZ3ubE/0PV+HOkZkJIeIg1p
-r3xt4cnjTtB3dYLboSr+fCO+NkqG8AIcnA2Jtn1bbDhr+/s2qIwlYkrAilhqoMkN
-sjRd3Hc+QrL8ZMmt2PhrSMTeX2+1f9uOvow2aZd35W2jo4t2rh+AdxjZWDwX6GGV
-Ln0D0c0Wn06WuXTL3Y2/AWyCLyZ1SWz1Gi+KRcC1OdbqGvPdS16sW+9JpKP4LJ3p
-PeeigV/H2qMVn242bmS1RA7pu/9T9mg/qiZGWUrUiDQ4pKumRzFsWvlsib/JUqeQ
-d9tYde++4Bjxrg/SLvpB3nz5ePT4BIvumH4pmqxHoWaUOMV/JMbZ9XbYFOgtSKpN
-kHoeouzI0o1VX/tyUZHQfHTk91e3BiBv3MSuIODKL8KS6KOZ5evDr9d5VwaCsU/w
-q2TF2Pz5
-=w2IP
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgiA3MACgkQFHw5/5Y0
+tyxqHAv+MxAFZ0Hxi+sZpHsgUK31X1ZXxNe+2yexznr2MDTliUTGFHG5Kegbft95
+93UuFsywcGHgUzcpJezoBpjGO8MOHcyKslwa+ZeD/TcQR57jdhTQrrcz7GJCq/B2
+cNDe2P6t5lX32LZ00XfvxVW+HuHRdoSrnDUcoJHUfjsUkXqvISAK9klE0JNWsEq+
+Wj2fYD6eaoXLi0JZjqXonc/G4w746YYVRm8333VcWYIt/Nj+CP6UpdZ5Tn3WZk0v
+3451uUBVjiuZeZbb6P+0uPNCLrKaW1VylhVaopwHjm4Rele+e5kOZtQzSPlF+kH5
+jupV8ddPN8pQVAUDDi24JhHlf21m5UL6Q4+dwa+CPkgnMTyuhRps+u9Tc5387mIG
+g9tctxvdACsSdvCjbsQWnCLkCD7yHi9Le+rVMCD7dUkCRFws44Og7XL3ipiivGDl
+r2a73P+LJKUDfvMDKw2JCW2ecxNKexO0BpYOkogzqo1hDScofLA5oldScDXClX+H
+Kmp+jXQR
+=eYqb
 -----END PGP SIGNATURE-----
 
---nrk1BVR6KZ/T852O--
+--Rsmn1HG2LHj0lOJP--
