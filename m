@@ -4,161 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC77FC3ABBC
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 09:12:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB521C3ABBC
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 09:21:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7C0E805D7;
-	Mon, 12 May 2025 11:12:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31F9C805D7;
+	Mon, 12 May 2025 11:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Pqezf45l";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="RIarr1Aq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E1728091A; Mon, 12 May 2025 11:12:55 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
+ id 851F28091A; Mon, 12 May 2025 11:21:40 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on2062b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::62b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C188180050
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 11:12:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2B1380050
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 11:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EPC6V2b144Pazmk3Wj0RIpcXlt1jFBggfKGAnZ9viMpTU4bpSu/QEkbo+cvQvnUKC/NbvvD4vopfMvleHU3MjyGFsoi0VvI0RRPofPRyO+XlFUBupU2dQZxwRvBi0l13qQprIg2ZSMbkCn6YBS2w8vzWX3uDktMQufPNAWmq7F3K0m3TIr+4+r7mJ+/WKO5TRqn+XWv1y82JJk7hM5+WF+Fla9rqnOts/93y46AaLrveyELe5PSsBB3GoGuemjSRlGySQL90miVgsh2pMvLVInsOcuoAzRwM43XutcL02ru08wvYK3Wy79gs9IGBect/At2UI23jffU1WBEd/5iPIA==
+ b=sx4arxfCOHvgJC4x8/wk1ssUSTuqBxDMy5nkW8jHVuaI1x2QT7V2rsd+hDGE9AuPej5EmBNJPXJUszC6GTt+Juk3GvlAo8qlcwTbkEo9akD5JP9QfUJR4owLV2uOIwCEWmnEPEiqb0WmzMpDOXMIhi5ZOWidHJlbPS0LD2EoUy/g/xz61XBb+YGec2v6ha406eozUuhk3IuS0+EYwtN4g8JtQax2PTimfpPCMaZgElEMquddjmmq+BOSTDD0tSSUeCC1yiagmVWPYSz69dwWaDbDIQgGtnuPREOPHD3rK8dBSHNfvAlVozoo+ZzW2r7mJk67HasldW0F2WdyHbHA4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nRJ9E5K2tgacEzvKgnuKwQUYKGwSxAvuY+24Rcis0L8=;
- b=BfHLGU+WzPkpMtN7odmqF6PP6gb7xCljAGGrP+NozIro8RfDXTCdvLwM1+6/zfR6ww4/38/8t/XasnIrTpKF1b1xSKbumVk4OTVt7SJquIMxfY13afEWZOyhDioCSYI/HjKYsKW1XSeScwEdtI6AyrHA3eCjOM1eqIs5+iXDRJfdB2DOnNoraYGFaBumX1M0LlMSDpEiFcDO/IDjTh0KbyBDOAObcgXkbdgfk9d8CEbYTofenVmX1WKoZEdnnMPtxfICicuR8xggfmJ5b9rhrdkb66UxF47DvSQ56HTZWJ2A5E3UXkoVrwXgXZL78Ix2QyM4K/24N6EuOuTW9AIa0g==
+ bh=2UZ5Ap+hEY6E5AO4GD5/xKpnvv9rux6jh2VxT0lrFRs=;
+ b=WGrrAMbZWb+rREcfXlA4ZEpJh8wFJ5p2yj0Gf97m9gmiOZKNXQtn3/rCecXvccTzryJbxc68ohWn+r0AWzaO/euRPy919oG1qWwcm2kdIYXBG2r9NWULLxA5DCs9DieiO2T2hMscLdttWzNULp1Yh/D9rFU2VuqX4XNdLiCX9TbINJ0QWBi5pFa463rIpMpWJokSF2HdV5YaPQGI8zioChug3p+L3ScM5lXtV41uuk1el8fjEHdUaT7abuPmxmJr8I2cuGUX2lDBJl5wVpevHw7aj7134bTaU50OEOZd0FxDzZWbZwZeXUHBrWQ6ATFxasYZQS2wD5L+2aybKy8vWw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nRJ9E5K2tgacEzvKgnuKwQUYKGwSxAvuY+24Rcis0L8=;
- b=Pqezf45lghcWjvfuoiW9U4A8MYeo9RjT09r7/lbqiOWAf4tJlqvR+hvx34vg+CqHsusHREhdmDr1YU2ZizVZBet+ANd8ssihnPh5vgN7xontgXxYFTxCjBGTNWCpKKjlrw+8ObwNRb0jHGtC00bLFNCHOQ0FIzh+WVGl5a/MML8=
+ bh=2UZ5Ap+hEY6E5AO4GD5/xKpnvv9rux6jh2VxT0lrFRs=;
+ b=RIarr1AqIBZgeJl1+nv32HwoQ6KTZc70N+fxRbNi8b+4u5aIl9HYVm+XaAoHrncuOOn2HTQ6ndlY96QMEZ+Za81l90FzwZBucVA9an14ELJDzFu/EMHOeVxpwQSLwrHV1nosb6agFAFVRSvOWPotr52UBHrBQzLW6uUKulpyoGU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS8PR04MB7943.eurprd04.prod.outlook.com (2603:10a6:20b:2a1::15)
+ by VI2PR04MB10716.eurprd04.prod.outlook.com (2603:10a6:800:270::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.24; Mon, 12 May
- 2025 09:12:51 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.28; Mon, 12 May
+ 2025 09:21:35 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8722.027; Mon, 12 May 2025
- 09:12:51 +0000
-Message-ID: <383cc638-2db5-470f-8585-13274a338c6f@cherry.de>
-Date: Mon, 12 May 2025 11:12:50 +0200
+ 09:21:34 +0000
+Message-ID: <abf4d18b-93c0-4384-ae00-ce19f1a7dbbc@cherry.de>
+Date: Mon, 12 May 2025 11:21:33 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] doc: pytest: Framework for documenting tests and
- document test_000_version
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-References: <20250225205003.2640910-1-trini@konsulko.com>
- <20250507221112.518041-1-trini@konsulko.com>
- <20250507221112.518041-3-trini@konsulko.com>
+Subject: Re: [PATCH v2 1/6] sunxi: A133: add DRAM init code
+To: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Cody Eksal <masterr3c0rd@epochal.quest>,
+ Philippe Simons <simons.philippe@gmail.com>,
+ Sumit Garg <sumit.garg@kernel.org>, linux-sunxi@lists.linux.dev,
+ Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>
+References: <20250511011003.15654-1-andre.przywara@arm.com>
+ <20250511011003.15654-2-andre.przywara@arm.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250507221112.518041-3-trini@konsulko.com>
+In-Reply-To: <20250511011003.15654-2-andre.przywara@arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0234.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e9::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR3P281CA0208.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a5::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB7943:EE_
-X-MS-Office365-Filtering-Correlation-Id: b232c3b2-2adc-468a-e31b-08dd91352bd0
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI2PR04MB10716:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7b5b461b-d774-462b-af47-08dd913663b3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V3ppRHBJSVpuUHVZSGFMOWlGaWl2NnZOQmtvV1BPT1ZjWENjNE0zVm9PdnF4?=
- =?utf-8?B?c0w0S2RGc3BNNEw5SkhsUU5YL3lKaTZ6Z2NGR21MWjJ1V2pQV1pVVGttNnE0?=
- =?utf-8?B?U0JTNmdqV1pyS0hUTVFvcHp4VFlKNWpkUU1na1BPK2d4cVpvQjNTU2w4UEk1?=
- =?utf-8?B?aERWZnVWOVVvOHluMmlSVWo0eUVzUHByaEJFNlZ5RC9hL2hxRXltVWF5c1N1?=
- =?utf-8?B?QjdaVEtHcFp2NEROb1daQ2dHZVMzYmdxZ1JDVCtKZUZHczRZaEt5clBHYmxD?=
- =?utf-8?B?NTR2RXo5ZktMRnFQWHg2endjTkM2QzFYMmNYVW1sN1E4NnJaOGtHdVRMNGVk?=
- =?utf-8?B?ZUg1enlKWGw0dVBCUURHemM1eVVJODErYlNOMHpTTTF2djhVQ3pJZ3NCVmV1?=
- =?utf-8?B?Zkt3dkExZ2hGYTVCWkdXWDJkTXZ3UnFVMlgzVXZZYVduMkhINnprOWZVWmJr?=
- =?utf-8?B?T3U1OUNSOTd4ZGxYS1cyZitWb01CTE8zS2NKczh3NFFreThtL1JqQXJDTEh5?=
- =?utf-8?B?L0swSUVlVnZiaENIbldjNEhiQUpQcTMwa2UzcFo3aGJjVVN4N3J4MmQxL3Uz?=
- =?utf-8?B?NXltQTdsS0FZVUFNUExNejVLM014ZlM3NWlmWW43anhET0l2cEZIaGZiUHZu?=
- =?utf-8?B?RDBJS0JCKzZ4V0ZXU1EyUkpscXI4azhVdjdNcW0vcDhsQXl2QkJTU3JFWGp1?=
- =?utf-8?B?THlMeWhHLzFaRmEyUk55ZzY4NWFVWnNUNHB6ejNqTURQSVZQZ0dhNUZ3SFJQ?=
- =?utf-8?B?ZThybWpTTjlxMkFWVm0wQldrL1hYZng3SHVKSTlhYmFVTUs5S080NzFwWG4v?=
- =?utf-8?B?anNuWVN0UjYrbE5jYTFET05uQ0RkQkxCQkczdmVhdlc1YUhjMlp3bGpXZm9Q?=
- =?utf-8?B?QXh1VjFtbXk1N09yOTFjNnlnZGdkeVJKWCtkVEZPNk9hWmIxanpmbnltUGtB?=
- =?utf-8?B?cVpSZU1CeGhHSlhTcUowZFhIUm9TVEI1ZXpUb1RjTlgwYzJVL0w4QW4zT3FG?=
- =?utf-8?B?SGhsTWk5MTBTSkN0cC9VTjg3UlQzNGRBTHFCQVh5a1hxKzdCbkR1NTdBS3cr?=
- =?utf-8?B?NXl2dmwrWGNEY09lNHBFbVRWRVBnSDNvczlFc1ViaWlSVmtpQ3p1eGU2R3o5?=
- =?utf-8?B?NXc4OFc0KzA4RTRlR3BDSWl3R1hyTWdhSEhQTkdrbHRNdlJVQWg2bHJvVDdx?=
- =?utf-8?B?dTFmeUd0c3k2bnhWaGkwQlhoNGlaSHVoTjZNSUtwM3kxNUhWZXkzL0oyclBZ?=
- =?utf-8?B?cUtYQWdnaWEvUExIYTNjYXZ4bEw0ZzBCWDlQRURjc0VMNUhHVjZtQlRHTHly?=
- =?utf-8?B?RitFOWxiVkdVRU9wY2tqbENSNjFCeGtiL1JHeDlqdE16L0NNbGZVR2xvQzJR?=
- =?utf-8?B?aGtnMm1xSHRFNGdmaE53c1IxTWplNUY2d01Ubmg2ZWdBWDNpS05aQmVyR2lo?=
- =?utf-8?B?M255VnlqMDR4QVQ1Y3VYRU5YeHliVUYxWW44MnpMaTRBT2I0WUpFQnlQRS9O?=
- =?utf-8?B?dFZYc0haSko5eW9Sa2cyZ2NXaWdvLzcrdkFld2xaenc5Sk9odFZHZ3Z3b0tw?=
- =?utf-8?B?cEdOWjRaVEl4WUdUa2o0K0ZzdUtzakVCeHRJak1HT1RUcFR3WVcxOWhWOTRM?=
- =?utf-8?B?NkFnT3JDOEUycFpvcENXaUxQRDdDU0twbWptMzF0YUtvdHdDSzI4VHF0Qkgx?=
- =?utf-8?B?VDgvTTQ5TUl2Z0haQ0lHclUwOU9wRlFXektHSHVwanZSaUUrN0dWZW9NSXdJ?=
- =?utf-8?B?ajk2NjA1c2dhYmhXUzBld0MwWFJsaERDV1ZWdXJaMG81c2dFU3EySVI0c2M0?=
- =?utf-8?Q?0pTRr5DAL9PiPExDw4Xqpg/LOl6jwk6tW+vQg=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dXlRcTdOT3dRV2I1WFZTOTJxRE11ZnJFa28zd0ZoZjUrQjh1cjVFQ3FMWkNX?=
+ =?utf-8?B?MW4zK1JSb3BXZDJFWjkrZ3cxV002S1N6eHk1RUxUZmNjazB0L3o1U1NDR09I?=
+ =?utf-8?B?aFQyVy81YWc3Q21DdmVVbjI5eVJsTHNKTXEvRk02bFZ0bVhBcmR0VlJVYnFj?=
+ =?utf-8?B?M0FraGkyUDJqN08vQ1RCb2ZZcm16anBaYWdMaEZEVFpxZExLbHN3Ryt6VDVR?=
+ =?utf-8?B?Q3ROdmo4WmVsUjArdmpjaWpzQWpRc1pGSlArNkZyR2pxS0wxNnFlcHFWSnZ6?=
+ =?utf-8?B?Z0l2L3dkcW5ZbWV2WVVaVUM2aE1tWWRQQ0JtaWZ6TkdrV09JZC8vZEhZdXVv?=
+ =?utf-8?B?M0R1cWlvb3BlaTNNbTI1akQ4SDFNeDE0T05lcVlHeUJ2WVBFa2xTTzdNc3lB?=
+ =?utf-8?B?eFc0TnphWGlhVEJwVSt6MmNiMG0vU2FjaEU0a2E5NDB4RzVVT25vMnp6TVVq?=
+ =?utf-8?B?Rk0vZ0lHS0JIT0wvMGxDaVMyQnEyWHpqTExLTXZBUG9JL2hGWG1tZzlZT3dM?=
+ =?utf-8?B?c21CeGJkWG1JWE1WMkNrNFN5YVZ3RUg1dWErYlZKbmZyeGlrTXJTQS9LNlhB?=
+ =?utf-8?B?UWNYRFM4Qk9SWHJjNWNqSC9vem9zb3BrRkRFeVV6V2VzbjczQWZTYXhjaWhM?=
+ =?utf-8?B?cmVKMFpPWW5RSldQNjd1NTJoZFZBN094VEFHZVByeUJDcmVldnRpVWNsemJJ?=
+ =?utf-8?B?UGM0dE0vRE1WdG5FcjdQYjIxMjBBdlVZN3RFR21YaXkwTjQrekx3VXZCdkht?=
+ =?utf-8?B?ZTdoV0EzRUY3TS9UYTB0WE1NMHpIQ0N3NzR0M0gxUG84QVpzSlNPcUc5VFVw?=
+ =?utf-8?B?elZyc2RMdEtVVDdldU8zQzIyRVBweTNwcHdKb0VoaWdpRVFaR09RM1lXZktL?=
+ =?utf-8?B?QUFrckszZ3BzMGM5TWt3ZWFmcVlyS3pqcW4xWEYyL281c0xFWHJaaENQcjdI?=
+ =?utf-8?B?czBvbHF5TUpseHNDcGhRU0lDZ1NHVGFnWk41VU1jQnFzTkpxblgxSUhmd0pM?=
+ =?utf-8?B?OStZQnVjOHF0RTJPM2ZKKzkrWWx0TS93ajM0L2g5cSt0aE9TU0FjYWlRcmVE?=
+ =?utf-8?B?a1V6bjdHeWdZZE9TTlZDUkFvL3hYdk9qSjJyd0s1OU44QXZjUy9Pd05GeHVm?=
+ =?utf-8?B?Q3pKQmJKU3IzSlhYY0xxeDhYMzk5bDAvQzNKbFJEVjZyVFRIbU1BSXBCcjhU?=
+ =?utf-8?B?OUI3YVd4bnV1M1dEQ1NXUGk3WFlWL0JsZVZ3VzFDNzF0K1FNK0ZmZlF6em5F?=
+ =?utf-8?B?bjdIaFZrdXp2Yyt3OXBlME5mSkcxSVgrYit1ZVc5cUFIa1RBSVcvSXpaKzRO?=
+ =?utf-8?B?elRMWkNMS1liTGEyZlJzNnRXQ2V3bXI4YkMxSllkVEtIZEJVekdidGNVNjJX?=
+ =?utf-8?B?NWcvN0ZUVXI5U092dUlwMDF6VGUrR0hNLzJ6dXFMMVNRdGpKNm9xY09uNWZx?=
+ =?utf-8?B?UnZ6OGpEckcyaDdXVWVBVE1sN2NETjdRak9EQ2FqZHQ0a1M1Nm05UzFVc2NL?=
+ =?utf-8?B?UjVraDRBem5QR3ZwdFl0S1pSYmFTQ3oyNlA0UHNPeVNtci9TOHFkc2QrdEdm?=
+ =?utf-8?B?a0JGQkJLY04yMHhVU0g5Y2RRbzhUeDZRdnptZ0t1Wk5XZ09iNDF0TFRRS051?=
+ =?utf-8?B?djR1Mm9OYmtBSExxL1NiME9PSjFhbXdSbTU4TkhZUmRCWVk1UzFoa2hYU05R?=
+ =?utf-8?B?MjVCdS9lNnRhV0hwWTNRdUlxd0pHUmFLWmwreXVWVTdEaWVUc3J2Y2VBY3A0?=
+ =?utf-8?B?RHJWRmt4YWVHaVBrRUxsUC9uTDd6cFcxSlpMMExnSkdoZTl6emdja3VrVjk5?=
+ =?utf-8?B?NTA0NW9LcWY2YzVVcWt6eVM0TVlmWkVaYVppYWxRbTBuL0NLcjFBYTJRTkRR?=
+ =?utf-8?B?ZC9Ga3d6cG1vYnI1eW1CSWM5akFuVDFvaU44cGR2WXBkWEdubDVVTE1lYVg5?=
+ =?utf-8?Q?c6A49vosYVc=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7053199007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SWF2dUFWY3ZoWCt3ZEp6ZGRxRkhaU3dWREw2K3o0dEJ5U3JzZFZReGJ2SGVI?=
- =?utf-8?B?bFR2U0Y3elM2N0Y2aDI2WENGZ2RsTGd2MjF6UHk3UVR6bWFidnVzR1IzMnNy?=
- =?utf-8?B?TVNjTjcvRlo3dFI4dXdUeFpQU3JBTG9yWlMwZXB2UDZZYnVpb0pmNGNUU1ll?=
- =?utf-8?B?djV0bEZxNE1wZ2J4MHJTUzljekZLRzRwcm9YK1loSElJYWFic0k4U1ZIMjEv?=
- =?utf-8?B?M2hmdkh2cnZUaitRKzI2T2svNnk5U0g0dzA3d2lzS2k0OCs2Rmtka21jL3Zv?=
- =?utf-8?B?eEtVRnlCVUpTdWNBNUJwN05qVWxvd0JKbWI0MkRxNDNQMzEraTUrOHFFeWdq?=
- =?utf-8?B?WUVpclpKR0ZyaW9Yb1lMSVpia2hGdkRSeVFES3k3bjZSVEtOUlNkREUvcmJ2?=
- =?utf-8?B?RlVNZUVCOTk2emUvQUduNlV5YzZ3WjhvaytqWnkycTB3ZXpaaGU3YThxdDMz?=
- =?utf-8?B?L0piYS9BWUc4dkFPT0daNEtRWHZ6TmFKTWZYQVN1cnJkQkVqQlFDbGdZSy96?=
- =?utf-8?B?Z3VuNzBrRE9hcDl0SEhXT1RDeXZhL1k5a2xvUytoVTFoR25vN1JaUFNqQk9P?=
- =?utf-8?B?T1BRbStYUTY0ZkNQSmJmSldlamNEZmhmR1JzSzBNSWVGTHRCTHZaODlVZDVa?=
- =?utf-8?B?VDZMa0Rpdm9BMXRIZ2F2bzg0OU9SZGpjZWFta0JQeXlQNGVHNGZ5QmxYSWJF?=
- =?utf-8?B?ZzNSZDhpWnlEYzc0UDRWd1VZdTljOS9uMUFUYk9TcEs4czlyWHVKQjRZc2hm?=
- =?utf-8?B?Mk1ML0RSemhPY2tPZjUyUitydTdFWlZKMXdDTHJRWG9aYkMrbEI5QVVXd0h4?=
- =?utf-8?B?cGhuYnV4ZnRiczFoTVc3UXFVSjhKVUh5Z3lpY2VneUtSWFR3OVUzZEV0OUFx?=
- =?utf-8?B?UjJwTXFKRWd0TEQyVTV1SUVqMXlIZXpaUzYxa1hIaVZwUEFXRHcyZ1lVYWE5?=
- =?utf-8?B?U05mZzRtVE9ldGlaSlZ1RGVJM21uVHYwYlg0aWpYUkZpUkl2c0Y3SjNKb3FQ?=
- =?utf-8?B?M00xUldLN05KM3J3ais3WXQ5SzhzWlVNRWsxUGRTell3b1g5bEo2b3RrQVdl?=
- =?utf-8?B?K0hMcDJSdXBNdFpRTGw3Ym9LVkI5Q3hvTlVmdTZiSklqQ1V5b1ZsQ0dpSDM0?=
- =?utf-8?B?NkpkQXVGMzhqVlRITE9KTE9vNzhEOHdQMmFmaWdqMlB6WXJybFhsNFpJYklD?=
- =?utf-8?B?SnNuZk43Zk85YkFpMU82QzQ1SjV3VVdha25OanVvTEEwUVBMWHVwL05EekpG?=
- =?utf-8?B?TnR4Y0U3Q3QvZ3gvSndCeTRubkRJZi8waEZneUZkWklSNC9sMXhTdC9uazQ1?=
- =?utf-8?B?ZmxVWkJXWUVoWlRWZFJMaUxUaVkvbVZHdFNDTkYzVEt3SlF3NS9qem9XSWkx?=
- =?utf-8?B?WkI2dlJIUG5ZVFl6OGdnQWs2czE1RjFNc1Zvekdad3FIcmFxdGhRc1pVSnRL?=
- =?utf-8?B?d0NGUW9mZm9oeG9WUVZueWdNd1ZQQzVPTEdVcUVGWStRdzk4RC9NcWg5Z1A1?=
- =?utf-8?B?Rk1rN0p0NUpjbGNlaXZYOUluNVp1WG4zUTY4R292MU9sREhtdHU4QXpPSHJz?=
- =?utf-8?B?eE5xTm01bzZ1WFdZc0Z1MTd1eXJ3NUVwdiszYnNuUFc5OGlBTzVhbERjYVBu?=
- =?utf-8?B?Y2haTm1aRG0vUVpSaVNwVjl4cko3aHlHN0xvNXBMbTU0c2lBL0Q3YnhNcDdk?=
- =?utf-8?B?enZQRTk4cEJkUnhmV2xaOGYzSDE5NnlIeTFDK1BISDkxUkQycmZ4Yzh6VHRO?=
- =?utf-8?B?MzBJV0NhTUR5TDVqWlkvWXFFVHdGb2l5RHFKSmp3dlMzU3VscFg5eFBDRmE4?=
- =?utf-8?B?QjMxLzR5NTVYR1M2eHhFd3FEcXVISENzbmF1SERQaVkyZWo4Rm13NGwxZElP?=
- =?utf-8?B?bExCUXNkVThoV1E4WmNrd1lsemRWOElNcWdkaVUzSmJyZlhUWUNLNTBoYzBB?=
- =?utf-8?B?MTlDQ1RNOXhPRXZlN3k0Z21GRVlwWEdHUVJMN282Mk45ZS9ZTHBNZnkvNkVR?=
- =?utf-8?B?YWVlcFViaTBvcVNqcDArejZGUmNiMzNUZHZ3cXVFTWVTWVU4UmhwSjRLcEhL?=
- =?utf-8?B?QUZvU25SaHpzQmRDdEY4OWRUd2g4T1BhWmY3UVZ1RnVDcGFJVU5WZGRaSjZF?=
- =?utf-8?B?MmJUeTBuNWVDTEtIUHlHU0tnWnEyTVFleVhqdEVOSXFFUzA0bGMyc1FIZU9D?=
- =?utf-8?B?UXc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Ui9zOHljQ1FpdU9LMWk1VDRqc3gzeUJpYzA0eVNlQ2RZU0UzRmRuMXVaSXFq?=
+ =?utf-8?B?MVMzaDdYQlU3QUhuU1htd2hpblR3Y0ZKUkhYeklJUEkvVi9CZHpsbkRNVExU?=
+ =?utf-8?B?MjBKLzlnTHlSeVk1bU5NU3cxUHljeXB0WmdnVlYza05acmtoY2ZOcFJVY2NR?=
+ =?utf-8?B?RE0wZ05qbGhYNWtNR1hJUUxOMUdUWWM4NVRsRHNUTVNyUHFtb2s1YmYvMEV6?=
+ =?utf-8?B?UEFzdnFrVnZvcTdXQ2ZSNll6NFJTRnlmUTg0TXJuYXJWWlFrelUrN0RoYkFC?=
+ =?utf-8?B?Q3VubFhRYzNwT2tNY0dPYWYvdE82VzFaUWRkUUZKU3J6c2NvcXh6NFA1LzdF?=
+ =?utf-8?B?cng3Z0ZRY3MybmpRdGJxamlPcGpZR1RLUktIUTJleXBIbTgvVm5oLyswMHNa?=
+ =?utf-8?B?TXZ4RVVRQ21xNFpHc2J0QUVWd05pL2ViZDdxSGJGdG5TbHBUbW5XL2ZTczZ2?=
+ =?utf-8?B?bjNBRDlma2gxeW95bllQMlE5TFhqRi9RZWN4ZC9LWnJDU3ZLUlp2SGJRdjNC?=
+ =?utf-8?B?TGo2V2R1bHgxV1lQdXdWTy8wSkQ2QWFPSkpoNlZ0TGRVN3NKNERlYlUyUEIv?=
+ =?utf-8?B?MUp3VXM4U0JIWEYrVmViNFplTW96dUdicFFXbXBLUTJieXpuVEpIWTZSeHo5?=
+ =?utf-8?B?YnpuYnN3eWI3WDJqeXpSTjlmelpBTDRKeUk1bmRZWWZDWlRxK0IwMWJDZTB0?=
+ =?utf-8?B?TmZ1b0h2RlIySkhEOXc2ZDlhc0ovY2RIemd5UDYyNXg3cVVPOFoyVEpQdVJG?=
+ =?utf-8?B?UkY1NEdILzlra1ZCcW1SSjR4d1FrNjM0S0dhYzhyaStBdEpHcFdOV2hUdjNa?=
+ =?utf-8?B?Y3JlWWhNdzhIbWsrMjdwOW5TRU5ZdWlyaHhSV3pReGFnYUVENGtnR29ablo2?=
+ =?utf-8?B?bXRvdHN0NEZLUElkeFRjMVFrbi9jd0l6L2htWk12ekpvaFRibTRIaVgwYkJL?=
+ =?utf-8?B?d09NcnYrOXptVHdqWWpKRHlMV2pva2VIUXMyRTVPb2cvbUh3VE9ucFRIRkh5?=
+ =?utf-8?B?MVJ1cUZTR084ejdRUlJKYjYwV1l3V1R0WFgrdmpvNmROa3BOVkZsYWVmUmhn?=
+ =?utf-8?B?cDJkc0lIdkVXVmpIU1IvK2VSdVFCU0kwMm8ra3p0bGZreEVBNEVhUFBidGRN?=
+ =?utf-8?B?RFl3N1drdjloR3Urb3J3VUJqUS8rdzNjcm1qdzZQdlp0emFrRGJ2OHI5Tldr?=
+ =?utf-8?B?ZjRiM1ovL0ZhQzZpSGo5cHV6WnNuNTc4SWgrV1hvZkNoa3picWJ4blI0YVU1?=
+ =?utf-8?B?dTdJVWIvWHg1WDZmWklrckdFMXZnR2I2cUNweGJla1k2M2Z2R2tRaWd1aGZt?=
+ =?utf-8?B?NCtzNE85Ym1NcDdNakd3WlZnQ2U0d0Z5M1JUSTRyVEJBSENCM2tuSWF0VGFS?=
+ =?utf-8?B?dGYzRytubW5BVkk0aXo1WHMzRjBEVENCNnBmbk5NL0tMbWZOaG1uS0hqNTVB?=
+ =?utf-8?B?aDB0RWRWa0xGUHpmSXZ3ZXYyZ3R3NzVCZFpzWUR1NzhUKzRiQ2MrVmIyOVhz?=
+ =?utf-8?B?bER1eEFNZ2tIUlFvVWdqWjFVSDcrZkZqakswSEF4U1BOZVBqNU5USUUvUnNB?=
+ =?utf-8?B?dUJ0RlZJTktuM0RsODhlMURqcEEybGNsMlovQTMxMG01ZEtzM3hQM2xSaW9D?=
+ =?utf-8?B?azkva0VEMytiMjlQK0FWVTlYWVFqMWIweC9HY050MU0vbXF4Tnh4SWsxSVJl?=
+ =?utf-8?B?ajl2ekQwa2h6NnczMkwySUtlUFExdGxveGRmMEhpY3JITFBtTG9pcEFWeUg3?=
+ =?utf-8?B?MDUwYk1PWFB4dzlzd3lyeURWY2VuTVQ2K2txKzdmL004RnB0YVUrRVI0NFcz?=
+ =?utf-8?B?aFJlUDEzcUdNK0RmWnBTUUlxVVo1VDJVYTVFU2NFVU5ZSkw2Z3J2Mk9jL01H?=
+ =?utf-8?B?RkFnR2RHa1pWZktZN1dXeXN2UkRFWFZGRytTUzV1UUZhZ240Qkd5ekZ5NFdS?=
+ =?utf-8?B?NzBCamdmZkord0ZkVlQ1TDI5N3BoVWV5b0RBSEZBVnZYQUpYR09wSk5EY1Vt?=
+ =?utf-8?B?OE5HOS9BQ1cwbTVtUmJIWDFpQVIzRVRkSzk3UGVxTEQyNGkrU2ZpYVlxa1FN?=
+ =?utf-8?B?d2hpVnZYQUlKYllaZzMxTVgzU20zS09yVHlodXVOSHczbTRiTkpSWlRuZzB0?=
+ =?utf-8?B?c1k2OEFEdDA1TFBaY1FVSHdxK0ZyeEFoK25jcks1ODhReXBXMFNSVW9peXZ3?=
+ =?utf-8?B?dGc9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b232c3b2-2adc-468a-e31b-08dd91352bd0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b5b461b-d774-462b-af47-08dd913663b3
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2025 09:12:51.2294 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2025 09:21:34.4921 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RXSdQteL5vpUOKjS/K74XG3ULzmjvdlaRT3TF7Oh8RcWMe3BUsdpw/VdP0X/zWl6Xx5gi7R43plM2/nvLgrVnr6iJzmC7ab+o/kZ2U/1G3s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7943
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4fKVOhfys8eFxH87WsjDr0PeQZ049cSjCQdSuUuKjMiUw2hsc39x7jXdugDaJDsyFdA273q6TVkP8z+7emQhABHy/c1YYTDywwarqAq8pKE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10716
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,116 +179,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Andre,
 
-On 5/8/25 12:08 AM, Tom Rini wrote:
-> In order to easily document pytests, we need to include the autodoc
-> extension. We also need to make sure that for building the docs, CI
-> includes pytest and that we have PYTHONPATH configured such that it will
-> find all of the tests and related files. Finally, we need to have our
-> comments in the test file by in proper pydoc format in order to be
-> included in the output.
+On 5/11/25 3:09 AM, Andre Przywara wrote:
+> From: Cody Eksal <masterr3c0rd@epochal.quest>
 > 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->   .azure-pipelines.yml                    |  2 +-
->   .gitlab-ci.yml                          |  2 +-
->   Makefile                                |  3 ++-
->   doc/conf.py                             |  2 +-
->   doc/develop/pytest/index.rst            |  8 ++++++++
->   doc/develop/pytest/test_000_version.rst |  8 ++++++++
->   test/py/tests/test_000_version.py       | 10 ++++++----
->   7 files changed, 27 insertions(+), 8 deletions(-)
->   create mode 100644 doc/develop/pytest/test_000_version.rst
+> This adds preliminary support for the DRAM controller in the Allwinner
+> A100/A133 SoCs.
+> This is work in progress, and has rough edges, but works on at least
+> three different boards. It contains support for DDR4 and LPDDR4.
 > 
-> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> index 5e1938b05262..9c136513bb9e 100644
-> --- a/.azure-pipelines.yml
-> +++ b/.azure-pipelines.yml
-> @@ -92,7 +92,7 @@ stages:
->             set -e
->             python3 -m venv /tmp/venvhtml
->             . /tmp/venvhtml/bin/activate
-> -          pip install -r doc/sphinx/requirements.txt
-> +          pip install -r doc/sphinx/requirements.txt pytest
+> [Andre: formatting fixes, adapt to mainline, drop unused parameters,
+> 	remove struct struct sunxi_mctl_com_reg, hardcode MR registers,
+> 	switch to mctl_check_pattern(), remove simple DRAM check]
 
-Shouldn't we force a specific version of pytest like we would if it were 
-part of doc/sphinx/requirements.txt?
-
->             make htmldocs KDOC_WERROR=1
->             make infodocs
->   
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 6f11331514b8..7aadd5d8b735 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -164,7 +164,7 @@ docs:
->     script:
->       - python3 -m venv /tmp/venvhtml
->       - . /tmp/venvhtml/bin/activate
-> -    - pip install -r doc/sphinx/requirements.txt
-> +    - pip install -r doc/sphinx/requirements.txt pytest
->       - make htmldocs KDOC_WERROR=1
->       - make infodocs
->   
-> diff --git a/Makefile b/Makefile
-> index 15c7e633b874..bd136a48982a 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -2448,7 +2448,8 @@ DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs epubdocs cleandocs \
->   	       linkcheckdocs dochelp refcheckdocs texinfodocs infodocs
->   PHONY += $(DOC_TARGETS)
->   $(DOC_TARGETS): scripts_basic FORCE
-> -	$(Q)$(MAKE) $(build)=doc $@
-> +	$(Q)PYTHONPATH=$(srctree)/test/py/tests:$(srctree)/test/py \
-> +	$(MAKE) $(build)=doc $@
->   
->   PHONY += checkstack ubootrelease ubootversion
->   
-> diff --git a/doc/conf.py b/doc/conf.py
-> index 3cb9b2bb65e5..84d028feda83 100644
-> --- a/doc/conf.py
-> +++ b/doc/conf.py
-> @@ -48,7 +48,7 @@ extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
->                 'kfigure', 'sphinx.ext.ifconfig', # 'automarkup',
->                 'maintainers_include', 'sphinx.ext.autosectionlabel',
->                 'kernel_abi', 'kernel_feat', 'sphinx-prompt',
-> -              'sphinx_reredirects' ]
-> +              'sphinx_reredirects', 'sphinx.ext.autodoc' ]
->   
->   #
->   # cdomain is badly broken in Sphinx 3+.  Leaving it out generates *most*
-> diff --git a/doc/develop/pytest/index.rst b/doc/develop/pytest/index.rst
-> index 435d84fc619f..ca45e157d3be 100644
-> --- a/doc/develop/pytest/index.rst
-> +++ b/doc/develop/pytest/index.rst
-> @@ -10,3 +10,11 @@ General
->      :maxdepth: 1
->   
->      usage
-> +
-> +Individual tests
-> +----------------
-> +
-> +.. toctree::
-> +   :maxdepth: 1
-> +
-> +   test_000_version
-
-Can I recommend using a glob here to avoid having to constantly modify 
-the index.rst whenever a new file needs to be added to it?
-
-.. toctree::
-    :maxdepth: 1
-    :glob:
-
-    test_*
-
-for example, c.f. 
-https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-option-toctree-glob
+Missing Cody's and your Signed-off-by.
 
 Cheers,
 Quentin
