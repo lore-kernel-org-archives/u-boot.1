@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5626DC3ABC3
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 16:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C92C3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 16:12:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9D3480C83;
-	Mon, 12 May 2025 18:11:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42C5180C83;
+	Mon, 12 May 2025 18:12:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qjCBTGuG";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bEFSIDId";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gIxY1Xny";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="n34/+hDB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68F1C81DD6; Mon, 12 May 2025 18:11:04 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 91F8981DD6; Mon, 12 May 2025 18:11:59 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75646805D7
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 18:11:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73555805D7
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 18:11:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Zx4N61Bscz9t0P;
- Mon, 12 May 2025 18:11:02 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Zx4P90vd8z9stB;
+ Mon, 12 May 2025 18:11:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747066262;
+ s=mail20150812; t=1747066317;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=iIPsBBpMg26MAxLx+NmiJ0imwt2mANKMQ2eFV2BCB1w=;
- b=qjCBTGuGB4W8/05jjou8DVqHvE6VcYSPUqJPU6k5+qFjTPn91sNCuAjge9R4uyldxEiZjx
- hmGQcoIMySmkEHJf3kexDFq9XVRuVeLrvevmx98R7UncQ4BEVdtI5R8il7gVBtvckO32qV
- etKH0PIV1VHFaPRqVSQRTUUHPXHC+TDSFsHFCM83AigL1get2K/Ot9V3fB8ycq/+jmCa6p
- kWqfoajT1zHzu1wfJ9W3qV9/mg+5o9bslvmLaiAVFehaH2FjpEMRs1VH2uOy06pOloLQBh
- UOvZJF3iyhqrH14ivKhSrmGC/cF+Lq4Z0VieVyNR3AFG7Hb5eV+V8ojzLqmkXg==
+ bh=6GT4pVPGub7tDbc58g9+FPybqSJRKW5wJe3U8q8RXcU=;
+ b=gIxY1Xnym2APo+KqHIjHKfyPvNBwn466iFweNRiPsalw9U2B+RDiGfrc3B+efsMNdGVE9F
+ uWOKUHaVaphN2m9zQEkfORlqYEB1lDVI5LH9PRhHVnBhdyMI+5bLPmJIJci/AupcBzOORp
+ flyL6cTcozPH2fABgJimAKFv1w8xo/F3SSej62u4IrINcJDC56KvyibljxfEN4GWhSvyaE
+ MxZBF3q/R83yJPQd5SY0r+9Yv4Eej0xVNilBiwo8Rh5ATvQUf+XhyzlKaErISPN9GapxNR
+ M4gzAEOL/1HtzHfhjVk8VEn5yZwLcL9I5qIHLWNI4tt2b4ACqiVx8htVaYhhZA==
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747066259;
+ s=mail20150812; t=1747066315;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=iIPsBBpMg26MAxLx+NmiJ0imwt2mANKMQ2eFV2BCB1w=;
- b=bEFSIDIdBMRxiOZd3Xk0th49MxRuwYY45SL7EVyQKIO9IAcbI7JuNXDztLVmPRmG/if6+M
- J1Px7ZkkDROrzsdHuDOCPcTcap3iewjbffu7gz/zdOyGyY1xspQnLtuwNwFqZCz6Of2CL5
- +VVNY2vt3bIZZ3F+ZENiehO2tcOJQ98AaPa8WRnNjbeNv4gkMW396nyddphUqjBxdpN0Ji
- ugIyoPra+WnZwCQD6ejq5/bc8+ouDxgY4DKlfSu65hmCISzd08rOcuczZMBc8bDgawYAYh
- n55ymnDxXpJBgLk5IpBjvmHup073D4yy6rgwfABwgABw5/UXA0ab6QOH+VAZkw==
+ bh=6GT4pVPGub7tDbc58g9+FPybqSJRKW5wJe3U8q8RXcU=;
+ b=n34/+hDB2rWIBC9Kbm2EvQYDvqIjobmGyOuv/+QDiucqS56stA4fIdoO2MBL4vkz6rbep+
+ mQr+72OJW7rMcYdHrzaeiSfPHcaC7h/SaEtVJesbeP0LZEDBwVKNhmj/SAieNMr53wHK21
+ S/3v1QSk+523M1ajKZS3X2Tajkk4pGP9hXc4lempGn++MyeK6UHpCgdNy35y1kQ5RMIG+a
+ v4GDlL+ecCX5Kq1sCPHoMWCCdRX2ti/hTkU7PELp1te4yu7W8kPFs8zQJeS85iySTwUodD
+ U9cnZ377X/XF/32EnJqRO/ziD2nmBhf9uRSR2Wiyax8f7h1SYSICBS0y6xXaSg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sam Edwards <cfsworks@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] ARM: Align image end to 8 bytes to fit DT alignment
-Date: Mon, 12 May 2025 18:10:28 +0200
-Message-ID: <20250512161033.146396-1-marek.vasut@mailbox.org>
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32: Drop unnecessary space
+Date: Mon, 12 May 2025 18:11:37 +0200
+Message-ID: <20250512161146.146658-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: hhbc9buo7szhqr6m8b9zg44o9h6mhzhn
-X-MBO-RS-ID: 8eab160bbc25a819b58
-X-Rspamd-Queue-Id: 4Zx4N61Bscz9t0P
+X-MBO-RS-META: ebfkdpkztm9g8nukfibbxq3sfh5jos7u
+X-MBO-RS-ID: 566b448db9e56e532bc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,42 +84,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Align U-Boot image end to 8 bytes to make sure DT alignment requirement
-is fulfilled. This fixes a possible failure in fdt_find_separate() in
-case the U-Boot image is aligned to 4 Bytes and DT is appended at the
-end at already 8 Byte aligned offset.
+Drop a space after tab, no functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Sam Edwards <cfsworks@gmail.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- arch/arm/cpu/u-boot.lds | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index 817e7a983ae..b2109e03ce3 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -153,14 +153,14 @@ SECTIONS
- 		__efi_runtime_rel_stop = .;
- 	}
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+index 4f1d783649b..caeeeca863c 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+@@ -67,7 +67,7 @@
+ #define BOOTROM_PARAM_ADDR	0x2FFC0078
+ #define BOOTROM_MODE_MASK	GENMASK(15, 0)
+ #define BOOTROM_MODE_SHIFT	0
+-#define BOOTROM_INSTANCE_MASK	 GENMASK(31, 16)
++#define BOOTROM_INSTANCE_MASK	GENMASK(31, 16)
+ #define BOOTROM_INSTANCE_SHIFT	16
  
--	. = ALIGN(4);
-+	. = ALIGN(8);
- 	__image_copy_end = .;
- 
- 	/*
- 	 * if CONFIG_USE_ARCH_MEMSET is not selected __bss_end - __bss_start
- 	 * needs to be a multiple of 4 and we overlay .bss with .rel.dyn
- 	 */
--	.rel.dyn ALIGN(4) : {
-+	.rel.dyn ALIGN(8) : {
- 		__rel_dyn_start = .;
- 		*(.rel*)
- 		__rel_dyn_end = .;
+ /* Device Part Number (RPN) = OTP_DATA1 lower 8 bits */
 -- 
 2.47.2
 
