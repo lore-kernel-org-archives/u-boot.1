@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E104DC3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 21:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A31C3ABC3
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 21:51:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61FB380C83;
-	Mon, 12 May 2025 23:50:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B9D8A80C83;
+	Mon, 12 May 2025 23:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZBUZXsqy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bFwRLwXP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6CCD82162; Mon, 12 May 2025 23:50:29 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 9ADCF82162; Mon, 12 May 2025 23:51:01 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF3DC80584
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 23:50:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ECD680584
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 23:50:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-549b116321aso5669620e87.3
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 14:50:27 -0700 (PDT)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-326c1f3655eso37115481fa.1
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 14:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747086627; x=1747691427; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1747086659; x=1747691459; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bBIEMT3BVC9SiNDpMT5UfcPzgwekV2bf6Sg5tpdIAqE=;
- b=ZBUZXsqya69KqxXR00bq+wVLe2flcQqAAoLc/lZPi3nlNsbs5laIgggV902izyNXsj
- sBYMuHZvV0MIJQz12mX8RpPMNj5y5ly2lJlmj/t15/ohIBPEiJZZfShMV1hPs/R99Dxq
- /CD+tfXZEnf1soJAoUor5zUhzSu/7Inb5w2xNnN+10swwQa7+t3VElkkEMElO5I5Zq9X
- LrT0a2YkHdfE9UwL9fyOpsdmHh1O+ifgSXC4CKIeMhVhidNf9RN7MkaSXDtCqrYXhjOP
- B/bpAWC+jhrH+591uoIo3Je5u7nOez+xsvJxOHHUFwlADs/ozVuqVeUclkx3Jzuwk2Nm
- DCog==
+ bh=GBOqia1vmAOv9KBlNpt4kCRYYIksV4qohhk7cCwEM8k=;
+ b=bFwRLwXPzoDKRmqsMK3uWB0LPyVOu2ydCeRWUzwQ7RDvJKhOZU8SPeekCuTXGztwaR
+ yz0uL2iC9r+qNvKvXU4BhfsHzJ6cFQG6LUoeHbLEDk89ZA5/eDVHPLP0gCqXkwjVXriJ
+ GRizX32DvYjXQd6oCowfSNr79B3SGUQm5b7QQw06wmlM+9fOGBC+z7RLnbrcH6uj+X+n
+ 2V2J/f6PDlMZsHvj2wFRdUF5cc1iGL1sI6A7weraYuYw4q61TjtIpyAHhZApm4Emlt00
+ cUPhKrEiRivQeWCBMibzSFQpx6q8OHDajwXm2GOYZhOgOiMjY6TbY5YnJHGSXmT3KObB
+ krsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747086627; x=1747691427;
+ d=1e100.net; s=20230601; t=1747086659; x=1747691459;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bBIEMT3BVC9SiNDpMT5UfcPzgwekV2bf6Sg5tpdIAqE=;
- b=qAIZL9GZarM6IjFYk28qdSXtQ1Lle5jwy21R7VzMNFVnKOjYMY/C+sLOx2RhF8cFST
- DqxOehZAI/sbVGvnP6u+mi0VUeNgT8kf3Pv9LNOoK94bePn40X0QW9+B/tTqEdH9Gcz5
- 9JnzbOrjUp1sn1OWtX+uP5jEHQBIea1ldVUH6DBxJ7sRrZF8vy8DE5iOLMtEHT41b4pN
- +BIZSI4+Mu/jtEzi5TLmIJNvWRk7Jvcy6ysFw/wv3o6rOxyJmSorHTGXx4a/hXQTQoQl
- C/hgV6Hn89sxryGlUtjW26fMVHXmLLkxQhY5mgqeMdjG2/YFIRU1I57HXeCbQCY3HO7X
- dSpA==
-X-Gm-Message-State: AOJu0YyjV74n8pNdO+pEAl1QMoEBM/G9PqeOot15mIhrgxo2BCm7BOqq
- 6emlefxukyMuXHRwNr60wCLkcj9j0zYmvr9nhB1SXD1E+Sapqqu+yXKKudQhwLCYpIJrh9nmox8
- J9wNlfaSuPz9jP8uWlCo2VAFBZZtLVw==
-X-Gm-Gg: ASbGnct0tDUuAKzgRiw07k+m7NJGJN2mwTQHt9+KVAZ4kj+wYt7jrmEsNsiy5iub6Y3
- SQyYRosZZ+6e7Rnr+FPRqatSVddUnUgy7oInGd54lghJ49eOEF6SpMIpAaXRRDXQpCIMb8FjYft
- 0SQ7Z4kGL0tCdosaUmj7h0FXWbnMcu2cHgiVkmK9wkhiqKjhsJTZOozpXTlPodGv/2
-X-Google-Smtp-Source: AGHT+IFqKdy1BYTy2mCsyjk6tnBVJUPE6reNeq7H+9SNUaQFwWeUfhwDEur7r0AL//Otgr2sBIkDrTV3h6JoDP+Xx4o=
-X-Received: by 2002:a05:6512:6408:b0:54e:a2f8:73e2 with SMTP id
- 2adb3069b0e04-54fc67c47damr4622051e87.18.1747086626718; Mon, 12 May 2025
- 14:50:26 -0700 (PDT)
+ bh=GBOqia1vmAOv9KBlNpt4kCRYYIksV4qohhk7cCwEM8k=;
+ b=YjzXvmEfQ8qRCQ5qTN78xMNfsxGftp8yp/HxSvIJXnOQaJNgxfqpLOdCgN+bYlOjYq
+ Yg4IoEAgPRs+e8S1wi6lelgxDOg5tl2uzsGzc9osc8scGRTFgYGOHRPOG2IoEY3OHluK
+ DqqQGQAUtZ8wDwWhzf38M9n+NO+mpLDFuThY/mtNfhPMCIrsK2xN6Q58i6ibl1Ty9vJK
+ OxSykODhNtWP3LpppX0COsd6nA4LnxrDa/1ysk9WLT0Om9R8Xokbd3NWFqDhbyGWFZp7
+ t2byVogGjTXsyxcUdmt9OLnDIR6n80FGd82l9Fg1HEr8BJpNGoyoXuZ7i0YlmhuINCDR
+ tL8w==
+X-Gm-Message-State: AOJu0Yzsq+Ic82Y85xvj28ZuDF63GC8GXdhh3RYSgALQqd9BfXS5/NHs
+ 2XvvWe8OLKGiWUH1tK4xaVkkLyyL4bElpY64rDRVMKTF/8wSHWactcRT/igZbq3YHBIsNOASUvk
+ pVPaAtJaxBZUXXHgQo29gz5rLMLk=
+X-Gm-Gg: ASbGncvNP3aKr2ulzebm7TBmQxqMFDBtORHGc1FRxaa7s46x8hPPDWB6u5rUWhOysKq
+ AqRG54LwBp3KQCDKD2yVxly4B2Q6fpbFrByuaQXSmJ1PkQyBOeLG47KDnBtejvC4z/tJtNbagPN
+ e9iiTBl4ix9TNijxHLe8PF33ql5eK72OQZ1R/rL0gYGNgwhuJFWYomeLBdQGVezu0d
+X-Google-Smtp-Source: AGHT+IGzioiCJDl1rzquaPudB9SXi7Vo5oARNKBRauZ0ApATVqiA9y8ibYVUMpSpXEBbbsTYRKhdt8G++aoB/9oLFD8=
+X-Received: by 2002:a05:651c:3226:b0:30b:f42b:72f6 with SMTP id
+ 38308e7fff4ca-326c467d22amr62897371fa.32.1747086658772; Mon, 12 May 2025
+ 14:50:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250505213733.4114398-1-tharvey@gateworks.com>
-In-Reply-To: <20250505213733.4114398-1-tharvey@gateworks.com>
+References: <20250428095945.1432389-1-heiko.thiery@gmail.com>
+In-Reply-To: <20250428095945.1432389-1-heiko.thiery@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 12 May 2025 18:50:15 -0300
-X-Gm-Features: AX0GCFuS6wjxz4UOjOcH0TCVJ7Qy4AK0B_tf_fv_txdgEHec9xRt-Tf_J4jC9tQ
-Message-ID: <CAOMZO5A8XsUVbi7MO+Xa-cDMWwea0yF+oTE3dCQGcY9mDmeLZQ@mail.gmail.com>
-Subject: Re: [PATCH] imx95_evk: enable PCI early
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+Date: Mon, 12 May 2025 18:50:46 -0300
+X-Gm-Features: AX0GCFto7F-lELlfiCY6pXp9zq5Y6Fcs65DzzrwCu6PMJ393VOIQp19YjEEAauo
+Message-ID: <CAOMZO5CPMpym1QyytnQAzTgWGFTnz-cJMC-W752+_UDJqkB-Lw@mail.gmail.com>
+Subject: Re: [PATCH] net: fsl_enetc: fix imdio register calculation
+To: Heiko Thiery <heiko.thiery@gmail.com>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>, 
+ Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Tim Harvey <tharvey@gateworks.com>, Michael Walle <mwalle@kernel.org>,
+ Thomas Schaefer <thomas.schaefer@kontron.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,11 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, May 5, 2025 at 6:37=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
-rote:
+On Mon, Apr 28, 2025 at 7:00=E2=80=AFAM Heiko Thiery <heiko.thiery@gmail.co=
+m> wrote:
 >
-> Enable PCI early as the NETC device is an PCI ECAM device.
+> From: Thomas Schaefer <thomas.schaefer@kontron.com>
 >
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> With commit cc4e8af2c552, fsl_enetc register accessors have been split to
+> handle different register offsets on different SoCs. However, for
+> internal MDIO register calculation, only ENETC_PM_IMDIO_BASE was fixed
+> without adding the SoC specific MAC register offset.
+>
+> As a result, the network support for the Kontron SMARC-sAL28 and
+> probably other boards based on the LS1028A CPU is broken.
+>
+> Add the SoC specific MAC register offset to calculation of imdio.priv to
+> fix this.
+>
+> Fixes: cc4e8af2c552 ("net: fsl_enetc: Split register accessors")
+> Signed-off-by: Thomas Schaefer <thomas.schaefer@kontron.com>
+> Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
 
 Applied, thanks.
