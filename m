@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF92C3ABC3
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 13:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99170C3ABCD
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 13:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFD4682A33;
-	Mon, 12 May 2025 15:08:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17E6182A1C;
+	Mon, 12 May 2025 15:08:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iad86BtS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DgzI3Bdd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87C9C82A1C; Mon, 12 May 2025 15:08:31 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 699F58294C; Mon, 12 May 2025 15:08:34 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A28A782162
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 15:08:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88E82826AA
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 15:08:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5fbf0324faaso9234623a12.1
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 06:08:29 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ad238c68b35so408073366b.1
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 06:08:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1747055309; x=1747660109; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1747055312; x=1747660112; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r6bemLQMyoppUGFmMqQ2jZZ+GXVK8YNEHDsbGq+hd4g=;
- b=iad86BtSP31qvJiROwx00Lk1Yb0fqn5m+dDI57/uenobCoX9mk+wWNLhNeprmcudAD
- WchI9wgojCItJPVWnjxhODi1lVavnCM3MGf961MlP67jdu6BwHmG5iTndMhOvW/Kh+60
- O64fmHdCwveZbh7WaA0PBlY48IQfW26OtHfHc=
+ bh=mYVI6gst+CgqnFyY2dMifa/8EIUJ+64cepLh5aDbKiI=;
+ b=DgzI3BddKM+jLt/ycLfosUqien1N0On6BG08FK7MVM1OIZ2oZk5npJQ0TjxzFUjOwb
+ 96229atAtyNS/qe0wUj4KHc/heAGQa1+ozyRpdag2UTqnkpNUXXymC6M5Nr+HQejYuwF
+ sPajppqsn0C787o0SrSi6XSx52wrMJXvXZ+gA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747055309; x=1747660109;
+ d=1e100.net; s=20230601; t=1747055312; x=1747660112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r6bemLQMyoppUGFmMqQ2jZZ+GXVK8YNEHDsbGq+hd4g=;
- b=Tv9/3eALAIkVPRUrhuyOUmzX0ZPZfMdk5eWAtRg0WXNkdiUdJx9h0cn3CNpsib9kLf
- rWCJBG/Rrl39SG7ThCg/m1Ivt6fudtxela6NTXb/yuGZba+AegjQrFGZ7T3XIQdAKtZq
- VJWbHxzUBYO9p/GWKTpyTYlkIia+4Uc/9GyBdfrOQHa4u+XnCXii3Upvfcc72LmXJPsH
- SfKGU7IRBBuqLiwc5veVAxBkYkqiiTH1EMuYpNFN5CRZjV5YbSybzpgvs/v9nPjTIxyM
- fkoS4zGHq4Ik/xJxRsj9b9Xx3g+vl27NMt4jAvnrnUMkdSIYfhCkB0dIJNrl1Gcu5HEA
- bGOw==
-X-Gm-Message-State: AOJu0Yxdon8ExeSDR7Q3f5CxSXxmYV351stCGaUCsjsTSOUuZiUQQr+m
- DctWb8wbCtvP90FpxXYobGK7uLdOC2g21Vnsi2i9cpcVrdRyBJtFmFhh7fPcEfUbh5oRf2IyQ6g
- 97ilXMIHlcxjETweQyzeglVKKFkzB4ex7t5N6RphJoF6KAc5FqJQq6er3og==
-X-Gm-Gg: ASbGncsVegun2o3vgLd6FXkqnEaygRLGKrFNZH5NDx60RyaILBDwxt/V0GtkgQjmX8b
- pmDw//Yz9471KZ6DAL0ow9y//jNFcyBHASDoqVfaUgBm99OS31xNooNu/u1olFKNsf8rkFomGqg
- 6yEn7be5rIgXInsrGHMc1rNMy4MnV4TeTLyA==
-X-Google-Smtp-Source: AGHT+IE+l3D/9ktqvIvBCvwOESGHEDoXBM5DfT6Gv34YPa/0VB4a8xKlL3gfLGH9V+5j2QYfwM2zXQGXHKBGMaMwPEo=
-X-Received: by 2002:a05:6402:1ecc:b0:5f7:f55a:e5c8 with SMTP id
- 4fb4d7f45d1cf-5fca07ed72cmr9592819a12.21.1747055308969; Mon, 12 May 2025
- 06:08:28 -0700 (PDT)
+ bh=mYVI6gst+CgqnFyY2dMifa/8EIUJ+64cepLh5aDbKiI=;
+ b=XOBj3i2ci7sU9W/5YFiunIFoY6RBxiLANJzEvwFAToWZWFPp4pNNwq3f/IctywrW++
+ xmSkJ49ZKsf5Is5RPF/JAWRRfVGpOJ1j3k+UPkfsYHIqp9HyHqnPOo+1Z98nFWLz+v2V
+ LnG8NKAmpe3T9PHuraQ5jZOiC6FDbxrESwqy1ddd9aU4oqyWeXaKsP66JVepFLASp/NL
+ tqZQxcJ+usA+2LWv3Y+CbE3Ud3gmQEOS11rzfMG0zOW0AiU+D4L+GC1/TV+qDm7ASVCf
+ GrBipqSkJ7YAjEqAOa9X97/RiP0QBsp6TFaarmRET6dgNqqO6Ml/U8mKhcnXx8Oiwq17
+ qq4g==
+X-Gm-Message-State: AOJu0Yw/ZxiBgOAMifGo/ty2eju5O8ZpMTpXUI6nQ9TRhh9HmaoDy/1o
+ z6YwMBhfvB9GBxy2lhRVNfi/zTX6Jllt7e6X73MvH7scYvkgp0ONRgr1hUgAfZtyFmBZc7xuOHD
+ rdNKCJxfG+06hsTA8PhayWKWiurrzt7pn8Pkw
+X-Gm-Gg: ASbGncsyy9h5Nk6RS9e91uwue7iWLmxaM72safSDsvhAbaVecF5c2X5eLE1KbgTkW8P
+ J5R6ZecWeHC6h0HEb8v+pOGepkQeqBNoqN5jPnClL6Y/wQ+xg4gmpdldm5z9JZp8XuuPG5HZMtL
+ RdOkmZZMF15B04XbwjbjLUbgXeP0vtJoHWKKJt4/fOOQNP
+X-Google-Smtp-Source: AGHT+IEq7CIe8gdsBv/N4j7ksF9IFPgpWCo0vWDoHLKimQbqMwKMcwVPIcDVNmlzqfq8qklxBf41nQoOYQDsO9RAi5A=
+X-Received: by 2002:a17:906:2317:b0:ad2:1cba:cf78 with SMTP id
+ a640c23a62f3a-ad21cbad577mr930723666b.45.1747055312025; Mon, 12 May 2025
+ 06:08:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250512115028.1783305-1-m-shah@ti.com>
- <20250512115028.1783305-2-m-shah@ti.com>
-In-Reply-To: <20250512115028.1783305-2-m-shah@ti.com>
+ <20250512115028.1783305-3-m-shah@ti.com>
+In-Reply-To: <20250512115028.1783305-3-m-shah@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 12 May 2025 15:08:16 +0200
-X-Gm-Features: AX0GCFveeDlbwBDp3urNyvP3ty9URjN6RTcOIgeJTQhlGmLcn9t5OULomBvvQq8
-Message-ID: <CAFLszThHJVnKXBRhpa-3yfrtRF+HWFCaKHbEENo5Sb-R5W1AKA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] tools: binman: control.py: Propagate bootph-*
- properties to supernodes
+Date: Mon, 12 May 2025 15:08:17 +0200
+X-Gm-Features: AX0GCFvZLv0xNYd1oUGXDQCGszSU3LU5hKgPGopMISk-JA1QRUWZqDE1yfHZH4A
+Message-ID: <CAFLszTiPSitCeYZUdf_=_w9NMmbtfKjjvztw-dMQKYXRxUqQFQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] tools: binman: ftest.py: Add testcase for bootph-*
+ propagation
 To: Moteen Shah <m-shah@ti.com>
 Cc: u-boot@lists.denx.de, trini@konsulko.com, alpernebiyasak@gmail.com, 
  quentin.schulz@cherry.de, m-chawdhry@ti.com, n-francis@ti.com, 
@@ -91,14 +91,16 @@ X-Virus-Status: Clean
 
 On Mon, 12 May 2025 at 13:50, Moteen Shah <m-shah@ti.com> wrote:
 >
-> Add a function to scan through all the nodes in the device-tree
-> for bootph-* property. If found, propagate it to all of its parent
-> nodes up the hierarchy.
+> Add a testcase to ensure that scan_and_prop_bootph() actually
+> propagates bootph-* properties to supernodes.
 >
 > Signed-off-by: Moteen Shah <m-shah@ti.com>
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->  tools/binman/control.py | 51 +++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 51 insertions(+)
+>  tools/binman/ftest.py                 | 22 ++++++++++++++++++++++
+>  tools/binman/test/347_bootph_prop.dts | 19 +++++++++++++++++++
+>  2 files changed, 41 insertions(+)
+>  create mode 100644 tools/binman/test/347_bootph_prop.dts
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
