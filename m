@@ -4,76 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C32C3ABCD
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 12:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2649CC3ABC3
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 12:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66F6A826AA;
-	Mon, 12 May 2025 14:38:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F02E82162;
+	Mon, 12 May 2025 14:39:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LvZWS5eQ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC18682162; Mon, 12 May 2025 10:18:45 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8969F805D7
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 10:18:43 +0200 (CEST)
+ id 50FE6826AA; Mon, 12 May 2025 14:39:54 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 8043380050
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 14:39:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sycamoremoon376@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5fcc96b6a64so3868611a12.0
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 01:18:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747037923; x=1747642723; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=l0tdQl2kjoQXm29BfNLAWPTNLQ0d/SZrR+WKnn86w18=;
- b=LvZWS5eQuTJ0Dkl7eUiwK2A06BMC1q6TCnyymrzfFQWsvAooAZspR7QZUVAzJVQGnx
- p9sMpogWJJWdOs3gFQcI2AIA0RowZIFlaaN/Decfly2RzmDqULAtAZU5PQdvojhGuoRz
- NKaNRw/zAor6CIbkv3IKg+p20N+XnJZTEHrfRCqtSXohMBa0RJjiPFBOYQALeQ0Uyasv
- D2smFLdJp9m1BekPH+Sm3AIFDWuHfU2AL46ciTZmIpyqkzH2e0Zoswew9rnNt5bqDUf2
- q5gyEZUd/ZfcXLiE7/pEu/AQtoasw+5TaMhm/rIR97e6VwCj6h92pP1/iY6oq7/r20dZ
- Wo9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747037923; x=1747642723;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=l0tdQl2kjoQXm29BfNLAWPTNLQ0d/SZrR+WKnn86w18=;
- b=raEmS9ImLUUE7YbKyMl6MCF2pz0EBsDwmHMSMdyy1reKMgbmqXEQeMApZFIpv91qjj
- sIkoSiX2JAzL6Pn/2XqH0OKagFRwM96Tbub5LHYS+DepUpSkZOk1L5tSh0pa5dRcX2zs
- 2VtQZrJRs69sRUyYDumWZ3UxCSK5rkwtjE+t2fQA3fTTaVdEYKchXzVO6uaZXjoZ2gQq
- rCOzXy2C+0rmTwTN+MezHjdviiUo48BX7toYm7i7mHZynpgJONNS1xZJvLHkz2o6nD3w
- SFshefCHoM9KBHOTgSkxEsteJbo3lCov6Z6CtJSehiI1h2WdNCFnffGhzggEqCUSAxTi
- 6c7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXxWECXe6xXdtG4TgJAiY8guAtoVbN1A+G5tyVQLaYCLUaNPW2ij/b3aaaGQcEHN9L+URrqcRo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOYkC7G2THoAr5EXn/P+FY4m8UkvrvubQ2CNNW7io/zAZjs2AG
- UBjYHWT2y46SRZZm3fG5+CKHeakZlu6cdJOONipAdjpHDzXn8/z9Gje1Ool+yN+EWsxXTL609ZJ
- bfFXH39ivIY5H8IiFEEplGuPDfiB6sg0Q
-X-Gm-Gg: ASbGnctNlOybd8tNKHQ9A074FcWkbTwlDH/f8u0ivOm7fpfG5FPy8wtNHoLqoRD5j9+
- 9YcxCxwJh8R9qV/hk8dHzW6iGIK3ba5kuLobrEEDsgcQbAiK9g9XeqJN/YeJ+JfqwvLe2DuFLUJ
- NvE+9j+hXq7PPACizaXIVpbsirwoz5wjBo7Vw=
-X-Google-Smtp-Source: AGHT+IEBWfGGVwn/UXVQktk2/f6rpuXf9yKVxyHzd6HdYZk3Jx1UQqJv1n6nWZkzkHg2PZDBUVCRvownrNrSR/p6QvE=
-X-Received: by 2002:a05:6402:40cc:b0:5e6:17e6:9510 with SMTP id
- 4fb4d7f45d1cf-5fca0730860mr9938349a12.6.1747037922193; Mon, 12 May 2025
- 01:18:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E140C150C;
+ Mon, 12 May 2025 05:39:39 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C226C3F673;
+ Mon, 12 May 2025 05:39:49 -0700 (PDT)
+Date: Mon, 12 May 2025 13:39:41 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, <u-boot@lists.denx.de>, Yixun
+ Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>, Jernej Skrabec
+ <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>,
+ <linux-sunxi@lists.linux.dev>
+Subject: Re: [PATCH v2 2/3] sunxi: add "fake" FEL pin support
+Message-ID: <20250512133941.23462a23@minigeek.lan>
+In-Reply-To: <11fe3319-8a26-47b7-873e-774140c146f6@cherry.de>
+References: <20250417000539.3709-1-andre.przywara@arm.com>
+ <20250417000539.3709-3-andre.przywara@arm.com>
+ <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
+ <20250421222939.69832f73@minigeek.lan>
+ <e2d354dd-4be6-45b0-b263-7112b9320692@cherry.de>
+ <20250422131121.7a491909@donnerap.manchester.arm.com>
+ <11fe3319-8a26-47b7-873e-774140c146f6@cherry.de>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-From: Zixian Zeng <sycamoremoon376@gmail.com>
-Date: Mon, 12 May 2025 16:18:31 +0800
-X-Gm-Features: AX0GCFuBTDNEUSlG1yyrMPOqFUEM0j8E0-lzXvPkRBTpme33N1uvPZ892ASUQr0
-Message-ID: <CAKyUbwVJR4=J=Xnt=OSt8b=A6+U+QLH+jn8zEBZfjvA8BYax2Q@mail.gmail.com>
-Subject: Re: [PATCH v1] arm: add call to cleanup_before_linux for go command
-To: Tom Rini <trini@konsulko.com>
-Cc: Bryan Brattlof <bb@ti.com>, "Raghavendra, Vignesh" <vigneshr@ti.com>,
- Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Mon, 12 May 2025 14:38:13 +0200
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,100 +64,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25/04/30 01:32PM, Tom Rini wrote:
-> On Wed, Apr 30, 2025 at 02:26:04PM -0500, Bryan Brattlof wrote:
-> > On April 30, 2025 thus sayeth Tom Rini:
-> > > On Wed, Apr 30, 2025 at 10:56:27PM +0530, Raghavendra, Vignesh wrote:
-> > > >
-> > > >
-> > > > On 4/30/2025 10:01 PM, Tom Rini wrote:
-> > > > > On Wed, Apr 30, 2025 at 11:29:04AM -0500, Bryan Brattlof wrote:
-> > > > >> On April 30, 2025 thus sayeth Anshul Dalal:
-> > > > >>> As discussed here[1], the go command causes undefined behavior when used
-> > > > >>> for running custom OSes since the icache might hold outdated data. OSes
-> > > > >>> usually also expect the MMU to be disabled upon execution.
-> > > > >>>
-> > > > >>> Therefore this patch adds a call to cleanup_before_linux before we jump
-> > > > >>> to the loaded program/os which disables both the caches and the MMU.
-> > > > >>> This makes the go command's behavior consistent with riscv platforms.
-> > > > >>>
-> > > > >>
-> > > > >> I know quite a few other OSes are beginning to use U-Boot (QNX,
-> > > > >> GreenHills or all the other RTOSes) each with their own requirements
-> > > > >> from the bootloader. I'm curious if we should make boot* a little more
-> > > > >> generic rather than abuse the 'go' command.
-> > > >
-> > > > VXworks has its own:
-> > > > https://docs.u-boot.org/en/stable/usage/os/vxworks.html
-> > > >
-> > > > I suppose QNX and others should ideally have their own cmds as needed.
-> > >
-> > > Well, what's the QNX output file format (options?) again?
-> >
-> > I've only ever seen outputs in compressed binary formats but I've been
-> > told there are tools to produce an ELF for the simulators
-> >
-> > >
-> > > > > Well, that's what bootelf is for :)
-> > > > >
-> > > >
-> > > > And if its not an elf but some .bin file "go" cmd should be used in
-> > > > conjunction with "cache" cmd here to flush/disable cache, I guess?
-> > >
-> > > Well, what exactly are we talking about? Is this an "in theory" or some
-> > > project(s) which exist today?
-> > >
-> >
-> > I noticed this thread mainly because of the number of RTOS people asking
-> > me about low level stuff U-Boot and TF-A is doing. I haven't seen any
-> > 'In-Production' type bugs but I wouldn't be surprised if U-Boot is being
-> > used in their CI environments today.
->
-> A number of RTOSes are already supported via "bootm". If they've stopped
-> working (as we don't have tests in CI for them) I'd love patches to fix
-> and at least instructions on how to make it fail somewhere, ideally
-> QEMU.
->
-> > > There's a whole lot of reasons for either a legacy header and bootm or a
-> > > not-legacy FIT image. The "go" command is for the "U-Boot is a debugger"
-> > > side of the world, not how you should kick off some OS/application in
-> > > production. It is all of the "this is dangerous" idioms.
-> > >
-> > > > If so, we should probably update the docs for this cmd appropriately so
-> > > > as to avoid end users overloading like what RISC-V did?
-> > >
-> > > Yes, we should clarify things as needed and unwind, most likely, what
-> > > RISC-V is doing. But not blindly so as perhaps there's now, sigh, a
-> > > production / in-the-wild case here and we're now in a sticky spot.
-> >
-> > I like the idea of boot${OS} flags if only to standardize the interface
-> > of how each OS should boot. I worry about situation where custom
-> > scripting is being used to boot in production rather than stdboot
->
-> Right. And that's part of why in this day and age, regular uses should
-> not be using "go". We've had and supported RTOSes via "bootm" for what
-> amounts to forever. We've had "bootelf" for arbitrary things for ages
-> too (and in turn, your custom app/RTOS/whatever using the normal bare
-> metal ELF linker script, target, etc makes it easier on that side too).
-> In more recent times, having a whatever project spit out an EFI binary
-> instead is also possible and done sometimes.
->
-It might be a novice question, sorry..
+On Tue, 22 Apr 2025 16:30:04 +0200
+Quentin Schulz <quentin.schulz@cherry.de> wrote:
 
-I'm using uboot on riscv, and noticed that the "bootelf" command just
-jumps to the entry point of the ELF file.  What if I want to boot
-multiple harts?
+Hi Quentin,
 
-bootm command calls "smp_call_functions" to change global variables
-`gd->arch.ipi` which restores function addr and arguments
-and sends IPI to each hart, but "bootelf" does not.
+just found this in my draft folder. It's not really related to this
+patch anymore, but you seemed to be interested, and I am happy to
+explain some of the specialities for sunxi in U-Boot, since it differs
+in many things from other platforms.
+So see below...
 
-It might not be a problem on other arches such as x86, if I recall
-correctly, x86 can specify the function address when sending IPI.
+> Hi Andre,
+> 
+> On 4/22/25 2:11 PM, Andre Przywara wrote:
+> > On Tue, 22 Apr 2025 12:49:40 +0200
+> > Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > 
+> > Hi,
+> >   
+> >> Hi Andre and Yixun Lan,
+> >>
+> >> On 4/21/25 11:29 PM, Andre Przywara wrote:  
+> >>> On Fri, 18 Apr 2025 13:28:23 +0200
+> >>> Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>>
+> >>> Hi Quentin,
+> >>>
+> >>> thanks for having a look!
+> >>>      
+> >>>> Hi Andre,
+> >>>>
+> >>>> On 4/17/25 2:05 AM, Andre Przywara wrote:  
+> >>>>> Some boards with Allwinner SoCs feature a "FEL" key, sometimes also
+> >>>>> labelled "uboot", which triggers the BootROM FEL mode, when pressed upon
+> >>>>> power-on or reset. This allows to access the SoC's memory via USB OTG,
+> >>>>> and to upload and execute code. There is a tool to upload our U-Boot image
+> >>>>> and immediately boot it, when the SoC is in FEL mode.
+> >>>>>
+> >>>>> To mimic this convenient behaviour on boards without such a dedicated key,
+> >>>>> we can query a GPIO pin very early in the SPL boot, then trigger the
+> >>>>> BootROM FEL routine.  There has not been much of a SoC or board setup at
+> >>>>> this point, so we enter the BROM in a rather pristine state still. On
+> >>>>> 64-bit SoCs the required AArch32 reset guarantees a clean CPU state anyway.
+> >>>>>
+> >>>>> Any GPIO can be used for that, the signal is expected to be active low,
+> >>>>> consequently we enable the pull-up resistors for that pin. A board (or a
+> >>>>> user) is expected to specify the GPIO name using the
+> >>>>> CONFIG_SUNXI_FAKE_FEL_PIN Kconfig variable. When this variable is not set,
+> >>>>> the compiler will optimise away the call.
+> >>>>>
+> >>>>> Call the code first thing in board_init_f(), which is the first sunxi
+> >>>>> specific C routine.
+> >>>>>
+> >>>>> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> >>>>> ---
+> >>>>>     arch/arm/mach-sunxi/Kconfig | 10 ++++++++++
+> >>>>>     arch/arm/mach-sunxi/board.c | 31 +++++++++++++++++++++++++++++++
+> >>>>>     2 files changed, 41 insertions(+)
+> >>>>>
+> >>>>> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> >>>>> index ab432390d3c..f1cfdb548bc 100644
+> >>>>> --- a/arch/arm/mach-sunxi/Kconfig
+> >>>>> +++ b/arch/arm/mach-sunxi/Kconfig
+> >>>>> @@ -825,6 +825,16 @@ config USB3_VBUS_PIN
+> >>>>>     	---help---
+> >>>>>     	See USB1_VBUS_PIN help text.
+> >>>>>     
+> >>>>> +config SUNXI_FAKE_FEL_PIN
+> >>>>> +	string "fake FEL GPIO pin"
+> >>>>> +	default ""
+> >>>>> +	---help---
+> >>>>> +	Define a GPIO that shall force entering FEL mode when a button
+> >>>>> +	connected to this pin is pressed at boot time. This must be an
+> >>>>> +	active low signal, the internal pull-up resistors are activated.
+> >>>>> +	This takes a string in the format understood by sunxi_name_to_gpio,
+> >>>>> +	e.g. PH1 for pin 1 of port H.
+> >>>>> +  
+> >>>>
+> >>>> Why not use the DT for that? Then you wouldn't even need to assume the
+> >>>> polarity of the signal or whether pull-up/downs need to be activated, etc.  
+> >>>
+> >>> As Yixun Lan already pointed out, the DT is not available at this
+> >>> point, and doing several pull-ups to get this information from the DT
+> >>> into the SPL image are really over the top for this purpose.  
+> >>
+> >> OK, we do have something "similar" for Rockchip boards, via the
+> >> sysreset-gpio DT property in /config, see
+> >> arch/arm/mach-rockchip/rk3399/rk3399.c and
+> >> arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi.
+> >>
+> >> I guess something similar could be implemented IFF there's an actual DT
+> >> in SPL (or even TPL). We for sure have DT in SPL for most if not all
+> >> Rockchip devices, and probably in TPL as well. Hence why I sometimes
+> >> forget other Arm boards may not have DT in those stages :)  
+> > 
+> > Yeah, I know, there is some push for DT anywhere, but it would be quite
+> > some pain for sunxi, for very little benefit. We are very tight in the SPL
+> > code size for some SoCs, up to the point where for instance enabling this
+> > code here made the build break on some SoCs (I found something to free
+> > some code space elsewhere, might send that later). So pulling libfdt and
+> > DM code in would require going TPL, I guess. But I don't see the reason,  
+> 
+> We are also very limited on some Rockchip SoCs, see PX30 which has a TPL 
+> without DM support and where adding a printf (there are already some) is 
+> sometimes too much to fit into the SRAM, so I understand. We do have 
+> some other SoCs that have DM enabled in TPL, e.g. RK3399 imply it.
 
-Thanks for your time.
-> --
-> Tom
+Yes, the size problem is *one* aspect. The early Allwinner SoCs have
+24KB usable SRAM, but it's fine there because their code size is smaller
+because of ARMv7 and Thumb2. The A64 has a 32KB limit, and it's really
+tight there, because it's 64-bit, so no Thumb and larger pointers.
+Later SoCs lifted the 32K limit, though we still try to keep it as small
+as possible.
 
-Best regards,
-Zixian
+> > really, as I tend to see the SPL more as the continuation of the BootROM,
+> > which manages without board specific knowledge at all. And for the small
+> > bits of info we need, we can happily use Kconfig. Most of it is actually
+> > SoC specific, not board specific, so users don't get bothered normally,
+> > and it just works (TM).  
+> 
+> Jonas has started to support "generic" images for Rockchip boards based 
+> on the recommended hardware design specified by Rockchip themselves. 
+> Most companies do mostly respect it, so that seems to be working quite 
+> nicely.
+
+I wouldn't be aware of a "recommended" board design for Allwinner, but
+as a matter of fact many companies copy their reference design -
+probably more out of laziness ;-). This brings the variation down to a
+manageable level, so we can define default values in Kconfig, so
+defconfigs stay small.
+
+> Depending on what exactly you want to support with U-Boot, a DM-less SPL 
+> may be difficult. e.g. if you want to support a fallback storage medium 
+> for loading u-boot.itb (or proper, don't know what's being used on 
+> Allwinner) that differs from the one used to load the SPL by the 
+> BootROM, then you possibly cannot rely on the BootROM initializing the 
+> PHYs, controllers, pinmuxes and pinconfs.
+
+We do not rely on any of those bits being setup, actually, but we
+naturally follow the BootROM in its decision process. The BROM stores
+the boot media used in a byte in SRAM, so we know where we have been
+loaded from, so can continue loading from there. But this is just a
+decision between SD card, eMMC, NOR flash and FEL mode (maskROM in RK
+lingo). We know that SD card boot must have been from MMC0 on the PortF
+pins, and NOR flash is only SPI0 on PortC, on so on. The mux values and
+MMIO base addresses are per SoC, so those two values are easily stored
+in a header or in Kconfig, where we put them *once*, when we add
+support for a new SoC - and they are also quite stable across
+generations. So there is really not a strong case for DT here. In fact
+so far the mux *value* required isn't even stored in the DT, but in a
+table in the pinctrl driver.
+
+> KConfig may be usable for this 
+> but that will make things cumbersome to support.
+> 
+> > There is tons of work and cleanup to do on the sunxi side, and were
+> > already have quite some backlog, so I want to avoid introducing more
+> > construction sites.
+> 
+> Fair, it also doesn't mean that what's currently added cannot be 
+> migrated later on :)
+
+Sure, but at the moment we are severely review limited, so unless that
+changes dramatically, I don't see that happening any time soon.
+
+> 
+> [...]
+> 
+> >>>> You can have the property in the -u-boot.dtsi then if you want?
+> >>>>
+> >>>> While the FEL button on the X96 is "fake", it does what it says, just in
+> >>>> software, maybe that is close enough to "hardware definition" which
+> >>>> would make it suitable for the DT (well, we also store binman nodes in  
+> >>>
+> >>> Yes, I have a patch to add this particular button as a GPIO button into
+> >>> the DT, so people can use it for whatever they want in Linux (trigger
+> >>> reboot, update, you name it). But this is rather orthogonal to this
+> >>> problem, as mentioned above.
+> >>>      
+> >>
+> >> Mmmmm but this will be in the Linux kernel DT and I assume you want the
+> >> same GPIO to be used in U-Boot and in Linux, so it would probably be
+> >> best to make sure they stay in sync? How are you planning to do that?  
+> > 
+> > On the Allwinner side we were syncing the DTs regularly for years already,
+> > and had no conflicting or different bindings at all. So I prefer to think
+> > of "the DT", with Linux or U-Boot just carrying slightly different
+> > versions for some time.
+>   
+> If the kernel DTB is coming from U-Boot, it should be much less 
+> difficult to keep this synced.
+
+Yes, that's what I am pushing for: don't bother loading a DTB, just use
+the one already provided by U-Boot, as this makes the whole kernel boot
+much less board specific: just give it a kernel with the right drivers
+in and it boots. And it works really nicely with U-Boot on SPI flash or
+on the eMMC boot partition.
+
+> But if it isn't, you would need to patch 
+> it live before booting the kernel for example.
+
+We do this for the MAC address and the memory info, but I'd really like
+to keep this minimal, and be it as an incentive for people to use
+$fdtcontroladdr ;-)
+
+Cheers,
+Andre
+
+> In any case, I think the conclusion is that DT cannot be used (yet?) for 
+> that so this thread is now essentially just me being curious :)
+> 
+> Cheers,
+> Quentin
+
