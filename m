@@ -4,69 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CFFC3ABC3
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 08:25:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D868C3ABC3
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 08:38:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 049BB8091A;
-	Mon, 12 May 2025 10:25:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id F3C58805D7;
+	Mon, 12 May 2025 10:38:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1747038350;
-	bh=G5n6PxLhRqxatyVq87CLsL2Bq785cCb9S9ldu8NGSPM=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0CKpDS6X3G0OVlJDr6DFKjPqWX4oDXsZGeOmLoLEdMa7B63U48zr87cG0I5IaHME+
-	 zFnoA+1WmZvLyzLvSszQM1wJusU9tiUyNJEvhZtlmMap91RcEop+8zNUu+e2k5a8D9
-	 P4t96cG4lTQHh+SBronTFSI380D1KbltB56p1TJcLgpzgF7BiVM7Czt9x0xBcPssts
-	 b04/AeNWlMvWkcBfxUklW5JOEzy8Y0rW8C9VG2Ub7fdbTj/fnMVJHNJx6iBZ4x18kv
-	 i/L3JSYu8hLwcTlMeJpwRfjrojQDV6+ifC4A09bsKbKAUD2vN8GM2TYxxu2QEmzhTZ
-	 v3sBaxD8YJANA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9753182162; Mon, 12 May 2025 10:25:48 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4E45805D7
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 10:25:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Ie/K6FbF"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7B7E5101EC11B; 
- Mon, 12 May 2025 10:25:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1747038345; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=G5n6PxLhRqxatyVq87CLsL2Bq785cCb9S9ldu8NGSPM=;
- b=Ie/K6FbF0z7lEYVDxi8UM4k5pdLVj27C1IeNnWGU7I0Vacirx3d0QMXUK5rv7k/PxWaM6M
- asA2/eQ45uh6sV8A5hA6qMq2aKVykliD8HeCwQwXNohHXo192IZasU0UmrSEr6tT4UfLSS
- tfxxKKI3AiXyuiUY/iKKbTHPzB12pz3oCSiEJ7QbQ3FDp+Bch20XHqVNwOom/uia80+T7Q
- kc+44too/TtQjVhqo60m5cCkh7CXrzEOoOiSznRoMzRGUthuhgS0q15cJK3AeMBq3Cphf3
- lEQHDlxEktLwrbMKf6y03n/QA7lAMNfAJ33XexRxy1pOYgaI7NCcSI0PBkr4ZQ==
-Date: Mon, 12 May 2025 10:25:42 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] ARM: stm32mp: Correct sign extension for memory address
- in dram_bank_mmu_setup()
-Message-ID: <20250512102542.5ff9f240@wsk>
-In-Reply-To: <831cd958-018d-4f39-91ed-5a9c44853bc2@denx.de>
-References: <20250510065256.267546-1-lukma@denx.de>
- <831cd958-018d-4f39-91ed-5a9c44853bc2@denx.de>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="RT/EESQy";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 31A638294C; Mon, 12 May 2025 10:38:39 +0200 (CEST)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AE4EF805D7
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 10:38:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux.intel.com
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=andriy.shevchenko@linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1747039117; x=1778575117;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=xrolwI6XmwNF9StD66/zOUKbJinmGRgegfAyNqMKYA0=;
+ b=RT/EESQy0Qwp7u3McbH4qKKLa1gbL1GCLv+xREjXPS1OiGCehJA+CkCn
+ kbMIYqBFc0fYQYjoqV/kWiLkl60pP3UM3bxGEY//VuiQuQ8JUFN3OCRh9
+ OxZl+Q2DO66mfA/s3PCUqzWFUJ1tXEJ/ADW+Uhz45VOFQi79FgcBCvQDF
+ w9tmA/+Pa65C7ADNuCVYFvZ8BsjZN4l98OfYiMiyJSspUaRxPnCdix3OD
+ 8QzOVk8y3MiHwbxPJlzjohhjwqUj308vV8jJxcbZM78am7kU9ZlTEhuqB
+ PTD1CCq0hwNMPd9GhhWKKXEJZmz7BnmTwxPidqrz/O35gVfQP/ZVap4du Q==;
+X-CSE-ConnectionGUID: SY8K9ozXSOmc5Xs9u+1uXg==
+X-CSE-MsgGUID: 4KscBVYiSe6YHxun2Q+7TA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11430"; a="52633955"
+X-IronPort-AV: E=Sophos;i="6.15,281,1739865600"; d="scan'208";a="52633955"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+ by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 May 2025 01:38:35 -0700
+X-CSE-ConnectionGUID: fdFfWLOTQc+UDuuyB3g49w==
+X-CSE-MsgGUID: zARr1/tZTtyT4QPBTJwhtQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,281,1739865600"; d="scan'208";a="141347803"
+Received: from smile.fi.intel.com ([10.237.72.52])
+ by fmviesa003.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 May 2025 01:38:32 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.98.2)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1uEOg8-00000000rbB-2R4i; Mon, 12 May 2025 11:38:28 +0300
+Date: Mon, 12 May 2025 11:38:28 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH V3 0/3] cmd: env: select: Add output for available
+ environment targets
+Message-ID: <aCGzhJPzGuL2i-mt@smile.fi.intel.com>
+References: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
+ <aCGlPXMozNUty7R-@smile.fi.intel.com>
+ <10712670b2bf422dbda67be449b0107a@dh-electronics.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/WuTL9JMq5GSaWquHQ7Hykyn";
- protocol="application/pgp-signature"; micalg=pgp-sha512
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <10712670b2bf422dbda67be449b0107a@dh-electronics.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,52 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/WuTL9JMq5GSaWquHQ7Hykyn
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On Mon, May 12, 2025 at 08:22:19AM +0000, Christoph Niedermaier wrote:
+> From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> Sent: Monday, May 12, 2025 9:38 AM
+> > On Fri, May 09, 2025 at 09:00:40PM +0200, Christoph Niedermaier wrote:
+> >> Add the "-l" parameter to the "env select" command to print the available
+> >> environment targets, convert all argument parsing in the file nvedit.c to
+> >> getopt() and check that with unit tests.
+> >>
+> >> The first patch converts the parsing of arguments to getopt() for all env
+> >> commands. The second one adds unit tests for checking the env command.
+> >> These were used to check the env commands before and after the conversion.
+> >> The third patch adds the actual new parameter "-l" for the "env select"
+> >> command.
+> > 
+> > What is the binary size increase with this change, please?
+> 
+> I don't know exactly which binary size I should look at?
+> I have looked at the object file of nvedit.c:
+> 
+> I built it with the config dh_imx6_defconfig.
+> 
+> Before my patches:
+> $ ls -la cmd/nvedit.o 
+> -rw-r--r-- 1 developer developer 57644 May 12 10:03 cmd/nvedit.o
+> 
+> After my patches:
+> $ ls -la cmd/nvedit.o 
+> -rw-r--r-- 1 developer developer 59292 May 12 10:06 cmd/nvedit.o
+> 
+> So the increase is 1648 Bytes (+2.86%).
 
-Hi Marek,
+U-Boot binary. And better to use bloat-o-meter script for that, it shows the
+breakdown in more precise terms.
 
-> On 5/10/25 8:52 AM, Lukasz Majewski wrote:
-> > On a system based on stm32mp157c, with 1GiB SDRAM (starting from
-> > 0xC0000000) and CONFIG_PHYS_64BIT enabled =20
->=20
-> STM32MP15xx does not have 64bit PA range , why is CONFIG_PHYS_64BIT=20
-> enabled ?
+-- 
+With Best Regards,
+Andy Shevchenko
 
-I've wrongly looked on defconfigs - Patrice has enabled
-CONFIG_SYS_64BIT_LBA=3Dy, not PA 64 bit range...
 
-It looks like I've prepared a fix for a problem, which I've created ...
-
-Sorry for the fuzz - please drop this patch :-/
-
-And of course thanks for pointing this out...
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/WuTL9JMq5GSaWquHQ7Hykyn
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmghsIYACgkQAR8vZIA0
-zr260gf+Jhw30Ilf4pnZId85yB34MvynLFsblaI+Fi6vWaUGtCvr11R7hnf4VIHP
-AZIE3b6AAVyZYG4jTuouubo+hCvnOorWf/hpVOuLQjkbJ+Lv+J2dekJuZ3MG4Sug
-H+ofKivOrlRd+zJmPbrywInWfg9jwRz0ipAsY5wh/QeN/syKS3iV5dfJY+Ky6aj9
-2Xk+oLOBsySQUaA52JMqppPg0rHgVJPa5bdv6HC8oCGX8gZiJ02U2Dw8St4JoKxU
-fYHpaz4Y/zbrKPMC4Qzl+Q4ne5rWlw3/5g658VB8p/xHehtAmI1Di3Q+L9BFLhOc
-Atm7KJ7o3sAxFVw5WTKuxCW5o3XaeA==
-=5zve
------END PGP SIGNATURE-----
-
---Sig_/WuTL9JMq5GSaWquHQ7Hykyn--
