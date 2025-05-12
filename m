@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9654BC3ABC3
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 18:07:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2664FC3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 18:09:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10F0D80C83;
-	Mon, 12 May 2025 20:07:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8C4D580C83;
+	Mon, 12 May 2025 20:09:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AE8C82A33; Mon, 12 May 2025 20:07:23 +0200 (CEST)
+ id E18E6829E7; Mon, 12 May 2025 20:09:50 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C91DA80584
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 20:07:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C832580584
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 20:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 54CI6V8i066447
+ by Atcsqr.andestech.com with ESMTPS id 54CI44Lb064909
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Tue, 13 May 2025 02:06:31 +0800 (+08)
+ Tue, 13 May 2025 02:04:04 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 13 May
- 2025 02:06:31 +0800
-Date: Tue, 13 May 2025 02:06:31 +0800
+ 2025 02:04:04 +0800
+Date: Tue, 13 May 2025 02:04:04 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Yao Zi <ziyao@disroot.org>
 CC: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>, Wei Fu
@@ -45,21 +45,21 @@ CC: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>, Wei Fu
  <afd@ti.com>,
  Chia-Wei Wang <chiawei_wang@aspeedtech.com>, <u-boot@lists.denx.de>,
  Han Gao <rabenda.cn@gmail.com>, Han Gao <gaohan@iscas.ac.cn>
-Subject: Re: [PATCH 10/10] doc: thead: lpi4a: Update documentation
-Message-ID: <aCI4p3w_4nKC69tn@swlinux02>
+Subject: Re: [PATCH 07/10] riscv: dts: th1520: Add DRAM controller
+Message-ID: <aCI4FDgnZu5XqNmF@swlinux02>
 References: <20250426165704.35523-1-ziyao@disroot.org>
- <20250426170322.35601-2-ziyao@disroot.org>
+ <20250426170059.35571-4-ziyao@disroot.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250426170322.35601-2-ziyao@disroot.org>
+In-Reply-To: <20250426170059.35571-4-ziyao@disroot.org>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 54CI6V8i066447
+X-MAIL: Atcsqr.andestech.com 54CI44Lb064909
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,16 +76,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Apr 26, 2025 at 05:03:21PM +0000, Yao Zi wrote:
+On Sat, Apr 26, 2025 at 05:00:56PM +0000, Yao Zi wrote:
 > [EXTERNAL MAIL]
 > 
-> Support for eMMC, SD card, GPIO and SPL have been available in LPi4A
-> port. Update the documentation of support status and build
-> instructions.
+> Describe DRAM controller integrated in TH1520 SoC and preserve it in SPL
+> devicetree blob.
 > 
 > Signed-off-by: Yao Zi <ziyao@disroot.org>
 > ---
->  doc/board/thead/lpi4a.rst | 58 +++++++++++++++++++++++++++++++++++++--
->  1 file changed, 55 insertions(+), 3 deletions(-)
+>  arch/riscv/dts/th1520.dtsi | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
