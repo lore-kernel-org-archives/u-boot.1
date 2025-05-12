@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B7D7C3ABC3
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 08:23:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CFFC3ABC3
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 08:25:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7F198091A;
-	Mon, 12 May 2025 10:23:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 049BB8091A;
+	Mon, 12 May 2025 10:25:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="gqWK2AJc";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1747038350;
+	bh=G5n6PxLhRqxatyVq87CLsL2Bq785cCb9S9ldu8NGSPM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=0CKpDS6X3G0OVlJDr6DFKjPqWX4oDXsZGeOmLoLEdMa7B63U48zr87cG0I5IaHME+
+	 zFnoA+1WmZvLyzLvSszQM1wJusU9tiUyNJEvhZtlmMap91RcEop+8zNUu+e2k5a8D9
+	 P4t96cG4lTQHh+SBronTFSI380D1KbltB56p1TJcLgpzgF7BiVM7Czt9x0xBcPssts
+	 b04/AeNWlMvWkcBfxUklW5JOEzy8Y0rW8C9VG2Ub7fdbTj/fnMVJHNJx6iBZ4x18kv
+	 i/L3JSYu8hLwcTlMeJpwRfjrojQDV6+ifC4A09bsKbKAUD2vN8GM2TYxxu2QEmzhTZ
+	 v3sBaxD8YJANA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5171E82162; Mon, 12 May 2025 10:22:59 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+ id 9753182162; Mon, 12 May 2025 10:25:48 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06104805D7
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 10:22:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id B4E45805D7
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 10:25:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1747038141;
- bh=uvo4OrsL2vQnyNLhtSEC6Wg7hjVEHN4THoTudmMBGmo=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=gqWK2AJc39q7YYlJCeexliNaWWQeOZiPEUoeaG6rkis/NB2LsvOFumBwMNDw2TkY4
- MtCFkGT50lL1kg9dp36oiEX6HPeultp1SHtFym9xV25oln/EVIArFp4QGONBNfcTvC
- hZeta3xs9F84OAQbr1PCqr5FV240iL4tWF+h8ptwQsRz8zJfRGBhqpZyXHqLi8UD9+
- UuKukCb3Xojso4h1cPtWnxR4jm/OhoijMS1vbvvVtzq4wNNhL/m8rOosax24NGZoyd
- dUIz3s3fI5JQvjZQI5jtvgF6WM+KPlLpORun2Kzi170ibW18lxnRw/TDO3LsBJQq2H
- OVrM+DlT6W/0w==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Christian Marangi
- <ansuelsmth@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, "Patrick
- Delaunay" <patrick.delaunay@foss.st.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Venkatesh
- Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
-Subject: RE: [PATCH V3 0/3] cmd: env: select: Add output for available
- environment targets
-Thread-Topic: [PATCH V3 0/3] cmd: env: select: Add output for available
- environment targets
-Thread-Index: AQHbwRTicAaSbjFs1ESxcWoUNFnGWrPOfcGAgAAp0/A=
-Date: Mon, 12 May 2025 08:22:19 +0000
-Message-ID: <10712670b2bf422dbda67be449b0107a@dh-electronics.com>
-References: <20250509190043.28641-1-cniedermaier@dh-electronics.com>
- <aCGlPXMozNUty7R-@smile.fi.intel.com>
-In-Reply-To: <aCGlPXMozNUty7R-@smile.fi.intel.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Ie/K6FbF"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7B7E5101EC11B; 
+ Mon, 12 May 2025 10:25:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1747038345; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=G5n6PxLhRqxatyVq87CLsL2Bq785cCb9S9ldu8NGSPM=;
+ b=Ie/K6FbF0z7lEYVDxi8UM4k5pdLVj27C1IeNnWGU7I0Vacirx3d0QMXUK5rv7k/PxWaM6M
+ asA2/eQ45uh6sV8A5hA6qMq2aKVykliD8HeCwQwXNohHXo192IZasU0UmrSEr6tT4UfLSS
+ tfxxKKI3AiXyuiUY/iKKbTHPzB12pz3oCSiEJ7QbQ3FDp+Bch20XHqVNwOom/uia80+T7Q
+ kc+44too/TtQjVhqo60m5cCkh7CXrzEOoOiSznRoMzRGUthuhgS0q15cJK3AeMBq3Cphf3
+ lEQHDlxEktLwrbMKf6y03n/QA7lAMNfAJ33XexRxy1pOYgaI7NCcSI0PBkr4ZQ==
+Date: Mon, 12 May 2025 10:25:42 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] ARM: stm32mp: Correct sign extension for memory address
+ in dram_bank_mmu_setup()
+Message-ID: <20250512102542.5ff9f240@wsk>
+In-Reply-To: <831cd958-018d-4f39-91ed-5a9c44853bc2@denx.de>
+References: <20250510065256.267546-1-lukma@denx.de>
+ <831cd958-018d-4f39-91ed-5a9c44853bc2@denx.de>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
+Content-Type: multipart/signed; boundary="Sig_/WuTL9JMq5GSaWquHQ7Hykyn";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,40 +83,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Sent: Monday, May 12, 2025 9:38 AM
-> On Fri, May 09, 2025 at 09:00:40PM +0200, Christoph Niedermaier wrote:
->> Add the "-l" parameter to the "env select" command to print the availabl=
-e
->> environment targets, convert all argument parsing in the file nvedit.c t=
-o
->> getopt() and check that with unit tests.
->>
->> The first patch converts the parsing of arguments to getopt() for all en=
-v
->> commands. The second one adds unit tests for checking the env command.
->> These were used to check the env commands before and after the conversio=
-n.
->> The third patch adds the actual new parameter "-l" for the "env select"
->> command.
+--Sig_/WuTL9JMq5GSaWquHQ7Hykyn
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Hi Marek,
+
+> On 5/10/25 8:52 AM, Lukasz Majewski wrote:
+> > On a system based on stm32mp157c, with 1GiB SDRAM (starting from
+> > 0xC0000000) and CONFIG_PHYS_64BIT enabled =20
 >=20
-> What is the binary size increase with this change, please?
+> STM32MP15xx does not have 64bit PA range , why is CONFIG_PHYS_64BIT=20
+> enabled ?
 
-I don't know exactly which binary size I should look at?
-I have looked at the object file of nvedit.c:
+I've wrongly looked on defconfigs - Patrice has enabled
+CONFIG_SYS_64BIT_LBA=3Dy, not PA 64 bit range...
 
-I built it with the config dh_imx6_defconfig.
+It looks like I've prepared a fix for a problem, which I've created ...
 
-Before my patches:
-$ ls -la cmd/nvedit.o=20
--rw-r--r-- 1 developer developer 57644 May 12 10:03 cmd/nvedit.o
+Sorry for the fuzz - please drop this patch :-/
 
-After my patches:
-$ ls -la cmd/nvedit.o=20
--rw-r--r-- 1 developer developer 59292 May 12 10:06 cmd/nvedit.o
+And of course thanks for pointing this out...
 
-So the increase is 1648 Bytes (+2.86%).
+Best regards,
 
+Lukasz Majewski
 
-Regards
-Christoph
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/WuTL9JMq5GSaWquHQ7Hykyn
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmghsIYACgkQAR8vZIA0
+zr260gf+Jhw30Ilf4pnZId85yB34MvynLFsblaI+Fi6vWaUGtCvr11R7hnf4VIHP
+AZIE3b6AAVyZYG4jTuouubo+hCvnOorWf/hpVOuLQjkbJ+Lv+J2dekJuZ3MG4Sug
+H+ofKivOrlRd+zJmPbrywInWfg9jwRz0ipAsY5wh/QeN/syKS3iV5dfJY+Ky6aj9
+2Xk+oLOBsySQUaA52JMqppPg0rHgVJPa5bdv6HC8oCGX8gZiJ02U2Dw8St4JoKxU
+fYHpaz4Y/zbrKPMC4Qzl+Q4ne5rWlw3/5g658VB8p/xHehtAmI1Di3Q+L9BFLhOc
+Atm7KJ7o3sAxFVw5WTKuxCW5o3XaeA==
+=5zve
+-----END PGP SIGNATURE-----
+
+--Sig_/WuTL9JMq5GSaWquHQ7Hykyn--
