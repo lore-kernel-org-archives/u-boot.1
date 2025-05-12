@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26BB5C3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 16:45:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C086C3ABC3
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 16:45:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35FCE80C83;
-	Mon, 12 May 2025 18:45:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A130B80C83;
+	Mon, 12 May 2025 18:45:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gs0qV7cN";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HrOejWc+";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PPSD5ckW";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VqLHlrmw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E96A80C83; Mon, 12 May 2025 18:45:10 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 4748982991; Mon, 12 May 2025 18:45:48 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6279380584
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 18:45:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A85B80584
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 18:45:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Zx57R10rrz9sy9;
- Mon, 12 May 2025 18:45:07 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Zx58B15Lnz9sQ5;
+ Mon, 12 May 2025 18:45:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747068307;
+ s=mail20150812; t=1747068346;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=aczK3CBUG8ChsLDwMgi0hgIR1BnC6epYbhlJBR4C9iw=;
- b=gs0qV7cNNwz4264/kUzlA8DnmQhewDRowmPyxz5xaWRsOdCNylOj5u65FRf6wFjZKGAc4T
- SAZ+R7NkMKMB5KJAZaqjAhYZMor7jI0tjxetyaKmdQEK+MaObVNxI0AVRhYTRuslr0BpX5
- oIKyzoezBk1yd1MkQpICPF9oryeRTHLY34CStBV3SYScya0HqArl8iDilSC6jzn6P7yZRp
- HvtJEjKs6PH5dhh8UEEhtFcPqUqKvZQDqdQcfPSIlEfdgG4u8Q9+FZP7q8leHVA9sMbrpb
- /bY4s5QMaOg6d+xwB7MXyPgfkCBymntJmJozNzw+C1kK8g9vcFQnDNAi0c9Bng==
+ bh=TY6NoTCmCFAlGtc/fcJG1FKxxmOzYWAvD5uA8AFpSpk=;
+ b=PPSD5ckWqnABGhjVn5HYsakmlCpwyQGQ7Kvp2OPoVNaVWFWnfxoPDrxvCnTzE4ePvfNgeL
+ uyLmMkvpwYfmKcFyGSi7HY5TZ3AebK/udy02UsZK7IH+yqhfUsMkGazuam8CIAiXsxX3YT
+ 2tBf24geHMVjfSdOPaKHbWvAT0zBSLiXB+MwzWF/fD8KnOsogsM8Ktbm7aYSajM+E/pSs2
+ 34zC+6ut4FcvMuUzT0JpsuL1v/3Ka/yx+QacX6+1sllAYQowasoc3IWlPT7DD5jQANSejH
+ kfvWsLSUXe0eklclOjjbHdQcwDEhnVu8Tlc5bt1rh/rMTSjpRIf1QSA3o3I3Hg==
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747068305;
+ s=mail20150812; t=1747068344;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=aczK3CBUG8ChsLDwMgi0hgIR1BnC6epYbhlJBR4C9iw=;
- b=HrOejWc+SFx8wEb7xa1b0NsI0tYkjZwk5w1nYSsGTxBJNyzoXGTM75l/nmtoEvX6fFMe5x
- EvR5kjkoMuuSeHHGLgUAuiZvUAxUiEM2hMuhE1rhTbydL7zmlBc0gRsq/1FOVGm4m+paeu
- BeiK8g3fTjivtfMpGrmQa3tcKvbUKDtq8mdhIUP2NXuQhJmVH/2brOPRPtE+QQzbN4XkYm
- K99tj9uYO8RBlftOou8dad6GelNj+3mrEFMIDyGvmIA3qKPcDj0EJNvn5ySfUVjc9A0r04
- wi49SYwPTbBIj5bQrDKLO8tqb+L8RXUvd0xfIxgCssug6H7k/6XmPKnW98T3iQ==
+ bh=TY6NoTCmCFAlGtc/fcJG1FKxxmOzYWAvD5uA8AFpSpk=;
+ b=VqLHlrmwQIugTzh/KnG2eJjp9AzlrCXXbpo0ZtDm5x550/w75toLtS/8gt9tvjcggvS8QB
+ +IuaIdBGCkJVLQLNwgkGYHT7Egd+TbW9GMADokeJh28YJ6HH8buMFbRAQsNMVtIbr0obud
+ MedTmn4aAd2zKqnjYPqz0jCXUHc1ubPjGCuED+xHFRYMILMIHP59izcvwEyqtD0Khb6z0o
+ 7KKW2D3ZgAox4avFfo07kLt5MRDt4kFHIvUXNCe+R0MWnD9aqDA4sc2le3uARuFsjls9au
+ nhtF1m9zyK4uG/RjvLWbiLZB890YIE1NVaZIKtSRDOXk3FKYKDuGwRzkwu3r7Q==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Fix DBGMCU macro on STM32MP13xx
-Date: Mon, 12 May 2025 18:44:53 +0200
-Message-ID: <20250512164456.147764-1-marek.vasut@mailbox.org>
+Subject: [PATCH] ARM: stm32: Auto-detect ROM API table on STM32MP15xx
+Date: Mon, 12 May 2025 18:45:14 +0200
+Message-ID: <20250512164536.147793-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: xapnii7n1d3nyxwh86pp5s5hns88diz3
-X-MBO-RS-ID: 130eaad637865cf2d4c
+X-MBO-RS-ID: 17de77ef747e0109cd2
+X-MBO-RS-META: n8r6m3zeb6xuzofuebmikpwdez6sz9jw
+X-Rspamd-Queue-Id: 4Zx58B15Lnz9sQ5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,9 +87,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DBGMCU block is available at address 0x50081000 both on STM32MP13xx
-and on STM32MP15xx . There is no reason to limit the DBGMCU macro being
-set only on STM32MP15xx , remove the ifdeffery.
+The ROM API table location is passed to the SPL by BootROM in register r0,
+make use of this, store the content of r0 and later use it to access the
+ROM API table to determine current boot device.
 
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
@@ -99,23 +101,45 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- arch/arm/mach-stm32mp/include/mach/stm32.h | 2 --
- 1 file changed, 2 deletions(-)
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c        | 3 +--
+ arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 3 +--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 47b459b75d1..dfba57e7dc4 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -78,9 +78,7 @@ enum forced_boot_mode {
- #define STM32_RCC_BASE			0x50000000
- #define STM32_PWR_BASE			0x50001000
- #define STM32_SYSCFG_BASE		0x50020000
--#ifdef CONFIG_STM32MP15X
- #define STM32_DBGMCU_BASE		0x50081000
--#endif
- #define STM32_FMC2_BASE			0x58002000
- #define STM32_IWDG2_BASE		0x5A002000
- #define STM32_DDRCTRL_BASE		0x5A003000
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+index 18175fd12cc..9ab5a3ede52 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+@@ -330,8 +330,7 @@ static uintptr_t nt_fw_dtb __section(".data");
+ void save_boot_params(unsigned long r0, unsigned long r1, unsigned long r2,
+ 		      unsigned long r3)
+ {
+-	if (IS_ENABLED(CONFIG_STM32_ECDSA_VERIFY))
+-		rom_api_table = r0;
++	rom_api_table = r0;
+ 
+ 	if (IS_ENABLED(CONFIG_TFABOOT))
+ 		nt_fw_dtb = r2;
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+index caeeeca863c..07d99034861 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+@@ -64,7 +64,6 @@
+  * - boot instance = bit 31:16
+  * - boot device = bit 15:0
+  */
+-#define BOOTROM_PARAM_ADDR	0x2FFC0078
+ #define BOOTROM_MODE_MASK	GENMASK(15, 0)
+ #define BOOTROM_MODE_SHIFT	0
+ #define BOOTROM_INSTANCE_MASK	GENMASK(31, 16)
+@@ -189,7 +188,7 @@ void spl_board_init(void)
+ static void update_bootmode(void)
+ {
+ 	u32 boot_mode;
+-	u32 bootrom_itf = readl(BOOTROM_PARAM_ADDR);
++	u32 bootrom_itf = readl(get_stm32mp_rom_api_table());
+ 	u32 bootrom_device, bootrom_instance;
+ 
+ 	/* enable TAMP clock = RTCAPBEN */
 -- 
 2.47.2
 
