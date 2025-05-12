@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B7F5C3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 20:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19114C3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 21:41:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECAD1826AA;
-	Mon, 12 May 2025 22:35:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 318CF80C83;
+	Mon, 12 May 2025 23:41:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lCTvSAOY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FCBsH02B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E501580584; Mon, 12 May 2025 22:35:10 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 807C782162; Mon, 12 May 2025 23:41:34 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F1D6826AA
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 22:35:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77D3A80584
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 23:41:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3f6dccdcadaso3886306b6e.2
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 13:35:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-30effbfaf4aso51985731fa.3
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 14:41:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747082105; x=1747686905; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Nj1NC4QZyKThxtAjGsRr+GcUK09cRIFDSg/HV6eIeho=;
- b=lCTvSAOYbM7P2bOlO1V8govLIUy5VByhqZyPVr1TKX7j2ZLniVsyneXRDN6HJlFOzm
- 24mim+B9hozQeAQWhI1CbAciPkw+Vc0zIy3mujVe2AhV5PlFTDL0Qb4hHC3p0RfBmpYp
- jXq4hgeJ8X/dUZkwiyfQXpuzEN4bSE8r/K8SE=
+ d=gmail.com; s=20230601; t=1747086092; x=1747690892; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d83O6GLxxyYQA3AmDkIDimhSTJ6NFw0UXNFQ7E/O3Vg=;
+ b=FCBsH02BF+3PLHU1f0li1FqmwgdJQ2iPa2lSvb0/LoEMWm4Mkmpk5rFEI8UzDdXnNP
+ WsqfiLpxvn9zPLdbCwrKB0QHp0Qlz4nNZpgH+hg64Dl+EyyeBzrdnzLYTu+JQBaoY3b3
+ rmDNSfmzEpOuNGvpB7JxDC49ncG70TGxaRLMcNQiZJBd3+iHbI6mug5YKOX63kkTt274
+ FlQkJezE4bo68YxlkMxRTLfEcDNXuFFVN/9eo4q53L8/T/ugP2PfwqpQPZq0r61cmEUC
+ GqM7xLJJHi/5Uc5WKVs7G0C9jQhmIaN9AWG13xokijVUj0DTNZS2KEJ2W1ngxHxsZjY2
+ h9Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747082105; x=1747686905;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Nj1NC4QZyKThxtAjGsRr+GcUK09cRIFDSg/HV6eIeho=;
- b=PQ5/oH5Ju0Qjr1hbbHxWXd5KhOepwoAZZ2YlPsmTrjFnSPImxlYbLwa9b4HpiI9taF
- NWk9HDw1/hNuJxkgdaK4Lz+6EByiRbCn5CsIvA+Vhaez6HTnbd80dytFLxmhfh5hSZB/
- 2SkdLi6UxUTBotLKIfY9BmIP6w1rV0EW0lH5MJ61wnpG6jFat8AwjXH0WrKBIyqNZg5e
- xlNfNeowDkGf5mMsYjlMUn0Tbl+N+nykxkOokeKRYFVBiCKJet3OOAQXH/KpuR/gpDS8
- 5Uoe5Y3L+g24D1R8hvck2BomkLKyW/ouSDucYLLfbLg1Cd54qXsugmNdh2LZ/fZJ4N1Q
- fHNw==
-X-Gm-Message-State: AOJu0YywlWza/hmFsvUd/cBjo62zs31yFaMxlgoNQCJMgCxkjPvkGiAC
- wMcSHulmrtPtBuopnP0T0gz1pVT6ualm754OZxghtkHb2iM1Neo0StQYmDygCedsOKL+B+ezJfA
- mX50=
-X-Gm-Gg: ASbGncs/Byw0VLcvZsBASJIjloSXPdG3RIng6YZ06o7hS8FsTiNyW15ufpfJUGSv7ck
- Ei8xN1PKepe2c69yphItfsnSajfkJEP10TB/YdgeTq+J0T8HxM/pse132aHQdI+0SXPaYvzK8NA
- 0n5TRI/5B3qydMD36wP1SW2r8MH3ZTth9wky31eUWNk+9fd5QJ6i6c8kShRFmDLyQgq+GY5rgPZ
- 2U7utv/ABJGpbfCdft4r0aEVULQJonByx3URzBhF889po128HhYXH4cQoWj44XxoPttNaz7VFw9
- vlSWuGKRybcvqi5xR6Hs/SfJ/7iqK21GXBrE1yvg7abqHoFMaXgzUpnqCK3+oZk6RCkg+u71KVv
- N+yrlLup2b8e6
-X-Google-Smtp-Source: AGHT+IHeuKszuJ2l/4vdCubO1lWpPRmn0+lWaJ/uvVORHkwwvR94WfnYeyKR+8RnoMIJcd/n+12Rdg==
-X-Received: by 2002:a05:6808:1392:b0:403:3195:58cb with SMTP id
- 5614622812f47-4037fe6e33emr9227286b6e.28.1747082104979; 
- Mon, 12 May 2025 13:35:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40380389220sm1708187b6e.37.2025.05.12.13.35.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 May 2025 13:35:03 -0700 (PDT)
-Date: Mon, 12 May 2025 14:35:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2025.07-rc2 released
-Message-ID: <20250512203501.GR603748@bill-the-cat>
+ d=1e100.net; s=20230601; t=1747086092; x=1747690892;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=d83O6GLxxyYQA3AmDkIDimhSTJ6NFw0UXNFQ7E/O3Vg=;
+ b=qYdV9/tQbBwd67Ir/uFB+yO+RZkDgp8CGoB/FJcMvvvpcXjgb15DCNQrXuZjZKO06Q
+ TaBKEQPQTI3waZfAT3s1IBDT0o3Q0vN2XEAO9Wct5XxaBS6cAE6gyVH1vtx89Y2zHDVL
+ IHDJtPz4eNz/lsAfOH1sdE9mv3X4qrONRqmsS86oryKcvK5nh+SmbULT+qW0yezJrk/l
+ xz51UZ2bRVj3XqfM4AddzAGsn0BgZ6Ld1oggxkQcONiugzL+9U+83+PTKGzuVCqzkuMJ
+ lpZ/KC4thmyB4Adqo1hqxvHRZX8kuDQMndF8PBauFy+P8/YyLRsnGdJ7KhDsfxdvdbpz
+ DfLg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBLwJ9VG8zRh1kyZjbA8pWLu8ohQSxwx6pw80Gsjgq9dLyJZNR1DB+XwYByyAWMhP/Rfa55rA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzxefqOkzBLPhBART5CYQDKgxQO/3uyylA7g966vFwhDgb4u3Jd
+ vixzoqDwWWi8VxDHyfOjfap6irRfUuPLFLSIlbixaK/rAJNQeszem/jKizilYspJzfZEtjOdfOF
+ YkGfzmbD7wJ2ED1yFY1kylDB6bDY=
+X-Gm-Gg: ASbGncswApy5eO0pS/f3Tj5RXdgQE+eEOk2VXgn6KgCvlQNIIMmuJqWeE8IBrUBb7ev
+ Y4iy18JmQL/YlCqWXeQJcfEoIEDtKUhY9ZFXuOblKsRszsjMGvvXro53lAZun7OavFkKvfSFNGj
+ kKzabxhgneLgOlYg3O5EHs8PWk36Mlw4XjJQmEJe6uqZYykCeBKxqWeAmauliRxruq
+X-Google-Smtp-Source: AGHT+IEDgy5B01cg+GPyJg3HM9hDK9cU54lh8Ow28Zlt0BJqHJj5sItHm2OMTD+7TwQ0YHibLnF+x1wT2VYZtwy19Ks=
+X-Received: by 2002:a2e:a549:0:b0:30c:50fd:925e with SMTP id
+ 38308e7fff4ca-326c456a7ffmr56020551fa.3.1747086091407; Mon, 12 May 2025
+ 14:41:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="g85B1L6vBMShn6Nd"
-Content-Disposition: inline
+References: <BE1P281MB229278535DE4B55BD7240B14E18D2@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
+ <a0971d75-fb68-476a-9d65-025584231859@gmx.de>
+ <BE1P281MB22929674BBA49DDCF59D404CE18AA@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
+In-Reply-To: <BE1P281MB22929674BBA49DDCF59D404CE18AA@BE1P281MB2292.DEUP281.PROD.OUTLOOK.COM>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 12 May 2025 18:41:20 -0300
+X-Gm-Features: AX0GCFs1cIVadjnG7B4m4ilAwq4GQDojYKTmcmnkWn0AsPimVeMko6uwEicVbCU
+Message-ID: <CAOMZO5BPH6+C1_-YjhxkS7VxrBs4ECmhEMS-N8M9UuFSm6KVFQ@mail.gmail.com>
+Subject: Re: arm:, imx:, caam: [PATCH] bugfix CAAM error on startup
+To: "Baehring, Olaf" <Olaf.Baehring@draeger.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Gaurav Jain <gaurav.jain@nxp.com>,
+ Marek Vasut <marex@denx.de>, 
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,58 +99,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Olaf,
 
---g85B1L6vBMShn6Nd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please adjust the subject line to:
 
-Hey all,
+Subject: [PATCH] caam: Fix error on startup
 
-So it's release day and I have tagged and pushed things out. As it's
--rc2 I've now also updated the next branch and so we should focus on
-fixes for master rather than new features. I tried looking over the
-patchwork queue as a whole last week and so I picked out a few
-outstanding patches that I had assigned to others but that had been
-reviewed and looked reasonable.
+On Fri, May 9, 2025 at 9:41=E2=80=AFAM Baehring, Olaf <Olaf.Baehring@draege=
+r.com> wrote:
+>
+> Internal
 
-We're continuing with a community meeting following the release and is
-the same time as the previous meeting. The meeting details itself are:
-https://meet.google.com/btj-wgcg-euw
-May 13th, 2025. 9am (GMT -06:00)
+Please remove this line.
 
-To join by phone:
-https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+> In rare cases U-Boot returns an error message when intantiating the RNG
+> of the CAAM device:
+> =E2=80=9CSEC0:  RNG4 SH0 instantiation failed with error 0xffffffff=E2=80=
+=9D
+> This  means, that even when the CAAM device reports a finished
+> descriptor, none is found in the output ring.
+> This might be caused by a missing cache invalidation before
+> reading the memory of the output ring
+> This patch moves the cache invalidation of the output ring from start of
+> the job to immediately after the notification from hardware where the
+> output ring will be read.
 
-In terms of a changelog,=20
-git log --merges v2025.07-rc1..v2025.07-rc2
-As always, more details in pull requests (or the tags referenced by
-them) will result in more details here.
+Add your Signed-off-by tag.
 
-I continue to plan to do an rc release every two weeks and the final
-release will be 07 July 2025.
+I tried applying your patch, but it failed:
 
-Thanks all!
+$ git am --3way
+~/Downloads/arm-imx-caam-PATCH-bugfix-CAAM-error-on-startup.patch
+Applying: arm:, imx:, caam: [PATCH] bugfix CAAM error on startup
+Using index info to reconstruct a base tree...
+error: patch failed: drivers/crypto/fsl/jr.c:217
+error: drivers/crypto/fsl/jr.c: patch does not apply
+error: patch failed: drivers/crypto/fsl/jr.h:83
+error: drivers/crypto/fsl/jr.h: patch does not apply
+error: Did you hand edit your patch?
+It does not apply to blobs recorded in its index.
+Patch failed at 0001 arm:, imx:, caam: [PATCH] bugfix CAAM error on startup
+hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
+When you have resolved this problem, run "git am --continue".
+If you prefer to skip this patch, run "git am --skip" instead.
+To restore the original branch and stop patching, run "git am --abort".
 
---=20
-Tom
+It seems the patch is corrupted.
 
---g85B1L6vBMShn6Nd
-Content-Type: application/pgp-signature; name="signature.asc"
+./scripts/checkpatch.pl shows several issues as well.
 
------BEGIN PGP SIGNATURE-----
+Please fix these problems and submit a v2 using 'git send-mail'.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgiW3UACgkQFHw5/5Y0
-tywaBwv+Im4k2Zjarjw5HQxABa24N3y26RgjO5BpjEV/UPJuD1ZRzg3mlMgda8AI
-Aj/cREAgudcBxtN5PPQF471o81oozMYjbg3wD/+J8VP1KAswINtznoeYKosTkNHg
-0zPush9eD0/XqfDCf8f48Rl4WleSdE1pOLWZc/b+BQ/CrYVNePdMZHvOX35c/utS
-gAgYiZpJQpLnGOt3yL84+yUNN5Wms1e3HyVR3FNOYY71d78pitL/+kAnuuU86+TQ
-yAnzeibnZTxCt4d6AYEpVueYaRb7KSK5VOzEJKlgL9cNsx1IgCUs2OX5Z8JK3Lzr
-SqRQVNSbzpVO7LT1sRlkp6syN0eW0cXpZiEwWk91niqVuS86ibSGniNeXBkJlycb
-nk8NSt5Fd8pUbDDg2mHIubXe5SXmae70KP5PCGj8tEhkDatIlPFtuZXiwxVkJmg+
-+ZZno8GYz5hhWu/MYnTLq3XMog1bHA2PLvsqTfd9t6ko5bTLERk+0i7IMdP5jbKD
-7sLAkyJb
-=rdQV
------END PGP SIGNATURE-----
-
---g85B1L6vBMShn6Nd--
+Thanks
