@@ -4,59 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6274AC3ABBC
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 07:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E60EC3ABBC
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 07:29:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5675805D7;
-	Mon, 12 May 2025 09:08:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C9A05805D7;
+	Mon, 12 May 2025 09:29:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cEUjASYV";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WsFw5h4u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF62281DD6; Mon, 12 May 2025 09:08:42 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 90F3C8091A; Mon, 12 May 2025 09:29:25 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E74D800C1
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 09:08:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95C46800C1
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 09:29:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C2D20445FA;
- Mon, 12 May 2025 07:08:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9076C4CEE7;
- Mon, 12 May 2025 07:08:33 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 7390C61149;
+ Mon, 12 May 2025 07:29:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0527AC4CEE7;
+ Mon, 12 May 2025 07:29:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747033718;
- bh=JwLc1fjGHu5hyq4vg9rn1WW4F+HGZkZyMzOZnt+nrh8=;
+ s=k20201202; t=1747034962;
+ bh=J2JYc5kZYqDv97IC/vxPTEqkwGiBRVQDJjSbIfiwweU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cEUjASYV8CM/SH56coFZ0kkU7vP/gScOUGRUX8nAwTOJvIy8NZ+NoMeoaeRGaS0ho
- QAlHoK95Ev4ru39Gyk+z62CcLNgM5rVfWZ6cwfLsUG3FWg4L5cy8IJgag6IQmCpo/d
- 08DnUYUyGxcfpIiV2ovoAOJ1L3aoyB3/AJQTeTOBQ5i6fom0SOnJKeV07I/Y0K2ht/
- 5fC1vqS1niw2s0NketxgzyN2q+K2uod9feUONXr3sH1EGxapfiIllgpS1Y4rDyO2uI
- gTnfu/+qLtG6zD+ilaw+WRwn/gGHtpj7wXL/XDyNWpv7XwI4uQW94IFhNYiPlbAnWf
- Jx8VSjE8dCy1A==
-Date: Mon, 12 May 2025 12:38:30 +0530
+ b=WsFw5h4uI6+ATLYcU/grrf+mVCM2WWb5WVhljeh2icqNMAMzzF6Hkwadj6hoWlV39
+ fFvZIqoRyDainrhGhsRqJpT0DpLLIsbPeYgxo/TjEzORaQ1k7UH+BKi6zkAQQ0mlFu
+ B7k/K188zwupOpZCdF/kWG8ebZDkkJUTeXx5jG1u2OYPYjJLGLVhF294SeoenZ/w4T
+ zYOJNPGkcYoz1aqpyF83oDWA6qIeMiadAhXwMQvP0xB+Yiab8KwEecVJ/fnT8XCJSI
+ eOGnvTuKADLVyDzlXTtaFnNeVSNOmRSvOpRIApcpFnhOzLbujBV6RJPHhJ2Gh8FITL
+ Q/Kcw8x3eGQAg==
+Date: Mon, 12 May 2025 12:59:16 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, lukma@denx.de, seanga2@gmail.com,
- ilias.apalodimas@linaro.org, me@samcday.com, sjg@chromium.org,
- quic_varada@quicinc.com, sughosh.ganu@linaro.org, lehmanju@devpi.de,
- bhupesh.linux@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v1 1/6] dt-bindings: power: rpmpd: Add QCS8300 Power
- Domain Indexes
-Message-ID: <aCGebjL9ZGjsMV5e@sumit-X1>
-References: <20250508111952.2304578-1-balaji.selvanathan@oss.qualcomm.com>
- <20250508111952.2304578-2-balaji.selvanathan@oss.qualcomm.com>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ trini@konsulko.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/1] gpio: msm_gpio: return correct value for gpio read
+Message-ID: <aCGjTLuK0_dz9P9E@sumit-X1>
+References: <20250508113646.1462518-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250508111952.2304578-2-balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20250508113646.1462518-1-aswin.murugan@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,58 +68,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
-
-On Thu, May 08, 2025 at 04:49:47PM +0530, Balaji Selvanathan wrote:
-> Added QCS8300 Power Domain Indexes in dt-bindings/power/qcom-rpmhpd.h
+On Thu, May 08, 2025 at 05:06:46PM +0530, Aswin Murugan wrote:
+> In the current implementation, the GPIO read operation considers
+> both the input and outbut bits (bits 0 and 1). It should only consider
+> the state of input bit, i.e bit 0. To address this, mask input bit
+> alone and read it.
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
->  .../include/dt-bindings/power/qcom-rpmpd.h    | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
-> 
-> diff --git a/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h b/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h
-> index df599bf4622..50291f918c2 100644
-> --- a/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h
-> +++ b/dts/upstream/include/dt-bindings/power/qcom-rpmpd.h
+>  drivers/gpio/msm_gpio.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Please don't directly patch dts/upstream subtree. Rather you should
-follow documentation here [1] as to how you can cherry pick patches from
-upstream dt-rebasing tree.
-
-Also, are these DT bindings header changes posted in Linux kernel
-upstream?
-
-[1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing-with-devicetree-rebasing
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
 
-> @@ -4,6 +4,25 @@
->  #ifndef _DT_BINDINGS_POWER_QCOM_RPMPD_H
->  #define _DT_BINDINGS_POWER_QCOM_RPMPD_H
+> 
+> diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+> index 6783fc756f4..7de332c66ae 100644
+> --- a/drivers/gpio/msm_gpio.c
+> +++ b/drivers/gpio/msm_gpio.c
+> @@ -202,7 +202,7 @@ static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
+>  	if (qcom_is_special_pin(priv->pin_data, gpio))
+>  		return msm_gpio_get_value_special(priv, gpio);
 >  
-> +/* QCS8300 Power Domain Indexes */
-> +#define QCS8300_CX	0
-> +#define QCS8300_CX_AO	1
-> +#define QCS8300_DDR	2
-> +#define QCS8300_EBI	3
-> +#define QCS8300_GFX	4
-> +#define QCS8300_LCX	5
-> +#define QCS8300_LMX	6
-> +#define QCS8300_MMCX	7
-> +#define QCS8300_MMCX_AO	8
-> +#define QCS8300_MSS	9
-> +#define QCS8300_MX	10
-> +#define QCS8300_MX_AO	11
-> +#define QCS8300_MXC	12
-> +#define QCS8300_MXC_AO	13
-> +#define QCS8300_NSP0	14
-> +#define QCS8300_NSP1	15
-> +#define QCS8300_XO	16
-> +
->  /* SA8775P Power Domain Indexes */
->  #define SA8775P_CX	0
->  #define SA8775P_CX_AO	1
+> -	return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) >> GPIO_IN);
+> +	return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) & BIT(GPIO_IN));
+>  }
+>  
+>  static int msm_gpio_get_function_special(struct msm_gpio_bank *priv,
 > -- 
 > 2.34.1
 > 
