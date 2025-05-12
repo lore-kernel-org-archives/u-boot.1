@@ -4,89 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6304AC3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 21:51:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CBCAC3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 21:54:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1A4482162;
-	Mon, 12 May 2025 23:51:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 867E382162;
+	Mon, 12 May 2025 23:54:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jPJgFVNz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UsNe8WrV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7012F80C83; Mon, 12 May 2025 23:51:42 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id A7666829A0; Mon, 12 May 2025 23:54:29 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 660A6829CD
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 23:51:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49B3780C83
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 23:54:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-30db1bd3bddso46979831fa.3
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 14:51:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3f6dccdcadaso3931753b6e.2
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 14:54:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747086700; x=1747691500; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WVcMUSDG5kslXYsrehFoaGOWUcd9jOGBgvWnZPMKqXA=;
- b=jPJgFVNzkp7WksCg6+HCc3zYFW3s2y5Q45Kto1Nu520j2vACDUdOYcU2aMRMgC6vnI
- u1r/hB+/68Hxf/qGMLxpqrP8YAfW/nS5BwHVO0ZSBuuMtYQv35LjQ4tzU9HAnYCxft8i
- vpopuleYAkxIL6a42zxU91l8vM2LK49BOYLRCaUXrfciu6jqPkreUCosmj1+Cj39VqBz
- ettdvMt7G5C+7hUweUhUN8reTyFUAKiZ63vuKWPTE7RezZCQ3dFw2MHCO/UMwFohYCYu
- M5htvKc3S9WamWemM1mTkeLeK6tjiKe+qIq6Hn4ZttVglk2efYfRAjbBKrmcrCsCrimL
- xAzA==
+ d=konsulko.com; s=google; t=1747086866; x=1747691666; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6uDzOaF2+77vuGdQzeoxeoxiEHQYB66ULO2itMFnjyc=;
+ b=UsNe8WrVlZeEnPkdnZMI2hQfYV0CSseg3V7jUg8ig2zxhBH+0ohPpTTuxX/EMP+R7F
+ DVo73wPYoGhj2Azil3xsXjC6jDMukfa9Ag4DFcXRGJlMKP71+f1kqWLo+Wh/u2+t0VXA
+ TRNSvfi5QAbgTVVUlGXVCazT/KlBiBleqXoAE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747086700; x=1747691500;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WVcMUSDG5kslXYsrehFoaGOWUcd9jOGBgvWnZPMKqXA=;
- b=ZPKvtK3fx8q9oWdf5rnfeiY89cXo7vUPDh4/z8h6GeLXc1FYnssxyV4gbr0GIM6Se+
- 2hvY6iYYAEPV6LOihj/jqARaWWGp4BCX3en5JEvn9UEzSdHzV2uFPW0DSpy5ityGRMe2
- UFFk+yZIrt83o4ZgiBofm3swqBg4ZANv7pjE2RaHAuUb4zkPe28RqNgTLeVb0r5BJ5Vj
- 0sRtE2ng1nwj15xh5mseWBPdWehknZHeJZLoYDA5gfLrgPqGHXL4UyaPYjBouPtsXjrG
- XfJxGNzj5ZdvSjhx97/jcv4ZbnxOlMhc80MNGdH9G5DHM2I2+nn89ePSBAlkEwDATkgZ
- klVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtZmVMKpyJBfQB6023E6iX8kIlUGg9cyLDTJLVVdXOGi92zPzNS0me0pTo2Yde/sllzOOaG+0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2lAztRb0EPkK4fnMtl6qMSTH1X+Zesc/KqIy5DE8jA6LYj3wp
- a0M7GSxlzisI+Jc0AAJrWffQg+sPOf0ACHyWGPA/HIgwzDrwnQqND8j1O5cgm6pDUaSu7JMdaTb
- cNe3Jfg22qfsOiocAwoqyo4vc6bzYJA==
-X-Gm-Gg: ASbGncsvfGgMGOZLu51ZYt1uUAEa36YouHE5MEWHP9xs+6c0SWX4iZCZTEhSbwLmpRj
- wP18PoG0OlyJoXHdF+pigRanj1uxEymjYZ3x+x4+tLnGFag/WHHtFkFgH+89rRTt9QsoVB03WHL
- PdIVGHcF0x51f5LqFIb9VsxDpZJb4gAB7pJfxHWhaQS6jr0NLyofleayA0OIEfNxz0
-X-Google-Smtp-Source: AGHT+IFPTyl/FWJNNbgmb/EdMQxTs0Axar/JDwkbr7hH7qrgIBQBDt/ifzfHIZ3xkLPNSPQSKeln7ciIN5cIyNWnY/s=
-X-Received: by 2002:a2e:a10f:0:b0:30b:b132:43e5 with SMTP id
- 38308e7fff4ca-326c45dd34bmr64217861fa.19.1747086699567; Mon, 12 May 2025
- 14:51:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1747086866; x=1747691666;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6uDzOaF2+77vuGdQzeoxeoxiEHQYB66ULO2itMFnjyc=;
+ b=I2221e7DRYjVE3Ytt0kPIdUTu7YnrlRwxdj0bkPA9dwMS6gebHTdrPhGPRm8SQeR5r
+ L4hCFFA6dqLTc2DKuPV+YS3YBX8/kd+sKt3CBKzh7tD/Wd4GA7YuoxFwk/aBlWv3IA7v
+ ckHoCp5aTyYoojWKldQ3twzLjXYuY97lKxO49R0Adt/rwdmFV+wbXDj9FkvIKdh2hVFz
+ NvmryUmhbNB+GhKkvaTb6g2eWV/sFUBQU4QpQs7RRKb4ijEhDVI1soAOUpsKuyCc69yV
+ BBH/vo9pXe/VB15/+2L1jije25/R3w/jBBhT24z+GkXJ1A6tYQLmyyANhNpXsazbFEab
+ Jlkg==
+X-Gm-Message-State: AOJu0YwzVu/hXc3X0KlmiA5Oe4sApjHElKiVQeDM8DBacT2Z17XuSE4D
+ 89gOmfc+fcexMNYB5hHuPQmePx/5nj8tFVohbkVzMrpUMlkPlROXisXcDNngrhj/Mt9TPwLvrn5
+ rdPQ=
+X-Gm-Gg: ASbGncvzkdBtztbKJdEvRiP1RvrS0tvbOA55vtaJpR7r2i4WcpeRzv0hC9RH5UxCdqT
+ QkiUWSkO8+tPd/aIYKFuAOyXS6HlqVtyZuglAca2zxp1CugPtB+dh6YZ3ePKpGH58G/GDKMIYml
+ pyn833zy2VP2uQ59Hr/SQlY4KngFONbar59C3ZNCIhzxRTK/W7SxFHiJZtaA17VkQcoPLQHN3a/
+ 3zY+2MxQ0+CTwC/Ya9iFpyO+2hUXZfoXvjRUKbQrjrMZeYfWw5VREmAOZHzlYKx6lnQAVRWIruQ
+ vf3MNZEU4TkBow7GJTV8kUiZ1TX1U+FzCypDmW/LABOCy6PXB3L7jpF9JFLQ1/WYueNnzbWDUYt
+ 6IRoLADxEC+2LZK8jn8BpdoRN9A==
+X-Google-Smtp-Source: AGHT+IFZ9lZrkQY2Ks1saLPBeCORzyEEIRFUB7/FyypnkVhDU5Mlq4VQjKz/vvvHZJz6Oks+JVbNsg==
+X-Received: by 2002:a05:6808:2209:b0:3f7:e553:56c6 with SMTP id
+ 5614622812f47-4037fe8db39mr10153718b6e.37.1747086866066; 
+ Mon, 12 May 2025 14:54:26 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40380399c6csm1729260b6e.49.2025.05.12.14.54.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 May 2025 14:54:25 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH] doc: pytest: Use globing for test files
+Date: Mon, 12 May 2025 15:54:24 -0600
+Message-ID: <20250512215424.2362166-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250507083625.6195-1-dullfire.ref@yahoo.com>
- <20250507083625.6195-1-dullfire@yahoo.com>
-In-Reply-To: <20250507083625.6195-1-dullfire@yahoo.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 12 May 2025 18:51:28 -0300
-X-Gm-Features: AX0GCFuLTGYB-lLe5Xs3Pe-wZAoTJ0qR4Yt5WKWNQH1HkesLvR90b6WlIpaO-yQ
-Message-ID: <CAOMZO5ALrt_3mLsizfww7vuvoWSoZBRMnfRju8B+irX538yWdw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 0/5] Add FlexSPI support for i.MX RT1170
-To: Jonathan Currier <dullfire@yahoo.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>, 
- Jesse Taube <Mr.Bossman075@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marex@denx.de>, 
- Frank Li <Frank.Li@nxp.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Mark Brown <broonie@kernel.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,26 +93,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 7, 2025 at 5:36=E2=80=AFAM Jonathan Currier <dullfire@yahoo.com=
-> wrote:
->
-> The nxp_fspi driver is missing some per-device quirks that are needed
-> for imxrt1170 support.
->
-> Fortunately, linux (where the driver originated) has since added support
-> for these qirks.
->
-> This series cherry-picks the linux commit, then adds the imxrt1170
-> usage of the quirks.
->
-> I believe Jesse Taube is also working on this problem for the
-> i.mxrt1050, however the patches I saw were quite a bit different, thus
-> this RFC.
->
->
-> Changes in v2:
-> - Rebased to latest master
-> - Seperated devicetree and binds to their own patch
-> - Included imxrt1170-evk_defconfig changes missing in v1
+After the original series was merged, Quentin noted that we could handle
+adding additional tests more easily by using the glob feature. Do so.
 
-Applied all, thanks.
+Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ doc/develop/pytest/index.rst | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+
+diff --git a/doc/develop/pytest/index.rst b/doc/develop/pytest/index.rst
+index 0a7c1b21a24b..dce8a96370f4 100644
+--- a/doc/develop/pytest/index.rst
++++ b/doc/develop/pytest/index.rst
+@@ -16,12 +16,6 @@ Individual tests
+ 
+ .. toctree::
+    :maxdepth: 1
++   :glob:
+ 
+-   test_000_version
+-   test_bind
+-   test_bootmenu
+-   test_bootstage
+-   test_button
+-   test_efi_loader
+-   test_net
+-   test_net_boot
++   test_*
+-- 
+2.43.0
+
