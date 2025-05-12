@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CA4C3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 22:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FC4C3ABC3
+	for <u-boot@archiver.kernel.org>; Mon, 12 May 2025 22:31:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 927EB80C83;
-	Tue, 13 May 2025 00:04:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A162280C83;
+	Tue, 13 May 2025 00:31:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T5QkE118";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZvoHridZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5E3482162; Tue, 13 May 2025 00:04:46 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 2A6D38294C; Tue, 13 May 2025 00:31:06 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACE1480584
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 00:04:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA8DE80AE0
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 00:31:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-2d5e5e21b92so3625899fac.0
- for <u-boot@lists.denx.de>; Mon, 12 May 2025 15:04:44 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3f7f7b70aebso3830630b6e.2
+ for <u-boot@lists.denx.de>; Mon, 12 May 2025 15:31:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747087483; x=1747692283; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747089062; x=1747693862; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=I+2CU/KVy6s/XXmKAkl+liS+a1d73Bj24EvgUKnfJIU=;
- b=T5QkE118Ew99Hd6DQ86r1gNbCFwbLgl5tsYqJ+8j376iu/xE/+/z2t/0j1nSBfarqW
- foyfusZ8naGF9AV6G20DtMD7FTbKYOQpDjBpB2kRjGvlNdmpWNz4v2FRjtT79IL/B9pB
- xYE9Lrvb4UeH+fI3yTMZRNSgGW3ES05es4v40=
+ bh=50XDZnGQHPdAQjQZc/sPntxfRMK+sukl55o/x70kojQ=;
+ b=ZvoHridZtwVWi90XgjHTJSRyhuh4ycVIqogaOan5c7b1RJfO3l0mw4zgwiEWCNzHoV
+ FWa5TJXZpvM5K03olRIVyqqZf/om2vW+0e4mLryLXq7VWpqLFLSbUvMoYw03j4yYSg/L
+ suBAxhCh5QHzvWl3M4OKzKt1iip5XM8buk77Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747087483; x=1747692283;
+ d=1e100.net; s=20230601; t=1747089062; x=1747693862;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I+2CU/KVy6s/XXmKAkl+liS+a1d73Bj24EvgUKnfJIU=;
- b=GSS1/Vsxim+7u2gk2u/VZmwVN+dlNGhszVclRK+gicQjpYceoNnURczizDWLooNFvc
- wjARSTv/yjM/xIHpsp7NEX8Jr0K12rsCaLj7rvb+2n9XPUAxg1ctRUFxBTM/izDc2986
- brMMhqZijBRW++e0bBknB4zdl0RUKS42rz8NlTdl9tQiTsKPn3h8hSu1iwwVWYAxyht6
- F9MCAJK3Gq3SPbQ5yxLFGt2rYamG5vlFUP530ArLLtc09tgnfUbWfMtCfakcXpfa0YOQ
- 2HjPhHIZPEOnA+BVWweH0TTc+rw2lkDowYvUQTk+Vk1VBU9TFP9vE2weZTlHvPxNinz5
- q9mw==
-X-Gm-Message-State: AOJu0YxtlbZM8ej3k8ysGJc1QD1A6ZYyy6EjVCX/PaWH+JZzgIm/bCJ7
- 2JZe9R3SsxUCutwITi+sG3Ufr9ZZX3sHDZtutpGCNYAn2XaEga48y5DB+MsUKno=
-X-Gm-Gg: ASbGncuKlPtGne4lBAnf+yyAAI6hbnGnAc59FGG+71R+a4Jy2LVjSZeq2KYDu8A+Bw2
- bK/0ay/FKNkMoIv2SOjXZC9uY3nHHdCflAPhATkW9EfE+sgGGYQETwnar9dTz4nX0RfzaSkKOed
- S/Nz8Bw23w3AwwS6GpXR0ZT9V/krTh0Aux5HIpUHhTDbK/uLG/vHTEmfi7EV7u4yAx83wt+LsPc
- /Ej84es6IbmO3NC5kpe0ji7fMzaHqekcpetCpnX9rakHUNbRzs5Ch1w228O0K2a/hB0g9Ly7hgU
- aFgoXQCGDX+Blw7eiQ8y36FnLggbBWnXFq5kO/kXehf8tw0z/zJn0GS9HZKHIw3K7ZbwwPgeu3t
- ZY82wAxV87sw/
-X-Google-Smtp-Source: AGHT+IH3/LQa9/GMjRb0pKdHnSxa5d7rz+lU17Ypl1zBIWrLlwuQ5oG28dorYTEElGho9fTg4UvAHw==
-X-Received: by 2002:a05:6870:5252:b0:2c2:5a63:9cd4 with SMTP id
- 586e51a60fabf-2dba435541emr7958784fac.19.1747087483238; 
- Mon, 12 May 2025 15:04:43 -0700 (PDT)
+ bh=50XDZnGQHPdAQjQZc/sPntxfRMK+sukl55o/x70kojQ=;
+ b=PNFIQ7B3PJTFCpgEBY2Ygf4SK6hoUh5fha9Jb8I23Bi+EKhWoJ/whZRUHQDQLk2L+W
+ vLyDQ6Z4WxzzmtOHPt/ki9BdIWl09sslDniVKQ8PBq0xaRj/ENbggeNdoYiZZs7hQSWX
+ Jx79vFmlLF02FuG91p/AbVB3IQR4pCmcWRpevyyIofpyOEKBq71U0mapH0ot1ZUaTYzL
+ Bw8Kkq1oivHRhkIacfRe1/YCbGHZ/aJeSk5YyFrvnyUG3UvU9V0xl0RiTi45XIMeuAnS
+ zon7E10eWULQlxScuExiSQlkC6UQ8q2d8GbsqCT0wTwLv4Z917Y+Gvi50UKwDHisI6P4
+ RaOg==
+X-Gm-Message-State: AOJu0YzFci0O8N+rnzEym7peoiQLa0kimHoYRzbqLvCaklOAgDNE3x7t
+ MsOTtKY24eirxIk4DLzbJZVoZV0vR+z8e61N9bJvaom/bI6hJv01BsyNe+tny3g=
+X-Gm-Gg: ASbGncsAAaA3L+gOihps0IqTtBqSttTOS59/Iimb3Q6gt/w48UAaLxNdRffBn3LE5TV
+ wGSGY583Z/A26wY9iZ/qitCMdjME8TtWevUSU7oAS78H8oUSygiyzlEPMebXh57FinLkUure/zt
+ aH8BNbgQsAgoDBALJJ4CiXvwkqcGqUDjj2K243Ig9StOGdtoQukDsPGUi+6yIPpAsyWMhGfliyx
+ Ids7F/7ukGa0/4D9awaOAlaSdjINIWcxkDQyAE8aSoJzYG1I54kEJef6ezDJRV5zfE9U8Mp2dXP
+ 7sCFVie178Z7lZb55JHDfkDTCzHIgXPjyUoqHLs444gYdrZoagkSRq4pGS2CT55AvfBhIuCmcl3
+ kQv83f7B64NRfHdIcRo/xRKA=
+X-Google-Smtp-Source: AGHT+IG7YZRPLEVBpxrlwh86cy/nMTqRAtA1EeDD7/tKMolYrwmLj5ZKyrqxLw+f/zi0NpDg8jbyBg==
+X-Received: by 2002:a05:6808:3195:b0:401:e949:6374 with SMTP id
+ 5614622812f47-4037fdef301mr9176768b6e.16.1747089062561; 
+ Mon, 12 May 2025 15:31:02 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2dba07c740csm2085089fac.29.2025.05.12.15.04.41
+ 5614622812f47-403802d3a1asm1719121b6e.20.2025.05.12.15.31.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 May 2025 15:04:42 -0700 (PDT)
-Date: Mon, 12 May 2025 16:04:39 -0600
+ Mon, 12 May 2025 15:31:01 -0700 (PDT)
+Date: Mon, 12 May 2025 16:30:58 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 0/3] doc: Document remaining test_b* tests
-Message-ID: <20250512220439.GS603748@bill-the-cat>
-References: <20250507232500.527782-1-trini@konsulko.com>
- <20250508214222.643020-1-trini@konsulko.com>
- <CAFLszTjwfGV6P7GzFDYFVp8G5oTvoXUKvOXZy6KLNW_=BMO+xQ@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v2 0/3] booti: Remove the SYS_BOOTM_LEN limit for booti
+Message-ID: <20250512223058.GT603748@bill-the-cat>
+References: <20250501131858.2160756-1-sjg@chromium.org>
+ <20250505181421.GI5430@bill-the-cat>
+ <CAFLszTgp0Y-yJVwE_ZBKKOXrqra6nRZqE-phPgQhA9Et99qcDg@mail.gmail.com>
+ <20250506163229.GY5430@bill-the-cat>
+ <CAFLszTg0YCntmLZ6EHXkWsJDhf0cCQyCHhCNzK31j+GHfBUz3A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Av143vDccTLFjxep"
+ protocol="application/pgp-signature"; boundary="wnHMZQ4P0rn+1Xgv"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjwfGV6P7GzFDYFVp8G5oTvoXUKvOXZy6KLNW_=BMO+xQ@mail.gmail.com>
+In-Reply-To: <CAFLszTg0YCntmLZ6EHXkWsJDhf0cCQyCHhCNzK31j+GHfBUz3A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,113 +107,126 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Av143vDccTLFjxep
+--wnHMZQ4P0rn+1Xgv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, May 10, 2025 at 01:27:23PM +0200, Simon Glass wrote:
+On Sat, May 10, 2025 at 01:25:57PM +0200, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 8 May 2025 at 23:42, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 6 May 2025 at 18:32, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Hey all,
+> > On Tue, May 06, 2025 at 03:24:21PM +0200, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 5 May 2025 at 20:14, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, May 01, 2025 at 07:18:32AM -0600, Simon Glass wrote:
+> > > >
+> > > > > This series restores the original behaviour of extlinux booting l=
+inux
+> > > > > 'Image' files, which is to ignore CONFIG_SYS_BOOTM_LEN and instea=
+d uses
+> > > > > a limit of 10x the compressed size.
+> > > > >
+> > > > > It also adds RISC-V support, since it uses a similar format to AR=
+M64.
+> > > > >
+> > > > > Future work should integrate the code in 'booti' into main 'bootm'
+> > > > > logic.
+> > > >
+> > > > I don't like "in the future we'll remove duplicated code".
+> > >
+> > > Small series, fixes a problem, can be made larger but then it isn't a=
+ bug-fix.
 > >
-> > This short series is a follow-up to my last series. It could have been
-> > longer, but I think this is a good point to get some feedback on a few
-> > points.
-> >
-> > As background, something I wondered about and the answer seems to be No
-> > is, can we automatically take things like:
-> > @pytest.mark.buildconfigspec('cmd_button')
-> > and get some nice output? Since we can't that limits the value,
-> > possibly, of generating some documentation.
-> >
-> > First, as this series shows, is there value in documenting tests which
-> > do not require additional configuration? We have some tests with no
-> > comments and some that are fully commented, but at the end of the day
-> > when trying to run these tests, pytest will already say helpful things
-> > like not being supported on a given platform, or not run because
-> > something isn't enabled in the build. Spelling that out in generated
-> > documentation would require duplication of work.
+> > Which is why yes, this should have been instead of the however-many-part
+> > "PXE" series, and then fixups on top, a series to address this problem.
+> > Then other series to address other problems.
 >=20
-> Yes, I agree. I think the code is the best place for most of the docs.
-
+> The whole effort is addressing problems, although it depends on your
+> definition of 'problem'.
+>=20
+> I'm quite happy with the approach I have taken here, incremental
+> improvement towards a long-term goal. It doesn't need to be constantly
+> rebased into out-of-tree code. People can only test what is in-tree.
 >=20
 > >
-> > Second, is there value in documenting arguments? Especially ones like
-> > "ubman" that are just required and always present?
+> > > > I also don't
+> > > > like not seeing that what we really need to do, in all cases (not j=
+ust
+> > > > booti) handle decompression like we do for FIT images, and ask LMB =
+to
+> > > > give us a space to use.
+> > >
+> > > See bootm_load_os() which does already do this.
+> >
+> > Yes, that's what I was asking you to look at. I assume you're even
+> > specifically pointing to commit 69544c4fd8b1 ("bootm: Support
+> > kernel_noload with compression") which you and I did together.
 >=20
-> I like documenting arguments, since when people see the docs they
-> continue the trend. Python suffers terribly from a 'def
-> my_function(*args, **kwargs)' disease where you have to spend hours
-> spelunking around to figure out what is actually valid as an argument.
-> Highly Pythonic, but dreadful.
-
-Maybe I wasn't clear in these two points. Let us use
-test/py/tests/test_cat.py as a concrete example. Today, most of the file
-is:
-# SPDX-License-Identifier:      GPL-2.0+
-
-""" Unit test for cat command
-"""
-
-import pytest
-=66rom subprocess import call, check_call, CalledProcessError
-=66rom tests import fs_helper
-
-@pytest.mark.boardspec('sandbox')
-@pytest.mark.buildconfigspec('cmd_cat')
-def test_cat(ubman):
-    """ Unit test for cat
-
-    Args:
-        ubman -- U-Boot console
-    """
-    try:
-    ....
-
-My point and question is that "@pytest.mark.buildconfigspec('cmd_cat')"
-will not be translated to generated documentation, but also that if you
-try and run this test outside of sandbox, pytest already tells you it's
-not supported, and a similar error if sandbox but not cmd_cat.
-
-So is there any value in adding doc/develop/pytest/test_cat.rst that
-will consume the above and generate valid documentation that I'm not
-sure would ever be read?
-
-> > Third, should we document internal functions too, or just the tests? I
-> > would be inclined to say no unless they're expected to be re-used. The
-> > test_net functions to bring up the networking are an example that of
-> > reuse that should be documented for example.
+> I seldom look at the commits that produced the code, but yes.
 >=20
-> Sounds right. But I am likely to continue to document all Python
-> functions, since I never know when I'm going to want to export
-> something for use elsewhere.
+> >
+> > > > A problem is that CONFIG_SYS_BOOTM_LEN was never
+> > > > intended to be the limit on *decompression* as it's the limit on wh=
+at
+> > > > we're loading to memory from disk. That's what getting me unhappy w=
+ith
+> > > > this part of the series.
+> > >
+> > > From what I can tell, that was introduced 11 years ago by this commit:
+> > >
+> > > 081cc197472 (HEAD) bootm: Export bootm_decomp_image()
+> > >
+> > > I suppose the idea is that BOOTM is supposed to be a limit on the
+> > > image being loaded, so it is compressed, then the limit needs to apply
+> > > to the size of the uncompressed image, to maintain parity. Otherwise
+> > > there would be no limit at all, since it is pretty easy to devise an
+> > > 100-byte image which expands to fill all available memory.
+> > >
+> > > Using 10x the uncompressed size doesn't fill me with the joys of spri=
+ng, TBH.
+> >
+> > Yes, it's a matter of heuristics, and also why we have things like lmb
+> > to check and make sure we don't overwrite ourselves. I do not recall if
+> > the 10x used there, or the 4x we used for kernel_noload FIT
+> > decompression, was based on checking what the compression factor the
+> > available algorithms get on typical kernel images or not. That would be
+> > another improvement area, sure.
+>=20
+> That commit you pointed to does not actually pass the lmb_alloced()'d
+> size to image_decomp(), so it isn't perfect.
+>=20
+> I would much rather use the BOOTM limit everywhere, including as the
+> maximum uncompressed size of images. That is what it is for, as I
+> understand it. Users would be quite surprised if the limit were
+> ignored in certain circumstances.
 
-I'm certainly not saying we shouldn't comment the code, but perhaps
-a follow-up to document test/py/tests/test_distro.py would clarify some
-of what I'm asking about in your mind.
+Yes. I believe you misunderstand the limit, and the reports that we (and
+distributions, etc) get when users have a problem would re-enforce that
+too.
 
 --=20
 Tom
 
---Av143vDccTLFjxep
+--wnHMZQ4P0rn+1Xgv
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgicHMACgkQFHw5/5Y0
-tyxghQv8CAhkv3+b6KzIZ6YuL0tg8akheFWtB99fQr16Q+G9Rph5z5Y/xck2u04E
-h9ePNSQpvmB2hGeGeLGB3V0UiO4PNy+Ao7tyvFw1N6BrPUgNsIbIocE93TpXyQtk
-LhuM/MHZdCDTfamit/AHeVXUgvGepvOEI2FJPwxRT9tR7S5MztY9+f/sA64wkaB+
-Nd6NtbPLlGoCTxw7jqUmsajneOJlol7zEqAN+3D6vDDS+nhRUKGMISZE1ZKT4VPR
-axABuoHHhQ+DHxrrz+jQbDh/VoC2LBvJwuUdcFBiqEsnPi9VjlZcvQSjDJwit0CV
-+iK3oR0UQi+0HIjJ+Ia3aHDp7mO9CdKUWH9n6xre5dPJP11B9oIXdUw6bHckutjw
-nq4bN9i5EEDd0CN77dnV4FYVj8PaJkd0y709L3wBxaQ2x8TjOEICKzvzRjL/Tq+q
-/yglU5+piC4ufKOigtDkHFvufLF3am7mnvZVEMnHP0dt9lntzzevraiBXE36mb2i
-BPkrRtB9
-=tg1U
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgidp4ACgkQFHw5/5Y0
+tywAFQwApXyxQxlc7Htxsh72M95fWQ8yNlqPxnMaDzCfUzm9dnwX3NVT5YOxqCeR
+k/2M+BEKW0NVc7p64uquRtO/MYz6ahq51MrSUFdGfe/ITwpZb/9KLWg6FLDN/ySA
+j9qp0/3EdtPscoQ8QN8I6YLwpieiBpfLdC3+8M5HPwddn/gT6xR6tbRv/pFCaEui
+H9u+IcTBKu/qWLdHglI66HQN3ikkTM0d2QN0hYqeOHpT8aaKDgwcmG22/IIiAu3/
+F9WlWQn8uH68PKsSt9r6T8aVAr92bUygdrYhFaRj5MZJ8qnHXODYql4qabCgPrdC
+TkHZ5+Mce/9GeNc9JsTIlptIPAD+4RZQpaXezHS8dJhVCR4M4UGWGXvZFEbTgCik
+oXp1HvLtpOnVXvJSZ2wgBPZkLwieYHvZq+Gd0oFKiGgU+N/1oe7OASo2rGWx+pwZ
+ZHI0Fe/PAMPPvnEVoFeQJSp0MIgCR7w4wtpEf9Bo7eT8aJsCB7QoeNgwH2QZ889V
+SODIMMXE
+=ioRW
 -----END PGP SIGNATURE-----
 
---Av143vDccTLFjxep--
+--wnHMZQ4P0rn+1Xgv--
