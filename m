@@ -4,163 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0D55C3ABC3
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 10:07:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11618C3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 10:40:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BAA78129F;
-	Tue, 13 May 2025 12:07:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C5E480AE0;
+	Tue, 13 May 2025 12:40:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="hQ1LJP2H";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="nxmzlOks";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDA0A81DD6; Tue, 13 May 2025 12:07:19 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20629.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::629])
+ id 574E080AE0; Tue, 13 May 2025 12:40:20 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20603.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::603])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A28398091A
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 12:07:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D3DF8091A
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 12:40:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Qn26ALfX3DyPLJvYGEV3HVgTKosIK2aw9hZSpvPT2xBAYkROAGi4J5EnJbWa/kgOzvcYR66SICFPp3YLZS3+F6xSnzws+Hkax+QXigZLnSdv8YnCXh7NIfWNfCA3COTG7qF/CREB8r7epwisYkWSm8jqBI+i4otxz52vT+q0MNUhaTDz2io8YwRVMiMmDiPsEb/ty6YW8vzlM76wW/KyuP/j2mWKOveJniEuAG5okuLeji1MyHrF7qJtaTXLKHvZ1+JdvrrWIOoLUJPFwkm91xqiDSUNS0hJzUcDnQ9zZhs6Ba9puH0/rhDmkbI5tRGzeHeEIjd8v23QfRxhrWaCBw==
+ b=amsUV0qni6MqCaEVQ4jg6NCACxW93oLh4tK2Ic32JEqXVOGBxo25IFiuBSTD+kCZVjm8k2RDXiGNgOp2ZFAvHZXojLHUEPSRfePO9cC8vJD4aPyiJUkXb1QfPAU41zPwg/DgnpMupAmXClbHJnqVHdpNW5d2VSgpFlfwnwZh2DBbrNptBapLLySPBb0QQvdkEUtlyEVeWh89ng0WiAYSk+zWwUpjnCrut+OB8DqLcL668ta4teJN9mJwfPUzdAhYDuvU8Ywqk0K52HAMFurZRwvczavFs2zD0db8oGbxkGzFi04RJml2wi1Jh68xpoQSH9t7TOLuXogB9RUm1rZ63Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=99pZswnr/H1buXCZYW015AUr3mLy6OsrpkHhWftYMRY=;
- b=E/pMYYYbzjtVrZqx5b2RkrtldbLaCoqObHxKnqqVWDkGTZgYTBoMbgzNW1SOArmf3BqJl6BHkSlUvH6636Sfzonm/38o2S3vTzgxlDGzNLGMaJV0i2er5s7Hd4Tntqab4yVQtJ5c/78sJNlWWrfX87wbdB9DK7PxkX5ZjoEKotkSJgbh6jgIHCvc3mReBu2BT5yxjZXQtqJyY4xbCI/nNAsv7dqRhC0l553EcXUD3W26zgxI0xLFlBlpWeP2aq+iKdaGvQMovXwOgi9s3T16qHQL+IxjTawZM+gcJpMFHb78Y/hqt3YhGd7HrXYBs68bu4VdfPSX4DfEAXslI6abfg==
+ bh=81I/jblcWAW84P0WaRVSOtQuAxaAKz3egB9Brhf9avw=;
+ b=MAVNOs/Miz7sLw4GayS5gLMT7+rys3lMWGObaZz6qs21wR7QDQcFuhM2VjHsCI3lFFe//uRP1W8pFPSzzCmUd6awOL+bonPs5ieNchPsV/BinqMsfPOJ1F6DcvNOiFb5jSaLqi6IcjzOcPa/PTTLo4oKrm7z6VhPEVzOrmyjr78mPXWAHb8BiDxuC9HiL5NiW5g0atGa4vpIGNOpsYa9jLHFE8Y3dnx01T21gD1DLADl7ztApo9IHXZyx2Vp/+hZkZUg+fgo8hrx3Pi/hqQ27Y4W/+hxFNVGsa+UOsiPVyVNvv2H/phBFP1ms9/1GRfl63OTzwpUenyl8TrX/VGzow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=99pZswnr/H1buXCZYW015AUr3mLy6OsrpkHhWftYMRY=;
- b=hQ1LJP2H8NPQHV1buqpAj5hepSGDIYsp63FZUS45li9KbKvSEXyDIJC8NJtiamDagyEz+1UAHQGz7VOUx2nTavCAQ7eFg7/nkNGmR1AnXFyq2SU2auEJgGxEA5VuYlzT8WO5s7QFZePR9NddnjROT48nxynIDIBratASf1Nj7V8=
+ bh=81I/jblcWAW84P0WaRVSOtQuAxaAKz3egB9Brhf9avw=;
+ b=nxmzlOksY4nUcTpVL8F2+ixRtgy74/Xz7kuqG905xfqtQVJ56jmn3QtfBPMPgq8zfbeMk57G6IKjMXRSGhb6Hduz4XRTliEPtU0uxufFWDIL+mOlbYpPgi+RlPZMKg5CAywPLAgGoFoxP+NtShuEnZdpUqn8fml0Fr5wxQIXX0I=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS4PR04MB9364.eurprd04.prod.outlook.com (2603:10a6:20b:4e9::22)
+ by GV1PR04MB9119.eurprd04.prod.outlook.com (2603:10a6:150:26::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.28; Tue, 13 May
- 2025 10:07:15 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.29; Tue, 13 May
+ 2025 10:40:14 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8722.027; Tue, 13 May 2025
- 10:07:15 +0000
-Message-ID: <e7bb5ed1-735d-4438-b052-f3ca31d30f1f@cherry.de>
-Date: Tue, 13 May 2025 12:07:13 +0200
+ 10:40:14 +0000
+Message-ID: <a3940636-92c2-4b7e-abe2-8357580c9f48@cherry.de>
+Date: Tue, 13 May 2025 12:40:12 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] tools: binman: ftest.py: Add testcase for bootph-*
- propagation
+Subject: Re: [PATCH 1/2] tools: binman: control.py: Propagate bootph-*
+ properties to supernodes
 To: Moteen Shah <m-shah@ti.com>, u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
  m-chawdhry@ti.com, n-francis@ti.com, vigneshr@ti.com, u-kumar1@ti.com
 References: <20250512115028.1783305-1-m-shah@ti.com>
- <20250512115028.1783305-3-m-shah@ti.com>
+ <20250512115028.1783305-2-m-shah@ti.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250512115028.1783305-3-m-shah@ti.com>
+In-Reply-To: <20250512115028.1783305-2-m-shah@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0069.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ce::9) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR2P281CA0025.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:14::12) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS4PR04MB9364:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9711815f-1b9c-48f5-e562-08dd9205ef8b
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GV1PR04MB9119:EE_
+X-MS-Office365-Filtering-Correlation-Id: b1218398-9aac-4eef-1f6d-08dd920a8b39
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?czkrTFIyK3N5dlg0clp5Yk9Baml4aVBNNzdZUElIRzJRUFluMis1LzRvMlNT?=
- =?utf-8?B?dzVJMENlb0ZGMjZ4OFZQM2oxM1Zjd2ZDN09YK2pibGMyTTZ6Z0gwZXQyTkNR?=
- =?utf-8?B?RVhKenNtaG5lb1VEWWpGSVA3RldrRk9TUG80N0luUWV6RDJBZm1Wb2R4VWZS?=
- =?utf-8?B?SnVWM1ZSNDlHeS9kM25pY3BiZk1RRTBDeUNnYjNZTVRINGhMRDNuYjNrdUxt?=
- =?utf-8?B?US8wU29yYi9CZGNOb2NhZjFSVllWcFVnMFlQbXh3VDdOby9uZUVieGdQVnV0?=
- =?utf-8?B?VCt0QW9WYm5xV3ByQkV6S3ZSOG1IWEN2UXBLd29nN1ZGSVRYcUlSQzEvZ01q?=
- =?utf-8?B?Y3htMmJBOGV5cVczMnJtV3o2RWtJNktLazlKbThXM0loMno3czlCMno5Qm5M?=
- =?utf-8?B?S2ZiTE8yQmpuUkhvVWJGcVZvamJidHlUaUNpc2g3cVZycStlODFqUHhvVEU5?=
- =?utf-8?B?cTFFd0twMlczNXF2M05nSGdMWkRvNmM5WjhWUFJqUmRJN1AwbUhnQzVzemRl?=
- =?utf-8?B?bGpTRTY2YzFCY3p3dHMySzNMamlpN2JoN1ZGZVNYT0dNZEdpb1NSSE5NeDVI?=
- =?utf-8?B?cis4RVZCdUJWd2VSQUo3NU03M1U2NlVSUTMvUGdWV3lOSEtpc1RWS0ZMUU5U?=
- =?utf-8?B?ajRDQS81bklwUjdnNytwTlRUbmxTK1RzWVFxNUVxT0d5S0FKRElIaXhRWlNW?=
- =?utf-8?B?ekhOcjZnazluZ0VtUDc0ckFycVVCTVZoeU9pZzMwM213clFpSU9jU3dQOHNp?=
- =?utf-8?B?T2o4bEt3WDQxQnhSV3R5bXVTNWZvV2hxRFRaT01TZHp0ZENzSTBsd25PNHR1?=
- =?utf-8?B?Sk5NZzNxSW5FaUsrQWxEQ1dLYnk4NnJ0ZUtpQlpUdS9wU3JjZmNNTW4zcUg3?=
- =?utf-8?B?ZzdKU1h6ZmhrTkhUZmhlbEhiblc1eTZCRUFsa0ZjUGk4dHRXTi9DMFlrbS9J?=
- =?utf-8?B?V2pqNTI0aGw5NnZ5bW1Na3hxTWQ4MzN5QzBNcmJOZ2lnaFdOTHRKVzcwRmhP?=
- =?utf-8?B?SUs1VTFZUzJtZHpObTluOU5wWE5kNFhkS2xkb1U5UTNuZU1Kc0NHSlBRMmZT?=
- =?utf-8?B?MUNtY1FMZGxKQmtIbldFbHZYczlLYTRqZkVGOWJUc3d6RFAyQWYyVzI1LzR6?=
- =?utf-8?B?TFh4aUppMVdQRE83bXQ4ajJxOUo0cUtXazE2SEljb1B1NjRtbnFTSWxCNWxL?=
- =?utf-8?B?cmFnRE9wZGJ5MmJsaFpGMUdyb0RFWXJIMHVqNE5GeW56bjdndVpQWTl1WUYw?=
- =?utf-8?B?MXdHaUlnQ2tvbDFjMG1VVGtBUE1zUzNJWkhqbG8rb04zQ2g1QnE2cGwwdUZ4?=
- =?utf-8?B?VzdBdmxPQmdEVFdXWm1HSW1BM0grUVhkL1pkNmsvTmFQaTNtOVBiUXJBYllB?=
- =?utf-8?B?R3JCK0NlcE9KdWhXdFVSSUNrRkpPK2lDbFhrdDA0UHRYbXpsc0NyV2x1TVNU?=
- =?utf-8?B?RzUvTTF4WWkxNUU3eVZhMHlZN1IvMzU3dFVBMXNWa1p2S3JOSjgySVhYS25Q?=
- =?utf-8?B?V2M0bW45c1lQRXlmOFZCYXo4bFhoUHBsUzZBd1hCVXBhVzl3NlhlUGxZM2JZ?=
- =?utf-8?B?cG5pZWpnVFFvYW1DR3pzTDczanhMWUtDQUdYQXdNMXYxekR0bEQ1VmlNa3Bw?=
- =?utf-8?B?OXh4ZCs0Y3lmbG9tR2Z4TVk3b2QxUDFtejMxdFczRXRDTW94NUZlNmdZK1lt?=
- =?utf-8?B?SnJSWmFiTm5FMDRycWxmd1l2T09GdWJnNjFjZ0hUU2w1Q3orcnJVYzFJU3lN?=
- =?utf-8?B?dWtGZGhtV1UxM2dMMk1WLzcwOXFHUG5wQWhHZFFuZXNSYTFGbTloY2Y3Tld4?=
- =?utf-8?B?Wk50bHlZTnFyeisvSEdrTmphSnZQR3kzVkFHRExIU1JZL0l3VnQ4VUY1bTdB?=
- =?utf-8?B?N2ZESUVsdG04MzI2WmJVSGhCUEIwYS9FMFF2QmpydlI1OU1GdThoUE9EeE1J?=
- =?utf-8?Q?gsG593KNNaY=3D?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eU8yazQvZ2FpL2l1VkwvOElGaDhZZ0FrUllybFhaSUFtcFFJQUhhUlN5Vjdx?=
+ =?utf-8?B?L3NIM25icWVYK2c3Nzdrdnp4ZmM3ZTIrMWw0NFdwcU1MWXk1eW9IbHNFUEpF?=
+ =?utf-8?B?WlhLMUR0R05yY0srL3daelNpQi9WaWVjbXRWRnNjSjBDeTVUWlI3M0pZdUc5?=
+ =?utf-8?B?NEhiRnNrRldOVVpPQmtYcStJYytUOGNhUk02OUtwVE55T1BJN2x6UldlaFUv?=
+ =?utf-8?B?R3RUcEhhUFVaZmkwYmR0UHd2NlIzOUhUY2tucW1jVVpQR2RJcHdxZ3pPS29G?=
+ =?utf-8?B?T1ZmbFNzSC8wQ2dmRzNtM3ZYQ2QrUEQxSzE0MklqajRjTmE5cXAyQmVNa1Q0?=
+ =?utf-8?B?bmh2Uk1ZdGlpWDhCTDQ2RVBnc1ROazZtbHpMMXRQeFdSTlNWVmNUdW5EMFl5?=
+ =?utf-8?B?WUoyTzlIWWFKSS9IM1lTekhMLzlVTERsbkdYOFdlVEUzdUFpbG0xSXpFYlFO?=
+ =?utf-8?B?SGNjaGVEU0NldmRGSWgyaWswMUF0bURYeVVLZDgwV2NjdFR0OVdGZHUxZmps?=
+ =?utf-8?B?eFg4QS9DdFcwT1d0bDNDdllpeElaTjl6bk1lZnE3UE1FR3F3RGM3TTROTFZK?=
+ =?utf-8?B?dzlQWmljTGNRTERkOXZUMUpaK051MFlPeHlVdHJ0M3R5MksyY1dZL3BGY29N?=
+ =?utf-8?B?SnpFMi9rbXBtWkNDMnJFNlhFcyswU2gvWnF4SE5VUHk4VkljZlVPN1E0WnJp?=
+ =?utf-8?B?K3BTSHExOE5rRVcrUmVhUy9TSmZBcXRFbzNJVE52V1FiOU11d01ueitUWUJH?=
+ =?utf-8?B?OGVDYnNxMGtUa2FSMFFickxnS1QrSVlCK3oxTlVZVGd4REtMWldNN2o0QW9L?=
+ =?utf-8?B?Y2RSd0M0ZDRyQWNZNkxFRTN0RnBjRmxuMXphWGdZZjR1aEZZNmdFc0JYTjBE?=
+ =?utf-8?B?VGk5MkFDK3BvM3l4cWpaVjlxa2M5dFZ4YzZGSFVYRHY3cGo1N3JtYk9zMnBq?=
+ =?utf-8?B?UngxQXJ6NXYxNnNLOStOMzBkK1lZdVhVZ3pMcmhyb21aazZhcUhydUgzSkVQ?=
+ =?utf-8?B?Z3d5Zy9CT1o5NmxSeVN0K2lrTEkrT2RJNW43a0pFY011dDExNEw3Q3VMZFQ2?=
+ =?utf-8?B?dXkyV3F6bzROMG5kcDNnVTJYZW1FLzd1bUw4djN5NW5JaklNaEdyWG1IbEtG?=
+ =?utf-8?B?bUwxUGZoekJsanZ5MmVwOEI1ZHJQSW1obDRtVm9wZEpGUXQyc2xRY3g3RmhY?=
+ =?utf-8?B?WEZ4aGFQSFMrcmhJZnlrU21HNXpWcG4vV1BvMTBBR3hGWDQxd3M5WDd5R0pG?=
+ =?utf-8?B?VDRFMTJERzhreWVLM1M5K0lITWFLbGNVc1hmT1l5a21IbmFrbHA1c2lUenpS?=
+ =?utf-8?B?a2l5Q0M3Vm1qY3FwOFY0UmI2S3djM3NseEVQaEFmdmV5K25UZzg3cVV2L1cr?=
+ =?utf-8?B?MHo1bDlNSm9zRDdDdnNkZ205WnFnY01FN3AraHdUeG04Qzh0UWM4aU04VFlG?=
+ =?utf-8?B?TnYrU0RRSHlhRkNoNXdtWXVzRVA5VlZaVlMwUDUxM2oxS3pMNFpsMjdaZTBz?=
+ =?utf-8?B?dGVKeUIyNG42NkJPMkZLVS84WTJidkR0SlpwcnU2R0NBaWRnLytranBWSG5H?=
+ =?utf-8?B?UWRnRjJGci92a2VSdWdzSGNXVnBHTCtmRkNwS0xOZ1dlZFhBWU93WTVTU0tW?=
+ =?utf-8?B?ZmdMWWRhRlJRSC9vUkRjNzZVOWloZk1iMzJndFJyUFRzZDk0MGxQWkh1ampY?=
+ =?utf-8?B?NGtHMFEwcWZWcUZERjNmZUN5dlJBQ3E0TVg2eVhCZmV1SkRmanYrdi9Td09R?=
+ =?utf-8?B?R253SlhPUWgyaTh1VFZLbGlNVTJjS2M1bXhHZ2FIYVE0d0Nrd3MyVTlUenJC?=
+ =?utf-8?B?UUpqLzhoSnFqSGpJTktyQkRmenpZbkxROGRRcWFDVnhERkM4TTFIM1RJVzdO?=
+ =?utf-8?B?aXlFaXdnUEJlenV1ZXhWMFhaWXl5VzllS0pPbVVmOU9nK29XdlBjUVFtTFh4?=
+ =?utf-8?Q?3paDpLMcdTE=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SXlPeDY2NEJINEZvU21OSnVXdklENS9iaGdNRDAvQTBDMzcwa0lvY1BaZ1BQ?=
- =?utf-8?B?eTZtR3N1WWVLWk90dDd0KzJyVE8rRU1KaVpLVXp2eHJaekJDdDE3QjhScDZB?=
- =?utf-8?B?OGt5REhtTlRkSFFZaWJiV0RXRmMrTzhxZUtmc1JEdzZkTDJZM0FTZis2c2hm?=
- =?utf-8?B?anZRUGNHUmtacVNEQllXMGtqWW5qUDE5NFo5WWJ6SE1Hc3VZaWJnOFJTMkNR?=
- =?utf-8?B?UjNoT29hY3hHWUFHcUFpRnhmcURqUWViRlJINWFrR29vOTN6eHRjS0FFdHAy?=
- =?utf-8?B?aWpvNmwwZlZhVWR5dzB1RHJmMm9GcFVOYXVLb083azZnaEtLdTJldFBES0lW?=
- =?utf-8?B?Ky9aSTBBa3ZWbU5QUFF1cW1vU1JpVHNVcFJIUXVqOVpxb2pLMXJBaVRzcHRP?=
- =?utf-8?B?Vlk1enl4NVluYnQwSFJnSzFLdTB2SFRuMnFEdWhlRFVyNFFsQUQ3UVkraXFP?=
- =?utf-8?B?YldJNitRRFJTNGxQdHlTbldvdFcvZVV3YWlMNTBZUk9xanR1OXZBb0xXUWNQ?=
- =?utf-8?B?eGZJUStlQ2N4NndDVFVwenRPRjhYZGFkakxrcyt4S3Bia1hFU2s5Q2NHdEhV?=
- =?utf-8?B?cU1mQ2RzTTBoYUtKS2lEMlBHVFgvRTlKZ3d1TlZLcGo2T0F3b1lWT1ZZZ3gr?=
- =?utf-8?B?VE1EVFl6ZGNjclJzWlhmSi9OTlZSc2xqeGRBZVBzdCtOMS9vbFBLRDErOWlF?=
- =?utf-8?B?UnZMdEFoYkxoM0FNRFJ5Njdhelg2dE9sUGNjK2QyVlB2dTNXMnJsWkYzcXlC?=
- =?utf-8?B?VkRQWjd0bE1TdWpiY25oOEdqMzN2aWw0dmJSWnB0RzVPT1lJZUJ2MTlvQ3Jq?=
- =?utf-8?B?NE1MRVhldmt6TTljMmJBRkpTOXJIUXJIWnRFVlpZbm5jYlFQa1pkaHkyUVVO?=
- =?utf-8?B?bVl0aEtuUWRoNXhPenNXeDkzbjhmMUtpTmhIeFg5T2FxUDM1cXZlbFZkMy9B?=
- =?utf-8?B?WGczVlVESGROYjZ6UGF6M0QvTzh3UGFWYzBhVThrQ3ZEbG8wT2RjU2VvOXpy?=
- =?utf-8?B?azBvNllMajJrTEJjUzVjZkdHVXB1Nk44VHgrZnF4cExJRjRiQVp1cE9Lbm5D?=
- =?utf-8?B?UEVuclNDZTRRN1RqS3ZrQkdqQUYzSkhWdWVyZlJiWWpXNjIxVk1aNG1JVWVC?=
- =?utf-8?B?QlZlcmJoa2ZHS2xTMnp6NXY3WHlnL3h5MU56MDZFaDZJc2FxK2o2U2ZJb3hX?=
- =?utf-8?B?TTNmdXZsQWVBcEh4YWl0MHNibEFEbi9QbXZLMkVxVVdmdHFJZXRvK0Y0Z0Ux?=
- =?utf-8?B?RWlKeG9iZHVlQVJEaU1GL0N2Rks4bU14NXpnenN4MUIyZFhncEhBK05WN3B0?=
- =?utf-8?B?QnRYZkJZZE1iUWtFT3BvUWlsSkJVZVYxZ1VxS1FmV1BjU08zeG5vYUI5anJl?=
- =?utf-8?B?OWJ6Z1JNc0tjUXYrbXVPeEhyQ1l1NWtXekJGSGg0R3dNMU1xU2lDZ3NqRkRV?=
- =?utf-8?B?dU1JY2d2QkxlRG92QWhBMU1JNGNyY3puc0tzYXY0ekNlSUpNMEJIbFNURjla?=
- =?utf-8?B?RDhOSW15cit1ZGQ5VnAyeXYxYUlvUFVvWEZqcmpINzJCUUtaUW1oT0NJS0Uw?=
- =?utf-8?B?RWIvZEs2NXMzVlRRbzJqSlZ0Umg2ZEtoQ0R1MHRxU3Q5NEtoOTc0ck15OHRO?=
- =?utf-8?B?Wko5eVZPN3pnK1hOaGt4OHFyUytEaFo4bEMraHRNbStmNnhROVpTbnd3dUdj?=
- =?utf-8?B?R1NXMVBKSmtvZGFVOGFReXowT1Q3azFzN3AvOHp5VGN6NTVSVy8zZlVBR2JE?=
- =?utf-8?B?QWxkRGlIUXpJRS82TW9UakUzbDVZQkc4QTdsRW95Z2xMTFZMajVIalhLdk9x?=
- =?utf-8?B?VTh3WXpFSHRneWJ5OHRXaFI1aCswc0NQU1liWDV0aFdIdENWWDFnMVVSeWg0?=
- =?utf-8?B?czdVd0JZK1poQXo0cktxTXRveHJkSlRtYzZjVVBXMFZETmp2eTlVMTMxMDh6?=
- =?utf-8?B?ekdBOG15MFNaeVI2QWJUcE1rU1pDc1VaZzB0OVBaN3NGa1JuN2Q3MXRkWndu?=
- =?utf-8?B?RGoxM1liUjJiQlM1RFIrTDh1NTRCMFB5ZkUrdGRCL3FqeUl5ZTI5cHU3UGt3?=
- =?utf-8?B?TWlIZy9XbFRUM051SUVON3Z5MDg4TkZEOXNvUFVsMEh6Q0FuSXZPYy9Fd1hi?=
- =?utf-8?B?dmtReGVuUi8xSWdCblBKVTZUcldFcVhmMXVWd0ZIM2RZQnRQQ2VNNkgySXIv?=
- =?utf-8?B?REE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dUJZR0tnNmM1Y1BDUGZsNHFKUTdBeFFpSW5WYzNDSEFGWnNzZkIzSUo5eFox?=
+ =?utf-8?B?N1F5ckJlVnlZQ1R2SXQ2VFlvVWhrdjFHSGduQXNjYUIrWW10SXhlRkpIbG1U?=
+ =?utf-8?B?U2poRXdydld5UHBjVm02RXBqWEFOQ0N5UVhYU3l0T2dxNnplNDhCYVlHRDVE?=
+ =?utf-8?B?WDhXWlhVTzZkS21tOWZwUERUV0VxWnJVcG85NE9qaGk1U0JrSWxXTXhTbG1U?=
+ =?utf-8?B?a0FjczVUU010cW1KeG1BVU9SSFIwYmpyaEtLWTVZMXlGU3RaSlRlTmhibFBk?=
+ =?utf-8?B?S05vdTR2dXM4WWliODFvRTdydGVHcUpjOTlrYVd4eThFeFZLb280SWlYVm9U?=
+ =?utf-8?B?cVdZajRhYy9UcjFFWEo4UFNlNDRkZEZKMWNiT0lFeHJ1YXFCNFVYYmRmQkd1?=
+ =?utf-8?B?QkZ1Z2hzMTM3RkxMMS9YL2FKbU8xbHhTM2FKZEFibUtoQ3lqOHpWb2tyTXJP?=
+ =?utf-8?B?Wm1KczhETTRFTVJyNUNOV2RuZ0dIZlh2N1VkT0VKM0FzQklEaGxqMWZpQjN5?=
+ =?utf-8?B?RURxY0I2eVovK2JxcHF1aDV0T1hUa1hPM1A4cWVYRFphV01SUnlSTXA1ZmdW?=
+ =?utf-8?B?M0dKZkZORGFzSVMxREFnbzJCRFJkQU1MR280MENCb1ZmRVA2SS8xNTBSdnEx?=
+ =?utf-8?B?OTB6YTRuYXY0aDNITEp4eGsrMDJFWHByRExXdkcrYXBpZEpuUjJmN0x0UStW?=
+ =?utf-8?B?dC91OXZXZzN5OXMxN0IxNGhKRVUrN001SjZYSkFGdHpLaWorRDBzVjhwU2xy?=
+ =?utf-8?B?RWNJSjZ1ZkNqNzlBc3BVR2RiUCtaU2RvUE9JU3JGaVB4MHM5aWhtWTNiWDd1?=
+ =?utf-8?B?U1liM1IrK21ENHEyNEZ0cURYcU1vMFpYU2xkaml2RklnKzBKdmtBMU42YWsr?=
+ =?utf-8?B?aWh0UEYyVUpmak5sTGZWWlYwdzQ5Z3dyVVQ0MG1BS2EzKzA5cW5CZExGbVA3?=
+ =?utf-8?B?S25teXl1dVQvdGpmaW43UjBjdTZBK0UzZlpDcTJoNmlRTmxmKzh1all4Y3la?=
+ =?utf-8?B?Q3kvTHF0Y0txcjJHOTFDK01mdm5tT1ZmSzZ4bHNCNS85Z0ZYMlIyQ09zSjNu?=
+ =?utf-8?B?N254YnlLK1ZOb3pyZnZEZlF5WmhNRUN2d1FYeGg2Zm1KeEo3a0dlaTZza25j?=
+ =?utf-8?B?OWMxb0ZYdTkzcExHYlVtZloydGtyUVJmTi9WTnRlem5FaEdMejNEd253OEIz?=
+ =?utf-8?B?UUw2UmFnaXVkUWlSSUJtRkNTUG9pVkljVytpR3VNKzYzN3pFc2Jmb2ZtdG5l?=
+ =?utf-8?B?SVVydUJOalFQeHlWcklHWEY1eENYVmhReTJIRFhTYmttMWlxTk4rRkdZUVFs?=
+ =?utf-8?B?R1VGNmdkVEJtRkhTQ1RpaFlvbEVwVGtuRFVDZHBTNzRwVWNvcjI3RXl4anpq?=
+ =?utf-8?B?ZVNKQlhzNDlMQTlnZFdyODhub1YvY0l5SlhRRzNESHgwSjNwTkl6MW5XQzJm?=
+ =?utf-8?B?U2NURkd1SitIZGZPMzVuRjh1eDNJS1ZvOHp6ci8zYUQ3WFdQb04xOEZCemZW?=
+ =?utf-8?B?UXJhNVNDdEh3QThZeTNueVB5QlhBeGMvUXg0aWRyYXRDdWErMXdpQTdZSWp4?=
+ =?utf-8?B?L0FhN0Z5TlBEQnJ0anF2amNxMXI5d1l6YVhIRkVKa1kzcGt5WHMvVTZsTTZJ?=
+ =?utf-8?B?YXB3ZUprZDhPRUpTa0dUMjBWTEFYOU1wcmJXbDJqL0tsdmswcG1JeXdWdnQ3?=
+ =?utf-8?B?VTI2WVhyekl3SjVILzhFTFlqNHM2RHlRSjUwd1BsQ05yeXdCTEN6c3BSeFFt?=
+ =?utf-8?B?MlYrd3VRbzVPOXRkK3hWQzV6cmQzcFY5eFV3dFRzZmppL1krOUhBN1BVWkxh?=
+ =?utf-8?B?VEZDSEszNEVKZFJUbkRQd0swYzc1NGMyKzJOK0RBNjJwT3BOUkdiSHREWFBW?=
+ =?utf-8?B?b2NlZXV3dGN1OXB6L0JRekZ5RHJwUjhxMmZaN1gzeFVHNHZIRm5uenpWZWRF?=
+ =?utf-8?B?VFYxdWloZnltUEk3QkxTWHhySFcxMHpyMnlhRmZSbGdDd0xkTXA3MHVudGJu?=
+ =?utf-8?B?U1JzK2NvT0wxcVZOT2dQTXphWHQ0NXhvaExxWjJvVzlXVHVIU1pmTUNVQlR1?=
+ =?utf-8?B?WGt2VHp4MWd0VnJ1K2hMUkdxRXN0YlRjUVdjN2ovUHZwWmgxaHZab1FWUEps?=
+ =?utf-8?B?LzY0a3A4bVd0ZFpSVUZLeldMU0FDdytQdDh2Qkl4TmVNRnhXWlJ6SFl0NXAx?=
+ =?utf-8?B?RVE9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9711815f-1b9c-48f5-e562-08dd9205ef8b
+X-MS-Exchange-CrossTenant-Network-Message-Id: b1218398-9aac-4eef-1f6d-08dd920a8b39
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2025 10:07:15.0090 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2025 10:40:14.0991 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4TVEPg1ST7kvs63rLyQBF/OPXrm95tZf9rBey5oLMjXtBbK3vhi3XE5si9TUcleW3J9u6e+hRU+matRRAQXIYvesNNKSy9kp4gufB1p8MkM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9364
+X-MS-Exchange-CrossTenant-UserPrincipalName: eWSvu0RUyqNFR/gxJyPTjFdXeULRlkNs6To1+u8EQcotnGNDeP5qGQhVLee1/XHLznGfjs/wVwBSrVQojKS9pVxVjQCxiC/peAsmOI3/EZU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB9119
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,70 +180,124 @@ X-Virus-Status: Clean
 Hi Moteen,
 
 On 5/12/25 1:50 PM, Moteen Shah wrote:
-> Add a testcase to ensure that scan_and_prop_bootph() actually
-> propagates bootph-* properties to supernodes.
+> Add a function to scan through all the nodes in the device-tree
+> for bootph-* property. If found, propagate it to all of its parent
+
+It's not scanning for bootph-* properties. It's scanning for two 
+specific bootph properties, so try to update the commit log and comments 
+so it's not misleading.
+
+The commit log is lacking information as to why we need to do this, what 
+this helps with and why this is specific to bootph-all and bootph-some-ram.
+
+We need to be able to look at this patch in 5 years and have a clue of 
+why this was required.
+
+> nodes up the hierarchy.
 > 
 > Signed-off-by: Moteen Shah <m-shah@ti.com>
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->   tools/binman/ftest.py                 | 22 ++++++++++++++++++++++
->   tools/binman/test/347_bootph_prop.dts | 19 +++++++++++++++++++
->   2 files changed, 41 insertions(+)
->   create mode 100644 tools/binman/test/347_bootph_prop.dts
+>   tools/binman/control.py | 51 +++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 51 insertions(+)
 > 
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index fa174900014..5c3138b271a 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -8011,5 +8011,27 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->           self._DoTestFile('346_remove_template.dts',
->                            force_missing_bintools='openssl',)
+> diff --git a/tools/binman/control.py b/tools/binman/control.py
+> index 81f61e3e152..ccf081cb686 100644
+> --- a/tools/binman/control.py
+> +++ b/tools/binman/control.py
+> @@ -530,6 +530,54 @@ def _RemoveTemplates(parent):
+>       for node in del_nodes:
+>           node.Delete()
 >   
-> +    def testBootphPropagation(self):
-> +        """Test that bootph-* properties are propagated correctly to supernodes"""
-> +        _, _, _, out_dtb_fname = self._DoReadFileDtb(
-> +                '347_bootph_prop.dts', use_real_dtb=True, update_dtb=True)
-> +        dtb = fdt.Fdt(out_dtb_fname)
-> +        dtb.Scan()
-> +        root = dtb.GetRoot()
-> +        parent_node = root.FindNode('dummy-parent')
-> +        subnode1 = parent_node.FindNode('subnode-1')
-> +        subnode2 = parent_node.FindNode('subnode-2')
-> +        subnode3 = parent_node.FindNode('subnode-3')
+> +def propagate_bootph(node, prop):
+> +    """Propagate bootph-* property to all the parent nodes up the hierarchy
 > +
-> +        self.assertIn('bootph-some-ram', subnode1.props,
-> +                      "Child node is missing 'bootph-some-ram' property")
-> +        self.assertIn('bootph-all', subnode1.props,
-> +                      "Child node is missing 'bootph-all' property")
-> +        self.assertIn('bootph-some-ram', parent_node.props,
-> +                      "Parent node is missing 'bootph-some-ram' property")
-> +        self.assertIn('bootph-all', parent_node.props,
-> +                      "Parent node is missing 'bootph-all' property")
-> +
-> +
->   if __name__ == "__main__":
->       unittest.main()
-> diff --git a/tools/binman/test/347_bootph_prop.dts b/tools/binman/test/347_bootph_prop.dts
-> new file mode 100644
-> index 00000000000..2bcc116cb4d
-> --- /dev/null
-> +++ b/tools/binman/test/347_bootph_prop.dts
-> @@ -0,0 +1,19 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-> +/ {
-> +	dummy-parent {
-> +		subnode-1 {
-> +			subnode-2 {
-> +				bootph-all;
-> +			};
-> +			subnode-3 {
-> +				bootph-some-ram;
 
-add a subnode-4 here as a subnode of subnode-3 and without a bootph- 
-property, then test that the node doesn't get it. Just for the sake of 
-completeness.
+Misleading, it's not propagating bootph properties, it's propagating the 
+prop passed as an argument to the function, so rename to something like 
+propagate_prop and update the comment.
+
+Be clear also that this is expected to be a boolean property (because of 
+AddEmptyProp).
+
+> +    Args:
+> +        node (fdt.Node): Node to propagate the property to
+
+Specify that all its parents (recursively) will have this property 
+propagated to.
+
+> +        prop (str): Property to propagate
+> +
+> +    Return:
+> +        True if any change was made, else False
+> +    """
+> +    changed = False
+> +    while node:
+> +        if prop not in node.props:
+> +            node.AddEmptyProp(prop, 0)
+> +            changed = True
+> +        node = node.parent
+> +    return changed
+> +
+> +def scan_and_prop_bootph(node):
+> +    """Propagate bootph properties from children to parents
+> +
+> +    The bootph schema indicates that bootph nodes in children should be implied
+
+s/nodes/properties/
+
+> +    in their parents, all the way up the hierarchy. This is expensive to
+> +    implement in U-Boot before relocation, so this function explicitly
+
+I think the point here is "at runtime" which is missing.
+
+> +    propagates these bootph properties upwards.
+
+at build time :)
+
+> +
+> +    This is used to set the bootph-* property in the parent node if a
+> +    "bootph-*" property is found in any of the parent's subnodes.
+> +
+
+This is all misleading, we aren't propagating all bootph properties
+
+> +    Args:
+> +        node (fdt.Node): Node to propagate the property to
+
+Same remarks as for the propagate_bootph method above.
+
+> +        prop (str): Property name to propagate
+> +
+> +    Return:
+> +        True if any change was made, else False
+> +
+> +    """
+> +    bootph_prop = ['bootph-all', 'bootph-some-ram']
+> +
+
+Please explain why those only.
+
+> +    changed = False
+> +    for prop in bootph_prop:
+> +        if prop in node.props:
+> +            changed |= propagate_bootph(node.parent, prop)
+> +
+> +    for subnode in node.subnodes:
+> +        changed |= scan_and_prop_bootph(subnode)
+> +    return changed
+> +
+
+I have a gut feeling this is suboptimal, though simple and easy to maintain.
+We currently go up to the root node for each and every found 
+bootph-{all,some-ram} property. We could simply divide this by half (or 
+more if there are more properties to propagate in the future) by passing 
+the props to propagate instead of just one. We can keep track of which 
+node has propagated the property already and, for its children, stop the 
+propagation at that level instead of going up to the root node all the 
+time. I'm not sure typical Device Trees are deep enough for us to care 
+about that kind of optimization for now, especially since it'll be 
+running at build time only?
 
 Cheers,
 Quentin
