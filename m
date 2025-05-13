@@ -4,69 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1155DC3ABCB
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 02:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4DCC3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 04:07:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C3C58091A;
-	Tue, 13 May 2025 04:12:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DD2080C83;
+	Tue, 13 May 2025 06:07:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A53C80C83; Tue, 13 May 2025 03:52:33 +0200 (CEST)
-Received: from smtpbgbr1.qq.com (smtpbgbr1.qq.com [54.207.19.206])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 124E280584
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 03:52:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=hal.feng@linux.starfivetech.com
-X-QQ-mid: zesmtpgz6t1747101123t187a6898
-X-QQ-Originating-IP: JKHQKTTExm2cp1AJ+g5Cnh+ZcBgMahN94eRKdes9wO0=
-Received: from [192.168.125.115] ( [219.128.232.47])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 13 May 2025 09:52:02 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 13975804235117325434
-Message-ID: <A943772C5A99C764+6288fd5b-22fe-4a9e-8dab-50d293c685cc@linux.starfivetech.com>
-Date: Tue, 13 May 2025 09:52:01 +0800
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="XBtnPFfs";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D8E6581F66; Tue, 13 May 2025 06:07:12 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4667A8091A
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 06:07:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id A0FCE25CD2;
+ Tue, 13 May 2025 06:07:09 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Vz83l-1RVQ47; Tue, 13 May 2025 06:07:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1747109228; bh=ZXMWVLZ3BGX4U25XaJLrBAlVdIX/4QbrELzSiD1Torw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=XBtnPFfs9UXujD6S1mwTYcvfZuZWz9+YDuUzvgAuOq5UFiz1uuIOF+73jPdKTWVYF
+ hwHjdvlER1XZXYI5dnb1g5VAQIyCnI1jShr27Jonjsy0wVRwVRGOO4zuc0jb6WQRaT
+ uN9boO9e1DutJHnB4AlTbE5ZsA7S3kVb/N6GN2VLZa8qDDN2bLy+CMJVg/5kU8oxIV
+ Hmsuwg0mDgFuvno8vExsjjBR6zzJFHw8rPHNRseEypmGV0Az9Vkipbkx9v5AVxi/Vt
+ l5aApt/k5O2drNbcIvwcHzi8j9P3UopToEG5BoRow/VkRWa/fp35H7aojKTDEwAocb
+ Z8m5+CYxwMUIg==
+Date: Tue, 13 May 2025 04:06:46 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: e <e@freeshell.de>, Leo Liang <ycliang@andestech.com>
+Cc: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Wei Fu <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Vaishnav Achath <vaishnav.a@ti.com>, Andrew Davis <afd@ti.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, u-boot@lists.denx.de,
+ Han Gao <rabenda.cn@gmail.com>, Han Gao <gaohan@iscas.ac.cn>
+Subject: Re: [PATCH 02/10] riscv: dts: th1520: Add clock-frequency for UART0
+Message-ID: <aCLFVtUNo6sj1N3S@pie>
+References: <20250426165704.35523-1-ziyao@disroot.org>
+ <20250426165704.35523-3-ziyao@disroot.org>
+ <aCHF-zLg41oOXdTl@swlinux02>
+ <c37ce687674984589e56d2edb0184e48@freeshell.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Lab failure on JH7110 (StarFive VisionFive 2)
-To: Simon Glass <sjg@chromium.org>, Hal Feng <hal.feng@starfivetech.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Minda Chen <minda.chen@starfivetech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <CAFLszTgi8FxpM=uCe5vZ4rWR81W9fnc77KxjrQ4-+yijXb5a=w@mail.gmail.com>
- <ZQ2PR01MB13077BEB7F27422FA9AF07A6E619A@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
- <CAFLszTg6sdcvB-qfbBJ23JORsxvjTgL9ozvcu_oKFkJrfL=9hQ@mail.gmail.com>
-Content-Language: en-US
-From: Hal Feng <hal.feng@linux.starfivetech.com>
-In-Reply-To: <CAFLszTg6sdcvB-qfbBJ23JORsxvjTgL9ozvcu_oKFkJrfL=9hQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpgz:linux.starfivetech.com:qybglogicsvrgz:qybglogicsvrgz5a-1
-X-QQ-XMAILINFO: NzSDQCFWCzVTuSBU+mSDxbXOrQle/P5hlyDTMtX6nnkoh4OmMwNxqgnT
- TmMXtvXzhIYE4/jVFee/39WdvvBkkarczpJ0+hfHRiAqXTqzoLdA1YPpJ91ovajRwLjGBs1
- U/Bli0Xkf2XZ6HSRWwzi7PbkIVmCecN5604iGHd2ADqTsgMNdd3J1aag7qgDn58jBDSJaVq
- UPQ534psXa5LCMZrEK3gwByX/vQeF0z00+IJAmmrouErMIXXFnBTjOOmxBxujO4+h4d606j
- 89mLEgrnpPeNbPlq9Am6Y8G1jXtz3lscXCwX94QRwFk0K1mENlOST6DR0RqYinY/OB9LCdq
- GpxXOKetvwI2mMpywRKNoTFzFLs3kS+kjAebTVOLDXXJxzNS5OIx2fmUlfhOSZP2VVNtMwM
- d2vlq763gLI8yaHqdvu5xUH9sexOlaFFZCdsYGeQndgDzvcYs/d+li3UHv2Ub+JVq22UpCP
- Siu7G7mlKMPxkK2T4ZgdkCFdRX0tdsgH2L4NtNeoBQ7YWUPHLTUg6v8SQmEAfeFq3V2gzF1
- MBOUrYrogY4FuNONWQmGMtaTuHOHPY3OLYyQqB/xw5Z/c1Vff7H3Mj2kCqYX/u0rOvTdknl
- Fqn2+BuavNdP86sHKGUgTyDPhPmZQ2rBMg2frxhN8bPS1OnwQvGdSjSslH5956HjKurr/iH
- aVxq86BNArS1lAZoDlZpj+0lR2YFT2JQo0MWAhitkmiSt+4CTk6uq0gK83kRM+nCyGKszT1
- 8fTbKYGeP8g2pzJ3k3C6ngWCuQAvNNMV9FSu1c0ndpxDkgIWq0D94myidti9s13TqEcf/0P
- IHDR1llAWddkOEbkpSKQm+uIcT/rscf6bqoi+eEF1KwjbiQt61Zmb1+xdD+S3cKWmUnZrf0
- xTMe3xZoQrKoFgZ+2N50J2TKJBoLKaLuVKzIHvXp5jLC8E+jtOdcee/+dmpJuaq4XXqdg6e
- SXERilCQvAtEaBVwUsx3WVgQN1JRaEMfj4hUVVzr/zoTKYqbHTgQu6Xhbn8YYTEKmq8s=
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
-X-QQ-RECHKSPAM: 0
-X-Mailman-Approved-At: Tue, 13 May 2025 04:12:06 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c37ce687674984589e56d2edb0184e48@freeshell.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,48 +80,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/2/2025 9:38 AM, Simon Glass wrote:
-> Hi,
+On Mon, May 12, 2025 at 07:53:01AM -0400, e wrote:
+> On 2025-05-12 05:57, Leo Liang wrote:
+> > On Sat, Apr 26, 2025 at 04:56:56PM +0000, Yao Zi wrote:
+> > > [EXTERNAL MAIL]
+> > > 
+> > > The BROM of TH1520 always initializes its clock and configure the
+> > > baudrate to 115200. Add a clock-frequency property to provide such
+> > > information without introducing CCF to SPL.
+> > > 
+> > > Signed-off-by: Yao Zi <ziyao@disroot.org>
+> > > ---
+> > >  arch/riscv/dts/th1520.dtsi | 1 +
+> > >  1 file changed, 1 insertion(+)
+> > 
+> > Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 > 
-> On Tue, 14 Jan 2025 at 23:56, Hal Feng <hal.feng@starfivetech.com> wrote:
->>
->> > On 09.01.25 20:37, Simon Glass wrote:
->> > Hi,
->> >
->> > I am seeing a lab failure on this board with the test_dm_compat test[1]:
->> >
->> > =================================== FAILURES
->> > ===================================
->> > 559________________________________ test_dm_compat
->> > ________________________________
->> > 560test/py/tests/test_dm.py:20: in test_dm_compat
->> > 561 assert not bad_drivers
->> > 562E AssertionError: assert not {'starfive_gpio'}
->> >
->> > Would you have time to take a look, please? A patch to fix a similar problem
->> > on another board is [2].
->> >
->> > Regards,
->> > Simon
->> >
->> > [1] https://ci.u-boot.org/u-boot/u-boot/-/jobs/14394
->> > [2]
->> > https://patchwork.ozlabs.org/project/uboot/patch/20240611200156.224552
->> > 5-19-sjg@chromium.org/
->>
->> I will take a look. Thanks.
-> 
-> I just wanted to check if you sent a patch and if so, if you have a
-> link to it please?
-> 
-> Regards,
-> SImon
-> 
+> NAK from me. Quoting Emil "The uart0 node already has a reference to the
+> uart0_core clock, so it shouldn't
+> need this property." If SPL does not support the clock framework to do this
+> parent node lookup properly from device-tree then we should not be adjusting
+> the device-tree in this way; use instead the codepath in serial driver that
+> checks a compile-time define.
 
-Already fixed in commit b6d150b9496fc42a2c88515fa14426ac892c3500
+I was not aware of the codepath, thanks for the hint! It should be the
+correct way to go and I'll try to take in v2.
 
-https://lore.kernel.org/all/20250116034534.91513-1-hal.feng@starfivetech.com/
+> See for example:
+> https://lore.kernel.org/u-boot/20250503115301.972550-1-e@freeshell.de/
+> 
+> - E
 
 Best regards,
-Hal
-
+Yao Zi
