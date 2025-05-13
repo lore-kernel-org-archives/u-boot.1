@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822BAC3ABC3
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 09:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEE1EC3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 09:19:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CEED829E7;
-	Tue, 13 May 2025 11:19:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F400682A59;
+	Tue, 13 May 2025 11:19:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="PmShhhRU";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Uz2W1tuz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E1F5800C1; Tue, 13 May 2025 11:19:02 +0200 (CEST)
+ id 860CE82A1C; Tue, 13 May 2025 11:19:08 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35D25829E4
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:19:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0470182991
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:19:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54D667nH030207;
- Tue, 13 May 2025 09:18:39 GMT
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54D6h0AO007509;
+ Tue, 13 May 2025 09:18:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 3odDkCKvEoXRxpN8QhVGQklhazALHDpYFVJe4egpqUc=; b=PmShhhRUHW1SOxzT
- fWQgKrWasCgf1go2x1M7NQDFMnQ8LmmsZ0rpO9LUe4XowagVzJDZZQIsW6mPpLiJ
- tu4QEuCzxwu2lntX+uglDTM5XkIusc7DQpv2dp9128QKIFTtpEuLJQp3Ebm7ro7Q
- mTORoN+PV33A6swggefDt7Wml3VE10s9wfXUbeQtP3Mt4Kqr9o/HzIiZflC5uWmO
- Uc9n/KyCsShgQ9BnbPnMjkhnTH5XMAxDC6Xy3snPXAscZnbLNLkZJQWa7LspQ1DW
- LkbxLW1ZIimzcV2swbGzCSus+6huj+P0Xu6glyuGcRIUU+g71RtkVaXSlDy4p0jg
- +aVJbw==
+ x9SifL0YCmO2W6i6i22EiR6/GrwQxZJg89WHWobgBIY=; b=Uz2W1tuzGmM49ujX
+ ADaNzHqcxNEpu/zhXI+BWo3pKacUN9lGx+r7kAKBTuZGmS1bC55HU4/BRWwxM/QQ
+ NLSHEDGhhkgE8MhhZVhypsDNEKwBVvEJdrrPfbKL2oLCOE/hmwvzxFD2+iMI9Us0
+ Qt2QvWiHvbT/RyGl+sU7UMLCexx6tjVfjyES+tUWyClDSysA3XKUAlB3PzhiKTOt
+ 9PvN5toLtBkSjoyw7XsoV0L1MRjext1xodIPQhIhjUJNseYzgecMlkPBMOrVH8vq
+ rNdPtKEcIHOibWDFvustAbA0aiZN2pmLIPXaJBjA8UXO5eQ7Dg9l3in2GXdI8HO/
+ sUUPOg==
 Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46hx4k76tr-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46hv5qffgq-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 May 2025 09:18:39 +0000 (GMT)
+ Tue, 13 May 2025 09:18:44 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54D9IcKI026148
+ by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54D9Ih9B026625
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 May 2025 09:18:38 GMT
+ Tue, 13 May 2025 09:18:43 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Tue, 13 May 2025 02:18:33 -0700
+ 15.2.1544.9; Tue, 13 May 2025 02:18:38 -0700
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <casey.connolly@linaro.org>, <neil.armstrong@linaro.org>,
  <sumit.garg@kernel.org>, <trini@konsulko.com>,
@@ -63,10 +63,9 @@ To: <casey.connolly@linaro.org>, <neil.armstrong@linaro.org>,
  <ansuelsmth@gmail.com>, <cniedermaier@dh-electronics.com>,
  <xypron.glpk@gmx.de>, <ilias.apalodimas@linaro.org>,
  <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
-Subject: [PATCH v4 3/5] env: Add support for storing env variables in SCSI
- devices
-Date: Tue, 13 May 2025 14:47:08 +0530
-Message-ID: <20250513091710.3719292-4-quic_varada@quicinc.com>
+Subject: [PATCH v4 4/5] doc: board/qualcomm: document iq9 building and flashing
+Date: Tue, 13 May 2025 14:47:09 +0530
+Message-ID: <20250513091710.3719292-5-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250513091710.3719292-1-quic_varada@quicinc.com>
 References: <20250513091710.3719292-1-quic_varada@quicinc.com>
@@ -79,28 +78,28 @@ X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Authority-Analysis: v=2.4 cv=ReqQC0tv c=1 sm=1 tr=0 ts=68230e6f cx=c_pps
+X-Authority-Analysis: v=2.4 cv=DqtW+H/+ c=1 sm=1 tr=0 ts=68230e74 cx=c_pps
  a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=dt9VzEwgFbYA:10 a=COk6AnOGAAAA:8 a=XyhusxJ8NkhsuqipcxUA:9
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: Bm8fPypUWOd8FdmXUi--bwLvpay8WrtQ
-X-Proofpoint-ORIG-GUID: Bm8fPypUWOd8FdmXUi--bwLvpay8WrtQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTEzMDA4OCBTYWx0ZWRfX++/wXWFgXL3p
- kNbQnWwIfEaKjLb1qG651lD8zuBLC8bYsd8t8YlJGUdlknXkgB9963KppDlMaxavGYul6QTI2T5
- zlPQE28avt1t2LyP/Zyjo8CS7jxRlwFpxPYtUNi76QFz0s6YY489fg/t27pH7uZmPOxepG9EvuP
- b1+8uv48F8OF6trBrqc0mXrNmeMrVZ6e4NcByAj2CzhK7P8a2fiLn/X0b2gTEdRa8zlEiWEZ7QW
- YU+C8rHd/DOWLYUh4GZUxMN4eGUxKwHW15UmPD/+ZTUpAJwl4TSFfuXZnMSxBzvEA4okl43Bygt
- qW410lw3AfPh7drv8q528se+rWJJE0hmMYLIAaMMPkMTW6Hce1WFpP0j8NB/KRrizuAqxPnn+j2
- ItCnpIa7gWfUOrR5a/lP7Wq4Co26cCDrbw/jIh+g4/Ml0JwKndpD/9owGYLyaFEYWz5NBQop
+ a=GEpy-HfZoHoA:10 a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8
+ a=COk6AnOGAAAA:8 a=fZOVrP4WiPEGLte6-pUA:9 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-ORIG-GUID: 17fNqTt7NSkw1R_V_x-O4k1h4BCs3GAb
+X-Proofpoint-GUID: 17fNqTt7NSkw1R_V_x-O4k1h4BCs3GAb
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTEzMDA4OCBTYWx0ZWRfX5LHemEdMsFiN
+ Lem8uQlVQIb3nx/z+EYcVtEQx8WwXkmOcVsWKgGegl9iuU/7Ym5+K8PkBet3dh56SGf3b8RTQd9
+ br5G5RWZkU/hdrfVJB4e1zeprwFrSLrRggzJ9OoJp14vxsmEnZjU76Yi8s/zPqgeyRfYwGE7gy+
+ icIKse4N1u0gvP+N3pgp2kFOq+5eGYnNhB1UiM7TuwthWe1qlNeziM6TdqmAfYCiGn0gV48Rblj
+ GKjYuFihSUZkDc5V6Lofqq5EqnVKi35wn2LKGTvoahlL0a9QCGPjyFyau7zFI2aFqfOgVjYy/Bv
+ AtfnUdoOsl6hpTqlnoCNxvabyWHYxi4puuUrRd3h+rdRVhx/N1Mf75G/YNTvF9Pc0Rk1DZxCeMr
+ 2BSsndChN3h47LWdsRvjJ2M4tVx+G3eLriaPcyq9F6g3/88YBpdrcscs9jESMSNM3dDioKYk
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-12_07,2025-05-09_01,2025-02-21_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 mlxscore=0 mlxlogscore=999 phishscore=0 suspectscore=0
- spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0 clxscore=1015
- adultscore=0 malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2504070000
- definitions=main-2505130088
+ mlxscore=0 bulkscore=0 phishscore=0 clxscore=1015 adultscore=0
+ lowpriorityscore=0 impostorscore=0 spamscore=0 mlxlogscore=999 malwarescore=0
+ suspectscore=0 priorityscore=1501 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2504070000 definitions=main-2505130088
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,218 +116,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow SCSI to be able to store environment variables.
+The steps are similar to other boards. Minor difference in
+the way environment variables are stored.
 
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
-v3: s/SCSI_ENV_PART/SCSI_ENV_PART_UUID
----
- env/Kconfig            |  15 +++++-
- env/Makefile           |   1 +
- env/env.c              |   3 ++
- env/scsi.c             | 115 +++++++++++++++++++++++++++++++++++++++++
- include/env_internal.h |   1 +
- 5 files changed, 134 insertions(+), 1 deletion(-)
- create mode 100644 env/scsi.c
+ doc/board/qualcomm/iq9.rst | 62 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 62 insertions(+)
+ create mode 100644 doc/board/qualcomm/iq9.rst
 
-diff --git a/env/Kconfig b/env/Kconfig
-index 9f5ec44601e..9081f7099b7 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -74,7 +74,7 @@ config ENV_IS_DEFAULT
- 		     !ENV_IS_IN_MMC && !ENV_IS_IN_NAND && \
- 		     !ENV_IS_IN_NVRAM && !ENV_IS_IN_ONENAND && \
- 		     !ENV_IS_IN_REMOTE && !ENV_IS_IN_SPI_FLASH && \
--		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD
-+		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD && !ENV_IS_IN_SCSI
- 	select ENV_IS_NOWHERE
- 
- config ENV_IS_NOWHERE
-@@ -297,6 +297,13 @@ config ENV_IS_IN_NAND
- 	  Currently, CONFIG_ENV_OFFSET_REDUND is not supported when
- 	  using CONFIG_ENV_OFFSET_OOB.
- 
-+config ENV_IS_IN_SCSI
-+	bool "Environment in an SCSI device"
-+	depends on SCSI
-+	help
-+	  Define this if you have an SCSI device which you want to use for the
-+	  environment.
-+
- config ENV_RANGE
- 	hex "Length of the region in which the environment can be written"
- 	depends on ENV_IS_IN_NAND
-@@ -731,6 +738,12 @@ config ENV_MMC_USE_DT
- 	  The 2 defines CONFIG_ENV_OFFSET, CONFIG_ENV_OFFSET_REDUND
- 	  are not used as fallback.
- 
-+config SCSI_ENV_PART_UUID
-+	string "SCSI partition UUID for saving environment"
-+	depends on ENV_IS_IN_SCSI
-+	help
-+	  UUID of the SCSI partition that you want to store the environment in.
-+
- config USE_DEFAULT_ENV_FILE
- 	bool "Create default environment from file"
- 	help
-diff --git a/env/Makefile b/env/Makefile
-index 3b9c71d5681..d11b87702c1 100644
---- a/env/Makefile
-+++ b/env/Makefile
-@@ -28,5 +28,6 @@ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_NAND) += nand.o
- obj-$(CONFIG_$(PHASE_)ENV_IS_IN_SPI_FLASH) += sf.o
- obj-$(CONFIG_$(PHASE_)ENV_IS_IN_MTD) += mtd.o
- obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FLASH) += flash.o
-+obj-$(CONFIG_$(PHASE_)ENV_IS_IN_SCSI) += scsi.o
- 
- CFLAGS_embedded.o := -Wa,--no-warn -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
-diff --git a/env/env.c b/env/env.c
-index dbaeedc3c3b..7a9c96b4078 100644
---- a/env/env.c
-+++ b/env/env.c
-@@ -46,6 +46,9 @@ static enum env_location env_locations[] = {
- #ifdef CONFIG_ENV_IS_IN_MMC
- 	ENVL_MMC,
- #endif
-+#ifdef CONFIG_ENV_IS_IN_SCSI
-+	ENVL_SCSI,
-+#endif
- #ifdef CONFIG_ENV_IS_IN_NAND
- 	ENVL_NAND,
- #endif
-diff --git a/env/scsi.c b/env/scsi.c
+diff --git a/doc/board/qualcomm/iq9.rst b/doc/board/qualcomm/iq9.rst
 new file mode 100644
-index 00000000000..207717e17b1
+index 00000000000..bc89f286add
 --- /dev/null
-+++ b/env/scsi.c
-@@ -0,0 +1,115 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2008-2011 Freescale Semiconductor, Inc.
-+ */
++++ b/doc/board/qualcomm/iq9.rst
+@@ -0,0 +1,62 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Caleb Connolly <quic_varada@quicinc.com>
 +
-+/* #define DEBUG */
++Qualcomm Dragonwing IQ9 Series
++==============================
 +
-+#include <asm/global_data.h>
++The Dragonwing IQ9 Series delivers unmatched on-device AI performance for the
++most demanding industrial applications, as well as available built-in safety
++features and design flexibility for high-compute, powerefficient performance
++capable of handling heavy workloads in extreme environments. More information
++can be found on `Qualcomm's product page`_.
 +
-+#include <command.h>
-+#include <env.h>
-+#include <env_internal.h>
-+#include <fdtdec.h>
-+#include <linux/stddef.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <part.h>
-+#include <search.h>
-+#include <scsi.h>
-+#include <errno.h>
-+#include <dm/ofnode.h>
++U-Boot can be used as a replacement for Qualcomm's original EDK2 bootloader by
++flashing it directly to the uefi_a (or _b) partition.
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+static env_t envbuf;
++.. _Qualcomm's product page: https://docs.qualcomm.com/bundle/publicresource/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf
 +
-+struct env_scsi_info {
-+	struct blk_desc *blk;
-+	struct disk_partition part;
-+	int count;
-+};
++Installation
++------------
++First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``qcm6490``::
 +
-+static struct env_scsi_info env_part;
++  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
++  $ make qcs9100_defconfig
++  $ make -j8
 +
-+static inline struct env_scsi_info *env_scsi_get_part(void)
-+{
-+	struct env_scsi_info *ep = &env_part;
++This will build ``u-boot.elf`` in the configured output directory.
 +
-+	if (scsi_get_blk_by_uuid(CONFIG_SCSI_ENV_PART_UUID, &ep->blk, &ep->part))
-+		return NULL;
++Although the RB3 Gen 2 does not have secure boot set up by default,
++the firmware still expects firmware ELF images to be "signed". The signature
++does not provide any security in this case, but it provides the firmware with
++some required metadata.
 +
-+	ep->count = CONFIG_ENV_SIZE / ep->part.blksz;
++To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
 +
-+	return ep;
-+}
++  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
 +
-+static int env_scsi_save(void)
-+{
-+	struct env_scsi_info *ep = env_scsi_get_part();
-+	int ret;
++Then install the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
++on your device with ``fastboot flash uefi_a u-boot.mbn``.
 +
-+	if (!ep)
-+		return -ENOENT;
++U-Boot should be running after a reboot (``fastboot reboot``).
 +
-+	ret = env_export(&envbuf);
-+	if (ret)
-+		return ret;
++Note that fastboot is not yet supported in U-Boot on this board, as a result,
++to flash back the original firmware, or new versoins of the U-Boot, EDL mode
++must be used. This can be accessed by pressing the EDL mode button as described
++in the Qualcomm Linux documentation. A tool like bkerler's `edl`_ can be used
++for flashing with the firehose loader binary appropriate for the board.
 +
-+	if (blk_dwrite(ep->blk, ep->part.start, ep->count, &envbuf) != ep->count)
-+		return -EIO;
++Environment Variables
++---------------------
++* The environment can be stored and retrieved directly from UFS partitions.
 +
-+	return 0;
-+}
++* Environment variable partition details
 +
-+static int env_scsi_erase(void)
-+{
-+	struct env_scsi_info *ep = env_scsi_get_part();
++	UUID: 71cb9cd0-acf1-b6cb-ad91-be9572fe11a9
 +
-+	if (!ep)
-+		return -ENOENT;
++* Relevant config options
 +
-+	return (int)blk_derase(ep->blk, ep->part.start, ep->count);
-+}
++	CONFIG_ENV_IS_IN_SCSI
++	CONFIG_SCSI_ENV_PART_UUID
 +
-+#if defined(ENV_IS_EMBEDDED)
-+static int env_scsi_load(void)
-+{
-+	return 0;
-+}
-+#else
-+static int env_scsi_load(void)
-+{
-+	struct env_scsi_info *ep = env_scsi_get_part();
-+	int ret;
-+
-+	if (!ep) {
-+		env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition not found", 0);
-+		return -ENOENT;
-+	}
-+
-+	if (blk_dread(ep->blk, ep->part.start, ep->count, &envbuf) != ep->count) {
-+		env_set_default(CONFIG_SCSI_ENV_PART_UUID " partition read failed", 0);
-+		return -EIO;
-+	}
-+
-+	ret = env_import((char *)&envbuf, 1, H_EXTERNAL);
-+	if (ret) {
-+		debug("ENV import failed\n");
-+		env_set_default("Cannot load environment", 0);
-+	} else {
-+		gd->env_addr = (ulong)envbuf.data;
-+	}
-+
-+	return ret;
-+}
-+#endif
-+
-+U_BOOT_ENV_LOCATION(scsi) = {
-+	.location	= ENVL_SCSI,
-+	ENV_NAME("SCSI")
-+	.load		= env_scsi_load,
-+#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_XPL_BUILD)
-+	.save		= env_save_ptr(env_scsi_save),
-+	.erase		= ENV_ERASE_PTR(env_scsi_erase),
-+#endif
-+};
-diff --git a/include/env_internal.h b/include/env_internal.h
-index ee939ba4293..75b46d0bcb0 100644
---- a/include/env_internal.h
-+++ b/include/env_internal.h
-@@ -115,6 +115,7 @@ enum env_location {
- 	ENVL_SPI_FLASH,
- 	ENVL_MTD,
- 	ENVL_UBI,
-+	ENVL_SCSI,
- 	ENVL_NOWHERE,
- 
- 	ENVL_COUNT,
++.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
++.. _edl: https://github.com/bkerler/edl
 -- 
 2.34.1
 
