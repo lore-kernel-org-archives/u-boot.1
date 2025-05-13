@@ -4,163 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B673DC3ABC3
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 12:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB88CC3ABCC
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 12:31:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2C9982A1C;
-	Tue, 13 May 2025 14:28:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C37682B54;
+	Tue, 13 May 2025 14:28:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="i9DJy/oj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gMFRUpsJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E23638129F; Tue, 13 May 2025 12:21:28 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2062a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::62a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 01217800C1; Tue, 13 May 2025 13:26:13 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D59638091A
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 12:21:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 530DB80AE0
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 13:26:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HJ8hxG7czB7buaT4yjnpl/kxBhsvCLmGzp2tlkBPF15BEH7ED2XvZwio6+1+WQN8T6134C+3aWEaidmgO/vLe8qqdCGedysdyeV9oLaC3fBkdoGUwbcyMNQMQwGiQ4QAAGDYr42bFSlT6rbIHvqoMWAFgOqqMXsc3lhf7XlNnjj7rlyCuhUqiZCRzhH4ufb3S8tIS2h0Zbox4WCVHUYdY+OavmuZn2w88A+DjLzQjWrg7T6fvAwGwALOmwKA5lYVAxo2zTVyL4p9XPRgNYVi2ij2ctZ3HRQsjVVnMck8YQ6rPJFIqZzB26ALGS2ydxX3qfhUYSEQ+URjjChOZt7hDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VokLj4ZjN/gDJYbelDCYsdHJvt3648tMWUIC3SZkrsw=;
- b=Q/cWi00JGTFfjAf5zV9+UrcwJUFDdC2fb8SnGNFFanhZCWyN2SKI9TPo513HeKyWN516ht5VsS+2g+U2UykHuU7bH5xc0C39AcyAt8OnT6P7hHuyvF01a6Ec+U+bXk69blJym3JgL/3xuN6Eyaa3X00Ne96YlKsHfR0iPNwWfOzv8OGUNrz6Rb0ftF21dJRKjEZn+ynxy4BJ2uuXtiC9MRYOs3fSIImsYVfqk4pJ0CY91yhiWNb2/TrX53p57qfl8BkQypcnazvHAc1wK0asgQFrVOTVDrVRc0xOjRRUtis26HYwL6UfJe43Vohp+ViJdeFJvnQITHSOs1TzCaeRVg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VokLj4ZjN/gDJYbelDCYsdHJvt3648tMWUIC3SZkrsw=;
- b=i9DJy/oj7TXxf6gHcG6OrTzTShnizqKBBL41HipivTp6Tj2mmJq3HtfxJP0Dt5BLG+whnAbJ7FT9/yAcKje+yIHnuIaogA8XF97LTCrjgBodJycoxEpB0Jdyt7MlUb/23LDhzpaJ0xctLpC37otVhxcoBp3VQp5qALd9dJU4HfwhdN9pK7Y/GsC03FMm4EzPtRyYxa/BHEKbndJYj/BPqCbnpepWOYc0zamFsEGjAC2Vzztr70Hz7ubW+ubFzfDd6whzAbu45+w5VKQL4QTmmsogQuzaKlH6uR1teAfP7dyYruayQVeFXHNl7iu8VrqdlkksPISIOUoKLis372U0Og==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from BN7PR03MB3410.namprd03.prod.outlook.com (2603:10b6:406:bd::11)
- by BN8PR03MB4979.namprd03.prod.outlook.com (2603:10b6:408:db::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.30; Tue, 13 May
- 2025 10:21:23 +0000
-Received: from BN7PR03MB3410.namprd03.prod.outlook.com
- ([fe80::bf20:122e:c7a8:10c]) by BN7PR03MB3410.namprd03.prod.outlook.com
- ([fe80::bf20:122e:c7a8:10c%5]) with mapi id 15.20.8722.020; Tue, 13 May 2025
- 10:21:23 +0000
-From: dinesh.maniyam@altera.com
-To: u-boot@lists.denx.de
-Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong <tien.fong.chee@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
- Boon Khai <boon.khai.ng@altera.com>,
- Alif <alif.zakuan.yuslaimi@altera.com>,
- Hazim <muhammad.hazim.izzat.zamri@altera.com>,
- Jit Loon Lim <jit.loon.lim@altera.com>
-Subject: [PATCH v5 12/12] configs: agilex5_defconfig: Enable i3c configs for
- agilex5
-Date: Tue, 13 May 2025 18:19:13 +0800
-Message-Id: <20250513101913.30880-13-dinesh.maniyam@altera.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20250513101913.30880-1-dinesh.maniyam@altera.com>
-References: <20250513101913.30880-1-dinesh.maniyam@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR13CA0219.namprd13.prod.outlook.com
- (2603:10b6:a03:2c1::14) To BN7PR03MB3410.namprd03.prod.outlook.com
- (2603:10b6:406:bd::11)
+ spf=pass smtp.mailfrom=sycamoremoon376@gmail.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-40331f302f1so3739762b6e.2
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 04:26:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1747135569; x=1747740369; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=l0tdQl2kjoQXm29BfNLAWPTNLQ0d/SZrR+WKnn86w18=;
+ b=gMFRUpsJTq4mFKrM1ThsW62uQPOgW2CvMnCSjltNo5dz+MQXWg1XZFylxlh10kaxeF
+ EwMWIzUi4UF0z9Yfyv9iS17idPDDYfzs7J6zdLmBrPryxucWB7ysawfzmj9H23K1+h5j
+ tuG3O0gct6Syh9mBukCxXwIGpIgrxyiE0tJOCEX08Pp8klLhCpW8Uihjq4klpr4C5eTW
+ WvZp51mf4HHKozRWgpB7DAHkyac2zyYXhWw8EMRtWCCTJNvGenlVnF7vJRSJc8ZGhe6K
+ pEqezb7YjE+U5Azz3CjCcexSkjIp7UHvAo2pZZHe/JEgiAiuD7g6+IjJWVDx4FJvS7mT
+ f4Hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747135569; x=1747740369;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=l0tdQl2kjoQXm29BfNLAWPTNLQ0d/SZrR+WKnn86w18=;
+ b=NYYNE1MhvUBhb4/RwAIORFDTBY9noWj4gXKnPAmd1RF5Cf9Ajo5//SGh4lMtgrjIUa
+ bJQvNF7idPcgQG+uqXbo3pR+x5aBMAp920hRo2cccVN9buTd8VsuX9BOGMV9fJrFQur0
+ Qq6vYaF3rUJ1Y1oFYRcSKzY0Il7Ka6lu5D/oZLUTf/z/t/KI3iJKUHVb+yVKRS69Ahu1
+ NIxCvKckhwdsy4xqqyakOVcRdKB9hkbcs4msaLUciWN9IEser8QUYnL34bQGIO36QzTU
+ d66FZn97tvDnz6/pUjn1w6bEE8lSXWKgvTjp6lw7qvn/Ci8evqn0h++na/og/RCrmxCR
+ CA8g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWKtdm2R3QVRDBtGOawAnCoQ8hj+cq0zqmn1BSFH9zPGaWGmIX7aejtGjEPhJjJFohxg6j5AnM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywyk53pLWS0bY3UBj4ajNAlk3Kn2dd1N/JMRQObW7gBzF4WTGnR
+ 5XwrwEU+QuEGxJc19IjaFQ1TJixWe17Mk8EfMk2Iluy28d+k7Xd012SoGrdtLoQ=
+X-Gm-Gg: ASbGncuBMbpWG5E1/AG6qw2njN6dL9B6+DGClyXB9RtLie4yEx9DUmOUYcYRkcqWFWI
+ C4KO5+WqIDciXZVswyH2p0vXceEpKRu/1Y2V1EifMvydBVyQSSd5QQAWM9i6Yt4u9YzSLu3S0zO
+ vFmljSDRucM2g8HWfXEbsXRhTO7+4hHD3rn7HgFN4x8/0Xu8XYggBfqsqhaJMjvZ6IMO1GHiqnz
+ GBimGuP+AORzV33iRf86jaBOt3MJwgAlaZc9q486Wn4NxDcl5KVqdt04FfWpqF1+o70E6NUnzt0
+ 2ZFkkGab+wfzms9GwhRUTU0ZAZfgxtIik1JsOOImDMrO6oXaezQ=
+X-Google-Smtp-Source: AGHT+IGdnhXCWVi+6sOufq4BIhFKaAH9e3KbjmwRku9zLhIuT+bPc7nMIifXzaJva08hkDDVrVqxxQ==
+X-Received: by 2002:a17:90b:1a8d:b0:2ee:c91a:acf7 with SMTP id
+ 98e67ed59e1d1-30c3ca0415emr24525501a91.4.1747135557693; 
+ Tue, 13 May 2025 04:25:57 -0700 (PDT)
+Received: from localhost ([2001:250:5800:1000::9fc8])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 98e67ed59e1d1-30c39e7607bsm8263901a91.46.2025.05.13.04.25.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 May 2025 04:25:57 -0700 (PDT)
+Date: Tue, 13 May 2025 19:25:53 +0800
+From: Zixian Zeng <sycamoremoon376@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Bryan Brattlof <bb@ti.com>, "Raghavendra, Vignesh" <vigneshr@ti.com>, 
+ Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] arm: add call to cleanup_before_linux for go command
+Message-ID: <jacjuejbprhinwzul6ktugk76a7hu7lm3mfeqelr3wizpyc5lj@toewgusd6z5r>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN7PR03MB3410:EE_|BN8PR03MB4979:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0b5208ba-3bdd-401e-f482-08dd9207e8ff
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?CfosJUhWNoGv9RGnpiahlZiczU0Bq0Rv+K/WHHXLPrsWbUdTW7egI7qvqhYs?=
- =?us-ascii?Q?IynqMou/2J4qFW1aigYDzvl13STwp+xsmZ7hFbR586wl313JrJDDgt28ldXn?=
- =?us-ascii?Q?wGFGaf+3WRkjqG0oIi6so2r9rsSTTE9NJOfGwbIdQsp9zX5h9cp3Eu7D5MvQ?=
- =?us-ascii?Q?5Vb34bEzb2XgkW79eRU247sXnmOW0oUDs6F0hHaBZaNLqv0oSZowidG79Q6l?=
- =?us-ascii?Q?3esFZvSBE7KBjN0UE1SVK/aj/v4KasAWZ5JocfUj8vtyGzqxLlpI7NVPM/Ag?=
- =?us-ascii?Q?z4nF3Qd97NfPsmkHBv2YzY1f19gdUpdyVBEHO4v6IJfGqTIt+952n2+0p49C?=
- =?us-ascii?Q?uKGcDZQ1UYbQJqAfoyYIaXBUu38cScIscwn0D415U8U/J5XIfqYMJGhO0hN2?=
- =?us-ascii?Q?IFRgcXZRFLRg/lN7Tawhl6xxV8tLokMPvuBjSgeFtmslaSkKw8HUeM4nlxl7?=
- =?us-ascii?Q?s5Ghz35sF9cEpB1CtjAy11HwZEK0/8p0+3RPPndCPOLn3ZaZLNqk12CPDFPn?=
- =?us-ascii?Q?Uq3hAU2g1TM6Wk/XrtHD7xz00lLSCkAk4ydgoS3i0axjS/d21MRXRUbjYyJV?=
- =?us-ascii?Q?eXC+1+N4YU5EcBxttWnCOWRkL2DwX19yi8v6Pue1jYgDvjkDapAdeUrTp8H9?=
- =?us-ascii?Q?1srV0ShWIGxsV7QUISPhecuDmHRLbvhawbJE8/33T3RECjxuRIgKiCjliNRw?=
- =?us-ascii?Q?rGiQ5Rk+V76kbZoJtxkAOtK47B/leUOgJEjGDSN/d4t6PA+fcDmtFzoGzMXY?=
- =?us-ascii?Q?DjWoqg1TNSN14sf9ung/xWn7v8HmXezI4W4D8qzkvqopVeChzusPlkpm4FPq?=
- =?us-ascii?Q?fZ5dvEh6f3rvcPao+y+l7h0AWsait8bHTCjX7qUySm83Ypr1GA9Wdy5SN4eV?=
- =?us-ascii?Q?p6ZoI6rghqdAHlFyYit6nIWNTlDYHt8iwRYxtSz5VaZutdPpQAw5QkVL/qKS?=
- =?us-ascii?Q?7IY2Dexmvjly2o0Q4oYujrNG2l97ARihMigQy8PwV23hq4/sK6dphnlatE1j?=
- =?us-ascii?Q?SU3sNLWmRZULebR7OjRKavsK21JUJl6nI1wvxH/em2CCcTa7RW4n0Q13jZhf?=
- =?us-ascii?Q?MlyJuoS8NLq+hm8R45ry6TgRf1p+CARMhvY9o7A7xJkZCesYxkedEKniVh7C?=
- =?us-ascii?Q?q7goqq3nF4q883R6jYjjwHVSpQe/IWPESr8RsScBufbEPO1wnCHRu4OWncei?=
- =?us-ascii?Q?Lk0ZwQl2pFfR/j6UkTz4j/knhLhF4NxsdPVFpGcU5KhQxCLawUrTui9o3U4X?=
- =?us-ascii?Q?fjRou8oBRvR5Kjyjc89Yq/DEu2AGjdL6z3lTkiprgiKaAWOZYBmHD2H03AXp?=
- =?us-ascii?Q?EzqsXBeB/7d4UgIYbuJDxbMVMMGjjvoqjTZimJl2Vy/GfujIs4BWZgtbvCNf?=
- =?us-ascii?Q?fG3qO49pwHtLD3O3nkdlWG0CHzho4YkvZtWNhkSmVM/XtG8hUqS+T+daOTU7?=
- =?us-ascii?Q?qOlTrd0GPuo=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN7PR03MB3410.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?XOhWIbKmzWPKKYUtGJxtnMZtEZSzL4d/UW9nRH/OVA3qZweuBQxDsOiwaHTN?=
- =?us-ascii?Q?qqloqjdGfOnXt/+WengHSlP4ovhVLY+FPz+bUHLim81xjt0OgNjhqxD42Slp?=
- =?us-ascii?Q?yZJRZt9QubKfBPJ8020QHugt1M5SWUNqMb/PtHJTQ+rQPx6O3sA2DdS5uE3d?=
- =?us-ascii?Q?we4mlhY3tkvJt8Kge2W3d27vehq7SK3KoRd+Rr6/xvnRqtjk6Ca0S97ICv3X?=
- =?us-ascii?Q?Kff5UL4cAhB108iVz+yth60AQuRcQ72jvT+851uNS5A1md6WWlVmxKXO76JZ?=
- =?us-ascii?Q?Y84h2yDPPF65ytqgPGjhXR8sqAPM4ZqFSp71dUJweni20ibp6pTLxNePN7e0?=
- =?us-ascii?Q?/ui9NaU6uWZyi9ZDrGfxd0dmjdAHRqPCMX/8nFCw+2d1+VV5io0byrk4erGo?=
- =?us-ascii?Q?WNYH9WUx/PAvjV3ZaoiWLD7fCWd99cSG0ObBciiTkXaWu/YHoFYw337ScMa0?=
- =?us-ascii?Q?knpqbH/X+JNmXqhfzwbIPCnr9im0Wiz0urB5ENZJ7w9/Ua3QdSGAiiQHoQHg?=
- =?us-ascii?Q?RylD+R3hls7zPfpgeCn/X4zktplMU/AN+Iu+4gfGb4hHaUUkYppzitKbGh9O?=
- =?us-ascii?Q?+qScbW1evptDFM6YLcF3fcvlbQFVnb08JNT7jXZmvWuwH61dIJz/0R/M/BbL?=
- =?us-ascii?Q?eB6ee7859r6IPKwET9yeNszDcAmD+4XrC+nBwBr2OlXZbwb5rXhdR6QKECY3?=
- =?us-ascii?Q?kVQfH21gZQDJ4H9HAx2yDwE7DxlQSxZGCs+BYa/DsClX/PD0ivI4gfPorJRM?=
- =?us-ascii?Q?UJBGX98FQGc+c5+s69D1/uSDwK4Meq7B7Lqb0BIMuUYQVxxL0M7j2ICnpVCJ?=
- =?us-ascii?Q?srFS9JqwnG6lN+wnQAJIQkAbqBMWyxlJkB+xwLeJRcdQpm4hBvPh+IfLgOxp?=
- =?us-ascii?Q?WBpIjUQxvc/Aehu7Qhy7LJuCzi5KYWdOsMl9K/k4x+ZVm4Z1TG3QOl2cFp6p?=
- =?us-ascii?Q?KNUCTNx3mHIKMSvBgNVUY/5iKA78FhkjyDPAkIKBFVvmaN/LJgREWfjPqECj?=
- =?us-ascii?Q?eXwOg6so/X7VYMoVZb3Qrqj1u1+dfmTOGWGldDHoMy4nrh7w9v3yCceU1PZZ?=
- =?us-ascii?Q?7Un2JfJvqpGIpnRt8RZf0YNVAOPM+dAVRWMpjE2nVQhKU2PPpLi9L2Fdu5AJ?=
- =?us-ascii?Q?8E5Gz9CKiKx017gmY1D9nAZ52YoCLezV1ZrglOrazAJKyjEqf0bNY4FkPKa+?=
- =?us-ascii?Q?WTremZDAlqSDVdBTbeaC4aeZ3/+StZLRguALPKe39oXBNRCJGV084PmpDig5?=
- =?us-ascii?Q?1kbVCkomH1Nbg8PBlxvpWZlrHlaBwbg7nJ1+U2H6htDWpVN6cYOm/rn3Iru/?=
- =?us-ascii?Q?Z5uSX/5RQbR1FEWzGxcqJAGpAzmVSNxkIw/VAS1oRRGVynkpObsNMlHLJUKh?=
- =?us-ascii?Q?F1gX2K4JU/a82Nv7J4gn2LfWGmHpZcS+9QnRfQcJ/AI4GqPkhbd5EZfHgA3z?=
- =?us-ascii?Q?qlowMDU5Vw6XuL4h4WuMN2cfMMtHh94qCzJ0BMVk/QG4OfZq/zHY4uLKIPid?=
- =?us-ascii?Q?YJofR6DiH1lsyEX4JqkK6awdVItTiLQEN/qQCK+8LVmSRNQhVzOhbySkzuOM?=
- =?us-ascii?Q?wuR1xUtCPEM+Amr4x9pf1mwtLYoigvotfRP4z6wBINJkhPDLrITbi0RjAKN1?=
- =?us-ascii?Q?Rw=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0b5208ba-3bdd-401e-f482-08dd9207e8ff
-X-MS-Exchange-CrossTenant-AuthSource: BN7PR03MB3410.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2025 10:21:23.0812 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6N5GH8qHbXvl061XcwVoT77kpffMw1cYMeCJyEdkMjsIUFzSN16Etd+Dty/ayeEbd5OeZxMOjkuSZWAJ54HEYJi3Kd1pSgFV4JRgbTHm5Gk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB4979
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Mailman-Approved-At: Tue, 13 May 2025 14:28:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -178,36 +96,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+On 25/04/30 01:32PM, Tom Rini wrote:
+> On Wed, Apr 30, 2025 at 02:26:04PM -0500, Bryan Brattlof wrote:
+> > On April 30, 2025 thus sayeth Tom Rini:
+> > > On Wed, Apr 30, 2025 at 10:56:27PM +0530, Raghavendra, Vignesh wrote:
+> > > >
+> > > >
+> > > > On 4/30/2025 10:01 PM, Tom Rini wrote:
+> > > > > On Wed, Apr 30, 2025 at 11:29:04AM -0500, Bryan Brattlof wrote:
+> > > > >> On April 30, 2025 thus sayeth Anshul Dalal:
+> > > > >>> As discussed here[1], the go command causes undefined behavior when used
+> > > > >>> for running custom OSes since the icache might hold outdated data. OSes
+> > > > >>> usually also expect the MMU to be disabled upon execution.
+> > > > >>>
+> > > > >>> Therefore this patch adds a call to cleanup_before_linux before we jump
+> > > > >>> to the loaded program/os which disables both the caches and the MMU.
+> > > > >>> This makes the go command's behavior consistent with riscv platforms.
+> > > > >>>
+> > > > >>
+> > > > >> I know quite a few other OSes are beginning to use U-Boot (QNX,
+> > > > >> GreenHills or all the other RTOSes) each with their own requirements
+> > > > >> from the bootloader. I'm curious if we should make boot* a little more
+> > > > >> generic rather than abuse the 'go' command.
+> > > >
+> > > > VXworks has its own:
+> > > > https://docs.u-boot.org/en/stable/usage/os/vxworks.html
+> > > >
+> > > > I suppose QNX and others should ideally have their own cmds as needed.
+> > >
+> > > Well, what's the QNX output file format (options?) again?
+> >
+> > I've only ever seen outputs in compressed binary formats but I've been
+> > told there are tools to produce an ELF for the simulators
+> >
+> > >
+> > > > > Well, that's what bootelf is for :)
+> > > > >
+> > > >
+> > > > And if its not an elf but some .bin file "go" cmd should be used in
+> > > > conjunction with "cache" cmd here to flush/disable cache, I guess?
+> > >
+> > > Well, what exactly are we talking about? Is this an "in theory" or some
+> > > project(s) which exist today?
+> > >
+> >
+> > I noticed this thread mainly because of the number of RTOS people asking
+> > me about low level stuff U-Boot and TF-A is doing. I haven't seen any
+> > 'In-Production' type bugs but I wouldn't be surprised if U-Boot is being
+> > used in their CI environments today.
+>
+> A number of RTOSes are already supported via "bootm". If they've stopped
+> working (as we don't have tests in CI for them) I'd love patches to fix
+> and at least instructions on how to make it fail somewhere, ideally
+> QEMU.
+>
+> > > There's a whole lot of reasons for either a legacy header and bootm or a
+> > > not-legacy FIT image. The "go" command is for the "U-Boot is a debugger"
+> > > side of the world, not how you should kick off some OS/application in
+> > > production. It is all of the "this is dangerous" idioms.
+> > >
+> > > > If so, we should probably update the docs for this cmd appropriately so
+> > > > as to avoid end users overloading like what RISC-V did?
+> > >
+> > > Yes, we should clarify things as needed and unwind, most likely, what
+> > > RISC-V is doing. But not blindly so as perhaps there's now, sigh, a
+> > > production / in-the-wild case here and we're now in a sticky spot.
+> >
+> > I like the idea of boot${OS} flags if only to standardize the interface
+> > of how each OS should boot. I worry about situation where custom
+> > scripting is being used to boot in production rather than stdboot
+>
+> Right. And that's part of why in this day and age, regular uses should
+> not be using "go". We've had and supported RTOSes via "bootm" for what
+> amounts to forever. We've had "bootelf" for arbitrary things for ages
+> too (and in turn, your custom app/RTOS/whatever using the normal bare
+> metal ELF linker script, target, etc makes it easier on that side too).
+> In more recent times, having a whatever project spit out an EFI binary
+> instead is also possible and done sometimes.
+>
+It might be a novice question, sorry..
 
-Enable configs for i3c in agilex5.
+I'm using uboot on riscv, and noticed that the "bootelf" command just
+jumps to the entry point of the ELF file.  What if I want to boot
+multiple harts?
 
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
----
- configs/socfpga_agilex5_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+bootm command calls "smp_call_functions" to change global variables
+`gd->arch.ipi` which restores function addr and arguments
+and sends IPI to each hart, but "bootelf" does not.
 
-diff --git a/configs/socfpga_agilex5_defconfig b/configs/socfpga_agilex5_defconfig
-index 8577ac610c2..87febc9f4ce 100644
---- a/configs/socfpga_agilex5_defconfig
-+++ b/configs/socfpga_agilex5_defconfig
-@@ -44,6 +44,7 @@ CONFIG_CMD_NVEDIT_SELECT=y
- CONFIG_CMD_MEMTEST=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
-+CONFIG_CMD_I3C=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_USB=y
-@@ -66,6 +67,8 @@ CONFIG_SPL_ALTERA_SDRAM=y
- CONFIG_DWAPB_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_DW=y
-+CONFIG_I3C=y
-+CONFIG_DW_I3C_MASTER=y
- CONFIG_MISC=y
- CONFIG_DM_MTD=y
- CONFIG_SPI_FLASH_SPANSION=y
--- 
-2.26.2
+It might not be a problem on other arches such as x86, if I recall
+correctly, x86 can specify the function address when sending IPI.
 
+Thanks for your time.
+> --
+> Tom
+
+Best regards,
+Zixian
