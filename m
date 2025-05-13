@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C6B6C3ABD7
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 09:19:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4800EC3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 09:19:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBFBD81DD6;
-	Tue, 13 May 2025 11:18:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3DD9182A0A;
+	Tue, 13 May 2025 11:19:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="jqBYwHI7";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="mTPKDuY7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7698381DD6; Tue, 13 May 2025 11:18:58 +0200 (CEST)
+ id 100D7800C1; Tue, 13 May 2025 11:18:59 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20748800C1
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:18:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D311482998
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:18:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
 Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54D91qXA012064;
- Tue, 13 May 2025 09:18:29 GMT
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54D9Dena011768;
+ Tue, 13 May 2025 09:18:34 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- rw9zFR2+9Z8OdB5WclhKEVOJcMJOu33vMqp0i98+R9w=; b=jqBYwHI7TeFhU3d3
- 4uLLaolRsM+k9FjU3e7slf+H3hXK14meAfUpWgCbCztH8pIfV4HeDcRTN9v83EMs
- 9LOuk6+wSoo7Qm4KQE3S2eA9Bs6p+kU+ayOQvBfJ1GNknXIbcfiIl2q91BMV+nvd
- 1jccZ69FGFT+5CayJ8OzPutYZKSN0/SOaeMrGDcLg0/GDCDH/CV56aP22qPE3KfU
- 6NDwZG65KikpFxDOdmBXiO21iboqQpXep84WgLbQjODfJityvZJyetJNQR/cgM9p
- mg30zpoZjpVK7ywvZwuqv6kYT9PmWvf+Bh76sOvwczTcQXYhhhSs28JtjIEphoB+
- WOKcAg==
+ LMCLV1THVUw3wgAzrEVnfngwijvqZN/PQv2YsST3Y1Y=; b=mTPKDuY7xp+EmV72
+ SmiwnstvsBDU7R1PdzxkunDe4E7Lfw+D9nll8bASbh63Kt85eUvmcc3LFzqeuZ3q
+ Ovxl17pjl5k6HAQNCLPoAva9gD5nbLmoWp+gJegfGx5x2pu2cd+XhJ8oNEeuRglt
+ h6g4PaY9gRnasF4k5PPNYoYK8x1hFXSjQemnNha+EnB75iAt5ErLoAzC3Uq4W1Zr
+ fedzmZz3YNkd2AOCFnu02SMLud7ueGpCBmD9pWLHJfUXLdFppzg59LIXZSzKXVEz
+ qHWXQN2T7p1Y3ncyOFqzKKigqat9beRgYezCO5fR36MFdSivmTGLNZN7+LolbXsV
+ 0jiL5g==
 Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46kc3mv11y-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46kc3mv129-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 May 2025 09:18:28 +0000 (GMT)
+ Tue, 13 May 2025 09:18:33 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54D9IScU018548
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54D9IXQt018664
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 May 2025 09:18:28 GMT
+ Tue, 13 May 2025 09:18:33 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Tue, 13 May 2025 02:18:23 -0700
+ 15.2.1544.9; Tue, 13 May 2025 02:18:28 -0700
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <casey.connolly@linaro.org>, <neil.armstrong@linaro.org>,
  <sumit.garg@kernel.org>, <trini@konsulko.com>,
@@ -63,10 +63,9 @@ To: <casey.connolly@linaro.org>, <neil.armstrong@linaro.org>,
  <ansuelsmth@gmail.com>, <cniedermaier@dh-electronics.com>,
  <xypron.glpk@gmx.de>, <ilias.apalodimas@linaro.org>,
  <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
-Subject: [PATCH v4 1/5] disk: part: implement generic function
- part_get_info_by_uuid()
-Date: Tue, 13 May 2025 14:47:06 +0530
-Message-ID: <20250513091710.3719292-2-quic_varada@quicinc.com>
+Subject: [PATCH v4 2/5] scsi: Implement get_blk() function
+Date: Tue, 13 May 2025 14:47:07 +0530
+Message-ID: <20250513091710.3719292-3-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250513091710.3719292-1-quic_varada@quicinc.com>
 References: <20250513091710.3719292-1-quic_varada@quicinc.com>
@@ -79,18 +78,18 @@ X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-ORIG-GUID: -ByvhmfVs1bDK_uxU4lnrz3NDzvMypmw
-X-Proofpoint-GUID: -ByvhmfVs1bDK_uxU4lnrz3NDzvMypmw
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTEzMDA4OCBTYWx0ZWRfX+FGuS/edV4/r
- G+KcBTRGHzD5nxNyfQE9L0+jBcNgey4rcxX/1nhsD/HiQZcBXRrKHH21lFE1aqp9kjdLhz0DC5L
- AFCsBqCSoHKHS6S1+ElkLdBGF839OCnxU39AhqtHPHQ3jZMS4iaeFFnOhr96BmNZYuNON108OJ9
- Vfk6yOMimFmoHh+YoaWfyHhGmLVYy5tZe8WfTF/0IHSNsV8BuZhdjFh/4onI0wuNKGQZCL8tJud
- 4nOv0g/d8A/l9CzHDQYKRI8ulSG1h5VrRwexkKkZIqsZTJa7katkyMjnyxsQY+gV1xCHy5oHW9Z
- N0Ki9k/vH9HgzHXY3m0IRHvZUOiVdIuYr9Sgpuwy9TlKlGBOeNM5DCnV+FOsM/YYm5BtD79YXY8
- 5iFlSRYgKQNApG+zy+uy3S6eGmKO1o2uwjWGZ/L7eh2saQEa2P/wLtL12WMVmtiPPQuQptYw
-X-Authority-Analysis: v=2.4 cv=afhhnQot c=1 sm=1 tr=0 ts=68230e64 cx=c_pps
+X-Proofpoint-ORIG-GUID: STHrIaYK4-C1vByE4r5Zh8JbCl-GP1yY
+X-Proofpoint-GUID: STHrIaYK4-C1vByE4r5Zh8JbCl-GP1yY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTEzMDA4OCBTYWx0ZWRfX6SYLrf6/IMOM
+ Xt8j3OgYhgwLHFuRqxpeKBGGAXadys4AZYlmhjKVd2Wy+poYKyNdoKSQnTIQg6iom73LmrSW/jS
+ Nmfj+GwxPfKoozYXI9n7BPSbkxxSfiG0surchyC/uIwMMHzo/hfRc6oBmZNa7FTfd+Bx9pleoos
+ zKxgROoLGY4wr9WM+uaq/rdWkiAvRy3zWLMsv7Xk47NjtNG4swKHLmrgQH9mL2ex26Yu8CxIFOB
+ qnRriy7SAo61psB3AIGErn1C25d1wo1fMyeWQ3qQSo/U5+EhIivoI1nkCg6wsc8KoreX3HQ2RBc
+ Q7gnPg+5ASkastEBK5jSMD5y9rq6xc1GjYlnBJm7h4UYxO0ZeM0aSypjHSDd3YFI6mgU8GvOHUt
+ oUIRKyCMj4o9UOGwddJqSz1iitJ8ZS33GH+dwrL1jSU3Kez5XrHehvAFEndyFao1k76IADev
+X-Authority-Analysis: v=2.4 cv=afhhnQot c=1 sm=1 tr=0 ts=68230e69 cx=c_pps
  a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=dt9VzEwgFbYA:10 a=COk6AnOGAAAA:8 a=E-TnPL4q6OkJPdRbN5YA:9
+ a=GEpy-HfZoHoA:10 a=dt9VzEwgFbYA:10 a=COk6AnOGAAAA:8 a=KeAuS3ePNnYHWw_nrfAA:9
  a=TjNXssC_j7lpFel5tvFf:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
@@ -117,108 +116,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add function to search for a partition by UUID as partition
-names may not be unique.
+Add a function to obtain the block device for SCSI.
 
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
-v4: Use if (!CONFIG_IS_ENABLED(PARTITION_UUIDS)) instead of '#if'
-
-    Not breaking from the for loop if '->get_info()' returns non-zero
-    to have similar behaviour as in part_get_info_by_name().
+v3: * s/scsi_get_blk/scsi_get_blk_by_uuid
+    * s/partition_name/uuid
 ---
- disk/part.c    | 39 +++++++++++++++++++++++++++++++++++++++
- include/part.h | 20 ++++++++++++++++++++
- 2 files changed, 59 insertions(+)
+ drivers/scsi/scsi-uclass.c | 30 ++++++++++++++++++++++++++++++
+ include/scsi.h             | 10 ++++++++++
+ 2 files changed, 40 insertions(+)
 
-diff --git a/disk/part.c b/disk/part.c
-index 303178161c0..8eefda39d7b 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -698,6 +698,45 @@ int part_get_info_by_name(struct blk_desc *desc, const char *name,
- 	return -ENOENT;
+diff --git a/drivers/scsi/scsi-uclass.c b/drivers/scsi/scsi-uclass.c
+index 1ee8236c05c..3eb6069649f 100644
+--- a/drivers/scsi/scsi-uclass.c
++++ b/drivers/scsi/scsi-uclass.c
+@@ -10,7 +10,9 @@
+ 
+ #define LOG_CATEGORY UCLASS_SCSI
+ 
++#include <blk.h>
+ #include <dm.h>
++#include <part.h>
+ #include <scsi.h>
+ 
+ int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
+@@ -23,6 +25,34 @@ int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
+ 	return ops->exec(dev, pccb);
  }
  
-+int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
-+			  struct disk_partition *info)
++int scsi_get_blk_by_uuid(const char *uuid,
++			 struct blk_desc **blk_desc_ptr,
++			 struct disk_partition *part_info_ptr)
 +{
-+	struct part_driver *part_drv;
-+	int ret;
-+	int i;
++	static int is_scsi_scanned;
++	struct blk_desc *blk;
++	int i, ret;
 +
-+	if (!CONFIG_IS_ENABLED(PARTITION_UUIDS))
-+		return -ENOENT;
-+
-+	part_drv = part_driver_lookup_type(desc);
-+	if (!part_drv)
-+		return -1;
-+
-+	if (!part_drv->get_info) {
-+		log_debug("## Driver %s does not have the get_info() method\n",
-+			  part_drv->name);
-+		return -ENOSYS;
++	if (!is_scsi_scanned) {
++		scsi_scan(false /* no verbose */);
++		is_scsi_scanned = 1;
 +	}
 +
-+	for (i = 1; i < part_drv->max_entries; i++) {
-+		ret = part_drv->get_info(desc, i, info);
-+		if (ret != 0) {
-+			/*
-+			 * Partition with this index can't be obtained, but
-+			 * further partitions might be, so keep checking.
-+			 */
++	for (i = 0; i < blk_find_max_devnum(UCLASS_SCSI) + 1; i++) {
++		ret = blk_get_desc(UCLASS_SCSI, i, &blk);
++		if (ret)
 +			continue;
-+		}
 +
-+		if (!strncasecmp(uuid, disk_partition_uuid(info), UUID_STR_LEN)) {
-+			/* matched */
-+			return i;
++		ret = part_get_info_by_uuid(blk, uuid, part_info_ptr);
++		if (ret > 0) {
++			*blk_desc_ptr = blk;
++			return 0;
 +		}
 +	}
 +
-+	return -ENOENT;
++	return -1;
 +}
 +
- /**
-  * Get partition info from device number and partition name.
-  *
-diff --git a/include/part.h b/include/part.h
-index fcb3c13dea4..3e6eb0ec33f 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -315,6 +315,20 @@ int blk_get_device_part_str(const char *ifname, const char *dev_part_str,
- int part_get_info_by_name(struct blk_desc *desc, const char *name,
- 			  struct disk_partition *info);
+ int scsi_bus_reset(struct udevice *dev)
+ {
+ 	struct scsi_ops *ops = scsi_get_ops(dev);
+diff --git a/include/scsi.h b/include/scsi.h
+index ab53b47b58f..8d6c5116419 100644
+--- a/include/scsi.h
++++ b/include/scsi.h
+@@ -351,6 +351,16 @@ int scsi_scan(bool verbose);
+  */
+ int scsi_scan_dev(struct udevice *dev, bool verbose);
  
 +/**
-+ * part_get_info_by_uuid() - Search for a partition by uuid
-+ *                           among all available registered partitions
++ * scsi_get_blk_by_uuid() - Provides SCSI partition information.
 + *
-+ * @desc:	block device descriptor
-+ * @uuid:	the specified table entry uuid
-+ * @info:	the disk partition info
-+ *
-+ * Return: the partition number on match (starting on 1), -ENOENT on no match,
-+ * otherwise error
++ * @uuid:		UUID of the partition for fetching its info
++ * @blk_desc_ptr:	Provides the blk descriptor
++ * @part_info_ptr:	Provides partition info
 + */
-+int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
-+			  struct disk_partition *info);
++int scsi_get_blk_by_uuid(const char *uuid, struct blk_desc **blk_desc_ptr,
++			 struct disk_partition *part_info_ptr);
 +
- /**
-  * part_get_info_by_dev_and_name_or_num() - Get partition info from dev number
-  *					    and part name, or dev number and
-@@ -386,6 +400,12 @@ static inline int part_get_info_by_name(struct blk_desc *desc, const char *name,
- 	return -ENOENT;
- }
+ #define SCSI_IDENTIFY					0xC0  /* not used */
  
-+static inline int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
-+					struct disk_partition *info)
-+{
-+	return -ENOENT;
-+}
-+
- static inline int
- part_get_info_by_dev_and_name_or_num(const char *dev_iface,
- 				     const char *dev_part_str,
+ /* Hardware errors  */
 -- 
 2.34.1
 
