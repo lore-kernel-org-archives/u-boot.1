@@ -4,121 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A8B0C3ABD7
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 11:03:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC802C3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 11:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A55082A7B;
-	Tue, 13 May 2025 13:03:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id D0CBC8091A;
+	Tue, 13 May 2025 13:35:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="GCHKstSP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tcHlGvdt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 428B282A4D; Tue, 13 May 2025 13:03:01 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D171080AE0; Tue, 13 May 2025 13:35:36 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BC4082A33
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 13:02:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 75983800C1
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 13:35:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54D6plRA015454
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:02:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=Q4tnm0KLqnm
- /E5CaoBEXKz5lntEKwht53bVeQuDrvxg=; b=GCHKstSPUFwwUZ6ART3zP2f9Wb0
- TjkoCltaE5SNqNUyj/+aFJDJqrdCleuFxBo4jrfB9Cr8ZlBi+pGKsoenI66qOgnJ
- gnBq6dh9vTr242ctag88Z3OynKrg/8Ivcul2CCboY+Abz3Pp2eGvltB3xwKLGDwo
- 77Piu6dnnTUP7TiziDgrvWxOjO+v7cZbgLQodzoAuIoVFZgLWhlwu4VucQKTcLsD
- QWnf+/2YA3Z2ly5tmfo0tEw0A4usbO16c+hf9xLjwTeAzVnjRq5b14KP8Vt2oeDx
- 18NTBZZecqjgL9rxz7G2WJsgOsOvoq29f5Fm45eINgMuL0NQpQc+XOLFy2g==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46hwt97g6y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:02:56 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-22e3abea7e8so57643255ad.2
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 04:02:56 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-441d1ed82dbso58707225e9.0
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 04:35:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1747136134; x=1747740934; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SS5Jxe0/GlCbpDuhriWKS/quxnT02iwPt5liboe0+VE=;
+ b=tcHlGvdtURbL6SCmcLuOAlk9PbaKYWtqmq3SET7xdU/qZ4+NotDoeT4ofyNvfFAvxh
+ SMM+qVrQUciszMpS6Tcw9GbHavzuqbS1ZKK6MjIWQZ9/t2SUp9tEc1MY4I04yd8X7vl3
+ LvOI578O3mQi3xdVWIT9UKNQETQeyptP8QgO5tlKtSaBHnQkGXotCVkoRKogZINFADJV
+ mtFGIgfTNAkN+Wlx8yoSkZvamZUdori4QEcWnHM1t/siPKxzkU1XbbiYgYpwQLeSIB2Z
+ jsZV7wfXyZCn5D399W4MNj3Y9uZNEFpcO5UoOW0DbSv/Lkvb5dOdVlbE8PP8cB69mfiw
+ 1COg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747134169; x=1747738969;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Q4tnm0KLqnm/E5CaoBEXKz5lntEKwht53bVeQuDrvxg=;
- b=e9RQ5K418sGKpw0Bu7G36zVOt7j3aSvrz3i0sI0yB51eV5O7/U8hgiwwQSfs//gj9+
- SCkMM1aae3uqFYzd2C/Xe7zHXxJLJJ8nC6OQDEGkT/EJ+m+jQVD0ccOiDjZtuig2Si0q
- MAGuGsTq6vmU1OHharMfIEek+o5etZLQRhV6l0S4ujk1KG+xUK93+MMCWjFnxT1ZAxze
- IELBGZepdxiKh/x+oYStDtNzU/q85Nd0O8X8PvIfZC6GsdXWOkKq+2ZJCo3QzOM92WZW
- 8IYxxu2VeLjDWH8KPIiU6KQyemNyoNPearoF1oy6DQl3cF5zi3fJ3JIBmayGR53oUP2v
- oiRw==
+ d=1e100.net; s=20230601; t=1747136134; x=1747740934;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SS5Jxe0/GlCbpDuhriWKS/quxnT02iwPt5liboe0+VE=;
+ b=DCbJ3WRbdVLnnJhDGoqYOddmmr76SaSyfupdXHJmsTF5gI/8/u18+LV2rbhxjVHpd0
+ w7biI7IuS2cm0v44pKQUA0ubfvYTKs6mXxLEzbldSRrq2lrCmDbm5Z+SFQOMZ6ff/fF/
+ 8pDqC5O7GscM/woZ+CbX2F+zIhWnKfugcawCT028Jqp9oJXCiu5gfC1Lqh3rnM+xsSGe
+ J93dC2euRZZHcShzlDAcBl1K51mLjgHwDC5ke26UL/C1+1Im2bXe+sL5eIPczsDjNDzA
+ RUSa7LVEk43Rko/z3wH+CPE6/dm08UlQUReDzVRBhWaQAlcT5Z55IaExw0XTojA7snfY
+ HoLQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVIj8+nxfkdstCq+lbSobFzDoXKeQhR/Betb3COcPbl1yPq+E3PqBdXKaniEEC2q93C/B+ghZw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPDj37gCKgd5pRru72i9ypX4ECO8ll94lK+bBzYiOlz5q/uLI0
- 7eXPyBGF2rcwruUddMidCTbU3obhfY79udXc0o0WVf8c9e35GOLwgrS6hX5dhmPluMfedb/kx/J
- J9Dga2YC/UsVJBhQPF+v1+QsF1eWdMvnteow9yHl2+2PgPnBuSImc
-X-Gm-Gg: ASbGncvcAwIfghG9elHbUfgR3LP64L6xWiOdd3lovsw0g0cgUhfn5OyfBSvFYdKKAJv
- N00urngWVGkPsMvTWkNuHMqGGJ1M0VA9l6v47yVzNCROkP57xIqoWMpq8j2c1wRFpvj/pRzw4cT
- liPQBtkKgVhoWmi/BWsmzgJ0AgTHsjzLqEm7ZuInY7Zga1RydmtDTzlvwbpXcrdXs1NZW3+ggxi
- QpLdE0y6KCUKQHQ9YpXP/JQqqjnwAAz+Yh3MLjxiUBIad2FWAy5nA35H0kKIng5p78Qv8V4TQnP
- 4C8FIyAdmD1BnnEX+03P87tKAaOXNWxm4TSf6Z6qMy0A0ETDE8+/uvNXYTHLbfCCOUCl2VtRq5g
- U9xGI1mgccxOIVfn45869veT+NU5plp8=
-X-Received: by 2002:a17:902:f393:b0:224:191d:8a87 with SMTP id
- d9443c01a7336-2315b29b684mr46446775ad.26.1747134169442; 
- Tue, 13 May 2025 04:02:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE9vUuQkmXdbhoatF1Lo3EoRtutpSFdHbjS4TeMbvg4mVoyvCoW1obkjwDEBeL5Ed8sTMBBUw==
-X-Received: by 2002:a17:902:f393:b0:224:191d:8a87 with SMTP id
- d9443c01a7336-2315b29b684mr46446485ad.26.1747134169040; 
- Tue, 13 May 2025 04:02:49 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ AJvYcCXDlZwqyI3SxirJ0C2gM0zIbwWhjGY+QuMbDgtd8hItnn/Dj/v1TSsvjt8NhVcRNwoou6z9uDo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOwVvLnWraj8MHM2/7moHl+qH/U0xk/a/4bdaaL6FwV/ywTGRx
+ MFtmu6c2YoENaO3OjbX2L4yzOOCTqJbsnd5l+/ID9fpAXLy25nMf0WZWMXpz+8U=
+X-Gm-Gg: ASbGncswneE4G9wk8Vr1VVSUvN5ogBFj6TVBOjmPRs6a3l69o0YGsoUatmbmy/7/VBD
+ MEMA8DUV8Sq+dA/zEvhiUzZIBrq9kuwyQbnTWfola3h+HovGAGku/WIEGqM6R+0Q+dgmt5wu4Pd
+ ZLwpx5VGXe1Q/JCSKndvUmF30oLf0ZtR1kfWtZoVqGVdCPrrRwnYsX+/6NcQnpa7rCpd/lBp42C
+ FdjJGTE0I/no+J6JQ/1+M9mzdTxHLOs2yf70GDYGXc8Vrx3PJ8uj4kpK45STIXQkpGwac/Av1LE
+ 3yA2WP45w8IYQ9wGSU7CHQUDq49ctEDhRW5Q06oSd2ZIEN06HHN+ItiGSHsD/yCk
+X-Google-Smtp-Source: AGHT+IFNzroVkux8cQTT8PB1un19LJnQDX6OspMCN9ggyJKUViL1JdpVQZ13A03ZndOq4OrshRudYw==
+X-Received: by 2002:a05:600c:8708:b0:441:a715:664a with SMTP id
+ 5b1f17b1804b1-442d6dd9d8cmr125769165e9.20.1747136133902; 
+ Tue, 13 May 2025 04:35:33 -0700 (PDT)
+Received: from [192.168.7.94] ([212.114.21.58])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22fc82bfa11sm78362135ad.254.2025.05.13.04.02.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 May 2025 04:02:47 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com,
- aswin.murugan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
- me@samcday.com, sjg@chromium.org, quic_varada@quicinc.com,
- sughosh.ganu@linaro.org, lehmanju@devpi.de, bhupesh.linux@gmail.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v1 4/5] qcom_defconfig: Enable QCS615 clock driver
-Date: Tue, 13 May 2025 16:32:12 +0530
-Message-Id: <20250513110213.330495-5-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250513110213.330495-1-aswin.murugan@oss.qualcomm.com>
-References: <20250513110213.330495-1-aswin.murugan@oss.qualcomm.com>
+ ffacd0b85a97d-3a1f57ddfc9sm15708292f8f.5.2025.05.13.04.35.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 May 2025 04:35:33 -0700 (PDT)
+Message-ID: <b323478f-bf9c-490b-9e28-0da114a4d2a4@linaro.org>
+Date: Tue, 13 May 2025 13:35:32 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTEzMDEwNSBTYWx0ZWRfXzR02UMFakULR
- m/9ZJciPF/0CGu7odQFdqcfQXj6DtR+S1XUlklLYA4uZfTAJ/wCwF6Cyue0Uf+QYvOvaxVbmXpe
- HRhzp5zxZ8EXMggAxElANbVG9s68PP3Ce+JvT7wpJACCeb/ssPOjc0MBS5lZPjiJcyXQ5F4Gz6I
- l+AwrSR5Asz9440FNxX1PEjjBMlNpW32fxHRsgpreVbwMAsAJKYMa7kPn1b6+MA3LWBZ3eefxg+
- ZbjwgOXDAVBc3lyAuW4BNeKYKoFcSbAQqpnn5NiJmqZ0bdXVQcg7JLbI+jCeh3berA9GCgATz+a
- 7XmMOnHjQLS4DnF4u+0kQAfC8bQLHD8xfLFyxzyY9lKe0FCVBnsBXODRdigrjud+cHLGs44+VBK
- 7LWNpWLiEle6LOnTyPMWGV2/EYHrideFBLrZqKKUvbdIH8eVkX4MMkf/mG6PC4t9RtYUlMN3
-X-Proofpoint-ORIG-GUID: 3qjIpMYadUV_aXSiBOHEbelTnZ5vIKvm
-X-Proofpoint-GUID: 3qjIpMYadUV_aXSiBOHEbelTnZ5vIKvm
-X-Authority-Analysis: v=2.4 cv=a58w9VSF c=1 sm=1 tr=0 ts=682326e0 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8 a=Z22XvwZFbGG9hQITJ7MA:9
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-12_07,2025-05-09_01,2025-02-21_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 lowpriorityscore=0 mlxlogscore=774 malwarescore=0
- clxscore=1015 impostorscore=0 mlxscore=0 spamscore=0 bulkscore=0 adultscore=0
- priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2504070000
- definitions=main-2505130105
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: lwip: tftp: time out if there is no reply from server
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250428092418.2606467-1-jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250428092418.2606467-1-jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,25 +104,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the QCS615 clock driver in Qualcomm defconfig.
+Hi Heinrich,
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+On 4/28/25 11:24, Jerome Forissier wrote:
+> When there is no reply from the TFTP server, do_tftpb() should
+> eventually time out. Add a 10 second timer for that purpose.
+> 
+> Reported-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+> 
+>  net/lwip/tftp.c | 15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index b8399701da0..8510828824f 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -51,6 +51,7 @@ CONFIG_CLK_QCOM_APQ8016=y
- CONFIG_CLK_QCOM_APQ8096=y
- CONFIG_CLK_QCOM_QCM2290=y
- CONFIG_CLK_QCOM_QCS404=y
-+CONFIG_CLK_QCOM_QCS615=y
- CONFIG_CLK_QCOM_SA8775P=y
- CONFIG_CLK_QCOM_SDM845=y
- CONFIG_CLK_QCOM_SM6115=y
+Does this fix the stalling issue you mentioned in [1]?
+
+[1] https://lists.denx.de/pipermail/u-boot/2025-April/587583.html
+
+Thanks,
 -- 
-2.34.1
+Jerome
 
+> 
+> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+> index 4f9b2049187..4f88924e47e 100644
+> --- a/net/lwip/tftp.c
+> +++ b/net/lwip/tftp.c
+> @@ -15,6 +15,8 @@
+>  #include <time.h>
+>  
+>  #define PROGRESS_PRINT_STEP_BYTES (10 * 1024)
+> +/* Max time to wait for first data packet from server */
+> +#define NO_RSP_TIMEOUT_MS 10000
+>  
+>  enum done_state {
+>  	NOT_DONE = 0,
+> @@ -106,6 +108,17 @@ static const struct tftp_context tftp_context = {
+>  	tftp_error
+>  };
+>  
+> +static void no_response(void *arg)
+> +{
+> +	struct tftp_ctx *ctx = (struct tftp_ctx *)arg;
+> +
+> +	if (ctx->size)
+> +		return;
+> +
+> +	printf("Timeout!\n");
+> +	ctx->done = FAILURE;
+> +}
+> +
+>  static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+>  		     ip_addr_t srvip, uint16_t srvport)
+>  {
+> @@ -150,6 +163,7 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+>  		return -1;
+>  	}
+>  
+> +	sys_timeout(NO_RSP_TIMEOUT_MS, no_response, &ctx);
+>  	while (!ctx.done) {
+>  		net_lwip_rx(udev, netif);
+>  		sys_check_timeouts();
+> @@ -159,6 +173,7 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+>  			break;
+>  		}
+>  	}
+> +	sys_untimeout(no_response, (void *)&ctx);
+>  
+>  	tftp_cleanup();
+>  
