@@ -4,160 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71B4FC3ABC3
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 15:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE37C3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 16:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C2978091A;
-	Tue, 13 May 2025 17:29:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id B6D938091A;
+	Tue, 13 May 2025 18:10:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="cJo6P6kl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wa1Ak9tz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C56280AE0; Tue, 13 May 2025 17:29:00 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20628.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::628])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F224680AE0; Tue, 13 May 2025 17:54:27 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6668800C1
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 17:28:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 91151800C1
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 17:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sqoB6wjDAeoEiJWOxsszxdaAVsSThd5w+WNqH8LQkWEy68F22Tc9tpg2IN4r4fphwDd7mqxcwKJlAt/MAp7+MjreFiNP1AUAPvB7a7ktT2bTN1Bv2LAj0EgLeaiBN/aXvIptEVB6w/LiloROOXzsC7QY0QEy2NHmiWt4q4EDj1z7iTa0HQ8NJDr8+si9xRqc6z+MeZgTPwebjD/MBaxbHJxAQl8ot7tj19XrFa+4te49i1PXq9CpnpezUhhRBAL0D8IUpberfOVGJN/rF26N1xk6S373wsIq6c0sj9oaI/yxQ1W8nyRzt63yCgP0VwVDveV/RMa7qrh9GqnUuZvFwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/uxtv3/1ir6iat7So3GiRdwrv59tGMB2292FnMx5UAs=;
- b=Oze3DVT5aD7u+sNphg/9sIWG638H0NklvWgdOvXQXwz+aE/CZgtWfu7MIq/QzLq5S/f/0JXbXVIDvuYxRoT4lYPR+LZHpg9ga6HtBorIAWooSt7B+65pFOAaWSUVSBk5BO2SHBC+YatziWDAL9MmdwUvEbC7aO7rZMxo9V2K6pEfZp6xvFZ/GUvxkq0naSlTODV1Pb1ynfnFD4bB4QMhxI5L1q4gVryVxOkCJ+Kp30uR5lfiC3wn2mETcPOeUIz2jrkxgOqXYwkUAmu3OrquXFWmw8UC1hifYTJH0IMoyv+DowcOZ/z7oMvIERPIzpSXC7pE0dZHUg/X6nS7bJhw5g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/uxtv3/1ir6iat7So3GiRdwrv59tGMB2292FnMx5UAs=;
- b=cJo6P6klizvnpUJfvUA9fsLcI1XGUxeCoIm6L5OB2ku66I9fOvK/RhXiBzCkj1UT1AOFCMFDy+fYJ1kqrqXGCNpAKVcQuy4n+lTo8qKe8aC63tNsJiQZvQ/OSXrnNxGg0g3IWjeegW4xriEKsCezgGd2QI9Q5L1dwfQ4BuW7JoU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM9PR04MB7603.eurprd04.prod.outlook.com (2603:10a6:20b:2d6::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.30; Tue, 13 May
- 2025 15:28:55 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8722.027; Tue, 13 May 2025
- 15:28:55 +0000
-Message-ID: <0cb64c56-8f11-4cff-b1a6-a1b6a4194c86@cherry.de>
-Date: Tue, 13 May 2025 17:28:54 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3a0ebf39427so4716569f8f.3
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 08:54:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1747151665; x=1747756465; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xAbZaQP7bKx7Q4hU/FuUZzqQz5bvt3ozOkX3voFg1+0=;
+ b=wa1Ak9tzbUng4p1pvfVn1WzNkanFy+nnle6JDdbGldQKEPdX2CwMEFxwjPpyxNfieR
+ t0qP5ZiE2PwmIOrauaqzdHHonuvX8mjyCOviZjr7k6wZfk6iLegGEzuoQjk75mwlgXAu
+ 9PFDSYhvPcIHXGQMZ6St7vr6RoxoWHWDqFOy0WKdI4+ns5VEoavnU3JZT9AeprhYrGkV
+ fuhpP7Vbhp6JeYETYsARAOfGKoRSVVrQT7smNgptdcgNTCThJKqekbLg/NrPo02EXse8
+ ZYdR21UDLBWQafz1PVvpt/zTlvtQ1jToJF2N1zvj9FjVOBAFJnG2y8PUtURa/I+IFxbX
+ 4VKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747151665; x=1747756465;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xAbZaQP7bKx7Q4hU/FuUZzqQz5bvt3ozOkX3voFg1+0=;
+ b=VXaSmoVVMHpBr7BenYxBHxYOfqVQV2kOAOL5qTtgNdkgfYTyOEoYJklhI6HEeIPm/w
+ pPdqe8PmoDkFt1h+vl3LWL7JQyd3hO+d4+siBQxoxuhOPdvXCuIJvzshz7xgTbND3Y0P
+ 8EBHPUrWELcvKgnwA32ZpoMIPSvC+SVIS4s9ePH4DCXKZok+FswG9hUXaNz3ev61LcjW
+ UQLJ96iA2fDSk1gARgLn5OiokjKfd6mXjspy8yDc0P2BzdlIosg+Od7wcJPN99Oqsakd
+ eytrvlbeFHg82p/k0VoPG8j4Z58La7EF0N5rC+FR7+lWMLnq2vKUqar9wZyUp5dctMUo
+ iP/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWost0B1Dk9CpEGdCVWWKPMCvH8ErRbwj+ZRqFVfkvjTB0LePCbgrgbET+Y/VaCXtE75USQ12w=@lists.denx.de
+X-Gm-Message-State: AOJu0YxUKvuL9I6akPGT/moCfRh76nj8Lp2sk0Q717QruQLEKgzs7JfM
+ jDDacKqv3FekpJVYS1BoMw0oS34oisbYv+DpGtIQ0C3FY8AwqIf8CQY0V90uCQ4=
+X-Gm-Gg: ASbGncuhjLC5TAvLEqMb79G/wnlb/FysEB+Zi6sQ8EcWcZoPxbk9qgN9/9dz0q52ZlG
+ t1BNYeQR575b/oAc/Aa9sr9WVopcSAzbskaJE8ax3Mq3W4dvYFKygeTM98P04kZbCHC+UpiTaUs
+ gwGLXw+2g63b4DD66LPSb9tL9jLqJ0w88MPZGseHGEiqbCWs4lnN8f2cB25tkbx/+rGUoTOMMLa
+ MMj5TyyZdOX4oUDo4HsqHBjUtfA7gOBklCETBEAbHiIV/b4ZUSGPaDR8ibp8K3+UuxBdB+hcycr
+ r+5QvbUu4KSFIG9lLS7omwt+6JSKtWZ1lMCxMNNMFI2dyIzLb/KW47FB+0KC/oRQv1ShfbEmr0+
+ EcK51RJHrpF+E
+X-Google-Smtp-Source: AGHT+IHb0fuze4Wwha2C+b+G3EndRS53Xhbf9ivhtJDZPP1Lz0u7FUCWzZiK10Y8Jdwy/hUbEeVLAw==
+X-Received: by 2002:a5d:5f82:0:b0:3a0:7af3:843f with SMTP id
+ ffacd0b85a97d-3a1f6432cb9mr13712843f8f.19.1747151664912; 
+ Tue, 13 May 2025 08:54:24 -0700 (PDT)
+Received: from [10.61.1.138] (110.8.30.213.rev.vodafone.pt. [213.30.8.110])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a1f579aa5bsm16577480f8f.0.2025.05.13.08.54.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 May 2025 08:54:24 -0700 (PDT)
+Message-ID: <8ab60d1b-8afb-4659-837e-fafd4b46a060@linaro.org>
+Date: Tue, 13 May 2025 16:54:22 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] tools: mkimage: validate image references in FIT
- configurations
-To: Aristo Chen <jj251510319013@gmail.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, carlos.lopezr4096@gmail.com,
- aristo.chen@canonical.com
-References: <20250505100852.9364-1-aristo.chen@canonical.com>
+Subject: Re: [PATCH] qcom_defconfig: Enable AUTOBOOT_KEYED support
+To: Sumit Garg <sumit.garg@kernel.org>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, neil.armstrong@linaro.org, trini@konsulko.com,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+References: <20250508103238.230608-1-sumit.garg@kernel.org>
+ <fe44fd2a-f16e-4f84-affa-3f9fbbbbdc9b@linaro.org>
+ <aB4XFmFxBj30x5U6@linaro.org> <aCGc5giJlI9Wqxwl@sumit-X1>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250505100852.9364-1-aristo.chen@canonical.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <aCGc5giJlI9Wqxwl@sumit-X1>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0115.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a8::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB7603:EE_
-X-MS-Office365-Filtering-Correlation-Id: 709d4bf0-cbcd-401a-f814-08dd9232df8f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?a0dBR0dQcDQzSE9ZdHhJZXRoYStVMy9McnpvVUFjcnJOSE5ISklyQ3BUeTAy?=
- =?utf-8?B?cnkwZGk0NXFRc1o1eS9BQ0dHU3Nncjc2cW1hcldrYjFON015cVhFVEcvZjFL?=
- =?utf-8?B?YjBmMi9wYkI0MGY2NkhFUXArRFpMM0dkWGdGNWhoeDhqc2lGRXkrK0gxaVQr?=
- =?utf-8?B?UGp0T3R6bEZOUm9YZHFpdWFuY2tyWUZzNXJkV3Z2U29vckNreWdMSGZVNHd4?=
- =?utf-8?B?MDRLMDVBYVo1S3BKQ25Fek1ONHpmKzJzOVQ3UmJtWEphMkRKVjVPMFY5VjU5?=
- =?utf-8?B?aWZkcVFHdmljZDMwOXlkM2Y5Y3U2YnZWY1QrbXB5TE9DNU1xcVFYQ241M2ds?=
- =?utf-8?B?aFhPem5XaWhkek9lNmUxRTQ4MUg0YlNYZ2NuUlNVN01hdDVjeUNGZ2FwUVFt?=
- =?utf-8?B?eGdGVjc1MkhDTG5tSFJnQ3ROMGxyUzI3aW41UnZRaFUzbGwwRXMxK1B0aVlo?=
- =?utf-8?B?Sk0xUk83N1pYU2Y4VTI4MGNHSzEzL3VsUGhPMlczRFZ5RUw5V1liMkdnTWpX?=
- =?utf-8?B?bEhEblZaQmlKWUJFTWpFWCtSZjlpOVoxTXJBQmFmazc3S1BKTHR1VmdJQjVp?=
- =?utf-8?B?VVZneGRyRllUcTFTZ1FSMVpWQTBRM1pjRDlEdU5xT1RjeCtUNGNsN3I2NXVW?=
- =?utf-8?B?djAwZ2hxZWNDbHZNdHBEWldGSEJrc2g1b2dXN2h4dTlNTG1rdjZaaUg5SXZX?=
- =?utf-8?B?ZmpFem9Db3RhRGpKMXJUZUV3RG5PZTlyRmFZaHljK3pxZkhyN1IrcW5WRkU4?=
- =?utf-8?B?UlpuTGJFK25nZ3lLYTcrTEVYU2NJUDlLWFBXM2UxeFR2bmEwYkZ4eEp0eHBI?=
- =?utf-8?B?KzR2djdWdTVoKzB1NFZvQllBaXRhU2tKTWkxalNaYmhuNDJ0UmxUWXpvbFVZ?=
- =?utf-8?B?MTU1eWphOFBqN2hkSjdvenpLcHhleHA0dlhmdmVvNC9YeUNKTEJwV2cybDk4?=
- =?utf-8?B?b1ZBK2Z5Yk9GaTBFMkIzdG9vY2dNM1JBYnJYeU4wc3Q5bFRia1EzL2ZvaXpI?=
- =?utf-8?B?d2VETkVMSW9NTWc4cDNUL3B0TlBZdHF6KzJrQ3MwR3p4d1B4WFRlazFHbVll?=
- =?utf-8?B?RnZSRGJRWUMrNFBrY0ZTQ0JiMmdJUGdPanpmSFZxcXFleW51QmpBSU1uUHlu?=
- =?utf-8?B?YnBVVFlpRGZQQ0dHK2Z1Uno0aWdBZDdjaDlEUFZyK3NtdEFqalY5Q3ltS283?=
- =?utf-8?B?ZjFhMlU3VlNrSGRlMlR4dEZ2SXVhMEZlUVJMLzVHekJKUnQ0Q3JkM05qRVUy?=
- =?utf-8?B?RlgwM3NUbXJtNUYxTWkycy82dnRzamRZZ1V3ZHl0b0tqV21IbS9ObS96c1dr?=
- =?utf-8?B?dE12aHd1Ym5iNEZLYUlia09lYXprZ2lMaGcyaC9LT1NVeVc0UzlwRlRrTTJt?=
- =?utf-8?B?WXJ3QkE5cXlrZWZZVEo5dDFNeUJmdW9oVTZSRGoxdTRnNlg1NGZ0UWkvTUtU?=
- =?utf-8?B?QXUzQ3Z5R0tXZGRCOGdka3ZXQnlrbUYxQ1ZPa3lhS3NtckRZT3AzQklSZ3d6?=
- =?utf-8?B?Q0RqNW4vS3lhZzh2N0pyRUVta3lkZDNTYjIxQzJKLzErUFNSS2pIZnd0L0VR?=
- =?utf-8?B?NnZISkNVcWdCQkdGVnJjRVAxdFVQcUxBa0Y3Y0N6djJJcW9tY2k3NlNlQXp5?=
- =?utf-8?B?SnhXSWd1RzRuZytSaDJXOXJaeXA2eEo0OFZEQ1hobCtXRmE5ekx6N2RIUnFh?=
- =?utf-8?B?V3dmWWVtSDNEVkFJNTcrWDNZNUlmdkFLZGNkdnRDUDQ1aXpPQitTNStFQ21h?=
- =?utf-8?B?YlBMNjlyZmlzdkFSNkdYNEJVQ0gyMzI3azEyYUhyTCtOb3JOU3pRbmFmWjZ0?=
- =?utf-8?Q?P36LWUwMSneRpzQJvI+8rSPlV4DYfc6oOCQZg=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eDBUY3VUYWFYQzlyc3BlNnJrbTlaUXZVS1Z2TTJLUTJnd1BLZGgydWNSTnpn?=
- =?utf-8?B?N3RzTjdFNUlRVTBsYmdYakdoR29NRHRJSmZ5MmNzTW81ZVNVYUt5OXNwQWZy?=
- =?utf-8?B?RHhVbkdLNlRXN0tUTEMwZ05iSlE1bDZDejJjZVJXR2tJMVJEOXBma1ZBQkRJ?=
- =?utf-8?B?Z0Q2M0hmLzZDYnBWL2N1WkIwYTVxRTF4a0tsekcrV0Z4QmtrdmlUT3pBRFUw?=
- =?utf-8?B?MWJoRFN6SXRJWnJCQk5kOEFIYUkza3hmeVlvM2U2dlJmNEFMY2ZPTjF4QUJo?=
- =?utf-8?B?NEN4ZkM5Y29LOEtwK1NVMVorbEpYSDVhaFF5QUd5UFNmaUhXMTBmbGFPaEpk?=
- =?utf-8?B?bjNpTGhaUExhOEdJNktOUlh6NGthUWNESWFQajNIUTNUMUVGUXVWQWJqN25F?=
- =?utf-8?B?TytnQ0JzcXkxaG83S2Y3bjA5K21ZMzFVTjduVEFOcEJvZHVGUHFmWVpxUFBs?=
- =?utf-8?B?TUdlVk85cENxS0JxTDRtc2hQZFBIYlQ3WDFod2xPdTB1TW9oVnZ4SEpsTnNW?=
- =?utf-8?B?RHBZRUNmUHRCNkk0dThWdnpvTEJ1R3QyLzJXT1FPOHErbWgwSWFUbE9tMGpM?=
- =?utf-8?B?SitxbTZxVjliWHNqV2t1UmRONGVCZnZ6SjI2Um5MOGU5L2VpTk5RUUJmM2ZG?=
- =?utf-8?B?NjhvaDNpQ3FUZWtpM0NSS1RvM3BzQU5VWllBOGx4bEdXbUxrdEV0NTlaT2Fr?=
- =?utf-8?B?cWtDV2pFSThKb01kY0lQN25BbE5jTmJuK09lSGVtV1ZWeVRSeC8vT2YxZGpZ?=
- =?utf-8?B?dFdCc2R3VlhBTEVTV1dIUENXKzl6b1NKMXBlaDR2MlBOZ2FMOWVHb2k4ak9k?=
- =?utf-8?B?WkxiR2JJZDZjNXpMUWk0QzlET2l2Z2RuUndGR2NPYmVMSUZZckdaQXNLTWRo?=
- =?utf-8?B?citRd0doOG1DNFF2L0g0SzBmRHFoWDZ4Vnd0RHNXTFE1WEV5RmVRb3ZyUzY0?=
- =?utf-8?B?dXhBak5yUnlhT2V4eUlKWlFNQmFVdWVvZmNnMlR0SW4xaWFFS3R0TTIzd1M2?=
- =?utf-8?B?aXJvN2xsRXduL0JORkRvUXNiOXNjWmdpRzcvUmJsTWVkbjI2QTI1VWN2cHFi?=
- =?utf-8?B?VW00YVZDVC81cG0xaTZIRzFJWFF5T2ZCeG9sVHZhRXE0TDlLOXdjWDhEYkt6?=
- =?utf-8?B?eWZIbWhkSXBaZGptenozNFdSdjgwYlJGUU1oTFl2alhkL29mcGhybm5oMWt3?=
- =?utf-8?B?VW83eFRxL3BsRnNLUjBOY0NDbDZTUmJEbTFOdUhwMVh4Q0RSdkJDVFc0ZHlN?=
- =?utf-8?B?cVBkVlBNM0pPK2RhY1EyM1hBTjVnODNjU3FxaG05c2ZFK2tveElpNzhjYi9p?=
- =?utf-8?B?ZVFvQTk3eUwvUzFXVC9UNVpNc2xBeGRBaUJpTk9RMTc4eG1lOWNrdTNKbFY1?=
- =?utf-8?B?dGpaTUdWMFBzNkl1bXFFdmtDbnRrdzFZQ0pHcFVxM1RMMGpIUUIzMFJUNUtD?=
- =?utf-8?B?R1AwMUxhZkFRNzBoRmFJakgzOW5DR1A5am1PNlpFVmwyQmp1Zk10WkJvQVBa?=
- =?utf-8?B?cDR0Q1F3MUFvQm8yWm9udFNHUmczdk1wOGRUR2YyQjlCeEFWaSt2WkVXZWpx?=
- =?utf-8?B?WHRRbVQ2bzJuT3c5OTVGeEVURkVyR0ZYakpaa1lJU0MwSWVlcGVKQXZwOUdX?=
- =?utf-8?B?OTBMSmhyWXN3QXI5WFVPTm9qQSs3NTc3a0hVSHNDRlFHS1o4ZGY1ZmVSOEQx?=
- =?utf-8?B?b3JGN3Q3alVDYW4wUyt3L29OUndqckx6RlNheVh1Njl1UGJVRGRxQUhmU2ht?=
- =?utf-8?B?Slc3SnRjQlZYVVNNREVoQ2k3R1QxRlFkYzQzZ282VXlzb2t4MlI1YzQxRXdz?=
- =?utf-8?B?WEF6K0U0WEliM0dFNWltZ3Vwbng1b21DNzdGRkV6YmZIT2R3T21yUmRQUE9H?=
- =?utf-8?B?QVoyc0hFdjd6WG9aL0o3bW5FV0xXVUV0SUdYdzljS0xOM1l1eEd1QWpVclAy?=
- =?utf-8?B?UTBqZURJaGRXd1J2ZVd4Rm5xVUJwLzNTVTNkQWxtcktEYlM1Sno3aWJXQUhy?=
- =?utf-8?B?NlViMzRPVEF2Y3IzYVZiMkZoamNIWUdkU0ZUdDdzV2h0MUZFQVlRalpYR0dH?=
- =?utf-8?B?MEU2bXhBRzNmM3ViWjQ5c1J5SmRKZGIrZUVHME5uVkRxeWZZNHVCS3Jyblda?=
- =?utf-8?B?akU5QkttdnU3czQ2ZDgxc3poNGJwRk9hNjg1NVBya1FpYWNpR0w4anFDZlV4?=
- =?utf-8?B?bGc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 709d4bf0-cbcd-401a-f814-08dd9232df8f
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2025 15:28:55.4619 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YbO8Ou/aq+9epNUwI3p0SMzIlwUkR2SEQ+5hW3Ga1ZVhfnHt7Gnz3V7h7cH3WMm5GlGnbIMccmNP5aQhjeveW8fIt8pm118w6Ie74Qp5AYg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7603
+X-Mailman-Approved-At: Tue, 13 May 2025 18:10:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,174 +107,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
+Hi Sumit,
 
-On 5/5/25 12:08 PM, Aristo Chen wrote:
-> When parsing a FIT image source (ITS), mkimage does not currently check
-> whether the image names referenced in the /configurations section (e.g.
-> "kernel", "fdt", "ramdisk", "loadables") actually exist in the /images
-> node.
+On 5/12/25 08:01, Sumit Garg wrote:
+> On Fri, May 09, 2025 at 04:54:43PM +0200, Stephan Gerhold wrote:
+>> On Fri, May 09, 2025 at 12:45:20PM +0200, Casey Connolly wrote:
+>>> On 5/8/25 12:32, Sumit Garg wrote:
+>>>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+>>>>
+>>>> When debug serial port isn't connected, it is at least reported on RB1
+>>>> that autoboot gets interrupted. It is probably due to random characters
+>>>> on the UART RX line when disconnected. Lets try to fix this inconsistent
+>>>> behaviour via enabling AUTOBOOT_KEYED such that the autoboot gets
+>>>> interrupted only when the <SPACE> key gets pressed.
+>>>
+>>> Honestly I'd much rather fix the bug in the UART driver, maybe it's broken
+>>> pinctrl?
+>>>
+>>> The older UART driver (for msm8916) had a similar but that Stephen was able
+>>> to fix with better configuration.
+>>>
+>>> Anyhow, this is a sensible enough workaround if nobody wants to look into
+>>> GENI...
+>>>
+>>
+>> Well, the main fix I did for that isn't related to the UART driver at
+>> all, it's simply adding bias-pull-up for the RX pin so that it isn't
+>> left floating when UART is not connected.
+>>
+>> For RB1, qcm2290.dtsi &qup_uart4_default currently has bias-disable for
+>> both RX and TX pins. So please try applying bias-pull-up + bootph-all
+>> for the GPIO that belongs to RX.
+>>
+>> For details, please see the following patch series for MSM8916:
+>> https://lore.kernel.org/linux-arm-msm/20250422-msm8916-console-pinctrl-v2-0-f345b7a53c91@linaro.org/T/
 > 
-> This patch introduces a validation step during FIT import that iterates
-> over each configuration and verifies that all referenced image names are
-> defined under /images. If a missing image is detected, an appropriate
-> error is reported and mkimage exits with FDT_ERR_NOTFOUND.
+> Thanks for this reference but unfortunately this doesn't fix the issue
+> on RB1. I have tried the diff below [1]. It seems most likely due the
+> chainloading via ABL on RB1 as compared to U-Boot running as primary
+> bootloader on db410c. The RX line seems to be floating even before the
+> U-Boot starts which is causing the autoboot to stop. So for the
+> chainloading configuration, we need to enable AUTOBOOT_KEYED. I think
+> it should be the default sane configuration on Qcom platforms rather
+> than allowing autoboot stopped via any random character on RX line.
+
+I dug into it and the rogue inputs actually come from the button-kbd 
+driver, maybe the buttons are slightly misconfigured. This explains why 
+it only happens on some boards.
+
+So the right solution here is to fix the buttons, or disable button-kbd 
+if you don't need it.
+
+Kind regards,
+
 > 
-
-Wondering if
-
-fdt = &fdt_1, &fdt_2;
-
-for example would have saved us from this issue since this would be 
-enforced by dtc requiring a label to exist. Ship has sailed already 
-though :)
-
-> This ensures that configuration integrity is validated at build time.
+> [1]
 > 
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-> ---
->   tools/fit_image.c | 48 +++++++++++++++++++++++++++++++++++++++++++++--
->   tools/mkimage.c   |  7 ++++++-
->   2 files changed, 52 insertions(+), 3 deletions(-)
+> diff --git a/dts/upstream/src/arm64/qcom/qcm2290.dtsi b/dts/upstream/src/arm64/qcom/qcm2290.dtsi
+> index f0746123e59..9392bd6f3e0 100644
+> --- a/dts/upstream/src/arm64/qcom/qcm2290.dtsi
+> +++ b/dts/upstream/src/arm64/qcom/qcm2290.dtsi
+> @@ -551,10 +551,28 @@
+>                          };
 > 
-> diff --git a/tools/fit_image.c b/tools/fit_image.c
-> index caed8d5f901..02b9c9b5855 100644
-> --- a/tools/fit_image.c
-> +++ b/tools/fit_image.c
-> @@ -627,6 +627,7 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
->   	struct stat sbuf;
->   	int ret;
->   	int images;
-> +	int confs;
->   	int node;
->   
->   	fd = mmap_fdt(params->cmdname, fname, 0, &old_fdt, &sbuf, false, false);
-> @@ -695,6 +696,49 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
->   		}
->   	}
->   
-> +	confs = fdt_path_offset(fdt, FIT_CONFS_PATH);
+>                          qup_uart4_default: qup-uart4-default-state {
+> +                               tx-pins {
+> +                                       pins = "gpio12";
+> +                                       function = "qup4";
+> +                                       drive-strength = <16>;
+> +                                       bias-disable;
+> +                                       bootph-all;
+> +                               };
 > +
-> +	for (node = fdt_first_subnode(fdt, confs);
-> +	     node >= 0;
-> +	     node = fdt_next_subnode(fdt, node)) {
-
-This should be fdt_for_each_subnode instead?
-
-> +		static const char * const props[] = { FIT_KERNEL_PROP,
-> +						      FIT_RAMDISK_PROP,
-> +						      FIT_FDT_PROP,
-> +						      FIT_LOADABLE_PROP };
+> +                               rx-pins {
+> +                                       pins = "gpio13";
+> +                                       function = "qup4";
+> +                                       drive-strength = <16>;
+> +                                       bias-pull-up;
+> +                                       bootph-all;
+> +                               };
+> +                       };
 > +
+> +                       qup_uart4_sleep: qup-uart4-sleep-state {
+>                                  pins = "gpio12", "gpio13";
+> -                               function = "qup4";
+> +                               function = "gpio";
+>                                  drive-strength = <2>;
+> -                               bias-disable;
+> +                               bias-pull-down;
+>                          };
+> 
+>                          sdc1_state_on: sdc1-on-state {
+> @@ -1293,7 +1311,8 @@
+>                                  clocks = <&gcc GCC_QUPV3_WRAP0_S4_CLK>;
+>                                  clock-names = "se";
+>                                  pinctrl-0 = <&qup_uart4_default>;
+> -                               pinctrl-names = "default";
+> +                               pinctrl-1 = <&qup_uart4_sleep>;
+> +                               pinctrl-names = "default", "sleep";
+>                                  interconnects = <&qup_virt MASTER_QUP_CORE_0 RPM_ALWAYS_TAG
+>                                                   &qup_virt SLAVE_QUP_CORE_0 RPM_ALWAYS_TAG>,
+>                                                  <&bimc MASTER_APPSS_PROC RPM_ALWAYS_TAG
+> 
+> 
+> -Sumit
 
-Why only those?
+-- 
+Casey (she/they)
 
-https://fitspec.osfw.foundation/#optional-properties specifies "fpga", 
-"script" as unit names. https://fitspec.osfw.foundation/#id6 specifies 
-"firmware" as a unit name. So I'm assuming we should be checking those 
-as well?
-
-Reading the code, it's not entirely clear (to me) whether FIT_SETUP_PROP 
-is about a unit name.
-
-> +		for (int i = 0; i < ARRAY_SIZE(props); i++) {
-> +			const char *list;
-> +			int len = 0;
-> +			int offset = 0;
-> +
-> +			list = fdt_getprop(fdt, node, props[i], &len);
-> +			if (!list)
-> +				continue;
-> +
-> +			// Some properties (like loadables) are stringlists
-
-Aren't they all stringlists?
-
-Simply get the stringlist length with fdt_stringlist_count() and then 
-iterate over all fdt_stringlist_get() instead of handcrafting some iterator?
-
-> +			while (offset < len) {
-> +				const char *img_name = list + offset;
-> +				char img_path[256];
-> +
-> +				offset += strlen(img_name) + 1;
-> +				snprintf(img_path, sizeof(img_path), "%s/%s", FIT_IMAGES_PATH,
-> +					 img_name);
-> +
-> +				int img = fdt_path_offset(fdt, img_path);
-
-I believe you could save the snprintf by doing the following
-
-- get the offset to the /images node with fdt_path_offset(fdt, 
-FIT_IMAGES_PATH)
-- use that offset with fdt_subnode_offset(fdt, images_offset, img_name)
-
-You only need to access the /images node once, outside of all loops.
-
-> +
-> +				if (img < 0) {
-> +					const char *conf_name = fdt_get_name(fdt, node, NULL);
-> +
-> +					fprintf(stderr,
-> +						"Error: configuration '%s' references undefined image '%s'\n",
-> +						conf_name, img_name);
-
-Would be nice to tell in which property as well since we already have 
-that info.
-
-> +					ret = FDT_ERR_NOTFOUND;
-> +					goto err_munmap;
-> +				}
-> +			}
-> +		}
-> +	}
-> +
->   	munmap(old_fdt, sbuf.st_size);
->   
->   	/* Close the old fd so we can re-use it. */
-> @@ -750,7 +794,7 @@ static int fit_handle_file(struct image_tool_params *params)
->   	char bakfile[MKIMAGE_MAX_TMPFILE_LEN + 4] = {0};
->   	char cmd[MKIMAGE_MAX_DTC_CMDLINE_LEN];
->   	size_t size_inc;
-> -	int ret;
-> +	int ret = EXIT_FAILURE;
->   
->   	/* Flattened Image Tree (FIT) format  handling */
->   	debug ("FIT format handling\n");
-> @@ -854,7 +898,7 @@ static int fit_handle_file(struct image_tool_params *params)
->   err_system:
->   	unlink(tmpfile);
->   	unlink(bakfile);
-> -	return -1;
-> +	return ret;
-
-This propagates more than simply the FDT_ERR_NOTFOUND added in this 
-patch. Not sure this is entirely safe to do? Please check that all 
-possible return codes of all functions whose return code is stored in 
-ret are negative.
-
-Maybe we should have this as a separate commit too, seems like we could 
-benefit from it regardless of the first part of the patch being merged.
-
->   }
->   
->   /**
-> diff --git a/tools/mkimage.c b/tools/mkimage.c
-> index 2954626a283..361711c53b2 100644
-> --- a/tools/mkimage.c
-> +++ b/tools/mkimage.c
-> @@ -519,8 +519,13 @@ int main(int argc, char **argv)
->   			 */
->   			retval = tparams->fflag_handle(&params);
->   
-> -		if (retval != EXIT_SUCCESS)
-> +		if (retval != EXIT_SUCCESS) {
-> +			if (retval == FDT_ERR_NOTFOUND) {
-> +				// Already printed error, exit cleanly
-> +				exit(EXIT_FAILURE);
-
-Considering we only have one U_BOOT_IMAGE_TYPE with a fflag_handle, I 
-guess this is "fine", but this seems very enthusiastic :)
-
-Cheers,
-Quentin
