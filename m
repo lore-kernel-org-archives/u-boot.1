@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56507C3ABC3
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 16:41:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA3AC3ABC9
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 20:03:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC4748091A;
-	Tue, 13 May 2025 18:41:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB42C80AE0;
+	Tue, 13 May 2025 22:03:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EZzgP1Uv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JYTET6CW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88DD680AE0; Tue, 13 May 2025 18:41:36 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 9E23C81DD6; Tue, 13 May 2025 22:03:51 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62A38800C1
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 18:41:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77EED800C1
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 22:03:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3f7f7b70aebso4423632b6e.2
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 09:41:34 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3f7f7b70aebso4538907b6e.2
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 13:03:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747154493; x=1747759293; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747166628; x=1747771428; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JMg59mXVr9/7Ajzh/4RjalgzvQwMcpsGgpM1xZQ06MM=;
- b=EZzgP1UvmwCyBj2CJcddDFKUMKPh0FPXKxV+cFD0gOQjRAD6+gnraxz9pl5Z9pAW8x
- +4+6zMkavs3N4pylhyurAbE1uqQH/IawxRMrklZTFLp8IOjS+vfvzDH8TJyx2OognVPk
- sj3LR7FPCDW/eFUuGtSXt5b6V+ZnFbAwDu+AQ=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=onROoGOw1WW9WYmO5QuQV3bcYO39/e4fN0uH/1pZvMA=;
+ b=JYTET6CWZ5tsLqvPbzaev9m+plyn1r1+GbyyMqtzk+T8dfzxhssRAKVtBP1j0xJgF6
+ 6czQh1HN4F+2Dlpeni0YQwRkIdOHZ7mKn3LCBnyymPP6eZeaYMP/xxEqW9Pywra9O+ZP
+ AYlmyJ/fNJfflgZAFpY1UykS2/hZjTp9aEio0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747154493; x=1747759293;
+ d=1e100.net; s=20230601; t=1747166628; x=1747771428;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JMg59mXVr9/7Ajzh/4RjalgzvQwMcpsGgpM1xZQ06MM=;
- b=SPfDLijG5BXgA4/wqhmAiPYXLepI+jz6KdGKrCvVva+VR+JmrqQWBqQgFXfBwR96JA
- p7pZvcfUiCYIcsP72j5yW9+FgMuyvkQcgVIQOrHuvNMK1YZYskK+ZHvlZKIVODQOgT5O
- +V5gvgwNV3YPHFe6uYlChW3mDDKonATg42KyJkbpa1ZBYfiaAOqvXLlGjOze0Z39sDMV
- uNpGPyj+xMjo5aoJFv1G9g2441qfELRDUU0RTVjOIBY9J1T0nJWilYXfKLKzHz0ZfT5h
- 7fOqX1UPveIL3hINcE6VUr1IdWdw0FDWeeAqqP6ewJpRFyDTPH+qFRv+JtcSQBM3fhhM
- 8WbQ==
-X-Gm-Message-State: AOJu0Yx3loM11J4lV/90QwZ1VwBp4Up+hyjh0n9D2VDmxzkY+DQ/mubC
- nFmO2JpMlxavD7w6gXSoIbGAZus4X62AdKEAmlCBUPuZkLaYVawgIOb4u3ur1EhGbHwbYUaNG/e
- c
-X-Gm-Gg: ASbGncvR6K0ClRl58pyo/KEZ67gWVkwkWv+7z+KxaCn/KNruyWRx2XHgDEZhLHT093M
- QgpWgImBvqpjdm3iAey8efon1rMts2tG/Ee0q05p3Ey2lGUTwvKVMhs2zrxbIoryYfq0PVjTnTW
- z/zcJdponjh1XJI5siuXLiTz/YYBE9u2jkWzzcC6hADyxzeeWp7fCfzc/T2XPAlbYlh0mg1igNM
- 4HWG+661159C8T6O3AiGjDSDFL4hez1R4Ptm5T0nkklgyzIFmxiUwW+/AJJw3hT5F16CQqYWHlz
- 4L7EkaMRnDIYoHUGtTl4qLg0oKcltX1HMqxliulUwEB96Xhwr68FweUrmMkq1sKoVuRliwNmL7N
- CWCUJrpM9vmU=
-X-Google-Smtp-Source: AGHT+IHFRVgWui4nHAa/Tkk+O7rPslA2+qtZ/4H36g/w5+2gInsU6FiJLaLKLLr/FkMhm1Qg8U6nZg==
-X-Received: by 2002:a05:6808:6a88:b0:403:31a4:f410 with SMTP id
- 5614622812f47-404c20bb49dmr167996b6e.24.1747154493124; 
- Tue, 13 May 2025 09:41:33 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-403802f1cc3sm2004620b6e.21.2025.05.13.09.41.32
+ bh=onROoGOw1WW9WYmO5QuQV3bcYO39/e4fN0uH/1pZvMA=;
+ b=Z7vYndAvEyJRcLoOY6mCbWWTqO412pqsE9lZ+vqUef8TQCDc/JaMW5I2KPmtc8PPvt
+ KDdbR3O41FZqC+Btc9biszfrhDbCo1oMJubNysHmsfxABlIuDJkcHfgmtyGNXFR5n9nN
+ XzAyKosJK6BnQ0VvPo+r0liWUQV1jVDOeKwG2oSuSt7NLbR3vzHQ8S8xENRj0Sz3Fxny
+ nbz07e6Aa6OqpWz6lsvYWzNvl5erwBBYgjvm/4Mt+iKWJ0+w5lPoYef3NiDeMPITvw8Q
+ zrsfJmySCNekk8BFkGrfLVoTJJogIlP8FwOF/8yFNr2+Aj7KpiEHtzo5fPId1KsY9JrU
+ jCsw==
+X-Gm-Message-State: AOJu0YymN55/pMkt81vsFvSh0jioiM4dwkTa/NkGeMgpJQKQWl6qxTDi
+ eOw6gVIT/S0Sk8BCcQB5/lg6MnZFk6JwSY3BwcbAWylZq9XWNPTMwjtBoYmvEAc=
+X-Gm-Gg: ASbGncuqt4+xsZM4m1p8M9OKwf4xaZslceV5lO4a2HZpaPOI7KRz4gFAjDmN/6Km29O
+ 1Akme9BE8dB5QlXwudEcNGmaXwxRm0CUWlCYF4cvBWOlEk7gvLv0YzweOzDTFjqfkGl8+Jlxvh5
+ Dsb7JgLrz43IMxIwCAlsUBdkvJ3stwkQ4gr5z27/J1+X0lBqo6ykkmE/Rodqulk3luMAx9oxDi6
+ Mf5BVPwaD18IHqfR1GxOznUSYe9WrFuxwoxeXSOogRlbTdKLcP7IXDyKExkUJXFW0yiliR6Vrob
+ hHEu4BjXaCHKwMMgyPnoOcRAfZoasmwmMeYk0KpuVX0pWjd2vx6k/WPbLqAHPdrijpLtIJ6+TYY
+ rx6qJPHIKJ0Q=
+X-Google-Smtp-Source: AGHT+IGM2jQaPsD+Pxy7X7L9v+mcNpmWXBFBNUyTwizmxyHvweTjXChkBED86V6Mbgpr/zUZYurJbA==
+X-Received: by 2002:a05:6808:3193:b0:401:e949:6374 with SMTP id
+ 5614622812f47-404c2003d2bmr629687b6e.16.1747166628066; 
+ Tue, 13 May 2025 13:03:48 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-137-42.totalplay.net.
+ [189.203.137.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-403802bd09fsm2095978b6e.2.2025.05.13.13.03.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 May 2025 09:41:32 -0700 (PDT)
+ Tue, 13 May 2025 13:03:47 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250512214927.3839357-1-festevam@gmail.com>
-References: <20250512214927.3839357-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250512
-Message-Id: <174715449245.2459465.6027374569059896016.b4-ty@konsulko.com>
-Date: Tue, 13 May 2025 10:41:32 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250501164721.1494370-1-trini@konsulko.com>
+References: <20250501164721.1494370-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/4] cmd/cat.c: Add missing include
+Message-Id: <174716662684.2554302.18259800566694633940.b4-ty@konsulko.com>
+Date: Tue, 13 May 2025 14:03:46 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,20 +93,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 12 May 2025 18:49:27 -0300, Fabio Estevam wrote:
+On Thu, 01 May 2025 10:47:18 -0600, Tom Rini wrote:
 
-> Please pull from u-boot-imx/master, thanks.
+> This file references errno values and so needs to include
+> <linux/errno.h>.
 > 
-> The following changes since commit cf37480bc8335494cf88b7180dc3f1eb8cf63a9d:
 > 
->   Prepare v2025.07-rc2 (2025-05-12 14:33:38 -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/next, thanks!
 
+[1/4] cmd/cat.c: Add missing include
+      commit: cfa00751b0516a3c8f4f432962a754fae4d551de
+[2/4] ext4fs.c: Add missing include
+      commit: 720e0c0f1a14f034df3cc960e0924b74b3ba4fe2
+[3/4] fat.c: Add missing include
+      commit: a367817c9a7f50b41a9f84e5a0818599e857739d
+[4/4] fs.h: Switch to using rtc_def.h
+      commit: 4c26de2eea6bcf5f27b13da0372d27d767cd38e3
 -- 
 Tom
 
