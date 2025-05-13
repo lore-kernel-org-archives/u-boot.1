@@ -4,62 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A70FC3ABC9
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 09:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F31AC3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 09:18:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 905D182A8D;
-	Tue, 13 May 2025 11:08:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 8A4B48129F;
+	Tue, 13 May 2025 11:18:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="WAtbVcXO";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="ULn7bNmU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 933FB82AA4; Tue, 13 May 2025 11:08:43 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1316F81DD6; Tue, 13 May 2025 11:18:52 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A5A382A8D
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:08:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B70CA800C1
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 11:18:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 22DFA25C08;
- Tue, 13 May 2025 11:08:41 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1l-Z0gVUOCMf; Tue, 13 May 2025 11:08:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1747127320; bh=wv1/eGM+w1sJ1UZevRGrJGCFCSLkWygnkmrNf3K2kzc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=WAtbVcXO1fex4tVtmWEA0MgWv2OWjypfcU4WqxDAF4gghVNDDn0D5kv2eH7RuV9YM
- JSkJsroG6eNwwv96+qgLQX9f+UMEwidfaw7E7vjmTiJrUswLA5h+A7nI4FHocg0kKU
- a7H3oXh8EipTatibBDzkk6aOu+oPvHdeWAU5+zTyGItOYpQupkJPJHs8WYHPOG1yol
- pYHpKUom3yrsYYAkyI9lvFR8vvp2EdTSE1GugpCUd6Xs9UKys6ZCbYKbbInN4iIXiV
- QWgJRirG6+5VwcOKBvPSmMgniNKZTHHLoYU3yBkDRpTh/rkoIcrEq5dPde57xV4GbS
- ZDIWat9fp9iGQ==
-From: Yao Zi <ziyao@disroot.org>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>, Wei Fu <wefu@redhat.com>,
- Yixun Lan <dlan@gentoo.org>, Maksim Kiselev <bigunclemax@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neha Malcom Francis <n-francis@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
- Vaishnav Achath <vaishnav.a@ti.com>, Andrew Davis <afd@ti.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
- Han Gao <gaohan@iscas.ac.cn>, Yao Zi <ziyao@disroot.org>
-Subject: [PATCH v2 10/10] doc: thead: lpi4a: Update documentation
-Date: Tue, 13 May 2025 09:05:03 +0000
-Message-ID: <20250513090503.46670-11-ziyao@disroot.org>
-In-Reply-To: <20250513090503.46670-1-ziyao@disroot.org>
-References: <20250513090503.46670-1-ziyao@disroot.org>
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54D6O1uD022669;
+ Tue, 13 May 2025 09:18:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=G9dIWMgMC8obL/dts460RF
+ cZqLBs1FF6wUrP3bhg0ME=; b=ULn7bNmUK7rYClsXvIXqEoUAfkRVdKSf/6Gl5Y
+ MdPuTTngxVSDD60ViqEG+oQENrFdVlLTpqCLu/BgMSPXINESx1FnP3OsZVkNU+oY
+ gtg2iNtpbyI2It7jPk1BSgLJ+5dAVzFV+b5DdJg9aLZ9/4wqaPo7GL2Af43FFxYj
+ xsUq1FSvr5a8mfTXKF5lpYawlBwa6/1YO77QUdmyc89Qyrz6yxcw5/nc7tT4M2mV
+ iGuEFkKOTzRyLxCFIOxWh9waIdXWY4kHe8WLFPe6zwSiigh+LgPUF5LXAiRLWWNX
+ 2YDowjuBkWiByfUTHYoTMXBn90MBjceUNlHsNHvJs4d9JqMw==
+Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46kdsp3cmx-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 13 May 2025 09:18:23 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54D9IMiG023598
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 13 May 2025 09:18:22 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Tue, 13 May 2025 02:18:17 -0700
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <casey.connolly@linaro.org>, <neil.armstrong@linaro.org>,
+ <sumit.garg@kernel.org>, <trini@konsulko.com>,
+ <joe.hershberger@ni.com>, <quic_varada@quicinc.com>,
+ <avromanov@salutedevices.com>, <michael@amarulasolutions.com>,
+ <sjg@chromium.org>, <hs@denx.de>, <michal.simek@amd.com>,
+ <marek.vasut+renesas@mailbox.org>, <venkatesh.abbarapu@amd.com>,
+ <ansuelsmth@gmail.com>, <cniedermaier@dh-electronics.com>,
+ <xypron.glpk@gmx.de>, <ilias.apalodimas@linaro.org>,
+ <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
+Subject: [PATCH v4 0/5] Enable env in SCSI
+Date: Tue, 13 May 2025 14:47:05 +0530
+Message-ID: <20250513091710.3719292-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: ZkyMxPwkO30pIzIaSvnzqpaYava2ZiN-
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTEzMDA4OCBTYWx0ZWRfX7oC1Vc1BvLtB
+ xwq9jA3+Udx0g+Y4RYiHICYS7HyFmD+QQyguk2LlQyxVcfS/zr/2a2U3Aq6OHyxqfs/WZZj1dsE
+ iQxy8biB3AWOs+pZwxFbjDooAwciXgnxATsMvYD2f0X/cSNHlOaf2v28dFy5CLMJKMbh2ptz+UO
+ YhNoVZhoPVGc6YTXJHZfowIiIJQ6SUwkYStIZx7q5A2c07EecojjHD1Yq/Jm26xd2a2eOgIDoB2
+ WtJ/28wD/BgdZXotFBajZ2mVGTFQVpjJV3uoS3ERcq2oVkAbsPuG+FHUS9UzKM2quCq+0zKKuof
+ dpMx10d/HLt8ci1dfUj1R+BSlegESxZLVU4gsrAJKBf8ZMdyiWhSAxpLq7K5ntgOlx/40OEcqG7
+ mw/hy8yEonmGezAAfHXkak7gvo3+ph6WW13VfW5UXVSyOvoQjnp/yHqFUZmTXD1dnR2NvQ4I
+X-Authority-Analysis: v=2.4 cv=TrfmhCXh c=1 sm=1 tr=0 ts=68230e60 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=dt9VzEwgFbYA:10 a=mQL1Am-uhmc7ytFfhkwA:9
+X-Proofpoint-ORIG-GUID: ZkyMxPwkO30pIzIaSvnzqpaYava2ZiN-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-12_07,2025-05-09_01,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 spamscore=0 malwarescore=0 mlxlogscore=921
+ suspectscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0
+ mlxscore=0 impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2504070000
+ definitions=main-2505130088
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,110 +112,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support for eMMC, SD card, GPIO and SPL have been available in LPi4A
-port. Update the documentation of support status and build
-instructions.
+The qcs9100 based Ride platforms have UFS as their primary storage.
+Hence add support to U-Boot env framework to be able to save and
+retrieve the environment from UFS. The environment will be
+saved/retrieved from the partition specified in the config option
+CONFIG_SCSI_ENV_PART.
 
-Signed-off-by: Yao Zi <ziyao@disroot.org>
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
----
- doc/board/thead/lpi4a.rst | 58 +++++++++++++++++++++++++++++++++++++--
- 1 file changed, 55 insertions(+), 3 deletions(-)
+Also add an API to convert partition UUID string to block device
+descriptor for UFS. This API will be used to get the block device
+descriptor for the partition specified in CONFIG_SCSI_ENV_PART.
 
-diff --git a/doc/board/thead/lpi4a.rst b/doc/board/thead/lpi4a.rst
-index e395c6ae12c..7e4c4ea81ee 100644
---- a/doc/board/thead/lpi4a.rst
-+++ b/doc/board/thead/lpi4a.rst
-@@ -32,6 +32,8 @@ Mainline support
- The support for following drivers are already enabled:
- 
- 1. ns16550 UART Driver.
-+2. eMMC and SD card
-+
- 
- Building
- ~~~~~~~~
-@@ -43,15 +45,32 @@ Building
- 
-    export CROSS_COMPILE=<riscv64 toolchain prefix>
- 
--The U-Boot is capable of running in M-Mode, so we can directly build it.
-+3. Build DDR firmware
-+
-+DDR driver requires a firmware to function, to build it:
-+
-+.. code-block:: bash
-+
-+	git clone --depth 1 https://github.com/ziyao233/th1520-firmware
-+	cd th1520-firmware
-+	lua5.4 ddr-generate.lua src/<CONFIGURATION_NAME>.lua th1520-ddr-firmware.bin
-+
-+4. Build U-Boot images
-+
-+The U-Boot is capable of running in M-Mode, so we can directly build it without
-+OpenSBI. The DDR firmware should be copied to U-Boot source directory before
-+building.
- 
- .. code-block:: console
- 
- 	cd <U-Boot-dir>
-+	cp <path-to-ddr-firmware> th1520-ddr-firmware.bin
- 	make th1520_lpi4a_defconfig
- 	make
- 
--This will generate u-boot-dtb.bin
-+This will generate u-boot-dtb.bin and u-boot-with-spl.bin. The former contains
-+only proper U-Boot and is for chainloading; the later contains also SPL and
-+DDR firmware and is ready for booting by BROM directly.
- 
- Booting
- ~~~~~~~
-@@ -61,7 +80,7 @@ and chain load the mainline u-boot image either via tftp or emmc storage,
- then bootup from it.
- 
- Sample boot log from Lichee PI 4A board via tftp
--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
- .. code-block:: none
- 
-@@ -127,3 +146,36 @@ Sample boot log from Lichee PI 4A board via tftp
-         Err:   serial@ffe7014000
-         Model: Sipeed Lichee Pi 4A
-         LPI4A=>
-+
-+SPL support is still in an early stage and not all of the functionalities are
-+available when booting from mainline SPL. When using mainline SPL,
-+u-boot-with-spl.bin should be loaded to SRAM through fastboot.
-+
-+Sample boot log from Lichee PI 4A board via fastboot and mainline SPL
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. code-block:: none
-+
-+	brom_ver 8
-+	[APP][E] protocol_connect failed, exit.
-+	Starting download of 636588 bytes
-+
-+	downloading of 636588 bytes finished
-+
-+	U-Boot SPL 2025.04-rc2-00049-geaa9fc99d4cd-dirty (Apr 26 2025 - 13:31:41 +0000)
-+	Trying to boot from RAM
-+
-+
-+	U-Boot 2025.04-rc2-00049-geaa9fc99d4cd-dirty (Apr 26 2025 - 13:31:41 +0000)
-+
-+	CPU:   thead,c910
-+	Model: Sipeed Lichee Pi 4A
-+	DRAM:  8 GiB
-+	Core:  30 devices, 9 uclasses, devicetree: separate
-+	MMC:   mmc@ffe7080000: 0, mmc@ffe7090000: 1
-+	Loading Environment from <NULL>... OK
-+	In:    serial@ffe7014000
-+	Out:   serial@ffe7014000
-+	Err:   serial@ffe7014000
-+	Model: Sipeed Lichee Pi 4A
-+	LPI4A=>
+v4: Use 'if (CONFIG_IS_ENABLED(xxx))' instead of '#if CONFIG_IS_ENABLED(xxx)
+    Add documentation about the platform
+
+v3: s/scsi_get_blk/scsi_get_blk_by_uuid
+    Fix argument name in scsi_get_blk_by_uuid
+
+v2: Add part_get_info_by_uuid() similar to part_get_info_by_name()
+    Use SCSI instead of UFS
+    Use UUID for SCSI_ENV_PART instead of name
+
+Varadarajan Narayanan (5):
+  disk: part: implement generic function part_get_info_by_uuid()
+  scsi: Implement get_blk() function
+  env: Add support for storing env variables in SCSI devices
+  doc: board/qualcomm: document iq9 building and flashing
+  configs: qcs9100: Enable env in SCSI
+
+ configs/qcs9100_defconfig  |   5 +-
+ disk/part.c                |  39 +++++++++++++
+ doc/board/qualcomm/iq9.rst |  62 ++++++++++++++++++++
+ drivers/scsi/scsi-uclass.c |  30 ++++++++++
+ env/Kconfig                |  15 ++++-
+ env/Makefile               |   1 +
+ env/env.c                  |   3 +
+ env/scsi.c                 | 115 +++++++++++++++++++++++++++++++++++++
+ include/env_internal.h     |   1 +
+ include/part.h             |  20 +++++++
+ include/scsi.h             |  10 ++++
+ 11 files changed, 299 insertions(+), 2 deletions(-)
+ create mode 100644 doc/board/qualcomm/iq9.rst
+ create mode 100644 env/scsi.c
+
+
+base-commit: 48db49b0977cc1c9c9abf82c0fb704238fcef4fd
 -- 
-2.49.0
+2.34.1
 
