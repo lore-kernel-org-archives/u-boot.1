@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37B2BC3ABC3
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 12:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8347CC3ABCC
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 12:30:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEE0B82B26;
-	Tue, 13 May 2025 14:28:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 135F682B33;
+	Tue, 13 May 2025 14:28:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="nD1MpHB/";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="XwLisu7g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B8808129F; Tue, 13 May 2025 12:21:08 +0200 (CEST)
+ id 452D38091A; Tue, 13 May 2025 12:21:13 +0200 (CEST)
 Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::61d])
+ (mail-mw2nam12on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::626])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A278091A
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 12:21:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1539B81FAB
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 12:21:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rNg74HKJHtuZG+QOA/6mfNzcWpv6RDcIVZu4VhyMwmm4s7hir3wMZiKpHoen4Thwz/sYjxpbAkpMSDqPCHQiDLlrjVkQf+iDm7Hd6y2HvCdjVboOSS57OeQkeyUwssLRbWxpATpzw5a48Wit60GgMPpNKI7gSj1tzFrDyJJbbHTV7827VpsIytyhUY8dZPFjVa7hJiD/QCPx4QeTC546eNdtU4gMBJrjKSzhRupSPCALRjhK2HF73HuJvmr0yDOqEAaesipXoZltpUijeQTmpYSxb1lK0ji2BBJjKfg++oyeB1RK9OU8ReI8eU53XPx+Myu9hU2dij0dBFG4lIO7qw==
+ b=ZWy3lw5x3MOTSHRzVeHrxrKxA6oDB5z0C5d9peylzrrdSFDgpAHj7rRDbIxerYke/4ikgAFMIEcmuxIXftqorvpzxmzWBoKri+Ly8O8rBb89nYiqeqM18jS+PXGchK+gjIkXX6dOlDFrlm4Bu02WnARvISCtIpOUPw8HA66Yuqut352PyGNXHMthMXE8ssQa2A2GQYvgqwyCQWEMTuNUjajSg5MYs/M7TnGXndk/7HkYscYH1sevAqlUONO9/k/zVSNypyos7lqr5K9JBpjuXRqVRkElVPVCHa/YSQj78G3bkcidwi7b3P5A6yk/HB/QCMS2IJVQwUOA/TPwMUKoQg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=phMn3CVeZIMuikqZ8k27fCXvnvIZccopCrsY6RBATwI=;
- b=DQTUWYxZ1cRQ05W9vLF3PGZ8RMT/qDORJuoa6KiKjmBIFrWH49TfKSiCZRe/9ILeq+chZECctRpzpVabSRW0+SBNDP2dawFiMZNLwgQbPrNUjEkprohv0BMTfZJNCt1rc5LjnaArPobRVvMc4tjPyAExsymuucIe7u+MVBCDoUee+SVXLHEG0eNNs2kzXhiNv7DutBpl7gUd2sxiHqKZ5zUgQsK7ksV+QTgLF2ZwY5+7NydQrn+XfiMQZ6MH4w8pU3Z5nnOg/pf0t0xtD6CIlFcVX5D2XMxpPZDe6Q8yXXV7dXbRN1+zCtikEPAir4pdtD5DVX7I3R6BAQX7ISsYMg==
+ bh=nJmr4z9Ih75M6QdTMHfTIawHtgOlo3HCVlmyRBgsqYI=;
+ b=lqwb+Kj0kcJxxSVP5rlbyVEnc1qrQha2CBZxRWa4RdfV/Sjbuq4UpgwNwro8yN2ZepSfmz1GX0fr900GWKLDUNAaX9y4ISId1Gi6mooz+Kr96WcLfOiMnyXKHxpW0WljR+DjrAnTtei31FjA76fwTH3SxLNAb1yrd9QS96cdhgWM8GFBQvOh69mxx7OnuePiP6HO7fVUcpGL7cZBqVVmgG/rSH50p5TKT0jaD7EFO7ZNJWBgdfNJVl6FRJyMEZrPAwmoPgkemon8vs0boaxi0nh4PxjnvfKjoGY5CRCbjtweOdPlygsiXBO5cM4+F1m+tNex15RVmF/iQ4yfHGz7WA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=phMn3CVeZIMuikqZ8k27fCXvnvIZccopCrsY6RBATwI=;
- b=nD1MpHB/9UHsQXx57NoaTcpKcmEDF8c3hNEupQyeSclO9Lb/WL0HhsMj2AQEvVPBUoky8D7MGC8TU2fyBQEE24sKn1ItsxABJL2sw32IO4InzbhgD3ZR7gm3t1s8o0MwpveKZh4391hOBGcnRqhDoBFtF3GPrPfZKYltKc259FGbYb/TIsQp4ilch6G8LXL9dl+ugqctTIV+Op+UW0p+uM9Z1zHZrJo8rOIPVZIouRrg0ttPzQHSfkIcyEuq0aLODupgiEEKmig+3jmE0O4tGwSmV02uudsgTJyHkmZavdObRcZRYgUW9YfbzcWWyhOGTgih7bVJx+v+IJ2y6HHYHg==
+ bh=nJmr4z9Ih75M6QdTMHfTIawHtgOlo3HCVlmyRBgsqYI=;
+ b=XwLisu7gEI6KXCXBn/Kous40uoEXijwiP1Yu/tJnUz9gakEqJnhsLX4u7UvFZ2faPKMvGAfVc/8HV3a7Ikmcem1b3+P+6NcIsPaqoB9tSlW5A7U6T8My/jG76bjWl8DDFrZGPtYMXOaaGDZBOY6t2uIlTbO3Vtj4JTjIwejv47TTbhyKaKNeRBQghwx7/NTHCXofS9ypdhJnusUfawhiFc5c+Dh1SmNw7L962OUx0kgAe5ue3xNw3im8MWZwRIdQqCli0y8yZCPge3zYW+Spb9poDjYQ6K37iN+RXz6Y9KLSZXkcPTbReIkPemTXrPbR22s5jLWmrUSQT2jqCQbFFQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from BN7PR03MB3410.namprd03.prod.outlook.com (2603:10b6:406:bd::11)
  by BN8PR03MB4979.namprd03.prod.outlook.com (2603:10b6:408:db::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.30; Tue, 13 May
- 2025 10:21:01 +0000
+ 2025 10:21:08 +0000
 Received: from BN7PR03MB3410.namprd03.prod.outlook.com
  ([fe80::bf20:122e:c7a8:10c]) by BN7PR03MB3410.namprd03.prod.outlook.com
  ([fe80::bf20:122e:c7a8:10c%5]) with mapi id 15.20.8722.020; Tue, 13 May 2025
- 10:21:01 +0000
+ 10:21:08 +0000
 From: dinesh.maniyam@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -74,9 +74,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Alif <alif.zakuan.yuslaimi@altera.com>,
  Hazim <muhammad.hazim.izzat.zamri@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>
-Subject: [PATCH v5 09/12] cmd: Add i3c command support.
-Date: Tue, 13 May 2025 18:19:10 +0800
-Message-Id: <20250513101913.30880-10-dinesh.maniyam@altera.com>
+Subject: [PATCH v5 10/12] test: cmd: Add simple test for i3c
+Date: Tue, 13 May 2025 18:19:11 +0800
+Message-Id: <20250513101913.30880-11-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20250513101913.30880-1-dinesh.maniyam@altera.com>
 References: <20250513101913.30880-1-dinesh.maniyam@altera.com>
@@ -88,76 +88,76 @@ X-ClientProxiedBy: SJ0PR13CA0219.namprd13.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BN7PR03MB3410:EE_|BN8PR03MB4979:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3da19201-bfa3-4c9e-6cab-08dd9207dc1e
+X-MS-Office365-Filtering-Correlation-Id: 49037b05-2de1-4f7b-8e57-08dd9207e06b
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?apsAJjU1HwQ3/JHYgzSTMEZL8fV5HNjkvXeukvSSjkupGI5L0oLSNKT3Ykkd?=
- =?us-ascii?Q?qTLFGsGHCyFU+6/sAmhF7YD4EFN92f/TBVlTEIy4taCAMOC2pbYVZsxF3VmO?=
- =?us-ascii?Q?vn0E08gkAnNNotk32QLbFb8lYbwl88gy/Gpzjvef0jxHY6+ABrqfkaZIDJcW?=
- =?us-ascii?Q?5rKU0z1Uk3M2I8HnIT4ykhP0U8GAGvEoRYqIgT3BsxX+fVaDoIaL6Ni+Ja4B?=
- =?us-ascii?Q?120iZeYJCRJLoDy0FRdonW00vKXUH2Dfoa7w24mJ1jPj5lOkIPf+yG54np/c?=
- =?us-ascii?Q?hK3ld056mDjvuuMjtPO1DUNoro3rYzj8/YaqmPNc1ZbOGPFKZVUKE8DoHGnT?=
- =?us-ascii?Q?ttsL0vx1bFwDl79OiQkRa6LT0RVBqjojGuJC/zy/f4E1EKWMaJUgTEBb8Lv7?=
- =?us-ascii?Q?F46Oq4LGHeFidjTCg2O3Jm3uLJsVjgWhVQFmfIssAduiN5Vf63CNfRxZVmdh?=
- =?us-ascii?Q?JXOQYroSUUFWjoWmTVgf+4eSCa6cJs+76irPwrfL6KNQOfptJ7WdIqMRRddz?=
- =?us-ascii?Q?7/WRQO6t2JjG845Q0J6X8fdvySZ6XioOic13NX8h2aAzwROBToebA0Jv6RCt?=
- =?us-ascii?Q?2bDsScU1MyiGo31nSh/idgWzAoD5tixyEJ1njSbpQaCIZwib/XNTm2FFY6d5?=
- =?us-ascii?Q?To/T4/t3BKSfblaibFylJUTAWs7BUFKhJjWNz7E1iWJ2PYCf+F9Dyhqihxfg?=
- =?us-ascii?Q?yF7umKcEF1HDuC3tRzPOpocTtHg82cKXkzbkOvJACT5UyOWZrYoqGiB560sm?=
- =?us-ascii?Q?PrSz3PfKvr8sOBcsqdnB1xOPAca4eo2yT6f6/2y4RL+vpA6hhsDC/VBq7GvH?=
- =?us-ascii?Q?jZ5x7COuPxosHNjRlSp5gHr50tFUH3hdrzHTQBlpnkbmwd2TLVhccuBgYTuN?=
- =?us-ascii?Q?fxGyOhgqDad/nt9voW77iPy7lmlI4s3mVxFEApnqieO8JluaHXZW5x1Q9dvs?=
- =?us-ascii?Q?TLsUVZSLhWarfPR44mzQm7hpPRwDqm2xMFtmZkd+xYO1WdpYT3oWAXCFToMM?=
- =?us-ascii?Q?y4haUjEyv0LliIcQU3UWC5F8U0riQMIvZC2bQSKYEG6/vt6i2PWYdisJAQBO?=
- =?us-ascii?Q?Jx7o6wzs5o/9PRIc97+dAxISvbVOfkV0QkA1rHgOtV0BZibnU4d5d1rftdMi?=
- =?us-ascii?Q?ca/Wd+R9gV43bQbboEcEBs43OkRDvevTQ8/f4TA20en94VL8CLgcZGEpFr+h?=
- =?us-ascii?Q?6hj39jfTwBjGFLZif8Dp0WSPnAcN+LSt+G/1YDCt/ffDpX4w5a6Ue0oFURs2?=
- =?us-ascii?Q?e+CxorWFWnVkLfWfKLKLFm5wUR336NQv9EsabGy3LREPaZQ3oZC6jyrCQj+K?=
- =?us-ascii?Q?i8S48T7Y6megtwIrOryEj2GhpvQ+Bm2gJzdgU7PLdxv7nfSiHhU6arA5kySL?=
- =?us-ascii?Q?6c6UCPM=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JMNOZKM2qYNQZGAVuMeOlnpdXT+GuR95mqytnJ9N3qF6wsLIieQ/z4ia2d7F?=
+ =?us-ascii?Q?3q2U93Zs+pgX+vV+B5p2ao5pR75K8uEpGvRmvyZdRuS2gyaSpcXLtwROGP5f?=
+ =?us-ascii?Q?hk7I9or3ZbXq6xMu/zH+q9yFdUIgRPL4MME5w+q8ItUeXxxkvvDHLf7jdZ1K?=
+ =?us-ascii?Q?eFswfEa5/db7jBmfoSUadTculk+fIDiupnXbdvV6mMJxt6p3V7lEtoyQTysz?=
+ =?us-ascii?Q?R/Hm2vRBiQ/gBK8OFeGeWemfg9ZAz6wsXVe113Dmy4IwcuhNe0PBb2AOiWSF?=
+ =?us-ascii?Q?8exhytRE06Er7MnjAVnmDGrqsEn4EMXnGUkdkXvhl9G85p4AfEKGuzaTjx7F?=
+ =?us-ascii?Q?xwdprgQZ+PmyZv/C7GPfoctK3zjJFAc/O/nZVzLmzoyk/s2gv7UR/yUceW0V?=
+ =?us-ascii?Q?d+rx2awfrIVQHH7T5ruKjZingY9WgoY12XO7o0kuSsWGqzrMeMvphDxzFVzw?=
+ =?us-ascii?Q?72dj90eeKZYLM9N6w1PvBE+8wCt/ETnSNeRRyJoolPhfB8C2/iURenQWq4b8?=
+ =?us-ascii?Q?r9u4NgPc/B2wSNJtnRg1MgHKSPH5/0i4oG1bOpIOpYxpuiVkVKpwHqmGyaXb?=
+ =?us-ascii?Q?yELkqQVpiPu1T60FiSv4W73kNDKC6GnyE7OcCTtEykYs82fBJ4CCpKicbw4t?=
+ =?us-ascii?Q?nV45eF18Hma/ILA0kQ3v609jLtXRMBsdsMCBYw1JqzB6aP+s6bTK9WicpCoO?=
+ =?us-ascii?Q?y4ywa7GK5o1nlHNJB7Pn5j1qrcGWNWlpFh78KTvBMv2mglMDGldYrSM0FQ6M?=
+ =?us-ascii?Q?yEu7fqXP9LYlFmqMR7z6Q0A6cCx4gDBuTKfO3pdVJEzw4CEZk+klTSB2+jMp?=
+ =?us-ascii?Q?vTgW1rBxl1x5PUK1ZvU4X338b5+XVnjpEmbpH+QxQ3TGEJPgDJ2uRiJ8GNmO?=
+ =?us-ascii?Q?tcdZOxX4/7pjIH7S1U7w7G95OFsiHEapTpnm3iq3wm4iFAsbNyNDEqF8yPui?=
+ =?us-ascii?Q?+ReipW3y0thrRcNAEbTxaYQAxvUi6/3F6PcZwZ8YsZhqsm2CbLNWRiSyluTH?=
+ =?us-ascii?Q?i2Liklnz9TSJvfmmVqysQJqKLgxXKN9UA2otkTtpTKI3IMjiyJyRrZAzm6EC?=
+ =?us-ascii?Q?YTkUTxf+OQ/Ic00H524ACG8xTmt7MDlW8FyUOAEGe96cvCVqpiXajjTJu4zi?=
+ =?us-ascii?Q?+j6bCLrd4SnIagk2z2iVlKmEJsBzyfaaSf2YQ8RzvTnfkEQZgXs1D7sqyE9X?=
+ =?us-ascii?Q?u1HhbPQd96neEABsb885FxmYIVmxh1AvLzV3syG4gN0W2fuoS9pKjK4Mm8/g?=
+ =?us-ascii?Q?0yI00LmjKBjzy58LpHuom96FugUkM0Cc5RyjXc/BYjv9s8iFCiSmYz2+6gth?=
+ =?us-ascii?Q?kNhP8y2q6r6u/UBYMBAOxqjDggDmVCrw2diKIMm6ZKmP8AODYL+x+pXc0s1F?=
+ =?us-ascii?Q?+hzOcUQ=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BN7PR03MB3410.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(7416014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5iR/qJPhUlfRRMxKfuWBOeIYuvcqLG+JMhTGrJqSWtM8mjXJBTJ9lWlgYlD8?=
- =?us-ascii?Q?/3BJyfng0ew5w9ol2LfaCq+GCmlgoPBe0LhFRsJ/OKBRfHle1hw9R1s1skul?=
- =?us-ascii?Q?7AAYdvQV1kCtNgdqaXStVbh3La0DqF568X2BL8M89IS4GJ1wVswMm3D9ygUD?=
- =?us-ascii?Q?whtgX0lorbD4EaIXGAc6o3QgM94vPPVvu37EO6KLApSMvz7va+V/qbZZsLqb?=
- =?us-ascii?Q?R/wpEDD6SAw5A1Xhvbh8jtqUyVPqYfTKXmGHuD7xNCYf3A1RUSQehAEIqr3S?=
- =?us-ascii?Q?ppkVPbAHQX6xSLn4PPQNJjKFcpZsIZn6JYyYDSJUT1QQELXQKKJs8CeQeyxy?=
- =?us-ascii?Q?6xMnhrudRmVQk6t5DuJwAOiZD8kKU6kTNqhbnLxVl0H7Jkq6feDUvLtESIqt?=
- =?us-ascii?Q?1Y5ky0Hukx2uTlgw6e3dGTQbXUHLet8t0y6EGjbb4w55W1Z4BRZMIinMBtva?=
- =?us-ascii?Q?mCx7fuYGnmCgMOHv5tEuBlhP7abpkQSw5NzETYcz4BNsGmSZy6XsQo4bhle0?=
- =?us-ascii?Q?68xL2CfduPu2AWERER5qTVq88boXdZZCsVAmBIKYZS8ucoxv1SKHGEZDbgJg?=
- =?us-ascii?Q?zdfsRA01xZrnqiIcXfUrVgK+gXXtF5zdw6AxVEWP/M312w5TfmSrPZaDW6RX?=
- =?us-ascii?Q?dbFM+CJouk6joEe/xQ1H2xUBtc5xgZziHNZKFH/Fxs5c5rQJn0t8zo8rCIcb?=
- =?us-ascii?Q?D0jPJkLFwErxbM1+x9T4uqnt7smc24exPJDf6S8EU0l0w7UODC1Wf5lP3bEK?=
- =?us-ascii?Q?SGA3tdRBEFRP1iH73RkVjIeL0ndSB2N8+MZsgaWMSaiz0DT3YGK27hxWc0Wt?=
- =?us-ascii?Q?JTX5r5Dpw/KUh54aF3/Z7xQXsXd6XAr5txbU/ZFNb6Sf3A7PqqZlzaWG6vuK?=
- =?us-ascii?Q?OsTXbqL8HzhxPvyniSNHzwsVKUV3lOiXitLdGiKrOCbjegYlq8q4mVOGk4r6?=
- =?us-ascii?Q?4+SsLcauy3xuNbOSp0/c8zAK2ubbGrWpt5g2W21shyghSZF3xgv/D9kkhSKP?=
- =?us-ascii?Q?XY4RHHQCb94AwVDo7Mn7cY7j+99t0ofgQ02jTeCT6+a6US629VoMOj3iY6Fq?=
- =?us-ascii?Q?2RpVHAcccsAK08l3CrC9tOnDD7izblFWk8wfFfhP2/6qUmBsL4WwMCgDoGnG?=
- =?us-ascii?Q?OiDthdB4ZL/DX9APiy7p9YKaIgkAPQaN3ewhAhsbrOGw3u12dPsaE6lnE0lT?=
- =?us-ascii?Q?zG48Lz+KYjhSmGdtAGirHpIdH/mYnkPLniWkGxN5shlscC5et9VI+LrT8dV4?=
- =?us-ascii?Q?YVB1gkXbNMISZnJNfz0GJhdPVUgF7E+3Sg8WvoLDKucWZm7BkYwZT0vCInI1?=
- =?us-ascii?Q?zxAzxwGnwOCUd5ogGecB+UJ8zd1j4yJGR5d2jy+KGB3LV8ZhqAqcOaASnQTn?=
- =?us-ascii?Q?LgbenAfNfnMqeLsZ3aKqcseLf7hi+V6QNgo+1HC7PZzN5coK5msLS00WQjYJ?=
- =?us-ascii?Q?2z986U4wYo2oKbJFCAK9M8s2IIYYV5nEFhMUldNvVErFTWBBicePIbD+EUVZ?=
- =?us-ascii?Q?6Q+Kp5sczV7glYgF42TTYpfEBBvVEgBmYyKbqpO8F7Zjkbc8QwB+TaClcCZp?=
- =?us-ascii?Q?jmDEJSxt0TLJ6znRdmlVKMak6jPId6XkSa6QsbZeVjYNDkIVw/f3PrCLy4lc?=
- =?us-ascii?Q?5Q=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?HxL5dU8rYwRR38n4iuSzhCwHcDdtl9N8OJyYvE1Zjxb+ZSLNPa56VcVSYgAd?=
+ =?us-ascii?Q?tlQa8ZnBo6de2QdqILdhoLf2PdPtl8SVTq2F6fMYplxHQ8hbhAjUymUS1lnM?=
+ =?us-ascii?Q?nC8kIg/9i43c7YwFKTeXGmWDpB01sevF61f1yoiYQjCJlQR0h7RX1DeRgoDm?=
+ =?us-ascii?Q?3zdlbd3AndRxjZ23xHdOdOQaKew7Qlm+HEVU5+wPfWXY634XUARHmAWbEq5q?=
+ =?us-ascii?Q?QfsoJkeAM20Rq4CtnSgF2qgNPbuP1ygvBrFy2VMWtuqZCOVFaQhQE2HFvcvL?=
+ =?us-ascii?Q?DFzZSleOLtnx0u8Mb7KFjcp1s+aVGeWJpa5S3eBwbO2SdLdXcoDuvzys+MZ7?=
+ =?us-ascii?Q?fMxM9EBFQEHI0OWtiIw4rqrjRmWPdY7b9jt6nmJC7shCPhwlH0CJRL2Sqgew?=
+ =?us-ascii?Q?6+JaEkz3HLVlZezxgkA+PSqLtgbefZfV9OiqTfesQCRtMgry8rkGpWp8etSh?=
+ =?us-ascii?Q?FyQJSd1sSw2QXuURNQrCTjjsp5rE5aGFJmrMNe27Y+NjlkeFZu/XA26uchrq?=
+ =?us-ascii?Q?XLWbe34IvCyVERJq8pH917csf6tER+xA9yAIN8nUcd7lIttISIm/Fuy3dmj4?=
+ =?us-ascii?Q?hqYAFJIj2ydQryVc7CNp1JWvO050+os0ZZgPIkWyoQXgd7JcKdAXZw/4GIqV?=
+ =?us-ascii?Q?bRvTd85glt//bm1wQFpRC0mN0ksvC8inE4+8YPX6MSW9dm8gEs1oLuleptKk?=
+ =?us-ascii?Q?oC2wY3qBzxnOCE6unF2l9ZYq6BBs7qSYeitDCnjY3waEsnlxJ4g7gJkWIqMu?=
+ =?us-ascii?Q?gb1+34VNE+wY3Y5xTImR8oY1OgFOtpJuzntQjHopqFOnZWMzppFa07noh6iH?=
+ =?us-ascii?Q?0xCJqG88hamBFZJWaaR49g2HSIGKCfwjOuwGKjWNxoZuYTRnFe9IJ8Ker7cA?=
+ =?us-ascii?Q?OlpdibSLgIJ+K//dY33JMLt0xyBsSrsX1o7OmdXzuc+waUenGctyKri4GKFZ?=
+ =?us-ascii?Q?/za01otw2cf0PRR75X4ZJ+dKxQCjZxxACzr9e3g4iFgU3N31aJ8qP3+DfVgX?=
+ =?us-ascii?Q?y1RBEoR1mMdVELd9vKhR5Y5U7E9Xt00l2QQZOfq3ZzD5RDeuhrP71UeSA/6+?=
+ =?us-ascii?Q?nVEPqkfDklsLwaz3A1lkPhV/qqaAZiMTGZ6LSm8lrEkGVdNRfmswb1J8P004?=
+ =?us-ascii?Q?PGZKEHBiv2hxTEeDsSBPN4fo7jNbsw3DrR4+5cq78pxBgqNt67/6WCebkT4z?=
+ =?us-ascii?Q?E5RUX44hnfj47gMwTouHJxpwdQfQeRnrt4vI5AOS2BFwZAWsWyQyp7iD/CkE?=
+ =?us-ascii?Q?DGhKP4A6LkrIjJ6Z3oLw9N1luNuhff0lN/esWXL20R7DI0Vv/HkDhsj4rvuf?=
+ =?us-ascii?Q?PpfofB6CfkLuIx1Bpz2886RYFy86EwXGZmYsZGTszGB9KHfG7OiudlvCRiIh?=
+ =?us-ascii?Q?753ZvH5bmIkt922QfMZJaDmswCB68Y6fwyiPxeWYT856unNa2TJb6Ts9FrUY?=
+ =?us-ascii?Q?7LL2TPFtJ5HyEsOWdMdpEIE4UiuoO1GT8YXrvyX432a4LncvVvScPBLiZo62?=
+ =?us-ascii?Q?U+xJi7cnO+io36ulUpPqS7rI6adIIk2VZ2zBjBLZnt+D0crrIZDtNhP9OGue?=
+ =?us-ascii?Q?mU7cNH2PTLudxc1RHop7aFsgKauIAIj+M34H3YwSCLX13wLtB8Ai+xDBLyYv?=
+ =?us-ascii?Q?pg=3D=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3da19201-bfa3-4c9e-6cab-08dd9207dc1e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49037b05-2de1-4f7b-8e57-08dd9207e06b
 X-MS-Exchange-CrossTenant-AuthSource: BN7PR03MB3410.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2025 10:21:01.5115 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2025 10:21:08.7053 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: C2fQExuGFVkgvdBRzkwS0dxMl2gwW1Z9+eeHtkRCucSrQ2//vNTNApt0/KAEejCojYbRWrzNLZrQETM8ZIYvt9svJ1HD8ARDGzAKLvtIBwU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: mXohQgtsPSM4sbqSp9C1HtmiR6OtK8D9iUtyxH4qC29GtKUyLHdHhqJF774fe6Oau65cNCRsjuzQg1rVg8XT66YrTefc6jhWfLMAQ4Zvthw=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB4979
 X-Mailman-Approved-At: Tue, 13 May 2025 14:28:49 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -178,597 +178,86 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Add i3c command file to support select, get i3c device
-target list, read and write operation.
+Add simple test to check i3c controller defined in sandbox test DT.
+Basically, this test case will check validity of the i3c controller
+by probing it and perform basic commands of cmd/i3c.c
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 ---
- cmd/Kconfig                        |   6 +
- cmd/Makefile                       |   1 +
- cmd/i3c.c                          | 261 +++++++++++++++++++++++++++++
- doc/usage/cmd/i3c.rst              | 146 ++++++++++++++++
- doc/usage/index.rst                |   1 +
- drivers/i3c/master/dw-i3c-master.c |  35 +++-
- include/dw-i3c.h                   |   2 +
- include/i3c.h                      |  28 +++-
- 8 files changed, 478 insertions(+), 2 deletions(-)
- create mode 100644 cmd/i3c.c
- create mode 100644 doc/usage/cmd/i3c.rst
+ test/cmd/Makefile |  1 +
+ test/cmd/i3c.c    | 50 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+)
+ create mode 100644 test/cmd/i3c.c
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 642cc1116e8..551959731f0 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1327,6 +1327,12 @@ config CMD_I2C
- 	help
- 	  I2C support.
- 
-+config CMD_I3C
-+	bool "i3c"
-+	help
-+	  Enable command to list i3c devices connected to the i3c controller
-+	  and perform read and write on the connected i3c devices.
-+
- config CMD_W1
- 	depends on W1
- 	default y if W1
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 8410be576bb..082470fa104 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -95,6 +95,7 @@ obj-$(CONFIG_CMD_GPIO) += gpio.o
- obj-$(CONFIG_CMD_HISTORY) += history.o
- obj-$(CONFIG_CMD_HVC) += smccc.o
- obj-$(CONFIG_CMD_I2C) += i2c.o
+diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+index d8a5e77402d..d1c49e2c97a 100644
+--- a/test/cmd/Makefile
++++ b/test/cmd/Makefile
+@@ -34,6 +34,7 @@ obj-$(CONFIG_CMD_PWM) += pwm.o
+ obj-$(CONFIG_CMD_READ) += rw.o
+ obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
+ obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
 +obj-$(CONFIG_CMD_I3C) += i3c.o
- obj-$(CONFIG_CMD_IOTRACE) += iotrace.o
- obj-$(CONFIG_CMD_HASH) += hash.o
- obj-$(CONFIG_CMD_IDE) += ide.o disk.o
-diff --git a/cmd/i3c.c b/cmd/i3c.c
+ ifdef CONFIG_NET
+ obj-$(CONFIG_CMD_WGET) += wget.o
+ endif
+diff --git a/test/cmd/i3c.c b/test/cmd/i3c.c
 new file mode 100644
-index 00000000000..7d2bde714cd
+index 00000000000..04baad2a4b2
 --- /dev/null
-+++ b/cmd/i3c.c
-@@ -0,0 +1,261 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/test/cmd/i3c.c
+@@ -0,0 +1,50 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2025 Altera Corporation <www.altera.com>
 + */
 +
-+#include <bootretry.h>
-+#include <cli.h>
-+#include <command.h>
-+#include <console.h>
 +#include <dm.h>
-+#include <dw-i3c.h>
-+#include <edid.h>
-+#include <errno.h>
-+#include <hexdump.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <asm/byteorder.h>
-+#include <linux/compiler.h>
-+#include <linux/delay.h>
-+#include <u-boot/crc.h>
-+#include <linux/i3c/master.h>
-+#include <linux/printk.h>
-+#include <linux/types.h>
++#include <dm/test.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+static struct udevice *currdev;
-+static struct udevice *prevdev;
-+static struct dw_i3c_master *master;
-+
-+static void low_to_high_bytes(void *data, size_t size)
++/* Basic test for probing i3c controller with invalid name */
++static int dm_test_i3c_cmd_probe_invalid_master(struct unit_test_state *uts)
 +{
-+	u8 *byte_data = data;
-+	size_t start = 0;
-+	size_t end = size - 1;
++	ut_asserteq(1, run_command("i3c any", 0));
++	ut_assert_nextline("i3c0 (i3c_sandbox)");
++	ut_assert_nextline("i3c1 (i3c_sandbox)");
++	ut_assert_nextline("i3c: Host controller not initialized: any");
++	ut_assert_console_end();
 +
-+	while (start < end) {
-+		u8 temp = byte_data[start];
-+
-+		byte_data[start] = byte_data[end];
-+		byte_data[end] = temp;
-+		start++;
-+		end--;
-+	}
++	return 0;
 +}
++DM_TEST(dm_test_i3c_cmd_probe_invalid_master, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_DM);
 +
-+static int handle_i3c_select(const char *name)
++/* Basic test of the i3c controller for valid name as per test DT */
++static int dm_test_i3c_cmd_probe_valid_master(struct unit_test_state *uts)
 +{
-+	struct uclass *uc;
-+	struct udevice *dev_list;
-+	int ret = uclass_get_device_by_name(UCLASS_I3C, name, &currdev);
++	ut_asserteq(0, run_command("i3c i3c0", 0));
++	ut_assert_nextline("i3c: Current controller: i3c0");
++	ut_assert_console_end();
 +
-+	if (ret) {
-+		currdev = prevdev;
-+		if (!currdev) {
-+			ret = uclass_get(UCLASS_I3C, &uc);
-+			if (ret)
-+				return CMD_RET_FAILURE;
++	ut_asserteq(0, run_command("i3c current", 0));
++	ut_assert_nextline("i3c: Current controller: i3c0");
++	ut_assert_console_end();
 +
-+			uclass_foreach_dev(dev_list, uc)
-+				printf("%s (%s)\n", dev_list->name, dev_list->driver->name);
++	ut_asserteq(0, run_command("i3c i3c1", 0));
++	ut_assert_nextline("i3c: Current controller: i3c1");
++	ut_assert_console_end();
 +
-+			printf("i3c: Host controller not initialized: %s\n", name);
-+			return CMD_RET_FAILURE;
-+		}
-+	} else {
-+		master = dev_get_priv(currdev);
-+		printf("i3c: Current controller: %s\n", currdev->name);
-+		prevdev = currdev;
-+	}
++	ut_asserteq(0, run_command("i3c current", 0));
++	ut_assert_nextline("i3c: Current controller: i3c1");
++	ut_assert_console_end();
 +
-+	return CMD_RET_SUCCESS;
++	ut_asserteq(0, run_command("i3c list", 0));
++	ut_assert_nextline("i3c0 (i3c_sandbox)");
++	ut_assert_nextline("i3c1 (i3c_sandbox)");
++	ut_assert_console_end();
++
++	return 0;
 +}
-+
-+static int handle_i3c_list(void)
-+{
-+	struct uclass *uc;
-+	struct udevice *dev_list;
-+	int ret = uclass_get(UCLASS_I3C, &uc);
-+
-+	if (ret)
-+		return CMD_RET_FAILURE;
-+
-+	uclass_foreach_dev(dev_list, uc)
-+		printf("%s (%s)\n", dev_list->name, dev_list->driver->name);
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int handle_i3c_current(void)
-+{
-+	if (!currdev)
-+		printf("i3c: No current controller selected\n");
-+	else
-+		printf("i3c: Current controller: %s\n", currdev->name);
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int handle_i3c_device_list(void)
-+{
-+	if (!master) {
-+		printf("i3c: No controller active\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	for (int i = 0; i < master->num_i3cdevs; i++) {
-+		struct i3c_device_info *info = &master->i3cdev[i]->info;
-+
-+		printf("Device %d:\n", i);
-+		printf("  Static Address  : 0x%02X\n", info->static_addr);
-+		printf("  Dynamic Address : 0x%X\n", info->dyn_addr);
-+		printf("  PID             : %016llx\n", info->pid);
-+		printf("  BCR             : 0x%X\n", info->bcr);
-+		printf("  DCR             : 0x%X\n", info->dcr);
-+		printf("  Max Read DS     : 0x%X\n", info->max_read_ds);
-+		printf("  Max Write DS    : 0x%X\n", info->max_write_ds);
-+		printf("\n");
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int handle_i3c_write(int argc, char *const argv[])
-+{
-+	if (argc < 5)
-+		return CMD_RET_USAGE;
-+
-+	if (!currdev) {
-+		printf("i3c: No I3C controller selected\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	u32 mem_addr = hextoul(argv[2], NULL);
-+	u32 num_bytes = hextoul(argv[3], NULL);
-+	u32 dev_num_val = hextoul(argv[4], NULL);
-+
-+	if (num_bytes == 0 || num_bytes > 4) {
-+		printf("i3c: Length must be between 1 and 4\n");
-+		return CMD_RET_USAGE;
-+	}
-+
-+	if (dev_num_val > 0xFF) {
-+		printf("i3c: Device number 0x%x exceeds valid u8 range\n", dev_num_val);
-+		return CMD_RET_USAGE;
-+	}
-+
-+	u8 device_num = dev_num_val;
-+	u8 *data = malloc(num_bytes);
-+
-+	if (!data) {
-+		printf("i3c: Memory allocation failed\n");
-+		return -ENOMEM;
-+	}
-+
-+	memcpy(data, (void *)(uintptr_t)mem_addr, num_bytes);
-+	low_to_high_bytes(data, num_bytes);
-+
-+	int ret = dm_i3c_write(currdev, device_num, data, num_bytes);
-+
-+	if (ret)
-+		printf("i3c: Write failed: %d\n", ret);
-+
-+	free(data);
-+	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
-+}
-+
-+static int handle_i3c_read(int argc, char *const argv[])
-+{
-+	if (argc < 5)
-+		return CMD_RET_USAGE;
-+
-+	if (!currdev) {
-+		printf("i3c: No I3C controller selected\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	u32 mem_addr = hextoul(argv[2], NULL);
-+	u32 read_len = hextoul(argv[3], NULL);
-+	u32 dev_num_val = hextoul(argv[4], NULL);
-+
-+	if (read_len == 0) {
-+		printf("i3c: Read length must be greater than 0\n");
-+		return CMD_RET_USAGE;
-+	}
-+
-+	if (dev_num_val > 0xFF) {
-+		printf("i3c: Device number 0x%x exceeds valid u8 range\n", dev_num_val);
-+		return CMD_RET_USAGE;
-+	}
-+
-+	u8 device_num = dev_num_val;
-+	u8 *rdata = malloc(read_len);
-+
-+	if (!rdata) {
-+		printf("i3c: Memory allocation failed\n");
-+		return -ENOMEM;
-+	}
-+
-+	int ret = dm_i3c_read(currdev, device_num, rdata, read_len);
-+
-+	if (ret) {
-+		printf("i3c: Read failed: %d\n", ret);
-+		free(rdata);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	memcpy((void *)(uintptr_t)mem_addr, rdata, read_len);
-+	print_hex_dump("i3c read: ", DUMP_PREFIX_OFFSET, 16, 1,
-+		       (void *)(uintptr_t)mem_addr, read_len, false);
-+
-+	free(rdata);
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static bool is_i3c_subcommand(const char *cmd)
-+{
-+	return !strcmp(cmd, "write") ||
-+	       !strcmp(cmd, "read") ||
-+	       !strcmp(cmd, "device_list") ||
-+	       !strcmp(cmd, "list") ||
-+	       !strcmp(cmd, "current");
-+}
-+
-+static int do_i3c(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	const char *subcmd = argv[1];
-+
-+	if (!is_i3c_subcommand(subcmd))
-+		return handle_i3c_select(subcmd);
-+
-+	if (!currdev) {
-+		printf("i3c: No I3C controller selected\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (!strcmp(subcmd, "list"))
-+		return handle_i3c_list();
-+	else if (!strcmp(subcmd, "current"))
-+		return handle_i3c_current();
-+	else if (!strcmp(subcmd, "device_list"))
-+		return handle_i3c_device_list();
-+	else if (!strcmp(subcmd, "write"))
-+		return handle_i3c_write(argc, argv);
-+	else if (!strcmp(subcmd, "read"))
-+		return handle_i3c_read(argc, argv);
-+
-+	return CMD_RET_USAGE;
-+}
-+
-+U_BOOT_CMD(
-+	i3c, 5, 1, do_i3c,
-+	"access the system i3c",
-+	"i3c write <mem_addr> <length> <device_number> - write from memory to device\n"
-+	"i3c read <mem_addr> <length> <device_number> - read from device to memory\n"
-+	"i3c device_list - List valid target devices\n"
-+	"i3c <host_controller> - Select i3c controller\n"
-+	"i3c list - List all available i3c controllers\n"
-+	"i3c current - Show current i3c controller"
-+);
-diff --git a/doc/usage/cmd/i3c.rst b/doc/usage/cmd/i3c.rst
-new file mode 100644
-index 00000000000..922fa3ea37c
---- /dev/null
-+++ b/doc/usage/cmd/i3c.rst
-@@ -0,0 +1,146 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. index::
-+   single: i3c (command)
-+
-+i3c command
-+===========
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    i3c <host_controller>
-+    i3c current
-+    i3c list
-+    i3c device_list
-+    i3c write <mem_addr> <length> <device_number>
-+    i3c read <mem_addr> <length> <device_number>
-+
-+Description
-+-----------
-+
-+The ``i3c`` command is used to probe the i3c host controller and perform
-+read and write operations on the connected i3c devices.
-+
-+i3c current
-+------------
-+
-+Display the currently selected i3c host controller.
-+
-+i3c list
-+---------
-+
-+List all the i3c hosts defined in the device-tree.
-+
-+i3c device_list
-+----------------
-+
-+List all the i3c devices' device number, static address, dynamic address,
-+PID, BCR, DCR, Max Write Speed, and Max Read Speed of the probed i3c host
-+controller.
-+
-+i3c write
-+----------
-+
-+Perform a write operation from memory to the connected i3c device. The data
-+is read from a specified memory address and written to the selected i3c
-+device, which is identified by its device number.
-+
-+You need to provide the memory address (``mem_addr``), the length of data
-+to be written (``length``), and the device number (``device_number``). The
-+data in memory will be transferred to the device in the specified order.
-+
-+i3c read
-+---------
-+
-+Perform a read operation from the connected i3c device to memory. The data
-+is read from the selected i3c device and stored at the specified memory
-+address. You need to provide the memory address (``mem_addr``), the length
-+of data to be read (``length``), and the device number (``device_number``).
-+
-+The device will send the requested data, which is then written to the memory
-+location you specified. This operation allows you to retrieve information
-+from the device and use it in your application. The data is read in the
-+order specified and can be multiple bytes.
-+
-+host_controller
-+    The name of the i3c host controller defined in the device-tree.
-+
-+length
-+    The size of the data to be read or written.
-+
-+device_number
-+    The device number in the driver model of the device connected to the i3c
-+    host controller.
-+
-+mem_addr
-+    The start address in memory from which to read or write the data.
-+
-+Examples
-+--------
-+
-+Probe the ``i3c0`` controller::
-+
-+    => i3c i3c0
-+
-+Display the current i3c host controller::
-+
-+    => i3c current
-+
-+Check the device number and PID of the connected devices::
-+
-+    => i3c device_list
-+
-+Perform write operations on the connected i3c device (device 0) from memory::
-+
-+    => i3c write 0x1000 4 0
-+
-+    This command reads 4 bytes of data from memory starting at address
-+    ``0x1000`` and writes them to device 0, which is identified by its device
-+    number in the driver model. Example data from memory could look like this:
-+
-+    ```
-+    Data at 0x1000: 0xAA 0xBB 0xCC 0xDD
-+    ```
-+
-+    The bytes `0xAA`, `0xBB`, `0xCC`, and `0xDD` will be written to device 0.
-+
-+Perform a read operation from device 0 to memory (multiple bytes)::
-+
-+    => i3c read 0x1000 4 0
-+
-+    This command reads 4 bytes of data from device 0 and writes them to
-+    memory starting at address ``0x1000``.
-+
-+    Example output after reading 4 bytes from device 0:
-+
-+    ```
-+    i3c Read:
-+    00000000  AA BB CC DD
-+    ```
-+
-+    The bytes `0xAA`, `0xBB`, `0xCC`, and `0xDD` are read from device 0
-+    and written to memory at address `0x1000`.
-+
-+Configuration
-+-------------
-+
-+The ``i3c`` command is only available if CONFIG_CMD_I3C=y.
-+
-+Return value
-+------------
-+
-+If the command succeeds, the return value ``$?`` is set to 0. If an error
-+occurs, the return value ``$?`` is set to 1.
-+
-+Note
-+----
-+
-+When specifying the data to be written to the i3c device (for example, with
-+the ``i3c write`` command), the data can be provided in either uppercase
-+or lowercase hexadecimal format. Both are valid and will be processed
-+correctly. Similarly, when reading data with ``i3c read``, the data will be
-+retrieved in the specified length and can include multiple bytes, all
-+formatted in the same way.
++DM_TEST(dm_test_i3c_cmd_probe_valid_master, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_DM);
 \ No newline at end of file
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index bf2335dc8f0..718b606b162 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -80,6 +80,7 @@ Shell commands
-    cmd/if
-    cmd/itest
-    cmd/imxtract
-+   cmd/i3c
-    cmd/load
-    cmd/loadb
-    cmd/loadm
-diff --git a/drivers/i3c/master/dw-i3c-master.c b/drivers/i3c/master/dw-i3c-master.c
-index 6d3d2ab5e71..d96eb9b134e 100644
---- a/drivers/i3c/master/dw-i3c-master.c
-+++ b/drivers/i3c/master/dw-i3c-master.c
-@@ -674,8 +674,11 @@ static int dw_i3c_master_daa(struct i3c_master_controller *m)
- 	newdevs &= ~olddevs;
- 
- 	for (pos = 0; pos < master->maxdevs; pos++) {
--		if (newdevs & BIT(pos))
-+		if (newdevs & BIT(pos)) {
- 			i3c_master_add_i3c_dev_locked(m, master->addrs[pos]);
-+			master->i3cdev[pos] = m->this;
-+			master->num_i3cdevs++;
-+		}
- 	}
- 
- 	dw_i3c_master_free_xfer(xfer);
-@@ -1010,8 +1013,38 @@ err_assert_rst:
- 	return ret;
- }
- 
-+static int dw_i3c_master_priv_read(struct udevice *dev, u32 dev_number,
-+				   u8 *buf, u32 buf_size)
-+{
-+	struct dw_i3c_master *master = dev_get_priv(dev);
-+	struct i3c_dev_desc *i3cdev = master->i3cdev[dev_number];
-+	struct i3c_priv_xfer i3c_xfers;
-+
-+	i3c_xfers.data.in = buf;
-+	i3c_xfers.len = buf_size;
-+	i3c_xfers.rnw = I3C_MSG_READ;
-+
-+	return dw_i3c_master_priv_xfers(i3cdev, &i3c_xfers, 1);
-+}
-+
-+static int dw_i3c_master_priv_write(struct udevice *dev, u32 dev_number,
-+				    u8 *buf, u32 buf_size)
-+{
-+	struct dw_i3c_master *master = dev_get_priv(dev);
-+	struct i3c_dev_desc *i3cdev = master->i3cdev[dev_number];
-+	struct i3c_priv_xfer i3c_xfers;
-+
-+	i3c_xfers.data.out = buf;
-+	i3c_xfers.len = buf_size;
-+	i3c_xfers.rnw = I3C_MSG_WRITE;
-+
-+	return dw_i3c_master_priv_xfers(i3cdev, &i3c_xfers, 1);
-+}
-+
- static const struct dm_i3c_ops dw_i3c_ops = {
- 	.i3c_xfers = dw_i3c_master_priv_xfers,
-+	.read = dw_i3c_master_priv_read,
-+	.write = dw_i3c_master_priv_write,
- };
- 
- static const struct udevice_id dw_i3c_ids[] = {
-diff --git a/include/dw-i3c.h b/include/dw-i3c.h
-index 42c37d6dfa2..c652de77404 100644
---- a/include/dw-i3c.h
-+++ b/include/dw-i3c.h
-@@ -241,6 +241,8 @@ struct dw_i3c_master {
- 	char type[5];
- 	u8 addrs[MAX_DEVS];
- 	bool first_broadcast;
-+	struct i3c_dev_desc *i3cdev[I3C_BUS_MAX_DEVS];
-+	u16 num_i3cdevs;
- };
- 
- struct dw_i3c_i2c_dev_data {
-diff --git a/include/i3c.h b/include/i3c.h
-index 59c787c21db..62d049232a7 100644
---- a/include/i3c.h
-+++ b/include/i3c.h
-@@ -25,6 +25,32 @@ struct dm_i3c_ops {
- 	int (*i3c_xfers)(struct i3c_dev_desc *dev,
- 			 struct i3c_priv_xfer *xfers,
- 			 u32 nxfers);
-+
-+/**
-+ * @i3c_xfers: Perform I3C read transaction.
-+ *
-+ * @dev: Chip to read from
-+ * @dev_number: The target device number from the driver model.
-+ * @buf: Place to put data
-+ * @num_bytes: Number of bytes to read.
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+	int (*read)(struct udevice *dev, u32 dev_number,
-+		    u8 *buf, u32 num_bytes);
-+
-+/**
-+ * @i3c_xfers: Perform I3C write transaction.
-+ *
-+ * @dev: Chip to write to
-+ * @dev_number: The target device number from the driver model.
-+ * @buf: Buffer containing data to write
-+ * @num_bytes: Number of bytes to write.
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+	int (*write)(struct udevice *dev, u32 dev_number,
-+		     u8 *buf, u32 num_bytes);
- };
- 
- /**
-@@ -64,4 +90,4 @@ int dm_i3c_write(struct udevice *dev, u32 dev_number,
-  * Return: 0 on success, negative error code on failure.
-  */
- int dm_i3c_read(struct udevice *dev, u32 dev_number,
--		u8 *buf, u32 num_bytes);
-\ No newline at end of file
-+		u8 *buf, u32 num_bytes);
 -- 
 2.26.2
 
