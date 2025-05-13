@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE37C3ABC3
-	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 16:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A0FC3ABC3
+	for <u-boot@archiver.kernel.org>; Tue, 13 May 2025 16:14:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6D938091A;
-	Tue, 13 May 2025 18:10:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 585998091A;
+	Tue, 13 May 2025 18:14:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wa1Ak9tz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SAwfQrOL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F224680AE0; Tue, 13 May 2025 17:54:27 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id B297380AE0; Tue, 13 May 2025 18:14:56 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91151800C1
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 17:54:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96829800C1
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 18:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a0ebf39427so4716569f8f.3
- for <u-boot@lists.denx.de>; Tue, 13 May 2025 08:54:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-acae7e7587dso909444266b.2
+ for <u-boot@lists.denx.de>; Tue, 13 May 2025 09:14:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747151665; x=1747756465; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xAbZaQP7bKx7Q4hU/FuUZzqQz5bvt3ozOkX3voFg1+0=;
- b=wa1Ak9tzbUng4p1pvfVn1WzNkanFy+nnle6JDdbGldQKEPdX2CwMEFxwjPpyxNfieR
- t0qP5ZiE2PwmIOrauaqzdHHonuvX8mjyCOviZjr7k6wZfk6iLegGEzuoQjk75mwlgXAu
- 9PFDSYhvPcIHXGQMZ6St7vr6RoxoWHWDqFOy0WKdI4+ns5VEoavnU3JZT9AeprhYrGkV
- fuhpP7Vbhp6JeYETYsARAOfGKoRSVVrQT7smNgptdcgNTCThJKqekbLg/NrPo02EXse8
- ZYdR21UDLBWQafz1PVvpt/zTlvtQ1jToJF2N1zvj9FjVOBAFJnG2y8PUtURa/I+IFxbX
- 4VKQ==
+ d=gmail.com; s=20230601; t=1747152894; x=1747757694; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rwGBom1LGkI5LRN3D+Ri+ZCxA6GAZyDvRIIbYOMA3pc=;
+ b=SAwfQrOL6e3ZHhXUwbBhBSQTxUpgtW3Wv23j3RoPMMFJ2xsl3RTtFfdWKTHf/8x8UW
+ SQCWJtQHmznG/fu6olIx0j9MV5j4jDxfwhxu8f+dHBVKC535V4aHiPCerO/E/N0ccUfR
+ aJxIA1XPJ6jHJ3zGgTTt6djH8U8tGGsFxrTYcaYB9We54n0UGiCopOxYHeo3AiMheTh/
+ yTyb1RthczuIRzMKqOXDv2Ma3cle8yVCuRxaYrDJ2wy8HwAseWEc9mSL3as1xH/IzfVM
+ SoWhXDEz1qGDVvAvlJJXJ5lMA3U0UTztdwMlR1bg4Oec/TfAAOqxNLb329z8caZdR2jp
+ ya0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747151665; x=1747756465;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xAbZaQP7bKx7Q4hU/FuUZzqQz5bvt3ozOkX3voFg1+0=;
- b=VXaSmoVVMHpBr7BenYxBHxYOfqVQV2kOAOL5qTtgNdkgfYTyOEoYJklhI6HEeIPm/w
- pPdqe8PmoDkFt1h+vl3LWL7JQyd3hO+d4+siBQxoxuhOPdvXCuIJvzshz7xgTbND3Y0P
- 8EBHPUrWELcvKgnwA32ZpoMIPSvC+SVIS4s9ePH4DCXKZok+FswG9hUXaNz3ev61LcjW
- UQLJ96iA2fDSk1gARgLn5OiokjKfd6mXjspy8yDc0P2BzdlIosg+Od7wcJPN99Oqsakd
- eytrvlbeFHg82p/k0VoPG8j4Z58La7EF0N5rC+FR7+lWMLnq2vKUqar9wZyUp5dctMUo
- iP/w==
+ d=1e100.net; s=20230601; t=1747152894; x=1747757694;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rwGBom1LGkI5LRN3D+Ri+ZCxA6GAZyDvRIIbYOMA3pc=;
+ b=cECE20DYpzrKdGo3qr8UlgehIvqrp2lGiS75B0fTkLKEvA4nwvmVlmYDld3G5m8g37
+ dx7WZfRPXtWnvSujsWK3swM6Qc8e5cn1eu69q0lh50tTfmHjzgK+L0Oki8hi3pySuhOc
+ DMtqevh8T2vWM9Ak6kSs8/LPdSxK1hhnyD8lKN2MIJcDE0Q9rBcBeojzRi3xBsQwV4lG
+ RzoM8i+zM1KF95IWkFMCNCtCcyI4ywXB0a7cG1TrNWtl7k7koe4WyQay7ZkdBzYXKMJx
+ ggl140MkQ1tpaZktV2l5HOtzIKKhwZdtlAFTxUJmKRBpMynXsnu1YxYGcMvrdkzmUFHj
+ oI2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWost0B1Dk9CpEGdCVWWKPMCvH8ErRbwj+ZRqFVfkvjTB0LePCbgrgbET+Y/VaCXtE75USQ12w=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUKvuL9I6akPGT/moCfRh76nj8Lp2sk0Q717QruQLEKgzs7JfM
- jDDacKqv3FekpJVYS1BoMw0oS34oisbYv+DpGtIQ0C3FY8AwqIf8CQY0V90uCQ4=
-X-Gm-Gg: ASbGncuhjLC5TAvLEqMb79G/wnlb/FysEB+Zi6sQ8EcWcZoPxbk9qgN9/9dz0q52ZlG
- t1BNYeQR575b/oAc/Aa9sr9WVopcSAzbskaJE8ax3Mq3W4dvYFKygeTM98P04kZbCHC+UpiTaUs
- gwGLXw+2g63b4DD66LPSb9tL9jLqJ0w88MPZGseHGEiqbCWs4lnN8f2cB25tkbx/+rGUoTOMMLa
- MMj5TyyZdOX4oUDo4HsqHBjUtfA7gOBklCETBEAbHiIV/b4ZUSGPaDR8ibp8K3+UuxBdB+hcycr
- r+5QvbUu4KSFIG9lLS7omwt+6JSKtWZ1lMCxMNNMFI2dyIzLb/KW47FB+0KC/oRQv1ShfbEmr0+
- EcK51RJHrpF+E
-X-Google-Smtp-Source: AGHT+IHb0fuze4Wwha2C+b+G3EndRS53Xhbf9ivhtJDZPP1Lz0u7FUCWzZiK10Y8Jdwy/hUbEeVLAw==
-X-Received: by 2002:a5d:5f82:0:b0:3a0:7af3:843f with SMTP id
- ffacd0b85a97d-3a1f6432cb9mr13712843f8f.19.1747151664912; 
- Tue, 13 May 2025 08:54:24 -0700 (PDT)
-Received: from [10.61.1.138] (110.8.30.213.rev.vodafone.pt. [213.30.8.110])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a1f579aa5bsm16577480f8f.0.2025.05.13.08.54.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 May 2025 08:54:24 -0700 (PDT)
-Message-ID: <8ab60d1b-8afb-4659-837e-fafd4b46a060@linaro.org>
-Date: Tue, 13 May 2025 16:54:22 +0100
+ AJvYcCVX3eH6NPITtZYFl7mCi0Oa95qFa5XgHWTqfN1xpmpQMM7Lxfj01qAX4whX+pA8JtCqtjocz4M=@lists.denx.de
+X-Gm-Message-State: AOJu0YxB84+poV2PFEw2oSy9l+wC1Y36xW+JpyoiqBhC324WAXSAjaGb
+ HQTWGkNB1kL3y+b8T6xmKWQ6/buxUiSQBeQ98LeYSVtVhMOwqiwAkE5LH9aFUhDddxL+WCASJli
+ ris7SGsxP9TklB4trbv9H9ZDpleY=
+X-Gm-Gg: ASbGncvP/ot9Vq6aZevUdj1NT1SnaoaHZoMW+76dwMCRUnyqzeMhwuQOfBBIKjWaCF8
+ xonxzAi14tNVXt8LnpNZmKTgJ+xGyRkCnYvNN1BxCirQcgyclAc5OushRhG5+KeaZx6McEZAidh
+ 5zg26GurBrUbEwY8Zv+c/ARz/HB7hQwsDAwQQixoZAjA==
+X-Google-Smtp-Source: AGHT+IGfAXjBYeHDCk4gmUNfIJk/2tnqNitSYqB6Tclt8ueLLFijdlQUX+6cGqkwSR3pSuvlgBbvaVy8Jm7OA7GWfhw=
+X-Received: by 2002:a17:907:c208:b0:ad2:2f00:175c with SMTP id
+ a640c23a62f3a-ad4f74cb660mr14407866b.50.1747152893731; Tue, 13 May 2025
+ 09:14:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] qcom_defconfig: Enable AUTOBOOT_KEYED support
-To: Sumit Garg <sumit.garg@kernel.org>,
- Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, neil.armstrong@linaro.org, trini@konsulko.com,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20250508103238.230608-1-sumit.garg@kernel.org>
- <fe44fd2a-f16e-4f84-affa-3f9fbbbbdc9b@linaro.org>
- <aB4XFmFxBj30x5U6@linaro.org> <aCGc5giJlI9Wqxwl@sumit-X1>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <aCGc5giJlI9Wqxwl@sumit-X1>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 13 May 2025 18:10:14 +0200
+References: <20250509070258.5077-1-linux.amoon@gmail.com>
+ <20250509070258.5077-8-linux.amoon@gmail.com>
+ <78cb05b6-3014-40f0-947d-f2b8f737fcaa@linaro.org>
+ <b581293c-9ab1-4fd5-965a-66469926acb9@cherry.de>
+ <CANAwSgQRK4zNot8+R3xXX9SadtJ09H5ApezGApKtt-D2KkBbfA@mail.gmail.com>
+ <c5f26b7c-b205-42f6-b315-c50bdf4ff0c0@cherry.de>
+ <183EB9E9446C2114.11104@groups.io>
+In-Reply-To: <183EB9E9446C2114.11104@groups.io>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Tue, 13 May 2025 21:44:36 +0530
+X-Gm-Features: AX0GCFugUhqUO30uEhdysi0gf_D03yvIvtgCTI0VGXGfrT-lz0PuzHoG-Gzq4tg
+Message-ID: <CANAwSgRxLqj+dGH4jDMZFDkAJXe=V7fmKGdEdPU=+cR5NKyg3A@mail.gmail.com>
+Subject: Re: [RFC v1 7/7] usb: onboard-hub: Add conditional compilation for
+ I2C initialization
+To: u-boot-amlogic@groups.io, linux.amoon@gmail.com
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Beniamino Galvani <b.galvani@gmail.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Marek Vasut <marex@denx.de>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ open list <u-boot@lists.denx.de>, Wayne Schroeder <raz@chewies.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,111 +105,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi All,
 
-On 5/12/25 08:01, Sumit Garg wrote:
-> On Fri, May 09, 2025 at 04:54:43PM +0200, Stephan Gerhold wrote:
->> On Fri, May 09, 2025 at 12:45:20PM +0200, Casey Connolly wrote:
->>> On 5/8/25 12:32, Sumit Garg wrote:
->>>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>>>
->>>> When debug serial port isn't connected, it is at least reported on RB1
->>>> that autoboot gets interrupted. It is probably due to random characters
->>>> on the UART RX line when disconnected. Lets try to fix this inconsistent
->>>> behaviour via enabling AUTOBOOT_KEYED such that the autoboot gets
->>>> interrupted only when the <SPACE> key gets pressed.
->>>
->>> Honestly I'd much rather fix the bug in the UART driver, maybe it's broken
->>> pinctrl?
->>>
->>> The older UART driver (for msm8916) had a similar but that Stephen was able
->>> to fix with better configuration.
->>>
->>> Anyhow, this is a sensible enough workaround if nobody wants to look into
->>> GENI...
->>>
->>
->> Well, the main fix I did for that isn't related to the UART driver at
->> all, it's simply adding bias-pull-up for the RX pin so that it isn't
->> left floating when UART is not connected.
->>
->> For RB1, qcm2290.dtsi &qup_uart4_default currently has bias-disable for
->> both RX and TX pins. So please try applying bias-pull-up + bootph-all
->> for the GPIO that belongs to RX.
->>
->> For details, please see the following patch series for MSM8916:
->> https://lore.kernel.org/linux-arm-msm/20250422-msm8916-console-pinctrl-v2-0-f345b7a53c91@linaro.org/T/
-> 
-> Thanks for this reference but unfortunately this doesn't fix the issue
-> on RB1. I have tried the diff below [1]. It seems most likely due the
-> chainloading via ABL on RB1 as compared to U-Boot running as primary
-> bootloader on db410c. The RX line seems to be floating even before the
-> U-Boot starts which is causing the autoboot to stop. So for the
-> chainloading configuration, we need to enable AUTOBOOT_KEYED. I think
-> it should be the default sane configuration on Qcom platforms rather
-> than allowing autoboot stopped via any random character on RX line.
+On Mon, 12 May 2025 at 13:51, Anand Moon via groups.io
+<linux.amoon=gmail.com@groups.io> wrote:
+>
+> Hi Quentin,
+>
+> On Mon, 12 May 2025 at 12:36, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >
+> > Hi Anand,
+> >
+> > On 5/9/25 7:45 PM, Anand Moon wrote:
+> > > Hi Quentin,
+> > >
+> > > On Fri, 9 May 2025 at 17:21, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > >>
+> > >> Hi Neil, Anand,
+> > >>
+> > >> On 5/9/25 9:57 AM, Neil Armstrong wrote:
+> > >>> On 09/05/2025 09:02, Anand Moon wrote:
+> > >>>> Add conditional compilation for the usb5744_i2c_init() function based
+> > >>>> on the CONFIG_DM_I2C configuration, to avoid compilation failure.
+> > >>>>
+> > >>>>     CC      net/net-common.o
+> > >>>>     AR      net/built-in.o
+> > >>>>     LDS     u-boot.lds
+> > >>>>     LD      u-boot
+> > >>>> aarch64-linux-gnu-ld.bfd: common/usb_onboard_hub.o: in function
+> > >>>> `usb5744_i2c_init':
+> > >>>> /home/amoon/mainline/u-boot/amlogic/u-boot-maineline/common/
+> > >>>> usb_onboard_hub.c:74:(.text.usb5744_i2c_init+0xfc): undefined
+> > >>>> reference to `i2c_get_chip'
+> > >>>> aarch64-linux-gnu-ld.bfd: /home/amoon/mainline/u-boot/amlogic/u-boot-
+> > >>>> maineline/common/usb_onboard_hub.c:89:(.text.usb5744_i2c_init+0x1a0):
+> > >>>> undefined reference to `dm_i2c_write'
+> > >>>> aarch64-linux-gnu-ld.bfd: /home/amoon/mainline/u-boot/amlogic/u-boot-
+> > >>>> maineline/common/usb_onboard_hub.c:96:(.text.usb5744_i2c_init+0x1c8):
+> > >>>> undefined reference to `dm_i2c_write'
+> > >>>> aarch64-linux-gnu-ld.bfd: /home/amoon/mainline/u-boot/amlogic/u-boot-
+> > >>>> maineline/common/usb_onboard_hub.c:104:(.text.usb5744_i2c_init+0x1f0):
+> > >>>> undefined reference to `dm_i2c_write'
+> > >>>> Segmentation fault (core dumped)
+> > >>>> make: *** [Makefile:1824: u-boot] Error 139
+> > >>>> make: *** Deleting file 'u-boot'
+> > >>>>
+> > >>>> Signed-off-by: Anand Moon <linux.amoon@gmail.com>
+> > >>>> ---
+> > >>>>    common/usb_onboard_hub.c | 4 ++++
+> > >>>>    1 file changed, 4 insertions(+)
+> > >>>>
+> > >>>> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+> > >>>> index 1242513c631..92e3f3a92c9 100644
+> > >>>> --- a/common/usb_onboard_hub.c
+> > >>>> +++ b/common/usb_onboard_hub.c
+> > >>>> @@ -30,6 +30,7 @@ struct onboard_hub_data {
+> > >>>>        int (*init)(struct udevice *dev);
+> > >>>>    };
+> > >>>> +#if CONFIG_IS_ENABLED(DM_I2C)
+> > >>>>    static int usb5744_i2c_init(struct udevice *dev)
+> > >>>>    {
+> > >>>>        /*
+> > >>>> @@ -109,6 +110,7 @@ static int usb5744_i2c_init(struct udevice *dev)
+> > >>>>        return 0;
+> > >>>>    }
+> > >>>> +#endif
+> > >>>>    int usb_onboard_hub_reset(struct udevice *dev)
+> > >>>>    {
+> > >>>> @@ -222,7 +224,9 @@ static const struct onboard_hub_data usb2514_data = {
+> > >>>>    };
+> > >>>>    static const struct onboard_hub_data usb5744_data = {
+> > >>>> +#if CONFIG_IS_ENABLED(DM_I2C)
+> > >>>>        .init = usb5744_i2c_init,
+> > >>>> +#endif
+> > >>>>        .power_on_delay_us = 1000,
+> > >>>>        .reset_us = 5,
+> > >>>>    };
+> > >>>
+> > >>> I think you should completely disable usb5744_data in this case
+> > >>>
+> > >>
+> > >> I would recommend to go the same route as the Linux kernel which has a
+> > >> special Kconfig option for it, c.f. USB_ONBOARD_DEV_USB5744 which adds
+> > >> the necessary dependencies.
+> > >>
+> > > On Linux kernel, it needs to parse the device node with i2c-bus.
+> > >
+> >
+> > Seems like it does in U-Boot too? c.f. usb5744_i2c_init() with
+> > dev_read_phandle_with_args with i2c-bus?
+> >
+> ok.
+> > >> We probably should be careful and figure out which boards are actually
+> > >> using the usb5744 and add this symbol to their defconfig so they don't
+> > >> regress.
+> > >>
+> > >  From my initial analysis configs/xilinx_zynqmp_kria_defconfig
+> > > which use CONFIG_USB_ONBOARD_HUB
+> > > I believe using DM_I2C to guard the code is the best approach.
+> > > it should be around .init() callback to guard this to work.
+> > >
+> >
+> > I disagree. The driver clearly supports the USB5744 and the driver is
+> > compiled regardless of DM_I2C support which is required (as far as I
+> > understood, maybe that's incorrect?) for being able to use USB5744? I
+> > don't like hidden dependencies.
+> >
+> Okay, I will add a new configuration option to guard the code as done
+> in the Linux kernel.
+> > Also, I believe Neil's point is we shouldn't try to probe the USB5744 if
+> > there is no DM_I2C support, simply excluding .init() callback will
+> > probably just render this "support" of USB5744 non-functional?
+> >
+> Let me debug this more, I will update the next version.
+> I need to check if this binds correctly to the USB hub reset.
 
-I dug into it and the rogue inputs actually come from the button-kbd 
-driver, maybe the buttons are slightly misconfigured. This explains why 
-it only happens on some boards.
+I am trying to get the usb_onboard_hub to bind.
+but this driver is not getting probed in the first place,
+I am missing some configuration to get this working.
 
-So the right solution here is to fix the buttons, or disable button-kbd 
-if you don't need it.
+Hit any key to stop autoboot:  0
+=> usb start
+starting USB...
+Register 3000140 NbrPorts 3
+Starting the controller
+USB XHCI 1.10
+Bus usb@ff500000: 4 USB Device(s) found
+       scanning usb for storage devices... 1 Storage Device(s) found
+=> dm tree
+...
+mmc           1  [ + ]   meson_gx_mmc          |   |-- mmc@ffe07000
+ blk           1  [   ]   mmc_blk               |   |   |-- mmc@ffe07000.blk
+ bootdev       2  [   ]   mmc_bootdev           |   |   `-- mmc@ffe07000.bootdev
+ simple_bus   11  [ + ]   dwc3-meson-g12a       |   `-- usb@ffe09000
+ usb_gadget    0  [   ]   dwc2-udc-otg          |       |-- usb@ff400000
+ usb           0  [ + ]   xhci-dwc3             |       `-- usb@ff500000
+ usb_hub       0  [ + ]   usb_hub               |           `-- usb_hub
+ usb_hub       1  [ + ]   usb_hub               |               |-- usb_hub
+ usb_hub       2  [ + ]   usb_hub               |               `-- usb_hub
+ usb_mass_s    0  [ + ]   usb_mass_storage      |
+`-- usb_mass_storage
+ blk           2  [ + ]   usb_storage_blk       |
+ |-- usb_mass_storage.lun0
+ partition     0  [ + ]   blk_partition         |
+ |   `-- usb_mass_storage.lun0:1
+ bootdev       3  [   ]   usb_bootdev           |
+ `-- usb_mass_storage.lun0.bootdev
+ clk           2  [ + ]   fixed_clock           |-- xtal-clk
 
-Kind regards,
-
-> 
-> [1]
-> 
-> diff --git a/dts/upstream/src/arm64/qcom/qcm2290.dtsi b/dts/upstream/src/arm64/qcom/qcm2290.dtsi
-> index f0746123e59..9392bd6f3e0 100644
-> --- a/dts/upstream/src/arm64/qcom/qcm2290.dtsi
-> +++ b/dts/upstream/src/arm64/qcom/qcm2290.dtsi
-> @@ -551,10 +551,28 @@
->                          };
-> 
->                          qup_uart4_default: qup-uart4-default-state {
-> +                               tx-pins {
-> +                                       pins = "gpio12";
-> +                                       function = "qup4";
-> +                                       drive-strength = <16>;
-> +                                       bias-disable;
-> +                                       bootph-all;
-> +                               };
-> +
-> +                               rx-pins {
-> +                                       pins = "gpio13";
-> +                                       function = "qup4";
-> +                                       drive-strength = <16>;
-> +                                       bias-pull-up;
-> +                                       bootph-all;
-> +                               };
-> +                       };
-> +
-> +                       qup_uart4_sleep: qup-uart4-sleep-state {
->                                  pins = "gpio12", "gpio13";
-> -                               function = "qup4";
-> +                               function = "gpio";
->                                  drive-strength = <2>;
-> -                               bias-disable;
-> +                               bias-pull-down;
->                          };
-> 
->                          sdc1_state_on: sdc1-on-state {
-> @@ -1293,7 +1311,8 @@
->                                  clocks = <&gcc GCC_QUPV3_WRAP0_S4_CLK>;
->                                  clock-names = "se";
->                                  pinctrl-0 = <&qup_uart4_default>;
-> -                               pinctrl-names = "default";
-> +                               pinctrl-1 = <&qup_uart4_sleep>;
-> +                               pinctrl-names = "default", "sleep";
->                                  interconnects = <&qup_virt MASTER_QUP_CORE_0 RPM_ALWAYS_TAG
->                                                   &qup_virt SLAVE_QUP_CORE_0 RPM_ALWAYS_TAG>,
->                                                  <&bimc MASTER_APPSS_PROC RPM_ALWAYS_TAG
-> 
-> 
-> -Sumit
-
--- 
-Casey (she/they)
-
+Thanks
+-Anand
