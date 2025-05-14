@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53300C3ABCC
-	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 15:34:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3315C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 16:06:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7206681DD6;
-	Wed, 14 May 2025 17:34:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0281482998;
+	Wed, 14 May 2025 18:06:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TKovuJeB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="chexl445";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 619E082162; Wed, 14 May 2025 17:34:15 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id CCCDA829E4; Wed, 14 May 2025 18:06:35 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B31F48059D
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 17:34:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40F6082162
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 18:06:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-30c5478017dso4487282a91.2
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 08:34:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-72b7a53ceb6so29492a34.0
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 09:06:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747236851; x=1747841651; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GL1XnAgSbqJaiBPVi60k1UaypCRiUSX5N84xhwNfpUk=;
- b=TKovuJeBO95sj4UmxWb0BTdyM0eL0R2yRuzVwkpV/p8bBjCr5viE3z3oruxcLRJhPH
- 0cDWsxZblGA1XucHTtNgfrhsnm9ZcPBG6Noxew6SJDX7E1lWIvxAtrs8vecdNUotqlfG
- KHMhsEDnCN9Y6UieBeoVyhw2ERSQ31UO37RVM6kTY3J945/6n65TRagKAaQ1dr1idqXV
- QShQTClD4Y/EoEcUJ4t9f5hjRKPRyUpwEpBIz+kviwtKHg132pkXdTA70AawyeYKpfF3
- Rq2cuWEOHkR0apXjE3WzcGTIO2x26C3xlMY+wT3yFZ2DUuUkCtZhVF3uVv8ib2GU58Wc
- z6xw==
+ d=konsulko.com; s=google; t=1747238792; x=1747843592; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=v2S+cVATBJYVmCb5EMvdGeYraVmp44v6PtDR6wsj2hk=;
+ b=chexl445jl3CZ+0/sW4MQbMPdb9YagD2TmckC3X7DipUHA1UGPtuEv1QHjPDu19fi4
+ vWqGvgWOZKfTb76W65inLf0Glz/F4InrsZgtfP1AsZ5tVrBOMmIUTDeb6mE2aQ2rLrdS
+ zQ0hkQ4jT2Io0z+VJMtpDLcMTZ6bYm3gB8r4E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747236851; x=1747841651;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GL1XnAgSbqJaiBPVi60k1UaypCRiUSX5N84xhwNfpUk=;
- b=F5dFDakF1x8vnemilk1ZOk5Xsv8L/mcLINY0q4b3SznMyZ6Vhua0eVyHn02VhykTZ4
- PQcGHZH2X2Xh1he7ETvDxYcZ1+lP5u25VvEZgDFe6RSPdjzSGGb0HQxKEwLz2Q0B2Y+r
- 9jfygl89UloFRQza5p8V1PfA8ZB2XU1Zpb6uAWyCZ/JcZ5BK8vQO5/nBeU5A7DfRpmrl
- ancjwCqqMqy1ru8F2Kx12fyUZQggSkt1U9Ee7ARAvIzG1rr9Tf8dodTYB111xGdzyFTM
- FANzWEOSjv8FmCjMt8KGeBN86Eev8w1iK28JONud8LFsWs6Q/+rrwGqfooiMB0s1qaJ0
- mCwQ==
-X-Gm-Message-State: AOJu0Yzptoma18CePi46g5ZIylAsnTkJ3Pdp58+hHR0wvQYGC5UsrS+T
- /1QG+ayoLR7fLRvVbMyAlB5Cviyrqz8G0YEG01J9fGmPxSNJiZ86Im/7i0hZKs4Fva8OUwKtPJY
- mDRov5ebaO0mqu31JzI1cTQv5cQE=
-X-Gm-Gg: ASbGncvsuPAvPVBPhRE+Bs9OLZ+KqmrHPpzsDZD4oEju9DaVajuA/jd/+Tl1cJ8OWdu
- 5INgU721uzMQze/byvUvIUVt8SSoWWyBp8SwYvvesFBgFCmAyauz0aqlGYqNSPpe2tgpx/kc0/m
- 26hktV28uxBM7/GdqDu2S2EfflXVu9INuSqVur0vsLJjh0
-X-Google-Smtp-Source: AGHT+IETlipoukssJklPZk6419aUQzyTt0l4IUt94dpAWgSuK+7xHp6XE7+ZaV/J+CLYoCzd863DChLY0iC8o8vwFys=
-X-Received: by 2002:a17:90b:3a8c:b0:2fa:15ab:4de7 with SMTP id
- 98e67ed59e1d1-30e2e5bc9f9mr7177609a91.12.1747236850989; Wed, 14 May 2025
- 08:34:10 -0700 (PDT)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1747238792; x=1747843592;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v2S+cVATBJYVmCb5EMvdGeYraVmp44v6PtDR6wsj2hk=;
+ b=jac4lABZFI5vExr/UlYiHQWSlHYmFE8ykfbvOGxPhJrj6ub+8L/LlfU0qNxoBg/ax+
+ m0NnQYu0/B2kanZ494RV+w2YDxh+xINwaoKjuPOCGPwZy0AuimAP00+gbr5HxPZrotFT
+ wrBaCZSIEZ5sjzrFQpHWS/RmYESPaGWmDrS10IY3aKyDe0LsZtJbQ/zj19xsn9MAXT8H
+ ibtnK2EGcwLRHKnxSEYtsew3J8VJUV9ERmoHi631z8TR2woyf1HqAXRC8dO+RtRJuQDM
+ mw8fivy9+aJdB/+hXLuX4UpSvTFPd4LMJ5dvMAUP93qIskhLXMaJ6dqx+RSmaIcfWK5F
+ Eonw==
+X-Gm-Message-State: AOJu0Yw94bBThRs0P07z6hywc6iuONyEbYRSZMsVNjnJ2vp8awAErfEq
+ ZMKXv+uVzYgUA/PvSVXr3PFzaPsGR8KxnpsDL49c7fGvOHvoql5zfKDSMb8FhE4=
+X-Gm-Gg: ASbGnct5S1CfeP2IOUGzZv3ffDGrqYTqQ0nPx6X2EYN5KCHb/iXut92qoM49RGur6QJ
+ RpiVJEQaGk8e2FH3D6IReTRwMtmfW21DnsFPR69LcfEHMHp0K/QIiD+4hF5iaC07ZaLk1/a25qu
+ scNFuDMr5UHfm4lu4E0jlyDPUoYHO64OHXeR8IIULke23d+D1wTIpqyzDtqVvp0+Zw0dVhMFWWZ
+ oBvuu2SIiRG0rCy011hmu3189Rfm7Rs0nOTzqe801PHsFRHCaxshXJUScOOz9dtCGRsaYjAuuFJ
+ OLJInY08USjnXwHp9gK3bXuyHINzhFTsv3qyhiMi+Fav8p10oL/K2VA27r1nuA6iRjKRElV+GIf
+ SUuWESRDSMt23
+X-Google-Smtp-Source: AGHT+IEtd5kPvQfspecSUVF/4g90yPI8ode8P1rEcxU8DcQ3g09xyFlQph3nYK1BBr6rSQs+A5Pckg==
+X-Received: by 2002:a05:6830:6213:b0:72b:9140:f6d9 with SMTP id
+ 46e09a7af769-734ec6e8c1fmr60540a34.4.1747238791865; 
+ Wed, 14 May 2025 09:06:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7324e3cbc11sm2319391a34.28.2025.05.14.09.06.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 May 2025 09:06:31 -0700 (PDT)
+Date: Wed, 14 May 2025 10:06:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Adriano =?iso-8859-1?Q?C=F3rdova?= <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adriano.cordova@canonical.com>
+Subject: Re: [PATCH v2 3/3] py/tests/test_efi_loader.py: execute HTTP testing
+Message-ID: <20250514160629.GY603748@bill-the-cat>
 References: <20250514074513.3562063-1-adriano.cordova@canonical.com>
  <20250514074513.3562063-4-adriano.cordova@canonical.com>
  <20250514150454.GW603748@bill-the-cat>
-In-Reply-To: <20250514150454.GW603748@bill-the-cat>
-From: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
-Date: Wed, 14 May 2025 17:33:59 +0200
-X-Gm-Features: AX0GCFsVy_Hm5Rjc-3UtysoEZsANhyINAuJNKviulIxe58C_MXTG63UKlHzyZeA
-Message-ID: <CAMGU2hXFGEupnEdVRzD7Y-37+cyGbXRK6XKw3dNcECDkjh+6bQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] py/tests/test_efi_loader.py: execute HTTP testing
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Adriano Cordova <adriano.cordova@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ <CAMGU2hXFGEupnEdVRzD7Y-37+cyGbXRK6XKw3dNcECDkjh+6bQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p/rRXPjb/9RMRT1A"
+Content-Disposition: inline
+In-Reply-To: <CAMGU2hXFGEupnEdVRzD7Y-37+cyGbXRK6XKw3dNcECDkjh+6bQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,60 +102,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Il mer 14 mag 2025, 17:04 Tom Rini <trini@konsulko.com> ha scritto:
 
-> On Wed, May 14, 2025 at 03:45:13AM -0400, Adriano Cordova wrote:
->
-> > Execute test_efi_helloworld_net_http
-> >
-> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > ---
-> >
-> > v2:
-> >  - remove --httpserver option
-> >
-> >  test/py/tests/test_efi_loader.py | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/test/py/tests/test_efi_loader.py
-> b/test/py/tests/test_efi_loader.py
-> > index 91f151d09cd..e19920b4fce 100644
-> > --- a/test/py/tests/test_efi_loader.py
-> > +++ b/test/py/tests/test_efi_loader.py
-> > @@ -195,7 +195,7 @@ def test_efi_helloworld_net_http(ubman):
-> >
-> >      Call the do_test_efi_helloworld_net function to execute the test
-> via HTTP.
-> >      """
-> > -    if ubman.config.env.get('env__efi_helloworld_net_http_test_skip',
-> True):
-> > +    if ubman.config.env.get('env__efi_helloworld_net_http_test_skip',
-> False):
-> >          pytest.skip('helloworld.efi HTTP test is not enabled!')
-> >
-> >      do_test_efi_helloworld_net(ubman, PROTO_HTTP);
->
-> Is this test inverted, or were you unaware of the u-boot-test-hooks side
-> at for example:
->
-> https://source.denx.de/u-boot/u-boot-test-hooks/-/blob/master/py/travis-ci/u_boot_boardenv_qemu_arm64_na.py?ref_type=heads
->
-> --
-> Tom
->
+--p/rRXPjb/9RMRT1A
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I am aware, but as the http server is enabled by 1/3 of this series I
-thought this test could default to enabled. Alternatively, or if this
-breaks tests where the http server ip is not correctly picked up, this
-patch 3/3 can be disregarded and instead selectively enable the test in
-u-boot-test-hooks via
-env__efi_helloworld_net_http_test_skip = False for at least some boards
-(e.g. the ones with qemu with dhcp).
+On Wed, May 14, 2025 at 05:33:59PM +0200, Adriano C=F3rdova wrote:
+> Il mer 14 mag 2025, 17:04 Tom Rini <trini@konsulko.com> ha scritto:
+>=20
+> > On Wed, May 14, 2025 at 03:45:13AM -0400, Adriano Cordova wrote:
+> >
+> > > Execute test_efi_helloworld_net_http
+> > >
+> > > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> > > ---
+> > >
+> > > v2:
+> > >  - remove --httpserver option
+> > >
+> > >  test/py/tests/test_efi_loader.py | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/test/py/tests/test_efi_loader.py
+> > b/test/py/tests/test_efi_loader.py
+> > > index 91f151d09cd..e19920b4fce 100644
+> > > --- a/test/py/tests/test_efi_loader.py
+> > > +++ b/test/py/tests/test_efi_loader.py
+> > > @@ -195,7 +195,7 @@ def test_efi_helloworld_net_http(ubman):
+> > >
+> > >      Call the do_test_efi_helloworld_net function to execute the test
+> > via HTTP.
+> > >      """
+> > > -    if ubman.config.env.get('env__efi_helloworld_net_http_test_skip',
+> > True):
+> > > +    if ubman.config.env.get('env__efi_helloworld_net_http_test_skip',
+> > False):
+> > >          pytest.skip('helloworld.efi HTTP test is not enabled!')
+> > >
+> > >      do_test_efi_helloworld_net(ubman, PROTO_HTTP);
+> >
+> > Is this test inverted, or were you unaware of the u-boot-test-hooks side
+> > at for example:
+> >
+> > https://source.denx.de/u-boot/u-boot-test-hooks/-/blob/master/py/travis=
+-ci/u_boot_boardenv_qemu_arm64_na.py?ref_type=3Dheads
+> >
+> > --
+> > Tom
+> >
+>=20
+> I am aware, but as the http server is enabled by 1/3 of this series I
+> thought this test could default to enabled. Alternatively, or if this
+> breaks tests where the http server ip is not correctly picked up, this
+> patch 3/3 can be disregarded and instead selectively enable the test in
+> u-boot-test-hooks via
+> env__efi_helloworld_net_http_test_skip =3D False for at least some boards
+> (e.g. the ones with qemu with dhcp).
+>=20
+> I cared mostly about 1/3 and 2/3 of this series as this would let us test
+> the EFI_HTTP_PROTOCOL.
 
-I cared mostly about 1/3 and 2/3 of this series as this would let us test
-the EFI_HTTP_PROTOCOL.
+Yes, I'd like to keep this being opt-in on the configuration side. It's
+trickier on the real hardware part to also have an HTTP server going
+depending on lab setup and restrictions. Thanks!
 
-Best,
-Adriano
+--=20
+Tom
 
->
+--p/rRXPjb/9RMRT1A
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgkv38ACgkQFHw5/5Y0
+tyzu5gwArUeOV7d85njWKzl6sLapM9jzpWIAfiXVosGpja7hIrH7APzxC/UyF5fC
++rNg5OlHMLnFtZqeCmZphJglmUqeaGfedbMRdHNuUKHt3+chWTAdw/Bhrp6xLcz5
+VI4wwUYmxzj6puJgWWhEauZ9wss8TMWIAa1T2pDExvDhjBcSs/H4vjFxOFMF0EUZ
+/5AaJyzspUVrNLB+wiP1yYIlQ8cXIFmAvDfb2wUg5FKY7DqK35fHUcVMWeXTkc7N
+BXh9VwRr/gQzVzDSOhcF8qBUDqlvAtgIpzjI4ADMvbnhQKwolONRcObdKUSxWhYC
+kxYNEaw9hLkJz52Bq01Ztop+nKEMQV8zJXhNwKaGACIsqs8MPcYW1M9hO8BmzU2w
+J5DuMLwJkFkPNX6BINbMFXu4PyLFU6OPy0JkjSfMCQ9IM0ccZ8MotnT+ymIoG1yB
+8A5/3MDf00uWm4hZwSiWuet6kvo2qAwk5gJ7jITDcac8Rcnn5F5AxwwmrJXahugJ
+3wFV4z0u
+=PvbK
+-----END PGP SIGNATURE-----
+
+--p/rRXPjb/9RMRT1A--
