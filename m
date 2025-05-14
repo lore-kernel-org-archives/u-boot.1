@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A037C3ABDD
-	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 16:50:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0605CC3ABDD
+	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 16:50:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5979982A0A;
-	Wed, 14 May 2025 18:50:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A82FC82A76;
+	Wed, 14 May 2025 18:50:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a3euOXOW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cl4Rbpe4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C351D82A25; Wed, 14 May 2025 18:50:08 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 5D49C82A65; Wed, 14 May 2025 18:50:15 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C0ED829E7
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 18:50:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41B2882A76
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 18:50:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3f9832f798aso67433b6e.2
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 09:50:06 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72c0b4a038fso4446520a34.0
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 09:50:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747241405; x=1747846205; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747241412; x=1747846212; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vp67Ig6y/GGtN7RoiFfhs0Idkic+iXR1W0wsPEVsBAo=;
- b=a3euOXOW4zZQ44i6uwe2PgpFNfEQYp7n3MRb6PW4TfBzEvkQCIxlw8hQXMxiabjl5F
- IQIDa1KZ8L5PfY+p6rzTp3IyqwOzArTHvb7yVvkz6oxUPY6rFhKrIiXo1fQWoQ/gU0ek
- lEduZQwqvwGqjHxeAObhQHBp1m8qkRzMBDFvQ=
+ bh=FG4q8K4mF9H3/98za57PUk7ajRKFuQZj0UDcZtuMHYA=;
+ b=cl4Rbpe4sv+nMlMlLqMPQWqHyg48+OYRBaq2b6VV7IWarXpHMPdaGu75l8mnmAhU9Z
+ V7tlNuutSferdjeBviTberoFHeB7PqMXtQFuVsss8I7j0qtVvAv7Qo979qysEGe1ZFgZ
+ gepRs7wycoHxsrrJbxOkqd9j+RbxzOVXwW99U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747241405; x=1747846205;
+ d=1e100.net; s=20230601; t=1747241412; x=1747846212;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vp67Ig6y/GGtN7RoiFfhs0Idkic+iXR1W0wsPEVsBAo=;
- b=dvyeGWuAffefAUKxGUl1t62hjvl1jGKY6BFSCoq1muXwXcwYL/ahcwiJUZtd7AtwIo
- e/ijS3mhzc5+pPJcA2LSiURgGc+euGdIsVONd0NoylKHPm/FBfOmHoI3QZrVRumqMtZi
- FVo9oPm3DrlYCKXqm1KsWxXWC+c+8Df3amocuUqi5UgLytkCFSu1YJ/3IEViwoLFee7t
- E6Ce43cIXuBlb/Wc6B/taIrTjHHjF2Ah24Z+MaxCy8Jg14XBT4QHsTJkv6G/mD0/eMO/
- btMCEC12OPxCUcsOvnTWKesNT5sbIuKA0EboOfTAHqBvb9tOYLbkV6k5OzY7CVZOAnSC
- a5tg==
-X-Gm-Message-State: AOJu0Yy/AQMCA5TSnYl3pe9YVJvXubtjC9/5FnU32duiODGEe1s80pv4
- ghPLPzh/4mUwDMAO4nzUImPorZCZdrfpHzMhhrNat3SQI2ysUYaUUKRhphL++cU=
-X-Gm-Gg: ASbGncsHxfJ+tkY99FxSeWlvJQSW10NwKZmg2Nhx+0VZCz044sYcaFZjN8Hs0i74QFX
- oOYzX1MuVl3EN1Sz6+mzAVeCR9n55xV6/VtvJiLVC0uS/Qsva7PMTbg+AXH/mMPNa4PaFbK/SVm
- L3YZiXNMWv87f/om/D475jJtyKR3HlLSduw7uYmtnEJ/uQ9tDOrIWNYiV2fsIUHRtIDDQ+fujEa
- AFr6kGfS5TNq/UlK8kH5iLSc5nJ007Tkb6sENChgUC+CPFZ4ao4LhOxVP+2q99jicaEX004UG0r
- 8DyAWKV8dvK7iLEUMR0Ufu//vlLUHASPVCbGMsc4hHyrJT4ZTxjcpWyqJjAUxhZIym01rauiC2V
- F816x/IpPLtcw
-X-Google-Smtp-Source: AGHT+IHVt26VntyYBpswexrk0ydbxZdX0skLj38fOWb+TSJEWw0vL2iJY4ZvVaY8CCm585re19LvuA==
-X-Received: by 2002:a05:6808:22a3:b0:3f3:d802:14f1 with SMTP id
- 5614622812f47-404c203664bmr3000734b6e.12.1747241405384; 
- Wed, 14 May 2025 09:50:05 -0700 (PDT)
+ bh=FG4q8K4mF9H3/98za57PUk7ajRKFuQZj0UDcZtuMHYA=;
+ b=nWj4hkl9+rmQYMkzcXX4E6L35H/Ron0A2+BZC7WItQhuWFvZE/qCEYg7fuOLNJLRoV
+ KEmL3wkyU5wdRiIaTbYEOV6lhRYWBj9GFvY4ufkq/+WqJlEKAVhMElvtcTy3ZfEJe6Td
+ j5ArDUmIrrrovENM6bcFT4fX+SfDB7debY8TocXUkcWHfU5+nw5dhgfXXHz4RowAQJHa
+ QdWCmGlzm7LmQm4H5+bTlThoUZY3FIaOr06V7yN+eMVGe8etpu9MDf05tMdbU9m7pKEN
+ glZgQprV0jJiAQGusaJagpv7BgZ3dqDYqaO5EhCPRMf3UoYt4cy2mfjfBrFgTRG2vP0q
+ dWLw==
+X-Gm-Message-State: AOJu0YxuyFZex86FcuDS8iB0DirDhkT65bN0lm2I7UR6cp/ZIPrOo6vw
+ D/Pb6jrDFdBorsCI37+xCFaBWjm+thOLa0Xo4NmzptBPuWuk24CbDs8FFpniLy0=
+X-Gm-Gg: ASbGncvX4qQaGHhckaYWOwadIQUfBBJi3F5z3dSfLgHsdqfRkz5n4YRJdVwLDAm8Mru
+ sCvK5NwC8NCeBkB/zFDchTwyLIGPXhdn2BJ5Rd1DHi42N2ilwGC46mfVI2uP5Ui0IHj9vLlLhYD
+ CiFeL1MXaJ4mY83Dd++qI+HvH1mBCVMjnhaNn81fyuIj4I7bG53pB1WD7LlXA5jvrXpsggIp7NI
+ Aqs56SqY6k3TzIZfm/n1c0aHH0IHalw0f9KzBjZ9ibWEePAXlNJizBbDKpp+5h+aPizMQrXA5lJ
+ zR2MgqCVLIMOh7WkpiXnAuzRcRy0J3jZUMsk5j3X8Mbg9WGurxZQOCOPRvao20UYiH0oTum3Hho
+ R6OutUJIe5uKbQKCcdMlR2ng=
+X-Google-Smtp-Source: AGHT+IFQeFG5i1xcfn0I1W4zVBrGcsUTXVZOqOIWyNQB9n+AZ8RSXm0uxtU24o0ZVcUD7wx+BqF8Mg==
+X-Received: by 2002:a05:6830:2a87:b0:727:24ab:3e4 with SMTP id
+ 46e09a7af769-734e13e227amr2736306a34.9.1747241411933; 
+ Wed, 14 May 2025 09:50:11 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7322647eec5sm2403894a34.13.2025.05.14.09.50.04
+ 46e09a7af769-732264d8ffcsm2396408a34.39.2025.05.14.09.50.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 May 2025 09:50:04 -0700 (PDT)
-Date: Wed, 14 May 2025 10:50:02 -0600
+ Wed, 14 May 2025 09:50:11 -0700 (PDT)
+Date: Wed, 14 May 2025 10:50:09 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Adriano Cordova <adrianox@gmail.com>
 Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  sjg@chromium.org, jerome.forissier@linaro.org,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: Re: [PATCH v3 1/2] CI testing: add http server to CI tests
-Message-ID: <20250514165002.GZ603748@bill-the-cat>
+Subject: Re: [PATCH v3 2/2] cmd/Kconfig: select CMD_WGET if ARCH_QEMU
+Message-ID: <20250514165009.GA603748@bill-the-cat>
 References: <20250514161841.3591411-1-adriano.cordova@canonical.com>
- <20250514161841.3591411-2-adriano.cordova@canonical.com>
+ <20250514161841.3591411-3-adriano.cordova@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="01CwthzS+aP3h7p9"
+ protocol="application/pgp-signature"; boundary="HU7t/UDpceEcZ03v"
 Content-Disposition: inline
-In-Reply-To: <20250514161841.3591411-2-adriano.cordova@canonical.com>
+In-Reply-To: <20250514161841.3591411-3-adriano.cordova@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,15 +99,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---01CwthzS+aP3h7p9
+--HU7t/UDpceEcZ03v
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 14, 2025 at 12:18:40PM -0400, Adriano Cordova wrote:
+On Wed, May 14, 2025 at 12:18:41PM -0400, Adriano Cordova wrote:
 
-> Add an http server to CI tests so that HTTP booting and
-> loading can be tested.
+> select CMD_WGET for ARCH_QEMU. This way HTTP can be tested
+> on the qemu platforms in CI.
 >=20
 > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 
@@ -116,22 +116,22 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---01CwthzS+aP3h7p9
+--HU7t/UDpceEcZ03v
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgkybYACgkQFHw5/5Y0
-tyy8UAwAjJFPrU/JaX12bOC8Z5V057TrERyGL/qHSBeY9yy6bM4NQ91mll4QhWYN
-fy3KB09uAS5iF8phoMRZiaLvR7XGQf6iGW1GCisXIr5HC18+YYs3dmcnSa7dgFRJ
-6p8oprGyadPHD6mSQTDe+atu/dwNPR0jJtaAw2YmnHrAvp/zDZtuWML+Z3dsy+6w
-irzjbhi0t5qSeGCIRQjhO8M+F9k+zif6tPhDBGdo0DtaO4FQUZvwOk+KBkNuD6qU
-CjR509Y2lhRD0unEModyCOOuPv7GeXmeTnEpCjgZeu+yMFaEaTRT7hh7dGPoEaHA
-fwz2+1Q7BWZyRIb2ZikWoVn0QENT9bdShe1lKncYkb10JfRlKw8tS1R1ZlEXxwsK
-WyP/qLI8zWRhz12PkkpyfP4TGP56YdrEQXA+pNNzuB7jgfFxSkwntIEK2lt8d1EV
-WTyURmWmw8ptpiBCdcsU8OmhLa8PwFSqQS/8jLgz4UfcbUWFudWi6Ax5d2F7FPrE
-b135olKG
-=E8Qp
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgkycEACgkQFHw5/5Y0
+tyyWfQv+K7GIfejCahjTwiSqJRTe4PZFlPCFqvDaqae7IV2qIerAMyxaNxN2rl7T
+nH2lAgHkDLZjqgWCJilbYeD1+CcJeqhwA8CTWzvoT6CLn8cTNkm7gpTFqMYAHsXM
+8Hh/X38KyJTvInhLibJ6p184gFP1moWcfG3WX0IHQJCRwxXSyn7LSelpOf/gCH8A
+3aDrPKaffipR0V4ZIyS1d/IMMNQSJoLw4GUW9Jwi9/Lm0zZdqE06h2x1U4xdnXla
+oOae9qsZEF6wGT3u3ud9RocZVKbLppsG4a9zpfVdcNm0nvGjfnI14NJR+xlzzC/A
+pT+BsWoMuClDpe7oaPScE8sRk9nDgd4JeE9Ibz8LDUyf2munS3x0SuRjjZ1iJaHQ
+kdBN5OVDe4JH6dXYgz2NdNGDgTUawnkSH3A9jKNDvE6oUDkuykDNZf/OcNfQbpcW
+b0IG2pQknXaaDj+DXrocadUzSIRzJks4ndhaOAKVk6CR2ZReDbRDfQn6mAoxR2b+
+E/x4Vzv8
+=UWkj
 -----END PGP SIGNATURE-----
 
---01CwthzS+aP3h7p9--
+--HU7t/UDpceEcZ03v--
