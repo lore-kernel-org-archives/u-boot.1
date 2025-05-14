@@ -4,118 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF2DC3ABD9
-	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 08:39:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6620AC3ABD8
+	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 14:47:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA89D82162;
-	Wed, 14 May 2025 10:39:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 752ED806D8;
+	Wed, 14 May 2025 16:47:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NazhEFp+";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=fiona.klute@gmx.de header.b="I+pvwMfk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7831C8294C; Wed, 14 May 2025 10:39:38 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E6DD98059D; Wed, 14 May 2025 16:47:13 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5640581DD6
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 10:39:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 828F88059D
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 16:47:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3a0b9c371d8so5494682f8f.0
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 01:39:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747211976; x=1747816776; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=5Ll6RkeRFF55Eo5DoHQr3oi+J1geKgKFAciaWkkAbao=;
- b=NazhEFp+/+OLs2NQJGhk5gGVI6vNf2v6ptLVaAa39dtdFfyQWvo7FnD0IxzSxzdcyk
- O7PAszyJtyzPLYqQQe2Q1YD9b9hxrNlAV6FeZdLyQRSUOpwGz2wcITmjZcn1XYM21l6b
- SVTcWRNIvI53+ItMoCbuphRLarYVvIZkbM3VMI1XZtliDnN1qhjqsohR56vbEiW854DU
- ACEm4w8VUDILgmTRIb93H7CeYe6MZPL2xQ6r+Zv2TEN9aDPXagWHcAL1ycsPK++ZUw8K
- k2SAAcOVlXgN4nGJ/NawSdXR9Woiexejn+O5FhJO5NRok9OLB3/FQja/A6GS3fixHC2q
- LOsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747211976; x=1747816776;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=5Ll6RkeRFF55Eo5DoHQr3oi+J1geKgKFAciaWkkAbao=;
- b=OXKucirrtuzmLNDkWwgspSEIDSe4Zg7hM8tNWNDp6AZ8iE9d69bigPoUNW6tTT5ZkL
- KcFmM/kY6HWPLakvKqlAIAoANwNr6R5AdRsAVbEWaae9TvKO6HVgONX68dqyyIDt0SUu
- Rln6PBWv44rVuX4AJYFLFOtgFU6kjvYZC+u+Tocj62BqgNUjdzu+Vj9aAYNaDgYTF1Lh
- BONpVrHoH4QoqlSZK9FT+a9SeSxzdwX/U0gtYwSDcFkK4C40e0eoocFo6+bSFIw4FQfJ
- C2yv+scpPxNtZdSXcbgjnYW9EuaaDNT5WCSOHmxUrFdYl8x5YZCT2ChLSqX1CB3E03Jl
- 3/Sw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfl8XFFEdJIL9zL7e2YnrgvlJXFbCRLl3hWzDGi3sF2B0FH0ENFX7raBHlCT07WD0znKxWUVg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxweog5FtxNeYke4YOoKDtrbDDajK/M4uc6uMqsuYAaVlgOzgMB
- s1zS524Uvq3MNvqbInVmrTlOkmkaE9yOx7wZUBK6uJT4t9RC5QBl39JE11FP9dk=
-X-Gm-Gg: ASbGncv7L5+indEkGMQSf3R0Bi48BOxduR1FWoH6+RoKBxWRtNco9MYIYenkdNytJQE
- 2tdEGcCyfBdU1SIKAv+ypFSAIYFg02gFrD0/gtcope8UJwm+x2CwUq6rDSzfaVf9kSCw+BSPdKF
- E7i3WM+i1EgU86AefAw6qyy6MR1mrbhWusqzO93nbT6ItDiwJmPO8hWSIjZhHgKLcXQGwu/vAk5
- vJU9ytv/IyB3OBZslin30zlunz49lbJjj/Ei7zMd7Zjpg51ot1WT+JR4OyNDN2IUjmlPIXuLOIb
- fvtZ83OegXw4BSGM0uah5r2qXye4PEcryC0pho+wVRzYemIHNofa745NslHQb3BM3J6F230anXL
- j7t3waMwrBp7D
-X-Google-Smtp-Source: AGHT+IEgVJXKXMmXXUDor7alEpdqkoqxbGpwpi/FL5VwmeorL4r06lXF65i1e9vIMr4G6fPwNR08bg==
-X-Received: by 2002:a5d:5f42:0:b0:3a0:aed9:e39 with SMTP id
- ffacd0b85a97d-3a3496bf2ecmr1833457f8f.28.1747211975699; 
- Wed, 14 May 2025 01:39:35 -0700 (PDT)
-Received: from [10.61.1.139] (110.8.30.213.rev.vodafone.pt. [213.30.8.110])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a1f5a4c7b2sm19052457f8f.93.2025.05.14.01.39.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 May 2025 01:39:35 -0700 (PDT)
-Message-ID: <1bfc9169-9144-4c01-a4e4-31c153468813@linaro.org>
-Date: Wed, 14 May 2025 10:39:32 +0200
+ spf=pass smtp.mailfrom=fiona.klute@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1747234030; x=1747838830; i=fiona.klute@gmx.de;
+ bh=IpzrAH7oCSmhzTQp/Iud1hQKjAvfYBDgypKiZ30sF6M=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:
+ MIME-Version:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=I+pvwMfkWekEHrJMle++bSfsfHSSGKJMEj7oJ5rcP2fE3dab987ui+9UjjoryPvy
+ jrO3pFavje+8tn8uvtL6hessCuzjKeQHs+OWW25wOm1LNwneuQUcZCZXWu8uEdlpi
+ pO40BMi9z9rk0kWOHzqcAiU7B0Gk4cIEgFmK303riQ3uuKY0TKkjWq5dcXVO/n3YX
+ LgO9yQAcu/D33VWUyEoSQtLM2yr8GYyZfl++YDOLyoQIQuJiCAuIxN1jBsIT+EO9l
+ KBHFHoH85X4l/06qHqby7JlrYjpAOF+/G/tgX3ieZZ2IL4mAcfRL1TTHuyUVY/JAE
+ lwWirkC2QqURRvib/g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from haruka.home.arpa ([85.22.127.19]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MatVb-1urII91Vnv-00eKAB; Wed, 14
+ May 2025 16:47:10 +0200
+From: Fiona Klute <fiona.klute@gmx.de>
+To: u-boot@lists.denx.de
+Cc: Fiona Klute <fiona.klute@gmx.de>, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] rpi: copy /system/linux,{serial,revision} from firmware FDT
+Date: Wed, 14 May 2025 16:46:49 +0200
+Message-ID: <20250514144649.1329480-1-fiona.klute@gmx.de>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 3/6] clk/qcom: qcs8300: Add GCC clock driver for QCS8300
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, casey.connolly@linaro.org, sumit.garg@kernel.org,
- lukma@denx.de, seanga2@gmail.com, ilias.apalodimas@linaro.org,
- me@samcday.com, christopher.obbard@linaro.org, quic_varada@quicinc.com,
- sughosh.ganu@linaro.org, lehmanju@devpi.de, sjg@chromium.org,
- bhupesh.linux@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250514044212.1422714-1-balaji.selvanathan@oss.qualcomm.com>
- <20250514044212.1422714-4-balaji.selvanathan@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250514044212.1422714-4-balaji.selvanathan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+X-Provags-ID: V03:K1:/I4spT2z4wrOSA8BHkjJMH0YvbHeK0znv37v7Z7/VkwMHBzGBYX
+ WbdzeZ+39KkxD+5T5XpZc8O4O0X71fCCy8tmtNZ5pW/Qf2weFCG8/7ZjmEn8Qwzv/oeOtTH
+ mWINnKd3AeQfO3XC1pdDxBd7JvnKMP+/zIY/3sEE1YENMpAOZ+bM1ejfEGcUCJkzcPb8A/6
+ VpuoMfuHqcMG/RIE9AuYw==
+UI-OutboundReport: notjunk:1;M01:P0:K34hlTg6lxk=;sP5W5n0e1ICr/6UWEHhMikt9HqR
+ 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
+ AtIDwCXyJlWNsYQN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,217 +114,70 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14/05/2025 06:42, Balaji Selvanathan wrote:
-> * Port Linux's gcc-qcs8300.c driver to U-Boot for basic bring-up.
-> 
-> * Enable QCS8300 clocks in qcom_defconfig.
-> 
-> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Arranged the configs in Kconfig file in alphabetical order
-> - Took care of alphabetical order in Makefile
-> ---
->   drivers/clk/qcom/Kconfig         |   8 ++
->   drivers/clk/qcom/Makefile        |   1 +
->   drivers/clk/qcom/clock-qcs8300.c | 146 +++++++++++++++++++++++++++++++
->   3 files changed, 155 insertions(+)
->   create mode 100644 drivers/clk/qcom/clock-qcs8300.c
-> 
-> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> index 3ea01f3c969..0544556c672 100644
-> --- a/drivers/clk/qcom/Kconfig
-> +++ b/drivers/clk/qcom/Kconfig
-> @@ -55,6 +55,14 @@ config CLK_QCOM_QCS404
->   	  on the Snapdragon QCS404 SoC. This driver supports the clocks
->   	  and resets exposed by the GCC hardware block.
->   
-> +config CLK_QCOM_QCS8300
-> +	bool "Qualcomm QCS8300 GCC"
-> +	select CLK_QCOM
-> +	help
-> +	  Say Y here to enable support for the Global Clock Controller
-> +	  on the Snapdragon QCS8300 SoC. This driver supports the clocks
-> +	  and resets exposed by the GCC hardware block.
-> +
->   config CLK_QCOM_SA8775P
->   	bool "Qualcomm SA8775 GCC"
->   	select CLK_QCOM
-> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> index e13fc8c1071..be2ec526cfe 100644
-> --- a/drivers/clk/qcom/Makefile
-> +++ b/drivers/clk/qcom/Makefile
-> @@ -10,6 +10,7 @@ obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
->   obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
->   obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
->   obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
-> +obj-$(CONFIG_CLK_QCOM_QCS8300) += clock-qcs8300.o
->   obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
->   obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
->   obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
-> diff --git a/drivers/clk/qcom/clock-qcs8300.c b/drivers/clk/qcom/clock-qcs8300.c
-> new file mode 100644
-> index 00000000000..f0b9a0b4fd5
-> --- /dev/null
-> +++ b/drivers/clk/qcom/clock-qcs8300.c
-> @@ -0,0 +1,146 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2024-2025, Qualcomm Innovation Center, Inc. All rights reserved.
-> + *
-> + */
-> +
-> +#include <linux/types.h>
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +#include <linux/delay.h>
-> +#include <asm/io.h>
-> +#include <linux/bug.h>
-> +#include <linux/bitops.h>
-> +#include <dt-bindings/clock/qcom,qcs8300-gcc.h>
-> +#include "clock-qcom.h"
-> +
-> +#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf038
-> +#define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf020
-> +
-> +static ulong qcs8300_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	if (clk->id < priv->data->num_clks)
-> +		debug("%s: %s, requested rate=%ld\n",
-> +		      __func__, priv->data->clks[clk->id].name, rate);
-> +
-> +	switch (clk->id) {
-> +	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-> +		WARN(rate != 19200000, "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
-> +		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
-> +		return rate;
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		WARN(rate != 200000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
-> +		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
-> +				     1, 0, 0, CFG_CLK_SRC_GPLL0_ODD, 8);
-> +		clk_rcg_set_rate(priv->base, 0xf064, 0, 0);
-> +		return rate;
-> +	default:
-> +		return 0;
-> +	}
-> +}
-> +
-> +static const struct gate_clk qcs8300_clks[] = {
-> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0x1b088, 1),
-> +	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0x1b018, 1),
-> +	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0x1b084, 1),
-> +	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0x1b020, 1),
-> +	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0x1b024, 1),
-> +	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0x1b05c, 1),
-> +	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0x1b060, 1),
-> +	GATE_CLK(GCC_UFS_PHY_AHB_CLK, 0x83020, 1),
-> +	GATE_CLK(GCC_UFS_PHY_AXI_CLK, 0x83018, 1),
-> +	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK, 0x830d4, 1),
-> +	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK, 0x83064, 1),
-
-Please replace "1" with BIT(0) is you re-spin
-
-Thanks,
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-
-> +};
-> +
-> +static int qcs8300_enable(struct clk *clk)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	if (priv->data->num_clks < clk->id) {
-> +		debug("%s: unknown clk id %lu\n", __func__, clk->id);
-> +		return 0;
-> +	}
-> +
-> +	debug("%s: clk %ld: %s\n", __func__, clk->id, qcs8300_clks[clk->id].name);
-> +
-> +	switch (clk->id) {
-> +	case GCC_AGGRE_USB3_PRIM_AXI_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
-> +		fallthrough;
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
-> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
-> +		break;
-> +	}
-> +
-> +	qcom_gate_clk_en(priv, clk->id);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct qcom_reset_map qcs8300_gcc_resets[] = {
-> +	[GCC_EMAC0_BCR] = { 0xb6000 },
-> +	[GCC_PCIE_0_BCR] = { 0xa9000 },
-> +	[GCC_PCIE_0_LINK_DOWN_BCR] = { 0xbf000 },
-> +	[GCC_PCIE_0_NOCSR_COM_PHY_BCR] = { 0xbf008 },
-> +	[GCC_PCIE_0_PHY_BCR] = { 0xa9144 },
-> +	[GCC_PCIE_0_PHY_NOCSR_COM_PHY_BCR] = { 0xbf00c },
-> +	[GCC_PCIE_1_BCR] = { 0x77000 },
-> +	[GCC_PCIE_1_LINK_DOWN_BCR] = { 0xae084 },
-> +	[GCC_PCIE_1_NOCSR_COM_PHY_BCR] = { 0xae090 },
-> +	[GCC_PCIE_1_PHY_BCR] = { 0xae08c },
-> +	[GCC_PCIE_1_PHY_NOCSR_COM_PHY_BCR] = { 0xae094 },
-> +	[GCC_SDCC1_BCR] = { 0x20000 },
-> +	[GCC_UFS_PHY_BCR] = { 0x83000 },
-> +	[GCC_USB20_PRIM_BCR] = { 0x1c000 },
-> +	[GCC_USB2_PHY_PRIM_BCR] = { 0x5c01c },
-> +	[GCC_USB2_PHY_SEC_BCR] = { 0x5c020 },
-> +	[GCC_USB30_PRIM_BCR] = { 0x1b000 },
-> +	[GCC_USB3_DP_PHY_PRIM_BCR] = { 0x5c008 },
-> +	[GCC_USB3_PHY_PRIM_BCR] = { 0x5c000 },
-> +	[GCC_USB3_PHY_TERT_BCR] = { 0x5c024 },
-> +	[GCC_USB3_UNIPHY_MP0_BCR] = { 0x5c00c },
-> +	[GCC_USB3_UNIPHY_MP1_BCR] = { 0x5c010 },
-> +	[GCC_USB3PHY_PHY_PRIM_BCR] = { 0x5c004 },
-> +	[GCC_USB3UNIPHY_PHY_MP0_BCR] = { 0x5c014 },
-> +	[GCC_USB3UNIPHY_PHY_MP1_BCR] = { 0x5c018 },
-> +	[GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x76000 },
-> +	[GCC_VIDEO_BCR] = { 0x34000 },
-> +};
-> +
-> +static const struct qcom_power_map qcs8300_gdscs[] = {
-> +	[GCC_UFS_PHY_GDSC] = { 0x83004 },
-> +	[GCC_USB30_PRIM_GDSC] = { 0x1B004 },
-> +};
-> +
-> +static struct msm_clk_data qcs8300_gcc_data = {
-> +	.resets = qcs8300_gcc_resets,
-> +	.num_resets = ARRAY_SIZE(qcs8300_gcc_resets),
-> +	.clks = qcs8300_clks,
-> +	.num_clks = ARRAY_SIZE(qcs8300_clks),
-> +
-> +	.power_domains = qcs8300_gdscs,
-> +	.num_power_domains = ARRAY_SIZE(qcs8300_gdscs),
-> +
-> +	.enable = qcs8300_enable,
-> +	.set_rate = qcs8300_set_rate,
-> +};
-> +
-> +static const struct udevice_id gcc_qcs8300_of_match[] = {
-> +	{
-> +		.compatible = "qcom,qcs8300-gcc",
-> +		.data = (ulong)&qcs8300_gcc_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_qcs8300) = {
-> +	.name		= "gcc_qcs8300",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= gcc_qcs8300_of_match,
-> +	.bind		= qcom_cc_bind,
-> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
-
+Qm90aCB0aGUgUmFzcGJlcnJ5IFBpIGRvd25zdHJlYW0ga2VybmVsIFsxXSBhbmQgc29tZSB1c2Vy
+c3BhY2UgdG9vbHMKWzJdIHVzZSB0aGUgcmV2aXNpb24gcHJvcGVydHkgdG8gaWRlbnRpZnkgdGhl
+IGJvYXJkLCBhbmQgdGhlIGxhdHRlcgpmYWlscyBpZiBpdCBpcyBhYnNlbnQuIFRoZSBmaXJtd2Fy
+ZSBjcmVhdGVzIHRoZSAvc3lzdGVtIG5vZGUgd2hpY2ggaXMKbm90IHByZXNlbnQgaW4gTGludXgg
+RFRTIChtYWlubGluZSBvciB2ZW5kb3IpIGZvciB0aGUgUmFzcGJlcnJ5IFBpCmJvYXJkcywgc28g
+d2UgbmVlZCB0byBkbyB0aGUgc2FtZS4KClsxXSBodHRwczovL2dpdGh1Yi5jb20vcmFzcGJlcnJ5
+cGkvbGludXgvYmxvYi8wZjI5MmZiYjYzNDZiMDU3NjYxNTI5MDIwNzY4OTU1NThhYzIzZjlhL2Fy
+Y2gvYXJtL21hY2gtYmNtL2JvYXJkX2JjbTI4MzUuYyNMMjMtTDMzClsyXSBodHRwczovL2dpdGh1
+Yi5jb20vamdhcmZmL3JwaV93czI4MXgvYmxvYi83ZmMwYmY4YjMxZDcxNWJiZWNmMjhlODUyZWRl
+NWFhYTM4ODE4MGRhL3JwaWh3LmMjTDU3OQoKU2lnbmVkLW9mZi1ieTogRmlvbmEgS2x1dGUgPGZp
+b25hLmtsdXRlQGdteC5kZT4KQ2M6IE1hdHRoaWFzIEJydWdnZXIgPG1icnVnZ2VyQHN1c2UuY29t
+PgpDYzogUGV0ZXIgUm9iaW5zb24gPHBicm9iaW5zb25AZ21haWwuY29tPgpDYzogVG9tIFJpbmkg
+PHRyaW5pQGtvbnN1bGtvLmNvbT4KLS0tCkkgc2VudCBhbiBSRkMgdmVyc2lvbiBvZiB0aGlzIHBh
+dGNoIFszXSBhIHdoaWxlIGFnbyB3aXRoIHRoZSBxdWVzdGlvbgppZiB0aGVyZSdzIGEgYmV0dGVy
+IHdheSB0byBjcmVhdGUgdGhlIC9zeXN0ZW0gbm9kZSB0aGFuIGNyZWF0aW5nIGEKdGVtcG9yYXJ5
+IG92ZXJsYXkuIEkgZGlkbid0IHJlY2VpdmUgYW55IHJlc3BvbnNlIHRvIHRoYXQgcXVlc3Rpb24s
+IHNvCkkgZ3Vlc3Mgbm90LgoKWzNdIGh0dHBzOi8vbGlzdHMuZGVueC5kZS9waXBlcm1haWwvdS1i
+b290LzIwMjUtRmVicnVhcnkvNTgwMzY0Lmh0bWwKCiBib2FyZC9yYXNwYmVycnlwaS9ycGkvcnBp
+LmMgfCA3MCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCiAxIGZpbGUgY2hh
+bmdlZCwgNzAgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2JvYXJkL3Jhc3BiZXJyeXBpL3Jw
+aS9ycGkuYyBiL2JvYXJkL3Jhc3BiZXJyeXBpL3JwaS9ycGkuYwppbmRleCAxYjBiNjY0ZmEyYi4u
+NjU0NTMwNmY2ZGEgMTAwNjQ0Ci0tLSBhL2JvYXJkL3Jhc3BiZXJyeXBpL3JwaS9ycGkuYworKysg
+Yi9ib2FyZC9yYXNwYmVycnlwaS9ycGkvcnBpLmMKQEAgLTU2Miw2ICs1NjIsNzQgQEAgaW50IGNv
+cHlfcHJvcGVydHkodm9pZCAqZHN0LCB2b2lkICpzcmMsIGNoYXIgKnBhdGgsIGNoYXIgKnByb3Bl
+cnR5KQogCXJldHVybiBmZHRfc2V0cHJvcChkc3QsIGRzdF9vZmZzZXQsIHByb3BlcnR5LCBwcm9w
+LCBsZW4pOwogfQogCit2b2lkIGNvcHlfc3lzdGVtX25vZGUodm9pZCAqZmR0LCB2b2lkICpmd19m
+ZHQpCit7CisJdm9pZCAqZmR0X2NvcHkgPSBOVUxMOworCWNvbnN0IGZkdDMyX3QgKnByb3A7CisJ
+Y2hhciBmZHRvWzEwMjRdOworCWludCBzcmNfb2Zmc2V0OworCXUzMiBmZHRfc2l6ZTsKKwlpbnQg
+bGVuOworCisJLyoKKwkgKiBJZiB0aGUgZmlybXdhcmUgRkRUIGRvZXMgbm90IGhhdmUgYSAvc3lz
+dGVtIG5vZGUsIHRoZXJlJ3MKKwkgKiBub3RoaW5nIHRvIGRvLgorCSAqLworCXNyY19vZmZzZXQg
+PSBmZHRfcGF0aF9vZmZzZXQoZndfZmR0LCAiL3N5c3RlbSIpOworCWlmIChzcmNfb2Zmc2V0IDwg
+MCkKKwkJcmV0dXJuOworCisJLyogQ3JlYXRlIGEgdGVtcG9yYXJ5IG92ZXJsYXkgdGhhdCBhZGRz
+IHRoZSAvc3lzdGVtIG5vZGUuICovCisJaWYgKGZkdF9jcmVhdGUoZmR0bywgc2l6ZW9mKGZkdG8p
+KSkKKwkJcmV0dXJuOworCWlmIChmZHRfZmluaXNoX3Jlc2VydmVtYXAoZmR0bykpCisJCXJldHVy
+bjsKKwlpZiAoZmR0X2JlZ2luX25vZGUoZmR0bywgIiIpKQorCQlyZXR1cm47CisJaWYgKGZkdF9i
+ZWdpbl9ub2RlKGZkdG8sICJmcmFnbWVudCIpKQorCQlyZXR1cm47CisJaWYgKGZkdF9wcm9wZXJ0
+eV9zdHJpbmcoZmR0bywgInRhcmdldC1wYXRoIiwgIi8iKSkKKwkJcmV0dXJuOworCWlmIChmZHRf
+YmVnaW5fbm9kZShmZHRvLCAiX19vdmVybGF5X18iKSkKKwkJcmV0dXJuOworCWlmIChmZHRfYmVn
+aW5fbm9kZShmZHRvLCAic3lzdGVtIikpCisJCXJldHVybjsKKworCXByb3AgPSBmZHRfZ2V0cHJv
+cChmd19mZHQsIHNyY19vZmZzZXQsICJsaW51eCxzZXJpYWwiLCAmbGVuKTsKKwlpZiAocHJvcCkK
+KwkJZmR0X3Byb3BlcnR5KGZkdG8sICJsaW51eCxzZXJpYWwiLCBwcm9wLCBsZW4pOworCXByb3Ag
+PSBmZHRfZ2V0cHJvcChmd19mZHQsIHNyY19vZmZzZXQsICJsaW51eCxyZXZpc2lvbiIsICZsZW4p
+OworCWlmIChwcm9wKQorCQlmZHRfcHJvcGVydHkoZmR0bywgImxpbnV4LHJldmlzaW9uIiwgcHJv
+cCwgbGVuKTsKKworCWlmIChmZHRfZW5kX25vZGUoZmR0bykpCisJCXJldHVybjsKKwlpZiAoZmR0
+X2VuZF9ub2RlKGZkdG8pKQorCQlyZXR1cm47CisJaWYgKGZkdF9lbmRfbm9kZShmZHRvKSkKKwkJ
+cmV0dXJuOworCWlmIChmZHRfZW5kX25vZGUoZmR0bykpCisJCXJldHVybjsKKwlpZiAoZmR0X2Zp
+bmlzaChmZHRvKSkKKwkJcmV0dXJuOworCisJLyoKKwkgKiBBIGZhaWxlZCBvdmVybGF5IGFwcGx5
+IGlzIGRlc3RydWN0aXZlIHRvIHRoZSB0YXJnZXQsIHNvIHVzZQorCSAqIGEgdGVtcG9yYXJ5IGNv
+cHkgYW5kIHJlcGxhY2UgdGhlIEZEVCBpZiBzdWNjZXNzZnVsLgorCSAqLworCWZkdF9zaXplID0g
+ZmR0X3RvdGFsc2l6ZShmZHQpOworCWZkdF9jb3B5ID0gbWFsbG9jKGZkdF9zaXplKTsKKwlpZiAo
+IWZkdF9jb3B5KQorCQlyZXR1cm47CisJbWVtY3B5KGZkdF9jb3B5LCBmZHQsIGZkdF9zaXplKTsK
+KwlpZiAoZmR0X292ZXJsYXlfYXBwbHlfdmVyYm9zZShmZHRfY29weSwgZmR0bykpCisJCWdvdG8g
+Y2xlYW51cDsKKwltZW1jcHkoZmR0LCBmZHRfY29weSwgZmR0X3NpemUpOworCisgY2xlYW51cDoK
+KwlmcmVlKGZkdF9jb3B5KTsKK30KKwogLyogQ29weSB0d2Vha3MgZnJvbSB0aGUgZmlybXdhcmUg
+ZHRiIHRvIHRoZSBsb2FkZWQgZHRiICovCiB2b2lkICB1cGRhdGVfZmR0X2Zyb21fZncodm9pZCAq
+ZmR0LCB2b2lkICpmd19mZHQpCiB7CkBAIC01NzIsNiArNjQwLDggQEAgdm9pZCAgdXBkYXRlX2Zk
+dF9mcm9tX2Z3KHZvaWQgKmZkdCwgdm9pZCAqZndfZmR0KQogCS8qIFRoZSBmaXJtd2FyZSBwcm92
+aWRlcyBhIG1vcmUgcHJlY2lzZSBtb2RlbDsgc28gY29weSB0aGF0ICovCiAJY29weV9wcm9wZXJ0
+eShmZHQsIGZ3X2ZkdCwgIi8iLCAibW9kZWwiKTsKIAorCWNvcHlfc3lzdGVtX25vZGUoZmR0LCBm
+d19mZHQpOworCiAJLyogbWVtb3J5IHJlc2VydmUgYXMgc3VnZ2VzdGVkIGJ5IHRoZSBmaXJtd2Fy
+ZSAqLwogCWNvcHlfcHJvcGVydHkoZmR0LCBmd19mZHQsICIvIiwgIm1lbXJlc2VydmUiKTsKIAot
+LSAKMi40OS4wCgo=
