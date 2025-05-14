@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0605CC3ABDD
-	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 16:50:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AAD2C3ABD8
+	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 19:39:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A82FC82A76;
-	Wed, 14 May 2025 18:50:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 316AE82A33;
+	Wed, 14 May 2025 21:39:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cl4Rbpe4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mTB06ph4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D49C82A65; Wed, 14 May 2025 18:50:15 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id E568382A8D; Wed, 14 May 2025 21:39:41 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B2882A76
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 18:50:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D212B8205B
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 21:39:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72c0b4a038fso4446520a34.0
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 09:50:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5fbcd9088a7so462236a12.0
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 12:39:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747241412; x=1747846212; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FG4q8K4mF9H3/98za57PUk7ajRKFuQZj0UDcZtuMHYA=;
- b=cl4Rbpe4sv+nMlMlLqMPQWqHyg48+OYRBaq2b6VV7IWarXpHMPdaGu75l8mnmAhU9Z
- V7tlNuutSferdjeBviTberoFHeB7PqMXtQFuVsss8I7j0qtVvAv7Qo979qysEGe1ZFgZ
- gepRs7wycoHxsrrJbxOkqd9j+RbxzOVXwW99U=
+ d=chromium.org; s=google; t=1747251579; x=1747856379; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vk5ZzX0XeMHvJ9DjN4/Pz4uAkcAsg4+veRtS3z62UEU=;
+ b=mTB06ph4X6uXHuHLt3KAd4rJFC/WTwv0EE7pVDNIsf8xdwSAQ245YruyeqYa/xf+tp
+ h2S1dAIIjbHwWAYnyu1fagq7sxDpOdz0z8iwpBzY8V+/x6eDQmzElQyQhjZU9viYk3xY
+ m76E7O7tOyc/DbZEzyF1B50XGvf1fLIlpDSxQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747241412; x=1747846212;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FG4q8K4mF9H3/98za57PUk7ajRKFuQZj0UDcZtuMHYA=;
- b=nWj4hkl9+rmQYMkzcXX4E6L35H/Ron0A2+BZC7WItQhuWFvZE/qCEYg7fuOLNJLRoV
- KEmL3wkyU5wdRiIaTbYEOV6lhRYWBj9GFvY4ufkq/+WqJlEKAVhMElvtcTy3ZfEJe6Td
- j5ArDUmIrrrovENM6bcFT4fX+SfDB7debY8TocXUkcWHfU5+nw5dhgfXXHz4RowAQJHa
- QdWCmGlzm7LmQm4H5+bTlThoUZY3FIaOr06V7yN+eMVGe8etpu9MDf05tMdbU9m7pKEN
- glZgQprV0jJiAQGusaJagpv7BgZ3dqDYqaO5EhCPRMf3UoYt4cy2mfjfBrFgTRG2vP0q
- dWLw==
-X-Gm-Message-State: AOJu0YxuyFZex86FcuDS8iB0DirDhkT65bN0lm2I7UR6cp/ZIPrOo6vw
- D/Pb6jrDFdBorsCI37+xCFaBWjm+thOLa0Xo4NmzptBPuWuk24CbDs8FFpniLy0=
-X-Gm-Gg: ASbGncvX4qQaGHhckaYWOwadIQUfBBJi3F5z3dSfLgHsdqfRkz5n4YRJdVwLDAm8Mru
- sCvK5NwC8NCeBkB/zFDchTwyLIGPXhdn2BJ5Rd1DHi42N2ilwGC46mfVI2uP5Ui0IHj9vLlLhYD
- CiFeL1MXaJ4mY83Dd++qI+HvH1mBCVMjnhaNn81fyuIj4I7bG53pB1WD7LlXA5jvrXpsggIp7NI
- Aqs56SqY6k3TzIZfm/n1c0aHH0IHalw0f9KzBjZ9ibWEePAXlNJizBbDKpp+5h+aPizMQrXA5lJ
- zR2MgqCVLIMOh7WkpiXnAuzRcRy0J3jZUMsk5j3X8Mbg9WGurxZQOCOPRvao20UYiH0oTum3Hho
- R6OutUJIe5uKbQKCcdMlR2ng=
-X-Google-Smtp-Source: AGHT+IFQeFG5i1xcfn0I1W4zVBrGcsUTXVZOqOIWyNQB9n+AZ8RSXm0uxtU24o0ZVcUD7wx+BqF8Mg==
-X-Received: by 2002:a05:6830:2a87:b0:727:24ab:3e4 with SMTP id
- 46e09a7af769-734e13e227amr2736306a34.9.1747241411933; 
- Wed, 14 May 2025 09:50:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-732264d8ffcsm2396408a34.39.2025.05.14.09.50.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 May 2025 09:50:11 -0700 (PDT)
-Date: Wed, 14 May 2025 10:50:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- sjg@chromium.org, jerome.forissier@linaro.org,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: Re: [PATCH v3 2/2] cmd/Kconfig: select CMD_WGET if ARCH_QEMU
-Message-ID: <20250514165009.GA603748@bill-the-cat>
-References: <20250514161841.3591411-1-adriano.cordova@canonical.com>
- <20250514161841.3591411-3-adriano.cordova@canonical.com>
+ d=1e100.net; s=20230601; t=1747251579; x=1747856379;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vk5ZzX0XeMHvJ9DjN4/Pz4uAkcAsg4+veRtS3z62UEU=;
+ b=mniHwqDF9CkjnuB86pw5p7MH8Q+//1Wzj438mogQGgM4cEgn3Q2s38xdYDYCC9OQxw
+ hSDwMNPfgsrWIwOl0WhiXdP7m2nS80f2rSKreVR/OHKKx4ExnVDrn4I+m079AW3cZQx3
+ HdivXUX3x7HbhARUi0x3vcsZSAMKARqn+bxYw40DlkyALHoEwHGN10pQOjM7/CLBlNMJ
+ TE/ccbNcfN2Vl+UbKBgJoSWrMxDqEc2nsOQ2yNM5MveVl73CHg1Pg84kElpHou0gjWbQ
+ hYywtO9oWyGbHR5BADV9cik4w0xmXJskvaXFdnlKC40oLj0CTEjxBuHXBQxCE/dzV0aX
+ zVkw==
+X-Gm-Message-State: AOJu0Ywsyhg49gSC5Iudd5VHju6h6Msi5BVJH4xdVgO0nBqdn4EKxcOd
+ Z68tRu4iwQL1VRqPjj47ViAEwmqDGvGMT4nxcIaE2z1m+6oGU3kUvF1d99FpCZQcxFlYY7yJ1Yg
+ VPJrhLwk3QdvMVtiUorWs8EnOJYINWDwGK1YNbSmx
+X-Gm-Gg: ASbGncv7jtkQv5rDAnZ2Ve+WkzLNmdGQsJW/EKX4t9Vm8X7X7j6Nl4BqrBORX6xUS+G
+ PeUl3w2noj52Z39hRH0H35UG71hjIOkjzJbywPuf8hR/iWk6sea74tmFaxcPvV4DGXRgaxl70x3
+ HylXtlpgqM0++TnLaukVOEvnoyPA3bdKrb8A==
+X-Google-Smtp-Source: AGHT+IH4NK+QFIs9aDh84SP8xLiZwZCOr9Z9UcozTqHt8lk7ATd6+9Tnqi4AM8qzW67jgzTxEJyWz9/osx33k2/BtkA=
+X-Received: by 2002:a05:6402:1ecf:b0:5fd:1778:70b1 with SMTP id
+ 4fb4d7f45d1cf-5ffc7900839mr663063a12.17.1747251579150; Wed, 14 May 2025
+ 12:39:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HU7t/UDpceEcZ03v"
-Content-Disposition: inline
-In-Reply-To: <20250514161841.3591411-3-adriano.cordova@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250507232500.527782-1-trini@konsulko.com>
+ <20250508214222.643020-1-trini@konsulko.com>
+ <CAFLszTjwfGV6P7GzFDYFVp8G5oTvoXUKvOXZy6KLNW_=BMO+xQ@mail.gmail.com>
+ <20250512220439.GS603748@bill-the-cat>
+In-Reply-To: <20250512220439.GS603748@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 14 May 2025 21:39:27 +0200
+X-Gm-Features: AX0GCFu8za7gHTIl8T1SPcfMSlQ2zngIaEnqD77HgEhU_6KCFmjpj3RuOiqnYCE
+Message-ID: <CAFLszThK_syj73fC7Xc9YydBm7b55hYrHBJNuR_HCA8xADDPLg@mail.gmail.com>
+Subject: Re: [PATCH 0/3] doc: Document remaining test_b* tests
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,40 +88,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---HU7t/UDpceEcZ03v
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 13 May 2025 at 00:04, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, May 10, 2025 at 01:27:23PM +0200, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 8 May 2025 at 23:42, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > Hey all,
+> > >
+> > > This short series is a follow-up to my last series. It could have been
+> > > longer, but I think this is a good point to get some feedback on a few
+> > > points.
+> > >
+> > > As background, something I wondered about and the answer seems to be No
+> > > is, can we automatically take things like:
+> > > @pytest.mark.buildconfigspec('cmd_button')
+> > > and get some nice output? Since we can't that limits the value,
+> > > possibly, of generating some documentation.
+> > >
+> > > First, as this series shows, is there value in documenting tests which
+> > > do not require additional configuration? We have some tests with no
+> > > comments and some that are fully commented, but at the end of the day
+> > > when trying to run these tests, pytest will already say helpful things
+> > > like not being supported on a given platform, or not run because
+> > > something isn't enabled in the build. Spelling that out in generated
+> > > documentation would require duplication of work.
+> >
+> > Yes, I agree. I think the code is the best place for most of the docs.
+>
+> >
+> > >
+> > > Second, is there value in documenting arguments? Especially ones like
+> > > "ubman" that are just required and always present?
+> >
+> > I like documenting arguments, since when people see the docs they
+> > continue the trend. Python suffers terribly from a 'def
+> > my_function(*args, **kwargs)' disease where you have to spend hours
+> > spelunking around to figure out what is actually valid as an argument.
+> > Highly Pythonic, but dreadful.
+>
+> Maybe I wasn't clear in these two points. Let us use
+> test/py/tests/test_cat.py as a concrete example. Today, most of the file
+> is:
+> # SPDX-License-Identifier:      GPL-2.0+
+>
+> """ Unit test for cat command
+> """
+>
+> import pytest
+> from subprocess import call, check_call, CalledProcessError
+> from tests import fs_helper
+>
+> @pytest.mark.boardspec('sandbox')
+> @pytest.mark.buildconfigspec('cmd_cat')
+> def test_cat(ubman):
+>     """ Unit test for cat
+>
+>     Args:
+>         ubman -- U-Boot console
+>     """
+>     try:
+>     ....
+>
+> My point and question is that "@pytest.mark.buildconfigspec('cmd_cat')"
+> will not be translated to generated documentation, but also that if you
+> try and run this test outside of sandbox, pytest already tells you it's
+> not supported, and a similar error if sandbox but not cmd_cat.
+>
+> So is there any value in adding doc/develop/pytest/test_cat.rst that
+> will consume the above and generate valid documentation that I'm not
+> sure would ever be read?
 
-On Wed, May 14, 2025 at 12:18:41PM -0400, Adriano Cordova wrote:
+No, I agree, I don't see any value in that.
 
-> select CMD_WGET for ARCH_QEMU. This way HTTP can be tested
-> on the qemu platforms in CI.
->=20
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+>
+> > > Third, should we document internal functions too, or just the tests? I
+> > > would be inclined to say no unless they're expected to be re-used. The
+> > > test_net functions to bring up the networking are an example that of
+> > > reuse that should be documented for example.
+> >
+> > Sounds right. But I am likely to continue to document all Python
+> > functions, since I never know when I'm going to want to export
+> > something for use elsewhere.
+>
+> I'm certainly not saying we shouldn't comment the code, but perhaps
+> a follow-up to document test/py/tests/test_distro.py would clarify some
+> of what I'm asking about in your mind.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+OK
 
---=20
-Tom
-
---HU7t/UDpceEcZ03v
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgkycEACgkQFHw5/5Y0
-tyyWfQv+K7GIfejCahjTwiSqJRTe4PZFlPCFqvDaqae7IV2qIerAMyxaNxN2rl7T
-nH2lAgHkDLZjqgWCJilbYeD1+CcJeqhwA8CTWzvoT6CLn8cTNkm7gpTFqMYAHsXM
-8Hh/X38KyJTvInhLibJ6p184gFP1moWcfG3WX0IHQJCRwxXSyn7LSelpOf/gCH8A
-3aDrPKaffipR0V4ZIyS1d/IMMNQSJoLw4GUW9Jwi9/Lm0zZdqE06h2x1U4xdnXla
-oOae9qsZEF6wGT3u3ud9RocZVKbLppsG4a9zpfVdcNm0nvGjfnI14NJR+xlzzC/A
-pT+BsWoMuClDpe7oaPScE8sRk9nDgd4JeE9Ibz8LDUyf2munS3x0SuRjjZ1iJaHQ
-kdBN5OVDe4JH6dXYgz2NdNGDgTUawnkSH3A9jKNDvE6oUDkuykDNZf/OcNfQbpcW
-b0IG2pQknXaaDj+DXrocadUzSIRzJks4ndhaOAKVk6CR2ZReDbRDfQn6mAoxR2b+
-E/x4Vzv8
-=UWkj
------END PGP SIGNATURE-----
-
---HU7t/UDpceEcZ03v--
+Regards,
+Simon
