@@ -4,105 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6620AC3ABD8
-	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 14:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E5EAC3ABD8
+	for <u-boot@archiver.kernel.org>; Wed, 14 May 2025 15:05:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 752ED806D8;
-	Wed, 14 May 2025 16:47:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id EE2FB8129F;
+	Wed, 14 May 2025 17:05:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=fiona.klute@gmx.de header.b="I+pvwMfk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pUCUDnMU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6DD98059D; Wed, 14 May 2025 16:47:13 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C4BC381DD6; Wed, 14 May 2025 17:05:01 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 828F88059D
- for <u-boot@lists.denx.de>; Wed, 14 May 2025 16:47:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52C4B8059D
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 17:04:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fiona.klute@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1747234030; x=1747838830; i=fiona.klute@gmx.de;
- bh=IpzrAH7oCSmhzTQp/Iud1hQKjAvfYBDgypKiZ30sF6M=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:
- MIME-Version:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=I+pvwMfkWekEHrJMle++bSfsfHSSGKJMEj7oJ5rcP2fE3dab987ui+9UjjoryPvy
- jrO3pFavje+8tn8uvtL6hessCuzjKeQHs+OWW25wOm1LNwneuQUcZCZXWu8uEdlpi
- pO40BMi9z9rk0kWOHzqcAiU7B0Gk4cIEgFmK303riQ3uuKY0TKkjWq5dcXVO/n3YX
- LgO9yQAcu/D33VWUyEoSQtLM2yr8GYyZfl++YDOLyoQIQuJiCAuIxN1jBsIT+EO9l
- KBHFHoH85X4l/06qHqby7JlrYjpAOF+/G/tgX3ieZZ2IL4mAcfRL1TTHuyUVY/JAE
- lwWirkC2QqURRvib/g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from haruka.home.arpa ([85.22.127.19]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MatVb-1urII91Vnv-00eKAB; Wed, 14
- May 2025 16:47:10 +0200
-From: Fiona Klute <fiona.klute@gmx.de>
-To: u-boot@lists.denx.de
-Cc: Fiona Klute <fiona.klute@gmx.de>, Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] rpi: copy /system/linux,{serial,revision} from firmware FDT
-Date: Wed, 14 May 2025 16:46:49 +0200
-Message-ID: <20250514144649.1329480-1-fiona.klute@gmx.de>
-X-Mailer: git-send-email 2.49.0
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-72ecb4d9a10so7522995a34.3
+ for <u-boot@lists.denx.de>; Wed, 14 May 2025 08:04:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1747235098; x=1747839898; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EOP2AT7r+O7UOf3CMGRDKfsRJwswzs+A3Wfttdt8GI8=;
+ b=pUCUDnMUchM3cZ+JfOSkaYNPk3mI6LSW2OYPk1A4SR++CO7e+YmsWeYwuwBUVlAqzC
+ SpV9AFFgbwVjQvmVdQCxhO55Z7KBfqjDnHrR4SeooIhwmIwzydxPdFKoFvRLgI7QX5hy
+ jrH0n9kdB0WVTB9tzSHdgwEgTMlbOuyHVfs8s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747235098; x=1747839898;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EOP2AT7r+O7UOf3CMGRDKfsRJwswzs+A3Wfttdt8GI8=;
+ b=FD8+9lmEjh6nI1ec1P22hJFDRsfVQGACC8qbr8iQ4yDvTWzUZ7Xp5VMBGb/1dWkiKw
+ x0z0ODLO3cYq5rPPOrQ5+ksL65BaJa3LhcuFmHqi+Qx1HWuM7VoAJ9pDhkU1o3kikbDw
+ 6FmXgrqhIRMJxDgoNFDnT7FJlNbsijbIZDRhCQqkXUd9LV/CcFciV6R359TrPhReXjPe
+ nX2zMiK7fEtUmdXXJFfObtYlJiVcVgoI3l1OoGMPTod6H9KnmqqHE3+hsDR9sFsxAUrS
+ i2+0XXIcuPSt7+/Qvc8v/eavk6V5XxRe9WtFbrJa/3rtFCwS7eiOw5vuNCXyiqUWwzLv
+ /zIQ==
+X-Gm-Message-State: AOJu0YykO8ClqgzQNOHODg/06Gzs7lKEV/EfrHeWi8k/if58dMQpyFmV
+ QnpllR5/8u8Ba6AqJ5rZ+6fxWx/Y+WEfGj3xIvSVaV/HqT6eoaHuFHYi7NucmmE=
+X-Gm-Gg: ASbGnctq+TH01XHH3ig73+zpd04m6T85O08lzjZMTpr88OS47wTPtrPcYHLUZZPSD9a
+ 7l5ZRCeGEB2maoONdR3yWiFXIatCrF56aO02q+GwhwGBaSCAmq7L1neLPIV5SPBtQuCUAKOCppW
+ 7BJy6LRnmUWdbvaIBfNQ1EaoNO7jE29E1TPwvoR1msNJmU2RynAs6SkZ91tDl9ydwDagja0xJzX
+ Bv7CeBC8PQQWlzcY3ROQV7dFN1rZddhiFOiBn/xykIEIwOp9GBW6JcLykAtHSs+3u51CUsG/NGF
+ nzbMq54K5tH3iuC5rTO5gXI9GZ17+2xv7+AGZugm0p3YIkrK7pue+vICKV1NiuIMGiH677OqW0w
+ a4dxvsuBfyl/G
+X-Google-Smtp-Source: AGHT+IEiRGCJGmQUZ4uQhHXJn6Np/ZIMYOVRW6caA0O8nqMjScpR2X1wzf1LJ878gGCltNHfPQKhQA==
+X-Received: by 2002:a05:6870:89a4:b0:2df:a9d0:1dc9 with SMTP id
+ 586e51a60fabf-2e3488718bbmr2022902fac.37.1747235097681; 
+ Wed, 14 May 2025 08:04:57 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2dba0619e78sm2659175fac.3.2025.05.14.08.04.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 May 2025 08:04:56 -0700 (PDT)
+Date: Wed, 14 May 2025 09:04:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ sjg@chromium.org, jerome.forissier@linaro.org,
+ Adriano Cordova <adriano.cordova@canonical.com>
+Subject: Re: [PATCH v2 3/3] py/tests/test_efi_loader.py: execute HTTP testing
+Message-ID: <20250514150454.GW603748@bill-the-cat>
+References: <20250514074513.3562063-1-adriano.cordova@canonical.com>
+ <20250514074513.3562063-4-adriano.cordova@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-X-Provags-ID: V03:K1:/I4spT2z4wrOSA8BHkjJMH0YvbHeK0znv37v7Z7/VkwMHBzGBYX
- WbdzeZ+39KkxD+5T5XpZc8O4O0X71fCCy8tmtNZ5pW/Qf2weFCG8/7ZjmEn8Qwzv/oeOtTH
- mWINnKd3AeQfO3XC1pdDxBd7JvnKMP+/zIY/3sEE1YENMpAOZ+bM1ejfEGcUCJkzcPb8A/6
- VpuoMfuHqcMG/RIE9AuYw==
-UI-OutboundReport: notjunk:1;M01:P0:K34hlTg6lxk=;sP5W5n0e1ICr/6UWEHhMikt9HqR
- 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
- AtIDwCXyJlWNsYQN
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LY4K+97l++oKXAXE"
+Content-Disposition: inline
+In-Reply-To: <20250514074513.3562063-4-adriano.cordova@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,65 +98,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Qm90aCB0aGUgUmFzcGJlcnJ5IFBpIGRvd25zdHJlYW0ga2VybmVsIFsxXSBhbmQgc29tZSB1c2Vy
-c3BhY2UgdG9vbHMKWzJdIHVzZSB0aGUgcmV2aXNpb24gcHJvcGVydHkgdG8gaWRlbnRpZnkgdGhl
-IGJvYXJkLCBhbmQgdGhlIGxhdHRlcgpmYWlscyBpZiBpdCBpcyBhYnNlbnQuIFRoZSBmaXJtd2Fy
-ZSBjcmVhdGVzIHRoZSAvc3lzdGVtIG5vZGUgd2hpY2ggaXMKbm90IHByZXNlbnQgaW4gTGludXgg
-RFRTIChtYWlubGluZSBvciB2ZW5kb3IpIGZvciB0aGUgUmFzcGJlcnJ5IFBpCmJvYXJkcywgc28g
-d2UgbmVlZCB0byBkbyB0aGUgc2FtZS4KClsxXSBodHRwczovL2dpdGh1Yi5jb20vcmFzcGJlcnJ5
-cGkvbGludXgvYmxvYi8wZjI5MmZiYjYzNDZiMDU3NjYxNTI5MDIwNzY4OTU1NThhYzIzZjlhL2Fy
-Y2gvYXJtL21hY2gtYmNtL2JvYXJkX2JjbTI4MzUuYyNMMjMtTDMzClsyXSBodHRwczovL2dpdGh1
-Yi5jb20vamdhcmZmL3JwaV93czI4MXgvYmxvYi83ZmMwYmY4YjMxZDcxNWJiZWNmMjhlODUyZWRl
-NWFhYTM4ODE4MGRhL3JwaWh3LmMjTDU3OQoKU2lnbmVkLW9mZi1ieTogRmlvbmEgS2x1dGUgPGZp
-b25hLmtsdXRlQGdteC5kZT4KQ2M6IE1hdHRoaWFzIEJydWdnZXIgPG1icnVnZ2VyQHN1c2UuY29t
-PgpDYzogUGV0ZXIgUm9iaW5zb24gPHBicm9iaW5zb25AZ21haWwuY29tPgpDYzogVG9tIFJpbmkg
-PHRyaW5pQGtvbnN1bGtvLmNvbT4KLS0tCkkgc2VudCBhbiBSRkMgdmVyc2lvbiBvZiB0aGlzIHBh
-dGNoIFszXSBhIHdoaWxlIGFnbyB3aXRoIHRoZSBxdWVzdGlvbgppZiB0aGVyZSdzIGEgYmV0dGVy
-IHdheSB0byBjcmVhdGUgdGhlIC9zeXN0ZW0gbm9kZSB0aGFuIGNyZWF0aW5nIGEKdGVtcG9yYXJ5
-IG92ZXJsYXkuIEkgZGlkbid0IHJlY2VpdmUgYW55IHJlc3BvbnNlIHRvIHRoYXQgcXVlc3Rpb24s
-IHNvCkkgZ3Vlc3Mgbm90LgoKWzNdIGh0dHBzOi8vbGlzdHMuZGVueC5kZS9waXBlcm1haWwvdS1i
-b290LzIwMjUtRmVicnVhcnkvNTgwMzY0Lmh0bWwKCiBib2FyZC9yYXNwYmVycnlwaS9ycGkvcnBp
-LmMgfCA3MCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCiAxIGZpbGUgY2hh
-bmdlZCwgNzAgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2JvYXJkL3Jhc3BiZXJyeXBpL3Jw
-aS9ycGkuYyBiL2JvYXJkL3Jhc3BiZXJyeXBpL3JwaS9ycGkuYwppbmRleCAxYjBiNjY0ZmEyYi4u
-NjU0NTMwNmY2ZGEgMTAwNjQ0Ci0tLSBhL2JvYXJkL3Jhc3BiZXJyeXBpL3JwaS9ycGkuYworKysg
-Yi9ib2FyZC9yYXNwYmVycnlwaS9ycGkvcnBpLmMKQEAgLTU2Miw2ICs1NjIsNzQgQEAgaW50IGNv
-cHlfcHJvcGVydHkodm9pZCAqZHN0LCB2b2lkICpzcmMsIGNoYXIgKnBhdGgsIGNoYXIgKnByb3Bl
-cnR5KQogCXJldHVybiBmZHRfc2V0cHJvcChkc3QsIGRzdF9vZmZzZXQsIHByb3BlcnR5LCBwcm9w
-LCBsZW4pOwogfQogCit2b2lkIGNvcHlfc3lzdGVtX25vZGUodm9pZCAqZmR0LCB2b2lkICpmd19m
-ZHQpCit7CisJdm9pZCAqZmR0X2NvcHkgPSBOVUxMOworCWNvbnN0IGZkdDMyX3QgKnByb3A7CisJ
-Y2hhciBmZHRvWzEwMjRdOworCWludCBzcmNfb2Zmc2V0OworCXUzMiBmZHRfc2l6ZTsKKwlpbnQg
-bGVuOworCisJLyoKKwkgKiBJZiB0aGUgZmlybXdhcmUgRkRUIGRvZXMgbm90IGhhdmUgYSAvc3lz
-dGVtIG5vZGUsIHRoZXJlJ3MKKwkgKiBub3RoaW5nIHRvIGRvLgorCSAqLworCXNyY19vZmZzZXQg
-PSBmZHRfcGF0aF9vZmZzZXQoZndfZmR0LCAiL3N5c3RlbSIpOworCWlmIChzcmNfb2Zmc2V0IDwg
-MCkKKwkJcmV0dXJuOworCisJLyogQ3JlYXRlIGEgdGVtcG9yYXJ5IG92ZXJsYXkgdGhhdCBhZGRz
-IHRoZSAvc3lzdGVtIG5vZGUuICovCisJaWYgKGZkdF9jcmVhdGUoZmR0bywgc2l6ZW9mKGZkdG8p
-KSkKKwkJcmV0dXJuOworCWlmIChmZHRfZmluaXNoX3Jlc2VydmVtYXAoZmR0bykpCisJCXJldHVy
-bjsKKwlpZiAoZmR0X2JlZ2luX25vZGUoZmR0bywgIiIpKQorCQlyZXR1cm47CisJaWYgKGZkdF9i
-ZWdpbl9ub2RlKGZkdG8sICJmcmFnbWVudCIpKQorCQlyZXR1cm47CisJaWYgKGZkdF9wcm9wZXJ0
-eV9zdHJpbmcoZmR0bywgInRhcmdldC1wYXRoIiwgIi8iKSkKKwkJcmV0dXJuOworCWlmIChmZHRf
-YmVnaW5fbm9kZShmZHRvLCAiX19vdmVybGF5X18iKSkKKwkJcmV0dXJuOworCWlmIChmZHRfYmVn
-aW5fbm9kZShmZHRvLCAic3lzdGVtIikpCisJCXJldHVybjsKKworCXByb3AgPSBmZHRfZ2V0cHJv
-cChmd19mZHQsIHNyY19vZmZzZXQsICJsaW51eCxzZXJpYWwiLCAmbGVuKTsKKwlpZiAocHJvcCkK
-KwkJZmR0X3Byb3BlcnR5KGZkdG8sICJsaW51eCxzZXJpYWwiLCBwcm9wLCBsZW4pOworCXByb3Ag
-PSBmZHRfZ2V0cHJvcChmd19mZHQsIHNyY19vZmZzZXQsICJsaW51eCxyZXZpc2lvbiIsICZsZW4p
-OworCWlmIChwcm9wKQorCQlmZHRfcHJvcGVydHkoZmR0bywgImxpbnV4LHJldmlzaW9uIiwgcHJv
-cCwgbGVuKTsKKworCWlmIChmZHRfZW5kX25vZGUoZmR0bykpCisJCXJldHVybjsKKwlpZiAoZmR0
-X2VuZF9ub2RlKGZkdG8pKQorCQlyZXR1cm47CisJaWYgKGZkdF9lbmRfbm9kZShmZHRvKSkKKwkJ
-cmV0dXJuOworCWlmIChmZHRfZW5kX25vZGUoZmR0bykpCisJCXJldHVybjsKKwlpZiAoZmR0X2Zp
-bmlzaChmZHRvKSkKKwkJcmV0dXJuOworCisJLyoKKwkgKiBBIGZhaWxlZCBvdmVybGF5IGFwcGx5
-IGlzIGRlc3RydWN0aXZlIHRvIHRoZSB0YXJnZXQsIHNvIHVzZQorCSAqIGEgdGVtcG9yYXJ5IGNv
-cHkgYW5kIHJlcGxhY2UgdGhlIEZEVCBpZiBzdWNjZXNzZnVsLgorCSAqLworCWZkdF9zaXplID0g
-ZmR0X3RvdGFsc2l6ZShmZHQpOworCWZkdF9jb3B5ID0gbWFsbG9jKGZkdF9zaXplKTsKKwlpZiAo
-IWZkdF9jb3B5KQorCQlyZXR1cm47CisJbWVtY3B5KGZkdF9jb3B5LCBmZHQsIGZkdF9zaXplKTsK
-KwlpZiAoZmR0X292ZXJsYXlfYXBwbHlfdmVyYm9zZShmZHRfY29weSwgZmR0bykpCisJCWdvdG8g
-Y2xlYW51cDsKKwltZW1jcHkoZmR0LCBmZHRfY29weSwgZmR0X3NpemUpOworCisgY2xlYW51cDoK
-KwlmcmVlKGZkdF9jb3B5KTsKK30KKwogLyogQ29weSB0d2Vha3MgZnJvbSB0aGUgZmlybXdhcmUg
-ZHRiIHRvIHRoZSBsb2FkZWQgZHRiICovCiB2b2lkICB1cGRhdGVfZmR0X2Zyb21fZncodm9pZCAq
-ZmR0LCB2b2lkICpmd19mZHQpCiB7CkBAIC01NzIsNiArNjQwLDggQEAgdm9pZCAgdXBkYXRlX2Zk
-dF9mcm9tX2Z3KHZvaWQgKmZkdCwgdm9pZCAqZndfZmR0KQogCS8qIFRoZSBmaXJtd2FyZSBwcm92
-aWRlcyBhIG1vcmUgcHJlY2lzZSBtb2RlbDsgc28gY29weSB0aGF0ICovCiAJY29weV9wcm9wZXJ0
-eShmZHQsIGZ3X2ZkdCwgIi8iLCAibW9kZWwiKTsKIAorCWNvcHlfc3lzdGVtX25vZGUoZmR0LCBm
-d19mZHQpOworCiAJLyogbWVtb3J5IHJlc2VydmUgYXMgc3VnZ2VzdGVkIGJ5IHRoZSBmaXJtd2Fy
-ZSAqLwogCWNvcHlfcHJvcGVydHkoZmR0LCBmd19mZHQsICIvIiwgIm1lbXJlc2VydmUiKTsKIAot
-LSAKMi40OS4wCgo=
+
+--LY4K+97l++oKXAXE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, May 14, 2025 at 03:45:13AM -0400, Adriano Cordova wrote:
+
+> Execute test_efi_helloworld_net_http
+>=20
+> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> ---
+>=20
+> v2:
+>  - remove --httpserver option
+>=20
+>  test/py/tests/test_efi_loader.py | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi_lo=
+ader.py
+> index 91f151d09cd..e19920b4fce 100644
+> --- a/test/py/tests/test_efi_loader.py
+> +++ b/test/py/tests/test_efi_loader.py
+> @@ -195,7 +195,7 @@ def test_efi_helloworld_net_http(ubman):
+> =20
+>      Call the do_test_efi_helloworld_net function to execute the test via=
+ HTTP.
+>      """
+> -    if ubman.config.env.get('env__efi_helloworld_net_http_test_skip', Tr=
+ue):
+> +    if ubman.config.env.get('env__efi_helloworld_net_http_test_skip', Fa=
+lse):
+>          pytest.skip('helloworld.efi HTTP test is not enabled!')
+> =20
+>      do_test_efi_helloworld_net(ubman, PROTO_HTTP);
+
+Is this test inverted, or were you unaware of the u-boot-test-hooks side
+at for example:
+https://source.denx.de/u-boot/u-boot-test-hooks/-/blob/master/py/travis-ci/=
+u_boot_boardenv_qemu_arm64_na.py?ref_type=3Dheads
+
+--=20
+Tom
+
+--LY4K+97l++oKXAXE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgksRAACgkQFHw5/5Y0
+tyyT5wv/YEu0D8BjegjGsF95yyRONkX+XOZrcrvj2w40TJPsVPJryCYht5On9Qih
+plctt8m9afk5sqYvEvC7RPKy2luM2DJA9bhFnEwXRKgbgpMIuO9VnNHyerBFbwTy
+G+GGEdvTiHu1GrwgYtcYsrcC843tMncbaWv9/w3hG9rvT6CtxSwwBVAzRls3YKwo
+T4hoRHtskAwsyxgtChXUI4QgDK83TQhuROExMQv83TMeOEG2ebGZ01I+2WUVVwO/
+cFMj5asZ2kg4gEbnfm6SWtpc52LZfJbmF8S40csKRM2mtiO/3nfWoOwoC6phHTRr
+Ewl+Vh6VX8qzshL1/YhNlTgxp83d0TwFILHopNEP9XBH5tmjA6d95lzDERjzD2nR
+2OBDJRSrcINhyaP2YU6ATOt/jhq1SbKQKN7Dc3K9NFP4Dvx2RFCM4Vi+1MtF9I0p
+/pZLjYFIC7I84+UeESa6OBFDwG1i3TWn1uhZhbrMVdC+32ZxJHhmeY92RBTRoI2q
+tTmqwyRr
+=RyVS
+-----END PGP SIGNATURE-----
+
+--LY4K+97l++oKXAXE--
