@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9698DC2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 15:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBBBC2D0CD
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 15:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E625B82C8A;
-	Thu, 15 May 2025 17:58:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 35FA182CA2;
+	Thu, 15 May 2025 17:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="GeH4gzLv";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="pwYkCvMI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A407E82BC1; Thu, 15 May 2025 17:58:16 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 8DCE282C13; Thu, 15 May 2025 17:58:17 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9F5C82C49
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 17:58:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9C7382C67
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 17:58:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ad228552355so207391666b.3
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 08:58:13 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ad4ffb005d8so206764366b.1
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 08:58:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747324693; x=1747929493;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747324695; x=1747929495;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ckvUKDdvQ0dFN54BMhDZUtFdcgxz09YjO+z08pvlBOQ=;
- b=GeH4gzLv6lpBs+FaFwYEcCy/X6HyPs7Tn0UsyiqaUBqOOM8T1/e2UZqPxKS5oDbqlY
- A0Vv6ibx6cgTzyyNUbgpChjHTJnTzsU0fplMcIvtutIOD8SzRpf0vAhhvJAysIWeTTmg
- xfzUwy9mSZvW6FJSmXJIObKV1oy6HcoNVa/VS9YrG6RDd0yYD5DwjSGTj0Uxj/Fd9rps
- 5UnixOgEIZ2QPOO8CZd3+Mwl7+ac7+N45qaBheHrEsckCe1QkSKEtEjE7WOW4BCi3UgN
- 1E7VZbOX2YHDNduy/866qLAIlmoB6BihF782rcLQJw1a2mIrBaGHzXGnobsZp/30y0NH
- W0Sg==
+ :reply-to; bh=iVifqlMpjS045IPnR8Vf+MjFZOjKmOJei9bkw4j2Y84=;
+ b=pwYkCvMIQ6jE6faGwZci4kJxxrLkyZHvgTPl9dC6Eycpse+oAbBQETpB5DrHt7ZFD1
+ qwHEUvXVLIkNqYNBGz46VVJPZMLsmNH7qKTgXgKsNfgZG084tpxGH6cxw6pnRqIhM1B5
+ rmiVsd9IYyViGJiNB++3nJhbMcLdhausorBi73bFCj8SFHiZyVsS43qrHdIvDniqB319
+ NwqCie6zLrzuPQdUNyOeVgHc+IgcxPKOJYhE2Zh9fYxhZUZObbET7p5W6cK3a88W+D3z
+ XmT2VhKzYGXqGtGDHm0SnPbDV88VyDZ0cwhOr56IPM9tSCcM+TVP8vBHo5z23JtvtYcy
+ /Tyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747324693; x=1747929493;
+ d=1e100.net; s=20230601; t=1747324695; x=1747929495;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ckvUKDdvQ0dFN54BMhDZUtFdcgxz09YjO+z08pvlBOQ=;
- b=fHb0HKGqdOFhfPqH4EfikEoM0Pz6yk9wHmzXIyUCILbvMTdfu6GCX57YuxzJEjskCt
- C4kc30470XQOybFM0U2YguBtUmyG++Ktd3i364/3lFsBSb9VxG6c6YG97f7opPbslMhC
- 97gNCsaKMijP6Ov0IHRys+0HZsE4SEc8fDxRN9KAd5VPFEATneqr7b3WyghmgvovZfgk
- 3IeaOOi/F2B3OsFaUN9G9bTjZW2UY+Vjjf1+8Drr8FWECPjfKVkb5qnhAuCflgSEDmyc
- d5kT3othNqtQhtEGxuZXLkF6hs/txpIWwvUx9HMzrSNyTXOC2AFT8+tib1rx/HZVnNJ6
- MaWg==
-X-Gm-Message-State: AOJu0YxAxRDooQq+ss1pQ3vC3iij+bvArWOdSYy20Qn+Ol840HIMj9XS
- D6J60D41Hz0I4wCDVDOaqy+hlsUZBVPdMp14rZ6h7fd06YGHbDwwVoz1WNJxrjfg7T8=
-X-Gm-Gg: ASbGnctkSznkYfGKlAfoYfpYSiuwQAJuPKmTANOl9QNmvf3qvqqU0MPw483TNksb5LM
- l6EG8+U5TBk6nWgqtaldM4K8eQo/uKeS/XvidTh6XhLUxCtmiOvJH6nU75d4/F8PCFDMDwIW/xm
- WKjWl3/2wUh6XBscShaeZ8Q4rQLb+MVhcREsJ1WqPrZECtiGKsWNb2QeXw3pNKYAZ0H/AC7Tcj/
- FlgXYd/72EnIMR2Dq18n/aHqAZUa4tpa60c93iGfjZ9wsOUnCtB4RPKAbpa6CiZOSboHRR9Bp+4
- hFfKahptB9fOz8hbzyacahJtwem41mY3ddd4LylPu39vhGLow/1S3ufic6Zn7n4Z
-X-Google-Smtp-Source: AGHT+IHRi5mETv41XJaGIpZEGiyR8SG/tffYHZJIEcZ92DRXC7evS4zeBO0ol5sf46yM3nl9QL/gQw==
-X-Received: by 2002:a17:907:7210:b0:ad2:3f9a:64a5 with SMTP id
- a640c23a62f3a-ad52d5a847bmr23103266b.41.1747324693246; 
- Thu, 15 May 2025 08:58:13 -0700 (PDT)
+ bh=iVifqlMpjS045IPnR8Vf+MjFZOjKmOJei9bkw4j2Y84=;
+ b=qjzFqC1Yzj96BEhSKBVG3WVzePSryg+G9ONlZVxLWF4XW1LBkqqnD3V8xCAM7K66SJ
+ 2AJ1iKiMZjyDNjyZh/hWu9TW7xMoV3PK/gGQMdE4CHf5xIayVR8Lbq+VvKAyraYg2Q69
+ GLYxDaa2ebHbE7NDcAWWV7YPVxVit2tio3b8+SvdDTbo63sa5pl4IJ2EeEm7nvfmRisJ
+ JO1k1oF2NfAz3OjMIjWjMI5as4R8PX3lBlhwTZwPlcTpZ+ri0j8wzohy/jKUsQBu8Pdh
+ kAyrFYknPXEyVqchM2JWdO5Ir7iOrxYqWuUqu0e+vg+JjjJ9NLCVJV3vVS8WU4shgYZn
+ /TrA==
+X-Gm-Message-State: AOJu0YwfYfZqHaWeflsgWGvb8UjvejO05l1zpLcMWszLScrpOB/nJzz1
+ I76sYdhFbVOhah0KlOmWfwvH3ZcXZHQqv0l6KumKEsY4DdDUiYPCJNQHo0bDhX7TArM=
+X-Gm-Gg: ASbGnctj735MN3LAd2yQFYymVFdeki9vp5bd/fiqX/UKam6rn8kmZOpmNHftd9jMLbJ
+ Nwp7++A53wJ0I325jqHz0Hvdr5FxN+xmc5E6JcyCLqr4Pvju4PkJ+vQFouY3Cl34sPl1gMw+iaX
+ aPXHeyYp20Q+I0f7M0T6TgoO1vloi9Zr1bIKCIJkYdd1mv9xdAhztbl3UDFTR2smd/IJ0jfE/kg
+ SsqspUTVjEcuuJnbrcDHGyAMBJ9q6Nk8fjc6hlKNsBGcky9LgIdAauI+G42pt61lBmi6iBZtCsx
+ 5xiSOANrWYaB0x0ASY3nSzhb80EAIXH2uj/Xzc4+uQthaSFSFnSxjLr5EN3AIL4D
+X-Google-Smtp-Source: AGHT+IHQTzZepMpzE/G+JzvwpYTvONJolhbWQEY6qAhc3CcTgAztmMqE66V1gxkHNvjTiI7fSSrZrg==
+X-Received: by 2002:a17:907:1c0a:b0:ad1:8fc6:d704 with SMTP id
+ a640c23a62f3a-ad52d444d53mr29293266b.1.1747324695060; 
+ Thu, 15 May 2025 08:58:15 -0700 (PDT)
 Received: from [127.0.1.1] ([185.72.186.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d271916sm8698266b.69.2025.05.15.08.58.12
+ a640c23a62f3a-ad52d271916sm8698266b.69.2025.05.15.08.58.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 08:58:12 -0700 (PDT)
+ Thu, 15 May 2025 08:58:14 -0700 (PDT)
 From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Date: Thu, 15 May 2025 17:55:45 +0200
-Subject: [PATCH v4 2/5] debug_uart: Replace debug functions with dummies if
- CONFIG_DEBUG_UART is not set
+Date: Thu, 15 May 2025 17:55:47 +0200
+Subject: [PATCH v4 4/5] rockchip: px30: Weaken dependency TPL/SPL serial
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250515-silent_console-v4-2-dec6c8391f01@thaumatec.com>
+Message-Id: <20250515-silent_console-v4-4-dec6c8391f01@thaumatec.com>
 References: <20250515-silent_console-v4-0-dec6c8391f01@thaumatec.com>
 In-Reply-To: <20250515-silent_console-v4-0-dec6c8391f01@thaumatec.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -100,48 +99,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case DEBUG UART is not used, define dummy macros replacing
-the actual function implementations that will not be available.
-This allows to compile code and avoid linker errors.
-Redefine the DEBUG_UART_FUNCS macro if DEBUG UART is not available,
-to avoid compilation errors.
+Allow to disable serial console in TPL and SPL. Weak dependency
+to SPL_SERIAL and TPL_SERIAL is also used in other Rockchip boards.
 
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
----
- include/debug_uart.h | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
 
-diff --git a/include/debug_uart.h b/include/debug_uart.h
-index 714b369e6fed..4526dca24ac6 100644
---- a/include/debug_uart.h
-+++ b/include/debug_uart.h
-@@ -128,6 +128,8 @@ void printdec(unsigned int value);
- 			(1 << CONFIG_DEBUG_UART_SHIFT), \
- 		CONFIG_DEBUG_UART_SHIFT)
- 
-+#ifdef CONFIG_DEBUG_UART
-+
- /*
-  * Now define some functions - this should be inserted into the serial driver
-  */
-@@ -197,4 +199,17 @@ void printdec(unsigned int value);
- 		_DEBUG_UART_ANNOUNCE \
- 	} \
- 
-+#else
-+
-+#define DEBUG_UART_FUNCS
-+
-+#define printch(ch) (void)(ch)
-+#define printascii(str) (void)(str)
-+#define printhex2(value) (void)(value)
-+#define printhex4(value) (void)(value)
-+#define printhex8(value) (void)(value)
-+#define printdec(value) (void)(value)
-+
-+#endif
-+
- #endif
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+---
+ arch/arm/mach-rockchip/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 9210877a4a49..dac160d33ae3 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -11,8 +11,8 @@ config ROCKCHIP_PX30
+ 	select TPL_TINY_FRAMEWORK if TPL
+ 	select TPL_HAVE_INIT_STACK if TPL
+ 	imply SPL_SEPARATE_BSS
+-	select SPL_SERIAL
+-	select TPL_SERIAL
++	imply SPL_SERIAL
++	imply TPL_SERIAL
+ 	select DEBUG_UART_BOARD_INIT
+ 	imply ROCKCHIP_COMMON_BOARD
+ 	imply ROCKCHIP_COMMON_STACK_ADDR
 
 -- 
 2.43.0
