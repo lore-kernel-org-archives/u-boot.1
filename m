@@ -4,170 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F19C2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 15:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D60CFC3ABC9
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 15:16:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55D1282C44;
-	Thu, 15 May 2025 17:13:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 60F9782BE4;
+	Thu, 15 May 2025 17:16:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="UWMuq759";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iG5KvSj0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 761DF82C2F; Thu, 15 May 2025 17:13:37 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6299682BE4
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 17:13:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ id E9BE482C15; Thu, 15 May 2025 17:16:31 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8657282BC1
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 17:16:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xVtKcSdoZlWfyawLsHl7rd+Ppi9/psHrbY1z7mqLDEknRB2h2YX0Tv9U8ggZbVGm/aQXW0bMdt9bn6xS+FaNfws+5diASKTKSi47tmYmsTtKCtDhFQy9dDrGPPrcDRpM7f+rPEBqNeBWjxUxUZGDzIVntsSpp+j0ynf2YJA8jKjtfByorRDFHvbTRTlEjc3TidIl9vSwjqkfl0iJPdRuVAslTYPTeKNSe5iN+QUCZ+3M4hL7TjhZGFvo5B0sxYSNbGobs3uaaSxj5rKwJgGZ9UNR7zmd4CNquJiYO3dMkMQY0c/RPkaRWeFV9cLRrqByN7c8GXd6d4GjrG7Y7OYqvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s4v3rRfKBFSblLDv1prbZkKg5P5QjKQvddlaagmFew0=;
- b=ccNRvJPNxov65AoULbKqrxtBBatmBtKFfSjE9QE3RznRxg3n1unqsZHM64VsH2t1gANlQl7y29JEjsz0+tRP3Cn0s6AHHLD10BghQnxHZegmXWNbLojiSJ3DawDFOO0HV1D86EqMUSHLNxWV7ZnlPeMc9HqvHNmXxT9ZSi4FWINmM9KslfYSXF+B4AdHjMZ3ze9/mdhdPEWEnECebVFNsfOhN2dQ2u/GgmV2yeA3cKr743HHizFKfWn3Q7492UpK3G00Vn+4mnAT5SfV8iLDpOCFXD7Lv1Y8oWhMs7VO7CXnTdyKBhfigMk24HaeuYo0QG+r5xOMllin6zcCvxY/Mw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s4v3rRfKBFSblLDv1prbZkKg5P5QjKQvddlaagmFew0=;
- b=UWMuq759TePOVsNAZNR7bp/awSpDwuOlryhqjiLSWCKwiSP3Ie2bBbpgbNAeCGUByXuDQcQdb4SI52nMs6uJPWmV4FJJKH6FLT6Qzt9YocET0xwYPnRz+6BggdD4ZJ9KMsvyPDieQ9dUzhOUp1IogsT9N18RH81GxGW71MrbqeQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by VI1PR04MB9835.eurprd04.prod.outlook.com (2603:10a6:800:1e1::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.30; Thu, 15 May
- 2025 15:13:31 +0000
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea%4]) with mapi id 15.20.8722.031; Thu, 15 May 2025
- 15:13:31 +0000
-Message-ID: <b2566f6f-e650-4541-9f52-8830bbba6159@cherry.de>
-Date: Thu, 15 May 2025 17:13:30 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] sunxi: add "fake" FEL pin support
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de,
- Yixun Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev
-References: <20250417000539.3709-1-andre.przywara@arm.com>
- <20250417000539.3709-3-andre.przywara@arm.com>
- <b7ffc468-1970-4eba-85e1-47aaced0161a@cherry.de>
- <20250421222939.69832f73@minigeek.lan>
- <e2d354dd-4be6-45b0-b263-7112b9320692@cherry.de>
- <20250422131121.7a491909@donnerap.manchester.arm.com>
- <11fe3319-8a26-47b7-873e-774140c146f6@cherry.de>
- <20250512133941.23462a23@minigeek.lan>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250512133941.23462a23@minigeek.lan>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0142.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:98::8) To AM9PR04MB8906.eurprd04.prod.outlook.com
- (2603:10a6:20b:409::9)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 54FFGMXW047350
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 15 May 2025 10:16:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1747322182;
+ bh=qV5C+M2neubPB4gUemw1krHSS+C99mZXYXKdZAzg8E0=;
+ h=From:Date:Subject:To:CC;
+ b=iG5KvSj0GYc+oCa1DHRA+/1oIGvLcJxLiKRgJZf8Bme3dcbwlvoEQiJYp5h+bTgk1
+ Q9gGmTYFq+qWJgk2W5MLuDyPdnuA3XqVkqXiPa3xqYpCM8bwD1693pdXgWwd4WHCkU
+ zQQwflrZE/MBukfX6HacsZU/AILttL+gvptlJwJA=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 54FFGMEs013225
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 15 May 2025 10:16:22 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 15
+ May 2025 10:16:22 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 15 May 2025 10:16:22 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54FFGMd3062683;
+ Thu, 15 May 2025 10:16:22 -0500
+From: Bryan Brattlof <bb@ti.com>
+Date: Thu, 15 May 2025 10:16:19 -0500
+Subject: [PATCH] binman: add atf-bl1 to etypes
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|VI1PR04MB9835:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0b9eb10c-089d-452f-db73-08dd93c30d73
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b2JMNGtzV2RPaDVScTNKR2FOZDY4SlVZR0JiTyt5UjB1eVV0czBoQVB0cEpz?=
- =?utf-8?B?Myt6cWlMYmRwWHVqclJaaGFYNWRoZ2hRZFM5ZFJ1YWdDaVB5QU5HVUdmeUtx?=
- =?utf-8?B?WndUTVVaa01rN0lBdFpUNHQzSW1VTEE1MmhtTUE2TTNNb3cvSUJkQUZqTXNM?=
- =?utf-8?B?YXh0OHVRbnk1dk4wMEtCeHg2Tlo2MlhqUnJQUEpScExTdlowM0VhSTVLUW92?=
- =?utf-8?B?L1RUZ3U2N1dhMG55TzBHRVpOa05KaFdYYlEvVUxZUndBZ3dnSEFYQlBTbmdo?=
- =?utf-8?B?SHdrTDI3d2ZUVU5SYWRGUWtESzZnaGlVV3R6MDI2NVZyLzRhSnVuZ2ZLT2Nv?=
- =?utf-8?B?Y1l2VHVuRXpLWW5IY1NLNjVPcTM4WWNMZlprMzE5ZXdkekZiV2tIbGt5OENs?=
- =?utf-8?B?MkQ3V2JxYjJ0VVNyWGdsVGhLdEN1UWJhellOblNLUnZYbnZxT1pndTVTTkxI?=
- =?utf-8?B?VEJQRGx0d0RpV1dXS05WdmpZRjBSUS9GdkRRbkl1SUtuQTlwYXpZZWYwVkJx?=
- =?utf-8?B?UlBZZGJITWJGN1Mycm9kR3lNYitaNU1uZHlwdng4bGtnZDRyMDR2bUdBeG1G?=
- =?utf-8?B?UW1YcWcrMjE3ZDBleVVUb1dMMDdiYnlxTG1waGFmaUxSdU93YTJxRHNBc01M?=
- =?utf-8?B?QSt0dXd2UzF0dHlQeHBVR1NUcHIvOTY3VHp6bWdqK1k2bEo0am13ZkxuV0VG?=
- =?utf-8?B?NkNQRklGK2l4dVRxaHlFZ0pZSmtkNXlvcExvWC83c09qeUJrZkFJd2VxcUFp?=
- =?utf-8?B?Z1IrbEpLV2Z3disweHp6V2dLc0hnUC80d3hWdS9iaGw2cWwxZk1ab1NKMHBu?=
- =?utf-8?B?VGpzdFRWZXRVWEdVMjFMWFZZaGJNajByREcxSHlNUzkzM28xaGlMY0syZ1I3?=
- =?utf-8?B?dXNKNnpnc0ZSc0hCUVlCK2tpN2puVTFvQlV6c092cjgreCtFWElDQjQxaGha?=
- =?utf-8?B?dklET3BDaG5DOS9XUHVnZWJCVFFWRmtNM2hHTmVidEdDVGhmdWpjcFBNZkM3?=
- =?utf-8?B?c0duSlJDK294WEJXSjgyRlJNMkp4NHpPNVpHR2p3WU9xWElCVUNJcnJBdnRO?=
- =?utf-8?B?MndKTElhUE5ldXRKSGpIZE1sdHYzdDJFR09DQ3V3WTQwM0VPajljVUR6aFpp?=
- =?utf-8?B?TUlQeW5xY21jRDlHb0dac2hCbGxRMkpIME5Ma2pFTm1qcG80K3BnYytwbjVv?=
- =?utf-8?B?cDRZMXNwRjdDeHRnWWhjZ01waHM4aFdENGpsL3lIN0prRjJTSk5sRDN4amVn?=
- =?utf-8?B?Z1h3SUdHTW9lYXBpVWZQMjFpWWFPMC8wYXJZMEFlSmkzUTFTQWxrNTZCUmIr?=
- =?utf-8?B?TUdVTCtmWmEzek9FdTYxb2RhUTkya3Z0MzNiZGxnMGVBZEoyeFJzWkx3Q2sx?=
- =?utf-8?B?V2FqYk14MndEZmxIRkdoTmFKRXM3V2FENk1FcHZVRnE2Uko0SkxCT2pTdXB6?=
- =?utf-8?B?VGNlT0VNaEhDTm9HTVNzd21CUW1NVEw0QTRYd2lBaUZmZFpLa2pwK21vcmkr?=
- =?utf-8?B?eElYb1R3b0trNjNCdmM5NFRXTlpPNStodUZKVDNMTGNHQXRLVXNrS3kzV2kr?=
- =?utf-8?B?RVBVZmZaQ1ZwdHZWbDB4TXkzcDhWdTd2UWxZb3VrR3JIR0lkTDNXc2h0QTM4?=
- =?utf-8?B?d0tYMDA3QjNSWVVnaVBtYkdGTWFWaDBEeDFvRUpjZ0FueGxoaytJUHRRelY3?=
- =?utf-8?B?L0FqVkg0dnBoRVlUQmtKdWtxUDlMM3l1R0ZWckFERWprM2d2L0xObWErUk02?=
- =?utf-8?B?L0hIUUloNWorZUQ4Q2FVN0NvWjlQZEFPNmtoQ0d4cGhUMDJDVEIyQ1FtZ2Np?=
- =?utf-8?B?YUJWQVVtQzhJVWljTWJyU09FcytWaEJNbWk1SjRMdUJJMnY0ZlJpS1lrY0Er?=
- =?utf-8?B?TVRZbE5oRlF5cDVSd3FRbTJISkRBYkdMclBQMU1lTklvMWRFbUhUMG0zcEgz?=
- =?utf-8?Q?Re4uNPnyygs=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dEZtck1ZTE9xb0xXZmUvSk1OMlB1ZGlIUGY3WUVEM3JVLyt2UzE4SXRGNWZh?=
- =?utf-8?B?L1ZCZ3djVVhXODBzZGx1bS9URGFwdlBOTkYwMWVHaUFjSDQ4MVlTK1ZZNTJJ?=
- =?utf-8?B?WlFXT0JsWW41WWdwYXlTSlNLR2RRRk40a1pOZU42NmRsWC9UeDdFZy9nQ2Zr?=
- =?utf-8?B?bUtFcTBaemFnS09WK2x1RXI3NnpEZlM0dStXeHZQQzdyOG5zYW5HdDJ0SGFD?=
- =?utf-8?B?bmVHaFcrampDZUk0Q29XYkNpaFo1VWpnOUFzdkNDL3R0ZHoxaFJyaUgvS2x1?=
- =?utf-8?B?M0dabFRpYi9vS3RuUHh0UlYxK3BTMkFPazRTOWhydDZCR1hsUHd5OGU1YWc2?=
- =?utf-8?B?aVVlbGV3VndxVzM0eXZUTGR0S2phRUNMU1lBRUNMVk90eTFGUmsrVEwrMW9a?=
- =?utf-8?B?VmZJQW1XM1lwdHZoWjlpcXVBRkRnblloZzNaRTNNb0tSbHp2dVkrTlY5RmhO?=
- =?utf-8?B?WHRuUTdScUJYY2pUMDU5djlBZUxCVG0wdzJNelQ3MHN1M09yK1ozWjZ0TEYx?=
- =?utf-8?B?SFh3NHFFZXlZSm0xN0VNYkZ0WnFNN2ErM2xaQmZnQ2ZBcTFpMEp5N1VaU1po?=
- =?utf-8?B?bFVsdG9EVUhsSXltbWlETWZjcUNqRjdYRXplUnJzbFBoVmFJdDJrbkd2R2xI?=
- =?utf-8?B?NUhlZ0FMYmRPM2tQWlhxd29IcHdVaWVKU2lsTnBYaHZqN01sNllMUWpMOUNi?=
- =?utf-8?B?bzF1RUxnTld3eTZwbVQxQmJxTTAydlFDa3o2YjZXTEFlZXRLYlprcUNlQmNM?=
- =?utf-8?B?UU44d3lyZE5VaFdFelhpN2lOTFpuUUhxWm5vdng1NG4xbmtpNWdJRGlNKzNo?=
- =?utf-8?B?dnp1QkxORHh3UUQ5dzFzMU5IWlFVZmp4OTlNVFR1L21pcDRybzZLSGVGNzhG?=
- =?utf-8?B?OUtCSzVEdUk5Q2JiRWw2RktLb0NTMDhITHNVb2RqR1crc0RKaXV0N3dlcGhS?=
- =?utf-8?B?RmxvdkFPQ1FRMkt2Wm9XZFBoSitCazB1U2YzWjJmRHN5WVdBcUdqVHZzTXZD?=
- =?utf-8?B?U0J2U2VveTJ1ank2ZzViSFoydnk0bktvMnJxQVRtZTNhQkVwUU9zWTVSeGh1?=
- =?utf-8?B?SFpQTGpWMEFoNE9EOGNIcEpJOER0NmlDQmlDWnR2T2xWbUFzMTJwNEQ0VGpn?=
- =?utf-8?B?STF6c2k5dW05T1dVbGN5MkhwVnhBWHNsQ2NmU3pmbCtCeE52UmZqV0NjbDBm?=
- =?utf-8?B?QmJCYms4MjFFVmxFY1ZFTWxsdkI1a21RaU1lT3hoTmF6U0FVSnJqTlZsNjRu?=
- =?utf-8?B?T1phZUdSUTVhNjA4YnJKR21ibGV6bTh0Tkw0SEZpNGdLYjNHZHhqdWpqSEJk?=
- =?utf-8?B?T1pjVnpwYUM3b0d6ZFRDV0lITmNEb1ZNU3FHSHRaeHdVTTNQcWJrSi93S2th?=
- =?utf-8?B?ZXNUc1JmYVA2MXBxUWlMTC9QUU45RHQ5RXpRd3JaZjVzZFY0V3VpMWJwRHNU?=
- =?utf-8?B?YlM4dk9NM0tqaGJ3MTI4cWdjbHFxSzE1TVQrb1BjMDlBNWZLNnNnS3ZZY1ln?=
- =?utf-8?B?TU5xbnc2RGtNbkxvckVWKzlkdTZYMkJlNXd3Ny94OC9HTmF3UitIZFY0SzdM?=
- =?utf-8?B?SS9YNG8yVDNFMGwwVC9QUUQxdFZpY1pMcVRuWmFsN1RVUDB2cFIwdjl5Nndk?=
- =?utf-8?B?UVM1MVZvalVleSs1NWlMZGE2blhGeUEvaUJXYWc4d1NsN0hvMTZVK1BwN0VN?=
- =?utf-8?B?WGtPb0NSRHBTSStUUEIvYm9RbWZpU2FHeFlkVFJLRWdncHJ6K2FXdjJaZXBh?=
- =?utf-8?B?cFlMak4xL3d6cWZoSXFMMzIyN0E5UFA0dUl1NDFSczNzeTkxMGxUVExPWU84?=
- =?utf-8?B?ZW9hYjQwNUE0S1ZpNllzeGRDeGQzbEhCUVplRng2azNsZDM5cFpWbVVnNkZD?=
- =?utf-8?B?UGVxT2ZOdXJ2TlVMcjl6ZXcybXBmMmlRY0t3VFJBQ0NYSmRYUnF4aHlLWWZa?=
- =?utf-8?B?dEF6eW8zZGV6eXVmQ3VVTEFsUUhIS09UNFNHbEtMMVNLYWFVUnZxdWZpZ3Ir?=
- =?utf-8?B?U3QzRU4reFJQVnJoNEQ0T3QyQURuaUtLSUF0S1puTTZ4eElZMk9nMmxleDkr?=
- =?utf-8?B?TlIwL1NveVJHWHFKRnkxL0E2ZEIxK1BJb2tPa0lpWGY0Q2U3NzZWZTJpRFVB?=
- =?utf-8?B?ZHpnWVVsOS85emJOdTFyWmVSUFh4cmZIa2d6MkMzRlhRdXk0bkFsL1BQM2ZN?=
- =?utf-8?B?SlE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0b9eb10c-089d-452f-db73-08dd93c30d73
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2025 15:13:31.3341 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: taUVp0dGeUYXVE0KAmuEggHz8Mi/CoN9Do1+s0JCwRagUOA+17t7vT/BY2c5eyT6iD3eHVsp1rr1ERkTFf4n+iCbI6ec7jQXUnerklwp36s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9835
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20250515-bl1-support-v1-1-fd4365542877@ti.com>
+X-B4-Tracking: v=1; b=H4sIAEIFJmgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDU0MT3aQcQ93i0oKC/KISXUtzwxTTFENjy9RkQyWgjoKi1LTMCrBp0bG
+ 1tQBxirt+XQAAAA==
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
+ Yasak <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Bryan
+ Brattlof <bb@ti.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5034; i=bb@ti.com;
+ h=from:subject:message-id; bh=Fi2ZB/ketFLEHl2IJEwpOtgFSYd9G6aEBYb7V9Fyiko=;
+ b=owNCWmg5MUFZJlNZvU9WgQAAaP///3//tv3jq/q7OOv7X/c3w1tv+z71+9L94k8r1X/10v+wA
+ RswIeoMgADJpoNAMgGgAaNAaADQNGhkDEDR6mjRoMjTQDQDBMRpkYANJpptIgNNGhkDTQMTQDQN
+ DQMBMQAMEGTTQPSZNDQADI0aGmTTQGmgHqaGg0NGmm0TIcmmmjamQGhgmmgANNMmhkYhoAAABph
+ GmTAgyaYJgQaaNAAAaGJoAZGgFC1IFsAGa5n8GkDkdlKNqUxKcrQgEgX2saiJjvkfmKHywJ52LR
+ XaDlc8fO1S2fgEVf17QoimVgFyJtHZLVIA68uL/aAOxepwau9lQgIgEk854OhTn5/x7c0OCnu+V
+ qsKi14Rs7nXzJwmURKG6hjL37F7bDAxmPEhT+lL8dwTV44ZO99sF1LEzYti8dwD7pRaOceBJDJV
+ URJho5le5Uih2u2+16HFJFdNTcoE1qKUK2hJ0k4mQJQb9GhlnHpe/8rltuCOWvlaxMZFxSvKcMV
+ /PdMT+WPWPVSfYXqJRC44Hy4+ixhLA5hy78A6rSvgSTQpJTTI0H4FyrBYTaxA06zIDnrPkPoBDh
+ uiCMMXk6MWOwhAFXqtnQD42u/jjmxLPBABDrPBBuaA8P24Bv9qmrQs/EhP4x+YhiBcMDPgDKKBr
+ JU5Fv0O/8XckU4UJC9T1aBA
+X-Developer-Key: i=bb@ti.com; a=openpgp;
+ fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -184,95 +96,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+Some SoCs require a Trusted Firmware-A (TF-A) AP Trusted ROM (BL1) to
+initialize the SoC before U-Boot can run properly. Add an atf-bl1 etype
+so we can properly package BL1 into a final binary
 
-On 5/12/25 2:39 PM, Andre Przywara wrote:
-> On Tue, 22 Apr 2025 16:30:04 +0200
-> Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> 
-> Hi Quentin,
-> 
-> just found this in my draft folder. It's not really related to this
-> patch anymore, but you seemed to be interested, and I am happy to
-> explain some of the specialities for sunxi in U-Boot, since it differs
-> in many things from other platforms.
-> So see below...
-> 
+Signed-off-by: Bryan Brattlof <bb@ti.com>
+---
+ Makefile                      |  1 +
+ tools/binman/entries.rst      | 16 ++++++++++++++++
+ tools/binman/etype/atf_bl1.py | 23 +++++++++++++++++++++++
+ tools/binman/ftest.py         |  7 +++++++
+ tools/binman/test/347_bl1.dts | 13 +++++++++++++
+ 5 files changed, 60 insertions(+)
 
-Thanks for taking the time to share this with me :)
+diff --git a/Makefile b/Makefile
+index f3278e3b01387..4bc907d14b292 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1414,6 +1414,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		-I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
+ 		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
+ 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
++		-a atf-bl1-path=${BL1} \
+ 		-a atf-bl31-path=${BL31} \
+ 		-a tee-os-path=${TEE} \
+ 		-a ti-dm-path=${TI_DM} \
+diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+index 4f05aa0a32362..12a39d070e48d 100644
+--- a/tools/binman/entries.rst
++++ b/tools/binman/entries.rst
+@@ -53,6 +53,22 @@ respecting the `bootph-xxx` tags in the devicetree.
+ 
+ 
+ 
++.. _etype_atf_bl1:
++
++Entry: atf-bl1: AP Trusted ROM (TF-A) BL1 blob
++-----------------------------------------------------
++
++Properties / Entry arguments:
++    - atf-bl1-path: Filename of file to read into entry. This is typically
++      called bl1.bin
++
++This entry holds the AP Trusted ROM firmware typically used by an SoC to
++help initialize the SoC before the SPL or U-Boot is started. See
++https://github.com/TrustedFirmware-A/trusted-firmware-a for more information
++about Boot Loader stage 1 (BL1) or about Trusted Firmware (TF-A)
++
++
++
+ .. _etype_atf_bl31:
+ 
+ Entry: atf-bl31: ARM Trusted Firmware (ATF) BL31 blob
+diff --git a/tools/binman/etype/atf_bl1.py b/tools/binman/etype/atf_bl1.py
+new file mode 100644
+index 0000000000000..7adf10e693c7c
+--- /dev/null
++++ b/tools/binman/etype/atf_bl1.py
+@@ -0,0 +1,23 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2025 Texas Instruments Incorporated
++#
++# Entry-type module for Application Processor Trusted ROM (BL1)
++#
++
++from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
++
++class Entry_atf_bl1(Entry_blob_named_by_arg):
++    """Application Processor (AP) Trusted ROM BL1 blob
++
++    Properties / Entry arguments:
++        - atf-bl1-path: Filename of file to read into entry. This is typically
++            called bl1.bin or bl1.elf
++
++    This entry holds the boot code initialization like exception vectors and
++    processor and platform initialization.
++
++    See https://github.com/TrustedFirmware-A/trusted-firmware-a for more information.
++    """
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node, 'atf-bl1')
++        self.external = True
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index fa17490001488..0c41b346821c9 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -87,6 +87,7 @@ REFCODE_DATA          = b'refcode'
+ FSP_M_DATA            = b'fsp_m'
+ FSP_S_DATA            = b'fsp_s'
+ FSP_T_DATA            = b'fsp_t'
++ATF_BL1_DATA         = b'bl1'
+ ATF_BL31_DATA         = b'bl31'
+ TEE_OS_DATA           = b'this is some tee OS data'
+ TI_DM_DATA            = b'tidmtidm'
+@@ -225,6 +226,7 @@ class TestFunctional(unittest.TestCase):
+ 
+         TestFunctional._MakeInputFile('compress', COMPRESS_DATA)
+         TestFunctional._MakeInputFile('compress_big', COMPRESS_DATA_BIG)
++        TestFunctional._MakeInputFile('bl1.bin', ATF_BL1_DATA)
+         TestFunctional._MakeInputFile('bl31.bin', ATF_BL31_DATA)
+         TestFunctional._MakeInputFile('tee-pager.bin', TEE_OS_DATA)
+         TestFunctional._MakeInputFile('dm.bin', TI_DM_DATA)
+@@ -5573,6 +5575,11 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = self._DoReadFile('225_ti_dm.dts')
+         self.assertEqual(TI_DM_DATA, data[:len(TI_DM_DATA)])
+ 
++    def testPackBl1(self):
++        """test if an image with a bl1 binary can be created"""
++        data = self._DoReadFile('347_bl1.dts')
++        self.assertEqual(ATF_BL1_DATA, data[:len(ATF_BL1_DATA)])
++
+     def testFitFdtOper(self):
+         """Check handling of a specified FIT operation"""
+         entry_args = {
+diff --git a/tools/binman/test/347_bl1.dts b/tools/binman/test/347_bl1.dts
+new file mode 100644
+index 0000000000000..1a10995620450
+--- /dev/null
++++ b/tools/binman/test/347_bl1.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++	binman {
++		atf-bl1 {
++			filename = "bl1.bin";
++		};
++	};
++};
 
-[...]
+---
+base-commit: 1b5e435102aa29a665119430196cb366ce36a01b
+change-id: 20250514-bl1-support-971d5d139ec1
 
->> Jonas has started to support "generic" images for Rockchip boards based
->> on the recommended hardware design specified by Rockchip themselves.
->> Most companies do mostly respect it, so that seems to be working quite
->> nicely.
-> 
-> I wouldn't be aware of a "recommended" board design for Allwinner, but
-> as a matter of fact many companies copy their reference design -
-> probably more out of laziness ;-). This brings the variation down to a
-> manageable level, so we can define default values in Kconfig, so
-> defconfigs stay small.
-> 
+Best regards,
+-- 
+Bryan Brattlof <bb@ti.com>
 
-Yeah I meant reference design and not recommended design :)
-
-I assume it's not necessarily laziness, but also makes it less prone to 
-HW issues and also hit "SW currently doesn't support that despite the 
-datasheet saying the HW does".
-
->> Depending on what exactly you want to support with U-Boot, a DM-less SPL
->> may be difficult. e.g. if you want to support a fallback storage medium
->> for loading u-boot.itb (or proper, don't know what's being used on
->> Allwinner) that differs from the one used to load the SPL by the
->> BootROM, then you possibly cannot rely on the BootROM initializing the
->> PHYs, controllers, pinmuxes and pinconfs.
-> 
-> We do not rely on any of those bits being setup, actually, but we
-> naturally follow the BootROM in its decision process. The BROM stores
-> the boot media used in a byte in SRAM, so we know where we have been
-> loaded from, so can continue loading from there. But this is just a
-> decision between SD card, eMMC, NOR flash and FEL mode (maskROM in RK
-> lingo). We know that SD card boot must have been from MMC0 on the PortF
-> pins, and NOR flash is only SPI0 on PortC, on so on. The mux values and
-> MMIO base addresses are per SoC, so those two values are easily stored
-> in a header or in Kconfig, where we put them *once*, when we add
-> support for a new SoC - and they are also quite stable across
-> generations. So there is really not a strong case for DT here. In fact
-> so far the mux *value* required isn't even stored in the DT, but in a
-> table in the pinctrl driver.
-> 
-
-I meant if for example U-Boot proper stored on the eMMC (when the BROM 
-loads SPL from eMMC) may be corrupted, and U-Boot should be able to try 
-loading from other storage media, e.g. SD or SPI-NOR. If you don't have 
-DT, you have to setup the controllers, PHYs, resets, etc... by hand in C 
-files instead. Not very convenient when you have something that is made 
-for that: DT :)
-
-I'm often bringing this topic because I went through the pain of 
-supporting this fallback mechanism on our RK3399 Puma board which has 9 
-booting scenarios (TPL+SPL on eMMC/SD/SPI and U-Boot on eMMC/SD/SPI and 
-you can boot proper from any of the TPL+SPL if the same medium as 
-TPL+SPL somehow is corrupted). It could actually be more if/when there's 
-support for USB loading mainline U-Boot.
-
->> KConfig may be usable for this
->> but that will make things cumbersome to support.
->>
->>> There is tons of work and cleanup to do on the sunxi side, and were
->>> already have quite some backlog, so I want to avoid introducing more
->>> construction sites.
->>
->> Fair, it also doesn't mean that what's currently added cannot be
->> migrated later on :)
-> 
-> Sure, but at the moment we are severely review limited, so unless that
-> changes dramatically, I don't see that happening any time soon.
-> 
-
-"Later on" has no deadline :) It was also not a way to pressure you into 
-doing it (now or later).
-
-Cheers,
-Quentin
