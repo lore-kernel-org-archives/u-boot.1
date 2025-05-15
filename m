@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00DDC2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 23:42:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56544C3ABC9
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 23:42:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7253B806D8;
+	by phobos.denx.de (Postfix) with ESMTP id BA7EB82A59;
 	Fri, 16 May 2025 01:42:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rZ3O0V4K";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZMwn1DlH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F3B182A25; Fri, 16 May 2025 01:42:05 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 604B482A1C; Fri, 16 May 2025 01:42:05 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BFBE81DD6
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 01:42:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E5518277D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 01:42:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72bd5f25ea6so615791a34.1
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:42:02 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-72b7a53ceb6so1099408a34.0
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:42:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747352521; x=1747957321; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747352522; x=1747957322; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XAg6P3lC8mMwjfmgE2N0nwW4l73iQyAOMTc2Xk4yKc8=;
- b=rZ3O0V4K1K4i+3sP7J2CdI5hY4BhtWCLWT55JOgrN0kX6GbXdC4Zb403Lxg/ety4TF
- ZMQmzp15gHvvJdM59ewMkkpZsEjqCC6nemqx/ISjMwRRVj2HLCnj/a2W5A2Em2qHIU7j
- qnNNbnbgbpiZe+dxGaspx6eZWxM4yz2cdrqUw=
+ bh=e/K0R+VcFhcZmxNmYPD72Zf3CPYA/pQ5fjyxnPjIix4=;
+ b=ZMwn1DlHssplUyPnUlmswN/O23+0/PUGRqUEQF1OReQZxY3nURfjNl3ePmVpiCeiyr
+ L3ZEuaRl2aeI5kGruQtkLjb6umRwPfTEIEU2GUYfLcqpSkg3s+ZG7zjY0Q2oweE/dfib
+ UkzXdit5PZOFF/12UloXjT/CE0Z7AgqSCyUpM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747352521; x=1747957321;
+ d=1e100.net; s=20230601; t=1747352522; x=1747957322;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XAg6P3lC8mMwjfmgE2N0nwW4l73iQyAOMTc2Xk4yKc8=;
- b=jG6H2HiItLWxL7+dycIn+7YI4WMhl1eIRacXuHCFueBR58uOi5l+TDsh5hWWMYio32
- pZ1hqrcxjE5M+uikJ5V36m+6HvWDDUb8Z4LIYniXPqorpZSjmd9A75nAMxkCJSYq04ux
- pOIdOjKG6BkLhg2AsahzgxD3gGnnCccDTqPs9Pn79h2TOnNgY0/adwS8ZKacQwymwgkq
- khGbUMd7IVbpIORrO4K0P9yW/RMKOfsPafEv/J8pgLzWXb7oupo0RD+3e0NxAWgV3mjC
- o9a5EIcGA37HfFpBSgNPPlm9XaElv7TxMjsnw9w8JXx17Sfa/6aILzE47p8CGErCmwrJ
- Ng2w==
-X-Gm-Message-State: AOJu0YzLUFbMgSCVrFspFf3hYpv7DX7phd2cztwudbqVkNZ611Y3Gt5E
- tqG5c07xHMehqQ2Ddzpgomlyu0w64nhlH8yvXXwgWYmM1AXXBfTXUe7rDa8Z3HEeBYRMrsmheDD
- EgS1TMZ8=
-X-Gm-Gg: ASbGncsr2gL49wlR+7CDRKe6OYvbLzS6On4izMTyh2Z3xEjakPjJ1YxYhMnT+CR2iGw
- xiz9TJuqBrZrrWjBoTWBPbQHD8edoATZbG16GznItNI53zqrQum4B6zT70ku7P/C3fCWUqocubP
- PoB1ByP4xw2SVMMgdUdOMIQ9pO4Hz8xuJGSAu6CC41pEbF7g7KuGaXwwJ2/nbOg9+GowKeFTubi
- 4DzV5khrHAT+USy5LBNWHSdbcNLjJSFL7LVX6TQxTZ+SiV5/jBOMIkf3PKx2CRbQFeJf+VA/WK3
- WdYmG9bf7m/71wzeucNNwf8NdN7N275hZOUxhqp8YqJPVKwhmx5Cj6CAdbKHhQI8mqvp9F6V09Z
- BPIj8WQ4MxveqJWo=
-X-Google-Smtp-Source: AGHT+IFyTPppSq+gj9Pwp9PwVuDdJywMNIRzUQBP5+wUkvuu5p0Xm7g1Qm/uERusm+p6pmQB/NHUbA==
-X-Received: by 2002:a05:6830:61c4:b0:72b:a020:a2c0 with SMTP id
- 46e09a7af769-734f99582ddmr403202a34.17.1747352521207; 
- Thu, 15 May 2025 16:42:01 -0700 (PDT)
+ bh=e/K0R+VcFhcZmxNmYPD72Zf3CPYA/pQ5fjyxnPjIix4=;
+ b=M7TE6LOrZaK46XFY6QZZzhm6QC5Lal4rZ8bfvqTNn/qRVtb8XHz5nz8ENWdIWj5sl3
+ pPb/9K9Xb2Y8t1XZA8hkKrIXjVpybXEysAu/fLFw5oslxIRHWC6gctXWAUJsdtzpBJwl
+ VKoRUBT5ysuN+Dg+JIiervHEIIjYAcWaZv7pdS23UonxOHwnUZ2AJIEA5l58zwDzkJD+
+ nRMiJXZPSzIZCwOgE9ZlWOO5XY62Ag/Kb7gacR89ALQu8jBcgdaenFyT8OF35OH1cR/O
+ p1pSP7BrlVof7h+PQtk76xnsKYlGrjHCam/ZzaNJ7nC+cO4FWHnfdRnDK+ZI38VRVMXE
+ wZSg==
+X-Gm-Message-State: AOJu0Yw1VfeWdk1ZptYQPhNdb5Kjw7P2rqt/eALe2omBnuD6zQ4PaFn3
+ sDzTTeGm3/+2930T6FBKk0xMOgq/QZQtkDvlUqwjYeMc7k5y2vzYLW45I6TxyoQaS3GTaNSzVDv
+ xQ6rqnJc=
+X-Gm-Gg: ASbGncs3anWfZqNITaUloeHj1DxXiAcm8YLT3++Z0sPgoVjCmi+4j8+7Zdvsa2LSqgo
+ 4yPWqMnK85Exn9uovW+RpvR3Zyc18TO4A74xDLjoSSqRragUj9u02Qbp80sglDzF8CANv32kaJM
+ PilsZkA6bfrqNXootLuAuGvjurGZ18U5PcTXBt6T118JalV9y6MNw52pC2oCcbGEXZGfwB7DrIz
+ KYt49NGyRlKnOK9/VA1q3jDzNMAMlVe+wLRHfy+1EAviPLw1IrfNXBYKAcnOTxjEaM89TxlM6//
+ eRgDCN1TOeEiCvrbgBhMPZQNtuKua+AWOU+SRiLllu7t2j/DqoVDfkijTQAIsXbeTsYikQVvAfX
+ CEU+gpbrGxwLV3IM=
+X-Google-Smtp-Source: AGHT+IFs9lyH6jXUhHgPEkm4g+c5simn912invFHGlC8wB/cpyB3Xrl3Z2paQAoU9ScBCMHmtItFNg==
+X-Received: by 2002:a05:6830:631c:b0:727:2731:d5e5 with SMTP id
+ 46e09a7af769-734ec7bff52mr3593844a34.12.1747352522078; 
+ Thu, 15 May 2025 16:42:02 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6b3a9b3sm147559a34.52.2025.05.15.16.42.00
+ 46e09a7af769-734f6b3a9b3sm147559a34.52.2025.05.15.16.42.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 16:42:00 -0700 (PDT)
+ Thu, 15 May 2025 16:42:01 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 02/22] congatec: Include env.h to permit reading the
+Subject: [PATCH v3 03/22] dhelectronics: Include env.h to permit reading the
  environment
-Date: Thu, 15 May 2025 17:31:31 -0600
-Message-ID: <20250515234154.1859366-3-trini@konsulko.com>
+Date: Thu, 15 May 2025 17:31:32 -0600
+Message-ID: <20250515234154.1859366-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250515234154.1859366-1-trini@konsulko.com>
 References: <20250514225002.15361-1-trini@konsulko.com>
@@ -103,26 +103,25 @@ This file reads from the environment but does not include the correct
 header. Update it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v3:
-- Keep config.h, update commit message - trini
+- None
 ---
- board/congatec/cgtqmx8/cgtqmx8.c | 1 +
+ board/dhelectronics/common/dh_common.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/board/congatec/cgtqmx8/cgtqmx8.c b/board/congatec/cgtqmx8/cgtqmx8.c
-index 054e4e10867a..03be02a2884f 100644
---- a/board/congatec/cgtqmx8/cgtqmx8.c
-+++ b/board/congatec/cgtqmx8/cgtqmx8.c
-@@ -4,6 +4,7 @@
-  * Copyright (C) 2019 Oliver Graute <oliver.graute@kococonnector.com>
+diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
+index 71010803f555..8c052c45007a 100644
+--- a/board/dhelectronics/common/dh_common.c
++++ b/board/dhelectronics/common/dh_common.c
+@@ -5,6 +5,7 @@
   */
- #include <config.h>
+ 
+ #include <dm.h>
 +#include <env.h>
- #include <errno.h>
- #include <linux/libfdt.h>
- #include <fsl_esdhc.h>
+ #include <i2c_eeprom.h>
+ #include <net.h>
+ #include <u-boot/crc.h>
 -- 
 2.43.0
 
