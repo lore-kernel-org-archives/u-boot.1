@@ -4,88 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56E27C2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 20:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F69CC2D0CD
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 20:45:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65D848091A;
-	Thu, 15 May 2025 22:44:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C51FA8091A;
+	Thu, 15 May 2025 22:45:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jxriVXPx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="enHVvYCJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 293728129F; Thu, 15 May 2025 22:44:23 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id ADAE68129F; Thu, 15 May 2025 22:45:45 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EC81806D8
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 22:44:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87257806D8
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 22:45:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-72bb9725de1so537922a34.2
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 13:44:19 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-401e77e5443so1104188b6e.3
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 13:45:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747341858; x=1747946658; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747341942; x=1747946742; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Oldm8Tju1+NV1+hS8R+CDCIIwitj51ON0Hxb9yZAK78=;
- b=jxriVXPxZAOAKiiPHnQSw3rZBu/aY7mQd5P7dw4uj/NxskY1Brb07SK8wFcH/1Qpwi
- FYd46lQon5Ofc14MQNhlP8WPNEKCJ59AxIxvzCLaOcddcIffVF30UDTYhPqgyTo7qA2B
- 1Bhe6ZzYY/rwRcgxdTzJcztdFskPtbF2G5G8c=
+ bh=sliFPfvj5zUKSbhQLN03Gbzvqno+4xkKNqjjLBGMAZA=;
+ b=enHVvYCJqg/XMkS/FbeOaDVC1qbFm6X223zoS1tNCrIvOVnwpUsglD4WZ1wf3IKhwh
+ ak8bvBqP46PH7Y0nMwP/fZQ7ns9d/xOWKAVb7fWo4ta0f94cByPCPCAcTKqf1LCQlQAJ
+ 6kxHg+EKQh2qq6LDjl3PkEqidf+0/4CY6OIuU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747341858; x=1747946658;
+ d=1e100.net; s=20230601; t=1747341942; x=1747946742;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Oldm8Tju1+NV1+hS8R+CDCIIwitj51ON0Hxb9yZAK78=;
- b=dobzk3N4PHI+rPwmLfES/spfoDbdEtvI4fXrNKLHtg2p85WejSlddGuZWZn/YpEGYt
- lYF8nTpYQvSWl4Y/dnQ6khkdeyBqVf0FgUFekwuOEnkcM3lZ2b5YE3FoGQSMtePt97Me
- TzmsDvg9XDvmvHn4DYXWyK9l1wHW5fQft57nS8VOE1wXHYTd3seFjRUKjgiME+u4UqOS
- K9aoeStqXxaKolh/+YwbHIDh9PYNkPbdMbdLMtSk8QcLaCV5YWhokQIh+kMnuyf4WhPY
- YCgFVfjosqsRHGEwf9sF4smvntCuflYfj+xCKPvdXODScAUVzAXJ+fB9FCuG7PofMm0E
- cgPQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKQysBzdT3bmrSm2l/qmp/FlPq6h6pBurZFi3ViSHJgjL3jKvwfAJtFX9bA++nsQOMkRxONtA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJIHJzgyNSBNz4L8VrAcGAaA8rMTo0NmwKDdFkm2hNN39c9+CQ
- OskBI1ect8Uu7WNEmnqofjsWd05xNh2tQHdJ2plGhd4vHgO40y5XJRcz9f1QzY7185s=
-X-Gm-Gg: ASbGnctRHEWwqbxRspjZFDz2PLdkXqGv9JQmN+e6itctDi5aqfCgjPttLAY7kbZm7Bb
- 3cZ42rEgR+OJgcd7QVi2s0fk1fqI4t8dcgjIO2ziUvzKgIO2cXrqRPgvPw7+A2w/+o3rEtIQu4a
- epse7U+0mXZ3E+2Id31w8thZI8439pNSRkaPHNDvXRsKD95XlWvJSBtH7q0/1WOlFvXweCGuOkO
- En/MeIqKvs6TMT7lLcC8VHnRF3Vswnx0nJFRKRMbaHm454knuZaZsZ8m5dE5Tz0Kkqj8YPfyjNO
- KHVOjoIr8Vlz9jLyWDjc7to1bdj5nXHhpKBTwCAF10pPh6FjflBHDrCFKbU8leCIkMF7Kx2OncV
- Tq6Cx0Km8wxuA
-X-Google-Smtp-Source: AGHT+IFax+tpbktphyPK7AWrmAaYSZhhi3ODBlVWZsBt3rF5p+9jru4LgNrB7kWVT5ohe9jbjSrimQ==
-X-Received: by 2002:a05:6830:6805:b0:731:e808:be5f with SMTP id
- 46e09a7af769-734f998f112mr112181a34.28.1747341857994; 
- Thu, 15 May 2025 13:44:17 -0700 (PDT)
+ bh=sliFPfvj5zUKSbhQLN03Gbzvqno+4xkKNqjjLBGMAZA=;
+ b=g6OiW+d4SNa2Pxovj7VBn5xNQisODHoAMP8/pkZO5EcCABlZISU/4F8k4gEph9ggzM
+ ea28++T1AbdYavAPOXKNyVztq6R7Lv1N0Zb0HFK/ylakSx3aMY/TgZegSwfX8rRSGWrb
+ P/jTVvCgWwBOpst8kxjOT6nPKzBGqa5bGJj1IIMxoXRc6U2D3X16QwHIMfdSkCPwBEnZ
+ koVRo8I9w+XE0rdfuGVLfPwM1a7Ts2bRXQExKhaRhclLOvto01XNj9FyOy1bzE2fCioS
+ fcK7H4+OD/KiTYkSxq/HQeeURYxQy8IJJQxQ+rFHUckfcsq+IbxXP+wkIAhS3kb/Py8J
+ Qajg==
+X-Gm-Message-State: AOJu0YyNUh67GfkyrW4OU+oa1wzDrVB5a+ckvco+er/3oqJ0guTTB8QW
+ zg0Xz2QaJal2qp1KyZ+Yc8hgDEolSRkrdOdN5VmPWOnPC9cDh4CqwQoyOLxc/5Y4CTk=
+X-Gm-Gg: ASbGnctHBDlnJH3cO44OlBqFdGkkbKbNoph8eSKkIkMvifsgAIL6dO//kcNyQFuij/d
+ WL4Xn8vHcS9WbgZyXx9uzhQcVAdZgwc3A+vcBlLrIL7z27Qjg6dDmdgbR7Ugb51JNl4vHO7c8yR
+ Al4FpfrkvNHwbYplDNRkVLSyKd3clH+SwgFKovOVRWhLPS/6VQkE7EuutLSMMNB4IBwVmylnz5r
+ UZ1AXJ3CgakcP8Na1aNcKTXSEF2UOrbMGw9NFyj3xVJM6t883qwAYLgVgyS4UZKAXdTCkEF1N5e
+ sT7HCJWxhxX1hKHYtxNOeDAZQ5jZzBL8z7Zyj5REBISPg759nNbl1scTSWCw16pWrIt0j4mixyN
+ xp0anQtXm9flt
+X-Google-Smtp-Source: AGHT+IEYJ6He2XPS2JYBpzzhcDRvheWvugkKz7kvSHSIZxl9fnyWu2F5UUXRzy7FsehYjyEvq3UaZw==
+X-Received: by 2002:a05:6808:1649:b0:401:e949:6374 with SMTP id
+ 5614622812f47-404d86e648dmr827331b6e.16.1747341942189; 
+ Thu, 15 May 2025 13:45:42 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6a4b1d1sm101254a34.10.2025.05.15.13.44.17
+ 5614622812f47-404d9805ed4sm73835b6e.24.2025.05.15.13.45.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 13:44:17 -0700 (PDT)
-Date: Thu, 15 May 2025 14:44:15 -0600
+ Thu, 15 May 2025 13:45:41 -0700 (PDT)
+Date: Thu, 15 May 2025 14:45:38 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Richard Weinberger <richard@nod.at>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/6] test: Update fs_helper to support passing in the image
-Message-ID: <20250515204415.GB100073@bill-the-cat>
-References: <20250511141828.2367318-2-sjg@chromium.org>
- <20250511141828.2367318-1-sjg@chromium.org>
- <CAFLszTjf_4E+spiD3FBFvXQbXtrnBxgoF1hCjNsauySom2SgFA@mail.gmail.com>
- <20250515135546.GF603748@bill-the-cat>
- <CAFLszTiOe56kP1i_AGLSZBRvyNOYWHMZXC45Qi0YsrP1rkjYAA@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bill Mills <bill.mills@linaro.org>,
+ Andrew Phelps <andrew.phelps@canonical.com>,
+ =?iso-8859-1?Q?Fran=E7ois?= Ozog <francois.ozog@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: Re: [PATCH v4 17/22] passage: Add a qemu test for ARM
+Message-ID: <20250515204538.GC100073@bill-the-cat>
+References: <20250510134253.1581164-1-sjg@chromium.org>
+ <20250510134253.1581164-12-sjg@chromium.org>
+ <20250514215831.GE603748@bill-the-cat>
+ <CAFLszTjKuPSHovFsoKFBiWTmn_2LSENjNQ0r2bGjBSXQOxJfxQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CFBO6ZitaIghuH0E"
+ protocol="application/pgp-signature"; boundary="rfqKKiEZYa3CedBl"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiOe56kP1i_AGLSZBRvyNOYWHMZXC45Qi0YsrP1rkjYAA@mail.gmail.com>
+In-Reply-To: <CAFLszTjKuPSHovFsoKFBiWTmn_2LSENjNQ0r2bGjBSXQOxJfxQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,94 +109,148 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---CFBO6ZitaIghuH0E
+--rfqKKiEZYa3CedBl
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 15, 2025 at 09:33:18PM +0200, Simon Glass wrote:
+On Thu, May 15, 2025 at 09:26:54PM +0200, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 15 May 2025 at 15:55, Tom Rini <trini@konsulko.com> wrote:
+> On Wed, 14 May 2025 at 23:58, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, May 15, 2025 at 06:51:17AM -0700, Simon Glass wrote:
-> > > This function is useful for other scripts, so add a parameter to spec=
-ify
-> > > the image name, if desired.
-> > >
-> > > Also add a flag to quieten the output of some of the tools, since in
-> > > many cases we only want to see warnings / errors.
+> > On Sat, May 10, 2025 at 03:42:15PM +0200, Simon Glass wrote:
+> >
+> > > Check that the standard passage works on ARM, by setting it up in SPL
+> > > and making sure that it comes through correctly in U-Boot proper.
 > > >
 > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > ---
 > > >
-> > >  test/py/tests/fs_helper.py | 18 +++++++++++++-----
-> > >  1 file changed, 13 insertions(+), 5 deletions(-)
+> > > (no changes since v3)
 > > >
-> > > Applied to sjg/master, thanks!
+> > > Changes in v3:
+> > > - Add conditions to avoid enaling the test on qemu_arm_sbsa
+> > > - Add support for a 64-bit test also
+> > >
+> > > Changes in v2:
+> > > - Add a devicetree for qemu-arm so that qemu_arm_spl can work
+> > >
+> > >  configs/qemu_arm64_spl_defconfig |  5 +++++
+> > >  configs/qemu_arm_spl_defconfig   |  6 ++++++
+> > >  test/py/tests/test_passage.py    | 13 +++++++++++++
+> > >  3 files changed, 24 insertions(+)
+> > >  create mode 100644 test/py/tests/test_passage.py
+> > >
+> > > diff --git a/configs/qemu_arm64_spl_defconfig b/configs/qemu_arm64_sp=
+l_defconfig
+> > > index a9ed47c8d3b..60651f80938 100644
+> > > --- a/configs/qemu_arm64_spl_defconfig
+> > > +++ b/configs/qemu_arm64_spl_defconfig
+> > > @@ -33,6 +33,10 @@ CONFIG_USE_PREBOOT=3Dy
+> > >  # CONFIG_DISPLAY_BOARDINFO is not set
+> > >  CONFIG_PCI_INIT_R=3Dy
+> > >  CONFIG_BLOBLIST=3Dy
+> > > +CONFIG_BLOBLIST_PASSAGE=3Dy
+> > > +CONFIG_BLOBLIST_SIZE=3D0x4000
+> > > +CONFIG_SPL_BLOBLIST_ALLOC=3Dy
+> > > +CONFIG_PASSAGE_IN=3Dy
+> > >  CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=3Dy
+> > >  CONFIG_SPL_NO_BSS_LIMIT=3Dy
+> > >  # CONFIG_SPL_SEPARATE_BSS is not set
+> > > @@ -47,6 +51,7 @@ CONFIG_CMD_EFIDEBUG=3Dy
+> > >  CONFIG_CMD_TPM=3Dy
+> > >  CONFIG_CMD_MTDPARTS=3Dy
+> > >  CONFIG_SPL_OF_CONTROL=3Dy
+> > > +CONFIG_OF_PASSAGE=3Dy
+> > >  CONFIG_OF_BOARD=3Dy
+> > >  CONFIG_ENV_IS_IN_FLASH=3Dy
+> > >  CONFIG_SPL_DM=3Dy
+> > > diff --git a/configs/qemu_arm_spl_defconfig b/configs/qemu_arm_spl_de=
+fconfig
+> > > index 9c4408dc73c..cf8ac703577 100644
+> > > --- a/configs/qemu_arm_spl_defconfig
+> > > +++ b/configs/qemu_arm_spl_defconfig
+> > > @@ -13,6 +13,7 @@ CONFIG_ENV_SECT_SIZE=3D0x40000
+> > >  CONFIG_DEFAULT_DEVICE_TREE=3D"qemu-arm"
+> > >  CONFIG_TARGET_QEMU_ARM_32BIT_SPL=3Dy
+> > >  CONFIG_SPL_SERIAL=3Dy
+> > > +CONFIG_SPL_SYS_MALLOC_F_LEN=3D0x9000
+> > >  CONFIG_SYS_BOOTM_LEN=3D0x4000000
+> > >  CONFIG_SYS_LOAD_ADDR=3D0x40200000
+> > >  CONFIG_DEBUG_UART_BASE=3D0x9000000
+> > > @@ -34,6 +35,10 @@ CONFIG_USE_PREBOOT=3Dy
+> > >  # CONFIG_DISPLAY_BOARDINFO is not set
+> > >  CONFIG_PCI_INIT_R=3Dy
+> > >  CONFIG_BLOBLIST=3Dy
+> > > +CONFIG_BLOBLIST_PASSAGE=3Dy
+> > > +CONFIG_BLOBLIST_SIZE=3D0x4000
+> > > +CONFIG_SPL_BLOBLIST_ALLOC=3Dy
+> > > +CONFIG_PASSAGE_IN=3Dy
+> > >  CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=3Dy
+> > >  CONFIG_SPL_NO_BSS_LIMIT=3Dy
+> > >  CONFIG_CMD_BOOTEFI_SELFTEST=3Dy
+> > > @@ -44,6 +49,7 @@ CONFIG_CMD_PCI=3Dy
+> > >  CONFIG_CMD_TPM=3Dy
+> > >  CONFIG_CMD_MTDPARTS=3Dy
+> > >  CONFIG_SPL_OF_CONTROL=3Dy
+> > > +CONFIG_OF_PASSAGE=3Dy
+> > >  CONFIG_OF_BOARD=3Dy
+> > >  CONFIG_ENV_IS_IN_FLASH=3Dy
+> > >  CONFIG_SPL_DM=3Dy
+> > > diff --git a/test/py/tests/test_passage.py b/test/py/tests/test_passa=
+ge.py
+> > > new file mode 100644
+> > > index 00000000000..4d95287fe55
+> > > --- /dev/null
+> > > +++ b/test/py/tests/test_passage.py
+> > > @@ -0,0 +1,13 @@
+> > > +# SPDX-License-Identifier: GPL-2.0
+> > > +# Copyright 2021 Google LLC
+> > > +
+> > > +import pytest
+> > > +
+> > > +@pytest.mark.buildconfigspec('qemu_manual_dtb')
+> > > +@pytest.mark.buildconfigspec('arm')
+> > > +@pytest.mark.buildconfigspec('of_passage')
+> > > +def test_passage(ubman):
+> > > +    """Test that the standard passage on ARM from SPL to U-Boot work=
+s."""
+> > > +
+> > > +    response =3D ubman.run_command('bdinfo')
+> > > +    assert 'devicetree  =3D passage' in response
 > >
-> > You have been repeatedly asked to not send messages about your personal
-> > tree to the list. Please stop sending these messages (and I hope you
-> > didn't change the patchwork status too, again).
+> > Why is this test QEMU specific? This would be at least as interesting to
+> > run on vexpress_fvp_bloblist and then any other real platform which also
+> > uses this in the future. Since the time to run this test will be
+> > negligible I don't see why it should be omitted elsewhere.
+> >
 >=20
-> We are still not really on the same page here.
+> Yes, I can enable it for that board.
 
-Yes, you keep not following seemingly clear directions. You posted
-something not against master, and that also continued adding things
-which do not belong in the tree, to the tree.
-
-> This series is showing as rejected in patchwork, so I've applied it to
-> my tree and sent an appropriate message
-
-There is no appropriate message to send to the public mailing list for
-your downstream tree, stop doing that. And patchwork reflects mainline,
-not your personal tree.
-
-> While we are in this state of
-> your rejecting my patches, I am not sure what else I can do. I have
-> already renamed the tree, as you requested, so there should be no
-> confusion that this is my tree. If there is still confusion, then
-> perhaps the rename (which took quite a bit of effort) was not
-> effective in resolving your concerns?
-
-Your downstream tree is not a special tree. Others have explained how
-they maintain downstream trees and work on upstreaming changes.
-
-> If you do take a pull request (e.g. for one of the 100+ patches
-> assigned to me in patchwork right now), the patches will then be in
-> your tree, so presumably need to be marked 'accepted' in patchwork.
-> When would be the best time for me to change this status?
-
-The status of patches for mainline in patchwork is pretty easy. I even
-run some helper scripts every tag to update (most) patches that might
-have been missed.
-
-> BTW, I'm really not sure why you have rejected this particular patch.
-> Even if you don't want scripts maintained in your tree, this is really
-> just a small tweak. It will help reduce the delta between our trees.
-
-It was rejected either because it wasn't against mainline, or because it
-contained changes that had already been rejected.
+It's not a per-board enablement, it's dynamic because that's what:
+@pytest.mark.buildconfigspec('of_passage')
+gives us.
 
 --=20
 Tom
 
---CFBO6ZitaIghuH0E
+--rfqKKiEZYa3CedBl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgmUhsACgkQFHw5/5Y0
-tyyNIwv/Z7JVxAe72qLXHwgSeMrw3vguSWYdbnTK2C6IZBsrlRcH3tiseT9/udZE
-op9sd4AoBEk8VwZADGTpHZ2CGQUQctR3y8fguzXRu/lHId5dEUbPjoYdT6ygbFHA
-uXZk29vG+1EGvQ0v9tc6+9wbyN4J6ptvcpIjYl69q3CiBio67KQF/I6ryJLCx19t
-r15DZnatszBlWYsfNSzEnX/eywwA3khIpnF1zd999JR+M02UmpRpCI8f43H4p1lD
-JO4h2qDZqVwQq8/p6ZExhqXw/AGKHJ6MOa2pSDxzHtx6MrSyZlbyS/JaXN4HomO/
-IZqS5TvR7K0GjRVK7eaicnipL2+UHVzJupUADvuq/l3EUAOMwzcG0Bgq0tWdFBVQ
-+uhzLRgjSnP7iDHfxz6oyg2CeT8GEGILePii58RKs66r013zemku2IxafVFgTjXC
-X90/lm0FzSgXpe0DZQCipDXnCFQ9CmPjO8W23GEYLKSkFERcTMvTSACf4RiKNGe7
-mFqLsn/j
-=Lzgk
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgmUnIACgkQFHw5/5Y0
+tyyIrAwAhFluXVKn7oCV6udT4h73HhPqZyNpyZcmAXyQfrEhUOkKPp47114lPpnz
+3EclKoLEtl7Hh7IVuiLreJ4zyzdQ+pkghVjVUeyVW58XgJgBENSj3IrT46Z3kiaM
+bTy1FHGugqfDHECN355z9QXAJ6SMJadUUJtAcF/gfEyUBO3nredKHedJYoUCeYRn
+0M1JH+2rrDSy/kdhDiKKCdu2odEniVwRCbtVZWN06XfsTbLoULPoYL2+t6EKU1sK
+pwS52qFxcA2tz14IESI8x74CBJE6d2iSpZ/3PPtq83brMVklJqpFbpShBipRNMu6
+mKQLP4S7EENd2ODVPb51yuHGFo+ANNGJu+CuNsFDyb2d5csGFOoQEUudQFCC8iEw
+kSpbHvoRhSNNxnoqEgNCDgZ7a3EBsVbIThUIhJWfp3dnuuX872XbB8VV+fYmvxbT
++X2QtiyQ8K5nzdjbulW0h78hA1n8j0Q9g2S+Y4qOKT1L+3wazKN4bqz4zdpUXwba
+ZnK7A7ne
+=IMf7
 -----END PGP SIGNATURE-----
 
---CFBO6ZitaIghuH0E--
+--rfqKKiEZYa3CedBl--
