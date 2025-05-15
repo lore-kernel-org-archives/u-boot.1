@@ -4,97 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B0BC2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 14:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE3AC3ABC9
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 14:35:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47DC982BD7;
-	Thu, 15 May 2025 16:30:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D3B1E82BDA;
+	Thu, 15 May 2025 16:35:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g+dQRJ5C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h0oWrwn3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D590782BD9; Thu, 15 May 2025 16:30:55 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 0E04982BDA; Thu, 15 May 2025 16:35:21 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 456E982BC1
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:30:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07CC282BC1
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:35:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-72a4793d4e2so788761a34.2
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 07:30:51 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6f8ae08e38dso4096146d6.2
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 07:35:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747319450; x=1747924250; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747319716; x=1747924516; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6FwGeMmufxL89wnFBX6JEdc/4NWN+KI4ZrzvKBpY9qU=;
- b=g+dQRJ5CplomE+WgmMqK0FoxbxlK3vinaTvM861JQkmN7xKPYlUom4mtuSqeaoq6BI
- LIG99Zjh8miH4i8W/oXgdcjrEeqZ1HkP9TIz7Bv+xybdH6K4Q/PEWJE4byhY1ZmR9T7k
- gg9GB5uQ3JKdbJFX2zJ6ynfjpFUBOvWAlcwDQ=
+ bh=69KP9FDbXq3+kcEtWA3tIEu1lmHm4O50iJjLUqiuujk=;
+ b=h0oWrwn39evzTCLuyuiAa0M4KCwlzmgZcsp8GcL2l2qoJWGRQiosQm/JtRoToUwRqf
+ ifmL4Bp6KsClQ9ASKt4qMpz0LUgb9+OcIeN2W+m7leD0j9KhKK3gacm3mkwM1mA9ZQ7X
+ 2QwQutIVmf3yQ5kY8NhBR56dbNaHMo7FaUZ9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747319450; x=1747924250;
+ d=1e100.net; s=20230601; t=1747319716; x=1747924516;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6FwGeMmufxL89wnFBX6JEdc/4NWN+KI4ZrzvKBpY9qU=;
- b=vNqVlyM1Z7TSgVP0i8rJv2rdvRMDRC1qy72AiI1ueLEDhpkgLzJCabjOIV3tNXNs1Q
- 0SGDNuG5WIUlMMrLHR88rQmoA5BUanuVWv7QDfQhOqdjSniUYhCXxzltdcFxy1yVG232
- EQWSrkHg3wd35ADH3uIeQ4RwRCAamt5GkcMSNjPn6pE3pza8g7SWYn3hYmACOwLN8qde
- SnfriznVvH7HJzupBcPK8GgAJlmer3JRZgHq2T3Rkp253MoDf4ZK9/vwTi6tfzDtAv+I
- mz5HM5Wq7gmU80bK5oGAJ5wPRl0yc66GFGieK0cJ7KSehv7e6csE0XC3mbLaGM5zeV9Y
- 3ZoQ==
+ bh=69KP9FDbXq3+kcEtWA3tIEu1lmHm4O50iJjLUqiuujk=;
+ b=uvXbkwfDlriDFe1A9lPk+QsOHAyCQU9nTcHDUqYyknzlHaagEoGQ/B0WEDNb9gvOA/
+ bYBu5dlL4tFTfB/4uqffppH5mVhp0b9uZwXKUvL7Q9a6/CT7aYtIzP0U+sL+XLkvKny+
+ rhDrXN/mNzOxwxfe9gIzLZak8ecHZHhgGDl+eEJtp1Avib+YKtGThVHgsdPJqvF3mL+x
+ 2SrH10cCr+kGAAlCnQ9uRSed6vIjTbv9Ixan17q6cV8lI18QXJStpqK9OXQ44jiKHMrC
+ CPQWHDJphEaMN5X9khNb5gBkZLyLi43JYyk+BajrHEf9KCPzzy1Geag48B5GfC3/L28N
+ TFWA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWm+1zRHVwBf+9gUPGrHDDBD86JuwYfIlYbPjUriGMWhM57XMk1GyQdh5o+UO14kqvg/JSgKhU=@lists.denx.de
-X-Gm-Message-State: AOJu0YywI/ttJBMBOlUlYcMx0m8j9iIqDunCGtVtiEMJkX9khNjzoYec
- H3lvpPwPqLyk7WWHbMjeC4thQbIviaFqGDarGGgGhND2iEgk3n8WUt3N80GvEl/7B7hAdsn+hk+
- S9/U=
-X-Gm-Gg: ASbGncuqJ6Iyow/xeHnQ6ojNhKoME1hsvaDiVP7JogbvruFccT6mCWfukk4SNz1G7vG
- uWLZPKrGOp82r1nzCDpD0IskVgXcE5zCk78SXH8BUlPFxxITYqdRYur3v6KUcAwfQTvy6JkG5C8
- LFCdl6FphWzfZQErWaYTlrTWOyL2P+z56HG78a7FvflwDdNAUN6hrWrmFy4btw8RpOaT5x6KSk7
- 7LE1Oe/xbJ7NLMmtzBgaN/NkjiyZny2xPmtFxiAlkHqpIKFsNVZFJGyDHSgsEJ5BGpvRk9Q41O2
- h4xOWwh5KB9EmRdEr2NOLahQ+B4WTIWlqMLLGLZL/rZX8FaMkLVgqYc5DycBv4a/AVkSgGPOLTO
- 8sYYo9lVLofDE
-X-Google-Smtp-Source: AGHT+IGAWs6BWUolWz2IOT+pYHqyYXUiNxxhxtUOdHG1aQG5iD6XG9jiOVPlnycdBdiw3bae45BEBA==
-X-Received: by 2002:a05:6870:47a8:b0:2d4:d07c:7cb6 with SMTP id
- 586e51a60fabf-2e32b057131mr4326759fac.1.1747319439363; 
- Thu, 15 May 2025 07:30:39 -0700 (PDT)
+ AJvYcCVHZEGIkicdRKOs+vo7RyQYTQ5caULFWr26aBKgpOji70w62cfdzjll7fkyERCg9Q5X5Fzyyi4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw96V869p4rISyz3xZMA3J23IzSccbFWuLSAImuEVSJFOlXO0Fl
+ v7QSWzC1TUdMshn6az4a0OCBDpWhGGpJdT2XqzhMKaFHWsQHhYwtuSX7WLNLWq/sPFUuSx3Yx0Y
+ G/EY=
+X-Gm-Gg: ASbGncsT9Vg7+uGJZX7bpWKIWRiHnA3l/nontIeF2Y8MW/7AkUtLi3URV9rbBos2aYd
+ xvKE4ElVAZPs+VfhxXMB8mjlYZ1gPhycurRSjRI4y5YtdFhGjWOPyaNKVrbCLKgkqRqGgcPyoEr
+ oOncXpBdVFj55fxwOx61Ux0d2ab6DIIV7EXrylwFbMhnnvyez3BmYQAHav22JGbLh6ljTsrByq3
+ wtdIb29AKfwWWAfYREaGMHwVwwmTifwK+62/Ta2wvPyhyNITvw6BxcA/o5GLJBn4jKW5qQVEpxn
+ IkzIaojkUbFUGgTv7v7U+MHfkRFYFSD9VWj8HVHwq4FG0ePCDbQXlmuC3kkFkK0cGcnJ2SEjlWs
+ wQiVQXPPddKY+
+X-Google-Smtp-Source: AGHT+IEPCzY9qcxyc3Ke1WCq7AWwIHnf7yj/KQo4dlJCSLaTv52T7sbc6z+vUwTBI2GODTr6K/ANeg==
+X-Received: by 2002:a05:6820:2082:b0:607:e15c:be07 with SMTP id
+ 006d021491bc7-609df23117emr3986251eaf.7.1747319706088; 
+ Thu, 15 May 2025 07:35:06 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2dba06dded9sm3147185fac.14.2025.05.15.07.30.37
+ 006d021491bc7-609ea0d225dsm412291eaf.27.2025.05.15.07.35.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 07:30:38 -0700 (PDT)
-Date: Thu, 15 May 2025 08:30:35 -0600
+ Thu, 15 May 2025 07:35:05 -0700 (PDT)
+Date: Thu, 15 May 2025 08:35:02 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- u-boot@lists.denx.de, michael@amarulasolutions.com,
- linux-amarula@amarulasolutions.com, Anshul Dalal <anshuld@ti.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Trevor Woerner <twoerner@gmail.com>
-Subject: Re: [RFC PATCH 1/3] spl: Kconfig: allow to enable
- SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR for i.MX8M
-Message-ID: <20250515143035.GH603748@bill-the-cat>
-References: <20250515131246.784206-1-dario.binacchi@amarulasolutions.com>
- <20250515131246.784206-2-dario.binacchi@amarulasolutions.com>
- <257158ee-7496-4da2-84c1-6bc74965cde0@cherry.de>
+ u-boot@lists.denx.de, linux-amarula@amarulasolutions.com,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Fabio Estevam <festevam@gmail.com>, Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Paul Geurts <paul.geurts@prodrive-technologies.com>,
+ Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Vitor Soares <vitor.soares@toradex.com>
+Subject: Re: [PATCH] arm: imx: imx8m: soc: fix the macro name
+Message-ID: <20250515143502.GI603748@bill-the-cat>
+References: <20250515100253.730388-1-dario.binacchi@amarulasolutions.com>
+ <58419801-d2c8-49bc-9c0b-ca07e423c950@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8hH4k1yXtN0RRKt+"
+ protocol="application/pgp-signature"; boundary="Knm2EL5H/24/w2jR"
 Content-Disposition: inline
-In-Reply-To: <257158ee-7496-4da2-84c1-6bc74965cde0@cherry.de>
+In-Reply-To: <58419801-d2c8-49bc-9c0b-ca07e423c950@cherry.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,60 +109,82 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8hH4k1yXtN0RRKt+
+--Knm2EL5H/24/w2jR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 15, 2025 at 03:26:18PM +0200, Quentin Schulz wrote:
+On Thu, May 15, 2025 at 01:37:44PM +0200, Quentin Schulz wrote:
 > Hi Dario,
 >=20
-> On 5/15/25 3:12 PM, Dario Binacchi wrote:
-> > Commit 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options") brea=
-ks
-> > the boot of the BSH SMM S2 board. As stated in the commit itself, "Some
-> > boards use this value even though MMC is not enabled in SPL, for example
-> > imx8mn_bsh_smm_s2". The same commit makes SPL_SYS_MMCSD_RAW_MODE depend
-> > on SPL_DM_MMC || SPL_MMC. With SPL_SYS_MMCSD_RAW_MODE unset, it is not
-> > possible to enable SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR, thus breaking
-> > the board's boot process.
+> On 5/15/25 12:02 PM, Dario Binacchi wrote:
+> > From: Michael Trimarchi <michael@amarulasolutions.com>
 > >=20
-> > The patch once again allows SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR to be
-> > selected also for boards that do not use MMC, in this case on the i.MX8M
-> > platform.
+> > The function arch_spl_mmc_get_uboot_raw_sector() was never compiled,
+> > even when the option CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION was
+> > enabled. So rename the macro SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION to
+> > CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION.
 > >=20
+> > Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> >=20
+> > ---
+> >=20
+> >   arch/arm/mach-imx/imx8m/soc.c | 4 ++--
+> >   1 file changed, 2 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/so=
+c.c
+> > index 567e8e9e81a0..806adcf145fa 100644
+> > --- a/arch/arm/mach-imx/imx8m/soc.c
+> > +++ b/arch/arm/mach-imx/imx8m/soc.c
+> > @@ -791,7 +791,7 @@ int boot_mode_getprisec(void)
+> >   #endif
+> >   #if defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MP)
+> > -#ifdef SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> > +#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
 >=20
-> Why would you use SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR if you don't have =
-any
-> MMC? Shouldn't we rather fix the incorrect usage of this variable to be
-> something else (or better guarded?).
+> Maybe a good opportunity to switch to
+>=20
+> #if IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION)
 
-It appears that arch/arm/mach-imx/spl_imx_romapi.c::spl_romapi_get_uboot_ba=
-se()
-will use the value so that we (apparently) go ROM->U-Boot, or at least
-ROM->some series of prior stage loaders->ROM->U-Boot. I'm not sure I
-love overloading the value like this, but I can't say it's wrong.
-Perhaps the help needs to be updated too?
+I honestly don't know if that's more readable, but don't strongly care.
+
+> ?
+>=20
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+>=20
+> I had a random idea but I'm wondering if there's a way we could check all
+> symbols listed in IS_ENABLED/CONFIG_IS_ENABLED and check they actually ex=
+ist
+> in Kconfig somewhere? This would not have caught this one since we were
+> using #ifdef but wondering if it could help with migrations/renaming?
+
+I think that might be something tools/qconfig.py --scan-source prints
+out about, but the output then requires manual investigation. I also
+*think* it missed one set of cases, but I've added a checkpatch.pl
+change to be louder about it.
 
 --=20
 Tom
 
---8hH4k1yXtN0RRKt+
+--Knm2EL5H/24/w2jR
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgl+oQACgkQFHw5/5Y0
-tywIQwv/Y6KalpAI1tbjURx1Sc16G0MH6A/WzUeLXlsOxtrC97Xk9cgZ0wHzBqtx
-80mR3zeW/nwHac3AUeuxfLyuU9qKy8/pTSTu9QX2SI/deqh8Gi777w9pkX18BWyl
-J3tWYZrJt/Lv88vAcBisIsZmAPfPsQorx14FX85PtblJjlx9TafLt4+dB8+Q6toZ
-4KwUPcmA4jREnG+cgevMsHkBqbpLrI0SvBkpS57cyqe9wmc1yTU3xMpJC9EdhNC7
-Y2jsagoP1/pZwI9pOwfgicV/MTvWM0mRmAFryTKyl1pcCfbm6me44ee/i8Jf5yJq
-2IdLtbXdcVcfWz0Rmx8aoqy/x1r+fWdsv1kQ3UFju8GiFDIlCV5X+M+A1HkHF/Jx
-Kb9B7W/C+e0g1d3zAQqJAsZhON1Z6ZqwV+QkMaQGOdKWODc/TEjJedEvb88T4KJP
-ij6T9uICvVF2oqBz93CrwEIbWcWHKZLaZkP8NpVyNtKRN9ul36x3DbO029QQKNiS
-3YaD6UTR
-=csZV
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgl+5YACgkQFHw5/5Y0
+tywsZwv8CucYirJ7SZB5KPOAHHot5NLHUKVnQz0mCmztgD+yL7niU8YXExW0ZlcN
+g4Hm5aI5LTDcyXQza5EXV7ipbZduPj0KxznL78kZblsjJf0Rs/1/dlvBzC0lsY6C
+YNiZq5Zck00xJJrjZKsJXHPLGZMf1cYPXuw6u2ETZgQN+DlZXLg3VbNmOCcMR9pY
+5hIi/oI8sK6+nrNp6EAMzD9yKAWUsdWVdMWSZob0t2FBw/WUephH7oQAPgaihL8Q
+dzUI4WYkgyXYsgMEXNVzbeQu147uqqrpy3yfbJNe+pFKdvja2c69kDM3Yw1kdDTv
+bcPSh+Bc3JbCpxvt7c5g/64bERrV0co5Hn89ERzFiDbGK59C3N4KYxnfiEruXA/p
+DgNStpwqWV91zdwYWoSb7tz7azsGrKxh/1UGyDOSJCHxqzjUvy6rrbW15/MpqmEi
+RVWLFAVEAB4GbeCj+Ga4mRzSMi+P17/8kR8B420mQdIul1bhXai8YJBFf8UKh/nb
+TQUIn9Wx
+=8Gmg
 -----END PGP SIGNATURE-----
 
---8hH4k1yXtN0RRKt+--
+--Knm2EL5H/24/w2jR--
