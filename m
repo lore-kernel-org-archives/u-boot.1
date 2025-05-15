@@ -4,78 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4356DC2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 19:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6558EC2D0CD
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 19:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8E0082BDA;
-	Thu, 15 May 2025 21:27:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B4F782C87;
+	Thu, 15 May 2025 21:27:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="loXekYjY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D+5wutRl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFEEF82AB2; Thu, 15 May 2025 21:27:16 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id B2B6382C84; Thu, 15 May 2025 21:27:20 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D22458129F
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 21:27:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB22A82C67
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 21:27:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5fbcd9088a7so1382043a12.0
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 12:27:14 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5fd32c133ccso2075900a12.0
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 12:27:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1747337234; x=1747942034; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1747337238; x=1747942038; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BhKSLyqH/pF/ENmB4T58qJ1XiP5qePmgI0h+8kvy/pw=;
- b=loXekYjYQfyJD5KxRQvexCp5nso25R1zE2z15R3J6z5cvqUhVNnokq7mhS7Mu/iFpZ
- 8Tn7W7EQaBNV57+RdLTWj9v757//Q3n8Axy9nqCVDj3wq0GNNQ37PvTYCk5V4goCfI9z
- zVYkL8EzW1A7QWFvWPhsUehDBmTGn2UyJ0PY0=
+ bh=7EZ5oZm0wN7SaJbrrdwSS7MeKAS1XhA1r7w0yKmU34Q=;
+ b=D+5wutRlDSLLOqMmOyoqh2/HYTM9QzK2nhWgcRfB+HKWv9B853IirGK5MVTJwmfQqw
+ 7VYFigac133gf3Z2YRmcSFk2uNE3Bc9imD0RiodHP9LNtUicjCiBCIuX/bO4QJGH7B9m
+ uzlQ2PolrurNZvMr5dvhxlaTVJOXqTyuZ2qmc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747337234; x=1747942034;
+ d=1e100.net; s=20230601; t=1747337238; x=1747942038;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BhKSLyqH/pF/ENmB4T58qJ1XiP5qePmgI0h+8kvy/pw=;
- b=HcwJv481b7wM40/w+eKcuDqhuYbPjgziCq/iezQyv5AM/pe59K39zMrumUekGjGodY
- lUGZiMgaCGh0elpsdDIsoLJCLJiaS5T+aCk9OfrYnk529TTHDtqmMVcUJaEV5GfozsYd
- q87h1T0fMX6nOXfywmm+Je7nP5nqUFnc9GvCSuktly8/Z0+ZAPRSPd8hLC8f6tWFwifq
- ZvMXqHF/Su+geR8ne2KvBmn/BrIwms47u9+UeSkls/HyCUTwuEfaTOFYgzcEaiPtHO/n
- t6iN7K5+Rm8/BWwDcNAp+814krUUTjfpJvkiU6VYVWsQdcwhDzqnIOeabXUPsTv1kt4X
- o1Kg==
-X-Gm-Message-State: AOJu0YwSYUKSPVwUpGov1owht6wRMMUjDmUATwSk8mRPedhHCDZVANQF
- OJEUlY2KGrAzrbtnPTi/rfQZJqKErf94GgDsbzcF63XLMRVQmJz7PwmbCe1Mi8uTg45N89t+Gwg
- mcxnq7wpRkmL8ExxK/4YGpx0XJdfCFZKy5WsuBwE4
-X-Gm-Gg: ASbGncubF7KH86gbwea3JxkNFw9WZaoGvU5Mw2QaahL9dXKlbrFXgO529apwPcDPPXu
- XFFFYilaiPso1F6V1ldAX6ZgQ4C4GauDCBq63QgRE6/L0/RDVoxNi/SeomWQIwrhvn1ja3i0PBw
- oGw4ht5kTNXuEdJfOLsXxO6cpf4tGbjr9nKg==
-X-Google-Smtp-Source: AGHT+IG7frNXXI+vjNRpZP+oVDYS9Bvs7+TX4YfpqmIZPaKFYVacsJWy/8rTaRnuFD1oqqvpGm38HYzuvsgg3AOtO9w=
-X-Received: by 2002:a05:6402:84a:b0:5fc:8d75:4a25 with SMTP id
- 4fb4d7f45d1cf-5ffc745c28bmr4459802a12.7.1747337234284; Thu, 15 May 2025
- 12:27:14 -0700 (PDT)
+ bh=7EZ5oZm0wN7SaJbrrdwSS7MeKAS1XhA1r7w0yKmU34Q=;
+ b=Szjhcwv7ggutwU+eh0etVeJeFkpEWLakjp7Ij92SG6ylzAziWQTzPkyVYxLNxs0gYy
+ eYW9N58m+nmS6GaaedJskuvfv0M0Yf7FsjRtvRIkeo78iH3Ky6frwSxkirFnh7e7mAw9
+ CrgJshJcT9kDXUatY/fBnnHVSVg56iEhc8UEUq1b4sf1JxFaHJSOWY0sz0ezM7SrC+Z5
+ zfs5UgDTUGJBNYnZIKFOutzVua0vc220JursMq9zP1OOLcl8BAOidnVB+CPhBDNdL+Tt
+ OQq+jls54RxABDPgFO9bVrnLmdgvUcVDHX4IctgqNSMXuVjV64SYSHVIHyblcRvdnvR5
+ NE0g==
+X-Gm-Message-State: AOJu0YxCuymLDn1KNAXtEnU6b4xtStS4qjYd+rgxMGJQ2kB9U4XKYfiB
+ W4Hcy7f3eq3BdPV7oZ4se4RMeewgvI7MCMNLD9eBl8X3sUZ3m3U8dk6Ecip6yM4gL01dXIEMjZR
+ OX5CpEK9sX1s+CW9PTiV+PXcj46Q+8y1ZIc7a0A4y
+X-Gm-Gg: ASbGncsG7Wb/zQUAKY9Lt86p2q4lVzzmu2fqQudMDakUNNjSFtmoG2TKWFouoQRn5yD
+ hkaYoTVptHe3sIVGLyQn2ddTbgM8fjLm5bOpdOZOJxpxNzdzWeS7wp09ujEb8HIhvlVWphmCc3Z
+ +OI7HFW1zSwrKXg5xkJBJhS5dubr4b5yTd9w==
+X-Google-Smtp-Source: AGHT+IEGXWCSYAD48C47rDGdAuRoer2lPlZiPeEZfGrnvmc7NMbNG7K+Z4dy9jYge97Sm+w2G06FQExPFexrbY61ZJQ=
+X-Received: by 2002:a05:6402:13cf:b0:5ec:9e6e:c48f with SMTP id
+ 4fb4d7f45d1cf-60090156a2emr475912a12.29.1747337238218; Thu, 15 May 2025
+ 12:27:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250510130642.1575114-1-sjg@chromium.org>
- <20250514215004.GC603748@bill-the-cat>
-In-Reply-To: <20250514215004.GC603748@bill-the-cat>
+References: <20250512161033.146396-1-marek.vasut@mailbox.org>
+In-Reply-To: <20250512161033.146396-1-marek.vasut@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 May 2025 21:26:59 +0200
-X-Gm-Features: AX0GCFu6jN393IbqhCHh8cmFkDMXjYCcIb4Kxg2p7c5LK3zFxBTejdlb09LUjz4
-Message-ID: <CAFLszTi+EZQENhvzVfJfwp1E6g3i5_HzdcFOTaTvhnneMONjBQ@mail.gmail.com>
-Subject: Re: [PATCH v3 00/10] ext4: Overflow fixes
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, Uma Shankar <uma.shankar@samsung.com>, 
- =?UTF-8?Q?=C5=81ukasz_Majewski?= <l.majewski@samsung.com>
+Date: Thu, 15 May 2025 21:27:06 +0200
+X-Gm-Features: AX0GCFsLzT6LibdksWKwfEgAgXGk2EX8lWtEQcqV5mFf_byPeyXdWPIgixINZxg
+Message-ID: <CAFLszTjuAXS_3oBaX5EM4SOtt6Xr+UO5r-CEqZ76sFf4gG9tsw@mail.gmail.com>
+Subject: Re: [PATCH] ARM: Align image end to 8 bytes to fit DT alignment
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Sam Edwards <cfsworks@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,57 +86,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marek,
 
-On Wed, 14 May 2025 at 23:50, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 12 May 2025 at 18:11, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
-> On Sat, May 10, 2025 at 03:06:06PM +0200, Simon Glass wrote:
+> Align U-Boot image end to 8 bytes to make sure DT alignment requirement
+> is fulfilled. This fixes a possible failure in fdt_find_separate() in
+> case the U-Boot image is aligned to 4 Bytes and DT is appended at the
+> end at already 8 Byte aligned offset.
 >
-> > This series fixes some potential overflows in the ext4 code with invalid
-> > or malicious filesystems.
-> >
-> > To assist with this and future work, it brings in overflow.h and part of
-> > limits.h from Linux.
-> >
-> > Changes in v3:
-> > - Split out into separate patches for easier review
-> >
-> > Changes in v2:
-> > - Add new patch to bring in linux/limits.h
-> > - Add new patch to bring in linux/overflow.h
-> > - Use Linux macros instead of gcc built-ins
-> >
-> > Simon Glass (10):
-> >   Bring in linux/limits.h
-> >   Bring in linux/overflow.h
-> >   ext4: Avoid expr in declaration in ext4fs_get_bgdtable()
-> >   ext4: Create a var for the number of blocks to allocate
-> >   ext4: Check for overflow of block count
-> >   ext4: Bail out of no_blk_pergdt() if there are no blocks
-> >   ext4: Replace multiplication with an existing variable
-> >   ext4: Set a max limit on block-size in ext4fs_init()
-> >   ext4: Make sure there is at least one sector per block
-> >   ext4: Check for overflow when allocating tables
-> >
-> >  fs/ext4/ext4_write.c     |  25 ++-
-> >  include/limits.h         |   2 +
-> >  include/linux/kernel.h   |  12 --
-> >  include/linux/limits.h   |  21 ++
-> >  include/linux/overflow.h | 443 +++++++++++++++++++++++++++++++++++++++
-> >  5 files changed, 487 insertions(+), 16 deletions(-)
-> >  create mode 100644 include/linux/limits.h
-> >  create mode 100644 include/linux/overflow.h
-> >
-> > --
-> > 2.43.0
-> >
-> > base-commit: c5a631df96de7421d10ee03dceed1b79db213026
-> > branch: sec3
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+> ---
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Sam Edwards <cfsworks@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  arch/arm/cpu/u-boot.lds | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> Since this commit isn't mainline, there's nothing further to do with it.
+> diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+> index 817e7a983ae..b2109e03ce3 100644
+> --- a/arch/arm/cpu/u-boot.lds
+> +++ b/arch/arm/cpu/u-boot.lds
+> @@ -153,14 +153,14 @@ SECTIONS
+>                 __efi_runtime_rel_stop = .;
+>         }
+>
+> -       . = ALIGN(4);
+> +       . = ALIGN(8);
+>         __image_copy_end = .;
+>
+>         /*
+>          * if CONFIG_USE_ARCH_MEMSET is not selected __bss_end - __bss_start
+>          * needs to be a multiple of 4 and we overlay .bss with .rel.dyn
+>          */
+> -       .rel.dyn ALIGN(4) : {
+> +       .rel.dyn ALIGN(8) : {
+>                 __rel_dyn_start = .;
+>                 *(.rel*)
+>                 __rel_dyn_end = .;
+> --
+> 2.47.2
+>
 
-If you'd like to review the series, please do. I just checked again
-and it applies fine to your tree.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Does the same need apply to SPL?
 
 Regards,
 Simon
