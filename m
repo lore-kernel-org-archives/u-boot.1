@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422F2C2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 14:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5372C2D0CD
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 14:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A250682BF2;
-	Thu, 15 May 2025 16:56:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2FC882C57;
+	Thu, 15 May 2025 16:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rQC66Pub";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="oV/12J10";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47A0782C49; Thu, 15 May 2025 16:56:00 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 9247782C0C; Thu, 15 May 2025 16:56:01 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C06982C30
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:55:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F3E782AFC
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:55:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43d2d952eb1so8295875e9.1
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 07:55:58 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43cf06eabdaso10005925e9.2
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 07:55:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1747320957; x=1747925757;
+ d=amarulasolutions.com; s=google; t=1747320955; x=1747925755;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vCeQwed33O8/cupvpVNiSMnnjyWuZD/E8lM3+ypML7M=;
- b=rQC66PubNmR6KJX5utP3gxjHHw6vqUZMYwI/AG4/9Sj4WB2+oFjGAsYIa8iE7zd9v5
- SUfBIm2UyWd0sUzWo52OVULYG+8R6DBZ5oR18cVJ1XHXNscNdZELVFIXq5QXgLjs7hSI
- vgI8lv5nOytB8IXAqjDtWfpkTxyVM/0SAjlqs=
+ bh=p9U0blKGXVXwmaC6hRcFej55AndVbW83uaN+gqIslc0=;
+ b=oV/12J10qPn1rhkpW5uZF/sL3KmGKFFl/1mGAbQEXHH/T5Oy3Tnoo5uHRuFWHCWe51
+ eAsCk5fA+nZgilvGSUbDhbhi2olBlmF2J529O6zi0BzMvYBfK8+B2dFdk9pNkxMSYaYY
+ Hu7Tl7Y8NAhidhcONyWZzTeCzCFTxnuaDZXPY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747320957; x=1747925757;
+ d=1e100.net; s=20230601; t=1747320955; x=1747925755;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vCeQwed33O8/cupvpVNiSMnnjyWuZD/E8lM3+ypML7M=;
- b=WDDLIZyTX90lOCGvZF33yq7GNPdQomzTeO4x2cfr0rO2iKDNKw35KPiJs7eZ52odGb
- e8DK+JpgKNPrNTCcwG3fNTSJXsun7Qe41KOy32K6D3HXwGw8MXHyJe1CH7KLBhzkHLL1
- zJ9YtwG53wZxNBYTBretXcgJg6dWXdLQHa7KQE5HmGrbLLnnlwcNbXE6Wxqgrvd6CBhJ
- FcKzz/K/oAi0Grye0jwdq0KCalusfQ1Rg5UL2Ks1XDJHNXRLR7R0kroa6UHMQzsytApG
- 10DTGLxNVyx6asGF32es0SDR+5iwisIGzoPv6c50xkGhZMdQDRiv8o5TrsAqddMNWd1r
- mTgQ==
-X-Gm-Message-State: AOJu0YzJ/MksbcF+QrTMQXurGiN/XZG94ZG+m3VZa4QwtaJ7CbC5k25P
- dJQ7rOHP4iRLgtOjKKQP/QbrnJZahRh6sO08uQbQjX58WQrwLtPWIW7i5kb9jdZ/CC4Gh/m31yC
- twVc=
-X-Gm-Gg: ASbGnctxkMqUvKULgvcr5cO9BtRbUdfS9UHbjfZsG6wPsZkk/0jaMoHCNbBpCfcdk/5
- HWfR50QRZRPN1TzoETmmM2muA2WZMQtrQhnHFC9A4igUIrdmaQAY9cFgbmu5Mq8NAcG++ryO3Vy
- Bc8hPt36cvfRjkzRweJmRaH21dd1X+RYaoj/sBSGjiONhPB5c1J8lUFZNyZaarCc7BhYzYmO5XT
- oLaZE5fms8+Dlu8vNi9aMZV5Yz0nOKbpx3qyoL9G34jJSoKQSuDtaTAPTFTjJg+LNekfqujISXq
- ZYwtFNDaQistHkI6hnhQ6HGICrhqXBmyuBfEXwQaiJpFbyaboykZT+cUOXCR/kKVPqGwPiWlUFg
- 3im0DCRKOiISynZw3IEOOIgsZaS4lKTALbzjwAvCwqhc=
-X-Google-Smtp-Source: AGHT+IEoPKKzGJvU2UJJq7H/to03yvGkcdZFhpUAC2eSOv03ohhV89+pjgsrH1zhqkzIvPbw6X0Fqg==
-X-Received: by 2002:a05:600c:4ecf:b0:441:d4e8:76c6 with SMTP id
- 5b1f17b1804b1-442f217a414mr90465715e9.30.1747320957570; 
- Thu, 15 May 2025 07:55:57 -0700 (PDT)
+ bh=p9U0blKGXVXwmaC6hRcFej55AndVbW83uaN+gqIslc0=;
+ b=NHbp4ODFWags8Fzvc/NiZg/Wiq2/DT+EOqEFipCW/RcPpEehpXygEyt4PlzOePwzrH
+ pqYvnoXl3L5NwWI71LPRE/g/4lZBdyDT1KsJ35WCyFT8ymyftCgcTMUj41GfZQjZzo66
+ byKBhkttWDZPfy6TSdBgw8aSME6BzZxPqmmll0iTJx+33wkfEGBgs9gMee36S/hegTqA
+ Bx/VxkEr56K9pS6RkUrnrQ4jaY93x2T5CVSC675JG2ScPJbN4Yovk1KGevhiXnrFsiBr
+ zWNu3dWHLJeL7rblfjzkklKABuarj6c9nluLOxIZuuqNHQIRdnVE76GTnZJWvvgGrc/v
+ UQCQ==
+X-Gm-Message-State: AOJu0YxTU+evnpVyBJA0KZ8wM7vFPJGsZBXn8MhiJal2vXj3uTC8vie5
+ 1d4bnDUoy+/Gwr5QOazERoNh8Rmuf/mg3ZFp57DzM8yB2mxEF4RqYZzb7kPe5aksOThH8QGcxay
+ mQEc=
+X-Gm-Gg: ASbGncu1g8kzFI26MvRpikeRaqCTmYRNZVYyqpFKlJKNY3uYXQfVFhXqarNqFaiL99p
+ PGGJBjaeuhqTRcuVavea/igO1/f4gHDxTqIyaVx9rwHRCEmM0zGHILfi8+Bm3JpGtxiNOPIbYdf
+ Mgynsr0jtjIdHCwol1UlBFh07NSsFaPi4L8haEL7Sk6vaOdGEBfi87KPv0vVdUnPKWZ/gfDGbrQ
+ /drQaloQEHFCGJtGQ+T7fjvite3NlofMIEJFjUxHtkydaGWwdr03H3cPnBLNAILrUWFTnDzaGOV
+ JwvY0hbGo3alYWTgLNJJfsLVZQIsVZrDl+PZVC5FRROrD1RR9q/e5iaA94Y+SD5cL1pvIkgr8Lu
+ yPbntGGokWEn0IP8oJFwBF9/pQjgB4WEh4W/xTqAAosA=
+X-Google-Smtp-Source: AGHT+IEPdTjxF2BMF/8prjolCHh/UFoOLCNaKeizY0xL4qnoK02dEJYOp9O/fWduXNQnlCPMjEFawQ==
+X-Received: by 2002:a05:600c:c87:b0:43c:e7ae:4bc9 with SMTP id
+ 5b1f17b1804b1-442f96e48d6mr21895235e9.1.1747320955587; 
+ Thu, 15 May 2025 07:55:55 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.client.m3-hotspots.de
  ([46.189.28.43]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442f3369138sm77030235e9.8.2025.05.15.07.55.56
+ 5b1f17b1804b1-442f3369138sm77030235e9.8.2025.05.15.07.55.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 07:55:57 -0700 (PDT)
+ Thu, 15 May 2025 07:55:54 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: michael@amarulasolutions.com, linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH v2 4/4] serial: mxc: restore booting for imx8mn_bsh_smm_s2
-Date: Thu, 15 May 2025 16:55:37 +0200
-Message-ID: <20250515145541.886857-5-dario.binacchi@amarulasolutions.com>
+Subject: [RFC PATCH v2 2/4] imx: spl_imx_romapi: support raw NAND sector
+Date: Thu, 15 May 2025 16:55:35 +0200
+Message-ID: <20250515145541.886857-3-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250515145541.886857-1-dario.binacchi@amarulasolutions.com>
 References: <20250515145541.886857-1-dario.binacchi@amarulasolutions.com>
@@ -100,64 +102,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit dda454e933c6 ("serial: mxc: Support bulk enabling clocks")
-breaks the booting of the BSH SMM S2 board.
-Restore proper booting of the board even in case of failure of either
-clk_get_bulk() or clk_enable_bulk().
+Commit 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options") breaks
+the boot of the BSH SMM S2 board. As stated in the dropped comment, "Some
+boards use this value even though MMC is not enabled in SPL, for example
+imx8mn_bsh_smm_s2".
 
-Fixes: dda454e933c6 ("serial: mxc: Support bulk enabling clocks")
+Support load of the U-Boot image from raw NAND sector.
+
+Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-
 ---
 
 (no changes since v1)
 
- drivers/serial/serial_mxc.c | 23 ++++++++++++++++-------
- 1 file changed, 16 insertions(+), 7 deletions(-)
+ arch/arm/mach-imx/spl_imx_romapi.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/serial/serial_mxc.c b/drivers/serial/serial_mxc.c
-index 28f4435d01dd..b09a5fe0f7a4 100644
---- a/drivers/serial/serial_mxc.c
-+++ b/drivers/serial/serial_mxc.c
-@@ -310,22 +310,31 @@ int mxc_serial_setbrg(struct udevice *dev, int baudrate)
- 	return 0;
- }
- 
--static int mxc_serial_probe(struct udevice *dev)
-+#if CONFIG_IS_ENABLED(CLK_CCF)
-+static void mxc_serial_enable_clk_bulk(struct udevice *dev)
+diff --git a/arch/arm/mach-imx/spl_imx_romapi.c b/arch/arm/mach-imx/spl_imx_romapi.c
+index 3982f4cca184..b7008df8e35a 100644
+--- a/arch/arm/mach-imx/spl_imx_romapi.c
++++ b/arch/arm/mach-imx/spl_imx_romapi.c
+@@ -35,12 +35,10 @@ ulong __weak spl_romapi_get_uboot_base(u32 image_offset, u32 rom_bt_dev)
  {
- 	struct mxc_serial_plat *plat = dev_get_plat(dev);
--#if CONFIG_IS_ENABLED(CLK_CCF)
- 	int ret;
+ 	u32 sector = 0;
  
- 	ret = clk_get_bulk(dev, &plat->clks);
- 	if (ret)
--		return ret;
-+		return;
- 
--	ret = clk_enable_bulk(&plat->clks);
--	if (ret)
--		return ret;
-+	clk_enable_bulk(&plat->clks);
-+}
-+#else
-+static mxc_serial_enable_clk_bulk(struct udevice *dev)
-+{
-+}
+-	/*
+-	 * Some boards use this value even though MMC is not enabled in SPL, for
+-	 * example imx8mn_bsh_smm_s2
+-	 */
+-#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
++#if IS_ENABLED(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR)
+ 	sector = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
++#elif IS_ENABLED(CONFIG_SPL_NAND_RAW_U_BOOT_USE_SECTOR)
++	sector = CONFIG_SPL_NAND_RAW_U_BOOT_SECTOR;
  #endif
--	_mxc_serial_init(plat->reg, plat->use_dte);
  
-+static int mxc_serial_probe(struct udevice *dev)
-+{
-+	struct mxc_serial_plat *plat = dev_get_plat(dev);
-+
-+	mxc_serial_enable_clk_bulk(dev);
-+
-+	_mxc_serial_init(plat->reg, plat->use_dte);
- 	return 0;
- }
- 
+ 	return image_offset + sector * 512 - 0x8000;
 -- 
 2.43.0
 
