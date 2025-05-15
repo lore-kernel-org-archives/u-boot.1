@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC52C2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 15:58:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D4CC2D0CD
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 15:58:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54D5A82C49;
+	by phobos.denx.de (Postfix) with ESMTP id 9B8A682C79;
 	Thu, 15 May 2025 17:58:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="gk5GRtSh";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="BHtJE9ro";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9B6E82C4D; Thu, 15 May 2025 17:58:14 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 56E5182C75; Thu, 15 May 2025 17:58:16 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13FA082C15
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 17:58:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7ADD782BC1
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 17:58:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5fbfa0a7d2cso1858591a12.1
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 08:58:13 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ad23ec87134so224169966b.2
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 08:58:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747324692; x=1747929492;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747324694; x=1747929494;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5mJeXteBSfy5AijviFM+j9TQlBvYVtCwXBjsdyKF1Kw=;
- b=gk5GRtShozGHbG6ZXWejxskBfwFTLKobd0fa63F27+UgDpzEV2IBT9D3DGShCIpZrF
- Yev/P0Z2Ny49aWcYiUNm7SWBNPORef0w2hsOsFBExsQnSAW7WoxmP8JNI0ZYQLeUdqcj
- NsAgdX7sY/BWgIGqH+f7MtfFEOxUe6dXEirOzP2tW9/dxxSNoodE7KQ+8hMrtOFlSOwy
- /jCL3blzxEr5gQVqIZIKXPLKNEHhOQ2nxMw2kRHH0KcGbjbvm3jTyBhyuHlEeVFZiIsG
- bnKkD7eT1DoYHAXUHvCcdlQDTIm/eSoLF+A3a1NFg4/RzM3YTH4jfu+PnSyAWQ6fk0AK
- r2Gw==
+ :reply-to; bh=VcNSUsootR03eJMNGEAuDjuxaG1fXB5zONncT/XCNNU=;
+ b=BHtJE9roW+sMCWOdi9IFGtE2q2Xd/0trg6g5SO3f6Wi8+cLI8JO3Z9TY/APW3hCnqB
+ hsA9herV0dNPM6VHhz8yJ1gpkEh9Z9RNnmSzJFh98Nbczj5cQF1NQcqX6Jc64OPVqy+n
+ T2VidtQECQ9UKsN/5XzXi+3rT4NhMKEXizyZCQLZ9TGZdL1vhc8NCSRvIlJ4zzct/I5b
+ Mfza5LpMcF/VvmvKPavSHPBNItnLDdl66T4LajWJ8h+rbryTE0iYYTFFYsT4zCx67bJc
+ zcrMLTm1ERKSBR2EKM8p514KNk/lw7NNMnBC0GU81fPZrFCffqQm/tt24n6MwhbzacnB
+ zi0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747324692; x=1747929492;
+ d=1e100.net; s=20230601; t=1747324694; x=1747929494;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5mJeXteBSfy5AijviFM+j9TQlBvYVtCwXBjsdyKF1Kw=;
- b=H3wtaeHDjwAmod1LXrl6wLAQ24vXqiaVSX5UaT0Yz3VyOskwH8HDFnxG9ZsJxCEE2L
- wu0onf6oWH/gP2xS9MVEdlMO6NLQTNLx8ZOnskhVHkwIbw2UaeVmW1PSd2Dt/5EtZG+/
- XXhEQjtSNKU0nTVbRMM6eYdP+yul34D/Trc5HbaJwunFpzpIx1U6yr6YUUzdRDl+DvR4
- bm9vKD07+9fQDwcnQVjkyE0XgS0FI833dPMQEstj7BTNq5pkGAshzbH/6SKS9Pu/mcJq
- TPbi/EDXzr5LR7t4kuplS8CuU7Y1DcF7eMpRxupQqkGt8qv+J9yj+YZxXr92ZcpOBToa
- DWjg==
-X-Gm-Message-State: AOJu0Yyfgdtb+hSYN7O8W3qFpgD44k/wuHpHuMq1618hmBxDS0Q+Hz4G
- /r16wu/LE6+0/p+TZUCZdtwosSzMw+nx+KLVAd5cPQIPDz0zFQRKjtOW3roND4eH5S8=
-X-Gm-Gg: ASbGnctsbKIJFpITkFAa73PjWGCdUKTBY0PUqrFkS+p58xPXIezmyVyWm60eUSd0scr
- v7fwlppdjtiEy+iIgzUktmjgHqeWKkTtO4oRZ7RhjgnAzrQgx4mz8YqOSzesXwx8KxcPETv2nj3
- LK5v/d+hdgRCFgcCQvoNForwkJYGNibwt6yEGOt1rGO6pPppqOnXacj3dAqdq1uL482adpiphH2
- CLWtDVZMVHmgcpo4fYLq/1tTPXNebeKp9Um+4igc3SGRWTvo8ZAKFZ5IRuFHN3XGdQFoJ1Zwv1W
- 2xs7lvbmyYDKKjjqjm2tCqZX6ckcCm2bJW3+3bUzP0M/bl+2uanwHQthzeyg1pFD
-X-Google-Smtp-Source: AGHT+IGeMcr72Uq5QdMLgmO8502mxkb+BzJ7sKyMm3tCu+t+wSGobhB3Bz7l3C9OmZYJ3bkiu3BUCg==
-X-Received: by 2002:a17:906:6a19:b0:ad2:1b0e:bfe5 with SMTP id
- a640c23a62f3a-ad52d443017mr24013566b.7.1747324692452; 
- Thu, 15 May 2025 08:58:12 -0700 (PDT)
+ bh=VcNSUsootR03eJMNGEAuDjuxaG1fXB5zONncT/XCNNU=;
+ b=ZreHKHduFf9iBCGqJk0byKpr0jXXmoDm057QxNTgjC0dGLkXo4QFXbLpAXgktjI9O5
+ ZH3Isamxe9CUEmPitMXCkLQi3bQdYlVHhOpkSZTsGI9HSPdA4QhGaRWSUAm8widTZSDj
+ vRgt5I4ASe39XOFshxrriJNpUGxbVsk58u2MPDrJWprRxpEahO8TMFMpjTHOFzwGznne
+ NwC662dFGegHwURq/p8xvCUMyyKeTcQli47rvD5mfUvlcS/nEfeJLxm6t1W1j5cdCJDk
+ OpsJBMTt2qFK2g85C1VWb09hWtugb0WNfkPNf+mVLI8RPcOWPklNWI8q1kEHrFB1OtCf
+ so9Q==
+X-Gm-Message-State: AOJu0YxEC7VsHpCg4yu5o6KDVgWMmoqa3JsLamyd7yp+yjTjEZzt6Np+
+ ynz6NNWtTbC5B7sCjbpm5C+QO7zykkTXPYxvwV4F3nyDWSEMUgfq+uGgwnsWibU3+T8=
+X-Gm-Gg: ASbGncv1zjvjTVRqc/WuKYlIYVw8h5u9SHSLmVKocJxtS0llkqoqcmTpFZD/xpW/CVZ
+ dTA8rN6974yGmuLwbup6WZ4qAnpWn0Om1hDkm1KCuHmx0XaiXs9yqU3IvbLDy71W5KQWmFsscOn
+ D+GaXoGgVbAD2SkY1FYL3Z8Bxtnf+EOr1Y2ebU8dsv+Dx5HzYNLxteNIehd590xcUmoSzI2bybF
+ F4nyVcfKo4t37tSetUuY5bHVpKoDeZ7hTb4XIVNKiqWcPwR5VAv0dBu0tomvbnt/T5k2dx+W9/b
+ YmEI3E8S3OUHvvwHLRMfeu9It3mQcOig6u1y9j3eA3LU8p9OdatfiQBXxebWeqVO
+X-Google-Smtp-Source: AGHT+IESDMAXlvKgfWiJbZppRL19JTrJHNIqJsxAwaflbVslrEANT5VTlHi/BFU8zJ6sTt3bb+kjNQ==
+X-Received: by 2002:a17:907:9281:b0:ad4:d9c9:c758 with SMTP id
+ a640c23a62f3a-ad52d42a5a9mr24237566b.11.1747324693944; 
+ Thu, 15 May 2025 08:58:13 -0700 (PDT)
 Received: from [127.0.1.1] ([185.72.186.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d271916sm8698266b.69.2025.05.15.08.58.11
+ a640c23a62f3a-ad52d271916sm8698266b.69.2025.05.15.08.58.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 08:58:11 -0700 (PDT)
+ Thu, 15 May 2025 08:58:13 -0700 (PDT)
 From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Date: Thu, 15 May 2025 17:55:44 +0200
-Subject: [PATCH v4 1/5] efi: stub: Define debug uart functions only if
- CONFIG_DEBUG_UART is enabled
+Date: Thu, 15 May 2025 17:55:46 +0200
+Subject: [PATCH v4 3/5] ram: rockchip: Fix dependency of RAM_ROCKCHIP_DEBUG
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250515-silent_console-v4-1-dec6c8391f01@thaumatec.com>
+Message-Id: <20250515-silent_console-v4-3-dec6c8391f01@thaumatec.com>
 References: <20250515-silent_console-v4-0-dec6c8391f01@thaumatec.com>
 In-Reply-To: <20250515-silent_console-v4-0-dec6c8391f01@thaumatec.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -100,35 +99,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Initialize the debug uart only in case CONFIG_DEBUG_UART is
-enabled. The _debug_uart_putc is used internally by debug uart
-functions, so it must be also included inside #ifdef block,
-otherwise it will cause compilation warnings.
+The RAM_ROCKCHIP_DEBUG can be used only if DEBUG_UART is
+available, otherwise it won't have any effect.
 
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
- lib/efi/efi_stub.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/ram/rockchip/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
-index 40fc29d9adf7..5172cd78a7c0 100644
---- a/lib/efi/efi_stub.c
-+++ b/lib/efi/efi_stub.c
-@@ -83,12 +83,14 @@ void puts(const char *str)
- 		putc(*str++);
- }
+diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
+index 67c63ecba047..d707d09c1c8b 100644
+--- a/drivers/ram/rockchip/Kconfig
++++ b/drivers/ram/rockchip/Kconfig
+@@ -15,6 +15,7 @@ if RAM_ROCKCHIP
  
-+#ifdef CONFIG_DEBUG_UART
- static void _debug_uart_putc(int ch)
- {
- 	putc(ch);
- }
- 
- DEBUG_UART_FUNCS
-+#endif
- 
- void *memcpy(void *dest, const void *src, size_t size)
- {
+ config RAM_ROCKCHIP_DEBUG
+ 	bool "Rockchip ram drivers debugging"
++	depends on DEBUG_UART
+ 	default y
+ 	help
+ 	  This enables debugging ram driver API's for the platforms
 
 -- 
 2.43.0
