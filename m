@@ -4,74 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 893B5C2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 09:01:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15DFCC3ABC9
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 10:03:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE49982B19;
-	Thu, 15 May 2025 11:01:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F5D682B31;
+	Thu, 15 May 2025 12:03:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V4LPPffD";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="oE4Kp258";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CC8C82B27; Thu, 15 May 2025 11:01:22 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B2AB82AC1
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 11:01:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 54F91DMG3658687
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 15 May 2025 04:01:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747299673;
- bh=FdOFolahslAzHnC5X0HMszSCT51Cnw1QBhq9LE/b1TI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=V4LPPffDSPkK814NPEPr7C/xbZ9BTY8mPWthtzeF4LDg3U1WGQ3XvFcPBK+x0kLda
- LCNTIRFrIm5fborZ1G7G1Nff6xtc8cKtuRPwJDHEti1hIkSwZDKjyaJ4MJGVp5zRZV
- t2276QNlC4t7IiSfqOaDndf8HEd4tF/W6mVVvom8=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 54F91DFN051092
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 15 May 2025 04:01:13 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 15
- May 2025 04:01:12 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 15 May 2025 04:01:12 -0500
-Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
- [172.24.227.136] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54F91960084876;
- Thu, 15 May 2025 04:01:10 -0500
-Message-ID: <2eadc7f4-e314-4540-9740-9baf5dc9f61a@ti.com>
-Date: Thu, 15 May 2025 14:31:08 +0530
+ id AB0F982B37; Thu, 15 May 2025 12:03:05 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9984D82B2F
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 12:03:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43cfdc2c8c9so3829325e9.2
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 03:03:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1747303383; x=1747908183;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z/SPXq4bsFUheBeAN54TSGhJH0zAFFGQH0BD+eMTKbQ=;
+ b=oE4Kp258sorkRnb1eipDzWFEDzgbywcOklaq1+yFJBLcMC0mj7bHLJs7yJTh62tqQJ
+ ewVw3pYwDQs8srUhm3tIj8Sl3isgPVeuk6jLItSwJgh8E2OfkAVM/00nzBtYPqNd922e
+ teXVJx5Hl6I0i2jNa+3UIpD/kYQbJcjd4mYK4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747303383; x=1747908183;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z/SPXq4bsFUheBeAN54TSGhJH0zAFFGQH0BD+eMTKbQ=;
+ b=LGLv1WgvJK3kFNbciHRtRmjxo96AdtwYsixoZi5xdNUxTI4BppzLR7Cw/mTtSCuM6C
+ +Rx5iIVqQEAT0ETaGjp/tDt6Wf4suzQNo0uF9rlL98i0l03q9HBUgmjAnX6417DybcJc
+ I3Bcbf9tmUli1EsDfiz4vMUS1jDQ5riV1ORGDgpbDczUpPCmtuHzhvlL/muELyc9+6ru
+ s4T3H+mTko/xteBkLUaqkPRiwhzyhx6lC8E83H9HrKmSgFyWlPCMee33uycLIcfMNR/J
+ ztlWGsK62Z3cGaOQoe7CQ6fT2epZrUuK4Mbxm3UzLXYeRoM6ooS4uk7lKiPrBg8XvPGu
+ UrWg==
+X-Gm-Message-State: AOJu0YwC9in3wPK9wu82T8NBwtT6Hy0rlFmnURSWDwpM+ncerL7k6Bjf
+ zhNcgkTvzM+cAbtAG3RlPCIz/QcDg1GEM0gJAkL6fh4NWDI/UR99uGqK5ygcG1PwNudKoL60aNl
+ h81BqEQ==
+X-Gm-Gg: ASbGncvDjBQK5b7hgsL9Q6FRHdGXirSrMp+xE3q6lwchl0vOZaCjlDHSB78aFWnGb+7
+ PXFMeP5hBeX+RjER4K9gtNvit15MsjM33bBMduWwk4Tisw91cIbyJgCrfRNwz5rfN7UOY1Czxz0
+ puQY5rthccVB20G1Ec4ycr7mcMDU0oRtILLy/B6EtF7w8RTOcCpazBf1SLdImJi0qiPkOakWFRk
+ Gz/ojzEbr+XxIPFt62yfZYS3sK6UCIED+TffMNHsVYRK79THq26F2MsjUKnBwJsiQVyYBc9q4FM
+ QksDXYs6po4aLkGPVoFOhrNNwrWC4qmhlqkiyLcQfF6XT+IG+3wcwu0xAIcB9+1BDgcNNgqKhr6
+ +6xW44r/SVjlUReVw+eFVt08Xdxj6a41d5uvltV+5vWA=
+X-Google-Smtp-Source: AGHT+IFEmbOaQ9XSZQmsw3RlsWPfKmjGTcl2vpuBCMhg1k2Z3/GY8d5xoJ4VE28nHMnL1tAy8UI1qQ==
+X-Received: by 2002:a05:600c:1c12:b0:442:c98e:79ab with SMTP id
+ 5b1f17b1804b1-442f20e8159mr65645505e9.9.1747303382719; 
+ Thu, 15 May 2025 03:03:02 -0700 (PDT)
+Received: from dario-ThinkPad-T14s-Gen-2i.client.m3-hotspots.de
+ ([46.189.28.43]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-442f397b680sm64897765e9.40.2025.05.15.03.03.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 May 2025 03:03:02 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Fabio Estevam <festevam@gmail.com>, Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Paul Geurts <paul.geurts@prodrive-technologies.com>,
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Vitor Soares <vitor.soares@toradex.com>
+Subject: [PATCH] arm: imx: imx8m: soc: fix the macro name
+Date: Thu, 15 May 2025 12:02:47 +0200
+Message-ID: <20250515100253.730388-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] tools: binman: control.py: Propagate bootph-*
- properties to supernodes
-To: Quentin Schulz <quentin.schulz@cherry.de>, <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <m-chawdhry@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>
-References: <20250512115028.1783305-1-m-shah@ti.com>
- <20250512115028.1783305-2-m-shah@ti.com>
- <a3940636-92c2-4b7e-abe2-8357580c9f48@cherry.de>
- <f25f3091-43f1-45e0-b5b3-6c35989554cd@ti.com>
- <b95911a4-bb5e-4b36-ba6d-0f57dc0a06e3@cherry.de>
-Content-Language: en-US
-From: Moteen Shah <m-shah@ti.com>
-In-Reply-To: <b95911a4-bb5e-4b36-ba6d-0f57dc0a06e3@cherry.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,157 +103,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Quentin,
+From: Michael Trimarchi <michael@amarulasolutions.com>
 
-On 14/05/25 21:42, Quentin Schulz wrote:
-> Hi Moteen,
->
-> On 5/14/25 8:05 AM, Moteen Shah wrote:
->> Hey Quentin,
->> Thanks for the review.
->>
->> On 13/05/25 16:10, Quentin Schulz wrote:
->>> Hi Moteen,
->>>
->>> On 5/12/25 1:50 PM, Moteen Shah wrote:
->>>> Add a function to scan through all the nodes in the device-tree
->>>> for bootph-* property. If found, propagate it to all of its parent
->>>
->>> It's not scanning for bootph-* properties. It's scanning for two 
->>> specific bootph properties, so try to update the commit log and 
->>> comments so it's not misleading.
->>>
->>
->> I will update the commit message in the revision.
->>
->>> The commit log is lacking information as to why we need to do this, 
->>> what this helps with and why this is specific to bootph-all and 
->>> bootph-some-ram.
->>
->>  > Why this is specific to bootph-all and bootph-some-ram
->>
->> The other ones are handled by fdtgrep as those are for the SPL stage.
->>
->
-> Yup, the issue is that the non-proper stages do not actually read the 
-> bootph nodes as they are stripped by fdtgrep. The DTB for the stage is 
-> of everything relevant to the stage, without the bootph nodes. This is 
-> done to save precious space (instead of having a full DTB with 
-> appropriate bootph nodes, we only keep the bootph nodes and we strip 
-> the bootph properties from them as they are now implied). However, the 
-> proper stage (and specifically the pre-relocation part of the proper 
-> stage) uses the full DTB, with bootph properties. So we need to 
-> propagate them so that pre-relocation works as expected since it'll 
-> check whether bootph-all/bootph-some-ram property is part of the node 
-> before probing the device.
->
-> [...]
->
->>>> +    Args:
->>>> +        node (fdt.Node): Node to propagate the property to
->>>
->>> Specify that all its parents (recursively) will have this property 
->>> propagated to.
->>
->> It is iterative not recursive. How about: "Node and all its parent 
->> nodes above it to propagate the property to iteratively"
->>
->
-> Mmmm, true, I had in mind that recursive also works for defining 
-> "parent of parent" and "parent of parent of parent", etc, but it 
-> really seems the term is specific to recursion, which we don't use here.
->
-> Can suggest something like:
->
-> Node to propagate the property to. Its parents (and their parents, and 
-> so on until the root node) are also propagated the property.
->
-> [...]
->
->>>> +    changed = False
->>>> +    for prop in bootph_prop:
->>>> +        if prop in node.props:
->>>> +            changed |= propagate_bootph(node.parent, prop)
->>>> +
->>>> +    for subnode in node.subnodes:
->>>> +        changed |= scan_and_prop_bootph(subnode)
->>>> +    return changed
->>>> +
->>>
->>> I have a gut feeling this is suboptimal, though simple and easy to 
->>> maintain.
->>> We currently go up to the root node for each and every found bootph- 
->>> {all,some-ram} property. We could simply divide this by half (or 
->>> more if there are more properties to propagate in the future) by 
->>> passing the props to propagate instead of just one. We can keep 
->>> track of which node has propagated the property already and, for its 
->>> children, stop the propagation at that level instead of going up to 
->>> the root node all the time. I'm not sure typical Device Trees are 
->>> deep enough for us to care about that kind of optimization for now, 
->>> especially since it'll be running at build time only?
->>>
->>
->>  > passing the props to propagate instead of just one
->>
->> Since we are only concerned with the post SPL stage with this patch 
->> since the SPL stages are handled by fdtgrep, I am not sure if adding 
->> this optimization would result in gains assuming that bootph-all is 
->> the superset of all bootph-* properties(this patch concerns only with 
->> some- ram and all) and adding anything with bootph-all in the same 
->> node will be redundant?
->>
->
-> Something like: (not tested)
->
-> def propagate_bootph(node, props):
->     changed = False
->     while node:
->         to_write = props - set(node.props)
->         for prop in to_write:
->             node.AddEmptyProp(prop, 0)
->             changed = True
->         node = node.parent
->     return changed
->
-> def scan_and_prop_bootph(node):
->     bootph_prop = {'bootph-all', 'bootph-some-ram'}
->
->     changed = False
->     to_propagate = bootph_prop & set(node.props)
->     if to_propagate:
->         changed |= propagate_bootph(node.parent, to_propagate)
-> [...]
+The function arch_spl_mmc_get_uboot_raw_sector() was never compiled,
+even when the option CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION was
+enabled. So rename the macro SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION to
+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION.
 
-Thanks for the pseudo code, question on this again, can a node have 
-bootph-all and bootph-some-ram together which we would require to 
-propagate together. In my understanding having both of these property in 
-the same node present will be a redundancy, and searching in current 
-tree as well, I found no such examples of both the properties being used 
-in the same node. If in future we are planning to add more bootph* 
-properties in the proper stage(pre-relocation) this change does makes 
-sense. Let me know if I should add this in my next revision.
+Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-Regards,
-Moteen
+---
 
+ arch/arm/mach-imx/imx8m/soc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
->
->>
->>  > stop the propagation at that level instead of going up to the root 
->> node all the time
->>
->> This optimization will surely result in gains of about few 
->> microseconds I would assume, since we are running this on host PC.
->> I am not sure if we require such optimizations in build time. It would 
->
-> require? No :)
->
-> We can optimize later on if it really becomes annoying for build time 
-> but I'm sure there are other places in code where optimizing would be 
-> more beneficial :)
->
-> So no worries about the optimization ;) (also not sure it is 
-> necessarily more optimized what I'm suggesting, just a gut feeling).
->
-> Cheers,
-> Quentin
+diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
+index 567e8e9e81a0..806adcf145fa 100644
+--- a/arch/arm/mach-imx/imx8m/soc.c
++++ b/arch/arm/mach-imx/imx8m/soc.c
+@@ -791,7 +791,7 @@ int boot_mode_getprisec(void)
+ #endif
+ 
+ #if defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MP)
+-#ifdef SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
++#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+ #define IMG_CNTN_SET1_OFFSET	GENMASK(22, 19)
+ unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+ 						unsigned long raw_sect)
+@@ -826,7 +826,7 @@ unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+ 
+ 	return raw_sect;
+ }
+-#endif /* SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION */
++#endif /* CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION */
+ #endif
+ 
+ bool is_usb_boot(void)
+-- 
+2.43.0
+
+base-commit: 1b5e435102aa29a665119430196cb366ce36a01b
+branch: fix-SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
