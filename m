@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2118AC2D0CD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 11:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A129C3ABC9
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 11:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8604082B39;
-	Thu, 15 May 2025 13:38:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D134382B4A;
+	Thu, 15 May 2025 13:38:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wnbSNwj0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="glyeS/+u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAE2B82B54; Thu, 15 May 2025 13:38:50 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 923C082B72; Thu, 15 May 2025 13:38:52 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B7DE82B20
+ by phobos.denx.de (Postfix) with ESMTPS id 3839482B45
  for <u-boot@lists.denx.de>; Thu, 15 May 2025 13:38:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 54FBchpO3433352
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 54FBclS52925267
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 15 May 2025 06:38:43 -0500
+ Thu, 15 May 2025 06:38:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747309123;
- bh=qa1wUxktE7HIKqV2MZc8PGhf/i8weTVjBowD3tcrYoE=;
- h=From:Subject:Date:To:CC;
- b=wnbSNwj0kVDwvfu4Zy9z/YiNgA/HD2LX9EiNa6+545baYpnVMSXvBZ9dCcNq93P03
- 48QVorIx5z9VkiyErkIU3vRBh3c4koAkDM2FsFSMdUjobBTpgVTi+L6nws6CFCwfQf
- jf9J8ZdY+CtyMaNe/uZHZT8cNPcPQ5nJANFzYb14=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 54FBchvf035778
+ s=ti-com-17Q1; t=1747309127;
+ bh=6AIhTNWUXFcgXXUiPz7tmvvyHyx5gfvd5Q1FJKqoqpQ=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=glyeS/+uKDSef7RVd2ecG3jW3tWrVOT/L1SE0bWeRgY/Z90kSDZSzQpfeVpvodqcE
+ wOfLgfC1Pzf2Dg2WXzq6owdaAL5Fqd2rTPyigLpQM5AoUCjVSoXYBV/E6yZMS+0+co
+ qS6gl5kURjVSuKHwbrmfEDBFJEBOoGIn7VgE/WDI=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 54FBclAo067488
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 15 May 2025 06:38:43 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 15 May 2025 06:38:47 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 15
- May 2025 06:38:42 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 06:38:46 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 15 May 2025 06:38:42 -0500
+ Frontend Transport; Thu, 15 May 2025 06:38:46 -0500
 Received: from [127.0.1.1] (uda0497581-hp.dhcp.ti.com [172.24.227.253])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54FBccg6059730;
- Thu, 15 May 2025 06:38:39 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54FBccg7059730;
+ Thu, 15 May 2025 06:38:43 -0500
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [PATCH 0/4] Remove clocks from R5 dtsi for missed boards.
-Date: Thu, 15 May 2025 17:08:33 +0530
-Message-ID: <20250515-b4-upstream-k3-pll-miss-v1-0-e38b89f027b8@ti.com>
+Date: Thu, 15 May 2025 17:08:34 +0530
+Subject: [PATCH 1/4] arm: dts: k3-am625-beagleplay-r5*: Remove clocks from
+ main_timer0
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADnSJWgC/x3MQQqDMBBA0avIrB3IGEO1VxEXRsc6VG3IaCkE7
- 97g8i3+T6AchRWeRYLIX1H57BlUFjAuw/5ilCkbKlM548ihr/EMekQeNnxbDOuKm6jiaKmhh6f
- Wcwu5DpFn+d3nrr+uPyMzgaZpAAAA
-X-Change-ID: 20250515-b4-upstream-k3-pll-miss-c31817b19be9
+Message-ID: <20250515-b4-upstream-k3-pll-miss-v1-1-e38b89f027b8@ti.com>
+References: <20250515-b4-upstream-k3-pll-miss-v1-0-e38b89f027b8@ti.com>
+In-Reply-To: <20250515-b4-upstream-k3-pll-miss-v1-0-e38b89f027b8@ti.com>
 To: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>, Robert Nelson
  <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>, Francesco
  Dolcini <francesco.dolcini@toradex.com>, Garrett Giordano
@@ -72,11 +71,11 @@ CC: <u-boot@lists.denx.de>, Vishal Mahaveer <vishalm@ti.com>, Chandru
  Neha Malcom Francis <n-francis@ti.com>, Manorit Chawdhry
  <m-chawdhry@ti.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1747309118; l=1402;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1747309118; l=1973;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=wjC5CMONciLURHoti15eqRZmaMIfjrjXpM+aTyvAkkA=;
- b=R0pUozYEIELqK+QGi31kyJ8HROGPGEWDaSqMCPOXXPUHNJ3VZ0qHTxj66hJaP3/8yYjxiOFfB
- mlSAol/OSXnCOwZGQoVBl45JA1KWHkxtKe02pslFfAm6UBo/uQiIDK2
+ bh=nVa8+R18/BT6YJ0SHUP66d731r9XRJLyG0K7Fpt7RT4=;
+ b=126eRNNVj8+UDzza6O7mvzjNI7Cdz4OFo83wwyvac8aWFafu4CCswZRiLYxXbd3IpHkmLF/uS
+ YTikXezvcG1DMO7GowJmJTLv23KerFUK2JTO6qKLRwoRZCU/EzxoNwE
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -96,34 +95,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix some of the boards that could be affected by the change done in [0].
+The commit 79d91e77f4c2 ("clk: ti: clk-k3-pll: Add additional robustness
+steps to the PLL sequence") introduced a change which requires the
+main_timer0 to not rely on it's own clocks which anyways was wrong.
 
-I can't test the changes. Please give Tested-by.
+Fix it by removing the clock dependency for it, also while at it, move
+it from u-boot.dtsi to R5 as that is the only entity that should require
+it as DM isn't up.
 
-[0]: https://lore.kernel.org/u-boot/20241121-b4-upstream-pll-fix-v1-0-904f618897a7@ti.com/T/#mecb70b415a364fdf322a94241438db7b5607e92b
-
+Fixes: 5d1aac358f3c ("arm: dts: k3-*-r5: Remove clocks from mcu_timer0")
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
-Manorit Chawdhry (4):
-      arm: dts: k3-am625-beagleplay-r5*: Remove clocks from main_timer0
-      arm: dts: k3-am625-phycore-r5*: Remove clocks from main_timer0
-      arm: dts: k3-am625-verdin-r5*: Remove clocks from main_timer0
-      arm: dts: k3-am62a7-phycore-r5*: Remove clocks from main_timer0
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 8 --------
+ arch/arm/dts/k3-am625-r5-beagleplay.dts      | 8 ++++++++
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi         | 8 --------
- arch/arm/dts/k3-am625-phyboard-lyra-rdk-u-boot.dtsi  | 5 -----
- arch/arm/dts/k3-am625-r5-beagleplay.dts              | 8 ++++++++
- arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts         | 8 ++++++++
- arch/arm/dts/k3-am625-verdin-r5.dts                  | 8 ++++++++
- arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi    | 8 --------
- arch/arm/dts/k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi | 5 -----
- arch/arm/dts/k3-am62a7-r5-phycore-som-2gb.dts        | 9 +++++++++
- 8 files changed, 33 insertions(+), 26 deletions(-)
----
-base-commit: 4c26de2eea6bcf5f27b13da0372d27d767cd38e3
-change-id: 20250515-b4-upstream-k3-pll-miss-c31817b19be9
+diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+index 01b6a8e417ca1016cb68b5add248b10b0bd7857a..2a4f0e4536526af65cd042e17721158be45b9ce0 100644
+--- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+@@ -9,10 +9,6 @@
+ #include "k3-binman.dtsi"
+ 
+ / {
+-	chosen {
+-		tick-timer = &main_timer0;
+-	};
+-
+ 	/* Keep the LEDs on by default to indicate life */
+ 	leds {
+ 		led-0 {
+@@ -37,10 +33,6 @@
+ 	};
+ };
+ 
+-&main_timer0 {
+-	clock-frequency = <25000000>;
+-};
+-
+ &sd_pins_default {
+ 	/* Force to use SDCD card detect pin */
+ 	pinctrl-single,pins = <
+diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am625-r5-beagleplay.dts
+index 9e0a6ed678448534aaa9c985b9369aa78c7815e9..c0c0c0aaa2910304e77cbfa6a1936c1feb6b1444 100644
+--- a/arch/arm/dts/k3-am625-r5-beagleplay.dts
++++ b/arch/arm/dts/k3-am625-r5-beagleplay.dts
+@@ -46,6 +46,14 @@
+ 	};
+ };
+ 
++&main_timer0 {
++	/delete-property/ clocks;
++	/delete-property/ clocks-names;
++	/delete-property/ assigned-clocks;
++	/delete-property/ assigned-clock-parents;
++	clock-frequency = <25000000>;
++};
++
+ &dmsc {
+ 	mboxes= <&secure_proxy_main 0>,
+ 		<&secure_proxy_main 1>,
 
-Best regards,
 -- 
-Manorit Chawdhry <m-chawdhry@ti.com>
+2.34.1
 
