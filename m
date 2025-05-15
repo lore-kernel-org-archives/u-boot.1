@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D8F3C3ABDD
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 19:27:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4356DC2D0CD
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 19:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87E8E82B70;
-	Thu, 15 May 2025 21:27:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8E0082BDA;
+	Thu, 15 May 2025 21:27:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QiAbBrdd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="loXekYjY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E9F682B70; Thu, 15 May 2025 21:27:12 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id BFEEF82AB2; Thu, 15 May 2025 21:27:16 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80AA582AB2
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 21:27:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D22458129F
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 21:27:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5f7ec0e4978so2629068a12.1
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 12:27:10 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5fbcd9088a7so1382043a12.0
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 12:27:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1747337230; x=1747942030; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1747337234; x=1747942034; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BiIafp41NIegEGd6WaXbD63VRSkILZcvF0thHcLXTmc=;
- b=QiAbBrdd/KGcqRqVyLM+tmMZSYU6K8qFypRFgixS8NGQMpLaUXCWYNwtezyGhQ4CVP
- P7gZi30c0zV52Hm8m5aXygSd90KST2ZfguR4Ns1e3KUt6k96w+F6mLHARy82gH+G7dOg
- narfu4VEx3yQip+i+0EaSwgD7iYWWDsX/izgk=
+ bh=BhKSLyqH/pF/ENmB4T58qJ1XiP5qePmgI0h+8kvy/pw=;
+ b=loXekYjYQfyJD5KxRQvexCp5nso25R1zE2z15R3J6z5cvqUhVNnokq7mhS7Mu/iFpZ
+ 8Tn7W7EQaBNV57+RdLTWj9v757//Q3n8Axy9nqCVDj3wq0GNNQ37PvTYCk5V4goCfI9z
+ zVYkL8EzW1A7QWFvWPhsUehDBmTGn2UyJ0PY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747337230; x=1747942030;
+ d=1e100.net; s=20230601; t=1747337234; x=1747942034;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BiIafp41NIegEGd6WaXbD63VRSkILZcvF0thHcLXTmc=;
- b=cX2dXHiFHDzuV9741COgCyz603CiPNjtxLSaRxVLwydwXvdXMs9lDk93OET0urfkfu
- 4fDKyuXj0NzJMnveTI27FnDWmlUVJAJS5C3oIx/jHscED+TFA48Oq3Qwuow8z+mw0iYh
- LSZb+qgRcpeqSjBQRKVulO6N3lntrCngEGj9ojEeKkyypZRZ6L+V829njzcDvawXBiIF
- n2bQKEEAo9pMQ7lmxCDt0f/sximCSYweO4//C6qBs/vOOkgx2rWRwIFtuCpRZfwN5N0G
- KEq4NG9/83D0pIjwYkurG4Yft69EDoVcztMx80aSR+tr36gZ8FRO0WpLIABFgeEm4Lxe
- teVA==
-X-Gm-Message-State: AOJu0YwdpZirN8wsApvD4KLwzRtnUxZumBgHtQbtZ15MOqFgDOfOMSe+
- 7s8WyNcuSwmZYlO5t26tIufmX277eAYiM8wySDe0+JvMVEe6mcLeTA12XsiPN6Rm/2xsecG5n97
- qZ8eg1M2u93HzZ1Ppfw7KoiotHtbGe9ILCjBnYJBm
-X-Gm-Gg: ASbGncsKwgZLFc1iXRA8Nm0qBcE+0PTy+X/W0LuxSheLwAo0dXZnPHF0g9Fcmqw2Jna
- q6zia/AGXeCCa4NlCKRXZjQvi2MfwfYc6QwRZGf7uAb95d3JAK89WUINp+i8PszlLo0+2tHA9rx
- z3pbL5F88ici3A3BzA7YqgBvxXvhTf1G2SNQ==
-X-Google-Smtp-Source: AGHT+IF4vMbM9mCltJKN3GuG/u4wCYvrdActMI6zgqJD99kFKwX1F4u7z/wW23yaR6Iw/nrWvUOP86SMtzZYwNAmyCI=
-X-Received: by 2002:a05:6402:40cf:b0:5fb:f708:2667 with SMTP id
- 4fb4d7f45d1cf-60090125099mr521034a12.33.1747337229848; Thu, 15 May 2025
- 12:27:09 -0700 (PDT)
+ bh=BhKSLyqH/pF/ENmB4T58qJ1XiP5qePmgI0h+8kvy/pw=;
+ b=HcwJv481b7wM40/w+eKcuDqhuYbPjgziCq/iezQyv5AM/pe59K39zMrumUekGjGodY
+ lUGZiMgaCGh0elpsdDIsoLJCLJiaS5T+aCk9OfrYnk529TTHDtqmMVcUJaEV5GfozsYd
+ q87h1T0fMX6nOXfywmm+Je7nP5nqUFnc9GvCSuktly8/Z0+ZAPRSPd8hLC8f6tWFwifq
+ ZvMXqHF/Su+geR8ne2KvBmn/BrIwms47u9+UeSkls/HyCUTwuEfaTOFYgzcEaiPtHO/n
+ t6iN7K5+Rm8/BWwDcNAp+814krUUTjfpJvkiU6VYVWsQdcwhDzqnIOeabXUPsTv1kt4X
+ o1Kg==
+X-Gm-Message-State: AOJu0YwSYUKSPVwUpGov1owht6wRMMUjDmUATwSk8mRPedhHCDZVANQF
+ OJEUlY2KGrAzrbtnPTi/rfQZJqKErf94GgDsbzcF63XLMRVQmJz7PwmbCe1Mi8uTg45N89t+Gwg
+ mcxnq7wpRkmL8ExxK/4YGpx0XJdfCFZKy5WsuBwE4
+X-Gm-Gg: ASbGncubF7KH86gbwea3JxkNFw9WZaoGvU5Mw2QaahL9dXKlbrFXgO529apwPcDPPXu
+ XFFFYilaiPso1F6V1ldAX6ZgQ4C4GauDCBq63QgRE6/L0/RDVoxNi/SeomWQIwrhvn1ja3i0PBw
+ oGw4ht5kTNXuEdJfOLsXxO6cpf4tGbjr9nKg==
+X-Google-Smtp-Source: AGHT+IG7frNXXI+vjNRpZP+oVDYS9Bvs7+TX4YfpqmIZPaKFYVacsJWy/8rTaRnuFD1oqqvpGm38HYzuvsgg3AOtO9w=
+X-Received: by 2002:a05:6402:84a:b0:5fc:8d75:4a25 with SMTP id
+ 4fb4d7f45d1cf-5ffc745c28bmr4459802a12.7.1747337234284; Thu, 15 May 2025
+ 12:27:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250510134253.1581164-1-sjg@chromium.org>
- <20250510134253.1581164-12-sjg@chromium.org>
- <20250514215831.GE603748@bill-the-cat>
-In-Reply-To: <20250514215831.GE603748@bill-the-cat>
+References: <20250510130642.1575114-1-sjg@chromium.org>
+ <20250514215004.GC603748@bill-the-cat>
+In-Reply-To: <20250514215004.GC603748@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 May 2025 21:26:54 +0200
-X-Gm-Features: AX0GCFtUSl34guoUVgyIxDgp5wRFhZqG0ui0vmTugRh8Dwo-mz_IblEElRlTI9c
-Message-ID: <CAFLszTjKuPSHovFsoKFBiWTmn_2LSENjNQ0r2bGjBSXQOxJfxQ@mail.gmail.com>
-Subject: Re: [PATCH v4 17/22] passage: Add a qemu test for ARM
+Date: Thu, 15 May 2025 21:26:59 +0200
+X-Gm-Features: AX0GCFu6jN393IbqhCHh8cmFkDMXjYCcIb4Kxg2p7c5LK3zFxBTejdlb09LUjz4
+Message-ID: <CAFLszTi+EZQENhvzVfJfwp1E6g3i5_HzdcFOTaTvhnneMONjBQ@mail.gmail.com>
+Subject: Re: [PATCH v3 00/10] ext4: Overflow fixes
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bill Mills <bill.mills@linaro.org>, 
- Andrew Phelps <andrew.phelps@canonical.com>,
- =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, Uma Shankar <uma.shankar@samsung.com>, 
+ =?UTF-8?Q?=C5=81ukasz_Majewski?= <l.majewski@samsung.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,112 +95,55 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 14 May 2025 at 23:58, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 14 May 2025 at 23:50, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, May 10, 2025 at 03:42:15PM +0200, Simon Glass wrote:
+> On Sat, May 10, 2025 at 03:06:06PM +0200, Simon Glass wrote:
 >
-> > Check that the standard passage works on ARM, by setting it up in SPL
-> > and making sure that it comes through correctly in U-Boot proper.
+> > This series fixes some potential overflows in the ext4 code with invalid
+> > or malicious filesystems.
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v3)
+> > To assist with this and future work, it brings in overflow.h and part of
+> > limits.h from Linux.
 > >
 > > Changes in v3:
-> > - Add conditions to avoid enaling the test on qemu_arm_sbsa
-> > - Add support for a 64-bit test also
+> > - Split out into separate patches for easier review
 > >
 > > Changes in v2:
-> > - Add a devicetree for qemu-arm so that qemu_arm_spl can work
+> > - Add new patch to bring in linux/limits.h
+> > - Add new patch to bring in linux/overflow.h
+> > - Use Linux macros instead of gcc built-ins
 > >
-> >  configs/qemu_arm64_spl_defconfig |  5 +++++
-> >  configs/qemu_arm_spl_defconfig   |  6 ++++++
-> >  test/py/tests/test_passage.py    | 13 +++++++++++++
-> >  3 files changed, 24 insertions(+)
-> >  create mode 100644 test/py/tests/test_passage.py
+> > Simon Glass (10):
+> >   Bring in linux/limits.h
+> >   Bring in linux/overflow.h
+> >   ext4: Avoid expr in declaration in ext4fs_get_bgdtable()
+> >   ext4: Create a var for the number of blocks to allocate
+> >   ext4: Check for overflow of block count
+> >   ext4: Bail out of no_blk_pergdt() if there are no blocks
+> >   ext4: Replace multiplication with an existing variable
+> >   ext4: Set a max limit on block-size in ext4fs_init()
+> >   ext4: Make sure there is at least one sector per block
+> >   ext4: Check for overflow when allocating tables
 > >
-> > diff --git a/configs/qemu_arm64_spl_defconfig b/configs/qemu_arm64_spl_defconfig
-> > index a9ed47c8d3b..60651f80938 100644
-> > --- a/configs/qemu_arm64_spl_defconfig
-> > +++ b/configs/qemu_arm64_spl_defconfig
-> > @@ -33,6 +33,10 @@ CONFIG_USE_PREBOOT=y
-> >  # CONFIG_DISPLAY_BOARDINFO is not set
-> >  CONFIG_PCI_INIT_R=y
-> >  CONFIG_BLOBLIST=y
-> > +CONFIG_BLOBLIST_PASSAGE=y
-> > +CONFIG_BLOBLIST_SIZE=0x4000
-> > +CONFIG_SPL_BLOBLIST_ALLOC=y
-> > +CONFIG_PASSAGE_IN=y
-> >  CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
-> >  CONFIG_SPL_NO_BSS_LIMIT=y
-> >  # CONFIG_SPL_SEPARATE_BSS is not set
-> > @@ -47,6 +51,7 @@ CONFIG_CMD_EFIDEBUG=y
-> >  CONFIG_CMD_TPM=y
-> >  CONFIG_CMD_MTDPARTS=y
-> >  CONFIG_SPL_OF_CONTROL=y
-> > +CONFIG_OF_PASSAGE=y
-> >  CONFIG_OF_BOARD=y
-> >  CONFIG_ENV_IS_IN_FLASH=y
-> >  CONFIG_SPL_DM=y
-> > diff --git a/configs/qemu_arm_spl_defconfig b/configs/qemu_arm_spl_defconfig
-> > index 9c4408dc73c..cf8ac703577 100644
-> > --- a/configs/qemu_arm_spl_defconfig
-> > +++ b/configs/qemu_arm_spl_defconfig
-> > @@ -13,6 +13,7 @@ CONFIG_ENV_SECT_SIZE=0x40000
-> >  CONFIG_DEFAULT_DEVICE_TREE="qemu-arm"
-> >  CONFIG_TARGET_QEMU_ARM_32BIT_SPL=y
-> >  CONFIG_SPL_SERIAL=y
-> > +CONFIG_SPL_SYS_MALLOC_F_LEN=0x9000
-> >  CONFIG_SYS_BOOTM_LEN=0x4000000
-> >  CONFIG_SYS_LOAD_ADDR=0x40200000
-> >  CONFIG_DEBUG_UART_BASE=0x9000000
-> > @@ -34,6 +35,10 @@ CONFIG_USE_PREBOOT=y
-> >  # CONFIG_DISPLAY_BOARDINFO is not set
-> >  CONFIG_PCI_INIT_R=y
-> >  CONFIG_BLOBLIST=y
-> > +CONFIG_BLOBLIST_PASSAGE=y
-> > +CONFIG_BLOBLIST_SIZE=0x4000
-> > +CONFIG_SPL_BLOBLIST_ALLOC=y
-> > +CONFIG_PASSAGE_IN=y
-> >  CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
-> >  CONFIG_SPL_NO_BSS_LIMIT=y
-> >  CONFIG_CMD_BOOTEFI_SELFTEST=y
-> > @@ -44,6 +49,7 @@ CONFIG_CMD_PCI=y
-> >  CONFIG_CMD_TPM=y
-> >  CONFIG_CMD_MTDPARTS=y
-> >  CONFIG_SPL_OF_CONTROL=y
-> > +CONFIG_OF_PASSAGE=y
-> >  CONFIG_OF_BOARD=y
-> >  CONFIG_ENV_IS_IN_FLASH=y
-> >  CONFIG_SPL_DM=y
-> > diff --git a/test/py/tests/test_passage.py b/test/py/tests/test_passage.py
-> > new file mode 100644
-> > index 00000000000..4d95287fe55
-> > --- /dev/null
-> > +++ b/test/py/tests/test_passage.py
-> > @@ -0,0 +1,13 @@
-> > +# SPDX-License-Identifier: GPL-2.0
-> > +# Copyright 2021 Google LLC
-> > +
-> > +import pytest
-> > +
-> > +@pytest.mark.buildconfigspec('qemu_manual_dtb')
-> > +@pytest.mark.buildconfigspec('arm')
-> > +@pytest.mark.buildconfigspec('of_passage')
-> > +def test_passage(ubman):
-> > +    """Test that the standard passage on ARM from SPL to U-Boot works."""
-> > +
-> > +    response = ubman.run_command('bdinfo')
-> > +    assert 'devicetree  = passage' in response
+> >  fs/ext4/ext4_write.c     |  25 ++-
+> >  include/limits.h         |   2 +
+> >  include/linux/kernel.h   |  12 --
+> >  include/linux/limits.h   |  21 ++
+> >  include/linux/overflow.h | 443 +++++++++++++++++++++++++++++++++++++++
+> >  5 files changed, 487 insertions(+), 16 deletions(-)
+> >  create mode 100644 include/linux/limits.h
+> >  create mode 100644 include/linux/overflow.h
+> >
+> > --
+> > 2.43.0
+> >
+> > base-commit: c5a631df96de7421d10ee03dceed1b79db213026
+> > branch: sec3
 >
-> Why is this test QEMU specific? This would be at least as interesting to
-> run on vexpress_fvp_bloblist and then any other real platform which also
-> uses this in the future. Since the time to run this test will be
-> negligible I don't see why it should be omitted elsewhere.
->
+> Since this commit isn't mainline, there's nothing further to do with it.
 
-Yes, I can enable it for that board.
+If you'd like to review the series, please do. I just checked again
+and it applies fine to your tree.
 
 Regards,
-SImon
+Simon
