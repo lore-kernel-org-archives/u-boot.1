@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA52C3ABC9
-	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 23:43:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E541C2D0CD
+	for <u-boot@archiver.kernel.org>; Thu, 15 May 2025 23:43:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3DAD82AD2;
-	Fri, 16 May 2025 01:42:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48BA382A1C;
+	Fri, 16 May 2025 01:42:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S57i682b";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EdfkaVma";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8CCA82B12; Fri, 16 May 2025 01:42:13 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 5E19982AFD; Fri, 16 May 2025 01:42:16 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A32B680107
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 01:42:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FCD582AFC
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 01:42:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72c14138668so688488a34.2
- for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:42:11 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-72b7a53ceb6so1099484a34.0
+ for <u-boot@lists.denx.de>; Thu, 15 May 2025 16:42:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747352530; x=1747957330; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747352532; x=1747957332; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dqSnf4jMhMwUqLjt+j8xLWtNwDFkuS+cf1yUlcFwfjs=;
- b=S57i682b9jP0qzkYdneuTw1eO+Yjfa6a3D5BzzZOZrocjtG5b80pEx68XgmWbKHlQH
- XLnL2mB98EXcsc6NHnnWLIRxMSUSx6U155S0/e3jQeOhOF/64ebRwzC9BPFYZly+fIGm
- oDo66S9FjocWQ4Tqbg/UvuT7szLFdmXRo3G9I=
+ bh=RrIL40OwQR98JxNxvQCXzrX8YNb4kqhuC7RPo9B3cGU=;
+ b=EdfkaVma11TjJEU63D4wKWA7pFsAaY+j1504zo+Jp7R5pGgWFdTLokjcZNmKQTBeaF
+ wgS/9XyENTIx98qmd3acYFASNgTHx1WrTjQ/QddiD0oJmdHGibT/FcRe4BTQWsL/LCFe
+ AFkmHe3xYUG8r/h6QdKoBwcwFtqD0+pA2zv0w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747352530; x=1747957330;
+ d=1e100.net; s=20230601; t=1747352532; x=1747957332;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dqSnf4jMhMwUqLjt+j8xLWtNwDFkuS+cf1yUlcFwfjs=;
- b=BqGfCEh1G6BENwXtwmBwf027bxHEzznhQb7svWBT6PitGYvC/YU0Ms+AqP+mvad1KN
- I+qxM3vdHD6VYt7zn+Nx3rWCrBCfplcjk51AeubI+GXsYgOq84nbea4E5QD5hoiWBo7J
- +PxXKp3x70YX70T6cHrVDMgBb7fA+9bnG4hMljKXXwLHcwee434W5CLS7MYP3y+e2hJa
- CuolWtttXx+pFNQJW6Qq7v8ZrowAhuofDAp9nKdDY0iNVA5Km2g8Rdk+novtuMxIuU2M
- n3LOyTwEospnffMzBd0R/kE41UGUPvDP3VrZythtMvsFtqP6eGKYTa1nipMAySKqwcNA
- tJVA==
-X-Gm-Message-State: AOJu0YyUWW40CWH9OByQYtwtRMsC5IGdpxsNU9W8eJAsVh4cIp1O92+5
- ZdBOGxJixF1XE9pIvqUN3JjdHI+jlB/MniB1RyTkbARtSNCPnOh+BWGKZ8OalR4BFGaa8qopTSi
- gYDmhcVY=
-X-Gm-Gg: ASbGnctmTCLHbfpxHYjbeF7sPk0/gSUf08Mvi5/tiMrYqAmZj++5kUI2fJDfz+SZiuD
- 1zBmzTvWuQJV30Z4fVmh6pq7+zsNWMzMHG3EiNkM3p3SBgBpSyMzdqEl95ul9Rx5NwzJwbwe4kN
- WQqzJYeSIy2qyt9GZIwFzCaP95qsPQb2KbJ2lUtkVOgSEurgbRSWkSVDHEpCHObw5kApRACT51V
- /F4znf9cMbz/2MWpLN71pzbPpn/EwKqv9zbEccaXk9ZdFrTOWxvsPzDEalczUwPCcxL+sw/4PH4
- R6b6aAqMeys9X+VZDzjFrTwOK1Z1ew5zQ991XDKEYi+TItx7fwkxf39g3flGjN+6EqJEBBKBGE9
- gugQmHBJp5HECSOE=
-X-Google-Smtp-Source: AGHT+IFDpdFhSYjG5l9Mz0q1moMPBa5T+R0yIko25ZEUF2qphQpFXPBd7opNvrD5PQQkSTDZ/5itZw==
-X-Received: by 2002:a05:6830:3c0e:b0:727:345d:3b72 with SMTP id
- 46e09a7af769-734f98adeeemr422615a34.16.1747352530434; 
- Thu, 15 May 2025 16:42:10 -0700 (PDT)
+ bh=RrIL40OwQR98JxNxvQCXzrX8YNb4kqhuC7RPo9B3cGU=;
+ b=C3MDopmNbtMa1EnPQSWM1R/LNfT4vrsjPBQ81EHKRl9PpB6L7JcwUtXZh3DHjPH9es
+ QEJCM9VEQ/cyriul64OYt7zyG6k2ua9vrO3RF5RUnWk0DmXTWSJTms69kJ73epj/U7XH
+ dM2LfJe6QHK/pymh7qET4fhJWFQbOgizRLpWkMv7CCAGbH4Gc8YQoJDPu2j62Ha/dSP/
+ nWzVb1H6tX2OQdU3J+uBgLMeF7UPrHSM1TBN1Bzpevbef26bUOjt3Uyb9apusMqTIDiM
+ OKRx/HlUirnJSSMOw00yWPY50dK5FKTSnirQOa7e3VfVyGi/AgCm1C4PneVkscjNkePK
+ zKVA==
+X-Gm-Message-State: AOJu0YxybKrg4jo+nPtqwcDW+vIQ3iNi1HpjgBl5gepol1S7IHiodwaa
+ RvIcBrOeAiwBr1eFL0Uor2xTXDGG+grHkKW868xP+agKCjWgvHpgtl8Su8fPq6fbnKppFcKMMgB
+ Zq7vuug4=
+X-Gm-Gg: ASbGncvVaGVihSmHKdwSFRF+i1wMML/csozt2Rwd0RECySOI0uNug9KohlVZRjJMS0+
+ 9M58Q5Ct1h2FHGJrYUvEOq8KrMDznJhEhLz6Hpiw0UJxvCvNimV7kMD8Nol0r++rJ334MYwB0w2
+ +eniGqWT3VbWQJ6CCGtJJhIfGt+RRQpFz/xFf92LDCby7X+zT7c8HCpP2o7kTHpIZrxKjprFtXo
+ NqhqNVZiNJmPumi29CfCVdTU0eT33BQfsgjeWo2aNEcsbJ4QDXkoF3rDstQL4chac76t4P2VES1
+ vp2MeQRhAyeJBdjwQhjvG8YPzZILhAblnP1JAldWrzr9j27Shlv8uJaXj7HxdkFBvzrZtPtiKJ7
+ 2EBvkxYejaPfWjnM=
+X-Google-Smtp-Source: AGHT+IG5dG3ZaU+6oKb44lzxQQrsKLr2Fr9qRSCPjQORw8IfLmfH0iriqDPKn9iDeSSXu88rCRpC6A==
+X-Received: by 2002:a05:6830:6513:b0:72b:8f4e:8c67 with SMTP id
+ 46e09a7af769-734f6e64232mr882570a34.13.1747352531837; 
+ Thu, 15 May 2025 16:42:11 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6b3a9b3sm147559a34.52.2025.05.15.16.42.09
+ 46e09a7af769-734f6b3a9b3sm147559a34.52.2025.05.15.16.42.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 May 2025 16:42:09 -0700 (PDT)
+ Thu, 15 May 2025 16:42:11 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Oliver Graute <oliver.graute@kococonnector.com>
-Subject: [PATCH v3 10/22] advantech: Include env.h in imx8qm_dmsse20_a1
-Date: Thu, 15 May 2025 17:31:39 -0600
-Message-ID: <20250515234154.1859366-11-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 11/22] tegra: Include env.h to permit reading the
+ environment
+Date: Thu, 15 May 2025 17:31:40 -0600
+Message-ID: <20250515234154.1859366-12-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250515234154.1859366-1-trini@konsulko.com>
 References: <20250514225002.15361-1-trini@konsulko.com>
@@ -99,30 +99,29 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-This file uses the environment but does not include the header file.
-Update it.
+This file reads from the environment but does not include the correct
+header. Update it.
 
-Acked-by: Oliver Graute <oliver.graute@kococonnector.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 Changes in v3:
 - None
 ---
- board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c | 1 +
+ arch/arm/mach-tegra/dt-setup.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-index 50b35db5f6cf..accd300df04d 100644
---- a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-+++ b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-@@ -4,6 +4,7 @@
-  * Copyright 2019-2023 Kococonnector GmbH
+diff --git a/arch/arm/mach-tegra/dt-setup.c b/arch/arm/mach-tegra/dt-setup.c
+index f4ae602d5239..96044ac78ce4 100644
+--- a/arch/arm/mach-tegra/dt-setup.c
++++ b/arch/arm/mach-tegra/dt-setup.c
+@@ -3,6 +3,7 @@
+  * Copyright (c) 2010-2016, NVIDIA CORPORATION.
   */
  
 +#include <env.h>
- #include <errno.h>
- #include <linux/libfdt.h>
- #include <asm/io.h>
+ #include <fdtdec.h>
+ #include <stdlib.h>
+ #include <asm/arch-tegra/cboot.h>
 -- 
 2.43.0
 
