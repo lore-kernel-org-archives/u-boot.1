@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D0EC3ABD8
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B11C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:42:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE31480079;
-	Fri, 16 May 2025 13:42:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F4A28294C;
+	Fri, 16 May 2025 13:42:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jCAxvdTg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bf3Sjc33";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E35E580107; Fri, 16 May 2025 13:42:01 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id D5FCE8294C; Fri, 16 May 2025 13:42:07 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A07C8006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:41:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B62588006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:42:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfrod286059;
- Fri, 16 May 2025 06:41:53 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfubv298172;
+ Fri, 16 May 2025 06:41:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747395713;
- bh=4IhW0Yl+6oSYLRXw/of/O1DnAMPUdVRqaa8N5nCfDm8=;
- h=From:To:CC:Subject:Date;
- b=jCAxvdTgqXEKEqYMLCBV//ezs2k1/WbZFM53KGqMcwNxvV1ljXSZmNoZHUxTn32hb
- PFa5AGaqv+Rnm2TNdMwqCxzYDzosmuEpptwpxMTXsXHeQNtx2BHI7hH2tVXUDgfrMJ
- UIPO31ZeEQBPSXCC1TWMRajokfJ/Az9vzkt3fE94=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54GBfrH94150536
+ s=ti-com-17Q1; t=1747395716;
+ bh=FZwYds0Yt2mvkF6zVI6Gas2E3onJKfX349MDCFIa524=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=bf3Sjc33m1h+lG2pRkRAXDTwXsGFyIR9O6CXwzefUtEPQ1x1LNehE5kf7fbS8CV6T
+ D1iD9KN47IyMzo7IRJ2W6AoG4cqApM3J2e3/e1CJVmXove9SCUXJUFSdSqfDPwLsg6
+ jctjog3b5SccrzG9pU8dWS9OIGni+akppC3t9PnI=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54GBfu0f3262521
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 16 May 2025 06:41:53 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 16 May 2025 06:41:56 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- May 2025 06:41:52 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 06:41:56 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 May 2025 06:41:52 -0500
+ Frontend Transport; Fri, 16 May 2025 06:41:55 -0500
 Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com
  [172.24.227.136] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfnh7063026;
- Fri, 16 May 2025 06:41:50 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfnh8063026;
+ Fri, 16 May 2025 06:41:53 -0500
 From: Moteen Shah <m-shah@ti.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
  <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
  <vigneshr@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>
-Subject: [PATCH 0/2 v2] Propagate bootph-all and bootph-some-ram property to
- all supernodes
-Date: Fri, 16 May 2025 17:11:46 +0530
-Message-ID: <20250516114148.3862114-1-m-shah@ti.com>
+Subject: [PATCH 1/2 v2] tools: binman: control.py: Propagate
+ bootph-all/bootph-some-ram properties to supernodes
+Date: Fri, 16 May 2025 17:11:47 +0530
+Message-ID: <20250516114148.3862114-2-m-shah@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250516114148.3862114-1-m-shah@ti.com>
+References: <20250516114148.3862114-1-m-shah@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,32 +82,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the U-Boot pre-relocation stage, if the parent node lacks
-bootph-all/bootph-some-ram property and the driver lacks a pre-reloc
-flag, all of its subsequent subnodes gets skipped over from driver
-binding—even if they have a bootph* property.
+As per bootph schema, bootph-* property in child node should be
+implied in their parent, but this feature is not implemented in
+the U-Boot proper stage (before relocation) resulting in devices
+not being bound because of the missing bootph-all or bootph-some-ram
+property in the parent node.
 
-This series addresses the issue by scanning through all the nodes during
-build time and propagating the applicable  property to all of its supernode.
+To mitigate this issue, add a function to scan through all the nodes
+in the device-tree for bootph-all and bootph-some-ram properties. If
+found, propagate it to all of its parent nodes up the hierarchy.
 
-Changes since v1: 
-- Carry reviewed-by from Simon
-- Add a subnode-4 in testcase
-- Change commit message and comments in control.py
+Signed-off-by: Moteen Shah <m-shah@ti.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Link to v1:
-https://lore.kernel.org/u-boot/20250512115028.1783305-1-m-shah@ti.com/
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Moteen Shah (2):
-  tools: binman: control.py: Propagate bootph-all/bootph-some-ram properties to supernodes
-  tools: binman: ftest.py: Add testcase for bootph-* propagation
+---
+ tools/binman/control.py | 54 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
 
- tools/binman/control.py               | 54 +++++++++++++++++++++++++++
- tools/binman/ftest.py                 | 24 ++++++++++++
- tools/binman/test/347_bootph_prop.dts | 21 +++++++++++
- 3 files changed, 99 insertions(+)
- create mode 100644 tools/binman/test/347_bootph_prop.dts
-
+diff --git a/tools/binman/control.py b/tools/binman/control.py
+index 81f61e3e152..dcbc028adcc 100644
+--- a/tools/binman/control.py
++++ b/tools/binman/control.py
+@@ -530,6 +530,57 @@ def _RemoveTemplates(parent):
+     for node in del_nodes:
+         node.Delete()
+ 
++def propagate_prop(node, prop):
++    """Propagate the provided property to all the parent nodes up the hierarchy
++
++    Args:
++        node (fdt.Node): Node and all its parent nodes up to the root to
++            propagate the property.
++        prop (str): Boolean property to propagate
++
++    Return:
++        True if any change was made, else False
++    """
++    changed = False
++    while node:
++        if prop not in node.props:
++            node.AddEmptyProp(prop, 0)
++            changed = True
++        node = node.parent
++    return changed
++
++def scan_and_prop_bootph(node):
++    """Propagate bootph properties from children to parents
++
++    The bootph schema indicates that bootph properties in children should be
++    implied in their parents, all the way up the hierarchy. This is expensive
++    to implement in U-Boot before relocation at runtime, so this function
++    explicitly propagates these bootph properties upwards during build time.
++
++    This is used to set the bootph-all, bootph-some-ram property in the parent
++    node if the respective property is found in any of the parent's subnodes.
++    The other bootph-* properties are associated with the SPL stage and hence
++    handled by fdtgrep.c.
++
++    Args:
++        node (fdt.Node): Node to scan for bootph-all and bootph-some-ram
++            property
++
++    Return:
++        True if any change was made, else False
++
++    """
++    bootph_prop = {'bootph-all', 'bootph-some-ram'}
++
++    changed = False
++    for prop in bootph_prop:
++        if prop in node.props:
++            changed |= propagate_prop(node.parent, prop)
++
++    for subnode in node.subnodes:
++        changed |= scan_and_prop_bootph(subnode)
++    return changed
++
+ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, indir):
+     """Prepare the images to be processed and select the device tree
+ 
+@@ -589,6 +640,9 @@ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, ind
+         fname = tools.get_output_filename('u-boot.dtb.tmpl2')
+         tools.write_file(fname, dtb.GetContents())
+ 
++    if scan_and_prop_bootph(dtb.GetRoot()):
++        dtb.Sync(True)
++
+     images = _ReadImageDesc(node, use_expanded)
+ 
+     if select_images:
 -- 
 2.34.1
 
