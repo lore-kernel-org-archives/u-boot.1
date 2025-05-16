@@ -4,52 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED89C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:41:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76A95C3ABD8
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:42:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7D5A80107;
-	Fri, 16 May 2025 18:41:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 10F4980107;
+	Fri, 16 May 2025 18:42:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1747413693;
-	bh=W4qnaFdS0Hd8Hyj33BJjZnOZHbWqFRGDhvY/FPAVrvc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PARM0+Fyv1s749LdGgIk3pQQ5iXzTvLxsYxlcFSVo5IiNit1AsnFOh/GoFTB2YOU2
-	 VvtYn58wOP3vuS3jT6cQbqBCgtGu89aozpwZkhYzkfR6IwvLE3i1Btc+f4qTURD3tW
-	 Yz9Nw8t1dPStwoH1w1mPCA6/VX1hlFOjTCfBNKKAPRFXfSvL2zGwyFPOLU+xq62OvP
-	 IIuTbjEv8jG7CVUyxQrEzw6QV+CaVmLsEl3ji8dQliU8lPZfwiL41BqETLeGjZNsaE
-	 1G6w6gUziKar4IjjAL+6O8cGDBQ4D7jyH7VyOmeq18YX4/gmkHM8GgEq+1HgiU+W13
-	 sD2/TXSTKFWnA==
+	s=phobos-20191101; t=1747413738;
+	bh=Tlc+tJkVDcXT54rYS3mnQLmcKIn5AJGV7oh6xM1xXa4=;
+	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=X3iff9PA3z/3Y6aLxbfZsuRq9XRPXP+BXosvaSs0GgeqWeak9HgzF+rJS4EIKGe5J
+	 BJzoVuRWuXzeqecjRquTMlF5HB3QFIkzdTRZ49/0ctKQizVQwQYZRskTrLXzFYXAjx
+	 K2ra9HreJsBteD9gPkaPKyeAlvdK2q+wA8SlgL/LXB44tEMNOS9IipMKVMcJ3Svp7v
+	 vBOqQiDywJ6b2dNBekcSVsBkpfx98Ts7pU8zAa6hIRH1eqij9TflDkz62+YIDpWNpZ
+	 z7+TLVK3yhPs13LY9f4g+ZbZeBQn3MBemxODwrPA/ao2a07ACkWFh43mhYPqbT9T+m
+	 78ofeyivuKx/Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F37C680FA8; Fri, 16 May 2025 18:41:31 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 3182980FA8; Fri, 16 May 2025 18:42:17 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 249398006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:41:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 044908006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:42:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4ZzXsN0BYqz9shL;
- Fri, 16 May 2025 18:41:28 +0200 (CEST)
-Message-ID: <cc528492-9693-4b0d-ad4f-afb0c6516ce7@denx.de>
-Date: Fri, 16 May 2025 18:41:27 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4ZzXtD305hz9tCH;
+ Fri, 16 May 2025 18:42:12 +0200 (CEST)
+Message-ID: <f5f977a1-34fe-4e2a-a604-0f0695f3bc7b@denx.de>
+Date: Fri, 16 May 2025 18:42:11 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 0/3] make cyclic_(un)register idempotent
-To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20250507105821.484442-1-ravi@prevas.dk>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250507105821.484442-1-ravi@prevas.dk>
+Subject: Please pull u-boot-watchdog/master
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,23 +63,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07.05.25 12:58, Rasmus Villemoes wrote:
-> Three small patches I've been meaning to send for a while; I really
-> believe (as I now learnt Thomas Gleixner also does) this is the way
-> timer frameworks should behave.
-> 
-> Rasmus Villemoes (3):
->    cyclic: make cyclic_unregister() idempotent
->    cyclic: make cyclic_register safe to call on already-registered info
->    cyclic: document new guarantees for cyclic_(un)register
-> 
->   common/cyclic.c        | 17 +++++++++++++++++
->   doc/develop/cyclic.rst | 13 +++++++++++++
->   2 files changed, 30 insertions(+)
-> 
+Hi Tom,
 
-Applied to u-boot-watchdog/master
+please pull this next batch of mostly cyclic patches from Rasmus:
+
+----------------------------------------------------------------
+- make cyclic_(un)register idempotent
+----------------------------------------------------------------
+
+Here the Azure build, without any issues:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=393&view=results
 
 Thanks,
 Stefan
+
+
+The following changes since commit 1b5e435102aa29a665119430196cb366ce36a01b:
+
+   Merge tag 'u-boot-imx-master-20250512' of 
+https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2025-05-12 16:05:22 
+-0600)
+
+are available in the Git repository at:
+
+   git@source.denx.de:u-boot/custodians/u-boot-watchdog 
+tags/u-boot-watchdog-20250516
+
+for you to fetch changes up to 6f0a3cd7bcdd4ce25b5ad253a6ebad88d4b94fbe:
+
+   cyclic: document new guarantees for cyclic_(un)register (2025-05-16 
+13:44:19 +0200)
+
+----------------------------------------------------------------
+Rasmus Villemoes (3):
+       cyclic: make cyclic_unregister() idempotent
+       cyclic: make cyclic_register safe to call on already-registered info
+       cyclic: document new guarantees for cyclic_(un)register
+
+  common/cyclic.c        | 17 +++++++++++++++++
+  doc/develop/cyclic.rst | 13 +++++++++++++
+  2 files changed, 30 insertions(+)
 
