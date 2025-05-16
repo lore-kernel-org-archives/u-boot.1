@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4F9AC3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 15:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04645C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:05:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B57E80107;
-	Fri, 16 May 2025 17:57:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AF1D80107;
+	Fri, 16 May 2025 18:05:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iF7IVvl7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FRzyzU4s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AB0C8059D; Fri, 16 May 2025 17:57:02 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 444CD8059D; Fri, 16 May 2025 18:05:51 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18EA78006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 17:57:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 501B58006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-4033c89f2aaso1782670b6e.0
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 08:57:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-550ee1cb0a3so592931e87.3
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 09:05:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747411019; x=1748015819; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bWapyd0/pfSD/FrKLF5q6Ob9LTMiAjmrRePwQ5w0PUw=;
- b=iF7IVvl7mr46XDPSMkyLgDIXWKFzEHlzKJEhkoN75TrUVUDk64L2+TOuXdfoxkSifD
- pUK1noHfKlf1OvnTAmmYt2F/dcqfeVnUOxEnK54zTEk0Hji27g7mu7lfoDEZ7GSblprs
- Bv0eFQr6NDSjxVZpLvAqlQfqcZJZmrJS1dqQg=
+ d=gmail.com; s=20230601; t=1747411548; x=1748016348; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JGFzeT5hhK1wMltMuV/rmhKbqMrW76cA8zChJvefCvk=;
+ b=FRzyzU4sLTcFEnfb83CqljluBY2dd9G8rJh8r4TzhpHN7hqq8ozg6sKPDxTHWoXmnG
+ up45xD0HFUb773Go6ul6r+unqBcGkOy5CCxoK1r288Uj1a2SzQfQsEAkmGbhBD1tsaKo
+ nWZ++DeVU1iiIldDVwdMA/Qar1da2jJjZ9AG/isGW575IUDI9i9JXvEPlK1Sk/aYSnNr
+ NtkD8FjjCkXKo9pfGiFJ0mffSaRErmxhGNJh6/6DoWy2GxjzW1m7Mz/iHNFoLASsANe0
+ gcfCsYnITYKzNgZI7vyUEWF9oTxn9pswqujhpzxjmpc6J2GyO8yUdm/JSQwenW/uiKZ8
+ G8hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747411019; x=1748015819;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bWapyd0/pfSD/FrKLF5q6Ob9LTMiAjmrRePwQ5w0PUw=;
- b=hheVJkhFSA98rVqy1IRi1w4eLhgyTOx4oe6p6Uo7Zhy49d48QeCUEMpv9af2e6VHQX
- 2t8tIVMbjzhmcYHHuAv2mB3kSi+vLU2yAd1o8OFB8P5WgdUDOVMWW/fFF31Xl+YFETkM
- H1rhfFsNUIeItq6WHv1Db4VJqj+YTDZ2p1/eZH1Mp+m3Lg5fGBOxjI4c5uKnvH+ax1T4
- LqZNTNvxSqpngv0vQDQGHRBMCu1Eh/W9ia7CeBMwCHoCO5fTn2rvzDIqUxv93vm8YFHx
- ftyP+WFLnNdaOdwVB+ZDVKK5j2Uw6B1f31ixR8EbRhystuNqwWWC82yN25GDLe7f6YdF
- Jcsw==
-X-Gm-Message-State: AOJu0YzmIdrk/puB27qjxI7kehnjnyXCxRqIYe0bzeNYkTofBvgln0CO
- v3b42RIvAJXfQ7fuO7XpN08XvJ9S7mV71tyBANISwi8k1rjW9eIEqTbgV5uPYfJqu6A=
-X-Gm-Gg: ASbGncvHWeIaCRMjRkmAGj9LG48OB8D1LeZL5rAIOTojtZcrEAUElfFF+92EU7SL/MK
- 8RUEv+448BZoN1Cgmu7LxPxLqJaNYdA78Wcn+MVuMNXTxQYK8xOqSZXmGh3AjreQojxVRdZxu0j
- b0pHy+5gR8wbac/9EBUZqZb8GzdPyWpYYqIujrlgUGyeZy+qi8j1iTlMPC61zjvQoXKFqNOKdeY
- 8/ImgHAcNElSvCkVDP+MltEqPofYP1pDes0CnUZHmcNqkWnMaT0NWsCOgrLyU6C1hp5MSTjxI8W
- 7LouYVNG47kGViSnHTwzO+qUFockmm+//Dza+DNh3Su3Ee5MRqfkie1gCSWMwi0EHuv5VnIejN6
- jFQki2/eTkQxN
-X-Google-Smtp-Source: AGHT+IHq4tJd2nyNtNem+P2ArCMhTXlygWppIdMh2a1STp4a71MQui2uOrKPRxZnveQcqfIglzEESA==
-X-Received: by 2002:a05:6870:70aa:b0:2d4:d9d6:c8bf with SMTP id
- 586e51a60fabf-2e3c1f4dbe2mr2163516fac.32.1747411018642; 
- Fri, 16 May 2025 08:56:58 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6a82109sm391560a34.28.2025.05.16.08.56.57
+ d=1e100.net; s=20230601; t=1747411548; x=1748016348;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JGFzeT5hhK1wMltMuV/rmhKbqMrW76cA8zChJvefCvk=;
+ b=CbBzBsaWypthVJs8ya/JqLBv36wvHiiIhGSkzOu8dtsZuUHoc5I3YhH4Hdyqol/1F3
+ HtlA6Zw9dGacdDfd49jtyPsNm11UwBJo41fX88xAbf8g2tR/YILZjD+m+w0ejXPUt8Db
+ g7vCMrN8xMRaSfzvCTFoc044w1GDzzR/ZI7vZBygGz9qSS156kMmT6YY/wfzqNZTO1cU
+ u4CEIo28hfwHs+l2u4HSle2/CG2RdHOmr+Db2761xW+IWr7x30D2ba7lP3CF1+134gx1
+ COAPIQugOtCIV5qDhX6D7GjJIv0H8un7kmAiDBrcUjodDizFosh0TW1PRUqZS2Bmrdak
+ IwRw==
+X-Gm-Message-State: AOJu0YyFGWsGzfcdWdhiMimasIJXQzoMAppQljPIt+hzWwiHIrMET8Ha
+ Yea4nRyvIhZ+6gfCbpYtZbsS34505D608M7/VczLYzNY3xktZXCFWTUOo3bHvqv/
+X-Gm-Gg: ASbGncuoOYKGypMxe5MXt8S2KVGyxf4E647aGm1BgxvAIujVcenrSJXkVEk3IR8ZiVl
+ caimaWeXN5eNiu7BPWTQc2m3tEq6AZi74B3f1yXrgRl1JuI4XlOVB/byXjco8rnXrNTd/qnHhCF
+ yJXrYZU7PvMlMZYkmrvinNM48izdtTtojxISMgvGPBdtjSih9TzY6T+SQhREK0LOKNSYmtKlTZL
+ 2C9ntjfPeYiojT74gu0Co4sZlIVJ0mumE4y4tENl1EF1UKoJemSccVMp1ram8Oh6o6KALW/O3lw
+ CY1D1Sq8Y80n6fb0rMrfudGKdBIqrIW9EoYD1oSRtqYzC2JbGclRPfMtQoiI6n8/6yULEw57e01
+ d1/MYFV1Mw5sumTkarQ==
+X-Google-Smtp-Source: AGHT+IEnQlyB0r1DwK1ijkdGztzjNUOFZrV/k8z39bN3ygm6Uu55GWLLJHD8dUApWDXmy2KAKUmsdQ==
+X-Received: by 2002:a05:6512:6805:b0:54f:c887:c7ca with SMTP id
+ 2adb3069b0e04-550e7230366mr1008551e87.45.1747411547916; 
+ Fri, 16 May 2025 09:05:47 -0700 (PDT)
+Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
+ [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-550e7017eecsm491081e87.143.2025.05.16.09.05.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 May 2025 08:56:57 -0700 (PDT)
-Date: Fri, 16 May 2025 09:56:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: ant.v.moryakov@gmail.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] drivers: spi: fix deref ater null.might in spi-uclass.c
-Message-ID: <20250516155655.GJ100073@bill-the-cat>
-References: <20250516125053.25457-1-ant.v.moryakov@gmail.com>
+ Fri, 16 May 2025 09:05:47 -0700 (PDT)
+From: ant.v.moryakov@gmail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] boot: fix memory leaks by freeing token.val in pxe_utils.c
+Date: Fri, 16 May 2025 19:05:42 +0300
+Message-Id: <20250516160542.86835-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="udfVoEQDCFHKzSeA"
-Content-Disposition: inline
-In-Reply-To: <20250516125053.25457-1-ant.v.moryakov@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,70 +95,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
 
---udfVoEQDCFHKzSeA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ Added free(t.val) for T_STRING case
+- Added free(t.val) in T_EOL and T_EOF cases
+- Added free(t.val) in default case
+- Added free(t.val) on error conditions
+- Prevents memory leaks from get_token() allocations
 
-On Fri, May 16, 2025 at 03:50:53PM +0300, ant.v.moryakov@gmail.com wrote:
-> From: Anton Moryakov <ant.v.moryakov@gmail.com>
->=20
-> The static analyzer (Svace) reported=20
-> After having been compared to a NULL value at spi-uclass.c:465,
-> pointer 'dev' is passed as 1st parameter in call to function 'dev_get_fla=
-gs'=20
-> at spi-uclass.c:469, where it is dereferenced at device.h:240.
->=20
-> Correct explained:
-> 1. Added dev && !device_active(dev) check before calling device_active()
-> 2. Added explicit if (!dev) check with ret =3D -ENODEV setting
-> 3. Protected logging in error block with if(dev) check
->=20
-> Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
-> ---
->  drivers/spi/spi-uclass.c | 14 +++++++++++---
->  1 file changed, 11 insertions(+), 3 deletions(-)
->=20
-> diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
-> index d6049753740..52b79223f96 100644
-> --- a/drivers/spi/spi-uclass.c
-> +++ b/drivers/spi/spi-uclass.c
-> @@ -345,7 +345,7 @@ int spi_get_bus_and_cs(int busnum, int cs, struct ude=
-vice **busp,
->  		return ret;
->  	}
-> =20
-> -	if (!device_active(dev)) {
-> +	if (dev && !device_active(dev)) {
->  		struct spi_slave *slave;
-> =20
->  		ret =3D device_probe(dev);
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
 
-Given that it looks like from a quick glance most places do not check
-for dev before dereferencing perhaps this should be done in
-dev_get_flags or so, and a follow-up for the places which had already
-been checking.
+---
+ boot/pxe_utils.c | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
 
---=20
-Tom
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index 82f217aaf86..81b7602387b 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -1277,6 +1277,11 @@ static int parse_label(char **c, struct pxe_menu *cfg)
+ 			break;
+ 
+ 		case T_EOL:
++			free(t.val);	
++			break;
++
++		case T_STRING:
++			free(t.val);	
+ 			break;
+ 
+ 		default:
+@@ -1285,12 +1290,15 @@ static int parse_label(char **c, struct pxe_menu *cfg)
+ 			 * of a label and whatever token this is, it's
+ 			 * something for the menu level context to handle.
+ 			 */
++			free(t.val);
+ 			*c = s;
+ 			return 1;
+ 		}
+ 
+-		if (err < 0)
++		if (err < 0) {
++			free(t.val);
+ 			return err;
++		}
+ 	}
+ }
+ 
+@@ -1383,19 +1391,28 @@ static int parse_pxefile_top(struct pxe_context *ctx, char *p, unsigned long bas
+ 			break;
+ 
+ 		case T_EOL:
++			free(t.val);
+ 			break;
+ 
+ 		case T_EOF:
++			free(t.val);
+ 			return 1;
++		
++		case T_STRING:
++            free(t.val);
++            break;
+ 
+ 		default:
+ 			printf("Ignoring unknown command: %.*s\n",
+ 			       (int)(p - s), s);
++			free(t.val);
+ 			eol_or_eof(&p);
+ 		}
+ 
+-		if (err < 0)
++		if (err < 0) {
++			free(t.val);
+ 			return err;
++		}
+ 	}
+ }
+ 
+-- 
+2.30.2
 
---udfVoEQDCFHKzSeA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgnYD8ACgkQFHw5/5Y0
-tyzPIwv/Q0ri5L+ms7wmfm5Q3HiL2qYITzjiTZnI1FEIKXIt4nEcelUqpFF6Jn7P
-4E/kDXAxkjUcuiLGlrJ11lzMExXi+O3IPVjIAsS1aLtDe5Z1fM661yVy4YklZMvs
-fjtV4XekSkVBlYZzvwJQQRu5/OXmNZCucLO3PFQFSz3dpyE2uy4kP2nQt7Qh5Yn5
-9rihuswW5puBjKHerpvlYCs96jHS2lbXNOrXsakfW4gDKsPqyASBZvBK50LVuhuX
-g0p7gHAwl+jqyjjVlwiG7r/XVbp+JsdoWFdTF1om8wlS+Yl0HZVh6zHa15T/2mbx
-N9HSJIh5+xehaZ4Yc0s/e82s7fyIPBcbostOIycgSD8+pNYANLRmLtVkBNJNvqQj
-Og2WcRFClsigQ7K8mZP9dwn3JSC2Ldrm29Lsgo30Ty4U0J5IlhqyYnoE1HsMMrS4
-NvlIroZ5ESsr1al/Ndvm8uUfCwo0nDYCm/whrk9DlHNmVx183uVtP2PEbH9A/rKm
-0Zz89ANj
-=Smcb
------END PGP SIGNATURE-----
-
---udfVoEQDCFHKzSeA--
