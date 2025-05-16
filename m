@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A265C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:20:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B12A9C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:20:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF0AE8059D;
-	Fri, 16 May 2025 18:20:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2726882AAA;
+	Fri, 16 May 2025 18:20:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LpxsLAA7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MXUig6wP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A945E82AAA; Fri, 16 May 2025 18:20:35 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id E9D5E82ABA; Fri, 16 May 2025 18:20:54 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46DA78006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:20:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6E358006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:20:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3f6a92f234dso1904303b6e.3
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 09:20:33 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5fbf52aad74so6444848a12.1
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 09:20:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747412432; x=1748017232; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=wQoKaDu65UKpM7r22lbc2l/KTfxsCUjOvIwEsApRXlE=;
- b=LpxsLAA7AYsFHPaQXtoLXJGfbNDIAWyFD8XL6C3F5IyLOKb49Mk+esNz6YDyZO5o1z
- 27hU8PUe8ua47fC1u+Cf5gAyv7tGiaU3gBbfK8gF0JU6xhsPbfS+aR3mn9ZDmsudfRhH
- tlsVj2qHp+6zq0o1Pn9Wv8SvL1miQn+c0tiKM=
+ d=chromium.org; s=google; t=1747412452; x=1748017252; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sXMTdv0bJPoshdbAWnXtC0xGqLtlkoOyHLZIG4hpxsM=;
+ b=MXUig6wPpqSO9yNUCxS3VnfgIMYSNowBDQ4gZ7OL8VSS1JuvQmUnzb6iAXlAytYM81
+ 1yrqnPmnkiZcIi9ZGyiugWDnhu8l2K5/bUFQfV/89+BnbkdvbkvEhqC26cGf4hrngSAG
+ BSHe2rKY9SO7HjvHfqV2DFaAtItzd1o9LMi4E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747412432; x=1748017232;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wQoKaDu65UKpM7r22lbc2l/KTfxsCUjOvIwEsApRXlE=;
- b=Uspql7J7PuTT1dVtOK13Tg+VBUiJLEos48dYtfL81yNKvwD7qeGxn4KeYqk1kA7QNG
- iRz+t4Wp4YAwRdZbLv8nYUoljl9dzgF7i8xkGOH2aRIt3xMBKyirWpXyzN503SGB8sIF
- y4eUVkOxRbmqFXKrbQeYTvwGTRw/+FeJMmlNpWQ2o5JoQ++ZVpmbb3hplcsXoaeQjJbT
- R2kExiRGeVQwLlQL205eojt/iIogYAzwSse19yiEjjP2DnglSzVpRwmBZDluRncYIMjH
- 2oGyg+VYdMK+hJ/Ver4eTcnpWQS8uBW6E9tcTf/dfGxfBrfh7K7uo4EkuCZEU9qFh1fG
- 76Iw==
-X-Gm-Message-State: AOJu0YyBq2e58lDx0fsxP+cWNAmW682TDwzxiuI5xXK4C2IoVa8yDHj4
- +bhp4B51CuW8wi8zodQQr+EGBSKnckzLDT3QaaFkm6KR1DCG3G66ViBN6TIaLPwQ5PhAmBpVFYm
- EjWU4DhI=
-X-Gm-Gg: ASbGncsAVq3hMEeh22hdPqk4jFevl252T8USjjbHVVrzF4cbDXujBe2sbMJmHej4oGY
- 3hmdV4OIVGQC3LsYGZ14iGyFMxQsD1z+1rpojs+X0WvO/koBXyFziuDtWqPgvILd5mL3kDSidtD
- AvCqV3LXZMp3IHcIPOF3lpOToADwgtWaVPuax+F72E/KuuFzd7GXswDHc76eO1cefVBOqFHMVuN
- 4LeA7ptCBeM7TlFrSdo/P8nzLMrREOixc82g73ft1L0e9SlZsMwhdk7JO2UlJEd4egz7VwQXTwR
- CI85SRFbnY5z52iEs/HKgy6RRIQe4xSBva+M2kOTC7m1eRgqm355WSXyXLAx6InjNQ03KTZkhkP
- UlDCTyxI/KJU=
-X-Google-Smtp-Source: AGHT+IEnQVFzMKai2MfbMZe6dVlDTCfKLSV0AbL4/mBNd4Ak+GCNVIF1jTb+mTWwU+URaQ/7b97VOQ==
-X-Received: by 2002:a05:6808:320e:b0:401:ea47:2c4a with SMTP id
- 5614622812f47-404da793bd2mr1961115b6e.28.1747412432015; 
- Fri, 16 May 2025 09:20:32 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-609f2f2e6d1sm440436eaf.8.2025.05.16.09.20.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 May 2025 09:20:31 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTg5GzLW1KvGvjcygoH8ktN_bqJyutbojHyONfmKVtddSA@mail.gmail.com>
-References: <CAFLszTg5GzLW1KvGvjcygoH8ktN_bqJyutbojHyONfmKVtddSA@mail.gmail.com>
-Subject: Re: Please pull u-boot-dm
-Message-Id: <174741243109.2939215.9980838033339254801.b4-ty@konsulko.com>
-Date: Fri, 16 May 2025 10:20:31 -0600
+ d=1e100.net; s=20230601; t=1747412452; x=1748017252;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sXMTdv0bJPoshdbAWnXtC0xGqLtlkoOyHLZIG4hpxsM=;
+ b=dul6yuAoj0sOhQxqZd4nlUIYWlkXvDnv13bXqnrt+FHE28gI2uC5P+vsIbp8BNRSDF
+ TwhxSrQlLmjU15EkamP+TkgAmGdOVeB2vMQUIKX17Cyoa+96duMdQajGTYfM2CsG4CML
+ TXQkzPGWpVSV8g3/aSTd467nVP8KRrK3IElWb669a3xWavUNHbhTOF+cxrD+b+ZgqU/g
+ bmaW8F2JrZO8aPsZ5PCFf+R3Zi+SZdRlY+s2/0QKlS7z4wGgOaHzL1weC9Az3CxUvBYv
+ MOyIlVmYrS16fL5O6r3ivkY37qlzZpRDojzy3xtjezEzFPZNk9xaEMpKzm9k9qelDeKO
+ N9pw==
+X-Gm-Message-State: AOJu0YxgZaNT8TdE5SOcXN1ILpP28YYvZbHuSFHafR5cLvxqRikTxev2
+ +bkQQmZPWe48CfRGRajoD4xBpJuaxb+74aurtURnReR5DY19OG7p3Z9l/G+L4mwaPeNuCERrt7s
+ WSsi71iR98KfdRJw2Y0bv7QZb1Rbu+/TEQtTe1URKyhcHXXnMw70TDADq84Funw==
+X-Gm-Gg: ASbGncurG5p5BPZOAdi3QTKsgSY0wdir5zRRX4yy2oRjQBv7QmGCjeQ8kw7hkBY8Id+
+ 02IeOa89Hl6VQoWp+ZJnhOCHr0Cpc4WvZPfYALK+pGlf6o9r+Ij3jappI0MxB+oz9M9+Drc5bND
+ 6hp1otCRPOW5MCy9zx6KjnPMLed+XdfvUm1Q==
+X-Google-Smtp-Source: AGHT+IHf9Xu2sayOx7RqVlkKE1LZq4RG3oHpHpqYdZBX/3XRosFIn6frwEXwoj0lyYefrYhbnKNtL0kd0kFSGP2VkO8=
+X-Received: by 2002:a17:906:f5a8:b0:ad2:2547:b0ae with SMTP id
+ a640c23a62f3a-ad50f7be127mr695416166b.20.1747412452230; Fri, 16 May 2025
+ 09:20:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250516125053.25457-1-ant.v.moryakov@gmail.com>
+In-Reply-To: <20250516125053.25457-1-ant.v.moryakov@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 16 May 2025 18:20:39 +0200
+X-Gm-Features: AX0GCFuUOHgqLwlFTQBTosRQGtPq3r1sKEc_x3RkD7iFvFQubkHXT51PKp65HAE
+Message-ID: <CAFLszTg03voPKR3Ojv_H5CvV2u8X4y9XqXL9Vh33_LRwFPz5pA@mail.gmail.com>
+Subject: Re: [PATCH] drivers: spi: fix deref ater null.might in spi-uclass.c
+To: ant.v.moryakov@gmail.com
+Cc: u-boot@lists.denx.de, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,21 +85,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 16 May 2025 09:36:14 +0200, Simon Glass wrote:
+Hi,
 
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/26199
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=78&view=results
-> 
-> 
-> The following changes since commit 4c26de2eea6bcf5f27b13da0372d27d767cd38e3:
-> 
->   fs.h: Switch to using rtc_def.h (2025-05-13 11:30:09 -0600)
-> 
-> [...]
+On Fri, 16 May 2025 at 14:51, <ant.v.moryakov@gmail.com> wrote:
+>
+> From: Anton Moryakov <ant.v.moryakov@gmail.com>
+>
+> The static analyzer (Svace) reported
+> After having been compared to a NULL value at spi-uclass.c:465,
+> pointer 'dev' is passed as 1st parameter in call to function 'dev_get_flags'
+> at spi-uclass.c:469, where it is dereferenced at device.h:240.
+>
+> Correct explained:
+> 1. Added dev && !device_active(dev) check before calling device_active()
+> 2. Added explicit if (!dev) check with ret = -ENODEV setting
+> 3. Protected logging in error block with if(dev) check
+>
+> Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+> ---
+>  drivers/spi/spi-uclass.c | 14 +++++++++++---
+>  1 file changed, 11 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
+> index d6049753740..52b79223f96 100644
+> --- a/drivers/spi/spi-uclass.c
+> +++ b/drivers/spi/spi-uclass.c
+> @@ -345,7 +345,7 @@ int spi_get_bus_and_cs(int busnum, int cs, struct udevice **busp,
+>                 return ret;
+>         }
+>
+> -       if (!device_active(dev)) {
+> +       if (dev && !device_active(dev)) {
+>                 struct spi_slave *slave;
+>
+>                 ret = device_probe(dev);
+> @@ -355,6 +355,11 @@ int spi_get_bus_and_cs(int busnum, int cs, struct udevice **busp,
+>                 slave->dev = dev;
+>         }
+>
+> +       if (!dev) {
+> +               ret = -ENODEV;
+> +               goto err;
+> +       }
+> +
+>         slave = dev_get_parent_priv(dev);
+>         bus_data = dev_get_uclass_priv(bus);
+>
+> @@ -373,8 +378,11 @@ int spi_get_bus_and_cs(int busnum, int cs, struct udevice **busp,
+>         return 0;
+>
+>  err:
+> -       log_debug("%s: Error path, device '%s'\n", __func__, dev->name);
+> -
+> +       if(dev)
+> +               log_debug("%s: Error path, device '%s'\n", __func__, dev->name);
+> +       else
+> +               log_debug("%s: Error path, NULL device\n", __func__);
+> +
+>         return ret;
+>  }
+>
+> --
+> 2.30.2
+>
 
-Merged into u-boot/next, thanks!
+You are not allowed to pass NULL as dev to driver model functions. So
+the bug here is in the SPI code.
 
--- 
-Tom
+There is a code-size cost to checking arguments and we tend to be
+reluctant to pay it in U-Boot, where code size is often critical.
 
+We do have assert() but it is fairly intrusive and people seldom
+enable it. If you have a better way, please suggest it!
 
+Regards,
+Simon
