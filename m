@@ -4,49 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76A95C3ABD8
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDCBC3ABD8
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 17:40:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10F4980107;
-	Fri, 16 May 2025 18:42:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3E18F80107;
+	Fri, 16 May 2025 19:40:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1747413738;
-	bh=Tlc+tJkVDcXT54rYS3mnQLmcKIn5AJGV7oh6xM1xXa4=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=X3iff9PA3z/3Y6aLxbfZsuRq9XRPXP+BXosvaSs0GgeqWeak9HgzF+rJS4EIKGe5J
-	 BJzoVuRWuXzeqecjRquTMlF5HB3QFIkzdTRZ49/0ctKQizVQwQYZRskTrLXzFYXAjx
-	 K2ra9HreJsBteD9gPkaPKyeAlvdK2q+wA8SlgL/LXB44tEMNOS9IipMKVMcJ3Svp7v
-	 vBOqQiDywJ6b2dNBekcSVsBkpfx98Ts7pU8zAa6hIRH1eqij9TflDkz62+YIDpWNpZ
-	 z7+TLVK3yhPs13LY9f4g+ZbZeBQn3MBemxODwrPA/ao2a07ACkWFh43mhYPqbT9T+m
-	 78ofeyivuKx/Q==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3182980FA8; Fri, 16 May 2025 18:42:17 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 044908006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:42:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aUr/EqIt";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 67FBA8059D; Fri, 16 May 2025 19:40:27 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4ZzXtD305hz9tCH;
- Fri, 16 May 2025 18:42:12 +0200 (CEST)
-Message-ID: <f5f977a1-34fe-4e2a-a604-0f0695f3bc7b@denx.de>
-Date: Fri, 16 May 2025 18:42:11 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 5F32C8006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 19:40:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-310447fe59aso24529451fa.0
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 10:40:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1747417224; x=1748022024; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XlsJ2H9ITYg7hmAA+XnkJgVqc/G30cOHSifNiMJNGBo=;
+ b=aUr/EqItjt/tfi62GVn0boqhWON/qodL6Hk2/aJ1QAWTsPS045HBJU6D5wcn5/TbU+
+ KIEJc9SzcuUIHZ7nmyCHHLzmqCwBtyNAUia8UGnrHLgPxITMCAhade6Q3Yuan5sZs8K/
+ JvsfOYUgZlO+iIMgBZcngcssXSkwlhrV1VkFnoUhmP95eZQFm3I6jRnLd7jP6VA5EvCd
+ f0rPOhy95AjTsYuVGXLctRZJtV3lwjFY3PVW6I9jbF9vvmw8OWu5jsDCrnuvsL4k0uSO
+ dWVrTc10Baw8wBfbvTh4hAYOGC6jngqFCxdof57avYFVS9hcbkVCqPkv1kETJC68ee4q
+ AN3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747417224; x=1748022024;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XlsJ2H9ITYg7hmAA+XnkJgVqc/G30cOHSifNiMJNGBo=;
+ b=ZqgGCO52Eafk/cj5v0CRJzpktGwgsuOUsIJykDksKe+N4uCDLikMvbtZz09R22BXK7
+ o4NXOShQbwzKJNnqRY6rRB3fgh/26VYFzO+7H2VKJ1ofgnTKvjL/7F44cBDc5HPE/ESj
+ ByM5ycEOOBvSRlAHdck3EHcow3hNzQt4Sab9JebxoD5LYjhtZruI/+9L8qFlzL/89/qF
+ vU3jiCR46rObBNEmmYkrBwJqjwgDwoLLO48AfDbE0llNuAr2fI55qa1NzaKcj8OASPLT
+ /c4RPrb9FQhVs7hYB7eezBM05AHtx4kPvo/odFHEHa6WCKpArCFAM3f3ee5Y2kYGVkpk
+ OarA==
+X-Gm-Message-State: AOJu0Yy/3YSmBfn9v+yiOleFe1Lkim+LIlJlWfCq/kJP2T6DqlzJLBOJ
+ qVExKNP7+B8OrHXAbkgtpX+puO7eqhofYuaQK1kkvdKuB0cB2yfCTXawvA5fx5Kl
+X-Gm-Gg: ASbGncv7vrvA+pKGP05N+gSwg0k+AEw6iidN1gLvMkM95K4ZuVSLHilS+FidM8bbyeX
+ BHNMd+Sx2UmQ2eOLZjzM2hxERad3NrpQPNM860pnw7YPH0j32XKxA+2fPFvZXsaVt9B099Du6GX
+ 8xFrAj9NBeGrU25xFiJfLwVsopr/2IozyT59aK54ODIt4yL/d3vy917xO+z+5vcetVkio2xpwM8
+ 25GCjpq3Mv435WQ9tKh1WPkMsNSzBy5k/qsPrWsoXLWl2+oLqIzt9xpMHOaTQDPkyC+HxXAzOcH
+ IuPdauFJ9U5vH0g7UWRChKl39eMoPS8Kev+kYUAbz0kV0fgusG4Kdz0eiFKMnuqiFxWTl0xPVqD
+ TD4z0mfgVLEKlmPYMIA==
+X-Google-Smtp-Source: AGHT+IGXiitzW3DOlgD/8NNvkRHSs1q82G4PLePVvD76COyudmwJXcLQiO1JL+jAHO7+ikpRO1mfVA==
+X-Received: by 2002:a2e:ae0e:0:b0:326:cf8a:7f30 with SMTP id
+ 38308e7fff4ca-328077a2dd9mr15318701fa.32.1747417224005; 
+ Fri, 16 May 2025 10:40:24 -0700 (PDT)
+Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
+ [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-328085b8795sm5212121fa.79.2025.05.16.10.40.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 May 2025 10:40:23 -0700 (PDT)
+From: ant.v.moryakov@gmail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] drivers: scsi: fix: memory leak in do_scsi_scan_one()
+Date: Fri, 16 May 2025 20:40:20 +0300
+Message-Id: <20250516174020.118229-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-watchdog/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,45 +95,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
 
-please pull this next batch of mostly cyclic patches from Rasmus:
+Free allocated name buffer when blk_create_devicef() fails to prevent
+memory leak. After successful device creation, the name ownership is
+transferred to the device structure and should not be freed manually.
 
-----------------------------------------------------------------
-- make cyclic_(un)register idempotent
-----------------------------------------------------------------
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>"
 
-Here the Azure build, without any issues:
+---
+ drivers/scsi/scsi.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=393&view=results
-
-Thanks,
-Stefan
-
-
-The following changes since commit 1b5e435102aa29a665119430196cb366ce36a01b:
-
-   Merge tag 'u-boot-imx-master-20250512' of 
-https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2025-05-12 16:05:22 
--0600)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-watchdog 
-tags/u-boot-watchdog-20250516
-
-for you to fetch changes up to 6f0a3cd7bcdd4ce25b5ad253a6ebad88d4b94fbe:
-
-   cyclic: document new guarantees for cyclic_(un)register (2025-05-16 
-13:44:19 +0200)
-
-----------------------------------------------------------------
-Rasmus Villemoes (3):
-       cyclic: make cyclic_unregister() idempotent
-       cyclic: make cyclic_register safe to call on already-registered info
-       cyclic: document new guarantees for cyclic_(un)register
-
-  common/cyclic.c        | 17 +++++++++++++++++
-  doc/develop/cyclic.rst | 13 +++++++++++++
-  2 files changed, 30 insertions(+)
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index cd0b84c0622..a9e364d3fdb 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -522,8 +522,10 @@ static int do_scsi_scan_one(struct udevice *dev, int id, int lun, bool verbose)
+ 		return log_msg_ret("pro", ret);
+ 
+ 	ret = bootdev_setup_for_sibling_blk(bdev, "scsi_bootdev");
+-	if (ret)
++	if (ret) {
++		free(name); 
+ 		return log_msg_ret("bd", ret);
++	}
+ 
+ 	if (verbose) {
+ 		printf("  Device %d: ", bdesc->devnum);
+-- 
+2.30.2
 
