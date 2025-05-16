@@ -4,162 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A71C9C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 14:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97479C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 14:38:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1861A8006D;
-	Fri, 16 May 2025 16:28:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BB3C8006D;
+	Fri, 16 May 2025 16:38:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Pa+OET8O";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IXhhspu9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 990DF80079; Fri, 16 May 2025 16:28:54 +0200 (CEST)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on20630.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::630])
+ id 35CF480079; Fri, 16 May 2025 16:38:11 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on2061a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::61a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EA2980050
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 16:28:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30CC680050
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 16:38:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xANqgKuJBC7UWVB/0o5bj2LNuriTWxM1qu4PlIv2e9PqMC686eu9Uomyu+bgDTaZvIvOwSZTPOzDdkhV1K1DelDrDkbtKpGXrmIlWL7NMsMzZ1qOQmISeCfzR2bzoLeNaI9X4ikVhSvWRoJphHKMn4JqrgYj20YVnmTPfUfES8MDaUflZ5rrtt+sbPpsiXAA5dcg1cN3faPXCc86l5VB5Kd8ufewqlG+5MH5RY3dE4rwIUPnPzWJUPZ/DxsV6q73Rw1wya05m3OXK/btGopWz/wI3/87XmosUnar+1Jq2OqbAdJYLpXEc/hj2mmCKr33qL4oqlWd92tuAzJEh/qw0w==
+ b=ypB+jUmMdg5tLFFoE/atQbdx8hwrMfn6dG6kqXjUbg45o6xVdCixhvf+MWNcgk8tQmHGvfubGQ0SrypEPttj4iFNPoYVcA3clGXFk5ZfQjYQLJgnp3dJHUGkvYCzCaGDpd+72lAGwgois+1uaLhlwqVdOtFAkxngvdoHVJZGXoRo1O9cCC6BfMRML2Pppxqgb2K/fkPeX7KgwZO8UpL+vgJn6zm0VLXU/IDAeqEJNKRBePFeuI3wEw4ZK56+dNMFyH55W57R1V0MRoT8n3e2pvyfUa2/cVtppsI83gyx1lzjCBJTIx7hRN+4t8UppAiEgJF+FgTCSFYYCsbwC1s+EA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8C9LqhCNDuAiL74kWDX2a5zmT3O6keaQSk65LoQCtQ0=;
- b=PukiwK68mDyJqyHp/jrbAeEBslFDLd9q5Iu/1ARRcfyAdwc7m+ZLLaHwRxVOG7feVFDIyKukLvWHoKP6t05q3G7RlKwmNlNYOzOMoa4AnJX32Vx2TIofFqigu2tD76wEqmTjlv+Q/bf2hqQ6p4TnYAGKq+4tPzB7e5EKbyjdRUSkv8oJxXwKBDKK/NCSwqRIMIdUnt+K3N50e2bAWdpLcK/xYAIXhND/Np9fxu2NTDQ5Y4ct5VYJxc/5sSyh2KXk3MfRary2SI6EjyDZUIxfDIktmHHYvILTsgsAB7v41avUSSc60wjP1twRUxpQr0tdbxfHmS5GNBdFL2TJ+9U9mw==
+ bh=3hEgoJrm/hnrIbQaMcFDSb5k+pF6lvq3b6A9HNoGK4U=;
+ b=IN7/ZaW+48cWsh6eyTazizZZDHdKvWNgLp8t4TrSJYK6y4wtaKh9Y4hXtaSAbQQMT0RZy9MPvrwumf0lRPTIjU3DBGIpBs5Ojeq5IQsDVUzsMijin5tiHCh6iSN40bnsHPGgQptG1YSQLEsnegJ2nzBFVVnOn18kN+gtj7lV+gLvxrTAopx1sLjEyky9dVkeSMVHnwo418zgzKM65XvoF5POlAccqAvAIdcgG4urqKAYIfmTCAqWEJ655QvlCslhHQPW5XUNKu65Qrqld1CW54p06rOkKIeIWKFAafSTPma2GKaLuNDFm2+/qrtGzQffb5fvXzeR16HsevRBLAGmAQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8C9LqhCNDuAiL74kWDX2a5zmT3O6keaQSk65LoQCtQ0=;
- b=Pa+OET8OYB7bOyjXFY3u14PNbKVsHWKQGkW6MNioCeNSA4WeRbbdpFkabf5jpiLq4T+Xo1wWXJGX/SJCDzLPfsrsud22VXy8dMXKKMdq0A6z3m3o/Vq6pn04gBcDmcTz0XpluOY2VaZu3CUhAqkWEItF7/TebRgaqeqB8391pBI=
+ bh=3hEgoJrm/hnrIbQaMcFDSb5k+pF6lvq3b6A9HNoGK4U=;
+ b=IXhhspu93976A4m/fBax8EoNyBKvIH1H+K2CGMgW3hzC79/iv+xBTCxFhbKHXA1r+cX1uBVzk0Tl9eBnfkUsAMn1bYKHU6V27RUKdm1of4ZELrxdRxnNcFsFXPw8OqRGteqDronuKEk7mBG2RTnpSTKEznypsIJ1LT53W12MbmU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS1PR04MB9238.eurprd04.prod.outlook.com (2603:10a6:20b:4c6::8)
+ by AM9PR04MB8553.eurprd04.prod.outlook.com (2603:10a6:20b:434::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.31; Fri, 16 May
- 2025 14:28:51 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.32; Fri, 16 May
+ 2025 14:38:07 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8722.031; Fri, 16 May 2025
- 14:28:50 +0000
-Message-ID: <3c142aee-f6c2-4313-b743-57d7e7b96d0f@cherry.de>
-Date: Fri, 16 May 2025 16:28:46 +0200
+ 14:38:07 +0000
+Message-ID: <40a312c1-06ef-4e90-9260-e9f15e0215c2@cherry.de>
+Date: Fri, 16 May 2025 16:38:06 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] usb: onboard-hub: Use the ofnode to check if the
- peer-hub was probed
+Subject: Re: [PATCH 2/4] usb: onboard-hub: Set the reset gpio pin before
+ freeing
 To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>
 References: <20250425-usb_onboard_hub_cypress_hx3-v1-0-3cc5a06087cf@thaumatec.com>
- <20250425-usb_onboard_hub_cypress_hx3-v1-1-3cc5a06087cf@thaumatec.com>
+ <20250425-usb_onboard_hub_cypress_hx3-v1-2-3cc5a06087cf@thaumatec.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250425-usb_onboard_hub_cypress_hx3-v1-1-3cc5a06087cf@thaumatec.com>
+In-Reply-To: <20250425-usb_onboard_hub_cypress_hx3-v1-2-3cc5a06087cf@thaumatec.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0042.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0234.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b2::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS1PR04MB9238:EE_
-X-MS-Office365-Filtering-Correlation-Id: 256c5c64-36f7-4694-9afe-08dd9485f83e
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB8553:EE_
+X-MS-Office365-Filtering-Correlation-Id: 19fd2850-4dd7-4edb-1bf9-08dd948745e3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TmxQZ0Rsd0RMSFUxUkNhL1VpTk1MNlJMbllzRjRBYTlkaElzbTh0Snd6eTVT?=
- =?utf-8?B?bmE1Rk5MK0xLNFFhaHRBeDhFT0IwWlREZ0hGbUZsYy90dncrUEhncjAzM0RC?=
- =?utf-8?B?bDFYckZCK1hoTTdNRFF5ckYyWXQ2bjBVbFNPTFBlKzc1ZTJrSzNYUE9QK0pX?=
- =?utf-8?B?cnRTMjRocnZkS2N4N1NlUkErWU9OMmJQby8rT2d6NFpIcVZqWGphWVc2Z2Nj?=
- =?utf-8?B?eWNQUkVnZVRPRW1TMkFPdmQ3ZmRwLy82N2xwOFhMZ0srZVlQcEVJL2tRVW91?=
- =?utf-8?B?V2RvRXRKWjd0VWUycjFnUlpEYjFEcUNuMiswK1loVXBoemFXeUVWMTZqYnhS?=
- =?utf-8?B?WGxkajlmRDVFb0ttLzNmek5qa2VjVkNja0g4bThDVks2VG51NVJtMlRxektk?=
- =?utf-8?B?YVNjWUNzSmR1SU9jT3ljU3RVQkZ6bjNCV0ZmVDRPbkkzWHVJbXBuUVloUjFo?=
- =?utf-8?B?K1Z4dkRIQ1BXajB1bkVLRFhDbEVIWnlNRi9hVjRKMjZmNElmbU53eWYycFov?=
- =?utf-8?B?QXpybWh0RUZhK0dZZlJLT0hOOGxuUFZuMDE5VU9hYnFtZWhndk4rRmFjUERN?=
- =?utf-8?B?RTY3RGU5TFpWV3A5Vlpmc2tsaXpEaWpGYnZkdWh3Wk5VdEU1RXJwMEZtdS8y?=
- =?utf-8?B?WjlOQldZL1lFcHcxMVdaT0RvSjRGOWcvOVhBWUR2VVFrTVVhd0VqbkZOT0lW?=
- =?utf-8?B?bkJjeFlhaEJNaW9DVE10eldvK2JVSHN0YkNwQWtjMTdKaFRqSVoxTW1YQ2dy?=
- =?utf-8?B?RGw0RzE1NVJHUGp0OHRmYUVzakxtU041Y3NGSUZKV3pvd0xrdGRXYS84dU9Y?=
- =?utf-8?B?NDdDSmRFWDB1dkFlRzRrVklVa3NId21IN0FWRjR1cDljcHhmZ1hIRmgyaXFV?=
- =?utf-8?B?YVhvd3BWdHllSUpGQ2ZWcnFLd3lzNTJrL2RZRVB0WEdURGdvWUVVdzdUZVly?=
- =?utf-8?B?b0dkdzM5OEFKTkFLU3dpeXNkTVlDaTJrYThJWXpjMEJZaGlDZkdQMU0xdEtT?=
- =?utf-8?B?cU1OQ2lLRjgrRkdManFmSFZqM2ttbHJSM1dvUjJxVnNvY1NiakFuRzNqaGdW?=
- =?utf-8?B?NlIxa1JOdXFmcU9sMEs2SXVBNXptKzRsOEpoanpVcmJEejdKUW1vZkVJeUJw?=
- =?utf-8?B?MFJlNFl5bVJpYWQrenFKZnppemZMMVBUVTk2RG9TVW0wZWtQODVVbmV3WVlt?=
- =?utf-8?B?WFU3UWdTTng3QlFRQ2tVV1JJTnJaOFlKSis0dXVnVWhaWjhDM1pDYmJjbFp5?=
- =?utf-8?B?NVEwVzE3SUNIRnNEbURNYUxtZDZXVGlsUUpOZlRwemt5OTdMK1dySnlGeFY4?=
- =?utf-8?B?NEtyb0E1VFJlQlQ1UDd3NEtXL3J3OFh0SldtRzRFQ21ldTQvV1JTckU3MmdC?=
- =?utf-8?B?MXh3VUdzbE8vdDBNK1crRmRnZStHU3IvamlsamVwVk9EOVk3ajRWTGwrWHVz?=
- =?utf-8?B?eGlyMXNpK1Azcjd0dHZ5L0tueVRWRzA5eHFIeWRiZW94bi9helFmaW1mZUJJ?=
- =?utf-8?B?dmQvbHc5eVZMNGJ0RWV4UlRXenN2emc5UHRYdGcvY2pnVzhaTTFuajlYREcx?=
- =?utf-8?B?VE9vaGN0dHQ0VmtrSEJ0RnpOdmJ5Ymk3OTBtakhzV05HUnFOOGJIeUM4ZGlu?=
- =?utf-8?B?WkpnL2NMOTNnaTljTHNoQUlZZWRhSllUUktveFF2dFRjMmtrcDEvYW1VWlNo?=
- =?utf-8?B?M3cwUnA3cTBGS3dVd3FKWVY1UnpPcGo3Y1F3REFGN0NtRjdlU3V4SlF6Q21W?=
- =?utf-8?B?cmtDdXI0ZE9tMGE4bDgwc09oTzZUSUZnS09Fc0tiZzNmTitTSjRLbWY1d3FJ?=
- =?utf-8?B?NVhwc2hiNFFHQ0VlM2hKbC9uWDdPL09ScTFzTnZSd2RCd3Z6V3VOUjVTeFpR?=
- =?utf-8?B?eDFvY3Y1M0ZmWW5tVExIR283S0NVUVlQcWpkUzArV2s0TFBxZElSaDB0enFj?=
- =?utf-8?Q?eZduV9f70j8=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?d0xwTTVkNnIrTXo5eEE0MEdWbTdlZjQyM1ZkQXFLdUNBd0QvOWF2QTIvekdO?=
+ =?utf-8?B?UzZ1SEl5T0U2M0JCK0JWYnJIeWlOaisvUEhnSGY4TjlWMzllSmk5TWxSNjZG?=
+ =?utf-8?B?UWl6UDV4NXlWemhGTldXWWQ4VW12MXlzN2p6UkF3eEFMTU5NKzRtSk1aYVoy?=
+ =?utf-8?B?R1J6dUlnUFFzelJ2TExZOU5tbFlDMlVGMFYwZ1JucHM0K0dXTUN2MGU5NTJr?=
+ =?utf-8?B?QU1YYUhPZUxWcWV0L3ZVenhGL2JvWW9mazd6M2pQZHVQMG9yYjA4SCtYSitp?=
+ =?utf-8?B?SlRwaGo0YWpnRHJvN3NMV1YyeTI1MS91M3RsbC9OS0U2MllDcmErVW8rRmtQ?=
+ =?utf-8?B?a0xnQmhNQXlvSTBKREZoclVJeU01UWRoa00zSzVMSEZaczUxUHZPc2xLaGdH?=
+ =?utf-8?B?ck5IYXBjZWZsSWk0bXJlWTdkOWJ5RXJTU1NmM2FYR0dWdmE5TzZRNnBQWEtr?=
+ =?utf-8?B?RHRuMFJZSUVlRXk2SUF5dXQxbzRDRjVFaG8rZGNYd05GOENnZ20yL1BqMG5o?=
+ =?utf-8?B?VHFrQWtHSVlDckhKYXZ2N3RVZUNlbmlzemlTOFJ1czZ1bWZFZzRCS0Zhd28w?=
+ =?utf-8?B?YmRpbFNvRFRJREVDQytjNC9vamxTOHdZQ2dxbG1ZcU9FRnpZdWViclVhQkpB?=
+ =?utf-8?B?VnFseHNPKzF4UDh4TWhUNDFKTDdUbER0MnM4L1UxRFRnNWNpeEFDQXVoQy8r?=
+ =?utf-8?B?cHV3OGFRaG5vTHFZWFFFcVl3SmZRMlBtWFRDaElISHhQTjV2clUyZ0VGZi9N?=
+ =?utf-8?B?VFY3UUhhQWZPbTRCOFlRazFiWGZWUE5wQ1Z5eGNBZlNUWjhpN2QyQWRaYU00?=
+ =?utf-8?B?S0FGYzRkOEtMTDlzNXpiRU11OFJGaXRlTERVUGt2YUhCcmQ5VmI0L3pFR254?=
+ =?utf-8?B?UXZCeTBJWVJBWDhSSHZCTDlhTXZqZEc0SlQ2dXk3ZEl5SnpIT0lGSEtFbkc0?=
+ =?utf-8?B?ZlBIT1ZSK011SXQzQXZORjNITGtEbUp5ZDNTSC9iTjVsVTBIcVFNYWtyQlVr?=
+ =?utf-8?B?STZNbnQyTVJmMFA3UE9MWlBsQ1o1Qy9EV0VpelJ1b2xtaDc4d1A1elhoQ0g1?=
+ =?utf-8?B?UDZUdVBXWksrME5vaWJtVE45YTZYbmkvcFBhbHBReUFHV1JjMi9vRElibmFp?=
+ =?utf-8?B?eUZqa0hUZjdsRHEyL2N2aUJXRmpEWEJkRUxKOFRDOVlYNkFvWlRkcG1PcEth?=
+ =?utf-8?B?YTJSQmtsWCt3MnpHbyt6QTBoaXRzYnVGYjFTcWVUZDBKOEFMUEtYUFFEYk41?=
+ =?utf-8?B?VzJ1d3QraElVMXZpa3VOdXdqTDFhOTkwemdUdDlVb1RhNUpFem9vUmR1cHQz?=
+ =?utf-8?B?ekY5QVI4bnhZMUk1akpIQit5YzZ5d3ZIcGxtTXdqQ0Z4WDFCOTBXVEdzTFFs?=
+ =?utf-8?B?MFJvcnFMOHZLV3dLR2ZoUWQzbTJBZlhNNTk1N2htSVQ2dStDTS81eWJtVU9y?=
+ =?utf-8?B?cHY3VmFUcjdHV0huZFRTclF0VXdHd244SkFuNnJ2S2k1LzF2QXdNaDBGZlN5?=
+ =?utf-8?B?Qnc0bWpwTFhRMjZoRFhSSXorWW93QkdEOVkveWVramxnTW0rODhBTHNlaHJH?=
+ =?utf-8?B?TmpUSWVPbU9tSS93SjBqSFVocTRETEtNT2dsMFN3SlRhZFlIYmorZStIOFlp?=
+ =?utf-8?B?MkVaRGppckJqN1MzclRka3JNcGNDN2dDdGl3cUM1bzVzY2ppbFpxT01rc3NV?=
+ =?utf-8?B?ZFQyd1NOLzZNNHpFbXVmVmQvZ0ZYcHpiSFk0djJuUmlKa294V2lYKzdWeXVV?=
+ =?utf-8?B?YmtGS29qdGIyNEQ2UXU1U1lxaUhteG1QdTk4bGJTQkR4U3YvbHRCZUowZndY?=
+ =?utf-8?B?eGhjV0Y1QWZOdTIrVDMyY0lZblZvNElxR0RtUWovVzFUcEhxS1FMMStmU21t?=
+ =?utf-8?B?eFhEaTErcmVaR3BNdjdRRmlJdWg5ekdvS1VnL1dlZFdqTHZzeGw4SnFlRVBu?=
+ =?utf-8?Q?NqOSuBSo39M=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(1800799024)(376014)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N1VQam00MXZRTmQ0bERsaElMZVpKTVpGVGplM1BhREJqYzR0cFVNYWk0VXJB?=
- =?utf-8?B?MlQyYUIzeHN5SERYVGRObGF1aVN3czh2dzlNVzNnOWY3dk1nRURpekxENWNv?=
- =?utf-8?B?SFJZK09QUWxUblV2amRXN0dpRUcwd295aU9jeE9qZENlNmxTMXd5dUU4UDhW?=
- =?utf-8?B?VGR2ZUJ2VzdsQmZ3TGU5SHNJN0o2ejBuTlNqaFdNWCtMd3NpWCtwOWE3Z3pw?=
- =?utf-8?B?SFRKNEV2OW1IdVVmc1doekdHL0ZMTDJmeWRwMFBGOG9rVUJWaW9qejBlaXJ6?=
- =?utf-8?B?T3ZFWXJHbSt0YjBXRXNEYUxOZWlSTGUyMU1ycXVXYVFwaFdxMW9nc1ErbHgv?=
- =?utf-8?B?L0pkVXJOZERHY2Y0U2srdUlCK0VJQk42ZTc4T3BWZHZVQkhuNTM4akUySU9P?=
- =?utf-8?B?TkZYWmdvc2tITXRtOFc4cFhjMDgyYVFBSmo3TUZQOTZPeElRZmtoeVovNXFH?=
- =?utf-8?B?YUFINUVWb0k1V0dWTGtOYzJsOVM0WHdiU283SllmVjg2a0NPSnhwQWduZHJT?=
- =?utf-8?B?K1MrR2NMbE5Jd0xXc1pvNTlyT29Lck1ocDFrK2RpL3NsVnNUQjU3ckErb3JC?=
- =?utf-8?B?d0VFVnZ5bDVyMjU0MzhkN25tem5nWFpnNmgwSVBHWlFYaXBKbk9MZUx0aXl5?=
- =?utf-8?B?c2JwUFJwTHNOQkVFVURiNGZ6VHZZSGxCUXNzRDl3RERiR2xWYXpTeHgvZEtY?=
- =?utf-8?B?NWkxWWxsRUViZUJtQzI4Zk8rTmxhcXAzK2xkZnJ1bC85MW82Z1JIVHB4MlBa?=
- =?utf-8?B?UnNWYTFHaUVZMVR5dHkrdEk3TXVvNDNPbStqd2VxV0RHSjdHSjc3bVArN3VP?=
- =?utf-8?B?b0NBYU1sa3J0YWJtaUR0VC92dGsxWmxadWNNUk02NXJNNmp4bHdqaGF6SzF1?=
- =?utf-8?B?YnExcWwxZDhJODA2ZVRISk1zZVpWOEErSW4vMisreTNVc1V2Y3FMTGlPSTRz?=
- =?utf-8?B?NUNUSk5SZitvc1B1VnRvM2ZVZHdHYUQ2SmthdWpFTFJ1MmRvZ3NmOHVCK2pG?=
- =?utf-8?B?ZnlEdlNWNzNZbW9TL1c5MHRIK1c5c0xCdTcyS1N0TjMyTzVzLytRUFFuM3NL?=
- =?utf-8?B?M0VvUnZXc3JiZTVoQVVvZmFxOU5SVWJkd054VWI4Umpudy9YUCsvT0Z0R1FY?=
- =?utf-8?B?c2Jockd6Q3o2LzFTcXl1NmhLVlBpdDl6cE5HZExPK2w0Qit2THQzVnhremh2?=
- =?utf-8?B?VXpvaXdSdU5rdXRONnIwREtXYXFCUm1jdmV4b3lkSjJuZ3FHQ21qLzJJdi9X?=
- =?utf-8?B?ZGRHU2dXbkV0YzVESmxPVWhXTi9OWmJqREw5VVBkaEN1TEllRzMzZDF3QmdM?=
- =?utf-8?B?ck5rMHp4LzVrS1ZGUUhsTGhuQitVZlI2bzFROFJ1ZGNDVUVwYzFyWXp5S3Jy?=
- =?utf-8?B?VDV6L1lWb2VwdXlmZ2dNUDdhRnd4VGg2c2dZYzNXLzVxcFZrbU8ySEVCTmFI?=
- =?utf-8?B?NzY4cDA1WUdxVnJiUUYvZUgwRHM4VzEzbFd5ZnVHWC9KSnlNQWsyUllhSzVh?=
- =?utf-8?B?cnpDd20za3R4N3NtaEFFMlJxUllndzJnWjFVd0NUeFBrOUM2M2x3QmJpbVVj?=
- =?utf-8?B?dFU4RjE4bzR5YjhSaUNhV0duTlRPdVo5SzdkOUJnS3dVVXAzaHB4eDlvL21z?=
- =?utf-8?B?RGZLdCt6RWhRMFFpbGpMdk4zbWVxd1lQdHhMb0JTUWErd0tPMkYxcXErU3Vh?=
- =?utf-8?B?ZC92NjVmd1NYVGhvQlR1SFZ4dmkraHNUTU1ibUhpY1N1R0RlVkdXRStYUVNq?=
- =?utf-8?B?RVAreXd0K1FxekNpQWtlYlY2bHEzVUtXR21FQ0g5eXFZQWk1WGhndDhhU1VP?=
- =?utf-8?B?V1JsNHdtejdSeU1PRzIwNkl0c1hieEZmVGY2OVdVOEhpbTl4ZmY5TWF2YTRD?=
- =?utf-8?B?Qm81aGowdi9RUDRMTEpXL2RZdTE5TElJN3Zod1JQb1d6dGhFbktlQ3p1UFE2?=
- =?utf-8?B?T2lOaHVvOXkrRzV0WXZxdDRsWXBPYzh0OGZST3d6dXBQczZVWWZ4SEt6WitI?=
- =?utf-8?B?eWQzdS9IdTdDV2hVSXQrVy9SaUJreVBLNHlsNHZnVWd4ZWtGclB0aG1MT0dz?=
- =?utf-8?B?UXBjVk5WdjRiMFJPT2RSamorRDZ2eGxZQmRqU0dVeTZTY1UvM3dOcnJoQjZ1?=
- =?utf-8?B?WHMxRlovcUhpdXNuZ0tGckloRkgvRFlVdTk1MlpHSXZSNE9RazhHa3Q5K0dL?=
- =?utf-8?B?Nnc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TmJvM2tlcFJJOEFmbGkvR2ZROFZtU0pKeXdvOVFlbVUzMjNHQVIvbjFzNmtz?=
+ =?utf-8?B?NGdDY1R6blkyUGRDcnNQZVBDSXhvaDY0d1pLTjgwQXp5VUJXUTN4dGFSdXhi?=
+ =?utf-8?B?UThmV21KeTJHSWwrVjVReTFzU0pmYjZYeitHeXdQckJQV1FXbXlBWHRyME83?=
+ =?utf-8?B?N3BsekRMaTJwNjZXbndVSEZvQnJ6UUtMZ1hoTkV4dzNFUFNyaEJHTGlhM21Q?=
+ =?utf-8?B?YlRvWDZMOWVYVHRFdGhZTjB6N05RcVg3cFJRWlRNc0xtMXJMUWh2d0hNR21X?=
+ =?utf-8?B?d2cwb21YNEFrVTlvTVhibE1xYUFlOHdydkJJckR3OC9kMnAwRitOM05lNTlY?=
+ =?utf-8?B?SUhPdFdxK2t5K2hJVFMzRHkvZzkyRGRMTDRJUEtTT050NkltOU9EdmQrVy9Y?=
+ =?utf-8?B?QzJsVlNMbHNPa2tEcEwzNEhYM3V5REQvOVNPOTZYcjFtZWh6a3F3WGtRbWRY?=
+ =?utf-8?B?M1BWNnRoc1kzMFU4NWFTcVRPNCtRayt2Y1FhckcvVlRtc3lIMXFOUzhGR29J?=
+ =?utf-8?B?aUNFbTZvd0RYL2gvRXZ3dm8rWWxEWndiYWJaWXE5VVA4WFV3Wm5rNE1kQWNa?=
+ =?utf-8?B?MEhha3dnOC9kTmlZakQ1ZVZwN0VqekxqNDFDQ1RHT2dEdjZnVTlYcTJNRG0w?=
+ =?utf-8?B?QkVCNElnSGgzaHVzcGdBa2pZbm5ibHlvcUFSc0tNN0J2UGVRalBZZDdhR3JE?=
+ =?utf-8?B?Mm9lODBFK25ESDFwUjJIMEtHYVRxM1VpQmR2bUdOZlpkVXVDUTh6aVZVYVpo?=
+ =?utf-8?B?SlR3YUc0NzJGV3htdzI2TjFObk1WOFloanhON0RaM29wZUV5QTlidlgvVjZZ?=
+ =?utf-8?B?QTExenlLZkhzcFd2RmtYSnA2a0JCQlNPUGZFaDZaNy9zaStDOXpDTDY4L3BW?=
+ =?utf-8?B?VTBaTWVMOENJbWNxQ2U5c29FQS9JZlllRFVSWFJReHNQSEJtUHB4TkJWTW5D?=
+ =?utf-8?B?clJOOUFTYzlrSVVCYTE2Mys2Zjc3WmdzWFhjdFdLbTUrRm9VY0k1eVBUSlV1?=
+ =?utf-8?B?UHVPZjdDZTdtUDhzb3dKNkpiaXl4R0MxNFh1Mlh2c3lTWnVyU2dnVmZSYXE3?=
+ =?utf-8?B?WDhFL2ZGMWRtdzhneno4MlNmdmc1Wm9nQnU5SUtSckJRVFRMWjN2VUtpd2JE?=
+ =?utf-8?B?OFlQRHNHZnRWUkp3NDdKcjU4VVN0bS8wbDcrV3JjWWpNRFpFM0dPaXRzcTJE?=
+ =?utf-8?B?ZkFnbHg0L1ZmeGhJV2JQUThvRlExNlNhcHIzS3p4TElsWFR2TXBrUkxDY1hj?=
+ =?utf-8?B?b2JOL1QzM25ackNNbi9mTHBlT0loU3FBQitaaXcxOGdRSW1LUjB2TW1FclJK?=
+ =?utf-8?B?ZHgvVTJlaHI2RWZvVXBZRmxRd0E2MG1zZDZPT0R5LytpdmJDOHlLMDgvcHZS?=
+ =?utf-8?B?bmdBaVFoU291TlFLVGlScUFMdGdMMmdxTEN1V1oySmxGNmxCUm5kMFJWeU9u?=
+ =?utf-8?B?VUhJeEZyMWdvVDJqaXZBTy95YXFRQnpYdnJjZnRtWGo3bFdIOFV3YUo4VTgw?=
+ =?utf-8?B?b3lWcS9HVGpSQ0J2RDd3Vmx3aWxoYmpmUEZXZHRabWI1SFZGamszczRIRnU0?=
+ =?utf-8?B?Z3hhNVM4Ly9FRkp3MnNmR1Z4dEsveHpsVEs4MlBNMmtxRm1NbU9PSE1nWFZZ?=
+ =?utf-8?B?ODN0M0VDTVJYWGF4OE05VFhkZ0ZXN3pMeDdMaEtJMWZxSzQ3NHY3UTF3bHBB?=
+ =?utf-8?B?YW1rVjlHUm1tekFZWURwaTdqb2lGaDNiREVHRXBjQTg1bkZKa2VzQnU0akZ6?=
+ =?utf-8?B?QlFpdkRISExJTlNMZEVDTjlnWGJWckJpMGFsaitTUFlOVmNFK0tmYnpXUHlk?=
+ =?utf-8?B?K3JvaTJKbDZ3Y2VnYzZGb2hLcE1YaE42bmJ4QW1ySGhkR1M5UTlLcWdSNWJW?=
+ =?utf-8?B?R1ZUMEhJR3FqeDA3YW5hQU5VL2tUZHFucjVNaU9pSVpDNE03Y2pLSWRRc0Ew?=
+ =?utf-8?B?ZXZGQVQ1WExyTHEwd0R0cGJkUFkxSElaK3BpZE54QVBRSGJuQWhFV204Z3cv?=
+ =?utf-8?B?Slp4VXczeE9NWmdmSWl1cUFjRXhSVUJTQWM3ODJpbkg3UVQ2eUxhSXlKb2VN?=
+ =?utf-8?B?Rk9iQ3c0VVpyd0VaTVdnSkxxejByL0NTTG5TdmN1ZHFodEpqc1hwMkczekJL?=
+ =?utf-8?B?MXpFb1R1K1VOK2dBMm5sY04wd1NWeTJTcVNDREErNzJwNnhxQlByM3NPd3BF?=
+ =?utf-8?B?Q2c9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 256c5c64-36f7-4694-9afe-08dd9485f83e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 19fd2850-4dd7-4edb-1bf9-08dd948745e3
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2025 14:28:50.9347 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2025 14:38:07.2006 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TbKHlS75DZ2VB86haq9ZOxDLPoNlZtM4GRdJdlfUOi58InLC4nVJ/xKMPZPcjoAPQE2HhkaJfWWITN36OV0/MbvhnnLRwwJJqcZ6g10AThE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9238
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9DwXFd1xM/m4JsonKUGHpB4PeydVUt1hyrOgBDMIVYCQhG2JPcGEGx5D/Ha+C1qrlOj2z6D75GqPFWungKaR4/Lwhn0O4s1IJkJX1ZmBq18=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8553
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,67 +179,67 @@ X-Virus-Status: Clean
 Hi Lukasz,
 
 On 4/25/25 12:56 PM, Lukasz Czechowski wrote:
-> Currently the check in usb_onboard_hub_bind is relying on specific
-> compatible string for the Michrochip USB5744. Replace this with
-> more generic approach that will allow to add new types of devices
-> to the of_match table. Because the driver only needs to bind one
-> "half" of the hub, the peer-hub node is used to find out if it
-> was already done. In case peer-hub was bound, -ENODEV is returned.
+> In the usb_onboard_hub_remove, the reset gpio, if available, is
+> freed. The pin state however, remains unchanged, as set in the
+> usb_onboard_hub_reset. The hub is then left enabled.
 > 
+> During second onboard hub probing, the hub is initially enabled
+> (reset pin in state "0"), and then it is being reset by the reset
+> function (transition to "1" and then to "0"). Because of this,
+> the hub first disconnects from root hub, and then it connects again.
+> 
+> When the devices are being discovered in the usb_scan_port in the
+> usb_hub driver, initially there is the USB_PORT_STAT_CONNECTION bit
+> not set in portstatus, but USB_PORT_STAT_C_CONNECTION set in
+> portchange data (which is because disconnect event occurred first).
+> In this condition, the driver does not wait for devices to appear.
+> This can cause the hub (and all child devices) to be not enumerated
+> when rescanning on "usb reset" command.
+> 
+> To fix this, set the reset gpio to active before freeing, to put
+> the hub into reset state.
+> 
+
+I would add in the commit log that there's still an additional scenario 
+currently not being handled:
+
+The reset GPIO is held high by default by the HW before U-Boot takes 
+over, in which case the USB hub is active, then during the probe it gets 
+reset and we have the same issue of child devices not being enumerated 
+because they are quickly disconnected.
+
 > Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 > ---
->   common/usb_onboard_hub.c | 15 ++++++++++-----
->   1 file changed, 10 insertions(+), 5 deletions(-)
+>   common/usb_onboard_hub.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
 > diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> index 7fe62b043e6a..9f8c1a304cdf 100644
+> index 9f8c1a304cdf..325c274ed952 100644
 > --- a/common/usb_onboard_hub.c
 > +++ b/common/usb_onboard_hub.c
-> @@ -9,6 +9,7 @@
+> @@ -211,8 +211,10 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+>   	struct onboard_hub *hub = dev_get_priv(dev);
+>   	int ret;
 >   
->   #include <asm/gpio.h>
->   #include <dm.h>
-> +#include <dm/device.h>
->   #include <dm/device_compat.h>
->   #include <i2c.h>
->   #include <linux/delay.h>
-> @@ -179,8 +180,8 @@ err:
->   static int usb_onboard_hub_bind(struct udevice *dev)
->   {
->   	struct ofnode_phandle_args phandle;
-> -	const void *fdt = gd->fdt_blob;
-> -	int ret, off;
-> +	struct udevice *peerdev;
-> +	int ret;
->   
->   	ret = dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle);
->   	if (ret == -ENOENT) {
-> @@ -193,10 +194,14 @@ static int usb_onboard_hub_bind(struct udevice *dev)
->   		return ret;
->   	}
->   
-> -	off = ofnode_to_offset(phandle.node);
-> -	ret = fdt_node_check_compatible(fdt, off, "usb424,5744");
-> -	if (!ret)
-> +	ret = device_find_global_by_ofnode(phandle.node, &peerdev);
+> -	if (hub->reset_gpio)
+> +	if (hub->reset_gpio) {
+> +		ret = dm_gpio_set_value(hub->reset_gpio, 1);
 
-Wondering if uclass_find_device_by_ofnode(UCLASS_USB_HUB, phandle.node, 
-&peerdev) wouldn't be faster/more appropriate here?
+We should probably dev_err here if ret is non-0?
 
-Looks good in any case so:
+With that done:
 
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Just for general information (I assume specifically to Tom since he's 
-the maintainer there), I would really appreciate this to be merged 
-before we sync the kernel DT with 6.16 (if Heiko manages to squeeze one 
-last merge request to Arnd before the cut-off date; or 6.17 failing 
-that) otherwise RK3399 Puma will have USB completely broken (I assume we 
-could have -u-boot.dtsi hacking the device tree to remove/add nodes to 
-keep it as it is today, but better to not do it :) ).
+Side note, I think the ret handling is wrong in the function as we'll 
+only ever return the return code of the last 
+regulator_set_enable_if_allowed call or if no supply provided, 
+dm_gpio_set_value.
 
-Timeline wise, I assume 2025.10 at the earliest, but maybe 2026.01? It 
-depends when 6.16/6.17 will be released and/or if we take -rc1 :)
+I guess we should |= them all (but only call dev_err when the latest 
+function returns non-zero) and return that at the end.
 
-Cheers,
+Nothing blocking this patch though.
+
+Thanks!
 Quentin
