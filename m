@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B11C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E0BC3ABD8
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:42:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F4A28294C;
-	Fri, 16 May 2025 13:42:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9859182935;
+	Fri, 16 May 2025 13:42:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bf3Sjc33";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cbWOh6be";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5FCE8294C; Fri, 16 May 2025 13:42:07 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id E5EC882A33; Fri, 16 May 2025 13:42:09 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B62588006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:42:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1E4F82935
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:42:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
 Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfubv298172;
- Fri, 16 May 2025 06:41:56 -0500
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfxTg3728217;
+ Fri, 16 May 2025 06:41:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747395716;
- bh=FZwYds0Yt2mvkF6zVI6Gas2E3onJKfX349MDCFIa524=;
+ s=ti-com-17Q1; t=1747395719;
+ bh=Y4ppxal3ySJzxyWPn2+pcY/HIci10sWR7N4E4ueKoLg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=bf3Sjc33m1h+lG2pRkRAXDTwXsGFyIR9O6CXwzefUtEPQ1x1LNehE5kf7fbS8CV6T
- D1iD9KN47IyMzo7IRJ2W6AoG4cqApM3J2e3/e1CJVmXove9SCUXJUFSdSqfDPwLsg6
- jctjog3b5SccrzG9pU8dWS9OIGni+akppC3t9PnI=
+ b=cbWOh6beqRHLVMlDEyx+LRJcmgc32ldTmKNjTNq/Nnjvv+RbKz7RnoPCLv30rUzdF
+ gHeYPQyqUf0lbIPbavQglG3qVk6qpiA+dJDoFfo2eGXu8RpqHRczCXVQSPAsb/CoBQ
+ OMZwY65EruTxMO8wkM24qsGPEZOcmwJCETfoNQIg=
 Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54GBfu0f3262521
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54GBfxfQ3262537
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 16 May 2025 06:41:56 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE109.ent.ti.com
+ Fri, 16 May 2025 06:41:59 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE109.ent.ti.com
  (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- May 2025 06:41:56 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 06:41:59 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 May 2025 06:41:55 -0500
+ Frontend Transport; Fri, 16 May 2025 06:41:59 -0500
 Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com
  [172.24.227.136] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfnh8063026;
- Fri, 16 May 2025 06:41:53 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfnh9063026;
+ Fri, 16 May 2025 06:41:56 -0500
 From: Moteen Shah <m-shah@ti.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
  <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
  <vigneshr@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>
-Subject: [PATCH 1/2 v2] tools: binman: control.py: Propagate
- bootph-all/bootph-some-ram properties to supernodes
-Date: Fri, 16 May 2025 17:11:47 +0530
-Message-ID: <20250516114148.3862114-2-m-shah@ti.com>
+Subject: [PATCH 2/2 v2] tools: binman: ftest.py: Add testcase for bootph-*
+ propagation
+Date: Fri, 16 May 2025 17:11:48 +0530
+Message-ID: <20250516114148.3862114-3-m-shah@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250516114148.3862114-1-m-shah@ti.com>
 References: <20250516114148.3862114-1-m-shah@ti.com>
@@ -82,97 +82,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As per bootph schema, bootph-* property in child node should be
-implied in their parent, but this feature is not implemented in
-the U-Boot proper stage (before relocation) resulting in devices
-not being bound because of the missing bootph-all or bootph-some-ram
-property in the parent node.
-
-To mitigate this issue, add a function to scan through all the nodes
-in the device-tree for bootph-all and bootph-some-ram properties. If
-found, propagate it to all of its parent nodes up the hierarchy.
+Add a testcase to ensure that scan_and_prop_bootph() actually
+propagates bootph-* properties to supernodes.
 
 Signed-off-by: Moteen Shah <m-shah@ti.com>
-Signed-off-by: Simon Glass <sjg@chromium.org>
-
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
- tools/binman/control.py | 54 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 54 insertions(+)
+ tools/binman/ftest.py                 | 24 ++++++++++++++++++++++++
+ tools/binman/test/347_bootph_prop.dts | 21 +++++++++++++++++++++
+ 2 files changed, 45 insertions(+)
+ create mode 100644 tools/binman/test/347_bootph_prop.dts
 
-diff --git a/tools/binman/control.py b/tools/binman/control.py
-index 81f61e3e152..dcbc028adcc 100644
---- a/tools/binman/control.py
-+++ b/tools/binman/control.py
-@@ -530,6 +530,57 @@ def _RemoveTemplates(parent):
-     for node in del_nodes:
-         node.Delete()
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index fa174900014..8c37c0c95f6 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -8011,5 +8011,29 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self._DoTestFile('346_remove_template.dts',
+                          force_missing_bintools='openssl',)
  
-+def propagate_prop(node, prop):
-+    """Propagate the provided property to all the parent nodes up the hierarchy
++    def testBootphPropagation(self):
++        """Test that bootph-* properties are propagated correctly to supernodes"""
++        _, _, _, out_dtb_fname = self._DoReadFileDtb(
++                '347_bootph_prop.dts', use_real_dtb=True, update_dtb=True)
++        dtb = fdt.Fdt(out_dtb_fname)
++        dtb.Scan()
++        root = dtb.GetRoot()
++        parent_node = root.FindNode('dummy-parent')
++        subnode1 = parent_node.FindNode('subnode-1')
++        subnode2 = subnode1.FindNode('subnode-2')
++        subnode3 = subnode1.FindNode('subnode-3')
++        subnode4 = subnode3.FindNode('subnode-4')
++ 
++        self.assertIn('bootph-some-ram', subnode1.props,
++                      "Child node is missing 'bootph-some-ram' property")
++        self.assertIn('bootph-all', subnode1.props,
++                      "Child node is missing 'bootph-all' property")
++        self.assertIn('bootph-some-ram', parent_node.props,
++                      "Parent node is missing 'bootph-some-ram' property")
++        self.assertIn('bootph-all', parent_node.props,
++                      "Parent node is missing 'bootph-all' property")
++        self.assertEqual(len(subnode4.props), 0,
++                        "subnode shouldn't have any properties")
++        
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/tools/binman/test/347_bootph_prop.dts b/tools/binman/test/347_bootph_prop.dts
+new file mode 100644
+index 00000000000..91d4e4ad600
+--- /dev/null
++++ b/tools/binman/test/347_bootph_prop.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-+    Args:
-+        node (fdt.Node): Node and all its parent nodes up to the root to
-+            propagate the property.
-+        prop (str): Boolean property to propagate
++/dts-v1/;
++/ {
++	dummy-parent {
++		subnode-1 {
++			subnode-2 {
++				bootph-all;
++			};
++			subnode-3 {
++				bootph-some-ram;
++				subnode-4 {
++				};
++			};
++		};
++	};
 +
-+    Return:
-+        True if any change was made, else False
-+    """
-+    changed = False
-+    while node:
-+        if prop not in node.props:
-+            node.AddEmptyProp(prop, 0)
-+            changed = True
-+        node = node.parent
-+    return changed
++	binman: binman {
++	};
++};
 +
-+def scan_and_prop_bootph(node):
-+    """Propagate bootph properties from children to parents
-+
-+    The bootph schema indicates that bootph properties in children should be
-+    implied in their parents, all the way up the hierarchy. This is expensive
-+    to implement in U-Boot before relocation at runtime, so this function
-+    explicitly propagates these bootph properties upwards during build time.
-+
-+    This is used to set the bootph-all, bootph-some-ram property in the parent
-+    node if the respective property is found in any of the parent's subnodes.
-+    The other bootph-* properties are associated with the SPL stage and hence
-+    handled by fdtgrep.c.
-+
-+    Args:
-+        node (fdt.Node): Node to scan for bootph-all and bootph-some-ram
-+            property
-+
-+    Return:
-+        True if any change was made, else False
-+
-+    """
-+    bootph_prop = {'bootph-all', 'bootph-some-ram'}
-+
-+    changed = False
-+    for prop in bootph_prop:
-+        if prop in node.props:
-+            changed |= propagate_prop(node.parent, prop)
-+
-+    for subnode in node.subnodes:
-+        changed |= scan_and_prop_bootph(subnode)
-+    return changed
-+
- def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, indir):
-     """Prepare the images to be processed and select the device tree
- 
-@@ -589,6 +640,9 @@ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, ind
-         fname = tools.get_output_filename('u-boot.dtb.tmpl2')
-         tools.write_file(fname, dtb.GetContents())
- 
-+    if scan_and_prop_bootph(dtb.GetRoot()):
-+        dtb.Sync(True)
-+
-     images = _ReadImageDesc(node, use_expanded)
- 
-     if select_images:
 -- 
 2.34.1
 
