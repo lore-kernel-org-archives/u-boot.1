@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDCBC3ABD8
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 17:40:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D859CC3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 17:50:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E18F80107;
-	Fri, 16 May 2025 19:40:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A85780107;
+	Fri, 16 May 2025 19:50:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aUr/EqIt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="guVirO1J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67FBA8059D; Fri, 16 May 2025 19:40:27 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 529678059D; Fri, 16 May 2025 19:50:30 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F32C8006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 19:40:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CCBB8006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 19:50:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-310447fe59aso24529451fa.0
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 10:40:25 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-54b10956398so2770396e87.0
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 10:50:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747417224; x=1748022024; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1747417827; x=1748022627; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XlsJ2H9ITYg7hmAA+XnkJgVqc/G30cOHSifNiMJNGBo=;
- b=aUr/EqItjt/tfi62GVn0boqhWON/qodL6Hk2/aJ1QAWTsPS045HBJU6D5wcn5/TbU+
- KIEJc9SzcuUIHZ7nmyCHHLzmqCwBtyNAUia8UGnrHLgPxITMCAhade6Q3Yuan5sZs8K/
- JvsfOYUgZlO+iIMgBZcngcssXSkwlhrV1VkFnoUhmP95eZQFm3I6jRnLd7jP6VA5EvCd
- f0rPOhy95AjTsYuVGXLctRZJtV3lwjFY3PVW6I9jbF9vvmw8OWu5jsDCrnuvsL4k0uSO
- dWVrTc10Baw8wBfbvTh4hAYOGC6jngqFCxdof57avYFVS9hcbkVCqPkv1kETJC68ee4q
- AN3A==
+ bh=Zc2G1dEjS+bRPAeWnJ6/US9IuB3gsWxNDyIUDW9ssUQ=;
+ b=guVirO1Jef4L+JCLdH9IqUkcWNmSJURo5FAhGcLpm71rwF60HCkXfS2N2cNd/2SdvZ
+ 6qOBAA87IeCg7KVkZ2D5a7EYeOEhQMnvLJU7p/9gqzO9IysAffc9z2yM/5BWBfL9IaiF
+ P9qaU9Zd6nECl2c0w1KNf9+j+8Nr5KU+xk8SgH/pOT7QFsbNpksegDniCJqvzNYYyR5U
+ dkI7kQ21IxWRZEzlRsq6WBlrZd+jpKdFqquowWrsYBkg+aIhH2j7gfcAEHfYxYzw9f85
+ +M3rAwdl74gW3fA14nJ/dcJIXcgAGiXzt/39/ztqAgd0pUVyS4vwOVn7ojPP1FjIva5s
+ eeRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747417224; x=1748022024;
+ d=1e100.net; s=20230601; t=1747417827; x=1748022627;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XlsJ2H9ITYg7hmAA+XnkJgVqc/G30cOHSifNiMJNGBo=;
- b=ZqgGCO52Eafk/cj5v0CRJzpktGwgsuOUsIJykDksKe+N4uCDLikMvbtZz09R22BXK7
- o4NXOShQbwzKJNnqRY6rRB3fgh/26VYFzO+7H2VKJ1ofgnTKvjL/7F44cBDc5HPE/ESj
- ByM5ycEOOBvSRlAHdck3EHcow3hNzQt4Sab9JebxoD5LYjhtZruI/+9L8qFlzL/89/qF
- vU3jiCR46rObBNEmmYkrBwJqjwgDwoLLO48AfDbE0llNuAr2fI55qa1NzaKcj8OASPLT
- /c4RPrb9FQhVs7hYB7eezBM05AHtx4kPvo/odFHEHa6WCKpArCFAM3f3ee5Y2kYGVkpk
- OarA==
-X-Gm-Message-State: AOJu0Yy/3YSmBfn9v+yiOleFe1Lkim+LIlJlWfCq/kJP2T6DqlzJLBOJ
- qVExKNP7+B8OrHXAbkgtpX+puO7eqhofYuaQK1kkvdKuB0cB2yfCTXawvA5fx5Kl
-X-Gm-Gg: ASbGncv7vrvA+pKGP05N+gSwg0k+AEw6iidN1gLvMkM95K4ZuVSLHilS+FidM8bbyeX
- BHNMd+Sx2UmQ2eOLZjzM2hxERad3NrpQPNM860pnw7YPH0j32XKxA+2fPFvZXsaVt9B099Du6GX
- 8xFrAj9NBeGrU25xFiJfLwVsopr/2IozyT59aK54ODIt4yL/d3vy917xO+z+5vcetVkio2xpwM8
- 25GCjpq3Mv435WQ9tKh1WPkMsNSzBy5k/qsPrWsoXLWl2+oLqIzt9xpMHOaTQDPkyC+HxXAzOcH
- IuPdauFJ9U5vH0g7UWRChKl39eMoPS8Kev+kYUAbz0kV0fgusG4Kdz0eiFKMnuqiFxWTl0xPVqD
- TD4z0mfgVLEKlmPYMIA==
-X-Google-Smtp-Source: AGHT+IGXiitzW3DOlgD/8NNvkRHSs1q82G4PLePVvD76COyudmwJXcLQiO1JL+jAHO7+ikpRO1mfVA==
-X-Received: by 2002:a2e:ae0e:0:b0:326:cf8a:7f30 with SMTP id
- 38308e7fff4ca-328077a2dd9mr15318701fa.32.1747417224005; 
- Fri, 16 May 2025 10:40:24 -0700 (PDT)
+ bh=Zc2G1dEjS+bRPAeWnJ6/US9IuB3gsWxNDyIUDW9ssUQ=;
+ b=ndMZIoOJLFxsXeR+lyG4oZ9eYIGDJOlFPp//bhasqyAfkuBvptmtdsB2b7r8SACcto
+ CJ3+0BsNIV1af4d/dGyJpyghSAGZmLcvbZE92mdM2wqA2PwgjSocGsDMe7s9eRlGlBzc
+ +B/XbDQE/9FsILtAxS0Vg3sfIYZXo7VOzqXuFicX61Plc9ginD5CnR0EENtwIdBjvyhu
+ mYzcAbo2v1+8KRgF+rHKIb9ol88+tPl6zMNuld6fivEqueMgCcNdhsNuq1lMAVQ3dTbw
+ a7yfFF5xJILbxgze46waC0rngAMT9LgIu66PTL1VZVe7q/rL6I5POJBRDaW7jdNnnu2v
+ +JfQ==
+X-Gm-Message-State: AOJu0YxWf36wez8rDitV61jmnsZiSt1ajFAMsaCPSQzT9UnE9Qv0dOeV
+ uUMtnzNUj3tYDZyNTn0aAmzgt16AG32bt5aqb98sWYjp+3RFrcTd4RiJHmeCmSrn
+X-Gm-Gg: ASbGncul6w4y6Yccj1XIxo2z6iV/2nNK2HAy4MdXVyzANRwFkOjNSNrEx7KmjhYvzW5
+ 8HHZ9Gf+HjejB6riofcDqhctggcwbUBVwl+ejUV6yhe6ZHB5QpjuQ6N7IpF0o9GiJocKmEE9ARz
+ 2t96keKvcGSQCMPrIecDPHs3COSW4zcUPe6BQY1qITmQXuNLqdZOcmiXiwRj/M/JVl6Adm8nSQe
+ xKaPUSXLP596K3/kBfPQOb84E9liGebrfd8+0Ve/3yL/LD0ENYVTF/EwAJdBhhLkv/UnbwvPwju
+ z3ARk5c6L6k2uH6rGsG50La7b5wq66FwQCc0z43AtI8Yo6meLJ4thP5Y/Neqk7fKwLKKSnpTTNB
+ zKJzJiKmvJGRUbISoCQ==
+X-Google-Smtp-Source: AGHT+IF+Dh1fUR71Y5UGG88w6e6aenDRmJIIWTBHoIRcDCQI6w5JeGyMXbb4S6iZIGD/ePcKQBhwOQ==
+X-Received: by 2002:a05:6512:6703:b0:550:ecb4:94e with SMTP id
+ 2adb3069b0e04-550ecb409b5mr695152e87.9.1747417827084; 
+ Fri, 16 May 2025 10:50:27 -0700 (PDT)
 Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
  [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-328085b8795sm5212121fa.79.2025.05.16.10.40.23
+ 2adb3069b0e04-550e70180d6sm525157e87.138.2025.05.16.10.50.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 May 2025 10:40:23 -0700 (PDT)
+ Fri, 16 May 2025 10:50:26 -0700 (PDT)
 From: ant.v.moryakov@gmail.com
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com,
 	Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] drivers: scsi: fix: memory leak in do_scsi_scan_one()
-Date: Fri, 16 May 2025 20:40:20 +0300
-Message-Id: <20250516174020.118229-1-ant.v.moryakov@gmail.com>
+Subject: [PATCH] drivers: usb: host: fix prevent memory leak in interrupt
+ message submission
+Date: Fri, 16 May 2025 20:50:07 +0300
+Message-Id: <20250516175006.122811-1-ant.v.moryakov@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,32 +99,38 @@ X-Virus-Status: Clean
 
 From: Anton Moryakov <ant.v.moryakov@gmail.com>
 
-Free allocated name buffer when blk_create_devicef() fails to prevent
-memory leak. After successful device creation, the name ownership is
-transferred to the device structure and should not be freed manually.
+Ensure int_queue is properly destroyed when receiving wrong buffer
+by adding error handling path. Fixes memory leak that occurred
+when backbuffer validation failed.
 
-Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>"
-
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
 ---
- drivers/scsi/scsi.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/usb/host/ehci-hcd.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index cd0b84c0622..a9e364d3fdb 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -522,8 +522,10 @@ static int do_scsi_scan_one(struct udevice *dev, int id, int lun, bool verbose)
- 		return log_msg_ret("pro", ret);
+diff --git a/drivers/usb/host/ehci-hcd.c b/drivers/usb/host/ehci-hcd.c
+index 7d5519c65a9..765d8b327ee 100644
+--- a/drivers/usb/host/ehci-hcd.c
++++ b/drivers/usb/host/ehci-hcd.c
+@@ -1557,6 +1557,7 @@ static int _ehci_submit_int_msg(struct usb_device *dev, unsigned long pipe,
+ 		debug("got wrong buffer back (%p instead of %p)\n",
+ 		      backbuffer, buffer);
+ 		return -EINVAL;
++		goto err;
+ 	}
  
- 	ret = bootdev_setup_for_sibling_blk(bdev, "scsi_bootdev");
--	if (ret)
-+	if (ret) {
-+		free(name); 
- 		return log_msg_ret("bd", ret);
-+	}
+ 	ret = _ehci_destroy_int_queue(dev, queue);
+@@ -1565,6 +1566,10 @@ static int _ehci_submit_int_msg(struct usb_device *dev, unsigned long pipe,
  
- 	if (verbose) {
- 		printf("  Device %d: ", bdesc->devnum);
+ 	/* everything worked out fine */
+ 	return result;
++	
++err:
++    _ehci_destroy_int_queue(dev, queue);  // Освобождаем очередь перед выходом
++    return result;
+ }
+ 
+ static int _ehci_lock_async(struct ehci_ctrl *ctrl, int lock)
 -- 
 2.30.2
 
