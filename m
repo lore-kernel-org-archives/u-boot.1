@@ -4,68 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E0BC3ABD8
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68AB0C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:42:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9859182935;
-	Fri, 16 May 2025 13:42:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D8FA082A8B;
+	Fri, 16 May 2025 13:42:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cbWOh6be";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1747395732;
+	bh=uj3a7AgGZFZ2nN8YjYMxYYqcwvo1J7UL90ZLAm2y7rU=;
+	h=Date:From:To:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=QzKcNAfDofRKMMde3NaPXflx9RgCl7nMJF8uhodCb+PL75z4u58Yk1EyOyboftd+T
+	 xgTor3K9X+KMkxGhR1dP07xQRznqs0HaibyWkiuacXCD/SCdUw7UIMCi+1nKuGMFKL
+	 8t5zyniavIEm41TQUmykCY+Je1GLqCbjWx5mTCasXv2+IzS0zKbZhCsstC3ooO0ww+
+	 V1AfcvA+HVh8x3wCEPHlq0KIYz85qkyy6u0HoJ3q+1ZyudLws2g4AiTpKpDYTVzHwe
+	 o1dFM+v9Gk4MH7Pj+aP8W1ZJxnyEPnmhucLnHkkBPre3mt8e8IU+g/GwQYBl/S/toC
+	 ih5orSz24xP3Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5EC882A33; Fri, 16 May 2025 13:42:09 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1E4F82935
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:42:07 +0200 (CEST)
+ id E9B9382A8B; Fri, 16 May 2025 13:42:11 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E61E682A36
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:42:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfxTg3728217;
- Fri, 16 May 2025 06:41:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747395719;
- bh=Y4ppxal3ySJzxyWPn2+pcY/HIci10sWR7N4E4ueKoLg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=cbWOh6beqRHLVMlDEyx+LRJcmgc32ldTmKNjTNq/Nnjvv+RbKz7RnoPCLv30rUzdF
- gHeYPQyqUf0lbIPbavQglG3qVk6qpiA+dJDoFfo2eGXu8RpqHRczCXVQSPAsb/CoBQ
- OMZwY65EruTxMO8wkM24qsGPEZOcmwJCETfoNQIg=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54GBfxfQ3262537
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 16 May 2025 06:41:59 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- May 2025 06:41:59 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 May 2025 06:41:59 -0500
-Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com
- [172.24.227.136] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54GBfnh9063026;
- Fri, 16 May 2025 06:41:56 -0500
-From: Moteen Shah <m-shah@ti.com>
-To: <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
- <vigneshr@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>
-Subject: [PATCH 2/2 v2] tools: binman: ftest.py: Add testcase for bootph-*
- propagation
-Date: Fri, 16 May 2025 17:11:48 +0530
-Message-ID: <20250516114148.3862114-3-m-shah@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250516114148.3862114-1-m-shah@ti.com>
-References: <20250516114148.3862114-1-m-shah@ti.com>
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4ZzQCv49wyz9tZh;
+ Fri, 16 May 2025 13:42:03 +0200 (CEST)
+Message-ID: <6e0b4e17-34c8-42f3-8f62-3e822e37fd4c@denx.de>
+Date: Fri, 16 May 2025 13:42:02 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Please pull u-boot-marvell/master
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,79 +64,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a testcase to ensure that scan_and_prop_bootph() actually
-propagates bootph-* properties to supernodes.
+Hi Tom,
 
-Signed-off-by: Moteen Shah <m-shah@ti.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+please pull this next batch of mostly Marvell related patches:
 
----
- tools/binman/ftest.py                 | 24 ++++++++++++++++++++++++
- tools/binman/test/347_bootph_prop.dts | 21 +++++++++++++++++++++
- 2 files changed, 45 insertions(+)
- create mode 100644 tools/binman/test/347_bootph_prop.dts
+----------------------------------------------------------------
+- mvebu_espressobin_ultra-88f3720_defconfig: enable hwrng
+- kirkwood: Convert to DM_SERIAL for Kirkwood boards
+- kirkwood: Convert to DM_SERIAL for Synology DS109 board
+- cmd: tlv_eeprom: return after successful read from EEPROM
+----------------------------------------------------------------
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index fa174900014..8c37c0c95f6 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -8011,5 +8011,29 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         self._DoTestFile('346_remove_template.dts',
-                          force_missing_bintools='openssl',)
- 
-+    def testBootphPropagation(self):
-+        """Test that bootph-* properties are propagated correctly to supernodes"""
-+        _, _, _, out_dtb_fname = self._DoReadFileDtb(
-+                '347_bootph_prop.dts', use_real_dtb=True, update_dtb=True)
-+        dtb = fdt.Fdt(out_dtb_fname)
-+        dtb.Scan()
-+        root = dtb.GetRoot()
-+        parent_node = root.FindNode('dummy-parent')
-+        subnode1 = parent_node.FindNode('subnode-1')
-+        subnode2 = subnode1.FindNode('subnode-2')
-+        subnode3 = subnode1.FindNode('subnode-3')
-+        subnode4 = subnode3.FindNode('subnode-4')
-+ 
-+        self.assertIn('bootph-some-ram', subnode1.props,
-+                      "Child node is missing 'bootph-some-ram' property")
-+        self.assertIn('bootph-all', subnode1.props,
-+                      "Child node is missing 'bootph-all' property")
-+        self.assertIn('bootph-some-ram', parent_node.props,
-+                      "Parent node is missing 'bootph-some-ram' property")
-+        self.assertIn('bootph-all', parent_node.props,
-+                      "Parent node is missing 'bootph-all' property")
-+        self.assertEqual(len(subnode4.props), 0,
-+                        "subnode shouldn't have any properties")
-+        
- if __name__ == "__main__":
-     unittest.main()
-diff --git a/tools/binman/test/347_bootph_prop.dts b/tools/binman/test/347_bootph_prop.dts
-new file mode 100644
-index 00000000000..91d4e4ad600
---- /dev/null
-+++ b/tools/binman/test/347_bootph_prop.dts
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+/ {
-+	dummy-parent {
-+		subnode-1 {
-+			subnode-2 {
-+				bootph-all;
-+			};
-+			subnode-3 {
-+				bootph-some-ram;
-+				subnode-4 {
-+				};
-+			};
-+		};
-+	};
-+
-+	binman: binman {
-+	};
-+};
-+
--- 
-2.34.1
+Here the Azure build, without any issues:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=392&view=results
+
+Thanks,
+Stefan
+
+The following changes since commit 1b5e435102aa29a665119430196cb366ce36a01b:
+
+   Merge tag 'u-boot-imx-master-20250512' of 
+https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2025-05-12 16:05:22 
+-0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-marvell.git 
+tags/u-boot-marvell-20250516-v2
+
+for you to fetch changes up to 7afcde09399297765945d57be4535291b2ac9549:
+
+   cmd: tlv_eeprom: return after successful read from EEPROM (2025-05-16 
+08:17:43 +0200)
+
+----------------------------------------------------------------
+Benjamin Schneider (1):
+       configs: mvebu_espressobin_ultra-88f3720_defconfig: enable hwrng
+
+Martin Schiller (1):
+       cmd: tlv_eeprom: return after successful read from EEPROM
+
+Tony Dinh (3):
+       arm: kirkwood: Convert to DM_SERIAL for Kirkwood boards
+       arm: kirkwood: Convert to DM_SERIAL for Synology DS109 board
+       arm: kirkwood: Remove Synology DS109 board reset_misc
+
+  arch/arm/mach-kirkwood/Kconfig                    |  9 +++++++++
+  board/Synology/ds109/ds109.c                      | 18 ------------------
+  cmd/tlv_eeprom.c                                  |  1 +
+  configs/ds109_defconfig                           |  2 --
+  configs/mvebu_espressobin_ultra-88f3720_defconfig |  2 ++
+  5 files changed, 12 insertions(+), 20 deletions(-)
 
