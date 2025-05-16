@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10C64C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 08:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ADB5C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 08:18:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC73982A25;
-	Fri, 16 May 2025 10:17:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 01B3D82A59;
+	Fri, 16 May 2025 10:17:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="oXlxtQFH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MMATCv51";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BACB2803DF; Fri, 16 May 2025 10:17:52 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 3173782A8B; Fri, 16 May 2025 10:17:53 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AD1D82A33
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 10:17:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 19EE682A59
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 10:17:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-442f5b3c710so13957815e9.1
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 01:17:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-442ccf0e1b3so20974345e9.3
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 01:17:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1747383469; x=1747988269;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1747383470; x=1747988270; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wJ/sRU1s5uCt7GiycEaM5hmahnHrMbYIPPT7bUyIP9A=;
- b=oXlxtQFH/oXABTsqd9TyzzJ5MEAIC7oCykWt6EaBWqFu7igM40qvY9fu7hyqpxe03i
- 0TsRqrlwvA2c3/JYfejh0fvXhuohIGPlwdapKNhplNAZQhu7yUN1gOIzwjiokU9e9cRy
- VbkEjLjJpbpKpw8lBloArQRrqeTopfXNr4UMQ=
+ bh=K0OFb+UjBro3Fvf74pRx1A80fnQi2BBxr1uH9mqaoPM=;
+ b=MMATCv51F7P9gA9hedsc7gkroGK+7RJA+64UvzqPsCyI9MRKuamxd2SXtI6ApjDc6Z
+ HYrtl5Qu0ge8FyrPL79TOtU0/7e1DzpAh7ZTfiYwMj52eTzRE9Xemfr+d14W5qPmYNbW
+ /ZgyXs8B/PRe6TG9iOZHhj6mpfJMxOLxJq5r1wYibR0d257FxZAcBuc8gYaTaNOp+wMY
+ 5vdN5MDQ4utYAeLAlQqIZWB2KwRKaFcsnKtL1EMOpNHWEKrOMEys31an813C2M3eq1sp
+ rAvuhwFCW16kfRXYMfn12JD6tgV3msKm393Vclb1JArhQrGIf7PAM4B8iZsdlx3XzgFD
+ oO8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747383469; x=1747988269;
+ d=1e100.net; s=20230601; t=1747383470; x=1747988270;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wJ/sRU1s5uCt7GiycEaM5hmahnHrMbYIPPT7bUyIP9A=;
- b=Rbq50d/TlVVoakFXxNOgEipwfj/0KM2JqXbKLO58o7rMD/CiDqPbPWODRkflCpxRBm
- RpufmNhbh55RCNtyLkLrJUeRXIchwrMh5gTlGDkD5PSDxS1DFUNAojsk8Ogc6ILinR8R
- mkrXygZgUinLJWK4cb3b2Y6vUZvLpku2x8rHuIzC/w3/RDuOrfbD4EXNbbeTQgmQb/JZ
- QCyLxt/MYwUO+cNplmwiebOxY+drMxrZNSkj3oKRwUZdbGP0nn/JAbCIt8u5kpVIdBla
- qbE+i5YZo2q1TXIFgPg2tTPZDR6dfzffRoY0tc/3SJFGRZ2KJ+TOPs2nbSys6sIkV7TU
- xAKA==
-X-Gm-Message-State: AOJu0YzTroQj73UbhwTo5lOspRTm5+xsbS6vwTMmByTJ/5mhz/q2s3c0
- g+6Sd0YYIN/oqW5y1W1ZZCYJ9/6gjgXkUdi7dlQMKtQDl/HnxWAuqHn3CvAwZh7IRTyShH1cqJY
- zLQES3ip/W/U9
-X-Gm-Gg: ASbGncviITtju90p/pp3o+l45/y4bZuWaaeKV2Wlfj7P55UKKXWQM2BQgQl4yuj+QkI
- jCG58EB9FzpHCt18T/cY9TUYqRvVKo4Gqz1Aatemqhx7OsuLfFYJsLCe4DPpNzi/J0l1oWxOkPJ
- BC/xoWZR0b3VWajLuoy+oZA7W8wxRJQItEgeTFS4CI6Xu76MufV2Nku8GIs/0IoVXQG/mIYEQyP
- mgRK5hF1Lwcf30tBHU62kk812cOp/1Vn9Jg5trY3/xsYq99LQr/GT9USA55h5Af3g/E7obdvX7K
- YezqVHHbBvyPgrPIYyBGwXqTQmu/CaosarY3XBnAquGONW/OdofpOu76bwbq6gEQaOd3e9XeXKr
- s90bt3zU3HJkNwP6E8VQCTwjsFp66Vg==
-X-Google-Smtp-Source: AGHT+IFnHlw0f4395qPh8dmXToQFRF7d37rHun3d7SYsGqrVtd179IVV+SV+P53N9pfapAVwVgWhtw==
-X-Received: by 2002:a5d:5886:0:b0:3a2:3c53:947b with SMTP id
- ffacd0b85a97d-3a35c7de96bmr2773015f8f.0.1747383469531; 
- Fri, 16 May 2025 01:17:49 -0700 (PDT)
-Received: from panicking.rbg.bshg.com (p5b26784b.dip0.t-ipconnect.de.
- [91.38.120.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca4d0fasm2098172f8f.8.2025.05.16.01.17.48
+ bh=K0OFb+UjBro3Fvf74pRx1A80fnQi2BBxr1uH9mqaoPM=;
+ b=I0qrtPMB/w9BDVaO0rx6fwMtvphfBJtSI1r2YummcirRLwqjqV4MD07lrKfJfc+uB0
+ nvx8G3VeybEutS/JllMUSAQocdYzVjdUlXNutc77li4/QiUuiXoXG/KWPnRIst/RV+9C
+ Wf9G62Q4WCfWuBEqphWFkzUzQv/FP8V02Z2WrWhZ4sG+gcP7Xsr5cXKA+p4YXAKC6r5f
+ 4D0HGIx911qs7dJyXRc/8kEiaXwvSSuKR/TRGCB56KK+BImRCFwa1Mzukkbvij+6DNvU
+ VqPc5yw8BpMK+mt6gMkTIb3Hk80NA3DBE9al1QIhq8Bp0cAaPjzrNrM/AUjNCjA1JCDn
+ XWPA==
+X-Gm-Message-State: AOJu0YxlYY8xiq/sD+aL3zeQBK8wdoa+He3Z1azynE0zKSXT+8FOuH29
+ 6aEz4rvJyLol4yidahRuPjY1c/wWHTLZD121KMSOgVWkoxuy3T9FcPk2VVSxypJjRuQ=
+X-Gm-Gg: ASbGncuH/Yv+sx/xFs6/1oXNYcR+BWlnYQB8jhsWrd8ncz4nyFtXRVgLibn4gKDP8Gd
+ 9hBLG+XVdWKc6aa8k8xiqz3JjRi8b35GkI9DorlIR4qBiZaC+MZm4nMkEVSjU10IIbVxNzMn69d
+ 941JK1spIkrE8DX6ThKFQ5dpdQbOAN3brA6sBMFMdXpmfkq/tVlcrkC3QQsAwXafihkb1ZVHsfk
+ q5UBRT6x3Fx+nKKGFGIcmWSYVxVWWEKihJ1hRE8HlEsTc4cQYPgGDR5/saY6b/VuiKfuJovlNMf
+ zhixlzWHiLJov2a+Y8+4hE1FKy1eOqyKbRe16XA1eCmSnYamgvbNix39kVavcA==
+X-Google-Smtp-Source: AGHT+IGPhyGwZRWMsJ3ZGUYBt6wzToTgM11DG6QkL7gsWjBmvl1i3PxZrVTTsKzj1XUcRh8C7UTRIg==
+X-Received: by 2002:a05:600c:35c8:b0:43c:ea1a:720c with SMTP id
+ 5b1f17b1804b1-442fd63c69emr25332255e9.18.1747383470401; 
+ Fri, 16 May 2025 01:17:50 -0700 (PDT)
+Received: from adriano.. ([213.157.19.150]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a35ca8ce9asm2010159f8f.86.2025.05.16.01.17.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 May 2025 01:17:48 -0700 (PDT)
-From: Michael Trimarchi <michael@amarulasolutions.com>
+ Fri, 16 May 2025 01:17:50 -0700 (PDT)
+From: Adriano Cordova <adrianox@gmail.com>
+X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Michael Trimarchi <michael@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] configs: imx6ulz_smm_m2: Add board watchdog reset
- configuration
-Date: Fri, 16 May 2025 10:17:20 +0200
-Message-ID: <20250516081738.2524518-2-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250516081738.2524518-1-michael@amarulasolutions.com>
-References: <20250516081738.2524518-1-michael@amarulasolutions.com>
+Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ trini@konsulko.com, jerome.forissier@linaro.org, rfried.dev@gmail.com,
+ Adriano Cordova <adriano.cordova@canonical.com>
+Subject: [PATCH 3/9] efi_loader/net: Rename efi_ipconfig.c to efi_ip4_config2.c
+Date: Fri, 16 May 2025 04:18:33 -0400
+Message-ID: <20250516081839.28587-4-adriano.cordova@canonical.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250516081839.28587-1-adriano.cordova@canonical.com>
+References: <20250516081839.28587-1-adriano.cordova@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,35 +98,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the configuration that allow to reset the board from reset
-cmd
+Rename to keep it consistent with the actial EFI protocol name
 
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
+ lib/efi_loader/net/Makefile                              | 2 +-
+ lib/efi_loader/net/{efi_ipconfig.c => efi_ip4_config2.c} | 0
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename lib/efi_loader/net/{efi_ipconfig.c => efi_ip4_config2.c} (100%)
 
- configs/imx6ulz_smm_m2_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/configs/imx6ulz_smm_m2_defconfig b/configs/imx6ulz_smm_m2_defconfig
-index 15a3ec5c627..436bfb78cc2 100644
---- a/configs/imx6ulz_smm_m2_defconfig
-+++ b/configs/imx6ulz_smm_m2_defconfig
-@@ -64,6 +64,8 @@ CONFIG_DM_PMIC=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_MXC_UART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_IMX_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
-@@ -75,3 +77,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
- CONFIG_CI_UDC=y
- CONFIG_SDP_LOADADDR=0x877fffc0
- CONFIG_SPL_USB_SDP_SUPPORT=y
-+CONFIG_IMX_WATCHDOG=y
+diff --git a/lib/efi_loader/net/Makefile b/lib/efi_loader/net/Makefile
+index ab41f358de9..75131877e30 100644
+--- a/lib/efi_loader/net/Makefile
++++ b/lib/efi_loader/net/Makefile
+@@ -1,3 +1,3 @@
+ obj-y += efi_net.o
+-obj-$(CONFIG_EFI_IP4_CONFIG2_PROTOCOL) += efi_ipconfig.o
++obj-$(CONFIG_EFI_IP4_CONFIG2_PROTOCOL) += efi_ip4_config2.o
+ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_http.o
+\ No newline at end of file
+diff --git a/lib/efi_loader/net/efi_ipconfig.c b/lib/efi_loader/net/efi_ip4_config2.c
+similarity index 100%
+rename from lib/efi_loader/net/efi_ipconfig.c
+rename to lib/efi_loader/net/efi_ip4_config2.c
 -- 
-2.43.0
+2.48.1
 
-base-commit: 7a18328d70cddf8d9ffab046ff38def5d2f61add
-branch: next
