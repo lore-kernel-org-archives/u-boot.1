@@ -4,164 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CCCAC3ABD8
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 15:31:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30534C3ABD8
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 15:40:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F67D8006D;
-	Fri, 16 May 2025 17:31:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 889FB80107;
+	Fri, 16 May 2025 17:40:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="F8/5N8ZM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lmeZ8ZQ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8770A80079; Fri, 16 May 2025 17:31:44 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::60a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 122088059D; Fri, 16 May 2025 17:40:02 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ECA080050
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 17:31:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id DCCA78006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 17:39:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EPhldf+ZclSYwiHYNw9hxzM+X/BiTQte9K3M+HHRtPsZF841jHZj2apsyUReS6m7QM/YkqTtd1tNICHYeIM5lXZoGo/E+bJJOpQwLT9vroeaqPbVQeTp4D+g38PF+oy3jJmnlTkCq8fpTLOewfVK7wOyd9hZhuvjtQVWxo1zxgE3WRgFGxrGiRE34WQXXOSFWko4zvaT78TFrNZM4qoA0UDSouF8YsGudkZAQzgte18UlZ35tVaukwlHOphPCeO8LmK8NH/CCINohRzx4BoyHIkgVAbmNIUGWGqHgq0aKz+nvKBUPjJI2IFFuLu99B+lm4MT6huk078nop3RRnPbGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lnnbu6F6ukZPjZSoKa6tC7eFRuNVuTiJ8uXKxOc9Yac=;
- b=nxZZ24gZm3mS+kOYBMqJVO0JlOiobk+c8ekq+8a4Ga305vo5+Xt4rp8phRAZzT1xMcHgT7VMmiaCBr7EHx5mkrDuq3y19hwOYFRKUwuj4dtz2gzt75Byz2cV6HRAVWQi26NhdCnM1WyRjQLDyJOW1KWMxx7GklDPEyMHv3ilIQ4VgA4AHSt6FMdl3u3jSD82/jbycCBDPXslb9Mw4UzAumvZcTkZzghjeCIfdV/MWVkBT4mpX4P0HwLPtzU9tlkeT0hrrJxbfYPMAqAJ0FGdpp3gUJwBcCUbDfqOqdvYvtcS6Lp6ec2QASd33obVi71vrJAuIBHq7OSKCPiM4u8CfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lnnbu6F6ukZPjZSoKa6tC7eFRuNVuTiJ8uXKxOc9Yac=;
- b=F8/5N8ZMVdSWR1hmifDzAU8/QNuyjcs8bwWwyFQzi/PSe+gAQTaKyhOonR1xmkoSJ2YLRBx1felbXY2pLag236RSCQ0fgDmSoFjtOdqeT9VmvFDMY/1rfLgFXjXCaqsg84Qr7EY6Y6uznyjUDRllnYGD5joFkAuVEfehkX8FPbE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PA4PR04MB7757.eurprd04.prod.outlook.com (2603:10a6:102:b8::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.33; Fri, 16 May
- 2025 15:31:40 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8722.031; Fri, 16 May 2025
- 15:31:40 +0000
-Message-ID: <8bd3cdd7-4e07-4f4e-bdac-3bb14bc23b91@cherry.de>
-Date: Fri, 16 May 2025 17:31:39 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/5] ram: rockchip: Fix dependency of RAM_ROCKCHIP_DEBUG
-To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-References: <20250515-silent_console-v4-0-dec6c8391f01@thaumatec.com>
- <20250515-silent_console-v4-3-dec6c8391f01@thaumatec.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250515-silent_console-v4-3-dec6c8391f01@thaumatec.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0082.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1f::8) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6006d5c3a0eso2194995a12.2
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 08:39:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1747409999; x=1748014799; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=b9SLi6dNQ7+vHHijp9HS2KIAiHMLAjRDRHY1A8VehX8=;
+ b=lmeZ8ZQ0UjcA0eQ5dCaaSPObe/XB96rkqOLwyRFrNUI+JEhq/mrLVVq0Ng1sYZliA6
+ 2heqKDxDk6oBPgqs3eCOWlNCnzGBW03j29+8IXrLWA/VLMy1x3oXf18RBsapsE2pU+8J
+ ELkNxXeHRBCi1ZG/FR1Yv8j5EKQ/hhdCnjNU4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747409999; x=1748014799;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=b9SLi6dNQ7+vHHijp9HS2KIAiHMLAjRDRHY1A8VehX8=;
+ b=XcbYTsPx30dNiYUkdgBCJeciveR2HEgad516CjUyHYCDYcOtYkvAYNNe0nAc6BKdpM
+ QMuILtIMoWp2xsKyjGXtskLqrW3tfjYym/ekGdu2WlQqyt8wlozbyMCqPiiMveI7yyq6
+ l4N/BQ47MczsYwHJCt0EO1l6LtcBW2UaZaRo1MNUFjpZ/QtKdsjjVfyVHgEO2qTvk+ZI
+ H7wszZv40MTQWRonML7fU0Ep+FiBK8yXdviGQgePyk/8My8c+HythTD5SV07GfsjbZol
+ B8lF+iwBI7ElC5joxKN/zw38sQ8Nm1gLCFCoNBXbP9/WVKwcWRhN9CG3RJ3YpqS7o9rA
+ V4pw==
+X-Gm-Message-State: AOJu0Ywrze+zCFp56isJBLgKVQ30nCNWtF5dulE5Ww8inQ0J+ZPwUGiV
+ HuD44ij1Ot54yM8YDLe+8kcfb0zlJZZ2zXAx6FADyp7Rq8wNQZFGqd8ZVH03O6gszrN4H35mTXl
+ StxAnmd1HAL4HrnFRwING16vROHRHEoPL6JZExgH8
+X-Gm-Gg: ASbGncv8hQ9oTaE2GclNeqRwDeD8dSDTWYCUEnzqyF39L8c65HjbBUcJ2HUKazCNGMe
+ M2426aqmYCmU9nzY9JT3/dxVXO+Bycfi1TdgMpkhPDS1U5ciA6KZ/KqLz6HKdjoj/PjQWBZP3th
+ wvZFBdA/0byCqeGZ49jUTIFnNdVrhy8gRJXQ==
+X-Google-Smtp-Source: AGHT+IGengcUbo6M1oe7lJdcpwc8Ik+CKCg+VSKJEjAaj+ufbJS+WjP10ETPFdE8jsu0u4WkVDKIu4WELG02x4UbKxU=
+X-Received: by 2002:a05:6402:2108:b0:5fa:b131:f009 with SMTP id
+ 4fb4d7f45d1cf-6007e825a98mr3339076a12.0.1747409999249; Fri, 16 May 2025
+ 08:39:59 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA4PR04MB7757:EE_
-X-MS-Office365-Filtering-Correlation-Id: fb692bae-f95e-43bf-6063-08dd948ec143
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?K3dnNmJWcDhyVHRxUDk4Vjl6QlUxbGZaZHF0YmVvL0xraWczY0toVG9hcVZi?=
- =?utf-8?B?emdoVTVrZHNnQ0FubGp3aVNZeVhRMEVCWDJqaklvZllSVGdPQTJOeC9PYkFr?=
- =?utf-8?B?ZFJHYURKZUt3ZEdMa1p2ZXVoaVByZ2M1SC9vRjh4VlIrUE55dHNVbE45b1pn?=
- =?utf-8?B?eFVXeWprMEoyblduclZQcTVGQ0tzSXhjMjFHdU1nTjhkbjVYOFpGQkNjOWhq?=
- =?utf-8?B?Zy9TQU8zQ1JkbnNjL2VaRXN0TDl5dURKK3M5dDM5b0M5YXpsSDcrc1c5QTZ6?=
- =?utf-8?B?eW5oWFpjR1FNdjludHp0U3pYT2F2QzNzWHAvYWIyQmxwYTlDejVzay8xMW55?=
- =?utf-8?B?M0xUT0U2aDhLdklYNjJFK0pzUUptQ3ZvUTBtaERuUk4rODFmWW9Ba1p5RDho?=
- =?utf-8?B?R3QzN2E4Nk5XaXVFN1FrTDA3ZXhKUGoyZ1lpYldaUS9JcUZ4aFk0TUtxSEVi?=
- =?utf-8?B?SFRPbFI1VHE1WEhZZjdJeUxrM1F4RDVrUWZnNDZkSzRSdjUyRGRvME5wSVdD?=
- =?utf-8?B?dGdwRlNRalhpd1dXaGYwRVFrKzVWMHJiSXczVWx4MmpBSUt3Y1g5R0pYcW42?=
- =?utf-8?B?TzNUR29xZVpDS0QzUVB0OUNqL2ozTkRPem8ycHEzUUlGRkY3L1liWEE3OEFM?=
- =?utf-8?B?aTRXMFU0cGt2c3ErSlN4Tlp6OWNJekE3Y2U0Y1VqRVEvbVVVRVZFVEJyWkFp?=
- =?utf-8?B?MTZiMjh1OG5KSkVhaTRVY2tFd3hZTUhhYjN1dFRpZHphVk50Z0tPNzg2OUp0?=
- =?utf-8?B?SFBFd2FDS1BLcmo0L1NPK1hSaUFjcTJJY25FTTRHUUhObVlGMkx5bE9BaS9L?=
- =?utf-8?B?OVhmMEtmcXN0b0JFSXJ2UXc4Yit6K1BnY3hVcHMxQjRlRWxzQnFPSG1ZYWFy?=
- =?utf-8?B?M3A0Vzd5bmZjTjcxbzBSNGVkMndtN2hXeXU2aWRmdlNIQ3JZSjZsSFZuVUEy?=
- =?utf-8?B?RHpwTDhDTEw4ZDZSZU4wM3dWV056dWRuOVVkcWpxeWtlclFPNElBbnFpV2hJ?=
- =?utf-8?B?S0JnNWVSWC9nM3BkeHdmc29jM3I5eCt6Z0lWelJWK1RTRHlMVHR1WGc4eGRu?=
- =?utf-8?B?YnFhYXlTVyswUWZQdWl4WXVhUDVrd1ZJZnZrY3hHODN0T1diVWxncEJubC9K?=
- =?utf-8?B?S204bjdISDFyVFpqVmw0OGlDVlExR3dka3V6MnN3M3hBOTVzYTFPTTNFM3lv?=
- =?utf-8?B?QjlBY1gxUkZoYW9VNUtvMHh6QkxtajJSUmhNS2NjRDZxRVZnYWE1RnRiVHE4?=
- =?utf-8?B?c2p6TTczeWNlZjRZNDR5MW8yRFdxTy9qRlNTcS82WS9GOUdHOHBVeE01MWNZ?=
- =?utf-8?B?ZkxWSWwwWHdaY3ovQThxVnlzd3Zpazd2ZVB0cDk0MVNoU0h0aklQYWVRYVl5?=
- =?utf-8?B?UVRKYitHdk9IOThWV1M5UDFLczRScXlzWmUyRmVBZ1pMWmN2RnpNZnZKTC9m?=
- =?utf-8?B?YW9mQ3puK3h2K3Fyam9wcWZVbC85Y1VHd1dKK2tKZm1jUGJLcXdWM1htYW93?=
- =?utf-8?B?WkhMeUhlMzc3ME1MaU1YNzNTMlVuZWVITVRoNnJkYU1TdGJWTUt1YTJ4dDlE?=
- =?utf-8?B?MUU3ODhFbFpzSVZsNGk1T3BrVzlIUjFaRFJwcElTVlFiUjdSVnQ1QVdhODY2?=
- =?utf-8?B?RHJQTWVnNWh6dVJ2SnJYNmlncUpOeFB4clNCVTlyY0tRK1VGZVZoRFduSUxm?=
- =?utf-8?B?NXg0a1E0R0MwbmZ2RFljNFd4VDZrZUdQQkNEdnplYXQxWVpPbFNoYWt1LzJr?=
- =?utf-8?B?WGdZYmVuaS9HUVVzRkNMU0RuM1pNZ3ZwRWJpSkJjU01NN1FjbzhIeUM1ZytM?=
- =?utf-8?B?QWtkUTJJM1BEL3dDQkdDUWZhMXNyakhjU2hISk5kNlV5d3dKdU1saEJ1ZDFT?=
- =?utf-8?B?SDJ4OFYvUUZvV3lCMTU2b0k1MldROHpJTXFhd0FaTGZZSTBrNDNxR29UeEgz?=
- =?utf-8?Q?XXl4cgF5ue4=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WU80VzRJcXhORnVPb28xNlhZcjZKOWpLbEREdkYvb1YyaG11dUpNczhEV0dN?=
- =?utf-8?B?bUxRTDI3TjY1U2pLb1R2TG50UTk0dFgvcjZsbEFVU3pTUnM3eGNIUmZjbndq?=
- =?utf-8?B?dWpUS3FhMDNnUklZMU1GN1lNVTFWdHNPUHlITzNBdE56UHc3WkhWRWZtWHVp?=
- =?utf-8?B?bjFYYUFVTUIyOVBhMlR6Mlh3U2hhdDlNdnF1STR4QUMzc1J2bXRKUkdoK3Nr?=
- =?utf-8?B?RGk0T1Q2MlR6OVNQMWY3bUpYN3BZZmxaY05RRjl1N0d2bnN5WXdGWGoyOXor?=
- =?utf-8?B?SzNKOS9RQkxFKzF0MHBiamI4eUNYamJ3NnByYVBiMVV4TlBiZzVkZXVxKy91?=
- =?utf-8?B?M3JNendVQnJHWWxhYi9JS3hNb0U3REtSOHN6SzBsR0dOL3lVUWZtaTFwOElO?=
- =?utf-8?B?UjRFWDcrTTFsemovZGRqemhTaHR4b24vWk4xT0ErcSs2NVFXOE9SWHNUUzhj?=
- =?utf-8?B?aWhPN2c5YmcrbmJsd09idlpJbXV1Z2hBSFlMZndrVEtJSkdnYms4Zk5xRjl5?=
- =?utf-8?B?Y09VbElqMFczbHVOZHdQT0ZTMHhIMDZtcWE5dWlReWxUYUtmcVFVclFrTFZ0?=
- =?utf-8?B?TmpEQUpsTlhQMDViSFhrQTFhRTZ4dVJHQkZFaE03ODYreU94Qzlic2tzTkVM?=
- =?utf-8?B?QUJqSWYyMUdub0ptZzFpdHIraUdtM0JRcUhieG4vNWh2TFJxZXZhR1VxWjB6?=
- =?utf-8?B?ZEhXU1Y1Tnd6VjFjYThuUk5QUTAyV21GVEh6dzY2TEgzUUU1TG1UbUwrZ0xY?=
- =?utf-8?B?UnNDRU15ZnYwTWQ5Q3Q4YUcwVk11MVhycDJoM3FjQjhPVzMyUFB2TW4wbmYr?=
- =?utf-8?B?dEdiYXdmNHhMcy9DS2FwT1BxZk1ncTZWTXBpT2IxVm9OWjcrWFZWWWtLeENU?=
- =?utf-8?B?aE5hR2c0d1V5cXQxV1ZCV3ExT2o3d1FEOVBoRWtJNmx1RHZjMVFsQVE3bC9u?=
- =?utf-8?B?aFJBTjkvOTd2c2xjcmVJcnF5ZVd1Ry90bzQwemRucWJLbHUxa1ZXNG42VElJ?=
- =?utf-8?B?NmVNU3NGYWdseGJlZDZJdVJETVJSZlBMQ0tiLzY4WThBTjNPK29lQllsL1Bv?=
- =?utf-8?B?M3A4MDZzNm1NTzNrQWo3RmhXWWpacERZZE13WTJXYmxDbkJ1UG13VGszYzdO?=
- =?utf-8?B?eVlEYUozL3pId01YdlI1U3NWY3VzZHVIeWZLQVR1Qk8zS3hPUXpKTkFIMjJa?=
- =?utf-8?B?WlJhdm11TXhIZWhyd2I2WXdUa01GRlFWRTUzaVRDTThHd3A5a01Dczd1WkVB?=
- =?utf-8?B?RGhHeU8xSytFMlV0bTFqdkRobytUbjBTQjlSb0NQV0tqNmk0aXlrSkhyM2Rh?=
- =?utf-8?B?aFByVDlxd2V4blM5NFlJbnR6TTErSi9ObHdmSmpHa1NOU2dJRk1KVTVYWmZJ?=
- =?utf-8?B?UnJTM2w4QmtRalpxZ0RCWFFXaUcwem9UMzA1UldpQWt5ZGppcnRXVVAvOEVi?=
- =?utf-8?B?d1RGWXhYNlJGR201TFBrRzIvalRsb2grd2FrUXpDV0VYWnpuZ0JRV0EzQ1Rk?=
- =?utf-8?B?c2g1M2U1OEhkS2hnRFdreHA4RkVodDQvd2lnTXY0STVaMXZPMDRqR2RNbUcy?=
- =?utf-8?B?aVpxVllpem5xWUdtMHNmVDRtQllFdTJvWFNwVGtjYkVWSDhFNzBKNGhlSzZS?=
- =?utf-8?B?dDlZUzhzdi9wVktDOCtBU2VjODNjdGVVTXphZEZKVVdVaXArN0J4bU5LSENP?=
- =?utf-8?B?VDNqUzgwTTY0N1ZmK2FvZUFIZ05rTnJtK1drdWJLTmZwcVp3QlJqaVllTWNv?=
- =?utf-8?B?QUNXc04zbWdnamt6YUwvRzRzY3NuQlFFbU81WElNYjRGeGo0N0c4dUttd3Rr?=
- =?utf-8?B?TUgvU3VZT2hyQmFKWmNRYWp6OFhrZHF5S1pRcS9meWUvVDFJMWhQM296N0Mr?=
- =?utf-8?B?TnNRU2tGQ0wyQlkzL3FYd2dtcXNJQWR2Z2tqZ0p0dUZiU2UvTWxPNUlNYzZ2?=
- =?utf-8?B?dmNFZmE4OXRXYUd4MFBvR2FGR0dJL1JJZXVGNGlNWHd3VFF2bUR5ZC90bUNF?=
- =?utf-8?B?RmxxZkt2SVovL0NRdHJXaE5tbWVVWGhLK0R2WCtodGJ5YjhRUXNySTZQVEF6?=
- =?utf-8?B?WktjSzBrKysrWHBiVmpSR1lmRGt1RXRjWWxxMkVrOGUrQWlIbFJrUEpjU1Rr?=
- =?utf-8?B?ZnFQOU5IZ3RTLy9YUk4wWDROdHdGcmJwT0FVMnUvUlV4czZsbXRrNVpNM3lq?=
- =?utf-8?B?SFE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fb692bae-f95e-43bf-6063-08dd948ec143
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2025 15:31:40.6749 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JZPaNoLTyq8zrYYQAx2lecZM53alZQ1oWHTrhaD1SWlBe0gpAmAdMOBxsLoZ540Nlby0j542cwIdy+XoWA5FbJWwTWRultPOssyzsCF+Gmo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7757
+References: <20250510134253.1581164-1-sjg@chromium.org>
+ <20250510134253.1581164-12-sjg@chromium.org>
+ <20250514215831.GE603748@bill-the-cat>
+ <CAFLszTjKuPSHovFsoKFBiWTmn_2LSENjNQ0r2bGjBSXQOxJfxQ@mail.gmail.com>
+ <20250515204538.GC100073@bill-the-cat>
+In-Reply-To: <20250515204538.GC100073@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 16 May 2025 17:39:47 +0200
+X-Gm-Features: AX0GCFt1VFOMw_udMeDTCO-rFzcgvxnhqdCbztTq783H8gcv1tkQ60XJNJcFk8k
+Message-ID: <CAFLszTgjNqAME_g5b5skP7qzx0T85L4uFg+=MBqNyX_enMNPcA@mail.gmail.com>
+Subject: Re: [PATCH v4 17/22] passage: Add a qemu test for ARM
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bill Mills <bill.mills@linaro.org>, 
+ Andrew Phelps <andrew.phelps@canonical.com>,
+ =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,25 +98,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+Hi Tom,
 
-On 5/15/25 5:55 PM, Lukasz Czechowski wrote:
-> The RAM_ROCKCHIP_DEBUG can be used only if DEBUG_UART is
-> available, otherwise it won't have any effect.
-> 
+On Thu, 15 May 2025 at 22:45, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, May 15, 2025 at 09:26:54PM +0200, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 14 May 2025 at 23:58, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sat, May 10, 2025 at 03:42:15PM +0200, Simon Glass wrote:
+> > >
+> > > > Check that the standard passage works on ARM, by setting it up in SPL
+> > > > and making sure that it comes through correctly in U-Boot proper.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > (no changes since v3)
+> > > >
+> > > > Changes in v3:
+> > > > - Add conditions to avoid enaling the test on qemu_arm_sbsa
+> > > > - Add support for a 64-bit test also
+> > > >
+> > > > Changes in v2:
+> > > > - Add a devicetree for qemu-arm so that qemu_arm_spl can work
+> > > >
+> > > >  configs/qemu_arm64_spl_defconfig |  5 +++++
+> > > >  configs/qemu_arm_spl_defconfig   |  6 ++++++
+> > > >  test/py/tests/test_passage.py    | 13 +++++++++++++
+> > > >  3 files changed, 24 insertions(+)
+> > > >  create mode 100644 test/py/tests/test_passage.py
+> > > >
+> > > > diff --git a/configs/qemu_arm64_spl_defconfig b/configs/qemu_arm64_spl_defconfig
+> > > > index a9ed47c8d3b..60651f80938 100644
+> > > > --- a/configs/qemu_arm64_spl_defconfig
+> > > > +++ b/configs/qemu_arm64_spl_defconfig
+> > > > @@ -33,6 +33,10 @@ CONFIG_USE_PREBOOT=y
+> > > >  # CONFIG_DISPLAY_BOARDINFO is not set
+> > > >  CONFIG_PCI_INIT_R=y
+> > > >  CONFIG_BLOBLIST=y
+> > > > +CONFIG_BLOBLIST_PASSAGE=y
+> > > > +CONFIG_BLOBLIST_SIZE=0x4000
+> > > > +CONFIG_SPL_BLOBLIST_ALLOC=y
+> > > > +CONFIG_PASSAGE_IN=y
+> > > >  CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
+> > > >  CONFIG_SPL_NO_BSS_LIMIT=y
+> > > >  # CONFIG_SPL_SEPARATE_BSS is not set
+> > > > @@ -47,6 +51,7 @@ CONFIG_CMD_EFIDEBUG=y
+> > > >  CONFIG_CMD_TPM=y
+> > > >  CONFIG_CMD_MTDPARTS=y
+> > > >  CONFIG_SPL_OF_CONTROL=y
+> > > > +CONFIG_OF_PASSAGE=y
+> > > >  CONFIG_OF_BOARD=y
+> > > >  CONFIG_ENV_IS_IN_FLASH=y
+> > > >  CONFIG_SPL_DM=y
+> > > > diff --git a/configs/qemu_arm_spl_defconfig b/configs/qemu_arm_spl_defconfig
+> > > > index 9c4408dc73c..cf8ac703577 100644
+> > > > --- a/configs/qemu_arm_spl_defconfig
+> > > > +++ b/configs/qemu_arm_spl_defconfig
+> > > > @@ -13,6 +13,7 @@ CONFIG_ENV_SECT_SIZE=0x40000
+> > > >  CONFIG_DEFAULT_DEVICE_TREE="qemu-arm"
+> > > >  CONFIG_TARGET_QEMU_ARM_32BIT_SPL=y
+> > > >  CONFIG_SPL_SERIAL=y
+> > > > +CONFIG_SPL_SYS_MALLOC_F_LEN=0x9000
+> > > >  CONFIG_SYS_BOOTM_LEN=0x4000000
+> > > >  CONFIG_SYS_LOAD_ADDR=0x40200000
+> > > >  CONFIG_DEBUG_UART_BASE=0x9000000
+> > > > @@ -34,6 +35,10 @@ CONFIG_USE_PREBOOT=y
+> > > >  # CONFIG_DISPLAY_BOARDINFO is not set
+> > > >  CONFIG_PCI_INIT_R=y
+> > > >  CONFIG_BLOBLIST=y
+> > > > +CONFIG_BLOBLIST_PASSAGE=y
+> > > > +CONFIG_BLOBLIST_SIZE=0x4000
+> > > > +CONFIG_SPL_BLOBLIST_ALLOC=y
+> > > > +CONFIG_PASSAGE_IN=y
+> > > >  CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
+> > > >  CONFIG_SPL_NO_BSS_LIMIT=y
+> > > >  CONFIG_CMD_BOOTEFI_SELFTEST=y
+> > > > @@ -44,6 +49,7 @@ CONFIG_CMD_PCI=y
+> > > >  CONFIG_CMD_TPM=y
+> > > >  CONFIG_CMD_MTDPARTS=y
+> > > >  CONFIG_SPL_OF_CONTROL=y
+> > > > +CONFIG_OF_PASSAGE=y
+> > > >  CONFIG_OF_BOARD=y
+> > > >  CONFIG_ENV_IS_IN_FLASH=y
+> > > >  CONFIG_SPL_DM=y
+> > > > diff --git a/test/py/tests/test_passage.py b/test/py/tests/test_passage.py
+> > > > new file mode 100644
+> > > > index 00000000000..4d95287fe55
+> > > > --- /dev/null
+> > > > +++ b/test/py/tests/test_passage.py
+> > > > @@ -0,0 +1,13 @@
+> > > > +# SPDX-License-Identifier: GPL-2.0
+> > > > +# Copyright 2021 Google LLC
+> > > > +
+> > > > +import pytest
+> > > > +
+> > > > +@pytest.mark.buildconfigspec('qemu_manual_dtb')
+> > > > +@pytest.mark.buildconfigspec('arm')
+> > > > +@pytest.mark.buildconfigspec('of_passage')
+> > > > +def test_passage(ubman):
+> > > > +    """Test that the standard passage on ARM from SPL to U-Boot works."""
+> > > > +
+> > > > +    response = ubman.run_command('bdinfo')
+> > > > +    assert 'devicetree  = passage' in response
+> > >
+> > > Why is this test QEMU specific? This would be at least as interesting to
+> > > run on vexpress_fvp_bloblist and then any other real platform which also
+> > > uses this in the future. Since the time to run this test will be
+> > > negligible I don't see why it should be omitted elsewhere.
+> > >
+> >
+> > Yes, I can enable it for that board.
+>
+> It's not a per-board enablement, it's dynamic because that's what:
+> @pytest.mark.buildconfigspec('of_passage')
+> gives us.
 
-I think it used to have an effect before patch 2/5 no?
+Yes, agreed.
 
-If that is the case, I would recommend to reorder the patches so that 
-3/5 is before 2/5 and in the commit log you explain that the next commit 
-is going to require DEBUG_UART to be defined in order to be able to use 
-printch/printascii/... That way, expected behavior won't change (i.e. if 
-I checkout at patch 2/5, I don't get anything on the serial anymore, but 
-I do if I checkout 1/5 or 3/5).
-
-Looks good to me otherwise:
-
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Thanks!
-Quentin
+Regards,
+Simon
