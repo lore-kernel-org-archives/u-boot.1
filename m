@@ -4,100 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4EB5C3ABD8
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 12:48:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 875A7C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 12:51:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31EEE8006D;
-	Fri, 16 May 2025 14:48:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0895D8006D;
+	Fri, 16 May 2025 14:51:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yO+quJhR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L/zUqYtW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 413A180079; Fri, 16 May 2025 14:48:23 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id DDB0780107; Fri, 16 May 2025 14:50:59 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E38A680050
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 14:48:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F79080050
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 14:50:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43edecbfb94so22217605e9.1
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 05:48:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-54c0fa6d455so2381967e87.1
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 05:50:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747399700; x=1748004500; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IAtr0o+tz+o80qc+SXQBfhXV+HcUkvJ5HR8PzSwpzws=;
- b=yO+quJhRGpxCgof232ORWGafbOZu5KJXAIbdgd+MqWVLfJ84kMAd5giiph6sCaBSwW
- RmBUHV5R7MjYUMY8XIj3Z0RDsuFpM9VK66qZAOll9xOsqMn2kBs02HISCZKqke4Vm57E
- gHnLs18CuJMZfIEdAeqxOEG6inrMIX/P7rMigdm0JlNI9c2E0jVWyKEqfNLNn2FoQlyQ
- ypjDHxdz1rTzuW5AcStq/+6SJdIcL6gDHOUH55MwRl/7fYnua/3TS8bnsvW9XxQqJaJU
- Gh6Awtn2U5bYUJfvfPTQTiGuHX4df1fl24hX2TPn6kqta9g3fQSytb8oEsxFw71Ds0ML
- ggzg==
+ d=gmail.com; s=20230601; t=1747399856; x=1748004656; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=u4F9Iw8ZJWI2gVEHxZNJAtuUV+SXkl8TRQQr7/yw5zE=;
+ b=L/zUqYtWW+5V3grtMXT2qzccfP6OHC3JmnGR1vOyfLvDr/f+3l9NeSlxCnVydx6GTE
+ tjjWDK3WbNEI82ZNSKuVes7oF4OlZ7kcpixZvyMWEty9FtfrBYU6aHQyCoWe2M6521Ww
+ Fi5YxcVQ7moHmL0rBsGu1QdQyv8qmGvVRDd+i9ZgyEMM+Fe1lu3bJ2w5x5vU4lDA24Fm
+ 8KVN8i/zO9X2N2UL7aOPT3CfAfwspUsE9w7gYJFgGpeZ+jJL3+B6cAI9dV+5++OAEuDn
+ NFteN67hxkZbUyb7PVbLZdhHo+aTyyJWp2Cmj1tFyE6tsNAMncAyCI1w7FtU7O44Rkdc
+ dYCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747399700; x=1748004500;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IAtr0o+tz+o80qc+SXQBfhXV+HcUkvJ5HR8PzSwpzws=;
- b=OI0KJ4ZTUIAtXGLs4uSZIT5Gz37QFpaGRf4z/u20pa5o2T7HPRQJ20igZgyAuagpUc
- KHhX0rPOuSp3G0kgAOg+AJnG/ilQAUbwFO/TLOC/9W6YPFL5RpB0zrf/sPTFGAcZxdwS
- iLz49xgXFwA+LKDHYcQNLG0ZYIqqMwp57/dl8Uo2un3O/wfl1S5MTqQCbfENVojhyd4k
- DpLhV3wHhrSMe9GFivyzdjzA/8hCaScWZquDZAbKt+15pR2VS7yHqXJycbwc0AUJL5JP
- IkXWg8nWwT3DOJ+6hLBfBtTfyAGs8yvNz/V7dnzwepb+amuncDVn4uwYOqO692iX9lJe
- T0xQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVLaxYtiQbckRM29H1i53PTDCTm1RCpp4IqqenzD8mpBNDNL0X3vxDNiSTnMSWQRx9V5jaICOg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyx11qllRZIOGNZh0NOR4aF2VVI2nyijmISUHX/YpnQgCb3AhNm
- Y1WyEC2J58cdmqR8wnknGoGuQBTpnfQj18nVdqh+T6HvStKVLWCk+gpnMgYboh3oMzc=
-X-Gm-Gg: ASbGnctsBT0xTstrm28gLwNUROLqk61w5fU5DM8adD28FPJtOOUhE54GSPMoJw2rGOa
- yFzYInjcrOLmaqsISjn8Yk6xhWGTqmRc4C7A6YxJ1D2YxHzDbjbw3qlMF3ts8M8AUUIBgBj0Ga4
- E0DsJsS6bcarbNrR2L6F5GOkTKbeTeBagKPzooW8eh4EjKJ5ia0ZpFECcF1lOVR19YGvkxJx//4
- Nub7RPlGtxF0FOU7gMBliv9Xmi5mL+PWNWr8LOmHE8R7wbFwl1ZmJoY04K7GZt6tjTep8s59qZQ
- Tssg6hq7rjNGf4scG9EXlwdoC8cHA58CxQCJRky5dSFn9yoZ2qvsmtZRqnin+71hvdDR49RIM+f
- qN+v0fmZ3JcL78Hvq586mrqXH
-X-Google-Smtp-Source: AGHT+IFcqtRqCmhbI8kiCnVDBSST4U4n3MOllocCs1GW5UfxV5m1wyTRB8CKp8R/8KzfqMOkFImPfg==
-X-Received: by 2002:a05:600c:1e8b:b0:43d:9f2:6274 with SMTP id
- 5b1f17b1804b1-442fd6205c7mr34780805e9.14.1747399700244; 
- Fri, 16 May 2025 05:48:20 -0700 (PDT)
-Received: from [10.61.0.89] (110.8.30.213.rev.vodafone.pt. [213.30.8.110])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442fd59708esm31996745e9.37.2025.05.16.05.48.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 May 2025 05:48:19 -0700 (PDT)
-Message-ID: <8eefe742-10e1-4d64-88c1-73a0d4f5e36b@linaro.org>
-Date: Fri, 16 May 2025 13:48:15 +0100
+ d=1e100.net; s=20230601; t=1747399856; x=1748004656;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=u4F9Iw8ZJWI2gVEHxZNJAtuUV+SXkl8TRQQr7/yw5zE=;
+ b=U1iganVCg0ie/fraQez87s5OOSiHhM8USbu9X3xrK3HNuuDby5hBTmWzb2oBK5G0tL
+ PsDftfHhVUongMt534VHLHvdYGJBYoBeRL73zYhFflqiomzlX9WsiejsPC+kvNXqfEQv
+ Kdf95O0wd6pSySN3Mgfea1kVlm6phCsoTBYBGp9xMJ2Z2X6S++mVUvgoSaaRWa77SZur
+ Idqe0yd1eMXlukPTyjb4Ie1yxC1RzpEWBG9wjPUi3QAJTb0XFD04pyB5l/lZ0hU/R9Yq
+ S3DatP2V/iR4lP6HYeSvcsgPAU91Ai/8gNm+gWYCZJoXzjSmKrr50Qcc8q3IaehXNcHG
+ lMhQ==
+X-Gm-Message-State: AOJu0YyWprhfH0lq4mZNSZ4cz8QhNSfaODXTxQbwj+O3AtbfovqhWgwI
+ UOz0GHwK99jtpggCEYr0SmSbpKBW08YSSOws9n1q+sQ3qa8xbNkF6SqG0dIPLpp8
+X-Gm-Gg: ASbGnct7mToap6Pxp6HX31XUk9owghRMGQkl8OnQws+vNASu48SPlFTzRzvTzYTSC/q
+ QhUBqV2imuPeNZuVX/l7I07q5s4M+m65WyyZzN7t1uxayQD7616z/hcG3GB2N2wlnQD2wD74q2j
+ YhOCzccSenpSlDKM/dHMPnGmBKRWFBGEVtnK5dOOi+VWY5NwgO5qPdoz/L3ncDzXd0hXAHk46sD
+ BesAzxrplOig/GF5gFijLgRrZPY4iIvINu7hrzT2a5iTQG8uSTjB7LbDkZBdtatDIE6NvstI9hu
+ pvFCEGX3AVpVEhghknjZtcqGD6YYsefNpZCmPOJ697UhN22NveBjivdJUyA/eeiu6tTNbY80KAT
+ 8q7b6uqUUPbHmeh7pnw==
+X-Google-Smtp-Source: AGHT+IERDVJ++pFiKOsTiroEnQm82uXaEFLMEg6Rq2uAecnZupdYZ9kDhsCwyeh+oyGNh6JDvOGxEQ==
+X-Received: by 2002:a05:6512:6505:b0:550:e648:1822 with SMTP id
+ 2adb3069b0e04-550e7232577mr930667e87.43.1747399856182; 
+ Fri, 16 May 2025 05:50:56 -0700 (PDT)
+Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
+ [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-550e6f164c2sm434719e87.13.2025.05.16.05.50.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 May 2025 05:50:55 -0700 (PDT)
+From: ant.v.moryakov@gmail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] drivers: spi: fix deref ater null.might in spi-uclass.c
+Date: Fri, 16 May 2025 15:50:53 +0300
+Message-Id: <20250516125053.25457-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 21/22] global: Avoid indirect inclusion of <env.h> from
- <net.h>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Huan 'Kitty' Wang <HuanWang@gehealthcare.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Angus Ainslie <angus@akkea.ca>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ian Ray <ian.ray@gehealthcare.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Le Jin <le.jin@siemens.com>,
- Martyn Welch <martyn.welch@collabora.com>, Niel Fourie <lusus@denx.de>,
- Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
- Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-References: <20250514225002.15361-1-trini@konsulko.com>
- <20250515234154.1859366-1-trini@konsulko.com>
- <20250515234154.1859366-22-trini@konsulko.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250515234154.1859366-22-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,59 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/16/25 00:31, Tom Rini wrote:
-> Now that env_get_ip() has been removed, the include file <net.h> does
-> not need anything from <env.h>. Furthermore, include/env.h itself
-> includes other headers which can lead to longer indirect inclusion
-> paths. To prepare to remove <env.h> from <net.h> fix all of the
-> remaining places which had relied on this indirect inclusion to instead
-> include <env.h> directly.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Changes in v3:
-> - New patch
-> 
-> Cc: "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>
-> Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-> Cc: Angus Ainslie <angus@akkea.ca> (supporter:PURISM LIBREM5 PHONE)
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ian Ray <ian.ray@gehealthcare.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jan Kiszka <jan.kiszka@siemens.com>
-> Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Le Jin <le.jin@siemens.com>
-> Cc: Martyn Welch <martyn.welch@collabora.com>
-> Cc: Niel Fourie <lusus@denx.de>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Rick Chen <rick@andestech.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-> ---
->  board/BuR/brppt2/board.c                            | 1 +
->  board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c | 1 +
->  board/andestech/ae350/ae350.c                       | 1 +
->  board/data_modul/common/common.c                    | 1 +
->  board/gateworks/gw_ventana/gw_ventana.c             | 1 +
->  board/ge/b1x5v2/b1x5v2.c                            | 1 +
->  board/keymile/kmcent2/kmcent2.c                     | 1 +
->  board/purism/librem5/librem5.c                      | 1 +
->  board/siemens/iot2050/board.c                       | 1 +
->  board/ti/j721e/evm.c                                | 1 +
->  boot/bootmeth_efi.c                                 | 1 +
->  boot/bootmeth_pxe.c                                 | 1 +
->  cmd/pxe.c                                           | 1 +
->  drivers/net/pfe_eth/pfe_firmware.c                  | 1 +
->  lib/efi_loader/efi_bootmgr.c                        | 1 +
->  lib/efi_loader/efi_net.c                            | 1 +
->  net/lwip/dhcp.c                                     | 1 +
->  net/lwip/dns.c                                      | 1 +
->  net/lwip/net-lwip.c                                 | 1 +
->  net/lwip/tftp.c                                     | 1 +
->  net/lwip/wget.c                                     | 1 +
->  test/dm/dsa.c                                       | 1 +
->  22 files changed, 22 insertions(+)
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
 
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org> # net/lwip
+The static analyzer (Svace) reported 
+After having been compared to a NULL value at spi-uclass.c:465,
+pointer 'dev' is passed as 1st parameter in call to function 'dev_get_flags' 
+at spi-uclass.c:469, where it is dereferenced at device.h:240.
+
+Correct explained:
+1. Added dev && !device_active(dev) check before calling device_active()
+2. Added explicit if (!dev) check with ret = -ENODEV setting
+3. Protected logging in error block with if(dev) check
+
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+---
+ drivers/spi/spi-uclass.c | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
+index d6049753740..52b79223f96 100644
+--- a/drivers/spi/spi-uclass.c
++++ b/drivers/spi/spi-uclass.c
+@@ -345,7 +345,7 @@ int spi_get_bus_and_cs(int busnum, int cs, struct udevice **busp,
+ 		return ret;
+ 	}
+ 
+-	if (!device_active(dev)) {
++	if (dev && !device_active(dev)) {
+ 		struct spi_slave *slave;
+ 
+ 		ret = device_probe(dev);
+@@ -355,6 +355,11 @@ int spi_get_bus_and_cs(int busnum, int cs, struct udevice **busp,
+ 		slave->dev = dev;
+ 	}
+ 
++	if (!dev) {
++		ret = -ENODEV;
++		goto err;
++	}
++
+ 	slave = dev_get_parent_priv(dev);
+ 	bus_data = dev_get_uclass_priv(bus);
+ 
+@@ -373,8 +378,11 @@ int spi_get_bus_and_cs(int busnum, int cs, struct udevice **busp,
+ 	return 0;
+ 
+ err:
+-	log_debug("%s: Error path, device '%s'\n", __func__, dev->name);
+-
++	if(dev)
++		log_debug("%s: Error path, device '%s'\n", __func__, dev->name);
++	else
++		log_debug("%s: Error path, NULL device\n", __func__);
++	
+ 	return ret;
+ }
+ 
+-- 
+2.30.2
+
