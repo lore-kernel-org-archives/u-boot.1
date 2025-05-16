@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B47FC3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 18:32:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58C24C3ABD8
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 18:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F1B982AE2;
-	Fri, 16 May 2025 20:32:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 96F8982A8B;
+	Fri, 16 May 2025 20:54:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MJbv9Jaa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DzMgPjjM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75B9182AE2; Fri, 16 May 2025 20:31:59 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 2FED382AE2; Fri, 16 May 2025 20:54:54 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5770D80107
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 20:31:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3073C8059D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 20:54:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7303d9d5edeso1077980a34.1
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 11:31:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-54fd1650afdso3025918e87.3
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 11:54:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747420316; x=1748025116; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pe3E8Nhm0oiEQiM+eIHarIOlzmK6mYn4JNJuGElN9Ao=;
- b=MJbv9JaandHPwEcODGxsAI0uuJ6vB4tnOoQuU51Pf7gatTJ1PixQxhWK6rt2qpB+Hg
- TbaCApChyIvbK53afPTevsRia03TXOS4xkk6mfQCehCAdOEf5s50WT53pYAYvXwWLrAp
- 3wAYxx2ubKW49RANemGYBh15oTdwMxuNM/gRM=
+ d=gmail.com; s=20230601; t=1747421691; x=1748026491; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aMDzfWZxaRTi2PfoBscREAp2R2js5MYuWOhLW6WtaEU=;
+ b=DzMgPjjMIYdj7KoD5X3O6aDPizizK7w+5ieFPmNY3uMUFY2NH2V24Lf3R64JbROBdE
+ 3Y4NT71W30LJ0g36vyrrGdlkX/cBItKTHTKEh9BxK7FfzVd1l7SsoUoK1+6tbCm9nooh
+ HZDaLUhatMpQtafbsdoXBqWHIgjlP1cbFzn56BGx6NA/Tt7DvmePU3K9LVFueXKiWxar
+ S1QuN2CzrFrlO/I4ROcVhHvEd8QUMv8nnPF2DGErkivRpAlLCPrIdKfGHIpgzPlcYqn+
+ seolmMZE+fBRDX5Ygw9jAiSOfVmwIhfyOL3tmWPayZt02i4jgpRGleivQxTa+uYg2lkg
+ s+gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747420316; x=1748025116;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pe3E8Nhm0oiEQiM+eIHarIOlzmK6mYn4JNJuGElN9Ao=;
- b=Hj/zpq5L6Ver7PRKoJY0/t42HldPIvSvyaWpWFJZJZhjBAszAAccRbD/ccbfou5Jdl
- yxAe6hlLD1JEaDTGbE7LqhxSrsQS4U+XnwFQQZKVo1gIC+/g2e4sBB8EmecT//YkHPxI
- 3xONVVy28OFmTp7gDHr6gfRZ7iYFacSIcbQRvF/kqJGVQYLdmIODBV45bYEDGydd+A6Y
- RNeaKVrTM9/LK4Maa4JrAhGmcOqXTwDTNxH7dqPg5/zh3gxsV1iCPK3H5eHMusC4cITW
- 5tqGlBxV5PzTKmNGrV1nFWlVbvPof9eeK0dhJRlJd9LZP9anWkyMvKwxwX4t0aGjFZ9O
- nrQw==
-X-Gm-Message-State: AOJu0YyuI20qyjwwkkWTVaHTTJQkfityDQKWwvFjeInoV5FeEMcZZk3W
- i8Vt74LOH999473v+hcmiF93+YIVk7igmT5HAovaR4qFCqPlz/wtuCW/SbmgPGk69Z0=
-X-Gm-Gg: ASbGncuJ7L1q7mfvdxY1cwM3LMBJUoXwy61Shpb2GjoZ/OWSV/Jun7ayNxKY029uFVi
- rEYt084cbKzZyQcj4IaHJ7K4CTynxYbM5QDK1Zir2J7kqVWaeWujf3k9uEEH2KcJyxK5j0GWocZ
- Vl4+CsblcgnrnFWDhjq8j0Xm1VNlqnHgnnKLiSFFlF0YZYMJYZoZBE3GkADTlVU1dkdanYp+c9u
- PIdAReMGQFlGbFAYxEKJ6MiGJbEXeb/hqx2kuPyIfRCH1JUl8/FKLe2taZe9T3PFVcvrIHdmwxz
- Bcb6B/yD4BftHVrtvRjfmfqEga69Djdu0oxZaVNcCw1oRua3v78koAee0UPFDtC2vUH3MGYk2po
- yhpdWicJC/6d9
-X-Google-Smtp-Source: AGHT+IEvBNaW9SvFTNnmYhYC2VD6vzPYC6wvI8WuyP3nUNURl9A/raiJ/n9OjNYNXgo58vlR9YDOgg==
-X-Received: by 2002:a05:6830:90d:b0:727:2a38:d0d2 with SMTP id
- 46e09a7af769-734f6af80c7mr3433073a34.10.1747420315994; 
- Fri, 16 May 2025 11:31:55 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6a4afb9sm446536a34.13.2025.05.16.11.31.54
+ d=1e100.net; s=20230601; t=1747421691; x=1748026491;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aMDzfWZxaRTi2PfoBscREAp2R2js5MYuWOhLW6WtaEU=;
+ b=EiMhh6EXCgvFr2doWSpby0tUpoGv8PMfnpo6LQ2vNDwURjvMXHbsLtIU+pznl+9aKE
+ rR4QAsiGFW3PUfnOrydiy1STiFTXrKvIfVVtv7kXLNWVsoQ3ds1Eyjl8habgmPei9Wo/
+ wkcz2nAUN24KpPH21/UouS2gQ7uLuvImwG/xyORb9XISJSwS+RCA1bECbRMy+pPDqho+
+ gbbQZkLw3fci9ddebfvGBg+FSmQ7kRyz1bY9qcD0+I8SasAXMsQZ64966GhCMKxOAkY2
+ 0vAQ/HrtcOGPXd767wN+8Dv8T2SedZhI5gnLml7Uz5PazIMdV9wCO504NTJJQ4goavTa
+ PEXA==
+X-Gm-Message-State: AOJu0YwVMm6Nym7gH0kFTjmcBFsWj+/Ava9R5Dl9gJ1vrF7/0IpOFFhQ
+ KIeN9P7uFDgjLZY5gkXQL5uz94O6/55KpUU5eN43x36guNm1hnZ0vGR6lPX5Ly88
+X-Gm-Gg: ASbGncvBfgOcBXbD/5ms+KpgbmgpBnuf1sJh/4FBZLwlyr17ZBGfTNANeedcYzDWcV5
+ RVj3V8MAwxiiLb8uH1HtbC3ctrvlVzeO0P756QVMxoV/vNNx+1VV2ZltHF1BQAW7LIqCq765B68
+ PH/UBc2+9d/ki8LZRhlf+B2dxbmclf0iQrDS3YMSwwgi4KK7WkzKFZvzsQCVj2Ifcb05yHEMc3T
+ GyccCVldADkJXqyn66E54402X+ttmDjHq+4hFFRu9Y2VqiaQXYB3z5Myz378A9fG0igySFpPieA
+ BTKDoyiWhSng0Tl9W/fH7EhGci3+hlYalvY444ncYNM+sSZQg7u/+SzxgQb0BsLwmztXr0JxMSM
+ p2U6uLkwk6eDCZVVgnw==
+X-Google-Smtp-Source: AGHT+IFGPedGw9haRPqyzYcH0l+2vy7zAzQ+mI2jT86UiBHMzh/jNi2XktxRLmv4u/ciOtRH2fiO+g==
+X-Received: by 2002:a05:6512:2616:b0:549:86c8:1132 with SMTP id
+ 2adb3069b0e04-550e97845f3mr1180237e87.17.1747421690412; 
+ Fri, 16 May 2025 11:54:50 -0700 (PDT)
+Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
+ [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-550e6f30eaesm549552e87.59.2025.05.16.11.54.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 May 2025 11:31:54 -0700 (PDT)
-Date: Fri, 16 May 2025 12:31:53 -0600
-From: Tom Rini <trini@konsulko.com>
-To: ant.v.moryakov@gmail.com
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] drivers: usb: host: fix prevent memory leak in interrupt
- message submission
-Message-ID: <20250516183153.GL100073@bill-the-cat>
-References: <20250516175434.124221-1-ant.v.moryakov@gmail.com>
+ Fri, 16 May 2025 11:54:49 -0700 (PDT)
+From: ant.v.moryakov@gmail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] lib: add NULL pointer check for %s format
+Date: Fri, 16 May 2025 21:54:47 +0300
+Message-Id: <20250516185447.141540-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3J2Y1IvNuU22JOnh"
-Content-Disposition: inline
-In-Reply-To: <20250516175434.124221-1-ant.v.moryakov@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,58 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
 
---3J2Y1IvNuU22JOnh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Handle NULL pointer case in string formatting (%s) by printing '(null)'
+instead of dereferencing NULL pointer. Makes behavior consistent with
+standard printf implementations and prevents potential crashes.
 
-On Fri, May 16, 2025 at 08:54:34PM +0300, ant.v.moryakov@gmail.com wrote:
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>"
+---
+ lib/tiny-printf.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> From: Anton Moryakov <ant.v.moryakov@gmail.com>
->=20
-> Ensure int_queue is properly destroyed when receiving wrong buffer
-> by adding error handling path. Fixes memory leak that occurred
-> when backbuffer validation failed.
->=20
-> Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
-> ---
->  drivers/usb/host/ehci-hcd.c | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/drivers/usb/host/ehci-hcd.c b/drivers/usb/host/ehci-hcd.c
-> index 7d5519c65a9..765d8b327ee 100644
-> --- a/drivers/usb/host/ehci-hcd.c
-> +++ b/drivers/usb/host/ehci-hcd.c
-> @@ -1557,6 +1557,7 @@ static int _ehci_submit_int_msg(struct usb_device *=
-dev, unsigned long pipe,
->  		debug("got wrong buffer back (%p instead of %p)\n",
->  		      backbuffer, buffer);
->  		return -EINVAL;
-> +		goto err;
+diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+index faf55d7f327..da596d72050 100644
+--- a/lib/tiny-printf.c
++++ b/lib/tiny-printf.c
+@@ -306,6 +306,8 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
+ 				break;
+ 			case 's':
+ 				p = va_arg(va, char*);
++				if (!p)
++					p = "(null)";
+ 				break;
+ 			case '%':
+ 				out(info, '%');
+-- 
+2.30.2
 
-A goto after return cannot be right, and should have had some compiler
-warnings too.
-
---=20
-Tom
-
---3J2Y1IvNuU22JOnh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgnhJQACgkQFHw5/5Y0
-tyxBsgv/QZN9ej9gvx8zpjFyKxYGCES2mGX9O4sTn79sFP9CoNAvcp8mY4YF8F7k
-PKTIrUtmqUDzRZJ8EROTSLyPC4HKWeKID7RE1zR2tPbOLjIkqxQy5Q4/BbmQkfai
-D+E7uuzYGvnmrYUsJakNDY7S6hS00UKs4yoV28j0mTAnzM02O/ixJ7VLYukmb5WM
-KvsH4zlltBoAo2ITGfLEbnYGe1qShvLzXRKf6Hgt+5PKOmKxnthnFXEe4ib1m7W/
-CKYM1jErap0ObdWng0Yof8/LOFdh1B2APUXhCGd7uhNvLOh3pB2b8yqlXQ/o30Rd
-spZrWt9LrHMiAiawlkoQu/Mtl6S0GQC+3Qkgvnr93bENO+M0tLSbtrCVAgRMcJoW
-ss2iivG1Sa6MwbUeDj+thbzB3HUS9y2jixJ7+tR5Htzu0ailsIgEwA1O+v9D05HZ
-z4zT4UFaa8J/e4jr/hpdFEQL6zi8PQ3TIVVRWgeLA3ybZSQSNWdhQWf0nz80Cuml
-lXhl9KW0
-=iOq7
------END PGP SIGNATURE-----
-
---3J2Y1IvNuU22JOnh--
