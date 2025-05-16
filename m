@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3DDC3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613E7C3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 16:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4C9B80107;
-	Fri, 16 May 2025 18:24:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 85D2D80107;
+	Fri, 16 May 2025 18:28:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P4TEdPNK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mTDSpTct";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E29068059D; Fri, 16 May 2025 18:24:31 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 4DED48006D; Fri, 16 May 2025 18:28:34 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4D918006D
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:24:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2640D8205B
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 18:28:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-70a2c0e7fbbso24706237b3.2
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 09:24:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-609e7f3caf3so1677963eaf.1
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 09:28:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747412668; x=1748017468; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pvA7dtW/KiiFB43E6AHz7IeGC3yI1cZLf18zuKE6UhA=;
- b=P4TEdPNKdLN01YtUyIJnhSViHaSKRFwcsGlahPPRWLq8CqfgOmAmvtH/cigby+vHfI
- 8RGxlNVnA2LElTBePeawWtixnxIQEy4VL+ConAZJ36TftmwI/t76MtiLiUfOgPuuISZa
- Z4g+Th6lmIbNZu6d5A4W3RnICr8H954cU/fthyEvbM33b2OfKN7Hwb9QmJaYSWsiQVTY
- fl+KbHDhPFAHw+Jmz/Jawuxs7h3bwPYwEPYVfwFM2cbTRI2HQb+zDH+Dg8TrPYV9bSa6
- P1wy2C1KCGQl5MpuYiFAzZ1/jnj5p92P4Js2RrQwjzxuTaoNz/0KwCcyf47K4RL13SZB
- fI7w==
+ d=konsulko.com; s=google; t=1747412911; x=1748017711; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4EDnMW3R2dbYLgEKpRa8xDlJfdiXBel5jgqrpEUJlqM=;
+ b=mTDSpTctO2v1XPoregacuD1JF57HvpNfSSjVGrcH3R91EFpa7YVfEqSlSSRGCf30eg
+ mqxbgr7nayGi7kz35OBZkyC7CJbBFGCS5uOg6mbtAgZ5Z/szZ/CTsDrfg17vghPH3ezr
+ EBv/dA7x8UzDVEGeqYzmuna1rs0JhqC4FuX/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747412668; x=1748017468;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pvA7dtW/KiiFB43E6AHz7IeGC3yI1cZLf18zuKE6UhA=;
- b=n337zXREEH/EB3Q4ztXZCEl2+syZx2Frs4Lezyz1wIK5T28+Gx/TaKshyC4bMJBW1v
- TfSxtUZHqkNZDzDeRqO+tGRufQwfhZbz8EySBMh6nznUuGMUV9INFJNLej92zBD6OzpJ
- l08SU6zhgWYpu5vBnnsrD5T7c3MvXSCLyAphW6rBGm5sJhefFPaNb85xAS5jVKTFGHx3
- U4vNdI+rEZD10MqBTxuFQDU/cZbzaA3AyBbdeTodBxcocRrMByhyCDO9LRlU6Skyt27c
- UUsOQAyK/M/hh6286kExVt2atBCmdF1uXbtUgr4eDJD84V5m4QTsWh1WV3QvlpFaiQG2
- OyKg==
-X-Gm-Message-State: AOJu0YzFvY2OrpgWe9rKginuIPqZLoOxmurbZmheYfnPP7hkCPbp98mr
- sKZvkw1wZxZ8YQa24Ubw+c7HLa8rtuw4hDNJ1a8fFKiZqQTh6/F4uorbV9fUr34yH/sc7WDsals
- YNLpcqsAsITo4fnMArYah4cL6gqePZhZWv0HbYtk=
-X-Gm-Gg: ASbGncvEIl8KS3TM15z3oTIyKyS5i5rVJofcmBXTpck9xxTCn8hj3wNqBX7HDqniKJh
- VxV++X9j8nRaG+YYPKOKP6fwzigALV/csWTUg//6YHbrK3AfHh8CyzbabWvzRxzjZznjrf7csTm
- rvRfwc5OA3M3sDrv3eA5KFrhliNxES4uBMUyhwe9aBha4=
-X-Google-Smtp-Source: AGHT+IEgfXoGvQXhE+dwal/CdkldssTt8x+OW83ZMEeFjhLuJpxdpWQ1MZj57YA8et1jGUY4oVophuvsEVJhs+JCgBo=
-X-Received: by 2002:a05:690c:3390:b0:70a:192d:122 with SMTP id
- 00721157ae682-70cab0c30eamr44645787b3.30.1747412668270; Fri, 16 May 2025
- 09:24:28 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1747412911; x=1748017711;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4EDnMW3R2dbYLgEKpRa8xDlJfdiXBel5jgqrpEUJlqM=;
+ b=euTrDoMLMWdOSxOW0Bg+d27pHLO+WK07KPqPagRnGuJpg3R/XCEkWr3vRodV18jleK
+ fEEgPK/O4TWcfT4UAYOKAVt4rDvIYMn1e/LAPm04RW5cd/SCmFvraB0MGZVwSEFwwh64
+ Pf644LG1CD2qpJrTyTHkLcRzLAjMg6zFC8MsunGbBLf8h2m4+q5eiTCuf4/hztP6pp2n
+ 7XC1BTSJCgtdQzqtI8kAYt4hnPk4sntZtEFwPh477FNpmxzFsrGudxZS3tqguTlqkxSO
+ efVk/XAdnvfvU5xG54Z4p0VyDxsPTJ5ubqvDyNpS4McUgvhUsPeYy9euQuZfQfD61tSw
+ stOw==
+X-Gm-Message-State: AOJu0Yy5OAfrmtxTJ1mQkfICXDgBXMGncnz4q9hoERsJTir2toAi0qKq
+ yz2QCZwhCvYzTTLB+FW3iVLdOpbe//Pd/cNP5MwdzXyIRc5S6id5ib1GSGmRI5udyDw=
+X-Gm-Gg: ASbGncuNYgC+GKqZL1dBqVajfvZrIybTGXP3YmrfXCYXZR8ueXp7jIRADTWM2NJZ0SG
+ wgC2wExqmKl6HhfX898Drvas1WD8dHSkXN6HHTwJyGZepZ+G1woMogBl8MIuek+j1hCZuBGP5i6
+ 8F7IjM/YOT8gLpv4gcbBCOhiCisro5rmXD50vuyTRT0rFDrqprxKOX2+KZT8Utd1tk8jW7+hiDJ
+ X588YenOq+dRd98NTkZgoflmGwu/kqElubZKA1+l4XCAFUd+RwmPn43RRgKolRJusPdV7EPCbiF
+ kwBdUWvlkTExj9URLGdopzAISuYMCOV4iDFybBxwCFqHOgfs5r9TK/X2kF2JTokLdqzI2JCVhwV
+ M8sbFw9E2+Rra
+X-Google-Smtp-Source: AGHT+IE9Q2WRhd+WLhwp4BB0iP3y6QiS8jjVgXVxtoSheZcvhvlkdLoQCcxJLA+eIcy7//9axNKHCQ==
+X-Received: by 2002:a05:6830:700e:b0:72b:9014:f5cc with SMTP id
+ 46e09a7af769-734f6b850d1mr3221593a34.25.1747412910805; 
+ Fri, 16 May 2025 09:28:30 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-734f6b6196bsm400671a34.63.2025.05.16.09.28.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 May 2025 09:28:30 -0700 (PDT)
+Date: Fri, 16 May 2025 10:28:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] [RFC]: dtc: Add Kconfig option to pad device tree blob
+Message-ID: <20250516162825.GA2939351@bill-the-cat>
+References: <20250502183826.859174-1-eric.schikschneit@novatechautomation.com>
 MIME-Version: 1.0
-References: <20250516125053.25457-1-ant.v.moryakov@gmail.com>
- <CAFLszTg03voPKR3Ojv_H5CvV2u8X4y9XqXL9Vh33_LRwFPz5pA@mail.gmail.com>
-In-Reply-To: <CAFLszTg03voPKR3Ojv_H5CvV2u8X4y9XqXL9Vh33_LRwFPz5pA@mail.gmail.com>
-From: Anton Moryakov <ant.v.moryakov@gmail.com>
-Date: Fri, 16 May 2025 19:24:17 +0300
-X-Gm-Features: AX0GCFv9gLhH6-38aZF5SzOxoI8erkyVxWJw8ziJSRCm8ck6azVYqn1HAeEV-44
-Message-ID: <CAHb2+K52-EuZ5D4MxYgdDiw6OuWoa8rFa2f2K5pkKpQg1NhVLw@mail.gmail.com>
-Subject: Re: [PATCH] drivers: spi: fix deref ater null.might in spi-uclass.c
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="U+vdnonEpE+MWniT"
+Content-Disposition: inline
+In-Reply-To: <20250502183826.859174-1-eric.schikschneit@novatechautomation.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,99 +95,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I can then leave only
-+       if (!dev) {
-+               ret =3D -ENODEV;
-+               goto err;
-+       }
-+
-but make it higher
-How do you like this option?
 
+--U+vdnonEpE+MWniT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-=D0=BF=D1=82, 16 =D0=BC=D0=B0=D1=8F 2025=E2=80=AF=D0=B3. =D0=B2 19:20, Simo=
-n Glass <sjg@chromium.org>:
+On Fri, May 02, 2025 at 01:38:26PM -0500, Eric Schikschneit wrote:
 
-> Hi,
->
-> On Fri, 16 May 2025 at 14:51, <ant.v.moryakov@gmail.com> wrote:
-> >
-> > From: Anton Moryakov <ant.v.moryakov@gmail.com>
-> >
-> > The static analyzer (Svace) reported
-> > After having been compared to a NULL value at spi-uclass.c:465,
-> > pointer 'dev' is passed as 1st parameter in call to function
-> 'dev_get_flags'
-> > at spi-uclass.c:469, where it is dereferenced at device.h:240.
-> >
-> > Correct explained:
-> > 1. Added dev && !device_active(dev) check before calling device_active(=
-)
-> > 2. Added explicit if (!dev) check with ret =3D -ENODEV setting
-> > 3. Protected logging in error block with if(dev) check
-> >
-> > Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
-> > ---
-> >  drivers/spi/spi-uclass.c | 14 +++++++++++---
-> >  1 file changed, 11 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
-> > index d6049753740..52b79223f96 100644
-> > --- a/drivers/spi/spi-uclass.c
-> > +++ b/drivers/spi/spi-uclass.c
-> > @@ -345,7 +345,7 @@ int spi_get_bus_and_cs(int busnum, int cs, struct
-> udevice **busp,
-> >                 return ret;
-> >         }
-> >
-> > -       if (!device_active(dev)) {
-> > +       if (dev && !device_active(dev)) {
-> >                 struct spi_slave *slave;
-> >
-> >                 ret =3D device_probe(dev);
-> > @@ -355,6 +355,11 @@ int spi_get_bus_and_cs(int busnum, int cs, struct
-> udevice **busp,
-> >                 slave->dev =3D dev;
-> >         }
-> >
-> > +       if (!dev) {
-> > +               ret =3D -ENODEV;
-> > +               goto err;
-> > +       }
-> > +
-> >         slave =3D dev_get_parent_priv(dev);
-> >         bus_data =3D dev_get_uclass_priv(bus);
-> >
-> > @@ -373,8 +378,11 @@ int spi_get_bus_and_cs(int busnum, int cs, struct
-> udevice **busp,
-> >         return 0;
-> >
-> >  err:
-> > -       log_debug("%s: Error path, device '%s'\n", __func__, dev->name)=
-;
-> > -
-> > +       if(dev)
-> > +               log_debug("%s: Error path, device '%s'\n", __func__,
-> dev->name);
-> > +       else
-> > +               log_debug("%s: Error path, NULL device\n", __func__);
-> > +
-> >         return ret;
-> >  }
-> >
-> > --
-> > 2.30.2
-> >
->
-> You are not allowed to pass NULL as dev to driver model functions. So
-> the bug here is in the SPI code.
->
-> There is a code-size cost to checking arguments and we tend to be
-> reluctant to pay it in U-Boot, where code size is often critical.
->
-> We do have assert() but it is fairly intrusive and people seldom
-> enable it. If you have a better way, please suggest it!
->
-> Regards,
-> Simon
->
+> This will allow arch(s) that use device tree blobs to pad the end of the
+> device tree so they can be modified by board files at run time. This will
+> help prevent errors such as FDT_ERR_NOSPACE from occuring.
+>=20
+> Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.co=
+m>
+> ---
+>  arch/Kconfig                 | 11 +++++++++++
+>  arch/arc/dts/Makefile        |  6 +++++-
+>  arch/arm/dts/Makefile        |  4 ++++
+>  arch/m68k/dts/Makefile       |  6 +++++-
+>  arch/microblaze/dts/Makefile |  6 +++++-
+>  arch/nios2/dts/Makefile      |  6 +++++-
+>  arch/powerpc/dts/Makefile    |  4 ++++
+>  arch/riscv/dts/Makefile      |  6 +++++-
+>  arch/sandbox/dts/Makefile    |  6 +++++-
+>  arch/x86/dts/Makefile        |  8 +++++++-
+>  10 files changed, 56 insertions(+), 7 deletions(-)
+
+I like the concept and the cleanup. However, I think we should:
+- Put the line
+DTC_FLAGS +=3D -p $(CONFIG_SYS_DTC_PAD_BYTES)
+in scripts/Makefile.dts with the rest of the DTC_LOGIC as:
+ifneq $(CONFIG_SYS_DTC_PAD_BYTES,0)
+DTC_FLAGS +=3D -p $(CONFIG_SYS_DTC_PAD_BYTES)
+endif
+
+Then we can:
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index ea33d07c086..a85f751d1e6 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -63,6 +63,17 @@ config SYS_CACHELINE_SIZE
+>  	default 64 if RISCV
+>  	default 32 if MIPS
+> =20
+> +config SYS_DTC_PAD
+> +	bool "Enable DTC padding"
+> +	help
+> +	  This will allow the final device tree of your specified arch to
+> +	  have pad space at the end. This enables the ability for the device
+> +	  tree to be modified in place by board files.
+
+Drop this.
+
+> +config SYS_DTC_PAD_BYTES
+> +	int "Size in bytes to pad device tree blob"
+> +	default 4096 if SYS_DTC_PAD
+
+And change the defaults to match the existing users, roughly:
+	default 32768 if X86 && EFI_APP
+	default 4096 if ARC || M68K || MICROBLAZE || NIOS2 || RCAR_64 \
+		|| RISCV || SANDBOX || (X86 && !EFI_APP)
+	default 0
+
+And then we drop the -p lines from all of the other DTC_FLAGS.
+
+Thanks!
+
+--=20
+Tom
+
+--U+vdnonEpE+MWniT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgnZ6UACgkQFHw5/5Y0
+tyy0Xwv/aJkcBfk1dczeV81JFwOUmOjzGRKtunkdV5lovNnWici1Gfkt9SeRSFnn
+h7G+O0a5EMDGBwR4bigidNgS13xA5d2ugoU/ETeRNfmIA12Q6sYyDEcOuh53qzFH
+8bK5W7NYUKW/eMBvIuA/pptRL67FV6wdyRGscXsLrtfdlWIeWQ7a0eray8xezcZ3
+xqQoYbTvprZhQ+/f6+l5JbHCcx/Yar74SnbDf+WXCbMc51iZ9r/N8MDR9td/k+VB
+nuXFYDvGGOwAKJ6EcUevqaMLdmg5yeUdMraBUQAgAtTNxTBP4bEz0HLDxkWQmY4Y
+gC6eIv5I4ksnrPFFlULvt8v4UEZm3FEUxROTQho6P9rxg+xnYxOS+PXt1thQwsHK
+yQDlAm5z5F3YKoj/mDl1amcN+COYGJp0+KgcPcg1iVHk22mRzgjVScJ56mJ31UKc
+71vIniGHrOWCePWvKKwLpc7YJ3D7F+a/csklO/0jFM4Gvh2f/YcrdVeojvI+f/9p
+Snf3Vpxn
+=+I0s
+-----END PGP SIGNATURE-----
+
+--U+vdnonEpE+MWniT--
