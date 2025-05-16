@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11954C3ABD8
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 14:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCEACC3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 14:20:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FA278006D;
-	Fri, 16 May 2025 16:13:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4352180079;
+	Fri, 16 May 2025 16:20:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UFv1FLtL";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=martyn.welch@collabora.com header.b="dSWEl1M9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E621080079; Fri, 16 May 2025 16:13:33 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 490B48059D; Fri, 16 May 2025 16:20:49 +0200 (CEST)
+Received: from sender4-op-o10.zoho.com (sender4-op-o10.zoho.com
+ [136.143.188.10])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9634980050
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 16:13:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84F3C8006D
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 16:20:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43cfe574976so14555915e9.1
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 07:13:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1747404810; x=1748009610; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=M9bhGZoU+syG8K7bCN/jU6Bd5VDEIqsiYyLB1QzG/pE=;
- b=UFv1FLtLyhzUbGlu7qfPmbPL8OCtnSQbDjpAdmA6nPS+yGIeYKaRMCE8K3AlE6jyZB
- JimS0tVYLIXayrJWskbSNFQtfOU9aMk6JhKwg5thDMIqcrBoUUooN9W+RJAj6r8qjiFn
- SZ2q4LBAgbPnF2e1NADLA5+6uP1iDbS61Pqeo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747404810; x=1748009610;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=M9bhGZoU+syG8K7bCN/jU6Bd5VDEIqsiYyLB1QzG/pE=;
- b=RwAKzGZcqAQzhbkrGoHJd+3+yXgOrMSnSVJ9Xd28EWHrwHlfBFb+8R/BfAPSweEKOs
- JEj5NGXQ8521iqIUj3aCxPza1cFiD3+EPRSKv2snfg75lXMVEEMifwbRjDcxWbyzp9a7
- DxVeN17GSzIAFlfJMDohGslz9Y6m29UUuvNLOQdQ6UQlkgftrVT/M7HOlNjQoCmnST6i
- DpDwvbmMoNf+76BF1TwRJ9cdH9/sMAKjiJTnhxzJQXx9Er2TG0tIxIPBUk3Fc5sg9+lC
- 88vDTlBy7rmDDc1JUV5BUP9tQ9NJX5JNVF8efl8qNx/TL6p9xRMIAcrIoXufhKd5VVjY
- q9Mw==
-X-Gm-Message-State: AOJu0YyPFLAMWitbQ4+F9A7WhyaHzuGrA+y8zxS9q0TEVz8Ap5u6FAOJ
- OnW4CWVEOmzJ95MClSqvxhAAPDsTnerfn59IdQYVHcog+0BxtwuIhl/BJXuQ60PV8E4JE+VHKgB
- 9QHj0RGaScI5VIw==
-X-Gm-Gg: ASbGncvi//UNecEb1I1DOHvFBg5DAEtqYrN6RC4uKcRW2tH7WVNSvLba9iIl6MDP5vh
- 8fekbsOZL2WMTCQ7584UAtWSPbDpON7rbOJa7svMcDeugXxrrPaP5H9Bgasux+ONBtuMRY2kCdA
- Zx0IRJPzcmpgceO47Bcc4HqBFjN3uHliyeuc2V5odV2we02XkjHmh0yUitzna/nrJmSweQjJQbg
- V1rE7Olu9s4Bxn511ozM+b4IbA1/2er2OrUqqZds570DwKXS6qq+x1c2/9Clw3yyHGGAML06E7M
- Y5lkFxa2WkuAqxG4LnRh3O/fwF8eki7p0u52cyhi7h9nOq4=
-X-Google-Smtp-Source: AGHT+IEzy6HfcJ1gYJ/yrLCcufcv7PBfUKlmWwyLOMKS29axvpMs96hQfsQ98rNSbCUjNdHSZwYAGQ==
-X-Received: by 2002:a05:600c:3e0a:b0:43c:e478:889 with SMTP id
- 5b1f17b1804b1-442fd5a2c09mr44591285e9.0.1747404810265; 
- Fri, 16 May 2025 07:13:30 -0700 (PDT)
-Received: from chromium.org ([213.157.19.135])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca8896dsm2966222f8f.73.2025.05.16.07.13.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 May 2025 07:13:29 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jerry Van Baren <vanbaren@cideas.com>, Jonas Karlman <jonas@kwiboo.se>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] fdt: Allow expanding the devicetree during relocation
-Date: Fri, 16 May 2025 16:12:56 +0200
-Message-ID: <20250516141300.384736-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=martyn.welch@collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1747405242; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=GS3NNq7ioBdgtzlQ1MOpNxrkoy8GPYYKXt41RdNGmhe6Rdp3tqYXUa67sfFmkhachHE6ks4O20IAk91VSltftp+CLZ0jmCS5jbMF7GRnSWG8H/BKr79z2jDe8gFoLrY6xxk1Z0+FwgVMiHsBjPVtNGIG7MWItRFZ2vH8iCCJev0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1747405242;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=fVYsy85N+JMqjkOG+yC1OAZaDyB+GJ1LMHI59n2Yq7c=; 
+ b=JnXg3nUuM5UjJuumkPyjqaxqfHB08rlKEB2PExbuK6g1n/5D/L8BcbevGPJEktibz9fh0FAnD48QQwLkggjZ+47+AghoYN2nf5qdftGL1wNwuLQPCkMheT9b0fs3IoBqXkBCip0vVR3n1m8to2ar29WmKykq6vENybJecdVYmV8=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=martyn.welch@collabora.com;
+ dmarc=pass header.from=<martyn.welch@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747405242; 
+ s=zohomail; d=collabora.com; i=martyn.welch@collabora.com;
+ h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=fVYsy85N+JMqjkOG+yC1OAZaDyB+GJ1LMHI59n2Yq7c=;
+ b=dSWEl1M9P2KonnSy8FSXgIRoXAZLn0PXMwBHB482quqz9w2+unmd5oKN8sGIpZ7t
+ wm+fi+8ixDx0YIk5b+nLN0QSAQCrfRCHASxVORm3aaLCsSzOt1coZ9UPIlZnA95bwS6
+ NDxgWsy2idy0gzUbp0e7gldYKaxkskAXpnBBfj5s=
+Received: by mx.zohomail.com with SMTPS id 1747405240407165.43433119659198;
+ Fri, 16 May 2025 07:20:40 -0700 (PDT)
+Message-ID: <0e1c33d7-3406-41e1-890f-975ad362a90d@collabora.com>
+Date: Fri, 16 May 2025 15:20:35 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 21/22] global: Avoid indirect inclusion of <env.h> from
+ <net.h>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Huan 'Kitty' Wang <HuanWang@gehealthcare.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Angus Ainslie <angus@akkea.ca>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ian Ray <ian.ray@gehealthcare.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Le Jin <le.jin@siemens.com>,
+ Niel Fourie <lusus@denx.de>, Ramon Fried <rfried.dev@gmail.com>,
+ Rick Chen <rick@andestech.com>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+References: <20250514225002.15361-1-trini@konsulko.com>
+ <20250515234154.1859366-1-trini@konsulko.com>
+ <20250515234154.1859366-22-trini@konsulko.com>
+Content-Language: en-US
+From: Martyn Welch <martyn.welch@collabora.com>
+In-Reply-To: <20250515234154.1859366-22-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,48 +91,330 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some boards set fdt_high to -1 which means that the FDT is not relocated
-in boot_relocate_fdt().
 
-A comment in that function says that we assume there is space after the
-existing fdt to use for padding, with the padding size set to
-CONFIG_SYS_FDT_PAD
 
-However, there is no guarantee that this space is available. If using
-the control FDT, then global_data is immediately above it, so expanding
-the FDT and adding FDT properties will cause U-Boot to fail.
+On 16/05/2025 00:31, Tom Rini wrote:
+> Now that env_get_ip() has been removed, the include file <net.h> does
+> not need anything from <env.h>. Furthermore, include/env.h itself
+> includes other headers which can lead to longer indirect inclusion
+> paths. To prepare to remove <env.h> from <net.h> fix all of the
+> remaining places which had relied on this indirect inclusion to instead
+> include <env.h> directly.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Changes in v3:
+> - New patch
+> 
+> Cc: "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>
+> Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+> Cc: Angus Ainslie <angus@akkea.ca> (supporter:PURISM LIBREM5 PHONE)
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ian Ray <ian.ray@gehealthcare.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jan Kiszka <jan.kiszka@siemens.com>
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Le Jin <le.jin@siemens.com>
+> Cc: Martyn Welch <martyn.welch@collabora.com>
+> Cc: Niel Fourie <lusus@denx.de>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Rick Chen <rick@andestech.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tim Harvey <tharvey@gateworks.com>
+> Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+> ---
+>   board/BuR/brppt2/board.c                            | 1 +
+>   board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c | 1 +
+>   board/andestech/ae350/ae350.c                       | 1 +
+>   board/data_modul/common/common.c                    | 1 +
+>   board/gateworks/gw_ventana/gw_ventana.c             | 1 +
+>   board/ge/b1x5v2/b1x5v2.c                            | 1 +
 
-Use the CONFIG_SYS_FDT_PAD option to expand the devicetree during
-relocation.
+For b1x5v2.c:
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Reviewed-by: Martyn Welch <martyn.welch@collabora.com>
 
-Changes in v2:
-- Use the SYS_FDT_PAD option instead of creating a new one
+>   board/keymile/kmcent2/kmcent2.c                     | 1 +
+>   board/purism/librem5/librem5.c                      | 1 +
+>   board/siemens/iot2050/board.c                       | 1 +
+>   board/ti/j721e/evm.c                                | 1 +
+>   boot/bootmeth_efi.c                                 | 1 +
+>   boot/bootmeth_pxe.c                                 | 1 +
+>   cmd/pxe.c                                           | 1 +
+>   drivers/net/pfe_eth/pfe_firmware.c                  | 1 +
+>   lib/efi_loader/efi_bootmgr.c                        | 1 +
+>   lib/efi_loader/efi_net.c                            | 1 +
+>   net/lwip/dhcp.c                                     | 1 +
+>   net/lwip/dns.c                                      | 1 +
+>   net/lwip/net-lwip.c                                 | 1 +
+>   net/lwip/tftp.c                                     | 1 +
+>   net/lwip/wget.c                                     | 1 +
+>   test/dm/dsa.c                                       | 1 +
+>   22 files changed, 22 insertions(+)
+> 
+> diff --git a/board/BuR/brppt2/board.c b/board/BuR/brppt2/board.c
+> index c0a163251b46..de206bdf1bc4 100644
+> --- a/board/BuR/brppt2/board.c
+> +++ b/board/BuR/brppt2/board.c
+> @@ -7,6 +7,7 @@
+>    *
+>    */
+>   #include <cpu_func.h>
+> +#include <env.h>
+>   #include <hang.h>
+>   #include <init.h>
+>   #include <spl.h>
+> diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> index b9f47006d610..8c9e98308765 100644
+> --- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> +++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> @@ -7,6 +7,7 @@
+>   #include <dwc3-uboot.h>
+>   #include <efi.h>
+>   #include <efi_loader.h>
+> +#include <env.h>
+>   #include <errno.h>
+>   #include <miiphy.h>
+>   #include <netdev.h>
+> diff --git a/board/andestech/ae350/ae350.c b/board/andestech/ae350/ae350.c
+> index 1d9d4a929c22..9bdd2ab17805 100644
+> --- a/board/andestech/ae350/ae350.c
+> +++ b/board/andestech/ae350/ae350.c
+> @@ -6,6 +6,7 @@
+>   
+>   #include <config.h>
+>   #include <cpu_func.h>
+> +#include <env.h>
+>   #include <flash.h>
+>   #include <image.h>
+>   #include <init.h>
+> diff --git a/board/data_modul/common/common.c b/board/data_modul/common/common.c
+> index 9e35dc5d6cb1..7d344792937e 100644
+> --- a/board/data_modul/common/common.c
+> +++ b/board/data_modul/common/common.c
+> @@ -12,6 +12,7 @@
+>   #include <asm/mach-imx/boot_mode.h>
+>   #include <asm/mach-imx/iomux-v3.h>
+>   #include <dm/uclass.h>
+> +#include <env.h>
+>   #include <hang.h>
+>   #include <i2c_eeprom.h>
+>   #include <image.h>
+> diff --git a/board/gateworks/gw_ventana/gw_ventana.c b/board/gateworks/gw_ventana/gw_ventana.c
+> index 21a908c20dd5..457d8281a664 100644
+> --- a/board/gateworks/gw_ventana/gw_ventana.c
+> +++ b/board/gateworks/gw_ventana/gw_ventana.c
+> @@ -6,6 +6,7 @@
+>    */
+>   
+>   #include <command.h>
+> +#include <env.h>
+>   #include <fdt_support.h>
+>   #include <gsc.h>
+>   #include <hwconfig.h>
+> diff --git a/board/ge/b1x5v2/b1x5v2.c b/board/ge/b1x5v2/b1x5v2.c
+> index c1aacd1458b1..ddb7304d493a 100644
+> --- a/board/ge/b1x5v2/b1x5v2.c
+> +++ b/board/ge/b1x5v2/b1x5v2.c
+> @@ -17,6 +17,7 @@
+>   #include <asm/io.h>
+>   #include <asm/mach-imx/video.h>
+>   #include <command.h>
+> +#include <env.h>
+>   #include <i2c.h>
+>   #include <input.h>
+>   #include <ipu_pixfmt.h>
+> diff --git a/board/keymile/kmcent2/kmcent2.c b/board/keymile/kmcent2/kmcent2.c
+> index 783853d5c6f6..0f43ebfec4d5 100644
+> --- a/board/keymile/kmcent2/kmcent2.c
+> +++ b/board/keymile/kmcent2/kmcent2.c
+> @@ -6,6 +6,7 @@
+>    * Copyright 2013 Freescale Semiconductor, Inc.
+>    */
+>   
+> +#include <env.h>
+>   #include <event.h>
+>   #include <asm/cache.h>
+>   #include <asm/fsl_fdt.h>
+> diff --git a/board/purism/librem5/librem5.c b/board/purism/librem5/librem5.c
+> index 8ca8792fa422..5178ee6929d8 100644
+> --- a/board/purism/librem5/librem5.c
+> +++ b/board/purism/librem5/librem5.c
+> @@ -6,6 +6,7 @@
+>   
+>   #include <malloc.h>
+>   #include <errno.h>
+> +#include <env.h>
+>   #include <asm/io.h>
+>   #include <miiphy.h>
+>   #include <asm/mach-imx/iomux-v3.h>
+> diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
+> index d827f728a08c..161210c60a96 100644
+> --- a/board/siemens/iot2050/board.c
+> +++ b/board/siemens/iot2050/board.c
+> @@ -11,6 +11,7 @@
+>   #include <config.h>
+>   #include <bootstage.h>
+>   #include <dm.h>
+> +#include <env.h>
+>   #include <fdt_support.h>
+>   #include <i2c.h>
+>   #include <led.h>
+> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+> index 0525f6e6f979..b1ed29af0018 100644
+> --- a/board/ti/j721e/evm.c
+> +++ b/board/ti/j721e/evm.c
+> @@ -8,6 +8,7 @@
+>    */
+>   
+>   #include <efi_loader.h>
+> +#include <env.h>
+>   #include <generic-phy.h>
+>   #include <image.h>
+>   #include <net.h>
+> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> index 0c9b4c3d59dc..0af23df3a4a5 100644
+> --- a/boot/bootmeth_efi.c
+> +++ b/boot/bootmeth_efi.c
+> @@ -15,6 +15,7 @@
+>   #include <dm.h>
+>   #include <efi.h>
+>   #include <efi_loader.h>
+> +#include <env.h>
+>   #include <fs.h>
+>   #include <malloc.h>
+>   #include <mapmem.h>
+> diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
+> index 6e5e0f99ea42..faa8d729b151 100644
+> --- a/boot/bootmeth_pxe.c
+> +++ b/boot/bootmeth_pxe.c
+> @@ -13,6 +13,7 @@
+>   #include <bootmeth.h>
+>   #include <command.h>
+>   #include <dm.h>
+> +#include <env.h>
+>   #include <extlinux.h>
+>   #include <fs.h>
+>   #include <log.h>
+> diff --git a/cmd/pxe.c b/cmd/pxe.c
+> index 0f26b3b42197..e82247af6c07 100644
+> --- a/cmd/pxe.c
+> +++ b/cmd/pxe.c
+> @@ -5,6 +5,7 @@
+>    */
+>   
+>   #include <command.h>
+> +#include <env.h>
+>   #include <fs.h>
+>   #include <net.h>
+>   #include <net6.h>
+> diff --git a/drivers/net/pfe_eth/pfe_firmware.c b/drivers/net/pfe_eth/pfe_firmware.c
+> index da4f2ca42a5b..b821fb17a1d6 100644
+> --- a/drivers/net/pfe_eth/pfe_firmware.c
+> +++ b/drivers/net/pfe_eth/pfe_firmware.c
+> @@ -12,6 +12,7 @@
+>   
+>   #include <dm.h>
+>   #include <dm/device-internal.h>
+> +#include <env.h>
+>   #include <image.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index c0df5cb9acd9..298149bcc332 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -12,6 +12,7 @@
+>   #include <charset.h>
+>   #include <dm.h>
+>   #include <efi.h>
+> +#include <env.h>
+>   #include <log.h>
+>   #include <malloc.h>
+>   #include <net.h>
+> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> index b3291b4f1d52..9db738ead9dd 100644
+> --- a/lib/efi_loader/efi_net.c
+> +++ b/lib/efi_loader/efi_net.c
+> @@ -18,6 +18,7 @@
+>   #define LOG_CATEGORY LOGC_EFI
+>   
+>   #include <efi_loader.h>
+> +#include <env.h>
+>   #include <dm.h>
+>   #include <linux/sizes.h>
+>   #include <malloc.h>
+> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+> index 92bd7067a7fb..043d2ab6e946 100644
+> --- a/net/lwip/dhcp.c
+> +++ b/net/lwip/dhcp.c
+> @@ -3,6 +3,7 @@
+>   
+>   #include <command.h>
+>   #include <console.h>
+> +#include <env.h>
+>   #include <log.h>
+>   #include <dm/device.h>
+>   #include <linux/delay.h>
+> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+> index 19172ac959ac..6862869d9e30 100644
+> --- a/net/lwip/dns.c
+> +++ b/net/lwip/dns.c
+> @@ -3,6 +3,7 @@
+>   
+>   #include <command.h>
+>   #include <console.h>
+> +#include <env.h>
+>   #include <lwip/dns.h>
+>   #include <lwip/timeouts.h>
+>   #include <net.h>
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index f05c4cd3f64f..abc52b32049c 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -3,6 +3,7 @@
+>   /* Copyright (C) 2024 Linaro Ltd. */
+>   
+>   #include <command.h>
+> +#include <env.h>
+>   #include <dm/device.h>
+>   #include <dm/uclass.h>
+>   #include <hexdump.h>
+> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+> index 4f9b2049187c..56d27f821212 100644
+> --- a/net/lwip/tftp.c
+> +++ b/net/lwip/tftp.c
+> @@ -6,6 +6,7 @@
+>   #include <display_options.h>
+>   #include <dm/device.h>
+>   #include <efi_loader.h>
+> +#include <env.h>
+>   #include <image.h>
+>   #include <linux/delay.h>
+>   #include <lwip/apps/tftp_client.h>
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index a3b82908877f..46c16edcc440 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -5,6 +5,7 @@
+>   #include <console.h>
+>   #include <display_options.h>
+>   #include <efi_loader.h>
+> +#include <env.h>
+>   #include <image.h>
+>   #include <lwip/apps/http_client.h>
+>   #include "lwip/altcp_tls.h"
+> diff --git a/test/dm/dsa.c b/test/dm/dsa.c
+> index 9a31ae39d952..46e48741fbaa 100644
+> --- a/test/dm/dsa.c
+> +++ b/test/dm/dsa.c
+> @@ -3,6 +3,7 @@
+>    * Copyright 2020-2021 NXP
+>    */
+>   
+> +#include <env.h>
+>   #include <net/dsa.h>
+>   #include <dm/test.h>
+>   #include <test/ut.h>
 
- common/board_f.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/common/board_f.c b/common/board_f.c
-index bff465d9cb2..5b7370b62bd 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -583,8 +583,10 @@ static int reserve_fdt(void)
- 		 * section, then it will be relocated with other data.
- 		 */
- 		if (gd->fdt_blob) {
--			gd->boardf->fdt_size =
--				ALIGN(fdt_totalsize(gd->fdt_blob), 32);
-+			int size = fdt_totalsize(gd->fdt_blob);
-+
-+			gd->boardf->fdt_size = ALIGN(size + CONFIG_SYS_FDT_PAD,
-+						     32);
- 
- 			gd->start_addr_sp = reserve_stack_aligned(
- 				gd->boardf->fdt_size);
--- 
-2.43.0
-
-base-commit: 4c26de2eea6bcf5f27b13da0372d27d767cd38e3
-branch: fdtb2
