@@ -4,50 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68AB0C3ABC9
-	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6EACC3ABC9
+	for <u-boot@archiver.kernel.org>; Fri, 16 May 2025 11:54:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8FA082A8B;
-	Fri, 16 May 2025 13:42:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1C5BF80107;
+	Fri, 16 May 2025 13:54:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1747395732;
-	bh=uj3a7AgGZFZ2nN8YjYMxYYqcwvo1J7UL90ZLAm2y7rU=;
-	h=Date:From:To:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=QzKcNAfDofRKMMde3NaPXflx9RgCl7nMJF8uhodCb+PL75z4u58Yk1EyOyboftd+T
-	 xgTor3K9X+KMkxGhR1dP07xQRznqs0HaibyWkiuacXCD/SCdUw7UIMCi+1nKuGMFKL
-	 8t5zyniavIEm41TQUmykCY+Je1GLqCbjWx5mTCasXv2+IzS0zKbZhCsstC3ooO0ww+
-	 V1AfcvA+HVh8x3wCEPHlq0KIYz85qkyy6u0HoJ3q+1ZyudLws2g4AiTpKpDYTVzHwe
-	 o1dFM+v9Gk4MH7Pj+aP8W1ZJxnyEPnmhucLnHkkBPre3mt8e8IU+g/GwQYBl/S/toC
-	 ih5orSz24xP3Q==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E9B9382A8B; Fri, 16 May 2025 13:42:11 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E61E682A36
- for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:42:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bfbaxMIQ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9D4E78059D; Fri, 16 May 2025 13:54:38 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4ZzQCv49wyz9tZh;
- Fri, 16 May 2025 13:42:03 +0200 (CEST)
-Message-ID: <6e0b4e17-34c8-42f3-8f62-3e822e37fd4c@denx.de>
-Date: Fri, 16 May 2025 13:42:02 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A08EE80079
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 13:54:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-550edba125bso195370e87.3
+ for <u-boot@lists.denx.de>; Fri, 16 May 2025 04:54:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1747396475; x=1748001275; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=D1rB7xAf0pW/5Pxh2XFbjzfBUjWrCHEbsO7br+CWGHg=;
+ b=bfbaxMIQ2kEtW0Xkqxa6ftvlDrYYxwLbzu/QVciyTMDzWLH7ZNf0PtiYuz0oVj44EL
+ 67d3VE3AtuIEABY41BEyZL25a2Iok1wKWT9395xrHZzvYoofkC5T3AVU/G4tfYHTUpW+
+ 7mJ/6EO6mH2thNXNJgZ2ydnIQwGoIJQUPRXYPYlDntLMOo7UJqFonvyQ+S6odTHe0wFB
+ cYU9FJLjFwRp+Pp5h8PcdtEEmz0/2sOO9E2f90tkrcRQ3895eCag0/vS6DmW8/j7ujRB
+ 0AobRiwIrATssVP2HLbmrdJRYPAR6g/Qfoo3a9AG6VaEXMmIdoJF6n8DzW/pcPQnO5C5
+ GDiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747396475; x=1748001275;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=D1rB7xAf0pW/5Pxh2XFbjzfBUjWrCHEbsO7br+CWGHg=;
+ b=IkoPOjH7mk8+8wBbeN3FKTd40les/1ugJPQDKDEN6yH1nBd3Fc7K4QpbbQN0JFFbe3
+ aAK+Z4OoXTlJIpZATgq7y3WllsVPjiiEza0NY34u9+c5oO+Im3/hkjsomxFkdajr/bO5
+ OzCCQ9G8AWLH5jV9NW6ULSygEziw5DxCPg3JlYJN2DOJ8Sk8vaVTPPd3qBCBGpw0MKDo
+ VH4/ZYMmCg7IhoG/L4k0jUy3CKZCGtBeKzbC0/Uy/vBdJbt1OLqINGsWITwlNWNkcQhe
+ x4HjGjuNsIykxDsLgutw/HnhbXabmNSKIND7ltTZHYlcl4p7AsYNh77yOvfPj+7+g4ti
+ L+dA==
+X-Gm-Message-State: AOJu0YyPgYsNlQL0uP3LX60omYQ8Q/HkSh7T+bPGQ760fSyJRBhoixWX
+ 3L4sys1Wn8aV/zTlJFp21G68EH+wnflA8L+nSLV9c1zXK5i2pLOv+Lii8KAGOEOp
+X-Gm-Gg: ASbGncvGYUB4zQhxvxR8Rp0rqiv+yYIpD9qSel0SYkHp0W0+JZYX8Nd+ngSZJ5Foqqq
+ wLF+bFWX7unFwdlNShswYVK68iylpk41IFlBK5fYMML2ghPAd0251XFvY22F8X3dsN9xGlk2daS
+ qrQuA5TUiCYBESw7K2KhelXPie7vqNGmGL19Z/2s234S062ApbnpCKU3nIb1JdAiHqLP/MDA2r4
+ h96cn5fd6SPRDu3OHbz75eKRGHe1IsD1y1eHj4JqtOBmUL/eN8G6gSX/zj+kBnb0nnIEzkeK3ZX
+ YpaCk2wT0tpNYLCwhPA2PtRq/obMToc9gQHGX6BbhsE8REAct9Na0GTBv7iQDMxREULV9p1mrLJ
+ tUqT+SaGxKacGq59Z0w==
+X-Google-Smtp-Source: AGHT+IFkxEjyhouSZQpYCySheZEKUsKYUwrUEpoIxjndTcTVbfvTT8GZm3N3CLCzvr3WNAHp683L2Q==
+X-Received: by 2002:a05:6512:650e:b0:549:8cbb:5443 with SMTP id
+ 2adb3069b0e04-550e724a21emr836358e87.47.1747396475085; 
+ Fri, 16 May 2025 04:54:35 -0700 (PDT)
+Received: from anton-desktop.. (109-252-120-31.nat.spd-mgts.ru.
+ [109.252.120.31]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-550e70181b4sm407078e87.116.2025.05.16.04.54.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 May 2025 04:54:34 -0700 (PDT)
+From: ant.v.moryakov@gmail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] boot: fix memory leak in bootmeth-uclass.c
+Date: Fri, 16 May 2025 14:54:29 +0300
+Message-Id: <20250516115429.8889-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Please pull u-boot-marvell/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,56 +95,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
 
-please pull this next batch of mostly Marvell related patches:
+The static analyzer (Svace) reported a memory leak in bootmeth_setup_iter_order():
+Dynamic memory referenced by 'order' was allocated by calloc() at bootmeth-uclass.c:113
+but could be lost when returning error codes.
 
-----------------------------------------------------------------
-- mvebu_espressobin_ultra-88f3720_defconfig: enable hwrng
-- kirkwood: Convert to DM_SERIAL for Kirkwood boards
-- kirkwood: Convert to DM_SERIAL for Synology DS109 board
-- cmd: tlv_eeprom: return after successful read from EEPROM
-----------------------------------------------------------------
+This fix:
+1. Adds proper error handling with goto/cleanup pattern
+2. Frees allocated 'order' before returning error codes
+3. Maintains all existing functionality
 
-Here the Azure build, without any issues:
+Identified issues fixed:
+- Memory leak on !include_global (-EPERM)
+- Memory leak on empty method list (-ENOENT)
+- Memory leak on allocation failure (-ENOMEM)
 
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=392&view=results
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+---
+ boot/bootmeth-uclass.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
 
-Thanks,
-Stefan
-
-The following changes since commit 1b5e435102aa29a665119430196cb366ce36a01b:
-
-   Merge tag 'u-boot-imx-master-20250512' of 
-https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2025-05-12 16:05:22 
--0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-marvell.git 
-tags/u-boot-marvell-20250516-v2
-
-for you to fetch changes up to 7afcde09399297765945d57be4535291b2ac9549:
-
-   cmd: tlv_eeprom: return after successful read from EEPROM (2025-05-16 
-08:17:43 +0200)
-
-----------------------------------------------------------------
-Benjamin Schneider (1):
-       configs: mvebu_espressobin_ultra-88f3720_defconfig: enable hwrng
-
-Martin Schiller (1):
-       cmd: tlv_eeprom: return after successful read from EEPROM
-
-Tony Dinh (3):
-       arm: kirkwood: Convert to DM_SERIAL for Kirkwood boards
-       arm: kirkwood: Convert to DM_SERIAL for Synology DS109 board
-       arm: kirkwood: Remove Synology DS109 board reset_misc
-
-  arch/arm/mach-kirkwood/Kconfig                    |  9 +++++++++
-  board/Synology/ds109/ds109.c                      | 18 ------------------
-  cmd/tlv_eeprom.c                                  |  1 +
-  configs/ds109_defconfig                           |  2 --
-  configs/mvebu_espressobin_ultra-88f3720_defconfig |  2 ++
-  5 files changed, 12 insertions(+), 20 deletions(-)
+diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+index 014b7588e8d..b3870ba5364 100644
+--- a/boot/bootmeth-uclass.c
++++ b/boot/bootmeth-uclass.c
+@@ -135,8 +135,10 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
+ 		 * We don't support skipping global bootmeths. Instead, the user
+ 		 * should omit them from the ordering
+ 		 */
+-		if (!include_global)
+-			return log_msg_ret("glob", -EPERM);
++		if (!include_global) {
++			ret = log_msg_ret("glob", -EPERM);
++			goto err;
++		} 
+ 		memcpy(order, std->bootmeth_order,
+ 		       count * sizeof(struct bootmeth *));
+ 
+@@ -190,9 +192,10 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
+ 		}
+ 		count = upto;
+ 	}
+-	if (!count)
+-		return log_msg_ret("count2", -ENOENT);
+-
++    if (!count) {
++        ret = log_msg_ret("count2", -ENOENT);
++        goto err;
++    }
+ 	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && include_global &&
+ 	    iter->first_glob_method != -1 && iter->first_glob_method != count) {
+ 		iter->cur_method = iter->first_glob_method;
+@@ -202,6 +205,10 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
+ 	iter->num_methods = count;
+ 
+ 	return 0;
++
++err:
++    free(order);
++    return ret;
+ }
+ 
+ int bootmeth_set_order(const char *order_str)
+-- 
+2.30.2
 
