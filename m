@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B740C3ABDD
-	for <u-boot@archiver.kernel.org>; Sat, 17 May 2025 21:22:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C0BFC2D0CD
+	for <u-boot@archiver.kernel.org>; Sat, 17 May 2025 22:52:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC08B82998;
-	Sat, 17 May 2025 23:22:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 226A3828BC;
+	Sun, 18 May 2025 00:52:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="CsUGtXcp";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="sSA1LoVn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7FFB80FA8; Sat, 17 May 2025 22:32:29 +0200 (CEST)
-Received: from mail-24425.protonmail.ch (mail-24425.protonmail.ch
- [109.224.244.25])
+ id BF3DC8205B; Sat, 17 May 2025 23:28:08 +0200 (CEST)
+Received: from mail-24426.protonmail.ch (mail-24426.protonmail.ch
+ [109.224.244.26])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2DD78004F
- for <u-boot@lists.denx.de>; Sat, 17 May 2025 22:32:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1B498004F
+ for <u-boot@lists.denx.de>; Sat, 17 May 2025 23:28:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=omapbsf@protonmail.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1747513946; x=1747773146;
- bh=4A1ahjWX4uXBgkY6eaMuNsfT1FK5AwJygPHNXhFN+wM=;
+ s=protonmail3; t=1747517285; x=1747776485;
+ bh=3XslgXbjB+qfz8RnbaxrzsmdsoBfLy+5gIi6AF0+glk=;
  h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
  Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
  List-Unsubscribe:List-Unsubscribe-Post;
- b=CsUGtXcpndfoOiOt0PChUlGEf7GwlGpJYigrft+sn7lDZKMYUYmzwqk332Gz2fAbX
- YGogTVZT0ZpEE/RE0FjjdJ+lpZSxAOBRrsYT2km6kb0Kxsb27H+qr3EVIhKyuQXs9y
- qQ8MgxjhM3RgOx3Yb/4XwcbhRU6TNw4cu6jBeLBgXYedhshIJYSIH7LA/ti/We+IA7
- Z87zgZg0awZREpRKD06r43dtB/3nu6futvHgDcSHCMQMjDr0UzK5D+O+zRw0mbUwkM
- nrZaRXWoixFz0zIenosFTkSFeMxpsvMaarcQ9CCBuWAdXY7IgEbFk56W55kmrRkETd
- mVSwy+lHQva4w==
-Date: Sat, 17 May 2025 20:32:23 +0000
+ b=sSA1LoVnS0lo/wHE7jX3j0wpqKf2yYsspY/jHjPRi60M2lZVhqzSp39c7IkeJRkhA
+ pl6e6fQ633xKVfh/1m3ZV40p7Dm2MJIHOmoYK9GmGcqJ6LeNS3VNJvIX/EH/qGiyAQ
+ 3mqi4lfUT19yseOGZ7zfKdXu2UHD09dKxuMuaBpcP/CBpGkibFp6nDjOVkXxfwsivq
+ luTGYqCFU0jy9ry0QQeC+Sduh4WJVh4BdGmr7m6k65flQo/LZecOUN+J0ZdG/m94Ue
+ 96h75PiIp/6pAYoGEgcfQer1mkQRDuo2/ZiGZzQWUQxZlGu4gUITRXz0+1eMylgwbp
+ kq1t9nXS+AKVA==
+Date: Sat, 17 May 2025 21:28:01 +0000
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 From: OMAP at BSF <omapbsf@protonmail.com>
-Subject: [PATCH v3 2/2] BeagleBoard: Fix memory detection error.
-Message-ID: <JeAXpblSawvNbrySIqR7wCm96jC9b5yHGdu7jPBPd3C1SKdt3eENVy3dtm8R37QPy-ysuLtxx8x-dISeflO4zllKT1etjIeRAgyaJjbtimw=@protonmail.com>
+Subject: [PATCH v4 2/2] BeagleBoard: Fix memory detection error.
+Message-ID: <mE_4mhVOMZGRGr8pC62KHcBcDzi9omdv8D2PHs9wPgUcSz60ltpSb0TYKx_M-b_SUarVQhSXSMhdfmUuQOGBIsWfjFLqEOr8TtekJqnsdpQ=@protonmail.com>
 Feedback-ID: 36988183:user:proton
-X-Pm-Message-ID: a579b3e6f58054b3b3b501e19f6d58fea3cc5a78
+X-Pm-Message-ID: 1f69ddea4a24f6c7657a3d954f09e2a0d2ea0669
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 17 May 2025 23:22:11 +0200
+X-Mailman-Approved-At: Sun, 18 May 2025 00:52:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,6 +72,11 @@ GPIO lines need to be checked again in U-Boot because they were not
 valid early on in SPL. The board and LPDDR timings are now correct.
 
 Signed-off-by: Steven Hill <omapbsf@protonmail.com>
+---
+v2: No change.
+v3: No change.
+v4: No change.
+
 ---
  arch/arm/mach-omap2/omap3/Makefile |  2 --
  arch/arm/mach-omap2/omap3/sdrc.c   | 18 +++++-----
