@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 290E8C3ABDD
-	for <u-boot@archiver.kernel.org>; Sat, 17 May 2025 20:46:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E0FC2D0CD
+	for <u-boot@archiver.kernel.org>; Sat, 17 May 2025 20:50:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2F31808AF;
-	Sat, 17 May 2025 22:46:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C52181FFC;
+	Sat, 17 May 2025 22:50:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="FxwP+oKE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RwQ1FYfj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4782A81FEE; Sat, 17 May 2025 22:46:44 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id EC9908205B; Sat, 17 May 2025 22:50:53 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B92C8004F
- for <u-boot@lists.denx.de>; Sat, 17 May 2025 22:46:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 09104808AF
+ for <u-boot@lists.denx.de>; Sat, 17 May 2025 22:50:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-22e09f57ed4so45461715ad.0
- for <u-boot@lists.denx.de>; Sat, 17 May 2025 13:46:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-54e8e5d2cf0so4034227e87.2
+ for <u-boot@lists.denx.de>; Sat, 17 May 2025 13:50:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1747514800; x=1748119600;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1747515051; x=1748119851; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=twEiyM6exA3Vn6FR/mYio3ErbEFOJtjk0VgmDlTE5Gg=;
- b=FxwP+oKEbR6lTcrk7GKtjchBtFzspTrz2KWsB3wKi/aiVMl4jaTlHUd0s8vBL3aMEf
- 2KspGhj/OAQ/z+JhoPFDsqLMeS/tniYyHuOZ68GY95UywWXl3p10CvYQnXdY/fMGHdHP
- XUqpuvFVzNPdkrO8MBdG3CVMkkx50K8+UXtaM=
+ bh=VOAvAKVI73za0NRfPZkp/HN5FIMAZViIxW4/GlReLh8=;
+ b=RwQ1FYfj3R5kEfeTaUt/vfI1cHp/4Poj1dwTONhANE9xCr2gvJW7fHxLvhIKim+5iw
+ k6AJMJbfd5ezhjmx0jR66D8YtNbiabYHjOHIsNNXPRrycZyuGgSLEDbOLhODh7ZKBvaR
+ aqKT8gnrypepmsj5hHaNkK4776RLkOKps779NAQBKCHZsbjcdwj5UOUUedpc1lUJahVT
+ tDzU2BxWtRy4NkMBgqwTAovGOlybA1BJ+R/okLpbmKJ1PaC1WDzXgdG+yeUpfpayo/11
+ omN+uOTdVP/3jQ0G1pY4/WII9mhfeSkftbnM103Civuh3aXWuh/WB9nTEGEyxwPH4bdI
+ OnJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747514800; x=1748119600;
+ d=1e100.net; s=20230601; t=1747515051; x=1748119851;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=twEiyM6exA3Vn6FR/mYio3ErbEFOJtjk0VgmDlTE5Gg=;
- b=BnoLynU6guOe9Xevr7Ir8QFAXOes8BLAvNUi7u18zfd4RgZJr2Uyd+ja9iCFpsT/wU
- MrxH8VGl4J/LBGz4c0gmhrP/HVUEe5K+Yckg3C/8qBZu61eQVFVBToXG4uDrxvhoHepo
- eO2lH4yVhC1mjQ+0ulADKBqQMDrYDVVPlQrzkAylDzwdrLr0jrm9Jv7ghjAwbGVuuLXE
- hGVn+U/ZIcCe9de/Mm6f1R+DDQG1wifbuhUnxu3GLG8+6rksd0VN8fAMJhwbtu0ecoo7
- qbZpiAnoNlXGCzLZS9A0C8pRD9dupe7Ir7zFtRr7yHBNGp4OBlNWWlkPleBDQmWK6+Zb
- xDiQ==
+ bh=VOAvAKVI73za0NRfPZkp/HN5FIMAZViIxW4/GlReLh8=;
+ b=px1NQ4mdaO5SMvSLFDRdIZoOjHQJLj81xfzX4mcqAWeVl4ET505Sy3Puqv7qbC3hxK
+ O6ujsNoG37QwVE3QmBhZC0iQCnXfDYX6DlHrsW23iPUp02zQ9Hl0AkKgdIMVxv+OFiDG
+ OPcwtHzVwspbkmwmOCV5ECW81O12SJ/madL6uje1cinMWSi6mbmYjR9HFbD+aq5Un0hK
+ wTef0XeoU+za5MunXmIwMgvSJssDKxz9TLPGNzyst8EsvvYwP49nuE4TA+fglhYY5xp8
+ OLv7Uy7p/wZJHxDCtUVgfzdfLBaA/xaj5/YdJBThBPgMFfobNqJZg0sCi1RyjnranwdY
+ /j6A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVNw5EiwbugDGOXB+1PdpKrUk4BQuNeraADiYKj/gRG1xUf5fYWrzvG/YErhtBmBneZpKgG/ko=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTW5H50AHdi3qts/WqVXDln5bsBVU7UC3OjN4TaT/koqCrHZrA
- Zv2qDbambys2lYyy6WDmcuWzPQDxHpaEC9TjqsHBCJNTJEaQnQK9LZcdkDW//y7K9MpM66kV6WO
- OIuhENMP2WjmLDf2WiYNA7Te5qnxVx3D2K+Lc/Iw9PQ==
-X-Gm-Gg: ASbGncvdRf2t/35reI02u/2KW3ztuB8xiz5VDvC6SVn/arQps2PuEi/Y/JET9fGk4sJ
- zs8h0KKRs4DWgSVs0jUHuRL9hF9jyVT4lmVaqXLQ+nof0uIKQbQx2kWaGDVhnlzbKyCyK2uNOWJ
- enOucj3rErg8oYWEI66PGqatizckOAiQ==
-X-Google-Smtp-Source: AGHT+IGIPW60hgz2ebGhh0y4NyoCiBDuYRV5bE8Mv+uHu/XzMeexnRAD3P6ibxLHY4bVrVVkBpVhxO2kKacQIe87Yz8=
-X-Received: by 2002:a17:903:110f:b0:221:1497:7b08 with SMTP id
- d9443c01a7336-231b39d5c45mr175318855ad.23.1747514800484; Sat, 17 May 2025
- 13:46:40 -0700 (PDT)
+ AJvYcCUzE8TPjvU35r7adNkQ1bENGmxbqP97bxHfdrUpQiv5BzZKKnjFxVfhnqWNweJAUHV1HG7zjUA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+p2Jnk2P3p2DGxQls5xawzjkBKg6znSqkvZo0ZEotgeogV/xk
+ cMz2OQxO2rmGve24Ek4STUG/sQkdfVYbJ19D4RQaxtVNetDL0fvyTAhu/SMe4EPRovJ9HzRYb/P
+ djFt9vGl4rLYldmarae9S2v0CKz9MI+c=
+X-Gm-Gg: ASbGncvFN7a4x9aLX2cSa2CWZ92RovhcFM5vzVQ1NtsTxOzql8Y4z/Eq15DC8f2Ld29
+ j+7u+yT0GOR5w0RmuMJcWRnL3RN/uAQWENBjTZrZpxVXOYWU+genp92V+Qlu7ttTF0OTCd+26Yt
+ gDLsXg3Jd9a+XUb9mnt/RW4mKQSnJ5bcJX/gmrsZuVGjAlGp607KwboQDXkZXz/1g=
+X-Google-Smtp-Source: AGHT+IGG7c2LiE4+DX2oAYx8ieQL304W8ZBlUxjROYiboAtgOftTMG37e8akW8ioZsnpfOShGwO2JB55ie8YhssN52Q=
+X-Received: by 2002:a05:6512:428b:b0:54e:859b:b9c7 with SMTP id
+ 2adb3069b0e04-550e97b91a4mr1344333e87.13.1747515051094; Sat, 17 May 2025
+ 13:50:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250515131246.784206-1-dario.binacchi@amarulasolutions.com>
  <20250515131246.784206-4-dario.binacchi@amarulasolutions.com>
@@ -72,13 +74,14 @@ References: <20250515131246.784206-1-dario.binacchi@amarulasolutions.com>
  <CAOf5uwnfC0nLBy1QhcDe_VpqE9LGh5fKV_Br4_=rZxMBNHw1ww@mail.gmail.com>
  <CAOMZO5AcUbYa0+40jZ=2a1dxO7D+tif82Arkguf_vVsP=CkzAA@mail.gmail.com>
  <CAOf5uw=cb2jQK1f-avqRvYxukYb-Sy-jWDvqEyM+nRLTnXcAwQ@mail.gmail.com>
-In-Reply-To: <CAOf5uw=cb2jQK1f-avqRvYxukYb-Sy-jWDvqEyM+nRLTnXcAwQ@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sat, 17 May 2025 22:46:29 +0200
-X-Gm-Features: AX0GCFu7O2ieBgLSmnC7PjYjpncarBkb-voY0JVvQ25uKg2eN2Kf6Wg5MdV2K9Y
-Message-ID: <CAOf5uw=099igk1=dEXH6dbUDMSH+bVo67mek_P=+G3Sw-f4B3A@mail.gmail.com>
+ <CAOf5uw=099igk1=dEXH6dbUDMSH+bVo67mek_P=+G3Sw-f4B3A@mail.gmail.com>
+In-Reply-To: <CAOf5uw=099igk1=dEXH6dbUDMSH+bVo67mek_P=+G3Sw-f4B3A@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 17 May 2025 17:50:39 -0300
+X-Gm-Features: AX0GCFv8jVlzbQ9k4S77tlvuahJ6K_PAymoIOKnAKPDiOLOVlm5npNU56FcGbAA
+Message-ID: <CAOMZO5BM8y1ojYONMRBm+gBAgQ7ThWarzWZqfrEHwm3fM8_2Yw@mail.gmail.com>
 Subject: Re: [RFC PATCH 3/3] serial: mxc: restore booting for imx8mn_bsh_smm_s2
-To: Fabio Estevam <festevam@gmail.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
 Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com, Adam Ford <aford173@gmail.com>, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -102,115 +105,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
-
-On Sat, May 17, 2025 at 10:44=E2=80=AFPM Michael Nazzareno Trimarchi
+On Sat, May 17, 2025 at 5:46=E2=80=AFPM Michael Nazzareno Trimarchi
 <michael@amarulasolutions.com> wrote:
->
-> Hi
->
-> On Sat, May 17, 2025 at 10:28=E2=80=AFPM Fabio Estevam <festevam@gmail.co=
-m> wrote:
+
+> > I was on master except this commit
 > >
-> > On Sat, May 17, 2025 at 5:15=E2=80=AFPM Michael Nazzareno Trimarchi
-> > <michael@amarulasolutions.com> wrote:
+> > commit 128d997a8772cc174f38d529d8b25f90b3aa8ad8
+> > Author: Jonas Karlman <jonas@kwiboo.se>
+> > Date:   Sat May 10 15:32:01 2025 +0000
 > >
-> > > Can you please point me to an example of a tested board?
+> >     clk: Fix clk_set_parent() regression
 > >
-> > I have just tested the top-of-tree U-Boot on an imx8mn evk board:
+> >     The commit ac30d90f3367 ("clk: Ensure the parent clocks are enabled
+> >     while reparenting") add a call to clk_enable() for the parent clock=
+.
 > >
-> > U-Boot SPL 2025.07-rc2-00018-g126a88d49bca (May 17 2025 - 17:21:14 -030=
-0)
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
-> > SEC0:  RNG instantiated
-> > Normal Boot
-> > Trying to boot from BOOTROM
-> > Boot Stage: Primary boot
-> > image offset 0x8000, pagesize 0x200, ivt offset 0x0
-> > NOTICE:  Do not release JR0 to NS as it can be used by HAB
-> > NOTICE:  BL31: v2.12.0(release):v2.12.0
-> > NOTICE:  BL31: Built : 17:16:49, May 17 2025
-> >
->
-> I was on master except this commit
->
-> commit 128d997a8772cc174f38d529d8b25f90b3aa8ad8
-> Author: Jonas Karlman <jonas@kwiboo.se>
-> Date:   Sat May 10 15:32:01 2025 +0000
->
->     clk: Fix clk_set_parent() regression
->
->     The commit ac30d90f3367 ("clk: Ensure the parent clocks are enabled
->     while reparenting") add a call to clk_enable() for the parent clock.
->
->     For clock drivers that do not implement the enable() ops, like most
->     Rockchip clock drivers, this now cause the set_parent() ops to never
->     be called when CLK_CCF=3Dn (default for Rockchip).
->
->
+> >     For clock drivers that do not implement the enable() ops, like most
+> >     Rockchip clock drivers, this now cause the set_parent() ops to neve=
+r
+> >     be called when CLK_CCF=3Dn (default for Rockchip).
 
-BTW is really needed now?
-
-git grep init_uart_clk board/freescale/imx8mn_evk/
-board/freescale/imx8mn_evk/spl.c:       init_uart_clk(1);
-
-
-Michael
-
-> I can not try today but if you can, is this the commit that could break m=
-y boot?
+CLK_CCF=3Dy in your case, so this does not help for you.
 >
-> Michael
-> >
-> > U-Boot 2025.07-rc2-00018-g126a88d49bca (May 17 2025 - 17:21:14 -0300)
-> >
-> > CPU:   NXP i.MX8MNano Quad Rev1.0 A53 at 1200 MHz
-> > CPU:   Consumer temperature grade (0C to 95C) at 32C
-> > Model: NXP i.MX8MNano DDR4 EVK board
-> > DRAM:  2 GiB
-> > Core:  180 devices, 23 uclasses, devicetree: separate
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
-> > MMC:   FSL_SDHC: 1, FSL_SDHC: 2
-> > Loading Environment from MMC... Reading from MMC(1)... OK
-> > In:    serial@30890000
-> > Out:   serial@30890000
-> > Err:   serial@30890000
-> > SEC0:  RNG instantiated
-> > Net:   eth0: ethernet@30be0000
-> > Hit any key to stop autoboot:  0
-> > u-boot=3D>
-> >
-> > Make sure you are using the most recent U-Boot. We had some imx8m
-> > clock drive hickups after 2025.04.
+> BTW is really needed now?
 >
->
->
-> --
-> Michael Nazzareno Trimarchi
-> Co-Founder & Chief Executive Officer
-> M. +39 347 913 2170
-> michael@amarulasolutions.com
-> __________________________________
->
-> Amarula Solutions BV
-> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> T. +31 (0)85 111 9172
-> info@amarulasolutions.com
-> www.amarulasolutions.com
+> git grep init_uart_clk board/freescale/imx8mn_evk/
+> board/freescale/imx8mn_evk/spl.c:       init_uart_clk(1);
 
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+This can be removed. I tested without this line, and it boots fine.
