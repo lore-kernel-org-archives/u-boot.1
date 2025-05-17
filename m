@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1677C2D0CD
-	for <u-boot@archiver.kernel.org>; Sat, 17 May 2025 19:56:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AF3EC3ABDD
+	for <u-boot@archiver.kernel.org>; Sat, 17 May 2025 20:15:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5A8D8081A;
-	Sat, 17 May 2025 21:56:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BEFD18081A;
+	Sat, 17 May 2025 22:15:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LEraKhJ+";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="P2eX/tb6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 012F1808AF; Sat, 17 May 2025 21:56:26 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 4BAB88081A; Sat, 17 May 2025 22:15:11 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B52E38004F
- for <u-boot@lists.denx.de>; Sat, 17 May 2025 21:56:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B13968004F
+ for <u-boot@lists.denx.de>; Sat, 17 May 2025 22:15:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-551ed672d6cso177432e87.0
- for <u-boot@lists.denx.de>; Sat, 17 May 2025 12:56:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-22e033a3a07so32095735ad.0
+ for <u-boot@lists.denx.de>; Sat, 17 May 2025 13:15:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747511783; x=1748116583; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1747512907; x=1748117707;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RPH2kjvlS1/LQXaD2hAlAM4PFJ1NJzAuHOz2MS9DxTc=;
- b=LEraKhJ+bXv49aljijHXv0AIhE7zvp3CFT8XLHTOjTfmPMmP0vRPQiI+RzJFh2eAbD
- 0N9JuNeJVffCt12W26O3HmO4hJZjuBW8vak2IS47pvQrHO2wMn+Ky31Po4FCAb7dYLnI
- Kc4YHOgP0uPiPXGJ5kuSmqCom0WziVXq/q81rgb0lvObTHOAx7nGGrzoBDy+xY+x0Syo
- ic1Mk63nnbOcFHL9V7twWsYwPCS+3WsoraAseiocrnWtHMyNiz7ok0nKXlxtmiLxpZ3n
- XpefCVk+PemNpQbl/KcWNdSfQjDC4ns88ot8bUqXoGtPpKvqbDuOA90B874dTBrngihw
- J84w==
+ bh=ZUgsWCYhKDHfBMirOEzY46lDwOCgRIECBOJlzzgaIjk=;
+ b=P2eX/tb6wmAw4bPzIf+Mpfm6loP7XFFdzUWB+d+x6GtxWOdm3XN4qL+WB/mOGtMOJE
+ /NT4OYxr8BGXyjnxqTKirkK6MEOUzlX2yNBM9y+Dbg9IgMVgENjxwoa9Gd0RXMKB7C6x
+ rp5rQ6KUWjZRSzf5CEED+y7vkW4myi7X/yc0c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747511783; x=1748116583;
+ d=1e100.net; s=20230601; t=1747512907; x=1748117707;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RPH2kjvlS1/LQXaD2hAlAM4PFJ1NJzAuHOz2MS9DxTc=;
- b=GKFtDKqzY9qJ2MJaAN9xt0w2m9ls+ixagOGDjvqO8a5LpFAM2nHDVqV1cKv/MCS/qA
- rYSeGiaumMa2De03zunhlc3ZdtlU3ADaLefchjFz6M9nojz7g3Lr+30GZANJ4Wht8xeY
- GLfaN/IeQaoSlEWg0ZmkjYBnYIVAWjRFUK7mQyv4ATRg9sno9miiFWQdyKynXHTmL6VU
- efY5vsrO9GQr1sjoCW7xCQJZIFRy/fVoiVi+eGLv1KI06qHJVQdbU+SQ3FV+NsfJarT2
- euGEr+Z21DNVs+kUySMLYNFqo4HSOmZrGpoKFhN4G4zvTFX9fgW1Nkw3nbeLpnvLkUxX
- mNJA==
+ bh=ZUgsWCYhKDHfBMirOEzY46lDwOCgRIECBOJlzzgaIjk=;
+ b=THIFaV+rC8cZJR4wSuNIfvDRRehjfsnu+2diV3qgo0Ontm0xVRSz1MglpSRnsVqcJY
+ tnERepZt7xI20iyVOqEDcJgViS5ogSLZjprGc89J13wyDP+TO/hRr6G/rYd3SDwY5ePn
+ WoEiGR2THOF4D6SsHoqOkRdcmY3jXarOlXqnLc8+zpB7Ba99FHrluY9uFCOXSzRhxw5l
+ YsxJ/TaVn+a7W47fadn6Q/Ge4BAsWAJYXF5kUC/eJCOdNxNH6xkRoOV//Wa1VggRPwQf
+ npfbK2zw3yvG6zQDLU1pDu+/EwUMymHa34S9iNvqLOBUm4yHZLNF9ucY4L968FHpIAfO
+ /1eQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUHZuLsOOuVO8mmPFRZtmx17xYMlYYFUjIUe4wuBsZ6fvGHbG7L9EORKjX3yCDpFo6zrDQBiqY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzdzM1iuJkQfYq151yyeDwkDCKygDvY/4OBEdVFT76yZJPlWk1
- q3Ixq3eXy2Bf9QSgeiMZAoohVulIw7fjwSqihPqPDONR+N0oOasTMhsY8bFc3Cmnd06UucajB9+
- bnMbrWGZZHF/25dCQj6ULDMddbFywa0U=
-X-Gm-Gg: ASbGncv/fJ0n2isizjJU2IQenkwsBTkeYqZeMWrbehXmP82APU/yL0I2lfpBM8GzxCV
- D/OudHo/ybP7nsXkxNdfADhLXiFbQw4eun70bBIABa0JBKA3jQOy54HOOnWghjBj4aQUq+Zosny
- +nqa/x8bw1QoXpe1y+gLfqwcPV9wrdeKPTIvDnsLszG711/kl0ha0kDanf+Jo+Ziw=
-X-Google-Smtp-Source: AGHT+IGnZRiOpX7maPMyszUPPLlnyr/sOLs0GllF76BJQqvK1ss9WaHZ+Y5NQsnW21ygLUbbxtN5aFgRI5R2e4OsHCs=
-X-Received: by 2002:a05:6512:104d:b0:54f:c1cd:c63d with SMTP id
- 2adb3069b0e04-550e995cd75mr2036880e87.54.1747511782618; Sat, 17 May 2025
- 12:56:22 -0700 (PDT)
+ AJvYcCXGK3TNtz4daoeXfP5GoXOLfKQ8OrqTAXBV+9zme/p27YgQx36zJ1f3Y68zlnCaGt31XnPxiaI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7DzSYCWORAc+zauL66L3R4+lnwTgFNHR8e0501eHWQ+2f/PHn
+ jfzY28wnldhJqdY6YJqWvry3yYL3wvw511Q5bEtV4nN8oTB9oBB5LYLFU2CoMRz7F3KhOvt6Hdb
+ HFSXkh+2dGRShTlnw9FxasKX3ERbF3k0/1a2IcVM0ag==
+X-Gm-Gg: ASbGncurkGwR9hmzFLmo18WZQlLWnIgGNDePJTmGNR8jq3AVsOmstAmDckFN5RnCV17
+ 3RocMza+Kdvle5kJFafvHjCxsAzb78iSRDiBBLjItaZ7EquDTSzqPjdOQyB50er1C9EwOyZEi1e
+ y02AKE/rCaAXv5banFjjKVP4hRJVTynw==
+X-Google-Smtp-Source: AGHT+IGC+eorZIeoTLhygRBKrWtxQVAszQe4gEhQ9DcbSdPGhKnjgg8ooVd04Q4TidoUOExOmdpi1rCUQX/8jM0BmWo=
+X-Received: by 2002:a17:903:1987:b0:223:5e76:637a with SMTP id
+ d9443c01a7336-231d451906dmr117838055ad.23.1747512907150; Sat, 17 May 2025
+ 13:15:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250515131246.784206-1-dario.binacchi@amarulasolutions.com>
  <20250515131246.784206-4-dario.binacchi@amarulasolutions.com>
  <CAOMZO5DdjRT=qGVd+qLXraud8xC=noioduLvDObd1B-n--7CdQ@mail.gmail.com>
  <CAOf5uw=iBNKu3Qvpa1WoYPy-RoKXM7PQtcdBaXupwrtWAKNAFw@mail.gmail.com>
-In-Reply-To: <CAOf5uw=iBNKu3Qvpa1WoYPy-RoKXM7PQtcdBaXupwrtWAKNAFw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 17 May 2025 16:56:11 -0300
-X-Gm-Features: AX0GCFv9tnSe3UiRf6ZASpkN-D9sFSwcVWR813_5jXrVR6W-k63cTJk91yOen8c
-Message-ID: <CAOMZO5Ac3NdTu=rWJ4e=YR5t=ck+qbNbf9SH3zikUghqMineMQ@mail.gmail.com>
+ <CAOMZO5Ac3NdTu=rWJ4e=YR5t=ck+qbNbf9SH3zikUghqMineMQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5Ac3NdTu=rWJ4e=YR5t=ck+qbNbf9SH3zikUghqMineMQ@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Sat, 17 May 2025 22:14:55 +0200
+X-Gm-Features: AX0GCFuY-7XTTJ1RuxUWIVk7GzG_fAds99Ozrx1Tszk6GlNQJYTpSR2j4i1KPf8
+Message-ID: <CAOf5uwnfC0nLBy1QhcDe_VpqE9LGh5fKV_Br4_=rZxMBNHw1ww@mail.gmail.com>
 Subject: Re: [RFC PATCH 3/3] serial: mxc: restore booting for imx8mn_bsh_smm_s2
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+To: Fabio Estevam <festevam@gmail.com>
 Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com, Adam Ford <aford173@gmail.com>, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -100,30 +99,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Hi Fabio
 
-On Thu, May 15, 2025 at 5:12=E2=80=AFPM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
+On Sat, May 17, 2025 at 9:56=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> Hi Michael,
+>
+> On Thu, May 15, 2025 at 5:12=E2=80=AFPM Michael Nazzareno Trimarchi
+> <michael@amarulasolutions.com> wrote:
+>
+> > The serial is not up at that time so we need to buffer the error and pr=
+int later. Right now
+> > we are working on other fixes
+>
+> Please share more details about the boot problem on the imx8mn_bsh_smm_s2=
+ board.
+>
+> Does a hang occur at SPL? Do you get anything in the console?
+>
+> The mx8mn_bsh_smm_s2 board uses UART4 as the console.
+>
+> The other i.MX8MN boards where we tested this patch used UART2.
+>
 
-> The serial is not up at that time so we need to buffer the error and prin=
-t later. Right now
-> we are working on other fixes
+Can you please point me to an example of a tested board?
 
-Please share more details about the boot problem on the imx8mn_bsh_smm_s2 b=
-oard.
+> UART4 does not have U-Boot/Linux permission by default.
+>
 
-Does a hang occur at SPL? Do you get anything in the console?
+TF-A is not in the game, the board is working fine.
 
-The mx8mn_bsh_smm_s2 board uses UART4 as the console.
+> TF-A enables the other UART port permission access at:
+> https://github.com/ARM-software/arm-trusted-firmware/blob/v2.12/plat/imx/=
+imx8m/imx8mn/imx8mn_bl31_setup.c#L124-L143
 
-The other i.MX8MN boards where we tested this patch used UART2.
+I think we have upstream the fix there. Anyway...
 
-UART4 does not have U-Boot/Linux permission by default.
+>
+> Is the UART clock access falling in your case?
+>
 
-TF-A enables the other UART port permission access at:
-https://github.com/ARM-software/arm-trusted-firmware/blob/v2.12/plat/imx/im=
-x8m/imx8mn/imx8mn_bl31_setup.c#L124-L143
+If the uart is failing you don't have the console
 
-Is the UART clock access falling in your case?
+> Is clk_enable_bulk() the one that fails?
 
-Is clk_enable_bulk() the one that fails?
+I think that something connected to -u-boot.dtsi if you have tested
+with some imx8mn
+
+Michael
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
