@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F1B5C3ABC9
-	for <u-boot@archiver.kernel.org>; Sun, 18 May 2025 12:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA3DC3ABC9
+	for <u-boot@archiver.kernel.org>; Sun, 18 May 2025 12:45:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64B8080FA8;
+	by phobos.denx.de (Postfix) with ESMTP id A96E9828BC;
 	Sun, 18 May 2025 14:45:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OtQ+6CxC";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HbUl0iXq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B11780584; Sun, 18 May 2025 13:16:46 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 21DDE80584; Sun, 18 May 2025 13:16:48 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07DC78004F
+ by phobos.denx.de (Postfix) with ESMTPS id 50C3A8081A
  for <u-boot@lists.denx.de>; Sun, 18 May 2025 13:16:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 7141D49E0D;
+ by sea.source.kernel.org (Postfix) with ESMTP id A8D7B4A506;
  Sun, 18 May 2025 11:16:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 41CC8C4CEEB;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 660D6C4CEF3;
  Sun, 18 May 2025 11:16:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1747567002;
- bh=okd2bvwfGMtJalyB489MmYbnJIYdDdZIfl2S0cbVj4w=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=OtQ+6CxC/GD/zDCoQPteHvYIxRITG4yVZPwsXIdB6lXIVsLNVlDlNancRqGFiy2Fa
- ypqN/LzDmFNy4lwIpr7kDgONjsQtBx9Y7mmjIFW0aQ3hywmCNaP+1kAyp7ChUkNsCO
- 48E0P+OW16yI1g8Ako6zDsj9l3wgJF7BscP1oWerx96m4SRqvelGEuku/u2BfJRHH8
- JOozNWMHVKYdGqMFYIvuNYAKkwflr1lw67s1ozGY4ARtf7PiZJAHBDWw0YOHvjcJ5y
- 7FtwSX5h7cubMYCJ6dfqcf72I0B4h4MgLHIVpJoBVmSxIYnu6D2ITXSGpkZus+KmcT
- 1avOfygaMTLFQ==
+ bh=Au5kfYDykZWh4tNdGwZufZx2916XKZWMNFUmrwMpFtA=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=HbUl0iXqqZB2r0QWlrueQ8TlEb15950+fzijFGrOqSSBQtMIdlqvrYysdPuUtrI+W
+ Fm1jCXsyO0u07Cm1aWYDtwjcVnJule868ncfAFjhvJEWh9u8ioovCy9RS/2NwXxN/U
+ 54uuV+l3goNSokydwnFJ8/V4cSQNEB/gv2tMNEZz+DK15faqnir8oU8Q8tu4SkUVNN
+ Sz6ICGZDAmKn+mctt/HYKLX88YW/IYOemFqKO3eAu3FTXBNzxAAqmYH1uvZSmQchM/
+ gmuEvcb06foweDEC1fat1GNJGfT2esNb4NxbCTEWt9FeXlu8Jg2DzhpgZKSa0p2dY8
+ hP+aW54/YwPmg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 2DA71C3ABD8;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 57F8BC3DA6D;
  Sun, 18 May 2025 11:16:42 +0000 (UTC)
 From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
-Subject: [PATCH v3 0/3] u-boot chain-loading LineageOS bootimg
-Date: Sun, 18 May 2025 19:16:17 +0800
-Message-Id: <20250518-android-boot-v3-0-02c8768e131f@gmail.com>
+Date: Sun, 18 May 2025 19:16:20 +0800
+Subject: [PATCH v3 3/3] mach-snapdragon: Enhance android image handling
+ memory footprint
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIHBKWgC/3WMwQ6CMBAFf4X0bA0US6kn/8N46G4LbCLUtKTRE
- P7dwkVjYt5pXjKzsOgCucjOxcKCSxTJTxnqQ8FwMFPvONnMTJRCliehuJls8GQ5eD9zhwCqadE
- aJVhWHsF19Nxz11vmgeLsw2uvp2p7/4RSxUsO0ECtUKPuqks/Grof0Y9sCyXxkfN+ZJFlLSyCh
- E5qbL/ldV3fnyYbPOUAAAA=
+Message-Id: <20250518-android-boot-v3-3-02c8768e131f@gmail.com>
+References: <20250518-android-boot-v3-0-02c8768e131f@gmail.com>
+In-Reply-To: <20250518-android-boot-v3-0-02c8768e131f@gmail.com>
 To: Tom Rini <trini@konsulko.com>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>, 
@@ -64,11 +64,11 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  George Chan <gchan9527@gmail.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1747567000; l=2455;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1747567000; l=1406;
  i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
- bh=okd2bvwfGMtJalyB489MmYbnJIYdDdZIfl2S0cbVj4w=;
- b=eUeoQlVe37jcqoWyIGbVVi1QNrckIj/8RpE4/F8APtcQMFbo0fIrF5tlrptEg+uqxcWSL1xEg
- YqIF6ikeGXBDF84S/86c6EEIW/NLCJjkQaJ9kOQ1nhXBHohkB8qiOZZ
+ bh=5MqcY4oWRA3jIaJEq5nkPbwYGfD84Cne/Fh6c5pNYFE=;
+ b=kM72fwbnxGSS+CWmwN35xxVHn79/0cZdm5Qx9v0mUjQRuuK5Q0s8xvdzV37FMnZ9lsyfgsDuJ
+ VZ3EXYjZOcRAV3mApE/fcLZj+LZka7PR4yhSymp5wAO9Eo/DBhQbwiy
 X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
  pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
 X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
@@ -92,65 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a series of patches to enable chainloading LineageOS on qcom SOC.
+From: George Chan <gchan9527@gmail.com>
 
-Patch #1 introduce kconfig to ignore those default value and use loadaddr
-instead. That workaround some androidboot image have invalid kernel/ramdisk
-loadaddr.
+In order to unzipped kernel from androidboot img, extra memory for
+loadaddr is needed. So once fastboot is enabled fastboot memory also
+share with loadaddr.
 
-Patch #2 enable #1 for snapdragon machine.
+That can balance with memory constrain soc and android usecase.
 
-Patch #3 override qcom soc loadaddr with fastboot_addr_r as a band-aid.
-Casey confirmed loadaddr and kernel_addr_r are purposely set to same
-address for memory-constrain case. A proper fix is far from get ready so
-this patch can work as a band-aid for maintainer atm. 
-
-Remain as unchanged to make it conditional on CONFIG_FASTBOOT is because
-that also imply CONFIG_ANDROID_BOOT_IMAGE set y.
-
-To: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Simon Glass <sjg@chromium.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-To: Sumit Garg <sumit.garg@kernel.org>
-To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Cc: u-boot@lists.denx.de
-Cc: u-boot-qcom@groups.io
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: George Chan <gchan9527@gmail.com>
-
-Changes in v3:
-- Rebase to origin/master
-- Drop optional patches, leaving those acked patches.
-- Gone through checkpatch.pl
-- Link to v2: https://lore.kernel.org/r/20250505-android-boot-v2-0-92dcb5bf59c8@gmail.com
-
-Changes in v2:
-- Revised patch #1 to control by kconfig, suggested by Casey
-- Split old #1 into new #1 and #5 for maintainer to choose.
-- Revised Casey's approach for #2 and make it as band-aid atm.
-- Revised Casey's approach for #3 and leave user to bake their own param set.
-- Introduce example for #1
-- Introduce kconfig default for #1 with snapdragon soc, suggested by Casey
-- Link to v1: https://lore.kernel.org/r/20250427-android-boot-v1-0-bb6b37c9c9f1@gmail.com
-
 ---
-George Chan (3):
-      boot/image-android: Workaround kernel/ramdisk invalid addr
-      mach-snapdragon: Enable workaround of ignoring androidboot addr
-      mach-snapdragon: Enhance android image handling memory footprint
+ arch/arm/mach-snapdragon/board.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
- arch/arm/Kconfig                 |  1 +
- arch/arm/mach-snapdragon/board.c |  8 ++++++--
- boot/Kconfig                     | 11 +++++++++++
- boot/image-android.c             |  9 ++++++---
- 4 files changed, 24 insertions(+), 5 deletions(-)
----
-base-commit: 126a88d49bcae04bbfc0d6723097cd6341355ade
-change-id: 20250427-android-boot-ecbb768cda72
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 3ab75f0fce0..e39973c62f6 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -499,8 +499,12 @@ int board_late_init(void)
+ 	status |= env_set_hex("ramdisk_addr_r", addr_alloc(SZ_128M));
+ 	status |= env_set_hex("kernel_comp_addr_r", addr_alloc(KERNEL_COMP_SIZE));
+ 	status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
+-	if (IS_ENABLED(CONFIG_FASTBOOT))
+-		status |= env_set_hex("fastboot_addr_r", addr_alloc(FASTBOOT_BUF_SIZE));
++	if (IS_ENABLED(CONFIG_FASTBOOT)) {
++		addr = addr_alloc(FASTBOOT_BUF_SIZE);
++		status |= env_set_hex("fastboot_addr_r", addr);
++		/* override loadaddr for memory rich soc */
++		status |= env_set_hex("loadaddr", addr);
++	}
+ 	status |= env_set_hex("scriptaddr", addr_alloc(SZ_4M));
+ 	status |= env_set_hex("pxefile_addr_r", addr_alloc(SZ_4M));
+ 	addr = addr_alloc(SZ_2M);
 
-Best regards,
 -- 
-George Chan <gchan9527@gmail.com>
+2.43.0
 
 
