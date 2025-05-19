@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A90C3DA6D
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 06:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CDE5C2D0CD
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 06:45:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDA0781E72;
-	Mon, 19 May 2025 08:31:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4DFC81E72;
+	Mon, 19 May 2025 08:45:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1747636293;
-	bh=sIS/b7ukHk4DvoEA0RKPNCnn5smdAytb6edPQfah6v0=;
+	s=phobos-20191101; t=1747637115;
+	bh=THAwZATmxuFi4H26Mvy46Ak0aEZBpwRDvfg29JNlmBI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mJ/WQy+6HgKODkvUDwKqA346amoCkpuMWbEyfZ4Le/pZDn2OTybC0+oQR8vl8C/pp
-	 Epvu0AtGxwjgpHRr6OQOPvvZTwf0tZQOchisQ8kew9fN5xlLaGUtIK9EKZw2vUINk7
-	 kjogi04yKP63IsWuriJGvIv2B5e4ShGzvyqh1GqZGeat8ufpEHr9+ttraJFpbzkj/d
-	 pHkj/RGInkAIpRxh0N4bB1yYQkl0OKv7Gsprlkna/Jt/qNBiRdtlDOK+JdQk0QlWQF
-	 sQ1flxuy2hKYZJmMY8zpA5YSpMlOFrlshqgBwk7+DMZseyFUWZtzFTUQI/FKfOYc3+
-	 CUiI5ToCDLiug==
+	b=i7CP/g82+uhV9O88Kv7pW2kVP9pvA3anOlLOZfUfQ9uoDOmzJ7vR6GwWsbgtVEoIx
+	 sIPY6T8h3oisY/GmpVNEL90H3ukFG22T2JAmnWOysS2WJP91x9UZAUCBluz/odxakN
+	 MBB1IVr+oy+KSxm3lxDNuKeQxHJWf1RKR/qIwmXp57s3r+B2gORY/0FrcjQwyKLVST
+	 naLeHKhFe+HKdDZ5kETlN0ILoOFrTbjGuvy70CY+GWq8wiu9LCCyp3S/lOcndgytW7
+	 7sWb9tFHxD7E+h2CvzygPp3pHQ5EK9oGn29RxXglYqkhsXMx09ATebp7XD9LDk5Ilq
+	 EUFiHdEG6wRxA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1574C81F66; Mon, 19 May 2025 08:31:33 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id BA7A981F66; Mon, 19 May 2025 08:45:14 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CB63803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 08:31:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D87A9803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 08:45:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4b17B906Qnz9ss6;
- Mon, 19 May 2025 08:31:29 +0200 (CEST)
-Message-ID: <9810a0c8-9052-4667-b91a-d3b3499d5f38@denx.de>
-Date: Mon, 19 May 2025 08:31:28 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4b17Ty4DQzz9srV;
+ Mon, 19 May 2025 08:45:10 +0200 (CEST)
+Message-ID: <889c50b4-cfb3-493a-8e1d-df0c40b2de08@denx.de>
+Date: Mon, 19 May 2025 08:45:09 +0200
 MIME-Version: 1.0
-Subject: Re: Please pull u-boot-watchdog/master
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <f5f977a1-34fe-4e2a-a604-0f0695f3bc7b@denx.de>
- <20250516191837.GN100073@bill-the-cat>
+Subject: Re: [PATCH] pci: zynqmp: Fix the pcireg base
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, trini@konsulko.com, git@amd.com
+References: <20250516092314.939424-1-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250516191837.GN100073@bill-the-cat>
+In-Reply-To: <20250516092314.939424-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4b17B906Qnz9ss6
+X-Rspamd-Queue-Id: 4b17Ty4DQzz9srV
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,23 +69,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On 16.05.25 21:18, Tom Rini wrote:
-> On Fri, May 16, 2025 at 06:42:11PM +0200, Stefan Roese wrote:
+On 16.05.25 11:23, Venkatesh Yadav Abbarapu wrote:
+> The pcireg base is not assigned to any address, reading the
+> pcireg base with PS_LINKUP_OFFSET which is incorrect and
+> giving random values. So update the pcireg base from
+> devicetree so that we can read the valid PCIE link status
+> and PHY ready status.
 > 
->> Hi Tom,
->>
->> please pull this next batch of mostly cyclic patches from Rasmus:
->>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   drivers/pci/pcie-xilinx-nwl.c | 7 +++++++
+>   1 file changed, 7 insertions(+)
 > 
-> Oh, and can you please update the .git/config here like you did for the
-> marvell PR? b4 doesn't like the git@ syntax so I had to do this manually
-> :)
+> diff --git a/drivers/pci/pcie-xilinx-nwl.c b/drivers/pci/pcie-xilinx-nwl.c
+> index 7ef2bdf57b5..e03ab3be912 100644
+> --- a/drivers/pci/pcie-xilinx-nwl.c
+> +++ b/drivers/pci/pcie-xilinx-nwl.c
+> @@ -303,6 +303,13 @@ static int nwl_pcie_parse_dt(struct nwl_pcie *pcie)
+>   		return PTR_ERR(pcie->breg_base);
+>   	pcie->phys_breg_base = res.start;
+>   
+> +	ret = dev_read_resource_byname(dev, "pcireg", &res);
+> +	if (ret)
+> +		return ret;
+> +	pcie->pcireg_base = devm_ioremap(dev, res.start, resource_size(&res));
+> +	if (IS_ERR(pcie->pcireg_base))
+> +		return PTR_ERR(pcie->pcireg_base);
+> +
+>   	ret = dev_read_resource_byname(dev, "cfg", &res);
+>   	if (ret)
+>   		return ret;
 
-Ah, I knew that I missed something here.
+Ah, many thanks for catching.
 
-Thanks for reminding - changes are made.
+Reviewed-by: Stefan Roese <sr@denx.de>
 
 Thanks,
 Stefan
