@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5593CC3DA6D
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 07:06:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457ECC3DA6D
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 07:06:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 839E981E72;
-	Mon, 19 May 2025 09:06:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D187582012;
+	Mon, 19 May 2025 09:06:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FAIyB961";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x0iBxCVI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F97481F66; Mon, 19 May 2025 09:06:16 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id B75AE8277D; Mon, 19 May 2025 09:06:33 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0018A803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 09:06:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3CEA803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 09:06:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-7086dcab64bso35936107b3.1
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 00:06:13 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-70ccd1f5072so6222057b3.1
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 00:06:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747638373; x=1748243173; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+SGyvB94KlKf2lnjhmb3bGu0Ltw0u3HzLTfZ8r4AdOE=;
- b=FAIyB961n3mEtJxXgT9RILsqpxx5EJ6pm/jNzfxWDdmAHzuJur/SoyclpRzKRtyZYv
- TbhkZ86v4JDQG8bvOH/L+r90L15Q7C5fE2/8pR+XdgmA04hGXr3KN5ZC4D8w4LnWVtLG
- v1ZltzTpkqFpUFB3sTZgoc5V48ndTs5MjxQ7iYyIZ4ST7TzuERInFw6C8gbg7bMNnM87
- 5yHC/cvj1lJrcN8NdXCDhNE27tfrqPiM/7KrYJP4tlM3iXDIQnYs3H/DDiwMUpwRs9VM
- cToIiBF7dzvIIXOAu7sqxOsvyi3qTss9iFeR4inTVFzX0Z/aY9KWhunFbeXj79HVy1RG
- a0oQ==
+ d=linaro.org; s=google; t=1747638390; x=1748243190; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IzxnkxxlS0dHnIJwSJv7k/s+V1K4dBaL2l5qC67BQYc=;
+ b=x0iBxCVI815SsfHbq9Uiu//thJonlfQ1CpqKZK2bygRgGJyaH521DwWIr8P0pTGwaz
+ LuFr38dgqujztHz9jd49JlT8ufx8qA6Ac1oAh3jjDvpcfZg6mbLK6LBisbk/0Z4DahQW
+ qgu7Oc42U5HzCSJLBIFkIHSBy10Rf4l5KaPuQ89MNs0ueMSqivfTDEIvSNUK6Bx7oYDk
+ ux0CddAZmsE+5rO0hkMlCeJiiiyi29qhYCoJYtVjQc8itD4UsTh1CeyeKGwzDj+gVwVg
+ 2vU+rVN2doAIZ8dyIJ4+0jItzfN4aUVXg5KrtDM7NJYLMki1587TihabyxOPtlO4DMEX
+ aTuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747638373; x=1748243173;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+SGyvB94KlKf2lnjhmb3bGu0Ltw0u3HzLTfZ8r4AdOE=;
- b=wxVlND/Nknyqr0tMnXDMujaqaO65WER3GeBsEZHs1oSNWxGSILxGS8+GSk/qgprE40
- 3A7KD3GUKzaMKd8+oGbuZU+SkrLacG6WjT0LOZi96kKPmGrME5RR2KPe0tzPg0vgT9SC
- ZgUSYgiI66gxMGCardwjgzzQZp88Hz9MlL0hGQmwsrxpE6YDyHs9vL5d+olJSG9jZaY3
- fGJzAwsiRLd+VqGXX6xNXZ+VBjjquey0RkDhgXtkqrdFoyxbx5EP8jfwQcO5+xedvg8z
- +VJt54Exd+s14Eb1sWAc1z2pot+CYm+tUk6ivox7LB1zThHQON9scGrXkArRYOVdyBUU
- DLwA==
-X-Gm-Message-State: AOJu0YwQCI9If0Rkg+rZ1l5iFwBgmpCGR+UiXrcmRnKYtK2u90+R3WF4
- l6uL7PWp7iM8e667AyCYA2+5gu8oQtReA8I2Csw0XD9yre0LQy4LFv3ip3Yfw9YyjLGFzMQUS9q
- zpbXpChNjuwinyIyvkuRX2xrn55Tqj8sHQJSBsj71aw==
-X-Gm-Gg: ASbGncurIZ18+pnUlcXQw7ajBbm3y6kQbfY51+zP8/amVXqKthVHzuDtkLZqtYz1z3n
- RFfWvmhR7TL2/cPet3aeMxQdXCttirxiETZe56lr1ZlMR6JIJIdmtkTiHjNR9ZTW4cJvGy3+ZxB
- GYcGWMVaWC1hApQiV8WzY5ioVfvDC4ITKwUA==
-X-Google-Smtp-Source: AGHT+IGvTSHtNvNjBwLVrs/isVwR5All/v4VHvA3CYl/Wai6bTimsIMlXf2D1xQzGD2QSlxcM9jHJcOdorBIzA/y6Bw=
-X-Received: by 2002:a05:690c:4986:b0:708:bc95:7ca4 with SMTP id
- 00721157ae682-70ca799b91amr168288547b3.4.1747638372838; Mon, 19 May 2025
- 00:06:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1747638390; x=1748243190;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IzxnkxxlS0dHnIJwSJv7k/s+V1K4dBaL2l5qC67BQYc=;
+ b=ML1j3DiDuw+EVTU2FHiuVAXXpkcc32KsTO5hiriuCzwIAnanAMSBQmiGC1ji/4g676
+ ziVIhKiY1pWmdnegtgfOtcyjNg1swJKZDJlYi9on9Bgav/F91n2to7ySWo74ezyLar56
+ nUaXOdxU1ratmmj0PyksgreLuI6d4lfu+7l9hF0dnvEVq3Wz2zYDyhwxCArYjpEW6wnV
+ rMxopT3zS46XPff/Ihxez5IBIyQb04Wn9y8SqDkPm7TAiwDMbn/9ynBHevq+kqb2gd+9
+ yTSHdt8/ruLq3ykLLWkggkDsvJms7SrN44P4X/wO0QvsLNVu8AK8RQtXCrCQNGwcydjf
+ 6NLw==
+X-Gm-Message-State: AOJu0Yzwd9kO0+RwSWafYEeXQ2zmtyudqe73Av5yX/Vri5lBJVztqRCk
+ LZ+DgcKoEXZuvu0hnQpY1veQ9bKsLPLMNToKq8hxh8fR8zWp7rfGhOUPOQ9X8g/h/pQziGnMmE7
+ 5n7JmkCO+2plm9RwRRmBUhV1RIWGiMH5URytAbEvnXg==
+X-Gm-Gg: ASbGncs56IXk0Y7wqQxzl2K0U/aWb0PXoWVtOFOEANgXSODd51287/C5Bbe9/2MCMS+
+ zP9X3Jr/KdNieBZ5kiJLrc3gpMnh7fVpZjzVXlRg2lT/eENbzcJBTfVg9MJ/vAjefn9gCL1Ghw+
+ xsw/9JS+SZmyotPwuIhPyr3WhUn5tYwwAVDg==
+X-Google-Smtp-Source: AGHT+IEJymFzLs2GihZNqkrhs55ocNn7E4BJY5gUHPU/o7wRBdor2PMARmPNFU5To5Wm4IBAdliw5N6FTmYcXU1uCbg=
+X-Received: by 2002:a05:690c:6f03:b0:6ef:7f89:d906 with SMTP id
+ 00721157ae682-70ca7bb63ecmr160470097b3.33.1747638390348; Mon, 19 May 2025
+ 00:06:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250514161841.3591411-1-adriano.cordova@canonical.com>
- <20250514161841.3591411-2-adriano.cordova@canonical.com>
-In-Reply-To: <20250514161841.3591411-2-adriano.cordova@canonical.com>
+ <20250514161841.3591411-3-adriano.cordova@canonical.com>
+In-Reply-To: <20250514161841.3591411-3-adriano.cordova@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 19 May 2025 10:05:37 +0300
-X-Gm-Features: AX0GCFtp3EQWcop_KbpMqOw8-Rus5yxvRfUw6mvKWIIuABw4MvVgjbZn6zO4R6E
-Message-ID: <CAC_iWjKYPFWcCCXe-RTeU0Q2A+2ku-JzE3A7z1yG_UWDk_ecuw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] CI testing: add http server to CI tests
+Date: Mon, 19 May 2025 10:05:54 +0300
+X-Gm-Features: AX0GCFsZyvGamSzO9cm6V7uPwOfFpOOADCCIV5rFS19h47uCdM-7IkWQnqKHuWc
+Message-ID: <CAC_iWjLM1u-bSWk8F-HgOaEh7n3ER4xy=i=2Hgy27j_AMpuPpQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] cmd/Kconfig: select CMD_WGET if ARCH_QEMU
 To: Adriano Cordova <adrianox@gmail.com>
 Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, sjg@chromium.org, 
  trini@konsulko.com, jerome.forissier@linaro.org, 
  Adriano Cordova <adriano.cordova@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,79 +94,30 @@ X-Virus-Status: Clean
 
 On Wed, 14 May 2025 at 19:17, Adriano Cordova <adrianox@gmail.com> wrote:
 >
-> Add an http server to CI tests so that HTTP booting and
-> loading can be tested.
+> select CMD_WGET for ARCH_QEMU. This way HTTP can be tested
+> on the qemu platforms in CI.
 >
 > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 > ---
 >
-> changes in v2:
->   - Remove HTTP_SERVER argument for test.py
+> (no changes since v1)
 >
->  .azure-pipelines.yml | 11 +++++++++++
->  .gitlab-ci.yml       | 11 +++++++++++
->  2 files changed, 22 insertions(+)
+>  cmd/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> index 9c136513bb9..334cf27cfb5 100644
-> --- a/.azure-pipelines.yml
-> +++ b/.azure-pipelines.yml
-> @@ -316,9 +316,20 @@ stages:
->            fi
->            export PATH=3D/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
->            export PYTHONPATH=3D/tmp/uboot-test-hooks/py/travis-ci
-> +          python3 -m http.server 80 --directory "\${UBOOT_TRAVIS_BUILD_D=
-IR}" > /dev/null 2>&1 &
-> +          HTTP_PID=3D\$!
-> +          sleep 1  # Give the server a moment to start
-> +          if ps -p \${HTTP_PID} > /dev/null; then
-> +            export HTTP_PID
-> +          else
-> +            unset HTTP_PID
-> +          fi
->            # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \=
-$var" if not
->            ./test/py/test.py -ra -o cache_dir=3D"\$UBOOT_TRAVIS_BUILD_DIR=
-"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_EXTRA} \${TES=
-T_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUI=
-LD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=3D\$(System.Defa=
-ultWorkingDirectory)/results.xml
->            # the below corresponds to .gitlab-ci.yml "after_script"
-> +          if [[ -n "\${HTTP_PID}" ]]; then
-> +            kill \${HTTP_PID};
-> +          fi
->            rm -rf /tmp/uboot-test-hooks /tmp/venv
->            EOF
->        - task: CopyFiles@2
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 7aadd5d8b73..f320de0c29c 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -106,10 +106,21 @@ stages:
->      # "${var:+"-k $var"}" expands to "" if $var is empty, "-k $var" if n=
-ot
->      - export PATH=3D/opt/qemu/bin:/tmp/uboot-test-hooks/bin:${PATH};
->        export PYTHONPATH=3D/tmp/uboot-test-hooks/py/travis-ci;
-> +      python3 -m http.server 80 --directory "${UBOOT_TRAVIS_BUILD_DIR}" =
-> /dev/null 2>&1 &
-> +      HTTP_PID=3D$!
-> +      sleep 1  # Give the server a moment to start
-> +      if ps -p ${HTTP_PID} > /dev/null; then
-> +        export HTTP_PID
-> +      else
-> +        unset HTTP_PID
-> +      fi
->        ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID} ${TEST_PY_E=
-XTRA}
->          ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
->          --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
->          --junitxml=3D/tmp/${TEST_PY_BD}/results.xml
-> +      if [[ -n "${HTTP_PID}" ]]; then
-> +        kill ${HTTP_PID};
-> +      fi
->    artifacts:
->      when: always
->      paths:
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index f21d27cb27f..fa353c6fcac 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2153,7 +2153,7 @@ config CMD_TFTPBOOT
+>
+>  config CMD_WGET
+>         bool "wget"
+> -       default y if SANDBOX
+> +       default y if SANDBOX || ARCH_QEMU
+>         select WGET
+>         help
+>           wget is a simple command to download kernel, or other files,
 > --
 > 2.48.1
 >
