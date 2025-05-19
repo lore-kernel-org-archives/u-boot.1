@@ -4,208 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C333AC2D0CD
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 09:05:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15049C3DA6D
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 09:06:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CEAD81E72;
-	Mon, 19 May 2025 11:05:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=hpe.com
+	by phobos.denx.de (Postfix) with ESMTP id A422382998;
+	Mon, 19 May 2025 11:06:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="cycwPU6M";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="iN3kESIr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A33BA81F66; Mon, 19 May 2025 11:05:36 +0200 (CEST)
-Received: from mx0b-002e3701.pphosted.com (mx0b-002e3701.pphosted.com
- [148.163.143.35])
+ id 7562682A76; Mon, 19 May 2025 11:06:12 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A6EE803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 11:05:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E42C282AE2
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 11:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=hpe.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=verdun@hpe.com
-Received: from pps.filterd (m0134423.ppops.net [127.0.0.1])
- by mx0b-002e3701.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54J5sw6v012847;
- Mon, 19 May 2025 09:05:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=
- content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=pps0720; bh=Q+uM6myxPWfw1kyB0OODnwf3JT
- OXLm563Zb/YxQ5aJM=; b=cycwPU6MZJdv7z/+0xWFJoYRR6r2yBEU7WaM66rUcG
- eHOJcLlOGkanE+L9+hlZmFAnqKsjS1fkS3hVPYEBEwniohOwfGqQ4Ylu4N98Og0T
- 9c/6zfAxxwGNIT1CMf8gpoq1OYNKfdEPuf4bp/2j36VSCbKtexKBTcFa8aqZOnnl
- eXAVR04JQTMXP3zjrVbh97l4csCX5mQRF70yCBvND/oyWbh5aDHJotbUUdqw48EE
- fm19Cm+eMA6ZFDnWefmhSqZgPOc+75W33mMnXrbxrolvWJ5dTX5hXzn8bGuuUFpz
- 6PPJqEXAR/0ueMfiaWvLWdQNeeq0hf3jC1XR43Y7XDiA==
-Received: from p1lg14880.it.hpe.com ([16.230.97.201])
- by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 46pfy8dyfx-1
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7234638148=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54J6vA76027476;
+ Mon, 19 May 2025 11:05:58 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 0SA8sT6qkvppNXFpXQNHjit+PQjmeepkMvYzMc3o6VQ=; b=iN3kESIrL4/cMTvB
+ 9GnXgqIG86Sy6rhWLMPuyejABgH0vTyH/KS3Z3vHsnXhJZKF0NUWct76ch++ku6e
+ Wq1rLvwsd2Iv/Ve0DQQUx9ZKJmPZi9K2ESasbG/OaKuBD2MYRsZlpYXAdTEhilPY
+ R/Qqh9xYrzdcUIcBlWFTr4HI3ywWjTAGkDxFMi0BAY45hk6M7KU1IrsZkjU7atDd
+ ms6BbEPsm9rp4lO5jpTDwADihJvzeb6tzXBV5QOZE2gYuPvE0U36hKXXbucZRaqg
+ bX7ci18DXXYbb2vKvhQgndXns4Sag1AM/QsIatjj46jiP/rIw2AA06jBqpKIx/aS
+ nvXl8g==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46pfk9x7ax-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 19 May 2025 09:05:28 +0000 (GMT)
-Received: from p1wg14923.americas.hpqcorp.net (unknown [10.119.18.111])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by p1lg14880.it.hpe.com (Postfix) with ESMTPS id 85F1980044F;
- Mon, 19 May 2025 09:05:27 +0000 (UTC)
-Received: from p1wg14928.americas.hpqcorp.net (10.119.18.116) by
- p1wg14923.americas.hpqcorp.net (10.119.18.111) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Sun, 18 May 2025 21:05:15 -1200
-Received: from p1wg14927.americas.hpqcorp.net (10.119.18.117) by
- p1wg14928.americas.hpqcorp.net (10.119.18.116) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Sun, 18 May 2025 21:05:14 -1200
-Received: from p1wg14921.americas.hpqcorp.net (16.230.19.124) by
- p1wg14927.americas.hpqcorp.net (10.119.18.117) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11 via Frontend Transport; Sun, 18 May 2025 21:05:14 -1200
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (192.58.206.38)
- by edge.it.hpe.com (16.230.19.124) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Sun, 18 May 2025 21:05:14 -1200
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qSxzHa65KmSw7P9VKFURz2iIU5PN13mn4lC7aOMG6QLEhtE3hoaTgNmeXFae5553cWDcQir8Em2gic0TszuPL6Bf6i1McJcGaW4yvnmVL2k1qqu0vJ4tcnpJnPfJDUzzCB4scIn/05wPs2QQicyvEkX1DV6N0E5yWvnOh5iFQbMp5MWWr0f8ynsyoYRJxAhYOn6PuWxBWhlIZqmvCnQMQbfuztaIg47ayHLszJRfE0Tw/Pb5EbW33EqrlyH20p+agbsLK2gC1MeecDKOaEruIW5xfS5nIjgR5YE6R6AEA2lc63ro8M7dtDZe2YLvjFVdYo7dUaDk9ZLJHdnzkgx6SA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q+uM6myxPWfw1kyB0OODnwf3JTOXLm563Zb/YxQ5aJM=;
- b=qq5RpUMSlDXq/tG03P1gMFe9RNfFumwmqKIzoUGOfKCX1ufzGMgwnTJN7cubDbTAmq7a6xiVYCnojYFky6klhK0SjLK8KVsHa7KCMZGSSQnGFKxBz3HCCbXj/pwL4IR8WDA4DjtcPGuRI9oC2JOiQ2t+Mrcpev7xbkO8OeLiomWu9sJnRd+wJtqZ5X0H/EhkSh0Y5p4roQVG07KWzCzTbNFsaqK7f0fmvTtadXyXrP0YTxHIOkKNoDT0zBr2LVLKkO7IrTiUqtBfhI0ZXsYM70MLohhEnyxV9zZHk9YUsge9YgfVKqbYbAQkPfSPgJ/eU6Q9angmcfuVoYprl0NjZA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=hpe.com; dmarc=pass action=none header.from=hpe.com; dkim=pass
- header.d=hpe.com; arc=none
-Received: from DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:8:4f::17) by
- MW4PR84MB1585.NAMPRD84.PROD.OUTLOOK.COM (2603:10b6:303:1a4::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8722.33; Mon, 19 May 2025 09:05:12 +0000
-Received: from DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM
- ([fe80::a5e9:4a65:e738:8b3a]) by DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM
- ([fe80::a5e9:4a65:e738:8b3a%4]) with mapi id 15.20.8722.031; Mon, 19 May 2025
- 09:05:12 +0000
-From: "Verdun, Jean-Marie" <verdun@hpe.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>, Neil Armstrong
- <neil.armstrong@linaro.org>, "jmverdun3@gmail.com" <jmverdun3@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 1/1] Initial support for Wiznet W5500
-Thread-Topic: [PATCH v4 1/1] Initial support for Wiznet W5500
-Thread-Index: AQHbwp7xIrnosPKZPkmFc0YqeiDvV7POpWqAgAAZ0gCABP0MmoAF8FWAgAAGdeE=
-Date: Mon, 19 May 2025 09:05:12 +0000
-Message-ID: <DM4PR84MB19761284E20ABD1F1F8ED8C5D69CA@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
-References: <20250511180207.42945-1-verdun@hpe.com>
- <20250511180207.42945-2-verdun@hpe.com>
- <91db507e-8fab-42cd-88dc-300372ceee68@linaro.org>
- <5dc908b9-6659-47bb-bcad-134871ecac28@cherry.de>
- <DM4PR84MB197689F8308F8FBB04CF96CBD690A@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
- <8e930859-c73b-4bd8-b58e-474b3e70e15d@cherry.de>
-In-Reply-To: <8e930859-c73b-4bd8-b58e-474b3e70e15d@cherry.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-reactions: allow
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM4PR84MB1976:EE_|MW4PR84MB1585:EE_
-x-ms-office365-filtering-correlation-id: c322c035-ff39-4b9b-494b-08dd96b44319
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|38070700018|8096899003; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?vTA3k4uQkPe8tGPPw/gALFqSfgwJ4b42cMflaavzX9rhpzLr2qfaGcZCUNtc?=
- =?us-ascii?Q?5XJLbNeX/S9V5WF4MjKCN2BzOkT+AhwFRQqCQF3NH5jkgFdtvWQOGNfb2eHa?=
- =?us-ascii?Q?uCXqXOATHFjHMMJOQAoHf+XN8/MeLJZv6ZrlUy9/U9mH7eH1prqfVHS2XXTs?=
- =?us-ascii?Q?FQylsK4/zCB55gEEeGQfWlsIKYbq3zJLC7uVMGakbWu03EQKxpCFqmGGHJTh?=
- =?us-ascii?Q?cXJtPkVF5nYaEUN4JOx23vocxofAus8Omm9f2oHWLsCG5hQSkyWKO2eV0vmX?=
- =?us-ascii?Q?BWuShKFgS8COF17Pe2ltGNXHCxtCGNGmrpbpBmdfqxq4UI1f9Srfdpp4j2S9?=
- =?us-ascii?Q?jdRV/Ilv+mbxCUmqkp1ea97IYO61xATIsCOkLDUGWih1GnL/arty80nD4Wko?=
- =?us-ascii?Q?Z3XV5cab+TJfzJdiEsAJ8jEtkDZ1llxO8jj+HMXi78Eo/sti387pE12HkaLC?=
- =?us-ascii?Q?OCbq2bcidaql1Bb9fwXJ8wM+4AhJvFwb8uskC9cE7mTb+E+t2wr2/d8q4r3w?=
- =?us-ascii?Q?xMWcO9azvmtiBqReuFISNjA1hVsc8jRmTBAbHS+/mmsFdlHcGP3BuaxooKOp?=
- =?us-ascii?Q?57YDGw7xC4GlLgOv/SIp8QyNZK84hiiSgw3WXnBKauKgh0aEqFkVO37eqhhh?=
- =?us-ascii?Q?rrWznxpFdYJug0mjA9GoGwq5gM7mofrrOr2CtiTk7RiMSexIhnJGUxWYDE/S?=
- =?us-ascii?Q?+aENPuu1/MP0Hfi5+Lvl+TA2okk3JTLZGHLQnR6Vxtgy3aWecrqGRi9fzuKY?=
- =?us-ascii?Q?bZC5akict/m2vT1UlUO3lWxslLuveLr7ceCafiUQAJc0q3WrSKXiorLYimZP?=
- =?us-ascii?Q?j0bYpxu1sxrLr5r1YGNo7r7l1T9x+osJuotVW+l6mg7oPvNW/b/lavY6MgyN?=
- =?us-ascii?Q?L1JtCQbXjQnipR7fDWMOAmlmsup5n2GusmegZFdpyIlguebJbt6JxLrhERVe?=
- =?us-ascii?Q?UyxUge5fhuDuM2orK6W/de0WbnkGDmzFPrR2QaJ9WThcyhXaeDic+KmiW8oq?=
- =?us-ascii?Q?fmMtsZQXb8cPQqdhr+DEovB5SFMay4gaU0T1U/BeeqOI5dZYEmezxxLCrwQ5?=
- =?us-ascii?Q?89XTuEl0UC7vTC7eKQqme6luTLT3opcG4NJh/cTBNpoXTsibwje/qUHGJqIe?=
- =?us-ascii?Q?SKaoLwezxLSXjOVq3TY6B0sNXlB1Cuq+UgK2pQ0/+K/TFYELnxfd0/E3Y6Tm?=
- =?us-ascii?Q?pG2tc3odC/pzjNX6rvnxSE4hIYyAdD6oMTLVvzxuE0zlH9EqLkHD/AOydXJo?=
- =?us-ascii?Q?xeUf/3vmtXU9XOmqEmZFTrfMoIhK/dqMJ49B7OLHFg4hgT0jVD60KeCvZTQt?=
- =?us-ascii?Q?3GVdwbPN6uo2KBxw57ScdNumMSfhGzGd+/uzUNvn44enRZNscZK+YHEt/hvK?=
- =?us-ascii?Q?h7qF0NDpNuhdPj8j8zS1tsr970uNAXYnZTD6vs/GdIuevDSxBQMDUReJ1zPj?=
- =?us-ascii?Q?9riqQRE7ZrxKpmQAkzcLf3NWfViwS2m7wZb6+cBOlnGcO/LwoM1aug=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(38070700018)(8096899003); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?Eb6xQ9UHagm8OPAw0JdC+AbN89X0dLEsarD6rkI9UPri7iyVR+ZYxk1bJBhZ?=
- =?us-ascii?Q?xcafpCtcEaZMp0QvB5rzCg8pTJcqqreTErIpEy4rBcz4buYTSdv49MCGWWBf?=
- =?us-ascii?Q?Hep2STNqC/kF7dE5kZTJzoylgpmavJ+4RN3J8uq4FLq0FNegh6X4PSPQ3Igk?=
- =?us-ascii?Q?XcfNoO+VDP9U71strnHS9voWMzAd4FIoFl9Liaa0f2gxnq8BFW4jqyo/fgea?=
- =?us-ascii?Q?VQaC3pmz33CGNT2zjcxhyK519/aPLsKd7f3nk1ka1uA41s20It/zICjupPiE?=
- =?us-ascii?Q?Fccc7CDDNr5SROyKVfdJ/mCd2unfJEzX8RhmkgOycfYXE2ZIHqBWbcLDaroL?=
- =?us-ascii?Q?9c8SAsS1LVj2EsioN0sptB4VjNIHvKWq2DTUK+ny62T0VGDq4GQEmhQaXUzH?=
- =?us-ascii?Q?BF5LyNuxz0uZes5Aky0AQwahzUK6Xqdn0G4NIAMJt1j0EdBzWOVGrEvDo13W?=
- =?us-ascii?Q?01jY8N83LVdZ8vyCB8PFPB1M2I5nN3qQGdVGh9T8md2WO0GyepAB0tfi0gkm?=
- =?us-ascii?Q?oGSIISEe4NbAk5/QxA19SCY+KsY5Xd3QWaTzsGviVIhoAMRT8ph0K/9h6Fjy?=
- =?us-ascii?Q?AIBlSRJ0bc025cEUrsH+XAImN6fmY5Ffvmk8kzLt8L58adS5jEaINznn/AJm?=
- =?us-ascii?Q?Aqvdy0juHb2YaAqiTPZtplIFfnLpiutJq52OsZ0MEwh/R9XKzxJPKqCl1QQR?=
- =?us-ascii?Q?diyDZ3CpSggbh0BWZUQbYUrIfE+af1Znjs6tz8kro7KMntdjPVjj/yEdQor3?=
- =?us-ascii?Q?VbanmDe0tLKoQdO3mZydD52hvsZHvtY6e5Dh6g83K7VbGBU/Vglg6PovpElD?=
- =?us-ascii?Q?hVvmythYnIeNuIg23xhX4NF092uMtDa+7B+O8uCkT5CUM3kI8CoRoaQx6ATM?=
- =?us-ascii?Q?foTGxIWKsK/I6Db4Zn3V3VJZGBbH/+mbT1fSyc+D/ka1sHERTEhXnNA8sjC2?=
- =?us-ascii?Q?ZCvAFj+ZkzWs9UraE+ole9h2woHjNyJKrkFwLGUhU9Go2k47e57qDMRzBrze?=
- =?us-ascii?Q?LSa4ZwEOSPrd54QfpZEuTbxyp2JWiTHin95Pwp8MP/c47pBr7y0s0q8YB9kM?=
- =?us-ascii?Q?7kOZW6fkxA/70kefvPzl4eYIPt3qeWZeOLkm6Jb7/P58bl89OBWU1RfPNSif?=
- =?us-ascii?Q?M8I8caWTIdWHA286TQDrhJLgVpdx+eu3Nr7ZD1y+2B0CbeGN9QsCwxfoY/bA?=
- =?us-ascii?Q?Ff5o9AQE6c6/HYBv5oFTTZSaIERgqmMbMqjtsDObTriQSV943/PKWIbMNfor?=
- =?us-ascii?Q?5zAjcXm37ynWN8q2Z28dGf9G1xawTsZWaPq89VZRliE2LFo6qUaKqTwy6NSJ?=
- =?us-ascii?Q?sBkp1lJ88lvaxe8kWSayIDN0qIlFNB6xr7Xz9V0zA34fUS6fL/OzQuLKbQy7?=
- =?us-ascii?Q?mY/CMNjHWRkwNuQbSa1Spb1NFSje+sKoxErog08wwODY2HdGUiIW+XtCIVZk?=
- =?us-ascii?Q?ZUYr63S9OLbVQXzLYA7bD9CT2Rj/ee0fM+gL/YCkG8p3LQNjcEAjme+5/B6M?=
- =?us-ascii?Q?HA2QSWPLQOdUPmbaimU0XplGmjd6Es+4dVk+cDUavuT9W88rQOqF1FkYVmQ2?=
- =?us-ascii?Q?uLlDcZFtjeBAqFVsMvW3YINLy2Z4H+KUVesQrCqb?=
+ Mon, 19 May 2025 11:05:58 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8CDDB40046;
+ Mon, 19 May 2025 11:05:04 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AE4E7A36ED7;
+ Mon, 19 May 2025 11:04:25 +0200 (CEST)
+Received: from localhost (10.48.86.182) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 19 May
+ 2025 11:04:25 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: <ilias.apalodimas@linaro.org>, <patrice.chotard@foss.st.com>,
+ <caleb.connolly@linaro.org>, <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH 2/3] doc: cmd: gpt: add information on type partition
+Date: Mon, 19 May 2025 11:04:20 +0200
+Message-ID: <20250519090421.470942-2-patrick.delaunay@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250519090421.470942-1-patrick.delaunay@foss.st.com>
+References: <20250519090421.470942-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: c322c035-ff39-4b9b-494b-08dd96b44319
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 May 2025 09:05:12.0221 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 105b2061-b669-4b31-92ac-24d304d195dc
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: wDmoYT7tcmPSbVkxUGQHbCHzp8JcBFm4hsGZjNFo0coATXSz6k5vnEKNstTVJYLS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR84MB1585
-X-OriginatorOrg: hpe.com
-X-Authority-Analysis: v=2.4 cv=OPQn3TaB c=1 sm=1 tr=0 ts=682af458 cx=c_pps
- a=A+SOMQ4XYIH4HgQ50p3F5Q==:117 a=A+SOMQ4XYIH4HgQ50p3F5Q==:17
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
- a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10
- a=dt9VzEwgFbYA:10 a=9WsQpWsH5MFBPi-5sJ8A:9 a=CjuIK1q_8ugA:10 a=yMhMjlubAAAA:8
- a=SSmOFEACAAAA:8 a=Yi-kuNgvaSzpVX4W1tEA:9 a=yLdepWMXQ2UmjYoG:21
- a=gKO2Hq4RSVkA:10 a=UiCQ7L4-1S4A:10 a=hTZeC7Yk6K0A:10 a=frz4AuCg-hUA:10
-X-Proofpoint-GUID: qpTiED4FJTFnQzutRO8pwKfLHQGClQig
-X-Proofpoint-ORIG-GUID: qpTiED4FJTFnQzutRO8pwKfLHQGClQig
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTE5MDA4NSBTYWx0ZWRfX8ch0fjDzqseW
- BuDto8VI9QYTdfaBkLw7WiEH9kqOzan46IPGPt5tm/uUOEiuOCHn5X5BLSQlwtkvhuFdPhMrJcT
- BfQzN4aniiXPnfyHhsK4sMYdwXCjEDOQlOLCTzSkkDpCpn0hzATl8HwESJJHO9g7UZKWhAsZ+Yy
- eMv2BiooGucgQXwxmJOXL7quwlGLsLjkQR6TW59JxlOcN/KvIR7akxqYrG3t6EZ88ufL9SFbF2u
- fuhYe9j1YoJiizpMVclAncqqGWDk3x2zaHV81h6LIMKO0nSNloTAKZBxBYgTxGrJm0ovvGb03Ws
- Ttx5UsKH9h+SXbRiqsJl/pl+r0cfk9vJjPB1EXt+xSLgbAvhIeIET4wS1l6npIN5+2aDjh7Afi1
- u0bcdT/1
-X-HPE-SCL: -1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.86.182]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-19_03,2025-05-16_03,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 mlxlogscore=999
- spamscore=0 impostorscore=0 clxscore=1015 phishscore=0 malwarescore=0
- suspectscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0
- priorityscore=1501 classifier=spam authscore=0 adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2505070000 definitions=main-2505190085
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -222,31 +91,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
->> Fair enough. You could have the same ternary operator to better match
->> what's in the kernel.
+Add information on type partition, copied from README.gpt.
 
->> Can you also reuse the macros that are in the kernel already?
->> W5500_SPI_BLOCK_SELECT, W5500_SPI_READ_CONTROL and
->> W5500_SPI_WRITE_CONTROL seems to be of interest?
+I also correct issue for gpt_parts variable and add example of
+"gpt read" usage.
 
-I will check it
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
->> If you do that, please also update the kernel code to use that :)
+ doc/usage/cmd/gpt.rst | 93 ++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 84 insertions(+), 9 deletions(-)
 
-I have a new version of the driver code without the _spi_read* _spi_write* =
-calls. I think for the u-boot version it will be ok as it shorten the sourc=
-e code.
-What I loved to do first is perhaps to get the new patchset upstream in u-b=
-oot and then change the cmd[xx] logic to a structure in the linux kernel an=
-d u-boot ? Syncing both might be a little bit tricky. I also have some perf=
-ormance patches to look at with u-boot (udelay call with a value of 0 is sl=
-ow and I know useless too)
-
->> The benefit of using dev_dbg is when you're having multiple devices from
->> the same driver, then you can identify from which one the message is
->> being printed. You could have two Wiznet W5500 for example, how do you
->> know which one's printing which message?
-
-I am going to switch to dev_dbg. I will send the new patchset on Wednesday,=
- as I liked to test it on real hardware before doing so.
+diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
+index 8534f78cbac0..13e8783be9b8 100644
+--- a/doc/usage/cmd/gpt.rst
++++ b/doc/usage/cmd/gpt.rst
+@@ -54,7 +54,7 @@ partition string
+ 
+     * name=<NAME> - The partition name, required
+     * start=<BYTES> - The partition start offset in bytes, required
+-    * size=<BYTES> - The partition size in bytes or "-" to expand it to the whole free area
++    * size=<BYTES> - The partition size in bytes or "-" for the last partition to expand it to the whole free area
+     * bootable - Set the legacy bootable flag
+     * uuid=<UUID> - The partition UUID, optional if CONFIG_RANDOM_UUID=y is enabled
+     * type=<UUID> - The partition type GUID, requires CONFIG_PARTITION_TYPE_GUID=y
+@@ -63,6 +63,23 @@ partition string
+     If 'uuid' is not specified, but CONFIG_RANDOM_UUID is enabled, a random UUID
+     will be generated for the partition
+ 
++    If 'type' is not specified or without CONFIG_PARTITION_TYPE_GUID=y,
++    the used partition type GUID is PARTITION_BASIC_DATA_GUID.
++
++    Some strings can be also used at the place of the known partition type GUID:
++	* "mbr" = LEGACY_MBR_PARTITION_GUID (024DEE41-33E7-11D3-9D69-0008C781F39F)
++	* "msft" = PARTITION_MSFT_RESERVED_GUID (E3C9E316-0B5C-4DB8-817D-F92DF00215AE)
++	* "data" = PARTITION_BASIC_DATA_GUID (EBD0A0A2-B9E5-4433-87C0-68B6B72699C7)
++	* "linux" = PARTITION_LINUX_FILE_SYSTEM_DATA_GUID (0FC63DAF-8483-4772-8E79-3D69D8477DE4)
++	* "raid" = PARTITION_LINUX_RAID_GUID (A19D880F-05FC-4D3B-A006-743F0F84911E)
++	* "swap" = PARTITION_LINUX_SWAP_GUID (0657FD6D-A4AB-43C4-84E5-0933C84B4F4F)
++	* "lvm" = PARTITION_LINUX_LVM_GUID (E6D6D379-F507-44C2-A23C-238F2A3DF928)
++	* "u-boot-env" = PARTITION_U_BOOT_ENVIRONMENT(3DE21764-95BD-54BD-A5C3-4ABE786F38A8)
++	* "system" = PARTITION_SYSTEM_GUID (C12A7328-F81F-11D2-BA4B-00A0C93EC93B)
++
++    The GPT partitions layout and associated 'type' are also printed with the
++    :doc:`part command <part>` command by typing "part list".
++
+ gpt enumerate
+ ~~~~~~~~~~~~~
+ 
+@@ -162,16 +179,17 @@ Examples
+ 
+ Create 6 partitions on a disk::
+ 
+-    => setenv gpt_parts 'uuid_disk=bec9fc2a-86c1-483d-8a0e-0109732277d7;
+-        name=boot,start=4M,size=128M,bootable,type=ebd0a0a2-b9e5-4433-87c0-68b6b72699c7,
+-        name=rootfs,size=3072M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=system-data,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=[ext],size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=user,size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=modules,size=100M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+-        name=ramdisk,size=8M,type=0fc63daf-8483-4772-8e79-3d69d8477de4
++    => setenv gpt_parts 'uuid_disk=bec9fc2a-86c1-483d-8a0e-0109732277d7;\
++    name=boot,start=4M,size=128M,bootable,type=ebd0a0a2-b9e5-4433-87c0-68b6b72699c7;\
++    name=rootfs,size=3072M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=system-data,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=user,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=modules,size=100M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=ramdisk,size=8M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
++    name=[ext],size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4'
+     => gpt write mmc 0 $gpt_parts
+ 
++Last partition "[ext]" with '-' is extended up to the end of the disk
+ 
+ Verify that the device matches the partition layout described in the variable
+ $gpt_parts::
+@@ -228,3 +246,60 @@ Swap the order of the 'boot' and 'rootfs' partition table entries::
+     => gpt setenv mmc 0 boot
+     => echo ${gpt_partition_entry}
+     2
++
++Other example: a disk with known partition types::
++
++    => setenv gpt_parts 'name=u-boot,size=32M,type=data;\
++    name=env,size=1M,type=u-boot-env;
++    name=ESP,size=128M,type=system;
++    name=rootfs,size=3072M,type=linux;
++    name=swap,size=100M,type=swap;
++    name=user,size=-,type=linux'
++    => gpt write mmc 0 $gpt_parts
++
++    => part list mmc 0
++    Partition Map for mmc device 0  --   Partition Type: EFI
++    Part	Start LBA	End LBA		Name
++    	Attributes
++    	Type GUID
++    	Partition GUID
++    1	0x00000022	0x00010021	"u-boot"
++    	attrs:	0x0000000000000000
++    	type:	ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
++    		(data)
++    	guid:	502d48f6-81c0-488f-bdc0-ad602498f3ce
++      2	0x00010022	0x00010821	"env"
++    	attrs:	0x0000000000000000
++    	type:	3de21764-95bd-54bd-a5c3-4abe786f38a8
++    		(u-boot-env)
++    	guid:	9dc62338-459a-485e-bd8f-b3fbf728d9c0
++      3	0x00010822	0x00050821	"ESP"
++    	attrs:	0x0000000000000000
++    	type:	c12a7328-f81f-11d2-ba4b-00a0c93ec93b
++    		(EFI System Partition)
++    	guid:	8a3a1168-6af8-4ba7-a95d-9cd0d14e1b3d
++      4	0x00050822	0x00650821	"rootfs"
++    	attrs:	0x0000000000000000
++    	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
++    		(linux)
++    	guid:	411ffebc-8a19-469d-99a9-0982409a6851
++      5	0x00650822	0x00682821	"swap"
++    	attrs:	0x0000000000000000
++    	type:	0657fd6d-a4ab-43c4-84e5-0933c84b4f4f
++    		(swap)
++    	guid:	f8ec0410-95ec-4e3e-8b98-fb8cf271a201
++      6	0x00682822	0x01dacbde	"user"
++    	attrs:	0x0000000000000000
++    	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
++    		(linux)
++    	guid:	c5543e1c-566d-4502-99ad-20545007e673
++
++Modifying GPT partition layout from U-Boot::
++
++    => gpt read mmc 0 current_partitions
++    => env edit current_partitions
++        edit: uuid_disk=[...];name=part1,start=0x4000,size=0x4000,uuid=[...];
++        name=part2,start=0xc000,size=0xc000,uuid=[...];[ . . . ]
++
++    => gpt write mmc 0 $current_partitions
++    => gpt verify mmc 0 $current_partitions
+-- 
+2.25.1
 
