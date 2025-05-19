@@ -4,87 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78B0FC2D0CD
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 08:24:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC70FC54754
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 08:35:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCCED81E72;
-	Mon, 19 May 2025 10:24:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 16C6881E72;
+	Mon, 19 May 2025 10:35:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zsP2etc4";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="QkN8ywem";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F11D81FFC; Mon, 19 May 2025 10:24:37 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B96E81FFC; Mon, 19 May 2025 10:35:15 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::623])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADF18803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 10:24:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43A37803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 10:35:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e7b8673ff36so1622634276.2
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 01:24:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747643073; x=1748247873; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xtOWyF74aXrtWQMnuV57IcVIOrsa8NHTxYA68uMJ2qo=;
- b=zsP2etc43kFD9rZq3v5t3FBczYUiXkxd2aj9isxeg6OWxhOaqP4VXVwdwlToxwqzah
- VOJbRlYVbT2Y6Lx4wYlFysv6jVdGqYX/PXnxgJkfoEwkiCGqFMDFRr480iD7zq8behSL
- 1tYxSR6CsDGt59Vj62X22pmZDvHIBt3pgYpNWWT90Ps77v1IqN9aeq/5Vhyg2EvnfaJB
- dLxQL6RsYND44xGWKe/DA7fy2FXWB9ZKCCLrysBjyRsWfzAKQYbYmMKnAIRp5CCfPN5s
- 8fuYrzfdP9VljO93zmMDj3nrg3ukLEbg5fH/4IYu5BWHLQ54zsU+acMmQLxuuXfhg/Na
- PXEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747643073; x=1748247873;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xtOWyF74aXrtWQMnuV57IcVIOrsa8NHTxYA68uMJ2qo=;
- b=hvvzRz0G6gRr+c2cNaZdKcrEH1VCyEt3B5kWBv5GwZ5tc6t/B47Lkpd8CYaZln7uWM
- WNAmreBgNO6Oe/V+Ev4rnA9OiJjF5Z4dn1pxpdf3mnYFqixQYxsup0AWCASoCyqA3Tr8
- 4ZzeyWbkInzAwQAMF143Kgs2RfMi87qH+JX86KnawVPXgh4zAOg6QkEsD3/dKJhUyt8v
- OKF/V86qZcU4J4+ga+wPHZe3noHaLTLJWE1vC/hlbLqe+xh1uCno/QH490tMLKffW0FQ
- p7WEqbkM1u44oOnyFG0UePJ2unrctpeGNqSXPQ2bc/ctRIRB9L76H9+H6TZgF9b8bFmA
- GOFg==
-X-Gm-Message-State: AOJu0YxFPsBXL+y7CdCRECVgFlP344vCOKTAdZeUNcg0iQ/H5f7E0Xo7
- duo213ytsiveGrELepa5wDh3Me5atuAKU1Pnljz03Y2Qyv9qebaHeUoIOVRjdtQzBsXN+v16Cba
- jGiVnaolRqMXQ0vYg8dnm7Dzhcn4SE8eMz9mJIHtwiA==
-X-Gm-Gg: ASbGnctMFhtEq8Jh4q3oJl4qGIOqb2Qo7tpXV2NGgKfJTjqSZ5WfWPxTIb2BeYRkx7H
- 6uO5wZFlcLAe20w76JbwCOXexJko13zeZ516PDcds8QgJzc+fE5ZaDlg2QCyJg5CI0tMOKG3/MJ
- fMgWhb3GLMUc88ohP/sa/IQNXJw8POkDXAd42r9ZewilNy
-X-Google-Smtp-Source: AGHT+IHr0/W3lhUIkv+r5JS7/tzwgMlJHo0FIXxyPHULsZig9ZsqHBBfCHTsD8CqhmaAs+b0cWZMrWXuXIFpdJCyPGM=
-X-Received: by 2002:a05:690c:3749:b0:70c:b958:9fbb with SMTP id
- 00721157ae682-70cb958a2c2mr105654107b3.4.1747643073468; Mon, 19 May 2025
- 01:24:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xoaiQgoIaZemlzRr6A4O0sqnXZUVKFqBMXFWP6ZnS9Tmoz0mm+xk0LemOYeuZIrfAWpfwriDuxbDPoMb1FCSRXibfAxx3VmL20c9Oh8dVvZz9lKbL7rEej0ZZN0TUEOpt3o9OBh38XwICiLhqxL78ojuax14tf7T5K7rNNcMrBaFwYn7VPPZTzhRnzqT3N+J3Mryev34dh53ocouK06c7oez8FmgpEEG1qaJximjJILAMxFRXN+xV9uITyS5pgpawsOFzniBgWGq4WHJ02rVdPEKrY3jwmjNJKC5wWb6sLeg9uMkv8KKlT6zGP6OT6aYOT6675v9VGswmb2ABwkrTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fpmDVyyGJrqUZxHx+V4QiXpO+6nHXh1T38xhHkIKS9A=;
+ b=CZE6DncGbxJxyFWzql71W/TvIqygM/m8bEtHx9jaD7RZ9kbS80pHIccnmCTUpc1s9rEGO7ZDihhGPmL1Xg9e69fvWBhUddIJEtooKhcQoZ8LXRX5wQDmMIG75C99CUvHyvnIs76YLzdiL3BcNrCuuaoMyhiqvZyRWYHSdGuGwOAcAK+F2IpiVF93JQy1qT1M6Jbwxegyp2jpiHqwUtzkgAYUlluVxui5T3mF/QXSl4b9laeBRBjULCNvKhZ3GMD/qT/w6A+gmsJZobr8XHmyKVq0jlA9yDMRAVfTqyObI8POs91DuwE6tTJJwcdseL67yWr5WGZsddBIyC0Swzvmcg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fpmDVyyGJrqUZxHx+V4QiXpO+6nHXh1T38xhHkIKS9A=;
+ b=QkN8ywemnPNdsbwcrSGA6kUDYqHCQQxQF1EgPFcRZyEHaFURXq464ZTmfiOY3PfETmKrFi6K3/DAE7Q77CpWd9SYBjAZDdZVx6Hpgo7NVt5t8wW+iKxffMPGBn6az8eCyqC6xmKnILqKzKsuSORuUfCqgE9sqc96hDyPQmzS90U=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AM9PR04MB8146.eurprd04.prod.outlook.com (2603:10a6:20b:3b5::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.31; Mon, 19 May
+ 2025 08:35:11 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8746.030; Mon, 19 May 2025
+ 08:35:11 +0000
+Message-ID: <8e930859-c73b-4bd8-b58e-474b3e70e15d@cherry.de>
+Date: Mon, 19 May 2025 10:35:09 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/1] Initial support for Wiznet W5500
+To: "Verdun, Jean-Marie" <verdun@hpe.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ "jmverdun3@gmail.com" <jmverdun3@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20250511180207.42945-1-verdun@hpe.com>
+ <20250511180207.42945-2-verdun@hpe.com>
+ <91db507e-8fab-42cd-88dc-300372ceee68@linaro.org>
+ <5dc908b9-6659-47bb-bcad-134871ecac28@cherry.de>
+ <DM4PR84MB197689F8308F8FBB04CF96CBD690A@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <DM4PR84MB197689F8308F8FBB04CF96CBD690A@DM4PR84MB1976.NAMPRD84.PROD.OUTLOOK.COM>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0233.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b2::6) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-References: <20250514225002.15361-1-trini@konsulko.com>
- <20250515234154.1859366-1-trini@konsulko.com>
- <20250515234154.1859366-22-trini@konsulko.com>
-In-Reply-To: <20250515234154.1859366-22-trini@konsulko.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 19 May 2025 11:23:56 +0300
-X-Gm-Features: AX0GCFsNHtEdP2h4_BKjYq7hh7FZ0HiYEsx3fXWl1gxT5yes_5CTk9xL48U_XAA
-Message-ID: <CAC_iWj+R__yNe_Av4g_6zkoQTCK+=SZc_ryF9PZP6G8un-wFjw@mail.gmail.com>
-Subject: Re: [PATCH v3 21/22] global: Avoid indirect inclusion of <env.h> from
- <net.h>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, Angus Ainslie <angus@akkea.ca>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ian Ray <ian.ray@gehealthcare.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Le Jin <le.jin@siemens.com>, 
- Martyn Welch <martyn.welch@collabora.com>, Niel Fourie <lusus@denx.de>, 
- Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>, 
- Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>, 
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB8146:EE_
+X-MS-Office365-Filtering-Correlation-Id: f4c26d88-b2e6-4d5d-2294-08dd96b011ab
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NXl2WFJmNU1IYTE1RU11QStET3N6by9ES1hQRjhuZ2VXbm9ERVkxUjRvZG91?=
+ =?utf-8?B?YTJWYVhaL0pzK1lQak9leS83UEJSLzJud253YTM0SENQSEZMVXR0MHJ2NEwz?=
+ =?utf-8?B?NThPOU5ZSEloRXFNNUs3VWIrRFowb25abUw1ZE1xNmVLSGFZVlE3V0dnQTZx?=
+ =?utf-8?B?b1pybXhMM2dUakhuMW42eUpiMEpPVTJRdmpCemQ3OTR4eE5iS21idlpNNUV2?=
+ =?utf-8?B?R2Y0TTNXTjJFZDd3UDBtZnlzMHFzRGVPemU0WmovVzdtcWp1bW56NVgzUi9F?=
+ =?utf-8?B?czhMRmtSUjY2R05KQlJaT3RSK2JWekZ6K1cwbDlod0FxTHB3MVdRZlVia0hK?=
+ =?utf-8?B?VFFYcWtDOFJXZ0ZBMTc2b2FPQm91WUU5V1ZVUWZ1NnVRYTRUQWY5S3h0RTZQ?=
+ =?utf-8?B?OXIzM3BZUXFmVVRBdGU3U0JFbW84WUFkV29OWWx3SVBiQzdoN1VOUGFWa2xP?=
+ =?utf-8?B?WEFlU1dKSUV6VnV0UUNJZXFhcndzNUhxNzh3aU4wOEVPK3JLUXVEV1VSWkRB?=
+ =?utf-8?B?ekQxTTRpdnJpd2N0QmczN3N0N09XSVFlU1gwWnBNNlo5d1NUeXlpSU5iZ1l5?=
+ =?utf-8?B?N21NaHg4QldOL2NZRFUyeXRULzJlWTBQN3lZRy9WUFp6RGdkY1BnRmZtaWk1?=
+ =?utf-8?B?cHhtV2dBd2N2R2dDUEY0VGdIQUtDaGZDRjJ0Z0NvZjZFZDhVSmxGcis4cXFM?=
+ =?utf-8?B?S3hhWkNGK0NwN3AvRlphODc5U2VhdDN0TkVQaEZ4OFRLYmRpdlFTRHhzRkxC?=
+ =?utf-8?B?cG8rMFNXUFVlUjRramVLalRIS1EwNXZjZlR3ZHFDMVpHOUo3YlhkVnlvaTZ3?=
+ =?utf-8?B?cTV2ME1peVFUc21MRjZ4ODAweTdYRmZhck1BUzhzWWpUb3hGODlSaHI3Tlhz?=
+ =?utf-8?B?b29nejNrMTMrOTlVR1pYZVJTT2UwODNIMm9sclRBbnh6R1daVlJyTGhiRWZS?=
+ =?utf-8?B?anNHK1F0RElTSkE0bGlkVHB5Ky9iMU9ZVmNid3AzWXBHeW94Zi9yVnVhQklT?=
+ =?utf-8?B?RGsrWkhwdGE1dm56V1E2bWc5STB4Q2tFWHU2NlZxc3c4TytBZk4xdnk1NjNv?=
+ =?utf-8?B?NEFoRTZaWGVvcTZ4NC9vN1h1TlZzRE5FRzUyTmowNEJTM2g5RkZRZWFtNlpU?=
+ =?utf-8?B?SjdNWkVqclZJL1VVTi9KRmcvSDdPclhaVGU2L3JUMHFXcDBwc0xIMEhmTEFF?=
+ =?utf-8?B?QjR3Qk1IdENnUzdNdWVNMERrbi9qcFlHeDVwOVFLR3VLb2FObFR1dm5yc2o4?=
+ =?utf-8?B?bVB1bWRSZWFlMTJiMnhBY21hTUZjTHBCbFJFdUJycjRBWnN1SWs3MDl5dW9V?=
+ =?utf-8?B?MUNISlpOWFBaUHRhS29Yc3JOVXpWQ3JVZ1RmSUtZQzVsc2doY2g1WG5TUWFL?=
+ =?utf-8?B?V013NzNhK010akM0WmFha2U4dmNSRU5NWnpCVUJIQm5IZGVyOUJqdEx6RWd2?=
+ =?utf-8?B?RlUzOUJWWXZoam8xa3dpMUk0ajBqWFJ0ckNFbG1xc2lTSlF0b3ljOUhEcEpM?=
+ =?utf-8?B?SjV3UFRYa001S1FFTlQxb05DRU9WeExqbjZ4SWV4WGlDa3VwSmM5WDRmVzgx?=
+ =?utf-8?B?dTJ4RkVjSHpMK00xSGl4aVRFSUVUblYxZnVRbXU2YjZ4NjdyemRGR3RIMDNW?=
+ =?utf-8?B?c0pDSVIrSWNJWU1MaFJURUt2Z3Y0ck1jL2RDOWx6M3o0b0ErTHlhWEJUbzB5?=
+ =?utf-8?B?RE9RdUlLMWd3U05TamNUQjR3amtVY3JteHVZNnR0MFltYm9QUVN3bFFpRDZh?=
+ =?utf-8?B?WmZERU9pUzNKamczK0dGTm1NUGpBcHdBb2N1enplNDAwbTlnMU90WUxZbUMz?=
+ =?utf-8?B?NzJXUUZUZ1prTEN6em45QkkwOU1QeGx5dUFxN2w4aW95ZnVtSDU1akQ0TWtW?=
+ =?utf-8?B?alpSWjNZNThXeC9zMWswajA2ZWlXVTE5SUhBdDU3aHgyZW1DaGlwWFVxN3hk?=
+ =?utf-8?Q?iMjWdB41zy4=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NFdDV3ZQVlJSeC91VjNaSlFlLzBRM2hzVXdDN3kxNDFlK25hZUxNN2V5SEZI?=
+ =?utf-8?B?ei8rNXdrREF0ZWh5YThtd3g5NUFOVHVENDVHYkEvRCs1M3JFcTRvbHJRMkVW?=
+ =?utf-8?B?cFhWQmVndGVlN0IyenppcWtpTGRsWVlFSjRMU0Q4OEdQZzNLQUFDakU4dnY4?=
+ =?utf-8?B?ck10RjVqMXJIbFFMQjI1TzM2bDNrWDRwc1BoUzQvY2dmVlY1eTIvL3VSV3Fh?=
+ =?utf-8?B?NWFsUW0rMjZKYkV5WnJFcVBDeWd0RlRtZWJWWTNtRXdZWXByL0ZkM0R3Zkg1?=
+ =?utf-8?B?dUpVSEUzelZJTXRlZytMOUpYbHZZbHdIbHJTRGRsN0hIVFc1cTY0cWlVSGQw?=
+ =?utf-8?B?VVdSZXl5d1NSZGpoRWdmNWlBSTF2UUI4bTlQYlhVYWs2RmZ0RVp6YzlCbGVF?=
+ =?utf-8?B?TlJwNHpCT3lCRDIzMTE4dWNNeHJQTE5VVk9tNW10eXpiY3pwS0RwU2xJRDVx?=
+ =?utf-8?B?UlpRSjQ5Z0hEUXJ5cC9KME9uemkyZEc5RmpaTkIxQnZBdVp4Qkl5Y3NlMXpG?=
+ =?utf-8?B?WG9va3ZRb0V1b0hvV1ZLTktNbWNxSW94K1I1WDVhNWRzN0pTN1NoNG81eW82?=
+ =?utf-8?B?QlFLaXlLMnNKM2IrTkE2bE9iQnNuUjFlR1lTZGdYUXdCc3dtTE00UzRYVDNF?=
+ =?utf-8?B?dHdBWDMrK1dFemtxSGJwcjFUZkNWNTkwRGEvb205UmVkRnU5VEt4TE1DZnpv?=
+ =?utf-8?B?RUkvTDYxS2srSk81NjlDZkxzMDQ1Q3NFTUFBTzFHMzRlKzU1eVpXU0dqR25K?=
+ =?utf-8?B?ZXZpa2gvU2xVT2daMnNZaGU1dHZJTFc0a3NuQ2FvYThTNU9nMlBzUlZJS3NE?=
+ =?utf-8?B?MUFnT3ZJN2l2N0cyYXY1dDd3Y1JuQlh2MzRKS0JCNGw4VXFrcUdLQlQzQzlR?=
+ =?utf-8?B?alJyMVI0Y3ozcmp3RTlqVHZmWUdSbGU4ZHdCTU55RE9mdG51ZzlhVDcraVI3?=
+ =?utf-8?B?L2RJWWFXN0p1NVh2VElxMWtMVUJTd2VzVm1TdmFnRjRRczhKR1NFVFhXaC9L?=
+ =?utf-8?B?eWFTOWt0WVJNWXlWT1VXcWJSYnIwMlBmdC9POEh1TzNwRDd6WTJUU0UvNC9X?=
+ =?utf-8?B?R3JaZ1dnTm1KOHBxOEJJMk84OGRlOWd3cERXcHloVDN1VWRPYmg3MlJ5ZVdT?=
+ =?utf-8?B?RHhCVUpJQlBzWlM3SXpsODZGZDM3R3ZmVExIK3VDeXl4U25oR1ptQXdaOEhj?=
+ =?utf-8?B?RGlibVlIRVN3M3dBc1BFZ2ZzSjc3cTkrOXk1RndFSFQxc0NrT2J1OVRJNnFo?=
+ =?utf-8?B?eURjUzNIOEtzS1pZV25haVpGUnc4bnREWXZ6QjJUN2VUdlRlWXNWLzZlVW1C?=
+ =?utf-8?B?Ri9qZEpKY296YURFcmVUajgzTFN0NVZjeXJoUnhydFBiYXNid0tEbXFMRkdC?=
+ =?utf-8?B?eFBzTzdBaW5vRDB5dDY5dVpIS1pyOHhKeWNCRVZYR0RBcVdyaU9YUkRJUTlD?=
+ =?utf-8?B?RUtNcWF2UzU5TWZWQmVqTDRIWlJibi8xOGloZm1WVjZmV1E3VVdiZ2RQSTZL?=
+ =?utf-8?B?eEJBU21JS0lrbkF5c3dPWkNjNlh1bjFlZldSNXlBZlhQeWlrNXJVcUsvSTVK?=
+ =?utf-8?B?eUE5cThvT1RobWFpVjdoR3B5cGJoSWVaNFhTU3RnS3U0UVZPYlI4SXVISlgz?=
+ =?utf-8?B?bS9CRDh1TS9RczU5OWhNV1dZeVNsZzVyTzA5MWtHbTV5M05tS05JUFhKa0hQ?=
+ =?utf-8?B?L0p6VS9oV0dDWnIwRzJKZ3FJUzMvUWpKYi8xZ2c5R2drYnlSbVZRWUk1NzV3?=
+ =?utf-8?B?Mjh3cCtoQ3Y1ZlJtYnBGTVIrT21JdzAyUWFIVk1zTzZ4anBEdnNtaDNZUDdk?=
+ =?utf-8?B?UVhWYlZpeElNeDRPK2lCRmFVT1FCMlVMY0RRNzR1dk14a3ArVkQvOFF0YmlF?=
+ =?utf-8?B?djVrQ3Evd1BTaEtHVmQwbElaUm5OWlgrajA4d3FvanBWd1RPOVdlN3B3YmlO?=
+ =?utf-8?B?L3d1eGgrWlZIMkFKZU5FbzBGMEtFUTduZU41dHE3M0UvNlVUWHhhVlRRMXM5?=
+ =?utf-8?B?d2xkczF0Z21FR3VHUStscEdvZDEvMmNlZUVSUk9XK0tEV1NuUHdDZDcyOTNk?=
+ =?utf-8?B?Nm5DTlJJNmJKd0ZQY1dlWFd4SnV1cE4rbkpEc0NndkJGRzNlYytQU3pOVzVs?=
+ =?utf-8?B?V28yaDYraU1ZNVFVQWVDdHh4bGlJemRHd1QrRDlLM290Ly81cHAweCs2a1Iy?=
+ =?utf-8?B?T0E9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: f4c26d88-b2e6-4d5d-2294-08dd96b011ab
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2025 08:35:11.3331 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kQl1sfxw/J3m3VtZJfp8chW3ezxEgcwYIXsaTUONx4Iv6vihVhO5lFcq7gXy9oH7ZG2RkHi2qqxrtohscN86smqxXocAWhciq+Xx+3rOsgM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8146
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,329 +180,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 16 May 2025 at 02:42, Tom Rini <trini@konsulko.com> wrote:
->
-> Now that env_get_ip() has been removed, the include file <net.h> does
-> not need anything from <env.h>. Furthermore, include/env.h itself
-> includes other headers which can lead to longer indirect inclusion
-> paths. To prepare to remove <env.h> from <net.h> fix all of the
-> remaining places which had relied on this indirect inclusion to instead
-> include <env.h> directly.
->
+Hi Jean-Marie,
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 5/15/25 4:01 PM, Verdun, Jean-Marie wrote:
+> 
+> 
+>>> This is dangerous too. How do I know if the returned data is an error
+>>> code or actual data?
+> 
+>>> Right now, xfer returns 0 if successful, -1 otherwise. I would suggest
+>>> return ret only if it is < 0.
+> 
+>>> Or even better, propagate the error code and return data through a
+>>> pointer as argument of the function?
+> 
+>>> e.g.
+> 
+>>> static int w5500_spi_read(struct udevice *dev, u32 addr, u8 *data)
+>>> {
+>>> [...]
+>>>      return xfer(dev, cmd, sizeof(cmd), &data, 1);
+>>> }
+> 
+> I could do that but that won’t be the same logic as the linux kernel
+> driver approach which is mixing up ret and data as return value of
+> this call and many others too.
+> 
 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Changes in v3:
-> - New patch
->
-> Cc: "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>
-> Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-> Cc: Angus Ainslie <angus@akkea.ca> (supporter:PURISM LIBREM5 PHONE)
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ian Ray <ian.ray@gehealthcare.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jan Kiszka <jan.kiszka@siemens.com>
-> Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Le Jin <le.jin@siemens.com>
-> Cc: Martyn Welch <martyn.welch@collabora.com>
-> Cc: Niel Fourie <lusus@denx.de>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Rick Chen <rick@andestech.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-> ---
->  board/BuR/brppt2/board.c                            | 1 +
->  board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c | 1 +
->  board/andestech/ae350/ae350.c                       | 1 +
->  board/data_modul/common/common.c                    | 1 +
->  board/gateworks/gw_ventana/gw_ventana.c             | 1 +
->  board/ge/b1x5v2/b1x5v2.c                            | 1 +
->  board/keymile/kmcent2/kmcent2.c                     | 1 +
->  board/purism/librem5/librem5.c                      | 1 +
->  board/siemens/iot2050/board.c                       | 1 +
->  board/ti/j721e/evm.c                                | 1 +
->  boot/bootmeth_efi.c                                 | 1 +
->  boot/bootmeth_pxe.c                                 | 1 +
->  cmd/pxe.c                                           | 1 +
->  drivers/net/pfe_eth/pfe_firmware.c                  | 1 +
->  lib/efi_loader/efi_bootmgr.c                        | 1 +
->  lib/efi_loader/efi_net.c                            | 1 +
->  net/lwip/dhcp.c                                     | 1 +
->  net/lwip/dns.c                                      | 1 +
->  net/lwip/net-lwip.c                                 | 1 +
->  net/lwip/tftp.c                                     | 1 +
->  net/lwip/wget.c                                     | 1 +
->  test/dm/dsa.c                                       | 1 +
->  22 files changed, 22 insertions(+)
->
-> diff --git a/board/BuR/brppt2/board.c b/board/BuR/brppt2/board.c
-> index c0a163251b46..de206bdf1bc4 100644
-> --- a/board/BuR/brppt2/board.c
-> +++ b/board/BuR/brppt2/board.c
-> @@ -7,6 +7,7 @@
->   *
->   */
->  #include <cpu_func.h>
-> +#include <env.h>
->  #include <hang.h>
->  #include <init.h>
->  #include <spl.h>
-> diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> index b9f47006d610..8c9e98308765 100644
-> --- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> +++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> @@ -7,6 +7,7 @@
->  #include <dwc3-uboot.h>
->  #include <efi.h>
->  #include <efi_loader.h>
-> +#include <env.h>
->  #include <errno.h>
->  #include <miiphy.h>
->  #include <netdev.h>
-> diff --git a/board/andestech/ae350/ae350.c b/board/andestech/ae350/ae350.c
-> index 1d9d4a929c22..9bdd2ab17805 100644
-> --- a/board/andestech/ae350/ae350.c
-> +++ b/board/andestech/ae350/ae350.c
-> @@ -6,6 +6,7 @@
->
->  #include <config.h>
->  #include <cpu_func.h>
-> +#include <env.h>
->  #include <flash.h>
->  #include <image.h>
->  #include <init.h>
-> diff --git a/board/data_modul/common/common.c b/board/data_modul/common/common.c
-> index 9e35dc5d6cb1..7d344792937e 100644
-> --- a/board/data_modul/common/common.c
-> +++ b/board/data_modul/common/common.c
-> @@ -12,6 +12,7 @@
->  #include <asm/mach-imx/boot_mode.h>
->  #include <asm/mach-imx/iomux-v3.h>
->  #include <dm/uclass.h>
-> +#include <env.h>
->  #include <hang.h>
->  #include <i2c_eeprom.h>
->  #include <image.h>
-> diff --git a/board/gateworks/gw_ventana/gw_ventana.c b/board/gateworks/gw_ventana/gw_ventana.c
-> index 21a908c20dd5..457d8281a664 100644
-> --- a/board/gateworks/gw_ventana/gw_ventana.c
-> +++ b/board/gateworks/gw_ventana/gw_ventana.c
-> @@ -6,6 +6,7 @@
->   */
->
->  #include <command.h>
-> +#include <env.h>
->  #include <fdt_support.h>
->  #include <gsc.h>
->  #include <hwconfig.h>
-> diff --git a/board/ge/b1x5v2/b1x5v2.c b/board/ge/b1x5v2/b1x5v2.c
-> index c1aacd1458b1..ddb7304d493a 100644
-> --- a/board/ge/b1x5v2/b1x5v2.c
-> +++ b/board/ge/b1x5v2/b1x5v2.c
-> @@ -17,6 +17,7 @@
->  #include <asm/io.h>
->  #include <asm/mach-imx/video.h>
->  #include <command.h>
-> +#include <env.h>
->  #include <i2c.h>
->  #include <input.h>
->  #include <ipu_pixfmt.h>
-> diff --git a/board/keymile/kmcent2/kmcent2.c b/board/keymile/kmcent2/kmcent2.c
-> index 783853d5c6f6..0f43ebfec4d5 100644
-> --- a/board/keymile/kmcent2/kmcent2.c
-> +++ b/board/keymile/kmcent2/kmcent2.c
-> @@ -6,6 +6,7 @@
->   * Copyright 2013 Freescale Semiconductor, Inc.
->   */
->
-> +#include <env.h>
->  #include <event.h>
->  #include <asm/cache.h>
->  #include <asm/fsl_fdt.h>
-> diff --git a/board/purism/librem5/librem5.c b/board/purism/librem5/librem5.c
-> index 8ca8792fa422..5178ee6929d8 100644
-> --- a/board/purism/librem5/librem5.c
-> +++ b/board/purism/librem5/librem5.c
-> @@ -6,6 +6,7 @@
->
->  #include <malloc.h>
->  #include <errno.h>
-> +#include <env.h>
->  #include <asm/io.h>
->  #include <miiphy.h>
->  #include <asm/mach-imx/iomux-v3.h>
-> diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
-> index d827f728a08c..161210c60a96 100644
-> --- a/board/siemens/iot2050/board.c
-> +++ b/board/siemens/iot2050/board.c
-> @@ -11,6 +11,7 @@
->  #include <config.h>
->  #include <bootstage.h>
->  #include <dm.h>
-> +#include <env.h>
->  #include <fdt_support.h>
->  #include <i2c.h>
->  #include <led.h>
-> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-> index 0525f6e6f979..b1ed29af0018 100644
-> --- a/board/ti/j721e/evm.c
-> +++ b/board/ti/j721e/evm.c
-> @@ -8,6 +8,7 @@
->   */
->
->  #include <efi_loader.h>
-> +#include <env.h>
->  #include <generic-phy.h>
->  #include <image.h>
->  #include <net.h>
-> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-> index 0c9b4c3d59dc..0af23df3a4a5 100644
-> --- a/boot/bootmeth_efi.c
-> +++ b/boot/bootmeth_efi.c
-> @@ -15,6 +15,7 @@
->  #include <dm.h>
->  #include <efi.h>
->  #include <efi_loader.h>
-> +#include <env.h>
->  #include <fs.h>
->  #include <malloc.h>
->  #include <mapmem.h>
-> diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-> index 6e5e0f99ea42..faa8d729b151 100644
-> --- a/boot/bootmeth_pxe.c
-> +++ b/boot/bootmeth_pxe.c
-> @@ -13,6 +13,7 @@
->  #include <bootmeth.h>
->  #include <command.h>
->  #include <dm.h>
-> +#include <env.h>
->  #include <extlinux.h>
->  #include <fs.h>
->  #include <log.h>
-> diff --git a/cmd/pxe.c b/cmd/pxe.c
-> index 0f26b3b42197..e82247af6c07 100644
-> --- a/cmd/pxe.c
-> +++ b/cmd/pxe.c
-> @@ -5,6 +5,7 @@
->   */
->
->  #include <command.h>
-> +#include <env.h>
->  #include <fs.h>
->  #include <net.h>
->  #include <net6.h>
-> diff --git a/drivers/net/pfe_eth/pfe_firmware.c b/drivers/net/pfe_eth/pfe_firmware.c
-> index da4f2ca42a5b..b821fb17a1d6 100644
-> --- a/drivers/net/pfe_eth/pfe_firmware.c
-> +++ b/drivers/net/pfe_eth/pfe_firmware.c
-> @@ -12,6 +12,7 @@
->
->  #include <dm.h>
->  #include <dm/device-internal.h>
-> +#include <env.h>
->  #include <image.h>
->  #include <log.h>
->  #include <malloc.h>
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index c0df5cb9acd9..298149bcc332 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -12,6 +12,7 @@
->  #include <charset.h>
->  #include <dm.h>
->  #include <efi.h>
-> +#include <env.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <net.h>
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index b3291b4f1d52..9db738ead9dd 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -18,6 +18,7 @@
->  #define LOG_CATEGORY LOGC_EFI
->
->  #include <efi_loader.h>
-> +#include <env.h>
->  #include <dm.h>
->  #include <linux/sizes.h>
->  #include <malloc.h>
-> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> index 92bd7067a7fb..043d2ab6e946 100644
-> --- a/net/lwip/dhcp.c
-> +++ b/net/lwip/dhcp.c
-> @@ -3,6 +3,7 @@
->
->  #include <command.h>
->  #include <console.h>
-> +#include <env.h>
->  #include <log.h>
->  #include <dm/device.h>
->  #include <linux/delay.h>
-> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-> index 19172ac959ac..6862869d9e30 100644
-> --- a/net/lwip/dns.c
-> +++ b/net/lwip/dns.c
-> @@ -3,6 +3,7 @@
->
->  #include <command.h>
->  #include <console.h>
-> +#include <env.h>
->  #include <lwip/dns.h>
->  #include <lwip/timeouts.h>
->  #include <net.h>
-> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> index f05c4cd3f64f..abc52b32049c 100644
-> --- a/net/lwip/net-lwip.c
-> +++ b/net/lwip/net-lwip.c
-> @@ -3,6 +3,7 @@
->  /* Copyright (C) 2024 Linaro Ltd. */
->
->  #include <command.h>
-> +#include <env.h>
->  #include <dm/device.h>
->  #include <dm/uclass.h>
->  #include <hexdump.h>
-> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-> index 4f9b2049187c..56d27f821212 100644
-> --- a/net/lwip/tftp.c
-> +++ b/net/lwip/tftp.c
-> @@ -6,6 +6,7 @@
->  #include <display_options.h>
->  #include <dm/device.h>
->  #include <efi_loader.h>
-> +#include <env.h>
->  #include <image.h>
->  #include <linux/delay.h>
->  #include <lwip/apps/tftp_client.h>
-> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-> index a3b82908877f..46c16edcc440 100644
-> --- a/net/lwip/wget.c
-> +++ b/net/lwip/wget.c
-> @@ -5,6 +5,7 @@
->  #include <console.h>
->  #include <display_options.h>
->  #include <efi_loader.h>
-> +#include <env.h>
->  #include <image.h>
->  #include <lwip/apps/http_client.h>
->  #include "lwip/altcp_tls.h"
-> diff --git a/test/dm/dsa.c b/test/dm/dsa.c
-> index 9a31ae39d952..46e48741fbaa 100644
-> --- a/test/dm/dsa.c
-> +++ b/test/dm/dsa.c
-> @@ -3,6 +3,7 @@
->   * Copyright 2020-2021 NXP
->   */
->
-> +#include <env.h>
->  #include <net/dsa.h>
->  #include <dm/test.h>
->  #include <test/ut.h>
-> --
-> 2.43.0
->
+Fair enough. You could have the same ternary operator to better match 
+what's in the kernel.
+
+Can you also reuse the macros that are in the kernel already? 
+W5500_SPI_BLOCK_SELECT, W5500_SPI_READ_CONTROL and 
+W5500_SPI_WRITE_CONTROL seems to be of interest?
+
+> 
+>>> Considering the only difference between w5500_spi_read16 and
+>>> w5500_spi_read is the 2 or 1 as last argument of xfer() call, you
+>>> probably want to factor them out into a common function to limit
+>>> duplicated code.
+> 
+>>> If you have access to the info, I would suggest to NOT use a u8[3] array
+>>> but create a small struct which specifies what each u8 is for so it's
+>>> easier to read and debug later on. This applies to all other functions.
+> 
+> I can do that
+> 
+
+If you do that, please also update the kernel code to use that :)
+
+>>> Looks like endianness swap to me? Is this supposed to happen if you have
+>>> another endianness for the SoC than the one you're currently using to
+>>> test this?
+> 
+> I don’t have access to anything else other than an ARM SoC to test it. It seems
+> required to swap the bytes from the SPI read process
+> 
+
+Yeah the kernel seems to be using __be16 type for that. And the write 
+part seems to be done by hand for the address and data.
+
+>>> Please use log_debug()/dev_dbg instead of debug().
+> 
+> Neil initially asked for debug, I can swap to any, just let me know which one.
+> 
+
+debug() can use the log framework if enabled, but you still need to add 
+#define DEBUG wherever you want to build the logging messages. Whereas 
+with log_debug you would only need to raise the log level at compile 
+time to see the logs. Same, but different.
+
+The benefit of using dev_dbg is when you're having multiple devices from 
+the same driver, then you can identify from which one the message is 
+being printed. You could have two Wiznet W5500 for example, how do you 
+know which one's printing which message?
+
+Up to you,
+
+Cheers,
+Quentin
