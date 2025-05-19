@@ -4,76 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E541C2D0CD
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 05:35:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A90C3DA6D
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 06:31:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1D0281F66;
-	Mon, 19 May 2025 07:35:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BDA0781E72;
+	Mon, 19 May 2025 08:31:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tFriNYzD";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1747636293;
+	bh=sIS/b7ukHk4DvoEA0RKPNCnn5smdAytb6edPQfah6v0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=mJ/WQy+6HgKODkvUDwKqA346amoCkpuMWbEyfZ4Le/pZDn2OTybC0+oQR8vl8C/pp
+	 Epvu0AtGxwjgpHRr6OQOPvvZTwf0tZQOchisQ8kew9fN5xlLaGUtIK9EKZw2vUINk7
+	 kjogi04yKP63IsWuriJGvIv2B5e4ShGzvyqh1GqZGeat8ufpEHr9+ttraJFpbzkj/d
+	 pHkj/RGInkAIpRxh0N4bB1yYQkl0OKv7Gsprlkna/Jt/qNBiRdtlDOK+JdQk0QlWQF
+	 sQ1flxuy2hKYZJmMY8zpA5YSpMlOFrlshqgBwk7+DMZseyFUWZtzFTUQI/FKfOYc3+
+	 CUiI5ToCDLiug==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A38E81FFC; Mon, 19 May 2025 07:35:15 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1574C81F66; Mon, 19 May 2025 08:31:33 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FA7A803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 07:35:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CB63803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 08:31:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-7053f85f059so32488697b3.2
- for <u-boot@lists.denx.de>; Sun, 18 May 2025 22:35:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747632912; x=1748237712; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F1Fw+Vzj8ovZb3V20iOH4C3yqA2FSTifYSD+4Ytkf5E=;
- b=tFriNYzDyXYTJA7na2C5eBHjkGMz9dH3QpU6v6XTzYWEXg2G03z2sW6Ewh6rp30Uxt
- BzsEX/AftRLszZOjXYmnUy1/mqkr4bjAdCa3pIW6clfRxns6iugD3Pl4zq3Idhfyjpid
- nNsZGA2seiuRmxwPbV/o6Im7Wv3IO2nZ806DtPhqOwSOd9G5prQTxaFxOFhUMUwm5lyW
- wj7P2/iwgLZ0r2SK4trjfUYwnWT77qIjWHY5Z1V7xgczjhovCNEhTp4dBEiHBoo9URqp
- 5hqwj9t+Z0R2VhpTcXnvdhWuD4RkbhThvOwUmFc9LJFqfuHrlE/j/MmVLtWYXrrt8ppR
- /Wcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747632912; x=1748237712;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=F1Fw+Vzj8ovZb3V20iOH4C3yqA2FSTifYSD+4Ytkf5E=;
- b=kKJJ++pymDj72M3jSmUtg3SkTzUOK1MYiKTie6QRbOOE/X79Jx9h5+hf/uXbYUSX8P
- 8uZ0wgLQdzUUPTJysjwqxPp5vDLDDnFjVWghmu2FkLz1r53W/SZVwXeMpAEO61F8oFqZ
- mRUglRxPhZIbeELql59D6EPNZFPHcm2PTAQczXE0IkDAM9Owrw+1b8u2lp10Wk8WdIzx
- 2NbMDed/KPrzRhXQCw+fnP44Vz+NMe/gdyVGOTXyqMM6WbNBt4CmgKsgqjonZw9ABpmR
- YoPdkPiAC/j7BmXRTa7RrbCK+MqIzUHuzfE69TN7TSdKGSLoXppD8k2TfZUfKqJoM/rq
- Vfww==
-X-Gm-Message-State: AOJu0YzU0sG29vAGIfGWWv3cnf0gaipxGcNB30eyWxvF6fZzNLihgSQZ
- x1WQK3XJaDbMmsDeL9oXeQzNCYRxWxIsO5pjlg7f6Fi2+Jq+uVdbeYIxR4j7urt/kGL/tNf9BWB
- AS53imRYcz5+kX+R3HPTfXG8IL2nJefI5O85kA4iKC75dCUi5I153SJw=
-X-Gm-Gg: ASbGncsOlUeA+bh4VtCxN+x0gGiUGuBdlaA3OM9Au83XPImunR/3pSnJtep4E0X7Lo+
- q9UldnAgEtbvitdY4hnhimZbfkm1YJuNsZW0robd6el1mHIlwK+XPbuDYspkn0fbv/Zo+RPnt0D
- 3sJCMmGOD4P2Y8iBwwCZZ1B68jVAQKtdOxSg==
-X-Google-Smtp-Source: AGHT+IH72QPbXeU1ukUGXA+W273ZFP+KgYctkmYey/4Cc8clPZd7Iyohn3P98xaCxofzvkz/s8RJs+kZIGll+s2GFPI=
-X-Received: by 2002:a05:690c:4b8f:b0:709:171e:1321 with SMTP id
- 00721157ae682-70ca7b8e205mr152154767b3.25.1747632911861; Sun, 18 May 2025
- 22:35:11 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4b17B906Qnz9ss6;
+ Mon, 19 May 2025 08:31:29 +0200 (CEST)
+Message-ID: <9810a0c8-9052-4667-b91a-d3b3499d5f38@denx.de>
+Date: Mon, 19 May 2025 08:31:28 +0200
 MIME-Version: 1.0
-References: <20250518064344.14467-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250518064344.14467-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 19 May 2025 08:34:36 +0300
-X-Gm-Features: AX0GCFtHDYRZE4OrHZRJgzt1zYzvtNXKQIUlLsrLTfoGvw44NugJytbBQj_1I44
-Message-ID: <CAC_iWjJVbc4pVJrh55bwvsP50U7=i8fc5xMeES_FxC6EE937mg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: correct EFI_TCG2_PROTOCOL_MEASURE_DTB
- description
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: Please pull u-boot-watchdog/master
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <f5f977a1-34fe-4e2a-a604-0f0695f3bc7b@denx.de>
+ <20250516191837.GN100073@bill-the-cat>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20250516191837.GN100073@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4b17B906Qnz9ss6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,39 +71,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 18 May 2025 at 09:43, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> %s/data that change/data that changes/
-> %s/cannot be used has/cannot be used as/
-> %s/Otherwise/Otherwise,/
-> %s/allows better measurement/allows for better measurement/
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/Kconfig | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
->
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 7f02a83e2a2..95b51d4da1f 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -443,10 +443,9 @@ config EFI_TCG2_PROTOCOL_MEASURE_DTB
->         help
->           When enabled, the DTB image passed to the booted EFI image is
->           measured using the EFI TCG2 protocol. Do not enable this feature if
-> -         the passed DTB contains data that change across platform reboots
-> -         and cannot be used has a predictable measurement. Otherwise
-> -         this feature allows better measurement of the system boot
-> -         sequence.
-> +         the passed DTB contains data that changes across platform reboots
-> +         and cannot be used as a predictable measurement. Otherwise, this
-> +         feature allows for better measurement of the system boot sequence.
->
->  config EFI_LOAD_FILE2_INITRD
->         bool "EFI_FILE_LOAD2_PROTOCOL for Linux initial ramdisk"
-> --
-> 2.48.1
->
+Hi Tom,
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 16.05.25 21:18, Tom Rini wrote:
+> On Fri, May 16, 2025 at 06:42:11PM +0200, Stefan Roese wrote:
+> 
+>> Hi Tom,
+>>
+>> please pull this next batch of mostly cyclic patches from Rasmus:
+>>
+> 
+> Oh, and can you please update the .git/config here like you did for the
+> marvell PR? b4 doesn't like the git@ syntax so I had to do this manually
+> :)
+
+Ah, I knew that I missed something here.
+
+Thanks for reminding - changes are made.
+
+Thanks,
+Stefan
+
