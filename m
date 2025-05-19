@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3285C3ABDD
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 13:35:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D44C3ABD8
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 14:11:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F4D182B0E;
-	Mon, 19 May 2025 15:35:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B782082B0E;
+	Mon, 19 May 2025 16:11:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M6gTXjXj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Kf1ONWij";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A0C82B32; Mon, 19 May 2025 15:35:09 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id BC7F381F66; Mon, 19 May 2025 10:46:36 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90C5181FEE
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 15:35:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9A14803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 10:46:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ad53cd163d9so482030666b.0
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 06:35:07 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-442ccf0e1b3so50984365e9.3
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 01:46:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747661707; x=1748266507; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=67TX9BENfpuEUro5thPb5C8dfwu/e2aIKpyy1xWTrcE=;
- b=M6gTXjXjWzLEDEXyoiL3aN9/6SWFB2AqXngnTmn2WmLu+MLPn+C6tDqIlTaDABdR6n
- 8YTN5jr8GZsC9p8xanmdeCeMDm/A8GGq9lJzXExKCE7buFU1mVGY9RL3SGfiSbrZ/yHi
- W/koGuPR5WZkmV/w1f3yEjabmFYhS6jGW/LvcrTXIAfr3UDnmrbIr1aby1jnIE3/yClu
- AGTXLRN6rEgjmGJvbkeG3PbUkUC3g1A1pfXlfe9ZExI5VGNLWiPBq6tE8JpIl2BJ7Lbg
- 7h4BdBrSDMfIsfTe4bRo1yeDod+xkDOZuwhgWsLVpZIOAEwelkmBPo/3oPXH6ofjzjaE
- 9IRw==
+ d=gmail.com; s=20230601; t=1747644394; x=1748249194; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iasu8tCinqbhSor1J++C1Q3fycjajRSfvyPET+TiAy4=;
+ b=Kf1ONWijtbX0DQyfpAyz4tn+f5Qc8iCzFyJQbLbaWv5o5tVfqJlugiZtN8MbLI4a06
+ 1W5V9HQvni+0PUy9lSMDPFBzhTV3a1wWV3cO4WV1di9V3A9SImDchM527hB1dvxWeYTE
+ p9a945PUFb2MSRUlBam4lDV+Og68h7qc7nKJpJQj7B0TfyMGjbWVoK+5vGL6hbyucyXt
+ +vBxcXbb+1/+EZf2ts6TSMdz9G9WYAy+ANPedJGNExhJRcrF15jzldDYPiCghi00XgIX
+ Bqh3D+zlG9FAF4QiAH3qi3yG1ooYxFrFXiucCRvjZ2doQAYdnN6xXbRHZW2OFZP9RE1c
+ oBjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747661707; x=1748266507;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1747644394; x=1748249194;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=67TX9BENfpuEUro5thPb5C8dfwu/e2aIKpyy1xWTrcE=;
- b=xJpmDj26lzbBYiZjfnuDaPvFsiQFVlYkWxzVOGx2DnPbxuJYbw8Zq+Oaf1HrSbwkbg
- WrToeyVsHRflkEMPAWcarC81Rroqkh3UTjFf+BCreesRimBdQ9TnHUsCq8eo/HXCJBxU
- HajrGly7xNwXlCzY8RMIs0MVo6Z98f64/Kk+/91hy5vMOOAflqxKCttaPyyw6YP+wwQ4
- mqdJ46XRGlTMbM43M8srDocT6WB+g3ctKzS0mzKzXKE33+ZkeHahpr8qYy2GR3OagEb1
- EaSmqy7sVFa/+OaBy9EtQ7CTD157amIWSg6Mh7IKaB/+mF7kDQjVrJeF+8XqpSVyIcjU
- trfQ==
+ bh=iasu8tCinqbhSor1J++C1Q3fycjajRSfvyPET+TiAy4=;
+ b=psVNm0JLe4EYK7F0VWtD/7aD0m9mMGIbEuYGU0+UMWyesZOlBLUdLcKhmaPEh4KUAk
+ I+ZeMkvFjzeMn++VEm2Q1NuNzKGW1J0AcEbExrBz78SyaD9wDRa94IKAAVwjx9n5h9qu
+ HjtHlD7HltRMdfkbncx/Tp27ePPVGBDPFQpGTAcE6q+MYEK97jM6UnrPntwH/JzXQ4ap
+ /6fgBn9sWQnN39kyoaq4DH+AouLk8hzVJUpShplRXWXtZ95bv/bS81tqlvpivQGqt3mE
+ Zndb5jZ/+kKEKJzgY7KhaT+IT6q7PEP5voF/m0SWwxGsfePxvUIcqZltg/ISDvWNGgVd
+ 7Fzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLiS1iK4mrFOufybRaQHcTv2o+AXY6zzLTM/LzTCjHi1dnxuhsuiqmwnVCL8x/+hQ4DXNrrQU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwfPY+jijawSGZbrerJjD+CcM+Cp8S2zshsU2aoOEP2CkYpBWRU
- wNO/nJr2i2cH/mp1UTapkWNGWqoniaZukEBiYhMu03pT1FV3ld+AEOjhiXxbzDLxUzC7ho9j8BX
- TwqIzjl61OiCcVGuIyK+vnrB4h/AKLag=
-X-Gm-Gg: ASbGncsSKsccJ3VFN21eH8GUAZXHYV1TvloKjwS1444naof3XPUl7WYe29ETAJNBSwb
- ZeNMnpUL65lnNc7kJrL38ZT9fmX587EXmfCl2mkhleQLNVOB5W2iddLlJS/Zhq/FGZ2Vw258X5u
- b5HU4jDRszmjDaV3geavI8+8O9GdgsjTFYpvnGbRvmEg==
-X-Google-Smtp-Source: AGHT+IH0MeVqYgmwlB67dmIeAwSFTNGtUdeqone5PvDsYKJH0Y1A1m6pgk0JqyqX/6UYEWV1mE9cirEq9F3J37jxGo4=
-X-Received: by 2002:a17:907:c985:b0:ad5:365a:1352 with SMTP id
- a640c23a62f3a-ad5365a29c7mr751001366b.1.1747661706853; Mon, 19 May 2025
- 06:35:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250425-usb_onboard_hub_cypress_hx3-v1-0-3cc5a06087cf@thaumatec.com>
- <20250425-usb_onboard_hub_cypress_hx3-v1-1-3cc5a06087cf@thaumatec.com>
- <CANAwSgSMJGy6hXP8++pfnqkuzH66zhn=UROK4MTs5mrdnyyhFA@mail.gmail.com>
- <3d255a1e-5a3f-4cfe-ae0a-6736dbc49340@cherry.de>
-In-Reply-To: <3d255a1e-5a3f-4cfe-ae0a-6736dbc49340@cherry.de>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Mon, 19 May 2025 19:04:50 +0530
-X-Gm-Features: AX0GCFvXHtYe036mXr_yelGM8FTnrS17mLMtYCpO0GN4DEMIN4gOIv_K7dh2410
-Message-ID: <CANAwSgQ+hjmsbG-=o7-5b6tU--OMF6RNmk_4FQnZmMXU_erf+Q@mail.gmail.com>
-Subject: Re: [PATCH 1/4] usb: onboard-hub: Use the ofnode to check if the
- peer-hub was probed
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, u-boot@lists.denx.de, 
+ AJvYcCWtmz3cyxa8nzuc2WbuX6BKphQG2DJE6ASkMDQb59f3r8tNW/tbIhIOkhFq3JxK/SAWtnK246k=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx682s+TphMZC+oriajirHjG4Cpckc/u4yabL/zoGyqZtYCnnDN
+ 2UCqLBla6JAQ4MUlnoYSqvr+RlaPwWM0poCoK6cpeBXlUoem2SynRm0Q
+X-Gm-Gg: ASbGnctrYKYHvcjC9HNjj7nbuhCXWCbTEGXyLn2g5a2SbhEaX5Ect7ObLIz07jipCpB
+ EKk5b4NrSJF9vyeGSftDotcLQQGQ6xRcVrvirySqefV+70non7PUvdDAp/NOJa0sxm91Js13Lzx
+ C/eA9xEsOKWdFFh1cyCExN6E8/Y/XTTms2ULpd6BJVqDs4bHeCV7pY+A0ZbFWwgm7kmCNhnmKeS
+ L7rSSmXkfXa5t64OmqKO58L2VIw6+RpqOLTS7DEaO+q9RC5ngaNuNOUbIXO9RrhO82EVJNx1dgz
+ S05lLkOh2c7pamzrBWAKCPL7zgw80gGeUfmJIYg2mIJW5PI=
+X-Google-Smtp-Source: AGHT+IG57nQI4j4Zo6MdGq3jg17Q6rs4d9BzN2WjF8xsqoTqvq+K4LZvxRH21hvKHOb/Ch9siloadQ==
+X-Received: by 2002:a05:600c:4f42:b0:442:f4d4:522 with SMTP id
+ 5b1f17b1804b1-442fd60a5bemr108025895e9.5.1747644393864; 
+ Mon, 19 May 2025 01:46:33 -0700 (PDT)
+Received: from vitor-nb.. ([2001:8a0:e602:d900:984:e6e4:a4ae:d95d])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-442fd59ab3esm133143205e9.40.2025.05.19.01.46.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 May 2025 01:46:33 -0700 (PDT)
+From: Vitor Soares <ivitro@gmail.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
+ ivitro@gmail.com
+Subject: [PATCH v1] toradex: tdx-cfg-block: add new pid4 support
+Date: Mon, 19 May 2025 09:46:30 +0100
+Message-Id: <20250519084630.376452-1-ivitro@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 19 May 2025 16:11:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,110 +97,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+From: Vitor Soares <vitor.soares@toradex.com>
 
-On Mon, 19 May 2025 at 18:45, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Anand,
->
-> On 5/19/25 2:42 PM, Anand Moon wrote:
-> > Hi Lukasz,
-> >
-> > On Fri, 25 Apr 2025 at 16:32, Lukasz Czechowski
-> > <lukasz.czechowski@thaumatec.com> wrote:
-> >>
-> >> Currently the check in usb_onboard_hub_bind is relying on specific
-> >> compatible string for the Michrochip USB5744. Replace this with
-> >> more generic approach that will allow to add new types of devices
-> >> to the of_match table. Because the driver only needs to bind one
-> >> "half" of the hub, the peer-hub node is used to find out if it
-> >> was already done. In case peer-hub was bound, -ENODEV is returned.
-> >>
-> >> Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-> >> ---
-> >>   common/usb_onboard_hub.c | 15 ++++++++++-----
-> >>   1 file changed, 10 insertions(+), 5 deletions(-)
-> >>
-> >> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> >> index 7fe62b043e6a..9f8c1a304cdf 100644
-> >> --- a/common/usb_onboard_hub.c
-> >> +++ b/common/usb_onboard_hub.c
-> >> @@ -9,6 +9,7 @@
-> >>
-> >>   #include <asm/gpio.h>
-> >>   #include <dm.h>
-> >> +#include <dm/device.h>
-> >>   #include <dm/device_compat.h>
-> >>   #include <i2c.h>
-> >>   #include <linux/delay.h>
-> >> @@ -179,8 +180,8 @@ err:
-> >>   static int usb_onboard_hub_bind(struct udevice *dev)
-> >>   {
-> >>          struct ofnode_phandle_args phandle;
-> >> -       const void *fdt = gd->fdt_blob;
-> >> -       int ret, off;
-> >> +       struct udevice *peerdev;
-> >> +       int ret;
-> >>
-> >>          ret = dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle);
-> >>          if (ret == -ENOENT) {
-> >> @@ -193,10 +194,14 @@ static int usb_onboard_hub_bind(struct udevice *dev)
-> >>                  return ret;
-> >>          }
-> >>
-> >> -       off = ofnode_to_offset(phandle.node);
-> >> -       ret = fdt_node_check_compatible(fdt, off, "usb424,5744");
-> >> -       if (!ret)
-> >> +       ret = device_find_global_by_ofnode(phandle.node, &peerdev);
-> >> +       if (ret) {
-> >> +               dev_dbg(dev, "binding before peer-hub %s\n",
-> >> +                       ofnode_get_name(phandle.node));
-> >>                  return 0;
-> >> +       }
-> >> +
-> >> +       dev_dbg(dev, "peer-hub %s has been bound\n", peerdev->name);
-> >>
-> >>          return -ENODEV;
-> >>   }
-> >>
-> >
-> > Thanks for your work
-> >
-> > I'm currently trying to reorder my changes for the
-> > Odroid Amlogic platform on top of your patch series.
-> > However, I'm facing an issue where the probe is not getting called
-> > and it isn't working on the Odroid N2+ board. I'm struggling to identify the
-> > missing piece that's causing this failure. Could you share some pointers?
-> >
->
-> Is the probe function never called or is the device not successfully
-> probed? not the same thing :)
->
-> Looking at the device tree for the Odroid N2, it seems the onboard USB
-> hub is improperly defined.
-> Except the compatible and peer-hub properties, **everything** else in
-> both nodes need to be absolutely identical because only the first one to
-> bind will be probed, and that isn't necessarily stable across reboots or
-> rebuilds. So the vdd-supply need to be the same, the reset-gpios need to
-> be present and the same as well.
->
-Yep I have modified this locally for testing.
-> Also, I assume phy-supply for the USB PHY would be enough for toggling
-> the enable pin of the USB hub but I'm not sure if it's proper or not,
-> maybe we should rather have an enable-gpios in the onboard driver too?
->
-Ok I will check this.
-> Finally, please also read the cover letter where we explain that the
-> second patch fixes some issues when doing a `usb reset`, but that
-> there's still a corner case that doesn't work: if the HW default isn't
-> holding the reset line then the device may not appear when enumerating,
-> because the hub will be found before the device is probed and goes
-> through a reset, then the core will detect the device is removed (due to
-> reset) and not probe it, so that could also be an issue here.
-OK I feel dwc2 is not working on this boards
-so I am looking into this issue only dwc3 hub get detected.
->
-> Cheers,
-> Quentin
-Thanks
--Anand
+Add the new PID4 to the ConfigBlock handling:
+ - 0098 Aquila iMX95 Hexa 16GB WB IT
+ - 0099 Verdin AM62P Quad 2GB WB IT
+ - 0201 SMARC iMX95 Hexa 8GB IT
+ - 0202 SMARC iMX95 Hexa 4GB WB IT
+ - 0203 SMARC iMX95 Hexa 4GB ET
+ - 0204 SMARC iMX95 Hexa 2GB WB IT
+ - 0205 SMARC iMX95 Hexa 2GB ET
+ - 0206 SMARC iMX8M Plus Quad 4GB IT
+ - 0207 SMARC iMX8M Plus Quad 2GB WB IT
+ - 0208 SMARC iMX8M Plus Quad 2GB IT
+ - 0209 SMARC iMX8M Plus Quadlite 1GB WB ET
+ - 0210 SMARC iMX8M Plus Quadlite 1GB ET
+ - 0211 Aquila AM69 Octa 32GB IT
+ - 0212 Aquila AM69 Octa 16GB WB IT
+ - 0213 Aquila AM69 Octa 16GB IT
+ - 0214 Aquila AM69 Octa 8GB WB IT
+ - 0215 Aquila AM69 Octa 8GB IT
+
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+---
+ board/toradex/common/tdx-cfg-block.c | 17 +++++++++++++++++
+ board/toradex/common/tdx-cfg-block.h | 17 +++++++++++++++++
+ 2 files changed, 34 insertions(+)
+
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index 6c1cea77c8ce..a89c5bf2c19c 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -166,6 +166,23 @@ const struct toradex_som toradex_modules[] = {
+ 	{ APALIS_IMX8QM_8GB_WIFI_BT_IT_1300MHZ,  "Apalis iMX8QM 8GB WB IT",              TARGET_IS_ENABLED(APALIS_IMX8)     },
+ 	{ SMARC_IMX95_HEXA_8GB_WB_IT,            "SMARC iMX95 Hexa 8GB WB IT",           TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
+ 	{ SMARC_IMX8MPQ_4GB_WB_IT,               "SMARC iMX8M Plus Quad 4GB WB IT",      TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
++	{ AQUILA_IMX95_HEXA_16GB_WB_IT,          "Aquila iMX95 Hexa 16GB WB IT",         TARGET_IS_ENABLED(AQUILA_IMX95)         },
++	{ VERDIN_AM62PQ_2G_WIFI_BT_IT,           "Verdin AM62P Quad 2GB WB IT",          TARGET_IS_ENABLED(VERDIN_AM62P_A53)     },
++	{ SMARC_IMX95_HEXA_8GB_IT,               "SMARC iMX95 Hexa 8GB IT",              TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
++	{ SMARC_IMX95_HEXA_4GB_WB_IT,            "SMARC iMX95 Hexa 4GB WB IT",           TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
++	{ SMARC_IMX95_HEXA_4GB_ET,               "SMARC iMX95 Hexa 4GB ET",              TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
++	{ SMARC_IMX95_HEXA_2GB_WB_IT,            "SMARC iMX95 Hexa 2GB WB IT",           TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
++	{ SMARC_IMX95_HEXA_2GB_ET,               "SMARC iMX95 Hexa 2GB ET",              TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
++	{ SMARC_IMX8MPQ_4GB_IT,                  "SMARC iMX8M Plus Quad 4GB IT",         TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
++	{ SMARC_IMX8MPQ_2GB_WB_IT,               "SMARC iMX8M Plus Quad 2GB WB IT",      TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
++	{ SMARC_IMX8MPQ_2GB_IT,                  "SMARC iMX8M Plus Quad 2GB IT",         TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
++	{ SMARC_IMX8MPQL_1GB_WB_ET,              "SMARC iMX8M Plus Quadlite 1GB WB ET",  TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
++	{ SMARC_IMX8MPQL_1GB_ET,                 "SMARC iMX8M Plus Quadlite 1GB ET",     TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
++	{ AQUILA_AM69O_32GB_IT,                  "Aquila AM69 Octa 32GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
++	{ AQUILA_AM69O_16GB_WB_IT,               "Aquila AM69 Octa 16GB WB IT",          TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
++	{ AQUILA_AM69O_16GB_IT,                  "Aquila AM69 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
++	{ AQUILA_AM69O_8GB_WB_IT,                "Aquila AM69 Octa 8GB WB IT",           TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
++	{ AQUILA_AM69O_8GB_IT,                   "Aquila AM69 Octa 8GB IT",              TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
+ };
+ 
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index f4dd853306b3..db612811c5c5 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -124,6 +124,23 @@ enum {
+ 	APALIS_IMX8QM_8GB_WIFI_BT_IT_1300MHZ, /* 95 */
+ 	SMARC_IMX95_HEXA_8GB_WB_IT,
+ 	SMARC_IMX8MPQ_4GB_WB_IT,
++	AQUILA_IMX95_HEXA_16GB_WB_IT,
++	VERDIN_AM62PQ_2G_WIFI_BT_IT, /* 99 */
++	SMARC_IMX95_HEXA_8GB_IT = 201,
++	SMARC_IMX95_HEXA_4GB_WB_IT,
++	SMARC_IMX95_HEXA_4GB_ET,
++	SMARC_IMX95_HEXA_2GB_WB_IT,
++	SMARC_IMX95_HEXA_2GB_ET, /* 205 */
++	SMARC_IMX8MPQ_4GB_IT,
++	SMARC_IMX8MPQ_2GB_WB_IT,
++	SMARC_IMX8MPQ_2GB_IT,
++	SMARC_IMX8MPQL_1GB_WB_ET,
++	SMARC_IMX8MPQL_1GB_ET, /* 210 */
++	AQUILA_AM69O_32GB_IT,
++	AQUILA_AM69O_16GB_WB_IT,
++	AQUILA_AM69O_16GB_IT,
++	AQUILA_AM69O_8GB_WB_IT,
++	AQUILA_AM69O_8GB_IT, /* 215 */
+ };
+ 
+ enum {
+-- 
+2.34.1
+
