@@ -4,82 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70894C3DA6D
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 09:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7232C3ABD8
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 10:28:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 808C381FEE;
-	Mon, 19 May 2025 11:57:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1297C81FEE;
+	Mon, 19 May 2025 12:28:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="HpimUmB5";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="EPiuFjt5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3618482A76; Mon, 19 May 2025 11:57:31 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CE3D182A9E; Mon, 19 May 2025 12:28:03 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20602.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::602])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED54D81E72
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 11:57:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C75481E72
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 12:28:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7234638148=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54J9Krnk006605;
- Mon, 19 May 2025 11:57:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- Pg/12hQngtmTV8OXAQJrLcgRmWk6cIuDXCGxViOGFfc=; b=HpimUmB5IaHMrcNi
- GSQXlAG7ZsrQUzijHuPZTgjCDJ0m5LxJq7AvUHjkKulnEKI9pWwXJfzY1okq4a8D
- niBcsrBztiG1uyGy6bw2YnqCgFACGA2wjyzLcIWrKEjj9yUuzGZX/Q3WTw891H+0
- KHYjUdgU/PkuFZq9QfkymAJRaWgBqraXDOmgEwVahci3bxJD5pvyJtRc/QTRWbZb
- AmbGCh618nhP1OtvgC07yAKhdp2OhXchOAotl7z9s1zvf696isvK2MusX+HSXwde
- x+eINETwN7gq1YIfDviOqasb7N+kG0vs3mvcILyrPsVgGaDdebEvnpHBsjYylzyF
- XL5Jhw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46phbgeap1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 19 May 2025 11:57:23 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1C71F4004C;
- Mon, 19 May 2025 11:56:17 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 61FA0AB62BE;
- Mon, 19 May 2025 11:55:30 +0200 (CEST)
-Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 19 May
- 2025 11:55:29 +0200
-Message-ID: <9d8fe91a-bb27-4fda-a3e3-c7af2eb184fc@foss.st.com>
-Date: Mon, 19 May 2025 11:55:28 +0200
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aZ4x1Y3hP0mC4kBj8NCABdrk2Em+o5c5BF//4+KOM3jDP0evmqzNIvvETzzMn/CtvRt85xWDDGCp4qlY8WjaFFoo0ldgJk4ab8LkuNCd5oKRKzHhJd/HXAu5qoI/npT9IhLQtOHICkFqjFJ6kwXveSEn4ru5vqTpijXHXxGQ1E//AGA6bgJWaWp9p63TtlaoYwF9FxBB3faG1158GTog0gn33vv09D/PSRHm1euk9e/qONG5uNHYq0vj+NGj4vum4yU5NdQUtlFxwHkyK65tz+lYoI3xmmJqUFskPmJSezwvgfmfrCUBlBlvW/gC684ErfDfJkO9ygBsm+3iQHO59Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wVG+JFobVxfviih9wyUDuGI2o+1bWNeF3xzarXUl8PM=;
+ b=MPb1pEtc4wR6ZQNkXmRtqsXlGqUBo2IlNHV3d/AcQZMC5BuJ+qFz/Ecsl7zLc1YRajh9U3UIirsdpKlPrTCE/99fgdyLcA+wdG+CocPnNKr4Y4nsnVbpE10ubLFqLvMq6tP8azH+aUk8Nza9TNWbKP6hTrg8CruKst5Da2pKqNzHEioz665XjDZ++eHYDGioRNTmn1TheWxJ8oDWoXVrb1jDhwz3rnRzW0yefffr72uaqqTxjHdnoXR+EtmmjKBhGjrWCw+NK2AQTmkxy8oPyL17niWVtkQiIX4xaRyo6CKCOx6WwjOya8YSwOPaAIUBliy6ZhHwSJmA8fMt7NF9pA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wVG+JFobVxfviih9wyUDuGI2o+1bWNeF3xzarXUl8PM=;
+ b=EPiuFjt5ygEM4o/2rnzwvT3zjYob5a0hgOcsibUEjAoyglQ/4q4f2ObehZgF65TS/V3tUUy1apUyzbo52c66uzpFCp5TD2ATfSKFhHB9khnRcyBlwNQ1BcgpnEK69cokEOeDDpoDR0d0Wr2Wxc+eYqvzQpGvI+dgDb6MdykEQz0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by VI1PR10MB8061.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:1df::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.30; Mon, 19 May
+ 2025 10:27:56 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.8722.031; Mon, 19 May 2025
+ 10:27:56 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,  Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] mkimage: do a rough estimate for the size needed for
+ hashes/signatures
+In-Reply-To: <CAFLszTjHnxzTxGUVOkTBo6CxoZc3DxO4q8=R8_Y847g_WHWM1w@mail.gmail.com>
+ (Simon Glass's message of "Fri, 16 May 2025 17:39:57 +0200")
+References: <20250516125430.1361912-1-ravi@prevas.dk>
+ <CAFLszTjHnxzTxGUVOkTBo6CxoZc3DxO4q8=R8_Y847g_WHWM1w@mail.gmail.com>
+Date: Mon, 19 May 2025 12:27:54 +0200
+Message-ID: <878qms51zp.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0006.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:a::12) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] lib/uuid.c: restore support of system partition type
- for ESP
-To: Jerome Forissier <jerome.forissier@linaro.org>, <u-boot@lists.denx.de>
-CC: <ilias.apalodimas@linaro.org>, <patrice.chotard@foss.st.com>,
- <caleb.connolly@linaro.org>, Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250519090421.470942-1-patrick.delaunay@foss.st.com>
- <20250519110417.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
- <71947acc-d77c-4cd2-9a15-d679a0e53a8c@linaro.org>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <71947acc-d77c-4cd2-9a15-d679a0e53a8c@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.86.182]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-19_04,2025-05-16_03,2025-03-28_01
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|VI1PR10MB8061:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9f6a8a8a-02c4-44e6-1bdb-08dd96bfd1ea
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|366016|52116014|7053199007|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1IeCYUCzzOtzJd3z5SocPy9YygzajLtRne1NXMwMTo1GxIrDIb8qFBY+EVK2?=
+ =?us-ascii?Q?AGvAzXFjIUuZVI9M8p4oJx0tHJjFXRgg2XuDhQOUr1/fL7k+VBCuoVqH0ilP?=
+ =?us-ascii?Q?TsGipRtKrmSoahQBXUxrFlvQ1CH0OopqWbrqr7h+f/5hQaBRDd920WzxcCEu?=
+ =?us-ascii?Q?DjJr9JSLuad1e2MAa1ifM71wZ8y7J8ucnM3vTEcXCQkv7+9AtjEpfIDpdfXc?=
+ =?us-ascii?Q?Vcy1HrClCpXmn9cumBaj0lMVq9oU99O+gg6S0N30Om7ZaDOZR24qtGB29FPo?=
+ =?us-ascii?Q?AwxFney52RSi8HI0yHdV+Am1b4KIoDbbCXNWhHllY1IMHfcK+krze+AmPvb7?=
+ =?us-ascii?Q?iB5tVCVNTqxNBplGASeBeQcIsJW+ORdEfLytZzuDGhNyHTLpsz/RgWq6jNz5?=
+ =?us-ascii?Q?MfcMXim7FFgH28amhrVB1tbdN+28+lNeGyJdktONtltOR66j64rIm8Ee30sV?=
+ =?us-ascii?Q?Rkukcg7uLgvqkDpptlYzwP51zHHH5MsnAUAqUswfESISTs9ZUQCh8nIbB/BR?=
+ =?us-ascii?Q?C6qGiFoTSwAri7NJFF+QrxFiQUV8KspooFEaJsr8RBN/9Q0F51r4an1ZmxP6?=
+ =?us-ascii?Q?K1K4T5SJE8VVmVgluDL3LPS+r0ncskZFe5JyzIFgblpQlTTKrB4eF3l1SLKF?=
+ =?us-ascii?Q?l8gsjYYdmjUsOtK5DI6PzTYD8qAm1LH1QoeTl2E6G0VCq92mZkT4DvJVhOmb?=
+ =?us-ascii?Q?feZlO25V/tgPxk69GSOs+ywnLKQtXlZpGIMf+lPSS7lcA0SiiQV4JuOVL2ym?=
+ =?us-ascii?Q?UZyREWVjrYcWbkDp/BXgaL1+P182rEfuVdO3qJQnLXqB9BnIvGqk8f48zsHL?=
+ =?us-ascii?Q?zSBiVKkXkHA+0gSeLFJrUxXPo3JMBN02z7PoFWS0QXTDeRCB/OR+SJWsBv3M?=
+ =?us-ascii?Q?AFnlbmNPImKEFW+FZf63Dl6t3Xe/C2ivSECI3a/2NfMoQl2kjiJ0hUojiEqv?=
+ =?us-ascii?Q?CIgEHd+sWYlo+HTq0BRCns62IKeArViouGW3JgS3xPL+gVUVbLW2oLLARz+V?=
+ =?us-ascii?Q?JkdVkHI7X19DQtqhZ9fPsVlAIHgM1j/T860hggV4DgtiK9GCPDeDYKx2b5mQ?=
+ =?us-ascii?Q?K8Z6YRaazlBbxPGUL++ltb9WSWOiBeh9N6iLNnaNeT9/X+5vr5G0HWay5ANZ?=
+ =?us-ascii?Q?fJrAOZzBVso4HHZtIF0c3Hb5tBEJi6qOsqMSyEpwkbWbVna3w2OZDChMCfyW?=
+ =?us-ascii?Q?KdgCpBAnl28Sw+8LLGRiMI6XNhuWaRqJP2M89y1b/Gd6BVN2XmwflpX+J+Ug?=
+ =?us-ascii?Q?5VM0iWnkut6+gxxSQWYwbtaN4BaLYK2wVrtPHCUpTYnhgsJlZzF2ydwokkwf?=
+ =?us-ascii?Q?jV1oFT2bqzx3IynCfwm+R1f71Pip1o2J1EyC9WM7s/LQXkVKGOZND1Kt1IVs?=
+ =?us-ascii?Q?B2m/t8PVsPIoYCE90/7t7iY+tR0Nzn/DWYQnOTrH/A5vlS5sHZqqC9DDt+RQ?=
+ =?us-ascii?Q?s+VY05s8ZW1hln4/XqiAomkfD+LbGxOayZUp1rmxaJlFi6pVMY+Tjw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(52116014)(7053199007)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PHlXOEVx7EOt5aTB2ZQ5wYlzB73aWTnx/97EDg9O7JJAYlaJs3K8nIWVcO35?=
+ =?us-ascii?Q?sf5K5vmSnV8gZ3SIPLccY1VBcnLYVfUuGl31pxBE3ZwE1kzgrvFmRaiyt2Mr?=
+ =?us-ascii?Q?EyX5hUotznmkki6WM5mJgSzDlDwplDYeyudDIWUNGDLdkjc7SZT/QJ/FsG/x?=
+ =?us-ascii?Q?Oy0QK9Frig5rDv7oXpmmnEu4Pb1OaWgaTh1ty4vsoMX+729+VMu+UMCIiwkT?=
+ =?us-ascii?Q?2jWnMMqnKrkXIOng4PuE+sCHTy/7lKe/rSlPY04mFlr+HK7vxuhiAzYK+JB0?=
+ =?us-ascii?Q?8SYFgpqZS8omrADkezmn96q1txOPB9eUMwN3zDhkNCdfAQ+kXOUaA/1hoUkH?=
+ =?us-ascii?Q?kfnmEw6zpEL1ry9fBs27hksex5VQsC22+PwDgXNWQfoDrnFOkbOTvortiwUV?=
+ =?us-ascii?Q?yOyceiZEe2SN/rTUacgDNZmgTToCR3wQjYtKvy4Vh2gadmr6jzKS0/qeP03o?=
+ =?us-ascii?Q?rI1es0Mwr9uz7B337nzToX9axonbhG5uP4orh2FcizoKPDyBcf+3KQTSwJeg?=
+ =?us-ascii?Q?IjAl0uu2XygxndrcnMYnPH5+1Ufa2SPo//UgeVXneKOmHzCvRFisRbl3StuV?=
+ =?us-ascii?Q?8Pr8xKDaFM3uSnbexLTAikzGdDTnNTNQG95AE3a7DGLTBEgU8aIwwQMj0U17?=
+ =?us-ascii?Q?oJVKtXk+d82vjaaRxDxoizRW+hdMcnMQ/Qo3aQ/Ri9uM9RWtgw6vwqjzLbrV?=
+ =?us-ascii?Q?8ho5Y6mG0Xj7i/Q0tcPFDPpUpgOjsEv2ByOIVPD85vRD0rv9h+ltVS980tMO?=
+ =?us-ascii?Q?49JSgcfccpxTNWHTWa5dMaj3mmBPK+UTpZZKku+tV1C78kksSNuFY9k1KsOI?=
+ =?us-ascii?Q?O239S9OBQNFqwKc88gQqbi9+nGfAf3vcoELybvWVdBwU/EJW0UXWN1fiy2UJ?=
+ =?us-ascii?Q?QEJQPYjAO573BSA8A7fCc8U2/ljsyfMAn9ay/We2RQDeOFxi6QHdxs2K5w5o?=
+ =?us-ascii?Q?YPKD8baQGK0L/iObLGibj0fWJVGaPrqNCZ39iFujw9mZMGQcmmT8uo0ZOjPw?=
+ =?us-ascii?Q?Kp1HEUTgpydWhgkwyzTOEFw33jlqTG+EQWg+0ZIsVU8Z0GNljvWeNCmB2OoA?=
+ =?us-ascii?Q?3/BUbLwK0OKBG6h3Hh1AVQZ4pjlqe8v3d9xa3Wq+lxqfar1+D+RTJBafeiN7?=
+ =?us-ascii?Q?T1r7QDJ6SwJWydm2L3eYrsRqxNniiSm2n63ED0aXdWr73kuZ6BzBIJAOWbic?=
+ =?us-ascii?Q?cbunV4Sn5YlOTk8nQwWsXN/RAc47kiLJuN+mEg7Bvy3prHBOF81RtPdPCEZu?=
+ =?us-ascii?Q?Y6Ob89w+H4XXjoLXrGiqe70sgPjS/la39YZPU2xos9+DoXzpZTA0ZiK+WwrR?=
+ =?us-ascii?Q?LqnMTcwwdqWajq63NrkyvQ1X3fP8w09g+Y4B3ZfMVx7Gdl3tKQatugmJcmlz?=
+ =?us-ascii?Q?CgMLg3vhtl6PJBvP35RyAj6NgEaC5uV/JrgfKLHDbWGevyGl7pnq3Wds0LGh?=
+ =?us-ascii?Q?Udqc0dDjxnPKbwuorf9kPS6RmZx9qr7gp0Wl1HB1iSugik04ipY11Z62BJ6e?=
+ =?us-ascii?Q?1CExMPb9S8ftiJoCzqg3dUOTEiauhgGM+0qJhe6yyk8h+VPFJByZNSo6Ybvg?=
+ =?us-ascii?Q?aAeWXAZNJO+MhASvs3W7VW+DqTmI3c6n8ujj0kDWxoVO7JiJk+Xswr6EsKK0?=
+ =?us-ascii?Q?rA=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9f6a8a8a-02c4-44e6-1bdb-08dd96bfd1ea
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2025 10:27:56.3338 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tLGAodA2HkO/3JLQiqjRVxrxlpI6TvItX2dbhofNzZaEupqfVs5r8EnLjvtdXlVrdoMiT6xDryGxfd0bgXBkwZb8f9H/fmQD6V0I5nY6weM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB8061
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,481 +160,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Fri, May 16 2025, Simon Glass <sjg@chromium.org> wrote:
 
-On 5/19/25 11:23, Jerome Forissier wrote:
-> Hi Patrick,
+> Hi Rasmus,
 >
-> On 5/19/25 10:04, Patrick Delaunay wrote:
->> Add support of shortname for type parameter and restore "system"
->> as short name for EFI System Partition (ESP) for filed "type" of the
->> "gpt write" command.
+> On Fri, 16 May 2025 at 14:54, Rasmus Villemoes <ravi@prevas.dk> wrote:
 >>
->> Fixes: d54e1004b8b1 ("lib/uuid.c: use unique name for PARTITION_SYSTEM_GUID")
->> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> ---
 >>
->>   lib/uuid.c | 148 +++++++++++++++++++++++++++--------------------------
->>   1 file changed, 76 insertions(+), 72 deletions(-)
+>> While not perfect, we can give a reasonable estimate of an upper bound
+>> on the necessary extra size by simply counting the number of hash and
+>> signature nodes in the FIT image.
 >>
->> diff --git a/lib/uuid.c b/lib/uuid.c
->> index 6abbcf27b1f3..ee02fa4d600d 100644
->> --- a/lib/uuid.c
->> +++ b/lib/uuid.c
->> @@ -62,184 +62,185 @@ int uuid_str_valid(const char *uuid)
->>   	return 1;
->>   }
->>   
->> +/* List of known GUID for GPT partition type */
->>   static const struct {
->> -	const char *string;
->> +	const char *string;     /* name for type parameter of gpt command */
-> const char *type?
-
-
-yes it is possible...
-
-I don't change existing name just to avoid to change too many part of 
-the existing code.
-
-
+>> As indicated in the comments, one could probably make it even more
+>> precise, and if there would ever be signatures larger than 512 bytes,
+>> probably one would have to do that. But this works well enough in
+>> practice for now, and is in fact an improvement in the normal case:
+>> Currently, starting with size_inc of 0 is guaranteed to fail, so we
+>> always enter the loop at least twice, even when not doing any signing
+>> but merely filling hash values.
+>>
 >
->> +	const char *description;/* description used for %pUs */
->>   	efi_guid_t guid;
->>   } list_guid[] = {
->>   #ifndef USE_HOSTCC
->> -#if defined(CONFIG_PARTITION_TYPE_GUID) || defined(CONFIG_CMD_EFIDEBUG) || \
->> -	defined(CONFIG_EFI)
->> -	{"EFI System Partition", PARTITION_SYSTEM_GUID},
->> -#endif
->> -#ifdef CONFIG_PARTITION_TYPE_GUID
->> -	{"mbr",		LEGACY_MBR_PARTITION_GUID},
->> -	{"msft",	PARTITION_MSFT_RESERVED_GUID},
->> -	{"data",	PARTITION_BASIC_DATA_GUID},
->> -	{"linux",	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
->> -	{"raid",	PARTITION_LINUX_RAID_GUID},
->> -	{"swap",	PARTITION_LINUX_SWAP_GUID},
->> -	{"lvm",		PARTITION_LINUX_LVM_GUID},
->> -	{"u-boot-env",	PARTITION_U_BOOT_ENVIRONMENT},
->> -	{"cros-kern",	PARTITION_CROS_KERNEL},
->> -	{"cros-root",	PARTITION_CROS_ROOT},
->> -	{"cros-fw",	PARTITION_CROS_FIRMWARE},
->> -	{"cros-rsrv",	PARTITION_CROS_RESERVED},
->> -#endif
->> +#if CONFIG_IS_ENABLED(EFI_PARTITION)
->> +	{"mbr",		NULL,	LEGACY_MBR_PARTITION_GUID},
->> +	{"msft",	NULL,	PARTITION_MSFT_RESERVED_GUID},
->> +	{"data",	NULL,	PARTITION_BASIC_DATA_GUID},
->> +	{"linux",	NULL,	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
->> +	{"raid",	NULL,	PARTITION_LINUX_RAID_GUID},
->> +	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
->> +	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
->> +	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
->> +	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
->> +	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
->> +	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
->> +	{"cros-rsrv",	NULL,	PARTITION_CROS_RESERVED},
->>   #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
->>   	{
->> -		"Device Path",
->> +		"system", "EFI System Partition",
->> +		PARTITION_SYSTEM_GUID,
->> +	},
-> The patch adds quite many NULLs to the list_guid[] only for this very
-> special case. We would be better off hardcoding the "system" case into
-> uuid_guid_get_bin() I think.
+> I have no particular objection here if you really want to go this way,
+> but it seems to me that it would be better to have a way to determine
+> the size of signatures using a new (or existing?) API call. Then you
+> can make this deterministic and always correct.
 
-I don't like the hardcoded solution in lib
+Well, I'm not saying I won't revisit this at some point in the future
+and improve on the heuristics.
 
-or the other possible workaround:
+However, as indicated, it's not just a matter of knowing the exact size
+of the signature data; one also has to account for the space used by the
+"hashed-nodes" property, which of course depends on the number of
+elements in the sign-images property, but also on the number of hash-*
+nodes in those "pointed-to" images. So it ends up being quite a lot of
+code to get it more exact.
 
-#if defined(CONFIG_PARTITION_TYPE_GUID) || defined(CONFIG_CMD_EFIDEBUG) 
-|| \
-     defined(CONFIG_EFI)
-       {"EFI System Partition", PARTITION_SYSTEM_GUID},
-+    {"system",    PARTITION_SYSTEM_GUID},
-#endif
+So yes, for now I would like to go this way, because it's a fix that
+works for my use case now and is easy to reason about, and should also
+be an improvement outside my use case in that it avoids at least one
+iteration, but possibly many.
 
-
-     with this simple modification
-     - first occurrence is used to display information (long name = 
-uuid_guid_get_str)
-     - second occurrence s used for gpt command parameter 'type=system'  
-with ( uuid_str_to_bin => uuid_guid_get_bin)
-
-
-And it is not ONLY for "system"....  but also for "mbr", "u-boot-env"...
-
-my proposal avoids confusion for
-
-- short name (with limited size and without SPACE) with can be used for 
-short in 'type=' parameter
-
-   also used as description when description is absent
-
-- long description for partition (only used for information), without 
-limitation (size, space).....
-
-
-and prepare addition for new short name for other knwon type UID
-
-
-PS: only the last added EFI partitions don't respected the first 
-restriction...
-
-      but someone can be added short name for EFI partitons, without 
-change long description
-
-      for example
-
-+		"dtb", "device tree",
-+		"dtbo", "Device-Tree Fixup",
-
-
-We must have limited size in short name because in cmd/gpt.c:533 we have
-
-
-#ifdef CONFIG_PARTITION_TYPE_GUID
-         /* guid */
-         val = extract_val(tok, "type");
-         if (val) {
-             /* 'type' is optional */
-             if (extract_env(val, &p))
-                 p = val;
-             if (strnlen(p, max_str_part) >= sizeof(parts[i].type_guid)) {
-                 printf("Wrong type guid format for partition %d\n",
-                        i);
-                 errno = -4;
-                 goto err;
-             }
-             strncpy((char *)parts[i].type_guid, p, max_str_part);
-             free(val);
-         }
-#endif
-
-
-So for STRING parameter, used as short cut) in 'type=' is also copied in 
-parts[i].type_guid
-
-=> shor name size is limited at 36
-
-
->
->> +	{
->> +		NULL, "Device Path",
->>   		EFI_DEVICE_PATH_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Device Path To Text",
->> +		NULL, "Device Path To Text",
->>   		EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Device Path Utilities",
->> +		NULL, "Device Path Utilities",
->>   		EFI_DEVICE_PATH_UTILITIES_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Unicode Collation 2",
->> +		NULL, "Unicode Collation 2",
->>   		EFI_UNICODE_COLLATION_PROTOCOL2_GUID,
->>   	},
->>   	{
->> -		"Driver Binding",
->> +		NULL, "Driver Binding",
->>   		EFI_DRIVER_BINDING_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Simple Text Input",
->> +		NULL, "Simple Text Input",
->>   		EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Simple Text Input Ex",
->> +		NULL, "Simple Text Input Ex",
->>   		EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Simple Text Output",
->> +		NULL, "Simple Text Output",
->>   		EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Block IO",
->> +		NULL, "Block IO",
->>   		EFI_BLOCK_IO_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Disk IO",
->> +		NULL, "Disk IO",
->>   		EFI_DISK_IO_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Simple File System",
->> +		NULL, "Simple File System",
->>   		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Loaded Image",
->> +		NULL, "Loaded Image",
->>   		EFI_LOADED_IMAGE_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Loaded Image Device Path",
->> +		NULL, "Loaded Image Device Path",
->>   		EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Graphics Output",
->> +		NULL, "Graphics Output",
->>   		EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"HII String",
->> +		NULL, "HII String",
->>   		EFI_HII_STRING_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"HII Database",
->> +		NULL, "HII Database",
->>   		EFI_HII_DATABASE_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"HII Config Access",
->> +		NULL, "HII Config Access",
->>   		EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"HII Config Routing",
->> +		NULL, "HII Config Routing",
->>   		EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Load File",
->> +		NULL, "Load File",
->>   		EFI_LOAD_FILE_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Load File2",
->> +		NULL, "Load File2",
->>   		EFI_LOAD_FILE2_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Random Number Generator",
->> +		NULL, "Random Number Generator",
->>   		EFI_RNG_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Simple Network",
->> +		NULL, "Simple Network",
->>   		EFI_SIMPLE_NETWORK_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"PXE Base Code",
->> +		NULL, "PXE Base Code",
->>   		EFI_PXE_BASE_CODE_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Device-Tree Fixup",
->> +		NULL, "Device-Tree Fixup",
->>   		EFI_DT_FIXUP_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"TCG2",
->> +		NULL, "TCG2",
->>   		EFI_TCG2_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"Firmware Management",
->> +		NULL, "Firmware Management",
->>   		EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID
->>   	},
->>   #if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
->>   	{
->> -		"HTTP",
->> +		NULL, "HTTP",
->>   		EFI_HTTP_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"HTTP Service Binding",
->> +		NULL, "HTTP Service Binding",
->>   		EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID,
->>   	},
->>   	{
->> -		"IPv4 Config2",
->> +		NULL, "IPv4 Config2",
->>   		EFI_IP4_CONFIG2_PROTOCOL_GUID,
->>   	},
->>   #endif
->>   	/* Configuration table GUIDs */
->>   	{
->> -		"ACPI table",
->> +		NULL, "ACPI table",
->>   		EFI_ACPI_TABLE_GUID,
->>   	},
->>   	{
->> -		"EFI System Resource Table",
->> +		NULL, "EFI System Resource Table",
->>   		EFI_SYSTEM_RESOURCE_TABLE_GUID,
->>   	},
->>   	{
->> -		"device tree",
->> +		NULL, "device tree",
->>   		EFI_FDT_GUID,
->>   	},
->>   	{
->> -		"SMBIOS table",
->> +		NULL, "SMBIOS table",
->>   		SMBIOS_TABLE_GUID,
->>   	},
->>   	{
->> -		"SMBIOS3 table",
->> +		NULL, "SMBIOS3 table",
->>   		SMBIOS3_TABLE_GUID,
->>   	},
->>   	{
->> -		"Runtime properties",
->> +		NULL, "Runtime properties",
->>   		EFI_RT_PROPERTIES_TABLE_GUID,
->>   	},
->>   	{
->> -		"TCG2 Final Events Table",
->> +		NULL, "TCG2 Final Events Table",
->>   		EFI_TCG2_FINAL_EVENTS_TABLE_GUID,
->>   	},
->>   	{
->> -		"EFI Conformance Profiles Table",
->> +		NULL, "EFI Conformance Profiles Table",
->>   		EFI_CONFORMANCE_PROFILES_TABLE_GUID,
->>   	},
->>   #ifdef CONFIG_EFI_RISCV_BOOT_PROTOCOL
->>   	{
->> -		"RISC-V Boot",
->> +		NULL, "RISC-V Boot",
->>   		RISCV_EFI_BOOT_PROTOCOL_GUID,
->>   	},
->>   #endif
->> @@ -247,35 +248,36 @@ static const struct {
->>   #ifdef CONFIG_CMD_NVEDIT_EFI
->>   	/* signature database */
->>   	{
->> -		"EFI_GLOBAL_VARIABLE_GUID",
->> +		NULL, "EFI_GLOBAL_VARIABLE_GUID",
->>   		EFI_GLOBAL_VARIABLE_GUID,
->>   	},
->>   	{
->> -		"EFI_IMAGE_SECURITY_DATABASE_GUID",
->> +		NULL, "EFI_IMAGE_SECURITY_DATABASE_GUID",
->>   		EFI_IMAGE_SECURITY_DATABASE_GUID,
->>   	},
->>   	/* certificate types */
->>   	{
->> -		"EFI_CERT_SHA256_GUID",
->> +		NULL, "EFI_CERT_SHA256_GUID",
->>   		EFI_CERT_SHA256_GUID,
->>   	},
->>   	{
->> -		"EFI_CERT_X509_GUID",
->> +		NULL, "EFI_CERT_X509_GUID",
->>   		EFI_CERT_X509_GUID,
->>   	},
->>   	{
->> -		"EFI_CERT_TYPE_PKCS7_GUID",
->> +		NULL, "EFI_CERT_TYPE_PKCS7_GUID",
->>   		EFI_CERT_TYPE_PKCS7_GUID,
->>   	},
->>   #endif
->>   #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
->> -	{ "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
->> -	{ "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
->> -	{ "EFI_HOB_LIST", EFI_HOB_LIST },
->> -	{ "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
->> -	{ "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
->> -	{ "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
->> +	{ NULL, "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
->> +	{ NULL, "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
->> +	{ NULL, "EFI_HOB_LIST", EFI_HOB_LIST },
->> +	{ NULL, "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
->> +	{ NULL, "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
->> +	{ NULL, "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
-
-
-here we can use existing as short name/description as string have no 
-space and size < 36....
-
-+	{ "EFI_LZMA_COMPRESSED", NULL, EFI_LZMA_COMPRESSED },
-+	{ "EFI_DXE_SERVICES", NULL, EFI_DXE_SERVICES },
-+	{ "EFI_HOB_LIST", NULL,  EFI_HOB_LIST },
-+	{ "EFI_MEMORY_TYPE", NULL,  EFI_MEMORY_TYPE },
-+	{ "EFI_MEM_STATUS_CODE_REC", NULL, EFI_MEM_STATUS_CODE_REC },
-+	{ "EFI_GUID_EFI_ACPI1", NULL,  EFI_GUID_EFI_ACPI1 },
-
-
-
->>   #endif
->> +#endif /* EFI_PARTITION */
->>   #endif /* !USE_HOSTCC */
->>   };
->>   
->> @@ -284,7 +286,8 @@ int uuid_guid_get_bin(const char *guid_str, unsigned char *guid_bin)
->>   	int i;
->>   
->>   	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
->> -		if (!strcmp(list_guid[i].string, guid_str)) {
->> +		if (list_guid[i].string &&
->> +		    !strcmp(list_guid[i].string, guid_str)) {
->>   			memcpy(guid_bin, &list_guid[i].guid, 16);
->>   			return 0;
->>   		}
->> @@ -298,6 +301,8 @@ const char *uuid_guid_get_str(const unsigned char *guid_bin)
-> Should this be called uuid_guid_get_type() instead? 'str' or 'string' are confusing.
-> We should have 'type' and 'decription' IMO.
->
->>   
->>   	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
->>   		if (!memcmp(list_guid[i].guid.b, guid_bin, 16)) {
->> +			if (list_guid[i].description)
->> +				return list_guid[i].description;
->>   			return list_guid[i].string;
-> .description is never (or should never be) NULL. No need to return .string as a fallback.
-
-
-it is the case for ALL the known type with only short description ....
-
-not need to have long description if short string is enough....
-
-+	{"mbr",		NULL,	LEGACY_MBR_PARTITION_GUID},
-+	{"msft",	NULL,	PARTITION_MSFT_RESERVED_GUID},
-+	{"data",	NULL,	PARTITION_BASIC_DATA_GUID},
-+	{"linux",	NULL,	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
-+	{"raid",	NULL,	PARTITION_LINUX_RAID_GUID},
-+	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
-+	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
-+	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
-+	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
-+	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
-+	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
-+	{"cros-rsrv",	NULL,	PARTITION_CROS_RESERVED},
-
-
->
->>   		}
->>   	}
->> @@ -312,10 +317,9 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
->>   	uint64_t tmp64;
->>   
->>   	if (!uuid_str_valid(uuid_str)) {
->> -#ifdef CONFIG_PARTITION_TYPE_GUID
->> -		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
->> +		if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID) &&
->> +		    !uuid_guid_get_bin(uuid_str, uuid_bin))
->>   			return 0;
->> -#endif
->>   		return -EINVAL;
->>   	}
->>   
-> Thanks,
-
-
-Regards
-
+Rasmus
