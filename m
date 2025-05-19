@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F37C2D0CD
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 14:48:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E2A8C3ABD8
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 14:49:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4577D82B5B;
-	Mon, 19 May 2025 16:48:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F87982B70;
+	Mon, 19 May 2025 16:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iSgkXQbv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L+uvbrFJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E4D82B63; Mon, 19 May 2025 16:48:41 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id C8EB282B72; Mon, 19 May 2025 16:49:55 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5A5081E72
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 16:48:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B43EF81FEE
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 16:49:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-2db2f23f174so1613055fac.2
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 07:48:39 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7303d9d5edeso1668982a34.1
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 07:49:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747666118; x=1748270918; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747666192; x=1748270992; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3SrxcDTUcmqIlvR5XmLYs5oJp7X3CtIX4pefToQDsMo=;
- b=iSgkXQbv5dgaFenB9a0jLEPbWggpBUBgzo1/o2jHFoCPFzCXDTN9ScX5NXe/5EacLV
- +bLeQc8sQUrS9/+3bDE8bgKkJM7A7N3iFgHs3cNND5PXtY6PK5zDxepsERpVMVs3mFRs
- IRuiZQ+gKR66nCWeOqI5lGGpeFFUp3YxfWQcQ=
+ bh=jfNNeDgCpLTffNABzsfn3UYtrusMo+iZUd9RX9PelG8=;
+ b=L+uvbrFJTBcMygycR1dj8lnywKUThyuS+1OVe2EKEM1hR+yRf9Cz1aOGBzdBX7K6qt
+ W5sUGbWvdr2DzySbgoY/nqqPPEBjfy/KPPk4SpWFV6OwjbLYElzltAJaoOxdUshIhYzU
+ U2w9QZVw+kB8fQrzSeIDkZhONwkJGoRTMlpwc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747666118; x=1748270918;
+ d=1e100.net; s=20230601; t=1747666192; x=1748270992;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3SrxcDTUcmqIlvR5XmLYs5oJp7X3CtIX4pefToQDsMo=;
- b=Pu7KT9lXjThUEeeEL2N0JOzS5Ppj1iYBuL1+tg9Ksh7fnF8BcnIdn/XJkWlkxmQ36Q
- KwtcQ9mbces9MN9Nl3dSKAtfGH9rCcmC7ZBca6ZrENuR/FeBuUeHsIlISJWEBLOffAk7
- u1Ty39dQYV3IYviDEndnxcvDpeZjRfZIikZV/T39od30LEg1YMEz00iK7beDQnPTh0ts
- 4Qisw0+GMNUErCGqEE0K7H6oabBRNka/k5H7sGzpDZ2ym2WPmL60vo7RVRfCQ1zuDN6u
- u1/q4Y9IqJCx8MbmsPihHmmkdiB+mYcw4MIElKXhKYmA7ddmMbA8JMgGJbpHSdWTA6Wz
- q3Cg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXj7/lkkgNAJnneSP3XP7aF/EQXaeayFDH1zUu0OqpAaBcfOyRpZwnvzxiO8HbK3qZsUGbh/E4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwcrUx3Qw0vjzyPZ238VUHHMpvRSy8eCqltImK3jo4WYCDZ4bhw
- EqTzEXivCgl42a00bhfyUei3l+3k+V66fICzANiZYYwUjT9n6Xz6n0xC0U09zEoRKtM=
-X-Gm-Gg: ASbGncslOXyYesn26N6WDjrjT5yN2/FDp/Aapib1ZJr9HPDZohbP9drjnyi4BcV199s
- FLD/2iuNsqnxwrPqIwWkkVj6thzF7OXQeG1lwakTGXgH+UAqbtHY41LALdwxGWwUMGr1UgiygmY
- EE6cJn/He1oqJBPgOnjupCC3gYAB4aHvP7QAcyqemIcfFAXwf6+36J0aKludt2Ovc21Ski/D86O
- urlSWdBW/+pzG0A6+j1ZtIL+hJ31nKBCJnL6BXzDF4kWWJpKfz4iVo6NJ5maaqSOzKhoS5kaGVv
- gWRS9QfoLZMh+Xw+eCYww/24XdfGe4UsAymU7+ISPyFYZFyq9A3I4fDOvUNiGN/0Ia2Ts8Omat0
- AbTW4dB67mMTb
-X-Google-Smtp-Source: AGHT+IECjc+ZkwHwevUzRbGUKJMm0jOH7LblGRrlSswaCUbJYM20bhbmGn6+8THBCOd+0a+GBQ8rDQ==
-X-Received: by 2002:a05:6870:6f13:b0:2c2:4090:9e8 with SMTP id
- 586e51a60fabf-2e3c1c98dcfmr7381233fac.22.1747666118293; 
- Mon, 19 May 2025 07:48:38 -0700 (PDT)
+ bh=jfNNeDgCpLTffNABzsfn3UYtrusMo+iZUd9RX9PelG8=;
+ b=pE5pGJWCelbYSxrzbAfMbuCdQfdCpvlhmg/FjsrJYg1bALkuHg1nuiCofpuFkEfUjS
+ XgrJGCoiLn4yzENo7BTbcApVpYffYBJ3HhFOTKVtK1M8L8XU7G2KX3X0t3J1HHUjwUqY
+ whO/Z6Hftbyzwzmf+R6XgEpjaZL/+T9njbuBMH8bOm7Q7JKSp7ymGwPetKJFKfFykxuh
+ 1nvjSIwfB+bnVhkbNa1/mvW2GCgmhL94nUC2vzfNtE3Tn7hQeuAITGj9/35qWsbUSnnj
+ 41kHP5SLACAmZiLMM0OO5kTe8R0m08cIHgpBM2RffWUBzwpg0zBlLxecKPXI8S7w0Yko
+ 5W1Q==
+X-Gm-Message-State: AOJu0Yz8yeXydnXfcfGclL653aUJJu+LbGkb7PDvZEbzFFxrTFJelxaN
+ tUZVa3wcirnBBHopgYxmZqBKRznB1QEXO9Bi9UHMsYkpg2DcbBEI7JcQFMRZwpVtEe1Yuy/Dxl4
+ QZHys
+X-Gm-Gg: ASbGncv26JyMdaVkC1wOQ3rfjFsiRogkAaWjsc9LfkVCmxQfVrsLBOYWnmxttTAHJUN
+ 3WKbWxI/YXJoqd0cvQJcpkpakwgP23fE89bNgxZAW0frEBWKAMzncRAEQwUmWwyS22gHAx3kXhk
+ BBNuC0RQzmAPqWx7mZAQKfN7yitKZLF0fP3tMEeT91ZIEeKNkH7dtfeaFNXyXAOXkJPLO3p4R3g
+ AYWNKaAhR0DlHwyNJhUMRBvrPfIBKZ3KNxmHGxR5e0fPUuYbTrk0zfN/vVgLbvhSk45wj1BQ38P
+ r5r+lydMMtYXKhuY++pP1VivXYKcdkBq7Baxj/9Yz3ThZ0c+q72AtdonDihF9Nmv3EwEePNlKU5
+ +yMmF64wk73+4
+X-Google-Smtp-Source: AGHT+IFWAWP6+oWMJ2R8Amx3Wq6GWD5CEsQIeEaZLrAaEVryjt3HEIn3iDqT3TmqXeJIjUAoFcJiXA==
+X-Received: by 2002:a05:6830:6819:b0:72b:992b:e41 with SMTP id
+ 46e09a7af769-734f6b8af80mr8220420a34.23.1747666192448; 
+ Mon, 19 May 2025 07:49:52 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c075b5d6sm1769279fac.22.2025.05.19.07.48.36
+ 46e09a7af769-734f6b3ab1dsm1477536a34.51.2025.05.19.07.49.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 07:48:37 -0700 (PDT)
-Date: Mon, 19 May 2025 08:48:35 -0600
+ Mon, 19 May 2025 07:49:51 -0700 (PDT)
+Date: Mon, 19 May 2025 08:49:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 1/5] efi: stub: Define debug uart functions only if
- CONFIG_DEBUG_UART is enabled
-Message-ID: <20250519144835.GB3396848@bill-the-cat>
-References: <20250515-silent_console-v4-0-dec6c8391f01@thaumatec.com>
- <20250515-silent_console-v4-1-dec6c8391f01@thaumatec.com>
+To: Benjamin ROBIN <dev@benjarobin.fr>
+Cc: u-boot@lists.denx.de, jerome.forissier@linaro.org, joe.hershberger@ni.com
+Subject: Re: [PATCH] env: Fix network support when CONFIG_NET_LWIP is set
+Message-ID: <20250519144949.GP100073@bill-the-cat>
+References: <20250517200930.78975-1-dev@benjarobin.fr>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3tIhSpn0nc2+Ca/F"
+ protocol="application/pgp-signature"; boundary="7ywriDrJqZkNy+Eu"
 Content-Disposition: inline
-In-Reply-To: <20250515-silent_console-v4-1-dec6c8391f01@thaumatec.com>
+In-Reply-To: <20250517200930.78975-1-dev@benjarobin.fr>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,65 +97,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---3tIhSpn0nc2+Ca/F
+--7ywriDrJqZkNy+Eu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 15, 2025 at 05:55:44PM +0200, Lukasz Czechowski wrote:
-> Initialize the debug uart only in case CONFIG_DEBUG_UART is
-> enabled. The _debug_uart_putc is used internally by debug uart
-> functions, so it must be also included inside #ifdef block,
-> otherwise it will cause compilation warnings.
->=20
-> Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-> ---
->  lib/efi/efi_stub.c | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
-> index 40fc29d9adf7..5172cd78a7c0 100644
-> --- a/lib/efi/efi_stub.c
-> +++ b/lib/efi/efi_stub.c
-> @@ -83,12 +83,14 @@ void puts(const char *str)
->  		putc(*str++);
->  }
-> =20
-> +#ifdef CONFIG_DEBUG_UART
->  static void _debug_uart_putc(int ch)
->  {
->  	putc(ch);
->  }
-> =20
->  DEBUG_UART_FUNCS
-> +#endif
-> =20
->  void *memcpy(void *dest, const void *src, size_t size)
->  {
+On Sat, May 17, 2025 at 10:09:30PM +0200, Benjamin ROBIN wrote:
 
-I notice that this, and the uniphier implementations are the only
-non-inline ones. Is the problem we later conflict with your changes,
-perhaps because this wasn't marked inline? Thanks.
+> When lwIP (CONFIG_NET_LWIP) is used instead of legacy stack (CONFIG_NET),
+> environment flags support associated with network was not built: restore
+> support of "i" and "m" environment flags.
+>=20
+> Signed-off-by: Benjamin ROBIN <dev@benjarobin.fr>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---3tIhSpn0nc2+Ca/F
+--7ywriDrJqZkNy+Eu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgrRMMACgkQFHw5/5Y0
-tyy3VQv8DCG5mOcCa+4FQb1KSO9pwW6LWg9OqnJu+BD24kscZLA4llnI9Qzf/t65
-V+BxBEYESJ3bw69A31yPHs2eak8XlkT41xoHmitOzwP1h+tsC2UfU1JsulC7KaOd
-QAmlL13av1cK3yYxMf39ugGweU+F7yGDPupJ1jIodenBCB1DLv0sINiqGA8gyx0V
-H158ltrR13IIFqluWOIUhqSxPaSwRrw5ll0Sp62BKx/2Y+2if6MtiJ79s3SvN1mU
-IyRNz00+VnQZD8CrruD0hy+FH5DHVaLdS9/NWY9SpXnItO16JUuLlMKIDFTOpQh7
-oI2xtuTWXldzVzmZ8y73q4wl1mtOMK9ZOnexJHcbLjoswN5qtJ3gyfuYonroG74P
-W3k4tTbaromfK1Y4zzU0Mp0HY9SdMC1sXg6Db/BRCnXTg2TzVZc2Ita9XpOodoLg
-J8uuAHKajEVK458uI36+ATMECxhKM/sxmBphAnhwZ6cZEDPP9HdrskbwTlwRvQRO
-agOb8Zd7
-=bhol
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgrRQ0ACgkQFHw5/5Y0
+tyxHhwv/Uf+HPeETXt1klTzzXhXnCnzhFjwdpKOkvnhdkeUAx2DOmd9wMiRZ6b9t
+uuyPBOMw7C8PZJR6OqV/zA2y0T/sM3boDjd2otyduqmYpcHW/UEemVPP6hD+REVb
+3mF7DEmy5YZlJ3q7mlRuawHIKaUh6b0FgmBL3ghf8DTMjFgdFDDGI/KFEYm7uaQU
+dWrT6GgimkSfyRyqecMM1TnDLf6rHoxoxK6j7NJK/z6wf8BN7GDpuXgRkWfrRwyA
+Q39UVYRzWHhxmakUWHozjtEyT522V1p1xwkZ02Ne8SVCw2AAKTjQu3PqN1rsjtur
+nIjNqijgTjwW6Po68Xp5xxneL5CiFy6VC70rsF5DqiWJxVmMueaq0Ruju8Ghvugd
+ZWM/ynVkkjywrsUX20bBS4/jmUurnXGqwuXjJyHEbWd0slmc+RjhBVeM/glQZT4z
+F9nhatArcyWNHoLmQcIFNN5o/kMh2tdzOihO46NewSlE0b3oXZ/8L8+3dJ+FnG6y
+YwJfyuBS
+=gB+N
 -----END PGP SIGNATURE-----
 
---3tIhSpn0nc2+Ca/F--
+--7ywriDrJqZkNy+Eu--
