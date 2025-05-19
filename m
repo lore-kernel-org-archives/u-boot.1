@@ -4,55 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CDE5C2D0CD
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 06:45:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A53EC3DA6D
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 06:50:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4DFC81E72;
-	Mon, 19 May 2025 08:45:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 75F8081E72;
+	Mon, 19 May 2025 08:50:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1747637115;
-	bh=THAwZATmxuFi4H26Mvy46Ak0aEZBpwRDvfg29JNlmBI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=i7CP/g82+uhV9O88Kv7pW2kVP9pvA3anOlLOZfUfQ9uoDOmzJ7vR6GwWsbgtVEoIx
-	 sIPY6T8h3oisY/GmpVNEL90H3ukFG22T2JAmnWOysS2WJP91x9UZAUCBluz/odxakN
-	 MBB1IVr+oy+KSxm3lxDNuKeQxHJWf1RKR/qIwmXp57s3r+B2gORY/0FrcjQwyKLVST
-	 naLeHKhFe+HKdDZ5kETlN0ILoOFrTbjGuvy70CY+GWq8wiu9LCCyp3S/lOcndgytW7
-	 7sWb9tFHxD7E+h2CvzygPp3pHQ5EK9oGn29RxXglYqkhsXMx09ATebp7XD9LDk5Ilq
-	 EUFiHdEG6wRxA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BA7A981F66; Mon, 19 May 2025 08:45:14 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D87A9803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 08:45:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Vokb97/c";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 84F1B81F66; Mon, 19 May 2025 08:50:10 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4b17Ty4DQzz9srV;
- Mon, 19 May 2025 08:45:10 +0200 (CEST)
-Message-ID: <889c50b4-cfb3-493a-8e1d-df0c40b2de08@denx.de>
-Date: Mon, 19 May 2025 08:45:09 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 2AFC6803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 08:50:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54J00Q4T000806;
+ Mon, 19 May 2025 06:50:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=UDRzbmzqMEluaIji38eMO2
+ lmDRWSOu5u87sb29hGWy0=; b=Vokb97/cO8j/nr9J1JxT5eM81ho7MmF44Ux8xz
+ xju3Acil2jHBsuvangHXVOYDb5zVH8u04MVJ1I4bF6oGsuwNLEJB2pAoiC5jXTy4
+ WVtCcKP6HbuL9ug+hARCDneqPSUpqag1XlePHM4PBFaeX7vyUoGTVVQOjXsSedR5
+ yo0KLzAi6+kv2hWo6jTCugJQUPLZABoLXzcszQb9oP7q6ezsIw8ffkg/vlyPNv23
+ Ll1WWwLLadRU1ln5P/usQzHWadRETJ+IMbI+Gea3wYphhphrysrER5b5p5aXHJjr
+ WANpJ4j98jkh+EvYKY7vUweP45MeuqncHZBEqiYUjl3Iu8Gw==
+Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46pkr9u9bj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 19 May 2025 06:50:03 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54J6o3ZW018860
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 19 May 2025 06:50:03 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Sun, 18 May 2025 23:50:00 -0700
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <trini@konsulko.com>, <marek.vasut+renesas@mailbox.org>,
+ <sjg@chromium.org>, <quic_varada@quicinc.com>,
+ <di.gerasimov@gmail.com>, <quic_vkarunam@quicinc.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH] cmd: Flush destination buffer only if it is available
+Date: Mon, 19 May 2025 12:19:34 +0530
+Message-ID: <20250519064935.3832233-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Subject: Re: [PATCH] pci: zynqmp: Fix the pcireg base
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, trini@konsulko.com, git@amd.com
-References: <20250516092314.939424-1-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250516092314.939424-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4b17Ty4DQzz9srV
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: JwNx4jLQhVfT2O9mXTf2U2sreaC6gxNk
+X-Proofpoint-ORIG-GUID: JwNx4jLQhVfT2O9mXTf2U2sreaC6gxNk
+X-Authority-Analysis: v=2.4 cv=DdAXqutW c=1 sm=1 tr=0 ts=682ad49b cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=dt9VzEwgFbYA:10 a=COk6AnOGAAAA:8 a=egeJB3ooJo5USmLp7B4A:9
+ a=zZCYzV9kfG8A:10 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTE5MDA2MyBTYWx0ZWRfX5YMfOEhwPUmA
+ sPsH8mc5ZND+z/JGYznlV6kOz7mnAsAP9bAX8IdURvevCvUbC8pDo9H006wqcorGETlAZSg+LWB
+ LC+MP5ozXvNNt7cnqGlve1A5BKb65ovKSvJ/2UsqTtB3uu3zk/r8oLN5t0ULy+iFFTB/T/FHEvJ
+ B/pWFe35LPt6KfaqfYmyfNqcL383bkqtMto20ayrsn4/hQQwmxRaYoFK5i0/XA8dB17eqUHL2th
+ EqgwoNJhwNiXx9R+iwKkPsuQLr2EKcoWJejO2wM5+jBzSqjjVjRsDfSpIJAxJsTc69nmWm4pf43
+ qSFoqvPBWWDhdltXkm9JKGwWR5oGa5jridkE7NazXqIDC0/LGp/vqj/AVrdwJy5CtCJkJMJgGRq
+ glKCz5Z+1jORpKrRPcnJeazsUqWHpA7+ZPiHvWM684xxVnSH0wbKkxzAraDxbws7+VYU6XWT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-19_02,2025-05-16_03,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxlogscore=663 clxscore=1011 phishscore=0 adultscore=0 mlxscore=0
+ spamscore=0 malwarescore=0 suspectscore=0 priorityscore=1501 bulkscore=0
+ impostorscore=0 lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505070000 definitions=main-2505190063
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,41 +108,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16.05.25 11:23, Venkatesh Yadav Abbarapu wrote:
-> The pcireg base is not assigned to any address, reading the
-> pcireg base with PS_LINKUP_OFFSET which is incorrect and
-> giving random values. So update the pcireg base from
-> devicetree so that we can read the valid PCIE link status
-> and PHY ready status.
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   drivers/pci/pcie-xilinx-nwl.c | 7 +++++++
->   1 file changed, 7 insertions(+)
-> 
-> diff --git a/drivers/pci/pcie-xilinx-nwl.c b/drivers/pci/pcie-xilinx-nwl.c
-> index 7ef2bdf57b5..e03ab3be912 100644
-> --- a/drivers/pci/pcie-xilinx-nwl.c
-> +++ b/drivers/pci/pcie-xilinx-nwl.c
-> @@ -303,6 +303,13 @@ static int nwl_pcie_parse_dt(struct nwl_pcie *pcie)
->   		return PTR_ERR(pcie->breg_base);
->   	pcie->phys_breg_base = res.start;
->   
-> +	ret = dev_read_resource_byname(dev, "pcireg", &res);
-> +	if (ret)
-> +		return ret;
-> +	pcie->pcireg_base = devm_ioremap(dev, res.start, resource_size(&res));
-> +	if (IS_ERR(pcie->pcireg_base))
-> +		return PTR_ERR(pcie->pcireg_base);
-> +
->   	ret = dev_read_resource_byname(dev, "cfg", &res);
->   	if (ret)
->   		return ret;
+From: Vandhiadevan Karunamoorthy <quic_vkarunam@quicinc.com>
 
-Ah, many thanks for catching.
+There are code paths in do_imgextract(), where 'dest' could be zero.
+Hence, avoid cache flush of 'dest' doesn't point to any data buffer.
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Signed-off-by: Vandhiadevan Karunamoorthy <quic_vkarunam@quicinc.com>
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
+ cmd/ximg.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Thanks,
-Stefan
+diff --git a/cmd/ximg.c b/cmd/ximg.c
+index 29d7c3279b3..8907b579d4c 100644
+--- a/cmd/ximg.c
++++ b/cmd/ximg.c
+@@ -265,7 +265,8 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		puts("OK\n");
+ 	}
+ 
+-	flush_cache(dest, ALIGN(len, ARCH_DMA_MINALIGN));
++	if (dest)
++		flush_cache(dest, ALIGN(len, ARCH_DMA_MINALIGN));
+ 
+ 	env_set_hex("fileaddr", data);
+ 	env_set_hex("filesize", len);
+
+base-commit: 1b5e435102aa29a665119430196cb366ce36a01b
+-- 
+2.34.1
 
