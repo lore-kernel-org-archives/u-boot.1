@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 723BFC3ABD8
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 11:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F300C2D0CD
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 11:49:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 026CA82AFC;
-	Mon, 19 May 2025 13:33:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E4C781FEE;
+	Mon, 19 May 2025 13:49:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="xwbKW3B/";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="hFN++a5G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0718781E72; Mon, 19 May 2025 13:33:32 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id BBE6F82AFC; Mon, 19 May 2025 13:49:48 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A10282B0E
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 13:33:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0ED281E72
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 13:49:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ad574992fcaso129151866b.1
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 04:33:30 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ad56e993ae9so178287366b.3
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 04:49:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747654409; x=1748259209;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747655386; x=1748260186;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=79nGVIS1PzwNMwuDuru3vasClcuEnvxd2lvVLAnWq5o=;
- b=xwbKW3B/QT+MfTZFvi0a89vraNXZqR/rxnShF4Fn2shtizRg9EDr53CZ6Y6OIOGac5
- ylAttKOC6vGaSM3cUVsXLG68jlUr/qZRFeGPeIMN6M4Gm3TN5Fy7rQVRonqY1Z2Yx2Xd
- gifrqnWtP3JVMMEzO6bC7dfYNUOPmxFk87jgZjTM5dQ1pYjYQAoTGGbkC21KyJlyVeyv
- tW2PZa1dWVeXYeiQCxMyW1MJKdtwkzQ3rKSrQrcvX4VBa1b72Jym9ECDTduPSTMmL1Qi
- XfokgQPKhFjm5RHewmy4aoYhNWcKIVjmrADa+uauPEEX3InrNGEK/RmaSBM6X9p9OAUf
- jnag==
+ bh=SK9ss3402S661VRDPQ2wRDIk73djh1jJtWalnXdvjT0=;
+ b=hFN++a5GlyLUl0ElDTYHWUujh2gHM7VH7vbSFS19uIlLQHBIdMkbErRa9JmwgZok14
+ WwXWSafOEIE2vw/XpvffTLHWQ3HfAkp5g4CwR8wR/s8gIwS3lXvvrMJsDwyRfmz3xPgm
+ Yz6YTsTLJgyopaUmNkQeIdmiUX3UhJSknoQFmHWb1HLMOpmcEY1XkQ4V5iU3ri1bYpVU
+ 1Prm2/aewl5nJagRNE/OrAsVqCE44JGfIs1KaBwOvCRMJo+Sth1NTLf8nhdWoVD/epqy
+ mlzYpUp02VyyX+1XpyT7UhW6J/zkJYzsWLdItLxWCK9TSgsN8yZeF6f4JLIznVEVi17L
+ llhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747654409; x=1748259209;
+ d=1e100.net; s=20230601; t=1747655386; x=1748260186;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=79nGVIS1PzwNMwuDuru3vasClcuEnvxd2lvVLAnWq5o=;
- b=Oqd4xc8Jye5o6CBzsOs36jWoi85xTM4rtPlixp9l8DKfOIcIXzDp+GYOUoWj+e/X4w
- D96pxuuD1r6al0XvbWmRGwJMnA5kfVs9jffkeQ4l1Bs1F8nCPmy7S4Dd0BBw3imAlDGe
- jkafzouzpzMapDBkHMczZ3OJhAIVrISy81uU+K0ZDT7ZXuueqxDiwiyD54h20KWk6820
- Ad3nveLl+rV2NwnseWv5KLwhYTLu37WF+A0OoZ4EVmlNKPj28Pvs9+u8TxpAykTePkY0
- HU+MdDMF9w77Hh08p/PV9gOyi/Hh5a2RSAkaS4CHV+8nrtpMt+gJ3gr07DMK7OuGPooe
- 2+9g==
-X-Gm-Message-State: AOJu0Yy4ZQfy3IeVBmqG5GR5IxwoAw8RUo7xIXfY1Mt8m/vDUeP6totN
- wzfqwLPTwjdV2V+7Z7e0LE2bJJ9EX2wSEVIqWcj/ryle9vvoX4Pke5505djVYdV9DLxyVImD1wh
- Mpm9byCgZ5JXg6PUUYtVIxxq48PNQsA3fcTY3H/97Kg==
-X-Gm-Gg: ASbGnctbwzNEtHEzaLx38vNLUcFoQZ9fzwBl/0dZFMI6UkB8P7uI5C0xOuO5KuZX8YZ
- HbKI2AhDcZSIht155e0W93pFnNDnswjA6HYzHEG8zcbNgWKTFR94hnfFQpkodgFSQwDeH2vDKww
- Y0j8TXZS4fCneYD45pDEUOlRxtyDllepc=
-X-Google-Smtp-Source: AGHT+IGxuAiJLoSBUhq35ieUnVvBCZKjec12GjF6fvSmvx69HOK9yL27kdu9vz8doZi7LY3hulMeQvpUna8Ig54AekI=
-X-Received: by 2002:a17:906:b750:b0:ad5:3e27:ebc with SMTP id
- a640c23a62f3a-ad53e271fccmr808618066b.57.1747654409475; Mon, 19 May 2025
- 04:33:29 -0700 (PDT)
+ bh=SK9ss3402S661VRDPQ2wRDIk73djh1jJtWalnXdvjT0=;
+ b=nGcHzNcnU2c+x/+d7Er60j88EYsLB9UEiDDZExJddlthmJkM+xtVxNDPdd+kPtjKIz
+ G1qPp/XzRBlAa6Z9v2x9sJ9WwPfl0EaAQmDLgja+eqoL9HbGRDRRRN/wZMFAzIbfP/d6
+ SAHA3pcY4RNWbLOPAg5jve2QgSRcEdp3P6iCpPgZm2W28KuWMKOOMAST0LYKZd1kcMGk
+ vDaUnb7xdDnkOWJhJMnliT7NfJ4otlQDu0PD/SESVfslznc+8V4RoJU6CpzrQseVhqd4
+ U74RaQyFLkRWk5dBzKr1zfe2PIoIruXNl4cMvvE3v4GILURd6enSnOa8v92ZMQdiW3CV
+ QrSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVuFAHDSkWREkXS2N2ptiUpLTD7MXGq3EvAuUBrVsah7AVjqDNPKu1yhjpVSeZPL8QdjFVbIas=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBe2Tp/YlFeOfs26+GLVFJUB73IuA/U47qgsOGhTcqnDMRBP44
+ oPnWSpzArA3ESa9JuIm+Tx6tP6Mt2e+xSNfcppIeQMDeqNls0gxNpGZ8O66hazeCoU+Dhp1orKc
+ Kvc2c+tCtm3PApo3H2jRkJDB2sccz6MenqFuIBllIVQ==
+X-Gm-Gg: ASbGnctYGv/vX3lNkvMXElGJaWbb2S4GKOmzn7nfjmOP2n+7nF2+J2zRVcAtMy8uSWJ
+ JOQKAu6z2H8FX9BxOB/7ZltszdZbp7ISbRqmK2WcHLTHS8hvZwYIUrQ4J/s3StazyWnNytjUklY
+ 3t7/YONSfbrFLpoPsveiQO62Zdo9Gxcd0=
+X-Google-Smtp-Source: AGHT+IGCQITab/+3thULaeYsTv/rGSj+qu7wesODKmfCdVL/idftHzy1qacsnL20WriRJgHttmMNe+5N0uAWu+kgB9E=
+X-Received: by 2002:a17:907:72c9:b0:acb:52cb:415f with SMTP id
+ a640c23a62f3a-ad536f27ba5mr1130466666b.48.1747655386138; Mon, 19 May 2025
+ 04:49:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250425-usb_onboard_hub_cypress_hx3-v1-0-3cc5a06087cf@thaumatec.com>
- <20250425-usb_onboard_hub_cypress_hx3-v1-1-3cc5a06087cf@thaumatec.com>
- <3c142aee-f6c2-4313-b743-57d7e7b96d0f@cherry.de>
-In-Reply-To: <3c142aee-f6c2-4313-b743-57d7e7b96d0f@cherry.de>
+References: <20250515-silent_console-v4-0-dec6c8391f01@thaumatec.com>
+ <20250515-silent_console-v4-2-dec6c8391f01@thaumatec.com>
+ <64515b97-1e4f-4e58-86aa-1cd5dc3de9ec@cherry.de>
+ <CABd623t=qZLn35J7BdO9q-AyXHk49cPyf0uDOA7UQ0FL=oxM1g@mail.gmail.com>
+ <df9d437b-5d7f-414a-a88e-d2ce0c25c05b@cherry.de>
+In-Reply-To: <df9d437b-5d7f-414a-a88e-d2ce0c25c05b@cherry.de>
 From: =?UTF-8?Q?=C5=81ukasz_Czechowski?= <lukasz.czechowski@thaumatec.com>
-Date: Mon, 19 May 2025 13:33:17 +0200
-X-Gm-Features: AX0GCFuXrUTWAewU0t4ji_3yjuyidJ2Z_gAMkuya9h4a5iYsWZFUEF6qK6l8gCc
-Message-ID: <CABd623tq9fZz32YwOje5+RiZ51y-hp2hjfLG72D5vEHPQCvmGw@mail.gmail.com>
-Subject: Re: [PATCH 1/4] usb: onboard-hub: Use the ofnode to check if the
- peer-hub was probed
+Date: Mon, 19 May 2025 13:49:34 +0200
+X-Gm-Features: AX0GCFvtdSg3O9t5KT5pop-xj4G6nWUO7ePINmCu1FeB4hbvarzSkpH5hNiJqoY
+Message-ID: <CABd623vgVmyHhpmEtyEyCk_ShHr-+RpDz6yi8Pu4u_g_ji4j6Q@mail.gmail.com>
+Subject: Re: [PATCH v4 2/5] debug_uart: Replace debug functions with dummies
+ if CONFIG_DEBUG_UART is not set
 To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,85 +101,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-
-pt., 16 maj 2025 o 16:28 Quentin Schulz <quentin.schulz@cherry.de> napisa=
+pon., 19 maj 2025 o 12:40 Quentin Schulz <quentin.schulz@cherry.de> napisa=
 =C5=82(a):
 >
 > Hi Lukasz,
 >
-> On 4/25/25 12:56 PM, Lukasz Czechowski wrote:
-> > Currently the check in usb_onboard_hub_bind is relying on specific
-> > compatible string for the Michrochip USB5744. Replace this with
-> > more generic approach that will allow to add new types of devices
-> > to the of_match table. Because the driver only needs to bind one
-> > "half" of the hub, the peer-hub node is used to find out if it
-> > was already done. In case peer-hub was bound, -ENODEV is returned.
+> On 5/19/25 12:32 PM, =C5=81ukasz Czechowski wrote:
+> > Hi Quentin,
 > >
-> > Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-> > ---
-> >   common/usb_onboard_hub.c | 15 ++++++++++-----
-> >   1 file changed, 10 insertions(+), 5 deletions(-)
+> > pt., 16 maj 2025 o 17:27 Quentin Schulz <quentin.schulz@cherry.de> napi=
+sa=C5=82(a):
+> >>
+> >> Hi Lukasz,
+> >>
+> >> On 5/15/25 5:55 PM, Lukasz Czechowski wrote:
+> >>> In case DEBUG UART is not used, define dummy macros replacing
+> >>> the actual function implementations that will not be available.
+> >>> This allows to compile code and avoid linker errors.
+> >>> Redefine the DEBUG_UART_FUNCS macro if DEBUG UART is not available,
+> >>> to avoid compilation errors.
+> >>>
+> >>> Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+> >>> ---
+> >>>    include/debug_uart.h | 15 +++++++++++++++
+> >>>    1 file changed, 15 insertions(+)
+> >>>
+> >>> diff --git a/include/debug_uart.h b/include/debug_uart.h
+> >>> index 714b369e6fed..4526dca24ac6 100644
+> >>> --- a/include/debug_uart.h
+> >>> +++ b/include/debug_uart.h
+> >>> @@ -128,6 +128,8 @@ void printdec(unsigned int value);
+> >>>                        (1 << CONFIG_DEBUG_UART_SHIFT), \
+> >>>                CONFIG_DEBUG_UART_SHIFT)
+> >>>
+> >>> +#ifdef CONFIG_DEBUG_UART
+> >>> +
+> >>>    /*
+> >>>     * Now define some functions - this should be inserted into the se=
+rial driver
+> >>>     */
+> >>> @@ -197,4 +199,17 @@ void printdec(unsigned int value);
+> >>>                _DEBUG_UART_ANNOUNCE \
+> >>>        } \
+> >>>
+> >>> +#else
+> >>> +
+> >>> +#define DEBUG_UART_FUNCS
+> >>> +
+> >>> +#define printch(ch) (void)(ch)
+> >>> +#define printascii(str) (void)(str)
+> >>> +#define printhex2(value) (void)(value)
+> >>> +#define printhex4(value) (void)(value)
+> >>> +#define printhex8(value) (void)(value)
+> >>> +#define printdec(value) (void)(value)
+> >>> +
+> >>
+> >> There are a few additional functions that aren't redefined here:
+> >>
+> >> _printch
+> >> printhex1
+> >> printhex
+> >> debug_uart_init
+> >>
+> >> any particular reason for not having included them?
 > >
-> > diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> > index 7fe62b043e6a..9f8c1a304cdf 100644
-> > --- a/common/usb_onboard_hub.c
-> > +++ b/common/usb_onboard_hub.c
-> > @@ -9,6 +9,7 @@
+> > Looking at the original code, _printch, printhex1 and printhex function=
+s
+> > seem to be only used internally by other print functions, hence they ar=
+e
+> > static (there are also no forward declarations of them in linux_uart,h,
+> > and I haven't seen any usage in the U-Boot code).
 > >
-> >   #include <asm/gpio.h>
-> >   #include <dm.h>
-> > +#include <dm/device.h>
-> >   #include <dm/device_compat.h>
-> >   #include <i2c.h>
-> >   #include <linux/delay.h>
-> > @@ -179,8 +180,8 @@ err:
-> >   static int usb_onboard_hub_bind(struct udevice *dev)
-> >   {
-> >       struct ofnode_phandle_args phandle;
-> > -     const void *fdt =3D gd->fdt_blob;
-> > -     int ret, off;
-> > +     struct udevice *peerdev;
-> > +     int ret;
-> >
-> >       ret =3D dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &=
-phandle);
-> >       if (ret =3D=3D -ENOENT) {
-> > @@ -193,10 +194,14 @@ static int usb_onboard_hub_bind(struct udevice *d=
-ev)
-> >               return ret;
-> >       }
-> >
-> > -     off =3D ofnode_to_offset(phandle.node);
-> > -     ret =3D fdt_node_check_compatible(fdt, off, "usb424,5744");
-> > -     if (!ret)
-> > +     ret =3D device_find_global_by_ofnode(phandle.node, &peerdev);
 >
-> Wondering if uclass_find_device_by_ofnode(UCLASS_USB_HUB, phandle.node,
-> &peerdev) wouldn't be faster/more appropriate here?
->
+> If I haven't misunderstood how C header works, I believe the fact that
+> the functions are static and used only in functions inside the header is
+> irrelevant. A static function in a header will still be available in the
+> C files that include it, even if there are no user of the function in
+> the header file. I believe this means anyone who includes that header
+> file and use one of those functions will have a build failure when
+> deselecting CONFIG_DEBUG_UART.
 
-Thanks for the remark. I'm wondering what are the differences between the
-device_find_global_by_ofnode and uclass_find_device_by_ofnode, other than
-the additional uclass_id parameter. Knowing that uclass_id is always
-UCLASS_USB_HUB it might be good idea indeed to use the
-uclass_find_device_by_ofnode that checks only devices within specific uclas=
-s.
+My point was that even if using those functions is technically possible
+(because as you wrote 'static' is irrelevant here), it was likely not inten=
+ded
+by the author. However if you think it's safer to redefine them as well,
+I can update the patch.
 
-> Looks good in any case so:
 >
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > The debug_uart_init function calls are, in most cases, guarded by
+> > CONFIG_DEBUG_UART, so it didn't trigger compilation errors for me.
+> > Do you think it's worth redefining it for consistency?
+> >
 >
-> Just for general information (I assume specifically to Tom since he's
-> the maintainer there), I would really appreciate this to be merged
-> before we sync the kernel DT with 6.16 (if Heiko manages to squeeze one
-> last merge request to Arnd before the cut-off date; or 6.17 failing
-> that) otherwise RK3399 Puma will have USB completely broken (I assume we
-> could have -u-boot.dtsi hacking the device tree to remove/add nodes to
-> keep it as it is today, but better to not do it :) ).
->
-> Timeline wise, I assume 2025.10 at the earliest, but maybe 2026.01? It
-> depends when 6.16/6.17 will be released and/or if we take -rc1 :)
+> I think it makes sense, maybe Tom or Simon have another opinion on that.
+Agree on that, thanks.
+
 >
 > Cheers,
 > Quentin
