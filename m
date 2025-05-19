@@ -4,94 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A53EC3DA6D
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 06:50:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5593CC3DA6D
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 07:06:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75F8081E72;
-	Mon, 19 May 2025 08:50:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 839E981E72;
+	Mon, 19 May 2025 09:06:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Vokb97/c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FAIyB961";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84F1B81F66; Mon, 19 May 2025 08:50:10 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7F97481F66; Mon, 19 May 2025 09:06:16 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AFC6803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 08:50:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0018A803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 09:06:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54J00Q4T000806;
- Mon, 19 May 2025 06:50:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=UDRzbmzqMEluaIji38eMO2
- lmDRWSOu5u87sb29hGWy0=; b=Vokb97/cO8j/nr9J1JxT5eM81ho7MmF44Ux8xz
- xju3Acil2jHBsuvangHXVOYDb5zVH8u04MVJ1I4bF6oGsuwNLEJB2pAoiC5jXTy4
- WVtCcKP6HbuL9ug+hARCDneqPSUpqag1XlePHM4PBFaeX7vyUoGTVVQOjXsSedR5
- yo0KLzAi6+kv2hWo6jTCugJQUPLZABoLXzcszQb9oP7q6ezsIw8ffkg/vlyPNv23
- Ll1WWwLLadRU1ln5P/usQzHWadRETJ+IMbI+Gea3wYphhphrysrER5b5p5aXHJjr
- WANpJ4j98jkh+EvYKY7vUweP45MeuqncHZBEqiYUjl3Iu8Gw==
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46pkr9u9bj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 19 May 2025 06:50:03 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54J6o3ZW018860
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 19 May 2025 06:50:03 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Sun, 18 May 2025 23:50:00 -0700
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <trini@konsulko.com>, <marek.vasut+renesas@mailbox.org>,
- <sjg@chromium.org>, <quic_varada@quicinc.com>,
- <di.gerasimov@gmail.com>, <quic_vkarunam@quicinc.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH] cmd: Flush destination buffer only if it is available
-Date: Mon, 19 May 2025 12:19:34 +0530
-Message-ID: <20250519064935.3832233-1-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-7086dcab64bso35936107b3.1
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 00:06:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1747638373; x=1748243173; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+SGyvB94KlKf2lnjhmb3bGu0Ltw0u3HzLTfZ8r4AdOE=;
+ b=FAIyB961n3mEtJxXgT9RILsqpxx5EJ6pm/jNzfxWDdmAHzuJur/SoyclpRzKRtyZYv
+ TbhkZ86v4JDQG8bvOH/L+r90L15Q7C5fE2/8pR+XdgmA04hGXr3KN5ZC4D8w4LnWVtLG
+ v1ZltzTpkqFpUFB3sTZgoc5V48ndTs5MjxQ7iYyIZ4ST7TzuERInFw6C8gbg7bMNnM87
+ 5yHC/cvj1lJrcN8NdXCDhNE27tfrqPiM/7KrYJP4tlM3iXDIQnYs3H/DDiwMUpwRs9VM
+ cToIiBF7dzvIIXOAu7sqxOsvyi3qTss9iFeR4inTVFzX0Z/aY9KWhunFbeXj79HVy1RG
+ a0oQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747638373; x=1748243173;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+SGyvB94KlKf2lnjhmb3bGu0Ltw0u3HzLTfZ8r4AdOE=;
+ b=wxVlND/Nknyqr0tMnXDMujaqaO65WER3GeBsEZHs1oSNWxGSILxGS8+GSk/qgprE40
+ 3A7KD3GUKzaMKd8+oGbuZU+SkrLacG6WjT0LOZi96kKPmGrME5RR2KPe0tzPg0vgT9SC
+ ZgUSYgiI66gxMGCardwjgzzQZp88Hz9MlL0hGQmwsrxpE6YDyHs9vL5d+olJSG9jZaY3
+ fGJzAwsiRLd+VqGXX6xNXZ+VBjjquey0RkDhgXtkqrdFoyxbx5EP8jfwQcO5+xedvg8z
+ +VJt54Exd+s14Eb1sWAc1z2pot+CYm+tUk6ivox7LB1zThHQON9scGrXkArRYOVdyBUU
+ DLwA==
+X-Gm-Message-State: AOJu0YwQCI9If0Rkg+rZ1l5iFwBgmpCGR+UiXrcmRnKYtK2u90+R3WF4
+ l6uL7PWp7iM8e667AyCYA2+5gu8oQtReA8I2Csw0XD9yre0LQy4LFv3ip3Yfw9YyjLGFzMQUS9q
+ zpbXpChNjuwinyIyvkuRX2xrn55Tqj8sHQJSBsj71aw==
+X-Gm-Gg: ASbGncurIZ18+pnUlcXQw7ajBbm3y6kQbfY51+zP8/amVXqKthVHzuDtkLZqtYz1z3n
+ RFfWvmhR7TL2/cPet3aeMxQdXCttirxiETZe56lr1ZlMR6JIJIdmtkTiHjNR9ZTW4cJvGy3+ZxB
+ GYcGWMVaWC1hApQiV8WzY5ioVfvDC4ITKwUA==
+X-Google-Smtp-Source: AGHT+IGvTSHtNvNjBwLVrs/isVwR5All/v4VHvA3CYl/Wai6bTimsIMlXf2D1xQzGD2QSlxcM9jHJcOdorBIzA/y6Bw=
+X-Received: by 2002:a05:690c:4986:b0:708:bc95:7ca4 with SMTP id
+ 00721157ae682-70ca799b91amr168288547b3.4.1747638372838; Mon, 19 May 2025
+ 00:06:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: JwNx4jLQhVfT2O9mXTf2U2sreaC6gxNk
-X-Proofpoint-ORIG-GUID: JwNx4jLQhVfT2O9mXTf2U2sreaC6gxNk
-X-Authority-Analysis: v=2.4 cv=DdAXqutW c=1 sm=1 tr=0 ts=682ad49b cx=c_pps
- a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=dt9VzEwgFbYA:10 a=COk6AnOGAAAA:8 a=egeJB3ooJo5USmLp7B4A:9
- a=zZCYzV9kfG8A:10 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTE5MDA2MyBTYWx0ZWRfX5YMfOEhwPUmA
- sPsH8mc5ZND+z/JGYznlV6kOz7mnAsAP9bAX8IdURvevCvUbC8pDo9H006wqcorGETlAZSg+LWB
- LC+MP5ozXvNNt7cnqGlve1A5BKb65ovKSvJ/2UsqTtB3uu3zk/r8oLN5t0ULy+iFFTB/T/FHEvJ
- B/pWFe35LPt6KfaqfYmyfNqcL383bkqtMto20ayrsn4/hQQwmxRaYoFK5i0/XA8dB17eqUHL2th
- EqgwoNJhwNiXx9R+iwKkPsuQLr2EKcoWJejO2wM5+jBzSqjjVjRsDfSpIJAxJsTc69nmWm4pf43
- qSFoqvPBWWDhdltXkm9JKGwWR5oGa5jridkE7NazXqIDC0/LGp/vqj/AVrdwJy5CtCJkJMJgGRq
- glKCz5Z+1jORpKrRPcnJeazsUqWHpA7+ZPiHvWM684xxVnSH0wbKkxzAraDxbws7+VYU6XWT
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-19_02,2025-05-16_03,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxlogscore=663 clxscore=1011 phishscore=0 adultscore=0 mlxscore=0
- spamscore=0 malwarescore=0 suspectscore=0 priorityscore=1501 bulkscore=0
- impostorscore=0 lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505070000 definitions=main-2505190063
+References: <20250514161841.3591411-1-adriano.cordova@canonical.com>
+ <20250514161841.3591411-2-adriano.cordova@canonical.com>
+In-Reply-To: <20250514161841.3591411-2-adriano.cordova@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 19 May 2025 10:05:37 +0300
+X-Gm-Features: AX0GCFtp3EQWcop_KbpMqOw8-Rus5yxvRfUw6mvKWIIuABw4MvVgjbZn6zO4R6E
+Message-ID: <CAC_iWjKYPFWcCCXe-RTeU0Q2A+2ku-JzE3A7z1yG_UWDk_ecuw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] CI testing: add http server to CI tests
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, sjg@chromium.org, 
+ trini@konsulko.com, jerome.forissier@linaro.org, 
+ Adriano Cordova <adriano.cordova@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,33 +94,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vandhiadevan Karunamoorthy <quic_vkarunam@quicinc.com>
+On Wed, 14 May 2025 at 19:17, Adriano Cordova <adrianox@gmail.com> wrote:
+>
+> Add an http server to CI tests so that HTTP booting and
+> loading can be tested.
+>
+> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> ---
+>
+> changes in v2:
+>   - Remove HTTP_SERVER argument for test.py
+>
+>  .azure-pipelines.yml | 11 +++++++++++
+>  .gitlab-ci.yml       | 11 +++++++++++
+>  2 files changed, 22 insertions(+)
+>
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 9c136513bb9..334cf27cfb5 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -316,9 +316,20 @@ stages:
+>            fi
+>            export PATH=3D/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
+>            export PYTHONPATH=3D/tmp/uboot-test-hooks/py/travis-ci
+> +          python3 -m http.server 80 --directory "\${UBOOT_TRAVIS_BUILD_D=
+IR}" > /dev/null 2>&1 &
+> +          HTTP_PID=3D\$!
+> +          sleep 1  # Give the server a moment to start
+> +          if ps -p \${HTTP_PID} > /dev/null; then
+> +            export HTTP_PID
+> +          else
+> +            unset HTTP_PID
+> +          fi
+>            # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \=
+$var" if not
+>            ./test/py/test.py -ra -o cache_dir=3D"\$UBOOT_TRAVIS_BUILD_DIR=
+"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_EXTRA} \${TES=
+T_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUI=
+LD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=3D\$(System.Defa=
+ultWorkingDirectory)/results.xml
+>            # the below corresponds to .gitlab-ci.yml "after_script"
+> +          if [[ -n "\${HTTP_PID}" ]]; then
+> +            kill \${HTTP_PID};
+> +          fi
+>            rm -rf /tmp/uboot-test-hooks /tmp/venv
+>            EOF
+>        - task: CopyFiles@2
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 7aadd5d8b73..f320de0c29c 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -106,10 +106,21 @@ stages:
+>      # "${var:+"-k $var"}" expands to "" if $var is empty, "-k $var" if n=
+ot
+>      - export PATH=3D/opt/qemu/bin:/tmp/uboot-test-hooks/bin:${PATH};
+>        export PYTHONPATH=3D/tmp/uboot-test-hooks/py/travis-ci;
+> +      python3 -m http.server 80 --directory "${UBOOT_TRAVIS_BUILD_DIR}" =
+> /dev/null 2>&1 &
+> +      HTTP_PID=3D$!
+> +      sleep 1  # Give the server a moment to start
+> +      if ps -p ${HTTP_PID} > /dev/null; then
+> +        export HTTP_PID
+> +      else
+> +        unset HTTP_PID
+> +      fi
+>        ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID} ${TEST_PY_E=
+XTRA}
+>          ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
+>          --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
+>          --junitxml=3D/tmp/${TEST_PY_BD}/results.xml
+> +      if [[ -n "${HTTP_PID}" ]]; then
+> +        kill ${HTTP_PID};
+> +      fi
+>    artifacts:
+>      when: always
+>      paths:
+> --
+> 2.48.1
+>
 
-There are code paths in do_imgextract(), where 'dest' could be zero.
-Hence, avoid cache flush of 'dest' doesn't point to any data buffer.
-
-Signed-off-by: Vandhiadevan Karunamoorthy <quic_vkarunam@quicinc.com>
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
- cmd/ximg.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/cmd/ximg.c b/cmd/ximg.c
-index 29d7c3279b3..8907b579d4c 100644
---- a/cmd/ximg.c
-+++ b/cmd/ximg.c
-@@ -265,7 +265,8 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		puts("OK\n");
- 	}
- 
--	flush_cache(dest, ALIGN(len, ARCH_DMA_MINALIGN));
-+	if (dest)
-+		flush_cache(dest, ALIGN(len, ARCH_DMA_MINALIGN));
- 
- 	env_set_hex("fileaddr", data);
- 	env_set_hex("filesize", len);
-
-base-commit: 1b5e435102aa29a665119430196cb366ce36a01b
--- 
-2.34.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
