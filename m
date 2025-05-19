@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D44C3ABD8
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 14:11:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20864C2D0CD
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 14:19:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B782082B0E;
-	Mon, 19 May 2025 16:11:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 85C3881FEE;
+	Mon, 19 May 2025 16:19:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Kf1ONWij";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BIX0b9Be";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC7F381F66; Mon, 19 May 2025 10:46:36 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id D05F582B0E; Mon, 19 May 2025 16:19:12 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9A14803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 10:46:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9118C8003E
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 16:19:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-442ccf0e1b3so50984365e9.3
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 01:46:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2c2ada8264aso2100924fac.2
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 07:19:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747644394; x=1748249194; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=iasu8tCinqbhSor1J++C1Q3fycjajRSfvyPET+TiAy4=;
- b=Kf1ONWijtbX0DQyfpAyz4tn+f5Qc8iCzFyJQbLbaWv5o5tVfqJlugiZtN8MbLI4a06
- 1W5V9HQvni+0PUy9lSMDPFBzhTV3a1wWV3cO4WV1di9V3A9SImDchM527hB1dvxWeYTE
- p9a945PUFb2MSRUlBam4lDV+Og68h7qc7nKJpJQj7B0TfyMGjbWVoK+5vGL6hbyucyXt
- +vBxcXbb+1/+EZf2ts6TSMdz9G9WYAy+ANPedJGNExhJRcrF15jzldDYPiCghi00XgIX
- Bqh3D+zlG9FAF4QiAH3qi3yG1ooYxFrFXiucCRvjZ2doQAYdnN6xXbRHZW2OFZP9RE1c
- oBjw==
+ d=konsulko.com; s=google; t=1747664349; x=1748269149; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZHJKbB6OrRN+pWzlUx60YBhWxswLaK5gSzv983Xllwc=;
+ b=BIX0b9BevsnuBlZ3Mx8LFrVHdzX7h4qvecKggbthp3S1O9A2RPC/H64Polx4yOf/rl
+ cZvYPSbgxeJCEI/ogKk/wQACUPNy2nQODkba4ZiNMyR4d5/FoTr0EwdU1WKeEtf5XDWd
+ E2K12mxrCZQ0KEe7jPbSUW2pOAsGjIYzAHSUs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747644394; x=1748249194;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iasu8tCinqbhSor1J++C1Q3fycjajRSfvyPET+TiAy4=;
- b=psVNm0JLe4EYK7F0VWtD/7aD0m9mMGIbEuYGU0+UMWyesZOlBLUdLcKhmaPEh4KUAk
- I+ZeMkvFjzeMn++VEm2Q1NuNzKGW1J0AcEbExrBz78SyaD9wDRa94IKAAVwjx9n5h9qu
- HjtHlD7HltRMdfkbncx/Tp27ePPVGBDPFQpGTAcE6q+MYEK97jM6UnrPntwH/JzXQ4ap
- /6fgBn9sWQnN39kyoaq4DH+AouLk8hzVJUpShplRXWXtZ95bv/bS81tqlvpivQGqt3mE
- Zndb5jZ/+kKEKJzgY7KhaT+IT6q7PEP5voF/m0SWwxGsfePxvUIcqZltg/ISDvWNGgVd
- 7Fzg==
+ d=1e100.net; s=20230601; t=1747664349; x=1748269149;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZHJKbB6OrRN+pWzlUx60YBhWxswLaK5gSzv983Xllwc=;
+ b=PT0bCzvIiv45CCw40XL0lfRGQCaBtCJQvSE+CqxbYoNJdiPckQuAgHK8BIEJn+5XLU
+ tFB99/TiXk3fUXJ4ZhNM7XuzaPa88l4P7vACt//7mw+OUWVPNpSCaYjurtByicDs0RsF
+ 0GK16jmCq/ldTFTIYZYlBx/BJZvAIcmeJq6Xam/WB5A6DZERM0suBLDZcgkEDnecyC5/
+ nckhRlFskkHdSnXDSHA96xoyOsQvbRZP2GdIrdXmPKSqwFwjqVVEWLtiqU1zAWlgGCnO
+ YelHjUP4//67E0zApkjr/g5LcvtikWDUAagd+aUHJ3s7U2lfrGxHO2C4TqjTaWwwtGLm
+ 7Qjw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtmz3cyxa8nzuc2WbuX6BKphQG2DJE6ASkMDQb59f3r8tNW/tbIhIOkhFq3JxK/SAWtnK246k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx682s+TphMZC+oriajirHjG4Cpckc/u4yabL/zoGyqZtYCnnDN
- 2UCqLBla6JAQ4MUlnoYSqvr+RlaPwWM0poCoK6cpeBXlUoem2SynRm0Q
-X-Gm-Gg: ASbGnctrYKYHvcjC9HNjj7nbuhCXWCbTEGXyLn2g5a2SbhEaX5Ect7ObLIz07jipCpB
- EKk5b4NrSJF9vyeGSftDotcLQQGQ6xRcVrvirySqefV+70non7PUvdDAp/NOJa0sxm91Js13Lzx
- C/eA9xEsOKWdFFh1cyCExN6E8/Y/XTTms2ULpd6BJVqDs4bHeCV7pY+A0ZbFWwgm7kmCNhnmKeS
- L7rSSmXkfXa5t64OmqKO58L2VIw6+RpqOLTS7DEaO+q9RC5ngaNuNOUbIXO9RrhO82EVJNx1dgz
- S05lLkOh2c7pamzrBWAKCPL7zgw80gGeUfmJIYg2mIJW5PI=
-X-Google-Smtp-Source: AGHT+IG57nQI4j4Zo6MdGq3jg17Q6rs4d9BzN2WjF8xsqoTqvq+K4LZvxRH21hvKHOb/Ch9siloadQ==
-X-Received: by 2002:a05:600c:4f42:b0:442:f4d4:522 with SMTP id
- 5b1f17b1804b1-442fd60a5bemr108025895e9.5.1747644393864; 
- Mon, 19 May 2025 01:46:33 -0700 (PDT)
-Received: from vitor-nb.. ([2001:8a0:e602:d900:984:e6e4:a4ae:d95d])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442fd59ab3esm133143205e9.40.2025.05.19.01.46.33
+ AJvYcCXWcGuW1Xw3kKp7KzlQinN9Lq2L9jds4nQLtkQZcq3/C0ADr64uL0xJ8FiJZqs576MY5/Heotg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxW+4mGXSVhOGbo8HE1S4cCzUB4MeXnj/IdGokpauezVEX7iVFs
+ v4g9f1fv8DerN1aajvItJnP6MTuOOAIltuSZTxTVt7l6zswiiPj9ica7LMiNu2UbKn4=
+X-Gm-Gg: ASbGncu43Tpc8+Fv+Ge8GlrAPwmLLtDj4nZKVTa7o3bt+f9OvmCZ/PgL5/gwujFkIlA
+ F6PGoW2xHQ6owVMlDgh0lJkECI0b4Lyf8XTcVUYVURYqWSstblo7erD8PHZK/pT67k86CvploCB
+ z3Lfr6ptNPARsCE2xO56idYvo+OqVetnJA4tenFCPeGFZCEvxAoiTIAtI4ElYwoZyRKe24NZu3q
+ nOVb3Xyc6Yre5hWKUg99tkoC8kwSucKtsRGQTj9YCxg/GGtxV44PNFmbdeveseH7gVzgAh9IWFt
+ /OUtjhepE6B5PGxs278NAhGJa58PtHwO/MqPK75bEkna7d4h9UxFGVo4PrX45HJ25nKn+ostkQR
+ 6EUHPb7Ce0e38
+X-Google-Smtp-Source: AGHT+IELF2uk5u26iSKW80XE6LNDgeie1DnBMom2mS24jB2SruHWVTusWAM6kx1pOz6bBsW1maqRig==
+X-Received: by 2002:a05:6870:1e84:b0:2c2:3fad:760f with SMTP id
+ 586e51a60fabf-2e3c1f6f15dmr7684401fac.37.1747664348847; 
+ Mon, 19 May 2025 07:19:08 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-734f6a82109sm1425696a34.28.2025.05.19.07.19.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 01:46:33 -0700 (PDT)
-From: Vitor Soares <ivitro@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
- ivitro@gmail.com
-Subject: [PATCH v1] toradex: tdx-cfg-block: add new pid4 support
-Date: Mon, 19 May 2025 09:46:30 +0100
-Message-Id: <20250519084630.376452-1-ivitro@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Mon, 19 May 2025 07:19:07 -0700 (PDT)
+Date: Mon, 19 May 2025 08:19:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: marek.vasut+renesas@mailbox.org, sjg@chromium.org,
+ di.gerasimov@gmail.com, quic_vkarunam@quicinc.com, u-boot@lists.denx.de
+Subject: Re: [PATCH] cmd: Flush destination buffer only if it is available
+Message-ID: <20250519141905.GO100073@bill-the-cat>
+References: <20250519064935.3832233-1-quic_varada@quicinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 19 May 2025 16:11:31 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jOzwvMb21jyWbp6e"
+Content-Disposition: inline
+In-Reply-To: <20250519064935.3832233-1-quic_varada@quicinc.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,89 +98,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vitor Soares <vitor.soares@toradex.com>
 
-Add the new PID4 to the ConfigBlock handling:
- - 0098 Aquila iMX95 Hexa 16GB WB IT
- - 0099 Verdin AM62P Quad 2GB WB IT
- - 0201 SMARC iMX95 Hexa 8GB IT
- - 0202 SMARC iMX95 Hexa 4GB WB IT
- - 0203 SMARC iMX95 Hexa 4GB ET
- - 0204 SMARC iMX95 Hexa 2GB WB IT
- - 0205 SMARC iMX95 Hexa 2GB ET
- - 0206 SMARC iMX8M Plus Quad 4GB IT
- - 0207 SMARC iMX8M Plus Quad 2GB WB IT
- - 0208 SMARC iMX8M Plus Quad 2GB IT
- - 0209 SMARC iMX8M Plus Quadlite 1GB WB ET
- - 0210 SMARC iMX8M Plus Quadlite 1GB ET
- - 0211 Aquila AM69 Octa 32GB IT
- - 0212 Aquila AM69 Octa 16GB WB IT
- - 0213 Aquila AM69 Octa 16GB IT
- - 0214 Aquila AM69 Octa 8GB WB IT
- - 0215 Aquila AM69 Octa 8GB IT
+--jOzwvMb21jyWbp6e
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
----
- board/toradex/common/tdx-cfg-block.c | 17 +++++++++++++++++
- board/toradex/common/tdx-cfg-block.h | 17 +++++++++++++++++
- 2 files changed, 34 insertions(+)
+On Mon, May 19, 2025 at 12:19:34PM +0530, Varadarajan Narayanan wrote:
 
-diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
-index 6c1cea77c8ce..a89c5bf2c19c 100644
---- a/board/toradex/common/tdx-cfg-block.c
-+++ b/board/toradex/common/tdx-cfg-block.c
-@@ -166,6 +166,23 @@ const struct toradex_som toradex_modules[] = {
- 	{ APALIS_IMX8QM_8GB_WIFI_BT_IT_1300MHZ,  "Apalis iMX8QM 8GB WB IT",              TARGET_IS_ENABLED(APALIS_IMX8)     },
- 	{ SMARC_IMX95_HEXA_8GB_WB_IT,            "SMARC iMX95 Hexa 8GB WB IT",           TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
- 	{ SMARC_IMX8MPQ_4GB_WB_IT,               "SMARC iMX8M Plus Quad 4GB WB IT",      TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
-+	{ AQUILA_IMX95_HEXA_16GB_WB_IT,          "Aquila iMX95 Hexa 16GB WB IT",         TARGET_IS_ENABLED(AQUILA_IMX95)         },
-+	{ VERDIN_AM62PQ_2G_WIFI_BT_IT,           "Verdin AM62P Quad 2GB WB IT",          TARGET_IS_ENABLED(VERDIN_AM62P_A53)     },
-+	{ SMARC_IMX95_HEXA_8GB_IT,               "SMARC iMX95 Hexa 8GB IT",              TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
-+	{ SMARC_IMX95_HEXA_4GB_WB_IT,            "SMARC iMX95 Hexa 4GB WB IT",           TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
-+	{ SMARC_IMX95_HEXA_4GB_ET,               "SMARC iMX95 Hexa 4GB ET",              TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
-+	{ SMARC_IMX95_HEXA_2GB_WB_IT,            "SMARC iMX95 Hexa 2GB WB IT",           TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
-+	{ SMARC_IMX95_HEXA_2GB_ET,               "SMARC iMX95 Hexa 2GB ET",              TARGET_IS_ENABLED(TORADEX_SMARC_IMX95)  },
-+	{ SMARC_IMX8MPQ_4GB_IT,                  "SMARC iMX8M Plus Quad 4GB IT",         TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
-+	{ SMARC_IMX8MPQ_2GB_WB_IT,               "SMARC iMX8M Plus Quad 2GB WB IT",      TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
-+	{ SMARC_IMX8MPQ_2GB_IT,                  "SMARC iMX8M Plus Quad 2GB IT",         TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
-+	{ SMARC_IMX8MPQL_1GB_WB_ET,              "SMARC iMX8M Plus Quadlite 1GB WB ET",  TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
-+	{ SMARC_IMX8MPQL_1GB_ET,                 "SMARC iMX8M Plus Quadlite 1GB ET",     TARGET_IS_ENABLED(TORADEX_SMARC_IMX8MP) },
-+	{ AQUILA_AM69O_32GB_IT,                  "Aquila AM69 Octa 32GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
-+	{ AQUILA_AM69O_16GB_WB_IT,               "Aquila AM69 Octa 16GB WB IT",          TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
-+	{ AQUILA_AM69O_16GB_IT,                  "Aquila AM69 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
-+	{ AQUILA_AM69O_8GB_WB_IT,                "Aquila AM69 Octa 8GB WB IT",           TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
-+	{ AQUILA_AM69O_8GB_IT,                   "Aquila AM69 Octa 8GB IT",              TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
- };
- 
- struct pid4list {
-diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
-index f4dd853306b3..db612811c5c5 100644
---- a/board/toradex/common/tdx-cfg-block.h
-+++ b/board/toradex/common/tdx-cfg-block.h
-@@ -124,6 +124,23 @@ enum {
- 	APALIS_IMX8QM_8GB_WIFI_BT_IT_1300MHZ, /* 95 */
- 	SMARC_IMX95_HEXA_8GB_WB_IT,
- 	SMARC_IMX8MPQ_4GB_WB_IT,
-+	AQUILA_IMX95_HEXA_16GB_WB_IT,
-+	VERDIN_AM62PQ_2G_WIFI_BT_IT, /* 99 */
-+	SMARC_IMX95_HEXA_8GB_IT = 201,
-+	SMARC_IMX95_HEXA_4GB_WB_IT,
-+	SMARC_IMX95_HEXA_4GB_ET,
-+	SMARC_IMX95_HEXA_2GB_WB_IT,
-+	SMARC_IMX95_HEXA_2GB_ET, /* 205 */
-+	SMARC_IMX8MPQ_4GB_IT,
-+	SMARC_IMX8MPQ_2GB_WB_IT,
-+	SMARC_IMX8MPQ_2GB_IT,
-+	SMARC_IMX8MPQL_1GB_WB_ET,
-+	SMARC_IMX8MPQL_1GB_ET, /* 210 */
-+	AQUILA_AM69O_32GB_IT,
-+	AQUILA_AM69O_16GB_WB_IT,
-+	AQUILA_AM69O_16GB_IT,
-+	AQUILA_AM69O_8GB_WB_IT,
-+	AQUILA_AM69O_8GB_IT, /* 215 */
- };
- 
- enum {
--- 
-2.34.1
+> From: Vandhiadevan Karunamoorthy <quic_vkarunam@quicinc.com>
+>=20
+> There are code paths in do_imgextract(), where 'dest' could be zero.
+> Hence, avoid cache flush of 'dest' doesn't point to any data buffer.
+>=20
+> Signed-off-by: Vandhiadevan Karunamoorthy <quic_vkarunam@quicinc.com>
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> ---
+>  cmd/ximg.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/cmd/ximg.c b/cmd/ximg.c
+> index 29d7c3279b3..8907b579d4c 100644
+> --- a/cmd/ximg.c
+> +++ b/cmd/ximg.c
+> @@ -265,7 +265,8 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int ar=
+gc, char *const argv[])
+>  		puts("OK\n");
+>  	}
+> =20
+> -	flush_cache(dest, ALIGN(len, ARCH_DMA_MINALIGN));
+> +	if (dest)
+> +		flush_cache(dest, ALIGN(len, ARCH_DMA_MINALIGN));
+> =20
+>  	env_set_hex("fileaddr", data);
+>  	env_set_hex("filesize", len);
+>=20
+> base-commit: 1b5e435102aa29a665119430196cb366ce36a01b
 
+A memory base of 0x0 is valid and not that uncommon, is there more going
+on here that lead to this patch?
+
+--=20
+Tom
+
+--jOzwvMb21jyWbp6e
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgrPdUACgkQFHw5/5Y0
+tywMbwwAo0vRAgPqgRqpZITvS4fSJPy74JD7xa68VsbmLlHytxiKIHnw+c+RMcYC
+B5FaUUgo12ivGnbNPvtWLw4vvMytJeQZUzKCHVhTQe5FzYa22pb+njt2YaQqxUnQ
+EgHYRuVVKaSHK9z97Dc+kNOaMPN6Nf7KhKFfjsqOCzjjJm8kLgfe+4zHygvNTALp
+mrswLAuY/DP0pk6uGuux00cYdeJKdrpsXSMXYuU2BqJZP9lQdU1rmF195rrXi4eO
+HePZ/ci+t1jSAQVLRyyX4kNPrKJjZDpa84taUevP5iaqupufQ8mijVNBfhfl2rho
+MaREVKDS80DpDHA3Qf1JyKWEtyPT4OBO5ZLEt/4a/NOvO853r9ZSX1siqkuEC+O2
+MgtA2TSAS4Usb4BkWWqY0VcV3S1pkwS5q6kM2aSSbtdQ1gM/INSlADnoOVLX8kmD
+yybld3o3/OiqZUUZPjuDm9IOa/7enivTDZ4+Ec0rfHh3GRa8xu87hSCp5XWyufAV
+nAPXSLg6
+=D+uO
+-----END PGP SIGNATURE-----
+
+--jOzwvMb21jyWbp6e--
