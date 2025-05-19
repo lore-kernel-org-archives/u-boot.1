@@ -4,78 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457ECC3DA6D
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 07:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DFF5C2D0CD
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 07:23:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D187582012;
-	Mon, 19 May 2025 09:06:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 565AB81E72;
+	Mon, 19 May 2025 09:23:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x0iBxCVI";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="BXQos7X/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B75AE8277D; Mon, 19 May 2025 09:06:33 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9474881FFC; Mon, 19 May 2025 09:23:14 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3CEA803DF
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 09:06:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C002803DF
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 09:23:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-70ccd1f5072so6222057b3.1
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 00:06:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747638390; x=1748243190; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IzxnkxxlS0dHnIJwSJv7k/s+V1K4dBaL2l5qC67BQYc=;
- b=x0iBxCVI815SsfHbq9Uiu//thJonlfQ1CpqKZK2bygRgGJyaH521DwWIr8P0pTGwaz
- LuFr38dgqujztHz9jd49JlT8ufx8qA6Ac1oAh3jjDvpcfZg6mbLK6LBisbk/0Z4DahQW
- qgu7Oc42U5HzCSJLBIFkIHSBy10Rf4l5KaPuQ89MNs0ueMSqivfTDEIvSNUK6Bx7oYDk
- ux0CddAZmsE+5rO0hkMlCeJiiiyi29qhYCoJYtVjQc8itD4UsTh1CeyeKGwzDj+gVwVg
- 2vU+rVN2doAIZ8dyIJ4+0jItzfN4aUVXg5KrtDM7NJYLMki1587TihabyxOPtlO4DMEX
- aTuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747638390; x=1748243190;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IzxnkxxlS0dHnIJwSJv7k/s+V1K4dBaL2l5qC67BQYc=;
- b=ML1j3DiDuw+EVTU2FHiuVAXXpkcc32KsTO5hiriuCzwIAnanAMSBQmiGC1ji/4g676
- ziVIhKiY1pWmdnegtgfOtcyjNg1swJKZDJlYi9on9Bgav/F91n2to7ySWo74ezyLar56
- nUaXOdxU1ratmmj0PyksgreLuI6d4lfu+7l9hF0dnvEVq3Wz2zYDyhwxCArYjpEW6wnV
- rMxopT3zS46XPff/Ihxez5IBIyQb04Wn9y8SqDkPm7TAiwDMbn/9ynBHevq+kqb2gd+9
- yTSHdt8/ruLq3ykLLWkggkDsvJms7SrN44P4X/wO0QvsLNVu8AK8RQtXCrCQNGwcydjf
- 6NLw==
-X-Gm-Message-State: AOJu0Yzwd9kO0+RwSWafYEeXQ2zmtyudqe73Av5yX/Vri5lBJVztqRCk
- LZ+DgcKoEXZuvu0hnQpY1veQ9bKsLPLMNToKq8hxh8fR8zWp7rfGhOUPOQ9X8g/h/pQziGnMmE7
- 5n7JmkCO+2plm9RwRRmBUhV1RIWGiMH5URytAbEvnXg==
-X-Gm-Gg: ASbGncs56IXk0Y7wqQxzl2K0U/aWb0PXoWVtOFOEANgXSODd51287/C5Bbe9/2MCMS+
- zP9X3Jr/KdNieBZ5kiJLrc3gpMnh7fVpZjzVXlRg2lT/eENbzcJBTfVg9MJ/vAjefn9gCL1Ghw+
- xsw/9JS+SZmyotPwuIhPyr3WhUn5tYwwAVDg==
-X-Google-Smtp-Source: AGHT+IEJymFzLs2GihZNqkrhs55ocNn7E4BJY5gUHPU/o7wRBdor2PMARmPNFU5To5Wm4IBAdliw5N6FTmYcXU1uCbg=
-X-Received: by 2002:a05:690c:6f03:b0:6ef:7f89:d906 with SMTP id
- 00721157ae682-70ca7bb63ecmr160470097b3.33.1747638390348; Mon, 19 May 2025
- 00:06:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54IMm9xB014902;
+ Mon, 19 May 2025 07:23:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=QhthCwjcpNkeK/fmJFc9WzWr
+ 8bC7TPoqLb62LvlW1qg=; b=BXQos7X/Z2u5rYuEbUZzzGGNWIRhJcDd6AGy5JJv
+ wugGph7JJtqVGmyQDJDhctwg9TkvzKhxVjh+Q/KwRiMugJoPviedN1zA+v9z47Le
+ OCXOpiDOaUxMNHrIvrwDz00gAUCMPudeNOZW/zHJcZxi5lfsYKG4HUXz8D8TlOAJ
+ KXCKhb6hf9IFPypxvX+bPYB2P0D99eF+Z8ezpHu7aP8dOaeGs42mLSdDppZRHD5H
+ yl/tNV8ICp5DZTGncJz3UPksWHNnD2LK66eX5RPEWeySPU3o6Ia46ZFZ3xkd7iPM
+ c0cFPwEJ24Z3wr1ExKHFjFeHvMxlbVmPCceJNh069Q0a5Q==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46pjjsuepk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 19 May 2025 07:23:05 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54J7N45X011214
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 19 May 2025 07:23:04 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 19 May 2025 00:23:01 -0700
+Date: Mon, 19 May 2025 12:52:57 +0530
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: Simon Glass <sjg@chromium.org>
+CC: Caleb Connolly <caleb.connolly@linaro.org>, Devarsh Thakkar
+ <devarsht@ti.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jonas
+ Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>, Richard
+ Weinberger <richard@nod.at>, This contributor prefers not to receive mails
+ <noreply@example.com>, Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, <u-boot-qcom@groups.io>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH] common/board_f: init malloc earlier
+Message-ID: <aCrcUZMU3OViHo7s@hu-varada-blr.qualcomm.com>
+References: <20241124183832.2476928-1-caleb.connolly@linaro.org>
+ <CAFLszThqtA_WBxOU-EnEvw956ZMN9KErx_C4gTzW_+p_tGu9qw@mail.gmail.com>
+ <cd43db10-4939-4958-97f2-9a2046d82160@linaro.org>
+ <CAFLszTgEhfbk4ug=JoU_jTgdzSkF-fXuqamGmPJHpdogwocbRA@mail.gmail.com>
+ <a8cd7895-7968-4ef9-bc5f-dd36c04d9db8@linaro.org>
+ <CAFLszThuqGKt+j9y+JgPpwKYe-2f_MJ4DHh=wzWzOjWv715xUw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250514161841.3591411-1-adriano.cordova@canonical.com>
- <20250514161841.3591411-3-adriano.cordova@canonical.com>
-In-Reply-To: <20250514161841.3591411-3-adriano.cordova@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 19 May 2025 10:05:54 +0300
-X-Gm-Features: AX0GCFsZyvGamSzO9cm6V7uPwOfFpOOADCCIV5rFS19h47uCdM-7IkWQnqKHuWc
-Message-ID: <CAC_iWjLM1u-bSWk8F-HgOaEh7n3ER4xy=i=2Hgy27j_AMpuPpQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] cmd/Kconfig: select CMD_WGET if ARCH_QEMU
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, sjg@chromium.org, 
- trini@konsulko.com, jerome.forissier@linaro.org, 
- Adriano Cordova <adriano.cordova@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThuqGKt+j9y+JgPpwKYe-2f_MJ4DHh=wzWzOjWv715xUw@mail.gmail.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: 9KI53Xetv-TeYS6SD-GsBvUWDdxRItIS
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTE5MDA2OCBTYWx0ZWRfX5LE5MwlkE6o0
+ mAxx08GBWaTD8gkIy5diz+mXZKajcB/4jdG/DxFBvHBpvJgWwMTmLyccUnA70V6Riy/d0hAri9S
+ vpSiNxjrWZRcKAWz7WKKzVZibo67uRoLU0AfsVEoh1e+vtsUS9IVq55RI9dTz0/Ymym1X2L35w0
+ tHzkfdSWjXUjnybOwISSxDbKwr+FFg6lEI8NIYDIdS7/zIMj9TvdSUETOqYQdxbkNhYYpVISXCi
+ ifxm+3cywDUQcvxgO1UXfc8HoGQ2kRLEKNnLCem8Yg2S9UTlfisw1e0g/I+BOSPKFGd0Uw2eola
+ RZGTCXSDEOAAF8bAD+BECQhjl2ZYFVS4G0R5wtpktAn7ufYsuvWOchmNkNFVHEqI0jEs9Hsol/i
+ +M/k4nCXSdvhLrAGFibP11961ruBTh36vq23GoYF/vuOoa0zJOwWxDk09uW+1TKaJ+tpVNyg
+X-Authority-Analysis: v=2.4 cv=K4giHzWI c=1 sm=1 tr=0 ts=682adc59 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=kj9zAlcOel0A:10 a=dt9VzEwgFbYA:10 a=KKAkSRfTAAAA:8
+ a=LKnWJ6M9mV0mj8fQErUA:9 a=CjuIK1q_8ugA:10 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: 9KI53Xetv-TeYS6SD-GsBvUWDdxRItIS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-19_03,2025-05-16_03,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 spamscore=0 mlxlogscore=999 suspectscore=0 phishscore=0
+ clxscore=1011 malwarescore=0 lowpriorityscore=0 impostorscore=0
+ priorityscore=1501 mlxscore=0 adultscore=0 classifier=spam authscore=0
+ authtc=n/a authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505070000 definitions=main-2505190068
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,34 +118,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 14 May 2025 at 19:17, Adriano Cordova <adrianox@gmail.com> wrote:
+On Wed, Nov 27, 2024 at 06:08:25AM -0700, Simon Glass wrote:
+> Hi Caleb,
 >
-> select CMD_WGET for ARCH_QEMU. This way HTTP can be tested
-> on the qemu platforms in CI.
+> On Tue, 26 Nov 2024 at 09:15, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On 26/11/2024 16:38, Simon Glass wrote:
+> > > Hi Caleb,
+> > >
+> > > On Tue, 26 Nov 2024 at 05:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> > >>
+> > >> Hi Simon,
+> > >>
+> > >> On 26/11/2024 01:32, Simon Glass wrote:
+> > >>> Hi Caleb,
+> > >>>
+> > >>> On Sun, 24 Nov 2024 at 11:38, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> > >>>>
+> > >>>> Currently the early malloc initialisation is done partially in
+> > >>>> board_init_f_init_reserve() (on arm64 at least), which configures
+> > >>>> gd->malloc_base. But it isn't actually usable until initf_malloc() is
+> > >>>> called which doesn't happen until after fdtdec_setup().
+> > >>>>
+> > >>>> This causes problems in a few scenarios:
+> > >>>>
+> > >>>> 1. when using MULTI_DTB_FIT as this needs a working malloc (especially
+> > >>>>    for compressed FIT).
+> > >>>
+> > >>> Hmmm, how does this work today?
+> > >>
+> > >> I honestly have no idea, I assume boards that make use of it do some
+> > >> custom board_f.
+> > >
+> > > OK.
+> > >
+> > >>>
+> > >>>> 2. Some platforms may need to allocate memory as part of memory map
+> > >>>>    initialisation (e.g. Qualcomm will need this to parse the memory map
+> > >>>>    from SMEM).
+> > >>>
+> > >>> That really needs to be tidied up. When does this fixup need to be
+> > >>> done? I imagine it is somewhere prior to setup_dest_addr() ? Perhaps
+> > >>
+> > >> It's necessary in order to figure out gd->ram_base/ram_size. We do it in
+> > >> board_fdt_blob_setup() so that we can support another use-case where
+> > >> U-Boot has an internal FDT (which it should use) but the memory layout
+> > >> is provided via an external FDT which is unavailable (although this
+> > >> usecase isn't enabled upstream yet).
+> > >>
+> > >>> we could introduce an event to do 'memory map' stuff?
+> > >>
+> > >> We could, but considering that on most platforms the pre-relocation
+> > >> malloc is fixed at build time and at a known location relative to U-Boot
+> > >> there is no reason for us to arbitrary decide that some codepaths at the
+> > >> start of board_f aren't allowed to use malloc().
+> > >>
+> > >> Just moving the malloc initialization earlier ensures malloc() is
+> > >> consistently available and greatly simplifies things.
+> > >
+> > > I'd like to see a more generic solution to this problem...I think we
+> > > discussed this before?
+> >
+> > I think so. I'm not sure I follow with "more generic solution"?
 >
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> ---
+> Using an event to set the RAM location, rather than repurposing the
+> FDT-setup function.
 >
-> (no changes since v1)
->
->  cmd/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index f21d27cb27f..fa353c6fcac 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2153,7 +2153,7 @@ config CMD_TFTPBOOT
->
->  config CMD_WGET
->         bool "wget"
-> -       default y if SANDBOX
-> +       default y if SANDBOX || ARCH_QEMU
->         select WGET
->         help
->           wget is a simple command to download kernel, or other files,
-> --
-> 2.48.1
->
+> > >
+> > > To my eye it looks like if we called an event in setup_dest_addr() we
+> > > could allow ram_base to be set.
+> >
+> > Right, it's possible/likely that we could clean up how mach-snapdragon
+> > currently does memory parsing.
+> >
+> > I do think this patch would still be justified even if we ignore the
+> > Qualcomm case.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Simon,
+
+> It does put malloc() outside the purview of trace. There is always
+> going to be a race between which subsystem wants to be first and we
+> have certainly changed it several times. But until we have an actual
+> need, I think it is better to wait.
+
+IPQ platforms use CONFIG_MULTI_DTB_FIT and CONFIG_MULTI_DTB_FIT_GZIP.
+The gzip decompressor allocates memory and faces this problem. Moving
+initf_malloc(), above helps resolve this. Would that be considered as
+a good justification to moving up initf_malloc()? Please advice.
+
+Thanks
+Varada
+
+> > >> fwiw, I had another variation of this patch which dropped initf_malloc()
+> > >> entirely and just set up gd->malloc_limit/malloc_ptr in
+> > >> board_init_f_init_reserve() since that's where we set malloc_base
+> > >> anyways. But after digging some more there seem to be quite a few other
+> > >> entrypoints into U-Boot that don't go through
+> > >> board_init_f_init_reserve() (e.g. sandbox, EFI app) and it seemed more
+> > >> error prone to duplicate the implementation there.
+> > >
+> > > Fair enough.
+> > >
+> > > One more thing I notice in your board_fdt_blob_setup() implementation
+> > > in arch/arm/mach-snapdragon/board.c :
+> > >
+> > > It seems to be using either an built-in or external devicetree. It
+> > > seems that we should show this in dm_announce(), i.e. with the call to
+> > > fdtdec_get_srcname() ?
+> >
+> > Yes, the way it's implemented currently assumes that if CONFIG_OF_BOARD
+> > is set that we'd never use the built-in DT and mach-snapdragon doesn't
+> > fit this assumption. It's not a high priority but for sure something I'd
+> > like to see fixed.
+>
+> I'm not even sure that assumption is right, actually...
+>
+> [..]
+>
+> REgards,
+> Simon
