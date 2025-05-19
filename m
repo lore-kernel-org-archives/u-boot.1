@@ -4,79 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72A7C2D0CD
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 09:10:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23993C2D0CD
+	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 09:23:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45E8882998;
-	Mon, 19 May 2025 11:10:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 566CF81FEE;
+	Mon, 19 May 2025 11:23:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Os3AW86V";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZipAAA8w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8098C82A8B; Mon, 19 May 2025 11:10:04 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AD9B682998; Mon, 19 May 2025 11:23:27 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B050181F66
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 11:10:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70ED481E72
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 11:23:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=72346f699d=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54J6vAhM027485;
- Mon, 19 May 2025 11:09:56 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- YeSqfD3Vc6JqxZvyHKnbRz1LbUwH5h6xo7aA4LG2nlQ=; b=Os3AW86VlS7UyLkC
- xeYuHPpOz6sMtmKKqIsMlvUUnDKOW7uUiUL2Be2yMXSsQD302qfy8XZ1pQ/gcy+s
- ZRJ3U6thgGkdzgO1utW7qwpC9H0hYE7+pFJaldARpaAy+QFIzB/F/Pge97ASk2b8
- WHI9StBCWf4rBaW8YbQHY4fA7daQROvm6zcc+WMdPdCrwzULR1N4x+R+OnwRdAPk
- pOHdPJ8wWk2XEwrbkdRQNaPaFHX8U/Iufo3gm2xhjqxRluGxiRe/xirkq4i9Lzy4
- 3oScpdl9htqzBzKs49JEqs0hZZ4w6xR/KJm/4dtD3nvGksiZ1W1ODEZT088twBzV
- ViJRaw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46pfk9x882-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 19 May 2025 11:09:56 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D833940052;
- Mon, 19 May 2025 11:09:05 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C155DA43229;
- Mon, 19 May 2025 11:08:44 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 19 May
- 2025 11:08:44 +0200
-Message-ID: <78a7450e-8e0f-4c96-a735-ed6db8a3999e@foss.st.com>
-Date: Mon, 19 May 2025 11:08:43 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43edb40f357so33279065e9.0
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 02:23:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1747646604; x=1748251404; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cmGDh7Quf7paBrFEK/LEdlFZm+7VMbs02wnac/NAITI=;
+ b=ZipAAA8wz1DwAB3GJla6hVqiJjhTk0sc4z4PD1ILUq3Y455V/5B3A1Cx7jFbXzSO2g
+ FdQ2jzPry2uJPBXN7PBgxdBovFPN6aN9/ANHKY9PhTjC8dhsrE82KyjT+/wwg8mfKYng
+ QkrU5QfF4R9KUaWspQ14H9QUBU6Apc28tA20MSMj0TtA/UqHmuvh0LrgxM2NLmXvf3Zq
+ 4c6zxp1fsDyJQewfp3Srq8gPVNp9mgeDtM9qsVXP7af0J9R8lp80ynRhMYpvdJjPEfSf
+ 8i7yL2beyro/vy7+pX+cEUYO5ZIldlBl2uXwNW1UxaQSVulDod7sh+QqZ5SZ7wMzfLP1
+ fmRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747646604; x=1748251404;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cmGDh7Quf7paBrFEK/LEdlFZm+7VMbs02wnac/NAITI=;
+ b=NCCOSf9/tvQpDUIpBV4V6Z4p9uV41tmjQ7im135WGLNuPOFbb20stn2UtlGbMk/ros
+ 64TAhLM/Z2xzha4j0coTPpgyOhtmxDUBojvy1xObOMgetowKss5Yi+ecurOFiOBxNLsh
+ uDGcaYItpT/wcyThgSIOPXI6eA5Go0Np3cHJnOElP8MPUjG0pWgS3ENbPd+fOFHoKXOD
+ YCPHxH1HvuUja4VoM5Mksqvau9qk9ETT3ioQX2cR20xhL/dWoKMk4alYqKpHKFEuAlGd
+ CKcdr4BsBaYVsmr7tV4k6lRyNq9Bx1iuqlE/4GQhaI8x1l+ZcZzzJnyApKvAZzMSUmjI
+ ZtlQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWxkEZZjz4DuQZWQd6kONXNXUaRnChJ3yw4VqdCDinYPifr4Zv/9GmuPAfR340T1d6l82ZFeJc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzk6JqvS7JQr2dWGNkALlCaUxDvn06dxZr9DOr99lawm1v2sRCJ
+ 4jev4lyIBoVuTA9IxsBj7woYpSOLFHpc8rFym5+293kIHoPTNL1CHfL+BcXOZrVFzag=
+X-Gm-Gg: ASbGncscbgtJPw0UTqDBRqZXm7PCFEzm5mAF74MjcJTunGs9/u6mhO7IQTgdMVUpkOZ
+ YSC+M9KRGcs6lrIYsQ1swIs6f5/r54v7K7pITFR/wg96UinTkrAufl2TPuyGV4yLfqH29jvNuYy
+ 5CF205Jt+k3mgoquXW/ofDaou23BWOvfuhTBEUuIn4C9Qs/k34TjIZmliyWqxmV1Wq1KA8HegoF
+ PPaHA299uzZAZouIyYJZv1Ud7DNgw1cu7b1iQ2wv0BQWKZXINo0+TRMWkulqw59CFCYdSVe8MuC
+ wWLui7Krh5LLP4AcPdACVbjM4S3E8uK7h4BNM6cztuWnQejebK+PTvT6CUUsmwKsL3UFPMeZIs2
+ CmKz1upFfa5d0lw8q6ZcEuiX74K2nqjQ=
+X-Google-Smtp-Source: AGHT+IFLfrdzgB3M6ko8RQD9Es7eT5NBE0s8mORUScAmdX6qrG9KPdSkrKdVjGn1EsNu5iZ3yBFmuQ==
+X-Received: by 2002:a05:600c:474a:b0:442:f44f:65b with SMTP id
+ 5b1f17b1804b1-442fd675a33mr96374135e9.32.1747646604380; 
+ Mon, 19 May 2025 02:23:24 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:f675:6612:8685:2dab?
+ ([2a01:e0a:3cb:7bb0:f675:6612:8685:2dab])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-442fd583fb7sm132268895e9.32.2025.05.19.02.23.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 19 May 2025 02:23:24 -0700 (PDT)
+Message-ID: <71947acc-d77c-4cd2-9a15-d679a0e53a8c@linaro.org>
+Date: Mon, 19 May 2025 10:23:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: Re: [PATCH v3] stm32mp: Add tamp_nvram driver
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Simeon Marijon
- <simeon.marijon@foss.st.com>, Cheick Traore <cheick.traore@foss.st.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250429065313.70121-1-patrice.chotard@foss.st.com>
- <f7da986d-647f-4adf-be33-cec7206ad062@foss.st.com>
+Subject: Re: [PATCH 1/3] lib/uuid.c: restore support of system partition type
+ for ESP
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Cc: ilias.apalodimas@linaro.org, patrice.chotard@foss.st.com,
+ caleb.connolly@linaro.org, Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
+ <vincent.stehle@arm.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250519090421.470942-1-patrick.delaunay@foss.st.com>
+ <20250519110417.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
 Content-Language: en-US
-In-Reply-To: <f7da986d-647f-4adf-be33-cec7206ad062@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-19_03,2025-05-16_03,2025-03-28_01
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250519110417.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,848 +109,363 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Patrick,
 
+On 5/19/25 10:04, Patrick Delaunay wrote:
+> Add support of shortname for type parameter and restore "system"
+> as short name for EFI System Partition (ESP) for filed "type" of the
+> "gpt write" command.
+> 
+> Fixes: d54e1004b8b1 ("lib/uuid.c: use unique name for PARTITION_SYSTEM_GUID")
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  lib/uuid.c | 148 +++++++++++++++++++++++++++--------------------------
+>  1 file changed, 76 insertions(+), 72 deletions(-)
+> 
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index 6abbcf27b1f3..ee02fa4d600d 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -62,184 +62,185 @@ int uuid_str_valid(const char *uuid)
+>  	return 1;
+>  }
+>  
+> +/* List of known GUID for GPT partition type */
+>  static const struct {
+> -	const char *string;
+> +	const char *string;     /* name for type parameter of gpt command */
 
-On 5/5/25 14:38, Patrick DELAUNAY wrote:
-> Hi,
-> 
-> minor remark to be coherent between SoC family
-> 
-> STM32MP1 <=> STM32MP2 for some part of the driver code
-> 
-> but STM32MP1 <=> STM32MP25 for other part of the code
-> 
-> and stm32mp15 <=> stm32mp25 for compatible
-> 
-> 
-> On 4/29/25 08:53, Patrice Chotard wrote:
->> From: Simeon Marijon <simeon.marijon@foss.st.com>
->>
->> TAMP backup registers will be exposed as nvmem cells.
->>
->> Each registers ([0..127] for STM32MP2, [0..31] for STM32MP1) could be
->> exposed as nvmem cells under the nvram node in device tree
->>
->> Signed-off-by: Simeon Marijon <simeon.marijon@foss.st.com>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>
->> ---
->>
->> Changes in v3:
->>    - Fix typo in SPDX-License-Identifier
->>
->>   arch/arm/mach-stm32mp/Kconfig      |   9 +
->>   arch/arm/mach-stm32mp/Makefile     |   2 +
->>   arch/arm/mach-stm32mp/tamp_nvram.c | 664 +++++++++++++++++++++++++++++
->>   3 files changed, 675 insertions(+)
->>   create mode 100644 arch/arm/mach-stm32mp/tamp_nvram.c
->>
->> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
->> index 002da2e3d3b..d7323659811 100644
->> --- a/arch/arm/mach-stm32mp/Kconfig
->> +++ b/arch/arm/mach-stm32mp/Kconfig
->> @@ -144,6 +144,15 @@ config STM32_ECDSA_VERIFY
->>         ROM API provided on STM32MP.
->>         The ROM API is only available during SPL for now.
->>   +config STM32MP_TAMP_NVMEM
->> +    bool "STM32 TAMP backup registers via NVMEM API"
->> +    select NVMEM
->> +    default y
->> +    help
->> +      Say y to enable the uclass driver for TAMP Backup registers using the
->> +      NVMEM API. It allows to access to boot mode or others shared information
->> +      between software components/execution levels.
->> +
->>   config CMD_STM32KEY
->>       bool "command stm32key to fuse public key hash"
->>       depends on CMDLINE
->> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
->> index 103e3410ad9..ecd49fe668d 100644
->> --- a/arch/arm/mach-stm32mp/Makefile
->> +++ b/arch/arm/mach-stm32mp/Makefile
->> @@ -13,6 +13,8 @@ obj-$(CONFIG_STM32MP13X) += stm32mp1/
->>   obj-$(CONFIG_STM32MP25X) += stm32mp2/
->>     obj-$(CONFIG_MFD_STM32_TIMERS) += timers.o
->> +obj-$(CONFIG_STM32MP_TAMP_NVMEM) += tamp_nvram.o
->> +
->>   obj-$(CONFIG_STM32_ECDSA_VERIFY) += ecdsa_romapi.o
->>   ifndef CONFIG_XPL_BUILD
->>   obj-y += cmd_stm32prog/
->> diff --git a/arch/arm/mach-stm32mp/tamp_nvram.c b/arch/arm/mach-stm32mp/tamp_nvram.c
->> new file mode 100644
->> index 00000000000..9edd001b540
->> --- /dev/null
->> +++ b/arch/arm/mach-stm32mp/tamp_nvram.c
->> @@ -0,0 +1,664 @@
->> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
->> +/*
->> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
->> + */
->> +#define LOG_CATEGORY UCLASS_MISC
->> +
->> +#include <clk.h>
->> +#include <dm.h>
->> +#include <log.h>
->> +#include <misc.h>
->> +#include <regmap.h>
->> +#include <tee.h>
->> +#include <asm/io.h>
->> +#include <dm/device.h>
->> +#include <dm/device_compat.h>
->> +#include <dm/devres.h>
->> +
->> +#define RIF_CID1            0x1
->> +#define CURRENT_CID            RIF_CID1
->> +#define NB_ZONES_STM32MP1        3
->> +#define NB_ZONES_STM32MP2        7
->> +
->> +#define _TAMP_SECCFGR            0x20U
->> +#define _TAMP_BKPRIFR(x)        (0x70U + 0x4U * ((x) - 1))
->> +#define _TAMP_RXCIDCFGR(x)        (0x80U + 0x4U * ((x)))
->> +
->> +#define BKPREG_PROTECTION_ZONE_1    0
->> +#define BKPREG_PROTECTION_ZONE_2    1
->> +#define BKPREG_PROTECTION_ZONE_3    2
->> +
->> +#define BKPREG_PROTECTION_ZONE_1_RIF1    0
->> +#define BKPREG_PROTECTION_ZONE_1_RIF2    1
->> +#define BKPREG_PROTECTION_ZONE_2_RIF1    2
->> +#define BKPREG_PROTECTION_ZONE_2_RIF2    3
->> +#define BKPREG_PROTECTION_ZONE_3_RIF1    4
->> +#define BKPREG_PROTECTION_ZONE_3_RIF0    5
->> +#define BKPREG_PROTECTION_ZONE_3_RIF2    6
->> +#define NB_COMPARTMENT_STM32MP2        3
->> +
->> +enum stm32_tamp_bkpreg_access {
->> +    BKP_READ_WRITE,
->> +    BKP_READ,
->> +    BKP_NO
->> +};
->> +
->> +struct stm32_tamp_nvram_plat {
->> +    void __iomem *base;
->> +    void __iomem *parent_base;
->> +    fdt_size_t size;
->> +    fdt_size_t parent_size;
->> +    unsigned int nb_total_regs;
->> +};
->> +
->> +struct stm32_tamp_nvram_priv {
->> +    int *idx_bkpreg_zones_end;
->> +    struct regmap *config_regmap;
->> +    struct regmap *bkpregs_regmap;
->> +    enum stm32_tamp_bkpreg_access *bkpreg_access;
-> 
-> +    const enum stm32_tamp_bkpreg_access *bkpreg_access;
-> 
-> as the acesss right are fixed after probe
+const char *type?
 
-ok
+> +	const char *description;/* description used for %pUs */
+>  	efi_guid_t guid;
+>  } list_guid[] = {
+>  #ifndef USE_HOSTCC
+> -#if defined(CONFIG_PARTITION_TYPE_GUID) || defined(CONFIG_CMD_EFIDEBUG) || \
+> -	defined(CONFIG_EFI)
+> -	{"EFI System Partition", PARTITION_SYSTEM_GUID},
+> -#endif
+> -#ifdef CONFIG_PARTITION_TYPE_GUID
+> -	{"mbr",		LEGACY_MBR_PARTITION_GUID},
+> -	{"msft",	PARTITION_MSFT_RESERVED_GUID},
+> -	{"data",	PARTITION_BASIC_DATA_GUID},
+> -	{"linux",	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
+> -	{"raid",	PARTITION_LINUX_RAID_GUID},
+> -	{"swap",	PARTITION_LINUX_SWAP_GUID},
+> -	{"lvm",		PARTITION_LINUX_LVM_GUID},
+> -	{"u-boot-env",	PARTITION_U_BOOT_ENVIRONMENT},
+> -	{"cros-kern",	PARTITION_CROS_KERNEL},
+> -	{"cros-root",	PARTITION_CROS_ROOT},
+> -	{"cros-fw",	PARTITION_CROS_FIRMWARE},
+> -	{"cros-rsrv",	PARTITION_CROS_RESERVED},
+> -#endif
+> +#if CONFIG_IS_ENABLED(EFI_PARTITION)
+> +	{"mbr",		NULL,	LEGACY_MBR_PARTITION_GUID},
+> +	{"msft",	NULL,	PARTITION_MSFT_RESERVED_GUID},
+> +	{"data",	NULL,	PARTITION_BASIC_DATA_GUID},
+> +	{"linux",	NULL,	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
+> +	{"raid",	NULL,	PARTITION_LINUX_RAID_GUID},
+> +	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
+> +	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
+> +	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
+> +	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
+> +	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
+> +	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
+> +	{"cros-rsrv",	NULL,	PARTITION_CROS_RESERVED},
+>  #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
+>  	{
+> -		"Device Path",
+> +		"system", "EFI System Partition",
+> +		PARTITION_SYSTEM_GUID,
+> +	},
 
-> 
-> 
->> +};
->> +
->> +struct stm32_tamp_nvram_drvdata {
->> +    const unsigned int nb_zones;
->> +    const struct reg_field *reg_fields;
->> +};
->> +
->> +static const struct reg_field stm32mp1_tamp_nvram_zone_cfg_fields[NB_ZONES_STM32MP1 - 1] = {
->> +    [BKPREG_PROTECTION_ZONE_1] = REG_FIELD(_TAMP_SECCFGR, 0, 7),
->> +    [BKPREG_PROTECTION_ZONE_2] = REG_FIELD(_TAMP_SECCFGR, 16, 23),
->> +};
->> +
-> 
-> I propose to rename it to
-> 
-> stm32mp2_tamp_nvram_zone_cfg_fields[]
-> 
-> to be coherent with stm32mp1_tamp_nvram_zone_cfg_fields[]
-> 
-> and same for other array
-> 
-> stm32mp2_tamp_nvram_rxcidcfg_cfen_fields[]
-> stm32mp2_tamp_nvram_rxcidcfg_fields[]
+The patch adds quite many NULLs to the list_guid[] only for this very
+special case. We would be better off hardcoding the "system" case into
+uuid_guid_get_bin() I think.
 
-ok
+> +	{
+> +		NULL, "Device Path",
+>  		EFI_DEVICE_PATH_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Device Path To Text",
+> +		NULL, "Device Path To Text",
+>  		EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Device Path Utilities",
+> +		NULL, "Device Path Utilities",
+>  		EFI_DEVICE_PATH_UTILITIES_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Unicode Collation 2",
+> +		NULL, "Unicode Collation 2",
+>  		EFI_UNICODE_COLLATION_PROTOCOL2_GUID,
+>  	},
+>  	{
+> -		"Driver Binding",
+> +		NULL, "Driver Binding",
+>  		EFI_DRIVER_BINDING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Text Input",
+> +		NULL, "Simple Text Input",
+>  		EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Text Input Ex",
+> +		NULL, "Simple Text Input Ex",
+>  		EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Text Output",
+> +		NULL, "Simple Text Output",
+>  		EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Block IO",
+> +		NULL, "Block IO",
+>  		EFI_BLOCK_IO_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Disk IO",
+> +		NULL, "Disk IO",
+>  		EFI_DISK_IO_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple File System",
+> +		NULL, "Simple File System",
+>  		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Loaded Image",
+> +		NULL, "Loaded Image",
+>  		EFI_LOADED_IMAGE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Loaded Image Device Path",
+> +		NULL, "Loaded Image Device Path",
+>  		EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Graphics Output",
+> +		NULL, "Graphics Output",
+>  		EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII String",
+> +		NULL, "HII String",
+>  		EFI_HII_STRING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII Database",
+> +		NULL, "HII Database",
+>  		EFI_HII_DATABASE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII Config Access",
+> +		NULL, "HII Config Access",
+>  		EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII Config Routing",
+> +		NULL, "HII Config Routing",
+>  		EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Load File",
+> +		NULL, "Load File",
+>  		EFI_LOAD_FILE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Load File2",
+> +		NULL, "Load File2",
+>  		EFI_LOAD_FILE2_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Random Number Generator",
+> +		NULL, "Random Number Generator",
+>  		EFI_RNG_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Network",
+> +		NULL, "Simple Network",
+>  		EFI_SIMPLE_NETWORK_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"PXE Base Code",
+> +		NULL, "PXE Base Code",
+>  		EFI_PXE_BASE_CODE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Device-Tree Fixup",
+> +		NULL, "Device-Tree Fixup",
+>  		EFI_DT_FIXUP_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"TCG2",
+> +		NULL, "TCG2",
+>  		EFI_TCG2_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Firmware Management",
+> +		NULL, "Firmware Management",
+>  		EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID
+>  	},
+>  #if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
+>  	{
+> -		"HTTP",
+> +		NULL, "HTTP",
+>  		EFI_HTTP_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HTTP Service Binding",
+> +		NULL, "HTTP Service Binding",
+>  		EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"IPv4 Config2",
+> +		NULL, "IPv4 Config2",
+>  		EFI_IP4_CONFIG2_PROTOCOL_GUID,
+>  	},
+>  #endif
+>  	/* Configuration table GUIDs */
+>  	{
+> -		"ACPI table",
+> +		NULL, "ACPI table",
+>  		EFI_ACPI_TABLE_GUID,
+>  	},
+>  	{
+> -		"EFI System Resource Table",
+> +		NULL, "EFI System Resource Table",
+>  		EFI_SYSTEM_RESOURCE_TABLE_GUID,
+>  	},
+>  	{
+> -		"device tree",
+> +		NULL, "device tree",
+>  		EFI_FDT_GUID,
+>  	},
+>  	{
+> -		"SMBIOS table",
+> +		NULL, "SMBIOS table",
+>  		SMBIOS_TABLE_GUID,
+>  	},
+>  	{
+> -		"SMBIOS3 table",
+> +		NULL, "SMBIOS3 table",
+>  		SMBIOS3_TABLE_GUID,
+>  	},
+>  	{
+> -		"Runtime properties",
+> +		NULL, "Runtime properties",
+>  		EFI_RT_PROPERTIES_TABLE_GUID,
+>  	},
+>  	{
+> -		"TCG2 Final Events Table",
+> +		NULL, "TCG2 Final Events Table",
+>  		EFI_TCG2_FINAL_EVENTS_TABLE_GUID,
+>  	},
+>  	{
+> -		"EFI Conformance Profiles Table",
+> +		NULL, "EFI Conformance Profiles Table",
+>  		EFI_CONFORMANCE_PROFILES_TABLE_GUID,
+>  	},
+>  #ifdef CONFIG_EFI_RISCV_BOOT_PROTOCOL
+>  	{
+> -		"RISC-V Boot",
+> +		NULL, "RISC-V Boot",
+>  		RISCV_EFI_BOOT_PROTOCOL_GUID,
+>  	},
+>  #endif
+> @@ -247,35 +248,36 @@ static const struct {
+>  #ifdef CONFIG_CMD_NVEDIT_EFI
+>  	/* signature database */
+>  	{
+> -		"EFI_GLOBAL_VARIABLE_GUID",
+> +		NULL, "EFI_GLOBAL_VARIABLE_GUID",
+>  		EFI_GLOBAL_VARIABLE_GUID,
+>  	},
+>  	{
+> -		"EFI_IMAGE_SECURITY_DATABASE_GUID",
+> +		NULL, "EFI_IMAGE_SECURITY_DATABASE_GUID",
+>  		EFI_IMAGE_SECURITY_DATABASE_GUID,
+>  	},
+>  	/* certificate types */
+>  	{
+> -		"EFI_CERT_SHA256_GUID",
+> +		NULL, "EFI_CERT_SHA256_GUID",
+>  		EFI_CERT_SHA256_GUID,
+>  	},
+>  	{
+> -		"EFI_CERT_X509_GUID",
+> +		NULL, "EFI_CERT_X509_GUID",
+>  		EFI_CERT_X509_GUID,
+>  	},
+>  	{
+> -		"EFI_CERT_TYPE_PKCS7_GUID",
+> +		NULL, "EFI_CERT_TYPE_PKCS7_GUID",
+>  		EFI_CERT_TYPE_PKCS7_GUID,
+>  	},
+>  #endif
+>  #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
+> -	{ "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
+> -	{ "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
+> -	{ "EFI_HOB_LIST", EFI_HOB_LIST },
+> -	{ "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
+> -	{ "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
+> -	{ "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
+> +	{ NULL, "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
+> +	{ NULL, "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
+> +	{ NULL, "EFI_HOB_LIST", EFI_HOB_LIST },
+> +	{ NULL, "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
+> +	{ NULL, "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
+> +	{ NULL, "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
+>  #endif
+> +#endif /* EFI_PARTITION */
+>  #endif /* !USE_HOSTCC */
+>  };
+>  
+> @@ -284,7 +286,8 @@ int uuid_guid_get_bin(const char *guid_str, unsigned char *guid_bin)
+>  	int i;
+>  
+>  	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
+> -		if (!strcmp(list_guid[i].string, guid_str)) {
+> +		if (list_guid[i].string &&
+> +		    !strcmp(list_guid[i].string, guid_str)) {
+>  			memcpy(guid_bin, &list_guid[i].guid, 16);
+>  			return 0;
+>  		}
+> @@ -298,6 +301,8 @@ const char *uuid_guid_get_str(const unsigned char *guid_bin)
 
-> 
->> +static const struct reg_field [NB_ZONES_STM32MP2 - 1] = {
->> +    [BKPREG_PROTECTION_ZONE_1_RIF1] = REG_FIELD(_TAMP_BKPRIFR(1), 0,  7),
->> +    [BKPREG_PROTECTION_ZONE_1_RIF2] = REG_FIELD(_TAMP_SECCFGR,    0,  7),
->> +    [BKPREG_PROTECTION_ZONE_2_RIF1] = REG_FIELD(_TAMP_BKPRIFR(2), 0,  7),
->> +    [BKPREG_PROTECTION_ZONE_2_RIF2] = REG_FIELD(_TAMP_SECCFGR,   16, 23),
->> +    [BKPREG_PROTECTION_ZONE_3_RIF1] = REG_FIELD(_TAMP_BKPRIFR(3), 0,  7),
->> +    [BKPREG_PROTECTION_ZONE_3_RIF0] = REG_FIELD(_TAMP_BKPRIFR(3), 16, 23),
->> +};
->> +
->> +static const struct reg_field stm32mp25_tamp_nvram_rxcidcfg_cfen_fields[NB_COMPARTMENT_STM32MP2] = {
->> +    REG_FIELD(_TAMP_RXCIDCFGR(0), 0, 0),
->> +    REG_FIELD(_TAMP_RXCIDCFGR(1), 0, 0),
->> +    REG_FIELD(_TAMP_RXCIDCFGR(2), 0, 0),
->> +};
->> +
->> +static const struct reg_field stm32mp25_tamp_nvram_rxcidcfg_fields[NB_COMPARTMENT_STM32MP2] = {
->> +    REG_FIELD(_TAMP_RXCIDCFGR(0), 4, 6),
->> +    REG_FIELD(_TAMP_RXCIDCFGR(1), 4, 6),
->> +    REG_FIELD(_TAMP_RXCIDCFGR(2), 4, 6),
->> +};
->> +
->> +static enum stm32_tamp_bkpreg_access stm32mp1_tamp_bkpreg_access[NB_ZONES_STM32MP1] = {
->> +    [BKPREG_PROTECTION_ZONE_1] = BKP_NO,
->> +    [BKPREG_PROTECTION_ZONE_2] = BKP_READ,
->> +    [BKPREG_PROTECTION_ZONE_3] = BKP_READ_WRITE,
->> +};
->> +
-> 
-> 
-> please change to
-> 
-> static const enum stm32_tamp_bkpreg_access stm32mp1_tamp_bkpreg_access[NB_ZONES_STM32MP1] = {
-> 
+Should this be called uuid_guid_get_type() instead? 'str' or 'string' are confusing.
+We should have 'type' and 'decription' IMO.
 
-done
+>  
+>  	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
+>  		if (!memcmp(list_guid[i].guid.b, guid_bin, 16)) {
+> +			if (list_guid[i].description)
+> +				return list_guid[i].description;
+>  			return list_guid[i].string;
 
-> 
->> +static const struct stm32_tamp_nvram_drvdata stm32mp1_tamp_nvram = {
->> +    .nb_zones = NB_ZONES_STM32MP1,
->> +    .reg_fields = stm32mp1_tamp_nvram_zone_cfg_fields,
->> +};
->> +
-> 
-> and to "stm32mp2_tamp_nvram"
+.description is never (or should never be) NULL. No need to return .string as a fallback.
 
-done
+>  		}
+>  	}
+> @@ -312,10 +317,9 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
+>  	uint64_t tmp64;
+>  
+>  	if (!uuid_str_valid(uuid_str)) {
+> -#ifdef CONFIG_PARTITION_TYPE_GUID
+> -		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
+> +		if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID) &&
+> +		    !uuid_guid_get_bin(uuid_str, uuid_bin))
+>  			return 0;
+> -#endif
+>  		return -EINVAL;
+>  	}
+>  
 
-> 
->> +static const struct stm32_tamp_nvram_drvdata stm32mp25_tamp_nvram = {
->> +    .nb_zones = NB_ZONES_STM32MP2,
->> +    .reg_fields = stm32mp25_tamp_nvram_zone_cfg_fields,
->> +};
->> +
->> +static int stm32_tamp_is_compartment_isolation_enabled_mp2X(struct udevice *dev)
-
-I proposed also to rename this function to stm32mp2_tamp_is_compartment_isolation_enabled
-
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    int nb_compartment_enabled = 0;
->> +    u32 cfen;
->> +    struct regmap_field *cfen_field;
->> +
->> +    for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
->> +        cfen_field = devm_regmap_field_alloc(dev,
->> +                             priv->config_regmap,
->> +                             stm32mp25_tamp_nvram_rxcidcfg_cfen_fields[i]);
->> +        if (IS_ERR_OR_NULL(cfen_field)) {
->> +            dev_err(dev, "Can't allocate field for reading configuration\n");
->> +            return -ENOMEM;
->> +        }
->> +        if (regmap_field_read(cfen_field, &cfen) != 0) {
->> +            dev_err(dev, "Can't read field for registers zones\n");
->> +            devm_regmap_field_free(dev, cfen_field);
->> +            return -EINVAL;
->> +        }
->> +        nb_compartment_enabled += cfen;
->> +        devm_regmap_field_free(dev, cfen_field);
->> +    }
->> +
->> +    if (nb_compartment_enabled == 0)
->> +        return 0;
->> +    else if (nb_compartment_enabled == NB_COMPARTMENT_STM32MP2)
->> +        return 1;
->> +    else
->> +        return -EINVAL;
->> +}
-> 
-> function name can be more simple: stm32mp2_tamp_get_compartment_owner()
-
-done
-
-> 
->> +static bool *stm32_tamp_get_compartment_owner_mp2X(struct udevice *dev)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    struct regmap_field *cid_field;
->> +    u32 cid_per_zone;
->> +    int isolation_enabled;
->> +    bool *compartment_owner;
->> +
->> +    isolation_enabled = stm32_tamp_is_compartment_isolation_enabled_mp2X(dev);
->> +    if (isolation_enabled < 0)
->> +        return NULL;
->> +
->> +    compartment_owner = devm_kcalloc(dev,
->> +                     NB_COMPARTMENT_STM32MP2,
->> +                     sizeof(*compartment_owner),
->> +                     GFP_KERNEL);
->> +    if (!compartment_owner)
->> +        return ERR_PTR(-ENOMEM);
->> +
->> +    for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
->> +        if (isolation_enabled) {
->> +            cid_field = devm_regmap_field_alloc(dev,
->> +                                priv->config_regmap,
->> +                                stm32mp25_tamp_nvram_rxcidcfg_fields[i]
->> +                                );
->> +
->> +            if (regmap_field_read(cid_field, &cid_per_zone) != 0) {
->> +                dev_err(dev, "Can't read field for registers zones\n");
->> +                devm_regmap_field_free(dev, cid_field);
->> +                devm_kfree(dev, compartment_owner);
->> +                return ERR_PTR(-EINVAL);
->> +            }
->> +            if (cid_per_zone == CURRENT_CID)
->> +                compartment_owner[i] = true;
->> +            else
->> +                compartment_owner[i] = false;
->> +
->> +            devm_regmap_field_free(dev, cid_field);
->> +        } else {
->> +            compartment_owner[i] = true;
->> +        }
->> +    }
->> +
->> +    return compartment_owner;
->> +}
->> +
-> 
-> same here => stm32mp2_tamp_get_access_rights()
-> 
-> and return const (the generated array is not mofdifiable)
-> 
-> +static const enum stm32_tamp_bkpreg_access *stm32mp2_tamp_get_access_rights(struct udevice *dev)
-
-done
-
-> 
->> +static enum stm32_tamp_bkpreg_access *stm32_tamp_get_access_rights_mp2X(struct udevice *dev)
->> +{
->> +    struct stm32_tamp_nvram_drvdata *drvdata =
->> +        (struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
->> +    unsigned int nb_zones = drvdata->nb_zones;
->> +    bool *compartment_owner;
->> +    enum stm32_tamp_bkpreg_access *bkpreg_access;
->> +
->> +    compartment_owner = stm32_tamp_get_compartment_owner_mp2X(dev);
->> +    if (IS_ERR(compartment_owner))
->> +        return ERR_PTR(-ENODEV);
->> +
->> +    bkpreg_access = devm_kcalloc(dev,
->> +                     NB_ZONES_STM32MP2,
->> +                     sizeof(*bkpreg_access),
->> +                     GFP_KERNEL);
->> +
->> +    for (int protection_zone_idx = 0; protection_zone_idx < nb_zones;
->> +         protection_zone_idx++) {
->> +        switch (protection_zone_idx) {
->> +        case BKPREG_PROTECTION_ZONE_1_RIF1:
->> +            bkpreg_access[protection_zone_idx] = BKP_NO;
->> +            break;
->> +        case BKPREG_PROTECTION_ZONE_1_RIF2:
->> +            bkpreg_access[protection_zone_idx] = BKP_NO;
->> +            break;
->> +        case BKPREG_PROTECTION_ZONE_2_RIF1:
->> +            if (compartment_owner[1] || compartment_owner[2])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ;
->> +            else
->> +                bkpreg_access[protection_zone_idx] = BKP_NO;
->> +            break;
->> +        case BKPREG_PROTECTION_ZONE_2_RIF2:
->> +            if (compartment_owner[1] || compartment_owner[2])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ;
->> +            else
->> +                bkpreg_access[protection_zone_idx] = BKP_NO;
->> +            break;
->> +        case BKPREG_PROTECTION_ZONE_3_RIF1:
->> +            if (compartment_owner[1])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
->> +            else if (compartment_owner[0] || compartment_owner[2])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ;
->> +            else
->> +                bkpreg_access[protection_zone_idx] = BKP_NO;
->> +            break;
->> +        case BKPREG_PROTECTION_ZONE_3_RIF0:
->> +            if (compartment_owner[0])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
->> +            else if (compartment_owner[1] || compartment_owner[2])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ;
->> +            else
->> +                bkpreg_access[protection_zone_idx] = BKP_NO;
->> +            break;
->> +        case BKPREG_PROTECTION_ZONE_3_RIF2:
->> +            if (compartment_owner[2])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
->> +            else if (compartment_owner[0] || compartment_owner[1])
->> +                bkpreg_access[protection_zone_idx] = BKP_READ;
->> +            else
->> +                bkpreg_access[protection_zone_idx] = BKP_NO;
->> +            break;
->> +        default:
->> +            devm_kfree(dev, bkpreg_access);
->> +            return ERR_PTR(-ENODEV);
->> +        }
->> +    }
->> +
->> +    return bkpreg_access;
->> +}
->> +
->> +static int stm32_tamp_nvram_bkpreg_get_zone_idx(struct udevice *dev, int reg)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    struct stm32_tamp_nvram_drvdata *drvdata =
->> +        (struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
->> +    int *idx_bkpreg_zones_end = priv->idx_bkpreg_zones_end;
->> +    int nb_zones = drvdata->nb_zones;
->> +    int protection_zone_idx;
->> +
->> +    if (reg < 0)
->> +        return -1; // negative reg is the boundary of an empty zone
->> +
->> +    for (protection_zone_idx = 0; protection_zone_idx < nb_zones; protection_zone_idx++) {
->> +        if (reg <= idx_bkpreg_zones_end[protection_zone_idx])
->> +            break;
->> +    }
->> +
->> +    if (protection_zone_idx >= nb_zones)
->> +        return -1; // the reg is not a part of any zone
->> +
->> +    return protection_zone_idx;
->> +}
->> +
->> +static bool stm32_tamp_nvram_rights(struct udevice *dev, int reg, bool read_only)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    int protection_zone_idx = stm32_tamp_nvram_bkpreg_get_zone_idx(dev, reg);
->> +
->> +    if (protection_zone_idx < 0)
->> +        return false;
->> +
->> +    switch (priv->bkpreg_access[protection_zone_idx]) {
->> +    case BKP_READ_WRITE:
->> +        return true;
->> +    case BKP_READ:
->> +        return read_only;
->> +    case BKP_NO:
->> +        return false;
->> +    default:
->> +        dev_err(dev, "Can't get access rights for the zone\n");
->> +        return false;
->> +    }
->> +
->> +    return false;
->> +}
->> +
->> +static int stm32_tamp_nvram_write_byte(struct udevice *dev, u32 offset, u8 byte)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
->> +    int byte_in_word = offset - offset_aligned;
->> +    u32 read_value, to_be_writen_value;
->> +    u32 reg_idx = offset_aligned / sizeof(u32);
->> +
->> +    if (!stm32_tamp_nvram_rights(dev, reg_idx, false))
->> +        return -EIO;
->> +
->> +    regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
->> +    to_be_writen_value = read_value & ~(0xFFUL << byte_in_word * 8);
->> +    to_be_writen_value |=  (u32)byte << (byte_in_word * 8);
->> +
->> +    return regmap_write(priv->bkpregs_regmap, offset_aligned, to_be_writen_value);
->> +}
->> +
->> +static int stm32_tamp_nvram_read_byte(struct udevice *dev, unsigned int offset, u8 *byte)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
->> +    int byte_in_word = offset - offset_aligned;
->> +    u32 read_value;
->> +    u32 reg_idx = offset_aligned / sizeof(u32);
->> +
->> +    if (!stm32_tamp_nvram_rights(dev, reg_idx, true))
->> +        return -EIO;
->> +
->> +    regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
->> +    *byte = (read_value >> (byte_in_word * 8)) & 0xFF;
->> +
->> +    return 0;
->> +}
->> +
->> +static int stm32_tamp_nvram_read(struct udevice *dev, int offset, void *buf, int size)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    u8 byte;
->> +    u8 *buf_u8 = buf;
->> +    u32 temp_u32;
->> +    int i, ret;
->> +    int total = offset + size;
->> +    u32 reg_idx;
->> +
->> +    i = offset;
->> +    while (i < total)  {
->> +        reg_idx = i / sizeof(u32);
->> +        if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
->> +            if (!stm32_tamp_nvram_rights(dev, reg_idx, true)) {
->> +                dev_dbg(dev, "Backup register %u is not allowed to be read\n",
->> +                    reg_idx);
->> +                temp_u32 = 0;
->> +            } else {
->> +                regmap_read(priv->bkpregs_regmap, i, &temp_u32);
->> +            }
->> +            memcpy(buf_u8, &temp_u32, sizeof(u32));
->> +            buf_u8 += sizeof(u32);
->> +            i += sizeof(u32);
->> +        } else {
->> +            ret = stm32_tamp_nvram_read_byte(dev, i, &byte);
->> +            if (ret != 0) {
->> +                dev_dbg(dev, "Backup register %u is not allowed to be read\n",
->> +                    reg_idx);
->> +                byte = 0;
->> +            }
->> +            *buf_u8 = byte;
->> +            i++;
->> +            buf_u8++;
->> +        }
->> +    }
->> +
->> +    return size;
->> +}
->> +
->> +static int stm32_tamp_nvram_write(struct udevice *dev, int offset, const void *buf, int size)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    u8 *buf_u8 = (u8 *)buf;
->> +    u32 temp_u32;
->> +    size_t total = offset + size;
->> +    int i, ret;
->> +    u32 reg_idx;
->> +
->> +    i = offset;
->> +    while (i < total)  {
->> +        reg_idx = i / sizeof(u32);
->> +        if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
->> +            if (stm32_tamp_nvram_rights(dev, reg_idx, false)) {
->> +                memcpy(&temp_u32, buf_u8, sizeof(u32));
->> +                regmap_write(priv->bkpregs_regmap, i, temp_u32);
->> +            } else {
->> +                dev_dbg(dev, "Backup register %u is not allowed to be written",
->> +                    reg_idx);
->> +            }
->> +            buf_u8 += sizeof(u32);
->> +            i += sizeof(u32);
->> +        } else {
->> +            ret = stm32_tamp_nvram_write_byte(dev, i, *buf_u8);
->> +            if (ret != 0)
->> +                dev_dbg(dev, "Backup register %u is not allowed to be written",
->> +                    reg_idx);
->> +            i++;
->> +            buf_u8++;
->> +        }
->> +    }
->> +
->> +    return size;
->> +}
->> +
->> +static const struct misc_ops stm32_tamp_nvram_ops = {
->> +    .read = stm32_tamp_nvram_read,
->> +    .write = stm32_tamp_nvram_write,
->> +};
->> +
->> +static u32 *stm32_tamp_nvram_get_backup_zones(struct udevice *dev)
->> +{
->> +    struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    const struct stm32_tamp_nvram_drvdata *drvdata =
->> +        (struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
->> +    int nb_zones = drvdata->nb_zones;
->> +    int zone_idx;
->> +    int *idx_bkpreg_zones_end;
->> +    struct regmap *tamp_regmap = priv->config_regmap;
->> +    u32 offset_field;
->> +
->> +    idx_bkpreg_zones_end = devm_kcalloc(dev,
->> +                        sizeof(*idx_bkpreg_zones_end),
->> +                        nb_zones,
->> +                        GFP_KERNEL);
->> +    if (IS_ERR_OR_NULL(idx_bkpreg_zones_end)) {
->> +        dev_err(dev, "Can't allocate registers zones\n");
->> +        return ERR_PTR(-ENOMEM);
->> +    }
->> +
->> +    //Get the n-1 frontiers of zone within the tamp configuration registers
->> +    for (zone_idx = 0; zone_idx < nb_zones - 1; zone_idx++) {
->> +        const struct reg_field reg_field = drvdata->reg_fields[zone_idx];
->> +        struct regmap_field *field = devm_regmap_field_alloc(dev,
->> +                                     tamp_regmap,
->> +                                     reg_field);
->> +
->> +        if (IS_ERR_OR_NULL(field)) {
->> +            dev_err(dev, "Can't allocate registers zones\n");
->> +            devm_kfree(dev, idx_bkpreg_zones_end);
->> +            return ERR_PTR(-ENOMEM);
->> +        }
->> +        if (regmap_field_read(field, &offset_field) != 0) {
->> +            dev_err(dev, "Can't read field for registers zones\n");
->> +            devm_kfree(dev, idx_bkpreg_zones_end);
->> +            return ERR_PTR(-EIO);
->> +        }
->> +
->> +        idx_bkpreg_zones_end[zone_idx] = offset_field - 1;
->> +    }
->> +
->> +    //The last zone end is defined by the number of registers in TAMP
->> +    idx_bkpreg_zones_end[zone_idx] = plat->nb_total_regs - 1;
->> +
->> +    return idx_bkpreg_zones_end;
->> +}
->> +
->> +static void stm32_tamp_nvram_print_zones(struct udevice *dev)
->> +{
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    int *zones_end = priv->idx_bkpreg_zones_end;
->> +
->> +    if (device_is_compatible(dev, "st,stm32mp25-tamp-nvram")) {
->> +        dev_dbg(dev,
->> +            "\n"
->> +            "Zone 1-RIF1 %3d - %3d %c%c\n"
->> +            "Zone 1-RIF2 %3d - %3d %c%c\n"
->> +            "Zone 2-RIF1 %3d - %3d %c%c\n"
->> +            "Zone 2-RIF2 %3d - %3d %c%c\n"
->> +            "Zone 3-RIF1 %3d - %3d %c%c\n"
->> +            "Zone 3-RIF0 %3d - %3d %c%c\n"
->> +            "Zone 3-RIF2 %3d - %3d %c%c\n",
->> +            0, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
->> +                        true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
->> +                        false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_1_RIF1] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
->> +                        true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
->> +                        false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_1_RIF2] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
->> +                        true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
->> +                        false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_2_RIF1] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
->> +                        true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
->> +                        false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_2_RIF2] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
->> +                        true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
->> +                        false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_3_RIF1] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
->> +                        true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
->> +                        false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_3_RIF0] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
->> +                        true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
->> +                        false) ?
->> +                'W' :
->> +                '-');
->> +    } else if (device_is_compatible(dev, "st,stm32mp15-tamp-nvram")) {
->> +        dev_dbg(dev,
->> +            "\n"
->> +            "Zone 1 %3d - %3d %c%c\n"
->> +            "Zone 2 %3d - %3d %c%c\n"
->> +            "Zone 3 %3d - %3d %c%c\n",
->> +            0, zones_end[BKPREG_PROTECTION_ZONE_1],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_1] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_2],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], false) ?
->> +                'W' :
->> +                '-',
->> +            zones_end[BKPREG_PROTECTION_ZONE_2] + 1,
->> +            zones_end[BKPREG_PROTECTION_ZONE_3],
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], true) ?
->> +                'R' :
->> +                '-',
->> +            stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], false) ?
->> +                'W' :
->> +                '-');
->> +    }
->> +}
->> +
->> +static int stm32_tamp_nvram_of_to_plat(struct udevice *dev)
->> +{
->> +    struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
->> +    fdt_addr_t addr = dev_read_addr_size_index(dev, 0, &plat->size);
->> +    fdt_addr_t parent_addr = dev_read_addr_size_index(dev->parent, 0, &plat->parent_size);
->> +
->> +    if (addr == FDT_ADDR_T_NONE)
->> +        return -EINVAL;
->> +    plat->base = (void __iomem *)addr;
->> +
->> +    if (parent_addr == FDT_ADDR_T_NONE)
->> +        return -EINVAL;
->> +    plat->parent_base = (void __iomem *)parent_addr;
->> +
->> +    if (plat->size == FDT_ADDR_T_NONE)
->> +        return -EOPNOTSUPP;
->> +
->> +    plat->nb_total_regs =  plat->size / sizeof(uint32_t);
->> +
->> +    return 0;
->> +}
->> +
->> +static int stm32_tamp_nvram_probe(struct udevice *dev)
->> +{
->> +    struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
->> +    struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
->> +    struct regmap_config config_regmap;
->> +    struct regmap_config bckreg_regmap;
->> +
->> +    config_regmap.r_start = (ulong)(plat->parent_base);
->> +    config_regmap.r_size = plat->parent_size;
->> +    config_regmap.reg_offset_shift = 0;
->> +    config_regmap.width = REGMAP_SIZE_32;
->> +    priv->config_regmap = devm_regmap_init(dev, NULL, NULL, &config_regmap);
->> +
->> +    bckreg_regmap.r_start = (ulong)(plat->base);
->> +    bckreg_regmap.r_size = plat->size;
->> +    bckreg_regmap.reg_offset_shift = 0;
->> +    bckreg_regmap.width = REGMAP_SIZE_32;
->> +    priv->bkpregs_regmap = devm_regmap_init(dev, NULL, NULL, &bckreg_regmap);
->> +
->> +    priv->idx_bkpreg_zones_end = stm32_tamp_nvram_get_backup_zones(dev);
->> +    if (IS_ERR_OR_NULL(priv->idx_bkpreg_zones_end)) {
->> +        dev_err(dev, "Failed to get the backup zone from tamp regs\n\n");
->> +        return -ENODEV;
->> +    }
->> +
-> 
-> to need to check the compatible , information is already provide by ucall with drvdata
-> 
-> +    const struct stm32_tamp_nvram_drvdata *drvdata =
-> +        (struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
-> +    if (drvdata == &stm32mp25_tamp_nvram) {
-> 
-
-done
-
->> +    if (device_is_compatible(dev, "st,stm32mp25-tamp-nvram")) {
->> +        priv->bkpreg_access = stm32_tamp_get_access_rights_mp2X(dev);
->> +        if (IS_ERR_OR_NULL(priv->bkpreg_access))
->> +            return -ENODEV;
->> +    } else {
->> +        priv->bkpreg_access = stm32mp1_tamp_bkpreg_access;
->> +    }
->> +
-> 
-> or better
-> 
-> or add element in drvdata
-> 
-> struct stm32_tamp_nvram_drvdata {
->     const unsigned int nb_zones;
->     const struct reg_field *reg_fields;
-> +       const enum stm32_tamp_bkpreg_access (*get_access)(struct udevice *dev)
-> };
-> 
-> with :
-> 
-> static const enum stm32_tamp_bkpreg_access *stm32mp1_tamp_get_access_rights(struct udevice *dev) {
->     return stm32mp1_tamp_bkpreg_access;
-> }
-> 
-> 
-> and with :
-> 
-> stm32mp1_tamp_nvram.get_access = stm32mp1_tamp_get_access_rights;
-> 
-> stm32mp2_tamp_nvram.get_access = stm32mp2_tamp_get_access_rights;
-> 
-> 
-> all this code becomes generic
-> 
->     priv->bkpreg_access = drvdata->get_access(dev);
-
-ok, perfect ;-)
-
-> 
->> +    stm32_tamp_nvram_print_zones(dev);
->> +
->> +    return 0;
->> +}
->> +
->> +static int stm32_tamp_nvram_remove(struct udevice *dev)
->> +{
->> +    return 0;
->> +}
->> +
->> +static const struct udevice_id stm32_tamp_nvram_ids[] = {
->> +    { .compatible = "st,stm32mp15-tamp-nvram", .data = (ulong)&stm32mp1_tamp_nvram },
->> +    { .compatible = "st,stm32mp25-tamp-nvram", .data = (ulong)&stm32mp25_tamp_nvram },
->> +    {},
->> +};
->> +
->> +U_BOOT_DRIVER(stm32_tamp_nvram) = {
->> +    .name = "stm32_tamp_nvram",
->> +    .id = UCLASS_MISC,
->> +    .of_match = stm32_tamp_nvram_ids,
->> +    .priv_auto = sizeof(struct stm32_tamp_nvram_priv),
->> +    .plat_auto = sizeof(struct stm32_tamp_nvram_plat),
->> +    .ops = &stm32_tamp_nvram_ops,
->> +    .of_to_plat = of_match_ptr(stm32_tamp_nvram_of_to_plat),
->> +    .probe = stm32_tamp_nvram_probe,
->> +    .remove = stm32_tamp_nvram_remove,
->> +};
->> +
-> 
-> 
-> Regards
-> 
-> 
-> Patrick
-> 
+Thanks,
+-- 
+Jerome
