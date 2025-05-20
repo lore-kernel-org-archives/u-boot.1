@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36BDC54754
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 12:11:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB7D7C3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 12:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22C3682B00;
-	Tue, 20 May 2025 14:11:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BAA082B00;
+	Tue, 20 May 2025 14:28:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VujBToQ5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A1NPprNY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E72482B97; Tue, 20 May 2025 14:11:40 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id C957382AB9; Tue, 20 May 2025 09:58:08 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F82482A8D
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 14:11:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9736E82A4B
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 09:58:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-551ed563740so3332731e87.2
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 05:11:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-231fd67a9aeso24979905ad.1
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 00:58:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747743098; x=1748347898; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1747727885; x=1748332685; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RFH15dHvDrz3vW19vb/3l6wKSP5wQrCCyFhZg31ps1Y=;
- b=VujBToQ5mGx1IObOAb81mFZfcVV2HxkoSW1Y0jt87tKgNQZZjciwQOiAymZ2OYn74P
- a0rK2181TiSgWLrDFHdOX0f0BaJD9RD27yzkJHdNqZt8gSwHZ6D5LFKel3DmHoew9YW8
- zvLGCwV9edKd4z/8WpHEORjOph/sLbxqy60WAjBGkMDJCyp71D1npPR9oR3W3/OFXkoF
- 1Vudr94hP1bGSDkY7cuqYhqysErEXYbqvK4s/bBSyXbxj1T7lVxFKapS8NwAnFVKWYK6
- f9PFy1IA3B9+xmYGKWkI4NOpHamGV1FgfWlL0RyK9YEusC6nhaGWJYS+usGBNt+vq2A6
- Zc7A==
+ bh=zawZKgQCvo3X66Pff3rWbs27XySL3Ytzy/n5l4fZD50=;
+ b=A1NPprNYNsLdw/4O4jcQcGnCdA9TlpOai7ve11tFnvrCn0JIBjqo1XVRcUK43s9Ire
+ jh7+Evg6YU4uynFSH6lKrfh7NGCUY9OrBizBOJsML3bTcgThoM6CzfcXHbSkfRh+4Uc5
+ 3mUPKEBmCw+mtaVFNG+nIWElcNogvPxykhbdaKJ7liQjvqr0JtkLLNDFmMinNCQsmH4W
+ bjnrIj6p+SOmaXmnyfSyK1mdx2JKXqbEfRwvPGl2cfBTkJvfWNO1avCB/lkWUeXd+CEx
+ csU6adOvNrE8QGMMBIGYrHX3gv/4WjiU1dt1R9a04YyiZOBWVFE8cxgS7Hw0T5gfuFM8
+ uDEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747743098; x=1748347898;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1747727885; x=1748332685;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RFH15dHvDrz3vW19vb/3l6wKSP5wQrCCyFhZg31ps1Y=;
- b=P1dJaf2GFgIUEFaN6gYH54yL5I0C49dIRno5gwpA6GOnWwb2quqqIZnQGcI/iZxQ6D
- 6L/q2SAgQxYM9P4rM4wDNHVJuFw9gAJZfAXB38dOcjGlyI7lrbw234AvlB87N3HZaMtK
- 4sYazWXoZWPdwCUxQ/Q3TqhiowIBsx12Qg1BPHjXCP3gccZbVLxmqZ0zeA3abupQ9x3c
- aYB4A+177gC/KXmry3V+qcTI+wCscXE1ZAORI68wWwR2oFrrD9VWYBytJ4lIabQlvhjk
- t5FhvV/tFkhpGSCRcIQtf1E3Mvxc8B/8dw5+mwhqOFjym8AXZTRG1jk+oxOHVLRl8nQI
- Qdcw==
-X-Gm-Message-State: AOJu0YzwhsLdC9sMdvV3dDJmA28D1iSX99ASg+mfUcUXaAPON0miJ8Io
- DBb5u1fBpnvErGiV1B9EkhA+K9HCr7MIzopO3TX5hm3lJIg2VPJkNSS8hmucOAsScznZ+AD03oi
- AQ0mGDP7VlKo18fS159Rdn9TdO35gcO8=
-X-Gm-Gg: ASbGnctj38UGOHUUBZydQxtW9FisantWSpIYX4f9d5mPgEKFSWAENBdnXpu4ETpZDk1
- gLNaO2vOQdybkh+Z5d6cI9dtDwj8q4yxw4R5suhd8/TBXlXqa9AjQ5CsQlno2RltvXjdvDpo/B/
- ltRKVMeMXHz9ikS+w2W+E665T0k2R69NfEq/2V4XJUXWOwih22I5+WOT8GhbVX3MI=
-X-Google-Smtp-Source: AGHT+IHX8X/jRD5JGkP2a9R4LfE/2lV1NdWKGV1cEYDcNvfwj6yt88fXYeRdtrMRhFqg9gs+LkBgkCBWIifBn6ppF4U=
-X-Received: by 2002:a05:6512:4508:b0:550:dea0:3491 with SMTP id
- 2adb3069b0e04-550e72299eemr4474263e87.39.1747743097581; Tue, 20 May 2025
- 05:11:37 -0700 (PDT)
+ bh=zawZKgQCvo3X66Pff3rWbs27XySL3Ytzy/n5l4fZD50=;
+ b=BONgUg3wGcsAuFMtksUoihBX/jwfwBpY8D2OPjWmJmBxqLfGHIDVjI0caaCa/k0m+3
+ IO6BNf3/8pRlEyYtjrEmMGNJEYy2jfftiyn06S0ArRvYsgdqbD/LzI/JeESYyRAw/V5a
+ 1I+ahFjpRTSt5C9zqvPlA3A1HyPLXSii9YxXJirpIjyxOf1c8cR7UIvMh05FOA7wrPyV
+ uSUnpU94RWYk4bX3Zs3Gvrh4krUVJ/J/+KuNM5dpyTtquTKFY4GXdUOFD86lpPYhdbkj
+ 8knLQt4ymY6AWcB7hf4qS7iiHX9WZVzHsAh3q2w4wbNYXj+91NKAoj189NY/DAI2d+Vl
+ oiTA==
+X-Gm-Message-State: AOJu0Yw2jN4KEMKAsf80tggRfqP39YfUQZk/n+UzwpjONNKjqzL4wDUb
+ r1FnvO6Pja3bynal8f0nmyrJPSFRGTdXA+9fiRC5aNpVgKk2i5o9XVZx2FpMSjfD
+X-Gm-Gg: ASbGncsGQgIisSm879rQaDU67rowW8b4i208Xk9tgcyz1oZmoJSlepCiWC7MPZNYN9n
+ PAUvvo4pE4fyISx5ZtFdYVZe6QMXHhj4Qg7OI78QEBNGTxBTNcqeymRQt1DRWmoqTsySImE8uq/
+ AI2Y8/YfAYI+IO8m+FW8qKLIB6FA/OFgoUJJ63E2iY9UeD55BZyVA/Zo/k/h80IVcfKVMcn6D9n
+ qBlcj2Eu3ngluTweRT7q0biP9g0+tPtPPEOoaBdSfkLkHc9nJbybV8NIPSxME5mgD+xj92k7Afq
+ mYRVNJk2QpAD1TIpAA6e4cfPFmvTWgH9xNTrzmEBRFRzALX7zHa5t8drWT5Z5fAKosskhIaEIsB
+ HoGPLqPVZnZwBm6PKSExyjzDEuK/xx1wgEmafFOCVIxeQKjs=
+X-Google-Smtp-Source: AGHT+IEBtV44t9sR8Xzu7cG87l9WOjd4N+zkRBdPdOSH+9pQdRgeR/qIdoLLXL0k7M/4tMFOBabJdQ==
+X-Received: by 2002:a17:902:da91:b0:215:a303:24e9 with SMTP id
+ d9443c01a7336-231d4ae1de4mr221010985ad.3.1747727884630; 
+ Tue, 20 May 2025 00:58:04 -0700 (PDT)
+Received: from noble-leuven.tail872496.ts.net
+ (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-231d4eba49esm71544795ad.163.2025.05.20.00.58.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 May 2025 00:58:04 -0700 (PDT)
+From: Aristo Chen <jj251510319013@gmail.com>
+X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, carlos.lopezr4096@gmail.com,
+ aristo.chen@canonical.com, quentin.schulz@cherry.de, ada@thorsis.com
+Subject: [PATCH v2 0/4] mkimage: validate image references in FIT
+ configurations
+Date: Tue, 20 May 2025 07:50:02 +0000
+Message-ID: <20250520075735.132308-2-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250505100852.9364-1-aristo.chen@canonical.com>
+References: <20250505100852.9364-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
-References: <20250520085436.925901-1-dario.binacchi@amarulasolutions.com>
- <20250520085436.925901-5-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20250520085436.925901-5-dario.binacchi@amarulasolutions.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 20 May 2025 09:11:26 -0300
-X-Gm-Features: AX0GCFtA19iSZOSevLOp5s94TVsInY3xcBu7QvRzyBPjidCH3qTo9hYGA0Wbnd0
-Message-ID: <CAOMZO5As4Uxmunk4-LGFC71mR2mCZdJDYWtYk0wM565tpM1_wA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] board: bsh: imx8mn_bsh_smm_s2/s2pro: enlarge
- CONFIG_SPL_SYS_MALLOC_F_LEN
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>
-Cc: u-boot@lists.denx.de, Sven Dembiann <Sven.Dembianny@bshg.com>, 
- linux-amarula@amarulasolutions.com, michael@amarulasolutions.com, 
- Simon Holesch <simon.holesch@bshg.com>, 
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 20 May 2025 14:28:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,48 +102,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dario and Michael,
 
-On Tue, May 20, 2025 at 5:55=E2=80=AFAM Dario Binacchi
-<dario.binacchi@amarulasolutions.com> wrote:
->
-> The commit dda454e933c6 ("serial: mxc: Support bulk enabling clocks")
-> breaks the booting of the BSH SMM S2 board. The analysis of the issue
-> revealed memory allocation failures during the registration of UART4
-> clocks as well as other peripherals. Increasing SYS_MALLOC_F_LEN to
-> 0x10000 fixed the issue.
->
-> Dropping this option allows it to be set to the default value of
-> CONFIG_SYS_MALLOC_F_LEN, which is set by default to 0x10000 on
-> i.MX8M platforms.
->
-> Co-developed-by: Michael Trimarchi <michael@amarulasolutions.com>
-> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> ---
->
-> (no changes since v1)
->
->  configs/imx8mn_bsh_smm_s2_defconfig    | 1 -
->  configs/imx8mn_bsh_smm_s2pro_defconfig | 1 -
->  2 files changed, 2 deletions(-)
->
-> diff --git a/configs/imx8mn_bsh_smm_s2_defconfig b/configs/imx8mn_bsh_smm=
-_s2_defconfig
-> index 1c11d4705419..206d216394db 100644
-> --- a/configs/imx8mn_bsh_smm_s2_defconfig
-> +++ b/configs/imx8mn_bsh_smm_s2_defconfig
-> @@ -15,7 +15,6 @@ CONFIG_SYS_MONITOR_LEN=3D524288
->  CONFIG_SPL_SERIAL=3Dy
->  CONFIG_SPL_DRIVERS_MISC=3Dy
->  CONFIG_SPL_STACK=3D0x980000
-> -CONFIG_SPL_SYS_MALLOC_F_LEN=3D0x2000
+Hi all,
 
-Thanks for investigating this issue and getting to the root cause.
+This series introduces a validation step in mkimage to ensure that all image
+names referenced under the /configurations node of a FIT source (ITS) are
+actually defined under the /images node.
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+### Motivation
 
-I'm adding Hugo to the Cc as the imx8mn_var_som_defconfig target also
-uses CONFIG_SPL_SYS_MALLOC_F_LEN=3D0x2000.
+When using mkimage to build FIT images, it's easy to mistakenly reference
+nonexistent image nodes in configurations (e.g., referencing a missing `fdt` or
+`firmware` node). Such issues are often not caught until runtime in U-Boot.
 
-Hugo, please consider doing the same change on  imx8mn_var_som_defconfig.
+This series aims to catch these errors early during FIT image creation by
+validating the configuration references in mkimage itself.
+
+### Changes in v2
+
+- Use `fdt_stringlist_count()` and `fdt_stringlist_get()` to handle stringlist properties cleanly
+- Validate additional properties (`firmware`, `fpga`, `script`)
+- Improve error messages by including the failing configuration and property name
+- Refactor error propagation in `fit_handle_file()` as a separate commit
+- Update all affected binman test DTS files to include the missing `atf` and `uboot` image nodes
+- Add a new Python test case under `test/py/` to ensure mkimage correctly fails when an image is missing
+
+Best regards,
+Aristo Chen
