@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29582C3ABDA
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:22:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13A7FC3ABDA
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:22:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5703282C0C;
-	Tue, 20 May 2025 07:22:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9FD1782C38;
+	Tue, 20 May 2025 07:22:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p8MgiHDM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rBNkEozn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AB9882BF2; Tue, 20 May 2025 07:22:09 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 10CB482C30; Tue, 20 May 2025 07:22:12 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A43A182BD7
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EFA782BD7
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-442f4a3a4d6so33159265e9.0
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:07 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3a0ac853894so4495230f8f.3
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718527; x=1748323327; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718529; x=1748323329; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ivTMYryFiugSVHlDJyBnwzVVzOeu9ckLXmKQbnYxhmY=;
- b=p8MgiHDM21qjvVCRTvOTDYMKAAXuxiFIogHz9B5ejr32mdNJql1pv1p0NQUzjEJ341
- UaEqArqhBpw3vzOkozhwLCSs6/cSI+jmgNxlDZLL35KPkJ3l7DSXbb/sVrP+hl6Kkg9U
- /trWBgZVFrCIuAxXkGmmqGJ3hLT+aM3VPsGFEwHHKLWaS/ihHXvwbAX0ib63Eltq8mNJ
- GzubfdpSn30euDUW6J7VV4/YxYEbe+lLoOpRDcKY7uUhinLBe4fh9oEgOHEBz7KeZHM8
- v4PE+fXgft6XxSxowg63Ms9tx3BNuE21S8F/LOWZL+84ItZ8fRKVMgDdj29kmkIo8uSy
- hROw==
+ bh=JsINoPKzYyO319retZqnRO2Ca2xaXXbDc9IMIr2DgW8=;
+ b=rBNkEoznB5760cYFv+HU15bkS8gVUGY7MUY/94DiI9+TcA/YDWOrbBFaStC4uvibGS
+ 6xXTmyIy18v4eEoiE3RZnLW9lDGrgdq7eViXc92hIEbr+Wpq/cjI7cBr96eXH+CLN8ms
+ yrDiV4CWP54FfYOfzTBAFgPq8C1RLL1rvCLDydQi4QPV0zxo6SPTf6uxSBlT91IbTV9P
+ bRyoMOVNT9WVRc4u3VlOfFV33WSIwQF4Dru07sIO/WXO0BvxpOdwcL1XQhnP6y0xsaqW
+ t007doCiC4vx5x5iswlrvqEzXxeqiQmaAipdTiyTod4gK2iV1DUhRIRVAYVs1ahtV8fV
+ tBwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718527; x=1748323327;
+ d=1e100.net; s=20230601; t=1747718529; x=1748323329;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ivTMYryFiugSVHlDJyBnwzVVzOeu9ckLXmKQbnYxhmY=;
- b=XHo/+iPw0kIUgc+Q/JGgqrVon+Lxfz48yJiYjauu8IMieakVcWxupJZFWTmDNIIH0P
- jJcxrLtwt2S/UWeNvvat/At3Q6BfTiZtwIIBilP27dWOJrE5oqXAyXc/HjD9+lXL2Yqp
- eAQKU6KfNE7kE56EOBly0ip4/m0Jpoy925mRMMl+3gYw7RkN4eIL+1BfVv1GkXU8AXPE
- IWSMWjmtZmXSGbj904W66/LyQcl6DDkORSZHymdvqlDX4UXtSr6lFzPIL8xJlUoFo+Bf
- lBNO2pBF5PgA1ZAMqVkN40OuFPblT20yeWLoCypIBAfVFtXivqXojfb7B7qVoo21kYt2
- y+Cw==
+ bh=JsINoPKzYyO319retZqnRO2Ca2xaXXbDc9IMIr2DgW8=;
+ b=kHb0qbrNWapeJvstlapMnq8bNEmNGEDWmxhMehL6494lMGVQP2A8QlqFrNThTgVFUd
+ +6Yvdnh0qxbzSYG4vwi6IcC3Wdjin6nC8kXlqskq2H1BnNM4AxQSBCGeI1VfRVlxv6bf
+ ee2T0VauOso6R2AR5CXGRBJKgZEmIqNRXDOQF9b1KRwvMW1og2UO5gS1P/AyDRHT6hFw
+ jIRn2tvtcBniMLcrrXoFowAfysYcq4RUjB1ah/09UqvWo50lucHidBF7T5tPb7kf08xC
+ Sfgy+pufvdbFo1Og8XiR7pYVF4uaRLSolj4GwXQw4ipNyqHgOo9Aew3JoCR0ae/oGd/c
+ Leig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWffcYJR00t5SGQK5ChqmUG/NQZkId9gpXz85CDazVQOzQeke7znL0mZ/pIPbF7nZU6ZD9V1YA=@lists.denx.de
-X-Gm-Message-State: AOJu0YynmFhc/OYIw+XM2QD+870btsrZKJtgKQ6O45A2Ysi3x32AlvST
- WhY9rboBcHViwhJaHeQlZIXHlcwIwP+x0YWlKZ793OUGGAjJl3xymmUC0mMIrYW1cHg=
-X-Gm-Gg: ASbGncvV0smGJqnts3aqx9sEQXFJMQate0QbRxz9kjvbYyIVAkbcYoxrb2flPVAKO7W
- m6nktHbAcmaWmAeVSaTU9TzXFuKCUhYmyKSJ2kNNcXVQSZS4fcn/uy+7RSALMUfwvEvk4PmrwI4
- rHRcDjhe0pLUlrqcoUD+Bo3qffZdhE1A81d2Q2uFVyxqPPJBIrHXiVyu2PeMyoGi2PRXNy3ZLtW
- QYFKMhG1VX16+oI7S+tf5tPbn+X6RdzTZNYzQ5dzEux5YQiHYEbQpmMvLT9onyo9uMzK1359pQp
- 2m5EvuUfOTG3OYyiWmbysr8q04MKzXASkIWZF7/W7EwcEVQUIoqJhfpDtsB6H6lPC9XRv8/32Bm
- Q6UeHksJt+g==
-X-Google-Smtp-Source: AGHT+IGGRfZ9MDaVR2t/AyHMvT0q0UU6iC+/noshTIP+wWZE6zYES9MvxmYJ4ToDtwdwu3Zr+FoU1A==
-X-Received: by 2002:a05:600d:19:b0:442:7c40:fda4 with SMTP id
- 5b1f17b1804b1-442f84c209dmr165502775e9.1.1747718527113; 
- Mon, 19 May 2025 22:22:07 -0700 (PDT)
+ AJvYcCWTYXYXUlNXBf2WcL8l1W8fFaGOdSb92YZfpxT5TqsRyrqWZdrHVW4kpUH9adzHSqL9YrfcIcg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZKk43PrGF29jmpP+nST9x+VfweZdli8mN3FUAfDPEFJ5unpre
+ fOFQciecK48o8tzMu7WImZFG3qWosZB/9+qUnb9E1Jtw1foDE4nRRDv30awFEWXmiC4=
+X-Gm-Gg: ASbGncvJVBvHE5ay9jaTYYGFCgxMubViM0xDIEI6y563RjJR7Yft5NZzrZ6+szkbe88
+ DevqBwYEvhnWdGKxQLM8nk17pZhdhqcKpI3P827pBPjonN8a5MXR/tmP+lCFmDCkpkMxvv4ssKG
+ uQNBlj6vm7Rb/W08WPLeGgupL0zf+BAladJ+FfmiL2+tK82d66qTRMlsHzAyDoyq3bTrCb2+7LF
+ VqKaHcRYNxRFtSk+eLb27jPUcCtrNETnXuh2EwZgUWRNRVa2F58anXshAk1VZRRKuAgD3f216hM
+ sygBBhvEMGZcWlqCKLSNEOS+J13yjx40ARrZ7hNNukaCX/1keWfmLrvPaAQx2YanE3tVgeYK52c
+ =
+X-Google-Smtp-Source: AGHT+IHxq23qfu7wTDzm9ZDQBeVRFVCmIXukFt6bX0WHMW+dzyvSbp/6FOM4AcvAm+8yjiZRCA5FeQ==
+X-Received: by 2002:a05:6000:4304:b0:3a3:6ae4:6615 with SMTP id
+ ffacd0b85a97d-3a36ae46750mr5772110f8f.13.1747718529552; 
+ Mon, 19 May 2025 22:22:09 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.05
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:06 -0700 (PDT)
+ Mon, 19 May 2025 22:22:09 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Prasad Kummari <prasad.kummari@amd.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: [PATCH 03/24] kbuild: Enable dtc graph_port warning by default
-Date: Tue, 20 May 2025 08:21:14 +0300
-Message-ID: <20250520052153.307194-4-ilias.apalodimas@linaro.org>
+Subject: [PATCH 04/24] kbuild: remove redundant 'set -e' from filechk_offsets
+Date: Tue, 20 May 2025 08:21:15 +0300
+Message-ID: <20250520052153.307194-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -108,25 +108,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Backport changes from the kernel
-commit a2237fec1e06 ("kbuild: Enable dtc graph_port warning by default")
+
+commit f3fd4a3f3a38 ("kbuild: remove redundant 'set -e' from filechk_offsets")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Makefile.lib | 1 -
- 1 file changed, 1 deletion(-)
+ scripts/Makefile.lib | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 2422ac980a46..c3c6c941bef4 100644
+index c3c6c941bef4..a2b3b2e63872 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -301,7 +301,6 @@ DTC_FLAGS += -Wno-unit_address_vs_reg \
- 	-Wno-avoid_unnecessary_addr_size \
- 	-Wno-alias_paths \
- 	-Wno-graph_child_address \
--	-Wno-graph_port \
- 	-Wno-simple_bus_reg \
- 	-Wno-unique_unit_address \
- 	-Wno-simple_bus_reg \
+@@ -718,7 +718,7 @@ endef
+ # Use filechk to avoid rebuilds when a header changes, but the resulting file
+ # does not
+ define filechk_offsets
+-	(set -e; \
++	( \
+ 	 echo "#ifndef $2"; \
+ 	 echo "#define $2"; \
+ 	 echo "/*"; \
 -- 
 2.49.0
 
