@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13A7FC3ABDA
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 232D8C3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FD1782C38;
-	Tue, 20 May 2025 07:22:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E700C82C67;
+	Tue, 20 May 2025 07:22:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rBNkEozn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZCzaLKdC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10CB482C30; Tue, 20 May 2025 07:22:12 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 647D582C57; Tue, 20 May 2025 07:22:14 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EFA782BD7
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A40D82BF2
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a0ac853894so4495230f8f.3
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:10 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a064a3e143so2779764f8f.3
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718529; x=1748323329; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718532; x=1748323332; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JsINoPKzYyO319retZqnRO2Ca2xaXXbDc9IMIr2DgW8=;
- b=rBNkEoznB5760cYFv+HU15bkS8gVUGY7MUY/94DiI9+TcA/YDWOrbBFaStC4uvibGS
- 6xXTmyIy18v4eEoiE3RZnLW9lDGrgdq7eViXc92hIEbr+Wpq/cjI7cBr96eXH+CLN8ms
- yrDiV4CWP54FfYOfzTBAFgPq8C1RLL1rvCLDydQi4QPV0zxo6SPTf6uxSBlT91IbTV9P
- bRyoMOVNT9WVRc4u3VlOfFV33WSIwQF4Dru07sIO/WXO0BvxpOdwcL1XQhnP6y0xsaqW
- t007doCiC4vx5x5iswlrvqEzXxeqiQmaAipdTiyTod4gK2iV1DUhRIRVAYVs1ahtV8fV
- tBwQ==
+ bh=RId3ynH0dbdaC44l+hzrdwIGHuq1A4xDU8SjctHA4Y4=;
+ b=ZCzaLKdCEgT5ziwv36QHMq0vFe3dX9ZyV2ef4EtKwgSZajsi658mt/SbvMP7zzblsQ
+ DxNWxHUj7r68uS4IlkpOu7lzv2Lk0hIPIkifmmSV/kz2nF5FUmgrdRrkKwDxhf8HBqJN
+ zMRO0kYRfzafSLAUCqS0KLRC+A6u8A9vKQzWU4Hj8PqiGiLLrKN2ShmshdNLTyW/wZB1
+ yk1u+ClO6sRQxbeoTO9EFAMeYbUcSNOLUH2zePGafulGdd17FTdzHueSC1G/hfPMQmlU
+ PxUR4vmLgGvkz1qi28020m/pjwlr4RAnY5Ja2r3g8HHsDopTeapyQxZJ+mOkSbsB5H16
+ 5a4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718529; x=1748323329;
+ d=1e100.net; s=20230601; t=1747718532; x=1748323332;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JsINoPKzYyO319retZqnRO2Ca2xaXXbDc9IMIr2DgW8=;
- b=kHb0qbrNWapeJvstlapMnq8bNEmNGEDWmxhMehL6494lMGVQP2A8QlqFrNThTgVFUd
- +6Yvdnh0qxbzSYG4vwi6IcC3Wdjin6nC8kXlqskq2H1BnNM4AxQSBCGeI1VfRVlxv6bf
- ee2T0VauOso6R2AR5CXGRBJKgZEmIqNRXDOQF9b1KRwvMW1og2UO5gS1P/AyDRHT6hFw
- jIRn2tvtcBniMLcrrXoFowAfysYcq4RUjB1ah/09UqvWo50lucHidBF7T5tPb7kf08xC
- Sfgy+pufvdbFo1Og8XiR7pYVF4uaRLSolj4GwXQw4ipNyqHgOo9Aew3JoCR0ae/oGd/c
- Leig==
+ bh=RId3ynH0dbdaC44l+hzrdwIGHuq1A4xDU8SjctHA4Y4=;
+ b=n93LY1VPJCcMefWkgA1fbiNYD3jjbw2ZHCaL5kScjnyOlrfYFRJ0mLfWC1NCEcf8Kh
+ DR3zyjhhgVWoTajtHt5sap5Yzli/mAqYVP+gGhTUpmSARKJId/FLkT4UkxzeLWGfhVER
+ 6WLU9QZhu7RtPQPmEwe6EmKNxBLboVJi+aSOUMmYCGOQNEtndqutYLLLGLIf0zegpHbz
+ uPOkyojfT7qRNvt4gVrxnxTwrIonjsU+iRpuG6WglEPoMYldGtGO8vrV4ap7LTnLkCU/
+ wKfWfGaZOZy1B/Z/kEFGRqmRzrpVlEW70GkJDrhpq6h2Nupqbbj0A8N/rNft06wtkB8v
+ Kpxw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTYXYXUlNXBf2WcL8l1W8fFaGOdSb92YZfpxT5TqsRyrqWZdrHVW4kpUH9adzHSqL9YrfcIcg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZKk43PrGF29jmpP+nST9x+VfweZdli8mN3FUAfDPEFJ5unpre
- fOFQciecK48o8tzMu7WImZFG3qWosZB/9+qUnb9E1Jtw1foDE4nRRDv30awFEWXmiC4=
-X-Gm-Gg: ASbGncvJVBvHE5ay9jaTYYGFCgxMubViM0xDIEI6y563RjJR7Yft5NZzrZ6+szkbe88
- DevqBwYEvhnWdGKxQLM8nk17pZhdhqcKpI3P827pBPjonN8a5MXR/tmP+lCFmDCkpkMxvv4ssKG
- uQNBlj6vm7Rb/W08WPLeGgupL0zf+BAladJ+FfmiL2+tK82d66qTRMlsHzAyDoyq3bTrCb2+7LF
- VqKaHcRYNxRFtSk+eLb27jPUcCtrNETnXuh2EwZgUWRNRVa2F58anXshAk1VZRRKuAgD3f216hM
- sygBBhvEMGZcWlqCKLSNEOS+J13yjx40ARrZ7hNNukaCX/1keWfmLrvPaAQx2YanE3tVgeYK52c
+ AJvYcCWvSVWNfDdejxMVaDnayVivxBOAC+mK6ROBvaid1BtjRU3BZXbo2n5ZCO059MAM9S1VV+Dys64=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+53nuIq7cCUkB5pzzssgnxvKW3S44qtRJRiHSLw7vVE+/9/jv
+ 5rzLo4NNB4tivSbiGU7a3dDkY9dFeNnvLuFF60RFOeZJDAkSN6l+9DrtJ145qzlMG34=
+X-Gm-Gg: ASbGncuSty0AWO24SRo1aKiycU5DoplGnzoHsnZ3eIB/MNlJjf9mMlMNFRyo4euhB82
+ GAOU9QrcyEqVmkp66RbwY9vFJQyplTgZ9tQ8Cg8f7e+HCmU9KjTkfkRnk1yQuATmARIMISUFEbm
+ EziOp1WA+wFS+2np1gZz2smIWD05eNQM6tkLlEqRUbsfZ3P9jVFgdLQ8COKXN3GdY+Nztow6zxA
+ 66rgknZRSo6OWFvJYFsjIBgYXqZmozsAayt5dx60x4//cRuwx3xFsTIMDI9NBo1oGOGcDlloovv
+ WYcitO6ElTQaoz6JLjh+KC3ahjUHK652OlkpA9HXjRiHn3glCui/KWkkUsizu7kA05ETaj4a90w
  =
-X-Google-Smtp-Source: AGHT+IHxq23qfu7wTDzm9ZDQBeVRFVCmIXukFt6bX0WHMW+dzyvSbp/6FOM4AcvAm+8yjiZRCA5FeQ==
-X-Received: by 2002:a05:6000:4304:b0:3a3:6ae4:6615 with SMTP id
- ffacd0b85a97d-3a36ae46750mr5772110f8f.13.1747718529552; 
- Mon, 19 May 2025 22:22:09 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGKmGMBYAvyan0+wt4fjVx3jF5a1k7J6M5GKs2bcJI1GbRaMqeHVseQ1nGmhw54j/WCfb6Pqg==
+X-Received: by 2002:a05:6000:18a9:b0:3a3:6d01:1ed3 with SMTP id
+ ffacd0b85a97d-3a36d012147mr6090222f8f.42.1747718531925; 
+ Mon, 19 May 2025 22:22:11 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.08
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:09 -0700 (PDT)
+ Mon, 19 May 2025 22:22:11 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -81,11 +81,11 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Prasad Kummari <prasad.kummari@amd.com>,
  Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: [PATCH 04/24] kbuild: remove redundant 'set -e' from filechk_offsets
-Date: Tue, 20 May 2025 08:21:15 +0300
-Message-ID: <20250520052153.307194-5-ilias.apalodimas@linaro.org>
+ Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH 05/24] kbuild: remove redundant target cleaning on failure
+Date: Tue, 20 May 2025 08:21:16 +0300
+Message-ID: <20250520052153.307194-6-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -107,28 +107,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Backport changes from the kernel
+Bacport from the kernel
 
-commit f3fd4a3f3a38 ("kbuild: remove redundant 'set -e' from filechk_offsets")
+commit 172caf1993b7 ("kbuild: remove redundant target cleaning on failure")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Makefile.lib | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ scripts/Makefile.lib | 21 +++++++--------------
+ 1 file changed, 7 insertions(+), 14 deletions(-)
 
 diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index c3c6c941bef4..a2b3b2e63872 100644
+index a2b3b2e63872..7690cc61f9a1 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -718,7 +718,7 @@ endef
- # Use filechk to avoid rebuilds when a header changes, but the resulting file
- # does not
- define filechk_offsets
--	(set -e; \
-+	( \
- 	 echo "#ifndef $2"; \
- 	 echo "#define $2"; \
- 	 echo "/*"; \
+@@ -288,8 +288,7 @@ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $(OBJCOPYFLAGS_$(@F)) $< $@
+ # ---------------------------------------------------------------------------
+ 
+ quiet_cmd_gzip = GZIP    $@
+-cmd_gzip = (cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@) || \
+-	(rm -f $@ ; false)
++cmd_gzip = cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@
+ 
+ # DTC
+ # ---------------------------------------------------------------------------
+@@ -562,26 +561,22 @@ printf "%08x\n" $$dec_size |						\
+ 
+ quiet_cmd_bzip2 = BZIP2   $@
+ cmd_bzip2 = (cat $(filter-out FORCE,$^) | \
+-	bzip2 -9 && $(call size_append, $(filter-out FORCE,$^))) > $@ || \
+-	(rm -f $@ ; false)
++	bzip2 -9 && $(call size_append, $(filter-out FORCE,$^))) > $@
+ 
+ # Lzma
+ # ---------------------------------------------------------------------------
+ 
+ quiet_cmd_lzma = LZMA    $@
+ cmd_lzma = (cat $(filter-out FORCE,$^) | \
+-	lzma -9 && $(call size_append, $(filter-out FORCE,$^))) > $@ || \
+-	(rm -f $@ ; false)
++	lzma -9 && $(call size_append, $(filter-out FORCE,$^))) > $@
+ 
+ quiet_cmd_lzo = LZO     $@
+ cmd_lzo = (cat $(filter-out FORCE,$^) | \
+-	lzop -9 && $(call size_append, $(filter-out FORCE,$^))) > $@ || \
+-	(rm -f $@ ; false)
++	lzop -9 && $(call size_append, $(filter-out FORCE,$^))) > $@
+ 
+ quiet_cmd_lz4 = LZ4     $@
+ cmd_lz4 = (cat $(filter-out FORCE,$^) | \
+-	lz4c -l -c1 stdin stdout && $(call size_append, $(filter-out FORCE,$^))) > $@ || \
+-	(rm -f $@ ; false)
++	lz4c -l -c1 stdin stdout && $(call size_append, $(filter-out FORCE,$^))) > $@
+ 
+ # U-Boot mkimage
+ # ---------------------------------------------------------------------------
+@@ -627,13 +622,11 @@ quiet_cmd_uimage = UIMAGE  $(UIMAGE_OUT)
+ quiet_cmd_xzkern = XZKERN  $@
+ cmd_xzkern = (cat $(filter-out FORCE,$^) | \
+ 	sh $(srctree)/scripts/xz_wrap.sh && \
+-	$(call size_append, $(filter-out FORCE,$^))) > $@ || \
+-	(rm -f $@ ; false)
++	$(call size_append, $(filter-out FORCE,$^))) > $@
+ 
+ quiet_cmd_xzmisc = XZMISC  $@
+ cmd_xzmisc = (cat $(filter-out FORCE,$^) | \
+-	xz --check=crc32 --lzma2=dict=1MiB) > $@ || \
+-	(rm -f $@ ; false)
++	xz --check=crc32 --lzma2=dict=1MiB) > $@
+ 
+ # Additional commands for U-Boot
+ #
 -- 
 2.49.0
 
