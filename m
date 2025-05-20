@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3B08C3ABDD
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:24:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFD9DC3ABDA
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3948682CB8;
-	Tue, 20 May 2025 07:22:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 620AA82CD2;
+	Tue, 20 May 2025 07:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M2xCMSrU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wGyOUATu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC61682BD7; Tue, 20 May 2025 07:22:35 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 1F94C82CD2; Tue, 20 May 2025 07:22:40 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0074D82BD7
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4731D82BD7
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3a35b7e60cbso3268346f8f.1
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:33 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-441d437cfaaso31081365e9.1
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718553; x=1748323353; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718556; x=1748323356; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QQrSB16BhDCM3PYdSyclKBO+oD+fpgkkI+/nDZCGFTY=;
- b=M2xCMSrUsQTKLP/nYKnk7Hv/5/S5NG+hOdnRtY6uXlEV4yavIk8XB4YWWiK4egMzO6
- sO4G/2UvGUGuvJAyRwhPXNNvt5VozamMlvZf0ia6EH+HSNua5RDgPfKd99pokQuA6XO4
- KfMWdTsQvBPjN54ESVwFXIdLwFjiaj7kCXthbMH2Z0cvkN2MYH6ePUycpg9X73apn4vk
- XIL6swluMTegH4vKkwhzKXtiW3ELVpvovrupUDv5t5IAu5WVzlV6tezRObuYqyXWHxxo
- Wpo9cD+XUOAv2m2wdlitaDWU0ShB4GEK2ATNiHJMON4L51Gyo7qCBlo1jSO+hnzEStRq
- Y4WA==
+ bh=krho0D7xdJC/s/CO/gGJ1CCxpElCy2ScmFM5rXKZo/c=;
+ b=wGyOUATugje04ChXXfLQIyxlGjXiwRpym9WdmbgAftYJWwch4NXfoGAhREHYZYF0Vc
+ T9lKGnTRPnqmYpYND6MAA6FFIBPLW9UQMlF6lnz5GEHOaTxesq1XMZp8eYlD6FJwiI1U
+ UpMiixb5basPDXaTMSEyZ08dH3AedLrdu/JnIPipakVsOFQwvPt2CyKtMHz8EYgKqAbf
+ An6STfOwJPYkcGZnRYTQ/zqzeWGbr96BeF0tND3EuODMrDEAXm/EN5/QRzmrzpOXWyyT
+ Nlyzvh3i/0dAWMn8l2hHCivMvZe5S/ntW9o+BFZ8WinBvBa5xF9C0klvC+G6NYSNcqsr
+ v/VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718553; x=1748323353;
+ d=1e100.net; s=20230601; t=1747718556; x=1748323356;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QQrSB16BhDCM3PYdSyclKBO+oD+fpgkkI+/nDZCGFTY=;
- b=S0w60y90fIkUjqnmzG9megyI7hfZ6nay7lNhOBgKyhvmwt79nnuW/fpx6HpAupnLnq
- TWVijrU/wQW8jS1kTP9PKqcnlHcLdm2zwuKs4d1EFlR9l1VEI1oz+gq4i+3xP2pJm+xZ
- vYfwIyUsAPEjjRU8cSX2pQQlkMC48bZemmxkiEiqJl1Sqvqt92DDtTdDTVNKYMxr0bbP
- VooI0vrBrZGgsDMgP1cFF0t5oTPduPwY/Istnyv3TXBR9N8EaFC28sQyMLEmSrsn1EZP
- Zv9jjeeevijCJZOWhoPZe+Ze/6iITu/P9PbwHkMK0qf8IQNnQkfOdFQtGs93+rozuvB3
- H+Iw==
+ bh=krho0D7xdJC/s/CO/gGJ1CCxpElCy2ScmFM5rXKZo/c=;
+ b=tqnt9OBkEFPB/wwTVq/7CBZaqV9lV95KOt0otTasY4BFLK29Wyl0BP08nQAhyJfchd
+ Uhp6Qr6hoOwqyx2jiN0Y6e9hZoKk6yiSqShKwNXtweUEdODsf19y1g965MCLW0nWlbuT
+ rm7Bygx6AOWFiMGPxh+AeWc7hsUxeRZq0uDDLvRnABkFjb09+lRC1KJ9RK42mnaeQJMu
+ DkIfzWSY9ZQZZkrHvagZEW5QMb1Q1T6aAb+3KQDXjtzmgqdSuTOZIb8wi0oyMKRL68vb
+ Nqs7L5ztjB1EOQ48rST3IX7ZiFy3rk8V6Ypx04U+2hI/IORuyMZ79PY9ZviglTUw/KBm
+ jzqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNmYvdDu4OvGTi/KXngZ69DVjIJekBanAxUwOUUN93e81Mlvev/jO9Qo5DkTiRw2uG3Qj30CU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjGpT+/NDb8vmq0gf+YzyM15n+hLoLAnURRXrOq6dInLA8rQdp
- Q6AJESu0acwofnyT2gHLe6XXRvICAlExNfJC8ZyzvrsX5Ky8914R9xpGhuVLu1JyTP8=
-X-Gm-Gg: ASbGncteNiLYtvD2Pq/Vd0TlsR9ZV02H9D1h49bv0vj5R8CAdz1sl2HB6ismz/0dQBD
- FYmBDwDyJ6EoJkXEmWgMhz6S18XcLRLFTPHKQDqh3iWFx85yRgLmEO8EWjUUdTFi3XaG5O/7vOv
- T+1y76Wp8rhq2NvSEovXkkaO5R4cUqO30DfGqCxIf29usNrN48WiHZH29v54n8yZYmKn3yJPWVT
- jDcW+pt5kphDnts2vZ28BHATvmS+ZfdGMY1Q1aQu4V9XP6fUl1ij3rrPkyOgN1AuIJlL0pl2PD1
- iEJt2AD9mnr3+JNhwRiJOzwXYMSz/BoYIUwCydseUvV9vuOG/S25H13UkBZlubUcM2opGc6f2DU
+ AJvYcCWeVzBn7kPnmdniVAci1fv44bYHb/nRJ1AF0iUEf3WwpkIL12a7OqgVtoj9Zd7g73Ofqa98QEM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxMX+wY47vHHO5lZAdtVVm5NXRiflTiCwqQCRZM06MRDp/+BidJ
+ zvCmFvI5CSImZxY/JSkXMrHBadnpf8SvAYWFkyGW5tP9y5PH2X7MpUSEJuf6zLA4NHQ=
+X-Gm-Gg: ASbGncuObXwAHdu6mwJRS5F80GPerFsDn5wSjiGDTjMDyGY3vIxDfwl453I6r0/bt5K
+ vzxOcEf3kjQexpwdto5m7aObejMt6+eXzCanXFVdKshl6NCWy0hrWOLqvxgHLRVXSDXAt3aDOWc
+ b7BTYa9+flBIrkydzLWM4E3TvSB3GNWKEhSy/HLafoJGCLYEVJAaL0qAypgludsAeORocBjQmn3
+ AXsTpONUeMBRmSPcMB2FBY+icg58UX0uEhGHT0GaCWhtvUW0k7T6Yb2rrAr+O3PArG5FlkxqybL
+ ujhb01gJJiNkCN9TyyQk4XkVvYBUKvgtEF70v0vXewLFWYCKjWLsdcZl9qbs7NQQZPQngLd/sa8
  =
-X-Google-Smtp-Source: AGHT+IH1g9Iv6xMpMGhaFhEm0xlqLn3af2zIFhiIv1QKCCPPXsds4c4ibFRsVd5huCnsX9SDE/BPYQ==
-X-Received: by 2002:a5d:64e8:0:b0:3a3:6c7b:d0ce with SMTP id
- ffacd0b85a97d-3a36c7bd389mr6293102f8f.2.1747718553459; 
- Mon, 19 May 2025 22:22:33 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGtjatjgKKS4+NFlAR+rP6G9WMeqQIE4nbp/u955UPg9H2mBePaNuSFLlmgefH17KE2tSCgOw==
+X-Received: by 2002:a05:600c:528b:b0:43d:4e9:27f3 with SMTP id
+ 5b1f17b1804b1-442fefee1b8mr123261515e9.9.1747718555839; 
+ Mon, 19 May 2025 22:22:35 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.31
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:33 -0700 (PDT)
+ Mon, 19 May 2025 22:22:35 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Prasad Kummari <prasad.kummari@amd.com>,
- Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Subject: [PATCH 14/24] kbuild: change if_changed_rule for multi-line recipe
-Date: Tue, 20 May 2025 08:21:25 +0300
-Message-ID: <20250520052153.307194-15-ilias.apalodimas@linaro.org>
+ Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Subject: [PATCH 15/24] kbuild: remove trailing semicolon from cmd_* passed to
+ if_changed_rule
+Date: Tue, 20 May 2025 08:21:26 +0300
+Message-ID: <20250520052153.307194-16-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -108,75 +109,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Backport from kernel
-commit 3a2429e1faf4 ("kbuild: change if_changed_rule for multi-line recipe")
+commit e5d289100d3a ("kbuild: remove trailing semicolon from cmd_* passed to if_changed_rule")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Kbuild.include | 12 ++++--------
- scripts/Makefile.build | 12 +++++++-----
- 2 files changed, 11 insertions(+), 13 deletions(-)
+ scripts/Makefile.build | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
-index 6ef66c451eb1..c0d3440a4b3e 100644
---- a/scripts/Kbuild.include
-+++ b/scripts/Kbuild.include
-@@ -226,7 +226,7 @@ echo-cmd = $(if $($(quiet)cmd_$(1)),\
- 	echo '  $(call escsq,$($(quiet)cmd_$(1)))$(echo-why)';)
- 
- # printing commands
--cmd = @$(echo-cmd) $(cmd_$(1))
-+cmd = @set -e; $(echo-cmd) $(cmd_$(1))
- 
- # Add $(obj)/ for paths that are not absolute
- objectify = $(foreach o,$(1),$(if $(filter /%,$(o)),$(o),$(obj)/$(o)))
-@@ -268,21 +268,17 @@ if_changed = $(if $(strip $(any-prereq) $(arg-check)),                       \
- 	printf '%s\n' 'cmd_$@ := $(make-cmd)' > $(dot-target).cmd, @:)
- 
- # Execute the command and also postprocess generated .d dependencies file.
--if_changed_dep = $(if $(strip $(any-prereq) $(arg-check) ),                  \
--	@set -e;                                                             \
--	$(cmd_and_fixdep), @:)
-+if_changed_dep = $(if $(strip $(any-prereq) $(arg-check)),$(cmd_and_fixdep),@:)
- 
- cmd_and_fixdep =						             \
--	$(echo-cmd) $(cmd_$(1));                                             \
-+	$(cmd);							             \
- 	scripts/basic/fixdep $(depfile) $@ '$(make-cmd)' > $(dot-target).cmd;\
- 	rm -f $(depfile)
- 
- # Usage: $(call if_changed_rule,foo)
- # Will check if $(cmd_foo) or any of the prerequisites changed,
- # and if so will execute $(rule_foo).
--if_changed_rule = $(if $(strip $(any-prereq) $(arg-check) ),                 \
--	@set -e;                                                             \
--	$(rule_$(1)), @:)
-+if_changed_rule = $(if $(strip $(any-prereq) $(arg-check)),$(rule_$(1)),@:)
- 
- ###
- # why - tell why a a target got build
 diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index 639091e7b29c..59ff37a53208 100644
+index 59ff37a53208..80caddde09ab 100644
 --- a/scripts/Makefile.build
 +++ b/scripts/Makefile.build
-@@ -236,11 +236,13 @@ endif # -record-mcount
+@@ -94,10 +94,10 @@ __build: $(if $(KBUILD_BUILTIN),$(builtin-target) $(lib-target) $(extra-y)) \
+ # Linus' kernel sanity checking tool
+ ifeq ($(KBUILD_CHECKSRC),1)
+   quiet_cmd_checksrc       = CHECK   $<
+-        cmd_checksrc       = $(CHECK) $(CHECKFLAGS) $(c_flags) $< ;
++        cmd_checksrc       = $(CHECK) $(CHECKFLAGS) $(c_flags) $<
+ else ifeq ($(KBUILD_CHECKSRC),2)
+   quiet_cmd_force_checksrc = CHECK   $<
+-        cmd_force_checksrc = $(CHECK) $(CHECKFLAGS) $(c_flags) $< ;
++        cmd_force_checksrc = $(CHECK) $(CHECKFLAGS) $(c_flags) $<
  endif
  
- define rule_cc_o_c
--	$(call echo-cmd,checksrc) $(cmd_checksrc)			  \
--	$(call cmd_and_fixdep,cc_o_c)					  \
--	$(cmd_modversions)						  \
--	$(cmd_objtool)							  \
--	$(call echo-cmd,record_mcount) $(cmd_record_mcount)
-+	$(call cmd,checksrc)
-+	$(call cmd_and_fixdep,cc_o_c)
-+	$(call cmd,gen_ksymdeps)
-+	$(call cmd,checkdoc)
-+	$(call cmd,objtool)
-+	$(call cmd,modversions_c)
-+	$(call cmd,record_mcount)
- endef
+ # Do section mismatch analysis for each module/built-in.o
+@@ -231,7 +231,7 @@ cmd_record_mcount =						\
+ 	if [ "$(findstring $(CC_FLAGS_FTRACE),$(_c_flags))" =	\
+ 	     "$(CC_FLAGS_FTRACE)" ]; then			\
+ 		$(sub_cmd_record_mcount)			\
+-	fi;
++	fi
+ endif # -record-mcount
+ endif
  
- define rule_as_o_S
 -- 
 2.49.0
 
