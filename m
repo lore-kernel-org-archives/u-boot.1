@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B77C3ABDD
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:22:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B06A0C3ABDA
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:22:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C43B82952;
-	Tue, 20 May 2025 07:22:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD08082BF3;
+	Tue, 20 May 2025 07:22:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J1tri2Pn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gF2vhB0d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A90482BDA; Tue, 20 May 2025 07:22:03 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id F3CBB82BF2; Tue, 20 May 2025 07:22:04 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7799828F8
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 050F782BD7
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3a3673e12c4so1576058f8f.2
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:00 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3a36efcadb8so1447286f8f.0
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718520; x=1748323320; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Cb+Cy+LMF0AJN6j2LaRgA2WQUPWQDOlC6+lYcWQbSXQ=;
- b=J1tri2PnxasXfJ9n7EdLibYjjz6LC9YSEeH2GQQtpDZfMmDcXy2Cil0LcTDZwkmHWe
- EkRKh7/IxWd5gqNnD8YBxrurzHAHBq3mzkFzpHsM7Hah84hNbI9tRPGQdOOgLbXHNRm5
- nBP6jnySN5Z3OsH/zprNMg98+8snrrpcs6PrkwUn+fZKF/oH6GsSYUNiCkugU86cjohC
- kJMyCWg9WCYOQ6ImI4QM6rqUmigJwFSemE1XEsE2WOuWtU8SxD3fTauKoas8yN5bwZ1u
- VtgDCvasVHHixY723c0059U/T75GQU6GwIM3xBbY5CiXemIKSPmaBEHe1gjPVYWmonu0
- DRWA==
+ d=linaro.org; s=google; t=1747718522; x=1748323322; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QfQ1a4M1KVIw2CBwf7u747pnSGqTK3IwJyxpzizwiWQ=;
+ b=gF2vhB0dhR1LtY0o05iYkUdnBfuHGL2IS0/nEKhNZ1bx8rCMCUI+I4743UW+c+ZFvb
+ ffsiouFQjQneE6duMa4auhkdZcSDnURdotTPcepFHlD4GfvU3k00vcYNzOPa4xaaiuv6
+ xO/lxc2gR9jykD73ZCRJ6FUtLJdX4APZoQW0m31Vad1OGJWhkClGxyr9HrIyCBrwOZus
+ cdxh1KucxgCjnhKxNgqboXUjCUZKNPCcQpgM0bxN8iZS7uVSycy4BjH67TZRSZ/02iqF
+ hWfoUneUXD3ScCMqryW9nZDYuLtgz/VWHYfHOK3UxUdgXPl5hUI+TFsyJxnzVqsTG3Mc
+ klEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718520; x=1748323320;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Cb+Cy+LMF0AJN6j2LaRgA2WQUPWQDOlC6+lYcWQbSXQ=;
- b=h8QjH0l3lR0mB/c2EaCEAwH+GNDzANAWG9fYj6dG/RGG4FfbTdH7jNFoZ9RNJs58i0
- VpggHVHNz+WBeOFzq+jsaXLoneor6WzWPTBxxSDNVpGoV9Fd1Ip2JeSc26lCkyUiZCOQ
- rp04HZlY8vhP8nitZ95ttNSW++67Pfsu84TDz01KCCqkjWMwfub8qyyovKzwPDLU43Sr
- BVJQi0LJoX6/19yhVhhwuKaZzFA/c1uStFc0yaznFhHOyLOmvyYHyjRxUthtHhIyhYG6
- NjLob6mlsCA/ZX3Okm21zQzz+/WxJdjDMrgSyF1ejMGwXMduCdCewjFTY9zuZHkmLfWN
- IcWg==
+ d=1e100.net; s=20230601; t=1747718522; x=1748323322;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QfQ1a4M1KVIw2CBwf7u747pnSGqTK3IwJyxpzizwiWQ=;
+ b=G/Jc/wwyOfUdxJTIQWkuiRzJgmIOZnv01+T2QYjEwITV2G3Q5JtCyaoavayc0ZYdan
+ mLUlHZQPjSIEq18sdYl3KXO84h6ir1OH3dBkWh0Yw1t+Yma9qPT+iyh9+ZwcrP6Z11cp
+ 3SWUMAXAU3QKNu94CNTqNQ2pDUplGubVbbEqmi5G3Fsr2nGAwvYA+1Efm1xCS6gdnN5k
+ oqUGiB7WNq21fsie+naszayu68ZDhb0+Kmj+q8Ta9bi56aXyfcWIIFxGAJyhoRH0trBQ
+ nSXucCelT90d9eBKEhCLFz7g62AO1AoDCKlpmatI8lSh+v6r2lR9A75ZretZUQ7ZEzZR
+ cF8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/y21Z7D9GQqADi6OOMVxA4ezNqOCliZw8aJowT9RcHNfKNbK4tP3gUvB8eUNC49DUVVlDjrM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxtP7MSym1P+yaaXXAM260LL/5t4A4jKt1KqmGlWZ9uWxqg3dTQ
- Fh0rXtx7neVZpB6ywOMPKFcc1fIeZCLtnv32HXGOGQH6ytuRwDM8sA1cOXZRfLpfkn0=
-X-Gm-Gg: ASbGnct0qrlVCfAexo3spo1l+CvUNVLdYcbdG6HpAQ/Yp5g5CQZ0uw0TKKz5gv4KPpl
- z2VaXJGNw2nB2o9FBJLfkMtcXjDZvwVs06N/qsiykhFeUTganDaKDZMIKeshizqKtNirvrs96r6
- CoC7jbsL1oFQriT1OlBYCF4/qt6GRRCIb6cZAimTzRXPqAlaeFMRLJ4QBamemIvs1XqLZNtGp69
- Lyd165pE228TAVTqfq5s24UpDPvFkqZbog4WAp/v7air+31kTYA4b+NrFgPg/4r7qx6UXwClYMG
- wg4FR9ZerSHE/en7S/3YNNhdPYiBkotAJwO1DKSU3ImVf/AYjcCZHBAmGdaX1e0xyjg0oXFWIj4
+ AJvYcCWGzGTcNaD0F8nPfMI5f7Ad6ecMzmZMXtg176ARxyniTpGnbH6jTQcrTFrLJ67yTV3dpZAn+vM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzpmg6dAOEnO50M9hLBMUHpqb+1j3BJP0gUGw1A5kkI40nA7zbO
+ XRyKRZLeIh1h7zCguQ/2NQ9tdklkEjeuR2i9zUAoiNWAQZLIFcDTHhAV4oOMfa6FqhA=
+X-Gm-Gg: ASbGncvUuMXeUXHOnv5UzxJ/ChjbgObfok2lHxzt4fEA+opIxf/wQkRaRp6mSeeEqKa
+ C77EVvHI9Vfzv8AMrb8adg/VE2ThX+W10yvMAdHzt/MomokI0G5E+wUyJQnsUJWnSBpAYYCyMoR
+ 04r8gZTZoWzGkwIjyUSRyM8AiqZyuSDIuhPaFfuppV6xhX/ehQcu50R69oNjjIWAA/C2eWviQNW
+ 7qh1eujXxyO3zpczApVWs+0p+7jHPOul8xlSN+FV3cwRl0WPqOOpQEquZAL1zHCIJNeWV1D32bZ
+ W4HgzplHhdsvIRMtBFTzBvUJ8NZ11o9jVq4BFO9ziCTCrR5/knYiKF1nB7cKCDOnkrvyLnN5pzI
  =
-X-Google-Smtp-Source: AGHT+IGIqGQSWXwPBJwjEmJp/8b95A74Asad0vpjXr5ky/vdIHxNqzijeOs8/AJS/Yh6cwPZBSKaUA==
-X-Received: by 2002:a05:6000:1ac9:b0:3a3:77d7:b3e2 with SMTP id
- ffacd0b85a97d-3a377d7b406mr1784134f8f.41.1747718520073; 
- Mon, 19 May 2025 22:22:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEozoOT2sWtdECjDEPhTv5AC9gKE3Q06qEgFwuLmm1oPf2KR4AUkF31Q4BzoJvhiTWHAFpG2g==
+X-Received: by 2002:a5d:64c7:0:b0:3a3:6481:1ca4 with SMTP id
+ ffacd0b85a97d-3a364812b25mr10748158f8f.43.1747718522485; 
+ Mon, 19 May 2025 22:22:02 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.21.58
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:21:59 -0700 (PDT)
+ Mon, 19 May 2025 22:22:02 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -80,12 +81,14 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Prasad Kummari <prasad.kummari@amd.com>,
  Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: [PATCH 00/24] Update kbuild
-Date: Tue, 20 May 2025 08:21:11 +0300
-Message-ID: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Subject: [PATCH 01/24] kbuild: de-duplicate fixdep usage
+Date: Tue, 20 May 2025 08:21:12 +0300
+Message-ID: <20250520052153.307194-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
+References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,72 +107,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Last time the kbuild scripts were synced with the Linux kernel was on the
-4.20 release. Updating directly to 6.x makes the diff difficult to read, so
-let's do the changes incrementally and bump to 5.1 first.
-
-Since the number of comits is bug, I am splitting this in multiple series.
-This one includes most of the commits for Makefile.build,
-Makefile.lib and some from Makefile.
-
-commit eeb5687a7139649e ("kbuild: add -Werror=strict-prototypes flag unconditionally")
-commit 3812b8c5c5d5 ("kbuild: make -r/-R effective in top Makefile for old Make versions")
-commit b421b8a6cb87 ("kbuild: remove unused archmrproper")
-commit 1a49b2fd8f58 ("kbuild: strip whitespace in cmd_record_mcount findstring")
-commit 88110713ca9dfb ("kbuild: hardcode genksyms path and remove GENKSYMS variable")
-commit 1d8001ef358 ("kbuild: generate modules.order only when CONFIG_MODULES=y")
-commit 45c4372d00 ("kbuild: refactor quiet_modtag")
-commit b39a691617e4 commit ("kbuild: remove redundant quiet_modtag for $(obj-m)")
-commit 5439f09f488f ("kbuild: remove redundant 'set -e' from cmd_* defines")
-commit e5d289100d3a ("kbuild: remove trailing semicolon from cmd_* passed to if_changed_rule")
-commit 3a2429e1faf4 ("kbuild: change if_changed_rule for multi-line recipe")
-commit ee3e46b7efd2 ("kbuild: refactor modversions build rules")
-commit 4317ee3b6a5e ("kbuild: remove redundant 'set -e' from sub_cmd_record_mcount")
-commit 392885ee82d3 ("kbuild: let fixdep directly write to .*.cmd files")
-commit 898f5a009f22 ("kbuild: move archive command to scripts/Makefile.lib")
-commit b79c6aa6a1f1 ("kbuild: remove unnecessary in-subshell execution")
-commit afa974b77128 ("kbuild: add real-prereqs shorthand for $(filter-out FORCE,$^)")
-commit ecbd10d90e94 ("kbuild: simplify rules of data compression with size appending")
-commit 58156ba4468f ("kbuild: skip 'addtree' and 'flags' magic for external module build")
-commit 172caf1993b7 ("kbuild: remove redundant target cleaning on failure")
-commit f3fd4a3f3a38 ("kbuild: remove redundant 'set -e' from filechk_offsets")
-commit a2237fec1e06 ("kbuild: Enable dtc graph_port warning by default")
-commit 70523a3ce5ff ("kbuild: disable dtc simple_bus_reg warnings by default")
+Backported from the linux kernel
 commit e4aca4595005 ("kbuild: de-duplicate fixdep usage")
 
-Ilias Apalodimas (24):
-  kbuild: de-duplicate fixdep usage
-  kbuild: disable dtc simple_bus_reg warnings by default
-  kbuild: Enable dtc graph_port warning by default
-  kbuild: remove redundant 'set -e' from filechk_offsets
-  kbuild: remove redundant target cleaning on failure
-  kbuild: skip 'addtree' and 'flags' magic for external module build
-  kbuild: simplify rules of data compression with size appending
-  kbuild: add real-prereqs shorthand for $(filter-out FORCE,$^)
-  kbuild: remove unnecessary in-subshell execution
-  kbuild: move archive command to scripts/Makefile.lib
-  kbuild: let fixdep directly write to .*.cmd files
-  kbuild: remove redundant 'set -e' from sub_cmd_record_mcount
-  kbuild: refactor modversions build rules
-  kbuild: change if_changed_rule for multi-line recipe
-  kbuild: remove trailing semicolon from cmd_* passed to if_changed_rule
-  kbuild: remove redundant 'set -e' from cmd_* defines
-  kbuild: remove redundant quiet_modtag for $(obj-m)
-  kbuild: refactor quiet_modtag
-  kbuild: generate modules.order only when CONFIG_MODULES=y
-  kbuild: hardcode genksyms path and remove GENKSYMS variable
-  kbuild: strip whitespace in cmd_record_mcount findstring
-  kbuild: remove unused archmrproper
-  kbuild: make -r/-R effective in top Makefile for old Make versions
-  kbuild: add -Werror=strict-prototypes flag unconditionally
+A lot of the kernels kbuild depend on that patch. Backport it and pull in
+the 'rule_as_o_S'a rule as well. This might end up being unused but it
+doesn't break anything and makes diffing the files easier.
 
- Makefile               | 65 +++++++++++++++----------------
- scripts/Kbuild.include | 22 ++++++-----
- scripts/Makefile.build | 87 +++++++++++++++++++-----------------------
- scripts/Makefile.host  |  6 ++-
- scripts/Makefile.lib   | 55 ++++++++++++--------------
- 5 files changed, 113 insertions(+), 122 deletions(-)
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ scripts/Kbuild.include |  5 ++++-
+ scripts/Makefile.build | 17 ++++++++++-------
+ 2 files changed, 14 insertions(+), 8 deletions(-)
 
---
+diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
+index 054dd157485c..7468223d3233 100644
+--- a/scripts/Kbuild.include
++++ b/scripts/Kbuild.include
+@@ -266,10 +266,13 @@ if_changed = $(if $(strip $(any-prereq) $(arg-check)),                       \
+ # Execute the command and also postprocess generated .d dependencies file.
+ if_changed_dep = $(if $(strip $(any-prereq) $(arg-check) ),                  \
+ 	@set -e;                                                             \
++	$(cmd_and_fixdep), @:)
++
++cmd_and_fixdep =						             \
+ 	$(echo-cmd) $(cmd_$(1));                                             \
+ 	scripts/basic/fixdep $(depfile) $@ '$(make-cmd)' > $(dot-target).tmp;\
+ 	rm -f $(depfile);                                                    \
+-	mv -f $(dot-target).tmp $(dot-target).cmd, @:)
++	mv -f $(dot-target).tmp $(dot-target).cmd;
+ 
+ # Usage: $(call if_changed_rule,foo)
+ # Will check if $(cmd_foo) or any of the prerequisites changed,
+diff --git a/scripts/Makefile.build b/scripts/Makefile.build
+index 90aed148c44b..10f31a57a0f9 100644
+--- a/scripts/Makefile.build
++++ b/scripts/Makefile.build
+@@ -241,14 +241,17 @@ endif
+ 
+ define rule_cc_o_c
+ 	$(call echo-cmd,checksrc) $(cmd_checksrc)			  \
+-	$(call echo-cmd,cc_o_c) $(cmd_cc_o_c);				  \
++	$(call cmd_and_fixdep,cc_o_c)					  \
+ 	$(cmd_modversions)						  \
+-	$(call echo-cmd,record_mcount)					  \
+-	$(cmd_record_mcount)						  \
+-	scripts/basic/fixdep $(depfile) $@ '$(call make-cmd,cc_o_c)' >    \
+-	                                              $(dot-target).tmp;  \
+-	rm -f $(depfile);						  \
+-	mv -f $(dot-target).tmp $(dot-target).cmd
++	$(cmd_objtool)							  \
++	$(call echo-cmd,record_mcount) $(cmd_record_mcount)
++endef
++
++define rule_as_o_S
++	$(call cmd_and_fixdep,as_o_S)
++	$(call cmd,gen_ksymdeps)
++	$(call cmd,objtool)
++	$(call cmd,modversions_S)
+ endef
+ 
+ # Built-in and composite module parts
+-- 
 2.49.0
 
