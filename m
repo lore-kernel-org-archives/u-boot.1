@@ -4,71 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17251C54E71
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 20:34:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC395C54E71
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 20:35:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CD3E82C87;
-	Tue, 20 May 2025 22:34:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E96182CB8;
+	Tue, 20 May 2025 22:35:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=benjarobin.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=benjarobin.fr header.i=@benjarobin.fr header.b="D/9XzbzY";
+	dkim=pass (2048-bit key; unprotected) header.d=benjarobin.fr header.i=@benjarobin.fr header.b="S2T2B8ri";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BC4982CB8; Tue, 20 May 2025 22:34:57 +0200 (CEST)
-Received: from 6.mo574.mail-out.ovh.net (6.mo574.mail-out.ovh.net
- [46.105.59.150])
+ id 95A8F82D09; Tue, 20 May 2025 22:35:31 +0200 (CEST)
+Received: from 4.mo573.mail-out.ovh.net (4.mo573.mail-out.ovh.net
+ [46.105.52.157])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 085E282C2F
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 22:34:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9712682CB8
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 22:35:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=benjarobin.fr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dev@benjarobin.fr
-Received: from director2.derp.mail-out.ovh.net
- (director2.derp.mail-out.ovh.net [79.137.60.36])
- by mo574.mail-out.ovh.net (Postfix) with ESMTPS id 4b25rt309dz15m4;
- Tue, 20 May 2025 20:34:54 +0000 (UTC)
-Received: from director2.derp.mail-out.ovh.net
- (director2.derp.mail-out.ovh.net. [127.0.0.1])
- by director2.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <sjg@chromium.org>; Tue, 20 May 2025 20:34:54 +0000 (UTC)
-Received: from mta7.priv.ovhmail-u1.ea.mail.ovh.net (unknown [10.108.9.13])
- by director2.derp.mail-out.ovh.net (Postfix) with ESMTPS id 4b25rt1hCHz1xwB;
- Tue, 20 May 2025 20:34:54 +0000 (UTC)
-Received: from benjarobin.fr (unknown [10.1.6.7])
- by mta7.priv.ovhmail-u1.ea.mail.ovh.net (Postfix) with ESMTPSA id BFF90C3B63; 
- Tue, 20 May 2025 20:34:53 +0000 (UTC)
+Received: from director3.derp.mail-out.ovh.net
+ (director3.derp.mail-out.ovh.net [152.228.215.222])
+ by mo573.mail-out.ovh.net (Postfix) with ESMTPS id 4b25sY0gn1z12HD;
+ Tue, 20 May 2025 20:35:29 +0000 (UTC)
+Received: from director3.derp.mail-out.ovh.net
+ (director3.derp.mail-out.ovh.net. [127.0.0.1])
+ by director3.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
+ for <dev@benjarobin.fr>; Tue, 20 May 2025 20:35:28 +0000 (UTC)
+Received: from mta3.priv.ovhmail-u1.ea.mail.ovh.net (unknown [10.109.139.140])
+ by director3.derp.mail-out.ovh.net (Postfix) with ESMTPS id
+ 4b25sX6V8mz5xL9; Tue, 20 May 2025 20:35:28 +0000 (UTC)
+Received: from benjarobin.fr (unknown [10.1.6.4])
+ by mta3.priv.ovhmail-u1.ea.mail.ovh.net (Postfix) with ESMTPSA id 451A43A401F; 
+ Tue, 20 May 2025 20:35:28 +0000 (UTC)
 Authentication-Results: garm.ovh; auth=pass
- (GARM-106R006c68034b9-9aef-4d75-aba4-d566d20e55a5,
+ (GARM-111S005b38caad1-975c-43dd-ab7e-8515644a02e8,
  EAD86587B2B6C3DD8ADE427FB1C91837DFE7FEC9) smtp.auth=dev@benjarobin.fr
 X-OVh-ClientIp: 86.194.82.154
-Date: Tue, 20 May 2025 22:34:52 +0200
 From: Benjamin ROBIN <dev@benjarobin.fr>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org
-Subject: Re: [PATCH] bootm: Fix bootz, bmi->images pointer was uninitialized
-Message-ID: <bggr22cgymvz4msmaslznvo2vpihvsrottkyh2epccurpftdnf@sorlltxjfso7>
-References: <20250519194800.5550-1-dev@benjarobin.fr>
- <20250519210608.GU100073@bill-the-cat>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, Benjamin ROBIN <dev@benjarobin.fr>
+Subject: [PATCH v2] bootm: Fix bmi->images pointer not initialized in some
+ cases
+Date: Tue, 20 May 2025 22:35:15 +0200
+Message-ID: <20250520203515.25839-1-dev@benjarobin.fr>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250519210608.GU100073@bill-the-cat>
-X-Ovh-Tracer-Id: 16676266472877276073
+X-Ovh-Tracer-Id: 16685836623348120489
 X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgdduudelucdltddurdegfedvrddttddmucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggugfgjsehtkefstddttddunecuhfhrohhmpeeuvghnjhgrmhhinhcutffquefkpfcuoeguvghvsegsvghnjhgrrhhosghinhdrfhhrqeenucggtffrrghtthgvrhhnpeekvefhgfejffffhefhhedvueekteekjeehhedugeefhefgudevleetffevkedtffenucfkphepuddvjedrtddrtddruddpkeeirdduleegrdekvddrudehgeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepuggvvhessggvnhhjrghrohgsihhnrdhfrhdpnhgspghrtghpthhtohepfedprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheejgegmpdhmohguvgepshhmthhpohhuth
-DKIM-Signature: a=rsa-sha256; bh=02BprZ7IYlRUkH/GdDLcfzfEkYuHcLVZ0b4mMgEG9q4=; 
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgdduudekucdltddurdegfedvrddttddmucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpeeuvghnjhgrmhhinhcutffquefkpfcuoeguvghvsegsvghnjhgrrhhosghinhdrfhhrqeenucggtffrrghtthgvrhhnpeehhffgjeekhfeljeetueektdetudfhheefuefhkeejgfeihfejfeeuveeigeetudenucfkphepuddvjedrtddrtddruddpkeeirdduleegrdekvddrudehgeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepuggvvhessggvnhhjrghrohgsihhnrdhfrhdpnhgspghrtghpthhtohepgedprhgtphhtthhopeguvghvsegsvghnjhgrrhhosghinhdrfhhrpdhrtghpthhtohepshhjghestghhrhhomhhiuhhmrdhorhhgpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdfovfetjfhoshhtpehmohehjeefmgdpmhhouggvpehsmhhtphhouhht
+DKIM-Signature: a=rsa-sha256; bh=8qgOvSCWu2h0gb28gIcOXqL6PbBBW2NaXgY7gqiicss=; 
  c=relaxed/relaxed; d=benjarobin.fr; h=From;
- s=ovhmo1728415-selector1; t=1747773294; v=1;
- b=D/9XzbzYNblx5q9ofguQp3o/rByKLuHTVPr0fvjk9YuM5PNLhoXJGFDme3Ko1L1z3zkF2OzP
- QykTve3wyIyF/Z329turJYLgQNGmupNwLOyczkm7scgR7acPxUr4dVVcqk9wA1vAd5z3DPbR0cl
- KhfIvcGMa8kjrxqm2Lov2XT1SHttgK4u2zpPMS1rkwZVn/BWSPNxiB1jda3Dm7yNCVPuAhCJByZ
- bx0/luBHbfEEQFr7E/amuda4U2rZBnpuoJU9cgv3I1ZDoqk5b369AJL3htKcWLzzXbS7LVMWkjK
- Ebg9PWddeBeN6AFIXTM8Sa16/DIPs9IWY8sXHMU/6WwhQ==
+ s=ovhmo1728415-selector1; t=1747773329; v=1;
+ b=S2T2B8ri7aqpGEpSBSVSYZHiDE8TdDz4Le8SJdZPq/hKEW2aH3dHvyg97N4YmeAk58McYmLB
+ NwJ75wTWwh9XaEE9StR7nwiznvhlwGcNzGbEGF3aMW0OIZwByXtyFxgJqfDdCdBbk+HOqNyycO+
+ Iu9QbQ4HsgI6i+Vbr3FiJJfpryC5uS2EAS++elXk49ilGlqe4MMVRIJVlxsq/HOVWUPzqFjf/5y
+ 1TksZQoV/YRJ2r+/BaokOlMn0zLuwtXam35btQxq3ipXG6038fcNiYtk0scSP8x2SxKSF7VxEDn
+ WUTS6RO9hFXo1rdhXb7Pg0da3QuFYqH4DXQ6Wv6WvMXuA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,22 +82,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le Mon, May 19, 2025 at 03:06:08PM -0600, Tom Rini a écrit :
-> Good catch. This should also get a:
-> Fixes: c2211ff65136 ("bootm: Add more fields to bootm_info")
+When building with only bootz command, without bootm, images pointer
+inside bootm_info structure is not initialized. And since this structure
+is stored in stack, the generated error is kind of random, but most of
+the time this will generate: "ramdisk - allocation error".
 
-Thank you for the review.
-I am preparing a v2 of this patch.
+Also, after analysis, this problem could occur with the command booti,
+if the command bootm is disabled.
 
-> And after reading the code and grepping around more, I think we should
-> be doing the assignment unconditionally in the function. It's what we
-> practically do today as only colibri_vf disables CMD_BOOTM but then also
-> enables any other OS boot command.
-> -- 
-> Tom
+Currently bootm_init() is called by: do_bootz(), do_bootm(), do_booti()
+and by do_stm32prog(). And all of these commands execute bootm_run_states()
+which access the images pointer stored into bootm_info structure.
 
-I did a bit more analysis, I put my discoveries into the commit message of the 
-second version of this patch. And yes, you are right, the assignment should be 
-done unconditionally (as I understand it).
+So, to fix this issue, just do the assignment unconditionally.
 
-Benjamin
+Fixes: c2211ff65136 ("bootm: Add more fields to bootm_info")
+Signed-off-by: Benjamin ROBIN <dev@benjarobin.fr>
+---
+ boot/bootm.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/boot/bootm.c b/boot/bootm.c
+index f6aa32746b7e..108ca7fb472e 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -1169,8 +1169,7 @@ void bootm_init(struct bootm_info *bmi)
+ {
+ 	memset(bmi, '\0', sizeof(struct bootm_info));
+ 	bmi->boot_progress = true;
+-	if (IS_ENABLED(CONFIG_CMD_BOOTM))
+-		bmi->images = &images;
++	bmi->images = &images;
+ }
+ 
+ /**
+-- 
+2.49.0
+
