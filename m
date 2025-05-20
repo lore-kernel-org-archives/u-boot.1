@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F20B5C3ABDA
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:23:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5F7C3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:23:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D793B82C7F;
-	Tue, 20 May 2025 07:22:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2657582C8A;
+	Tue, 20 May 2025 07:22:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UQKtgX1u";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uyBobRLZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E9B782C7D; Tue, 20 May 2025 07:22:21 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id BC12B82C96; Tue, 20 May 2025 07:22:23 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74FB082BD7
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C779482BD9
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3a365a6804eso1655682f8f.3
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:19 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a37a243388so287965f8f.1
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718539; x=1748323339; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718541; x=1748323341; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MNw18Apz6e/E3KjGZ+WTdqsXhZKTri/y2r4tNvNh1Qg=;
- b=UQKtgX1uSyNL5nP5CABlnYpDE6jJJe1ZHVpWucobXwjkfjHmNJJGpoJ148h5I/miyi
- /lc1oGHcatXP5Z3xUhSoPZwzpFlmhawqK0sWw4n2d9rHUFE9DjqYMPM2iy5221Wpz48Y
- 9Dsp6Otpzh+EztWQZWU4KoB0/02Yx04xzh0DrnVhhrpgkRXHXUzW52iWEjm7dFhrrXlm
- 6po1hQztvUBMVgF2iQ+wOtHZYWSDZ3a3uvy7L8Tg2iOLmCcjT0imikJLt5A1EmB9W8An
- FIVgYB//4QIhd7jhFk1jNwHvvknToCGLrKL0MXJki+0B7g4u+zOqmF4AwxYkmja9mCyr
- 8MhA==
+ bh=NSNNW0Lxdsdb+CG0WOvzIn/xRqPJRoz2EmMLVVPhvP0=;
+ b=uyBobRLZkt4T3JXK3T3jcb8yZjO/pXz8RkrHKEe7VNXFgZoIUO+5fLOe6C/L/3v4x+
+ Hb7S9AxmmAd/Xlzb8xhmKO5EcziLw7mxSCTpTdIepczlP7M4PqV28u7njehEwGzvvj4p
+ 2qLdUze8bjJMnyFMGXriwqGxIJDe+Ucnyth5TkUGEjBG8hXg2NXjKSMgan83wyMtvg9S
+ W6OYyJjrvwYiy3DWXv890XySYCOj4x/UuOxD3GfYe5l8CHoTZtbS6hpAmJH04eGQ/crG
+ HfPNKQNMWhzM0cfgwv+hGxCzenh/ZFVg2Qe2nbdX+gmej9ugGRdnIRLrTgTG5115fGsQ
+ Ek6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718539; x=1748323339;
+ d=1e100.net; s=20230601; t=1747718541; x=1748323341;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MNw18Apz6e/E3KjGZ+WTdqsXhZKTri/y2r4tNvNh1Qg=;
- b=IT9g0HhCMNsqeHKAMaxsGdlFkt/pgCaINZbId7WzoKUKRcCeuVd8QE5GD6rlIYgmof
- HR+f5Dx+wr+giTEUZyewfmp50ttLI5JooqUyF7KInc9Y0C+SfI0OXPw295TZ2jcCU407
- /kjJiYhcYspWixI5V2M2qtX/Y5u4opNu415uU70KEzkqhJPg5kdcrP7XfFYGfwV1pSEk
- ZqxRDYI4h13M/30aLuD3U3utvZb+JwKrZh3EAY9AwHtVFIgDc+zp+hdmMVDejsM+GH3v
- YUbrTn4p464gdpjgfo8lIWSUPSKwVjdoTRYwn5Ht6XmINWRwvTPz2/OjNvyyCKFx/1cr
- piFQ==
+ bh=NSNNW0Lxdsdb+CG0WOvzIn/xRqPJRoz2EmMLVVPhvP0=;
+ b=dL0n2fcnigAw+mZ+aWYw33+TWAZoR024uVxh7uLz7S1zDWKOzn/eLr+uy+gC971ak8
+ 2uLAnYUv5pNimt4z1LU825tOYc95E6bjGPOxuHZ+XiRtjvTsoKy4WxhyRM0EwHIXSrDs
+ Gwe8VLke3/UcYeERIxRlG6aFZ4LqzemcbgoufA7ZM/iUTxk4brXKySbQqV1hHj1zQcM/
+ QHq6MuftTcKO0JzGwRyrtjRHI3L7cpayuMgi/rY0PqSOHbzqBF8NHiYfsT/B0Ztx3SfG
+ ytLLAZF8x1iLW1SR/n4exhR2CpQ6mBtGBVLktsTc904zkJRdKsRlbm4abB3sD4O/nvfM
+ q7Qg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFM0AZn7VZx6A1ghLue8P6NUlN+UQaK9PYW31I/MvkdUv3BPt5Ado3plzXyKeCrPWFdl12erg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0nAKcgffwloiUaLcN14CrmU3bNLk1CiV/QvrgBzecMA8+ZHdD
- wGTAt5y7aNknFs40LcYkQ935RjHHF2AW9avEtoG1j/dJAJV+dhEehNKcKw8sJPc23Qk=
-X-Gm-Gg: ASbGnctlPQYg8fPWTR1c6VusyiQMA3JvEjv4BB4rIrJDNxBMQ+GMVzBqLFAYV2lT/6U
- LROkGimR4ktswE0lIQO2rlMp2r7zB+bVLoG1W6r9dB53vId4gg1aEiSGQAOQDpyEoBlGM4rrfSs
- 5yb5G99P/Az+3gb4BgwqTVlefP4aZvlnIxInQrW6ZiAuwOhGRKVJ6GRbEXRKouVhdqoFYHirhqr
- HGbGdf4+wPDVQ+6z3Zv2AKVzfoHthPOHNJI3MNWc2YI81WetqxWr72MXB5iFzLDC2tPcixPgalD
- o1kgjgM62Lyk5Xx0PvwfXf7d0MpvyXwxK9HkKHkwS7lqkC8pkZr/k04EPXvY5nKgehAAPVWYUR4
+ AJvYcCWpbrOG+pD03y+bKjzIux7OCkGQBQRdzYgf08EznYdwBnC7sZO9BNH1vXFnfDcp7BEZhqV+kW8=@lists.denx.de
+X-Gm-Message-State: AOJu0YweNmk7XAd+PUG/7iD/kCHF1BKlD/mTqd2R48Mn75scTBgjKziE
+ vIOXLi4gfoxn+Veg9FGyBCg9Xjm94isKxXvFtsJQDVk4XI3XO/JJoem7f4Yyrfpzv+MASAYxDb+
+ SObET
+X-Gm-Gg: ASbGnctM05JZrsVpa0kkAiwTpyKjGQjWTF7APBTjs4FsiSmWschi6rEkjf8Xb09bvCp
+ 69hX9C5wf+x2P0M5ZN2UBHnZSTlu+WpBgr0Otl4aPjMuOtPLu3hbvu5tSRjOfswlk+MQ63fa2/A
+ zynb7jJwhnRHhs+qK4kSK8MmEZMpvOmzZy44/HBGaNpBBWO1EwqIe1GHpMCnnWQYnUSc+nO9wha
+ 2eXO075oVIlzuzytXIeOaJsUBkVgGkvcGqeSGyymyhHoQrZ4ed1jleTg0LOs1q/cKYgr6fJ2bGH
+ zFu8Xw6R/HAFEjubsgwxX5PIYqX/9oBU3/2hXHdDBqy9KLTwlizSqRX5bPW5yMRaEUPB47QF4QY
  =
-X-Google-Smtp-Source: AGHT+IHxIX6G6Y8+PQMnPfIATHeMW7fSI98ZFm75POHkzc5GfQhp7JP2YWSLsafZTCihtEBivmt6Sw==
-X-Received: by 2002:a05:6000:144f:b0:3a3:7ba5:93a5 with SMTP id
- ffacd0b85a97d-3a37ba593dbmr388599f8f.26.1747718538930; 
- Mon, 19 May 2025 22:22:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG0hAdQS5myQbQthngS1QZAWuo93u9MlI7A1OKdVuht2sZXF+ILCAAsIe9ck8NpQWUGcBEKwg==
+X-Received: by 2002:a05:6000:40c9:b0:3a0:7aa3:cc74 with SMTP id
+ ffacd0b85a97d-3a35c808cb7mr14847328f8f.6.1747718541308; 
+ Mon, 19 May 2025 22:22:21 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.17
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:18 -0700 (PDT)
+ Mon, 19 May 2025 22:22:20 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -82,11 +83,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- u-boot@lists.denx.de
-Subject: [PATCH 08/24] kbuild: add real-prereqs shorthand for $(filter-out
- FORCE, $^)
-Date: Tue, 20 May 2025 08:21:19 +0300
-Message-ID: <20250520052153.307194-9-ilias.apalodimas@linaro.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Subject: [PATCH 09/24] kbuild: remove unnecessary in-subshell execution
+Date: Tue, 20 May 2025 08:21:20 +0300
+Message-ID: <20250520052153.307194-10-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -108,81 +108,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Backport from kernel
-commit afa974b77128 ("kbuild: add real-prereqs shorthand for $(filter-out FORCE,$^)")
+Backport kernel changes
+
+commit b79c6aa6a1f1 ("kbuild: remove unnecessary in-subshell execution")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Kbuild.include |  4 ++++
- scripts/Makefile.build |  2 +-
- scripts/Makefile.lib   | 10 +++++-----
- 3 files changed, 10 insertions(+), 6 deletions(-)
+ scripts/Makefile.lib | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
 
-diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
-index 7468223d3233..2ef687ea895a 100644
---- a/scripts/Kbuild.include
-+++ b/scripts/Kbuild.include
-@@ -27,6 +27,10 @@ basetarget = $(basename $(notdir $@))
- # filename of first prerequisite with directory and extension stripped
- baseprereq = $(basename $(notdir $<))
- 
-+###
-+# real prerequisites without phony targets
-+real-prereqs = $(filter-out $(PHONY), $^)
-+
- ###
- # Escape single quote for use in echo statements
- escsq = $(subst $(squote),'\$(squote)',$1)
-diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index 10f31a57a0f9..73e1d71e30df 100644
---- a/scripts/Makefile.build
-+++ b/scripts/Makefile.build
-@@ -356,7 +356,7 @@ $(modorder-target): $(subdir-ym) FORCE
- #
- ifdef lib-target
- quiet_cmd_link_l_target = AR      $@
--cmd_link_l_target = rm -f $@; $(AR) cDPrsT$(KBUILD_ARFLAGS) $@ $(lib-y)
-+cmd_link_l_target = rm -f $@; $(AR) rcsTP$(KBUILD_ARFLAGS) $@ $(real-prereqs)
- 
- $(lib-target): $(lib-y) FORCE
- 	$(call if_changed,link_l_target)
 diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 6d0cb8e6513f..4861b1332c3c 100644
+index 4861b1332c3c..28295c7ff125 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -546,7 +546,7 @@ $(obj)/dsdt_generated.c:    $(src)/dsdt.asl
- # append the size as a 32-bit littleendian number as gzip does.
- size_append = printf $(shell						\
- dec_size=0;								\
--for F in $(filter-out FORCE,$^); do
-+for F in $(real-prereqs); do
- 	fsize=$$(stat -c "%s" $$F);					\
- 	dec_size=$$(expr $$dec_size + $$fsize);				\
- done;									\
-@@ -560,19 +560,19 @@ printf "%08x\n" $$dec_size |						\
+@@ -324,7 +324,7 @@ DTC_FLAGS += $(if $(filter $(patsubst $(obj)/%,%,$@), $(base-dtb-y)), -@)
+ quiet_cmd_dt_S_dtb= DTBS    $@
+ # Modified for U-Boot
+ cmd_dt_S_dtb=						\
+-(							\
++{							\
+ 	echo '.section .dtb.init.rodata,"a"';		\
+ 	echo '.balign 16';				\
+ 	echo '.global __dtb_$(subst -,_,$(*F))_begin';	\
+@@ -333,7 +333,7 @@ cmd_dt_S_dtb=						\
+ 	echo '__dtb_$(subst -,_,$(*F))_end:';		\
+ 	echo '.global __dtb_$(subst -,_,$(*F))_end';	\
+ 	echo '.balign 16';				\
+-) > $@
++} > $@
+ 
+ $(obj)/%.dtb.S: $(obj)/%.dtb
+ 	$(call cmd,dt_S_dtb)
+@@ -560,20 +560,20 @@ printf "%08x\n" $$dec_size |						\
  )
  
  quiet_cmd_bzip2 = BZIP2   $@
--cmd_bzip2 = (cat $(filter-out FORCE,$^) | bzip2 -9 && $(size_append)) > $@
-+cmd_bzip2 = (cat $(real-prereqs) | bzip2 -9 && $(size_append)) > $@
+-cmd_bzip2 = (cat $(real-prereqs) | bzip2 -9 && $(size_append)) > $@
++cmd_bzip2 = { cat $(real-prereqs) | bzip2 -9 && $(size_append); } > $@
  
  # Lzma
  # ---------------------------------------------------------------------------
  
  quiet_cmd_lzma = LZMA    $@
--cmd_lzma = (cat $(filter-out FORCE,$^) | lzma -9 && $(size_append)) > $@
-+cmd_lzma = (cat $(real-prereqs) | lzma -9 && $(size_append)) > $@
+-cmd_lzma = (cat $(real-prereqs) | lzma -9 && $(size_append)) > $@
++cmd_lzma = { cat $(real-prereqs) | lzma -9 && $(size_append); } > $@
  
  quiet_cmd_lzo = LZO     $@
--cmd_lzo = (cat $(filter-out FORCE,$^) | lzop -9 && $(size_append)) > $@
-+cmd_lzo = (cat $(real-prereqs) | lzop -9 && $(size_append)) > $@
+-cmd_lzo = (cat $(real-prereqs) | lzop -9 && $(size_append)) > $@
++cmd_lzo = { cat $(real-prereqs) | lzop -9 && $(size_append); } > $@
  
  quiet_cmd_lz4 = LZ4     $@
--cmd_lz4 = (cat $(filter-out FORCE,$^) | lz4c -l -c1 stdin stdout && \
-+cmd_lz4 = (cat $(real-prereqs) | lz4c -l -c1 stdin stdout && \
- 	$(size_append)) > $@
+-cmd_lz4 = (cat $(real-prereqs) | lz4c -l -c1 stdin stdout && \
+-	$(size_append)) > $@
++cmd_lz4 = { cat $(real-prereqs) | lz4c -l -c1 stdin stdout && \
++	$(size_append); } > $@
  
  # U-Boot mkimage
+ # ---------------------------------------------------------------------------
+@@ -617,12 +617,11 @@ quiet_cmd_uimage = UIMAGE  $(UIMAGE_OUT)
+ # big dictionary would increase the memory usage too much in the multi-call
+ # decompression mode. A BCJ filter isn't used either.
+ quiet_cmd_xzkern = XZKERN  $@
+-cmd_xzkern = (cat $(filter-out FORCE,$^) | \
+-	sh $(srctree)/scripts/xz_wrap.sh && $(size_append)) > $@
++cmd_xzkern = { cat $(filter-out FORCE,$^) | \
++	sh $(srctree)/scripts/xz_wrap.sh && $(size_append); } > $@
+ 
+ quiet_cmd_xzmisc = XZMISC  $@
+-cmd_xzmisc = (cat $(filter-out FORCE,$^) | \
+-	xz --check=crc32 --lzma2=dict=1MiB) > $@
++cmd_xzmisc = cat $(real-prereqs) | xz --check=crc32 --lzma2=dict=1MiB > $@
+ 
+ # Additional commands for U-Boot
+ #
 -- 
 2.49.0
 
