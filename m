@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA0B3C3DA6D
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 13:57:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FA7DC3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 13:57:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D4DB82C55;
-	Tue, 20 May 2025 15:57:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7768482CA0;
+	Tue, 20 May 2025 15:57:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MJznTnYT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZjXPD3LS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9ADD982B00; Tue, 20 May 2025 15:57:27 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id AA40F82B00; Tue, 20 May 2025 15:57:40 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66F0082C55
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 15:57:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8823182B00
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 15:57:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-60657f417c4so3073570eaf.0
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 06:57:25 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2d0920ce388so1929953fac.0
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 06:57:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747749444; x=1748354244; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747749457; x=1748354257; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6jMVQ2qBi0yQVW0lMJPFKCZY2LzBv/Hxy0hWJz9GLdM=;
- b=MJznTnYTkJ47MSXgprNGOkfqFAycGzNorDnTQnr0j6vgn3kKrhmAtETxALlxvKtBd1
- MCwSGyLuDbgMysCZMttVNT+PMu4eim6BBXAQ/D/ShfkzbErizK6fwnP1jKGypAHVRddY
- 9vrD3ivjkJ1maWwb1W3w9LZAz27lpK5/NJvZM=
+ bh=W0Ptn7hWN/ETDMMvPfc3SiQbHjmUBzYCyNHIg3vpZGY=;
+ b=ZjXPD3LS8D7h5IHMojpPoYTlfRDTur2zhsLFEF005vuSJssv6TXtbzhnAjip36tzua
+ lKmxDitpcuHhzOIHonn37P5mdV4pOkQmt7onZ+3zV3gFssy7XP2LOdiQwMcuERIREb6v
+ S0y1iYXnhc2OoT6mzthlm+Tcjyx7eF+vZrrBs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747749444; x=1748354244;
+ d=1e100.net; s=20230601; t=1747749457; x=1748354257;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6jMVQ2qBi0yQVW0lMJPFKCZY2LzBv/Hxy0hWJz9GLdM=;
- b=XGTsHeytY/ybx34bnkzCB5rHJ6JKDqo8VcgUj6NXpiISczlKq8Dx+oUq61q1f0qNUY
- Vu76Sqhirpxy2F4v/hf5oBDTTUMYM16xZ6df0+Ydc3KT6CwXLYdbNZwCvrOV7cEq9qhm
- 1akMioIWwk7LQ45KErrcMvJ9mqJ4gmqTCChRgDi2unqLLErNtppRBDObL73NR3wUlLVg
- wt4E/4mRca3CXvegSIBGaqDNODy2oHDZXmnO5JjHMKN1v+oQnvXUimvePLTFnTNGbjcb
- jJOZI0mr3O7ujgePGYFCjKmEDsTlVm5n2JbB+4jsHbwNBwik1PhokG52pkdxOtdBL/fS
- IJ6A==
+ bh=W0Ptn7hWN/ETDMMvPfc3SiQbHjmUBzYCyNHIg3vpZGY=;
+ b=A3ycCv0hFRvg8oOEayLzwswFWO3LzljCrGGaLG6gq2iPY104PvXjP+vufmGjo9yNdf
+ 4QR3wiFLxyBAWMRJxZIKdGkcgcaYSQ2v5yDCApAfCfx61im0zzsvzk8sDtB2M+ajgqlm
+ vcgktMKdccrSThZBAcWk/wO2TtcWl8wYndr7wZn5v7uJBRoLawfIrVLhIXdfgSl4ZT02
+ flyntuvFNvO+4rMQvXD3wVvIfNPT/BsumvwLNLu2Ik2DRFNXfz5oYKqn92dwcYkd0PjB
+ jyit1f5f/9wCQrgy2PE4Wi+N36pourM9rPoJdMe6zQyTdVT2jsFYfKLy/OCnmIWrPvuS
+ XVfA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWMuublHavkjutmKmzfc3dAq3LW7n8imCqUy4PbAMbxSsFphSxPNNkFGcqbsaI/YHuu5eidfDE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbXUYK44bCB9zgyEFl43blFYwpSLYGt9v6/sftbLevlNu3Crjg
- XbFbeWLELkCAl1naXYF9L4YoNp7gIhbl4wBvFK3CO08bH/SoGtPKCII6UagWJcEwivo=
-X-Gm-Gg: ASbGnct9F28y64Pg19fBdZiWoyqhG/DJ49at9ffPQCmFlcjAiw+WfaiBj8sdXk+dmG3
- sPGwlC1UYq2+eOxVBVi4W8iwE5cUHgvJ6/HGoMLa6XmuPNITo61qXPt0OI+fJQtvs+JSc/vQApJ
- TtOGayXg94/BHtsWXaQamcgr0iFHJfL3Ko/COBCfnD+U1JN5RFRIn9wyXLouRzcIKhhMxhHgXaX
- LUoF5HpAabjgbaOwzBOBsKgEbXQpj6YQ281V0uiN8ITfZPgSwT+zz0vmsTHEzybd76qDErSkWEm
- 6Y8tkvllkc1syYLSyqWO/fPqrUFeBsmuxZNHRE1+C06hxMf5esFcmEFTurMhutSqcSyXEJzv00y
- GYEBGbEx+woIe
-X-Google-Smtp-Source: AGHT+IHHgKsBJ/KetmJTz8a7FS74Mnw8BymM3pAwv7+awI9U06j1oQ0v2u1oFyfJggB9TdIDCsDN9A==
-X-Received: by 2002:a05:6870:47a0:b0:2c1:ac88:4a8d with SMTP id
- 586e51a60fabf-2e3c1e59ef5mr10240497fac.30.1747749444059; 
- Tue, 20 May 2025 06:57:24 -0700 (PDT)
+ AJvYcCWsxOTi7+9CTB47UA8a0pWJSY8fv8pRIaLLc7SnXz/jwmet2ANGWldPDKR7o2+D2DqA5YQ0dWk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz3ZaF9IIkPcZ6AD0zudH2c3RYCcBjkptfrQg+dAR2/ENE8fCWP
+ JZ9v4wxWk1M0Kz9qtAAeXXvwIkZikGGtKLdZ3B6B6oQ/36GZlik1+UzH4/sa+OTcgY0=
+X-Gm-Gg: ASbGncsUrioi+KPvjdZOjoqRRLqdohCFe/gHS1+0MdphSoS+jNwoyxpgi1ZG4299dju
+ cefJAXZw78pBeMGIAjgP1YNxSP6QDP0qkLIJegGqx/2u1cmiXFJkDoRbeOCd9U85QmL9uA6xb4K
+ +V4wJw97a5Hm9c2qwugTduRp6EQJDBALDGAQzWIlDq685LUAu2mLUvbTZMxeAZ6oVTyXzfPOHyn
+ 1SyRUn+6lXVwqC5rLJK4aBd1Jgh9mdHgzZu8NJ243XV7K/kdDXwp0wpiRHNayyMjEPUDsg3zHvx
+ iKZSz/GUsLlw+LTJ5z1tueQlO/cDULuirs2lJMudEWSiU5+bz6BN4XYbEUjwT+pRo6KN7DelGwV
+ 0ZyMdjUltWV9v
+X-Google-Smtp-Source: AGHT+IE0Z21RrtFeJFixt6R4sgsQT5kwCkkU7NCpfNfpSq2I4YcpxHM4cgMwoLiWXzp9TNmTXOBl1Q==
+X-Received: by 2002:a05:6870:f114:b0:2d9:3868:b310 with SMTP id
+ 586e51a60fabf-2e3c1c09e05mr9788667fac.11.1747749456876; 
+ Tue, 20 May 2025 06:57:36 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c0aa201asm2208002fac.33.2025.05.20.06.57.22
+ 586e51a60fabf-2e3c0b21cb2sm2165009fac.46.2025.05.20.06.57.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 06:57:23 -0700 (PDT)
-Date: Tue, 20 May 2025 07:57:21 -0600
+ Tue, 20 May 2025 06:57:36 -0700 (PDT)
+Date: Tue, 20 May 2025 07:57:34 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 1/6] arm: uniphier: Change _debug_uart_putc function
- to inline
-Message-ID: <20250520135721.GY100073@bill-the-cat>
+Subject: Re: [PATCH v5 2/6] efi: stub: Change _debug_uart_putc function to
+ inline
+Message-ID: <20250520135734.GZ100073@bill-the-cat>
 References: <20250520-silent_console-v5-0-ef9583d93285@thaumatec.com>
- <20250520-silent_console-v5-1-ef9583d93285@thaumatec.com>
+ <20250520-silent_console-v5-2-ef9583d93285@thaumatec.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1ce/+6n0pJUWvN6X"
+ protocol="application/pgp-signature"; boundary="eepa+7lHTTs74buZ"
 Content-Disposition: inline
-In-Reply-To: <20250520-silent_console-v5-1-ef9583d93285@thaumatec.com>
+In-Reply-To: <20250520-silent_console-v5-2-ef9583d93285@thaumatec.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,15 +102,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---1ce/+6n0pJUWvN6X
+--eepa+7lHTTs74buZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 20, 2025 at 01:36:39PM +0200, Lukasz Czechowski wrote:
+On Tue, May 20, 2025 at 01:36:40PM +0200, Lukasz Czechowski wrote:
 
-> Update the definition of _debug_uart_putc to static inline.
-> This matches the instructions in include/debug_uart.h and
+> Update definition of _debug_uart_putc to static inline.
+> This will allow to avoid compilation warnings about unused code
+> after introduction of patch changing debug uart functions to
+> dummies if CONFIG_DEBUG_UART is not set.
+> This also matches the instructions in include/debug_uart.h and
 > provides consistency with implementations for other platforms.
 >=20
 > Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
@@ -120,22 +123,22 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---1ce/+6n0pJUWvN6X
+--eepa+7lHTTs74buZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgsikEACgkQFHw5/5Y0
-tyzPVAv/ewK1N1Qp2A30yLHW2LemriJf6ctibklln4Vgrd3aGa4xH6G9WTzhBoJd
-92cj3STcPlqAJWsC3FFX+8i7hy2SAFEQ43De7z/Xh4f8mUHGQkNJguei+WfR6sUP
-FU2Cq+owcDhd/Pcji933z/l/s550O6F3Y6T0DOxTdsDIDoU8JmcEGp8fZ86vvxKm
-jFH6s34Ab1m1+bb1Fdy1ikujEnVcYuptGoXEMw4clWz7eRhmwH4xuhszGWs/SnV8
-ZdSX2XHun1Tc/pv5rOfVl3xddtRgCojoCLWfe6+mhMv1T1C4Dk1ylnGbJftRDrXA
-GxVwNu2L8TQGt/kuRd2PcVOvkvwlaS2pPFkMXKL8/EGRBiPeHouT53cnEr7MXmPg
-l6X4UNt4z+aiLTb9Qwe4SU+W0TJbmgq+ZIw5rVvH4l+WdC5BAmWv4j7lQ3J8V+Ee
-v0LMUrHO/q3Tndh9iqWWSeV3R0WbPC8NUbjsp6jta99kBwZbCZYB37F8CXk1Zzj0
-3upEvzRK
-=jvII
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgsik4ACgkQFHw5/5Y0
+tyz+8wwAmPoMQkYo68ZEMFCM1Gt7KR9BB05Yay9iqabUxPr0mEoFvKj4YYY9axc6
+PdEbA3Zcohcs4kHy/RR/AhaNhq1JCFhFf4dbRjtxpdfSKjrZagRjy0glvvs6FvhS
+jHX21L8EKqZ9VPChCC/jFFU1PPx5cCGAu6OvoExhuhlFpNd+SIhvnmnfWqFVoWmL
+oZq/A9w5XQmcZS0N7gATthhwfZnTqSkMu8Sx2/12iG0kU9JNaf6qj7P1lZNCIG3N
+sPpzzFSx391fHrqYuOy12s6tcRXYAhrCK1u4aCLaZMcscbIpwP2qOsWIbqsi3Hw4
+PQN+YH0vRGPDIJwlvFuhfUOSdzAy0dcM+zmDZ2UqI4TfsXO5lAot3MTpkMQPypx6
+/RSml67Zbgm1cWS7+RQupYX85WVu05cIyvzPCaeptQ+YWQTxEbNB+SfMuP/P/dM7
+SomFa724taILlwo+MRve2BnnFi/nQBj7Uf0WN72du11JxToNWXcrWwewaw95B8Ul
+n8aBHvGq
+=+DoF
 -----END PGP SIGNATURE-----
 
---1ce/+6n0pJUWvN6X--
+--eepa+7lHTTs74buZ--
