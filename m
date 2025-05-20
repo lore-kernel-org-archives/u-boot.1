@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CFF8C3DA6D
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 14:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F1BC3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 14:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E83A82CD9;
+	by phobos.denx.de (Postfix) with ESMTP id 6638082CF4;
 	Tue, 20 May 2025 16:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Q/hLH0H4";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IWW12DzE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C05C782CA0; Tue, 20 May 2025 16:26:04 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id F23AF82C55; Tue, 20 May 2025 16:26:04 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1381882CA4
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 16:26:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8E5682C2F
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 16:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7F1845C5652;
- Tue, 20 May 2025 14:23:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 167EBC4CEEB;
+ by sea.source.kernel.org (Postfix) with ESMTP id 17C8C4505B;
  Tue, 20 May 2025 14:25:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E6500C4CEE9;
+ Tue, 20 May 2025 14:25:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747751159;
- bh=GyvkI/Jug/VN/e1Ni+nwmu3nl5sW1DKtzgOvTQLW0y0=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=Q/hLH0H4AtGYyyj5dYcQhHlNvK95Vsm/ajdJTrW6nbDmzFXvraZ9CQlH1LPBEEvVS
- svbLgcOpIqw9Fv8mkS+/3yDfo2MpQLxuMNoANQJvoF8y9eU52UoeNHi+NhB/iUmSzy
- FYfEu/vMSPx18izILzeykB3vNgJu70VXXB/sKkvxGrY43Dth/6xgtZ3mxptiiBaMwC
- L9UYaKCxhK9dHVPRsXMGDwcIMxOOHw5qr/ATmr8nbIeeABqvNZKTT33wC5R4JirOGp
- g7u6ypqYsut7+4whWAqpo4jq7ZBpkkv8iiQrAOm74HTyPM1yzSwyvF5257W2Q4POPu
- eWV2nyYQzxZGw==
+ s=k20201202; t=1747751158;
+ bh=FGMvhL5VzJ+FRv+Wa1Xojc0aHPnOaZO+iDim/8NByws=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=IWW12DzE4nZkQFFG8HtGpTv8G6AGkRRUGf61EiVlfKq9u7vkCWTndxUCC8ZpUgyk6
+ ArFzWR+FWFqAlkdk9ZZZna589ehctiLew0Yl84CUYeK1FEH8P0/k3+L+uJrvg2o8Ts
+ DkSBcRTSdRGF+0EfLy9nanzZKhtxIpYvZnxxQgcFK/NNRJGMf3zTt6Pm1lDZFmJtaQ
+ bwuDTEO4/6wEwJtLaH34W4ojJt88M9/MjeF2Vs32gxOAHNfAMFrh+J01qY1Z+nH1MN
+ zOWJVG850H/D9tTaVRUl7iDVs5IGUO6gxj3NQ0FHfcoezW7iKlfBYbVVV3JVOf0NxH
+ CGq38US7/SONA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 08D73C54E90;
- Tue, 20 May 2025 14:25:59 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id D5D59C3DA6D;
+ Tue, 20 May 2025 14:25:58 +0000 (UTC)
 From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
-Date: Tue, 20 May 2025 22:25:58 +0800
-Subject: [PATCH 3/4] boot: bootmeth_android: Conditionally dependent on
- abootimg
+Subject: [PATCH 0/4] A series of patch for enable sc7180 android boot
+Date: Tue, 20 May 2025 22:25:55 +0800
+Message-Id: <20250520-sc7180-android-boot-v1-0-3075a84ea094@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250520-sc7180-android-boot-v1-3-3075a84ea094@gmail.com>
-References: <20250520-sc7180-android-boot-v1-0-3075a84ea094@gmail.com>
-In-Reply-To: <20250520-sc7180-android-boot-v1-0-3075a84ea094@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAPSQLGgC/x3MQQqAIBBA0avErBtQUZKuEi1Mx5qNhkYE0t2Tl
+ m/xf4NKhanCPDQodHPlnDrkOIA/XNoJOXSDEsoIowRWP0kr0KVQMgfccr7QWW3IR22dttDLs1D
+ k578u6/t+A/ESvGUAAAA=
 To: Tom Rini <trini@konsulko.com>, 
  Casey Connolly <casey.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -62,13 +61,13 @@ To: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- George Chan <gchan9527@gmail.com>
+ George Chan <gchan9527@gmail.com>, Vitalii Skorkin <nikroks@mainlining.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1747751157; l=1767;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1747751157; l=1755;
  i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
- bh=WjgYwgaVztceTx2DDYS0GrMHIgSKhAFgtLATy38C6+o=;
- b=soghn9/18o6C7GK4RrfKR8lDBsrIn07FLIJLu2LnSYocuuyLyvdAeBG2BHbWi4jl6XPREifXm
- rgMdHA0d1ANDur42p4N8cdxXfWB6Qzzcy4MR5/ttjBQ2aW2N8WEGduM
+ bh=FGMvhL5VzJ+FRv+Wa1Xojc0aHPnOaZO+iDim/8NByws=;
+ b=KC/bYCrZM7IzlfMx9GLPIzy29T/JQFMbkMdexijPcjYu4Jrf9GIkEraj+qyOhBTW8RPxf3NSX
+ VEfjmCEtIqCBCODX71AxzMlTvNLYhsNKbit+cF0hbb0qNgJAdcsJrJt
 X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
  pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
 X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
@@ -92,52 +91,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: George Chan <gchan9527@gmail.com>
+Since attempt[1] to embed android specific boot param into fdt bootargs,
+a new idea is formed as to make use of env file to contain default param
+value. Current code logic is already working fine, unless the priority
+of param at begining is higher than at tail. From env file, bootargs is
+treated important, and prepend at begining. So there is a need to
+reverse the logic, and make sure default bootargs value at the end, and
+let androidboot img bootargs value sit at begining. 
 
-If target u-boot img do not support androidboot v3 or greater,
-abootimg might not be necessary.
+So a new kconfig item is introduced. Once enabled, the bootargs strcat
+param will get reversed.
 
-aarch64-linux-gnu-ld.bfd: boot/bootmeth_android.o: in function `boot_android_normal':
-/home/user/sources/u-boot-next/boot/bootmeth_android.c:541:(.text.boot_android_normal+0xd0): undefined reference to `set_avendor_bootimg_addr'
-aarch64-linux-gnu-ld.bfd: /home/user/sources/u-boot-next/boot/bootmeth_android.c:543:(.text.boot_android_normal+0xd8): undefined reference to `set_abootimg_addr'
-Segmentation fault (core dumped)
+Some one-liners patch is included to enable device driver for sc7180
+soc. It is about iommu for usb, usb gadget vendor/product id, and
+abootimg dependency.
+
+Worth mentioning is as always, the EL1 jump_linux[2] logic to boot.
+
+[1]https://lists.denx.de/pipermail/u-boot/2025-May/588828.html
+[2]https://lists.denx.de/pipermail/u-boot/2025-April/585995.html
 
 Signed-off-by: George Chan <gchan9527@gmail.com>
 ---
- boot/bootmeth_android.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+George Chan (4):
+      image-android: Prepend/postpend default bootargs value with given bootcmd
+      iommu: qcom-smmu: Introduce sc7180 compatible string
+      boot: bootmeth_android: Conditionally dependent on abootimg
+      usb: gadget: Introduce usb gadget vendor/product default id for ARCH_QCOM
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 654ebfdf1fc..29a9a4afe7a 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -517,7 +517,7 @@ static int boot_android_normal(struct bootflow *bflow)
- 	struct android_priv *priv = bflow->bootmeth_priv;
- 	int ret;
- 	ulong loadaddr = env_get_hex("loadaddr", 0);
--	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
-+	ulong __maybe_unused vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
- 
- 	ret = run_avb_verification(bflow);
- 	if (ret < 0)
-@@ -533,6 +533,7 @@ static int boot_android_normal(struct bootflow *bflow)
- 	if (ret < 0)
- 		return log_msg_ret("read boot", ret);
- 
-+#ifdef CONFIG_CMD_ABOOTIMG
- 	if (priv->header_version >= 3) {
- 		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
- 					     priv->vendor_boot_img_size, vloadaddr);
-@@ -541,6 +542,7 @@ static int boot_android_normal(struct bootflow *bflow)
- 		set_avendor_bootimg_addr(vloadaddr);
- 	}
- 	set_abootimg_addr(loadaddr);
-+#endif
- 
- 	if (priv->slot)
- 		free(priv->slot);
+ boot/Kconfig                  |  8 ++++++++
+ boot/bootmeth_android.c       |  4 +++-
+ boot/image-android.c          | 10 ++++++++--
+ drivers/iommu/qcom-hyp-smmu.c |  1 +
+ drivers/usb/gadget/Kconfig    |  2 ++
+ 5 files changed, 22 insertions(+), 3 deletions(-)
+---
+base-commit: 126a88d49bcae04bbfc0d6723097cd6341355ade
+change-id: 20250520-sc7180-android-boot-a845ecf48a48
 
+Best regards,
 -- 
-2.43.0
+George Chan <gchan9527@gmail.com>
 
 
