@@ -4,82 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FEA5C3DA6D
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 12:00:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A170EC3DA6D
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 12:06:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8EA982B00;
-	Tue, 20 May 2025 14:00:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E7C8B82B00;
+	Tue, 20 May 2025 14:06:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EYrjTQFW";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3AF782B7E; Tue, 20 May 2025 14:00:56 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D93EB82A8D
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 14:00:54 +0200 (CEST)
+ id 6BDD582BB4; Tue, 20 May 2025 14:06:21 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 00D6582A8D
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 14:06:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-32923999549so12413811fa.2
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 05:00:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747742454; x=1748347254; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fBxtQzWtE7caQmxQ7Y3aftleTvqs0g1c0f3yQLKcwzw=;
- b=EYrjTQFWzItjcvyjjqgLq21LJqH4/u/CV2h0dbJZmfdq8yuokxtNYO0Ec7STLwExo8
- Tqg9xzmuyZDkclz5inIATFjZxIr0c1TUqcgbmLOVdmWUXl187Xa10GpTp7LDpby9q6G9
- QF9dguz7YKXJTmmDyrG+syxr4y5RLmUHo5JCtYjYkYtt942Yijk7Iyhe2gLkoQyBVqO+
- uQj1yfpQjjtsy6IcrbalXFlW7LVii4A1O0f7Z4rOBifi/RzXJ/1H3J6IAXw1zrt24YHZ
- kqAutj1Q1tYL4aZkuikjstKY4jgveSfpZphhF5yBIX0pLIm5W7jPLAIyZBFAPoUvkeFI
- mTKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747742454; x=1748347254;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fBxtQzWtE7caQmxQ7Y3aftleTvqs0g1c0f3yQLKcwzw=;
- b=NKPg6atqDX2AbqDZd2t42TSsmSb8Cad4MspxSVeKxSu5jZoSMSwVTP+/FAtKWuDuTB
- r6Ov0WflHseJ4HgIvhQJz3+2cDtcadecBLeJh7xVCHqs/BmyzVEt3k7VV/XN6LTf4KjO
- oAoV6fJnoRZ8Tdwx61+WwDQwMP9HqgjTInepT4IJm7iZgGhK4w1dLso90zw+IB0QsFlU
- GytAWKVpiCiwD1kDz+tJ7zz1GUK0oW/fLicJWBwFCthsX6xU7sXM3BHQQ7I3Q8Jl9cpu
- Th4bYgJ+qdJr3MZPnA0rb13726BGovcdvVKFDg5JJpqRsqrIVDjvgJ6rzxhccpaqD3nJ
- G5tw==
-X-Gm-Message-State: AOJu0YxUnxZmact/L++axgFNDb8j5fRMu6ov/EhJGEUkELMhNIXW8H0Q
- Ol6UMT5QFa+Kw/d4YYSoIu1/QQ4YR3hVqmqS6njEwQJSY+FOSuKk8iW5y0Rf7ndL7ZZMpsxeyAl
- fTI4jq07L/I2RnXp1USLslCKCEFA6k3M=
-X-Gm-Gg: ASbGnct9b5SGbGGZWZBUeykbbOSCPm5S46zuPVnQiCisHOwru7mhYszgac1V9X3RzlR
- Js04uGeaq8KOZfpAoAMCVc0xYhMgyNTJIFu3pvGn3HiEuBjX/jcsF7ZZEZwTj2lCFXSIntOqxvB
- 8lrNMtIW3lWPO6xZH/H5tWS1Q+Mjpzm9ix5ab37aKNJrL5UlcGZq8D0DQvWs90WBE=
-X-Google-Smtp-Source: AGHT+IH9WRcNUG2y++p0iH8Dd2qeUS5160spN0mwTw6Csl5YLhbKIlvAYaeeS6YKuWOeXFGR+sK81ZzFBjobx6a/zc8=
-X-Received: by 2002:a05:651c:110b:b0:30b:d17b:26aa with SMTP id
- 38308e7fff4ca-328076e8964mr51863541fa.2.1747742453908; Tue, 20 May 2025
- 05:00:53 -0700 (PDT)
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DF7091516;
+ Tue, 20 May 2025 05:06:04 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 814953F5A1;
+ Tue, 20 May 2025 05:06:15 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 0/5] lmb: use a single API for all allocations
+Date: Tue, 20 May 2025 17:36:01 +0530
+Message-Id: <20250520120606.173228-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250520090241.926812-1-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20250520090241.926812-1-dario.binacchi@amarulasolutions.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 20 May 2025 09:00:41 -0300
-X-Gm-Features: AX0GCFvWDIFlix4TBBpvjzVcg7Zg64B08rcAn6es0KklAuXIvsPtzE5AmCyIxg0
-Message-ID: <CAOMZO5CRVhRhHu9eWDk2mG_Q2Yf1jP5M8BQFyN=8R4c4T=KBbg@mail.gmail.com>
-Subject: Re: [PATCH] board: freescale: imx8mn_evk: let clock system enable
- UART clock
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,17 +55,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 20, 2025 at 6:02=E2=80=AFAM Dario Binacchi
-<dario.binacchi@amarulasolutions.com> wrote:
->
-> From: Michael Trimarchi <michael@amarulasolutions.com>
->
-> Now that the UART driver can enable the required clocks, remove
-> the hard-coded clock enable.
->
-> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-Thanks for the cleanup:
+The LMB module has a bunch for API's which are used for allocating
+memory. There are a couple of API's for requesting memory, and two
+more for reserving regions of memory. Replace these different API's
+with a single one, lmb_allocate_mem(). The type of allocation to be
+made is specified through one of the parameters to the function.
 
-Tested-by: Fabio Estevam <festevam@gmail.com>
+Additionally, the two API's for reserving regions of memory,
+lmb_reserve() and lmb_alloc_addr() are the same with one
+difference. One can reserve any memory region with lmb_reserve(),
+while lmb_alloc_addr() actually checks that the memory region being
+requested is part of the LMB memory map. Reserving memory that is not
+part of the LMB memory map is pretty futile -- the allocation
+functions do not allocate memory which has not been added to the LMB
+memory map.
+
+This series also removes the functionality allowing for reserving
+memory regions outside the LMB memory map. Any request for reserving a
+region of memory outside the LMB memory map now returns an -EINVAL
+error.
+
+Certain places in the common code using the LMB API's were not
+checking the return value of the functions. Checks have been added for
+them. There are some calls being made from the architecture/platform
+specific code which too do not check the return value. Those have been
+kept the same, as I do not have the platform with me to check if it
+causes any issues on those platforms.
+
+
+Changes since V1:
+* Check the return value of the lmb API in some of the common,
+  non-arch code that got missed out in the earlier version. Done where
+  applicable. (patch 1)
+* Declare a local variable of type phys_addr_t and use that while
+  calling the API, instead of casting the parameter to a void *. Done
+  where applicable. (patch 1)
+* Keep the value of of_start as a pointer instead of an user-address
+  in boot_relocate_fdt(). (patch 1)
+* Made changes to the documentation for the lmb_allocate_mem() API to
+  highlight function parameters and other important constants. (patch
+  1)
+* Check the return value of the lmb API in some of the common,
+  non-arch code that got missed out in the earlier version. Done where
+  applicable. (patch 2)
+* Declare a local variable of type phys_addr_t and use that while
+  calling the API, instead of casting the parameter to a void *. Done
+  where applicable. (patch 2)
+* Optimize the use of the lmb API in boot_ramdisk_high(). (patch 2)
+* s/desired_addr/high_addr in boot_relocate_fdt(). (patch 2)
+* Fallthrough the LMB_MEM_ALLOC_ANY case in lmb_allocate_mem() as
+  suggested by Ilias. (patch 2)
+
+
+
+Sughosh Ganu (5):
+  lmb: replace lmb_reserve() and lmb_alloc_addr() API's
+  lmb: replace the lmb_alloc() and lmb_alloc_base() API's
+  lmb: staticise lmb_add_memory()
+  lmb: use a single function to free up memory
+  doc: add lmb documentation
+
+ arch/arm/mach-apple/board.c      |  27 +++--
+ arch/arm/mach-mediatek/tzcfg.c   |   8 +-
+ arch/arm/mach-snapdragon/board.c |  13 ++-
+ arch/powerpc/cpu/mpc85xx/mp.c    |   4 +-
+ arch/powerpc/lib/misc.c          |   5 +-
+ boot/bootm.c                     |  27 +++--
+ boot/image-board.c               |  56 ++++++----
+ boot/image-fdt.c                 |  70 +++++++++----
+ cmd/booti.c                      |  10 +-
+ cmd/bootz.c                      |  10 +-
+ cmd/load.c                       |   7 +-
+ doc/api/index.rst                |   1 -
+ doc/api/lmb.rst                  |   7 --
+ doc/develop/index.rst            |   1 +
+ doc/develop/lmb.rst              | 166 ++++++++++++++++++++++++++++++
+ fs/fs.c                          |   5 +-
+ include/lmb.h                    | 105 +++++++++----------
+ lib/efi_loader/efi_memory.c      |  22 ++--
+ lib/lmb.c                        | 169 +++++++++++++++++--------------
+ test/lib/lmb.c                   | 102 +++++++++++++------
+ 20 files changed, 559 insertions(+), 256 deletions(-)
+ delete mode 100644 doc/api/lmb.rst
+ create mode 100644 doc/develop/lmb.rst
+
+-- 
+2.34.1
+
+
