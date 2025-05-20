@@ -4,81 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D5A5C54799
-	for <u-boot@archiver.kernel.org>; Mon, 19 May 2025 21:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B77C3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:22:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 754BE828F8;
-	Mon, 19 May 2025 23:06:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C43B82952;
+	Tue, 20 May 2025 07:22:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SuIo6opS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J1tri2Pn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D742F828F8; Mon, 19 May 2025 23:06:14 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 1A90482BDA; Tue, 20 May 2025 07:22:03 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC11782012
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 23:06:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7799828F8
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3fb3f4bf97aso1793965b6e.2
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 14:06:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a3673e12c4so1576058f8f.2
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747688771; x=1748293571; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MZaOjL9BM1LVz7CyW1OXFrfa3YAoKpyYaOjmPxQxnl0=;
- b=SuIo6opSDE+S2dNzDB/ZvdMLfLt1J7+NjlpvRlfFEq2rO1ZICMKCAqfUln2Gc9H3Et
- c6vfTDCyPiZuq4dB8RD5opjVu2xUY71NAbzbyauNVz3/DOss4wnn/1yuH2Qx+5gq1h/V
- gHCHAmEuEEgn9YoUellEKg9QoEiJEYbWZeF0E=
+ d=linaro.org; s=google; t=1747718520; x=1748323320; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Cb+Cy+LMF0AJN6j2LaRgA2WQUPWQDOlC6+lYcWQbSXQ=;
+ b=J1tri2PnxasXfJ9n7EdLibYjjz6LC9YSEeH2GQQtpDZfMmDcXy2Cil0LcTDZwkmHWe
+ EkRKh7/IxWd5gqNnD8YBxrurzHAHBq3mzkFzpHsM7Hah84hNbI9tRPGQdOOgLbXHNRm5
+ nBP6jnySN5Z3OsH/zprNMg98+8snrrpcs6PrkwUn+fZKF/oH6GsSYUNiCkugU86cjohC
+ kJMyCWg9WCYOQ6ImI4QM6rqUmigJwFSemE1XEsE2WOuWtU8SxD3fTauKoas8yN5bwZ1u
+ VtgDCvasVHHixY723c0059U/T75GQU6GwIM3xBbY5CiXemIKSPmaBEHe1gjPVYWmonu0
+ DRWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747688771; x=1748293571;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MZaOjL9BM1LVz7CyW1OXFrfa3YAoKpyYaOjmPxQxnl0=;
- b=vA5amdS4LjRjPUs2NbYouIFGl5OUEqAkMU8j1qe1x4vq1ChoJzgsxykbL8jqvj+i5S
- soqHr6QgG/DH5GkPQ3Epq8xoN6tzjmdC1prhuKnxurqvlKnmMInNuq1sHpqOKbOc0EWY
- QHp+sNZBuyVqrfxyzUIPlDNoVLQoYw2v+u0UcXdFYrBLrD+krh1xlcuKpgLvzcA2CSML
- 6hLIaSuFwdHD4ns3jbMMYjWYqVweghqv9etT9t6EXDJosXtcVhCUPRu3AB2iFKmuLdUY
- yu8CLzWQEHGi0iq23ekUjEqywvKY7S1325pfAsF0+RX/rAjXLVMLgfbabvDnQ3CCvXqD
- MzBg==
-X-Gm-Message-State: AOJu0YxDiTeghMEwnyrJ1NZjoEYmEyo6HqfDMp0guyTohs7jdDmc4Fng
- V5FULteNAhvoSOUm4g1VeSop+YrJfbhfT3oAXO9hsQ283visukMmDomhHjTrj7C+8uA=
-X-Gm-Gg: ASbGncsZWqbfh33gSRWc001C3U86vhwOHZA7lQPyH/nAzq5lnNzwu6R+Cyn/4PgJCYr
- lVd0c2c4xhL/VnFAfOyKjD1TIciU4vOXIiCAwZAX+LnxJPFZ1jm0g/v6fAZ+hLElohsuTtErNPX
- cKWw++qsEh0OFkHDUmdXuTo4yY8pGGDaQhtSCrF+P2jhJ2ElKoS9C6bZWRUV8FHAYOO7qcSsEtJ
- W4CsZudWmvnrDXRPEmxcbQyS0afj4w0S3C7kURI+tbjQ5AFzKakuIOBe+5vhVxMHJda4A2Bq+Cb
- wlZ2H3ZuAiSFZgR2fM/Bj9y3ub9cU5hGgB8JbUR/e/viUqOQQQBRtl0IybeRNQeoKETX6IvyUoj
- iPGyUTHYOj8UC
-X-Google-Smtp-Source: AGHT+IHsm0fjJsHHOpEtqG4pEjsQURytx6Xb+6HvyCz1yWjFR55N+sEinmwJWuBasAYnnzCPH5aBDw==
-X-Received: by 2002:a05:6808:229f:b0:403:34b3:c987 with SMTP id
- 5614622812f47-404d87b8b34mr7760556b6e.28.1747688771273; 
- Mon, 19 May 2025 14:06:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-609f2f43884sm1726539eaf.15.2025.05.19.14.06.09
+ d=1e100.net; s=20230601; t=1747718520; x=1748323320;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Cb+Cy+LMF0AJN6j2LaRgA2WQUPWQDOlC6+lYcWQbSXQ=;
+ b=h8QjH0l3lR0mB/c2EaCEAwH+GNDzANAWG9fYj6dG/RGG4FfbTdH7jNFoZ9RNJs58i0
+ VpggHVHNz+WBeOFzq+jsaXLoneor6WzWPTBxxSDNVpGoV9Fd1Ip2JeSc26lCkyUiZCOQ
+ rp04HZlY8vhP8nitZ95ttNSW++67Pfsu84TDz01KCCqkjWMwfub8qyyovKzwPDLU43Sr
+ BVJQi0LJoX6/19yhVhhwuKaZzFA/c1uStFc0yaznFhHOyLOmvyYHyjRxUthtHhIyhYG6
+ NjLob6mlsCA/ZX3Okm21zQzz+/WxJdjDMrgSyF1ejMGwXMduCdCewjFTY9zuZHkmLfWN
+ IcWg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/y21Z7D9GQqADi6OOMVxA4ezNqOCliZw8aJowT9RcHNfKNbK4tP3gUvB8eUNC49DUVVlDjrM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxtP7MSym1P+yaaXXAM260LL/5t4A4jKt1KqmGlWZ9uWxqg3dTQ
+ Fh0rXtx7neVZpB6ywOMPKFcc1fIeZCLtnv32HXGOGQH6ytuRwDM8sA1cOXZRfLpfkn0=
+X-Gm-Gg: ASbGnct0qrlVCfAexo3spo1l+CvUNVLdYcbdG6HpAQ/Yp5g5CQZ0uw0TKKz5gv4KPpl
+ z2VaXJGNw2nB2o9FBJLfkMtcXjDZvwVs06N/qsiykhFeUTganDaKDZMIKeshizqKtNirvrs96r6
+ CoC7jbsL1oFQriT1OlBYCF4/qt6GRRCIb6cZAimTzRXPqAlaeFMRLJ4QBamemIvs1XqLZNtGp69
+ Lyd165pE228TAVTqfq5s24UpDPvFkqZbog4WAp/v7air+31kTYA4b+NrFgPg/4r7qx6UXwClYMG
+ wg4FR9ZerSHE/en7S/3YNNhdPYiBkotAJwO1DKSU3ImVf/AYjcCZHBAmGdaX1e0xyjg0oXFWIj4
+ =
+X-Google-Smtp-Source: AGHT+IGIqGQSWXwPBJwjEmJp/8b95A74Asad0vpjXr5ky/vdIHxNqzijeOs8/AJS/Yh6cwPZBSKaUA==
+X-Received: by 2002:a05:6000:1ac9:b0:3a3:77d7:b3e2 with SMTP id
+ ffacd0b85a97d-3a377d7b406mr1784134f8f.41.1747718520073; 
+ Mon, 19 May 2025 22:22:00 -0700 (PDT)
+Received: from localhost.localdomain ([46.198.180.244])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.21.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 14:06:10 -0700 (PDT)
-Date: Mon, 19 May 2025 15:06:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Benjamin ROBIN <dev@benjarobin.fr>
-Cc: u-boot@lists.denx.de, sjg@chromium.org
-Subject: Re: [PATCH] bootm: Fix bootz, bmi->images pointer was uninitialized
-Message-ID: <20250519210608.GU100073@bill-the-cat>
-References: <20250519194800.5550-1-dev@benjarobin.fr>
+ Mon, 19 May 2025 22:21:59 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: trini@konsulko.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Subject: [PATCH 00/24] Update kbuild
+Date: Tue, 20 May 2025 08:21:11 +0300
+Message-ID: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Qp0V/UtNTUg0Lsif"
-Content-Disposition: inline
-In-Reply-To: <20250519194800.5550-1-dev@benjarobin.fr>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,64 +104,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Last time the kbuild scripts were synced with the Linux kernel was on the
+4.20 release. Updating directly to 6.x makes the diff difficult to read, so
+let's do the changes incrementally and bump to 5.1 first.
 
---Qp0V/UtNTUg0Lsif
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Since the number of comits is bug, I am splitting this in multiple series.
+This one includes most of the commits for Makefile.build,
+Makefile.lib and some from Makefile.
 
-On Mon, May 19, 2025 at 09:48:00PM +0200, Benjamin ROBIN wrote:
+commit eeb5687a7139649e ("kbuild: add -Werror=strict-prototypes flag unconditionally")
+commit 3812b8c5c5d5 ("kbuild: make -r/-R effective in top Makefile for old Make versions")
+commit b421b8a6cb87 ("kbuild: remove unused archmrproper")
+commit 1a49b2fd8f58 ("kbuild: strip whitespace in cmd_record_mcount findstring")
+commit 88110713ca9dfb ("kbuild: hardcode genksyms path and remove GENKSYMS variable")
+commit 1d8001ef358 ("kbuild: generate modules.order only when CONFIG_MODULES=y")
+commit 45c4372d00 ("kbuild: refactor quiet_modtag")
+commit b39a691617e4 commit ("kbuild: remove redundant quiet_modtag for $(obj-m)")
+commit 5439f09f488f ("kbuild: remove redundant 'set -e' from cmd_* defines")
+commit e5d289100d3a ("kbuild: remove trailing semicolon from cmd_* passed to if_changed_rule")
+commit 3a2429e1faf4 ("kbuild: change if_changed_rule for multi-line recipe")
+commit ee3e46b7efd2 ("kbuild: refactor modversions build rules")
+commit 4317ee3b6a5e ("kbuild: remove redundant 'set -e' from sub_cmd_record_mcount")
+commit 392885ee82d3 ("kbuild: let fixdep directly write to .*.cmd files")
+commit 898f5a009f22 ("kbuild: move archive command to scripts/Makefile.lib")
+commit b79c6aa6a1f1 ("kbuild: remove unnecessary in-subshell execution")
+commit afa974b77128 ("kbuild: add real-prereqs shorthand for $(filter-out FORCE,$^)")
+commit ecbd10d90e94 ("kbuild: simplify rules of data compression with size appending")
+commit 58156ba4468f ("kbuild: skip 'addtree' and 'flags' magic for external module build")
+commit 172caf1993b7 ("kbuild: remove redundant target cleaning on failure")
+commit f3fd4a3f3a38 ("kbuild: remove redundant 'set -e' from filechk_offsets")
+commit a2237fec1e06 ("kbuild: Enable dtc graph_port warning by default")
+commit 70523a3ce5ff ("kbuild: disable dtc simple_bus_reg warnings by default")
+commit e4aca4595005 ("kbuild: de-duplicate fixdep usage")
 
-> When building with only bootz command, without bootm, images pointer
-> inside bootm_info structure is not initialized. And since this structure
-> is stored in stack the generated error is kind of random, but most of
-> the time this will generate: "ramdisk - allocation error"
->=20
-> Signed-off-by: Benjamin ROBIN <dev@benjarobin.fr>
-> ---
->  boot/bootm.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index f6aa32746b7e..f6fddc151809 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -1169,7 +1169,7 @@ void bootm_init(struct bootm_info *bmi)
->  {
->  	memset(bmi, '\0', sizeof(struct bootm_info));
->  	bmi->boot_progress =3D true;
-> -	if (IS_ENABLED(CONFIG_CMD_BOOTM))
-> +	if (IS_ENABLED(CONFIG_CMD_BOOTM) || IS_ENABLED(CONFIG_CMD_BOOTZ))
->  		bmi->images =3D &images;
->  }
+Ilias Apalodimas (24):
+  kbuild: de-duplicate fixdep usage
+  kbuild: disable dtc simple_bus_reg warnings by default
+  kbuild: Enable dtc graph_port warning by default
+  kbuild: remove redundant 'set -e' from filechk_offsets
+  kbuild: remove redundant target cleaning on failure
+  kbuild: skip 'addtree' and 'flags' magic for external module build
+  kbuild: simplify rules of data compression with size appending
+  kbuild: add real-prereqs shorthand for $(filter-out FORCE,$^)
+  kbuild: remove unnecessary in-subshell execution
+  kbuild: move archive command to scripts/Makefile.lib
+  kbuild: let fixdep directly write to .*.cmd files
+  kbuild: remove redundant 'set -e' from sub_cmd_record_mcount
+  kbuild: refactor modversions build rules
+  kbuild: change if_changed_rule for multi-line recipe
+  kbuild: remove trailing semicolon from cmd_* passed to if_changed_rule
+  kbuild: remove redundant 'set -e' from cmd_* defines
+  kbuild: remove redundant quiet_modtag for $(obj-m)
+  kbuild: refactor quiet_modtag
+  kbuild: generate modules.order only when CONFIG_MODULES=y
+  kbuild: hardcode genksyms path and remove GENKSYMS variable
+  kbuild: strip whitespace in cmd_record_mcount findstring
+  kbuild: remove unused archmrproper
+  kbuild: make -r/-R effective in top Makefile for old Make versions
+  kbuild: add -Werror=strict-prototypes flag unconditionally
 
-Good catch. This should also get a:
-Fixes: c2211ff65136 ("bootm: Add more fields to bootm_info")
+ Makefile               | 65 +++++++++++++++----------------
+ scripts/Kbuild.include | 22 ++++++-----
+ scripts/Makefile.build | 87 +++++++++++++++++++-----------------------
+ scripts/Makefile.host  |  6 ++-
+ scripts/Makefile.lib   | 55 ++++++++++++--------------
+ 5 files changed, 113 insertions(+), 122 deletions(-)
 
-And after reading the code and grepping around more, I think we should
-be doing the assignment unconditionally in the function. It's what we
-practically do today as only colibri_vf disables CMD_BOOTM but then also
-enables any other OS boot command.
+--
+2.49.0
 
---=20
-Tom
-
---Qp0V/UtNTUg0Lsif
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgrnTgACgkQFHw5/5Y0
-tyyp6wv/caajuJHz0zqFf8Gb5RKm2O2LJeeBwvI91gslhxPV1LLesddq9n4vIz6c
-XFLldzKpkv2V8j1jEDspmtY2A3epZNYvYB/61zjtSODdqF5IhwFAEbYTbsVHhyPk
-qxdPuRr7dqbit9qnoAzV1oehbbNuB5q0u25WfAxj856P3ZXHZUEEwor3qB5JsGIC
-jru+Qh4lhqPUXZNWhYyJfqKSleLg0rRUngCTuBTeBQ84VJQYyE4HBbFNQffpQZlB
-4YXzyWtO2dRjKIZZIQDdg+l3ojkBVoFAohZHuTxlwy4Wdvz0wWxQL9BVPa/rZ1wk
-za15HlU6Z9Lrj9wMnKg1hLhsIt82IIZOD1DSAxstRc0x+h0zJX/paX1B80FdcxsA
-Nb5OelSuwQxFyuNZVhMQl2X3cKjr2AlzW2jtzEjHWvaMHyINYNZSffiGKTs62IeM
-tv1xelyiSSnCUjCF3f1+vny1YFh2OP9foO3+Irg/E4+gycAxDdBU1leoljaWOZIE
-H/BPvVkd
-=wDp1
------END PGP SIGNATURE-----
-
---Qp0V/UtNTUg0Lsif--
