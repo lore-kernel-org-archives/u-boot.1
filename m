@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67ED9C3DA6D
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 12:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94AA2C3DA6D
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 12:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7FAB82C30;
+	by phobos.denx.de (Postfix) with ESMTP id F2D2482C7F;
 	Tue, 20 May 2025 14:28:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BXXmY3n7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hy8KvQjF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E72C82AB9; Tue, 20 May 2025 09:58:20 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id 7C8A782AB9; Tue, 20 May 2025 09:58:30 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2141B82A4B
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 09:58:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4165B82A4B
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 09:58:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-afc857702d1so4800281a12.3
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 00:58:18 -0700 (PDT)
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-af51596da56so3902755a12.0
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 00:58:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747727896; x=1748332696; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1747727906; x=1748332706; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zUWqZEoeCOPi4kA8iZW60G/CH5kQ9HtU0Ua7T5EZUM0=;
- b=BXXmY3n7gsVJa//i3n1/zxxqLc8RMtbqlVu8yhJiqaEgk8D/VKVnAGP4IHF27dLb8G
- fis6JdqWhM0mFqVQJGuEraMw1fuJ8f9WWtpdnv8CmLLbMmRRzyO9dIfdEepPlTROwMW0
- yz3e28++SRiqmnaJQDAhC+7ZMI79scCCLtAHUi6Aweta1CijCGcP8MeazSVhP6l8FRta
- h/OvQdD//j/TgA2NUuthPMcaw5UntOB2mYnh3LigCLXghwOCfZoTWEVmZ1RMMDp+WKly
- agsIh0cLlcMPfMEgSvLPSCtRUq6LBhlGn/744In0sTGAX07x9QTDsd/lG0IfOE7x+idj
- 5KVA==
+ bh=x6dxhKAmGIeE0lS+/61VMNrPTJkQvaeMR2CtTw3YPtQ=;
+ b=hy8KvQjF82ZUVSN9ZncEqLfqYLs26lGOXpOqk6A47VxPxQCANeRMfpQZqbAbPhHt32
+ MOmOQ4Z0x/alYbkp3l2wKQddOIwM8TV6eflKfyatA+0z/nvnx60IlyGejW5nV+WmJg8N
+ 6xPqmC0d8mIL8JvDmNYXwF2bD+OkywBJvpCHKvU8gPopjrlpp40QH+DZWc3M7wVV7tx+
+ wEY7Etzg3XhWCmsbQqp4Gl8V9NgmFhR8+FqYRtJuJ5SFkiv9kDFtoab4HoKn3qy9HXBX
+ P4Bw1TvLYEc1D39T2FzUXfbDWaNB9KCF/GId9Poj0EP0ohja8XsqZ8UMX8LwwYZSBRI7
+ VTDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747727896; x=1748332696;
+ d=1e100.net; s=20230601; t=1747727906; x=1748332706;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zUWqZEoeCOPi4kA8iZW60G/CH5kQ9HtU0Ua7T5EZUM0=;
- b=IwGInHzqKSs/zFPIIwtUY+sZzytBgDh2wLkb/qIhLVcMlpGoT66fW5+AXSRjdpVIl2
- lTChtHKWv9WR4W+LiKGlJFiAvayVFs67+/gQuQOeg8ik7hj+g/iB5Q+MGz2NYceYYZvL
- xqZIpJzI5E6u2dKCw8nQOPkyoUxGKqAAvv9nTptjoGTFsTdwz8OI/vNXrhNmDwHMULcQ
- ES2/4+U7VgsRM55SF98fb+sHhOUWn332F1PId9AmjiNnmLcY9+hfOEE+0NEPC71spSU/
- opNDhj7lq8GacbTlnQKj0mFO0pLt0sWiEdNNv+k4M3vgBa+WZ01dTUbS5uEYKGiTeAI3
- P0hg==
-X-Gm-Message-State: AOJu0YyY42FQsii80kYqcEYrAaq/LXm11DEyMHs092Sdj1TgzErMxwWU
- wRtxcjvCy7uP8xfPRZ0/tNebucb/rsUj6veYbMPXgajZnKlVt5WEtjc36wc6ChBe
-X-Gm-Gg: ASbGnct4ZhBnsL8ZAli8iO/ul7po0hfkXYwLtP/trx8HmixwOhcXo4IJI9jygq0ItvV
- 5G7d4Q5ggPtdeBIfkrUrSRCQ/svP0qqYqQHcCq35oyHSt/FRJRMx0QeHf4pzl43oPW0UCX0aC73
- 7SWVgRxIV0A5EdsQDyU0rxm3by6o+/mCUAsa2iLn/N+YAbD6ICvGKs1qpeAhPa3Nkh9M4rmEx/S
- 2S+DY3YtXRDXwpN7uMb3tyTJddzasVA3S/1dY3An10xckV/YmRGcpwAf7sCBW8p2IkAbrAVE8YX
- IY45tPGE0i32YfPLUSaLD9N1fFeD6iya+Z2UWI2k6F2fCqqpxtiZy6q0L7FYwgtE2n7P8fSWmhS
- a0GyMMCP46R9fAlmA6WZ3xcW27MOScb18JedFgI8EuNv7HIU=
-X-Google-Smtp-Source: AGHT+IG1/QNcluBBP8K6+kGoGRWT8YvJ6lbBL2jybsVylMeHYFC0c2ABCm55hx9niJXTCKm+EHqhvQ==
-X-Received: by 2002:a17:903:320b:b0:21f:35fd:1b7b with SMTP id
- d9443c01a7336-231d45bfa9amr212178425ad.50.1747727896322; 
- Tue, 20 May 2025 00:58:16 -0700 (PDT)
+ bh=x6dxhKAmGIeE0lS+/61VMNrPTJkQvaeMR2CtTw3YPtQ=;
+ b=eYsppMglUu6X0hF/fa7h3lB0IxKScMbOCryBLow7IJ/OKAvzZU74d6Gowmtg5DTy9L
+ CISJtV6rlrJPFSfZG5Gxh6G8lQTuYs9wzO1cqzyyVBduvR613VvHorrVViJEkPylS/gm
+ lLIqI+WOCGFmGGhDUmmLvxQHgvyeFLXon66LLE3JzYe1Cy8gZkQTdUkaf8Qebzmvv8Wo
+ 99wa23CpHrVFUUZ22w2OB4bBOFMqA9zi5RAcet4ZS9IM43RECrPcXhBZrr52bDX7Fc9s
+ NHzRNvTTW2rJKDmfCd6nk0KyBgCgkHwkUcc24RF7OEmsD4KJcIa2q7pSHThfFyx9V7Gl
+ VKPA==
+X-Gm-Message-State: AOJu0Yz9Kcq90pcNGSAHyyFySjknpZ+AcBhDWTo2ZPAgH29aGL6m/Hl+
+ fy01ufGGg4gK3cQBWxxr5OHrZyYPPhwJTaqPIOhGB0wMK0TPvh3ZQf8Yz+Pgd8+2
+X-Gm-Gg: ASbGncvEohS0l/ggfnDbB9nEImdAT9Zx4yWUBQ/QjIoAGTwH7hzZi+HNZT08GRy6SSp
+ QQtyNCDpSFeYLmt1MvPBsIlWbRGdt5ZDgM1Z1G3OQkzdQvLlyZQynqcs1UyCPTDqwUgjSIzRw4l
+ UVDma/ml1a/eKKUAOdsA54emK9aekoHUyHzLhtNfQsc3Fuf/MmTgONAHOdaNi7eSFcHrdcgTaO4
+ PUWJWYYtgETFEYBNCW2iiqsfNw6MIYFtJ/RZeAy+gK/onVQMrVSNLcVUsB5wjF4mAjsKDZTZ69B
+ i4ebDt1jVT7kvGo9R0O5N949/SxaK6Xf9pLYd7X19fZwA8nMEVSVGgdMuG17jn7BEMWKXJs+/GX
+ 4FglLdFd1Yl5Yh1q172y24tc8QVq0V69fU8CSv9o2744WBqc=
+X-Google-Smtp-Source: AGHT+IH++l9IZerhX1lpAyppUp4HJI8qX+hy+xZeX2pWCI7Avv5OIIXyWW30Um4XppQ7yIX/qot5SA==
+X-Received: by 2002:a17:903:25c7:b0:231:e331:b7ca with SMTP id
+ d9443c01a7336-231e331bc48mr127477895ad.3.1747727906468; 
+ Tue, 20 May 2025 00:58:26 -0700 (PDT)
 Received: from noble-leuven.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-231d4eba49esm71544795ad.163.2025.05.20.00.58.14
+ d9443c01a7336-231d4eba49esm71544795ad.163.2025.05.20.00.58.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 00:58:16 -0700 (PDT)
+ Tue, 20 May 2025 00:58:26 -0700 (PDT)
 From: Aristo Chen <jj251510319013@gmail.com>
 X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, carlos.lopezr4096@gmail.com,
  aristo.chen@canonical.com, quentin.schulz@cherry.de, ada@thorsis.com
-Subject: [PATCH v2 1/4] tools: mkimage: propagate error codes from
- fit_handle_file()
-Date: Tue, 20 May 2025 07:50:03 +0000
-Message-ID: <20250520075735.132308-3-aristo.chen@canonical.com>
+Subject: [PATCH v2 2/4] tools: mkimage: validate image references in FIT
+ configurations
+Date: Tue, 20 May 2025 07:50:04 +0000
+Message-ID: <20250520075735.132308-4-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250505100852.9364-1-aristo.chen@canonical.com>
 References: <20250505100852.9364-1-aristo.chen@canonical.com>
@@ -102,41 +102,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The fit_handle_file() function previously returned a hardcoded -1 on
-error. This change updates the logic to return the actual error code
-stored in `ret`, allowing for error propagation.
+When parsing a FIT image source (ITS), mkimage does not currently check
+whether the image names referenced in the /configurations section (e.g.
+"kernel", "fdt", "ramdisk", "loadables") actually exist in the /images
+node.
 
-This improves debuggability and enables downstream callers to
-distinguish different failure causes, such as FDT_ERR_NOTFOUND or
-other errors.
+This patch introduces a validation step during FIT import that iterates
+over each configuration and verifies that all referenced image names are
+defined under /images. If a missing image is detected, an appropriate
+error is reported and mkimage exits with FDT_ERR_NOTFOUND.
+
+This ensures that configuration integrity is validated at build time.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- tools/fit_image.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/fit_image.c | 38 ++++++++++++++++++++++++++++++++++++++
+ tools/mkimage.c   |  7 ++++++-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
 
 diff --git a/tools/fit_image.c b/tools/fit_image.c
-index caed8d5f901..3d2fbad3853 100644
+index 3d2fbad3853..bf9a6fc369a 100644
 --- a/tools/fit_image.c
 +++ b/tools/fit_image.c
-@@ -750,7 +750,7 @@ static int fit_handle_file(struct image_tool_params *params)
- 	char bakfile[MKIMAGE_MAX_TMPFILE_LEN + 4] = {0};
- 	char cmd[MKIMAGE_MAX_DTC_CMDLINE_LEN];
- 	size_t size_inc;
--	int ret;
-+	int ret = EXIT_FAILURE;
+@@ -627,6 +627,7 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
+ 	struct stat sbuf;
+ 	int ret;
+ 	int images;
++	int confs;
+ 	int node;
  
- 	/* Flattened Image Tree (FIT) format  handling */
- 	debug ("FIT format handling\n");
-@@ -854,7 +854,7 @@ static int fit_handle_file(struct image_tool_params *params)
- err_system:
- 	unlink(tmpfile);
- 	unlink(bakfile);
--	return -1;
-+	return ret;
- }
+ 	fd = mmap_fdt(params->cmdname, fname, 0, &old_fdt, &sbuf, false, false);
+@@ -695,6 +696,43 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
+ 		}
+ 	}
  
- /**
++	confs = fdt_path_offset(fdt, FIT_CONFS_PATH);
++	static const char * const props[] = { FIT_KERNEL_PROP,
++					      FIT_RAMDISK_PROP,
++					      FIT_FDT_PROP,
++					      FIT_LOADABLE_PROP,
++					      FIT_FPGA_PROP,
++					      FIT_FIRMWARE_PROP,
++					      FIT_SCRIPT_PROP};
++
++	fdt_for_each_subnode(node, fdt, confs) {
++		const char *conf_name = fdt_get_name(fdt, node, NULL);
++
++		for (int i = 0; i < ARRAY_SIZE(props); i++) {
++			int count = fdt_stringlist_count(fdt, node, props[i]);
++
++			if (count < 0)
++				continue;
++
++			for (int j = 0; j < count; j++) {
++				const char *img_name =
++					fdt_stringlist_get(fdt, node, props[i], j, NULL);
++				if (!img_name)
++					continue;
++
++				int img = fdt_subnode_offset(fdt, images, img_name);
++
++				if (img < 0) {
++					fprintf(stderr,
++						"Error: configuration '%s' references undefined image '%s' in property '%s'\n",
++						conf_name, img_name, props[i]);
++					ret = FDT_ERR_NOTFOUND;
++					goto err_munmap;
++				}
++			}
++		}
++	}
++
+ 	munmap(old_fdt, sbuf.st_size);
+ 
+ 	/* Close the old fd so we can re-use it. */
+diff --git a/tools/mkimage.c b/tools/mkimage.c
+index 2954626a283..361711c53b2 100644
+--- a/tools/mkimage.c
++++ b/tools/mkimage.c
+@@ -519,8 +519,13 @@ int main(int argc, char **argv)
+ 			 */
+ 			retval = tparams->fflag_handle(&params);
+ 
+-		if (retval != EXIT_SUCCESS)
++		if (retval != EXIT_SUCCESS) {
++			if (retval == FDT_ERR_NOTFOUND) {
++				// Already printed error, exit cleanly
++				exit(EXIT_FAILURE);
++			}
+ 			usage("Bad parameters for FIT image type");
++		}
+ 	}
+ 
+ 	if (params.lflag || params.fflag) {
 -- 
 2.43.0
 
