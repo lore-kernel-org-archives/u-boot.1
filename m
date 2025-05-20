@@ -4,50 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 934E8C3DA6D
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 18:23:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 682BFC3DA6D
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 20:04:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBDBA82CB8;
-	Tue, 20 May 2025 20:23:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=novatechautomation.com
+	by phobos.denx.de (Postfix) with ESMTP id 9264F82C87;
+	Tue, 20 May 2025 22:03:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=novatechautomation.com header.i=@novatechautomation.com header.b="cXyPmwOK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FfouAXDP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F033482CD2; Tue, 20 May 2025 20:23:22 +0200 (CEST)
-Received: from gw2.cammew.com (gw2.cammew.com [64.182.209.149])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D328782B7C; Tue, 20 May 2025 22:03:57 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD10F82B7C
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 20:23:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=novatechautomation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=eric.schikschneit@novatechautomation.com
-Received: from eric-Desktop.novatech-llc.local (unknown [38.62.160.128])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by gw2.cammew.com (Postfix) with ESMTPSA id F31B2EDCD8;
- Tue, 20 May 2025 14:23:17 -0400 (EDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 gw2.cammew.com F31B2EDCD8
+ by phobos.denx.de (Postfix) with ESMTPS id C83B382B7C
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 22:03:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-442f4a3a4d6so39244985e9.0
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 13:03:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=novatechautomation.com; s=relay; t=1747765398;
- bh=AX5O+VRaTfH8BxAZ1TPbuKpP5hitLTzWeubUgwyV8lk=;
- h=From:To:Cc:Subject:Date:From;
- b=cXyPmwOKjNLKHhesL9g+iM2vkJL2rAG9/H9yfZhsTJgVIG9ghTDd9NUgPwABLMN5Y
- nOExnkmiFj56oidTRT9kbZ8zin2dumVvobmTL382xjpWd10gdFQDk1Y50CfdOTdI01
- YpLPmO0fY3VpN1P285WgoGEXone9Hu10rA3LySnA=
-From: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-To: u-boot@lists.denx.de
-Cc: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Subject: [PATCH] dtc: Add Kconfig option to pad device tree blob
-Date: Tue, 20 May 2025 13:23:05 -0500
-Message-Id: <20250520182305.3819776-1-eric.schikschneit@novatechautomation.com>
-X-Mailer: git-send-email 2.34.1
+ d=linaro.org; s=google; t=1747771435; x=1748376235; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FvaAvhL8wynaBF2PKaDUQwfVFkh8mB4LVx6SFjPKSM4=;
+ b=FfouAXDP26tiOCO1dtUlzJLH+1mfwh5XI3/Tb6jYtyb94sL3cPSGhSQTwIZbZz0ehb
+ KnZ/XdjLHD9s64x0UOE1n5sMQMT2FHxrTHArDOVFR427tCAsTsVsyNr/SI07oN/dOQi1
+ tsEBVFDE/egylizkkYQlEI0oLTkqz1jgpEGeBUXgOs7kcZsAyaGmYksTm0ICqCX2rm+Y
+ ZlK94yjDRa+uGru5Ad/H6xixJ3gUpzF+mIFzZhTMZhgvktX5dYzUeJAYm1zsOV9T9sqG
+ RK6J1cZnbq90zQEqwoMve49EnZzT5hVYm6L2Enbf7prmVod3Zmth1G0dsWhnnjAsMqZY
+ QxLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747771435; x=1748376235;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FvaAvhL8wynaBF2PKaDUQwfVFkh8mB4LVx6SFjPKSM4=;
+ b=v0kmAkHr3EKZVDmC1/9fOtfqSMa7ln82GYOgi31UDNvHqUhW/I8evR6DdKHuL5eTO8
+ ZS44qrOBE+3Z6A1rV+MkTIIN6bcpLN9KYmv89CvLA28piKp0OO+t4Qwgwb+CbBWkQqGm
+ UcxgPWGXqse/yhy9sLlClYMS0rfKeL3AaEdyZQwTOejVSlE400ps5RaPqNatzzX0CpSa
+ efapH++baVQZHka5Y8P40iMYdFRX8bxqpK14GnmBwSaaivCrM9uooUyLtrGfgHaIPXTG
+ 7Ur7DPx6Ks3gNNsVxhTHhapR+ZXjbqFYzoKcClkU8U/wwCeIfXBiXrLY6qFpiJr6d1Qv
+ RQWQ==
+X-Gm-Message-State: AOJu0YzTstgzgwqXMLSZ8GX1G/UVmlVhEGjAbsCmfMPSeehwV0XTLziu
+ sDLPMhyWE0/Vj3k6/4ReCmyTUkVUG1D/47sfwpAJD/1MB6uoV4ikJTilBu1SF4QPlrk=
+X-Gm-Gg: ASbGnctlt079jZbh1LXNTWodVvPi4I0IeUnUTxNe/9zdCBGCT1Sr2NMAXiiuIBZaiia
+ i+W8CPAAM2J5i0jKzYl8JeEY8ffU+zAag1Ih+bkK+fnnRKQRdt/sIPvcvrvrcSYfANib58PwVhZ
+ Q95P/bvVetatb1PE0nWDClkvuisng4dnBkd2rK2hyHQ07KoQwIfJTVy8KUQaLW+uhmdfCvWqEI/
+ 8pTnB9kN6yhL9Eq0zeQVGh/nByT8iVXTKHPoaQ6h/oIRdNkZSbUEyeHDmHsh3nJEtyzqDLLH799
+ qzOOL4GoIaFgTRnCjhBlYxrgEG58rMev+UXtKrPUQRRh+4NaycwmjN1mSKHinyyY1EQxOcxLYCW
+ eO6iFCi5OGx98dNs4gy63+XgrHfc6QNk=
+X-Google-Smtp-Source: AGHT+IFrTfKv0NG3AzJFxrX/OSblJkZHgLaM+uJDABxRBiPUgdZ0Itc2U7JfoqOKCzJrlz+vOeIaBQ==
+X-Received: by 2002:a05:600c:3d07:b0:442:f904:1305 with SMTP id
+ 5b1f17b1804b1-442fd93d54emr165817785e9.6.1747771435232; 
+ Tue, 20 May 2025 13:03:55 -0700 (PDT)
+Received: from ?IPV6:2001:818:dd7b:1900:4a4e:99d7:b164:548a?
+ ([2001:818:dd7b:1900:4a4e:99d7:b164:548a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-447f7bae3b9sm41279495e9.33.2025.05.20.13.03.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 May 2025 13:03:54 -0700 (PDT)
+Message-ID: <477a8226-83a1-49b6-abd9-12fd9bc49e0b@linaro.org>
+Date: Tue, 20 May 2025 21:03:51 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] iommu: qcom-smmu: Introduce sc7180 compatible string
+To: gchan9527@gmail.com, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Vitalii Skorkin <nikroks@mainlining.org>
+References: <20250520-sc7180-android-boot-v1-0-3075a84ea094@gmail.com>
+ <20250520-sc7180-android-boot-v1-2-3075a84ea094@gmail.com>
+Content-Language: en-US
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250520-sc7180-android-boot-v1-2-3075a84ea094@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,164 +106,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This will allow arch(s) that use device tree blobs to pad the end of the
-device tree so they can be modified by board files at run time. This will
-help prevent errors such as FDT_ERR_NOSPACE from occuring.
 
-Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
----
- arch/Kconfig                   | 7 +++++++
- arch/arc/dts/Makefile          | 2 +-
- arch/m68k/dts/Makefile         | 2 +-
- arch/microblaze/dts/Makefile   | 2 +-
- arch/nios2/dts/Makefile        | 2 +-
- arch/riscv/dts/Makefile        | 2 +-
- arch/sandbox/dts/Makefile      | 2 +-
- arch/x86/dts/Makefile          | 2 +-
- doc/board/broadcom/bcm7xxx.rst | 6 ++----
- doc/develop/makefiles.rst      | 5 ++++-
- scripts/Makefile.dts           | 4 ++++
- 11 files changed, 24 insertions(+), 12 deletions(-)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index ea33d07c086..a683af3d591 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -63,6 +63,13 @@ config SYS_CACHELINE_SIZE
- 	default 64 if RISCV
- 	default 32 if MIPS
- 
-+config SYS_DTC_PAD_BYTES
-+	int "Size in bytes to pad device tree blob"
-+	default 4096 if ARC || ARM || M68K || MICROBLAZE || NIOS2 \
-+		|| RISCV || SANDBOX || X86
-+	default 32768 if X86 && EFI_APP
-+	default 0
-+
- config LINKER_LIST_ALIGN
- 	int
- 	default 32 if SANDBOX
-diff --git a/arch/arc/dts/Makefile b/arch/arc/dts/Makefile
-index fe6ad7b849a..87c627c01c8 100644
---- a/arch/arc/dts/Makefile
-+++ b/arch/arc/dts/Makefile
-@@ -11,4 +11,4 @@ dtb-$(CONFIG_TARGET_IOT_DEVKIT) +=  iot_devkit.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/m68k/dts/Makefile b/arch/m68k/dts/Makefile
-index 8b354b9c570..0f06109aa06 100644
---- a/arch/m68k/dts/Makefile
-+++ b/arch/m68k/dts/Makefile
-@@ -21,4 +21,4 @@ dtb-$(CONFIG_TARGET_STMARK2) += stmark2.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makefile
-index 9be902d3bb1..0f3a7472a67 100644
---- a/arch/microblaze/dts/Makefile
-+++ b/arch/microblaze/dts/Makefile
-@@ -5,4 +5,4 @@ dtb-y += $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/nios2/dts/Makefile b/arch/nios2/dts/Makefile
-index d77db9762a1..75951164978 100644
---- a/arch/nios2/dts/Makefile
-+++ b/arch/nios2/dts/Makefile
-@@ -5,4 +5,4 @@ dtb-y += $(CONFIG_DEFAULT_DEVICE_TREE:"%"=%).dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index cf1872f3fdc..2b10c2d6c01 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -19,4 +19,4 @@ dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += ast2700-ibex.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/sandbox/dts/Makefile b/arch/sandbox/dts/Makefile
-index 1c9fb4a4566..0d7b0b80e21 100644
---- a/arch/sandbox/dts/Makefile
-+++ b/arch/sandbox/dts/Makefile
-@@ -11,4 +11,4 @@ dtb-$(CONFIG_CMD_EXTENSION) += overlay0.dtbo overlay1.dtbo
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/x86/dts/Makefile b/arch/x86/dts/Makefile
-index 9a46726e026..725991e2629 100644
---- a/arch/x86/dts/Makefile
-+++ b/arch/x86/dts/Makefile
-@@ -24,4 +24,4 @@ dtb-y += bayleybay.dtb \
- 
- include $(srctree)/scripts/Makefile.dts
- 
--DTC_FLAGS += -R 4 -p $(if $(CONFIG_EFI_APP),0x8000,0x1000)
-+DTC_FLAGS += -R 4
-diff --git a/doc/board/broadcom/bcm7xxx.rst b/doc/board/broadcom/bcm7xxx.rst
-index f1994d9f975..f559d5c290a 100644
---- a/doc/board/broadcom/bcm7xxx.rst
-+++ b/doc/board/broadcom/bcm7xxx.rst
-@@ -149,10 +149,8 @@ and with a generic ARMv7 root file system.
- 				 * to the Linux source tree as a .dts file.
- 				 *
- 				 * To support modifications to the device tree
--				 * in-place in U-Boot, add to Linux's
--				 * arch/arm/boot/dts/Makefile:
--				 *
--				 * DTC_FLAGS ?= -p 4096
-+				 * in-place in U-Boot, set the config variable
-+				 * CONFIG_SYS_DTC_PAD_BYTES as needed.
- 				 *
- 				 * This will leave some padding in the DTB and
- 				 * thus reserve room for node additions.
-diff --git a/doc/develop/makefiles.rst b/doc/develop/makefiles.rst
-index 37a7deaca92..593556f4dd5 100644
---- a/doc/develop/makefiles.rst
-+++ b/doc/develop/makefiles.rst
-@@ -1430,10 +1430,13 @@ When kbuild executes, the following steps are followed (roughly):
- 	A central rule exists to create `$(obj)/%.dtb` from `$(src)/%.dts`;
- 	architecture Makefiles do no need to explicitly write out that rule.
- 
-+        The device tree can now be padded by the specified number of bytes
-+        by setting CONFIG_SYS_DTC_PAD_BYTES instead of explicitly setting
-+        DTC_FLAGS with the -p option.
-+
- 	Example::
- 
- 		targets += $(dtb-y)
--		DTC_FLAGS ?= -p 1024
- 
- 7.9 Preprocessing linker scripts
- --------------------------------
-diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-index 685e3371bc6..3871a4ad412 100644
---- a/scripts/Makefile.dts
-+++ b/scripts/Makefile.dts
-@@ -16,6 +16,10 @@ dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
- 
- endif
- 
-+ifneq ($(CONFIG_SYS_DTC_PAD_BYTES),0)
-+DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-+
- targets += $(dtb-y)
- 
- PHONY += dtbs
+On 5/20/25 15:25, George Chan via B4 Relay wrote:
+> From: George Chan <gchan9527@gmail.com>
+> 
+> Add basic compatible string for sc7180 family soc.
+> 
+> Signed-off-by: Vitalii Skorkin <nikroks@mainlining.org>
+> Co-developed-by: George Chan <gchan9527@gmail.com>
+> Signed-off-by: George Chan <gchan9527@gmail.com>
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+> ---
+>   drivers/iommu/qcom-hyp-smmu.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/iommu/qcom-hyp-smmu.c b/drivers/iommu/qcom-hyp-smmu.c
+> index c1b95bc8b8c..2a356613a26 100644
+> --- a/drivers/iommu/qcom-hyp-smmu.c
+> +++ b/drivers/iommu/qcom-hyp-smmu.c
+> @@ -388,6 +388,7 @@ static struct iommu_ops qcom_smmu_ops = {
+>   
+>   static const struct udevice_id qcom_smmu500_ids[] = {
+>   	{ .compatible = "qcom,sdm845-smmu-500" },
+> +	{ .compatible = "qcom,sc7180-smmu-500" },
+>   	{ .compatible = "qcom,sc7280-smmu-500" },
+>   	{ .compatible = "qcom,smmu-500", },
+>   	{ /* sentinel */ }
+> 
+
 -- 
-2.34.1
+Casey (she/they)
 
