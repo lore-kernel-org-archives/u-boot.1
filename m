@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE95C3ABDA
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:24:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64430C3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:25:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4006F82CF5;
-	Tue, 20 May 2025 07:22:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A2DE82C10;
+	Tue, 20 May 2025 07:22:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GafPnXC9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fvdxna39";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B5E182CF4; Tue, 20 May 2025 07:22:45 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id E15AF82BF3; Tue, 20 May 2025 07:22:47 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FFB282BD9
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F297F82BD9
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43ea40a6e98so53957495e9.1
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:43 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43cf06eabdaso50406255e9.2
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718563; x=1748323363; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718565; x=1748323365; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P3VccfpBjmUTArAx3UopilQt/lVGZQhEuWcUfxFYEHI=;
- b=GafPnXC9td8Pq3IY+xYzper6mxuuzNCidsLVbM6EtvmcM84nTjGEpq8GFLwlEu3l30
- trFT40UZBDLYhjzXHzJhYGU/1MCweMSHWUysR0/SdWDxEQTUGHJ4x1IE/ACBTDjsRxHf
- Xwf66i2B7mxRnoDH1/AedIyjpYryRZUTqDNvtCgZkp6gkQpg4MHD/LkB7uxdxoW+0teK
- /DhdzwS/CI1UngWFJ8E3coWF6sDaxfMioXl/n2DEZlPMzZLtFIDf4GltK539dXfuXpFC
- +R5ajyqRwUv3K1lFDhDEc3OL6ECoOatTJgKaej5EwupnR4gSxvbrJ1BEd+yx5DoYIN0y
- WDdw==
+ bh=OG92kuwzpTCKHLc7zmNK40MbdlcZyxZZSL53UbY0+N8=;
+ b=Fvdxna39qpXPhAxXFHEWVS/Xev+2RXLcs/NEB3vjQTjJXg21Ezi4TkfVqkwooDyYki
+ WaE4700F3H+ZgmyCyAnc7xLgHB38Q9eahEmOir1kwo8Ss9o22ztqVec2o21vNhRotGlK
+ bfb02StPiIYRmpIEASueBFGPiEm+VcQfWKaR49mSo/yU1K+ioMXQVa4qntyhzPX76RfS
+ 7Shep8KuVZD89Qa1UukS8XZLKti6IgK1z5D5LOwAJrY9Le5Dr5BCcmjgJZOam7lYzSK6
+ crSunB36Qr9aKcSYqtaZaO/TWWgynwbUAc+dwklfks2j9CDZK1R3LGkbimT9jLr67eSQ
+ Jkmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718563; x=1748323363;
+ d=1e100.net; s=20230601; t=1747718565; x=1748323365;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P3VccfpBjmUTArAx3UopilQt/lVGZQhEuWcUfxFYEHI=;
- b=scWWsL02V+qtk/q1N/FnnidJ586XlCWVFKSS0cDK2BorauuqfhyfHyn810GA5/UJ7H
- n8TLA67XynTErsjFWsBvxn2NfIVTf4Md8ZloOdDr+l6dNJaQ+nNmt83WPfz4H2uOza0E
- YPEzVkI5O9IY1E2jlkFw+4Lq/SyokeB72TJkSFLMgVfUfSpUVp1wb5eOjSGKSL+AQaBi
- MSEdgYSDIT52HPnFW6628mV13A+ETqUmYKl/F9ZSj3HQRVBdGLkw/1CN/+JgbU4xrrBN
- W/s9/FmUWse0eiwyqrC43CPZysmN9i+FmOZGruMvnAR9+J8VYp/X2Yfrhn/U1aGhV+QQ
- 3pRQ==
+ bh=OG92kuwzpTCKHLc7zmNK40MbdlcZyxZZSL53UbY0+N8=;
+ b=UPFNaE2FxMENWYoqxbMZSTjnfDIAtg0V9pfFLFSkwmzMrSIbyorLWYLy+eTv25pAtC
+ 4O1svNbH9Osat5xFedkXmCMAFEgTJOKU8Ooi2EPC/JtJWxoflZfhvknZGmSQjork0M3a
+ eTDWRE82Gfqo0f0yHj6uCv00o8rRjGfsNkCb/zoFmhMkfUCO1qdc+ji1zwhlWEiGN53o
+ irv7xw2jELRplMA4dpPc5tJiNpy3rGm7kFu27MEL6Q1jRYsqrjxFCbBvuItCNo30a2s+
+ Xk18ffT/8O/91zVZWpkbJHhiiL/Njk411Kq2Rf68ZUNKMG2BTQrOWxA5X0RMOssh50lk
+ Eysw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtfwjnsjBAoRyB/Ur3829+ry5yTyUums9pczaz+eTucF1RXaU41OiWXxI1R9j9a84W00CI76c=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKsseWhxGP8SDG1LD0hvjlqIP4DK5DOr8zGvo9xppyS9xjCiAJ
- /QiEqc8KQs3UXn5HsWndQMkEorYnJ9GwlYRSxpG8j13rZbvICCjanrQt0VXZPy11Z9k=
-X-Gm-Gg: ASbGncsBSNW6Q3T5efpJg/UfI2u1ox7y3jsEx4ljTog3sAZ/p/OMfICbMXw1O27Bd4T
- D9u9XN+gJfbWqezzuNLKMs4ZV5nfSgUbHpD7202qI3q2p/T3ES4pds/xu0gBMHx/xGHjbYvaS0z
- Za1gyJ8BeOIGe1ThY6CQy9FJ4WWbqD3OBBIpWjdGn6macqfnfBWUkk5ou3H4xRavcbYxLjc2RFW
- 6cUSGU++qppH7D0lsSz+m3iNvrMz8WhRle6Tyep4SqRsYF/tmy4aGOS9ageZ5t3o6d460rhFuWL
- pBF24EJzuMSZvQh50lL6lghkj3KUqyA97FCC4gE1r4XH9kpxTSCBkVOlpusfY8KJKV9sUvrZ2vA
- =
-X-Google-Smtp-Source: AGHT+IFqq4/VQsPukpsfsZbK2FHa8rnuOUKWBCFnmFj1BHQ2yu+EpbHmjssizcMgmyGjuUX+ieLHBQ==
-X-Received: by 2002:a05:6000:186c:b0:3a3:6a3f:bc85 with SMTP id
- ffacd0b85a97d-3a36a3fbee8mr6971237f8f.25.1747718563021; 
- Mon, 19 May 2025 22:22:43 -0700 (PDT)
+ AJvYcCUn8qfOwm+PYKUoRKRfnazBXGLaJZrt6bX9sxqtjbW2g/nSkWLwu1YOYGcnBDbRgRrWReLzziE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxlGcb6Y8ZE/KHLFqXslZv+zb6j5Gsx0KWDk5WiBanqOa9eYGVL
+ MRJGr+0ariR6eMoWDn1Li23nLYJP2ib5TnjUer7hxm8jSlH5VLNEN3e3Bcu+KDCwXWE=
+X-Gm-Gg: ASbGncsFFld0cNRhJ1QD0w2v4HjUf/yoZwFSC0FQBqjboE4COvu5cuh5l+e23ZZ0Z8A
+ LMDE81/NcFuFEE7gQFdUa5M4ObX5b8BLCfNWKxQP+Mub8lhc5O57v3cozjedVTsOghOywSXy7lg
+ m4svuY60ktkvI3kFxU0mfURWe/QcHWYSC4F9S6+0Zln2wb9jC2x2qypjufSpW7vArDasXoJ36/7
+ vpi08G9btaa1KfZO93OsCRXHvlTEKJTlQBUiPNPK4l7K4DqZI94JPjk/SKCh+0YsTtUvmM24tFs
+ zZJBp9uje+dP+EWReqBufV07Kjk6hTSuvXCPdF5Q2bqKB9RbrGfIG66m3+JdADIzWofJIyJGQsk
+ xWHbSxNHsrQ==
+X-Google-Smtp-Source: AGHT+IEUDTzkZ4WjNvO4DkNgPijwnM8W1fOiMrieVDDeqM3Xnp3wTNbpWHtcOsfB3qBTobVnxS4fLQ==
+X-Received: by 2002:a05:6000:400f:b0:3a0:b4f1:8bd5 with SMTP id
+ ffacd0b85a97d-3a35fe67aa7mr11415768f8f.18.1747718565459; 
+ Mon, 19 May 2025 22:22:45 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.41
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:42 -0700 (PDT)
+ Mon, 19 May 2025 22:22:45 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Prasad Kummari <prasad.kummari@amd.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: [PATCH 18/24] kbuild: refactor quiet_modtag
-Date: Tue, 20 May 2025 08:21:29 +0300
-Message-ID: <20250520052153.307194-19-ilias.apalodimas@linaro.org>
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Subject: [PATCH 19/24] kbuild: generate modules.order only when
+ CONFIG_MODULES=y
+Date: Tue, 20 May 2025 08:21:30 +0300
+Message-ID: <20250520052153.307194-20-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -107,37 +108,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Backport from kernel
-commit 45c4372d00 ("kbuild: refactor quiet_modtag")
+Backport from kernel although it is unused since it makes diffing easier.
+commit 1d8001ef358 ("kbuild: generate modules.order only when CONFIG_MODULES=y")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Makefile.build | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ scripts/Makefile.build | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index 29446298041f..ed58bcab291e 100644
+index ed58bcab291e..2b2beb01bd3b 100644
 --- a/scripts/Makefile.build
 +++ b/scripts/Makefile.build
-@@ -113,18 +113,13 @@ modkern_cflags =                                          \
- 	$(if $(part-of-module),                           \
- 		$(KBUILD_CFLAGS_MODULE) $(CFLAGS_MODULE), \
- 		$(KBUILD_CFLAGS_KERNEL) $(CFLAGS_KERNEL))
--quiet_modtag := $(empty)   $(empty)
-+quiet_modtag = $(if $(part-of-module),[M],   )
+@@ -82,7 +82,9 @@ ifneq ($(strip $(obj-y) $(obj-m) $(obj-) $(subdir-m) $(lib-target)),)
+ builtin-target := $(obj)/built-in.o
+ endif
  
- $(real-objs-m)        : part-of-module := y
- $(real-objs-m:.o=.i)  : part-of-module := y
- $(real-objs-m:.o=.s)  : part-of-module := y
- $(real-objs-m:.o=.lst): part-of-module := y
++ifdef CONFIG_MODULES
+ modorder-target := $(obj)/modules.order
++endif
  
--$(real-objs-m)        : quiet_modtag := [M]
--$(real-objs-m:.o=.i)  : quiet_modtag := [M]
--$(real-objs-m:.o=.s)  : quiet_modtag := [M]
--$(real-objs-m:.o=.lst): quiet_modtag := [M]
--
- # Default for not multi-part modules
- modname = $(basetarget)
+ # We keep a list of all modules in $(MODVERDIR)
  
 -- 
 2.49.0
