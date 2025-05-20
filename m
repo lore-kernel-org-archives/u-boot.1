@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D61C3DA6D
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 11:38:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2314C3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 11:38:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6CFD82BC8;
-	Tue, 20 May 2025 13:38:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3262C82B00;
+	Tue, 20 May 2025 13:38:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="dqM0J+Nf";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="LhNhyVi9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 794AE82A8D; Tue, 20 May 2025 13:38:03 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 3DC4782BE3; Tue, 20 May 2025 13:38:05 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88EFB82B07
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 13:38:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F2E782B48
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 13:38:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ad564b7aea9so443780866b.1
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 04:38:01 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ad545e74f60so570694166b.2
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 04:38:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747741081; x=1748345881;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1747741082; x=1748345882;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DbD1srGlad1N1uR/N9lobk1TDUA/rR+YpaQMRwmHIl0=;
- b=dqM0J+NfXzJ48Lh3VlTEywpf8R4HE9MSBJcFwhQPh+qiQYt8cokr6VE8bBfLI6k/k/
- rkcAt0NiwdMtMh+3M3UyJjq6WvHfC2/RiPSamdi5sV6pi3vu0xKJkDCltfdBFqMWxW19
- kATkdPg8YEeY7PE+FBD/v5MeWGgyGlH6OM+hpcg85Eqf4/QkqcqeTW8l58eC4SnJA0B0
- gkxbLYpINwRADNVsqlnfAmLddWpX9l3tPGSiYm1+LwsSf4htA5DrhoRfM+4uFnTMILfH
- lUQqilHVE/8NLOuY2SwQBOwiSgcu72Mi15YJsJ1lIJDOF1vni5izlzUaBvhgaq8yjAPs
- +8GQ==
+ :reply-to; bh=xkUdXaFSEYqPu7z6mYs9ahRLQWk7tAZerSzni0btV8A=;
+ b=LhNhyVi9np3BJewzcKi4XPIsfYBLOmOP75dcsaNJ7DUMfFAKhfY6RA6befj91xA5re
+ FGf7Rl8ER1636f1L7mrs91dArVsbA5i493WjlReMkkVU/dmWK8W3GHNNGPs6eOuTPDo8
+ AND6XbWcIMaUx8Zfihpj8KDRjJ7xIVD6tOApOL8gyvcvHyS+6YuCiECB15F+KzVO6zrE
+ nLD57HJErNyySdNWCGLLcU3y4ExzeViFqXYaS4Gcun9YEx2yyMRs6voryKRJYeOUQxKF
+ sRfUZMdQV/iIAFHeX1KX2+qXfXkGqylgsXHv9APu+0xejd1xd8yfxmVJZ9DxLWaD0WBG
+ yyjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747741081; x=1748345881;
+ d=1e100.net; s=20230601; t=1747741082; x=1748345882;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DbD1srGlad1N1uR/N9lobk1TDUA/rR+YpaQMRwmHIl0=;
- b=jMP1ZqbIXbWcaRLSHsdWtrYAdxpbIWahqS54Qhl/Po8f4JuI0yeCrpJ15sYMqsLa0F
- 5yTEY8kMVGmS83qKjaiZhHXDQEU7w28dpI5irivv5Fn/KKtRliKTBPbed/CMtF41gwoI
- 190UX3ckWXBpT8sWswR3GjATZ5s4pYGhmZHC7WmiyDpnZ8CHX4LI73WvaXVftGAROHKk
- q4B+SC4WUuL8FVqlZONg1zCUWfun/0mqxul04d7t5jt9WTiobU96ruvbTvxTAcEGA01z
- LgVuCskUtwYrOKNdp9mo8diP5GbTYoIeerI7Jre7W15CSgt889nSTOYH3ufOa5KZ6VvQ
- hMeg==
-X-Gm-Message-State: AOJu0Yx1//X/94vznKt+2wtTimR1pk4mR8WVCqW/anuooIMpXEglMaXX
- 5vJRgpXBZhBCYA30mx4fWX5FZD0/YIfbz8asZVRebhq/1a1s4d+OGxH7Y+STqgh+k7U=
-X-Gm-Gg: ASbGncu/bEwI94asICmaMrnbwSTyHn8BirYZf5J80K5yaLzoj4bM9MvrXJ3J5gPWK5w
- PHQFiWQwzbic86Qdfcmzz74pl+Rx3y/BmIRXgkcJx+2GSVcNgTVfJ95205wIf3U2S3amXpt7hxh
- qWCs1MfXySyRJ809yfDGYiAUeEWXyciJf3u3hYeN4LjXW3HTPI2xfZl6U3j2M9VJMZcrdzplVCj
- 0vU+kVCUz9fn8SU46PzmyZxqPKRPt72etvhoAsJUsN542M9iLR3R0F8wSDag8E0kRxmAV5BzL5m
- ZwPisQCt6F+10hxiXWTG7GV0dtwXXy5coIWOrMXbw3//W5Fbefzir7YSr0TjGdCy
-X-Google-Smtp-Source: AGHT+IGe1vrpFLfsuTaolnQ29ZHJXITUOYU80AyhzTXQ4xL9dpUMpKJG362fDRA85ivk464pjHe8NA==
-X-Received: by 2002:a17:907:1b27:b0:ad2:e08:e9e2 with SMTP id
- a640c23a62f3a-ad52fc38d7cmr1415146966b.27.1747741080961; 
- Tue, 20 May 2025 04:38:00 -0700 (PDT)
+ bh=xkUdXaFSEYqPu7z6mYs9ahRLQWk7tAZerSzni0btV8A=;
+ b=LN4ruUxbtI4k5d0QCeag+CPNxh4rEG06JXHdUEyxxiXzTuu42tbEOYHGPrbj66BvLj
+ 7Tivmu89qPDGaxzuBh1Vo1eNlSesuBwetH9y/KEBdFVh8WMnDbJkIpAUdwdLgh6/w5Zn
+ YiR/IZpqfVqGtBHshGK5i3hi1MtZsDc7L4zCXLiFcxm3fxenbe/ARY6K4foQPRJilbh2
+ WYw+BDE4PLHOOCqlIiDS3ZFMDz4yQyVG3PYr8eewkR35h9yE9fKPozyBIHjNVZty1KVF
+ yYnyFf+dKILq10ETIYBHdFv8pJzF75a7J41ox6S3CKtArmck9shceZ1QSp/fQlC7iI3s
+ vWVw==
+X-Gm-Message-State: AOJu0YxRXVMOTKmUkkU24/F2XDMWkKO2zk8E/GxSXazyBu07Rbw1pnXS
+ sdthnM8yuIrKTrurTiIeBUeaiIwVWH6ly0r3YoOb0PP6YEcGNMb69p0kJZ+DOiiiHPI=
+X-Gm-Gg: ASbGncupF1tQmjlfirtyCX6fGfVFGXRswP508ZhxyhrpADddjZfuU+tre0NSaX+Gzpl
+ KI0I1KsrHn1atw8Q9FRAuNXI9vhOtAsoKdEk9qtmB63Z1Um5HCysO4eaYK8f81d6S50oyYW7daI
+ UY0c2dF8Tl1JQqnzI0sp3Td3gUVEQFfCEuLfmU1+MjBspl6IHCbOSLwWkU3HXE7YWnpArIl+I4u
+ iW7DespwspEKXEK/fMXRhx27wutVVp2TG1ORoT7jvc4YOFSpIDm7+LC0DadN9hiXgyxVuavlQMX
+ GlBcxQp7nBojFv/6Q7nqf7RkYWOMc+bvl5liYM2oc/RacLmsrVG7PF0HdrdzyDm1
+X-Google-Smtp-Source: AGHT+IEop5l37mABkw6ac6Jn1GHzbmFKMJEkCIo2/AT+BsLl5kIGfg+5srP+iQuMkFgU9/G9ixjCCA==
+X-Received: by 2002:a17:907:fdcb:b0:ad5:52a3:e358 with SMTP id
+ a640c23a62f3a-ad552a3e5b3mr1148498266b.49.1747741081704; 
+ Tue, 20 May 2025 04:38:01 -0700 (PDT)
 Received: from [127.0.1.1] ([185.72.186.3]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d4383bdsm715331166b.122.2025.05.20.04.38.00
+ a640c23a62f3a-ad52d4383bdsm715331166b.122.2025.05.20.04.38.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 04:38:00 -0700 (PDT)
+ Tue, 20 May 2025 04:38:01 -0700 (PDT)
 From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Date: Tue, 20 May 2025 13:36:39 +0200
-Subject: [PATCH v5 1/6] arm: uniphier: Change _debug_uart_putc function to
- inline
+Date: Tue, 20 May 2025 13:36:40 +0200
+Subject: [PATCH v5 2/6] efi: stub: Change _debug_uart_putc function to inline
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250520-silent_console-v5-1-ef9583d93285@thaumatec.com>
+Message-Id: <20250520-silent_console-v5-2-ef9583d93285@thaumatec.com>
 References: <20250520-silent_console-v5-0-ef9583d93285@thaumatec.com>
 In-Reply-To: <20250520-silent_console-v5-0-ef9583d93285@thaumatec.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -100,28 +99,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the definition of _debug_uart_putc to static inline.
-This matches the instructions in include/debug_uart.h and
+Update definition of _debug_uart_putc to static inline.
+This will allow to avoid compilation warnings about unused code
+after introduction of patch changing debug uart functions to
+dummies if CONFIG_DEBUG_UART is not set.
+This also matches the instructions in include/debug_uart.h and
 provides consistency with implementations for other platforms.
 
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 ---
- arch/arm/mach-uniphier/debug-uart/debug-uart.c | 2 +-
+ lib/efi/efi_stub.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-uniphier/debug-uart/debug-uart.c b/arch/arm/mach-uniphier/debug-uart/debug-uart.c
-index 6836eb63bfac..1a3e290aa978 100644
---- a/arch/arm/mach-uniphier/debug-uart/debug-uart.c
-+++ b/arch/arm/mach-uniphier/debug-uart/debug-uart.c
-@@ -16,7 +16,7 @@
- #define UNIPHIER_UART_LSR		0x14
- #define UNIPHIER_UART_LDR		0x24
+diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
+index 40fc29d9adf7..a083c7f1e9b4 100644
+--- a/lib/efi/efi_stub.c
++++ b/lib/efi/efi_stub.c
+@@ -83,7 +83,7 @@ void puts(const char *str)
+ 		putc(*str++);
+ }
  
--static void _debug_uart_putc(int c)
-+static inline void _debug_uart_putc(int c)
+-static void _debug_uart_putc(int ch)
++static inline void _debug_uart_putc(int ch)
  {
- 	void __iomem *base = (void __iomem *)CONFIG_VAL(DEBUG_UART_BASE);
- 
+ 	putc(ch);
+ }
 
 -- 
 2.43.0
