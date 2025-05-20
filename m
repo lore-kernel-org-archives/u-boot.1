@@ -4,89 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64430C3ABDD
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7BAC3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:25:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A2DE82C10;
-	Tue, 20 May 2025 07:22:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBF5082D06;
+	Tue, 20 May 2025 07:22:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fvdxna39";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Na3tv/DF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E15AF82BF3; Tue, 20 May 2025 07:22:47 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 5788A82CF4; Tue, 20 May 2025 07:22:50 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F297F82BD9
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FF4282BD9
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43cf06eabdaso50406255e9.2
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:45 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cfba466b2so56142725e9.3
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718565; x=1748323365; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718568; x=1748323368; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OG92kuwzpTCKHLc7zmNK40MbdlcZyxZZSL53UbY0+N8=;
- b=Fvdxna39qpXPhAxXFHEWVS/Xev+2RXLcs/NEB3vjQTjJXg21Ezi4TkfVqkwooDyYki
- WaE4700F3H+ZgmyCyAnc7xLgHB38Q9eahEmOir1kwo8Ss9o22ztqVec2o21vNhRotGlK
- bfb02StPiIYRmpIEASueBFGPiEm+VcQfWKaR49mSo/yU1K+ioMXQVa4qntyhzPX76RfS
- 7Shep8KuVZD89Qa1UukS8XZLKti6IgK1z5D5LOwAJrY9Le5Dr5BCcmjgJZOam7lYzSK6
- crSunB36Qr9aKcSYqtaZaO/TWWgynwbUAc+dwklfks2j9CDZK1R3LGkbimT9jLr67eSQ
- Jkmg==
+ bh=D3kk1pY9CNaQhZdYqtPu3iz9HnxJiZ8tAZj1sTxPVQ4=;
+ b=Na3tv/DFOTaXvDxlu+688z85Ga/WDoMmETmoIFmLH3S4qzZS42cczh2SO9lNzRDAJQ
+ wwYGfXbpj5FeA3UOiA/8njdN3N3Jcoxsn6u3wUcQYiPOpfjkkxAz7KYhHlAEvbQ1dza5
+ eQfADLKOMlyoNggTY35naueW7N8AS2orhHNph9mIAmwL2gCBE2twR2uzPQ1SOd12a0CQ
+ lRpwOP+wW8Bgk5woyzW7R30YG9gjHOIk4bOLsgB8IqAPaOHTSSakIjlzz4C8Z/Ffjk+m
+ YTR9GE8bxTF8QnEYPijgC36T+19qkb/+Tta567n5+sGXnl7FMX/BqS3/u+EjB+nizgaO
+ ZH5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718565; x=1748323365;
+ d=1e100.net; s=20230601; t=1747718568; x=1748323368;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OG92kuwzpTCKHLc7zmNK40MbdlcZyxZZSL53UbY0+N8=;
- b=UPFNaE2FxMENWYoqxbMZSTjnfDIAtg0V9pfFLFSkwmzMrSIbyorLWYLy+eTv25pAtC
- 4O1svNbH9Osat5xFedkXmCMAFEgTJOKU8Ooi2EPC/JtJWxoflZfhvknZGmSQjork0M3a
- eTDWRE82Gfqo0f0yHj6uCv00o8rRjGfsNkCb/zoFmhMkfUCO1qdc+ji1zwhlWEiGN53o
- irv7xw2jELRplMA4dpPc5tJiNpy3rGm7kFu27MEL6Q1jRYsqrjxFCbBvuItCNo30a2s+
- Xk18ffT/8O/91zVZWpkbJHhiiL/Njk411Kq2Rf68ZUNKMG2BTQrOWxA5X0RMOssh50lk
- Eysw==
+ bh=D3kk1pY9CNaQhZdYqtPu3iz9HnxJiZ8tAZj1sTxPVQ4=;
+ b=Zsba1GhMbZ/+XC/Hl/3ziBFLpscl552okQ5du9D2FBDAeVq50DvCe/DCgk8g2+n5zP
+ nKZBuBiC+NeS7ZVCpppozakKI19cpFTVUUG0QBYVN7mFp7QQ31n56mwvypVL2caQD8LS
+ CiNfBvhTZdlLSOHGM1/iFj+uGB1ZncNP9jh8RrVewQFpmhwdCZxSK1kLKK/xfWzVQGN9
+ WK5P1urFbYifd5IcGaV8DwvwOiLkkLLgvTE4nSdnttKuwx/NF2v0eOwv+eqrHR8+Y95f
+ IzST/vH01qBYS8Wfigsg3D40w6tktnS5gIB6k7Kp/VIGxlNkj3GtizfwPQAc1tGaaItM
+ hPNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUn8qfOwm+PYKUoRKRfnazBXGLaJZrt6bX9sxqtjbW2g/nSkWLwu1YOYGcnBDbRgRrWReLzziE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlGcb6Y8ZE/KHLFqXslZv+zb6j5Gsx0KWDk5WiBanqOa9eYGVL
- MRJGr+0ariR6eMoWDn1Li23nLYJP2ib5TnjUer7hxm8jSlH5VLNEN3e3Bcu+KDCwXWE=
-X-Gm-Gg: ASbGncsFFld0cNRhJ1QD0w2v4HjUf/yoZwFSC0FQBqjboE4COvu5cuh5l+e23ZZ0Z8A
- LMDE81/NcFuFEE7gQFdUa5M4ObX5b8BLCfNWKxQP+Mub8lhc5O57v3cozjedVTsOghOywSXy7lg
- m4svuY60ktkvI3kFxU0mfURWe/QcHWYSC4F9S6+0Zln2wb9jC2x2qypjufSpW7vArDasXoJ36/7
- vpi08G9btaa1KfZO93OsCRXHvlTEKJTlQBUiPNPK4l7K4DqZI94JPjk/SKCh+0YsTtUvmM24tFs
- zZJBp9uje+dP+EWReqBufV07Kjk6hTSuvXCPdF5Q2bqKB9RbrGfIG66m3+JdADIzWofJIyJGQsk
- xWHbSxNHsrQ==
-X-Google-Smtp-Source: AGHT+IEUDTzkZ4WjNvO4DkNgPijwnM8W1fOiMrieVDDeqM3Xnp3wTNbpWHtcOsfB3qBTobVnxS4fLQ==
-X-Received: by 2002:a05:6000:400f:b0:3a0:b4f1:8bd5 with SMTP id
- ffacd0b85a97d-3a35fe67aa7mr11415768f8f.18.1747718565459; 
- Mon, 19 May 2025 22:22:45 -0700 (PDT)
+ AJvYcCUosA9W2r6NW0wg6jvdvdX3bKrMgLGr12SOv52r9netVsHX2V9jogp2s+wmAQP9WDAOjfz0rWA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy33CyRhsmUzIE4OPxWqqNMj2VEW4/83u8pwpq0ryarzjPNj0IS
+ ZPUubvEkzxqViKIuujrsjiOa3iw1VCBZGMQEKK+OMPit93cMBu8nqPpbJq1y7+iTBiY=
+X-Gm-Gg: ASbGncsqfvDDhCQaODU5JgK7/QsBSiMp/f94OUMlCHzreAOD/+0ZT0VRnTgKx3XsYr3
+ GKN9iXvepqLT1I0LMOduzmvjPRmS2QJ5zXQqP6KCmzHDKPQ+1uSRWTaDkY4p0joeyNeRUVw2yKD
+ Xsagb7qkymZL91O0xEPVfLwQNxZmH0bLr821dVfkd1LxoTYJGPzZJYzIt9xs8O+uqiBQAHr158j
+ vH0j164wUrmNvqB3TqH9xn2jUz5nM7uItYxmAiVxVwc2b8hCtjbpvC0n3HaM333sJ777JPH2P9l
+ Oo8Q+Wj0QBmT0hVmx1PIgI5YVYi4M69pEwChWSFlns1PpY0tJUK5ptc3BLrs1w0iRagsSGFFEjr
+ 8m0OhpAO9DQ==
+X-Google-Smtp-Source: AGHT+IFG6dg+84Mxk9OQsizVwAYkiNzOqsbmlDGw0kPpyr5j7KdG3BKiB6QNYWenuYMjkrRsgJYeJQ==
+X-Received: by 2002:a5d:5848:0:b0:3a1:4343:f834 with SMTP id
+ ffacd0b85a97d-3a35fe5c5e9mr13710681f8f.2.1747718567968; 
+ Mon, 19 May 2025 22:22:47 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.43
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:45 -0700 (PDT)
+ Mon, 19 May 2025 22:22:47 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Prasad Kummari <prasad.kummari@amd.com>,
- Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Subject: [PATCH 19/24] kbuild: generate modules.order only when
- CONFIG_MODULES=y
-Date: Tue, 20 May 2025 08:21:30 +0300
-Message-ID: <20250520052153.307194-20-ilias.apalodimas@linaro.org>
+Subject: [PATCH 20/24] kbuild: hardcode genksyms path and remove GENKSYMS
+ variable
+Date: Tue, 20 May 2025 08:21:31 +0300
+Message-ID: <20250520052153.307194-21-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -108,27 +109,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Backport from kernel although it is unused since it makes diffing easier.
-commit 1d8001ef358 ("kbuild: generate modules.order only when CONFIG_MODULES=y")
+Back port from kernel although it's not used since it makes diffing
+easier.
+commit 88110713ca9dfb ("kbuild: hardcode genksyms path and remove GENKSYMS variable")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Makefile.build | 2 ++
- 1 file changed, 2 insertions(+)
+ scripts/Makefile.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index ed58bcab291e..2b2beb01bd3b 100644
+index 2b2beb01bd3b..b7611c030088 100644
 --- a/scripts/Makefile.build
 +++ b/scripts/Makefile.build
-@@ -82,7 +82,9 @@ ifneq ($(strip $(obj-y) $(obj-m) $(obj-) $(subdir-m) $(lib-target)),)
- builtin-target := $(obj)/built-in.o
- endif
+@@ -148,7 +148,7 @@ $(obj)/%.i: $(src)/%.c FORCE
  
-+ifdef CONFIG_MODULES
- modorder-target := $(obj)/modules.order
-+endif
- 
- # We keep a list of all modules in $(MODVERDIR)
+ cmd_gensymtypes =                                                           \
+     $(CPP) -D__GENKSYMS__ $(c_flags) $< |                                   \
+-    $(GENKSYMS) $(if $(1), -T $(2))                                         \
++    scripts/genksyms/genksyms $(if $(1), -T $(2))			    \
+      $(if $(KBUILD_PRESERVE),-p)                                            \
+      -r $(firstword $(wildcard $(2:.symtypes=.symref) /dev/null))
  
 -- 
 2.49.0
