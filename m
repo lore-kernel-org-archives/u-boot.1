@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01562C3ABDA
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:23:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D4BC3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:23:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 675D882C7D;
-	Tue, 20 May 2025 07:22:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABF1082CA4;
+	Tue, 20 May 2025 07:22:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FY+ryaIL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="haj083N7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CBC482BF2; Tue, 20 May 2025 07:22:26 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id B319482CA4; Tue, 20 May 2025 07:22:28 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DE5482BD7
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB39382BD7
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a36abf5df9so1484648f8f.0
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:24 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3a361b8a664so3654046f8f.3
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718543; x=1748323343; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718546; x=1748323346; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=siqFNQWCvueAM0VVXekArN+vDPNhJjXRQCAFGK43+g8=;
- b=FY+ryaILzAJdAFg0ZhWS/BuX/O7VgBUYpWW3bIzWfwIRPCIpMot3oC1TGI4m8dhtpN
- 9ZYroSddK7T/CW7AyBvtBTuDoUlV2a1Ysli2fzwxPCeS5+oIkwyNQkj7xsPu3npDRR2q
- FosvJJpReYq+wDXKXqOOssZ1/EbkE7xStw8oOqcBdBW9fTeeUkRZJF09y5VgwNeH+6+c
- ltz26UKxzqVTUlR82ThaHNsV6HsaR3FeDh82i39QHkoja9rq9Wn/fdTkInzwGp/H3UPC
- 8RCJ7Ci19i+Gzls6H7VtFUrutUlm5ZO8dBGlyF7r4hpHFLxFyN7J5jo1RbajWaROs19U
- e8hg==
+ bh=myAQLnNyoEYgTL9thFBm6JVTMfd0yPZIgdnmPcYkCAg=;
+ b=haj083N7qZ653hN0FtKx+XJV4GjSRV1+HfEmwGeRu8enYWRljQEzuURVKYSQpyvCJJ
+ MJO99dG4yMi58KrzBGlpbtDgjlOjGE9ttICRYWa4wLQ9Dc9Zhoym5s6zmLHeNJbDw9I/
+ gGVzMW6dfAN/x279F9ZVTeRLqQ1AcBz4NoVebFNHNBtbRzfee7fPBX9Z5mXCi7mkns5B
+ lQA1l0Ho3370283AVy9X/SNzXEoDApRaz7nIQJtw78xViqKvu5c3msMKCOuHwV8wjnUu
+ xX6z/GQ+eVNJdkwfwhBR34XcHW8qR4MRMQOGX86xcXoEQdK8fkS5nnNx5B3xJDYyrICW
+ Tp6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718543; x=1748323343;
+ d=1e100.net; s=20230601; t=1747718546; x=1748323346;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=siqFNQWCvueAM0VVXekArN+vDPNhJjXRQCAFGK43+g8=;
- b=P9mKLrST8EbOslJAzAAPRBoPmSi28Fy28kkWSIVAoAsGtY5xXMZTd/CmsWfHBNgZyu
- kt59qcZRlH/hgw4yM9whGG2waacj1B3CM1ZwnTEvownhO+Dogk4aCUyt+ORTr//MV8hL
- 1QTz23b6BTno0C0S5usFKEXBqFo3JZ36WQv6LNwhJNRbjK3XIOzC9oJCpf+WQaSNf9mj
- KghtrjNk0O7TLqWEL+9ddbzLA3o/JR2QLBQzqYGwDEALhYBWH1xv+8vZWSyzhu+T4VCl
- bVyfNsmMeysAvfQPi4gXnwF4v4gxPvxoQ0vzo5Z4IsJt04d3dq3l3yUBqEg8FEhL43oa
- VLSw==
+ bh=myAQLnNyoEYgTL9thFBm6JVTMfd0yPZIgdnmPcYkCAg=;
+ b=Vpov/+eLxswwOpIcSpSVT5+qS6zBd+M2KEg0NOfd18pVzK+cU7gJ0hzYA1XP1FeN/5
+ AefO930RTt7UiaUmcpK8sj2RCv/U6ImUZg+VgPI0/kjTwq81VxZP4pxcojkl/18QNFkv
+ i8Z0y0FZy1LMS4pgU75B0qp71IWTgoeNbN71SDLgmhnHAAt9jKYShb8BwVp8weWsQIl9
+ eJuNEvMTJ/Ph0B8e9oOVjhzN2prehNbi8JB5QMdw8gqjzhrn5zoj7gPwpTl1sYaQDk2a
+ 3/jEtXQXE1rml/0zOnGxkikkhozmGU7wb2G+UoUSfU09kPfDruJykaHlhS36Fb/rvRWJ
+ Hc/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0L/YBukiDBcTw1p+bfevvO6hudyrk3zNyyeSUc77S1nlUrv0+VUgw/lKCq4TxLx4LeAEllFs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxoVt8sXkTJobKPFqFt0KVyCjS15+/KHiddgz7ib5OrxCcidG1J
- DMAj+qQcYCzpMm0VWIwTdcKSSJGegvDXm7WrmEJh51pB7RmqFF8gq6t3dlaP/GzhABo=
-X-Gm-Gg: ASbGncuV0N3ImXNbLsAHq5CQCQc9DjLrMDeDzmOkur+5N7/44PYbmFUuL2ysBzvEPya
- E6Y97xQdcMS6+x9GyOgMG7TG6ULI4HHpVoGeUne8CxRIuo9ijAvpZe9fBEuhMGPMpWHTvDCPCqh
- 8UotfEbtNg0JUnXocBJIe6y76vCU76H5JdIRhldQF2q7HbZ+33adtqbMFOJiMVVroEtisjSiSao
- k28EfbrPtJGYHm7N5jssfb62VV9uRNVJYX6qdmh6d264ND3voM3+0OYhRD/9M7KpKNg0TndYEfu
- tYxPfoEVOkEnnuNwaO9o1UXgx6AJ0kXHewipVy7LYlbpoXYiH0zCsvyrEFqsQFogKXAgmRfc6qY
+ AJvYcCUjF6YSsTs83n7XGHjqqllldqZICroaSXhCKxs9qMRG/Yqhr2GXq9j+kHFxvUv52mQw+NEwKJs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMff6+35ZgVihpFiZ8il/g3FUW+DTiSOyVFqO+Rjoi67Q35x63
+ EI59JaKXPupZB6cATUYsW068fmUHXZD2/ISCGQPpvftLke4H3yx1SoUmSyJ4bo925H0=
+X-Gm-Gg: ASbGncujH8FYaLXgU2aJbsoBIlEk0PLQTwL6QmxtrPy1SVIi3Z1cCLh0zKw2FzaqAPj
+ kKOVYnCFWQ/lS0C31dsrUeHlhdyegvsUip71RGy0hF43OVKniY0gtMko6+oCNEKiSH82+Q25Lqz
+ nSRDGzDDN4Z2ehjuS3P4VdcXU5Bm5fspVvwQoQ21KjxSgSJOikOkD70NUbj0URsTieS8GZB8UnG
+ 31wUWyugrj2QmXi3NA61w4kdsOYPcl/iFMzZEkXNWARwGrqKM5otGwkYvyxw9CT2M8G1VzMB0Uf
+ GIECfpXqkP6st4ZF1mBUPoOQs7JGJZukbL1XXAITyGDHi2tEKovAk2bZtkhVrZcDat8AXeZPIGc
  =
-X-Google-Smtp-Source: AGHT+IEy1tUQjnivywss43jTdWJS08t36o55uuYT7mYpk8JHZDdB4nO+ZJ5C+KnhzHb1aXUf7TIp1Q==
-X-Received: by 2002:a5d:62d2:0:b0:3a3:56e1:dff1 with SMTP id
- ffacd0b85a97d-3a356e1e170mr12474126f8f.4.1747718543613; 
- Mon, 19 May 2025 22:22:23 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFWTCHfLCMG7g3dMSP5QJL9aXG+ND8ZvecNdexiaThlfqmmn1DAwppTWH0Db1Tumc3IsEvm+g==
+X-Received: by 2002:a05:6000:430c:b0:3a3:6947:6d35 with SMTP id
+ ffacd0b85a97d-3a369477158mr7580078f8f.57.1747718546170; 
+ Mon, 19 May 2025 22:22:26 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.22
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:23 -0700 (PDT)
+ Mon, 19 May 2025 22:22:25 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Prasad Kummari <prasad.kummari@amd.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- u-boot@lists.denx.de
-Subject: [PATCH 10/24] kbuild: move archive command to scripts/Makefile.lib
-Date: Tue, 20 May 2025 08:21:21 +0300
-Message-ID: <20250520052153.307194-11-ilias.apalodimas@linaro.org>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Subject: [PATCH 11/24] kbuild: let fixdep directly write to .*.cmd files
+Date: Tue, 20 May 2025 08:21:22 +0300
+Message-ID: <20250520052153.307194-12-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -108,47 +109,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Backport from kernel
-commit 898f5a009f22 ("kbuild: move archive command to scripts/Makefile.lib")
+commit 392885ee82d3 ("kbuild: let fixdep directly write to .*.cmd files")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Makefile.build | 4 +---
- scripts/Makefile.lib   | 5 +++++
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ Makefile               | 13 +++++--------
+ scripts/Kbuild.include |  5 ++---
+ scripts/Makefile.build | 11 +++++++----
+ 3 files changed, 14 insertions(+), 15 deletions(-)
 
+diff --git a/Makefile b/Makefile
+index 15c7e633b874..09d36b8cbbed 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2538,14 +2538,11 @@ quiet_cmd_rmdirs = $(if $(wildcard $(rm-dirs)),CLEAN   $(wildcard $(rm-dirs)))
+ quiet_cmd_rmfiles = $(if $(wildcard $(rm-files)),CLEAN   $(wildcard $(rm-files)))
+       cmd_rmfiles = rm -f $(rm-files)
+ 
+-# read all saved command lines
+-
+-cmd_files := $(wildcard .*.cmd)
+-
+-ifneq ($(cmd_files),)
+-  $(cmd_files): ;	# Do not try to update included dependency files
+-  include $(cmd_files)
+-endif
++# read saved command lines for existing targets
++existing-targets := $(wildcard $(sort $(targets)))
++cmd_files := $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).cmd)
++$(cmd_files): ;        # Do not try to update included dependency files
++-include $(cmd_files)
+ 
+ endif    #ifeq ($(config-targets),1)
+ endif    #ifeq ($(mixed-targets),1)
+diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
+index 2ef687ea895a..6ef66c451eb1 100644
+--- a/scripts/Kbuild.include
++++ b/scripts/Kbuild.include
+@@ -274,9 +274,8 @@ if_changed_dep = $(if $(strip $(any-prereq) $(arg-check) ),                  \
+ 
+ cmd_and_fixdep =						             \
+ 	$(echo-cmd) $(cmd_$(1));                                             \
+-	scripts/basic/fixdep $(depfile) $@ '$(make-cmd)' > $(dot-target).tmp;\
+-	rm -f $(depfile);                                                    \
+-	mv -f $(dot-target).tmp $(dot-target).cmd;
++	scripts/basic/fixdep $(depfile) $@ '$(make-cmd)' > $(dot-target).cmd;\
++	rm -f $(depfile)
+ 
+ # Usage: $(call if_changed_rule,foo)
+ # Will check if $(cmd_foo) or any of the prerequisites changed,
 diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index 73e1d71e30df..d90b0b7aa6a0 100644
+index d90b0b7aa6a0..2f2d5d4afc25 100644
 --- a/scripts/Makefile.build
 +++ b/scripts/Makefile.build
-@@ -355,11 +355,9 @@ $(modorder-target): $(subdir-ym) FORCE
- # Rule to compile a set of .o files into one .a file
- #
- ifdef lib-target
--quiet_cmd_link_l_target = AR      $@
--cmd_link_l_target = rm -f $@; $(AR) rcsTP$(KBUILD_ARFLAGS) $@ $(real-prereqs)
+@@ -410,14 +410,17 @@ FORCE:
+ # optimization, we don't need to read them if the target does not
+ # exist, we will rebuild anyway in that case.
  
- $(lib-target): $(lib-y) FORCE
--	$(call if_changed,link_l_target)
-+	$(call if_changed,ar)
+-cmd_files := $(wildcard $(foreach f,$(sort $(targets)),$(dir $(f)).$(notdir $(f)).cmd))
++existing-targets := $(wildcard $(sort $(targets)))
  
- targets += $(lib-target)
- endif
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 28295c7ff125..c441be352da1 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -278,6 +278,11 @@ $(obj)/%: $(src)/%_shipped
- quiet_cmd_ld = LD      $@
- cmd_ld = $(LD) $(ld_flags) $(filter-out FORCE,$^) -o $@
+-ifneq ($(cmd_files),)
+-  include $(cmd_files)
+-endif
++-include $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).cmd)
  
-+# Archive
-+# ---------------------------------------------------------------------------
-+quiet_cmd_ar = AR      $@
-+cmd_ar = rm -f $@; $(AR) rcsTP$(KBUILD_ARFLAGS) $@ $(real-prereqs)
-+
- # Objcopy
- # ---------------------------------------------------------------------------
+ # Create directories for object files if they do not exist
+ obj-dirs := $(sort $(obj) $(patsubst %/,%, $(dir $(targets))))
++# If targets exist, their directories apparently exist. Skip mkdir.
++existing-dirs := $(sort $(patsubst %/,%, $(dir $(existing-targets))))
++obj-dirs := $(strip $(filter-out $(existing-dirs), $(obj-dirs)))
++ifneq ($(obj-dirs),)
+ $(shell mkdir -p $(obj-dirs))
++endif
  
+ .PHONY: $(PHONY)
 -- 
 2.49.0
 
