@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90080C3ABDD
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 15:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8510C54E65
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 15:07:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E53D782CD2;
-	Tue, 20 May 2025 17:07:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3307982CF4;
+	Tue, 20 May 2025 17:07:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="T7zNyjYg";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KDLf4Nzc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2769482CDF; Tue, 20 May 2025 17:07:18 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 7230182A8D; Tue, 20 May 2025 17:07:18 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7928B82A8D
+ by phobos.denx.de (Postfix) with ESMTPS id CF86982C87
  for <u-boot@lists.denx.de>; Tue, 20 May 2025 17:07:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43d2d952eb1so46092315e9.1
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a36c2d3104so1667940f8f.1
  for <u-boot@lists.denx.de>; Tue, 20 May 2025 08:07:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amarulasolutions.com; s=google; t=1747753635; x=1748358435;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=umDfddv0eFDxPx8NQVdX6EweKq1K+Vo3liwjYi2BWEk=;
- b=T7zNyjYgpBz7TfWvPQ8PylCi+OiFjWH0xE1KNyBKPtZJolhpu5Yd1YFxJGTRvQ1MU0
- o1vm3b3tqusEPqoUkBqE0x4sXba0s8MU8+xdwYQpwba+2YFvs1aPOw1kSKWk6mls18uh
- mAzi6Uy0Z6XmYow7nn3Lh5FF+TB8s9gsq+J9k=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6pfUTtAHhEmjHhzlv4fvFPcPlxehN1XDXiMNtRG2hmc=;
+ b=KDLf4Nzc+NJrdhgKRjTbNdSxlr+1nTs9BzN9Jdq45b/neiaoosjUUaQpfrlpQGW4HC
+ 7Pa3GUz/20JeacN59MthmJWRyZOI+WVutrpag19OkZrMp+AUaIkVS35vgIpO+wR87xIc
+ eUesawOaUXKyL8bR+DbpEgcX4WfI6uP5tAWvc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1747753635; x=1748358435;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=umDfddv0eFDxPx8NQVdX6EweKq1K+Vo3liwjYi2BWEk=;
- b=B3JCS9MbwbaPovoGBQb+sRDTIihtdkhCkt915x2gIBN4ooidFRI468oo8PGMR13gDz
- 1AN8y2AmzayY8EVcAym1cynbwMfUJrLapesetUrOjYV7MvhRTGcIpaFoAD9+HWCh9xBB
- 9yO8aynQxJVJiM3kbucou8qOCDQI+J0cMl+pFgIg6jYt+E67GzCDxtPbj0+Nxl6Dl0WY
- 5byuOAiuoUKvI6Rl48I/nuRtMqyqb/Umgta93HfMIfXUrHtGxa+MNa1gyoj4EkhiDs2n
- ip3GzZtrTqONzSOzsFN4HPb0uD3eSURaPGXdlWEbXT5Hpu99qFIP3Y9bwoJX6x0flT2O
- NMAg==
-X-Gm-Message-State: AOJu0YwyA3beuokpp7j6r4wSWL2DsdcR3XJHC48Kdgn+wcvS4MzFFUCn
- 8NY54GimkECz8WRnEDAVr67MMOXK1PjP89iePa06tmnbjrTl3BUYDRikHJQr6ObkUMeUpwvjud4
- n7a80
-X-Gm-Gg: ASbGnctd4JoakMvW44PCIvSEirA0JsxXpwS3Gz2AjJuAhHbUgdEA0jOjJBITAWKTY1Q
- FN4xMZ85siKR/1foAB3EoLmx1OEBs66xcGkhz1g3ynZqc71+rlG7dR9JmC2gQxydS0A/IThEhZt
- dGqWGCuIMW8yDfZTZcuMg4Dn8n4yBO0Wxiikk1cHa1j+vVam+KJLOikjSDG5Cjisc06jyU8TBLw
- e2FxyjN1jgFi0Yb/yXdZNRwnyTt2hCea/lqlbxzo53ic+mSJM4smZIa+as0Ie+uvdIxkOtdBKwH
- ZugbzoCGncyFEAKahQlDT8ebf95ygNb0at/DmjANOtSEsy0gTgIS2WzvDktXjcE/igzgFpEqz0u
- BQbYBGJzcYaif46OoNzvWNHk+diL7AAA6trs8LD/q
-X-Google-Smtp-Source: AGHT+IHmuTSmdd6xbtEg8eZPfmLB8xpmAT1aPCmwtfoJRqdK51eAkyg7TMegdfGxG486bwCtONrakw==
-X-Received: by 2002:a05:600c:3c94:b0:43d:24d:bbe2 with SMTP id
- 5b1f17b1804b1-442fd6758d2mr130039405e9.28.1747753632967; 
- Tue, 20 May 2025 08:07:12 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6pfUTtAHhEmjHhzlv4fvFPcPlxehN1XDXiMNtRG2hmc=;
+ b=B9WDb0Rg2rwKaQdJRCxDk4M2/5+G+qZhLgt8zjWS+lhKmJllk+PL4vmWA4k0ftn0Ab
+ J7/Xz9LBqzDYbVFnirlRpUogpD+28yt+CoC9jkCdonG2oyJS8ra4Mig/fnowgz+35p1N
+ hckNCWwGDnObFnsCrCnQ9foZlMU43xK3BuNjS41PQeF123AVVKPNrHpL5tXwt+nXUzZf
+ K1oMhE4ses+8oxk3Jij5DySYvZQtbhXqPyee0+dFUI2i0lji2LEyH2lXjUH8P9e9ge6G
+ +asEl66hXrfB+zz1q8HvyOTvvIL98hPlX1q3D+20yfo1h87n5v7bCO5JG25iAsyU9uQL
+ Q4Yw==
+X-Gm-Message-State: AOJu0YzgvnVr9JoBcyx4bxjx1Lx4FbyifBe/yP4lvA55D3VKhgrsliUQ
+ KgYmC7X392hE5Lglfg3rtHrMlLP2ciCNzG+5wZY8Hr4HJT82VRA1OCwDbemTWeCIPwGXTm85YeX
+ v12pk
+X-Gm-Gg: ASbGncsdKPfBGf3H1IUn3FD0uXGFanpA/+wjbxoF75E51fYpPBZYgyeWcYLAHUyTIm5
+ ffnbozOpJqKa720KVxF3yr+7zY7PtxLkz6CQv1ohajHGnadzblcQHwmLfMiQSnb6z0R3QfULnrn
+ YXhWrBuwapw+13+L8BznS0z6uX/1hJWXceNX4sxOTC8EuWAUYoYaqqyYdgGclDhtGqaJOe4hBBR
+ Kksi5szQ6HawYySolIsykx5dpT6cKS3sJJCUhryVY+bNta95FFPavDA9mYCVYFajt77JlBjpfPr
+ NCIJE6f9KnxdRF9EE6EorQs/eu1EKZtCE/tD0PSM4H+x+wa7h8OiVvXcol2+5IJ9cSyMVqBEEJM
+ owW76GodL3x0Mbo36cIykKHncJcTSE+JIy5cMazV8
+X-Google-Smtp-Source: AGHT+IEAFP+0p6viiBjygixAQgiLiaVJpI4b5Upy+5s5ktazwuordKbyY6PHrBiF24+uerfh00OsvQ==
+X-Received: by 2002:a05:6000:1847:b0:3a3:69fe:f55a with SMTP id
+ ffacd0b85a97d-3a369fef7bamr10512333f8f.51.1747753634689; 
+ Tue, 20 May 2025 08:07:14 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.amarulasolutions.com ([2.196.40.47])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35e49262fsm16179766f8f.44.2025.05.20.08.07.11
+ ffacd0b85a97d-3a35e49262fsm16179766f8f.44.2025.05.20.08.07.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 08:07:12 -0700 (PDT)
+ Tue, 20 May 2025 08:07:14 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Bode <michael.bode@bshg.com>, linux-amarula@amarulasolutions.com,
  Simon Holesch <simon.holesch@bshg.com>, michael@amarulasolutions.com,
+ Wolfgang Birkner <wolfgang.birkner@bshg.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Wolfgang Birkner <wolfgang.birkner@bshg.com>
-Subject: [PATCH v2 1/4] board: bsh: imx6ulz_smm_m2: Match SPL DDR settings to
- DCD table
-Date: Tue, 20 May 2025 17:06:59 +0200
-Message-ID: <20250520150709.988904-1-dario.binacchi@amarulasolutions.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/4] board: bsh: imx6ulz_smm_m2: Add support for 256 MiB
+ DRAM
+Date: Tue, 20 May 2025 17:07:00 +0200
+Message-ID: <20250520150709.988904-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250520150709.988904-1-dario.binacchi@amarulasolutions.com>
+References: <20250520150709.988904-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,107 +101,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Trimarchi <michael@amarulasolutions.com>
+From: Simon Holesch <simon.holesch@bshg.com>
 
-When using SPL on i.mx6 we frequently notice some DDR initialization
-mismatches between the SPL code and the non-SPL code.
+Calibration values were calculated using the NXP tool
+I.MX6ULL_DDR3_Script_Aid_V0.01.xlsx
 
-As the non-SPL code have been tested for long time and proves to be
-reliable, let's configure the DDR in the exact same way as the non-SPL
-case.
-
-The idea is simple: just use the DCD table and write directly to the DDR
-registers.
-
+Signed-off-by: Wolfgang Birkner <wolfgang.birkner@bshg.com>
+Signed-off-by: Simon Holesch <simon.holesch@bshg.com>
 Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
 ---
 
 Changes in v2:
-- Add 'static struct' globally in the module where the definitions
-  can mabe static.
 - Use standard C comment style
 
- arch/arm/include/asm/arch-mx6/mx6-ddr.h |   2 +
- arch/arm/mach-imx/mx6/ddr.c             |   3 +
- board/bsh/imx6ulz_smm_m2/spl.c          | 260 ++++++++++++++++++------
- 3 files changed, 203 insertions(+), 62 deletions(-)
+ board/bsh/imx6ulz_smm_m2/Makefile            |   2 +-
+ board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m.c | 169 +++++++++++++++
+ board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m.c | 168 +++++++++++++++
+ board/bsh/imx6ulz_smm_m2/spl.c               | 207 ++-----------------
+ board/bsh/imx6ulz_smm_m2/spl_mtypes.h        |  26 +++
+ include/configs/imx6ulz_smm_m2.h             |   6 +-
+ 6 files changed, 388 insertions(+), 190 deletions(-)
+ create mode 100644 board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m.c
+ create mode 100644 board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m.c
+ create mode 100644 board/bsh/imx6ulz_smm_m2/spl_mtypes.h
 
-diff --git a/arch/arm/include/asm/arch-mx6/mx6-ddr.h b/arch/arm/include/asm/arch-mx6/mx6-ddr.h
-index ad9c1ac906a3..bd3ff65bcd96 100644
---- a/arch/arm/include/asm/arch-mx6/mx6-ddr.h
-+++ b/arch/arm/include/asm/arch-mx6/mx6-ddr.h
-@@ -457,6 +457,8 @@ struct mx6_mmdc_calibration {
- 	u32 p1_mpwrdlctl;
- 	/* lpddr2 zq hw calibration */
- 	u32 mpzqlp2ctl;
-+	/* MDC Duty Cycle Control Register */
-+	u32 mpdccr;
- };
+diff --git a/board/bsh/imx6ulz_smm_m2/Makefile b/board/bsh/imx6ulz_smm_m2/Makefile
+index 59870419bdde..d448f4fc5215 100644
+--- a/board/bsh/imx6ulz_smm_m2/Makefile
++++ b/board/bsh/imx6ulz_smm_m2/Makefile
+@@ -2,5 +2,5 @@
+ # (C) Copyright 2021 Amarula Solutions B.V.
  
- /* configure iomux (pinctl/padctl) */
-diff --git a/arch/arm/mach-imx/mx6/ddr.c b/arch/arm/mach-imx/mx6/ddr.c
-index 5a1258e002d2..749ceee0cdbf 100644
---- a/arch/arm/mach-imx/mx6/ddr.c
-+++ b/arch/arm/mach-imx/mx6/ddr.c
-@@ -1444,6 +1444,9 @@ void mx6_ddr3_cfg(const struct mx6_ddr_sysinfo *sysinfo,
- 	mmdc0->mpdgctrl1 = calib->p0_mpdgctrl1;
- 	mmdc0->mprddlctl = calib->p0_mprddlctl;
- 	mmdc0->mpwrdlctl = calib->p0_mpwrdlctl;
-+	if (calib->mpdccr)
-+		mmdc0->mpdccr = calib->mpdccr;
+ obj-y  := imx6ulz_smm_m2.o
+-obj-$(CONFIG_XPL_BUILD) += spl.o
++obj-$(CONFIG_XPL_BUILD) += spl.o ddr3l_timing_256m.o ddr3l_timing_128m.o
+ 
+diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m.c
+new file mode 100644
+index 000000000000..66c3483adbf5
+--- /dev/null
++++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m.c
+@@ -0,0 +1,169 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
- 	if (sysinfo->dsize > 1) {
- 		MMDC1(mpwldectrl0, calib->p1_mpwldectrl0);
- 		MMDC1(mpwldectrl1, calib->p1_mpwldectrl1);
-diff --git a/board/bsh/imx6ulz_smm_m2/spl.c b/board/bsh/imx6ulz_smm_m2/spl.c
-index 724841b57456..936e54662e98 100644
---- a/board/bsh/imx6ulz_smm_m2/spl.c
-+++ b/board/bsh/imx6ulz_smm_m2/spl.c
-@@ -31,70 +31,209 @@ static void setup_iomux_uart(void)
- 	imx_iomux_v3_setup_multiple_pads(uart4_pads, ARRAY_SIZE(uart4_pads));
- }
- 
--static struct mx6ul_iomux_grp_regs mx6_grp_ioregs = {
--	.grp_addds		= 0x00000028,
--	.grp_ddrmode_ctl	= 0x00020000,
--	.grp_b0ds		= 0x00000028,
--	.grp_ctlds		= 0x00000028,
--	.grp_b1ds		= 0x00000028,
--	.grp_ddrpke		= 0x00000000,
--	.grp_ddrmode		= 0x00020000,
--	.grp_ddr_type		= 0x000c0000,
-+struct dram_cfg_param {
-+	unsigned int reg;
-+	unsigned int val;
- };
- 
--static struct mx6ul_iomux_ddr_regs mx6_ddr_ioregs = {
--	.dram_dqm0		= 0x00000028,
--	.dram_dqm1		= 0x00000028,
--	.dram_ras		= 0x00000028,
--	.dram_cas		= 0x00000028,
--	.dram_odt0		= 0x00000028,
--	.dram_odt1		= 0x00000028,
--	.dram_sdba2		= 0x00000000,
--	.dram_sdclk_0		= 0x00000028,
--	.dram_sdqs0		= 0x00000028,
--	.dram_sdqs1		= 0x00000028,
--	.dram_reset		= 0x000c0028,
-+struct dram_timing_info {
-+	const struct dram_cfg_param *ddrc_cfg;
-+	unsigned int ddrc_cfg_num;
- };
- 
--static struct mx6_mmdc_calibration mx6_mmcd_calib = {
--	.p0_mpwldectrl0		= 0x00000000,
--	.p0_mpwldectrl1		= 0x00100010,
--	.p0_mpdgctrl0		= 0x414c014c,
--	.p0_mpdgctrl1		= 0x00000000,
--	.p0_mprddlctl		= 0x40403a42,
--	.p0_mpwrdlctl		= 0x4040342e,
--};
++#include "spl_mtypes.h"
++
 +static const struct dram_cfg_param ddr_ddrc_cfg_128mb[] = {
 +	/* IOMUX */
 +
@@ -218,10 +165,9 @@ index 724841b57456..936e54662e98 100644
 +
 +	/* Control: */
 +	{0x020e0288, 0x000C0028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
-+
 +	{0x020e0270, 0x00000000},	/*
 +					 * IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 - DSE can be configured
-+					 * using Group Control Register: IOMUXC_SW_PAD_CTL_GRP_CTLDS
++					 * using Group Control Register IOMUXC_SW_PAD_CTL_GRP_CTLDS
 +					 */
 +
 +	{0x020e0260, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDODT0 */
@@ -256,26 +202,24 @@ index 724841b57456..936e54662e98 100644
 +	 * Data bus width16
 +	 * =============================================================================
 +	 */
-+
-+	{0x021b001c, 0x00008000}, /*
-+				   * MMDC0_MDSCR, set the Configuration request bit during
-+				   * MMDC set up
-+				   */
++	{0x021b001c, 0x00008000},	/*
++					 * MMDC0_MDSCR, set the Configuration request bit
++					 * during MMDC set up
++					 */
 +
 +	/*
 +	 * =============================================================================
-+	 * Calibration setup
++	 * Calibration setup.
 +	 * =============================================================================
 +	 */
-+
-+	{0x021b0800, 0xA1390003}, /*
-+				   * DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic
-+				   * HW ZQ calibration.
-+				   */
++	{0x021b0800, 0xA1390003},	/*
++					 * DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic
++					 * HW ZQ calibration.
++					 */
 +
 +	/*
-+	 * For target board, may need to run write leveling calibration to fine tune these
-+	 * settings.
++	 * For target board, may need to run write leveling calibration to fine tune
++	 * these settings.
 +	 */
 +	{0x021b080c, 0x00000000},
 +
@@ -290,7 +234,7 @@ index 724841b57456..936e54662e98 100644
 +
 +	/*
 +	 * Read data bit delay: 3 is the recommended default value, although out of reset
-+	 * value is 0
++	 * value is 0.
 +	 */
 +	{0x021b081c, 0x33333333},	/* MMDC_MPRDDQBY0DL */
 +	{0x021b0820, 0x33333333},	/* MMDC_MPRDDQBY1DL */
@@ -304,22 +248,7 @@ index 724841b57456..936e54662e98 100644
 +
 +	/* Complete calibration by forced measurement: */
 +	{0x021b08b8, 0x00000800},	/* DDR_PHY_P0_MPMUR0, frc_msr */
- 
--static struct mx6_ddr_sysinfo ddr_sysinfo = {
--	.dsize			= 0,
--	.cs1_mirror		= 0,
--	.cs_density		= 32,
--	.ncs			= 1,
--	.bi_on			= 1,
--	.rtt_nom		= 1,
--	.rtt_wr			= 0,
--	.ralat			= 5,
--	.walat			= 1,
--	.mif3_mode		= 3,
--	.rst_to_cke		= 0x23,	/* 33 cycles (JEDEC value for DDR3) - total of 500 us */
--	.sde_to_rst		= 0x10,	/* 14 cycles (JEDEC value for DDR3) - total of 200 us */
--	.refsel			= 1,
--	.refr			= 3,
++
 +	/*
 +	 * =============================================================================
 +	 * Calibration setup end
@@ -342,8 +271,8 @@ index 724841b57456..936e54662e98 100644
 +	 */
 +	{0x021b0018, 0x00211740},	/* MMDC0_MDMISC */
 +	{0x021b001c, 0x00008000},	/*
-+					 * MMDC0_MDSCR, set the Configuration request
-+					 * bit during MMDC set up
++					 * MMDC0_MDSCR, set the Configuration request bit during
++					 * MMDC set up
 +					 */
 +	{0x021b002c, 0x000026D2},	/* MMDC0_MDRWD */
 +	{0x021b0030, 0x002F1023},	/* MMDC0_MDOR */
@@ -358,9 +287,10 @@ index 724841b57456..936e54662e98 100644
 +	{0x021b001c, 0x00048031},	/* MMDC0_MDSCR, MR1 write, CS0 */
 +	{0x021b001c, 0x15208030},	/* MMDC0_MDSCR, MR0write, CS0 */
 +	{0x021b001c, 0x04008040},	/*
-+					 * MMDC0_MDSCR, ZQ calibration command sent to
-+					 * device on CS0
++					 * MMDC0_MDSCR, ZQ calibration command sent to device
++					 * on CS0
 +					 */
++
 +	{0x021b0020, 0x00007800},	/* MMDC0_MDREF */
 +
 +	{0x021b0818, 0x00000227},	/* DDR_PHY_P0_MPODTCTRL */
@@ -374,80 +304,475 @@ index 724841b57456..936e54662e98 100644
 +					 */
 +
 +	{0x021b001c, 0x00000000},	/*
-+					 * MMDC0_MDSCR, clear this register
-+					 * (especially the configuration bit as initialization
-+					 * is complete)
++					 * MMDC0_MDSCR, clear this register (especially the
++					 * configuration bit as initialization is complete)
 +					 */
- };
- 
--static struct mx6_ddr3_cfg mem_ddr = {
--	.mem_speed		= 1333,
--	.density		= 2,
--	.width			= 16,
--	.banks			= 8,
--	.rowaddr		= 13,
--	.coladdr		= 10,
--	.pagesz			= 2,
--	.trcd			= 1350,
--	.trcmin			= 4950,
--	.trasmin		= 3600,
-+static struct dram_timing_info dram_timing_128mb = {
++};
++
++struct dram_timing_info bsh_dram_timing_128mb = {
 +	.ddrc_cfg = ddr_ddrc_cfg_128mb,
 +	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_128mb),
- };
++};
+diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m.c
+new file mode 100644
+index 000000000000..0fe5b90a6732
+--- /dev/null
++++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m.c
+@@ -0,0 +1,168 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include "spl_mtypes.h"
++
++static const struct dram_cfg_param ddr_ddrc_cfg_256mb[] = {
++	/* IOMUX */
++
++	/* DDR IO Type: */
++	{0x020e04b4, 0x000C0000},	/* IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
++	{0x020e04ac, 0x00000000},	/* IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
++
++	/* Clock: */
++	{0x020e027c, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK_0 */
++
++	/* Address: */
++	{0x020e0250, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
++	{0x020e024c, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
++	{0x020e0490, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_ADDDS */
++
++	/* Control: */
++	{0x020e0288, 0x000C0028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
++	{0x020e0270, 0x00000000},	/*
++					 * IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 - DSE can be configured
++					 * using Group Control Register: IOMUXC_SW_PAD_CTL_GRP_CTLDS
++					 */
++
++	{0x020e0260, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDODT0 */
++	{0x020e0264, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDODT1 */
++	{0x020e04a0, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_CTLDS */
++
++	/* Data Strobes: */
++	{0x020e0494, 0x00020000},	/* IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
++	{0x020e0280, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0 */
++	{0x020e0284, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1 */
++
++	/* Data: */
++	{0x020e04b0, 0x00020000},	/* IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
++	{0x020e0498, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_B0DS */
++	{0x020e04a4, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_B1DS */
++
++	{0x020e0244, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
++	{0x020e0248, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
++
++	/*
++	 * =============================================================================
++	 * DDR Controller Registers
++	 * =============================================================================
++	 * Manufacturer:ISSI
++	 * Device Part Number:IS43TR16640BL-125JBLI
++	 * Clock Freq.: 400MHz
++	 * Density per CS in Gb: 2
++	 * Chip Selects used:1
++	 * Number of Banks:8
++	 * Row address:    14
++	 * Column address: 10
++	 * Data bus width16
++	 * =============================================================================
++	 */
++	{0x021b001c, 0x00008000},	/*
++					 * MMDC0_MDSCR, set the Configuration request bit during
++					 * MMDC set up
++					 */
++
++	/*
++	 * =============================================================================
++	 * Calibration setup.
++	 * =============================================================================
++	 */
++	{0x021b0800, 0xA1390003},	/*
++					 * DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic
++					 * HW ZQ calibration
++					 */
++
++	/*
++	 * For target board, may need to run write leveling calibration to fine tune these settings
++	 */
++	{0x021b080c, 0x00050005},
++
++	/* Read DQS Gating calibration */
++	{0x021b083c, 0x01480144},	/* MPDGCTRL0 PHY0 */
++
++	/* Read calibration */
++	{0x021b0848, 0x4040363A},	/* MPRDDLCTL PHY0 */
++
++	/* Write calibration */
++	{0x021b0850, 0x40402E2C},	/* MPWRDLCTL PHY0 */
++
++	/*
++	 * Read data bit delay: 3 is the reccommended default value, although out of reset value
++	 * is 0
++	 */
++	{0x021b081c, 0x33333333},	/* MMDC_MPRDDQBY0DL */
++	{0x021b0820, 0x33333333},	/* MMDC_MPRDDQBY1DL */
++
++	/* Write data bit delay: */
++	{0x021b082c, 0xF3333333},	/* MMDC_MPWRDQBY0DL */
++	{0x021b0830, 0xF3333333},	/* MMDC_MPWRDQBY1DL */
++
++	/* DQS&CLK Duty Cycle */
++	{0x021b08c0, 0x00944009},	/* [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
++
++	/* Complete calibration by forced measurement: */
++	{0x021b08b8, 0x00000800},	/* DDR_PHY_P0_MPMUR0, frc_msr */
++
++	/*
++	 * =============================================================================
++	 * Calibration setup end
++	 * =============================================================================
++	 */
++
++	/* MMDC init: */
++	{0x021b0004, 0x0002002D},	/* MMDC0_MDPDC */
++	{0x021b0008, 0x1B333030},	/* MMDC0_MDOTC */
++	{0x021b000c, 0x3F435333},	/* MMDC0_MDCFG0 */
++	{0x021b0010, 0xB68E0B63},	/* MMDC0_MDCFG1 */
++	{0x021b0014, 0x01FF00DB},	/* MMDC0_MDCFG2 */
++
++	/*
++	 * MDMISC: RALAT kept to the high level of 5.
++	 * MDMISC: consider reducing RALAT if your 528MHz board design allow that.
++	 * Lower RALAT benefits:
++	 * a. better operation at low frequency, for LPDDR2 freq < 100MHz, change RALAT to 3
++	 * b. Small performence improvment
++	 */
++	{0x021b0018, 0x00211740},	/* MMDC0_MDMISC */
++	{0x021b001c, 0x00008000},	/*
++					 * MMDC0_MDSCR, set the Configuration request bit during
++					 * MMDC set up
++					 */
++	{0x021b002c, 0x000026D2},	/* MMDC0_MDRWD */
++	{0x021b0030, 0x00431023},	/* MMDC0_MDOR */
++	{0x021b0040, 0x00000047},	/* Chan0 CS0_END */
++	{0x021b0000, 0x83180000},	/* MMDC0_MDCTL */
++
++	{0x021b0890, 0x00400000},	/* MPPDCMPR2 */
++
++	/* Mode register writes */
++	{0x021b001c, 0x02808032},	/* MMDC0_MDSCR, MR2 write, CS0 */
++	{0x021b001c, 0x00008033},	/* MMDC0_MDSCR, MR3 write, CS0 */
++	{0x021b001c, 0x00048031},	/* MMDC0_MDSCR, MR1 write, CS0 */
++	{0x021b001c, 0x15208030},	/* MMDC0_MDSCR, MR0write, CS0 */
++	{0x021b001c, 0x04008040},	/*
++					 * MMDC0_MDSCR, ZQ calibration command sent to device
++					 * on CS0
++					 */
++
++	{0x021b0020, 0x00007800},	/* MMDC0_MDREF */
++
++	{0x021b0818, 0x00000227},	/* DDR_PHY_P0_MPODTCTRL */
++
++	{0x021b0004, 0x0002552D},	/* MMDC0_MDPDC now SDCTL power down enabled */
++
++	{0x021b0404, 0x00011006},	/*
++					 * MMDC0_MAPSR ADOPT power down enabled, MMDC will enter
++					 * automatically to self-refresh while the number of idle
++					 * cycle reached
++					 */
++
++	{0x021b001c, 0x00000000},	/*
++					 * MMDC0_MDSCR, clear this register (especially the
++					 * configuration bit as initialization is complete)
++					 */
++};
++
++struct dram_timing_info bsh_dram_timing_256mb = {
++	.ddrc_cfg = ddr_ddrc_cfg_256mb,
++	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_256mb),
++};
+diff --git a/board/bsh/imx6ulz_smm_m2/spl.c b/board/bsh/imx6ulz_smm_m2/spl.c
+index 936e54662e98..85fd9e133eb3 100644
+--- a/board/bsh/imx6ulz_smm_m2/spl.c
++++ b/board/bsh/imx6ulz_smm_m2/spl.c
+@@ -17,6 +17,8 @@
+ #include <spl.h>
+ #include <asm/arch/mx6-ddr.h>
  
-+static void ddr_cfg_write(const struct dram_timing_info *dram_timing_info)
-+{
-+	int i;
-+	const struct dram_cfg_param *ddrc_cfg = dram_timing_info->ddrc_cfg;
-+	const int ddrc_cfg_num = dram_timing_info->ddrc_cfg_num;
++#include "spl_mtypes.h"
 +
-+	for (i = 0; i < ddrc_cfg_num; i++) {
-+		debug("Writing 0x%x to register 0x%x\n", ddrc_cfg->val,
-+		      ddrc_cfg->reg);
-+		writel(ddrc_cfg->val, ddrc_cfg->reg);
-+		ddrc_cfg++;
-+	}
-+}
-+
-+static void spl_dram_init(void)
-+{
+ #define UART_PAD_CTRL (PAD_CTL_PKE | PAD_CTL_PUE | \
+ 		       PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED | \
+ 		       PAD_CTL_DSE_40ohm | PAD_CTL_SRE_FAST | PAD_CTL_HYS)
+@@ -31,190 +33,15 @@ static void setup_iomux_uart(void)
+ 	imx_iomux_v3_setup_multiple_pads(uart4_pads, ARRAY_SIZE(uart4_pads));
+ }
+ 
+-struct dram_cfg_param {
+-	unsigned int reg;
+-	unsigned int val;
+-};
+-
+-struct dram_timing_info {
+-	const struct dram_cfg_param *ddrc_cfg;
+-	unsigned int ddrc_cfg_num;
+-};
+-
+-static const struct dram_cfg_param ddr_ddrc_cfg_128mb[] = {
+-	/* IOMUX */
+-
+-	/* DDR IO Type: */
+-	{0x020e04b4, 0x000C0000},	/* IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
+-	{0x020e04ac, 0x00000000},	/* IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
+-
+-	/* Clock: */
+-	{0x020e027c, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK_0 */
+-
+-	/* Address: */
+-	{0x020e0250, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
+-	{0x020e024c, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
+-	{0x020e0490, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_ADDDS */
+-
+-	/* Control: */
+-	{0x020e0288, 0x000C0028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
+-
+-	{0x020e0270, 0x00000000},	/*
+-					 * IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 - DSE can be configured
+-					 * using Group Control Register: IOMUXC_SW_PAD_CTL_GRP_CTLDS
+-					 */
+-
+-	{0x020e0260, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDODT0 */
+-	{0x020e0264, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDODT1 */
+-	{0x020e04a0, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_CTLDS */
+-
+-	/* Data Strobes: */
+-	{0x020e0494, 0x00020000},	/* IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
+-	{0x020e0280, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0 */
+-	{0x020e0284, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1 */
+-
+-	/* Data: */
+-	{0x020e04b0, 0x00020000},	/* IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
+-	{0x020e0498, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_B0DS */
+-	{0x020e04a4, 0x00000028},	/* IOMUXC_SW_PAD_CTL_GRP_B1DS */
+-
+-	{0x020e0244, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
+-	{0x020e0248, 0x00000028},	/* IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
+-
+-	/*
+-	 * =============================================================================
+-	 * DDR Controller Registers
+-	 * =============================================================================
+-	 * Manufacturer:ISSI
+-	 * Device Part Number:IS43TR16640BL-125JBLI
+-	 * Clock Freq.: 400MHz
+-	 * Density per CS in Gb: 1
+-	 * Chip Selects used:1
+-	 * Number of Banks:8
+-	 * Row address:    13
+-	 * Column address: 10
+-	 * Data bus width16
+-	 * =============================================================================
+-	 */
+-
+-	{0x021b001c, 0x00008000}, /*
+-				   * MMDC0_MDSCR, set the Configuration request bit during
+-				   * MMDC set up
+-				   */
+-
+-	/*
+-	 * =============================================================================
+-	 * Calibration setup
+-	 * =============================================================================
+-	 */
+-
+-	{0x021b0800, 0xA1390003}, /*
+-				   * DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic
+-				   * HW ZQ calibration.
+-				   */
+-
+-	/*
+-	 * For target board, may need to run write leveling calibration to fine tune these
+-	 * settings.
+-	 */
+-	{0x021b080c, 0x00000000},
+-
+-	/* Read DQS Gating calibration */
+-	{0x021b083c, 0x41480148},	/* MPDGCTRL0 PHY0 */
+-
+-	/* Read calibration */
+-	{0x021b0848, 0x40403A3E},	/* MPRDDLCTL PHY0 */
+-
+-	/* Write calibration */
+-	{0x021b0850, 0x4040362E},	/* MPWRDLCTL PHY0 */
+-
+-	/*
+-	 * Read data bit delay: 3 is the recommended default value, although out of reset
+-	 * value is 0
+-	 */
+-	{0x021b081c, 0x33333333},	/* MMDC_MPRDDQBY0DL */
+-	{0x021b0820, 0x33333333},	/* MMDC_MPRDDQBY1DL */
+-
+-	/* Write data bit delay: */
+-	{0x021b082c, 0xF3333333},	/* MMDC_MPWRDQBY0DL */
+-	{0x021b0830, 0xF3333333},	/* MMDC_MPWRDQBY1DL */
+-
+-	/* DQS&CLK Duty Cycle */
+-	{0x021b08c0, 0x00944009},	/* [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
+-
+-	/* Complete calibration by forced measurement: */
+-	{0x021b08b8, 0x00000800},	/* DDR_PHY_P0_MPMUR0, frc_msr */
+-
+-	/*
+-	 * =============================================================================
+-	 * Calibration setup end
+-	 * =============================================================================
+-	 */
+-
+-	/* MMDC init: */
+-	{0x021b0004, 0x0002002D},	/* MMDC0_MDPDC */
+-	{0x021b0008, 0x1B333030},	/* MMDC0_MDOTC */
+-	{0x021b000c, 0x2B2F52F3},	/* MMDC0_MDCFG0 */
+-	{0x021b0010, 0xB66D0B63},	/* MMDC0_MDCFG1 */
+-	{0x021b0014, 0x01FF00DB},	/* MMDC0_MDCFG2 */
+-
+-	/*
+-	 * MDMISC: RALAT kept to the high level of 5.
+-	 * MDMISC: consider reducing RALAT if your 528MHz board design allow that.
+-	 * Lower RALAT benefits:
+-	 * a. better operation at low frequency, for LPDDR2 freq < 100MHz, change RALAT to 3
+-	 * b. Small performance improvement
+-	 */
+-	{0x021b0018, 0x00211740},	/* MMDC0_MDMISC */
+-	{0x021b001c, 0x00008000},	/*
+-					 * MMDC0_MDSCR, set the Configuration request
+-					 * bit during MMDC set up
+-					 */
+-	{0x021b002c, 0x000026D2},	/* MMDC0_MDRWD */
+-	{0x021b0030, 0x002F1023},	/* MMDC0_MDOR */
+-	{0x021b0040, 0x00000043},	/* Chan0 CS0_END */
+-	{0x021b0000, 0x82180000},	/* MMDC0_MDCTL */
+-
+-	{0x021b0890, 0x00400000},	/* MPPDCMPR2 */
+-
+-	/* Mode register writes */
+-	{0x021b001c, 0x02808032},	/* MMDC0_MDSCR, MR2 write, CS0 */
+-	{0x021b001c, 0x00008033},	/* MMDC0_MDSCR, MR3 write, CS0 */
+-	{0x021b001c, 0x00048031},	/* MMDC0_MDSCR, MR1 write, CS0 */
+-	{0x021b001c, 0x15208030},	/* MMDC0_MDSCR, MR0write, CS0 */
+-	{0x021b001c, 0x04008040},	/*
+-					 * MMDC0_MDSCR, ZQ calibration command sent to
+-					 * device on CS0
+-					 */
+-	{0x021b0020, 0x00007800},	/* MMDC0_MDREF */
+-
+-	{0x021b0818, 0x00000227},	/* DDR_PHY_P0_MPODTCTRL */
+-
+-	{0x021b0004, 0x0002552D},	/* MMDC0_MDPDC now SDCTL power down enabled */
+-
+-	{0x021b0404, 0x00011006},	/*
+-					 * MMDC0_MAPSR ADOPT power down enabled,
+-					 * MMDC will enter automatically to self-refresh
+-					 * while the number of idle cycle reached.
+-					 */
+-
+-	{0x021b001c, 0x00000000},	/*
+-					 * MMDC0_MDSCR, clear this register
+-					 * (especially the configuration bit as initialization
+-					 * is complete)
+-					 */
+-};
+-
+-static struct dram_timing_info dram_timing_128mb = {
+-	.ddrc_cfg = ddr_ddrc_cfg_128mb,
+-	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_128mb),
+-};
+-
+ static void ddr_cfg_write(const struct dram_timing_info *dram_timing_info)
+ {
+ 	int i;
+ 	const struct dram_cfg_param *ddrc_cfg = dram_timing_info->ddrc_cfg;
+ 	const int ddrc_cfg_num = dram_timing_info->ddrc_cfg_num;
 +	struct mmdc_p_regs *mmdc0 = (struct mmdc_p_regs *)MMDC_P0_BASE_ADDR;
 +
 +	clrbits_le32(&mmdc0->mdctl, 1 << 31);	/* clear SDE_0 */
 +	clrbits_le32(&mmdc0->mdctl, 1 << 30);	/* clear SDE_1 */
-+
-+	ddr_cfg_write(&dram_timing_128mb);
-+}
-+
- static void ccgr_init(void)
- {
- 	struct mxc_ccm_reg *ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
-@@ -108,20 +247,17 @@ static void ccgr_init(void)
- 	writel(0xFFFFFFFF, &ccm->CCGR6);
- }
  
--static void imx6ul_spl_dram_cfg(void)
--{
--	mx6ul_dram_iocfg(mem_ddr.width, &mx6_ddr_ioregs, &mx6_grp_ioregs);
--	mx6_dram_cfg(&ddr_sysinfo, &mx6_mmcd_calib, &mem_ddr);
--}
+ 	for (i = 0; i < ddrc_cfg_num; i++) {
+ 		debug("Writing 0x%x to register 0x%x\n", ddrc_cfg->val,
+@@ -226,12 +53,22 @@ static void ddr_cfg_write(const struct dram_timing_info *dram_timing_info)
+ 
+ static void spl_dram_init(void)
+ {
+-	struct mmdc_p_regs *mmdc0 = (struct mmdc_p_regs *)MMDC_P0_BASE_ADDR;
 -
- void board_init_f(ulong dummy)
- {
- 	ccgr_init();
+-	clrbits_le32(&mmdc0->mdctl, 1 << 31);	/* clear SDE_0 */
+-	clrbits_le32(&mmdc0->mdctl, 1 << 30);	/* clear SDE_1 */
+-
+-	ddr_cfg_write(&dram_timing_128mb);
++	/* Configure memory to maximum supported size for detection */
++	ddr_cfg_write(&bsh_dram_timing_256mb);
 +
-+	/* DDR initialization */
-+	spl_dram_init();
++	/* Detect memory physically present */
++	gd->ram_size = get_ram_size((void *)CFG_SYS_SDRAM_BASE, SZ_256M);
 +
- 	arch_cpu_init();
- 	timer_init();
- 	setup_iomux_uart();
- 	preloader_console_init();
--	imx6ul_spl_dram_cfg();
++	/* Reconfigure memory for actual detected size */
++	switch (gd->ram_size) {
++	case SZ_256M:
++		/* Already configured, nothing to do */
++		break;
++	case SZ_128M:
++	default:
++		ddr_cfg_write(&bsh_dram_timing_128mb);
++		break;
++	}
  }
  
- void reset_cpu(void)
+ static void ccgr_init(void)
+diff --git a/board/bsh/imx6ulz_smm_m2/spl_mtypes.h b/board/bsh/imx6ulz_smm_m2/spl_mtypes.h
+new file mode 100644
+index 000000000000..2b517c316e0f
+--- /dev/null
++++ b/board/bsh/imx6ulz_smm_m2/spl_mtypes.h
+@@ -0,0 +1,26 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2025 BSH Hausgeraete GmbH
++ *
++ * Written by: Simon Holesch <simon.holesch@bshg.com>
++ */
++
++#ifndef SPL_MTYPES_H
++#define SPL_MTYPES_H
++
++#include <spl.h>
++
++struct dram_cfg_param {
++	unsigned int reg;
++	unsigned int val;
++};
++
++struct dram_timing_info {
++	const struct dram_cfg_param *ddrc_cfg;
++	unsigned int ddrc_cfg_num;
++};
++
++extern struct dram_timing_info bsh_dram_timing_128mb;
++extern struct dram_timing_info bsh_dram_timing_256mb;
++
++#endif /* SPL_MTYPES_H */
+diff --git a/include/configs/imx6ulz_smm_m2.h b/include/configs/imx6ulz_smm_m2.h
+index 44a3fc02e8ac..87aede218d16 100644
+--- a/include/configs/imx6ulz_smm_m2.h
++++ b/include/configs/imx6ulz_smm_m2.h
+@@ -60,10 +60,8 @@
+ 	BOOTENV
+ 
+ /* Physical Memory Map */
+-#define PHYS_SDRAM			MMDC0_ARB_BASE_ADDR
+-#define PHYS_SDRAM_SIZE			SZ_128M
+-
+-#define CFG_SYS_SDRAM_BASE		PHYS_SDRAM
++#define PHYS_SDRAM		MMDC0_ARB_BASE_ADDR
++#define CFG_SYS_SDRAM_BASE	PHYS_SDRAM
+ #define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
+ #define CFG_SYS_INIT_RAM_SIZE	IRAM_SIZE
+ 
 -- 
 2.43.0
 
