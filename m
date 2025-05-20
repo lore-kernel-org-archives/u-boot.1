@@ -4,68 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC395C54E71
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 20:35:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1EDC3DA6D
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 22:59:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E96182CB8;
-	Tue, 20 May 2025 22:35:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=benjarobin.fr
+	by phobos.denx.de (Postfix) with ESMTP id 289FC82C2F;
+	Wed, 21 May 2025 00:59:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=benjarobin.fr header.i=@benjarobin.fr header.b="S2T2B8ri";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="t0t0p7ZJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95A8F82D09; Tue, 20 May 2025 22:35:31 +0200 (CEST)
-Received: from 4.mo573.mail-out.ovh.net (4.mo573.mail-out.ovh.net
- [46.105.52.157])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9712682CB8
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 22:35:29 +0200 (CEST)
+ id 9761482CD2; Wed, 21 May 2025 00:59:20 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 612E382BD6
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 00:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=benjarobin.fr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dev@benjarobin.fr
-Received: from director3.derp.mail-out.ovh.net
- (director3.derp.mail-out.ovh.net [152.228.215.222])
- by mo573.mail-out.ovh.net (Postfix) with ESMTPS id 4b25sY0gn1z12HD;
- Tue, 20 May 2025 20:35:29 +0000 (UTC)
-Received: from director3.derp.mail-out.ovh.net
- (director3.derp.mail-out.ovh.net. [127.0.0.1])
- by director3.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <dev@benjarobin.fr>; Tue, 20 May 2025 20:35:28 +0000 (UTC)
-Received: from mta3.priv.ovhmail-u1.ea.mail.ovh.net (unknown [10.109.139.140])
- by director3.derp.mail-out.ovh.net (Postfix) with ESMTPS id
- 4b25sX6V8mz5xL9; Tue, 20 May 2025 20:35:28 +0000 (UTC)
-Received: from benjarobin.fr (unknown [10.1.6.4])
- by mta3.priv.ovhmail-u1.ea.mail.ovh.net (Postfix) with ESMTPSA id 451A43A401F; 
- Tue, 20 May 2025 20:35:28 +0000 (UTC)
-Authentication-Results: garm.ovh; auth=pass
- (GARM-111S005b38caad1-975c-43dd-ab7e-8515644a02e8,
- EAD86587B2B6C3DD8ADE427FB1C91837DFE7FEC9) smtp.auth=dev@benjarobin.fr
-X-OVh-ClientIp: 86.194.82.154
-From: Benjamin ROBIN <dev@benjarobin.fr>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, trini@konsulko.com, Benjamin ROBIN <dev@benjarobin.fr>
-Subject: [PATCH v2] bootm: Fix bmi->images pointer not initialized in some
- cases
-Date: Tue, 20 May 2025 22:35:15 +0200
-Message-ID: <20250520203515.25839-1-dev@benjarobin.fr>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54KMxGVl135940;
+ Tue, 20 May 2025 17:59:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1747781956;
+ bh=9V1C1jqmxUcl6jhNCmnbYl3J3xekwV2oUfrjrDubkII=;
+ h=From:To:CC:Subject:Date;
+ b=t0t0p7ZJqlxm/qYQBxbxpa03wId+T9S5NDEMpWbWgtlWOhK9gfy0iUSn5ukeGbd7b
+ LfAzskCmhTEfd0it7s9dNor+JPVMGwcdQ94l5cCiWyDTAsf4dOrhg9t6/Nwv+GwGY2
+ F3C/+5seWDWlKc6zVsyng8Tlkvxa3bB9yIwmM8hw=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54KMxGD51672528
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 20 May 2025 17:59:16 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
+ May 2025 17:59:15 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 20 May 2025 17:59:15 -0500
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54KMxFk5123638;
+ Tue, 20 May 2025 17:59:15 -0500
+From: Judith Mendez <jm@ti.com>
+To: Judith Mendez <jm@ti.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCH] mmc: am654_sdhci: Clear UHS_MODE_SELECT when < MMC_HS_52
+Date: Tue, 20 May 2025 17:59:15 -0500
+Message-ID: <20250520225915.146026-1-jm@ti.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 16685836623348120489
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtddtgdduudekucdltddurdegfedvrddttddmucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpeeuvghnjhgrmhhinhcutffquefkpfcuoeguvghvsegsvghnjhgrrhhosghinhdrfhhrqeenucggtffrrghtthgvrhhnpeehhffgjeekhfeljeetueektdetudfhheefuefhkeejgfeihfejfeeuveeigeetudenucfkphepuddvjedrtddrtddruddpkeeirdduleegrdekvddrudehgeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepuggvvhessggvnhhjrghrohgsihhnrdhfrhdpnhgspghrtghpthhtohepgedprhgtphhtthhopeguvghvsegsvghnjhgrrhhosghinhdrfhhrpdhrtghpthhtohepshhjghestghhrhhomhhiuhhmrdhorhhgpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdfovfetjfhoshhtpehmohehjeefmgdpmhhouggvpehsmhhtphhouhht
-DKIM-Signature: a=rsa-sha256; bh=8qgOvSCWu2h0gb28gIcOXqL6PbBBW2NaXgY7gqiicss=; 
- c=relaxed/relaxed; d=benjarobin.fr; h=From;
- s=ovhmo1728415-selector1; t=1747773329; v=1;
- b=S2T2B8ri7aqpGEpSBSVSYZHiDE8TdDz4Le8SJdZPq/hKEW2aH3dHvyg97N4YmeAk58McYmLB
- NwJ75wTWwh9XaEE9StR7nwiznvhlwGcNzGbEGF3aMW0OIZwByXtyFxgJqfDdCdBbk+HOqNyycO+
- Iu9QbQ4HsgI6i+Vbr3FiJJfpryC5uS2EAS++elXk49ilGlqe4MMVRIJVlxsq/HOVWUPzqFjf/5y
- 1TksZQoV/YRJ2r+/BaokOlMn0zLuwtXam35btQxq3ipXG6038fcNiYtk0scSP8x2SxKSF7VxEDn
- WUTS6RO9hFXo1rdhXb7Pg0da3QuFYqH4DXQ6Wv6WvMXuA==
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,40 +77,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building with only bootz command, without bootm, images pointer
-inside bootm_info structure is not initialized. And since this structure
-is stored in stack, the generated error is kind of random, but most of
-the time this will generate: "ramdisk - allocation error".
+This clears UHS_MODE_SELECT for timing modes < MMC_HS_52.
 
-Also, after analysis, this problem could occur with the command booti,
-if the command bootm is disabled.
+When initializing to HS400 mode, the host controller downgrades to non-uhs
+modes so clear UHS_MODE_SELECT at modes < MMC_HS_52.
 
-Currently bootm_init() is called by: do_bootz(), do_bootm(), do_booti()
-and by do_stm32prog(). And all of these commands execute bootm_run_states()
-which access the images pointer stored into bootm_info structure.
+This fixes eMMC writes on j7200 EVM.
 
-So, to fix this issue, just do the assignment unconditionally.
-
-Fixes: c2211ff65136 ("bootm: Add more fields to bootm_info")
-Signed-off-by: Benjamin ROBIN <dev@benjarobin.fr>
+Fixes: 6067aa66b3bb ("mmc: am654_sdhci: Add am654_sdhci_set_control_reg")
+Signed-off-by: Judith Mendez <jm@ti.com>
 ---
- boot/bootm.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/mmc/am654_sdhci.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index f6aa32746b7e..108ca7fb472e 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -1169,8 +1169,7 @@ void bootm_init(struct bootm_info *bmi)
+diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
+index 0df3568f073..d3c8f94dd0c 100644
+--- a/drivers/mmc/am654_sdhci.c
++++ b/drivers/mmc/am654_sdhci.c
+@@ -527,11 +527,16 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
+ void am654_sdhci_set_control_reg(struct sdhci_host *host)
  {
- 	memset(bmi, '\0', sizeof(struct bootm_info));
- 	bmi->boot_progress = true;
--	if (IS_ENABLED(CONFIG_CMD_BOOTM))
--		bmi->images = &images;
-+	bmi->images = &images;
+ 	struct mmc *mmc = host->mmc;
++	u32 reg;
+ 
++	reg = sdhci_readw(host, SDHCI_HOST_CONTROL2);
++	reg &= ~SDHCI_CTRL_UHS_MASK;
+ 	sdhci_set_voltage(host);
+ 
+ 	if (mmc->selected_mode > MMC_HS_52)
+ 		sdhci_set_uhs_timing(host);
++	else
++		sdhci_writew(host, reg, SDHCI_HOST_CONTROL2);
  }
  
- /**
+ const struct sdhci_ops am654_sdhci_ops = {
 -- 
 2.49.0
 
