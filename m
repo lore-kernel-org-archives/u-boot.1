@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDCCBC3ABDD
-	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:24:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D1EEC3ABDD
+	for <u-boot@archiver.kernel.org>; Tue, 20 May 2025 05:24:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A277782CC9;
+	by phobos.denx.de (Postfix) with ESMTP id EBE3A82CEB;
 	Tue, 20 May 2025 07:22:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TxuCUhvK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZNzUB+h6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0819F82BD9; Tue, 20 May 2025 07:22:41 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 1817182BD7; Tue, 20 May 2025 07:22:43 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA47E82CBB
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2ECEB82BF2
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 07:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-442ec3ce724so42137865e9.0
- for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:38 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-441ab63a415so56961235e9.3
+ for <u-boot@lists.denx.de>; Mon, 19 May 2025 22:22:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747718558; x=1748323358; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1747718560; x=1748323360; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gz0FBT2PRpQ7wti3FF8BzG2UcXh/a7kQXjjzcGtZsCQ=;
- b=TxuCUhvKlEMSJnVVFsdL5fpbfOB6Lry+PvWH1B6iPvbsiUh7CFNzCw0TnU6TTt7z1l
- D2I8jLbFR8QrmZhxtQqDY/4AO28KDaGYMto4qg+K/KFLKQKFc2EqmV6kVMQnolYwv4i2
- 8X1pCTQ9vHqL5E+nMgIdW1HJHLA7+9rZjXrov9QuJjtM5SRnMCRt9q3m/MEPm5AfSuBO
- hyy/zCHWn7AqRWMbf8bHBXARFGL3v682/1559zMnAYXWXhlBjVdkqKs9eiERo5Ix/m+y
- jL5lAXF0vkSZQiY5Q4MpUvfqxeVxJUgG7q8po/Z+klI4c/VM03gyIEgAJbOvYOVsJQK2
- 005Q==
+ bh=SZrKWnYZXXNTGosY75zyzhsNnAawmI+hKa+SKDv0ZfY=;
+ b=ZNzUB+h6Kv1pq25b7IBpRQosGRaWP9TFst4MlnMSKtv1yr4uKzcVIBCLc+q+bFNewk
+ EC2n49tCfGpWgpFVRRTd5EoFA6dF4weUVJb1nUfYt1GwHFq2RQG07PLbznmSBDYkFxnM
+ h5pQvDaQ664b5pi8KQb8nKo1TBwOHt4U0eJlB/VIwbDc9RN6dG6kW0pyyvBfOVkC0Lne
+ ZfwHhbZR/KPHNg8dxXprEv5Cw50CnKo4ikfhU68UFS2yWu9QN0zCmpFV2gEQ2IMSnpJw
+ VBPaCjn1Hm+5UEgAfdEsBgGOyHqo0BmS9aukLbEwlRLev4o+1LuDdGrwaN618hsmo5qc
+ b0wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747718558; x=1748323358;
+ d=1e100.net; s=20230601; t=1747718560; x=1748323360;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gz0FBT2PRpQ7wti3FF8BzG2UcXh/a7kQXjjzcGtZsCQ=;
- b=GbyS4hPnPZJnfVBgyzCcK7acm9s/3jj4VTujRSNfh3LkWvxLDh0gwgTAlOT///Alkp
- p1Ne3MXFPBBW+S0iLmUlbnF5l43UrraVjoxc8qv48u5Bq1/X5RW0avPxk8R5hb40VDy4
- ZtqyRYpM7wFs8t9K4BAMQgoIDfpsvePufVKLJUqXEJsxZgC6goL2FwjiCe5fwpJdcm7d
- GHDKk+oFQmkRMWm3JYsVIMA0yzN1S0sxLqRt7cgglyC91uVMnCr4O8K/+U24gt6LXuay
- 4XM5H5OB2xUT2xMZpdt9HvP+lJbKWnfQ53+Q1g4CHd+fd8UoE4Yk32vA0eJc20zX2qcz
- ayWA==
+ bh=SZrKWnYZXXNTGosY75zyzhsNnAawmI+hKa+SKDv0ZfY=;
+ b=e7YWeYbqSlLCDbMgVEdx61uXsZCB6fnxKApv/igY1aRxCwZVfdVYzZ0/7KqzZjho69
+ Ct8L8CC9D+F3kKLNDd10+bBQC7rhrop5eJWkZjUlPGK2TXh8KLHXKUQuFk9nyn76S+zO
+ zibUCSVEV8ILDUs/8/Yk0o25gZmYoHOMV8q8W03CgiaaahvCs0uK36ZBdQhhBrqbi6Kr
+ Xld+JDjkCnoJHdLfaU3RKkIO7bOnd3GQMAfUTH4fOgz6d2Du5xUjQdliKOexcuBGL/qE
+ whS+k0ymMcNHRD6ThjAWVIqvxBNe3I7DGAnX9vRY/yl2us35Av1id3LwsKEsM9Vv6/ZW
+ tbSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWs5fjqgptoqDSjrluIJpiodkSiIBOdcx6QKAN6fV+cYp4cwoObjhqlM+ms9+VrvxBQWz9XIus=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywhigx2xVQmd+ecmf+RTxk0eCcraIQ05RgqzuqQmdS64mQOR9h5
- LRvuHEHK19H928iyTj2rAJ4vKXI2lAMdW2WH99qE/39J1y6YwqoB//fBXW2efJBkwb0=
-X-Gm-Gg: ASbGncv2h/wnPKGkRuYRO0iPKzrG/SNi1+EQBv8Mhs4pwYs2dIxTBVzk7d+RqDEL+MQ
- Bom8GiFLujNh4P+vDbeRAG95hJ7eAWIv04OWcBPv0zpbe0XOGHx3/O+DEFibYYnTDGr7zSGRIsy
- eNoN1h/9z4pa0H13dBY0oyKhHh2zZQi7CglAI5XJo23EorI5Nr9aCyOimvP5mnik82RzMV7HMDU
- BKH75YnUOsAPr1TwbULScwez/a5STGYcEGdgtFuZIaMV9mARtwGyqSnc5mptSeozNA28welinX/
- cZ3Aew3qNjfRHx636I0MgYzQd/BQCZTbjKvOQ830IW9f+rvGB5rx1Kg5PZxhIRrE3XCX97DgoHU
+ AJvYcCV0GZxqT++7n0mTMI/OjTc+KOIZ5rzf4fbqLM+nAl6WolpRN9up8HphN4ecNGr9DJqkKxNrZF8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwVjky5cfWElMos+B4SN/BV5gaop1SlHMe4j9f4EhK6+E2+tVuz
+ QMHf+4nqVGFizk5jgM02gu1sHnE1NeSsSces0CHsa0rhxtiNaLRFcm62tBMCsRdmZr4=
+X-Gm-Gg: ASbGncspPDVvXw/Ie3y3eDWgF1Rp5ccaVYnNb4rSJzdmYtY4TF6RDEJ8i5Q/dJ4kSqq
+ 58dIjVm1G9uJCkYl5rZsBn80VXuiL2yRteKQXZ8J6lb3g6Q75dFuJnKMtkqBZk9Dw+LnF/oHfkM
+ UdRbnLSx5P70sEMU1s19XMPqGO7nyBHhGT2IFQ17Ajss/krBiUy1N7tblGY6gVFw/nQR10fgjR3
+ hWW9U5tMJu4n01/iX/6RhhV1xyudpPhvBdAJIADyN/13P9oq74u3A+AYdRIDyHKOkVoSnSYMMIn
+ rUgRssZoVUKqPBnseMUZRCnpcmyPnhnUKLKjwdPptfDfNLG8zMNKafP/MpFuC2qiNy1ZltH+2e0
  =
-X-Google-Smtp-Source: AGHT+IEQxnOpIMHAt+AxHPNqTNWwoXkAfZJr1Ytpg+qG5Dpb9MXU7723SyujZc0LXWwCto24FBe82w==
-X-Received: by 2002:a05:600c:5247:b0:442:f4a3:b5f2 with SMTP id
- 5b1f17b1804b1-442fd60b4e8mr119775415e9.6.1747718558189; 
- Mon, 19 May 2025 22:22:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFnx/mASC/1xoKjsbF6qTXs7R3CO8e4ycvqg64Rq2gKtzcbPTcuParUQP4VXSssVWUPpcny3Q==
+X-Received: by 2002:a05:600c:1d07:b0:43c:e305:6d50 with SMTP id
+ 5b1f17b1804b1-442fd660721mr114794865e9.24.1747718560542; 
+ Mon, 19 May 2025 22:22:40 -0700 (PDT)
 Received: from localhost.localdomain ([46.198.180.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.36
+ ffacd0b85a97d-3a35ca889e6sm15100762f8f.71.2025.05.19.22.22.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 May 2025 22:22:37 -0700 (PDT)
+ Mon, 19 May 2025 22:22:40 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -81,11 +81,11 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Prasad Kummari <prasad.kummari@amd.com>,
  Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
- u-boot@lists.denx.de
-Subject: [PATCH 16/24] kbuild: remove redundant 'set -e' from cmd_* defines
-Date: Tue, 20 May 2025 08:21:27 +0300
-Message-ID: <20250520052153.307194-17-ilias.apalodimas@linaro.org>
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Subject: [PATCH 17/24] kbuild: remove redundant quiet_modtag for $(obj-m)
+Date: Tue, 20 May 2025 08:21:28 +0300
+Message-ID: <20250520052153.307194-18-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
 References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
@@ -108,24 +108,25 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Backported from kernel
-commit 5439f09f488f ("kbuild: remove redundant 'set -e' from cmd_* defines")
+commit b39a691617e4 commit ("kbuild: remove redundant quiet_modtag for $(obj-m)")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Makefile.build | 1 -
- 1 file changed, 1 deletion(-)
+ scripts/Makefile.build | 2 --
+ 1 file changed, 2 deletions(-)
 
 diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index 80caddde09ab..fa91445f132b 100644
+index fa91445f132b..29446298041f 100644
 --- a/scripts/Makefile.build
 +++ b/scripts/Makefile.build
-@@ -159,7 +159,6 @@ cmd_gensymtypes =                                                           \
+@@ -125,8 +125,6 @@ $(real-objs-m:.o=.i)  : quiet_modtag := [M]
+ $(real-objs-m:.o=.s)  : quiet_modtag := [M]
+ $(real-objs-m:.o=.lst): quiet_modtag := [M]
  
- quiet_cmd_cc_symtypes_c = SYM $(quiet_modtag) $@
- cmd_cc_symtypes_c =                                                         \
--    set -e;                                                                 \
-     $(call cmd_gensymtypes,true,$@) >/dev/null;                             \
-     test -s $@ || rm -f $@
+-$(obj-m)              : quiet_modtag := [M]
+-
+ # Default for not multi-part modules
+ modname = $(basetarget)
  
 -- 
 2.49.0
