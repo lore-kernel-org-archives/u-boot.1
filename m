@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FDBC2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 13:44:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A3BC54E71
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 13:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 142A982F30;
+	by phobos.denx.de (Postfix) with ESMTP id 54E7982F66;
 	Wed, 21 May 2025 15:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0O/s5VMB";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Uhq2kimY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63F1182F73; Wed, 21 May 2025 15:43:29 +0200 (CEST)
+ id 7D02482F40; Wed, 21 May 2025 15:43:29 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29F3382F40
+ by phobos.denx.de (Postfix) with ESMTPS id 6E58A82F54
  for <u-boot@lists.denx.de>; Wed, 21 May 2025 15:43:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=723653ac2b=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LDRTDY006868;
- Wed, 21 May 2025 15:43:21 +0200
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LBo8mq013291;
+ Wed, 21 May 2025 15:43:22 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- zWWcAz5wQfil1Ixhv5cOVdWiSy7ZtI8K7RXL8uOvZHE=; b=0O/s5VMBmAr5qmPG
- Zk8BUliQm/CaSS42TgbskBzjkHCGfiRIKE4Pxf/ej0QlNuwOYZkuXOo5rIBZZhu0
- 3cSpteJ7BCWc/GddalbDq+w90XfeJydelMeLtrkdMO3yKBy9ZxMNf5mgFmHeO2Un
- 1VUFrwMeuDff0u+01VMfHT+2UNzfrEX9pDifIrqJX7RpvjNo9S+DUR6KJtBwIEOr
- wpciCm5JhAroIokKwuvMSe1vE0ZphB9ufrOhVgCwSNzPTYAKCTFNFlu3ZZo5ctaX
- mkwruOjRnfEsjhdGPBUL1PfeEdJBl84xZcq4cg9syM2vmgKEqkLkp3915ym5cGe4
- CeW9Kw==
+ fdy34bXxJLwlYN2agnGl1y+F8EzLnrGc5IniTM45jO4=; b=Uhq2kimYukTYd/jm
+ URZ90MQBxjutgWEpzV+rgqz8ONyxns86SsC2jxBiybZfcmdpufAAyTmb5gZ+qd6X
+ w3lLTvUm+8nSJzEjrfy8DnkfITRyAj/EoPcUU/6GQvRX4jDkH1XHN8bxYbckT2j7
+ hVPJviPjIyMuXHDArRwMmEYOPaNhPfxVSCoNxk7/V2OPa6jTbpfgOCFzHeKo0Fud
+ rUJBkeVvUUOAiUXWtfx+kwjHhZd6jUPPoqgdl+XL9TFRmOx7EzWjCwrW5aJzm0Z7
+ 4zd5Q8r8FCMjD74s8jvfER99mq58vB7SXopD9+57vAdshdH+8J0ek+M9HHGnHZA0
+ R9kcwg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwf44enn-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwff4drn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Wed, 21 May 2025 15:43:21 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 17D3140052;
- Wed, 21 May 2025 15:42:32 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 45F2240048;
+ Wed, 21 May 2025 15:42:19 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CD907B2CB74;
- Wed, 21 May 2025 15:41:37 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 38DD9B2CB63;
+ Wed, 21 May 2025 15:41:30 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
- 2025 15:41:37 +0200
+ 2025 15:41:29 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Valentin Caron
+ <valentin.caron@foss.st.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 09/13] phy: stm32-usbphyc: manage properly the clk
- identifier with CCF
-Date: Wed, 21 May 2025 15:41:13 +0200
-Message-ID: <20250521134117.2828335-10-patrice.chotard@foss.st.com>
+ Alice Guo <alice.guo@nxp.com>, Marek Vasut <marex@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, Ranjani Vaidyanathan
+ <Ranjani.Vaidyanathan@nxp.com>, Tom Rini <trini@konsulko.com>, Ye Li
+ <ye.li@nxp.com>
+Subject: [PATCH v1 01/13] clk: scmi: add compatibility with clock protocol 2.0
+Date: Wed, 21 May 2025 15:41:05 +0200
+Message-ID: <20250521134117.2828335-2-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
 References: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
@@ -92,71 +95,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+From: Valentin Caron <valentin.caron@foss.st.com>
 
-Add private uclass data for "stm32-usbphyc-clk" as it is not done
-by the driver model.
+Since clock protocol 2.0, SCMI specification add an option field
+"clock_enable_delay" to CLOCK_ATTRIBUTES command.
 
-This clk struct is needed by CCF to save the unique id used to identify
-each clock.
+scmi_read_resp_from_smt() will return an error ("Buffer too small") as
+the message length coming from the SCMI server is not the same as expected.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+So implement a condition to SCMI clock protocol version to change the
+length of the expected message.
+
+Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Lukasz Majewski <lukma@denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>
 ---
 
- drivers/phy/phy-stm32-usbphyc.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ drivers/clk/clk_scmi.c   | 54 +++++++++++++++++++++++++++++-----------
+ include/scmi_protocols.h | 15 +++++++++++
+ 2 files changed, 54 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
-index 8d643b762f9..fcf8617ee9b 100644
---- a/drivers/phy/phy-stm32-usbphyc.c
-+++ b/drivers/phy/phy-stm32-usbphyc.c
-@@ -16,7 +16,9 @@
- #include <syscon.h>
- #include <usb.h>
- #include <asm/io.h>
-+#include <dm/device.h>
- #include <dm/device_compat.h>
-+#include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dm/of_access.h>
- #include <linux/bitfield.h>
-@@ -633,6 +635,7 @@ U_BOOT_DRIVER(stm32_usb_phyc) = {
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index af69850cdd8..e323a948780 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -84,26 +84,47 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
+ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+ 				 u32 *attr)
+ {
++	struct scmi_clock_priv *priv = dev_get_priv(dev);
+ 	struct scmi_clk_attribute_in in = {
+ 		.clock_id = clkid,
+ 	};
+-	struct scmi_clk_attribute_out out;
+-	struct scmi_msg msg = {
+-		.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
+-		.message_id = SCMI_CLOCK_ATTRIBUTES,
+-		.in_msg = (u8 *)&in,
+-		.in_msg_sz = sizeof(in),
+-		.out_msg = (u8 *)&out,
+-		.out_msg_sz = sizeof(out),
+-	};
+ 	int ret;
  
- struct stm32_usbphyc_clk {
- 	bool enable;
-+	struct clk clkp;
+-	ret = devm_scmi_process_msg(dev, &msg);
+-	if (ret)
+-		return ret;
+-
+-	*name = strdup(out.clock_name);
+-	*attr = out.attributes;
++	if (priv->version >= 0x20000) {
++		struct scmi_clk_attribute_out_v2 out;
++		struct scmi_msg msg = {
++			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
++			.message_id = SCMI_CLOCK_ATTRIBUTES,
++			.in_msg = (u8 *)&in,
++			.in_msg_sz = sizeof(in),
++			.out_msg = (u8 *)&out,
++			.out_msg_sz = sizeof(out),
++		};
++
++		ret = devm_scmi_process_msg(dev, &msg);
++		if (ret)
++			return ret;
++
++		*name = strdup(out.clock_name);
++		*attr = out.attributes;
++	} else {
++		struct scmi_clk_attribute_out out;
++		struct scmi_msg msg = {
++			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
++			.message_id = SCMI_CLOCK_ATTRIBUTES,
++			.in_msg = (u8 *)&in,
++			.in_msg_sz = sizeof(in),
++			.out_msg = (u8 *)&out,
++			.out_msg_sz = sizeof(out),
++		};
++
++		ret = devm_scmi_process_msg(dev, &msg);
++		if (ret)
++			return ret;
++
++		*name = strdup(out.clock_name);
++		*attr = out.attributes;
++	}
+ 
+ 	return 0;
+ }
+@@ -257,6 +278,9 @@ static int scmi_clk_probe(struct udevice *dev)
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return 0;
+ 
++	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
++					    &priv->version);
++
+ 	/* register CCF children: CLK UCLASS, no probed again */
+ 	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
+ 		return 0;
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index 9046de7e3e7..762a1032c37 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -782,6 +782,21 @@ struct scmi_clk_attribute_out {
+ 	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
  };
  
- static ulong stm32_usbphyc_clk48_get_rate(struct clk *clk)
-@@ -687,9 +690,25 @@ const struct clk_ops usbphyc_clk48_ops = {
- 	.disable = stm32_usbphyc_clk48_disable,
- };
- 
-+int usbphyc_clk48_probe(struct udevice *dev)
-+{
-+	struct stm32_usbphyc_clk *priv = dev_get_priv(dev);
++/**
++ * struct scmi_clk_get_nb_out_v2 - Response payload for SCMI_CLOCK_ATTRIBUTES command
++ * Clock management Protocol 2.0
++ * @status:	SCMI command status
++ * @attributes:	clock attributes
++ * @clock_name:	name of the clock
++ * @clock_enable_delay: delay incurred by the platform to enable the clock
++ */
++struct scmi_clk_attribute_out_v2 {
++	s32 status;
++	u32 attributes;
++	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
++	u32 clock_enable_delay;
++};
 +
-+	/* prepare clkp to correctly register clock with CCF */
-+	priv->clkp.dev = dev;
-+	priv->clkp.id = CLK_ID(dev, 0);
-+
-+	/* Store back pointer to clk from udevice */
-+	/* FIXME: This is not allowed...should be allocated by driver model */
-+	dev_set_uclass_priv(dev, &priv->clkp);
-+
-+	return 0;
-+}
-+
- U_BOOT_DRIVER(stm32_usb_phyc_clk) = {
- 	.name = "stm32-usbphyc-clk",
- 	.id = UCLASS_CLK,
- 	.ops = &usbphyc_clk48_ops,
-+	.probe = &usbphyc_clk48_probe,
- 	.priv_auto = sizeof(struct stm32_usbphyc_clk),
- };
+ /**
+  * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
+  * @clock_id:	SCMI clock ID
 -- 
 2.25.1
 
