@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 738BAC54756
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 01:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CCCC54756
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 01:57:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA9B482D4A;
-	Wed, 21 May 2025 03:57:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 017EE82D2E;
+	Wed, 21 May 2025 03:57:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Np3Cr75V";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Q1oIX37U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A0C682D4E; Wed, 21 May 2025 03:57:27 +0200 (CEST)
-Received: from mail-m32105.qiye.163.com (mail-m32105.qiye.163.com
- [220.197.32.105])
+ id B63B982D4D; Wed, 21 May 2025 03:57:34 +0200 (CEST)
+Received: from mail-m155104.qiye.163.com (mail-m155104.qiye.163.com
+ [101.71.155.104])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C47782D4A
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 03:57:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23C7482C2F
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 03:57:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 15d19772f;
- Wed, 21 May 2025 09:57:19 +0800 (GMT+08:00)
-Message-ID: <03069ed4-694a-41e8-9c97-9a4c6b3d0ebe@rock-chips.com>
-Date: Wed, 21 May 2025 09:57:19 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 15d197771;
+ Wed, 21 May 2025 09:57:27 +0800 (GMT+08:00)
+Message-ID: <996998d8-a3f6-4ad3-93bf-142c2e337055@rock-chips.com>
+Date: Wed, 21 May 2025 09:57:26 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/6] arm: uniphier: Change _debug_uart_putc function to
+Subject: Re: [PATCH v5 2/6] efi: stub: Change _debug_uart_putc function to
  inline
 To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -41,25 +41,25 @@ To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
  Quentin Schulz <quentin.schulz@cherry.de>
 Cc: u-boot@lists.denx.de
 References: <20250520-silent_console-v5-0-ef9583d93285@thaumatec.com>
- <20250520-silent_console-v5-1-ef9583d93285@thaumatec.com>
+ <20250520-silent_console-v5-2-ef9583d93285@thaumatec.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250520-silent_console-v5-1-ef9583d93285@thaumatec.com>
+In-Reply-To: <20250520-silent_console-v5-2-ef9583d93285@thaumatec.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCGksfVkgZGR0dGB1OGEwZQlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCGEsYVk4ZH0NITU9LSR0dQ1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
-X-HM-Tid: 0a96f08f222a03afkunmb015bc31487aa3
+X-HM-Tid: 0a96f08f547c03afkunm9a43683f487e60
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ky46NQw5HTE1URgWKA8YDzke
- KzpPCRBVSlVKTE9MTEJJTU9LSENDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpDQ0o3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pxg6ATo6DzE#GBgBAg4pDyJJ
+ PjFPCStVSlVKTE9MTEJJTU9DTUhDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpDT0o3Bg++
 DKIM-Signature: a=rsa-sha256;
- b=Np3Cr75VX7SkxghWZJVgOrcZ2WiQaI2myn+j/gl8dmbwz4hZ1kpHjTzSF+YuFEtF1wsyY9lANBcxjBsgjv8/QGvXBE5pn6M6roZxHfi+gRECmIhHN0LJuUJ498JJbIXEef9rMtRm1yH0k3dMclHIW+e07/GFJ/3l8mWnVCvrtSQ=;
+ b=Q1oIX37U6pCgmc2n6XKwACf0Hle05+fvwqGDXoad/MEz+539MY0VxBZdHHqKRfXSY10FYeE9Pt5rygIxJ4uB/YL6MpnwezzTMAlVQJZd3rfjiq7dK3Z+XJcYm1oNtMuLGzW/29nryun619RjCYaqxR+jzquK+9sbyU9gwgPJnjo=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=rqfTeVTv75XrJSSX7yUpy0suo0V9Tl+xnK08ewZE8ac=;
+ bh=ospzZZ0AlQ8slzqq9deYOrkBAV6itIi1xVz9Uk2pC+g=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,8 +79,11 @@ X-Virus-Status: Clean
 
 
 On 2025/5/20 19:36, Lukasz Czechowski wrote:
-> Update the definition of _debug_uart_putc to static inline.
-> This matches the instructions in include/debug_uart.h and
+> Update definition of _debug_uart_putc to static inline.
+> This will allow to avoid compilation warnings about unused code
+> after introduction of patch changing debug uart functions to
+> dummies if CONFIG_DEBUG_UART is not set.
+> This also matches the instructions in include/debug_uart.h and
 > provides consistency with implementations for other platforms.
 >
 > Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
@@ -89,20 +92,20 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/mach-uniphier/debug-uart/debug-uart.c | 2 +-
+>   lib/efi/efi_stub.c | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/arch/arm/mach-uniphier/debug-uart/debug-uart.c b/arch/arm/mach-uniphier/debug-uart/debug-uart.c
-> index 6836eb63bfac..1a3e290aa978 100644
-> --- a/arch/arm/mach-uniphier/debug-uart/debug-uart.c
-> +++ b/arch/arm/mach-uniphier/debug-uart/debug-uart.c
-> @@ -16,7 +16,7 @@
->   #define UNIPHIER_UART_LSR		0x14
->   #define UNIPHIER_UART_LDR		0x24
+> diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
+> index 40fc29d9adf7..a083c7f1e9b4 100644
+> --- a/lib/efi/efi_stub.c
+> +++ b/lib/efi/efi_stub.c
+> @@ -83,7 +83,7 @@ void puts(const char *str)
+>   		putc(*str++);
+>   }
 >   
-> -static void _debug_uart_putc(int c)
-> +static inline void _debug_uart_putc(int c)
+> -static void _debug_uart_putc(int ch)
+> +static inline void _debug_uart_putc(int ch)
 >   {
->   	void __iomem *base = (void __iomem *)CONFIG_VAL(DEBUG_UART_BASE);
->   
+>   	putc(ch);
+>   }
 >
