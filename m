@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69D43C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 10:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC64C2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 11:09:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1DD582E31;
-	Wed, 21 May 2025 12:03:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B649A82E2D;
+	Wed, 21 May 2025 13:09:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dcn22fuL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SiuFUP3v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7B4F82E81; Wed, 21 May 2025 12:03:03 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 1B59682E31; Wed, 21 May 2025 13:09:20 +0200 (CEST)
+Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
+ [IPv6:2607:f8b0:4864:20::e2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D830482E2D
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 12:03:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEB2182E0A
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 13:09:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7c9677cd6d7so676165385a.3
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 03:03:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-4e15013bdc5so1580525137.1
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 04:09:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747821780; x=1748426580; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/duUTZ1TdpIYDBvfYEAJAVPbybmJCsU0CHrNNTU1prc=;
- b=dcn22fuLwDP1U+agIS6R04BzbKh3WCkN8V3dB2OmDqwZ19huffArjLskKMPS7UQLP/
- sCf0KQeM1Kl9DgbkRu6Nxp/h9m3udo+mFhX0PVqysrM1KaR5I7li88B97Y+NTMqMW2VE
- ZB4fQTmw5cO4NGt5d3l49zrEFmGyGO7I6RnTZ5g5Z/DPIwjmqR3A0Ctq4QA0p0F6T35E
- ZCYUA0EOnCxoxe8/OF+lhUlZGBF6TfbpK+vt28JHpEBOMXH11Eceki8Tx+PnxTVPcRF9
- NKygjbnsC6E7Cde1kF93u6b5gbIUZOKLhkfqX+/Ngi1dkop/y45r3TIer1QmTLkWJDdB
- 1QMw==
+ d=gmail.com; s=20230601; t=1747825757; x=1748430557; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uapniPJlouyC0yomaIpKmn5GB0bwl9Ggt7EFeeLYgRo=;
+ b=SiuFUP3v6NP4gx9QBj6DoqWEx+vY4kZES0SK5lF+Bpo8kkru8lUneBP1V6MpE5y4ri
+ WgKGZCXQuk4zm7w0b2C9PRsAeSB/06q6bx5C6RimNPqp7brYmoiWZncVStvgv426yiMc
+ lgWpZza41w8RxT5TXTn5mCbKDdxW1rSGuVpTN2sXIjbhDmrd01hcegIFWP2aEMrKYLMp
+ VPks6v8UfZvwYDCm1jxK9jWNYp2ZWJTHLC3ADEaXQyzxJNNtmR+wTVl0Xr6Q7y6L0eKk
+ MJUV3Jra8hgCGif7MKmMG3GZnCYgJ+pAEwh5dOFjyDScdG0Iy/0bfcNmlcRfAVHWxfGP
+ 9maQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747821780; x=1748426580;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1747825757; x=1748430557;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/duUTZ1TdpIYDBvfYEAJAVPbybmJCsU0CHrNNTU1prc=;
- b=nk7aFZkdrHDEVcYA4ymHQTtYAOYf31gWUWKfwnkyzH2zjw4YVxleOqUf15d+0/YyRJ
- Rhw6sd+pbX9Lp/1cmxwrXrgQo+tiBTlxrMB8ORkleFf4KGo5VWWWpEiP2w6qkQvCySZP
- kch0OtOc8hoNuiOINrnFeiyc1Ay8eb5ZI4mc16evHaa54QRRBYjVYcuBX4UtdlJDKat4
- DGEpdUPUXIYSCFyjR0NW7EZB6DNM0vUU20haSj+s2UwFOM6t0b30t26mTt77+HzO32/7
- st/eCpPlxM5wTogEymtfkoRPa3/Rz9JW4fWbd4botRq9RXWPE1u8N9UpVoj2J4WVZXM8
- 5Kvg==
-X-Gm-Message-State: AOJu0YxdUH80UhSTHfqvbYnuvne0xqGdn/8Ub3d9DloCe5wRyI87COGt
- nffDMEb5kSVVhcvwIHxDJq+ECOdY57JoxdKQNadTQ3/n5zqWAkTfIMzMF1fpLPWYSYnuMZuU73H
- WgEIiHHl48BX1lSspWmYAyMqr592MJ1l8do5NRK+VrA==
-X-Gm-Gg: ASbGnctdgt3LEYLRdADOSiBUGvz6ROoqmgvVdhR18F+jcLcxpupM+mWEFOJi92EScDt
- zwMVKJbEjgpS9EkW/ndxpPEkyKLp/eO7qyupNk6T12RGmNfHJV4szLb/H9fxaTikfXkYsz5hqlR
- khq/Q34SAnDjfFoLJdsrrNzRRH4vhLW+lM6Q==
-X-Google-Smtp-Source: AGHT+IGpZqGGBIR+VG1/gdRs8/7nccvHM8X21h7Dg+zU2Z35QdvptI5L8eEve483knR7F7o3Co5Oii3LjORYl9+ppkQ=
-X-Received: by 2002:a05:620a:2910:b0:7ca:cc88:bcef with SMTP id
- af79cd13be357-7cd4672d904mr3021067085a.15.1747821779290; Wed, 21 May 2025
- 03:02:59 -0700 (PDT)
+ bh=uapniPJlouyC0yomaIpKmn5GB0bwl9Ggt7EFeeLYgRo=;
+ b=Zi6F13ermAJzp72T1IXP7+2uHFfpZC0vZuN07vhduLck5l6RvlUrssReNbHQDByyjN
+ ny/nArmPk3YN1+pYtK8OIe8mQAhTZIVEsDejhdN9yQZRzKlH9qMIiF0iGYWve8ANZC+7
+ 4jJSkCJPB6pL2FTvS5ig2O77nVB47J2BpAGGNgFkQJrMaXseRn/s+K76FghnW3bAGmnr
+ VmI6HKKo5Bxen2OWh/aRbp7da85M51c2lKr3cLkYjZydh86jIgVa+hi8E1rjNfu8X37u
+ +Vc2f7QizM0HPO6T1WqNqU+YHHODzHNo5MUFxHs3H0O26JxM6ANYmp608xU1jNIe1Btj
+ T5/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV2Qdoj/dIlz1mz+1XRAVWSXdGhZww+kbIOwCdXos9YxvaNhQsGG0Tl1TRYCrevGSkjwHNC/D0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzIC77yQ2iDoikERSOOZ0aXq1HzO7cdtY4T7IQHuHImgBKIIQ+L
+ qeriGJ/tH3h7kS8wEfeqIH65rIqm9m54xiNSqsQ8So+06/Lrw0eqFT4T
+X-Gm-Gg: ASbGncuHHI7XCBa1uthjs9gYbco4ymTWMJ3xJ2LUDV89KCo+8bvwh339s185NV+m7Be
+ 8ChUc8u9Hz+awO7AjsR0ZVpHMTZOl1v5EIxJuNY+5tJwqOjn5mCUM5dRzaWyXJ6Mn2q2U0p4OxP
+ QB/8WEzlT9W4TvoJ2zGT9iuJ9v4ZOaT4CG5eRX8os9vsJsW7ptix9wQ/3HqTcZzmWThkil3nCBI
+ xu6Nscg89VKQDsGjbsVLveMfep0eiC6D4TiB8n+ymQZ44qfub7YDtNPJa/guKmRVFTI/uedochk
+ rB2H5oW4kpNPLBjwZEqvI4v/JKZEzMbM/es+bs/Pzvf9oSHJtjmxoey+kQb/S/tg7w==
+X-Google-Smtp-Source: AGHT+IFVWDoPXo2sVqHreKhbxtlHaRcaAjD/hlwmjXgLaS16Vy8QMc+RIs1gueNIQi5YcKnZfNkavw==
+X-Received: by 2002:a05:6102:3ca1:b0:4c1:91da:dac1 with SMTP id
+ ada2fe7eead31-4dfa6b45cd7mr21133941137.6.1747825756562; 
+ Wed, 21 May 2025 04:09:16 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fa17:cb12:a4b3:acd4])
+ by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-87bec121baasm8890946241.8.2025.05.21.04.09.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 May 2025 04:09:16 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: gaurav.jain@nxp.com
+Cc: trini@konsulko.com, peng.fan@nxp.com, olaf.baehring@draeger.com,
+ u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] caam: Fix CAAM error on startup
+Date: Wed, 21 May 2025 08:09:08 -0300
+Message-Id: <20250521110908.1665170-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250520120606.173228-1-sughosh.ganu@linaro.org>
- <20250520120606.173228-2-sughosh.ganu@linaro.org>
- <DA1OCJCRJ6KI.1X5DUMJDQ6913@linaro.org>
- <CADg8p97UZVCUoYe3wzykVMDc+wpVJuz06+vJuJvG6WsMRRto3g@mail.gmail.com>
-In-Reply-To: <CADg8p97UZVCUoYe3wzykVMDc+wpVJuz06+vJuJvG6WsMRRto3g@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 21 May 2025 15:32:47 +0530
-X-Gm-Features: AX0GCFvKjtaCSIadaRPrUiX59jqne6_Am2zu2w64EcvJsVFzqVpUjySUObANv-o
-Message-ID: <CADg8p95TjKPJKLF1+vSVRRh5_a67tUZAs0YSjDaSBrMumqnjGA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] lmb: replace lmb_reserve() and lmb_alloc_addr()
- API's
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,121 +97,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 21 May 2025 at 14:48, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Wed, 21 May 2025 at 13:23, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Sughosh
-> >
-> > On Tue May 20, 2025 at 3:06 PM EEST, Sughosh Ganu wrote:
-> > > There currently are multiple allocation API's in the LMB module. There
-> > > are a couple of API's for allocating memory(lmb_alloc() and
-> > > lmb_alloc_base()), and then there are two for requesting a reservation
-> > > for a particular memory region (lmb_reserve() and
-> > > lmb_alloc_addr()). Introduce a single API lmb_allocate_mem() which
-> > > will cater to all types of allocation requests and replace
-> > > lmb_reserve() and lmb_alloc_addr() with the new API.
-> > >
-> > > Moreover, the lmb_reserve() API is pretty similar to the
-> > > lmb_alloc_addr() API, with the one difference being that the
-> > > lmb_reserve() API allows for reserving any address passed to it --
-> > > the address need not be part of the LMB memory map. The
-> > > lmb_alloc_addr() does check that the address being requested is
-> > > actually part of the LMB memory map.
-> > >
-> > > There is no need to support reserving memory regions which are outside
-> > > the LMB memory map. Remove the lmb_reserve() API functionality and use
-> > > the functionality provided by lmb_alloc_addr() instead. The
-> > > lmb_alloc_addr() will check if the requested address is part of the
-> > > LMB memory map and return an error if not.
-> > >
-> > >        * there's no need to check the result
-> > >        */
-> > >       arm_smccc_smc(MTK_SIP_GET_BL31_REGION, 0, 0, 0, 0, 0, 0, 0, &res);
-> > > -     lmb_reserve(res.a1, res.a2, LMB_NOMAP);
-> > > +     addr = (phys_addr_t)res.a1;
-> > > +     lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, res.a2, LMB_NOMAP);
-> >
-> > In some case you check the return value and in others you ignore it.
-> > Since you are changing this, check the return address everywhere
->
-> Yes, I mentioned this in the cover-letter. I have kept the code in
-> arch-specific functions as is when it comes to error checking, as I do
-> not have the associated boards with me. I am not sure what side
-> effects erroring out would have. It would be better if the respective
-> custodians/maintainers fix this, as it would ensure no breakage.
->
->
-> >
-> > > + * be -EINVAL if the requested memory region is not part of the LMB memory
-> > > + * map, and -EEXIST if the requested region is already allocated.
-> > > + */
-> > > +int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
-> >
-> > Nit, but can you rename it to lmb_alloc_mem() so it uses abbreviations everywhere?
->
-> You mean a shorter name? I had pondered over using lmb_alloc_mem()
-> instead earlier, but thought about using the current one, as this is a
-> globally visible API.
->
-> >
-> > > +/**
-> > > + * lmb_can_reserve_region() - check if the region can be reserved
-> > > + * @base: base address of region to be reserved
-> > > + * @size: size of region to be reserved
-> > > + * @flags: flag of the region to be reserved
-> > > + *
-> > > + * Go through all the reserved regions and ensure that the requested
-> > > + * region does not overlap with any existing regions. An overlap is
-> > > + * allowed only when the flag of the request region and the existing
-> > > + * region is LMB_NONE.
-> > > + *
-> > > + * Return: true if region can be reserved, false otherwise
-> > > + */
-> > > +static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
-> > > +                                u32 flags)
-> >
-> > Overall this is a good cleanup. But I was hoping we can rid of this as well.
-> > This is almost identical to lmb_overlaps_region() with very small differences.
-> > One of these takes the lmb list as an argument and the other is also checking some flags.
-> > It's better if we keep one.
->
-> I can get rid of the above function. It would require putting the
-> checks for the flags in the calling function, but we can indeed use
-> lmb_overlaps_region() instead. I will put this in a separate patch.
-> Thanks.
+From: Olaf Baehring <olaf.baehring@draeger.com>
 
-Sorry, I replied here in haste. The reason I introduced
-lmb_can_reserve_region() is because there is a subtle difference
-between what lmb_overlaps_region() does. The lmb_overlaps_region() is
-used primarily to check if an address can be allocated. So it stops
-iterating through the regions as soon as it finds an overlap -- this
-makes sense as we cannot allocate memory over already reserved memory.
-The lmb_can_reserve_region() is used for reserving memory, which might
-already have been reserved. This function then checks if the requested
-region overlaps one or multiple regions, and if the flags of all the
-existing regions match (all regions have flag LMB_NONE) so that the
-reservation can go through. I have depicted the scenario in a diagram
-[1]. So, in case of code re-use, there will have to be some tweaks
-made to lmb_overlaps_region(), so that in case of a reservation
-request, it should not stop iterating through the loop in case of an
-overlap. I will check if it can be cleanly implemented.
+In rare cases U-Boot returns an error message when intantiating the RNG
+of the CAAM device:
+“SEC0:  RNG4 SH0 instantiation failed with error 0xffffffff”
+This  means, that even when the CAAM device reports a finished
+descriptor, none is found in the output ring.
+This might be caused by a missing cache invalidation before
+reading the memory of the output ring
+This patch moves the cache invalidation of the output ring from start of
+the job to immediately after the notification from hardware where the
+output ring will be read.
 
--sughosh
+Signed-off-by: Olaf Baehring <olaf.baehring@draeger.com>
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ drivers/crypto/fsl/jr.c | 25 ++++++++++++++-----------
+ drivers/crypto/fsl/jr.h |  4 ----
+ 2 files changed, 14 insertions(+), 15 deletions(-)
 
-[1] - https://gist.github.com/sughoshg/accfad55244fa0f3965e2137db8062b2
+diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
+index 8f7a821ebf3d..1d95d2bff278 100644
+--- a/drivers/crypto/fsl/jr.c
++++ b/drivers/crypto/fsl/jr.c
+@@ -217,13 +217,6 @@ static int jr_enqueue(uint32_t *desc_addr,
+ 
+ 	jr->head = (head + 1) & (jr->size - 1);
+ 
+-	/* Invalidate output ring */
+-	start = (unsigned long)jr->output_ring &
+-					~(ARCH_DMA_MINALIGN - 1);
+-	end = ALIGN((unsigned long)jr->output_ring + jr->op_size,
+-		    ARCH_DMA_MINALIGN);
+-	invalidate_dcache_range(start, end);
+-
+ 	sec_out32(&regs->irja, 1);
+ 
+ 	return 0;
+@@ -243,6 +236,7 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
+ #else
+ 	uint32_t *addr;
+ #endif
++	unsigned long start, end;
+ 
+ 	while (sec_in32(&regs->orsf) && CIRC_CNT(jr->head, jr->tail,
+ 						 jr->size)) {
+@@ -250,6 +244,11 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
+ 		found = 0;
+ 
+ 		caam_dma_addr_t op_desc;
++
++		/* Invalidate output ring */
++		start = (unsigned long)jr->output_ring & ~(ARCH_DMA_MINALIGN - 1);
++		end = ALIGN((unsigned long)jr->output_ring + jr->op_size, ARCH_DMA_MINALIGN);
++		invalidate_dcache_range(start, end);
+ 	#ifdef CONFIG_CAAM_64BIT
+ 		/* Read the 64 bit Descriptor address from Output Ring.
+ 		 * The 32 bit hign and low part of the address will
+@@ -283,8 +282,13 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
+ 		}
+ 
+ 		/* Error condition if match not found */
+-		if (!found)
++		if (!found) {
++			int slots_full = sec_in32(&regs->orsf);
++
++			jr->tail = (jr->tail + slots_full) & (jr->size - 1);
++			sec_out32(&regs->orjr, slots_full);
+ 			return -1;
++		}
+ 
+ 		jr->info[idx].op_done = 1;
+ 		callback = (void *)jr->info[idx].callback;
+@@ -296,14 +300,14 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
+ 		 */
+ 		if (idx == tail)
+ 			do {
++				jr->info[tail].op_done = 0;
+ 				tail = (tail + 1) & (jr->size - 1);
+ 			} while (jr->info[tail].op_done);
+ 
+ 		jr->tail = tail;
+-		jr->read_idx = (jr->read_idx + 1) & (jr->size - 1);
++
+ 
+ 		sec_out32(&regs->orjr, 1);
+-		jr->info[idx].op_done = 0;
+ 
+ 		callback(status, arg);
+ 	}
+@@ -378,7 +382,6 @@ static int jr_sw_cleanup(uint8_t sec_idx, struct caam_regs *caam)
+ 
+ 	jr->head = 0;
+ 	jr->tail = 0;
+-	jr->read_idx = 0;
+ 	jr->write_idx = 0;
+ 	memset(jr->info, 0, sizeof(jr->info));
+ 	memset(jr->input_ring, 0, jr->size * sizeof(caam_dma_addr_t));
+diff --git a/drivers/crypto/fsl/jr.h b/drivers/crypto/fsl/jr.h
+index b136cd8d05a9..8d5ca03e5015 100644
+--- a/drivers/crypto/fsl/jr.h
++++ b/drivers/crypto/fsl/jr.h
+@@ -83,10 +83,6 @@ struct jobring {
+ 	 * in-order job completion
+ 	 */
+ 	int tail;
+-	/* Read index of the output ring. It may not match with tail in case
+-	 * of out of order completetion
+-	 */
+-	int read_idx;
+ 	/* Write index to input ring. Would be always equal to head */
+ 	int write_idx;
+ 	/* Size of the rings. */
+-- 
+2.34.1
 
->
-> >
-> > [...]
-> >
-> > Overall this is moving towards thr gith direction
->
-> Good to know :)
->
-> -sughosh
->
-> >
-> > Cheers
-> > /Ilias
