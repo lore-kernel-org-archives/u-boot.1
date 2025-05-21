@@ -4,86 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A03C54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:48:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53D5C54E65
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:50:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D200A82E9A;
-	Wed, 21 May 2025 11:47:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D98A82E2D;
+	Wed, 21 May 2025 11:50:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="nLPfR9RB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F11682E5A; Wed, 21 May 2025 11:47:44 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8677F82E31; Wed, 21 May 2025 11:50:18 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 149EE82E0A
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:47:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ad53cd163d9so832373966b.0
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:47:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1747820861; x=1748425661;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r7NL+y29KnispVsvW77N7C8ACwJH2kyHQysY3j8pf8k=;
- b=nLPfR9RB7pnSLaxBhbdd5Ny252sIZZ+15x8YJz1ZlMdsIlnUQ64URlUO2MuHLlXHC1
- FrPx1SHU3KyI+4jlogr2X6eirRCeKmj8aHmyHNvsdzRo57QF0ZnvYet7vCipZMc0oZup
- zpQV5R96NE7H1mkr6dVr/VvssUOkRaEGRjYoc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747820861; x=1748425661;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=r7NL+y29KnispVsvW77N7C8ACwJH2kyHQysY3j8pf8k=;
- b=EMy21SsM4/1vmoaVFWX0fCUQBYsf/c0Lo1lebWKZ6VJ0pnlRNtUUhV2yRH5fjAYccr
- 60MFvLw2twfq1qzMth2VQnu2PV+2cA64REmMmOjihxM5Ch4D6vJqjm1gddEbQJo4ARez
- ozspI5MpMs8vZAWx6LpFYh4UxNo9j4nPudt4CgqQwOBbSaCXRRXNDv8ULwtZsR94nYy2
- dgdMoh7w2q6lC8Qr4gP6jy2n3JAWrg5OYMrCyuNZJIwIo5Wpb9/786suy6RSldW6g3AN
- z3zmBYM6p4s1LkPo091LePwcAHHdsoW/wn+OjcHovxmi26r7FLMnRmc1tZ+COHv63m2t
- /XnQ==
-X-Gm-Message-State: AOJu0YxO1N9cdejsE5M3M3KXJ2jfXFAubUjo+jXcYLvtMWWaRBar9eDT
- gKgtKD+CjRipvXLd7HObG3RlEjYDOkXFOccSyR/qXTJppN5yicyDFqn0lB9woEXSTOR2hGI5NyL
- mOrO3
-X-Gm-Gg: ASbGncuoR7V76r2UAiHlPzVWuHjvWpfQPdx7f8Tooe+nNqa/coldLmRg09TzsDH0u+L
- uuxFDbqhMpkDEG3e4Ic654rWxNZ5BSWmhDaFnhNiq2noTDaF83YGXV/33bOycxEfq5X78IfzRiC
- 4GJn8fHLyS4eJ47EvOWzTbnUXGczTF3RvsPpgDp8oQosZ0O0ISCxdOZJ5UiEGLOPPHMZNoJuOrP
- zrOsLXFyMKg5N3fHxWVpJeUoWNGFF1xAwq5QGXpFZjnz8xmuHlDeVULSDMBzofxRRUKv68UhwOc
- aLYbm8y/5K0n2PJKg83xa0oisvg7kZJPwYNEaIzqReR1ZRy41Fl426olOPNltFRe5PiRO177UiG
- zowpNB6VutaQa
-X-Google-Smtp-Source: AGHT+IHsZr17O2aqfAxFEvyWJHEPriDHrtcmAoWUoi7UHY7j9NT3POnIN8veaY4eyeOGJLfgbP9fjA==
-X-Received: by 2002:a17:907:6d11:b0:ad2:5198:d715 with SMTP id
- a640c23a62f3a-ad52d48ffb7mr1995205366b.19.1747820861279; 
- Wed, 21 May 2025 02:47:41 -0700 (PDT)
-Received: from localhost.localdomain ([2001:b07:6474:ebbf:cfc5:5070:d6f4:1d86])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d06b497sm863951166b.42.2025.05.21.02.47.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 02:47:40 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: michael@amarulasolutions.com, Simon Holesch <simon.holesch@bshg.com>,
- linux-amarula@amarulasolutions.com, Michael Bode <michael.bode@bshg.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Wolfgang Birkner <wolfgang.birkner@bshg.com>
-Subject: [PATCH v3 4/4] board: bsh: imx6ulz_smm_m2: Add delay between DRAM
- read access
-Date: Wed, 21 May 2025 11:47:32 +0200
-Message-ID: <20250521094735.1037146-4-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250521094735.1037146-1-dario.binacchi@amarulasolutions.com>
-References: <20250521094735.1037146-1-dario.binacchi@amarulasolutions.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 04B0D82E0A
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:50:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 54L9o6mj054918
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Wed, 21 May 2025 17:50:07 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
+ 2025 17:50:06 +0800
+Date: Wed, 21 May 2025 17:50:03 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
+Subject: [GIT PULL] u-boot-riscv/master
+Message-ID: <aC2hyzxwKzO4k1im@swlinux02>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 54L9o6mj054918
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,61 +64,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Bode <michael.bode@bshg.com>
+Hi Tom,
 
-A small delay between DRAM read access with wrong parameters and
-reconfiguration is necessary.
-Without a delay between DRAM read access and a following reconfiguration
-this reconfiguration fails for certain DRAM chips (Nanya).
+The following changes since commit a3e09b24ffd4429909604f1b28455b44306edbaa:
 
-Signed-off-by: Michael Bode <michael.bode@bshg.com>
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+  Merge tag 'mmc-2025-05-20' of https://source.denx.de/u-boot/custodians/u-boot-mmc (2025-05-20 08:35:31 -0600)
 
----
+are available in the Git repository at:
 
-Changes in v3:
-- Drop changes on arch/arm/include/asm/arch-mx6/mx6-ddr.h and
-  arch/arm/mach-imx/mx6/ddr.c files from patch
-  [1/1] "board: bsh: imx6ulz_smm_m2: Match SPL DDR settings to DCD
-  table"
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
 
-Changes in v2:
-- Add 'static struct' globally in the module where the definitions
-  can mabe static.
-- Use standard C comment style
-- Remove unnecessary variable initializations
+for you to fetch changes up to ff6e20c32ff33c6963f7d0a79a0914681461f4fa:
 
- board/bsh/imx6ulz_smm_m2/spl.c | 3 +++
- 1 file changed, 3 insertions(+)
+  riscv: dts: th1520: Complete clock tree (2025-05-21 16:49:58 +0800)
 
-diff --git a/board/bsh/imx6ulz_smm_m2/spl.c b/board/bsh/imx6ulz_smm_m2/spl.c
-index e8255b6d2a62..c330e4d6d39d 100644
---- a/board/bsh/imx6ulz_smm_m2/spl.c
-+++ b/board/bsh/imx6ulz_smm_m2/spl.c
-@@ -13,6 +13,7 @@
- #include <asm/gpio.h>
- #include <asm/mach-imx/iomux-v3.h>
- #include <asm/mach-imx/boot_mode.h>
-+#include <linux/delay.h>
- #include <linux/libfdt.h>
- #include <spl.h>
- #include <asm/arch/mx6-ddr.h>
-@@ -65,10 +66,12 @@ static void spl_dram_init(void)
- 		/* Already configured, nothing to do */
- 		break;
- 	case SZ_256M:
-+		udelay(1);
- 		ddr_cfg_write(&bsh_dram_timing_256mb);
- 		break;
- 	case SZ_128M:
- 	default:
-+		udelay(1);
- 		ddr_cfg_write(&bsh_dram_timing_128mb);
- 		break;
- 	}
--- 
-2.43.0
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/26259
 
-base-commit: a3e09b24ffd4429909604f1b28455b44306edbaa
-branch: bsh-202505-RAM
+----------------------------------------------------------------
+- Initial SPL support for T-Head TH1520 SoC
+- Improve usability of TH1520 with mainline SPL
+- Support building RV32 & RV64 images
+- riscv: Improve jh7110 support
+----------------------------------------------------------------
+E Shattow (3):
+      riscv: starfive: jh7110: move uart0 clock frequency to config header
+      riscv: dts: jh7110: remove redundant parent nodes
+      riscv: dts: jh7110: override syscrg assigned clock rates with defaults
+
+Mayuresh Chitale (4):
+      riscv: image: Add new image type for RV64
+      riscv: Select appropriate image type
+      booti/bootm: riscv: Verify image arch type
+      riscv: insn-def.h: Fix header guard
+
+Yao Zi (16):
+      riscv: dts: binman.dtsi: Drop filename property for proper U-Boot
+      riscv: Access gd with inline assembly when building with LTO or Clang
+      riscv: lib: Split out support for T-Head cache management operations
+      configs: th1520_lpi4a: Add UART clock frequency
+      riscv: cpu: Add TH1520 CPU support
+      ram: thead: Add initial DDR controller support for TH1520
+      riscv: dts: th1520: Preserve necessary devices for SPL
+      riscv: dts: lichee-module-4a: Preserve memory node for SPL
+      riscv: dts: th1520: Add DRAM controller
+      riscv: dts: th1520: Add binman configuration
+      board: thead: licheepi4a: Enable SPL support
+      doc: thead: lpi4a: Update documentation
+      riscv: cpu: th1520: Initialize IOPMPs in SPL
+      clk: thead: Port clock controller driver of TH1520 SoC
+      riscv: cpu: th1520: Select clock driver
+      riscv: dts: th1520: Complete clock tree
+
+ arch/riscv/Kconfig                                 |    9 +
+ arch/riscv/cpu/cpu.c                               |    6 +
+ arch/riscv/cpu/cv1800b/Kconfig                     |    1 +
+ arch/riscv/cpu/cv1800b/Makefile                    |    1 -
+ arch/riscv/cpu/th1520/Kconfig                      |   22 +
+ arch/riscv/cpu/th1520/Makefile                     |    8 +
+ arch/riscv/cpu/th1520/cache.c                      |   32 +
+ arch/riscv/cpu/th1520/cpu.c                        |   21 +
+ arch/riscv/cpu/th1520/dram.c                       |   21 +
+ arch/riscv/cpu/th1520/spl.c                        |   96 ++
+ arch/riscv/dts/binman.dtsi                         |   15 +-
+ arch/riscv/dts/jh7110-common-u-boot.dtsi           |    1 -
+ arch/riscv/dts/jh7110-u-boot.dtsi                  |   73 +-
+ arch/riscv/dts/th1520-lichee-module-4a.dtsi        |    9 +-
+ arch/riscv/dts/th1520-lichee-pi-4a.dts             |    1 +
+ arch/riscv/dts/th1520.dtsi                         |   91 +-
+ arch/riscv/dts/thead-th1520-binman.dtsi            |   55 ++
+ arch/riscv/include/asm/arch-th1520/cpu.h           |    9 +
+ arch/riscv/include/asm/arch-th1520/iopmp.h         |   42 +
+ arch/riscv/include/asm/arch-th1520/spl.h           |   10 +
+ arch/riscv/include/asm/global_data.h               |   19 +
+ arch/riscv/include/asm/insn-def.h                  |    6 +-
+ arch/riscv/include/asm/u-boot.h                    |    4 +
+ arch/riscv/lib/Makefile                            |    1 +
+ arch/riscv/lib/bootm.c                             |    4 +
+ .../riscv/{cpu/cv1800b/cache.c => lib/thead_cmo.c} |    0
+ board/thead/th1520_lpi4a/Kconfig                   |    5 +-
+ board/thead/th1520_lpi4a/Makefile                  |    1 +
+ board/thead/th1520_lpi4a/spl.c                     |   48 +
+ boot/image.c                                       |    3 +-
+ cmd/booti.c                                        |    7 +-
+ common/board_r.c                                   |    4 +-
+ common/init/board_init.c                           |    7 +-
+ configs/th1520_lpi4a_defconfig                     |   18 +
+ doc/board/thead/lpi4a.rst                          |   58 +-
+ drivers/clk/Kconfig                                |    1 +
+ drivers/clk/Makefile                               |    1 +
+ drivers/clk/thead/Kconfig                          |   19 +
+ drivers/clk/thead/Makefile                         |    5 +
+ drivers/clk/thead/clk-th1520-ap.c                  | 1031 ++++++++++++++++++++
+ drivers/ram/Kconfig                                |    1 +
+ drivers/ram/Makefile                               |    4 +
+ drivers/ram/thead/Kconfig                          |    5 +
+ drivers/ram/thead/Makefile                         |    1 +
+ drivers/ram/thead/th1520_ddr.c                     |  787 +++++++++++++++
+ include/configs/starfive-visionfive2.h             |    2 +
+ include/configs/th1520_lpi4a.h                     |    1 +
+ include/image.h                                    |    3 +-
+ 48 files changed, 2459 insertions(+), 110 deletions(-)
+ create mode 100644 arch/riscv/cpu/th1520/Kconfig
+ create mode 100644 arch/riscv/cpu/th1520/Makefile
+ create mode 100644 arch/riscv/cpu/th1520/cache.c
+ create mode 100644 arch/riscv/cpu/th1520/cpu.c
+ create mode 100644 arch/riscv/cpu/th1520/dram.c
+ create mode 100644 arch/riscv/cpu/th1520/spl.c
+ create mode 100644 arch/riscv/dts/thead-th1520-binman.dtsi
+ create mode 100644 arch/riscv/include/asm/arch-th1520/cpu.h
+ create mode 100644 arch/riscv/include/asm/arch-th1520/iopmp.h
+ create mode 100644 arch/riscv/include/asm/arch-th1520/spl.h
+ rename arch/riscv/{cpu/cv1800b/cache.c => lib/thead_cmo.c} (100%)
+ create mode 100644 board/thead/th1520_lpi4a/spl.c
+ create mode 100644 drivers/clk/thead/Kconfig
+ create mode 100644 drivers/clk/thead/Makefile
+ create mode 100644 drivers/clk/thead/clk-th1520-ap.c
+ create mode 100644 drivers/ram/thead/Kconfig
+ create mode 100644 drivers/ram/thead/Makefile
+ create mode 100644 drivers/ram/thead/th1520_ddr.c
+
+ Best regards,
+ Leo
