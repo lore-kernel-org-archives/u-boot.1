@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F901C54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B27C54E65
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:03:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8359582FBE;
+	by phobos.denx.de (Postfix) with ESMTP id C86BD83022;
 	Thu, 22 May 2025 01:01:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BsjBuoTP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j73yDO6m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B72382FB8; Thu, 22 May 2025 01:01:40 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 0C4AA82FAB; Thu, 22 May 2025 01:01:43 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1840D82E31
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEF7A83015
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-6060167af73so4657510eaf.2
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:38 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-4033c70577fso4370763b6e.0
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747868497; x=1748473297; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747868498; x=1748473298; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GzjTRa+TRr1D+qIQAWmZ4aDtCQmTTS0C2B2R1EbujYo=;
- b=BsjBuoTPi5Lqpq04vB6RRFxLfCSi1b1QOgcYD4otNBsb+cSt5rVvten7qbxLPLvMd9
- SkeTPBVLQtjMT4TY6bhZ1zX1M1rJFP1yYAlXbs8obmdZxpbD1FAuHmKWaCNb2BUfaysF
- Yp1DnO9shJagm+X6C3lOU/BQtbjPaR13JCcxQ=
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=zK05UYy5mQR0BDp/9H2xFWyHOrRTovkeL7i30RRZx0o=;
+ b=j73yDO6m6/sO5OIFf2EZopLJ+fvlzNwsZN9ktc9yy4vKytnOi/5gHA/tCzCIEqpGnP
+ iCcRMlwnjpBGvZkTKYu+QZ0fQEEv4nNHcjZlP7Pt2M9d6VGVjohvzv6+QRSvY2+rjFB/
+ Cezr8da955G1kgUcESWKFNpbjwK8Y3yBAVRRs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747868497; x=1748473297;
+ d=1e100.net; s=20230601; t=1747868498; x=1748473298;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GzjTRa+TRr1D+qIQAWmZ4aDtCQmTTS0C2B2R1EbujYo=;
- b=D/CYoh5b4kCmRg8EZbZtUBn20MHhRvItMfl6oIGWtdxnmiuw3e3T8yDdkMosyBqfi7
- 576ZkD3NGz6k+7N8ySmiDcswjOclvEDa6dqj7ereu3Dg6ASlMAqvOmbpP7956mGzsmrC
- 6K/2Y/9omWOXHbgEFNePAmF7wgnfhACKPyZMm8SaJb5O8jCaYGTATtgr+pcH0wOXkbDy
- NDApt3f11pvLbEwd7xETaR+SZplK0eQB8y65hGAYsBlTj/6JSysEtD/NVm7HFHkQOgwv
- bUyEpXAGCwdROX8jiprsFy3XqMid5x9hQjcZWdIedSq/j7OlOb6BoDHfgtBn2BCc79Qs
- 1oNw==
-X-Gm-Message-State: AOJu0YxvzgmtUvV53BlqV7i40EFghzkdg3rV4Qs2lOnuuD7qPOVVrVsW
- SEa57x58h9f0y9w2LQGXyg+YaXB5hpowy9Hit4HG0q6fGsefWt+ii9bcDFzrE47uYmRSEpPB6Mq
- 8Awbgl0o=
-X-Gm-Gg: ASbGncsls54MHOzvcbflUsmRNDEGlW7i2Xfmg+jZHBPkQZbje+7nmGBbG6JfeMqLHdf
- i+4Kee5OuC3+7rrfuFRia/dh4CmzmxhvvmFMXiqZIPPBUKuqbjLwIg4KmRnE7ZpXs/G6MgdnrtK
- I2KsAxBZ9uGHFKmnTfGtqovWRod4w8br+N0YHKCXR8a01hQtJqDn3r+DWXVvYCI53leFWImAgpd
- c1G7PVN5v3aFt6DC6RZDk5GTHj60vZtpA6/T8XKjZgR39aAtCsS/vXt7nmScD9HVQa+a39G6ZkM
- WBo//bO/YzbbA4HkM3lpnPoWxeX5k0AziDi4fxzPQXC1XsMbTiT652rhNVPhGtWeF3rhfqAlPRd
- +lmUHO36GdrsZr2c=
-X-Google-Smtp-Source: AGHT+IGFA5mGkPZ6a9XCYbdgABdir05ywLnJU9Sf+6cUALLUA7UP9NYSnKAFxLvf3/HptIbVYLv1lw==
-X-Received: by 2002:a05:6820:188e:b0:609:dd17:795 with SMTP id
- 006d021491bc7-609f37bd3e6mr16073975eaf.6.1747868496831; 
- Wed, 21 May 2025 16:01:36 -0700 (PDT)
+ bh=zK05UYy5mQR0BDp/9H2xFWyHOrRTovkeL7i30RRZx0o=;
+ b=afYiWPK5AzjcpIMNv8ZpAW2TLVDgXe6Z4aon2Mhx8lrGHW32NCUFH6Q+JdI1XagtAs
+ f22dcy/HOHwlo0Vc203+if2wdpplWZNwGO/OC3yKJOD2ociA4tEvd4OpD9ENPS3iQL//
+ r7KeaWtATeLx/S5XuCu0jzMECexLRxaTP7PNR+Q5sLkcE5xtIPGcz5nFHc1nDHB9PMBm
+ G594Gpa/USJq8x7fZuk0AFnH2Qq6C/wHC9HO/Hr5RW7jQVC/LU3XDNF1K2Giq4Ku1E0F
+ EfxubqW9G73G85+1hqQrfegAhnQWrmE2g5AQv322mC8Uy/tKF0XqeN7b+5tY4am7TY6Y
+ lLhw==
+X-Gm-Message-State: AOJu0YyJ4UVd/cR1L7wl5uPs3hOVwrVx/vJUuA3ma/lLEc8L7J3oe6rU
+ Ak6nkncycZaBPby71XM/iIYF4wP/tOlvU9lhI5/XnBvnVEWk2E3Q85lMMUTS4zHpmkrfxHXR20u
+ Jjf3ChBU=
+X-Gm-Gg: ASbGncuq+hEznCfb8/7AKo/lptFM4zUYwBfORIfw8Y/2MJiDgwKMXyswXpzy+Q/wdQF
+ gLZTqiCLZmxphTeOevVj7KtmecMOylLue9eP68oi7Au8RlcAgMgX4EcV379DcUWBe4ZoJa1IAR7
+ 7glLGd48yJ0rh/RuiSZmXHTE1h9ik+rQPHOhf2WqdP9wfAWoemQuTaG3ohe/J4FuiQgdSE1iSC0
+ zSEN45FC7ZmE7+Mx7k9hRQlQxx6xbAxv+KJgqFlvSJJTPTzS5EuDcctuBxKrKKk9jKpeBAw46pN
+ hf5zoj/E3Y2xUXkT452ZhyeHcUgeIAnfoSH0/4xZZ6sf50aT+w97HfGGXRSurF3wF/Zm3+qB2cG
+ A6JNwJeo0V3uWH8k=
+X-Google-Smtp-Source: AGHT+IG6tYqXjTRS9aSiIbsiEtIO852wu3taF4l/z7MfHhbwuawee62TPdMkxdc0ET2RoebrUplFVw==
+X-Received: by 2002:a05:6808:80a9:b0:400:32b9:7926 with SMTP id
+ 5614622812f47-404d863751cmr14438175b6e.6.1747868498379; 
+ Wed, 21 May 2025 16:01:38 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.35
+ 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.36
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 16:01:35 -0700 (PDT)
+ Wed, 21 May 2025 16:01:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH 09/17] include/dfu.h: Audit include list
-Date: Wed, 21 May 2025 16:51:14 -0600
-Message-ID: <20250521230119.2084088-10-trini@konsulko.com>
+Subject: [PATCH 10/17] include/dw_hdmi.h: Audit include list
+Date: Wed, 21 May 2025 16:51:15 -0600
+Message-ID: <20250521230119.2084088-11-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250521230119.2084088-1-trini@konsulko.com>
 References: <20250521230119.2084088-1-trini@konsulko.com>
@@ -95,28 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This file does not need a forward declaration of 'struct list_head' as
-it includes <linux/list.h> so remove it.
+This file does not need <edid.h> so remove it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
----
- include/dfu.h | 1 -
- 1 file changed, 1 deletion(-)
+ include/dw_hdmi.h | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/include/dfu.h b/include/dfu.h
-index 12f9dfcdfcdf..80593a906fd2 100644
---- a/include/dfu.h
-+++ b/include/dfu.h
-@@ -173,7 +173,6 @@ struct dfu_entity {
- 	unsigned int inited:1;
- };
+diff --git a/include/dw_hdmi.h b/include/dw_hdmi.h
+index b73518207ef5..fab5aafea194 100644
+--- a/include/dw_hdmi.h
++++ b/include/dw_hdmi.h
+@@ -9,8 +9,6 @@
+ #ifndef _DW_HDMI_H
+ #define _DW_HDMI_H
  
--struct list_head;
- extern struct list_head dfu_list;
+-#include <edid.h>
+-
+ #define HDMI_EDID_BLOCK_SIZE            128
  
- #ifdef CONFIG_SET_DFU_ALT_INFO
+ /* Identification Registers */
 -- 
 2.43.0
 
