@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD455C54ED1
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:03:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0541C54E65
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:03:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D520B8304C;
-	Thu, 22 May 2025 01:01:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30FF482FD2;
+	Thu, 22 May 2025 01:01:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C5nElWan";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pvlj2irL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7241282FC7; Thu, 22 May 2025 01:01:46 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 1777282FED; Thu, 22 May 2025 01:01:48 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B703282FBE
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEAAE82FC5
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3feaedb4d2cso4978517b6e.1
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:42 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-404da7584adso2980807b6e.3
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747868501; x=1748473301; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747868502; x=1748473302; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8KugI/gLLbU/hstpuSUipMi9VzJvDH6ly7TVttHiwfs=;
- b=C5nElWanC++cVtrJCsMFAPuX2HUPMNbesxZVzWk0yAsNvh46oQelO6NPq5lVwVK50b
- biA8dbnP5fOYzLmVg9q5fGsWs8hygU3G5O0Lrf339MhC1h5LiptUpInRZZ/AWFYe3yiI
- j8ovThbkBduFgNbnvhqHLgskHXROwyNyo7XXI=
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=MFjR6kYe/JaYG5oqXBcr/s5aPiXySyuwBHki4378vIw=;
+ b=pvlj2irLWtpvt3V+hMBe5YN/bQAeAx/IKmH+bfYkS7yhfcJjCJGlc4HwkS21n5LM2G
+ B7BmA7/My0ggHzQ3wNjXJNeXsokeTUPnyDqaUth98tL3NDwXjj+UKhruzJwNtQjEDt+7
+ hZCwEnG2E1L+RZG7KeVfo2cs4pNvWQrInf4v8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747868501; x=1748473301;
+ d=1e100.net; s=20230601; t=1747868502; x=1748473302;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8KugI/gLLbU/hstpuSUipMi9VzJvDH6ly7TVttHiwfs=;
- b=mFqmTN10n9VvcaU+1EMsMZVIh64j5wV0qx/Cg5Gx0QKvCDZ5zqJmM3lpAP1+v0EISP
- UN0XKPdibx+4jynF1Hn52jUWPcLDnRhs+BPa5PFaTeR19KFzXSu6e78hUUrFRZKiGT1z
- zd6yW/AMFe0//vdm4F4UpJv4+4eYGfeY2p9hzjxksmbXprQB7FrNZnDDXj1pBABWoGzY
- mUmFs6ir6ub41lDwMdWODRtbfdJwhPamKokqNAaUhEscu41Rn9LUXCfC/4G3+1YtpmU5
- GZjJ06qseQs4/ALYMWJ4bC3iHa+bIANQzp628NxA/oXy3d1gGeWEpnpYiSyrSKA/bko5
- yzEQ==
-X-Gm-Message-State: AOJu0Yw7rlwnwbk9mBzvF0vbd0ghRwikFpdhApUVH3WcwffvivACdJkg
- ctVhORnqzWnoi6zC93n/7nFhShsRGk/8CsCjUkQAjxCmm1/SigS6pBJ1Kc4n4fzmbr5RrCiS7fB
- JVhtBUUw=
-X-Gm-Gg: ASbGnctAbAlWamFsw23OaieTHj3X8g8GshsPdNHOiA+FNb1ITe4jfPwda6Jzz3CoJxU
- 6Kv5Xwp4aAwVmBaRoa/cDa+KoUGsSk3L0K9HNqyc8Bcrtsjt6UMNBu88FgdpPoOYzc4vr1R7soN
- KUgueGWLChI/Iuvv5w5OOK6BsjfKFtJLph8/KNa2GlNTuiAh2kEZop9kJhj5UkneI85RQwmcoDx
- t2I5iUB6QjFaEIPvcrb07lSp12nJ8Et0k7XLxrWZV0LUXd1ulP31LRRw5WC55x9wC4pQy5jWEjE
- yu3tlN72JkHS9SMRJADTW8mOX/fnVk4Ck0E+0P57Z4Vfhux/sbI0QzxrC25/igGnf0SH+M0f4aR
- 3XAuPt+1cu2evp+s=
-X-Google-Smtp-Source: AGHT+IGMX659BQYiC2VmK/HYQf+Mmuq8qTEddSvuyhuyG739bTsKaPOugRoUQzryrWBwPOQVfgEhfw==
-X-Received: by 2002:a05:6808:1b8b:b0:3f8:2c35:eeca with SMTP id
- 5614622812f47-404da631c9emr14297803b6e.0.1747868501447; 
- Wed, 21 May 2025 16:01:41 -0700 (PDT)
+ bh=MFjR6kYe/JaYG5oqXBcr/s5aPiXySyuwBHki4378vIw=;
+ b=A1W/mbHXfKjIdfRb4KZvzxO11HzMR2I+zwVEACCly4YEVj7r4ZWEYTCpq57XPB2Xfa
+ MKOiTN++WIo7Bw0KfSxdTLHZx8qTyWVb+ciDZdmoFXLsUnZQ2N6Klly6ZCUE0OL7lCmF
+ TYCCxrZKgfvGH2gokWCnLgwHn4RPuHY6Xs/PqH7m7qEJAZfTINiKJbS2AKW8XptLNmJk
+ /JNZYWSE8KhljyAu3BwACRjdMnQjTUp3EbO4gaLIrg6Msl2MPQyBleXkrnVtupZ2gqjM
+ wXDaqiHaNhu68JRon9k8sEgpguEtCQEyp7piIBwlgQ3Eg0JH/yBzhZGh3j52wfhVvvP3
+ Hy0g==
+X-Gm-Message-State: AOJu0YzugnK7F3rN8rWZmrqMUF2IApCcce6frhdHgFCqJZgz8pm0agLh
+ 9dX8j3QpV1+2PBYUtqQobmAf0fTrA91WMSZrPr10I3d81JKr6loPZPGrUs8PCVZbLFYLkfVqxmU
+ lk1wLo1Y=
+X-Gm-Gg: ASbGncsU4dOp2A5ncqy/l+f6p94YEGuaUE2x2nN44FjwyEg0vDF42IQQAF+sGRVLeBM
+ XiF6TzNUWyykpsVXXwu5douM+p0FWkwxJ4byRbcCfF461ye5g7r3QA9t/7sE3RkyQ3YNs+Fm/CK
+ NQomIkKkMSkMc1sPd3UPMdNCuvJhc6ilW1aZE8CVT/1rXCGJBUn8ALe1skoAP2kTRQpTCrW+olv
+ gmGeN8bnJIBuO2caQQKOsrEf+/gGdXCwPTjVj6LAUMgSnJ9MSbXsVgHn9dcKEbXJHhcZsGvN0qQ
+ 3P2O+XCwzT6xRpgLXsFI+7yn04X1lpQMAzVgjcDIdkSzF+4MVAbAYM7bTRpKcaroFdvjuSP5RMm
+ 4s3kbiCm2j1zZeDk=
+X-Google-Smtp-Source: AGHT+IGeoZAhT5vs9gR5GyEUpT/W3FCF2ZjMcDPdLId+K1iqKrR08rh0wmDNWCbXBxng/xp2Ea6Wiw==
+X-Received: by 2002:a05:6808:6c8b:b0:3f8:e55c:16d6 with SMTP id
+ 5614622812f47-404d87fe3c5mr14695008b6e.28.1747868502534; 
+ Wed, 21 May 2025 16:01:42 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.40
+ 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.41
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 16:01:40 -0700 (PDT)
+ Wed, 21 May 2025 16:01:42 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 12/17] include/efi_loader.h,
- include/efi_tcg2.h: Audit include list
-Date: Wed, 21 May 2025 16:51:17 -0600
-Message-ID: <20250521230119.2084088-13-trini@konsulko.com>
+Subject: [PATCH 13/17] include/fat.h: Audit include list
+Date: Wed, 21 May 2025 16:51:18 -0600
+Message-ID: <20250521230119.2084088-14-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250521230119.2084088-1-trini@konsulko.com>
 References: <20250521230119.2084088-1-trini@konsulko.com>
@@ -97,50 +94,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In include/efi_loader.h we do not directly need <log.h>, <part_efi.h>,
-<pe.h> nor <linux/oid_registry.h> so remove them. In include/efi_tcg2.h
-we make use of <part_efi.h> but did not include it, so add it directly.
+This file does not need <asm/cache.h> so remove it. However the file
+common/spl/spl_fat.c does need it, so add it there.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- include/efi_loader.h | 4 ----
- include/efi_tcg2.h   | 1 +
- 2 files changed, 1 insertion(+), 4 deletions(-)
+ common/spl/spl_fat.c | 1 +
+ include/fat.h        | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 84e8cfe320e2..f3c85ae8d663 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -10,15 +10,11 @@
- 
- #include <blk.h>
- #include <event.h>
--#include <log.h>
--#include <part_efi.h>
- #include <efi_api.h>
+diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+index f426a068ff96..8b7cafa7291e 100644
+--- a/common/spl/spl_fat.c
++++ b/common/spl/spl_fat.c
+@@ -16,6 +16,7 @@
+ #include <errno.h>
  #include <image.h>
--#include <pe.h>
- #include <setjmp.h>
- #include <linux/list.h>
- #include <linux/sizes.h>
--#include <linux/oid_registry.h>
+ #include <linux/libfdt.h>
++#include <asm/cache.h>
  
- struct blk_desc;
- struct bootflow;
-diff --git a/include/efi_tcg2.h b/include/efi_tcg2.h
-index 7ed88809913b..34a3d4a04346 100644
---- a/include/efi_tcg2.h
-+++ b/include/efi_tcg2.h
-@@ -17,6 +17,7 @@
- #define _EFI_TCG2_PROTOCOL_H_
+ static int fat_registered;
  
- #include <efi_api.h>
-+#include <part_efi.h>
- #include <tpm-v2.h>
- #include <tpm_tcg2.h>
+diff --git a/include/fat.h b/include/fat.h
+index ca97880de12d..bdf430f70675 100644
+--- a/include/fat.h
++++ b/include/fat.h
+@@ -11,7 +11,6 @@
+ 
+ #include <fs.h>
+ #include <asm/byteorder.h>
+-#include <asm/cache.h>
+ 
+ struct disk_partition;
  
 -- 
 2.43.0
