@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A04BC54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:45:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7B2DC2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:45:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A772F82D6C;
-	Wed, 21 May 2025 11:44:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E940982E0A;
+	Wed, 21 May 2025 11:45:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="OdaK+Otu";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="d+QTPb70";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76A5D82DE7; Wed, 21 May 2025 11:44:57 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 751FE82D59; Wed, 21 May 2025 11:45:02 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE01182D59
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:44:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE06282E08
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:44:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54L9XUZ4016660
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 09:44:53 GMT
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54L9XL6A031715
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 09:44:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=yw5xXvs+Tio8eKePNJBkpE+snq4caB1N0eo
- uJ+de4i0=; b=OdaK+OtukHHYvfbvFXSmO8re3p2x+wQP6pURkyWTIS0zh7xyal2
- pJOEzTn0qz4JVkoHvB6cBbAnvoBPinkEjPu3PV24/OgJFyyR1ZU5xjYwFtCDUdl8
- GGX8DFlY7svsKOtGj4Tp0hwaPlKJAOaQk6Ip9/gIBC2g4uVC6ddwHP8hPCLpgzX8
- 6LB7bYyY2aZVXbHRs8Z3cCpWpj5/5hblcrWE9ayghYyXaqx739iybDS+rvJV2WtR
- S11wAcr7js3aRjcusFVr4Qb3nOtfqFVzR/Ozr7BNIyljapMjATQcrZifrFimd6z6
- I3Smyv4n/+UVcl4hLXzPZFLuDUENDCH4Ccw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46rwf9ter5-1
+ content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=uD9iR31IZZr
+ GHLYP+Qs3NIRjK3jWChDuL/mb/RgrjKc=; b=d+QTPb70SPUpxGIAnEjXuEFH1ww
+ 7It8N+doCTPcKuYjfnk1Ioqf2quVNgT/PRKB7eabQvBge3oHkoQ3ar4d41a3y42i
+ gAvLhnTm9JxqYWcnozvVsaJdg7Bmu5isbjWAd10mWuDzaRKi0FyojQAdu7guIVoP
+ UoXlya+BABUpoSZSJdR6kYSPyxTrJS8vUjM/Cv24RX7TixYrAG+N2ATltBWXeLzY
+ iJQ8/k2G8fuu55FavRtCsd5Z95ibgqIQf3SMnZ5UXccOiJbwXfTYULOJDPDI+ic+
+ sEv96PueUHs728F0EUIUQYWRI6de6czud6q7Bjce2uIx/+sdgSlMO9uqVaw==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46s8c20x2g-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 09:44:53 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-30e8346b49cso5312575a91.0
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:44:53 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 09:44:58 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-b26e4fe0c08so3802960a12.3
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:44:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747820692; x=1748425492;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yw5xXvs+Tio8eKePNJBkpE+snq4caB1N0eouJ+de4i0=;
- b=IICTEYjNNcoOpPMKUdQ4KGZodEdfHLZ7/DMm4ZFGUIvcQjykVhV2HEHmmWz09G3sH8
- XRTgKts0F+vl1KgQ8QW7b0/ejmGk/795xS+iUhcXGTwVfXWQuaJftMOoiXufEhFXibf5
- J5mxiNhOsUjmU1cciqy+ICC7ZsLzqvFxcGcObZ+hhIKNKB0iC5KkXZVgBwuV1PnS1gQ7
- hoZb52n3Bq+whrtahGxifqA/nnm0Sd6105pGrCnsJUroIY68vE1YCHKVvmHibf59swyx
- sOjK/OXlkSdj2BCXqgJiFtWlZ/kYuJXrNGmEjanTxXmRNt259u9n9ZqjmUzpZm8jPtJZ
- PV3w==
+ d=1e100.net; s=20230601; t=1747820697; x=1748425497;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uD9iR31IZZrGHLYP+Qs3NIRjK3jWChDuL/mb/RgrjKc=;
+ b=bzLjxPEwC7Sl2CLrM39uShmJRz5GLUKYF9n6ber0iSveGsh3JgAh/KUlOanP+/cSr9
+ bfiV9WqlRzzRIp5p1uNDXXfee4z8/qloYDv3ekjEmczlaPBvZWrh2npQeWC1ua/afsdC
+ Rkb1QIEZ51FhU2Yd/wWmfrwkwGYHwyT3wZmSjqx9L9EEHiBFzoE2D+dc2w9et7mao5H/
+ xLWTvaipSkm4LetT/zUKDW9PZg/R4SsttARhMc1DmTBHIdrr3UH6VMuhXpqBTyd8slBY
+ 8tkvro5suenWw0ejXTfqIvCt4fm+iG3Eg56DK++qWxb4492NENENXu/2XwyumIslehO4
+ 6vtg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWSLnU+2FpDF2yEDcKYzzz/r/ub5Byz586APdJpE7jVMdVUv2fXOg5uIjTf+W9kc4I0WdSavyY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw6XXx5vB+/EY4k99nZPJdUOVmp65h1m/2GIpt4jTv+uNWTkavE
- aYv+TyBanqFhua+fNd6S5XSkwnLCP4NAo0kprLL5NybD/mRv1Z8VJktfKUOZZKsIw2s2J1NZyBf
- QRzTJrUgHuLaZv9dGbIRQZpn9J2kHsMWijOvw41AHB5DTG0vnLZ3hoJM0
-X-Gm-Gg: ASbGnctEPgubiPWgEvmQ31u9fhkRyjEe6zNP0RPvkmqxl7M6lgx3D+RD6rWew7VoGyT
- KX+KUYf3+dt08ysLTyvpKfTC/5pXsZ1UpqhoFB/G2AV+1MFTlE2x3NM4pF2BKw6C+FSKw39nveI
- OE5WzPmozGsWmA4LmfUKmJ/bEKZHmXfFpeCya0jZKVWgshMi8tyMZ2IGpixLqLbEXj2q582VB1I
- VIJCO45j1iiXKO5yEcFK1C7ZOFYVv0HCO1zROhW76l6HNcJl5qz4Z008DO/JAg2iLpDkXrERMq/
- b/D5to9UCe/bAhtCrcY+YgLuUBbj6GSXSNnKEds8jtNNIQ0t0q76JueKtWWR8s1Al/AaFvjSaRS
- JVrUOJvC5GU+wxYwXFCD1MKZarnsy+yFOx95fMAWO
-X-Received: by 2002:a17:90b:52c8:b0:30e:382f:8b86 with SMTP id
- 98e67ed59e1d1-30e8312dc73mr33829628a91.15.1747820691795; 
- Wed, 21 May 2025 02:44:51 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEChEj7nXAB8v8cdyVYctNqhHwdgq9iabw2TUKQ9tpJWPEXzbdsAV9qLgJqVsviKoZwFRCpmQ==
-X-Received: by 2002:a17:90b:52c8:b0:30e:382f:8b86 with SMTP id
- 98e67ed59e1d1-30e8312dc73mr33829595a91.15.1747820691355; 
- Wed, 21 May 2025 02:44:51 -0700 (PDT)
+ AJvYcCUhwaNKF+jNVb9711fH/4bpbyYH3GlMMKywddetWwhjxYxTWiEsB7YpYhM9nOo7tJ9Zjg2IeCo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKpxRvmXOlE2ToNXRvp8P59gP79U7Mgyl3LdLNUK5f1q7NNq2d
+ nMAn4oWEzOat/NLPELSDumE0MmPMWh2TOUc3YpFrVCHOvgcVYaa0Efs17ABJAruwCsNNmzGbu0J
+ OGYqM4ZyYKrxC+CrB/cQ2Nm80DvuDCjJ193PXj/jrwzQf0P18+c0ciXa/
+X-Gm-Gg: ASbGnctf3UVcgLiylGIrkVuJE5ZOxM+qxOdOJiJAVqYnuO9LEKDts/fk6m4fS3bkVeE
+ 0nqQfBEXkhGjmM7ah15bA61pL+fhEXw2FLYJrFPkCB0YiE2UNfGPoL6E4qV1nN+Zk9d9w4N31Dt
+ +kZepuPKQ6nEXYOm2QtbzzZ+ksqYQf9S6DnUlFR3DYcl/OdGWaEofT0Zvcsyd+gkHz0DJmCWxpR
+ hVQ1ABv+SCoM5/zuqtXWdz/l7hb7qu80ud5OPNIjpxSGONPYlvb8r7P+0ECcrAD1YQwLAsBHwVi
+ WyDXMd9hUH9AbCQl8H1XcCYCedA7mp//tTeHxPlt+8eMrUEYClIJt9UnvuyRH31RLOnm08dD6kH
+ dUtLAViBAOkKqRy76fhiuamzFY7+5ejxyIguhlpVs
+X-Received: by 2002:a17:90b:48ce:b0:2ee:d371:3227 with SMTP id
+ 98e67ed59e1d1-30e7d53fedcmr36533844a91.17.1747820696524; 
+ Wed, 21 May 2025 02:44:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG7I9FGB9Q3dso0+Yie63+LlMML3cXW2Cq5LorTJf8MNNi1Q5IuwEbQ8jWeKwRoWZ3lAOELeg==
+X-Received: by 2002:a17:90b:48ce:b0:2ee:d371:3227 with SMTP id
+ 98e67ed59e1d1-30e7d53fedcmr36533800a91.17.1747820696023; 
+ Wed, 21 May 2025 02:44:56 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30f3650000csm3226367a91.37.2025.05.21.02.44.46
+ 98e67ed59e1d1-30f3650000csm3226367a91.37.2025.05.21.02.44.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 02:44:50 -0700 (PDT)
+ Wed, 21 May 2025 02:44:55 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com,
@@ -88,33 +89,35 @@ To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  me@samcday.com, quic_varada@quicinc.com, sughosh.ganu@linaro.org,
  sjg@chromium.org, lehmanju@devpi.de, bhupesh.linux@gmail.com,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v3 0/6] Introduce support for QCS8300 SoC based IQ8 Series
- Platform
-Date: Wed, 21 May 2025 15:14:36 +0530
-Message-Id: <20250521094442.3522036-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH v3 1/6] doc: board: qualcomm: document Dragonwing board
+ building/flashing
+Date: Wed, 21 May 2025 15:14:37 +0530
+Message-Id: <20250521094442.3522036-2-balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250521094442.3522036-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20250521094442.3522036-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=V9990fni c=1 sm=1 tr=0 ts=682da095 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=plaP86i05TW429YolQ4A:9
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-ORIG-GUID: Feemu-kxcU3dy3hC25MJ0oE8ghi5kGr0
-X-Proofpoint-GUID: Feemu-kxcU3dy3hC25MJ0oE8ghi5kGr0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIxMDA5NiBTYWx0ZWRfX/dt/2yPOCSrs
- Xs9v1WlQeT2bBzjFWSqNwMcmqgFzNUhGh9GSF+hvqxX0c/hyBxxxIQGwSUnQif+UkupUUIafRWa
- mp7RghYdqrwrdsB/LsKI36YiUTuZrXkA27+dhEwT1LCJxIyk2hjsCvVmWTQmBr0sW4+Z9Mn//NP
- Jy2O/XkVmjYM5vag6L9YqBhtzio1gA5FR46AS21xCo4BOF5jqcB3DTtP/8ExdwRBcWhc3lNLrnL
- ciZSvqtSc/fbH1OHEtqKYS3MHyeO92ve1i16SF/q/HEXCH2yEcL+jsIbzWNzSYYzF1YadcT3iiS
- 0HAw7o9ujmRo3WwlUtgUeZmmeRyg2tHfDwRXzuJTYrsMy2RPMSMscuOz8+h8fK0brSfswIGIUFB
- Svyjct2iYfEOiUkdpGuL3VEMMLrohrbBj4+hZB1juYBptm6C/uayhPT6XZVzveXrsWm9XTON
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIxMDA5NiBTYWx0ZWRfXwuq1sYMCEy3f
+ 2Wk7iBXMsuxb2gw1bekdBkuVtI6RiilcrTZhcuo4eML1pRsegucFzXx9iBvKpPaRscjv5AnpG1q
+ 33OOQpHrW+aXkwlz+AxZRva/VX6KXP24LOj4K189KP2wc1fA10pTuu6ZCSAExR0jxuudnAjTV2u
+ ZsfH6kYgzDFKVCKBNxqLsBa6rmQ8nG+1rvIrKEmJ0YovyB7+3bc7FM8zPbd3qaQdlLa8v9xj3pw
+ 4cZ9LgAGRYfIqvrDEIjUd/SSHpkm9xOzshhs8bue60lu8DxdT+6e7d4GYX8j4AqF/yRkyZ0JHOv
+ qlqwcMSncSSjBC5mvYwLiEhqEf1dyZiGta0eXBLHTC/pcTjv1AzRGn5Eqgm4n/hZ3c0cwTwh/AC
+ C5hUs6OJKkHhRHW6HKNuRwhBJ6clRouzPtChFGjzpBbARJXDRRdVkoJac/vCiffB4wKOwutd
+X-Authority-Analysis: v=2.4 cv=RIuzH5i+ c=1 sm=1 tr=0 ts=682da09a cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=QRC5FBUSQmOKMuYLiD4A:9
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-ORIG-GUID: P3xm86GNhcreTZ13VF9vg0l89KTd_qYH
+X-Proofpoint-GUID: P3xm86GNhcreTZ13VF9vg0l89KTd_qYH
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-21_02,2025-05-20_03,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxlogscore=999 bulkscore=0 impostorscore=0 clxscore=1015 priorityscore=1501
- lowpriorityscore=0 mlxscore=0 spamscore=0 phishscore=0 suspectscore=0
- adultscore=0 malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ clxscore=1015 phishscore=0 suspectscore=0 malwarescore=0 bulkscore=0
+ mlxlogscore=999 spamscore=0 lowpriorityscore=0 mlxscore=0 priorityscore=1501
+ adultscore=0 impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505160000
  definitions=main-2505210096
 X-BeenThere: u-boot@lists.denx.de
@@ -133,56 +136,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These patches introduce the initial support code needed
-for the Qualcomm Dragonwing QCS8300 SoC based IQ8 Series Platform.
-For information on supported boards and build instructions please
-refer to doc/board/qualcomm/dragonwing.rst file.
-
-Please see [1] for SoC related details
-
-1 - https://docs.qualcomm.com/bundle/publicresource/87-83839-1_REV_A_Qualcomm_IQ8_Series_Product_Brief________.pdf
+Introducing documentation support for Qualcomm Dragonwing series
+boards. Documents the build and flashing steps.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
-Changes in v3:
-- In drivers/clk/qcom/clock-qcs8300.c driver file, replaced
-  1s with BIT(0)s in the clock definitions
-- Link to v2: https://lore.kernel.org/u-boot/20250514044212.1422714-1-balaji.selvanathan@oss.qualcomm.com/
+v3:
+- No changes to this patch in v3
 
-Changes in v2:
-- Added documentation file for Qualcomm Dragonwing
-  series (doc/board/qualcomm/dragonwing.rst)
-- Removed direct changes done to dts/upstream subtree
-  (in dts/upstream/include/dt-bindings/power/qcom-rpmpd.h)
-- Took care of alphabetical order in drivers/clk/qcom/Kconfig
-  and drivers/clk/qcom/Makefile
-- Took care of alphabetical order in configs/qcom_defconfig
-- Renamed "configs/qcs8300_defconfig" to"configs/qcom_qcs8300_defconfig"
-- Link to v1: https://lore.kernel.org/u-boot/20250508111952.2304578-1-balaji.selvanathan@oss.qualcomm.com/ 
+v2:
+- This file is newly added in v2 based on suggestion from reviewer
 ---
-
-Balaji Selvanathan (6):
-  doc: board: qualcomm: document Dragonwing board building/flashing
-  dts: qcs8300-ride-u-boot.dtsi: Add memory entry to bootup
-  clk/qcom: qcs8300: Add GCC clock driver for QCS8300
-  phy: qcom: Enable QMP UFS PHY driver for QCS8300
-  qcom_defconfig: Enable QCS8300 clock driver
-  configs: add qcs8300_defconfig
-
- arch/arm/dts/qcs8300-ride-u-boot.dtsi |  19 ++++
- configs/qcom_defconfig                |   1 +
- configs/qcom_qcs8300_defconfig        |  21 ++++
- doc/board/qualcomm/dragonwing.rst     |  41 ++++++++
- drivers/clk/qcom/Kconfig              |   8 ++
- drivers/clk/qcom/Makefile             |   1 +
- drivers/clk/qcom/clock-qcs8300.c      | 146 ++++++++++++++++++++++++++
- drivers/phy/qcom/phy-qcom-qmp-ufs.c   |   1 +
- 8 files changed, 238 insertions(+)
- create mode 100644 arch/arm/dts/qcs8300-ride-u-boot.dtsi
- create mode 100644 configs/qcom_qcs8300_defconfig
+ doc/board/qualcomm/dragonwing.rst | 41 +++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
  create mode 100644 doc/board/qualcomm/dragonwing.rst
- create mode 100644 drivers/clk/qcom/clock-qcs8300.c
 
+diff --git a/doc/board/qualcomm/dragonwing.rst b/doc/board/qualcomm/dragonwing.rst
+new file mode 100644
+index 00000000000..18788cd6167
+--- /dev/null
++++ b/doc/board/qualcomm/dragonwing.rst
+@@ -0,0 +1,41 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. sectionauthor:: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
++
++Qualcomm DragonWing
++========================================
++
++Qualcomm DragonWing are industrial-grade boards that provides various series
++of processors such as IQ6 (QCS615), IQ8 (QCS8300) and IQ9 (QCS9100).
++These SoCs are used for factory/industry based applications.
++More information can be found on the `Qualcomm's IQ6 product page`_,
++`Qualcomm's IQ8 product page`_ and `Qualcomm's IQ9 product page`_.
++
++.. _Qualcomm's IQ6 product page: https://docs.qualcomm.com/bundle/publicresource/87-83838-1_REV_A_Qualcomm_IQ6_Series_Product_Brief.pdf
++.. _Qualcomm's IQ8 product page: https://docs.qualcomm.com/bundle/publicresource/87-83839-1_REV_A_Qualcomm_IQ8_Series_Product_Brief________.pdf
++.. _Qualcomm's IQ9 product page: https://docs.qualcomm.com/bundle/publicresource/87-83840-1_REV_A_Qualcomm_IQ9_Series_Product_Brief.pdf
++
++Installation
++------------
++First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``QCS615``, ``QCS8300`` or ``QCS9100``::
++
++  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
++  $ make qcom_qcs8300_defconfig
++  $ make -j8
++
++This will build ``u-boot.elf`` in the configured output directory.
++
++The firmware expects firmware ELF images to be "signed". The signature
++does not provide any security in this case, but it provides the firmware
++with some required metadata.
++
++To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
++
++  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
++
++Then install the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
++on your device.
++
++U-Boot should be running after a reboot (``reset``).
++
++.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
++.. _edl: https://github.com/bkerler/edl
 -- 
 2.34.1
 
