@@ -4,82 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61B4FC54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:18:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A04BC54E65
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:45:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C213482D59;
-	Wed, 21 May 2025 11:18:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A772F82D6C;
+	Wed, 21 May 2025 11:44:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jm+qmGHX";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="OdaK+Otu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A05D82D6C; Wed, 21 May 2025 11:18:16 +0200 (CEST)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 76A5D82DE7; Wed, 21 May 2025 11:44:57 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1BCD82D2B
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:18:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-87be2373596so1935999241.1
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:18:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747819092; x=1748423892; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lIIX1my3hcLMxf/sE98i2MEEpuyIcbZAQbYjb9DgwgY=;
- b=jm+qmGHXW0hvGLZS02ekAaqX0I8rdXJOV+TmL6s3Kfpnrj+B/Bb89vt08abyp1+Z4M
- kdm4iSARiTpYxpjMsY0KIQhO15PCAsGuWsv4SIr3tTNxflz0nzYLuUvAQNFZHOd4F0oR
- AeYfG6y3iILzxi6yG+bdOEFP4qaRRKsYk2E1Do4T0wkkmKwSREbQDhffqnsF7ACkhZhR
- OOMj1Gqi73byQwyKdjkFY+94tUjHnL47eR2VWATvk+yOU8FtvydyeffFmgOdroETSfGq
- ENiUBFUjR30mLANiM9mDrN4p4me3pV18KyqJ+Qy8S6il/QhCe7dkQJD9PMjTXcNuVwxd
- qkng==
+ by phobos.denx.de (Postfix) with ESMTPS id DE01182D59
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:44:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54L9XUZ4016660
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 09:44:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=yw5xXvs+Tio8eKePNJBkpE+snq4caB1N0eo
+ uJ+de4i0=; b=OdaK+OtukHHYvfbvFXSmO8re3p2x+wQP6pURkyWTIS0zh7xyal2
+ pJOEzTn0qz4JVkoHvB6cBbAnvoBPinkEjPu3PV24/OgJFyyR1ZU5xjYwFtCDUdl8
+ GGX8DFlY7svsKOtGj4Tp0hwaPlKJAOaQk6Ip9/gIBC2g4uVC6ddwHP8hPCLpgzX8
+ 6LB7bYyY2aZVXbHRs8Z3cCpWpj5/5hblcrWE9ayghYyXaqx739iybDS+rvJV2WtR
+ S11wAcr7js3aRjcusFVr4Qb3nOtfqFVzR/Ozr7BNIyljapMjATQcrZifrFimd6z6
+ I3Smyv4n/+UVcl4hLXzPZFLuDUENDCH4Ccw==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46rwf9ter5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 09:44:53 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-30e8346b49cso5312575a91.0
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:44:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747819092; x=1748423892;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lIIX1my3hcLMxf/sE98i2MEEpuyIcbZAQbYjb9DgwgY=;
- b=kEF7M23iHd1QF+BKAHhNk9kCkC9fbxFRxp/zAj8HpJlSQwizaDEU895uoFSg33o/Ag
- dpAohuTVdzKMCVWI3xXkgIsnxBzL2Rks8xLHlK8C3cWoNDfXQsVV+dpyyxctMjzFqOyE
- oYd5Xvomuzii4maAsI4QeZjIt9jU8EZ5wZs1KvMhzFOsByy2P9xndk24KE10rSH1w9VN
- Tk714m1ltWkEmAoOW5fcSO0PKuWQiIg95QuebHufEdH3wWc5ijRIvU4A4NS3Y2e9hO/o
- nL0Kh8xHizKgODey9kBJTOwSAnWZH9FMXzle6LWSrts/X4anhC2Zul4sVohD3ldSoo8p
- ddsg==
-X-Gm-Message-State: AOJu0Yzhsg2tlkdeurf5BHlgI827fg24DoXbLy2Pq5zsQA0Z9MR/A8Ju
- F6pcEwiTTLtdU8nsosQI77rYN1Aze9mzr34E/2jTvL+8yage/G2qqRZMQXD2TTCLCiM3evvIjpp
- I3uDwKOgH/qVpS2lLvPyqsaySd1eVXBhYhfTqIHjHoQ==
-X-Gm-Gg: ASbGncucoDwsZ9hIfWh6UmB5+IpeDeABpN6/8AHXpun34zNuH3dhfAVuymN5/kHmndE
- fKA4QsBIYLvx1qLKOF+wvVfB+3uuiif3+lDfCpMQsndh12Ko66FurwX5JFjH8bfot38WZ/es48W
- 8S318P7YvEDlixfzU9VroUGFGIynUfkwLATg==
-X-Google-Smtp-Source: AGHT+IG/tC21DfLKb0XIty+HVI94WyvKHHX+mmZepBlCgylO5PegwRvxpwR9oHD3pfEcAjTMTWY4sGTV4CG7376eu/Q=
-X-Received: by 2002:a05:6102:8005:b0:4dd:ad20:a334 with SMTP id
- ada2fe7eead31-4e049d57331mr18861433137.7.1747819092496; Wed, 21 May 2025
- 02:18:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1747820692; x=1748425492;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yw5xXvs+Tio8eKePNJBkpE+snq4caB1N0eouJ+de4i0=;
+ b=IICTEYjNNcoOpPMKUdQ4KGZodEdfHLZ7/DMm4ZFGUIvcQjykVhV2HEHmmWz09G3sH8
+ XRTgKts0F+vl1KgQ8QW7b0/ejmGk/795xS+iUhcXGTwVfXWQuaJftMOoiXufEhFXibf5
+ J5mxiNhOsUjmU1cciqy+ICC7ZsLzqvFxcGcObZ+hhIKNKB0iC5KkXZVgBwuV1PnS1gQ7
+ hoZb52n3Bq+whrtahGxifqA/nnm0Sd6105pGrCnsJUroIY68vE1YCHKVvmHibf59swyx
+ sOjK/OXlkSdj2BCXqgJiFtWlZ/kYuJXrNGmEjanTxXmRNt259u9n9ZqjmUzpZm8jPtJZ
+ PV3w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWSLnU+2FpDF2yEDcKYzzz/r/ub5Byz586APdJpE7jVMdVUv2fXOg5uIjTf+W9kc4I0WdSavyY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6XXx5vB+/EY4k99nZPJdUOVmp65h1m/2GIpt4jTv+uNWTkavE
+ aYv+TyBanqFhua+fNd6S5XSkwnLCP4NAo0kprLL5NybD/mRv1Z8VJktfKUOZZKsIw2s2J1NZyBf
+ QRzTJrUgHuLaZv9dGbIRQZpn9J2kHsMWijOvw41AHB5DTG0vnLZ3hoJM0
+X-Gm-Gg: ASbGnctEPgubiPWgEvmQ31u9fhkRyjEe6zNP0RPvkmqxl7M6lgx3D+RD6rWew7VoGyT
+ KX+KUYf3+dt08ysLTyvpKfTC/5pXsZ1UpqhoFB/G2AV+1MFTlE2x3NM4pF2BKw6C+FSKw39nveI
+ OE5WzPmozGsWmA4LmfUKmJ/bEKZHmXfFpeCya0jZKVWgshMi8tyMZ2IGpixLqLbEXj2q582VB1I
+ VIJCO45j1iiXKO5yEcFK1C7ZOFYVv0HCO1zROhW76l6HNcJl5qz4Z008DO/JAg2iLpDkXrERMq/
+ b/D5to9UCe/bAhtCrcY+YgLuUBbj6GSXSNnKEds8jtNNIQ0t0q76JueKtWWR8s1Al/AaFvjSaRS
+ JVrUOJvC5GU+wxYwXFCD1MKZarnsy+yFOx95fMAWO
+X-Received: by 2002:a17:90b:52c8:b0:30e:382f:8b86 with SMTP id
+ 98e67ed59e1d1-30e8312dc73mr33829628a91.15.1747820691795; 
+ Wed, 21 May 2025 02:44:51 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEChEj7nXAB8v8cdyVYctNqhHwdgq9iabw2TUKQ9tpJWPEXzbdsAV9qLgJqVsviKoZwFRCpmQ==
+X-Received: by 2002:a17:90b:52c8:b0:30e:382f:8b86 with SMTP id
+ 98e67ed59e1d1-30e8312dc73mr33829595a91.15.1747820691355; 
+ Wed, 21 May 2025 02:44:51 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-30f3650000csm3226367a91.37.2025.05.21.02.44.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 May 2025 02:44:50 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com,
+ balaji.selvanathan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
+ me@samcday.com, quic_varada@quicinc.com, sughosh.ganu@linaro.org,
+ sjg@chromium.org, lehmanju@devpi.de, bhupesh.linux@gmail.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: [PATCH v3 0/6] Introduce support for QCS8300 SoC based IQ8 Series
+ Platform
+Date: Wed, 21 May 2025 15:14:36 +0530
+Message-Id: <20250521094442.3522036-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250520120606.173228-1-sughosh.ganu@linaro.org>
- <20250520120606.173228-2-sughosh.ganu@linaro.org>
- <DA1OCJCRJ6KI.1X5DUMJDQ6913@linaro.org>
-In-Reply-To: <DA1OCJCRJ6KI.1X5DUMJDQ6913@linaro.org>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 21 May 2025 14:48:01 +0530
-X-Gm-Features: AX0GCFuKYSni_N69Svu6Gc_JnfBahuT7N5cxJQKjYPmMT24UJurwvwklj8JN8Eo
-Message-ID: <CADg8p97UZVCUoYe3wzykVMDc+wpVJuz06+vJuJvG6WsMRRto3g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] lmb: replace lmb_reserve() and lmb_alloc_addr()
- API's
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=V9990fni c=1 sm=1 tr=0 ts=682da095 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=plaP86i05TW429YolQ4A:9
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: Feemu-kxcU3dy3hC25MJ0oE8ghi5kGr0
+X-Proofpoint-GUID: Feemu-kxcU3dy3hC25MJ0oE8ghi5kGr0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIxMDA5NiBTYWx0ZWRfX/dt/2yPOCSrs
+ Xs9v1WlQeT2bBzjFWSqNwMcmqgFzNUhGh9GSF+hvqxX0c/hyBxxxIQGwSUnQif+UkupUUIafRWa
+ mp7RghYdqrwrdsB/LsKI36YiUTuZrXkA27+dhEwT1LCJxIyk2hjsCvVmWTQmBr0sW4+Z9Mn//NP
+ Jy2O/XkVmjYM5vag6L9YqBhtzio1gA5FR46AS21xCo4BOF5jqcB3DTtP/8ExdwRBcWhc3lNLrnL
+ ciZSvqtSc/fbH1OHEtqKYS3MHyeO92ve1i16SF/q/HEXCH2yEcL+jsIbzWNzSYYzF1YadcT3iiS
+ 0HAw7o9ujmRo3WwlUtgUeZmmeRyg2tHfDwRXzuJTYrsMy2RPMSMscuOz8+h8fK0brSfswIGIUFB
+ Svyjct2iYfEOiUkdpGuL3VEMMLrohrbBj4+hZB1juYBptm6C/uayhPT6XZVzveXrsWm9XTON
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-21_02,2025-05-20_03,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxlogscore=999 bulkscore=0 impostorscore=0 clxscore=1015 priorityscore=1501
+ lowpriorityscore=0 mlxscore=0 spamscore=0 phishscore=0 suspectscore=0
+ adultscore=0 malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505160000
+ definitions=main-2505210096
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,98 +133,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 21 May 2025 at 13:23, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Sughosh
->
-> On Tue May 20, 2025 at 3:06 PM EEST, Sughosh Ganu wrote:
-> > There currently are multiple allocation API's in the LMB module. There
-> > are a couple of API's for allocating memory(lmb_alloc() and
-> > lmb_alloc_base()), and then there are two for requesting a reservation
-> > for a particular memory region (lmb_reserve() and
-> > lmb_alloc_addr()). Introduce a single API lmb_allocate_mem() which
-> > will cater to all types of allocation requests and replace
-> > lmb_reserve() and lmb_alloc_addr() with the new API.
-> >
-> > Moreover, the lmb_reserve() API is pretty similar to the
-> > lmb_alloc_addr() API, with the one difference being that the
-> > lmb_reserve() API allows for reserving any address passed to it --
-> > the address need not be part of the LMB memory map. The
-> > lmb_alloc_addr() does check that the address being requested is
-> > actually part of the LMB memory map.
-> >
-> > There is no need to support reserving memory regions which are outside
-> > the LMB memory map. Remove the lmb_reserve() API functionality and use
-> > the functionality provided by lmb_alloc_addr() instead. The
-> > lmb_alloc_addr() will check if the requested address is part of the
-> > LMB memory map and return an error if not.
-> >
-> >        * there's no need to check the result
-> >        */
-> >       arm_smccc_smc(MTK_SIP_GET_BL31_REGION, 0, 0, 0, 0, 0, 0, 0, &res);
-> > -     lmb_reserve(res.a1, res.a2, LMB_NOMAP);
-> > +     addr = (phys_addr_t)res.a1;
-> > +     lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, res.a2, LMB_NOMAP);
->
-> In some case you check the return value and in others you ignore it.
-> Since you are changing this, check the return address everywhere
+These patches introduce the initial support code needed
+for the Qualcomm Dragonwing QCS8300 SoC based IQ8 Series Platform.
+For information on supported boards and build instructions please
+refer to doc/board/qualcomm/dragonwing.rst file.
 
-Yes, I mentioned this in the cover-letter. I have kept the code in
-arch-specific functions as is when it comes to error checking, as I do
-not have the associated boards with me. I am not sure what side
-effects erroring out would have. It would be better if the respective
-custodians/maintainers fix this, as it would ensure no breakage.
+Please see [1] for SoC related details
 
+1 - https://docs.qualcomm.com/bundle/publicresource/87-83839-1_REV_A_Qualcomm_IQ8_Series_Product_Brief________.pdf
 
->
-> > + * be -EINVAL if the requested memory region is not part of the LMB memory
-> > + * map, and -EEXIST if the requested region is already allocated.
-> > + */
-> > +int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
->
-> Nit, but can you rename it to lmb_alloc_mem() so it uses abbreviations everywhere?
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Changes in v3:
+- In drivers/clk/qcom/clock-qcs8300.c driver file, replaced
+  1s with BIT(0)s in the clock definitions
+- Link to v2: https://lore.kernel.org/u-boot/20250514044212.1422714-1-balaji.selvanathan@oss.qualcomm.com/
 
-You mean a shorter name? I had pondered over using lmb_alloc_mem()
-instead earlier, but thought about using the current one, as this is a
-globally visible API.
+Changes in v2:
+- Added documentation file for Qualcomm Dragonwing
+  series (doc/board/qualcomm/dragonwing.rst)
+- Removed direct changes done to dts/upstream subtree
+  (in dts/upstream/include/dt-bindings/power/qcom-rpmpd.h)
+- Took care of alphabetical order in drivers/clk/qcom/Kconfig
+  and drivers/clk/qcom/Makefile
+- Took care of alphabetical order in configs/qcom_defconfig
+- Renamed "configs/qcs8300_defconfig" to"configs/qcom_qcs8300_defconfig"
+- Link to v1: https://lore.kernel.org/u-boot/20250508111952.2304578-1-balaji.selvanathan@oss.qualcomm.com/ 
+---
 
->
-> > +/**
-> > + * lmb_can_reserve_region() - check if the region can be reserved
-> > + * @base: base address of region to be reserved
-> > + * @size: size of region to be reserved
-> > + * @flags: flag of the region to be reserved
-> > + *
-> > + * Go through all the reserved regions and ensure that the requested
-> > + * region does not overlap with any existing regions. An overlap is
-> > + * allowed only when the flag of the request region and the existing
-> > + * region is LMB_NONE.
-> > + *
-> > + * Return: true if region can be reserved, false otherwise
-> > + */
-> > +static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
-> > +                                u32 flags)
->
-> Overall this is a good cleanup. But I was hoping we can rid of this as well.
-> This is almost identical to lmb_overlaps_region() with very small differences.
-> One of these takes the lmb list as an argument and the other is also checking some flags.
-> It's better if we keep one.
+Balaji Selvanathan (6):
+  doc: board: qualcomm: document Dragonwing board building/flashing
+  dts: qcs8300-ride-u-boot.dtsi: Add memory entry to bootup
+  clk/qcom: qcs8300: Add GCC clock driver for QCS8300
+  phy: qcom: Enable QMP UFS PHY driver for QCS8300
+  qcom_defconfig: Enable QCS8300 clock driver
+  configs: add qcs8300_defconfig
 
-I can get rid of the above function. It would require putting the
-checks for the flags in the calling function, but we can indeed use
-lmb_overlaps_region() instead. I will put this in a separate patch.
-Thanks.
+ arch/arm/dts/qcs8300-ride-u-boot.dtsi |  19 ++++
+ configs/qcom_defconfig                |   1 +
+ configs/qcom_qcs8300_defconfig        |  21 ++++
+ doc/board/qualcomm/dragonwing.rst     |  41 ++++++++
+ drivers/clk/qcom/Kconfig              |   8 ++
+ drivers/clk/qcom/Makefile             |   1 +
+ drivers/clk/qcom/clock-qcs8300.c      | 146 ++++++++++++++++++++++++++
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c   |   1 +
+ 8 files changed, 238 insertions(+)
+ create mode 100644 arch/arm/dts/qcs8300-ride-u-boot.dtsi
+ create mode 100644 configs/qcom_qcs8300_defconfig
+ create mode 100644 doc/board/qualcomm/dragonwing.rst
+ create mode 100644 drivers/clk/qcom/clock-qcs8300.c
 
->
-> [...]
->
-> Overall this is moving towards thr gith direction
+-- 
+2.34.1
 
-Good to know :)
-
--sughosh
-
->
-> Cheers
-> /Ilias
