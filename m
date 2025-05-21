@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22D68C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C73CC54E65
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:09:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E47E82DE7;
-	Wed, 21 May 2025 11:08:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97D9C82D59;
+	Wed, 21 May 2025 11:08:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i3fkL9Dj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NzMa1HBY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 996F682D6C; Wed, 21 May 2025 11:08:28 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 2833382D6C; Wed, 21 May 2025 11:08:58 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 537ED82D2B
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:08:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14B8982D2B
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:08:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-601968db16bso2384196a12.3
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:08:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-70df2e31510so4502317b3.1
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:08:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747818506; x=1748423306; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:content-language:subject:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f0xsCINiDpC2pirzX/J7kPudLcbb9wjvAXsqae8Ok5U=;
- b=i3fkL9DjIt7p85Yl3BWRaucRXT2tsbtI284uQ2eOPZNd1Cydg9/fa8PIgHsZLu4a9c
- HbRzxkVz1wa8EBUUjtti9MqpJliLEQzvZa7ea5/XlYJxt04fl0xYSvwas3T56c6u8Zj7
- /RfUdFeTsf/rdskTxSr5y0jja3eI8rPovfPLkeGC5qC9s29fJjMvE/eZZQJzOrXpuxb2
- IJH42n/YLeitVxIqiE4FLacQ3GDNZD1Vg5HjUgCzPxDesRcQyTsAM+hMQ9zkZvkzIHsZ
- GH6SUdQ+l5/PPflqAYFk078LfztYgmHdScvlOlsX1kfhZmIA4VPQP5zfuXoeSHcr374o
- h9Ww==
+ d=linaro.org; s=google; t=1747818535; x=1748423335; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4Da0BxBaHsX0KixEsNmkjCPuxSEHcSw+Nh8+zpLMfHI=;
+ b=NzMa1HBYwVo7Eci+XJNB0rVLvr4Bh/8JiOUIZfbhnWW8yMURjPCvxrOjkQAJnLGn56
+ U8WGN8XosOgp2uoE/dOHNSSTDkj8MUK9DLp0wE93HVtEMamQ4s8ElbLNnGqtQg9qPIDL
+ zzLW7RXzJ7rfAqkD/QESpfNTq4LNHYr2JBOVVmPTW3cPEzEoLp7qxRWKRwgXwRPBhInw
+ kCM62GETu9l8or4LmUGxNW9QU4nHTOcCgvUW92VtIIXsUDMk/wpV4GdRuB/y3Jt3c2KX
+ f++zSsfyOYrZijwcorIasLWJqoNq5XnK5MAWzsVXtc6EPMsiP7MF4q7yk6i6Fn1BEkD1
+ Bk+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747818506; x=1748423306;
- h=content-transfer-encoding:cc:to:content-language:subject:from
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=f0xsCINiDpC2pirzX/J7kPudLcbb9wjvAXsqae8Ok5U=;
- b=taj2m23gwIgm2MeVKIhpikgAYbeHPqtpTEpGbsgMuxf17mN0HongoaY8RBkz/2W+A0
- AT5W2JirFYl1043aWB3UA/SQOubaOlpMtuDe5I09c2gJB06V9TU0uiiiOFZcyTviAaVk
- rp1IBI6lZn1txLthUYfFW9DpRa0qnhX4DTWXSw1CilnBwz2imK76avZa+ldDXmarGj1q
- +81ZnGAh00qQMbbM/urBcaV5KG0igg5oq3TK5cyXyKG1s7cSSGXhOJW/tp8Z2xHG1h6g
- mPpRy+MHSKJ4XtJx5R8vdjUNEJF8bMG0XygbzFutDHHBIewmWjvgiFz4E2y2Kt1y8X91
- TyxQ==
-X-Gm-Message-State: AOJu0Yys9xWw1It7KXWv0dRGugdjZBaH4pDemzpsouV7h5396CVTUd1R
- j9j1sPKH3jlZha7iGQ/Y9GWJjG0LYq4lnKTdylvclV5RBnQOkg5+I4+SxExERAMYAHX3m2MExlE
- tUS2QlTM=
-X-Gm-Gg: ASbGncvzJ22ZcqkxcyUQeR289CiwvJkkGfIco7ozatWOIsiHNtcOV23YQjMSW0z3Ap+
- I2cB3wMnteo5iaBRcpwOp3BTwesUGObIMxNnoC2YfuUFlyEq6S7Rh5dw09xFP4R1tTYjf37Zbw0
- v68lEpm152NZjJ9n01yVQ1DflEAptZbGhrbqLbiw4UmpT8RDg88KtEma6ea14ijQCwm8u8a5OdD
- uQjVvaOurS8JdVBThPRpX8X73ppgByDYrp1NQANYr1Fu91eSRIu4w9cZmifXHaDoYK23vVNkXl4
- rcCbvpVYLQIJep8/yF+ym6Vset8NBM0Hn3oBwgWNkdrEYxhjG5ucdgrK5oP+Qg==
-X-Google-Smtp-Source: AGHT+IHZjkMImJ/aPXMGul4JMCJzcz443/SWnAii/Y2qgbRUKcxtbZipubOsg8E45wjrWZyXaYvSIw==
-X-Received: by 2002:a17:907:97c6:b0:abf:7453:1f1a with SMTP id
- a640c23a62f3a-ad52d5174e6mr1856956866b.36.1747818505727; 
- Wed, 21 May 2025 02:08:25 -0700 (PDT)
-Received: from [10.5.0.2] ([176.223.172.184]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d4382e2sm872985766b.107.2025.05.21.02.08.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 May 2025 02:08:25 -0700 (PDT)
-Message-ID: <4ec1ca88-d52d-48a7-a883-acb84add4f1b@linaro.org>
-Date: Wed, 21 May 2025 11:08:24 +0200
+ d=1e100.net; s=20230601; t=1747818535; x=1748423335;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4Da0BxBaHsX0KixEsNmkjCPuxSEHcSw+Nh8+zpLMfHI=;
+ b=e+qZbCOH4lw5DfNahmZWxz2LHAWfY2zwfHJeepCLk6FP6eY3KQNozGDdKUPBCVJ89z
+ XTBRWN7NXeFxrcmGvTumAAeZYpD9DGSJ4UKX1PQ3ZySp8mgMbaRiSaz3CFIG0TmQQhfH
+ vkmO7RrfBk/kSSGUAxpWkHjC7N8raOo8/p0k1CEY5yTgX7BrgypcUs/EjfHeauK4DRj7
+ W3nPIYnf/r7fpkl1sd5gZB7xUTys9pHa5chUX9+dPv9SikYfxZoQ/QeaYD0uepNj7oiV
+ SnBoVURKeMINFkLNcBesJZds4whLgLzrfBj5dskMQ5lmzLFzZzkTUsWWQl6TX85xdEJm
+ kGTQ==
+X-Gm-Message-State: AOJu0YxQK0RIWZU8Zx69Ha7aZcb3GTLHD6/aoRrNnKH5YbxR7ESsLOui
+ 5AbFwOWIqBzPXNXxu4LRbhxkJvpUS3y4MZGH1BsvkaGS7zFO7fXGlWykXWeUp4UvPy2VuE4mN6V
+ Cr0ZceP8bOvdgLNvmXF2uUd5hfYBuTNUJqL3fwF+2L7+KQvdf8DVy
+X-Gm-Gg: ASbGncvSYvGEb+Khq5SHV/1D6cyH0CoYJn+3kVfi71C1lCAlrmbI5e3iuK4KIERpw6w
+ hdztu8z43uAZsEPXKmhM5vIqwHLb5I5oXUaLrz1pHVVYWaSIERe4FyvUOSewnex3n1AyDR0bW99
+ zn5R+n+Kap5Tw1AupZze6Hrb1VRkm1be0clI6NAp/4xMLt
+X-Google-Smtp-Source: AGHT+IE9vA4DoQ3ZxiOFJTn0YgKUplp0f/NVXN3+Ii/JrfdQ3lj3YiUTuk/M5hplDvyRZNJNNCLQOngYtTs+kqX0VyM=
+X-Received: by 2002:a05:690c:3708:b0:70d:cfa6:3a78 with SMTP id
+ 00721157ae682-70dcfa63c61mr138474687b3.14.1747818534945; Wed, 21 May 2025
+ 02:08:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Please pull net-20250520
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 21 May 2025 12:08:19 +0300
+X-Gm-Features: AX0GCFvweQlbJlZqboZT2uryj5uU9lu9YyZ6EwsdcHwm8W0-MxvQdgrvgchqtHY
+Message-ID: <CAC_iWjK4U9KEdYkkkKb2TB4p+VJFU3DVFLK8fUg0druZpiZ4tQ@mail.gmail.com>
+Subject: Re: QEMU & KVM broken for arm64
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Mark Kettenis <kettenis@openbsd.org>, Mikko Rapeli <mikko.rapeli@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,47 +92,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit eeb5ff1a468b2303efa9deb2483b5edbebb568c6:
+++CC Mikko who stumbled upon it
 
-  Merge tag 'efi-2025-07-rc3-2' of https://source.denx.de/u-boot/custodians/u-boot-efi (2025-05-18 08:06:56 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20250520
-
-for you to fetch changes up to 722e41ad9931bf6f327a66b5f8ec0dadfb32e0f3:
-
-  net: lwip: tftp: time out if there is no reply from server (2025-05-20 15:43:09 +0200)
-
-CI link: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/26247
-
-Thanks,
--- 
-Jerome
-
-----------------------------------------------------------------
-Pull request net-20250520.
-
-net, net-lwip:
-- Remove wget console output when called by EFI
-
-net-lwip:
-- Add 10 s timeout to TFTP
-- Add LMB buffer checks
-
-----------------------------------------------------------------
-Jerome Forissier (5):
-      net-lwip: change static function wget_loop() to be wget_do_request()
-      net, net-lwip: wget: suppress console output when called by EFI
-      net-lwip: wget: add LMB and buffer checks
-      net-lwip: tftp: add LMB and buffer checks
-      net: lwip: tftp: time out if there is no reply from server
-
- doc/usage/cmd/wget.rst                             |   2 +-
- include/net-common.h                               |   2 +
- lib/efi_loader/efi_net.c                           |   2 +-
- .../lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c    |   8 +-
- net/lwip/tftp.c                                    |  71 ++++++++++--
- net/lwip/wget.c                                    | 122 +++++++++++++++------
- net/wget.c                                         |  23 +++-
- 7 files changed, 175 insertions(+), 55 deletions(-)
+On Wed, 21 May 2025 at 12:07, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi all,
+>
+> Starting from commit 53d5a221632e  ("emulation: Use bloblist to hold
+> tables") I can't boot U-Boot with QEMU (version 8.2.2) & KVM anymore.
+> The command line to reproduce it is:
+> qemu-system-aarch64 -smp 2 -nographic -cpu host -m 4096 -accel kvm
+> -bios u-boot.bin -machine virt,secure=off
+>
+> commit 24768a23a9b3 ("emulation: fdt: Relax condition for
+> OF_HAS_PRIOR_STAGE") boots fine.
+>
+> Simon do you have an arm64 host to reproduce this?
+>
+> Thanks
+> /Ilias
