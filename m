@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EDD8C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 13:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED8F9C2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 13:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7F3182E31;
-	Wed, 21 May 2025 15:37:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 539D582E31;
+	Wed, 21 May 2025 15:43:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m6TNX7F1";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="AwHdmt0/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C86B82E9A; Wed, 21 May 2025 15:37:29 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 366B182E9A; Wed, 21 May 2025 15:43:13 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1513982E2D
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 15:37:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF3A082E2D
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 15:43:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-70df2e31510so6628577b3.1
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 06:37:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747834646; x=1748439446; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hQAo1QaIyUazaqPED+Bxa3M6/BmKDxNwo+8dXee+JYg=;
- b=m6TNX7F17PIduy8YG3llu2qjL4btzy1W4+B5WTJ8UzLSbrqI0X5W8qBqMjmvONV7pR
- B/DPU7kYNehq8Iv6lZaOkanPtLFpyEmItZn+sRkQl0nVDp34FqUTbJ5XerIyH1jNvnjS
- +VTJTCRSfi3Dmfq+eL/aLlPD6zLQFNKAl59vzQ+VwPGU+ISBRfUG6P8new7ZbRz3laN3
- I2EhKaRlBiwLvc+fgp6GGj/PARAO3Q5jDWuj8FCy0FRi7cuK2IT7Z9To2ZHbveqL27NG
- ADxz3WdEi/3F3T2Z9qZOZsXotvo25ZJEFNwYqGJE/yV9wSvpRs0usp1dpfn7uUZ2M/2X
- V1+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747834646; x=1748439446;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hQAo1QaIyUazaqPED+Bxa3M6/BmKDxNwo+8dXee+JYg=;
- b=Zwaxa/tck2ugA7II6L/F8phDmzQioDsS4fkUEhD1/98jQvI/dZkwEioFcHBDJjcUQ+
- vyvwRPKa9DxldacTVgt/znDo/d0xFHx4eMsY/YSP0z+6fEBU+zn8uLZ8ZprUw4sLOfij
- xNec9QfFSzmsALaYmYe6GOq+2vtVwT5bTBeA1uKrRfkz1WPj8A2PvLHzBiUeuKMABmbl
- RpauVVe2eFmHpnQ7nG/Z7KhZ6lO9zMDrSriQ7z1bmuhkw5O3JD8dL9XInxEPDFy7isLq
- Jv4VQtpcrdnRfNCmUeNSsxsCk/Sdq0oahx7EE3ov20xKI9FzcDDWPVqCXTHxn0vYNYHY
- c1dA==
-X-Gm-Message-State: AOJu0Yz4lCxDSaH+Z4JMtiS+vQ5lapNDpToi3YZFbKwaPwHwQFsYcLXB
- Lzhp1N6Uy+W2MU2niidVnQvFU/KhaxOzeB02EyrDCcVj2jWODLOMR+L7TgbjUKpC6zI5T9HfUxT
- 4ELksNtrbNzGW43DQUzIlLbm2LFJqWvV/ENlli4lQOg==
-X-Gm-Gg: ASbGncu6RpuWUyApqJShMc+MYvGEplpwbHOcX1316t/4Ju/ei7siTws1q2CXdUpIceP
- /9CGqif5BJ1LuIkMbSCtxSMlKpPcIg7uwHjVh2MJ9N164oQ2zolE7f8MkiZPflnXmkdcG4udG6N
- fdDzauLokoJMLI8fgy/HVe4AT9GNqLze1V+mxq/97NTuT+
-X-Google-Smtp-Source: AGHT+IH2jU2xtOJGOP9wNGF2OKMhPnoWCkYifymYUeNy6OJfuIY+hNn5BrdBRX6xouUb4w/L8i8yJpNvD82KoCP68sA=
-X-Received: by 2002:a05:690c:9a82:b0:70d:f09a:bb4d with SMTP id
- 00721157ae682-70df09ad963mr44822857b3.0.1747834645873; Wed, 21 May 2025
- 06:37:25 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=723653ac2b=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LCf5G7004858;
+ Wed, 21 May 2025 15:43:08 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ VcmMGEW79/eQf4TngFF56ib9i0ImK627lCo711zfGbc=; b=AwHdmt0/bIROIWnC
+ LtOrjgv74YsGuhwXJp149QbazBeza8YjCkd6Fo/q5u3jwUHfCfA4O2rKfFqlUwBl
+ LTGUh+hnotQC5YzJYajd0ApD5SudMgce/5xkrs3uRSUL/tampJhTIQTUBeTmFeZ4
+ qOKG3EbXouySYjxw7cLyQbrBDQczfQLn830YrWkeAWIGqemKtS+HzQBD3hrnzITe
+ ieR9v6LrnwMIzwDHnDAQfno8xk1grDmvudlgW+zLgVj+2nvHvX3atAwPvJZPyAqE
+ 1vFoKNEYtAq4TDlz7OXU9hm+sh04rHUoAI24TJ/HwTwB2Ri1H8M426ROKYTnS+Fh
+ 7ot/ZA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwff4dqs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 21 May 2025 15:43:08 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 941444006A;
+ Wed, 21 May 2025 15:42:23 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B8195B2CB78;
+ Wed, 21 May 2025 15:41:40 +0200 (CEST)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
+ 2025 15:41:40 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 12/13] ARM: dts: stm32: switch from fixed to scmi clocks
+ for stm32mp257f-ev1
+Date: Wed, 21 May 2025 15:41:16 +0200
+Message-ID: <20250521134117.2828335-13-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
+References: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-References: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
- <87o6vm3zg9.fsf@bloch.sibelius.xs4all.nl>
-In-Reply-To: <87o6vm3zg9.fsf@bloch.sibelius.xs4all.nl>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 21 May 2025 16:36:50 +0300
-X-Gm-Features: AX0GCFvQY6awu0NAMo_PMHGBu_l8bG-SgopH7b9GBGsWz_pGD-Ke1C5sk15Hq5E
-Message-ID: <CAC_iWjKv2Ga0JqPHsNxRqARmcpthuBkNFzDhJyGXfGPgPAyZ-Q@mail.gmail.com>
-Subject: Re: QEMU & KVM broken for arm64
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- xypron.glpk@gmx.de, andre.przywara@arm.com, kettenis@openbsd.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-21_04,2025-05-20_03,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,32 +90,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
+SCMI clocks are now available, switch from fixed to SCMI clocks.
 
-On Wed, 21 May 2025 at 15:44, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
->
-> > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Date: Wed, 21 May 2025 12:07:40 +0300
-> >
-> > Hi all,
-> >
-> > Starting from commit 53d5a221632e  ("emulation: Use bloblist to hold
-> > tables") I can't boot U-Boot with QEMU (version 8.2.2) & KVM anymore.
-> > The command line to reproduce it is:
-> > qemu-system-aarch64 -smp 2 -nographic -cpu host -m 4096 -accel kvm
-> > -bios u-boot.bin -machine virt,secure=off
-> >
-> > commit 24768a23a9b3 ("emulation: fdt: Relax condition for
-> > OF_HAS_PRIOR_STAGE") boots fine.
-> >
-> > Simon do you have an arm64 host to reproduce this?
->
-> Does the same thing happen without "-accel kvm"?
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-No that still works fine (but you have to change the cpu from host to
-something else). E.g
-qemu-system-aarch64 -smp 2 -nographic -cpu max -m 1024  -bios
-u-boot.bin -machine virt,secure=off works fine
+ arch/arm/dts/stm32mp25-u-boot.dtsi       |  8 +++
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 74 ------------------------
+ 2 files changed, 8 insertions(+), 74 deletions(-)
 
-Thanks
-/Ilias
+diff --git a/arch/arm/dts/stm32mp25-u-boot.dtsi b/arch/arm/dts/stm32mp25-u-boot.dtsi
+index 0c8e95b3416..d9aeeb6d510 100644
+--- a/arch/arm/dts/stm32mp25-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp25-u-boot.dtsi
+@@ -25,6 +25,10 @@
+ 		optee {
+ 			bootph-all;
+ 		};
++
++		scmi {
++			bootph-all;
++		};
+ 	};
+ 
+ 	/* need PSCI for sysreset during board_f */
+@@ -93,6 +97,10 @@
+ 	bootph-all;
+ };
+ 
++&rcc {
++	bootph-all;
++};
++
+ &rifsc {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+index d778b8d8d05..9a566e18d3f 100644
+--- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+@@ -10,84 +10,10 @@
+ 		u-boot,boot-led = "led-blue";
+ 		u-boot,mmc-env-partition = "u-boot-env";
+ 	};
+-
+-	clocks {
+-		ck_flexgen_08: ck-flexgen-08 {
+-			#clock-cells = <0>;
+-			compatible = "fixed-clock";
+-			clock-frequency = <64000000>;
+-		};
+-
+-		ck_flexgen_51: ck-flexgen-51 {
+-			#clock-cells = <0>;
+-			compatible = "fixed-clock";
+-			clock-frequency = <200000000>;
+-		};
+-
+-		ck_icn_ls_mcu: ck-icn-ls-mcu {
+-			#clock-cells = <0>;
+-			compatible = "fixed-clock";
+-			clock-frequency = <200000000>;
+-		};
+-	};
+-};
+-
+-&gpioa {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpiob {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpioc {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpiod {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpioe {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpiof {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpiog {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpioh {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpioi {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpioj {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpiok {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&gpioz {
+-	clocks = <&ck_icn_ls_mcu>;
+-};
+-
+-&sdmmc1 {
+-	clocks = <&ck_flexgen_51>;
+-	/delete-property/resets;
+ };
+ 
+ &usart2 {
+ 	bootph-all;
+-	clocks = <&ck_flexgen_08>;
+ };
+ 
+ &usart2_pins_a {
+-- 
+2.25.1
+
