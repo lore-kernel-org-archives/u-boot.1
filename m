@@ -4,62 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8975C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 08:45:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 407A1C2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:08:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 653C082D2B;
-	Wed, 21 May 2025 10:45:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id C397082D59;
+	Wed, 21 May 2025 11:08:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 99F9082D6B; Wed, 21 May 2025 10:45:20 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6266082BD6
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 10:45:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 54L8iuVO085984
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Wed, 21 May 2025 16:44:56 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
- 2025 16:44:56 +0800
-Date: Wed, 21 May 2025 16:44:53 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Yao Zi <ziyao@disroot.org>
-CC: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>, "Lukasz
- Majewski" <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, "Neil
- Armstrong" <neil.armstrong@linaro.org>, Kongyang Liu
- <seashell11234455@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass
- <sjg@chromium.org>,
- Christian Marangi <ansuelsmth@gmail.com>, <u-boot@lists.denx.de>,
- Han Gao <rabenda.cn@gmail.com>, Han Gao <gaohan@iscas.ac.cn>
-Subject: Re: [PATCH 4/4] riscv: dts: th1520: Complete clock tree
-Message-ID: <aC2ShQUdo7sD-Zo8@swlinux02>
-References: <20250516030525.31361-1-ziyao@disroot.org>
- <20250516030525.31361-5-ziyao@disroot.org>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rpLjrXlm";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6756A82D6C; Wed, 21 May 2025 11:08:20 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B98A982D2B
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:08:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-708d90aa8f9so62262427b3.3
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 02:08:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1747818496; x=1748423296; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=GN6EWBjKHB+AdRNObjbAaAzZ+N6sSf60u4W6U5vy5ko=;
+ b=rpLjrXlmirCAiyDd4STXgHXlI5Xm4s1AB558ziZKpxBnhv0Kvwn3J+GDQZFLhRwo5R
+ 8M19f6H1GDFYgCRWwR50gxegwSzz6hBKx9pxX4J60WWyFKBsF04nWPI/f4cNtFvX271r
+ fNAMqL8BMBdabw53z3Ozf3zO5TvpEUWmqRWcIPeUa/vgAoE6DWYxl+vfTZghWjgWw7WV
+ d/gC8FnsUzbcEznn0ikxD1LGvryB1UrglsP5bOs/vU942ybyohl3EV/7J4Z6iLbtoGK5
+ a/D0aehRP8ZJEXYEbRc0OBYbBBBaaFfvTKK71OBqsssxIROLZBm2N4MTpBzHtHXsQLzc
+ MPMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747818496; x=1748423296;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GN6EWBjKHB+AdRNObjbAaAzZ+N6sSf60u4W6U5vy5ko=;
+ b=I7ikypSVNSB4QR3Az5akml/APkYBd+Y4KykXoeSO7kUIkbMkr5+yelEt69Uk8Rk3p4
+ iwFtMZdGx5lYBStIX61Qj54mrmZjxWV6JlQ190e8Z7cF+gLOy1IlBbGbgp5jYJwJU5gN
+ R1AF/xolw6g76wfxvZtYAv/V2orehnEJCTLVvSyT4h7AcklQ29b2xOyCcVGRAhUFXrB+
+ 2u4iATl/Hyfpd/LV93N6iYpK0xyM7qljEvlOWSPx1iSZCjo3QnreSbIAHaS8agHxumUy
+ mGdcTR39JUfNkckKRGjb6LSGGJiy/VWrCwdUIWcSeIiRLTF6h5dADkdGDP/Pe+JTgMT9
+ Jtvg==
+X-Gm-Message-State: AOJu0YxV0cXJgamAikXUHOyT8hyKHE0hGlkOf4WUaLRHwdbxfzmBa9Ub
+ u5o+v1+a7fDmSOG+oZw5uz58J0ObQAhcLkJ+vwuErCEXBODXXju9/IkfuHf/FqyKkH8lueuHuA1
+ 9KraI2BwQkbnOmxJ1ptwpEPBgUZ6s6zAmFuurL3chfgwHeZkeKanWNDk=
+X-Gm-Gg: ASbGncsVy+3Cv2TQIuFQNQ1OMkUvPh3eulUPO+38BT6M7GbvRVAjdqCGrlXaQsW4F00
+ nz9Sh74jNGMRhnEUSpc+P4Pb5iCVXdfvKER/zJM6xgc7iGlXdhLav95SpBt/OPcC4t4cTmuGpJi
+ anGY8mpFmFXFWbUk+VkpIc3Xwx+Ke9UR5egQ==
+X-Google-Smtp-Source: AGHT+IHPNx1lDQF2MV0/PCmrBTS+Wne+j6osW1n8xDyTyAMkSJirvBiEEzVKg5oZEGddZYIpXELac0cirelGUb6JEv0=
+X-Received: by 2002:a05:690c:6087:b0:708:73bc:abdc with SMTP id
+ 00721157ae682-70ca7b74584mr278041727b3.22.1747818496451; Wed, 21 May 2025
+ 02:08:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250516030525.31361-5-ziyao@disroot.org>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 54L8iuVO085984
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 21 May 2025 12:07:40 +0300
+X-Gm-Features: AX0GCFspOOI95DKWYjzANLEdiABKHIg3xS5MXRKC2mo5TeVqrev7Kka5xiarfzc
+Message-ID: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
+Subject: QEMU & KVM broken for arm64
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Mark Kettenis <kettenis@openbsd.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,15 +89,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 16, 2025 at 03:05:25AM +0000, Yao Zi wrote:
-> Describe the newly-supported clock controller of TH1520 in SoC
-> devicetree, replace dummy clocks with the controller-supplied ones and
-> add correct clocks for GPIO controllers.
-> 
-> Signed-off-by: Yao Zi <ziyao@disroot.org>
-> ---
->  arch/riscv/dts/th1520-lichee-module-4a.dtsi |  8 ---
->  arch/riscv/dts/th1520.dtsi                  | 75 +++++++++++----------
->  2 files changed, 39 insertions(+), 44 deletions(-)
+Hi all,
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+Starting from commit 53d5a221632e  ("emulation: Use bloblist to hold
+tables") I can't boot U-Boot with QEMU (version 8.2.2) & KVM anymore.
+The command line to reproduce it is:
+qemu-system-aarch64 -smp 2 -nographic -cpu host -m 4096 -accel kvm
+-bios u-boot.bin -machine virt,secure=off
+
+commit 24768a23a9b3 ("emulation: fdt: Relax condition for
+OF_HAS_PRIOR_STAGE") boots fine.
+
+Simon do you have an arm64 host to reproduce this?
+
+Thanks
+/Ilias
