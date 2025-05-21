@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E66C54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CADC2C54E90
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:01:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27B2A82F85;
-	Thu, 22 May 2025 01:01:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C704D82FB9;
+	Thu, 22 May 2025 01:01:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N12CDvj1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uVAHxfR5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D727082F8A; Thu, 22 May 2025 01:01:29 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 9DF7682FB8; Thu, 22 May 2025 01:01:32 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C079B82E31
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2FCF82F84
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72c09f8369cso2821103a34.3
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:27 -0700 (PDT)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-6021e3daeabso3914062eaf.3
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747868486; x=1748473286; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747868487; x=1748473287; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5jmGhrrArKKgH70D5O8GK7UYmQxk4XJaRSuQJXbPeZQ=;
- b=N12CDvj1FUDYKXxmd5kPTgcKobl5NdyuF6sq/0qfoGsEJRcPpQXrafS/1Ohnjukj5F
- 7uxhHIviCjNaDRzm895fIxnzjzQeiETgxDv3T1i30XhjdmDxWk/JErGeaI4d70d+CNdv
- 47jCEEXK6rO0J7vT99vwaqE+e7WcHsaEdrf+4=
+ :reply-to; bh=O/a1beNZJqccoB8CN6g7ghU28NfrR0yuWzGk83w723g=;
+ b=uVAHxfR5uEb+cDj2JZn/j1VnT4jxxYD+zCMN5CtmZ0WKLiZ2eTF1MYrIUegRaIZ5QE
+ WhZ4oV54NQyq+i7s405/n+D6rRtIbFRAlP7LMgcYC6Q/tdKwElasBP/J7ngXa1ztBDyT
+ JFx5+WJxa5vfgqHaJYcSdB1xsxWE4t3iB/Z/k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747868486; x=1748473286;
+ d=1e100.net; s=20230601; t=1747868487; x=1748473287;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5jmGhrrArKKgH70D5O8GK7UYmQxk4XJaRSuQJXbPeZQ=;
- b=VLbrfb9/H6kIyD/E81pXtrmgIFoqPUcnUzInLJT2jPjfmqK//f+exIvtrvF8fu4uKr
- XVLsvMkte0oEz6QfcO+HpigeBpx+mx687OfUi7GxiDVUZ9JPrLv21LArt4wtv6fXDm36
- XFMWheqxUgCAF67MVDmq44xnXML9LkA99GKncWh1YX7N8fcz4f8cD0/EpsPOMDb/ZZkn
- gXXvzdCBiowdNCEK5yxnE8brDyUvXoOW/2U01P5RRxCGgkDS5kCX26AqugZA8cyxFGZV
- Nu3vSxN/ex42Cqc4zwYWfXv0jZqsrim6I5KDWIiow+lVq1Mjcd2vlO+GkjpjEAWlHB72
- x9iQ==
-X-Gm-Message-State: AOJu0YwU40L5kSs5CbNakTb+/IoJGNeI6tyByPbkQ/cRAkTwXrkqRUpZ
- YQtVOQUx+S7DrP8loogAH2cOHkojBMGr8jscielfWCSdhaVDnzyetFRO46LhKOUid8wm8y78jv0
- 3hbgstMo=
-X-Gm-Gg: ASbGnctz4dn8bDg5filgeMEvITI4xR2KwAflNKtRGC6sxYj0qpl7QtPb/SIHZgfYXtj
- 5IP4yJSKiuTSV5aSQg3ysMWgtetqBrPbUZRLfG0+aFHMw9zfHn8er6BmWmtR/Z4PUmnCjNAMnlP
- NTB75LuPXeyu5pRRFJhankZPlzqApyhLb2RawDlez58kHvU1y7efQKAwm6DE+LFvHif+2pIcfE+
- o7/HJUQKGTOmGrQAQi2W7ONH6VubKVkbqCGk2FUiWj9Rq432KO7EKNwERghuJ/4S1glix/la1iq
- 1GFyo2XpRr0V0SKY0Tunnk56gq/tSFJLD7wCDASbc3MRMBORxaQumnPNGibHSaaKmLHB1YBJuA1
- UCS2TqB1T1q/G8H4=
-X-Google-Smtp-Source: AGHT+IG6RmmhnkLt/gno21AezbfTOn1BexQZv4R9DZJ0jvMDkK1DpW8d7Vg3ousNGV7X+W8S9yR+Tw==
-X-Received: by 2002:a05:6808:1b0c:b0:403:43c4:f434 with SMTP id
- 5614622812f47-404d86af8d5mr12819279b6e.16.1747868486511; 
- Wed, 21 May 2025 16:01:26 -0700 (PDT)
+ bh=O/a1beNZJqccoB8CN6g7ghU28NfrR0yuWzGk83w723g=;
+ b=PbQ43feQaq4DNb1uXEMYKz4FdwllHu5XlXxmENIabBhzV9Y/OSME5gZ+m2aEGzkdh9
+ D5TnPGv03uy7DlyqU3hiMbgXmIzX/bYWAOHoBp8/bpOgQ0tua1EkBkuAwm0HnMmi1enh
+ zLPzX3jCAXOWpvD7VX8bin4xcCc0/ZOKUrNsiqELiRlQv6XOExKCPlmTgHijDjtkJOa+
+ z5yy8wZYJk5kFFlhNMIb4we/4NGiYk5zNvjmtPhQ/4AQGG5wkZzJL6KX66IKhUOdzgJT
+ cuqP90LoswzU+X3rPiqu5r+CrGVWwcmnhTJ4z0GxyZWTOydmeXHCUB+2agkzeaOfOVde
+ j1tQ==
+X-Gm-Message-State: AOJu0Yyll4ejLGbuAm6BazaYNInifVot8mx1BrVIB3jfhYKWzRl/PPkg
+ nokSNAQyhWkcS3rU80s3ULcSBSOkmozagbfrOcWE6p69G2YQQ2X2E+9Mhe6ThP+MJwxYG/nNI2i
+ PW6l4L20=
+X-Gm-Gg: ASbGncuc7XwHFAussWVbdyLMk8nWSVT7O5zJ6+zRDyR/2Jz7iMNW0TvIKIU+Gj1ktat
+ yZ6Oo+4pO31OQjWEiHjhfbjI5eRPEEw0ZQeiTRvC4+poMg/0w+xGHQHVxZw9duFJNb6t7Mo/GfM
+ 5ZKHo5OupwPq/vmn2N4OwY+p+U/XLV2t1TbeG0wu4PYshf5UQQZlXnEb4HmkYeZKjrzjxRHn5nO
+ yJZ2zeoVXeuZDbCDBMqMg+sLEZjSPx6BpA5JpRrEtuEKxXxzxRPChF/1s7pQL1Pf+pZisf7f69V
+ jt3seD5xZIif8miVJp+UYo30yaiKRTVoqGIQmh5t7GyMADcspCz7jVQguJlV1pzAUG1sF3C8UuC
+ gpkzM8L55q4EgjIY=
+X-Google-Smtp-Source: AGHT+IFJIrSLaNBPHyCDlGLXVqq9fJNTjyUccmTopzIyEScCZ1SkvB/83po+KiJmAPr4sbFZimZ7oA==
+X-Received: by 2002:a05:6820:290c:b0:60a:9c7:e8e6 with SMTP id
+ 006d021491bc7-60a09c7eab4mr8712955eaf.4.1747868487634; 
+ Wed, 21 May 2025 16:01:27 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.25
+ 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.26
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 16:01:25 -0700 (PDT)
+ Wed, 21 May 2025 16:01:26 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 02/17] include/arm_ffa.h: Audit include list
-Date: Wed, 21 May 2025 16:51:07 -0600
-Message-ID: <20250521230119.2084088-3-trini@konsulko.com>
+Subject: [PATCH 03/17] include/bios_emul.h: Audit include list
+Date: Wed, 21 May 2025 16:51:08 -0600
+Message-ID: <20250521230119.2084088-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250521230119.2084088-1-trini@konsulko.com>
 References: <20250521230119.2084088-1-trini@konsulko.com>
@@ -94,27 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This file does not need <linux/printk.h> but does directly need
-<linux/types.h>.
+This file does not need <pc.h> but does directly need
+<linux/types.h>. Furthermore, arch/x86/lib/bios.c was getting <pci.h>
+via <bios_emul.h> so add it there.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- include/arm_ffa.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/lib/bios.c | 1 +
+ include/bios_emul.h | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/arm_ffa.h b/include/arm_ffa.h
-index db9b1be995e6..2994d8ee3ae1 100644
---- a/include/arm_ffa.h
-+++ b/include/arm_ffa.h
-@@ -9,7 +9,7 @@
- #ifndef __ARM_FFA_H
- #define __ARM_FFA_H
+diff --git a/arch/x86/lib/bios.c b/arch/x86/lib/bios.c
+index de4578666fbd..77a8117d1580 100644
+--- a/arch/x86/lib/bios.c
++++ b/arch/x86/lib/bios.c
+@@ -12,6 +12,7 @@
+ #include <bios_emul.h>
+ #include <irq_func.h>
+ #include <log.h>
++#include <pci.h>
+ #include <vesa.h>
+ #include <linux/linkage.h>
+ #include <asm/cache.h>
+diff --git a/include/bios_emul.h b/include/bios_emul.h
+index a7e6d73972ce..47a45296cc31 100644
+--- a/include/bios_emul.h
++++ b/include/bios_emul.h
+@@ -8,7 +8,7 @@
  
--#include <linux/printk.h>
+ /* Include the register header directly here */
+ #include "../drivers/bios_emulator/include/x86emu/regs.h"
+-#include <pci.h>
 +#include <linux/types.h>
  
- /*
-  * This header is public. It can be used by clients to access
+ /****************************************************************************
+ REMARKS:
 -- 
 2.43.0
 
