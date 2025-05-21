@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC64C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 11:09:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7669AC3ABC9
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 12:36:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B649A82E2D;
-	Wed, 21 May 2025 13:09:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A1B2882E2D;
+	Wed, 21 May 2025 14:36:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SiuFUP3v";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="f0925c1Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B59682E31; Wed, 21 May 2025 13:09:20 +0200 (CEST)
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
- [IPv6:2607:f8b0:4864:20::e2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D2FC882EDA; Wed, 21 May 2025 14:29:09 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEB2182E0A
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 13:09:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C97A82E9F
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 14:29:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-4e15013bdc5so1580525137.1
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 04:09:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747825757; x=1748430557; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=uapniPJlouyC0yomaIpKmn5GB0bwl9Ggt7EFeeLYgRo=;
- b=SiuFUP3v6NP4gx9QBj6DoqWEx+vY4kZES0SK5lF+Bpo8kkru8lUneBP1V6MpE5y4ri
- WgKGZCXQuk4zm7w0b2C9PRsAeSB/06q6bx5C6RimNPqp7brYmoiWZncVStvgv426yiMc
- lgWpZza41w8RxT5TXTn5mCbKDdxW1rSGuVpTN2sXIjbhDmrd01hcegIFWP2aEMrKYLMp
- VPks6v8UfZvwYDCm1jxK9jWNYp2ZWJTHLC3ADEaXQyzxJNNtmR+wTVl0Xr6Q7y6L0eKk
- MJUV3Jra8hgCGif7MKmMG3GZnCYgJ+pAEwh5dOFjyDScdG0Iy/0bfcNmlcRfAVHWxfGP
- 9maQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747825757; x=1748430557;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uapniPJlouyC0yomaIpKmn5GB0bwl9Ggt7EFeeLYgRo=;
- b=Zi6F13ermAJzp72T1IXP7+2uHFfpZC0vZuN07vhduLck5l6RvlUrssReNbHQDByyjN
- ny/nArmPk3YN1+pYtK8OIe8mQAhTZIVEsDejhdN9yQZRzKlH9qMIiF0iGYWve8ANZC+7
- 4jJSkCJPB6pL2FTvS5ig2O77nVB47J2BpAGGNgFkQJrMaXseRn/s+K76FghnW3bAGmnr
- VmI6HKKo5Bxen2OWh/aRbp7da85M51c2lKr3cLkYjZydh86jIgVa+hi8E1rjNfu8X37u
- +Vc2f7QizM0HPO6T1WqNqU+YHHODzHNo5MUFxHs3H0O26JxM6ANYmp608xU1jNIe1Btj
- T5/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV2Qdoj/dIlz1mz+1XRAVWSXdGhZww+kbIOwCdXos9YxvaNhQsGG0Tl1TRYCrevGSkjwHNC/D0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzIC77yQ2iDoikERSOOZ0aXq1HzO7cdtY4T7IQHuHImgBKIIQ+L
- qeriGJ/tH3h7kS8wEfeqIH65rIqm9m54xiNSqsQ8So+06/Lrw0eqFT4T
-X-Gm-Gg: ASbGncuHHI7XCBa1uthjs9gYbco4ymTWMJ3xJ2LUDV89KCo+8bvwh339s185NV+m7Be
- 8ChUc8u9Hz+awO7AjsR0ZVpHMTZOl1v5EIxJuNY+5tJwqOjn5mCUM5dRzaWyXJ6Mn2q2U0p4OxP
- QB/8WEzlT9W4TvoJ2zGT9iuJ9v4ZOaT4CG5eRX8os9vsJsW7ptix9wQ/3HqTcZzmWThkil3nCBI
- xu6Nscg89VKQDsGjbsVLveMfep0eiC6D4TiB8n+ymQZ44qfub7YDtNPJa/guKmRVFTI/uedochk
- rB2H5oW4kpNPLBjwZEqvI4v/JKZEzMbM/es+bs/Pzvf9oSHJtjmxoey+kQb/S/tg7w==
-X-Google-Smtp-Source: AGHT+IFVWDoPXo2sVqHreKhbxtlHaRcaAjD/hlwmjXgLaS16Vy8QMc+RIs1gueNIQi5YcKnZfNkavw==
-X-Received: by 2002:a05:6102:3ca1:b0:4c1:91da:dac1 with SMTP id
- ada2fe7eead31-4dfa6b45cd7mr21133941137.6.1747825756562; 
- Wed, 21 May 2025 04:09:16 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fa17:cb12:a4b3:acd4])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-87bec121baasm8890946241.8.2025.05.21.04.09.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 04:09:16 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: gaurav.jain@nxp.com
-Cc: trini@konsulko.com, peng.fan@nxp.com, olaf.baehring@draeger.com,
- u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] caam: Fix CAAM error on startup
-Date: Wed, 21 May 2025 08:09:08 -0300
-Message-Id: <20250521110908.1665170-1-festevam@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7236647066=antonio.borneo@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LC0f19017098;
+ Wed, 21 May 2025 14:29:03 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=W7/zcALgui6R9BdBkaPxe3
+ ZPckl7A/FufUkxvtoZ+Sw=; b=f0925c1YaKQG5n5Kkvn9cgFsOh09PutlWsFS78
+ o3CTHmSFn5qXD2KpZ5QWocn4/IuIyDC55qrLcEy5pkj886uMdww9BVv4AmZwn4IL
+ 0wXP3emT0EUnjmEfcnVgVwR+jYZmCP40jn0fCYyUZwWLrV+8RZr5vt2U3IGZUM9p
+ M/ZEve/2E5ZZsjCk7qAn9dOHrlEdeIgmA16JNZ1DRpCE/cSxjXHUngtcw7sPk5Ef
+ 7XYdFL7KfaqI8sZArQVX9Om82kSw8jZQw/ZOvMHVjvfYtK+HnTy4LmCa/RgC3N3k
+ DdxY+TMtGeO/D1FJBoqzim73mKOTQz8yOGVX/DqnEcKIgmmQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfc3wjr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 21 May 2025 14:29:03 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 11FAB40049;
+ Wed, 21 May 2025 14:28:23 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6C2EFBDE792;
+ Wed, 21 May 2025 14:28:09 +0200 (CEST)
+Received: from localhost (10.252.16.84) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
+ 2025 14:28:08 +0200
+From: Antonio Borneo <antonio.borneo@foss.st.com>
+To: <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+CC: Antonio Borneo <antonio.borneo@foss.st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
+ <lionel.debieve@foss.st.com>, =?UTF-8?q?Cl=C3=A9ment=20Le=20Goffic?=
+ <clement.legoffic@foss.st.com>
+Subject: [PATCH 0/4] watchdog for STM32MP family
+Date: Wed, 21 May 2025 14:27:51 +0200
+Message-ID: <20250521122755.265760-1-antonio.borneo@foss.st.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.252.16.84]
+X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-21_04,2025-05-20_03,2025-03-28_01
+X-Mailman-Approved-At: Wed, 21 May 2025 14:36:09 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,119 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Olaf Baehring <olaf.baehring@draeger.com>
+This series addresses the two watchdog drivers used on STM32MPxx
+family platforms.
 
-In rare cases U-Boot returns an error message when intantiating the RNG
-of the CAAM device:
-“SEC0:  RNG4 SH0 instantiation failed with error 0xffffffff”
-This  means, that even when the CAAM device reports a finished
-descriptor, none is found in the output ring.
-This might be caused by a missing cache invalidation before
-reading the memory of the output ring
-This patch moves the cache invalidation of the output ring from start of
-the job to immediately after the notification from hardware where the
-output ring will be read.
+On the generic watchdog framework, it adds a new method
+wdt_set_force_autostart() used by the watchdog drivers to force
+the autostart status of the watchdog.
+This is used when the driver detects that the watchdog has already
+been started by a previous boot stage (e.g. HW, bootrom, Secure
+OS, ...) and needs to be kicked by U-Boot regardless of the
+autostart flag set in DT or in config.
 
-Signed-off-by: Olaf Baehring <olaf.baehring@draeger.com>
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
----
- drivers/crypto/fsl/jr.c | 25 ++++++++++++++-----------
- drivers/crypto/fsl/jr.h |  4 ----
- 2 files changed, 14 insertions(+), 15 deletions(-)
+On the driver arm_smc_wdt, it adds the API to query the Secure OS
+about the state of the watchdog, and if at probe the watchdog is
+already started it invokes wdt_set_force_autostart().
 
-diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
-index 8f7a821ebf3d..1d95d2bff278 100644
---- a/drivers/crypto/fsl/jr.c
-+++ b/drivers/crypto/fsl/jr.c
-@@ -217,13 +217,6 @@ static int jr_enqueue(uint32_t *desc_addr,
- 
- 	jr->head = (head + 1) & (jr->size - 1);
- 
--	/* Invalidate output ring */
--	start = (unsigned long)jr->output_ring &
--					~(ARCH_DMA_MINALIGN - 1);
--	end = ALIGN((unsigned long)jr->output_ring + jr->op_size,
--		    ARCH_DMA_MINALIGN);
--	invalidate_dcache_range(start, end);
--
- 	sec_out32(&regs->irja, 1);
- 
- 	return 0;
-@@ -243,6 +236,7 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
- #else
- 	uint32_t *addr;
- #endif
-+	unsigned long start, end;
- 
- 	while (sec_in32(&regs->orsf) && CIRC_CNT(jr->head, jr->tail,
- 						 jr->size)) {
-@@ -250,6 +244,11 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
- 		found = 0;
- 
- 		caam_dma_addr_t op_desc;
-+
-+		/* Invalidate output ring */
-+		start = (unsigned long)jr->output_ring & ~(ARCH_DMA_MINALIGN - 1);
-+		end = ALIGN((unsigned long)jr->output_ring + jr->op_size, ARCH_DMA_MINALIGN);
-+		invalidate_dcache_range(start, end);
- 	#ifdef CONFIG_CAAM_64BIT
- 		/* Read the 64 bit Descriptor address from Output Ring.
- 		 * The 32 bit hign and low part of the address will
-@@ -283,8 +282,13 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
- 		}
- 
- 		/* Error condition if match not found */
--		if (!found)
-+		if (!found) {
-+			int slots_full = sec_in32(&regs->orsf);
-+
-+			jr->tail = (jr->tail + slots_full) & (jr->size - 1);
-+			sec_out32(&regs->orjr, slots_full);
- 			return -1;
-+		}
- 
- 		jr->info[idx].op_done = 1;
- 		callback = (void *)jr->info[idx].callback;
-@@ -296,14 +300,14 @@ static int jr_dequeue(int sec_idx, struct caam_regs *caam)
- 		 */
- 		if (idx == tail)
- 			do {
-+				jr->info[tail].op_done = 0;
- 				tail = (tail + 1) & (jr->size - 1);
- 			} while (jr->info[tail].op_done);
- 
- 		jr->tail = tail;
--		jr->read_idx = (jr->read_idx + 1) & (jr->size - 1);
-+
- 
- 		sec_out32(&regs->orjr, 1);
--		jr->info[idx].op_done = 0;
- 
- 		callback(status, arg);
- 	}
-@@ -378,7 +382,6 @@ static int jr_sw_cleanup(uint8_t sec_idx, struct caam_regs *caam)
- 
- 	jr->head = 0;
- 	jr->tail = 0;
--	jr->read_idx = 0;
- 	jr->write_idx = 0;
- 	memset(jr->info, 0, sizeof(jr->info));
- 	memset(jr->input_ring, 0, jr->size * sizeof(caam_dma_addr_t));
-diff --git a/drivers/crypto/fsl/jr.h b/drivers/crypto/fsl/jr.h
-index b136cd8d05a9..8d5ca03e5015 100644
---- a/drivers/crypto/fsl/jr.h
-+++ b/drivers/crypto/fsl/jr.h
-@@ -83,10 +83,6 @@ struct jobring {
- 	 * in-order job completion
- 	 */
- 	int tail;
--	/* Read index of the output ring. It may not match with tail in case
--	 * of out of order completetion
--	 */
--	int read_idx;
- 	/* Write index to input ring. Would be always equal to head */
- 	int write_idx;
- 	/* Size of the rings. */
+On the driver stm32mp_wdt, it adds the code to detect the state of
+the watchdog, and if at probe the watchdog is already started it
+invokes wdt_set_force_autostart().
+
+At last, since all the watchdog drivers used on STM32MPxx family
+platforms can query the status of the watchdog and use it
+consequently, set WATCHDOG_AUTOSTART default to 'n' on such
+platforms. This implies that U-Boot, by default, will respect the
+status of the watchdog set by a previous boot stage.
+
+
+Antonio Borneo (2):
+  watchdog: wdt-uclass.c: add wdt_set_force_autostart() helper
+  watchdog: arm_smc_wdt: get wdt status through SMCWD_GET_TIMELEFT
+
+Clément Le Goffic (1):
+  watchdog: stm32mp: check the watchdog status
+
+Patrice Chotard (1):
+  watchdog: don't autostart watchdog on STM32MP boards
+
+ drivers/watchdog/Kconfig       |  1 +
+ drivers/watchdog/arm_smc_wdt.c | 17 +++++++++++++++++
+ drivers/watchdog/stm32mp_wdt.c | 33 +++++++++++++++++++++++++++++++++
+ drivers/watchdog/wdt-uclass.c  |  9 +++++++++
+ include/wdt.h                  |  9 +++++++++
+ 5 files changed, 69 insertions(+)
+
+
+base-commit: 0bc9b288fab3d9d143066db71299a4c047be38b9
 -- 
 2.34.1
 
