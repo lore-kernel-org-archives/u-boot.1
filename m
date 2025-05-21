@@ -4,98 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 417A6C54EDA
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 20:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D19ECC54E90
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 21:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6239682ED0;
-	Wed, 21 May 2025 22:12:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 044A582E7D;
+	Wed, 21 May 2025 23:46:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="f1MfbpbP";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="fsyt/hcg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E36482E28; Wed, 21 May 2025 20:52:49 +0200 (CEST)
+ id 2020982E40; Wed, 21 May 2025 23:27:43 +0200 (CEST)
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4A5082E08
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 20:52:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAF9D82E2D
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 23:27:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@redhat.com
+ spf=pass smtp.mailfrom=ekovsky@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747853565;
+ s=mimecast20190719; t=1747862859;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=c2peapZ3Y+YDJOiDzCV58FJiDHRmLVpi7Ho4Hv7z+ss=;
- b=f1MfbpbPuPmGWuw4YKLC6nU2rjN2pYer1y3OY36ufyrdGFKW9gX82vBugkL0zPBtlkIEgi
- iw1MVM24eyh7c4nm42e4My/qcxTVgonx04cDHEh89I8zzSZv+M9HmhRx0JmrTg3KMsMQ3Y
- MqngLHvTZoKqnoUn/eBZhCphhg6T7yo=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=urdL9iRxQ0QV7cGgq3NR4eZEyE2L11ipsE7cPhVibO0=;
+ b=fsyt/hcg0f+1vljDnUzafiP/8q9+JVT6V2qglyQ1HkXfoCYUBgDIrRs1wyxFP+lPMSFQY3
+ pP/b+sUUAC5SERHKbem7JZM5wWF+ZDgVNXY/MldhvunQOTZJtzMjv5tXUPhHL8QlqjLmu7
+ msMH7GBsye8acatp4slK6WMNDsQcMW8=
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-295-tGyTnOzmM1i68in_uwc1aw-1; Wed, 21 May 2025 14:52:44 -0400
-X-MC-Unique: tGyTnOzmM1i68in_uwc1aw-1
-X-Mimecast-MFC-AGG-ID: tGyTnOzmM1i68in_uwc1aw_1747853563
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-43ea256f039so56506885e9.0
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:52:44 -0700 (PDT)
+ us-mta-661-ofXISB9sNOCfTeBoUvUBOA-1; Wed, 21 May 2025 17:27:38 -0400
+X-MC-Unique: ofXISB9sNOCfTeBoUvUBOA-1
+X-Mimecast-MFC-AGG-ID: ofXISB9sNOCfTeBoUvUBOA_1747862858
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-7cabd21579eso1278265985a.3
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 14:27:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747853563; x=1748458363;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c2peapZ3Y+YDJOiDzCV58FJiDHRmLVpi7Ho4Hv7z+ss=;
- b=Vlj5/b3lz+sM7JOuOPokwp7Uxp1m1O+M1bRB9QDBKCQQLL+BMwWiXOhh7qzaV5Hkz0
- 2dnVNzwJR8RJr0xqNnXYPtUPOAzr/ZdaYA57KOzqKE/M/9lu76/kHToXk96klHROM6uo
- 7VPne+qrWSvRg6aGhuZ87G2h78tywJroMfjQfTgGDO7epafsrMs6jwVKsc6fNVEOeG5H
- YZiJvG27eSch640eiq2KEJNjmEsJV2UUNVkLIQeR3qv39mBACeqWVzqwAI6dy4r4kuJY
- 2ct8ZkA7VTuKVNNBgrtOYxoXRl4YnAXE8HghibKcOLxybrsl99TgwJse/R1aLCNi76Yr
- LnpQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX331yCm+Dv0J4BNS+xCMuEfCs7F6+Ua1A/f9Lw+acZ7l+XBZIZuXMNtVi8zgMvd3JyEAlFdT0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwuDlijeBF2BuHH/XDhMrbzGLf+ooiMfdcwOfPoM/hNZuvwfw11
- vzhtGTA14RH5VKpyL1n7aTbI5CBd7aeYQaUw/qzNTTTEQo2XRp971572v0fvW9Bg8ircvftQR0e
- O5Dg0h1uDwBTKx4C/kgHqCQeC9Lc3kfJVv0IrO1PJn4G+W7oHv4B2ZKU=
-X-Gm-Gg: ASbGnctInlLfKIYM712HTe3sdra5lnjAm7WxcoUqE5KQS5doSvN3ovjMvLxA9BQJV0r
- tvspUZbXxbKi4/TBBDhMAKh/6OwPYnld5oDwzf2QKiY1LO51rQvxd+Rjhnzk/bsWCSqfzd7xv1h
- GKH+gKj5T+ypF3VJau3H3dFa3M2lOdLxNQzYAziajE+tW6QBPxTJmUbByXq56d2eBNtSYvAgbxa
- kSva0d4If9DPUP6iBlA9y/LyFBbZD5oTchDQZ0G1XkZCyQDQTBAmXJp3+JFQeHBXcO8XHRbdF4i
- T3EC36sHwlbhmciQrPA=
-X-Received: by 2002:a05:600c:524d:b0:442:e109:3027 with SMTP id
- 5b1f17b1804b1-442fd6649bdmr199341305e9.24.1747853563138; 
- Wed, 21 May 2025 11:52:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGJCsierm63CmRLWGGzpH7mASGqMC8Rx/ce169hCUrtDa1O6Jz27lmsiVIZ99Twpep00mzIVQ==
-X-Received: by 2002:a05:600c:524d:b0:442:e109:3027 with SMTP id
- 5b1f17b1804b1-442fd6649bdmr199341145e9.24.1747853562755; 
- Wed, 21 May 2025 11:52:42 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a35ca6265fsm20359724f8f.43.2025.05.21.11.52.42
+ d=1e100.net; s=20230601; t=1747862857; x=1748467657;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=urdL9iRxQ0QV7cGgq3NR4eZEyE2L11ipsE7cPhVibO0=;
+ b=eePLoTD0/9ube5JYfnpwwopvsrdDCoEDE4U4CKHKRu5hpwhBOwYn0qUVahVjR649n6
+ 8ohci8NcI5u+Oj1PANlKBD1T+wIQI3UdKzgXdi48q2qBDSClpVbegeIQ8ToEzFaderco
+ myGaWOYUNk7tFamQ95rcN1L/MEDKFR1VvggzqJSWcUGT2OO4t6pD/2r/N36eccF2+oUG
+ qdTCc0fnPfWMXMX/aHoWgmj0gN3LM7dmL75XEgMRDFxptxF1CR3GAlmmtd3Awu/44oHT
+ 7nY+jHRI3oD0b4tP7Oa7vShsHPk+QbuKiSA7cXF2UdBM+qUXutzLSnZ7OpSmoZkEnsYm
+ sNrw==
+X-Gm-Message-State: AOJu0Yw7PGl5GHg2OjyF14AFWxqfP0ixByTNBUN17Q4dXbYZJ+UCw+Ut
+ lJmd+OoN8ZCukSVZtiDedOi/NiwVVF99fao2hualgHOljlP5mZ8fIjqj3U/hT/LKyllYbgCV/DN
+ eQIG670ZKbwNe0JgJVPlI7+waqfCTEBENVJvauRxHCn/10bdtk4gjk4nUFYqD4lIe7DsLTBs9jR
+ XzoN7lEJkbhB9bWnw7ROLZ/Ve+zh3AneCDGDi6iplY
+X-Gm-Gg: ASbGncvB3iZHRkHe0zc/yPeU/suFinM8pC3f1dHUp5f6sWWw5gAg1IwGnt8G4qp3D4X
+ eoO5G73t/ojUDvjqahefEeIYPI59W4kJVha/a5Q/7gj+anN9KVLumVP+RcZEcLKjy/cLAfS0Yj7
+ zIGMvgViTGCQD+yC8pBsuDOvIQk/qxeAtKzqZlkI1BjTOEVCDf7JPqe+Ypn3Jb7zulbl6nMqRiz
+ BaaAqaPxH0ZtxB/Tz3qDGg8yxFRWbuPo+YW55mTCeXkAhiH4HBbv/NquuVKXkZ1CymKVdo1hc1S
+ AryNppA=
+X-Received: by 2002:a05:620a:4441:b0:7c7:97ff:ca42 with SMTP id
+ af79cd13be357-7cd46780414mr3155035785a.41.1747862857075; 
+ Wed, 21 May 2025 14:27:37 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHJAKOhHv/e5w0JQQQm3htRq3fbJLR12hzXR+xJvLK7tPnaGN2a2/ea9VXxULpzb3Ed1rwC+w==
+X-Received: by 2002:a05:620a:4441:b0:7c7:97ff:ca42 with SMTP id
+ af79cd13be357-7cd46780414mr3155031685a.41.1747862856610; 
+ Wed, 21 May 2025 14:27:36 -0700 (PDT)
+Received: from localhost ([38.147.236.174]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7cd468cc89fsm928372385a.105.2025.05.21.14.27.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 11:52:42 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@redhat.com>
-To: Tom Rini <trini@konsulko.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: neil.armstrong@linaro.org, u-boot@lists.denx.de, Dmitrii Merkurev
- <dimorinny@google.com>
-Subject: Re: [PATCH RFT v3 0/3] fastboot: add support for generic block
- flashing
-In-Reply-To: <20250521151236.GC100073@bill-the-cat>
-References: <20250506-topic-fastboot-blk-v3-0-d94be5829f46@linaro.org>
- <174774092427.332438.8643753165301653831.b4-ty@kernel.org>
- <87zff6nhmo.fsf@kernel.org> <20250521151236.GC100073@bill-the-cat>
-Date: Wed, 21 May 2025 20:52:41 +0200
-Message-ID: <87wma9okxy.fsf@kernel.org>
+ Wed, 21 May 2025 14:27:36 -0700 (PDT)
+From: Eddie Kovsky <ekovsky@redhat.com>
+To: u-boot@lists.denx.de
+Cc: Enric Balletbo i Serra <eballetbo@redhat.com>,
+ Aaron Kling <webgeek1234@gmail.com>, Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <mwalle@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nicolas Belin <nbelin@baylibre.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] image: android: fix ramdisk default address
+Date: Wed, 21 May 2025 15:26:59 -0600
+Message-ID: <20250521212714.100357-1-ekovsky@redhat.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: EoWnnT__gHfJ-A8vSIBy7LN9jbfHGQea6KsBcJVy-Ws_1747853563
+X-Mimecast-MFC-PROC-ID: b4WWjZSxsfXd2ZveXhVyBYL9y2Dggv_o9ubOSylM20Y_1747862858
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
-X-Mailman-Approved-At: Wed, 21 May 2025 22:12:24 +0200
+Content-Transfer-Encoding: 8bit
+content-type: text/plain; charset="US-ASCII"; x-default=true
+X-Mailman-Approved-At: Wed, 21 May 2025 23:46:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,89 +113,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Commit 21e7fa0e3ac5 ("image: android: handle ramdisk default address")
+changed the default behavior for header versions less than or equal to 2.
 
-On mer., mai 21, 2025 at 09:12, Tom Rini <trini@konsulko.com> wrote:
+The ramdisk address (img_data.ramdisk_ptr) is only assigned to *rd_data
+if the physical load address (img_data.ramdisk_addr) is equal to 0 or
+the Android default ramdisk address.
 
-> On Wed, May 21, 2025 at 04:49:35PM +0200, Mattijs Korpershoek wrote:
->> Hi Neil,
->> 
->> On mar., mai 20, 2025 at 13:35, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
->> 
->> > Hi,
->> >
->> > On Tue, 06 May 2025 18:10:06 +0200, neil.armstrong@linaro.org wrote:
->> >> This serie permits using any block device as target
->> >> for fastboot by moving the generic block logic into
->> >> a common set of helpers and also use them as generic
->> >> backend.
->> >> 
->> >> The erase logic has been extended to support software
->> >> erase since only 2 block drivers exposes the erase
->> >> operation.
->> >> 
->> >> [...]
->> >
->> > Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
->> >
->> > [1/3] fastboot: blk: introduce fastboot block flashing support
->> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88239b5bb04bea2b58f7bf4c3ea72cf832de818c
->> > [2/3] fastboot: blk: switch emmc to use the block helpers
->> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/25ab5c32c28b9f25fb193f726f239d75af3c365a
->> > [3/3] fastboot: integrate block flashing back-end
->> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a885bd8c969e25d03bf406207d89b1145c9490fb
->> 
->> It seems this series cause CI to fail:
->> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26238
->> 
->> Without the patches applied, it passes:
->> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26235
->> 
->> Do you have any idea what is going wrong?
->> I could not find anything obvious by skimming through the logs.
->
-> It's a Kconfig problem then. Some platform is prompting for a value (not
-> a y/n) and there's no default.
+    /* Ramdisk can be used in-place, use current ptr */
+    if (img_data.ramdisk_addr == 0 ||
+            img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
+        *rd_data = img_data.ramdisk_ptr;
+    } else {
+        ramdisk_ptr = img_data.ramdisk_addr;
+        *rd_data = ramdisk_ptr;
+        memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
+                img_data.ramdisk_size);
+    }
 
-You are correct. Thank you for the suggestion.
+When the img_data.ramdisk_addr and the img_data.kernel_addr are the same
+*rd_data needs to be assigned to the ramdisk address (ramdisk_ptr), not
+the physical address (ramdisk_addr).
 
-I've applied the following diff to 3/3:
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 68967abb751e..fdf34a6abe1e 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -200,6 +200,7 @@ config FASTBOOT_MMC_USER_NAME
- config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
-        string "Define FASTBOOT block interface name"
-        depends on FASTBOOT_FLASH_BLOCK
-+       default "none"
-        help
-          The fastboot "flash" and "erase" commands support operations
-          on any Block device, this should specify the block device name
-@@ -212,6 +213,7 @@ config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
- config FASTBOOT_FLASH_BLOCK_DEVICE_ID
-        int "Define FASTBOOT block device identifier"
-        depends on FASTBOOT_FLASH_BLOCK
-+       default 0
-        help
-          The fastboot "flash" and "erase" commands support operations
-          on any Block device, this should specify the block device
+As a result of the current behavior, we can no longer boot a kernel on
+the Renesas R-Car S4 board.
 
-See:
-https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/e9e185a349fc1dd5066c9b79758b0434e3385003
+Add an additional check to the if clause so that the ramdisk address is
+assigned when the kernel address and the ramdisk address are the same,
+restoring the previous default behavior.
 
-And it builds successfully:
-https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26268
+Fixes: 21e7fa0e3ac5 ("image: android: handle ramdisk default address")
+Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+---
 
-Neil, can you look if the above diff is good for you?
-If so, I can squash this in.
+ boot/image-android.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-If you prefer, you can resend a v4 with the fix included and I can
-re-merge that instead.
-
-Let me know what works for you.
-
->
-> -- 
-> Tom
+diff --git a/boot/image-android.c b/boot/image-android.c
+index 1746b0189008..459cdb8456c4 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -488,7 +488,8 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 	} else {
+ 		/* Ramdisk can be used in-place, use current ptr */
+ 		if (img_data.ramdisk_addr == 0 ||
+-		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR) {
++		    img_data.ramdisk_addr == ANDROID_IMAGE_DEFAULT_RAMDISK_ADDR ||
++		    img_data.ramdisk_addr == img_data.kernel_addr) {
+ 			*rd_data = img_data.ramdisk_ptr;
+ 		} else {
+ 			ramdisk_ptr = img_data.ramdisk_addr;
+-- 
+2.49.0
 
