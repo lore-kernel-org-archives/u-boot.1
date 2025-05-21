@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE4EC54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89FD2C54E90
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:03:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8D1A82FBC;
-	Thu, 22 May 2025 01:01:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40E2183020;
+	Thu, 22 May 2025 01:01:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R0i6OfYc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a0zrJb2c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38C6B82FC5; Thu, 22 May 2025 01:01:49 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 8082F8300B; Thu, 22 May 2025 01:01:49 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 457C382FBC
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF53682FBE
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-6065803ef35so2050925eaf.1
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:45 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-60b8a9be8a3so56751eaf.3
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747868504; x=1748473304; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747868505; x=1748473305; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=BBZGSfhNqe+cqmGCjULDiW+dDXxs1jonZXrmzc+KkFM=;
- b=R0i6OfYch8sXuauVuzDkSp31GZILplgbWuh4snqBRi4gd3Z87GfdEJFD9pl9C6OOL9
- 8Jl/8bSq+CdtIXDByuBdbGGAxIBAMGJz0uXcll4s1v05t6SUTyvpW7SbjdZVxH2Az2mI
- WftPBXJzlik84boGlTEhpq9P5gEwTC4m9iODU=
+ :reply-to; bh=/zmhmC+KmP1696GMSYnSuIQ0ZB/h9+llWQw2tW+5PyE=;
+ b=a0zrJb2cHsto1XNz6kgz5D+FWEmWvqLVY7AECNUtt/E+L+EQcB9+wPC7uXj6Lta3rI
+ uDM9cBIEP3PXAo9bhXR/N263ik1sAuhhEX4/0IQm9aAM6qVyCsQJfnztFwflhu+V0tTM
+ h7o8dapmoKhJQIxLJo50P17yJUDmkHA9HmOpM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747868504; x=1748473304;
+ d=1e100.net; s=20230601; t=1747868505; x=1748473305;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BBZGSfhNqe+cqmGCjULDiW+dDXxs1jonZXrmzc+KkFM=;
- b=I8th8m8MEKhCFwsEtVznDk3a+zeufFd8Ai3ZJ0idT6pPo/2mr27/fhwGW+D++q4+3L
- 6qK89ptDhmdOhWMrUf/WGIqrmlBijzopJAvHZv26XC+dKj/TlZ3Un6okS8FucWXvl++b
- F6kzWzPUvdUgXfPzqoVjI5kZDyH8GlhLjEqKlGGHmg3bMBxQEovLQuegM6nM3Nc+cdTV
- UEBwWNgsnpPxmdCWosrKg05bcAnN2PQDKl2cbuQRC5fCqWKHjn/Yj6P0t13VEOcYdr5a
- JKXOD07U2aVp3T+IbCCBf24h8DsaU9OoRY2m6HGMKFsPV5T+416T8vTC89XXJ+DloNnD
- BuWA==
-X-Gm-Message-State: AOJu0YzC1uc6Jqv7gecPx3kz3kF1tnOcPL3BpoVUQQ8U+qq6SZgvGk7f
- eA4IpPHpiRI6D/2kLc7G4TPncm53UORGwyo2yjFf/PJulFifV3wcx5hCquUdkniSDdJocNRcbnv
- c6FGZpIw=
-X-Gm-Gg: ASbGncvBP3mYA/YIrw+QLrCITG80fMj7a14jfKDbKlyH7Ydl206aULXbNHsiypFvywd
- sZQls3KSYqWkdxX6o2pUErn4k4fWb59zxN3RmjDNW2lCh7yR/H99s4m4tGzvtYSHObtoBOQdomR
- n9jvaIujrU9N1v8t8x+MowOx8BK43c5OQnNBzal2OiRgw+dnEknQ+v10aFT6CLY8N25PH6tFjPU
- ejHxeNF36IOIBeoTGouBJQbiy07CnSti3kBjcGEXPikrdWGoZ6az7ctCSrNCX9uRIHfj/8+en0U
- DTqnTT5WE5YxvIZEbqjIg4889AZZeNcsFFqKE/a3sD8wYGIROX+XtJGO0ygytCpeE/9EDFpDE/Z
- QKFMcVYh28dLcDLk=
-X-Google-Smtp-Source: AGHT+IGQuzZBKesZ1IRLIqHnBnMfy4eDqohznvsf05v9rJbPfNZ26Tf2iVLockPAFkR+H7GjkKBAgQ==
-X-Received: by 2002:a4a:ee8b:0:b0:60b:87fa:80e8 with SMTP id
- 006d021491bc7-60b87fa836bmr893878eaf.7.1747868503985; 
- Wed, 21 May 2025 16:01:43 -0700 (PDT)
+ bh=/zmhmC+KmP1696GMSYnSuIQ0ZB/h9+llWQw2tW+5PyE=;
+ b=j2U8Jj1YMrYIkkYmXlaD6wEE2miWQXVXNoWUWfBJ1X7k3SKNOJsXBauhG+pnatwe31
+ tPRi1MhUdhrGjywNYODp/EVN1bTOusKno4kxGGFYwfaudnamk+q2u8Ru2zUx0bW5bl18
+ POC+DmlOV5iscisndhtPVeINEmTG75FdczPtLi/SZk5NCkDMMjJQDa4z8d6I1msB9qx/
+ Gsu+Pxf0fhvopkgbz1r198Tao9KPZpZdvMOBjc63QxSz1PTqyAbQ3NvQacbdcfGLfE0V
+ MNUzti86GfhSSRcXRyIv1ttyPnabz4+b3OKtXvtf7jyjC1pEC2UEAmb05oT927T3QnEy
+ rGxA==
+X-Gm-Message-State: AOJu0YwcsPZ5b5/dXzQWseygjGhH9VLN7WHYQNJ1rWSkkDTMBvOcldbm
+ tuLU7okeDdD0xbn7YujLAv3LmjoGxmGg3rI/YcBgjezUpGAFKe6aqnLrYGVCjaMs5w2dAawFnKx
+ ovaw3IYU=
+X-Gm-Gg: ASbGnctZtmcEgHgp1YflLa83nqkcjJFVHu+HnuUDYs0cA3uty4sV5boLuThBsFAoMOJ
+ dskF9Xh+Jzyfy6LGZ2o0ym8+ugaK6uElqvcnh1eQoGlBECCoBYYKSSPWM1IkeKNeYA01GSB2/4g
+ ESis82HxjDQvXg7N8pu3+QhDXv1N0jQoDv+sIn45FDQO3CxjpyA9FIjmidamObmTP4h42tf0Wto
+ UsJsCtyGLr3tGlVprJWiGotz22TaZNmDIzp3+GR2No7d8tCKgHcs5dqgguNw/kJW0rAQwvEysYh
+ 6G6oHlB5+n558h36f06Gc45mx8EFltgz39Me8gHQ7S24Thjjui7kThDyEXFdEC2O8t6Cwtv++Sn
+ aYIpKW9UrbTnKjFk=
+X-Google-Smtp-Source: AGHT+IFsORu4fizdgrciOAisvryeWnIaEPe/MmQmT06RH79sR0thlznFE7/J9YFLPXRCmFgMdTzDhQ==
+X-Received: by 2002:a4a:ee8a:0:b0:60b:7e53:f1c3 with SMTP id
+ 006d021491bc7-60b7e53f688mr3371941eaf.0.1747868505400; 
+ Wed, 21 May 2025 16:01:45 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.42
+ 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.44
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 16:01:43 -0700 (PDT)
+ Wed, 21 May 2025 16:01:44 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 14/17] include/ide.h: Cleanup usage
-Date: Wed, 21 May 2025 16:51:19 -0600
-Message-ID: <20250521230119.2084088-15-trini@konsulko.com>
+Subject: [PATCH 15/17] include/mmc.h: Audit include list
+Date: Wed, 21 May 2025 16:51:20 -0600
+Message-ID: <20250521230119.2084088-16-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250521230119.2084088-1-trini@konsulko.com>
 References: <20250521230119.2084088-1-trini@konsulko.com>
@@ -94,173 +94,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At this point in time, <ide.h> provides the IDE_BUS macro and the
-function prototype for ide_set_reset, which is used with IDE_RESET. The
-only files which should include this header are the ones that either use
-that macro or that function. Remove <blk.h> from <ide.h> and remove
-<ide.h> from places which do not need it.
+This file does not need <linux/sizes.h> nor <linux/compiler.h> so remove
+them. This exposes however that a number of other files had been relying
+on this implicit include for <linux/sizes.h> so add that where needed.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- board/freescale/m5253demo/m5253demo.c | 1 +
- board/imgtec/malta/malta.c            | 1 -
- cmd/ide.c                             | 1 -
- common/board_r.c                      | 1 -
- disk/part.c                           | 1 -
- disk/part_amiga.c                     | 1 -
- disk/part_dos.c                       | 1 -
- disk/part_efi.c                       | 1 -
- disk/part_mac.c                       | 1 -
- include/ide.h                         | 2 --
- include/part.h                        | 1 -
- lib/efi_loader/efi_device_path.c      | 1 +
- 12 files changed, 2 insertions(+), 11 deletions(-)
+ arch/powerpc/cpu/mpc85xx/fdt.c          | 1 +
+ board/emulation/common/qemu_dfu.c       | 1 +
+ board/toradex/verdin-am62/verdin-am62.c | 1 +
+ drivers/mmc/mmc.c                       | 1 +
+ drivers/mmc/snps_sdhci.c                | 1 +
+ include/mmc.h                           | 2 --
+ 6 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/board/freescale/m5253demo/m5253demo.c b/board/freescale/m5253demo/m5253demo.c
-index 446a79e67232..50c5320b55cb 100644
---- a/board/freescale/m5253demo/m5253demo.c
-+++ b/board/freescale/m5253demo/m5253demo.c
-@@ -93,6 +93,7 @@ int testdram(void)
- 
- #ifdef CONFIG_IDE
- #include <ata.h>
-+#include <ide.h>
- void ide_set_reset(int idereset)
- {
- 	atac_t *ata = (atac_t *) CONFIG_SYS_ATA_BASE_ADDR;
-diff --git a/board/imgtec/malta/malta.c b/board/imgtec/malta/malta.c
-index 4a72ab5cecad..0ffa964178f0 100644
---- a/board/imgtec/malta/malta.c
-+++ b/board/imgtec/malta/malta.c
-@@ -6,7 +6,6 @@
- 
- #include <config.h>
+diff --git a/arch/powerpc/cpu/mpc85xx/fdt.c b/arch/powerpc/cpu/mpc85xx/fdt.c
+index b2c0c517e7a0..143b7c624d27 100644
+--- a/arch/powerpc/cpu/mpc85xx/fdt.c
++++ b/arch/powerpc/cpu/mpc85xx/fdt.c
+@@ -13,6 +13,7 @@
+ #include <time.h>
+ #include <asm/global_data.h>
+ #include <linux/libfdt.h>
++#include <linux/sizes.h>
  #include <fdt_support.h>
--#include <ide.h>
- #include <init.h>
- #include <net.h>
- #include <netdev.h>
-diff --git a/cmd/ide.c b/cmd/ide.c
-index 036489fda979..ed30f9468660 100644
---- a/cmd/ide.c
-+++ b/cmd/ide.c
-@@ -19,7 +19,6 @@
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
- 
--#include <ide.h>
- #include <ata.h>
- 
- #ifdef CONFIG_LED_STATUS
-diff --git a/common/board_r.c b/common/board_r.c
-index b90a4d9ff695..a1183f0811dd 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -36,7 +36,6 @@
+ #include <asm/processor.h>
+ #include <linux/ctype.h>
+diff --git a/board/emulation/common/qemu_dfu.c b/board/emulation/common/qemu_dfu.c
+index 393fcaeb7422..8a59f5ade13a 100644
+--- a/board/emulation/common/qemu_dfu.c
++++ b/board/emulation/common/qemu_dfu.c
+@@ -7,6 +7,7 @@
  #include <env.h>
- #include <env_internal.h>
- #include <fdtdec.h>
--#include <ide.h>
- #include <init.h>
- #include <initcall.h>
- #include <kgdb.h>
-diff --git a/disk/part.c b/disk/part.c
-index 303178161c08..9cbd03686f5d 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -8,7 +8,6 @@
- #include <command.h>
- #include <env.h>
- #include <errno.h>
--#include <ide.h>
- #include <log.h>
- #include <malloc.h>
- #include <part.h>
-diff --git a/disk/part_amiga.c b/disk/part_amiga.c
-index 5b8ae5762d3a..22bf99f1b88c 100644
---- a/disk/part_amiga.c
-+++ b/disk/part_amiga.c
-@@ -6,7 +6,6 @@
-  */
- #include <command.h>
- #include <env.h>
--#include <ide.h>
- #include "part_amiga.h"
- #include <part.h>
- #include <vsprintf.h>
-diff --git a/disk/part_dos.c b/disk/part_dos.c
-index 96f748702fd5..5c77225cef93 100644
---- a/disk/part_dos.c
-+++ b/disk/part_dos.c
-@@ -15,7 +15,6 @@
- 
- #include <blk.h>
- #include <command.h>
--#include <ide.h>
  #include <memalign.h>
- #include <vsprintf.h>
- #include <asm/unaligned.h>
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index 932d058c184c..68ba1d11e7b6 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -21,7 +21,6 @@
- #include <asm/unaligned.h>
- #include <command.h>
- #include <fdtdec.h>
--#include <ide.h>
+ #include <mtd.h>
++#include <linux/sizes.h>
+ 
+ #define DFU_ALT_BUF_LEN		SZ_1K
+ 
+diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
+index 7b2eecbf659a..eca2cc8bc7f8 100644
+--- a/board/toradex/verdin-am62/verdin-am62.c
++++ b/board/toradex/verdin-am62/verdin-am62.c
+@@ -15,6 +15,7 @@
+ #include <init.h>
+ #include <k3-ddrss.h>
+ #include <spl.h>
++#include <linux/sizes.h>
+ #include <asm/arch/k3-ddr.h>
+ 
+ #include "../common/tdx-cfg-block.h"
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index cdcf2e0c8fe0..9421a846e458 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -20,6 +20,7 @@
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/printk.h>
++#include <linux/sizes.h>
+ #include <power/regulator.h>
  #include <malloc.h>
  #include <memalign.h>
- #include <part_efi.h>
-diff --git a/disk/part_mac.c b/disk/part_mac.c
-index 21c85942fd84..dd3ce0be832b 100644
---- a/disk/part_mac.c
-+++ b/disk/part_mac.c
-@@ -15,7 +15,6 @@
- #include <command.h>
- #include <log.h>
- #include <memalign.h>
--#include <ide.h>
- #include "part_mac.h"
- #include <part.h>
- 
-diff --git a/include/ide.h b/include/ide.h
-index 2c25e74ede08..550b33056213 100644
---- a/include/ide.h
-+++ b/include/ide.h
-@@ -7,8 +7,6 @@
- #ifndef	_IDE_H
- #define _IDE_H
- 
--#include <blk.h>
--
- #define IDE_BUS(dev)	(dev / (CONFIG_SYS_IDE_MAXDEVICE / CONFIG_SYS_IDE_MAXBUS))
- 
- /**
-diff --git a/include/part.h b/include/part.h
-index fcb3c13dea4d..3fa2d8424b70 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -7,7 +7,6 @@
- #define _PART_H
- 
- #include <blk.h>
--#include <ide.h>
- #include <u-boot/uuid.h>
- #include <linker_lists.h>
- #include <linux/errno.h>
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index c9bf2726fe24..66a951a8c1bb 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -10,6 +10,7 @@
- #include <blk.h>
+diff --git a/drivers/mmc/snps_sdhci.c b/drivers/mmc/snps_sdhci.c
+index f5ede38c3c17..fe834ec29692 100644
+--- a/drivers/mmc/snps_sdhci.c
++++ b/drivers/mmc/snps_sdhci.c
+@@ -6,6 +6,7 @@
+ #include <clk.h>
  #include <dm.h>
- #include <dm/root.h>
-+#include <ide.h>
- #include <log.h>
- #include <net.h>
- #include <usb.h>
+ #include <linux/bitfield.h>
++#include <linux/sizes.h>
+ #include <sdhci.h>
+ 
+ /* DWCMSHC specific Mode Select value */
+diff --git a/include/mmc.h b/include/mmc.h
+index eead666ae442..87f7ef131b63 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -11,8 +11,6 @@
+ 
+ #include <linux/bitops.h>
+ #include <linux/list.h>
+-#include <linux/sizes.h>
+-#include <linux/compiler.h>
+ #include <linux/dma-direction.h>
+ #include <cyclic.h>
+ #include <part.h>
 -- 
 2.43.0
 
