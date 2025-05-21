@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5E06C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 07:53:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C57C54E65
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 08:21:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0F6782D2B;
-	Wed, 21 May 2025 09:53:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C48082D2B;
+	Wed, 21 May 2025 10:21:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NoWPYG4E";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="uoPV2qba";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5677082D33; Wed, 21 May 2025 09:53:08 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 0EC2682D33; Wed, 21 May 2025 10:21:14 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4136882BD6
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 09:53:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CE6582BD6
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 10:21:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-442f4a3a4d6so41910945e9.0
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 00:53:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=sbellary@baylibre.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-b13e0471a2dso4261300a12.2
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 01:21:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747813986; x=1748418786; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=40igUJGxXuBoOLAFP8HtoeHwgvg2yZAlXkImFUz8clc=;
- b=NoWPYG4E/kFufjZ2LBa6vg8IjSvm7YnxF95QahAXDXy0G1X/4tg979uNerD4LRkLb/
- SbGbxP+jy9/te5gr3uRiyYwj2YHuCC5jEwF2vpfc0qzvnmeg/+IPbDLVl0G/f1zZq96C
- 6YsWnK/G5DuH7Od0bYiAssZ/Bh/xkQfH1DGR7obITLr5iMwdygtSAu3V5M1WlPq+A/fl
- BZa55Hu9wrBwQYHaFWzCTGys339vUyy006qlj5oYo3nXYpZupUJgiaAppGk6ftUrI+73
- SmO5aZPmjFfIHjZqvoQaDiRLA/mTNKPkgQf/JG8jM9mKwdveMKXDDuTe1f0JVpKcNQ+8
- uBjw==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1747815670; x=1748420470;
+ darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UW/9eOmcxww1SCoN2sRjbngcwHurM2a/dMr/YjT3Pnw=;
+ b=uoPV2qbaKgqrch3UmWuLLC7HbMERTGLVesIlxjWvJ5fLiXfDI6eAekYTu7ur4R9JO8
+ hX3i7/5T/3ZFoFSN5AFClIDC8ZzCE4Gpg9SkzMm1C4PgWww1hFeNKO9kRV3F3fOpJk78
+ hEYEBkibiRJk5P5DipeD9Alym0FaY2TyhwR/JPrKhC0s7YFSzhy/+aSMBJ7BME9EuQjV
+ K3pO3fwaX9asCMfDiRPQWRiT62Z3uiiGZOlMrHLMDUwHLFmkrAeO/glh/94B+x9Gxk50
+ ZLXsKIj/h71rHoDHubXQdBIkKTs4dh375ZiNFGYzOZ6zQvlWGFEQf7Q2oUoRXqiZI66d
+ UaVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747813986; x=1748418786;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=40igUJGxXuBoOLAFP8HtoeHwgvg2yZAlXkImFUz8clc=;
- b=Q9LkcEzOnihw6rkiIoZeqI6t8HdYaYlrNCVRClt8wnmJwZwzYCeB7aLuRpnOAsKQfp
- 3BIkPWFuhXsdasv/5TRz3dhqOtz99GH8z5r4sPH1NaPaztl/v4JbrAl530IgYM14Sl/g
- 9BW7DgycGx8OT9bFQAfWy17ilx3mF+Gt+N1BqeuTuy4QupyRf+AfpnZqdlrHDSwdc/vX
- pr3dzCVgsFNtxEKXrwRtcbcnSKWCsSphvz6r5ZadAgZVep5IrX5+yAcoiPTWIm9pdqP/
- mxR3h4CDvHqD8trsmRKT0xzRYulRUEgbelxrJWb2eTRxyE38GhXjPVtLqncezviy7smv
- DC2g==
+ d=1e100.net; s=20230601; t=1747815670; x=1748420470;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UW/9eOmcxww1SCoN2sRjbngcwHurM2a/dMr/YjT3Pnw=;
+ b=tOJ4mRZ/tQAAxJfD7ZLhwHCmqeVeEgOhZdw3czD3qodSicm0DD3ihNIL+hsoq3+2FE
+ lBihev1IZnPw/wIRHIvxWuB49DzjPLSjLc0w0thopiSxTGVwkHyVAEexQKDkQuvHxROH
+ 1BfDeEQ+kNxBl4nL96YS6Q9ZyvWcGbC3tx5y/FGra1ugZvxgC14yO4Ofnil7Zzi1hRmA
+ +5ifOB6GKTxoxTUQE6X5g6hIrcM168voo2NU6Lut/GOOGtuCkKN0+Iz5pEwgxDhBQuR2
+ BjfPJB2CkHM9Mt9lIBIxSpOIIbwUmVPnb05quCZkTueRsGj+fJY4qfGwRvoOX2WC9PgZ
+ rAag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5JHL5PeE1LiT2nfRmvw8HC1PK4PhXvumV+lFh3qlTV8LwOFd3eGmLwJVxJyF3javalV2iqaA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4FCWXOTB4Fr65Q4yaF4JBwCX1M/f8ahYDXVaV59V8wmu0SSgg
- wfV9H6DRrA5j1rc1kfa/krLbc1rgQQgfhgbXjpB27hSY0hRrvyde1MdOL9UeaxnNHYU=
-X-Gm-Gg: ASbGncvvDo+g+rTjMnzaY2wWQc9IxUKxRFHY5PccdJXUcw7waZPoMly15itBeFVqFqF
- hQa6kQKKJWUXuHo9sJ/trgpYOOwel0kicPPgFM1AuYaqjEbmkDJLrSxiYVCc06M8J7Mn+hnt3gF
- +HxhduHy5ljKzp384R9xtCPz2ogjGD79xtiURH2XwgNxATKrVbvi7VJ0o0nEUYFzyPCsMbkt+KE
- aV8JU39ySloI7laCxG/JET9aMvGYsB8EpGIPIepoj0cLVv4vrSO41F9JU5jlauotj4I9VfSHx7I
- zgDTJFtsUk8d4T/L+eK1kxBxjHMUNtWHkjcYGMuF7SAOgPqW6Yk8s30FzHo=
-X-Google-Smtp-Source: AGHT+IF8vxedh9boh7twtAuuP7cAutqbnEK3gub/bHcC+U67HvF8+E5zFp/3QhSxsVQsHaEoLh52IA==
-X-Received: by 2002:a05:600c:3587:b0:43d:16a0:d98d with SMTP id
- 5b1f17b1804b1-442fd9970d1mr151078455e9.15.1747813985687; 
- Wed, 21 May 2025 00:53:05 -0700 (PDT)
-Received: from localhost ([46.198.180.244]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-447f18251c7sm59787875e9.3.2025.05.21.00.53.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 May 2025 00:53:05 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 21 May 2025 10:53:03 +0300
-Message-Id: <DA1OCJCRJ6KI.1X5DUMJDQ6913@linaro.org>
-Cc: "Tom Rini" <trini@konsulko.com>, "Casey Connolly"
- <casey.connolly@linaro.org>, "Neil Armstrong" <neil.armstrong@linaro.org>,
- "Mark Kettenis" <kettenis@openbsd.org>, "Weijie Gao"
- <weijie.gao@mediatek.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
- "Simon Glass" <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/5] lmb: replace lmb_reserve() and lmb_alloc_addr()
- API's
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "Sughosh Ganu" <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.20.0
-References: <20250520120606.173228-1-sughosh.ganu@linaro.org>
- <20250520120606.173228-2-sughosh.ganu@linaro.org>
-In-Reply-To: <20250520120606.173228-2-sughosh.ganu@linaro.org>
+ AJvYcCXudNx+b0HSGM/kTjyJaJChBRIKYI07g8sbtij8jJg0mEnBVLbn9YvW6OdgiPCpgjxGu4EN1mM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx6kwLkORJWzdcJmRqRSeTMfp9QGbXgE8PxI/c/uo+iW2ch/qJr
+ olAgOZDPjojtJk+uGe7CJndvTq4abpPZdyfqPrblAbZ6kSpa/Bi+ljpeeEUENtOoBXGny1y4zag
+ WQxJA
+X-Gm-Gg: ASbGncv6Da22elmP9lOt2WxvVJxtXzSEOUxav2jx2PjhcEYwYvjKmLpD9rJuPhdjACF
+ HZsn1S3jnHiUqSOiNliUhW3hjax9Pgo2CLnBI4Jrar6n1n4pcORi1xPXxNqk5/G+KPHFP2s4N+G
+ zKaXjFD2wsew7uGrhZu8/45tlZ0l1Ozk2X4mtvSDLmtVCW2RaGUMOif6G2fzLyE1TRBrv8ozxIS
+ FXCf1xE7EZVw+v9FlSSyZCjCd01X0FlfQTkl8o4qVm7zGtew6YNEZiYLPXG/g1P0scwhH7jEalj
+ RhdYpLCfYutmrwOCnIBx39XEBNCZ+RlzJMVFbhArQdiNjzQxmeWhGdgqtB8G3XfwjkDNZNh3zX1
+ uk5mWcqwg+h4=
+X-Google-Smtp-Source: AGHT+IHVEKGaYRMNk9Zo0F+brPvMgI5+VvMa5gh41lTi2qufrTZKCM4SKohvZqbcaNUnorTLsBTs7w==
+X-Received: by 2002:a17:902:dac5:b0:22f:a4aa:b82b with SMTP id
+ d9443c01a7336-231de36b4ebmr273864465ad.21.1747815669717; 
+ Wed, 21 May 2025 01:21:09 -0700 (PDT)
+Received: from dev-linux (syn-076-088-115-008.res.spectrum.com. [76.88.115.8])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2325251da10sm42924095ad.42.2025.05.21.01.21.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 May 2025 01:21:08 -0700 (PDT)
+Date: Wed, 21 May 2025 01:20:57 -0700
+From: Sukrut Bellary <sbellary@baylibre.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
+ Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/3] Add support for eCAP PWM and LCD pin mux
+Message-ID: <aC2M6d2K+/NkP+Py@dev-linux>
+References: <20250423084249.197101-1-sbellary@baylibre.com>
+ <20250502213218.GA1379719@bill-the-cat>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250502213218.GA1379719@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,77 +102,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh
-
-On Tue May 20, 2025 at 3:06 PM EEST, Sughosh Ganu wrote:
-> There currently are multiple allocation API's in the LMB module. There
-> are a couple of API's for allocating memory(lmb_alloc() and
-> lmb_alloc_base()), and then there are two for requesting a reservation
-> for a particular memory region (lmb_reserve() and
-> lmb_alloc_addr()). Introduce a single API lmb_allocate_mem() which
-> will cater to all types of allocation requests and replace
-> lmb_reserve() and lmb_alloc_addr() with the new API.
+On Fri, May 02, 2025 at 03:32:18PM -0600, Tom Rini wrote:
+> On Wed, Apr 23, 2025 at 01:42:46AM -0700, Sukrut Bellary wrote:
+> 
+> > This patch series adds the support for
+> > 
+> > 1. In am33xx SoC[1], enhanced capture (eCAP) supports auxiliary PWM (APWM).
+> > This series adds the PWM driver support for the APWM feature for eCAP on
+> > AM33xx. AM335X_ECAP0_IN_PWM0_OUT is used to enable the backlight.
+> > 
+> > 2. Fix build warning in ti-ehrpwm driver in dev_deb().
+> > 
+> > 3. Enable eCAP0 PWM and LCD pin muxing to support splash screen on
+> > AM335x EVM[2].
+> > 
+> > [1] AM335x TRM - https://www.ti.com/lit/ug/spruh73q/spruh73q.pdf
+> > [2] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
+> > 
+> > per discussion on the earlier patch series,
+> > https://lore.kernel.org/all/20250319202516.3300444-1-sbellary@baylibre.com/
+> > dropping the device tree changes in this series due to OF_UPSTREAM
+> > conflict.
+> > As we are dropping the DT patch, started with the new series instead of
+> > V2.
+> > 
+> > This series doesn't contain defconfig changes since we don't want to
+> > enable LCD, splash screen and PWM support by default.
+> > Enabling splash screen and PWM support in defconfig causes u-boot crash
+> > on AM335x based beaglebone black. This will be handled in a separate
+> > patch.
+> > 
+> > Sukrut Bellary (3):
+> >   pwm: ti: am33xx: Enable Auxiliary PWM using eCAP
+> >   pwm: ti: am33xx: Fix build warnings in dev_dbg()
+> >   board: ti: am335x: Enable eCAP0 PWM and LCD pin muxing
+> > 
+> >  board/ti/am335x/mux.c       |  47 +++++++++
+> >  drivers/pwm/Kconfig         |   6 ++
+> >  drivers/pwm/Makefile        |   1 +
+> >  drivers/pwm/pwm-ti-ehrpwm.c |   2 +-
+> >  drivers/pwm/pwm-tiecap.c    | 198 ++++++++++++++++++++++++++++++++++++
+> >  5 files changed, 253 insertions(+), 1 deletion(-)
+> >  create mode 100644 drivers/pwm/pwm-tiecap.c
+> 
+> This currently introduces a failure to build on am335x_evm and other
+> variants of the TI EVM:
+>        arm:  +   am335x_evm
+> +(am335x_evm) board/ti/am335x/mux.c: In function 'enable_board_pin_mux':
+> +(am335x_evm) board/ti/am335x/mux.c:435:50: error: 'lcd_pin_mux' undeclared (first use in this function); did you mean 'nand_pin_mux'?
+> +(am335x_evm)   435 |                         configure_module_pin_mux(lcd_pin_mux);
+> +(am335x_evm)       |                                                  ^~~~~~~~~~~
+> +(am335x_evm)       |                                                  nand_pin_mux
+> +(am335x_evm) board/ti/am335x/mux.c:435:50: note: each undeclared identifier is reported only once for each function it appears in
+> +(am335x_evm) board/ti/am335x/mux.c:438:50: error: 'ecap_pin_mux' undeclared (first use in this function); did you mean 'nand_pin_mux'?
+> +(am335x_evm)   438 |                         configure_module_pin_mux(ecap_pin_mux);
+> +(am335x_evm)       |                                                  ^~~~~~~~~~~~
+> +(am335x_evm) make[3]: *** [scripts/Makefile.build:256: spl/board/ti/am335x/mux.o] Error 1
+> +(am335x_evm) make[2]: *** [scripts/Makefile.xpl:548: spl/board/ti/am335x] Error 2
+> +(am335x_evm) make[1]: *** [Makefile:2119: spl/u-boot-spl] Error 2
+> +(am335x_evm) make: *** [Makefile:177: sub-make] Error 2
 >
-> Moreover, the lmb_reserve() API is pretty similar to the
-> lmb_alloc_addr() API, with the one difference being that the
-> lmb_reserve() API allows for reserving any address passed to it --
-> the address need not be part of the LMB memory map. The
-> lmb_alloc_addr() does check that the address being requested is
-> actually part of the LMB memory map.
->
-> There is no need to support reserving memory regions which are outside
-> the LMB memory map. Remove the lmb_reserve() API functionality and use
-> the functionality provided by lmb_alloc_addr() instead. The
-> lmb_alloc_addr() will check if the requested address is part of the
-> LMB memory map and return an error if not.
->
->  	 * there's no need to check the result
->  	 */
->  	arm_smccc_smc(MTK_SIP_GET_BL31_REGION, 0, 0, 0, 0, 0, 0, 0, &res);
-> -	lmb_reserve(res.a1, res.a2, LMB_NOMAP);
-> +	addr =3D (phys_addr_t)res.a1;
-> +	lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, res.a2, LMB_NOMAP);
 
-In some case you check the return value and in others you ignore it.
-Since you are changing this, check the return address everywhere
+Sorry about this.
+While fixing the checkpatch warning, I overlooked the CONFIG_AM335X_LCD
+not set case.
+I will send v2 to fix this.
 
-> + * be -EINVAL if the requested memory region is not part of the LMB memo=
-ry
-> + * map, and -EEXIST if the requested region is already allocated.
-> + */
-> +int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *add=
-r,
+> -- 
+> Tom
 
-Nit, but can you rename it to lmb_alloc_mem() so it uses abbreviations ever=
-ywhere?
 
-> +/**
-> + * lmb_can_reserve_region() - check if the region can be reserved
-> + * @base: base address of region to be reserved
-> + * @size: size of region to be reserved
-> + * @flags: flag of the region to be reserved
-> + *
-> + * Go through all the reserved regions and ensure that the requested
-> + * region does not overlap with any existing regions. An overlap is
-> + * allowed only when the flag of the request region and the existing
-> + * region is LMB_NONE.
-> + *
-> + * Return: true if region can be reserved, false otherwise
-> + */
-> +static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
-> +				   u32 flags)
-
-Overall this is a good cleanup. But I was hoping we can rid of this as well=
-.
-This is almost identical to lmb_overlaps_region() with very small differenc=
-es.
-One of these takes the lmb list as an argument and the other is also checki=
-ng some flags.
-It's better if we keep one.
-
-[...]
-
-Overall this is moving towards thr gith direction
-
-Cheers
-/Ilias
