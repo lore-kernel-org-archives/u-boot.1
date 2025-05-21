@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44764C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 12:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14509C2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 12:37:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7719282F67;
+	by phobos.denx.de (Postfix) with ESMTP id C7E1182F6F;
 	Wed, 21 May 2025 14:36:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MjgIHqXQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="ZFJ0MMCs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10E0C82D40; Wed, 21 May 2025 08:28:52 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 3120F82E81; Wed, 21 May 2025 12:27:28 +0200 (CEST)
+Received: from sonic315-49.consmr.mail.ne1.yahoo.com
+ (sonic315-49.consmr.mail.ne1.yahoo.com [66.163.190.175])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCD5F82BD6
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 08:28:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06DDA82E2D
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 12:27:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-742b614581dso5010917b3a.3
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 23:28:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747808928; x=1748413728; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rkJOlwCEYa+tQCPMVKUSgm9ALnwOtk5g9+SfAjqZlrw=;
- b=MjgIHqXQ//JrIrnD6qPmsNOfLWMwB6BZQNEFvmlJri55f+J0JwlV1umS25ick+77KK
- 7HMZOC2RiazOfbAx9xYV+bB3BzQgj8Ic4QQuAUHlyATCr9m9qYxiD7cTKOx0Wpz5UQvt
- hGWlgzqrhopg52z7zyCYrkm0kbW/BQj211pAXn+HIuVoDBamZmUBG+H8kSPMyLnoDmUw
- nGh2GtfGEbSwuHxJ3cYuZPpdjwCTHUVcK+GfEC67q0vcH20m75TG9z8xzf9oDDf52cYt
- pvU6UpzNXfAvQGozpBRpq20ObhIlcZKXTfu1oymLIBOTOxDzXkwdauZDNFBMe/NwZomK
- IiCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747808928; x=1748413728;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rkJOlwCEYa+tQCPMVKUSgm9ALnwOtk5g9+SfAjqZlrw=;
- b=UkILWcPW7bPB26oH6y7dEfyMYYmoEvLAnLtkOmI4lvYZ9GUw0E5tJ0f29rNX+7NHLQ
- tnCjKjgW41nxU79Ku4+3/DnI+vwue+MJBIuq34s4xMmz3gr2YUHkKdzCTwKL4OPiY+oT
- 4za9nglaBg+pEkOanGmvjzEli/UdXUpuMoYx0+yxl9lo3r24wdo2NGNyj2OC4t23NB5y
- h2Gvi1F0zNypbcY5wKeS/r4WvJKXJERr2hZgBmJK+gCjvcs0kZIrO12omJq6orzyU0gP
- 9dWkQwzW9LuOigozkEU0crZL76ultcqPiyShFvGnpJnMJIBdcP0LH4wQb2qiNGTlzqbj
- l8Hw==
-X-Gm-Message-State: AOJu0YwSUzEXOrUtqySV3mAY7c7aF8yXnZm3D3uVWmOISGGS2HTykqC8
- 8IbKqZoQPanF6AabRaAtiAi3+8jlPdPptF0uRcPblrk7iWGQyOddvz8iF9mw7M5z
-X-Gm-Gg: ASbGnct+ClPTnpNCsq2q8KaJoG1r53rZFLxQ5FbLJTQpiIxxy8Qon9S3Ja9TkYdmeEx
- sxRf1/TqaD5R0dykUbWLUWr8tt3iYwFvmPfTQEwaVZkMlCzXfX2u9fDTJEjTVm4BbIfdTnErX/5
- dciJzan52gfl6RE+0QGhoDU0F9/1+suR2gl8Gl24yA9Y/F1G+UJwDgi9ZvwBMvtJlJmAayvzKhG
- RFRQrdUL1fr9H5nlZ459/kcPE6AXAPnrCGKYjVUo+oN+shLk8q1Q3fiYgjzaZsyZeo8QEMKAYEG
- dMusHIv+f7KoCWde71x5GnLw7HtOVIkbJGhTqvU4D9gjn2np/duQuBrR1nIwNDqT6Rded9pGHHL
- F9/+/9+6pFW+WUy4lmpD4i1cXPc4zT4mG6zwgYT4=
-X-Google-Smtp-Source: AGHT+IE56QcXLq4Jb2xP9NZsrsaGIgZETJ80sQLACGaeq72YyTYHwlTjt6CaPkkIHYdW/9iaFDz4ow==
-X-Received: by 2002:a05:6a00:c86:b0:740:9e87:9625 with SMTP id
- d2e1a72fcca58-742acc8ff71mr27399518b3a.4.1747808927997; 
- Tue, 20 May 2025 23:28:47 -0700 (PDT)
-Received: from noble-leuven.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-742a982b884sm9277911b3a.95.2025.05.20.23.28.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 23:28:47 -0700 (PDT)
-From: Aristo Chen <jj251510319013@gmail.com>
-X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, carlos.lopezr4096@gmail.com,
- aristo.chen@canonical.com, quentin.schulz@cherry.de, ada@thorsis.com
-Subject: [PATCH v3 4/4] test: py: add mkimage test for undefined image
- references in FIT configs
-Date: Wed, 21 May 2025 06:27:45 +0000
-Message-ID: <20250521062745.3458-5-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250521062745.3458-1-aristo.chen@canonical.com>
-References: <20250521062745.3458-1-aristo.chen@canonical.com>
+ spf=pass smtp.mailfrom=skorpyon1992@yahoo.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1747823243; bh=rxxEimmvs74fl/SejBArbCWSataac5FdIO/YkgzSY54=;
+ h=Date:From:To:Subject:References:From:Subject:Reply-To;
+ b=ZFJ0MMCsh4fitfiYlaak/eOkfSeW5kUshQ9sqn9mZycAwZ7bNf4vyRDfc/xqcAc1NKcHb6whsA0hxXMNrvmZ9VuBUoqtNudlNcOsiAb0nwbsDwsAWEIjFA/RdmXzX493x6WXm+t4qJYLZ91Cp/lD7S3AO4Y4/W94Pw2HzhGwHMMFOHcHx5WMvhSL8JP2MxWqGsAUWUeTQBlO7ALZ4WQHK/EUjk5CE3ULCzgC/1Amn8UcTlmF4gw5XUkRGTpL+YEaTzuUUYH+AAJeo0rAe1PHWwVt13HY5LUZW2OfzAdGG5D9waxVLp+wyI/ranovywhn9gfnzVjclpm+fTCvxMh5tg==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1747823243; bh=5U6pJbDX9mnTPWvV3ok+MgYU7ZD3yHsNsf7jW2lmM3p=;
+ h=X-Sonic-MF:Date:From:To:Subject:From:Subject;
+ b=HAXCV/Dutt7fJmqxAPb/GGdanSIZgiIf5PJZ1QB51XlpXbLfTC7xDOKW2sHO+C0y0xm4gP/ZO4WNrlWyw1uPoxJis4tSBmaFEc47O1gjqGY6mD9gbqjsPW5QdvCXFaeJQQndkYA2AQhjDYDVftPUMBwK9/OYuIl/Q84Lr9r+SlbgIWx1FOP6WzBJg1XxAjt9awBsfUskIczFplLmBlbzFwNqsciykkyh6xCJBxuBNf9Z65HDfQSOPTmglMsAIcSk9zxsn2irlSZUBnSQ9XZfjEhicsXUswfSReBgRy8kDeu0YCtKPfhYZmWhWOxBwpHyDh0QhgqLFOw1bRgEDUQSGA==
+X-YMail-OSG: NnxZi_IVM1klMu9UocTDgmZ4xo5ISok6RenXEpv41x37sR.epWHEPlJ1IdgBJFo
+ n5NpHSzP2Gn2O5CZ10ZeLF2YeBw8HaXOQSFjuLCZlLBVdnbyAb81Fh.PA83tSHszuMR6Zd0ucuPl
+ hDFr5ixocNOrI5xEWpoWQELaLJm1UJtl4VKzoYJsfIF7_VXeHI9WS47QrgWSXp0GoP4wHgqQ5.4g
+ GzDZ7_T46C5kHDLiWxnvc7R4qzcfFdNu_U.KydjPVws.T_aH4VlNb3bgrWtisvmC0ijJyyY7GvTz
+ WxT7T5q2Nnnr6JEABj3bE55SCHjNdK8KRWda.3WAjsmmvWhO9wtaa7m.H9ahYpSZgn_.y6EvgF_b
+ WwGwin66gfYxAup6KOR7HUtibNXum_4a0Bkc_b0_QBr8Ro_9xSQgP4HOVthumETJD.TUfHTHXaa1
+ tIskEXpJ2Ihb30e4oCgIplXQ8NFg9VjYKAHklpiA32BJvcC_xB3R5v9UePh3MY_yVJZv42mJ2hW4
+ ah9XTOOv.6k4qIF2bLORbwGUFydgdNMTOZ7d7UoO0LkIW0o0FtJnayFYSHp1KpoUI9msUClmRA1m
+ rgZ5lOwPXTO3o99SmnJELzYXF8XBNAMcNAcSSqvMLBbLnPrRYH3VwQ3sNXv9IwaOk1NuDTGrPkU7
+ wY33ypRiXMJKpnGriExCQoIOmjbik0au7AHviT3KOGk9g9p9V0b2elf7fIgT5i.ZJRlGwrvDC7jE
+ 3QUUuYXNNGekoGsIxNXhIAxgsl5FELXrWoaFc9kRCQooMIfWPMxl0MKQU_HWK2xAgFTHiTyEOMSF
+ DvJg8WaqKEqL8eZrZWcqxFt4xjKbGZ1Jc39_SyB24JsCRjWE9eZr_ORDIU4Va8.zoypyDTZwo2VN
+ kTBcQHHgs08r37aKGjQTT_OpFibMLnShyCSrXeTh_r2kf9OfP_DbB2D7mO0jW4svd5JwIJbqGA22
+ cdNo7TYuLVGJlzVE3P7vsRvu8T1vyO.atgfMCJseU26FjvW.NiosQEoL.gnRdKkYTToOLwcy8YuV
+ EGJyQOdZt0Go0JjhNcrnaoOH8JyiQMfruIbZo5Pe.w_49MbtEj3Nmmjnrh_GIAgP28qBWNJym3mc
+ BnNOVUgLktCy0y8bbJmaSNkvWlKVTYDZecR4ze9Lf0QRDqeicQEia2G3VrKzu.k.NFkY88Wyqd03
+ EsST6K60L6cjeJKTYPZ0fzOWyNcMuooAryA4sJpg76sLGyqk4x7Fvd8hS3PwbICrm9jOi7UiZfxF
+ XUtOX_s03.BLaZJk6xGXixEUB8JY3qXZ_NvFIXKeJlTfse1oGaJwd8WzW6kDQ8TMvYyflS5TMQ4r
+ hpLcBFB0fmV51LFAAHJS6aBGP30XHu4weO1e2VwgOY5mhXVeKIkW6IMnVjlI.6Bm.TuBWiswVqnr
+ qFKdloKvV3eVBuhuCAD5nYPvuDE7ieJe6efZLLhHy1QawJ1f_wkzm4vHkdUJLGLTbHjIh6TYfZU6
+ 97eGGIvYfYNnIEN6SCXBo5gRnuWTbxN8Ku.Za7x9WsOUPQCKKN8nQtRBgzLMx0uAUiolgX0fgm_L
+ sZa.F6BEJ9QDqrOaY7IZkXDpr00tWITkpYYOiW4rxmYY8gSHTZem_4tmvzF_w0G7856.QtbkAmzK
+ 6fdikJ7F9RcBMJKV8JlDd4cbE6F.h3Sb1GOx3FwWh7KCqTceStj.8yzbSXEhR11tB4uxM7.ofpx9
+ PFnNnAjwvnR3dSreRkGs5aZ9pjCJTx_mwRU8oQ4RvCmJsj41UuWjU.cgmprMYIvHTQYFrMbK_IbA
+ 8L6gcB7tPjRppjkxXhSkDZbkQqU1wd_AHe_ZtyIIt4nXZuoaZDSDn0Yzp3Mva1VX.tY69J9Pr0Bj
+ j88WhBFh80SRB6WGcMga6X9COXvnKpYlShtsES68osWG9MD8TllP4VtBuGo4JK_9caqLU3xba5eY
+ 57KERHgeAa9ohkqoRLPbwj9CKuuPsJ9kSHIIythJAlN9.EhN1zxPK6obQnwevbOp5usQo0WcHloe
+ EAXkUzz1iqlSwNxAXhXdvGLnNxbH5j7CnAlayD3bJ8ArZwkAs2QAAyP.Nnuty3nDO6SEhWyYqWNC
+ 0vxQQkDYindSZwt9gpClOmXfOs_eutVhvhxxGWelwebvpXG0T4hkylrC5M87AewTEm70eyU.RXuW
+ o41x9UYxvUoRSD3ZHXj43k32C3PndQSPuSmqWDCLVv0XJVzvwjKVpkzzFuXL_D5Bq7AP9Ssmk9js
+ BSScDNdmIk2cxBknnnoYFgZqJmP1PLMo8NbsEZDctIc8gFRmuPzE-
+X-Sonic-MF: <skorpyon1992@yahoo.com>
+X-Sonic-ID: 1df36357-9ddf-4aba-989d-3fd50f46f78b
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic315.consmr.mail.ne1.yahoo.com with HTTP; Wed, 21 May 2025 10:27:23 +0000
+Date: Wed, 21 May 2025 10:25:22 +0000 (UTC)
+From: Valentina Skorpion <skorpyon1992@yahoo.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Message-ID: <1495046231.2955539.1747823122875@mail.yahoo.com>
+Subject: Save sspi output bytes in variable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1495046231.2955539.1747823122875.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.23840 YMailNorrin
 X-Mailman-Approved-At: Wed, 21 May 2025 14:36:46 +0200
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,87 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test case to verify that mkimage correctly rejects a FIT source
-that references a non-existent image from a configuration node.
-
-This test introduces a minimal ITS that defines a valid kernel image
-but references a missing "fdt" image under the /configurations section.
-The test asserts that mkimage fails with a clear error message, as
-introduced in the new validation logic.
-
-This helps ensure the validation logic behaves correctly and prevents
-regressions in future FIT enhancements.
-
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- test/py/tests/test_fit_mkimage_validate.py | 58 ++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
- create mode 100644 test/py/tests/test_fit_mkimage_validate.py
-
-diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests/test_fit_mkimage_validate.py
-new file mode 100644
-index 00000000000..af56f08ca10
---- /dev/null
-+++ b/test/py/tests/test_fit_mkimage_validate.py
-@@ -0,0 +1,58 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (c) 2025
-+#
-+# Test that mkimage validates image references in configurations
-+
-+import os
-+import subprocess
-+import pytest
-+import fit_util
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+def test_fit_invalid_image_reference(ubman):
-+    """Test that mkimage fails when configuration references a missing image"""
-+
-+    its_fname = fit_util.make_fname(ubman, "invalid.its")
-+    itb_fname = fit_util.make_fname(ubman, "invalid.itb")
-+    kernel = fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
-+
-+    # Write ITS with an invalid reference to a nonexistent image
-+    its_text = '''
-+/dts-v1/;
-+
-+/ {
-+    images {
-+        kernel@1 {
-+            description = "Test Kernel";
-+            data = /incbin/("kernel.bin");
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x40000>;
-+            entry = <0x40000>;
-+        };
-+    };
-+
-+    configurations {
-+        default = "conf@1";
-+        conf@1 {
-+            kernel = "kernel@1";
-+            fdt = "notexist";
-+        };
-+    };
-+};
-+'''
-+
-+    with open(its_fname, 'w') as f:
-+        f.write(its_text)
-+
-+    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
-+    cmd = [mkimage, '-f', its_fname, itb_fname]
-+
-+    result = subprocess.run(cmd, capture_output=True, text=True)
-+
-+    assert result.returncode != 0, "mkimage should fail due to missing image reference"
-+    assert "references undefined image 'notexist'" in result.stderr
-+
--- 
-2.43.0
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Hello all,
+=C2=A0I am using uboot 2024.07 on a Verdin imx8mp board and would like to s=
+ave the output of the result (the bytes) into a variable.We have developed =
+an spi peripheral that would retrieve us value that we would use further in=
+ the boot process (we would parse the spi output and set proper boot partit=
+ion and devnum in u-boot-initial-env).For example :=20
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Verdin iMX8MP # sspi 1:0.0 =
+16 00
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0AA03
+=C2=A0 How can I save in variable the result in hex (AA03 in such case), or=
+ if there is a way to do it in u-boot-initial-env ? I have seen so far only=
+ scripts and if statements that looks at the return code , but not the outp=
+ut on the console.=C2=A0 Many thanks!
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 Best regards,=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Valentina.
 
