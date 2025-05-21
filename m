@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19271C3ABC9
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 12:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44764C2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 12:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DF4782F5A;
+	by phobos.denx.de (Postfix) with ESMTP id 7719282F67;
 	Wed, 21 May 2025 14:36:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zlf8HkQ/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MjgIHqXQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F94482D33; Wed, 21 May 2025 08:28:49 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 10E0C82D40; Wed, 21 May 2025 08:28:52 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32C1682BD6
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 08:28:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCD5F82BD6
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 08:28:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-7370a2d1981so5027559b3a.2
- for <u-boot@lists.denx.de>; Tue, 20 May 2025 23:28:47 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-742b614581dso5010917b3a.3
+ for <u-boot@lists.denx.de>; Tue, 20 May 2025 23:28:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747808925; x=1748413725; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1747808928; x=1748413728; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UzqhTbGo9uV252TD9Sf80J8NArSZZUjFqxUvP48IFt0=;
- b=Zlf8HkQ/2vrMVaC46gE/PXL91d9IfDvWvDJBRK3grkTfcXnHwqjtbWamG2GyqEWm2w
- qRmMyHws4UIBasMF8ahUPNEzf1wd0EZI+AZPK16DTiY8Qu5qie4pT1b95OQ8DMvrpHa5
- E2tlRmIG/49RbY1ppoe8uOaX9D0QUDPAAUrDQsCcoxq2cRZON7ocbbPGzrl868Yu52Vo
- mU3CfA0Gs3AvbZ7WDrcr/peb6jh6Yxc3DDwmtWGs+Nhf2JnU7JmEyzjPwPQAZF3APy/X
- KabCjUgqKlqXzKhylWVp/QXbhiHIJ69qy3rSKn/vGSkJV4WndUUQH8eXhjFmS2mW4nFF
- vgbg==
+ bh=rkJOlwCEYa+tQCPMVKUSgm9ALnwOtk5g9+SfAjqZlrw=;
+ b=MjgIHqXQ//JrIrnD6qPmsNOfLWMwB6BZQNEFvmlJri55f+J0JwlV1umS25ick+77KK
+ 7HMZOC2RiazOfbAx9xYV+bB3BzQgj8Ic4QQuAUHlyATCr9m9qYxiD7cTKOx0Wpz5UQvt
+ hGWlgzqrhopg52z7zyCYrkm0kbW/BQj211pAXn+HIuVoDBamZmUBG+H8kSPMyLnoDmUw
+ nGh2GtfGEbSwuHxJ3cYuZPpdjwCTHUVcK+GfEC67q0vcH20m75TG9z8xzf9oDDf52cYt
+ pvU6UpzNXfAvQGozpBRpq20ObhIlcZKXTfu1oymLIBOTOxDzXkwdauZDNFBMe/NwZomK
+ IiCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747808925; x=1748413725;
+ d=1e100.net; s=20230601; t=1747808928; x=1748413728;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UzqhTbGo9uV252TD9Sf80J8NArSZZUjFqxUvP48IFt0=;
- b=f9aKvrWoUI7dicCZNvKc9MonLyG1TnFmFrDottvl5fiFxUMIlWnMl3r+SdcX6KX+E5
- ba+07Nn3vnWA0fYByBA042tBqHBiJEEAwb6CiuLpr7iv/mnWp22OQEGdBH7GXSYa31yr
- 4dqMZFNXDs6SLrdlshYCZZP3toCvTwQ6gekEsuhsuXNcQKPN9la6SxLp0FiJxNMPs0NB
- 1oR5G7mm3KaONKhndNfo6sxzMfKTabucFcXWwYJNJnavcUj9jG8FulciaSnu9ZFxvHcE
- 1+j2L5xRf7as2/ITEeS6OlHyo5XQesfxzdwTd8kOtYTgkWzh4Lr61KudjsamFTpjMR41
- diuQ==
-X-Gm-Message-State: AOJu0YwuScwPOYl5zDWbs94Je+0WNIwSQ856vBir7JkpC/wpwekTvHvX
- mX+P/qTaQN4BLk5TCJ+vDjOyPlV24wf1Fwb+TSvE8InOGVfNmJq2E/ZG7LNkj5Xa
-X-Gm-Gg: ASbGncuicC74InXZzlxmdjvSiqR/fhXYIn/5F1ChY0GDOO2oq3zmyAHG5W0/u207ZNu
- zl1Xh277bc6KuDa+rlYTctCpTdz4DvL7iNatQ+AEhBsZdakynA1hCaHscIC1VSXQ5ez/6jYCp3B
- 2kmS7agPPi7WNvrLAwgnGGz6wU77MQuQjbFUJCRCLTADEyK7ra8CoeDHQpBuR1qRf86g4d6cq+c
- lbRKVmYg20LwYwU2ASEmm9fFVwbn603Tkpbr1cCjUuJUHoyx04HI6yNmRKDpP2zGhwliaM5BV2+
- TyMflH9z6ToU6GPvqpm1Wc4Q74+ZH3dyLWg/F9H8siSM9bcQsZrBuHCdZZuw7WmvRUlGbW7AceC
- YxyuFhzIDEoZViQN5KFKbkJ+vZZD0
-X-Google-Smtp-Source: AGHT+IH0KNB4I5iv5QEhAR7vFDKITtuZ2eKw2sCl50xT2L6hNkMqNnJx+ZkY7suL9xzD5GkZjLZhBQ==
-X-Received: by 2002:a05:6300:668c:b0:215:dc32:ffac with SMTP id
- adf61e73a8af0-2170cdf19f0mr27707644637.26.1747808925447; 
- Tue, 20 May 2025 23:28:45 -0700 (PDT)
+ bh=rkJOlwCEYa+tQCPMVKUSgm9ALnwOtk5g9+SfAjqZlrw=;
+ b=UkILWcPW7bPB26oH6y7dEfyMYYmoEvLAnLtkOmI4lvYZ9GUw0E5tJ0f29rNX+7NHLQ
+ tnCjKjgW41nxU79Ku4+3/DnI+vwue+MJBIuq34s4xMmz3gr2YUHkKdzCTwKL4OPiY+oT
+ 4za9nglaBg+pEkOanGmvjzEli/UdXUpuMoYx0+yxl9lo3r24wdo2NGNyj2OC4t23NB5y
+ h2Gvi1F0zNypbcY5wKeS/r4WvJKXJERr2hZgBmJK+gCjvcs0kZIrO12omJq6orzyU0gP
+ 9dWkQwzW9LuOigozkEU0crZL76ultcqPiyShFvGnpJnMJIBdcP0LH4wQb2qiNGTlzqbj
+ l8Hw==
+X-Gm-Message-State: AOJu0YwSUzEXOrUtqySV3mAY7c7aF8yXnZm3D3uVWmOISGGS2HTykqC8
+ 8IbKqZoQPanF6AabRaAtiAi3+8jlPdPptF0uRcPblrk7iWGQyOddvz8iF9mw7M5z
+X-Gm-Gg: ASbGnct+ClPTnpNCsq2q8KaJoG1r53rZFLxQ5FbLJTQpiIxxy8Qon9S3Ja9TkYdmeEx
+ sxRf1/TqaD5R0dykUbWLUWr8tt3iYwFvmPfTQEwaVZkMlCzXfX2u9fDTJEjTVm4BbIfdTnErX/5
+ dciJzan52gfl6RE+0QGhoDU0F9/1+suR2gl8Gl24yA9Y/F1G+UJwDgi9ZvwBMvtJlJmAayvzKhG
+ RFRQrdUL1fr9H5nlZ459/kcPE6AXAPnrCGKYjVUo+oN+shLk8q1Q3fiYgjzaZsyZeo8QEMKAYEG
+ dMusHIv+f7KoCWde71x5GnLw7HtOVIkbJGhTqvU4D9gjn2np/duQuBrR1nIwNDqT6Rded9pGHHL
+ F9/+/9+6pFW+WUy4lmpD4i1cXPc4zT4mG6zwgYT4=
+X-Google-Smtp-Source: AGHT+IE56QcXLq4Jb2xP9NZsrsaGIgZETJ80sQLACGaeq72YyTYHwlTjt6CaPkkIHYdW/9iaFDz4ow==
+X-Received: by 2002:a05:6a00:c86:b0:740:9e87:9625 with SMTP id
+ d2e1a72fcca58-742acc8ff71mr27399518b3a.4.1747808927997; 
+ Tue, 20 May 2025 23:28:47 -0700 (PDT)
 Received: from noble-leuven.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
  [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-742a982b884sm9277911b3a.95.2025.05.20.23.28.44
+ d2e1a72fcca58-742a982b884sm9277911b3a.95.2025.05.20.23.28.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 23:28:45 -0700 (PDT)
+ Tue, 20 May 2025 23:28:47 -0700 (PDT)
 From: Aristo Chen <jj251510319013@gmail.com>
 X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, carlos.lopezr4096@gmail.com,
  aristo.chen@canonical.com, quentin.schulz@cherry.de, ada@thorsis.com
-Subject: [PATCH v3 3/4] binman: test: Ensure all config references exist in
- /images node
-Date: Wed, 21 May 2025 06:27:44 +0000
-Message-ID: <20250521062745.3458-4-aristo.chen@canonical.com>
+Subject: [PATCH v3 4/4] test: py: add mkimage test for undefined image
+ references in FIT configs
+Date: Wed, 21 May 2025 06:27:45 +0000
+Message-ID: <20250521062745.3458-5-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250521062745.3458-1-aristo.chen@canonical.com>
 References: <20250521062745.3458-1-aristo.chen@canonical.com>
@@ -101,214 +101,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Several binman FIT test device trees reference image nodes such as atf
-and uboot in their /configurations sections, but those image nodes
-were not actually defined in the /images node. This mismatch can lead
-to validation errors when stricter consistency checks are introduced.
+Add a test case to verify that mkimage correctly rejects a FIT source
+that references a non-existent image from a configuration node.
 
-This patch adds minimal definitions for atf and uboot under the
-/images node in all relevant test DTS files.
+This test introduces a minimal ITS that defines a valid kernel image
+but references a missing "fdt" image under the /configurations section.
+The test asserts that mkimage fails with a clear error message, as
+introduced in the new validation logic.
+
+This helps ensure the validation logic behaves correctly and prevents
+regressions in future FIT enhancements.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- tools/binman/test/170_fit_fdt.dts              | 14 ++++++++++++++
- tools/binman/test/220_fit_subentry_bintool.dts |  2 +-
- tools/binman/test/223_fit_fdt_oper.dts         | 14 ++++++++++++++
- tools/binman/test/284_fit_fdt_list.dts         | 14 ++++++++++++++
- tools/binman/test/333_fit_fdt_dir.dts          | 14 ++++++++++++++
- tools/binman/test/334_fit_fdt_compat.dts       | 14 ++++++++++++++
- tools/binman/test/335_fit_fdt_phase.dts        | 14 ++++++++++++++
- tools/binman/test/345_fit_fdt_name.dts         | 14 ++++++++++++++
- 8 files changed, 99 insertions(+), 1 deletion(-)
+ test/py/tests/test_fit_mkimage_validate.py | 58 ++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
+ create mode 100644 test/py/tests/test_fit_mkimage_validate.py
 
-diff --git a/tools/binman/test/170_fit_fdt.dts b/tools/binman/test/170_fit_fdt.dts
-index 0197ffd1597..4b1e9b41ec0 100644
---- a/tools/binman/test/170_fit_fdt.dts
-+++ b/tools/binman/test/170_fit_fdt.dts
-@@ -15,6 +15,20 @@
- 			fit,fdt-list = "of-list";
- 
- 			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
- 				kernel {
- 					description = "Vanilla Linux kernel";
- 					type = "kernel";
-diff --git a/tools/binman/test/220_fit_subentry_bintool.dts b/tools/binman/test/220_fit_subentry_bintool.dts
-index 6e29d41eeb3..b1d8fb0feae 100644
---- a/tools/binman/test/220_fit_subentry_bintool.dts
-+++ b/tools/binman/test/220_fit_subentry_bintool.dts
-@@ -12,7 +12,7 @@
- 			#address-cells = <1>;
- 
- 			images {
--				test {
-+				kernel {
- 					description = "Something using a bintool";
- 					type = "kernel";
- 					arch = "arm";
-diff --git a/tools/binman/test/223_fit_fdt_oper.dts b/tools/binman/test/223_fit_fdt_oper.dts
-index e630165acf4..cb3b31e36f6 100644
---- a/tools/binman/test/223_fit_fdt_oper.dts
-+++ b/tools/binman/test/223_fit_fdt_oper.dts
-@@ -15,6 +15,20 @@
- 			fit,fdt-list = "of-list";
- 
- 			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
- 				kernel {
- 					description = "Vanilla Linux kernel";
- 					type = "kernel";
-diff --git a/tools/binman/test/284_fit_fdt_list.dts b/tools/binman/test/284_fit_fdt_list.dts
-index 8885313f5b8..70cdb326708 100644
---- a/tools/binman/test/284_fit_fdt_list.dts
-+++ b/tools/binman/test/284_fit_fdt_list.dts
-@@ -15,6 +15,20 @@
- 			fit,fdt-list-val = "test-fdt1", "test-fdt2";
- 
- 			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
- 				kernel {
- 					description = "Vanilla Linux kernel";
- 					type = "kernel";
-diff --git a/tools/binman/test/333_fit_fdt_dir.dts b/tools/binman/test/333_fit_fdt_dir.dts
-index aa778451a4b..71971de4232 100644
---- a/tools/binman/test/333_fit_fdt_dir.dts
-+++ b/tools/binman/test/333_fit_fdt_dir.dts
-@@ -15,6 +15,20 @@
- 			fit,fdt-list-dir = "fdts";
- 
- 			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
- 				kernel {
- 					description = "Vanilla Linux kernel";
- 					type = "kernel";
-diff --git a/tools/binman/test/334_fit_fdt_compat.dts b/tools/binman/test/334_fit_fdt_compat.dts
-index 3bf45c710db..bf1b5a4a94a 100644
---- a/tools/binman/test/334_fit_fdt_compat.dts
-+++ b/tools/binman/test/334_fit_fdt_compat.dts
-@@ -15,6 +15,20 @@
- 			fit,fdt-list = "of-list";
- 
- 			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
- 				kernel {
- 					description = "Vanilla Linux kernel";
- 					type = "kernel";
-diff --git a/tools/binman/test/335_fit_fdt_phase.dts b/tools/binman/test/335_fit_fdt_phase.dts
-index f8d0740a394..c20bcad651a 100644
---- a/tools/binman/test/335_fit_fdt_phase.dts
-+++ b/tools/binman/test/335_fit_fdt_phase.dts
-@@ -15,6 +15,20 @@
- 			fit,fdt-list = "of-list";
- 
- 			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
- 				kernel {
- 					description = "Vanilla Linux kernel";
- 					type = "kernel";
-diff --git a/tools/binman/test/345_fit_fdt_name.dts b/tools/binman/test/345_fit_fdt_name.dts
-index 631a8e5f59b..0ef2e1934a0 100644
---- a/tools/binman/test/345_fit_fdt_name.dts
-+++ b/tools/binman/test/345_fit_fdt_name.dts
-@@ -15,6 +15,20 @@
- 			fit,fdt-list = "of-list";
- 
- 			images {
-+				atf {
-+					description = "atf firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
-+				uboot {
-+					description = "U-Boot firmware";
-+					type = "firmware";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+				};
- 				kernel {
- 					description = "Vanilla Linux kernel";
- 					type = "kernel";
+diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests/test_fit_mkimage_validate.py
+new file mode 100644
+index 00000000000..af56f08ca10
+--- /dev/null
++++ b/test/py/tests/test_fit_mkimage_validate.py
+@@ -0,0 +1,58 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2025
++#
++# Test that mkimage validates image references in configurations
++
++import os
++import subprocess
++import pytest
++import fit_util
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.requiredtool('dtc')
++def test_fit_invalid_image_reference(ubman):
++    """Test that mkimage fails when configuration references a missing image"""
++
++    its_fname = fit_util.make_fname(ubman, "invalid.its")
++    itb_fname = fit_util.make_fname(ubman, "invalid.itb")
++    kernel = fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
++
++    # Write ITS with an invalid reference to a nonexistent image
++    its_text = '''
++/dts-v1/;
++
++/ {
++    images {
++        kernel@1 {
++            description = "Test Kernel";
++            data = /incbin/("kernel.bin");
++            type = "kernel";
++            arch = "sandbox";
++            os = "linux";
++            compression = "none";
++            load = <0x40000>;
++            entry = <0x40000>;
++        };
++    };
++
++    configurations {
++        default = "conf@1";
++        conf@1 {
++            kernel = "kernel@1";
++            fdt = "notexist";
++        };
++    };
++};
++'''
++
++    with open(its_fname, 'w') as f:
++        f.write(its_text)
++
++    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
++    cmd = [mkimage, '-f', its_fname, itb_fname]
++
++    result = subprocess.run(cmd, capture_output=True, text=True)
++
++    assert result.returncode != 0, "mkimage should fail due to missing image reference"
++    assert "references undefined image 'notexist'" in result.stderr
++
 -- 
 2.43.0
 
