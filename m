@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D25D7C2D0CD
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 12:36:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C39C2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 12:36:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8664882F10;
+	by phobos.denx.de (Postfix) with ESMTP id D271C82F30;
 	Wed, 21 May 2025 14:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="rbeFEK4C";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="hoNgdCSc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D051482E2D; Wed, 21 May 2025 14:29:11 +0200 (CEST)
+ id 15BFC82E2D; Wed, 21 May 2025 14:29:12 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36B8982ED0
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 14:29:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6525182E31
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 14:29:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7236647066=antonio.borneo@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LAtt2m027728;
- Wed, 21 May 2025 14:29:03 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54L827BX010857;
+ Wed, 21 May 2025 14:29:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- ls8dx3XqZjziXW6N70aAJw18VFM1Q/6VdCHNig5QGd8=; b=rbeFEK4C9iRAm7lP
- xGCVqWCy7tX4B/t4xUtwfBU+qwGSq0ufEbYoOQp+CkJe6H/WGQEOo39JP91ONtnw
- 0CeFQ/JfA6m6HSSXOu8k4GGMhO2tID9ba/AsvdvoOJ4oyWgdnjakz1hUrkxp1Ja6
- mKtX7KKTVmZuHIzvM8OHfw4BtoaCnqS7wWX2qI8WlQVdkjwvRID5+Jscaui2NQdV
- W4dzcBCEWuitzC/TGWaZhAj/PyauGeO57atwgk1d2TTei8DW9VR73bnLsscOMQ8f
- 8ILLQlUrfZjNof73JCt8G0i4p3RQeukYMZ30/FgUsMgBufwY0qaploiFrCLkfMke
- w607jA==
+ +RcbzCogerlOEpMRKpTvwg0vOxTcvBbVUSoSfjfiMwg=; b=hoNgdCScR6nrWmV3
+ +Yff+RuWhQI4kit98fUjPCFDvJoAhHY/u6s+H9n9n/Z7oXisTJ1ywb0fTJhSpk0N
+ JsCT+r8JxX+jGnKCIlQZIqPx16/VbmHO1Q1yQR6pgQYD1M1sMHzfiuVWpuxH8EmG
+ P3vTvOkb1LCPxNPp/xJzndNrMZ9GbPNBq6qSVh+CNQ09epjRWdruqP9HL8AEnp5e
+ nA83tVKIvAoXZN8qKLKsP0UMQvAK8QTiVjUDaFCzyMgj6DzUc9hXcM4m41WZ167K
+ R92rWFoPOf2NwQCh5qDenanTRvmAnYwNvsOwlvP1cJMCDBW8qKzw4qHU10kUq5nA
+ mgmcfg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfqkvuy-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfc3wjk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 May 2025 14:29:03 +0200 (MEST)
+ Wed, 21 May 2025 14:29:02 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 093114004D;
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1113B4004F;
  Wed, 21 May 2025 14:28:25 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5CF42BDF165;
- Wed, 21 May 2025 14:28:12 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 65059BDE7AD;
+ Wed, 21 May 2025 14:28:11 +0200 (CEST)
 Received: from localhost (10.252.16.84) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
@@ -61,15 +61,16 @@ CC: Antonio Borneo <antonio.borneo@foss.st.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
  <lionel.debieve@foss.st.com>, =?UTF-8?q?Cl=C3=A9ment=20Le=20Goffic?=
  <clement.legoffic@foss.st.com>
-Subject: [PATCH 3/4] watchdog: stm32mp: check the watchdog status
-Date: Wed, 21 May 2025 14:27:54 +0200
-Message-ID: <20250521122755.265760-4-antonio.borneo@foss.st.com>
+Subject: [PATCH 2/4] watchdog: arm_smc_wdt: get wdt status through
+ SMCWD_GET_TIMELEFT
+Date: Wed, 21 May 2025 14:27:53 +0200
+Message-ID: <20250521122755.265760-3-antonio.borneo@foss.st.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250521122755.265760-1-antonio.borneo@foss.st.com>
 References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [10.252.16.84]
 X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -93,92 +94,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Clément Le Goffic <clement.legoffic@foss.st.com>
+The optional SMCWD_GET_TIMELEFT command can be used to detect if
+the watchdog has already been started.
+See the implementation in OP-TEE secure OS [1].
 
-Add a mean to check the IWDG status based on the peripheral version.
-This is done by either checking the status bit ONF either by updating
-the reload register with the same value and check if the reload succeed.
+At probe time, check if the watchdog is already started and then
+call wdt_set_force_autostart(). This will keep U-Boot pinging the
+watchdog even when the property 'u-boot,noautostart' is present.
 
-Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
+Link: https://github.com/OP-TEE/optee_os/commit/a7f2d4bd8632 [1]
+
 Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
 ---
- drivers/watchdog/stm32mp_wdt.c | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ drivers/watchdog/arm_smc_wdt.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/drivers/watchdog/stm32mp_wdt.c b/drivers/watchdog/stm32mp_wdt.c
-index 97ab8cfe7ab..0712524b4a8 100644
---- a/drivers/watchdog/stm32mp_wdt.c
-+++ b/drivers/watchdog/stm32mp_wdt.c
-@@ -21,11 +21,13 @@
- #define IWDG_PR		0x04	/* Prescaler Register */
- #define IWDG_RLR	0x08	/* ReLoad Register */
- #define IWDG_SR		0x0C	/* Status Register */
-+#define IWDG_VERR	0x3F4	/* Version Register */
+diff --git a/drivers/watchdog/arm_smc_wdt.c b/drivers/watchdog/arm_smc_wdt.c
+index 0ea44445700..f6854aa9ac9 100644
+--- a/drivers/watchdog/arm_smc_wdt.c
++++ b/drivers/watchdog/arm_smc_wdt.c
+@@ -46,6 +46,8 @@ static int smcwd_call(struct udevice *dev, enum smcwd_call call,
+ 		return -ENODEV;
+ 	if (res->a0 == PSCI_RET_INVALID_PARAMS)
+ 		return -EINVAL;
++	if (res->a0 == PSCI_RET_DISABLED)
++		return -ENODATA;
+ 	if (res->a0 != PSCI_RET_SUCCESS)
+ 		return -EIO;
  
- /* IWDG_KR register bit mask */
- #define KR_KEY_RELOAD	0xAAAA	/* Reload counter enable */
- #define KR_KEY_ENABLE	0xCCCC	/* Peripheral enable */
- #define KR_KEY_EWA	0x5555	/* Write access enable */
-+#define KR_KEY_DWA	0x0000	/* Write access disable*/
+@@ -99,6 +101,21 @@ static int smcwd_probe(struct udevice *dev)
+ 	priv->min_timeout = res.a1;
+ 	priv->max_timeout = res.a2;
  
- /* IWDG_PR register bit values */
- #define PR_256		0x06	/* Prescaler set to 256 */
-@@ -36,10 +38,17 @@
- /* IWDG_SR register bit values */
- #define SR_PVU		BIT(0)	/* Watchdog prescaler value update */
- #define SR_RVU		BIT(1)	/* Watchdog counter reload value update */
-+#define SR_ONF		BIT(8)	/* Watchdog enable status bit */
-+
-+/* IWDG Compatibility */
-+#define ONF_MIN_VER	0x31
-+
-+#define TIMEOUT_US	10000
- 
- struct stm32mp_wdt_priv {
- 	fdt_addr_t base;		/* registers addr in physical memory */
- 	unsigned long wdt_clk_rate;	/* Watchdog dedicated clock rate */
-+	unsigned int hw_version;	/* Peripheral version */
- };
- 
- static int stm32mp_wdt_reset(struct udevice *dev)
-@@ -90,6 +99,7 @@ static int stm32mp_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
- static int stm32mp_wdt_probe(struct udevice *dev)
- {
- 	struct stm32mp_wdt_priv *priv = dev_get_priv(dev);
-+	u32 rlr, sr;
- 	struct clk clk;
- 	int ret;
- 
-@@ -115,6 +125,29 @@ static int stm32mp_wdt_probe(struct udevice *dev)
- 
- 	priv->wdt_clk_rate = clk_get_rate(&clk);
- 
-+	priv->hw_version = readl(priv->base + IWDG_VERR);
-+
-+	if (priv->hw_version >= ONF_MIN_VER) {
-+		if (readl(priv->base + IWDG_SR) & SR_ONF)
-+			wdt_set_force_autostart(dev);
-+	} else {
-+		/*
-+		 * Workaround for old versions without IWDG_SR_ONF bit:
-+		 * - write in IWDG_RLR_OFFSET
-+		 * - wait for sync
-+		 * - if sync succeeds, then iwdg is running
-+		 */
-+		writel(KR_KEY_EWA, priv->base + IWDG_KR);
-+		rlr = readl(priv->base + IWDG_RLR);
-+		writel(rlr, priv->base + IWDG_RLR);
-+		ret = readl_poll_timeout(priv->base + IWDG_SR, sr, sr & SR_RVU,
-+					 TIMEOUT_US);
-+		if (!ret)
-+			wdt_set_force_autostart(dev);
-+
-+		writel(KR_KEY_DWA, priv->base + IWDG_KR);
++	/* If already started, then force u-boot to use it */
++	err = smcwd_call(dev, SMCWD_GET_TIMELEFT, 0, NULL);
++	switch (err) {
++	case 0:
++		dev_dbg(dev, "Already started\n");
++		wdt_set_force_autostart(dev);
++		break;
++	case -ENODATA:
++		dev_dbg(dev, "Not already started\n");
++		break;
++	default:
++		/* Optional SMCWD_GET_TIMELEFT not implemented */
++		break;
 +	}
 +
- 	dev_dbg(dev, "IWDG init done\n");
- 
  	return 0;
+ }
+ 
 -- 
 2.34.1
 
